@@ -1,6 +1,7 @@
 arb-dir: lib/l10n
 template-arb-file: f_en.arb
 format: true
+preferred-supported-locales: [ en ]
 header: |
   // dart format off
   // coverage:ignore-file

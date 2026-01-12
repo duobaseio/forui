@@ -38,16 +38,18 @@ class _SandboxState extends State<Sandbox> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) => Center(
     child: Column(
-      spacing: 5,
       mainAxisSize: .min,
       children: [
-        FButton(
-          child: const Text('Left'),
-          onPress: () => showFSheet(
-            context: context,
-            useSafeArea: true,
-            side: .btt,
-            builder: (dialogContext) => const FTextField(autofocus: true),
+        FTimeField(),
+        FDateField(),
+        FAutocomplete(items: fruits),
+        FSelect<String>(items: {for (final fruit in fruits) fruit: fruit}),
+        FMultiSelect<String>(items: {for (final fruit in fruits) fruit: fruit}),
+        FTextField.password(),
+        FTextField(
+          suffixBuilder: (_, style, states) => IconTheme(
+            data: style.clearButtonStyle.iconContentStyle.iconStyle.resolve(states),
+            child: Icon(Icons.search),
           ),
         ),
       ],

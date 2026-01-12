@@ -1,3 +1,62 @@
+## 0.18.0
+
+### `FTheme`
+* Add `FTheme.textDirection`.
+
+* **Breaking** Rename `FTheme` to `FBasicTheme`.
+* **Breaking** Rename `FAnimatedTheme` to `FTheme`.
+* **Breaking** Rename `FAnimatedThemeMotion` to `FThemeMotion`.
+
+
+### `FCircularProgress`
+* **Breaking** Remove `FCircularProgress.loader(icon: ...)`. This shouldn't have been included.
+* **Breaking** Remove `FCircularProgress.pinwheel(icon: ...)`. This shouldn't have been included.
+
+
+### `FDateField`
+* **Breaking** Rename `FDateFieldStyle.selectFieldStyle` to `FDateFieldStyle.fieldStyle`.
+* **Breaking** Remove `FDateFieldStyle.iconStyle`. Use nested `FDateFieldStyle.fieldStyle.iconStyle` instead.
+
+
+### `FPicker`
+* Change error message when given unbounded constraints to be more descriptive.
+
+
+### `FSelect` & `FMultiSelect`
+* **Breaking** Rename `FSelectStyle.selectFieldStyle` to `FSelectStyle.fieldStyle`.
+* **Breaking** Rename `FSelectSearchStyle.textFieldStyle` to `FSelectSearchStyle.fieldStyle`.
+* **Breaking** Remove `FSelectStyle.iconStyle`. Use `FSelectStyle.fieldStyle.iconStyle` instead.
+* **Breaking** Remove `FSelectSearchStyle.iconStyle`. Use `FSelectSearchStyle.fieldStyle.iconStyle` instead.
+* **Breaking** Change `FMultiSelectFieldStyle.iconStyle` type from `IconThemeData` to `FWidgetStateMap<IconThemeData>`.
+               Wrap existing values with `.all(...)`, e.g. `.all(IconThemeData(...))`.
+* **Breaking** Add `enabled` parameter to `FMultiSelectTagBuilder` at position 1 (after `context`).
+
+* Fix `FMultiSelect` still allowing tags to be removed when disabled.
+
+
+### `FSlider`
+* Change `FSlider`'s default error style to not affect the entire slider.
+
+
+### `FTextField`
+* **Breaking** Add `FTextFieldStyle.iconStyle`.
+
+* Change `FTextFieldStyle.clearButtonStyle` to not bounce by default.
+* Change `FTextFieldStyle.obscureButtonStyle` to not bounce by default.
+
+
+### `FTimeField`
+* Change error message when localizations are missing to be more descriptive.
+* **Breaking** Rename `FTimeFieldStyle.selectFieldStyle` to `FTimeFieldStyle.fieldStyle`.
+* **Breaking** Remove `FTimeFieldStyle.iconStyle`. Use `FTimeFieldStyle.fieldStyle.iconStyle` instead.
+
+* Fix `FTimeField` incorrectly handling traversal when no localizations are provided.
+
+
+### `FTimePicker`
+* Change error message when given unbounded constraints to be more descriptive.
+
+
 ## 0.17.0
 
 This update overhauls the API by introducing [controls](https://forui.dev/docs/controls) to support declarative state

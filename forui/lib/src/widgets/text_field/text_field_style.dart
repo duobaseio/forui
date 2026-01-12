@@ -55,6 +55,17 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
   @override
   final EdgeInsets scrollPadding;
 
+  /// The prefix & suffix icon styles.
+  ///
+  /// The supported states are:
+  /// * [WidgetState.disabled]
+  /// * [WidgetState.error]
+  /// * [WidgetState.focused]
+  /// * [WidgetState.hovered]
+  /// * [WidgetState.pressed]
+  @override
+  final FWidgetStateMap<IconThemeData> iconStyle;
+
   /// The clear button's style when [FTextField.clearable] is true.
   @override
   final FButtonStyle clearButtonStyle;
@@ -110,6 +121,7 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
   /// Creates a [FTextFieldStyle].
   FTextFieldStyle({
     required this.keyboardAppearance,
+    required this.iconStyle,
     required this.clearButtonStyle,
     required this.obscureButtonStyle,
     required this.contentTextStyle,
@@ -137,19 +149,22 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
     final label = FLabelStyles.inherit(style: style).verticalStyle;
     final ghost = FButtonStyles.inherit(colors: colors, typography: typography, style: style).ghost;
     final textStyle = typography.sm.copyWith(fontFamily: typography.defaultFontFamily);
-    final buttonStyle = ghost.copyWith(
-      iconContentStyle: ghost.iconContentStyle.copyWith(
-        iconStyle: FWidgetStateMap({
-          WidgetState.disabled: IconThemeData(color: colors.disable(colors.mutedForeground), size: 17),
-          WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 17),
-        }),
-      ),
+    final iconStyle = FWidgetStateMap({
+      WidgetState.disabled: IconThemeData(color: colors.disable(colors.mutedForeground), size: 17),
+      WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 17),
+    });
+    final bounceableButtonStyle = ghost.copyWith(
+      iconContentStyle: ghost.iconContentStyle.copyWith(iconStyle: iconStyle),
     );
 
     return .new(
       keyboardAppearance: colors.brightness,
-      clearButtonStyle: buttonStyle,
-      obscureButtonStyle: buttonStyle,
+      iconStyle: iconStyle,
+      clearButtonStyle: bounceableButtonStyle,
+      obscureButtonStyle: bounceableButtonStyle.copyWith(
+        tappableStyle: (style) =>
+            style.copyWith(motion: (motion) => motion.copyWith(bounceTween: FTappableMotion.noBounceTween)),
+      ),
       contentTextStyle: FWidgetStateMap({
         WidgetState.disabled: textStyle.copyWith(color: colors.disable(colors.primary)),
         WidgetState.any: textStyle.copyWith(color: colors.primary),

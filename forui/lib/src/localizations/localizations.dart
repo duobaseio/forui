@@ -171,6 +171,7 @@ abstract class FLocalizations {
 
   /// A list of this localizations delegate's supported locales.
   static const List<Locale> supportedLocales = <Locale>[
+    Locale('en'),
     Locale('af'),
     Locale('am'),
     Locale('ar'),
@@ -187,7 +188,6 @@ abstract class FLocalizations {
     Locale('de'),
     Locale('de', 'CH'),
     Locale('el'),
-    Locale('en'),
     Locale('en', 'AU'),
     Locale('en', 'CA'),
     Locale('en', 'GB'),

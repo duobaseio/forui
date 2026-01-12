@@ -12,10 +12,7 @@ void main() {
   testWidgets('blue screen', (tester) async {
     await tester.pumpWidget(
       TestScaffold.blue(
-        child: MaterialApp(
-          debugShowCheckedModeBanner: false,
-          home: FDateField(style: TestScaffold.blueScreen.dateFieldStyle, key: key),
-        ),
+        child: FDateField(style: TestScaffold.blueScreen.dateFieldStyle, key: key),
       ),
     );
 
@@ -40,7 +37,7 @@ void main() {
     });
 
     testWidgets('${theme.name} with no icon', (tester) async {
-      await tester.pumpWidget(TestScaffold(theme: theme.data, child: const FDateField(prefixBuilder: null)));
+      await tester.pumpWidget(TestScaffold.app(theme: theme.data, child: const FDateField(prefixBuilder: null)));
 
       await expectLater(
         find.byType(TestScaffold),
