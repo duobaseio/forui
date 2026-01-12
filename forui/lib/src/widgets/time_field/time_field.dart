@@ -132,7 +132,7 @@ abstract class FTimeField extends StatefulWidget {
 
   const FTimeField._({
     this.control = const .managed(),
-    this.popoverControl = const FPopoverControl.managed(),
+    this.popoverControl = const .managed(),
     this.style,
     this.hour24 = false,
     this.autofocus = false,

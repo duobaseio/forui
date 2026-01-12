@@ -46,8 +46,11 @@
 
 
 ### `FTimeField`
+* Change error message when localizations are missing to be more descriptive.
 * **Breaking** Rename `FTimeFieldStyle.selectFieldStyle` to `FTimeFieldStyle.fieldStyle`.
 * **Breaking** Remove `FTimeFieldStyle.iconStyle`. Use `FTimeFieldStyle.fieldStyle.iconStyle` instead.
+
+* Fix `FTimeField` incorrectly handling traversal when no localizations are provided.
 
 
 ### `FTimePicker`

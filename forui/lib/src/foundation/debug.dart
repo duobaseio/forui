@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
+import 'package:forui/forui.dart';
+import 'package:intl/intl.dart';
 
 /// A widget that validates that its child's constraints are finite.
 ///
@@ -33,56 +35,59 @@ class _RenderFiniteConstraintsValidator extends RenderProxyBox {
 
   @override
   void performLayout() {
-    final flex = parent is RenderFlex;
-    if (!constraints.hasBoundedWidth && !constraints.hasBoundedHeight) {
-      throw FlutterError.fromParts([
-        ErrorSummary('$type was given unbounded width and height.'),
-        ErrorDescription(
-          '$type tries to be as big as possible, but it was placed inside a widget that allows its children to pick '
-          'their own size.',
-        ),
-        DiagnosticsProperty('The constraints were', constraints, style: .errorProperty),
-        ErrorHint('To fix this, wrap $type in a SizedBox with a finite width and height.'),
-      ]);
-    } else if (!constraints.hasBoundedWidth) {
-      throw FlutterError.fromParts([
-        ErrorSummary('$type was given unbounded width.'),
-        if (flex)
-          ErrorDescription(
-            '$type tries to be as big as possible, but it was placed inside a Flex widget, e.g., Row, that allows '
-            'its children to pick their own width.',
-          )
-        else
+    assert(() {
+      final flex = parent is RenderFlex;
+      if (!constraints.hasBoundedWidth && !constraints.hasBoundedHeight) {
+        throw FlutterError.fromParts([
+          ErrorSummary('$type was given unbounded width and height.'),
           ErrorDescription(
             '$type tries to be as big as possible, but it was placed inside a widget that allows its children to pick '
-            'their own width.',
+                'their own size.',
           ),
-        DiagnosticsProperty('The constraints were', constraints, style: .errorProperty),
-        if (flex)
-          ErrorHint('To fix this, wrap $type in an Expanded, Flexible, or SizedBox with a finite width.')
-        else
-          ErrorHint('To fix this, wrap $type in a SizedBox with a finite width.'),
-      ]);
-    } else if (!constraints.hasBoundedHeight) {
-      throw FlutterError.fromParts([
-        ErrorSummary('$type was given unbounded height.'),
-        if (flex)
-          ErrorDescription(
-            '$type tries to be as big as possible, but it was placed inside a Flex widget, e.g., Column, that allows '
-            'its children to pick their own height.',
-          )
-        else
-          ErrorDescription(
-            '$type tries to be as big as possible, but it was placed inside a widget that allows its children to pick '
-            'their own height.',
-          ),
-        DiagnosticsProperty('The constraints were', constraints, style: .errorProperty),
-        if (flex)
-          ErrorHint('To fix this, wrap $type in an Expanded, Flexible, or SizedBox with a finite height.')
-        else
-          ErrorHint('To fix this, wrap $type in a SizedBox with a finite height.'),
-      ]);
-    }
+          DiagnosticsProperty('The constraints were', constraints, style: .errorProperty),
+          ErrorHint('To fix this, wrap $type in a SizedBox with a finite width and height.'),
+        ]);
+      } else if (!constraints.hasBoundedWidth) {
+        throw FlutterError.fromParts([
+          ErrorSummary('$type was given unbounded width.'),
+          if (flex)
+            ErrorDescription(
+              '$type tries to be as big as possible, but it was placed inside a Flex widget, e.g., Row, that allows '
+                  'its children to pick their own width.',
+            )
+          else
+            ErrorDescription(
+              '$type tries to be as big as possible, but it was placed inside a widget that allows its children to pick '
+                  'their own width.',
+            ),
+          DiagnosticsProperty('The constraints were', constraints, style: .errorProperty),
+          if (flex)
+            ErrorHint('To fix this, wrap $type in an Expanded, Flexible, or SizedBox with a finite width.')
+          else
+            ErrorHint('To fix this, wrap $type in a SizedBox with a finite width.'),
+        ]);
+      } else if (!constraints.hasBoundedHeight) {
+        throw FlutterError.fromParts([
+          ErrorSummary('$type was given unbounded height.'),
+          if (flex)
+            ErrorDescription(
+              '$type tries to be as big as possible, but it was placed inside a Flex widget, e.g., Column, that allows '
+                  'its children to pick their own height.',
+            )
+          else
+            ErrorDescription(
+              '$type tries to be as big as possible, but it was placed inside a widget that allows its children to pick '
+                  'their own height.',
+            ),
+          DiagnosticsProperty('The constraints were', constraints, style: .errorProperty),
+          if (flex)
+            ErrorHint('To fix this, wrap $type in an Expanded, Flexible, or SizedBox with a finite height.')
+          else
+            ErrorHint('To fix this, wrap $type in a SizedBox with a finite height.'),
+        ]);
+      }
+      return true;
+    }());
 
     super.performLayout();
   }
@@ -115,7 +120,7 @@ bool debugCheckHasAncestor<T extends InheritedWidget>(String ancestor, BuildCont
         if (generic)
           ErrorHint(
             "This is likely because $ancestor's type parameter could not be inferred. To fix this, wrap "
-            '${context.widget.runtimeType} in a $ancestor widget and explicitly specify the type parameter.',
+                '${context.widget.runtimeType} in a $ancestor widget and explicitly specify the type parameter.',
           )
         else
           ErrorHint('To fix this, wrap ${context.widget.runtimeType} in a $ancestor widget.'),
@@ -164,6 +169,32 @@ bool debugCheckInclusiveRange<T>(int min, int? max) {
       ]);
     }
 
+    return true;
+  }());
+
+  return true;
+}
+
+@internal
+bool debugCheckFLocalizationsInitialized(FLocalizations localizations) {
+  assert(() {
+    if (localizations is FDefaultLocalizations && !DateFormat.jm('en_US').pattern!.contains('\u202F')) {
+      throw FlutterError.fromParts([
+        ErrorSummary("Forui's localizations are not configured."),
+        ErrorDescription(
+          "The default localization is being used although the intl package has been initialized with Flutter's locale data. "
+          "This implies that Forui's localization delegates have not been added to the application.",
+        ),
+        ErrorHint(
+          'To fix this, add localization delegates to your MaterialApp, CupertinoApp or WidgetsApp:\n\n'
+          'MaterialApp(\n'
+          '  localizationsDelegates: FLocalizations.localizationsDelegates,\n'
+          '  supportedLocales: FLocalizations.supportedLocales,\n'
+          ')\n\n'
+          'See https://forui.dev/docs/localization for more information.',
+        ),
+      ]);
+    }
     return true;
   }());
 

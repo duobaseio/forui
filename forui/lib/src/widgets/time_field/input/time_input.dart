@@ -78,6 +78,13 @@ class TimeInput extends Input<FTime?> {
 }
 
 class _TimeFieldState extends InputState<TimeInput, FTime?> {
+  /// The 12-hour time format used with [FDefaultLocalizations].
+  ///
+  /// The `intl` package's default date formats use narrow no-break spaces (NNBSP). Flutter replaces these with regular
+  /// spaces by loading custom locale data, but only when [WidgetsApp.localizationsDelegates] is provided. This format
+  /// ensures consistent spacing regardless of whether delegates are configured.
+  static final _default12Hour = DateFormat('h:mm a', 'en_US');
+
   @override
   void didUpdateWidget(covariant TimeInput old) {
     super.didUpdateWidget(old);
@@ -101,7 +108,9 @@ class _TimeFieldState extends InputState<TimeInput, FTime?> {
   @override
   @protected
   InputController createController() {
-    final format = widget.hour24 ? DateFormat.Hm(localizations.localeName) : DateFormat.jm(localizations.localeName);
+    final format = widget.hour24
+        ? DateFormat.Hm(localizations.localeName)
+        : (localizations is FDefaultLocalizations ? _default12Hour : DateFormat.jm(localizations.localeName));
     return TimeInputController(localizations, widget.timeController, format, widget.style.fieldStyle);
   }
 

@@ -5,6 +5,7 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/input/input.dart';
 import 'package:forui/src/foundation/input/input_controller.dart';
 import 'package:forui/src/localizations/localization.dart';
+import 'package:forui/src/localizations/localizations_en.dart';
 import 'package:forui/src/widgets/date_field/input/date_input_controller.dart';
 
 @internal
@@ -86,7 +87,7 @@ class _DateInputState extends InputState<DateInput, DateTime?> {
     super.didUpdateWidget(old);
     if (widget.localizations != old.localizations) {
       localizations = scriptNumerals.contains(widget.localizations.localeName)
-          ? FDefaultLocalizations()
+          ? FLocalizationsEn()
           : widget.localizations;
       inputController.dispose();
       inputController = createController();

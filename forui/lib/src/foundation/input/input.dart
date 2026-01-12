@@ -3,9 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/debug.dart';
 import 'package:forui/src/foundation/form/form_field.dart';
 import 'package:forui/src/foundation/input/input_controller.dart';
 import 'package:forui/src/localizations/localization.dart';
+import 'package:forui/src/localizations/localizations_en.dart';
 
 @internal
 abstract class Input<T> extends StatefulWidget {
@@ -106,7 +108,7 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
   void initState() {
     super.initState();
     localizations = scriptNumerals.contains(widget.localizations.localeName)
-        ? FDefaultLocalizations()
+        ? FLocalizationsEn()
         : widget.localizations;
     inputController = createController();
   }
@@ -121,7 +123,9 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
   InputController createController();
 
   @override
-  Widget build(BuildContext _) => Shortcuts(
+  Widget build(BuildContext _) {
+    assert(debugCheckFLocalizationsInitialized(localizations));
+    return Shortcuts(
     shortcuts: const {SingleActivator(.arrowUp): AdjustIntent(1), SingleActivator(.arrowDown): AdjustIntent(-1)},
     child: Actions(
       actions: {
@@ -173,6 +177,7 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
       ),
     ),
   );
+  }
 
   @protected
   bool clearable(TextEditingValue value) => false;

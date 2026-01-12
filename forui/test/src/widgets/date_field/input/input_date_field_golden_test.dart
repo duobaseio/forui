@@ -31,7 +31,7 @@ void main() {
     });
 
     testWidgets('${theme.name} with no icon', (tester) async {
-      await tester.pumpWidget(TestScaffold(theme: theme.data, child: const FDateField.input(prefixBuilder: null)));
+      await tester.pumpWidget(TestScaffold.app(theme: theme.data, child: const FDateField.input(prefixBuilder: null)));
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/${theme.name}/input/no-icon.png'));
     });
