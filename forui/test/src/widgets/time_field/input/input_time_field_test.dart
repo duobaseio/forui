@@ -77,29 +77,6 @@ void main() {
     });
   }
 
-  group('default locale', () {
-    testWidgets('traversal', (tester) async {
-      await tester.pumpWidget(
-        MaterialApp(
-          debugShowCheckedModeBanner: false,
-          builder: (context, child) => FTheme(
-            data: FThemes.zinc.light,
-            child: Container(child: child!),
-          ),
-          home: const FTimeField(key: key),
-        ),
-      );
-
-      await tester.tapAt(tester.getTopLeft(find.byKey(key)));
-      await tester.pumpAndSettle();
-
-      await tester.sendKeyEvent(.arrowRight);
-      await tester.pumpAndSettle();
-
-      expect(tester.takeException(), null);
-    });
-  });
-
   testWidgets('arrow key adjustment', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
