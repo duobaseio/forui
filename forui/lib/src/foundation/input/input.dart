@@ -126,57 +126,57 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
   Widget build(BuildContext _) {
     assert(debugCheckFLocalizationsInitialized(localizations));
     return Shortcuts(
-    shortcuts: const {SingleActivator(.arrowUp): AdjustIntent(1), SingleActivator(.arrowDown): AdjustIntent(-1)},
-    child: Actions(
-      actions: {
-        AdjustIntent: CallbackAction<AdjustIntent>(onInvoke: (intent) => inputController.adjust(intent.amount)),
-        ExtendSelectionByCharacterIntent: CallbackAction<ExtendSelectionByCharacterIntent>(
-          onInvoke: (intent) => inputController.traverse(forward: intent.forward),
-        ),
-      },
-      child: Field<U>(
-        controller: widget.controller,
-        enabled: widget.enabled,
-        onSaved: widget.onSaved,
-        onReset: widget.onReset,
-        validator: (value) => switch (this.value) {
-          null when inputController.text == inputController.placeholder => widget.validator(null),
-          null => errorMessage,
-          final value => widget.validator(value),
+      shortcuts: const {SingleActivator(.arrowUp): AdjustIntent(1), SingleActivator(.arrowDown): AdjustIntent(-1)},
+      child: Actions(
+        actions: {
+          AdjustIntent: CallbackAction<AdjustIntent>(onInvoke: (intent) => inputController.adjust(intent.amount)),
+          ExtendSelectionByCharacterIntent: CallbackAction<ExtendSelectionByCharacterIntent>(
+            onInvoke: (intent) => inputController.traverse(forward: intent.forward),
+          ),
         },
-        autovalidateMode: widget.autovalidateMode,
-        forceErrorText: widget.forceErrorText,
-        builder: (state) => FTextField(
-          control: .managed(controller: inputController),
-          style: textFieldStyle,
-          statesController: inputController.statesController,
-          builder: widget.builder,
-          autocorrect: false,
-          // We cannot use TextInputType.number as it does not contain a done button on iOS.
-          keyboardType: const .numberWithOptions(signed: true),
-          minLines: 1,
-          label: widget.label,
-          description: widget.description,
-          error: state.hasError ? widget.errorBuilder(context, state.errorText ?? '') : null,
+        child: Field<U>(
+          controller: widget.controller,
           enabled: widget.enabled,
-          focusNode: widget.focusNode,
-          textInputAction: widget.textInputAction,
-          textAlign: widget.textAlign,
-          textAlignVertical: widget.textAlignVertical,
-          textDirection: widget.textDirection,
-          expands: widget.expands,
-          autofocus: widget.autofocus,
-          onEditingComplete: widget.onEditingComplete,
-          mouseCursor: widget.mouseCursor,
-          onTap: widget.onTap,
-          canRequestFocus: widget.canRequestFocus,
-          prefixBuilder: widget.prefixBuilder,
-          suffixBuilder: widget.suffixBuilder,
-          clearable: widget.clearable ? clearable : (_) => false,
+          onSaved: widget.onSaved,
+          onReset: widget.onReset,
+          validator: (value) => switch (this.value) {
+            null when inputController.text == inputController.placeholder => widget.validator(null),
+            null => errorMessage,
+            final value => widget.validator(value),
+          },
+          autovalidateMode: widget.autovalidateMode,
+          forceErrorText: widget.forceErrorText,
+          builder: (state) => FTextField(
+            control: .managed(controller: inputController),
+            style: textFieldStyle,
+            statesController: inputController.statesController,
+            builder: widget.builder,
+            autocorrect: false,
+            // We cannot use TextInputType.number as it does not contain a done button on iOS.
+            keyboardType: const .numberWithOptions(signed: true),
+            minLines: 1,
+            label: widget.label,
+            description: widget.description,
+            error: state.hasError ? widget.errorBuilder(context, state.errorText ?? '') : null,
+            enabled: widget.enabled,
+            focusNode: widget.focusNode,
+            textInputAction: widget.textInputAction,
+            textAlign: widget.textAlign,
+            textAlignVertical: widget.textAlignVertical,
+            textDirection: widget.textDirection,
+            expands: widget.expands,
+            autofocus: widget.autofocus,
+            onEditingComplete: widget.onEditingComplete,
+            mouseCursor: widget.mouseCursor,
+            onTap: widget.onTap,
+            canRequestFocus: widget.canRequestFocus,
+            prefixBuilder: widget.prefixBuilder,
+            suffixBuilder: widget.suffixBuilder,
+            clearable: widget.clearable ? clearable : (_) => false,
+          ),
         ),
       ),
-    ),
-  );
+    );
   }
 
   @protected

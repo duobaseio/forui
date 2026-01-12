@@ -82,7 +82,10 @@ void main() {
       await tester.pumpWidget(
         MaterialApp(
           debugShowCheckedModeBanner: false,
-          builder: (context, child) => FTheme(data: FThemes.zinc.light, child: Container(child: child!)),
+          builder: (context, child) => FTheme(
+            data: FThemes.zinc.light,
+            child: Container(child: child!),
+          ),
           home: const FTimeField(key: key),
         ),
       );
