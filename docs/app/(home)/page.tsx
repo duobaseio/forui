@@ -11,7 +11,7 @@ export default function HomePage() {
       <section className="flex flex-col items-center px-6 pt-10 sm:pt-20 pb-8 text-center gap-10 sm:gap-16">
         <div className="flex flex-col items-center justify-center max-w-3xl mx-auto">
           <h1 className="text-3xl sm:text-5xl font-bold tracking-tight mb-4">
-            Beautifully designed minimalistic Flutter widgets
+            Test PR
           </h1>
           <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mb-6">
             A flutter platform-agnostic UI library for developers seeking consistent and elegant UIs across all devices.
