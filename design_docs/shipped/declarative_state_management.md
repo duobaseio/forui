@@ -3,7 +3,7 @@
 Author: Matt (Pante)
 Status: Shipped (Forui 0.17.0)
 
-## Outline
+## Summary
 
 This document outlines the introduction of a declarative state management API to Forui widgets. Most popular
 state management solutions in Flutter (Riverpod, hooks, bloc) favor a declarative approach where state is driven by
