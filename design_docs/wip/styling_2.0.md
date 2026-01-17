@@ -27,7 +27,7 @@ and will continue to complement Styling 2.0.
 `FWidgetStateMap` currently uses a **first-match-wins strategy** to resolve widget states. 
 
 Given the following constraints:
-```dart
+```
 {
   hovered: A(),
   hovered & focused: B(),
@@ -42,7 +42,7 @@ Order-dependency breaks encapsulation. Introducing a new constraint to a `FWidge
 definitions are ordered internally since arbitrary insertion of new constraints may accidentally override existing ones.
 It also means that every change made to the default constraints can subtly break developer customizations.
 
-```dart
+```
 // Where should "hovered & selected: C()" go?
 {
   hovered: A(),
@@ -55,8 +55,8 @@ map when adding new constraints. This is cumbersome and leads to poor DX.
 
 To solve this, we propose a **most-specific-wins strategy** to resolve widget states. 
 
-Re-using the previous example:
-```dart
+Reusing the previous example:
+```
 {
   hovered: A(),
   hovered & focused: B(),
@@ -142,4 +142,158 @@ focused & pressed → sort → ["focused", "pressed"]
 
 As a future enhancement, we can consider introducing an analyzer plugin that detects and warns against defining impossible
 constraints and constraints with equal specificity.
+
+## Widget-specific States
+
+The current styling system uses Flutter's in-built [WidgetState](https://api.flutter.dev/flutter/widgets/WidgetState.html)
+to represent widget states.
+
+Since `WidgetState` is an enum, it is impossible to define new states. For example, a calendar may have a `today` and 
+`enclosing` state. The current restrictions force us to define these states as separate fields.
+
+```dart
+class FCalendarStyle {
+  final FWidgetStateMap<FTappableStyle> todayStyle;
+  final FWidgetStateMap<FTappableStyle> enclosingStyle;   
+  final FWidgetStateMap<FTappableStyle> tappableStyle;               
+}
+```
+
+As each state is represented as a field, they do not compose. Developers cannot specify a style for `today & enclosing`
+without a dedicated field for that combination. Adding every combination is infeasible since the number of possible fields
+grows exponentially with the number of states, exploding the API surface area. Lastly, this introduces a dichotomy:
+states defined in `WidgetState` are modeled using `FWidgetStateMap` while those outside it are modeled as fields.
+
+Conversely, `WidgetState` defines too many generic states that are not applicable to all widgets. This is further
+exacerbated by `WidgetState` formerly being `MaterialState` and including Material-specific states such as 
+[`scrolledUnder`](https://api.flutter.dev/flutter/widgets/WidgetState.html#scrolledUnder) which is only used by `AppBar`.
+
+It is currently perfectly valid to pass in unsupported states since there is no compile-time validation.
+
+```dart
+// Compiles fine, but scrolledUnder is meaningless for a tappable
+FTappableStyle(
+  decoration: FWidgetStateMap({
+    WidgetState.scrolledUnder: BoxDecoration(...),  // silently ignored
+  }),
+)
+```
+
+This hurts discoverability as developers must consult each field's documentation to determine what fields they support.
+It also increases the likelihood of bugs since it falls to us to manually sync the documentation with the actual 
+supported states across many fields.
+
+```dart
+FTappableStyle(
+  decoration: FWidgetStateMap({
+    WidgetState.selected: BoxDecoration(...),  // Does FTappableStyle support selected? Who knows.
+  }),
+)
+```
+
+In summary, `WidgetState` is too closed to extend yet too open to misuse.
+
+To fix this, we propose replacing `WidgetState` with **widget-specific states**. 
+
+Reusing the previous example, we define `FWidgetState` as a base which all widget-specific states extend. `FCalendarState`
+and `FTappableState` represent calendar-specific and tappable-specific states respectively.
+
+```dart
+sealed class FWidgetState {
+  const factory FWidgetState() = _Value;
+
+  const FWidgetState._();
+
+  bool satisfiedBy(Set<FWidgetState> variants);
+}
+
+class _Value extends FWidgetState {
+  const _Value(): super._();
+
+  @override
+  bool satisfiedBy(Set<FWidgetState> variants) => variants.contains(this);
+}
+
+class _And extends FWidgetState {
+  final FWidgetState first;
+  final FWidgetState second;
+
+  const _And(this.first, this.second): super._();
+
+  @override
+  bool satisfiedBy(Set<FWidgetState> variants) => first.satisfiedBy(variants) && second.satisfiedBy(variants);
+}
+
+final class _Not extends FWidgetState {
+  final FWidgetState value;
+
+  const _Not(this.value): super._();
+
+  @override
+  bool satisfiedBy(Set<FWidgetState> variants) => !value.satisfiedBy(variants);
+}
+
+extension type const FCalendarState(FWidgetState _) implements FWidgetState {
+  static const enclosing = FCalendarState(.new());
+
+  static const today = FCalendarState(.new());
+
+  factory FCalendarState.not(FCalendarState other) => .new(_Not(other));
+
+  FCalendarState and(FCalendarState other) => .new(_And(this, other));
+}
+
+extension type const FTappableState(FWidgetState _) implements FWidgetState {
+  static const focused = FTappableState(.new());
+
+  static const hovered = FTappableState(.new());
+
+  static const pressed = FTappableState(.new());
+
+  factory FTappableState.not(FTappableState other) => .new(_Not(other));
+
+  FTappableState and(FTappableState other) => .new(_And(this, other));
+}
+```
+
+With widget-specific states, we can define all states in a single, unified way using `FWidgetStateMap`:
+
+```dart
+class FCalendarStyle {
+  final FWidgetStateMap<FCalendarState, FTappableStyle> tappableStyle;
+}
+
+FCalendarStyle(
+  tappableStyle: {
+    .today: FTappableStyle(...),
+    .today.and(.enclosing): FTappableStyle(...),
+    .enclosing: FTappableStyle(
+      decoration: FWidgetStateMap({
+        .hovered.and(.not(.pressed)): BoxDecoration(...), 
+      }),
+    ),
+  },
+)
+```
+
+[Dot shorthands do not work with operator overloading](https://github.com/dart-lang/language/issues/4609). We prioritize
+dot shorthands over operators since type names are verbose and hurt readability. To enable this, methods such as `and(...)`
+and `not(...)` are used instead of operator overloads.
+
+To prevent accidental mixing of incompatible states, `and(...)`and `not(...)` are defined in the specific states and 
+accept and return covariant state types.
+
+```dart
+// ✗ Compile error: incompatible state types
+FCalendarState.today.and(FTappableState.hovered);
+```
+
+Since states are widget-specific, all states are valid and developers do not have to perform any guesswork. Likewise,
+developers discover valid states through autocomplete rather than documentation.
+
+One potential downside to this "share nothing" approach is the duplication of fields across widget-specific states and
+consequentially a significantly larger API surface. We expect the duplication of fields to be alleviated by code generation, 
+the exact mechanism behind which is to be decided. In the future, [Augmenting static fields](https://github.com/dart-lang/language/blob/main/working/augmentations/feature-specification.md)
+may further reduce boilerplate. We accept a larger API surface to gain the benefits of discoverability, and type-safety.
+
 
