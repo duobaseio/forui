@@ -12,6 +12,7 @@ Generally, most of the problems stem from misguided assumptions about usage patt
 in designing a styling system. This led to an unergonomic API where it is possible but painful to achieve common styling
 tasks.
 
+
 ## Styling CLI
 
 We previously introduced a styling CLI in Forui 0.11.0 to try to mitigate the issue. However, it failed to gain widespread
@@ -21,6 +22,7 @@ blunt tool that generated entire styling files rather than minor tweaks to exist
 The CLI will no longer be actively promoted as the default way to style widgets. Nevertheless, removing the CLI is
 **not** a goal. It is still a niche yet useful tool for developers that wish to build radically different design systems,
 and will continue to complement Styling 2.0.
+
 
 ## Order-independent Widget State Resolution
 
@@ -142,6 +144,7 @@ focused & pressed → sort → ["focused", "pressed"]
 
 As a future enhancement, we can consider introducing an analyzer plugin that detects and warns against defining impossible
 constraints and constraints with equal specificity.
+
 
 ## Widget-specific States
 
@@ -341,6 +344,120 @@ ButtonStyle(
 )
 ```
 
-# Generalizing Widget States to Variants
+## Generalizing Widget States to Variants
 
-The current styling system does not support platform 
+The current styling system does not support platform-specific or responsive styling. Instead, developers must manually
+check the platform or screen size and apply conditional logic when building styles.
+
+```dart
+FDialogStyle(
+  padding: Platform.isIOS ? .all(16) : .all(12),
+  axis: MediaQuery.ofSize(context).width > 600 ? .horizontal : .vertical,
+)
+```
+
+This makes styles difficult to modify as overriding a single platform or adding a new one requires rewriting the entire
+conditional logic. It is worse when the conditional is defined inside Forui as developers must understand the 
+implementation details to make minor tweaks, thereby breaking encapsulation.
+
+```dart
+// Inside library:
+FDialogStyle(
+  padding: Platform.isIOS ? .all(16) : .all(12),
+)
+
+// User wants to change just iOS padding to 20:
+FDialogStyle(
+  padding: Platform.isIOS ? .all(20) : .all(12),  // must also know/copy other platforms' value  
+)
+```
+
+More importantly, this introduces a dichotomy: platform and responsive styling rely on conditional logic while widget
+state styles use `FWidgetStateMap`.
+
+To fix this, we propose unifying platform/responsive styling and widget states under a single concept: **Variants**. 
+This approach is inspired by [Mix's dynamic styling](https://www.fluttermix.com/documentation/guides/dynamic-styling).
+
+Building on the [widget-specific states design](#widget-specific-states), we rename `FWidgetState` to `FVariant` (and 
+correspondingly, `FTappableState` to `FTappableVariant`, etc.).
+
+```dart
+sealed class FVariant {
+  // Platform variants
+  static const android = FVariant();
+  
+  static const ios = FVariant();
+  
+  static const web = FVariant();
+  
+  // Responsive variants
+  static const xs = FVariant();
+  
+  static const sm = FVariant();
+  
+  const factory FVariant() = _Value;
+
+  const FVariant._();
+
+  bool satisfiedBy(Set<FVariant> variants);
+}
+
+extension type const FDialogVariant(FVariant _) implements FVariant {
+  // Platform variants
+  static const android = FDialogVariant(.android);
+  
+  static const ios = FDialogVariant(.ios);
+  
+  static const web = FDialogVariant(.web);
+  
+  // Responsive variants
+  static const xs = FDialogVariant(.xs);
+  
+  static const sm = FDialogVariant(.sm);
+  
+  // Dialog-specific variants
+  static const focused = FDialogVariant(.new());
+  
+  factory FDialogVariant.not(FDialogVariant other) => .new(_Not(other));
+
+  FDialogVariant and(FDialogVariant other) => .new(_And(this, other));
+}
+```
+
+Each widget variant defines the platform and responsive variants it supports. [As mentioned previously](#widget-specific-states), 
+this leads to a larger API surface area, but we accept this tradeoff for improved discoverability and type-safety.
+
+With variants, we can map platform, responsive and widget-specific variants to styles using `FVariants` (renamed from 
+`FWidgetStateMap`).
+
+```dart
+FDialogStyle(
+  padding: {
+    .ios: .all(16),
+    .ios.and(.focused).and(.not(.sm)): .all(20),
+    .android: .all(12),
+  },
+  axis: {.sm: .vertical, .md: .horizontal},
+)
+```
+
+Platform and responsive variants are defined once in `FVariant`. Widget-specific variants like `FDialogVariant` wrap 
+these base constants. Since extension types are compiled away, these wrapped constants will be equal across variants.
+
+To provide these platform and responsive variants across the entire application, we introduce a `FAdaptiveScope` that
+combines a `LayoutBuilder` and `InheritedWidget` to provide the current platform and responsive variants down the widget 
+tree. An extension getter on `BuildContext`, `context.adaptiveVariants`, is also provided to retrieve said variants from 
+the nearest `FAdaptiveScope`. An `FTheme` widget will include a `FAdaptiveScope` by default.
+
+### Summary of Renames
+
+| Before            | After              |
+|-------------------|--------------------|
+| `FWidgetState`    | `FVariant`         |
+| `FWidgetStateMap` | `FVariants`        |
+| `FTappableState`  | `FTappableVariant` |
+| `FCalendarState`  | `FCalendarVariant` |
+
+
+## Merge-by-default `FVariants`
+
