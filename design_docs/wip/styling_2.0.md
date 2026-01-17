@@ -24,6 +24,177 @@ The CLI will no longer be actively promoted as the default way to style widgets.
 and will continue to complement Styling 2.0.
 
 
+## Simplifying Style Modification
+
+In the current styling system, modifying a style requires a callback and an explicit `copyWith(...)` call that repeats
+for each level of nesting.
+
+```dart
+FAutocomplete(
+  style: (style) => style.copyWith(
+    contentStyle: (content) => content.copyWith(
+      sectionStyle: (section) => section.copyWith(
+        itemStyle: (item) => item.copyWith(
+          tappableStyle: (tappable) => tappable.copyWith(
+            motion: FTappableMotion.none, // All this boilerplate just to change one property.
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+```
+
+Due to the excessive amount of boilerplate, these nested callbacks and `copyWith` calls are both painful to write and 
+difficult to read and reason about. This is exacerbated by most styles being deeply nested and the frequency of deep
+modifications. Callbacks were originally introduced to make an existing style available in the lexical scope and avoid
+accessing a chain of fields each time. Although it _did_ make it easier to obtain the current style, there is still much
+to be desired.
+
+Beyond the callbacks, the current `copyWith(...)` methods are not able to differentiate between `null` and "no change" 
+since both are represented as `null`. Consequently, nullable fields can never be set to `null` using `copyWith(...)`.
+
+```dart
+class FExampleStyle {
+  final Color? background;
+  final EdgeInsets padding;
+
+  FExampleStyle copyWith({Color? background, EdgeInsets? padding}) => FExampleStyle(
+    background: background ?? this.background,
+    padding: padding ?? this.padding,
+  );
+}
+
+void usage() {
+  FExample(
+    // Can't set background to null & keeps the existing background
+    style: (style) => style.copyWith(background: null),
+  );
+}
+```
+
+From our observations, most developers only modify a few properties of an existing style rather than replacing it. 
+Thus, to fix this, we propose simplifying style modification by eliminating the need for callbacks and `copyWith(...)`
+calls.
+
+It is **not** a goal to remove the `copyWith(...)` methods. They will remain available, albeit modified to accept nested
+styles directly rather than through callbacks, and use sentinel values to distinguish between `null` and "no change".
+
+To simplify modification, we introduce `Delta`s that correspond to styles, with widgets accepting deltas rather than 
+style callbacks.
+
+Given `FAutocompleteStyle`, `FAutocompleteStyleDelta` is defined as:
+
+```dart
+mixin Delta<S> {
+  S apply(S base);
+}
+
+abstract class FAutocompleteStyleDelta with Delta<FAutocompleteStyle> {
+  factory FAutocompleteStyleDelta.merge({
+    FTextFieldStyleDelta? fieldStyle,
+    FAutocompleteContentStyleDelta? contentStyle,
+  }) = _FAutocompleteStyleMerge;
+
+  factory FAutocompleteStyleDelta.replace(FAutocompleteStyle style) = _FAutocompleteStyleReplace;
+}
+
+class _FAutocompleteStyleMerge implements FAutocompleteStyleDelta {
+  final FTextFieldStyleDelta? fieldStyle;
+  final FAutocompleteContentStyleDelta? contentStyle;
+
+  const _FAutocompleteStyleMerge({this.fieldStyle, this.contentStyle});
+
+  // Applies the delta inside FAutocomplete.
+  @override
+  FAutocompleteStyle apply(FAutocompleteStyle base) => FAutocompleteStyle(
+    fieldStyle: fieldStyle?.apply(base.fieldStyle) ?? base.fieldStyle,
+    contentStyle: contentStyle?.apply(base.contentStyle) ?? base.contentStyle,
+  );
+}
+
+class _FAutocompleteStyleReplace implements FAutocompleteStyleDelta {
+  final FAutocompleteStyle _style;
+
+  const _FAutocompleteStyleReplace(this._style);
+
+  // Applies the delta inside FAutocomplete.
+  @override
+  FAutocompleteStyle apply(FAutocompleteStyle base) => _style;
+}
+
+// FTextFieldStyleDelta and FAutocompleteContentStyleDelta are omitted for brevity.
+```
+
+With deltas, styles can be modified succinctly, though deep nesting remains.
+
+```dart
+FAutocomplete(
+  style: .merge(
+    contentStyle: .merge(
+      sectionStyle: .merge(
+        itemStyle: .merge(
+          tappableStyle: .merge(
+            motion: FTappableMotion.none,
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+```
+
+Replacing a style entirely is also supported via `.replace(...)`.
+
+```dart
+FAutocomplete(
+  style: .merge(
+    contentStyle: .replace(FAutocompleteContentStyle(...)),
+  ),
+)
+```
+
+Deltas use sentinel values rather than `null` to represent "no change", allowing nullable fields to be set to `null`.
+
+```dart
+class _SentinelColor extends Color {
+  const _SentinelColor();
+}
+
+abstract class FExampleStyleDelta with Delta<FExampleStyle> {
+  factory FExampleStyleDelta.merge({Color? background, EdgeInsets? padding}) = _FExampleStyleMerge;
+}
+
+class _FExampleStyleMerge implements FExampleStyleDelta {
+  final Color? background;
+  final EdgeInsets? padding;
+
+  const _FExampleStyleMerge({this.background = const _SentinelColor(), this.padding});
+}
+
+void usage() {
+  FExample(
+    style: .merge(background: null), // sets background to null
+  );
+
+  FExample(
+    style: .merge(),            // keeps existing background
+  );
+}
+```
+
+Style deltas will be generated for each style while deltas for Flutter types like `BoxDecoration` and `TextStyle` will 
+be implemented manually. Furthermore, since there are few nullable types, we manually implement the sentinel values which
+are then referenced by the generated code.
+
+### Alternatives
+
+We evaluated using a Fluent API similar to [Mix](https://www.fluttermix.com/documentation/guides/styling) but found it
+to be unidiomatic to Flutter and not to our tastes. [A small-scale user study conducted by Flutter when experimenting
+with using decorators](https://github.com/flutter/flutter/issues/161345#issuecomment-2666390902) to styling widgets also 
+found them to have a mixed impact on understandability.
+
+
 ## Order-independent Widget State Resolution
 
 `FWidgetStateMap` currently uses a **first-match-wins strategy** to resolve widget states.
@@ -103,7 +274,7 @@ hovered                      = 1
 focused                      = 1
 hovered & focused            = 2
 hovered & ~focused           = 2
-hovered & focused & pressed  = 3                                                                                                                                                                                                                                                                                    +
+hovered & focused & pressed  = 3
 ```
 
 OR (|) operators are not supported as intermixing with AND operators lead to a significantly worse heuristic with
@@ -119,7 +290,7 @@ accept a set of constraints that map to the same value.
 ```
 
 Constraints such as `A & ~A` can be defined but are effectively impossible to match. To tiebreak constraints with equal
-counts, operands within a constraint are first sorted alphabetically, then constraint are compared lexicographically.
+counts, operands within a constraint are first sorted alphabetically, then constraints are compared lexicographically.
 This guarantees a deterministic resolution that is order-independent.
 
 ```
@@ -344,6 +515,7 @@ ButtonStyle(
 )
 ```
 
+
 ## Generalizing Widget States to Variants
 
 The current styling system does not support platform-specific or responsive styling. Instead, developers must manually
@@ -457,7 +629,3 @@ the nearest `FAdaptiveScope`. An `FTheme` widget will include a `FAdaptiveScope`
 | `FWidgetStateMap` | `FVariants`        |
 | `FTappableState`  | `FTappableVariant` |
 | `FCalendarState`  | `FCalendarVariant` |
-
-
-## Merge-by-default `FVariants`
-
