@@ -86,6 +86,7 @@ extension WidgetStates on Never {
   /// * [WidgetState.hovered]
   /// * [WidgetState.pressed]
   /// * [WidgetState.disabled]
+  /// * [WidgetState.selected]
   /// {@endtemplate}
   static const selectable = '';
 
