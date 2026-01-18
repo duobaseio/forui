@@ -13,11 +13,12 @@ final tabs = FTabs(
     FTabEntry(label: Text('Tab 1'), child: Text('Content 1')),
     FTabEntry(label: Text('Tab 2'), child: Text('Content 2')),
   ],
+  expands: false,
   // {@endcategory}
   // {@category "Control"}
   control: const .managed(),
   // {@endcategory}
-  // {@category "Scroll"}
+  // {@category "Tab Bar"}
   scrollable: false,
   physics: null,
   // {@endcategory}
