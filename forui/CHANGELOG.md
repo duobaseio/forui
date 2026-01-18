@@ -38,6 +38,10 @@
 * Change `FSlider`'s default error style to not affect the entire slider.
 
 
+### `FTabs`
+* Add `FTabs.expands`.
+
+
 ### `FTextField`
 * **Breaking** Add `FTextFieldStyle.iconStyle`.
 

@@ -99,5 +99,37 @@ void main() {
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('tabs/${theme.name}-focused.png'));
     });
+
+    testWidgets('expands - ${theme.name}', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          child: SizedBox(
+            height: 400,
+            child: FTabs(
+              expands: true,
+              children: [
+                FTabEntry(
+                  label: const Text('Account'),
+                  child: FCard(
+                    title: const Text('Account'),
+                    subtitle: const Text('Make changes to your account here. Click save when you are done.'),
+                  ),
+                ),
+                FTabEntry(
+                  label: const Text('Password'),
+                  child: FCard(
+                    title: const Text('Password'),
+                    subtitle: const Text('Change your password here. After saving, you will be logged out.'),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tabs/${theme.name}-expand.png'));
+    });
   }
 }

@@ -78,6 +78,12 @@ class FTabs extends StatefulWidget {
   /// The mouse cursor. Defaults to [MouseCursor.defer].
   final MouseCursor mouseCursor;
 
+  /// Whether the tab content should expand to fill the remaining available space. Defaults to false.
+  ///
+  /// ## Contract
+  /// Throws an error if true and placed in a container with unbound height constraint, e.g. [ListView].
+  final bool expands;
+
   /// The tabs.
   final List<FTabEntry> children;
 
@@ -94,6 +100,7 @@ class FTabs extends StatefulWidget {
     this.style,
     this.onPress,
     this.mouseCursor = .defer,
+    this.expands = false,
     super.key,
   }) : assert(children.isNotEmpty, 'Must provide at least 1 tab.');
 
@@ -107,6 +114,7 @@ class FTabs extends StatefulWidget {
       ..add(DiagnosticsProperty('physics', physics))
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
+      ..add(FlagProperty('expands', value: expands, ifTrue: 'expands'))
       ..add(IterableProperty('children', children));
   }
 
@@ -150,6 +158,14 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
     final style = widget.style?.call(context.theme.tabsStyle) ?? context.theme.tabsStyle;
     final localizations = Localizations.of<MaterialLocalizations>(context, MaterialLocalizations);
 
+    final content = DefaultTextStyle(
+      style: theme.typography.base.copyWith(
+        fontFamily: theme.typography.defaultFontFamily,
+        color: theme.colors.foreground,
+      ),
+      child: widget.children[_controller.index].child,
+    );
+
     final tabs = Material(
       color: Colors.transparent,
       child: Column(
@@ -173,13 +189,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
             ),
           ),
           SizedBox(height: style.spacing),
-          DefaultTextStyle(
-            style: theme.typography.base.copyWith(
-              fontFamily: theme.typography.defaultFontFamily,
-              color: theme.colors.foreground,
-            ),
-            child: widget.children[_controller.index].child,
-          ),
+          if (widget.expands) Expanded(child: content) else content,
         ],
       ),
     );
