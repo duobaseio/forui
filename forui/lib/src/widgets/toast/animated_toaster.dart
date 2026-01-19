@@ -212,8 +212,8 @@ class RenderAnimatedToaster extends RenderBox
           expand *
           switch (expandedAlignTransform.dx) {
             -1 => 0,
-            0 => (size.width - child.size.width) / 2,
-            _ => size.width - child.size.width,
+            1 => size.width - child.size.width,
+            _ => (size.width - child.size.width) / 2,
           };
 
       data.offset = Offset(translateX, data.offset.dy + translateY);

@@ -51,6 +51,26 @@ class ToastPage extends Example {
 }
 
 @RoutePage()
+class CustomAlignmentToastPage extends Example {
+  CustomAlignmentToastPage({@queryParam super.theme});
+
+  @override
+  Widget example(BuildContext context) => FButton(
+    mainAxisSize: .min,
+    onPress: () => showFToast(
+      context: context,
+      // {@highlight}
+      alignment: FToastAlignment(const Alignment(-0.5, -1), -1),
+      // {@endhighlight}
+      icon: const Icon(FIcons.info),
+      title: const Text('Event has been created'),
+      description: const Text('Friday, May 23, 2025 at 9:00 AM'),
+    ),
+    child: const Text('Show Custom Alignment Toast'),
+  );
+}
+
+@RoutePage()
 class NoAutoDismissToastPage extends Example {
   NoAutoDismissToastPage({@queryParam super.theme});
 

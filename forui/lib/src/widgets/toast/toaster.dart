@@ -130,49 +130,92 @@ FToasterEntry showRawFToast({
 }
 
 /// The toast's alignment.
-enum FToastAlignment {
+final class FToastAlignment {
   /// Aligns the toasts to the top start of the screen, depending on the locale's text direction.
   ///
   /// Top left in LTR locales, top right in RTL locales.
-  topStart(AlignmentDirectional.topStart, .bottomCenter),
+  static const topStart = FToastAlignment._(AlignmentDirectional.topStart, Alignment.bottomCenter);
 
   /// Aligns the toasts to the start of the screen, depending on the locale's text direction.
   ///
   /// Top right in LTR locales, top left in RTL locales.
-  topEnd(AlignmentDirectional.topEnd, .bottomCenter),
+  static const topEnd = FToastAlignment._(AlignmentDirectional.topEnd, Alignment.bottomCenter);
 
   /// Aligns the toasts to the top left of the screen.
-  topLeft(.topLeft, .bottomCenter),
+  static const topLeft = FToastAlignment._(.topLeft, .bottomCenter);
 
   /// Aligns the toasts to the top right of the screen.
-  topRight(.topRight, .bottomCenter),
+  static const topRight = FToastAlignment._(.topRight, .bottomCenter);
 
   /// Aligns the toasts to the top center of the screen.
-  topCenter(.topCenter, .bottomCenter),
+  static const topCenter = FToastAlignment._(.topCenter, .bottomCenter);
 
   /// Aligns the toasts to the bottom start of the screen, depending on the locale's text direction.
   ///
   /// Bottom left in LTR locales, bottom right in RTL locales.
-  bottomStart(AlignmentDirectional.bottomStart, .topCenter),
+  static const bottomStart = FToastAlignment._(AlignmentDirectional.bottomStart, .topCenter);
 
   /// Aligns the toasts to the bottom end of the screen, depending on the locale's text direction.
   ///
   /// Bottom right in LTR locales, bottom right in RTL locales.
-  bottomEnd(AlignmentDirectional.bottomEnd, .topCenter),
+  static const bottomEnd = FToastAlignment._(AlignmentDirectional.bottomEnd, .topCenter);
 
   /// Aligns the toasts to the bottom left of the screen.
-  bottomLeft(.bottomLeft, .topCenter),
+  static const bottomLeft = FToastAlignment._(.bottomLeft, .topCenter);
 
   /// Aligns the toasts to the bottom right of the screen.
-  bottomRight(.bottomRight, .topCenter),
+  static const bottomRight = FToastAlignment._(.bottomRight, .topCenter);
 
   /// Aligns the toasts to the bottom center of the screen.
-  bottomCenter(.bottomCenter, .topCenter);
+  static const bottomCenter = FToastAlignment._(.bottomCenter, .topCenter);
 
   final AlignmentGeometry _alignment;
   final Alignment _toastAlignment;
 
-  const FToastAlignment(this._alignment, this._toastAlignment);
+  const FToastAlignment._(this._alignment, this._toastAlignment);
+
+  /// Creates a [FToastAlignment] with the given alignments.
+  ///
+  /// It is typically recommended to use one of the constants instead. Use this only if you need fine-grained control
+  /// over the toast's positioning.
+  ///
+  /// [AlignmentGeometry] controls where the toast appears on the screen while [toastAlignment] controls how the toasts
+  /// vertically stack.
+  ///
+  /// ```dart
+  /// // Toasts appear between the top left and top center, and stack downward from the top.
+  /// // Top left is (0, 0).
+  /// FToastAlignment(Alignment(-0.5, -1), 1);
+  ///
+  /// // Toasts appear at bottom-left and stack upward from the bottom.
+  /// FToastAlignment(Alignment.bottomLeft, 1);
+  ///
+  /// // Toasts appear at top-center and stack downward from the top.
+  /// FToastAlignment(Alignment.topCenter, -1);
+  /// ```
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [toastAlignment] is not between -1 and 1, inclusive.
+  FToastAlignment(this._alignment, double toastAlignment)
+    : assert(
+        toastAlignment >= -1 && toastAlignment <= 1,
+        'toastAlignment ($toastAlignment) must be between -1 and 1, inclusive.',
+      ),
+      _toastAlignment = Alignment(0, toastAlignment);
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FToastAlignment &&
+          runtimeType == other.runtimeType &&
+          _alignment == other._alignment &&
+          _toastAlignment == other._toastAlignment;
+
+  @override
+  int get hashCode => Object.hash(_alignment, _toastAlignment);
+
+  @override
+  String toString() => 'FToastAlignment(alignment: $_alignment, toastAlignment: $_toastAlignment)';
 }
 
 /// An opinionated toast widget.

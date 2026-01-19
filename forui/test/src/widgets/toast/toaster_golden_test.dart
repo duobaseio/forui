@@ -88,8 +88,20 @@ void main() {
     await expectBlueScreen();
   });
 
-  for (final alignment in FToastAlignment.values) {
-    group('collapsed - $alignment', () {
+  for (final (name, alignment) in [
+    ('topStart', FToastAlignment.topStart),
+    ('topEnd', FToastAlignment.topEnd),
+    ('topLeft', FToastAlignment.topLeft),
+    ('topRight', FToastAlignment.topRight),
+    ('topCenter', FToastAlignment.topCenter),
+    ('bottomStart', FToastAlignment.bottomStart),
+    ('bottomEnd', FToastAlignment.bottomEnd),
+    ('bottomLeft', FToastAlignment.bottomLeft),
+    ('bottomRight', FToastAlignment.bottomRight),
+    ('bottomCenter', FToastAlignment.bottomCenter),
+    ('custom', FToastAlignment(const Alignment(-0.5, -0.5), 1)),
+  ]) {
+    group('collapsed - $name', () {
       testWidgets('simple', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
@@ -111,7 +123,7 @@ void main() {
         await tester.tap(find.text('3'));
         await tester.pumpAndSettle();
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/collapsed/simple-$alignment.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/collapsed/simple-$name.png'));
       });
 
       testWidgets('big middle', (tester) async {
@@ -135,7 +147,7 @@ void main() {
         await tester.tap(find.text('3'));
         await tester.pumpAndSettle();
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/collapsed/big-middle-$alignment.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/collapsed/big-middle-$name.png'));
       });
 
       testWidgets('big front', (tester) async {
@@ -159,11 +171,11 @@ void main() {
         await tester.tap(find.text('3'));
         await tester.pumpAndSettle();
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/collapsed/big-front-$alignment.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/collapsed/big-front-$name.png'));
       });
     });
 
-    group('expanded - $alignment', () {
+    group('expanded - $name', () {
       testWidgets('simple', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
@@ -188,7 +200,7 @@ void main() {
         await tester.tap(find.text('3').last);
         await tester.pumpAndSettle(const Duration(seconds: 1));
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/expanded/simple-$alignment.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/expanded/simple-$name.png'));
       });
 
       testWidgets('big middle', (tester) async {
@@ -215,7 +227,7 @@ void main() {
         await tester.tap(find.text('3').last);
         await tester.pumpAndSettle(const Duration(seconds: 1));
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/expanded/big-middle-$alignment.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/expanded/big-middle-$name.png'));
       });
 
       testWidgets('big front', (tester) async {
@@ -242,7 +254,7 @@ void main() {
         await tester.tap(find.text('3').last);
         await tester.pumpAndSettle(const Duration(seconds: 1));
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/expanded/big-front-$alignment.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/expanded/big-front-$name.png'));
       });
     });
   }

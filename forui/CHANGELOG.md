@@ -61,6 +61,10 @@
 * Change error message when given unbounded constraints to be more descriptive.
 
 
+### `FToaster`
+* Change `FToastAlignment` from an enum to final classto allow fine-grained control over positioning.
+
+
 ## 0.17.0
 
 This update overhauls the API by introducing [controls](https://forui.dev/docs/concepts/controls) to support declarative state

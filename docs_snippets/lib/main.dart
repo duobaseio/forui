@@ -247,6 +247,7 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/time-picker/interval', page: IntervalTimePickerRoute.page),
     AutoRoute(path: '/time-picker/animated', page: AnimatedTimePickerRoute.page),
     AutoRoute(path: '/toast/default', page: ToastRoute.page),
+    AutoRoute(path: '/toast/custom-alignment', page: CustomAlignmentToastRoute.page),
     AutoRoute(path: '/toast/no-auto-dismiss', page: NoAutoDismissToastRoute.page),
     AutoRoute(path: '/toast/raw', page: RawToastRoute.page),
     AutoRoute(path: '/toast/always-expand', page: AlwaysExpandToastRoute.page),
