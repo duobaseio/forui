@@ -62,7 +62,7 @@
 
 
 ### `FToaster`
-* Change `FToastAlignment` from an enum to final classto allow fine-grained control over positioning.
+* Change `FToastAlignment` from an enum to final class to allow fine-grained control over positioning.
 
 
 ## 0.17.0
