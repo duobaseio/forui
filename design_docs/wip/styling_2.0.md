@@ -5,31 +5,34 @@ Status: WIP
 
 ## Summary
 
-This document outlines the problems that we have observed with the current styling system over the last few year(s). In
-addition, it proposes a series of potential solutions to those problems that together form Styling 2.0.
+This document outlines problems we have observed with the current styling system and proposes solutions that together
+form Styling 2.0.
 
-Generally, most of the problems stem from misguided assumptions about usage patterns as well as our relative inexperience
-in designing a styling system. This led to an unergonomic API where it is possible but painful to achieve common styling
-tasks.
+## Table of Contents
 
-**All syntax and code snippets in this document are illustrative and may not represent the final API.**
-
-
-## Styling CLI
-
-We previously introduced a styling CLI in Forui 0.11.0 to try to mitigate the issue. However, it failed to gain widespread
-adoption due to poor discoverability and workflow disruption from context switching. Most importantly, it is an extremely
-blunt tool that generated entire styling files rather than minor tweaks to existing styles.
-
-The CLI will no longer be actively promoted as the default way to style widgets. Nevertheless, removing the CLI is
-**not** a goal. It is still a niche yet useful tool for developers that wish to build radically different design systems,
-and will continue to complement Styling 2.0.
+1. [Styling CLI](#1-styling-cli)
+2. [Simplifying Style Modification](#2-simplifying-style-modification)
+3. [Order-independent Widget State Resolution](#3-order-independent-widget-state-resolution)
+4. [Widget-specific States](#4-widget-specific-states)
+5. [Generalizing Widget States to Variants](#5-generalizing-widget-states-to-variants)
+6. [Simplifying FVariants](#6-simplifying-fvariants)
+7. [Migration](#7-migration)
+8. [Future Work](#8-future-work)
 
 
-## Simplifying Style Modification
+## 1. Styling CLI
 
-In the current styling system, modifying a style requires a callback and an explicit `copyWith(...)` call that repeats
-for each level of nesting.
+A styling CLI was previously introduced in 0.11.0 to alleviate the problems. Adoption was low due to poor discoverability
+and workflow disruption from constant context switching. More importantly, it generates entire style files when minor
+tweaks are needed, akin to using a sledgehammer for surgery.
+
+The CLI will no longer be the recommended way to style widgets. However, removing the CLI is **not** a goal as it is 
+still useful for developers that build radically different design systems.
+
+
+## 2. Simplifying Style Modification
+
+Modifying a style requires a callback and an explicit `copyWith` call that repeats for each level of nesting.
 
 ```dart
 FAutocomplete(
@@ -38,7 +41,7 @@ FAutocomplete(
       sectionStyle: (section) => section.copyWith(
         itemStyle: (item) => item.copyWith(
           tappableStyle: (tappable) => tappable.copyWith(
-            motion: FTappableMotion.none, // All this boilerplate just to change one property.
+            motion: FTappableMotion.none, // All this just to change one property.
           ),
         ),
       ),
@@ -47,85 +50,82 @@ FAutocomplete(
 )
 ```
 
-Due to the excessive amount of boilerplate, these nested callbacks and `copyWith` calls are both painful to write and 
-difficult to read and reason about. This is exacerbated by most styles being deeply nested and the frequency of deep
-modifications. Callbacks were originally introduced to make an existing style available in the lexical scope and avoid
-accessing a chain of fields each time. Although it _did_ make it easier to obtain the current style, there is still much
-to be desired.
+These nested callbacks and `copyWith` calls are painful to read, write, and reason about. It is exacerbated by styles
+typically being ~3 levels deep and the frequency of deep modifications. Callbacks were introduced to provide the current
+style without field chaining. Although helpful, there is still much to be desired.
 
-Beyond the callbacks, the current `copyWith(...)` methods are not able to differentiate between `null` and "no change" 
-since both are represented as `null`. Consequently, nullable fields can never be set to `null` using `copyWith(...)`.
+Beyond the callbacks, `copyWith` is unable to distinguish between `null` and "no change". Consequently, nullable fields
+can never be set to `null`.
 
 ```dart
-class FExampleStyle {
+class FooStyle {
   final Color? background;
   final EdgeInsets padding;
 
-  FExampleStyle copyWith({Color? background, EdgeInsets? padding}) => FExampleStyle(
+  FooStyle copyWith({Color? background, EdgeInsets? padding}) => FooStyle(
     background: background ?? this.background,
     padding: padding ?? this.padding,
   );
 }
-
-void usage() {
-  FExample(
-    // Can't set background to null & keeps the existing background
-    style: (style) => style.copyWith(background: null),
-  );
-}
 ```
 
-From our observations, most developers only modify a few properties of an existing style rather than replacing it. 
-Thus, to fix this, we propose simplifying style modification by eliminating the need for callbacks and `copyWith(...)`
-calls.
+Usage:
 
-It is **not** a goal to remove the `copyWith(...)` methods. They will remain available, albeit modified to accept nested
-styles directly rather than through callbacks, and use sentinel values to distinguish between `null` and "no change".
+```dart
+Foo(
+  // Can't set background to null.
+  style: (style) => style.copyWith(background: null),
+);
+```
 
-To simplify modification, we introduce `Delta`s that correspond to styles, with widgets accepting deltas rather than 
-style callbacks.
 
-Given `FAutocompleteStyle`, `FAutocompleteStyleDelta` is defined as:
+### Proposed Solution
+
+Most developers only modify a few properties rather than replace an entire style. Thus, we propose eliminating the need
+for callbacks and `copyWith` when modifying styles.
+
+Removing `copyWith` is **not** a goal. They will be modified to accept styles (not callbacks) and use sentinel values 
+to distinguish between `null` and "no change".
+
+Each style will have a corresponding `Delta`, and widgets will accept deltas instead of callbacks.
+
+Given `FAutocompleteStyle`:
 
 ```dart
 mixin Delta<S> {
   S apply(S base);
 }
 
-abstract class FAutocompleteStyleDelta with Delta<FAutocompleteStyle> {
+sealed class FAutocompleteStyleDelta with Delta<FAutocompleteStyle> {
   factory FAutocompleteStyleDelta.merge({
-    FTextFieldStyleDelta? fieldStyle,
     FAutocompleteContentStyleDelta? contentStyle,
-  }) = _FAutocompleteStyleMerge;
+  }) = _Merge;
 
-  factory FAutocompleteStyleDelta.replace(FAutocompleteStyle style) = _FAutocompleteStyleReplace;
+  factory FAutocompleteStyleDelta.replace(FAutocompleteStyle style) = _Replace;
 }
 
-class _FAutocompleteStyleMerge implements FAutocompleteStyleDelta {
-  final FTextFieldStyleDelta? fieldStyle;
+class _Merge implements FAutocompleteStyleDelta {
   final FAutocompleteContentStyleDelta? contentStyle;
 
-  const _FAutocompleteStyleMerge({this.fieldStyle, this.contentStyle});
+  _Merge({this.contentStyle});
 
   // Applies the delta inside FAutocomplete.
   @override
-  FAutocompleteStyle apply(FAutocompleteStyle base) => FAutocompleteStyle(
-    fieldStyle: fieldStyle?.apply(base.fieldStyle) ?? base.fieldStyle,
-    contentStyle: contentStyle?.apply(base.contentStyle) ?? base.contentStyle,
-  );
+  FAutocompleteStyle apply(FAutocompleteStyle base) =>
+      FAutocompleteStyle(
+        contentStyle: contentStyle?.apply(base.contentStyle) ?? base.contentStyle,
+      );
 }
 
-class _FAutocompleteStyleReplace implements FAutocompleteStyleDelta {
+class _Replace implements FAutocompleteStyleDelta {
   final FAutocompleteStyle _style;
 
-  const _FAutocompleteStyleReplace(this._style);
+  _Replace(this._style);
 
   // Applies the delta inside FAutocomplete.
   @override
   FAutocompleteStyle apply(FAutocompleteStyle base) => _style;
 }
-
-// FTextFieldStyleDelta and FAutocompleteContentStyleDelta are omitted for brevity.
 ```
 
 With deltas, styles can be modified succinctly, though deep nesting remains.
@@ -146,7 +146,7 @@ FAutocomplete(
 )
 ```
 
-Replacing a style entirely is also supported via `.replace(...)`.
+Replacing a style is also supported via `.replace(...)`.
 
 ```dart
 FAutocomplete(
@@ -156,104 +156,94 @@ FAutocomplete(
 )
 ```
 
-Deltas use sentinel values rather than `null` to represent "no change", allowing nullable fields to be set to `null`.
+Deltas use sentinel values for "no change", so `null` means `null`.
 
 ```dart
-class _SentinelColor extends Color {
-  const _SentinelColor();
+class _Sentinel extends Color {
+  const _Sentinel();
 }
 
-abstract class FExampleStyleDelta with Delta<FExampleStyle> {
-  factory FExampleStyleDelta.merge({Color? background, EdgeInsets? padding}) = _FExampleStyleMerge;
+abstract class FooStyleDelta with Delta<FooStyle> {
+  factory FooStyleDelta.merge({Color? background, EdgeInsets? padding}) = _Merge;
 }
 
-class _FExampleStyleMerge implements FExampleStyleDelta {
+class _Merge implements FooStyleDelta {
   final Color? background;
   final EdgeInsets? padding;
 
-  const _FExampleStyleMerge({this.background = const _SentinelColor(), this.padding});
-}
-
-void usage() {
-  FExample(
-    style: .merge(background: null), // sets background to null
-  );
-
-  FExample(
-    style: .merge(),            // keeps existing background
-  );
+  const _Merge({this.background = const _Sentinel(), this.padding});
 }
 ```
 
-Style deltas will be generated for each style while deltas for Flutter types like `BoxDecoration` and `TextStyle` will 
-be implemented manually. Furthermore, since there are few nullable types, we manually implement the sentinel values which
-are then referenced by the generated code.
+Usage:
+
+```dart
+Foo(
+  style: .merge(background: null), // sets background to null
+);
+
+Foo(
+  style: .merge(), // keeps existing background
+);
+```
+
+Style deltas will be generated while Flutter type deltas, e.g. `BoxDecoration`, and sentinel values will be manually
+implemented.
 
 ### Alternatives
 
-We evaluated using a Fluent API similar to [Mix](https://www.fluttermix.com/documentation/guides/styling) but found it
-to be unidiomatic to Flutter and not to our tastes. [A small-scale user study conducted by Flutter when experimenting
-with using decorators](https://github.com/flutter/flutter/issues/161345#issuecomment-2666390902) to styling widgets also 
-found them to have a mixed impact on understandability.
+We considered a fluent API similar to [Mix](https://www.fluttermix.com/documentation/guides/styling). However, it felt
+unidiomatic and not to our tastes. [Small user studies](https://github.com/flutter/flutter/issues/161345#issuecomment-2666390902) 
+conducted by Flutter found decorators to have mixed impact on understandability.
 
 
-## Order-independent Widget State Resolution
+## 3. Order-independent Widget State Resolution
 
-`FWidgetStateMap` currently uses a **first-match-wins strategy** to resolve widget states.
+`FWidgetStateMap` uses a **first-match-wins strategy** to resolve widget states.
 
 Given the following constraints:
+
 ```
-{
-  hovered: A(),
-  hovered & focused: B(),
-}
+hovered: A()
+hovered & focused: B()
 ```
 
-`{ hovered, focused }` will **always resolve to `A()`**  since it is defined first, even though `B()` is the more
-specific match which most developers expect. In other words, the `FWidgetStateMap` is order-dependent, which is
-unintuitive and error-prone.
+A set of states, `{ hovered, focused }`, will always resolve to `A()` since it is defined first although `B()` is more 
+specific. In other words, `FWidgetStateMap` is order-dependent which is unintuitive and error-prone.
 
-Order-dependency breaks encapsulation. Introducing a new constraint to a `FWidgetStateMap` requires knowledge of how
-definitions are ordered internally since arbitrary insertion of new constraints may accidentally override existing ones.
-It also means that every change made to the default constraints can subtly break developer customizations.
+Order-dependency breaks encapsulation. Adding constraints requires knowing internal order since arbitrary insertions may 
+override existing ones. Adding default constraints can also subtly break developer customizations. Hence, no insertion 
+methods are provided. This forces developers to recreate a `FWidgetStateMap` which is poor DX.
 
 ```
 // Where should "hovered & selected: C()" go?
-{
-  hovered: A(),
-  hovered & selected & focused: B(),
-}
+
+hovered: A()
+hovered & selected & focused: B()
 ```
 
-For these reasons, `FWidgetStateMap` opts not to provide any insertion methods, forcing developers to redefine the entire
-map when adding new constraints. This is cumbersome and leads to poor DX.
+### Proposed Solution
 
-To solve this, we propose a **most-specific-wins strategy** to resolve widget states.
-
-Reusing the previous example:
-```
-{
-  hovered: A(),
-  hovered & focused: B(),
-}
-```
-
-`{ hovered, focused }` will **always resolve to `B()`** since it is the most specific match. This holds true even when
-the order of definitions is changed or less specific constraints are added. In other words, resolution is now
-order-independent, which has wide-reaching implications.
-
-Encapsulation is preserved. A new constraint can be arbitrarily inserted without knowledge of the internals. Adding default
-constraints will not break existing customizations either since the developer constraints are applied after and will
-override the defaults.
-
-Determining the "most specific" constraint for a given set of states is equivalent to finding the constraint that matches
-the fewest possible states.
+We propose a **most-specific-wins strategy** to resolve widget states.
 
 ```
-Assuming 2 states: hovered, focused
-Possible state sets: {}, {h}, {f}, {h,f}
+hovered: A(),
+hovered & focused: B(),
+```
 
-hovered          → 2 matches: {h}, {h,f}
+A set of states, `{ hovered, focused }`, will always resolve to `B()` since it is the most specific. This is true even
+when the constraints are reordered or a less specific constraint is added. In other words, resolution is order-independent.
+
+Encapsulation is preserved. Adding new constraints does not require knowing internal ordering. Likewise, adding default
+constraints will no longer break developer customizations since the latter are applied last.
+
+The "most-specific" constraint matches the fewest state sets.
+
+```
+Given 2 states: hovered, focused
+Possible sets: {}, {h}, {f}, {h,f}
+
+hovered           → 2 matches: {h}, {h,f}
 hovered & focused → 1 match:  {h,f}
 
 Fewer matches = more specific
@@ -261,46 +251,38 @@ For {h,f}, resolve to the constraint matching fewest sets: hovered & focused
 ```
 
 This reduces to the [SAT problem](https://en.wikipedia.org/wiki/Boolean_satisfiability_problem) which is NP-complete.
-A SAT solver is too computationally expensive given that constraints are resolved in the build method, part of the
-rendering pipeline, and everything must be completed under 16ms and 8ms per frame to maintain 60fps and 120fps respectively.
-Not to mention, there are not any well-established SAT solver libraries for Dart/Flutter to our knowledge except for
-[PubGrub](https://github.com/dart-lang/pub/blob/master/doc/solver.md) but using that brings its own share of problems.
+Constraints are resolved in the build method and a SAT solver is too slow for the 8ms frame budget for 120 FPS. No
+well-established Dart SAT solvers except [PubGrub](https://github.com/dart-lang/pub/blob/master/doc/solver.md) exist either.
 
-Instead, we use a simple counting system that only supports AND (&) and NOT(~) operators to determine specificity. The 
-system simply counts the number of operands in a constraint, with the highest count winning.
+Instead, specificity = operand count while only AND (&) and NOT (~) operators are allowed. Highest count wins.
 
 ```
 // Count = number of operands
 hovered                      = 1
 ~hovered                     = 1
-focused                      = 1
 hovered & focused            = 2
 hovered & ~focused           = 2
 hovered & focused & pressed  = 3
 ```
 
-OR (|) operators are not supported as intermixing with AND operators lead to a significantly worse heuristic with
-unintuitive edge cases. To express `A | B`, define two separate constraints. This is simplified by modifying the API to
-accept a set of constraints that map to the same value.
+OR (|) operators are not allowed as intermixing leads to a worse heuristic with sharp edge cases. Instead, OR expressions 
+are split into separate constraints with a set of constraints mapping to one value.
 
 ```
 // Logical OR (not supported):
-{ hovered | pressed: value }
+hovered | pressed: value
 
 // Set of constraints (supported):
-{ {hovered, pressed}: value }
+{hovered, pressed}: value
 ```
 
-Constraints such as `A & ~A` can be defined but are effectively impossible to match. To tiebreak constraints with equal
-counts, operands within a constraint are first sorted alphabetically, then constraints are compared lexicographically.
-This guarantees a deterministic resolution that is order-independent.
+To break ties, operands in a constraint are first sorted alphabetically then constraints are compared lexicographically. 
+This guarantees a deterministic and order-independent resolution.
 
 ```
 // states = {hovered, focused, pressed}
-{
-  hovered & focused: A(),   // count 2
-  focused & pressed: B(),   // count 2
-}
+hovered & focused: A(),   // count 2
+focused & pressed: B(),   // count 2
 
 // Tiebreaker:
 
@@ -315,24 +297,22 @@ focused & pressed → sort → ["focused", "pressed"]
 → resolves to A()
 ```
 
-As a future enhancement, we can consider introducing an analyzer plugin that detects and warns against defining impossible
-constraints and constraints with equal specificity.
+Invalid constraints like `A & ~A` can still be written. As future work, we can introduce an analyzer plugin that flags
+invalid and ambiguous constraints.
 
 ### Alternatives
 
-We considered allowing OR (|) operators and splitting the operands in OR constraints into distinct constraints in a 
-preprocessing step. Doing so reduces the boilerplate for single states, e.g. `hovered` instead of `{hovered}`. However, 
-this requires constraints to be in [disjunctive normal form](https://en.wikipedia.org/wiki/Disjunctive_normal_form), and
-we are uncertain if developers will find this requirement intuitive.
+We considered allowing OR (|) operators by automatically splitting them into distinct constraints in a preprocessing step. 
+Doing so reduces the boilerplate for single states, e.g. `hovered` instead of `{hovered}`. However, this requires constraints 
+to be in [disjunctive normal form](https://en.wikipedia.org/wiki/Disjunctive_normal_form), which is unintuitive.
 
 
-## Widget-specific States
+## 4. Widget-specific States
 
-The current styling system uses Flutter's in-built [WidgetState](https://api.flutter.dev/flutter/widgets/WidgetState.html)
-to represent widget states.
+Flutter's in-built [WidgetState](https://api.flutter.dev/flutter/widgets/WidgetState.html) is used to represent widget states.
 
-Since `WidgetState` is an enum, it is impossible to define new states. For example, a calendar may have a `today` and
-`enclosing` state. The current restrictions force us to define these states as separate fields.
+Since `WidgetState` is an enum, it is impossible to define new states. A calendar may have a `today` and `enclosing` state
+but is forced to define them as separate fields that do not compose.
 
 ```dart
 class FCalendarStyle {
@@ -342,204 +322,143 @@ class FCalendarStyle {
 }
 ```
 
-As each state is represented as a field, they do not compose. Developers cannot specify a value for `today & enclosing`
-without a dedicated field for that combination. Adding every combination is infeasible since the number of possible fields
-grows exponentially with the number of states, exploding the API surface area. Lastly, this introduces a dichotomy:
-states defined in `WidgetState` are modeled using `FWidgetStateMap` while those outside it are modeled as fields.
+Values cannot be specified for a constraint without a field, e.g. `todayEnclosingStyle`. Moreover, it is infeasible to 
+make every constraint a field since that grows exponentially with the number of states. Lastly, this introduces a dichotomy:
+`WidgetState`s are modeled using `FWidgetStateMap` while other states are modeled as fields.
 
-Conversely, `WidgetState` defines too many generic states that are not applicable to all widgets. This is further
-exacerbated by `WidgetState` formerly being `MaterialState` and including Material-specific states such as
-[`scrolledUnder`](https://api.flutter.dev/flutter/widgets/WidgetState.html#scrolledUnder) which is only used by `AppBar`.
-
-It is currently perfectly valid to pass in unsupported states since there is no compile-time validation.
+Conversely, `WidgetState` has too many generic states inapplicable to most widgets. This is exacerbated by `WidgetState` 
+containing niche states like [`scrolledUnder`](https://api.flutter.dev/flutter/widgets/WidgetState.html#scrolledUnder)
+which is only used by `AppBar`.
 
 ```dart
 // Compiles fine, but scrolledUnder is meaningless for a tappable
 FTappableStyle(
   decoration: FWidgetStateMap({
-    WidgetState.scrolledUnder: BoxDecoration(...),  // silently ignored
+    WidgetState.scrolledUnder: BoxDecoration(...),  // Does FTappableStyle support scrolledUnder? Who knows.
   }),
 )
 ```
 
-This hurts discoverability as developers must consult each field's documentation to determine what states they support.
-It also increases the likelihood of bugs since it falls to us to manually sync the documentation with the actual
-supported states across many fields.
+It is possible to pass in unsupported states since there is no compile-time check. This hurts discoverability as finding
+a field's supported states requires consulting its documentation. The likelihood of bugs also increases as the actual
+supported states and documentation need to be manually synced across many fields.
+
+In short, `WidgetState` is too closed to extend yet too open to misuse.
+
+### Proposed Solution
+
+We propose replacing `WidgetState` with **widget-specific states**.
+
+We define `FVariant` as a base which all widget-specific states, e.g. `FCalendarVariant` and `FTappableVariant`, extend. 
+
+> `WidgetState` is renamed to `FVariant`, and `FWidgetStateMap` to `FVariants`. The rationale is in the [next section](#5-generalizing-widget-states-to-variants).
+> Just assume it is a simple rename for now.
 
 ```dart
-FTappableStyle(
-  decoration: FWidgetStateMap({
-    WidgetState.selected: BoxDecoration(...),  // Does FTappableStyle support selected? Who knows.
-  }),
-)
-```
+sealed class FVariant {
+  const factory FVariant() = _Value;
 
-In summary, `WidgetState` is too closed to extend yet too open to misuse.
-
-To fix this, we propose replacing `WidgetState` with **widget-specific states**.
-
-Reusing the previous example, we define `FWidgetState` as a base which all widget-specific states extend. `FCalendarState`
-and `FTappableState` represent calendar-specific and tappable-specific states respectively.
-
-```dart
-sealed class FWidgetState {
-  const factory FWidgetState() = _Value;
-
-  const FWidgetState._();
-
-  bool satisfiedBy(Set<FWidgetState> variants);
+  bool satisfiedBy(Set<FVariant> variants);
 }
 
-class _Value extends FWidgetState {
-  const _Value(): super._();
+class _Value implements FVariant {
+  @override
+  bool satisfiedBy(Set<FVariant> variants) => variants.contains(this);
+}
+
+class _And implements FVariant {
+  final FVariant left;
+  final FVariant right;
 
   @override
-  bool satisfiedBy(Set<FWidgetState> variants) => variants.contains(this);
+  bool satisfiedBy(Set<FVariant> variants) => left.satisfiedBy(variants) && right.satisfiedBy(variants);
 }
 
-class _And extends FWidgetState {
-  final FWidgetState first;
-  final FWidgetState second;
-
-  const _And(this.first, this.second): super._();
-
-  @override
-  bool satisfiedBy(Set<FWidgetState> variants) => first.satisfiedBy(variants) && second.satisfiedBy(variants);
-}
-
-final class _Not extends FWidgetState {
-  final FWidgetState value;
-
-  const _Not(this.value): super._();
+class _Not implements FVariant {
+  final FVariant value;
 
   @override
   bool satisfiedBy(Set<FWidgetState> variants) => !value.satisfiedBy(variants);
 }
 
-extension type const FCalendarState(FWidgetState _) implements FWidgetState {
-  static const enclosing = FCalendarState(.new());
+extension type const FCalendarVariant(FVariant _) implements FVariant {
+  static const enclosing = FCalendarVariant(.new());
 
-  static const today = FCalendarState(.new());
+  static const today = FCalendarVariant(.new());
 
-  factory FCalendarState.not(FCalendarState other) => .new(_Not(other));
+  factory FCalendarVariant.not(FCalendarVariant other) => .new(_Not(other));
 
-  FCalendarState and(FCalendarState other) => .new(_And(this, other));
+  FCalendarVariant and(FCalendarVariant other) => .new(_And(this, other));
 }
 
-extension type const FTappableState(FWidgetState _) implements FWidgetState {
-  static const focused = FTappableState(.new());
+extension type const FTappableVariant(FVariant _) implements FVariant {
+  static const hovered = FTappableVariant(.new());
 
-  static const hovered = FTappableState(.new());
+  static const pressed = FTappableVariant(.new());
 
-  static const pressed = FTappableState(.new());
+  factory FTappableVariant.not(FTappableVariant other) => .new(_Not(other));
 
-  factory FTappableState.not(FTappableState other) => .new(_Not(other));
-
-  FTappableState and(FTappableState other) => .new(_And(this, other));
+  FTappableVariant and(FTappableVariant other) => .new(_And(this, other));
 }
 ```
 
-With widget-specific states, we can define all states in a single, unified way using `FWidgetStateMap`:
+With widget-specific states, all states can be defined uniformly using `FVariants`.
 
 ```dart
 class FCalendarStyle {
-  final FWidgetStateMap<FCalendarState, FTappableStyle> tappableStyle;
+  final FVariants<FCalendarVariant, FTappableStyle> tappableStyle;
 }
 
-FCalendarStyle(
-  tappableStyle: {
-    { .today }: FTappableStyle(...),
-    { .today.and(.enclosing) }: FTappableStyle(...),
-    { .enclosing }: FTappableStyle(
-      decoration: FWidgetStateMap({
-        .hovered.and(.not(.pressed)): BoxDecoration(...),
-      }),
-    ),
-  },
-)
+void usage() {
+  FCalendarStyle(
+    tappableStyle: FVariants({
+      {.today}: FTappableStyle(...),
+      {.today.and(.enclosing)}: FTappableStyle(...),
+      {.enclosing}: FTappableStyle(
+        decoration: FVariants({
+          {.hovered.and(.not(.pressed))}: BoxDecoration(...),
+        }),
+      ),
+    }),
+  )
+}
 ```
 
-[Dot shorthands do not work with operator overloading](https://github.com/dart-lang/language/issues/4609). We prioritize
-dot shorthands over operators since type names are verbose and hurt readability. To enable this, methods such as `and(...)`
-and `not(...)` are used instead of operator overloads.
-
-To prevent accidental mixing of incompatible states, `and(...)` and `not(...)` are defined in the specific states and
-accept and return covariant state types.
+As [dot shorthands do not work with operator overloading](https://github.com/dart-lang/language/issues/4609), dot shorthands
+are prioritized over operators since type names add noise and hurt readability. Consequently, `and(...)` and `not(...)`
+replace operator overloads. To prevent accidental mixing, these methods are defined in specific states and accept and
+return covariant types.
 
 ```dart
-// ✗ Compile error: incompatible state types
-FCalendarState.today.and(FTappableState.hovered);
+// ✗ Compile error: incompatible types
+FCalendarVariant.today.and(FTappableVariant.hovered);
 ```
 
-Since states are widget-specific, all states are valid and developers do not have to perform any guesswork. Likewise,
-developers discover valid states through autocomplete rather than documentation.
+Widget-specific states ensure that all states are valid without guesswork. In addition, these states can be discovered
+through autocomplete instead of documentation.
 
-One potential downside to this "share nothing" approach is the duplication/redeclaration of fields across widget-specific
-states and consequently a significantly larger API surface. Code generation will alleviate duplication;
-[static field augmentation](https://github.com/dart-lang/language/blob/main/working/augmentations/feature-specification.md)
-may further reduce boilerplate once available. We accept a larger API surface to gain the benefits of discoverability and type-safety.
+A downside to this is the redeclaration of fields across states leading to a significantly larger API surface. Code 
+generation helps; [static field augmentation](https://github.com/dart-lang/language/blob/main/working/augmentations/feature-specification.md)
+will further reduce boilerplate once available. We accept a larger API surface to improve discoverability and type-safety.
 
 ### Guidelines for Defining Widget-specific States
 
-We codify the following guidelines for defining widget-specific states:
+We codify the following guidelines for widget-specific states:
 * Non-exclusive by default. Avoid having mutually exclusive states like **both** `enabled` and `disabled`; prefer just
   `disabled`.
-* Model the exception. Since most widgets are enabled by default, define only `disabled`, not `enabled`.
+* Model the exception. Since most widgets are enabled by default, define `disabled`, not `enabled`.
 
 ### Alternatives
 
-We considered making states composable depending on the context. For example, a `FTappableStyle` alone will accept only
-`FTappableState`, but when nested inside a `FCalendarStyle`, it accepts `FCalendarTappableState` which implements both
-`FCalendarState` and `FTappableState`. This approach however, meant an even larger API surface since N parent widgets
-embedding M child widgets will require N * M state types. More worryingly, it encourages a "property-first" API which
-is more verbose and difficult to reason about at scale compared to a "state-first" API.
-
-```dart
-// Property-first:
-ButtonStyle(
-  backgroundColor: {
-    .hovered: blue,
-    .pressed: darkBlue,
-    .disabled: grey,
-  },
-  textColor: {
-    .hovered: white,
-    .pressed: white,
-    .disabled: lightGrey,
-  },
-  borderColor: {
-    .hovered: blue,
-    .pressed: darkBlue,
-    .disabled: grey,
-  },
-)
-
-// State-first:
-ButtonStyle(
-  styles: {
-    .hovered: (backgroundColor: blue, textColor: white, borderColor: blue),
-    .pressed: (backgroundColor: darkBlue, textColor: white, borderColor: darkBlue),
-    .disabled: (backgroundColor: grey, textColor: lightGrey, borderColor: grey),
-  },
-)
-```
+We considered context-dependent state composition. A standalone `FTappableStyle` will only accept `FTappableVariant`
+and `FCalendarTappableVariant` when nested inside a `FCalendarStyle`. However, this meant an even larger API surface
+since N parents and M children requires N * M state types.
 
 
-## Generalizing Widget States to Variants
+## 5. Generalizing Widget States to Variants
 
-The current styling system does not support platform-specific or responsive styling. Instead, developers must manually
-check the platform or screen size and apply conditional logic when building styles.
-
-```dart
-FDialogStyle(
-  padding: Platform.isIOS ? .all(16) : .all(12),
-  axis: MediaQuery.ofSize(context).width > 600 ? .horizontal : .vertical,
-)
-```
-
-This makes styles difficult to modify as overriding a single platform or adding a new one requires rewriting the entire
-conditional logic. It is worse when the conditional is defined inside Forui as developers must understand the 
-implementation details to make minor tweaks, thereby breaking encapsulation.
+Platform-specific styling is not supported. Modifying a platform-specific style requires either rewriting the conditional 
+logic, breaking encapsulation, or creating a new theme, which is extremely heavy-handed.
 
 ```dart
 // Inside library:
@@ -549,18 +468,21 @@ FDialogStyle(
 
 // User wants to change just iOS padding to 20:
 FDialogStyle(
-  padding: Platform.isIOS ? .all(20) : .all(12),  // must also know/copy other platforms' value  
+  padding: Platform.isIOS ? .all(20) : .all(12),  // must also know/copy other platforms' value or create a new theme.
 )
 ```
 
-More importantly, this introduces a dichotomy: platform and responsive styling rely on conditional logic while widget
-state values use `FWidgetStateMap`.
+Moreover, this introduces a dichotomy: platform states rely on conditional logic while widget-specific states rely on
+`FWidgetStateMap`.
 
-To fix this, we propose unifying platform/responsive styling and widget states under a single concept: **Variants**. 
-This approach is inspired by [Mix's dynamic styling](https://www.fluttermix.com/documentation/guides/dynamic-styling).
+### Proposed Solution
 
-Building on the [widget-specific states design](#widget-specific-states), we rename `FWidgetState` to `FVariant` (and 
-correspondingly, `FTappableState` to `FTappableVariant`, etc.).
+Inspired by [Mix's dynamic styling](https://www.fluttermix.com/documentation/guides/dynamic-styling), we propose unifying 
+platform and widget-specific state under a single concept: **Variants**. To do so, we rename the concept of `WidgetState`s 
+to `FVariant` and `FWidgetStateMap` to `FVariants`.
+
+Platform variants are defined in `FVariant` and wrapped by each widget-specific variant. Since extension types are
+compiled away, these wrapped constants will be equal across variants. We deem the larger API surface an acceptable tradeoff.
 
 ```dart
 sealed class FVariant {
@@ -571,93 +493,63 @@ sealed class FVariant {
   
   static const web = FVariant();
   
-  // Responsive variants
-  static const xs = FVariant();
-  
-  static const sm = FVariant();
-  
-  const factory FVariant() = _Value;
-
-  const FVariant._();
-
-  bool satisfiedBy(Set<FVariant> variants);
+  static final touch = .android.and(.ios);
 }
 
-extension type const FDialogVariant(FVariant _) implements FVariant {
+extension type const FTappableVariant(FVariant _) implements FVariant {
   // Platform variants
-  static const android = FDialogVariant(.android);
+  static const android = FTappableVariant(.android);
   
-  static const ios = FDialogVariant(.ios);
+  static const ios = FTappableVariant(.ios);
   
-  static const web = FDialogVariant(.web);
+  static const web = FTappableVariant(.web);
   
-  // Responsive variants
-  static const xs = FDialogVariant(.xs);
+  static final touch = .android.and(.ios);
   
-  static const sm = FDialogVariant(.sm);
-  
-  // Dialog-specific variants
-  static const focused = FDialogVariant(.new());
-  
-  factory FDialogVariant.not(FDialogVariant other) => .new(_Not(other));
-
-  FDialogVariant and(FDialogVariant other) => .new(_And(this, other));
+  // Tappable-specific variants
+  static const hovered = FTappableVariant(.new());
 }
 ```
 
-Each widget variant defines the platform and responsive variants it supports. [As mentioned previously](#widget-specific-states), 
-this leads to a larger API surface area, but we accept this tradeoff for improved discoverability and type-safety.
-
-With variants, we can map platform, responsive and widget-specific variants to values using `FVariants` (renamed from 
-`FWidgetStateMap`).
+`FVariants` can map both platform and widget-specific variants.
 
 ```dart
-FDialogStyle(
-  padding: {
+FTappableVariant(
+  padding: FVariants({
     {.ios}: .all(16),
-    {.ios.and(.focused).and(.not(.sm))}: .all(20),
+    {.ios.and(.focused)}: .all(20),
     {.android}: .all(12),
-  },
-  axis: {{.sm}: .vertical, {.md}: .horizontal},
+  }),
 )
 ```
 
-Platform and responsive variants are defined once in `FVariant`. Widget-specific variants like `FDialogVariant` wrap 
-these base constants. Since extension types are compiled away, these wrapped constants will be equal across variants.
+We introduce `FAdaptiveScope` to provide platform variants down the widget tree using `InheritedWidget`, and 
+`BuildContext.platformVariant` for easier access. `FTheme` includes `FAdaptiveScope` by default. `FAdaptiveScope` accepts
+an overriding platform variant as an escape hatch.
 
-To provide these platform and responsive variants across the entire application, we introduce a `FAdaptiveScope` that
-combines a `LayoutBuilder` and `InheritedWidget` to provide the current platform and responsive variants down the widget 
-tree. An extension getter on `BuildContext`, `context.adaptiveVariants`, is also provided to retrieve said variants from 
-the nearest `FAdaptiveScope`. An `FTheme` widget will include a `FAdaptiveScope` by default.
+### Alternatives
 
-### Summary of Renames
-
-| Before            | After              |
-|-------------------|--------------------|
-| `FWidgetState`    | `FVariant`         |
-| `FWidgetStateMap` | `FVariants`        |
-| `FTappableState`  | `FTappableVariant` |
-| `FCalendarState`  | `FCalendarVariant` |
+Responsive variants were included originally but removed. Window-based breakpoints are not useful since widgets size
+themselves according to the parent's constraints. Proper responsive layouts require even more coordination between widgets.
 
 
-## Simplifying `FVariants`
+## 6. Simplifying `FVariants`
 
-`FWidgetStateMap` is currently used to map widget state constraints to values. In the [previous section](#summary-of-renames), 
-we renamed it to `FVariants` to better reflect its generalized purpose. From here on, we refer to `FWidgetStateMap` as 
-`FVariants`.
-
-From our observations, most variants are slight modifications of a base value and share the majority of properties,
-rather than completely different values. Copying and modifying a base value is painful in the current system.
-Developers need to identify the base value, extract it, and assign it to a local variable before modifying it.
+Most variants are minor modifications of a base variant instead of complete replacements. Modifying a variant is painful
+as the base variant needs to be identified, extracted, and assigned to a local variable before use. It also precludes
+the use of arrow syntax, leading to more verbose code. Furthermore, adding constraints requires recreating all mappings 
+as mentioned in [order-independent widget state resolution](#3-order-independent-widget-state-resolution).
 
 ```dart
+// Creation
 FTappableStyle(
   decoration: FVariants({
-  {.hovered, .pressed}: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(8)),
-  {.any}: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8)),
+    {.hovered, .pressed}: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(8)),
+    {.any}: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8)),
   }),
 );
 
+// Modification
 FTappable(
   style: (style) {
     final base = style.decoration.resolve({WidgetState.any})!;
@@ -672,23 +564,16 @@ FTappable(
 )
 ```
 
-Assigning it to a local variable outside the method call chain typically means that the enclosing scope cannot use arrow
-syntax, further adding to verbosity.
-
-As mentioned earlier in [order-independent widget state resolution](#order-independent-widget-state-resolution), the 
-current API does not support insertions. To add a new constraint, it requires redefining all mappings which demands
-knowledge of the library's internals and breaks encapsulation.
-
-`FVariants` does not assume a default value. This necessitates a special `.any` state, and an explicit mapping to it at 
-the end of each `FVariants`. Since there is no compile-time check for this, it is extremely easy to accidentally omit,
-especially for developers new to Forui that may not have fully grasped the concept of variants. Furthermore, it is 
-[unintuitive to modify the `.any` constraint using the existing API](https://github.com/duobaseio/forui/issues/805).
+`FVariants` does not assume a default value, necessitating an explicit `.any` mapping. Without compile-time checks,
+this is easy to forget. [Modifying `.any` is also unintuitive](https://github.com/duobaseio/forui/issues/805). Additionally,
+`FVariants.resolve(...)` must verify a match exists, precluding nullable types as it cannot distinguish between `null`
+and "no match found".
 
 ```dart
+// Modification
 FTappable(
   style: (style) {
     final base = style.decoration.resolve({WidgetState.any})!;
-    
     return style.copyWith(
       decoration: FVariants({
         {.hovered}: base.copyWith(color: Colors.blue),
@@ -700,14 +585,11 @@ FTappable(
 )
 ```
 
-As `FVariants` does not assume a default value, `FVariants.resolve(...)` has to perform a runtime check to ensure that 
-at least one constraint matches. This precludes the use of nullable types in `FVariants` since the check is unable to
-distinguish between "no match found" and `null`.
+### Proposed Solution
 
-To solve these problems, we observe that a base value **is** the default value and that most modifications are deltas.
-Thus, building on `Delta`s introduced in [simplifying style modification](#simplifying-style-modification), we propose
-splitting `FVariants` into `FVariants` and `FLiteralVariants`. Both will have a `base` field. The former will
-accept a mapping of constraints to deltas while the latter will accept concrete values.
+We observe that a base value **is** the default value, and modifications are deltas. Building on `Delta`s in 
+[simplifying style modification](#2-simplifying-style-modification), we split `FVariants` into `FVariants`, which maps
+constraints to deltas, and `FLiteralVariants`, which maps constraints to concrete values. Both have a `base` field.
 
 ```dart
 class FVariants<V extends FVariant, T, D extends Delta<T>> {
@@ -717,6 +599,7 @@ class FVariants<V extends FVariant, T, D extends Delta<T>> {
   FVariants(this.base, this.deltas);
 }
 
+// Creation
 FTappableStyle(
   decoration: FVariants(
     BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8)),
@@ -736,7 +619,8 @@ class FLiteralVariants<V extends FVariant, T> {
   FLiteralVariants(this.base, this.values);
 }
 
-FExampleStyle(
+// Creation
+FooStyle(
   spacing: FLiteralVariants(
     16,
     {
@@ -747,23 +631,24 @@ FExampleStyle(
 );
 ```
 
-In general, there are 3 types of modifications to a `FVariants`/`FLiteralVariants`:
-* Mapping all/specific values.
-* Adding a new variant.
-* Removing an existing variant.
+Unlike style deltas, `FVariantsDelta` and `FLiteralVariantsDelta` use `.apply(...)` instead of `.merge(...)` since typical 
+usage is a sequence of operations and order matters (add-then-modify ≠ modify-then-add). 
 
-To support these operations, we introduce `FVariantsDelta`, `FLiteralVariantsDelta`, `FVariantDeltaOperation`, and
-`FLiteralVariantDeltaOperation`.
+In general, there are 3 types of operations:
+* Adding a new variant.
+* Mapping values.
+* Removing an existing variant.
 
 ```dart
 class FVariantsDelta<V extends FVariant, T, D extends Delta<T>> implements Delta<FVariants<V, T, D>> {
-  FVariantsDelta.map(List<FVariantDeltaOperation<V, T, D>> operations);
+  FVariantsDelta.apply(List<FVariantDeltaOperation<V, T, D>> operations);
 
+  // Escape hatch to replace entire variants.
   FVariantsDelta.replace(FVariants<V, T, D> variants);
 }
 
 class FVariantDeltaOperation<V extends FVariant, T, D> {
-  // Base value operations
+  // Base operations
   FVariantDeltaOperation.replaceBase(T base);
 
   FVariantDeltaOperation.mergeBase(D delta);
@@ -779,8 +664,9 @@ class FVariantDeltaOperation<V extends FVariant, T, D> {
 
 ```dart
 class FLiteralVariantsDelta<V extends FVariant, T> implements Delta<FLiteralVariants<V, T>> {
-  FLiteralVariantsDelta.map(List<FLiteralVariantDeltaOperation<V, T>> operations);
+  FLiteralVariantsDelta.apply(List<FLiteralVariantDeltaOperation<V, T>> operations);
 
+  // Escape hatch to replace entire variants.
   FLiteralVariantsDelta.replace(FLiteralVariants<V, T> variants);
 }
 
@@ -797,18 +683,29 @@ class FLiteralVariantDeltaOperation<V extends FVariant, T> {
 }
 ```
 
-Unlike style deltas, `FVariantsDelta` and `FLiteralVariantsDelta` do not have a `.merge(...)` factory since the order of
-operations matter. Adding a new constraint then applying a modification to constraints is different from applying a 
-modification to existing constraints then adding it. Instead, both classes provide a `.map(...)` factory that accepts a 
-list of operations that are applied in order.
+The operations use inclusive matching. For example: `.map({.hovered, .focused}, delta)` affects:
 
-Combined with the enhancements in [simplifying style modification](#simplifying-style-modification), modifying a 
-`FTappable` becomes:
+```dart
+final decoration = FVariants(
+  BoxDecoration(color: Colors.white),
+  {
+    {.hovered}: .merge(color: Colors.blue),                   // ✓ contains hovered
+    {.hovered, .pressed}: .merge(color: Colors.darkBlue),     // ✓ contains hovered
+    {.focused}: .merge(color: Colors.green),                  // ✓ contains focused
+    {.disabled}: .replace(BoxDecoration(color: Colors.grey)), // ✗ contains neither
+  },
+);
+```
+
+
+With [style deltas](#2-simplifying-style-modification), modifying `FTappable` becomes:
 
 ```dart
 FTappable(
+  // Merge using style delta
   style: .merge(
-    decoration: .map([
+    // Apply all modifications without needing to extract base variant.
+    decoration: .apply([
       .map({.hovered}, .merge(color: Colors.blue)),
       .map({.pressed}, .merge(color: Colors.darkBlue)),
     ]),
@@ -816,21 +713,20 @@ FTappable(
 )
 ```
 
-Since `FVariants` have a `base` field which is also the default value, there is no longer a need for a special `.any` 
-constraint. Nullable types are also supported since `FVariants.resolve(...)` can now return the base value when no 
-constraints match.
+The `base` field is also the default, eliminating the need for `.any`. This also enables nullable types since 
+`FVariants.resolve(...)` returns `base` when nothing matches.
 
 
 ### Alternatives
 
-The `FVariantsDelta` and `FLiteralVariantsDelta` APIs may be overcomplicating things. A simpler alternative is to make
-a style delta's merge method accept a callback for `FVariants`, and implement the constructors in `FVariantDeltaOperation`
-and `FLiteralVariantDeltaOperation` as methods inside `FVariants` and `FLiteralVariants` respectively. This will also
-eliminate the need for `FVariantsDelta` and `FLiteralVariantsDelta`.
+`FVariantsDelta` and `FLiteralVariantsDelta` may be overcomplicated. Style deltas could accept a callback, with operations
+as methods on `FVariants` and `FLiteralVariants`.
 
 ```dart
 FTappable(
+  // Merge using style delta
   style: .merge(
+    // Callback-based delta
     decoration: (variants) => variants
       .map({.hovered}, .merge(color: Colors.blue))
       .map({.pressed}, .merge(color: Colors.darkBlue)),
@@ -838,30 +734,23 @@ FTappable(
 )
 ```
 
-The choice between these two approaches is still open.
 
-
-## Migration
+## 7. Migration
 
 We expect most of these proposed changes to be breaking changes. Unfortunately, 
 [data driven fixes](https://github.com/flutter/flutter/blob/master/docs/contributing/Data-driven-Fixes.md) may not be 
-feasible due to the limitations with the tool.
+feasible due to the tool's limitations.
 
 
-## Future Work
+## 8. Future Work
 
 ### Animated Transitions Between Variants
 
-It may be worth exploring adding support for animated transitions between variants in the future like 
-[Mix](https://www.fluttermix.com/documentation/guides/animations) currently does. This may be achieved by introducing 
-`AnimatedDelta`s that interpolate between two `Delta`s over a given duration and curve. Said duration and curve should
-be configurable directly as a parameter in `FVariants`. It should also be possible to specify different durations and 
-curves between specific variants.
+It is worth adding support for animated transitions between variants, similar to [Mix](https://www.fluttermix.com/documentation/guides/animations), using `AnimatedDelta`s
+with configurable duration and curve. Different transitions between specific variants should also be supported.
 
 ### Color Paths
 
-It may be worth introducing static fields in `FColor` that are shorthands to access the colors in the current theme.
-For example, `FColor.primary` will be a shorthand for `context.theme.colors.primary`. We can circumvent static and
-instance member names clashing by abusing this [language quirk](https://github.com/dart-lang/language/issues/1711#issuecomment-2715814832).
-We are hesitant to add this since it requires a wrapper around `Color`, e.g. `DeferredColor` which throws when trying to access its value.
-This is a footgun and is likely to be extremely confusing and error-prone.
+It may be worth adding static shorthands to access the current theme's colors in `FColor`, e.g. `FColor.primary` for
+`context.theme.colors.primary`. This is possible by abusing a [language quirk](https://github.com/dart-lang/language/issues/1711#issuecomment-2715814832). However, this requires a `DeferredColor`
+wrapper that throws when accessed directly which is confusing and error-prone.
