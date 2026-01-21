@@ -492,8 +492,6 @@ sealed class FVariant {
   static const ios = FVariant();
   
   static const web = FVariant();
-  
-  static final touch = .android.and(.ios);
 }
 
 extension type const FTappableVariant(FVariant _) implements FVariant {
@@ -503,8 +501,6 @@ extension type const FTappableVariant(FVariant _) implements FVariant {
   static const ios = FTappableVariant(.ios);
   
   static const web = FTappableVariant(.web);
-  
-  static final touch = .android.and(.ios);
   
   // Tappable-specific variants
   static const hovered = FTappableVariant(.new());
