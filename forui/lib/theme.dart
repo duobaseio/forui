@@ -10,5 +10,7 @@ export 'src/theme/theme.dart';
 export 'src/theme/theme_data.dart';
 export 'src/theme/themes.dart';
 export 'src/theme/typography.dart';
+export 'src/theme/variant.dart' hide And, Not, Or;
+export 'src/theme/variants.dart';
 export 'src/theme/widget_state_map.dart';
 export 'src/theme/widget_states_delta.dart';
