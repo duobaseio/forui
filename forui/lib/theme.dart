@@ -2,6 +2,7 @@
 /// choices of Forui widgets.
 library forui.theme;
 
+export 'src/theme/adaptive_scope.dart';
 export 'src/theme/breakpoints.dart';
 export 'src/theme/colors.dart';
 export 'src/theme/delta.dart' show BoxDecorationDelta, Delta, IconThemeDataDelta, TextStyleDelta;

@@ -9,27 +9,6 @@ import 'package:forui/forui.dart';
 /// See also:
 /// * [FVariants], which maps variant constraints to values.
 sealed class FVariantConstraint {
-  /// The Android platform variant.
-  static const FVariant android = FVariant('android');
-
-  /// The iOS platform variant.
-  static const FVariant ios = FVariant('ios');
-
-  /// The Fuchsia platform variant.
-  static const FVariant fuchsia = FVariant('fuchsia');
-
-  /// The Windows platform variant.
-  static const FVariant windows = FVariant('windows');
-
-  /// The macOS platform variant.
-  static const FVariant macos = FVariant('macos');
-
-  /// The Linux platform variant.
-  static const FVariant linux = FVariant('linux');
-
-  /// The web platform variant.
-  static const FVariant web = FVariant('web');
-
   /// Returns the more specific of two constraints.
   ///
   /// Specificity is determined by operand count with the highest count winning.
@@ -64,12 +43,12 @@ sealed class FVariantConstraint {
   /// Returns true if this constraint is satisfied by [variants].
   ///
   /// ```dart
-  /// final variants = {.android};
+  /// final variants = {.hovered, .focused};
   ///
-  /// .android.satisfiedBy(variants); // true
-  /// .ios.satisfiedBy(variants);     // false
-  /// .touch.satisfiedBy(variants);   // true (android | ios | fuchsia)
-  /// .desktop.satisfiedBy(variants); // false
+  /// .hovered.satisfiedBy(variants);                  // true
+  /// .pressed.satisfiedBy(variants);                  // false
+  /// .hovered.and(.focused).satisfiedBy(variants);    // true
+  /// .hovered.and(.pressed).satisfiedBy(variants);    // false
   /// ```
   bool satisfiedBy(Set<FVariant> variants);
 

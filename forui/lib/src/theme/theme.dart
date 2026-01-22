@@ -95,6 +95,9 @@ class FTheme extends ImplicitlyAnimatedWidget {
   /// The text direction. Defaults to the text direction inherited from its nearest ancestor.
   final TextDirection? textDirection;
 
+  /// The platform variant. Defaults to the current platform.
+  final FPlatformVariant? platform;
+
   /// The widget below this widget in the tree.
   final Widget child;
 
@@ -103,6 +106,7 @@ class FTheme extends ImplicitlyAnimatedWidget {
     required this.data,
     required this.child,
     this.textDirection,
+    this.platform,
     this.motion = const FThemeMotion(),
     super.onEnd,
     super.key,
@@ -117,7 +121,8 @@ class FTheme extends ImplicitlyAnimatedWidget {
     properties
       ..add(DiagnosticsProperty('motion', motion))
       ..add(DiagnosticsProperty('data', data))
-      ..add(EnumProperty('textDirection', textDirection));
+      ..add(EnumProperty('textDirection', textDirection))
+      ..add(DiagnosticsProperty('platform', platform));
   }
 }
 
@@ -133,6 +138,7 @@ class _State extends AnimatedWidgetBaseState<FTheme> {
   Widget build(BuildContext context) => FBasicTheme(
     data: _tween!.evaluate(animation),
     textDirection: widget.textDirection ?? Directionality.maybeOf(context) ?? .ltr,
+    platform: widget.platform,
     child: widget.child,
   );
 }
@@ -218,23 +224,29 @@ class FBasicTheme extends StatelessWidget {
   /// The text direction. Defaults to the text direction inherited from its nearest ancestor.
   final TextDirection? textDirection;
 
+  /// The platform variant. Defaults to the current platform.
+  final FPlatformVariant? platform;
+
   /// The widget below this widget in the tree.
   final Widget child;
 
   /// Creates a [FTheme] that applies [data] to all descendant widgets in [child].
-  const FBasicTheme({required this.data, required this.child, this.textDirection, super.key});
+  const FBasicTheme({required this.data, required this.child, this.textDirection, this.platform, super.key});
 
   @override
-  Widget build(BuildContext context) => _InheritedTheme(
-    data: data,
-    child: Directionality(
-      textDirection: textDirection ?? Directionality.maybeOf(context) ?? .ltr,
-      child: DefaultTextStyle(
-        style: data.typography.base.copyWith(
-          fontFamily: data.typography.defaultFontFamily,
-          color: data.colors.foreground,
+  Widget build(BuildContext context) => FAdaptiveScope(
+    platform: platform,
+    child: _InheritedTheme(
+      data: data,
+      child: Directionality(
+        textDirection: textDirection ?? Directionality.maybeOf(context) ?? .ltr,
+        child: DefaultTextStyle(
+          style: data.typography.base.copyWith(
+            fontFamily: data.typography.defaultFontFamily,
+            color: data.colors.foreground,
+          ),
+          child: child,
         ),
-        child: child,
       ),
     ),
   );
@@ -244,7 +256,8 @@ class FBasicTheme extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('data', data, showName: false))
-      ..add(EnumProperty('textDirection', textDirection));
+      ..add(EnumProperty('textDirection', textDirection))
+      ..add(DiagnosticsProperty('platform', platform));
   }
 }
 
