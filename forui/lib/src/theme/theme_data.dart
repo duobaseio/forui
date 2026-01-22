@@ -9,12 +9,6 @@ import 'package:forui/forui.dart';
 
 part 'theme_data.design.dart';
 
-/// A mixin for types that can be applied to base value to produce a new value.
-mixin Delta<T> {
-  /// Applies this delta to [value].
-  T call(T value);
-}
-
 /// Defines the configuration of the overall visual [FTheme] for a widget subtree.
 ///
 /// A [FThemeData] is composed of [colors], [typography], [style], widget styles, and [extensions].
