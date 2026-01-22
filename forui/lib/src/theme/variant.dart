@@ -4,7 +4,7 @@ import 'package:forui/forui.dart';
 
 /// Represents a combination of variants under which a widget is styled differently.
 ///
-/// This should not be used directly. Instead, use the provided widget-specific variants.
+/// Users should generally use the provided widget-specific variants instead of this.
 ///
 /// See also:
 /// * [FVariants], which maps variant constraints to values.
@@ -32,13 +32,13 @@ sealed class FVariantConstraint {
 
   /// Returns the more specific of two constraints.
   ///
-  /// ## Specificity
-  /// Specificity is determined by operand count. Highest count wins.
+  /// Specificity is determined by operand count with the highest count winning.
+  ///
   /// ```dart
   /// max(hovered, hovered.and(focused)); // hovered & focused (2 > 1)
   /// ```
   ///
-  /// When operand counts are equal, ties are broken lexicographically by sorted operand names.
+  /// Ties are broken lexicographically by sorted operand names.
   /// ```dart
   /// max(hovered.and(focused), focused.and(pressed)); // focused & hovered ("focused" < "pressed")
   /// ```
@@ -55,7 +55,6 @@ sealed class FVariantConstraint {
     final operandsB = <String>[];
     a._accept(operandsA);
     b._accept(operandsB);
-
     operandsA.sort();
     operandsB.sort();
 

@@ -2,17 +2,71 @@ import 'package:flutter/foundation.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
-class _Variants<C extends FVariantConstraint, T> with Diagnosticable {
-  /// The base value.
-  final T base;
-  final Map<C, T> _variants;
+@internal
+FVariants<K, V, D> createVariants<K extends FVariantConstraint, V, D extends Delta<V>>(V base, Map<K, V> variants) =>
+    ._(base, variants);
 
-  _Variants(this.base, this._variants);
+/// A [FVariants] maps constraints to values.
+///
+/// See also:
+/// * [FVariantConstraint], which represents a combination of variants under which a widget is styled differently.
+class FVariants<K extends FVariantConstraint, V, D extends Delta<V>> with Diagnosticable {
+  /// The base variant.
+  final V base;
 
-  T resolve(Set<FVariant> variants) {
-    C? constraint;
-    T? variant;
-    for (final MapEntry(key: current, :value) in _variants.entries) {
+  /// The variants.
+  ///
+  /// ## Contract
+  /// Modifying this map directly may result in undefined behavior.
+  final Map<K, V> variants;
+
+  /// Creates an [FVariants] with variants created from deltas applied to [base].
+  FVariants.delta(this.base, {required Map<Set<K>, D> variants})
+    : variants = (() {
+        final map = <K, V>{};
+        for (final MapEntry(key: constraints, value: delta) in variants.entries) {
+          final variant = delta.call(base);
+          for (final constraint in constraints) {
+            map[constraint] = variant;
+          }
+        }
+
+        return map;
+      }());
+
+  /// Creates an [FVariants] with concrete variants.
+  FVariants(this.base, {required Map<Set<K>, V> variants})
+    : variants = {
+        for (final MapEntry(key: constraints, :value) in variants.entries)
+          for (final constraint in constraints) constraint: value,
+      };
+
+  FVariants._(this.base, this.variants);
+
+  /// Returns most specific matching value, or [base] if no constraints match.
+  ///
+  /// ## Resolution
+  /// Resolution uses a **most-specific-wins strategy**, i.e. the constraint with the highest operand count wins. Ties
+  /// are broken lexicographically.
+  ///
+  /// ```dart
+  /// final variants = FVariants(
+  ///   Base(),
+  ///   variants: {
+  ///     {.hovered}: A(),                // operands: 1
+  ///     {.hovered.and(.focused) }: B(), // operands: 2
+  ///   },
+  /// );
+  ///
+  /// variants.resolve({.hovered});           // A applied
+  /// variants.resolve({.hovered, .focused}); // B applied (more specific)
+  /// variants.resolve({.pressed});           // base returned (no match)
+  /// ```
+  @useResult
+  V resolve(Set<FVariant> variants) {
+    K? constraint;
+    V? variant;
+    for (final MapEntry(key: current, :value) in this.variants.entries) {
       if (!current.satisfiedBy(variants)) {
         continue;
       }
@@ -31,91 +85,199 @@ class _Variants<C extends FVariantConstraint, T> with Diagnosticable {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('base', base))
-      ..add(IterableProperty('variants', _variants.entries));
+      ..add(IterableProperty('variants', variants.entries));
   }
 
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is _Variants<C, T> &&
+      other is FVariants<K, V, D> &&
           runtimeType == other.runtimeType &&
           base == other.base &&
-          mapEquals(_variants, other._variants);
+          mapEquals(variants, other.variants);
 
   @override
-  int get hashCode => Object.hash(base, Object.hashAllUnordered(_variants.entries));
+  int get hashCode => Object.hash(base, Object.hashAllUnordered(variants.entries));
 }
 
-/// Maps constraints to deltas that are applied to a base value.
-///
-/// See also:
-/// * [FLiteralVariants], which maps constraints to concrete values.
-/// * [FVariantConstraint], which represents a condition under which a widget is styled differently.
-class FVariants<C extends FVariantConstraint, T, D extends Delta<T>> extends _Variants<C, T> {
-  /// Creates an [FVariants].
-  FVariants(T base, {required Map<Set<C>, D> deltas})
-    : super(base, {
-        for (final MapEntry(key: constraints, :value) in deltas.entries)
-          for (final constraint in constraints) constraint: value.apply(base),
+/// A delta that describes modifications to an [FVariants] in terms of deltas.
+class FVariantsDelta<K extends FVariantConstraint, E extends FVariant, D extends Delta<V>, V>
+    with Delta<FVariants<K, V, D>> {
+  final FVariants<K, V, D> Function(V base, Map<K, V> variants) _call;
+
+  /// Replaces the entire [FVariants].
+  FVariantsDelta.replace(FVariants<K, V, D> variants) : _call = ((_, _) => variants);
+
+  /// Applies a sequence of [operations] that modify the [FVariants].
+  FVariantsDelta.apply(List<FVariantOperation<K, E, V, D>> operations)
+    : _call = ((base, variants) {
+        for (final operation in operations) {
+          final result = operation._call(base, variants);
+          base = result.base;
+          variants = result.variants;
+        }
+
+        return ._(base, variants);
       });
 
-  /// Returns [base] with the most specific matching delta applied, or [base] if no constraints match.
-  ///
-  /// ## Resolution
-  /// Resolution uses a **most-specific-wins strategy**, i.e. the constraint with the highest operand count wins. Ties
-  /// are broken lexicographically.
-  ///
-  /// ```dart
-  /// final variants = FVariants(
-  ///   'base',
-  ///   deltas: {
-  ///     {.hovered}: A(),                // operands: 1
-  ///     {.hovered.and(.focused) }: B(), // operands: 2
-  ///   },
-  /// );
-  ///
-  /// variants.resolve({.hovered});           // A applied
-  /// variants.resolve({.hovered, .focused}); // B applied (more specific)
-  /// variants.resolve({.pressed});           // base returned (no match)
-  /// ```
   @override
-  @useResult
-  T resolve(Set<FVariant> variants) => super.resolve(variants);
+  FVariants<K, V, D> call(FVariants<K, V, D> variants) => _call(variants.base, variants.variants);
 }
 
-/// Maps variant constraints to concrete values.
-///
-/// See also:
-/// * [FVariants], which maps constraints to deltas.
-/// * [FVariantConstraint], which represents a condition under which a widget is styled differently.
-class FLiteralVariants<C extends FVariantConstraint, T> extends _Variants<C, T> {
-  /// Creates an [FLiteralVariants].
-  FLiteralVariants(T base, {required Map<Set<C>, T> values})
-    : super(base, {
-        for (final MapEntry(key: constraints, :value) in values.entries)
-          for (final constraint in constraints) constraint: value,
-      });
+/// An operation in [FVariantsDelta.apply] that modifies [FVariants] using deltas.
+class FVariantOperation<K extends FVariantConstraint, E extends FVariant, V, D extends Delta<V>> {
+  final FVariants<K, V, D> Function(V base, Map<K, V> variants) _call;
 
-  /// Returns value with the most specific matching delta applied, or [base] if no constraints match.
+  /// Applies [delta] to base and associates the result with each constraint in [constraints].
   ///
-  /// ## Resolution
-  /// Resolution uses a **most-specific-wins strategy**, i.e. the constraint with the highest operand count wins. Ties
-  /// are broken lexicographically.
+  /// Matching variants are overridden.
   ///
   /// ```dart
-  /// final variants = FVariants(
-  ///   'base',
-  ///   deltas: {
-  ///     {.hovered}: A(),                // operands: 1
-  ///     {.hovered.and(.focused) }: B(), // operands: 2
-  ///   },
-  /// );
-  ///
-  /// variants.resolve({.hovered});           // A applied
-  /// variants.resolve({.hovered, .focused}); // B applied (more specific)
-  /// variants.resolve({.pressed});           // base returned (no match)
+  /// // Given base: 0, {a: 1, b: 1}
+  /// .add({b, c}, Delta(2)) // {a: 1, b: 2, c: 2}
   /// ```
+  FVariantOperation.add(Set<K> constraints, D delta)
+    : _call = ((base, existing) {
+        final addition = delta(base);
+        return ._(base, {...existing, for (final constraint in constraints) constraint: addition});
+      });
+
+  /// Applies [delta] to [FVariants.base] without modifying existing variants.
+  ///
+  /// ```dart
+  /// // Given base: 0, {a: 1, b: 2}
+  /// .onBase(Delta(10)) // base: 10, {a: 1, b: 2}
+  /// ```
+  FVariantOperation.onBase(D delta) : _call = ((base, existing) => ._(delta(base), {...existing}));
+
+  /// Applies [delta] to variants whose constraints are satisfied by [variants].
+  ///
+  /// ```dart
+  /// // Given base: 0, {a: 1, b: 2, c: 3}
+  /// .on({a, b}, AddDelta(10)) // {a: 11, b: 12, c: 3}
+  /// ```
+  ///
+  /// See also [FVariantOperation.onAll] for applying to all variants.
+  FVariantOperation.on(Set<E> variants, D delta)
+    : _call = ((base, existing) => ._(base, {
+        for (final MapEntry(key: constraint, :value) in existing.entries)
+          constraint: constraint.satisfiedBy(variants) ? delta(value) : value,
+      }));
+
+  /// Applies [delta] to all existing variants.
+  ///
+  /// ```dart
+  /// // Given base: 0, {a: 1, b: 2, c: 3}
+  /// .onAll(AddDelta(10)) // {a: 11, b: 12, c: 13}
+  /// ```
+  FVariantOperation.onAll(D delta)
+    : _call = ((base, existing) =>
+          ._(base, {for (final MapEntry(key: constraint, :value) in existing.entries) constraint: delta(value)}));
+
+  /// Removes variants whose constraints are satisfied by [variants].
+  ///
+  /// ```dart
+  /// // Given {a: 1, b: 2, c: 3}
+  /// .remove({a, b}) // {c: 3}
+  /// ```
+  ///
+  /// See [FVariantOperation.removeAll] for removing all variants.
+  FVariantOperation.remove(Set<E> variants)
+    : _call = ((base, existing) => ._(base, {
+        for (final MapEntry(key: constraint, :value) in existing.entries)
+          if (!constraint.satisfiedBy(variants)) constraint: value,
+      }));
+
+  /// Removes all existing variants.
+  ///
+  /// ```dart
+  /// // Given {a: 1, b: 2, c: 3}
+  /// .removeAll() // {}
+  /// ```
+  FVariantOperation.removeAll() : _call = ((base, _) => ._(base, {}));
+}
+
+/// A delta that describes modifications to an [FVariants] in terms of concrete values.
+class FVariantsValueDelta<K extends FVariantConstraint, E extends FVariant, V> with Delta<FVariants<K, V, Delta<V>>> {
+  final FVariants<K, V, Delta<V>> Function(V base, Map<K, V> variants) _call;
+
+  /// Replaces the entire [FVariants].
+  FVariantsValueDelta.replace(FVariants<K, V, Delta<V>> variants) : _call = ((_, _) => variants);
+
+  /// Applies a sequence of [operations] that modify the [FVariants].
+  FVariantsValueDelta.apply(List<FVariantValueDeltaOperation<K, E, V>> operations)
+    : _call = ((base, variants) {
+        for (final operation in operations) {
+          final result = operation._call(base, variants);
+          base = result.base;
+          variants = result.variants;
+        }
+
+        return ._(base, variants);
+      });
+
   @override
-  @useResult
-  T resolve(Set<FVariant> variants) => super.resolve(variants);
+  FVariants<K, V, Delta<V>> call(FVariants<K, V, Delta<V>> variants) => _call(variants.base, variants.variants);
+}
+
+/// An operation in [FVariantsValueDelta.apply] that modifies [FVariants] using concrete values.
+class FVariantValueDeltaOperation<K extends FVariantConstraint, E extends FVariant, V> {
+  final FVariants<K, V, Delta<V>> Function(V base, Map<K, V> variants) _call;
+
+  /// Adds [value] for exactly each constraint in [constraints], overriding any existing values.
+  ///
+  /// ```dart
+  /// // Given {a: 1, b: 1}
+  /// .add({b, c}, 2) // {a: 1, b: 2, c: 2}
+  /// ```
+  FVariantValueDeltaOperation.add(Set<K> constraints, V value)
+    : _call = ((base, existing) => ._(base, {...existing, for (final constraint in constraints) constraint: value}));
+
+  /// Replaces the base with [base].
+  FVariantValueDeltaOperation.onBase(V base) : _call = ((_, variants) => ._(base, {...variants}));
+
+  /// Replaces variants whose constraints are satisfied by [variants] with [value].
+  ///
+  /// ```dart
+  /// // Given {a: 1, b: 2, c: 3}
+  /// .on({a, b}, 10) // {a: 10, b: 10, c: 3}
+  /// ```
+  ///
+  /// See also [FVariantValueDeltaOperation.onAll] for replacing all variants except the base.
+  FVariantValueDeltaOperation.on(Set<E> variants, V value)
+    : _call = ((base, existing) => ._(base, {
+        for (final MapEntry(key: constraint, value: v) in existing.entries)
+          constraint: constraint.satisfiedBy(variants) ? value : v,
+      }));
+
+  /// Replaces all variants except base with [value].
+  ///
+  /// ```dart
+  /// // Given {a: 1, b: 2, c: 3}
+  /// .onAll(10) // {a: 10, b: 10, c: 10}
+  /// ```
+  FVariantValueDeltaOperation.onAll(V value)
+    : _call = ((base, variants) => ._(base, {for (final key in variants.keys) key: value}));
+
+  /// Removes variants whose constraints are satisfied by [variants].
+  ///
+  /// ```dart
+  /// // Given {a: 1, b: 2, c: 3}
+  /// .remove({a, b}) // {c: 3}
+  /// ```
+  ///
+  /// See [FVariantValueDeltaOperation.removeAll] for removing all variants except the base.
+  FVariantValueDeltaOperation.remove(Set<E> variants)
+    : _call = ((base, existing) => ._(base, {
+        for (final MapEntry(key: constraint, :value) in existing.entries)
+          if (!constraint.satisfiedBy(variants)) constraint: value,
+      }));
+
+  /// Removes all existing variants except the base.
+  ///
+  /// ```dart
+  /// // Given {a: 1, b: 2, c: 3}
+  /// .removeAll() // {}
+  /// ```
+  FVariantValueDeltaOperation.removeAll() : _call = ((base, _) => ._(base, {}));
 }
