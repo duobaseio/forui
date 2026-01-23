@@ -12,7 +12,7 @@ export 'src/theme/theme.dart';
 export 'src/theme/theme_data.dart';
 export 'src/theme/themes.dart';
 export 'src/theme/typography.dart';
-export 'src/theme/variant.dart' hide And, Not;
+export 'src/theme/variant.dart' hide And, Not, Value;
 export 'src/theme/variants.dart' hide createVariants;
 export 'src/theme/widget_state_map.dart';
 export 'src/theme/widget_states_delta.dart';

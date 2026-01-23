@@ -6,9 +6,11 @@ const _source = r'''
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/annotations.dart';
 import 'package:meta/meta.dart';
 import 'dart:ui';
 
+@Variants(FGoldenStyle, {'hovered': 'The hovered state.', 'pressed': 'The pressed state.'})
 part 'example.design.dart';
 
 class FGoldenStyle with Diagnosticable, _$FGoldenStyleFunctions {
@@ -108,6 +110,120 @@ part of 'example.dart';
 // **************************************************************************
 // DesignGenerator
 // **************************************************************************
+
+/// Represents a combination of variants which a [FGoldenStyle] can be styled.
+///
+/// See also:
+/// * [FGoldenStyleVariant], which represents individual variants for [FGoldenStyle].
+extension type const FGoldenStyleVariantConstraint._(FVariantConstraint _) implements FVariantConstraint {
+  /// Creates a [FGoldenStyleVariantConstraint] that negates [constraint].
+  factory FGoldenStyleVariantConstraint.not(FGoldenStyleVariantConstraint constraint) =>
+      FGoldenStyleVariantConstraint._(Not(constraint));
+
+  /// The hovered state.
+  static const hovered = FGoldenStyleVariant.hovered;
+
+  /// The pressed state.
+  static const pressed = FGoldenStyleVariant.pressed;
+
+  /// Matches all touch-based platforms, [android], [iOS] and [fuchsia].
+  static const touch = FGoldenStyleVariant.touch;
+
+  /// The Android platform variant.
+  ///
+  /// More specific than [touch] in variant resolution.
+  static const android = FGoldenStyleVariant.android;
+
+  /// The iOS platform variant.
+  ///
+  /// More specific than [touch] in variant resolution.
+  static const iOS = FGoldenStyleVariant.iOS;
+
+  /// The Fuchsia platform variant.
+  ///
+  /// More specific than [touch] in variant resolution.
+  static const fuchsia = FGoldenStyleVariant.fuchsia;
+
+  /// Matches all desktop-based platforms, [windows], [macOS] and [linux].
+  static const desktop = FGoldenStyleVariant.desktop;
+
+  /// The Windows platform variant.
+  ///
+  /// More specific than [desktop] in variant resolution.
+  static const windows = FGoldenStyleVariant.windows;
+
+  /// The macOS platform variant.
+  ///
+  /// More specific than [desktop] in variant resolution.
+  static const macOS = FGoldenStyleVariant.macOS;
+
+  /// The Linux platform variant.
+  ///
+  /// More specific than [desktop] in variant resolution.
+  static const linux = FGoldenStyleVariant.linux;
+
+  /// The web platform variant.
+  ///
+  /// Standalone platform that is neither [touch] nor [desktop].
+  static const web = FGoldenStyleVariant.web;
+
+  /// Combines this with [other] using a logical AND operation.
+  FGoldenStyleVariantConstraint and(FGoldenStyleVariantConstraint other) =>
+      FGoldenStyleVariantConstraint._(And(this, other));
+}
+
+/// Represents a condition under which a [FGoldenStyle] can be styled differently.
+///
+/// See also:
+/// * [FGoldenStyleVariantConstraint], which represents combinations of variants for [FGoldenStyle].
+extension type const FGoldenStyleVariant._(FVariant _) implements FGoldenStyleVariantConstraint, FVariant {
+  /// The hovered state.
+  static const hovered = FGoldenStyleVariant._(.new('hovered'));
+
+  /// The pressed state.
+  static const pressed = FGoldenStyleVariant._(.new('pressed'));
+
+  /// Matches all touch-based platforms, [android], [iOS] and [fuchsia].
+  static const touch = FGoldenStyleVariant._(FPlatformVariant.touch);
+
+  /// The Android platform variant.
+  ///
+  /// More specific than [touch] in variant resolution.
+  static const android = FGoldenStyleVariant._(FPlatformVariant.android);
+
+  /// The iOS platform variant.
+  ///
+  /// More specific than [touch] in variant resolution.
+  static const iOS = FGoldenStyleVariant._(FPlatformVariant.iOS);
+
+  /// The Fuchsia platform variant.
+  ///
+  /// More specific than [touch] in variant resolution.
+  static const fuchsia = FGoldenStyleVariant._(FPlatformVariant.fuchsia);
+
+  /// Matches all desktop-based platforms, [windows], [macOS] and [linux].
+  static const desktop = FGoldenStyleVariant._(FPlatformVariant.desktop);
+
+  /// The Windows platform variant.
+  ///
+  /// More specific than [desktop] in variant resolution.
+  static const windows = FGoldenStyleVariant._(FPlatformVariant.windows);
+
+  /// The macOS platform variant.
+  ///
+  /// More specific than [desktop] in variant resolution.
+  static const macOS = FGoldenStyleVariant._(FPlatformVariant.macOS);
+
+  /// The Linux platform variant.
+  ///
+  /// More specific than [desktop] in variant resolution.
+  static const linux = FGoldenStyleVariant._(FPlatformVariant.linux);
+
+  /// The web platform variant.
+  ///
+  /// Standalone platform that is neither [touch] nor [desktop].
+  static const web = FGoldenStyleVariant._(FPlatformVariant.web);
+}
 
 /// Provides [copyWith] and [lerp] methods.
 extension $FGoldenStyleTransformations on FGoldenStyle {
