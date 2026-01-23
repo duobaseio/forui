@@ -9,7 +9,7 @@ extension type const FPlatformVariant(FVariant _) implements FVariant {
   static const android = FPlatformVariant(.new('android'));
 
   /// The iOS platform variant.
-  static const iOS = FPlatformVariant(.new('ios'));
+  static const iOS = FPlatformVariant(.new('iOS'));
 
   /// The Fuchsia platform variant.
   static const fuchsia = FPlatformVariant(.new('fuchsia'));
@@ -18,7 +18,7 @@ extension type const FPlatformVariant(FVariant _) implements FVariant {
   static const windows = FPlatformVariant(.new('windows'));
 
   /// The macOS platform variant.
-  static const macOS = FPlatformVariant(.new('macos'));
+  static const macOS = FPlatformVariant(.new('macOS'));
 
   /// The Linux platform variant.
   static const linux = FPlatformVariant(.new('linux'));
@@ -33,6 +33,9 @@ extension type const FPlatformVariant(FVariant _) implements FVariant {
   bool get touch => this == .iOS || this == .android || this == .fuchsia;
 
   /// Whether the current platform is a primarily keyboard/mouse-based platform.
+  ///
+  /// This is not 100% as accurate as there are hybrid devices that use both touch and keyboard/mouse input, e.g.,
+  /// Windows Surface laptops.
   bool get desktop => this == .windows || this == .macOS || this == .linux;
 }
 
@@ -83,7 +86,7 @@ class FAdaptiveScope extends InheritedWidget {
   }
 }
 
-/// Extension on [BuildContext] for accessing platform variants.
+/// Provides functions for accessing the current platform variant.
 extension FAdaptiveBuildContext on BuildContext {
   /// Returns the current [FVariant].
   FPlatformVariant get platformVariant => FAdaptiveScope.of(this);

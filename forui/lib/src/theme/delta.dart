@@ -115,7 +115,7 @@ final class _GradientSentinel extends Gradient {
 
 /// A delta that applies modifications to a [BoxDecoration].
 sealed class BoxDecorationDelta with Delta<BoxDecoration> {
-  /// Merges partial modifications into a [BoxDecoration].
+  /// Creates a partial modification of a [BoxDecoration].
   const factory BoxDecorationDelta.merge({
     Color? color,
     DecorationImage? image,
@@ -127,7 +127,7 @@ sealed class BoxDecorationDelta with Delta<BoxDecoration> {
     BoxShape? shape,
   }) = _BoxDecorationMerge;
 
-  /// Replaces the entire [BoxDecoration].
+  /// Creates a complete replacement for a [BoxDecoration].
   const factory BoxDecorationDelta.replace(BoxDecoration decoration) = _BoxDecorationReplace;
 }
 
@@ -176,7 +176,7 @@ class _BoxDecorationReplace implements BoxDecorationDelta {
 
 /// A delta that applies modifications to an [IconThemeData].
 sealed class IconThemeDataDelta with Delta<IconThemeData> {
-  /// Merges partial modifications into an [IconThemeData].
+  /// Creates a partial modification of an [IconThemeData].
   const factory IconThemeDataDelta.merge({
     Color? color,
     double? opacity,
@@ -189,7 +189,7 @@ sealed class IconThemeDataDelta with Delta<IconThemeData> {
     bool? Function()? applyTextScaling,
   }) = _IconThemeDataMerge;
 
-  /// Replaces the entire [IconThemeData].
+  /// Creates a complete replacement of an [IconThemeData].
   const factory IconThemeDataDelta.replace(IconThemeData data) = _IconThemeDataReplace;
 }
 
@@ -263,7 +263,7 @@ final class _TextDecorationSentinel implements TextDecoration {
 
 /// A delta that applies modifications to a [TextStyle].
 sealed class TextStyleDelta with Delta<TextStyle> {
-  /// Merges partial modifications into a [TextStyle].
+  /// Creates a partial modification of a [TextStyle].
   const factory TextStyleDelta.merge({
     bool? inherit,
     Color? color,
@@ -293,7 +293,7 @@ sealed class TextStyleDelta with Delta<TextStyle> {
     TextOverflow? Function()? overflow,
   }) = _Merge;
 
-  /// Replaces the entire [TextStyle].
+  /// Creates a complete replacement of a [TextStyle].
   const factory TextStyleDelta.replace(TextStyle style) = _Replace;
 }
 
