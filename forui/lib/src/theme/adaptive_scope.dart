@@ -3,42 +3,6 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:meta/meta.dart';
 
-/// Represents a platform.
-extension type const FPlatformVariant(FVariant _) implements FVariant {
-  /// The Android platform variant.
-  static const android = FPlatformVariant(.new('android'));
-
-  /// The iOS platform variant.
-  static const iOS = FPlatformVariant(.new('iOS'));
-
-  /// The Fuchsia platform variant.
-  static const fuchsia = FPlatformVariant(.new('fuchsia'));
-
-  /// The Windows platform variant.
-  static const windows = FPlatformVariant(.new('windows'));
-
-  /// The macOS platform variant.
-  static const macOS = FPlatformVariant(.new('macOS'));
-
-  /// The Linux platform variant.
-  static const linux = FPlatformVariant(.new('linux'));
-
-  /// The web platform variant.
-  static const web = FPlatformVariant(.new('web'));
-
-  /// Whether the current platform is a primarily touch-based platform.
-  ///
-  /// This is not 100% accurate as there are hybrid devices that use both touch and keyboard/mouse input, e.g.,
-  /// Windows Surface laptops.
-  bool get touch => this == .iOS || this == .android || this == .fuchsia;
-
-  /// Whether the current platform is a primarily keyboard/mouse-based platform.
-  ///
-  /// This is not 100% as accurate as there are hybrid devices that use both touch and keyboard/mouse input, e.g.,
-  /// Windows Surface laptops.
-  bool get desktop => this == .windows || this == .macOS || this == .linux;
-}
-
 /// Provides the current platform variant down the widget tree.
 ///
 /// [FTheme] includes an [FAdaptiveScope] by default.

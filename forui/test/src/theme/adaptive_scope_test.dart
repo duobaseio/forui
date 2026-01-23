@@ -3,32 +3,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/forui.dart';
 
 void main() {
-  group('FPlatformVariant', () {
-    for (final (platform, expected) in [
-      (FPlatformVariant.android, true),
-      (FPlatformVariant.iOS, true),
-      (FPlatformVariant.fuchsia, true),
-      (FPlatformVariant.windows, false),
-      (FPlatformVariant.macOS, false),
-      (FPlatformVariant.linux, false),
-      (FPlatformVariant.web, false),
-    ]) {
-      test('touch - $platform', () => expect(platform.touch, expected));
-    }
-
-    for (final (platform, expected) in [
-      (FPlatformVariant.android, false),
-      (FPlatformVariant.iOS, false),
-      (FPlatformVariant.fuchsia, false),
-      (FPlatformVariant.windows, true),
-      (FPlatformVariant.macOS, true),
-      (FPlatformVariant.linux, true),
-      (FPlatformVariant.web, false),
-    ]) {
-      test('desktop - $platform', () => expect(platform.desktop, expected));
-    }
-  });
-
   group('FAdaptiveScope', () {
     testWidgets('overridden platform', (tester) async {
       late FPlatformVariant captured;

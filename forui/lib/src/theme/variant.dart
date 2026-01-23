@@ -2,7 +2,9 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
-/// Represents a combination of variants under which a widget is styled differently.
+part 'variant_platform.dart';
+
+/// Represents a combination of variants under which a widget can be styled differently.
 ///
 /// Users should generally use the provided widget-specific variants instead of this.
 ///
@@ -60,11 +62,16 @@ sealed class FVariantConstraint {
 /// Represents a condition under which a widget can be styled differently.
 ///
 /// Unlike [WidgetState], it is extended by widget-specific variants, allowing widgets to define their own states.
-class FVariant implements FVariantConstraint {
+sealed class FVariant implements FVariantConstraint {
+  /// Creates a variant.
+  const factory FVariant(String value) = Value;
+}
+
+@internal
+class Value implements FVariant {
   final String _value;
 
-  /// Creates a variant.
-  const FVariant(this._value);
+  const Value(this._value);
 
   @override
   bool satisfiedBy(Set<FVariant> variants) => variants.contains(this);
@@ -77,7 +84,7 @@ class FVariant implements FVariantConstraint {
 
   @override
   bool operator ==(Object other) =>
-      identical(this, other) || other is FVariant && runtimeType == other.runtimeType && _value == other._value;
+      identical(this, other) || other is Value && runtimeType == other.runtimeType && _value == other._value;
 
   @override
   int get hashCode => _value.hashCode;

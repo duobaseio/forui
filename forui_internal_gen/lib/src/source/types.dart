@@ -1,3 +1,4 @@
+import 'package:analyzer/dart/constant/value.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:code_builder/code_builder.dart';
@@ -33,6 +34,10 @@ const boxShadow = TypeChecker.fromUrl('package:flutter/src/painting/box_shadow.d
 const shadow = TypeChecker.fromUrl('dart:ui#Shadow');
 
 const fWidgetStateMap = TypeChecker.fromUrl('package:forui/src/theme/widget_state_map.dart#FWidgetStateMap');
+
+// Annotations
+const variants = TypeChecker.fromUrl('package:forui/src/foundation/annotations.dart#Variants');
+const sentinels = TypeChecker.fromUrl('package:forui/src/foundation/annotations.dart#Sentinels');
 
 /// Returns the instance fields for the given [element] and its supertypes.
 List<FieldElement> transitiveInstanceFields(ClassElement element) {
@@ -86,3 +91,17 @@ String aliasAwareType(DartType type) {
 
   return type.getDisplayString();
 }
+
+/// Returns the the `Variants` annotation's fields.
+(InterfaceType type, Map<String, String> variants) variantsAnnotation(DartObject annotation) => (
+  annotation.getField('type')!.toTypeValue()! as InterfaceType,
+  annotation.getField('variants')!.toMapValue()!.map(
+    (key, value) => MapEntry(key!.toStringValue()!, value!.toStringValue()!),
+  ),
+);
+
+/// Returns the the `Sentinels` annotation's fields.
+Map<String, String>? sentinelsAnnotation(DartObject annotation) => annotation
+    .getField('values')!
+    .toMapValue()!
+    .map((key, value) => MapEntry(key!.toStringValue()!, value!.toStringValue()!));
