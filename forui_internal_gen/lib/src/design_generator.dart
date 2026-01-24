@@ -1,5 +1,6 @@
 import 'package:build/build.dart';
 import 'package:code_builder/code_builder.dart' hide RecordType;
+import 'package:forui_internal_gen/src/source/delta_class.dart';
 import 'package:forui_internal_gen/src/source/design_functions_mixin.dart';
 import 'package:forui_internal_gen/src/source/design_transformations_extension.dart';
 import 'package:forui_internal_gen/src/source/types.dart';
@@ -16,6 +17,7 @@ class DesignGenerator extends Generator {
   @override
   Future<String?> generate(LibraryReader library, BuildStep step) async {
     final generated = <String>[];
+
     for (final annotated in library.libraryDirectivesAnnotatedWith(variants)) {
       final (type, variants) = variantsAnnotation(annotated.annotation.objectValue);
       final generator = VariantExtensionType(type, variants);
@@ -26,73 +28,85 @@ class DesignGenerator extends Generator {
       ]);
     }
 
+    // {style: {sentinelName: sentinelValue, ...}, ...}
+    final sentinelValues = <String, Map<String, String>>{};
+    for (final annotated in library.libraryDirectivesAnnotatedWith(sentinels)) {
+      final (style, values) = sentinelsAnnotation(annotated.annotation.objectValue);
+      sentinelValues[style.element.name!] = values;
+    }
+
     for (final type in library.classes) {
-      if (type.name == null && type.isSealed || type.isAbstract) {
+      if (type.name == null || type.isSealed || type.isAbstract) {
         continue;
       }
 
       if (_style.hasMatch(type.name!)) {
-        generated
-          ..add(
-            _emitter
-                .visitExtension(
-                  DesignTransformationsExtension(
-                    type,
-                    copyWithDocsHeader: [
-                      '/// Returns a copy of this [${type.name!}] with the given properties replaced.',
-                      '///',
-                      '/// Consider [using the CLI to generate a style](https://forui.dev/docs/themes#individual-widget-styles).',
-                      '///',
-                    ],
-                  ).generate(),
-                )
-                .toString(),
-          )
-          ..add(
-            _emitter
-                .visitMixin(
-                  DesignFunctionsMixin(type, [
-                    '/// Returns itself.',
-                    '/// ',
-                    "/// Allows [${type.name}] to replace functions that accept and return a [${type.name}], such as a style's",
-                    '/// `copyWith(...)` function.',
-                    '/// ',
-                    '/// ## Example',
-                    '/// ',
-                    '/// Given:',
-                    '/// ```dart',
-                    '/// void copyWith(${type.name} Function(${type.name}) nestedStyle) {}',
-                    '/// ```',
-                    '/// ',
-                    '/// The following:',
-                    '/// ```dart',
-                    '/// copyWith((style) => ${type.name}(...));',
-                    '/// ```',
-                    '/// ',
-                    '/// Can be replaced with:',
-                    '/// ```dart',
-                    '/// copyWith(${type.name}(...));',
-                    '/// ```',
-                  ]).generate(),
-                )
-                .toString(),
-          );
+        final delta = DeltaClass(type, sentinelValues[type.name] ?? {});
+        generated.addAll([
+          _emitter
+              .visitExtension(
+                DesignTransformationsExtension(
+                  type,
+                  copyWithDocsHeader: [
+                    '/// Returns a copy of this [${type.name!}] with the given properties replaced.',
+                    '///',
+                    '/// Consider [using the CLI to generate a style](https://forui.dev/docs/themes#individual-widget-styles).',
+                    '///',
+                  ],
+                ).generate(),
+              )
+              .toString(),
+          _emitter
+              .visitMixin(
+                DesignFunctionsMixin(type, [
+                  '/// Returns itself.',
+                  '/// ',
+                  "/// Allows [${type.name}] to replace functions that accept and return a [${type.name}], such as a style's",
+                  '/// `copyWith(...)` function.',
+                  '/// ',
+                  '/// ## Example',
+                  '/// ',
+                  '/// Given:',
+                  '/// ```dart',
+                  '/// void copyWith(${type.name} Function(${type.name}) nestedStyle) {}',
+                  '/// ```',
+                  '/// ',
+                  '/// The following:',
+                  '/// ```dart',
+                  '/// copyWith((style) => ${type.name}(...));',
+                  '/// ```',
+                  '/// ',
+                  '/// Can be replaced with:',
+                  '/// ```dart',
+                  '/// copyWith(${type.name}(...));',
+                  '/// ```',
+                ]).generate(),
+              )
+              .toString(),
+          _emitter.visitClass(delta.generateSealed()).toString(),
+          _emitter.visitClass(delta.generateReplace()).toString(),
+          _emitter.visitClass(delta.generateMerge()).toString(),
+        ]);
       } else if (_motion.hasMatch(type.name!)) {
-        generated
-          ..add(
-            _emitter
-                .visitExtension(
-                  DesignTransformationsExtension(
-                    type,
-                    copyWithDocsHeader: [
-                      '/// Returns a copy of this [${type.name!}] with the given properties replaced.',
-                      '///',
-                    ],
-                  ).generate(),
-                )
-                .toString(),
-          )
-          ..add(_emitter.visitMixin(DesignFunctionsMixin(type, ['/// Returns itself.']).generate()).toString());
+        final delta = DeltaClass(type, sentinelValues[type.name] ?? {});
+
+        generated.addAll([
+          _emitter
+              .visitExtension(
+                DesignTransformationsExtension(
+                  type,
+                  copyWithDocsHeader: [
+                    '/// Returns a copy of this [${type.name!}] with the given properties replaced.',
+                    '///',
+                  ],
+                ).generate(),
+              )
+              .toString(),
+          _emitter.visitMixin(DesignFunctionsMixin(type, ['/// Returns itself.']).generate()).toString(),
+          _emitter.visitClass(delta.generateSealed()).toString(),
+          _emitter.visitClass(delta.generateReplace()).toString(),
+          _emitter.visitClass(delta.generateMerge()).toString(),
+        ]);
       } else if (type.name == 'FThemeData') {
         generated.add(_emitter.visitMixin(DesignFunctionsMixin(type, ['/// Returns itself.']).generate()).toString());
       }

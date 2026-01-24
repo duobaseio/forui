@@ -8,7 +8,7 @@ import 'package:meta/meta.dart';
 ///
 /// This will probably be replaced by an augment class in the future.
 @internal
-abstract class FunctionsMixin {
+class FunctionsMixin {
   /// The type.
   @protected
   final ClassElement element;
@@ -25,7 +25,12 @@ abstract class FunctionsMixin {
   FunctionsMixin(this.element) : transitiveFields = transitiveInstanceFields(element), fields = instanceFields(element);
 
   /// Generates a mixin.
-  Mixin generate();
+  Mixin generate() =>
+      (MixinBuilder()
+        ..name = '_\$${element.name}Functions'
+        ..on = refer('Diagnosticable')
+        ..methods.addAll([...getters, if (fields.isNotEmpty) debugFillProperties, equals, hash]))
+          .build();
 
   /// Generates getters for the class's fields that must be overridden by the class.
   @protected
@@ -33,7 +38,7 @@ abstract class FunctionsMixin {
       .map(
         (field) => Method(
           (m) => m
-            ..returns = refer(aliasAwareType(field.type))
+            ..returns = refer(fieldType(field))
             ..type = MethodType.getter
             ..name = field.name,
         ),

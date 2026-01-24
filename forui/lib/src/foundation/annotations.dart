@@ -3,17 +3,20 @@ import 'package:meta/meta.dart';
 @internal
 class Variants {
   /// The widget the variants are associated with.
-  final Type type;
+  final Type widget;
   /// The variants and their associated documentation.
   final Map<String, String> variants;
 
-  const Variants(this.type, this.variants);
+  const Variants(this.widget, this.variants);
 }
 
 @internal
 class Sentinels {
-  /// The nullable and their associated sentinel values, typically a const field name.
+  /// The corresponding style.
+  final Type style;
+  
+  /// The field name and their associated sentinel values which is typically a const field name.
   final Map<String, String> values;
 
-  const Sentinels(this.values);
+  const Sentinels(this.style, this.values);
 }
