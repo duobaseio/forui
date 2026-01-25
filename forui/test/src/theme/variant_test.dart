@@ -75,7 +75,7 @@ void main() {
   group('Not', () {
     const a = FVariant('a');
     const b = FVariant('b');
-    final not = Not(a);
+    const not = Not(a);
 
     for (final (variants, expected) in [
       ({a}, false),
@@ -86,7 +86,7 @@ void main() {
       test('satisfiedBy $variants', () => expect(not.satisfiedBy(variants), expected));
     }
 
-    for (final (other, expected) in [(not, true), (Not(b), false)]) {
+    for (final (other, expected) in [(not, true), (const Not(b), false)]) {
       test('== $other', () => expect(not == other, expected));
     }
 
