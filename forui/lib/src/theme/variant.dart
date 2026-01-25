@@ -116,7 +116,9 @@ class And implements FVariantConstraint {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is And && runtimeType == other.runtimeType && _left == other._left && _right == other._right;
+      other is And &&
+          runtimeType == other.runtimeType &&
+          ((_left == other._left && _right == other._right) || (_left == other._right && _right == other._left));
 
   @override
   int get hashCode => Object.hash(_left, _right);
@@ -129,7 +131,7 @@ class And implements FVariantConstraint {
 class Not implements FVariantConstraint {
   final FVariantConstraint _operand;
 
-  Not(this._operand);
+  const Not(this._operand);
 
   @override
   bool satisfiedBy(Set<FVariant> variants) => !_operand.satisfiedBy(variants);
