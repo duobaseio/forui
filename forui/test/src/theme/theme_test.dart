@@ -78,6 +78,7 @@ void main() {
         [
           DiagnosticsProperty<FThemeData>('data', FThemes.zinc.dark, showName: false),
           EnumProperty<TextDirection?>('textDirection', theme.textDirection),
+          DiagnosticsProperty('platform', theme.platform),
         ].map((p) => p.toString()),
       );
     });
