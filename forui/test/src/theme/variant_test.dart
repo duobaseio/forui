@@ -65,7 +65,7 @@ void main() {
       test('satisfiedBy $variants', () => expect(and.satisfiedBy(variants), expected));
     }
 
-    for (final (other, expected) in [(and, true), (const And(a, c), false), (const And(b, a), false)]) {
+    for (final (other, expected) in [(and, true), (const And(a, c), false), (const And(b, a), true)]) {
       test('== $other', () => expect(and == other, expected));
     }
 
