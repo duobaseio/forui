@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
-import 'package:forui/forui.dart';
+
 import 'package:meta/meta.dart';
+
+import 'package:forui/forui.dart';
 
 @internal
 FVariants<K, V, D> createVariants<K extends FVariantConstraint, V, D extends Delta<V>>(V base, Map<K, V> variants) =>

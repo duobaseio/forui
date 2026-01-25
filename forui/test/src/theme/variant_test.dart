@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+
 import 'package:forui/src/theme/variant.dart';
 
 void main() {
@@ -40,10 +41,7 @@ void main() {
       test('satisfiedBy $variants', () => expect(a.satisfiedBy(variants), expected));
     }
 
-    for (final (other, expected) in [
-      (a, true),
-      (b, false),
-    ]) {
+    for (final (other, expected) in [(a, true), (b, false)]) {
       test('== $other', () => expect(a == other, expected));
     }
 
@@ -67,11 +65,7 @@ void main() {
       test('satisfiedBy $variants', () => expect(and.satisfiedBy(variants), expected));
     }
 
-    for (final (other, expected) in [
-      (and, true),
-      (const And(a, c), false),
-      (const And(b, a), false),
-    ]) {
+    for (final (other, expected) in [(and, true), (const And(a, c), false), (const And(b, a), false)]) {
       test('== $other', () => expect(and == other, expected));
     }
 
@@ -92,10 +86,7 @@ void main() {
       test('satisfiedBy $variants', () => expect(not.satisfiedBy(variants), expected));
     }
 
-    for (final (other, expected) in [
-      (not, true),
-      (Not(b), false),
-    ]) {
+    for (final (other, expected) in [(not, true), (Not(b), false)]) {
       test('== $other', () => expect(not == other, expected));
     }
 

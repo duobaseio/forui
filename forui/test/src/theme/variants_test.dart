@@ -1,7 +1,8 @@
 import 'package:flutter_test/flutter_test.dart';
+
 import 'package:forui/forui.dart';
-import 'package:forui/src/theme/variants.dart';
 import 'package:forui/src/theme/variant.dart';
+import 'package:forui/src/theme/variants.dart';
 
 class _Add with Delta<int> {
   final int value;

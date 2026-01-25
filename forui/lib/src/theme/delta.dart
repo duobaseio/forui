@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/widgets.dart';
+
 import 'package:meta/meta.dart';
 
 @internal
@@ -25,7 +26,6 @@ final class _ColorSentinel extends Color {
 final class _ImageFilterSentinel implements ImageFilter {
   const _ImageFilterSentinel();
 }
-
 
 /// A mixin for types that can be applied to base value to produce a new value.
 mixin Delta<T> {
@@ -85,12 +85,17 @@ final class _BoxBorderSentinel extends BoxBorder {
   ShapeBorder scale(double t) => throw UnimplementedError();
 
   @override
-  void paint(Canvas canvas, Rect rect, {TextDirection? textDirection, BoxShape shape = BoxShape.rectangle, BorderRadius? borderRadius}) =>
-      throw UnimplementedError();
+  void paint(
+    Canvas canvas,
+    Rect rect, {
+    TextDirection? textDirection,
+    BoxShape shape = BoxShape.rectangle,
+    BorderRadius? borderRadius,
+  }) => throw UnimplementedError();
 }
 
 final class _DecorationImageSentinel extends DecorationImage {
-  const _DecorationImageSentinel(): super(image: const _ImageProvider());
+  const _DecorationImageSentinel() : super(image: const _ImageProvider());
 }
 
 final class _ImageProvider extends ImageProvider {
@@ -376,7 +381,9 @@ class _Merge implements TextStyleDelta {
     decoration: identical(decoration, _textDecorationSentinel) ? style.decoration : decoration,
     decorationColor: identical(decorationColor, colorSentinel) ? style.decorationColor : decorationColor,
     decorationStyle: decorationStyle != null ? decorationStyle!() : style.decorationStyle,
-    decorationThickness: identical(decorationThickness, double.infinity) ? style.decorationThickness : decorationThickness,
+    decorationThickness: identical(decorationThickness, double.infinity)
+        ? style.decorationThickness
+        : decorationThickness,
     debugLabel: identical(debugLabel, stringSentinel) ? style.debugLabel : debugLabel,
     fontFamily: identical(fontFamily, stringSentinel) ? style.fontFamily : fontFamily,
     fontFamilyFallback: fontFamilyFallback ?? style.fontFamilyFallback,

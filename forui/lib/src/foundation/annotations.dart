@@ -4,6 +4,7 @@ import 'package:meta/meta.dart';
 class Variants {
   /// The widget the variants are associated with.
   final Type widget;
+
   /// The variants and their associated documentation.
   final Map<String, String> variants;
 
@@ -14,7 +15,7 @@ class Variants {
 class Sentinels {
   /// The corresponding style.
   final Type style;
-  
+
   /// The field name and their associated sentinel values which is typically a const field name.
   final Map<String, String> values;
 
