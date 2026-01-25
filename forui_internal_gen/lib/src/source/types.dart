@@ -95,17 +95,19 @@ String aliasAwareType(DartType type) {
 /// Returns the the `Variants` annotation's fields.
 (InterfaceType widget, Map<String, String> variants) variantsAnnotation(DartObject annotation) => (
   annotation.getField('widget')!.toTypeValue()! as InterfaceType,
-  annotation.getField('variants')!.toMapValue()!.map(
-    (key, value) => MapEntry(key!.toStringValue()!, value!.toStringValue()!),
-  ),
+  annotation
+      .getField('variants')!
+      .toMapValue()!
+      .map((key, value) => MapEntry(key!.toStringValue()!, value!.toStringValue()!)),
 );
 
 /// Returns the the `Sentinels` annotation's fields.
 (InterfaceType style, Map<String, String> values) sentinelsAnnotation(DartObject annotation) => (
   annotation.getField('style')!.toTypeValue()! as InterfaceType,
-  annotation.getField('values')!.toMapValue()!.map(
-    (key, value) => MapEntry(key!.toStringValue()!, value!.toStringValue()!),
-  ),
+  annotation
+      .getField('values')!
+      .toMapValue()!
+      .map((key, value) => MapEntry(key!.toStringValue()!, value!.toStringValue()!)),
 );
 
 final _constraint = RegExp(r'\[(\w+)\]');

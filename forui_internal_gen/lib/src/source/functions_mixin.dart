@@ -27,9 +27,9 @@ class FunctionsMixin {
   /// Generates a mixin.
   Mixin generate() =>
       (MixinBuilder()
-        ..name = '_\$${element.name}Functions'
-        ..on = refer('Diagnosticable')
-        ..methods.addAll([...getters, if (fields.isNotEmpty) debugFillProperties, equals, hash]))
+            ..name = '_\$${element.name}Functions'
+            ..on = refer('Diagnosticable')
+            ..methods.addAll([...getters, if (fields.isNotEmpty) debugFillProperties, equals, hash]))
           .build();
 
   /// Generates getters for the class's fields that must be overridden by the class.
