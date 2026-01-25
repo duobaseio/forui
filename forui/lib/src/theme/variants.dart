@@ -202,7 +202,7 @@ class FVariantsValueDelta<K extends FVariantConstraint, E extends FVariant, V> w
   /// Creates a complete replacement of a [FVariants].
   FVariantsValueDelta.replace(FVariants<K, V, Delta<V>> variants) : _call = ((_, _) => variants);
 
-  /// Creates a sequence of delta modifications to [FVariants].
+  /// Creates a sequence of modifications to [FVariants].
   FVariantsValueDelta.apply(List<FVariantValueDeltaOperation<K, E, V>> operations)
     : _call = ((base, variants) {
         for (final operation in operations) {

@@ -61,10 +61,12 @@ can never be set to `null`.
 class FooStyle {
   final Color? background;
   final EdgeInsets padding;
+  final Axis axis;
 
-  FooStyle copyWith({Color? background, EdgeInsets? padding}) => FooStyle(
+  FooStyle copyWith({Color? background, EdgeInsets? padding, Axis? axis}) => FooStyle(
     background: background ?? this.background,
     padding: padding ?? this.padding,
+    axis: axis ?? this.axis,
   );
 }
 ```
@@ -156,7 +158,8 @@ FAutocomplete(
 )
 ```
 
-Deltas use sentinel values for "no change", so `null` means `null`.
+Deltas use sentinel values for "no change", so `null` means `null`. Types, such as enums, that cannot implement sentinel 
+values, use a function wrapper instead.
 
 ```dart
 class _Sentinel extends Color {
@@ -164,14 +167,15 @@ class _Sentinel extends Color {
 }
 
 abstract class FooStyleDelta with Delta<FooStyle> {
-  factory FooStyleDelta.merge({Color? background, EdgeInsets? padding}) = _Merge;
+  factory FooStyleDelta.merge({Color? background, EdgeInsets? padding, Axis? Function()? axis}) = _Merge;
 }
 
 class _Merge implements FooStyleDelta {
   final Color? background;
   final EdgeInsets? padding;
+  final Axis? Function()? axis;
 
-  const _Merge({this.background = const _Sentinel(), this.padding});
+  const _Merge({this.background = const _Sentinel(), this.padding, this.axis});
 }
 ```
 
@@ -519,7 +523,26 @@ FTappableVariant(
 )
 ```
 
-We introduce `FAdaptiveScope` to provide platform variants down the widget tree using `InheritedWidget`, and 
+`touch` and `desktop` shorthands group related platforms. As OR operators are disallowed, we cannot define 
+`touch = android | ios | fuchsia`. Instead, we invert the relationship where variants are **compounds** that include their
+parent.
+
+```
+touch    = touch                    (1 operand)
+android  = touch & android          (2 operands)
+ios      = touch & ios              (2 operands)
+fuchsia  = touch & fuchsia          (2 operands)
+
+desktop  = desktop                  (1 operand)
+windows  = desktop & windows        (2 operands)
+macOS    = desktop & macOS          (2 operands)
+linux    = desktop & linux          (2 operands)
+```
+
+When the active platform is `android`, both `{.android}` and `{.touch}` constraints are satisfied. Specificity resolves
+correctly since `{.android}` (2 operands) is more specific than `{.touch}` (1 operand).
+
+Lastly, we introduce `FAdaptiveScope` to provide platform variants down the widget tree using `InheritedWidget`, and 
 `BuildContext.platformVariant` for easier access. `FTheme` includes `FAdaptiveScope` by default. `FAdaptiveScope` accepts
 an overriding platform variant as an escape hatch.
 
@@ -584,8 +607,8 @@ FTappable(
 ### Proposed Solution
 
 We observe that a base value **is** the default value, and modifications are deltas. Building on `Delta`s in 
-[simplifying style modification](#2-simplifying-style-modification), we split `FVariants` into `FVariants`, which maps
-constraints to deltas, and `FLiteralVariants`, which maps constraints to concrete values. Both have a `base` field.
+[simplifying style modification](#2-simplifying-style-modification), `FVariants` will have `base` field and can be 
+created using either mapping to deltas or concrete values.
 
 ```dart
 class FVariants<V extends FVariant, T, D extends Delta<T>> {
@@ -595,10 +618,38 @@ class FVariants<V extends FVariant, T, D extends Delta<T>> {
   FVariants(this.base, this.deltas);
 }
 
-// Creation
+
+```
+
+```dart
+class FVariants<K extends FVariant, V, D extends Delta<T>> {
+  final V base;
+  final Map<Set<K>, V> values;
+
+  FVariants(this.base, this.values);
+
+  FVariants.deltas(this.base, Map<Set<K>, D> deltas): 
+    values = deltas.map((key, delta) => MapEntry(key, delta.apply(base)));
+}
+
+// Creation using concrete values
+FooStyle(
+  spacing: FVariants(
+    16,
+    {
+      {.compact}: 8,
+      {.expanded}: 24,
+    },
+  ),
+);
+
+// Creation using deltas
 FTappableStyle(
   decoration: FVariants(
-    BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8)),
+    BoxDecoration(
+      color: Colors.white,
+      borderRadius: BorderRadius.circular(8),
+    ),
     {
       {.hovered, .pressed}: .merge(color: Colors.grey),
       {.disabled}: .replace(BoxDecoration(color: Colors.red)),
@@ -607,27 +658,7 @@ FTappableStyle(
 );
 ```
 
-```dart
-class FLiteralVariants<V extends FVariant, T> {
-  final T base;
-  final Map<Set<V>, T> values;
-
-  FLiteralVariants(this.base, this.values);
-}
-
-// Creation
-FooStyle(
-  spacing: FLiteralVariants(
-    16,
-    {
-      {.compact}: 8,
-      {.expanded}: 24,
-    },
-  ),
-);
-```
-
-Unlike style deltas, `FVariantsDelta` and `FLiteralVariantsDelta` use `.apply(...)` instead of `.merge(...)` since typical 
+Unlike style deltas, `FVariantsDelta` and `FVariantsValueDelta` use `.apply(...)` instead of `.merge(...)` since typical 
 usage is a sequence of operations and order matters (add-then-modify ≠ modify-then-add). 
 
 In general, there are 3 types of operations:
@@ -636,50 +667,69 @@ In general, there are 3 types of operations:
 * Removing an existing variant.
 
 ```dart
-class FVariantsDelta<V extends FVariant, T, D extends Delta<T>> implements Delta<FVariants<V, T, D>> {
+class FVariantsDelta<K extends FVariantConstraint, E extends FVariant, D extends Delta<V>, V>
+    with Delta<FVariants<K, V, D>> {
+  // Creates a sequence of modifications to [FVariants].
   FVariantsDelta.apply(List<FVariantDeltaOperation<V, T, D>> operations);
 
-  // Escape hatch to replace entire variants.
+  // Creates a complete replacement of a [FVariants].
   FVariantsDelta.replace(FVariants<V, T, D> variants);
 }
 
-class FVariantDeltaOperation<V extends FVariant, T, D> {
-  // Base operations
-  FVariantDeltaOperation.replaceBase(T base);
+// Delta-based operations.
+class FVariantOperation<K extends FVariantConstraint, E extends FVariant, V, D extends Delta<V>> {
+  // Adds a new variant
+  FVariantOperation.add(Set<K> constraints, D delta);
 
-  FVariantDeltaOperation.mergeBase(D delta);
+  // Applies [delta] to the base without modifying existing variants.
+  FVariantOperation.onBase(D delta);
 
-  // Variant operations
-  FVariantDeltaOperation.add(Set<V> constraint, D delta);
+  // Applies [delta] to variants whose constraints are satisfied by [variants].
+  FVariantOperation.on(Set<E> variants, D delta);
 
-  FVariantDeltaOperation.map(Set<V> constraint, D delta);
+  // Applies [delta] to all variants.
+  FVariantOperation.onAll(D delta);
 
-  FVariantDeltaOperation.remove(Set<V> constraint);
+  // Removes variants matching [variants].
+  FVariantOperation.remove(Set<E> variants);
+
+  // Removes all variants.
+  FVariantOperation.removeAll();
 }
 ```
 
 ```dart
-class FLiteralVariantsDelta<V extends FVariant, T> implements Delta<FLiteralVariants<V, T>> {
-  FLiteralVariantsDelta.apply(List<FLiteralVariantDeltaOperation<V, T>> operations);
+class FVariantsValueDelta<K extends FVariantConstraint, E extends FVariant, V> with Delta<FVariants<K, V, Delta<V>>>  {
+  // Creates a sequence of modifications to [FVariants].
+  FVariantsValueDelta.apply(List<FVariantValueDeltaOperation<K, E, V>> operations);
 
-  // Escape hatch to replace entire variants.
-  FLiteralVariantsDelta.replace(FLiteralVariants<V, T> variants);
+  // Creates a complete replacement of a [FVariants].
+  FVariantsValueDelta.replace(FVariants<K, V, Delta<V>> variants);
 }
 
-class FLiteralVariantDeltaOperation<V extends FVariant, T> {
-  // Base value operation
-  FLiteralVariantDeltaOperation.replaceBase(T base);
+// Concrete value-based operations
+class FVariantValueDeltaOperation<K extends FVariantConstraint, E extends FVariant, V>  {
+  // Adds a new variant
+  FVariantValueDeltaOperation.add(Set<K> constraints, V value);
 
-  // Variant operations
-  FLiteralVariantDeltaOperation.add(Set<V> constraint, T value);
+  // Replaces the base with [base].
+  FVariantValueDeltaOperation.onBase(V base);
 
-  FLiteralVariantDeltaOperation.map(Set<V> constraint, T value);
+  // Replaces variants matching [variants] with [value].
+  FVariantValueDeltaOperation.on(Set<E> variants, V value);
 
-  FLiteralVariantDeltaOperation.remove(Set<V> constraint);
+  // Replaces all variants with [value].
+  FVariantValueDeltaOperation.onAll(V value);
+
+  // Removes variants matching [variants].
+  FVariantValueDeltaOperation.remove(Set<E> variants);
+
+  // Removes all variants.
+  FVariantValueDeltaOperation.removeAll();
 }
 ```
 
-The operations use inclusive matching. For example: `.map({.hovered, .focused}, delta)` affects:
+The `on` and remove` operations use inclusive matching. For example: `.on({.hovered, .focused}, delta)` affects:
 
 ```dart
 final decoration = FVariants(

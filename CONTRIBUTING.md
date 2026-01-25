@@ -142,35 +142,34 @@ Lastly, types from 3rd party packages should not be publicly exported by Forui.
 
 Prefer the `Geometry` variants when possible because they are more flexible.
 
-### Widget Styles
 
+### Hide, not Show
+
+Prefer hiding internal members (blacklisting) rather than showing public members (whitelisting) in [barrel files](https://medium.com/@ugamakelechi501/barrel-files-in-dart-and-flutter-a-guide-to-simplifying-imports-9b245dbe516a).
+
+✅ Prefer this:
 ```dart
-part 'foo.style.dart'; // --- (1)
+library forui.widgets.calendar;
 
-class FooStyle with Diagnosticable, _$FooStyleFunctions { // ---- (2) (3)
-  
-  final Color color;
-  
-  FooStyle({required this.color});
-  
-  FooStyle.inherit({FFont font, FColorScheme scheme}): color = scheme.primary; // ---- (4)
-  
-  FooStyle copyWith({Color? color}) => FooStyle( // ---- (5)
-    color: color ?? this.color, 
-  );
-}
+export '../src/widgets/calendar/calendar.dart';
+export '../src/widgets/calendar/day/day_picker.dart' hide DayPicker;
+export '../src/widgets/calendar/shared/entry.dart' hide Entry;
+export '../src/widgets/calendar/shared/header.dart' hide Header, Navigation;
+export '../src/widgets/calendar/calendar_controller.dart';
 ```
 
-They should:
-1. include a generated part file which includes `_$FooStyleFunctions`. To generate the file, run 
-  `dart run build_runner build --delete-conflicting-outputs` in the forui/forui directory.
-2. mix-in [Diagnosticable](https://api.flutter.dev/flutter/foundation/Diagnosticable-mixin.html).
-3. mix-in `_$FooStyleFunctions`, which contains several utility functions.
-4. provide a primary constructor, and a named constructor, `inherit(...)` , that configures itself based on
-   an ancestor `FTheme`.
+❌ Instead of:
+```dart
+export '../src/widgets/calendar/calendar.dart';
+export '../src/widgets/calendar/day/day_picker.dart' show FCalendarDayPickerStyle;
+export '../src/widgets/calendar/shared/entry.dart' show FCalendarDayData, FCalendarEntryStyle;
+export '../src/widgets/calendar/shared/header.dart' show FCalendarHeaderStyle, FCalendarPickerType;
+export '../src/widgets/calendar/calendar_controller.dart';
+```
 
-Lastly, the order of the fields and methods should be as shown above.
+This prevents accidental omission of generated public members.
 
+## Code Generation
 
 ### Widget Controls
 
@@ -317,31 +316,41 @@ class _FMyWidgetState extends State<FMyWidget> {
 See [FAccordionController](https://github.com/forus-labs/forui/blob/main/forui/lib/src/widgets/accordion/accordion_controller.dart)
 for a reference implementation.
 
-### Hide, not Show
+### Widget Styles
 
-Prefer hiding internal members (blacklisting) rather than showing public members (whitelisting) in [barrel files](https://medium.com/@ugamakelechi501/barrel-files-in-dart-and-flutter-a-guide-to-simplifying-imports-9b245dbe516a).
-
-✅ Prefer this:
 ```dart
-library forui.widgets.calendar;
+@Variants(FWidget, {'hovered': 'The hovered state', 'pressed': 'The pressed state'}) // --- (1)
+@Sentinels(FWidgetStyle, {'someDouble': 'double.infinity', 'color': 'colorSentinel'}) // --- (2)
+part 'widget.design.dart'; // --- (3)
 
-export '../src/widgets/calendar/calendar.dart';
-export '../src/widgets/calendar/day/day_picker.dart' hide DayPicker;
-export '../src/widgets/calendar/shared/entry.dart' hide Entry;
-export '../src/widgets/calendar/shared/header.dart' hide Header, Navigation;
-export '../src/widgets/calendar/calendar_controller.dart';
+class FWidget { /* ... */ }
+
+class FWidgetStyle with Diagnosticable, _$FWidgetStyleFunctions { // --- (4) (5)
+
+  final double someDouble;
+  final Color color;
+
+  FWidgetStyle({required this.someDouble, required this.color});
+
+  FWidgetStyle.inherit({FFont font, FColorScheme scheme}):
+    someDouble = 16,
+    color = scheme.primary; // --- (6)
+}
 ```
 
-❌ Instead of:
-```dart
-export '../src/widgets/calendar/calendar.dart';
-export '../src/widgets/calendar/day/day_picker.dart' show FCalendarDayPickerStyle;
-export '../src/widgets/calendar/shared/entry.dart' show FCalendarDayData, FCalendarEntryStyle;
-export '../src/widgets/calendar/shared/header.dart' show FCalendarHeaderStyle, FCalendarPickerType;
-export '../src/widgets/calendar/calendar_controller.dart';
-```
+They should:
+1. `@Variants` - Declares widget-specific variants (states). Maps variant names to documentation strings. Generates
+   `FWidgetVariant` and `FWidgetVariantConstraint` extension types.
+2. `@Sentinels` - Specifies sentinel values for delta merges. Maps field names to their sentinel values (e.g.,
+   `'double.infinity'`, `'colorSentinel'`). Used to distinguish "no change" from actual values in generated delta classes.
+3. Include a generated part file (`*.design.dart`) containing `_$FWidgetStyleFunctions`, delta classes, and variant types.
+4. Mix-in [Diagnosticable](https://api.flutter.dev/flutter/foundation/Diagnosticable-mixin.html).
+5. Mix-in `_$FWidgetStyleFunctions` (generated utility functions).
+6. Provide constructors including `inherit(...)` for theme-based defaults.
 
-This prevents accidental omission of generated public members.
+To generate files, run `dart run build_runner build --delete-conflicting-outputs` in the forui/forui directory.
+
+Platform variants (touch, desktop, android, iOS, etc.) are automatically included in generated variant types.
 
 
 ## Leak Tracking
