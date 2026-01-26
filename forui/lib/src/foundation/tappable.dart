@@ -1,12 +1,27 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/foundation/annotations.dart';
+import 'package:forui/src/theme/variant.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
+@Variants(FTappable, {
+  'primaryFocused': 'The variant when a given widget (and not its descendants) has focus.',
+  'focused': 'The variant when the given widget or any of its descendants have focus.',
+  'hovered': 'The variant when the user drags their mouse cursor over the given widget.',
+  'pressed': 'The variant when the user is actively pressing down on the given widget.',
+  'disabled': 'The variant when this widget is disabled and cannot be interacted with.',
+  'selected': 'The variant when this item has been selected.',
+})
 part 'tappable.design.dart';
+
+/// A callback for when a tappable's variants change.
+///
+/// See [FTappable.onVariantChange].
+typedef FTappableVariantChangeCallback = void Function(Set<FTappableVariant> previous, Set<FTappableVariant> current);
 
 /// Utilities for retrieving information about the current platform.
 @Deprecated('This needs to be migrated.')
@@ -35,10 +50,10 @@ extension FTouch on Never {
 /// It is typically used to create other high-level widgets, i.e., [FButton]. Unless you are creating a custom widget,
 /// you should use those high-level widgets instead.
 class FTappable extends StatefulWidget {
-  static Widget _builder(BuildContext _, Set<WidgetState> _, Widget? child) => child!;
+  static Widget _builder(BuildContext _, Set<FTappableVariant> _, Widget? child) => child!;
 
   /// The style.
-  final FTappableStyle Function(FTappableStyle style)? style;
+  final FTappableStyleDelta? style;
 
   /// The style used when the tappable is focused. This tappable will not be outlined if null.
   final FFocusedOutlineStyleDelta? focusedOutlineStyle;
@@ -65,14 +80,10 @@ class FTappable extends StatefulWidget {
   /// {@endtemplate}
   final ValueChanged<bool>? onHoverChange;
 
-  /// {@template forui.foundation.FTappable.onStateChange}
-  /// Handler called when there are any changes to a tappable's [WidgetState]s.
-  ///
-  /// It only gains the [WidgetState.focused] state on primary focus.
-  ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
+  /// {@template forui.foundation.FTappable.onVariantChange}
+  /// Handler called when there are any changes to a tappable's [FTappableVariant]s.
   /// {@endtemplate}
-  final ValueChanged<FWidgetStatesDelta>? onStateChange;
+  final FTappableVariantChangeCallback? onVariantChange;
 
   /// True if this tappable is currently selected. Defaults to false.
   final bool selected;
@@ -135,9 +146,7 @@ class FTappable extends StatefulWidget {
   final Map<Type, Action<Intent>>? actions;
 
   /// The builder used to create a child with the current state.
-  ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
-  final ValueWidgetBuilder<Set<WidgetState>> builder;
+  final ValueWidgetBuilder<Set<FTappableVariant>> builder;
 
   /// An optional child.
   ///
@@ -150,7 +159,7 @@ class FTappable extends StatefulWidget {
   /// ## Contract
   /// Throws [AssertionError] if [builder] and [child] are both null.
   const factory FTappable({
-    FTappableStyle Function(FTappableStyle style)? style,
+    FTappableStyleDelta? style,
     FFocusedOutlineStyleDelta? focusedOutlineStyle,
     String? semanticsLabel,
     bool excludeSemantics,
@@ -158,7 +167,7 @@ class FTappable extends StatefulWidget {
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
     ValueChanged<bool>? onHoverChange,
-    ValueChanged<FWidgetStatesDelta>? onStateChange,
+    FTappableVariantChangeCallback? onVariantChange,
     bool selected,
     HitTestBehavior behavior,
     VoidCallback? onPress,
@@ -167,7 +176,7 @@ class FTappable extends StatefulWidget {
     VoidCallback? onSecondaryLongPress,
     Map<ShortcutActivator, Intent>? shortcuts,
     Map<Type, Action<Intent>>? actions,
-    ValueWidgetBuilder<Set<WidgetState>> builder,
+    ValueWidgetBuilder<Set<FTappableVariant>> builder,
     Widget? child,
     Key? key,
   }) = AnimatedTappable;
@@ -185,7 +194,7 @@ class FTappable extends StatefulWidget {
     this.focusNode,
     this.onFocusChange,
     this.onHoverChange,
-    this.onStateChange,
+    this.onVariantChange,
     this.selected = false,
     this.behavior = .translucent,
     this.onPress,
@@ -215,7 +224,7 @@ class FTappable extends StatefulWidget {
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
-      ..add(ObjectFlagProperty.has('onStateChange', onStateChange))
+      ..add(ObjectFlagProperty.has('onVariantChange', onVariantChange))
       ..add(FlagProperty('selected', value: selected, ifTrue: 'selected'))
       ..add(EnumProperty('behavior', behavior))
       ..add(ObjectFlagProperty.has('onPress', onPress))
@@ -232,30 +241,33 @@ class FTappable extends StatefulWidget {
 }
 
 class _FTappableState<T extends FTappable> extends State<T> {
-  late final WidgetStatesController _controller;
   late FocusNode _focus;
-  late Set<WidgetState> _current;
+  late Set<FTappableVariant> _current;
   int _monotonic = 0;
 
   @override
   void initState() {
     super.initState();
-    _controller = WidgetStatesController({
+    _focus = widget.focusNode ?? .new(debugLabel: 'FTappable');
+    _current = {
       if (widget.selected) .selected,
       if (widget.autofocus) .focused,
       if (widget._disabled) .disabled,
-    });
-    _focus = widget.focusNode ?? .new(debugLabel: 'FTappable');
-    _current = {..._controller.value};
-    _controller.addListener(_onChange);
+    };
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // This cast is always fine since extension types are erased at runtime.
+    _current.add(context.platformVariant as FTappableVariant);
   }
 
   @override
   void didUpdateWidget(covariant T old) {
     super.didUpdateWidget(old);
-    _controller
-      ..update(.selected, widget.selected)
-      ..update(.disabled, widget._disabled);
+    _update(.selected, widget.selected);
+    _update(.disabled, widget._disabled);
 
     if (widget.focusNode != old.focusNode) {
       if (old.focusNode == null) {
@@ -265,15 +277,12 @@ class _FTappableState<T extends FTappable> extends State<T> {
     }
   }
 
-  void _onChange() {
-    // We need to create a new set because of https://github.com/flutter/flutter/issues/167916
-    final current = {..._controller.value};
-    final previous = _current;
-
-    // We set _current before onStateChange to prevent exceptions thrown by it from corrupting the state.
-    _current = current;
-    if (widget.onStateChange case final onStateChange?) {
-      onStateChange(FWidgetStatesDelta(previous, current));
+  void _update(FTappableVariant variant, bool add) {
+    final previous = {..._current};
+    if (add ? _current.add(variant) : _current.remove(variant)) {
+      if (widget.onVariantChange case final onVariantChange?) {
+        onVariantChange(previous, {..._current});
+      }
     }
   }
 
@@ -282,7 +291,6 @@ class _FTappableState<T extends FTappable> extends State<T> {
     if (widget.focusNode == null) {
       _focus.dispose();
     }
-    _controller.dispose();
     super.dispose();
   }
 
@@ -310,17 +318,20 @@ class _FTappableState<T extends FTappable> extends State<T> {
             autofocus: widget.autofocus,
             focusNode: _focus,
             onFocusChange: (focused) {
-              setState(() => _controller.update(.focused, _focus.hasPrimaryFocus));
+              setState(() {
+                _update(.focused, focused);
+                _update(.primaryFocused, _focus.hasPrimaryFocus);
+              });
               widget.onFocusChange?.call(focused);
             },
             child: MouseRegion(
-              cursor: style.cursor.resolve(_controller.value),
+              cursor: style.cursor.resolve(_current),
               onEnter: (_) {
-                setState(() => _controller.update(.hovered, true));
+                setState(() => _update(.hovered, true));
                 widget.onHoverChange?.call(true);
               },
               onExit: (_) => setState(() {
-                _controller.update(.hovered, false);
+                _update(.hovered, false);
                 widget.onHoverChange?.call(false);
               }),
               // We use a separate Listener instead of the GestureDetector in _child as GestureDetectors fight in
@@ -334,8 +345,8 @@ class _FTappableState<T extends FTappable> extends State<T> {
                   }
 
                   await Future.delayed(style.pressedEnterDuration);
-                  if (mounted && count == _monotonic && !_controller.value.contains(WidgetState.pressed)) {
-                    setState(() => _controller.update(.pressed, true));
+                  if (mounted && count == _monotonic && !_current.contains(FTappableVariant.pressed)) {
+                    setState(() => _update(.pressed, true));
                   }
                 },
                 onPointerMove: (event) {
@@ -347,7 +358,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
                     if (!widget._disabled) {
                       onPressedEnd();
                     }
-                    setState(() => _controller.update(.pressed, false));
+                    setState(() => _update(.pressed, false));
                   }
                 },
                 onPointerUp: (_) async {
@@ -357,8 +368,8 @@ class _FTappableState<T extends FTappable> extends State<T> {
                   }
 
                   await Future.delayed(style.pressedExitDuration);
-                  if (mounted && count == _monotonic && _controller.value.contains(WidgetState.pressed)) {
-                    setState(() => _controller.update(.pressed, false));
+                  if (mounted && count == _monotonic && _current.contains(FTappableVariant.pressed)) {
+                    setState(() => _update(.pressed, false));
                   }
                 },
                 child: GestureDetector(
@@ -378,7 +389,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
 
     if (widget.focusedOutlineStyle case final style?) {
       tappable = FFocusedOutline(
-        focused: _controller.value.contains(WidgetState.focused),
+        focused: _current.contains(FTappableVariant.focused),
         style: style,
         child: tappable,
       );
@@ -405,7 +416,7 @@ class AnimatedTappable extends FTappable {
     super.focusNode,
     super.onFocusChange,
     super.onHoverChange,
-    super.onStateChange,
+    super.onVariantChange,
     super.selected,
     super.behavior,
     super.onPress,
@@ -500,8 +511,11 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
 /// A [FTappable]'s style.
 class FTappableStyle with Diagnosticable, _$FTappableStyleFunctions {
   /// The mouse cursor for mouse pointers that are hovering over the region. Defaults to [MouseCursor.defer].
+  ///
+  /// See:
+  /// * [FTappableVariantConstraint] for the supported variant constraints.
   @override
-  final FWidgetStateMap<MouseCursor> cursor;
+  final FVariants<FTappableVariantConstraint, MouseCursor, Delta<MouseCursor>> cursor;
 
   /// The duration to wait before applying the pressed effect after the user presses the tile. Defaults to 200ms.
   @override
@@ -519,7 +533,7 @@ class FTappableStyle with Diagnosticable, _$FTappableStyleFunctions {
 
   /// Creates a [FTappableStyle].
   FTappableStyle({
-    this.cursor = const FWidgetStateMap({WidgetState.any: .defer}),
+    this.cursor = const .raw(.defer),
     this.pressedEnterDuration = const Duration(milliseconds: 200),
     this.pressedExitDuration = .zero,
     this.motion = const FTappableMotion(),

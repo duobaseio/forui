@@ -92,4 +92,23 @@ void main() {
 
     test('toString', () => expect(not.toString(), '!a'));
   });
+
+  group('Any', () {
+    const a = FVariant('a');
+    const b = FVariant('b');
+    const any = Any();
+
+    for (final (variants, expected) in [
+      ({a}, true),
+      ({b}, true),
+      ({a, b}, true),
+      (<FVariant>{}, true),
+    ]) {
+      test('satisfiedBy $variants', () => expect(any.satisfiedBy(variants), expected));
+    }
+
+    test('== Any()', () => expect(any == const Any(), true));
+
+    test('toString', () => expect(any.toString(), 'any'));
+  });
 }

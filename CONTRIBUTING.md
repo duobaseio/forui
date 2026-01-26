@@ -47,37 +47,30 @@ This installs dependencies and generates the required files.
 Run `make help` to see all available commands.
 
 
-## Conventions
+## Guidelines
 
-* Avoid [double negatives](https://en.wikipedia.org/wiki/Double_negative) when naming things, i.e. a boolean field should
-  be named `enabled` instead of `disabled`.
+### Prefix publicly exported widgets and styles with `F`
 
-* Avoid past tense when naming callbacks, prefer present tense instead.
+For example, `FScaffold` instead of `Scaffold`.
 
-  ✅ Prefer this:
-  ```dart
-  final VoidCallback onPress;
-  ```
+### Avoid double negatives
 
-  ❌ Instead of:
-  ```dart
-  final VoidCallback onPressed;
-  ```
+Avoid [double negatives](https://en.wikipedia.org/wiki/Double_negative) when naming things, i.e. a boolean field should
+be named `enabled` instead of `disabled`.
 
-* Format all Dart code with 120 characters line limit, i.e. `dart format . --line-length=120`.
+### Avoid past tense when naming callbacks
 
-* Prefix all publicly exported widgets and styles with `F`, i.e. `FScaffold`.
+Prefer present tense instead.
 
+✅ Prefer this:
+```dart
+final VoidCallback onPress;
+```
 
-## Design Guidelines
-
-### Avoid translucent colors
-
-Translucent colors may not render as expected on different backgrounds. They are usually used as disabled and hovered
-states. Instead, use the `FColorScheme.disable` and `FColorScheme.hover` functions to generate colors for disabled and
-hovered states respectively.
-
-Alternatively, use alpha-blending to generate an equivalent solid color.
+❌ Instead of:
+```dart
+final VoidCallback onPressed;
+```
 
 ### Be agnostic about state management
 
@@ -93,9 +86,9 @@ constitute a breaking change.
 ```dart
 class Foo extends StatelessWidget {
   final int _someKnobWeDontKnowIfUsefulToUsers = 42;
-  
+
   const Foo() {}
-  
+
   @override
   void build(BuildContext context) {
     return Placeholder();
@@ -107,9 +100,9 @@ class Foo extends StatelessWidget {
 ```dart
 class Foo extends StatelessWidget {
   final int someKnobWeDontKnowIfUsefulToUsers = 42;
-  
+
   const Foo(this.someKnobWeDontKnowIfUsefulToUsers) {}
-  
+
   @override
   void build(BuildContext context) {
     return Placeholder();
@@ -138,10 +131,16 @@ In some situations, it is unrealistic to implement things ourselves. In these ca
 
 Lastly, types from 3rd party packages should not be publicly exported by Forui.
 
+### Avoid translucent colors
+
+Translucent colors may not render as expected on different backgrounds. They are usually used as disabled and hovered states. Instead, use the `FColorScheme.disable` and `FColorScheme.hover` functions to generate colors for disabled and
+hovered states respectively.
+
+Alternatively, use alpha-blending to generate an equivalent solid color.
+
 ### Prefer `AlignmentGeometry`/`BorderRadiusGeometry`/`EdgeInsetsGeometry` over `Alignment`/`BorderRadius`/`EdgeInsets`
 
 Prefer the `Geometry` variants when possible because they are more flexible.
-
 
 ### Hide, not Show
 
@@ -168,6 +167,33 @@ export '../src/widgets/calendar/calendar_controller.dart';
 ```
 
 This prevents accidental omission of generated public members.
+
+### Changelog organization
+
+Entries should be grouped by widgets in alphabetical order. Each widget section should be a level 3 heading with the
+widget name in backticks.
+
+Within each widget section, order entries as follows:
+1. Additions (start with "Add")
+2. Changes (start with "Change", "Rename", or similar)
+3. Removals (start with "Remove")
+4. Fixes (start with "Fix")
+
+Separate each category with a blank line. Breaking changes must start with `**Breaking**`.
+
+✅ Example:
+```markdown
+### `FSelect`
+* Add `FSelect.search(...)`.
+
+* **Breaking** Rename `FSelectStyle.selectFieldStyle` to `FSelectStyle.fieldStyle`.
+
+* **Breaking** Remove `FSelectStyle.iconStyle`. Use `FSelectStyle.fieldStyle.iconStyle` instead.
+
+* Fix `FSelect` still allowing tags to be removed when disabled.
+```
+
+Use `### Others` for changes that don't belong to a specific widget.
 
 ## Code Generation
 
