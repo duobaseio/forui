@@ -198,7 +198,7 @@ class Action extends StatelessWidget {
     child: FTappable(
       style: style.actionTappableStyle,
       semanticsLabel: semanticsLabel,
-      focusedOutlineStyle: context.theme.style.focusedOutlineStyle,
+      focusedOutlineStyle: .replace(context.theme.style.focusedOutlineStyle),
       onPress: onPress,
       builder: (context, states, child) => DecoratedBox(
         decoration: style.itemDecoration.resolve(states),
@@ -238,7 +238,7 @@ class _Page extends StatelessWidget {
         listenable: controller,
         builder: (_, _) => FTappable(
           style: style.pageTappableStyle,
-          focusedOutlineStyle: style.focusedOutlineStyle,
+          focusedOutlineStyle: .replace(style.focusedOutlineStyle),
           selected: controller.value == page,
           onPress: () => controller.value = page,
           builder: (_, states, _) => DecoratedBox(

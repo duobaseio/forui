@@ -109,7 +109,7 @@ class FCheckbox extends StatelessWidget {
           // rather than the entire FLabel, is outlined.
           child: FFocusedOutline(
             focused: states.contains(WidgetState.focused),
-            style: style.focusedOutlineStyle,
+            style: .replace(style.focusedOutlineStyle),
             child: AnimatedSwitcher(
               duration: style.motion.fadeInDuration,
               reverseDuration: style.motion.fadeOutDuration,

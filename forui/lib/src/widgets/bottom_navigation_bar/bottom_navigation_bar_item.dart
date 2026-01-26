@@ -62,7 +62,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
 
     return FTappable(
       style: style.tappableStyle,
-      focusedOutlineStyle: style.focusedOutlineStyle,
+      focusedOutlineStyle: .replace(style.focusedOutlineStyle),
       autofocus: autofocus,
       focusNode: focusNode,
       onFocusChange: onFocusChange,

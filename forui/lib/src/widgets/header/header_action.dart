@@ -152,7 +152,7 @@ class FHeaderAction extends StatelessWidget {
       onFocusChange: onFocusChange,
       onHoverChange: onHoverChange,
       onStateChange: onStateChange,
-      focusedOutlineStyle: style.focusedOutlineStyle,
+      focusedOutlineStyle: .replace(style.focusedOutlineStyle),
       semanticsLabel: semanticsLabel,
       onPress: onPress,
       onLongPress: onLongPress,

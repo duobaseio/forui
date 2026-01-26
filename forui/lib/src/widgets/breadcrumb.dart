@@ -201,7 +201,7 @@ class _Crumb extends StatelessWidget implements FBreadcrumbItem {
 
     return FTappable(
       style: style.tappableStyle,
-      focusedOutlineStyle: focusedOutlineStyle,
+      focusedOutlineStyle: .replace(focusedOutlineStyle),
       selected: current,
       onPress: onPress,
       builder: (_, states, child) => DefaultTextStyle(style: style.textStyle.resolve(states), child: child!),
@@ -387,7 +387,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
         divider: widget.divider,
         menu: menu,
         child: FTappable(
-          focusedOutlineStyle: style.focusedOutlineStyle,
+          focusedOutlineStyle: .replace(style.focusedOutlineStyle),
           onPress: _controller.toggle,
           child: Padding(
             padding: style.padding,
@@ -417,7 +417,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
         divider: widget.divider,
         menu: widget.tileMenu!,
         child: FTappable(
-          focusedOutlineStyle: style.focusedOutlineStyle,
+          focusedOutlineStyle: .replace(style.focusedOutlineStyle),
           onPress: _controller.toggle,
           child: Padding(
             padding: style.padding,

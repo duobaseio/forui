@@ -17,7 +17,7 @@ part 'focused_outline.design.dart';
 /// * [FFocusedOutlineStyle] for customizing an outline.
 class FFocusedOutline extends SingleChildRenderObjectWidget {
   /// The style.
-  final FFocusedOutlineStyle Function(FFocusedOutlineStyle style)? style;
+  final FFocusedOutlineStyleDelta? style;
 
   /// True if the [child] should be outlined.
   final bool focused;

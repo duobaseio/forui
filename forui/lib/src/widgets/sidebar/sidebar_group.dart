@@ -90,7 +90,7 @@ class FSidebarGroup extends StatelessWidget {
                     if (action != null)
                       FTappable(
                         style: style.tappableStyle,
-                        focusedOutlineStyle: style.focusedOutlineStyle,
+                        focusedOutlineStyle: .replace(style.focusedOutlineStyle),
                         onHoverChange: onActionHoverChange,
                         onStateChange: onActionStateChange,
                         onPress: onActionPress,
