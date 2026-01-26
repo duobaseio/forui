@@ -252,7 +252,7 @@ void main() {
         TestScaffold(
           child: FTappable(
             builder: (_, _, _) => const Text('tappable'),
-            onStateChange: (v) => states = v,
+            onVariantChange: (v) => states = v,
             onPress: () {},
           ),
         ),
@@ -273,7 +273,7 @@ void main() {
         TestScaffold(
           child: FTappable(
             builder: (_, _, _) => const Text('tappable'),
-            onStateChange: (v) {
+            onVariantChange: (v) {
               delta = v;
               throw Exception('Error in onStateChange');
             },
@@ -501,7 +501,7 @@ void main() {
         TestScaffold(
           child: FTappable.static(
             builder: (_, _, _) => const Text('tappable'),
-            onStateChange: (v) => delta = v,
+            onVariantChange: (v) => delta = v,
             onHoverChange: (v) => hovered = v,
             onPress: () {},
           ),
@@ -534,7 +534,7 @@ void main() {
         child: FTappable(
           focusNode: focus,
           onPress: focus.requestFocus,
-          onStateChange: (v) => focused = v.current.contains(WidgetState.focused),
+          onVariantChange: (v) => focused = v.current.contains(WidgetState.focused),
           focusedOutlineStyle: .replace(FThemes.zinc.light.style.focusedOutlineStyle),
           child: const Text('focus'),
         ),
@@ -555,7 +555,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         child: FTappable(
-          onStateChange: (v) => focused = v.current.contains(WidgetState.focused),
+          onVariantChange: (v) => focused = v.current.contains(WidgetState.focused),
           focusedOutlineStyle: .replace(FThemes.zinc.light.style.focusedOutlineStyle),
           child: FButton(onPress: focus.requestFocus, focusNode: focus, child: const Text('focus')),
         ),

@@ -194,7 +194,7 @@ class DeltaClass {
 
       final type = d.getDisplayString().split('<').first == 'Delta'
           ? 'FVariantsValueDelta<$k, $e, ${v.getDisplayString()}>'
-          : 'FVariantsDelta<$k, $e, ${d.getDisplayString()}, ${v.getDisplayString()}>';
+          : 'FVariantsDelta<$k, $e, ${v.getDisplayString()}, ${d.getDisplayString()}>';
 
       return ('$type?', '$name?.call(original.$name) ?? original.$name', null);
     }

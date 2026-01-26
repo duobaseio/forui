@@ -1,11 +1,15 @@
 ## 0.18.0
 
-### `FTheme`
-* Add `FTheme.textDirection`.
+### `FAccordionItem`
+* **Breaking** Rename `FAccordionItem.onStateChange` to `FAccordionItem.onVariantChange`.
 
-* **Breaking** Rename `FTheme` to `FBasicTheme`.
-* **Breaking** Rename `FAnimatedTheme` to `FTheme`.
-* **Breaking** Rename `FAnimatedThemeMotion` to `FThemeMotion`.
+
+### `FBottomNavigationBarItem`
+* **Breaking** Rename `FBottomNavigationBarItem.onStateChange` to `FBottomNavigationBarItem.onVariantChange`.
+
+
+### `FButton`
+* **Breaking** Rename `FButton.onStateChange` to `FButton.onVariantChange`.
 
 
 ### `FCircularProgress`
@@ -15,7 +19,20 @@
 
 ### `FDateField`
 * **Breaking** Rename `FDateFieldStyle.selectFieldStyle` to `FDateFieldStyle.fieldStyle`.
+
 * **Breaking** Remove `FDateFieldStyle.iconStyle`. Use nested `FDateFieldStyle.fieldStyle.iconStyle` instead.
+
+
+### `FHeaderAction`
+* **Breaking** Rename `FHeaderAction.onStateChange` to `FHeaderAction.onVariantChange`.
+
+
+### `FItem`
+* **Breaking** Rename `FItem.onStateChange` to `FItem.onVariantChange`.
+
+
+### `FMultiSelectTag`
+* **Breaking** Rename `FMultiSelectTag.onStateChange` to `FMultiSelectTag.onVariantChange`.
 
 
 ### `FPicker`
@@ -23,15 +40,29 @@
 
 
 ### `FSelect` & `FMultiSelect`
-* **Breaking** Rename `FSelectStyle.selectFieldStyle` to `FSelectStyle.fieldStyle`.
-* **Breaking** Rename `FSelectSearchStyle.textFieldStyle` to `FSelectSearchStyle.fieldStyle`.
-* **Breaking** Remove `FSelectStyle.iconStyle`. Use `FSelectStyle.fieldStyle.iconStyle` instead.
-* **Breaking** Remove `FSelectSearchStyle.iconStyle`. Use `FSelectSearchStyle.fieldStyle.iconStyle` instead.
-* **Breaking** Change `FMultiSelectFieldStyle.iconStyle` type from `IconThemeData` to `FWidgetStateMap<IconThemeData>`.
-               Wrap existing values with `.all(...)`, e.g. `.all(IconThemeData(...))`.
 * **Breaking** Add `enabled` parameter to `FMultiSelectTagBuilder` at position 1 (after `context`).
 
+* **Breaking** Change `FMultiSelectFieldStyle.iconStyle` type from `IconThemeData` to `FWidgetStateMap<IconThemeData>`.
+  Wrap existing values with `.all(...)`, e.g. `.all(IconThemeData(...))`.
+* **Breaking** Rename `FSelectStyle.selectFieldStyle` to `FSelectStyle.fieldStyle`.
+* **Breaking** Rename `FSelectSearchStyle.textFieldStyle` to `FSelectSearchStyle.fieldStyle`.
+
+* **Breaking** Remove `FSelectStyle.iconStyle`. Use `FSelectStyle.fieldStyle.iconStyle` instead.
+* **Breaking** Remove `FSelectSearchStyle.iconStyle`. Use `FSelectSearchStyle.fieldStyle.iconStyle` instead.
+
 * Fix `FMultiSelect` still allowing tags to be removed when disabled.
+
+
+### `FSelectTile`
+* **Breaking** Rename `FSelectTile.onStatesChange` to `FSelectTile.onVariantChange`.
+
+
+### `FSidebarGroup`
+* **Breaking** Rename `FSidebarGroup.onActionStateChange` to `FSidebarGroup.onActionVariantChange`.
+
+
+### `FSidebarItem`
+* **Breaking** Rename `FSidebarItem.onStateChange` to `FSidebarItem.onVariantChange`.
 
 
 ### `FSlider`
@@ -42,6 +73,14 @@
 * Add `FTabs.expands`.
 
 
+### `FTappable`
+* **Breaking** Rename `FTappable.onStateChange` to `FTappable.onVariantChange`.
+
+
+### `FTile`
+* **Breaking** Rename `FTile.onStateChange` to `FTile.onVariantChange`.
+
+
 ### `FTextField`
 * **Breaking** Add `FTextFieldStyle.iconStyle`.
 
@@ -49,9 +88,18 @@
 * Change `FTextFieldStyle.obscureButtonStyle` to not bounce by default.
 
 
+### `FTheme`
+* Add `FTheme.textDirection`.
+
+* **Breaking** Rename `FTheme` to `FBasicTheme`.
+* **Breaking** Rename `FAnimatedTheme` to `FTheme`.
+* **Breaking** Rename `FAnimatedThemeMotion` to `FThemeMotion`.
+
+
 ### `FTimeField`
 * Change error message when localizations are missing to be more descriptive.
 * **Breaking** Rename `FTimeFieldStyle.selectFieldStyle` to `FTimeFieldStyle.fieldStyle`.
+
 * **Breaking** Remove `FTimeFieldStyle.iconStyle`. Use `FTimeFieldStyle.fieldStyle.iconStyle` instead.
 
 * Fix `FTimeField` incorrectly handling traversal when no localizations are provided.
@@ -63,6 +111,10 @@
 
 ### `FToaster`
 * Change `FToastAlignment` from an enum to final class to allow fine-grained control over positioning.
+
+
+### Others
+* **Breaking** Remove `FWidgetStatesDelta`.
 
 
 ## 0.17.0

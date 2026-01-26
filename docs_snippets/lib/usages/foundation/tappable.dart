@@ -30,7 +30,7 @@ final tappable = FTappable(
   onSecondaryPress: () {},
   onSecondaryLongPress: () {},
   onHoverChange: (hovered) {},
-  onStateChange: (delta) {},
+  onVariantChange: (delta) {},
   // {@endcategory}
 );
 
@@ -58,6 +58,6 @@ final tappableStatic = FTappable.static(
   onSecondaryPress: () {},
   onSecondaryLongPress: () {},
   onHoverChange: (hovered) {},
-  onStateChange: (delta) {},
+  onVariantChange: (delta) {},
   // {@endcategory}
 );

@@ -141,3 +141,223 @@ transforms:
     changes:
       - kind: rename
         newName: 'fieldStyle.iconStyle'
+
+  # FTappable
+  - title: 'Rename FTappable(onStateChange: ...) to FTappable(onVariantChange: ...)'
+    date: 2026-01-26
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FTappable
+    changes:
+      - kind: renameParameter
+        oldName: 'onStateChange'
+        newName: 'onVariantChange'
+
+  - title: 'Rename FTappable.static(onStateChange: ...) to FTappable.static(onVariantChange: ...)'
+    date: 2026-01-26
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'static'
+      inClass: FTappable
+    changes:
+      - kind: renameParameter
+        oldName: 'onStateChange'
+        newName: 'onVariantChange'
+
+  # FAccordionItem
+  - title: 'Rename FAccordionItem(onStateChange: ...) to FAccordionItem(onVariantChange: ...)'
+    date: 2026-01-26
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FAccordionItem
+    changes:
+      - kind: renameParameter
+        oldName: 'onStateChange'
+        newName: 'onVariantChange'
+
+  # FBottomNavigationBarItem
+  - title: 'Rename FBottomNavigationBarItem(onStateChange: ...) to FBottomNavigationBarItem(onVariantChange: ...)'
+    date: 2026-01-26
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FBottomNavigationBarItem
+    changes:
+      - kind: renameParameter
+        oldName: 'onStateChange'
+        newName: 'onVariantChange'
+
+  # FButton
+  - title: 'Rename FButton(onStateChange: ...) to FButton(onVariantChange: ...)'
+    date: 2026-01-26
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FButton
+    changes:
+      - kind: renameParameter
+        oldName: 'onStateChange'
+        newName: 'onVariantChange'
+
+  - title: 'Rename FButton.icon(onStateChange: ...) to FButton.icon(onVariantChange: ...)'
+    date: 2026-01-26
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'icon'
+      inClass: FButton
+    changes:
+      - kind: renameParameter
+        oldName: 'onStateChange'
+        newName: 'onVariantChange'
+
+  # FHeaderAction
+  - title: 'Rename FHeaderAction(onStateChange: ...) to FHeaderAction(onVariantChange: ...)'
+    date: 2026-01-26
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FHeaderAction
+    changes:
+      - kind: renameParameter
+        oldName: 'onStateChange'
+        newName: 'onVariantChange'
+
+  - title: 'Rename FHeaderAction.back(onStateChange: ...) to FHeaderAction.back(onVariantChange: ...)'
+    date: 2026-01-26
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'back'
+      inClass: FHeaderAction
+    changes:
+      - kind: renameParameter
+        oldName: 'onStateChange'
+        newName: 'onVariantChange'
+
+  - title: 'Rename FHeaderAction.x(onStateChange: ...) to FHeaderAction.x(onVariantChange: ...)'
+    date: 2026-01-26
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'x'
+      inClass: FHeaderAction
+    changes:
+      - kind: renameParameter
+        oldName: 'onStateChange'
+        newName: 'onVariantChange'
+
+  # FItem
+  - title: 'Rename FItem(onStateChange: ...) to FItem(onVariantChange: ...)'
+    date: 2026-01-26
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FItem
+    changes:
+      - kind: renameParameter
+        oldName: 'onStateChange'
+        newName: 'onVariantChange'
+
+  - title: 'Rename FItem.raw(onStateChange: ...) to FItem.raw(onVariantChange: ...)'
+    date: 2026-01-26
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'raw'
+      inClass: FItem
+    changes:
+      - kind: renameParameter
+        oldName: 'onStateChange'
+        newName: 'onVariantChange'
+
+  # FMultiSelectTag
+  - title: 'Rename FMultiSelectTag(onStateChange: ...) to FMultiSelectTag(onVariantChange: ...)'
+    date: 2026-01-26
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FMultiSelectTag
+    changes:
+      - kind: renameParameter
+        oldName: 'onStateChange'
+        newName: 'onVariantChange'
+
+  # FSidebarItem
+  - title: 'Rename FSidebarItem(onStateChange: ...) to FSidebarItem(onVariantChange: ...)'
+    date: 2026-01-26
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FSidebarItem
+    changes:
+      - kind: renameParameter
+        oldName: 'onStateChange'
+        newName: 'onVariantChange'
+
+  # FSidebarGroup
+  - title: 'Rename FSidebarGroup(onActionStateChange: ...) to FSidebarGroup(onActionVariantChange: ...)'
+    date: 2026-01-26
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FSidebarGroup
+    changes:
+      - kind: renameParameter
+        oldName: 'onActionStateChange'
+        newName: 'onActionVariantChange'
+
+  # FTile
+  - title: 'Rename FTile(onStateChange: ...) to FTile(onVariantChange: ...)'
+    date: 2026-01-26
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FTile
+    changes:
+      - kind: renameParameter
+        oldName: 'onStateChange'
+        newName: 'onVariantChange'
+
+  - title: 'Rename FTile.raw(onStateChange: ...) to FTile.raw(onVariantChange: ...)'
+    date: 2026-01-26
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'raw'
+      inClass: FTile
+    changes:
+      - kind: renameParameter
+        oldName: 'onStateChange'
+        newName: 'onVariantChange'
+
+  # FSelectTile
+  - title: 'Rename FSelectTile(onStatesChange: ...) to FSelectTile(onVariantChange: ...)'
+    date: 2026-01-26
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FSelectTile
+    changes:
+      - kind: renameParameter
+        oldName: 'onStatesChange'
+        newName: 'onVariantChange'
+
+  - title: 'Rename FSelectTile.tile(onStatesChange: ...) to FSelectTile.tile(onVariantChange: ...)'
+    date: 2026-01-26
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'tile'
+      inClass: FSelectTile
+    changes:
+      - kind: renameParameter
+        oldName: 'onStatesChange'
+        newName: 'onVariantChange'
+
+  - title: 'Rename FSelectTile.suffix(onStatesChange: ...) to FSelectTile.suffix(onVariantChange: ...)'
+    date: 2026-01-26
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'suffix'
+      inClass: FSelectTile
+    changes:
+      - kind: renameParameter
+        oldName: 'onStatesChange'
+        newName: 'onVariantChange'

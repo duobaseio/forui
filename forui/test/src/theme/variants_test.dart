@@ -33,7 +33,7 @@ void main() {
 
   group('FVariantsDelta', () {
     test('replaces entire FVariants', () {
-      final delta = FVariantsDelta<FVariant, FVariant, _Add, int>.replace(createVariants(10, {c: 30}));
+      final delta = FVariantsDelta<FVariant, FVariant, int, _Add>.replace(createVariants(10, {c: 30}));
       final result = delta(createVariants(0, {a: 1, b: 2}));
 
       expect(result.base, 10);
@@ -42,7 +42,7 @@ void main() {
 
     group('apply(...)', () {
       test('in order', () {
-        final delta = FVariantsDelta<FVariant, FVariant, _Add, int>.apply([
+        final delta = FVariantsDelta<FVariant, FVariant, int, _Add>.apply([
           .add({c}, const _Add(3)),
           .onAll(const _Add(10)),
         ]);
@@ -53,7 +53,7 @@ void main() {
       });
 
       test('no operations', () {
-        final delta = FVariantsDelta<FVariant, FVariant, _Add, int>.apply([]);
+        final delta = FVariantsDelta<FVariant, FVariant, int, _Add>.apply([]);
         final result = delta(createVariants(0, {a: 1}));
 
         expect(result.base, 0);
@@ -69,7 +69,7 @@ void main() {
     const d = FVariant('d');
 
     test('add(...)', () {
-      final delta = FVariantsDelta<FVariant, FVariant, _Add, int>.apply([
+      final delta = FVariantsDelta<FVariant, FVariant, int, _Add>.apply([
         .add({b, c}, const _Add(10)),
       ]);
       final result = delta(createVariants(0, {a: 1, b: 2}));
@@ -79,7 +79,7 @@ void main() {
     });
 
     test('onBase(...)', () {
-      final delta = FVariantsDelta<FVariant, FVariant, _Add, int>.apply([.onBase(const _Add(10))]);
+      final delta = FVariantsDelta<FVariant, FVariant, int, _Add>.apply([.onBase(const _Add(10))]);
       final result = delta(createVariants(5, {a: 1}));
 
       expect(result.base, 15);
@@ -87,12 +87,12 @@ void main() {
     });
 
     for (final (description, variants, expected) in [
-      ('on(...) - many', {a, b}, {a: 11, b: 12, c: 3}),
-      ('on(...) - none', {d}, {a: 1, b: 2, c: 3}),
-      ('on(...) - single', {b}, {a: 1, b: 12, c: 3}),
+      ('many', {a, b}, {a: 11, b: 12, c: 3}),
+      ('none', {d}, {a: 1, b: 2, c: 3}),
+      ('single', {b}, {a: 1, b: 12, c: 3}),
     ]) {
-      test(description, () {
-        final delta = FVariantsDelta<FVariant, FVariant, _Add, int>.apply([.on(variants, const _Add(10))]);
+      test('onVariants - $description', () {
+        final delta = FVariantsDelta<FVariant, FVariant, int, _Add>.apply([.on(variants, const _Add(10))]);
         final result = delta(createVariants(0, {a: 1, b: 2, c: 3}));
 
         expect(result.base, 0);
@@ -101,15 +101,15 @@ void main() {
     }
 
     test('onAll(...)', () {
-      final delta = FVariantsDelta<FVariant, FVariant, _Add, int>.apply([.onAll(const _Add(10))]);
+      final delta = FVariantsDelta<FVariant, FVariant, int, _Add>.apply([.onAll(const _Add(10))]);
       final result = delta(createVariants(0, {a: 1, b: 2}));
 
-      expect(result.base, 0);
+      expect(result.base, 10);
       expect(result.variants, {a: 11, b: 12});
     });
 
     test('remove(...)', () {
-      final delta = FVariantsDelta<FVariant, FVariant, _Add, int>.apply([
+      final delta = FVariantsDelta<FVariant, FVariant, int, _Add>.apply([
         .remove({a, b}),
       ]);
       final result = delta(createVariants(0, {a: 1, b: 2, c: 3}));
@@ -119,7 +119,7 @@ void main() {
     });
 
     test('removeAll(...)', () {
-      final delta = FVariantsDelta<FVariant, FVariant, _Add, int>.apply([.removeAll()]);
+      final delta = FVariantsDelta<FVariant, FVariant, int, _Add>.apply([.removeAll()]);
       final result = delta(createVariants(0, {a: 1, b: 2}));
 
       expect(result.base, 0);
@@ -165,10 +165,10 @@ void main() {
     const d = FVariant('d');
 
     for (final (description, constraints, expected) in [
-      ('add(...) - new', {c}, {a: 1, b: 2, c: 10}),
-      ('add(...) - overwrite', {b}, {a: 1, b: 10}),
+      (' new', {c}, {a: 1, b: 2, c: 10}),
+      ('overwrite', {b}, {a: 1, b: 10}),
     ]) {
-      test(description, () {
+      test('add(...) - $description', () {
         final delta = FVariantsValueDelta<FVariant, FVariant, int>.apply([.add(constraints, 10)]);
         final result = delta(createVariants(0, {a: 1, b: 2}));
 
@@ -186,13 +186,27 @@ void main() {
     });
 
     for (final (description, variants, expected) in [
-      ('on(...) - many', {a, b}, {a: 10, b: 10, c: 3}),
-      ('on(...) - none', {d}, {a: 1, b: 2, c: 3}),
-      ('on(...) - single', {b}, {a: 1, b: 10, c: 3}),
+      ('many', {a, b}, {a: 10, b: 10, c: 3}),
+      ('none', {d}, {a: 1, b: 2, c: 3}),
+      ('single', {b}, {a: 1, b: 10, c: 3}),
     ]) {
-      test(description, () {
+      test('on(...) - $description', () {
         final delta = FVariantsValueDelta<FVariant, FVariant, int>.apply([.on(variants, 10)]);
         final result = delta(createVariants(0, {a: 1, b: 2, c: 3}));
+
+        expect(result.base, 0);
+        expect(result.variants, expected);
+      });
+    }
+
+    for (final (description, initial, expected) in [
+      ('empty', <FVariant, int>{}, <FVariant, int>{}),
+      ('single', {a: 1}, {a: 10}),
+      ('many', {a: 1, b: 2, c: 3}, {a: 10, b: 10, c: 10}),
+    ]) {
+      test('onVariants(...) - $description', () {
+        final delta = FVariantsValueDelta<FVariant, FVariant, int>.apply([.onVariants(10)]);
+        final result = delta(createVariants(0, initial));
 
         expect(result.base, 0);
         expect(result.variants, expected);
@@ -203,17 +217,17 @@ void main() {
       final delta = FVariantsValueDelta<FVariant, FVariant, int>.apply([.onAll(10)]);
       final result = delta(createVariants(0, {a: 1, b: 2}));
 
-      expect(result.base, 0);
+      expect(result.base, 10);
       expect(result.variants, {a: 10, b: 10});
     });
 
     for (final (description, variants, expected) in [
-      ('remove - many', {a, b}, {c: 3}),
-      ('remove - all', {a, b, c}, <FVariant, int>{}),
-      ('remove - none', {d}, {a: 1, b: 2, c: 3}),
-      ('remove - single', {b}, {a: 1, c: 3}),
+      ('many', {a, b}, {c: 3}),
+      ('all', {a, b, c}, <FVariant, int>{}),
+      ('none', {d}, {a: 1, b: 2, c: 3}),
+      ('single', {b}, {a: 1, c: 3}),
     ]) {
-      test(description, () {
+      test('remove - $description', () {
         final delta = FVariantsValueDelta<FVariant, FVariant, int>.apply([.remove(variants)]);
         final result = delta(createVariants(0, {a: 1, b: 2, c: 3}));
 
