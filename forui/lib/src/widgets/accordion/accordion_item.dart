@@ -180,7 +180,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
                   ),
                 ),
                 FFocusedOutline(
-                  style: style.focusedOutlineStyle,
+                  style: .replace(style.focusedOutlineStyle),
                   focused: states.contains(WidgetState.focused),
                   child: RotationTransition(
                     turns: _iconRotation!,

@@ -105,7 +105,7 @@ class FRadio extends StatelessWidget {
           // rather than the entire FLabel, is outlined.
           child: FFocusedOutline(
             focused: states.contains(WidgetState.focused),
-            style: style.focusedOutlineStyle,
+            style: .replace(style.focusedOutlineStyle),
             child: Stack(
               alignment: .center,
               children: [

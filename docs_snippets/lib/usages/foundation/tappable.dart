@@ -1,13 +1,15 @@
 // ignore_for_file: avoid_redundant_argument_values, sort_child_properties_last
 
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
 
 final tappable = FTappable(
   // {@category "Core"}
   style: (style) => style,
-  focusedOutlineStyle: (style) => style,
+  focusedOutlineStyle: const .merge(
+    color: Colors.black,
+  ),
   selected: false,
   behavior: .translucent,
   builder: (context, states, child) => child!,
@@ -35,7 +37,7 @@ final tappable = FTappable(
 final tappableStatic = FTappable.static(
   // {@category "Core"}
   style: (style) => style,
-  focusedOutlineStyle: (style) => style,
+  focusedOutlineStyle: const .merge(color: Color(0xFF000000)),
   selected: false,
   behavior: .translucent,
   builder: (context, states, child) => child!,

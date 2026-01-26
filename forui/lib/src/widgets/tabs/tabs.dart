@@ -242,7 +242,7 @@ class _TabState extends State<_Tab> {
 
   @override
   Widget build(BuildContext _) => FFocusedOutline(
-    style: widget.style.focusedOutlineStyle,
+    style: .replace(widget.style.focusedOutlineStyle),
     focused: _focused,
     child: Tab(height: widget.style.height, child: widget.label),
   );

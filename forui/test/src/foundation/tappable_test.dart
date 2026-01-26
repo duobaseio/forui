@@ -535,7 +535,7 @@ void main() {
           focusNode: focus,
           onPress: focus.requestFocus,
           onStateChange: (v) => focused = v.current.contains(WidgetState.focused),
-          focusedOutlineStyle: FThemes.zinc.light.style.focusedOutlineStyle,
+          focusedOutlineStyle: .replace(FThemes.zinc.light.style.focusedOutlineStyle),
           child: const Text('focus'),
         ),
       ),
@@ -556,7 +556,7 @@ void main() {
       TestScaffold.app(
         child: FTappable(
           onStateChange: (v) => focused = v.current.contains(WidgetState.focused),
-          focusedOutlineStyle: FThemes.zinc.light.style.focusedOutlineStyle,
+          focusedOutlineStyle: .replace(FThemes.zinc.light.style.focusedOutlineStyle),
           child: FButton(onPress: focus.requestFocus, focusNode: focus, child: const Text('focus')),
         ),
       ),

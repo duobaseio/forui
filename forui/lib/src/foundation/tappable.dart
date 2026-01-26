@@ -9,6 +9,7 @@ import 'package:forui/forui.dart';
 part 'tappable.design.dart';
 
 /// Utilities for retrieving information about the current platform.
+@Deprecated('This needs to be migrated.')
 extension FTouch on Never {
   /// The platforms that use touch as the primary input. This isn't 100% accurate as there are hybrid devices that use
   /// both touch and keyboard/mouse input, i.e., Windows Surface laptops.
@@ -40,7 +41,7 @@ class FTappable extends StatefulWidget {
   final FTappableStyle Function(FTappableStyle style)? style;
 
   /// The style used when the tappable is focused. This tappable will not be outlined if null.
-  final FFocusedOutlineStyle Function(FFocusedOutlineStyle style)? focusedOutlineStyle;
+  final FFocusedOutlineStyleDelta? focusedOutlineStyle;
 
   /// {@macro forui.foundation.doc_templates.semanticsLabel}
   final String? semanticsLabel;
@@ -150,7 +151,7 @@ class FTappable extends StatefulWidget {
   /// Throws [AssertionError] if [builder] and [child] are both null.
   const factory FTappable({
     FTappableStyle Function(FTappableStyle style)? style,
-    FFocusedOutlineStyle Function(FFocusedOutlineStyle style)? focusedOutlineStyle,
+    FFocusedOutlineStyleDelta? focusedOutlineStyle,
     String? semanticsLabel,
     bool excludeSemantics,
     bool autofocus,
