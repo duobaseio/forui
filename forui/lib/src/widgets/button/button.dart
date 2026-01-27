@@ -60,8 +60,8 @@ class FButton extends StatelessWidget {
   /// {@macro forui.foundation.FTappable.onHoverChange}
   final ValueChanged<bool>? onHoverChange;
 
-  /// {@macro forui.foundation.FTappable.onStateChange}
-  final ValueChanged<FWidgetStatesDelta>? onStateChange;
+  /// {@macro forui.foundation.FTappable.onVariantChange}
+  final FTappableVariantChangeCallback? onVariantChange;
 
   /// {@macro forui.foundation.FTappable.shortcuts}
   final Map<ShortcutActivator, Intent>? shortcuts;
@@ -106,7 +106,7 @@ class FButton extends StatelessWidget {
     this.focusNode,
     this.onFocusChange,
     this.onHoverChange,
-    this.onStateChange,
+    this.onVariantChange,
     this.selected = false,
     this.shortcuts,
     this.actions,
@@ -141,7 +141,7 @@ class FButton extends StatelessWidget {
     this.focusNode,
     this.onFocusChange,
     this.onHoverChange,
-    this.onStateChange,
+    this.onVariantChange,
     this.selected = false,
     this.shortcuts,
     this.actions,
@@ -160,7 +160,7 @@ class FButton extends StatelessWidget {
     this.focusNode,
     this.onFocusChange,
     this.onHoverChange,
-    this.onStateChange,
+    this.onVariantChange,
     this.selected = false,
     this.shortcuts,
     this.actions,
@@ -175,13 +175,13 @@ class FButton extends StatelessWidget {
     };
 
     return FTappable(
-      style: style.tappableStyle,
+      style: .replace(style.tappableStyle),
       focusedOutlineStyle: .replace(style.focusedOutlineStyle),
       autofocus: autofocus,
       focusNode: focusNode,
       onFocusChange: onFocusChange,
       onHoverChange: onHoverChange,
-      onStateChange: onStateChange,
+      onVariantChange: onVariantChange,
       onPress: onPress,
       onLongPress: onLongPress,
       onSecondaryPress: onSecondaryPress,
@@ -207,7 +207,7 @@ class FButton extends StatelessWidget {
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
-      ..add(ObjectFlagProperty.has('onStateChange', onStateChange))
+      ..add(ObjectFlagProperty.has('onVariantChange', onVariantChange))
       ..add(DiagnosticsProperty('shortcuts', shortcuts))
       ..add(DiagnosticsProperty('actions', actions))
       ..add(FlagProperty('selected', value: selected, defaultValue: false, ifTrue: 'selected'));
@@ -269,10 +269,8 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
       (_) => _Resolve((context) => style?.call(context.theme.buttonStyles.ghost) ?? context.theme.buttonStyles.ghost);
 
   /// The box decoration.
-  ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
-  final FWidgetStateMap<BoxDecoration> decoration;
+  final FVariants<FTappableVariantConstraint, BoxDecoration, BoxDecorationDelta> decoration;
 
   /// The content's style.
   @override
@@ -307,14 +305,13 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
     required Color color,
     required Color foregroundColor,
   }) : this(
-         decoration: FWidgetStateMap({
-           WidgetState.disabled: BoxDecoration(borderRadius: style.borderRadius, color: colors.disable(color)),
-           WidgetState.hovered | WidgetState.pressed: BoxDecoration(
-             borderRadius: style.borderRadius,
-             color: colors.hover(color),
-           ),
-           WidgetState.any: BoxDecoration(borderRadius: style.borderRadius, color: color),
-         }),
+         decoration: .delta(
+           BoxDecoration(borderRadius: style.borderRadius, color: color),
+           variants: {
+             {.disabled}: .merge(color: colors.disable(color)),
+             {.hovered, .pressed}: .merge(color: colors.hover(color)),
+           },
+         ),
          focusedOutlineStyle: style.focusedOutlineStyle,
          contentStyle: .inherit(
            typography: typography,
@@ -322,13 +319,12 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
            disabled: colors.disable(foregroundColor, colors.disable(color)),
          ),
          iconContentStyle: FButtonIconContentStyle(
-           iconStyle: FWidgetStateMap({
-             WidgetState.disabled: IconThemeData(
-               color: colors.disable(foregroundColor, colors.disable(color)),
-               size: 20,
-             ),
-             WidgetState.any: IconThemeData(color: foregroundColor, size: 20),
-           }),
+           iconStyle: .delta(
+             IconThemeData(color: foregroundColor, size: 20),
+             variants: {
+               {.disabled}: .merge(color: colors.disable(foregroundColor, colors.disable(color))),
+             },
+           ),
          ),
          tappableStyle: style.tappableStyle,
        );
@@ -346,8 +342,8 @@ class FButtonData extends InheritedWidget {
   /// The button's style.
   final FButtonStyle style;
 
-  /// The current states.
-  final Set<WidgetState> states;
+  /// The current variants.
+  final Set<FTappableVariant> states;
 
   /// Creates a [FButtonData].
   const FButtonData({required this.style, required this.states, required super.child, super.key});

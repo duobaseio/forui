@@ -17,7 +17,7 @@ class RawItemContent extends StatelessWidget {
 
   final double top;
   final double bottom;
-  final Set<WidgetState> states;
+  final Set<FTappableVariant> variants;
   final FWidgetStateMap<Color>? dividerColor;
   final double? dividerWidth;
   final FItemDivider dividerType;
@@ -29,7 +29,7 @@ class RawItemContent extends StatelessWidget {
     required this.margin,
     required this.bottom,
     required this.top,
-    required this.states,
+    required this.variants,
     required this.dividerColor,
     required this.dividerWidth,
     required this.dividerType,
@@ -48,19 +48,19 @@ class RawItemContent extends StatelessWidget {
     padding: style.padding,
     top: top,
     bottom: bottom,
-    dividerColor: dividerColor?.resolve(states),
+    dividerColor: dividerColor?.resolve({if (variants.contains(FTappableVariant.disabled)) WidgetState.disabled}),
     dividerWidth: dividerWidth,
     dividerType: dividerType,
     children: [
       if (prefix case final prefix?)
         Padding(
           padding: .directional(end: style.prefixIconSpacing),
-          child: IconTheme(data: style.prefixIconStyle.resolve(states), child: prefix),
+          child: IconTheme(data: style.prefixIconStyle.resolve(variants), child: prefix),
         )
       else
         const SizedBox(),
       DefaultTextStyle.merge(
-        style: style.childTextStyle.resolve(states),
+        style: style.childTextStyle.resolve(variants),
         textHeightBehavior: const TextHeightBehavior(applyHeightToFirstAscent: false, applyHeightToLastDescent: false),
         overflow: .ellipsis,
         child: child,
@@ -76,7 +76,7 @@ class RawItemContent extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('margin', margin))
-      ..add(IterableProperty('states', states))
+      ..add(IterableProperty('variants', variants))
       ..add(DoubleProperty('top', top))
       ..add(DoubleProperty('bottom', bottom))
       ..add(DiagnosticsProperty('dividerColor', dividerColor))
@@ -93,7 +93,7 @@ class FRawItemContentStyle with Diagnosticable, _$FRawItemContentStyleFunctions 
 
   /// The prefix icon style.
   @override
-  final FWidgetStateMap<IconThemeData> prefixIconStyle;
+  final FVariants<FTappableVariantConstraint, IconThemeData, IconThemeDataDelta> prefixIconStyle;
 
   /// The horizontal spacing between the prefix icon and child. Defaults to 10.
   ///
@@ -104,7 +104,7 @@ class FRawItemContentStyle with Diagnosticable, _$FRawItemContentStyleFunctions 
 
   /// The child's text style.
   @override
-  final FWidgetStateMap<TextStyle> childTextStyle;
+  final FVariants<FTappableVariantConstraint, TextStyle, TextStyleDelta> childTextStyle;
 
   /// Creates a [FRawItemContentStyle].
   FRawItemContentStyle({
@@ -117,13 +117,17 @@ class FRawItemContentStyle with Diagnosticable, _$FRawItemContentStyleFunctions 
   /// Creates a [FRawItemContentStyle] that inherits its properties.
   FRawItemContentStyle.inherit({required FColors colors, required FTypography typography})
     : this(
-        prefixIconStyle: FWidgetStateMap({
-          WidgetState.disabled: IconThemeData(color: colors.disable(colors.primary), size: 15),
-          WidgetState.any: IconThemeData(color: colors.primary, size: 15),
-        }),
-        childTextStyle: FWidgetStateMap({
-          WidgetState.disabled: typography.sm.copyWith(color: colors.disable(colors.primary)),
-          WidgetState.any: typography.sm,
-        }),
+        prefixIconStyle: .delta(
+          IconThemeData(color: colors.primary, size: 15),
+          variants: {
+            {.disabled}: .merge(color: colors.disable(colors.primary)),
+          },
+        ),
+        childTextStyle: .delta(
+          typography.sm,
+          variants: {
+            {.disabled}: .merge(color: colors.disable(colors.primary)),
+          },
+        ),
       );
 }

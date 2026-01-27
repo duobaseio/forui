@@ -111,7 +111,7 @@ class _CalendarLayoutState extends State<CalendarLayout> {
     final scale = widget.scale;
     final textStyle = widget.textStyle;
 
-    double height(FLineCalendarStyle style, Set<WidgetState> states) {
+    double height(FLineCalendarStyle style, Set<FTappableVariant> states) {
       final dateHeight = scale.scale(style.dateTextStyle.resolve(states).fontSize ?? textStyle.fontSize ?? 0);
       final weekdayHeight = scale.scale(style.weekdayTextStyle.resolve(states).fontSize ?? textStyle.fontSize ?? 0);
       final otherHeight = widget.style.contentSpacing + (widget.style.contentEdgeSpacing * 2);
@@ -121,9 +121,9 @@ class _CalendarLayoutState extends State<CalendarLayout> {
 
     // We use the height to estimate the width.
     return [
-      height(widget.style, const {.selected}),
-      height(widget.style, const {.selected, .hovered}),
-      height(widget.style, const {.hovered}),
+      height(widget.style, {.selected}),
+      height(widget.style, {.selected, .hovered}),
+      height(widget.style, {.hovered}),
       height(widget.style, const {}),
     ].max!;
   }
@@ -139,10 +139,10 @@ class _CalendarLayoutState extends State<CalendarLayout> {
     final placeholder = widget.today.toNative();
     return SpeculativeLayout(
       children: [
-        ItemContent(style: widget.style, states: const {.selected}, date: placeholder),
-        ItemContent(style: widget.style, states: const {.selected, .hovered}, date: placeholder),
-        ItemContent(style: widget.style, states: const {}, date: placeholder),
-        ItemContent(style: widget.style, states: const {.hovered}, date: placeholder),
+        ItemContent(style: widget.style, variants: {.selected}, date: placeholder),
+        ItemContent(style: widget.style, variants: {.selected, .hovered}, date: placeholder),
+        ItemContent(style: widget.style, variants: const {}, date: placeholder),
+        ItemContent(style: widget.style, variants: {.hovered}, date: placeholder),
         ListView.builder(
           controller: _scrollController,
           scrollDirection: .horizontal,

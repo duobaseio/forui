@@ -135,11 +135,9 @@ class InheritedAccordionData extends InheritedWidget {
 
 /// The [FAccordion]'s style.
 class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
-  /// The title's text style.
-  ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.tappable}
+  /// The title's text style..
   @override
-  final FWidgetStateMap<TextStyle> titleTextStyle;
+  final FVariants<FTappableVariantConstraint, TextStyle, TextStyleDelta> titleTextStyle;
 
   /// The child's default text style.
   @override
@@ -154,10 +152,8 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
   final EdgeInsetsGeometry childPadding;
 
   /// The icon's style.
-  ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.tappable}
   @override
-  final FWidgetStateMap<IconThemeData> iconStyle;
+  final FVariants<FTappableVariantConstraint, IconThemeData, IconThemeDataDelta> iconStyle;
 
   /// The focused outline style.
   @override
@@ -191,16 +187,14 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
   /// Creates a [FDividerStyles] that inherits its properties.
   FAccordionStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        titleTextStyle: FWidgetStateMap({
-          WidgetState.hovered | WidgetState.pressed: typography.base.copyWith(
-            fontWeight: .w500,
-            color: colors.foreground,
-            decoration: .underline,
-          ),
-          WidgetState.any: typography.base.copyWith(fontWeight: .w500, color: colors.foreground),
-        }),
+        titleTextStyle: .delta(
+          typography.base.copyWith(fontWeight: .w500, color: colors.foreground),
+          variants: {
+            {.hovered, .pressed}: const .merge(decoration: .underline),
+          },
+        ),
         childTextStyle: typography.sm.copyWith(color: colors.foreground),
-        iconStyle: .all(IconThemeData(color: colors.mutedForeground, size: 20)),
+        iconStyle: .raw(IconThemeData(color: colors.mutedForeground, size: 20)),
         focusedOutlineStyle: style.focusedOutlineStyle,
         dividerStyle: FDividerStyle(color: colors.border, padding: .zero),
         tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),

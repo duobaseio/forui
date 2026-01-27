@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
@@ -16,47 +14,45 @@ part 'variant_platform.dart';
 sealed class FVariantConstraint {
   /// Returns the more specific of two constraints.
   ///
-  /// Specificity is determined first by tier, with higher tiers winning.
+  /// Specificity is determined tier-by-tier from highest to lowest. At each tier, the constraint with more operands
+  /// wins. This means a compound constraint with two tier-2 operands beats one with only one tier-2 operand, even if
+  /// the latter has additional lower-tier operands.
   ///
   /// ```dart
   /// max(hovered, disabled); // disabled (tier 2 > tier 1)
+  /// max(disabled.and(selected), disabled.and(hovered)); // disabled & selected (2 tier-2 operands > 1 tier-2 + 1 tier-1)
   /// ```
   ///
-  /// Ties are broken by operand count, with the highest count winning.
+  /// If all tiers have equal counts, ties are broken by total operand count, then lexicographically by sorted operand
+  /// names.
   ///
   /// ```dart
   /// max(hovered, hovered.and(focused)); // hovered & focused (2 > 1)
-  /// ```
-  ///
-  /// Further ties are broken lexicographically by sorted operand names.
-  ///
-  /// ```dart
   /// max(hovered.and(focused), focused.and(pressed)); // focused & hovered ("focused" < "pressed")
   /// ```
   static T max<T extends FVariantConstraint>(T a, T b) {
-    final aSpecificity = a._specificity;
-    final bSpecificity = b._specificity;
-
-    switch (aSpecificity.$1.compareTo(bSpecificity.$1)) {
-      case < 0:
-        return b;
-
-      case > 0:
-        return a;
-    }
-
-    switch (aSpecificity.$2.compareTo(bSpecificity.$2)) {
-      case < 0:
-        return b;
-
-      case > 0:
-        return a;
-    }
+    const maxTiers = 3;
 
     final operandsA = <String>[];
     final operandsB = <String>[];
-    a._accept(operandsA);
-    b._accept(operandsB);
+    final tiersA = List.filled(maxTiers, 0);
+    final tiersB = List.filled(maxTiers, 0);
+    a._accept(operandsA, tiersA);
+    b._accept(operandsB, tiersB);
+
+    // Compare tier-by-tier from highest to lowest.
+    for (var tier = maxTiers - 1; tier >= 0; tier--) {
+      if (tiersA[tier] != tiersB[tier]) {
+        return tiersA[tier] > tiersB[tier] ? a : b;
+      }
+    }
+
+    // Fall back to total operand count.
+    if (operandsA.length != operandsB.length) {
+      return operandsA.length > operandsB.length ? a : b;
+    }
+
+    // Fall back to lexicographic comparison.
     operandsA.sort();
     operandsB.sort();
 
@@ -75,9 +71,7 @@ sealed class FVariantConstraint {
   /// ```
   bool satisfiedBy(Set<FVariant> variants);
 
-  void _accept(List<String> operands);
-
-  (int tier, int operands) get _specificity;
+  void _accept(List<String> operands, List<int> tiers);
 }
 
 /// Represents a condition under which a widget can be styled differently.
@@ -102,10 +96,10 @@ class Value implements FVariant {
   bool satisfiedBy(Set<FVariant> variants) => variants.contains(this);
 
   @override
-  void _accept(List<String> operands) => operands.add(_value);
-
-  @override
-  (int tier, int operands) get _specificity => (_tier, 1);
+  void _accept(List<String> operands, List<int> tiers) {
+    operands.add(_value);
+    tiers[_tier] = tiers[_tier] + 1;
+  }
 
   @override
   bool operator ==(Object other) =>
@@ -129,17 +123,9 @@ class And implements FVariantConstraint {
   bool satisfiedBy(Set<FVariant> variants) => _left.satisfiedBy(variants) && _right.satisfiedBy(variants);
 
   @override
-  void _accept(List<String> operands) {
-    _left._accept(operands);
-    _right._accept(operands);
-  }
-
-  @override
-  (int tier, int operands) get _specificity {
-    final left = _left._specificity;
-    final right = _right._specificity;
-
-    return (max(left.$1, right.$1), left.$2 + right.$2);
+  void _accept(List<String> operands, List<int> tiers) {
+    _left._accept(operands, tiers);
+    _right._accept(operands, tiers);
   }
 
   @override
@@ -166,10 +152,7 @@ class Not implements FVariantConstraint {
   bool satisfiedBy(Set<FVariant> variants) => !_operand.satisfiedBy(variants);
 
   @override
-  void _accept(List<String> operands) => _operand._accept(operands);
-
-  @override
-  (int tier, int operands) get _specificity => _operand._specificity;
+  void _accept(List<String> operands, List<int> tiers) => _operand._accept(operands, tiers);
 
   @override
   bool operator ==(Object other) =>

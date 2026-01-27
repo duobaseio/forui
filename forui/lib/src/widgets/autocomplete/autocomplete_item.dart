@@ -234,15 +234,18 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
     required FTypography typography,
   }) {
     const padding = EdgeInsetsDirectional.only(start: 11, top: 7.5, bottom: 7.5, end: 6);
-    final iconStyle = FWidgetStateMap({
-      WidgetState.disabled: IconThemeData(color: colors.disable(colors.primary), size: 15),
-      WidgetState.any: IconThemeData(color: colors.primary, size: 15),
-    });
-    final textStyle = FWidgetStateMap({
-      WidgetState.disabled: typography.sm.copyWith(color: colors.disable(colors.primary)),
-      WidgetState.any: typography.sm.copyWith(color: colors.primary),
-    });
-
+    final iconStyle = FVariants<FTappableVariantConstraint, IconThemeData, IconThemeDataDelta>.delta(
+      IconThemeData(color: colors.primary, size: 15),
+      variants: {
+        {.disabled}: .merge(color: colors.disable(colors.primary)),
+      },
+    );
+    final textStyle = FVariants<FTappableVariantConstraint, TextStyle, TextStyleDelta>.delta(
+      typography.sm,
+      variants: {
+        {.disabled}: .merge(color: colors.disable(colors.primary)),
+      },
+    );
     return .new(
       labelTextStyle: FWidgetStateMap({
         WidgetState.disabled: typography.sm.copyWith(
@@ -254,27 +257,32 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
       dividerColor: .all(colors.border),
       dividerWidth: style.borderWidth,
       itemStyle: FItemStyle(
-        backgroundColor: .all(null),
-        decoration: FWidgetStateMap({
-          ~WidgetState.disabled & (WidgetState.focused | WidgetState.hovered | WidgetState.pressed): BoxDecoration(
-            color: colors.secondary,
-            borderRadius: style.borderRadius,
-          ),
-        }),
+        backgroundColor: const .raw(null),
+        decoration: FVariants(
+          const BoxDecoration(),
+          variants: {
+            {.disabled}: const BoxDecoration(),
+            {.focused, .hovered, .pressed}: BoxDecoration(color: colors.secondary, borderRadius: style.borderRadius),
+          },
+        ),
         contentStyle: .inherit(colors: colors, typography: typography).copyWith(
           padding: padding,
           prefixIconStyle: iconStyle,
           prefixIconSpacing: 10,
           titleTextStyle: textStyle,
           titleSpacing: 4,
-          subtitleTextStyle: FWidgetStateMap({
-            WidgetState.disabled: typography.xs.copyWith(color: colors.disable(colors.mutedForeground)),
-            WidgetState.any: typography.xs.copyWith(color: colors.mutedForeground),
-          }),
-          suffixIconStyle: FWidgetStateMap({
-            WidgetState.disabled: IconThemeData(color: colors.disable(colors.primary), size: 15),
-            WidgetState.any: IconThemeData(color: colors.primary, size: 15),
-          }),
+          subtitleTextStyle: .delta(
+            typography.xs.copyWith(color: colors.mutedForeground),
+            variants: {
+              {.disabled}: .merge(color: colors.disable(colors.mutedForeground)),
+            },
+          ),
+          suffixIconStyle: .delta(
+            IconThemeData(color: colors.primary, size: 15),
+            variants: {
+              {.disabled}: .merge(color: colors.disable(colors.primary)),
+            },
+          ),
         ),
         rawItemContentStyle: FRawItemContentStyle(
           padding: padding,

@@ -196,18 +196,18 @@ class Action extends StatelessWidget {
   Widget build(BuildContext context) => Padding(
     padding: style.itemPadding,
     child: FTappable(
-      style: style.actionTappableStyle,
+      style: .replace(style.actionTappableStyle),
       semanticsLabel: semanticsLabel,
       focusedOutlineStyle: .replace(context.theme.style.focusedOutlineStyle),
       onPress: onPress,
-      builder: (context, states, child) => DecoratedBox(
-        decoration: style.itemDecoration.resolve(states),
+      builder: (context, variants, child) => DecoratedBox(
+        decoration: style.itemDecoration.resolve(variants),
         child: ConstrainedBox(
           constraints: style.itemConstraints,
           child: DefaultTextStyle(
-            style: style.itemTextStyle.resolve(states),
+            style: style.itemTextStyle.resolve(variants),
             child: Center(
-              child: IconTheme(data: style.itemIconStyle.resolve(states), child: child!),
+              child: IconTheme(data: style.itemIconStyle.resolve(variants), child: child!),
             ),
           ),
         ),
@@ -237,16 +237,16 @@ class _Page extends StatelessWidget {
       child: ListenableBuilder(
         listenable: controller,
         builder: (_, _) => FTappable(
-          style: style.pageTappableStyle,
+          style: .replace(style.pageTappableStyle),
           focusedOutlineStyle: .replace(style.focusedOutlineStyle),
           selected: controller.value == page,
           onPress: () => controller.value = page,
-          builder: (_, states, _) => DecoratedBox(
-            decoration: style.itemDecoration.resolve(states),
+          builder: (_, variants, _) => DecoratedBox(
+            decoration: style.itemDecoration.resolve(variants),
             child: ConstrainedBox(
               constraints: style.itemConstraints,
               child: DefaultTextStyle(
-                style: style.itemTextStyle.resolve(states),
+                style: style.itemTextStyle.resolve(variants),
                 child: Center(child: Text('${page + 1}')),
               ),
             ),

@@ -21,7 +21,7 @@ typedef FCalendarDayData = ({
 @internal
 abstract class Entry extends StatelessWidget {
   final FCalendarEntryStyle style;
-  final ValueWidgetBuilder<Set<WidgetState>> builder;
+  final ValueWidgetBuilder<Set<FTappableVariant>> builder;
 
   factory Entry.day({
     required FCalendarDayPickerStyle style,
@@ -41,7 +41,7 @@ abstract class Entry extends StatelessWidget {
 
     final entryStyle = current ? style.current : style.enclosing;
 
-    Widget builder(BuildContext context, Set<WidgetState> states, Widget? _) {
+    Widget builder(BuildContext context, Set<FTappableVariant> states, Widget? _) {
       final yesterday = isSelected && selected(date.yesterday) ? Radius.zero : entryStyle.radius;
       final tomorrow = isSelected && selected(date.tomorrow) ? Radius.zero : entryStyle.radius;
       return dayBuilder(
@@ -87,7 +87,7 @@ abstract class Entry extends StatelessWidget {
     required ValueChanged<LocalDate> onPress,
     required String Function(LocalDate date) format,
   }) {
-    Widget builder(BuildContext _, Set<WidgetState> states, Widget? _) => _Content(
+    Widget builder(BuildContext _, Set<FTappableVariant> states, Widget? _) => _Content(
       style: style,
       borderRadius: .all(style.radius),
       text: format(date),
@@ -169,7 +169,7 @@ class _UnselectableEntry extends Entry {
 
   @override
   Widget build(BuildContext context) =>
-      ExcludeSemantics(child: builder(context, {if (selected) WidgetState.selected}, null));
+      ExcludeSemantics(child: builder(context, {if (selected) .selected}, null));
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -182,7 +182,7 @@ class _Content extends StatelessWidget {
   final FCalendarEntryStyle style;
   final BorderRadiusGeometry borderRadius;
   final String text;
-  final Set<WidgetState> states;
+  final Set<FTappableVariant> states;
   final bool current;
 
   const _Content({
@@ -226,22 +226,16 @@ class _Content extends StatelessWidget {
 /// A calendar entry's style.
 class FCalendarEntryStyle with Diagnosticable, _$FCalendarEntryStyleFunctions {
   /// The day's background color.
-  ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
-  final FWidgetStateMap<Color> backgroundColor;
+  final FVariants<FTappableVariantConstraint, Color, Delta<Color>> backgroundColor;
 
   /// The border.
-  ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
-  final FWidgetStateMap<Color?> borderColor;
+  final FVariants<FTappableVariantConstraint, Color?, Delta<Color?>> borderColor;
 
   /// The day's text style.
-  ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
-  final FWidgetStateMap<TextStyle> textStyle;
+  final FVariants<FTappableVariantConstraint, TextStyle, TextStyleDelta> textStyle;
 
   /// The entry border's radius. Defaults to `Radius.circular(4)`.
   @override

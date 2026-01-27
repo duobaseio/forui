@@ -257,21 +257,26 @@ class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
         headerStyle: FCalendarHeaderStyle.inherit(colors: colors, typography: typography, style: style),
         dayPickerStyle: FCalendarDayPickerStyle.inherit(colors: colors, typography: typography),
         yearMonthPickerStyle: FCalendarEntryStyle(
-          backgroundColor: FWidgetStateMap({
-            (WidgetState.hovered | WidgetState.pressed) & ~WidgetState.disabled: colors.secondary,
-            WidgetState.any: colors.background,
-          }),
-          borderColor: FWidgetStateMap({
-            WidgetState.disabled: colors.background,
-            WidgetState.focused: colors.foreground,
-          }),
-          textStyle: FWidgetStateMap({
-            WidgetState.disabled: typography.base.copyWith(
-              color: colors.disable(colors.mutedForeground),
-              fontWeight: .w500,
-            ),
-            WidgetState.any: typography.base.copyWith(color: colors.foreground, fontWeight: .w500),
-          }),
+          backgroundColor: FVariants(
+            colors.background,
+            variants: {
+              {.disabled}: colors.background,
+              {.hovered, .pressed}: colors.secondary,
+            },
+          ),
+          borderColor: FVariants(
+            null,
+            variants: {
+              {.disabled}: colors.background,
+              {.focused}: colors.foreground,
+            },
+          ),
+          textStyle: .delta(
+            typography.base.copyWith(color: colors.foreground, fontWeight: .w500),
+            variants: {
+              {.disabled}: .merge(color: colors.disable(colors.mutedForeground)),
+            },
+          ),
           radius: const .circular(8),
         ),
         decoration: BoxDecoration(

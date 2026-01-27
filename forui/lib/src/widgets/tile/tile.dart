@@ -80,8 +80,8 @@ class FTile extends StatelessWidget with FTileMixin {
   /// {@macro forui.foundation.FTappable.onHoverChange}
   final ValueChanged<bool>? onHoverChange;
 
-  /// {@macro forui.foundation.FTappable.onStateChange}
-  final ValueChanged<FWidgetStatesDelta>? onStateChange;
+  /// {@macro forui.foundation.FTappable.onVariantChange}
+  final FTappableVariantChangeCallback? onVariantChange;
 
   /// {@macro forui.foundation.FTappable.shortcuts}
   final Map<ShortcutActivator, Intent>? shortcuts;
@@ -152,7 +152,7 @@ class FTile extends StatelessWidget with FTileMixin {
     this.focusNode,
     this.onFocusChange,
     this.onHoverChange,
-    this.onStateChange,
+    this.onVariantChange,
     this.onPress,
     this.onLongPress,
     this.onSecondaryPress,
@@ -174,7 +174,7 @@ class FTile extends StatelessWidget with FTileMixin {
          focusNode: focusNode,
          onFocusChange: onFocusChange,
          onHoverChange: onHoverChange,
-         onStateChange: onStateChange,
+         onVariantChange: onVariantChange,
          onPress: onPress,
          onLongPress: onLongPress,
          onSecondaryPress: onSecondaryPress,
@@ -209,7 +209,7 @@ class FTile extends StatelessWidget with FTileMixin {
     this.focusNode,
     this.onFocusChange,
     this.onHoverChange,
-    this.onStateChange,
+    this.onVariantChange,
     this.onPress,
     this.onLongPress,
     this.onSecondaryPress,
@@ -227,7 +227,7 @@ class FTile extends StatelessWidget with FTileMixin {
          focusNode: focusNode,
          onFocusChange: onFocusChange,
          onHoverChange: onHoverChange,
-         onStateChange: onStateChange,
+         onVariantChange: onVariantChange,
          onPress: onPress,
          onLongPress: onLongPress,
          onSecondaryPress: onSecondaryPress,
@@ -257,7 +257,7 @@ class FTile extends StatelessWidget with FTileMixin {
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
-      ..add(ObjectFlagProperty.has('onChange', onStateChange))
+      ..add(ObjectFlagProperty.has('onVariantChange', onVariantChange))
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
       ..add(ObjectFlagProperty.has('onSecondaryPress', onSecondaryPress))
@@ -283,57 +283,61 @@ class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
   /// Creates a [FTileStyle].
   FTileStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        backgroundColor: .all(colors.background),
-        decoration: FWidgetStateMap({
-          WidgetState.disabled: BoxDecoration(
-            color: colors.disable(colors.secondary),
-            border: .all(color: colors.border),
-            borderRadius: style.borderRadius,
-          ),
-          WidgetState.hovered | WidgetState.pressed: BoxDecoration(
-            color: colors.secondary,
-            border: .all(color: colors.border),
-            borderRadius: style.borderRadius,
-          ),
-          WidgetState.any: BoxDecoration(
-            color: colors.background,
-            border: .all(color: colors.border),
-            borderRadius: style.borderRadius,
-          ),
-        }),
+        backgroundColor: .raw(colors.background),
+        decoration: .delta(
+          BoxDecoration(color: colors.background, border: .all(color: colors.border), borderRadius: style.borderRadius),
+          variants: {
+            {.disabled}: .merge(color: colors.disable(colors.secondary)),
+            {.hovered, .pressed}: .merge(color: colors.secondary),
+          },
+        ),
         contentStyle: FItemContentStyle(
           padding: const .fromSTEB(15, 13, 10, 13),
-          prefixIconStyle: FWidgetStateMap({
-            WidgetState.disabled: IconThemeData(color: colors.disable(colors.primary), size: 18),
-            WidgetState.any: IconThemeData(color: colors.primary, size: 18),
-          }),
-          titleTextStyle: FWidgetStateMap({
-            WidgetState.disabled: typography.base.copyWith(color: colors.disable(colors.primary)),
-            WidgetState.any: typography.base,
-          }),
-          subtitleTextStyle: FWidgetStateMap({
-            WidgetState.disabled: typography.xs.copyWith(color: colors.disable(colors.mutedForeground)),
-            WidgetState.any: typography.xs.copyWith(color: colors.mutedForeground),
-          }),
-          detailsTextStyle: FWidgetStateMap({
-            WidgetState.disabled: typography.base.copyWith(color: colors.disable(colors.mutedForeground)),
-            WidgetState.any: typography.base.copyWith(color: colors.mutedForeground),
-          }),
-          suffixIconStyle: FWidgetStateMap({
-            WidgetState.disabled: IconThemeData(color: colors.disable(colors.mutedForeground), size: 18),
-            WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 18),
-          }),
+          prefixIconStyle: .delta(
+            IconThemeData(color: colors.primary, size: 18),
+            variants: {
+              {.disabled}: .merge(color: colors.disable(colors.primary)),
+            },
+          ),
+          titleTextStyle: .delta(
+            typography.base,
+            variants: {
+              {.disabled}: .merge(color: colors.disable(colors.primary)),
+            },
+          ),
+          subtitleTextStyle: .delta(
+            typography.xs.copyWith(color: colors.mutedForeground),
+            variants: {
+              {.disabled}: .merge(color: colors.disable(colors.mutedForeground)),
+            },
+          ),
+          detailsTextStyle: .delta(
+            typography.base.copyWith(color: colors.mutedForeground),
+            variants: {
+              {.disabled}: .merge(color: colors.disable(colors.mutedForeground)),
+            },
+          ),
+          suffixIconStyle: .delta(
+            IconThemeData(color: colors.mutedForeground, size: 18),
+            variants: {
+              {.disabled}: .merge(color: colors.disable(colors.mutedForeground)),
+            },
+          ),
         ),
         rawItemContentStyle: FRawItemContentStyle(
           padding: const .fromSTEB(15, 13, 10, 13),
-          prefixIconStyle: FWidgetStateMap({
-            WidgetState.disabled: IconThemeData(color: colors.disable(colors.primary), size: 18),
-            WidgetState.any: IconThemeData(color: colors.primary, size: 18),
-          }),
-          childTextStyle: FWidgetStateMap({
-            WidgetState.disabled: typography.base.copyWith(color: colors.disable(colors.primary)),
-            WidgetState.any: typography.base,
-          }),
+          prefixIconStyle: .delta(
+            IconThemeData(color: colors.primary, size: 18),
+            variants: {
+              {.disabled}: .merge(color: colors.disable(colors.primary)),
+            },
+          ),
+          childTextStyle: .delta(
+            typography.base,
+            variants: {
+              {.disabled}: .merge(color: colors.disable(colors.primary)),
+            },
+          ),
         ),
         tappableStyle: style.tappableStyle.copyWith(
           motion: FTappableMotion.none,

@@ -84,7 +84,7 @@ void main() {
     FWidgetStatesDelta? delta;
     await tester.pumpWidget(
       TestScaffold(
-        child: FItem(title: const Text('item'), onStateChange: (s) => delta = s),
+        child: FItem(title: const Text('item'), onVariantChange: (s) => delta = s),
       ),
     );
 
@@ -100,7 +100,7 @@ void main() {
     FWidgetStatesDelta? delta;
     await tester.pumpWidget(
       TestScaffold(
-        child: FItem(title: const Text('item'), onSecondaryPress: () {}, onStateChange: (s) => delta = s),
+        child: FItem(title: const Text('item'), onSecondaryPress: () {}, onVariantChange: (s) => delta = s),
       ),
     );
 
@@ -116,7 +116,7 @@ void main() {
     FWidgetStatesDelta? delta;
     await tester.pumpWidget(
       TestScaffold(
-        child: FItem(title: const Text('item'), onSecondaryLongPress: () {}, onStateChange: (s) => delta = s),
+        child: FItem(title: const Text('item'), onSecondaryLongPress: () {}, onVariantChange: (s) => delta = s),
       ),
     );
 

@@ -63,21 +63,16 @@ class FButtonStyles with Diagnosticable, _$FButtonStylesFunctions {
           foregroundColor: colors.destructiveForeground,
         ),
         outline: FButtonStyle(
-          decoration: FWidgetStateMap({
-            WidgetState.disabled: BoxDecoration(
-              border: .all(color: colors.disable(colors.border)),
-              borderRadius: style.borderRadius,
-            ),
-            WidgetState.hovered | WidgetState.pressed: BoxDecoration(
-              border: .all(color: colors.border),
-              borderRadius: style.borderRadius,
-              color: colors.secondary,
-            ),
-            WidgetState.any: BoxDecoration(
+          decoration: .delta(
+            BoxDecoration(
               border: .all(color: colors.border),
               borderRadius: style.borderRadius,
             ),
-          }),
+            variants: {
+              {.disabled}: .merge(border: .all(color: colors.disable(colors.border))),
+              {.hovered, .pressed}: .merge(color: colors.secondary),
+            },
+          ),
           focusedOutlineStyle: style.focusedOutlineStyle,
           contentStyle: .inherit(
             typography: typography,
@@ -91,14 +86,13 @@ class FButtonStyles with Diagnosticable, _$FButtonStylesFunctions {
           tappableStyle: style.tappableStyle,
         ),
         ghost: FButtonStyle(
-          decoration: FWidgetStateMap({
-            WidgetState.disabled: BoxDecoration(borderRadius: style.borderRadius),
-            WidgetState.hovered | WidgetState.pressed: BoxDecoration(
-              borderRadius: style.borderRadius,
-              color: colors.secondary,
-            ),
-            WidgetState.any: BoxDecoration(borderRadius: style.borderRadius),
-          }),
+          decoration: .delta(
+            BoxDecoration(borderRadius: style.borderRadius),
+            variants: {
+              {.disabled}: const .merge(),
+              {.hovered, .pressed}: .merge(color: colors.secondary),
+            },
+          ),
           focusedOutlineStyle: style.focusedOutlineStyle,
           contentStyle: .inherit(
             typography: typography,

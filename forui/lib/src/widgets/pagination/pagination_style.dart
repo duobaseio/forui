@@ -18,22 +18,16 @@ class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
   final BoxConstraints itemConstraints;
 
   /// The icon's style.
-  ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
-  final FWidgetStateMap<IconThemeData> itemIconStyle;
+  final FVariants<FTappableVariantConstraint, IconThemeData, IconThemeDataDelta> itemIconStyle;
 
   /// The decoration applied to the pagination item.
-  ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
-  final FWidgetStateMap<BoxDecoration> itemDecoration;
+  final FVariants<FTappableVariantConstraint, BoxDecoration, BoxDecorationDelta> itemDecoration;
 
   /// The default text style applied to the pagination item.
-  ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
-  final FWidgetStateMap<TextStyle> itemTextStyle;
+  final FVariants<FTappableVariantConstraint, TextStyle, TextStyleDelta> itemTextStyle;
 
   /// The ellipsis's text style.
   @override
@@ -67,20 +61,21 @@ class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
   /// Creates a [FPaginationStyle] that inherits its properties.
   FPaginationStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        itemIconStyle: .all(IconThemeData(color: colors.primary, size: 18)),
-        itemDecoration: FWidgetStateMap({
-          WidgetState.selected & (WidgetState.hovered | WidgetState.pressed): BoxDecoration(
-            borderRadius: style.borderRadius,
-            color: colors.hover(colors.primary),
-          ),
-          WidgetState.selected: BoxDecoration(borderRadius: style.borderRadius, color: colors.primary),
-          WidgetState.hovered: BoxDecoration(borderRadius: style.borderRadius, color: colors.border),
-          WidgetState.any: BoxDecoration(borderRadius: style.borderRadius, color: colors.background),
-        }),
-        itemTextStyle: FWidgetStateMap({
-          WidgetState.selected: typography.sm.copyWith(color: colors.primaryForeground),
-          WidgetState.any: typography.sm.copyWith(color: colors.primary),
-        }),
+        itemIconStyle: .raw(IconThemeData(color: colors.primary, size: 18)),
+        itemDecoration: .delta(
+          BoxDecoration(borderRadius: style.borderRadius, color: colors.background),
+          variants: {
+            {.selected.and(.hovered), .selected.and(.pressed)}: .merge(color: colors.hover(colors.primary)),
+            {.selected}: .merge(color: colors.primary),
+            {.hovered}: .merge(color: colors.border),
+          },
+        ),
+        itemTextStyle: .delta(
+          typography.sm.copyWith(color: colors.primary),
+          variants: {
+            {.selected}: .merge(color: colors.primaryForeground),
+          },
+        ),
         ellipsisTextStyle: typography.sm.copyWith(color: colors.primary),
         actionTappableStyle: style.tappableStyle,
         pageTappableStyle: style.tappableStyle,
