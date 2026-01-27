@@ -35,8 +35,8 @@ class FHeaderAction extends StatelessWidget {
   /// {@macro forui.foundation.FTappable.onHoverChange}
   final ValueChanged<bool>? onHoverChange;
 
-  /// {@macro forui.foundation.FTappable.onStateChange}
-  final ValueChanged<FWidgetStatesDelta>? onStateChange;
+  /// {@macro forui.foundation.FTappable.onVariantChange}
+  final FTappableVariantChangeCallback? onVariantChange;
 
   /// {@macro forui.foundation.FTappable.onPress}
   final VoidCallback? onPress;
@@ -67,7 +67,7 @@ class FHeaderAction extends StatelessWidget {
     this.focusNode,
     this.onFocusChange,
     this.onHoverChange,
-    this.onStateChange,
+    this.onVariantChange,
     this.onLongPress,
     this.onSecondaryPress,
     this.onSecondaryLongPress,
@@ -85,7 +85,7 @@ class FHeaderAction extends StatelessWidget {
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
     ValueChanged<bool>? onHoverChange,
-    ValueChanged<FWidgetStatesDelta>? onStateChange,
+    FTappableVariantChangeCallback? onVariantChange,
     VoidCallback? onLongPress,
     VoidCallback? onSecondaryPress,
     VoidCallback? onSecondaryLongPress,
@@ -101,7 +101,7 @@ class FHeaderAction extends StatelessWidget {
     focusNode: focusNode,
     onFocusChange: onFocusChange,
     onHoverChange: onHoverChange,
-    onStateChange: onStateChange,
+    onVariantChange: onVariantChange,
     onLongPress: onLongPress,
     onSecondaryPress: onSecondaryPress,
     onSecondaryLongPress: onSecondaryLongPress,
@@ -118,7 +118,7 @@ class FHeaderAction extends StatelessWidget {
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
     ValueChanged<bool>? onHoverChange,
-    ValueChanged<FWidgetStatesDelta>? onStateChange,
+    FTappableVariantChangeCallback? onVariantChange,
     VoidCallback? onLongPress,
     VoidCallback? onSecondaryPress,
     VoidCallback? onSecondaryLongPress,
@@ -133,7 +133,7 @@ class FHeaderAction extends StatelessWidget {
     focusNode: focusNode,
     onFocusChange: onFocusChange,
     onHoverChange: onHoverChange,
-    onStateChange: onStateChange,
+    onVariantChange: onVariantChange,
     onLongPress: onLongPress,
     onSecondaryPress: onSecondaryPress,
     onSecondaryLongPress: onSecondaryLongPress,
@@ -146,12 +146,12 @@ class FHeaderAction extends StatelessWidget {
   Widget build(BuildContext context) {
     final style = this.style ?? FHeaderData.of(context).actionStyle;
     return FTappable(
-      style: style.tappableStyle,
+      style: .replace(style.tappableStyle),
       autofocus: autofocus,
       focusNode: focusNode,
       onFocusChange: onFocusChange,
       onHoverChange: onHoverChange,
-      onStateChange: onStateChange,
+      onVariantChange: onVariantChange,
       focusedOutlineStyle: .replace(style.focusedOutlineStyle),
       semanticsLabel: semanticsLabel,
       onPress: onPress,
@@ -177,7 +177,7 @@ class FHeaderAction extends StatelessWidget {
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
-      ..add(ObjectFlagProperty.has('onStateChange', onStateChange))
+      ..add(ObjectFlagProperty.has('onVariantChange', onVariantChange))
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
       ..add(ObjectFlagProperty.has('onSecondaryPress', onSecondaryPress))
@@ -190,10 +190,8 @@ class FHeaderAction extends StatelessWidget {
 /// [FHeaderAction]'s style.
 class FHeaderActionStyle with Diagnosticable, _$FHeaderActionStyleFunctions {
   /// The icon's style.
-  ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.tappable}
   @override
-  final FWidgetStateMap<IconThemeData> iconStyle;
+  final FVariants<FTappableVariantConstraint, IconThemeData, IconThemeDataDelta> iconStyle;
 
   /// The outline style when this action is focused.
   @override
@@ -208,10 +206,12 @@ class FHeaderActionStyle with Diagnosticable, _$FHeaderActionStyleFunctions {
 
   /// Creates a [FHeaderActionStyle] that inherits its properties.
   FHeaderActionStyle.inherit({required FColors colors, required FStyle style, required double size})
-    : iconStyle = FWidgetStateMap({
-        WidgetState.disabled: IconThemeData(color: colors.disable(colors.foreground), size: size),
-        WidgetState.any: IconThemeData(color: colors.foreground, size: size),
-      }),
+    : iconStyle = .delta(
+        IconThemeData(color: colors.foreground, size: size),
+        variants: {
+          {.disabled}: .merge(color: colors.disable(colors.foreground)),
+        },
+      ),
       focusedOutlineStyle = style.focusedOutlineStyle,
       tappableStyle = style.tappableStyle;
 }

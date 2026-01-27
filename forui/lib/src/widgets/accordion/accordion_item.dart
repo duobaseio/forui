@@ -47,8 +47,8 @@ class FAccordionItem extends StatefulWidget with FAccordionItemMixin {
   /// {@macro forui.foundation.FTappable.onHoverChange}
   final ValueChanged<bool>? onHoverChange;
 
-  /// {@macro forui.foundation.FTappable.onStateChange}
-  final ValueChanged<FWidgetStatesDelta>? onStateChange;
+  /// {@macro forui.foundation.FTappable.onVariantChange}
+  final FTappableVariantChangeCallback? onVariantChange;
 
   /// The child.
   final Widget child;
@@ -64,7 +64,7 @@ class FAccordionItem extends StatefulWidget with FAccordionItemMixin {
     this.focusNode,
     this.onFocusChange,
     this.onHoverChange,
-    this.onStateChange,
+    this.onVariantChange,
     super.key,
   });
 
@@ -81,7 +81,7 @@ class FAccordionItem extends StatefulWidget with FAccordionItemMixin {
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
-      ..add(ObjectFlagProperty.has('onStateChange', onStateChange));
+      ..add(ObjectFlagProperty.has('onVariantChange', onVariantChange));
   }
 }
 
@@ -158,12 +158,12 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
       crossAxisAlignment: .stretch,
       children: [
         FTappable(
-          style: style.tappableStyle,
+          style: .replace(style.tappableStyle),
           autofocus: widget.autofocus,
           focusNode: widget.focusNode,
           onFocusChange: widget.onFocusChange,
           onHoverChange: widget.onHoverChange,
-          onStateChange: widget.onStateChange,
+          onVariantChange: widget.onVariantChange,
           onPress: () => controller.toggle(index),
           builder: (_, states, _) => Padding(
             padding: style.titlePadding,
@@ -181,7 +181,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
                 ),
                 FFocusedOutline(
                   style: .replace(style.focusedOutlineStyle),
-                  focused: states.contains(WidgetState.focused),
+                  focused: states.contains(FTappableVariant.focused),
                   child: RotationTransition(
                     turns: _iconRotation!,
                     child: IconTheme(data: style.iconStyle.resolve(states), child: widget.icon),

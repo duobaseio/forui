@@ -59,10 +59,10 @@ class Touch implements FVariant {
   bool satisfiedBy(Set<FVariant> variants) => variants.any((v) => v is Touch);
 
   @override
-  void _accept(List<String> operands) => operands.add('touch');
-
-  @override
-  (int tier, int operands) get _specificity => (0, 1);
+  void _accept(List<String> operands, List<int> tiers) {
+    operands.add('touch');
+    tiers[0] = tiers[0] + 1;
+  }
 
   @override
   String toString() => 'touch';
@@ -75,13 +75,10 @@ class _Android extends Touch {
   bool satisfiedBy(Set<FVariant> variants) => variants.contains(const _Android());
 
   @override
-  void _accept(List<String> operands) {
-    super._accept(operands);
-    operands.add('android');
+  void _accept(List<String> operands, List<int> tiers) {
+    operands..add('touch')..add('android');
+    tiers[0] = tiers[0] + 2;
   }
-
-  @override
-  (int tier, int operands) get _specificity => (0, 2);
 
   @override
   String toString() => '{touch, android}';
@@ -94,13 +91,10 @@ class _Ios extends Touch {
   bool satisfiedBy(Set<FVariant> variants) => variants.contains(const _Ios());
 
   @override
-  void _accept(List<String> operands) {
-    super._accept(operands);
-    operands.add('iOS');
+  void _accept(List<String> operands, List<int> tiers) {
+    operands..add('touch')..add('iOS');
+    tiers[0] = tiers[0] + 2;
   }
-
-  @override
-  (int tier, int operands) get _specificity => (0, 2);
 
   @override
   String toString() => '{touch, iOS}';
@@ -113,13 +107,10 @@ class _Fuchsia extends Touch {
   bool satisfiedBy(Set<FVariant> variants) => variants.contains(const _Fuchsia());
 
   @override
-  void _accept(List<String> operands) {
-    super._accept(operands);
-    operands.add('fuchsia');
+  void _accept(List<String> operands, List<int> tiers) {
+    operands..add('touch')..add('fuchsia');
+    tiers[0] = tiers[0] + 2;
   }
-
-  @override
-  (int tier, int operands) get _specificity => (0, 2);
 
   @override
   String toString() => '{touch, fuchsia}';
@@ -133,10 +124,10 @@ class Desktop implements FVariant {
   bool satisfiedBy(Set<FVariant> variants) => variants.any((v) => v is Desktop);
 
   @override
-  void _accept(List<String> operands) => operands.add('desktop');
-
-  @override
-  (int tier, int operands) get _specificity => (0, 1);
+  void _accept(List<String> operands, List<int> tiers) {
+    operands.add('desktop');
+    tiers[0] = tiers[0] + 1;
+  }
 
   @override
   String toString() => 'desktop';
@@ -149,13 +140,10 @@ class _Windows extends Desktop {
   bool satisfiedBy(Set<FVariant> variants) => variants.contains(const _Windows());
 
   @override
-  void _accept(List<String> operands) {
-    super._accept(operands);
-    operands.add('windows');
+  void _accept(List<String> operands, List<int> tiers) {
+    operands..add('desktop')..add('windows');
+    tiers[0] = tiers[0] + 2;
   }
-
-  @override
-  (int tier, int operands) get _specificity => (0, 2);
 
   @override
   String toString() => '{desktop, windows}';
@@ -168,13 +156,10 @@ class _MacOS extends Desktop {
   bool satisfiedBy(Set<FVariant> variants) => variants.contains(const _MacOS());
 
   @override
-  void _accept(List<String> operands) {
-    super._accept(operands);
-    operands.add('macOS');
+  void _accept(List<String> operands, List<int> tiers) {
+    operands..add('desktop')..add('macOS');
+    tiers[0] = tiers[0] + 2;
   }
-
-  @override
-  (int tier, int operands) get _specificity => (0, 2);
 
   @override
   String toString() => '{desktop, macOS}';
@@ -187,13 +172,10 @@ class _Linux extends Desktop {
   bool satisfiedBy(Set<FVariant> variants) => variants.contains(const _Linux());
 
   @override
-  void _accept(List<String> operands) {
-    super._accept(operands);
-    operands.add('linux');
+  void _accept(List<String> operands, List<int> tiers) {
+    operands..add('desktop')..add('linux');
+    tiers[0] = tiers[0] + 2;
   }
-
-  @override
-  (int tier, int operands) get _specificity => (0, 2);
 
   @override
   String toString() => '{desktop, linux}';
@@ -206,10 +188,10 @@ class _Web implements FVariant {
   bool satisfiedBy(Set<FVariant> variants) => variants.contains(const _Web());
 
   @override
-  void _accept(List<String> operands) => operands.add('web');
-
-  @override
-  (int tier, int operands) get _specificity => (0, 1);
+  void _accept(List<String> operands, List<int> tiers) {
+    operands.add('web');
+    tiers[0] = tiers[0] + 1;
+  }
 
   @override
   String toString() => 'web';

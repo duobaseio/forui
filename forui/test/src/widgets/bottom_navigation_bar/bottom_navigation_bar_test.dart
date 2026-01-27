@@ -16,7 +16,7 @@ void main() {
             FBottomNavigationBarItem(
               icon: const Icon(FIcons.house),
               label: const Text('Home'),
-              onStateChange: (v) => delta = v,
+              onVariantChange: (v) => delta = v,
               onHoverChange: (v) => hovered = v,
             ),
           ],

@@ -393,18 +393,10 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
       ),
 
       tileStyle: tileStyle.copyWith(
-        decoration: tileStyle.decoration.map(
-          (d) => d == null
-              ? null
-              : BoxDecoration(
-                  color: d.color,
-                  image: d.image,
-                  boxShadow: d.boxShadow,
-                  gradient: d.gradient,
-                  backgroundBlendMode: d.backgroundBlendMode,
-                  shape: d.shape,
-                ),
-        ),
+        decoration:
+            FVariantsDelta<FTappableVariantConstraint, FTappableVariant, BoxDecoration, BoxDecorationDelta>.apply([
+              .onAll(const .merge(border: null, borderRadius: null)),
+            ])(tileStyle.decoration),
       ),
       dividerColor: .all(colors.border),
       dividerWidth: style.borderWidth,

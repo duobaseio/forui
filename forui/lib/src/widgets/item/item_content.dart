@@ -17,7 +17,7 @@ class ItemContent extends StatelessWidget {
   final EdgeInsetsGeometry margin;
   final double top;
   final double bottom;
-  final Set<WidgetState> states;
+  final Set<FTappableVariant> variants;
   final FWidgetStateMap<Color>? dividerColor;
   final double? dividerWidth;
   final FItemDivider dividerType;
@@ -32,7 +32,7 @@ class ItemContent extends StatelessWidget {
     required this.margin,
     required this.bottom,
     required this.top,
-    required this.states,
+    required this.variants,
     required this.dividerColor,
     required this.dividerWidth,
     required this.dividerType,
@@ -54,14 +54,16 @@ class ItemContent extends StatelessWidget {
     padding: style.padding,
     top: top,
     bottom: bottom,
-    dividerColor: dividerColor?.resolve(states),
+    dividerColor: dividerColor?.resolve({
+      if (variants.contains(FTappableVariant.disabled)) WidgetState.disabled,
+    }),
     dividerWidth: dividerWidth,
     dividerType: dividerType,
     children: [
       if (prefix case final prefix?)
         Padding(
           padding: .directional(end: style.prefixIconSpacing),
-          child: IconTheme(data: style.prefixIconStyle.resolve(states), child: prefix),
+          child: IconTheme(data: style.prefixIconStyle.resolve(variants), child: prefix),
         )
       else
         const SizedBox(),
@@ -74,7 +76,7 @@ class ItemContent extends StatelessWidget {
           spacing: style.titleSpacing,
           children: [
             DefaultTextStyle.merge(
-              style: style.titleTextStyle.resolve(states),
+              style: style.titleTextStyle.resolve(variants),
               textHeightBehavior: const TextHeightBehavior(
                 applyHeightToFirstAscent: false,
                 applyHeightToLastDescent: false,
@@ -84,7 +86,7 @@ class ItemContent extends StatelessWidget {
             ),
             if (subtitle case final subtitle?)
               DefaultTextStyle.merge(
-                style: style.subtitleTextStyle.resolve(states),
+                style: style.subtitleTextStyle.resolve(variants),
                 textHeightBehavior: const TextHeightBehavior(
                   applyHeightToFirstAscent: false,
                   applyHeightToLastDescent: false,
@@ -97,7 +99,7 @@ class ItemContent extends StatelessWidget {
       ),
       if (details case final details?)
         DefaultTextStyle.merge(
-          style: style.detailsTextStyle.resolve(states),
+          style: style.detailsTextStyle.resolve(variants),
           textHeightBehavior: const TextHeightBehavior(
             applyHeightToFirstAscent: false,
             applyHeightToLastDescent: false,
@@ -110,7 +112,7 @@ class ItemContent extends StatelessWidget {
       if (suffix case final suffixIcon?)
         Padding(
           padding: .directional(start: style.suffixIconSpacing),
-          child: IconTheme(data: style.suffixIconStyle.resolve(states), child: suffixIcon),
+          child: IconTheme(data: style.suffixIconStyle.resolve(variants), child: suffixIcon),
         )
       else
         const SizedBox(),
@@ -125,7 +127,7 @@ class ItemContent extends StatelessWidget {
       ..add(DiagnosticsProperty('margin', margin))
       ..add(DoubleProperty('top', top))
       ..add(DoubleProperty('bottom', bottom))
-      ..add(IterableProperty('states', states))
+      ..add(IterableProperty('variants', variants))
       ..add(DiagnosticsProperty('dividerColor', dividerColor))
       ..add(DoubleProperty('dividerWidth', dividerWidth))
       ..add(DiagnosticsProperty('dividerType', dividerType));
@@ -140,7 +142,7 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
 
   /// The prefix icon style.
   @override
-  final FWidgetStateMap<IconThemeData> prefixIconStyle;
+  final FVariants<FTappableVariantConstraint, IconThemeData, IconThemeDataDelta> prefixIconStyle;
 
   /// The horizontal spacing between the prefix icon and title and the subtitle. Defaults to 10.
   ///
@@ -151,7 +153,7 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
 
   /// The title's text style.
   @override
-  final FWidgetStateMap<TextStyle> titleTextStyle;
+  final FVariants<FTappableVariantConstraint, TextStyle, TextStyleDelta> titleTextStyle;
 
   /// The vertical spacing between the title and the subtitle. Defaults to 4.
   ///
@@ -162,7 +164,7 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
 
   /// The subtitle's text style.
   @override
-  final FWidgetStateMap<TextStyle> subtitleTextStyle;
+  final FVariants<FTappableVariantConstraint, TextStyle, TextStyleDelta> subtitleTextStyle;
 
   /// The minimum horizontal spacing between the title, subtitle, combined, and the details. Defaults to 4.
   ///
@@ -173,11 +175,11 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
 
   /// The details text style.
   @override
-  final FWidgetStateMap<TextStyle> detailsTextStyle;
+  final FVariants<FTappableVariantConstraint, TextStyle, TextStyleDelta> detailsTextStyle;
 
   /// The suffix icon style.
   @override
-  final FWidgetStateMap<IconThemeData> suffixIconStyle;
+  final FVariants<FTappableVariantConstraint, IconThemeData, IconThemeDataDelta> suffixIconStyle;
 
   /// The horizontal spacing between the details and suffix icon. Defaults to 10.
   ///
@@ -206,25 +208,37 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
   /// Creates a [FItemContentStyle] that inherits its properties.
   FItemContentStyle.inherit({required FColors colors, required FTypography typography})
     : this(
-        prefixIconStyle: FWidgetStateMap({
-          WidgetState.disabled: IconThemeData(color: colors.disable(colors.primary), size: 15),
-          WidgetState.any: IconThemeData(color: colors.primary, size: 15),
-        }),
-        titleTextStyle: FWidgetStateMap({
-          WidgetState.disabled: typography.sm.copyWith(color: colors.disable(colors.primary)),
-          WidgetState.any: typography.sm,
-        }),
-        subtitleTextStyle: FWidgetStateMap({
-          WidgetState.disabled: typography.xs.copyWith(color: colors.disable(colors.mutedForeground)),
-          WidgetState.any: typography.xs.copyWith(color: colors.mutedForeground),
-        }),
-        detailsTextStyle: FWidgetStateMap({
-          WidgetState.disabled: typography.xs.copyWith(color: colors.disable(colors.mutedForeground)),
-          WidgetState.any: typography.xs.copyWith(color: colors.mutedForeground),
-        }),
-        suffixIconStyle: FWidgetStateMap({
-          WidgetState.disabled: IconThemeData(color: colors.disable(colors.mutedForeground), size: 15),
-          WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 15),
-        }),
+        prefixIconStyle: .delta(
+          IconThemeData(color: colors.primary, size: 15),
+          variants: {
+            {.disabled}: .merge(color: colors.disable(colors.primary)),
+          },
+        ),
+        titleTextStyle: .delta(
+          typography.sm,
+          variants: {
+            {.disabled}: .merge(color: colors.disable(colors.primary)),
+          },
+        ),
+        subtitleTextStyle: .delta(
+          typography.xs.copyWith(color: colors.mutedForeground),
+          variants: {
+            {.disabled}: .merge(color: colors.disable(colors.mutedForeground)),
+          },
+        ),
+        detailsTextStyle: .delta(
+          typography.xs.copyWith(color: colors.mutedForeground),
+          variants: {
+            {.disabled}: .merge(color: colors.disable(colors.mutedForeground)),
+          },
+        ),
+        suffixIconStyle: .delta(
+          IconThemeData(color: colors.mutedForeground, size: 15),
+          variants: {
+            {.disabled}: .merge(color: colors.disable(colors.mutedForeground)),
+          },
+        ),
       );
+
+
 }

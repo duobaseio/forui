@@ -12,7 +12,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold(
         child: FButton(
-          onStateChange: (v) => delta = v,
+          onVariantChange: (v) => delta = v,
           onHoverChange: (v) => hovered = v,
           onPress: () {},
           child: const Text('Button'),

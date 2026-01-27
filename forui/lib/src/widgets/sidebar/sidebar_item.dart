@@ -58,8 +58,8 @@ class FSidebarItem extends StatefulWidget {
   /// Called when the hover state changes.
   final ValueChanged<bool>? onHoverChange;
 
-  /// Called when the state changes.
-  final ValueChanged<FWidgetStatesDelta>? onStateChange;
+  /// Called when the variant changes.
+  final FTappableVariantChangeCallback? onVariantChange;
 
   /// The sidebar item's children.
   final List<Widget> children;
@@ -76,7 +76,7 @@ class FSidebarItem extends StatefulWidget {
     this.onPress,
     this.onLongPress,
     this.onHoverChange,
-    this.onStateChange,
+    this.onVariantChange,
     this.children = const [],
     super.key,
   });
@@ -96,7 +96,7 @@ class FSidebarItem extends StatefulWidget {
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
       ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
-      ..add(ObjectFlagProperty.has('onStateChange', onStateChange))
+      ..add(ObjectFlagProperty.has('onVariantChange', onVariantChange))
       ..add(DiagnosticsProperty('children', children));
   }
 }
@@ -183,7 +183,7 @@ class _FSidebarItemState extends State<FSidebarItem> with TickerProviderStateMix
     crossAxisAlignment: .start,
     children: [
       FTappable(
-        style: _style!.tappableStyle,
+        style: .replace(_style!.tappableStyle),
         focusedOutlineStyle: .replace(_style!.focusedOutlineStyle),
         selected: widget.selected,
         autofocus: widget.autofocus,
@@ -196,7 +196,7 @@ class _FSidebarItemState extends State<FSidebarItem> with TickerProviderStateMix
             : widget.onPress,
         onLongPress: widget.onLongPress,
         onHoverChange: widget.onHoverChange,
-        onStateChange: widget.onStateChange,
+        onVariantChange: widget.onVariantChange,
         builder: (_, states, child) => Container(
           padding: _style!.padding,
           decoration: BoxDecoration(color: _style!.backgroundColor.resolve(states), borderRadius: _style!.borderRadius),
@@ -258,30 +258,24 @@ class _FSidebarItemState extends State<FSidebarItem> with TickerProviderStateMix
 /// The style for a [FSidebarItem].
 class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
   /// The label's text style.
-  ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
-  final FWidgetStateMap<TextStyle> textStyle;
+  final FVariants<FTappableVariantConstraint, TextStyle, TextStyleDelta> textStyle;
 
   /// The spacing between the icon and label. Defaults to 8.
   @override
   final double iconSpacing;
 
   /// The icon's style.
-  ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
-  final FWidgetStateMap<IconThemeData> iconStyle;
+  final FVariants<FTappableVariantConstraint, IconThemeData, IconThemeDataDelta> iconStyle;
 
   /// The spacing between the label and collapsible widget. Defaults to 8.
   @override
   final double collapsibleIconSpacing;
 
   /// The collapsible icon's style.
-  ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
-  final FWidgetStateMap<IconThemeData> collapsibleIconStyle;
+  final FVariants<FTappableVariantConstraint, IconThemeData, IconThemeDataDelta> collapsibleIconStyle;
 
   /// The spacing between child items. Defaults to 2.
   @override
@@ -292,10 +286,8 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
   final EdgeInsetsGeometry childrenPadding;
 
   /// The background color.
-  ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.selectable}
   @override
-  final FWidgetStateMap<Color> backgroundColor;
+  final FVariants<FTappableVariantConstraint, Color, Delta<Color>> backgroundColor;
 
   /// The padding around the content. Defaults to `EdgeInsets.symmetric(horizontal: 12, vertical: 10)`.
   @override
@@ -337,31 +329,31 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
   /// Creates a [FSidebarItemStyle] that inherits its properties.
   FSidebarItemStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        textStyle: FWidgetStateMap({
-          WidgetState.disabled: typography.base.copyWith(
-            color: colors.mutedForeground,
-            height: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-          WidgetState.any: typography.base.copyWith(
-            color: colors.foreground,
-            height: 1,
-            overflow: TextOverflow.ellipsis,
-          ),
-        }),
-        iconStyle: FWidgetStateMap({
-          WidgetState.disabled: IconThemeData(color: colors.mutedForeground, size: 16),
-          WidgetState.any: IconThemeData(color: colors.foreground, size: 16),
-        }),
-        collapsibleIconStyle: FWidgetStateMap({
-          WidgetState.disabled: IconThemeData(color: colors.mutedForeground, size: 16),
-          WidgetState.any: IconThemeData(color: colors.foreground, size: 16),
-        }),
-        backgroundColor: FWidgetStateMap({
-          WidgetState.disabled: Colors.transparent,
-          WidgetState.selected | WidgetState.hovered | WidgetState.pressed: colors.hover(colors.secondary),
-          WidgetState.any: Colors.transparent,
-        }),
+        textStyle: .delta(
+          typography.base.copyWith(color: colors.foreground, overflow: .ellipsis, height: 1),
+          variants: {
+            {.disabled}: .merge(color: colors.mutedForeground),
+          },
+        ),
+        iconStyle: .delta(
+          IconThemeData(color: colors.foreground, size: 16),
+          variants: {
+            {.disabled}: .merge(color: colors.mutedForeground),
+          },
+        ),
+        collapsibleIconStyle: .delta(
+          IconThemeData(color: colors.foreground, size: 16),
+          variants: {
+            {.disabled}: .merge(color: colors.mutedForeground),
+          },
+        ),
+        backgroundColor: FVariants(
+          Colors.transparent,
+          variants: {
+            {.disabled}: Colors.transparent,
+            {.selected, .hovered, .pressed}: colors.hover(colors.secondary),
+          },
+        ),
         borderRadius: style.borderRadius,
         tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
         focusedOutlineStyle: style.focusedOutlineStyle.copyWith(spacing: 0),

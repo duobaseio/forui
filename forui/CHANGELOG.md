@@ -115,6 +115,7 @@
 
 ### Others
 * **Breaking** Remove `FWidgetStatesDelta`.
+* **Breaking** Replace all instances of `FWidgetStateMap` with `FVariants`. 
 
 
 ## 0.17.0

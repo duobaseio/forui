@@ -195,15 +195,10 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
     final outline = FButtonStyles.inherit(colors: colors, typography: typography, style: style).outline;
     return .new(
       focusedOutlineStyle: style.focusedOutlineStyle,
-      buttonStyle: outline.copyWith(
-        decoration: outline.decoration.map((d) => d.copyWith(borderRadius: .circular(4))),
-        iconContentStyle: FButtonIconContentStyle(
-          iconStyle: FWidgetStateMap({
-            WidgetState.disabled: IconThemeData(color: colors.disable(colors.mutedForeground), size: 17),
-            WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 17),
-          }),
-        ),
-      ),
+      buttonStyle: FButtonStyleDelta.merge(
+        decoration: .apply([.onAll(.merge(borderRadius: .circular(4)))]),
+        iconContentStyle: .merge(iconStyle: .apply([.onAll(const .merge(size: 17))])),
+      )(outline),
       headerTextStyle: typography.base.copyWith(color: colors.primary, fontWeight: .w600),
     );
   }

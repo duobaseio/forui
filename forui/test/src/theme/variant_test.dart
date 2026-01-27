@@ -15,11 +15,24 @@ void main() {
     const ac = And(a, c);
     const bc = And(b, c);
 
+    // Tier 1 variant with different name for cross-tier tests
+    const e = FVariant(1, 'e');
+    // Second tier 2 variant
+    const f = FVariant(2, 'f');
+
+    const da = And(d, a); // tier 2 + tier 1
+    const df = And(d, f); // tier 2 + tier 2
+    const ae = And(a, e); // tier 1 + tier 1
+
     for (final (x, y, expected) in [
-      // Tier comparison
+      // Tier comparison (single variants)
       (a, d, d), // tier 1 vs tier 2 → tier 2 wins
       (d, a, d), // tier 2 vs tier 1 → tier 2 wins
-      (ab, d, d), // tier 1 (2 operands) vs tier 2 (1 operand) → tier 2 wins
+      // Cross-tier compound: tier-by-tier comparison
+      (df, da, df), // {2: 2} vs {2: 1, 1: 1} → 2 tier-2 operands > 1 tier-2 operand
+      (da, df, df), // symmetric
+      (da, ae, da), // {2: 1, 1: 1} vs {1: 2} → has tier-2 operand, other doesn't
+      (ae, da, da), // symmetric
       // Operand count (same tier)
       (a, ab, ab), // 1 vs 2 → 2 wins
       (ab, a, ab), // 2 vs 1 → 2 wins
@@ -53,7 +66,7 @@ void main() {
       test('== $other', () => expect(a == other, expected));
     }
 
-    test('toString', () => expect(a.toString(), 'a'));
+    test('toString', () => expect(a.toString(), 'a(1)'));
   });
 
   group('And', () {

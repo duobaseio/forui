@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 /// The state of a line calendar item used to build a line calendar item.
-typedef FLineCalendarItemData = ({FLineCalendarStyle style, DateTime date, bool today, Set<WidgetState> states});
+typedef FLineCalendarItemData = ({FLineCalendarStyle style, DateTime date, bool today, Set<FTappableVariant> variants});
 
 @internal
 class Item extends StatelessWidget {
@@ -27,17 +27,17 @@ class Item extends StatelessWidget {
   Widget build(BuildContext context) => ValueListenableBuilder(
     valueListenable: controller,
     builder: (context, selected, _) => FTappable(
-      style: style.tappableStyle,
+      style: .replace(style.tappableStyle),
       semanticsLabel: (FLocalizations.of(context) ?? FDefaultLocalizations()).fullDate(date),
       selected: selected == date,
       onPress: controller.selectable(date) ? () => controller.select(date) : null,
-      builder: (context, states, _) => builder(
+      builder: (context, variants, _) => builder(
         context,
-        (style: style, date: date, today: today, states: states),
+        (style: style, date: date, today: today, variants: variants),
         Stack(
           children: [
             Positioned.fill(
-              child: ItemContent(style: style, date: date, states: states),
+              child: ItemContent(style: style, date: date, variants: variants),
             ),
             if (today)
               Positioned(
@@ -46,7 +46,7 @@ class Item extends StatelessWidget {
                 child: Container(
                   height: 4,
                   width: 4,
-                  decoration: BoxDecoration(color: style.todayIndicatorColor.resolve(states), shape: .circle),
+                  decoration: BoxDecoration(color: style.todayIndicatorColor.resolve(variants), shape: .circle),
                 ),
               ),
           ],
@@ -71,15 +71,15 @@ class Item extends StatelessWidget {
 class ItemContent extends StatelessWidget {
   final FLineCalendarStyle style;
   final DateTime date;
-  final Set<WidgetState> states;
+  final Set<FTappableVariant> variants;
 
-  const ItemContent({required this.style, required this.date, required this.states, super.key});
+  const ItemContent({required this.style, required this.date, required this.variants, super.key});
 
   @override
   Widget build(BuildContext context) {
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
     return DecoratedBox(
-      decoration: style.decoration.resolve(states),
+      decoration: style.decoration.resolve(variants),
       child: Padding(
         padding: .symmetric(vertical: style.contentEdgeSpacing),
         child: Column(
@@ -92,7 +92,7 @@ class ItemContent extends StatelessWidget {
                 applyHeightToFirstAscent: false,
                 applyHeightToLastDescent: false,
               ),
-              style: style.dateTextStyle.resolve(states),
+              style: style.dateTextStyle.resolve(variants),
               child: Text(localizations.day(date)),
             ),
             DefaultTextStyle.merge(
@@ -100,7 +100,7 @@ class ItemContent extends StatelessWidget {
                 applyHeightToFirstAscent: false,
                 applyHeightToLastDescent: false,
               ),
-              style: style.weekdayTextStyle.resolve(states),
+              style: style.weekdayTextStyle.resolve(variants),
               child: Text(localizations.shortWeekDays[date.weekday % 7]),
             ),
           ],
@@ -115,6 +115,6 @@ class ItemContent extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('date', date))
-      ..add(IterableProperty('states', states));
+      ..add(IterableProperty('states', variants));
   }
 }

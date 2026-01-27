@@ -86,7 +86,7 @@ class FCheckbox extends StatelessWidget {
     };
 
     return FTappable(
-      style: style.tappableStyle,
+      style: .replace(style.tappableStyle),
       semanticsLabel: semanticsLabel,
       selected: value,
       onPress: enabled ? () => onChange?.call(!value) : null,
@@ -108,7 +108,7 @@ class FCheckbox extends StatelessWidget {
           // A separate FFocusedOutline is used instead of FTappable's built-in one so that only the checkbox,
           // rather than the entire FLabel, is outlined.
           child: FFocusedOutline(
-            focused: states.contains(WidgetState.focused),
+            focused: states.contains(FTappableVariant.focused),
             style: .replace(style.focusedOutlineStyle),
             child: AnimatedSwitcher(
               duration: style.motion.fadeInDuration,
