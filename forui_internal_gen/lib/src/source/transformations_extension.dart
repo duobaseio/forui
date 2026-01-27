@@ -1,5 +1,6 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
+import 'package:build/build.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:forui_internal_gen/src/source/types.dart';
 import 'package:meta/meta.dart';
@@ -89,6 +90,10 @@ String? summarizeDocs(String? documentation) {
 /// non-virtual. This prevents conflicts between base and subclasses.
 @internal
 class TransformationsExtension {
+  /// The build step.
+  @protected
+  final BuildStep step;
+
   /// The type.
   @protected
   final ClassElement element;
@@ -102,21 +107,21 @@ class TransformationsExtension {
   final List<String> copyWithDocsHeader;
 
   /// Creates a [TransformationsExtension].
-  TransformationsExtension(this.element, {required this.copyWithDocsHeader})
+  TransformationsExtension(this.step, this.element, {required this.copyWithDocsHeader})
     : fields = transitiveInstanceFields(element);
 
   /// Generates an extension that provides non virtual transforming methods.
-  Extension generate() =>
+  Future<Extension> generate() async =>
       (ExtensionBuilder()
             ..docs.addAll(['/// Provides a [copyWith] method.'])
             ..name = '\$${element.name!}Transformations'
             ..on = refer(element.name!)
-            ..methods.addAll([copyWith]))
+            ..methods.addAll([await copyWith]))
           .build();
 
   /// Generates a copyWith method that allows for creating a new instance of the style with modified properties.
   @protected
-  Method get copyWith {
+  Future<Method> get copyWith async {
     // Copy the documentation comments from the fields.
     final docs = ['/// ## Parameters'];
 
@@ -136,43 +141,54 @@ class TransformationsExtension {
       }
     }).join();
 
+    final parameters = <Parameter>[];
+    for (final field in fields) {
+      final type = await fieldType(step, field);
+      if (nestedMotion(field.type)) {
+        parameters.add(
+          Parameter(
+            (p) => p
+              ..name = field.name!
+              ..type = refer('$type Function($type motion)?')
+              ..named = true,
+          ),
+        );
+      } else if (nestedStyle(field.type)) {
+        parameters.add(
+          Parameter(
+            (p) => p
+              ..name = field.name!
+              ..type = refer('$type Function($type style)?')
+              ..named = true,
+          ),
+        );
+      } else {
+        final nullableType = await _nullableType(field);
+        parameters.add(
+          Parameter(
+            (p) => p
+              ..name = field.name!
+              ..type = refer(nullableType)
+              ..named = true,
+          ),
+        );
+      }
+    }
+
     return Method(
       (m) => m
         ..returns = refer(element.name!)
         ..docs.addAll([...copyWithDocsHeader, ...docs])
         ..annotations.add(refer('useResult'))
         ..name = 'copyWith'
-        ..optionalParameters.addAll([
-          for (final field in fields)
-            if (nestedMotion(field.type))
-              Parameter(
-                (p) => p
-                  ..name = field.name!
-                  ..type = refer('${fieldType(field)} Function(${fieldType(field)} motion)?')
-                  ..named = true,
-              )
-            else if (nestedStyle(field.type))
-              Parameter(
-                (p) => p
-                  ..name = field.name!
-                  ..type = refer('${fieldType(field)} Function(${fieldType(field)} style)?')
-                  ..named = true,
-              )
-            else
-              Parameter(
-                (p) => p
-                  ..name = field.name!
-                  ..type = refer(_nullableType(field))
-                  ..named = true,
-              ),
-        ])
+        ..optionalParameters.addAll(parameters)
         ..lambda = true
         ..body = Code('.new($assignments)\n'),
     );
   }
 
-  String _nullableType(FieldElement field) {
-    final type = fieldType(field);
+  Future<String> _nullableType(FieldElement field) async {
+    final type = await fieldType(step, field);
     return field.type.nullabilitySuffix == .question ? type : '$type?';
   }
 

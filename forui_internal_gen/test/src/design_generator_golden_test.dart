@@ -13,7 +13,7 @@ import 'package:forui/src/theme/delta.dart';
 import 'package:forui/src/theme/variant.dart';
 import 'package:meta/meta.dart';
 
-@Variants(FGolden, {'hovered': 'The hovered state', 'pressed': 'The pressed state'})
+@Variants(FGolden, {'hovered': (1, 'The hovered state'), 'pressed': (1, 'The pressed state')})
 @Sentinels(FGoldenStyle, {'someDouble': 'double.infinity', 'color': 'colorSentinel'})
 part 'example.design.dart';
 
@@ -138,45 +138,31 @@ extension type const FGoldenVariantConstraint._(FVariantConstraint _) implements
   /// The pressed state
   static const pressed = FGoldenVariant.pressed;
 
-  /// Matches all touch-based platforms, [android], [iOS] and [fuchsia].
-  static const touch = FGoldenVariant.touch;
+  /// A platform variant that matches all touch-based platforms, [android], [iOS] and [fuchsia].
+  static const touch = Touch();
+
+  /// A platform variant that matches all desktop-based platforms, [windows], [macOS] and [linux].
+  static const desktop = Desktop();
 
   /// The Android platform variant.
-  ///
-  /// More specific than [touch] in variant resolution.
   static const android = FGoldenVariant.android;
 
   /// The iOS platform variant.
-  ///
-  /// More specific than [touch] in variant resolution.
   static const iOS = FGoldenVariant.iOS;
 
   /// The Fuchsia platform variant.
-  ///
-  /// More specific than [touch] in variant resolution.
   static const fuchsia = FGoldenVariant.fuchsia;
 
-  /// Matches all desktop-based platforms, [windows], [macOS] and [linux].
-  static const desktop = FGoldenVariant.desktop;
-
   /// The Windows platform variant.
-  ///
-  /// More specific than [desktop] in variant resolution.
   static const windows = FGoldenVariant.windows;
 
   /// The macOS platform variant.
-  ///
-  /// More specific than [desktop] in variant resolution.
   static const macOS = FGoldenVariant.macOS;
 
   /// The Linux platform variant.
-  ///
-  /// More specific than [desktop] in variant resolution.
   static const linux = FGoldenVariant.linux;
 
   /// The web platform variant.
-  ///
-  /// Standalone platform that is neither [touch] nor [desktop].
   static const web = FGoldenVariant.web;
 
   /// Combines this with [other] using a logical AND operation.
@@ -185,54 +171,36 @@ extension type const FGoldenVariantConstraint._(FVariantConstraint _) implements
 
 /// Represents a condition under which a [FGolden] can be styled differently.
 ///
+/// Each variant has a tier that determines its specificity. Higher tiers take precedence during resolution.
+///
 /// See also:
 /// * [FGoldenVariantConstraint], which represents combinations of variants for [FGolden].
 extension type const FGoldenVariant._(FVariant _) implements FGoldenVariantConstraint, FVariant {
   /// The hovered state
-  static const hovered = FGoldenVariant._(.new('hovered'));
+  static const hovered = FGoldenVariant._(.new(1, 'hovered'));
 
   /// The pressed state
-  static const pressed = FGoldenVariant._(.new('pressed'));
-
-  /// Matches all touch-based platforms, [android], [iOS] and [fuchsia].
-  static const touch = FGoldenVariant._(FPlatformVariant.touch);
+  static const pressed = FGoldenVariant._(.new(1, 'pressed'));
 
   /// The Android platform variant.
-  ///
-  /// More specific than [touch] in variant resolution.
   static const android = FGoldenVariant._(FPlatformVariant.android);
 
   /// The iOS platform variant.
-  ///
-  /// More specific than [touch] in variant resolution.
   static const iOS = FGoldenVariant._(FPlatformVariant.iOS);
 
   /// The Fuchsia platform variant.
-  ///
-  /// More specific than [touch] in variant resolution.
   static const fuchsia = FGoldenVariant._(FPlatformVariant.fuchsia);
 
-  /// Matches all desktop-based platforms, [windows], [macOS] and [linux].
-  static const desktop = FGoldenVariant._(FPlatformVariant.desktop);
-
   /// The Windows platform variant.
-  ///
-  /// More specific than [desktop] in variant resolution.
   static const windows = FGoldenVariant._(FPlatformVariant.windows);
 
   /// The macOS platform variant.
-  ///
-  /// More specific than [desktop] in variant resolution.
   static const macOS = FGoldenVariant._(FPlatformVariant.macOS);
 
   /// The Linux platform variant.
-  ///
-  /// More specific than [desktop] in variant resolution.
   static const linux = FGoldenVariant._(FPlatformVariant.linux);
 
   /// The web platform variant.
-  ///
-  /// Standalone platform that is neither [touch] nor [desktop].
   static const web = FGoldenVariant._(FPlatformVariant.web);
 }
 
@@ -591,7 +559,7 @@ sealed class FGoldenStyleDelta with Delta<FGoldenStyle> {
     Set<String>? set,
     Map<String, int>? map,
     FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color>? variantsWithGenericDelta,
-    FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, TextStyleDelta, TextStyle>? variantsWithSpecificDelta,
+    FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, TextStyle, TextStyleDelta>? variantsWithSpecificDelta,
   }) = _FGoldenStyleMerge;
 }
 
@@ -699,7 +667,7 @@ class _FGoldenStyleMerge implements FGoldenStyleDelta {
 
   final FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color>? variantsWithGenericDelta;
 
-  final FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, TextStyleDelta, TextStyle>? variantsWithSpecificDelta;
+  final FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, TextStyle, TextStyleDelta>? variantsWithSpecificDelta;
 
   @override
   FGoldenStyle call(FGoldenStyle original) => FGoldenStyle(

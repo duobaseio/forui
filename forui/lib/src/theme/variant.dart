@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
@@ -14,18 +16,36 @@ part 'variant_platform.dart';
 sealed class FVariantConstraint {
   /// Returns the more specific of two constraints.
   ///
-  /// Specificity is determined by operand count with the highest count winning.
+  /// Specificity is determined first by tier, with higher tiers winning.
+  ///
+  /// ```dart
+  /// max(hovered, disabled); // disabled (tier 2 > tier 1)
+  /// ```
+  ///
+  /// Ties are broken by operand count, with the highest count winning.
   ///
   /// ```dart
   /// max(hovered, hovered.and(focused)); // hovered & focused (2 > 1)
   /// ```
   ///
-  /// Ties are broken lexicographically by sorted operand names.
+  /// Further ties are broken lexicographically by sorted operand names.
+  ///
   /// ```dart
   /// max(hovered.and(focused), focused.and(pressed)); // focused & hovered ("focused" < "pressed")
   /// ```
   static T max<T extends FVariantConstraint>(T a, T b) {
-    switch (a._operands.compareTo(b._operands)) {
+    final aSpecificity = a._specificity;
+    final bSpecificity = b._specificity;
+
+    switch (aSpecificity.$1.compareTo(bSpecificity.$1)) {
+      case < 0:
+        return b;
+
+      case > 0:
+        return a;
+    }
+
+    switch (aSpecificity.$2.compareTo(bSpecificity.$2)) {
       case < 0:
         return b;
 
@@ -57,22 +77,26 @@ sealed class FVariantConstraint {
 
   void _accept(List<String> operands);
 
-  int get _operands;
+  (int tier, int operands) get _specificity;
 }
 
 /// Represents a condition under which a widget can be styled differently.
 ///
+/// Each variant has a tier that determines its specificity. Higher tiers take precedence over lower tiers.
+/// Tiers typically follow: platform (tier 0) < interaction (tier 1) < semantic (tier 2).
+///
 /// Unlike [WidgetState], it is extended by widget-specific variants, allowing widgets to define their own states.
 sealed class FVariant implements FVariantConstraint {
   /// Creates a variant.
-  const factory FVariant(String value) = Value;
+  const factory FVariant(int priority, String value) = Value;
 }
 
 @internal
 class Value implements FVariant {
+  final int _tier;
   final String _value;
 
-  const Value(this._value);
+  const Value(this._tier, this._value);
 
   @override
   bool satisfiedBy(Set<FVariant> variants) => variants.contains(this);
@@ -81,7 +105,7 @@ class Value implements FVariant {
   void _accept(List<String> operands) => operands.add(_value);
 
   @override
-  int get _operands => 1;
+  (int tier, int operands) get _specificity => (_tier, 1);
 
   @override
   bool operator ==(Object other) =>
@@ -91,7 +115,7 @@ class Value implements FVariant {
   int get hashCode => _value.hashCode;
 
   @override
-  String toString() => _value;
+  String toString() => '$_value($_tier)';
 }
 
 @internal
@@ -111,7 +135,12 @@ class And implements FVariantConstraint {
   }
 
   @override
-  int get _operands => _left._operands + _right._operands;
+  (int tier, int operands) get _specificity {
+    final left = _left._specificity;
+    final right = _right._specificity;
+
+    return (max(left.$1, right.$1), left.$2 + right.$2);
+  }
 
   @override
   bool operator ==(Object other) =>
@@ -140,7 +169,7 @@ class Not implements FVariantConstraint {
   void _accept(List<String> operands) => _operand._accept(operands);
 
   @override
-  int get _operands => _operand._operands;
+  (int tier, int operands) get _specificity => _operand._specificity;
 
   @override
   bool operator ==(Object other) =>

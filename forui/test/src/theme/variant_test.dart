@@ -4,19 +4,27 @@ import 'package:forui/src/theme/variant.dart';
 
 void main() {
   group('FVariantConstraint', () {
-    const a = FVariant('a');
-    const b = FVariant('b');
-    const c = FVariant('c');
+    // Tier 1 variants (interaction)
+    const a = FVariant(1, 'a');
+    const b = FVariant(1, 'b');
+    const c = FVariant(1, 'c');
+    // Tier 2 variant (semantic)
+    const d = FVariant(2, 'd');
+
     const ab = And(a, b);
     const ac = And(a, c);
     const bc = And(b, c);
 
     for (final (x, y, expected) in [
-      // Operand count
+      // Tier comparison
+      (a, d, d), // tier 1 vs tier 2 → tier 2 wins
+      (d, a, d), // tier 2 vs tier 1 → tier 2 wins
+      (ab, d, d), // tier 1 (2 operands) vs tier 2 (1 operand) → tier 2 wins
+      // Operand count (same tier)
       (a, ab, ab), // 1 vs 2 → 2 wins
       (ab, a, ab), // 2 vs 1 → 2 wins
       (a, const And(ab, c), const And(ab, c)), // 1 vs 3 → 3 wins
-      // Lexicographic
+      // Lexicographic (same tier, same operand count)
       (ab, ac, ab), // "a" + "b" < "a" + "c"
       (ac, ab, ab), // "a" + "c" > "a" + "b"
       (ab, bc, ab), // "a" + "b" < "b" + "c"
@@ -29,8 +37,8 @@ void main() {
   });
 
   group('FVariant', () {
-    const a = FVariant('a');
-    const b = FVariant('b');
+    const a = FVariant(1, 'a');
+    const b = FVariant(1, 'b');
 
     for (final (variants, expected) in [
       ({a}, true),
@@ -49,9 +57,9 @@ void main() {
   });
 
   group('And', () {
-    const a = FVariant('a');
-    const b = FVariant('b');
-    const c = FVariant('c');
+    const a = FVariant(1, 'a');
+    const b = FVariant(1, 'b');
+    const c = FVariant(1, 'c');
     const and = And(a, b);
 
     for (final (variants, expected) in [
@@ -73,8 +81,8 @@ void main() {
   });
 
   group('Not', () {
-    const a = FVariant('a');
-    const b = FVariant('b');
+    const a = FVariant(1, 'a');
+    const b = FVariant(1, 'b');
     const not = Not(a);
 
     for (final (variants, expected) in [
@@ -91,24 +99,5 @@ void main() {
     }
 
     test('toString', () => expect(not.toString(), '!a'));
-  });
-
-  group('Any', () {
-    const a = FVariant('a');
-    const b = FVariant('b');
-    const any = Any();
-
-    for (final (variants, expected) in [
-      ({a}, true),
-      ({b}, true),
-      ({a, b}, true),
-      (<FVariant>{}, true),
-    ]) {
-      test('satisfiedBy $variants', () => expect(any.satisfiedBy(variants), expected));
-    }
-
-    test('== Any()', () => expect(any == const Any(), true));
-
-    test('toString', () => expect(any.toString(), 'any'));
   });
 }

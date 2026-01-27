@@ -7,16 +7,16 @@ import 'package:forui_internal_gen/src/source/types.dart';
 /// Generates a [TransformationsExtension] that provides `copyWith` and `lerp` methods.
 class DesignTransformationsExtension extends TransformationsExtension {
   /// Creates a [DesignTransformationsExtension].
-  DesignTransformationsExtension(super.element, {required super.copyWithDocsHeader});
+  DesignTransformationsExtension(super.step, super.element, {required super.copyWithDocsHeader});
 
   /// Generates an extension that provides non virtual transforming methods.
   @override
-  Extension generate() =>
+  Future<Extension> generate() async =>
       (ExtensionBuilder()
             ..docs.addAll(['/// Provides [copyWith] and [lerp] methods.'])
             ..name = '\$${element.name!}Transformations'
             ..on = refer(element.name!)
-            ..methods.addAll([copyWith, _lerp]))
+            ..methods.addAll([await copyWith, _lerp]))
           .build();
 
   Method get _lerp {

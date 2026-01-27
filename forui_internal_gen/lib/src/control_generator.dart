@@ -68,7 +68,8 @@ class ControlGenerator extends Generator {
           for (final type in direct)
             _emitter
                 .visitMixin(
-                  ControlMixin(
+                  await ControlMixin(
+                    step: step,
                     element: type,
                     supertype: supertype,
                     update: update,
@@ -82,7 +83,9 @@ class ControlGenerator extends Generator {
         ])
         ..addAll([
           for (final type in transitive)
-            _emitter.visitMixin(ControlPartialMixin(type: type, supertype: supertype).generate()).toString(),
+            _emitter
+                .visitMixin(await ControlPartialMixin(step: step, type: type, supertype: supertype).generate())
+                .toString(),
         ]);
     }
 

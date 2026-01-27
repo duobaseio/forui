@@ -5,8 +5,8 @@ class Variants {
   /// The widget the variants are associated with.
   final Type widget;
 
-  /// The variants and their associated documentation.
-  final Map<String, String> variants;
+  /// The variants and their associated tier and documentation.
+  final Map<String, (int, String)> variants;
 
   const Variants(this.widget, this.variants);
 }

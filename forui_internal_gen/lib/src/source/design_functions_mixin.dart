@@ -12,15 +12,15 @@ class DesignFunctionsMixin extends FunctionsMixin {
   final List<String> callDocs;
 
   /// Creates a new [DesignFunctionsMixin].
-  DesignFunctionsMixin(super.element, this.callDocs);
+  DesignFunctionsMixin(super.step, super.element, this.callDocs);
 
   /// Generates a mixin.
   @override
-  Mixin generate() =>
+  Future<Mixin> generate() async =>
       (MixinBuilder()
             ..name = '_\$${element.name}Functions'
             ..on = refer('Diagnosticable')
-            ..methods.addAll([...getters, _call, if (fields.isNotEmpty) debugFillProperties, equals, hash]))
+            ..methods.addAll([...await getters, _call, if (fields.isNotEmpty) debugFillProperties, equals, hash]))
           .build();
 
   /// Generates a special `call` method that allows styles to be used directly.

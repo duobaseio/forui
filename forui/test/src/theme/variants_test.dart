@@ -14,9 +14,9 @@ class _Add with Delta<int> {
 }
 
 void main() {
-  const a = FVariant('a');
-  const b = FVariant('b');
-  const c = FVariant('c');
+  const a = FVariant(1, 'a');
+  const b = FVariant(1, 'b');
+  const c = FVariant(1, 'c');
   const ab = And(a, b);
 
   group('FVariants', () {
@@ -63,10 +63,10 @@ void main() {
   });
 
   group('FVariantOperation', () {
-    const a = FVariant('a');
-    const b = FVariant('b');
-    const c = FVariant('c');
-    const d = FVariant('d');
+    const a = FVariant(1, 'a');
+    const b = FVariant(1, 'b');
+    const c = FVariant(1, 'c');
+    const d = FVariant(1, 'd');
 
     test('add(...)', () {
       final delta = FVariantsDelta<FVariant, FVariant, int, _Add>.apply([
@@ -159,10 +159,10 @@ void main() {
   });
 
   group('FVariantValueDeltaOperation', () {
-    const a = FVariant('a');
-    const b = FVariant('b');
-    const c = FVariant('c');
-    const d = FVariant('d');
+    const a = FVariant(1, 'a');
+    const b = FVariant(1, 'b');
+    const c = FVariant(1, 'c');
+    const d = FVariant(1, 'd');
 
     for (final (description, constraints, expected) in [
       (' new', {c}, {a: 1, b: 2, c: 10}),
