@@ -1,4 +1,5 @@
 import 'package:analyzer/dart/element/element.dart';
+import 'package:build/build.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:forui_internal_gen/src/source/functions_mixin.dart';
 import 'package:forui_internal_gen/src/source/types.dart';
@@ -30,6 +31,7 @@ abstract class ControlMixin extends FunctionsMixin {
 
   /// Creates a new [ControlMixin].
   factory ControlMixin({
+    required BuildStep step,
     required ClassElement element,
     required ClassElement supertype,
     required MethodElement update,
@@ -39,6 +41,7 @@ abstract class ControlMixin extends FunctionsMixin {
     required List<ClassElement> siblings,
   }) => element.name!.contains('Lifted')
       ? _LiftedControlMixin(
+          step: step,
           element: element,
           supertype: supertype,
           update: update,
@@ -48,6 +51,7 @@ abstract class ControlMixin extends FunctionsMixin {
           siblings: siblings,
         )
       : _ManagedControlMixin(
+          step: step,
           element: element,
           supertype: supertype,
           update: update,
@@ -58,6 +62,7 @@ abstract class ControlMixin extends FunctionsMixin {
         );
 
   ControlMixin._({
+    required BuildStep step,
     required ClassElement element,
     required this.supertype,
     required this.update,
@@ -65,7 +70,7 @@ abstract class ControlMixin extends FunctionsMixin {
     required this.default_,
     required this.dispose,
     required this.siblings,
-  }) : super(element);
+  }) : super(step, element);
 
   String get _typeParameters =>
       supertype.typeParameters.isEmpty ? '' : '<${supertype.typeParameters.map((t) => t.name).join(', ')}>';
@@ -98,6 +103,7 @@ abstract class ControlMixin extends FunctionsMixin {
 
 class _ManagedControlMixin extends ControlMixin {
   _ManagedControlMixin({
+    required super.step,
     required super.element,
     required super.supertype,
     required super.update,
@@ -109,12 +115,12 @@ class _ManagedControlMixin extends ControlMixin {
        super._();
 
   @override
-  Mixin generate() =>
+  Future<Mixin> generate() async =>
       (MixinBuilder()
             ..name = '_\$${element.name}Mixin'
             ..types.addAll([for (final t in supertype.typeParameters) refer(t.name!)])
             ..on = refer('Diagnosticable, ${supertype.name}$_typeParameters')
-            ..methods.addAll([...getters, _update, _dispose, debugFillProperties, equals, hash]))
+            ..methods.addAll([...await getters, _update, _dispose, debugFillProperties, equals, hash]))
           .build();
 
   @override
@@ -170,6 +176,7 @@ class _ManagedControlMixin extends ControlMixin {
 
 class _LiftedControlMixin extends ControlMixin {
   _LiftedControlMixin({
+    required super.step,
     required super.element,
     required super.supertype,
     required super.update,
@@ -181,12 +188,20 @@ class _LiftedControlMixin extends ControlMixin {
        super._();
 
   @override
-  Mixin generate() =>
+  Future<Mixin> generate() async =>
       (MixinBuilder()
             ..name = '_\$${element.name}Mixin'
             ..types.addAll([for (final t in supertype.typeParameters) refer(t.name!)])
             ..on = refer('Diagnosticable, ${supertype.name}$_typeParameters')
-            ..methods.addAll([...getters, _update, _updateController, _dispose, debugFillProperties, equals, hash]))
+            ..methods.addAll([
+              ...await getters,
+              _update,
+              _updateController,
+              _dispose,
+              debugFillProperties,
+              equals,
+              hash,
+            ]))
           .build();
 
   @override

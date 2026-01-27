@@ -1,5 +1,6 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
+import 'package:build/build.dart';
 import 'package:code_builder/code_builder.dart' hide RecordType;
 import 'package:forui_internal_gen/src/source/types.dart';
 import 'package:meta/meta.dart';
@@ -9,6 +10,10 @@ import 'package:meta/meta.dart';
 /// This will probably be replaced by an augment class in the future.
 @internal
 class FunctionsMixin {
+  /// The build step.
+  @protected
+  final BuildStep step;
+
   /// The type.
   @protected
   final ClassElement element;
@@ -22,28 +27,28 @@ class FunctionsMixin {
   final List<FieldElement> fields;
 
   /// Creates a new [FunctionsMixin].
-  FunctionsMixin(this.element) : transitiveFields = transitiveInstanceFields(element), fields = instanceFields(element);
+  FunctionsMixin(this.step, this.element)
+    : transitiveFields = transitiveInstanceFields(element),
+      fields = instanceFields(element);
 
   /// Generates a mixin.
-  Mixin generate() =>
+  Future<Mixin> generate() async =>
       (MixinBuilder()
             ..name = '_\$${element.name}Functions'
             ..on = refer('Diagnosticable')
-            ..methods.addAll([...getters, if (fields.isNotEmpty) debugFillProperties, equals, hash]))
+            ..methods.addAll([...await getters, if (fields.isNotEmpty) debugFillProperties, equals, hash]))
           .build();
 
   /// Generates getters for the class's fields that must be overridden by the class.
   @protected
-  List<Method> get getters => transitiveFields
-      .map(
-        (field) => Method(
-          (m) => m
-            ..returns = refer(fieldType(field))
+  Future<List<Method>> get getters async => [
+    for (final field in transitiveFields)
+      (MethodBuilder()
+            ..returns = refer(await fieldType(step, field))
             ..type = MethodType.getter
-            ..name = field.name,
-        ),
-      )
-      .toList();
+            ..name = field.name)
+          .build(),
+  ];
 
   /// Generates a `debugFillProperties` method.
   @protected

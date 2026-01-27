@@ -41,11 +41,12 @@ class DesignGenerator extends Generator {
       }
 
       if (_style.hasMatch(type.name!)) {
-        final delta = DeltaClass(type, sentinelValues[type.name] ?? {});
+        final delta = DeltaClass(step, type, sentinelValues[type.name] ?? {});
         generated.addAll([
           _emitter
               .visitExtension(
-                DesignTransformationsExtension(
+                await DesignTransformationsExtension(
+                  step,
                   type,
                   copyWithDocsHeader: [
                     '/// Returns a copy of this [${type.name!}] with the given properties replaced.',
@@ -58,7 +59,7 @@ class DesignGenerator extends Generator {
               .toString(),
           _emitter
               .visitMixin(
-                DesignFunctionsMixin(type, [
+                await DesignFunctionsMixin(step, type, [
                   '/// Returns itself.',
                   '/// ',
                   "/// Allows [${type.name}] to replace functions that accept and return a [${type.name}], such as a style's",
@@ -83,17 +84,18 @@ class DesignGenerator extends Generator {
                 ]).generate(),
               )
               .toString(),
-          _emitter.visitClass(delta.generateSealed()).toString(),
+          _emitter.visitClass(await delta.generateSealed()).toString(),
           _emitter.visitClass(delta.generateReplace()).toString(),
-          _emitter.visitClass(delta.generateMerge()).toString(),
+          _emitter.visitClass(await delta.generateMerge()).toString(),
         ]);
       } else if (_motion.hasMatch(type.name!)) {
-        final delta = DeltaClass(type, sentinelValues[type.name] ?? {});
+        final delta = DeltaClass(step, type, sentinelValues[type.name] ?? {});
 
         generated.addAll([
           _emitter
               .visitExtension(
-                DesignTransformationsExtension(
+                await DesignTransformationsExtension(
+                  step,
                   type,
                   copyWithDocsHeader: [
                     '/// Returns a copy of this [${type.name!}] with the given properties replaced.',
@@ -102,13 +104,15 @@ class DesignGenerator extends Generator {
                 ).generate(),
               )
               .toString(),
-          _emitter.visitMixin(DesignFunctionsMixin(type, ['/// Returns itself.']).generate()).toString(),
-          _emitter.visitClass(delta.generateSealed()).toString(),
+          _emitter.visitMixin(await DesignFunctionsMixin(step, type, ['/// Returns itself.']).generate()).toString(),
+          _emitter.visitClass(await delta.generateSealed()).toString(),
           _emitter.visitClass(delta.generateReplace()).toString(),
-          _emitter.visitClass(delta.generateMerge()).toString(),
+          _emitter.visitClass(await delta.generateMerge()).toString(),
         ]);
       } else if (type.name == 'FThemeData') {
-        generated.add(_emitter.visitMixin(DesignFunctionsMixin(type, ['/// Returns itself.']).generate()).toString());
+        generated.add(
+          _emitter.visitMixin(await DesignFunctionsMixin(step, type, ['/// Returns itself.']).generate()).toString(),
+        );
       }
     }
 

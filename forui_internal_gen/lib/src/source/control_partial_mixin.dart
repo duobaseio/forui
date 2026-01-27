@@ -1,4 +1,5 @@
 import 'package:analyzer/dart/element/element.dart';
+import 'package:build/build.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:forui_internal_gen/src/source/functions_mixin.dart';
 import 'package:meta/meta.dart';
@@ -12,15 +13,16 @@ class ControlPartialMixin extends FunctionsMixin {
   final ClassElement supertype;
 
   /// Creates a new [ControlPartialMixin].
-  ControlPartialMixin({required ClassElement type, required this.supertype}) : super(type);
+  ControlPartialMixin({required BuildStep step, required ClassElement type, required this.supertype})
+    : super(step, type);
 
   @override
-  Mixin generate() =>
+  Future<Mixin> generate() async =>
       (MixinBuilder()
             ..name = '_\$${element.name}Mixin'
             ..types.addAll([for (final t in supertype.typeParameters) refer(t.name!)])
             ..on = refer('Diagnosticable, ${supertype.displayName}$_typeParameters')
-            ..methods.addAll([...getters, if (fields.isNotEmpty) debugFillProperties, equals, hash]))
+            ..methods.addAll([...await getters, if (fields.isNotEmpty) debugFillProperties, equals, hash]))
           .build();
 
   String get _typeParameters =>

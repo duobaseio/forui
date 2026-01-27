@@ -9,12 +9,12 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 
 @Variants(FTappable, {
-  'primaryFocused': 'The variant when a given widget (and not its descendants) has focus.',
-  'focused': 'The variant when the given widget or any of its descendants have focus.',
-  'hovered': 'The variant when the user drags their mouse cursor over the given widget.',
-  'pressed': 'The variant when the user is actively pressing down on the given widget.',
-  'disabled': 'The variant when this widget is disabled and cannot be interacted with.',
-  'selected': 'The variant when this item has been selected.',
+  'disabled': (2, 'The semantic variant when this widget is disabled and cannot be interacted with.'),
+  'selected': (2, 'The semantic variant when this item has been selected.'),
+  'primaryFocused': (1, 'The interaction variant when a given widget (and not its descendants) has focus.'),
+  'focused': (1, 'The interaction variant when the given widget or any of its descendants have focus.'),
+  'hovered': (1, 'The interaction variant when the user drags their mouse cursor over the given widget.'),
+  'pressed': (1, 'The interaction variant when the user is actively pressing down on the given widget.'),
 })
 part 'tappable.design.dart';
 
