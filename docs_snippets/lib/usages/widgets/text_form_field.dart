@@ -64,7 +64,6 @@ final textFormField = FTextFormField(
   selectionControls: null,
   dragStartBehavior: .start,
   groupId: EditableText,
-  statesController: null,
   undoController: null,
   // {@endcategory}
   // {@category "Lines/Length"}
@@ -151,7 +150,6 @@ final textFormFieldEmail = FTextFormField.email(
   selectionControls: null,
   dragStartBehavior: .start,
   groupId: EditableText,
-  statesController: null,
   undoController: null,
   // {@endcategory}
   // {@category "Lines/Length"}
@@ -238,7 +236,6 @@ final textFormFieldMultiline = FTextFormField.multiline(
   selectionControls: null,
   dragStartBehavior: .start,
   groupId: EditableText,
-  statesController: null,
   undoController: null,
   // {@endcategory}
   // {@category "Lines/Length"}
@@ -328,7 +325,6 @@ final textFormFieldPassword = FTextFormField.password(
   selectionControls: null,
   dragStartBehavior: .start,
   groupId: EditableText,
-  statesController: null,
   undoController: null,
   // {@endcategory}
   // {@category "Lines/Length"}

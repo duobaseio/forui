@@ -33,7 +33,7 @@ final button = FButton(
   onSecondaryPress: null,
   onSecondaryLongPress: null,
   onHoverChange: (hovered) {},
-  onVariantChange: (states) {},
+  onVariantChange: (previous, current) {},
   // {@endcategory}
 );
 
@@ -58,7 +58,7 @@ final icon = FButton.icon(
   onSecondaryPress: null,
   onSecondaryLongPress: null,
   onHoverChange: (hovered) {},
-  onVariantChange: (states) {},
+  onVariantChange: (previous, current) {},
   // {@endcategory}
 );
 
@@ -83,7 +83,7 @@ final raw = FButton.raw(
   onSecondaryPress: null,
   onSecondaryLongPress: null,
   onHoverChange: (hovered) {},
-  onVariantChange: (states) {},
+  onVariantChange: (previous, current) {},
   // {@endcategory}
 );
 

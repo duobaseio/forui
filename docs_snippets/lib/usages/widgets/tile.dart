@@ -29,7 +29,7 @@ final tile = FTile(
   onSecondaryPress: () {},
   onSecondaryLongPress: () {},
   onHoverChange: (hovered) {},
-  onVariantChange: (states) {},
+  onVariantChange: (previous, current) {},
   // {@endcategory}
 );
 
@@ -55,6 +55,6 @@ final tileRaw = FTile.raw(
   onSecondaryPress: () {},
   onSecondaryLongPress: () {},
   onHoverChange: (hovered) {},
-  onVariantChange: (states) {},
+  onVariantChange: (previous, current) {},
   // {@endcategory}
 );

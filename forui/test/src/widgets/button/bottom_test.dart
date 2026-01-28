@@ -6,13 +6,17 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  testWidgets('onStateChange & onHoverChange callback called', (tester) async {
-    FWidgetStatesDelta? delta;
+  testWidgets('onVariantChange & onHoverChange callback called', (tester) async {
+    Set<FTappableVariant>? previous;
+    Set<FTappableVariant>? current;
     bool? hovered;
     await tester.pumpWidget(
       TestScaffold(
         child: FButton(
-          onVariantChange: (v) => delta = v,
+          onVariantChange: (p, c) {
+            previous = p;
+            current = c;
+          },
           onHoverChange: (v) => hovered = v,
           onPress: () {},
           child: const Text('Button'),
@@ -26,13 +30,15 @@ void main() {
     await gesture.moveTo(tester.getCenter(find.text('Button')));
     await tester.pumpAndSettle();
 
-    expect(delta, FWidgetStatesDelta({}, {WidgetState.hovered}));
+    expect(previous, isNot(contains(FTappableVariant.hovered)));
+    expect(current, contains(FTappableVariant.hovered));
     expect(hovered, true);
 
     await gesture.moveTo(.zero);
     await tester.pumpAndSettle();
 
-    expect(delta, FWidgetStatesDelta({WidgetState.hovered}, {}));
+    expect(previous, contains(FTappableVariant.hovered));
+    expect(current, isNot(contains(FTappableVariant.hovered)));
     expect(hovered, false);
   });
 }

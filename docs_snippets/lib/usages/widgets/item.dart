@@ -29,7 +29,7 @@ final item = FItem(
   onSecondaryPress: () {},
   onSecondaryLongPress: () {},
   onHoverChange: (hovered) {},
-  onVariantChange: (states) {},
+  onVariantChange: (previous, current) {},
   // {@endcategory}
 );
 
@@ -55,6 +55,6 @@ final raw = FItem.raw(
   onSecondaryPress: () {},
   onSecondaryLongPress: () {},
   onHoverChange: (hovered) {},
-  onVariantChange: (states) {},
+  onVariantChange: (previous, current) {},
   // {@endcategory}
 );

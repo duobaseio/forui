@@ -29,7 +29,7 @@ final accordionItem = FAccordionItem(
   // {@endcategory}
   // {@category "Callbacks"}
   onHoverChange: (hovered) {},
-  onVariantChange: (delta) {},
+  onVariantChange: (previous, current) {},
   // {@endcategory}
 );
 
