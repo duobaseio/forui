@@ -6,7 +6,14 @@ import 'package:flutter/services.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/annotations.dart';
+import 'package:forui/src/theme/variant.dart';
 
+@Variants(FSwitchStyle, {
+  'disabled': (2, 'The semantic variant when this widget is disabled and cannot be interacted with.'),
+  'error': (2, 'The semantic variant when this widget is in an error state.'),
+  'selected': (2, 'The semantic variant when this widget is selected/on.'),
+})
 part 'switch.design.dart';
 
 /// A control that allows the user to toggle between checked and unchecked.
@@ -96,8 +103,8 @@ class FSwitch extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = this.style?.call(context.theme.switchStyle) ?? context.theme.switchStyle;
-    final formStates = {if (!enabled) WidgetState.disabled, if (error != null) WidgetState.error};
-    final states = {if (value) WidgetState.selected, ...formStates};
+    final formVariants = <FFormFieldVariant>{if (!enabled) .disabled, if (error != null) .error};
+    final variants = {if (value) FSwitchVariant.selected, ...formVariants};
 
     // The label is wrapped in a GestureDetector to improve affordance.
     return GestureDetector(
@@ -113,7 +120,7 @@ class FSwitch extends StatelessWidget {
           toggled: value,
           child: FLabel(
             axis: .horizontal,
-            states: formStates,
+            variants: formVariants,
             style: style,
             label: label,
             description: description,
@@ -128,10 +135,10 @@ class FSwitch extends StatelessWidget {
                 onChange?.call(value);
               },
               applyTheme: false,
-              activeTrackColor: style.trackColor.resolve(states),
-              // Don't use [states] as it always contains [WidgetState.selected] but we want the unselected color.
-              inactiveTrackColor: style.trackColor.resolve(formStates),
-              thumbColor: style.thumbColor.resolve(states),
+              activeTrackColor: style.trackColor.resolve(variants),
+              // Don't use [variants] as it always contains [.selected] but we want the unselected color.
+              inactiveTrackColor: style.trackColor.resolve(formVariants),
+              thumbColor: style.thumbColor.resolve(variants),
               focusColor: style.focusColor,
               autofocus: autofocus,
               focusNode: focusNode,
@@ -166,22 +173,12 @@ class FSwitchStyle extends FLabelStyle with _$FSwitchStyleFunctions {
   final Color focusColor;
 
   /// The track's color.
-  ///
-  /// The supported states are:
-  /// * [WidgetState.disabled]
-  /// * [WidgetState.error]
-  /// * [WidgetState.selected]
   @override
-  final FWidgetStateMap<Color> trackColor;
+  final FVariants<FSwitchVariantConstraint, Color, Delta<Color>> trackColor;
 
   /// The thumb's color.
-  ///
-  /// The supported states are:
-  /// * [WidgetState.disabled]
-  /// * [WidgetState.error]
-  /// * [WidgetState.selected]
   @override
-  final FWidgetStateMap<Color> thumbColor;
+  final FVariants<FSwitchVariantConstraint, Color, Delta<Color>> thumbColor;
 
   /// Creates a [FSwitchStyle].
   const FSwitchStyle({
@@ -202,16 +199,16 @@ class FSwitchStyle extends FLabelStyle with _$FSwitchStyleFunctions {
     final label = FLabelStyles.inherit(style: style).horizontalStyle;
     return .new(
       focusColor: colors.primary,
-      trackColor: FWidgetStateMap({
-        // Disabled
-        WidgetState.disabled & WidgetState.selected: colors.disable(colors.primary),
-        WidgetState.disabled: colors.disable(colors.border),
-
-        // Enabled / Error
-        WidgetState.selected: colors.primary,
-        WidgetState.any: colors.border,
-      }),
-      thumbColor: .all(colors.background),
+      trackColor: FVariants(
+        colors.border,
+        variants: {
+          // Disabled
+          {.disabled.and(.selected)}: colors.disable(colors.primary),
+          {.disabled}: colors.disable(colors.border),
+          {.selected}: colors.primary,
+        },
+      ),
+      thumbColor: .raw(colors.background),
       labelTextStyle: style.formFieldStyle.labelTextStyle,
       descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,
       errorTextStyle: style.formFieldStyle.errorTextStyle,

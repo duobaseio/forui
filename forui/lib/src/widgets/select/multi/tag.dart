@@ -6,7 +6,15 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/annotations.dart';
+import 'package:forui/src/theme/variant.dart';
 
+@Variants(FMultiSelectTagStyle, {
+  'disabled': (2, 'The semantic variant when this widget is disabled and cannot be interacted with.'),
+  'focused': (1, 'The interaction variant when the given widget or any of its descendants have focus.'),
+  'hovered': (1, 'The interaction variant when the user drags their mouse cursor over the given widget.'),
+  'pressed': (1, 'The interaction variant when the user is actively pressing down on the given widget.'),
+})
 part 'tag.design.dart';
 
 /// A tag in a [FMultiSelect].
@@ -27,7 +35,7 @@ class FMultiSelectTag extends StatelessWidget {
   final ValueChanged<bool>? onHoverChange;
 
   /// {@macro forui.foundation.FTappable.onStateChange}
-  final ValueChanged<FWidgetStatesDelta>? onStateChange;
+  final FTappableVariantChangeCallback? onStateChange;
 
   /// The label.
   final Widget label;
@@ -72,12 +80,12 @@ class FMultiSelectTag extends StatelessWidget {
   Widget build(BuildContext context) {
     final style = this.style?.call(context.theme.multiSelectStyle.tagStyle) ?? context.theme.multiSelectStyle.tagStyle;
     return FTappable(
-      style: style.tappableStyle,
+      style: .replace(style.tappableStyle),
       autofocus: autofocus,
       focusNode: focusNode,
       onFocusChange: onFocusChange,
       onHoverChange: onHoverChange,
-      onStateChange: onStateChange,
+      onVariantChange: onStateChange,
       onPress: onPress,
       onLongPress: onLongPress,
       onSecondaryPress: onSecondaryPress,
@@ -94,7 +102,7 @@ class FMultiSelectTag extends StatelessWidget {
             children: [
               DefaultTextStyle(style: style.labelTextStyle.resolve(states), child: label),
               FFocusedOutline(
-                focused: states.contains(WidgetState.focused),
+                focused: states.contains(FTappableVariant.focused),
                 child: IconTheme(data: style.iconStyle.resolve(states), child: const Icon(FIcons.x)),
               ),
             ],
@@ -126,10 +134,8 @@ class FMultiSelectTag extends StatelessWidget {
 /// A [FMultiSelectTag]'s style.
 class FMultiSelectTagStyle with Diagnosticable, _$FMultiSelectTagStyleFunctions {
   /// The decoration.
-  ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.tappable}
   @override
-  final FWidgetStateMap<Decoration> decoration;
+  final FVariants<FMultiSelectTagVariantConstraint, Decoration, Delta<Decoration>> decoration;
 
   /// The padding. Defaults to `EdgeInsets.symmetric(vertical: 4, horizontal: 8)`.
   ///
@@ -142,16 +148,12 @@ class FMultiSelectTagStyle with Diagnosticable, _$FMultiSelectTagStyleFunctions 
   final double spacing;
 
   /// The label's text style.
-  ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.tappable}
   @override
-  final FWidgetStateMap<TextStyle> labelTextStyle;
+  final FVariants<FMultiSelectTagVariantConstraint, TextStyle, TextStyleDelta> labelTextStyle;
 
   /// The icon's style.
-  ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.tappable}
   @override
-  final FWidgetStateMap<IconThemeData> iconStyle;
+  final FVariants<FMultiSelectTagVariantConstraint, IconThemeData, IconThemeDataDelta> iconStyle;
 
   /// The tappable style.
   @override
@@ -175,25 +177,28 @@ class FMultiSelectTagStyle with Diagnosticable, _$FMultiSelectTagStyleFunctions 
   /// Creates a [FMultiSelectTagStyle] that inherits its properties.
   FMultiSelectTagStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        decoration: FWidgetStateMap({
-          WidgetState.disabled: BoxDecoration(
-            borderRadius: style.borderRadius,
-            color: colors.disable(colors.secondary),
-          ),
-          WidgetState.hovered | WidgetState.pressed: BoxDecoration(
-            borderRadius: style.borderRadius,
-            color: colors.hover(colors.secondary),
-          ),
-          WidgetState.any: BoxDecoration(borderRadius: style.borderRadius, color: colors.secondary),
-        }),
-        labelTextStyle: FWidgetStateMap({
-          WidgetState.disabled: typography.sm.copyWith(color: colors.disable(colors.secondaryForeground)),
-          WidgetState.any: typography.sm.copyWith(color: colors.secondaryForeground),
-        }),
-        iconStyle: FWidgetStateMap({
-          WidgetState.disabled: IconThemeData(color: colors.disable(colors.mutedForeground), size: 15),
-          WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 15),
-        }),
+        decoration: FVariants(
+          BoxDecoration(borderRadius: style.borderRadius, color: colors.secondary),
+          variants: {
+            {.disabled}: BoxDecoration(borderRadius: style.borderRadius, color: colors.disable(colors.secondary)),
+            {.hovered, .pressed}: BoxDecoration(
+              borderRadius: style.borderRadius,
+              color: colors.hover(colors.secondary),
+            ),
+          },
+        ),
+        labelTextStyle: .delta(
+          typography.sm.copyWith(color: colors.secondaryForeground),
+          variants: {
+            {.disabled}: .merge(color: colors.disable(colors.secondaryForeground)),
+          },
+        ),
+        iconStyle: .delta(
+          IconThemeData(color: colors.mutedForeground, size: 15),
+          variants: {
+            {.disabled}: .merge(color: colors.disable(colors.mutedForeground)),
+          },
+        ),
         tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
         focusedOutlineStyle: style.focusedOutlineStyle,
       );

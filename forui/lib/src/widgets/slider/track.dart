@@ -7,7 +7,7 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/slider/inherited_controller.dart';
 import 'package:forui/src/widgets/slider/inherited_data.dart';
-import 'package:forui/src/widgets/slider/inherited_state.dart';
+import 'package:forui/src/widgets/slider/inherited_variants.dart';
 import 'package:forui/src/widgets/slider/thumb.dart';
 
 @internal
@@ -181,7 +181,7 @@ class _Track extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final InheritedData(:style, :layout, :marks, :enabled) = InheritedData.of(context);
-    final states = InheritedStates.of(context).states;
+    final states = InheritedVariants.of(context).variants;
     final crossAxisExtent = style.crossAxisExtent;
 
     final extent = InheritedController.of(
@@ -225,7 +225,7 @@ class ActiveTrack extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final InheritedData(:style, :layout) = .of(context);
-    final states = InheritedStates.of(context).states;
+    final states = InheritedVariants.of(context).variants;
     final crossAxisExtent = style.crossAxisExtent;
     final pixels = InheritedController.of(context, InheritedController.pixels).controller.value.pixels;
 

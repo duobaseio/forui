@@ -183,11 +183,11 @@ class _FSelectGroupState<T> extends State<FSelectGroup<T>> {
       forceErrorText: widget.forceErrorText,
       autovalidateMode: widget.autovalidateMode,
       builder: (state) {
-        final formStates = {if (!widget.enabled) WidgetState.disabled, if (state.errorText != null) WidgetState.error};
+        final variants = <FFormFieldVariant>{if (!widget.enabled) .disabled, if (state.errorText != null) .error};
 
         return FLabel(
           axis: .vertical,
-          states: formStates,
+          variants: variants,
           style: groupStyle,
           label: widget.label,
           description: widget.description,
@@ -250,14 +250,18 @@ class FSelectGroupStyle extends FLabelStyle with Diagnosticable, _$FSelectGroupS
   factory FSelectGroupStyle.inherit({required FColors colors, required FTypography typography, required FStyle style}) {
     final vertical = FLabelStyles.inherit(style: style).verticalStyle;
 
-    final labelTextStyle = FWidgetStateMap({
-      WidgetState.disabled: typography.sm.copyWith(color: colors.disable(colors.primary), fontWeight: .w500),
-      WidgetState.any: typography.sm.copyWith(color: colors.primary, fontWeight: .w500),
-    });
-    final descriptionTextStyle = FWidgetStateMap({
-      WidgetState.disabled: typography.sm.copyWith(color: colors.disable(colors.mutedForeground)),
-      WidgetState.any: typography.sm.copyWith(color: colors.mutedForeground),
-    });
+    final labelTextStyle = FVariants<FFormFieldVariantConstraint, TextStyle, TextStyleDelta>.delta(
+      typography.sm.copyWith(color: colors.primary, fontWeight: .w500),
+      variants: {
+        {.disabled}: .merge(color: colors.disable(colors.primary)),
+      },
+    );
+    final descriptionTextStyle = FVariants<FFormFieldVariantConstraint, TextStyle, TextStyleDelta>.delta(
+      typography.sm.copyWith(color: colors.mutedForeground),
+      variants: {
+        {.disabled}: .merge(color: colors.disable(colors.mutedForeground)),
+      },
+    );
     final errorTextStyle = typography.sm.copyWith(color: colors.error, fontWeight: .w500);
 
     return .new(

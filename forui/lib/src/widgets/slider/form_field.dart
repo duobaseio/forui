@@ -3,7 +3,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/slider/inherited_data.dart';
-import 'package:forui/src/widgets/slider/inherited_state.dart';
+import 'package:forui/src/widgets/slider/inherited_variants.dart';
 import 'package:forui/src/widgets/slider/slider_render_object.dart';
 import 'package:forui/src/widgets/slider/track.dart';
 
@@ -37,21 +37,21 @@ class SliderFormField extends FormField<FSliderValue> with FFormFieldProperties<
            final state = field as _State;
            final InheritedData(:layout, :marks, :trackMainAxisExtent) = .of(state.context);
            final style = InheritedData.of(state.context).style;
-           final states = {if (!enabled) WidgetState.disabled, if (state.hasError) WidgetState.error};
+           final formVariants = <FFormFieldVariant>{if (!enabled) .disabled, if (state.hasError) .error};
 
            // DO NOT REORDER THE CHILDREN - _RenderSlider assumes this order.
            final children = [
              Padding(padding: style.childPadding, child: const Track()),
              if (label != null)
                DefaultTextStyle(
-                 style: style.labelTextStyle.resolve(states),
+                 style: style.labelTextStyle.resolve(formVariants),
                  child: Padding(padding: style.labelPadding, child: label),
                )
              else
                const SizedBox(),
              if (description != null)
                DefaultTextStyle.merge(
-                 style: style.descriptionTextStyle.resolve(states),
+                 style: style.descriptionTextStyle.resolve(formVariants),
                  child: Padding(padding: style.descriptionPadding, child: description),
                )
              else
@@ -65,11 +65,11 @@ class SliderFormField extends FormField<FSliderValue> with FFormFieldProperties<
                const SizedBox(),
              for (final mark in marks.where((mark) => mark.label != null).toList())
                if (mark case FSliderMark(style: final markStyle, :final label?))
-                 DefaultTextStyle(style: (markStyle ?? style.markStyle).labelTextStyle.resolve(states), child: label),
+                 DefaultTextStyle(style: (markStyle ?? style.markStyle).labelTextStyle.resolve(formVariants), child: label),
            ];
 
-           return InheritedStates(
-             states: states,
+           return InheritedVariants(
+             variants: formVariants,
              child: layout.vertical
                  ? VerticalSliderRenderObject(children: children)
                  : HorizontalSliderRenderObject(children: children),

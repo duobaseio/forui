@@ -72,12 +72,14 @@ extension Focus on Never {
 }
 
 @internal
+@Deprecated('TODO remove')
 extension WidgetStates on Never {
   /// {@template forui.foundation.doc_templates.WidgetStates.form}
   ///  Supported states:
   /// * [WidgetState.disabled]
   /// * [WidgetState.error]
   /// {@endtemplate}
+  @Deprecated('TODO remove')
   static const form = '';
 
   /// {@template forui.foundation.doc_templates.WidgetStates.selectable}
@@ -88,6 +90,7 @@ extension WidgetStates on Never {
   /// * [WidgetState.disabled]
   /// * [WidgetState.selected]
   /// {@endtemplate}
+  @Deprecated('TODO remove')
   static const selectable = '';
 
   /// {@template forui.foundation.doc_templates.WidgetStates.tappable}
@@ -97,6 +100,7 @@ extension WidgetStates on Never {
   /// * [WidgetState.pressed]
   /// * [WidgetState.disabled]
   /// {@endtemplate}
+  @Deprecated('TODO remove')
   static const tappable = '';
 }
 

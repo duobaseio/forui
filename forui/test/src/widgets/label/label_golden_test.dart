@@ -17,7 +17,7 @@ void main() {
             label: const Text('Email'),
             description: const Text('Enter your email address.'),
             error: const Text('Please enter a valid email address.'),
-            states: const {.error},
+            variants: {.error},
             child: const SizedBox(width: 16, height: 16),
           ),
         ),
@@ -28,12 +28,12 @@ void main() {
   });
 
   for (final theme in TestScaffold.themes) {
-    for (final states in [
-      {WidgetState.disabled},
-      {WidgetState.error},
-      <WidgetState>{},
+    for (final Set<FFormFieldVariant> variants in [
+      {.disabled},
+      {.error},
+      {},
     ]) {
-      testWidgets('${theme.name} horizontal with $states', (tester) async {
+      testWidgets('${theme.name} horizontal with $variants', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
@@ -44,7 +44,7 @@ void main() {
                 label: const Text('Email'),
                 description: const Text('Enter your email address.'),
                 error: const Text('Please enter a valid email address.'),
-                states: states,
+                variants: variants,
                 child: const DecoratedBox(
                   decoration: BoxDecoration(borderRadius: .all(.circular(5)), color: Colors.grey),
                   child: SizedBox(width: 16, height: 16),
@@ -54,16 +54,16 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('label/${theme.name}/horizontal-$states.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('label/${theme.name}/horizontal-$variants.png'));
       });
     }
 
-    for (final state in [
-      {WidgetState.disabled},
-      {WidgetState.error},
-      <WidgetState>{},
+    for (final Set<FFormFieldVariant> variants in [
+      {.disabled},
+      {.error},
+      {},
     ]) {
-      testWidgets('${theme.name} vertical with $state', (tester) async {
+      testWidgets('${theme.name} vertical with $variants', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
@@ -72,7 +72,7 @@ void main() {
               label: const Text('Email'),
               description: const Text('Enter your email address.'),
               error: const Text('Please enter a valid email address.'),
-              states: state,
+              variants: variants,
               child: const DecoratedBox(
                 decoration: BoxDecoration(borderRadius: .all(.circular(5)), color: Colors.grey),
                 child: SizedBox(width: 200, height: 30),
@@ -81,7 +81,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('label/${theme.name}/vertical-$state.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('label/${theme.name}/vertical-$variants.png'));
       });
     }
   }

@@ -37,7 +37,7 @@ void main() {
   testWidgets('renders error even when label and description are null', (tester) async {
     await tester.pumpWidget(
       TestScaffold(
-        child: const FLabel(axis: .horizontal, states: {.error}, error: Text('Error'), child: Text('Child')),
+        child: FLabel(axis: .horizontal, variants: {.error}, error: const Text('Error'), child: const Text('Child')),
       ),
     );
 
@@ -48,13 +48,13 @@ void main() {
   testWidgets('renders horizontal label with label, description, and error', (tester) async {
     await tester.pumpWidget(
       TestScaffold(
-        child: const FLabel(
+        child: FLabel(
           axis: .horizontal,
-          label: Text('Label'),
-          description: Text('Description'),
-          error: Text('Error'),
-          states: {.error},
-          child: Text('Child'),
+          label: const Text('Label'),
+          description: const Text('Description'),
+          error: const Text('Error'),
+          variants: {.error},
+          child: const Text('Child'),
         ),
       ),
     );
@@ -68,13 +68,13 @@ void main() {
   testWidgets('renders vertical label with label, description, and error', (tester) async {
     await tester.pumpWidget(
       TestScaffold(
-        child: const FLabel(
+        child: FLabel(
           axis: .vertical,
-          label: Text('Label'),
-          description: Text('Description'),
-          error: Text('Error'),
-          states: {.error},
-          child: Text('Child'),
+          label: const Text('Label'),
+          description: const Text('Description'),
+          error: const Text('Error'),
+          variants: {.error},
+          child: const Text('Child'),
         ),
       ),
     );

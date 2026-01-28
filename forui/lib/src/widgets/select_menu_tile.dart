@@ -604,13 +604,13 @@ class _FSelectMenuTileState<T> extends State<FSelectMenuTile<T>> with TickerProv
         );
 
         if (data == null && (widget.label != null || widget.description != null || state.errorText != null)) {
-          final states = {if (!widget.enabled) WidgetState.disabled, if (state.errorText != null) WidgetState.error};
+          final variants = <FFormFieldVariant>{if (!widget.enabled) .disabled, if (state.errorText != null) .error};
           final error = state.errorText == null ? null : widget.errorBuilder(context, state.errorText!);
 
           tile = FLabel(
             axis: .vertical,
             style: selectMenuTileStyle ?? global,
-            states: states,
+            variants: variants,
             label: widget.label,
             description: widget.description,
             error: error,

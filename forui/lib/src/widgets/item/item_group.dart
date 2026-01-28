@@ -7,7 +7,12 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/annotations.dart';
+import 'package:forui/src/theme/variant.dart';
 
+@Variants(FItemGroupStyle, {
+  'disabled': (2, 'The semantic variant when this widget is disabled and cannot be interacted with.'),
+})
 part 'item_group.design.dart';
 
 /// A marker interface which denotes that mixed-in widgets can group items and be used in a [FItemGroup.merge].
@@ -444,11 +449,8 @@ class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
   final double spacing;
 
   /// The divider's style.
-  ///
-  /// Supported states:
-  /// * [WidgetState.disabled]
   @override
-  final FWidgetStateMap<Color> dividerColor;
+  final FVariants<FItemGroupVariantConstraint, Color, Delta<Color>> dividerColor;
 
   /// The divider's width.
   @override
@@ -471,7 +473,7 @@ class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
   FItemGroupStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         itemStyle: .inherit(colors: colors, typography: typography, style: style),
-        dividerColor: .all(colors.border),
+        dividerColor: .raw(colors.border),
         dividerWidth: style.borderWidth,
       );
 }

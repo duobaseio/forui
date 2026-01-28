@@ -60,7 +60,7 @@ final class FInheritedItemData extends InheritedWidget {
     FItemStyle? style,
     double? spacing,
     FItemDivider? divider,
-    FWidgetStateMap<Color>? dividerColor,
+    FVariants<FItemGroupVariantConstraint, Color, Delta<Color>>? dividerColor,
     double? dividerWidth,
     bool? enabled,
     int? index,
@@ -73,7 +73,7 @@ final class FInheritedItemData extends InheritedWidget {
         data: FItemData(
           style: style ?? parent?.style,
           spacing: max(spacing ?? 0, parent?.spacing ?? 0),
-          dividerColor: dividerColor ?? parent?.dividerColor ?? .all(Colors.transparent),
+          dividerColor: dividerColor ?? parent?.dividerColor ?? const .raw(Colors.transparent),
           dividerWidth: dividerWidth ?? parent?.dividerWidth ?? 0,
           divider: switch ((last, globalLast)) {
             // The first/middle items of a group.
@@ -114,7 +114,7 @@ final class FItemData with Diagnosticable {
   final double spacing;
 
   /// The divider's style.
-  final FWidgetStateMap<Color> dividerColor;
+  final FVariants<FItemGroupVariantConstraint, Color, Delta<Color>> dividerColor;
 
   /// The divider's width.
   final double dividerWidth;
@@ -138,7 +138,7 @@ final class FItemData with Diagnosticable {
   const FItemData({
     this.style,
     this.spacing = 0,
-    this.dividerColor = const FWidgetStateMap({WidgetState.any: Colors.transparent}),
+    this.dividerColor = const .raw(Colors.transparent),
     this.dividerWidth = 0,
     this.divider = FItemDivider.none,
     this.enabled = true,

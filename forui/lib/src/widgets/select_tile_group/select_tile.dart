@@ -57,8 +57,8 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
   /// {@macro forui.foundation.FTappable.onHoverChange}
   final ValueChanged<bool>? onHoverChange;
 
-  /// {@macro forui.foundation.FTappable.onStateChange}
-  final ValueChanged<FWidgetStatesDelta>? onStatesChange;
+  /// {@macro forui.foundation.FTappable.onVariantChange}
+  final FTappableVariantChangeCallback? onVariantChange;
 
   /// The shortcuts. Defaults to calling [ActivateIntent].
   final Map<ShortcutActivator, Intent>? shortcuts;
@@ -87,7 +87,7 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
     this.focusNode,
     this.onFocusChange,
     this.onHoverChange,
-    this.onStatesChange,
+    this.onVariantChange,
     this.shortcuts,
     this.actions,
     Widget? suffix,
@@ -113,7 +113,7 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
     ValueChanged<bool>? onHoverChange,
-    ValueChanged<FWidgetStatesDelta>? onStatesChange,
+    FTappableVariantChangeCallback? onVariantChange,
     Map<ShortcutActivator, Intent>? shortcuts,
     Map<Type, Action<Intent>>? actions,
     Widget? suffix,
@@ -137,7 +137,7 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
     this.focusNode,
     this.onFocusChange,
     this.onHoverChange,
-    this.onStatesChange,
+    this.onVariantChange,
     this.shortcuts,
     this.actions,
     Widget? prefix,
@@ -171,7 +171,7 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
       focusNode: focusNode,
       onFocusChange: onFocusChange,
       onHoverChange: onHoverChange,
-      onStateChange: onStatesChange,
+      onVariantChange: onVariantChange,
       shortcuts: shortcuts,
       actions: actions,
     );
@@ -188,7 +188,7 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
-      ..add(ObjectFlagProperty.has('onStatesChange', onStatesChange))
+      ..add(ObjectFlagProperty.has('onVariantChange', onVariantChange))
       ..add(DiagnosticsProperty('shortcuts', shortcuts))
       ..add(DiagnosticsProperty('actions', actions));
   }

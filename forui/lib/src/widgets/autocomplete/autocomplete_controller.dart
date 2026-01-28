@@ -15,11 +15,11 @@ class FAutocompleteController extends FTypeaheadController {
   FAutocompleteController({super.text, super.suggestions})
     : super(
         textStyles: (context) {
-          final InheritedAutocompleteStyle(:style, :states) = .of(context);
+          final InheritedAutocompleteStyle(:style, :variants) = .of(context);
           return (
-            style.fieldStyle.contentTextStyle.resolve(states),
-            style.composingTextStyle.resolve(states),
-            style.typeaheadTextStyle.resolve(states),
+            style.fieldStyle.contentTextStyle.resolve(variants),
+            style.composingTextStyle.resolve(variants),
+            style.typeaheadTextStyle.resolve(variants),
           );
         },
       );
@@ -28,7 +28,7 @@ class FAutocompleteController extends FTypeaheadController {
   FAutocompleteController.fromValue(super.value, {super.suggestions = const []})
     : super.fromValue(
         textStyles: (context) {
-          final InheritedAutocompleteStyle(:style, :states) = .of(context);
+          final InheritedAutocompleteStyle(:style, variants:states) = .of(context);
           return (
             style.fieldStyle.contentTextStyle.resolve(states),
             style.composingTextStyle.resolve(states),

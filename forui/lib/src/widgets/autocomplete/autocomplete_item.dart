@@ -6,9 +6,14 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/annotations.dart';
+import 'package:forui/src/theme/variant.dart';
 import 'package:forui/src/widgets/autocomplete/autocomplete_content.dart';
 import 'package:forui/src/widgets/autocomplete/autocomplete_controller.dart';
 
+@Variants(FAutocompleteSectionStyle, {
+  'disabled': (2, 'The semantic variant when this widget is disabled and cannot be interacted with.'),
+})
 part 'autocomplete_item.design.dart';
 
 /// A marker interface which denotes that mixed-in widgets can be used in a [FAutocomplete].
@@ -152,7 +157,7 @@ class FAutocompleteSection extends StatelessWidget with FAutocompleteItemMixin {
         crossAxisAlignment: .start,
         children: [
           DefaultTextStyle.merge(
-            style: style.labelTextStyle.resolve({if (!enabled) .disabled}),
+            style: style.labelTextStyle.resolve({if (!enabled) FAutocompleteSectionVariant.disabled}),
             child: Padding(padding: style.labelPadding, child: label),
           ),
           if (children.firstOrNull case final first?)
@@ -193,22 +198,16 @@ class FAutocompleteSection extends StatelessWidget with FAutocompleteItemMixin {
 /// A [FAutocompleteSection]'s style.
 class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyleFunctions {
   /// The enabled label's text style.
-  ///
-  /// Supported states:
-  /// * [WidgetState.disabled]
   @override
-  final FWidgetStateMap<TextStyle> labelTextStyle;
+  final FVariants<FAutocompleteSectionVariantConstraint, TextStyle, TextStyleDelta> labelTextStyle;
 
   /// The padding around the label. Defaults to `EdgeInsetsDirectional.only(start: 15, top: 7.5, bottom: 7.5, end: 10)`.
   @override
   final EdgeInsetsGeometry labelPadding;
 
   /// The divider's style.
-  ///
-  /// Supported states:
-  /// * [WidgetState.disabled]
   @override
-  final FWidgetStateMap<Color> dividerColor;
+  final FVariants<FItemGroupVariantConstraint, Color, Delta<Color>> dividerColor;
 
   /// The divider's width.
   @override
@@ -247,14 +246,21 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
       },
     );
     return .new(
-      labelTextStyle: FWidgetStateMap({
-        WidgetState.disabled: typography.sm.copyWith(
-          color: colors.disable(colors.primary),
-          fontWeight: FontWeight.w600,
-        ),
-        WidgetState.any: typography.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w600),
-      }),
-      dividerColor: .all(colors.border),
+
+      // labelTextStyle: FWidgetStateMap({
+      //   WidgetState.disabled: typography.sm.copyWith(
+      //     color: colors.disable(colors.primary),
+      //     fontWeight: FontWeight.w600,
+      //   ),
+      //   WidgetState.any: typography.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w600),
+      // }),
+      labelTextStyle: .delta(
+        typography.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w600),
+        variants: {
+          {.disabled}: .merge(color: colors.disable(colors.primary)),
+        },
+      ),
+      dividerColor: .raw(colors.border),
       dividerWidth: style.borderWidth,
       itemStyle: FItemStyle(
         backgroundColor: const .raw(null),

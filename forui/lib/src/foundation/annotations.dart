@@ -2,13 +2,13 @@ import 'package:meta/meta.dart';
 
 @internal
 class Variants {
-  /// The widget the variants are associated with.
-  final Type widget;
+  /// The corresponding style.
+  final Type style;
 
   /// The variants and their associated tier and documentation.
   final Map<String, (int, String)> variants;
 
-  const Variants(this.widget, this.variants);
+  const Variants(this.style, this.variants);
 }
 
 @internal

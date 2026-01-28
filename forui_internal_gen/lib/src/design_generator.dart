@@ -19,8 +19,8 @@ class DesignGenerator extends Generator {
     final generated = <String>[];
 
     for (final annotated in library.libraryDirectivesAnnotatedWith(variants)) {
-      final (type, variants) = variantsAnnotation(annotated.annotation.objectValue);
-      final generator = VariantExtensionType(type, variants);
+      final (style, variants) = variantsAnnotation(annotated.annotation.objectValue);
+      final generator = VariantExtensionType(style, variants);
 
       generated.addAll([
         _emitter.visitExtensionType(generator.generateVariantConstraint()).toString(),

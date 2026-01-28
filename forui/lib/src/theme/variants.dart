@@ -81,6 +81,13 @@ class FVariants<K extends FVariantConstraint, V, D extends Delta<V>> with Diagno
     return variant ?? base;
   }
 
+  /// Returns a new [FVariants] with the constraint type parameter cast to [T].
+  ///
+  /// ## Implementation details
+  /// This is always valid if [K] and [T] are both extension types over [FVariantConstraint] as in the case with the
+  /// generated widget-specific variant constraints.
+  FVariants<T, V, D> cast<T extends FVariantConstraint>() => this as FVariants<T, V, D>;
+
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);

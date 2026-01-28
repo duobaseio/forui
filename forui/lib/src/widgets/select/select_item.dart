@@ -6,9 +6,14 @@ import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/annotations.dart';
+import 'package:forui/src/theme/variant.dart';
 import 'package:forui/src/widgets/select/content/content.dart';
 import 'package:forui/src/widgets/select/content/inherited_controller.dart';
 
+@Variants(FSelectSectionStyle, {
+  'disabled': (2, 'The semantic variant when this widget is disabled and cannot be interacted with.'),
+})
 part 'select_item.design.dart';
 
 Widget? _defaultSuffixBuilder(BuildContext _, bool selected) => selected ? const Icon(FIcons.check) : null;
@@ -157,7 +162,7 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
         crossAxisAlignment: .start,
         children: [
           DefaultTextStyle.merge(
-            style: style.labelTextStyle.resolve({if (!enabled) .disabled}),
+            style: style.labelTextStyle.resolve({if (!enabled) FSelectSectionVariant.disabled}),
             child: Padding(padding: style.labelPadding, child: label),
           ),
           // There is an edge case where a non-first, enabled child of a disabled section will not be auto-focused.
@@ -201,23 +206,17 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
 
 /// A [FSelectSection]'s style.
 class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
-  /// The enabled label's text style.
-  ///
-  /// Supported states:
-  /// * [WidgetState.disabled]
+  /// The label's text style.
   @override
-  final FWidgetStateMap<TextStyle> labelTextStyle;
+  final FVariants<FSelectSectionVariantConstraint, TextStyle, TextStyleDelta> labelTextStyle;
 
   /// The padding around the label. Defaults to `EdgeInsetsDirectional.only(start: 15, top: 7.5, bottom: 7.5, end: 10)`.
   @override
   final EdgeInsetsGeometry labelPadding;
 
   /// The divider's style.
-  ///
-  /// Supported states:
-  /// * [WidgetState.disabled]
   @override
-  final FWidgetStateMap<Color> dividerColor;
+  final FVariants<FSelectSectionVariantConstraint, Color, Delta<Color>> dividerColor;
 
   /// The divider's width.
   @override
@@ -243,44 +242,55 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
     required FTypography typography,
   }) {
     const padding = EdgeInsetsDirectional.only(start: 11, top: 7.5, bottom: 7.5, end: 6);
-    final iconStyle = FWidgetStateMap({
-      WidgetState.disabled: IconThemeData(color: colors.disable(colors.primary), size: 15),
-      WidgetState.any: IconThemeData(color: colors.primary, size: 15),
-    });
-    final textStyle = FWidgetStateMap({
-      WidgetState.disabled: typography.sm.copyWith(color: colors.disable(colors.primary)),
-      WidgetState.any: typography.sm.copyWith(color: colors.primary),
-    });
+    final iconStyle = FVariants<FTappableVariantConstraint, IconThemeData, IconThemeDataDelta>.delta(
+      IconThemeData(color: colors.primary, size: 15),
+      variants: {
+        {.disabled}: .merge(color: colors.disable(colors.primary)),
+      },
+    );
+    final textStyle = FVariants<FTappableVariantConstraint, TextStyle, TextStyleDelta>.delta(
+      typography.sm.copyWith(color: colors.primary),
+      variants: {
+        {.disabled}: .merge(color: colors.disable(colors.primary)),
+      },
+    );
 
     return .new(
-      labelTextStyle: FWidgetStateMap({
-        WidgetState.disabled: typography.sm.copyWith(color: colors.disable(colors.primary), fontWeight: .w600),
-        WidgetState.any: typography.sm.copyWith(color: colors.primary, fontWeight: .w600),
-      }),
-      dividerColor: .all(colors.border),
+      labelTextStyle: .delta(
+        typography.sm.copyWith(color: colors.primary, fontWeight: .w600),
+        variants: {
+          {.disabled}: .merge(color: colors.disable(colors.primary)),
+        },
+      ),
+      dividerColor: .raw(colors.border),
       dividerWidth: style.borderWidth,
       itemStyle: FItemStyle(
-        backgroundColor: .all(null),
-        decoration: FWidgetStateMap({
-          ~WidgetState.disabled & (WidgetState.focused | WidgetState.hovered | WidgetState.pressed): BoxDecoration(
-            color: colors.secondary,
-            borderRadius: style.borderRadius,
-          ),
-        }),
+        backgroundColor: const .raw(null),
+        decoration: .delta(
+          const BoxDecoration(),
+          variants: {
+            {.disabled}: const .merge(),
+            {.focused, .hovered, .pressed}: .merge(color: colors.secondary, borderRadius: style.borderRadius),
+          },
+        ),
         contentStyle: .inherit(colors: colors, typography: typography).copyWith(
           padding: padding,
           prefixIconStyle: iconStyle,
           prefixIconSpacing: 10,
           titleTextStyle: textStyle,
           titleSpacing: 4,
-          subtitleTextStyle: FWidgetStateMap({
-            WidgetState.disabled: typography.xs.copyWith(color: colors.disable(colors.mutedForeground)),
-            WidgetState.any: typography.xs.copyWith(color: colors.mutedForeground),
-          }),
-          suffixIconStyle: FWidgetStateMap({
-            WidgetState.disabled: IconThemeData(color: colors.disable(colors.primary), size: 15),
-            WidgetState.any: IconThemeData(color: colors.primary, size: 15),
-          }),
+          subtitleTextStyle: .delta(
+            typography.xs.copyWith(color: colors.mutedForeground),
+            variants: {
+              {.disabled}: .merge(color: colors.disable(colors.mutedForeground)),
+            },
+          ),
+          suffixIconStyle: .delta(
+            IconThemeData(color: colors.primary, size: 15),
+            variants: {
+              {.disabled}: .merge(color: colors.disable(colors.primary)),
+            },
+          ),
         ),
         rawItemContentStyle: FRawItemContentStyle(
           padding: padding,
@@ -409,12 +419,15 @@ abstract class _State<W extends FSelectItem<T>, T> extends State<W> {
       widget.enabled ?? content.enabled,
       contains(widget.value),
       focus(widget.value) || content.first,
-      (delta) {
-        if (delta.added.contains(WidgetState.hovered) ||
-            (!delta.previous.contains(WidgetState.hovered) && delta.added.contains(WidgetState.pressed))) {
+      (previous, current) {
+        final added = current.difference(previous);
+        final removed = previous.difference(current);
+
+        if (added.contains(FTappableVariant.hovered) ||
+            (!previous.contains(FTappableVariant.hovered) && added.contains(FTappableVariant.pressed))) {
           _focus.requestFocus();
-        } else if (delta.removed.contains(WidgetState.hovered) ||
-            (!delta.current.contains(WidgetState.hovered) && delta.removed.contains(WidgetState.pressed))) {
+        } else if (removed.contains(FTappableVariant.hovered) ||
+            (!current.contains(FTappableVariant.hovered) && removed.contains(FTappableVariant.pressed))) {
           _focus.unfocus();
         }
       },
@@ -427,7 +440,7 @@ abstract class _State<W extends FSelectItem<T>, T> extends State<W> {
     bool enabled,
     bool selected,
     bool focused,
-    ValueChanged<FWidgetStatesDelta> onStateChange,
+    FTappableVariantChangeCallback onVariantChange,
     VoidCallback onPress,
   );
 }
@@ -467,7 +480,7 @@ class _SelectItemState<T> extends _State<_SelectItem<T>, T> {
     bool enabled,
     bool selected,
     bool focused,
-    ValueChanged<FWidgetStatesDelta> onStateChange,
+    FTappableVariantChangeCallback onVariantChange,
     VoidCallback onPress,
   ) => FItem(
     style: widget.style?.call,
@@ -475,7 +488,7 @@ class _SelectItemState<T> extends _State<_SelectItem<T>, T> {
     selected: selected,
     autofocus: focused,
     focusNode: _focus,
-    onStateChange: onStateChange,
+    onVariantChange: onVariantChange,
     onPress: onPress,
     prefix: widget.prefix,
     title: widget.title,
@@ -501,7 +514,7 @@ class _RawSelectItemState<T> extends _State<_RawSelectItem<T>, T> {
     bool enabled,
     bool selected,
     bool focused,
-    ValueChanged<FWidgetStatesDelta> onStateChange,
+    FTappableVariantChangeCallback onVariantChange,
     VoidCallback onPress,
   ) => FItem.raw(
     style: widget.style?.call,
@@ -509,7 +522,7 @@ class _RawSelectItemState<T> extends _State<_RawSelectItem<T>, T> {
     selected: selected,
     autofocus: focused,
     focusNode: _focus,
-    onStateChange: onStateChange,
+    onVariantChange: onVariantChange,
     onPress: onPress,
     prefix: widget.prefix,
     child: widget.child,

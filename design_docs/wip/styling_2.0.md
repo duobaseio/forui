@@ -228,7 +228,7 @@ hovered & selected & focused: B()
 
 ### Proposed Solution
 
-We propose a **most-specific-wins strategy** to resolve widget states.
+We propose a **tiered most-specific-wins strategy** to resolve widget states.
 
 ```
 hovered: A(),
@@ -258,18 +258,56 @@ This reduces to the [SAT problem](https://en.wikipedia.org/wiki/Boolean_satisfia
 Constraints are resolved in the build method and a SAT solver is too slow for the 8ms frame budget for 120 FPS. No
 well-established Dart SAT solvers except [PubGrub](https://github.com/dart-lang/pub/blob/master/doc/solver.md) exist either.
 
-Instead, specificity = operand count while only AND (&) and NOT (~) operators are allowed. Highest count wins.
+Instead, only AND (&) and NOT (~) operators are allowed, and specificity is determined by a **multi-tier model**. Each
+variant belongs to one of three tiers:
+
+| Tier | Category    | Examples                        |
+|------|-------------|---------------------------------|
+| 0    | Platform    | `android`, `iOS`, `web`         |
+| 1    | Interaction | `hovered`, `focused`, `pressed` |
+| 2    | Semantic    | `disabled`, `selected`, `error` |
+
+Higher tiers always take precedence. Specificity is resolved as follows:
+
+1. **Tier-by-tier comparison** (highest to lowest): The constraint with more operands at the highest differing tier wins.
+2. **Total operand count** (tiebreaker): If all tiers are equal, more operands wins.
+3. **Lexicographic comparison** (final tiebreaker): Operands are sorted alphabetically and compared lexicographically.
+
+This guarantees a deterministic and order-independent resolution.
 
 ```
-// Count = number of operands
-hovered                      = 1
-~hovered                     = 1
-hovered & focused            = 2
-hovered & ~focused           = 2
-hovered & focused & pressed  = 3
+// Tier-based resolution:
+disabled                        → tier 2 (1 operand)
+hovered & focused & pressed     → tier 1 (3 operands)
+
+→ resolves to disabled (tier 2 > tier 1, regardless of operand count)
 ```
 
-OR (|) operators are not allowed as intermixing leads to a worse heuristic with sharp edge cases. Instead, OR expressions 
+```
+// Tier-2 operand count:
+disabled & selected             → tier 2 (2 operands)
+disabled & hovered              → tier 2 (1 operand) + tier 1 (1 operand)
+
+→ resolves to disabled & selected (2 tier-2 operands > 1 tier-2 operand)
+```
+
+```
+// Same-tier tiebreaker (operand count, then lexicographic):
+hovered & focused: A(),         → tier 1, count 2
+focused & pressed: B(),         → tier 1, count 2
+
+// Sort:
+hovered & focused → ["focused", "hovered"]
+focused & pressed → ["focused", "pressed"]
+
+// Lexicographic comparison:
+[0]: "focused" == "focused" → continue
+[1]: "hovered" < "pressed"  → winner
+
+→ resolves to A()
+```
+
+OR (|) operators are not allowed as intermixing leads to a worse heuristic with sharp edge cases. Instead, OR expressions
 are split into separate constraints with a set of constraints mapping to one value.
 
 ```
@@ -280,34 +318,17 @@ hovered | pressed: value
 {hovered, pressed}: value
 ```
 
-To break ties, operands in a constraint are first sorted alphabetically then constraints are compared lexicographically. 
-This guarantees a deterministic and order-independent resolution.
-
-```
-// states = {hovered, focused, pressed}
-hovered & focused: A(),   // count 2
-focused & pressed: B(),   // count 2
-
-// Tiebreaker:
-
-// Sort:
-hovered & focused → sort → ["focused", "hovered"]
-focused & pressed → sort → ["focused", "pressed"]
-
-// Lexicographical comparison:
-[0]: "focused" == "focused" → continue
-[1]: "hovered" < "pressed"  → winner
-
-→ resolves to A()
-```
-
 Invalid constraints like `A & ~A` can still be written. As future work, we can introduce an analyzer plugin that flags
 invalid and ambiguous constraints.
 
 ### Alternatives
 
-We considered allowing OR (|) operators by automatically splitting them into distinct constraints in a preprocessing step. 
-Doing so reduces the boilerplate for single states, e.g. `hovered` instead of `{hovered}`. However, this requires constraints 
+We initially considered a **single-tier** model where specificity = total operand. It failed because it could not express
+that semantic states (e.g. `disabled`) should always outrank interaction states (e.g. `hovered & focused`). A disabled 
+button should always render as disabled even when hovered and focused.
+
+We considered allowing OR (|) operators by automatically splitting them into distinct constraints in a preprocessing step.
+Doing so reduces the boilerplate for single states, e.g. `hovered` instead of `{hovered}`. However, this requires constraints
 to be in [disjunctive normal form](https://en.wikipedia.org/wiki/Disjunctive_normal_form), which is unintuitive.
 
 
@@ -611,25 +632,15 @@ We observe that a base value **is** the default value, and modifications are del
 created using either mapping to deltas or concrete values.
 
 ```dart
-class FVariants<V extends FVariant, T, D extends Delta<T>> {
-  final T base;
-  final Map<Set<V>, D> deltas;
-
-  FVariants(this.base, this.deltas);
-}
-
-
-```
-
-```dart
-class FVariants<K extends FVariant, V, D extends Delta<T>> {
+class FVariants<K extends FVariantConstraint, V, D extends Delta<V>> {
   final V base;
-  final Map<Set<K>, V> values;
+  final Map<K, V> variants;
 
-  FVariants(this.base, this.values);
+  FVariants(this.base, {required Map<Set<K>, V> variants});
 
-  FVariants.deltas(this.base, Map<Set<K>, D> deltas): 
-    values = deltas.map((key, delta) => MapEntry(key, delta.apply(base)));
+  FVariants.delta(this.base, {required Map<Set<K>, D> variants});
+
+  const FVariants.raw(this.base, [this.variants = const {}]);
 }
 
 // Creation using concrete values
@@ -667,7 +678,7 @@ In general, there are 3 types of operations:
 * Removing an existing variant.
 
 ```dart
-class FVariantsDelta<K extends FVariantConstraint, E extends FVariant, D extends Delta<V>, V>
+class FVariantsDelta<K extends FVariantConstraint, E extends FVariant, V, D extends Delta<V>>
     with Delta<FVariants<K, V, D>> {
   // Creates a sequence of modifications to [FVariants].
   FVariantsDelta.apply(List<FVariantDeltaOperation<V, T, D>> operations);
@@ -688,6 +699,9 @@ class FVariantOperation<K extends FVariantConstraint, E extends FVariant, V, D e
   FVariantOperation.on(Set<E> variants, D delta);
 
   // Applies [delta] to all variants.
+  FVariantOperation.onVariants(D delta);
+
+  // Applies [delta] to all variants and base.
   FVariantOperation.onAll(D delta);
 
   // Removes variants matching [variants].
@@ -719,6 +733,9 @@ class FVariantValueDeltaOperation<K extends FVariantConstraint, E extends FVaria
   FVariantValueDeltaOperation.on(Set<E> variants, V value);
 
   // Replaces all variants with [value].
+  FVariantValueDeltaOperation.onVariants(V value);
+
+  // Replaces all variants and base with [value].
   FVariantValueDeltaOperation.onAll(V value);
 
   // Removes variants matching [variants].
@@ -752,8 +769,8 @@ FTappable(
   style: .merge(
     // Apply all modifications without needing to extract base variant.
     decoration: .apply([
-      .map({.hovered}, .merge(color: Colors.blue)),
-      .map({.pressed}, .merge(color: Colors.darkBlue)),
+      .on({.hovered}, .merge(color: Colors.blue)),
+      .on({.pressed}, .merge(color: Colors.darkBlue)),
     ]),
   ),
 )

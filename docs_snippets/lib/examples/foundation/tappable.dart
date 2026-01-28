@@ -13,7 +13,7 @@ class TappablePage extends Example {
   Widget example(BuildContext context) => FTappable(
     builder: (context, states, child) => Container(
       decoration: BoxDecoration(
-        color: (states.contains(WidgetState.hovered) || states.contains(WidgetState.pressed))
+        color: (states.contains(FTappableVariant.hovered) || states.contains(FTappableVariant.pressed))
             ? context.theme.colors.secondary
             : context.theme.colors.background,
         borderRadius: .circular(8),

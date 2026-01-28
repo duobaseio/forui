@@ -34,7 +34,7 @@ part 'select.design.dart';
 /// * [FSelectStyle] for customizing the appearance of a select.
 abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// The default suffix builder that shows a upward and downward facing chevron icon.
-  static Widget defaultIconBuilder(BuildContext _, FSelectStyle style, Set<WidgetState> states) => Padding(
+  static Widget defaultIconBuilder(BuildContext _, FSelectStyle style, Set<FTextFieldVariant> states) => Padding(
     padding: const .directional(end: 8.0),
     child: IconTheme(data: style.fieldStyle.iconStyle.resolve(states), child: const Icon(FIcons.chevronDown)),
   );
@@ -54,7 +54,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     );
   }
 
-  static Widget _fieldBuilder(BuildContext _, FSelectStyle _, Set<WidgetState> _, Widget child) => child;
+  static Widget _fieldBuilder(BuildContext _, FSelectStyle _, Set<FTextFieldVariant> _, Widget child) => child;
 
   static String? _defaultValidator(Object? _) => null;
 
