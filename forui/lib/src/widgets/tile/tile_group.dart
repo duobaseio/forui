@@ -272,7 +272,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
     return FLabel(
       style: style,
       axis: .vertical,
-      states: {if (!enabled) .disabled, if (error != null) .error},
+      variants: {if (!enabled) .disabled, if (error != null) .error},
       label: label,
       description: description,
       error: error,
@@ -358,11 +358,8 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
   final FTileStyle tileStyle;
 
   /// The divider's style.
-  ///
-  /// Supported states:
-  /// * [WidgetState.disabled]
   @override
-  final FWidgetStateMap<Color> dividerColor;
+  final FVariants<FItemGroupVariantConstraint, Color, Delta<Color>> dividerColor;
 
   /// The divider's width.
   @override
@@ -398,27 +395,15 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
               .onAll(const .merge(border: null, borderRadius: null)),
             ])(tileStyle.decoration),
       ),
-      dividerColor: .all(colors.border),
+      dividerColor: .raw(colors.border),
       dividerWidth: style.borderWidth,
-      labelTextStyle: FWidgetStateMap({
-        WidgetState.error: typography.base.copyWith(
-          color: style.formFieldStyle.labelTextStyle.maybeResolve({})?.color ?? colors.primary,
-          fontWeight: .w600,
-        ),
-        WidgetState.disabled: typography.base.copyWith(
-          color:
-              style.formFieldStyle.labelTextStyle.maybeResolve({WidgetState.disabled})?.color ??
-              colors.disable(colors.primary),
-          fontWeight: .w600,
-        ),
-        WidgetState.any: typography.base.copyWith(
-          color: style.formFieldStyle.labelTextStyle.maybeResolve({})?.color ?? colors.primary,
-          fontWeight: .w600,
-        ),
-      }),
-      descriptionTextStyle: style.formFieldStyle.descriptionTextStyle.map(
-        (s) => typography.xs.copyWith(color: s.color),
-      ),
+      labelTextStyle: FVariantsDelta<FFormFieldVariantConstraint, FFormFieldVariant, TextStyle, TextStyleDelta>.apply([
+        .onAll(.merge(fontSize: typography.base.fontSize, height: typography.xs.height)),
+      ])(style.formFieldStyle.labelTextStyle),
+      descriptionTextStyle:
+          FVariantsDelta<FFormFieldVariantConstraint, FFormFieldVariant, TextStyle, TextStyleDelta>.apply([
+            .onAll(.merge(fontSize: typography.xs.fontSize, height: typography.xs.height)),
+          ])(style.formFieldStyle.descriptionTextStyle),
       errorTextStyle: typography.xs.copyWith(color: style.formFieldStyle.errorTextStyle.color),
     );
   }

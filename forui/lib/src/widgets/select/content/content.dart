@@ -160,7 +160,7 @@ class _ContentState<T> extends State<Content<T>> {
                   child: FInheritedItemData(
                     data: FItemData(
                       style: style,
-                      dividerColor: widget.style.sectionStyle.dividerColor,
+                      dividerColor: widget.style.sectionStyle.dividerColor.cast(),
                       dividerWidth: widget.style.sectionStyle.dividerWidth,
                       divider: widget.children.length == 1 ? FItemDivider.none : widget.divider,
                       enabled: widget.enabled,
@@ -174,7 +174,7 @@ class _ContentState<T> extends State<Content<T>> {
                 FInheritedItemData(
                   data: FItemData(
                     style: style,
-                    dividerColor: widget.style.sectionStyle.dividerColor,
+                    dividerColor: widget.style.sectionStyle.dividerColor.cast(),
                     dividerWidth: widget.style.sectionStyle.dividerWidth,
                     divider: i == widget.children.length - 1 ? FItemDivider.none : widget.divider,
                     enabled: widget.enabled,

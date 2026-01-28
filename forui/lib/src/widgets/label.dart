@@ -62,8 +62,8 @@ class FLabel extends StatelessWidget {
   /// Only applicable when [axis] is [Axis.vertical].
   final bool expands;
 
-  /// The label's states.
-  final Set<WidgetState> states;
+  /// The label's variants.
+  final Set<FFormFieldVariant> variants;
 
   /// The child.
   final Widget child;
@@ -77,7 +77,7 @@ class FLabel extends StatelessWidget {
     this.description,
     this.error,
     this.expands = false,
-    this.states = const {},
+    this.variants = const {},
     super.key,
   }) : assert(axis == .vertical || !expands, 'expands can only be true when axis is vertical');
 
@@ -99,7 +99,7 @@ class FLabel extends StatelessWidget {
         label: label,
         description: description,
         error: error,
-        states: states,
+        variants: variants,
         child: child,
       ),
       .vertical => _FVerticalLabel(
@@ -108,7 +108,7 @@ class FLabel extends StatelessWidget {
         description: description,
         error: error,
         expands: expands,
-        states: states,
+        variants: variants,
         child: child,
       ),
     };
@@ -120,7 +120,7 @@ class FLabel extends StatelessWidget {
     properties
       ..add(EnumProperty('axis', axis))
       ..add(FlagProperty('expands', value: expands, ifTrue: 'expands'))
-      ..add(IterableProperty('states', states));
+      ..add(IterableProperty('variants', variants));
   }
 }
 
@@ -129,7 +129,7 @@ class _FHorizontalLabel extends StatelessWidget {
   final Widget? label;
   final Widget? description;
   final Widget? error;
-  final Set<WidgetState> states;
+  final Set<FFormFieldVariant> variants;
   final Widget child;
 
   const _FHorizontalLabel({
@@ -137,7 +137,7 @@ class _FHorizontalLabel extends StatelessWidget {
     required this.label,
     required this.description,
     required this.error,
-    required this.states,
+    required this.variants,
     required this.child,
   });
 
@@ -153,11 +153,11 @@ class _FHorizontalLabel extends StatelessWidget {
             child: Padding(padding: style.childPadding, child: child),
           ),
           if (label != null)
-            _buildCell(padding: style.labelPadding, textStyle: style.labelTextStyle.resolve(states), child: label)
+            _buildCell(padding: style.labelPadding, textStyle: style.labelTextStyle.resolve(variants), child: label)
           else
             _buildCell(
               padding: style.descriptionPadding,
-              textStyle: style.descriptionTextStyle.resolve(states),
+              textStyle: style.descriptionTextStyle.resolve(variants),
               child: description,
             ),
         ],
@@ -168,12 +168,12 @@ class _FHorizontalLabel extends StatelessWidget {
             const TableCell(child: SizedBox()),
             _buildCell(
               padding: style.descriptionPadding,
-              textStyle: style.descriptionTextStyle.resolve(states),
+              textStyle: style.descriptionTextStyle.resolve(variants),
               child: description,
             ),
           ],
         ),
-      if (error != null && states.contains(WidgetState.error))
+      if (error != null && variants.contains(FFormFieldVariant.error))
         TableRow(
           children: [
             const TableCell(child: SizedBox()),
@@ -206,7 +206,7 @@ class _FHorizontalLabel extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(StringProperty('style', style.toString()))
-      ..add(IterableProperty('states', states));
+      ..add(IterableProperty('variants', variants));
   }
 }
 
@@ -216,7 +216,7 @@ class _FVerticalLabel extends StatelessWidget {
   final Widget? description;
   final Widget? error;
   final bool expands;
-  final Set<WidgetState> states;
+  final Set<FFormFieldVariant> variants;
   final Widget child;
 
   const _FVerticalLabel({
@@ -225,7 +225,7 @@ class _FVerticalLabel extends StatelessWidget {
     required this.description,
     required this.error,
     required this.expands,
-    required this.states,
+    required this.variants,
     required this.child,
   });
 
@@ -238,7 +238,7 @@ class _FVerticalLabel extends StatelessWidget {
         Padding(
           padding: style.labelPadding,
           child: DefaultTextStyle(
-            style: style.labelTextStyle.resolve(states),
+            style: style.labelTextStyle.resolve(variants),
             textHeightBehavior: const TextHeightBehavior(applyHeightToFirstAscent: false),
             child: label!,
           ),
@@ -253,12 +253,12 @@ class _FVerticalLabel extends StatelessWidget {
         Padding(
           padding: style.descriptionPadding,
           child: DefaultTextStyle(
-            style: style.descriptionTextStyle.resolve(states),
+            style: style.descriptionTextStyle.resolve(variants),
             textHeightBehavior: const TextHeightBehavior(applyHeightToFirstAscent: false),
             child: description!,
           ),
         ),
-      if (error != null && states.contains(WidgetState.error))
+      if (error != null && variants.contains(FFormFieldVariant.error))
         Padding(
           padding: style.errorPadding,
           child: DefaultTextStyle(
@@ -276,7 +276,7 @@ class _FVerticalLabel extends StatelessWidget {
     properties
       ..add(StringProperty('style', style.toString()))
       ..add(FlagProperty('expands', value: expands, ifTrue: 'expands'))
-      ..add(IterableProperty('states', states));
+      ..add(IterableProperty('variants', variants));
   }
 }
 

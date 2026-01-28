@@ -2,8 +2,8 @@ import 'package:analyzer/dart/element/type.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:meta/meta.dart';
 
-/// Matches F at the start only if followed by an uppercase letter.
-final _f = RegExp('^F(?=[A-Z])');
+/// Matches the suffixing Style or Styles.
+final _style = RegExp(r'Styles?$');
 
 /// Generates widget-specific variant and variant constraint extension types.
 @internal
@@ -30,8 +30,8 @@ class VariantExtensionType {
     'web': '/// The web platform variant.',
   };
 
-  /// The widget name.
-  final String widget;
+  /// The style name.
+  final String style;
 
   /// The variant constraint name.
   final String constraint;
@@ -44,18 +44,18 @@ class VariantExtensionType {
 
   /// Creates a new [VariantExtensionType].
   VariantExtensionType(InterfaceType widget, this.variants)
-    : widget = widget.element.name!,
-      constraint = 'F${widget.element.name!.replaceFirst(_f, '')}VariantConstraint',
-      variant = 'F${widget.element.name!.replaceFirst(_f, '')}Variant';
+    : style = widget.element.name!,
+      constraint = '${widget.element.name!.replaceFirst(_style, '')}VariantConstraint',
+      variant = '${widget.element.name!.replaceFirst(_style, '')}Variant';
 
   /// Generates the variant constraint extension type.
   ExtensionType generateVariantConstraint() => ExtensionType(
     (b) => b
       ..docs.addAll([
-        '/// Represents a combination of variants which a [$widget] can be styled.',
+        '/// Represents a combination of variants for a [$style]',
         '///',
         '/// See also:',
-        '/// * [$variant], which represents individual variants for [$widget].',
+        '/// * [$variant], which represents individual variants for [$style].',
       ])
       ..constant = true
       ..name = constraint
@@ -150,12 +150,12 @@ class VariantExtensionType {
   ExtensionType generateVariant() => ExtensionType(
     (b) => b
       ..docs.addAll([
-        '/// Represents a condition under which a [$widget] can be styled differently.',
+        '/// Represents a variant in [$style].',
         '///',
         '/// Each variant has a tier that determines its specificity. Higher tiers take precedence during resolution.',
         '///',
         '/// See also:',
-        '/// * [$constraint], which represents combinations of variants for [$widget].',
+        '/// * [$constraint], which represents combinations of variants for [$style].',
       ])
       ..constant = true
       ..name = variant

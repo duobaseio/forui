@@ -29,6 +29,11 @@ void main() {
     ]) {
       test('resolve($active)', () => expect(createVariants(0, values).resolve(active), expected));
     }
+
+    test('cast', () {
+      final variants = FVariants<FTextFieldVariantConstraint, int, Delta<int>>.raw(0, {.disabled: 1});
+      expect(() => variants.cast<FFormFieldVariantConstraint>(), returnsNormally);
+    });
   });
 
   group('FVariantsDelta', () {

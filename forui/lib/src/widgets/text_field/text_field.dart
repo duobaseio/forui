@@ -24,19 +24,19 @@ typedef FTextFieldCounterBuilder =
 /// A callback for decorating a field. It should always use the given field.
 ///
 /// [style] is the field's style.
-/// [states] is the current states of the widget.
+/// [variants] is the current variants of the widget.
 /// [field] is the field that will be decorated.
 ///
 /// See [FTextField.builder].
-typedef FFieldBuilder<T> = Widget Function(BuildContext context, T style, Set<WidgetState> states, Widget field);
+typedef FFieldBuilder<T> = Widget Function(BuildContext context, T style, Set<FTextFieldVariant> variants, Widget field);
 
 /// A callback for building a field's icon.
 ///
 /// [style] is the field's style.
-/// [states] is the current states of the widget.
+/// [variants] is the current variants of the widget.
 ///
 /// See [FTextField.prefixBuilder] and [FTextField.suffixBuilder].
-typedef FFieldIconBuilder<T> = Widget Function(BuildContext context, T style, Set<WidgetState> states);
+typedef FFieldIconBuilder<T> = Widget Function(BuildContext context, T style, Set<FTextFieldVariant> variants);
 
 /// A callback for building a clear icon.
 ///
@@ -81,7 +81,6 @@ class FTextField extends StatelessWidget {
     TextAlignVertical? textAlignVertical,
     TextDirection? textDirection,
     bool autofocus = false,
-    WidgetStatesController? statesController,
     String obscuringCharacter = '•',
     bool autocorrect = false,
     SmartDashesType? smartDashesType,
@@ -147,7 +146,6 @@ class FTextField extends StatelessWidget {
         textAlignVertical: textAlignVertical,
         textDirection: textDirection,
         autofocus: autofocus,
-        statesController: statesController,
         obscuringCharacter: obscuringCharacter,
         autocorrect: autocorrect,
         smartDashesType: smartDashesType,
@@ -319,14 +317,6 @@ class FTextField extends StatelessWidget {
   /// See [TextField.focusNode] for more information.
   /// {@endtemplate}
   final FocusNode? focusNode;
-
-  /// {@template forui.text_field.statesController}
-  /// Represents the interactive "state" of this widget in terms of a set of [WidgetState]s, including
-  /// [WidgetState.disabled], [WidgetState.hovered], [WidgetState.error], and [WidgetState.focused].
-  ///
-  /// See [TextField.statesController] for more information.
-  /// {@endtemplate}
-  final WidgetStatesController? statesController;
 
   /// {@template forui.text_field.obscuringCharacter}
   /// Character used for obscuring text if [obscureText] is true.
@@ -832,7 +822,6 @@ class FTextField extends StatelessWidget {
     this.textAlignVertical,
     this.textDirection,
     this.autofocus = false,
-    this.statesController,
     this.obscuringCharacter = '•',
     this.obscureText = false,
     this.autocorrect = true,
@@ -898,7 +887,6 @@ class FTextField extends StatelessWidget {
     this.textAlignVertical,
     this.textDirection,
     this.autofocus = false,
-    this.statesController,
     this.obscuringCharacter = '•',
     this.obscureText = false,
     this.autocorrect = false,
@@ -968,7 +956,6 @@ class FTextField extends StatelessWidget {
     this.textAlignVertical,
     this.textDirection,
     this.autofocus = false,
-    this.statesController,
     this.obscuringCharacter = '•',
     this.obscureText = false,
     this.autocorrect = true,
@@ -1036,7 +1023,6 @@ class FTextField extends StatelessWidget {
       textAlignVertical: textAlignVertical,
       textDirection: textDirection,
       autofocus: autofocus,
-      statesController: statesController,
       obscuringCharacter: obscuringCharacter,
       obscureText: obscureText,
       autocorrect: autocorrect,
@@ -1101,7 +1087,6 @@ class FTextField extends StatelessWidget {
       ..add(DiagnosticsProperty('textAlignVertical', textAlignVertical))
       ..add(EnumProperty('textDirection', textDirection))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
-      ..add(DiagnosticsProperty('statesController', statesController))
       ..add(StringProperty('obscuringCharacter', obscuringCharacter, defaultValue: '•'))
       ..add(FlagProperty('obscureText', value: obscureText, ifTrue: 'obscureText'))
       ..add(FlagProperty('autocorrect', value: autocorrect, ifTrue: 'autocorrect'))

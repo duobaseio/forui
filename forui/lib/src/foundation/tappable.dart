@@ -8,7 +8,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-@Variants(FTappable, {
+@Variants(FTappableStyle, {
   'disabled': (2, 'The semantic variant when this widget is disabled and cannot be interacted with.'),
   'selected': (2, 'The semantic variant when this item has been selected.'),
   'primaryFocused': (1, 'The interaction variant when a given widget (and not its descendants) has focus.'),
@@ -251,7 +251,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
     _focus = widget.focusNode ?? .new(debugLabel: 'FTappable');
     _current = {
       if (widget.selected) .selected,
-      if (widget.autofocus) .focused,
+      if (widget.autofocus) ...[.focused, .primaryFocused],
       if (widget._disabled) .disabled,
     };
   }

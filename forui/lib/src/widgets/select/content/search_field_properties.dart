@@ -9,10 +9,11 @@ import 'package:forui/forui.dart';
 /// The search field's properties.
 class FSelectSearchFieldProperties with Diagnosticable {
   /// The search field's default prefix builder that displays a search icon.
-  static Widget defaultIconBuilder(BuildContext _, FSelectSearchStyle style, Set<WidgetState> states) => Padding(
-    padding: const .directional(start: 10.0, end: 4.0),
-    child: IconTheme(data: style.fieldStyle.iconStyle.resolve(states), child: const Icon(FIcons.search)),
-  );
+  static Widget defaultIconBuilder(BuildContext _, FSelectSearchStyle style, Set<FTextFieldVariant> variants) =>
+      Padding(
+        padding: const .directional(start: 10.0, end: 4.0),
+        child: IconTheme(data: style.fieldStyle.iconStyle.resolve(variants), child: const Icon(FIcons.search)),
+      );
 
   static bool _clearable(TextEditingValue _) => false;
 

@@ -9,7 +9,7 @@ final label = FLabel(
   style: (style) => style,
   axis: .vertical,
   expands: false,
-  states: const {},
+  variants: const {},
   label: const Text('Label'),
   description: const Text('Description'),
   error: const Text('Error message'),

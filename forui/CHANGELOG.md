@@ -81,8 +81,13 @@
 * **Breaking** Rename `FTile.onStateChange` to `FTile.onVariantChange`.
 
 
-### `FTextField`
+### `FTextField` & `FTextFormField`
 * **Breaking** Add `FTextFieldStyle.iconStyle`.
+* **Breaking** Remove `FTextField.statesController`.
+* **Breaking** Remove `FTextFormField.statesController`.
+* **Breaking** Change `FFieldBuilder` to use `Set<FTextFieldVariant>` instead of `Set<WidgetState>`.
+* **Breaking** Change `FFieldIconBuilder` to use `Set<FTextFieldVariant>` instead of `Set<WidgetState>`.
+* **Breaking** Change `FPasswordFieldIconBuilder` to use `Set<FTextFieldVariant>` instead of `Set<WidgetState>`.
 
 * Change `FTextFieldStyle.clearButtonStyle` to not bounce by default.
 * Change `FTextFieldStyle.obscureButtonStyle` to not bounce by default.

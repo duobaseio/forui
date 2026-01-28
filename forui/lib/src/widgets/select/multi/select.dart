@@ -49,7 +49,7 @@ typedef FMultiSelectTagBuilder<T> =
 /// * [FMultiSelectStyle] for customizing the appearance of a select.
 abstract class FMultiSelect<T> extends StatefulWidget {
   /// The default suffix builder that shows a upward and downward facing chevron icon.
-  static Widget defaultIconBuilder(BuildContext _, FMultiSelectStyle style, Set<WidgetState> states) => Padding(
+  static Widget defaultIconBuilder(BuildContext _, FMultiSelectStyle style, Set<FTextFieldVariant> states) => Padding(
     padding: const .directional(start: 4),
     child: IconTheme(data: style.fieldStyle.iconStyle.resolve(states), child: const Icon(FIcons.chevronDown)),
   );
@@ -664,11 +664,13 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
       validator: (v) => widget.validator(v ?? {}),
       builder: (state) {
         final values = widget.sort == null ? _controller.value : _controller.value.sorted(widget.sort!);
+        final formVariants = <FFormFieldVariant>{if (!widget.enabled) .disabled, if (state.hasError) .error};
+
         return Directionality(
           textDirection: direction,
           child: FLabel(
-            axis: Axis.vertical,
-            states: {if (!widget.enabled) WidgetState.disabled, if (state.hasError) WidgetState.error},
+            axis: .vertical,
+            variants: formVariants,
             label: widget.label,
             style: style.fieldStyle,
             description: widget.description,
@@ -685,7 +687,7 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
               offset: widget.contentOffset,
               hideRegion: widget.contentHideRegion,
               groupId: widget.contentGroupId,
-              shortcuts: {const SingleActivator(LogicalKeyboardKey.escape): _toggle},
+              shortcuts: {const SingleActivator(.escape): _toggle},
               popoverBuilder: (context, controller) => InheritedSelectController<T>(
                 popover: _popoverController,
                 contains: (value) => _controller.value.contains(value),
@@ -694,17 +696,13 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
                 child: content(context, style),
               ),
               child: FTappable(
-                style: style.fieldStyle.tappableStyle,
+                style: .replace(style.fieldStyle.tappableStyle),
                 focusNode: _focus,
                 onPress: widget.enabled ? _toggle : null,
-                builder: (context, states, child) {
-                  states = {
-                    ...states,
-                    if (!widget.enabled) WidgetState.disabled,
-                    if (state.hasError) WidgetState.error,
-                  };
+                builder: (context, tappableVariants, child) {
+                  final variants = {...tappableVariants, ...formVariants};
                   return DecoratedBox(
-                    decoration: style.fieldStyle.decoration.resolve(states),
+                    decoration: style.fieldStyle.decoration.resolve(variants),
                     child: Padding(
                       padding: padding.copyWith(top: 0, bottom: 0),
                       child: DefaultTextStyle.merge(
@@ -712,7 +710,8 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            if (widget.prefixBuilder case final prefix?) prefix(context, style, states),
+                            if (widget.prefixBuilder case final prefix?)
+                              prefix(context, style, variants as Set<FTextFieldVariant>),
                             Expanded(
                               child: Padding(
                                 padding: padding.copyWith(left: 0, right: 0),
@@ -734,7 +733,7 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
                                       Padding(
                                         padding: style.fieldStyle.hintPadding,
                                         child: DefaultTextStyle.merge(
-                                          style: style.fieldStyle.hintTextStyle.resolve(states),
+                                          style: style.fieldStyle.hintTextStyle.resolve(variants),
                                           child: widget.hint ?? Text(localizations.multiSelectHint),
                                         ),
                                       ),
@@ -754,7 +753,8 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
                                   ),
                                 ),
                               ),
-                            if (widget.suffixBuilder case final suffix?) suffix(context, style, states),
+                            if (widget.suffixBuilder case final suffix?)
+                              suffix(context, style, variants as Set<FTextFieldVariant>),
                           ],
                         ),
                       ),
@@ -823,15 +823,8 @@ class FMultiSelectStyle with Diagnosticable, _$FMultiSelectStyleFunctions {
 /// A [FMultiSelectFieldStyle]'s style.
 class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSelectFieldStyleFunctions {
   /// The multi-select field's decoration.
-  ///
-  /// The supported states are:
-  /// * [WidgetState.disabled]
-  /// * [WidgetState.error]
-  /// * [WidgetState.focused]
-  /// * [WidgetState.hovered]
-  /// * [WidgetState.pressed]
   @override
-  final FWidgetStateMap<Decoration> decoration;
+  final FVariants<FTextFieldVariantConstraint, Decoration, Delta<Decoration>> decoration;
 
   /// The multi-select field's padding. Defaults to `EdgeInsets.only(start: 10, top: 6, bottom: 6, end: 8)`.
   @override
@@ -846,15 +839,8 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
   final double runSpacing;
 
   /// The multi-select field hint's text style.
-  ///
-  /// The supported states are:
-  /// * [WidgetState.disabled]
-  /// * [WidgetState.error]
-  /// * [WidgetState.focused]
-  /// * [WidgetState.hovered]
-  /// * [WidgetState.pressed]
   @override
-  final FWidgetStateMap<TextStyle> hintTextStyle;
+  final FVariants<FTextFieldVariantConstraint, TextStyle, TextStyleDelta> hintTextStyle;
 
   /// The multi-select field's hint padding. Defaults to `EdgeInsetsDirectional.only(start: 4, top: 4, bottom: 4)`.
   ///
@@ -863,15 +849,8 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
   final EdgeInsetsGeometry hintPadding;
 
   /// The multi-select field's icon style.
-  ///
-  /// The supported states are:
-  /// * [WidgetState.disabled]
-  /// * [WidgetState.error]
-  /// * [WidgetState.focused]
-  /// * [WidgetState.hovered]
-  /// * [WidgetState.pressed]
   @override
-  final FWidgetStateMap<IconThemeData> iconStyle;
+  final FVariants<FTextFieldVariantConstraint, IconThemeData, IconThemeDataDelta> iconStyle;
 
   /// The clear button's style when [FMultiSelect.clearable] is true.
   @override
@@ -916,38 +895,49 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
     final ghost = FButtonStyles.inherit(colors: colors, typography: typography, style: style).ghost;
 
     return .new(
-      decoration: FWidgetStateMap({
-        WidgetState.error: BoxDecoration(
-          border: .all(color: colors.error, width: style.borderWidth),
-          borderRadius: style.borderRadius,
-        ),
-        WidgetState.disabled: BoxDecoration(
-          border: .all(color: colors.disable(colors.border), width: style.borderWidth),
-          borderRadius: style.borderRadius,
-        ),
-        WidgetState.focused: BoxDecoration(
-          border: .all(color: colors.primary, width: style.borderWidth),
-          borderRadius: style.borderRadius,
-        ),
-        WidgetState.any: BoxDecoration(
+      decoration: FVariants(
+        BoxDecoration(
           border: .all(color: colors.border, width: style.borderWidth),
           borderRadius: style.borderRadius,
         ),
-      }),
-      hintTextStyle: FWidgetStateMap({
-        WidgetState.disabled: typography.sm.copyWith(color: colors.disable(colors.border)),
-        WidgetState.any: typography.sm.copyWith(color: colors.mutedForeground),
-      }),
-      iconStyle: FWidgetStateMap({
-        WidgetState.disabled: IconThemeData(color: colors.disable(colors.mutedForeground), size: 17),
-        WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 17),
-      }),
+        variants: {
+          {.error}: BoxDecoration(
+            border: .all(color: colors.error, width: style.borderWidth),
+            borderRadius: style.borderRadius,
+          ),
+          {.disabled}: BoxDecoration(
+            border: .all(color: colors.disable(colors.border), width: style.borderWidth),
+            borderRadius: style.borderRadius,
+          ),
+          {.focused}: BoxDecoration(
+            border: .all(color: colors.primary, width: style.borderWidth),
+            borderRadius: style.borderRadius,
+          ),
+        },
+      ),
+      hintTextStyle: .delta(
+        typography.sm.copyWith(color: colors.mutedForeground),
+        variants: {
+          {.disabled}: .merge(color: colors.disable(colors.border)),
+        },
+      ),
+      iconStyle: .delta(
+        IconThemeData(color: colors.mutedForeground, size: 17),
+        variants: {
+          {.disabled}: .merge(color: colors.disable(colors.mutedForeground)),
+        },
+      ),
       clearButtonStyle: ghost.copyWith(
         iconContentStyle: ghost.iconContentStyle.copyWith(
-          iconStyle: FWidgetStateMap({
-            WidgetState.disabled: IconThemeData(color: colors.disable(colors.mutedForeground), size: 17),
-            WidgetState.any: IconThemeData(color: colors.mutedForeground, size: 17),
-          }),
+          iconStyle: FVariants(
+            IconThemeData(color: colors.mutedForeground, size: 17),
+            variants: {
+              {FTappableVariantConstraint.disabled}: IconThemeData(
+                color: colors.disable(colors.mutedForeground),
+                size: 17,
+              ),
+            },
+          ),
         ),
       ),
       tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),

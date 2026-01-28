@@ -34,7 +34,7 @@ class ToastPage extends Example {
                 style: context.theme.buttonStyles.primary.copyWith(
                   contentStyle: context.theme.buttonStyles.primary.contentStyle.copyWith(
                     padding: const .symmetric(horizontal: 12, vertical: 7.5),
-                    textStyle: .all(
+                    textStyle: .raw(
                       context.theme.typography.xs.copyWith(color: context.theme.colors.primaryForeground),
                     ),
                   ),

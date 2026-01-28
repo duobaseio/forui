@@ -18,7 +18,7 @@ class ItemContent extends StatelessWidget {
   final double top;
   final double bottom;
   final Set<FTappableVariant> variants;
-  final FWidgetStateMap<Color>? dividerColor;
+  final FVariants<FItemGroupVariantConstraint, Color, Delta<Color>>? dividerColor;
   final double? dividerWidth;
   final FItemDivider dividerType;
   final Widget? prefix;
@@ -54,9 +54,7 @@ class ItemContent extends StatelessWidget {
     padding: style.padding,
     top: top,
     bottom: bottom,
-    dividerColor: dividerColor?.resolve({
-      if (variants.contains(FTappableVariant.disabled)) WidgetState.disabled,
-    }),
+    dividerColor: dividerColor?.resolve(variants),
     dividerWidth: dividerWidth,
     dividerType: dividerType,
     children: [

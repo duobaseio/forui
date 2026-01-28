@@ -221,7 +221,7 @@ class FItem extends StatelessWidget with FItemMixin {
     double top,
     double bottom,
     Set<FTappableVariant> variants,
-    FWidgetStateMap<Color>? color,
+    FVariants<FItemGroupVariantConstraint, Color, Delta<Color>>? color,
     double? width,
     FItemDivider divider,
   )

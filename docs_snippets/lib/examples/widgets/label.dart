@@ -46,15 +46,15 @@ class DisabledHorizontalLabelPage extends Example {
   DisabledHorizontalLabelPage({@queryParam super.theme}) : super(maxWidth: 320);
 
   @override
-  Widget example(BuildContext _) => const FLabel(
+  Widget example(BuildContext _) => FLabel(
     axis: .horizontal,
-    label: Text('Accept terms and conditions'),
-    description: Text('You agree to our terms and conditions.'),
-    error: Text('Please accept the terms.'),
+    label: const Text('Accept terms and conditions'),
+    description: const Text('You agree to our terms and conditions.'),
+    error: const Text('Please accept the terms.'),
     // {@highlight}
-    states: {WidgetState.disabled},
+    variants: {.disabled},
     // {@endhighlight}
-    child: DecoratedBox(
+    child: const DecoratedBox(
       decoration: BoxDecoration(borderRadius: .all(.circular(5)), color: Colors.grey),
       child: SizedBox.square(dimension: 16),
     ),
@@ -66,15 +66,15 @@ class ErrorHorizontalLabelPage extends Example {
   ErrorHorizontalLabelPage({@queryParam super.theme}) : super(maxWidth: 320);
 
   @override
-  Widget example(BuildContext _) => const FLabel(
+  Widget example(BuildContext _) => FLabel(
     axis: .horizontal,
-    label: Text('Accept terms and conditions'),
-    description: Text('You agree to our terms and conditions.'),
-    error: Text('Please accept the terms.'),
+    label: const Text('Accept terms and conditions'),
+    description: const Text('You agree to our terms and conditions.'),
+    error: const Text('Please accept the terms.'),
     // {@highlight}
-    states: {WidgetState.error},
+    variants: {.error},
     // {@endhighlight}
-    child: DecoratedBox(
+    child: const DecoratedBox(
       decoration: BoxDecoration(borderRadius: .all(.circular(5)), color: Colors.grey),
       child: SizedBox.square(dimension: 16),
     ),

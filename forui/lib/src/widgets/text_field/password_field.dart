@@ -11,11 +11,11 @@ import 'package:forui/src/widgets/text_field/obscure_text_control.dart';
 ///
 /// [style] is the field's style.
 /// [obscure] controls the visibility of the password.
-/// [states] is the current states of the widget.
+/// [variants] is the current variants.
 ///
 /// See [FTextField.prefixBuilder] and [FTextField.suffixBuilder].
 typedef FPasswordFieldIconBuilder<T> =
-    Widget Function(BuildContext context, T style, ValueNotifier<bool> obscure, Set<WidgetState> states);
+    Widget Function(BuildContext context, T style, ValueNotifier<bool> obscure, Set<FTextFieldVariant> variants);
 
 @internal
 class PasswordFieldProperties with Diagnosticable {
@@ -35,7 +35,6 @@ class PasswordFieldProperties with Diagnosticable {
   final TextAlignVertical? textAlignVertical;
   final TextDirection? textDirection;
   final bool autofocus;
-  final WidgetStatesController? statesController;
   final String obscuringCharacter;
   final bool autocorrect;
   final SmartDashesType? smartDashesType;
@@ -97,7 +96,6 @@ class PasswordFieldProperties with Diagnosticable {
     required this.textAlignVertical,
     required this.textDirection,
     required this.autofocus,
-    required this.statesController,
     required this.obscuringCharacter,
     required this.autocorrect,
     required this.smartDashesType,
@@ -160,7 +158,6 @@ class PasswordFieldProperties with Diagnosticable {
       ..add(DiagnosticsProperty('textAlignVertical', textAlignVertical))
       ..add(EnumProperty('textDirection', textDirection))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
-      ..add(DiagnosticsProperty('statesController', statesController))
       ..add(StringProperty('obscuringCharacter', obscuringCharacter, defaultValue: '•'))
       ..add(FlagProperty('autocorrect', value: autocorrect, ifTrue: 'autocorrect'))
       ..add(EnumProperty('smartDashesType', smartDashesType))
@@ -223,14 +220,14 @@ class PasswordField extends StatefulWidget {
     BuildContext context,
     FTextFieldStyle style,
     ValueNotifier<bool> obscure,
-    Set<WidgetState> states,
+    Set<FTextFieldVariant> variants,
   ) {
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
     return Padding(
       padding: style.obscureButtonPadding,
       child: FButton.icon(
         style: style.obscureButtonStyle,
-        onPress: states.contains(WidgetState.disabled) ? null : () => obscure.value = !obscure.value,
+        onPress: variants.contains(FTextFieldVariant.disabled) ? null : () => obscure.value = !obscure.value,
         child: Icon(
           obscure.value ? FIcons.eye : FIcons.eyeClosed,
           semanticLabel: obscure.value
@@ -308,7 +305,6 @@ class _State extends State<PasswordField> {
       textAlignVertical: widget.properties.textAlignVertical,
       textDirection: widget.properties.textDirection,
       autofocus: widget.properties.autofocus,
-      statesController: widget.properties.statesController,
       obscuringCharacter: widget.properties.obscuringCharacter,
       obscureText: obscured,
       autocorrect: widget.properties.autocorrect,
@@ -350,10 +346,10 @@ class _State extends State<PasswordField> {
       spellCheckConfiguration: widget.properties.spellCheckConfiguration,
       prefixBuilder: widget.properties.prefixBuilder == null
           ? null
-          : (context, style, states) => widget.properties.prefixBuilder!(context, style, _controller, states),
+          : (context, style, variants) => widget.properties.prefixBuilder!(context, style, _controller, variants),
       suffixBuilder: widget.properties.suffixBuilder == null
           ? null
-          : (context, style, states) => widget.properties.suffixBuilder!(context, style, _controller, states),
+          : (context, style, variants) => widget.properties.suffixBuilder!(context, style, _controller, variants),
       clearable: widget.properties.clearable,
       clearIconBuilder: widget.properties.clearIconBuilder,
     ),

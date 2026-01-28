@@ -4,7 +4,17 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/annotations.dart';
+import 'package:forui/src/theme/variant.dart';
 
+@Variants(FRadioStyle, {
+  'disabled': (2, 'The semantic variant when this widget is disabled and cannot be interacted with.'),
+  'error': (2, 'The semantic variant when this widget is in an error state.'),
+  'selected': (2, 'The semantic variant when this widget is selected.'),
+  'focused': (1, 'The interaction variant when the given widget or any of its descendants have focus.'),
+  'hovered': (1, 'The interaction variant when the user drags their mouse cursor over the given widget.'),
+  'pressed': (1, 'The interaction variant when the user is actively pressing down on the given widget.'),
+})
 part 'radio.design.dart';
 
 /// A radio button that typically allows the user to choose only one of a predefined set of options.
@@ -77,26 +87,22 @@ class FRadio extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = this.style?.call(context.theme.radioStyle) ?? context.theme.radioStyle;
-    final formStates = {
-      if (!enabled) WidgetState.disabled,
-      if (error != null) WidgetState.error,
-      if (value) WidgetState.selected,
-    };
+    final formVariants = <FFormFieldVariant>{if (!enabled) .disabled, if (error != null) .error};
 
     return FTappable(
-      style: style.tappableStyle,
+      style: .replace(style.tappableStyle),
       semanticsLabel: semanticsLabel,
       selected: value,
       onPress: enabled ? () => onChange?.call(!value) : null,
       autofocus: autofocus,
       focusNode: focusNode,
       onFocusChange: onFocusChange,
-      builder: (context, states, _) {
-        states = {...states, ...formStates};
+      builder: (context, tappableVariants, _) {
+        final variants = {...tappableVariants, ...formVariants};
 
         return FLabel(
           axis: .horizontal,
-          states: formStates,
+          variants: formVariants,
           style: style,
           label: label,
           description: description,
@@ -104,7 +110,7 @@ class FRadio extends StatelessWidget {
           // A separate FFocusedOutline is used instead of FTappable's built-in one so that only the radio,
           // rather than the entire FLabel, is outlined.
           child: FFocusedOutline(
-            focused: states.contains(WidgetState.focused),
+            focused: tappableVariants.contains(FTappableVariant.focused),
             style: .replace(style.focusedOutlineStyle),
             child: Stack(
               alignment: .center,
@@ -112,14 +118,14 @@ class FRadio extends StatelessWidget {
                 Container(
                   padding: const .all(2),
                   decoration: BoxDecoration(
-                    border: Border.all(color: style.borderColor.resolve(states)),
-                    color: style.backgroundColor.resolve(states),
+                    border: .all(color: style.borderColor.resolve(variants)),
+                    color: style.backgroundColor.resolve(variants),
                     shape: .circle,
                   ),
                   child: const SizedBox.square(dimension: 10),
                 ),
                 DecoratedBox(
-                  decoration: BoxDecoration(color: style.indicatorColor.resolve(states), shape: .circle),
+                  decoration: BoxDecoration(color: style.indicatorColor.resolve(variants), shape: .circle),
                   child: AnimatedSize(
                     duration: style.motion.duration,
                     reverseDuration: style.motion.reverseDuration,
@@ -161,40 +167,16 @@ class FRadioStyle extends FLabelStyle with _$FRadioStyleFunctions {
   final FFocusedOutlineStyle focusedOutlineStyle;
 
   /// The [FRadio]'s border color.
-  ///
-  /// The supported states are:
-  /// * [WidgetState.disabled]
-  /// * [WidgetState.error]
-  /// * [WidgetState.focused]
-  /// * [WidgetState.hovered]
-  /// * [WidgetState.pressed]
-  /// * [WidgetState.selected]
   @override
-  final FWidgetStateMap<Color> borderColor;
+  final FVariants<FRadioVariantConstraint, Color, Delta<Color>> borderColor;
 
   /// The [FRadio]'s background color.
-  ///
-  /// The supported states are:
-  /// * [WidgetState.disabled]
-  /// * [WidgetState.error]
-  /// * [WidgetState.focused]
-  /// * [WidgetState.hovered]
-  /// * [WidgetState.pressed]
-  /// * [WidgetState.selected]
   @override
-  final FWidgetStateMap<Color> backgroundColor;
+  final FVariants<FRadioVariantConstraint, Color, Delta<Color>> backgroundColor;
 
   /// The [FRadio]'s indicator color.
-  ///
-  /// The supported states are:
-  /// * [WidgetState.disabled]
-  /// * [WidgetState.error]
-  /// * [WidgetState.focused]
-  /// * [WidgetState.hovered]
-  /// * [WidgetState.pressed]
-  /// * [WidgetState.selected]
   @override
-  final FWidgetStateMap<Color> indicatorColor;
+  final FVariants<FRadioVariantConstraint, Color, Delta<Color>> indicatorColor;
 
   /// The motion-related properties.
   @override
@@ -223,17 +205,21 @@ class FRadioStyle extends FLabelStyle with _$FRadioStyleFunctions {
     return .new(
       tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
       focusedOutlineStyle: FFocusedOutlineStyle(color: colors.primary, borderRadius: .circular(100)),
-      borderColor: FWidgetStateMap({
-        WidgetState.error: colors.error,
-        WidgetState.disabled: colors.disable(colors.primary),
-        WidgetState.any: colors.primary,
-      }),
-      backgroundColor: .all(colors.background),
-      indicatorColor: FWidgetStateMap({
-        WidgetState.error: colors.error,
-        WidgetState.disabled: colors.disable(colors.primary),
-        WidgetState.any: colors.primary,
-      }),
+      borderColor: FVariants(
+        colors.primary,
+        variants: {
+          {.error}: colors.error,
+          {.disabled}: colors.disable(colors.primary),
+        },
+      ),
+      backgroundColor: .raw(colors.background),
+      indicatorColor: FVariants(
+        colors.primary,
+        variants: {
+          {.error}: colors.error,
+          {.disabled}: colors.disable(colors.primary),
+        },
+      ),
       labelTextStyle: style.formFieldStyle.labelTextStyle,
       descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,
       errorTextStyle: style.formFieldStyle.errorTextStyle,

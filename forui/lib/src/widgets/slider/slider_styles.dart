@@ -2,12 +2,16 @@ import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/annotations.dart';
+import 'package:forui/src/theme/variant.dart';
 
+@Variants(FSliderStyle, {
+  'disabled': (2, 'The semantic variant when this widget is disabled and cannot be interacted with.'),
+})
 part 'slider_styles.design.dart';
 
 /// A slider's styles.
@@ -52,16 +56,12 @@ class FSliderStyles with Diagnosticable, _$FSliderStylesFunctions {
 /// A slider's style.
 class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
   /// The slider's active track colors.
-  ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.form}
   @override
-  final FWidgetStateMap<Color> activeColor;
+  final FVariants<FSliderVariantConstraint, Color, Delta<Color>> activeColor;
 
   /// The slider's inactive track colors.
-  ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.form}
   @override
-  final FWidgetStateMap<Color> inactiveColor;
+  final FVariants<FSliderVariantConstraint, Color, Delta<Color>> inactiveColor;
 
   /// The slider's border radius.
   @override
@@ -151,22 +151,26 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
     AlignmentGeometry tooltipTipAnchor = .bottomCenter,
     AlignmentGeometry tooltipThumbAnchor = .topCenter,
   }) : this(
-         activeColor: FWidgetStateMap({
-           WidgetState.disabled: colors.disable(colors.primary, colors.secondary),
-           WidgetState.any: colors.primary,
-         }),
-         inactiveColor: .all(colors.secondary),
+         activeColor: FVariants(
+           colors.primary,
+           variants: {
+             {.disabled}: colors.disable(colors.primary, colors.secondary),
+           },
+         ),
+         inactiveColor: .raw(colors.secondary),
          thumbStyle: FSliderThumbStyle(
-           color: .all(colors.primaryForeground),
-           borderColor: FWidgetStateMap({
-             WidgetState.disabled: colors.disable(colors.primary),
-             WidgetState.any: colors.primary,
-           }),
+           color: .raw(colors.primaryForeground),
+           borderColor: FVariants(
+             colors.primary,
+             variants: {
+               {.disabled}: colors.disable(colors.primary),
+             },
+           ),
            focusedOutlineStyle: style.focusedOutlineStyle,
          ),
          markStyle: FSliderMarkStyle(
-           tickColor: .all(colors.mutedForeground),
-           labelTextStyle: .all(typography.xs.copyWith(color: colors.mutedForeground)),
+           tickColor: .raw(colors.mutedForeground),
+           labelTextStyle: .raw(typography.xs.copyWith(color: colors.mutedForeground)),
            labelAnchor: labelAnchor,
            labelOffset: labelOffset,
          ),

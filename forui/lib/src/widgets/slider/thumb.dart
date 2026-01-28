@@ -9,7 +9,7 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/slider/inherited_controller.dart';
 import 'package:forui/src/widgets/slider/inherited_data.dart';
-import 'package:forui/src/widgets/slider/inherited_state.dart';
+import 'package:forui/src/widgets/slider/inherited_variants.dart';
 
 part 'thumb.design.dart';
 
@@ -48,7 +48,7 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
     final InheritedController(:controller, :minTooltipController, :maxTooltipController) = .of(context);
     final tooltip = widget.min ? minTooltipController : maxTooltipController;
     final offset = widget.min ? controller.value.min : controller.value.max;
-    final states = InheritedStates.of(context).states;
+    final variants = InheritedVariants.of(context).variants;
     final InheritedData(
       style: FSliderStyle(:thumbSize, :thumbStyle, :tooltipTipAnchor, :tooltipThumbAnchor),
       :layout,
@@ -120,8 +120,8 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
           child: DecoratedBox(
             decoration: BoxDecoration(
               shape: .circle,
-              color: thumbStyle.color.resolve(states),
-              border: .all(color: thumbStyle.borderColor.resolve(states), width: thumbStyle.borderWidth),
+              color: thumbStyle.color.resolve(variants),
+              border: .all(color: thumbStyle.borderColor.resolve(variants), width: thumbStyle.borderWidth),
             ),
             child: SizedBox.square(dimension: thumbSize),
           ),
@@ -226,16 +226,12 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
 /// implementation.
 class FSliderThumbStyle with Diagnosticable, _$FSliderThumbStyleFunctions {
   /// The thumb's color.
-  ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.form}
   @override
-  final FWidgetStateMap<Color> color;
+  final FVariants<FSliderVariantConstraint, Color, Delta<Color>> color;
 
   /// The border's color.
-  ///
-  /// {@macro forui.foundation.doc_templates.WidgetStates.form}
   @override
-  final FWidgetStateMap<Color> borderColor;
+  final FVariants<FSliderVariantConstraint, Color, Delta<Color>> borderColor;
 
   /// The border's width. Defaults to `2`.
   ///
