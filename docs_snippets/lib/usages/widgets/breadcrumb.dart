@@ -28,7 +28,7 @@ final breadcrumbItem = FBreadcrumbItem(
   // {@endcategory}
   // {@category "Callbacks"}
   onHoverChange: (hovered) {},
-  onStateChange: (states) {},
+  onVariantChange: (previous, current) {},
   // {@endcategory}
 );
 
@@ -72,7 +72,7 @@ final breadcrumbItemCollapsed = FBreadcrumbItem.collapsed(
   // {@endcategory}
   // {@category "Callbacks"}
   onHoverChange: (hovered) {},
-  onStateChange: (states) {},
+  onVariantChange: (previous, current) {},
   // {@endcategory}
 );
 
@@ -115,7 +115,7 @@ final breadcrumbItemCollapsedTiles = FBreadcrumbItem.collapsedTiles(
   // {@endcategory}
   // {@category "Callbacks"}
   onHoverChange: (hovered) {},
-  onStateChange: (states) {},
+  onVariantChange: (previous, current) {},
   // {@endcategory}
 );
 

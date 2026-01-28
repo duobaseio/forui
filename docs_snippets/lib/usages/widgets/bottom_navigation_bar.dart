@@ -30,6 +30,6 @@ final bottomNavigationBarItem = FBottomNavigationBarItem(
   // {@endcategory}
   // {@category "Callbacks"}
   onHoverChange: (hovered) {},
-  onVariantChange: (delta) {},
+  onVariantChange: (previous, current) {},
   // {@endcategory}
 );

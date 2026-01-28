@@ -15,9 +15,9 @@ void main() {
     test('constructor', () {
       expect(
         () => FSliderMarkStyle(
-          tickColor: .all(const Color(0xFF000000)),
+          tickColor: .raw(const Color(0xFF000000)),
           tickSize: -1,
-          labelTextStyle: .all(const TextStyle()),
+          labelTextStyle: .raw(const TextStyle()),
           labelAnchor: Alignment.center,
           labelOffset: 0.0,
         ),

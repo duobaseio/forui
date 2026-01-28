@@ -246,36 +246,16 @@ void main() {
       expect(find.text({WidgetState.hovered, ...set(false)}.toString()), findsOneWidget);
     });
 
-    testWidgets('onStateChange callback called', (tester) async {
-      FWidgetStatesDelta? states;
+    testWidgets('onVariantChange callback called', (tester) async {
+      Set<FTappableVariant>? previous;
+      Set<FTappableVariant>? current;
       await tester.pumpWidget(
         TestScaffold(
           child: FTappable(
             builder: (_, _, _) => const Text('tappable'),
-            onVariantChange: (v) => states = v,
-            onPress: () {},
-          ),
-        ),
-      );
-
-      final gesture = await tester.createPointerGesture();
-      await tester.pump();
-
-      await gesture.moveTo(tester.getCenter(find.text('tappable')));
-      await tester.pumpAndSettle();
-
-      expect(states, FWidgetStatesDelta({}, {.hovered}));
-    });
-
-    testWidgets('onStateChange throwing error does not corrupt state', (tester) async {
-      FWidgetStatesDelta? delta;
-      await tester.pumpWidget(
-        TestScaffold(
-          child: FTappable(
-            builder: (_, _, _) => const Text('tappable'),
-            onVariantChange: (v) {
-              delta = v;
-              throw Exception('Error in onStateChange');
+            onVariantChange: (p, c) {
+              previous = p;
+              current = c;
             },
             onPress: () {},
           ),
@@ -288,13 +268,42 @@ void main() {
       await gesture.moveTo(tester.getCenter(find.text('tappable')));
       await tester.pumpAndSettle();
 
-      expect(delta, FWidgetStatesDelta({}, {.hovered}));
+      expect(previous, isNot(contains(FTappableVariant.hovered)));
+      expect(current, contains(FTappableVariant.hovered));
+    });
+
+    testWidgets('onVariantChange throwing error does not corrupt state', (tester) async {
+      Set<FTappableVariant>? previous;
+      Set<FTappableVariant>? current;
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FTappable(
+            builder: (_, _, _) => const Text('tappable'),
+            onVariantChange: (p, c) {
+              previous = p;
+              current = c;
+              throw Exception('Error in onVariantChange');
+            },
+            onPress: () {},
+          ),
+        ),
+      );
+
+      final gesture = await tester.createPointerGesture();
+      await tester.pump();
+
+      await gesture.moveTo(tester.getCenter(find.text('tappable')));
+      await tester.pumpAndSettle();
+
+      expect(previous, isNot(contains(FTappableVariant.hovered)));
+      expect(current, contains(FTappableVariant.hovered));
       expect(tester.takeException(), isNotNull);
 
       await gesture.moveTo(.zero);
       await tester.pumpAndSettle();
 
-      expect(delta, FWidgetStatesDelta({.hovered}, {}));
+      expect(previous, contains(FTappableVariant.hovered));
+      expect(current, isNot(contains(FTappableVariant.hovered)));
       expect(tester.takeException(), isNotNull);
     });
   });
@@ -494,14 +503,18 @@ void main() {
       expect(find.text({WidgetState.hovered, ...set(false)}.toString()), findsOneWidget);
     });
 
-    testWidgets('onStateChange & onHoverChange callback called', (tester) async {
-      FWidgetStatesDelta? delta;
+    testWidgets('onVariantChange & onHoverChange callback called', (tester) async {
+      Set<FTappableVariant>? previous;
+      Set<FTappableVariant>? current;
       bool? hovered;
       await tester.pumpWidget(
         TestScaffold(
           child: FTappable.static(
             builder: (_, _, _) => const Text('tappable'),
-            onVariantChange: (v) => delta = v,
+            onVariantChange: (p, c) {
+              previous = p;
+              current = c;
+            },
             onHoverChange: (v) => hovered = v,
             onPress: () {},
           ),
@@ -514,13 +527,15 @@ void main() {
       await gesture.moveTo(tester.getCenter(find.text('tappable')));
       await tester.pumpAndSettle();
 
-      expect(delta, FWidgetStatesDelta({}, {.hovered}));
+      expect(previous, isNot(contains(FTappableVariant.hovered)));
+      expect(current, contains(FTappableVariant.hovered));
       expect(hovered, true);
 
       await gesture.moveTo(.zero);
       await tester.pumpAndSettle();
 
-      expect(delta, FWidgetStatesDelta({.hovered}, {}));
+      expect(previous, contains(FTappableVariant.hovered));
+      expect(current, isNot(contains(FTappableVariant.hovered)));
       expect(hovered, false);
     });
   });
@@ -534,7 +549,7 @@ void main() {
         child: FTappable(
           focusNode: focus,
           onPress: focus.requestFocus,
-          onVariantChange: (v) => focused = v.current.contains(WidgetState.focused),
+          onVariantChange: (_, current) => focused = current.contains(FTappableVariant.focused),
           focusedOutlineStyle: .replace(FThemes.zinc.light.style.focusedOutlineStyle),
           child: const Text('focus'),
         ),
@@ -555,7 +570,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         child: FTappable(
-          onVariantChange: (v) => focused = v.current.contains(WidgetState.focused),
+          onVariantChange: (_, current) => focused = current.contains(FTappableVariant.focused),
           focusedOutlineStyle: .replace(FThemes.zinc.light.style.focusedOutlineStyle),
           child: FButton(onPress: focus.requestFocus, focusNode: focus, child: const Text('focus')),
         ),

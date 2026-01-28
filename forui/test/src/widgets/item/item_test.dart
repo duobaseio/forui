@@ -81,10 +81,10 @@ void main() {
   });
 
   testWidgets('disabled when no press callbacks given', (tester) async {
-    FWidgetStatesDelta? delta;
+    Set<FTappableVariant>? current;
     await tester.pumpWidget(
       TestScaffold(
-        child: FItem(title: const Text('item'), onVariantChange: (s) => delta = s),
+        child: FItem(title: const Text('item'), onVariantChange: (_, c) => current = c),
       ),
     );
 
@@ -93,14 +93,14 @@ void main() {
     await gesture.moveTo(tester.getCenter(find.byType(FItem)));
     await tester.pumpAndSettle();
 
-    expect(delta, null);
+    expect(current, null);
   });
 
   testWidgets('enabled when secondary press given', (tester) async {
-    FWidgetStatesDelta? delta;
+    Set<FTappableVariant>? current;
     await tester.pumpWidget(
       TestScaffold(
-        child: FItem(title: const Text('item'), onSecondaryPress: () {}, onVariantChange: (s) => delta = s),
+        child: FItem(title: const Text('item'), onSecondaryPress: () {}, onVariantChange: (_, c) => current = c),
       ),
     );
 
@@ -109,14 +109,14 @@ void main() {
     await gesture.moveTo(tester.getCenter(find.byType(FItem)));
     await tester.pumpAndSettle();
 
-    expect(delta, FWidgetStatesDelta({}, {.hovered}));
+    expect(current, contains(FTappableVariant.hovered));
   });
 
   testWidgets('enabled when secondary long press given', (tester) async {
-    FWidgetStatesDelta? delta;
+    Set<FTappableVariant>? current;
     await tester.pumpWidget(
       TestScaffold(
-        child: FItem(title: const Text('item'), onSecondaryLongPress: () {}, onVariantChange: (s) => delta = s),
+        child: FItem(title: const Text('item'), onSecondaryLongPress: () {}, onVariantChange: (_, c) => current = c),
       ),
     );
 
@@ -125,7 +125,7 @@ void main() {
     await gesture.moveTo(tester.getCenter(find.byType(FItem)));
     await tester.pumpAndSettle();
 
-    expect(delta, FWidgetStatesDelta({}, {.hovered}));
+    expect(current, contains(FTappableVariant.hovered));
   });
 
   testWidgets('child hit test', (tester) async {

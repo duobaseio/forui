@@ -69,7 +69,7 @@ final sidebarGroup = FSidebarGroup(
   // {@endcategory}
   // {@category "Callbacks"}
   onActionHoverChange: (hovered) {},
-  onActionVariantChange: (states) {},
+  onActionVariantChange: (previous, current) {},
   onActionPress: () {},
   onActionLongPress: () {},
   // {@endcategory}
@@ -95,6 +95,6 @@ final sidebarItem = FSidebarItem(
   onPress: () {},
   onLongPress: () {},
   onHoverChange: (hovered) {},
-  onVariantChange: (states) {},
+  onVariantChange: (previous, current) {},
   // {@endcategory}
 );

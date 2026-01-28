@@ -6,15 +6,23 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  testWidgets('onStateChange & onHoverChange callback called', (tester) async {
-    FWidgetStatesDelta? delta;
+  testWidgets('onVariantChange & onHoverChange callback called', (tester) async {
+    Set<FTappableVariant>? previous;
+    Set<FTappableVariant>? current;
     bool? hovered;
     await tester.pumpWidget(
       TestScaffold(
         child: FHeader.nested(
           title: const Text('Title'),
           prefixes: [
-            FHeaderAction.back(onHoverChange: (v) => hovered = v, onVariantChange: (v) => delta = v, onPress: () {}),
+            FHeaderAction.back(
+              onHoverChange: (v) => hovered = v,
+              onVariantChange: (p, c) {
+                previous = p;
+                current = c;
+              },
+              onPress: () {},
+            ),
           ],
         ),
       ),
@@ -26,13 +34,15 @@ void main() {
     await gesture.moveTo(tester.getCenter(find.byType(FHeaderAction)));
     await tester.pumpAndSettle();
 
-    expect(delta, FWidgetStatesDelta({}, {.hovered}));
+    expect(previous, isNot(contains(FTappableVariant.hovered)));
+    expect(current, contains(FTappableVariant.hovered));
     expect(hovered, true);
 
     await gesture.moveTo(.zero);
     await tester.pumpAndSettle();
 
-    expect(delta, FWidgetStatesDelta({.hovered}, {}));
+    expect(previous, contains(FTappableVariant.hovered));
+    expect(current, isNot(contains(FTappableVariant.hovered)));
     expect(hovered, false);
   });
 }

@@ -95,7 +95,7 @@ final selectTile = FSelectTile<String>(
   // {@endcategory}
   // {@category "Callbacks"}
   onHoverChange: (hovered) {},
-  onVariantChange: (states) {},
+  onVariantChange: (previous, current) {},
   // {@endcategory}
 );
 
@@ -121,7 +121,7 @@ final selectTileSuffix = FSelectTile<String>.suffix(
   // {@endcategory}
   // {@category "Callbacks"}
   onHoverChange: (hovered) {},
-  onVariantChange: (states) {},
+  onVariantChange: (previous, current) {},
   // {@endcategory}
 );
 
