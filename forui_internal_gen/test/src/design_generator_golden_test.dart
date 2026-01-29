@@ -525,10 +525,10 @@ mixin _$FGoldenStyleFunctions on Diagnosticable {
 /// A delta that applies modifications to a [FGoldenStyle].
 sealed class FGoldenStyleDelta with Delta<FGoldenStyle> {
   /// Creates a complete replacement for a [FGoldenStyle].
-  const factory FGoldenStyleDelta.replace(FGoldenStyle replacement) = _FGoldenStyleReplace;
+  const factory FGoldenStyleDelta.value(FGoldenStyle replacement) = _FGoldenStyleValue;
 
   /// Creates a partial modification of a [FGoldenStyle].
-  const factory FGoldenStyleDelta.merge({
+  const factory FGoldenStyleDelta.delta({
     double someDouble,
     Alignment? alignment,
     AlignmentGeometry? alignmentGeometry,
@@ -560,11 +560,11 @@ sealed class FGoldenStyleDelta with Delta<FGoldenStyle> {
     Map<String, int>? map,
     FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color>? variantsWithGenericDelta,
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, TextStyle, TextStyleDelta>? variantsWithSpecificDelta,
-  }) = _FGoldenStyleMerge;
+  }) = _FGoldenStyleDelta;
 }
 
-class _FGoldenStyleReplace implements FGoldenStyleDelta {
-  const _FGoldenStyleReplace(this._replacement);
+class _FGoldenStyleValue implements FGoldenStyleDelta {
+  const _FGoldenStyleValue(this._replacement);
 
   final FGoldenStyle _replacement;
 
@@ -572,8 +572,8 @@ class _FGoldenStyleReplace implements FGoldenStyleDelta {
   FGoldenStyle call(FGoldenStyle _) => _replacement;
 }
 
-class _FGoldenStyleMerge implements FGoldenStyleDelta {
-  const _FGoldenStyleMerge({
+class _FGoldenStyleDelta implements FGoldenStyleDelta {
+  const _FGoldenStyleDelta({
     this.someDouble = double.infinity,
     this.alignment,
     this.alignmentGeometry,
@@ -762,15 +762,15 @@ mixin _$FGoldenNestedMotionFunctions on Diagnosticable {
 /// A delta that applies modifications to a [FGoldenNestedMotion].
 sealed class FGoldenNestedMotionDelta with Delta<FGoldenNestedMotion> {
   /// Creates a complete replacement for a [FGoldenNestedMotion].
-  const factory FGoldenNestedMotionDelta.replace(FGoldenNestedMotion replacement) = _FGoldenNestedMotionReplace;
+  const factory FGoldenNestedMotionDelta.value(FGoldenNestedMotion replacement) = _FGoldenNestedMotionValue;
 
   /// Creates a partial modification of a [FGoldenNestedMotion].
-  const factory FGoldenNestedMotionDelta.merge({double? someDouble, Duration? duration, Curve? curve}) =
-      _FGoldenNestedMotionMerge;
+  const factory FGoldenNestedMotionDelta.delta({double? someDouble, Duration? duration, Curve? curve}) =
+      _FGoldenNestedMotionDelta;
 }
 
-class _FGoldenNestedMotionReplace implements FGoldenNestedMotionDelta {
-  const _FGoldenNestedMotionReplace(this._replacement);
+class _FGoldenNestedMotionValue implements FGoldenNestedMotionDelta {
+  const _FGoldenNestedMotionValue(this._replacement);
 
   final FGoldenNestedMotion _replacement;
 
@@ -778,8 +778,8 @@ class _FGoldenNestedMotionReplace implements FGoldenNestedMotionDelta {
   FGoldenNestedMotion call(FGoldenNestedMotion _) => _replacement;
 }
 
-class _FGoldenNestedMotionMerge implements FGoldenNestedMotionDelta {
-  const _FGoldenNestedMotionMerge({this.someDouble, this.duration, this.curve});
+class _FGoldenNestedMotionDelta implements FGoldenNestedMotionDelta {
+  const _FGoldenNestedMotionDelta({this.someDouble, this.duration, this.curve});
 
   final double? someDouble;
 
@@ -846,14 +846,14 @@ mixin _$FGoldenNestedStyleFunctions on Diagnosticable {
 /// A delta that applies modifications to a [FGoldenNestedStyle].
 sealed class FGoldenNestedStyleDelta with Delta<FGoldenNestedStyle> {
   /// Creates a complete replacement for a [FGoldenNestedStyle].
-  const factory FGoldenNestedStyleDelta.replace(FGoldenNestedStyle replacement) = _FGoldenNestedStyleReplace;
+  const factory FGoldenNestedStyleDelta.value(FGoldenNestedStyle replacement) = _FGoldenNestedStyleValue;
 
   /// Creates a partial modification of a [FGoldenNestedStyle].
-  const factory FGoldenNestedStyleDelta.merge() = _FGoldenNestedStyleMerge;
+  const factory FGoldenNestedStyleDelta.delta() = _FGoldenNestedStyleDelta;
 }
 
-class _FGoldenNestedStyleReplace implements FGoldenNestedStyleDelta {
-  const _FGoldenNestedStyleReplace(this._replacement);
+class _FGoldenNestedStyleValue implements FGoldenNestedStyleDelta {
+  const _FGoldenNestedStyleValue(this._replacement);
 
   final FGoldenNestedStyle _replacement;
 
@@ -861,8 +861,8 @@ class _FGoldenNestedStyleReplace implements FGoldenNestedStyleDelta {
   FGoldenNestedStyle call(FGoldenNestedStyle _) => _replacement;
 }
 
-class _FGoldenNestedStyleMerge implements FGoldenNestedStyleDelta {
-  const _FGoldenNestedStyleMerge();
+class _FGoldenNestedStyleDelta implements FGoldenNestedStyleDelta {
+  const _FGoldenNestedStyleDelta();
 
   @override
   FGoldenNestedStyle call(FGoldenNestedStyle original) => FGoldenNestedStyle();

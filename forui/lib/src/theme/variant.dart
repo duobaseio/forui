@@ -109,7 +109,7 @@ class Value implements FVariant {
   int get hashCode => _value.hashCode;
 
   @override
-  String toString() => '$_value($_tier)';
+  String toString() => _value;
 }
 
 @internal

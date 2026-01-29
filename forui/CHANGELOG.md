@@ -75,6 +75,8 @@
 
 ### `FTappable`
 * **Breaking** Rename `FTappable.onStateChange` to `FTappable.onVariantChange`.
+* **Breaking** Change `FTappableVariantChangeCallback` signature from `void Function(Set<FTappableVariant>)` to
+  `void Function(Set<FTappableVariant> previous, Set<FTappableVariant> current)`.
 
 
 ### `FTile`

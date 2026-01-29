@@ -209,34 +209,32 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
         prefixIconStyle: .delta(
           IconThemeData(color: colors.primary, size: 15),
           variants: {
-            {.disabled}: .merge(color: colors.disable(colors.primary)),
+            [.disabled]: .delta(color: colors.disable(colors.primary)),
           },
         ),
         titleTextStyle: .delta(
           typography.sm,
           variants: {
-            {.disabled}: .merge(color: colors.disable(colors.primary)),
+            [.disabled]: .delta(color: colors.disable(colors.primary)),
           },
         ),
         subtitleTextStyle: .delta(
           typography.xs.copyWith(color: colors.mutedForeground),
           variants: {
-            {.disabled}: .merge(color: colors.disable(colors.mutedForeground)),
+            [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
           },
         ),
         detailsTextStyle: .delta(
           typography.xs.copyWith(color: colors.mutedForeground),
           variants: {
-            {.disabled}: .merge(color: colors.disable(colors.mutedForeground)),
+            [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
           },
         ),
         suffixIconStyle: .delta(
           IconThemeData(color: colors.mutedForeground, size: 15),
           variants: {
-            {.disabled}: .merge(color: colors.disable(colors.mutedForeground)),
+            [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
           },
         ),
       );
-
-
 }

@@ -253,13 +253,13 @@ class FSelectGroupStyle extends FLabelStyle with Diagnosticable, _$FSelectGroupS
     final labelTextStyle = FVariants<FFormFieldVariantConstraint, TextStyle, TextStyleDelta>.delta(
       typography.sm.copyWith(color: colors.primary, fontWeight: .w500),
       variants: {
-        {.disabled}: .merge(color: colors.disable(colors.primary)),
+        [.disabled]: .delta(color: colors.disable(colors.primary)),
       },
     );
     final descriptionTextStyle = FVariants<FFormFieldVariantConstraint, TextStyle, TextStyleDelta>.delta(
       typography.sm.copyWith(color: colors.mutedForeground),
       variants: {
-        {.disabled}: .merge(color: colors.disable(colors.mutedForeground)),
+        [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
       },
     );
     final errorTextStyle = typography.sm.copyWith(color: colors.error, fontWeight: .w500);

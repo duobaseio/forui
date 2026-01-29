@@ -175,8 +175,8 @@ class FButton extends StatelessWidget {
     };
 
     return FTappable(
-      style: .replace(style.tappableStyle),
-      focusedOutlineStyle: .replace(style.focusedOutlineStyle),
+      style: .value(style.tappableStyle),
+      focusedOutlineStyle: .value(style.focusedOutlineStyle),
       autofocus: autofocus,
       focusNode: focusNode,
       onFocusChange: onFocusChange,
@@ -308,8 +308,8 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
          decoration: .delta(
            BoxDecoration(borderRadius: style.borderRadius, color: color),
            variants: {
-             {.disabled}: .merge(color: colors.disable(color)),
-             {.hovered, .pressed}: .merge(color: colors.hover(color)),
+             [.disabled]: .delta(color: colors.disable(color)),
+             [.hovered, .pressed]: .delta(color: colors.hover(color)),
            },
          ),
          focusedOutlineStyle: style.focusedOutlineStyle,
@@ -322,7 +322,7 @@ class FButtonStyle extends FBaseButtonStyle with Diagnosticable, _$FButtonStyleF
            iconStyle: .delta(
              IconThemeData(color: foregroundColor, size: 20),
              variants: {
-               {.disabled}: .merge(color: colors.disable(foregroundColor, colors.disable(color))),
+               [.disabled]: .delta(color: colors.disable(foregroundColor, colors.disable(color))),
              },
            ),
          ),

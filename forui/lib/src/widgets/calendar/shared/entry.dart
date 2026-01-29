@@ -168,8 +168,7 @@ class _UnselectableEntry extends Entry {
   const _UnselectableEntry({required this.selected, required super.style, required super.builder}) : super._();
 
   @override
-  Widget build(BuildContext context) =>
-      ExcludeSemantics(child: builder(context, {if (selected) .selected}, null));
+  Widget build(BuildContext context) => ExcludeSemantics(child: builder(context, {if (selected) .selected}, null));
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

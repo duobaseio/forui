@@ -370,7 +370,7 @@ class FItem extends StatelessWidget with FItemMixin {
       child: Padding(
         padding: margin,
         child: FTappable(
-          style: .replace(style.tappableStyle),
+          style: .value(style.tappableStyle),
           semanticsLabel: semanticsLabel,
           autofocus: autofocus,
           focusNode: focusNode,
@@ -479,14 +479,14 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
         backgroundColor: FVariants(
           colors.background,
           variants: {
-            {.disabled}: colors.disable(colors.secondary),
+            [.disabled]: colors.disable(colors.secondary),
           },
         ),
         decoration: .delta(
           BoxDecoration(color: colors.background, borderRadius: style.borderRadius),
           variants: {
-            {.disabled}: .merge(color: colors.disable(colors.secondary)),
-            {.hovered, .pressed}: .merge(color: colors.secondary),
+            [.disabled]: .delta(color: colors.disable(colors.secondary)),
+            [.hovered, .pressed]: .delta(color: colors.secondary),
           },
         ),
         contentStyle: .inherit(colors: colors, typography: typography),

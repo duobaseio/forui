@@ -388,11 +388,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
     );
 
     if (widget.focusedOutlineStyle case final style?) {
-      tappable = FFocusedOutline(
-        focused: _current.contains(FTappableVariant.focused),
-        style: style,
-        child: tappable,
-      );
+      tappable = FFocusedOutline(focused: _current.contains(FTappableVariant.focused), style: style, child: tappable);
     }
 
     return tappable;
@@ -511,9 +507,6 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
 /// A [FTappable]'s style.
 class FTappableStyle with Diagnosticable, _$FTappableStyleFunctions {
   /// The mouse cursor for mouse pointers that are hovering over the region. Defaults to [MouseCursor.defer].
-  ///
-  /// See:
-  /// * [FTappableVariantConstraint] for the supported variant constraints.
   @override
   final FVariants<FTappableVariantConstraint, MouseCursor, Delta<MouseCursor>> cursor;
 
@@ -533,7 +526,7 @@ class FTappableStyle with Diagnosticable, _$FTappableStyleFunctions {
 
   /// Creates a [FTappableStyle].
   FTappableStyle({
-    this.cursor = const .raw(.defer),
+    this.cursor = const .all(.defer),
     this.pressedEnterDuration = const Duration(milliseconds: 200),
     this.pressedExitDuration = .zero,
     this.motion = const FTappableMotion(),

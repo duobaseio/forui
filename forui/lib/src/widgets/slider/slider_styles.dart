@@ -154,23 +154,23 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
          activeColor: FVariants(
            colors.primary,
            variants: {
-             {.disabled}: colors.disable(colors.primary, colors.secondary),
+             [.disabled]: colors.disable(colors.primary, colors.secondary),
            },
          ),
-         inactiveColor: .raw(colors.secondary),
+         inactiveColor: .all(colors.secondary),
          thumbStyle: FSliderThumbStyle(
-           color: .raw(colors.primaryForeground),
+           color: .all(colors.primaryForeground),
            borderColor: FVariants(
              colors.primary,
              variants: {
-               {.disabled}: colors.disable(colors.primary),
+               [.disabled]: colors.disable(colors.primary),
              },
            ),
            focusedOutlineStyle: style.focusedOutlineStyle,
          ),
          markStyle: FSliderMarkStyle(
-           tickColor: .raw(colors.mutedForeground),
-           labelTextStyle: .raw(typography.xs.copyWith(color: colors.mutedForeground)),
+           tickColor: .all(colors.mutedForeground),
+           labelTextStyle: .all(typography.xs.copyWith(color: colors.mutedForeground)),
            labelAnchor: labelAnchor,
            labelOffset: labelOffset,
          ),

@@ -128,13 +128,11 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
     final iconStyle = FVariants<FTextFieldVariantConstraint, IconThemeData, IconThemeDataDelta>.delta(
       IconThemeData(color: colors.mutedForeground, size: 17),
       variants: {
-        {.disabled}: .merge(color: colors.disable(colors.mutedForeground)),
+        [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
       },
     );
     final bounceableButtonStyle = ghost.copyWith(
-      iconContentStyle: ghost.iconContentStyle.copyWith(
-        iconStyle: iconStyle.cast(),
-      ),
+      iconContentStyle: ghost.iconContentStyle.copyWith(iconStyle: iconStyle.cast()),
     );
 
     return .new(
@@ -148,19 +146,19 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
       contentTextStyle: .delta(
         textStyle.copyWith(color: colors.primary),
         variants: {
-          {.disabled}: .merge(color: colors.disable(colors.primary)),
+          [.disabled]: .delta(color: colors.disable(colors.primary)),
         },
       ),
       hintTextStyle: .delta(
         textStyle.copyWith(color: colors.mutedForeground),
         variants: {
-          {.disabled}: .merge(color: colors.disable(colors.border)),
+          [.disabled]: .delta(color: colors.disable(colors.border)),
         },
       ),
       counterTextStyle: .delta(
         textStyle.copyWith(color: colors.primary),
         variants: {
-          {.disabled}: .merge(color: colors.disable(colors.primary)),
+          [.disabled]: .delta(color: colors.disable(colors.primary)),
         },
       ),
       border: FVariants(
@@ -169,15 +167,15 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
           borderRadius: style.borderRadius,
         ),
         variants: {
-          {.error}: OutlineInputBorder(
+          [.error]: OutlineInputBorder(
             borderSide: BorderSide(color: colors.error, width: style.borderWidth),
             borderRadius: style.borderRadius,
           ),
-          {.disabled.and(.not(.error))}: OutlineInputBorder(
+          [.disabled.and(.not(.error))]: OutlineInputBorder(
             borderSide: BorderSide(color: colors.disable(colors.border), width: style.borderWidth),
             borderRadius: style.borderRadius,
           ),
-          {.focused}: OutlineInputBorder(
+          [.focused]: OutlineInputBorder(
             borderSide: BorderSide(color: colors.primary, width: style.borderWidth),
             borderRadius: style.borderRadius,
           ),

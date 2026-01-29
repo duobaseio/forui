@@ -260,21 +260,21 @@ class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
           backgroundColor: FVariants(
             colors.background,
             variants: {
-              {.disabled}: colors.background,
-              {.hovered, .pressed}: colors.secondary,
+              [.disabled]: colors.background,
+              [.hovered, .pressed]: colors.secondary,
             },
           ),
           borderColor: FVariants(
             null,
             variants: {
-              {.disabled}: colors.background,
-              {.focused}: colors.foreground,
+              [.disabled]: colors.background,
+              [.focused]: colors.foreground,
             },
           ),
           textStyle: .delta(
             typography.base.copyWith(color: colors.foreground, fontWeight: .w500),
             variants: {
-              {.disabled}: .merge(color: colors.disable(colors.mutedForeground)),
+              [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
             },
           ),
           radius: const .circular(8),

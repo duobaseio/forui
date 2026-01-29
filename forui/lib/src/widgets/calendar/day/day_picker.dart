@@ -229,18 +229,18 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
   factory FCalendarDayPickerStyle.inherit({required FColors colors, required FTypography typography}) {
     final mutedTextStyle = typography.base.copyWith(color: colors.disable(colors.mutedForeground), fontWeight: .w500);
 
-    final background = <Set<FTappableVariantConstraint>, Color>{
-      {.disabled.and(.selected)}: colors.primaryForeground,
-      {.disabled}: colors.background,
-      {.hovered, .pressed}: colors.secondary,
+    final background = <List<FTappableVariantConstraint>, Color>{
+      [.disabled.and(.selected)]: colors.primaryForeground,
+      [.disabled]: colors.background,
+      [.hovered, .pressed]: colors.secondary,
     };
 
-    final border = FVariants<FTappableVariantConstraint, Color?, Delta<Color>>(
+    final border = FVariants<FTappableVariantConstraint, Color?, Delta<Color?>>(
       null,
       variants: {
-        {.disabled.and(.selected).and(.focused)}: colors.primaryForeground,
-        {.disabled.and(.focused)}: colors.background,
-        {.focused}: colors.foreground,
+        [.disabled.and(.selected).and(.focused)]: colors.primaryForeground,
+        [.disabled.and(.focused)]: colors.background,
+        [.focused]: colors.foreground,
       },
     );
 
@@ -251,15 +251,15 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
           colors.background,
           variants: {
             ...background,
-            {.selected}: colors.foreground,
+            [.selected]: colors.foreground,
           },
         ),
         borderColor: border,
         textStyle: .delta(
           typography.base.copyWith(color: colors.foreground, fontWeight: .w500),
           variants: {
-            {.disabled}: .merge(color: colors.disable(colors.mutedForeground)),
-            {.selected}: .merge(color: colors.background),
+            [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
+            [.selected]: .delta(color: colors.background),
           },
         ),
         radius: const .circular(4),
@@ -269,11 +269,11 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
           colors.background,
           variants: {
             ...background,
-            {.selected}: colors.primaryForeground,
+            [.selected]: colors.primaryForeground,
           },
         ),
         borderColor: border,
-        textStyle: .raw(mutedTextStyle),
+        textStyle: .all(mutedTextStyle),
         radius: const .circular(4),
       ),
     );

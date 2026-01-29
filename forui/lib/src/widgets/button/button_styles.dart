@@ -63,14 +63,14 @@ class FButtonStyles with Diagnosticable, _$FButtonStylesFunctions {
           foregroundColor: colors.destructiveForeground,
         ),
         outline: FButtonStyle(
-          decoration: .delta(
+          decoration: FVariants.delta(
             BoxDecoration(
               border: .all(color: colors.border),
               borderRadius: style.borderRadius,
             ),
             variants: {
-              {.disabled}: .merge(border: .all(color: colors.disable(colors.border))),
-              {.hovered, .pressed}: .merge(color: colors.secondary),
+              [.disabled]: .delta(border: .all(color: colors.disable(colors.border))),
+              [.hovered, .pressed]: .delta(color: colors.secondary),
             },
           ),
           focusedOutlineStyle: style.focusedOutlineStyle,
@@ -86,11 +86,11 @@ class FButtonStyles with Diagnosticable, _$FButtonStylesFunctions {
           tappableStyle: style.tappableStyle,
         ),
         ghost: FButtonStyle(
-          decoration: .delta(
+          decoration: FVariants.delta(
             BoxDecoration(borderRadius: style.borderRadius),
             variants: {
-              {.disabled}: const .merge(),
-              {.hovered, .pressed}: .merge(color: colors.secondary),
+              [.disabled]: const .delta(),
+              [.hovered, .pressed]: .delta(color: colors.secondary),
             },
           ),
           focusedOutlineStyle: style.focusedOutlineStyle,

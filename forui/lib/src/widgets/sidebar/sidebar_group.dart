@@ -89,8 +89,8 @@ class FSidebarGroup extends StatelessWidget {
                       const SizedBox(),
                     if (action != null)
                       FTappable(
-                        style: .replace(style.tappableStyle),
-                        focusedOutlineStyle: .replace(style.focusedOutlineStyle),
+                        style: .value(style.tappableStyle),
+                        focusedOutlineStyle: .value(style.focusedOutlineStyle),
                         onHoverChange: onActionHoverChange,
                         onVariantChange: onActionVariantChange,
                         onPress: onActionPress,
@@ -215,7 +215,7 @@ class FSidebarGroupStyle with Diagnosticable, _$FSidebarGroupStyleFunctions {
         actionStyle: .delta(
           IconThemeData(color: colors.mutedForeground, size: 18),
           variants: {
-            {.hovered, .pressed}: .merge(color: colors.primary),
+            [.hovered, .pressed]: .delta(color: colors.primary),
           },
         ),
         tappableStyle: style.tappableStyle,

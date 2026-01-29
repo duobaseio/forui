@@ -28,7 +28,8 @@ typedef FTextFieldCounterBuilder =
 /// [field] is the field that will be decorated.
 ///
 /// See [FTextField.builder].
-typedef FFieldBuilder<T> = Widget Function(BuildContext context, T style, Set<FTextFieldVariant> variants, Widget field);
+typedef FFieldBuilder<T> =
+    Widget Function(BuildContext context, T style, Set<FTextFieldVariant> variants, Widget field);
 
 /// A callback for building a field's icon.
 ///

@@ -203,12 +203,12 @@ class FSwitchStyle extends FLabelStyle with _$FSwitchStyleFunctions {
         colors.border,
         variants: {
           // Disabled
-          {.disabled.and(.selected)}: colors.disable(colors.primary),
-          {.disabled}: colors.disable(colors.border),
-          {.selected}: colors.primary,
+          [.disabled.and(.selected)]: colors.disable(colors.primary),
+          [.disabled]: colors.disable(colors.border),
+          [.selected]: colors.primary,
         },
       ),
-      thumbColor: .raw(colors.background),
+      thumbColor: .all(colors.background),
       labelTextStyle: style.formFieldStyle.labelTextStyle,
       descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,
       errorTextStyle: style.formFieldStyle.errorTextStyle,

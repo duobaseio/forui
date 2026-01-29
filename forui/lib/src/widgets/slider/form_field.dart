@@ -65,7 +65,10 @@ class SliderFormField extends FormField<FSliderValue> with FFormFieldProperties<
                const SizedBox(),
              for (final mark in marks.where((mark) => mark.label != null).toList())
                if (mark case FSliderMark(style: final markStyle, :final label?))
-                 DefaultTextStyle(style: (markStyle ?? style.markStyle).labelTextStyle.resolve(formVariants), child: label),
+                 DefaultTextStyle(
+                   style: (markStyle ?? style.markStyle).labelTextStyle.resolve(formVariants),
+                   child: label,
+                 ),
            ];
 
            return InheritedVariants(

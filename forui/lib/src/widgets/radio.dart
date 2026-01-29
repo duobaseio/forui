@@ -90,7 +90,7 @@ class FRadio extends StatelessWidget {
     final formVariants = <FFormFieldVariant>{if (!enabled) .disabled, if (error != null) .error};
 
     return FTappable(
-      style: .replace(style.tappableStyle),
+      style: .value(style.tappableStyle),
       semanticsLabel: semanticsLabel,
       selected: value,
       onPress: enabled ? () => onChange?.call(!value) : null,
@@ -111,7 +111,7 @@ class FRadio extends StatelessWidget {
           // rather than the entire FLabel, is outlined.
           child: FFocusedOutline(
             focused: tappableVariants.contains(FTappableVariant.focused),
-            style: .replace(style.focusedOutlineStyle),
+            style: .value(style.focusedOutlineStyle),
             child: Stack(
               alignment: .center,
               children: [
@@ -208,16 +208,16 @@ class FRadioStyle extends FLabelStyle with _$FRadioStyleFunctions {
       borderColor: FVariants(
         colors.primary,
         variants: {
-          {.error}: colors.error,
-          {.disabled}: colors.disable(colors.primary),
+          [.error]: colors.error,
+          [.disabled]: colors.disable(colors.primary),
         },
       ),
-      backgroundColor: .raw(colors.background),
+      backgroundColor: .all(colors.background),
       indicatorColor: FVariants(
         colors.primary,
         variants: {
-          {.error}: colors.error,
-          {.disabled}: colors.disable(colors.primary),
+          [.error]: colors.error,
+          [.disabled]: colors.disable(colors.primary),
         },
       ),
       labelTextStyle: style.formFieldStyle.labelTextStyle,

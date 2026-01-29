@@ -283,12 +283,16 @@ class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
   /// Creates a [FTileStyle].
   FTileStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        backgroundColor: .raw(colors.background),
+        backgroundColor: .all(colors.background),
         decoration: .delta(
-          BoxDecoration(color: colors.background, border: .all(color: colors.border), borderRadius: style.borderRadius),
+          BoxDecoration(
+            color: colors.background,
+            border: .all(color: colors.border),
+            borderRadius: style.borderRadius,
+          ),
           variants: {
-            {.disabled}: .merge(color: colors.disable(colors.secondary)),
-            {.hovered, .pressed}: .merge(color: colors.secondary),
+            [.disabled]: .delta(color: colors.disable(colors.secondary)),
+            [.hovered, .pressed]: .delta(color: colors.secondary),
           },
         ),
         contentStyle: FItemContentStyle(
@@ -296,31 +300,31 @@ class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
           prefixIconStyle: .delta(
             IconThemeData(color: colors.primary, size: 18),
             variants: {
-              {.disabled}: .merge(color: colors.disable(colors.primary)),
+              [.disabled]: .delta(color: colors.disable(colors.primary)),
             },
           ),
           titleTextStyle: .delta(
             typography.base,
             variants: {
-              {.disabled}: .merge(color: colors.disable(colors.primary)),
+              [.disabled]: .delta(color: colors.disable(colors.primary)),
             },
           ),
           subtitleTextStyle: .delta(
             typography.xs.copyWith(color: colors.mutedForeground),
             variants: {
-              {.disabled}: .merge(color: colors.disable(colors.mutedForeground)),
+              [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
             },
           ),
           detailsTextStyle: .delta(
             typography.base.copyWith(color: colors.mutedForeground),
             variants: {
-              {.disabled}: .merge(color: colors.disable(colors.mutedForeground)),
+              [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
             },
           ),
           suffixIconStyle: .delta(
             IconThemeData(color: colors.mutedForeground, size: 18),
             variants: {
-              {.disabled}: .merge(color: colors.disable(colors.mutedForeground)),
+              [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
             },
           ),
         ),
@@ -329,13 +333,13 @@ class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
           prefixIconStyle: .delta(
             IconThemeData(color: colors.primary, size: 18),
             variants: {
-              {.disabled}: .merge(color: colors.disable(colors.primary)),
+              [.disabled]: .delta(color: colors.disable(colors.primary)),
             },
           ),
           childTextStyle: .delta(
             typography.base,
             variants: {
-              {.disabled}: .merge(color: colors.disable(colors.primary)),
+              [.disabled]: .delta(color: colors.disable(colors.primary)),
             },
           ),
         ),

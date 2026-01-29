@@ -17,7 +17,7 @@ void main() {
           backgroundBlendMode: .srcOver,
         );
 
-        const delta = BoxDecorationDelta.merge();
+        const delta = BoxDecorationDelta.delta();
         final result = delta(original);
 
         expect(result.color, original.color);
@@ -39,7 +39,7 @@ void main() {
           backgroundBlendMode: .srcOver,
         );
 
-        final delta = BoxDecorationDelta.merge(
+        final delta = BoxDecorationDelta.delta(
           color: null,
           image: null,
           border: null,
@@ -64,7 +64,7 @@ void main() {
 
       const replacement = BoxDecoration(color: Color(0xFFFF0000));
 
-      const delta = BoxDecorationDelta.replace(replacement);
+      const delta = BoxDecorationDelta.value(replacement);
       final result = delta(original);
 
       expect(result, replacement);
@@ -86,7 +86,7 @@ void main() {
           shadows: [Shadow(blurRadius: 2)],
           applyTextScaling: true,
         );
-        const delta = IconThemeDataDelta.merge();
+        const delta = IconThemeDataDelta.delta();
         final result = delta(original);
 
         expect(result.color, original.color);
@@ -110,7 +110,7 @@ void main() {
           grade: 0.25,
           opticalSize: 48,
         );
-        const delta = IconThemeDataDelta.merge(
+        const delta = IconThemeDataDelta.delta(
           color: null,
           opacity: null,
           size: null,
@@ -135,7 +135,7 @@ void main() {
       const original = IconThemeData(color: Color(0xFF000000), size: 24);
       const replacement = IconThemeData(color: Color(0xFFFF0000));
 
-      const delta = IconThemeDataDelta.replace(replacement);
+      const delta = IconThemeDataDelta.value(replacement);
       final result = delta(original);
 
       expect(result, replacement);
@@ -167,7 +167,7 @@ void main() {
           overflow: .ellipsis,
         );
 
-        const delta = TextStyleDelta.merge();
+        const delta = TextStyleDelta.delta();
         final result = delta(original);
 
         expect(result.inherit, original.inherit);
@@ -218,7 +218,7 @@ void main() {
           overflow: .ellipsis,
         );
 
-        final delta = TextStyleDelta.merge(
+        final delta = TextStyleDelta.delta(
           fontSize: null,
           fontWeight: null,
           fontStyle: () => null,
@@ -267,7 +267,7 @@ void main() {
 
       const replacement = TextStyle(color: Color(0xFFFF0000));
 
-      const delta = TextStyleDelta.replace(replacement);
+      const delta = TextStyleDelta.value(replacement);
       final result = delta(original);
 
       expect(result, replacement);

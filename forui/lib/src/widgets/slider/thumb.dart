@@ -115,7 +115,7 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
         includeFocusSemantics: false,
         onFocusChange: (focused) => setState(() => _focused = focused),
         child: FFocusedOutline(
-          style: .replace(thumbStyle.focusedOutlineStyle),
+          style: .value(thumbStyle.focusedOutlineStyle),
           focused: _focused,
           child: DecoratedBox(
             decoration: BoxDecoration(

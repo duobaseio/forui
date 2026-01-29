@@ -158,7 +158,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
       crossAxisAlignment: .stretch,
       children: [
         FTappable(
-          style: .replace(style.tappableStyle),
+          style: .value(style.tappableStyle),
           autofocus: widget.autofocus,
           focusNode: widget.focusNode,
           onFocusChange: widget.onFocusChange,
@@ -180,7 +180,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
                   ),
                 ),
                 FFocusedOutline(
-                  style: .replace(style.focusedOutlineStyle),
+                  style: .value(style.focusedOutlineStyle),
                   focused: states.contains(FTappableVariant.focused),
                   child: RotationTransition(
                     turns: _iconRotation!,

@@ -196,9 +196,9 @@ class Action extends StatelessWidget {
   Widget build(BuildContext context) => Padding(
     padding: style.itemPadding,
     child: FTappable(
-      style: .replace(style.actionTappableStyle),
+      style: .value(style.actionTappableStyle),
       semanticsLabel: semanticsLabel,
-      focusedOutlineStyle: .replace(context.theme.style.focusedOutlineStyle),
+      focusedOutlineStyle: .value(context.theme.style.focusedOutlineStyle),
       onPress: onPress,
       builder: (context, variants, child) => DecoratedBox(
         decoration: style.itemDecoration.resolve(variants),
@@ -237,8 +237,8 @@ class _Page extends StatelessWidget {
       child: ListenableBuilder(
         listenable: controller,
         builder: (_, _) => FTappable(
-          style: .replace(style.pageTappableStyle),
-          focusedOutlineStyle: .replace(style.focusedOutlineStyle),
+          style: .value(style.pageTappableStyle),
+          focusedOutlineStyle: .value(style.focusedOutlineStyle),
           selected: controller.value == page,
           onPress: () => controller.value = page,
           builder: (_, variants, _) => DecoratedBox(

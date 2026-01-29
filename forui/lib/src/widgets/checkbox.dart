@@ -92,7 +92,7 @@ class FCheckbox extends StatelessWidget {
     final formVariants = <FFormFieldVariant>{if (!enabled) .disabled, if (error != null) .error};
 
     return FTappable(
-      style: .replace(style.tappableStyle),
+      style: .value(style.tappableStyle),
       semanticsLabel: semanticsLabel,
       selected: value,
       onPress: enabled ? () => onChange?.call(!value) : null,
@@ -115,7 +115,7 @@ class FCheckbox extends StatelessWidget {
           // rather than the entire FLabel, is outlined.
           child: FFocusedOutline(
             focused: tappableVariants.contains(FTappableVariant.focused),
-            style: .replace(style.focusedOutlineStyle),
+            style: .value(style.focusedOutlineStyle),
             child: AnimatedSwitcher(
               duration: style.motion.fadeInDuration,
               reverseDuration: style.motion.fadeOutDuration,
@@ -204,11 +204,11 @@ class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
     return .new(
       tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
       focusedOutlineStyle: style.focusedOutlineStyle.copyWith(borderRadius: .circular(4)),
-      iconStyle: FVariants(
+      iconStyle: .delta(
         IconThemeData(color: colors.primaryForeground, size: 14),
         variants: {
-          {.error}: IconThemeData(color: colors.errorForeground, size: 14),
-          {.disabled}: IconThemeData(color: colors.disable(colors.primaryForeground), size: 14),
+          [.error]: .delta(color: colors.errorForeground),
+          [.disabled]: .delta(color: colors.disable(colors.primaryForeground)),
         },
       ),
       decoration: .delta(
@@ -218,14 +218,14 @@ class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
           color: colors.background,
         ),
         variants: {
-          {.error.and(.selected)}: .merge(border: null, color: colors.error),
-          {.error}: .merge(border: .all(color: colors.error, width: 0.6)),
-          {.disabled.and(.selected).and(.not(.error))}: .merge(color: colors.disable(colors.primary)),
-          {.disabled.and(.not(.error))}: .merge(
+          [.error.and(.selected)]: .delta(border: null, color: colors.error),
+          [.error]: .delta(border: .all(color: colors.error, width: 0.6)),
+          [.disabled.and(.selected).and(.not(.error))]: .delta(color: colors.disable(colors.primary)),
+          [.disabled.and(.not(.error))]: .delta(
             border: .all(color: colors.disable(colors.primary), width: 0.6),
             color: colors.disable(colors.primary),
           ),
-          {.selected}: .merge(color: colors.primary),
+          [.selected]: .delta(color: colors.primary),
         },
       ),
       labelTextStyle: style.formFieldStyle.labelTextStyle,

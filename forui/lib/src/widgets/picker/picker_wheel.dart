@@ -147,7 +147,7 @@ abstract class _State<T extends FPickerWheel> extends State<T> {
               Container(
                 height: extent,
                 decoration: BoxDecoration(
-                  border: Border.all(color: style.focusedOutlineStyle.color, width: style.focusedOutlineStyle.width),
+                  border: .all(color: style.focusedOutlineStyle.color, width: style.focusedOutlineStyle.width),
                   borderRadius: style.focusedOutlineStyle.borderRadius,
                 ),
               ),
