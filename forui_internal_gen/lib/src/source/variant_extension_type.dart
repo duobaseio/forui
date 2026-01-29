@@ -116,17 +116,17 @@ class VariantExtensionType {
   Constructor get _not => Constructor(
     (c) => c
       ..factory = true
-      ..docs.addAll(['/// Creates a [$constraint] that negates [constraint].'])
+      ..docs.addAll(['/// Creates a [$constraint] that negates [variant].'])
       ..name = 'not'
       ..requiredParameters.add(
         Parameter(
           (p) => p
-            ..type = refer(constraint)
-            ..name = 'constraint',
+            ..type = refer(variant)
+            ..name = 'variant',
         ),
       )
       ..lambda = true
-      ..body = Code('$constraint._(Not(constraint))'),
+      ..body = Code('$constraint._(Not(variant))'),
   );
 
   /// Generates a method for combining two constraints with a logical AND.

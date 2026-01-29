@@ -128,9 +128,9 @@ part of 'example.dart';
 /// See also:
 /// * [FGoldenVariant], which represents individual variants for [FGolden].
 extension type const FGoldenVariantConstraint._(FVariantConstraint _) implements FVariantConstraint {
-  /// Creates a [FGoldenVariantConstraint] that negates [constraint].
-  factory FGoldenVariantConstraint.not(FGoldenVariantConstraint constraint) =>
-      FGoldenVariantConstraint._(Not(constraint));
+  /// Creates a [FGoldenVariantConstraint] that negates [variant].
+  factory FGoldenVariantConstraint.not(FGoldenVariant variant) =>
+      FGoldenVariantConstraint._(Not(variant));
 
   /// The hovered state
   static const hovered = FGoldenVariant.hovered;

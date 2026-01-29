@@ -144,7 +144,7 @@ class And implements FVariantConstraint {
 
 @internal
 class Not implements FVariantConstraint {
-  final FVariantConstraint _operand;
+  final FVariant _operand;
 
   const Not(this._operand);
 
