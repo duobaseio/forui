@@ -34,7 +34,7 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderValue> {
   /// ```shell
   /// dart run forui style create sliders
   /// ```
-  final FSliderStyle Function(FSliderStyle style)? style;
+  final FSliderStyleDelta? style;
 
   /// The layout. Defaults to the current [TextDirection].
   final FLayout? layout;

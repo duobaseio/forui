@@ -22,7 +22,7 @@ void main() {
               controller: controller,
               selected: false,
               child: FSelectTile(
-                style: TestScaffold.blueScreen.tileGroupStyle.tileStyle,
+                style: .value(TestScaffold.blueScreen.tileGroupStyle.tileStyle),
                 title: const Text('Bluetooth'),
                 subtitle: const Text('Fee, Fo, Fum'),
                 details: const Text('Duobase (5G)'),
@@ -43,7 +43,7 @@ void main() {
               controller: controller,
               selected: false,
               child: FSelectTile(
-                style: TestScaffold.blueScreen.tileStyle,
+                style: .value(TestScaffold.blueScreen.tileStyle),
                 title: const Text('Bluetooth'),
                 subtitle: const Text('Fee, Fo, Fum'),
                 details: const Text('Duobase (5G)'),
@@ -70,7 +70,7 @@ void main() {
               controller: controller,
               selected: true,
               child: FSelectTile(
-                style: TestScaffold.blueScreen.tileStyle,
+                style: .value(TestScaffold.blueScreen.tileStyle),
                 enabled: false,
                 title: const Text('Bluetooth'),
                 subtitle: const Text('Fee, Fo, Fum'),
@@ -92,7 +92,7 @@ void main() {
               controller: controller,
               selected: false,
               child: FSelectTile(
-                style: TestScaffold.blueScreen.tileStyle,
+                style: .value(TestScaffold.blueScreen.tileStyle),
                 enabled: false,
                 title: const Text('Bluetooth'),
                 subtitle: const Text('Fee, Fo, Fum'),

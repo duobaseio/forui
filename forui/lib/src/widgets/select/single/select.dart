@@ -42,7 +42,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// The default content loading builder that shows a spinner when an asynchronous search is pending.
   static Widget defaultContentLoadingBuilder(BuildContext _, FSelectSearchStyle style) => Padding(
     padding: const .all(13),
-    child: FCircularProgress(style: style.progressStyle),
+    child: FCircularProgress(style: .value(style.progressStyle)),
   );
 
   /// The default content empty builder that shows a localized message when there are no results.
@@ -76,7 +76,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// ```shell
   /// dart run forui style create select
   /// ```
-  final FSelectStyle Function(FSelectStyle style)? style;
+  final FSelectStyleDelta? style;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
@@ -207,7 +207,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     required Map<String, T> items,
     FSelectControl<T>? control,
     FPopoverControl popoverControl = const .managed(),
-    FSelectStyle Function(FSelectStyle style)? style,
+    FSelectStyleDelta? style,
     bool autofocus = false,
     FocusNode? focusNode,
     FFieldBuilder<FSelectStyle> builder = _fieldBuilder,
@@ -302,7 +302,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     required List<FSelectItemMixin> children,
     FSelectControl<T>? control,
     FPopoverControl popoverControl,
-    FSelectStyle Function(FSelectStyle style)? style,
+    FSelectStyleDelta? style,
     bool autofocus,
     FocusNode? focusNode,
     FFieldBuilder<FSelectStyle> builder,
@@ -369,7 +369,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder,
     FSelectControl<T>? control,
     FPopoverControl popoverControl = const .managed(),
-    FSelectStyle Function(FSelectStyle style)? style,
+    FSelectStyleDelta? style,
     bool autofocus = false,
     FocusNode? focusNode,
     FFieldBuilder<FSelectStyle> builder = _fieldBuilder,
@@ -487,7 +487,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder,
     FSelectControl<T>? control,
     FPopoverControl popoverControl,
-    FSelectStyle Function(FSelectStyle style)? style,
+    FSelectStyleDelta? style,
     bool autofocus,
     FocusNode? focusNode,
     FFieldBuilder<FSelectStyle> builder,
@@ -721,7 +721,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
       builder: (state) => FTextField(
         control: .managed(controller: _textController),
         focusNode: _focus,
-        style: style.fieldStyle,
+        style: .value(style.fieldStyle),
         textAlign: widget.textAlign,
         textAlignVertical: widget.textAlignVertical,
         textDirection: widget.textDirection,
@@ -746,7 +746,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
         enabled: widget.enabled,
         builder: (context, _, states, field) => FPopover(
           control: .managed(controller: _popoverController),
-          style: style.contentStyle,
+          style: .value(style.contentStyle),
           constraints: widget.contentConstraints,
           popoverAnchor: widget.contentAnchor,
           childAnchor: widget.fieldAnchor,

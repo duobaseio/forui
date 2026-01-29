@@ -9,7 +9,7 @@ void main() {
   testWidgets('blue screen', (tester) async {
     await tester.pumpWidget(
       TestScaffold.blue(
-        child: FDivider(style: TestScaffold.blueScreen.dividerStyles.verticalStyle, axis: .vertical),
+        child: FDivider(style: .value(TestScaffold.blueScreen.dividerStyles.verticalStyle), axis: .vertical),
       ),
     );
 

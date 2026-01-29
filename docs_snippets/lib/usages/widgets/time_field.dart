@@ -7,7 +7,7 @@ import 'package:intl/intl.dart';
 
 final timeField = FTimeField(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(fieldStyle: .delta(labelPadding: .symmetric(vertical: 7))),
   enabled: true,
   hour24: false,
   // {@endcategory}
@@ -48,7 +48,7 @@ final timeField = FTimeField(
 
 final timeFieldPicker = FTimeField.picker(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(fieldStyle: .delta(labelPadding: .symmetric(vertical: 7))),
   enabled: true,
   hour24: false,
   // {@endcategory}

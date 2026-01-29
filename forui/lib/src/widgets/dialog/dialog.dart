@@ -41,8 +41,8 @@ Future<T?> showFDialog<T>({
   required BuildContext context,
   required Widget Function(BuildContext context, FDialogStyle style, Animation<double> animation) builder,
   bool useRootNavigator = false,
-  FDialogRouteStyle Function(FDialogRouteStyle style)? routeStyle,
-  FDialogStyle Function(FDialogStyle style)? style,
+  FDialogRouteStyleDelta? routeStyle,
+  FDialogStyleDelta? style,
   String? barrierLabel,
   bool barrierDismissible = true,
   RouteSettings? routeSettings,
@@ -227,7 +227,7 @@ class FDialog extends StatefulWidget {
   /// ```shell
   /// dart run forui style create dialog
   /// ```
-  final FDialogStyle Function(FDialogStyle style)? style;
+  final FDialogStyleDelta? style;
 
   /// The animation used to animate the dialog's entrance and exit. Settings this to null will disable the animation.
   ///
@@ -502,13 +502,13 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
       horizontalStyle: FDialogContentStyle(
         titleTextStyle: title,
         bodyTextStyle: body,
-        padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 25),
+        padding: const .symmetric(horizontal: 25, vertical: 25),
         actionSpacing: 7,
       ),
       verticalStyle: FDialogContentStyle(
         titleTextStyle: title,
         bodyTextStyle: body,
-        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 25),
+        padding: const .symmetric(horizontal: 30, vertical: 25),
         actionSpacing: 8,
       ),
     );

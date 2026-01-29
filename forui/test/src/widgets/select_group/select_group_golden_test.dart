@@ -11,7 +11,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FSelectGroup(
-            style: TestScaffold.blueScreen.selectGroupStyle,
+            style: .value(TestScaffold.blueScreen.selectGroupStyle),
             label: const Text('Select Group'),
             description: const Text('Select Group Description'),
             control: const .managed(initial: {1}),

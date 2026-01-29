@@ -7,7 +7,7 @@ import 'package:forui/forui.dart';
 final show = showFSheet(
   // {@category "Core"}
   context: context,
-  style: (style) => style,
+  style: const .delta(flingVelocity: 700),
   side: .btt,
   builder: (context) => const Padding(padding: .all(16), child: Text('Sheet content')),
   // {@endcategory}

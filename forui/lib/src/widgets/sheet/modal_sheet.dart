@@ -61,7 +61,7 @@ Future<T?> showFSheet<T>({
   required WidgetBuilder builder,
   required FLayout side,
   bool useRootNavigator = false,
-  FModalSheetStyle Function(FModalSheetStyle style)? style,
+  FModalSheetStyleDelta? style,
   double? mainAxisMaxRatio = 9 / 16,
   bool useSafeArea = false,
   bool resizeToAvoidBottomInset = true,

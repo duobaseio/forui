@@ -4,15 +4,15 @@ import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
 
-final label = FLabel(
+const label = FLabel(
   // {@category "Core"}
-  style: (style) => style,
+  style: .delta(labelPadding: .zero),
   axis: .vertical,
   expands: false,
-  variants: const {},
-  label: const Text('Label'),
-  description: const Text('Description'),
-  error: const Text('Error message'),
-  child: const Placeholder(),
+  variants: {},
+  label: Text('Label'),
+  description: Text('Description'),
+  error: Text('Error message'),
+  child: Placeholder(),
   // {@endcategory}
 );

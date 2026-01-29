@@ -16,7 +16,7 @@ void main() {
   testWidgets('blue screen', (tester) async {
     await tester.pumpWidget(
       TestScaffold.blue(
-        child: FPagination(style: TestScaffold.blueScreen.paginationStyle, control: const .managed(pages: 10)),
+        child: FPagination(style: .value(TestScaffold.blueScreen.paginationStyle), control: const .managed(pages: 10)),
       ),
     );
 

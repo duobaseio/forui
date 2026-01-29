@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 
 final selectGroup = FSelectGroup<String>(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(itemPadding: .symmetric(vertical: 2)),
   enabled: true,
   children: [
     .checkbox(value: 'apple', label: const Text('Apple')),

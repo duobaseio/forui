@@ -961,16 +961,16 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       chipTheme: ChipThemeData(shape: RoundedRectangleBorder(borderRadius: style.borderRadius)),
 
       // Input
-      // inputDecorationTheme: InputDecorationTheme(
-      //   border: WidgetStateInputBorder.resolveWith(textFieldStyle.border.resolve),
-      //   labelStyle: textFieldStyle.descriptionTextStyle.maybeResolve({}),
-      //   floatingLabelStyle: textFieldStyle.labelTextStyle.maybeResolve({}),
-      //   hintStyle: textFieldStyle.hintTextStyle.maybeResolve({}),
-      //   errorStyle: textFieldStyle.errorTextStyle,
-      //   helperStyle: textFieldStyle.descriptionTextStyle.maybeResolve({}),
-      //   counterStyle: textFieldStyle.counterTextStyle.maybeResolve({}),
-      //   contentPadding: textFieldStyle.contentPadding,
-      // ),
+      inputDecorationTheme: InputDecorationTheme(
+        border: WidgetStateInputBorder.resolveWith((states) => textFieldStyle.border.resolve(toVariants(states))),
+        labelStyle: textFieldStyle.descriptionTextStyle.base,
+        floatingLabelStyle: textFieldStyle.labelTextStyle.base,
+        hintStyle: textFieldStyle.hintTextStyle.base,
+        errorStyle: textFieldStyle.errorTextStyle,
+        helperStyle: textFieldStyle.descriptionTextStyle.base,
+        counterStyle: textFieldStyle.counterTextStyle.base,
+        contentPadding: textFieldStyle.contentPadding,
+      ),
 
       // Date Picker
       datePickerTheme: DatePickerThemeData(
@@ -992,150 +992,169 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
         shape: RoundedRectangleBorder(borderRadius: style.borderRadius),
       ),
 
-      // /// Slider
-      // sliderTheme: SliderThemeData(
-      //   activeTrackColor: sliderStyles.horizontalStyle.activeColor.maybeResolve({}),
-      //   inactiveTrackColor: sliderStyles.horizontalStyle.inactiveColor.maybeResolve({}),
-      //   disabledActiveTrackColor: sliderStyles.horizontalStyle.activeColor.maybeResolve({WidgetState.disabled}),
-      //   disabledInactiveTrackColor: sliderStyles.horizontalStyle.inactiveColor.maybeResolve({WidgetState.disabled}),
-      //   activeTickMarkColor: sliderStyles.horizontalStyle.markStyle.tickColor.maybeResolve({}),
-      //   inactiveTickMarkColor: sliderStyles.horizontalStyle.markStyle.tickColor.maybeResolve({}),
-      //   disabledActiveTickMarkColor: sliderStyles.horizontalStyle.markStyle.tickColor.maybeResolve({
-      //     WidgetState.disabled,
-      //   }),
-      //   disabledInactiveTickMarkColor: sliderStyles.horizontalStyle.markStyle.tickColor.maybeResolve({
-      //     WidgetState.disabled,
-      //   }),
-      //   thumbColor: sliderStyles.horizontalStyle.thumbStyle.borderColor.maybeResolve({}),
-      //   disabledThumbColor: sliderStyles.horizontalStyle.thumbStyle.borderColor.maybeResolve({WidgetState.disabled}),
-      //   valueIndicatorColor: sliderStyles.horizontalStyle.tooltipStyle.decoration.color,
-      //   valueIndicatorTextStyle: sliderStyles.horizontalStyle.tooltipStyle.textStyle,
-      // ),
-      //
-      // // Switch
-      // switchTheme: SwitchThemeData(
-      //   thumbColor: switchStyle.thumbColor,
-      //   trackColor: switchStyle.trackColor,
-      //   trackOutlineColor: switchStyle.trackColor,
-      // ),
-      //
-      // // Buttons
-      // elevatedButtonTheme: ElevatedButtonThemeData(
-      //   style: ButtonStyle(
-      //     textStyle: buttonStyles.secondary.contentStyle.textStyle,
-      //     backgroundColor: WidgetStateColor.resolveWith(
-      //       (states) => buttonStyles.secondary.decoration.maybeResolve(states)?.color ?? colors.secondary,
-      //     ),
-      //     foregroundColor: WidgetStateColor.resolveWith(
-      //       (states) =>
-      //           buttonStyles.secondary.contentStyle.textStyle.maybeResolve(states)?.color ?? colors.secondaryForeground,
-      //     ),
-      //     padding: .all(buttonStyles.secondary.contentStyle.padding),
-      //     shape: .all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
-      //   ),
-      // ),
-      // filledButtonTheme: FilledButtonThemeData(
-      //   style: ButtonStyle(
-      //     textStyle: buttonStyles.primary.contentStyle.textStyle,
-      //     backgroundColor: WidgetStateColor.resolveWith(
-      //       (states) => buttonStyles.primary.decoration.maybeResolve(states)?.color ?? colors.secondary,
-      //     ),
-      //     foregroundColor: WidgetStateColor.resolveWith(
-      //       (states) => buttonStyles.secondary.decoration.maybeResolve(states)?.color ?? colors.secondaryForeground,
-      //     ),
-      //     padding: .all(buttonStyles.primary.contentStyle.padding),
-      //     shape: .all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
-      //   ),
-      // ),
-      // outlinedButtonTheme: OutlinedButtonThemeData(
-      //   style: ButtonStyle(
-      //     textStyle: buttonStyles.outline.contentStyle.textStyle,
-      //     backgroundColor: WidgetStateColor.resolveWith(
-      //       (states) => buttonStyles.outline.decoration.maybeResolve(states)?.color ?? Colors.transparent,
-      //     ),
-      //     foregroundColor: WidgetStateColor.resolveWith(
-      //       (states) => buttonStyles.outline.decoration.maybeResolve(states)?.color ?? Colors.transparent,
-      //     ),
-      //     padding: .all(buttonStyles.outline.contentStyle.padding),
-      //     side: WidgetStateBorderSide.resolveWith((states) {
-      //       final border = buttonStyles.outline.decoration.maybeResolve(states)?.border;
-      //       return BorderSide(
-      //         color:
-      //             border?.top.color ??
-      //             switch (states) {
-      //               _ when states.contains(WidgetState.disabled) => colors.disable(colors.border),
-      //               _ when states.contains(WidgetState.hovered) => colors.hover(colors.border),
-      //               _ => colors.border,
-      //             },
-      //         width: border?.top.width ?? style.borderWidth,
-      //       );
-      //     }),
-      //     shape: WidgetStateProperty.resolveWith(
-      //       (states) => RoundedRectangleBorder(
-      //         borderRadius: buttonStyles.outline.decoration.maybeResolve(states)?.borderRadius ?? style.borderRadius,
-      //       ),
-      //     ),
-      //   ),
-      // ),
-      // textButtonTheme: TextButtonThemeData(
-      //   style: ButtonStyle(
-      //     textStyle: buttonStyles.ghost.contentStyle.textStyle,
-      //     backgroundColor: WidgetStateColor.resolveWith(
-      //       (states) => buttonStyles.ghost.decoration.maybeResolve(states)?.color ?? Colors.transparent,
-      //     ),
-      //     foregroundColor: WidgetStateColor.resolveWith(
-      //       (states) =>
-      //           buttonStyles.ghost.contentStyle.textStyle.maybeResolve(states)?.color ?? colors.secondaryForeground,
-      //     ),
-      //     shape: WidgetStateProperty.resolveWith(
-      //       (states) => RoundedRectangleBorder(
-      //         borderRadius: buttonStyles.ghost.decoration.maybeResolve(states)?.borderRadius ?? style.borderRadius,
-      //       ),
-      //     ),
-      //   ),
-      // ),
-      // floatingActionButtonTheme: FloatingActionButtonThemeData(
-      //   backgroundColor: buttonStyles.primary.decoration.maybeResolve(const {})?.color,
-      //   foregroundColor: buttonStyles.primary.contentStyle.textStyle.maybeResolve(const {})?.color,
-      //   hoverColor: buttonStyles.primary.decoration.maybeResolve(const {WidgetState.hovered})?.color,
-      //   disabledElevation: 0,
-      //   shape: RoundedRectangleBorder(
-      //     borderRadius: buttonStyles.primary.decoration.maybeResolve(const {})?.borderRadius ?? style.borderRadius,
-      //   ),
-      // ),
-      // iconButtonTheme: IconButtonThemeData(
-      //   style: ButtonStyle(
-      //     backgroundColor: WidgetStateColor.resolveWith(
-      //       (states) => buttonStyles.ghost.decoration.maybeResolve(states)?.color ?? Colors.transparent,
-      //     ),
-      //     foregroundColor: WidgetStateColor.resolveWith(
-      //       (states) =>
-      //           buttonStyles.ghost.contentStyle.textStyle.maybeResolve(states)?.color ?? colors.secondaryForeground,
-      //     ),
-      //     shape: WidgetStateProperty.resolveWith(
-      //       (states) => RoundedRectangleBorder(
-      //         borderRadius: buttonStyles.ghost.decoration.maybeResolve(states)?.borderRadius ?? style.borderRadius,
-      //       ),
-      //     ),
-      //   ),
-      // ),
-      // segmentedButtonTheme: SegmentedButtonThemeData(
-      //   style: ButtonStyle(
-      //     textStyle: buttonStyles.ghost.contentStyle.textStyle,
-      //     backgroundColor: WidgetStateColor.resolveWith(
-      //       (states) => buttonStyles.ghost.decoration.maybeResolve(states)?.color ?? Colors.transparent,
-      //     ),
-      //     foregroundColor: WidgetStateColor.resolveWith(
-      //       (states) =>
-      //           buttonStyles.ghost.contentStyle.textStyle.maybeResolve(states)?.color ?? colors.secondaryForeground,
-      //     ),
-      //     shape: WidgetStateProperty.resolveWith(
-      //       (states) => RoundedRectangleBorder(
-      //         borderRadius: buttonStyles.ghost.decoration.maybeResolve(states)?.borderRadius ?? style.borderRadius,
-      //       ),
-      //     ),
-      //   ),
-      // ),
+      // Slider
+      sliderTheme: SliderThemeData(
+        activeTrackColor: sliderStyles.horizontalStyle.activeColor.base,
+        inactiveTrackColor: sliderStyles.horizontalStyle.inactiveColor.base,
+        disabledActiveTrackColor: sliderStyles.horizontalStyle.activeColor.resolve({FSliderVariant.disabled}),
+        disabledInactiveTrackColor: sliderStyles.horizontalStyle.inactiveColor.resolve({FSliderVariant.disabled}),
+        activeTickMarkColor: sliderStyles.horizontalStyle.markStyle.tickColor.base,
+        inactiveTickMarkColor: sliderStyles.horizontalStyle.markStyle.tickColor.base,
+        disabledActiveTickMarkColor: sliderStyles.horizontalStyle.markStyle.tickColor.resolve({
+          FSliderVariant.disabled,
+        }),
+        disabledInactiveTickMarkColor: sliderStyles.horizontalStyle.markStyle.tickColor.resolve({
+          FSliderVariant.disabled,
+        }),
+        thumbColor: sliderStyles.horizontalStyle.thumbStyle.borderColor.base,
+        disabledThumbColor: sliderStyles.horizontalStyle.thumbStyle.borderColor.resolve({FSliderVariant.disabled}),
+        valueIndicatorColor: sliderStyles.horizontalStyle.tooltipStyle.decoration.color,
+        valueIndicatorTextStyle: sliderStyles.horizontalStyle.tooltipStyle.textStyle,
+      ),
+
+      // Switch
+      switchTheme: SwitchThemeData(
+        thumbColor: .resolveWith((states) => switchStyle.thumbColor.resolve(toVariants(states))),
+        trackColor: .resolveWith((states) => switchStyle.trackColor.resolve(toVariants(states))),
+        trackOutlineColor: .resolveWith((states) => switchStyle.trackColor.resolve(toVariants(states))),
+      ),
+
+      // Buttons
+      elevatedButtonTheme: ElevatedButtonThemeData(
+        style: ButtonStyle(
+          textStyle: .resolveWith(
+            (states) => buttonStyles.secondary.contentStyle.textStyle.resolve(toVariants(states)),
+          ),
+          backgroundColor: .resolveWith(
+            (states) => buttonStyles.secondary.decoration.resolve(toVariants(states)).color ?? colors.secondary,
+          ),
+          foregroundColor: .resolveWith(
+            (states) =>
+                buttonStyles.secondary.contentStyle.textStyle.resolve(toVariants(states)).color ??
+                colors.secondaryForeground,
+          ),
+          padding: .all(buttonStyles.secondary.contentStyle.padding),
+          shape: .all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
+        ),
+      ),
+
+      filledButtonTheme: FilledButtonThemeData(
+        style: ButtonStyle(
+          textStyle: .resolveWith((states) => buttonStyles.primary.contentStyle.textStyle.resolve(toVariants(states))),
+          backgroundColor: .resolveWith(
+            (states) => buttonStyles.primary.decoration.resolve(toVariants(states)).color ?? colors.secondary,
+          ),
+          foregroundColor: .resolveWith(
+            (states) =>
+                buttonStyles.secondary.contentStyle.textStyle.resolve(toVariants(states)).color ??
+                colors.secondaryForeground,
+          ),
+          padding: .all(buttonStyles.primary.contentStyle.padding),
+          shape: .all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
+        ),
+      ),
+
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: ButtonStyle(
+          textStyle: .resolveWith((states) => buttonStyles.outline.contentStyle.textStyle.resolve(toVariants(states))),
+          backgroundColor: .resolveWith(
+            (states) => buttonStyles.outline.decoration.resolve(toVariants(states)).color ?? Colors.transparent,
+          ),
+          foregroundColor: .resolveWith(
+            (states) =>
+                buttonStyles.outline.contentStyle.textStyle.resolve(toVariants(states)).color ?? Colors.transparent,
+          ),
+          padding: .all(buttonStyles.outline.contentStyle.padding),
+          side: .resolveWith((states) {
+            final border = buttonStyles.outline.decoration.resolve(toVariants(states)).border;
+            return BorderSide(
+              color:
+                  border?.top.color ??
+                  switch (states) {
+                    _ when states.contains(WidgetState.disabled) => colors.disable(colors.border),
+                    _ when states.contains(WidgetState.hovered) => colors.hover(colors.border),
+                    _ => colors.border,
+                  },
+              width: border?.top.width ?? style.borderWidth,
+            );
+          }),
+          shape: .resolveWith(
+            (states) => RoundedRectangleBorder(
+              borderRadius:
+                  buttonStyles.outline.decoration.resolve(toVariants(states)).borderRadius ?? style.borderRadius,
+            ),
+          ),
+        ),
+      ),
+
+      textButtonTheme: TextButtonThemeData(
+        style: ButtonStyle(
+          textStyle: .resolveWith((states) => buttonStyles.ghost.contentStyle.textStyle.resolve(toVariants(states))),
+          backgroundColor: .resolveWith(
+            (states) => buttonStyles.ghost.decoration.resolve(toVariants(states)).color ?? Colors.transparent,
+          ),
+          foregroundColor: .resolveWith(
+            (states) =>
+                buttonStyles.ghost.contentStyle.textStyle.resolve(toVariants(states)).color ??
+                colors.secondaryForeground,
+          ),
+          shape: .resolveWith(
+            (states) => RoundedRectangleBorder(
+              borderRadius:
+                  buttonStyles.ghost.decoration.resolve(toVariants(states)).borderRadius ?? style.borderRadius,
+            ),
+          ),
+        ),
+      ),
+
+      floatingActionButtonTheme: FloatingActionButtonThemeData(
+        backgroundColor: buttonStyles.primary.decoration.base.color,
+        foregroundColor: buttonStyles.primary.contentStyle.textStyle.base.color,
+        hoverColor: buttonStyles.primary.decoration.resolve({FTappableVariant.hovered}).color,
+        disabledElevation: 0,
+        shape: RoundedRectangleBorder(
+          borderRadius: buttonStyles.primary.decoration.base.borderRadius ?? style.borderRadius,
+        ),
+      ),
+
+      iconButtonTheme: IconButtonThemeData(
+        style: ButtonStyle(
+          backgroundColor: .resolveWith(
+            (states) => buttonStyles.ghost.decoration.resolve(toVariants(states)).color ?? Colors.transparent,
+          ),
+          foregroundColor: .resolveWith(
+            (states) =>
+                buttonStyles.ghost.contentStyle.textStyle.resolve(toVariants(states)).color ??
+                colors.secondaryForeground,
+          ),
+          shape: .resolveWith(
+            (states) => RoundedRectangleBorder(
+              borderRadius:
+                  buttonStyles.ghost.decoration.resolve(toVariants(states)).borderRadius ?? style.borderRadius,
+            ),
+          ),
+        ),
+      ),
+
+      segmentedButtonTheme: SegmentedButtonThemeData(
+        style: ButtonStyle(
+          textStyle: .resolveWith((states) => buttonStyles.ghost.contentStyle.textStyle.resolve(toVariants(states))),
+          backgroundColor: .resolveWith(
+            (states) => buttonStyles.ghost.decoration.resolve(toVariants(states)).color ?? Colors.transparent,
+          ),
+          foregroundColor: .resolveWith(
+            (states) =>
+                buttonStyles.ghost.contentStyle.textStyle.resolve(toVariants(states)).color ??
+                colors.secondaryForeground,
+          ),
+          shape: .resolveWith(
+            (states) => RoundedRectangleBorder(
+              borderRadius:
+                  buttonStyles.ghost.decoration.resolve(toVariants(states)).borderRadius ?? style.borderRadius,
+            ),
+          ),
+        ),
+      ),
 
       /// Dialog
       dialogTheme: DialogThemeData(shape: RoundedRectangleBorder(borderRadius: style.borderRadius)),

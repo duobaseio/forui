@@ -33,7 +33,7 @@ void main() {
           child: FSelect<String>.rich(
             key: key,
             format: (s) => s,
-            style: TestScaffold.blueScreen.selectStyle,
+            style: .value(TestScaffold.blueScreen.selectStyle),
             children: [
               .richSection(
                 label: const Text('A'),
@@ -56,7 +56,7 @@ void main() {
         TestScaffold.blue(
           child: FSelect<String>.rich(
             key: key,
-            style: TestScaffold.blueScreen.selectStyle,
+            style: .value(TestScaffold.blueScreen.selectStyle),
             format: (s) => s,
             children: const [],
           ),
@@ -75,7 +75,7 @@ void main() {
           child: FSelect<String>.rich(
             key: key,
             format: (s) => s,
-            style: TestScaffold.blueScreen.selectStyle,
+            style: .value(TestScaffold.blueScreen.selectStyle),
             contentScrollHandles: true,
             children: [
               .richSection(
@@ -97,7 +97,11 @@ void main() {
     testWidgets('constructor', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(
-          child: FSelect<int>(items: const {'A': 1, 'B': 2}, key: key, style: TestScaffold.blueScreen.selectStyle),
+          child: FSelect<int>(
+            items: const {'A': 1, 'B': 2},
+            key: key,
+            style: .value(TestScaffold.blueScreen.selectStyle),
+          ),
         ),
       );
 
@@ -113,7 +117,7 @@ void main() {
           child: FSelect<String>.searchBuilder(
             key: key,
             format: (s) => s,
-            style: TestScaffold.blueScreen.selectStyle,
+            style: .value(TestScaffold.blueScreen.selectStyle),
             contentScrollHandles: true,
             filter: (_) => [],
             contentBuilder: (_, _, _) => [for (int i = 0; i < 10; i++) FSelectItem(title: Text('$i'), value: '$i')],
@@ -133,7 +137,7 @@ void main() {
           child: FSelect<String>.searchBuilder(
             key: key,
             format: (s) => s,
-            style: TestScaffold.blueScreen.selectStyle,
+            style: .value(TestScaffold.blueScreen.selectStyle),
             contentScrollHandles: true,
             filter: (_) async {
               await Future.delayed(const Duration(seconds: 1));
@@ -156,7 +160,7 @@ void main() {
           child: FSelect<int>.search(
             items: {for (int i = 0; i < 10; i++) '$i': i},
             key: key,
-            style: TestScaffold.blueScreen.selectStyle,
+            style: .value(TestScaffold.blueScreen.selectStyle),
             contentScrollHandles: true,
             filter: (_) => [],
           ),

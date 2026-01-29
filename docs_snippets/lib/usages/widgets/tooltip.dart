@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 
 final tooltip = FTooltip(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(padding: .symmetric(horizontal: 14, vertical: 10)),
   tipBuilder: (context, controller) => const Text('Tooltip content'),
   builder: (context, controller, child) => child!,
   child: const Text('Hover me'),

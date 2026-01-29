@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 
 final tileGroup = FTileGroup(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(dividerWidth: 1),
   enabled: true,
   divider: .indented,
   label: const Text('Label'),
@@ -31,7 +31,7 @@ final tileGroup = FTileGroup(
 
 final tileGroupBuilder = FTileGroup.builder(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(dividerWidth: 1),
   enabled: true,
   divider: .indented,
   label: const Text('Label'),
@@ -54,7 +54,7 @@ final tileGroupBuilder = FTileGroup.builder(
 
 final tileGroupMerge = FTileGroup.merge(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(dividerWidth: 1),
   enabled: true,
   divider: .full,
   label: const Text('Label'),

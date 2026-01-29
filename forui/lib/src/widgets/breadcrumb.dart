@@ -29,7 +29,7 @@ class FBreadcrumb extends StatelessWidget {
   /// ```shell
   /// dart run forui style create breadcrumb
   /// ```
-  final FBreadcrumbStyle Function(FBreadcrumbStyle style)? style;
+  final FBreadcrumbStyleDelta? style;
 
   /// A list of breadcrumb items representing the navigation path.
   ///
@@ -115,7 +115,7 @@ abstract interface class FBreadcrumbItem extends Widget {
   /// displays a popover menu with the collapsed items.
   const factory FBreadcrumbItem.collapsed({
     required List<FItemGroup> menu,
-    FPopoverMenuStyle Function(FPopoverMenuStyle style)? popoverMenuStyle,
+    FPopoverMenuStyleDelta? popoverMenuStyle,
     FPopoverControl popoverControl,
     ScrollController? scrollController,
     double? cacheExtent,
@@ -147,7 +147,7 @@ abstract interface class FBreadcrumbItem extends Widget {
   /// displays a popover menu with the collapsed items.
   const factory FBreadcrumbItem.collapsedTiles({
     required List<FTileGroup> menu,
-    FPopoverMenuStyle Function(FPopoverMenuStyle style)? popoverMenuStyle,
+    FPopoverMenuStyleDelta? popoverMenuStyle,
     FPopoverControl popoverControl,
     ScrollController? scrollController,
     double? cacheExtent,
@@ -227,7 +227,7 @@ class _Crumb extends StatelessWidget implements FBreadcrumbItem {
 class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
   final List<FTileGroup>? tileMenu;
   final List<FItemGroup>? itemMenu;
-  final FPopoverMenuStyle Function(FPopoverMenuStyle style)? popoverMenuStyle;
+  final FPopoverMenuStyleDelta? popoverMenuStyle;
   final FPopoverControl popoverControl;
   final ScrollController? scrollController;
   final double? cacheExtent;
@@ -367,7 +367,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
     if (widget.itemMenu case final menu?) {
       return FPopoverMenu(
         control: .managed(controller: _controller),
-        style: widget.popoverMenuStyle?.call(context.theme.popoverMenuStyle) ?? context.theme.popoverMenuStyle,
+        style: widget.popoverMenuStyle,
         menuAnchor: widget.menuAnchor,
         childAnchor: widget.childAnchor,
         spacing: widget.spacing,
@@ -398,7 +398,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
     } else {
       return FPopoverMenu.tiles(
         control: .managed(controller: _controller),
-        style: widget.popoverMenuStyle?.call(context.theme.popoverMenuStyle) ?? context.theme.popoverMenuStyle,
+        style: widget.popoverMenuStyle,
         menuAnchor: widget.menuAnchor,
         childAnchor: widget.childAnchor,
         spacing: widget.spacing,

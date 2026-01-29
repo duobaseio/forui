@@ -65,7 +65,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             child: FToaster(
-              style: FThemes.zinc.light.toasterStyle.copyWith(expandBehavior: behavior),
+              style: .delta(expandBehavior: behavior),
               child: Center(
                 child: Column(mainAxisSize: .min, children: [small('1')]),
               ),
@@ -87,7 +87,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             child: FToaster(
-              style: FThemes.zinc.light.toasterStyle.copyWith(expandBehavior: behavior),
+              style: .delta(expandBehavior: behavior),
               child: Center(
                 child: Column(mainAxisSize: .min, children: [small('1', null, .bottomRight, null)]),
               ),
@@ -109,7 +109,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             child: FToaster(
-              style: FThemes.zinc.light.toasterStyle.copyWith(expandBehavior: behavior),
+              style: .delta(expandBehavior: behavior),
               child: Center(
                 child: Column(mainAxisSize: .min, children: [small('1')]),
               ),
@@ -136,7 +136,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             child: FToaster(
-              style: FThemes.zinc.light.toasterStyle.copyWith(expandBehavior: behavior),
+              style: .delta(expandBehavior: behavior),
               child: Center(
                 child: Column(mainAxisSize: .min, children: [small('1'), small('2'), small('3')]),
               ),

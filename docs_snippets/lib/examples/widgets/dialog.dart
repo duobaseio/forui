@@ -19,7 +19,7 @@ class DialogPage extends Example {
       builder: (context, style, animation) => FTheme(
         data: theme,
         child: FDialog(
-          style: style,
+          style: .value(style),
           animation: animation,
           // {@highlight}
           direction: .horizontal,
@@ -55,7 +55,7 @@ class VerticalDialogPage extends Example {
       builder: (context, style, animation) => FTheme(
         data: theme,
         child: FDialog(
-          style: style,
+          style: .value(style),
           animation: animation,
           title: const Text('Are you absolutely sure?'),
           body: const Text(
@@ -85,18 +85,18 @@ class BlurredDialogPage extends Example {
     mainAxisSize: .min,
     onPress: () => showFDialog(
       context: context,
-      routeStyle: context.theme.dialogRouteStyle.copyWith(
-        // {@highlight}
-        barrierFilter: (animation) => ImageFilter.compose(
+      // {@highlight}
+      routeStyle: .delta(
+        barrierFilter: () => (animation) => ImageFilter.compose(
           outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
           inner: ColorFilter.mode(context.theme.colors.barrier, .srcOver),
         ),
-        // {@endhighlight}
       ),
+      // {@endhighlight}
       builder: (context, style, animation) => FTheme(
         data: theme,
         child: FDialog(
-          style: style,
+          style: .value(style),
           animation: animation,
           title: const Text('Are you absolutely sure?'),
           body: const Text(

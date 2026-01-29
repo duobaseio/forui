@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 
 final bottomNavigationBar = FBottomNavigationBar(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(padding: .zero),
   index: 0,
   onChange: (index) {},
   children: const [FBottomNavigationBarItem(icon: Icon(FIcons.house), label: Text('Home'))],
@@ -19,7 +19,7 @@ final bottomNavigationBar = FBottomNavigationBar(
 
 final bottomNavigationBarItem = FBottomNavigationBarItem(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(padding: .zero),
   icon: const Icon(FIcons.house),
   label: const Text('Home'),
   // {@endcategory}

@@ -16,7 +16,7 @@ mixin FItemMixin on Widget {
   /// This function is a shorthand for [FItem.new].
   static FItem item({
     required Widget title,
-    FItemStyle Function(FItemStyle style)? style,
+    FItemStyleDelta? style,
     bool? enabled,
     bool selected = false,
     String? semanticsLabel,
@@ -65,7 +65,7 @@ mixin FItemMixin on Widget {
   /// This function is a shorthand for [FItem.raw].
   static FItem raw({
     required Widget child,
-    FItemStyle Function(FItemStyle style)? style,
+    FItemStyleDelta? style,
     bool? enabled,
     bool selected = false,
     String? semanticsLabel,
@@ -147,7 +147,7 @@ class FItem extends StatelessWidget with FItemMixin {
   /// ```shell
   /// dart run forui style create item
   /// ```
-  final FItemStyle Function(FItemStyle style)? style;
+  final FItemStyleDelta? style;
 
   /// Whether the item is enabled. Defaults to true.
   final bool? enabled;

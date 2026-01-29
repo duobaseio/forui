@@ -1,10 +1,10 @@
 import 'package:flutter/widgets.dart';
-import 'package:forui/src/widgets/text_field/input/input.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/input/parser.dart';
+import 'package:forui/src/theme/variant.dart';
 
 @internal
 abstract class InputController extends TextEditingController {
@@ -85,7 +85,7 @@ abstract class InputController extends TextEditingController {
   TextSpan buildTextSpan({required BuildContext context, required bool withComposing, TextStyle? style}) {
     if (text == placeholder) {
       style = statesController.value.contains(WidgetState.focused)
-          ? this.style.contentTextStyle.resolve(statesController.textFieldVariants)
+          ? this.style.contentTextStyle.resolve(toTextFieldVariants(statesController.value))
           : this.style.hintTextStyle.resolve({});
     }
 

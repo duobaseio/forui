@@ -113,7 +113,7 @@ class RawToastPage extends Example {
         duration: null,
         builder: (context, toast) => IntrinsicHeight(
           child: FCard(
-            style: cardStyle,
+            style: .value(cardStyle),
             title: const Text('Event has been created'),
             subtitle: const Padding(
               padding: .symmetric(vertical: 5),
@@ -141,11 +141,9 @@ class AlwaysExpandToastPage extends StatelessWidget {
   Widget build(BuildContext context) => FTheme(
     data: theme,
     child: FToaster(
-      style: context.theme.toasterStyle.copyWith(
-        // {@highlight}
-        expandBehavior: .always,
-        // {@endhighlight}
-      ),
+      // {@highlight}
+      style: const .delta(expandBehavior: .always),
+      // {@endhighlight}
       child: FScaffold(
         child: Align(
           child: ConstrainedBox(
@@ -180,11 +178,9 @@ class DisabledExpandToastPage extends StatelessWidget {
   Widget build(BuildContext context) => FTheme(
     data: theme,
     child: FToaster(
-      style: context.theme.toasterStyle.copyWith(
-        // {@highlight}
-        expandBehavior: .disabled,
-        // {@endhighlight}
-      ),
+      // {@highlight}
+      style: const .delta(expandBehavior: .disabled),
+      // {@endhighlight}
       child: FScaffold(
         child: Align(
           child: ConstrainedBox(

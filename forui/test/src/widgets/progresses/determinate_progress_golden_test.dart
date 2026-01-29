@@ -9,7 +9,7 @@ void main() {
   testWidgets('blue screen', (tester) async {
     await tester.pumpWidget(
       TestScaffold.blue(
-        child: FDeterminateProgress(style: TestScaffold.blueScreen.determinateProgressStyle, value: 0.4),
+        child: FDeterminateProgress(style: .value(TestScaffold.blueScreen.determinateProgressStyle), value: 0.4),
       ),
     );
 

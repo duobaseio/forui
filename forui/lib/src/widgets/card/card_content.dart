@@ -16,7 +16,7 @@ class Content extends StatelessWidget {
   final Widget? subtitle;
   final Widget? child;
   final MainAxisSize mainAxisSize;
-  final FCardStyle Function(FCardStyle style)? style;
+  final FCardStyleDelta? style;
 
   const Content({required this.mainAxisSize, this.image, this.title, this.subtitle, this.child, this.style, super.key});
 

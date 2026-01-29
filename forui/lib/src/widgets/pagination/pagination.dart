@@ -25,7 +25,7 @@ class FPagination extends StatefulWidget {
   /// ```shell
   /// dart run forui style create pagination
   /// ```
-  final FPaginationStyle Function(FPaginationStyle style)? style;
+  final FPaginationStyleDelta? style;
 
   /// The previous button placed at the beginning of the pagination.
   ///

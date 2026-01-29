@@ -64,12 +64,13 @@ class BlurredModalSheetPage extends Example {
   Widget example(BuildContext context) => FButton(
     child: const Text('Open'),
     onPress: () => showFSheet(
-      style: context.theme.modalSheetStyle.copyWith(
+      style: .delta(
         // {@highlight}
-        barrierFilter: (animation) => ImageFilter.compose(
-          outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
-          inner: ColorFilter.mode(context.theme.colors.barrier, .srcOver),
-        ),
+        barrierFilter: () =>
+            (animation) => .compose(
+              outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
+              inner: ColorFilter.mode(context.theme.colors.barrier, .srcOver),
+            ),
         // {@endhighlight}
       ),
       context: context,

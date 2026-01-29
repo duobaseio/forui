@@ -1,11 +1,12 @@
 // dart format width=80
 // ignore_for_file: avoid_redundant_argument_values
 
+
 import 'package:forui/forui.dart';
 
 final calendar = FCalendar(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(padding: .zero),
   start: .utc(1900),
   end: .utc(2100),
   today: .now(),

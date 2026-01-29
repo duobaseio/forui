@@ -26,7 +26,7 @@ class FDivider extends StatelessWidget {
   /// ```shell
   /// dart run forui style create dividers
   /// ```
-  final FDividerStyle Function(FDividerStyle style)? style;
+  final FDividerStyleDelta? style;
 
   /// The axis along which the divider is drawn. Defaults to horizontal.
   final Axis axis;

@@ -13,7 +13,7 @@ void main() {
       TestScaffold.blue(
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: FDateField.calendar(style: TestScaffold.blueScreen.dateFieldStyle, key: key),
+          home: FDateField.calendar(style: .value(TestScaffold.blueScreen.dateFieldStyle), key: key),
         ),
       ),
     );

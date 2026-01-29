@@ -57,7 +57,7 @@ class FTile extends StatelessWidget with FTileMixin {
   /// ```shell
   /// dart run forui style create tile
   /// ```
-  final FItemStyle Function(FItemStyle style)? style;
+  final FItemStyleDelta? style;
 
   /// Whether the tile is enabled. Defaults to true.
   final bool? enabled;

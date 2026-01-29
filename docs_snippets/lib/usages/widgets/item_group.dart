@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 
 final itemGroup = FItemGroup(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(spacing: 4),
   enabled: true,
   divider: .none,
   children: [
@@ -28,7 +28,7 @@ final itemGroup = FItemGroup(
 
 final builder = FItemGroup.builder(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(spacing: 4),
   enabled: true,
   divider: .none,
   itemBuilder: (context, index) => FItem(title: Text('Item $index'), onPress: () {}),
@@ -48,7 +48,7 @@ final builder = FItemGroup.builder(
 
 final merge = FItemGroup.merge(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(spacing: 4),
   enabled: true,
   divider: .full,
   children: [

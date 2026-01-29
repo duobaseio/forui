@@ -26,7 +26,7 @@ class FSidebarGroup extends StatelessWidget {
   /// ```shell
   /// dart run forui style create sidebar
   /// ```
-  final FSidebarGroupStyle Function(FSidebarGroupStyle style)? style;
+  final FSidebarGroupStyleDelta? style;
 
   /// The label of the group.
   final Widget? label;

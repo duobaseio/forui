@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 
 final select = FSelect<String>(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(emptyTextStyle: .delta()),
   enabled: true,
   items: const {'Apple': 'apple', 'Banana': 'banana', 'Cherry': 'cherry'},
   // {@endcategory}
@@ -62,7 +62,7 @@ final select = FSelect<String>(
 
 final selectRich = FSelect<String>.rich(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(emptyTextStyle: .delta()),
   enabled: true,
   format: (value) => value,
   children: [
@@ -123,7 +123,7 @@ final selectRich = FSelect<String>.rich(
 
 final selectSearch = FSelect<String>.search(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(emptyTextStyle: .delta()),
   enabled: true,
   filter: (query) => ['apple', 'banana', 'cherry'].where((e) => e.startsWith(query)),
   items: const {'Apple': 'apple', 'Banana': 'banana', 'Cherry': 'cherry'},
@@ -183,7 +183,7 @@ final selectSearch = FSelect<String>.search(
 
 final selectSearchBuilder = FSelect<String>.searchBuilder(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(emptyTextStyle: .delta()),
   enabled: true,
   format: (value) => value,
   filter: (query) => ['apple', 'banana', 'cherry'].where((e) => e.startsWith(query)),

@@ -34,7 +34,7 @@ class FRadio extends StatelessWidget {
   /// ```shell
   /// dart run forui style create radio
   /// ```
-  final FRadioStyle Function(FRadioStyle style)? style;
+  final FRadioStyleDelta? style;
 
   /// The label displayed next to the radio.
   final Widget? label;
@@ -103,7 +103,7 @@ class FRadio extends StatelessWidget {
         return FLabel(
           axis: .horizontal,
           variants: formVariants,
-          style: style,
+          style: .value(style),
           label: label,
           description: description,
           error: error,

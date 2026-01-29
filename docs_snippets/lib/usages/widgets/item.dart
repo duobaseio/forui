@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 
 final item = FItem(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(margin: .zero),
   enabled: true,
   selected: false,
   onPress: () {},
@@ -35,7 +35,7 @@ final item = FItem(
 
 final raw = FItem.raw(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(margin: .zero),
   enabled: true,
   selected: false,
   onPress: () {},

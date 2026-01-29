@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 
 final avatar = FAvatar(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(backgroundColor: Color(0xFF000000)),
   size: 40.0,
   image: const NetworkImage('https://example.com/avatar.png'),
   // {@endcategory}
@@ -18,7 +18,7 @@ final avatar = FAvatar(
 
 final raw = FAvatar.raw(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(backgroundColor: Color(0xFF000000)),
   size: 40.0,
   child: const Text('AB'),
   // {@endcategory}

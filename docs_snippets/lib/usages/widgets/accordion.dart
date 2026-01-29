@@ -4,13 +4,13 @@ import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
 
-final accordion = FAccordion(
+const accordion = FAccordion(
   // {@category "Core"}
-  style: (style) => style,
-  children: const [FAccordionItem(title: Text('Title'), child: SizedBox())],
+  style: .delta(titlePadding: .zero),
+  children: [FAccordionItem(title: Text('Title'), child: SizedBox())],
   // {@endcategory}
   // {@category "Control"}
-  control: const .managed(min: 1, max: 2),
+  control: .managed(min: 1, max: 2),
   // {@endcategory}
 );
 

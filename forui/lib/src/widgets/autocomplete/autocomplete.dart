@@ -36,7 +36,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   /// The default loading builder that shows a spinner when an asynchronous search is pending.
   static Widget defaultContentLoadingBuilder(BuildContext _, FAutocompleteContentStyle style) => Padding(
     padding: const .all(13),
-    child: FCircularProgress(style: style.progressStyle),
+    child: FCircularProgress(style: .value(style.progressStyle)),
   );
 
   /// The default empty builder that shows a localized message when there are no results.
@@ -70,7 +70,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   /// ```shell
   /// dart run forui style create autocomplete
   /// ```
-  final FAutocompleteStyle Function(FAutocompleteStyle style)? style;
+  final FAutocompleteStyleDelta? style;
 
   /// {@macro forui.text_field.label}
   @override
@@ -319,7 +319,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     required List<String> items,
     FAutocompleteControl control = const .managed(),
     FPopoverControl popoverControl = const .managed(),
-    FAutocompleteStyle Function(FAutocompleteStyle style)? style,
+    FAutocompleteStyleDelta? style,
     Widget? label,
     String? hint,
     Widget? description,
@@ -799,7 +799,7 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
       },
       child: FTextFormField(
         control: .managed(controller: _controller),
-        style: style.fieldStyle,
+        style: .value(style.fieldStyle),
         label: widget.label,
         hint: widget.hint,
         description: widget.description,
@@ -868,7 +868,7 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
           policy: SkipDelegateTraversalPolicy(FocusTraversalGroup.maybeOf(context) ?? ReadingOrderTraversalPolicy()),
           child: FPopover(
             control: .managed(controller: _popoverController),
-            style: style.contentStyle,
+            style: .value(style.contentStyle),
             constraints: widget.contentConstraints,
             popoverAnchor: widget.contentAnchor,
             childAnchor: widget.fieldAnchor,

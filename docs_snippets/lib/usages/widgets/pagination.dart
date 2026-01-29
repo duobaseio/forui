@@ -4,14 +4,14 @@ import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
 
-final pagination = FPagination(
+const pagination = FPagination(
   // {@category "Core"}
-  style: (style) => style,
-  previous: const Icon(FIcons.chevronLeft),
-  next: const Icon(FIcons.chevronRight),
+  style: .delta(itemPadding: .symmetric(horizontal: 2)),
+  previous: Icon(FIcons.chevronLeft),
+  next: Icon(FIcons.chevronRight),
   // {@endcategory}
   // {@category "Control"}
-  control: const .managed(),
+  control: .managed(),
   // {@endcategory}
 );
 

@@ -47,13 +47,13 @@ void main() {
           children: [
             const Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
             FToast(
-              style: FThemes.zinc.light.toasterStyle.toastStyle.copyWith(
-                backgroundFilter: .blur(sigmaX: 5, sigmaY: 5),
-                decoration: BoxDecoration(
+              style: .delta(
+                backgroundFilter: () => .blur(sigmaX: 5, sigmaY: 5),
+                decoration: .value(BoxDecoration(
                   color: FThemes.zinc.light.colors.background.withValues(alpha: 0.5),
                   borderRadius: FThemes.zinc.light.style.borderRadius,
                   border: .all(width: FThemes.zinc.light.style.borderWidth, color: FThemes.zinc.light.colors.border),
-                ),
+                )),
               ),
               title: const Text('Event has been created'),
               description: const Text(

@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 
 final switchWidget = FSwitch(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(labelPadding: .only(left: 8)),
   enabled: true,
   value: false,
   onChange: (value) {},

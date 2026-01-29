@@ -28,7 +28,7 @@ mixin FSelectItemMixin on Widget {
   static FSelectSection<T> section<T>({
     required Widget label,
     required Map<String, T> items,
-    FSelectSectionStyle Function(FSelectSectionStyle style)? style,
+    FSelectSectionStyleDelta? style,
     bool? enabled,
     FItemDivider divider = .none,
     Key? key,
@@ -40,7 +40,7 @@ mixin FSelectItemMixin on Widget {
   static FSelectSection<T> richSection<T>({
     required Widget label,
     required List<FSelectItem<T>> children,
-    FSelectSectionStyle Function(FSelectSectionStyle style)? style,
+    FSelectSectionStyleDelta? style,
     bool? enabled,
     FItemDivider divider = .none,
     Key? key,
@@ -54,7 +54,7 @@ mixin FSelectItemMixin on Widget {
   static FSelectItem<T> item<T>({
     required Widget title,
     required T value,
-    FItemStyle Function(FItemStyle style)? style,
+    FItemStyleDelta? style,
     bool? enabled,
     Widget? prefix,
     Widget? subtitle,
@@ -78,7 +78,7 @@ mixin FSelectItemMixin on Widget {
   static FSelectItem<T> raw<T>({
     required Widget child,
     required T value,
-    FItemStyle Function(FItemStyle style)? style,
+    FItemStyleDelta? style,
     bool? enabled,
     Widget? prefix,
     Key? key,
@@ -95,7 +95,7 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
   /// ```shell
   /// dart run forui style create select-section
   /// ```
-  final FSelectSectionStyle Function(FSelectSectionStyle style)? style;
+  final FSelectSectionStyleDelta? style;
 
   /// True if the section is enabled. Disabled sections cannot be selected, and is skipped during traversal.
   ///
@@ -120,7 +120,7 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
   FSelectSection({
     required Widget label,
     required Map<String, T> items,
-    FSelectSectionStyle Function(FSelectSectionStyle style)? style,
+    FSelectSectionStyleDelta? style,
     bool? enabled,
     FItemDivider divider = .none,
     Key? key,
@@ -314,7 +314,7 @@ abstract class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
   /// ```shell
   /// dart run forui style create select-section
   /// ```
-  final FItemStyle Function(FItemStyle style)? style;
+  final FItemStyleDelta? style;
 
   /// The value.
   final T value;
@@ -333,7 +333,7 @@ abstract class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
   const factory FSelectItem({
     required Widget title,
     required T value,
-    FItemStyle Function(FItemStyle style)? style,
+    FItemStyleDelta? style,
     bool? enabled,
     Widget? prefix,
     Widget? subtitle,
@@ -349,7 +349,7 @@ abstract class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
   const factory FSelectItem.item({
     required Widget title,
     required T value,
-    FItemStyle Function(FItemStyle style)? style,
+    FItemStyleDelta? style,
     bool? enabled,
     Widget? prefix,
     Widget? subtitle,
@@ -364,7 +364,7 @@ abstract class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
   const factory FSelectItem.raw({
     required Widget child,
     required T value,
-    FItemStyle Function(FItemStyle style)? style,
+    FItemStyleDelta? style,
     bool? enabled,
     Widget? prefix,
     Key? key,
@@ -483,7 +483,7 @@ class _SelectItemState<T> extends _State<_SelectItem<T>, T> {
     FTappableVariantChangeCallback onVariantChange,
     VoidCallback onPress,
   ) => FItem(
-    style: widget.style?.call,
+    style: widget.style,
     enabled: enabled,
     selected: selected,
     autofocus: focused,
@@ -517,7 +517,7 @@ class _RawSelectItemState<T> extends _State<_RawSelectItem<T>, T> {
     FTappableVariantChangeCallback onVariantChange,
     VoidCallback onPress,
   ) => FItem.raw(
-    style: widget.style?.call,
+    style: widget.style,
     enabled: enabled,
     selected: selected,
     autofocus: focused,

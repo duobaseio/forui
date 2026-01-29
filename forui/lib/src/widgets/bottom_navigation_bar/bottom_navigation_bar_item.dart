@@ -19,7 +19,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
   /// ```shell
   /// dart run forui style create bottom-navigation-bar-item
   /// ```
-  final FBottomNavigationBarItemStyle Function(FBottomNavigationBarItemStyle style)? style;
+  final FBottomNavigationBarItemStyleDelta? style;
 
   /// The icon, wrapped in a [IconTheme].
   final Widget icon;

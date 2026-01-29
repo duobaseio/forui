@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 
 final popoverMenu = FPopoverMenu(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(maxWidth: 250),
   divider: .full,
   menu: [
     .group(
@@ -54,7 +54,7 @@ final popoverMenu = FPopoverMenu(
 
 final popoverMenuTiles = FPopoverMenu.tiles(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(maxWidth: 250),
   divider: .full,
   menu: [
     .group(

@@ -12,7 +12,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.blue(
         child: FBottomNavigationBar(
-          style: TestScaffold.blueScreen.bottomNavigationBarStyle,
+          style: .value(TestScaffold.blueScreen.bottomNavigationBarStyle),
           index: 2,
           children: const [
             FBottomNavigationBarItem(icon: Icon(FIcons.house), label: Text('Home')),
@@ -83,9 +83,9 @@ void main() {
                 children: [
                   const Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
                   FBottomNavigationBar(
-                    style: theme.data.bottomNavigationBarStyle.copyWith(
-                      backgroundFilter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
-                      decoration: BoxDecoration(color: theme.data.colors.background.withValues(alpha: 0.5)),
+                    style: .delta(
+                      backgroundFilter: () => ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                      decoration: .value(BoxDecoration(color: theme.data.colors.background.withValues(alpha: 0.5))),
                     ),
                     index: 2,
                     children: const [

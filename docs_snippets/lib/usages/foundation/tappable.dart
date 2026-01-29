@@ -7,9 +7,7 @@ import 'package:forui/forui.dart';
 final tappable = FTappable(
   // {@category "Core"}
   style: const .delta(motion: .value(FTappableMotion.none)),
-  focusedOutlineStyle: const .delta(
-    color: Colors.black,
-  ),
+  focusedOutlineStyle: const .delta(color: Colors.black),
   selected: false,
   behavior: .translucent,
   builder: (context, states, child) => child!,

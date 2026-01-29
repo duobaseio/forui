@@ -80,8 +80,8 @@ void main() {
           mainAxisSize: .min,
           children: [
             FPopover(
-              style: FThemes.zinc.light.popoverStyle.copyWith(
-                barrierFilter: (animation) => .blur(sigmaX: animation * 5, sigmaY: animation * 5),
+              style: .delta(
+                barrierFilter: () => (animation) => .blur(sigmaX: animation * 5, sigmaY: animation * 5),
               ),
               popoverBuilder: (context, _) => const Text('popover'),
               builder: (_, controller, _) => FButton(onPress: controller.toggle, child: const Text('target')),
@@ -133,8 +133,8 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         child: FPopover(
-          style: FThemes.zinc.light.popoverStyle.copyWith(
-            barrierFilter: (animation) => .blur(sigmaX: animation * 5, sigmaY: animation * 5),
+          style: .delta(
+            barrierFilter: () => (animation) => .blur(sigmaX: animation * 5, sigmaY: animation * 5),
           ),
           onTapHide: () => count++,
           popoverBuilder: (context, _) => const Text('popover'),
@@ -160,8 +160,8 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         child: FPopover(
-          style: FThemes.zinc.light.popoverStyle.copyWith(
-            barrierFilter: (animation) => .blur(sigmaX: animation * 5, sigmaY: animation * 5),
+          style: .delta(
+            barrierFilter: () => (animation) => .blur(sigmaX: animation * 5, sigmaY: animation * 5),
           ),
           onTapHide: () => count++,
           hideRegion: .none,

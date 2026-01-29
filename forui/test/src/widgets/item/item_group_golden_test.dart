@@ -20,7 +20,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.blue(
             child: FItemGroup(
-              style: TestScaffold.blueScreen.itemGroupStyle,
+              style: .value(TestScaffold.blueScreen.itemGroupStyle),
               children: [
                 FItem(
                   prefix: const Icon(FIcons.wifi),
@@ -49,7 +49,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.blue(
             child: FItemGroup(
-              style: TestScaffold.blueScreen.itemGroupStyle,
+              style: .value(TestScaffold.blueScreen.itemGroupStyle),
               children: [
                 FItem(
                   prefix: const Icon(FIcons.wifi),
@@ -84,7 +84,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.blue(
             child: FItemGroup(
-              style: TestScaffold.blueScreen.itemGroupStyle,
+              style: .value(TestScaffold.blueScreen.itemGroupStyle),
               children: [
                 FItem(
                   enabled: false,
@@ -494,7 +494,7 @@ void main() {
                 onPress: () {},
               ),
               FItem(
-                style: FThemes.blue.dark.itemGroupStyle.itemStyle,
+                style: .value(FThemes.blue.dark.itemGroupStyle.itemStyle),
                 prefix: const Icon(FIcons.bluetooth),
                 title: const Text('Bluetooth'),
                 subtitle: const Text('Fee, Fo'),
@@ -544,7 +544,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FItemGroup.builder(
-            style: TestScaffold.blueScreen.itemGroupStyle,
+            style: .value(TestScaffold.blueScreen.itemGroupStyle),
             maxHeight: 300,
             itemBuilder: (context, index) => FItem(title: Text('Item $index')),
           ),

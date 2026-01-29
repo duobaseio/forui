@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 
 final popover = FPopover(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(viewInsets: .all(5)),
   popoverBuilder: (context, controller) => const Padding(padding: .all(8), child: Text('Popover content')),
   builder: (context, controller, child) => child!,
   child: FButton(onPress: () {}, child: const Text('Show Popover')),

@@ -1,10 +1,11 @@
 // ignore_for_file: avoid_redundant_argument_values
 
+
 import 'package:forui/forui.dart';
 
-final divider = FDivider(
+const divider = FDivider(
   // {@category "Core"}
-  style: (style) => style,
+  style: .delta(padding: .zero),
   axis: .horizontal,
   // {@endcategory}
 );

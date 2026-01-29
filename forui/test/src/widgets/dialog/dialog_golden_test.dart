@@ -49,8 +49,8 @@ void main() {
             child: Builder(
               builder: (context) => FButton(
                 onPress: () => showFDialog(
-                  routeStyle: theme.data.dialogRouteStyle.copyWith(
-                    barrierFilter: (animation) => .blur(sigmaX: animation * 5, sigmaY: animation * 5),
+                  routeStyle: .delta(
+                    barrierFilter: () => (animation) => .blur(sigmaX: animation * 5, sigmaY: animation * 5),
                   ),
                   context: context,
                   builder: (context, _, animation) => FDialog(
@@ -84,16 +84,16 @@ void main() {
             child: Builder(
               builder: (context) => FButton(
                 onPress: () => showFDialog(
-                  style: theme.data.dialogStyle.copyWith(
-                    backgroundFilter: (v) => .blur(sigmaX: v * 5, sigmaY: v * 5),
-                    decoration: BoxDecoration(
+                  style: .delta(
+                    backgroundFilter: () => (v) => .blur(sigmaX: v * 5, sigmaY: v * 5),
+                    decoration: .value(BoxDecoration(
                       borderRadius: theme.data.style.borderRadius,
                       color: theme.data.colors.background.withValues(alpha: 0.5),
-                    ),
+                    )),
                   ),
                   context: context,
                   builder: (context, style, animation) => FDialog(
-                    style: style,
+                    style: .value(style),
                     animation: animation,
                     title: const Text('Are you absolutely sure?'),
                     body: const Text(
@@ -124,7 +124,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FDialog(
-            style: TestScaffold.blueScreen.dialogStyle,
+            style: .value(TestScaffold.blueScreen.dialogStyle),
             direction: .horizontal,
             title: const Text('Are you absolutely sure?'),
             body: const Text(

@@ -72,8 +72,8 @@ void main() {
           theme: theme.data,
           child: FPopover(
             control: const .managed(initial: true),
-            style: theme.data.popoverStyle.copyWith(
-              barrierFilter: (animation) => .blur(sigmaX: animation * 5, sigmaY: animation * 5),
+            style: .delta(
+              barrierFilter: () => (animation) => .blur(sigmaX: animation * 5, sigmaY: animation * 5),
             ),
             popoverBuilder: (context, _) => const SizedBox.square(dimension: 100),
             child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
@@ -97,13 +97,13 @@ void main() {
               FButton(onPress: controller.toggle, child: const Text('Toggle Popover')),
               FPopover(
                 control: .managed(controller: controller),
-                style: theme.data.popoverStyle.copyWith(
-                  backgroundFilter: (v) => .blur(sigmaX: v * 5, sigmaY: v * 5),
-                  decoration: BoxDecoration(
+                style: .delta(
+                  backgroundFilter: () => (v) => .blur(sigmaX: v * 5, sigmaY: v * 5),
+                  decoration: .value(BoxDecoration(
                     color: theme.data.colors.background.withValues(alpha: 0.5),
                     borderRadius: theme.data.style.borderRadius,
                     border: .all(width: theme.data.style.borderWidth, color: theme.data.colors.border),
-                  ),
+                  )),
                 ),
                 popoverBuilder: (_, _) => const SizedBox.square(dimension: 100),
                 child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),

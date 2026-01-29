@@ -58,7 +58,7 @@ class FTabs extends StatefulWidget {
   /// ```shell
   /// dart run forui style create tabs
   /// ```
-  final FTabsStyle Function(FTabsStyle style)? style;
+  final FTabsStyleDelta? style;
 
   /// Whether this tab bar can be scrolled horizontally. Defaults to false.
   ///

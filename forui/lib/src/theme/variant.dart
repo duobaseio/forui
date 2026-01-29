@@ -5,6 +5,26 @@ import 'package:forui/forui.dart';
 
 part 'variant_platform.dart';
 
+/// Converts a set of [WidgetState]s to a set of [FVariant]s.
+Set<FVariant> toVariants(Set<WidgetState> states) => {
+  if (states.contains(WidgetState.disabled)) const FVariant(2, 'disabled'),
+  if (states.contains(WidgetState.error)) const FVariant(2, 'error'),
+  if (states.contains(WidgetState.selected)) const FVariant(2, 'selected'),
+  if (states.contains(WidgetState.focused)) const FVariant(1, 'focused'),
+  if (states.contains(WidgetState.hovered)) const FVariant(1, 'hovered'),
+  if (states.contains(WidgetState.pressed)) const FVariant(1, 'pressed'),
+  if (states.contains(WidgetState.dragged)) const FVariant(1, 'dragged'),
+};
+
+@internal
+Set<FTextFieldVariant> toTextFieldVariants(Set<WidgetState> states) => {
+  if (states.contains(WidgetState.disabled)) .disabled,
+  if (states.contains(WidgetState.error)) .error,
+  if (states.contains(WidgetState.focused)) .focused,
+  if (states.contains(WidgetState.hovered)) .hovered,
+  if (states.contains(WidgetState.pressed)) .pressed,
+};
+
 /// Represents a combination of variants under which a widget can be styled differently.
 ///
 /// Users should generally use the provided widget-specific variants instead of this.

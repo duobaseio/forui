@@ -38,7 +38,7 @@ class FTooltip extends StatefulWidget {
   /// ```shell
   /// dart run forui style create tooltip
   /// ```
-  final FTooltipStyle Function(FTooltipStyle style)? style;
+  final FTooltipStyleDelta? style;
 
   /// The anchor point on the tip used for positioning relative to the [childAnchor].
   ///

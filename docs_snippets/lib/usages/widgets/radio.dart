@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 
 final radio = FRadio(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(motion: .delta()),
   enabled: true,
   value: false,
   onChange: (value) {},

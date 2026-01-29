@@ -13,7 +13,7 @@ void main() {
           TestScaffold.blue(
             child: FSelectMenuTile(
               selectControl: const .managed(initial: {1}),
-              style: TestScaffold.blueScreen.selectMenuTileStyle,
+              style: .value(TestScaffold.blueScreen.selectMenuTileStyle),
               prefix: const Icon(FIcons.bluetooth),
               label: const Text('Label'),
               description: const Text('Description'),
@@ -34,7 +34,7 @@ void main() {
             child: FSelectMenuTile(
               selectControl: const .managed(initial: {1}),
               enabled: false,
-              style: TestScaffold.blueScreen.selectMenuTileStyle,
+              style: .value(TestScaffold.blueScreen.selectMenuTileStyle),
               prefix: const Icon(FIcons.bluetooth),
               label: const Text('Label'),
               description: const Text('Description'),

@@ -1,3 +1,4 @@
+
 import 'package:forui/forui.dart';
 
 final colors = FThemes.zinc.light.colors;
@@ -6,18 +7,18 @@ final style = FThemes.zinc.light.style;
 
 final a =
     // {@snippet constructor}
-    // Long-form
+    // Complete replacement using .value()
     FAccordion(
-      style: (s) => FAccordionStyle.inherit(colors: colors, typography: typography, style: style),
+      style: .value(.inherit(colors: colors, typography: typography, style: style)),
       children: const [],
     );
 // {@endsnippet}
 
-final b =
+const b =
     // {@snippet constructor}
     // Short-form
     FAccordion(
-      style: FAccordionStyle.inherit(colors: colors, typography: typography, style: style),
-      children: const [],
+      style: .delta(titlePadding: .symmetric(vertical: 20)),
+      children: [],
     );
 // {@endsnippet}

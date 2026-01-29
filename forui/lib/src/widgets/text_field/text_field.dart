@@ -66,7 +66,7 @@ class FTextField extends StatelessWidget {
   static Widget password({
     FTextFieldControl control = const .managed(),
     FObscureTextControl obscureTextControl = const .managed(),
-    FTextFieldStyle Function(FTextFieldStyle style)? style,
+    FTextFieldStyleDelta? style,
     FFieldBuilder<FTextFieldStyle> builder = Input.defaultBuilder,
     Widget? label = const LocalizedText.password(),
     String? hint,
@@ -204,7 +204,7 @@ class FTextField extends StatelessWidget {
   /// dart run forui style create text-field
   /// ```
   /// {@endtemplate}
-  final FTextFieldStyle Function(FTextFieldStyle style)? style;
+  final FTextFieldStyleDelta? style;
 
   /// {@template forui.text_field.builder}
   /// The builder used to decorate the text-field. It should always use the given child.

@@ -23,6 +23,22 @@
 * **Breaking** Remove `FDateFieldStyle.iconStyle`. Use nested `FDateFieldStyle.fieldStyle.iconStyle` instead.
 
 
+### `showFDialog`
+* **Breaking** Change `showFDialog`'s `style` parameter from `FDialogStyle Function(FDialogStyle)?` to `FDialogStyleDelta?`.
+* **Breaking** Change `showFDialog`'s `routeStyle` parameter from `FDialogRouteStyle Function(FDialogRouteStyle)?` to
+  `FDialogRouteStyleDelta?`.
+
+
+### `showFSheet`
+* **Breaking** Change `showFSheet`'s `style` parameter from `FModalSheetStyle Function(FModalSheetStyle)?` to
+  `FModalSheetStyleDelta?`.
+
+
+### `showFPersistentSheet`
+* **Breaking** Change `showFPersistentSheet`'s `style` parameter from `FPersistentSheetStyle Function(FPersistentSheetStyle)?`
+  to `FPersistentSheetStyleDelta?`.
+
+
 ### `FHeaderAction`
 * **Breaking** Rename `FHeaderAction.onStateChange` to `FHeaderAction.onVariantChange`.
 
@@ -121,6 +137,10 @@
 
 
 ### Others
+* **Breaking** Change all widget `style` parameters from callback type `FXxxStyle Function(FXxxStyle)?` to delta type
+  `FXxxStyleDelta?`. Use `.value(style)` to wrap a complete style or `.delta(param: value)` to partially modify specific
+  properties.
+
 * **Breaking** Remove `FWidgetStatesDelta`.
 * **Breaking** Replace all instances of `FWidgetStateMap` with `FVariants`. 
 

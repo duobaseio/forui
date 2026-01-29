@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 
 final selectMenuTile = FSelectMenuTile<String>(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(labelPadding: .symmetric(vertical: 7)),
   enabled: true,
   autoHide: true,
   divider: .full,
@@ -69,7 +69,7 @@ final selectMenuTile = FSelectMenuTile<String>(
 
 final selectMenuTileBuilder = FSelectMenuTile<String>.builder(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(labelPadding: .symmetric(vertical: 7)),
   enabled: true,
   autoHide: true,
   divider: .full,

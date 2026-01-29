@@ -24,7 +24,7 @@ class FCard extends StatelessWidget {
   /// ```shell
   /// dart run forui style create card
   /// ```
-  final FCardStyle Function(FCardStyle style)? style;
+  final FCardStyleDelta? style;
 
   /// The child.
   final Widget child;

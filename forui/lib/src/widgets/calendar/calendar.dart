@@ -39,7 +39,7 @@ class FCalendar extends StatefulWidget {
   /// ```shell
   /// dart run forui style create calendar
   /// ```
-  final FCalendarStyle Function(FCalendarStyle style)? style;
+  final FCalendarStyleDelta? style;
 
   /// Controls how dates are selected.
   final FCalendarControl<Object?> control;

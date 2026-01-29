@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 
 final tabs = FTabs(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(spacing: 10),
   mouseCursor: .defer,
   onPress: (index) {},
   children: const [

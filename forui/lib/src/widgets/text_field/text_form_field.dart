@@ -32,7 +32,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   static Widget password({
     FTextFieldControl control = const .managed(),
     FObscureTextControl obscureTextControl = const .managed(),
-    FTextFieldStyle Function(FTextFieldStyle style)? style,
+    FTextFieldStyleDelta? style,
     FFieldBuilder<FTextFieldStyle> builder = Input.defaultBuilder,
     Widget? label = const LocalizedText.password(),
     String? hint,
@@ -175,7 +175,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   final FTextFieldControl control;
 
   /// {@macro forui.text_field.style}
-  final FTextFieldStyle Function(FTextFieldStyle style)? style;
+  final FTextFieldStyleDelta? style;
 
   /// {@macro forui.text_field.builder}
   final Widget Function(BuildContext context, FTextFieldStyle style, Set<FTextFieldVariant> variants, Widget field)

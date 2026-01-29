@@ -36,7 +36,7 @@ class FPicker extends StatefulWidget {
   /// ```shell
   /// dart run forui style create picker
   /// ```
-  final FPickerStyle Function(FPickerStyle style)? style;
+  final FPickerStyleDelta? style;
 
   /// The individual wheels and separators.
   ///
