@@ -31,40 +31,40 @@ class DeltaClass {
               ..docs.addAll(['/// Creates a complete replacement for a [${_class.name}].'])
               ..constant = true
               ..factory = true
-              ..name = 'replace'
+              ..name = 'value'
               ..requiredParameters.add(
                 Parameter(
                   (p) => p
-                    ..name = 'replacement'
+                    ..name = 'value'
                     ..type = refer(_class.name!),
                 ),
               )
-              ..redirect = refer('_${_class.name}Replace'),
+              ..redirect = refer('_${_class.name}Value'),
           ),
           Constructor(
             (c) => c
               ..docs.addAll(['/// Creates a partial modification of a [${_class.name}].'])
               ..constant = true
               ..factory = true
-              ..name = 'merge'
+              ..name = 'delta'
               ..optionalParameters.addAll(parameters)
-              ..redirect = refer('_${_class.name}Merge'),
+              ..redirect = refer('_${_class.name}Delta'),
           ),
         ]),
     );
   }
 
-  /// Generates the private replace implementation class.
-  Class generateReplace() => Class(
+  /// Generates the private value class.
+  Class generateValue() => Class(
     (c) => c
-      ..name = '_${_class.name}Replace'
+      ..name = '_${_class.name}Value'
       ..implements.add(refer('${_class.name}Delta'))
       ..fields.add(
         Field(
           (f) => f
             ..modifier = .final$
             ..type = refer(_class.name!)
-            ..name = '_replacement',
+            ..name = '_value',
         ),
       )
       ..constructors.add(
@@ -75,7 +75,7 @@ class DeltaClass {
               Parameter(
                 (p) => p
                   ..toThis = true
-                  ..name = '_replacement',
+                  ..name = '_value',
               ),
             ),
         ),
@@ -94,19 +94,19 @@ class DeltaClass {
               ),
             )
             ..lambda = true
-            ..body = const Code('_replacement'),
+            ..body = const Code('_value'),
         ),
       ),
   );
 
-  /// Generates the private merge implementation class.
-  Future<Class> generateMerge() async {
+  /// Generates the private delta class.
+  Future<Class> generateDelta() async {
     final parameters = [for (final field in _fields) await _parameter(field, toThis: true)];
     final fields = [for (final field in _fields) await _field(field)];
     final call = await _call();
     return Class(
       (c) => c
-        ..name = '_${_class.name}Merge'
+        ..name = '_${_class.name}Delta'
         ..implements.add(refer('${_class.name}Delta'))
         ..constructors.add(
           Constructor(

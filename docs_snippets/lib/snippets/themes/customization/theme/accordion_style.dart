@@ -13,13 +13,13 @@ FAccordionStyle accordionStyle({required FColors colors, required FTypography ty
         variants: {
           // This text style is applied when the accordion is hovered OR pressed.
           // {@highlight}
-          {.hovered, .pressed}: const .merge(decoration: .underline),
+          [.hovered, .pressed]: const .delta(decoration: .underline),
         },
       ),
       // {@endsnippet}
       childTextStyle: typography.sm.copyWith(color: colors.foreground),
       // This decoration is ALWAYS applied.
-      iconStyle: .raw(IconThemeData(color: colors.primary, size: 20)),
+      iconStyle: .all(IconThemeData(color: colors.primary, size: 20)),
       focusedOutlineStyle: style.focusedOutlineStyle,
       dividerStyle: FDividerStyle(color: colors.border, padding: .zero),
       tappableStyle: style.tappableStyle.copyWith(

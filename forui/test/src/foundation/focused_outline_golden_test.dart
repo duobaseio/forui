@@ -11,7 +11,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FFocusedOutline(
-            style: .replace(TestScaffold.blueScreen.style.focusedOutlineStyle),
+            style: .value(TestScaffold.blueScreen.style.focusedOutlineStyle),
             focused: true,
             child: const SizedBox(width: 100, height: 100),
           ),

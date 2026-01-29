@@ -385,25 +385,23 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
     final tileStyle = FTileStyle.inherit(colors: colors, typography: typography, style: style);
     return .new(
       decoration: BoxDecoration(
-        border: Border.all(color: colors.border, width: style.borderWidth),
+        border: .all(color: colors.border, width: style.borderWidth),
         borderRadius: style.borderRadius,
       ),
 
       tileStyle: tileStyle.copyWith(
-        decoration:
-            FVariantsDelta<FTappableVariantConstraint, FTappableVariant, BoxDecoration, BoxDecorationDelta>.apply([
-              .onAll(const .merge(border: null, borderRadius: null)),
-            ])(tileStyle.decoration),
+        decoration: tileStyle.decoration.apply<FTappableVariant>([
+          .onAll(const .delta(border: null, borderRadius: null)),
+        ]),
       ),
-      dividerColor: .raw(colors.border),
+      dividerColor: .all(colors.border),
       dividerWidth: style.borderWidth,
-      labelTextStyle: FVariantsDelta<FFormFieldVariantConstraint, FFormFieldVariant, TextStyle, TextStyleDelta>.apply([
-        .onAll(.merge(fontSize: typography.base.fontSize, height: typography.xs.height)),
-      ])(style.formFieldStyle.labelTextStyle),
-      descriptionTextStyle:
-          FVariantsDelta<FFormFieldVariantConstraint, FFormFieldVariant, TextStyle, TextStyleDelta>.apply([
-            .onAll(.merge(fontSize: typography.xs.fontSize, height: typography.xs.height)),
-          ])(style.formFieldStyle.descriptionTextStyle),
+      labelTextStyle: style.formFieldStyle.labelTextStyle.apply<FFormFieldVariant>([
+        .onAll(.delta(fontSize: typography.base.fontSize, height: typography.xs.height)),
+      ]),
+      descriptionTextStyle: style.formFieldStyle.descriptionTextStyle.apply<FFormFieldVariant>([
+        .onAll(.delta(fontSize: typography.xs.fontSize, height: typography.xs.height)),
+      ]),
       errorTextStyle: typography.xs.copyWith(color: style.formFieldStyle.errorTextStyle.color),
     );
   }

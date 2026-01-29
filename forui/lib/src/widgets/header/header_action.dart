@@ -146,13 +146,13 @@ class FHeaderAction extends StatelessWidget {
   Widget build(BuildContext context) {
     final style = this.style ?? FHeaderData.of(context).actionStyle;
     return FTappable(
-      style: .replace(style.tappableStyle),
+      style: .value(style.tappableStyle),
       autofocus: autofocus,
       focusNode: focusNode,
       onFocusChange: onFocusChange,
       onHoverChange: onHoverChange,
       onVariantChange: onVariantChange,
-      focusedOutlineStyle: .replace(style.focusedOutlineStyle),
+      focusedOutlineStyle: .value(style.focusedOutlineStyle),
       semanticsLabel: semanticsLabel,
       onPress: onPress,
       onLongPress: onLongPress,
@@ -209,7 +209,7 @@ class FHeaderActionStyle with Diagnosticable, _$FHeaderActionStyleFunctions {
     : iconStyle = .delta(
         IconThemeData(color: colors.foreground, size: size),
         variants: {
-          {.disabled}: .merge(color: colors.disable(colors.foreground)),
+          [.disabled]: .delta(color: colors.disable(colors.foreground)),
         },
       ),
       focusedOutlineStyle = style.focusedOutlineStyle,

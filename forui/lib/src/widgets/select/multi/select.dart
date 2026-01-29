@@ -696,7 +696,7 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
                 child: content(context, style),
               ),
               child: FTappable(
-                style: .replace(style.fieldStyle.tappableStyle),
+                style: .value(style.fieldStyle.tappableStyle),
                 focusNode: _focus,
                 onPress: widget.enabled ? _toggle : null,
                 builder: (context, tappableVariants, child) {
@@ -901,15 +901,15 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
           borderRadius: style.borderRadius,
         ),
         variants: {
-          {.error}: BoxDecoration(
+          [.error]: BoxDecoration(
             border: .all(color: colors.error, width: style.borderWidth),
             borderRadius: style.borderRadius,
           ),
-          {.disabled}: BoxDecoration(
+          [.disabled]: BoxDecoration(
             border: .all(color: colors.disable(colors.border), width: style.borderWidth),
             borderRadius: style.borderRadius,
           ),
-          {.focused}: BoxDecoration(
+          [.focused]: BoxDecoration(
             border: .all(color: colors.primary, width: style.borderWidth),
             borderRadius: style.borderRadius,
           ),
@@ -918,13 +918,13 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
       hintTextStyle: .delta(
         typography.sm.copyWith(color: colors.mutedForeground),
         variants: {
-          {.disabled}: .merge(color: colors.disable(colors.border)),
+          [.disabled]: .delta(color: colors.disable(colors.border)),
         },
       ),
       iconStyle: .delta(
         IconThemeData(color: colors.mutedForeground, size: 17),
         variants: {
-          {.disabled}: .merge(color: colors.disable(colors.mutedForeground)),
+          [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
         },
       ),
       clearButtonStyle: ghost.copyWith(
@@ -932,7 +932,7 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
           iconStyle: FVariants(
             IconThemeData(color: colors.mutedForeground, size: 17),
             variants: {
-              {FTappableVariantConstraint.disabled}: IconThemeData(
+              [FTappableVariantConstraint.disabled]: IconThemeData(
                 color: colors.disable(colors.mutedForeground),
                 size: 17,
               ),

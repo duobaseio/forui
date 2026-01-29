@@ -66,7 +66,7 @@ void main() {
       test('== $other', () => expect(a == other, expected));
     }
 
-    test('toString', () => expect(a.toString(), 'a(1)'));
+    test('toString', () => expect(a.toString(), 'a'));
   });
 
   group('And', () {

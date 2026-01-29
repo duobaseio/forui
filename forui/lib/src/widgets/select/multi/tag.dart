@@ -34,8 +34,8 @@ class FMultiSelectTag extends StatelessWidget {
   /// {@macro forui.foundation.FTappable.onHoverChange}
   final ValueChanged<bool>? onHoverChange;
 
-  /// {@macro forui.foundation.FTappable.onStateChange}
-  final FTappableVariantChangeCallback? onStateChange;
+  /// {@macro forui.foundation.FTappable.onVariantChange}
+  final FTappableVariantChangeCallback? onVariantChange;
 
   /// The label.
   final Widget label;
@@ -66,7 +66,7 @@ class FMultiSelectTag extends StatelessWidget {
     this.focusNode,
     this.onFocusChange,
     this.onHoverChange,
-    this.onStateChange,
+    this.onVariantChange,
     this.onPress,
     this.onLongPress,
     this.onSecondaryPress,
@@ -80,12 +80,12 @@ class FMultiSelectTag extends StatelessWidget {
   Widget build(BuildContext context) {
     final style = this.style?.call(context.theme.multiSelectStyle.tagStyle) ?? context.theme.multiSelectStyle.tagStyle;
     return FTappable(
-      style: .replace(style.tappableStyle),
+      style: .value(style.tappableStyle),
       autofocus: autofocus,
       focusNode: focusNode,
       onFocusChange: onFocusChange,
       onHoverChange: onHoverChange,
-      onVariantChange: onStateChange,
+      onVariantChange: onVariantChange,
       onPress: onPress,
       onLongPress: onLongPress,
       onSecondaryPress: onSecondaryPress,
@@ -121,7 +121,7 @@ class FMultiSelectTag extends StatelessWidget {
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
-      ..add(ObjectFlagProperty.has('onStateChange', onStateChange))
+      ..add(ObjectFlagProperty.has('onVariantChange', onVariantChange))
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
       ..add(ObjectFlagProperty.has('onSecondaryPress', onSecondaryPress))
@@ -180,8 +180,8 @@ class FMultiSelectTagStyle with Diagnosticable, _$FMultiSelectTagStyleFunctions 
         decoration: FVariants(
           BoxDecoration(borderRadius: style.borderRadius, color: colors.secondary),
           variants: {
-            {.disabled}: BoxDecoration(borderRadius: style.borderRadius, color: colors.disable(colors.secondary)),
-            {.hovered, .pressed}: BoxDecoration(
+            [.disabled]: BoxDecoration(borderRadius: style.borderRadius, color: colors.disable(colors.secondary)),
+            [.hovered, .pressed]: BoxDecoration(
               borderRadius: style.borderRadius,
               color: colors.hover(colors.secondary),
             ),
@@ -190,13 +190,13 @@ class FMultiSelectTagStyle with Diagnosticable, _$FMultiSelectTagStyleFunctions 
         labelTextStyle: .delta(
           typography.sm.copyWith(color: colors.secondaryForeground),
           variants: {
-            {.disabled}: .merge(color: colors.disable(colors.secondaryForeground)),
+            [.disabled]: .delta(color: colors.disable(colors.secondaryForeground)),
           },
         ),
         iconStyle: .delta(
           IconThemeData(color: colors.mutedForeground, size: 15),
           variants: {
-            {.disabled}: .merge(color: colors.disable(colors.mutedForeground)),
+            [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
           },
         ),
         tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),

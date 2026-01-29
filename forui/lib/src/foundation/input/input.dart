@@ -12,7 +12,8 @@ import 'package:forui/src/localizations/localizations_en.dart';
 @internal
 abstract class Input<T> extends StatefulWidget {
   final ValueNotifier<T?> controller;
-  final Widget Function(BuildContext context, FTextFieldStyle style, Set<FTextFieldVariant> variants, Widget child) builder;
+  final Widget Function(BuildContext context, FTextFieldStyle style, Set<FTextFieldVariant> variants, Widget child)
+  builder;
   final Widget? label;
   final Widget? description;
   final Widget Function(BuildContext context, String message) errorBuilder;

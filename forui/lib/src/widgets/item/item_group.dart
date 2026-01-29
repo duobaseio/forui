@@ -473,7 +473,7 @@ class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
   FItemGroupStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         itemStyle: .inherit(colors: colors, typography: typography, style: style),
-        dividerColor: .raw(colors.border),
+        dividerColor: .all(colors.border),
         dividerWidth: style.borderWidth,
       );
 }

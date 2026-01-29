@@ -245,13 +245,13 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
     final iconStyle = FVariants<FTappableVariantConstraint, IconThemeData, IconThemeDataDelta>.delta(
       IconThemeData(color: colors.primary, size: 15),
       variants: {
-        {.disabled}: .merge(color: colors.disable(colors.primary)),
+        [.disabled]: .delta(color: colors.disable(colors.primary)),
       },
     );
     final textStyle = FVariants<FTappableVariantConstraint, TextStyle, TextStyleDelta>.delta(
       typography.sm.copyWith(color: colors.primary),
       variants: {
-        {.disabled}: .merge(color: colors.disable(colors.primary)),
+        [.disabled]: .delta(color: colors.disable(colors.primary)),
       },
     );
 
@@ -259,18 +259,18 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
       labelTextStyle: .delta(
         typography.sm.copyWith(color: colors.primary, fontWeight: .w600),
         variants: {
-          {.disabled}: .merge(color: colors.disable(colors.primary)),
+          [.disabled]: .delta(color: colors.disable(colors.primary)),
         },
       ),
-      dividerColor: .raw(colors.border),
+      dividerColor: .all(colors.border),
       dividerWidth: style.borderWidth,
       itemStyle: FItemStyle(
-        backgroundColor: const .raw(null),
+        backgroundColor: const .all(null),
         decoration: .delta(
           const BoxDecoration(),
           variants: {
-            {.disabled}: const .merge(),
-            {.focused, .hovered, .pressed}: .merge(color: colors.secondary, borderRadius: style.borderRadius),
+            [.disabled]: const .delta(),
+            [.focused, .hovered, .pressed]: .delta(color: colors.secondary, borderRadius: style.borderRadius),
           },
         ),
         contentStyle: .inherit(colors: colors, typography: typography).copyWith(
@@ -282,13 +282,13 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
           subtitleTextStyle: .delta(
             typography.xs.copyWith(color: colors.mutedForeground),
             variants: {
-              {.disabled}: .merge(color: colors.disable(colors.mutedForeground)),
+              [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
             },
           ),
           suffixIconStyle: .delta(
             IconThemeData(color: colors.primary, size: 15),
             variants: {
-              {.disabled}: .merge(color: colors.disable(colors.primary)),
+              [.disabled]: .delta(color: colors.disable(colors.primary)),
             },
           ),
         ),

@@ -236,39 +236,31 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
     final iconStyle = FVariants<FTappableVariantConstraint, IconThemeData, IconThemeDataDelta>.delta(
       IconThemeData(color: colors.primary, size: 15),
       variants: {
-        {.disabled}: .merge(color: colors.disable(colors.primary)),
+        [.disabled]: .delta(color: colors.disable(colors.primary)),
       },
     );
     final textStyle = FVariants<FTappableVariantConstraint, TextStyle, TextStyleDelta>.delta(
       typography.sm,
       variants: {
-        {.disabled}: .merge(color: colors.disable(colors.primary)),
+        [.disabled]: .delta(color: colors.disable(colors.primary)),
       },
     );
     return .new(
-
-      // labelTextStyle: FWidgetStateMap({
-      //   WidgetState.disabled: typography.sm.copyWith(
-      //     color: colors.disable(colors.primary),
-      //     fontWeight: FontWeight.w600,
-      //   ),
-      //   WidgetState.any: typography.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w600),
-      // }),
       labelTextStyle: .delta(
         typography.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w600),
         variants: {
-          {.disabled}: .merge(color: colors.disable(colors.primary)),
+          [.disabled]: .delta(color: colors.disable(colors.primary)),
         },
       ),
-      dividerColor: .raw(colors.border),
+      dividerColor: .all(colors.border),
       dividerWidth: style.borderWidth,
       itemStyle: FItemStyle(
-        backgroundColor: const .raw(null),
+        backgroundColor: const .all(null),
         decoration: FVariants(
           const BoxDecoration(),
           variants: {
-            {.disabled}: const BoxDecoration(),
-            {.focused, .hovered, .pressed}: BoxDecoration(color: colors.secondary, borderRadius: style.borderRadius),
+            [.disabled]: const BoxDecoration(),
+            [.focused, .hovered, .pressed]: BoxDecoration(color: colors.secondary, borderRadius: style.borderRadius),
           },
         ),
         contentStyle: .inherit(colors: colors, typography: typography).copyWith(
@@ -280,13 +272,13 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
           subtitleTextStyle: .delta(
             typography.xs.copyWith(color: colors.mutedForeground),
             variants: {
-              {.disabled}: .merge(color: colors.disable(colors.mutedForeground)),
+              [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
             },
           ),
           suffixIconStyle: .delta(
             IconThemeData(color: colors.primary, size: 15),
             variants: {
-              {.disabled}: .merge(color: colors.disable(colors.primary)),
+              [.disabled]: .delta(color: colors.disable(colors.primary)),
             },
           ),
         ),

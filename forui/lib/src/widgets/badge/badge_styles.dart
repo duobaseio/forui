@@ -48,7 +48,7 @@ class FBadgeStyles with Diagnosticable, _$FBadgeStylesFunctions {
         ),
         outline: FBadgeStyle(
           decoration: BoxDecoration(
-            border: Border.all(color: colors.border, width: style.borderWidth),
+            border: .all(color: colors.border, width: style.borderWidth),
             borderRadius: FBadgeStyles.defaultRadius,
           ),
           contentStyle: FBadgeContentStyle(

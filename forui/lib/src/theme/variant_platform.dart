@@ -18,6 +18,7 @@ extension type const FPlatformVariant(FVariant _) implements FVariant {
   ///
   /// More specific than [touch] in variant resolution.
   static const fuchsia = FPlatformVariant(_Fuchsia());
+
   /// The Windows platform variant.
   ///
   /// More specific than [desktop] in variant resolution.
@@ -76,7 +77,9 @@ class _Android extends Touch {
 
   @override
   void _accept(List<String> operands, List<int> tiers) {
-    operands..add('touch')..add('android');
+    operands
+      ..add('touch')
+      ..add('android');
     tiers[0] = tiers[0] + 2;
   }
 
@@ -92,7 +95,9 @@ class _Ios extends Touch {
 
   @override
   void _accept(List<String> operands, List<int> tiers) {
-    operands..add('touch')..add('iOS');
+    operands
+      ..add('touch')
+      ..add('iOS');
     tiers[0] = tiers[0] + 2;
   }
 
@@ -108,7 +113,9 @@ class _Fuchsia extends Touch {
 
   @override
   void _accept(List<String> operands, List<int> tiers) {
-    operands..add('touch')..add('fuchsia');
+    operands
+      ..add('touch')
+      ..add('fuchsia');
     tiers[0] = tiers[0] + 2;
   }
 
@@ -141,7 +148,9 @@ class _Windows extends Desktop {
 
   @override
   void _accept(List<String> operands, List<int> tiers) {
-    operands..add('desktop')..add('windows');
+    operands
+      ..add('desktop')
+      ..add('windows');
     tiers[0] = tiers[0] + 2;
   }
 
@@ -157,7 +166,9 @@ class _MacOS extends Desktop {
 
   @override
   void _accept(List<String> operands, List<int> tiers) {
-    operands..add('desktop')..add('macOS');
+    operands
+      ..add('desktop')
+      ..add('macOS');
     tiers[0] = tiers[0] + 2;
   }
 
@@ -173,7 +184,9 @@ class _Linux extends Desktop {
 
   @override
   void _accept(List<String> operands, List<int> tiers) {
-    operands..add('desktop')..add('linux');
+    operands
+      ..add('desktop')
+      ..add('linux');
     tiers[0] = tiers[0] + 2;
   }
 

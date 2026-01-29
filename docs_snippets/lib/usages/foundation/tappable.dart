@@ -6,8 +6,8 @@ import 'package:forui/forui.dart';
 
 final tappable = FTappable(
   // {@category "Core"}
-  style: const .merge(motion: FTappableMotion.none),
-  focusedOutlineStyle: const .merge(
+  style: const .delta(motion: .value(FTappableMotion.none)),
+  focusedOutlineStyle: const .delta(
     color: Colors.black,
   ),
   selected: false,
@@ -36,8 +36,8 @@ final tappable = FTappable(
 
 final tappableStatic = FTappable.static(
   // {@category "Core"}
-  style: const .merge(motion: FTappableMotion.none),
-  focusedOutlineStyle: const .merge(color: Color(0xFF000000)),
+  style: const .delta(motion: .value(FTappableMotion.none)),
+  focusedOutlineStyle: const .delta(color: Color(0xFF000000)),
   selected: false,
   behavior: .translucent,
   builder: (context, states, child) => child!,

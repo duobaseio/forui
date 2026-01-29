@@ -121,7 +121,7 @@ final class _GradientSentinel extends Gradient {
 /// A delta that applies modifications to a [BoxDecoration].
 sealed class BoxDecorationDelta with Delta<BoxDecoration> {
   /// Creates a partial modification of a [BoxDecoration].
-  const factory BoxDecorationDelta.merge({
+  const factory BoxDecorationDelta.delta({
     Color? color,
     DecorationImage? image,
     BoxBorder? border,
@@ -130,13 +130,13 @@ sealed class BoxDecorationDelta with Delta<BoxDecoration> {
     Gradient? gradient,
     BlendMode? Function()? backgroundBlendMode,
     BoxShape? shape,
-  }) = _BoxDecorationMerge;
+  }) = _BoxDecorationDelta;
 
   /// Creates a complete replacement for a [BoxDecoration].
-  const factory BoxDecorationDelta.replace(BoxDecoration decoration) = _BoxDecorationReplace;
+  const factory BoxDecorationDelta.value(BoxDecoration decoration) = _BoxDecorationValue;
 }
 
-class _BoxDecorationMerge implements BoxDecorationDelta {
+class _BoxDecorationDelta implements BoxDecorationDelta {
   final Color? color;
   final DecorationImage? image;
   final BoxBorder? border;
@@ -146,7 +146,7 @@ class _BoxDecorationMerge implements BoxDecorationDelta {
   final BlendMode? Function()? backgroundBlendMode;
   final BoxShape? shape;
 
-  const _BoxDecorationMerge({
+  const _BoxDecorationDelta({
     this.color = colorSentinel,
     this.image = _decorationImageSentinel,
     this.border = _boxBorderSentinel,
@@ -170,10 +170,10 @@ class _BoxDecorationMerge implements BoxDecorationDelta {
   );
 }
 
-class _BoxDecorationReplace implements BoxDecorationDelta {
+class _BoxDecorationValue implements BoxDecorationDelta {
   final BoxDecoration _decoration;
 
-  const _BoxDecorationReplace(this._decoration);
+  const _BoxDecorationValue(this._decoration);
 
   @override
   BoxDecoration call(BoxDecoration decoration) => _decoration;
@@ -182,7 +182,7 @@ class _BoxDecorationReplace implements BoxDecorationDelta {
 /// A delta that applies modifications to an [IconThemeData].
 sealed class IconThemeDataDelta with Delta<IconThemeData> {
   /// Creates a partial modification of an [IconThemeData].
-  const factory IconThemeDataDelta.merge({
+  const factory IconThemeDataDelta.delta({
     Color? color,
     double? opacity,
     double? size,
@@ -192,13 +192,13 @@ sealed class IconThemeDataDelta with Delta<IconThemeData> {
     double? opticalSize,
     List<Shadow>? shadows,
     bool? Function()? applyTextScaling,
-  }) = _IconThemeDataMerge;
+  }) = _IconThemeDataDelta;
 
   /// Creates a complete replacement of an [IconThemeData].
-  const factory IconThemeDataDelta.replace(IconThemeData data) = _IconThemeDataReplace;
+  const factory IconThemeDataDelta.value(IconThemeData data) = _IconThemeDataValue;
 }
 
-class _IconThemeDataMerge implements IconThemeDataDelta {
+class _IconThemeDataDelta implements IconThemeDataDelta {
   final Color? color;
   final double? opacity;
   final double? size;
@@ -209,7 +209,7 @@ class _IconThemeDataMerge implements IconThemeDataDelta {
   final List<Shadow>? shadows;
   final bool? Function()? applyTextScaling;
 
-  const _IconThemeDataMerge({
+  const _IconThemeDataDelta({
     this.color = colorSentinel,
     this.opacity = .infinity,
     this.size = .infinity,
@@ -235,10 +235,10 @@ class _IconThemeDataMerge implements IconThemeDataDelta {
   );
 }
 
-class _IconThemeDataReplace implements IconThemeDataDelta {
+class _IconThemeDataValue implements IconThemeDataDelta {
   final IconThemeData _data;
 
-  const _IconThemeDataReplace(this._data);
+  const _IconThemeDataValue(this._data);
 
   @override
   IconThemeData call(IconThemeData data) => _data;
@@ -269,7 +269,7 @@ final class _TextDecorationSentinel implements TextDecoration {
 /// A delta that applies modifications to a [TextStyle].
 sealed class TextStyleDelta with Delta<TextStyle> {
   /// Creates a partial modification of a [TextStyle].
-  const factory TextStyleDelta.merge({
+  const factory TextStyleDelta.delta({
     bool? inherit,
     Color? color,
     Color? backgroundColor,
@@ -296,13 +296,13 @@ sealed class TextStyleDelta with Delta<TextStyle> {
     List<String>? fontFamilyFallback,
     String? package,
     TextOverflow? Function()? overflow,
-  }) = _Merge;
+  }) = _TextStyleDelta;
 
   /// Creates a complete replacement of a [TextStyle].
-  const factory TextStyleDelta.replace(TextStyle style) = _Replace;
+  const factory TextStyleDelta.value(TextStyle style) = _TextStyleValue;
 }
 
-class _Merge implements TextStyleDelta {
+class _TextStyleDelta implements TextStyleDelta {
   final bool? inherit;
   final Color? color;
   final Color? backgroundColor;
@@ -330,7 +330,7 @@ class _Merge implements TextStyleDelta {
   final String? package;
   final TextOverflow? Function()? overflow;
 
-  const _Merge({
+  const _TextStyleDelta({
     this.inherit,
     this.color = colorSentinel,
     this.backgroundColor = colorSentinel,
@@ -392,10 +392,10 @@ class _Merge implements TextStyleDelta {
   );
 }
 
-class _Replace implements TextStyleDelta {
+class _TextStyleValue implements TextStyleDelta {
   final TextStyle _style;
 
-  const _Replace(this._style);
+  const _TextStyleValue(this._style);
 
   @override
   TextStyle call(TextStyle style) => _style;

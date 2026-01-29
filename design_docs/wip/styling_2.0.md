@@ -99,17 +99,17 @@ mixin Delta<S> {
 }
 
 sealed class FAutocompleteStyleDelta with Delta<FAutocompleteStyle> {
-  factory FAutocompleteStyleDelta.merge({
+  factory FAutocompleteStyleDelta.delta({
     FAutocompleteContentStyleDelta? contentStyle,
-  }) = _Merge;
+  }) = _Delta;
 
-  factory FAutocompleteStyleDelta.replace(FAutocompleteStyle style) = _Replace;
+  factory FAutocompleteStyleDelta.value(FAutocompleteStyle style) = _Value;
 }
 
-class _Merge implements FAutocompleteStyleDelta {
+class _Delta implements FAutocompleteStyleDelta {
   final FAutocompleteContentStyleDelta? contentStyle;
 
-  _Merge({this.contentStyle});
+  _Delta({this.contentStyle});
 
   // Applies the delta inside FAutocomplete.
   @override
@@ -119,10 +119,10 @@ class _Merge implements FAutocompleteStyleDelta {
       );
 }
 
-class _Replace implements FAutocompleteStyleDelta {
+class _Value implements FAutocompleteStyleDelta {
   final FAutocompleteStyle _style;
 
-  _Replace(this._style);
+  _Value(this._style);
 
   // Applies the delta inside FAutocomplete.
   @override
@@ -134,11 +134,11 @@ With deltas, styles can be modified succinctly, though deep nesting remains.
 
 ```dart
 FAutocomplete(
-  style: .merge(
-    contentStyle: .merge(
-      sectionStyle: .merge(
-        itemStyle: .merge(
-          tappableStyle: .merge(
+  style: .delta(
+    contentStyle: .delta(
+      sectionStyle: .delta(
+        itemStyle: .delta(
+          tappableStyle: .delta(
             motion: FTappableMotion.none,
           ),
         ),
@@ -148,12 +148,12 @@ FAutocomplete(
 )
 ```
 
-Replacing a style is also supported via `.replace(...)`.
+Replacing a style is also supported via `.value(...)`.
 
 ```dart
 FAutocomplete(
-  style: .merge(
-    contentStyle: .replace(FAutocompleteContentStyle(...)),
+  style: .delta(
+    contentStyle: .value(FAutocompleteContentStyle(...)),
   ),
 )
 ```
@@ -167,15 +167,15 @@ class _Sentinel extends Color {
 }
 
 abstract class FooStyleDelta with Delta<FooStyle> {
-  factory FooStyleDelta.merge({Color? background, EdgeInsets? padding, Axis? Function()? axis}) = _Merge;
+  factory FooStyleDelta.delta({Color? background, EdgeInsets? padding, Axis? Function()? axis}) = _Delta;
 }
 
-class _Merge implements FooStyleDelta {
+class _Delta implements FooStyleDelta {
   final Color? background;
   final EdgeInsets? padding;
   final Axis? Function()? axis;
 
-  const _Merge({this.background = const _Sentinel(), this.padding, this.axis});
+  const _Delta({this.background = const _Sentinel(), this.padding, this.axis});
 }
 ```
 
@@ -183,11 +183,11 @@ Usage:
 
 ```dart
 Foo(
-  style: .merge(background: null), // sets background to null
+  style: .delta(background: null), // sets background to null
 );
 
 Foo(
-  style: .merge(), // keeps existing background
+  style: .delta(), // keeps existing background
 );
 ```
 
@@ -314,8 +314,8 @@ are split into separate constraints with a set of constraints mapping to one val
 // Logical OR (not supported):
 hovered | pressed: value
 
-// Set of constraints (supported):
-{hovered, pressed}: value
+// List of constraints (supported):
+[hovered, pressed]: value
 ```
 
 Invalid constraints like `A & ~A` can still be written. As future work, we can introduce an analyzer plugin that flags
@@ -436,15 +436,21 @@ class FCalendarStyle {
 
 void usage() {
   FCalendarStyle(
-    tappableStyle: FVariants({
-      {.today}: FTappableStyle(...),
-      {.today.and(.enclosing)}: FTappableStyle(...),
-      {.enclosing}: FTappableStyle(
-        decoration: FVariants({
-          {.hovered.and(.not(.pressed))}: BoxDecoration(...),
-        }),
-      ),
-    }),
+    tappableStyle: FVariants(
+      FTappableStyle(...), // base
+      variants: {
+        [.today]: FTappableStyle(...),
+        [.today.and(.enclosing)]: FTappableStyle(...),
+        [.enclosing]: FTappableStyle(
+          decoration: FVariants(
+            BoxDecoration(...), // base
+            variants: {
+              [.hovered.and(.not(.pressed))]: BoxDecoration(...),
+            },
+          ),
+        ),
+      },
+    ),
   )
 }
 ```
@@ -535,12 +541,14 @@ extension type const FTappableVariant(FVariant _) implements FVariant {
 `FVariants` can map both platform and widget-specific variants.
 
 ```dart
-FTappableVariant(
-  padding: FVariants({
-    {.ios}: .all(16),
-    {.ios.and(.focused)}: .all(20),
-    {.android}: .all(12),
-  }),
+FTappableStyle(
+  padding: FVariants(
+    variants: {
+      [.ios]: .all(16),
+      [.ios.and(.focused)]: .all(20),
+      [.android]: .all(12),
+    },
+  ),
 )
 ```
 
@@ -577,15 +585,15 @@ themselves according to the parent's constraints. Proper responsive layouts requ
 
 Most variants are minor modifications of a base variant instead of complete replacements. Modifying a variant is painful
 as the base variant needs to be identified, extracted, and assigned to a local variable before use. It also precludes
-the use of arrow syntax, leading to more verbose code. Furthermore, adding constraints requires recreating all mappings 
+the use of arrow syntax, leading to more verbose code. Furthermore, adding constraints requires recreating all mappings
 as mentioned in [order-independent widget state resolution](#3-order-independent-widget-state-resolution).
 
 ```dart
 // Creation
 FTappableStyle(
   decoration: FVariants({
-    {.hovered, .pressed}: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(8)),
-    {.any}: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8)),
+    [.hovered, .pressed]: BoxDecoration(color: Colors.grey, borderRadius: BorderRadius.circular(8)),
+    [.any]: BoxDecoration(color: Colors.white, borderRadius: BorderRadius.circular(8)),
   }),
 );
 
@@ -595,9 +603,9 @@ FTappable(
     final base = style.decoration.resolve({WidgetState.any})!;
     return style.copyWith(
       decoration: FVariants({
-        {.hovered}: base.copyWith(color: Colors.blue),
-        {.pressed}: base.copyWith(color: Colors.darkBlue),
-        {.any}: base,
+        [.hovered]: base.copyWith(color: Colors.blue),
+        [.pressed]: base.copyWith(color: Colors.darkBlue),
+        [.any]: base,
       }),
     );
   },
@@ -616,8 +624,8 @@ FTappable(
     final base = style.decoration.resolve({WidgetState.any})!;
     return style.copyWith(
       decoration: FVariants({
-        {.hovered}: base.copyWith(color: Colors.blue),
-        {.pressed}: base.copyWith(color: Colors.darkBlue),
+        [.hovered]: base.copyWith(color: Colors.blue),
+        [.pressed]: base.copyWith(color: Colors.darkBlue),
         // Oops!
       }),
     );
@@ -636,40 +644,40 @@ class FVariants<K extends FVariantConstraint, V, D extends Delta<V>> {
   final V base;
   final Map<K, V> variants;
 
-  FVariants(this.base, {required Map<Set<K>, V> variants});
+  FVariants(this.base, {required Map<List<K>, V> variants});
 
-  FVariants.delta(this.base, {required Map<Set<K>, D> variants});
+  FVariants.delta(this.base, {required Map<List<K>, D> variants});
 
-  const FVariants.raw(this.base, [this.variants = const {}]);
+  const FVariants.all(this.base) : variants = const {};
 }
 
 // Creation using concrete values
 FooStyle(
   spacing: FVariants(
     16,
-    {
-      {.compact}: 8,
-      {.expanded}: 24,
+    variants: {
+      [.compact]: 8,
+      [.expanded]: 24,
     },
   ),
 );
 
 // Creation using deltas
 FTappableStyle(
-  decoration: FVariants(
+  decoration: FVariants.delta(
     BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.circular(8),
     ),
-    {
-      {.hovered, .pressed}: .merge(color: Colors.grey),
-      {.disabled}: .replace(BoxDecoration(color: Colors.red)),
+    variants: {
+      [.hovered, .pressed]: .delta(color: Colors.grey),
+      [.disabled]: .value(BoxDecoration(color: Colors.red)),
     },
   ),
 );
 ```
 
-Unlike style deltas, `FVariantsDelta` and `FVariantsValueDelta` use `.apply(...)` instead of `.merge(...)` since typical 
+Unlike style deltas, `FVariantsDelta` and `FVariantsValueDelta` use `.apply(...)` instead of `.delta(...)` since typical 
 usage is a sequence of operations and order matters (add-then-modify ≠ modify-then-add). 
 
 In general, there are 3 types of operations:
@@ -684,7 +692,7 @@ class FVariantsDelta<K extends FVariantConstraint, E extends FVariant, V, D exte
   FVariantsDelta.apply(List<FVariantDeltaOperation<V, T, D>> operations);
 
   // Creates a complete replacement of a [FVariants].
-  FVariantsDelta.replace(FVariants<V, T, D> variants);
+  FVariantsDelta.value(FVariants<V, T, D> variants);
 }
 
 // Delta-based operations.
@@ -718,7 +726,7 @@ class FVariantsValueDelta<K extends FVariantConstraint, E extends FVariant, V> w
   FVariantsValueDelta.apply(List<FVariantValueDeltaOperation<K, E, V>> operations);
 
   // Creates a complete replacement of a [FVariants].
-  FVariantsValueDelta.replace(FVariants<K, V, Delta<V>> variants);
+  FVariantsValueDelta.value(FVariants<K, V, Delta<V>> variants);
 }
 
 // Concrete value-based operations
@@ -749,13 +757,13 @@ class FVariantValueDeltaOperation<K extends FVariantConstraint, E extends FVaria
 The `on` and remove` operations use inclusive matching. For example: `.on({.hovered, .focused}, delta)` affects:
 
 ```dart
-final decoration = FVariants(
+final decoration = FVariants.delta(
   BoxDecoration(color: Colors.white),
-  {
-    {.hovered}: .merge(color: Colors.blue),                   // ✓ contains hovered
-    {.hovered, .pressed}: .merge(color: Colors.darkBlue),     // ✓ contains hovered
-    {.focused}: .merge(color: Colors.green),                  // ✓ contains focused
-    {.disabled}: .replace(BoxDecoration(color: Colors.grey)), // ✗ contains neither
+  variants: {
+    [.hovered]: .delta(color: Colors.blue),                   // ✓ contains hovered
+    [.hovered, .pressed]: .delta(color: Colors.darkBlue),     // ✓ contains hovered
+    [.focused]: .delta(color: Colors.green),                  // ✓ contains focused
+    [.disabled]: .value(BoxDecoration(color: Colors.grey)),   // ✗ contains neither
   },
 );
 ```
@@ -765,34 +773,45 @@ With [style deltas](#2-simplifying-style-modification), modifying `FTappable` be
 
 ```dart
 FTappable(
-  // Merge using style delta
-  style: .merge(
+  // Delta using style delta
+  style: .delta(
     // Apply all modifications without needing to extract base variant.
     decoration: .apply([
-      .on({.hovered}, .merge(color: Colors.blue)),
-      .on({.pressed}, .merge(color: Colors.darkBlue)),
+      .on({.hovered}, .delta(color: Colors.blue)),
+      .on({.pressed}, .delta(color: Colors.darkBlue)),
     ]),
   ),
 )
 ```
 
-The `base` field is also the default, eliminating the need for `.any`. This also enables nullable types since 
+The `base` field is also the default, eliminating the need for `.any`. This also enables nullable types since
 `FVariants.resolve(...)` returns `base` when nothing matches.
+
+As an escape hatch, `FVariants` also provides `apply(...)` and `applyValues(...)` methods that directly apply operations.
+Most developers will not need these since style deltas handle the common case. However, they are useful for developers
+creating entirely new styles or programmatically constructing variants.
+
+```dart
+final updated = variants.apply([
+  .onAll(.delta(color: Colors.blue)),
+  .add({.disabled}, .delta(color: Colors.grey)),
+]);
+```
 
 
 ### Alternatives
 
-`FVariantsDelta` and `FLiteralVariantsDelta` may be overcomplicated. Style deltas could accept a callback, with operations
-as methods on `FVariants` and `FLiteralVariants`.
+`FVariantsDelta` and `FVariantsValueDelta` may be overcomplicated. Style deltas could accept a callback, with operations
+as methods on `FVariants`.
 
 ```dart
 FTappable(
-  // Merge using style delta
-  style: .merge(
+  // Delta using style delta
+  style: .delta(
     // Callback-based delta
     decoration: (variants) => variants
-      .map({.hovered}, .merge(color: Colors.blue))
-      .map({.pressed}, .merge(color: Colors.darkBlue)),
+      .map({.hovered}, .delta(color: Colors.blue))
+      .map({.pressed}, .delta(color: Colors.darkBlue)),
   ),
 )
 ```

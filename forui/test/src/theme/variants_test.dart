@@ -31,14 +31,36 @@ void main() {
     }
 
     test('cast', () {
-      final variants = FVariants<FTextFieldVariantConstraint, int, Delta<int>>.raw(0, {.disabled: 1});
+      final variants = createVariants<FTextFieldVariantConstraint, int, Delta<int>>(0, {.disabled: 1});
       expect(() => variants.cast<FFormFieldVariantConstraint>(), returnsNormally);
+    });
+
+    test('apply', () {
+      final variants = createVariants<FVariant, int, _Add>(0, {a: 1, b: 2});
+      final result = variants.apply([
+        .add({c}, const _Add(3)),
+        .onAll(const _Add(10)),
+      ]);
+
+      expect(result.base, 10);
+      expect(result.variants, {a: 11, b: 12, c: 13});
+    });
+
+    test('applyValues', () {
+      final variants = createVariants<FVariant, int, Delta<int>>(0, {a: 1, b: 2});
+      final result = variants.applyValues([
+        .add({c}, 3),
+        .onAll(10),
+      ]);
+
+      expect(result.base, 10);
+      expect(result.variants, {a: 10, b: 10, c: 10});
     });
   });
 
   group('FVariantsDelta', () {
     test('replaces entire FVariants', () {
-      final delta = FVariantsDelta<FVariant, FVariant, int, _Add>.replace(createVariants(10, {c: 30}));
+      final delta = FVariantsDelta<FVariant, FVariant, int, _Add>.value(createVariants(10, {c: 30}));
       final result = delta(createVariants(0, {a: 1, b: 2}));
 
       expect(result.base, 10);
@@ -53,7 +75,7 @@ void main() {
         ]);
         final result = delta(createVariants(0, {a: 1, b: 2}));
 
-        expect(result.base, 0);
+        expect(result.base, 10);
         expect(result.variants, {a: 11, b: 12, c: 13});
       });
 
@@ -134,7 +156,7 @@ void main() {
 
   group('FVariantsValueDelta', () {
     test('replaces entire FVariants', () {
-      final delta = FVariantsValueDelta<FVariant, FVariant, int>.replace(createVariants(10, {c: 30}));
+      final delta = FVariantsValueDelta<FVariant, FVariant, int>.value(createVariants(10, {c: 30}));
       final result = delta(createVariants(0, {a: 1, b: 2}));
 
       expect(result.base, 10);
@@ -149,7 +171,7 @@ void main() {
         ]);
         final result = delta(createVariants(0, {a: 1, b: 2}));
 
-        expect(result.base, 0);
+        expect(result.base, 10);
         expect(result.variants, {a: 10, b: 10, c: 10});
       });
 

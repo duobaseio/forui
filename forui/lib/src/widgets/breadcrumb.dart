@@ -200,8 +200,8 @@ class _Crumb extends StatelessWidget implements FBreadcrumbItem {
     final focusedOutlineStyle = context.theme.style.focusedOutlineStyle;
 
     return FTappable(
-      style: .replace(style.tappableStyle),
-      focusedOutlineStyle: .replace(focusedOutlineStyle),
+      style: .value(style.tappableStyle),
+      focusedOutlineStyle: .value(focusedOutlineStyle),
       selected: current,
       onPress: onPress,
       builder: (_, states, child) => DefaultTextStyle(style: style.textStyle.resolve(states), child: child!),
@@ -387,7 +387,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
         divider: widget.divider,
         menu: menu,
         child: FTappable(
-          focusedOutlineStyle: .replace(style.focusedOutlineStyle),
+          focusedOutlineStyle: .value(style.focusedOutlineStyle),
           onPress: _controller.toggle,
           child: Padding(
             padding: style.padding,
@@ -417,7 +417,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
         divider: widget.divider,
         menu: widget.tileMenu!,
         child: FTappable(
-          focusedOutlineStyle: .replace(style.focusedOutlineStyle),
+          focusedOutlineStyle: .value(style.focusedOutlineStyle),
           onPress: _controller.toggle,
           child: Padding(
             padding: style.padding,
@@ -466,12 +466,12 @@ class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
         textStyle: .delta(
           typography.sm.copyWith(fontWeight: .w400, color: colors.mutedForeground),
           variants: {
-            {.selected.and(.hovered), .selected.and(.pressed)}: .merge(
+            [.selected.and(.hovered), .selected.and(.pressed)]: .delta(
               color: colors.foreground,
               decoration: .underline,
             ),
-            {.selected}: .merge(color: colors.foreground),
-            {.hovered, .pressed}: .merge(color: colors.foreground, decoration: .underline),
+            [.selected]: .delta(color: colors.foreground),
+            [.hovered, .pressed]: .delta(color: colors.foreground, decoration: .underline),
           },
         ),
         iconStyle: IconThemeData(color: colors.mutedForeground, size: 16),

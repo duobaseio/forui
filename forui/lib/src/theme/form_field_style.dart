@@ -39,15 +39,17 @@ class FFormFieldStyle with Diagnosticable, _$FFormFieldStyleFunctions {
     : labelTextStyle = .delta(
         typography.sm.copyWith(color: colors.primary, fontWeight: .w600),
         variants: {
-          {.error}: .merge(color: colors.error),
-          {.disabled.and(.not(.error))}: .merge(color: colors.disable(colors.primary)),
+          [.error]: .delta(color: colors.error),
+          [.error.and(.disabled)]: .delta(color: colors.disable(colors.error)),
+          [.disabled.and(.not(.error))]: .delta(color: colors.disable(colors.primary)),
         },
       ),
       descriptionTextStyle = .delta(
         typography.sm.copyWith(color: colors.mutedForeground),
         variants: {
-          {.disabled.and(.not(.error))}: .merge(color: colors.disable(colors.mutedForeground)),
+          [.error.and(.disabled)]: .delta(color: colors.disable(colors.mutedForeground)),
+          [.disabled.and(.not(.error))]: .delta(color: colors.disable(colors.mutedForeground)),
         },
       ),
-      errorTextStyle = typography.sm.copyWith(color: colors.error, fontWeight: .w600);
+      errorTextStyle = typography.sm.copyWith(color: colors.disable(colors.error), fontWeight: .w600);
 }

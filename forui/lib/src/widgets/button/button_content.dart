@@ -121,19 +121,19 @@ class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFunctions {
         textStyle: .delta(
           typography.base.copyWith(color: enabled, fontWeight: .w500, height: 1),
           variants: {
-            {.disabled}: .merge(color: disabled),
+            [.disabled]: .delta(color: disabled),
           },
         ),
         iconStyle: .delta(
           IconThemeData(color: enabled, size: 20),
           variants: {
-            {.disabled}: .merge(color: disabled),
+            [.disabled]: .delta(color: disabled),
           },
         ),
         circularProgressStyle: .delta(
           FCircularProgressStyle(iconStyle: IconThemeData(color: enabled, size: 20)),
           variants: {
-            {.disabled}: .merge(iconStyle: .merge(color: disabled)),
+            [.disabled]: .delta(iconStyle: .delta(color: disabled)),
           },
         ),
       );
@@ -158,7 +158,7 @@ class FButtonIconContentStyle with Diagnosticable, _$FButtonIconContentStyleFunc
         iconStyle: .delta(
           IconThemeData(color: enabled, size: 20),
           variants: {
-            {.disabled}: .merge(color: disabled),
+            [.disabled]: .delta(color: disabled),
           },
         ),
       );

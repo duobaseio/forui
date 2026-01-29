@@ -31,7 +31,7 @@ class FAccordion extends StatefulWidget {
   /// ```shell
   /// dart run forui style create accordion
   /// ```
-  final FAccordionStyle Function(FAccordionStyle style)? style;
+  final FAccordionStyleDelta? style;
 
   /// The individual accordion items and separators.
   ///
@@ -190,11 +190,11 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
         titleTextStyle: .delta(
           typography.base.copyWith(fontWeight: .w500, color: colors.foreground),
           variants: {
-            {.hovered, .pressed}: const .merge(decoration: .underline),
+            [.hovered, .pressed]: const .delta(decoration: .underline),
           },
         ),
         childTextStyle: typography.sm.copyWith(color: colors.foreground),
-        iconStyle: .raw(IconThemeData(color: colors.mutedForeground, size: 20)),
+        iconStyle: .all(IconThemeData(color: colors.mutedForeground, size: 20)),
         focusedOutlineStyle: style.focusedOutlineStyle,
         dividerStyle: FDividerStyle(color: colors.border, padding: .zero),
         tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),

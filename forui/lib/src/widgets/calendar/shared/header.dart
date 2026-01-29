@@ -53,7 +53,7 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) => FTappable(
-    focusedOutlineStyle: .replace(widget.style.focusedOutlineStyle),
+    focusedOutlineStyle: .value(widget.style.focusedOutlineStyle),
     onPress: () => widget.type.value = switch (widget.type.value) {
       .day => .yearMonth,
       .yearMonth => .day,
@@ -195,9 +195,9 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
     final outline = FButtonStyles.inherit(colors: colors, typography: typography, style: style).outline;
     return .new(
       focusedOutlineStyle: style.focusedOutlineStyle,
-      buttonStyle: FButtonStyleDelta.merge(
-        decoration: .apply([.onAll(.merge(borderRadius: .circular(4)))]),
-        iconContentStyle: .merge(iconStyle: .apply([.onAll(const .merge(size: 17))])),
+      buttonStyle: FButtonStyleDelta.delta(
+        decoration: .apply([.onAll(.delta(borderRadius: .circular(4)))]),
+        iconContentStyle: .delta(iconStyle: .apply([.onAll(const .delta(size: 17))])),
       )(outline),
       headerTextStyle: typography.base.copyWith(color: colors.primary, fontWeight: .w600),
     );

@@ -120,13 +120,13 @@ class FRawItemContentStyle with Diagnosticable, _$FRawItemContentStyleFunctions 
         prefixIconStyle: .delta(
           IconThemeData(color: colors.primary, size: 15),
           variants: {
-            {.disabled}: .merge(color: colors.disable(colors.primary)),
+            [.disabled]: .delta(color: colors.disable(colors.primary)),
           },
         ),
         childTextStyle: .delta(
           typography.sm,
           variants: {
-            {.disabled}: .merge(color: colors.disable(colors.primary)),
+            [.disabled]: .delta(color: colors.disable(colors.primary)),
           },
         ),
       );

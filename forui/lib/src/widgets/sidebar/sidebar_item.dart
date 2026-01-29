@@ -183,8 +183,8 @@ class _FSidebarItemState extends State<FSidebarItem> with TickerProviderStateMix
     crossAxisAlignment: .start,
     children: [
       FTappable(
-        style: .replace(_style!.tappableStyle),
-        focusedOutlineStyle: .replace(_style!.focusedOutlineStyle),
+        style: .value(_style!.tappableStyle),
+        focusedOutlineStyle: .value(_style!.focusedOutlineStyle),
         selected: widget.selected,
         autofocus: widget.autofocus,
         focusNode: widget.focusNode,
@@ -332,26 +332,26 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
         textStyle: .delta(
           typography.base.copyWith(color: colors.foreground, overflow: .ellipsis, height: 1),
           variants: {
-            {.disabled}: .merge(color: colors.mutedForeground),
+            [.disabled]: .delta(color: colors.mutedForeground),
           },
         ),
         iconStyle: .delta(
           IconThemeData(color: colors.foreground, size: 16),
           variants: {
-            {.disabled}: .merge(color: colors.mutedForeground),
+            [.disabled]: .delta(color: colors.mutedForeground),
           },
         ),
         collapsibleIconStyle: .delta(
           IconThemeData(color: colors.foreground, size: 16),
           variants: {
-            {.disabled}: .merge(color: colors.mutedForeground),
+            [.disabled]: .delta(color: colors.mutedForeground),
           },
         ),
         backgroundColor: FVariants(
           Colors.transparent,
           variants: {
-            {.disabled}: Colors.transparent,
-            {.selected, .hovered, .pressed}: colors.hover(colors.secondary),
+            [.disabled]: Colors.transparent,
+            [.selected, .hovered, .pressed]: colors.hover(colors.secondary),
           },
         ),
         borderRadius: style.borderRadius,

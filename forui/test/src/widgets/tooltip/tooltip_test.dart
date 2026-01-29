@@ -292,7 +292,7 @@ void main() {
               child: Padding(
                 padding: const .all(8.0),
                 child: FTappable(
-                  focusedOutlineStyle: .replace(FThemes.zinc.light.style.focusedOutlineStyle),
+                  focusedOutlineStyle: .value(FThemes.zinc.light.style.focusedOutlineStyle),
                   onPress: () {},
                   child: Padding(
                     padding: const .all(8.0),
@@ -321,7 +321,7 @@ void main() {
               child: Padding(
                 padding: const .all(8.0),
                 child: FTappable(
-                  focusedOutlineStyle: .replace(FThemes.zinc.light.style.focusedOutlineStyle),
+                  focusedOutlineStyle: .value(FThemes.zinc.light.style.focusedOutlineStyle),
                   onPress: () {},
                   child: Padding(
                     padding: const .all(8.0),

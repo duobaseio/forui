@@ -61,19 +61,19 @@ class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
   /// Creates a [FPaginationStyle] that inherits its properties.
   FPaginationStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        itemIconStyle: .raw(IconThemeData(color: colors.primary, size: 18)),
+        itemIconStyle: .all(IconThemeData(color: colors.primary, size: 18)),
         itemDecoration: .delta(
           BoxDecoration(borderRadius: style.borderRadius, color: colors.background),
           variants: {
-            {.selected.and(.hovered), .selected.and(.pressed)}: .merge(color: colors.hover(colors.primary)),
-            {.selected}: .merge(color: colors.primary),
-            {.hovered}: .merge(color: colors.border),
+            [.selected.and(.hovered), .selected.and(.pressed)]: .delta(color: colors.hover(colors.primary)),
+            [.selected]: .delta(color: colors.primary),
+            [.hovered]: .delta(color: colors.border),
           },
         ),
         itemTextStyle: .delta(
           typography.sm.copyWith(color: colors.primary),
           variants: {
-            {.selected}: .merge(color: colors.primaryForeground),
+            [.selected]: .delta(color: colors.primaryForeground),
           },
         ),
         ellipsisTextStyle: typography.sm.copyWith(color: colors.primary),

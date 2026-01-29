@@ -61,8 +61,8 @@ class FBottomNavigationBarItem extends StatelessWidget {
     final style = this.style?.call(itemStyle) ?? itemStyle;
 
     return FTappable(
-      style: .replace(style.tappableStyle),
-      focusedOutlineStyle: .replace(style.focusedOutlineStyle),
+      style: .value(style.tappableStyle),
+      focusedOutlineStyle: .value(style.focusedOutlineStyle),
       autofocus: autofocus,
       focusNode: focusNode,
       onFocusChange: onFocusChange,
@@ -146,13 +146,13 @@ class FBottomNavigationBarItemStyle with Diagnosticable, _$FBottomNavigationBarI
          iconStyle: .delta(
            IconThemeData(color: colors.disable(colors.foreground), size: 24),
            variants: {
-             {.selected}: .merge(color: colors.primary),
+             [.selected]: .delta(color: colors.primary),
            },
          ),
          textStyle: .delta(
            typography.base.copyWith(color: colors.disable(colors.foreground), fontSize: 10),
            variants: {
-             {.selected}: .merge(color: colors.primary),
+             [.selected]: .delta(color: colors.primary),
            },
          ),
          tappableStyle: style.tappableStyle,
