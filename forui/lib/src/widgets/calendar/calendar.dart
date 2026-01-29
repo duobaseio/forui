@@ -39,7 +39,7 @@ class FCalendar extends StatefulWidget {
   /// ```shell
   /// dart run forui style create calendar
   /// ```
-  final FCalendarStyleDelta? style;
+  final FCalendarStyleDelta style;
 
   /// Controls how dates are selected.
   final FCalendarControl<Object?> control;
@@ -86,7 +86,7 @@ class FCalendar extends StatefulWidget {
   /// new [initialMonth]. This will reset the widget's interactive state.
   FCalendar({
     required this.control,
-    this.style,
+    this.style = const .inherit(),
     this.dayBuilder = defaultDayBuilder,
     this.onMonthChange,
     this.onPress,
@@ -159,7 +159,7 @@ class _State extends State<FCalendar> {
 
   @override
   Widget build(BuildContext context) {
-    final style = widget.style?.call(context.theme.calendarStyle) ?? context.theme.calendarStyle;
+    final style = widget.style(context.theme.calendarStyle);
     return DecoratedBox(
       decoration: style.decoration,
       child: Padding(
@@ -254,8 +254,8 @@ class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
   /// Creates a [FCalendarStyle] that inherits its properties.
   FCalendarStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        headerStyle: FCalendarHeaderStyle.inherit(colors: colors, typography: typography, style: style),
-        dayPickerStyle: FCalendarDayPickerStyle.inherit(colors: colors, typography: typography),
+        headerStyle: .inherit(colors: colors, typography: typography, style: style),
+        dayPickerStyle: .inherit(colors: colors, typography: typography),
         yearMonthPickerStyle: FCalendarEntryStyle(
           backgroundColor: FVariants(
             colors.background,

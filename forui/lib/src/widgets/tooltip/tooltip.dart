@@ -38,7 +38,7 @@ class FTooltip extends StatefulWidget {
   /// ```shell
   /// dart run forui style create tooltip
   /// ```
-  final FTooltipStyleDelta? style;
+  final FTooltipStyleDelta style;
 
   /// The anchor point on the tip used for positioning relative to the [childAnchor].
   ///
@@ -108,7 +108,7 @@ class FTooltip extends StatefulWidget {
   const FTooltip({
     required this.tipBuilder,
     this.control = const .managed(),
-    this.style,
+    this.style = const .inherit(),
     this.tipAnchor = .bottomCenter,
     this.childAnchor = .topCenter,
     this.spacing = const .spacing(4),
@@ -178,7 +178,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
-    final style = widget.style?.call(context.theme.tooltipStyle) ?? context.theme.tooltipStyle;
+    final style = widget.style(context.theme.tooltipStyle);
     final direction = Directionality.maybeOf(context) ?? .ltr;
 
     var child = widget.builder(context, _controller, widget.child);

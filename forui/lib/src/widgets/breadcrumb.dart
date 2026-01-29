@@ -29,7 +29,7 @@ class FBreadcrumb extends StatelessWidget {
   /// ```shell
   /// dart run forui style create breadcrumb
   /// ```
-  final FBreadcrumbStyleDelta? style;
+  final FBreadcrumbStyleDelta style;
 
   /// A list of breadcrumb items representing the navigation path.
   ///
@@ -43,11 +43,11 @@ class FBreadcrumb extends StatelessWidget {
   final Widget? divider;
 
   /// Creates an [FBreadcrumb].
-  const FBreadcrumb({required this.children, this.style, this.divider, super.key});
+  const FBreadcrumb({required this.children, this.style = const .inherit(), this.divider, super.key});
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style?.call(context.theme.breadcrumbStyle) ?? context.theme.breadcrumbStyle;
+    final style = this.style(context.theme.breadcrumbStyle);
     final divider = IconTheme(data: style.iconStyle, child: this.divider ?? const Icon(FIcons.chevronRight));
 
     return Row(
@@ -115,7 +115,7 @@ abstract interface class FBreadcrumbItem extends Widget {
   /// displays a popover menu with the collapsed items.
   const factory FBreadcrumbItem.collapsed({
     required List<FItemGroup> menu,
-    FPopoverMenuStyleDelta? popoverMenuStyle,
+    FPopoverMenuStyleDelta popoverMenuStyle,
     FPopoverControl popoverControl,
     ScrollController? scrollController,
     double? cacheExtent,
@@ -147,7 +147,7 @@ abstract interface class FBreadcrumbItem extends Widget {
   /// displays a popover menu with the collapsed items.
   const factory FBreadcrumbItem.collapsedTiles({
     required List<FTileGroup> menu,
-    FPopoverMenuStyleDelta? popoverMenuStyle,
+    FPopoverMenuStyleDelta popoverMenuStyle,
     FPopoverControl popoverControl,
     ScrollController? scrollController,
     double? cacheExtent,
@@ -227,7 +227,7 @@ class _Crumb extends StatelessWidget implements FBreadcrumbItem {
 class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
   final List<FTileGroup>? tileMenu;
   final List<FItemGroup>? itemMenu;
-  final FPopoverMenuStyleDelta? popoverMenuStyle;
+  final FPopoverMenuStyleDelta popoverMenuStyle;
   final FPopoverControl popoverControl;
   final ScrollController? scrollController;
   final double? cacheExtent;
@@ -251,7 +251,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
 
   const _CollapsedCrumb({
     required List<FItemGroup> menu,
-    this.popoverMenuStyle,
+    this.popoverMenuStyle = const .inherit(),
     this.popoverControl = const .managed(),
     this.scrollController,
     this.cacheExtent,
@@ -278,7 +278,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
 
   const _CollapsedCrumb.tiles({
     required List<FTileGroup> menu,
-    this.popoverMenuStyle,
+    this.popoverMenuStyle = const .inherit(),
     this.popoverControl = const .managed(),
     this.scrollController,
     this.cacheExtent,

@@ -103,7 +103,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
   /// ```shell
   /// dart run forui style create multi-select
   /// ```
-  final FMultiSelectStyleDelta? style;
+  final FMultiSelectStyleDelta style;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
@@ -218,7 +218,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     required Map<String, T> items,
     FMultiValueControl<T>? control,
     FPopoverControl popoverControl = const .managed(),
-    FMultiSelectStyleDelta? style,
+    FMultiSelectStyleDelta style = const .inherit(),
     bool autofocus = false,
     FocusNode? focusNode,
     FFieldIconBuilder<FMultiSelectStyle>? prefixBuilder,
@@ -305,7 +305,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     required List<FSelectItemMixin> children,
     FMultiValueControl<T>? control,
     FPopoverControl popoverControl,
-    FMultiSelectStyleDelta? style,
+    FMultiSelectStyleDelta style,
     bool autofocus,
     FocusNode? focusNode,
     FFieldIconBuilder<FMultiSelectStyle>? prefixBuilder,
@@ -366,7 +366,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder,
     FMultiValueControl<T>? control,
     FPopoverControl popoverControl = const .managed(),
-    FMultiSelectStyleDelta? style,
+    FMultiSelectStyleDelta style = const .inherit(),
     bool autofocus = false,
     FocusNode? focusNode,
     FFieldIconBuilder<FMultiSelectStyle>? prefixBuilder,
@@ -475,7 +475,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder,
     FMultiValueControl<T>? control,
     FPopoverControl popoverControl,
-    FMultiSelectStyleDelta? style,
+    FMultiSelectStyleDelta style,
     bool autofocus,
     FocusNode? focusNode,
     FFieldIconBuilder<FMultiSelectStyle>? prefixBuilder,
@@ -516,7 +516,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     required this.format,
     this.control,
     this.popoverControl = const .managed(),
-    this.style,
+    this.style = const .inherit(),
     this.autofocus = false,
     this.focusNode,
     this.prefixBuilder,
@@ -650,7 +650,7 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
 
   @override
   Widget build(BuildContext context) {
-    final style = widget.style?.call(context.theme.multiSelectStyle) ?? context.theme.multiSelectStyle;
+    final style = widget.style(context.theme.multiSelectStyle);
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
     final direction = widget.textDirection ?? Directionality.maybeOf(context) ?? .ltr;
     final padding = style.fieldStyle.contentPadding.resolve(direction);

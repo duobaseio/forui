@@ -36,7 +36,7 @@ class FTimePicker extends StatefulWidget {
   /// ```shell
   /// dart run forui style create time-picker
   /// ```
-  final FTimePickerStyleDelta? style;
+  final FTimePickerStyleDelta style;
 
   /// True if the time picker should use the 24-hour format.
   ///
@@ -58,7 +58,7 @@ class FTimePicker extends StatefulWidget {
   /// Creates a [FTimePicker].
   const FTimePicker({
     this.control = const .managed(),
-    this.style,
+    this.style = const .inherit(),
     this.hour24 = false,
     this.hourInterval = 1,
     this.minuteInterval = 1,
@@ -129,7 +129,7 @@ class _FTimePickerState extends State<FTimePicker> {
   @override
   Widget build(BuildContext context) => TimePicker(
     controller: _controller,
-    style: widget.style?.call(context.theme.timePickerStyle) ?? context.theme.timePickerStyle,
+    style: widget.style(context.theme.timePickerStyle),
     format: _format,
     padding: _padding,
     hourInterval: _controller.hourInterval,

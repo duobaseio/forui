@@ -20,7 +20,7 @@ part 'tag.design.dart';
 /// A tag in a [FMultiSelect].
 class FMultiSelectTag extends StatelessWidget {
   /// The style.
-  final FMultiSelectTagStyleDelta? style;
+  final FMultiSelectTagStyleDelta style;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
@@ -61,7 +61,7 @@ class FMultiSelectTag extends StatelessWidget {
   /// Creates a [FMultiSelectTag].
   const FMultiSelectTag({
     required this.label,
-    this.style,
+    this.style = const .inherit(),
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
@@ -78,7 +78,7 @@ class FMultiSelectTag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style?.call(context.theme.multiSelectStyle.tagStyle) ?? context.theme.multiSelectStyle.tagStyle;
+    final style = this.style(context.theme.multiSelectStyle.tagStyle);
     return FTappable(
       style: .value(style.tappableStyle),
       autofocus: autofocus,

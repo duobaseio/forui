@@ -5,7 +5,7 @@ import 'package:forui/forui.dart';
 
 @internal
 class Content extends StatelessWidget {
-  final FAvatarStyleDelta? style;
+  final FAvatarStyleDelta style;
   final double size;
   final ImageProvider image;
   final String? semanticsLabel;
@@ -51,16 +51,16 @@ class Content extends StatelessWidget {
 
 @internal
 class PlaceholderContent extends StatelessWidget {
-  final FAvatarStyleDelta? style;
+  final FAvatarStyleDelta style;
   final double size;
 
-  const PlaceholderContent({required this.size, this.style, super.key});
+  const PlaceholderContent({required this.size, required this.style, super.key});
 
   @override
   Widget build(BuildContext context) => Icon(
     FIcons.userRound,
     size: size / 2,
-    color: (style?.call(context.theme.avatarStyle) ?? context.theme.avatarStyle).foregroundColor,
+    color: style.call(context.theme.avatarStyle).foregroundColor,
   );
 
   @override

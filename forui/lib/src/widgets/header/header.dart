@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:forui/src/foundation/annotations.dart';
 
 import 'package:meta/meta.dart';
 
@@ -12,6 +13,7 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
 import 'package:forui/src/foundation/rendering.dart';
 
+@Sentinels(FHeaderStyle, {'backgroundFilter': 'imageFilterSentinel'})
 part 'header.design.dart';
 
 part 'header_action.dart';
@@ -41,7 +43,7 @@ sealed class FHeader extends StatelessWidget {
   /// ```shell
   /// dart run forui style create headers
   /// ```
-  const factory FHeader({Widget title, FHeaderStyleDelta? style, List<Widget> suffixes, Key? key}) = _FRootHeader;
+  const factory FHeader({Widget title, FHeaderStyleDelta style, List<Widget> suffixes, Key? key}) = _FRootHeader;
 
   /// Creates a nested header whose title is aligned to the center.
   ///
@@ -56,7 +58,7 @@ sealed class FHeader extends StatelessWidget {
   const factory FHeader.nested({
     Widget title,
     AlignmentGeometry titleAlignment,
-    FHeaderStyleDelta? style,
+    FHeaderStyleDelta style,
     List<Widget> prefixes,
     List<Widget> suffixes,
     Key? key,

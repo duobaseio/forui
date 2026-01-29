@@ -42,7 +42,7 @@ class FSidebar extends StatefulWidget {
   /// ```shell
   /// dart run forui style create sidebar
   /// ```
-  final FSidebarStyleDelta? style;
+  final FSidebarStyleDelta style;
 
   /// An optional sticky header.
   final Widget? header;
@@ -71,7 +71,7 @@ class FSidebar extends StatefulWidget {
     required List<Widget> children,
     this.header,
     this.footer,
-    this.style,
+    this.style = const .inherit(),
     this.autofocus = false,
     this.focusNode,
     this.traversalEdgeBehavior,
@@ -86,7 +86,7 @@ class FSidebar extends StatefulWidget {
   FSidebar.builder({
     required Widget Function(BuildContext context, int index) itemBuilder,
     required int itemCount,
-    this.style,
+    this.style = const .inherit(),
     this.header,
     this.footer,
     this.autofocus = false,
@@ -107,7 +107,7 @@ class FSidebar extends StatefulWidget {
     required this.child,
     this.header,
     this.footer,
-    this.style,
+    this.style = const .inherit(),
     this.autofocus = false,
     this.focusNode,
     this.traversalEdgeBehavior,
@@ -167,7 +167,7 @@ class _FSidebarState extends State<FSidebar> {
 
   @override
   Widget build(BuildContext context) {
-    final style = widget.style?.call(context.theme.sidebarStyle) ?? context.theme.sidebarStyle;
+    final style = widget.style(context.theme.sidebarStyle);
 
     Widget sidebar = FocusScope(
       autofocus: widget.autofocus,

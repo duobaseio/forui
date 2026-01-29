@@ -34,7 +34,7 @@ class FRadio extends StatelessWidget {
   /// ```shell
   /// dart run forui style create radio
   /// ```
-  final FRadioStyleDelta? style;
+  final FRadioStyleDelta style;
 
   /// The label displayed next to the radio.
   final Widget? label;
@@ -70,7 +70,7 @@ class FRadio extends StatelessWidget {
 
   /// Creates a [FRadio].
   const FRadio({
-    this.style,
+    this.style = const .inherit(),
     this.label,
     this.description,
     this.error,
@@ -86,7 +86,7 @@ class FRadio extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style?.call(context.theme.radioStyle) ?? context.theme.radioStyle;
+    final style = this.style(context.theme.radioStyle);
     final formVariants = <FFormFieldVariant>{if (!enabled) .disabled, if (error != null) .error};
 
     return FTappable(

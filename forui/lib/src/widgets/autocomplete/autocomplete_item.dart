@@ -26,7 +26,7 @@ mixin FAutocompleteItemMixin on Widget {
   static FAutocompleteSection section({
     required Widget label,
     required List<String> items,
-    FAutocompleteSectionStyleDelta? style,
+    FAutocompleteSectionStyleDelta style = const .inherit(),
     bool? enabled,
     FItemDivider divider = .none,
     Key? key,
@@ -38,7 +38,7 @@ mixin FAutocompleteItemMixin on Widget {
   static FAutocompleteSection richSection({
     required Widget label,
     required List<FAutocompleteItem> children,
-    FAutocompleteSectionStyleDelta? style,
+    FAutocompleteSectionStyleDelta style = const .inherit(),
     bool? enabled,
     FItemDivider divider = .none,
     Key? key,
@@ -51,7 +51,7 @@ mixin FAutocompleteItemMixin on Widget {
   /// This function is a shorthand for [FAutocompleteItem.new].
   static FAutocompleteItem item({
     required String value,
-    FItemStyleDelta? style,
+    FItemStyleDelta style = const .inherit(),
     bool? enabled,
     Widget? prefix,
     Widget? title,
@@ -75,7 +75,7 @@ mixin FAutocompleteItemMixin on Widget {
   static FAutocompleteItem rawItem({
     required Widget child,
     required String value,
-    FItemStyleDelta? style,
+    FItemStyleDelta style = const .inherit(),
     bool? enabled,
     Widget? prefix,
     Key? key,
@@ -92,7 +92,7 @@ class FAutocompleteSection extends StatelessWidget with FAutocompleteItemMixin {
   /// ```shell
   /// dart run forui style create autocomplete-section
   /// ```
-  final FAutocompleteSectionStyleDelta? style;
+  final FAutocompleteSectionStyleDelta style;
 
   /// True if the section is enabled. Disabled sections cannot be selected, and is skipped during traversal.
   ///
@@ -117,7 +117,7 @@ class FAutocompleteSection extends StatelessWidget with FAutocompleteItemMixin {
   FAutocompleteSection({
     required Widget label,
     required List<String> items,
-    FAutocompleteSectionStyleDelta? style,
+    FAutocompleteSectionStyleDelta style = const .inherit(),
     bool? enabled,
     FItemDivider divider = .none,
     Key? key,
@@ -136,7 +136,7 @@ class FAutocompleteSection extends StatelessWidget with FAutocompleteItemMixin {
   const FAutocompleteSection.rich({
     required this.label,
     required this.children,
-    this.style,
+    this.style = const .inherit(),
     this.enabled,
     this.divider = .none,
     super.key,
@@ -146,8 +146,7 @@ class FAutocompleteSection extends StatelessWidget with FAutocompleteItemMixin {
   Widget build(BuildContext context) {
     final content = ContentData.of(context);
     final enabled = this.enabled ?? content.enabled;
-    final style = this.style?.call(content.style) ?? content.style;
-    final itemStyle = style.itemStyle;
+    final style = this.style(content.style);
 
     return ContentData(
       style: style,
@@ -165,7 +164,7 @@ class FAutocompleteSection extends StatelessWidget with FAutocompleteItemMixin {
               style: style,
               enabled: enabled,
               child: FInheritedItemData.merge(
-                style: itemStyle,
+                style: style.itemStyle,
                 divider: divider,
                 index: 0,
                 last: children.length == 1,
@@ -174,7 +173,7 @@ class FAutocompleteSection extends StatelessWidget with FAutocompleteItemMixin {
             ),
           for (final (i, child) in children.indexed.skip(1))
             FInheritedItemData.merge(
-              style: itemStyle,
+              style: style.itemStyle,
               divider: divider,
               index: i,
               last: i == children.length - 1,
@@ -304,7 +303,7 @@ abstract class FAutocompleteItem extends StatelessWidget with FAutocompleteItemM
   /// ```shell
   /// dart run forui style create autocomplete-section
   /// ```
-  final FItemStyleDelta? style;
+  final FItemStyleDelta style;
 
   /// The value.
   final String value;
@@ -324,7 +323,7 @@ abstract class FAutocompleteItem extends StatelessWidget with FAutocompleteItemM
   /// {@endtemplate}
   factory FAutocompleteItem({
     required String value,
-    FItemStyleDelta? style,
+    FItemStyleDelta style,
     bool? enabled,
     Widget? prefix,
     Widget? title,
@@ -341,7 +340,7 @@ abstract class FAutocompleteItem extends StatelessWidget with FAutocompleteItemM
   /// For even more control over the item's appearance, use [FAutocompleteItem.raw].
   factory FAutocompleteItem.item({
     required String value,
-    FItemStyleDelta? style,
+    FItemStyleDelta style,
     bool? enabled,
     Widget? prefix,
     Widget? title,
@@ -359,13 +358,13 @@ abstract class FAutocompleteItem extends StatelessWidget with FAutocompleteItemM
   factory FAutocompleteItem.raw({
     required Widget child,
     required String value,
-    FItemStyleDelta? style,
+    FItemStyleDelta style,
     bool? enabled,
     Widget? prefix,
     Key? key,
   }) = _RawAutocompleteItem;
 
-  const FAutocompleteItem._({required this.value, this.style, this.enabled, this.prefix, super.key});
+  const FAutocompleteItem._({required this.value, this.style = const .inherit(), this.enabled, this.prefix, super.key});
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

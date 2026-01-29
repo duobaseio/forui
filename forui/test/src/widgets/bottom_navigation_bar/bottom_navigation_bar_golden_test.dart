@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 
@@ -84,7 +83,7 @@ void main() {
                   const Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
                   FBottomNavigationBar(
                     style: .delta(
-                      backgroundFilter: () => ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                      backgroundFilter: .blur(sigmaX: 5, sigmaY: 5),
                       decoration: .value(BoxDecoration(color: theme.data.colors.background.withValues(alpha: 0.5))),
                     ),
                     index: 2,

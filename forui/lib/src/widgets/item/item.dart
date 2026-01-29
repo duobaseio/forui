@@ -16,7 +16,7 @@ mixin FItemMixin on Widget {
   /// This function is a shorthand for [FItem.new].
   static FItem item({
     required Widget title,
-    FItemStyleDelta? style,
+    FItemStyleDelta style = const .inherit(),
     bool? enabled,
     bool selected = false,
     String? semanticsLabel,
@@ -65,7 +65,7 @@ mixin FItemMixin on Widget {
   /// This function is a shorthand for [FItem.raw].
   static FItem raw({
     required Widget child,
-    FItemStyleDelta? style,
+    FItemStyleDelta style = const .inherit(),
     bool? enabled,
     bool selected = false,
     String? semanticsLabel,
@@ -147,7 +147,7 @@ class FItem extends StatelessWidget with FItemMixin {
   /// ```shell
   /// dart run forui style create item
   /// ```
-  final FItemStyleDelta? style;
+  final FItemStyleDelta style;
 
   /// Whether the item is enabled. Defaults to true.
   final bool? enabled;
@@ -252,7 +252,7 @@ class FItem extends StatelessWidget with FItemMixin {
   /// {@endtemplate}
   FItem({
     required Widget title,
-    this.style,
+    this.style = const .inherit(),
     this.enabled,
     this.selected = false,
     this.semanticsLabel,
@@ -302,7 +302,7 @@ class FItem extends StatelessWidget with FItemMixin {
   /// {@endtemplate}
   FItem.raw({
     required Widget child,
-    this.style,
+    this.style = const .inherit(),
     this.enabled,
     this.selected = false,
     this.semanticsLabel,
@@ -335,9 +335,7 @@ class FItem extends StatelessWidget with FItemMixin {
   @override
   Widget build(BuildContext context) {
     final data = FInheritedItemData.maybeOf(context) ?? const FItemData();
-    final inheritedStyle = data.style ?? context.theme.itemStyle;
-
-    final style = this.style?.call(inheritedStyle) ?? inheritedStyle;
+    final style = this.style(data.style ?? context.theme.itemStyle);
     final enabled = this.enabled ?? data.enabled;
     final variants = <FTappableVariant>{if (!enabled) .disabled};
     final divider = data.divider;

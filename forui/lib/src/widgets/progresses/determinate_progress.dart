@@ -16,7 +16,7 @@ part 'determinate_progress.design.dart';
 /// * [FCircularProgress] for for an indeterminate circular progress indicator.
 class FDeterminateProgress extends StatefulWidget {
   /// The style.
-  final FDeterminateProgressStyleDelta? style;
+  final FDeterminateProgressStyleDelta style;
 
   /// The semantics label. Defaults to [FLocalizations.progressSemanticsLabel].
   final String? semanticsLabel;
@@ -28,7 +28,7 @@ class FDeterminateProgress extends StatefulWidget {
   final double value;
 
   /// Creates a determinate [FDeterminateProgress].
-  const FDeterminateProgress({required this.value, this.style, this.semanticsLabel, super.key})
+  const FDeterminateProgress({required this.value, this.style = const .inherit(), this.semanticsLabel, super.key})
     : assert((0.0 <= value && value <= 1.0), 'value ($value) must be between 0.0 and 1.0');
 
   @override
@@ -62,7 +62,7 @@ class _State extends State<FDeterminateProgress> with SingleTickerProviderStateM
   }
 
   void _setup() {
-    final style = widget.style?.call(context.theme.determinateProgressStyle) ?? context.theme.determinateProgressStyle;
+    final style = widget.style(context.theme.determinateProgressStyle);
 
     if (_style != style) {
       _style = style;

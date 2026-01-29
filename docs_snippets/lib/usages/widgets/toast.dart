@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 
 const toast = FToast(
   // {@category "Core"}
-  style: null,
+  style: .delta(titleSpacing: 5),
   icon: Icon(FIcons.info),
   title: Text('Title'),
   description: Text('Description'),

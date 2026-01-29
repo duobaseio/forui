@@ -26,7 +26,7 @@ class FSidebarGroup extends StatelessWidget {
   /// ```shell
   /// dart run forui style create sidebar
   /// ```
-  final FSidebarGroupStyleDelta? style;
+  final FSidebarGroupStyleDelta style;
 
   /// The label of the group.
   final Widget? label;
@@ -52,7 +52,7 @@ class FSidebarGroup extends StatelessWidget {
   /// Creates a [FSidebarGroup].
   const FSidebarGroup({
     required this.children,
-    this.style,
+    this.style = const .inherit(),
     this.label,
     this.action,
     this.onActionHoverChange,
@@ -64,10 +64,7 @@ class FSidebarGroup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sidebarData = FSidebarData.maybeOf(context);
-    final inheritedStyle = sidebarData?.style.groupStyle ?? context.theme.sidebarStyle.groupStyle;
-    final style = this.style?.call(inheritedStyle) ?? inheritedStyle;
-
+    final style = this.style(FSidebarData.maybeOf(context)?.style.groupStyle ?? context.theme.sidebarStyle.groupStyle);
     return FSidebarGroupData(
       style: style,
       child: Padding(

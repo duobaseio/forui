@@ -41,8 +41,8 @@ Future<T?> showFDialog<T>({
   required BuildContext context,
   required Widget Function(BuildContext context, FDialogStyle style, Animation<double> animation) builder,
   bool useRootNavigator = false,
-  FDialogRouteStyleDelta? routeStyle,
-  FDialogStyleDelta? style,
+  FDialogRouteStyleDelta routeStyle = const .inherit(),
+  FDialogStyleDelta style = const .inherit(),
   String? barrierLabel,
   bool barrierDismissible = true,
   RouteSettings? routeSettings,
@@ -54,8 +54,8 @@ Future<T?> showFDialog<T>({
 
   final navigator = Navigator.of(context, rootNavigator: useRootNavigator);
   final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
-  final dialogRouteStyle = routeStyle?.call(context.theme.dialogRouteStyle) ?? context.theme.dialogRouteStyle;
-  final dialogStyle = style?.call(context.theme.dialogStyle) ?? context.theme.dialogStyle;
+  final dialogRouteStyle = routeStyle(context.theme.dialogRouteStyle);
+  final dialogStyle = style(context.theme.dialogStyle);
 
   return navigator.push(
     FDialogRoute<T>(
@@ -227,7 +227,7 @@ class FDialog extends StatefulWidget {
   /// ```shell
   /// dart run forui style create dialog
   /// ```
-  final FDialogStyleDelta? style;
+  final FDialogStyleDelta style;
 
   /// The animation used to animate the dialog's entrance and exit. Settings this to null will disable the animation.
   ///
@@ -279,7 +279,7 @@ class FDialog extends StatefulWidget {
   /// |--------------------------------------------|
   FDialog({
     required List<Widget> actions,
-    this.style,
+    this.style = const .inherit(),
     this.animation,
     this.semanticsLabel,
     this.constraints = const BoxConstraints(minWidth: 280, maxWidth: 560),
@@ -306,7 +306,7 @@ class FDialog extends StatefulWidget {
   /// horizontally on larger devices.
   FDialog.adaptive({
     required List<Widget> actions,
-    this.style,
+    this.style = const .inherit(),
     this.animation,
     this.semanticsLabel,
     this.constraints = const BoxConstraints(minWidth: 280, maxWidth: 560),
@@ -326,7 +326,7 @@ class FDialog extends StatefulWidget {
   /// Creates a [FDialog] with a custom builder.
   const FDialog.raw({
     required this.builder,
-    this.style,
+    this.style = const .inherit(),
     this.animation,
     this.semanticsLabel,
     this.constraints = const BoxConstraints(minWidth: 280, maxWidth: 560),
@@ -357,7 +357,7 @@ class _FDialogState extends State<FDialog> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    final style = widget.style?.call(context.theme.dialogStyle) ?? context.theme.dialogStyle;
+    final style = widget.style(context.theme.dialogStyle);
 
     if (_curvedScale?.parent != widget.animation || _curvedFade?.parent != widget.animation) {
       _curvedScale?.dispose();
@@ -395,7 +395,7 @@ class _FDialogState extends State<FDialog> {
   @override
   Widget build(BuildContext context) {
     final theme = context.theme;
-    final style = widget.style?.call(context.theme.dialogStyle) ?? context.theme.dialogStyle;
+    final style = widget.style(context.theme.dialogStyle);
     final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
 
     Widget dialog = DecoratedBox(decoration: style.decoration, child: widget.builder(context, style));

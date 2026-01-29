@@ -36,7 +36,7 @@ class FPicker extends StatefulWidget {
   /// ```shell
   /// dart run forui style create picker
   /// ```
-  final FPickerStyleDelta? style;
+  final FPickerStyleDelta style;
 
   /// The individual wheels and separators.
   ///
@@ -55,7 +55,7 @@ class FPicker extends StatefulWidget {
   const FPicker({
     required this.children,
     this.control = const .managed(),
-    this.style,
+    this.style = const .inherit(),
     this.debugLabel = 'FPicker',
     super.key,
   });
@@ -107,7 +107,7 @@ class _FPickerState extends State<FPicker> {
 
   @override
   Widget build(BuildContext context) {
-    final style = widget.style?.call(context.theme.pickerStyle) ?? context.theme.pickerStyle;
+    final style = widget.style(context.theme.pickerStyle);
     final selectionExtent =
         FPickerWheel.estimateExtent(style, context) * style.magnification + style.selectionHeightAdjustment;
 

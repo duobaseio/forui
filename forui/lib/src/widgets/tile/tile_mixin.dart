@@ -15,7 +15,7 @@ mixin FTileMixin on Widget {
     FMultiValueControl<T>? selectControl,
     FPopoverControl popoverControl = const .managed(),
     ScrollController? scrollController,
-    FSelectMenuTileStyleDelta? style,
+    FSelectMenuTileStyleDelta style = const .inherit(),
     double? cacheExtent,
     double maxHeight = .infinity,
     DragStartBehavior dragStartBehavior = .start,
@@ -110,7 +110,7 @@ mixin FTileMixin on Widget {
     FMultiValueControl<T>? selectControl,
     FPopoverControl popoverControl = const .managed(),
     ScrollController? scrollController,
-    FSelectMenuTileStyleDelta? style,
+    FSelectMenuTileStyleDelta style = const .inherit(),
     double? cacheExtent,
     double maxHeight = .infinity,
     DragStartBehavior dragStartBehavior = .start,
@@ -206,7 +206,7 @@ mixin FTileMixin on Widget {
     FMultiValueControl<T>? selectControl,
     FPopoverControl popoverControl = const .managed(),
     ScrollController? scrollController,
-    FSelectMenuTileStyleDelta? style,
+    FSelectMenuTileStyleDelta style = const .inherit(),
     double? cacheExtent,
     double maxHeight = .infinity,
     DragStartBehavior dragStartBehavior = .start,
@@ -298,7 +298,7 @@ mixin FTileMixin on Widget {
   /// This function is a shorthand for [FTile.new].
   static FTile tile({
     required Widget title,
-    FItemStyleDelta? style,
+    FItemStyleDelta style = const .inherit(),
     bool? enabled,
     bool selected = false,
     String? semanticsLabel,
@@ -347,7 +347,7 @@ mixin FTileMixin on Widget {
   /// This function is a shorthand for [FTile.raw].
   static FTile raw({
     required Widget child,
-    FItemStyleDelta? style,
+    FItemStyleDelta style = const .inherit(),
     bool? enabled,
     bool selected = false,
     String? semanticsLabel,

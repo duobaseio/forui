@@ -20,7 +20,7 @@ mixin FItemGroupMixin on Widget {
   /// {@macro forui.widgets.FItemGroup.new}
   static FItemGroup group({
     required List<FItemMixin> children,
-    FItemGroupStyleDelta? style,
+    FItemGroupStyleDelta style = const .inherit(),
     ScrollController? scrollController,
     double? cacheExtent,
     double maxHeight = .infinity,
@@ -48,7 +48,7 @@ mixin FItemGroupMixin on Widget {
   static FItemGroup builder({
     required NullableIndexedWidgetBuilder itemBuilder,
     int? count,
-    FItemGroupStyleDelta? style,
+    FItemGroupStyleDelta style = const .inherit(),
     ScrollController? scrollController,
     double? cacheExtent,
     double maxHeight = .infinity,
@@ -76,7 +76,7 @@ mixin FItemGroupMixin on Widget {
   /// {@macro forui.widgets.FItemGroup.merge}
   static FItemGroup merge({
     required List<FItemGroupMixin> children,
-    FItemGroupStyleDelta? style,
+    FItemGroupStyleDelta style = const .inherit(),
     ScrollController? scrollController,
     double? cacheExtent,
     double maxHeight = .infinity,
@@ -144,7 +144,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
   /// ```shell
   /// dart run forui style create item-group
   /// ```
-  final FItemGroupStyleDelta? style;
+  final FItemGroupStyleDelta style;
 
   /// {@template forui.widgets.FItemGroup.scrollController}
   /// The scroll controller used to control the position to which this group is scrolled.
@@ -211,7 +211,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
   /// {@endtemplate}
   FItemGroup({
     required List<FItemMixin> children,
-    this.style,
+    this.style = const .inherit(),
     this.scrollController,
     this.cacheExtent,
     this.maxHeight = .infinity,
@@ -259,7 +259,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
   FItemGroup.builder({
     required NullableIndexedWidgetBuilder itemBuilder,
     int? count,
-    this.style,
+    this.style = const .inherit(),
     this.scrollController,
     this.cacheExtent,
     this.maxHeight = .infinity,
@@ -299,7 +299,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
   /// {@endtemplate}
   FItemGroup.merge({
     required List<FItemGroupMixin> children,
-    this.style,
+    this.style = const .inherit(),
     this.scrollController,
     this.cacheExtent,
     this.maxHeight = .infinity,
@@ -332,7 +332,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
   /// This function is a shorthand for [FItemGroup.new].
   FItemGroup.group({
     required List<FItemMixin> children,
-    FItemGroupStyleDelta? style,
+    FItemGroupStyleDelta style = const .inherit(),
     ScrollController? scrollController,
     double? cacheExtent,
     double maxHeight = .infinity,
@@ -359,8 +359,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
   @override
   Widget build(BuildContext context) {
     final data = FInheritedItemData.maybeOf(context);
-    final inheritedStyle = FItemGroupStyleData.of(context);
-    final style = this.style?.call(inheritedStyle) ?? inheritedStyle;
+    final style = this.style(FItemGroupStyleData.of(context));
     final enabled = this.enabled ?? data?.enabled ?? true;
 
     final sliver = _builder(style, enabled);

@@ -42,7 +42,7 @@ class FLabel extends StatelessWidget {
   /// dart run forui style create labels
   /// ```
   // ignore: diagnostic_describe_all_properties
-  final FLabelStyleDelta? style;
+  final FLabelStyleDelta style;
 
   /// The label that describes the form field.
   final Widget? label;
@@ -72,7 +72,7 @@ class FLabel extends StatelessWidget {
   const FLabel({
     required this.axis,
     required this.child,
-    this.style,
+    this.style = const .inherit(),
     this.label,
     this.description,
     this.error,
@@ -83,11 +83,10 @@ class FLabel extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final inheritedStyle = switch (axis) {
+    final style = this.style(switch (axis) {
       .horizontal => context.theme.labelStyles.horizontalStyle,
       .vertical => context.theme.labelStyles.verticalStyle,
-    };
-    final style = this.style?.call(inheritedStyle) ?? inheritedStyle;
+    });
 
     if (label == null && description == null && error == null) {
       return Padding(padding: style.childPadding, child: child);

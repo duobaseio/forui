@@ -13,7 +13,7 @@ mixin FAccordionItemMixin on Widget {}
 /// See:
 /// * https://forui.dev/docs/data/accordion for working examples.
 class FAccordionItem extends StatefulWidget with FAccordionItemMixin {
-  /// The accordion's style. Defaults to [FThemeData.accordionStyle].
+  /// The accordion's style. Defaults to the enclosing [FAccordion]'s style.
   ///
   /// ## CLI
   /// To generate and customize this style:
@@ -21,7 +21,7 @@ class FAccordionItem extends StatefulWidget with FAccordionItemMixin {
   /// ```shell
   /// dart run forui style create accordion
   /// ```
-  final FAccordionStyle? style;
+  final FAccordionStyleDelta style;
 
   /// The title.
   final Widget title;
@@ -57,7 +57,7 @@ class FAccordionItem extends StatefulWidget with FAccordionItemMixin {
   const FAccordionItem({
     required this.title,
     required this.child,
-    this.style,
+    this.style = const .inherit(),
     this.icon = const Icon(FIcons.chevronDown),
     this.initiallyExpanded,
     this.autofocus = false,
@@ -152,7 +152,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
   @override
   Widget build(BuildContext context) {
     final InheritedAccordionData(:index, :controller, style: inheritedStyle) = .of(context);
-    final style = widget.style ?? inheritedStyle;
+    final style = widget.style(inheritedStyle);
 
     return Column(
       crossAxisAlignment: .stretch,

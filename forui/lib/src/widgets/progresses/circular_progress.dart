@@ -17,7 +17,7 @@ part 'circular_progress.design.dart';
 /// * [FProgress] for for an indeterminate linear progress indicator.
 class FCircularProgress extends StatefulWidget {
   /// The style.
-  final FCircularProgressStyleDelta? style;
+  final FCircularProgressStyleDelta style;
 
   /// The semantics label. Defaults to [FLocalizations.progressSemanticsLabel].
   final String? semanticsLabel;
@@ -26,13 +26,20 @@ class FCircularProgress extends StatefulWidget {
   final IconData icon;
 
   /// Creates a [FCircularProgress] that uses [FIcons.loaderCircle].
-  const FCircularProgress({this.style, this.semanticsLabel, this.icon = FIcons.loaderCircle, super.key});
+  const FCircularProgress({
+    this.style = const .inherit(),
+    this.semanticsLabel,
+    this.icon = FIcons.loaderCircle,
+    super.key,
+  });
 
   /// Creates a [FCircularProgress] that uses [FIcons.loader].
-  const FCircularProgress.loader({this.style, this.semanticsLabel, super.key}) : icon = FIcons.loader;
+  const FCircularProgress.loader({this.style = const .inherit(), this.semanticsLabel, super.key})
+    : icon = FIcons.loader;
 
   /// Creates a [FCircularProgress] that uses [FIcons.loaderPinwheel].
-  const FCircularProgress.pinwheel({this.style, this.semanticsLabel, super.key}) : icon = FIcons.loaderPinwheel;
+  const FCircularProgress.pinwheel({this.style = const .inherit(), this.semanticsLabel, super.key})
+    : icon = FIcons.loaderPinwheel;
 
   @override
   State<FCircularProgress> createState() => _CircularState();
@@ -66,8 +73,7 @@ class _CircularState extends State<FCircularProgress> with SingleTickerProviderS
   }
 
   void _setup() {
-    final inherited = FInheritedCircularProgressStyle.of(context);
-    final style = widget.style?.call(inherited) ?? inherited;
+    final style = widget.style(FInheritedCircularProgressStyle.of(context));
     if (_style != style) {
       _style = style;
       _controller

@@ -27,7 +27,7 @@ class FSidebarItem extends StatefulWidget {
   /// ```shell
   /// dart run forui style create sidebar
   /// ```
-  final FSidebarItemStyleDelta? style;
+  final FSidebarItemStyleDelta style;
 
   /// The icon to display before the label.
   final Widget? icon;
@@ -66,7 +66,7 @@ class FSidebarItem extends StatefulWidget {
 
   /// Creates a [FSidebarItem].
   const FSidebarItem({
-    this.style,
+    this.style = const .inherit(),
     this.icon,
     this.label,
     this.selected = false,
@@ -131,13 +131,11 @@ class _FSidebarItemState extends State<FSidebarItem> with TickerProviderStateMix
   }
 
   void _update() {
-    final groupData = FSidebarGroupData.maybeOf(context);
-    final sidebarData = FSidebarData.maybeOf(context);
-    final inheritedStyle =
-        groupData?.style.itemStyle ??
-        sidebarData?.style.groupStyle.itemStyle ??
-        context.theme.sidebarStyle.groupStyle.itemStyle;
-    final style = widget.style?.call(inheritedStyle) ?? inheritedStyle;
+    final style = widget.style(
+      FSidebarGroupData.maybeOf(context)?.style.itemStyle ??
+          FSidebarData.maybeOf(context)?.style.groupStyle.itemStyle ??
+          context.theme.sidebarStyle.groupStyle.itemStyle,
+    );
 
     if (_style != style) {
       _style = style;

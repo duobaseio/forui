@@ -57,7 +57,7 @@ class FTile extends StatelessWidget with FTileMixin {
   /// ```shell
   /// dart run forui style create tile
   /// ```
-  final FItemStyleDelta? style;
+  final FItemStyleDelta style;
 
   /// Whether the tile is enabled. Defaults to true.
   final bool? enabled;
@@ -144,7 +144,7 @@ class FTile extends StatelessWidget with FTileMixin {
   /// {@endtemplate}
   FTile({
     required Widget title,
-    this.style,
+    this.style = const .inherit(),
     this.enabled,
     this.selected = false,
     this.semanticsLabel,
@@ -201,7 +201,7 @@ class FTile extends StatelessWidget with FTileMixin {
   /// {@endtemplate}
   FTile.raw({
     required Widget child,
-    this.style,
+    this.style = const .inherit(),
     this.enabled,
     this.selected = false,
     this.semanticsLabel,
@@ -239,11 +239,11 @@ class FTile extends StatelessWidget with FTileMixin {
        );
 
   @override
-  Widget build(BuildContext context) {
-    final parent = FInheritedItemData.maybeOf(context);
-    final style = parent == null ? this.style?.call(context.theme.tileStyle) ?? context.theme.tileStyle : null;
-    return FInheritedItemData.merge(style: style, last: true, child: _child);
-  }
+  Widget build(BuildContext context) => FInheritedItemData.merge(
+    style: FInheritedItemData.maybeOf(context) == null ? style(context.theme.tileStyle) : null,
+    last: true,
+    child: _child,
+  );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

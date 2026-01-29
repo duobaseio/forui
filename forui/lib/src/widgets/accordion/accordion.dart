@@ -31,7 +31,7 @@ class FAccordion extends StatefulWidget {
   /// ```shell
   /// dart run forui style create accordion
   /// ```
-  final FAccordionStyleDelta? style;
+  final FAccordionStyleDelta style;
 
   /// The individual accordion items and separators.
   ///
@@ -41,7 +41,7 @@ class FAccordion extends StatefulWidget {
   final List<Widget> children;
 
   /// Creates a [FAccordion].
-  const FAccordion({required this.children, this.control = const .managed(), this.style, super.key});
+  const FAccordion({required this.children, this.control = const .managed(), this.style = const .inherit(), super.key});
 
   @override
   State<FAccordion> createState() => _FAccordionState();
@@ -83,18 +83,20 @@ class _FAccordionState extends State<FAccordion> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final style = widget.style?.call(context.theme.accordionStyle) ?? context.theme.accordionStyle;
-    return Column(
+  Widget build(BuildContext context) => Column(
       children: [
         for (final (index, child) in widget.children.indexed)
           if (child is FAccordionItemMixin)
-            InheritedAccordionData(index: index, controller: _controller, style: style, child: child)
+            InheritedAccordionData(
+              index: index,
+              controller: _controller,
+              style: widget.style(context.theme.accordionStyle),
+              child: child,
+            )
           else
             child,
       ],
     );
-  }
 }
 
 @internal

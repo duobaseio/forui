@@ -18,13 +18,13 @@ part 'progress.design.dart';
 /// * [FCircularProgress] for for a circular progress indicator.
 class FProgress extends StatefulWidget {
   /// The style.
-  final FProgressStyleDelta? style;
+  final FProgressStyleDelta style;
 
   /// The semantics label. Defaults to [FLocalizations.progressSemanticsLabel].
   final String? semanticsLabel;
 
   /// Creates a determinate [FProgress].
-  const FProgress({this.style, this.semanticsLabel, super.key});
+  const FProgress({this.style = const .inherit(), this.semanticsLabel, super.key});
 
   @override
   State<FProgress> createState() => _ProgressState();
@@ -57,7 +57,7 @@ class _ProgressState extends State<FProgress> with SingleTickerProviderStateMixi
   }
 
   void _setup() {
-    final style = widget.style?.call(context.theme.progressStyle) ?? context.theme.progressStyle;
+    final style = widget.style(context.theme.progressStyle);
     if (_style != style) {
       _style = style;
 

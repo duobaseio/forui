@@ -76,7 +76,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// ```shell
   /// dart run forui style create select
   /// ```
-  final FSelectStyleDelta? style;
+  final FSelectStyleDelta style;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
@@ -207,7 +207,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     required Map<String, T> items,
     FSelectControl<T>? control,
     FPopoverControl popoverControl = const .managed(),
-    FSelectStyleDelta? style,
+    FSelectStyleDelta style = const .inherit(),
     bool autofocus = false,
     FocusNode? focusNode,
     FFieldBuilder<FSelectStyle> builder = _fieldBuilder,
@@ -302,7 +302,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     required List<FSelectItemMixin> children,
     FSelectControl<T>? control,
     FPopoverControl popoverControl,
-    FSelectStyleDelta? style,
+    FSelectStyleDelta style,
     bool autofocus,
     FocusNode? focusNode,
     FFieldBuilder<FSelectStyle> builder,
@@ -369,7 +369,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder,
     FSelectControl<T>? control,
     FPopoverControl popoverControl = const .managed(),
-    FSelectStyleDelta? style,
+    FSelectStyleDelta style = const .inherit(),
     bool autofocus = false,
     FocusNode? focusNode,
     FFieldBuilder<FSelectStyle> builder = _fieldBuilder,
@@ -487,7 +487,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder,
     FSelectControl<T>? control,
     FPopoverControl popoverControl,
-    FSelectStyleDelta? style,
+    FSelectStyleDelta style,
     bool autofocus,
     FocusNode? focusNode,
     FFieldBuilder<FSelectStyle> builder,
@@ -534,7 +534,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     required this.format,
     this.control,
     this.popoverControl = const .managed(),
-    this.style,
+    this.style = const .inherit(),
     this.autofocus = false,
     this.focusNode,
     this.builder = _fieldBuilder,
@@ -707,7 +707,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
 
   @override
   Widget build(BuildContext context) {
-    final style = widget.style?.call(context.theme.selectStyle) ?? context.theme.selectStyle;
+    final style = widget.style.call(context.theme.selectStyle);
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
 
     return Field<T>(

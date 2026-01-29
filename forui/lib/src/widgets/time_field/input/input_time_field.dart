@@ -71,7 +71,7 @@ class _InputTimeFieldState extends _FTimeFieldState<_InputTimeField> {
 
   @override
   Widget build(BuildContext context) {
-    final style = widget.style?.call(context.theme.timeFieldStyle) ?? context.theme.timeFieldStyle;
+    final style = widget.style(context.theme.timeFieldStyle);
     return TimeInput(
       controller: _controller,
       timeController: _controller,

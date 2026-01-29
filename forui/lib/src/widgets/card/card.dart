@@ -24,7 +24,7 @@ class FCard extends StatelessWidget {
   /// ```shell
   /// dart run forui style create card
   /// ```
-  final FCardStyleDelta? style;
+  final FCardStyleDelta style;
 
   /// The child.
   final Widget child;
@@ -48,7 +48,7 @@ class FCard extends StatelessWidget {
     Widget? subtitle,
     Widget? child,
     MainAxisSize mainAxisSize = .min,
-    this.style,
+    this.style = const .inherit(),
     super.key,
   }) : child = Content(
          image: image,
@@ -60,11 +60,11 @@ class FCard extends StatelessWidget {
        );
 
   /// Creates a [FCard] with custom content.
-  const FCard.raw({required this.child, this.style, super.key});
+  const FCard.raw({required this.child, this.style = const .inherit(), super.key});
 
   @override
   Widget build(BuildContext context) => DecoratedBox(
-    decoration: (style?.call(context.theme.cardStyle) ?? context.theme.cardStyle).decoration,
+    decoration: style(context.theme.cardStyle).decoration,
     child: child,
   );
 
