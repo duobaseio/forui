@@ -9,21 +9,12 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/annotations.dart';
-import 'package:forui/src/theme/variant.dart';
 import 'package:forui/src/foundation/debug.dart';
 import 'package:forui/src/widgets/autocomplete/autocomplete_content.dart';
 import 'package:forui/src/widgets/autocomplete/autocomplete_controller.dart';
 import 'package:forui/src/widgets/autocomplete/skip_delegate_traversal_policy.dart';
 import 'package:forui/src/widgets/popover/popover_controller.dart';
 
-@Variants(FAutocompleteStyle, {
-  'disabled': (2, 'The semantic variant when this widget is disabled and cannot be interacted with.'),
-  'error': (2, 'The semantic variant when this widget is in an error state.'),
-  'focused': (1, 'The interaction variant when the given widget or any of its descendants have focus.'),
-  'hovered': (1, 'The interaction variant when the user drags their mouse cursor over the given widget.'),
-  'pressed': (1, 'The interaction variant when the user is actively pressing down on the given widget.'),
-})
 part 'autocomplete.design.dart';
 
 /// A builder for [FAutocomplete]'s results.

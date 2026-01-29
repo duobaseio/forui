@@ -787,9 +787,7 @@ FTappable(
 The `base` field is also the default, eliminating the need for `.any`. This also enables nullable types since
 `FVariants.resolve(...)` returns `base` when nothing matches.
 
-As an escape hatch, `FVariants` also provides `apply(...)` and `applyValues(...)` methods that directly apply operations.
-Most developers will not need these since style deltas handle the common case. However, they are useful for developers
-creating entirely new styles or programmatically constructing variants.
+Lastly, `FVariants` also provides `apply(...)` and `applyValues(...)` which directly apply operations.
 
 ```dart
 final updated = variants.apply([
