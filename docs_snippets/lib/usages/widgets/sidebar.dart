@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 
 final sidebar = FSidebar(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(headerPadding: .fromLTRB(0, 16, 0, 0)),
   header: const Text('Header'),
   children: [
     FSidebarGroup(
@@ -28,7 +28,7 @@ final sidebar = FSidebar(
 
 final sidebarBuilder = FSidebar.builder(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(headerPadding: .fromLTRB(0, 16, 0, 0)),
   header: const Text('Header'),
   itemBuilder: (context, index) => FSidebarItem(label: Text('Item $index'), onPress: () {}),
   itemCount: 10,
@@ -43,7 +43,7 @@ final sidebarBuilder = FSidebar.builder(
 
 final sidebarRaw = FSidebar.raw(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(headerPadding: .fromLTRB(0, 16, 0, 0)),
   header: const Text('Header'),
   child: ListView(
     children: [FSidebarItem(label: const Text('Custom Item'), onPress: () {})],
@@ -59,7 +59,7 @@ final sidebarRaw = FSidebar.raw(
 
 final sidebarGroup = FSidebarGroup(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(padding: .symmetric(horizontal: 8)),
   label: const Text('Navigation'),
   action: const Icon(FIcons.plus),
   children: [
@@ -77,7 +77,7 @@ final sidebarGroup = FSidebarGroup(
 
 final sidebarItem = FSidebarItem(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(padding: .symmetric(horizontal: 8)),
   selected: false,
   initiallyExpanded: false,
   icon: const Icon(FIcons.house),

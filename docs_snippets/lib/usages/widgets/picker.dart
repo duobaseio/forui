@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 
 final picker = FPicker(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(spacing: 5),
   children: [
     FPickerWheel(children: [for (var i = 1; i <= 12; i++) Text('$i')]),
     const Text(':'),

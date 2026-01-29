@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 
 final dialog = FDialog(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(insetPadding: .zero),
   title: const Text('Title'),
   body: const Text('Body'),
   actions: [FButton(onPress: () {}, child: const Text('Action'))],
@@ -25,7 +25,7 @@ final dialog = FDialog(
 
 final adaptive = FDialog.adaptive(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(insetPadding: .zero),
   title: const Text('Title'),
   body: const Text('Body'),
   actions: [FButton(onPress: () {}, child: const Text('Action'))],
@@ -43,7 +43,7 @@ final adaptive = FDialog.adaptive(
 
 final raw = FDialog.raw(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(insetPadding: .zero),
   builder: (context, style) => const Text('Custom content'),
   // {@endcategory}
   // {@category "Layout"}
@@ -60,10 +60,10 @@ final raw = FDialog.raw(
 final show = showFDialog(
   // {@category "Core"}
   context: context,
-  style: (style) => style,
-  routeStyle: (style) => style,
+  style: const .delta(insetPadding: .zero),
+  routeStyle: const .delta(motion: .delta()),
   builder: (context, style, animation) => FDialog(
-    style: (_) => style,
+    style: .value(style),
     animation: animation,
     title: const Text('Title'),
     body: const Text('Body'),

@@ -28,7 +28,7 @@ import 'package:forui/src/widgets/toast/toaster_stack.dart';
 FToasterEntry showFToast({
   required BuildContext context,
   required Widget title,
-  FToastStyle Function(FToastStyle style)? style,
+  FToastStyleDelta? style,
   Widget? icon,
   Widget? description,
   Widget Function(BuildContext context, FToasterEntry entry)? suffixBuilder,
@@ -95,7 +95,7 @@ FToasterEntry showFToast({
 FToasterEntry showRawFToast({
   required BuildContext context,
   required Widget Function(BuildContext context, FToasterEntry entry) builder,
-  FToastStyle Function(FToastStyle style)? style,
+  FToastStyleDelta? style,
   FToastAlignment? alignment,
   List<AxisDirection>? swipeToDismiss,
   Duration? duration = const Duration(seconds: 5),
@@ -243,7 +243,7 @@ class FToaster extends StatefulWidget {
   static FToasterState of(BuildContext context) => context.findAncestorStateOfType<FToasterState>()!;
 
   /// The style.
-  final FToasterStyle Function(FToasterStyle style)? style;
+  final FToasterStyleDelta? style;
 
   /// The child.
   final Widget child;
@@ -273,7 +273,7 @@ class FToasterState extends State<FToaster> {
   FToasterEntry show({
     required Widget Function(BuildContext context, FToasterEntry entry) builder,
     BuildContext? context,
-    FToastStyle Function(FToastStyle style)? style,
+    FToastStyleDelta? style,
     FToastAlignment? alignment,
     List<AxisDirection>? swipeToDismiss,
     Duration? duration = const Duration(seconds: 5),

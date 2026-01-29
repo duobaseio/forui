@@ -33,7 +33,7 @@ void main() {
           child: FMultiSelect<String>.rich(
             key: key,
             format: Text.new,
-            style: TestScaffold.blueScreen.multiSelectStyle,
+            style: .value(TestScaffold.blueScreen.multiSelectStyle),
             children: [
               .richSection(
                 label: const Text('A'),
@@ -57,7 +57,7 @@ void main() {
           child: FMultiSelect<String>.rich(
             key: key,
             format: Text.new,
-            style: TestScaffold.blueScreen.multiSelectStyle,
+            style: .value(TestScaffold.blueScreen.multiSelectStyle),
             children: const [],
           ),
         ),
@@ -75,7 +75,7 @@ void main() {
           child: FMultiSelect<String>.rich(
             key: key,
             format: Text.new,
-            style: TestScaffold.blueScreen.multiSelectStyle,
+            style: .value(TestScaffold.blueScreen.multiSelectStyle),
             contentScrollHandles: true,
             children: [
               .richSection(
@@ -100,7 +100,7 @@ void main() {
           child: FMultiSelect<int>(
             key: key,
             items: const {'A': 1, 'B': 2},
-            style: TestScaffold.blueScreen.multiSelectStyle,
+            style: .value(TestScaffold.blueScreen.multiSelectStyle),
           ),
         ),
       );
@@ -117,7 +117,7 @@ void main() {
           child: FMultiSelect<String>.searchBuilder(
             key: key,
             format: Text.new,
-            style: TestScaffold.blueScreen.multiSelectStyle,
+            style: .value(TestScaffold.blueScreen.multiSelectStyle),
             contentScrollHandles: true,
             filter: (_) => [],
             contentBuilder: (_, _, _) => [for (int i = 0; i < 10; i++) .item(title: Text('$i'), value: '$i')],
@@ -137,7 +137,7 @@ void main() {
           child: FMultiSelect<String>.searchBuilder(
             key: key,
             format: Text.new,
-            style: TestScaffold.blueScreen.multiSelectStyle,
+            style: .value(TestScaffold.blueScreen.multiSelectStyle),
             contentScrollHandles: true,
             filter: (_) async {
               await Future.delayed(const Duration(seconds: 1));
@@ -160,7 +160,7 @@ void main() {
           child: FMultiSelect<int>.search(
             {for (int i = 0; i < 10; i++) '$i': i},
             key: key,
-            style: TestScaffold.blueScreen.multiSelectStyle,
+            style: .value(TestScaffold.blueScreen.multiSelectStyle),
             contentScrollHandles: true,
             filter: (_) => [],
           ),

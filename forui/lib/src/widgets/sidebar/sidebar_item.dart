@@ -27,7 +27,7 @@ class FSidebarItem extends StatefulWidget {
   /// ```shell
   /// dart run forui style create sidebar
   /// ```
-  final FSidebarItemStyle Function(FSidebarItemStyle style)? style;
+  final FSidebarItemStyleDelta? style;
 
   /// The icon to display before the label.
   final Widget? icon;

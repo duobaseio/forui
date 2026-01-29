@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 
 final checkbox = FCheckbox(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(size: 20),
   enabled: true,
   value: false,
   onChange: (value) {},

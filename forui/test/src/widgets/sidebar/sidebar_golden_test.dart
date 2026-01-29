@@ -10,7 +10,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.blue(
         child: FSidebar(
-          style: TestScaffold.blueScreen.sidebarStyle,
+          style: .value(TestScaffold.blueScreen.sidebarStyle),
           children: [
             FSidebarGroup(
               label: const Text('Group 1'),
@@ -136,7 +136,7 @@ void main() {
         TestScaffold(
           theme: theme.data,
           child: FSidebar(
-            style: (s) => s.copyWith(constraints: s.constraints.copyWith(minWidth: 500, maxWidth: 500)),
+            style: const .delta(constraints: BoxConstraints(minWidth: 500, maxWidth: 500)),
             header: const Text('Header'),
             footer: const Text('Footer'),
             children: [
@@ -213,12 +213,12 @@ void main() {
             children: [
               const Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
               FSidebar(
-                style: theme.data.sidebarStyle.copyWith(
-                  backgroundFilter: .blur(sigmaX: 5, sigmaY: 5),
-                  decoration: BoxDecoration(
+                style: .delta(
+                  backgroundFilter: () => .blur(sigmaX: 5, sigmaY: 5),
+                  decoration: .value(BoxDecoration(
                     color: theme.data.colors.background.withValues(alpha: 0.5),
                     borderRadius: theme.data.style.borderRadius,
-                  ),
+                  )),
                 ),
                 header: const Text('Header'),
                 footer: const Text('Footer'),

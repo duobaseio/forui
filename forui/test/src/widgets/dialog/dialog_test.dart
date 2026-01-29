@@ -119,7 +119,7 @@ void main() {
               onPress: () => showFDialog(
                 context: context,
                 builder: (context, style, animation) => FDialog(
-                  style: style,
+                  style: .value(style),
                   animation: animation,
                   title: const Text('Are you absolutely sure?'),
                   body: SingleChildScrollView(child: Container(height: 5000)),

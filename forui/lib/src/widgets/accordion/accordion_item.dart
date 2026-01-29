@@ -201,7 +201,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
             ),
           ),
         ),
-        FDivider(style: style.dividerStyle),
+        FDivider(style: .value(style.dividerStyle)),
       ],
     );
   }

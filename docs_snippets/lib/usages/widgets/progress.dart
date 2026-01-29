@@ -2,38 +2,38 @@
 
 import 'package:forui/forui.dart';
 
-final progress = FProgress(
+const progress = FProgress(
   // {@category "Core"}
-  style: (style) => style,
+  style: .delta(constraints: .tightFor(height: 10.0)),
   semanticsLabel: 'Loading',
   // {@endcategory}
 );
 
-final circularProgress = FCircularProgress(
+const circularProgress = FCircularProgress(
   // {@category "Core"}
-  style: (style) => style,
+  style: .delta(iconStyle: .delta()),
   icon: FIcons.loaderCircle,
   semanticsLabel: 'Loading',
   // {@endcategory}
 );
 
-final circularProgressLoader = FCircularProgress.loader(
+const circularProgressLoader = FCircularProgress.loader(
   // {@category "Core"}
-  style: (style) => style,
+  style: .delta(iconStyle: .delta()),
   semanticsLabel: 'Loading',
   // {@endcategory}
 );
 
-final circularProgressPinwheel = FCircularProgress.pinwheel(
+const circularProgressPinwheel = FCircularProgress.pinwheel(
   // {@category "Core"}
-  style: (style) => style,
+  style: .delta(iconStyle: .delta()),
   semanticsLabel: 'Loading',
   // {@endcategory}
 );
 
-final determinateProgress = FDeterminateProgress(
+const determinateProgress = FDeterminateProgress(
   // {@category "Core"}
-  style: (style) => style,
+  style: .delta(constraints: .tightFor(height: 10.0)),
   semanticsLabel: 'Loading 50%',
   value: 0.5,
   // {@endcategory}

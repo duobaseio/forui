@@ -7,7 +7,7 @@ import 'package:forui/forui.dart';
 final show = showFPersistentSheet(
   // {@category "Core"}
   context: context,
-  style: (style) => style,
+  style: const .delta(flingVelocity: 700),
   side: .btt,
   builder: (context, controller) => Padding(
     padding: const .all(16),

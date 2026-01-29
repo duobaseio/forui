@@ -8,6 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/theme/variant.dart';
 
 @internal
 class Input extends StatefulWidget {
@@ -31,7 +32,7 @@ class Input extends StatefulWidget {
   }
 
   final TextEditingController controller;
-  final FTextFieldStyle Function(FTextFieldStyle)? style;
+  final FTextFieldStyleDelta? style;
   final FFieldBuilder<FTextFieldStyle> builder;
   final Widget? label;
   final String? hint;
@@ -255,7 +256,7 @@ class _InputState extends State<Input> {
   @override
   Widget build(BuildContext context) {
     final style = widget.style?.call(context.theme.textFieldStyle) ?? context.theme.textFieldStyle;
-    final variants = _statesController.textFieldVariants;
+    final variants = toTextFieldVariants(_statesController.value);
 
     final textfield = TextField(
       controller: widget.controller,
@@ -325,7 +326,7 @@ class _InputState extends State<Input> {
       axis: .vertical,
       variants: variants as Set<FFormFieldVariant>,
       label: widget.label,
-      style: style,
+      style: .value(style),
       description: widget.description,
       // Error should never be null as doing so causes the widget tree to change. This causes overlays attached to
       // the textfield to fail as it is not smart enough to track the new location of the textfield in the widget tree.
@@ -376,7 +377,7 @@ class _InputState extends State<Input> {
   InputDecoration _decoration(FTextFieldStyle style) {
     final textDirection = Directionality.maybeOf(context) ?? .ltr;
     final padding = style.contentPadding.resolve(textDirection);
-    final variants = _statesController.textFieldVariants;
+    final variants = toTextFieldVariants(_statesController.value);
 
     final suffix = widget.suffixBuilder?.call(context, style, variants);
     final clear = widget.clearable(widget.controller.value)
@@ -423,15 +424,4 @@ class _InputState extends State<Input> {
     _statesController.dispose();
     super.dispose();
   }
-}
-
-@internal
-extension VariantsController on WidgetStatesController {
-  Set<FTextFieldVariant> get textFieldVariants => {
-    if (value.contains(WidgetState.disabled)) .disabled,
-    if (value.contains(WidgetState.error)) .error,
-    if (value.contains(WidgetState.focused)) .focused,
-    if (value.contains(WidgetState.hovered)) .hovered,
-    if (value.contains(WidgetState.pressed)) .pressed,
-  };
 }

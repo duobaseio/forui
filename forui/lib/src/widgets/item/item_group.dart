@@ -20,7 +20,7 @@ mixin FItemGroupMixin on Widget {
   /// {@macro forui.widgets.FItemGroup.new}
   static FItemGroup group({
     required List<FItemMixin> children,
-    FItemGroupStyle Function(FItemGroupStyle style)? style,
+    FItemGroupStyleDelta? style,
     ScrollController? scrollController,
     double? cacheExtent,
     double maxHeight = .infinity,
@@ -48,7 +48,7 @@ mixin FItemGroupMixin on Widget {
   static FItemGroup builder({
     required NullableIndexedWidgetBuilder itemBuilder,
     int? count,
-    FItemGroupStyle Function(FItemGroupStyle style)? style,
+    FItemGroupStyleDelta? style,
     ScrollController? scrollController,
     double? cacheExtent,
     double maxHeight = .infinity,
@@ -76,7 +76,7 @@ mixin FItemGroupMixin on Widget {
   /// {@macro forui.widgets.FItemGroup.merge}
   static FItemGroup merge({
     required List<FItemGroupMixin> children,
-    FItemGroupStyle Function(FItemGroupStyle style)? style,
+    FItemGroupStyleDelta? style,
     ScrollController? scrollController,
     double? cacheExtent,
     double maxHeight = .infinity,
@@ -144,7 +144,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
   /// ```shell
   /// dart run forui style create item-group
   /// ```
-  final FItemGroupStyle Function(FItemGroupStyle style)? style;
+  final FItemGroupStyleDelta? style;
 
   /// {@template forui.widgets.FItemGroup.scrollController}
   /// The scroll controller used to control the position to which this group is scrolled.
@@ -332,7 +332,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
   /// This function is a shorthand for [FItemGroup.new].
   FItemGroup.group({
     required List<FItemMixin> children,
-    FItemGroupStyle Function(FItemGroupStyle style)? style,
+    FItemGroupStyleDelta? style,
     ScrollController? scrollController,
     double? cacheExtent,
     double maxHeight = .infinity,

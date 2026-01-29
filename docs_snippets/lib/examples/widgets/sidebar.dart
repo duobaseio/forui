@@ -28,7 +28,7 @@ class SidebarPage extends Example {
                 colorFilter: ColorFilter.mode(context.theme.colors.foreground, .srcIn),
               ),
             ),
-            FDivider(style: context.theme.dividerStyles.horizontalStyle.copyWith(padding: .zero)),
+            const FDivider(style: .delta(padding: .zero)),
           ],
         ),
       ),
@@ -158,7 +158,7 @@ class SheetSidebarPage extends Example {
         builder: (context) => DecoratedBox(
           decoration: BoxDecoration(color: context.theme.colors.background),
           child: FSidebar(
-            style: (s) => s.copyWith(constraints: s.constraints.copyWith(minWidth: 300, maxWidth: 300)),
+            style: const .delta(constraints: BoxConstraints(minWidth: 300, maxWidth: 300)),
             header: Padding(
               padding: const .symmetric(horizontal: 16),
               child: Column(
@@ -174,7 +174,7 @@ class SheetSidebarPage extends Example {
                       colorFilter: ColorFilter.mode(context.theme.colors.foreground, .srcIn),
                     ),
                   ),
-                  FDivider(style: context.theme.dividerStyles.horizontalStyle.copyWith(padding: EdgeInsets.zero)),
+                  const FDivider(style: .delta(padding: .zero)),
                 ],
               ),
             ),
@@ -257,7 +257,7 @@ class CustomWidthSidebarPage extends Example {
   @override
   Widget example(BuildContext _) => FSidebar(
     // {@highlight}
-    style: (s) => s.copyWith(constraints: s.constraints.copyWith(minWidth: 500, maxWidth: 500)),
+    style: const .delta(constraints: BoxConstraints(minWidth: 500, maxWidth: 500)),
     // {@endhighlight}
     children: [
       FSidebarGroup(
@@ -291,7 +291,7 @@ class NestedSidebarPage extends Example {
 
   @override
   Widget example(BuildContext _) => FSidebar(
-    style: (s) => s.copyWith(constraints: s.constraints.copyWith(minWidth: 300, maxWidth: 300)),
+    style: const .delta(constraints: BoxConstraints(minWidth: 300, maxWidth: 300)),
     children: [
       FSidebarGroup(
         children: [

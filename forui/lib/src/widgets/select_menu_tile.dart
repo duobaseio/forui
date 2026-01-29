@@ -66,7 +66,7 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
   /// ```shell
   /// dart run forui style create select-menu-tile
   /// ```
-  final FSelectMenuTileStyle Function(FSelectMenuTileStyle style)? style;
+  final FSelectMenuTileStyleDelta? style;
 
   /// The divider between select tiles. Defaults to [FItemDivider.indented].
   final FItemDivider divider;
@@ -259,7 +259,7 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
     FMultiValueControl<T>? selectControl,
     FPopoverControl popoverControl = const .managed(),
     ScrollController? scrollController,
-    FSelectMenuTileStyle Function(FSelectMenuTileStyle style)? style,
+    FSelectMenuTileStyleDelta? style,
     double? cacheExtent,
     double maxHeight = .infinity,
     DragStartBehavior dragStartBehavior = .start,
@@ -537,7 +537,7 @@ class _FSelectMenuTileState<T> extends State<FSelectMenuTile<T>> with TickerProv
           // See https://stackoverflow.com/a/59410824/4189771
           key: GlobalObjectKey(_controller._popover),
           control: .managed(controller: _controller._popover),
-          style: menuStyle,
+          style: .value(menuStyle),
           constraints: FPortalConstraints(maxWidth: menuStyle.maxWidth),
           popoverAnchor: widget.menuAnchor,
           childAnchor: widget.tileAnchor,
@@ -586,7 +586,7 @@ class _FSelectMenuTileState<T> extends State<FSelectMenuTile<T>> with TickerProv
             );
           },
           child: FTile(
-            style: tileStyle,
+            style: .value(tileStyle),
             prefix: widget.prefix,
             enabled: widget.enabled,
             title: widget.title,
@@ -609,7 +609,7 @@ class _FSelectMenuTileState<T> extends State<FSelectMenuTile<T>> with TickerProv
 
           tile = FLabel(
             axis: .vertical,
-            style: selectMenuTileStyle ?? global,
+            style: .value(selectMenuTileStyle ?? global),
             variants: variants,
             label: widget.label,
             description: widget.description,

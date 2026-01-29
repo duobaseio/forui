@@ -4,7 +4,7 @@ import 'package:forui/forui.dart';
 
 final lineCalendar = FLineCalendar(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(padding: .zero),
   start: .utc(1900),
   end: .utc(2100),
   today: .now(),

@@ -135,7 +135,7 @@ class InheritedAccordionData extends InheritedWidget {
 
 /// The [FAccordion]'s style.
 class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
-  /// The title's text style..
+  /// The title's text style.
   @override
   final FVariants<FTappableVariantConstraint, TextStyle, TextStyleDelta> titleTextStyle;
 

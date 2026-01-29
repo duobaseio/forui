@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 
 final multiSelect = FMultiSelect<String>(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(emptyTextStyle: .delta()),
   enabled: true,
   items: const {'Apple': 'apple', 'Banana': 'banana', 'Cherry': 'cherry'},
   // {@endcategory}
@@ -60,7 +60,7 @@ final multiSelect = FMultiSelect<String>(
 
 final multiSelectRich = FMultiSelect<String>.rich(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(emptyTextStyle: .delta()),
   enabled: true,
   format: Text.new,
   children: [
@@ -120,7 +120,7 @@ final multiSelectRich = FMultiSelect<String>.rich(
 final multiSelectSearch = FMultiSelect<String>.search(
   // {@category "Core"}
   const {'Apple': 'apple', 'Banana': 'banana', 'Cherry': 'cherry'},
-  style: (style) => style,
+  style: const .delta(emptyTextStyle: .delta()),
   enabled: true,
   filter: (query) => ['apple', 'banana', 'cherry'].where((e) => e.startsWith(query)),
   // {@endcategory}
@@ -177,7 +177,7 @@ final multiSelectSearch = FMultiSelect<String>.search(
 
 final multiSelectSearchBuilder = FMultiSelect<String>.searchBuilder(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(emptyTextStyle: .delta()),
   enabled: true,
   filter: (query) => ['apple', 'banana', 'cherry'].where((e) => e.startsWith(query)),
   format: Text.new,

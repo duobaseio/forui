@@ -36,7 +36,7 @@ class FCheckbox extends StatelessWidget {
   /// ```shell
   /// dart run forui style create checkbox
   /// ```
-  final FCheckboxStyle Function(FCheckboxStyle style)? style;
+  final FCheckboxStyleDelta? style;
 
   /// The label displayed next to the checkbox.
   final Widget? label;
@@ -107,7 +107,7 @@ class FCheckbox extends StatelessWidget {
         return FLabel(
           axis: .horizontal,
           variants: formVariants,
-          style: style,
+          style: .value(style),
           label: label,
           description: description,
           error: error,

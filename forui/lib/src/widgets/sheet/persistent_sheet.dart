@@ -67,7 +67,7 @@ FPersistentSheetController showFPersistentSheet({
   required BuildContext context,
   required FLayout side,
   required Widget Function(BuildContext context, FPersistentSheetController controller) builder,
-  FPersistentSheetStyle Function(FPersistentSheetStyle)? style,
+  FPersistentSheetStyleDelta? style,
   double? mainAxisMaxRatio = 9 / 16,
   BoxConstraints constraints = const BoxConstraints(),
   bool draggable = true,

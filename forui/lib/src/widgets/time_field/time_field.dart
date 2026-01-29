@@ -67,7 +67,7 @@ abstract class FTimeField extends StatefulWidget {
   /// ```shell
   /// dart run forui style create time-field
   /// ```
-  final FTimeFieldStyle Function(FTimeFieldStyle style)? style;
+  final FTimeFieldStyleDelta? style;
 
   /// True if the time field should use the 24-hour format.
   ///
@@ -177,7 +177,7 @@ abstract class FTimeField extends StatefulWidget {
   const factory FTimeField({
     FTimeFieldControl control,
     FPopoverControl popoverControl,
-    FTimeFieldStyle Function(FTimeFieldStyle style)? style,
+    FTimeFieldStyleDelta? style,
     bool hour24,
     bool autofocus,
     FocusNode? focusNode,
@@ -252,7 +252,7 @@ abstract class FTimeField extends StatefulWidget {
   const factory FTimeField.picker({
     FTimeFieldControl control,
     FPopoverControl popoverControl,
-    FTimeFieldStyle Function(FTimeFieldStyle style)? style,
+    FTimeFieldStyleDelta? style,
     bool hour24,
     DateFormat? format,
     TextAlign textAlign,

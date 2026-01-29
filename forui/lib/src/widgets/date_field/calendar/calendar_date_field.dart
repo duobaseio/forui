@@ -187,7 +187,7 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
       builder: (state) => FTextField(
         control: .managed(controller: _textController),
         focusNode: _focus,
-        style: style.fieldStyle,
+        style: .value(style.fieldStyle),
         textAlign: widget.textAlign,
         textAlignVertical: widget.textAlignVertical,
         textDirection: widget.textDirection,
@@ -257,7 +257,7 @@ class _CalendarPopover extends StatelessWidget {
   Widget build(BuildContext _) => FPopover(
     control: .managed(controller: popoverController),
     traversalEdgeBehavior: .parentScope,
-    style: style.popoverStyle,
+    style: .value(style.popoverStyle),
     popoverAnchor: properties.anchor,
     childAnchor: properties.fieldAnchor,
     spacing: properties.spacing,
@@ -272,7 +272,7 @@ class _CalendarPopover extends StatelessWidget {
         valueListenable: calendarController,
         builder: (_, value, _) => FCalendar(
           control: .managedDate(controller: calendarController),
-          style: style.calendarStyle,
+          style: .value(style.calendarStyle),
           initialMonth: switch (value) {
             null => null,
             _ when value.isBefore(properties.start ?? .utc(1900)) => properties.today,

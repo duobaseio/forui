@@ -55,7 +55,7 @@ abstract class FDateField extends StatefulWidget {
   /// ```shell
   /// dart run forui style create date-field
   /// ```
-  final FDateFieldStyle Function(FDateFieldStyle style)? style;
+  final FDateFieldStyleDelta? style;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
@@ -170,7 +170,7 @@ abstract class FDateField extends StatefulWidget {
   const factory FDateField({
     FDateFieldControl control,
     FPopoverControl popoverControl,
-    FDateFieldStyle Function(FDateFieldStyle style)? style,
+    FDateFieldStyleDelta? style,
     FocusNode? focusNode,
     TextInputAction? textInputAction,
     TextAlign textAlign,
@@ -253,7 +253,7 @@ abstract class FDateField extends StatefulWidget {
   const factory FDateField.calendar({
     FDateFieldControl control,
     FPopoverControl popoverControl,
-    FDateFieldStyle Function(FDateFieldStyle style)? style,
+    FDateFieldStyleDelta? style,
     DateFormat? format,
     TextAlign textAlign,
     TextAlignVertical? textAlignVertical,
@@ -324,7 +324,7 @@ abstract class FDateField extends StatefulWidget {
   /// * [FDateField.calendar] - Creates a date field with only a calendar.
   const factory FDateField.input({
     FDateFieldControl control,
-    FDateFieldStyle Function(FDateFieldStyle style)? style,
+    FDateFieldStyleDelta? style,
     bool autofocus,
     FocusNode? focusNode,
     FFieldBuilder<FDateFieldStyle> builder,

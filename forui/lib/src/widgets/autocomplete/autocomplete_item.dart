@@ -26,7 +26,7 @@ mixin FAutocompleteItemMixin on Widget {
   static FAutocompleteSection section({
     required Widget label,
     required List<String> items,
-    FAutocompleteSectionStyle Function(FAutocompleteSectionStyle style)? style,
+    FAutocompleteSectionStyleDelta? style,
     bool? enabled,
     FItemDivider divider = .none,
     Key? key,
@@ -38,7 +38,7 @@ mixin FAutocompleteItemMixin on Widget {
   static FAutocompleteSection richSection({
     required Widget label,
     required List<FAutocompleteItem> children,
-    FAutocompleteSectionStyle Function(FAutocompleteSectionStyle style)? style,
+    FAutocompleteSectionStyleDelta? style,
     bool? enabled,
     FItemDivider divider = .none,
     Key? key,
@@ -51,7 +51,7 @@ mixin FAutocompleteItemMixin on Widget {
   /// This function is a shorthand for [FAutocompleteItem.new].
   static FAutocompleteItem item({
     required String value,
-    FItemStyle Function(FItemStyle style)? style,
+    FItemStyleDelta? style,
     bool? enabled,
     Widget? prefix,
     Widget? title,
@@ -75,7 +75,7 @@ mixin FAutocompleteItemMixin on Widget {
   static FAutocompleteItem rawItem({
     required Widget child,
     required String value,
-    FItemStyle Function(FItemStyle style)? style,
+    FItemStyleDelta? style,
     bool? enabled,
     Widget? prefix,
     Key? key,
@@ -92,7 +92,7 @@ class FAutocompleteSection extends StatelessWidget with FAutocompleteItemMixin {
   /// ```shell
   /// dart run forui style create autocomplete-section
   /// ```
-  final FAutocompleteSectionStyle Function(FAutocompleteSectionStyle style)? style;
+  final FAutocompleteSectionStyleDelta? style;
 
   /// True if the section is enabled. Disabled sections cannot be selected, and is skipped during traversal.
   ///
@@ -117,7 +117,7 @@ class FAutocompleteSection extends StatelessWidget with FAutocompleteItemMixin {
   FAutocompleteSection({
     required Widget label,
     required List<String> items,
-    FAutocompleteSectionStyle Function(FAutocompleteSectionStyle style)? style,
+    FAutocompleteSectionStyleDelta? style,
     bool? enabled,
     FItemDivider divider = .none,
     Key? key,
@@ -304,7 +304,7 @@ abstract class FAutocompleteItem extends StatelessWidget with FAutocompleteItemM
   /// ```shell
   /// dart run forui style create autocomplete-section
   /// ```
-  final FItemStyle Function(FItemStyle style)? style;
+  final FItemStyleDelta? style;
 
   /// The value.
   final String value;
@@ -324,7 +324,7 @@ abstract class FAutocompleteItem extends StatelessWidget with FAutocompleteItemM
   /// {@endtemplate}
   factory FAutocompleteItem({
     required String value,
-    FItemStyle Function(FItemStyle style)? style,
+    FItemStyleDelta? style,
     bool? enabled,
     Widget? prefix,
     Widget? title,
@@ -341,7 +341,7 @@ abstract class FAutocompleteItem extends StatelessWidget with FAutocompleteItemM
   /// For even more control over the item's appearance, use [FAutocompleteItem.raw].
   factory FAutocompleteItem.item({
     required String value,
-    FItemStyle Function(FItemStyle style)? style,
+    FItemStyleDelta? style,
     bool? enabled,
     Widget? prefix,
     Widget? title,
@@ -359,7 +359,7 @@ abstract class FAutocompleteItem extends StatelessWidget with FAutocompleteItemM
   factory FAutocompleteItem.raw({
     required Widget child,
     required String value,
-    FItemStyle Function(FItemStyle style)? style,
+    FItemStyleDelta? style,
     bool? enabled,
     Widget? prefix,
     Key? key,
@@ -400,10 +400,9 @@ class _AutocompleteItem extends FAutocompleteItem {
     final content = ContentData.of(context);
 
     final enabled = this.enabled ?? content.enabled;
-    final style = this.style?.call(content.style.itemStyle);
 
     return FItem(
-      style: style?.call,
+      style: style,
       enabled: enabled,
       onPress: () => onPress(value),
       onFocusChange: (focused) {
@@ -437,10 +436,9 @@ class _RawAutocompleteItem extends FAutocompleteItem {
     final content = ContentData.of(context);
 
     final enabled = this.enabled ?? content.enabled;
-    final style = this.style?.call(content.style.itemStyle);
 
     return FItem.raw(
-      style: style?.call,
+      style: style,
       enabled: enabled,
       onPress: () => onPress(value),
       onFocusChange: (focused) {

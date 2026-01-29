@@ -274,17 +274,18 @@ class BlurredPopoverPage extends Example {
         ],
       ),
       FPopover(
-        style: context.theme.popoverStyle.copyWith(
-          // {@highlight}
-          barrierFilter: (animation) => ImageFilter.compose(
-            outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
-            inner: ColorFilter.mode(
-              Color.lerp(Colors.transparent, Colors.black.withValues(alpha: 0.2), animation)!,
-              .srcOver,
-            ),
-          ),
-          // {@endhighlight}
+        // {@highlight}
+        style: .delta(
+          barrierFilter: () =>
+              (animation) => .compose(
+                outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
+                inner: ColorFilter.mode(
+                  Color.lerp(Colors.transparent, Colors.black.withValues(alpha: 0.2), animation)!,
+                  .srcOver,
+                ),
+              ),
         ),
+        // {@endhighlight}
         popoverAnchor: .topCenter,
         childAnchor: .bottomCenter,
         popoverBuilder: (context, _) => Padding(

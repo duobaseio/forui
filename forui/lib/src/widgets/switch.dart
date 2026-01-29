@@ -32,7 +32,7 @@ class FSwitch extends StatelessWidget {
   /// ```shell
   /// dart run forui style create switch
   /// ```
-  final FSwitchStyle Function(FSwitchStyle style)? style;
+  final FSwitchStyleDelta? style;
 
   /// The label displayed next to the switch.
   final Widget? label;
@@ -121,7 +121,7 @@ class FSwitch extends StatelessWidget {
           child: FLabel(
             axis: .horizontal,
             variants: formVariants,
-            style: style,
+            style: .value(style),
             label: label,
             description: description,
             error: error,

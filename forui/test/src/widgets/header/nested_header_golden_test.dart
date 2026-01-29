@@ -14,7 +14,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.blue(
         child: FHeader.nested(
-          style: TestScaffold.blueScreen.headerStyles.nestedStyle,
+          style: .value(TestScaffold.blueScreen.headerStyles.nestedStyle),
           title: const Text('Title'),
           prefixes: [
             FHeaderAction.back(onPress: () {}),
@@ -64,9 +64,9 @@ void main() {
                 children: [
                   const Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
                   FHeader.nested(
-                    style: theme.data.headerStyles.nestedStyle.copyWith(
-                      backgroundFilter: .blur(sigmaX: 5, sigmaY: 5),
-                      decoration: BoxDecoration(color: theme.data.colors.background.withValues(alpha: 0.5)),
+                    style: .delta(
+                      backgroundFilter: () => .blur(sigmaX: 5, sigmaY: 5),
+                      decoration: .value(BoxDecoration(color: theme.data.colors.background.withValues(alpha: 0.5))),
                     ),
                     title: const Text('Title'),
                     prefixes: [

@@ -53,7 +53,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
   /// ```shell
   /// dart run forui style create tile-group
   /// ```
-  final FTileGroupStyle Function(FTileGroupStyle style)? style;
+  final FTileGroupStyleDelta? style;
 
   /// {@template forui.widgets.FTileGroup.scrollController}
   /// The scroll controller used to control the position to which this group is scrolled.
@@ -270,7 +270,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
     }
 
     return FLabel(
-      style: style,
+      style: .value(style),
       axis: .vertical,
       variants: {if (!enabled) .disabled, if (error != null) .error},
       label: label,

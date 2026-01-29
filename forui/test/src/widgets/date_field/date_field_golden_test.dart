@@ -12,7 +12,7 @@ void main() {
   testWidgets('blue screen', (tester) async {
     await tester.pumpWidget(
       TestScaffold.blue(
-        child: FDateField(style: TestScaffold.blueScreen.dateFieldStyle, key: key),
+        child: FDateField(style: .value(TestScaffold.blueScreen.dateFieldStyle), key: key),
       ),
     );
 

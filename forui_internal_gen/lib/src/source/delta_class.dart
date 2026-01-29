@@ -213,8 +213,8 @@ class DeltaClass {
     }
 
     // Enums and nullable types without explicit sentinel values
-    if (enumeration.isAssignableFromType(field.type) ||
-        (field.type.nullabilitySuffix == .question && !_sentinels.containsKey(field.name))) {
+    if (field.type.nullabilitySuffix == .question &&
+        (enumeration.isAssignableFromType(field.type) || !_sentinels.containsKey(field.name))) {
       return ('$typeName Function()?', '$name == null ? original.$name : $name!()', null);
     }
 

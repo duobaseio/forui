@@ -1,8 +1,28 @@
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/src/theme/variant.dart';
 
 void main() {
+  group('toVariants', () {
+    for (final (states, expected) in [
+      (<WidgetState>{}, <FVariant>{}),
+      ({WidgetState.disabled}, {const FVariant(2, 'disabled')}),
+      ({WidgetState.error}, {const FVariant(2, 'error')}),
+      ({WidgetState.selected}, {const FVariant(2, 'selected')}),
+      ({WidgetState.focused}, {const FVariant(1, 'focused')}),
+      ({WidgetState.hovered}, {const FVariant(1, 'hovered')}),
+      ({WidgetState.pressed}, {const FVariant(1, 'pressed')}),
+      ({WidgetState.dragged}, {const FVariant(1, 'dragged')}),
+      ({WidgetState.disabled, WidgetState.focused}, {const FVariant(2, 'disabled'), const FVariant(1, 'focused')}),
+      (
+        {WidgetState.error, WidgetState.hovered, WidgetState.pressed},
+        {const FVariant(2, 'error'), const FVariant(1, 'hovered'), const FVariant(1, 'pressed')},
+      ),
+    ]) {
+      test('$states', () => expect(toVariants(states), expected));
+    }
+  });
   group('FVariantConstraint', () {
     // Tier 1 variants (interaction)
     const a = FVariant(1, 'a');

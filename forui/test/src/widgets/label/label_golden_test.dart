@@ -12,7 +12,7 @@ void main() {
         child: SizedBox(
           width: 300,
           child: FLabel(
-            style: TestScaffold.blueScreen.labelStyles.horizontalStyle,
+            style: .value(TestScaffold.blueScreen.labelStyles.horizontalStyle),
             axis: .horizontal,
             label: const Text('Email'),
             description: const Text('Enter your email address.'),

@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 
 final slider = FSlider(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(thumbSize: 20),
   enabled: true,
   layout: .ltr,
   marks: const [FSliderMark(value: 0), FSliderMark(value: 0.5), FSliderMark(value: 1)],

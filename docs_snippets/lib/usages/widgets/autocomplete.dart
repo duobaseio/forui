@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 
 final autocomplete = FAutocomplete(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(fieldStyle: .delta(contentPadding: .zero)),
   enabled: true,
   hint: 'Hint',
   items: const ['Apple', 'Banana', 'Cherry'],
@@ -103,7 +103,7 @@ final autocomplete = FAutocomplete(
 
 final builder = FAutocomplete.builder(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(fieldStyle: .delta(contentPadding: .zero)),
   enabled: true,
   filter: (query) => ['Apple', 'Banana'].where((item) => item.toLowerCase().startsWith(query.toLowerCase())),
   contentBuilder: (context, query, values) => [for (final value in values) .item(value: value)],

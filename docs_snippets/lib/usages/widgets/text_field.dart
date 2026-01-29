@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 
 final textField = FTextField(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(contentPadding: .symmetric(horizontal: 10)),
   enabled: true,
   label: const Text('Label'),
   hint: 'Enter text...',
@@ -85,7 +85,7 @@ final textField = FTextField(
 
 final textFieldEmail = FTextField.email(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(contentPadding: .symmetric(horizontal: 10)),
   enabled: true,
   label: const Text('Email'),
   hint: 'Enter email...',
@@ -164,7 +164,7 @@ final textFieldEmail = FTextField.email(
 
 final textFieldMultiline = FTextField.multiline(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(contentPadding: .symmetric(horizontal: 10)),
   enabled: true,
   label: const Text('Label'),
   hint: 'Enter text...',
@@ -243,7 +243,7 @@ final textFieldMultiline = FTextField.multiline(
 
 final textFieldPassword = FTextField.password(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(contentPadding: .symmetric(horizontal: 10)),
   enabled: true,
   label: const Text('Password'),
   hint: 'Enter password...',

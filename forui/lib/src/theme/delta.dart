@@ -264,6 +264,9 @@ final class _TextDecorationSentinel implements TextDecoration {
 
   @override
   bool contains(TextDecoration other) => throw UnimplementedError();
+
+  // This needs to be provided: https://github.com/flutter/flutter/issues/181662
+  int get maskValue => 0;
 }
 
 /// A delta that applies modifications to a [TextStyle].

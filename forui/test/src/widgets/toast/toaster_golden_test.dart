@@ -67,10 +67,10 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.blue(
         child: FToaster(
-          style: TestScaffold.blueScreen.toasterStyle,
+          style: .value(TestScaffold.blueScreen.toasterStyle),
           child: Builder(
             builder: (context) => FButton(
-              style: TestScaffold.blueScreen.buttonStyles.primary,
+              style: (_) => TestScaffold.blueScreen.buttonStyles.primary,
               onPress: () => showRawFToast(
                 context: context,
                 builder: (_, _) => Container(color: TestScaffold.blueScreen.colors.foreground, width: 100, height: 100),
@@ -316,7 +316,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             child: FToaster(
-              style: FThemes.zinc.light.toasterStyle.copyWith(expandBehavior: .always),
+              style: const .delta(expandBehavior: .always),
               child: Center(
                 child: Column(mainAxisSize: .min, children: [small('1'), small('2'), big('3')]),
               ),
@@ -336,7 +336,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             child: FToaster(
-              style: FThemes.zinc.light.toasterStyle.copyWith(expandBehavior: .always),
+              style: const .delta(expandBehavior: .always),
               child: Center(
                 child: Column(mainAxisSize: .min, children: [small('1'), small('2'), big('3')]),
               ),
@@ -362,7 +362,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             child: FToaster(
-              style: FThemes.zinc.light.toasterStyle.copyWith(expandBehavior: .disabled),
+              style: const .delta(expandBehavior: .disabled),
               child: Center(
                 child: Column(mainAxisSize: .min, children: [small('1'), small('2'), big('3')]),
               ),
@@ -533,7 +533,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             child: FToaster(
-              style: FThemes.zinc.light.toasterStyle.copyWith(expandBehavior: .disabled),
+              style: const .delta(expandBehavior: .disabled),
               child: Center(
                 child: Column(mainAxisSize: .min, children: [small('1'), small('2'), big('3')]),
               ),
@@ -559,7 +559,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             child: FToaster(
-              style: FThemes.zinc.light.toasterStyle.copyWith(expandBehavior: .disabled),
+              style: const .delta(expandBehavior: .disabled),
               child: Center(
                 child: Column(mainAxisSize: .min, children: [small('1'), small('2'), big('3')]),
               ),

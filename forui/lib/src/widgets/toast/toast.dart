@@ -12,7 +12,7 @@ import 'package:forui/forui.dart';
 /// * [FToastStyle] for customizing a toast's appearance.
 class FToast extends StatelessWidget {
   /// The toast's style.
-  final FToastStyle Function(FToastStyle style)? style;
+  final FToastStyleDelta? style;
 
   /// An optional icon aligned to the start of the toast (left in LTR locales).
   final Widget? icon;

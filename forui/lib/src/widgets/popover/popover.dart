@@ -118,7 +118,7 @@ class FPopover extends StatefulWidget {
   /// ```shell
   /// dart run forui style create popover
   /// ```
-  final FPopoverStyle Function(FPopoverStyle style)? style;
+  final FPopoverStyleDelta? style;
 
   /// The popover's size constraints.
   final FPortalConstraints constraints;

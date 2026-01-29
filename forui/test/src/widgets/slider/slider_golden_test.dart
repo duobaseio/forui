@@ -14,7 +14,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.blue(
         child: FSlider(
-          style: TestScaffold.blueScreen.sliderStyles.horizontalStyle,
+          style: .value(TestScaffold.blueScreen.sliderStyles.horizontalStyle),
           control: .managedContinuous(initial: FSliderValue(min: 0.30, max: 0.60)),
           marks: const [
             .mark(value: 0.0, label: Text('0')),
@@ -141,7 +141,7 @@ void main() {
               TestScaffold.app(
                 theme: theme.data,
                 child: FSlider(
-                  style: layout.vertical ? styles.verticalStyle : styles.horizontalStyle,
+                  style: .value(layout.vertical ? styles.verticalStyle : styles.horizontalStyle),
                   label: const Text('Label'),
                   description: const Text('Description'),
                   control: .managedContinuousRange(initial: FSliderValue(min: 0.30, max: 0.60)),
@@ -186,7 +186,7 @@ void main() {
             TestScaffold.app(
               theme: theme.data,
               child: FSlider(
-                style: layout.vertical ? styles.verticalStyle : styles.horizontalStyle,
+                style: .value(layout.vertical ? styles.verticalStyle : styles.horizontalStyle),
                 label: const Text('Label'),
                 description: const Text('Description'),
                 forceErrorText: 'Error',
@@ -225,7 +225,7 @@ void main() {
             TestScaffold.app(
               theme: theme.data,
               child: FSlider(
-                style: layout.vertical ? styles.verticalStyle : styles.horizontalStyle,
+                style: .value(layout.vertical ? styles.verticalStyle : styles.horizontalStyle),
                 label: const Text('Label'),
                 description: const Text('Description'),
                 forceErrorText: 'Error',
@@ -346,7 +346,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             child: FSlider(
-              style: sliderStyle.copyWith(childPadding: const .only(left: 20, top: 40, right: 10, bottom: 30)),
+              style: const .delta(childPadding: .only(left: 20, top: 40, right: 10, bottom: 30)),
               control: .managedContinuous(initial: FSliderValue(min: 0.30, max: 0.60)),
               layout: layout,
               marks: marks,

@@ -17,7 +17,7 @@ part 'circular_progress.design.dart';
 /// * [FProgress] for for an indeterminate linear progress indicator.
 class FCircularProgress extends StatefulWidget {
   /// The style.
-  final FCircularProgressStyle Function(FCircularProgressStyle style)? style;
+  final FCircularProgressStyleDelta? style;
 
   /// The semantics label. Defaults to [FLocalizations.progressSemanticsLabel].
   final String? semanticsLabel;

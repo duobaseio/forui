@@ -37,7 +37,7 @@ class FResizable extends StatefulWidget {
   /// ```shell
   /// dart run forui style create resizable
   /// ```
-  final FResizableStyle Function(FResizableStyle style)? style;
+  final FResizableStyleDelta? style;
 
   /// The main axis along which the [children] can be resized.
   final Axis axis;

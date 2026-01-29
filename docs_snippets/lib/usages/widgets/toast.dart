@@ -14,17 +14,17 @@ const toast = FToast(
   // {@endcategory}
 );
 
-final toaster = FToaster(
+const toaster = FToaster(
   // {@category "Core"}
-  style: (style) => style,
-  child: const Placeholder(),
+  style: .delta(padding: .all(16)),
+  child: Placeholder(),
   // {@endcategory}
 );
 
 final showToast = showFToast(
   // {@category "Core"}
   context: context,
-  style: (style) => style,
+  style: const .delta(padding: .all(16)),
   icon: const Icon(FIcons.info),
   title: const Text('Title'),
   description: const Text('Description'),
@@ -40,7 +40,7 @@ final showToast = showFToast(
 final showRawToast = showRawFToast(
   // {@category "Core"}
   context: context,
-  style: (style) => style,
+  style: const .delta(padding: .all(16)),
   builder: (context, entry) => const Text('Custom toast content'),
   // {@endcategory}
   // {@category "Behavior"}

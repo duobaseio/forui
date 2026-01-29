@@ -45,7 +45,7 @@ class FScaffold extends StatelessWidget {
   /// ```shell
   /// dart run forui style create scaffold
   /// ```
-  final FScaffoldStyle Function(FScaffoldStyle style)? scaffoldStyle;
+  final FScaffoldStyleDelta? scaffoldStyle;
 
   /// The main content area of the scaffold.
   final Widget child;

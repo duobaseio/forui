@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 
 final resizable = FResizable(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(horizontalDividerStyle: .delta()),
   axis: .vertical,
   divider: .dividerWithThumb,
   children: [

@@ -19,7 +19,7 @@ typedef FPasswordFieldIconBuilder<T> =
 
 @internal
 class PasswordFieldProperties with Diagnosticable {
-  final FTextFieldStyle Function(FTextFieldStyle style)? style;
+  final FTextFieldStyleDelta? style;
   final FFieldBuilder<FTextFieldStyle> builder;
   final Widget? label;
   final String? hint;

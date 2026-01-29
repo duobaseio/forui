@@ -4,14 +4,14 @@ import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
 
-final scaffold = FScaffold(
+const scaffold = FScaffold(
   // {@category "Core"}
-  scaffoldStyle: (style) => style,
+  scaffoldStyle: .delta(childPadding: .zero),
   childPad: true,
   resizeToAvoidBottomInset: true,
-  header: const Text('Header'),
-  sidebar: const Text('Sidebar'),
-  footer: const Text('Footer'),
-  child: const Text('Content'),
+  header: Text('Header'),
+  sidebar: Text('Sidebar'),
+  footer: Text('Footer'),
+  child: Text('Content'),
   // {@endcategory}
 );

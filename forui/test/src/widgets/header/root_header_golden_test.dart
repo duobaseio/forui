@@ -14,7 +14,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.blue(
         child: FHeader(
-          style: TestScaffold.blueScreen.headerStyles.rootStyle,
+          style: .value(TestScaffold.blueScreen.headerStyles.rootStyle),
           title: const Text('Title'),
           suffixes: [
             FHeaderAction.back(onPress: () {}),
@@ -56,9 +56,9 @@ void main() {
                 children: [
                   const Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
                   FHeader(
-                    style: theme.data.headerStyles.rootStyle.copyWith(
-                      backgroundFilter: .blur(sigmaX: 5, sigmaY: 5),
-                      decoration: BoxDecoration(color: theme.data.colors.background.withValues(alpha: 0.5)),
+                    style: .delta(
+                      backgroundFilter: () => .blur(sigmaX: 5, sigmaY: 5),
+                      decoration: .value(BoxDecoration(color: theme.data.colors.background.withValues(alpha: 0.5))),
                     ),
                     title: const Text('Title'),
                     suffixes: [

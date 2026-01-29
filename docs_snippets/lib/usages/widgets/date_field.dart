@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 
 final dateField = FDateField(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(fieldStyle: .delta()),
   enabled: true,
   // {@endcategory}
   // {@category "Control"}
@@ -51,7 +51,7 @@ final dateField = FDateField(
 
 final calendar = FDateField.calendar(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(fieldStyle: .delta()),
   enabled: true,
   // {@endcategory}
   // {@category "Control"}
@@ -107,7 +107,7 @@ final calendar = FDateField.calendar(
 
 final input = FDateField.input(
   // {@category "Core"}
-  style: (style) => style,
+  style: const .delta(fieldStyle: .delta()),
   enabled: true,
   // {@endcategory}
   // {@category "Control"}

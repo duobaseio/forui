@@ -12,9 +12,9 @@ void main() {
   testWidgets('blue screen', (tester) async {
     await tester.pumpWidget(
       TestScaffold.blue(
-        child: FTimePicker(
+        child: const FTimePicker(
           // The default opacity messes up the coloring.
-          style: TestScaffold.blueScreen.timePickerStyle.copyWith(overAndUnderCenterOpacity: 1),
+          style: .delta(overAndUnderCenterOpacity: 1),
         ),
       ),
     );

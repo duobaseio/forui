@@ -63,7 +63,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     T value,
     Widget label,
   ) => FMultiSelectTag(
-    style: style.tagStyle,
+    style: .value(style.tagStyle),
     label: label,
     onPress: enabled ? () => controller.update(value, add: false) : null,
   );
@@ -71,7 +71,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
   /// The default loading builder that shows a spinner when an asynchronous search is pending.
   static Widget defaultContentLoadingBuilder(BuildContext _, FSelectSearchStyle style) => Padding(
     padding: const EdgeInsets.all(13),
-    child: FCircularProgress(style: style.progressStyle),
+    child: FCircularProgress(style: .value(style.progressStyle)),
   );
 
   /// The default content empty builder that shows a localized message when there are no results.
@@ -103,7 +103,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
   /// ```shell
   /// dart run forui style create multi-select
   /// ```
-  final FMultiSelectStyle Function(FMultiSelectStyle style)? style;
+  final FMultiSelectStyleDelta? style;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
@@ -218,7 +218,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     required Map<String, T> items,
     FMultiValueControl<T>? control,
     FPopoverControl popoverControl = const .managed(),
-    FMultiSelectStyle Function(FMultiSelectStyle style)? style,
+    FMultiSelectStyleDelta? style,
     bool autofocus = false,
     FocusNode? focusNode,
     FFieldIconBuilder<FMultiSelectStyle>? prefixBuilder,
@@ -305,7 +305,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     required List<FSelectItemMixin> children,
     FMultiValueControl<T>? control,
     FPopoverControl popoverControl,
-    FMultiSelectStyle Function(FMultiSelectStyle style)? style,
+    FMultiSelectStyleDelta? style,
     bool autofocus,
     FocusNode? focusNode,
     FFieldIconBuilder<FMultiSelectStyle>? prefixBuilder,
@@ -366,7 +366,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder,
     FMultiValueControl<T>? control,
     FPopoverControl popoverControl = const .managed(),
-    FMultiSelectStyle Function(FMultiSelectStyle style)? style,
+    FMultiSelectStyleDelta? style,
     bool autofocus = false,
     FocusNode? focusNode,
     FFieldIconBuilder<FMultiSelectStyle>? prefixBuilder,
@@ -475,7 +475,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder,
     FMultiValueControl<T>? control,
     FPopoverControl popoverControl,
-    FMultiSelectStyle Function(FMultiSelectStyle style)? style,
+    FMultiSelectStyleDelta? style,
     bool autofocus,
     FocusNode? focusNode,
     FFieldIconBuilder<FMultiSelectStyle>? prefixBuilder,
@@ -672,13 +672,13 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
             axis: .vertical,
             variants: formVariants,
             label: widget.label,
-            style: style.fieldStyle,
+            style: .value(style.fieldStyle),
             description: widget.description,
             // Error should never be null as doing so causes the widget tree to change.
             error: state.errorText == null ? const SizedBox() : widget.errorBuilder(context, state.errorText!),
             child: FPopover(
               control: .managed(controller: _popoverController),
-              style: style.contentStyle,
+              style: .value(style.contentStyle),
               constraints: widget.contentConstraints,
               popoverAnchor: widget.contentAnchor,
               childAnchor: widget.fieldAnchor,
