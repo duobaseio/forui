@@ -53,7 +53,7 @@ class FTappable extends StatefulWidget {
   static Widget _builder(BuildContext _, Set<FTappableVariant> _, Widget? child) => child!;
 
   /// The style.
-  final FTappableStyleDelta? style;
+  final FTappableStyleDelta style;
 
   /// The style used when the tappable is focused. This tappable will not be outlined if null.
   final FFocusedOutlineStyleDelta? focusedOutlineStyle;
@@ -159,7 +159,7 @@ class FTappable extends StatefulWidget {
   /// ## Contract
   /// Throws [AssertionError] if [builder] and [child] are both null.
   const factory FTappable({
-    FTappableStyleDelta? style,
+    FTappableStyleDelta style,
     FFocusedOutlineStyleDelta? focusedOutlineStyle,
     String? semanticsLabel,
     bool excludeSemantics,
@@ -186,7 +186,7 @@ class FTappable extends StatefulWidget {
   /// ## Contract
   /// Throws [AssertionError] if [builder] and [child] are both null.
   const FTappable.static({
-    this.style,
+    this.style = const .inherit(),
     this.focusedOutlineStyle,
     this.semanticsLabel,
     this.excludeSemantics = false,
@@ -296,7 +296,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
 
   @override
   Widget build(BuildContext context) {
-    final style = widget.style?.call(context.theme.tappableStyle) ?? context.theme.tappableStyle;
+    final style = widget.style(context.theme.tappableStyle);
     var tappable = _decorate(context, widget.builder(context, _current, widget.child));
     tappable = Shortcuts(
       shortcuts: widget.shortcuts,
@@ -452,7 +452,7 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
   }
 
   void _setupBounceAnimation() {
-    final style = widget.style?.call(context.theme.tappableStyle) ?? context.theme.tappableStyle;
+    final style = widget.style(context.theme.tappableStyle);
     if (_style != style) {
       _style = style;
       _bounceController

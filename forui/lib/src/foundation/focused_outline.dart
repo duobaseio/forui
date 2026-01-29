@@ -17,17 +17,17 @@ part 'focused_outline.design.dart';
 /// * [FFocusedOutlineStyle] for customizing an outline.
 class FFocusedOutline extends SingleChildRenderObjectWidget {
   /// The style.
-  final FFocusedOutlineStyleDelta? style;
+  final FFocusedOutlineStyleDelta style;
 
   /// True if the [child] should be outlined.
   final bool focused;
 
   /// Creates a [FFocusedOutline].
-  const FFocusedOutline({required this.focused, required super.child, this.style, super.key});
+  const FFocusedOutline({required this.focused, required super.child, this.style = const .inherit(), super.key});
 
   @override
   RenderObject createRenderObject(BuildContext context) => _Outline(
-    style?.call(context.theme.style.focusedOutlineStyle) ?? context.theme.style.focusedOutlineStyle,
+    style(context.theme.style.focusedOutlineStyle),
     Directionality.maybeOf(context) ?? .ltr,
     focused: focused,
   );
@@ -36,7 +36,7 @@ class FFocusedOutline extends SingleChildRenderObjectWidget {
   // ignore: library_private_types_in_public_api
   void updateRenderObject(BuildContext context, _Outline outline) {
     outline
-      ..style = style?.call(context.theme.style.focusedOutlineStyle) ?? context.theme.style.focusedOutlineStyle
+      ..style = style(context.theme.style.focusedOutlineStyle)
       ..textDirection = Directionality.maybeOf(context) ?? .ltr
       ..focused = focused;
   }

@@ -73,7 +73,7 @@ class FSelectGroup<T> extends StatefulWidget with FFormFieldProperties<Set<T>> {
   /// ```shell
   /// dart run forui style create select-group
   /// ```
-  final FSelectGroupStyleDelta? style;
+  final FSelectGroupStyleDelta style;
 
   @override
   final Widget? label;
@@ -115,7 +115,7 @@ class FSelectGroup<T> extends StatefulWidget with FFormFieldProperties<Set<T>> {
   const FSelectGroup({
     required this.children,
     this.control,
-    this.style,
+    this.style = const .inherit(),
     this.label,
     this.description,
     this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
@@ -173,7 +173,7 @@ class _FSelectGroupState<T> extends State<FSelectGroup<T>> {
 
   @override
   Widget build(BuildContext context) {
-    final groupStyle = widget.style?.call(context.theme.selectGroupStyle) ?? context.theme.selectGroupStyle;
+    final groupStyle = widget.style(context.theme.selectGroupStyle);
 
     return MultiValueFormField<T>(
       controller: _controller,

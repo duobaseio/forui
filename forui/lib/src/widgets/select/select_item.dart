@@ -28,7 +28,7 @@ mixin FSelectItemMixin on Widget {
   static FSelectSection<T> section<T>({
     required Widget label,
     required Map<String, T> items,
-    FSelectSectionStyleDelta? style,
+    FSelectSectionStyleDelta style = const .inherit(),
     bool? enabled,
     FItemDivider divider = .none,
     Key? key,
@@ -40,7 +40,7 @@ mixin FSelectItemMixin on Widget {
   static FSelectSection<T> richSection<T>({
     required Widget label,
     required List<FSelectItem<T>> children,
-    FSelectSectionStyleDelta? style,
+    FSelectSectionStyleDelta style = const .inherit(),
     bool? enabled,
     FItemDivider divider = .none,
     Key? key,
@@ -54,7 +54,7 @@ mixin FSelectItemMixin on Widget {
   static FSelectItem<T> item<T>({
     required Widget title,
     required T value,
-    FItemStyleDelta? style,
+    FItemStyleDelta style = const .inherit(),
     bool? enabled,
     Widget? prefix,
     Widget? subtitle,
@@ -78,7 +78,7 @@ mixin FSelectItemMixin on Widget {
   static FSelectItem<T> raw<T>({
     required Widget child,
     required T value,
-    FItemStyleDelta? style,
+    FItemStyleDelta style = const .inherit(),
     bool? enabled,
     Widget? prefix,
     Key? key,
@@ -95,7 +95,7 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
   /// ```shell
   /// dart run forui style create select-section
   /// ```
-  final FSelectSectionStyleDelta? style;
+  final FSelectSectionStyleDelta style;
 
   /// True if the section is enabled. Disabled sections cannot be selected, and is skipped during traversal.
   ///
@@ -120,7 +120,7 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
   FSelectSection({
     required Widget label,
     required Map<String, T> items,
-    FSelectSectionStyleDelta? style,
+    FSelectSectionStyleDelta style = const .inherit(),
     bool? enabled,
     FItemDivider divider = .none,
     Key? key,
@@ -139,7 +139,7 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
   const FSelectSection.rich({
     required this.label,
     required this.children,
-    this.style,
+    this.style = const .inherit(),
     this.enabled,
     this.divider = .none,
     super.key,
@@ -149,8 +149,7 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
   Widget build(BuildContext context) {
     final content = ContentData.of<T>(context);
     final enabled = this.enabled ?? content.enabled;
-    final style = this.style?.call(content.style) ?? content.style;
-    final itemStyle = style.itemStyle.call(context);
+    final style = this.style(content.style);
 
     return ContentData<T>(
       style: style,
@@ -174,7 +173,7 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
               enabled: enabled,
               ensureVisible: content.ensureVisible,
               child: FInheritedItemData.merge(
-                style: itemStyle,
+                style: style.itemStyle,
                 divider: divider,
                 index: 0,
                 last: children.length == 1,
@@ -183,7 +182,7 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
             ),
           for (final (i, child) in children.indexed.skip(1))
             FInheritedItemData.merge(
-              style: itemStyle,
+              style: style.itemStyle,
               divider: divider,
               index: i,
               last: i == children.length - 1,
@@ -314,7 +313,7 @@ abstract class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
   /// ```shell
   /// dart run forui style create select-section
   /// ```
-  final FItemStyleDelta? style;
+  final FItemStyleDelta style;
 
   /// The value.
   final T value;
@@ -333,7 +332,7 @@ abstract class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
   const factory FSelectItem({
     required Widget title,
     required T value,
-    FItemStyleDelta? style,
+    FItemStyleDelta style,
     bool? enabled,
     Widget? prefix,
     Widget? subtitle,
@@ -349,7 +348,7 @@ abstract class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
   const factory FSelectItem.item({
     required Widget title,
     required T value,
-    FItemStyleDelta? style,
+    FItemStyleDelta style,
     bool? enabled,
     Widget? prefix,
     Widget? subtitle,
@@ -364,13 +363,13 @@ abstract class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
   const factory FSelectItem.raw({
     required Widget child,
     required T value,
-    FItemStyleDelta? style,
+    FItemStyleDelta style,
     bool? enabled,
     Widget? prefix,
     Key? key,
   }) = _RawSelectItem<T>;
 
-  const FSelectItem._({required this.value, this.style, this.enabled, this.prefix, super.key});
+  const FSelectItem._({required this.value, this.style = const .inherit(), this.enabled, this.prefix, super.key});
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

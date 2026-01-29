@@ -28,7 +28,7 @@ import 'package:forui/src/widgets/toast/toaster_stack.dart';
 FToasterEntry showFToast({
   required BuildContext context,
   required Widget title,
-  FToastStyleDelta? style,
+  FToastStyleDelta style = const .inherit(),
   Widget? icon,
   Widget? description,
   Widget Function(BuildContext context, FToasterEntry entry)? suffixBuilder,
@@ -95,7 +95,7 @@ FToasterEntry showFToast({
 FToasterEntry showRawFToast({
   required BuildContext context,
   required Widget Function(BuildContext context, FToasterEntry entry) builder,
-  FToastStyleDelta? style,
+  FToastStyleDelta style = const .inherit(),
   FToastAlignment? alignment,
   List<AxisDirection>? swipeToDismiss,
   Duration? duration = const Duration(seconds: 5),
@@ -243,13 +243,13 @@ class FToaster extends StatefulWidget {
   static FToasterState of(BuildContext context) => context.findAncestorStateOfType<FToasterState>()!;
 
   /// The style.
-  final FToasterStyleDelta? style;
+  final FToasterStyleDelta style;
 
   /// The child.
   final Widget child;
 
   /// Creates a [FToaster] widget.
-  const FToaster({required this.child, this.style, super.key});
+  const FToaster({required this.child, this.style = const .inherit(), super.key});
 
   @override
   State<FToaster> createState() => FToasterState();
@@ -273,7 +273,7 @@ class FToasterState extends State<FToaster> {
   FToasterEntry show({
     required Widget Function(BuildContext context, FToasterEntry entry) builder,
     BuildContext? context,
-    FToastStyleDelta? style,
+    FToastStyleDelta style = const .inherit(),
     FToastAlignment? alignment,
     List<AxisDirection>? swipeToDismiss,
     Duration? duration = const Duration(seconds: 5),
@@ -282,12 +282,12 @@ class FToasterState extends State<FToaster> {
     context ??= this.context;
 
     final direction = Directionality.maybeOf(context) ?? .ltr;
-    final toasterStyle = widget.style?.call(context.theme.toasterStyle) ?? context.theme.toasterStyle;
+    final toasterStyle = widget.style(context.theme.toasterStyle);
     final resolved = (alignment ?? toasterStyle.toastAlignment)._alignment.resolve(direction);
     final directions = swipeToDismiss ?? [if (resolved.x < 1) .left else .right];
 
     final entry = ToasterEntry(
-      style?.call(toasterStyle.toastStyle) ?? toasterStyle.toastStyle,
+      style(toasterStyle.toastStyle),
       resolved,
       directions,
       duration,
@@ -337,7 +337,7 @@ class FToasterState extends State<FToaster> {
 
   @override
   Widget build(BuildContext context) {
-    final style = widget.style?.call(context.theme.toasterStyle) ?? context.theme.toasterStyle;
+    final style = widget.style.call(context.theme.toasterStyle);
     final children = [widget.child];
 
     for (final MapEntry(key: alignment, value: (toastAlignment, entries)) in _entries.entries) {

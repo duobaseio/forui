@@ -25,7 +25,7 @@ class FPagination extends StatefulWidget {
   /// ```shell
   /// dart run forui style create pagination
   /// ```
-  final FPaginationStyleDelta? style;
+  final FPaginationStyleDelta style;
 
   /// The previous button placed at the beginning of the pagination.
   ///
@@ -38,7 +38,7 @@ class FPagination extends StatefulWidget {
   final Widget? next;
 
   /// Creates an [FPagination].
-  const FPagination({this.control = const .managed(), this.style, this.previous, this.next, super.key});
+  const FPagination({this.control = const .managed(), this.style = const .inherit(), this.previous, this.next, super.key});
 
   @override
   State<FPagination> createState() => _FPaginationState();
@@ -81,7 +81,7 @@ class _FPaginationState extends State<FPagination> {
 
   @override
   Widget build(BuildContext context) {
-    final style = widget.style?.call(context.theme.paginationStyle) ?? context.theme.paginationStyle;
+    final style = widget.style(context.theme.paginationStyle);
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
 
     final previous =

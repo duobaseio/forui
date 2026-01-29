@@ -36,7 +36,7 @@ class FCheckbox extends StatelessWidget {
   /// ```shell
   /// dart run forui style create checkbox
   /// ```
-  final FCheckboxStyleDelta? style;
+  final FCheckboxStyleDelta style;
 
   /// The label displayed next to the checkbox.
   final Widget? label;
@@ -72,7 +72,7 @@ class FCheckbox extends StatelessWidget {
 
   /// Creates a [FCheckbox].
   const FCheckbox({
-    this.style,
+    this.style = const .inherit(),
     this.label,
     this.description,
     this.error,
@@ -88,7 +88,7 @@ class FCheckbox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style?.call(context.theme.checkboxStyle) ?? context.theme.checkboxStyle;
+    final style = this.style(context.theme.checkboxStyle);
     final formVariants = <FFormFieldVariant>{if (!enabled) .disabled, if (error != null) .error};
 
     return FTappable(

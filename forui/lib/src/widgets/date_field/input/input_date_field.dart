@@ -113,7 +113,7 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
 
   @override
   Widget build(BuildContext context) {
-    final style = widget.style?.call(context.theme.dateFieldStyle) ?? context.theme.dateFieldStyle;
+    final style = widget.style(context.theme.dateFieldStyle);
     return CallbackShortcuts(
       bindings: {
         const SingleActivator(.enter): () {
@@ -265,7 +265,7 @@ class _InputOnlyDateFieldState extends _FDateFieldState<_InputOnlyDateField> {
 
   @override
   Widget build(BuildContext context) {
-    final style = widget.style?.call(context.theme.dateFieldStyle) ?? context.theme.dateFieldStyle;
+    final style = widget.style(context.theme.dateFieldStyle);
     return DateInput(
       controller: _controller,
       calendarController: _controller.calendar,

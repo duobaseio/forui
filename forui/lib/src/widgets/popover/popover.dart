@@ -118,7 +118,7 @@ class FPopover extends StatefulWidget {
   /// ```shell
   /// dart run forui style create popover
   /// ```
-  final FPopoverStyleDelta? style;
+  final FPopoverStyleDelta style;
 
   /// The popover's size constraints.
   final FPortalConstraints constraints;
@@ -264,7 +264,7 @@ class FPopover extends StatefulWidget {
   FPopover({
     required this.popoverBuilder,
     this.control = const .managed(),
-    this.style,
+    this.style = const .inherit(),
     this.constraints = const FPortalConstraints(),
     this.spacing = const .spacing(4),
     this.overflow = .flip,
@@ -386,7 +386,7 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final style = widget.style?.call(context.theme.popoverStyle) ?? context.theme.popoverStyle;
+    final style = widget.style(context.theme.popoverStyle);
     final direction = Directionality.maybeOf(context) ?? .ltr;
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
 

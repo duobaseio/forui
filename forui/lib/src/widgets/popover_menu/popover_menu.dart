@@ -40,7 +40,7 @@ class FPopoverMenu extends StatelessWidget {
   /// ```shell
   /// dart run forui style create popover-menu
   /// ```
-  final FPopoverMenuStyleDelta? style;
+  final FPopoverMenuStyleDelta style;
 
   /// Defines how the popover menu's shown state is controlled.
   ///
@@ -149,7 +149,7 @@ class FPopoverMenu extends StatelessWidget {
   FPopoverMenu({
     this.control = const .managed(),
     this.scrollController,
-    this.style,
+    this.style = const .inherit(),
     this.cacheExtent,
     this.maxHeight = .infinity,
     this.dragStartBehavior = .start,
@@ -207,7 +207,7 @@ class FPopoverMenu extends StatelessWidget {
   FPopoverMenu.tiles({
     this.control = const .managed(),
     this.scrollController,
-    this.style,
+    this.style = const .inherit(),
     this.cacheExtent,
     this.maxHeight = .infinity,
     this.dragStartBehavior = .start,
@@ -249,7 +249,7 @@ class FPopoverMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style?.call(context.theme.popoverMenuStyle) ?? context.theme.popoverMenuStyle;
+    final style = this.style(context.theme.popoverMenuStyle);
     return FPopover(
       control: control,
       style: .value(style),

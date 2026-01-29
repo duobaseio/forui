@@ -19,7 +19,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
   /// ```shell
   /// dart run forui style create bottom-navigation-bar-item
   /// ```
-  final FBottomNavigationBarItemStyleDelta? style;
+  final FBottomNavigationBarItemStyleDelta style;
 
   /// The icon, wrapped in a [IconTheme].
   final Widget icon;
@@ -46,7 +46,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
   const FBottomNavigationBarItem({
     required this.icon,
     this.label,
-    this.style,
+    this.style = const .inherit(),
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
@@ -58,7 +58,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final FBottomNavigationBarData(:itemStyle, :selected, :index, :onChange) = .of(context);
-    final style = this.style?.call(itemStyle) ?? itemStyle;
+    final style = this.style(itemStyle);
 
     return FTappable(
       style: .value(style.tappableStyle),

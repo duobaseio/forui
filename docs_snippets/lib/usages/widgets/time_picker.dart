@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 
 const timePicker = FTimePicker(
   // {@category "Core"}
-  style: null,
+  style: .delta(padding: .all(5)),
   hour24: false,
   hourInterval: 1,
   minuteInterval: 1,

@@ -32,7 +32,7 @@ class Input extends StatefulWidget {
   }
 
   final TextEditingController controller;
-  final FTextFieldStyleDelta? style;
+  final FTextFieldStyleDelta style;
   final FFieldBuilder<FTextFieldStyle> builder;
   final Widget? label;
   final String? hint;
@@ -114,7 +114,7 @@ class Input extends StatefulWidget {
     required this.canRequestFocus,
     required this.clearable,
     required this.clearIconBuilder,
-    this.style,
+    required this.style,
     this.label,
     this.hint,
     this.description,
@@ -255,7 +255,7 @@ class _InputState extends State<Input> {
 
   @override
   Widget build(BuildContext context) {
-    final style = widget.style?.call(context.theme.textFieldStyle) ?? context.theme.textFieldStyle;
+    final style = widget.style(context.theme.textFieldStyle);
     final variants = toTextFieldVariants(_statesController.value);
 
     final textfield = TextField(

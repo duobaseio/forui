@@ -66,7 +66,7 @@ class FTextField extends StatelessWidget {
   static Widget password({
     FTextFieldControl control = const .managed(),
     FObscureTextControl obscureTextControl = const .managed(),
-    FTextFieldStyleDelta? style,
+    FTextFieldStyleDelta style = const .inherit(),
     FFieldBuilder<FTextFieldStyle> builder = Input.defaultBuilder,
     Widget? label = const LocalizedText.password(),
     String? hint,
@@ -204,7 +204,7 @@ class FTextField extends StatelessWidget {
   /// dart run forui style create text-field
   /// ```
   /// {@endtemplate}
-  final FTextFieldStyleDelta? style;
+  final FTextFieldStyleDelta style;
 
   /// {@template forui.text_field.builder}
   /// The builder used to decorate the text-field. It should always use the given child.
@@ -807,7 +807,7 @@ class FTextField extends StatelessWidget {
   /// Creates a [FTextField].
   const FTextField({
     this.control = const .managed(),
-    this.style,
+    this.style = const .inherit(),
     this.builder = Input.defaultBuilder,
     this.label,
     this.hint,
@@ -872,7 +872,7 @@ class FTextField extends StatelessWidget {
   /// Creates a [FTextField] configured for emails.
   const FTextField.email({
     this.control = const .managed(),
-    this.style,
+    this.style = const .inherit(),
     this.builder = Input.defaultBuilder,
     this.label = const LocalizedText.email(),
     this.hint,
@@ -941,7 +941,7 @@ class FTextField extends StatelessWidget {
   /// [maxLines].
   const FTextField.multiline({
     this.control = const .managed(),
-    this.style,
+    this.style = const .inherit(),
     this.builder = Input.defaultBuilder,
     this.label,
     this.hint,

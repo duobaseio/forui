@@ -70,7 +70,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   /// ```shell
   /// dart run forui style create autocomplete
   /// ```
-  final FAutocompleteStyleDelta? style;
+  final FAutocompleteStyleDelta style;
 
   /// {@macro forui.text_field.label}
   @override
@@ -319,7 +319,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     required List<String> items,
     FAutocompleteControl control = const .managed(),
     FPopoverControl popoverControl = const .managed(),
-    FAutocompleteStyleDelta? style,
+    FAutocompleteStyleDelta style = const .inherit(),
     Widget? label,
     String? hint,
     Widget? description,
@@ -494,7 +494,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     required this.contentBuilder,
     this.control = const .managed(),
     this.popoverControl = const .managed(),
-    this.style,
+    this.style = const .inherit(),
     this.label,
     this.hint,
     this.description,
@@ -781,7 +781,7 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final style = widget.style?.call(context.theme.autocompleteStyle) ?? context.theme.autocompleteStyle;
+    final style = widget.style(context.theme.autocompleteStyle);
     // On desktop, the textfield selects the entire text when focused (except when tapped). However, refocusing on the
     // textfield after keyboard navigation of completions should NOT select the entire text.
     //

@@ -26,13 +26,13 @@ class FDivider extends StatelessWidget {
   /// ```shell
   /// dart run forui style create dividers
   /// ```
-  final FDividerStyleDelta? style;
+  final FDividerStyleDelta style;
 
   /// The axis along which the divider is drawn. Defaults to horizontal.
   final Axis axis;
 
   /// Creates a [FDivider].
-  const FDivider({this.style, this.axis = .horizontal, super.key});
+  const FDivider({this.style = const .inherit(), this.axis = .horizontal, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class FDivider extends StatelessWidget {
       .horizontal => context.theme.dividerStyles.horizontalStyle,
       .vertical => context.theme.dividerStyles.verticalStyle,
     };
-    final style = this.style?.call(inheritedStyle) ?? inheritedStyle;
+    final style = this.style(inheritedStyle);
 
     return Container(
       margin: style.padding,

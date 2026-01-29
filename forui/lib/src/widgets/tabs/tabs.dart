@@ -58,7 +58,7 @@ class FTabs extends StatefulWidget {
   /// ```shell
   /// dart run forui style create tabs
   /// ```
-  final FTabsStyleDelta? style;
+  final FTabsStyleDelta style;
 
   /// Whether this tab bar can be scrolled horizontally. Defaults to false.
   ///
@@ -97,7 +97,7 @@ class FTabs extends StatefulWidget {
     this.control = const .managed(),
     this.scrollable = false,
     this.physics,
-    this.style,
+    this.style = const .inherit(),
     this.onPress,
     this.mouseCursor = .defer,
     this.expands = false,
@@ -155,7 +155,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final theme = context.theme;
-    final style = widget.style?.call(context.theme.tabsStyle) ?? context.theme.tabsStyle;
+    final style = widget.style(context.theme.tabsStyle);
     final localizations = Localizations.of<MaterialLocalizations>(context, MaterialLocalizations);
 
     final content = DefaultTextStyle(

@@ -43,6 +43,14 @@ class DeltaClass {
           ),
           Constructor(
             (c) => c
+              ..docs.addAll(['/// Creates a delta that returns the [${_class.name}] in the current context.'])
+              ..constant = true
+              ..factory = true
+              ..name = 'inherit'
+              ..redirect = refer('_${_class.name}Inherit'),
+          ),
+          Constructor(
+            (c) => c
               ..docs.addAll(['/// Creates a partial modification of a [${_class.name}].'])
               ..constant = true
               ..factory = true
@@ -95,6 +103,35 @@ class DeltaClass {
             )
             ..lambda = true
             ..body = const Code('_value'),
+        ),
+      ),
+  );
+
+  /// Generates the private inherit class.
+  Class generateInherit() => Class(
+    (c) => c
+      ..name = '_${_class.name}Inherit'
+      ..implements.add(refer('${_class.name}Delta'))
+      ..constructors.add(
+        Constructor(
+          (c) => c..constant = true,
+        ),
+      )
+      ..methods.add(
+        Method(
+          (m) => m
+            ..annotations.add(refer('override'))
+            ..returns = refer(_class.name!)
+            ..name = 'call'
+            ..requiredParameters.add(
+              Parameter(
+                (p) => p
+                  ..type = refer(_class.name!)
+                  ..name = 'original',
+              ),
+            )
+            ..lambda = true
+            ..body = const Code('original'),
         ),
       ),
   );

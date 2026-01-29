@@ -45,7 +45,7 @@ class FScaffold extends StatelessWidget {
   /// ```shell
   /// dart run forui style create scaffold
   /// ```
-  final FScaffoldStyleDelta? scaffoldStyle;
+  final FScaffoldStyleDelta scaffoldStyle;
 
   /// The main content area of the scaffold.
   final Widget child;
@@ -74,7 +74,7 @@ class FScaffold extends StatelessWidget {
   /// Creates a [FScaffold].
   const FScaffold({
     required this.child,
-    this.scaffoldStyle,
+    this.scaffoldStyle = const .inherit(),
     this.header,
     this.sidebar,
     this.footer,
@@ -85,7 +85,7 @@ class FScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = scaffoldStyle?.call(context.theme.scaffoldStyle) ?? context.theme.scaffoldStyle;
+    final style = scaffoldStyle(context.theme.scaffoldStyle);
     var child = this.child;
 
     final Widget footer = this.footer != null

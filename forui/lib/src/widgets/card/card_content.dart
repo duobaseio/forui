@@ -16,13 +16,13 @@ class Content extends StatelessWidget {
   final Widget? subtitle;
   final Widget? child;
   final MainAxisSize mainAxisSize;
-  final FCardStyleDelta? style;
+  final FCardStyleDelta style;
 
-  const Content({required this.mainAxisSize, this.image, this.title, this.subtitle, this.child, this.style, super.key});
+  const Content({required this.mainAxisSize, required this.style, this.image, this.title, this.subtitle, this.child, super.key});
 
   @override
   Widget build(BuildContext context) {
-    final style = (this.style?.call(context.theme.cardStyle) ?? context.theme.cardStyle).contentStyle;
+    final style = this.style(context.theme.cardStyle).contentStyle;
     return Padding(
       padding: style.padding,
       child: Column(

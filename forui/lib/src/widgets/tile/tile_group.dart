@@ -53,7 +53,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
   /// ```shell
   /// dart run forui style create tile-group
   /// ```
-  final FTileGroupStyleDelta? style;
+  final FTileGroupStyleDelta style;
 
   /// {@template forui.widgets.FTileGroup.scrollController}
   /// The scroll controller used to control the position to which this group is scrolled.
@@ -135,7 +135,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
   /// {@endtemplate}
   FTileGroup({
     required List<FTileMixin> children,
-    this.style,
+    this.style = const .inherit(),
     this.scrollController,
     this.cacheExtent,
     this.maxHeight = .infinity,
@@ -185,7 +185,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
   FTileGroup.builder({
     required NullableIndexedWidgetBuilder tileBuilder,
     int? count,
-    this.style,
+    this.style = const .inherit(),
     this.scrollController,
     this.cacheExtent,
     this.maxHeight = .infinity,
@@ -227,7 +227,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
   /// {@endtemplate}
   FTileGroup.merge({
     required List<FTileGroupMixin> children,
-    this.style,
+    this.style = const .inherit(),
     this.scrollController,
     this.cacheExtent,
     this.maxHeight = .infinity,
@@ -260,8 +260,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
   @override
   Widget build(BuildContext context) {
     final data = FInheritedItemData.maybeOf(context);
-    final inheritedStyle = FTileGroupStyleData.of(context);
-    final style = this.style?.call(inheritedStyle) ?? inheritedStyle;
+    final style = this.style(FTileGroupStyleData.of(context));
     final enabled = this.enabled ?? data?.enabled ?? true;
 
     final sliver = _builder(style, enabled);
