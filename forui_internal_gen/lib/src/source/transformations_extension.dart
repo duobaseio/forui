@@ -141,7 +141,7 @@ class TransformationsExtension {
     final parameters = <Parameter>[];
 
     for (final field in fields) {
-      final (type, assignment, sentinel) = await deltaField(step, field, sentinels, prefix: 'this');
+      final (type, assignment, sentinel) = await deltaField(step, field, sentinels);
       assignments.add('${field.name}: $assignment,');
       parameters.add(
         Parameter(

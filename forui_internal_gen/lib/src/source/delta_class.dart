@@ -153,7 +153,7 @@ class DeltaClass {
 
   /// Generates a delta parameter from the field.
   Future<Parameter> _parameter(FieldElement field, {required bool toThis}) async {
-    final (type, _, sentinel) = await deltaField(_step, field, _sentinels);
+    final (type, _, sentinel) = await deltaField(_step, field, _sentinels, prefix: 'original', cast: true);
     final parameter = ParameterBuilder()
       ..named = true
       ..name = field.name!;
@@ -171,7 +171,7 @@ class DeltaClass {
 
   /// Generates a delta field from the field.
   Future<Field> _field(FieldElement field) async {
-    final (type, _, _) = await deltaField(_step, field, _sentinels);
+    final (type, _, _) = await deltaField(_step, field, _sentinels, prefix: 'original', cast: true);
     return Field(
       (f) => f
         ..modifier = .final$
@@ -183,7 +183,7 @@ class DeltaClass {
   /// Generates the call method for the merge class.
   Future<Method> _call() async {
     final assignments = [
-      for (final field in _fields) '${field.name!}: ${(await deltaField(_step, field, _sentinels)).$2}',
+      for (final field in _fields) '${field.name!}: ${(await deltaField(_step, field, _sentinels, prefix: 'original', cast: true)).$2}',
     ].join(',');
     return Method(
       (m) => m

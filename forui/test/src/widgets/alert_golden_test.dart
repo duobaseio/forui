@@ -12,7 +12,7 @@ void main() {
         child: FAlert(
           title: const Text('Alert Title'),
           subtitle: const Text('Alert description with extra text'),
-          style: TestScaffold.blueScreen.alertStyles.primary,
+          style: .value(TestScaffold.blueScreen.alertStyles.base),
         ),
       ),
     );
@@ -21,15 +21,18 @@ void main() {
   });
 
   for (final theme in TestScaffold.themes) {
-    for (final (name, variant) in [('primary', FAlertStyle.primary()), ('destructive', FAlertStyle.destructive())]) {
+    for (final (name, Set<FAlertVariant> variants) in [
+      ('primary', {}),
+      ('destructive', {.destructive}),
+    ]) {
       testWidgets('${theme.name} with default icon', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
             child: FAlert(
+              variants: variants,
               title: const Text('Alert Title'),
               subtitle: const Text('Alert description with extra text'),
-              style: variant,
             ),
           ),
         );
@@ -42,10 +45,10 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: FAlert(
+              variants: variants,
               icon: const Icon(FIcons.badgeAlert),
               title: const Text('Alert Title'),
               subtitle: const Text('Alert description with extra text'),
-              style: variant,
             ),
           ),
         );
