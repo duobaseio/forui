@@ -745,7 +745,7 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
                               Padding(
                                 padding: style.fieldStyle.clearButtonPadding,
                                 child: FButton.icon(
-                                  style: style.fieldStyle.clearButtonStyle,
+                                  style: .value(style.fieldStyle.clearButtonStyle),
                                   onPress: () => _controller.value = {},
                                   child: Icon(
                                     FIcons.x,
@@ -892,7 +892,9 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
     required FStyle style,
   }) {
     final label = FLabelStyles.inherit(style: style).verticalStyle;
-    final ghost = FButtonStyles.inherit(colors: colors, typography: typography, style: style).ghost;
+    final ghost = FButtonStyles.inherit(colors: colors, typography: typography, style: style).resolve({
+      FButtonVariant.ghost,
+    });
 
     return .new(
       decoration: FVariants(
@@ -929,7 +931,7 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
       ),
       clearButtonStyle: ghost.copyWith(
         iconContentStyle: .value(ghost.iconContentStyle.copyWith(
-          iconStyle: FVariants(
+          iconStyle: .value(.new(
             IconThemeData(color: colors.mutedForeground, size: 17),
             variants: {
               [FTappableVariantConstraint.disabled]: IconThemeData(
@@ -937,7 +939,7 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
                 size: 17,
               ),
             },
-          ),
+          )),
         )),
       ),
       tappableStyle: style.tappableStyle.copyWith(motion: const .value(FTappableMotion.none)),

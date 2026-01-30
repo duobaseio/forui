@@ -70,7 +70,7 @@ void main() {
           style: .value(TestScaffold.blueScreen.toasterStyle),
           child: Builder(
             builder: (context) => FButton(
-              style: (_) => TestScaffold.blueScreen.buttonStyles.primary,
+              style: .value(TestScaffold.blueScreen.buttonStyles.base),
               onPress: () => showRawFToast(
                 context: context,
                 builder: (_, _) => Container(color: TestScaffold.blueScreen.colors.foreground, width: 100, height: 100),

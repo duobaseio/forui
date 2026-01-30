@@ -30,7 +30,7 @@ class DialogPage extends Example {
           ),
           actions: [
             FButton(
-              style: FButtonStyle.outline(),
+              variants: {.outline},
               child: const Text('Cancel'),
               onPress: () => Navigator.of(context).pop(),
             ),
@@ -64,7 +64,7 @@ class VerticalDialogPage extends Example {
           actions: [
             FButton(child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
             FButton(
-              style: FButtonStyle.outline(),
+              variants: {.outline},
               child: const Text('Cancel'),
               onPress: () => Navigator.of(context).pop(),
             ),
@@ -105,7 +105,7 @@ class BlurredDialogPage extends Example {
           actions: [
             FButton(child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
             FButton(
-              style: FButtonStyle.outline(),
+              variants: {.outline},
               child: const Text('Cancel'),
               onPress: () => Navigator.of(context).pop(),
             ),

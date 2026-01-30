@@ -274,22 +274,11 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
         ),
         contentStyle: .inherit(colors: colors, typography: typography).copyWith(
           padding: padding,
-          prefixIconStyle: iconStyle,
+          prefixIconStyle: .value(iconStyle),
           prefixIconSpacing: 10,
-          titleTextStyle: textStyle,
+          titleTextStyle: .value(textStyle),
           titleSpacing: 4,
-          subtitleTextStyle: .delta(
-            typography.xs.copyWith(color: colors.mutedForeground),
-            variants: {
-              [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
-            },
-          ),
-          suffixIconStyle: .delta(
-            IconThemeData(color: colors.primary, size: 15),
-            variants: {
-              [.disabled]: .delta(color: colors.disable(colors.primary)),
-            },
-          ),
+          suffixIconStyle: .value(iconStyle),
         ),
         rawItemContentStyle: FRawItemContentStyle(
           padding: padding,

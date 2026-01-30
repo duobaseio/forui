@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 
 final badge = FBadge(
   // {@category "Variants"}
-  variants: {},
+  variants: const {},
   // {@endcategory}
   // {@category "Core"}
   style: const .inherit(),
@@ -16,7 +16,7 @@ final badge = FBadge(
 
 final raw = FBadge.raw(
   // {@category "Variants"}
-  variants: {},
+  variants: const {},
   // {@endcategory}
   // {@category "Core"}
   style: const .inherit(),
@@ -39,4 +39,3 @@ final Set<FBadgeVariant> outline = {.outline};
 // {@category "Variants" "Destructive"}
 /// The badge's destructive variant.
 final Set<FBadgeVariant> destructive = {.destructive};
-

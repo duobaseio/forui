@@ -25,7 +25,7 @@ void main() {
                     ),
                     actions: [
                       FButton(onPress: () {}, child: const Text('Continue')),
-                      FButton(style: FButtonStyle.outline(), onPress: () {}, child: const Text('Cancel')),
+                      FButton(variants: {.outline}, onPress: () {}, child: const Text('Cancel')),
                     ],
                   ),
                 ),
@@ -61,7 +61,7 @@ void main() {
                     ),
                     actions: [
                       FButton(onPress: () {}, child: const Text('Continue')),
-                      FButton(style: FButtonStyle.outline(), onPress: () {}, child: const Text('Cancel')),
+                      FButton(variants: {.outline}, onPress: () {}, child: const Text('Cancel')),
                     ],
                   ),
                 ),
@@ -101,7 +101,7 @@ void main() {
                     ),
                     actions: [
                       FButton(onPress: () {}, child: const Text('Continue')),
-                      FButton(style: FButtonStyle.outline(), onPress: () {}, child: const Text('Cancel')),
+                      FButton(variants: {.outline}, onPress: () {}, child: const Text('Cancel')),
                     ],
                   ),
                 ),
@@ -152,7 +152,7 @@ void main() {
                 ),
                 actions: [
                   FButton(onPress: () {}, child: const Text('Continue')),
-                  FButton(style: FButtonStyle.outline(), onPress: () {}, child: const Text('Cancel')),
+                  FButton(variants: {.outline}, onPress: () {}, child: const Text('Cancel')),
                 ],
               ),
             ),
@@ -190,7 +190,7 @@ void main() {
               ),
               actions: [
                 FButton(child: const Text('Continue'), onPress: () {}),
-                FButton(style: FButtonStyle.outline(), child: const Text('Cancel'), onPress: () {}),
+                FButton(variants: {.outline}, child: const Text('Cancel'), onPress: () {}),
               ],
             ),
           ),
@@ -213,7 +213,7 @@ void main() {
               ),
               actions: [
                 FButton(child: const Text('Continue'), onPress: () {}),
-                FButton(style: FButtonStyle.outline(), child: const Text('Cancel'), onPress: () {}),
+                FButton(variants: {.outline}, child: const Text('Cancel'), onPress: () {}),
               ],
             ),
           ),
