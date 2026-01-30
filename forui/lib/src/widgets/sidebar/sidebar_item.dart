@@ -353,7 +353,7 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
           },
         ),
         borderRadius: style.borderRadius,
-        tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
+        tappableStyle: style.tappableStyle.copyWith(motion: const .value(FTappableMotion.none)),
         focusedOutlineStyle: style.focusedOutlineStyle.copyWith(spacing: 0),
       );
 }

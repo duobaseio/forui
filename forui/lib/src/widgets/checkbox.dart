@@ -202,7 +202,7 @@ class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
   factory FCheckboxStyle.inherit({required FColors colors, required FStyle style}) {
     final label = FLabelStyles.inherit(style: style).horizontalStyle;
     return .new(
-      tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
+      tappableStyle: style.tappableStyle.copyWith(motion: const .value(FTappableMotion.none)),
       focusedOutlineStyle: style.focusedOutlineStyle.copyWith(borderRadius: .circular(4)),
       iconStyle: .delta(
         IconThemeData(color: colors.primaryForeground, size: 14),

@@ -1,6 +1,7 @@
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/constant/value.dart';
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:build/build.dart';
 import 'package:code_builder/code_builder.dart';
@@ -114,6 +115,63 @@ String aliasAwareType(DartType type) {
       .toMapValue()!
       .map((key, value) => MapEntry(key!.toStringValue()!, value!.toStringValue()!)),
 );
+
+/// Returns the delta type, assignment expression, and optional sentinel for a [field].
+Future<(String type, String assignment, String? sentinel)> deltaField(
+  BuildStep step,
+  FieldElement field,
+  Map<String, String> sentinels, {
+  String prefix = 'original',
+}) async {
+  final name = field.name!;
+  final typeName = field.type.getDisplayString();
+
+  // Nested styles
+  if ((typeName.startsWith('F') && !typeName.startsWith('FInherited')) &&
+      (typeName.endsWith('Style') || typeName.endsWith('Styles'))) {
+    return ('${typeName}Delta?', '$name?.call($prefix.$name) ?? $prefix.$name', null);
+  }
+
+  // Nested motions
+  if (typeName.startsWith('F') && typeName.endsWith('Motion')) {
+    return ('${typeName}Delta?', '$name?.call($prefix.$name) ?? $prefix.$name', null);
+  }
+
+  // Supported Flutter in-built types
+  if (typeName == 'BoxDecoration' || typeName == 'IconThemeData' || typeName == 'TextStyle') {
+    return ('${typeName}Delta?', '$name?.call($prefix.$name) ?? $prefix.$name', null);
+  }
+
+  // FVariants<K extends FVariantConstraint, V, D extends Delta<V>>
+  if (field.type case InterfaceType(:final element) when element.name == 'FVariants') {
+    final type = ((await step.resolver.astNodeFor(field.firstFragment))!.parent! as VariableDeclarationList).type!;
+    final [kAst, vAst, dAst] = (type as NamedType).typeArguments!.arguments;
+
+    final k = kAst.toSource();
+    final e = k.substring(0, k.indexOf('Constraint'));
+    final v = vAst.toSource();
+    final d = dAst.toSource();
+
+    final deltaType = (dAst as NamedType).name.lexeme == 'Delta'
+        ? 'FVariantsValueDelta<$k, $e, $v>'
+        : 'FVariantsDelta<$k, $e, $v, $d>';
+
+    return ('$deltaType?', '$name?.call($prefix.$name) ?? $prefix.$name', null);
+  }
+
+  // Nullable types with explicit sentinel values
+  if (sentinels[field.name] case final sentinel?) {
+    return (typeName, '$name == $sentinel ? $prefix.$name : $name', sentinel);
+  }
+
+  // Enums and nullable types without explicit sentinel values
+  if (field.type.nullabilitySuffix == NullabilitySuffix.question &&
+      (enumeration.isAssignableFromType(field.type) || !sentinels.containsKey(field.name))) {
+    return ('$typeName Function()?', '$name == null ? $prefix.$name : $name!()', null);
+  }
+
+  return ('$typeName?', '$name ?? $prefix.$name', null);
+}
 
 /// Returns the type string for a field, handling FVariants circular dependency.
 ///

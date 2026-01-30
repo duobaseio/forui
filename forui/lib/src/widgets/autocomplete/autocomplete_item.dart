@@ -286,7 +286,7 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
           prefixIconStyle: iconStyle,
           childTextStyle: textStyle,
         ),
-        tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
+        tappableStyle: style.tappableStyle.copyWith(motion: const .value(FTappableMotion.none)),
         focusedOutlineStyle: null,
       ),
     );

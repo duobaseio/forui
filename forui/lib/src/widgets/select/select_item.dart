@@ -296,7 +296,7 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
           prefixIconStyle: iconStyle,
           childTextStyle: textStyle,
         ),
-        tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
+        tappableStyle: style.tappableStyle.copyWith(motion: const .value(FTappableMotion.none)),
         focusedOutlineStyle: null,
       ),
     );

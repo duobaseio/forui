@@ -132,7 +132,7 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
       },
     );
     final bounceableButtonStyle = ghost.copyWith(
-      iconContentStyle: ghost.iconContentStyle.copyWith(iconStyle: iconStyle.cast()),
+      iconContentStyle: .value(ghost.iconContentStyle.copyWith(iconStyle: iconStyle.cast())),
     );
 
     return .new(
@@ -140,8 +140,7 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
       iconStyle: iconStyle,
       clearButtonStyle: bounceableButtonStyle,
       obscureButtonStyle: bounceableButtonStyle.copyWith(
-        tappableStyle: (style) =>
-            style.copyWith(motion: (motion) => motion.copyWith(bounceTween: FTappableMotion.noBounceTween)),
+        tappableStyle: const .delta(motion: .delta(bounceTween: FTappableMotion.noBounceTween)),
       ),
       contentTextStyle: .delta(
         textStyle.copyWith(color: colors.primary),

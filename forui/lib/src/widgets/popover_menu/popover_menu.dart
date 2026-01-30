@@ -342,10 +342,10 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
   /// Creates a [FPopoverMenuStyle] that inherits its properties.
   FPopoverMenuStyle.inherit({required super.colors, required super.style, required FTypography typography})
     : itemGroupStyle = .inherit(colors: colors, style: style, typography: typography).copyWith(
-        decoration: BoxDecoration(
+        decoration: .value(BoxDecoration(
           border: .all(color: colors.border, width: style.borderWidth),
           borderRadius: style.borderRadius,
-        ),
+        )),
       ),
       tileGroupStyle = .inherit(colors: colors, style: style, typography: typography),
       maxWidth = 250,

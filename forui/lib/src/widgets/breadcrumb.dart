@@ -475,7 +475,7 @@ class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
           },
         ),
         iconStyle: IconThemeData(color: colors.mutedForeground, size: 16),
-        tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
+        tappableStyle: style.tappableStyle.copyWith(motion: const .value(FTappableMotion.none)),
         focusedOutlineStyle: style.focusedOutlineStyle,
       );
 }

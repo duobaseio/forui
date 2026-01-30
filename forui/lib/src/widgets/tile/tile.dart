@@ -344,7 +344,7 @@ class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
           ),
         ),
         tappableStyle: style.tappableStyle.copyWith(
-          motion: FTappableMotion.none,
+          motion: const .value(FTappableMotion.none),
           pressedEnterDuration: .zero,
           pressedExitDuration: const Duration(milliseconds: 25),
         ),
