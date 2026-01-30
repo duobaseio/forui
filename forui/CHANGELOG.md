@@ -137,12 +137,15 @@
 
 
 ### Others
+
 * **Breaking** Change all widget `style` parameters from callback type `FXxxStyle Function(FXxxStyle)?` to delta type
   `FXxxStyleDelta?`. Use `.value(style)` to wrap a complete style or `.delta(param: value)` to partially modify specific
   properties.
-
+* **Breaking** Change `copyWith` for all styles to uses delta instead of callbacks for nested styles/motions, sentinel
+  values for nullable fields.
+* **Breaking** Replace all instances of `FWidgetStateMap` with `FVariants`.
+* **Breaking** Remove `call` method from all styles.
 * **Breaking** Remove `FWidgetStatesDelta`.
-* **Breaking** Replace all instances of `FWidgetStateMap` with `FVariants`. 
 
 
 ## 0.17.0

@@ -121,7 +121,8 @@ Future<(String type, String assignment, String? sentinel)> deltaField(
   BuildStep step,
   FieldElement field,
   Map<String, String> sentinels, {
-  String prefix = 'original',
+  String prefix = 'this',
+  bool cast = false,
 }) async {
   final name = field.name!;
   final typeName = field.type.getDisplayString();
@@ -167,7 +168,7 @@ Future<(String type, String assignment, String? sentinel)> deltaField(
   // Enums and nullable types without explicit sentinel values
   if (field.type.nullabilitySuffix == NullabilitySuffix.question &&
       (enumeration.isAssignableFromType(field.type) || !sentinels.containsKey(field.name))) {
-    return ('$typeName Function()?', '$name == null ? $prefix.$name : $name!()', null);
+    return ('$typeName Function()?', '$name == null ? $prefix.$name : $name${cast ? '!' : ''}()', null);
   }
 
   return ('$typeName?', '$name ?? $prefix.$name', null);

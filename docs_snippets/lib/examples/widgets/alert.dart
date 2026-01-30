@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_redundant_argument_values
+
 import 'package:flutter/material.dart';
 
 import 'package:auto_route/auto_route.dart';
@@ -10,12 +12,12 @@ class AlertPrimaryPage extends Example {
   AlertPrimaryPage({@queryParam super.theme});
 
   @override
-  Widget example(BuildContext _) => FAlert(
+  Widget example(BuildContext _) => const FAlert(
     // {@highlight}
-    style: FAlertStyle.primary(),
+    variants: {},
     // {@endhighlight}
-    title: const Text('Heads Up!'),
-    subtitle: const Text('You can add components to your app using the cli.'),
+    title: Text('Heads Up!'),
+    subtitle: Text('You can add components to your app using the cli.'),
   );
 }
 
@@ -26,7 +28,7 @@ class AlertDestructivePage extends Example {
   @override
   Widget example(BuildContext _) => FAlert(
     // {@highlight}
-    style: FAlertStyle.destructive(),
+    variants: {.destructive},
     // {@endhighlight}
     title: const Text('Heads Up!'),
     subtitle: const Text('You can add components to your app using the cli.'),
