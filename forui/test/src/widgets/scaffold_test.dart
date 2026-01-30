@@ -17,7 +17,7 @@ void main() {
             colors: FThemes.zinc.light.colors,
             typography: FThemes.zinc.light.typography,
             style: FThemes.zinc.light.style.copyWith(
-              iconStyle: const IconThemeData(color: testIconColor, size: testIconSize),
+              iconStyle: const .value(IconThemeData(color: testIconColor, size: testIconSize)),
             ),
           ),
           child: const FScaffold(child: Center(child: Icon(FIcons.star))),

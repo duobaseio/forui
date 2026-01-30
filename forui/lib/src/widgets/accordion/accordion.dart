@@ -199,7 +199,7 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
         iconStyle: .all(IconThemeData(color: colors.mutedForeground, size: 20)),
         focusedOutlineStyle: style.focusedOutlineStyle,
         dividerStyle: FDividerStyle(color: colors.border, padding: .zero),
-        tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
+        tappableStyle: style.tappableStyle.copyWith(motion: const .value(FTappableMotion.none)),
       );
 }
 

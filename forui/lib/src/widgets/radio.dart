@@ -203,7 +203,7 @@ class FRadioStyle extends FLabelStyle with _$FRadioStyleFunctions {
   factory FRadioStyle.inherit({required FColors colors, required FStyle style}) {
     final label = FLabelStyles.inherit(style: style).horizontalStyle;
     return .new(
-      tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
+      tappableStyle: style.tappableStyle.copyWith(motion: const .value(FTappableMotion.none)),
       focusedOutlineStyle: FFocusedOutlineStyle(color: colors.primary, borderRadius: .circular(100)),
       borderColor: FVariants(
         colors.primary,

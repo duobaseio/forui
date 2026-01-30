@@ -8,7 +8,7 @@ import 'package:forui_internal_gen/src/source/types.dart';
 /// Generates a [TransformationsExtension] that provides `copyWith` and `lerp` methods.
 class DesignTransformationsExtension extends TransformationsExtension {
   /// Creates a [DesignTransformationsExtension].
-  DesignTransformationsExtension(super.step, super.element, {required super.copyWithDocsHeader});
+  DesignTransformationsExtension(super.step, super.element, super.sentinels, {required super.copyWithDocsHeader});
 
   /// Generates an extension that provides non virtual transforming methods.
   @override

@@ -102,12 +102,16 @@ class TransformationsExtension {
   @protected
   final List<FieldElement> fields;
 
+  /// The sentinel values for nullable fields.
+  @protected
+  final Map<String, String> sentinels;
+
   /// The copyWith documentation comments.
   @protected
   final List<String> copyWithDocsHeader;
 
   /// Creates a [TransformationsExtension].
-  TransformationsExtension(this.step, this.element, {required this.copyWithDocsHeader})
+  TransformationsExtension(this.step, this.element, this.sentinels, {required this.copyWithDocsHeader})
     : fields = transitiveInstanceFields(element);
 
   /// Generates an extension that provides non virtual transforming methods.
@@ -132,47 +136,22 @@ class TransformationsExtension {
       docs.add('$prefix${summary == null ? '' : ' - $summary'}');
     }
 
-    // Generate assignments for the copyWith method body
-    final assignments = fields.map((f) {
-      if (nestedMotion(f.type) || nestedStyle(f.type)) {
-        return '${f.name}: ${f.name} != null ? ${f.name}(this.${f.name}) : this.${f.name},';
-      } else {
-        return '${f.name}: ${f.name} ?? this.${f.name},';
-      }
-    }).join();
-
+    // Generate assignments and parameters for the copyWith method
+    final assignments = <String>[];
     final parameters = <Parameter>[];
+
     for (final field in fields) {
-      final type = await fieldType(step, field);
-      if (nestedMotion(field.type)) {
-        parameters.add(
-          Parameter(
-            (p) => p
-              ..name = field.name!
-              ..type = refer('$type Function($type motion)?')
-              ..named = true,
-          ),
-        );
-      } else if (nestedStyle(field.type)) {
-        parameters.add(
-          Parameter(
-            (p) => p
-              ..name = field.name!
-              ..type = refer('$type Function($type style)?')
-              ..named = true,
-          ),
-        );
-      } else {
-        final nullableType = await _nullableType(field);
-        parameters.add(
-          Parameter(
-            (p) => p
-              ..name = field.name!
-              ..type = refer(nullableType)
-              ..named = true,
-          ),
-        );
-      }
+      final (type, assignment, sentinel) = await deltaField(step, field, sentinels, prefix: 'this');
+      assignments.add('${field.name}: $assignment,');
+      parameters.add(
+        Parameter(
+          (p) => p
+            ..name = field.name!
+            ..type = refer(type)
+            ..named = true
+            ..defaultTo = sentinel == null ? null : Code(sentinel),
+        ),
+      );
     }
 
     return Method(
@@ -183,13 +162,8 @@ class TransformationsExtension {
         ..name = 'copyWith'
         ..optionalParameters.addAll(parameters)
         ..lambda = true
-        ..body = Code('.new($assignments)\n'),
+        ..body = Code('.new(${assignments.join()})\n'),
     );
-  }
-
-  Future<String> _nullableType(FieldElement field) async {
-    final type = await fieldType(step, field);
-    return field.type.nullabilitySuffix == .question ? type : '$type?';
   }
 
   /// Checks if the type is a nested motion.

@@ -490,7 +490,7 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
         contentStyle: .inherit(colors: colors, typography: typography),
         rawItemContentStyle: .inherit(colors: colors, typography: typography),
         tappableStyle: style.tappableStyle.copyWith(
-          motion: FTappableMotion.none,
+          motion: const .value(FTappableMotion.none),
           pressedEnterDuration: .zero,
           pressedExitDuration: const Duration(milliseconds: 25),
         ),

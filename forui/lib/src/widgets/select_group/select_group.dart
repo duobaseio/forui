@@ -266,14 +266,14 @@ class FSelectGroupStyle extends FLabelStyle with Diagnosticable, _$FSelectGroupS
 
     return .new(
       checkboxStyle: .inherit(colors: colors, style: style).copyWith(
-        labelTextStyle: labelTextStyle,
-        descriptionTextStyle: descriptionTextStyle,
-        errorTextStyle: errorTextStyle,
+        labelTextStyle: .value(labelTextStyle),
+        descriptionTextStyle: .value(descriptionTextStyle),
+        errorTextStyle: .value(errorTextStyle),
       ),
       radioStyle: .inherit(colors: colors, style: style).copyWith(
-        labelTextStyle: labelTextStyle,
-        descriptionTextStyle: descriptionTextStyle,
-        errorTextStyle: errorTextStyle,
+        labelTextStyle: .value(labelTextStyle),
+        descriptionTextStyle: .value(descriptionTextStyle),
+        errorTextStyle: .value(errorTextStyle),
       ),
       labelTextStyle: style.formFieldStyle.labelTextStyle,
       descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,

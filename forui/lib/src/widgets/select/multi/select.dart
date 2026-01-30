@@ -928,7 +928,7 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
         },
       ),
       clearButtonStyle: ghost.copyWith(
-        iconContentStyle: ghost.iconContentStyle.copyWith(
+        iconContentStyle: .value(ghost.iconContentStyle.copyWith(
           iconStyle: FVariants(
             IconThemeData(color: colors.mutedForeground, size: 17),
             variants: {
@@ -938,9 +938,9 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
               ),
             },
           ),
-        ),
+        )),
       ),
-      tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
+      tappableStyle: style.tappableStyle.copyWith(motion: const .value(FTappableMotion.none)),
       labelTextStyle: style.formFieldStyle.labelTextStyle,
       descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,
       errorTextStyle: style.formFieldStyle.errorTextStyle,

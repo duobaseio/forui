@@ -199,7 +199,7 @@ class FMultiSelectTagStyle with Diagnosticable, _$FMultiSelectTagStyleFunctions 
             [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
           },
         ),
-        tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
+        tappableStyle: style.tappableStyle.copyWith(motion: const .value(FTappableMotion.none)),
         focusedOutlineStyle: style.focusedOutlineStyle,
       );
 }

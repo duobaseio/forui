@@ -48,6 +48,7 @@ class DesignGenerator extends Generator {
                 await DesignTransformationsExtension(
                   step,
                   type,
+                  sentinelValues[type.name] ?? {},
                   copyWithDocsHeader: [
                     '/// Returns a copy of this [${type.name!}] with the given properties replaced.',
                     '///',
@@ -98,6 +99,7 @@ class DesignGenerator extends Generator {
                 await DesignTransformationsExtension(
                   step,
                   type,
+                  sentinelValues[type.name] ?? {},
                   copyWithDocsHeader: [
                     '/// Returns a copy of this [${type.name!}] with the given properties replaced.',
                     '///',
