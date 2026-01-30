@@ -388,11 +388,7 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
         borderRadius: style.borderRadius,
       ),
 
-      tileStyle: tileStyle.copyWith(
-        decoration: tileStyle.decoration.apply<FTappableVariant>([
-          .onAll(const .delta(border: null, borderRadius: null)),
-        ]),
-      ),
+      tileStyle: tileStyle.copyWith(decoration: .apply([.onAll(const .delta(border: null, borderRadius: null))])),
       dividerColor: .all(colors.border),
       dividerWidth: style.borderWidth,
       labelTextStyle: style.formFieldStyle.labelTextStyle.apply<FFormFieldVariant>([

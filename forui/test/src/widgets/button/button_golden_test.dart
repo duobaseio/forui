@@ -12,7 +12,7 @@ void main() {
         TestScaffold.blue(
           child: FButton(
             autofocus: true,
-            style: TestScaffold.blueScreen.buttonStyles.primary,
+            style: FButtonStyleDelta.value(TestScaffold.blueScreen.buttonStyles.base),
             prefix: const Icon(FIcons.circlePlay),
             suffix: const Icon(FIcons.circleStop),
             onPress: () {},
@@ -28,7 +28,8 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FButton.icon(
-            style: TestScaffold.blueScreen.buttonStyles.primary,
+            variants: const {},
+            style: FButtonStyleDelta.value(TestScaffold.blueScreen.buttonStyles.base),
             child: const Icon(FIcons.circleStop),
             onPress: () {},
           ),
@@ -40,19 +41,19 @@ void main() {
   });
 
   for (final theme in TestScaffold.themes) {
-    for (final (name, variant) in [
-      ('primary', FButtonStyle.primary()),
-      ('secondary', FButtonStyle.secondary()),
-      ('destructive', FButtonStyle.destructive()),
-      ('outline', FButtonStyle.outline()),
-      ('ghost', FButtonStyle.ghost()),
+    for (final (name, Set<FButtonVariant> variants) in [
+      ('primary', {}),
+      ('secondary', {.secondary}),
+      ('destructive', {.destructive}),
+      ('outline', {.outline}),
+      ('ghost', {.ghost}),
     ]) {
       testWidgets('${theme.name} enabled with FButtonContent', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
             child: FButton(
-              style: variant,
+              variants: variants,
               prefix: const Icon(FIcons.circlePlay),
               suffix: const Icon(FIcons.circleStop),
               onPress: () {},
@@ -72,7 +73,7 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: FButton(
-              style: variant,
+              variants: variants,
               mainAxisSize: .min,
               prefix: const Icon(FIcons.circlePlay),
               suffix: const Icon(FIcons.circleStop),
@@ -93,7 +94,7 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: FButton(
-              style: variant,
+              variants: variants,
               prefix: const Icon(FIcons.circlePlay),
               suffix: const Icon(FIcons.circleStop),
               onPress: () {},
@@ -119,7 +120,7 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: FButton(
-              style: variant,
+              variants: variants,
               prefix: const Icon(FIcons.circlePlay),
               suffix: const Icon(FIcons.circleStop),
               onPress: () {},
@@ -146,7 +147,7 @@ void main() {
             theme: theme.data,
             child: FButton(
               autofocus: true,
-              style: variant,
+              variants: variants,
               prefix: const Icon(FIcons.circlePlay),
               suffix: const Icon(FIcons.circleStop),
               onPress: () {},
@@ -163,7 +164,7 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: FButton(
-              style: variant,
+              variants: variants,
               prefix: const Icon(FIcons.circlePlay),
               suffix: const Icon(FIcons.circleStop),
               onPress: null,
@@ -183,7 +184,7 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: FButton.raw(
-              style: variant,
+              variants: variants,
               onPress: () {},
               child: Padding(
                 padding: const .all(50),
@@ -213,7 +214,7 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: FButton.raw(
-              style: variant,
+              variants: variants,
               onPress: null,
               child: Padding(
                 padding: const .all(50),
@@ -242,7 +243,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FButton.icon(onPress: () {}, style: variant, child: const Icon(FIcons.chevronRight)),
+            child: FButton.icon(onPress: () {}, variants: variants, child: const Icon(FIcons.chevronRight)),
           ),
         );
 
@@ -256,7 +257,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FButton.icon(onPress: null, style: variant, child: const Icon(FIcons.chevronRight)),
+            child: FButton.icon(onPress: null, variants: variants, child: const Icon(FIcons.chevronRight)),
           ),
         );
 
@@ -270,7 +271,7 @@ void main() {
             child: FButton(
               prefix: const FCircularProgress(),
               onPress: () {},
-              style: variant,
+              variants: variants,
               child: const Text('Loading'),
             ),
           ),
@@ -289,7 +290,7 @@ void main() {
             child: FButton(
               prefix: const FCircularProgress(),
               onPress: null,
-              style: variant,
+              variants: variants,
               child: const Text('Loading'),
             ),
           ),

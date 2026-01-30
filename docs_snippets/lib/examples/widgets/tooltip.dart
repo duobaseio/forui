@@ -26,7 +26,7 @@ class TooltipPage extends StatelessWidget {
                 FTooltip(
                   tipBuilder: (context, _) => const Text('Add to library'),
                   child: FButton(
-                    style: FButtonStyle.outline(),
+                    variants: {.outline},
                     mainAxisSize: .min,
                     onPress: () {},
                     child: const Text('Long press/Hover'),
@@ -66,7 +66,7 @@ class HorizontalTooltipPage extends StatelessWidget {
                   // {@endhighlight}
                   tipBuilder: (context, _) => const Text('Add to library'),
                   child: FButton(
-                    style: FButtonStyle.outline(),
+                    variants: {.outline},
                     mainAxisSize: .min,
                     onPress: () {},
                     child: const Text('Long press/Hover'),
@@ -105,7 +105,7 @@ class LongPressOnlyTooltipPage extends StatelessWidget {
                   // {@endhighlight}
                   tipBuilder: (context, _) => const Text('Add to library'),
                   child: FButton(
-                    style: FButtonStyle.outline(),
+                    variants: {.outline},
                     mainAxisSize: .min,
                     onPress: () {},
                     child: const Text('Long press'),

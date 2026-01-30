@@ -24,7 +24,7 @@ class Input extends StatefulWidget {
     return Padding(
       padding: style.clearButtonPadding,
       child: FButton.icon(
-        style: style.clearButtonStyle,
+        style: .value(style.clearButtonStyle),
         onPress: clear,
         child: Icon(FIcons.x, semanticLabel: localizations.textFieldClearButtonSemanticsLabel),
       ),

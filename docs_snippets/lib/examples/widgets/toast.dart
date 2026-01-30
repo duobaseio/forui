@@ -31,11 +31,11 @@ class ToastPage extends Example {
             description: const Text('Friday, May 23, 2025 at 9:00 AM'),
             suffixBuilder: (context, entry) => IntrinsicHeight(
               child: FButton(
-                style: context.theme.buttonStyles.primary.copyWith(
-                  contentStyle: context.theme.buttonStyles.primary.contentStyle.copyWith(
+                style: .delta(
+                  contentStyle: .delta(
                     padding: const .symmetric(horizontal: 12, vertical: 7.5),
-                    textStyle: .all(
-                      context.theme.typography.xs.copyWith(color: context.theme.colors.primaryForeground),
+                    textStyle: .value(
+                      .all(context.theme.typography.xs.copyWith(color: context.theme.colors.primaryForeground)),
                     ),
                   ),
                 ),
@@ -96,10 +96,11 @@ class RawToastPage extends Example {
   @override
   Widget example(BuildContext context) {
     final cardStyle = context.theme.cardStyle.copyWith(
-      contentStyle: context.theme.cardStyle.contentStyle.copyWith(
-        titleTextStyle: context.theme.typography.sm.copyWith(
-          color: context.theme.colors.primary,
-          fontWeight: FontWeight.w600,
+      contentStyle: .value(
+        context.theme.cardStyle.contentStyle.copyWith(
+          titleTextStyle: .value(
+            context.theme.typography.sm.copyWith(color: context.theme.colors.primary, fontWeight: FontWeight.w600),
+          ),
         ),
       ),
     );

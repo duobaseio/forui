@@ -89,7 +89,7 @@ void main() {
               child: ConstrainedBox(
                 constraints: style.itemConstraints,
                 child: FButton.icon(
-                  style: FButtonStyle.ghost(),
+                  variants: {.ghost},
                   onPress: controller.next,
                   child: IconTheme(data: style.itemIconStyle.resolve({}), child: const Icon(FIcons.bird)),
                 ),
@@ -100,7 +100,7 @@ void main() {
               child: ConstrainedBox(
                 constraints: style.itemConstraints,
                 child: FButton.icon(
-                  style: FButtonStyle.ghost(),
+                  variants: {.ghost},
                   onPress: controller.previous,
                   child: IconTheme(data: style.itemIconStyle.resolve({}), child: const Icon(FIcons.anchor)),
                 ),
