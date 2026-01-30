@@ -9,7 +9,7 @@ void main() {
   testWidgets('blue screen', (tester) async {
     await tester.pumpWidget(
       TestScaffold.blue(
-        child: FBadge(style: TestScaffold.blueScreen.badgeStyles.primary, child: const Text('Badge')),
+        child: FBadge(style: .value(TestScaffold.blueScreen.badgeStyles.base), child: const Text('Badge')),
       ),
     );
 
@@ -17,17 +17,17 @@ void main() {
   });
 
   for (final theme in TestScaffold.themes) {
-    for (final (name, variant) in [
-      ('primary', FBadgeStyle.primary()),
-      ('secondary', FBadgeStyle.secondary()),
-      ('destructive', FBadgeStyle.destructive()),
-      ('outline', FBadgeStyle.outline()),
+    for (final (name, Set<FBadgeVariant> variants) in [
+      ('primary', {}),
+      ('secondary', {.secondary}),
+      ('destructive', {.destructive}),
+      ('outline', {.outline}),
     ]) {
       testWidgets('${theme.name} with FBadgeContent', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FBadge(style: variant, child: const Text('Badge')),
+            child: FBadge(variants: variants, child: const Text('Badge')),
           ),
         );
 
@@ -39,7 +39,7 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: FBadge.raw(
-              style: variant,
+              variants: variants,
               builder: (_, style) => Padding(
                 padding: const .all(50),
                 child: Container(

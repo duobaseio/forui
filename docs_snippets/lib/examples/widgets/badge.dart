@@ -10,12 +10,7 @@ class BadgePrimaryPage extends Example {
   BadgePrimaryPage({@queryParam super.theme});
 
   @override
-  Widget example(BuildContext _) => FBadge(
-    // {@highlight}
-    style: FBadgeStyle.primary(),
-    // {@endhighlight}
-    child: const Text('Badge'),
-  );
+  Widget example(BuildContext _) => FBadge(child: const Text('Badge'));
 }
 
 @RoutePage()
@@ -25,7 +20,7 @@ class BadgeSecondaryPage extends Example {
   @override
   Widget example(BuildContext _) => FBadge(
     // {@highlight}
-    style: FBadgeStyle.secondary(),
+    variants: {.secondary},
     // {@endhighlight}
     child: const Text('Badge'),
   );
@@ -38,7 +33,7 @@ class BadgeDestructivePage extends Example {
   @override
   Widget example(BuildContext _) => FBadge(
     // {@highlight}
-    style: FBadgeStyle.destructive(),
+    variants: {.destructive},
     // {@endhighlight}
     child: const Text('Badge'),
   );
@@ -51,7 +46,7 @@ class BadgeOutlinePage extends Example {
   @override
   Widget example(BuildContext _) => FBadge(
     // {@highlight}
-    style: FBadgeStyle.outline(),
+    variants: {.outline},
     // {@endhighlight}
     child: const Text('Badge'),
   );

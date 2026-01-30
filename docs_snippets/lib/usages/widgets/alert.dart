@@ -16,11 +16,10 @@ const alert = FAlert(
   // {@endcategory}
 );
 
-// {@category "Variant" "`Primary)`"}
-/// The alert's primary style.
+// {@category "Variants" "`Primary)`"}
+/// The alert's primary variant.
 const Set<FAlertVariant> primary = {};
 
-// {@category "Style" "`Destructive`"}
-/// The alert's destructive style.
+// {@category "Variants" "`Destructive`"}
+/// The alert's destructive variant.
 final Set<FAlertVariant> destructive = {.destructive};
-    

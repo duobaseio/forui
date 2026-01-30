@@ -7,4 +7,3 @@ library forui.widgets.badge;
 
 export '../src/widgets/badge/badge.dart';
 export '../src/widgets/badge/badge_content.dart' hide Content;
-export '../src/widgets/badge/badge_styles.dart';
