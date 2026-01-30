@@ -57,7 +57,7 @@ void main() {
                   const Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
                   FHeader(
                     style: .delta(
-                      backgroundFilter: () => .blur(sigmaX: 5, sigmaY: 5),
+                      backgroundFilter: .blur(sigmaX: 5, sigmaY: 5),
                       decoration: .value(BoxDecoration(color: theme.data.colors.background.withValues(alpha: 0.5))),
                     ),
                     title: const Text('Title'),

@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
 
@@ -13,6 +14,68 @@ FVariants<K, V, D> createVariants<K extends FVariantConstraint, V, D extends Del
 /// See also:
 /// * [FVariantConstraint] which represents a combination of variants under which a widget is styled differently.
 class FVariants<K extends FVariantConstraint, V, D extends Delta<V>> with Diagnosticable {
+  /// Linearly interpolates between two [FVariants] containing [BoxDecoration]s.
+  static FVariants<K, BoxDecoration, D> lerpBoxDecoration<K extends FVariantConstraint, D extends Delta<BoxDecoration>>(
+    FVariants<K, BoxDecoration, D> a,
+    FVariants<K, BoxDecoration, D> b,
+    double t,
+  ) => lerpWhere(a, b, t, BoxDecoration.lerp);
+
+  /// Linearly interpolates between two [FVariants] containing [Color]s.
+  static FVariants<K, Color, D> lerpColor<K extends FVariantConstraint, D extends Delta<Color>>(
+    FVariants<K, Color, D> a,
+    FVariants<K, Color, D> b,
+    double t,
+  ) => lerpWhere(a, b, t, Color.lerp);
+
+  /// Linearly interpolates between two [FVariants] containing [IconThemeData]s.
+  static FVariants<K, IconThemeData, D> lerpIconThemeData<K extends FVariantConstraint, D extends Delta<IconThemeData>>(
+    FVariants<K, IconThemeData, D> a,
+    FVariants<K, IconThemeData, D> b,
+    double t,
+  ) => lerpWhere(a, b, t, IconThemeData.lerp);
+
+  /// Linearly interpolates between two [FVariants] containing [TextStyle]s.
+  static FVariants<K, TextStyle, D> lerpTextStyle<K extends FVariantConstraint, D extends Delta<TextStyle>>(
+    FVariants<K, TextStyle, D> a,
+    FVariants<K, TextStyle, D> b,
+    double t,
+  ) => lerpWhere(a, b, t, TextStyle.lerp);
+
+  /// Linearly interpolates between two [FVariants] using the given [lerp] function.
+  ///
+  /// Only keys present in both [a] and [b] are lerped.
+  static FVariants<K, V, D> lerpWhere<K extends FVariantConstraint, V, D extends Delta<V>>(
+    FVariants<K, V, D> a,
+    FVariants<K, V, D> b,
+    double t,
+    V? Function(V?, V?, double) lerp,
+  ) {
+    final base = lerp(a.base, b.base, t);
+    final variants = <K, V>{};
+
+    // V is V?. Casts are necessary as flow typing isn't smart enough to propagate this check.
+    if (null is V) {
+      for (final key in a.variants.keys) {
+        if (b.variants.containsKey(key)) {
+          variants[key] = lerp(a.variants[key], b.variants[key], t) as V;
+        }
+      }
+
+      return ._(base as V, variants);
+    } else {
+      for (final key in a.variants.keys) {
+        if (b.variants.containsKey(key)) {
+          if (lerp(a.variants[key], b.variants[key], t) case final lerped?) {
+            variants[key] = lerped;
+          }
+        }
+      }
+
+      return ._(base ?? (t < 0.5 ? a.base : b.base), variants);
+    }
+  }
+
   /// The base variant.
   final V base;
 

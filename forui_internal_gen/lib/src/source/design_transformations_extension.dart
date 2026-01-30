@@ -1,3 +1,4 @@
+import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:code_builder/code_builder.dart';
@@ -16,11 +17,11 @@ class DesignTransformationsExtension extends TransformationsExtension {
             ..docs.addAll(['/// Provides [copyWith] and [lerp] methods.'])
             ..name = '\$${element.name!}Transformations'
             ..on = refer(element.name!)
-            ..methods.addAll([await copyWith, _lerp]))
+            ..methods.addAll([await copyWith, await _lerp]))
           .build();
 
-  Method get _lerp {
-    String invocation(FieldElement field) {
+  Future<Method> get _lerp async {
+    Future<String> invocation(FieldElement field) async {
       final type = field.type;
       final name = field.name!;
 
@@ -45,28 +46,24 @@ class DesignTransformationsExtension extends TransformationsExtension {
           final t when shadow.isAssignableFromType(t) => 'Shadow.lerpList($name, other.$name, t) ?? $name',
           _ => 't < 0.5 ? $name : other.$name',
         },
-        // FWidgetStateMap<T>/FWidgetStateMap<T?>
-        _ when fWidgetStateMap.isAssignableFromType(type) && type is ParameterizedType => switch (type
-            .typeArguments
-            .single) {
-          final t when boxDecoration.isAssignableFromType(t) && t.nullabilitySuffix == .none =>
-            '.lerpBoxDecoration($name, other.$name, t)',
-          final t when boxDecoration.isAssignableFromType(t) => '.lerpWhere($name, other.$name, t, BoxDecoration.lerp)',
-          //
-          final t when color.isAssignableFromType(t) && t.nullabilitySuffix == .none =>
-            '.lerpColor($name, other.$name, t)',
-          final t when color.isAssignableFromType(t) => '.lerpWhere($name, other.$name, t, Color.lerp)',
-          //
-          final t when iconThemeData.isAssignableFromType(t) && t.nullabilitySuffix == .none =>
-            '.lerpIconThemeData($name, other.$name, t)',
-          final t when iconThemeData.isAssignableFromType(t) => '.lerpWhere($name, other.$name, t, IconThemeData.lerp)',
-          //
-          final t when textStyle.isAssignableFromType(t) && t.nullabilitySuffix == .none =>
-            '.lerpTextStyle($name, other.$name, t)',
-          final t when textStyle.isAssignableFromType(t) => '.lerpWhere($name, other.$name, t, TextStyle.lerp)',
-          //
-          _ => 't < 0.5 ? $name : other.$name',
-        },
+        // FVariants<K, V, D> - use AST to get type due to circular dependency
+        InterfaceType(:final element) when element.name == 'FVariants' => await () async {
+          final node = await step.resolver.astNodeFor(field.firstFragment);
+          if (node?.parent case VariableDeclarationList(type: NamedType(:final typeArguments?))) {
+            return switch (typeArguments.arguments[1].toSource()) {
+              'BoxDecoration' => '.lerpBoxDecoration($name, other.$name, t)',
+              'BoxDecoration?' => '.lerpWhere($name, other.$name, t, BoxDecoration.lerp)',
+              'Color' => '.lerpColor($name, other.$name, t)',
+              'Color?' => '.lerpWhere($name, other.$name, t, Color.lerp)',
+              'IconThemeData' => '.lerpIconThemeData($name, other.$name, t)',
+              'IconThemeData?' => '.lerpWhere($name, other.$name, t, IconThemeData.lerp)',
+              'TextStyle' => '.lerpTextStyle($name, other.$name, t)',
+              'TextStyle?' => '.lerpWhere($name, other.$name, t, TextStyle.lerp)',
+              _ => 't < 0.5 ? $name : other.$name',
+            };
+          }
+          return 't < 0.5 ? $name : other.$name';
+        }(),
         // Nested motion/style
         _ when nestedMotion(type) || nestedStyle(type) => '$name.lerp(other.$name, t)',
         //
@@ -75,7 +72,7 @@ class DesignTransformationsExtension extends TransformationsExtension {
     }
 
     // Generate field assignments for the lerp method body.
-    final assignments = [for (final field in fields) '${field.name}: ${invocation(field)},'].join();
+    final assignments = [for (final field in fields) '${field.name}: ${await invocation(field)},'].join();
 
     return Method(
       (m) => m
