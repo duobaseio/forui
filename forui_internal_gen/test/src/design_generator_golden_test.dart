@@ -535,6 +535,39 @@ sealed class FGoldenStyleDelta with Delta<FGoldenStyle> {
   const factory FGoldenStyleDelta.inherit() = _FGoldenStyleInherit;
 
   /// Creates a partial modification of a [FGoldenStyle].
+  ///
+  /// ## Parameters
+  /// * [FGoldenStyle.someDouble] - This is a field's summary.
+  /// * [FGoldenStyle.alignment]
+  /// * [FGoldenStyle.alignmentGeometry]
+  /// * [FGoldenStyle.borderRadius]
+  /// * [FGoldenStyle.borderRadiusGeometry]
+  /// * [FGoldenStyle.boxConstraints]
+  /// * [FGoldenStyle.boxDecoration]
+  /// * [FGoldenStyle.decoration]
+  /// * [FGoldenStyle.color]
+  /// * [FGoldenStyle.edgeInsets]
+  /// * [FGoldenStyle.edgeInsetsDirectional]
+  /// * [FGoldenStyle.edgeInsetsGeometry]
+  /// * [FGoldenStyle.iconThemeData]
+  /// * [FGoldenStyle.textStyle]
+  /// * [FGoldenStyle.boxShadows]
+  /// * [FGoldenStyle.shadows]
+  /// * [FGoldenStyle.boxDecorationVariants]
+  /// * [FGoldenStyle.nullableBoxDecorationVariants]
+  /// * [FGoldenStyle.colorVariants]
+  /// * [FGoldenStyle.nullableColorVariants]
+  /// * [FGoldenStyle.iconThemeDataVariants]
+  /// * [FGoldenStyle.nullableIconThemeDataVariants]
+  /// * [FGoldenStyle.textStyleVariants]
+  /// * [FGoldenStyle.nullableTextStyleVariants]
+  /// * [FGoldenStyle.nestedMotion]
+  /// * [FGoldenStyle.nestedStyle]
+  /// * [FGoldenStyle.list]
+  /// * [FGoldenStyle.set]
+  /// * [FGoldenStyle.map]
+  /// * [FGoldenStyle.variantsWithGenericDelta] - Variants with generic delta.
+  /// * [FGoldenStyle.variantsWithSpecificDelta] - Variants with specific delta.
   const factory FGoldenStyleDelta.delta({
     double someDouble,
     Alignment? alignment,
@@ -790,6 +823,11 @@ sealed class FGoldenNestedMotionDelta with Delta<FGoldenNestedMotion> {
   const factory FGoldenNestedMotionDelta.inherit() = _FGoldenNestedMotionInherit;
 
   /// Creates a partial modification of a [FGoldenNestedMotion].
+  ///
+  /// ## Parameters
+  /// * [FGoldenNestedMotion.someDouble] - This is a field's summary.
+  /// * [FGoldenNestedMotion.duration]
+  /// * [FGoldenNestedMotion.curve]
   const factory FGoldenNestedMotionDelta.delta({double? someDouble, Duration? duration, Curve? curve}) =
       _FGoldenNestedMotionDelta;
 }
@@ -884,6 +922,8 @@ sealed class FGoldenNestedStyleDelta with Delta<FGoldenNestedStyle> {
   const factory FGoldenNestedStyleDelta.inherit() = _FGoldenNestedStyleInherit;
 
   /// Creates a partial modification of a [FGoldenNestedStyle].
+  ///
+  /// ## Parameters
   const factory FGoldenNestedStyleDelta.delta() = _FGoldenNestedStyleDelta;
 }
 

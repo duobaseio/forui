@@ -9,7 +9,7 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
 import 'package:forui/src/theme/variant.dart';
 
-@Variants(FSwitchStyle, {
+@Variants('FSwitch', {
   'disabled': (2, 'The semantic variant when this widget is disabled and cannot be interacted with.'),
   'error': (2, 'The semantic variant when this widget is in an error state.'),
   'selected': (2, 'The semantic variant when this widget is selected/on.'),

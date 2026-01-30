@@ -1,9 +1,5 @@
-import 'package:analyzer/dart/element/type.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:meta/meta.dart';
-
-/// Matches the suffixing Style or Styles.
-final _style = RegExp(r'Styles?$');
 
 /// Generates widget-specific variant and variant constraint extension types.
 @internal
@@ -31,7 +27,7 @@ class VariantExtensionType {
   };
 
   /// The style name.
-  final String style;
+  final String prefix;
 
   /// The variant constraint name.
   final String constraint;
@@ -43,19 +39,18 @@ class VariantExtensionType {
   final Map<String, (int, String)> variants;
 
   /// Creates a new [VariantExtensionType].
-  VariantExtensionType(InterfaceType widget, this.variants)
-    : style = widget.element.name!,
-      constraint = '${widget.element.name!.replaceFirst(_style, '')}VariantConstraint',
-      variant = '${widget.element.name!.replaceFirst(_style, '')}Variant';
+  VariantExtensionType(this.prefix, this.variants)
+    : constraint = '${prefix}VariantConstraint',
+      variant = '${prefix}Variant';
 
   /// Generates the variant constraint extension type.
   ExtensionType generateVariantConstraint() => ExtensionType(
     (b) => b
       ..docs.addAll([
-        '/// Represents a combination of variants for a [$style]',
+        '/// Represents a combination of variants.',
         '///',
         '/// See also:',
-        '/// * [$variant], which represents individual variants for [$style].',
+        '/// * [$variant], which represents individual variants.',
       ])
       ..constant = true
       ..name = constraint
@@ -95,7 +90,7 @@ class VariantExtensionType {
           ..static = true
           ..modifier = .constant
           ..name = name
-          ..assignment = Code(constructor),
+          ..assignment = Code('$variant._($constructor)'),
       ),
   ];
 
@@ -150,12 +145,12 @@ class VariantExtensionType {
   ExtensionType generateVariant() => ExtensionType(
     (b) => b
       ..docs.addAll([
-        '/// Represents a variant in [$style].',
+        '/// Represents a variant.',
         '///',
         '/// Each variant has a tier that determines its specificity. Higher tiers take precedence during resolution.',
         '///',
         '/// See also:',
-        '/// * [$constraint], which represents combinations of variants for [$style].',
+        '/// * [$constraint], which represents combinations of variants.',
       ])
       ..constant = true
       ..name = variant

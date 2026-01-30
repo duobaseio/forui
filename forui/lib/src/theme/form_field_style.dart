@@ -7,7 +7,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-@Variants(FFormFieldStyle, {
+@Variants('FFormField', {
   'disabled': (2, 'The semantic variant when this widget is disabled and cannot be interacted with.'),
   'error': (2, 'The semantic variant when this widget is in an error state.'),
 })

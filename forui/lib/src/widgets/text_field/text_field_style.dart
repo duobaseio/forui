@@ -9,7 +9,7 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
 import 'package:forui/src/theme/variant.dart';
 
-@Variants(FTextFieldStyle, {
+@Variants('FTextField', {
   'disabled': (2, 'The semantic variant when this widget is disabled and cannot be interacted with.'),
   'error': (2, 'The semantic variant when this widget is in an error state.'),
   'focused': (1, 'The interaction variant when the given widget or any of its descendants have focus.'),

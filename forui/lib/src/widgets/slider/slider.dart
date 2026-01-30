@@ -149,7 +149,12 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderValue> {
     };
 
     final styles = context.theme.sliderStyles;
-    final sliderStyle = style(layout.vertical ? styles.verticalStyle : styles.horizontalStyle);
+    final sliderStyle = style(
+      styles.resolve({
+        if (layout.vertical) FSliderAxisVariant.vertical else FSliderAxisVariant.horizontal,
+        context.platformVariant,
+      }),
+    );
 
     return LayoutBuilder(
       builder: (_, constraints) => _Slider(

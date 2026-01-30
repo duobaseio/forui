@@ -8,13 +8,11 @@ import 'package:forui/src/widgets/slider/track.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  tearDown(() => FTouch.primary = null);
-
   testWidgets('blue screen', (tester) async {
     await tester.pumpWidget(
       TestScaffold.blue(
         child: FSlider(
-          style: .value(TestScaffold.blueScreen.sliderStyles.horizontalStyle),
+          style: .value(TestScaffold.blueScreen.sliderStyles.base),
           control: .managedContinuous(initial: FSliderValue(min: 0.30, max: 0.60)),
           marks: const [
             .mark(value: 0.0, label: Text('0')),
@@ -130,18 +128,11 @@ void main() {
       for (final touch in [true, false]) {
         for (final enabled in [true, false]) {
           testWidgets('${theme.name} - $layout - ${enabled ? 'enabled' : 'disabled'}', (tester) async {
-            FTouch.primary = touch;
-            final styles = FSliderStyles.inherit(
-              colors: theme.data.colors,
-              typography: theme.data.typography,
-              style: theme.data.style,
-            );
-
             await tester.pumpWidget(
               TestScaffold.app(
                 theme: theme.data,
+                platform: touch ? .android : .macOS,
                 child: FSlider(
-                  style: .value(layout.vertical ? styles.verticalStyle : styles.horizontalStyle),
                   label: const Text('Label'),
                   description: const Text('Description'),
                   control: .managedContinuousRange(initial: FSliderValue(min: 0.30, max: 0.60)),
@@ -175,18 +166,11 @@ void main() {
         }
 
         testWidgets('${theme.name} - $layout - focused', (tester) async {
-          FTouch.primary = touch;
-          final styles = FSliderStyles.inherit(
-            colors: theme.data.colors,
-            typography: theme.data.typography,
-            style: theme.data.style,
-          );
-
           await tester.pumpWidget(
             TestScaffold.app(
               theme: theme.data,
+              platform: touch ? .android : .macOS,
               child: FSlider(
-                style: .value(layout.vertical ? styles.verticalStyle : styles.horizontalStyle),
                 label: const Text('Label'),
                 description: const Text('Description'),
                 forceErrorText: 'Error',
@@ -214,18 +198,11 @@ void main() {
         });
 
         testWidgets('${theme.name} - $layout - error', (tester) async {
-          FTouch.primary = touch;
-          final styles = FSliderStyles.inherit(
-            colors: theme.data.colors,
-            typography: theme.data.typography,
-            style: theme.data.style,
-          );
-
           await tester.pumpWidget(
             TestScaffold.app(
               theme: theme.data,
+              platform: touch ? .android : .macOS,
               child: FSlider(
-                style: .value(layout.vertical ? styles.verticalStyle : styles.horizontalStyle),
                 label: const Text('Label'),
                 description: const Text('Description'),
                 forceErrorText: 'Error',
@@ -300,7 +277,9 @@ void main() {
 
       setUp(() {
         final sliderStyles = FThemes.zinc.light.sliderStyles;
-        sliderStyle = layout.vertical ? sliderStyles.verticalStyle : sliderStyles.horizontalStyle;
+        sliderStyle = sliderStyles.resolve({
+          if (layout.vertical) FSliderAxisVariant.vertical else FSliderAxisVariant.horizontal,
+        });
 
         positive = layout.vertical ? .centerLeft : .topCenter;
         negative = layout.vertical ? .centerRight : .bottomCenter;

@@ -76,7 +76,7 @@ class _GestureDetectorState extends State<_GestureDetector> {
       return track;
     }
 
-    if (FTouch.primary || trackHitRegionCrossExtent != null) {
+    if (context.platformVariant.touch || trackHitRegionCrossExtent != null) {
       final crossAxisExtent = trackHitRegionCrossExtent ?? max(style.thumbSize, style.crossAxisExtent);
       final (height, width) = layout.vertical ? (null, crossAxisExtent) : (crossAxisExtent, null);
 

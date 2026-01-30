@@ -11,7 +11,7 @@ import 'package:forui/src/theme/variant.dart';
 import 'package:forui/src/widgets/select/content/content.dart';
 import 'package:forui/src/widgets/select/content/inherited_controller.dart';
 
-@Variants(FSelectSectionStyle, {
+@Variants('FSelectSection', {
   'disabled': (2, 'The semantic variant when this widget is disabled and cannot be interacted with.'),
 })
 part 'select_item.design.dart';

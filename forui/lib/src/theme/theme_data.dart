@@ -750,7 +750,13 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     selectGroupStyle: a.selectGroupStyle.lerp(b.selectGroupStyle, t),
     selectMenuTileStyle: a.selectMenuTileStyle.lerp(b.selectMenuTileStyle, t),
     sidebarStyle: a.sidebarStyle.lerp(b.sidebarStyle, t),
-    sliderStyles: a.sliderStyles.lerp(b.sliderStyles, t),
+    sliderStyles: FVariants.lerpWhereUsing(
+      a.sliderStyles,
+      b.sliderStyles,
+      t,
+      (a, b, t) => a!.lerp(b!, t),
+      FSliderStyles.raw,
+    ),
     toasterStyle: a.toasterStyle.lerp(b.toasterStyle, t),
     switchStyle: a.switchStyle.lerp(b.switchStyle, t),
     tabsStyle: a.tabsStyle.lerp(b.tabsStyle, t),
@@ -1012,22 +1018,22 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
 
       // Slider
       sliderTheme: SliderThemeData(
-        activeTrackColor: sliderStyles.horizontalStyle.activeColor.base,
-        inactiveTrackColor: sliderStyles.horizontalStyle.inactiveColor.base,
-        disabledActiveTrackColor: sliderStyles.horizontalStyle.activeColor.resolve({FSliderVariant.disabled}),
-        disabledInactiveTrackColor: sliderStyles.horizontalStyle.inactiveColor.resolve({FSliderVariant.disabled}),
-        activeTickMarkColor: sliderStyles.horizontalStyle.markStyle.tickColor.base,
-        inactiveTickMarkColor: sliderStyles.horizontalStyle.markStyle.tickColor.base,
-        disabledActiveTickMarkColor: sliderStyles.horizontalStyle.markStyle.tickColor.resolve({
+        activeTrackColor: sliderStyles.base.activeColor.base,
+        inactiveTrackColor: sliderStyles.base.inactiveColor.base,
+        disabledActiveTrackColor: sliderStyles.base.activeColor.resolve({FSliderVariant.disabled}),
+        disabledInactiveTrackColor: sliderStyles.base.inactiveColor.resolve({FSliderVariant.disabled}),
+        activeTickMarkColor: sliderStyles.base.markStyle.tickColor.base,
+        inactiveTickMarkColor: sliderStyles.base.markStyle.tickColor.base,
+        disabledActiveTickMarkColor: sliderStyles.base.markStyle.tickColor.resolve({
           FSliderVariant.disabled,
         }),
-        disabledInactiveTickMarkColor: sliderStyles.horizontalStyle.markStyle.tickColor.resolve({
+        disabledInactiveTickMarkColor: sliderStyles.base.markStyle.tickColor.resolve({
           FSliderVariant.disabled,
         }),
-        thumbColor: sliderStyles.horizontalStyle.thumbStyle.borderColor.base,
-        disabledThumbColor: sliderStyles.horizontalStyle.thumbStyle.borderColor.resolve({FSliderVariant.disabled}),
-        valueIndicatorColor: sliderStyles.horizontalStyle.tooltipStyle.decoration.color,
-        valueIndicatorTextStyle: sliderStyles.horizontalStyle.tooltipStyle.textStyle,
+        thumbColor: sliderStyles.base.thumbStyle.borderColor.base,
+        disabledThumbColor: sliderStyles.base.thumbStyle.borderColor.resolve({FSliderVariant.disabled}),
+        valueIndicatorColor: sliderStyles.base.tooltipStyle.decoration.color,
+        valueIndicatorTextStyle: sliderStyles.base.tooltipStyle.textStyle,
       ),
 
       // Switch

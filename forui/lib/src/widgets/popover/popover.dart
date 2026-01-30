@@ -99,10 +99,6 @@ enum FPopoverHideRegion {
 /// * [FPopoverController] for controlling a popover.
 /// * [FPopoverStyle] for customizing a popover's appearance.
 class FPopover extends StatefulWidget {
-  /// The platform-specific default popover and child anchors.
-  static ({Alignment popover, Alignment child}) get defaultPlatform =>
-      FTouch.primary ? (popover: .bottomCenter, child: .topCenter) : (popover: .topCenter, child: .bottomCenter);
-
   static Widget _builder(BuildContext _, FPopoverController _, Widget? child) => child!;
 
   /// Defines how the popover's shown state is controlled.
@@ -130,8 +126,9 @@ class FPopover extends StatefulWidget {
   /// the popover's top edge will align with the child's bottom edge.
   /// {@endtemplate}
   ///
-  /// Defaults to [Alignment.bottomCenter] on Android and iOS, and [Alignment.topCenter] on all other platforms.
-  final AlignmentGeometry popoverAnchor;
+  /// Defaults to [Alignment.bottomCenter] on Android, iOS and Fuchsia, and [Alignment.topCenter] on all other platforms.
+  /// To change the platform variant, update the enclosing [FTheme.platform]/[FAdaptiveScope.platform].
+  final AlignmentGeometry? popoverAnchor;
 
   /// {@template forui.widgets.FPopover.childAnchor}
   /// The anchor point on the [child] used for positioning relative to the popover's anchor.
@@ -141,7 +138,8 @@ class FPopover extends StatefulWidget {
   /// {@endtemplate}
   ///
   /// Defaults to [Alignment.topCenter] on Android and iOS, and [Alignment.bottomCenter] on all other platforms.
-  final AlignmentGeometry childAnchor;
+  ///  To change the platform variant, update the enclosing [FTheme.platform]/[FAdaptiveScope.platform].
+  final AlignmentGeometry? childAnchor;
 
   /// {@template forui.widgets.FPopover.spacing}
   /// The spacing between the popover and child anchors.
@@ -261,7 +259,7 @@ class FPopover extends StatefulWidget {
   /// Throws an [AssertionError] if:
   /// * [groupId] is not null and [hideRegion] is not set to [FPopoverHideRegion.excludeChild].
   /// * neither [builder] nor [child] is provided.
-  FPopover({
+  const FPopover({
     required this.popoverBuilder,
     this.control = const .managed(),
     this.style = const .inherit(),
@@ -282,8 +280,8 @@ class FPopover extends StatefulWidget {
     this.shortcuts,
     this.builder = _builder,
     this.child,
-    AlignmentGeometry? popoverAnchor,
-    AlignmentGeometry? childAnchor,
+    this.popoverAnchor,
+    this.childAnchor,
     super.key,
   }) : assert(
          groupId == null || hideRegion == FPopoverHideRegion.excludeChild,
@@ -293,9 +291,7 @@ class FPopover extends StatefulWidget {
          focusNode == null || traversalEdgeBehavior == null,
          'Cannot provide both focusNode and traversalEdgeBehavior',
        ),
-       assert(builder != _builder || child != null, 'Either builder or child must be provided'),
-       popoverAnchor = popoverAnchor ?? defaultPlatform.popover,
-       childAnchor = childAnchor ?? defaultPlatform.child;
+       assert(builder != _builder || child != null, 'Either builder or child must be provided');
 
   @override
   State<FPopover> createState() => _State();
@@ -389,6 +385,9 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
     final style = widget.style(context.theme.popoverStyle);
     final direction = Directionality.maybeOf(context) ?? .ltr;
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
+    final touch = context.platformVariant.touch;
+    final popoverAnchor = widget.popoverAnchor ?? (touch ? .bottomCenter : .topCenter);
+    final childAnchor = widget.childAnchor ?? (touch ? .topCenter : .bottomCenter);
 
     var child = widget.builder(context, _controller, widget.child);
 
@@ -400,8 +399,8 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
       child: FPortal(
         controller: _controller.overlay,
         constraints: widget.constraints,
-        portalAnchor: widget.popoverAnchor,
-        childAnchor: widget.childAnchor,
+        portalAnchor: popoverAnchor,
+        childAnchor: childAnchor,
         viewInsets: MediaQuery.viewPaddingOf(context) + style.viewInsets.resolve(direction),
         spacing: widget.spacing,
         overflow: widget.overflow,
@@ -419,7 +418,7 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
               ),
         portalBuilder: (context, _) {
           Widget popover = ScaleTransition(
-            alignment: widget.popoverAnchor.resolve(direction),
+            alignment: popoverAnchor.resolve(direction),
             scale: _controller.scale,
             child: FadeTransition(
               opacity: _controller.fade,

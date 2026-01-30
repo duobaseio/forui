@@ -1,4 +1,4 @@
-import 'package:forui_internal_gen/src/source/transformations_extension.dart';
+import 'package:forui_internal_gen/src/source/docs.dart';
 import 'package:test/test.dart';
 
 void main() {

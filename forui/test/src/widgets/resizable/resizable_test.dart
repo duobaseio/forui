@@ -19,12 +19,6 @@ void main() {
     builder: (context, snapshot, child) => const Align(child: Text('B')),
   );
 
-  setUp(() {
-    FTouch.primary = false;
-  });
-
-  tearDown(() => FTouch.primary = null);
-
   for (final (index, constructor) in [
     () => FResizable(crossAxisExtent: 0, axis: .vertical, children: [top, bottom]),
   ].indexed) {
@@ -34,6 +28,7 @@ void main() {
   testWidgets('vertical drag downwards', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
+        platform: .macOS,
         child: Center(
           child: FResizable(crossAxisExtent: 50, axis: .vertical, children: [top, bottom]),
         ),
@@ -50,6 +45,7 @@ void main() {
   testWidgets('vertical drag upwards', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
+        platform: .macOS,
         child: Center(
           child: FResizable(crossAxisExtent: 50, axis: .vertical, children: [top, bottom]),
         ),
@@ -66,6 +62,7 @@ void main() {
   testWidgets('horizontal drag right', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
+        platform: .macOS,
         child: Center(
           child: FResizable(crossAxisExtent: 50, axis: .horizontal, children: [top, bottom]),
         ),
@@ -82,6 +79,7 @@ void main() {
   testWidgets('horizontal drag left', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
+        platform: .macOS,
         child: Center(
           child: FResizable(crossAxisExtent: 50, axis: .horizontal, children: [top, bottom]),
         ),

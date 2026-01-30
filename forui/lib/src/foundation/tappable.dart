@@ -8,7 +8,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-@Variants(FTappableStyle, {
+@Variants('FTappable', {
   'disabled': (2, 'The semantic variant when this widget is disabled and cannot be interacted with.'),
   'selected': (2, 'The semantic variant when this item has been selected.'),
   'primaryFocused': (1, 'The interaction variant when a given widget (and not its descendants) has focus.'),
@@ -22,28 +22,6 @@ part 'tappable.design.dart';
 ///
 /// See [FTappable.onVariantChange].
 typedef FTappableVariantChangeCallback = void Function(Set<FTappableVariant> previous, Set<FTappableVariant> current);
-
-/// Utilities for retrieving information about the current platform.
-@Deprecated('This needs to be migrated.')
-extension FTouch on Never {
-  /// The platforms that use touch as the primary input. This isn't 100% accurate as there are hybrid devices that use
-  /// both touch and keyboard/mouse input, i.e., Windows Surface laptops.
-  static const Set<TargetPlatform> platforms = {.android, .iOS, .fuchsia};
-
-  static bool? _primary;
-
-  /// True if the current platform uses touch as the primary input.
-  static bool get primary => _primary ?? platforms.contains(defaultTargetPlatform);
-
-  @visibleForTesting
-  static set primary(bool? value) {
-    if (!kDebugMode) {
-      throw UnsupportedError('Setting Touch.primary is only available in debug mode.');
-    }
-
-    _primary = value;
-  }
-}
 
 /// An area that responds to touch.
 ///

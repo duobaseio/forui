@@ -11,7 +11,7 @@ import 'package:forui/src/theme/variant.dart';
 import 'package:forui/src/widgets/autocomplete/autocomplete_content.dart';
 import 'package:forui/src/widgets/autocomplete/autocomplete_controller.dart';
 
-@Variants(FAutocompleteSectionStyle, {
+@Variants('FAutocompleteSection', {
   'disabled': (2, 'The semantic variant when this widget is disabled and cannot be interacted with.'),
 })
 part 'autocomplete_item.design.dart';

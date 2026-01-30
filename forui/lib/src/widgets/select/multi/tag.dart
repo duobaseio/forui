@@ -9,7 +9,7 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
 import 'package:forui/src/theme/variant.dart';
 
-@Variants(FMultiSelectTagStyle, {
+@Variants('FMultiSelectTag', {
   'disabled': (2, 'The semantic variant when this widget is disabled and cannot be interacted with.'),
   'focused': (1, 'The interaction variant when the given widget or any of its descendants have focus.'),
   'hovered': (1, 'The interaction variant when the user drags their mouse cursor over the given widget.'),
