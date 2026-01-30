@@ -1,3 +1,4 @@
+import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
 import 'package:code_builder/code_builder.dart' hide RecordType;
 import 'package:forui_internal_gen/src/source/delta_class.dart';
@@ -19,20 +20,27 @@ class DesignGenerator extends Generator {
     final generated = <String>[];
 
     for (final annotated in library.libraryDirectivesAnnotatedWith(variants)) {
-      final (style, variants) = variantsAnnotation(annotated.annotation.objectValue);
-      final generator = VariantExtensionType(style, variants);
-
-      generated.addAll([
-        _emitter.visitExtensionType(generator.generateVariantConstraint()).toString(),
-        _emitter.visitExtensionType(generator.generateVariant()).toString(),
-      ]);
+      for (final metadata in annotated.metadata2?.annotations ?? <ElementAnnotation>[]) {
+        if (metadata.computeConstantValue() case final annotation? when variants.isExactlyType(annotation.type!)) {
+          final (prefix, variants) = variantsAnnotation(annotation);
+          final generator = VariantExtensionType(prefix, variants);
+          generated.addAll([
+            _emitter.visitExtensionType(generator.generateVariantConstraint()).toString(),
+            _emitter.visitExtensionType(generator.generateVariant()).toString(),
+          ]);
+        }
+      }
     }
 
     // {style: {sentinelName: sentinelValue, ...}, ...}
     final sentinelValues = <String, Map<String, String>>{};
     for (final annotated in library.libraryDirectivesAnnotatedWith(sentinels)) {
-      final (style, values) = sentinelsAnnotation(annotated.annotation.objectValue);
-      sentinelValues[style.element.name!] = values;
+      for (final metadata in annotated.metadata2?.annotations ?? <ElementAnnotation>[]) {
+        if (metadata.computeConstantValue() case final annotation? when sentinels.isExactlyType(annotation.type!)) {
+          final (style, values) = sentinelsAnnotation(annotation);
+          sentinelValues[style.element.name!] = values;
+        }
+      }
     }
 
     for (final type in library.classes) {

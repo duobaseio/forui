@@ -10,7 +10,7 @@ import 'package:forui/src/foundation/annotations.dart';
 import 'package:forui/src/foundation/keys.dart';
 import 'package:forui/src/theme/variant.dart';
 
-@Variants(FCheckboxStyle, {
+@Variants('FCheckbox', {
   'disabled': (2, 'The semantic variant when this widget is disabled and cannot be interacted with.'),
   'error': (2, 'The semantic variant when this widget is in an error state.'),
   'selected': (2, 'The semantic variant when this widget is selected/checked.'),

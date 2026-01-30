@@ -56,11 +56,12 @@ class FResizable extends StatefulWidget {
   ///
   /// Hit regions are centered around the dividers between resizable regions.
   ///
-  /// Defaults to `60` on Android and iOS, and `10` on other platforms.
+  /// Defaults to `60` on Android, iOS and Fuchsia, and `10` on other platforms. To change the platform variant, update
+  /// the enclosing [FTheme.platform]/[FAdaptiveScope.platform].
   ///
   /// ## Contract
   /// Throws [AssertionError] if [hitRegionExtent] <= 0.
-  final double hitRegionExtent;
+  final double? hitRegionExtent;
 
   /// The percentage of the total extent by which regions are resized when using the keyboard. Defaults to 0.005 (0.5%).
   ///
@@ -75,20 +76,19 @@ class FResizable extends StatefulWidget {
   final List<FResizableRegion> children;
 
   /// Creates a [FResizable].
-  FResizable({
+  const FResizable({
     required this.axis,
     required this.children,
     this.control = const .managedCascade(),
     this.style = const .inherit(),
     this.divider = .dividerWithThumb,
     this.crossAxisExtent,
+    this.hitRegionExtent,
     this.resizePercentage = 0.005,
     this.semanticFormatterCallback = _label,
-    double? hitRegionExtent,
     super.key,
   }) : assert(crossAxisExtent == null || 0 < crossAxisExtent, 'crossAxisExtent ($crossAxisExtent) must be > 0'),
-       assert(hitRegionExtent == null || 0 < hitRegionExtent, 'hitRegionExtent ($hitRegionExtent) must be > 0'),
-       hitRegionExtent = hitRegionExtent ?? (FTouch.primary ? 60 : 10);
+       assert(hitRegionExtent == null || 0 < hitRegionExtent, 'hitRegionExtent ($hitRegionExtent) must be > 0');
 
   @override
   State<StatefulWidget> createState() => _FResizableState();
@@ -111,11 +111,17 @@ class FResizable extends StatefulWidget {
 
 class _FResizableState extends State<FResizable> {
   late FResizableController _controller;
+  late double _hitRegionExtent;
 
   @override
   void initState() {
     super.initState();
     _controller = widget.control.create(() {});
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
     _update();
   }
 
@@ -126,6 +132,7 @@ class _FResizableState extends State<FResizable> {
     if (updated ||
         widget.axis != old.axis ||
         widget.crossAxisExtent != old.crossAxisExtent ||
+        widget.hitRegionExtent != old.hitRegionExtent ||
         !widget.children.equals(old.children)) {
       _controller = controller;
       _update();
@@ -139,16 +146,18 @@ class _FResizableState extends State<FResizable> {
   }
 
   void _update() {
+    _hitRegionExtent = widget.hitRegionExtent ?? (context.platformVariant.touch ? 60 : 10);
+
     var minOffset = 0.0;
-    final minTotalExtent = widget.children.sum((c) => max(c.minExtent ?? 0, widget.hitRegionExtent), initial: 0.0);
+    final minTotalExtent = widget.children.sum((c) => max(c.minExtent ?? 0, _hitRegionExtent), initial: 0.0);
     final totalExtent = widget.children.sum((c) => c.initialExtent, initial: 0.0);
     final regions = [
       for (final (index, region) in widget.children.indexed)
         FResizableRegionData(
           index: index,
           extent: (
-            min: region.minExtent ?? widget.hitRegionExtent,
-            max: totalExtent - minTotalExtent + max(region.minExtent ?? 0, widget.hitRegionExtent),
+            min: region.minExtent ?? _hitRegionExtent,
+            max: totalExtent - minTotalExtent + max(region.minExtent ?? 0, _hitRegionExtent),
             total: totalExtent,
           ),
           offset: (min: minOffset, max: minOffset += region.initialExtent),
@@ -195,7 +204,7 @@ class _FResizableState extends State<FResizable> {
                     left: i,
                     right: i + 1,
                     crossAxisExtent: constraints.maxHeight.isFinite ? constraints.maxHeight : widget.crossAxisExtent,
-                    hitRegionExtent: widget.hitRegionExtent,
+                    hitRegionExtent: _hitRegionExtent,
                     resizePercentage: widget.resizePercentage,
                     cursor: SystemMouseCursors.resizeLeftRight,
                     semanticFormatterCallback: widget.semanticFormatterCallback,
@@ -233,7 +242,7 @@ class _FResizableState extends State<FResizable> {
                     left: i,
                     right: i + 1,
                     crossAxisExtent: constraints.maxWidth.isFinite ? constraints.maxWidth : widget.crossAxisExtent,
-                    hitRegionExtent: widget.hitRegionExtent,
+                    hitRegionExtent: _hitRegionExtent,
                     resizePercentage: widget.resizePercentage,
                     cursor: SystemMouseCursors.resizeUpDown,
                     semanticFormatterCallback: widget.semanticFormatterCallback,

@@ -7,7 +7,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-@Variants(FAlertStyle, {'destructive': (2, 'The destructive alert style.')})
+@Variants('FAlert', {'destructive': (2, 'The destructive alert style.')})
 part 'alert.design.dart';
 
 /// A visual element displaying status information (info, warning, success, or error).

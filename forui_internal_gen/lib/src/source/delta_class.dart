@@ -1,6 +1,7 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
 import 'package:code_builder/code_builder.dart';
+import 'package:forui_internal_gen/src/source/docs.dart';
 import 'package:forui_internal_gen/src/source/types.dart';
 import 'package:meta/meta.dart';
 
@@ -49,7 +50,7 @@ class DeltaClass {
           ),
           Constructor(
             (c) => c
-              ..docs.addAll(['/// Creates a partial modification of a [${_class.name}].'])
+              ..docs.addAll(_deltaConstructorDocs)
               ..constant = true
               ..factory = true
               ..name = 'delta'
@@ -58,6 +59,22 @@ class DeltaClass {
           ),
         ]),
     );
+  }
+
+  List<String> get _deltaConstructorDocs {
+    final docs = [
+      '/// Creates a partial modification of a [${_class.name}].',
+      '///',
+      '/// ## Parameters',
+    ];
+
+    for (final field in _fields) {
+      final prefix = '/// * [${_class.name}.${field.name}]';
+      final summary = summarizeDocs(field.documentationComment);
+      docs.add('$prefix${summary == null ? '' : ' - $summary'}');
+    }
+
+    return docs;
   }
 
   /// Generates the private value class.

@@ -6,10 +6,6 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  tearDown(() {
-    FTouch.primary = null;
-  });
-
   for (final theme in TestScaffold.themes) {
     testWidgets('${theme.name} hidden ', (tester) async {
       await tester.pumpWidget(
@@ -26,11 +22,10 @@ void main() {
     });
 
     testWidgets('${theme.name} shown on touch device', (tester) async {
-      FTouch.primary = true;
-
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
+          platform: .android,
           child: FPopover(
             control: const .managed(initial: true),
             popoverBuilder: (context, _) => const SizedBox.square(dimension: 100),
@@ -44,11 +39,10 @@ void main() {
     });
 
     testWidgets('${theme.name} shown on non-touch device', (tester) async {
-      FTouch.primary = false;
-
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
+          platform: .macOS,
           child: FPopover(
             control: const .managed(initial: true),
             popoverBuilder: (context, _) => const SizedBox.square(dimension: 100),
@@ -65,11 +59,10 @@ void main() {
     });
 
     testWidgets('${theme.name} with barrier', (tester) async {
-      FTouch.primary = false;
-
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
+          platform: .macOS,
           child: FPopover(
             control: const .managed(initial: true),
             style: .delta(

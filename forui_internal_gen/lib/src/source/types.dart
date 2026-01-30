@@ -97,13 +97,11 @@ String aliasAwareType(DartType type) {
 }
 
 /// Returns the the `Variants` annotation's fields.
-(InterfaceType widget, Map<String, (int, String)> variants) variantsAnnotation(DartObject annotation) => (
-  annotation.getField('style')!.toTypeValue()! as InterfaceType,
+(String prefix, Map<String, (int, String)> variants) variantsAnnotation(DartObject annotation) => (
+  annotation.getField('prefix')!.toStringValue()!,
   annotation.getField('variants')!.toMapValue()!.map((key, value) {
     final record = value!.toRecordValue()!.positional;
-    final tier = record[0].toIntValue()!;
-    final documentation = record[1].toStringValue()!;
-    return MapEntry(key!.toStringValue()!, (tier, documentation));
+    return MapEntry(key!.toStringValue()!, (record[0].toIntValue()!, record[1].toStringValue()!));
   }),
 );
 

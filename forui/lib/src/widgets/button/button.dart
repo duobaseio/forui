@@ -9,7 +9,7 @@ import 'package:forui/src/foundation/debug.dart';
 import 'package:forui/src/theme/variant.dart';
 import 'package:forui/src/widgets/button/button_content.dart';
 
-@Variants(FButtonStyle, {
+@Variants('FButton', {
   'secondary': (2, 'The secondary button style.'),
   'destructive': (3, 'The destructive button style.'),
   'outline': (4, 'The outline button style.'),

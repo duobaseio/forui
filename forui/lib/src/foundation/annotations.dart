@@ -2,13 +2,13 @@ import 'package:meta/meta.dart';
 
 @internal
 class Variants {
-  /// The corresponding style.
-  final Type style;
+  /// The variant's prefix, i.e. `<prefix>Variant` and `<prefix>VariantConstraint`.
+  final String prefix;
 
   /// The variants and their associated tier and documentation.
   final Map<String, (int, String)> variants;
 
-  const Variants(this.style, this.variants);
+  const Variants(this.prefix, this.variants);
 }
 
 @internal

@@ -8,7 +8,7 @@ import 'package:forui/src/foundation/annotations.dart';
 import 'package:forui/src/theme/variant.dart';
 import 'package:forui/src/widgets/badge/badge_content.dart';
 
-@Variants(FBadgeStyle, {
+@Variants('FBadge', {
   'secondary': (2, 'The secondary badge style.'),
   'outline': (3, 'The outline badge style.'),
   'destructive': (4, 'The destructive badge style.'),

@@ -9,28 +9,30 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
 import 'package:forui/src/theme/variant.dart';
 
-@Variants(FSliderStyle, {
+@Variants('FSliderAxis', {
+  'horizontal': (1, 'The horizontal slider variant.'),
+  'vertical': (1, 'The vertical slider variant.'),
+})
+@Variants('FSlider', {
   'disabled': (2, 'The semantic variant when this widget is disabled and cannot be interacted with.'),
 })
 part 'slider_styles.design.dart';
 
 /// A slider's styles.
-class FSliderStyles with Diagnosticable, _$FSliderStylesFunctions {
-  /// The enabled slider's horizontal style.
-  @override
-  final FSliderStyle horizontalStyle;
+class FSliderStyles extends FVariants<FSliderAxisVariantConstraint, FSliderStyle, FSliderStyleDelta> {
+  /// Creates a [FSliderStyles] with concrete styles.
+  FSliderStyles(super.base, {required super.variants});
 
-  /// The enabled slider's vertical style.
-  @override
-  final FSliderStyle verticalStyle;
+  /// Creates a [FSliderStyles] from deltas.
+  FSliderStyles.delta(super.base, {required super.variants}) : super.delta();
 
-  /// Creates a [FSliderStyles].
-  FSliderStyles({required this.horizontalStyle, required this.verticalStyle});
+  /// Creates a [FSliderStyles] from raw values.
+  FSliderStyles.raw(super.base, super.variants) : super.raw();
 
   /// Creates a [FSliderStyles] that inherits its properties.
   FSliderStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        horizontalStyle: .inherit(
+    : super.delta(
+        .inherit(
           colors: colors,
           typography: typography,
           style: style,
@@ -39,17 +41,24 @@ class FSliderStyles with Diagnosticable, _$FSliderStylesFunctions {
           descriptionPadding: const .only(top: 10),
           childPadding: const .only(top: 10, bottom: 20, left: 10, right: 10),
         ),
-        verticalStyle: .inherit(
-          colors: colors,
-          typography: typography,
-          style: style,
-          labelAnchor: .centerRight,
-          labelOffset: -10,
-          tooltipTipAnchor: FTouch.primary ? .bottomCenter : .centerLeft,
-          tooltipThumbAnchor: FTouch.primary ? .topCenter : .centerRight,
-          descriptionPadding: const .only(top: 5),
-          childPadding: const .all(10),
-        ),
+        variants: {
+          [.touch]: const .delta(thumbSize: 25),
+          [.vertical]: const .delta(
+            markStyle: .delta(labelAnchor: .centerRight, labelOffset: -10),
+            tooltipTipAnchor: .centerLeft,
+            tooltipThumbAnchor: .centerRight,
+            descriptionPadding: .only(top: 5),
+            childPadding: .all(10),
+          ),
+          [.vertical.and(.touch)]: const .delta(
+            markStyle: .delta(labelAnchor: .centerRight, labelOffset: -10),
+            tooltipTipAnchor: .bottomCenter,
+            tooltipThumbAnchor: .topCenter,
+            thumbSize: 25,
+            descriptionPadding: .only(top: 5),
+            childPadding: .all(10),
+          ),
+        },
       );
 }
 
@@ -74,7 +83,7 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
   @override
   final double crossAxisExtent;
 
-  /// The thumb's size. Defaults to `25` on touch platforms and `20` on non-touch platforms.
+  /// The thumb's size. Defaults to `25` on primarily touch devices and `20` on non-primarily touch devices.
   ///
   /// ## Contract
   /// Throws [AssertionError] if [thumbSize] is not positive.
@@ -117,7 +126,7 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
   final AlignmentGeometry tooltipThumbAnchor;
 
   /// Creates a [FSliderStyle].
-  FSliderStyle({
+  const FSliderStyle({
     required this.activeColor,
     required this.inactiveColor,
     required this.thumbStyle,
@@ -128,16 +137,15 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
     required super.errorTextStyle,
     this.borderRadius = const .all(.circular(4)),
     this.crossAxisExtent = 8,
-    double? thumbSize,
+    this.thumbSize = 20,
     this.tooltipMotion = const FTooltipMotion(),
-    this.tooltipTipAnchor = .bottomCenter,
-    this.tooltipThumbAnchor = .topCenter,
+    this.tooltipTipAnchor = .centerLeft,
+    this.tooltipThumbAnchor = .centerRight,
     super.labelPadding = const .only(bottom: 5),
     super.descriptionPadding,
     super.errorPadding = const .only(top: 5),
     super.childPadding,
-  }) : assert(thumbSize == null || 0 < thumbSize, 'thumbSize ($thumbSize) must be > 0'),
-       thumbSize = thumbSize ?? (FTouch.primary ? 25 : 20);
+  }) : assert(0 < thumbSize, 'thumbSize must be > 0');
 
   /// Creates a [FSliderStyle] that inherits its properties.
   FSliderStyle.inherit({
@@ -148,8 +156,6 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
     required double labelOffset,
     required EdgeInsetsGeometry descriptionPadding,
     required EdgeInsetsGeometry childPadding,
-    AlignmentGeometry tooltipTipAnchor = .bottomCenter,
-    AlignmentGeometry tooltipThumbAnchor = .topCenter,
   }) : this(
          activeColor: FVariants(
            colors.primary,
@@ -175,8 +181,6 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
            labelOffset: labelOffset,
          ),
          tooltipStyle: .inherit(colors: colors, typography: typography, style: style),
-         tooltipTipAnchor: tooltipTipAnchor,
-         tooltipThumbAnchor: tooltipThumbAnchor,
          labelTextStyle: style.formFieldStyle.labelTextStyle,
          descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,
          errorTextStyle: style.formFieldStyle.errorTextStyle,
