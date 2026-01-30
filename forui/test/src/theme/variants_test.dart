@@ -1,3 +1,6 @@
+import 'dart:ui';
+
+import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
@@ -13,6 +16,15 @@ class _Add with Delta<int> {
   int call(int base) => base + value;
 }
 
+class _NullableDelta with Delta<double?> {
+  const _NullableDelta();
+
+  @override
+  double? call(double? base) => base;
+}
+
+double? _lerpNullableDouble(double? a, double? b, double t) => lerpDouble(a, b, t);
+
 void main() {
   const a = FVariant(1, 'a');
   const b = FVariant(1, 'b');
@@ -20,6 +32,125 @@ void main() {
   const ab = And(a, b);
 
   group('FVariants', () {
+    test('lerpBoxDecoration', () {
+      final first = createVariants<FVariant, BoxDecoration, Delta<BoxDecoration>>(
+        const BoxDecoration(color: Color(0xFF000000)),
+        {a: const BoxDecoration(color: Color(0xFF000000))},
+      );
+      final second = createVariants<FVariant, BoxDecoration, Delta<BoxDecoration>>(
+        const BoxDecoration(color: Color(0xFFFFFFFF)),
+        {a: const BoxDecoration(color: Color(0xFFFFFFFF))},
+      );
+
+      final result = FVariants.lerpBoxDecoration(first, second, 0.5);
+
+      expect(result.base.color?.r, closeTo(0.5, 0.01));
+      expect(result.variants[a]?.color?.r, closeTo(0.5, 0.01));
+    });
+
+    test('lerpColor', () {
+      final first = createVariants<FVariant, Color, Delta<Color>>(const Color(0xFF000000), {a: const Color(0xFF000000)});
+      final second = createVariants<FVariant, Color, Delta<Color>>(const Color(0xFFFFFFFF), {a: const Color(0xFFFFFFFF)});
+
+      final result = FVariants.lerpColor(first, second, 0.5);
+
+      expect(result.base.r, closeTo(0.5, 0.01));
+      expect(result.variants[a]?.r, closeTo(0.5, 0.01));
+    });
+
+    test('lerpIconThemeData', () {
+      final first = createVariants<FVariant, IconThemeData, Delta<IconThemeData>>(
+        const IconThemeData(size: 10),
+        {a: const IconThemeData(size: 15)},
+      );
+      final second = createVariants<FVariant, IconThemeData, Delta<IconThemeData>>(
+        const IconThemeData(size: 20),
+        {a: const IconThemeData(size: 25)},
+      );
+
+      final result = FVariants.lerpIconThemeData(first, second, 0.5);
+
+      expect(result.base.size, 15);
+      expect(result.variants[a]?.size, 20);
+    });
+
+    test('lerpTextStyle', () {
+      final first = createVariants<FVariant, TextStyle, Delta<TextStyle>>(
+        const TextStyle(fontSize: 10),
+        {a: const TextStyle(fontSize: 15)},
+      );
+      final second = createVariants<FVariant, TextStyle, Delta<TextStyle>>(
+        const TextStyle(fontSize: 20),
+        {a: const TextStyle(fontSize: 25)},
+      );
+
+      final result = FVariants.lerpTextStyle(first, second, 0.5);
+
+      expect(result.base.fontSize, 15);
+      expect(result.variants[a]?.fontSize, 20);
+    });
+
+    group('lerpWhere', () {
+      group('non-nullable V', () {
+        for (final (description, firstVariants, secondVariants, expected) in [
+          ('keys in both', {a: 2.0, b: 4.0}, {a: 6.0, b: 8.0}, {a: 4.0, b: 6.0}),
+          ('keys only in first', {a: 2.0, b: 4.0}, {a: 6.0}, {a: 4.0}),
+          ('keys only in second', {a: 2.0}, {a: 6.0, b: 8.0}, {a: 4.0}),
+        ]) {
+          test(description, () {
+            final first = createVariants<FVariant, double, Delta<double>>(1.0, firstVariants);
+            final second = createVariants<FVariant, double, Delta<double>>(3.0, secondVariants);
+
+            final result = FVariants.lerpWhere(first, second, 0.5, lerpDouble);
+
+            expect(result.base, 2.0);
+            expect(result.variants, expected);
+          });
+        }
+
+        for (final (t, expected) in [(0.4, 1.0), (0.5, 3.0)]) {
+          test('base fallback at t=$t', () {
+            final first = createVariants<FVariant, double, Delta<double>>(1.0, {});
+            final second = createVariants<FVariant, double, Delta<double>>(3.0, {});
+
+            final result = FVariants.lerpWhere(first, second, t, (a, b, t) => null);
+
+            expect(result.base, expected);
+            expect(result.variants, <FVariant, double>{});
+          });
+        }
+      });
+
+      group('nullable V', () {
+        for (final (description, firstVariants, secondVariants, expected) in [
+          ('keys in both', {a: 2.0, b: 4.0}, {a: 6.0, b: 8.0}, {a: 4.0, b: 6.0}),
+          ('keys only in first', {a: 2.0, b: 4.0}, {a: 6.0}, {a: 4.0}),
+          ('keys only in second', {a: 2.0}, {a: 6.0, b: 8.0}, {a: 4.0}),
+          ('null values in both', <FVariant, double?>{a: null}, <FVariant, double?>{a: null}, {a: null}),
+        ]) {
+          test(description, () {
+            final first = createVariants<FVariant, double?, _NullableDelta>(1.0, firstVariants);
+            final second = createVariants<FVariant, double?, _NullableDelta>(3.0, secondVariants);
+
+            final result = FVariants.lerpWhere<FVariant, double?, _NullableDelta>(first, second, 0.5, _lerpNullableDouble);
+
+            expect(result.base, 2.0);
+            expect(result.variants, expected);
+          });
+        }
+
+        test('lerp returning null includes key with null value', () {
+          final first = createVariants<FVariant, double?, _NullableDelta>(1.0, {a: 2.0});
+          final second = createVariants<FVariant, double?, _NullableDelta>(3.0, {a: 6.0});
+
+          final result = FVariants.lerpWhere<FVariant, double?, _NullableDelta>(first, second, 0.5, (a, b, t) => null);
+
+          expect(result.base, null);
+          expect(result.variants, {a: null});
+        });
+      });
+    });
+
     for (final (values, active, expected) in [
       (<FVariant, int>{}, {a}, 0), // no variants → base
       ({a: 1}, {a}, 1), // single match

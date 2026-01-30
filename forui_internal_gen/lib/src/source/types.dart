@@ -36,6 +36,7 @@ const boxShadow = TypeChecker.fromUrl('package:flutter/src/painting/box_shadow.d
 const shadow = TypeChecker.fromUrl('dart:ui#Shadow');
 
 const fWidgetStateMap = TypeChecker.fromUrl('package:forui/src/theme/widget_state_map.dart#FWidgetStateMap');
+const fVariants = TypeChecker.fromUrl('package:forui/src/theme/variants.dart#FVariants');
 
 // Annotations
 const variants = TypeChecker.fromUrl('package:forui/src/foundation/annotations.dart#Variants');
