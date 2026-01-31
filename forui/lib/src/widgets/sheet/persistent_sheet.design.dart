@@ -1,0 +1,214 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+// dart format width=120
+// coverage:ignore-file
+
+part of 'persistent_sheet.dart';
+
+// **************************************************************************
+// DesignGenerator
+// **************************************************************************
+
+/// Provides [copyWith] and [lerp] methods.
+extension $FPersistentSheetStyleTransformations on FPersistentSheetStyle {
+  /// Returns a copy of this [FPersistentSheetStyle] with the given properties replaced.
+  ///
+  /// Consider [using the CLI to generate a style](https://forui.dev/docs/themes#individual-widget-styles).
+  ///
+  /// ## Parameters
+  /// * [FPersistentSheetStyle.motion] - The motion-related properties for a persistent sheet.
+  /// * [FPersistentSheetStyle.flingVelocity] - The minimum velocity to initiate a fling.
+  /// * [FPersistentSheetStyle.closeProgressThreshold] - The threshold for determining whether the sheet is closing.
+  @useResult
+  FPersistentSheetStyle copyWith({
+    FPersistentSheetMotion Function(FPersistentSheetMotion motion)? motion,
+    double? flingVelocity,
+    double? closeProgressThreshold,
+  }) => .new(
+    motion: motion != null ? motion(this.motion) : this.motion,
+    flingVelocity: flingVelocity ?? this.flingVelocity,
+    closeProgressThreshold: closeProgressThreshold ?? this.closeProgressThreshold,
+  );
+
+  /// Linearly interpolate between this and another [FPersistentSheetStyle] using the given factor [t].
+  @useResult
+  FPersistentSheetStyle lerp(FPersistentSheetStyle other, double t) => .new(
+    motion: motion.lerp(other.motion, t),
+    flingVelocity: lerpDouble(flingVelocity, other.flingVelocity, t) ?? flingVelocity,
+    closeProgressThreshold:
+        lerpDouble(closeProgressThreshold, other.closeProgressThreshold, t) ?? closeProgressThreshold,
+  );
+}
+
+mixin _$FPersistentSheetStyleFunctions on Diagnosticable {
+  FPersistentSheetMotion get motion;
+  double get flingVelocity;
+  double get closeProgressThreshold;
+
+  /// Returns itself.
+  ///
+  /// Allows [FPersistentSheetStyle] to replace functions that accept and return a [FPersistentSheetStyle], such as a style's
+  /// `copyWith(...)` function.
+  ///
+  /// ## Example
+  ///
+  /// Given:
+  /// ```dart
+  /// void copyWith(FPersistentSheetStyle Function(FPersistentSheetStyle) nestedStyle) {}
+  /// ```
+  ///
+  /// The following:
+  /// ```dart
+  /// copyWith((style) => FPersistentSheetStyle(...));
+  /// ```
+  ///
+  /// Can be replaced with:
+  /// ```dart
+  /// copyWith(FPersistentSheetStyle(...));
+  /// ```
+  @useResult
+  FPersistentSheetStyle call(Object? _) => this as FPersistentSheetStyle;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('motion', motion, level: .debug));
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is FPersistentSheetStyle &&
+          runtimeType == other.runtimeType &&
+          motion == other.motion &&
+          flingVelocity == other.flingVelocity &&
+          closeProgressThreshold == other.closeProgressThreshold);
+
+  @override
+  int get hashCode => motion.hashCode ^ flingVelocity.hashCode ^ closeProgressThreshold.hashCode;
+}
+
+/// A delta that applies modifications to a [FPersistentSheetStyle].
+sealed class FPersistentSheetStyleDelta with Delta<FPersistentSheetStyle> {
+  /// Creates a complete replacement for a [FPersistentSheetStyle].
+  const factory FPersistentSheetStyleDelta.replace(FPersistentSheetStyle replacement) = _FPersistentSheetStyleReplace;
+
+  /// Creates a partial modification of a [FPersistentSheetStyle].
+  const factory FPersistentSheetStyleDelta.merge({
+    FPersistentSheetMotionDelta? motion,
+    double? flingVelocity,
+    double? closeProgressThreshold,
+  }) = _FPersistentSheetStyleMerge;
+}
+
+class _FPersistentSheetStyleReplace implements FPersistentSheetStyleDelta {
+  const _FPersistentSheetStyleReplace(this._replacement);
+
+  final FPersistentSheetStyle _replacement;
+
+  @override
+  FPersistentSheetStyle call(FPersistentSheetStyle _) => _replacement;
+}
+
+class _FPersistentSheetStyleMerge implements FPersistentSheetStyleDelta {
+  const _FPersistentSheetStyleMerge({this.motion, this.flingVelocity, this.closeProgressThreshold});
+
+  final FPersistentSheetMotionDelta? motion;
+
+  final double? flingVelocity;
+
+  final double? closeProgressThreshold;
+
+  @override
+  FPersistentSheetStyle call(FPersistentSheetStyle original) => FPersistentSheetStyle(
+    motion: motion?.call(original.motion) ?? original.motion,
+    flingVelocity: flingVelocity ?? original.flingVelocity,
+    closeProgressThreshold: closeProgressThreshold ?? original.closeProgressThreshold,
+  );
+}
+
+/// Provides [copyWith] and [lerp] methods.
+extension $FPersistentSheetMotionTransformations on FPersistentSheetMotion {
+  /// Returns a copy of this [FPersistentSheetMotion] with the given properties replaced.
+  ///
+  /// ## Parameters
+  /// * [FPersistentSheetMotion.expandDuration] - The duration of the sheet's expansion animation.
+  /// * [FPersistentSheetMotion.collapseDuration] - The duration of the sheet's collapsing animation.
+  /// * [FPersistentSheetMotion.curve] - The curve of the sheet's expansion and collapse.
+  @useResult
+  FPersistentSheetMotion copyWith({Duration? expandDuration, Duration? collapseDuration, Curve? curve}) => .new(
+    expandDuration: expandDuration ?? this.expandDuration,
+    collapseDuration: collapseDuration ?? this.collapseDuration,
+    curve: curve ?? this.curve,
+  );
+
+  /// Linearly interpolate between this and another [FPersistentSheetMotion] using the given factor [t].
+  @useResult
+  FPersistentSheetMotion lerp(FPersistentSheetMotion other, double t) => .new(
+    expandDuration: t < 0.5 ? expandDuration : other.expandDuration,
+    collapseDuration: t < 0.5 ? collapseDuration : other.collapseDuration,
+    curve: t < 0.5 ? curve : other.curve,
+  );
+}
+
+mixin _$FPersistentSheetMotionFunctions on Diagnosticable {
+  Duration get expandDuration;
+  Duration get collapseDuration;
+  Curve get curve;
+
+  /// Returns itself.
+  @useResult
+  FPersistentSheetMotion call(Object? _) => this as FPersistentSheetMotion;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is FPersistentSheetMotion &&
+          runtimeType == other.runtimeType &&
+          expandDuration == other.expandDuration &&
+          collapseDuration == other.collapseDuration &&
+          curve == other.curve);
+
+  @override
+  int get hashCode => expandDuration.hashCode ^ collapseDuration.hashCode ^ curve.hashCode;
+}
+
+/// A delta that applies modifications to a [FPersistentSheetMotion].
+sealed class FPersistentSheetMotionDelta with Delta<FPersistentSheetMotion> {
+  /// Creates a complete replacement for a [FPersistentSheetMotion].
+  const factory FPersistentSheetMotionDelta.replace(FPersistentSheetMotion replacement) =
+      _FPersistentSheetMotionReplace;
+
+  /// Creates a partial modification of a [FPersistentSheetMotion].
+  const factory FPersistentSheetMotionDelta.merge({
+    Duration? expandDuration,
+    Duration? collapseDuration,
+    Curve? curve,
+  }) = _FPersistentSheetMotionMerge;
+}
+
+class _FPersistentSheetMotionReplace implements FPersistentSheetMotionDelta {
+  const _FPersistentSheetMotionReplace(this._replacement);
+
+  final FPersistentSheetMotion _replacement;
+
+  @override
+  FPersistentSheetMotion call(FPersistentSheetMotion _) => _replacement;
+}
+
+class _FPersistentSheetMotionMerge implements FPersistentSheetMotionDelta {
+  const _FPersistentSheetMotionMerge({this.expandDuration, this.collapseDuration, this.curve});
+
+  final Duration? expandDuration;
+
+  final Duration? collapseDuration;
+
+  final Curve? curve;
+
+  @override
+  FPersistentSheetMotion call(FPersistentSheetMotion original) => FPersistentSheetMotion(
+    expandDuration: expandDuration ?? original.expandDuration,
+    collapseDuration: collapseDuration ?? original.collapseDuration,
+    curve: curve ?? original.curve,
+  );
+}

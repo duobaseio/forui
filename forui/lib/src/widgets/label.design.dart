@@ -1,0 +1,293 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+// dart format width=120
+// coverage:ignore-file
+
+part of 'label.dart';
+
+// **************************************************************************
+// DesignGenerator
+// **************************************************************************
+
+/// Provides [copyWith] and [lerp] methods.
+extension $FLabelStylesTransformations on FLabelStyles {
+  /// Returns a copy of this [FLabelStyles] with the given properties replaced.
+  ///
+  /// Consider [using the CLI to generate a style](https://forui.dev/docs/themes#individual-widget-styles).
+  ///
+  /// ## Parameters
+  /// * [FLabelStyles.horizontalStyle] - The horizontal label's style.
+  /// * [FLabelStyles.verticalStyle] - The vertical label's style.
+  @useResult
+  FLabelStyles copyWith({
+    FLabelStyle Function(FLabelStyle style)? horizontalStyle,
+    FLabelStyle Function(FLabelStyle style)? verticalStyle,
+  }) => .new(
+    horizontalStyle: horizontalStyle != null ? horizontalStyle(this.horizontalStyle) : this.horizontalStyle,
+    verticalStyle: verticalStyle != null ? verticalStyle(this.verticalStyle) : this.verticalStyle,
+  );
+
+  /// Linearly interpolate between this and another [FLabelStyles] using the given factor [t].
+  @useResult
+  FLabelStyles lerp(FLabelStyles other, double t) => .new(
+    horizontalStyle: horizontalStyle.lerp(other.horizontalStyle, t),
+    verticalStyle: verticalStyle.lerp(other.verticalStyle, t),
+  );
+}
+
+mixin _$FLabelStylesFunctions on Diagnosticable {
+  FLabelStyle get horizontalStyle;
+  FLabelStyle get verticalStyle;
+
+  /// Returns itself.
+  ///
+  /// Allows [FLabelStyles] to replace functions that accept and return a [FLabelStyles], such as a style's
+  /// `copyWith(...)` function.
+  ///
+  /// ## Example
+  ///
+  /// Given:
+  /// ```dart
+  /// void copyWith(FLabelStyles Function(FLabelStyles) nestedStyle) {}
+  /// ```
+  ///
+  /// The following:
+  /// ```dart
+  /// copyWith((style) => FLabelStyles(...));
+  /// ```
+  ///
+  /// Can be replaced with:
+  /// ```dart
+  /// copyWith(FLabelStyles(...));
+  /// ```
+  @useResult
+  FLabelStyles call(Object? _) => this as FLabelStyles;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('horizontalStyle', horizontalStyle, level: .debug))
+      ..add(DiagnosticsProperty('verticalStyle', verticalStyle, level: .debug));
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is FLabelStyles &&
+          runtimeType == other.runtimeType &&
+          horizontalStyle == other.horizontalStyle &&
+          verticalStyle == other.verticalStyle);
+
+  @override
+  int get hashCode => horizontalStyle.hashCode ^ verticalStyle.hashCode;
+}
+
+/// A delta that applies modifications to a [FLabelStyles].
+sealed class FLabelStylesDelta with Delta<FLabelStyles> {
+  /// Creates a complete replacement for a [FLabelStyles].
+  const factory FLabelStylesDelta.replace(FLabelStyles replacement) = _FLabelStylesReplace;
+
+  /// Creates a partial modification of a [FLabelStyles].
+  const factory FLabelStylesDelta.merge({FLabelStyleDelta? horizontalStyle, FLabelStyleDelta? verticalStyle}) =
+      _FLabelStylesMerge;
+}
+
+class _FLabelStylesReplace implements FLabelStylesDelta {
+  const _FLabelStylesReplace(this._replacement);
+
+  final FLabelStyles _replacement;
+
+  @override
+  FLabelStyles call(FLabelStyles _) => _replacement;
+}
+
+class _FLabelStylesMerge implements FLabelStylesDelta {
+  const _FLabelStylesMerge({this.horizontalStyle, this.verticalStyle});
+
+  final FLabelStyleDelta? horizontalStyle;
+
+  final FLabelStyleDelta? verticalStyle;
+
+  @override
+  FLabelStyles call(FLabelStyles original) => FLabelStyles(
+    horizontalStyle: horizontalStyle?.call(original.horizontalStyle) ?? original.horizontalStyle,
+    verticalStyle: verticalStyle?.call(original.verticalStyle) ?? original.verticalStyle,
+  );
+}
+
+/// Provides [copyWith] and [lerp] methods.
+extension $FLabelStyleTransformations on FLabelStyle {
+  /// Returns a copy of this [FLabelStyle] with the given properties replaced.
+  ///
+  /// Consider [using the CLI to generate a style](https://forui.dev/docs/themes#individual-widget-styles).
+  ///
+  /// ## Parameters
+  /// * [FLabelStyle.labelPadding] - The label's padding.
+  /// * [FLabelStyle.descriptionPadding] - The description's padding.
+  /// * [FLabelStyle.errorPadding] - The error's padding.
+  /// * [FLabelStyle.childPadding] - The child's padding.
+  /// * [FLabelStyle.labelTextStyle] - The label's text style.
+  /// * [FLabelStyle.descriptionTextStyle] - The description's text style.
+  /// * [FLabelStyle.errorTextStyle] - The error's text style.
+  @useResult
+  FLabelStyle copyWith({
+    EdgeInsetsGeometry? labelPadding,
+    EdgeInsetsGeometry? descriptionPadding,
+    EdgeInsetsGeometry? errorPadding,
+    EdgeInsetsGeometry? childPadding,
+    FWidgetStateMap<TextStyle>? labelTextStyle,
+    FWidgetStateMap<TextStyle>? descriptionTextStyle,
+    TextStyle? errorTextStyle,
+  }) => .new(
+    labelPadding: labelPadding ?? this.labelPadding,
+    descriptionPadding: descriptionPadding ?? this.descriptionPadding,
+    errorPadding: errorPadding ?? this.errorPadding,
+    childPadding: childPadding ?? this.childPadding,
+    labelTextStyle: labelTextStyle ?? this.labelTextStyle,
+    descriptionTextStyle: descriptionTextStyle ?? this.descriptionTextStyle,
+    errorTextStyle: errorTextStyle ?? this.errorTextStyle,
+  );
+
+  /// Linearly interpolate between this and another [FLabelStyle] using the given factor [t].
+  @useResult
+  FLabelStyle lerp(FLabelStyle other, double t) => .new(
+    labelPadding: .lerp(labelPadding, other.labelPadding, t) ?? labelPadding,
+    descriptionPadding: .lerp(descriptionPadding, other.descriptionPadding, t) ?? descriptionPadding,
+    errorPadding: .lerp(errorPadding, other.errorPadding, t) ?? errorPadding,
+    childPadding: .lerp(childPadding, other.childPadding, t) ?? childPadding,
+    labelTextStyle: .lerpTextStyle(labelTextStyle, other.labelTextStyle, t),
+    descriptionTextStyle: .lerpTextStyle(descriptionTextStyle, other.descriptionTextStyle, t),
+    errorTextStyle: .lerp(errorTextStyle, other.errorTextStyle, t) ?? errorTextStyle,
+  );
+}
+
+mixin _$FLabelStyleFunctions on Diagnosticable {
+  EdgeInsetsGeometry get labelPadding;
+  EdgeInsetsGeometry get descriptionPadding;
+  EdgeInsetsGeometry get errorPadding;
+  EdgeInsetsGeometry get childPadding;
+  FWidgetStateMap<TextStyle> get labelTextStyle;
+  FWidgetStateMap<TextStyle> get descriptionTextStyle;
+  TextStyle get errorTextStyle;
+
+  /// Returns itself.
+  ///
+  /// Allows [FLabelStyle] to replace functions that accept and return a [FLabelStyle], such as a style's
+  /// `copyWith(...)` function.
+  ///
+  /// ## Example
+  ///
+  /// Given:
+  /// ```dart
+  /// void copyWith(FLabelStyle Function(FLabelStyle) nestedStyle) {}
+  /// ```
+  ///
+  /// The following:
+  /// ```dart
+  /// copyWith((style) => FLabelStyle(...));
+  /// ```
+  ///
+  /// Can be replaced with:
+  /// ```dart
+  /// copyWith(FLabelStyle(...));
+  /// ```
+  @useResult
+  FLabelStyle call(Object? _) => this as FLabelStyle;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('labelPadding', labelPadding, level: .debug))
+      ..add(DiagnosticsProperty('descriptionPadding', descriptionPadding, level: .debug))
+      ..add(DiagnosticsProperty('errorPadding', errorPadding, level: .debug))
+      ..add(DiagnosticsProperty('childPadding', childPadding, level: .debug));
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is FLabelStyle &&
+          runtimeType == other.runtimeType &&
+          labelPadding == other.labelPadding &&
+          descriptionPadding == other.descriptionPadding &&
+          errorPadding == other.errorPadding &&
+          childPadding == other.childPadding &&
+          labelTextStyle == other.labelTextStyle &&
+          descriptionTextStyle == other.descriptionTextStyle &&
+          errorTextStyle == other.errorTextStyle);
+
+  @override
+  int get hashCode =>
+      labelPadding.hashCode ^
+      descriptionPadding.hashCode ^
+      errorPadding.hashCode ^
+      childPadding.hashCode ^
+      labelTextStyle.hashCode ^
+      descriptionTextStyle.hashCode ^
+      errorTextStyle.hashCode;
+}
+
+/// A delta that applies modifications to a [FLabelStyle].
+sealed class FLabelStyleDelta with Delta<FLabelStyle> {
+  /// Creates a complete replacement for a [FLabelStyle].
+  const factory FLabelStyleDelta.replace(FLabelStyle replacement) = _FLabelStyleReplace;
+
+  /// Creates a partial modification of a [FLabelStyle].
+  const factory FLabelStyleDelta.merge({
+    EdgeInsetsGeometry? labelPadding,
+    EdgeInsetsGeometry? descriptionPadding,
+    EdgeInsetsGeometry? errorPadding,
+    EdgeInsetsGeometry? childPadding,
+    FWidgetStateMap<TextStyle>? labelTextStyle,
+    FWidgetStateMap<TextStyle>? descriptionTextStyle,
+    TextStyleDelta? errorTextStyle,
+  }) = _FLabelStyleMerge;
+}
+
+class _FLabelStyleReplace implements FLabelStyleDelta {
+  const _FLabelStyleReplace(this._replacement);
+
+  final FLabelStyle _replacement;
+
+  @override
+  FLabelStyle call(FLabelStyle _) => _replacement;
+}
+
+class _FLabelStyleMerge implements FLabelStyleDelta {
+  const _FLabelStyleMerge({
+    this.labelPadding,
+    this.descriptionPadding,
+    this.errorPadding,
+    this.childPadding,
+    this.labelTextStyle,
+    this.descriptionTextStyle,
+    this.errorTextStyle,
+  });
+
+  final EdgeInsetsGeometry? labelPadding;
+
+  final EdgeInsetsGeometry? descriptionPadding;
+
+  final EdgeInsetsGeometry? errorPadding;
+
+  final EdgeInsetsGeometry? childPadding;
+
+  final FWidgetStateMap<TextStyle>? labelTextStyle;
+
+  final FWidgetStateMap<TextStyle>? descriptionTextStyle;
+
+  final TextStyleDelta? errorTextStyle;
+
+  @override
+  FLabelStyle call(FLabelStyle original) => FLabelStyle(
+    labelPadding: labelPadding ?? original.labelPadding,
+    descriptionPadding: descriptionPadding ?? original.descriptionPadding,
+    errorPadding: errorPadding ?? original.errorPadding,
+    childPadding: childPadding ?? original.childPadding,
+    labelTextStyle: labelTextStyle ?? original.labelTextStyle,
+    descriptionTextStyle: descriptionTextStyle ?? original.descriptionTextStyle,
+    errorTextStyle: errorTextStyle?.call(original.errorTextStyle) ?? original.errorTextStyle,
+  );
+}
