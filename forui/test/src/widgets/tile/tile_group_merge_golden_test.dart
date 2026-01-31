@@ -19,7 +19,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FTileGroup.merge(
-            style: .value(TestScaffold.blueScreen.tileGroupStyle),
+            style: TestScaffold.blueScreen.tileGroupStyle,
             children: [
               FTileGroup(
                 label: const Text('Network'),
@@ -45,7 +45,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FTileGroup(
-            style: .value(TestScaffold.blueScreen.tileGroupStyle),
+            style: TestScaffold.blueScreen.tileGroupStyle,
             label: const Text('Network'),
             children: [
               .tile(
@@ -81,7 +81,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FTileGroup(
-            style: .value(TestScaffold.blueScreen.tileGroupStyle),
+            style: TestScaffold.blueScreen.tileGroupStyle,
             label: const Text('Network'),
             children: [
               .tile(
@@ -572,7 +572,7 @@ void main() {
         child: FTileGroup.merge(
           children: [
             .group(
-              style: .value(FThemes.green.dark.tileGroupStyle),
+              style: FThemes.green.dark.tileGroupStyle,
               children: [
                 .tile(
                   prefix: const Icon(FIcons.wifi),
@@ -582,7 +582,7 @@ void main() {
                   onPress: () {},
                 ),
                 .tile(
-                  style: .value(FThemes.blue.dark.tileGroupStyle.tileStyle),
+                  style: FThemes.blue.dark.tileGroupStyle.tileStyle,
                   prefix: const Icon(FIcons.bluetooth),
                   title: const Text('Bluetooth'),
                   subtitle: const Text('Fee, Fo'),

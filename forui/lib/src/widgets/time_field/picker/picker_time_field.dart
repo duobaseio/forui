@@ -175,7 +175,7 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
       builder: (state) => FTextField(
         control: .managed(controller: _textController),
         focusNode: _focus,
-        style: .value(style.fieldStyle),
+        style: style.fieldStyle,
         textAlign: widget.textAlign,
         textAlignVertical: widget.textAlignVertical,
         textDirection: widget.textDirection,
@@ -246,7 +246,7 @@ class _PickerPopover extends StatelessWidget {
   @override
   Widget build(BuildContext _) => FPopover(
     control: .managed(controller: popoverController),
-    style: .value(style.popoverStyle),
+    style: style.popoverStyle,
     constraints: properties.constraints,
     popoverAnchor: properties.anchor,
     childAnchor: properties.fieldAnchor,
@@ -263,7 +263,7 @@ class _PickerPopover extends StatelessWidget {
         padding: const .symmetric(horizontal: 5.0),
         child: FTimePicker(
           control: .managed(controller: controller.picker),
-          style: .value(style.pickerStyle),
+          style: style.pickerStyle,
           hour24: hour24,
           hourInterval: properties.hourInterval,
           minuteInterval: properties.minuteInterval,

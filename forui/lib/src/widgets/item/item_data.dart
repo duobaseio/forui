@@ -60,7 +60,7 @@ final class FInheritedItemData extends InheritedWidget {
     FItemStyle? style,
     double? spacing,
     FItemDivider? divider,
-    FVariants<FItemGroupVariantConstraint, Color, Delta<Color>>? dividerColor,
+    FVariants<FItemGroupVariantConstraint, Color, Delta>? dividerColor,
     double? dividerWidth,
     bool? enabled,
     int? index,
@@ -114,7 +114,7 @@ final class FItemData with Diagnosticable {
   final double spacing;
 
   /// The divider's style.
-  final FVariants<FItemGroupVariantConstraint, Color, Delta<Color>> dividerColor;
+  final FVariants<FItemGroupVariantConstraint, Color, Delta> dividerColor;
 
   /// The divider's width.
   final double dividerWidth;

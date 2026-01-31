@@ -4,6 +4,7 @@ import 'package:code_builder/code_builder.dart' hide RecordType;
 import 'package:forui_internal_gen/src/source/delta_class.dart';
 import 'package:forui_internal_gen/src/source/design_functions_mixin.dart';
 import 'package:forui_internal_gen/src/source/design_transformations_extension.dart';
+import 'package:forui_internal_gen/src/source/functions_mixin.dart';
 import 'package:forui_internal_gen/src/source/types.dart';
 import 'package:forui_internal_gen/src/source/variant_extension_type.dart';
 import 'package:source_gen/source_gen.dart';
@@ -66,35 +67,8 @@ class DesignGenerator extends Generator {
                 ).generate(),
               )
               .toString(),
-          _emitter
-              .visitMixin(
-                await DesignFunctionsMixin(step, type, [
-                  '/// Returns itself.',
-                  '/// ',
-                  "/// Allows [${type.name}] to replace functions that accept and return a [${type.name}], such as a style's",
-                  '/// `copyWith(...)` function.',
-                  '/// ',
-                  '/// ## Example',
-                  '/// ',
-                  '/// Given:',
-                  '/// ```dart',
-                  '/// void copyWith(${type.name} Function(${type.name}) nestedStyle) {}',
-                  '/// ```',
-                  '/// ',
-                  '/// The following:',
-                  '/// ```dart',
-                  '/// copyWith((style) => ${type.name}(...));',
-                  '/// ```',
-                  '/// ',
-                  '/// Can be replaced with:',
-                  '/// ```dart',
-                  '/// copyWith(${type.name}(...));',
-                  '/// ```',
-                ]).generate(),
-              )
-              .toString(),
+          _emitter.visitMixin(await DesignFunctionsMixin(step, type).generate()).toString(),
           _emitter.visitClass(await delta.generateSealed()).toString(),
-          _emitter.visitClass(delta.generateValue()).toString(),
           _emitter.visitClass(delta.generateInherit()).toString(),
           _emitter.visitClass(await delta.generateDelta()).toString(),
         ]);
@@ -115,16 +89,13 @@ class DesignGenerator extends Generator {
                 ).generate(),
               )
               .toString(),
-          _emitter.visitMixin(await DesignFunctionsMixin(step, type, ['/// Returns itself.']).generate()).toString(),
+          _emitter.visitMixin(await DesignFunctionsMixin(step, type).generate()).toString(),
           _emitter.visitClass(await delta.generateSealed()).toString(),
-          _emitter.visitClass(delta.generateValue()).toString(),
           _emitter.visitClass(delta.generateInherit()).toString(),
           _emitter.visitClass(await delta.generateDelta()).toString(),
         ]);
       } else if (type.name == 'FThemeData') {
-        generated.add(
-          _emitter.visitMixin(await DesignFunctionsMixin(step, type, ['/// Returns itself.']).generate()).toString(),
-        );
+        generated.add(_emitter.visitMixin(await FunctionsMixin(step, type).generate()).toString());
       }
     }
 

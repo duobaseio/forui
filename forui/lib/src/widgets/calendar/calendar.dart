@@ -33,6 +33,16 @@ class FCalendar extends StatefulWidget {
 
   /// The style. Defaults to [FThemeData.calendarStyle].
   ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FCalendarStyle(...)
+  /// ```
+  ///
   /// ## CLI
   /// To generate and customize this style:
   ///

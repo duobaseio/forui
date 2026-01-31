@@ -11,7 +11,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FSidebarGroup(
-            style: .value(TestScaffold.blueScreen.sidebarStyle.groupStyle),
+            style: TestScaffold.blueScreen.sidebarStyle.groupStyle,
             label: const Text('Group'),
             action: const Icon(FIcons.plus),
             onActionPress: () {},
@@ -30,7 +30,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FSidebarGroup(
-            style: .value(TestScaffold.blueScreen.sidebarStyle.groupStyle),
+            style: TestScaffold.blueScreen.sidebarStyle.groupStyle,
             label: const Text('Group'),
             action: const Icon(FIcons.plus),
             onActionPress: () {},

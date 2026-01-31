@@ -149,7 +149,7 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
           forceErrorText: widget.forceErrorText,
           builder: (state) => FTextField(
             control: .managed(controller: inputController),
-            style: .value(textFieldStyle),
+            style: textFieldStyle,
             builder: widget.builder,
             autocorrect: false,
             // We cannot use TextInputType.number as it does not contain a done button on iOS.

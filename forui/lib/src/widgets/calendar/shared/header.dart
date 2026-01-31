@@ -53,7 +53,7 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) => FTappable(
-    focusedOutlineStyle: .value(widget.style.focusedOutlineStyle),
+    focusedOutlineStyle: widget.style.focusedOutlineStyle,
     onPress: () => widget.type.value = switch (widget.type.value) {
       .day => .yearMonth,
       .yearMonth => .day,
@@ -138,7 +138,7 @@ class Navigation extends StatelessWidget {
           Padding(
             padding: const .directional(start: 7),
             child: FButton.icon(
-              style: .value(style.buttonStyle),
+              style: style.buttonStyle,
               onPress: onPrevious,
               child: const Icon(FIcons.chevronLeft),
             ),
@@ -148,7 +148,7 @@ class Navigation extends StatelessWidget {
           Padding(
             padding: const .directional(end: 7),
             child: FButton.icon(
-              style: .value(style.buttonStyle),
+              style: style.buttonStyle,
               onPress: onNext,
               child: const Icon(FIcons.chevronRight),
             ),

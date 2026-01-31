@@ -42,7 +42,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// The default content loading builder that shows a spinner when an asynchronous search is pending.
   static Widget defaultContentLoadingBuilder(BuildContext _, FSelectSearchStyle style) => Padding(
     padding: const .all(13),
-    child: FCircularProgress(style: .value(style.progressStyle)),
+    child: FCircularProgress(style: style.progressStyle),
   );
 
   /// The default content empty builder that shows a localized message when there are no results.
@@ -69,6 +69,16 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   final FPopoverControl popoverControl;
 
   /// The style.
+  ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FSelectStyle(...)
+  /// ```
   ///
   /// ## CLI
   /// To generate and customize this style:
@@ -721,7 +731,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
       builder: (state) => FTextField(
         control: .managed(controller: _textController),
         focusNode: _focus,
-        style: .value(style.fieldStyle),
+        style: style.fieldStyle,
         textAlign: widget.textAlign,
         textAlignVertical: widget.textAlignVertical,
         textDirection: widget.textDirection,
@@ -746,7 +756,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
         enabled: widget.enabled,
         builder: (context, _, states, field) => FPopover(
           control: .managed(controller: _popoverController),
-          style: .value(style.contentStyle),
+          style: style.contentStyle,
           constraints: widget.contentConstraints,
           popoverAnchor: widget.contentAnchor,
           childAnchor: widget.fieldAnchor,

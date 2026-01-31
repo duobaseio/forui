@@ -235,7 +235,7 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
       [.hovered, .pressed]: colors.secondary,
     };
 
-    final border = FVariants<FTappableVariantConstraint, Color?, Delta<Color?>>(
+    final border = FVariants<FTappableVariantConstraint, Color?, Delta>(
       null,
       variants: {
         [.disabled.and(.selected).and(.focused)]: colors.primaryForeground,

@@ -39,6 +39,16 @@ part 'scaffold.design.dart';
 class FScaffold extends StatelessWidget {
   /// The style. Defaults to [FThemeData.scaffoldStyle].
   ///
+  /// To modify the current style:
+  /// ```dart
+  /// scaffoldStyle: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// scaffoldStyle: FScaffoldStyle(...)
+  /// ```
+  ///
   /// ## CLI
   /// To generate and customize this style:
   ///

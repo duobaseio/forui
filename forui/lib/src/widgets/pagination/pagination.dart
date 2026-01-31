@@ -19,6 +19,16 @@ class FPagination extends StatefulWidget {
 
   /// The pagination's style.
   ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FPaginationStyle(...)
+  /// ```
+  ///
   /// ## CLI
   /// To generate and customize this style:
   ///
@@ -196,9 +206,9 @@ class Action extends StatelessWidget {
   Widget build(BuildContext context) => Padding(
     padding: style.itemPadding,
     child: FTappable(
-      style: .value(style.actionTappableStyle),
+      style: style.actionTappableStyle,
       semanticsLabel: semanticsLabel,
-      focusedOutlineStyle: .value(context.theme.style.focusedOutlineStyle),
+      focusedOutlineStyle: context.theme.style.focusedOutlineStyle,
       onPress: onPress,
       builder: (context, variants, child) => DecoratedBox(
         decoration: style.itemDecoration.resolve(variants),
@@ -237,8 +247,8 @@ class _Page extends StatelessWidget {
       child: ListenableBuilder(
         listenable: controller,
         builder: (_, _) => FTappable(
-          style: .value(style.pageTappableStyle),
-          focusedOutlineStyle: .value(style.focusedOutlineStyle),
+          style: style.pageTappableStyle,
+          focusedOutlineStyle: style.focusedOutlineStyle,
           selected: controller.value == page,
           onPress: () => controller.value = page,
           builder: (_, variants, _) => DecoratedBox(

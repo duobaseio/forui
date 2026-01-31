@@ -10,7 +10,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.blue(
         child: FTabs(
-          style: .value(TestScaffold.blueScreen.tabsStyle),
+          style: TestScaffold.blueScreen.tabsStyle,
           children: const [
             FTabEntry(label: Text('Account'), child: SizedBox()),
             FTabEntry(label: Text('Settings'), child: SizedBox()),

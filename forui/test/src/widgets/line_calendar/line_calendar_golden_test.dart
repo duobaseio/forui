@@ -21,7 +21,7 @@ void main() {
       TestScaffold.blue(
         child: Focus(
           focusNode: focus,
-          child: FLineCalendar(style: .value(TestScaffold.blueScreen.lineCalendarStyle)),
+          child: FLineCalendar(style: TestScaffold.blueScreen.lineCalendarStyle),
         ),
       ),
     );

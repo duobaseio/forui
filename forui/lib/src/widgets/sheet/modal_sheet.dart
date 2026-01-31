@@ -42,6 +42,16 @@ part 'modal_sheet.design.dart';
 /// Returns a `Future` that resolves to the value (if any) that was passed to [Navigator.pop] when the modal sheet was
 /// closed.
 ///
+/// To modify the current style:
+/// ```dart
+/// style: .delta(...)
+/// ```
+///
+/// To replace the style:
+/// ```dart
+/// style: FModalSheetStyle(...)
+/// ```
+///
 /// ## CLI
 /// To generate and customize this widget's style:
 ///

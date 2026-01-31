@@ -63,7 +63,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     T value,
     Widget label,
   ) => FMultiSelectTag(
-    style: .value(style.tagStyle),
+    style: style.tagStyle,
     label: label,
     onPress: enabled ? () => controller.update(value, add: false) : null,
   );
@@ -71,7 +71,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
   /// The default loading builder that shows a spinner when an asynchronous search is pending.
   static Widget defaultContentLoadingBuilder(BuildContext _, FSelectSearchStyle style) => Padding(
     padding: const EdgeInsets.all(13),
-    child: FCircularProgress(style: .value(style.progressStyle)),
+    child: FCircularProgress(style: style.progressStyle),
   );
 
   /// The default content empty builder that shows a localized message when there are no results.
@@ -96,6 +96,16 @@ abstract class FMultiSelect<T> extends StatefulWidget {
   final FPopoverControl popoverControl;
 
   /// The style.
+  ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FMultiSelectStyle(...)
+  /// ```
   ///
   /// ## CLI
   /// To generate and customize this style:
@@ -672,13 +682,13 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
             axis: .vertical,
             variants: formVariants,
             label: widget.label,
-            style: .value(style.fieldStyle),
+            style: style.fieldStyle,
             description: widget.description,
             // Error should never be null as doing so causes the widget tree to change.
             error: state.errorText == null ? const SizedBox() : widget.errorBuilder(context, state.errorText!),
             child: FPopover(
               control: .managed(controller: _popoverController),
-              style: .value(style.contentStyle),
+              style: style.contentStyle,
               constraints: widget.contentConstraints,
               popoverAnchor: widget.contentAnchor,
               childAnchor: widget.fieldAnchor,
@@ -696,7 +706,7 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
                 child: content(context, style),
               ),
               child: FTappable(
-                style: .value(style.fieldStyle.tappableStyle),
+                style: style.fieldStyle.tappableStyle,
                 focusNode: _focus,
                 onPress: widget.enabled ? _toggle : null,
                 builder: (context, tappableVariants, child) {
@@ -745,7 +755,7 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
                               Padding(
                                 padding: style.fieldStyle.clearButtonPadding,
                                 child: FButton.icon(
-                                  style: .value(style.fieldStyle.clearButtonStyle),
+                                  style: style.fieldStyle.clearButtonStyle,
                                   onPress: () => _controller.value = {},
                                   child: Icon(
                                     FIcons.x,
@@ -824,7 +834,7 @@ class FMultiSelectStyle with Diagnosticable, _$FMultiSelectStyleFunctions {
 class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSelectFieldStyleFunctions {
   /// The multi-select field's decoration.
   @override
-  final FVariants<FTextFieldVariantConstraint, Decoration, Delta<Decoration>> decoration;
+  final FVariants<FTextFieldVariantConstraint, Decoration, Delta> decoration;
 
   /// The multi-select field's padding. Defaults to `EdgeInsets.only(start: 10, top: 6, bottom: 6, end: 8)`.
   @override
@@ -930,8 +940,8 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
         },
       ),
       clearButtonStyle: ghost.copyWith(
-        iconContentStyle: .value(ghost.iconContentStyle.copyWith(
-          iconStyle: .value(.new(
+        iconContentStyle: ghost.iconContentStyle.copyWith(
+          iconStyle: FVariantsDelta.value(.new(
             IconThemeData(color: colors.mutedForeground, size: 17),
             variants: {
               [FTappableVariantConstraint.disabled]: IconThemeData(
@@ -940,9 +950,9 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
               ),
             },
           )),
-        )),
+        ),
       ),
-      tappableStyle: style.tappableStyle.copyWith(motion: const .value(FTappableMotion.none)),
+      tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
       labelTextStyle: style.formFieldStyle.labelTextStyle,
       descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,
       errorTextStyle: style.formFieldStyle.errorTextStyle,

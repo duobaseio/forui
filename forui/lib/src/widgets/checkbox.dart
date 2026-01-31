@@ -30,6 +30,16 @@ part 'checkbox.design.dart';
 class FCheckbox extends StatelessWidget {
   /// The style. Defaults to [FThemeData.checkboxStyle].
   ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FCheckboxStyle(...)
+  /// ```
+  ///
   /// ## CLI
   /// To generate and customize this style:
   ///
@@ -92,7 +102,7 @@ class FCheckbox extends StatelessWidget {
     final formVariants = <FFormFieldVariant>{if (!enabled) .disabled, if (error != null) .error};
 
     return FTappable(
-      style: .value(style.tappableStyle),
+      style: style.tappableStyle,
       semanticsLabel: semanticsLabel,
       selected: value,
       onPress: enabled ? () => onChange?.call(!value) : null,
@@ -107,7 +117,7 @@ class FCheckbox extends StatelessWidget {
         return FLabel(
           axis: .horizontal,
           variants: formVariants,
-          style: .value(style),
+          style: style,
           label: label,
           description: description,
           error: error,
@@ -115,7 +125,7 @@ class FCheckbox extends StatelessWidget {
           // rather than the entire FLabel, is outlined.
           child: FFocusedOutline(
             focused: tappableVariants.contains(FTappableVariant.focused),
-            style: .value(style.focusedOutlineStyle),
+            style: style.focusedOutlineStyle,
             child: AnimatedSwitcher(
               duration: style.motion.fadeInDuration,
               reverseDuration: style.motion.fadeOutDuration,
@@ -202,7 +212,7 @@ class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
   factory FCheckboxStyle.inherit({required FColors colors, required FStyle style}) {
     final label = FLabelStyles.inherit(style: style).horizontalStyle;
     return .new(
-      tappableStyle: style.tappableStyle.copyWith(motion: const .value(FTappableMotion.none)),
+      tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
       focusedOutlineStyle: style.focusedOutlineStyle.copyWith(borderRadius: .circular(4)),
       iconStyle: .delta(
         IconThemeData(color: colors.primaryForeground, size: 14),

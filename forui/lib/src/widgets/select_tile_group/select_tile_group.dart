@@ -40,6 +40,16 @@ class FSelectTileGroup<T> extends StatefulWidget with FTileGroupMixin, FFormFiel
 
   /// The style. Defaults to [FThemeData.tileGroupStyle].
   ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FTileGroupStyle(...)
+  /// ```
+  ///
   /// ## CLI
   /// To generate and customize this style:
   ///
@@ -234,7 +244,7 @@ class _FSelectTileGroupState<T> extends State<FSelectTileGroup<T>> {
         if (widget._children case final children?) {
           return FTileGroup(
             scrollController: widget.scrollController,
-            style: .value(groupStyle),
+            style: groupStyle,
             cacheExtent: widget.cacheExtent,
             maxHeight: widget.maxHeight,
             dragStartBehavior: widget.dragStartBehavior,
@@ -254,7 +264,7 @@ class _FSelectTileGroupState<T> extends State<FSelectTileGroup<T>> {
 
         return FTileGroup.builder(
           scrollController: widget.scrollController,
-          style: .value(groupStyle),
+          style: groupStyle,
           cacheExtent: widget.cacheExtent,
           maxHeight: widget.maxHeight,
           dragStartBehavior: widget.dragStartBehavior,

@@ -22,7 +22,7 @@ void main() {
         TestScaffold.blue(
           child: FCalendar(
             control: .managedDates(initial: selected, selectable: (date) => date != .utc(2024, 7, 2)),
-            style: .value(TestScaffold.blueScreen.calendarStyle),
+            style: TestScaffold.blueScreen.calendarStyle,
             start: DateTime(1900, 1, 8),
             end: DateTime(2024, 7, 10),
             today: DateTime(2024, 7, 14),
@@ -38,7 +38,7 @@ void main() {
         TestScaffold.blue(
           child: FCalendar(
             control: .managedDates(initial: selected, selectable: (date) => date != .utc(2024, 7, 2)),
-            style: .value(TestScaffold.blueScreen.calendarStyle),
+            style: TestScaffold.blueScreen.calendarStyle,
             initialType: FCalendarPickerType.yearMonth,
             start: DateTime(1900, 1, 8),
             end: DateTime(2024, 7, 10),

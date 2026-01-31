@@ -86,6 +86,16 @@ mixin FAutocompleteItemMixin on Widget {
 class FAutocompleteSection extends StatelessWidget with FAutocompleteItemMixin {
   /// The style. Defaults to the [FAutocompleteSectionStyle] inherited from the parent [FAutocomplete].
   ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FAutocompleteSectionStyle(...)
+  /// ```
+  ///
   /// ## CLI
   /// To generate and customize this style:
   ///
@@ -206,7 +216,7 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
 
   /// The divider's style.
   @override
-  final FVariants<FItemGroupVariantConstraint, Color, Delta<Color>> dividerColor;
+  final FVariants<FItemGroupVariantConstraint, Color, Delta> dividerColor;
 
   /// The divider's width.
   @override
@@ -275,7 +285,7 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
           prefixIconStyle: iconStyle,
           childTextStyle: textStyle,
         ),
-        tappableStyle: style.tappableStyle.copyWith(motion: const .value(FTappableMotion.none)),
+        tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
         focusedOutlineStyle: null,
       ),
     );
@@ -285,6 +295,16 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
 /// A suggestion in a [FAutocomplete] that can optionally be nested in a [FAutocompleteSection].
 abstract class FAutocompleteItem extends StatelessWidget with FAutocompleteItemMixin {
   /// The style. Defaults to the [FItemStyle] inherited from the parent [FAutocompleteSection] or [FAutocomplete].
+  ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FItemStyle(...)
+  /// ```
   ///
   /// ## CLI
   /// To generate and customize this style:

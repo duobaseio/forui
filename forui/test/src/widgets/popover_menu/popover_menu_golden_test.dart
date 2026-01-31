@@ -12,7 +12,7 @@ void main() {
         TestScaffold.blue(
           child: FPopoverMenu(
             control: const .managed(initial: true),
-            style: .value(TestScaffold.blueScreen.popoverMenuStyle),
+            style: TestScaffold.blueScreen.popoverMenuStyle,
             menu: [
               .group(
                 children: [.item(title: const Text('Item 1'), onPress: () {})],
@@ -38,7 +38,7 @@ void main() {
         TestScaffold.blue(
           child: FPopoverMenu.tiles(
             control: const .managed(initial: true),
-            style: .value(TestScaffold.blueScreen.popoverMenuStyle),
+            style: TestScaffold.blueScreen.popoverMenuStyle,
             menu: [
               .group(
                 children: [.tile(title: const Text('Item 1'), onPress: () {})],

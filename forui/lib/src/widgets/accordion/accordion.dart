@@ -25,6 +25,16 @@ class FAccordion extends StatefulWidget {
 
   /// The style. Defaults to [FThemeData.accordionStyle].
   ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FAccordionStyle(...)
+  /// ```
+  ///
   /// ## CLI
   /// To generate and customize this style:
   ///
@@ -199,7 +209,7 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
         iconStyle: .all(IconThemeData(color: colors.mutedForeground, size: 20)),
         focusedOutlineStyle: style.focusedOutlineStyle,
         dividerStyle: FDividerStyle(color: colors.border, padding: .zero),
-        tappableStyle: style.tappableStyle.copyWith(motion: const .value(FTappableMotion.none)),
+        tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
       );
 }
 

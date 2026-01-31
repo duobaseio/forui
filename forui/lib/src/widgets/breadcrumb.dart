@@ -23,6 +23,16 @@ part 'breadcrumb.design.dart';
 class FBreadcrumb extends StatelessWidget {
   /// The breadcrumb's style. Defaults to the appropriate style in [FThemeData.breadcrumbStyle].
   ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FBreadcrumbStyle(...)
+  /// ```
+  ///
   /// ## CLI
   /// To generate and customize this style:
   ///
@@ -200,8 +210,8 @@ class _Crumb extends StatelessWidget implements FBreadcrumbItem {
     final focusedOutlineStyle = context.theme.style.focusedOutlineStyle;
 
     return FTappable(
-      style: .value(style.tappableStyle),
-      focusedOutlineStyle: .value(focusedOutlineStyle),
+      style: style.tappableStyle,
+      focusedOutlineStyle: focusedOutlineStyle,
       selected: current,
       onPress: onPress,
       builder: (_, states, child) => DefaultTextStyle(style: style.textStyle.resolve(states), child: child!),
@@ -387,7 +397,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
         divider: widget.divider,
         menu: menu,
         child: FTappable(
-          focusedOutlineStyle: .value(style.focusedOutlineStyle),
+          focusedOutlineStyle: style.focusedOutlineStyle,
           onPress: _controller.toggle,
           child: Padding(
             padding: style.padding,
@@ -417,7 +427,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
         divider: widget.divider,
         menu: widget.tileMenu!,
         child: FTappable(
-          focusedOutlineStyle: .value(style.focusedOutlineStyle),
+          focusedOutlineStyle: style.focusedOutlineStyle,
           onPress: _controller.toggle,
           child: Padding(
             padding: style.padding,
@@ -475,7 +485,7 @@ class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
           },
         ),
         iconStyle: IconThemeData(color: colors.mutedForeground, size: 16),
-        tappableStyle: style.tappableStyle.copyWith(motion: const .value(FTappableMotion.none)),
+        tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
         focusedOutlineStyle: style.focusedOutlineStyle,
       );
 }

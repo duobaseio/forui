@@ -51,6 +51,16 @@ class FTile extends StatelessWidget with FTileMixin {
   ///
   /// Provide a style to prevent inheritance from the ancestor tile group.
   ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FTileStyle(...)
+  /// ```
+  ///
   /// ## CLI
   /// To generate and customize this style:
   ///
@@ -344,7 +354,7 @@ class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
           ),
         ),
         tappableStyle: style.tappableStyle.copyWith(
-          motion: const .value(FTappableMotion.none),
+          motion: FTappableMotion.none,
           pressedEnterDuration: .zero,
           pressedExitDuration: const Duration(milliseconds: 25),
         ),

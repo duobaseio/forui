@@ -13,6 +13,16 @@ import 'package:forui/src/foundation/debug.dart';
 class FSelectTile<T> extends StatelessWidget with FTileMixin {
   /// The style.
   ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FItemStyle(...)
+  /// ```
+  ///
   /// ## CLI
   /// To generate and customize this style:
   ///

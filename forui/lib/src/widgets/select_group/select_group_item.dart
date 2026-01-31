@@ -91,7 +91,7 @@ class _Checkbox<T> extends StatelessWidget with FSelectGroupItemMixin<T> {
     final FSelectGroupItemData(:controller, :selected, :style) = .of<T>(context);
     final checkboxStyle = this.style ?? style.checkboxStyle;
     return FCheckbox(
-      style: .value(checkboxStyle),
+      style: checkboxStyle,
       label: label,
       description: description,
       semanticsLabel: semanticsLabel,
@@ -153,7 +153,7 @@ class _Radio<T> extends StatelessWidget with FSelectGroupItemMixin<T> {
     final radioStyle = this.style ?? style.radioStyle;
 
     return FRadio(
-      style: .value(radioStyle),
+      style: radioStyle,
       label: label,
       description: description,
       semanticsLabel: semanticsLabel,

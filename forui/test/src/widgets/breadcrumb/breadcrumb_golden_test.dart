@@ -10,7 +10,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.blue(
         child: FBreadcrumb(
-          style: .value(TestScaffold.blueScreen.breadcrumbStyle),
+          style: TestScaffold.blueScreen.breadcrumbStyle,
           children: [
             FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
             FBreadcrumbItem(onPress: () {}, child: const Text('Core')),

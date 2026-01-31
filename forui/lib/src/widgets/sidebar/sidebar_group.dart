@@ -20,6 +20,16 @@ part 'sidebar_group.design.dart';
 class FSidebarGroup extends StatelessWidget {
   /// The sidebar group's style.
   ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FSidebarGroupStyle(...)
+  /// ```
+  ///
   /// ## CLI
   /// To generate and customize this style:
   ///
@@ -86,8 +96,8 @@ class FSidebarGroup extends StatelessWidget {
                       const SizedBox(),
                     if (action != null)
                       FTappable(
-                        style: .value(style.tappableStyle),
-                        focusedOutlineStyle: .value(style.focusedOutlineStyle),
+                        style: style.tappableStyle,
+                        focusedOutlineStyle: style.focusedOutlineStyle,
                         onHoverChange: onActionHoverChange,
                         onVariantChange: onActionVariantChange,
                         onPress: onActionPress,

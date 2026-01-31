@@ -10,7 +10,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.blue(
         child: FSidebar(
-          style: .value(TestScaffold.blueScreen.sidebarStyle),
+          style: TestScaffold.blueScreen.sidebarStyle,
           children: [
             FSidebarGroup(
               label: const Text('Group 1'),

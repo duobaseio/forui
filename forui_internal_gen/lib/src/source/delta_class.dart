@@ -20,26 +20,15 @@ class DeltaClass {
     final parameters = [for (final field in _fields) await _parameter(field, toThis: false)];
     return Class(
       (c) => c
-        ..docs.addAll(['/// A delta that applies modifications to a [${_class.name}].'])
+        ..docs.addAll([
+          '/// A delta that applies modifications to a [${_class.name}].',
+          '/// ',
+          '/// A [${_class.name}] is itself a [${_class.name}Delta].',
+        ])
         ..sealed = true
         ..name = '${_class.name}Delta'
-        ..mixins.add(refer('Delta<${_class.name}>'))
+        ..mixins.add(refer('Delta'))
         ..constructors.addAll([
-          Constructor(
-            (c) => c
-              ..docs.addAll(['/// Creates a complete replacement for a [${_class.name}].'])
-              ..constant = true
-              ..factory = true
-              ..name = 'value'
-              ..requiredParameters.add(
-                Parameter(
-                  (p) => p
-                    ..name = 'value'
-                    ..type = refer(_class.name!),
-                ),
-              )
-              ..redirect = refer('_${_class.name}Value'),
-          ),
           Constructor(
             (c) => c
               ..docs.addAll(['/// Creates a delta that returns the [${_class.name}] in the current context.'])
@@ -57,16 +46,28 @@ class DeltaClass {
               ..optionalParameters.addAll(parameters)
               ..redirect = refer('_${_class.name}Delta'),
           ),
-        ]),
+        ])
+        ..methods.add(
+          Method(
+            (m) => m
+              ..annotations.add(refer('override'))
+              ..returns = refer(_class.name!)
+              ..name = 'call'
+              ..requiredParameters.add(
+                Parameter(
+                  (p) => p
+                    ..covariant = true
+                    ..type = refer(_class.name!)
+                    ..name = 'value',
+                ),
+              ),
+          ),
+        ),
     );
   }
 
   List<String> get _deltaConstructorDocs {
-    final docs = [
-      '/// Creates a partial modification of a [${_class.name}].',
-      '///',
-      '/// ## Parameters',
-    ];
+    final docs = ['/// Creates a partial modification of a [${_class.name}].', '///', '/// ## Parameters'];
 
     for (final field in _fields) {
       final prefix = '/// * [${_class.name}.${field.name}]';
@@ -76,51 +77,6 @@ class DeltaClass {
 
     return docs;
   }
-
-  /// Generates the private value class.
-  Class generateValue() => Class(
-    (c) => c
-      ..name = '_${_class.name}Value'
-      ..implements.add(refer('${_class.name}Delta'))
-      ..fields.add(
-        Field(
-          (f) => f
-            ..modifier = .final$
-            ..type = refer(_class.name!)
-            ..name = '_value',
-        ),
-      )
-      ..constructors.add(
-        Constructor(
-          (c) => c
-            ..constant = true
-            ..requiredParameters.add(
-              Parameter(
-                (p) => p
-                  ..toThis = true
-                  ..name = '_value',
-              ),
-            ),
-        ),
-      )
-      ..methods.add(
-        Method(
-          (m) => m
-            ..annotations.add(refer('override'))
-            ..returns = refer(_class.name!)
-            ..name = 'call'
-            ..requiredParameters.add(
-              Parameter(
-                (p) => p
-                  ..type = refer(_class.name!)
-                  ..name = '_',
-              ),
-            )
-            ..lambda = true
-            ..body = const Code('_value'),
-        ),
-      ),
-  );
 
   /// Generates the private inherit class.
   Class generateInherit() => Class(
@@ -200,7 +156,8 @@ class DeltaClass {
   /// Generates the call method for the merge class.
   Future<Method> _call() async {
     final assignments = [
-      for (final field in _fields) '${field.name!}: ${(await deltaField(_step, field, _sentinels, prefix: 'original', cast: true)).$2}',
+      for (final field in _fields)
+        '${field.name!}: ${(await deltaField(_step, field, _sentinels, prefix: 'original', cast: true)).$2}',
     ].join(',');
     return Method(
       (m) => m

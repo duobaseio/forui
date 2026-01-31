@@ -20,7 +20,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.blue(
             child: FTileGroup(
-              style: .value(TestScaffold.blueScreen.tileGroupStyle),
+              style: TestScaffold.blueScreen.tileGroupStyle,
               label: const Text('Network'),
               description: const Text('Description'),
               children: [
@@ -51,7 +51,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.blue(
             child: FTileGroup(
-              style: .value(TestScaffold.blueScreen.tileGroupStyle),
+              style: TestScaffold.blueScreen.tileGroupStyle,
               label: const Text('Network'),
               children: [
                 .tile(
@@ -87,7 +87,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.blue(
             child: FTileGroup(
-              style: .value(TestScaffold.blueScreen.tileGroupStyle),
+              style: TestScaffold.blueScreen.tileGroupStyle,
               label: const Text('Network'),
               children: [
                 .tile(
@@ -118,7 +118,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.blue(
             child: FTileGroup(
-              style: .value(TestScaffold.blueScreen.tileGroupStyle),
+              style: TestScaffold.blueScreen.tileGroupStyle,
               label: const Text('Network'),
               description: const Text('Description'),
               error: const Text('This should not appear'),
@@ -538,7 +538,7 @@ void main() {
                 onPress: () {},
               ),
               .tile(
-                style: .value(FThemes.blue.dark.tileGroupStyle.tileStyle),
+                style: FThemes.blue.dark.tileGroupStyle.tileStyle,
                 prefix: const Icon(FIcons.bluetooth),
                 title: const Text('Bluetooth'),
                 subtitle: const Text('Fee, Fo'),
@@ -589,7 +589,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FTileGroup.builder(
-            style: .value(TestScaffold.blueScreen.tileGroupStyle),
+            style: TestScaffold.blueScreen.tileGroupStyle,
             label: const Text('Network'),
             description: const Text('Description'),
             error: const Text('This should not appear'),

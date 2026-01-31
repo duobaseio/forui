@@ -226,7 +226,7 @@ class PasswordField extends StatefulWidget {
     return Padding(
       padding: style.obscureButtonPadding,
       child: FButton.icon(
-        style: .value(style.obscureButtonStyle),
+        style: style.obscureButtonStyle,
         onPress: variants.contains(FTextFieldVariant.disabled) ? null : () => obscure.value = !obscure.value,
         child: Icon(
           obscure.value ? FIcons.eye : FIcons.eyeClosed,

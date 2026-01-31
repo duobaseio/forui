@@ -203,8 +203,8 @@ class FButton extends StatelessWidget {
     final style = this.style(context.theme.buttonStyles.resolve({...variants, context.platformVariant}));
 
     return FTappable(
-      style: .value(style.tappableStyle),
-      focusedOutlineStyle: .value(style.focusedOutlineStyle),
+      style: style.tappableStyle,
+      focusedOutlineStyle: style.focusedOutlineStyle,
       autofocus: autofocus,
       focusNode: focusNode,
       onFocusChange: onFocusChange,

@@ -94,16 +94,16 @@ Each style will have a corresponding `Delta`, and widgets will accept deltas ins
 Given `FAutocompleteStyle`:
 
 ```dart
-mixin Delta<S> {
-  S apply(S base);
+mixin Delta {
+  Object call(covariant Object? base);
 }
 
-sealed class FAutocompleteStyleDelta with Delta<FAutocompleteStyle> {
+sealed class FAutocompleteStyleDelta with Delta {
   factory FAutocompleteStyleDelta.delta({
     FAutocompleteContentStyleDelta? contentStyle,
   }) = _Delta;
 
-  factory FAutocompleteStyleDelta.value(FAutocompleteStyle style) = _Value;
+  const factory FAutocompleteStyleDelta.inherit() = _Inherit;
 }
 
 class _Delta implements FAutocompleteStyleDelta {
@@ -113,20 +113,25 @@ class _Delta implements FAutocompleteStyleDelta {
 
   // Applies the delta inside FAutocomplete.
   @override
-  FAutocompleteStyle apply(FAutocompleteStyle base) =>
+  FAutocompleteStyle call(FAutocompleteStyle base) =>
       FAutocompleteStyle(
-        contentStyle: contentStyle?.apply(base.contentStyle) ?? base.contentStyle,
+        contentStyle: contentStyle?.call(base.contentStyle) ?? base.contentStyle,
       );
 }
 
-class _Value implements FAutocompleteStyleDelta {
-  final FAutocompleteStyle _style;
+class _Inherit implements FAutocompleteStyleDelta {
+  const _Inherit();
 
-  _Value(this._style);
-
-  // Applies the delta inside FAutocomplete.
   @override
-  FAutocompleteStyle apply(FAutocompleteStyle base) => _style;
+  FAutocompleteStyle call(FAutocompleteStyle base) => base;
+}
+
+// Styles implement their own delta, allowing direct usage for replacement.
+class FAutocompleteStyle with _$FAutocompleteStyleFunctions implements FAutocompleteStyleDelta {
+  // ...
+
+  @override
+  FAutocompleteStyle call(FAutocompleteStyle base) => this;
 }
 ```
 
@@ -148,14 +153,25 @@ FAutocomplete(
 )
 ```
 
-Replacing a style is also supported via `.value(...)`.
+Replacing a style is supported by passing the style directly, since styles implement their own delta.
 
 ```dart
 FAutocomplete(
   style: .delta(
-    contentStyle: .value(FAutocompleteContentStyle(...)),
+    contentStyle: FAutocompleteContentStyle(...),
   ),
 )
+```
+
+If the type, e.g. `BoxDecoration`, is unable to implement its own delta, the delta will instead contain a `value(T value)`
+constructor that replaces the value.
+
+```dart
+class BoxDecorationDelta with Delta<BoxDecoration> {
+  factory BoxDecorationDelta.delta({Color? color, BorderRadius? borderRadius}) = _Delta;
+
+  factory BoxDecorationDelta.value(BoxDecoration value) = _Value;
+}
 ```
 
 Deltas use sentinel values for "no change", so `null` means `null`. Types, such as enums, that cannot implement sentinel 
@@ -199,6 +215,35 @@ implemented.
 We considered a fluent API similar to [Mix](https://www.fluttermix.com/documentation/guides/styling). However, it felt
 unidiomatic and not to our tastes. [Small user studies](https://github.com/flutter/flutter/issues/161345#issuecomment-2666390902) 
 conducted by Flutter found decorators to have mixed impact on understandability.
+
+The initial design made `Delta` a generic mixin that accepted and returned a type parameter. This prevented styles from
+implementing `Delta` while inheriting other styles due to [the diamond problem](https://en.wikipedia.org/wiki/Multiple_inheritance#The_diamond_problem).
+Consequently, replacing a style required wrapping it in a `.value(...)` call which unnecessarily verbose. We accept the 
+slightly unsafer covariant `Delta` mixin to improve DX.
+
+```dart
+mixin Delta<S> {
+  S apply(S base);
+}
+
+class FooDelta with Delta<Foo> {
+  Foo apply(Foo base);
+}
+
+class Foo implements FooDelta {
+  @override
+  Foo apply(Foo base) => this;
+}
+
+class BarDelta with Delta<Bar> {
+  Bar apply(Bar base);
+}
+
+// Compilation error since Bar indirectly implements both Delta<Foo> and Delta<Bar>.
+class Bar extends Foo implements BarDelta {
+  @override
+  Bar apply(Bar base) => this; 
+```
 
 
 ## 3. Order-independent Widget State Resolution

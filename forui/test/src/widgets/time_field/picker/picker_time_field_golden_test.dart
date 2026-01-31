@@ -14,7 +14,7 @@ void main() {
       TestScaffold.blue(
         child: MaterialApp(
           debugShowCheckedModeBanner: false,
-          home: FTimeField.picker(style: .value(TestScaffold.blueScreen.timeFieldStyle), key: key),
+          home: FTimeField.picker(style: TestScaffold.blueScreen.timeFieldStyle, key: key),
         ),
       ),
     );

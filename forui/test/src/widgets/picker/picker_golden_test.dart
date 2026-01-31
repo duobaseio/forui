@@ -33,7 +33,7 @@ void main() {
       TestScaffold.blue(
         child: FPicker(
           // The default opacity messes up the coloring.
-          style: .value(TestScaffold.blueScreen.pickerStyle.copyWith(overAndUnderCenterOpacity: 1)),
+          style: TestScaffold.blueScreen.pickerStyle.copyWith(overAndUnderCenterOpacity: 1),
           children: [
             const FPickerWheel(flex: 3, loop: true, children: months),
             FPickerWheel.builder(flex: 3, builder: (context, index) => Text('Item $index')),

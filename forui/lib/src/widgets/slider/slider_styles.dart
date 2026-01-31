@@ -66,11 +66,11 @@ class FSliderStyles extends FVariants<FSliderAxisVariantConstraint, FSliderStyle
 class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
   /// The slider's active track colors.
   @override
-  final FVariants<FSliderVariantConstraint, Color, Delta<Color>> activeColor;
+  final FVariants<FSliderVariantConstraint, Color, Delta> activeColor;
 
   /// The slider's inactive track colors.
   @override
-  final FVariants<FSliderVariantConstraint, Color, Delta<Color>> inactiveColor;
+  final FVariants<FSliderVariantConstraint, Color, Delta> inactiveColor;
 
   /// The slider's border radius.
   @override

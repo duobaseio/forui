@@ -21,6 +21,16 @@ part 'sidebar_item.design.dart';
 class FSidebarItem extends StatefulWidget {
   /// The sidebar item's style.
   ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FSidebarItemStyle(...)
+  /// ```
+  ///
   /// ## CLI
   /// To generate and customize this style:
   ///
@@ -181,8 +191,8 @@ class _FSidebarItemState extends State<FSidebarItem> with TickerProviderStateMix
     crossAxisAlignment: .start,
     children: [
       FTappable(
-        style: .value(_style!.tappableStyle),
-        focusedOutlineStyle: .value(_style!.focusedOutlineStyle),
+        style: _style!.tappableStyle,
+        focusedOutlineStyle: _style!.focusedOutlineStyle,
         selected: widget.selected,
         autofocus: widget.autofocus,
         focusNode: widget.focusNode,
@@ -285,7 +295,7 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
 
   /// The background color.
   @override
-  final FVariants<FTappableVariantConstraint, Color, Delta<Color>> backgroundColor;
+  final FVariants<FTappableVariantConstraint, Color, Delta> backgroundColor;
 
   /// The padding around the content. Defaults to `EdgeInsets.symmetric(horizontal: 12, vertical: 10)`.
   @override
@@ -353,7 +363,7 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
           },
         ),
         borderRadius: style.borderRadius,
-        tappableStyle: style.tappableStyle.copyWith(motion: const .value(FTappableMotion.none)),
+        tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
         focusedOutlineStyle: style.focusedOutlineStyle.copyWith(spacing: 0),
       );
 }

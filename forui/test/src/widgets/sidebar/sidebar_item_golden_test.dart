@@ -11,7 +11,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FSidebarItem(
-            style: .value(TestScaffold.blueScreen.sidebarStyle.groupStyle.itemStyle),
+            style: TestScaffold.blueScreen.sidebarStyle.groupStyle.itemStyle,
             icon: const Icon(FIcons.box),
             label: const Text('Item'),
             onPress: () {},
@@ -26,7 +26,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FSidebarItem(
-            style: .value(TestScaffold.blueScreen.sidebarStyle.groupStyle.itemStyle),
+            style: TestScaffold.blueScreen.sidebarStyle.groupStyle.itemStyle,
             icon: const Icon(FIcons.box),
             label: const Text('Item'),
           ),
@@ -215,7 +215,7 @@ void main() {
       TestScaffold(
         child: FSidebarItem(
           key: const Key('item'),
-          style: .value(FThemes.zinc.light.sidebarStyle.groupStyle.itemStyle),
+          style: FThemes.zinc.light.sidebarStyle.groupStyle.itemStyle,
           label: const Text('Item'),
           onPress: () {},
         ),
@@ -226,7 +226,7 @@ void main() {
       TestScaffold(
         child: FSidebarItem(
           key: const Key('item'),
-          style: .value(FThemes.zinc.dark.sidebarStyle.groupStyle.itemStyle),
+          style: FThemes.zinc.dark.sidebarStyle.groupStyle.itemStyle,
           label: const Text('Item'),
           onPress: () {},
         ),

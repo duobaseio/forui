@@ -7,9 +7,9 @@ final style = FThemes.zinc.light.style;
 
 final a =
     // {@snippet constructor}
-    // Complete replacement using .value()
+    // Complete replacement by passing a style directly
     FAccordion(
-      style: .value(.inherit(colors: colors, typography: typography, style: style)),
+      style: FAccordionStyle.inherit(colors: colors, typography: typography, style: style),
       children: const [],
     );
 // {@endsnippet}

@@ -15,6 +15,16 @@ mixin FAccordionItemMixin on Widget {}
 class FAccordionItem extends StatefulWidget with FAccordionItemMixin {
   /// The accordion's style. Defaults to the enclosing [FAccordion]'s style.
   ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FAccordionStyle(...)
+  /// ```
+  ///
   /// ## CLI
   /// To generate and customize this style:
   ///
@@ -158,7 +168,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
       crossAxisAlignment: .stretch,
       children: [
         FTappable(
-          style: .value(style.tappableStyle),
+          style: style.tappableStyle,
           autofocus: widget.autofocus,
           focusNode: widget.focusNode,
           onFocusChange: widget.onFocusChange,
@@ -180,7 +190,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
                   ),
                 ),
                 FFocusedOutline(
-                  style: .value(style.focusedOutlineStyle),
+                  style: style.focusedOutlineStyle,
                   focused: states.contains(FTappableVariant.focused),
                   child: RotationTransition(
                     turns: _iconRotation!,
@@ -201,7 +211,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
             ),
           ),
         ),
-        FDivider(style: .value(style.dividerStyle)),
+        FDivider(style: style.dividerStyle),
       ],
     );
   }

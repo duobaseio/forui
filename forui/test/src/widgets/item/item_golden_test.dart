@@ -12,7 +12,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FItem(
-            style: .value(TestScaffold.blueScreen.itemStyle),
+            style: TestScaffold.blueScreen.itemStyle,
             prefix: const Icon(FIcons.bluetooth),
             title: const Text('Bluetooth'),
             subtitle: const Text('Fee, Fo, Fum'),
@@ -30,7 +30,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FItem(
-            style: .value(TestScaffold.blueScreen.itemStyle),
+            style: TestScaffold.blueScreen.itemStyle,
             prefix: const Icon(FIcons.bluetooth),
             title: const Text('Bluetooth'),
             subtitle: const Text('Fee, Fo, Fum'),
@@ -54,7 +54,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FItem(
-            style: .value(TestScaffold.blueScreen.itemStyle),
+            style: TestScaffold.blueScreen.itemStyle,
             enabled: false,
             prefix: const Icon(FIcons.bluetooth),
             title: const Text('Bluetooth'),

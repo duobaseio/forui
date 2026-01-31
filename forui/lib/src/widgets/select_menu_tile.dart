@@ -60,6 +60,16 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
 
   /// The style.
   ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FSelectMenuTileStyle(...)
+  /// ```
+  ///
   /// ## CLI
   /// To generate and customize this style:
   ///
@@ -539,7 +549,7 @@ class _FSelectMenuTileState<T> extends State<FSelectMenuTile<T>> with TickerProv
           // See https://stackoverflow.com/a/59410824/4189771
           key: GlobalObjectKey(_controller._popover),
           control: .managed(controller: _controller._popover),
-          style: .value(menuStyle),
+          style: menuStyle,
           constraints: FPortalConstraints(maxWidth: menuStyle.maxWidth),
           popoverAnchor: widget.menuAnchor,
           childAnchor: widget.tileAnchor,
@@ -565,7 +575,7 @@ class _FSelectMenuTileState<T> extends State<FSelectMenuTile<T>> with TickerProv
                   maxHeight: widget.maxHeight,
                   dragStartBehavior: widget.dragStartBehavior,
                   physics: widget.physics,
-                  style: .value(menuStyle.tileGroupStyle),
+                  style: menuStyle.tileGroupStyle,
                   semanticsLabel: widget.semanticsLabel,
                   divider: widget.divider,
                   children: menu,
@@ -580,7 +590,7 @@ class _FSelectMenuTileState<T> extends State<FSelectMenuTile<T>> with TickerProv
               maxHeight: widget.maxHeight,
               dragStartBehavior: widget.dragStartBehavior,
               physics: widget.physics,
-              style: .value(menuStyle.tileGroupStyle),
+              style: menuStyle.tileGroupStyle,
               semanticsLabel: widget.semanticsLabel,
               divider: widget.divider,
               tileBuilder: widget._menuBuilder!,
@@ -588,7 +598,7 @@ class _FSelectMenuTileState<T> extends State<FSelectMenuTile<T>> with TickerProv
             );
           },
           child: FTile(
-            style: .value(tileStyle),
+            style: tileStyle,
             prefix: widget.prefix,
             enabled: widget.enabled,
             title: widget.title,
@@ -611,7 +621,7 @@ class _FSelectMenuTileState<T> extends State<FSelectMenuTile<T>> with TickerProv
 
           tile = FLabel(
             axis: .vertical,
-            style: .value(selectMenuTileStyle),
+            style: selectMenuTileStyle,
             variants: variants,
             label: widget.label,
             description: widget.description,

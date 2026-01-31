@@ -14,7 +14,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.blue(
         child: FHeader(
-          style: .value(TestScaffold.blueScreen.headerStyles.rootStyle),
+          style: TestScaffold.blueScreen.headerStyles.rootStyle,
           title: const Text('Title'),
           suffixes: [
             FHeaderAction.back(onPress: () {}),

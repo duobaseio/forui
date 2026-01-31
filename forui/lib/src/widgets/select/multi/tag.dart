@@ -20,6 +20,16 @@ part 'tag.design.dart';
 /// A tag in a [FMultiSelect].
 class FMultiSelectTag extends StatelessWidget {
   /// The style.
+  ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FMultiSelectTagStyle(...)
+  /// ```
   final FMultiSelectTagStyleDelta style;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
@@ -80,7 +90,7 @@ class FMultiSelectTag extends StatelessWidget {
   Widget build(BuildContext context) {
     final style = this.style(context.theme.multiSelectStyle.tagStyle);
     return FTappable(
-      style: .value(style.tappableStyle),
+      style: style.tappableStyle,
       autofocus: autofocus,
       focusNode: focusNode,
       onFocusChange: onFocusChange,
@@ -135,7 +145,7 @@ class FMultiSelectTag extends StatelessWidget {
 class FMultiSelectTagStyle with Diagnosticable, _$FMultiSelectTagStyleFunctions {
   /// The decoration.
   @override
-  final FVariants<FMultiSelectTagVariantConstraint, Decoration, Delta<Decoration>> decoration;
+  final FVariants<FMultiSelectTagVariantConstraint, Decoration, Delta> decoration;
 
   /// The padding. Defaults to `EdgeInsets.symmetric(vertical: 4, horizontal: 8)`.
   ///
@@ -199,7 +209,7 @@ class FMultiSelectTagStyle with Diagnosticable, _$FMultiSelectTagStyleFunctions 
             [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
           },
         ),
-        tappableStyle: style.tappableStyle.copyWith(motion: const .value(FTappableMotion.none)),
+        tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
         focusedOutlineStyle: style.focusedOutlineStyle,
       );
 }

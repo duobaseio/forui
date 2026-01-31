@@ -19,7 +19,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FItemGroup.merge(
-            style: .value(TestScaffold.blueScreen.itemGroupStyle),
+            style: TestScaffold.blueScreen.itemGroupStyle,
             children: [
               FItemGroup(
                 children: [
@@ -44,7 +44,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FItemGroup(
-            style: .value(TestScaffold.blueScreen.itemGroupStyle),
+            style: TestScaffold.blueScreen.itemGroupStyle,
             children: [
               FItem(
                 prefix: const Icon(FIcons.wifi),
@@ -79,7 +79,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FItemGroup(
-            style: .value(TestScaffold.blueScreen.itemGroupStyle),
+            style: TestScaffold.blueScreen.itemGroupStyle,
             children: [
               FItem(
                 enabled: false,
@@ -447,7 +447,7 @@ void main() {
         child: FItemGroup.merge(
           children: [
             FItemGroup(
-              style: .value(FThemes.green.dark.itemGroupStyle),
+              style: FThemes.green.dark.itemGroupStyle,
               children: [
                 FItem(
                   prefix: const Icon(FIcons.wifi),
@@ -457,7 +457,7 @@ void main() {
                   onPress: () {},
                 ),
                 FItem(
-                  style: .value(FThemes.blue.dark.itemGroupStyle.itemStyle),
+                  style: FThemes.blue.dark.itemGroupStyle.itemStyle,
                   prefix: const Icon(FIcons.bluetooth),
                   title: const Text('Bluetooth'),
                   subtitle: const Text('Fee, Fo'),

@@ -28,6 +28,16 @@ part 'radio.design.dart';
 class FRadio extends StatelessWidget {
   /// The style. Defaults to [FThemeData.radioStyle].
   ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FRadioStyle(...)
+  /// ```
+  ///
   /// ## CLI
   /// To generate and customize this style:
   ///
@@ -90,7 +100,7 @@ class FRadio extends StatelessWidget {
     final formVariants = <FFormFieldVariant>{if (!enabled) .disabled, if (error != null) .error};
 
     return FTappable(
-      style: .value(style.tappableStyle),
+      style: style.tappableStyle,
       semanticsLabel: semanticsLabel,
       selected: value,
       onPress: enabled ? () => onChange?.call(!value) : null,
@@ -103,7 +113,7 @@ class FRadio extends StatelessWidget {
         return FLabel(
           axis: .horizontal,
           variants: formVariants,
-          style: .value(style),
+          style: style,
           label: label,
           description: description,
           error: error,
@@ -111,7 +121,7 @@ class FRadio extends StatelessWidget {
           // rather than the entire FLabel, is outlined.
           child: FFocusedOutline(
             focused: tappableVariants.contains(FTappableVariant.focused),
-            style: .value(style.focusedOutlineStyle),
+            style: style.focusedOutlineStyle,
             child: Stack(
               alignment: .center,
               children: [
@@ -168,15 +178,15 @@ class FRadioStyle extends FLabelStyle with _$FRadioStyleFunctions {
 
   /// The [FRadio]'s border color.
   @override
-  final FVariants<FRadioVariantConstraint, Color, Delta<Color>> borderColor;
+  final FVariants<FRadioVariantConstraint, Color, Delta> borderColor;
 
   /// The [FRadio]'s background color.
   @override
-  final FVariants<FRadioVariantConstraint, Color, Delta<Color>> backgroundColor;
+  final FVariants<FRadioVariantConstraint, Color, Delta> backgroundColor;
 
   /// The [FRadio]'s indicator color.
   @override
-  final FVariants<FRadioVariantConstraint, Color, Delta<Color>> indicatorColor;
+  final FVariants<FRadioVariantConstraint, Color, Delta> indicatorColor;
 
   /// The motion-related properties.
   @override
@@ -203,7 +213,7 @@ class FRadioStyle extends FLabelStyle with _$FRadioStyleFunctions {
   factory FRadioStyle.inherit({required FColors colors, required FStyle style}) {
     final label = FLabelStyles.inherit(style: style).horizontalStyle;
     return .new(
-      tappableStyle: style.tappableStyle.copyWith(motion: const .value(FTappableMotion.none)),
+      tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
       focusedOutlineStyle: FFocusedOutlineStyle(color: colors.primary, borderRadius: .circular(100)),
       borderColor: FVariants(
         colors.primary,

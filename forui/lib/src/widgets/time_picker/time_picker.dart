@@ -30,6 +30,16 @@ class FTimePicker extends StatefulWidget {
 
   /// The style. If null, the default picker style will be used.
   ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FTimePickerStyle(...)
+  /// ```
+  ///
   /// ## CLI
   /// To generate and customize this style:
   ///

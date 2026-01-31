@@ -6,18 +6,18 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 
 @internal
-FVariants<K, V, D> createVariants<K extends FVariantConstraint, V, D extends Delta<V>>(V base, Map<K, V> variants) =>
+FVariants<K, V, D> createVariants<K extends FVariantConstraint, V, D extends Delta>(V base, Map<K, V> variants) =>
     .raw(base, variants);
 
 /// Maps variant constraints to values.
 ///
 /// See also:
 /// * [FVariantConstraint] which represents a combination of variants under which a widget is styled differently.
-class FVariants<K extends FVariantConstraint, V, D extends Delta<V>> with Diagnosticable {
+class FVariants<K extends FVariantConstraint, V, D extends Delta> with Diagnosticable {
   /// Linearly interpolates between two [FVariants] containing [BoxDecoration]s.
   ///
   /// {@macro forui.FVariants.lerpWhereUsing}
-  static FVariants<K, BoxDecoration, D> lerpBoxDecoration<K extends FVariantConstraint, D extends Delta<BoxDecoration>>(
+  static FVariants<K, BoxDecoration, D> lerpBoxDecoration<K extends FVariantConstraint, D extends Delta>(
     FVariants<K, BoxDecoration, D> a,
     FVariants<K, BoxDecoration, D> b,
     double t,
@@ -26,7 +26,7 @@ class FVariants<K extends FVariantConstraint, V, D extends Delta<V>> with Diagno
   /// Linearly interpolates between two [FVariants] containing [Color]s.
   ///
   /// {@macro forui.FVariants.lerpWhereUsing}
-  static FVariants<K, Color, D> lerpColor<K extends FVariantConstraint, D extends Delta<Color>>(
+  static FVariants<K, Color, D> lerpColor<K extends FVariantConstraint, D extends Delta>(
     FVariants<K, Color, D> a,
     FVariants<K, Color, D> b,
     double t,
@@ -35,7 +35,7 @@ class FVariants<K extends FVariantConstraint, V, D extends Delta<V>> with Diagno
   /// Linearly interpolates between two [FVariants] containing [IconThemeData]s.
   ///
   /// {@macro forui.FVariants.lerpWhereUsing}
-  static FVariants<K, IconThemeData, D> lerpIconThemeData<K extends FVariantConstraint, D extends Delta<IconThemeData>>(
+  static FVariants<K, IconThemeData, D> lerpIconThemeData<K extends FVariantConstraint, D extends Delta>(
     FVariants<K, IconThemeData, D> a,
     FVariants<K, IconThemeData, D> b,
     double t,
@@ -44,7 +44,7 @@ class FVariants<K extends FVariantConstraint, V, D extends Delta<V>> with Diagno
   /// Linearly interpolates between two [FVariants] containing [TextStyle]s.
   ///
   /// {@macro forui.FVariants.lerpWhereUsing}
-  static FVariants<K, TextStyle, D> lerpTextStyle<K extends FVariantConstraint, D extends Delta<TextStyle>>(
+  static FVariants<K, TextStyle, D> lerpTextStyle<K extends FVariantConstraint, D extends Delta>(
     FVariants<K, TextStyle, D> a,
     FVariants<K, TextStyle, D> b,
     double t,
@@ -53,7 +53,7 @@ class FVariants<K extends FVariantConstraint, V, D extends Delta<V>> with Diagno
   /// Linearly interpolates between two [FVariants] using the given [lerp] function.
   ///
   /// {@macro forui.FVariants.lerpWhereUsing}
-  static FVariants<K, V, D> lerpWhere<K extends FVariantConstraint, V, D extends Delta<V>>(
+  static FVariants<K, V, D> lerpWhere<K extends FVariantConstraint, V, D extends Delta>(
     FVariants<K, V, D> a,
     FVariants<K, V, D> b,
     double t,
@@ -68,13 +68,13 @@ class FVariants<K extends FVariantConstraint, V, D extends Delta<V>> with Diagno
   ///
   /// See:
   /// * [lerpWhere] for a version that returns [FVariants].
-  static T lerpWhereUsing<T extends FVariants<K, V, D>, K extends FVariantConstraint, V, D extends Delta<V>>(
-      FVariants<K, V, D> a,
-      FVariants<K, V, D> b,
-      double t,
-      V? Function(V?, V?, double) lerp,
-      T Function(V base, Map<K, V> variants) supply,
-      ) {
+  static T lerpWhereUsing<T extends FVariants<K, V, D>, K extends FVariantConstraint, V, D extends Delta>(
+    FVariants<K, V, D> a,
+    FVariants<K, V, D> b,
+    double t,
+    V? Function(V?, V?, double) lerp,
+    T Function(V base, Map<K, V> variants) supply,
+  ) {
     final base = lerp(a.base, b.base, t);
     final variants = <K, V>{};
 
@@ -100,7 +100,6 @@ class FVariants<K extends FVariantConstraint, V, D extends Delta<V>> with Diagno
     }
   }
 
-
   /// The base variant.
   final V base;
 
@@ -119,7 +118,7 @@ class FVariants<K extends FVariantConstraint, V, D extends Delta<V>> with Diagno
     : variants = (() {
         final map = <K, V>{};
         for (final MapEntry(key: constraints, value: delta) in variants.entries) {
-          final variant = delta.call(base);
+          final variant = delta(base) as V;
           for (final constraint in constraints) {
             map[constraint] = variant;
           }
@@ -199,7 +198,7 @@ class FVariants<K extends FVariantConstraint, V, D extends Delta<V>> with Diagno
   /// See also:
   /// * [apply] for applying delta-based operations.
   @useResult
-  FVariants<K, V, Delta<V>> applyValues<E extends FVariant>(List<FVariantValueDeltaOperation<K, E, V>> operations) =>
+  FVariants<K, V, Delta> applyValues<E extends FVariant>(List<FVariantValueDeltaOperation<K, E, V>> operations) =>
       FVariantsValueDelta.apply(operations)(this);
 
   /// Returns a new [FVariants] with the constraint type parameter cast to [T].
@@ -230,8 +229,7 @@ class FVariants<K extends FVariantConstraint, V, D extends Delta<V>> with Diagno
 }
 
 /// Describes modifications to an [FVariants] in terms of deltas.
-class FVariantsDelta<K extends FVariantConstraint, E extends FVariant, V, D extends Delta<V>>
-    with Delta<FVariants<K, V, D>> {
+class FVariantsDelta<K extends FVariantConstraint, E extends FVariant, V, D extends Delta> with Delta {
   final FVariants<K, V, D> Function(V base, Map<K, V> variants) _call;
 
   /// Creates a complete replacement of a [FVariants].
@@ -250,11 +248,11 @@ class FVariantsDelta<K extends FVariantConstraint, E extends FVariant, V, D exte
       });
 
   @override
-  FVariants<K, V, D> call(FVariants<K, V, D> variants) => _call(variants.base, variants.variants);
+  FVariants<K, V, D> call(covariant FVariants<K, V, D> variants) => _call(variants.base, variants.variants);
 }
 
 /// An operation in [FVariantsDelta.apply] that modifies [FVariants] using deltas.
-class FVariantOperation<K extends FVariantConstraint, E extends FVariant, V, D extends Delta<V>> {
+class FVariantOperation<K extends FVariantConstraint, E extends FVariant, V, D extends Delta> {
   final FVariants<K, V, D> Function(V base, Map<K, V> variants) _call;
 
   /// Applies [delta] to the base and associates the result with each constraint in [constraints].
@@ -267,7 +265,7 @@ class FVariantOperation<K extends FVariantConstraint, E extends FVariant, V, D e
   /// ```
   FVariantOperation.add(Set<K> constraints, D delta)
     : _call = ((base, existing) {
-        final addition = delta(base);
+        final addition = delta(base) as V;
         return .raw(base, {...existing, for (final constraint in constraints) constraint: addition});
       });
 
@@ -282,7 +280,7 @@ class FVariantOperation<K extends FVariantConstraint, E extends FVariant, V, D e
   /// * [FVariantOperation.on] for applying to specific variants.
   /// * [FVariantOperation.onVariants] for applying to all variants.
   /// * [FVariantOperation.onAll] for applying to all variants and base.
-  FVariantOperation.onBase(D delta) : _call = ((base, existing) => .raw(delta(base), {...existing}));
+  FVariantOperation.onBase(D delta) : _call = ((base, existing) => .raw(delta(base) as V, {...existing}));
 
   /// Applies [delta] to variants whose constraints are satisfied by [variants].
   ///
@@ -298,7 +296,7 @@ class FVariantOperation<K extends FVariantConstraint, E extends FVariant, V, D e
   FVariantOperation.on(Set<E> variants, D delta)
     : _call = ((base, existing) => .raw(base, {
         for (final MapEntry(key: constraint, :value) in existing.entries)
-          constraint: constraint.satisfiedBy(variants) ? delta(value) : value,
+          constraint: constraint.satisfiedBy(variants) ? delta(value) as V : value,
       }));
 
   /// Applies [delta] to all existing variants.
@@ -314,7 +312,7 @@ class FVariantOperation<K extends FVariantConstraint, E extends FVariant, V, D e
   /// * [FVariantOperation.onAll] for applying to all variants and base.
   FVariantOperation.onVariants(D delta)
     : _call = ((base, existing) =>
-          .raw(base, {for (final MapEntry(key: constraint, :value) in existing.entries) constraint: delta(value)}));
+          .raw(base, {for (final MapEntry(key: constraint, :value) in existing.entries) constraint: delta(value) as V}));
 
   /// Applies [delta] to all variants and base.
   ///
@@ -328,8 +326,8 @@ class FVariantOperation<K extends FVariantConstraint, E extends FVariant, V, D e
   /// * [FVariantOperation.on] for applying to specific variants.
   /// * [FVariantOperation.onVariants] for applying to all variants.
   FVariantOperation.onAll(D delta)
-    : _call = ((base, existing) => .raw(delta(base), {
-        for (final MapEntry(key: constraint, :value) in existing.entries) constraint: delta(value),
+    : _call = ((base, existing) => .raw(delta(base) as V, {
+        for (final MapEntry(key: constraint, :value) in existing.entries) constraint: delta(value) as V,
       }));
 
   /// Removes variants whose constraints are satisfied by [variants].
@@ -358,11 +356,11 @@ class FVariantOperation<K extends FVariantConstraint, E extends FVariant, V, D e
 }
 
 /// A delta that describes modifications to an [FVariants] in terms of concrete values.
-class FVariantsValueDelta<K extends FVariantConstraint, E extends FVariant, V> with Delta<FVariants<K, V, Delta<V>>> {
-  final FVariants<K, V, Delta<V>> Function(V base, Map<K, V> variants) _call;
+class FVariantsValueDelta<K extends FVariantConstraint, E extends FVariant, V> with Delta {
+  final FVariants<K, V, Delta> Function(V base, Map<K, V> variants) _call;
 
   /// Creates a complete replacement of a [FVariants].
-  FVariantsValueDelta.value(FVariants<K, V, Delta<V>> variants) : _call = ((_, _) => variants);
+  FVariantsValueDelta.value(FVariants<K, V, Delta> variants) : _call = ((_, _) => variants);
 
   /// Creates a sequence of modifications to [FVariants].
   FVariantsValueDelta.apply(List<FVariantValueDeltaOperation<K, E, V>> operations)
@@ -377,12 +375,12 @@ class FVariantsValueDelta<K extends FVariantConstraint, E extends FVariant, V> w
       });
 
   @override
-  FVariants<K, V, Delta<V>> call(FVariants<K, V, Delta<V>> variants) => _call(variants.base, variants.variants);
+  FVariants<K, V, Delta> call(covariant FVariants<K, V, Delta> variants) => _call(variants.base, variants.variants);
 }
 
 /// An operation in [FVariantsValueDelta.apply] that modifies [FVariants] using concrete values.
 class FVariantValueDeltaOperation<K extends FVariantConstraint, E extends FVariant, V> {
-  final FVariants<K, V, Delta<V>> Function(V base, Map<K, V> variants) _call;
+  final FVariants<K, V, Delta> Function(V base, Map<K, V> variants) _call;
 
   /// Adds [value] for exactly each constraint in [constraints].
   ///

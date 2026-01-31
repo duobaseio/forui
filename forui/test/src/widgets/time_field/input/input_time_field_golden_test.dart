@@ -11,7 +11,7 @@ void main() {
 
   testWidgets('blue screen', (tester) async {
     await tester.pumpWidget(
-      TestScaffold.blue(child: FTimeField(style: .value(TestScaffold.blueScreen.timeFieldStyle))),
+      TestScaffold.blue(child: FTimeField(style: TestScaffold.blueScreen.timeFieldStyle)),
     );
 
     await expectBlueScreen();

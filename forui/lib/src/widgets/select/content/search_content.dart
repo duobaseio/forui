@@ -129,7 +129,7 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
           child: FTextField(
             control: .managed(controller: _controller, onChange: widget.properties.onChange),
             focusNode: _focus,
-            style: .value(widget.searchStyle.fieldStyle),
+            style: widget.searchStyle.fieldStyle,
             hint: widget.properties.hint ?? localizations.selectSearchHint,
             magnifierConfiguration: widget.properties.magnifierConfiguration,
             keyboardType: widget.properties.keyboardType,
@@ -179,7 +179,7 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
             clearable: widget.properties.clearable,
           ),
         ),
-        FDivider(style: .value(widget.searchStyle.dividerStyle)),
+        FDivider(style: widget.searchStyle.dividerStyle),
         switch (_data) {
           final Iterable<T> data => _content(context, data),
           final Future<Iterable<T>> future => FutureBuilder(

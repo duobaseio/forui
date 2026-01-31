@@ -10,7 +10,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.blue(
         child: FCheckbox(
-          style: .value(TestScaffold.blueScreen.checkboxStyle),
+          style: TestScaffold.blueScreen.checkboxStyle,
           label: const Text('Terms and Conditions'),
           description: const Text('I agree to the terms and conditions.'),
           error: const Text('Please check the agree to continue.'),
