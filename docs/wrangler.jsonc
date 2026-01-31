@@ -26,11 +26,11 @@
 			"bucket_name": "forui-docs-cache-prod"
 		}
 	],
-	"images": {
-		// Enable image optimization
-		// see https://opennext.js.org/cloudflare/howtos/image
-		"binding": "IMAGES"
-	},
+//	"images": {
+//		// Enable image optimization
+//		// see https://opennext.js.org/cloudflare/howtos/image
+//		"binding": "IMAGES"
+//	},
 	"observability": {
 		"logs": {
 			"enabled": true,
@@ -52,9 +52,9 @@
 					"bucket_name": "forui-docs-cache-dev"
 				}
 			],
-			"images": {
-				"binding": "IMAGES"
-			},
+//			"images": {
+//				"binding": "IMAGES"
+//			},
 			"observability": {
 				"logs": {
 					"enabled": true,
