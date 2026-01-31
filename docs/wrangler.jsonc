@@ -37,6 +37,12 @@
 			"invocation_logs": true
 		}
 	},
+	"observability": {
+		"logs": {
+			"enabled": true,
+			"invocation_logs": true
+		}
+	},
 	"env": {
 		"dev": {
 			"name": "forui-docs-dev",

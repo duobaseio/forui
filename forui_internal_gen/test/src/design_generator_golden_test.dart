@@ -3,13 +3,21 @@ import 'package:forui_internal_gen/forui_internal_gen.dart';
 import 'package:test/test.dart';
 
 const _source = r'''
+import 'dart:ui';
+import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/annotations.dart';
+import 'package:forui/src/theme/delta.dart';
+import 'package:forui/src/theme/variant.dart';
 import 'package:meta/meta.dart';
-import 'dart:ui';
 
+@Variants(FGolden, {'hovered': 'The hovered state', 'pressed': 'The pressed state'})
+@Sentinels(FGoldenStyle, {'someDouble': 'double.infinity', 'color': 'colorSentinel'})
 part 'example.design.dart';
+
+class FGolden {}
 
 class FGoldenStyle with Diagnosticable, _$FGoldenStyleFunctions {
   /// This is a field's summary.
@@ -44,7 +52,14 @@ class FGoldenStyle with Diagnosticable, _$FGoldenStyleFunctions {
   final List<String> list;
   final Set<String> set;
   final Map<String, int> map;
-  late final Color? _private;
+
+  /// Variants with generic delta.
+  /// * [FGoldenVariantConstraint]
+  final FVariants<FGoldenVariantConstraint, Color, Delta<Color>> variantsWithGenericDelta;
+
+  /// Variants with specific delta.
+  /// * [FGoldenVariantConstraint]
+  final FVariants<FGoldenVariantConstraint, TextStyle, TextStyleDelta> variantsWithSpecificDelta;
 
   FGoldenStyle({
     required this.someDouble,
@@ -76,10 +91,12 @@ class FGoldenStyle with Diagnosticable, _$FGoldenStyleFunctions {
     required this.list,
     required this.set,
     required this.map,
+    required this.variantsWithGenericDelta,
+    required this.variantsWithSpecificDelta,
   });
 }
 
-class FGoldenNestedMotion with Diagnosticable, _$FGoldenMotionFunctions {
+class FGoldenNestedMotion with Diagnosticable, _$FGoldenNestedMotionFunctions {
   /// This is a field's summary.
   ///
   /// This is more information about a field.
@@ -87,14 +104,11 @@ class FGoldenNestedMotion with Diagnosticable, _$FGoldenMotionFunctions {
   final Duration duration;
   final Curve curve;
 
-  FGoldenNestedMotion({
-    required this.someDouble,
-    required this.duration,
-    required this.curve,
-  });
+  FGoldenNestedMotion({required this.someDouble, required this.duration, required this.curve});
 }
 
 class FGoldenNestedStyle with Diagnosticable, _$FGoldenNestedStyleFunctions {}
+
 ''';
 
 const _golden = r'''
@@ -108,6 +122,119 @@ part of 'example.dart';
 // **************************************************************************
 // DesignGenerator
 // **************************************************************************
+
+/// Represents a combination of variants which a [FGolden] can be styled.
+///
+/// See also:
+/// * [FGoldenVariant], which represents individual variants for [FGolden].
+extension type const FGoldenVariantConstraint._(FVariantConstraint _) implements FVariantConstraint {
+  /// Creates a [FGoldenVariantConstraint] that negates [constraint].
+  factory FGoldenVariantConstraint.not(FGoldenVariantConstraint constraint) =>
+      FGoldenVariantConstraint._(Not(constraint));
+
+  /// The hovered state
+  static const hovered = FGoldenVariant.hovered;
+
+  /// The pressed state
+  static const pressed = FGoldenVariant.pressed;
+
+  /// Matches all touch-based platforms, [android], [iOS] and [fuchsia].
+  static const touch = FGoldenVariant.touch;
+
+  /// The Android platform variant.
+  ///
+  /// More specific than [touch] in variant resolution.
+  static const android = FGoldenVariant.android;
+
+  /// The iOS platform variant.
+  ///
+  /// More specific than [touch] in variant resolution.
+  static const iOS = FGoldenVariant.iOS;
+
+  /// The Fuchsia platform variant.
+  ///
+  /// More specific than [touch] in variant resolution.
+  static const fuchsia = FGoldenVariant.fuchsia;
+
+  /// Matches all desktop-based platforms, [windows], [macOS] and [linux].
+  static const desktop = FGoldenVariant.desktop;
+
+  /// The Windows platform variant.
+  ///
+  /// More specific than [desktop] in variant resolution.
+  static const windows = FGoldenVariant.windows;
+
+  /// The macOS platform variant.
+  ///
+  /// More specific than [desktop] in variant resolution.
+  static const macOS = FGoldenVariant.macOS;
+
+  /// The Linux platform variant.
+  ///
+  /// More specific than [desktop] in variant resolution.
+  static const linux = FGoldenVariant.linux;
+
+  /// The web platform variant.
+  ///
+  /// Standalone platform that is neither [touch] nor [desktop].
+  static const web = FGoldenVariant.web;
+
+  /// Combines this with [other] using a logical AND operation.
+  FGoldenVariantConstraint and(FGoldenVariantConstraint other) => FGoldenVariantConstraint._(And(this, other));
+}
+
+/// Represents a condition under which a [FGolden] can be styled differently.
+///
+/// See also:
+/// * [FGoldenVariantConstraint], which represents combinations of variants for [FGolden].
+extension type const FGoldenVariant._(FVariant _) implements FGoldenVariantConstraint, FVariant {
+  /// The hovered state
+  static const hovered = FGoldenVariant._(.new('hovered'));
+
+  /// The pressed state
+  static const pressed = FGoldenVariant._(.new('pressed'));
+
+  /// Matches all touch-based platforms, [android], [iOS] and [fuchsia].
+  static const touch = FGoldenVariant._(FPlatformVariant.touch);
+
+  /// The Android platform variant.
+  ///
+  /// More specific than [touch] in variant resolution.
+  static const android = FGoldenVariant._(FPlatformVariant.android);
+
+  /// The iOS platform variant.
+  ///
+  /// More specific than [touch] in variant resolution.
+  static const iOS = FGoldenVariant._(FPlatformVariant.iOS);
+
+  /// The Fuchsia platform variant.
+  ///
+  /// More specific than [touch] in variant resolution.
+  static const fuchsia = FGoldenVariant._(FPlatformVariant.fuchsia);
+
+  /// Matches all desktop-based platforms, [windows], [macOS] and [linux].
+  static const desktop = FGoldenVariant._(FPlatformVariant.desktop);
+
+  /// The Windows platform variant.
+  ///
+  /// More specific than [desktop] in variant resolution.
+  static const windows = FGoldenVariant._(FPlatformVariant.windows);
+
+  /// The macOS platform variant.
+  ///
+  /// More specific than [desktop] in variant resolution.
+  static const macOS = FGoldenVariant._(FPlatformVariant.macOS);
+
+  /// The Linux platform variant.
+  ///
+  /// More specific than [desktop] in variant resolution.
+  static const linux = FGoldenVariant._(FPlatformVariant.linux);
+
+  /// The web platform variant.
+  ///
+  /// Standalone platform that is neither [touch] nor [desktop].
+  static const web = FGoldenVariant._(FPlatformVariant.web);
+}
 
 /// Provides [copyWith] and [lerp] methods.
 extension $FGoldenStyleTransformations on FGoldenStyle {
@@ -145,6 +272,8 @@ extension $FGoldenStyleTransformations on FGoldenStyle {
   /// * [FGoldenStyle.list]
   /// * [FGoldenStyle.set]
   /// * [FGoldenStyle.map]
+  /// * [FGoldenStyle.variantsWithGenericDelta] - Variants with generic delta.
+  /// * [FGoldenStyle.variantsWithSpecificDelta] - Variants with specific delta.
   @useResult
   FGoldenStyle copyWith({
     double? someDouble,
@@ -176,6 +305,8 @@ extension $FGoldenStyleTransformations on FGoldenStyle {
     List<String>? list,
     Set<String>? set,
     Map<String, int>? map,
+    FVariants<FGoldenVariantConstraint, Color, Delta<Color>>? variantsWithGenericDelta,
+    FVariants<FGoldenVariantConstraint, TextStyle, TextStyleDelta>? variantsWithSpecificDelta,
   }) => .new(
     someDouble: someDouble ?? this.someDouble,
     alignment: alignment ?? this.alignment,
@@ -206,6 +337,8 @@ extension $FGoldenStyleTransformations on FGoldenStyle {
     list: list ?? this.list,
     set: set ?? this.set,
     map: map ?? this.map,
+    variantsWithGenericDelta: variantsWithGenericDelta ?? this.variantsWithGenericDelta,
+    variantsWithSpecificDelta: variantsWithSpecificDelta ?? this.variantsWithSpecificDelta,
   );
 
   /// Linearly interpolate between this and another [FGoldenStyle] using the given factor [t].
@@ -250,6 +383,8 @@ extension $FGoldenStyleTransformations on FGoldenStyle {
     list: t < 0.5 ? list : other.list,
     set: t < 0.5 ? set : other.set,
     map: t < 0.5 ? map : other.map,
+    variantsWithGenericDelta: t < 0.5 ? variantsWithGenericDelta : other.variantsWithGenericDelta,
+    variantsWithSpecificDelta: t < 0.5 ? variantsWithSpecificDelta : other.variantsWithSpecificDelta,
   );
 }
 
@@ -283,6 +418,8 @@ mixin _$FGoldenStyleFunctions on Diagnosticable {
   List<String> get list;
   Set<String> get set;
   Map<String, int> get map;
+  FVariants<FGoldenVariantConstraint, Color, Delta<Color>> get variantsWithGenericDelta;
+  FVariants<FGoldenVariantConstraint, TextStyle, TextStyleDelta> get variantsWithSpecificDelta;
 
   /// Returns itself.
   ///
@@ -340,7 +477,9 @@ mixin _$FGoldenStyleFunctions on Diagnosticable {
       ..add(DiagnosticsProperty('nestedStyle', nestedStyle, level: .debug))
       ..add(IterableProperty('list', list, level: .debug))
       ..add(IterableProperty('set', set, level: .debug))
-      ..add(DiagnosticsProperty('map', map, level: .debug));
+      ..add(DiagnosticsProperty('map', map, level: .debug))
+      ..add(DiagnosticsProperty('variantsWithGenericDelta', variantsWithGenericDelta, level: .debug))
+      ..add(DiagnosticsProperty('variantsWithSpecificDelta', variantsWithSpecificDelta, level: .debug));
   }
 
   @override
@@ -376,7 +515,9 @@ mixin _$FGoldenStyleFunctions on Diagnosticable {
           nestedStyle == other.nestedStyle &&
           listEquals(list, other.list) &&
           setEquals(set, other.set) &&
-          mapEquals(map, other.map));
+          mapEquals(map, other.map) &&
+          variantsWithGenericDelta == other.variantsWithGenericDelta &&
+          variantsWithSpecificDelta == other.variantsWithSpecificDelta);
 
   @override
   int get hashCode =>
@@ -408,7 +549,194 @@ mixin _$FGoldenStyleFunctions on Diagnosticable {
       nestedStyle.hashCode ^
       const ListEquality().hash(list) ^
       const SetEquality().hash(set) ^
-      const MapEquality().hash(map);
+      const MapEquality().hash(map) ^
+      variantsWithGenericDelta.hashCode ^
+      variantsWithSpecificDelta.hashCode;
+}
+
+/// A delta that applies modifications to a [FGoldenStyle].
+sealed class FGoldenStyleDelta with Delta<FGoldenStyle> {
+  /// Creates a complete replacement for a [FGoldenStyle].
+  const factory FGoldenStyleDelta.replace(FGoldenStyle replacement) = _FGoldenStyleReplace;
+
+  /// Creates a partial modification of a [FGoldenStyle].
+  const factory FGoldenStyleDelta.merge({
+    double someDouble,
+    Alignment? alignment,
+    AlignmentGeometry? alignmentGeometry,
+    BorderRadius? borderRadius,
+    BorderRadiusGeometry? borderRadiusGeometry,
+    BoxConstraints? boxConstraints,
+    BoxDecorationDelta? boxDecoration,
+    Decoration? decoration,
+    Color color,
+    EdgeInsets? edgeInsets,
+    EdgeInsetsDirectional? edgeInsetsDirectional,
+    EdgeInsetsGeometry? edgeInsetsGeometry,
+    IconThemeDataDelta? iconThemeData,
+    TextStyleDelta? textStyle,
+    List<BoxShadow>? boxShadows,
+    List<Shadow>? shadows,
+    FWidgetStateMap<BoxDecoration>? boxDecorationMap,
+    FWidgetStateMap<BoxDecoration?>? nullableBoxDecorationMap,
+    FWidgetStateMap<Color>? colorMap,
+    FWidgetStateMap<Color?>? nullableColorMap,
+    FWidgetStateMap<IconThemeData>? iconThemeDataMap,
+    FWidgetStateMap<IconThemeData?>? nullableIconThemeDataMap,
+    FWidgetStateMap<TextStyle>? textStyleMap,
+    FWidgetStateMap<TextStyle?>? nullableTextStyleMap,
+    FGoldenNestedMotionDelta? nestedMotion,
+    FGoldenNestedStyleDelta? nestedStyle,
+    List<String>? list,
+    Set<String>? set,
+    Map<String, int>? map,
+    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color>? variantsWithGenericDelta,
+    FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, TextStyleDelta, TextStyle>? variantsWithSpecificDelta,
+  }) = _FGoldenStyleMerge;
+}
+
+class _FGoldenStyleReplace implements FGoldenStyleDelta {
+  const _FGoldenStyleReplace(this._replacement);
+
+  final FGoldenStyle _replacement;
+
+  @override
+  FGoldenStyle call(FGoldenStyle _) => _replacement;
+}
+
+class _FGoldenStyleMerge implements FGoldenStyleDelta {
+  const _FGoldenStyleMerge({
+    this.someDouble = double.infinity,
+    this.alignment,
+    this.alignmentGeometry,
+    this.borderRadius,
+    this.borderRadiusGeometry,
+    this.boxConstraints,
+    this.boxDecoration,
+    this.decoration,
+    this.color = colorSentinel,
+    this.edgeInsets,
+    this.edgeInsetsDirectional,
+    this.edgeInsetsGeometry,
+    this.iconThemeData,
+    this.textStyle,
+    this.boxShadows,
+    this.shadows,
+    this.boxDecorationMap,
+    this.nullableBoxDecorationMap,
+    this.colorMap,
+    this.nullableColorMap,
+    this.iconThemeDataMap,
+    this.nullableIconThemeDataMap,
+    this.textStyleMap,
+    this.nullableTextStyleMap,
+    this.nestedMotion,
+    this.nestedStyle,
+    this.list,
+    this.set,
+    this.map,
+    this.variantsWithGenericDelta,
+    this.variantsWithSpecificDelta,
+  });
+
+  final double someDouble;
+
+  final Alignment? alignment;
+
+  final AlignmentGeometry? alignmentGeometry;
+
+  final BorderRadius? borderRadius;
+
+  final BorderRadiusGeometry? borderRadiusGeometry;
+
+  final BoxConstraints? boxConstraints;
+
+  final BoxDecorationDelta? boxDecoration;
+
+  final Decoration? decoration;
+
+  final Color color;
+
+  final EdgeInsets? edgeInsets;
+
+  final EdgeInsetsDirectional? edgeInsetsDirectional;
+
+  final EdgeInsetsGeometry? edgeInsetsGeometry;
+
+  final IconThemeDataDelta? iconThemeData;
+
+  final TextStyleDelta? textStyle;
+
+  final List<BoxShadow>? boxShadows;
+
+  final List<Shadow>? shadows;
+
+  final FWidgetStateMap<BoxDecoration>? boxDecorationMap;
+
+  final FWidgetStateMap<BoxDecoration?>? nullableBoxDecorationMap;
+
+  final FWidgetStateMap<Color>? colorMap;
+
+  final FWidgetStateMap<Color?>? nullableColorMap;
+
+  final FWidgetStateMap<IconThemeData>? iconThemeDataMap;
+
+  final FWidgetStateMap<IconThemeData?>? nullableIconThemeDataMap;
+
+  final FWidgetStateMap<TextStyle>? textStyleMap;
+
+  final FWidgetStateMap<TextStyle?>? nullableTextStyleMap;
+
+  final FGoldenNestedMotionDelta? nestedMotion;
+
+  final FGoldenNestedStyleDelta? nestedStyle;
+
+  final List<String>? list;
+
+  final Set<String>? set;
+
+  final Map<String, int>? map;
+
+  final FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color>? variantsWithGenericDelta;
+
+  final FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, TextStyleDelta, TextStyle>? variantsWithSpecificDelta;
+
+  @override
+  FGoldenStyle call(FGoldenStyle original) => FGoldenStyle(
+    someDouble: someDouble == double.infinity ? original.someDouble : someDouble,
+    alignment: alignment ?? original.alignment,
+    alignmentGeometry: alignmentGeometry ?? original.alignmentGeometry,
+    borderRadius: borderRadius ?? original.borderRadius,
+    borderRadiusGeometry: borderRadiusGeometry ?? original.borderRadiusGeometry,
+    boxConstraints: boxConstraints ?? original.boxConstraints,
+    boxDecoration: boxDecoration?.call(original.boxDecoration) ?? original.boxDecoration,
+    decoration: decoration ?? original.decoration,
+    color: color == colorSentinel ? original.color : color,
+    edgeInsets: edgeInsets ?? original.edgeInsets,
+    edgeInsetsDirectional: edgeInsetsDirectional ?? original.edgeInsetsDirectional,
+    edgeInsetsGeometry: edgeInsetsGeometry ?? original.edgeInsetsGeometry,
+    iconThemeData: iconThemeData?.call(original.iconThemeData) ?? original.iconThemeData,
+    textStyle: textStyle?.call(original.textStyle) ?? original.textStyle,
+    boxShadows: boxShadows ?? original.boxShadows,
+    shadows: shadows ?? original.shadows,
+    boxDecorationMap: boxDecorationMap ?? original.boxDecorationMap,
+    nullableBoxDecorationMap: nullableBoxDecorationMap ?? original.nullableBoxDecorationMap,
+    colorMap: colorMap ?? original.colorMap,
+    nullableColorMap: nullableColorMap ?? original.nullableColorMap,
+    iconThemeDataMap: iconThemeDataMap ?? original.iconThemeDataMap,
+    nullableIconThemeDataMap: nullableIconThemeDataMap ?? original.nullableIconThemeDataMap,
+    textStyleMap: textStyleMap ?? original.textStyleMap,
+    nullableTextStyleMap: nullableTextStyleMap ?? original.nullableTextStyleMap,
+    nestedMotion: nestedMotion?.call(original.nestedMotion) ?? original.nestedMotion,
+    nestedStyle: nestedStyle?.call(original.nestedStyle) ?? original.nestedStyle,
+    list: list ?? original.list,
+    set: set ?? original.set,
+    map: map ?? original.map,
+    variantsWithGenericDelta:
+        variantsWithGenericDelta?.call(original.variantsWithGenericDelta) ?? original.variantsWithGenericDelta,
+    variantsWithSpecificDelta:
+        variantsWithSpecificDelta?.call(original.variantsWithSpecificDelta) ?? original.variantsWithSpecificDelta,
+  );
 }
 
 /// Provides [copyWith] and [lerp] methods.
@@ -463,6 +791,42 @@ mixin _$FGoldenNestedMotionFunctions on Diagnosticable {
   int get hashCode => someDouble.hashCode ^ duration.hashCode ^ curve.hashCode;
 }
 
+/// A delta that applies modifications to a [FGoldenNestedMotion].
+sealed class FGoldenNestedMotionDelta with Delta<FGoldenNestedMotion> {
+  /// Creates a complete replacement for a [FGoldenNestedMotion].
+  const factory FGoldenNestedMotionDelta.replace(FGoldenNestedMotion replacement) = _FGoldenNestedMotionReplace;
+
+  /// Creates a partial modification of a [FGoldenNestedMotion].
+  const factory FGoldenNestedMotionDelta.merge({double? someDouble, Duration? duration, Curve? curve}) =
+      _FGoldenNestedMotionMerge;
+}
+
+class _FGoldenNestedMotionReplace implements FGoldenNestedMotionDelta {
+  const _FGoldenNestedMotionReplace(this._replacement);
+
+  final FGoldenNestedMotion _replacement;
+
+  @override
+  FGoldenNestedMotion call(FGoldenNestedMotion _) => _replacement;
+}
+
+class _FGoldenNestedMotionMerge implements FGoldenNestedMotionDelta {
+  const _FGoldenNestedMotionMerge({this.someDouble, this.duration, this.curve});
+
+  final double? someDouble;
+
+  final Duration? duration;
+
+  final Curve? curve;
+
+  @override
+  FGoldenNestedMotion call(FGoldenNestedMotion original) => FGoldenNestedMotion(
+    someDouble: someDouble ?? original.someDouble,
+    duration: duration ?? original.duration,
+    curve: curve ?? original.curve,
+  );
+}
+
 /// Provides [copyWith] and [lerp] methods.
 extension $FGoldenNestedStyleTransformations on FGoldenNestedStyle {
   /// Returns a copy of this [FGoldenNestedStyle] with the given properties replaced.
@@ -509,6 +873,31 @@ mixin _$FGoldenNestedStyleFunctions on Diagnosticable {
 
   @override
   int get hashCode => 0;
+}
+
+/// A delta that applies modifications to a [FGoldenNestedStyle].
+sealed class FGoldenNestedStyleDelta with Delta<FGoldenNestedStyle> {
+  /// Creates a complete replacement for a [FGoldenNestedStyle].
+  const factory FGoldenNestedStyleDelta.replace(FGoldenNestedStyle replacement) = _FGoldenNestedStyleReplace;
+
+  /// Creates a partial modification of a [FGoldenNestedStyle].
+  const factory FGoldenNestedStyleDelta.merge() = _FGoldenNestedStyleMerge;
+}
+
+class _FGoldenNestedStyleReplace implements FGoldenNestedStyleDelta {
+  const _FGoldenNestedStyleReplace(this._replacement);
+
+  final FGoldenNestedStyle _replacement;
+
+  @override
+  FGoldenNestedStyle call(FGoldenNestedStyle _) => _replacement;
+}
+
+class _FGoldenNestedStyleMerge implements FGoldenNestedStyleDelta {
+  const _FGoldenNestedStyleMerge();
+
+  @override
+  FGoldenNestedStyle call(FGoldenNestedStyle original) => FGoldenNestedStyle();
 }
 ''';
 
