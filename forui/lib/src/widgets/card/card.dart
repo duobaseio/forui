@@ -18,6 +18,16 @@ part 'card.design.dart';
 class FCard extends StatelessWidget {
   /// The style. Defaults to [FThemeData.cardStyle].
   ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FCardStyle(...)
+  /// ```
+  ///
   /// ## CLI
   /// To generate and customize this style:
   ///

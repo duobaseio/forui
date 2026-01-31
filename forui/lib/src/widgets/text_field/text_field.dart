@@ -197,6 +197,16 @@ class FTextField extends StatelessWidget {
   /// {@template forui.text_field.style}
   /// The text field's style. Defaults to [FThemeData.textFieldStyle].
   ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FTextFieldStyle(...)
+  /// ```
+  ///
   /// ## CLI
   /// To generate and customize this style:
   ///

@@ -31,6 +31,16 @@ class FResizable extends StatefulWidget {
 
   /// The resizable' style.
   ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FResizableStyle(...)
+  /// ```
+  ///
   /// ## CLI
   /// To generate and customize this style:
   ///

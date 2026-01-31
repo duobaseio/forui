@@ -93,7 +93,7 @@ void main() {
                   ),
                   context: context,
                   builder: (context, style, animation) => FDialog(
-                    style: .value(style),
+                    style: style,
                     animation: animation,
                     title: const Text('Are you absolutely sure?'),
                     body: const Text(
@@ -124,7 +124,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FDialog(
-            style: .value(TestScaffold.blueScreen.dialogStyle),
+            style: TestScaffold.blueScreen.dialogStyle,
             direction: .horizontal,
             title: const Text('Are you absolutely sure?'),
             body: const Text(

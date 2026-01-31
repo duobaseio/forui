@@ -12,7 +12,7 @@ void main() {
         TestScaffold.blue(
           child: FButton(
             autofocus: true,
-            style: FButtonStyleDelta.value(TestScaffold.blueScreen.buttonStyles.base),
+            style: TestScaffold.blueScreen.buttonStyles.base,
             prefix: const Icon(FIcons.circlePlay),
             suffix: const Icon(FIcons.circleStop),
             onPress: () {},
@@ -29,7 +29,7 @@ void main() {
         TestScaffold.blue(
           child: FButton.icon(
             variants: const {},
-            style: FButtonStyleDelta.value(TestScaffold.blueScreen.buttonStyles.base),
+            style: TestScaffold.blueScreen.buttonStyles.base,
             child: const Icon(FIcons.circleStop),
             onPress: () {},
           ),

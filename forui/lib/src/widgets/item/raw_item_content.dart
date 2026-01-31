@@ -18,7 +18,7 @@ class RawItemContent extends StatelessWidget {
   final double top;
   final double bottom;
   final Set<FTappableVariant> variants;
-  final FVariants<FItemGroupVariantConstraint, Color, Delta<Color>>? dividerColor;
+  final FVariants<FItemGroupVariantConstraint, Color, Delta>? dividerColor;
   final double? dividerWidth;
   final FItemDivider dividerType;
   final Widget? prefix;

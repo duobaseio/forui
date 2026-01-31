@@ -47,6 +47,16 @@ part 'tile_group.design.dart';
 class FTileGroup extends StatelessWidget with FTileGroupMixin {
   /// The style.
   ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FTileGroupStyle(...)
+  /// ```
+  ///
   /// ## CLI
   /// To generate and customize this style:
   ///
@@ -269,7 +279,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
     }
 
     return FLabel(
-      style: .value(style),
+      style: style,
       axis: .vertical,
       variants: {if (!enabled) .disabled, if (error != null) .error},
       label: label,
@@ -358,7 +368,7 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
 
   /// The divider's style.
   @override
-  final FVariants<FItemGroupVariantConstraint, Color, Delta<Color>> dividerColor;
+  final FVariants<FItemGroupVariantConstraint, Color, Delta> dividerColor;
 
   /// The divider's width.
   @override

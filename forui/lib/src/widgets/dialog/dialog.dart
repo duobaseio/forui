@@ -26,6 +26,16 @@ part 'dialog.design.dart';
 /// Returns a `Future` that resolves to the value (if any) that was passed to [Navigator.pop] when the modal sheet was
 /// closed.
 ///
+/// To modify the current [style]:
+/// ```dart
+/// style: .delta(...)
+/// ```
+///
+/// To replace the [style]:
+/// ```dart
+/// style: FDialogStyle(...)
+/// ```
+///
 /// ## CLI
 /// To generate and customize this widget's style:
 ///
@@ -220,6 +230,16 @@ class FDialogRouteMotion with Diagnosticable, _$FDialogRouteMotionFunctions {
 /// * [FDialogStyle] for customizing a dialog's appearance.
 class FDialog extends StatefulWidget {
   /// The dialog's style. Defaults to [FThemeData.dialogStyle].
+  ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FDialogStyle(...)
+  /// ```
   ///
   /// ## CLI
   /// To generate and customize this style:

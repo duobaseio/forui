@@ -13,6 +13,16 @@ part 'bottom_navigation_bar_item.design.dart';
 class FBottomNavigationBarItem extends StatelessWidget {
   /// The style.
   ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FBottomNavigationBarItemStyle(...)
+  /// ```
+  ///
   /// ## CLI
   /// To generate and customize this style:
   ///
@@ -61,8 +71,8 @@ class FBottomNavigationBarItem extends StatelessWidget {
     final style = this.style(itemStyle);
 
     return FTappable(
-      style: .value(style.tappableStyle),
-      focusedOutlineStyle: .value(style.focusedOutlineStyle),
+      style: style.tappableStyle,
+      focusedOutlineStyle: style.focusedOutlineStyle,
       autofocus: autofocus,
       focusNode: focusNode,
       onFocusChange: onFocusChange,

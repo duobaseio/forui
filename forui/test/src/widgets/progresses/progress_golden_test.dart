@@ -7,7 +7,7 @@ import '../../test_scaffold.dart';
 
 void main() {
   testWidgets('blue screen', (tester) async {
-    await tester.pumpWidget(TestScaffold.blue(child: FProgress(style: .value(TestScaffold.blueScreen.progressStyle))));
+    await tester.pumpWidget(TestScaffold.blue(child: FProgress(style: TestScaffold.blueScreen.progressStyle)));
 
     await expectBlueScreen();
   });

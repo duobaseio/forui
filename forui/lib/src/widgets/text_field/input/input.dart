@@ -24,7 +24,7 @@ class Input extends StatefulWidget {
     return Padding(
       padding: style.clearButtonPadding,
       child: FButton.icon(
-        style: .value(style.clearButtonStyle),
+        style: style.clearButtonStyle,
         onPress: clear,
         child: Icon(FIcons.x, semanticLabel: localizations.textFieldClearButtonSemanticsLabel),
       ),
@@ -326,7 +326,7 @@ class _InputState extends State<Input> {
       axis: .vertical,
       variants: variants as Set<FFormFieldVariant>,
       label: widget.label,
-      style: .value(style),
+      style: style,
       description: widget.description,
       // Error should never be null as doing so causes the widget tree to change. This causes overlays attached to
       // the textfield to fail as it is not smart enough to track the new location of the textfield in the widget tree.

@@ -65,7 +65,7 @@ class FSliderMark with Diagnosticable {
 class FSliderMarkStyle with Diagnosticable, _$FSliderMarkStyleFunctions {
   /// The tick's color.
   @override
-  final FVariants<FSliderVariantConstraint, Color, Delta<Color>> tickColor;
+  final FVariants<FSliderVariantConstraint, Color, Delta> tickColor;
 
   /// The tick's size. Defaults to 3.
   ///

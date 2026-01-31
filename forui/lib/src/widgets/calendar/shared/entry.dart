@@ -226,11 +226,11 @@ class _Content extends StatelessWidget {
 class FCalendarEntryStyle with Diagnosticable, _$FCalendarEntryStyleFunctions {
   /// The day's background color.
   @override
-  final FVariants<FTappableVariantConstraint, Color, Delta<Color>> backgroundColor;
+  final FVariants<FTappableVariantConstraint, Color, Delta> backgroundColor;
 
   /// The border.
   @override
-  final FVariants<FTappableVariantConstraint, Color?, Delta<Color?>> borderColor;
+  final FVariants<FTappableVariantConstraint, Color?, Delta> borderColor;
 
   /// The day's text style.
   @override

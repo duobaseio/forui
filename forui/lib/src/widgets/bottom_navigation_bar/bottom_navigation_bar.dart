@@ -25,6 +25,16 @@ part 'bottom_navigation_bar.design.dart';
 class FBottomNavigationBar extends StatelessWidget {
   /// The style.
   ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FBottomNavigationBarStyle(...)
+  /// ```
+  ///
   /// ## CLI
   /// To generate and customize this style:
   ///

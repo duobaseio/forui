@@ -13,7 +13,7 @@ void main() {
           TestScaffold.blue(
             child: FSelectTileGroup(
               control: const .managedRadio(initial: 1),
-              style: .value(TestScaffold.blueScreen.tileGroupStyle),
+              style: TestScaffold.blueScreen.tileGroupStyle,
               label: const Text('Network'),
               children: const [
                 .tile(title: Text('WiFi'), details: Text('Duobase (5G)'), suffix: Icon(FIcons.chevronRight), value: 1),
@@ -37,7 +37,7 @@ void main() {
           TestScaffold.blue(
             child: FSelectTileGroup(
               control: const .managedRadio(initial: 1),
-              style: .value(TestScaffold.blueScreen.tileGroupStyle),
+              style: TestScaffold.blueScreen.tileGroupStyle,
               label: const Text('Network'),
               children: const [
                 .tile(title: Text('WiFi'), details: Text('Duobase (5G)'), suffix: Icon(FIcons.chevronRight), value: 1),
@@ -67,7 +67,7 @@ void main() {
           TestScaffold.blue(
             child: FSelectTileGroup(
               control: const .managedRadio(initial: 1),
-              style: .value(TestScaffold.blueScreen.tileGroupStyle),
+              style: TestScaffold.blueScreen.tileGroupStyle,
               enabled: false,
               label: const Text('Network'),
               children: const [
@@ -306,7 +306,7 @@ void main() {
             children: [
               const .tile(title: Text('WiFi'), details: Text('FL (5G)'), suffix: Icon(FIcons.chevronRight), value: 1),
               .tile(
-                style: .value(FThemes.blue.dark.tileGroupStyle.tileStyle),
+                style: FThemes.blue.dark.tileGroupStyle.tileStyle,
                 title: const Text('Bluetooth'),
                 subtitle: const Text('Fee, Fo'),
                 details: const Text('FL (5G)'),
@@ -358,7 +358,7 @@ void main() {
         TestScaffold.blue(
           child: FSelectTileGroup.builder(
             control: const .managedRadio(initial: 1),
-            style: .value(TestScaffold.blueScreen.tileGroupStyle),
+            style: TestScaffold.blueScreen.tileGroupStyle,
             maxHeight: 200,
             count: 5,
             label: const Text('Network'),

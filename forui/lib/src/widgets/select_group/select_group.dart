@@ -67,6 +67,16 @@ class FSelectGroup<T> extends StatefulWidget with FFormFieldProperties<Set<T>> {
 
   /// The style. Defaults to [FThemeData.selectGroupStyle].
   ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FSelectGroupStyle(...)
+  /// ```
+  ///
   /// ## CLI
   /// To generate and customize this style:
   ///
@@ -188,7 +198,7 @@ class _FSelectGroupState<T> extends State<FSelectGroup<T>> {
         return FLabel(
           axis: .vertical,
           variants: variants,
-          style: .value(groupStyle),
+          style: groupStyle,
           label: widget.label,
           description: widget.description,
           error: state.errorText == null ? null : widget.errorBuilder(context, state.errorText!),

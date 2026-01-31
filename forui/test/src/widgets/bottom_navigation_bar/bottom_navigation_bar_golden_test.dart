@@ -11,7 +11,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.blue(
         child: FBottomNavigationBar(
-          style: .value(TestScaffold.blueScreen.bottomNavigationBarStyle),
+          style: TestScaffold.blueScreen.bottomNavigationBarStyle,
           index: 2,
           children: const [
             FBottomNavigationBarItem(icon: Icon(FIcons.house), label: Text('Home')),

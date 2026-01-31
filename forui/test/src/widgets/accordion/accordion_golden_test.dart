@@ -10,7 +10,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.blue(
         child: FAccordion(
-          style: .value(TestScaffold.blueScreen.accordionStyle),
+          style: TestScaffold.blueScreen.accordionStyle,
           children: const [FAccordionItem(title: Text('Title'), child: SizedBox())],
         ),
       ),

@@ -36,6 +36,16 @@ part 'sidebar.design.dart';
 class FSidebar extends StatefulWidget {
   /// The style.
   ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FSidebarStyle(...)
+  /// ```
+  ///
   /// ## CLI
   /// To generate and customize this style:
   ///

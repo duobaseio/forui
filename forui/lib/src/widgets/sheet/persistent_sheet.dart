@@ -49,6 +49,16 @@ part 'persistent_sheet.design.dart';
 ///   * the [context] does not contain a [FSheets] or [FScaffold] ancestor.
 ///   * a sheet with the same [key] already exists.
 ///
+/// To modify the current style:
+/// ```dart
+/// style: .delta(...)
+/// ```
+///
+/// To replace the style:
+/// ```dart
+/// style: FPersistentSheetStyle(...)
+/// ```
+///
 /// ## CLI
 /// To generate and customize this widget's style:
 ///

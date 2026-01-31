@@ -18,6 +18,16 @@ part 'progress.design.dart';
 /// * [FCircularProgress] for for a circular progress indicator.
 class FProgress extends StatefulWidget {
   /// The style.
+  ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FProgressStyle(...)
+  /// ```
   final FProgressStyleDelta style;
 
   /// The semantics label. Defaults to [FLocalizations.progressSemanticsLabel].

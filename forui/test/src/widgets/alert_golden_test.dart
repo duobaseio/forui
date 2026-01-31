@@ -12,7 +12,7 @@ void main() {
         child: FAlert(
           title: const Text('Alert Title'),
           subtitle: const Text('Alert description with extra text'),
-          style: .value(TestScaffold.blueScreen.alertStyles.base),
+          style: TestScaffold.blueScreen.alertStyles.base,
         ),
       ),
     );

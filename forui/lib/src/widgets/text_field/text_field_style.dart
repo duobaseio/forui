@@ -92,7 +92,7 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
 
   /// The border.
   @override
-  final FVariants<FTextFieldVariantConstraint, InputBorder, Delta<InputBorder>> border;
+  final FVariants<FTextFieldVariantConstraint, InputBorder, Delta> border;
 
   /// Creates a [FTextFieldStyle].
   FTextFieldStyle({
@@ -134,7 +134,7 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
       },
     );
     final bounceableButtonStyle = ghost.copyWith(
-      iconContentStyle: .value(ghost.iconContentStyle.copyWith(iconStyle: .value(iconStyle.cast()))),
+      iconContentStyle: ghost.iconContentStyle.copyWith(iconStyle: FVariantsDelta.value(iconStyle.cast())),
     );
 
     return .new(

@@ -17,6 +17,16 @@ part 'focused_outline.design.dart';
 /// * [FFocusedOutlineStyle] for customizing an outline.
 class FFocusedOutline extends SingleChildRenderObjectWidget {
   /// The style.
+  ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FFocusedOutlineStyle(...)
+  /// ```
   final FFocusedOutlineStyleDelta style;
 
   /// True if the [child] should be outlined.

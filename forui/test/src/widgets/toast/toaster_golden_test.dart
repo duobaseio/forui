@@ -67,10 +67,10 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.blue(
         child: FToaster(
-          style: .value(TestScaffold.blueScreen.toasterStyle),
+          style: TestScaffold.blueScreen.toasterStyle,
           child: Builder(
             builder: (context) => FButton(
-              style: .value(TestScaffold.blueScreen.buttonStyles.base),
+              style: TestScaffold.blueScreen.buttonStyles.base,
               onPress: () => showRawFToast(
                 context: context,
                 builder: (_, _) => Container(color: TestScaffold.blueScreen.colors.foreground, width: 100, height: 100),

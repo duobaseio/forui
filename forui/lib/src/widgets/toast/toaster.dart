@@ -243,6 +243,16 @@ class FToaster extends StatefulWidget {
   static FToasterState of(BuildContext context) => context.findAncestorStateOfType<FToasterState>()!;
 
   /// The style.
+  ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FToasterStyle(...)
+  /// ```
   final FToasterStyleDelta style;
 
   /// The child.

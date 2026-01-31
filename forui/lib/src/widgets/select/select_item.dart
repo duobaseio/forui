@@ -89,6 +89,16 @@ mixin FSelectItemMixin on Widget {
 class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
   /// The style. Defaults to the [FSelectSectionStyle] inherited from the parent [FSelect].
   ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FSelectSectionStyle(...)
+  /// ```
+  ///
   /// ## CLI
   /// To generate and customize this style:
   ///
@@ -215,7 +225,7 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
 
   /// The divider's style.
   @override
-  final FVariants<FSelectSectionVariantConstraint, Color, Delta<Color>> dividerColor;
+  final FVariants<FSelectSectionVariantConstraint, Color, Delta> dividerColor;
 
   /// The divider's width.
   @override
@@ -285,7 +295,7 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
           prefixIconStyle: iconStyle,
           childTextStyle: textStyle,
         ),
-        tappableStyle: style.tappableStyle.copyWith(motion: const .value(FTappableMotion.none)),
+        tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
         focusedOutlineStyle: null,
       ),
     );
@@ -295,6 +305,16 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
 /// A selectable item in a [FSelect] that can optionally be nested in a [FSelectSection].
 abstract class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
   /// The style. Defaults to the [FItemStyle] inherited from the parent [FSelectSection] or [FSelect].
+  ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FItemStyle(...)
+  /// ```
   ///
   /// ## CLI
   /// To generate and customize this style:

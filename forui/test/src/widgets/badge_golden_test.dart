@@ -9,7 +9,7 @@ void main() {
   testWidgets('blue screen', (tester) async {
     await tester.pumpWidget(
       TestScaffold.blue(
-        child: FBadge(style: .value(TestScaffold.blueScreen.badgeStyles.base), child: const Text('Badge')),
+        child: FBadge(style: TestScaffold.blueScreen.badgeStyles.base, child: const Text('Badge')),
       ),
     );
 

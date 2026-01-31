@@ -115,7 +115,7 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
         includeFocusSemantics: false,
         onFocusChange: (focused) => setState(() => _focused = focused),
         child: FFocusedOutline(
-          style: .value(thumbStyle.focusedOutlineStyle),
+          style: thumbStyle.focusedOutlineStyle,
           focused: _focused,
           child: DecoratedBox(
             decoration: BoxDecoration(
@@ -227,11 +227,11 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
 class FSliderThumbStyle with Diagnosticable, _$FSliderThumbStyleFunctions {
   /// The thumb's color.
   @override
-  final FVariants<FSliderVariantConstraint, Color, Delta<Color>> color;
+  final FVariants<FSliderVariantConstraint, Color, Delta> color;
 
   /// The border's color.
   @override
-  final FVariants<FSliderVariantConstraint, Color, Delta<Color>> borderColor;
+  final FVariants<FSliderVariantConstraint, Color, Delta> borderColor;
 
   /// The border's width. Defaults to `2`.
   ///

@@ -52,6 +52,16 @@ class FTabs extends StatefulWidget {
 
   /// The style.
   ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FTabsStyle(...)
+  /// ```
+  ///
   /// ## CLI
   /// To generate and customize this style:
   ///
@@ -242,7 +252,7 @@ class _TabState extends State<_Tab> {
 
   @override
   Widget build(BuildContext _) => FFocusedOutline(
-    style: .value(widget.style.focusedOutlineStyle),
+    style: widget.style.focusedOutlineStyle,
     focused: _focused,
     child: Tab(height: widget.style.height, child: widget.label),
   );

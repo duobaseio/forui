@@ -19,7 +19,7 @@ class DialogPage extends Example {
       builder: (context, style, animation) => FTheme(
         data: theme,
         child: FDialog(
-          style: .value(style),
+          style: style,
           animation: animation,
           // {@highlight}
           direction: .horizontal,
@@ -55,7 +55,7 @@ class VerticalDialogPage extends Example {
       builder: (context, style, animation) => FTheme(
         data: theme,
         child: FDialog(
-          style: .value(style),
+          style: style,
           animation: animation,
           title: const Text('Are you absolutely sure?'),
           body: const Text(
@@ -96,7 +96,7 @@ class BlurredDialogPage extends Example {
       builder: (context, style, animation) => FTheme(
         data: theme,
         child: FDialog(
-          style: .value(style),
+          style: style,
           animation: animation,
           title: const Text('Are you absolutely sure?'),
           body: const Text(

@@ -94,42 +94,36 @@ class RawToastPage extends Example {
   RawToastPage({@queryParam super.theme});
 
   @override
-  Widget example(BuildContext context) {
-    final cardStyle = context.theme.cardStyle.copyWith(
-      contentStyle: .value(
-        context.theme.cardStyle.contentStyle.copyWith(
-          titleTextStyle: .value(
-            context.theme.typography.sm.copyWith(color: context.theme.colors.primary, fontWeight: FontWeight.w600),
-          ),
-        ),
-      ),
-    );
-
-    return FButton(
-      mainAxisSize: .min,
-      // {@highlight}
-      onPress: () => showRawFToast(
-        // {@endhighlight}
-        context: context,
-        duration: null,
-        builder: (context, toast) => IntrinsicHeight(
-          child: FCard(
-            style: .value(cardStyle),
-            title: const Text('Event has been created'),
-            subtitle: const Padding(
-              padding: .symmetric(vertical: 5),
-              child: Text(
-                'This is a more detailed description that provides comprehensive context and additional information '
-                'about the notification, explaining what happened and what the user might expect next.',
+  Widget example(BuildContext context) => FButton(
+    mainAxisSize: .min,
+    // {@highlight}
+    onPress: () => showRawFToast(
+      // {@endhighlight}
+      context: context,
+      duration: null,
+      builder: (context, toast) => IntrinsicHeight(
+        child: FCard(
+          style: .delta(
+            contentStyle: .delta(
+              titleTextStyle: .value(
+                context.theme.typography.sm.copyWith(color: context.theme.colors.primary, fontWeight: .w600),
               ),
             ),
-            child: FButton(onPress: () => toast.dismiss(), child: const Text('undo')),
           ),
+          title: const Text('Event has been created'),
+          subtitle: const Padding(
+            padding: .symmetric(vertical: 5),
+            child: Text(
+              'This is a more detailed description that provides comprehensive context and additional information '
+              'about the notification, explaining what happened and what the user might expect next.',
+            ),
+          ),
+          child: FButton(onPress: () => toast.dismiss(), child: const Text('undo')),
         ),
       ),
-      child: const Text('Show Toast'),
-    );
-  }
+    ),
+    child: const Text('Show Toast'),
+  );
 }
 
 @RoutePage()

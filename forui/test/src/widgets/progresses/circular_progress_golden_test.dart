@@ -8,7 +8,7 @@ import '../../test_scaffold.dart';
 void main() {
   testWidgets('blue screen', (tester) async {
     await tester.pumpWidget(
-      TestScaffold.blue(child: FCircularProgress(style: .value(TestScaffold.blueScreen.circularProgressStyle))),
+      TestScaffold.blue(child: FCircularProgress(style: TestScaffold.blueScreen.circularProgressStyle)),
     );
 
     await expectBlueScreen();

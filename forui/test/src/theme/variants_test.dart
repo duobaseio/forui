@@ -7,20 +7,20 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/theme/variant.dart';
 import 'package:forui/src/theme/variants.dart';
 
-class _Add with Delta<int> {
+class _Add with Delta {
   final int value;
 
   const _Add(this.value);
 
   @override
-  int call(int base) => base + value;
+  int call(covariant int base) => base + value;
 }
 
-class _NullableDelta with Delta<double?> {
+class _NullableDelta with Delta {
   const _NullableDelta();
 
   @override
-  double? call(double? base) => base;
+  Object call(covariant double? base) => base ?? 0.0;
 }
 
 double? _lerpNullableDouble(double? a, double? b, double t) => lerpDouble(a, b, t);
@@ -33,11 +33,11 @@ void main() {
 
   group('FVariants', () {
     test('lerpBoxDecoration', () {
-      final first = createVariants<FVariant, BoxDecoration, Delta<BoxDecoration>>(
+      final first = createVariants<FVariant, BoxDecoration, Delta>(
         const BoxDecoration(color: Color(0xFF000000)),
         {a: const BoxDecoration(color: Color(0xFF000000))},
       );
-      final second = createVariants<FVariant, BoxDecoration, Delta<BoxDecoration>>(
+      final second = createVariants<FVariant, BoxDecoration, Delta>(
         const BoxDecoration(color: Color(0xFFFFFFFF)),
         {a: const BoxDecoration(color: Color(0xFFFFFFFF))},
       );
@@ -49,8 +49,8 @@ void main() {
     });
 
     test('lerpColor', () {
-      final first = createVariants<FVariant, Color, Delta<Color>>(const Color(0xFF000000), {a: const Color(0xFF000000)});
-      final second = createVariants<FVariant, Color, Delta<Color>>(const Color(0xFFFFFFFF), {a: const Color(0xFFFFFFFF)});
+      final first = createVariants<FVariant, Color, Delta>(const Color(0xFF000000), {a: const Color(0xFF000000)});
+      final second = createVariants<FVariant, Color, Delta>(const Color(0xFFFFFFFF), {a: const Color(0xFFFFFFFF)});
 
       final result = FVariants.lerpColor(first, second, 0.5);
 
@@ -59,11 +59,11 @@ void main() {
     });
 
     test('lerpIconThemeData', () {
-      final first = createVariants<FVariant, IconThemeData, Delta<IconThemeData>>(
+      final first = createVariants<FVariant, IconThemeData, Delta>(
         const IconThemeData(size: 10),
         {a: const IconThemeData(size: 15)},
       );
-      final second = createVariants<FVariant, IconThemeData, Delta<IconThemeData>>(
+      final second = createVariants<FVariant, IconThemeData, Delta>(
         const IconThemeData(size: 20),
         {a: const IconThemeData(size: 25)},
       );
@@ -75,11 +75,11 @@ void main() {
     });
 
     test('lerpTextStyle', () {
-      final first = createVariants<FVariant, TextStyle, Delta<TextStyle>>(
+      final first = createVariants<FVariant, TextStyle, Delta>(
         const TextStyle(fontSize: 10),
         {a: const TextStyle(fontSize: 15)},
       );
-      final second = createVariants<FVariant, TextStyle, Delta<TextStyle>>(
+      final second = createVariants<FVariant, TextStyle, Delta>(
         const TextStyle(fontSize: 20),
         {a: const TextStyle(fontSize: 25)},
       );
@@ -98,8 +98,8 @@ void main() {
           ('keys only in second', {a: 2.0}, {a: 6.0, b: 8.0}, {a: 4.0}),
         ]) {
           test(description, () {
-            final first = createVariants<FVariant, double, Delta<double>>(1.0, firstVariants);
-            final second = createVariants<FVariant, double, Delta<double>>(3.0, secondVariants);
+            final first = createVariants<FVariant, double, Delta>(1.0, firstVariants);
+            final second = createVariants<FVariant, double, Delta>(3.0, secondVariants);
 
             final result = FVariants.lerpWhere(first, second, 0.5, lerpDouble);
 
@@ -110,8 +110,8 @@ void main() {
 
         for (final (t, expected) in [(0.4, 1.0), (0.5, 3.0)]) {
           test('base fallback at t=$t', () {
-            final first = createVariants<FVariant, double, Delta<double>>(1.0, {});
-            final second = createVariants<FVariant, double, Delta<double>>(3.0, {});
+            final first = createVariants<FVariant, double, Delta>(1.0, {});
+            final second = createVariants<FVariant, double, Delta>(3.0, {});
 
             final result = FVariants.lerpWhere(first, second, t, (a, b, t) => null);
 
@@ -162,7 +162,7 @@ void main() {
     }
 
     test('cast', () {
-      final variants = createVariants<FTextFieldVariantConstraint, int, Delta<int>>(0, {.disabled: 1});
+      final variants = createVariants<FTextFieldVariantConstraint, int, Delta>(0, {.disabled: 1});
       expect(() => variants.cast<FFormFieldVariantConstraint>(), returnsNormally);
     });
 
@@ -178,7 +178,7 @@ void main() {
     });
 
     test('applyValues', () {
-      final variants = createVariants<FVariant, int, Delta<int>>(0, {a: 1, b: 2});
+      final variants = createVariants<FVariant, int, Delta>(0, {a: 1, b: 2});
       final result = variants.applyValues([
         .add({c}, 3),
         .onAll(10),

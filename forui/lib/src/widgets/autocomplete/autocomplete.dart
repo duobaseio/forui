@@ -36,7 +36,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   /// The default loading builder that shows a spinner when an asynchronous search is pending.
   static Widget defaultContentLoadingBuilder(BuildContext _, FAutocompleteContentStyle style) => Padding(
     padding: const .all(13),
-    child: FCircularProgress(style: .value(style.progressStyle)),
+    child: FCircularProgress(style: style.progressStyle),
   );
 
   /// The default empty builder that shows a localized message when there are no results.
@@ -63,6 +63,16 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   final FPopoverControl popoverControl;
 
   /// The style.
+  ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FAutocompleteStyle(...)
+  /// ```
   ///
   /// ## CLI
   /// To generate and customize this style:
@@ -799,7 +809,7 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
       },
       child: FTextFormField(
         control: .managed(controller: _controller),
-        style: .value(style.fieldStyle),
+        style: style.fieldStyle,
         label: widget.label,
         hint: widget.hint,
         description: widget.description,
@@ -868,7 +878,7 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
           policy: SkipDelegateTraversalPolicy(FocusTraversalGroup.maybeOf(context) ?? ReadingOrderTraversalPolicy()),
           child: FPopover(
             control: .managed(controller: _popoverController),
-            style: .value(style.contentStyle),
+            style: style.contentStyle,
             constraints: widget.contentConstraints,
             popoverAnchor: widget.contentAnchor,
             childAnchor: widget.fieldAnchor,

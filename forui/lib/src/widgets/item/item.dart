@@ -141,6 +141,16 @@ class FItem extends StatelessWidget with FItemMixin {
   ///
   /// Provide a style to prevent inheritance from [FInheritedItemData].
   ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FItemStyle(...)
+  /// ```
+  ///
   /// ## CLI
   /// To generate and customize this style:
   ///
@@ -221,7 +231,7 @@ class FItem extends StatelessWidget with FItemMixin {
     double top,
     double bottom,
     Set<FTappableVariant> variants,
-    FVariants<FItemGroupVariantConstraint, Color, Delta<Color>>? color,
+    FVariants<FItemGroupVariantConstraint, Color, Delta>? color,
     double? width,
     FItemDivider divider,
   )
@@ -368,7 +378,7 @@ class FItem extends StatelessWidget with FItemMixin {
       child: Padding(
         padding: margin,
         child: FTappable(
-          style: .value(style.tappableStyle),
+          style: style.tappableStyle,
           semanticsLabel: semanticsLabel,
           autofocus: autofocus,
           focusNode: focusNode,
@@ -432,7 +442,7 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
   ///
   /// This is useful for setting a background color when [margin] is not zero.
   @override
-  final FVariants<FTappableVariantConstraint, Color?, Delta<Color?>> backgroundColor;
+  final FVariants<FTappableVariantConstraint, Color?, Delta> backgroundColor;
 
   /// The margin around the item, including the [decoration].
   ///
@@ -490,7 +500,7 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
         contentStyle: .inherit(colors: colors, typography: typography),
         rawItemContentStyle: .inherit(colors: colors, typography: typography),
         tappableStyle: style.tappableStyle.copyWith(
-          motion: const .value(FTappableMotion.none),
+          motion: FTappableMotion.none,
           pressedEnterDuration: .zero,
           pressedExitDuration: const Duration(milliseconds: 25),
         ),

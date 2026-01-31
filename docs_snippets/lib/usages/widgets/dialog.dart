@@ -63,7 +63,7 @@ final show = showFDialog(
   style: const .delta(insetPadding: .zero),
   routeStyle: const .delta(motion: .delta()),
   builder: (context, style, animation) => FDialog(
-    style: .value(style),
+    style: style,
     animation: animation,
     title: const Text('Title'),
     body: const Text('Body'),

@@ -70,6 +70,19 @@ void main() {
       expect(result, replacement);
       expect(result.borderRadius, null);
     });
+
+    test('creates from null', () {
+      const delta = BoxDecorationDelta.delta(color: Color(0xFF000000));
+      final result = delta(null);
+
+      expect(result.color, const Color(0xFF000000));
+      expect(result.border, null);
+      expect(result.borderRadius, null);
+      expect(result.boxShadow, null);
+      expect(result.gradient, null);
+      expect(result.backgroundBlendMode, null);
+      expect(result.shape, BoxShape.rectangle);
+    });
   });
 
   group('IconThemeDataDelta', () {
@@ -140,6 +153,21 @@ void main() {
 
       expect(result, replacement);
       expect(result.size, null);
+    });
+
+    test('creates from null', () {
+      const delta = IconThemeDataDelta.delta(color: Color(0xFF000000));
+      final result = delta(null);
+
+      expect(result.color, const Color(0xFF000000));
+      expect(result.opacity, null);
+      expect(result.size, null);
+      expect(result.fill, null);
+      expect(result.weight, null);
+      expect(result.grade, null);
+      expect(result.opticalSize, null);
+      expect(result.shadows, null);
+      expect(result.applyTextScaling, null);
     });
   });
 
@@ -272,6 +300,20 @@ void main() {
 
       expect(result, replacement);
       expect(result.fontSize, null);
+      expect(result.decoration, null);
+    });
+
+    test('creates from null', () {
+      const delta = TextStyleDelta.delta(color: Color(0xFF000000));
+      final result = delta(null);
+
+      expect(result.color, const Color(0xFF000000));
+      expect(result.inherit, true);
+      expect(result.backgroundColor, null);
+      expect(result.fontSize, null);
+      expect(result.fontWeight, null);
+      expect(result.fontStyle, null);
+      expect(result.letterSpacing, null);
       expect(result.decoration, null);
     });
   });

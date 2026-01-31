@@ -12,7 +12,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.blue(
         child: FSlider(
-          style: .value(TestScaffold.blueScreen.sliderStyles.base),
+          style: TestScaffold.blueScreen.sliderStyles.base,
           control: .managedContinuous(initial: FSliderValue(min: 0.30, max: 0.60)),
           marks: const [
             .mark(value: 0.0, label: Text('0')),

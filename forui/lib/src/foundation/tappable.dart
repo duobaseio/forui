@@ -31,6 +31,16 @@ class FTappable extends StatefulWidget {
   static Widget _builder(BuildContext _, Set<FTappableVariant> _, Widget? child) => child!;
 
   /// The style.
+  ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FTappableStyle(...)
+  /// ```
   final FTappableStyleDelta style;
 
   /// The style used when the tappable is focused. This tappable will not be outlined if null.
@@ -486,7 +496,7 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
 class FTappableStyle with Diagnosticable, _$FTappableStyleFunctions {
   /// The mouse cursor for mouse pointers that are hovering over the region. Defaults to [MouseCursor.defer].
   @override
-  final FVariants<FTappableVariantConstraint, MouseCursor, Delta<MouseCursor>> cursor;
+  final FVariants<FTappableVariantConstraint, MouseCursor, Delta> cursor;
 
   /// The duration to wait before applying the pressed effect after the user presses the tile. Defaults to 200ms.
   @override

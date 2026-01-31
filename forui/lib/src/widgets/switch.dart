@@ -26,6 +26,16 @@ part 'switch.design.dart';
 class FSwitch extends StatelessWidget {
   /// The style. Defaults to [FThemeData.switchStyle].
   ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FSwitchStyle(...)
+  /// ```
+  ///
   /// ## CLI
   /// To generate and customize this style:
   ///
@@ -121,7 +131,7 @@ class FSwitch extends StatelessWidget {
           child: FLabel(
             axis: .horizontal,
             variants: formVariants,
-            style: .value(style),
+            style: style,
             label: label,
             description: description,
             error: error,
@@ -174,11 +184,11 @@ class FSwitchStyle extends FLabelStyle with _$FSwitchStyleFunctions {
 
   /// The track's color.
   @override
-  final FVariants<FSwitchVariantConstraint, Color, Delta<Color>> trackColor;
+  final FVariants<FSwitchVariantConstraint, Color, Delta> trackColor;
 
   /// The thumb's color.
   @override
-  final FVariants<FSwitchVariantConstraint, Color, Delta<Color>> thumbColor;
+  final FVariants<FSwitchVariantConstraint, Color, Delta> thumbColor;
 
   /// Creates a [FSwitchStyle].
   const FSwitchStyle({

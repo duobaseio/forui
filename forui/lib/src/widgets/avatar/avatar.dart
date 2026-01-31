@@ -21,6 +21,16 @@ part 'avatar.design.dart';
 class FAvatar extends StatelessWidget {
   /// The style. Defaults to [FThemeData.avatarStyle].
   ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FAvatarStyle(...)
+  /// ```
+  ///
   /// ## CLI
   /// To generate and customize this style:
   ///

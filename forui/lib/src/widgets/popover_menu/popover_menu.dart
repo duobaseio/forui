@@ -34,6 +34,16 @@ class FPopoverMenu extends StatelessWidget {
 
   /// The popover menu's style.
   ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FPopoverMenuStyle(...)
+  /// ```
+  ///
   /// ## CLI
   /// To generate and customize this style:
   ///
@@ -182,7 +192,7 @@ class FPopoverMenu extends StatelessWidget {
          maxHeight: maxHeight,
          dragStartBehavior: dragStartBehavior,
          semanticsLabel: semanticsLabel,
-         style: .value(style.itemGroupStyle),
+         style: style.itemGroupStyle,
          divider: divider,
          children: menuBuilder(context, controller, menu),
        )),
@@ -240,7 +250,7 @@ class FPopoverMenu extends StatelessWidget {
          maxHeight: maxHeight,
          dragStartBehavior: dragStartBehavior,
          semanticsLabel: semanticsLabel,
-         style: .value(style.tileGroupStyle),
+         style: style.tileGroupStyle,
          divider: divider,
          children: menuBuilder(context, controller, menu),
        )),
@@ -252,7 +262,7 @@ class FPopoverMenu extends StatelessWidget {
     final style = this.style(context.theme.popoverMenuStyle);
     return FPopover(
       control: control,
-      style: .value(style),
+      style: style,
       constraints: FPortalConstraints(maxWidth: style.maxWidth),
       popoverAnchor: menuAnchor,
       childAnchor: childAnchor,

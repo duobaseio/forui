@@ -10,7 +10,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.blue(
         child: FRadio(
-          style: .value(TestScaffold.blueScreen.radioStyle),
+          style: TestScaffold.blueScreen.radioStyle,
           value: true,
           label: const Text('Direct messages and mentions'),
           description: const Text('Only send me direct messages and mentions.'),

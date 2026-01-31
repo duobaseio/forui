@@ -28,6 +28,16 @@ class FLineCalendar extends StatelessWidget {
 
   /// The style.
   ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FLineCalendarStyle(...)
+  /// ```
+  ///
   /// ## CLI
   /// To generate and customize this style:
   ///
@@ -174,7 +184,7 @@ class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
 
   /// The color of the today indicator.
   @override
-  final FVariants<FTappableVariantConstraint, Color, Delta<Color>> todayIndicatorColor;
+  final FVariants<FTappableVariantConstraint, Color, Delta> todayIndicatorColor;
 
   /// The text style for the date.
   @override

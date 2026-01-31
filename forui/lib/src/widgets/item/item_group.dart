@@ -138,6 +138,16 @@ mixin FItemGroupMixin on Widget {
 class FItemGroup extends StatelessWidget with FItemGroupMixin {
   /// The style.
   ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FItemGroupStyle(...)
+  /// ```
+  ///
   /// ## CLI
   /// To generate and customize this style:
   ///
@@ -449,7 +459,7 @@ class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
 
   /// The divider's style.
   @override
-  final FVariants<FItemGroupVariantConstraint, Color, Delta<Color>> dividerColor;
+  final FVariants<FItemGroupVariantConstraint, Color, Delta> dividerColor;
 
   /// The divider's width.
   @override

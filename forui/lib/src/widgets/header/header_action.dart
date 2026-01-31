@@ -6,6 +6,16 @@ part of 'header.dart';
 class FHeaderAction extends StatelessWidget {
   /// The style.
   ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FHeaderActionStyle(...)
+  /// ```
+  ///
   /// ## CLI
   /// To generate and customize this style:
   ///
@@ -146,13 +156,13 @@ class FHeaderAction extends StatelessWidget {
   Widget build(BuildContext context) {
     final style = this.style ?? FHeaderData.of(context).actionStyle;
     return FTappable(
-      style: .value(style.tappableStyle),
+      style: style.tappableStyle,
       autofocus: autofocus,
       focusNode: focusNode,
       onFocusChange: onFocusChange,
       onHoverChange: onHoverChange,
       onVariantChange: onVariantChange,
-      focusedOutlineStyle: .value(style.focusedOutlineStyle),
+      focusedOutlineStyle: style.focusedOutlineStyle,
       semanticsLabel: semanticsLabel,
       onPress: onPress,
       onLongPress: onLongPress,

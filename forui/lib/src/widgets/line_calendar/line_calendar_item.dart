@@ -27,7 +27,7 @@ class Item extends StatelessWidget {
   Widget build(BuildContext context) => ValueListenableBuilder(
     valueListenable: controller,
     builder: (context, selected, _) => FTappable(
-      style: .value(style.tappableStyle),
+      style: style.tappableStyle,
       semanticsLabel: (FLocalizations.of(context) ?? FDefaultLocalizations()).fullDate(date),
       selected: selected == date,
       onPress: controller.selectable(date) ? () => controller.select(date) : null,

@@ -17,7 +17,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.blue(
         child: FTextField(
-          style: .value(TestScaffold.blueScreen.textFieldStyle),
+          style: TestScaffold.blueScreen.textFieldStyle,
           label: const Text('My Label'),
           hint: 'hint',
           description: const Text('Some help text.'),

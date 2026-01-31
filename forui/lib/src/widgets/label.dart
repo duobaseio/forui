@@ -35,6 +35,16 @@ part 'label.design.dart';
 class FLabel extends StatelessWidget {
   /// The label's style. Defaults to the appropriate style in [FThemeData.labelStyles].
   ///
+  /// To modify the current style:
+  /// ```dart
+  /// style: .delta(...)
+  /// ```
+  ///
+  /// To replace the style:
+  /// ```dart
+  /// style: FLabelStyle(...)
+  /// ```
+  ///
   /// ## CLI
   /// To generate and customize this style:
   ///
