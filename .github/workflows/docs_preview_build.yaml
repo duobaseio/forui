@@ -32,6 +32,11 @@ jobs:
           path: ./docs_snippets/build/web
           retention-days: 1
 
+      # Generate JSON snippets for docs
+      - name: Generate snippets
+        working-directory: ./docs_snippets
+        run: dart run tool/snippet_generator/main.dart
+
       # Escape branch name and create short SHA for snippets URL
       - id: escape-branch
         run: |

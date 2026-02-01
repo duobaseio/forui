@@ -38,6 +38,20 @@ jobs:
         working-directory: ./docs
     steps:
       - uses: actions/checkout@v6
+
+      # Generate JSON snippets for docs
+      - uses: subosito/flutter-action@v2.21.0
+      - name: Build forui dependencies
+        working-directory: ./forui
+        run: |
+          flutter pub get
+          dart run build_runner build --delete-conflicting-outputs
+      - name: Generate snippets
+        working-directory: ./docs_snippets
+        run: |
+          flutter pub get
+          dart run tool/snippet_generator/main.dart
+
       - uses: actions/setup-node@v6
         with:
           node-version: 24
