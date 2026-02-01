@@ -33,7 +33,9 @@ void main() {
         TestScaffold.blue(
           child: FAutocomplete.builder(
             key: key,
-            style: const .delta(fieldStyle: .delta(cursorColor: Color(0xFF03A9F4))),
+            style: TestScaffold.blueScreen.autocompleteStyle.copyWith(
+              fieldStyle: const .delta(cursorColor: Color(0xFF03A9F4)),
+            ),
             filter: (query) => fruits.where((f) => f.toLowerCase().startsWith(query.toLowerCase())),
             contentBuilder: (context, query, items) => [
               .section(label: const Text('Most popular'), items: const ['Apple', 'Kiwi']),

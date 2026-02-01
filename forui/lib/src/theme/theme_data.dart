@@ -990,7 +990,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
         labelStyle: textFieldStyle.descriptionTextStyle.base,
         floatingLabelStyle: textFieldStyle.labelTextStyle.base,
         hintStyle: textFieldStyle.hintTextStyle.base,
-        errorStyle: textFieldStyle.errorTextStyle,
+        errorStyle: textFieldStyle.errorTextStyle.base,
         helperStyle: textFieldStyle.descriptionTextStyle.base,
         counterStyle: textFieldStyle.counterTextStyle.base,
         contentPadding: textFieldStyle.contentPadding,

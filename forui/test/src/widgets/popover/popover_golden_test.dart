@@ -66,7 +66,7 @@ void main() {
           child: FPopover(
             control: const .managed(initial: true),
             style: .delta(
-              barrierFilter: () => (animation) => .blur(sigmaX: animation * 5, sigmaY: animation * 5),
+              barrierFilter: (animation) => .blur(sigmaX: animation * 5, sigmaY: animation * 5),
             ),
             popoverBuilder: (context, _) => const SizedBox.square(dimension: 100),
             child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
@@ -91,7 +91,7 @@ void main() {
               FPopover(
                 control: .managed(controller: controller),
                 style: .delta(
-                  backgroundFilter: () => (v) => .blur(sigmaX: v * 5, sigmaY: v * 5),
+                  backgroundFilter: (v) => .blur(sigmaX: v * 5, sigmaY: v * 5),
                   decoration: .value(BoxDecoration(
                     color: theme.data.colors.background.withValues(alpha: 0.5),
                     borderRadius: theme.data.style.borderRadius,

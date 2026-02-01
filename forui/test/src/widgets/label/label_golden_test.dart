@@ -28,12 +28,13 @@ void main() {
   });
 
   for (final theme in TestScaffold.themes) {
-    for (final Set<FFormFieldVariant> variants in [
-      {.disabled},
-      {.error},
-      {},
+    for (final (name, Set<FFormFieldVariant> variants) in [
+      ('disabled', {.disabled}),
+      ('error', {.error}),
+      ('disabled-error', {.disabled, .error}),
+      ('default', {}),
     ]) {
-      testWidgets('${theme.name} horizontal with $variants', (tester) async {
+      testWidgets('${theme.name} horizontal with $name', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
@@ -54,16 +55,17 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('label/${theme.name}/horizontal-$variants.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('label/${theme.name}/horizontal-$name.png'));
       });
     }
 
-    for (final Set<FFormFieldVariant> variants in [
-      {.disabled},
-      {.error},
-      {},
+    for (final (name, Set<FFormFieldVariant> variants) in [
+      ('disabled', {.disabled}),
+      ('error', {.error}),
+      ('disabled-error', {.disabled, .error}),
+      ('default', {}),
     ]) {
-      testWidgets('${theme.name} vertical with $variants', (tester) async {
+      testWidgets('${theme.name} vertical with $name', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
@@ -81,7 +83,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('label/${theme.name}/vertical-$variants.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('label/${theme.name}/vertical-$name.png'));
       });
     }
   }

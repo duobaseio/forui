@@ -1,8 +1,9 @@
 import 'dart:ui';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:meta/meta.dart';
+import 'package:forui/src/foundation/focused_outline.dart';
 
 @internal
 const nonNegativeIntSentinel = -1;
@@ -12,6 +13,9 @@ const stringSentinel = 'stringSentinel';
 
 @internal
 const colorSentinel = _ColorSentinel();
+
+@internal
+const focusedOutlineStyleSentinel = _FocusedOutlineStyleSentinel();
 
 @internal
 const imageFilterSentinel = _ImageFilterSentinel();
@@ -25,6 +29,38 @@ final class _ColorSentinel extends Color {
 
 final class _ImageFilterSentinel implements ImageFilter {
   const _ImageFilterSentinel();
+}
+
+// ignore: avoid_implementing_value_types
+final class _FocusedOutlineStyleSentinel implements FFocusedOutlineStyle {
+  const _FocusedOutlineStyleSentinel();
+
+  @override
+  BorderRadiusGeometry get borderRadius => throw UnimplementedError();
+
+  @override
+  Color get color => throw UnimplementedError();
+
+  @override
+  double get spacing => throw UnimplementedError();
+
+  @override
+  double get width => throw UnimplementedError();
+
+  @override
+  FFocusedOutlineStyle call(Object _) => throw UnimplementedError();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) => throw UnimplementedError();
+
+  @override
+  DiagnosticsNode toDiagnosticsNode({String? name, DiagnosticsTreeStyle? style}) => throw UnimplementedError();
+
+  @override
+  String toStringShort() => throw UnimplementedError();
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) => throw UnimplementedError();
 }
 
 /// A mixin for types that can be applied to a base value to produce a new value.

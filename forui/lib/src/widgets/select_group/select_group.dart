@@ -272,7 +272,12 @@ class FSelectGroupStyle extends FLabelStyle with Diagnosticable, _$FSelectGroupS
         [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
       },
     );
-    final errorTextStyle = typography.sm.copyWith(color: colors.error, fontWeight: .w500);
+    final errorTextStyle = FVariants<FFormFieldErrorVariantConstraint, TextStyle, TextStyleDelta>.delta(
+      typography.sm.copyWith(color: colors.error, fontWeight: .w500),
+      variants: {
+        [.disabled]: .delta(color: colors.disable(colors.error)),
+      },
+    );
 
     return .new(
       checkboxStyle: .inherit(colors: colors, style: style).copyWith(

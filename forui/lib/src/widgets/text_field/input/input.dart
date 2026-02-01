@@ -410,10 +410,10 @@ class _InputState extends State<Input> {
         .rtl => padding.copyWith(right: 0),
       },
       hintText: widget.hint,
-      hintStyle: style.hintTextStyle.resolve(variants),
+      hintStyle: WidgetStateTextStyle.resolveWith((states) => style.hintTextStyle.resolve(toTextFieldVariants(states))),
       fillColor: style.fillColor,
       filled: style.filled,
-      border: style.border.resolve(variants),
+      border: WidgetStateInputBorder.resolveWith((states) => style.border.resolve(toTextFieldVariants(states))),
       // This is done to trigger the error state. We don't pass in error directly since we build our own using FLabel.
       error: widget.error == null ? null : const SizedBox(),
     );

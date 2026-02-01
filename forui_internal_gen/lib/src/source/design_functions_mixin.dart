@@ -29,8 +29,7 @@ class DesignFunctionsMixin extends FunctionsMixin {
       ..requiredParameters.add(
         Parameter(
           (p) => p
-            ..covariant = true
-            ..type = refer(element.name!)
+            ..type = refer('Object')
             ..name = '_',
         ),
       )

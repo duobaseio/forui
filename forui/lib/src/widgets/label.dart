@@ -189,7 +189,7 @@ class _FHorizontalLabel extends StatelessWidget {
             TableCell(
               child: Padding(
                 padding: style.errorPadding,
-                child: DefaultTextStyle(style: style.errorTextStyle, child: error!),
+                child: DefaultTextStyle(style: style.errorTextStyle.resolve(variants), child: error!),
               ),
             ),
           ],
@@ -271,7 +271,7 @@ class _FVerticalLabel extends StatelessWidget {
         Padding(
           padding: style.errorPadding,
           child: DefaultTextStyle(
-            style: style.errorTextStyle,
+            style: style.errorTextStyle.resolve(variants),
             textHeightBehavior: const TextHeightBehavior(applyHeightToFirstAscent: false),
             child: error!,
           ),

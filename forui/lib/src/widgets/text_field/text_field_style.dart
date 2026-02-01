@@ -134,7 +134,7 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
       },
     );
     final bounceableButtonStyle = ghost.copyWith(
-      iconContentStyle: ghost.iconContentStyle.copyWith(iconStyle: FVariantsDelta.value(iconStyle.cast())),
+      iconContentStyle: ghost.iconContentStyle.copyWith(iconStyle: .value(iconStyle.cast())),
     );
 
     return .new(

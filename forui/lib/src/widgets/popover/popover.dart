@@ -7,8 +7,14 @@ import 'package:flutter/services.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/annotations.dart';
+import 'package:forui/src/theme/delta.dart';
 import 'package:forui/src/widgets/popover/popover_controller.dart';
 
+@Sentinels(FPopoverStyle, {
+  'barrierFilter': 'imageFilterFunctionSentinel',
+  'backgroundFilter': 'imageFilterFunctionSentinel',
+})
 part 'popover.design.dart';
 
 /// Motion-related properties for [FPopover].

@@ -404,10 +404,12 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
       labelTextStyle: style.formFieldStyle.labelTextStyle.apply<FFormFieldVariant>([
         .onAll(.delta(fontSize: typography.base.fontSize, height: typography.xs.height)),
       ]),
-      descriptionTextStyle: style.formFieldStyle.descriptionTextStyle.apply<FFormFieldVariant>([
+      descriptionTextStyle: style.formFieldStyle.descriptionTextStyle.apply([
         .onAll(.delta(fontSize: typography.xs.fontSize, height: typography.xs.height)),
       ]),
-      errorTextStyle: typography.xs.copyWith(color: style.formFieldStyle.errorTextStyle.color),
+      errorTextStyle: style.formFieldStyle.errorTextStyle.apply([
+        .onAll(.delta(fontSize: typography.xs.fontSize, height: typography.xs.height)),
+      ]),
     );
   }
 }

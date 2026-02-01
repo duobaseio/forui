@@ -276,7 +276,7 @@ class BlurredPopoverPage extends Example {
       FPopover(
         // {@highlight}
         style: .delta(
-          barrierFilter: () =>
+          barrierFilter:
               (animation) => .compose(
                 outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
                 inner: ColorFilter.mode(

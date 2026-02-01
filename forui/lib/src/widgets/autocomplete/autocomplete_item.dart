@@ -256,7 +256,7 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
     );
     return .new(
       labelTextStyle: .delta(
-        typography.sm.copyWith(color: colors.primary, fontWeight: FontWeight.w600),
+        typography.sm.copyWith(color: colors.primary, fontWeight: .w600),
         variants: {
           [.disabled]: .delta(color: colors.disable(colors.primary)),
         },

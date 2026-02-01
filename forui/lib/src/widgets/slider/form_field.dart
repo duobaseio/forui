@@ -58,7 +58,7 @@ class SliderFormField extends FormField<FSliderValue> with FFormFieldProperties<
                const SizedBox(),
              if (state.errorText != null)
                DefaultTextStyle.merge(
-                 style: style.errorTextStyle,
+                 style: style.errorTextStyle.resolve(formVariants),
                  child: Padding(padding: style.errorPadding, child: errorBuilder(state.context, state.errorText!)),
                )
              else

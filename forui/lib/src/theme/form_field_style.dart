@@ -11,6 +11,9 @@ import 'package:forui/forui.dart';
   'disabled': (2, 'The semantic variant when this widget is disabled and cannot be interacted with.'),
   'error': (2, 'The semantic variant when this widget is in an error state.'),
 })
+@Variants('FFormFieldError', {
+  'disabled': (2, 'The semantic variant when this widget is disabled and cannot be interacted with.'),
+})
 part 'form_field_style.design.dart';
 
 /// A form field state's style.
@@ -25,7 +28,7 @@ class FFormFieldStyle with Diagnosticable, _$FFormFieldStyleFunctions {
 
   /// The error's text style.
   @override
-  final TextStyle errorTextStyle;
+  final FVariants<FFormFieldErrorVariantConstraint, TextStyle, TextStyleDelta> errorTextStyle;
 
   /// Creates a [FFormFieldStyle].
   const FFormFieldStyle({
@@ -40,16 +43,20 @@ class FFormFieldStyle with Diagnosticable, _$FFormFieldStyleFunctions {
         typography.sm.copyWith(color: colors.primary, fontWeight: .w600),
         variants: {
           [.error]: .delta(color: colors.error),
-          [.error.and(.disabled)]: .delta(color: colors.disable(colors.error)),
-          [.disabled.and(.not(.error))]: .delta(color: colors.disable(colors.primary)),
+          [.disabled]: .delta(color: colors.disable(colors.primary)),
+          [.disabled.and(.error)]: .delta(color: colors.disable(colors.error)),
         },
       ),
       descriptionTextStyle = .delta(
         typography.sm.copyWith(color: colors.mutedForeground),
         variants: {
-          [.error.and(.disabled)]: .delta(color: colors.disable(colors.mutedForeground)),
-          [.disabled.and(.not(.error))]: .delta(color: colors.disable(colors.mutedForeground)),
+          [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
         },
       ),
-      errorTextStyle = typography.sm.copyWith(color: colors.disable(colors.error), fontWeight: .w600);
+      errorTextStyle = .delta(
+        typography.sm.copyWith(color: colors.error, fontWeight: .w600),
+        variants: {
+          [.disabled]: .delta(color: colors.disable(colors.error)),
+        },
+      );
 }
