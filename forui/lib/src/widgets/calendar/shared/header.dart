@@ -137,21 +137,13 @@ class Navigation extends StatelessWidget {
         children: [
           Padding(
             padding: const .directional(start: 7),
-            child: FButton.icon(
-              style: style.buttonStyle,
-              onPress: onPrevious,
-              child: const Icon(FIcons.chevronLeft),
-            ),
+            child: FButton.icon(style: style.buttonStyle, onPress: onPrevious, child: const Icon(FIcons.chevronLeft)),
           ),
 
           const Expanded(child: SizedBox()),
           Padding(
             padding: const .directional(end: 7),
-            child: FButton.icon(
-              style: style.buttonStyle,
-              onPress: onNext,
-              child: const Icon(FIcons.chevronRight),
-            ),
+            child: FButton.icon(style: style.buttonStyle, onPress: onNext, child: const Icon(FIcons.chevronRight)),
           ),
         ],
       ),
@@ -205,7 +197,16 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
         .resolve({FButtonVariant.outline})
         .copyWith(
           decoration: .apply([.onAll(.delta(borderRadius: .circular(4)))]),
-          iconContentStyle: .delta(iconStyle: .apply([.onAll(const .delta(size: 17))])),
+          iconContentStyle: .delta(
+            iconStyle: .value(
+              .delta(
+                IconThemeData(color: colors.mutedForeground, size: 17),
+                variants: {
+                  [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
+                },
+              ),
+            ),
+          ),
         ),
     headerTextStyle: typography.base.copyWith(color: colors.primary, fontWeight: .w600),
   );

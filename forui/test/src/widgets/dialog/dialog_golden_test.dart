@@ -85,7 +85,7 @@ void main() {
               builder: (context) => FButton(
                 onPress: () => showFDialog(
                   style: .delta(
-                    backgroundFilter: () => (v) => .blur(sigmaX: v * 5, sigmaY: v * 5),
+                    backgroundFilter: (v) => .blur(sigmaX: v * 5, sigmaY: v * 5),
                     decoration: .value(BoxDecoration(
                       borderRadius: theme.data.style.borderRadius,
                       color: theme.data.colors.background.withValues(alpha: 0.5),

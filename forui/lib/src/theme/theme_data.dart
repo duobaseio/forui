@@ -730,7 +730,13 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     dialogRouteStyle: a.dialogRouteStyle.lerp(b.dialogRouteStyle, t),
     dialogStyle: a.dialogStyle.lerp(b.dialogStyle, t),
     dividerStyles: a.dividerStyles.lerp(b.dividerStyles, t),
-    headerStyles: a.headerStyles.lerp(b.headerStyles, t),
+    headerStyles: FVariants.lerpWhereUsing(
+      a.headerStyles,
+      b.headerStyles,
+      t,
+      (a, b, t) => a!.lerp(b!, t),
+      FHeaderStyles.raw,
+    ),
     itemStyle: a.itemStyle.lerp(b.itemStyle, t),
     itemGroupStyle: a.itemGroupStyle.lerp(b.itemGroupStyle, t),
     labelStyles: a.labelStyles.lerp(b.labelStyles, t),
@@ -886,6 +892,12 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
 
   /// Converts this [FThemeData] to a Material [ThemeData] on a best-effort basis.
   ///
+  /// It does not take into account any platform-specific styling. If you need to do so, consider generating and
+  /// customizing this method using the CLI:
+  /// ```shell
+  /// dart run forui snippet create material-mapping
+  /// ```
+  ///
   /// This method enables interoperability between Forui and Material Design widgets by mapping
   /// Forui's theme properties to their closest Material equivalents. Use this when you need to:
   ///
@@ -903,11 +915,6 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   ///   theme: FThemes.zinc.light.toApproximateMaterialTheme(),
   ///   // ...
   /// )
-  /// ```
-  ///
-  /// This method can be generated inside projects and directly modified by running:
-  /// ```shell
-  /// dart run forui snippet create material-mapping
   /// ```
   @experimental
   ThemeData toApproximateMaterialTheme() {

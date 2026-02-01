@@ -35,6 +35,7 @@ class PasswordFieldProperties with Diagnosticable {
   final TextAlignVertical? textAlignVertical;
   final TextDirection? textDirection;
   final bool autofocus;
+  final WidgetStatesController? statesController;
   final String obscuringCharacter;
   final bool autocorrect;
   final SmartDashesType? smartDashesType;
@@ -96,6 +97,7 @@ class PasswordFieldProperties with Diagnosticable {
     required this.textAlignVertical,
     required this.textDirection,
     required this.autofocus,
+    required this.statesController,
     required this.obscuringCharacter,
     required this.autocorrect,
     required this.smartDashesType,
@@ -158,6 +160,7 @@ class PasswordFieldProperties with Diagnosticable {
       ..add(DiagnosticsProperty('textAlignVertical', textAlignVertical))
       ..add(EnumProperty('textDirection', textDirection))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
+      ..add(DiagnosticsProperty('statesController', statesController))
       ..add(StringProperty('obscuringCharacter', obscuringCharacter, defaultValue: '•'))
       ..add(FlagProperty('autocorrect', value: autocorrect, ifTrue: 'autocorrect'))
       ..add(EnumProperty('smartDashesType', smartDashesType))
@@ -305,6 +308,7 @@ class _State extends State<PasswordField> {
       textAlignVertical: widget.properties.textAlignVertical,
       textDirection: widget.properties.textDirection,
       autofocus: widget.properties.autofocus,
+      statesController: widget.properties.statesController,
       obscuringCharacter: widget.properties.obscuringCharacter,
       obscureText: obscured,
       autocorrect: widget.properties.autocorrect,

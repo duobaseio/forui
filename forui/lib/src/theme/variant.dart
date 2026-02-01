@@ -17,7 +17,8 @@ Set<FVariant> toVariants(Set<WidgetState> states) => {
 };
 
 @internal
-Set<FTextFieldVariant> toTextFieldVariants(Set<WidgetState> states) => {
+Set<FTextFieldVariant> toTextFieldVariants(FPlatformVariant platform, Set<WidgetState> states) => {
+  platform as FTextFieldVariant,
   if (states.contains(WidgetState.disabled)) .disabled,
   if (states.contains(WidgetState.error)) .error,
   if (states.contains(WidgetState.focused)) .focused,

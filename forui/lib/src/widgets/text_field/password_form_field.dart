@@ -79,6 +79,7 @@ class PasswordFormField extends StatelessWidget with FFormFieldProperties<String
           textAlignVertical: properties.textAlignVertical,
           textDirection: properties.textDirection,
           autofocus: properties.autofocus,
+          statesController: properties.statesController,
           obscuringCharacter: properties.obscuringCharacter,
           autocorrect: properties.autocorrect,
           smartDashesType: properties.smartDashesType,

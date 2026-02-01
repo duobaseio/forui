@@ -48,6 +48,7 @@ class Input extends StatefulWidget {
   final TextAlignVertical? textAlignVertical;
   final TextDirection? textDirection;
   final bool autofocus;
+  final WidgetStatesController? statesController;
   final String obscuringCharacter;
   final bool obscureText;
   final bool autocorrect;
@@ -125,6 +126,7 @@ class Input extends StatefulWidget {
     this.textInputAction,
     this.textAlignVertical,
     this.textDirection,
+    this.statesController,
     this.smartDashesType,
     this.smartQuotesType,
     this.minLines,
@@ -177,6 +179,7 @@ class Input extends StatefulWidget {
       ..add(DiagnosticsProperty('textAlignVertical', textAlignVertical))
       ..add(EnumProperty('textDirection', textDirection))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
+      ..add(DiagnosticsProperty('statesController', statesController))
       ..add(StringProperty('obscuringCharacter', obscuringCharacter))
       ..add(FlagProperty('obscureText', value: obscureText, ifTrue: 'obscureText'))
       ..add(FlagProperty('autocorrect', value: autocorrect, ifTrue: 'autocorrect'))
@@ -238,13 +241,28 @@ class Input extends StatefulWidget {
 }
 
 class _InputState extends State<Input> {
-  late final WidgetStatesController _statesController;
+  late WidgetStatesController _statesController;
 
   @override
   void initState() {
     super.initState();
-    _statesController = WidgetStatesController();
+    _statesController = widget.statesController ?? .new();
     _statesController.addListener(_handleStatesChange);
+  }
+
+  @override
+  void didUpdateWidget(covariant Input old) {
+    super.didUpdateWidget(old);
+    if (widget.statesController != old.statesController) {
+      if (old.statesController == null) {
+        _statesController.dispose();
+      } else {
+        _statesController.removeListener(_handleStatesChange);
+      }
+
+      _statesController = widget.statesController ?? .new();
+      _statesController.addListener(_handleStatesChange);
+    }
   }
 
   void _handleStatesChange() => SchedulerBinding.instance.addPostFrameCallback((_) {
@@ -256,7 +274,7 @@ class _InputState extends State<Input> {
   @override
   Widget build(BuildContext context) {
     final style = widget.style(context.theme.textFieldStyle);
-    final variants = toTextFieldVariants(_statesController.value);
+    final variants = toTextFieldVariants(context.platformVariant, _statesController.value);
 
     final textfield = TextField(
       controller: widget.controller,
@@ -377,7 +395,8 @@ class _InputState extends State<Input> {
   InputDecoration _decoration(FTextFieldStyle style) {
     final textDirection = Directionality.maybeOf(context) ?? .ltr;
     final padding = style.contentPadding.resolve(textDirection);
-    final variants = toTextFieldVariants(_statesController.value);
+    final platform = context.platformVariant;
+    final variants = toTextFieldVariants(platform, _statesController.value);
 
     final suffix = widget.suffixBuilder?.call(context, style, variants);
     final clear = widget.clearable(widget.controller.value)
@@ -410,10 +429,14 @@ class _InputState extends State<Input> {
         .rtl => padding.copyWith(right: 0),
       },
       hintText: widget.hint,
-      hintStyle: WidgetStateTextStyle.resolveWith((states) => style.hintTextStyle.resolve(toTextFieldVariants(states))),
+      hintStyle: WidgetStateTextStyle.resolveWith(
+        (states) => style.hintTextStyle.resolve(toTextFieldVariants(platform, states)),
+      ),
       fillColor: style.fillColor,
       filled: style.filled,
-      border: WidgetStateInputBorder.resolveWith((states) => style.border.resolve(toTextFieldVariants(states))),
+      border: WidgetStateInputBorder.resolveWith(
+        (states) => style.border.resolve(toTextFieldVariants(platform, states)),
+      ),
       // This is done to trigger the error state. We don't pass in error directly since we build our own using FLabel.
       error: widget.error == null ? null : const SizedBox(),
     );
@@ -421,7 +444,11 @@ class _InputState extends State<Input> {
 
   @override
   void dispose() {
-    _statesController.dispose();
+    if (widget.statesController == null) {
+      _statesController.dispose();
+    } else {
+      _statesController.removeListener(_handleStatesChange);
+    }
     super.dispose();
   }
 }

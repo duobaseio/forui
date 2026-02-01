@@ -3,12 +3,17 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/semantics.dart';
+import 'package:forui/src/foundation/annotations.dart';
+import 'package:forui/src/theme/delta.dart';
+import 'package:forui/src/theme/variant.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/dialog/dialog_content.dart';
 
+@Variants('FDialogAxis', {'vertical': (1, 'The vertical dialog variant.')})
+@Sentinels(FDialogStyle, {'backgroundFilter': 'imageFilterFunctionSentinel'})
 part 'dialog.design.dart';
 
 /// Shows a dialog.
@@ -308,14 +313,14 @@ class FDialog extends StatefulWidget {
     Axis direction = .vertical,
     super.key,
   }) : builder = switch (direction) {
-         .horizontal => (_, style) => HorizontalContent(
-           style: style.horizontalStyle,
+         .horizontal => (context, style) => HorizontalContent(
+           style: style.contentStyle.resolve({context.platformVariant}),
            title: title,
            body: body,
            actions: actions,
          ),
-         .vertical => (_, style) => VerticalContent(
-           style: style.verticalStyle,
+         .vertical => (context, style) => VerticalContent(
+           style: style.contentStyle.resolve({context.platformVariant, FDialogAxisVariant.vertical}),
            title: title,
            body: body,
            actions: actions,
@@ -335,12 +340,17 @@ class FDialog extends StatefulWidget {
     super.key,
   }) : builder = ((context, style) => switch (MediaQuery.sizeOf(context).width) {
          final width when width < context.theme.breakpoints.sm => VerticalContent(
-           style: style.verticalStyle,
+           style: style.contentStyle.resolve({context.platformVariant, FDialogAxisVariant.vertical}),
            title: title,
            body: body,
            actions: actions,
          ),
-         _ => HorizontalContent(style: style.horizontalStyle, title: title, body: body, actions: actions),
+         _ => HorizontalContent(
+           style: style.contentStyle.resolve({context.platformVariant}),
+           title: title,
+           body: body,
+           actions: actions,
+         ),
        });
 
   /// Creates a [FDialog] with a custom builder.
@@ -491,13 +501,9 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
   @override
   final EdgeInsetsGeometry insetPadding;
 
-  /// The horizontal dialog content's style.
+  /// The dialog content's style.
   @override
-  final FDialogContentStyle horizontalStyle;
-
-  /// The vertical dialog content's style.
-  @override
-  final FDialogContentStyle verticalStyle;
+  final FVariants<FDialogAxisVariantConstraint, FDialogContentStyle, FDialogContentStyleDelta> contentStyle;
 
   /// Motion-related properties.
   @override
@@ -506,8 +512,7 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
   /// Creates a [FDialogStyle].
   FDialogStyle({
     required this.decoration,
-    required this.horizontalStyle,
-    required this.verticalStyle,
+    required this.contentStyle,
     this.backgroundFilter,
     this.insetPadding = const .symmetric(horizontal: 40, vertical: 24),
     this.motion = const FDialogMotion(),
@@ -519,17 +524,21 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
     final body = typography.sm.copyWith(color: colors.mutedForeground);
     return .new(
       decoration: BoxDecoration(borderRadius: style.borderRadius, color: colors.background),
-      horizontalStyle: FDialogContentStyle(
-        titleTextStyle: title,
-        bodyTextStyle: body,
-        padding: const .symmetric(horizontal: 25, vertical: 25),
-        actionSpacing: 7,
-      ),
-      verticalStyle: FDialogContentStyle(
-        titleTextStyle: title,
-        bodyTextStyle: body,
-        padding: const .symmetric(horizontal: 30, vertical: 25),
-        actionSpacing: 8,
+      contentStyle: FVariants(
+        FDialogContentStyle(
+          titleTextStyle: title,
+          bodyTextStyle: body,
+          padding: const .symmetric(horizontal: 25, vertical: 25),
+          actionSpacing: 7,
+        ),
+        variants: {
+          [.vertical]: FDialogContentStyle(
+            titleTextStyle: title,
+            bodyTextStyle: body,
+            padding: const .symmetric(horizontal: 30, vertical: 25),
+            actionSpacing: 8,
+          ),
+        },
       ),
     );
   }

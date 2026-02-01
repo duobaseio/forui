@@ -37,7 +37,7 @@ class _FNestedHeader extends FHeader {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style(context.theme.headerStyles.nestedStyle);
+    final style = this.style(context.theme.headerStyles.resolve({context.platformVariant, FHeaderVariant.nested}));
     final alignment = titleAlignment.resolve(Directionality.maybeOf(context) ?? .ltr);
 
     Widget header = SafeArea(

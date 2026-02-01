@@ -150,6 +150,7 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
           builder: (state) => FTextField(
             control: .managed(controller: inputController),
             style: textFieldStyle,
+            statesController: inputController.statesController,
             builder: widget.builder,
             autocorrect: false,
             // We cannot use TextInputType.number as it does not contain a done button on iOS.

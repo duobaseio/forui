@@ -84,9 +84,10 @@ abstract class InputController extends TextEditingController {
   @override
   TextSpan buildTextSpan({required BuildContext context, required bool withComposing, TextStyle? style}) {
     if (text == placeholder) {
+      final platform = context.platformVariant;
       style = statesController.value.contains(WidgetState.focused)
-          ? this.style.contentTextStyle.resolve(toTextFieldVariants(statesController.value))
-          : this.style.hintTextStyle.resolve({});
+          ? this.style.contentTextStyle.resolve(toTextFieldVariants(platform, statesController.value))
+          : this.style.hintTextStyle.resolve({platform});
     }
 
     return super.buildTextSpan(context: context, withComposing: withComposing, style: style);

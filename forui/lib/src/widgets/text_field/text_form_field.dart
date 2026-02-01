@@ -48,6 +48,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     TextAlignVertical? textAlignVertical,
     TextDirection? textDirection,
     bool autofocus = false,
+    WidgetStatesController? statesController,
     String obscuringCharacter = '•',
     bool autocorrect = false,
     SmartDashesType? smartDashesType,
@@ -116,6 +117,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
       textAlignVertical: textAlignVertical,
       textDirection: textDirection,
       autofocus: autofocus,
+      statesController: statesController,
       obscuringCharacter: obscuringCharacter,
       autocorrect: autocorrect,
       smartDashesType: smartDashesType,
@@ -221,6 +223,9 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
 
   /// {@macro forui.text_field.focusNode}
   final FocusNode? focusNode;
+
+  /// {@macro forui.text_field.statesController}
+  final WidgetStatesController? statesController;
 
   /// {@macro forui.text_field.obscuringCharacter}
   final String obscuringCharacter;
@@ -388,6 +393,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     this.textAlignVertical,
     this.textDirection,
     this.autofocus = false,
+    this.statesController,
     this.obscuringCharacter = '•',
     this.obscureText = false,
     this.autocorrect = true,
@@ -458,6 +464,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     this.textAlignVertical,
     this.textDirection,
     this.autofocus = false,
+    this.statesController,
     this.obscuringCharacter = '•',
     this.obscureText = false,
     this.autocorrect = false,
@@ -532,6 +539,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     this.textAlignVertical,
     this.textDirection,
     this.autofocus = false,
+    this.statesController,
     this.obscuringCharacter = '•',
     this.obscureText = false,
     this.autocorrect = true,
@@ -618,6 +626,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
         textAlignVertical: textAlignVertical,
         textDirection: textDirection,
         autofocus: autofocus,
+        statesController: statesController,
         obscuringCharacter: obscuringCharacter,
         obscureText: obscureText,
         autocorrect: autocorrect,
@@ -683,6 +692,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
       ..add(DiagnosticsProperty('textAlignVertical', textAlignVertical))
       ..add(EnumProperty('textDirection', textDirection))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
+      ..add(DiagnosticsProperty('statesController', statesController))
       ..add(StringProperty('obscuringCharacter', obscuringCharacter, defaultValue: '•'))
       ..add(FlagProperty('obscureText', value: obscureText, ifTrue: 'obscureText'))
       ..add(FlagProperty('autocorrect', value: autocorrect, ifTrue: 'autocorrect'))

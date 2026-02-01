@@ -82,6 +82,7 @@ class FTextField extends StatelessWidget {
     TextAlignVertical? textAlignVertical,
     TextDirection? textDirection,
     bool autofocus = false,
+    WidgetStatesController? statesController,
     String obscuringCharacter = '•',
     bool autocorrect = false,
     SmartDashesType? smartDashesType,
@@ -147,6 +148,7 @@ class FTextField extends StatelessWidget {
         textAlignVertical: textAlignVertical,
         textDirection: textDirection,
         autofocus: autofocus,
+        statesController: statesController,
         obscuringCharacter: obscuringCharacter,
         autocorrect: autocorrect,
         smartDashesType: smartDashesType,
@@ -328,6 +330,14 @@ class FTextField extends StatelessWidget {
   /// See [TextField.focusNode] for more information.
   /// {@endtemplate}
   final FocusNode? focusNode;
+
+  /// {@template forui.text_field.statesController}
+  /// Represents the interactive "state" of this widget in terms of a set of [WidgetState]s, including
+  /// [WidgetState.disabled], [WidgetState.hovered], [WidgetState.error], and [WidgetState.focused].
+  ///
+  /// See [TextField.statesController] for more information.
+  /// {@endtemplate}
+  final WidgetStatesController? statesController;
 
   /// {@template forui.text_field.obscuringCharacter}
   /// Character used for obscuring text if [obscureText] is true.
@@ -833,6 +843,7 @@ class FTextField extends StatelessWidget {
     this.textAlignVertical,
     this.textDirection,
     this.autofocus = false,
+    this.statesController,
     this.obscuringCharacter = '•',
     this.obscureText = false,
     this.autocorrect = true,
@@ -898,6 +909,7 @@ class FTextField extends StatelessWidget {
     this.textAlignVertical,
     this.textDirection,
     this.autofocus = false,
+    this.statesController,
     this.obscuringCharacter = '•',
     this.obscureText = false,
     this.autocorrect = false,
@@ -967,6 +979,7 @@ class FTextField extends StatelessWidget {
     this.textAlignVertical,
     this.textDirection,
     this.autofocus = false,
+    this.statesController,
     this.obscuringCharacter = '•',
     this.obscureText = false,
     this.autocorrect = true,
@@ -1034,6 +1047,7 @@ class FTextField extends StatelessWidget {
       textAlignVertical: textAlignVertical,
       textDirection: textDirection,
       autofocus: autofocus,
+      statesController: statesController,
       obscuringCharacter: obscuringCharacter,
       obscureText: obscureText,
       autocorrect: autocorrect,
@@ -1098,6 +1112,7 @@ class FTextField extends StatelessWidget {
       ..add(DiagnosticsProperty('textAlignVertical', textAlignVertical))
       ..add(EnumProperty('textDirection', textDirection))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
+      ..add(DiagnosticsProperty('statesController', statesController))
       ..add(StringProperty('obscuringCharacter', obscuringCharacter, defaultValue: '•'))
       ..add(FlagProperty('obscureText', value: obscureText, ifTrue: 'obscureText'))
       ..add(FlagProperty('autocorrect', value: autocorrect, ifTrue: 'autocorrect'))
