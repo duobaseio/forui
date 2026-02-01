@@ -350,7 +350,10 @@ class FItem extends StatelessWidget with FItemMixin {
     final data = FInheritedItemData.maybeOf(context) ?? const FItemData();
     final style = this.style(data.style ?? context.theme.itemStyle);
     final enabled = this.enabled ?? data.enabled;
-    final variants = <FTappableVariant>{if (!enabled) .disabled};
+    final variants = <FTappableVariant>{
+      context.platformVariant as FTappableVariant,
+      if (!enabled) FTappableVariant.disabled,
+    };
     final divider = data.divider;
 
     // We increase the bottom margin to draw the divider.

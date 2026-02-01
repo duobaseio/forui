@@ -381,7 +381,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   @override
   final FRadioStyle radioStyle;
 
-  /// The resizable style.
+  /// The resizable styles.
   ///
   /// ## CLI
   /// To generate and customize this style:
@@ -390,7 +390,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// dart run forui style create resizable
   /// ```
   @override
-  final FResizableStyle resizableStyle;
+  final FResizableStyles resizableStyles;
 
   /// The scaffold style.
   ///
@@ -608,7 +608,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FPopoverMenuStyle? popoverMenuStyle,
     FProgressStyle? progressStyle,
     FRadioStyle? radioStyle,
-    FResizableStyle? resizableStyle,
+    FResizableStyles? resizableStyles,
     FScaffoldStyle? scaffoldStyle,
     FSelectStyle? selectStyle,
     FSelectGroupStyle? selectGroupStyle,
@@ -667,7 +667,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       popoverMenuStyle: popoverMenuStyle ?? .inherit(colors: colors, style: style, typography: typography),
       progressStyle: progressStyle ?? .inherit(colors: colors, style: style),
       radioStyle: radioStyle ?? .inherit(colors: colors, style: style),
-      resizableStyle: resizableStyle ?? .inherit(colors: colors, style: style),
+      resizableStyles: resizableStyles ?? .inherit(colors: colors, style: style),
       scaffoldStyle: scaffoldStyle ?? .inherit(colors: colors, style: style),
       selectStyle: selectStyle ?? .inherit(colors: colors, typography: typography, style: style),
       selectGroupStyle: selectGroupStyle ?? .inherit(colors: colors, typography: typography, style: style),
@@ -750,7 +750,13 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     popoverMenuStyle: a.popoverMenuStyle.lerp(b.popoverMenuStyle, t),
     progressStyle: a.progressStyle.lerp(b.progressStyle, t),
     radioStyle: a.radioStyle.lerp(b.radioStyle, t),
-    resizableStyle: a.resizableStyle.lerp(b.resizableStyle, t),
+    resizableStyles: FVariants.lerpWhereUsing(
+      a.resizableStyles,
+      b.resizableStyles,
+      t,
+      (a, b, t) => a!.lerp(b!, t),
+      FResizableStyles.raw,
+    ),
     scaffoldStyle: a.scaffoldStyle.lerp(b.scaffoldStyle, t),
     selectStyle: a.selectStyle.lerp(b.selectStyle, t),
     selectGroupStyle: a.selectGroupStyle.lerp(b.selectGroupStyle, t),
@@ -816,7 +822,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     required this.popoverMenuStyle,
     required this.progressStyle,
     required this.radioStyle,
-    required this.resizableStyle,
+    required this.resizableStyles,
     required this.scaffoldStyle,
     required this.selectStyle,
     required this.selectGroupStyle,
@@ -1332,7 +1338,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FPopoverMenuStyle Function(FPopoverMenuStyle style)? popoverMenuStyle,
     FProgressStyle Function(FProgressStyle style)? progressStyle,
     FRadioStyle Function(FRadioStyle style)? radioStyle,
-    FResizableStyle Function(FResizableStyle style)? resizableStyle,
+    FResizableStyles Function(FResizableStyles style)? resizableStyles,
     FScaffoldStyle Function(FScaffoldStyle style)? scaffoldStyle,
     FSelectStyle Function(FSelectStyle style)? selectStyle,
     FSelectGroupStyle Function(FSelectGroupStyle style)? selectGroupStyle,
@@ -1395,7 +1401,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     popoverMenuStyle: popoverMenuStyle != null ? popoverMenuStyle(this.popoverMenuStyle) : this.popoverMenuStyle,
     progressStyle: progressStyle != null ? progressStyle(this.progressStyle) : this.progressStyle,
     radioStyle: radioStyle != null ? radioStyle(this.radioStyle) : this.radioStyle,
-    resizableStyle: resizableStyle != null ? resizableStyle(this.resizableStyle) : this.resizableStyle,
+    resizableStyles: resizableStyles != null ? resizableStyles(this.resizableStyles) : this.resizableStyles,
     scaffoldStyle: scaffoldStyle != null ? scaffoldStyle(this.scaffoldStyle) : this.scaffoldStyle,
     selectStyle: selectStyle != null ? selectStyle(this.selectStyle) : this.selectStyle,
     selectGroupStyle: selectGroupStyle != null ? selectGroupStyle(this.selectGroupStyle) : this.selectGroupStyle,

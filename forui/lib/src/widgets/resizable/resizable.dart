@@ -1,14 +1,16 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/annotations.dart';
 import 'package:forui/src/foundation/debug.dart';
+import 'package:forui/src/theme/variant.dart';
 import 'package:forui/src/widgets/resizable/divider.dart';
 import 'package:forui/src/widgets/resizable/resizable_controller.dart';
 
+@Variants('FResizableAxis', {'vertical': (1, 'The vertical resizable variant.')})
 part 'resizable.design.dart';
 
 /// A resizable allows its children to be resized along either the horizontal or vertical main axis.
@@ -21,7 +23,7 @@ part 'resizable.design.dart';
 ///
 /// See:
 /// * https://forui.dev/docs/layout/resizable for working examples.
-/// * [FResizableStyle] for customizing a resizable's appearance.
+/// * [FResizableStyles] for customizing a resizable's appearance.
 class FResizable extends StatefulWidget {
   static String _label(FResizableRegionData left, FResizableRegionData right) =>
       '${left.extent.current}, ${right.extent.current}';
@@ -29,7 +31,7 @@ class FResizable extends StatefulWidget {
   /// The control that manages the resizing of regions. Defaults to [FResizableControl.managedCascade].
   final FResizableControl control;
 
-  /// The resizable' style.
+  /// The divider' style.
   ///
   /// To modify the current style:
   /// ```dart
@@ -38,7 +40,7 @@ class FResizable extends StatefulWidget {
   ///
   /// To replace the style:
   /// ```dart
-  /// style: FResizableStyle(...)
+  /// style: FResizableDividerStyle(...)
   /// ```
   ///
   /// ## CLI
@@ -47,7 +49,7 @@ class FResizable extends StatefulWidget {
   /// ```shell
   /// dart run forui style create resizable
   /// ```
-  final FResizableStyleDelta style;
+  final FResizableDividerStyleDelta style;
 
   /// The main axis along which the [children] can be resized.
   final Axis axis;
@@ -185,8 +187,9 @@ class _FResizableState extends State<FResizable> {
       'The number of FResizableData should be equal to the number of children.',
     );
 
-    final style = widget.style(context.theme.resizableStyle);
+    final styles = context.theme.resizableStyles;
     if (widget.axis == .horizontal) {
+      final dividerStyle = widget.style(styles.resolve({context.platformVariant}));
       return SizedBox(
         height: widget.crossAxisExtent,
         child: LayoutBuilder(
@@ -209,7 +212,7 @@ class _FResizableState extends State<FResizable> {
                 for (var i = 0; i < widget.children.length - 1; i++)
                   HorizontalDivider(
                     controller: _controller,
-                    style: style.horizontalDividerStyle,
+                    style: dividerStyle,
                     type: widget.divider,
                     left: i,
                     right: i + 1,
@@ -225,6 +228,7 @@ class _FResizableState extends State<FResizable> {
         ),
       );
     } else {
+      final dividerStyle = widget.style(styles.resolve({context.platformVariant, FResizableAxisVariant.vertical}));
       return SizedBox(
         width: widget.crossAxisExtent,
         child: LayoutBuilder(
@@ -247,7 +251,7 @@ class _FResizableState extends State<FResizable> {
                 for (var i = 0; i < widget.children.length - 1; i++)
                   VerticalDivider(
                     controller: _controller,
-                    style: style.verticalDividerStyle,
+                    style: dividerStyle,
                     type: widget.divider,
                     left: i,
                     right: i + 1,
@@ -267,22 +271,21 @@ class _FResizableState extends State<FResizable> {
 }
 
 /// A [FResizable]'s style.
-class FResizableStyle with Diagnosticable, _$FResizableStyleFunctions {
-  /// The horizontal divider style.
-  @override
-  final FResizableDividerStyle horizontalDividerStyle;
+class FResizableStyles
+    extends FVariants<FResizableAxisVariantConstraint, FResizableDividerStyle, FResizableDividerStyleDelta> {
+  /// Creates a [FResizableStyles] with concrete styles.
+  FResizableStyles(super.base, {required super.variants});
 
-  /// The vertical divider style.
-  @override
-  final FResizableDividerStyle verticalDividerStyle;
+  /// Creates a [FResizableStyles] from deltas.
+  FResizableStyles.delta(super.base, {required super.variants}) : super.delta();
 
-  /// Creates a [FResizableStyle].
-  FResizableStyle({required this.horizontalDividerStyle, required this.verticalDividerStyle});
+  /// Creates a [FResizableStyles] from raw values.
+  FResizableStyles.raw(super.base, super.variants) : super.raw();
 
-  /// Creates a [FResizableStyle] that inherits its properties.
-  FResizableStyle.inherit({required FColors colors, required FStyle style})
-    : this(
-        horizontalDividerStyle: FResizableDividerStyle(
+  /// Creates a [FResizableStyles] that inherits its properties.
+  FResizableStyles.inherit({required FColors colors, required FStyle style})
+    : super(
+        FResizableDividerStyle(
           color: colors.border,
           focusedOutlineStyle: style.focusedOutlineStyle,
           thumbStyle: FResizableDividerThumbStyle(
@@ -292,16 +295,18 @@ class FResizableStyle with Diagnosticable, _$FResizableStyleFunctions {
             width: 10,
           ),
         ),
-        verticalDividerStyle: FResizableDividerStyle(
-          color: colors.border,
-          focusedOutlineStyle: style.focusedOutlineStyle,
-          thumbStyle: FResizableDividerThumbStyle(
-            decoration: BoxDecoration(color: colors.border, borderRadius: style.borderRadius),
-            foregroundColor: colors.foreground,
-            height: 10,
-            width: 20,
+        variants: {
+          [.vertical]: FResizableDividerStyle(
+            color: colors.border,
+            focusedOutlineStyle: style.focusedOutlineStyle,
+            thumbStyle: FResizableDividerThumbStyle(
+              decoration: BoxDecoration(color: colors.border, borderRadius: style.borderRadius),
+              foregroundColor: colors.foreground,
+              height: 10,
+              width: 20,
+            ),
           ),
-        ),
+        },
       );
 }
 

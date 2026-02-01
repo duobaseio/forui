@@ -11,7 +11,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FResizable(
-            style: TestScaffold.blueScreen.resizableStyle,
+            style: TestScaffold.blueScreen.resizableStyles.resolve({FResizableAxisVariant.vertical}),
             axis: .vertical,
             crossAxisExtent: 100,
             children: [
