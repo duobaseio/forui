@@ -6,40 +6,16 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.popover_m
 
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import defaultSnippet from '@/snippets/examples/popover-menu/default.json';
+import tilesSnippet from '@/snippets/examples/popover-menu/tiles.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
     <Widget name='popover-menu' query={{}} height={500}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    FHeader(
-      title: const Text('Edit Notes'),
-      suffixes: [
-        FPopoverMenu(
-          autofocus: true,
-          menuAnchor: Alignment.topRight,
-          childAnchor: Alignment.bottomRight,
-          menu: [
-            FItemGroup(
-              children: [
-                FItem(prefix: const Icon(FIcons.user), title: const Text('Personalization'), onPress: () {}),
-                FItem(prefix: const Icon(FIcons.paperclip), title: const Text('Add attachments'), onPress: () {}),
-                FItem(prefix: const Icon(FIcons.qrCode), title: const Text('Scan Document'), onPress: () {}),
-              ],
-            ),
-            FItemGroup(
-              children: [
-                FItem(prefix: const Icon(FIcons.list), title: const Text('List View'), onPress: () {}),
-                FItem(prefix: const Icon(FIcons.layoutGrid), title: const Text('Grid View'), onPress: () {}),
-              ],
-            ),
-          ],
-          builder: (_, controller, _) => FHeaderAction(icon: const Icon(FIcons.ellipsis), onPress: controller.toggle),
-        ),
-      ],
-    );
-    ```
+    <CodeSnippet snippet={defaultSnippet} />
   </Tab>
 </Tabs>
 
@@ -119,33 +95,6 @@ FPopoverMenu.tiles(
     <Widget name='popover-menu' variant='tiles' query={{}} height={500}/>
   </Tab>
   <Tab value="Code">
-    ```dart {4} copy
-    FHeader(
-      title: const Text('Edit Notes'),
-      suffixes: [
-        FPopoverMenu.tiles(
-          autofocus: true,
-          menuAnchor: Alignment.topRight,
-          childAnchor: Alignment.bottomRight,
-          menu: [
-            FTileGroup(
-              children: [
-                FTile(prefix: const Icon(FIcons.user), title: const Text('Personalization'), onPress: () {}),
-                FTile(prefix: const Icon(FIcons.paperclip), title: const Text('Add attachments'), onPress: () {}),
-                FTile(prefix: const Icon(FIcons.qrCode), title: const Text('Scan Document'), onPress: () {}),
-              ],
-            ),
-            FTileGroup(
-              children: [
-                FTile(prefix: const Icon(FIcons.list), title: const Text('List View'), onPress: () {}),
-                FTile(prefix: const Icon(FIcons.layoutGrid), title: const Text('Grid View'), onPress: () {}),
-              ],
-            ),
-          ],
-          builder: (_, controller, _) => FHeaderAction(icon: const Icon(FIcons.ellipsis), onPress: controller.toggle),
-        ),
-      ],
-    );
-    ```
+    <CodeSnippet snippet={tilesSnippet} />
   </Tab>
 </Tabs>

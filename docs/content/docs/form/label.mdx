@@ -6,24 +6,18 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.label/
 
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import horizontalSnippet from '@/snippets/examples/label/horizontal.json';
+import verticalSnippet from '@/snippets/examples/label/vertical.json';
+import disabledSnippet from '@/snippets/examples/label/disabled.json';
+import errorSnippet from '@/snippets/examples/label/error.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
     <Widget name='label' variant='horizontal' query={{}}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    FLabel(
-      axis: Axis.horizontal,
-      label: const Text('Accept terms and conditions'),
-      description: const Text('You agree to our terms and conditions.'),
-      error: const Text('Please accept the terms.'),
-      child: const DecoratedBox(
-        decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.grey),
-        child: SizedBox(width: 16, height: 16),
-      ),
-    );
-    ```
+    <CodeSnippet snippet={horizontalSnippet} />
   </Tab>
 </Tabs>
 
@@ -61,18 +55,7 @@ FLabel(
         <Widget name='label' variant='vertical' query={{}}/>
     </Tab>
     <Tab value="Code">
-        ```dart {2} copy
-        FLabel(
-          axis: Axis.vertical,
-          label: const Text('Email'),
-          description: const Text('Enter your email address.'),
-          error: const Text('Please enter a valid email address.'),
-          child: const DecoratedBox(
-            decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.grey),
-            child: SizedBox(width: 250, height: 30),
-          ),
-        );
-        ```
+        <CodeSnippet snippet={verticalSnippet} />
     </Tab>
 </Tabs>
 
@@ -83,19 +66,7 @@ FLabel(
     <Widget name='label' variant='horizontal' query={{ state: 'disabled' }}/>
   </Tab>
   <Tab value="Code">
-    ```dart {6} copy
-    FLabel(
-      axis: Axis.horizontal,
-      label: const Text('Accept terms and conditions'),
-      description: const Text('You agree to our terms and conditions.'),
-      error: const Text('Please accept the terms.'),
-      states: {WidgetState.disabled},
-      child: const DecoratedBox(
-        decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.grey),
-        child: SizedBox(width: 16, height: 16),
-      ),
-    );
-    ```
+    <CodeSnippet snippet={disabledSnippet} />
   </Tab>
 </Tabs>
 
@@ -106,18 +77,6 @@ FLabel(
     <Widget name='label' variant='horizontal' query={{ state: 'error' }}/>
   </Tab>
   <Tab value="Code">
-    ```dart {6} copy
-    FLabel(
-      axis: Axis.horizontal,
-      label: const Text('Accept terms and conditions'),
-      description: const Text('You agree to our terms and conditions.'),
-      error: const Text('Please accept the terms.'),
-      states: {WidgetState.error},
-      child: const DecoratedBox(
-        decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(5)), color: Colors.grey),
-        child: SizedBox(width: 16, height: 16),
-      ),
-    );
-    ```
+    <CodeSnippet snippet={errorSnippet} />
   </Tab>
 </Tabs>

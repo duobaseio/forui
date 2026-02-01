@@ -6,19 +6,16 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.alert/
 
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import primarySnippet from '@/snippets/examples/alert/primary.json';
+import destructiveSnippet from '@/snippets/examples/alert/destructive.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
     <Widget name='alert' query={{}}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    FAlert(
-      title: const Text('Heads Up!'),
-      subtitle: const Text('You can add components to your app using the cli.'),
-      style: FAlertStyle.primary(),
-    );
-    ```
+    <CodeSnippet snippet={primarySnippet} />
   </Tab>
 </Tabs>
 
@@ -52,13 +49,7 @@ FAlert(
     <Widget name='alert' query={{}}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    FAlert(
-      title: const Text('Heads Up!'),
-      subtitle: const Text('You can add components to your app using the cli.'),
-      style: FAlertStyle.primary(),
-    );
-    ```
+    <CodeSnippet snippet={primarySnippet} />
   </Tab>
 </Tabs>
 
@@ -69,12 +60,6 @@ FAlert(
     <Widget name='alert' query={{style: 'destructive'}}/>
   </Tab>
   <Tab value="Code">
-    ```dart {4} copy
-    FAlert(
-      title: const Text('Heads Up!'),
-      subtitle: const Text('You can add components to your app using the cli.'),
-      style: FAlertStyle.destructive(),
-    );
-    ```
+    <CodeSnippet snippet={destructiveSnippet} />
   </Tab>
 </Tabs>

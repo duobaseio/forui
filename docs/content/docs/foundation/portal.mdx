@@ -7,6 +7,8 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.foundation/FPorta
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Callout } from 'fumadocs-ui/components/callout';
 import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import portalDefault from '@/snippets/examples/portal/default.json';
 
 <Callout type="info">
   This widget is typically used to create other high-level widgets, e.g., [popover](../overlay/popover) or
@@ -18,54 +20,7 @@ import { Widget } from '@/components/demo/widget';
     <Widget name='portal' query={{}} height={500}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    FPortal(
-      spacing: const FPortalSpacing(8),
-      viewInsets: const EdgeInsets.all(5),
-      portalBuilder: (context, _) => Container(
-        decoration: BoxDecoration(
-          color: context.theme.colors.background,
-          border: Border.all(color: context.theme.colors.border),
-          borderRadius: BorderRadius.circular(4),
-        ),
-        padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
-        child: SizedBox(
-          width: 288,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Dimensions', style: context.theme.typography.base),
-              const SizedBox(height: 7),
-              Text(
-                'Set the dimensions for the layer.',
-                style: context.theme.typography.sm.copyWith(
-                  color: context.theme.colors.mutedForeground,
-                  fontWeight: FontWeight.w300,
-                ),
-              ),
-              const SizedBox(height: 15),
-              for (final (label, value) in [('Width', '100%'), ('Max. Width', '300px')]) ...[
-                Row(
-                  children: [
-                    Expanded(child: Text(label, style: context.theme.typography.sm)),
-                    Expanded(
-                      flex: 2,
-                      child: FTextField(
-                        control: FTextFieldControl.managed(initial: TextEditingValue(text: value)),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 7),
-              ],
-            ],
-          ),
-        ),
-      ),
-      builder: (context, controller, _) => FButton(onPress: controller.toggle, child: const Text('Portal')),
-    );
-    ```
+    <CodeSnippet snippet={portalDefault} />
   </Tab>
 </Tabs>
 

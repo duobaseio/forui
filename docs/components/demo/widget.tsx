@@ -18,7 +18,7 @@ function Component({ name, variant = 'default', height = 200, query = {} }: Prop
 
   return (
     <iframe
-      className="w-full border rounded dark:border-neutral-400/20"
+      className="w-full border rounded-2xl shadow dark:border-neutral-400/20"
       style={{ height: `${height}px` }}
       src={`${url}/${name}/${variant}?${new URLSearchParams(params).toString()}`}
     />

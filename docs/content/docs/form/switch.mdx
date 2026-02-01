@@ -6,30 +6,17 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.switch_/
 
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import defaultSnippet from '@/snippets/examples/switch/default.json';
+import disabledSnippet from '@/snippets/examples/switch/disabled.json';
+import formSnippet from '@/snippets/examples/switch/form.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
     <Widget name='switch' query={{enabled: 'true'}}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    class SwitchPage extends StatefulWidget {
-      @override
-      State<SwitchPage> createState() => _SwitchPageState();
-    }
-
-    class _SwitchPageState extends State<SwitchPage> {
-      bool _state = false;
-
-      @override
-      Widget build(BuildContext context) => FSwitch(
-        label: const Text('Airplane Mode'),
-        semanticsLabel: 'Airplane Mode',
-        value: _state,
-        onChange: (value) => setState(() => _state = value),
-      );
-    }
-    ```
+    <CodeSnippet snippet={defaultSnippet} />
   </Tab>
 </Tabs>
 
@@ -70,25 +57,7 @@ FSwitch(
     <Widget name='switch' query={{enabled: false}}/>
   </Tab>
   <Tab value="Code">
-    ```dart {15} copy
-    class SwitchPage extends StatefulWidget {
-      @override
-      State<SwitchPage> createState() => _SwitchPageState();
-    }
-
-    class _SwitchPageState extends State<SwitchPage> {
-      bool _state = false;
-
-      @override
-      Widget build(BuildContext context) => FSwitch(
-        label: const Text('Airplane Mode'),
-        semanticsLabel: 'Airplane Mode',
-        value: _state,
-        onChange: (value) => setState(() => _state = value),
-        enabled: false,
-      );
-    }
-    ```
+    <CodeSnippet snippet={disabledSnippet} />
   </Tab>
 </Tabs>
 
@@ -99,132 +68,6 @@ FSwitch(
     <Widget name='switch' variant='form' query={{}} height={500}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    class FormSwitchPage extends StatefulWidget {
-      @override
-      State<FormSwitchPage> createState() => _FormSwitchPageState();
-    }
-
-    class _FormSwitchPageState extends State<FormSwitchPage> {
-      final GlobalKey<FormState> _key = GlobalKey<FormState>();
-
-      @override
-      Widget build(BuildContext context) {
-        final theme = context.theme;
-        return Form(
-          key: _key,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                'Email Notifications',
-                style: theme.typography.xl2.copyWith(
-                  fontWeight: FontWeight.w600,
-                  color: theme.colors.foreground,
-                  height: 1.5,
-                ),
-              ),
-              const SizedBox(height: 15),
-              FCard.raw(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Marketing Emails',
-                              style: theme.typography.base.copyWith(
-                                fontWeight: FontWeight.w500,
-                                color: theme.colors.foreground,
-                                height: 1.5,
-                              ),
-                            ),
-                            Text(
-                              'Receive emails about new products, features, and more.',
-                              style: theme.typography.sm.copyWith(color: theme.colors.mutedForeground),
-                            ),
-                          ],
-                        ),
-                      ),
-                      FormField(
-                        initialValue: false,
-                        onSaved: (value) {
-                          // Save values somewhere.
-                        },
-                        validator: (value) => null, // No validation required.
-                        builder: (state) => FSwitch(
-                          value: state.value ?? false,
-                          onChange: (value) => state.didChange(value),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(height: 12),
-              FCard.raw(
-                child: Padding(
-                  padding: const EdgeInsets.fromLTRB(16, 12, 16, 16),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Flexible(
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Text(
-                              'Security emails',
-                              style: theme.typography.base.copyWith(
-                                fontWeight: FontWeight.w500,
-                                color: theme.colors.foreground,
-                                height: 1.5,
-                              ),
-                            ),
-                            Text(
-                              'Receive emails about your account security.',
-                              style: theme.typography.sm.copyWith(color: theme.colors.mutedForeground),
-                            ),
-                          ],
-                        ),
-                      ),
-                      FormField(
-                        initialValue: true,
-                        onSaved: (value) {
-                          // Save values somewhere.
-                        },
-                        validator: (value) => null, // No validation required.
-                        builder: (state) => FSwitch(
-                          value: state.value ?? false,
-                          onChange: (value) => state.didChange(value),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ),
-              const SizedBox(height: 30),
-              FButton(
-                child: const Text('Submit'),
-                onPress: () {
-                  if (!_key.currentState!.validate()) {
-                    // Handle errors here.
-                    return;
-                  }
-
-                  _key.currentState!.save();
-                  // Do something.
-                },
-              ),
-            ],
-          ),
-        );
-      }
-    }
-    ```
+    <CodeSnippet snippet={formSnippet} />
   </Tab>
 </Tabs>

@@ -13,7 +13,7 @@ This section is for contributors who want to add or modify code snippets.
 
 To run the generator (from the repository root):
 ```shell
-dart run docs_snippets/tool/snippet_generator/bin/snippet_generator.dart
+dart run tool/snippet_generator/main.dart
 ```
 
 There are **3** types of snippets. All of them support `// {@hhighlight}` and `// {@endhighlight}` markers to highlight 

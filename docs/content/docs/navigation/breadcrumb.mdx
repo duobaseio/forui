@@ -6,31 +6,17 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.breadcrum
 
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import defaultSnippet from '@/snippets/examples/breadcrumb/default.json';
+import tilesSnippet from '@/snippets/examples/breadcrumb/tiles.json';
+import dividerSnippet from '@/snippets/examples/breadcrumb/divider.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
     <Widget name='breadcrumb' variant='default' height={400}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    FBreadcrumb(
-      children: [
-        FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
-        FBreadcrumbItem.collapsed(
-          menu: [
-            FItemGroup(
-              children: [
-                FItem(title: const Text('Documentation'), onPress: () {}),
-                FItem(title: const Text('Themes'), onPress: () {}),
-              ],
-            ),
-          ],
-        ),
-        FBreadcrumbItem(onPress: () {}, child: const Text('Layout')),
-        const FBreadcrumbItem(current: true, child: Text('Widgets')),
-      ],
-    );
-    ```
+    <CodeSnippet snippet={defaultSnippet} />
   </Tab>
 </Tabs>
 
@@ -80,25 +66,7 @@ FBreadcrumb(
     <Widget name='breadcrumb' variant='tiles' height={400}/>
   </Tab>
   <Tab value="Code">
-    ```dart {4} copy
-    FBreadcrumb(
-      children: [
-        FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
-        FBreadcrumbItem.collapsedTiles(
-          menu: [
-            FTileGroup(
-              children: [
-                FTile(title: const Text('Documentation'), onPress: () {}),
-                FTile(title: const Text('Themes'), onPress: () {}),
-              ],
-            ),
-          ],
-        ),
-        FBreadcrumbItem(onPress: () {}, child: const Text('Layout')),
-        const FBreadcrumbItem(current: true, child: Text('Widgets')),
-      ],
-    );
-    ```
+    <CodeSnippet snippet={tilesSnippet} />
   </Tab>
 </Tabs>
 
@@ -109,25 +77,6 @@ FBreadcrumb(
     <Widget name='breadcrumb' variant='divider' height={400}/>
   </Tab>
   <Tab value="Code">
-    ```dart {2} copy
-    FBreadcrumb(
-      divider: Transform.rotate(angle: -60, child: const Icon(FIcons.slash, size: 14)),
-      children: [
-        FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
-        FBreadcrumbItem.collapsed(
-          menu: [
-            FItemGroup(
-              children: [
-                FItem(title: const Text('Documentation'), onPress: () {}),
-                FItem(title: const Text('Themes'), onPress: () {}),
-              ],
-            ),
-          ],
-        ),
-        FBreadcrumbItem(onPress: () {}, child: const Text('Layout')),
-        const FBreadcrumbItem(current: true, child: Text('Widgets')),
-      ],
-    );
-    ```
+    <CodeSnippet snippet={dividerSnippet} />
   </Tab>
 </Tabs>

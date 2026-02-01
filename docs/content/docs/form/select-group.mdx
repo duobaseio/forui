@@ -7,6 +7,10 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.select_gr
 import { Callout } from 'fumadocs-ui/components/callout';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import defaultSnippet from '@/snippets/examples/select-group/default.json';
+import checkboxFormSnippet from '@/snippets/examples/select-group/checkbox-form.json';
+import radioFormSnippet from '@/snippets/examples/select-group/radio-form.json';
 
 <Callout type="info">
     For touch devices, a [select tile group](/docs/tile/select-tile-group) or
@@ -18,18 +22,7 @@ import { Widget } from '@/components/demo/widget';
     <Widget name='select-group' variant='default' query={{}} height={300}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    FSelectGroup<Sidebar>(
-      control: const FSelectGroupControl.managed(initial: {Sidebar.recents}),
-      label: const Text('Sidebar'),
-      description: const Text('These will be shown in the sidebar.'),
-      children: [
-        FSelectGroupItem.checkbox(value: Sidebar.recents, label: const Text('Recents')),
-        FSelectGroupItem.checkbox(value: Sidebar.home, label: const Text('Home')),
-        FSelectGroupItem.checkbox(value: Sidebar.applications, label: const Text('Applications')),
-      ],
-    );
-    ```
+    <CodeSnippet snippet={defaultSnippet} />
   </Tab>
 </Tabs>
 
@@ -72,51 +65,7 @@ FSelectGroup<Value>(
         <Widget name='select-group' variant='checkbox-form' query={{}} height={400}/>
     </Tab>
     <Tab value="Code">
-        ```dart copy
-        class CheckboxForm extends StatefulWidget {
-          @override
-          State<CheckboxForm> createState() => _CheckboxFormState();
-        }
-
-        class _CheckboxFormState extends State<CheckboxForm> {
-          final _key = GlobalKey<FormState>();
-
-          @override
-          Widget build(BuildContext context) => Form(
-            key: _key,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                FSelectGroup<Language>(
-                  label: const Text('Favorite Languages'),
-                  description: const Text('Your favorite language.'),
-                  validator: (values) => values?.isEmpty ?? true ? 'Please select at least one language.' : null,
-                  children: [
-                    FSelectGroupItem.checkbox(value: Language.dart, label: const Text('Dart')),
-                    FSelectGroupItem.checkbox(value: Language.java, label: const Text('Java')),
-                    FSelectGroupItem.checkbox(value: Language.rust, label: const Text('Rust')),
-                    FSelectGroupItem.checkbox(value: Language.python, label: const Text('Python')),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                FButton(
-                  child: const Text('Submit'),
-                  onPress: () {
-                    if (!_key.currentState!.validate()) {
-                      // Handle errors here.
-                      return;
-                    }
-
-                    _key.currentState!.save();
-                    // Do something.
-                  },
-                ),
-              ],
-            ),
-          );
-        }
-        ```
+        <CodeSnippet snippet={checkboxFormSnippet} />
     </Tab>
 
 </Tabs>
@@ -128,59 +77,6 @@ FSelectGroup<Value>(
     <Widget name='select-group' variant='radio-form' query={{}} height={400}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    enum Notification { all, direct, nothing }
-
-    class RadioForm extends StatefulWidget {
-      @override
-      State<RadioForm> createState() => _RadioFormState();
-    }
-
-    class _RadioFormState extends State<RadioForm> {
-      final _key = GlobalKey<FormState>();
-      final _controller = FMultiValueNotifier<Notification>.radio();
-
-      @override
-      void dispose() {
-        _controller.dispose();
-        super.dispose();
-      }
-
-      @override
-      Widget build(BuildContext context) => Form(
-        key: _key,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            FSelectGroup<Notification>(
-              control: FSelectGroupControl.managed(controller: _controller),
-              label: const Text('Notifications'),
-              description: const Text('Select the notifications.'),
-              validator: (values) => values?.isEmpty ?? true ? 'Please select a value.' : null,
-              children: [
-                FSelectGroupItem.radio(value: Notification.all, label: const Text('All new messages')),
-                FSelectGroupItem.radio(value: Notification.direct, label: const Text('Direct messages and mentions')),
-                FSelectGroupItem.radio(value: Notification.nothing, label: const Text('Nothing')),
-              ],
-            ),
-            const SizedBox(height: 20),
-            FButton(
-              child: const Text('Save'),
-              onPress: () {
-                if (!_key.currentState!.validate()) {
-                  // Handle errors here.
-                  return;
-                }
-
-                _key.currentState!.save();
-                // Do something.
-              },
-            ),
-          ],
-        ),
-      );
-    }
-    ```
+    <CodeSnippet snippet={radioFormSnippet} />
   </Tab>
 </Tabs>

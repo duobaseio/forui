@@ -18,9 +18,7 @@ import 'usages/usages.dart';
 final formatter = DartFormatter(languageVersion: DartFormatter.latestLanguageVersion);
 
 /// The output directory for generated snippet JSON files.
-///
-/// TODO: Change this to your liking @Joe.
-final output = p.join(Directory.current.path, 'output');
+final output = p.join(Directory.current.path, '../docs/snippets');
 
 final lib = p.join(Directory.current.parent.path, 'docs_snippets', 'lib');
 final _examples = p.join(lib, 'examples');

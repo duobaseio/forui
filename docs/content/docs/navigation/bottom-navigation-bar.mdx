@@ -7,37 +7,15 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.bottom_na
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Callout } from 'fumadocs-ui/components/callout';
 import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import defaultSnippet from '@/snippets/examples/bottom-navigation-bar/default.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
     <Widget name='bottom-navigation-bar' query={{}}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    class Application extends StatefulWidget {
-      const Application({super.key});
-
-      @override
-      State<Application> createState() => _ApplicationState();
-    }
-
-    class _ApplicationState extends State<Application> {
-      int _index = 1;
-
-      @override
-      Widget build(BuildContext context) => FBottomNavigationBar(
-        index: _index,
-        onChange: (index) => setState(() => _index = index),
-        children: const [
-          FBottomNavigationBarItem(icon: Icon(FIcons.house), label: Text('Home')),
-          FBottomNavigationBarItem(icon: Icon(FIcons.layoutGrid), label: Text('Browse')),
-          FBottomNavigationBarItem(icon: Icon(FIcons.radio), label: Text('Radio')),
-          FBottomNavigationBarItem(icon: Icon(FIcons.libraryBig), label: Text('Library')),
-          FBottomNavigationBarItem(icon: Icon(FIcons.search), label: Text('Search')),
-        ],
-      );
-    }
-    ```
+    <CodeSnippet snippet={defaultSnippet} />
   </Tab>
 </Tabs>
 

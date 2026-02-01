@@ -6,6 +6,11 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.badge/
 
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import primarySnippet from '@/snippets/examples/badge/primary.json';
+import secondarySnippet from '@/snippets/examples/badge/secondary.json';
+import outlineSnippet from '@/snippets/examples/badge/outline.json';
+import destructiveSnippet from '@/snippets/examples/badge/destructive.json';
 
 ## Overview
 
@@ -14,9 +19,7 @@ import { Widget } from '@/components/demo/widget';
       <Widget name='badge' query={{}}/>
   </Tab>
   <Tab value="Code">
-      ```dart copy
-      FBadge(style: FBadgeStyle.primary(), child: const Text('Badge'));
-      ```
+      <CodeSnippet snippet={primarySnippet} />
   </Tab>
 </Tabs>
 
@@ -57,9 +60,7 @@ FBadge.raw(
       <Widget name='badge' query={{}}/>
   </Tab>
   <Tab value="Code">
-      ```dart copy
-      FBadge(style: FBadgeStyle.primary(), child: const Text('Badge'));
-      ```
+      <CodeSnippet snippet={primarySnippet} />
   </Tab>
 </Tabs>
 
@@ -70,9 +71,7 @@ FBadge.raw(
       <Widget name='badge' query={{style: 'secondary'}}/>
   </Tab>
   <Tab value="Code">
-      ```dart copy
-      FBadge(style: FBadgeStyle.secondary(), child: const Text('Badge'));
-      ```
+      <CodeSnippet snippet={secondarySnippet} />
   </Tab>
 </Tabs>
 
@@ -83,9 +82,7 @@ FBadge.raw(
       <Widget name='badge' query={{style: 'outline'}}/>
   </Tab>
   <Tab value="Code">
-      ```dart copy
-      FBadge(style: FBadgeStyle.outline(), child: const Text('Badge'));
-      ```
+      <CodeSnippet snippet={outlineSnippet} />
   </Tab>
 </Tabs>
 
@@ -96,8 +93,6 @@ FBadge.raw(
       <Widget name='badge' query={{style: 'destructive'}}/>
   </Tab>
   <Tab value="Code">
-      ```dart copy
-      FBadge(style: FBadgeStyle.destructive(), child: const Text('Badge'));
-      ```
+      <CodeSnippet snippet={destructiveSnippet} />
   </Tab>
 </Tabs>

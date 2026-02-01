@@ -6,24 +6,15 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.card/
 
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import defaultSnippet from '@/snippets/examples/card/default.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
       <Widget name='card' query={{}}  height={400}/>
   </Tab>
   <Tab value="Code">
-      ```dart copy
-      FCard(
-        image: Container(
-          decoration: BoxDecoration(
-            image: DecorationImage(image: AssetImage('avatar.png'), fit: BoxFit.cover),
-          ),
-          height: 200,
-        ),
-        title: const Text('Gratitude'),
-        subtitle: const Text('The quality of being thankful; readiness to show appreciation for and to return kindness.'),
-      );
-      ```
+      <CodeSnippet snippet={defaultSnippet} />
   </Tab>
 </Tabs>
 

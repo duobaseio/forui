@@ -4,6 +4,28 @@ description: Define consistent visual styles across your Flutter application wit
 ---
 
 import {Callout} from "fumadocs-ui/components/callout";
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import gettingStartedSnippet from '@/snippets/snippets/themes/getting_started/getting_started.json';
+import componentsSnippet from '@/snippets/snippets/themes/components/components.json';
+import colorsSnippet from '@/snippets/snippets/themes/components/colors.json';
+import typographySnippet from '@/snippets/snippets/themes/components/typography.json';
+import styleSnippet from '@/snippets/snippets/themes/components/style.json';
+import widgetStateMapSnippet from '@/snippets/snippets/themes/components/widget_state_map.json';
+import mainSnippet from '@/snippets/snippets/themes/customization/main.json';
+import themeSnippet from '@/snippets/snippets/themes/customization/theme/theme.json';
+import accordionStyleSnippet from '@/snippets/snippets/themes/customization/theme/accordion_style.json';
+import copyWithSnippet from '@/snippets/snippets/themes/customization/copy_with.json';
+import copyWithCallSnippet from '@/snippets/snippets/themes/customization/copy_with_call.json';
+import modifyStyleSnippet from '@/snippets/snippets/themes/customization/modify_style.json';
+import passStyleSnippet from '@/snippets/snippets/themes/customization/pass_style.json';
+import customFontFamilySnippet from '@/snippets/snippets/themes/customization/custom_font_family.json';
+import brandColorSnippet from '@/snippets/snippets/themes/custom_properties/brand_color.json';
+import extensionsSnippet from '@/snippets/snippets/themes/custom_properties/extensions.json';
+import getterSnippet from '@/snippets/snippets/themes/custom_properties/getter.json';
+import accessPropertiesSnippet from '@/snippets/snippets/themes/custom_properties/access_properties.json';
+import copyWithExtensionsSnippet from '@/snippets/snippets/themes/custom_properties/copy_with.json';
+import approximateMaterialThemeSnippet from '@/snippets/snippets/themes/material_interop/apporximate_material_theme.json';
+
 export function Theme({title, color}) {
     return (
         <div className="flex items-center space-x-2">
@@ -22,13 +44,7 @@ to generate themes and styles that can be directly modified in your project.
     Forui does not manage the theme brightness (light or dark) automatically.
     You need to specify the theme explicitly in `FAnimatedTheme(...)`.
 
-    ```dart filename="main.dart" {3} copy
-    @override
-    Widget build(BuildContext context) => FAnimatedTheme(
-      data: FThemes.zinc.light, // or FThemes.zinc.dark
-      child: FScaffold(...),
-    );
-    ```
+    <CodeSnippet snippet={gettingStartedSnippet} />
 </Callout>
 
 Forui includes predefined themes that can be used out of the box. They are heavily inspired by [shadcn/ui](https://ui.shadcn.com/themes).
@@ -106,17 +122,7 @@ There are **6** core components in Forui's theming system.
 
 The included `BuildContext` extension allows `FThemeData` can be accessed via [`context.theme`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeBuildContext.html):
 
-```dart {3-6} copy
-@override
-Widget build(BuildContext context) {
-  final FThemeData theme = context.theme;
-  final FColors colors = context.theme.colors;
-  final FTypography typography = context.theme.typography;
-  final FStyle style = context.theme.style;
-
-  return const Placeholder();
-}
-```
+<CodeSnippet snippet={componentsSnippet} />
 
 ### Colors
 
@@ -129,19 +135,7 @@ For example:
 - `secondary` (background) + `secondaryForeground` (text/icons)
 - `destructive` (background) + `destructiveForeground` (text/icons)
 
-```dart {3, 8} copy
-@override
-Widget build(BuildContext context) {
-  final colors = context.theme.colors;
-  return ColoredBox(
-    color: colors.primary,
-    child: Text(
-      'Hello World!',
-      style: TextStyle(color: colors.primaryForeground),
-    ),
-  );
-}
-```
+<CodeSnippet snippet={colorsSnippet} />
 
 #### Hovered and Disabled Colors
 
@@ -160,62 +154,20 @@ styles.
 
 `FTypography`'s text styles only specify `fontSize` and `height`. Use `copyWith()` to add colors and other properties:
 
-```dart {3, 7-10} copy
-@override
-Widget build(BuildContext context) {
-  final typography = context.theme.typography;
-
-  return Text(
-    'Hello World!',
-    style: typography.xs.copyWith(
-      color: context.theme.colors.primaryForeground,
-      fontWeight: FontWeight.bold,
-    ),
-  );
-}
-```
+<CodeSnippet snippet={typographySnippet} />
 
 #### Custom Font Family
 
 Use the `copyWith()` method to change the default font family. As some fonts may have different sizes, the `scale()`
 method is provided to quickly scale all the font sizes.
 
-```dart {5-7} copy
-@override
-Widget build(BuildContext context) => FAnimatedTheme(
-  data: FThemeData(
-    colors: FThemes.zinc.light.colors,
-    typography: FThemes.zinc.light.typography.copyWith(
-      xs: const TextStyle(fontSize: 12, height: 1),
-    ).scale(sizeScalar: 0.8),
-  ),
-  child: const FScaffold(...),
-);
-```
+<CodeSnippet snippet={customFontFamilySnippet} />
 
 ### Style
 
 The `FStyle` class the theme's miscellaneous styling options such as the default border radius and icon size.
 
-```dart {4, 7-14} copy
-@override
-Widget build(BuildContext context) {
-  final colors = context.theme.colors;
-  final style = context.theme.style;
-
-  return DecoratedBox(
-    decoration: BoxDecoration(
-      border: Border.all(
-        color: colors.border,
-        width: style.borderWidth,
-      ),
-      borderRadius: style.borderRadius,
-      color: colors.primary,
-    ),
-    child: const Placeholder(),
-  );
-}
-```
+<CodeSnippet snippet={styleSnippet} />
 
 ### `FWidgetStateMap`
 
@@ -230,28 +182,7 @@ be used. In general, more specific constraints should be placed above more gener
 
 In the following example, given the states `{hovered, pressed}`, the 1st constraint will **always** match.
 
-```dart
-FWidgetStateMap({
-  // ❌ Don't declare more general constraints above more specific ones!
-  // 1st constraint: applied when the accordion is hovered.
-  WidgetState.hovered: typography.base.copyWith(
-    fontWeight: FontWeight.w500,
-    color: colors.foreground,
-    decoration: TextDecoration.underline,
-  ),
-  // 2nd constraint: applied when the accordion is hovered OR pressed.
-  WidgetState.hovered | WidgetState.pressed: typography.base.copyWith(
-    fontWeight: FontWeight.w500,
-    color: colors.foreground,
-    decoration: TextDecoration.underline,
-  ),
-  // 3rd constraint: This text style is applied when the accordion is NOT hovered OR pressed.
-  WidgetState.any: typography.base.copyWith(
-    fontWeight: FontWeight.w500,
-    color: colors.foreground,
-  ),
-});
-```
+<CodeSnippet snippet={widgetStateMapSnippet} />
 
 Most `FWidgetStateMap` fields only support a subset of states. For example, [`FButtonStyle.decoration`](https://pub.dev/documentation/forui/latest/forui.widgets.button/FButtonStyle/decoration.html)
 only supports the disabled, hovered, pressed and focused states. A field's supported states are documented in its [API docs](https://pub.dev/documentation/forui/latest/forui.widgets.button/FButtonStyle/decoration.html).
@@ -283,34 +214,7 @@ dart run forui init
 
 This generates a `main.dart` file where you will add your generated theme:
 
-```dart filename="lib/main.dart" {1, 13, 18-19} copy
-import 'theme/theme.dart';
-
-void main() {
-  runApp(const Application());
-}
-
-class Application extends StatelessWidget {
-  const Application({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    // Assign the generated theme to `theme`.
-    final theme = zincLight;
-
-    return MaterialApp(
-      localizationsDelegates: FLocalizations.localizationsDelegates,
-      supportedLocales: FLocalizations.supportedLocales,
-      builder: (_, child) => FAnimatedTheme(data: theme, child: child!),
-      theme: theme.toApproximateMaterialTheme(),
-      home: const FScaffold(
-        // TODO: replace with your widget.
-        child: Placeholder(),
-      ),
-    );
-  }
-}
-```
+<CodeSnippet snippet={mainSnippet} />
 
 #### Generate a Theme
 
@@ -329,63 +233,7 @@ This generates a theme file which you can:
 - add to your generated `main.dart`.
 - add the generated styles to.
 
-```dart filename="lib/theme/theme.dart" {1, 20} copy
-import 'accordion_style.dart';
-
-FThemeData get zincLight {
-  const colors = FColors(
-    brightness: Brightness.light,
-    barrier: Color(0x33000000),
-    background: Color(0xFFFFFFFF),
-    foreground: Color(0xFF09090B),
-    ...
-  );
-
-  final typography = _typography(colors: colors);
-  final style = _style(colors: colors, typography: typography);
-
-  return FThemeData(
-    colors: colors,
-    typography: typography,
-    style: style,
-    // Add your generated styles here.
-    accordionStyle: accordionStyle(colors: colors, typography, typography, style: style),
-  );
-}
-
-FTypography _typography({
-  required FColors colors,
-  String defaultFontFamily = 'packages/forui/Inter',
-}) => FTypography(
-  xs: TextStyle(
-    color: colors.foreground,
-    fontFamily: defaultFontFamily,
-    fontSize: 12,
-    height: 1,
-  ),
-  sm: TextStyle(
-    color: colors.foreground,
-    fontFamily: defaultFontFamily,
-    fontSize: 14,
-    height: 1.25,
-  ),
-  ...
-);
-
-FStyle _style({required FColors colors, required FTypography typography}) => FStyle(
-  formFieldStyle: FFormFieldStyle.inherit(
-    colors: colors,
-    typography: typography,
-  ),
-  focusedOutlineStyle: FFocusedOutlineStyle(
-    color: colors.primary,
-    borderRadius: const BorderRadius.all(Radius.circular(8)),
-  ),
-  iconStyle: IconThemeData(color: colors.primary, size: 20),
-  tappableStyle: FTappableStyle(),
-  ...
-);
-```
+<CodeSnippet snippet={themeSnippet} />
 
 #### Generate a Style
 
@@ -401,40 +249,7 @@ dart run forui style create accordion
 
 This generates a accordion style file which you can add to your theme:
 
-```dart filename="lib/theme/accordion_style.dart" {8-12} copy
-FAccordionStyle accordionStyle({
-  required FColors colors,
-  required FTypography typography,
-  required FStyle style,
-}) => FAccordionStyle(
-  titleTextStyle: FWidgetStateMap({
-    // This text style is applied when the accordion is hovered OR pressed.
-    WidgetState.hovered | WidgetState.pressed: typography.base.copyWith(
-      fontWeight: FontWeight.w500,
-      color: colors.foreground,
-      decoration: TextDecoration.underline,
-    ),
-    // This text style is applied when the accordion is NOT hovered OR pressed.
-    WidgetState.any: typography.base.copyWith(
-      fontWeight: FontWeight.w500,
-      color: colors.foreground,
-    ),
-  }),
-  childTextStyle: typography.sm.copyWith(color: colors.foreground),
-  // This decoration is ALWAYS applied.
-  iconStyle: FWidgetStateMap.all(
-    IconThemeData(color: colors.primary, size: 20),
-  ),
-  focusedOutlineStyle: style.focusedOutlineStyle,
-  dividerStyle: FDividerStyle(color: colors.border, padding: EdgeInsets.zero),
-  tappableStyle: style.tappableStyle.copyWith(
-    animationTween: FTappableAnimations.none,
-  ),
-  titlePadding: const EdgeInsets.symmetric(vertical: 15),
-  childPadding: const EdgeInsets.only(bottom: 15),
-  motion: const FAccordionMotion(),
-);
-```
+<CodeSnippet snippet={accordionStyleSnippet} />
 
 See [`FWidgetStateMap`](#fwidgetstatemap) for more information on `FWidgetStateMap`s.
 
@@ -451,32 +266,14 @@ All widgets and style `copyWith(...)`s accept style builder functions.
 
 To change an accordion's focused outline color:
 
-```dart copy
-FAccordion(
-  style: (style) => style.copyWith(
-    focusedOutlineStyle: (style) => style.copyWith(
-      color: context.theme.colors.background,
-    ),
-  ),
-);
-```
+<CodeSnippet snippet={copyWithSnippet} />
 
 All styles implement the [`call` function](https://dart.dev/language/callable-objects). This allows a style object to be
 passed directly to a widget or style's `copyWith(...)` as a shortcut.
 
 Both are equivalent:
 
-```dart copy
-// Long-form
-FAccordion(
-  style: (style) => FAccordionStyle(...),
-);
-
-// Short-form
-FAccordion(
-  style: FAccordionStyle(...),
-);
-```
+<CodeSnippet snippet={copyWithCallSnippet} />
 
 #### CLI
 
@@ -498,52 +295,13 @@ dart run forui style create accordion
 
 This example shows how to add underlining when the accordion title is focused, in addition to the existing hover and press states:
 
-```dart filename="lib/theme/accordion_style.dart" {8} copy
-FAccordionStyle accordionStyle({
-  required FColors colors,
-  required FTypography typography,
-  required FStyle style,
-}) => FAccordionStyle(
-  titleTextStyle: FWidgetStateMap({
-    // This text style is applied when the accordion is hovered OR pressed OR focused (new).
-    WidgetState.hovered | WidgetState.pressed | Widget.focused: typography.base.copyWith(
-      fontWeight: FontWeight.w500,
-      color: colors.foreground,
-      decoration: TextDecoration.underline,
-    ),
-    // This text style is applied when the accordion is NOT hovered OR pressed.
-    WidgetState.any: typography.base.copyWith(
-      fontWeight: FontWeight.w500,
-      color: colors.foreground,
-    ),
-  }),
-  ...
-);
-```
+<CodeSnippet snippet={modifyStyleSnippet} />
 
 See [`FWidgetStateMap`](#fwidgetstatemap) for more information on `FWidgetStateMap`s.
 
 ##### Pass the Style
 
-```dart filename="main.dart" {1, 6-10} copy
-import 'lib/theme/accordion_style.dart';
-
-@override
-Widget build(BuildContext context) => FAccordion(
-  // Pass the modified style to the widget.
-  style: accordionStyle(
-    colors: context.theme.colors,
-    typography: context.theme.typography,
-    style: context.theme.style,
-  ),
-  children: const [
-    FAccordionItem(
-      title: Text('Is it accessible?'),
-      child: Text('Yes. It adheres to the WAI-ARIA design pattern.'),
-    ),
-  ],
-);
-```
+<CodeSnippet snippet={passStyleSnippet} />
 
 ## Custom Properties
 
@@ -554,72 +312,25 @@ system.
 
 Theme extensions must extend `ThemeExtension` and implement `copyWith()` and `lerp()`.
 
-```dart filename="lib/theme/brand_color.dart" copy
-import 'package:flutter/material.dart';
-
-class BrandColor extends ThemeExtension<BrandColor> {
-  final Color color;
-
-  const BrandColor({
-    required this.color,
-  });
-
-  @override
-  BrandColor copyWith({Color? color}) => BrandColor(color: color ?? this.color);
-
-  @override
-  BrandColor lerp(BrandColor? other, double t) {
-    if (other is! BrandColor) {
-      return this;
-    }
-
-    return BrandColor(color: Color.lerp(color, other.color, t)!);
-  }
-}
-```
+<CodeSnippet snippet={brandColorSnippet} />
 
 Add the extension to `FThemeData(...)` via its `extensions` parameter:
 
-```dart copy
-import 'brand_theme.dart';
-
-FThemeData(
-  // ... other theme properties
-  extensions: [
-    BrandColor(color: const Color(0xFF6366F1)),
-  ],
-);
-```
+<CodeSnippet snippet={extensionsSnippet} />
 
 You can also add extensions to existing themes using `copyWith(...)`:
 
-```dart copy
-final theme = FThemes.zinc.light.copyWith(
-  extensions: [
-    BrandColor(color: const Color(0xFF6366F1)),
-  ],
-);
-```
+<CodeSnippet snippet={copyWithExtensionsSnippet} />
 
 ### Accessing the Properties
 
 Retrieve your custom theme extension via [`extension<T>()`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/extension.html):
 
-```dart {3} copy
-@override
-Widget build(BuildContext context) {
-  final brand = context.theme.extension<BrandColor>();
-  return ColoredBox(color: brand.color);
-}
-```
+<CodeSnippet snippet={accessPropertiesSnippet} />
 
 Optionally, we recommend creating a getter on `FThemeData`:
 
-```dart filename="lib/theme/theme_extensions.dart" copy
-extension BrandColorExtension on FThemeData {
-  BrandColor get brand => extension<BrandColor>();
-}
-```
+<CodeSnippet snippet={getterSnippet} />
 
 ## Material Interoperability
 
@@ -643,31 +354,7 @@ A Forui theme can be converted to a Material theme using
   of a Forui theme.
 </Callout>
 
-```dart {9} copy
-import 'package:flutter/material.dart';
-import 'package:forui/forui.dart';
-
-@override
-Widget build(BuildContext context) {
-  final fThemeData = FThemes.zinc.light;
-
-  return MaterialApp(
-    theme: fThemeData.toApproximateMaterialTheme(),
-    home: Scaffold(
-      body: Center(
-        child: FCard(
-          title: 'Mixed Widgets',
-          subtitle: 'Using both Forui and Material widgets together',
-          child: ElevatedButton(
-            onPressed: () {},
-            child: const Text('Material Button'),
-          ),
-        ),
-      ),
-    ),
-  );
-}
-```
+<CodeSnippet snippet={approximateMaterialThemeSnippet} />
 
 ### CLI
 

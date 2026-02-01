@@ -6,66 +6,22 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.popover/
 
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import defaultSnippet from '@/snippets/examples/popover/default.json';
+import horizontalSnippet from '@/snippets/examples/popover/horizontal.json';
+import slideSnippet from '@/snippets/examples/popover/slide.json';
+import flipSnippet from '@/snippets/examples/popover/flip.json';
+import allowOverflowSnippet from '@/snippets/examples/popover/allow-overflow.json';
+import noHideRegionSnippet from '@/snippets/examples/popover/no-hide-region.json';
+import nestedSnippet from '@/snippets/examples/popover/nested.json';
+import blurredSnippet from '@/snippets/examples/popover/blurred.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
     <Widget name='popover' query={{alignment: 'topCenter'}} height={500}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    FPopover(
-      popoverAnchor: Alignment.topCenter,
-      childAnchor: Alignment.bottomCenter,
-      popoverBuilder: (context, _) => Padding(
-        padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
-        child: SizedBox(
-          width: 288,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Dimensions', style: context.theme.typography.base),
-              const SizedBox(height: 7),
-              Text(
-                'Set the dimensions for the layer.',
-                style: context.theme.typography.sm.copyWith(
-                  color: context.theme.colors.mutedForeground,
-                  fontWeight: FontWeight.w300,
-                ),
-              ),
-              const SizedBox(height: 15),
-              for (final (index, (label, value)) in [
-                ('Width', '100%'),
-                ('Max. Width', '300px'),
-                ('Height', '25px'),
-                ('Max. Height', 'none'),
-              ].indexed) ...[
-                Row(
-                  children: [
-                    Expanded(child: Text(label, style: context.theme.typography.sm)),
-                    Expanded(
-                      flex: 2,
-                      child: FTextField(
-                        control: FTextFieldControl.managed(initial: TextEditingValue(text: value)),
-                        autofocus: index == 0,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 7),
-              ],
-            ],
-          ),
-        ),
-      ),
-      builder: (_, controller, _) => FButton(
-        style: FButtonStyle.outline(),
-        mainAxisSize: MainAxisSize.min,
-        onPress: controller.toggle,
-        child: const Text('Open popover'),
-      ),
-    );
-    ```
+    <CodeSnippet snippet={defaultSnippet} />
   </Tab>
 </Tabs>
 
@@ -115,57 +71,7 @@ To prevent this, make both widgets share the same `groupId`.
     <Widget name='popover' variant='nested' height={500}/>
   </Tab>
   <Tab value="Code">
-    ```dart {2, 27} copy
-    FPopover(
-      groupId: 'nested-popover',
-      popoverBuilder: (context, _) => Padding(
-        padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
-        child: SizedBox(
-          width: 288,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Dimensions', style: context.theme.typography.base),
-              const SizedBox(height: 7),
-              Text(
-                'Set the dimensions for the layer.',
-                style: context.theme.typography.sm.copyWith(
-                  color: context.theme.colors.mutedForeground,
-                  fontWeight: FontWeight.w300,
-                ),
-              ),
-              const SizedBox(height: 15),
-              Row(
-                children: [
-                  Expanded(child: Text('Width', style: context.theme.typography.sm)),
-                  Expanded(
-                    flex: 2,
-                    child: FSelect<String>.rich(
-                      contentGroupId: 'nested-popover',
-                      hint: 'Select',
-                      format: (s) => s,
-                      children: [
-                        FSelectItem.item(title: const Text('100%'), value: '100%'),
-                        FSelectItem.item(title: const Text('75%'), value: '75%'),
-                        FSelectItem.item(title: const Text('50%'), value: '50%'),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-      builder: (_, controller, _) => FButton(
-        style: FButtonStyle.outline(),
-        mainAxisSize: MainAxisSize.min,
-        onPress: controller.toggle,
-        child: const Text('Open popover'),
-      ),
-    );
-    ```
+    <CodeSnippet snippet={nestedSnippet} />
   </Tab>
 </Tabs>
 
@@ -178,60 +84,7 @@ You can change how the popover is aligned to the button.
     <Widget name='popover' query={{axis: 'horizontal'}} height={500}/>
   </Tab>
   <Tab value="Code">
-    ```dart {2-3} copy
-    FPopover(
-      popoverAnchor: Alignment.bottomLeft,
-      childAnchor: Alignment.bottomRight,
-      popoverBuilder: (context, _) => Padding(
-        padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
-        child: SizedBox(
-          width: 288,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Dimensions', style: context.theme.typography.base),
-              const SizedBox(height: 7),
-              Text(
-                'Set the dimensions for the layer.',
-                style: context.theme.typography.sm.copyWith(
-                  color: context.theme.colors.mutedForeground,
-                  fontWeight: FontWeight.w300,
-                ),
-              ),
-              const SizedBox(height: 15),
-              for (final (index, (label, value)) in [
-                ('Width', '100%'),
-                ('Max. Width', '300px'),
-                ('Height', '25px'),
-                ('Max. Height', 'none'),
-              ].indexed) ...[
-                Row(
-                  children: [
-                    Expanded(child: Text(label, style: context.theme.typography.sm)),
-                    Expanded(
-                      flex: 2,
-                      child: FTextField(
-                        control: FTextFieldControl.managed(initial: TextEditingValue(text: value)),
-                        autofocus: index == 0,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 7),
-              ],
-            ],
-          ),
-        ),
-      ),
-      builder: (_, controller, _) => FButton(
-        style: FButtonStyle.outline(),
-        mainAxisSize: MainAxisSize.min,
-        onPress: controller.toggle,
-        child: const Text('Open popover'),
-      ),
-    );
-    ```
+    <CodeSnippet snippet={horizontalSnippet} />
   </Tab>
 </Tabs>
 
@@ -242,59 +95,7 @@ You can change how the popover is aligned to the button.
     <Widget name='popover' query={{alignment: 'topCenter', hideRegion: 'none'}} height={500}/>
   </Tab>
   <Tab value="Code">
-    ```dart {2} copy
-    FPopover(
-      hideRegion: FPopoverHideRegion.none,
-      popoverBuilder: (context, _) => Padding(
-        padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
-        child: SizedBox(
-          width: 288,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Dimensions', style: context.theme.typography.base),
-              const SizedBox(height: 7),
-              Text(
-                'Set the dimensions for the layer.',
-                style: context.theme.typography.sm.copyWith(
-                  color: context.theme.colors.mutedForeground,
-                  fontWeight: FontWeight.w300,
-                ),
-              ),
-              const SizedBox(height: 15),
-              for (final (index, (label, value)) in [
-                ('Width', '100%'),
-                ('Max. Width', '300px'),
-                ('Height', '25px'),
-                ('Max. Height', 'none'),
-              ].indexed) ...[
-                Row(
-                  children: [
-                    Expanded(child: Text(label, style: context.theme.typography.sm)),
-                    Expanded(
-                      flex: 2,
-                      child: FTextField(
-                        control: FTextFieldControl.managed(initial: TextEditingValue(text: value)),
-                        autofocus: index == 0,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 7),
-              ],
-            ],
-          ),
-        ),
-      ),
-      builder: (_, controller, _) => FButton(
-        style: FButtonStyle.outline(),
-        mainAxisSize: MainAxisSize.min,
-        onPress: controller.toggle,
-        child: const Text('Open popover'),
-      ),
-    );
-    ```
+    <CodeSnippet snippet={noHideRegionSnippet} />
   </Tab>
 </Tabs>
 
@@ -305,86 +106,7 @@ You can change how the popover is aligned to the button.
     <Widget name='popover' variant='blurred' height={500}/>
   </Tab>
   <Tab value="Code">
-    ```dart {17-23} copy
-    Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      crossAxisAlignment: CrossAxisAlignment.end,
-      children: [
-        Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text('Layer Properties', style: context.theme.typography.xl.copyWith(fontWeight: FontWeight.bold)),
-            const SizedBox(height: 20),
-            const FTextField(control: FTextFieldControl.managed(initial: TextEditingValue(text: 'Header Component'))),
-            const SizedBox(height: 16),
-            const FTextField(control: FTextFieldControl.managed(initial: TextEditingValue(text: 'Navigation Bar'))),
-            const SizedBox(height: 30),
-          ],
-        ),
-        FPopover(
-          style: (style) => style.copyWith(
-            barrierFilter: (animation) => ImageFilter.compose(
-              outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
-              inner: ColorFilter.mode(
-                Color.lerp(Colors.transparent, Colors.black.withValues(alpha: 0.2), animation)!,
-                BlendMode.srcOver,
-              ),
-            ),
-          ),
-          popoverAnchor: Alignment.topCenter,
-          childAnchor: Alignment.bottomCenter,
-          popoverBuilder: (context, _) => Padding(
-            padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
-            child: SizedBox(
-              width: 288,
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text('Dimensions', style: context.theme.typography.base),
-                  const SizedBox(height: 7),
-                  Text(
-                    'Set the dimensions for the layer.',
-                    style: context.theme.typography.sm.copyWith(
-                      color: context.theme.colors.mutedForeground,
-                      fontWeight: FontWeight.w300,
-                    ),
-                  ),
-                  const SizedBox(height: 15),
-                  for (final (index, (label, value)) in [
-                    ('Width', '100%'),
-                    ('Max. Width', '300px'),
-                    ('Height', '25px'),
-                    ('Max. Height', 'none'),
-                  ].indexed) ...[
-                    Row(
-                      children: [
-                        Expanded(child: Text(label, style: context.theme.typography.sm)),
-                        Expanded(
-                          flex: 2,
-                          child: FTextField(
-                            control: FTextFieldControl.managed(initial: TextEditingValue(text: value)),
-                            autofocus: index == 0,
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 7),
-                  ],
-                ],
-              ),
-            ),
-          ),
-          builder: (_, controller, _) => FButton(
-            style: FButtonStyle.outline(),
-            mainAxisSize: MainAxisSize.min,
-            onPress: controller.toggle,
-            child: const Text('Open popover'),
-          ),
-        ),
-      ],
-    );
-    ```
+    <CodeSnippet snippet={blurredSnippet} />
   </Tab>
 </Tabs>
 
@@ -397,59 +119,7 @@ The popover can be flipped along the overflowing axis to stay within the viewpor
     <Widget name='popover' query={{alignment: 'bottomCenter', overflow: 'flip'}} height={500}/>
   </Tab>
   <Tab value="Code">
-    ```dart {2} copy
-    FPopover(
-      overflow: FPortalOverflow.flip,
-      popoverBuilder: (context, _) => Padding(
-        padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
-        child: SizedBox(
-          width: 288,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Dimensions', style: context.theme.typography.base),
-              const SizedBox(height: 7),
-              Text(
-                'Set the dimensions for the layer.',
-                style: context.theme.typography.sm.copyWith(
-                  color: context.theme.colors.mutedForeground,
-                  fontWeight: FontWeight.w300,
-                ),
-              ),
-              const SizedBox(height: 15),
-              for (final (index, (label, value)) in [
-                ('Width', '100%'),
-                ('Max. Width', '300px'),
-                ('Height', '25px'),
-                ('Max. Height', 'none'),
-              ].indexed) ...[
-                Row(
-                  children: [
-                    Expanded(child: Text(label, style: context.theme.typography.sm)),
-                    Expanded(
-                      flex: 2,
-                      child: FTextField(
-                        control: FTextFieldControl.managed(initial: TextEditingValue(text: value)),
-                        autofocus: index == 0,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 7),
-              ],
-            ],
-          ),
-        ),
-      ),
-      builder: (_, controller, _) => FButton(
-        style: FButtonStyle.outline(),
-        mainAxisSize: MainAxisSize.min,
-        onPress: controller.toggle,
-        child: const Text('Open popover'),
-      ),
-    );
-    ```
+    <CodeSnippet snippet={flipSnippet} />
   </Tab>
 </Tabs>
 
@@ -462,59 +132,7 @@ The popover can be slid along the overflowing axis to stay within the viewport b
     <Widget name='popover' query={{overflow: 'slide'}} height={500}/>
   </Tab>
   <Tab value="Code">
-    ```dart {2} copy
-    FPopover(
-      overflow: FPortalOverflow.slide,
-      popoverBuilder: (context, _) => Padding(
-        padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
-        child: SizedBox(
-          width: 288,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Dimensions', style: context.theme.typography.base),
-              const SizedBox(height: 7),
-              Text(
-                'Set the dimensions for the layer.',
-                style: context.theme.typography.sm.copyWith(
-                  color: context.theme.colors.mutedForeground,
-                  fontWeight: FontWeight.w300,
-                ),
-              ),
-              const SizedBox(height: 15),
-              for (final (index, (label, value)) in [
-                ('Width', '100%'),
-                ('Max. Width', '300px'),
-                ('Height', '25px'),
-                ('Max. Height', 'none'),
-              ].indexed) ...[
-                Row(
-                  children: [
-                    Expanded(child: Text(label, style: context.theme.typography.sm)),
-                    Expanded(
-                      flex: 2,
-                      child: FTextField(
-                        control: FTextFieldControl.managed(initial: TextEditingValue(text: value)),
-                        autofocus: index == 0,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 7),
-              ],
-            ],
-          ),
-        ),
-      ),
-      builder: (_, controller, _) => FButton(
-        style: FButtonStyle.outline(),
-        mainAxisSize: MainAxisSize.min,
-        onPress: controller.toggle,
-        child: const Text('Open popover'),
-      ),
-    );
-    ```
+    <CodeSnippet snippet={slideSnippet} />
   </Tab>
 </Tabs>
 
@@ -527,58 +145,6 @@ The popover is not shifted to stay within the viewport boundaries, even if it ov
     <Widget name='popover' query={{overflow: 'allow'}} height={500}/>
   </Tab>
   <Tab value="Code">
-    ```dart {2} copy
-    FPopover(
-      overflow: FPortalOverflow.none,
-      popoverBuilder: (context, _) => Padding(
-        padding: const EdgeInsets.only(left: 20, top: 14, right: 20, bottom: 10),
-        child: SizedBox(
-          width: 288,
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text('Dimensions', style: context.theme.typography.base),
-              const SizedBox(height: 7),
-              Text(
-                'Set the dimensions for the layer.',
-                style: context.theme.typography.sm.copyWith(
-                  color: context.theme.colors.mutedForeground,
-                  fontWeight: FontWeight.w300,
-                ),
-              ),
-              const SizedBox(height: 15),
-              for (final (index, (label, value)) in [
-                ('Width', '100%'),
-                ('Max. Width', '300px'),
-                ('Height', '25px'),
-                ('Max. Height', 'none'),
-              ].indexed) ...[
-                Row(
-                  children: [
-                    Expanded(child: Text(label, style: context.theme.typography.sm)),
-                    Expanded(
-                      flex: 2,
-                      child: FTextField(
-                        control: FTextFieldControl.managed(initial: TextEditingValue(text: value)),
-                        autofocus: index == 0,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 7),
-              ],
-            ],
-          ),
-        ),
-      ),
-      builder: (_, controller, _) => FButton(
-        style: FButtonStyle.outline(),
-        mainAxisSize: MainAxisSize.min,
-        onPress: controller.toggle,
-        child: const Text('Open popover'),
-      ),
-    );
-    ```
+    <CodeSnippet snippet={allowOverflowSnippet} />
   </Tab>
 </Tabs>

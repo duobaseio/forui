@@ -6,23 +6,15 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.progress/
 
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import circularSnippet from '@/snippets/examples/progress/circular.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
     <Widget name='progress' variant='circular'/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      spacing: 25,
-      children: [
-        FCircularProgress(),
-        FCircularProgress.loader(),
-        FCircularProgress.pinwheel(),
-      ],
-    );
-    ```
+    <CodeSnippet snippet={circularSnippet} />
   </Tab>
 </Tabs>
 

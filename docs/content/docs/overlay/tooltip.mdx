@@ -6,25 +6,17 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.tooltip/
 
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import defaultSnippet from '@/snippets/examples/tooltip/default.json';
+import horizontalSnippet from '@/snippets/examples/tooltip/horizontal.json';
+import longPressOnlySnippet from '@/snippets/examples/tooltip/long-press-only.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
     <Widget name='tooltip' height={300}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    FTooltip(
-      hover: true,
-      longPress: true,
-      tipBuilder: (context, _) => const Text('Add to library'),
-      child: FButton(
-        style: FButtonStyle.outline(),
-        mainAxisSize: MainAxisSize.min,
-        onPress: () {},
-        child: const Text('Long press/Hover'),
-      ),
-    );
-    ```
+    <CodeSnippet snippet={defaultSnippet} />
   </Tab>
 </Tabs>
 
@@ -70,19 +62,7 @@ You can change how the tooltip is aligned to the button.
     <Widget name='tooltip' query={{axis: 'horizontal'}} height={300}/>
   </Tab>
   <Tab value="Code">
-    ```dart {2-3} copy
-    FTooltip(
-      tipAnchor: Alignment.topLeft,
-      childAnchor: Alignment.topRight,
-      tipBuilder: (context, _) => const Text('Add to library'),
-      child: FButton(
-        style: FButtonStyle.outline(),
-        mainAxisSize: MainAxisSize.min,
-        onPress: () {},
-        child: const Text('Long press/Hover'),
-      ),
-    );
-    ```
+    <CodeSnippet snippet={horizontalSnippet} />
   </Tab>
 </Tabs>
 
@@ -93,18 +73,6 @@ You can change how the tooltip is aligned to the button.
     <Widget name='tooltip' query={{hover: 'false'}} height={300}/>
   </Tab>
   <Tab value="Code">
-    ```dart {2-3} copy
-    FTooltip(
-      hover: false,
-      longPress: true,
-      tipBuilder: (context, _) => const Text('Add to library'),
-      child: FButton(
-        style: FButtonStyle.outline(),
-        mainAxisSize: MainAxisSize.min,
-        onPress: () {},
-        child: const Text('Long press'),
-      ),
-    );
-    ```
+    <CodeSnippet snippet={longPressOnlySnippet} />
   </Tab>
 </Tabs>

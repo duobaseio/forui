@@ -7,6 +7,20 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.select/
 import { Callout } from 'fumadocs-ui/components/callout';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import defaultSnippet from '@/snippets/examples/multi-select/default.json';
+import detailedSnippet from '@/snippets/examples/multi-select/detailed.json';
+import sectionSnippet from '@/snippets/examples/multi-select/section.json';
+import dividerSnippet from '@/snippets/examples/multi-select/divider.json';
+import syncSnippet from '@/snippets/examples/multi-select/sync.json';
+import asyncSnippet from '@/snippets/examples/multi-select/async.json';
+import asyncLoadingSnippet from '@/snippets/examples/multi-select/async-loading.json';
+import asyncErrorSnippet from '@/snippets/examples/multi-select/async-error.json';
+import clearableSnippet from '@/snippets/examples/multi-select/clearable.json';
+import formatSnippet from '@/snippets/examples/multi-select/format.json';
+import minMaxSnippet from '@/snippets/examples/multi-select/min-max.json';
+import sortedSnippet from '@/snippets/examples/multi-select/sorted.json';
+import formSnippet from '@/snippets/examples/multi-select/form.json';
 
 <Callout type="info">
     For single selections, consider using a [select](/docs/form/select).
@@ -21,13 +35,7 @@ import { Widget } from '@/components/demo/widget';
     <Widget name='multi-select' query={{}} height={400}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    FMultiSelect<String>.rich(
-      hint: const Text('Select a fruit'),
-      format: Text.new,
-      children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit)],
-    );
-    ```
+    <CodeSnippet snippet={defaultSnippet} />
   </Tab>
 </Tabs>
 
@@ -207,32 +215,7 @@ FMultiSelect<User>.search(
     <Widget name='multi-select' variant='detailed' query={{}} height={400}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    FMultiSelect<String>.rich(
-      hint: const Text('Type'),
-      format: Text.new,
-      children: [
-        FSelectItem(
-          prefix: const Icon(FIcons.bug),
-          title: const Text('Bug'),
-          subtitle: const Text('An unexpected problem or behavior'),
-          value: 'Bug',
-        ),
-        FSelectItem(
-          prefix: const Icon(FIcons.filePlus2),
-          title: const Text('Feature'),
-          subtitle: const Text('A new feature or enhancement'),
-          value: 'Feature',
-        ),
-        FSelectItem(
-          prefix: const Icon(FIcons.messageCircleQuestionMark),
-          title: const Text('Question'),
-          subtitle: const Text('A question or clarification'),
-          value: 'Question',
-        ),
-      ],
-    );
-    ```
+    <CodeSnippet snippet={detailedSnippet} />
   </Tab>
 </Tabs>
 
@@ -243,81 +226,7 @@ FMultiSelect<User>.search(
     <Widget name='multi-select' variant='section' query={{}} height={400}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    FMultiSelect<String>.rich(
-      hint: const Text('Select a timezone'),
-      format: Text.new,
-      children: [
-        FSelectSection(
-          label: const Text('North America'),
-          items: {
-            for (final item in [
-              'Eastern Standard Time (EST)',
-              'Central Standard Time (CST)',
-              'Mountain Standard Time (MST)',
-              'Pacific Standard Time (PST)',
-              'Alaska Standard Time (AKST)',
-              'Hawaii Standard Time (HST)',
-            ])
-              item: item,
-          },
-        ),
-        FSelectSection(
-          label: const Text('South America'),
-          items: {
-            for (final item in [
-              'Argentina Time (ART)',
-              'Bolivia Time (BOT)',
-              'Brasilia Time (BRT)',
-              'Chile Standard Time (CLT)',
-            ])
-              item: item,
-          },
-        ),
-        FSelectSection(
-          label: const Text('Europe & Africa'),
-          items: {
-            for (final item in [
-              'Greenwich Mean Time (GMT)',
-              'Central European Time (CET)',
-              'Eastern European Time (EET)',
-              'Western European Summer Time (WEST)',
-              'Central Africa Time (CAT)',
-              'Eastern Africa Time (EAT)',
-            ])
-              item: item,
-          },
-        ),
-        FSelectSection(
-          label: const Text('Asia'),
-          items: {
-            for (final item in [
-              'Moscow Time (MSK)',
-              'India Standard Time (IST)',
-              'China Standard Time (CST)',
-              'Japan Standard Time (JST)',
-              'Korea Standard Time (KST)',
-              'Indonesia Standard Time (IST)',
-            ])
-              item: item,
-          },
-        ),
-        FSelectSection(
-          label: const Text('Australia & Pacific'),
-          items: {
-            for (final item in [
-              'Australian Western Standard Time (AWST)',
-              'Australian Central Standard Time (ACST)',
-              'Australian Eastern Standard Time (AEST)',
-              'New Zealand Standard Time (NZST)',
-              'Fiji Time (FJT)',
-            ])
-              item: item,
-          },
-        ),
-      ],
-    );
-    ```
+    <CodeSnippet snippet={sectionSnippet} />
   </Tab>
 </Tabs>
 
@@ -328,30 +237,7 @@ FMultiSelect<User>.search(
     <Widget name='multi-select' variant='divider' query={{}} height={400}/>
   </Tab>
   <Tab value="Code">
-    ```dart {3, 8} copy
-    FMultiSelect<String>.rich(
-      hint: const Text('Select a level'),
-      contentDivider: FItemDivider.full,
-      format: Text.new,
-      children: [
-        FSelectSection(
-          label: const Text('Level 1'),
-          divider: FItemDivider.indented,
-          items: {
-            for (final item in ['A', 'B']) item: '1$item',
-          },
-        ),
-        FSelectSection(
-          label: const Text('Level 2'),
-          items: {
-            for (final item in ['A', 'B']) item: '2$item',
-          },
-        ),
-        FSelectItem(title: const Text('Level 3'), value: '3'),
-        FSelectItem(title: const Text('Level 4'), value: '4'),
-      ],
-    );
-    ```
+    <CodeSnippet snippet={dividerSnippet} />
   </Tab>
 </Tabs>
 
@@ -364,14 +250,7 @@ FMultiSelect<User>.search(
     <Widget name='multi-select' variant='sync' query={{}} height={400}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    FMultiSelect<String>.searchBuilder(
-      hint: const Text('Select a fruit'),
-      format: Text.new,
-      filter: (query) => query.isEmpty ? fruits : fruits.where((f) => f.toLowerCase().startsWith(query.toLowerCase())),
-      contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit)],
-    );
-    ```
+    <CodeSnippet snippet={syncSnippet} />
   </Tab>
 </Tabs>
 
@@ -382,17 +261,7 @@ FMultiSelect<User>.search(
     <Widget name='multi-select' variant='async' query={{}} height={400}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    FMultiSelect<String>.searchBuilder(
-      hint: const Text('Select a fruit'),
-      format: Text.new,
-      filter: (query) async {
-        await Future.delayed(const Duration(seconds: 1));
-        return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
-      },
-      contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit)],
-    );
-    ```
+    <CodeSnippet snippet={asyncSnippet} />
   </Tab>
 </Tabs>
 
@@ -403,21 +272,7 @@ FMultiSelect<User>.search(
     <Widget name='multi-select' variant='async-loading' query={{}} height={400}/>
   </Tab>
   <Tab value="Code">
-    ```dart {8-11} copy
-    FMultiSelect<String>.searchBuilder(
-      hint: const Text('Select a fruit'),
-      format: Text.new,
-      filter: (query) async {
-        await Future.delayed(const Duration(seconds: 1));
-        return query.isEmpty ? fruits : fruits.where((fruit) => fruit.toLowerCase().startsWith(query.toLowerCase()));
-      },
-      contentLoadingBuilder: (context, style) => Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Text('Here be dragons...', style: style.textFieldStyle.contentTextStyle.resolve({})),
-      ),
-      contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit)],
-    );
-    ```
+    <CodeSnippet snippet={asyncLoadingSnippet} />
   </Tab>
 </Tabs>
 
@@ -428,24 +283,7 @@ FMultiSelect<User>.search(
     <Widget name='multi-select' variant='async-error' query={{}} height={400}/>
   </Tab>
   <Tab value="Code">
-    ```dart {9-14} copy
-    FMultiSelect<String>.searchBuilder(
-      hint: const Text('Select a fruit'),
-      format: Text.new,
-      filter: (query) async {
-        await Future.delayed(const Duration(seconds: 1));
-        throw StateError('Error loading data');
-      },
-      contentBuilder: (context, _, fruits) => [for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit)],
-      contentErrorBuilder: (context, error, trace) {
-        final style = context.theme.selectStyle.iconStyle;
-        return Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Icon(FIcons.messageCircleX, size: style.size, color: style.color),
-        );
-      },
-    );
-    ```
+    <CodeSnippet snippet={asyncErrorSnippet} />
   </Tab>
 </Tabs>
 
@@ -458,14 +296,7 @@ FMultiSelect<User>.search(
     <Widget name='multi-select' variant='clearable' query={{}} height={400}/>
   </Tab>
   <Tab value="Code">
-    ```dart {4} copy
-    FMultiSelect<String>.rich(
-      hint: const Text('Select a fruit'),
-      format: Text.new,
-      clearable: true,
-      children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit)],
-    );
-    ```
+    <CodeSnippet snippet={clearableSnippet} />
   </Tab>
 </Tabs>
 
@@ -476,13 +307,7 @@ FMultiSelect<User>.search(
     <Widget name='multi-select' variant='format' query={{}} height={400}/>
   </Tab>
   <Tab value="Code">
-    ```dart {3} copy
-    FMultiSelect<({String firstName, String lastName})>.rich(
-      hint: const Text('Select a user'),
-      format: (user) => Text('${user.firstName} ${user.lastName}'),
-      children: [for (final user in users) FSelectItem(title: Text(user.firstName), value: user)],
-    );
-    ```
+    <CodeSnippet snippet={formatSnippet} />
   </Tab>
 </Tabs>
 
@@ -493,32 +318,7 @@ FMultiSelect<User>.search(
     <Widget name='multi-select' variant='min-max' query={{}} height={400}/>
   </Tab>
   <Tab value="Code">
-    ```dart {2} copy
-    FMultiSelect<String>.rich(
-      control: const FMultiSelectControl.managed(min: 1, max: 3),
-      hint: const Text('Select favorite fruits'),
-      format: Text.new,
-      children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit)],
-    );
-    ```
-  </Tab>
-</Tabs>
-
-#### With Scroll Handles
-
-<Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
-    <Widget name='multi-select' variant='scroll-handles' query={{}} height={400}/>
-  </Tab>
-  <Tab value="Code">
-    ```dart {4} copy
-    FMultiSelect<String>.rich(
-      hint: const Text('Select a fruit'),
-      format: Text.new,
-      contentScrollHandles: true,
-      children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit)],
-    );
-    ```
+    <CodeSnippet snippet={minMaxSnippet} />
   </Tab>
 </Tabs>
 
@@ -529,32 +329,7 @@ FMultiSelect<User>.search(
     <Widget name='multi-select' variant='sorted' query={{}} height={400}/>
   </Tab>
   <Tab value="Code">
-    ```dart {13} copy
-    const fruits = [
-      'Apple',
-      'Banana',
-      'Blueberry',
-      'Grapes',
-      'Lemon',
-      'Mango',
-      'Kiwi',
-      'Orange',
-      'Peach',
-      'Pear',
-      'Pineapple',
-      'Plum',
-      'Raspberry',
-      'Strawberry',
-      'Watermelon',
-    ];
-
-    FMultiSelect<String>.rich(
-      hint: const Text('Select favorite fruits'),
-      format: Text.new,
-      sort: (a, b) => a.compareTo(b),
-      children: [for (final fruit in fruits) FSelectItem(title: Text(fruit), value: fruit)],
-    );
-    ```
+    <CodeSnippet snippet={sortedSnippet} />
   </Tab>
 </Tabs>
 
@@ -565,45 +340,6 @@ FMultiSelect<User>.search(
     <Widget name='multi-select' variant='form' query={{}} height={400}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    class FormMultiSelectPage extends StatefulWidget {
-      @override
-      State<FormMultiSelectPage> createState() => _FormMultiSelectPageState();
-    }
-
-    class _FormMultiSelectPageState extends State<FormMultiSelectPage> {
-      final _key = GlobalKey<FormState>();
-
-      @override
-      Widget build(BuildContext context) => Form(
-        key: _key,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            FMultiSelect<String>.rich(
-              label: const Text('Department'),
-              description: const Text('Choose your dream department(s)'),
-              hint: const Text('Select departments'),
-              format: Text.new,
-              validator: (departments) => departments.isEmpty ? 'Please select departments' : null,
-              children: [
-                for (final department in const ['Engineering', 'Marketing', 'Sales', 'Human Resources', 'Finance'])
-                  FSelectItem(title: Text(department), value: department),
-              ],
-            ),
-            const SizedBox(height: 25),
-            FButton(
-              child: const Text('Submit'),
-              onPress: () {
-                if (_key.currentState!.validate()) {
-                  // Form is valid, do something with departments
-                }
-              },
-            ),
-          ],
-        ),
-      );
-    }
-    ```
+    <CodeSnippet snippet={formSnippet} />
   </Tab>
 </Tabs>

@@ -7,6 +7,8 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.radio/
 import { Callout } from 'fumadocs-ui/components/callout';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import defaultSnippet from '@/snippets/examples/radio/default.json';
 
 <Callout type="info">
     We recommend using a [select group](/docs/form/select-group#radio-form) to create a group of radio buttons instead of using `FRadio` directly.
@@ -17,24 +19,7 @@ import { Widget } from '@/components/demo/widget';
     <Widget name='radio' variant='default' query={{}}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    class RadioPage extends StatefulWidget {
-      @override
-      State<RadioPage> createState() => _RadioPageState();
-    }
-
-    class _RadioPageState extends State<RadioPage> {
-      bool _value = true;
-
-      @override
-      Widget build(BuildContext context) => FRadio(
-        label: const Text('Default'),
-        description: const Text('The description of the default option.'),
-        value: _value,
-        onChange: (value) => setState(() => _value = value),
-      );
-    }
-    ```
+    <CodeSnippet snippet={defaultSnippet} />
   </Tab>
 </Tabs>
 

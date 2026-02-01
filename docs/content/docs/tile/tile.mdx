@@ -7,6 +7,12 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.tile/
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Callout } from 'fumadocs-ui/components/callout';
 import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import tileDefault from '@/snippets/examples/tile/default.json';
+import tileUntappable from '@/snippets/examples/tile/untappable.json';
+import tileDisabled from '@/snippets/examples/tile/disabled.json';
+import tileSubtitle from '@/snippets/examples/tile/subtitle.json';
+import tileDetails from '@/snippets/examples/tile/details.json';
 
 <Callout type="info">
     Tiles can be grouped together inside a [FTileGroup](/docs/tile/tile-group).
@@ -17,14 +23,7 @@ import { Widget } from '@/components/demo/widget';
     <Widget name='tile' variant='default' query={{}}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    FTile(
-      prefix: const Icon(FIcons.user),
-      title: const Text('Personalization'),
-      suffix: const Icon(FIcons.chevronRight),
-      onPress: () {},
-    );
-    ```
+    <CodeSnippet snippet={tileDefault} />
   </Tab>
 </Tabs>
 
@@ -98,13 +97,7 @@ FTile.raw(
     <Widget name='tile' variant='default' query={{tappable: false}}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    FTile(
-      prefix: const Icon(FIcons.user),
-      title: const Text('Personalization'),
-      suffix: const Icon(FIcons.chevronRight),
-    );
-    ```
+    <CodeSnippet snippet={tileUntappable} />
   </Tab>
 </Tabs>
 
@@ -115,15 +108,7 @@ FTile.raw(
     <Widget name='tile' variant='default' query={{enabled: false}}/>
   </Tab>
   <Tab value="Code">
-    ```dart {2} copy
-    FTile(
-      enabled: false,
-      prefix: const Icon(FIcons.user),
-      title: const Text('Personalization'),
-      suffix: const Icon(FIcons.chevronRight),
-      onPress: () {},
-    );
-    ```
+    <CodeSnippet snippet={tileDisabled} />
   </Tab>
 </Tabs>
 
@@ -134,15 +119,7 @@ FTile.raw(
     <Widget name='tile' variant='subtitle' query={{}}/>
   </Tab>
   <Tab value="Code">
-    ```dart {4} copy
-    FTile(
-      prefix: const Icon(FIcons.bell),
-      title: const Text('Notifications'),
-      subtitle: const Text('Banners, Sounds, Badges'),
-      suffix: const Icon(FIcons.chevronRight),
-      onPress: () {},
-    );
-    ```
+    <CodeSnippet snippet={tileSubtitle} />
   </Tab>
 </Tabs>
 
@@ -153,14 +130,6 @@ FTile.raw(
     <Widget name='tile' variant='details' query={{}}/>
   </Tab>
   <Tab value="Code">
-    ```dart {4} copy
-    FTile(
-      prefix: const Icon(FIcons.wifi),
-      title: const Text('WiFi'),
-      details: const Text('Duobase (5G)'),
-      suffix: const Icon(FIcons.chevronRight),
-      onPress: () {},
-    );
-    ```
+    <CodeSnippet snippet={tileDetails} />
   </Tab>
 </Tabs>

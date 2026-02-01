@@ -7,6 +7,15 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.select_ti
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Callout } from 'fumadocs-ui/components/callout';
 import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import selectTileGroupDefault from '@/snippets/examples/select-tile-group/default.json';
+import selectTileGroupRadio from '@/snippets/examples/select-tile-group/radio.json';
+import selectTileGroupMultiValue from '@/snippets/examples/select-tile-group/multi-value.json';
+import selectTileGroupSuffix from '@/snippets/examples/select-tile-group/suffix.json';
+import selectTileGroupLazy from '@/snippets/examples/select-tile-group/lazy.json';
+import selectTileGroupScrollable from '@/snippets/examples/select-tile-group/scrollable.json';
+import selectTileGroupFullDivider from '@/snippets/examples/select-tile-group/full-divider.json';
+import selectTileGroupNoDivider from '@/snippets/examples/select-tile-group/no-divider.json';
 
 <Callout type="info">
     For desktop, a [select group](/docs/form/select-group) is generally recommended over this.
@@ -17,20 +26,7 @@ import { Widget } from '@/components/demo/widget';
     <Widget name='select-tile-group' variant='default' query={{}} height={300}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    enum Sidebar { recents, home, applications }
-
-    FSelectTileGroup<Sidebar>(
-      control: const FMultiValueControl.managed(initial: {Sidebar.recents}),
-      label: const Text('Sidebar'),
-      description: const Text('These will be shown in the sidebar.'),
-      children: const [
-        FSelectTile(title: Text('Recents'), suffix: Icon(FIcons.timer), value: Sidebar.recents),
-        FSelectTile(title: Text('Home'), suffix: Icon(FIcons.house), value: Sidebar.home),
-        FSelectTile(title: Text('Applications'), suffix: Icon(FIcons.appWindowMac), value: Sidebar.applications),
-      ],
-    );
-    ```
+    <CodeSnippet snippet={selectTileGroupDefault} />
   </Tab>
 </Tabs>
 
@@ -110,21 +106,7 @@ FSelectTileGroup<int>.builder(
     <Widget name='select-tile-group' variant='scrollable' query={{}} height={300}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    enum Sidebar { recents, home, applications }
-
-    FSelectTileGroup<Sidebar>(
-      control: const FMultiValueControl.managed(initial: {Sidebar.recents}),
-      label: const Text('Sidebar'),
-      description: const Text('These will be shown in the sidebar.'),
-      maxHeight: 100,
-      children: const [
-        FSelectTile(title: Text('Recents'), suffix: Icon(FIcons.timer), value: Sidebar.recents),
-        FSelectTile(title: Text('Home'), suffix: Icon(FIcons.house), value: Sidebar.home),
-        FSelectTile(title: Text('Applications'), suffix: Icon(FIcons.appWindowMac), value: Sidebar.applications),
-      ],
-    );
-    ```
+    <CodeSnippet snippet={selectTileGroupScrollable} />
   </Tab>
 </Tabs>
 
@@ -135,14 +117,7 @@ FSelectTileGroup<int>.builder(
     <Widget name='select-tile-group' variant='lazy' query={{}} height={300}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    FSelectTileGroup<int>.builder(
-      control: const FMultiValueControl.managed(initial: {1}),
-      label: const Text('Applicable values'),
-      maxHeight: 200,
-      tileBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index),
-    );
-    ```
+    <CodeSnippet snippet={selectTileGroupLazy} />
   </Tab>
 </Tabs>
 
@@ -153,55 +128,7 @@ FSelectTileGroup<int>.builder(
     <Widget name='select-tile-group' variant='multi-value' query={{}} height={400}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    enum Language { dart, java, rust, python }
-
-    class MultiValueForm extends StatefulWidget {
-      const MultiValueForm({super.key});
-
-      @override
-      State<MultiValueForm> createState() => _MultiValueFormState();
-    }
-
-    class _MultiValueFormState extends State<MultiValueForm> {
-      final _key = GlobalKey<FormState>();
-
-      @override
-      Widget build(BuildContext context) => Form(
-        key: _key,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          spacing: 20,
-          children: [
-            FSelectTileGroup<Language>(
-              label: const Text('Favorite Languages'),
-              description: const Text('Your favorite language.'),
-              validator: (values) => (values?.isEmpty ?? true) ? 'Please select at least one language.' : null,
-              children: const [
-                FSelectTile(title: Text('Dart'), value: Language.dart),
-                FSelectTile(title: Text('Java'), value: Language.java),
-                FSelectTile(title: Text('Rust'), value: Language.rust),
-                FSelectTile(title: Text('Python'), value: Language.python),
-              ],
-            ),
-            FButton(
-              child: const Text('Save'),
-              onPress: () {
-                if (!_key.currentState!.validate()) {
-                  // Handle errors here.
-                  return;
-                }
-
-                _key.currentState!.save();
-                // Do something.
-              },
-            ),
-          ],
-        ),
-      );
-    }
-    ```
+    <CodeSnippet snippet={selectTileGroupMultiValue} />
   </Tab>
 </Tabs>
 
@@ -212,62 +139,7 @@ FSelectTileGroup<int>.builder(
     <Widget name='select-tile-group' variant='radio' query={{}} height={400}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    enum Notification { all, direct, nothing }
-
-    class RadioForm extends StatefulWidget {
-      const RadioForm({super.key});
-
-      @override
-      State<RadioForm> createState() => _RadioFormState();
-    }
-
-    class _RadioFormState extends State<RadioForm> {
-      final _key = GlobalKey<FormState>();
-      final _controller = FMultiValueNotifier<Notification>.radio();
-
-      @override
-      void dispose() {
-        _controller.dispose();
-        super.dispose();
-      }
-
-      @override
-      Widget build(BuildContext context) => Form(
-        key: _key,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          spacing: 20,
-          children: [
-            FSelectTileGroup<Notification>(
-              control: FMultiValueControl.managed(controller: _controller),
-              label: const Text('Notifications'),
-              description: const Text('Select the notifications.'),
-              validator: (values) => values?.isEmpty ?? true ? 'Please select a value.' : null,
-              children: const [
-                FSelectTile(title: Text('All new messages'), value: Notification.all),
-                FSelectTile(title: Text('Direct messages and mentions'), value: Notification.direct),
-                FSelectTile(title: Text('Nothing'), value: Notification.nothing),
-              ],
-            ),
-            FButton(
-              child: const Text('Save'),
-              onPress: () {
-                if (!_key.currentState!.validate()) {
-                  // Handle errors here.
-                  return;
-                }
-
-                _key.currentState!.save();
-                // Do something.
-              },
-            ),
-          ],
-        ),
-      );
-    }
-    ```
+    <CodeSnippet snippet={selectTileGroupRadio} />
   </Tab>
 </Tabs>
 
@@ -280,16 +152,7 @@ FSelectTileGroup<int>.builder(
     <Widget name='select-tile-group' variant='suffix' query={{}}/>
   </Tab>
   <Tab value="Code">
-    ```dart {5, 6} copy
-    FSelectTileGroup<String>(
-      control: const FMultiValueControl.managedRadio(),
-      label: const Text('Settings'),
-      children: const [
-        FSelectTile.suffix(prefix: Icon(FIcons.list), title: Text('List View'), value: 'List'),
-        FSelectTile.suffix(prefix: Icon(FIcons.layoutGrid), title: Text('Grid View'), value: 'Grid'),
-      ],
-    );
-    ```
+    <CodeSnippet snippet={selectTileGroupSuffix} />
   </Tab>
 </Tabs>
 
@@ -300,21 +163,7 @@ FSelectTileGroup<int>.builder(
     <Widget name='select-tile-group' variant='default' query={{divider: 'full'}} height={300}/>
   </Tab>
   <Tab value="Code">
-    ```dart {5} copy
-    enum Sidebar { recents, home, applications }
-
-    FSelectTileGroup<Sidebar>(
-      control: const FMultiValueControl.managed(initial: {Sidebar.recents}),
-      divider: FItemDivider.full,
-      label: const Text('Sidebar'),
-      description: const Text('These will be shown in the sidebar.'),
-      children: const [
-        FSelectTile(title: Text('Recents'), suffix: Icon(FIcons.timer), value: Sidebar.recents),
-        FSelectTile(title: Text('Home'), suffix: Icon(FIcons.house), value: Sidebar.home),
-        FSelectTile(title: Text('Applications'), suffix: Icon(FIcons.appWindowMac), value: Sidebar.applications),
-      ],
-    );
-    ```
+    <CodeSnippet snippet={selectTileGroupFullDivider} />
   </Tab>
 </Tabs>
 
@@ -325,20 +174,6 @@ FSelectTileGroup<int>.builder(
     <Widget name='select-tile-group' variant='default' query={{divider: 'none'}} height={300}/>
   </Tab>
   <Tab value="Code">
-    ```dart {5} copy
-    enum Sidebar { recents, home, applications }
-
-    FSelectTileGroup<Sidebar>(
-      control: const FMultiValueControl.managed(initial: {Sidebar.recents}),
-      divider: FItemDivider.none,
-      label: const Text('Sidebar'),
-      description: const Text('These will be shown in the sidebar.'),
-      children: const [
-        FSelectTile(title: Text('Recents'), suffix: Icon(FIcons.timer), value: Sidebar.recents),
-        FSelectTile(title: Text('Home'), suffix: Icon(FIcons.house), value: Sidebar.home),
-        FSelectTile(title: Text('Applications'), suffix: Icon(FIcons.appWindowMac), value: Sidebar.applications),
-      ],
-    );
-    ```
+    <CodeSnippet snippet={selectTileGroupNoDivider} />
   </Tab>
 </Tabs>

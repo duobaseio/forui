@@ -7,6 +7,8 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.line_cale
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Callout } from 'fumadocs-ui/components/callout';
 import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import defaultSnippet from '@/snippets/examples/line-calendar/default.json';
 
 <Callout type="info">
   Hold `Shift` while scrolling to navigate through dates on desktop and web.
@@ -17,13 +19,7 @@ import { Widget } from '@/components/demo/widget';
         <Widget name='line-calendar' query={{}} height={200}/>
     </Tab>
     <Tab value="Code">
-        ```dart copy
-        FLineCalendar(
-          control: FLineCalendarControl.managed(
-            initial: DateTime.now().subtract(const Duration(days: 1)),
-          ),
-        );
-        ```
+        <CodeSnippet snippet={defaultSnippet} />
     </Tab>
 </Tabs>
 

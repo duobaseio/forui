@@ -7,6 +7,10 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.sheet/
 import { Callout } from 'fumadocs-ui/components/callout';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import defaultSnippet from '@/snippets/examples/modal-sheet/default.json';
+import blurredSnippet from '@/snippets/examples/modal-sheet/blurred.json';
+import draggableSnippet from '@/snippets/examples/modal-sheet/draggable.json';
 
 It navigates to a new page each time.
 
@@ -20,101 +24,7 @@ It navigates to a new page each time.
     <Widget name='modal-sheet' query={{}} height={500}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    Column(
-      mainAxisAlignment: MainAxisAlignment.center,
-      mainAxisSize: MainAxisSize.min,
-      spacing: 5,
-      children: [
-        FButton(
-          child: const Text('Left'),
-          onPress: () => showFSheet(
-            context: context,
-            side: FLayout.ltr,
-            builder: (context) => const Form(side: FLayout.ltr),
-          ),
-        ),
-        FButton(
-          child: const Text('Top'),
-          onPress: () => showFSheet(
-            context: context,
-            side: FLayout.ttb,
-            builder: (context) => const Form(side: FLayout.ttb),
-          ),
-        ),
-        FButton(
-          child: const Text('Right'),
-          onPress: () => showFSheet(
-            context: context,
-            side: FLayout.rtl,
-            builder: (context) => const Form(side: FLayout.rtl),
-          ),
-        ),
-        FButton(
-          child: const Text('Bottom'),
-          onPress: () => showFSheet(
-            context: context,
-            side: FLayout.btt,
-            builder: (context) => const Form(side: FLayout.btt),
-          ),
-        ),
-      ],
-    );
-
-    class Form extends StatelessWidget {
-      final FLayout side;
-
-      const Form({required this.side, super.key});
-
-      @override
-      Widget build(BuildContext context) => Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: context.theme.colors.background,
-          border: side.vertical
-              ? Border.symmetric(horizontal: BorderSide(color: context.theme.colors.border))
-              : Border.symmetric(vertical: BorderSide(color: context.theme.colors.border)),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8.0),
-          child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Account',
-                  style: context.theme.typography.xl2.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: context.theme.colors.foreground,
-                    height: 1.5,
-                  ),
-                ),
-                Text(
-                  'Make changes to your account here. Click save when you are done.',
-                  style: context.theme.typography.sm.copyWith(color: context.theme.colors.mutedForeground),
-                ),
-                const SizedBox(height: 8),
-                SizedBox(
-                  width: 450,
-                  child: Column(
-                    children: [
-                      const FTextField(label: Text('Name'), hint: 'John Renalo'),
-                      const SizedBox(height: 10),
-                      const FTextField(label: Text('Email'), hint: 'john@doe.com'),
-                      const SizedBox(height: 16),
-                      FButton(child: const Text('Save'), onPress: () => Navigator.of(context).pop()),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      );
-    }
-    ```
+    <CodeSnippet snippet={defaultSnippet} />
   </Tab>
 </Tabs>
 
@@ -160,76 +70,7 @@ showFSheet(
     <Widget name='modal-sheet' variant='blurred' query={{}} height={500}/>
   </Tab>
   <Tab value="Code">
-    ```dart {4-8} copy
-    FButton(
-      child: const Text('Open'),
-      onPress: () => showFSheet(
-        style: (style) => style.copyWith(
-          barrierFilter: (animation) => ImageFilter.compose(
-            outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
-            inner: ColorFilter.mode(context.theme.colors.barrier, BlendMode.srcOver),
-          ),
-        ),
-        context: context,
-        side: FLayout.ltr,
-        builder: (context) => const Form(side: FLayout.ltr),
-      ),
-    );
-
-    class Form extends StatelessWidget {
-      final FLayout side;
-
-      const Form({required this.side, super.key});
-
-      @override
-      Widget build(BuildContext context) => Container(
-        height: double.infinity,
-        width: double.infinity,
-        decoration: BoxDecoration(
-          color: context.theme.colors.background,
-          border: side.vertical
-              ? Border.symmetric(horizontal: BorderSide(color: context.theme.colors.border))
-              : Border.symmetric(vertical: BorderSide(color: context.theme.colors.border)),
-        ),
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 8.0),
-          child: Center(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Account',
-                  style: context.theme.typography.xl2.copyWith(
-                    fontWeight: FontWeight.w600,
-                    color: context.theme.colors.foreground,
-                    height: 1.5,
-                  ),
-                ),
-                Text(
-                  'Make changes to your account here. Click save when you are done.',
-                  style: context.theme.typography.sm.copyWith(color: context.theme.colors.mutedForeground),
-                ),
-                const SizedBox(height: 8),
-                SizedBox(
-                  width: 450,
-                  child: Column(
-                    children: [
-                      const FTextField(label: Text('Name'), hint: 'John Renalo'),
-                      const SizedBox(height: 10),
-                      const FTextField(label: Text('Email'), hint: 'john@doe.com'),
-                      const SizedBox(height: 16),
-                      FButton(child: const Text('Save'), onPress: () => Navigator.of(context).pop()),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
-        ),
-      );
-    }
-    ```
+    <CodeSnippet snippet={blurredSnippet} />
   </Tab>
 </Tabs>
 
@@ -240,30 +81,6 @@ showFSheet(
     <Widget name='modal-sheet' query={{}} height={400} variant='draggable'/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    FButton(
-      child: const Text('Click me'),
-      onPress: () => showFSheet(
-        context: context,
-        side: FLayout.btt,
-        mainAxisMaxRatio: null,
-        builder: (context) => DraggableScrollableSheet(
-          expand: false,
-          builder: (context, controller) => ScrollConfiguration(
-            // This is required to enable dragging on desktop.
-            // See https://github.com/flutter/flutter/issues/101903 for more information.
-            behavior: ScrollConfiguration.of(context).copyWith(
-              dragDevices: {PointerDeviceKind.touch, PointerDeviceKind.mouse, PointerDeviceKind.trackpad},
-            ),
-            child: FTileGroup.builder(
-              count: 25,
-              scrollController: controller,
-              tileBuilder: (context, index) => FTile(title: Text('Tile $index')),
-            ),
-          ),
-        ),
-      ),
-    );
-    ```
+    <CodeSnippet snippet={draggableSnippet} />
   </Tab>
 </Tabs>

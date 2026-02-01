@@ -1,0 +1,1342 @@
+{
+  "text": "FSelectGroup<String>(\n{{Core}}{{Control}}{{Form}})",
+  "highlights": [],
+  "links": [
+    {
+      "offset": 0,
+      "length": 20,
+      "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/FSelectGroup.html"
+    }
+  ],
+  "tooltips": [
+    {
+      "offset": 0,
+      "length": 20,
+      "snippet": {
+        "text": "FSelectGroup({\n  required List<FSelectGroupItemMixin<String>> children,\n  FMultiValueControl<String>? control,\n  FSelectGroupStyle Function(FSelectGroupStyle)? style,\n  Widget? label,\n  Widget? description,\n  Widget Function(BuildContext, String) errorBuilder =\n      FFormFieldProperties.defaultErrorBuilder,\n  void Function(Set<String>?)? onSaved,\n  void Function()? onReset,\n  String? Function(Set<String>?)? validator,\n  String? forceErrorText,\n  bool enabled = true,\n  AutovalidateMode autovalidateMode = .disabled,\n  Key? key,\n})\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 0,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/FSelectGroup.html"
+          },
+          {
+            "offset": 62,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/FSelectGroup.html"
+          },
+          {
+            "offset": 31,
+            "length": 29,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin-mixin.html"
+          },
+          {
+            "offset": 102,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/FSelectGroup.html"
+          },
+          {
+            "offset": 74,
+            "length": 27,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl-class.html"
+          },
+          {
+            "offset": 160,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/FSelectGroup.html"
+          },
+          {
+            "offset": 113,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupStyle-class.html"
+          },
+          {
+            "offset": 140,
+            "length": 17,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupStyle-class.html"
+          },
+          {
+            "offset": 177,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/FSelectGroup.html"
+          },
+          {
+            "offset": 194,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/FSelectGroup.html"
+          },
+          {
+            "offset": 247,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/FSelectGroup.html"
+          },
+          {
+            "offset": 268,
+            "length": 40,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFormFieldProperties/defaultErrorBuilder.html"
+          },
+          {
+            "offset": 341,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/FSelectGroup.html"
+          },
+          {
+            "offset": 369,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/FSelectGroup.html"
+          },
+          {
+            "offset": 412,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/FSelectGroup.html"
+          },
+          {
+            "offset": 433,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/FSelectGroup.html"
+          },
+          {
+            "offset": 456,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/FSelectGroup.html"
+          },
+          {
+            "offset": 491,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/FSelectGroup.html"
+          },
+          {
+            "offset": 528,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/FSelectGroup.html"
+          }
+        ],
+        "tooltips": [],
+        "container": {
+          "name": "FSelectGroup",
+          "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup-class.html"
+        }
+      }
+    }
+  ],
+  "categories": {
+    "Core": [
+      {
+        "name": "Core",
+        "description": "",
+        "text": "  style: (style) => style,\n  enabled: true,\n  children: [\n    .checkbox(value: 'apple', label: const Text('Apple')),\n    .checkbox(value: 'banana', label: const Text('Banana')),\n    .checkbox(value: 'cherry', label: const Text('Cherry')),\n  ],\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 2,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/style.html"
+          },
+          {
+            "offset": 29,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/enabled.html"
+          },
+          {
+            "offset": 46,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/children.html"
+          },
+          {
+            "offset": 63,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
+          },
+          {
+            "offset": 72,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
+          },
+          {
+            "offset": 88,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
+          },
+          {
+            "offset": 122,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
+          },
+          {
+            "offset": 131,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
+          },
+          {
+            "offset": 148,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
+          },
+          {
+            "offset": 183,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
+          },
+          {
+            "offset": 192,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
+          },
+          {
+            "offset": 209,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 2,
+            "length": 6,
+            "snippet": {
+              "text": "{FSelectGroupStyle Function(FSelectGroupStyle)? style}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 17,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupStyle-class.html"
+                },
+                {
+                  "offset": 28,
+                  "length": 17,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 10,
+            "length": 5,
+            "snippet": {
+              "text": "FSelectGroupStyle style",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 17,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupStyle-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 29,
+            "length": 8,
+            "snippet": {
+              "text": "{bool enabled = true}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 46,
+            "length": 9,
+            "snippet": {
+              "text": "{required List<FSelectGroupItemMixin<String>> children}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 15,
+                  "length": 29,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin-mixin.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 63,
+            "length": 8,
+            "snippet": {
+              "text": "FSelectGroupItemMixin<T> checkbox<T>({\n  required T value,\n  FCheckboxStyle? style,\n  Widget? label,\n  Widget? description,\n  Widget? error,\n  String? semanticsLabel,\n  bool enabled = true,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n})",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 25,
+                  "length": 8,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
+                },
+                {
+                  "offset": 0,
+                  "length": 24,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin-mixin.html"
+                },
+                {
+                  "offset": 61,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckboxStyle-class.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FSelectGroupItemMixin",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin-mixin.html"
+              }
+            }
+          },
+          {
+            "offset": 72,
+            "length": 6,
+            "snippet": {
+              "text": "{required String value}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 88,
+            "length": 6,
+            "snippet": {
+              "text": "{Widget? label}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 122,
+            "length": 8,
+            "snippet": {
+              "text": "FSelectGroupItemMixin<T> checkbox<T>({\n  required T value,\n  FCheckboxStyle? style,\n  Widget? label,\n  Widget? description,\n  Widget? error,\n  String? semanticsLabel,\n  bool enabled = true,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n})",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 25,
+                  "length": 8,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
+                },
+                {
+                  "offset": 0,
+                  "length": 24,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin-mixin.html"
+                },
+                {
+                  "offset": 61,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckboxStyle-class.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FSelectGroupItemMixin",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin-mixin.html"
+              }
+            }
+          },
+          {
+            "offset": 131,
+            "length": 6,
+            "snippet": {
+              "text": "{required String value}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 148,
+            "length": 6,
+            "snippet": {
+              "text": "{Widget? label}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 183,
+            "length": 8,
+            "snippet": {
+              "text": "FSelectGroupItemMixin<T> checkbox<T>({\n  required T value,\n  FCheckboxStyle? style,\n  Widget? label,\n  Widget? description,\n  Widget? error,\n  String? semanticsLabel,\n  bool enabled = true,\n  bool autofocus = false,\n  FocusNode? focusNode,\n  void Function(bool)? onFocusChange,\n})",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 25,
+                  "length": 8,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin/checkbox.html"
+                },
+                {
+                  "offset": 0,
+                  "length": 24,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin-mixin.html"
+                },
+                {
+                  "offset": 61,
+                  "length": 15,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.checkbox/FCheckboxStyle-class.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FSelectGroupItemMixin",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroupItemMixin-mixin.html"
+              }
+            }
+          },
+          {
+            "offset": 192,
+            "length": 6,
+            "snippet": {
+              "text": "{required String value}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 209,
+            "length": 6,
+            "snippet": {
+              "text": "{Widget? label}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ],
+    "Control": [
+      {
+        "name": "`.lifted()`",
+        "description": "Externally controls the select group's values.",
+        "text": "  control: .lifted(\n    value: {},\n    onChange: (values) {},\n  ),\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 12,
+            "length": 6,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.lifted.html"
+          },
+          {
+            "offset": 24,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.lifted.html"
+          },
+          {
+            "offset": 39,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.lifted.html"
+          },
+          {
+            "offset": 2,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/control.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 12,
+            "length": 6,
+            "snippet": {
+              "text": "FMultiValueControl.lifted({\n  required Set<String> value,\n  required void Function(Set<String>) onChange,\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 25,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.lifted.html"
+                },
+                {
+                  "offset": 51,
+                  "length": 5,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.lifted.html"
+                },
+                {
+                  "offset": 96,
+                  "length": 8,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.lifted.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FMultiValueControl",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl-class.html"
+              }
+            }
+          },
+          {
+            "offset": 24,
+            "length": 6,
+            "snippet": {
+              "text": "{required Set<String> value}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 39,
+            "length": 9,
+            "snippet": {
+              "text": "{required void Function(Set<String>) onChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 50,
+            "length": 6,
+            "snippet": {
+              "text": "Set<String> values",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 2,
+            "length": 8,
+            "snippet": {
+              "text": "{FMultiValueControl<String>? control}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 27,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          }
+        ]
+      },
+      {
+        "name": "`.managed()` with internal controller",
+        "description": "Manages the select group state internally for multiple selections.",
+        "text": "  control: .managed(\n    initial: {},\n    min: 0,\n    max: null,\n    onChange: (values) {},\n  ),\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 12,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+          },
+          {
+            "offset": 25,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+          },
+          {
+            "offset": 42,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+          },
+          {
+            "offset": 54,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+          },
+          {
+            "offset": 69,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+          },
+          {
+            "offset": 2,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/control.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 12,
+            "length": 7,
+            "snippet": {
+              "text": "FMultiValueControl.managed({\n  FMultiValueNotifier<String>? controller,\n  Set<String>? initial,\n  int min,\n  int? max,\n  void Function(Set<String>)? onChange,\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 26,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+                },
+                {
+                  "offset": 60,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+                },
+                {
+                  "offset": 31,
+                  "length": 28,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueNotifier-class.html"
+                },
+                {
+                  "offset": 87,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+                },
+                {
+                  "offset": 102,
+                  "length": 3,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+                },
+                {
+                  "offset": 114,
+                  "length": 3,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+                },
+                {
+                  "offset": 149,
+                  "length": 8,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FMultiValueControl",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl-class.html"
+              }
+            }
+          },
+          {
+            "offset": 25,
+            "length": 8,
+            "snippet": {
+              "text": "{Set<String>? initial}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 42,
+            "length": 4,
+            "snippet": {
+              "text": "{int min}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 54,
+            "length": 4,
+            "snippet": {
+              "text": "{int? max}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 69,
+            "length": 9,
+            "snippet": {
+              "text": "{void Function(Set<String>)? onChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 80,
+            "length": 6,
+            "snippet": {
+              "text": "Set<String> values",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 2,
+            "length": 8,
+            "snippet": {
+              "text": "{FMultiValueControl<String>? control}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 27,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          }
+        ]
+      },
+      {
+        "name": "`.managed()` with external controller",
+        "description": "Uses an external controller for multiple selections.",
+        "text": "  control: .managed(\n    // For demonstration purposes only. Don't create a controller inline, store it in a State instead.\n    controller: FMultiValueNotifier<String>(value: {}, min: 0, max: 5),\n    onChange: (values) {},\n  ),\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 12,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+          },
+          {
+            "offset": 128,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+          },
+          {
+            "offset": 140,
+            "length": 27,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueNotifier/FMultiValueNotifier.html"
+          },
+          {
+            "offset": 168,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueNotifier/value.html"
+          },
+          {
+            "offset": 179,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueNotifier/FMultiValueNotifier.html"
+          },
+          {
+            "offset": 187,
+            "length": 3,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueNotifier/FMultiValueNotifier.html"
+          },
+          {
+            "offset": 200,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+          },
+          {
+            "offset": 2,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/control.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 12,
+            "length": 7,
+            "snippet": {
+              "text": "FMultiValueControl.managed({\n  FMultiValueNotifier<String>? controller,\n  Set<String>? initial,\n  int min,\n  int? max,\n  void Function(Set<String>)? onChange,\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 26,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+                },
+                {
+                  "offset": 60,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+                },
+                {
+                  "offset": 31,
+                  "length": 28,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueNotifier-class.html"
+                },
+                {
+                  "offset": 87,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+                },
+                {
+                  "offset": 102,
+                  "length": 3,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+                },
+                {
+                  "offset": 114,
+                  "length": 3,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+                },
+                {
+                  "offset": 149,
+                  "length": 8,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managed.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FMultiValueControl",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl-class.html"
+              }
+            }
+          },
+          {
+            "offset": 128,
+            "length": 11,
+            "snippet": {
+              "text": "{FMultiValueNotifier<String>? controller}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 28,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueNotifier-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 140,
+            "length": 27,
+            "snippet": {
+              "text": "FMultiValueNotifier({Set<String> value = const {}, int min = 0, int? max})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 19,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueNotifier/FMultiValueNotifier.html"
+                },
+                {
+                  "offset": 33,
+                  "length": 5,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueNotifier/FMultiValueNotifier.html"
+                },
+                {
+                  "offset": 55,
+                  "length": 3,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueNotifier/FMultiValueNotifier.html"
+                },
+                {
+                  "offset": 69,
+                  "length": 3,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueNotifier/FMultiValueNotifier.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FMultiValueNotifier",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueNotifier-class.html"
+              }
+            }
+          },
+          {
+            "offset": 168,
+            "length": 6,
+            "snippet": {
+              "text": "{Set<String> value = const {}}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 179,
+            "length": 4,
+            "snippet": {
+              "text": "{int min = 0}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 187,
+            "length": 4,
+            "snippet": {
+              "text": "{int? max}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 200,
+            "length": 9,
+            "snippet": {
+              "text": "{void Function(Set<String>)? onChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 211,
+            "length": 6,
+            "snippet": {
+              "text": "Set<String> values",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 2,
+            "length": 8,
+            "snippet": {
+              "text": "{FMultiValueControl<String>? control}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 27,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          }
+        ]
+      },
+      {
+        "name": "`.managedRadio()` with internal controller",
+        "description": "Single selection with internal controller (radio behavior).",
+        "text": "  control: .managedRadio(\n    initial: null,\n    onChange: (values) {},\n  ),\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 12,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managedRadio.html"
+          },
+          {
+            "offset": 30,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managedRadio.html"
+          },
+          {
+            "offset": 49,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managedRadio.html"
+          },
+          {
+            "offset": 2,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/control.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 12,
+            "length": 12,
+            "snippet": {
+              "text": "FMultiValueControl.managedRadio({\n  FMultiValueNotifier<String>? controller,\n  String? initial,\n  void Function(Set<String>)? onChange,\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 31,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managedRadio.html"
+                },
+                {
+                  "offset": 65,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managedRadio.html"
+                },
+                {
+                  "offset": 36,
+                  "length": 28,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueNotifier-class.html"
+                },
+                {
+                  "offset": 87,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managedRadio.html"
+                },
+                {
+                  "offset": 126,
+                  "length": 8,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managedRadio.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FMultiValueControl",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl-class.html"
+              }
+            }
+          },
+          {
+            "offset": 30,
+            "length": 8,
+            "snippet": {
+              "text": "{String? initial}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 49,
+            "length": 9,
+            "snippet": {
+              "text": "{void Function(Set<String>)? onChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 60,
+            "length": 6,
+            "snippet": {
+              "text": "Set<String> values",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 2,
+            "length": 8,
+            "snippet": {
+              "text": "{FMultiValueControl<String>? control}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 27,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          }
+        ]
+      },
+      {
+        "name": "`.managedRadio()` with external controller",
+        "description": "Single selection with external controller (radio behavior).",
+        "text": "  control: .managedRadio(\n    // For demonstration purposes only. Don't create a controller inline, store it in a State instead.\n    controller: .radio(),\n    onChange: (values) {},\n  ),\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 12,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managedRadio.html"
+          },
+          {
+            "offset": 133,
+            "length": 10,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managedRadio.html"
+          },
+          {
+            "offset": 146,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueNotifier/FMultiValueNotifier.radio.html"
+          },
+          {
+            "offset": 159,
+            "length": 8,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managedRadio.html"
+          },
+          {
+            "offset": 2,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/control.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 12,
+            "length": 12,
+            "snippet": {
+              "text": "FMultiValueControl.managedRadio({\n  FMultiValueNotifier<String>? controller,\n  String? initial,\n  void Function(Set<String>)? onChange,\n})\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 31,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managedRadio.html"
+                },
+                {
+                  "offset": 65,
+                  "length": 10,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managedRadio.html"
+                },
+                {
+                  "offset": 36,
+                  "length": 28,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueNotifier-class.html"
+                },
+                {
+                  "offset": 87,
+                  "length": 7,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managedRadio.html"
+                },
+                {
+                  "offset": 126,
+                  "length": 8,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl/FMultiValueControl.managedRadio.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FMultiValueControl",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl-class.html"
+              }
+            }
+          },
+          {
+            "offset": 133,
+            "length": 11,
+            "snippet": {
+              "text": "{FMultiValueNotifier<String>? controller}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 28,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueNotifier-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 146,
+            "length": 5,
+            "snippet": {
+              "text": "FMultiValueNotifier.radio([String? value])\n",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 0,
+                  "length": 25,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueNotifier/FMultiValueNotifier.radio.html"
+                },
+                {
+                  "offset": 35,
+                  "length": 5,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueNotifier/FMultiValueNotifier.radio.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FMultiValueNotifier",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueNotifier-class.html"
+              }
+            }
+          },
+          {
+            "offset": 159,
+            "length": 9,
+            "snippet": {
+              "text": "{void Function(Set<String>)? onChange}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 170,
+            "length": 6,
+            "snippet": {
+              "text": "Set<String> values",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 2,
+            "length": 8,
+            "snippet": {
+              "text": "{FMultiValueControl<String>? control}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 1,
+                  "length": 27,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FMultiValueControl-class.html"
+                }
+              ],
+              "tooltips": []
+            }
+          }
+        ]
+      }
+    ],
+    "Form": [
+      {
+        "name": "Form",
+        "description": "",
+        "text": "  label: const Text('Select fruits'),\n  description: const Text('Choose your favorite fruits'),\n  onSaved: (values) {},\n  onReset: () {},\n  autovalidateMode: .disabled,\n  forceErrorText: null,\n  validator: (values) => null,\n  errorBuilder: FFormFieldProperties.defaultErrorBuilder,\n",
+        "highlights": [],
+        "links": [
+          {
+            "offset": 2,
+            "length": 5,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/label.html"
+          },
+          {
+            "offset": 40,
+            "length": 11,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/description.html"
+          },
+          {
+            "offset": 98,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/onSaved.html"
+          },
+          {
+            "offset": 122,
+            "length": 7,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/onReset.html"
+          },
+          {
+            "offset": 140,
+            "length": 16,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/autovalidateMode.html"
+          },
+          {
+            "offset": 171,
+            "length": 14,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/forceErrorText.html"
+          },
+          {
+            "offset": 195,
+            "length": 9,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/validator.html"
+          },
+          {
+            "offset": 226,
+            "length": 12,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.widgets.select_group/FSelectGroup/errorBuilder.html"
+          },
+          {
+            "offset": 240,
+            "length": 40,
+            "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFormFieldProperties/defaultErrorBuilder.html"
+          }
+        ],
+        "tooltips": [
+          {
+            "offset": 2,
+            "length": 6,
+            "snippet": {
+              "text": "{Widget? label}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 40,
+            "length": 12,
+            "snippet": {
+              "text": "{Widget? description}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 98,
+            "length": 8,
+            "snippet": {
+              "text": "{void Function(Set<String>?)? onSaved}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 108,
+            "length": 6,
+            "snippet": {
+              "text": "Set<String>? values",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 122,
+            "length": 8,
+            "snippet": {
+              "text": "{void Function()? onReset}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 140,
+            "length": 17,
+            "snippet": {
+              "text": "{AutovalidateMode autovalidateMode = .disabled}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 171,
+            "length": 15,
+            "snippet": {
+              "text": "{String? forceErrorText}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 195,
+            "length": 10,
+            "snippet": {
+              "text": "{String? Function(Set<String>?)? validator}",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 207,
+            "length": 6,
+            "snippet": {
+              "text": "Set<String>? values",
+              "highlights": [],
+              "links": [],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 226,
+            "length": 13,
+            "snippet": {
+              "text": "{\n  Widget Function(BuildContext, String) errorBuilder =\n      FFormFieldProperties.defaultErrorBuilder,\n}",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 63,
+                  "length": 40,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFormFieldProperties/defaultErrorBuilder.html"
+                }
+              ],
+              "tooltips": []
+            }
+          },
+          {
+            "offset": 240,
+            "length": 40,
+            "snippet": {
+              "text": "Widget defaultErrorBuilder(BuildContext _, String error)",
+              "highlights": [],
+              "links": [
+                {
+                  "offset": 7,
+                  "length": 19,
+                  "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFormFieldProperties/defaultErrorBuilder.html"
+                }
+              ],
+              "tooltips": [],
+              "container": {
+                "name": "FFormFieldProperties",
+                "url": "https://pub.dev/documentation/forui/0.17.0/forui.foundation/FFormFieldProperties-mixin.html"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

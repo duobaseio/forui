@@ -7,33 +7,20 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.tile/
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Callout } from 'fumadocs-ui/components/callout';
 import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import tileGroupDefault from '@/snippets/examples/tile-group/default.json';
+import tileGroupLazy from '@/snippets/examples/tile-group/lazy.json';
+import tileGroupMerge from '@/snippets/examples/tile-group/merge.json';
+import tileGroupScrollable from '@/snippets/examples/tile-group/scrollable.json';
+import tileGroupFullDivider from '@/snippets/examples/tile-group/full-divider.json';
+import tileGroupNoDivider from '@/snippets/examples/tile-group/no-divider.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
     <Widget name='tile-group' variant='default' query={{}}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    FTileGroup(
-      label: const Text('Settings'),
-      description: const Text('Personalize your experience'),
-      children: [
-        FTile(
-          prefix: const Icon(FIcons.user),
-          title: const Text('Personalization'),
-          suffix: const Icon(FIcons.chevronRight),
-          onPress: () {},
-        ),
-        FTile(
-          prefix: const Icon(FIcons.wifi),
-          title: const Text('WiFi'),
-          details: const Text('Duobase (5G)'),
-          suffix: const Icon(FIcons.chevronRight),
-          onPress: () {},
-        ),
-      ],
-    );
-    ```
+    <CodeSnippet snippet={tileGroupDefault} />
   </Tab>
 </Tabs>
 
@@ -119,46 +106,7 @@ FTileGroup.merge(
     <Widget name='tile-group' variant='scrollable' query={{}} height={300}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    FTileGroup(
-      label: const Text('Settings'),
-      description: const Text('Personalize your experience'),
-      maxHeight: 200,
-      children: [
-        FTile(
-          prefix: const Icon(FIcons.user),
-          title: const Text('Personalization'),
-          suffix: const Icon(FIcons.chevronRight),
-          onPress: () {},
-        ),
-        FTile(
-          prefix: const Icon(FIcons.mail),
-          title: const Text('Mail'),
-          suffix: const Icon(FIcons.chevronRight),
-          onPress: () {},
-        ),
-        FTile(
-          prefix: const Icon(FIcons.wifi),
-          title: const Text('WiFi'),
-          details: const Text('Duobase (5G)'),
-          suffix: const Icon(FIcons.chevronRight),
-          onPress: () {},
-        ),
-        FTile(
-          prefix: const Icon(FIcons.alarmClock),
-          title: const Text('Alarm Clock'),
-          suffix: const Icon(FIcons.chevronRight),
-          onPress: () {},
-        ),
-        FTile(
-          prefix: const Icon(FIcons.qrCode),
-          title: const Text('QR code'),
-          suffix: const Icon(FIcons.chevronRight),
-          onPress: () {},
-        ),
-      ],
-    );
-    ```
+    <CodeSnippet snippet={tileGroupScrollable} />
   </Tab>
 </Tabs>
 
@@ -169,19 +117,7 @@ FTileGroup.merge(
     <Widget name='tile-group' variant='lazy' query={{}} height={300}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    FTileGroup.builder(
-      label: const Text('Settings'),
-      description: const Text('Personalize your experience'),
-      maxHeight: 200,
-      count: 200,
-      tileBuilder: (context, index) => FTile(
-        title: Text('Tile $index'),
-        suffix: const Icon(FIcons.chevronRight),
-        onPress: () {},
-      ),
-    );
-    ```
+    <CodeSnippet snippet={tileGroupLazy} />
   </Tab>
 </Tabs>
 
@@ -195,55 +131,7 @@ several sections.
     <Widget name='tile-group' variant='merge' query={{}} height={300}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    class MergeTileGroupExample extends StatefulWidget {
-      const MergeTileGroupExample({super.key});
-
-      @override
-      State<MergeTileGroupExample> createState() => _MergeTileGroupExampleState();
-    }
-
-    class _MergeTileGroupExampleState extends State<MergeTileGroupExample> {
-      final _controller = FMultiValueNotifier.radio('List');
-
-      @override
-      void dispose() {
-        _controller.dispose();
-        super.dispose();
-      }
-
-      @override
-      Widget build(BuildContext context) => FTileGroup.merge(
-        label: const Text('Settings'),
-        children: [
-          FTileGroup(
-            children: [
-              FTile(
-                prefix: const Icon(FIcons.user),
-                title: const Text('Personalization'),
-                suffix: const Icon(FIcons.chevronRight),
-                onPress: () {},
-              ),
-              FTile(
-                prefix: const Icon(FIcons.wifi),
-                title: const Text('WiFi'),
-                details: const Text('Duobase (5G)'),
-                suffix: const Icon(FIcons.chevronRight),
-                onPress: () {},
-              ),
-            ],
-          ),
-          FSelectTileGroup<String>(
-            control: FMultiValueControl.managed(controller: _controller),
-            children: const [
-              FSelectTile(title: Text('List View'), value: 'List'),
-              FSelectTile(title: Text('Grid View'), value: 'Grid'),
-            ],
-          ),
-        ],
-      );
-    }
-    ```
+    <CodeSnippet snippet={tileGroupMerge} />
   </Tab>
 </Tabs>
 
@@ -256,27 +144,7 @@ several sections.
     <Widget name='tile-group' variant='default' query={{divider: 'full'}}/>
   </Tab>
   <Tab value="Code">
-    ```dart {3} copy
-    FTileGroup(
-      label: const Text('Settings'),
-      divider: FItemDivider.full,
-      children: [
-        FTile(
-          prefix: const Icon(FIcons.user),
-          title: const Text('Personalization'),
-          suffix: const Icon(FIcons.chevronRight),
-          onPress: () {},
-        ),
-        FTile(
-          prefix: const Icon(FIcons.wifi),
-          title: const Text('WiFi'),
-          details: const Text('Duobase (5G)'),
-          suffix: const Icon(FIcons.chevronRight),
-          onPress: () {},
-        ),
-      ],
-    );
-    ```
+    <CodeSnippet snippet={tileGroupFullDivider} />
   </Tab>
 </Tabs>
 
@@ -287,26 +155,6 @@ several sections.
     <Widget name='tile-group' variant='default' query={{divider: 'none'}}/>
   </Tab>
   <Tab value="Code">
-    ```dart {3} copy
-    FTileGroup(
-      label: const Text('Settings'),
-      divider: FItemDivider.none,
-      children: [
-        FTile(
-          prefix: const Icon(FIcons.user),
-          title: const Text('Personalization'),
-          suffix: const Icon(FIcons.chevronRight),
-          onPress: () {},
-        ),
-        FTile(
-          prefix: const Icon(FIcons.wifi),
-          title: const Text('WiFi'),
-          details: const Text('Duobase (5G)'),
-          suffix: const Icon(FIcons.chevronRight),
-          onPress: () {},
-        ),
-      ],
-    );
-    ```
+    <CodeSnippet snippet={tileGroupNoDivider} />
   </Tab>
 </Tabs>

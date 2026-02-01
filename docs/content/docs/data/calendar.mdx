@@ -7,6 +7,11 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.calendar/
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Callout } from 'fumadocs-ui/components/callout';
 import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import defaultSnippet from '@/snippets/examples/calendar/default.json';
+import datesSnippet from '@/snippets/examples/calendar/dates.json';
+import unselectableSnippet from '@/snippets/examples/calendar/unselectable.json';
+import rangeSnippet from '@/snippets/examples/calendar/range.json';
 
 The calendar supports swipe gestures on mobile platforms, allowing users to navigate between pages by swiping left or right.
 
@@ -26,13 +31,7 @@ controls the date selection behavior, including single date, multiple dates, and
         <Widget name='calendar' query={{}} height={500}/>
     </Tab>
     <Tab value="Code">
-        ```dart copy
-        FCalendar(
-          control: FCalendarControl.managedDate(),
-          start: DateTime(2000),
-          end: DateTime(2040),
-        );
-        ```
+        <CodeSnippet snippet={defaultSnippet} />
     </Tab>
 </Tabs>
 
@@ -80,13 +79,7 @@ FCalendar(
         <Widget name='calendar' query={{}} height={500}/>
     </Tab>
     <Tab value="Code">
-        ```dart {2} copy
-        FCalendar(
-          control: FCalendarControl.managedDate(),
-          start: DateTime(2000),
-          end: DateTime(2040),
-        );
-        ```
+        <CodeSnippet snippet={defaultSnippet} />
     </Tab>
 </Tabs>
 
@@ -97,16 +90,7 @@ FCalendar(
         <Widget name='calendar' variant='dates' query={{}} height={500}/>
     </Tab>
     <Tab value="Code">
-        ```dart {2-4} copy
-        FCalendar(
-          control: FCalendarControl.managedDates(
-            initial: {DateTime(2024, 7, 17), DateTime(2024, 7, 20)},
-          ),
-          start: DateTime(2000),
-          today: DateTime(2024, 7, 15),
-          end: DateTime(2030),
-        );
-        ```
+        <CodeSnippet snippet={datesSnippet} />
     </Tab>
 </Tabs>
 
@@ -117,17 +101,7 @@ FCalendar(
         <Widget name='calendar' variant='unselectable' query={{}} height={500}/>
     </Tab>
     <Tab value="Code">
-        ```dart {4} copy
-        FCalendar(
-          control: FCalendarControl.managedDates(
-            initial: {DateTime(2024, 7, 17), DateTime(2024, 7, 20)},
-            selectable: (date) => !{DateTime.utc(2024, 7, 18), DateTime.utc(2024, 7, 19)}.contains(date),
-          ),
-          start: DateTime(2000),
-          today: DateTime(2024, 7, 15),
-          end: DateTime(2030),
-        );
-        ```
+        <CodeSnippet snippet={unselectableSnippet} />
     </Tab>
 </Tabs>
 
@@ -138,15 +112,6 @@ FCalendar(
         <Widget name='calendar' variant='range' query={{}} height={500}/>
     </Tab>
     <Tab value="Code">
-        ```dart {2-4} copy
-        FCalendar(
-          control: FCalendarControl.managedRange(
-            initial: (DateTime(2024, 7, 17), DateTime(2024, 7, 20)),
-          ),
-          start: DateTime(2000),
-          today: DateTime(2024, 7, 15),
-          end: DateTime(2030),
-        );
-        ```
+        <CodeSnippet snippet={rangeSnippet} />
     </Tab>
 </Tabs>

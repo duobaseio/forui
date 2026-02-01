@@ -7,6 +7,13 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.date_fiel
 import { Callout } from 'fumadocs-ui/components/callout';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import defaultSnippet from '@/snippets/examples/date-field/default.json';
+import calendarSnippet from '@/snippets/examples/date-field/calendar.json';
+import inputSnippet from '@/snippets/examples/date-field/input.json';
+import clearableSnippet from '@/snippets/examples/date-field/clearable.json';
+import validatorSnippet from '@/snippets/examples/date-field/validator.json';
+import formSnippet from '@/snippets/examples/date-field/form.json';
 
 <Callout type="info">
     It is recommended to use [FDateField.calendar](#fdatefieldcalendar) on touch devices and
@@ -35,12 +42,7 @@ The input field does not support the following locales that use non-western nume
         <Widget name='date-field' query={{}} height={500}/>
     </Tab>
     <Tab value="Code">
-        ```dart copy
-        FDateField(
-          label: const Text('Appointment Date'),
-          description: const Text('Select a date for your appointment'),
-        );
-        ```
+        <CodeSnippet snippet={defaultSnippet} />
     </Tab>
 </Tabs>
 
@@ -166,12 +168,7 @@ FDateField.input(
         <Widget name='date-field' variant='calendar' query={{}} height={500}/>
     </Tab>
     <Tab value="Code">
-        ```dart copy
-        FDateField.calendar(
-          label: const Text('Appointment Date'),
-          description: const Text('Select a date for your appointment'),
-        );
-        ```
+        <CodeSnippet snippet={calendarSnippet} />
     </Tab>
 </Tabs>
 
@@ -182,12 +179,7 @@ FDateField.input(
         <Widget name='date-field' variant='input' query={{}}/>
     </Tab>
     <Tab value="Code">
-        ```dart copy
-        FDateField.input(
-          label: const Text('Appointment Date'),
-          description: const Text('Select a date for your appointment'),
-        );
-        ```
+        <CodeSnippet snippet={inputSnippet} />
     </Tab>
 </Tabs>
 
@@ -198,14 +190,7 @@ FDateField.input(
         <Widget name='date-field' variant='clearable' query={{}} height={500}/>
     </Tab>
     <Tab value="Code">
-        ```dart {5} copy
-        FDateField(
-          control: FDateFieldControl.managed(initial: DateTime.now()),
-          label: const Text('Appointment Date'),
-          description: const Text('Select a date for your appointment'),
-          clearable: true,
-        );
-        ```
+        <CodeSnippet snippet={clearableSnippet} />
     </Tab>
 
 </Tabs>
@@ -217,15 +202,7 @@ FDateField.input(
         <Widget name='date-field' variant='validator' query={{}} height={500}/>
     </Tab>
     <Tab value="Code">
-        ```dart {3} copy
-        FDateField(
-          control: FDateFieldControl.managed(
-            validator: (date) => date?.weekday == 6 || date?.weekday == 7 ? 'Date cannot be a weekend.' : null,
-          ),
-          label: const Text('Appointment Date'),
-          description: const Text('Select a date for your appointment'),
-        );
-        ```
+        <CodeSnippet snippet={validatorSnippet} />
     </Tab>
 
 </Tabs>
@@ -237,67 +214,7 @@ FDateField.input(
         <Widget name='date-field' variant='form' query={{}} height={600}/>
     </Tab>
     <Tab value="Code">
-        ```dart copy
-        class FormDateFieldPage extends StatefulWidget {
-          @override
-          State<FormDateFieldPage> createState() => _FormDateFieldPageState();
-        }
-
-        class _FormDateFieldPageState extends State<FormDateFieldPage> {
-          final _key = GlobalKey<FormState>();
-          late final _startController = FDateFieldController(
-            validator: (date) => switch (date) {
-              null => 'Please select a start date',
-              final date when date.isBefore(DateTime.now()) => 'Start date must be in the future',
-              _ => null,
-            },
-          );
-
-          @override
-          void dispose() {
-            _startController.dispose();
-            super.dispose();
-          }
-
-          @override
-          Widget build(BuildContext context) => Form(
-            key: _key,
-            child: Column(
-              children: [
-                FDateField(
-                  control: FDateFieldControl.managed(controller: _startController),
-                  label: const Text('Start Date'),
-                  description: const Text('Select a start date'),
-                  autovalidateMode: AutovalidateMode.disabled,
-                ),
-                const SizedBox(height: 20),
-                FDateField(
-                  control: FDateFieldControl.managed(
-                    validator: (date) => switch (date) {
-                      null => 'Please select an end date',
-                      final date when _startController.value != null && date.isBefore(_startController.value!) =>
-                        'End date must be after start date',
-                      _ => null,
-                    },
-                  ),
-                  label: const Text('End Date'),
-                  description: const Text('Select an end date'),
-                  autovalidateMode: AutovalidateMode.disabled,
-                ),
-                const SizedBox(height: 25),
-                FButton(
-                  child: const Text('Submit'),
-                  onPress: () {
-                    if (_key.currentState!.validate()) {
-                      // Form is valid, process the dates
-                    }
-                  },
-                ),
-              ],
-            ),
-          );
-        }
-        ```
+        <CodeSnippet snippet={formSnippet} />
     </Tab>
 
 </Tabs>

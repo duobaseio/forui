@@ -3,6 +3,11 @@ title: Responsive
 description: Responsive breakpoints based on Tailwind CSS for adaptive layouts.
 ---
 
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import usageSnippet from '@/snippets/snippets/responsive/usage.json';
+import customBreakpointsSnippet from '@/snippets/snippets/responsive/custom_breakpoints.json';
+import customBreakpointsUsageSnippet from '@/snippets/snippets/responsive/custom_breakpoints_usage.json';
+
 Forui contains responsive breakpoints based on [Tailwind CSS](https://tailwindcss.com/docs/responsive-design).
 
 ## Predefined Breakpoints
@@ -20,43 +25,14 @@ devices are typically larger than `md` (768) and `lg` (1024) respectively.
 
 ## Usage
 
-```dart copy
-@override
-Widget build(BuildContext context) {
-  final breakpoints = context.theme.breakpoints; // FBreakpoints
-  final width = MediaQuery.sizeOf(context).width; // double
-
-  return switch (width) {
-    _ when width < breakpoints.sm => MobileWidget(),
-    _ when width < breakpoints.lg => TabletWidget(),
-    _ => DesktopWidget(),
-  };
-}
-```
+<CodeSnippet snippet={usageSnippet} />
 
 ## Custom Breakpoints
 
 Additional breakpoints can be added via an extension on `FBreakpoints`:
 
-```dart copy
-extension CustomBreakpoints on FBreakpoints {
-  double get custom => 42;
-}
-```
+<CodeSnippet snippet={customBreakpointsSnippet} />
 
 After which, the custom breakpoint can be accessed like so:
 
-```dart {7} copy
-@override
-Widget build(BuildContext context) {
-  final breakpoints = context.theme.breakpoints; // FBreakpoints
-  final width = MediaQuery.sizeOf(context).width; // double
-
-  return switch (width) {
-    _ when width < breakpoints.custom => SuperSmallWidget(),
-    _ when width < breakpoints.sm => MobileWidget(),
-    _ when width < breakpoints.lg => TabletWidget(),
-    _ => DesktopWidget(),
-  };
-}
-```
+<CodeSnippet snippet={customBreakpointsUsageSnippet} />

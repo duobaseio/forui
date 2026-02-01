@@ -6,6 +6,22 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.slider/
 
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import defaultSnippet from '@/snippets/examples/slider/default.json';
+import labelledSnippet from '@/snippets/examples/slider/labelled.json';
+import disabledSnippet from '@/snippets/examples/slider/disabled.json';
+import errorSnippet from '@/snippets/examples/slider/error.json';
+import tooltipSnippet from '@/snippets/examples/slider/tooltip.json';
+import marksSnippet from '@/snippets/examples/slider/marks.json';
+import discreteSnippet from '@/snippets/examples/slider/discrete.json';
+import rangeSnippet from '@/snippets/examples/slider/range.json';
+import boundariesSnippet from '@/snippets/examples/slider/boundaries.json';
+import verticalSnippet from '@/snippets/examples/slider/vertical.json';
+import slideSnippet from '@/snippets/examples/slider/slide.json';
+import slideThumbSnippet from '@/snippets/examples/slider/slide-thumb.json';
+import tapSnippet from '@/snippets/examples/slider/tap.json';
+import tapAndSlideThumbSnippet from '@/snippets/examples/slider/tap-and-slide-thumb.json';
+import formSnippet from '@/snippets/examples/slider/form.json';
 
 ## CLI
 
@@ -22,11 +38,7 @@ dart run forui style create slider
     <Widget name='slider'/>
   </Tab>
   <Tab value="Code">
-        ```dart copy
-        FSlider(
-          control: FSliderControl.managedContinuous(initial: FSliderValue(max: 0.6)),
-        );
-        ```
+    <CodeSnippet snippet={defaultSnippet} />
   </Tab>
 </Tabs>
 
@@ -62,13 +74,7 @@ FSlider(
     <Widget name='slider' query={{label: 'Volume', description: 'Adjust the volume by dragging the slider.'}}/>
   </Tab>
   <Tab value="Code">
-        ```dart {3-4} copy
-        FSlider(
-          control: FSliderControl.managedContinuous(initial: FSliderValue(max: 0.6)),
-          label: const Text('Volume'),
-          description: const Text('Adjust the volume by dragging the slider.'),
-        );
-        ```
+    <CodeSnippet snippet={labelledSnippet} />
   </Tab>
 </Tabs>
 
@@ -79,14 +85,7 @@ FSlider(
     <Widget name='slider' query={{enabled: 'false', label: 'Volume', description: 'Adjust the volume by dragging the slider.'}}/>
   </Tab>
   <Tab value="Code">
-        ```dart {5} copy
-        FSlider(
-          control: FSliderControl.managedContinuous(initial: FSliderValue(max: 0.6)),
-          label: const Text('Volume'),
-          description: const Text('Adjust the volume by dragging the slider.'),
-          enabled: false,
-        );
-        ```
+    <CodeSnippet snippet={disabledSnippet} />
   </Tab>
 </Tabs>
 
@@ -97,14 +96,7 @@ FSlider(
     <Widget name='slider' query={{label: 'Volume', description: 'Adjust the volume by dragging the slider.', error: 'Volume is too high.'}}/>
   </Tab>
   <Tab value="Code">
-        ```dart {5} copy
-        FSlider(
-          control: FSliderControl.managedContinuous(initial: FSliderValue(max: 0.6)),
-          label: const Text('Volume'),
-          description: const Text('Adjust the volume by dragging the slider.'),
-          forceErrorText: 'Volume is too high.',
-        );
-        ```
+    <CodeSnippet snippet={errorSnippet} />
   </Tab>
 </Tabs>
 
@@ -115,15 +107,7 @@ FSlider(
     <Widget name='slider' variant='tooltip'/>
   </Tab>
   <Tab value="Code">
-        ```dart {3-5} copy
-        FSlider(
-          control: FSliderControl.managedContinuous(initial: FSliderValue(max: 0.6)),
-          tooltipBuilder: (style, value) {
-            final hex = (value * 100).round().toRadixString(16).padLeft(2, '0');
-            return Text('0x$hex');
-          },
-        );
-        ```
+    <CodeSnippet snippet={tooltipSnippet} />
   </Tab>
 </Tabs>
 
@@ -139,18 +123,7 @@ Marks provide visual reference points on the slider track. Each mark consists of
     <Widget name='slider' variant='marks'/>
   </Tab>
   <Tab value="Code">
-        ```dart {3-8} copy
-        FSlider(
-          control: FSliderControl.managedContinuous(initial: FSliderValue(max: 0.35)),
-          marks: const [
-            FSliderMark(value: 0, label: Text('0%')),
-            FSliderMark(value: 0.25, tick: false),
-            FSliderMark(value: 0.5),
-            FSliderMark(value: 0.75, tick: false),
-            FSliderMark(value: 1, label: Text('100%')),
-          ],
-        );
-        ```
+    <CodeSnippet snippet={marksSnippet} />
   </Tab>
 </Tabs>
 
@@ -163,18 +136,7 @@ Marks provide visual reference points on the slider track. Each mark consists of
     <Widget name='slider' variant='discrete'/>
   </Tab>
   <Tab value="Code">
-        ```dart {3-8} copy
-        FSlider(
-          control: FSliderControl.managedDiscrete(initial: FSliderValue(max: 0.25)),
-          marks: const [
-            FSliderMark(value: 0, label: Text('0%')),
-            FSliderMark(value: 0.25, tick: false),
-            FSliderMark(value: 0.5),
-            FSliderMark(value: 0.75, tick: false),
-            FSliderMark(value: 1, label: Text('100%')),
-          ],
-        );
-        ```
+    <CodeSnippet snippet={discreteSnippet} />
   </Tab>
 </Tabs>
 
@@ -185,11 +147,7 @@ Marks provide visual reference points on the slider track. Each mark consists of
     <Widget name='slider' variant='range'/>
   </Tab>
   <Tab value="Code">
-        ```dart {2} copy
-        FSlider(
-          control: FSliderControl.managedContinuousRange(initial: FSliderValue(min: 0.25, max: 0.75)),
-        );
-        ```
+    <CodeSnippet snippet={rangeSnippet} />
   </Tab>
 </Tabs>
 
@@ -200,11 +158,7 @@ Marks provide visual reference points on the slider track. Each mark consists of
     <Widget name='slider' query={{extent: 'true'}}/>
   </Tab>
   <Tab value="Code">
-        ```dart {2} copy
-        FSlider(
-          control: FSliderControl.managedContinuous(initial: FSliderValue(max: 0.6, constraints: (min: 0.25, max: 0.75))),
-        );
-        ```
+    <CodeSnippet snippet={boundariesSnippet} />
   </Tab>
 </Tabs>
 
@@ -215,22 +169,7 @@ Marks provide visual reference points on the slider track. Each mark consists of
     <Widget name='slider' variant='vertical' height={500}/>
   </Tab>
   <Tab value="Code">
-        ```dart {5} copy
-        FSlider(
-          control: FSliderControl.managedContinuous(initial: FSliderValue(max: 0.35)),
-          label: const Text('Volume'),
-          description: const Text('Adjust the volume by dragging the slider.'),
-          layout: FLayout.btt,
-          trackMainAxisExtent: 350,
-          marks: const [
-            FSliderMark(value: 0, label: Text('0%')),
-            FSliderMark(value: 0.25, tick: false),
-            FSliderMark(value: 0.5, label: Text('50%')),
-            FSliderMark(value: 0.75, tick: false),
-            FSliderMark(value: 1, label: Text('100%')),
-          ],
-        );
-        ```
+    <CodeSnippet snippet={verticalSnippet} />
   </Tab>
 </Tabs>
 
@@ -245,14 +184,7 @@ Slide anywhere on the track or thumb to select a value.
     <Widget name='slider' query={{interaction: 'slide'}}/>
   </Tab>
   <Tab value="Code">
-        ```dart {4} copy
-        FSlider(
-          control: FSliderControl.managedContinuous(
-            initial: FSliderValue(max: 0.6),
-            interaction: FSliderInteraction.slide,
-          ),
-        );
-        ```
+    <CodeSnippet snippet={slideSnippet} />
   </Tab>
 </Tabs>
 
@@ -265,14 +197,7 @@ Slide the thumb to select a value.
     <Widget name='slider' query={{interaction: 'slideThumb'}}/>
   </Tab>
   <Tab value="Code">
-        ```dart {4} copy
-        FSlider(
-          control: FSliderControl.managedContinuous(
-            initial: FSliderValue(max: 0.6),
-            interaction: FSliderInteraction.slideThumb,
-          ),
-        );
-        ```
+    <CodeSnippet snippet={slideThumbSnippet} />
   </Tab>
 </Tabs>
 
@@ -285,14 +210,7 @@ Tap anywhere on the track to select a value.
     <Widget name='slider' query={{interaction: 'tap'}}/>
   </Tab>
   <Tab value="Code">
-        ```dart {4} copy
-        FSlider(
-          control: FSliderControl.managedContinuous(
-            initial: FSliderValue(max: 0.6),
-            interaction: FSliderInteraction.tap,
-          ),
-        );
-        ```
+    <CodeSnippet snippet={tapSnippet} />
   </Tab>
 </Tabs>
 
@@ -305,14 +223,7 @@ Tap anywhere or slide the thumb to select a value.
     <Widget name='slider' query={{interaction: 'tapAndSlideThumb'}}/>
   </Tab>
   <Tab value="Code">
-        ```dart {4} copy
-        FSlider(
-          control: FSliderControl.managedContinuous(
-            initial: FSliderValue(max: 0.6),
-            interaction: FSliderInteraction.tapAndSlideThumb,
-          ),
-        );
-        ```
+    <CodeSnippet snippet={tapAndSlideThumbSnippet} />
   </Tab>
 </Tabs>
 
@@ -323,51 +234,6 @@ Tap anywhere or slide the thumb to select a value.
     <Widget name='slider' variant='form' height='500'/>
   </Tab>
   <Tab value="Code">
-        ```dart copy
-        class SliderForm extends StatefulWidget {
-          @override
-          State<SliderForm> createState() => _SliderFormState();
-        }
-
-        class _SliderFormState extends State<SliderForm> {
-          final _key = GlobalKey<FormState>();
-
-          @override
-          Widget build(BuildContext context) => Form(
-            key: _key,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                FSlider(
-                  control: FSliderControl.managedContinuous(initial: FSliderValue(max: 0.35)),
-                  label: const Text('Brightness'),
-                  description: const Text('Adjust the brightness level.'),
-                  marks: const [
-                    FSliderMark(value: 0, label: Text('0%')),
-                    FSliderMark(value: 0.25, tick: false),
-                    FSliderMark(value: 0.5, label: Text('50%')),
-                    FSliderMark(value: 0.75, tick: false),
-                    FSliderMark(value: 1, label: Text('100%')),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                FButton(
-                  child: const Text('Save'),
-                  onPress: () {
-                    if (!_key.currentState!.validate()) {
-                      // Handle errors here.
-                      return;
-                    }
-
-                    _key.currentState!.save();
-                    // Do something.
-                  },
-                ),
-              ],
-            ),
-          );
-        }
-        ```
+    <CodeSnippet snippet={formSnippet} />
   </Tab>
 </Tabs>

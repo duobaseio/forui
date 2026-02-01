@@ -7,6 +7,13 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.text_fiel
 import { Callout } from 'fumadocs-ui/components/callout';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import defaultSnippet from '@/snippets/examples/text-field/default.json';
+import disabledSnippet from '@/snippets/examples/text-field/disabled.json';
+import clearableSnippet from '@/snippets/examples/text-field/clearable.json';
+import emailSnippet from '@/snippets/examples/text-field/email.json';
+import passwordSnippet from '@/snippets/examples/text-field/password.json';
+import multilineSnippet from '@/snippets/examples/text-field/multiline.json';
 
 <Callout type="info">
   See [`FTextFormField`](/docs/form/text-form-field) for using text fields in forms.
@@ -17,14 +24,7 @@ import { Widget } from '@/components/demo/widget';
     <Widget name='text-field' query={{enabled: 'true'}}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    FTextField(
-      enabled: true,
-      label: const Text('Username'),
-      hint: 'JaneDoe',
-      description: const Text('Please enter your username.'),
-    );
-    ```
+    <CodeSnippet snippet={defaultSnippet} />
   </Tab>
 </Tabs>
 
@@ -67,14 +67,7 @@ FTextField(
     <Widget name='text-field' query={{enabled: 'true'}}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    FTextField(
-      enabled: true,
-      label: const Text('Username'),
-      hint: 'JaneDoe',
-      description: const Text('Please enter your username.'),
-    );
-    ```
+    <CodeSnippet snippet={defaultSnippet} />
   </Tab>
 </Tabs>
 
@@ -85,14 +78,7 @@ FTextField(
     <Widget name='text-field' query={{enabled: 'false'}}/>
   </Tab>
   <Tab value="Code">
-    ```dart {2} copy
-    FTextField(
-      enabled: false,
-      label: const Text('Username'),
-      hint: 'JaneDoe',
-      description: const Text('Please enter your username.'),
-    );
-    ```
+    <CodeSnippet snippet={disabledSnippet} />
   </Tab>
 </Tabs>
 
@@ -103,15 +89,7 @@ FTextField(
     <Widget name='text-field' variant='clearable' query={{}}/>
   </Tab>
   <Tab value="Code">
-    ```dart {2, 6} copy
-    FTextField(
-      control: const FTextFieldControl.managed(initial: TextEditingValue(text: 'MyUsername')),
-      label: const Text('Username'),
-      hint: 'JaneDoe',
-      description: const Text('Please enter your username.'),
-      clearable: (value) => value.text.isNotEmpty,
-    );
-    ```
+    <CodeSnippet snippet={clearableSnippet} />
   </Tab>
 </Tabs>
 
@@ -124,11 +102,7 @@ FTextField(
     <Widget name='text-field' variant='email' query={{}}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    FTextField.email(
-      control: FTextFieldControl.managed(initial: TextEditingValue(text: 'jane@doe.com')),
-    );
-    ```
+    <CodeSnippet snippet={emailSnippet} />
   </Tab>
 </Tabs>
 
@@ -139,11 +113,7 @@ FTextField(
     <Widget name='text-field' variant='password' query={{}}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    FTextField.password(
-      control: FTextFieldControl.managed(initial: TextEditingValue(text: 'My password')),
-    );
-    ```
+    <CodeSnippet snippet={passwordSnippet} />
   </Tab>
 </Tabs>
 
@@ -154,8 +124,6 @@ FTextField(
     <Widget name='text-field' variant='multiline' query={{}}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    FTextField.multiline(label: const Text('Leave a review'), maxLines: 4);
-    ```
+    <CodeSnippet snippet={multilineSnippet} />
   </Tab>
 </Tabs>

@@ -7,6 +7,8 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.foundation/FTappa
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Callout } from 'fumadocs-ui/components/callout';
 import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import tappableDefault from '@/snippets/examples/tappable/default.json';
 
 <Callout type="info">
   This widget is typically used to create other high-level widgets, e.g., [button](../form/button). You should prefer
@@ -18,23 +20,7 @@ import { Widget } from '@/components/demo/widget';
     <Widget name='tappable' query={{}} height={300}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    FTappable(
-      builder: (context, states, child) => Container(
-        decoration: BoxDecoration(
-          color: (states.contains(WidgetState.hovered) || states.contains(WidgetState.pressed))
-              ? context.theme.colors.secondary
-              : context.theme.colors.background,
-          borderRadius: BorderRadius.circular(8),
-          border: Border.all(color: context.theme.colors.border),
-        ),
-        padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 12),
-        child: child!,
-      ),
-      child: const Text('Tappable'),
-      onPress: () {},
-    );
-    ```
+    <CodeSnippet snippet={tappableDefault} />
   </Tab>
 </Tabs>
 

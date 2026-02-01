@@ -6,15 +6,15 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.progress/
 
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import defaultSnippet from '@/snippets/examples/progress/default.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
     <Widget name='progress'/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    const FProgress();
-    ```
+    <CodeSnippet snippet={defaultSnippet} />
   </Tab>
 </Tabs>
 

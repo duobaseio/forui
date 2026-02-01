@@ -6,6 +6,11 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.time_pick
 
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import defaultSnippet from '@/snippets/examples/time-picker/default.json';
+import hour24Snippet from '@/snippets/examples/time-picker/hour24.json';
+import intervalSnippet from '@/snippets/examples/time-picker/interval.json';
+import animatedSnippet from '@/snippets/examples/time-picker/animated.json';
 
 The picker supports arrow key navigation:
 
@@ -19,12 +24,7 @@ Recommended for touch devices.
         <Widget name='time-picker' query={{}}/>
     </Tab>
     <Tab value="Code">
-        ```dart copy
-        FTimePicker(
-          control: FTimePickerControl.managed(initial: FTime.now()),
-          hour24: false,
-        );
-        ```
+        <CodeSnippet snippet={defaultSnippet} />
     </Tab>
 </Tabs>
 
@@ -59,12 +59,7 @@ FTimePicker(
         <Widget name='time-picker' query={{hour24: 'true'}}/>
     </Tab>
     <Tab value="Code">
-        ```dart {3} copy
-        FTimePicker(
-          control: FTimePickerControl.managed(initial: FTime.now()),
-          hour24: true,
-        );
-        ```
+        <CodeSnippet snippet={hour24Snippet} />
     </Tab>
 
 </Tabs>
@@ -76,13 +71,7 @@ FTimePicker(
         <Widget name='time-picker' variant='interval'/>
     </Tab>
     <Tab value="Code">
-        ```dart {3-4} copy
-        FTimePicker(
-          control: FTimePickerControl.managed(initial: FTime.now()),
-          hourInterval: 2,
-          minuteInterval: 5,
-        );
-        ```
+        <CodeSnippet snippet={intervalSnippet} />
     </Tab>
 
 </Tabs>
@@ -94,38 +83,7 @@ FTimePicker(
         <Widget name='time-picker' variant='animated' height={500}/>
     </Tab>
     <Tab value="Code">
-        ```dart copy
-        class AnimatedTimePickerPage extends StatefulWidget {
-          @override
-          State<AnimatedTimePickerPage> createState() => _AnimatedTimePickerPageState();
-        }
-
-        class _AnimatedTimePickerPageState extends State<AnimatedTimePickerPage> {
-          static final _random = Random();
-          final _controller = FTimePickerController(time: FTime.now());
-
-          @override
-          void dispose() {
-            _controller.dispose();
-            super.dispose();
-          }
-
-          @override
-          Widget build(BuildContext context) => Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              SizedBox(
-                height: 300,
-                child: FTimePicker(control: FTimePickerControl.managed(controller: _controller)),
-              ),
-              FButton(
-                child: const Text('Funny button'),
-                onPress: () => _controller.animateTo(FTime(_random.nextInt(24), _random.nextInt(60))),
-              ),
-            ],
-          );
-        }
-        ```
+        <CodeSnippet snippet={animatedSnippet} />
     </Tab>
 
 </Tabs>

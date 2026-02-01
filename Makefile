@@ -40,8 +40,8 @@ build_runner:
 	@echo "$(COLOR_BLUE)cd forui_assets && dart run build_runner build --delete-conflicting-outputs$(COLOR_RESET)"
 	@cd forui_assets && dart run build_runner build --delete-conflicting-outputs
 	@echo ""
-	@echo "$(COLOR_BLUE)cd samples && dart run build_runner build --delete-conflicting-outputs$(COLOR_RESET)"
-	@cd samples && dart run build_runner build --delete-conflicting-outputs
+	@echo "$(COLOR_BLUE)cd docs_snippets && dart run build_runner build --delete-conflicting-outputs$(COLOR_RESET)"
+	@cd docs_snippets && dart run build_runner build --delete-conflicting-outputs
 	@echo ""
 	@echo "$(COLOR_GREEN)✓ Build runner complete$(COLOR_RESET)"
 br: build_runner

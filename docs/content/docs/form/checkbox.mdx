@@ -7,6 +7,12 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.checkbox/
 import { Callout } from 'fumadocs-ui/components/callout';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import defaultSnippet from '@/snippets/examples/checkbox/default.json';
+import disabledSnippet from '@/snippets/examples/checkbox/disabled.json';
+import errorSnippet from '@/snippets/examples/checkbox/error.json';
+import rawSnippet from '@/snippets/examples/checkbox/raw.json';
+import formSnippet from '@/snippets/examples/checkbox/form.json';
 
 <Callout type="info">
     For touch devices, a [switch](/docs/form/switch) is generally recommended over this.
@@ -21,26 +27,7 @@ import { Widget } from '@/components/demo/widget';
         <Widget name='checkbox' query={{enabled: 'true'}}/>
     </Tab>
     <Tab value="Code">
-        ```dart copy
-        class Page extends StatefulWidget {
-          @override
-          State<Page> createState() => PageState();
-        }
-
-        class PageState extends State<Page> {
-          bool _state = false;
-
-          @override
-          Widget build(BuildContext context) => FCheckbox(
-            label: const Text('Accept terms and conditions'),
-            description: const Text('You agree to our terms and conditions.'),
-            semanticsLabel: 'Accept terms and conditions',
-            value: _state,
-            onChange: (value) => setState(() => _state = value),
-            enabled: true,
-          );
-        }
-        ```
+        <CodeSnippet snippet={defaultSnippet} />
     </Tab>
 
 </Tabs>
@@ -80,26 +67,7 @@ FCheckbox(
     <Widget name='checkbox' query={{initialValue: 'true', enabled: 'false'}}/>
   </Tab>
   <Tab value="Code">
-    ```dart {16} copy
-    class Page extends StatefulWidget {
-      @override
-      State<Page> createState() => PageState();
-    }
-
-    class PageState extends State<Page> {
-      bool _state = true;
-
-      @override
-      Widget build(BuildContext context) => FCheckbox(
-        label: const Text('Accept terms and conditions'),
-        description: const Text('You agree to our terms and conditions.'),
-        semanticsLabel: 'Accept terms and conditions',
-        value: _state,
-        onChange: (value) => setState(() => _state = value),
-        enabled: false,
-      );
-    }
-    ```
+    <CodeSnippet snippet={disabledSnippet} />
   </Tab>
 </Tabs>
 
@@ -110,26 +78,7 @@ FCheckbox(
     <Widget name='checkbox' query={{ error: 'Please accept the terms and conditions.' }}/>
   </Tab>
   <Tab value="Code">
-    ```dart {13} copy
-    class Page extends StatefulWidget {
-      @override
-      State<Page> createState() => PageState();
-    }
-
-    class PageState extends State<Page> {
-      bool _state = false;
-
-      @override
-      Widget build(BuildContext context) => FCheckbox(
-        label: const Text('Accept terms and conditions'),
-        description: const Text('You agree to our terms and conditions.'),
-        error: const Text('Please accept the terms and conditions.'),
-        semanticsLabel: 'Accept terms and conditions',
-        value: _state,
-        onChange: (value) => setState(() => _state = value),
-      );
-    }
-    ```
+    <CodeSnippet snippet={errorSnippet} />
   </Tab>
 </Tabs>
 
@@ -140,22 +89,7 @@ FCheckbox(
         <Widget name='checkbox' variant='raw' query={{ }}/>
     </Tab>
     <Tab value="Code">
-        ```dart copy
-        class Page extends StatefulWidget {
-          @override
-          State<Page> createState() => PageState();
-        }
-
-        class PageState extends State<Page> {
-          bool _state = false;
-
-          @override
-          Widget build(BuildContext context) => FCheckbox(
-            value: _state,
-            onChange: (value) => setState(() => _state = value),
-          );
-        }
-        ```
+        <CodeSnippet snippet={rawSnippet} />
     </Tab>
 
 </Tabs>
@@ -167,62 +101,6 @@ FCheckbox(
     <Widget name='checkbox' variant='form' query={{}} height={550}/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    class RegisterForm extends StatefulWidget {
-      @override
-      State<RegisterForm> createState() => _RegisterFormState();
-    }
-
-    class _RegisterFormState extends State<RegisterForm> {
-      final _key = GlobalKey<FormState>();
-
-      @override
-      Widget build(BuildContext context) => Form(
-            key: _key,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                FTextFormField.email(
-                  hint: 'janedoe@foruslabs.com',
-                  validator: (value) => (value?.contains('@') ?? false) ? null : 'Please enter a valid email.',
-                ),
-                const SizedBox(height: 12),
-                FTextFormField.password(
-                  validator: (value) => 8 <= (value?.length ?? 0) ? null : 'Password must be at least 8 characters long.',
-                ),
-                const SizedBox(height: 15),
-                FormField(
-                  initialValue: false,
-                  onSaved: (value) {
-                    // Save values somewhere.
-                  },
-                  validator: (value) => (value ?? false) ? null : 'Please accept the terms and conditions.',
-                  builder: (state) => FCheckbox(
-                    label: const Text('Accept terms and conditions'),
-                    description: const Text('You agree to our terms and conditions.'),
-                    error: state.errorText == null ? null : Text(state.errorText!),
-                    value: state.value ?? false,
-                    onChange: (value) => state.didChange(value),
-                  ),
-                ),
-                const SizedBox(height: 20),
-                FButton(
-                  child: const Text('Register'),
-                  onPress: () {
-                    if (!_key.currentState!.validate()) {
-                      // Handle errors here.
-                      return;
-                    }
-
-                    _key.currentState!.save();
-                    // Do something.
-                  },
-                ),
-              ],
-            ),
-          );
-    }
-    ```
+    <CodeSnippet snippet={formSnippet} />
   </Tab>
 </Tabs>

@@ -6,46 +6,15 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.progress/
 
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import determinateSnippet from '@/snippets/examples/progress/determinate.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
     <Widget name='progress' variant='determinate'/>
   </Tab>
   <Tab value="Code">
-    ```dart copy
-    class Progress extends StatefulWidget {
-      @override
-      State<Progress> createState() => _State();
-    }
-
-    class _State extends State<Progress> {
-      late Timer _timer = Timer(const Duration(seconds: 1), () => setState(() => _value = 0.7));
-      double _value = 0.2;
-
-      @override
-      void dispose() {
-        _timer.cancel();
-        super.dispose();
-      }
-
-      @override
-      Widget build(BuildContext context) => Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        spacing: 20,
-        children: [
-          FDeterminateProgress(value: _value),
-          FButton(
-            child: const Text('Reset'),
-            onPress: () => setState(() {
-              _value = 0.2;
-              _timer.cancel();
-              _timer = Timer(const Duration(seconds: 1), () => setState(() => _value = 0.7));
-            }),
-          ),
-        ],
-      );
-    }
-    ```
+    <CodeSnippet snippet={determinateSnippet} />
   </Tab>
 </Tabs>
 
