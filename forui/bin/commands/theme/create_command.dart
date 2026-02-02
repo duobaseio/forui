@@ -26,7 +26,7 @@ import 'package:flutter/services.dart';
 /// dart forui style create [styles]
 /// ```
 /// 
-/// See https://forui.dev/docs/themes#customize-themes for more information.''';
+/// See https://forui.dev/docs/concepts/themes#customization for more information.''';
 
 class ThemeCreateCommand extends ForuiCommand {
   @override
@@ -126,7 +126,7 @@ class ThemeCreateCommand extends ForuiCommand {
     stdout
       ..writeln('${emoji ? '✅' : '[Done]'} $path')
       ..writeln()
-      ..writeln('See https://forui.dev/docs/themes#customize-themes for how to use the generated theme.');
+      ..writeln('See https://forui.dev/docs/concepts/themes#customization for how to use the generated theme.');
   }
 
   void _prompt(String existing, {required bool input}) {

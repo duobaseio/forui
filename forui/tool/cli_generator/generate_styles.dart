@@ -9,7 +9,7 @@ import 'package:sugar/sugar.dart';
 import 'constructors.dart';
 import 'main.dart';
 
-final _type = RegExp('F[^ ]+?Styles?');
+final _type = RegExp(r'^F.*Styles?$');
 final _mapConstructor = RegExp(r'F([^ ]*?Styles?)\.inherit');
 final _traverseConstructor = RegExp(r'(F[^ ]*?Styles?)\.inherit');
 
@@ -79,6 +79,10 @@ List<String> _aliases(ConstructorFragment fragment) {
   final es = RegExp(r'(ch|sh|x|ss|z)$', caseSensitive: false);
 
   var name = fragment.type.replaceAll(RegExp('Styles?'), '').substring(1);
+  if (name.isEmpty) { // Special case for `FStyle`.
+    name = 'style';
+  }
+
   if (fragment.type.endsWith('Styles')) {
     // English pluralization rules are a convoluted mess. Checking for the simple cases should suffice for now.
     name = es.hasMatch(name) ? '${name}es' : '${name}s';

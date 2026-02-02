@@ -61,7 +61,7 @@ import 'package:forui/forui.dart';
 /// dart forui theme create [theme name]
 /// ```
 /// 
-/// See https://forui.dev/docs/themes#customize-themes for more information.''';
+/// See https://forui.dev/docs/concepts/themes#customization for more information.''';
 
 const _namespaced = '''
 import 'package:flutter/cupertino.dart';
@@ -118,7 +118,7 @@ import 'package:forui/forui.dart';
 /// dart forui theme create [theme name]
 /// ```
 /// 
-/// See https://forui.dev/docs/themes#customize-themes for more information.''';
+/// See https://forui.dev/docs/concepts/themes#customization for more information.''';
 
 extension Generation on StyleCreateCommand {
   void generate(List<String> arguments, {required bool input, required bool all}) {
@@ -147,7 +147,7 @@ extension Generation on StyleCreateCommand {
 
     stdout
       ..writeln()
-      ..writeln('See https://forui.dev/docs/themes#customize-themes for more information.');
+      ..writeln('See https://forui.dev/docs/concepts/themes#customization for more information.');
   }
 
   void _prompt(Set<String> existing, {required bool input}) {

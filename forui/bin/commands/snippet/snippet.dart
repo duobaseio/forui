@@ -211,14 +211,14 @@ extension CustomMaterialTheme on FThemeData {
       ),
       inputDecorationTheme: InputDecorationTheme(
         border: WidgetStateInputBorder.resolveWith(
-          textFieldStyle.border.resolve,
+          (states) => textFieldStyle.border.resolve(toVariants(states)),
         ),
-        labelStyle: textFieldStyle.descriptionTextStyle.maybeResolve({}),
-        floatingLabelStyle: textFieldStyle.labelTextStyle.maybeResolve({}),
-        hintStyle: textFieldStyle.hintTextStyle.maybeResolve({}),
-        errorStyle: textFieldStyle.errorTextStyle,
-        helperStyle: textFieldStyle.descriptionTextStyle.maybeResolve({}),
-        counterStyle: textFieldStyle.counterTextStyle.maybeResolve({}),
+        labelStyle: textFieldStyle.descriptionTextStyle.base,
+        floatingLabelStyle: textFieldStyle.labelTextStyle.base,
+        hintStyle: textFieldStyle.hintTextStyle.base,
+        errorStyle: textFieldStyle.errorTextStyle.base,
+        helperStyle: textFieldStyle.descriptionTextStyle.base,
+        counterStyle: textFieldStyle.counterTextStyle.base,
         contentPadding: textFieldStyle.contentPadding,
       ),
       datePickerTheme: DatePickerThemeData(
@@ -246,97 +246,140 @@ extension CustomMaterialTheme on FThemeData {
         shape: RoundedRectangleBorder(borderRadius: style.borderRadius),
       ),
       sliderTheme: SliderThemeData(
-        activeTrackColor: sliderStyles.horizontalStyle.activeColor.maybeResolve(
-          {},
-        ),
-        inactiveTrackColor: sliderStyles.horizontalStyle.inactiveColor
-            .maybeResolve({}),
-        disabledActiveTrackColor: sliderStyles.horizontalStyle.activeColor
-            .maybeResolve({WidgetState.disabled}),
-        disabledInactiveTrackColor: sliderStyles.horizontalStyle.inactiveColor
-            .maybeResolve({WidgetState.disabled}),
-        activeTickMarkColor: sliderStyles.horizontalStyle.markStyle.tickColor
-            .maybeResolve({}),
-        inactiveTickMarkColor: sliderStyles.horizontalStyle.markStyle.tickColor
-            .maybeResolve({}),
-        disabledActiveTickMarkColor: sliderStyles
-            .horizontalStyle
-            .markStyle
-            .tickColor
-            .maybeResolve({WidgetState.disabled}),
-        disabledInactiveTickMarkColor: sliderStyles
-            .horizontalStyle
-            .markStyle
-            .tickColor
-            .maybeResolve({WidgetState.disabled}),
-        thumbColor: sliderStyles.horizontalStyle.thumbStyle.borderColor
-            .maybeResolve({}),
-        disabledThumbColor: sliderStyles.horizontalStyle.thumbStyle.borderColor
-            .maybeResolve({WidgetState.disabled}),
-        valueIndicatorColor:
-            sliderStyles.horizontalStyle.tooltipStyle.decoration.color,
-        valueIndicatorTextStyle:
-            sliderStyles.horizontalStyle.tooltipStyle.textStyle,
+        activeTrackColor: sliderStyles.base.activeColor.base,
+        inactiveTrackColor: sliderStyles.base.inactiveColor.base,
+        disabledActiveTrackColor: sliderStyles.base.activeColor.resolve({
+          FSliderVariant.disabled,
+        }),
+        disabledInactiveTrackColor: sliderStyles.base.inactiveColor.resolve({
+          FSliderVariant.disabled,
+        }),
+        activeTickMarkColor: sliderStyles.base.markStyle.tickColor.base,
+        inactiveTickMarkColor: sliderStyles.base.markStyle.tickColor.base,
+        disabledActiveTickMarkColor: sliderStyles.base.markStyle.tickColor
+            .resolve({FSliderVariant.disabled}),
+        disabledInactiveTickMarkColor: sliderStyles.base.markStyle.tickColor
+            .resolve({FSliderVariant.disabled}),
+        thumbColor: sliderStyles.base.thumbStyle.borderColor.base,
+        disabledThumbColor: sliderStyles.base.thumbStyle.borderColor.resolve({
+          FSliderVariant.disabled,
+        }),
+        valueIndicatorColor: sliderStyles.base.tooltipStyle.decoration.color,
+        valueIndicatorTextStyle: sliderStyles.base.tooltipStyle.textStyle,
       ),
       switchTheme: SwitchThemeData(
-        thumbColor: switchStyle.thumbColor,
-        trackColor: switchStyle.trackColor,
-        trackOutlineColor: switchStyle.trackColor,
+        thumbColor: .resolveWith(
+          (states) => switchStyle.thumbColor.resolve(toVariants(states)),
+        ),
+        trackColor: .resolveWith(
+          (states) => switchStyle.trackColor.resolve(toVariants(states)),
+        ),
+        trackOutlineColor: .resolveWith(
+          (states) => switchStyle.trackColor.resolve(toVariants(states)),
+        ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
-          textStyle: buttonStyles.secondary.contentStyle.textStyle,
-          backgroundColor: WidgetStateColor.resolveWith(
+          textStyle: .resolveWith(
+            (states) => buttonStyles
+                .resolve({FButtonVariant.secondary})
+                .contentStyle
+                .textStyle
+                .resolve(toVariants(states)),
+          ),
+          backgroundColor: .resolveWith(
             (states) =>
-                buttonStyles.secondary.decoration.maybeResolve(states)?.color ??
+                buttonStyles
+                    .resolve({FButtonVariant.secondary})
+                    .decoration
+                    .resolve(toVariants(states))
+                    .color ??
                 colors.secondary,
           ),
-          foregroundColor: WidgetStateColor.resolveWith(
+          foregroundColor: .resolveWith(
             (states) =>
-                buttonStyles.secondary.contentStyle.textStyle
-                    .maybeResolve(states)
-                    ?.color ??
+                buttonStyles
+                    .resolve({FButtonVariant.secondary})
+                    .contentStyle
+                    .textStyle
+                    .resolve(toVariants(states))
+                    .color ??
                 colors.secondaryForeground,
           ),
-          padding: .all(buttonStyles.secondary.contentStyle.padding),
+          padding: .all(
+            buttonStyles
+                .resolve({FButtonVariant.secondary})
+                .contentStyle
+                .padding,
+          ),
           shape: .all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
         ),
       ),
       filledButtonTheme: FilledButtonThemeData(
         style: ButtonStyle(
-          textStyle: buttonStyles.primary.contentStyle.textStyle,
-          backgroundColor: WidgetStateColor.resolveWith(
+          textStyle: .resolveWith(
+            (states) => buttonStyles.base.contentStyle.textStyle.resolve(
+              toVariants(states),
+            ),
+          ),
+          backgroundColor: .resolveWith(
             (states) =>
-                buttonStyles.primary.decoration.maybeResolve(states)?.color ??
+                buttonStyles.base.decoration
+                    .resolve(toVariants(states))
+                    .color ??
                 colors.secondary,
           ),
-          foregroundColor: WidgetStateColor.resolveWith(
+          foregroundColor: .resolveWith(
             (states) =>
-                buttonStyles.secondary.decoration.maybeResolve(states)?.color ??
+                buttonStyles
+                    .resolve({FButtonVariant.secondary})
+                    .contentStyle
+                    .textStyle
+                    .resolve(toVariants(states))
+                    .color ??
                 colors.secondaryForeground,
           ),
-          padding: .all(buttonStyles.primary.contentStyle.padding),
+          padding: .all(buttonStyles.base.contentStyle.padding),
           shape: .all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: ButtonStyle(
-          textStyle: buttonStyles.outline.contentStyle.textStyle,
-          backgroundColor: WidgetStateColor.resolveWith(
+          textStyle: .resolveWith(
+            (states) => buttonStyles
+                .resolve({FButtonVariant.outline})
+                .contentStyle
+                .textStyle
+                .resolve(toVariants(states)),
+          ),
+          backgroundColor: .resolveWith(
             (states) =>
-                buttonStyles.outline.decoration.maybeResolve(states)?.color ??
+                buttonStyles
+                    .resolve({FButtonVariant.outline})
+                    .decoration
+                    .resolve(toVariants(states))
+                    .color ??
                 Colors.transparent,
           ),
-          foregroundColor: WidgetStateColor.resolveWith(
+          foregroundColor: .resolveWith(
             (states) =>
-                buttonStyles.outline.decoration.maybeResolve(states)?.color ??
+                buttonStyles
+                    .resolve({FButtonVariant.outline})
+                    .contentStyle
+                    .textStyle
+                    .resolve(toVariants(states))
+                    .color ??
                 Colors.transparent,
           ),
-          padding: .all(buttonStyles.outline.contentStyle.padding),
-          side: WidgetStateBorderSide.resolveWith((states) {
-            final border = buttonStyles.outline.decoration
-                .maybeResolve(states)
-                ?.border;
+          padding: .all(
+            buttonStyles.resolve({FButtonVariant.outline}).contentStyle.padding,
+          ),
+          side: .resolveWith((states) {
+            final border = buttonStyles
+                .resolve({FButtonVariant.outline})
+                .decoration
+                .resolve(toVariants(states))
+                .border;
             return BorderSide(
               color:
                   border?.top.color ??
@@ -351,12 +394,14 @@ extension CustomMaterialTheme on FThemeData {
               width: border?.top.width ?? style.borderWidth,
             );
           }),
-          shape: WidgetStateProperty.resolveWith(
+          shape: .resolveWith(
             (states) => RoundedRectangleBorder(
               borderRadius:
-                  buttonStyles.outline.decoration
-                      .maybeResolve(states)
-                      ?.borderRadius ??
+                  buttonStyles
+                      .resolve({FButtonVariant.outline})
+                      .decoration
+                      .resolve(toVariants(states))
+                      .borderRadius ??
                   style.borderRadius,
             ),
           ),
@@ -364,69 +409,87 @@ extension CustomMaterialTheme on FThemeData {
       ),
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
-          textStyle: buttonStyles.ghost.contentStyle.textStyle,
-          backgroundColor: WidgetStateColor.resolveWith(
+          textStyle: .resolveWith(
+            (states) => buttonStyles
+                .resolve({FButtonVariant.ghost})
+                .contentStyle
+                .textStyle
+                .resolve(toVariants(states)),
+          ),
+          backgroundColor: .resolveWith(
             (states) =>
-                buttonStyles.ghost.decoration.maybeResolve(states)?.color ??
+                buttonStyles
+                    .resolve({FButtonVariant.ghost})
+                    .decoration
+                    .resolve(toVariants(states))
+                    .color ??
                 Colors.transparent,
           ),
-          foregroundColor: WidgetStateColor.resolveWith(
+          foregroundColor: .resolveWith(
             (states) =>
-                buttonStyles.ghost.contentStyle.textStyle
-                    .maybeResolve(states)
-                    ?.color ??
+                buttonStyles
+                    .resolve({FButtonVariant.ghost})
+                    .contentStyle
+                    .textStyle
+                    .resolve(toVariants(states))
+                    .color ??
                 colors.secondaryForeground,
           ),
-          shape: WidgetStateProperty.resolveWith(
+          shape: .resolveWith(
             (states) => RoundedRectangleBorder(
               borderRadius:
-                  buttonStyles.ghost.decoration
-                      .maybeResolve(states)
-                      ?.borderRadius ??
+                  buttonStyles
+                      .resolve({FButtonVariant.ghost})
+                      .decoration
+                      .resolve(toVariants(states))
+                      .borderRadius ??
                   style.borderRadius,
             ),
           ),
         ),
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: buttonStyles.primary.decoration
-            .maybeResolve(const {})
-            ?.color,
-        foregroundColor: buttonStyles.primary.contentStyle.textStyle
-            .maybeResolve(const {})
-            ?.color,
-        hoverColor: buttonStyles.primary.decoration.maybeResolve(const {
-          WidgetState.hovered,
-        })?.color,
+        backgroundColor: buttonStyles.base.decoration.base.color,
+        foregroundColor: buttonStyles.base.contentStyle.textStyle.base.color,
+        hoverColor: buttonStyles.base.decoration.resolve({
+          FTappableVariant.hovered,
+        }).color,
         disabledElevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius:
-              buttonStyles.primary.decoration
-                  .maybeResolve(const {})
-                  ?.borderRadius ??
+              buttonStyles.base.decoration.base.borderRadius ??
               style.borderRadius,
         ),
       ),
       iconButtonTheme: IconButtonThemeData(
         style: ButtonStyle(
-          backgroundColor: WidgetStateColor.resolveWith(
+          backgroundColor: .resolveWith(
             (states) =>
-                buttonStyles.ghost.decoration.maybeResolve(states)?.color ??
+                buttonStyles
+                    .resolve({FButtonVariant.ghost})
+                    .decoration
+                    .resolve(toVariants(states))
+                    .color ??
                 Colors.transparent,
           ),
-          foregroundColor: WidgetStateColor.resolveWith(
+          foregroundColor: .resolveWith(
             (states) =>
-                buttonStyles.ghost.contentStyle.textStyle
-                    .maybeResolve(states)
-                    ?.color ??
+                buttonStyles
+                    .resolve({FButtonVariant.ghost})
+                    .contentStyle
+                    .textStyle
+                    .resolve(toVariants(states))
+                    .color ??
                 colors.secondaryForeground,
           ),
-          shape: WidgetStateProperty.resolveWith(
+          shape: .resolveWith(
             (states) => RoundedRectangleBorder(
               borderRadius:
-                  buttonStyles.ghost.decoration
-                      .maybeResolve(states)
-                      ?.borderRadius ??
+                  buttonStyles
+                      .resolve({FButtonVariant.ghost})
+                      .decoration
+                      .resolve(toVariants(states))
+                      .borderRadius ??
                   style.borderRadius,
             ),
           ),
@@ -434,25 +497,40 @@ extension CustomMaterialTheme on FThemeData {
       ),
       segmentedButtonTheme: SegmentedButtonThemeData(
         style: ButtonStyle(
-          textStyle: buttonStyles.ghost.contentStyle.textStyle,
-          backgroundColor: WidgetStateColor.resolveWith(
+          textStyle: .resolveWith(
+            (states) => buttonStyles
+                .resolve({FButtonVariant.ghost})
+                .contentStyle
+                .textStyle
+                .resolve(toVariants(states)),
+          ),
+          backgroundColor: .resolveWith(
             (states) =>
-                buttonStyles.ghost.decoration.maybeResolve(states)?.color ??
+                buttonStyles
+                    .resolve({FButtonVariant.ghost})
+                    .decoration
+                    .resolve(toVariants(states))
+                    .color ??
                 Colors.transparent,
           ),
-          foregroundColor: WidgetStateColor.resolveWith(
+          foregroundColor: .resolveWith(
             (states) =>
-                buttonStyles.ghost.contentStyle.textStyle
-                    .maybeResolve(states)
-                    ?.color ??
+                buttonStyles
+                    .resolve({FButtonVariant.ghost})
+                    .contentStyle
+                    .textStyle
+                    .resolve(toVariants(states))
+                    .color ??
                 colors.secondaryForeground,
           ),
-          shape: WidgetStateProperty.resolveWith(
+          shape: .resolveWith(
             (states) => RoundedRectangleBorder(
               borderRadius:
-                  buttonStyles.ghost.decoration
-                      .maybeResolve(states)
-                      ?.borderRadius ??
+                  buttonStyles
+                      .resolve({FButtonVariant.ghost})
+                      .decoration
+                      .resolve(toVariants(states))
+                      .borderRadius ??
                   style.borderRadius,
             ),
           ),

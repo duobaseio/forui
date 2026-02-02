@@ -242,6 +242,8 @@ are not available for most of these changes due to the tool's limitations.
 * **Breaking** Remove `call` method from all styles.
 * **Breaking** Remove `FWidgetStatesDelta`.
 
+* Fix CLI incorrectly parsing `FStyle`.
+
 
 ## 0.17.0
 

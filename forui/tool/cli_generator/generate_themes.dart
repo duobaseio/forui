@@ -19,7 +19,7 @@ typedef ThemeConstructor = ({String theme, String variant, String colors});
 
 final _typography = RegExp('FTypography');
 final _typographyConstructor = RegExp(r'(FTypography)\.inherit');
-final _style = RegExp('FStyle');
+final _style = RegExp(r'^FStyle$');
 final _styleConstructor = RegExp(r'(FStyle)\.inherit');
 
 String generateThemes(Map<(String, String?), String> fragments) {
