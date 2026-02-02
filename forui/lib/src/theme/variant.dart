@@ -35,9 +35,11 @@ Set<FTextFieldVariant> toTextFieldVariants(FPlatformVariant platform, Set<Widget
 sealed class FVariantConstraint {
   /// Returns the more specific of two constraints.
   ///
+  /// {@template forui.theme.FVariantConstraint.max}
   /// Specificity is determined tier-by-tier from highest to lowest. At each tier, the constraint with more operands
   /// wins. This means a compound constraint with two tier-2 operands beats one with only one tier-2 operand, even if
-  /// the latter has additional lower-tier operands.
+  /// the latter has additional lower-tier operands. Typically `platform < interaction < semantic`.
+  /// {@endtemplate}
   ///
   /// ```dart
   /// max(hovered, disabled); // disabled (tier 2 > tier 1)
@@ -80,7 +82,7 @@ sealed class FVariantConstraint {
     return operandsA.join().compareTo(operandsB.join()) <= 0 ? a : b;
   }
 
-  /// Returns true if this constraint is satisfied by [variants].
+  /// Returns true if all variants in this constraint are present in [variants].
   ///
   /// ```dart
   /// final variants = {.hovered, .focused};

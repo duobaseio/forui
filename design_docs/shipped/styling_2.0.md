@@ -742,14 +742,15 @@ class FVariantsDelta<K extends FVariantConstraint, E extends FVariant, V, D exte
 
 // Delta-based operations.
 class FVariantOperation<K extends FVariantConstraint, E extends FVariant, V, D extends Delta<V>> {
-  // Adds a new variant
-  FVariantOperation.add(Set<K> constraints, D delta);
-
   // Applies [delta] to the base without modifying existing variants.
   FVariantOperation.onBase(D delta);
 
-  // Applies [delta] to variants whose constraints are satisfied by [variants].
-  FVariantOperation.on(Set<E> variants, D delta);
+  // Applies [delta] to the base and associates the result with each constraint in [constraints].
+  // Creates exact entries rather than matching existing variants.
+  FVariantOperation.on(Set<K> constraints, D delta);
+
+  // Applies [delta] to existing variants whose constraint's variants are all present in [variants].
+  FVariantOperation.onMatching(Set<E> variants, D delta);
 
   // Applies [delta] to all variants.
   FVariantOperation.onVariants(D delta);
@@ -757,8 +758,11 @@ class FVariantOperation<K extends FVariantConstraint, E extends FVariant, V, D e
   // Applies [delta] to all variants and base.
   FVariantOperation.onAll(D delta);
 
-  // Removes variants matching [variants].
-  FVariantOperation.remove(Set<E> variants);
+  // Removes exact [constraints] from existing variants.
+  FVariantOperation.remove(Set<K> constraints);
+
+  // Removes existing variants whose constraint's variants are all present in [variants].
+  FVariantOperation.removeMatching(Set<E> variants);
 
   // Removes all variants.
   FVariantOperation.removeAll();
@@ -776,14 +780,15 @@ class FVariantsValueDelta<K extends FVariantConstraint, E extends FVariant, V> w
 
 // Concrete value-based operations
 class FVariantValueDeltaOperation<K extends FVariantConstraint, E extends FVariant, V>  {
-  // Adds a new variant
-  FVariantValueDeltaOperation.add(Set<K> constraints, V value);
-
   // Replaces the base with [base].
   FVariantValueDeltaOperation.onBase(V base);
 
-  // Replaces variants matching [variants] with [value].
-  FVariantValueDeltaOperation.on(Set<E> variants, V value);
+  // Sets [value] for each constraint in [constraints], creating or overriding entries.
+  // Creates exact entries rather than matching existing variants.
+  FVariantValueDeltaOperation.on(Set<K> constraints, V value);
+
+  // Replaces existing variants whose constraint's variants are all present in [variants].
+  FVariantValueDeltaOperation.onMatching(Set<E> variants, V value);
 
   // Replaces all variants with [value].
   FVariantValueDeltaOperation.onVariants(V value);
@@ -791,24 +796,32 @@ class FVariantValueDeltaOperation<K extends FVariantConstraint, E extends FVaria
   // Replaces all variants and base with [value].
   FVariantValueDeltaOperation.onAll(V value);
 
-  // Removes variants matching [variants].
-  FVariantValueDeltaOperation.remove(Set<E> variants);
+  // Removes exact [constraints] from existing variants.
+  FVariantValueDeltaOperation.remove(Set<K> constraints);
+
+  // Removes existing variants whose constraint's variants are all present in [variants].
+  FVariantValueDeltaOperation.removeMatching(Set<E> variants);
 
   // Removes all variants.
   FVariantValueDeltaOperation.removeAll();
 }
 ```
 
-The `on` and remove` operations use inclusive matching. For example: `.on({.hovered, .focused}, delta)` affects:
+The `on` and `remove` operations work on **exact** constraint entries. For example, `.on({.hovered, .focused}, delta)`
+creates separate entries for `.hovered` and `.focused`, but not `.hovered.and(.focused)`.
+
+In contrast, `onMatching` and `removeMatching` match constraints whose variants are all present in the given set.
+For example, `.onMatching({.hovered, .focused}, delta)` affects constraints that are **satisfied by** `{.hovered, .focused}`:
 
 ```dart
 final decoration = FVariants.delta(
   BoxDecoration(color: Colors.white),
   variants: {
-    [.hovered]: .delta(color: Colors.blue),                   // ✓ contains hovered
-    [.hovered, .pressed]: .delta(color: Colors.darkBlue),     // ✓ contains hovered
-    [.focused]: .delta(color: Colors.green),                  // ✓ contains focused
-    [.disabled]: .value(BoxDecoration(color: Colors.grey)),   // ✗ contains neither
+    [.hovered]: .delta(color: Colors.blue),                   // ✓ hovered ⊆ {hovered, focused}
+    [.hovered.and(.focused)]: .delta(color: Colors.darkBlue), // ✓ hovered & focused ⊆ {hovered, focused}
+    [.focused]: .delta(color: Colors.green),                  // ✓ focused ⊆ {hovered, focused}
+    [.hovered.and(.pressed)]: .delta(color: Colors.red),      // ✗ pressed ∉ {hovered, focused}
+    [.disabled]: .value(BoxDecoration(color: Colors.grey)),   // ✗ disabled ∉ {hovered, focused}
   },
 );
 ```
@@ -822,8 +835,8 @@ FTappable(
   style: .delta(
     // Apply all modifications without needing to extract base variant.
     decoration: .apply([
-      .on({.hovered}, .delta(color: Colors.blue)),
-      .on({.pressed}, .delta(color: Colors.darkBlue)),
+      .onMatching({.hovered}, .delta(color: Colors.blue)),
+      .onMatching({.pressed}, .delta(color: Colors.darkBlue)),
     ]),
   ),
 )
@@ -837,7 +850,7 @@ Lastly, `FVariants` also provides `apply(...)` and `applyValues(...)` which dire
 ```dart
 final updated = variants.apply([
   .onAll(.delta(color: Colors.blue)),
-  .add({.disabled}, .delta(color: Colors.grey)),
+  .on({.disabled}, .delta(color: Colors.grey)),
 ]);
 ```
 
