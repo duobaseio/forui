@@ -1,5 +1,100 @@
 ## 0.18.0
 
+This update overhauls the Styling API as outlined in [Styling 2.0](https://github.com/duobaseio/forui/blob/main/design_docs/shipped/styling_2.0.md).
+
+### Key Styling 2.0 Improvements
+
+Simplified style modification using deltas:
+
+```dart
+// Before:
+FAutocomplete(
+  style: (style) => style.copyWith(
+    contentStyle: (content) => content.copyWith(
+      sectionStyle: (section) => section.copyWith(
+        itemStyle: (item) => item.copyWith(
+          tappableStyle: (tappable) => tappable.copyWith(
+            motion: FTappableMotion.none,
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+
+// After:
+FAutocomplete(
+  style: .delta(
+    contentStyle: .delta(
+      sectionStyle: .delta(
+        itemStyle: .delta(
+          tappableStyle: .delta(
+            motion: FTappableMotion.none,
+          ),
+        ),
+      ),
+    ),
+  ),
+)
+```
+
+`FVariants` replaces `FWidgetStateMap` with order-independent, tier-based resolution:
+
+```dart
+// Before
+FWidgetStateMap({
+  WidgetState.hovered: A(),            // Matches first for {hovered, focused}
+  WidgetState.hovered & .focused: B(), // Never reached
+  WidgetState.any: base,               // Easy to omit
+})
+
+// After
+FVariants(
+  base, // Required — no more accidentally omitted defaults
+  variants: {
+    [.hovered.and(.focused)]: A(), // More specific than .hovered alone
+    [.hovered]: B(),               // Order doesn't matter
+    [.disabled]: C(),              // Semantic tier always beats interaction variants, avoiding hovered from being applied when disabled.
+  },
+)
+```
+
+Widget-specific variants replace `WidgetState`s for better type-safety and discoverability:
+
+```dart
+// Before: compiles fine, but scrolledUnder is meaningless for a tappable
+FTappableStyle(
+  decoration: FWidgetStateMap({
+    WidgetState.scrolledUnder: BoxDecoration(...),  // Does FTappableStyle support scrolledUnder? Who knows.
+  }),
+)
+
+// After:
+extension type const FTappableVariant {
+  /// The semantic variant when this widget is disabled and cannot be interacted with.
+  static const disabled = FTappableVariant();
+
+  /// The interaction variant when the user drags their mouse cursor over the given widget.
+  static const hovered = FTappableVariant();
+
+  /// The interaction variant when the user is actively pressing down on the given widget.
+  static const pressed = FTappableVariant();
+}
+
+FTappableStyle(
+  decoration: FVariants(
+    const BoxDecoration(),
+    variants: {
+      [.hovered]: BoxDecoration(...), // Only FTappableVariant allowed (which works well with autocomplete)
+    }
+  ),
+)
+```
+
+Automated fixes via [Data Driven Fixes](https://github.com/flutter/flutter/blob/master/docs/contributing/Data-driven-Fixes.md)
+are not available for most of these changes due to the tool's limitations.
+
+
 ### `FAccordionItem`
 * **Breaking** Rename `FAccordionItem.onStateChange` to `FAccordionItem.onVariantChange`.
 
@@ -138,9 +233,9 @@
 
 ### Others
 
+* Change all widget styles to implement their widget-specific delta types.
 * **Breaking** Change all widget `style` parameters from callback type `FXxxStyle Function(FXxxStyle)?` to delta type
-  `FXxxStyleDelta?`. Use `.value(style)` to wrap a complete style or `.delta(param: value)` to partially modify specific
-  properties.
+  `FXxxStyleDelta?`. Pass a style or `.delta(param: value)` to partially modify specific properties.
 * **Breaking** Change `copyWith` for all styles to uses delta instead of callbacks for nested styles/motions, sentinel
   values for nullable fields.
 * **Breaking** Replace all instances of `FWidgetStateMap` with `FVariants`.

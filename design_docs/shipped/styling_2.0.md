@@ -1,7 +1,7 @@
 # Styling 2.0
 
 Author: Matt (Pante)
-Status: WIP
+Status: Shipped (Forui 0.18.0)
 
 ## Summary
 

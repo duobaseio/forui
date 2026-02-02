@@ -1,117 +1,4 @@
-import 'package:build_test/build_test.dart';
-import 'package:forui_internal_gen/forui_internal_gen.dart';
-import 'package:test/test.dart';
-
-const _source = r'''
-import 'dart:ui';
-import 'package:collection/collection.dart';
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
-import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/annotations.dart';
-import 'package:forui/src/theme/delta.dart';
-import 'package:forui/src/theme/variant.dart';
-import 'package:meta/meta.dart';
-
-@Variants(FGolden, {'hovered': (1, 'The hovered state'), 'pressed': (1, 'The pressed state')})
-@Sentinels(FGoldenStyle, {'someDouble': 'double.infinity', 'color': 'colorSentinel'})
-part 'example.design.dart';
-
-class FGolden {}
-
-class FGoldenStyle with Diagnosticable, _$FGoldenStyleFunctions {
-  /// This is a field's summary.
-  ///
-  /// This is more information about a field.
-  final double someDouble;
-  final Alignment alignment;
-  final AlignmentGeometry alignmentGeometry;
-  final BorderRadius borderRadius;
-  final BorderRadiusGeometry borderRadiusGeometry;
-  final BoxConstraints boxConstraints;
-  final BoxDecoration boxDecoration;
-  final Decoration decoration;
-  final Color color;
-  final EdgeInsets edgeInsets;
-  final EdgeInsetsDirectional edgeInsetsDirectional;
-  final EdgeInsetsGeometry edgeInsetsGeometry;
-  final IconThemeData iconThemeData;
-  final TextStyle textStyle;
-  final List<BoxShadow> boxShadows;
-  final List<Shadow> shadows;
-  final FVariants<FGoldenVariantConstraint, BoxDecoration, Delta<BoxDecoration>> boxDecorationVariants;
-  final FVariants<FGoldenVariantConstraint, BoxDecoration?, Delta<BoxDecoration?>> nullableBoxDecorationVariants;
-  final FVariants<FGoldenVariantConstraint, Color, Delta<Color>> colorVariants;
-  final FVariants<FGoldenVariantConstraint, Color?, Delta<Color?>> nullableColorVariants;
-  final FVariants<FGoldenVariantConstraint, IconThemeData, Delta<IconThemeData>> iconThemeDataVariants;
-  final FVariants<FGoldenVariantConstraint, IconThemeData?, Delta<IconThemeData?>> nullableIconThemeDataVariants;
-  final FVariants<FGoldenVariantConstraint, TextStyle, Delta<TextStyle>> textStyleVariants;
-  final FVariants<FGoldenVariantConstraint, TextStyle?, Delta<TextStyle?>> nullableTextStyleVariants;
-  final FGoldenNestedMotion nestedMotion;
-  final FGoldenNestedStyle nestedStyle;
-  final List<String> list;
-  final Set<String> set;
-  final Map<String, int> map;
-
-  /// Variants with generic delta.
-  /// * [FGoldenVariantConstraint]
-  final FVariants<FGoldenVariantConstraint, Color, Delta<Color>> variantsWithGenericDelta;
-
-  /// Variants with specific delta.
-  /// * [FGoldenVariantConstraint]
-  final FVariants<FGoldenVariantConstraint, TextStyle, TextStyleDelta> variantsWithSpecificDelta;
-
-  FGoldenStyle({
-    required this.someDouble,
-    required this.alignment,
-    required this.alignmentGeometry,
-    required this.borderRadius,
-    required this.borderRadiusGeometry,
-    required this.boxConstraints,
-    required this.boxDecoration,
-    required this.decoration,
-    required this.color,
-    required this.edgeInsets,
-    required this.edgeInsetsDirectional,
-    required this.edgeInsetsGeometry,
-    required this.iconThemeData,
-    required this.textStyle,
-    required this.boxShadows,
-    required this.shadows,
-    required this.boxDecorationVariants,
-    required this.nullableBoxDecorationVariants,
-    required this.colorVariants,
-    required this.nullableColorVariants,
-    required this.iconThemeDataVariants,
-    required this.nullableIconThemeDataVariants,
-    required this.textStyleVariants,
-    required this.nullableTextStyleVariants,
-    required this.nestedMotion,
-    required this.nestedStyle,
-    required this.list,
-    required this.set,
-    required this.map,
-    required this.variantsWithGenericDelta,
-    required this.variantsWithSpecificDelta,
-  });
-}
-
-class FGoldenNestedMotion with Diagnosticable, _$FGoldenNestedMotionFunctions {
-  /// This is a field's summary.
-  ///
-  /// This is more information about a field.
-  final double someDouble;
-  final Duration duration;
-  final Curve curve;
-
-  FGoldenNestedMotion({required this.someDouble, required this.duration, required this.curve});
-}
-
-class FGoldenNestedStyle with Diagnosticable, _$FGoldenNestedStyleFunctions {}
-
-''';
-
-const _golden = r'''
+const golden = r'''
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
 // dart format width=120
@@ -123,10 +10,10 @@ part of 'example.dart';
 // DesignGenerator
 // **************************************************************************
 
-/// Represents a combination of variants for a [FGolden]
+/// Represents a combination of variants.
 ///
 /// See also:
-/// * [FGoldenVariant], which represents individual variants for [FGolden].
+/// * [FGoldenVariant], which represents individual variants.
 extension type const FGoldenVariantConstraint._(FVariantConstraint _) implements FVariantConstraint {
   /// Creates a [FGoldenVariantConstraint] that negates [variant].
   factory FGoldenVariantConstraint.not(FGoldenVariant variant) => FGoldenVariantConstraint._(Not(variant));
@@ -138,10 +25,10 @@ extension type const FGoldenVariantConstraint._(FVariantConstraint _) implements
   static const pressed = FGoldenVariant.pressed;
 
   /// A platform variant that matches all touch-based platforms, [android], [iOS] and [fuchsia].
-  static const touch = Touch();
+  static const touch = FGoldenVariant._(Touch());
 
   /// A platform variant that matches all desktop-based platforms, [windows], [macOS] and [linux].
-  static const desktop = Desktop();
+  static const desktop = FGoldenVariant._(Desktop());
 
   /// The Android platform variant.
   static const android = FGoldenVariant.android;
@@ -168,12 +55,12 @@ extension type const FGoldenVariantConstraint._(FVariantConstraint _) implements
   FGoldenVariantConstraint and(FGoldenVariantConstraint other) => FGoldenVariantConstraint._(And(this, other));
 }
 
-/// Represents a variant in [FGolden].
+/// Represents a variant.
 ///
 /// Each variant has a tier that determines its specificity. Higher tiers take precedence during resolution.
 ///
 /// See also:
-/// * [FGoldenVariantConstraint], which represents combinations of variants for [FGolden].
+/// * [FGoldenVariantConstraint], which represents combinations of variants.
 extension type const FGoldenVariant._(FVariant _) implements FGoldenVariantConstraint, FVariant {
   /// The hovered state
   static const hovered = FGoldenVariant._(.new(1, 'hovered'));
@@ -243,69 +130,76 @@ extension $FGoldenStyleTransformations on FGoldenStyle {
   /// * [FGoldenStyle.variantsWithSpecificDelta] - Variants with specific delta.
   @useResult
   FGoldenStyle copyWith({
-    double? someDouble,
+    double someDouble = double.infinity,
     Alignment? alignment,
     AlignmentGeometry? alignmentGeometry,
     BorderRadius? borderRadius,
     BorderRadiusGeometry? borderRadiusGeometry,
     BoxConstraints? boxConstraints,
-    BoxDecoration? boxDecoration,
+    BoxDecorationDelta? boxDecoration,
     Decoration? decoration,
-    Color? color,
+    Color color = colorSentinel,
     EdgeInsets? edgeInsets,
     EdgeInsetsDirectional? edgeInsetsDirectional,
     EdgeInsetsGeometry? edgeInsetsGeometry,
-    IconThemeData? iconThemeData,
-    TextStyle? textStyle,
+    IconThemeDataDelta? iconThemeData,
+    TextStyleDelta? textStyle,
     List<BoxShadow>? boxShadows,
     List<Shadow>? shadows,
-    FVariants<FGoldenVariantConstraint, BoxDecoration, Delta<BoxDecoration>>? boxDecorationVariants,
-    FVariants<FGoldenVariantConstraint, BoxDecoration?, Delta<BoxDecoration?>>? nullableBoxDecorationVariants,
-    FVariants<FGoldenVariantConstraint, Color, Delta<Color>>? colorVariants,
-    FVariants<FGoldenVariantConstraint, Color?, Delta<Color?>>? nullableColorVariants,
-    FVariants<FGoldenVariantConstraint, IconThemeData, Delta<IconThemeData>>? iconThemeDataVariants,
-    FVariants<FGoldenVariantConstraint, IconThemeData?, Delta<IconThemeData?>>? nullableIconThemeDataVariants,
-    FVariants<FGoldenVariantConstraint, TextStyle, Delta<TextStyle>>? textStyleVariants,
-    FVariants<FGoldenVariantConstraint, TextStyle?, Delta<TextStyle?>>? nullableTextStyleVariants,
-    FGoldenNestedMotion Function(FGoldenNestedMotion motion)? nestedMotion,
-    FGoldenNestedStyle Function(FGoldenNestedStyle style)? nestedStyle,
+    FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration, BoxDecorationDelta>? boxDecorationVariants,
+    FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration?, BoxDecorationDelta>?
+    nullableBoxDecorationVariants,
+    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color>? colorVariants,
+    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color?>? nullableColorVariants,
+    FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, IconThemeData, IconThemeDataDelta>? iconThemeDataVariants,
+    FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, IconThemeData?, IconThemeDataDelta>?
+    nullableIconThemeDataVariants,
+    FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, TextStyle, TextStyleDelta>? textStyleVariants,
+    FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, TextStyle?, TextStyleDelta>? nullableTextStyleVariants,
+    FGoldenNestedMotionDelta? nestedMotion,
+    FGoldenNestedStyleDelta? nestedStyle,
     List<String>? list,
     Set<String>? set,
     Map<String, int>? map,
-    FVariants<FGoldenVariantConstraint, Color, Delta<Color>>? variantsWithGenericDelta,
-    FVariants<FGoldenVariantConstraint, TextStyle, TextStyleDelta>? variantsWithSpecificDelta,
+    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color>? variantsWithGenericDelta,
+    FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, TextStyle, TextStyleDelta>? variantsWithSpecificDelta,
   }) => .new(
-    someDouble: someDouble ?? this.someDouble,
+    someDouble: someDouble == double.infinity ? this.someDouble : someDouble,
     alignment: alignment ?? this.alignment,
     alignmentGeometry: alignmentGeometry ?? this.alignmentGeometry,
     borderRadius: borderRadius ?? this.borderRadius,
     borderRadiusGeometry: borderRadiusGeometry ?? this.borderRadiusGeometry,
     boxConstraints: boxConstraints ?? this.boxConstraints,
-    boxDecoration: boxDecoration ?? this.boxDecoration,
+    boxDecoration: boxDecoration?.call(this.boxDecoration) ?? this.boxDecoration,
     decoration: decoration ?? this.decoration,
-    color: color ?? this.color,
+    color: color == colorSentinel ? this.color : color,
     edgeInsets: edgeInsets ?? this.edgeInsets,
     edgeInsetsDirectional: edgeInsetsDirectional ?? this.edgeInsetsDirectional,
     edgeInsetsGeometry: edgeInsetsGeometry ?? this.edgeInsetsGeometry,
-    iconThemeData: iconThemeData ?? this.iconThemeData,
-    textStyle: textStyle ?? this.textStyle,
+    iconThemeData: iconThemeData?.call(this.iconThemeData) ?? this.iconThemeData,
+    textStyle: textStyle?.call(this.textStyle) ?? this.textStyle,
     boxShadows: boxShadows ?? this.boxShadows,
     shadows: shadows ?? this.shadows,
-    boxDecorationVariants: boxDecorationVariants ?? this.boxDecorationVariants,
-    nullableBoxDecorationVariants: nullableBoxDecorationVariants ?? this.nullableBoxDecorationVariants,
-    colorVariants: colorVariants ?? this.colorVariants,
-    nullableColorVariants: nullableColorVariants ?? this.nullableColorVariants,
-    iconThemeDataVariants: iconThemeDataVariants ?? this.iconThemeDataVariants,
-    nullableIconThemeDataVariants: nullableIconThemeDataVariants ?? this.nullableIconThemeDataVariants,
-    textStyleVariants: textStyleVariants ?? this.textStyleVariants,
-    nullableTextStyleVariants: nullableTextStyleVariants ?? this.nullableTextStyleVariants,
-    nestedMotion: nestedMotion != null ? nestedMotion(this.nestedMotion) : this.nestedMotion,
-    nestedStyle: nestedStyle != null ? nestedStyle(this.nestedStyle) : this.nestedStyle,
+    boxDecorationVariants: boxDecorationVariants?.call(this.boxDecorationVariants) ?? this.boxDecorationVariants,
+    nullableBoxDecorationVariants:
+        nullableBoxDecorationVariants?.call(this.nullableBoxDecorationVariants) ?? this.nullableBoxDecorationVariants,
+    colorVariants: colorVariants?.call(this.colorVariants) ?? this.colorVariants,
+    nullableColorVariants: nullableColorVariants?.call(this.nullableColorVariants) ?? this.nullableColorVariants,
+    iconThemeDataVariants: iconThemeDataVariants?.call(this.iconThemeDataVariants) ?? this.iconThemeDataVariants,
+    nullableIconThemeDataVariants:
+        nullableIconThemeDataVariants?.call(this.nullableIconThemeDataVariants) ?? this.nullableIconThemeDataVariants,
+    textStyleVariants: textStyleVariants?.call(this.textStyleVariants) ?? this.textStyleVariants,
+    nullableTextStyleVariants:
+        nullableTextStyleVariants?.call(this.nullableTextStyleVariants) ?? this.nullableTextStyleVariants,
+    nestedMotion: nestedMotion?.call(this.nestedMotion) ?? this.nestedMotion,
+    nestedStyle: nestedStyle?.call(this.nestedStyle) ?? this.nestedStyle,
     list: list ?? this.list,
     set: set ?? this.set,
     map: map ?? this.map,
-    variantsWithGenericDelta: variantsWithGenericDelta ?? this.variantsWithGenericDelta,
-    variantsWithSpecificDelta: variantsWithSpecificDelta ?? this.variantsWithSpecificDelta,
+    variantsWithGenericDelta:
+        variantsWithGenericDelta?.call(this.variantsWithGenericDelta) ?? this.variantsWithGenericDelta,
+    variantsWithSpecificDelta:
+        variantsWithSpecificDelta?.call(this.variantsWithSpecificDelta) ?? this.variantsWithSpecificDelta,
   );
 
   /// Linearly interpolate between this and another [FGoldenStyle] using the given factor [t].
@@ -360,7 +254,11 @@ extension $FGoldenStyleTransformations on FGoldenStyle {
   );
 }
 
-mixin _$FGoldenStyleFunctions on Diagnosticable {
+mixin _$FGoldenStyleFunctions on Diagnosticable implements FGoldenStyleDelta {
+  /// Returns itself.
+  @override
+  FGoldenStyle call(Object _) => this as FGoldenStyle;
+
   double get someDouble;
   Alignment get alignment;
   AlignmentGeometry get alignmentGeometry;
@@ -377,46 +275,21 @@ mixin _$FGoldenStyleFunctions on Diagnosticable {
   TextStyle get textStyle;
   List<BoxShadow> get boxShadows;
   List<Shadow> get shadows;
-  FVariants<FGoldenVariantConstraint, BoxDecoration, Delta<BoxDecoration>> get boxDecorationVariants;
-  FVariants<FGoldenVariantConstraint, BoxDecoration?, Delta<BoxDecoration?>> get nullableBoxDecorationVariants;
-  FVariants<FGoldenVariantConstraint, Color, Delta<Color>> get colorVariants;
-  FVariants<FGoldenVariantConstraint, Color?, Delta<Color?>> get nullableColorVariants;
-  FVariants<FGoldenVariantConstraint, IconThemeData, Delta<IconThemeData>> get iconThemeDataVariants;
-  FVariants<FGoldenVariantConstraint, IconThemeData?, Delta<IconThemeData?>> get nullableIconThemeDataVariants;
-  FVariants<FGoldenVariantConstraint, TextStyle, Delta<TextStyle>> get textStyleVariants;
-  FVariants<FGoldenVariantConstraint, TextStyle?, Delta<TextStyle?>> get nullableTextStyleVariants;
+  FVariants<FGoldenVariantConstraint, BoxDecoration, BoxDecorationDelta> get boxDecorationVariants;
+  FVariants<FGoldenVariantConstraint, BoxDecoration?, BoxDecorationDelta> get nullableBoxDecorationVariants;
+  FVariants<FGoldenVariantConstraint, Color, Delta> get colorVariants;
+  FVariants<FGoldenVariantConstraint, Color?, Delta> get nullableColorVariants;
+  FVariants<FGoldenVariantConstraint, IconThemeData, IconThemeDataDelta> get iconThemeDataVariants;
+  FVariants<FGoldenVariantConstraint, IconThemeData?, IconThemeDataDelta> get nullableIconThemeDataVariants;
+  FVariants<FGoldenVariantConstraint, TextStyle, TextStyleDelta> get textStyleVariants;
+  FVariants<FGoldenVariantConstraint, TextStyle?, TextStyleDelta> get nullableTextStyleVariants;
   FGoldenNestedMotion get nestedMotion;
   FGoldenNestedStyle get nestedStyle;
   List<String> get list;
   Set<String> get set;
   Map<String, int> get map;
-  FVariants<FGoldenVariantConstraint, Color, Delta<Color>> get variantsWithGenericDelta;
+  FVariants<FGoldenVariantConstraint, Color, Delta> get variantsWithGenericDelta;
   FVariants<FGoldenVariantConstraint, TextStyle, TextStyleDelta> get variantsWithSpecificDelta;
-
-  /// Returns itself.
-  ///
-  /// Allows [FGoldenStyle] to replace functions that accept and return a [FGoldenStyle], such as a style's
-  /// `copyWith(...)` function.
-  ///
-  /// ## Example
-  ///
-  /// Given:
-  /// ```dart
-  /// void copyWith(FGoldenStyle Function(FGoldenStyle) nestedStyle) {}
-  /// ```
-  ///
-  /// The following:
-  /// ```dart
-  /// copyWith((style) => FGoldenStyle(...));
-  /// ```
-  ///
-  /// Can be replaced with:
-  /// ```dart
-  /// copyWith(FGoldenStyle(...));
-  /// ```
-  @useResult
-  FGoldenStyle call(Object? _) => this as FGoldenStyle;
-
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
@@ -527,10 +400,9 @@ mixin _$FGoldenStyleFunctions on Diagnosticable {
 }
 
 /// A delta that applies modifications to a [FGoldenStyle].
-sealed class FGoldenStyleDelta with Delta<FGoldenStyle> {
-  /// Creates a complete replacement for a [FGoldenStyle].
-  const factory FGoldenStyleDelta.value(FGoldenStyle value) = _FGoldenStyleValue;
-
+///
+/// A [FGoldenStyle] is itself a [FGoldenStyleDelta].
+sealed class FGoldenStyleDelta with Delta {
   /// Creates a delta that returns the [FGoldenStyle] in the current context.
   const factory FGoldenStyleDelta.inherit() = _FGoldenStyleInherit;
 
@@ -585,14 +457,16 @@ sealed class FGoldenStyleDelta with Delta<FGoldenStyle> {
     TextStyleDelta? textStyle,
     List<BoxShadow>? boxShadows,
     List<Shadow>? shadows,
-    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration>? boxDecorationVariants,
-    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration?>? nullableBoxDecorationVariants,
+    FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration, BoxDecorationDelta>? boxDecorationVariants,
+    FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration?, BoxDecorationDelta>?
+    nullableBoxDecorationVariants,
     FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color>? colorVariants,
     FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color?>? nullableColorVariants,
-    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, IconThemeData>? iconThemeDataVariants,
-    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, IconThemeData?>? nullableIconThemeDataVariants,
-    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, TextStyle>? textStyleVariants,
-    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, TextStyle?>? nullableTextStyleVariants,
+    FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, IconThemeData, IconThemeDataDelta>? iconThemeDataVariants,
+    FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, IconThemeData?, IconThemeDataDelta>?
+    nullableIconThemeDataVariants,
+    FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, TextStyle, TextStyleDelta>? textStyleVariants,
+    FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, TextStyle?, TextStyleDelta>? nullableTextStyleVariants,
     FGoldenNestedMotionDelta? nestedMotion,
     FGoldenNestedStyleDelta? nestedStyle,
     List<String>? list,
@@ -601,15 +475,9 @@ sealed class FGoldenStyleDelta with Delta<FGoldenStyle> {
     FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color>? variantsWithGenericDelta,
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, TextStyle, TextStyleDelta>? variantsWithSpecificDelta,
   }) = _FGoldenStyleDelta;
-}
-
-class _FGoldenStyleValue implements FGoldenStyleDelta {
-  const _FGoldenStyleValue(this._value);
-
-  final FGoldenStyle _value;
 
   @override
-  FGoldenStyle call(FGoldenStyle _) => _value;
+  FGoldenStyle call(covariant FGoldenStyle value);
 }
 
 class _FGoldenStyleInherit implements FGoldenStyleDelta {
@@ -686,21 +554,25 @@ class _FGoldenStyleDelta implements FGoldenStyleDelta {
 
   final List<Shadow>? shadows;
 
-  final FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration>? boxDecorationVariants;
+  final FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration, BoxDecorationDelta>?
+  boxDecorationVariants;
 
-  final FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration?>? nullableBoxDecorationVariants;
+  final FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration?, BoxDecorationDelta>?
+  nullableBoxDecorationVariants;
 
   final FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color>? colorVariants;
 
   final FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color?>? nullableColorVariants;
 
-  final FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, IconThemeData>? iconThemeDataVariants;
+  final FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, IconThemeData, IconThemeDataDelta>?
+  iconThemeDataVariants;
 
-  final FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, IconThemeData?>? nullableIconThemeDataVariants;
+  final FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, IconThemeData?, IconThemeDataDelta>?
+  nullableIconThemeDataVariants;
 
-  final FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, TextStyle>? textStyleVariants;
+  final FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, TextStyle, TextStyleDelta>? textStyleVariants;
 
-  final FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, TextStyle?>? nullableTextStyleVariants;
+  final FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, TextStyle?, TextStyleDelta>? nullableTextStyleVariants;
 
   final FGoldenNestedMotionDelta? nestedMotion;
 
@@ -783,15 +655,14 @@ extension $FGoldenNestedMotionTransformations on FGoldenNestedMotion {
   );
 }
 
-mixin _$FGoldenNestedMotionFunctions on Diagnosticable {
+mixin _$FGoldenNestedMotionFunctions on Diagnosticable implements FGoldenNestedMotionDelta {
+  /// Returns itself.
+  @override
+  FGoldenNestedMotion call(Object _) => this as FGoldenNestedMotion;
+
   double get someDouble;
   Duration get duration;
   Curve get curve;
-
-  /// Returns itself.
-  @useResult
-  FGoldenNestedMotion call(Object? _) => this as FGoldenNestedMotion;
-
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
@@ -815,10 +686,9 @@ mixin _$FGoldenNestedMotionFunctions on Diagnosticable {
 }
 
 /// A delta that applies modifications to a [FGoldenNestedMotion].
-sealed class FGoldenNestedMotionDelta with Delta<FGoldenNestedMotion> {
-  /// Creates a complete replacement for a [FGoldenNestedMotion].
-  const factory FGoldenNestedMotionDelta.value(FGoldenNestedMotion value) = _FGoldenNestedMotionValue;
-
+///
+/// A [FGoldenNestedMotion] is itself a [FGoldenNestedMotionDelta].
+sealed class FGoldenNestedMotionDelta with Delta {
   /// Creates a delta that returns the [FGoldenNestedMotion] in the current context.
   const factory FGoldenNestedMotionDelta.inherit() = _FGoldenNestedMotionInherit;
 
@@ -830,15 +700,9 @@ sealed class FGoldenNestedMotionDelta with Delta<FGoldenNestedMotion> {
   /// * [FGoldenNestedMotion.curve]
   const factory FGoldenNestedMotionDelta.delta({double? someDouble, Duration? duration, Curve? curve}) =
       _FGoldenNestedMotionDelta;
-}
-
-class _FGoldenNestedMotionValue implements FGoldenNestedMotionDelta {
-  const _FGoldenNestedMotionValue(this._value);
-
-  final FGoldenNestedMotion _value;
 
   @override
-  FGoldenNestedMotion call(FGoldenNestedMotion _) => _value;
+  FGoldenNestedMotion call(covariant FGoldenNestedMotion value);
 }
 
 class _FGoldenNestedMotionInherit implements FGoldenNestedMotionDelta {
@@ -880,30 +744,10 @@ extension $FGoldenNestedStyleTransformations on FGoldenNestedStyle {
   FGoldenNestedStyle lerp(FGoldenNestedStyle other, double t) => .new();
 }
 
-mixin _$FGoldenNestedStyleFunctions on Diagnosticable {
+mixin _$FGoldenNestedStyleFunctions on Diagnosticable implements FGoldenNestedStyleDelta {
   /// Returns itself.
-  ///
-  /// Allows [FGoldenNestedStyle] to replace functions that accept and return a [FGoldenNestedStyle], such as a style's
-  /// `copyWith(...)` function.
-  ///
-  /// ## Example
-  ///
-  /// Given:
-  /// ```dart
-  /// void copyWith(FGoldenNestedStyle Function(FGoldenNestedStyle) nestedStyle) {}
-  /// ```
-  ///
-  /// The following:
-  /// ```dart
-  /// copyWith((style) => FGoldenNestedStyle(...));
-  /// ```
-  ///
-  /// Can be replaced with:
-  /// ```dart
-  /// copyWith(FGoldenNestedStyle(...));
-  /// ```
-  @useResult
-  FGoldenNestedStyle call(Object? _) => this as FGoldenNestedStyle;
+  @override
+  FGoldenNestedStyle call(Object _) => this as FGoldenNestedStyle;
 
   @override
   bool operator ==(Object other) =>
@@ -914,10 +758,9 @@ mixin _$FGoldenNestedStyleFunctions on Diagnosticable {
 }
 
 /// A delta that applies modifications to a [FGoldenNestedStyle].
-sealed class FGoldenNestedStyleDelta with Delta<FGoldenNestedStyle> {
-  /// Creates a complete replacement for a [FGoldenNestedStyle].
-  const factory FGoldenNestedStyleDelta.value(FGoldenNestedStyle value) = _FGoldenNestedStyleValue;
-
+///
+/// A [FGoldenNestedStyle] is itself a [FGoldenNestedStyleDelta].
+sealed class FGoldenNestedStyleDelta with Delta {
   /// Creates a delta that returns the [FGoldenNestedStyle] in the current context.
   const factory FGoldenNestedStyleDelta.inherit() = _FGoldenNestedStyleInherit;
 
@@ -925,15 +768,9 @@ sealed class FGoldenNestedStyleDelta with Delta<FGoldenNestedStyle> {
   ///
   /// ## Parameters
   const factory FGoldenNestedStyleDelta.delta() = _FGoldenNestedStyleDelta;
-}
-
-class _FGoldenNestedStyleValue implements FGoldenNestedStyleDelta {
-  const _FGoldenNestedStyleValue(this._value);
-
-  final FGoldenNestedStyle _value;
 
   @override
-  FGoldenNestedStyle call(FGoldenNestedStyle _) => _value;
+  FGoldenNestedStyle call(covariant FGoldenNestedStyle value);
 }
 
 class _FGoldenNestedStyleInherit implements FGoldenNestedStyleDelta {
@@ -950,17 +787,3 @@ class _FGoldenNestedStyleDelta implements FGoldenNestedStyleDelta {
   FGoldenNestedStyle call(FGoldenNestedStyle original) => FGoldenNestedStyle();
 }
 ''';
-
-void main() {
-  test('design', () async {
-    final readerWriter = TestReaderWriter(rootPackage: 'forui_internal_gen');
-    await readerWriter.testing.loadIsolateSources();
-
-    await testBuilder(
-      designBuilder(.empty),
-      {'forui_internal_gen|test/src/example.dart': _source},
-      outputs: {'forui_internal_gen|test/src/example.design.dart': _golden},
-      readerWriter: readerWriter,
-    );
-  }, timeout: const Timeout(Duration(minutes: 1)));
-}
