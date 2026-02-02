@@ -22,9 +22,7 @@ FAccordionStyle accordionStyle({required FColors colors, required FTypography ty
       iconStyle: .all(IconThemeData(color: colors.primary, size: 20)),
       focusedOutlineStyle: style.focusedOutlineStyle,
       dividerStyle: FDividerStyle(color: colors.border, padding: .zero),
-      tappableStyle: style.tappableStyle.copyWith(
-        motion: const .delta(bounceTween: FTappableMotion.noBounceTween),
-      ),
+      tappableStyle: style.tappableStyle.copyWith(motion: const .delta(bounceTween: FTappableMotion.noBounceTween)),
       titlePadding: const .symmetric(vertical: 15),
       childPadding: const .only(bottom: 15),
       motion: const FAccordionMotion(),

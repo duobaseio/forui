@@ -10,11 +10,7 @@ class ButtonPrimaryPage extends Example {
   ButtonPrimaryPage({@queryParam super.theme});
 
   @override
-  Widget example(BuildContext _) => FButton(
-    mainAxisSize: .min,
-    onPress: () {},
-    child: const Text('Button'),
-  );
+  Widget example(BuildContext _) => FButton(mainAxisSize: .min, onPress: () {}, child: const Text('Button'));
 }
 
 @RoutePage()

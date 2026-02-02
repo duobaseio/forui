@@ -1,4 +1,3 @@
-
 import 'package:forui/forui.dart';
 
 final colors = FThemes.zinc.light.colors;
