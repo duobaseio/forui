@@ -16,7 +16,7 @@ class InheritedVariants extends InheritedWidget {
   const InheritedVariants({required this.variants, required super.child, super.key});
 
   @override
-  bool updateShouldNotify(InheritedVariants old) => !setEquals(variants, variants);
+  bool updateShouldNotify(InheritedVariants old) => !setEquals(variants, old.variants);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
