@@ -73,14 +73,13 @@ void main() {
 
       theme.debugFillProperties(builder);
 
-      expect(
-        builder.properties.map((p) => p.toString()),
-        [
-          DiagnosticsProperty<FThemeData>('data', FThemes.zinc.dark, showName: false),
-          EnumProperty<TextDirection?>('textDirection', theme.textDirection),
-          DiagnosticsProperty('platform', theme.platform),
-        ].map((p) => p.toString()),
-      );
+      expect(builder.properties.length, 3);
+      expect(builder.properties[0].name, 'data');
+      expect((builder.properties[0] as DiagnosticsProperty<FThemeData>).value, FThemes.zinc.dark);
+      expect(builder.properties[1].name, 'textDirection');
+      expect((builder.properties[1] as DiagnosticsProperty<TextDirection?>).value, theme.textDirection);
+      expect(builder.properties[2].name, 'platform');
+      expect((builder.properties[2] as DiagnosticsProperty).value, theme.platform);
     });
   });
 }

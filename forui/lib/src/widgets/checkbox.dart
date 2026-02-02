@@ -217,6 +217,7 @@ class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
       iconStyle: .delta(
         IconThemeData(color: colors.primaryForeground, size: 14),
         variants: {
+          [.disabled.and(.error)]: .delta(color: colors.disable(colors.errorForeground)),
           [.error]: .delta(color: colors.errorForeground),
           [.disabled]: .delta(color: colors.disable(colors.primaryForeground)),
         },
@@ -228,14 +229,19 @@ class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
           color: colors.background,
         ),
         variants: {
+          [.disabled.and(.error).and(.selected)]: .delta(border: null, color: colors.disable(colors.error)),
+          [.disabled.and(.error)]: .delta(
+            border: .all(color: colors.disable(colors.error), width: 0.6),
+            color: colors.disable(colors.background),
+          ),
           [.error.and(.selected)]: .delta(border: null, color: colors.error),
           [.error]: .delta(border: .all(color: colors.error, width: 0.6)),
-          [.disabled.and(.selected).and(.not(.error))]: .delta(color: colors.disable(colors.primary)),
-          [.disabled.and(.not(.error))]: .delta(
+          [.disabled.and(.selected)]: .delta(border: null, color: colors.disable(colors.primary)),
+          [.disabled]: .delta(
             border: .all(color: colors.disable(colors.primary), width: 0.6),
-            color: colors.disable(colors.primary),
+            color: colors.disable(colors.background),
           ),
-          [.selected]: .delta(color: colors.primary),
+          [.selected]: .delta(border: null, color: colors.primary),
         },
       ),
       labelTextStyle: style.formFieldStyle.labelTextStyle,

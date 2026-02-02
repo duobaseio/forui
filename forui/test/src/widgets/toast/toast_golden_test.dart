@@ -48,7 +48,7 @@ void main() {
             const Text('Lorem ipsum dolor sit amet, consectetur adipiscing elit.'),
             FToast(
               style: .delta(
-                backgroundFilter: () => .blur(sigmaX: 5, sigmaY: 5),
+                backgroundFilter: .blur(sigmaX: 5, sigmaY: 5),
                 decoration: .value(BoxDecoration(
                   color: FThemes.zinc.light.colors.background.withValues(alpha: 0.5),
                   borderRadius: FThemes.zinc.light.style.borderRadius,

@@ -54,6 +54,29 @@ void main() {
           );
         });
 
+        testWidgets('disabled - ${theme.name} - $focused ${text == null ? '- no text' : ''}', (tester) async {
+          await tester.pumpWidget(
+            TestScaffold.app(
+              theme: theme.data,
+              child: FTextField(
+                control: .managed(initial: text == null ? null : TextEditingValue(text: text)),
+                autofocus: focused_,
+                enabled: false,
+                label: const Text('My Label'),
+                hint: 'hint',
+                description: const Text('Some help text.'),
+              ),
+            ),
+          );
+
+          await tester.pumpAndSettle();
+
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('text-field/${theme.name}/disabled-$focused${text == null ? '-no-text' : ''}.png'),
+          );
+        });
+
         testWidgets('error - ${theme.name} - $focused ${text == null ? '- no text' : ''}', (tester) async {
           await tester.pumpWidget(
             TestScaffold.app(
@@ -73,6 +96,30 @@ void main() {
           await expectLater(
             find.byType(TestScaffold),
             matchesGoldenFile('text-field/${theme.name}/error-$focused${text == null ? '-no-text' : ''}.png'),
+          );
+        });
+
+
+        testWidgets('disabled error - ${theme.name} - $focused ${text == null ? '- no text' : ''}', (tester) async {
+          await tester.pumpWidget(
+            TestScaffold.app(
+              theme: theme.data,
+              child: FTextField(
+                control: .managed(initial: text == null ? null : TextEditingValue(text: text)),
+                autofocus: focused_,
+                enabled: false,
+                label: const Text('My Label'),
+                hint: 'hint',
+                error: const Text('An error has occurred.'),
+              ),
+            ),
+          );
+
+          await tester.pumpAndSettle();
+
+          await expectLater(
+            find.byType(TestScaffold),
+            matchesGoldenFile('text-field/${theme.name}/disabled-error-$focused${text == null ? '-no-text' : ''}.png'),
           );
         });
 

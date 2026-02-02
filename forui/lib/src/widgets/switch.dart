@@ -212,7 +212,6 @@ class FSwitchStyle extends FLabelStyle with _$FSwitchStyleFunctions {
       trackColor: FVariants(
         colors.border,
         variants: {
-          // Disabled
           [.disabled.and(.selected)]: colors.disable(colors.primary),
           [.disabled]: colors.disable(colors.border),
           [.selected]: colors.primary,

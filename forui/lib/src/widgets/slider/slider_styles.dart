@@ -10,7 +10,6 @@ import 'package:forui/src/foundation/annotations.dart';
 import 'package:forui/src/theme/variant.dart';
 
 @Variants('FSliderAxis', {
-  'horizontal': (1, 'The horizontal slider variant.'),
   'vertical': (1, 'The vertical slider variant.'),
 })
 @Variants('FSlider', {
@@ -139,8 +138,8 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
     this.crossAxisExtent = 8,
     this.thumbSize = 20,
     this.tooltipMotion = const FTooltipMotion(),
-    this.tooltipTipAnchor = .centerLeft,
-    this.tooltipThumbAnchor = .centerRight,
+    this.tooltipTipAnchor = .bottomCenter,
+    this.tooltipThumbAnchor = .topCenter,
     super.labelPadding = const .only(bottom: 5),
     super.descriptionPadding,
     super.errorPadding = const .only(top: 5),
@@ -156,6 +155,8 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
     required double labelOffset,
     required EdgeInsetsGeometry descriptionPadding,
     required EdgeInsetsGeometry childPadding,
+    AlignmentGeometry tooltipTipAnchor = .bottomCenter,
+    AlignmentGeometry tooltipThumbAnchor = .topCenter,
   }) : this(
          activeColor: FVariants(
            colors.primary,
@@ -181,6 +182,8 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
            labelOffset: labelOffset,
          ),
          tooltipStyle: .inherit(colors: colors, typography: typography, style: style),
+         tooltipTipAnchor: tooltipTipAnchor,
+         tooltipThumbAnchor: tooltipThumbAnchor,
          labelTextStyle: style.formFieldStyle.labelTextStyle,
          descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,
          errorTextStyle: style.formFieldStyle.errorTextStyle,

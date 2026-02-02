@@ -6,7 +6,10 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/annotations.dart';
+import 'package:forui/src/theme/variant.dart';
 
+@Variants('FDividerAxis', {'vertical': (1, 'The vertical divider variant.')})
 part 'divider.design.dart';
 
 /// A visual separator used to create division between content.
@@ -46,11 +49,9 @@ class FDivider extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final inheritedStyle = switch (axis) {
-      .horizontal => context.theme.dividerStyles.horizontalStyle,
-      .vertical => context.theme.dividerStyles.verticalStyle,
-    };
-    final style = this.style(inheritedStyle);
+    final style = this.style(
+      context.theme.dividerStyles.resolve({if (axis == .vertical) FDividerAxisVariant.vertical}),
+    );
 
     return Container(
       margin: style.padding,
@@ -70,31 +71,27 @@ class FDivider extends StatelessWidget {
 }
 
 /// The [FDivider] styles.
-class FDividerStyles with Diagnosticable, _$FDividerStylesFunctions {
-  /// The horizontal divider's style.
-  @override
-  final FDividerStyle horizontalStyle;
-
-  /// The vertical divider's style.
-  @override
-  final FDividerStyle verticalStyle;
-
+class FDividerStyles extends FVariants<FDividerAxisVariantConstraint, FDividerStyle, FDividerStyleDelta> {
   /// Creates a [FDividerStyles].
-  FDividerStyles({required this.horizontalStyle, required this.verticalStyle});
+  FDividerStyles(super.base, {required super.variants});
+
+  /// Creates a [FDividerStyles] from deltas.
+  FDividerStyles.delta(super.base, {required super.variants}) : super.delta();
+
+  /// Creates a [FDividerStyles] from raw values.
+  FDividerStyles.raw(super.base, super.variants) : super.raw();
 
   /// Creates a [FDividerStyles] that inherits its properties.
   FDividerStyles.inherit({required FColors colors, required FStyle style})
-    : this(
-        horizontalStyle: FDividerStyle(
+    : super.delta(
+        FDividerStyle(
           color: colors.secondary,
           padding: FDividerStyle.defaultPadding.horizontalStyle,
           width: style.borderWidth,
         ),
-        verticalStyle: FDividerStyle(
-          color: colors.secondary,
-          padding: FDividerStyle.defaultPadding.verticalStyle,
-          width: style.borderWidth,
-        ),
+        variants: {
+          [.vertical]: .delta(padding: FDividerStyle.defaultPadding.verticalStyle),
+        },
       );
 }
 

@@ -401,14 +401,20 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
       tileStyle: tileStyle.copyWith(decoration: .apply([.onAll(const .delta(border: null, borderRadius: null))])),
       dividerColor: .all(colors.border),
       dividerWidth: style.borderWidth,
-      labelTextStyle: style.formFieldStyle.labelTextStyle.apply<FFormFieldVariant>([
-        .onAll(.delta(fontSize: typography.base.fontSize, height: typography.xs.height)),
-      ]),
+      labelTextStyle: .delta(
+        typography.base.copyWith(
+          color: style.formFieldStyle.labelTextStyle.base.color ?? colors.primary,
+          fontWeight: .w600,
+        ),
+        variants: {
+          [.disabled]: .delta(color: colors.disable(colors.primary)),
+        },
+      ),
       descriptionTextStyle: style.formFieldStyle.descriptionTextStyle.apply([
         .onAll(.delta(fontSize: typography.xs.fontSize, height: typography.xs.height)),
       ]),
       errorTextStyle: style.formFieldStyle.errorTextStyle.apply([
-        .onAll(.delta(fontSize: typography.xs.fontSize, height: typography.xs.height)),
+        .onAll(.delta(fontSize: typography.xs.fontSize, height: typography.xs.height, fontWeight: .w400)),
       ]),
     );
   }

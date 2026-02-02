@@ -168,11 +168,15 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
           borderRadius: style.borderRadius,
         ),
         variants: {
+          [.disabled.and(.error)]: OutlineInputBorder(
+            borderSide: BorderSide(color: colors.disable(colors.error), width: style.borderWidth),
+            borderRadius: style.borderRadius,
+          ),
           [.error]: OutlineInputBorder(
             borderSide: BorderSide(color: colors.error, width: style.borderWidth),
             borderRadius: style.borderRadius,
           ),
-          [.disabled.and(.not(.error))]: OutlineInputBorder(
+          [.disabled]: OutlineInputBorder(
             borderSide: BorderSide(color: colors.disable(colors.border), width: style.borderWidth),
             borderRadius: style.borderRadius,
           ),

@@ -729,7 +729,13 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     determinateProgressStyle: a.determinateProgressStyle.lerp(b.determinateProgressStyle, t),
     dialogRouteStyle: a.dialogRouteStyle.lerp(b.dialogRouteStyle, t),
     dialogStyle: a.dialogStyle.lerp(b.dialogStyle, t),
-    dividerStyles: a.dividerStyles.lerp(b.dividerStyles, t),
+    dividerStyles: FVariants.lerpWhereUsing(
+      a.dividerStyles,
+      b.dividerStyles,
+      t,
+      (a, b, t) => a!.lerp(b!, t),
+      FDividerStyles.raw,
+    ),
     headerStyles: FVariants.lerpWhereUsing(
       a.headerStyles,
       b.headerStyles,
@@ -1245,8 +1251,8 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
 
       /// Divider
       dividerTheme: DividerThemeData(
-        color: dividerStyles.horizontalStyle.color,
-        thickness: dividerStyles.horizontalStyle.width,
+        color: dividerStyles.resolve({}).color,
+        thickness: dividerStyles.resolve({}).width,
       ),
 
       iconTheme: IconThemeData(color: colors.primary, size: 20),

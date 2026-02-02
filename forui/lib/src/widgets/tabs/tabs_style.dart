@@ -28,13 +28,9 @@ class FTabsStyle with Diagnosticable, _$FTabsStyleFunctions {
   @override
   final EdgeInsetsGeometry padding;
 
-  /// The [TextStyle] of the label.
+  /// The label's [TextStyle].
   @override
-  final TextStyle selectedLabelTextStyle;
-
-  /// The [TextStyle] of the label.
-  @override
-  final TextStyle unselectedLabelTextStyle;
+  final FVariants<FTabVariantConstraint, TextStyle, TextStyleDelta> labelTextStyle;
 
   /// The indicator.
   @override
@@ -59,8 +55,7 @@ class FTabsStyle with Diagnosticable, _$FTabsStyleFunctions {
   /// Creates a [FTabsStyle].
   FTabsStyle({
     required this.decoration,
-    required this.selectedLabelTextStyle,
-    required this.unselectedLabelTextStyle,
+    required this.labelTextStyle,
     required this.indicatorDecoration,
     required this.focusedOutlineStyle,
     this.padding = const .all(4),
@@ -77,15 +72,15 @@ class FTabsStyle with Diagnosticable, _$FTabsStyleFunctions {
           borderRadius: style.borderRadius,
           color: colors.muted,
         ),
-        selectedLabelTextStyle: typography.sm.copyWith(
-          fontWeight: .w500,
-          fontFamily: typography.defaultFontFamily,
-          color: colors.foreground,
-        ),
-        unselectedLabelTextStyle: typography.sm.copyWith(
-          fontWeight: .w500,
-          fontFamily: typography.defaultFontFamily,
-          color: colors.mutedForeground,
+        labelTextStyle: .delta(
+          typography.sm.copyWith(
+            fontWeight: .w500,
+            fontFamily: typography.defaultFontFamily,
+            color: colors.mutedForeground,
+          ),
+          variants: {
+            [.selected]: .delta(color: colors.foreground),
+          },
         ),
         indicatorDecoration: BoxDecoration(color: colors.background, borderRadius: style.borderRadius),
         focusedOutlineStyle: style.focusedOutlineStyle,

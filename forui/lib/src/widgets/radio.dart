@@ -218,6 +218,7 @@ class FRadioStyle extends FLabelStyle with _$FRadioStyleFunctions {
       borderColor: FVariants(
         colors.primary,
         variants: {
+          [.disabled.and(.error)]: colors.disable(colors.error),
           [.error]: colors.error,
           [.disabled]: colors.disable(colors.primary),
         },
@@ -226,6 +227,7 @@ class FRadioStyle extends FLabelStyle with _$FRadioStyleFunctions {
       indicatorColor: FVariants(
         colors.primary,
         variants: {
+          [.disabled.and(.error)]: colors.disable(colors.error),
           [.error]: colors.error,
           [.disabled]: colors.disable(colors.primary),
         },

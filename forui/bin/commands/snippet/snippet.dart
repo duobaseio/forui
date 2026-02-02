@@ -471,8 +471,8 @@ extension CustomMaterialTheme on FThemeData {
         shape: RoundedRectangleBorder(borderRadius: style.borderRadius),
       ),
       dividerTheme: DividerThemeData(
-        color: dividerStyles.horizontalStyle.color,
-        thickness: dividerStyles.horizontalStyle.width,
+        color: dividerStyles.resolve({}).color,
+        thickness: dividerStyles.resolve({}).width,
       ),
       iconTheme: IconThemeData(color: colors.primary, size: 20),
     );
