@@ -1043,12 +1043,8 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
         disabledInactiveTrackColor: sliderStyles.base.inactiveColor.resolve({FSliderVariant.disabled}),
         activeTickMarkColor: sliderStyles.base.markStyle.tickColor.base,
         inactiveTickMarkColor: sliderStyles.base.markStyle.tickColor.base,
-        disabledActiveTickMarkColor: sliderStyles.base.markStyle.tickColor.resolve({
-          FSliderVariant.disabled,
-        }),
-        disabledInactiveTickMarkColor: sliderStyles.base.markStyle.tickColor.resolve({
-          FSliderVariant.disabled,
-        }),
+        disabledActiveTickMarkColor: sliderStyles.base.markStyle.tickColor.resolve({FSliderVariant.disabled}),
+        disabledInactiveTickMarkColor: sliderStyles.base.markStyle.tickColor.resolve({FSliderVariant.disabled}),
         thumbColor: sliderStyles.base.thumbStyle.borderColor.base,
         disabledThumbColor: sliderStyles.base.thumbStyle.borderColor.resolve({FSliderVariant.disabled}),
         valueIndicatorColor: sliderStyles.base.tooltipStyle.decoration.color,

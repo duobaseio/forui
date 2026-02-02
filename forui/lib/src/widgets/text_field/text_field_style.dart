@@ -1,12 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:forui/src/theme/delta.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
+import 'package:forui/src/theme/delta.dart';
 import 'package:forui/src/theme/variant.dart';
 
 @Variants('FTextField', {
@@ -123,9 +123,11 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
   /// Creates a [FTextFieldStyle] that inherits its properties.
   factory FTextFieldStyle.inherit({required FColors colors, required FTypography typography, required FStyle style}) {
     final label = FLabelStyles.inherit(style: style).verticalStyle;
-    final ghost = FButtonStyles.inherit(colors: colors, typography: typography, style: style).resolve({
-      FButtonVariant.ghost,
-    });
+    final ghost = FButtonStyles.inherit(
+      colors: colors,
+      typography: typography,
+      style: style,
+    ).resolve({FButtonVariant.ghost});
     final textStyle = typography.sm.copyWith(fontFamily: typography.defaultFontFamily);
     final iconStyle = FVariants<FTextFieldVariantConstraint, IconThemeData, IconThemeDataDelta>.delta(
       IconThemeData(color: colors.mutedForeground, size: 17),

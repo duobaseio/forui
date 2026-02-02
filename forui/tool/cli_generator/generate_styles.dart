@@ -79,7 +79,8 @@ List<String> _aliases(ConstructorFragment fragment) {
   final es = RegExp(r'(ch|sh|x|ss|z)$', caseSensitive: false);
 
   var name = fragment.type.replaceAll(RegExp('Styles?'), '').substring(1);
-  if (name.isEmpty) { // Special case for `FStyle`.
+  if (name.isEmpty) {
+    // Special case for `FStyle`.
     name = 'style';
   }
 

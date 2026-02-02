@@ -1,11 +1,11 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/src/foundation/annotations.dart';
-import 'package:forui/src/theme/variant.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/annotations.dart';
+import 'package:forui/src/theme/variant.dart';
 
 @Variants('FAlert', {'destructive': (2, 'The destructive alert style.')})
 part 'alert.design.dart';
@@ -137,7 +137,7 @@ class FAlertStyles extends FVariants<FAlertVariantConstraint, FAlertStyle, FAler
   FAlertStyles.delta(super.base, {required super.variants}) : super.delta();
 
   /// Creates a [FAlertStyles] from raw values.
-  FAlertStyles.raw(super.base, super.variants): super.raw();
+  FAlertStyles.raw(super.base, super.variants) : super.raw();
 
   /// Creates a [FAlertStyles] that inherits its properties.
   FAlertStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})

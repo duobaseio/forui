@@ -50,7 +50,8 @@ void main() {
               builder: (context) => FButton(
                 onPress: () => showFDialog(
                   routeStyle: .delta(
-                    barrierFilter: () => (animation) => .blur(sigmaX: animation * 5, sigmaY: animation * 5),
+                    barrierFilter: () =>
+                        (animation) => .blur(sigmaX: animation * 5, sigmaY: animation * 5),
                   ),
                   context: context,
                   builder: (context, _, animation) => FDialog(
@@ -86,10 +87,12 @@ void main() {
                 onPress: () => showFDialog(
                   style: .delta(
                     backgroundFilter: (v) => .blur(sigmaX: v * 5, sigmaY: v * 5),
-                    decoration: .value(BoxDecoration(
-                      borderRadius: theme.data.style.borderRadius,
-                      color: theme.data.colors.background.withValues(alpha: 0.5),
-                    )),
+                    decoration: .value(
+                      BoxDecoration(
+                        borderRadius: theme.data.style.borderRadius,
+                        color: theme.data.colors.background.withValues(alpha: 0.5),
+                      ),
+                    ),
                   ),
                   context: context,
                   builder: (context, style, animation) => FDialog(

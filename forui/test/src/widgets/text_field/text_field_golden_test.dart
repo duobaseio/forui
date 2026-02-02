@@ -99,7 +99,6 @@ void main() {
           );
         });
 
-
         testWidgets('disabled error - ${theme.name} - $focused ${text == null ? '- no text' : ''}', (tester) async {
           await tester.pumpWidget(
             TestScaffold.app(

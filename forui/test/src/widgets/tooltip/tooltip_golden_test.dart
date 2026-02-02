@@ -53,11 +53,13 @@ void main() {
               FTooltip(
                 style: .delta(
                   backgroundFilter: .blur(sigmaX: 5, sigmaY: 5),
-                  decoration: .value(BoxDecoration(
-                    color: theme.data.colors.background.withValues(alpha: 0.5),
-                    borderRadius: theme.data.style.borderRadius,
-                    border: .all(width: theme.data.style.borderWidth, color: theme.data.colors.border),
-                  )),
+                  decoration: .value(
+                    BoxDecoration(
+                      color: theme.data.colors.background.withValues(alpha: 0.5),
+                      borderRadius: theme.data.style.borderRadius,
+                      border: .all(width: theme.data.style.borderWidth, color: theme.data.colors.border),
+                    ),
+                  ),
                 ),
                 tipBuilder: (context, _) => const Text('Lorem'),
                 child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),

@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/widgets.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
@@ -236,7 +237,7 @@ void main() {
 
     test('on(...)', () {
       final delta = FVariantsDelta<FVariant, FVariant, int, _Add>.apply([
-            .on({b, c}, const _Add(10)),
+        .on({b, c}, const _Add(10)),
       ]);
       final result = delta(createVariants(0, {a: 1, b: 2}));
 

@@ -18,7 +18,15 @@ class Content extends StatelessWidget {
   final MainAxisSize mainAxisSize;
   final FCardStyleDelta style;
 
-  const Content({required this.mainAxisSize, required this.style, this.image, this.title, this.subtitle, this.child, super.key});
+  const Content({
+    required this.mainAxisSize,
+    required this.style,
+    this.image,
+    this.title,
+    this.subtitle,
+    this.child,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

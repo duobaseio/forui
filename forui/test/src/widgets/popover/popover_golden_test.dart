@@ -92,11 +92,13 @@ void main() {
                 control: .managed(controller: controller),
                 style: .delta(
                   backgroundFilter: (v) => .blur(sigmaX: v * 5, sigmaY: v * 5),
-                  decoration: .value(BoxDecoration(
-                    color: theme.data.colors.background.withValues(alpha: 0.5),
-                    borderRadius: theme.data.style.borderRadius,
-                    border: .all(width: theme.data.style.borderWidth, color: theme.data.colors.border),
-                  )),
+                  decoration: .value(
+                    BoxDecoration(
+                      color: theme.data.colors.background.withValues(alpha: 0.5),
+                      borderRadius: theme.data.style.borderRadius,
+                      border: .all(width: theme.data.style.borderWidth, color: theme.data.colors.border),
+                    ),
+                  ),
                 ),
                 popoverBuilder: (_, _) => const SizedBox.square(dimension: 100),
                 child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),

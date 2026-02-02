@@ -277,9 +277,7 @@ void main() {
 
       setUp(() {
         final sliderStyles = FThemes.zinc.light.sliderStyles;
-        sliderStyle = sliderStyles.resolve({
-          if (layout.vertical) FSliderAxisVariant.vertical,
-        });
+        sliderStyle = sliderStyles.resolve({if (layout.vertical) FSliderAxisVariant.vertical});
 
         positive = layout.vertical ? .centerLeft : .topCenter;
         negative = layout.vertical ? .centerRight : .bottomCenter;

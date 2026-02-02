@@ -9,9 +9,7 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
 import 'package:forui/src/theme/variant.dart';
 
-@Variants('FSliderAxis', {
-  'vertical': (1, 'The vertical slider variant.'),
-})
+@Variants('FSliderAxis', {'vertical': (1, 'The vertical slider variant.')})
 @Variants('FSlider', {
   'disabled': (2, 'The semantic variant when this widget is disabled and cannot be interacted with.'),
 })

@@ -97,11 +97,7 @@ void main() {
     testWidgets('constructor', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(
-          child: FSelect<int>(
-            items: const {'A': 1, 'B': 2},
-            key: key,
-            style: TestScaffold.blueScreen.selectStyle,
-          ),
+          child: FSelect<int>(items: const {'A': 1, 'B': 2}, key: key, style: TestScaffold.blueScreen.selectStyle),
         ),
       );
 

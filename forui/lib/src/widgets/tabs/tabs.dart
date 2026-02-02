@@ -4,11 +4,11 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:forui/src/theme/variant.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
+import 'package:forui/src/theme/variant.dart';
 
 @Variants('FTab', {'selected': (2, 'The selected tab variant.')})
 part 'tab_controller.dart';

@@ -94,19 +94,19 @@ class _FAccordionState extends State<FAccordion> {
 
   @override
   Widget build(BuildContext context) => Column(
-      children: [
-        for (final (index, child) in widget.children.indexed)
-          if (child is FAccordionItemMixin)
-            InheritedAccordionData(
-              index: index,
-              controller: _controller,
-              style: widget.style(context.theme.accordionStyle),
-              child: child,
-            )
-          else
-            child,
-      ],
-    );
+    children: [
+      for (final (index, child) in widget.children.indexed)
+        if (child is FAccordionItemMixin)
+          InheritedAccordionData(
+            index: index,
+            controller: _controller,
+            style: widget.style(context.theme.accordionStyle),
+            child: child,
+          )
+        else
+          child,
+    ],
+  );
 }
 
 @internal

@@ -283,10 +283,10 @@ class FVariantOperation<K extends FVariantConstraint, E extends FVariant, V, D e
   /// * [FVariantOperation.onVariants] for applying to all variants.
   /// * [FVariantOperation.onAll] for applying to all variants and base.
   FVariantOperation.on(Set<K> constraints, D delta)
-      : _call = ((base, existing) {
-    final addition = delta(base) as V;
-    return .raw(base, {...existing, for (final constraint in constraints) constraint: addition});
-  });
+    : _call = ((base, existing) {
+        final addition = delta(base) as V;
+        return .raw(base, {...existing, for (final constraint in constraints) constraint: addition});
+      });
 
   /// Applies [delta] to existing variants whose constraint's variants are all present in [variants].
   ///

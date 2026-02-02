@@ -37,7 +37,14 @@ class FToast extends StatelessWidget {
   final Widget? suffix;
 
   /// Creates a [FToast].
-  const FToast({required this.title, this.style = const .inherit(), this.icon, this.description, this.suffix, super.key});
+  const FToast({
+    required this.title,
+    this.style = const .inherit(),
+    this.icon,
+    this.description,
+    this.suffix,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {

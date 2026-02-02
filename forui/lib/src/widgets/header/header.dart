@@ -5,19 +5,17 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/src/foundation/annotations.dart';
-import 'package:forui/src/theme/delta.dart';
-import 'package:forui/src/theme/variant.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/annotations.dart';
 import 'package:forui/src/foundation/debug.dart';
 import 'package:forui/src/foundation/rendering.dart';
+import 'package:forui/src/theme/delta.dart';
+import 'package:forui/src/theme/variant.dart';
 
-@Variants('FHeader', {
-  'nested': (1, 'The nested header variant.'),
-})
+@Variants('FHeader', {'nested': (1, 'The nested header variant.')})
 @Sentinels(FHeaderStyle, {'backgroundFilter': 'imageFilterSentinel'})
 part 'header.design.dart';
 

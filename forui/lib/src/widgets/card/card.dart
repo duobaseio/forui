@@ -73,10 +73,8 @@ class FCard extends StatelessWidget {
   const FCard.raw({required this.child, this.style = const .inherit(), super.key});
 
   @override
-  Widget build(BuildContext context) => DecoratedBox(
-    decoration: style(context.theme.cardStyle).decoration,
-    child: child,
-  );
+  Widget build(BuildContext context) =>
+      DecoratedBox(decoration: style(context.theme.cardStyle).decoration, child: child);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

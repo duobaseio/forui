@@ -902,9 +902,11 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
     required FStyle style,
   }) {
     final label = FLabelStyles.inherit(style: style).verticalStyle;
-    final ghost = FButtonStyles.inherit(colors: colors, typography: typography, style: style).resolve({
-      FButtonVariant.ghost,
-    });
+    final ghost = FButtonStyles.inherit(
+      colors: colors,
+      typography: typography,
+      style: style,
+    ).resolve({FButtonVariant.ghost});
 
     return .new(
       decoration: FVariants(
@@ -941,15 +943,17 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
       ),
       clearButtonStyle: ghost.copyWith(
         iconContentStyle: ghost.iconContentStyle.copyWith(
-          iconStyle: FVariantsDelta.value(.new(
-            IconThemeData(color: colors.mutedForeground, size: 17),
-            variants: {
-              [FTappableVariantConstraint.disabled]: IconThemeData(
-                color: colors.disable(colors.mutedForeground),
-                size: 17,
-              ),
-            },
-          )),
+          iconStyle: FVariantsDelta.value(
+            .new(
+              IconThemeData(color: colors.mutedForeground, size: 17),
+              variants: {
+                [FTappableVariantConstraint.disabled]: IconThemeData(
+                  color: colors.disable(colors.mutedForeground),
+                  size: 17,
+                ),
+              },
+            ),
+          ),
         ),
       ),
       tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),

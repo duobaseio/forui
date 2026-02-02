@@ -215,10 +215,12 @@ void main() {
               FSidebar(
                 style: .delta(
                   backgroundFilter: .blur(sigmaX: 5, sigmaY: 5),
-                  decoration: .value(BoxDecoration(
-                    color: theme.data.colors.background.withValues(alpha: 0.5),
-                    borderRadius: theme.data.style.borderRadius,
-                  )),
+                  decoration: .value(
+                    BoxDecoration(
+                      color: theme.data.colors.background.withValues(alpha: 0.5),
+                      borderRadius: theme.data.style.borderRadius,
+                    ),
+                  ),
                 ),
                 header: const Text('Header'),
                 footer: const Text('Footer'),

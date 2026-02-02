@@ -57,11 +57,8 @@ class PlaceholderContent extends StatelessWidget {
   const PlaceholderContent({required this.size, required this.style, super.key});
 
   @override
-  Widget build(BuildContext context) => Icon(
-    FIcons.userRound,
-    size: size / 2,
-    color: style.call(context.theme.avatarStyle).foregroundColor,
-  );
+  Widget build(BuildContext context) =>
+      Icon(FIcons.userRound, size: size / 2, color: style.call(context.theme.avatarStyle).foregroundColor);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

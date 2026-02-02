@@ -10,9 +10,7 @@ void main() {
   const key = Key('field');
 
   testWidgets('blue screen', (tester) async {
-    await tester.pumpWidget(
-      TestScaffold.blue(child: FTimeField(style: TestScaffold.blueScreen.timeFieldStyle)),
-    );
+    await tester.pumpWidget(TestScaffold.blue(child: FTimeField(style: TestScaffold.blueScreen.timeFieldStyle)));
 
     await expectBlueScreen();
   });
