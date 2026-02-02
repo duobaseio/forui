@@ -10,7 +10,6 @@ import componentsSnippet from '@/snippets/snippets/themes/components/components.
 import colorsSnippet from '@/snippets/snippets/themes/components/colors.json';
 import typographySnippet from '@/snippets/snippets/themes/components/typography.json';
 import styleSnippet from '@/snippets/snippets/themes/components/style.json';
-import widgetStateMapSnippet from '@/snippets/snippets/themes/components/widget_state_map.json';
 import mainSnippet from '@/snippets/snippets/themes/customization/main.json';
 import themeSnippet from '@/snippets/snippets/themes/customization/theme/theme.json';
 import accordionStyleSnippet from '@/snippets/snippets/themes/customization/theme/accordion_style.json';
@@ -182,7 +181,8 @@ be used. In general, more specific constraints should be placed above more gener
 
 In the following example, given the states `{hovered, pressed}`, the 1st constraint will **always** match.
 
-<CodeSnippet snippet={widgetStateMapSnippet} />
+{/* TODO: replace with FVariants */}
+{/* <CodeSnippet snippet={widgetStateMapSnippet} /> */}
 
 Most `FWidgetStateMap` fields only support a subset of states. For example, [`FButtonStyle.decoration`](https://pub.dev/documentation/forui/latest/forui.widgets.button/FButtonStyle/decoration.html)
 only supports the disabled, hovered, pressed and focused states. A field's supported states are documented in its [API docs](https://pub.dev/documentation/forui/latest/forui.widgets.button/FButtonStyle/decoration.html).
