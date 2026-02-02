@@ -172,10 +172,10 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
             spellCheckConfiguration: widget.properties.spellCheckConfiguration,
             prefixBuilder: widget.properties.prefixBuilder == null
                 ? null
-                : (context, _, states) => widget.properties.prefixBuilder!(context, widget.searchStyle, states),
+                : (context, _, variants) => widget.properties.prefixBuilder!(context, widget.searchStyle, variants),
             suffixBuilder: widget.properties.suffixBuilder == null
                 ? null
-                : (context, _, states) => widget.properties.suffixBuilder!(context, widget.searchStyle, states),
+                : (context, _, variants) => widget.properties.suffixBuilder!(context, widget.searchStyle, variants),
             clearable: widget.properties.clearable,
           ),
         ),

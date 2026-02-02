@@ -21,6 +21,6 @@ class InheritedVariants extends InheritedWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(IterableProperty('states', variants));
+    properties.add(IterableProperty('variants', variants));
   }
 }

@@ -285,12 +285,12 @@ class FItem extends StatelessWidget with FItemMixin {
     Widget? details,
     Widget? suffix,
     super.key,
-  }) : _builder = ((context, style, top, bottom, states, color, width, divider) => ItemContent(
+  }) : _builder = ((context, style, top, bottom, variants, color, width, divider) => ItemContent(
          style: style.contentStyle,
          margin: style.margin,
          top: top,
          bottom: bottom,
-         variants: states,
+         variants: variants,
          dividerColor: color,
          dividerWidth: width,
          dividerType: divider,
@@ -332,12 +332,12 @@ class FItem extends StatelessWidget with FItemMixin {
     this.actions,
     Widget? prefix,
     super.key,
-  }) : _builder = ((context, style, top, bottom, states, color, width, divider) => RawItemContent(
+  }) : _builder = ((context, style, top, bottom, variants, color, width, divider) => RawItemContent(
          style: style.rawItemContentStyle,
          margin: style.margin,
          top: top,
          bottom: bottom,
-         variants: states,
+         variants: variants,
          dividerColor: color,
          dividerWidth: width,
          dividerType: divider,
@@ -350,7 +350,7 @@ class FItem extends StatelessWidget with FItemMixin {
     final data = FInheritedItemData.maybeOf(context) ?? const FItemData();
     final style = this.style(data.style ?? context.theme.itemStyle);
     final enabled = this.enabled ?? data.enabled;
-    final variants = <FTappableVariant>{
+    final formVariants = <FTappableVariant>{
       context.platformVariant as FTappableVariant,
       if (!enabled) FTappableVariant.disabled,
     };
@@ -368,19 +368,19 @@ class FItem extends StatelessWidget with FItemMixin {
 
     if (onPress == null && onLongPress == null && onSecondaryPress == null && onSecondaryLongPress == null) {
       return ColoredBox(
-        color: style.backgroundColor.resolve(variants) ?? Colors.transparent,
+        color: style.backgroundColor.resolve(formVariants) ?? Colors.transparent,
         child: Padding(
           padding: margin,
           child: DecoratedBox(
-            decoration: style.decoration.resolve(variants),
-            child: _builder(context, style, top, bottom, variants, data.dividerColor, data.dividerWidth, divider),
+            decoration: style.decoration.resolve(formVariants),
+            child: _builder(context, style, top, bottom, formVariants, data.dividerColor, data.dividerWidth, divider),
           ),
         ),
       );
     }
 
     return ColoredBox(
-      color: style.backgroundColor.resolve(variants) ?? Colors.transparent,
+      color: style.backgroundColor.resolve(formVariants) ?? Colors.transparent,
       child: Padding(
         padding: margin,
         child: FTappable(
@@ -398,18 +398,18 @@ class FItem extends StatelessWidget with FItemMixin {
           onSecondaryLongPress: enabled ? (onSecondaryLongPress ?? () {}) : null,
           shortcuts: shortcuts,
           actions: actions,
-          builder: (context, states, _) => DecoratedBox(
+          builder: (context, variants, _) => DecoratedBox(
             position: .foreground,
             decoration: switch (style.focusedOutlineStyle) {
-              final outline? when states.contains(FTappableVariant.focused) => BoxDecoration(
+              final outline? when variants.contains(FTappableVariant.focused) => BoxDecoration(
                 border: .all(color: outline.color, width: outline.width),
                 borderRadius: outline.borderRadius,
               ),
               _ => const BoxDecoration(),
             },
             child: DecoratedBox(
-              decoration: style.decoration.resolve(states),
-              child: _builder(context, style, top, bottom, states, data.dividerColor, data.dividerWidth, divider),
+              decoration: style.decoration.resolve(variants),
+              child: _builder(context, style, top, bottom, variants, data.dividerColor, data.dividerWidth, divider),
             ),
           ),
         ),

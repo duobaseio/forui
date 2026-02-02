@@ -102,8 +102,8 @@ class FSidebarGroup extends StatelessWidget {
                         onVariantChange: onActionVariantChange,
                         onPress: onActionPress,
                         onLongPress: onActionLongPress,
-                        builder: (_, states, child) =>
-                            IconTheme(data: style.actionStyle.resolve(states), child: child!),
+                        builder: (_, variants, child) =>
+                            IconTheme(data: style.actionStyle.resolve(variants), child: child!),
                         child: action!,
                       )
                     else

@@ -148,22 +148,22 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
         canRequestFocus: widget.canRequestFocus,
         prefixBuilder: widget.prefixBuilder == null
             ? null
-            : (context, _, states) => widget.prefixBuilder!(context, style, states),
+            : (context, _, variants) => widget.prefixBuilder!(context, style, variants),
         suffixBuilder: widget.suffixBuilder == null
             ? null
-            : (context, _, states) => widget.suffixBuilder!(context, style, states),
+            : (context, _, variants) => widget.suffixBuilder!(context, style, variants),
         localizations: FLocalizations.of(context) ?? FDefaultLocalizations(),
         baselineYear: widget.baselineInputYear,
         builder: switch (widget.calendar) {
-          null => (context, _, states, child) => widget.builder(context, style, states, child),
-          final properties => (context, _, states, child) => _CalendarPopover(
+          null => (context, _, variants, child) => widget.builder(context, style, variants, child),
+          final properties => (context, _, variants, child) => _CalendarPopover(
             popoverController: _popoverController,
             calendarController: _controller.calendar,
             style: style,
             properties: properties,
             autofocus: false,
             fieldFocusNode: null,
-            child: widget.builder(context, style, states, child),
+            child: widget.builder(context, style, variants, child),
           ),
         },
       ),
@@ -293,13 +293,13 @@ class _InputOnlyDateFieldState extends _FDateFieldState<_InputOnlyDateField> {
       canRequestFocus: widget.canRequestFocus,
       prefixBuilder: widget.prefixBuilder == null
           ? null
-          : (context, _, states) => widget.prefixBuilder!(context, style, states),
+          : (context, _, variants) => widget.prefixBuilder!(context, style, variants),
       suffixBuilder: widget.suffixBuilder == null
           ? null
-          : (context, _, states) => widget.suffixBuilder!(context, style, states),
+          : (context, _, variants) => widget.suffixBuilder!(context, style, variants),
       localizations: FLocalizations.of(context) ?? FDefaultLocalizations(),
       baselineYear: widget.baselineInputYear,
-      builder: (context, _, states, child) => widget.builder(context, style, states, child),
+      builder: (context, _, variants, child) => widget.builder(context, style, variants, child),
     );
   }
 }

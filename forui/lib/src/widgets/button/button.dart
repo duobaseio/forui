@@ -215,9 +215,9 @@ class FButton extends StatelessWidget {
       onSecondaryPress: onSecondaryPress,
       onSecondaryLongPress: onSecondaryLongPress,
       selected: selected,
-      builder: (_, states, _) => DecoratedBox(
-        decoration: style.decoration.resolve(states),
-        child: FButtonData(style: style, states: states, child: child),
+      builder: (_, variants, _) => DecoratedBox(
+        decoration: style.decoration.resolve(variants),
+        child: FButtonData(style: style, variants: variants, child: child),
       ),
     );
   }
@@ -404,19 +404,19 @@ class FButtonData extends InheritedWidget {
   final FButtonStyle style;
 
   /// The current variants.
-  final Set<FTappableVariant> states;
+  final Set<FTappableVariant> variants;
 
   /// Creates a [FButtonData].
-  const FButtonData({required this.style, required this.states, required super.child, super.key});
+  const FButtonData({required this.style, required this.variants, required super.child, super.key});
 
   @override
-  bool updateShouldNotify(covariant FButtonData old) => style != old.style || !setEquals(states, old.states);
+  bool updateShouldNotify(covariant FButtonData old) => style != old.style || !setEquals(variants, old.variants);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(IterableProperty('states', states));
+      ..add(IterableProperty('variants', variants));
   }
 }

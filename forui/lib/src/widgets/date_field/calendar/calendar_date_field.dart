@@ -201,16 +201,16 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
         enableInteractiveSelection: false,
         prefixBuilder: widget.prefixBuilder == null
             ? null
-            : (context, _, states) => widget.prefixBuilder!(context, style, states),
+            : (context, _, variants) => widget.prefixBuilder!(context, style, variants),
         suffixBuilder: widget.suffixBuilder == null
             ? null
-            : (context, _, states) => widget.suffixBuilder!(context, style, states),
+            : (context, _, variants) => widget.suffixBuilder!(context, style, variants),
         clearable: widget.clearable ? (value) => value.text.isNotEmpty : (_) => false,
         label: widget.label,
         description: widget.description,
         error: state.hasError ? widget.errorBuilder(context, state.errorText ?? '') : null,
         enabled: widget.enabled,
-        builder: (context, _, states, field) => _CalendarPopover(
+        builder: (context, _, variants, field) => _CalendarPopover(
           popoverController: _popoverController,
           calendarController: _controller.calendar,
           style: style,
@@ -219,7 +219,7 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
           fieldFocusNode: _focus,
           child: CallbackShortcuts(
             bindings: {const SingleActivator(.enter): _onTap},
-            child: widget.builder(context, style, states, field),
+            child: widget.builder(context, style, variants, field),
           ),
         ),
       ),

@@ -102,18 +102,18 @@ class FMultiSelectTag extends StatelessWidget {
       onSecondaryLongPress: onSecondaryLongPress,
       shortcuts: shortcuts,
       actions: actions,
-      builder: (context, states, child) => DecoratedBox(
-        decoration: style.decoration.resolve(states),
+      builder: (context, variants, child) => DecoratedBox(
+        decoration: style.decoration.resolve(variants),
         child: Padding(
           padding: style.padding,
           child: Row(
             mainAxisSize: .min,
             spacing: style.spacing,
             children: [
-              DefaultTextStyle(style: style.labelTextStyle.resolve(states), child: label),
+              DefaultTextStyle(style: style.labelTextStyle.resolve(variants), child: label),
               FFocusedOutline(
-                focused: states.contains(FTappableVariant.focused),
-                child: IconTheme(data: style.iconStyle.resolve(states), child: const Icon(FIcons.x)),
+                focused: variants.contains(FTappableVariant.focused),
+                child: IconTheme(data: style.iconStyle.resolve(variants), child: const Icon(FIcons.x)),
               ),
             ],
           ),

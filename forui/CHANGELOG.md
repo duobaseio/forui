@@ -105,6 +105,7 @@ are not available for most of these changes due to the tool's limitations.
 
 ### `FButton`
 * **Breaking** Rename `FButton.onStateChange` to `FButton.onVariantChange`.
+* **Breaking** Rename `FButtonData.states` to `FButtonData.variants`.
 
 
 ### `FCircularProgress`

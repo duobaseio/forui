@@ -181,7 +181,7 @@ class _Track extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final InheritedData(:style, :layout, :marks, :enabled) = InheritedData.of(context);
-    final states = InheritedVariants.of(context).variants;
+    final variants = InheritedVariants.of(context).variants;
     final crossAxisExtent = style.crossAxisExtent;
 
     final extent = InheritedController.of(
@@ -194,7 +194,7 @@ class _Track extends StatelessWidget {
     final (height, width) = layout.vertical ? (null, crossAxisExtent) : (crossAxisExtent, null);
 
     return DecoratedBox(
-      decoration: BoxDecoration(borderRadius: style.borderRadius, color: style.inactiveColor.resolve(states)),
+      decoration: BoxDecoration(borderRadius: style.borderRadius, color: style.inactiveColor.resolve(variants)),
       child: SizedBox(
         height: height,
         width: width,
@@ -206,7 +206,7 @@ class _Track extends StatelessWidget {
                 position(
                   offset: value * extent + half - ((markStyle ??= style.markStyle).tickSize / 2),
                   child: DecoratedBox(
-                    decoration: BoxDecoration(shape: BoxShape.circle, color: markStyle.tickColor.resolve(states)),
+                    decoration: BoxDecoration(shape: BoxShape.circle, color: markStyle.tickColor.resolve(variants)),
                     child: SizedBox.square(dimension: markStyle.tickSize),
                   ),
                 ),
@@ -225,7 +225,7 @@ class ActiveTrack extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final InheritedData(:style, :layout) = .of(context);
-    final states = InheritedVariants.of(context).variants;
+    final variants = InheritedVariants.of(context).variants;
     final crossAxisExtent = style.crossAxisExtent;
     final pixels = InheritedController.of(context, InheritedController.pixels).controller.value.pixels;
 
@@ -235,7 +235,7 @@ class ActiveTrack extends StatelessWidget {
     return layout.position(
       offset: pixels.min,
       child: DecoratedBox(
-        decoration: BoxDecoration(borderRadius: style.borderRadius, color: style.activeColor.resolve(states)),
+        decoration: BoxDecoration(borderRadius: style.borderRadius, color: style.activeColor.resolve(variants)),
         child: SizedBox(height: height, width: width),
       ),
     );

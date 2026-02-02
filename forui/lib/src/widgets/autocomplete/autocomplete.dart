@@ -863,10 +863,10 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
         spellCheckConfiguration: widget.spellCheckConfiguration,
         prefixBuilder: widget.prefixBuilder == null
             ? null
-            : (context, _, states) => widget.prefixBuilder!(context, style, states),
+            : (context, _, variants) => widget.prefixBuilder!(context, style, variants),
         suffixBuilder: widget.suffixBuilder == null
             ? null
-            : (context, _, states) => widget.suffixBuilder!(context, style, states),
+            : (context, _, variants) => widget.suffixBuilder!(context, style, variants),
         clearable: widget.clearable,
         onSaved: widget.onSaved,
         onReset: widget.onReset,
@@ -874,7 +874,7 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
         autovalidateMode: widget.autovalidateMode,
         forceErrorText: widget.forceErrorText,
         errorBuilder: widget.errorBuilder,
-        builder: (context, _, states, field) => FocusTraversalGroup(
+        builder: (context, _, variants, field) => FocusTraversalGroup(
           policy: SkipDelegateTraversalPolicy(FocusTraversalGroup.maybeOf(context) ?? ReadingOrderTraversalPolicy()),
           child: FPopover(
             control: .managed(controller: _popoverController),
@@ -927,7 +927,7 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
             ),
             child: InheritedAutocompleteStyle(
               style: style,
-              variants: states,
+              variants: variants,
               child: CallbackShortcuts(
                 bindings: {
                   const SingleActivator(.escape): _popoverController.hide,
@@ -940,7 +940,7 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
                   ) when widget.rightArrowToComplete)
                     const SingleActivator(.arrowRight): () => _complete(replacement),
                 },
-                child: widget.builder(context, style, states, field),
+                child: widget.builder(context, style, variants, field),
               ),
             ),
           ),

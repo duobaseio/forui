@@ -133,7 +133,7 @@ class FTappable extends StatefulWidget {
   /// {@endtemplate}
   final Map<Type, Action<Intent>>? actions;
 
-  /// The builder used to create a child with the current state.
+  /// The builder used to create a child with the current variants.
   final ValueWidgetBuilder<Set<FTappableVariant>> builder;
 
   /// An optional child.

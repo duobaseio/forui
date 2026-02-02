@@ -99,12 +99,12 @@ class _InputTimeFieldState extends _FTimeFieldState<_InputTimeField> {
       canRequestFocus: widget.canRequestFocus,
       prefixBuilder: widget.prefixBuilder == null
           ? null
-          : (context, _, states) => widget.prefixBuilder!(context, style, states),
+          : (context, _, variants) => widget.prefixBuilder!(context, style, variants),
       suffixBuilder: widget.suffixBuilder == null
           ? null
-          : (context, _, states) => widget.suffixBuilder!(context, style, states),
+          : (context, _, variants) => widget.suffixBuilder!(context, style, variants),
       localizations: FLocalizations.of(context) ?? FDefaultLocalizations(),
-      builder: (context, _, states, field) => widget.builder(context, style, states, field),
+      builder: (context, _, variants, field) => widget.builder(context, style, variants, field),
     );
   }
 }

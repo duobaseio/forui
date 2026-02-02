@@ -205,9 +205,12 @@ class _FSidebarItemState extends State<FSidebarItem> with TickerProviderStateMix
         onLongPress: widget.onLongPress,
         onHoverChange: widget.onHoverChange,
         onVariantChange: widget.onVariantChange,
-        builder: (_, states, child) => Container(
+        builder: (_, variants, child) => Container(
           padding: _style!.padding,
-          decoration: BoxDecoration(color: _style!.backgroundColor.resolve(states), borderRadius: _style!.borderRadius),
+          decoration: BoxDecoration(
+            color: _style!.backgroundColor.resolve(variants),
+            borderRadius: _style!.borderRadius,
+          ),
           child: Row(
             spacing: _style!.collapsibleIconSpacing,
             mainAxisAlignment: .spaceBetween,
@@ -216,17 +219,17 @@ class _FSidebarItemState extends State<FSidebarItem> with TickerProviderStateMix
                 child: Row(
                   spacing: _style!.iconSpacing,
                   children: [
-                    if (widget.icon != null) IconTheme(data: _style!.iconStyle.resolve(states), child: widget.icon!),
+                    if (widget.icon != null) IconTheme(data: _style!.iconStyle.resolve(variants), child: widget.icon!),
                     if (widget.label != null)
                       Expanded(
-                        child: DefaultTextStyle.merge(style: _style!.textStyle.resolve(states), child: widget.label!),
+                        child: DefaultTextStyle.merge(style: _style!.textStyle.resolve(variants), child: widget.label!),
                       ),
                   ],
                 ),
               ),
               if (widget.children.isNotEmpty)
                 IconTheme(
-                  data: _style!.collapsibleIconStyle.resolve(states),
+                  data: _style!.collapsibleIconStyle.resolve(variants),
                   child: RotationTransition(turns: _iconRotation!, child: const Icon(FIcons.chevronRight)),
                 ),
             ],

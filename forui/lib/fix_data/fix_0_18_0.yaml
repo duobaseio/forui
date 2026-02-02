@@ -212,6 +212,18 @@ transforms:
         oldName: 'onStateChange'
         newName: 'onVariantChange'
 
+  # FButtonData
+  - title: 'Rename FButtonData(states: ...) to FButtonData(variants: ...)'
+    date: 2026-02-02
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FButtonData
+    changes:
+      - kind: renameParameter
+        oldName: 'states'
+        newName: 'variants'
+
   # FHeaderAction
   - title: 'Rename FHeaderAction(onStateChange: ...) to FHeaderAction(onVariantChange: ...)'
     date: 2026-01-26

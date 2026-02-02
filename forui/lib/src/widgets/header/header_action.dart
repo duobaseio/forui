@@ -170,7 +170,7 @@ class FHeaderAction extends StatelessWidget {
       onSecondaryLongPress: onSecondaryLongPress,
       shortcuts: shortcuts,
       actions: actions,
-      builder: (_, states, child) => IconTheme(data: style.iconStyle.resolve(states), child: child!),
+      builder: (_, variants, child) => IconTheme(data: style.iconStyle.resolve(variants), child: child!),
       child: icon,
     );
   }

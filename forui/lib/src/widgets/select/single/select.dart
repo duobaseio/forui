@@ -34,9 +34,9 @@ part 'select.design.dart';
 /// * [FSelectStyle] for customizing the appearance of a select.
 abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// The default suffix builder that shows a upward and downward facing chevron icon.
-  static Widget defaultIconBuilder(BuildContext _, FSelectStyle style, Set<FTextFieldVariant> states) => Padding(
+  static Widget defaultIconBuilder(BuildContext _, FSelectStyle style, Set<FTextFieldVariant> variants) => Padding(
     padding: const .directional(end: 8.0),
-    child: IconTheme(data: style.fieldStyle.iconStyle.resolve(states), child: const Icon(FIcons.chevronDown)),
+    child: IconTheme(data: style.fieldStyle.iconStyle.resolve(variants), child: const Icon(FIcons.chevronDown)),
   );
 
   /// The default content loading builder that shows a spinner when an asynchronous search is pending.
@@ -745,16 +745,16 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
         enableInteractiveSelection: false,
         prefixBuilder: widget.prefixBuilder == null
             ? null
-            : (context, _, states) => widget.prefixBuilder!(context, style, states),
+            : (context, _, variants) => widget.prefixBuilder!(context, style, variants),
         suffixBuilder: widget.suffixBuilder == null
             ? null
-            : (context, _, states) => widget.suffixBuilder!(context, style, states),
+            : (context, _, variants) => widget.suffixBuilder!(context, style, variants),
         clearable: widget.clearable ? (_) => _controller.value != null : (_) => false,
         label: widget.label,
         description: widget.description,
         error: state.hasError ? widget.errorBuilder(state.context, state.errorText ?? '') : null,
         enabled: widget.enabled,
-        builder: (context, _, states, field) => FPopover(
+        builder: (context, _, variants, field) => FPopover(
           control: .managed(controller: _popoverController),
           style: style.contentStyle,
           constraints: widget.contentConstraints,
@@ -784,7 +784,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
           ),
           child: CallbackShortcuts(
             bindings: {const SingleActivator(.enter): _toggle},
-            child: widget.builder(context, style, states, field),
+            child: widget.builder(context, style, variants, field),
           ),
         ),
       ),

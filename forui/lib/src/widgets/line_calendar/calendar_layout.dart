@@ -111,9 +111,9 @@ class _CalendarLayoutState extends State<CalendarLayout> {
     final scale = widget.scale;
     final textStyle = widget.textStyle;
 
-    double height(FLineCalendarStyle style, Set<FTappableVariant> states) {
-      final dateHeight = scale.scale(style.dateTextStyle.resolve(states).fontSize ?? textStyle.fontSize ?? 0);
-      final weekdayHeight = scale.scale(style.weekdayTextStyle.resolve(states).fontSize ?? textStyle.fontSize ?? 0);
+    double height(FLineCalendarStyle style, Set<FTappableVariant> variants) {
+      final dateHeight = scale.scale(style.dateTextStyle.resolve(variants).fontSize ?? textStyle.fontSize ?? 0);
+      final weekdayHeight = scale.scale(style.weekdayTextStyle.resolve(variants).fontSize ?? textStyle.fontSize ?? 0);
       final otherHeight = widget.style.contentSpacing + (widget.style.contentEdgeSpacing * 2);
 
       return dateHeight + weekdayHeight + otherHeight;

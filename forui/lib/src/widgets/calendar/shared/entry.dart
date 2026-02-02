@@ -41,7 +41,7 @@ abstract class Entry extends StatelessWidget {
 
     final entryStyle = current ? style.current : style.enclosing;
 
-    Widget builder(BuildContext context, Set<FTappableVariant> states, Widget? _) {
+    Widget builder(BuildContext context, Set<FTappableVariant> variants, Widget? _) {
       final yesterday = isSelected && selected(date.yesterday) ? Radius.zero : entryStyle.radius;
       final tomorrow = isSelected && selected(date.tomorrow) ? Radius.zero : entryStyle.radius;
       return dayBuilder(
@@ -58,7 +58,7 @@ abstract class Entry extends StatelessWidget {
           style: entryStyle,
           borderRadius: .horizontal(start: yesterday, end: tomorrow),
           text: (FLocalizations.of(context) ?? FDefaultLocalizations()).day(date.toNative()),
-          states: {...states, if (!canSelect) .disabled},
+          variants: {...variants, if (!canSelect) .disabled},
           current: today,
         ),
       );
@@ -87,11 +87,11 @@ abstract class Entry extends StatelessWidget {
     required ValueChanged<LocalDate> onPress,
     required String Function(LocalDate date) format,
   }) {
-    Widget builder(BuildContext _, Set<FTappableVariant> states, Widget? _) => _Content(
+    Widget builder(BuildContext _, Set<FTappableVariant> variants, Widget? _) => _Content(
       style: style,
       borderRadius: .all(style.radius),
       text: format(date),
-      states: {...states, if (!selectable) .disabled},
+      variants: {...variants, if (!selectable) .disabled},
       current: current,
     );
 
@@ -181,30 +181,30 @@ class _Content extends StatelessWidget {
   final FCalendarEntryStyle style;
   final BorderRadiusGeometry borderRadius;
   final String text;
-  final Set<FTappableVariant> states;
+  final Set<FTappableVariant> variants;
   final bool current;
 
   const _Content({
     required this.style,
     required this.borderRadius,
     required this.text,
-    required this.states,
+    required this.variants,
     required this.current,
   });
 
   @override
   Widget build(BuildContext _) {
-    var textStyle = style.textStyle.resolve(states);
+    var textStyle = style.textStyle.resolve(variants);
     if (current) {
       textStyle = textStyle.copyWith(decoration: .underline);
     }
 
-    final borderColor = style.borderColor.resolve(states);
+    final borderColor = style.borderColor.resolve(variants);
     return DecoratedBox(
       decoration: BoxDecoration(
         border: borderColor == null ? null : .all(color: borderColor),
         borderRadius: borderRadius,
-        color: style.backgroundColor.resolve(states),
+        color: style.backgroundColor.resolve(variants),
       ),
       child: Center(child: Text(text, style: textStyle)),
     );
@@ -217,7 +217,7 @@ class _Content extends StatelessWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('borderRadius', borderRadius))
       ..add(StringProperty('text', text))
-      ..add(StringProperty('state', states.toString()))
+      ..add(IterableProperty('variants', variants))
       ..add(FlagProperty('current', value: current, ifTrue: 'current'));
   }
 }

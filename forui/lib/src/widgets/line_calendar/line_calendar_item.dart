@@ -115,6 +115,6 @@ class ItemContent extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('date', date))
-      ..add(IterableProperty('states', variants));
+      ..add(IterableProperty('variants', variants));
   }
 }

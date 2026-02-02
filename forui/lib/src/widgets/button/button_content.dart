@@ -32,15 +32,15 @@ class Content extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FButtonData(style: FButtonStyle(:contentStyle), :states) = .of(context);
+    final FButtonData(style: FButtonStyle(:contentStyle), :variants) = .of(context);
     return Padding(
       padding: contentStyle.padding,
       child: DefaultTextStyle.merge(
-        style: contentStyle.textStyle.resolve(states),
+        style: contentStyle.textStyle.resolve(variants),
         child: IconTheme(
-          data: contentStyle.iconStyle.resolve(states),
+          data: contentStyle.iconStyle.resolve(variants),
           child: FInheritedCircularProgressStyle(
-            style: contentStyle.circularProgressStyle.resolve(states),
+            style: contentStyle.circularProgressStyle.resolve(variants),
             child: Row(
               mainAxisAlignment: mainAxisAlignment,
               mainAxisSize: mainAxisSize,
@@ -74,11 +74,11 @@ class IconContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FButtonData(:style, :states) = .of(context);
+    final FButtonData(:style, :variants) = .of(context);
 
     return Padding(
       padding: style.iconContentStyle.padding,
-      child: IconTheme(data: style.iconContentStyle.iconStyle.resolve(states), child: child),
+      child: IconTheme(data: style.iconContentStyle.iconStyle.resolve(variants), child: child),
     );
   }
 }

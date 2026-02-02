@@ -59,7 +59,7 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
       .yearMonth => .day,
     },
     excludeSemantics: true,
-    builder: (_, states, _) => SizedBox(
+    builder: (_, variants, _) => SizedBox(
       height: Header.height,
       child: Padding(
         padding: const .symmetric(horizontal: 15),
@@ -80,7 +80,7 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
                 padding: const .all(2.0),
                 child: IconTheme(
                   data: widget.style.buttonStyle.iconContentStyle.iconStyle
-                      .resolve(states)
+                      .resolve(variants)
                       .copyWith(color: widget.style.headerTextStyle.color),
                   child: const Icon(FIcons.chevronRight, size: 15),
                 ),
