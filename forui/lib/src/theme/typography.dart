@@ -12,6 +12,25 @@ import 'package:forui/forui.dart';
 ///
 /// The scaling is applied automatically in all Forui widgets while the labelled font sizes are used as the defaults
 /// for the corresponding properties of widget styles configured via `inherit(...)` constructors.
+///
+/// ## CJK Text Alignment
+///
+/// When using CJK (Chinese, Japanese, Korean) scripts, text may appear vertically misaligned. This is a
+/// [known Flutter issue](https://github.com/flutter/flutter/issues/22625).
+///
+/// As a temporary workaround, wrap the affected widget in a [DefaultTextStyle] with the appropriate [TextHeightBehavior]:
+/// ```dart
+/// DefaultTextStyle.merge(
+///   textHeightBehavior: const TextHeightBehavior(
+///     applyHeightToFirstAscent: false,
+///     applyHeightToLastDescent: false,
+///   ),
+///   child: FButton(
+///     onPressed: () {},
+///     child: const Text('按钮'),
+///   ),
+/// )
+/// ```
 final class FTypography with Diagnosticable {
   /// The default font family. Defaults to [`packages/forui/Inter`](https://fonts.google.com/specimen/Inter).
   ///
