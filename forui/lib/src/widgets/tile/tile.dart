@@ -47,6 +47,21 @@ part 'tile.design.dart';
 class FTile extends StatelessWidget with FTileMixin {
   // The fields aren't strictly needed, but we keep them to improve documentation.
 
+  /// The variants used to resolve the style from [FTileStyles].
+  ///
+  /// Defaults to an empty set, which resolves to the base (primary) style. The current platform variant is automatically
+  /// included during style resolution. To change the platform variant, update the enclosing
+  /// [FTheme.platform]/[FAdaptiveScope.platform].
+  ///
+  /// For example, to create a destructive tile:
+  /// ```dart
+  /// FTile(
+  ///   variants: {FItemVariant.destructive},
+  ///   title: Text('Delete'),
+  /// )
+  /// ```
+  final Set<FItemVariant> variants;
+
   /// The tile's style. Defaults to the ancestor tile group's style if present.
   ///
   /// Provide a style to prevent inheritance from the ancestor tile group.
@@ -154,6 +169,7 @@ class FTile extends StatelessWidget with FTileMixin {
   /// {@endtemplate}
   FTile({
     required Widget title,
+    this.variants = const {},
     this.style = const .inherit(),
     this.enabled,
     this.selected = false,
@@ -176,6 +192,7 @@ class FTile extends StatelessWidget with FTileMixin {
     super.key,
   }) : _child = FItem(
          title: title,
+         variants: variants,
          style: style,
          enabled: enabled,
          selected: selected,
@@ -211,6 +228,7 @@ class FTile extends StatelessWidget with FTileMixin {
   /// {@endtemplate}
   FTile.raw({
     required Widget child,
+    this.variants = const {},
     this.style = const .inherit(),
     this.enabled,
     this.selected = false,
@@ -229,6 +247,7 @@ class FTile extends StatelessWidget with FTileMixin {
     Widget? prefix,
     super.key,
   }) : _child = FItem.raw(
+         variants: variants,
          style: style,
          enabled: enabled,
          selected: selected,
@@ -249,16 +268,20 @@ class FTile extends StatelessWidget with FTileMixin {
        );
 
   @override
-  Widget build(BuildContext context) => FInheritedItemData.merge(
-    style: FInheritedItemData.maybeOf(context) == null ? style(context.theme.tileStyle) : null,
-    last: true,
-    child: _child,
-  );
+  Widget build(BuildContext context) {
+    final data = FInheritedItemData.maybeOf(context);
+    return FInheritedItemData.merge(
+      styles: data == null ? context.theme.tileStyles.toItemStyles() : null,
+      last: true,
+      child: _child,
+    );
+  }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(IterableProperty('variants', variants))
       ..add(DiagnosticsProperty('style', style))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
       ..add(FlagProperty('selected', value: selected, ifTrue: 'selected'))
@@ -275,6 +298,48 @@ class FTile extends StatelessWidget with FTileMixin {
       ..add(DiagnosticsProperty('shortcuts', shortcuts))
       ..add(DiagnosticsProperty('actions', actions));
   }
+}
+
+/// The tile styles.
+class FTileStyles extends FVariants<FItemVariantConstraint, FTileStyle, FTileStyleDelta> {
+  /// Creates a [FTileStyles] with concrete styles.
+  FTileStyles(super.base, {required super.variants});
+
+  /// Creates a [FTileStyles] from deltas.
+  FTileStyles.delta(super.base, {required super.variants}) : super.delta();
+
+  /// Creates a [FTileStyles] from raw values.
+  FTileStyles.raw(super.base, super.variants) : super.raw();
+
+  /// Creates a [FTileStyles] with only a base variant.
+  const FTileStyles.all(super.base) : super.all();
+
+  /// Creates a [FTileStyles] that inherits its properties.
+  FTileStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
+    : super.delta(
+        .inherit(colors: colors, typography: typography, style: style),
+        variants: {
+          [.destructive]: .delta(
+            contentStyle: FItemContentStyle.inherit(
+              typography: typography,
+              foreground: colors.destructive,
+              mutedForeground: colors.destructive,
+              disabledForeground: colors.disable(colors.destructive),
+              disabledMutedForeground: colors.disable(colors.destructive),
+            ),
+            rawItemContentStyle: FRawItemContentStyle.inherit(
+              typography: typography,
+              enabled: colors.destructive,
+              disabled: colors.disable(colors.destructive),
+            ),
+          ),
+        },
+      );
+}
+
+@internal
+extension FTileStylesConversion on FTileStyles {
+  FItemStyles toItemStyles() => FItemStyles.raw(base, variants);
 }
 
 /// A [FTile]'s style.

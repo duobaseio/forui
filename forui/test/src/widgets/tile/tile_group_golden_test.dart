@@ -538,7 +538,7 @@ void main() {
                 onPress: () {},
               ),
               .tile(
-                style: FThemes.blue.dark.tileGroupStyle.tileStyle,
+                style: FThemes.blue.dark.tileGroupStyle.tileStyles.base,
                 prefix: const Icon(FIcons.bluetooth),
                 title: const Text('Bluetooth'),
                 subtitle: const Text('Fee, Fo'),

@@ -527,7 +527,7 @@ class _FSelectMenuTileState<T> extends State<FSelectMenuTile<T>> with TickerProv
 
     final menuStyle = selectMenuTileStyle.menuStyle;
     final tileStyle = widget.style == const .inherit()
-        ? (inheritedStyle?.tileStyle ?? global.tileStyle)
+        ? (inheritedStyle?.tileStyles.base ?? global.tileStyle)
         : selectMenuTileStyle.tileStyle;
 
     return MultiValueFormField<T>(

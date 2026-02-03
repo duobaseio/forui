@@ -119,18 +119,15 @@ are not available for most of these changes due to the tool's limitations.
 * **Breaking** Remove `FDateFieldStyle.iconStyle`. Use nested `FDateFieldStyle.fieldStyle.iconStyle` instead.
 
 
-### `showFDialog`
+### `FDialog`
 * **Breaking** Change `showFDialog`'s `style` parameter from `FDialogStyle Function(FDialogStyle)?` to `FDialogStyleDelta?`.
 * **Breaking** Change `showFDialog`'s `routeStyle` parameter from `FDialogRouteStyle Function(FDialogRouteStyle)?` to
   `FDialogRouteStyleDelta?`.
 
 
-### `showFSheet`
+### `FSheet` & `FPersistentSheet`
 * **Breaking** Change `showFSheet`'s `style` parameter from `FModalSheetStyle Function(FModalSheetStyle)?` to
   `FModalSheetStyleDelta?`.
-
-
-### `showFPersistentSheet`
 * **Breaking** Change `showFPersistentSheet`'s `style` parameter from `FPersistentSheetStyle Function(FPersistentSheetStyle)?`
   to `FPersistentSheetStyleDelta?`.
 
@@ -140,6 +137,9 @@ are not available for most of these changes due to the tool's limitations.
 
 
 ### `FItem` & `FItemGroup`
+* Add destructive `FItem` variant.
+* Add default styling for selected `FItem`s.
+
 * **Breaking** Change `FItemGroupStyle.itemStyle` to `FItemStyles` instead of `FItemStyle`.
 * **Breaking** Change `FItemData.style` to `FItemStyles?` instead of `FItemStyle?`.
 * **Breaking** Change `FInheritedItemData.merge(style: ...)` to `FInheritedItemData.merge(styles: ...)`.
@@ -196,8 +196,12 @@ are not available for most of these changes due to the tool's limitations.
 `void Function(Set<FTappableVariant> previous, Set<FTappableVariant> current)`.
 
 
-### `FTile`
+### `FTile` & `FTileGroup`
+* Add destructive `FItem` variant.
+* Add `FTileStyles`.
+
 * **Breaking** Rename `FTile.onStateChange` to `FTile.onVariantChange`.
+* **Breaking** Change `FTileGroupStyle.tileStyle` to `FTileGroupStyle.tileStyles` (`FTileStyles` instead of `FTileStyle`).
 
 
 ### `FTextField` & `FTextFormField`
@@ -222,8 +226,10 @@ are not available for most of these changes due to the tool's limitations.
 
 ### `FThemeData`
 * Add `FThemeData.itemStyles`.
+* Add `FThemeData.tileStyles`.
 
 * **Breaking** Remove `FThemeData.itemStyle`.
+* **Breaking** Remove `FThemeData.tileStyle`.
 
 
 ### `FTimeField`

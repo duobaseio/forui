@@ -513,7 +513,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   @override
   final FTextFieldStyle textFieldStyle;
 
-  /// The tile's style.
+  /// The tile's styles.
   ///
   /// ## CLI
   /// To generate and customize this style:
@@ -522,7 +522,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// dart run forui style create tile
   /// ```
   @override
-  final FTileStyle tileStyle;
+  final FTileStyles tileStyles;
 
   /// The tile group's style.
   ///
@@ -620,7 +620,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FTabsStyle? tabsStyle,
     FTappableStyle? tappableStyle,
     FTextFieldStyle? textFieldStyle,
-    FTileStyle? tileStyle,
+    FTileStyles? tileStyles,
     FTileGroupStyle? tileGroupStyle,
     FTimeFieldStyle? timeFieldStyle,
     FTimePickerStyle? timePickerStyle,
@@ -679,7 +679,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       tabsStyle: tabsStyle ?? .inherit(colors: colors, typography: typography, style: style),
       tappableStyle: tappableStyle ?? FTappableStyle(),
       textFieldStyle: textFieldStyle ?? .inherit(colors: colors, typography: typography, style: style),
-      tileStyle: tileStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      tileStyles: tileStyles ?? .inherit(colors: colors, typography: typography, style: style),
       tileGroupStyle: tileGroupStyle ?? .inherit(colors: colors, typography: typography, style: style),
       timeFieldStyle: timeFieldStyle ?? .inherit(colors: colors, typography: typography, style: style),
       timePickerStyle: timePickerStyle ?? .inherit(colors: colors, typography: typography, style: style),
@@ -786,7 +786,13 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     tabsStyle: a.tabsStyle.lerp(b.tabsStyle, t),
     tappableStyle: a.tappableStyle.lerp(b.tappableStyle, t),
     textFieldStyle: a.textFieldStyle.lerp(b.textFieldStyle, t),
-    tileStyle: a.tileStyle.lerp(b.tileStyle, t),
+    tileStyles: FVariants.lerpWhereUsing(
+      a.tileStyles,
+      b.tileStyles,
+      t,
+      (a, b, t) => a!.lerp(b!, t),
+      FTileStyles.raw,
+    ),
     tileGroupStyle: a.tileGroupStyle.lerp(b.tileGroupStyle, t),
     timeFieldStyle: a.timeFieldStyle.lerp(b.timeFieldStyle, t),
     timePickerStyle: a.timePickerStyle.lerp(b.timePickerStyle, t),
@@ -846,7 +852,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     required this.tabsStyle,
     required this.tappableStyle,
     required this.textFieldStyle,
-    required this.tileStyle,
+    required this.tileStyles,
     required this.tileGroupStyle,
     required this.timeFieldStyle,
     required this.timePickerStyle,
@@ -1358,7 +1364,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FTabsStyle Function(FTabsStyle style)? tabsStyle,
     FTappableStyle Function(FTappableStyle style)? tappableStyle,
     FTextFieldStyle Function(FTextFieldStyle style)? textFieldStyle,
-    FTileStyle Function(FTileStyle style)? tileStyle,
+    FTileStyles Function(FTileStyles style)? tileStyles,
     FTileGroupStyle Function(FTileGroupStyle style)? tileGroupStyle,
     FTimeFieldStyle Function(FTimeFieldStyle style)? timeFieldStyle,
     FTimePickerStyle Function(FTimePickerStyle style)? timePickerStyle,
@@ -1423,7 +1429,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     tabsStyle: tabsStyle != null ? tabsStyle(this.tabsStyle) : this.tabsStyle,
     tappableStyle: tappableStyle != null ? tappableStyle(this.tappableStyle) : this.tappableStyle,
     textFieldStyle: textFieldStyle != null ? textFieldStyle(this.textFieldStyle) : this.textFieldStyle,
-    tileStyle: tileStyle != null ? tileStyle(this.tileStyle) : this.tileStyle,
+    tileStyles: tileStyles != null ? tileStyles(this.tileStyles) : this.tileStyles,
     tileGroupStyle: tileGroupStyle != null ? tileGroupStyle(this.tileGroupStyle) : this.tileGroupStyle,
     timeFieldStyle: timeFieldStyle != null ? timeFieldStyle(this.timeFieldStyle) : this.timeFieldStyle,
     timePickerStyle: timePickerStyle != null ? timePickerStyle(this.timePickerStyle) : this.timePickerStyle,

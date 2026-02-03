@@ -12,7 +12,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FTile(
-            style: TestScaffold.blueScreen.tileStyle,
+            style: TestScaffold.blueScreen.tileStyles.base,
             prefix: const Icon(FIcons.bluetooth),
             title: const Text('Bluetooth'),
             subtitle: const Text('Fee, Fo, Fum'),
@@ -30,7 +30,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FTile(
-            style: TestScaffold.blueScreen.tileStyle,
+            style: TestScaffold.blueScreen.tileStyles.base,
             prefix: const Icon(FIcons.bluetooth),
             title: const Text('Bluetooth'),
             subtitle: const Text('Fee, Fo, Fum'),
@@ -54,7 +54,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FTile(
-            style: TestScaffold.blueScreen.tileStyle,
+            style: TestScaffold.blueScreen.tileStyles.base,
             enabled: false,
             prefix: const Icon(FIcons.bluetooth),
             title: const Text('Bluetooth'),
@@ -71,23 +71,32 @@ void main() {
   });
 
   for (final theme in TestScaffold.themes) {
-    testWidgets('enabled - ${theme.name}', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold(
-          theme: theme.data,
-          child: FTile(
-            prefix: const Icon(FIcons.bluetooth),
-            title: const Text('Lorem'),
-            subtitle: const Text('Fee, Fo'),
-            details: const Text('FL (5G)'),
-            suffix: const Icon(FIcons.chevronRight),
-            onPress: () {},
+    for (final (name, Set<FItemVariant> variants, bool enabled) in [
+      ('enabled', {}, true),
+      ('disabled', {}, false),
+      ('destructive', {FItemVariant.destructive}, true),
+      ('destructive-disabled', {FItemVariant.destructive}, false),
+    ]) {
+      testWidgets('$name - ${theme.name}', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme.data,
+            child: FTile(
+              variants: variants,
+              enabled: enabled,
+              prefix: const Icon(FIcons.bluetooth),
+              title: const Text('Lorem'),
+              subtitle: const Text('Fee, Fo'),
+              details: const Text('FL (5G)'),
+              suffix: const Icon(FIcons.chevronRight),
+              onPress: () {},
+            ),
           ),
-        ),
-      );
+        );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/enabled-${theme.name}.png'));
-    });
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/$name-${theme.name}.png'));
+      });
+    }
 
     testWidgets('hovered', (tester) async {
       await tester.pumpWidget(
@@ -175,25 +184,6 @@ void main() {
       );
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/focused-${theme.name}.png'));
-    });
-
-    testWidgets('disabled - ${theme.name}', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold(
-          theme: theme.data,
-          child: FTile(
-            enabled: false,
-            prefix: const Icon(FIcons.bluetooth),
-            title: const Text('Lorem'),
-            subtitle: const Text('Fee, Fo'),
-            details: const Text('FL (5G)'),
-            suffix: const Icon(FIcons.chevronRight),
-            onPress: () {},
-          ),
-        ),
-      );
-
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/disabled-${theme.name}.png'));
     });
   }
 
