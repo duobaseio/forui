@@ -222,9 +222,8 @@ extension Generation on StyleCreateCommand {
         buffer.write('static ');
       }
       final style = registry[nested.toLowerCase()]!;
-      buffer.write(
-        '${style.source.substring(0, style.type.length + 1)}_${style.source.substring(style.type.length + 1)}\n',
-      );
+      final type = style.wrapped ?? style.type;
+      buffer.write('${style.source.substring(0, type.length + 1)}_${style.source.substring(type.length + 1)}\n');
     }
 
     if (many) {

@@ -26,6 +26,7 @@ String generateStyles(Map<String, ConstructorFragment> fragments) {
                       ..name = fragment.type.toLowerCase()
                       ..arguments.addAll([
                         literalString(fragment.type),
+                        if (fragment.wrapped == null) literalNull else literalString(fragment.wrapped!),
                         literalList(_aliases(fragment), refer('String')),
                         literalList(fragment.closure, refer('String')),
                         literalString(fragment.source),
@@ -37,6 +38,12 @@ String generateStyles(Map<String, ConstructorFragment> fragments) {
                     ..docs.addAll(['/// The type name.'])
                     ..name = 'type'
                     ..type = refer('String')
+                    ..modifier = FieldModifier.final$)
+                  .build(),
+              (FieldBuilder()
+                    ..docs.addAll(['/// The wrapped type.'])
+                    ..name = 'wrapped'
+                    ..type = refer('String?')
                     ..modifier = FieldModifier.final$)
                   .build(),
               (FieldBuilder()
@@ -63,6 +70,7 @@ String generateStyles(Map<String, ConstructorFragment> fragments) {
                     ..constant = true
                     ..requiredParameters.addAll([
                       Parameter((p) => p..name = 'this.type'),
+                      Parameter((p) => p..name = 'this.wrapped'),
                       Parameter((p) => p..name = 'this.aliases'),
                       Parameter((p) => p..name = 'this.closure'),
                       Parameter((p) => p..name = 'this.source'),

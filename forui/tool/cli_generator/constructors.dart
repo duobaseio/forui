@@ -20,6 +20,7 @@ class ConstructorFragment {
       key: ConstructorFragment(
         root: match.root,
         type: key,
+        wrapped: match.wrapped,
         closure: _closure(key, matches),
         source: fragmentFormatter.format(switch (match.constructor) {
           final constructor when constructor.factoryKeyword != null => _factory(key, pattern, match),
@@ -96,7 +97,6 @@ class ConstructorFragment {
     final constructor = match.constructor;
     var source = constructor.toSource();
 
-    // Regular class (existing logic)
     source = source
         .replaceAll('$type.inherit', '$type ${type.substring(1).toCamelCase()}')
         .replaceAll(' : this', ' => $type');
@@ -189,10 +189,17 @@ class ConstructorFragment {
 
   final bool root;
   final String type;
+  final String? wrapped;
   final List<String> closure;
   final String source;
 
-  ConstructorFragment({required this.root, required this.type, required this.closure, required this.source});
+  ConstructorFragment({
+    required this.root,
+    required this.type,
+    required this.wrapped,
+    required this.closure,
+    required this.source,
+  });
 }
 
 /// Visitor that all constructor invocations of a given type.
@@ -286,11 +293,7 @@ class _Visitor extends RecursiveAstVisitor<void> {
       return;
     }
 
-    matches[_name!] = ConstructorMatch(
-      root: _roots.contains(_name!),
-      constructor: constructor,
-      wrapped: _wrapped,
-    );
+    matches[_name!] = ConstructorMatch(root: _roots.contains(_name!), constructor: constructor, wrapped: _wrapped);
 
     // Constructors typically consist of:
     // * Factory constructors
