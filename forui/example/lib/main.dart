@@ -1,67 +1,64 @@
 import 'package:flutter/material.dart';
+
 import 'package:forui/forui.dart';
+import 'package:forui_example/sandbox.dart';
+import 'package:wakelock_plus/wakelock_plus.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  WakelockPlus.enable();
+
   runApp(const Application());
 }
 
-class Application extends StatelessWidget {
+List<Widget> _pages = [
+  const Text('Home'),
+  const Text('Categories'),
+  const Text('Search'),
+  const Text('Settings'),
+  const Sandbox(),
+];
+
+class Application extends StatefulWidget {
   const Application({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    /// Try changing this and hot reloading the application.
-    ///
-    /// To create a custom theme:
-    /// ```shell
-    /// dart forui theme create [theme template].
-    /// ```
-    final theme = FThemes.zinc.dark;
+  State<Application> createState() => _ApplicationState();
+}
 
-    return MaterialApp(
-      // TODO: replace with your application's supported locales.
-      supportedLocales: FLocalizations.supportedLocales,
-      // TODO: add your application's localizations delegates.
-      localizationsDelegates: const [...FLocalizations.localizationsDelegates],
-      // MaterialApp's theme is also animated by default with the same duration and curve.
-      // See https://api.flutter.dev/flutter/material/MaterialApp/themeAnimationStyle.html for how to configure this.
-      //
-      // There is a known issue with implicitly animated widgets where their transition occurs AFTER the theme's.
-      // See https://github.com/duobaseio/forui/issues/670.
-      theme: theme.toApproximateMaterialTheme(),
-      builder: (_, child) => FTheme(data: theme, child: child!),
-      // You can also replace FScaffold with Material Scaffold.
-      home: const FScaffold(
-        // TODO: replace with your widget.
-        child: Example(),
-      ),
-    );
+class _ApplicationState extends State<Application> with SingleTickerProviderStateMixin {
+  int index = 4;
+
+  @override
+  void initState() {
+    super.initState();
   }
-}
-
-class Example extends StatefulWidget {
-  const Example({super.key});
 
   @override
-  State<Example> createState() => _ExampleState();
-}
-
-class _ExampleState extends State<Example> {
-  int _count = 0;
-
-  @override
-  Widget build(BuildContext context) => Center(
-    child: Column(
-      mainAxisSize: .min,
-      spacing: 10,
-      children: [
-        Text('Count: $_count'),
-        FButton(
-          onPress: () => setState(() => _count++),
-          suffix: const Icon(FIcons.chevronsUp),
-          child: const Text('Increase'),
-        ),
-      ],
+  Widget build(BuildContext context) => MaterialApp(
+    locale: const Locale('en', 'US'),
+    localizationsDelegates: FLocalizations.localizationsDelegates,
+    supportedLocales: FLocalizations.supportedLocales,
+    theme: FThemes.zinc.light.toApproximateMaterialTheme(),
+    builder: (context, child) => FTheme(data: FThemes.zinc.light, child: child!),
+    home: Builder(
+      builder: (context) {
+        return FScaffold(
+          header: const FHeader(title: Text('Example (B)')),
+          footer: FBottomNavigationBar(
+            index: index,
+            onChange: (index) => setState(() => this.index = index),
+            children: const [
+              FBottomNavigationBarItem(icon: Icon(FIcons.house)),
+              FBottomNavigationBarItem(icon: Icon(FIcons.layoutGrid)),
+              FBottomNavigationBarItem(icon: Icon(FIcons.search)),
+              FBottomNavigationBarItem(icon: Icon(FIcons.settings)),
+              FBottomNavigationBarItem(icon: Icon(FIcons.castle)),
+            ],
+          ),
+          child: _pages[index],
+        );
+      },
     ),
   );
 }

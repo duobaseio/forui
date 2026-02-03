@@ -139,7 +139,12 @@ are not available for most of these changes due to the tool's limitations.
 * **Breaking** Rename `FHeaderAction.onStateChange` to `FHeaderAction.onVariantChange`.
 
 
-### `FItem`
+### `FItem` & `FItemGroup`
+* **Breaking** Change `FItemGroupStyle.itemStyle` to `FItemStyles` instead of `FItemStyle`.
+* **Breaking** Change `FItemData.style` to `FItemStyles?` instead of `FItemStyle?`.
+* **Breaking** Change `FInheritedItemData.merge(style: ...)` to `FInheritedItemData.merge(styles: ...)`.
+* **Breaking** Change `FItemContentStyle.inherit(...)` signature.
+* **Breaking** Change `FRawItemContentStyle.inherit(...)` signature.
 * **Breaking** Rename `FItem.onStateChange` to `FItem.onVariantChange`.
 
 
@@ -188,7 +193,7 @@ are not available for most of these changes due to the tool's limitations.
 ### `FTappable`
 * **Breaking** Rename `FTappable.onStateChange` to `FTappable.onVariantChange`.
 * **Breaking** Change `FTappableVariantChangeCallback` signature from `void Function(Set<FTappableVariant>)` to
-  `void Function(Set<FTappableVariant> previous, Set<FTappableVariant> current)`.
+`void Function(Set<FTappableVariant> previous, Set<FTappableVariant> current)`.
 
 
 ### `FTile`
@@ -213,6 +218,12 @@ are not available for most of these changes due to the tool's limitations.
 * **Breaking** Rename `FTheme` to `FBasicTheme`.
 * **Breaking** Rename `FAnimatedTheme` to `FTheme`.
 * **Breaking** Rename `FAnimatedThemeMotion` to `FThemeMotion`.
+
+
+### `FThemeData`
+* Add `FThemeData.itemStyles`.
+
+* **Breaking** Remove `FThemeData.itemStyle`.
 
 
 ### `FTimeField`

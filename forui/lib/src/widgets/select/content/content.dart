@@ -159,7 +159,7 @@ class _ContentState<T> extends State<Content<T>> {
                   ensureVisible: _ensureVisible,
                   child: FInheritedItemData(
                     data: FItemData(
-                      style: style,
+                      styles: .all(style),
                       dividerColor: widget.style.sectionStyle.dividerColor.cast(),
                       dividerWidth: widget.style.sectionStyle.dividerWidth,
                       divider: widget.children.length == 1 ? FItemDivider.none : widget.divider,
@@ -173,7 +173,7 @@ class _ContentState<T> extends State<Content<T>> {
               for (final (i, child) in widget.children.indexed.skip(1))
                 FInheritedItemData(
                   data: FItemData(
-                    style: style,
+                    styles: .all(style),
                     dividerColor: widget.style.sectionStyle.dividerColor.cast(),
                     dividerWidth: widget.style.sectionStyle.dividerWidth,
                     divider: i == widget.children.length - 1 ? FItemDivider.none : widget.divider,

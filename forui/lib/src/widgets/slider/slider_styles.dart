@@ -26,6 +26,9 @@ class FSliderStyles extends FVariants<FSliderAxisVariantConstraint, FSliderStyle
   /// Creates a [FSliderStyles] from raw values.
   FSliderStyles.raw(super.base, super.variants) : super.raw();
 
+  /// Creates a [FSliderStyles] with only a base variant.
+  const FSliderStyles.all(super.base): super.all();
+
   /// Creates a [FSliderStyles] that inherits its properties.
   FSliderStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : super.delta(

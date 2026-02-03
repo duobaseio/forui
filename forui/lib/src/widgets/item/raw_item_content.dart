@@ -115,18 +115,18 @@ class FRawItemContentStyle with Diagnosticable, _$FRawItemContentStyleFunctions 
   }) : assert(0 <= prefixIconSpacing, 'prefixIconSpacing ($prefixIconSpacing) must be >= 0');
 
   /// Creates a [FRawItemContentStyle] that inherits its properties.
-  FRawItemContentStyle.inherit({required FColors colors, required FTypography typography})
+  FRawItemContentStyle.inherit({required FTypography typography, required Color enabled, required Color disabled})
     : this(
         prefixIconStyle: .delta(
-          IconThemeData(color: colors.primary, size: 15),
+          IconThemeData(color: enabled, size: 15),
           variants: {
-            [.disabled]: .delta(color: colors.disable(colors.primary)),
+            [.disabled]: .delta(color: disabled),
           },
         ),
-        childTextStyle: .delta(
-          typography.sm,
+        childTextStyle: FVariants(
+          typography.sm.copyWith(color: enabled),
           variants: {
-            [.disabled]: .delta(color: colors.disable(colors.primary)),
+            [.disabled]: typography.sm.copyWith(color: disabled),
           },
         ),
       );

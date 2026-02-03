@@ -110,7 +110,7 @@ class Content extends StatelessWidget {
               for (final (i, child) in children.indexed)
                 FInheritedItemData(
                   data: FItemData(
-                    style: itemStyle,
+                    styles: .all(itemStyle),
                     dividerColor: sectionStyle.dividerColor,
                     dividerWidth: sectionStyle.dividerWidth,
                     divider: i == children.length - 1 ? FItemDivider.none : divider,

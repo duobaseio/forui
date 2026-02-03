@@ -204,37 +204,42 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
        assert(0 <= suffixIconSpacing, 'suffixIconSpacing ($suffixIconSpacing) must be >= 0');
 
   /// Creates a [FItemContentStyle] that inherits its properties.
-  FItemContentStyle.inherit({required FColors colors, required FTypography typography})
-    : this(
-        prefixIconStyle: .delta(
-          IconThemeData(color: colors.primary, size: 15),
-          variants: {
-            [.disabled]: .delta(color: colors.disable(colors.primary)),
-          },
-        ),
-        titleTextStyle: .delta(
-          typography.sm,
-          variants: {
-            [.disabled]: .delta(color: colors.disable(colors.primary)),
-          },
-        ),
-        subtitleTextStyle: .delta(
-          typography.xs.copyWith(color: colors.mutedForeground),
-          variants: {
-            [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
-          },
-        ),
-        detailsTextStyle: .delta(
-          typography.xs.copyWith(color: colors.mutedForeground),
-          variants: {
-            [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
-          },
-        ),
-        suffixIconStyle: .delta(
-          IconThemeData(color: colors.mutedForeground, size: 15),
-          variants: {
-            [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
-          },
-        ),
-      );
+  FItemContentStyle.inherit({
+    required FTypography typography,
+    required Color foreground,
+    required Color disabledForeground,
+    required Color mutedForeground,
+    required Color disabledMutedForeground,
+  }) : this(
+         prefixIconStyle: .delta(
+           IconThemeData(color: foreground, size: 15),
+           variants: {
+             [.disabled]: .delta(color: disabledForeground),
+           },
+         ),
+         titleTextStyle: .delta(
+           typography.sm.copyWith(color: foreground),
+           variants: {
+             [.disabled]: .delta(color: disabledForeground),
+           },
+         ),
+         subtitleTextStyle: .delta(
+           typography.xs.copyWith(color: mutedForeground),
+           variants: {
+             [.disabled]: .delta(color: disabledMutedForeground),
+           },
+         ),
+         detailsTextStyle: .delta(
+           typography.xs.copyWith(color: mutedForeground),
+           variants: {
+             [.disabled]: .delta(color: disabledMutedForeground),
+           },
+         ),
+         suffixIconStyle: .delta(
+           IconThemeData(color: mutedForeground, size: 15),
+           variants: {
+             [.disabled]: .delta(color: disabledMutedForeground),
+           },
+         ),
+       );
 }

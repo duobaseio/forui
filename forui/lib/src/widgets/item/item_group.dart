@@ -236,7 +236,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
          children: [
            for (final (index, child) in children.indexed)
              FInheritedItemData.merge(
-               style: style.itemStyle,
+               styles: style.itemStyles,
                spacing: style.spacing,
                enabled: enabled,
                dividerColor: style.dividerColor,
@@ -286,7 +286,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
          itemBuilder: (context, index) {
            if (itemBuilder(context, index) case final item?) {
              return FInheritedItemData.merge(
-               style: style.itemStyle,
+               styles: style.itemStyles,
                spacing: style.spacing,
                enabled: enabled,
                dividerColor: style.dividerColor,
@@ -324,7 +324,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
          slivers: [
            for (final (index, child) in children.indexed)
              FInheritedItemData.merge(
-               style: style.itemStyle,
+               styles: style.itemStyles,
                spacing: style.spacing,
                enabled: enabled,
                dividerColor: style.dividerColor,
@@ -465,15 +465,15 @@ class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
   @override
   final double dividerWidth;
 
-  /// The item's style.
+  /// The item's styles.
   @override
-  final FItemStyle itemStyle;
+  final FItemStyles itemStyles;
 
   /// Creates a [FItemGroupStyle].
   FItemGroupStyle({
     required this.dividerColor,
     required this.dividerWidth,
-    required this.itemStyle,
+    required this.itemStyles,
     this.decoration = const BoxDecoration(),
     this.spacing = 4,
   });
@@ -481,7 +481,7 @@ class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
   /// Creates a [FItemGroupStyle] that inherits from the given arguments.
   FItemGroupStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        itemStyle: .inherit(colors: colors, typography: typography, style: style),
+        itemStyles: .inherit(colors: colors, typography: typography, style: style),
         dividerColor: .all(colors.border),
         dividerWidth: style.borderWidth,
       );

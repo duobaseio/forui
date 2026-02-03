@@ -12,7 +12,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FItem(
-            style: TestScaffold.blueScreen.itemStyle,
+            style: TestScaffold.blueScreen.itemStyles.base,
             prefix: const Icon(FIcons.bluetooth),
             title: const Text('Bluetooth'),
             subtitle: const Text('Fee, Fo, Fum'),
@@ -30,7 +30,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FItem(
-            style: TestScaffold.blueScreen.itemStyle,
+            style: TestScaffold.blueScreen.itemStyles.base,
             prefix: const Icon(FIcons.bluetooth),
             title: const Text('Bluetooth'),
             subtitle: const Text('Fee, Fo, Fum'),
@@ -54,7 +54,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FItem(
-            style: TestScaffold.blueScreen.itemStyle,
+            style: TestScaffold.blueScreen.itemStyles.base,
             enabled: false,
             prefix: const Icon(FIcons.bluetooth),
             title: const Text('Bluetooth'),
@@ -71,23 +71,36 @@ void main() {
   });
 
   for (final theme in TestScaffold.themes) {
-    testWidgets('enabled - ${theme.name}', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold(
-          theme: theme.data,
-          child: FItem(
-            prefix: const Icon(FIcons.bluetooth),
-            title: const Text('Lorem'),
-            subtitle: const Text('Fee, Fo'),
-            details: const Text('FL (5G)'),
-            suffix: const Icon(FIcons.chevronRight),
-            onPress: () {},
+    for (final (name, Set<FItemVariant> variants, bool enabled, bool selected) in [
+      ('enabled', {}, true, false),
+      ('disabled', {}, false, false),
+      ('selected', {}, true, true),
+      ('disabled-selected', {}, false, true),
+      ('destructive', {FItemVariant.destructive}, true, false),
+      ('destructive-disabled', {FItemVariant.destructive}, false, false),
+      ('destructive-selected', {FItemVariant.destructive}, true, true),
+    ]) {
+      testWidgets('$name - ${theme.name}', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme.data,
+            child: FItem(
+              variants: variants,
+              enabled: enabled,
+              selected: selected,
+              prefix: const Icon(FIcons.bluetooth),
+              title: const Text('Lorem'),
+              subtitle: const Text('Fee, Fo'),
+              details: const Text('FL (5G)'),
+              suffix: const Icon(FIcons.chevronRight),
+              onPress: () {},
+            ),
           ),
-        ),
-      );
+        );
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('item/item/enabled-${theme.name}.png'));
-    });
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('item/item/$name-${theme.name}.png'));
+      });
+    }
 
     testWidgets('hovered', (tester) async {
       await tester.pumpWidget(
@@ -175,25 +188,6 @@ void main() {
       );
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('item/item/focused-${theme.name}.png'));
-    });
-
-    testWidgets('disabled - ${theme.name}', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold(
-          theme: theme.data,
-          child: FItem(
-            enabled: false,
-            prefix: const Icon(FIcons.bluetooth),
-            title: const Text('Lorem'),
-            subtitle: const Text('Fee, Fo'),
-            details: const Text('FL (5G)'),
-            suffix: const Icon(FIcons.chevronRight),
-            onPress: () {},
-          ),
-        ),
-      );
-
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('item/item/disabled-${theme.name}.png'));
     });
   }
 

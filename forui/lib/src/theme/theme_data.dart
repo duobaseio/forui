@@ -241,7 +241,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   @override
   final FHeaderStyles headerStyles;
 
-  /// The item style.
+  /// The item styles.
   ///
   /// ## CLI
   /// To generate and customize this style:
@@ -249,7 +249,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// dart run forui style create item
   /// ```
   @override
-  final FItemStyle itemStyle;
+  final FItemStyles itemStyles;
 
   /// The item group style.
   ///
@@ -595,7 +595,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FDialogStyle? dialogStyle,
     FDividerStyles? dividerStyles,
     FHeaderStyles? headerStyles,
-    FItemStyle? itemStyle,
+    FItemStyles? itemStyles,
     FItemGroupStyle? itemGroupStyle,
     FLabelStyles? labelStyles,
     FLineCalendarStyle? lineCalendarStyle,
@@ -654,7 +654,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       dialogStyle: dialogStyle ?? .inherit(colors: colors, typography: typography, style: style),
       dividerStyles: dividerStyles ?? .inherit(colors: colors, style: style),
       headerStyles: headerStyles ?? .inherit(colors: colors, typography: typography, style: style),
-      itemStyle: itemStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      itemStyles: itemStyles ?? .inherit(colors: colors, typography: typography, style: style),
       itemGroupStyle: itemGroupStyle ?? .inherit(colors: colors, typography: typography, style: style),
       labelStyles: labelStyles ?? .inherit(style: style),
       lineCalendarStyle: lineCalendarStyle ?? .inherit(colors: colors, typography: typography, style: style),
@@ -743,7 +743,13 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       (a, b, t) => a!.lerp(b!, t),
       FHeaderStyles.raw,
     ),
-    itemStyle: a.itemStyle.lerp(b.itemStyle, t),
+    itemStyles: FVariants.lerpWhereUsing(
+      a.itemStyles,
+      b.itemStyles,
+      t,
+      (a, b, t) => a!.lerp(b!, t),
+      FItemStyles.raw,
+    ),
     itemGroupStyle: a.itemGroupStyle.lerp(b.itemGroupStyle, t),
     labelStyles: a.labelStyles.lerp(b.labelStyles, t),
     lineCalendarStyle: a.lineCalendarStyle.lerp(b.lineCalendarStyle, t),
@@ -815,7 +821,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     required this.dialogStyle,
     required this.dividerStyles,
     required this.headerStyles,
-    required this.itemStyle,
+    required this.itemStyles,
     required this.itemGroupStyle,
     required this.labelStyles,
     required this.lineCalendarStyle,
@@ -1327,7 +1333,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FDialogStyle Function(FDialogStyle style)? dialogStyle,
     FDividerStyles Function(FDividerStyles style)? dividerStyles,
     FHeaderStyles Function(FHeaderStyles style)? headerStyles,
-    FItemStyle Function(FItemStyle style)? itemStyle,
+    FItemStyles Function(FItemStyles style)? itemStyles,
     FItemGroupStyle Function(FItemGroupStyle style)? itemGroupStyle,
     FLabelStyles Function(FLabelStyles style)? labelStyles,
     FLineCalendarStyle Function(FLineCalendarStyle style)? lineCalendarStyle,
@@ -1388,7 +1394,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     dialogStyle: dialogStyle != null ? dialogStyle(this.dialogStyle) : this.dialogStyle,
     dividerStyles: dividerStyles != null ? dividerStyles(this.dividerStyles) : this.dividerStyles,
     headerStyles: headerStyles != null ? headerStyles(this.headerStyles) : this.headerStyles,
-    itemStyle: itemStyle != null ? itemStyle(this.itemStyle) : this.itemStyle,
+    itemStyles: itemStyles != null ? itemStyles(this.itemStyles) : this.itemStyles,
     itemGroupStyle: itemGroupStyle != null ? itemGroupStyle(this.itemGroupStyle) : this.itemGroupStyle,
     labelStyles: labelStyles != null ? labelStyles(this.labelStyles) : this.labelStyles,
     lineCalendarStyle: lineCalendarStyle != null ? lineCalendarStyle(this.lineCalendarStyle) : this.lineCalendarStyle,

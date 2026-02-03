@@ -57,7 +57,7 @@ final class FInheritedItemData extends InheritedWidget {
   static Widget merge({
     required bool last,
     required Widget child,
-    FItemStyle? style,
+    FItemStyles? styles,
     double? spacing,
     FItemDivider? divider,
     FVariants<FItemGroupVariantConstraint, Color, Delta>? dividerColor,
@@ -71,7 +71,7 @@ final class FInheritedItemData extends InheritedWidget {
 
       return FInheritedItemData(
         data: FItemData(
-          style: style ?? parent?.style,
+          styles: styles ?? parent?.styles,
           spacing: max(spacing ?? 0, parent?.spacing ?? 0),
           dividerColor: dividerColor ?? parent?.dividerColor ?? const .all(Colors.transparent),
           dividerWidth: dividerWidth ?? parent?.dividerWidth ?? 0,
@@ -107,8 +107,8 @@ final class FInheritedItemData extends InheritedWidget {
 
 /// The item's data.
 final class FItemData with Diagnosticable {
-  /// The item's style.
-  final FItemStyle? style;
+  /// The item's styles.
+  final FItemStyles? styles;
 
   /// The vertical spacing at the top and bottom of each level.
   final double spacing;
@@ -136,7 +136,7 @@ final class FItemData with Diagnosticable {
 
   /// Creates a new [FItemData].
   const FItemData({
-    this.style,
+    this.styles,
     this.spacing = 0,
     this.dividerColor = const .all(Colors.transparent),
     this.dividerWidth = 0,
@@ -151,7 +151,7 @@ final class FItemData with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty('styles', styles))
       ..add(DoubleProperty('spacing', spacing))
       ..add(DiagnosticsProperty('dividerColor', dividerColor))
       ..add(DoubleProperty('dividerWidth', dividerWidth))
@@ -167,7 +167,7 @@ final class FItemData with Diagnosticable {
       identical(this, other) ||
       other is FItemData &&
           runtimeType == other.runtimeType &&
-          style == other.style &&
+          styles == other.styles &&
           spacing == other.spacing &&
           dividerColor == other.dividerColor &&
           dividerWidth == other.dividerWidth &&
@@ -179,5 +179,5 @@ final class FItemData with Diagnosticable {
 
   @override
   int get hashCode =>
-      Object.hash(style, spacing, dividerColor, dividerWidth, divider, enabled, index, last, globalLast);
+      Object.hash(styles, spacing, dividerColor, dividerWidth, divider, enabled, index, last, globalLast);
 }

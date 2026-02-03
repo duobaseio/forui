@@ -457,7 +457,7 @@ void main() {
                   onPress: () {},
                 ),
                 FItem(
-                  style: FThemes.blue.dark.itemGroupStyle.itemStyle,
+                  style: FThemes.blue.dark.itemGroupStyle.itemStyles.base,
                   prefix: const Icon(FIcons.bluetooth),
                   title: const Text('Bluetooth'),
                   subtitle: const Text('Fee, Fo'),

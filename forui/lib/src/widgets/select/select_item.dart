@@ -183,7 +183,7 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
               enabled: enabled,
               ensureVisible: content.ensureVisible,
               child: FInheritedItemData.merge(
-                style: style.itemStyle,
+                styles: .all(style.itemStyle),
                 divider: divider,
                 index: 0,
                 last: children.length == 1,
@@ -192,7 +192,7 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
             ),
           for (final (i, child) in children.indexed.skip(1))
             FInheritedItemData.merge(
-              style: style.itemStyle,
+              styles: .all(style.itemStyle),
               divider: divider,
               index: i,
               last: i == children.length - 1,
@@ -282,7 +282,13 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
             [.focused, .hovered, .pressed]: .delta(color: colors.secondary, borderRadius: style.borderRadius),
           },
         ),
-        contentStyle: .inherit(colors: colors, typography: typography).copyWith(
+        contentStyle: .inherit(
+          typography: typography,
+          foreground: colors.primary,
+          disabledForeground: colors.disable(colors.primary),
+          mutedForeground: colors.mutedForeground,
+          disabledMutedForeground: colors.disable(colors.mutedForeground),
+        ).copyWith(
           padding: padding,
           prefixIconStyle: .value(iconStyle),
           prefixIconSpacing: 10,

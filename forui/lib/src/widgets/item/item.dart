@@ -6,9 +6,11 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
 import 'package:forui/src/theme/delta.dart';
+import 'package:forui/src/theme/variant.dart';
 import 'package:forui/src/widgets/item/item_content.dart';
 import 'package:forui/src/widgets/item/raw_item_content.dart';
 
+@Variants('FItem', {'destructive': (2, 'The destructive item style.')})
 @Sentinels(FItemStyle, {'focusedOutlineStyle': 'focusedOutlineStyleSentinel'})
 part 'item.design.dart';
 
@@ -19,6 +21,7 @@ mixin FItemMixin on Widget {
   /// This function is a shorthand for [FItem.new].
   static FItem item({
     required Widget title,
+    Set<FItemVariant> variants = const {},
     FItemStyleDelta style = const .inherit(),
     bool? enabled,
     bool selected = false,
@@ -41,6 +44,7 @@ mixin FItemMixin on Widget {
     Key? key,
   }) => .new(
     title: title,
+    variants: variants,
     style: style,
     enabled: enabled,
     selected: selected,
@@ -68,6 +72,7 @@ mixin FItemMixin on Widget {
   /// This function is a shorthand for [FItem.raw].
   static FItem raw({
     required Widget child,
+    Set<FItemVariant> variants = const {},
     FItemStyleDelta style = const .inherit(),
     bool? enabled,
     bool selected = false,
@@ -86,6 +91,7 @@ mixin FItemMixin on Widget {
     Widget? prefix,
     Key? key,
   }) => .raw(
+    variants: variants,
     style: style,
     enabled: enabled,
     selected: selected,
@@ -140,7 +146,22 @@ mixin FItemMixin on Widget {
 /// * [FTile] for a specialized item for touch devices.
 /// * [FItemStyle] for customizing an item's appearance.
 class FItem extends StatelessWidget with FItemMixin {
-  /// The item's style. Defaults to [FItemData.style] if present.
+  /// The variants used to resolve the style from [FItemStyles].
+  ///
+  /// Defaults to an empty set, which resolves to the base (primary) style. The current platform variant is automatically
+  /// included during style resolution. To change the platform variant, update the enclosing
+  /// [FTheme.platform]/[FAdaptiveScope.platform].
+  ///
+  /// For example, to create a destructive item:
+  /// ```dart
+  /// FItem(
+  ///   variants: {FItemVariant.destructive},
+  ///   title: Text('Delete'),
+  /// )
+  /// ```
+  final Set<FItemVariant> variants;
+
+  /// The item's style. Defaults to [FItemData.styles] if present.
   ///
   /// Provide a style to prevent inheritance from [FInheritedItemData].
   ///
@@ -265,6 +286,7 @@ class FItem extends StatelessWidget with FItemMixin {
   /// {@endtemplate}
   FItem({
     required Widget title,
+    this.variants = const {},
     this.style = const .inherit(),
     this.enabled,
     this.selected = false,
@@ -315,6 +337,7 @@ class FItem extends StatelessWidget with FItemMixin {
   /// {@endtemplate}
   FItem.raw({
     required Widget child,
+    this.variants = const {},
     this.style = const .inherit(),
     this.enabled,
     this.selected = false,
@@ -348,7 +371,7 @@ class FItem extends StatelessWidget with FItemMixin {
   @override
   Widget build(BuildContext context) {
     final data = FInheritedItemData.maybeOf(context) ?? const FItemData();
-    final style = this.style(data.style ?? context.theme.itemStyle);
+    final style = this.style((data.styles ?? context.theme.itemStyles).resolve({...variants, context.platformVariant}));
     final enabled = this.enabled ?? data.enabled;
     final formVariants = <FTappableVariant>{
       context.platformVariant as FTappableVariant,
@@ -421,6 +444,7 @@ class FItem extends StatelessWidget with FItemMixin {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(IterableProperty('variants', variants))
       ..add(DiagnosticsProperty('style', style))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
       ..add(FlagProperty('selected', value: selected, ifTrue: 'selected'))
@@ -437,6 +461,43 @@ class FItem extends StatelessWidget with FItemMixin {
       ..add(DiagnosticsProperty('shortcuts', shortcuts))
       ..add(DiagnosticsProperty('actions', actions));
   }
+}
+
+/// The item styles.
+class FItemStyles extends FVariants<FItemVariantConstraint, FItemStyle, FItemStyleDelta> {
+  /// Creates a [FItemStyles] with concrete styles.
+  FItemStyles(super.base, {required super.variants});
+
+  /// Creates a [FItemStyles] from deltas.
+  FItemStyles.delta(super.base, {required super.variants}) : super.delta();
+
+  /// Creates a [FItemStyles] from raw values.
+  FItemStyles.raw(super.base, super.variants) : super.raw();
+
+  /// Creates a [FItemStyles] with only a base variant.
+  const FItemStyles.all(super.base) : super.all();
+
+  /// Creates a [FItemStyles] that inherits its properties.
+  FItemStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
+    : super.delta(
+        .inherit(colors: colors, typography: typography, style: style),
+        variants: {
+          [.destructive]: .delta(
+            contentStyle: FItemContentStyle.inherit(
+              typography: typography,
+              foreground: colors.destructive,
+              mutedForeground: colors.destructive,
+              disabledForeground: colors.disable(colors.destructive),
+              disabledMutedForeground: colors.disable(colors.destructive),
+            ),
+            rawItemContentStyle: FRawItemContentStyle.inherit(
+              typography: typography,
+              enabled: colors.primary,
+              disabled: colors.disable(colors.primary),
+            ),
+          ),
+        },
+      );
 }
 
 /// A [FItem]'s style.
@@ -493,18 +554,30 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
         backgroundColor: FVariants(
           colors.background,
           variants: {
-            [.disabled]: colors.disable(colors.secondary),
+            [.disabled]: colors.background,
           },
         ),
         decoration: .delta(
           BoxDecoration(color: colors.background, borderRadius: style.borderRadius),
           variants: {
-            [.disabled]: .delta(color: colors.disable(colors.secondary)),
+            [.disabled.and(.selected)]: .delta(color: colors.disable(colors.secondary)),
+            [.disabled]: const .delta(),
+            [.selected]: .delta(color: colors.secondary),
             [.hovered, .pressed]: .delta(color: colors.secondary),
           },
         ),
-        contentStyle: .inherit(colors: colors, typography: typography),
-        rawItemContentStyle: .inherit(colors: colors, typography: typography),
+        contentStyle: .inherit(
+          typography: typography,
+          foreground: colors.primary,
+          disabledForeground: colors.disable(colors.primary),
+          mutedForeground: colors.mutedForeground,
+          disabledMutedForeground: colors.disable(colors.mutedForeground),
+        ),
+        rawItemContentStyle: .inherit(
+          typography: typography,
+          enabled: colors.primary,
+          disabled: colors.disable(colors.primary),
+        ),
         tappableStyle: style.tappableStyle.copyWith(
           motion: FTappableMotion.none,
           pressedEnterDuration: .zero,
