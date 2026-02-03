@@ -272,20 +272,21 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
             [.focused, .hovered, .pressed]: BoxDecoration(color: colors.secondary, borderRadius: style.borderRadius),
           },
         ),
-        contentStyle: .inherit(
-          typography: typography,
-          foreground: colors.primary,
-          disabledForeground: colors.disable(colors.primary),
-          mutedForeground: colors.mutedForeground,
-          disabledMutedForeground: colors.disable(colors.mutedForeground),
-        ).copyWith(
-          padding: padding,
-          prefixIconStyle: .value(iconStyle),
-          prefixIconSpacing: 10,
-          titleTextStyle: .value(textStyle),
-          titleSpacing: 4,
-          suffixIconStyle: .value(iconStyle),
-        ),
+        contentStyle:
+            .inherit(
+              typography: typography,
+              foreground: colors.primary,
+              disabledForeground: colors.disable(colors.primary),
+              mutedForeground: colors.mutedForeground,
+              disabledMutedForeground: colors.disable(colors.mutedForeground),
+            ).copyWith(
+              padding: padding,
+              prefixIconStyle: .value(iconStyle),
+              prefixIconSpacing: 10,
+              titleTextStyle: .value(textStyle),
+              titleSpacing: 4,
+              suffixIconStyle: .value(iconStyle),
+            ),
         rawItemContentStyle: FRawItemContentStyle(
           padding: padding,
           prefixIconStyle: iconStyle,

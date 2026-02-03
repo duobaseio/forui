@@ -131,7 +131,6 @@ class FAlert extends StatelessWidget {
 /// The alert styles.
 extension type FAlertStyles._(FVariants<FAlertVariantConstraint, FAlertStyle, FAlertStyleDelta> _)
     implements FVariants<FAlertVariantConstraint, FAlertStyle, FAlertStyleDelta> {
-
   /// Creates a [FAlertStyles] that inherits its properties.
   FAlertStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this._(
