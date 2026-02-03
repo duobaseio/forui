@@ -29,7 +29,6 @@ dependencies:
   flutter_localizations:
     sdk: flutter
   forui_assets: ^0.17.0
-  google_fonts: ^6.2.0
   intl: any
   meta: ^1.11.0
   sugar: ^4.0.0
