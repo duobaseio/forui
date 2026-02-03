@@ -467,7 +467,7 @@ class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
 
   /// The item's styles.
   @override
-  final FItemStyles itemStyles;
+  final FVariants<FItemVariantConstraint, FItemStyle, FItemStyleDelta> itemStyles;
 
   /// Creates a [FItemGroupStyle].
   FItemGroupStyle({
@@ -481,8 +481,8 @@ class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
   /// Creates a [FItemGroupStyle] that inherits from the given arguments.
   FItemGroupStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        itemStyles: .inherit(colors: colors, typography: typography, style: style),
         dividerColor: .all(colors.border),
         dividerWidth: style.borderWidth,
+        itemStyles: FItemStyles.inherit(colors: colors, typography: typography, style: style),
       );
 }

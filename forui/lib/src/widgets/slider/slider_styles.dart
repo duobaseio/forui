@@ -16,49 +16,40 @@ import 'package:forui/src/theme/variant.dart';
 part 'slider_styles.design.dart';
 
 /// A slider's styles.
-class FSliderStyles extends FVariants<FSliderAxisVariantConstraint, FSliderStyle, FSliderStyleDelta> {
-  /// Creates a [FSliderStyles] with concrete styles.
-  FSliderStyles(super.base, {required super.variants});
-
-  /// Creates a [FSliderStyles] from deltas.
-  FSliderStyles.delta(super.base, {required super.variants}) : super.delta();
-
-  /// Creates a [FSliderStyles] from raw values.
-  FSliderStyles.raw(super.base, super.variants) : super.raw();
-
-  /// Creates a [FSliderStyles] with only a base variant.
-  const FSliderStyles.all(super.base): super.all();
-
+extension type FSliderStyles._(FVariants<FSliderAxisVariantConstraint, FSliderStyle, FSliderStyleDelta> _)
+    implements FVariants<FSliderAxisVariantConstraint, FSliderStyle, FSliderStyleDelta> {
   /// Creates a [FSliderStyles] that inherits its properties.
   FSliderStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : super.delta(
-        .inherit(
-          colors: colors,
-          typography: typography,
-          style: style,
-          labelAnchor: .topCenter,
-          labelOffset: 10,
-          descriptionPadding: const .only(top: 10),
-          childPadding: const .only(top: 10, bottom: 20, left: 10, right: 10),
+    : this._(
+        .delta(
+          .inherit(
+            colors: colors,
+            typography: typography,
+            style: style,
+            labelAnchor: .topCenter,
+            labelOffset: 10,
+            descriptionPadding: const .only(top: 10),
+            childPadding: const .only(top: 10, bottom: 20, left: 10, right: 10),
+          ),
+          variants: {
+            [.touch]: const .delta(thumbSize: 25),
+            [.vertical]: const .delta(
+              markStyle: .delta(labelAnchor: .centerRight, labelOffset: -10),
+              tooltipTipAnchor: .centerLeft,
+              tooltipThumbAnchor: .centerRight,
+              descriptionPadding: .only(top: 5),
+              childPadding: .all(10),
+            ),
+            [.vertical.and(.touch)]: const .delta(
+              markStyle: .delta(labelAnchor: .centerRight, labelOffset: -10),
+              tooltipTipAnchor: .bottomCenter,
+              tooltipThumbAnchor: .topCenter,
+              thumbSize: 25,
+              descriptionPadding: .only(top: 5),
+              childPadding: .all(10),
+            ),
+          },
         ),
-        variants: {
-          [.touch]: const .delta(thumbSize: 25),
-          [.vertical]: const .delta(
-            markStyle: .delta(labelAnchor: .centerRight, labelOffset: -10),
-            tooltipTipAnchor: .centerLeft,
-            tooltipThumbAnchor: .centerRight,
-            descriptionPadding: .only(top: 5),
-            childPadding: .all(10),
-          ),
-          [.vertical.and(.touch)]: const .delta(
-            markStyle: .delta(labelAnchor: .centerRight, labelOffset: -10),
-            tooltipTipAnchor: .bottomCenter,
-            tooltipThumbAnchor: .topCenter,
-            thumbSize: 25,
-            descriptionPadding: .only(top: 5),
-            childPadding: .all(10),
-          ),
-        },
       );
 }
 

@@ -97,33 +97,27 @@ class FHeaderData extends InheritedWidget {
 }
 
 /// [FHeader]'s styles.
-class FHeaderStyles extends FVariants<FHeaderVariantConstraint, FHeaderStyle, FHeaderStyleDelta> {
-  /// Creates a [FHeaderStyles] with concrete styles.
-  FHeaderStyles(super.base, {required super.variants});
-
-  /// Creates a [FHeaderStyles] from deltas.
-  FHeaderStyles.delta(super.base, {required super.variants}) : super.delta();
-
-  /// Creates a [FHeaderStyles] from raw values.
-  FHeaderStyles.raw(super.base, super.variants) : super.raw();
-
+extension type FHeaderStyles._(FVariants<FHeaderVariantConstraint, FHeaderStyle, FHeaderStyleDelta> _)
+    implements FVariants<FHeaderVariantConstraint, FHeaderStyle, FHeaderStyleDelta> {
   /// Creates a [FHeaderStyles] that inherits its properties.
   FHeaderStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : super(
-        FHeaderStyle(
-          systemOverlayStyle: colors.systemOverlayStyle,
-          titleTextStyle: typography.xl3.copyWith(color: colors.foreground, fontWeight: .w700, height: 1),
-          actionStyle: .inherit(colors: colors, style: style, size: 30),
-          padding: style.pagePadding.copyWith(bottom: 15),
-        ),
-        variants: {
-          [.nested]: FHeaderStyle(
+    : this._(
+        FVariants(
+          FHeaderStyle(
             systemOverlayStyle: colors.systemOverlayStyle,
-            titleTextStyle: typography.xl.copyWith(color: colors.foreground, fontWeight: .w600, height: 1),
-            actionStyle: .inherit(colors: colors, style: style, size: 25),
+            titleTextStyle: typography.xl3.copyWith(color: colors.foreground, fontWeight: .w700, height: 1),
+            actionStyle: .inherit(colors: colors, style: style, size: 30),
             padding: style.pagePadding.copyWith(bottom: 15),
           ),
-        },
+          variants: {
+            [.nested]: FHeaderStyle(
+              systemOverlayStyle: colors.systemOverlayStyle,
+              titleTextStyle: typography.xl.copyWith(color: colors.foreground, fontWeight: .w600, height: 1),
+              actionStyle: .inherit(colors: colors, style: style, size: 25),
+              padding: style.pagePadding.copyWith(bottom: 15),
+            ),
+          },
+        ),
       );
 }
 

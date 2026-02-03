@@ -364,10 +364,6 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
   @override
   final BoxDecoration decoration;
 
-  /// The tile's styles.
-  @override
-  final FTileStyles tileStyles;
-
   /// The divider's style.
   @override
   final FVariants<FItemGroupVariantConstraint, Color, Delta> dividerColor;
@@ -376,12 +372,16 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
   @override
   final double dividerWidth;
 
+  /// The tile's styles.
+  @override
+  final FVariants<FItemVariantConstraint, FTileStyle, FTileStyleDelta> tileStyles;
+
   /// Creates a [FTileGroupStyle].
   FTileGroupStyle({
     required this.decoration,
-    required this.tileStyles,
     required this.dividerColor,
     required this.dividerWidth,
+    required this.tileStyles,
     required super.labelTextStyle,
     required super.descriptionTextStyle,
     required super.errorTextStyle,
@@ -398,7 +398,17 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
           border: .all(color: colors.border, width: style.borderWidth),
           borderRadius: style.borderRadius,
         ),
-
+        dividerColor: .all(colors.border),
+        dividerWidth: style.borderWidth,
+        labelTextStyle: .delta(
+          typography.base.copyWith(
+            color: style.formFieldStyle.labelTextStyle.base.color ?? colors.primary,
+            fontWeight: .w600,
+          ),
+          variants: {
+            [.disabled]: .delta(color: colors.disable(colors.primary)),
+          },
+        ),
         tileStyles: .delta(
           FTileStyle.inherit(
             colors: colors,
@@ -420,17 +430,6 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
                 disabled: colors.disable(colors.destructive),
               ),
             ),
-          },
-        ),
-        dividerColor: .all(colors.border),
-        dividerWidth: style.borderWidth,
-        labelTextStyle: .delta(
-          typography.base.copyWith(
-            color: style.formFieldStyle.labelTextStyle.base.color ?? colors.primary,
-            fontWeight: .w600,
-          ),
-          variants: {
-            [.disabled]: .delta(color: colors.disable(colors.primary)),
           },
         ),
         descriptionTextStyle: style.formFieldStyle.descriptionTextStyle.apply([

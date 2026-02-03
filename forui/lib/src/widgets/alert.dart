@@ -129,37 +129,32 @@ class FAlert extends StatelessWidget {
 }
 
 /// The alert styles.
-class FAlertStyles extends FVariants<FAlertVariantConstraint, FAlertStyle, FAlertStyleDelta> {
-  /// Creates a [FAlertStyles] with concrete styles.
-  FAlertStyles(super.base, {required super.variants});
-
-  /// Creates a [FAlertStyles] from deltas.
-  FAlertStyles.delta(super.base, {required super.variants}) : super.delta();
-
-  /// Creates a [FAlertStyles] from raw values.
-  FAlertStyles.raw(super.base, super.variants) : super.raw();
+extension type FAlertStyles._(FVariants<FAlertVariantConstraint, FAlertStyle, FAlertStyleDelta> _)
+    implements FVariants<FAlertVariantConstraint, FAlertStyle, FAlertStyleDelta> {
 
   /// Creates a [FAlertStyles] that inherits its properties.
   FAlertStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : super.delta(
-        FAlertStyle(
-          iconStyle: IconThemeData(color: colors.foreground, size: 20),
-          titleTextStyle: typography.base.copyWith(fontWeight: .w500, color: colors.foreground, height: 1.2),
-          subtitleTextStyle: typography.sm.copyWith(color: colors.foreground),
-          decoration: BoxDecoration(
-            border: .all(color: colors.border),
-            borderRadius: style.borderRadius,
-            color: colors.background,
+    : this._(
+        FVariants.delta(
+          FAlertStyle(
+            iconStyle: IconThemeData(color: colors.foreground, size: 20),
+            titleTextStyle: typography.base.copyWith(fontWeight: .w500, color: colors.foreground, height: 1.2),
+            subtitleTextStyle: typography.sm.copyWith(color: colors.foreground),
+            decoration: BoxDecoration(
+              border: .all(color: colors.border),
+              borderRadius: style.borderRadius,
+              color: colors.background,
+            ),
           ),
+          variants: {
+            [.destructive]: .delta(
+              iconStyle: .delta(color: colors.destructive),
+              titleTextStyle: .delta(color: colors.destructive),
+              subtitleTextStyle: .delta(color: colors.destructive),
+              decoration: .delta(border: .all(color: colors.destructive)),
+            ),
+          },
         ),
-        variants: {
-          [.destructive]: .delta(
-            iconStyle: .delta(color: colors.destructive),
-            titleTextStyle: .delta(color: colors.destructive),
-            subtitleTextStyle: .delta(color: colors.destructive),
-            decoration: .delta(border: .all(color: colors.destructive)),
-          ),
-        },
       );
 }
 

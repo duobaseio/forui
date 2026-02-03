@@ -271,42 +271,37 @@ class _FResizableState extends State<FResizable> {
 }
 
 /// A [FResizable]'s style.
-class FResizableStyles
-    extends FVariants<FResizableAxisVariantConstraint, FResizableDividerStyle, FResizableDividerStyleDelta> {
-  /// Creates a [FResizableStyles] with concrete styles.
-  FResizableStyles(super.base, {required super.variants});
-
-  /// Creates a [FResizableStyles] from deltas.
-  FResizableStyles.delta(super.base, {required super.variants}) : super.delta();
-
-  /// Creates a [FResizableStyles] from raw values.
-  FResizableStyles.raw(super.base, super.variants) : super.raw();
-
+extension type FResizableStyles._(
+  FVariants<FResizableAxisVariantConstraint, FResizableDividerStyle, FResizableDividerStyleDelta> _
+)
+    implements FVariants<FResizableAxisVariantConstraint, FResizableDividerStyle, FResizableDividerStyleDelta> {
   /// Creates a [FResizableStyles] that inherits its properties.
   FResizableStyles.inherit({required FColors colors, required FStyle style})
-    : super(
-        FResizableDividerStyle(
-          color: colors.border,
-          focusedOutlineStyle: style.focusedOutlineStyle,
-          thumbStyle: FResizableDividerThumbStyle(
-            decoration: BoxDecoration(color: colors.border, borderRadius: style.borderRadius),
-            foregroundColor: colors.foreground,
-            height: 20,
-            width: 10,
-          ),
-        ),
-        variants: {
-          [.vertical]: FResizableDividerStyle(
+    : this._(
+        FVariants(
+          FResizableDividerStyle(
             color: colors.border,
             focusedOutlineStyle: style.focusedOutlineStyle,
             thumbStyle: FResizableDividerThumbStyle(
               decoration: BoxDecoration(color: colors.border, borderRadius: style.borderRadius),
               foregroundColor: colors.foreground,
-              height: 10,
-              width: 20,
+              height: 20,
+              width: 10,
             ),
           ),
-        },
+          variants: {
+            [.vertical]: FResizableDividerStyle(
+              color: colors.border,
+              focusedOutlineStyle: style.focusedOutlineStyle,
+              thumbStyle: FResizableDividerThumbStyle(
+                decoration: BoxDecoration(color: colors.border, borderRadius: style.borderRadius),
+                foregroundColor: colors.foreground,
+                height: 10,
+                width: 20,
+              ),
+            ),
+          },
+        ),
       );
 }
 

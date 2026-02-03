@@ -45,7 +45,7 @@ class DesignGenerator extends Generator {
     }
 
     for (final type in library.classes) {
-      if (type.name == null || type.isSealed || type.isAbstract || type.supertype?.element.name == 'FVariants') {
+      if (type.name == null || type.isSealed || type.isAbstract || fVariants.isSuperTypeOf(type.thisType)) {
         continue;
       }
 

@@ -301,45 +301,36 @@ class FTile extends StatelessWidget with FTileMixin {
 }
 
 /// The tile styles.
-class FTileStyles extends FVariants<FItemVariantConstraint, FTileStyle, FTileStyleDelta> {
-  /// Creates a [FTileStyles] with concrete styles.
-  FTileStyles(super.base, {required super.variants});
-
-  /// Creates a [FTileStyles] from deltas.
-  FTileStyles.delta(super.base, {required super.variants}) : super.delta();
-
-  /// Creates a [FTileStyles] from raw values.
-  FTileStyles.raw(super.base, super.variants) : super.raw();
-
-  /// Creates a [FTileStyles] with only a base variant.
-  const FTileStyles.all(super.base) : super.all();
-
+extension type FTileStyles._(FVariants<FItemVariantConstraint, FTileStyle, FTileStyleDelta> _)
+    implements FVariants<FItemVariantConstraint, FTileStyle, FTileStyleDelta> {
   /// Creates a [FTileStyles] that inherits its properties.
   FTileStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : super.delta(
-        .inherit(colors: colors, typography: typography, style: style),
-        variants: {
-          [.destructive]: .delta(
-            contentStyle: FItemContentStyle.inherit(
-              typography: typography,
-              foreground: colors.destructive,
-              mutedForeground: colors.destructive,
-              disabledForeground: colors.disable(colors.destructive),
-              disabledMutedForeground: colors.disable(colors.destructive),
+    : this._(
+        .delta(
+          .inherit(colors: colors, typography: typography, style: style),
+          variants: {
+            [.destructive]: .delta(
+              contentStyle: FItemContentStyle.inherit(
+                typography: typography,
+                foreground: colors.destructive,
+                mutedForeground: colors.destructive,
+                disabledForeground: colors.disable(colors.destructive),
+                disabledMutedForeground: colors.disable(colors.destructive),
+              ),
+              rawItemContentStyle: FRawItemContentStyle.inherit(
+                typography: typography,
+                enabled: colors.destructive,
+                disabled: colors.disable(colors.destructive),
+              ),
             ),
-            rawItemContentStyle: FRawItemContentStyle.inherit(
-              typography: typography,
-              enabled: colors.destructive,
-              disabled: colors.disable(colors.destructive),
-            ),
-          ),
-        },
+          },
+        ),
       );
 }
 
 @internal
-extension FTileStylesConversion on FTileStyles {
-  FItemStyles toItemStyles() => FItemStyles.raw(base, variants);
+extension FTileStylesConversion on FVariants<FItemVariantConstraint, FTileStyle, FTileStyleDelta> {
+  FVariants<FItemVariantConstraint, FItemStyle, FItemStyleDelta> toItemStyles() => .raw(base, variants);
 }
 
 /// A [FTile]'s style.

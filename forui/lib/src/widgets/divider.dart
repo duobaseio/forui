@@ -71,27 +71,21 @@ class FDivider extends StatelessWidget {
 }
 
 /// The [FDivider] styles.
-class FDividerStyles extends FVariants<FDividerAxisVariantConstraint, FDividerStyle, FDividerStyleDelta> {
-  /// Creates a [FDividerStyles].
-  FDividerStyles(super.base, {required super.variants});
-
-  /// Creates a [FDividerStyles] from deltas.
-  FDividerStyles.delta(super.base, {required super.variants}) : super.delta();
-
-  /// Creates a [FDividerStyles] from raw values.
-  FDividerStyles.raw(super.base, super.variants) : super.raw();
-
+extension type FDividerStyles._(FVariants<FDividerAxisVariantConstraint, FDividerStyle, FDividerStyleDelta> _)
+    implements FVariants<FDividerAxisVariantConstraint, FDividerStyle, FDividerStyleDelta> {
   /// Creates a [FDividerStyles] that inherits its properties.
   FDividerStyles.inherit({required FColors colors, required FStyle style})
-    : super.delta(
-        FDividerStyle(
-          color: colors.secondary,
-          padding: FDividerStyle.defaultPadding.horizontalStyle,
-          width: style.borderWidth,
+    : this._(
+        .delta(
+          FDividerStyle(
+            color: colors.secondary,
+            padding: FDividerStyle.defaultPadding.horizontalStyle,
+            width: style.borderWidth,
+          ),
+          variants: {
+            [.vertical]: .delta(padding: FDividerStyle.defaultPadding.verticalStyle),
+          },
         ),
-        variants: {
-          [.vertical]: .delta(padding: FDividerStyle.defaultPadding.verticalStyle),
-        },
       );
 }
 

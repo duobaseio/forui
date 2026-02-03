@@ -464,39 +464,30 @@ class FItem extends StatelessWidget with FItemMixin {
 }
 
 /// The item styles.
-class FItemStyles extends FVariants<FItemVariantConstraint, FItemStyle, FItemStyleDelta> {
-  /// Creates a [FItemStyles] with concrete styles.
-  FItemStyles(super.base, {required super.variants});
-
-  /// Creates a [FItemStyles] from deltas.
-  FItemStyles.delta(super.base, {required super.variants}) : super.delta();
-
-  /// Creates a [FItemStyles] from raw values.
-  FItemStyles.raw(super.base, super.variants) : super.raw();
-
-  /// Creates a [FItemStyles] with only a base variant.
-  const FItemStyles.all(super.base) : super.all();
-
+extension type FItemStyles._(FVariants<FItemVariantConstraint, FItemStyle, FItemStyleDelta> _)
+    implements FVariants<FItemVariantConstraint, FItemStyle, FItemStyleDelta> {
   /// Creates a [FItemStyles] that inherits its properties.
   FItemStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : super.delta(
-        .inherit(colors: colors, typography: typography, style: style),
-        variants: {
-          [.destructive]: .delta(
-            contentStyle: FItemContentStyle.inherit(
-              typography: typography,
-              foreground: colors.destructive,
-              mutedForeground: colors.destructive,
-              disabledForeground: colors.disable(colors.destructive),
-              disabledMutedForeground: colors.disable(colors.destructive),
+    : this._(
+        .delta(
+          .inherit(colors: colors, typography: typography, style: style),
+          variants: {
+            [.destructive]: .delta(
+              contentStyle: FItemContentStyle.inherit(
+                typography: typography,
+                foreground: colors.destructive,
+                mutedForeground: colors.destructive,
+                disabledForeground: colors.disable(colors.destructive),
+                disabledMutedForeground: colors.disable(colors.destructive),
+              ),
+              rawItemContentStyle: FRawItemContentStyle.inherit(
+                typography: typography,
+                enabled: colors.primary,
+                disabled: colors.disable(colors.primary),
+              ),
             ),
-            rawItemContentStyle: FRawItemContentStyle.inherit(
-              typography: typography,
-              enabled: colors.primary,
-              disabled: colors.disable(colors.primary),
-            ),
-          ),
-        },
+          },
+        ),
       );
 }
 

@@ -87,45 +87,39 @@ class FBadge extends StatelessWidget {
 }
 
 /// The [FBadgeStyle]s.
-class FBadgeStyles extends FVariants<FBadgeVariantConstraint, FBadgeStyle, FBadgeStyleDelta> {
+extension type FBadgeStyles._(FVariants<FBadgeVariantConstraint, FBadgeStyle, FBadgeStyleDelta> _)
+    implements FVariants<FBadgeVariantConstraint, FBadgeStyle, FBadgeStyleDelta> {
   /// The default border radius for badges.
-  static const BorderRadius defaultRadius = .all(.circular(100));
-
-  /// Creates a [FBadgeStyles] with concrete styles.
-  FBadgeStyles(super.base, {required super.variants});
-
-  /// Creates a [FBadgeStyles] from deltas.
-  FBadgeStyles.delta(super.base, {required super.variants}) : super.delta();
-
-  /// Creates a [FBadgeStyles] from raw values.
-  FBadgeStyles.raw(super.base, super.variants) : super.raw();
+  static const BorderRadius defaultBadgeRadius = BorderRadius.all(Radius.circular(100));
 
   /// Creates a [FBadgeStyles] that inherits its properties.
   FBadgeStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : super.delta(
-        FBadgeStyle(
-          decoration: BoxDecoration(color: colors.primary, borderRadius: defaultRadius),
-          contentStyle: FBadgeContentStyle(
-            labelTextStyle: typography.sm.copyWith(color: colors.primaryForeground, fontWeight: .w600),
-          ),
-        ),
-        variants: {
-          [.secondary]: .delta(
-            decoration: .delta(color: colors.secondary),
-            contentStyle: .delta(labelTextStyle: .delta(color: colors.secondaryForeground)),
-          ),
-          [.outline]: .delta(
-            decoration: .delta(
-              color: const Color(0x00000000),
-              border: .all(color: colors.border, width: style.borderWidth),
+    : this._(
+        FVariants.delta(
+          FBadgeStyle(
+            decoration: BoxDecoration(color: colors.primary, borderRadius: defaultBadgeRadius),
+            contentStyle: FBadgeContentStyle(
+              labelTextStyle: typography.sm.copyWith(color: colors.primaryForeground, fontWeight: .w600),
             ),
-            contentStyle: .delta(labelTextStyle: .delta(color: colors.foreground)),
           ),
-          [.destructive]: .delta(
-            decoration: .delta(color: colors.destructive),
-            contentStyle: .delta(labelTextStyle: .delta(color: colors.destructiveForeground)),
-          ),
-        },
+          variants: {
+            [.secondary]: .delta(
+              decoration: .delta(color: colors.secondary),
+              contentStyle: .delta(labelTextStyle: .delta(color: colors.secondaryForeground)),
+            ),
+            [.outline]: .delta(
+              decoration: .delta(
+                color: const Color(0x00000000),
+                border: .all(color: colors.border, width: style.borderWidth),
+              ),
+              contentStyle: .delta(labelTextStyle: .delta(color: colors.foreground)),
+            ),
+            [.destructive]: .delta(
+              decoration: .delta(color: colors.destructive),
+              contentStyle: .delta(labelTextStyle: .delta(color: colors.destructiveForeground)),
+            ),
+          },
+        ),
       );
 }
 

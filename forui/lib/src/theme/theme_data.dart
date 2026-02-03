@@ -74,7 +74,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// dart run forui style create alerts
   /// ```
   @override
-  final FAlertStyles alertStyles;
+  final FVariants<FAlertVariantConstraint, FAlertStyle, FAlertStyleDelta> alertStyles;
 
   /// The avatar style.
   ///
@@ -96,7 +96,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// dart run forui style create badges
   /// ```
   @override
-  final FBadgeStyles badgeStyles;
+  final FVariants<FBadgeVariantConstraint, FBadgeStyle, FBadgeStyleDelta> badgeStyles;
 
   /// The bottom navigation bar style.
   ///
@@ -129,7 +129,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// dart run forui style create buttons
   /// ```
   @override
-  final FButtonStyles buttonStyles;
+  final FVariants<FButtonVariantConstraint, FButtonStyle, FButtonStyleDelta> buttonStyles;
 
   /// The calendar style.
   ///
@@ -228,7 +228,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// dart run forui style create dividers
   /// ```
   @override
-  final FDividerStyles dividerStyles;
+  final FVariants<FDividerAxisVariantConstraint, FDividerStyle, FDividerStyleDelta> dividerStyles;
 
   /// The header styles.
   ///
@@ -239,7 +239,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// dart run forui style create headers
   /// ```
   @override
-  final FHeaderStyles headerStyles;
+  final FVariants<FHeaderVariantConstraint, FHeaderStyle, FHeaderStyleDelta> headerStyles;
 
   /// The item styles.
   ///
@@ -249,7 +249,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// dart run forui style create item
   /// ```
   @override
-  final FItemStyles itemStyles;
+  final FVariants<FItemVariantConstraint, FItemStyle, FItemStyleDelta> itemStyles;
 
   /// The item group style.
   ///
@@ -390,7 +390,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// dart run forui style create resizable
   /// ```
   @override
-  final FResizableStyles resizableStyles;
+  final FVariants<FResizableAxisVariantConstraint, FResizableDividerStyle, FResizableDividerStyleDelta> resizableStyles;
 
   /// The scaffold style.
   ///
@@ -456,7 +456,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// dart run forui style create sliders
   /// ```
   @override
-  final FSliderStyles sliderStyles;
+  final FVariants<FSliderAxisVariantConstraint, FSliderStyle, FSliderStyleDelta> sliderStyles;
 
   /// The toaster style.
   ///
@@ -522,7 +522,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// dart run forui style create tile
   /// ```
   @override
-  final FTileStyles tileStyles;
+  final FVariants<FItemVariantConstraint, FTileStyle, FTileStyleDelta> tileStyles;
 
   /// The tile group's style.
   ///
@@ -579,12 +579,12 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FStyle? style,
     FAccordionStyle? accordionStyle,
     FAutocompleteStyle? autocompleteStyle,
-    FAlertStyles? alertStyles,
+    FVariants<FAlertVariantConstraint, FAlertStyle, FAlertStyleDelta>? alertStyles,
     FAvatarStyle? avatarStyle,
-    FBadgeStyles? badgeStyles,
+    FVariants<FBadgeVariantConstraint, FBadgeStyle, FBadgeStyleDelta>? badgeStyles,
     FBottomNavigationBarStyle? bottomNavigationBarStyle,
     FBreadcrumbStyle? breadcrumbStyle,
-    FButtonStyles? buttonStyles,
+    FVariants<FButtonVariantConstraint, FButtonStyle, FButtonStyleDelta>? buttonStyles,
     FCalendarStyle? calendarStyle,
     FCardStyle? cardStyle,
     FCheckboxStyle? checkboxStyle,
@@ -593,9 +593,9 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FDeterminateProgressStyle? determinateProgressStyle,
     FDialogRouteStyle? dialogRouteStyle,
     FDialogStyle? dialogStyle,
-    FDividerStyles? dividerStyles,
-    FHeaderStyles? headerStyles,
-    FItemStyles? itemStyles,
+    FVariants<FDividerAxisVariantConstraint, FDividerStyle, FDividerStyleDelta>? dividerStyles,
+    FVariants<FHeaderVariantConstraint, FHeaderStyle, FHeaderStyleDelta>? headerStyles,
+    FVariants<FItemVariantConstraint, FItemStyle, FItemStyleDelta>? itemStyles,
     FItemGroupStyle? itemGroupStyle,
     FLabelStyles? labelStyles,
     FLineCalendarStyle? lineCalendarStyle,
@@ -608,19 +608,19 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FPopoverMenuStyle? popoverMenuStyle,
     FProgressStyle? progressStyle,
     FRadioStyle? radioStyle,
-    FResizableStyles? resizableStyles,
+    FVariants<FResizableAxisVariantConstraint, FResizableDividerStyle, FResizableDividerStyleDelta>? resizableStyles,
     FScaffoldStyle? scaffoldStyle,
     FSelectStyle? selectStyle,
     FSelectGroupStyle? selectGroupStyle,
     FSelectMenuTileStyle? selectMenuTileStyle,
     FSidebarStyle? sidebarStyle,
-    FSliderStyles? sliderStyles,
+    FVariants<FSliderAxisVariantConstraint, FSliderStyle, FSliderStyleDelta>? sliderStyles,
     FToasterStyle? toasterStyle,
     FSwitchStyle? switchStyle,
     FTabsStyle? tabsStyle,
     FTappableStyle? tappableStyle,
     FTextFieldStyle? textFieldStyle,
-    FTileStyles? tileStyles,
+    FVariants<FItemVariantConstraint, FTileStyle, FTileStyleDelta>? tileStyles,
     FTileGroupStyle? tileGroupStyle,
     FTimeFieldStyle? timeFieldStyle,
     FTimePickerStyle? timePickerStyle,
@@ -637,13 +637,13 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       style: style,
       accordionStyle: accordionStyle ?? .inherit(colors: colors, typography: typography, style: style),
       autocompleteStyle: autocompleteStyle ?? .inherit(colors: colors, typography: typography, style: style),
-      alertStyles: alertStyles ?? .inherit(colors: colors, typography: typography, style: style),
+      alertStyles: alertStyles ?? FAlertStyles.inherit(colors: colors, typography: typography, style: style),
       avatarStyle: avatarStyle ?? .inherit(colors: colors, typography: typography),
-      badgeStyles: badgeStyles ?? .inherit(colors: colors, typography: typography, style: style),
+      badgeStyles: badgeStyles ?? FBadgeStyles.inherit(colors: colors, typography: typography, style: style),
       bottomNavigationBarStyle:
           bottomNavigationBarStyle ?? .inherit(colors: colors, typography: typography, style: style),
       breadcrumbStyle: breadcrumbStyle ?? .inherit(colors: colors, typography: typography, style: style),
-      buttonStyles: buttonStyles ?? .inherit(colors: colors, typography: typography, style: style),
+      buttonStyles: buttonStyles ?? FButtonStyles.inherit(colors: colors, typography: typography, style: style),
       calendarStyle: calendarStyle ?? .inherit(colors: colors, typography: typography, style: style),
       cardStyle: cardStyle ?? .inherit(colors: colors, typography: typography, style: style),
       checkboxStyle: checkboxStyle ?? .inherit(colors: colors, style: style),
@@ -652,9 +652,9 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       determinateProgressStyle: determinateProgressStyle ?? .inherit(colors: colors, style: style),
       dialogRouteStyle: dialogRouteStyle ?? .inherit(colors: colors),
       dialogStyle: dialogStyle ?? .inherit(colors: colors, typography: typography, style: style),
-      dividerStyles: dividerStyles ?? .inherit(colors: colors, style: style),
-      headerStyles: headerStyles ?? .inherit(colors: colors, typography: typography, style: style),
-      itemStyles: itemStyles ?? .inherit(colors: colors, typography: typography, style: style),
+      dividerStyles: dividerStyles ?? FDividerStyles.inherit(colors: colors, style: style),
+      headerStyles: headerStyles ?? FHeaderStyles.inherit(colors: colors, typography: typography, style: style),
+      itemStyles: itemStyles ?? FItemStyles.inherit(colors: colors, typography: typography, style: style),
       itemGroupStyle: itemGroupStyle ?? .inherit(colors: colors, typography: typography, style: style),
       labelStyles: labelStyles ?? .inherit(style: style),
       lineCalendarStyle: lineCalendarStyle ?? .inherit(colors: colors, typography: typography, style: style),
@@ -667,19 +667,19 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       popoverMenuStyle: popoverMenuStyle ?? .inherit(colors: colors, style: style, typography: typography),
       progressStyle: progressStyle ?? .inherit(colors: colors, style: style),
       radioStyle: radioStyle ?? .inherit(colors: colors, style: style),
-      resizableStyles: resizableStyles ?? .inherit(colors: colors, style: style),
+      resizableStyles: resizableStyles ?? FResizableStyles.inherit(colors: colors, style: style),
       scaffoldStyle: scaffoldStyle ?? .inherit(colors: colors, style: style),
       selectStyle: selectStyle ?? .inherit(colors: colors, typography: typography, style: style),
       selectGroupStyle: selectGroupStyle ?? .inherit(colors: colors, typography: typography, style: style),
       selectMenuTileStyle: selectMenuTileStyle ?? .inherit(colors: colors, typography: typography, style: style),
       sidebarStyle: sidebarStyle ?? .inherit(colors: colors, typography: typography, style: style),
-      sliderStyles: sliderStyles ?? .inherit(colors: colors, typography: typography, style: style),
+      sliderStyles: sliderStyles ?? FSliderStyles.inherit(colors: colors, typography: typography, style: style),
       toasterStyle: toasterStyle ?? .inherit(colors: colors, typography: typography, style: style),
       switchStyle: switchStyle ?? .inherit(colors: colors, style: style),
       tabsStyle: tabsStyle ?? .inherit(colors: colors, typography: typography, style: style),
       tappableStyle: tappableStyle ?? FTappableStyle(),
       textFieldStyle: textFieldStyle ?? .inherit(colors: colors, typography: typography, style: style),
-      tileStyles: tileStyles ?? .inherit(colors: colors, typography: typography, style: style),
+      tileStyles: tileStyles ?? FTileStyles.inherit(colors: colors, typography: typography, style: style),
       tileGroupStyle: tileGroupStyle ?? .inherit(colors: colors, typography: typography, style: style),
       timeFieldStyle: timeFieldStyle ?? .inherit(colors: colors, typography: typography, style: style),
       timePickerStyle: timePickerStyle ?? .inherit(colors: colors, typography: typography, style: style),
@@ -697,30 +697,12 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     style: a.style.lerp(b.style, t),
     accordionStyle: a.accordionStyle.lerp(b.accordionStyle, t),
     autocompleteStyle: a.autocompleteStyle.lerp(b.autocompleteStyle, t),
-    alertStyles: FVariants.lerpWhereUsing(
-      a.alertStyles,
-      b.alertStyles,
-      t,
-      (a, b, t) => a!.lerp(b!, t),
-      FAlertStyles.raw,
-    ),
+    alertStyles: FVariants.lerpWhere(a.alertStyles, b.alertStyles, t, (a, b, t) => a!.lerp(b!, t)),
     avatarStyle: a.avatarStyle.lerp(b.avatarStyle, t),
-    badgeStyles: FVariants.lerpWhereUsing(
-      a.badgeStyles,
-      b.badgeStyles,
-      t,
-      (a, b, t) => a!.lerp(b!, t),
-      FBadgeStyles.raw,
-    ),
+    badgeStyles: FVariants.lerpWhere(a.badgeStyles, b.badgeStyles, t, (a, b, t) => a!.lerp(b!, t)),
     bottomNavigationBarStyle: a.bottomNavigationBarStyle.lerp(b.bottomNavigationBarStyle, t),
     breadcrumbStyle: a.breadcrumbStyle.lerp(b.breadcrumbStyle, t),
-    buttonStyles: FVariants.lerpWhereUsing(
-      a.buttonStyles,
-      b.buttonStyles,
-      t,
-      (a, b, t) => a!.lerp(b!, t),
-      FButtonStyles.raw,
-    ),
+    buttonStyles: FVariants.lerpWhere(a.buttonStyles, b.buttonStyles, t, (a, b, t) => a!.lerp(b!, t)),
     calendarStyle: a.calendarStyle.lerp(b.calendarStyle, t),
     cardStyle: a.cardStyle.lerp(b.cardStyle, t),
     checkboxStyle: a.checkboxStyle.lerp(b.checkboxStyle, t),
@@ -729,27 +711,9 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     determinateProgressStyle: a.determinateProgressStyle.lerp(b.determinateProgressStyle, t),
     dialogRouteStyle: a.dialogRouteStyle.lerp(b.dialogRouteStyle, t),
     dialogStyle: a.dialogStyle.lerp(b.dialogStyle, t),
-    dividerStyles: FVariants.lerpWhereUsing(
-      a.dividerStyles,
-      b.dividerStyles,
-      t,
-      (a, b, t) => a!.lerp(b!, t),
-      FDividerStyles.raw,
-    ),
-    headerStyles: FVariants.lerpWhereUsing(
-      a.headerStyles,
-      b.headerStyles,
-      t,
-      (a, b, t) => a!.lerp(b!, t),
-      FHeaderStyles.raw,
-    ),
-    itemStyles: FVariants.lerpWhereUsing(
-      a.itemStyles,
-      b.itemStyles,
-      t,
-      (a, b, t) => a!.lerp(b!, t),
-      FItemStyles.raw,
-    ),
+    dividerStyles: FVariants.lerpWhere(a.dividerStyles, b.dividerStyles, t, (a, b, t) => a!.lerp(b!, t)),
+    headerStyles: FVariants.lerpWhere(a.headerStyles, b.headerStyles, t, (a, b, t) => a!.lerp(b!, t)),
+    itemStyles: FVariants.lerpWhere(a.itemStyles, b.itemStyles, t, (a, b, t) => a!.lerp(b!, t)),
     itemGroupStyle: a.itemGroupStyle.lerp(b.itemGroupStyle, t),
     labelStyles: a.labelStyles.lerp(b.labelStyles, t),
     lineCalendarStyle: a.lineCalendarStyle.lerp(b.lineCalendarStyle, t),
@@ -762,37 +726,19 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     popoverMenuStyle: a.popoverMenuStyle.lerp(b.popoverMenuStyle, t),
     progressStyle: a.progressStyle.lerp(b.progressStyle, t),
     radioStyle: a.radioStyle.lerp(b.radioStyle, t),
-    resizableStyles: FVariants.lerpWhereUsing(
-      a.resizableStyles,
-      b.resizableStyles,
-      t,
-      (a, b, t) => a!.lerp(b!, t),
-      FResizableStyles.raw,
-    ),
+    resizableStyles: FVariants.lerpWhere(a.resizableStyles, b.resizableStyles, t, (a, b, t) => a!.lerp(b!, t)),
     scaffoldStyle: a.scaffoldStyle.lerp(b.scaffoldStyle, t),
     selectStyle: a.selectStyle.lerp(b.selectStyle, t),
     selectGroupStyle: a.selectGroupStyle.lerp(b.selectGroupStyle, t),
     selectMenuTileStyle: a.selectMenuTileStyle.lerp(b.selectMenuTileStyle, t),
     sidebarStyle: a.sidebarStyle.lerp(b.sidebarStyle, t),
-    sliderStyles: FVariants.lerpWhereUsing(
-      a.sliderStyles,
-      b.sliderStyles,
-      t,
-      (a, b, t) => a!.lerp(b!, t),
-      FSliderStyles.raw,
-    ),
+    sliderStyles: FVariants.lerpWhere(a.sliderStyles, b.sliderStyles, t, (a, b, t) => a!.lerp(b!, t)),
     toasterStyle: a.toasterStyle.lerp(b.toasterStyle, t),
     switchStyle: a.switchStyle.lerp(b.switchStyle, t),
     tabsStyle: a.tabsStyle.lerp(b.tabsStyle, t),
     tappableStyle: a.tappableStyle.lerp(b.tappableStyle, t),
     textFieldStyle: a.textFieldStyle.lerp(b.textFieldStyle, t),
-    tileStyles: FVariants.lerpWhereUsing(
-      a.tileStyles,
-      b.tileStyles,
-      t,
-      (a, b, t) => a!.lerp(b!, t),
-      FTileStyles.raw,
-    ),
+    tileStyles: FVariants.lerpWhere(a.tileStyles, b.tileStyles, t, (a, b, t) => a!.lerp(b!, t)),
     tileGroupStyle: a.tileGroupStyle.lerp(b.tileGroupStyle, t),
     timeFieldStyle: a.timeFieldStyle.lerp(b.timeFieldStyle, t),
     timePickerStyle: a.timePickerStyle.lerp(b.timePickerStyle, t),
@@ -1288,152 +1234,149 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// @override
   /// Widget build(BuildContext context) {
   ///   final theme = FThemeData(
-  ///     color: FThemes.zinc.light.colors.copyWith(
+  ///     colors: FThemes.zinc.light.colors.copyWith(
   ///       primary: const Color(0xFF0D47A1), // dark blue
   ///       primaryForeground: const Color(0xFFFFFFFF), // white
   ///     ),
-  ///     text: FThemes.zinc.light.typography.copyWith(
-  ///       defaultFontFamily: 'Roboto',
+  ///     typography: FThemes.zinc.light.typography.copyWith(
+  ///       // ...
   ///     ).scale(sizeScalar: 0.8),
   ///     style: FThemes.zinc.light.style.copyWith(
-  ///       borderRadius: BorderRadius.zero,
+  ///       borderRadius: .zero,
   ///     ),
   ///   );
   ///
   ///   return FTheme(
   ///     data: theme.copyWith(
   ///       cardStyle: theme.cardStyle.copyWith(
-  ///         decoration: theme.cardStyle.decoration.copyWith(
-  ///           borderRadius: const BorderRadius.all(Radius.circular(8)),
-  ///         ),
+  ///         decoration: .delta(borderRadius: const .all(.circular(8))),
   ///       ),
   ///     ),
   ///     child: const FScaffold(...),
   ///   );
   /// }
+  /// ```
   ///
   /// Alternatively, consider using the [CLI](forui.dev/docs/cli).
-  ///```
   @useResult
   FThemeData copyWith({
     String? debugLabel,
     FBreakpoints? breakpoints,
     FColors? colors,
     FTypography? typography,
-    FStyle Function(FStyle style)? style,
-    FAccordionStyle Function(FAccordionStyle style)? accordionStyle,
-    FAutocompleteStyle Function(FAutocompleteStyle style)? autocompleteStyle,
-    FAlertStyles Function(FAlertStyles style)? alertStyles,
-    FAvatarStyle Function(FAvatarStyle style)? avatarStyle,
-    FBadgeStyles Function(FBadgeStyles style)? badgeStyles,
-    FBottomNavigationBarStyle Function(FBottomNavigationBarStyle style)? bottomNavigationBarStyle,
-    FBreadcrumbStyle Function(FBreadcrumbStyle style)? breadcrumbStyle,
-    FButtonStyles Function(FButtonStyles style)? buttonStyles,
-    FCalendarStyle Function(FCalendarStyle style)? calendarStyle,
-    FCardStyle Function(FCardStyle style)? cardStyle,
-    FCheckboxStyle Function(FCheckboxStyle style)? checkboxStyle,
-    FCircularProgressStyle Function(FCircularProgressStyle style)? circularProgressStyle,
-    FDateFieldStyle Function(FDateFieldStyle style)? dateFieldStyle,
-    FDeterminateProgressStyle Function(FDeterminateProgressStyle style)? determinateProgressStyle,
-    FDialogRouteStyle Function(FDialogRouteStyle style)? dialogRouteStyle,
-    FDialogStyle Function(FDialogStyle style)? dialogStyle,
-    FDividerStyles Function(FDividerStyles style)? dividerStyles,
-    FHeaderStyles Function(FHeaderStyles style)? headerStyles,
-    FItemStyles Function(FItemStyles style)? itemStyles,
-    FItemGroupStyle Function(FItemGroupStyle style)? itemGroupStyle,
-    FLabelStyles Function(FLabelStyles style)? labelStyles,
-    FLineCalendarStyle Function(FLineCalendarStyle style)? lineCalendarStyle,
-    FMultiSelectStyle Function(FMultiSelectStyle style)? multiSelectStyle,
-    FModalSheetStyle Function(FModalSheetStyle style)? modalSheetStyle,
-    FPaginationStyle Function(FPaginationStyle style)? paginationStyle,
-    FPersistentSheetStyle Function(FPersistentSheetStyle style)? persistentSheetStyle,
-    FPickerStyle Function(FPickerStyle style)? pickerStyle,
-    FPopoverStyle Function(FPopoverStyle style)? popoverStyle,
-    FPopoverMenuStyle Function(FPopoverMenuStyle style)? popoverMenuStyle,
-    FProgressStyle Function(FProgressStyle style)? progressStyle,
-    FRadioStyle Function(FRadioStyle style)? radioStyle,
-    FResizableStyles Function(FResizableStyles style)? resizableStyles,
-    FScaffoldStyle Function(FScaffoldStyle style)? scaffoldStyle,
-    FSelectStyle Function(FSelectStyle style)? selectStyle,
-    FSelectGroupStyle Function(FSelectGroupStyle style)? selectGroupStyle,
-    FSelectMenuTileStyle Function(FSelectMenuTileStyle style)? selectMenuTileStyle,
-    FSidebarStyle Function(FSidebarStyle style)? sidebarStyle,
-    FSliderStyles Function(FSliderStyles style)? sliderStyles,
-    FToasterStyle Function(FToasterStyle style)? toasterStyle,
-    FSwitchStyle Function(FSwitchStyle style)? switchStyle,
-    FTabsStyle Function(FTabsStyle style)? tabsStyle,
-    FTappableStyle Function(FTappableStyle style)? tappableStyle,
-    FTextFieldStyle Function(FTextFieldStyle style)? textFieldStyle,
-    FTileStyles Function(FTileStyles style)? tileStyles,
-    FTileGroupStyle Function(FTileGroupStyle style)? tileGroupStyle,
-    FTimeFieldStyle Function(FTimeFieldStyle style)? timeFieldStyle,
-    FTimePickerStyle Function(FTimePickerStyle style)? timePickerStyle,
-    FTooltipStyle Function(FTooltipStyle style)? tooltipStyle,
+    FStyleDelta? style,
+    FAccordionStyleDelta? accordionStyle,
+    FAutocompleteStyleDelta? autocompleteStyle,
+    FVariantsDelta<FAlertVariantConstraint, FAlertVariant, FAlertStyle, FAlertStyleDelta>? alertStyles,
+    FAvatarStyleDelta? avatarStyle,
+    FVariantsDelta<FBadgeVariantConstraint, FBadgeVariant, FBadgeStyle, FBadgeStyleDelta>? badgeStyles,
+    FBottomNavigationBarStyleDelta? bottomNavigationBarStyle,
+    FBreadcrumbStyleDelta? breadcrumbStyle,
+    FVariantsDelta<FButtonVariantConstraint, FButtonVariant, FButtonStyle, FButtonStyleDelta>? buttonStyles,
+    FCalendarStyleDelta? calendarStyle,
+    FCardStyleDelta? cardStyle,
+    FCheckboxStyleDelta? checkboxStyle,
+    FCircularProgressStyleDelta? circularProgressStyle,
+    FDateFieldStyleDelta? dateFieldStyle,
+    FDeterminateProgressStyleDelta? determinateProgressStyle,
+    FDialogRouteStyleDelta? dialogRouteStyle,
+    FDialogStyleDelta? dialogStyle,
+    FVariantsDelta<FDividerAxisVariantConstraint, FDividerAxisVariant, FDividerStyle, FDividerStyleDelta>?
+    dividerStyles,
+    FVariantsDelta<FHeaderVariantConstraint, FHeaderVariant, FHeaderStyle, FHeaderStyleDelta>? headerStyles,
+    FVariantsDelta<FItemVariantConstraint, FItemVariant, FItemStyle, FItemStyleDelta>? itemStyles,
+    FItemGroupStyleDelta? itemGroupStyle,
+    FLabelStylesDelta? labelStyles,
+    FLineCalendarStyleDelta? lineCalendarStyle,
+    FMultiSelectStyleDelta? multiSelectStyle,
+    FModalSheetStyleDelta? modalSheetStyle,
+    FPaginationStyleDelta? paginationStyle,
+    FPersistentSheetStyleDelta? persistentSheetStyle,
+    FPickerStyleDelta? pickerStyle,
+    FPopoverStyleDelta? popoverStyle,
+    FPopoverMenuStyleDelta? popoverMenuStyle,
+    FProgressStyleDelta? progressStyle,
+    FRadioStyleDelta? radioStyle,
+    FVariantsDelta<
+      FResizableAxisVariantConstraint,
+      FResizableAxisVariant,
+      FResizableDividerStyle,
+      FResizableDividerStyleDelta
+    >?
+    resizableStyles,
+    FScaffoldStyleDelta? scaffoldStyle,
+    FSelectStyleDelta? selectStyle,
+    FSelectGroupStyleDelta? selectGroupStyle,
+    FSelectMenuTileStyleDelta? selectMenuTileStyle,
+    FSidebarStyleDelta? sidebarStyle,
+    FVariantsDelta<FSliderAxisVariantConstraint, FSliderAxisVariant, FSliderStyle, FSliderStyleDelta>? sliderStyles,
+    FToasterStyleDelta? toasterStyle,
+    FSwitchStyleDelta? switchStyle,
+    FTabsStyleDelta? tabsStyle,
+    FTappableStyleDelta? tappableStyle,
+    FTextFieldStyleDelta? textFieldStyle,
+    FVariantsDelta<FItemVariantConstraint, FItemVariant, FTileStyle, FTileStyleDelta>? tileStyles,
+    FTileGroupStyleDelta? tileGroupStyle,
+    FTimeFieldStyleDelta? timeFieldStyle,
+    FTimePickerStyleDelta? timePickerStyle,
+    FTooltipStyleDelta? tooltipStyle,
     Iterable<ThemeExtension<dynamic>>? extensions,
   }) => FThemeData(
     debugLabel: debugLabel ?? this.debugLabel,
     breakpoints: breakpoints ?? this.breakpoints,
     colors: colors ?? this.colors,
     typography: typography ?? this.typography,
-    style: style != null ? style(this.style) : this.style,
-    accordionStyle: accordionStyle != null ? accordionStyle(this.accordionStyle) : this.accordionStyle,
-    autocompleteStyle: autocompleteStyle != null ? autocompleteStyle(this.autocompleteStyle) : this.autocompleteStyle,
-    alertStyles: alertStyles != null ? alertStyles(this.alertStyles) : this.alertStyles,
-    avatarStyle: avatarStyle != null ? avatarStyle(this.avatarStyle) : this.avatarStyle,
-    badgeStyles: badgeStyles != null ? badgeStyles(this.badgeStyles) : this.badgeStyles,
-    bottomNavigationBarStyle: bottomNavigationBarStyle != null
-        ? bottomNavigationBarStyle(this.bottomNavigationBarStyle)
-        : this.bottomNavigationBarStyle,
-    breadcrumbStyle: breadcrumbStyle != null ? breadcrumbStyle(this.breadcrumbStyle) : this.breadcrumbStyle,
-    buttonStyles: buttonStyles != null ? buttonStyles(this.buttonStyles) : this.buttonStyles,
-    calendarStyle: calendarStyle != null ? calendarStyle(this.calendarStyle) : this.calendarStyle,
-    cardStyle: cardStyle != null ? cardStyle(this.cardStyle) : this.cardStyle,
-    checkboxStyle: checkboxStyle != null ? checkboxStyle(this.checkboxStyle) : this.checkboxStyle,
-    circularProgressStyle: circularProgressStyle != null
-        ? circularProgressStyle(this.circularProgressStyle)
-        : this.circularProgressStyle,
-    dateFieldStyle: dateFieldStyle != null ? dateFieldStyle(this.dateFieldStyle) : this.dateFieldStyle,
-    determinateProgressStyle: determinateProgressStyle != null
-        ? determinateProgressStyle(this.determinateProgressStyle)
-        : this.determinateProgressStyle,
-    dialogRouteStyle: dialogRouteStyle != null ? dialogRouteStyle(this.dialogRouteStyle) : this.dialogRouteStyle,
-    dialogStyle: dialogStyle != null ? dialogStyle(this.dialogStyle) : this.dialogStyle,
-    dividerStyles: dividerStyles != null ? dividerStyles(this.dividerStyles) : this.dividerStyles,
-    headerStyles: headerStyles != null ? headerStyles(this.headerStyles) : this.headerStyles,
-    itemStyles: itemStyles != null ? itemStyles(this.itemStyles) : this.itemStyles,
-    itemGroupStyle: itemGroupStyle != null ? itemGroupStyle(this.itemGroupStyle) : this.itemGroupStyle,
-    labelStyles: labelStyles != null ? labelStyles(this.labelStyles) : this.labelStyles,
-    lineCalendarStyle: lineCalendarStyle != null ? lineCalendarStyle(this.lineCalendarStyle) : this.lineCalendarStyle,
-    multiSelectStyle: multiSelectStyle != null ? multiSelectStyle(this.multiSelectStyle) : this.multiSelectStyle,
-    modalSheetStyle: modalSheetStyle != null ? modalSheetStyle(this.modalSheetStyle) : this.modalSheetStyle,
-    paginationStyle: paginationStyle != null ? paginationStyle(this.paginationStyle) : this.paginationStyle,
-    persistentSheetStyle: persistentSheetStyle != null
-        ? persistentSheetStyle(this.persistentSheetStyle)
-        : this.persistentSheetStyle,
-    pickerStyle: pickerStyle != null ? pickerStyle(this.pickerStyle) : this.pickerStyle,
-    popoverStyle: popoverStyle != null ? popoverStyle(this.popoverStyle) : this.popoverStyle,
-    popoverMenuStyle: popoverMenuStyle != null ? popoverMenuStyle(this.popoverMenuStyle) : this.popoverMenuStyle,
-    progressStyle: progressStyle != null ? progressStyle(this.progressStyle) : this.progressStyle,
-    radioStyle: radioStyle != null ? radioStyle(this.radioStyle) : this.radioStyle,
-    resizableStyles: resizableStyles != null ? resizableStyles(this.resizableStyles) : this.resizableStyles,
-    scaffoldStyle: scaffoldStyle != null ? scaffoldStyle(this.scaffoldStyle) : this.scaffoldStyle,
-    selectStyle: selectStyle != null ? selectStyle(this.selectStyle) : this.selectStyle,
-    selectGroupStyle: selectGroupStyle != null ? selectGroupStyle(this.selectGroupStyle) : this.selectGroupStyle,
-    selectMenuTileStyle: selectMenuTileStyle != null
-        ? selectMenuTileStyle(this.selectMenuTileStyle)
-        : this.selectMenuTileStyle,
-    sidebarStyle: sidebarStyle != null ? sidebarStyle(this.sidebarStyle) : this.sidebarStyle,
-    sliderStyles: sliderStyles != null ? sliderStyles(this.sliderStyles) : this.sliderStyles,
-    toasterStyle: toasterStyle != null ? toasterStyle(this.toasterStyle) : this.toasterStyle,
-    switchStyle: switchStyle != null ? switchStyle(this.switchStyle) : this.switchStyle,
-    tabsStyle: tabsStyle != null ? tabsStyle(this.tabsStyle) : this.tabsStyle,
-    tappableStyle: tappableStyle != null ? tappableStyle(this.tappableStyle) : this.tappableStyle,
-    textFieldStyle: textFieldStyle != null ? textFieldStyle(this.textFieldStyle) : this.textFieldStyle,
-    tileStyles: tileStyles != null ? tileStyles(this.tileStyles) : this.tileStyles,
-    tileGroupStyle: tileGroupStyle != null ? tileGroupStyle(this.tileGroupStyle) : this.tileGroupStyle,
-    timeFieldStyle: timeFieldStyle != null ? timeFieldStyle(this.timeFieldStyle) : this.timeFieldStyle,
-    timePickerStyle: timePickerStyle != null ? timePickerStyle(this.timePickerStyle) : this.timePickerStyle,
-    tooltipStyle: tooltipStyle != null ? tooltipStyle(this.tooltipStyle) : this.tooltipStyle,
+    style: style?.call(this.style) ?? this.style,
+    accordionStyle: accordionStyle?.call(this.accordionStyle) ?? this.accordionStyle,
+    autocompleteStyle: autocompleteStyle?.call(this.autocompleteStyle) ?? this.autocompleteStyle,
+    alertStyles: alertStyles?.call(this.alertStyles) ?? this.alertStyles,
+    avatarStyle: avatarStyle?.call(this.avatarStyle) ?? this.avatarStyle,
+    badgeStyles: badgeStyles?.call(this.badgeStyles) ?? this.badgeStyles,
+    bottomNavigationBarStyle:
+        bottomNavigationBarStyle?.call(this.bottomNavigationBarStyle) ?? this.bottomNavigationBarStyle,
+    breadcrumbStyle: breadcrumbStyle?.call(this.breadcrumbStyle) ?? this.breadcrumbStyle,
+    buttonStyles: buttonStyles?.call(this.buttonStyles) ?? this.buttonStyles,
+    calendarStyle: calendarStyle?.call(this.calendarStyle) ?? this.calendarStyle,
+    cardStyle: cardStyle?.call(this.cardStyle) ?? this.cardStyle,
+    checkboxStyle: checkboxStyle?.call(this.checkboxStyle) ?? this.checkboxStyle,
+    circularProgressStyle: circularProgressStyle?.call(this.circularProgressStyle) ?? this.circularProgressStyle,
+    dateFieldStyle: dateFieldStyle?.call(this.dateFieldStyle) ?? this.dateFieldStyle,
+    determinateProgressStyle:
+        determinateProgressStyle?.call(this.determinateProgressStyle) ?? this.determinateProgressStyle,
+    dialogRouteStyle: dialogRouteStyle?.call(this.dialogRouteStyle) ?? this.dialogRouteStyle,
+    dialogStyle: dialogStyle?.call(this.dialogStyle) ?? this.dialogStyle,
+    dividerStyles: dividerStyles?.call(this.dividerStyles) ?? this.dividerStyles,
+    headerStyles: headerStyles?.call(this.headerStyles) ?? this.headerStyles,
+    itemStyles: itemStyles?.call(this.itemStyles) ?? this.itemStyles,
+    itemGroupStyle: itemGroupStyle?.call(this.itemGroupStyle) ?? this.itemGroupStyle,
+    labelStyles: labelStyles?.call(this.labelStyles) ?? this.labelStyles,
+    lineCalendarStyle: lineCalendarStyle?.call(this.lineCalendarStyle) ?? this.lineCalendarStyle,
+    multiSelectStyle: multiSelectStyle?.call(this.multiSelectStyle) ?? this.multiSelectStyle,
+    modalSheetStyle: modalSheetStyle?.call(this.modalSheetStyle) ?? this.modalSheetStyle,
+    paginationStyle: paginationStyle?.call(this.paginationStyle) ?? this.paginationStyle,
+    persistentSheetStyle: persistentSheetStyle?.call(this.persistentSheetStyle) ?? this.persistentSheetStyle,
+    pickerStyle: pickerStyle?.call(this.pickerStyle) ?? this.pickerStyle,
+    popoverStyle: popoverStyle?.call(this.popoverStyle) ?? this.popoverStyle,
+    popoverMenuStyle: popoverMenuStyle?.call(this.popoverMenuStyle) ?? this.popoverMenuStyle,
+    progressStyle: progressStyle?.call(this.progressStyle) ?? this.progressStyle,
+    radioStyle: radioStyle?.call(this.radioStyle) ?? this.radioStyle,
+    resizableStyles: resizableStyles?.call(this.resizableStyles) ?? this.resizableStyles,
+    scaffoldStyle: scaffoldStyle?.call(this.scaffoldStyle) ?? this.scaffoldStyle,
+    selectStyle: selectStyle?.call(this.selectStyle) ?? this.selectStyle,
+    selectGroupStyle: selectGroupStyle?.call(this.selectGroupStyle) ?? this.selectGroupStyle,
+    selectMenuTileStyle: selectMenuTileStyle?.call(this.selectMenuTileStyle) ?? this.selectMenuTileStyle,
+    sidebarStyle: sidebarStyle?.call(this.sidebarStyle) ?? this.sidebarStyle,
+    sliderStyles: sliderStyles?.call(this.sliderStyles) ?? this.sliderStyles,
+    toasterStyle: toasterStyle?.call(this.toasterStyle) ?? this.toasterStyle,
+    switchStyle: switchStyle?.call(this.switchStyle) ?? this.switchStyle,
+    tabsStyle: tabsStyle?.call(this.tabsStyle) ?? this.tabsStyle,
+    tappableStyle: tappableStyle?.call(this.tappableStyle) ?? this.tappableStyle,
+    textFieldStyle: textFieldStyle?.call(this.textFieldStyle) ?? this.textFieldStyle,
+    tileStyles: tileStyles?.call(this.tileStyles) ?? this.tileStyles,
+    tileGroupStyle: tileGroupStyle?.call(this.tileGroupStyle) ?? this.tileGroupStyle,
+    timeFieldStyle: timeFieldStyle?.call(this.timeFieldStyle) ?? this.timeFieldStyle,
+    timePickerStyle: timePickerStyle?.call(this.timePickerStyle) ?? this.timePickerStyle,
+    tooltipStyle: tooltipStyle?.call(this.tooltipStyle) ?? this.tooltipStyle,
     extensions: extensions ?? this.extensions,
   );
 }

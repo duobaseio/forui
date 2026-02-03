@@ -57,7 +57,7 @@ final class FInheritedItemData extends InheritedWidget {
   static Widget merge({
     required bool last,
     required Widget child,
-    FItemStyles? styles,
+    FVariants<FItemVariantConstraint, FItemStyle, FItemStyleDelta>? styles,
     double? spacing,
     FItemDivider? divider,
     FVariants<FItemGroupVariantConstraint, Color, Delta>? dividerColor,
@@ -108,7 +108,7 @@ final class FInheritedItemData extends InheritedWidget {
 /// The item's data.
 final class FItemData with Diagnosticable {
   /// The item's styles.
-  final FItemStyles? styles;
+  final FVariants<FItemVariantConstraint, FItemStyle, FItemStyleDelta>? styles;
 
   /// The vertical spacing at the top and bottom of each level.
   final double spacing;
