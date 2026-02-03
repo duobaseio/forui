@@ -231,6 +231,8 @@ are not available for most of these changes due to the tool's limitations.
 * **Breaking** Remove `FThemeData.itemStyle`.
 * **Breaking** Remove `FThemeData.tileStyle`.
 
+* **Breaking** Change `FThemeData.copyWith(...)` to accept `Delta`s instead of callbacks.
+
 
 ### `FTimeField`
 * Change error message when localizations are missing to be more descriptive.
