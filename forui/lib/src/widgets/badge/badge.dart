@@ -97,7 +97,7 @@ extension type FBadgeStyles._(FVariants<FBadgeVariantConstraint, FBadgeStyle, FB
     : this._(
         FVariants.delta(
           FBadgeStyle(
-            decoration: BoxDecoration(color: colors.primary, borderRadius: defaultBadgeRadius),
+            decoration: BoxDecoration(color: colors.primary, borderRadius: FBadgeStyles.defaultBadgeRadius),
             contentStyle: FBadgeContentStyle(
               labelTextStyle: typography.sm.copyWith(color: colors.primaryForeground, fontWeight: .w600),
             ),

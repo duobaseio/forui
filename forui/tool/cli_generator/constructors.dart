@@ -23,8 +23,11 @@ class ConstructorFragment {
         closure: _closure(key, matches),
         source: fragmentFormatter.format(switch (match.constructor) {
           final constructor when constructor.factoryKeyword != null => _factory(key, pattern, match),
+          final constructor
+              when constructor.initializers.singleOrNull is RedirectingConstructorInvocation && match.wrapped == null =>
+            _redirectingClass(key, pattern, match),
           final constructor when constructor.initializers.singleOrNull is RedirectingConstructorInvocation =>
-            _redirecting(key, pattern, constructor),
+            _redirectingExtensionType(key, pattern, match),
           final constructor => _initializers(key, pattern, constructor),
         }),
       ),
@@ -89,9 +92,12 @@ class ConstructorFragment {
     return source;
   }
 
-  static String _redirecting(String type, RegExp pattern, ConstructorDeclaration constructor) {
-    var source = constructor
-        .toSource()
+  static String _redirectingClass(String type, RegExp pattern, ConstructorMatch match) {
+    final constructor = match.constructor;
+    var source = constructor.toSource();
+
+    // Regular class (existing logic)
+    source = source
         .replaceAll('$type.inherit', '$type ${type.substring(1).toCamelCase()}')
         .replaceAll(' : this', ' => $type');
 
@@ -111,6 +117,23 @@ class ConstructorFragment {
           additional.join(', ') +
           source.substring(closingParenthesis);
     }
+
+    return source.replaceAllMapped(pattern, (m) => '_${m.group(1)!.toCamelCase()}');
+  }
+
+  static String _redirectingExtensionType(String type, RegExp pattern, ConstructorMatch match) {
+    final constructor = match.constructor;
+    final returnType = match.wrapped!;
+
+    var source = constructor.toSource();
+
+    // Extension type: use the wrapped type as return type and remove the wrapper.
+    // "FBadgeStyles.inherit({...}) : this._(FVariants.delta(...))"
+    // becomes: "FVariants<...> badgeStyles({...}) => FVariants.delta(...)"
+    source = source
+        .replaceAll('$type.inherit', '$returnType ${type.substring(1).toCamelCase()}')
+        .replaceFirst(RegExp(r' : this\._\('), ' => ')
+        .replaceFirst(RegExp(r'\);$'), ';');
 
     return source.replaceAllMapped(pattern, (m) => '_${m.group(1)!.toCamelCase()}');
   }
@@ -216,10 +239,13 @@ class ConstructorMatch {
   /// The matching constructor.
   final ConstructorDeclaration constructor;
 
+  /// The wrapped type for extension types (e.g., "FVariants<...>"), null for regular classes.
+  final String? wrapped;
+
   /// The names of classes that are [ConstructorMatch]es and are created inside this [constructor].
   final Set<String> nested = {};
 
-  ConstructorMatch({required this.root, required this.constructor});
+  ConstructorMatch({required this.root, required this.constructor, this.wrapped});
 }
 
 class _Visitor extends RecursiveAstVisitor<void> {
@@ -227,7 +253,8 @@ class _Visitor extends RecursiveAstVisitor<void> {
   final RegExp _type;
   final RegExp _constructor;
   final Set<String> _roots;
-  ClassDeclaration? _class;
+  String? _name;
+  String? _wrapped;
 
   _Visitor(this._type, this._constructor, this._roots);
 
@@ -235,28 +262,41 @@ class _Visitor extends RecursiveAstVisitor<void> {
   void visitClassDeclaration(ClassDeclaration declaration) {
     final name = declaration.name.lexeme;
     if (_type.hasMatch(name)) {
-      _class = declaration;
+      _name = name;
       super.visitClassDeclaration(declaration);
-      _class = null;
+      _name = null;
+    }
+  }
+
+  @override
+  void visitExtensionTypeDeclaration(ExtensionTypeDeclaration declaration) {
+    final name = declaration.name.lexeme;
+    if (_type.hasMatch(name)) {
+      _name = name;
+      _wrapped = declaration.representation.fieldType.toSource();
+      super.visitExtensionTypeDeclaration(declaration);
+      _name = null;
+      _wrapped = null;
     }
   }
 
   @override
   void visitConstructorDeclaration(ConstructorDeclaration constructor) {
-    if (constructor.name?.lexeme != 'inherit') {
+    if (_name == null || constructor.name?.lexeme != 'inherit') {
       return;
     }
 
-    matches[_class!.name.lexeme] = ConstructorMatch(
-      root: _roots.contains(_class!.name.lexeme),
+    matches[_name!] = ConstructorMatch(
+      root: _roots.contains(_name!),
       constructor: constructor,
+      wrapped: _wrapped,
     );
 
     // Constructors typically consist of:
     // * Factory constructors
     // * Field initializers
     // * Redirecting constructors
-    final nested = matches[_class!.name.lexeme]!.nested..addAll(_match(constructor.body.toSource()));
+    final nested = matches[_name!]!.nested..addAll(_match(constructor.body.toSource()));
     for (final initializer in constructor.initializers) {
       nested.addAll(_match(initializer.toSource()));
     }
@@ -267,7 +307,7 @@ class _Visitor extends RecursiveAstVisitor<void> {
   @override
   void visitRedirectingConstructorInvocation(RedirectingConstructorInvocation invocation) {
     // TODO: It will be nice to check for, and fail if there are external/private method invocations.
-    matches[_class!.name.lexeme]!.nested.addAll(_match(invocation.argumentList.toSource()));
+    matches[_name!]!.nested.addAll(_match(invocation.argumentList.toSource()));
   }
 
   Set<String> _match(String source) => _constructor.allMatches(source).map((m) => m.group(1)!).toSet();
