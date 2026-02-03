@@ -1,4 +1,3 @@
-
 final _comment = RegExp('(/// ?)');
 
 /// Summarizes the multi-line documentation comment by extracting the first sentence.
