@@ -1,0 +1,13 @@
+version: 1
+transforms:
+  # FBottomNavigationBarItem
+  - title: 'Rename FBottomNavigationBarItem(onStateChange: ...) to FBottomNavigationBarItem(onVariantChange: ...)'
+    date: 2026-01-26
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FBottomNavigationBarItem
+    changes:
+      - kind: renameParameter
+        oldName: 'onStateChange'
+        newName: 'onVariantChange'

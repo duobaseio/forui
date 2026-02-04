@@ -12,7 +12,7 @@ and enhance existing documentation.
 In general, contributing code involves the adding/updating of:
 * Widgets.
 * Relevant unit/golden tests.
-* Relevant examples under the [docs_snippets](./docs_snippets) project. 
+* Relevant examples under the [docs_snippets](./docs_snippets) project.
 * Relevant documentation under the [docs](./docs) project.
 * [CHANGELOG.md](./forui/CHANGELOG.md).
 
@@ -20,10 +20,10 @@ In general, contributing code involves the adding/updating of:
 ## Before You Contribute
 
 Before starting work on a PR, please check if a similar [issue](https://github.com/forus-labs/forui/issues)/
-[PR](https://github.com/forus-labs/forui/pulls) exists. We recommend that first time contributors start with 
+[PR](https://github.com/forus-labs/forui/pulls) exists. We recommend that first time contributors start with
 [existing issues that are labelled with `difficulty: easy` and/or `duration: tiny`](https://github.com/forus-labs/forui/issues?q=is%3Aopen+is%3Aissue+label%3A%22difficulty%3A+easy%22%2C%22duration%3A+tiny%22+).
 
-If an issue doesn't exist, create one to discuss the proposed changes. After which, please comment on the issue to 
+If an issue doesn't exist, create one to discuss the proposed changes. After which, please comment on the issue to
 indicate that you're working on it.
 
 This helps to:
@@ -133,8 +133,9 @@ Lastly, types from 3rd party packages should not be publicly exported by Forui.
 
 ### Avoid translucent colors
 
-Translucent colors may not render as expected on different backgrounds. They are usually used as disabled and hovered states. Instead, use the `FColorScheme.disable` and `FColorScheme.hover` functions to generate colors for disabled and
-hovered states respectively.
+Translucent colors may not render as expected on different backgrounds. They are usually used as disabled and hovered
+states. Instead, use the `FColors.disable` and `FColors.hover` functions to generate colors for disabled and hovered
+states respectively.
 
 Alternatively, use alpha-blending to generate an equivalent solid color.
 
@@ -144,7 +145,8 @@ Prefer the `Geometry` variants when possible because they are more flexible.
 
 ### Hide, not Show
 
-Prefer hiding internal members (blacklisting) rather than showing public members (whitelisting) in [barrel files](https://medium.com/@ugamakelechi501/barrel-files-in-dart-and-flutter-a-guide-to-simplifying-imports-9b245dbe516a).
+Prefer hiding internal members (blacklisting) rather than showing public members (whitelisting) in 
+[barrel files](https://medium.com/@ugamakelechi501/barrel-files-in-dart-and-flutter-a-guide-to-simplifying-imports-9b245dbe516a).
 
 ✅ Prefer this:
 ```dart
@@ -181,7 +183,7 @@ Within each widget section, order entries as follows:
 
 Separate each category with a blank line. Breaking changes must start with `**Breaking**`.
 
-✅ Example:
+Example:
 ```markdown
 ### `FSelect`
 * Add `FSelect.search(...)`.
@@ -194,6 +196,65 @@ Separate each category with a blank line. Breaking changes must start with `**Br
 ```
 
 Use `### Others` for changes that don't belong to a specific widget.
+
+### Data Driven Fixes Organization
+
+Where possible, provide [data driven fixes](https://github.com/flutter/flutter/blob/master/docs/contributing/Data-driven-Fixes.md).
+
+Fixes are located in the `<package>/lib/fix_data` folder. Each public widget should have one file containing fixes for
+its related classes (e.g., FButton, FButtonStyle, FButtonController). Fixes inside each file should be grouped by class
+in alphabetical order.
+
+```yaml
+ # Example: button.yaml - All FButton-related fixes in one file
+
+  version: 1
+  transforms:
+    # FButton
+    - title: 'Rename FButton(onStateChange: ...) to FButton(onVariantChange: ...)'
+      date: 2026-01-26
+      element:
+        uris: [ 'package:forui/forui.dart' ]
+        constructor: ''
+        inClass: FButton
+      changes:
+        - kind: renameParameter
+          oldName: 'onStateChange'
+          newName: 'onVariantChange'
+
+    - title: 'Rename FButton.icon(onStateChange: ...) to FButton.icon(onVariantChange: ...)'
+      date: 2026-01-26
+      element:
+        uris: [ 'package:forui/forui.dart' ]
+        constructor: 'icon'
+        inClass: FButton
+      changes:
+        - kind: renameParameter
+          oldName: 'onStateChange'
+          newName: 'onVariantChange'
+
+    # FButtonController
+    - title: 'Rename FButtonController.state to FButtonController.variant'
+      date: 2026-01-26
+      element:
+        uris: [ 'package:forui/forui.dart' ]
+        getter: 'state'
+        inClass: FButtonController
+      changes:
+        - kind: rename
+          newName: 'variant'
+
+    # FButtonStyle
+    - title: 'Remove FButtonStyle(iconStyle: ...)'
+      date: 2026-01-26
+      element:
+        uris: [ 'package:forui/forui.dart' ]
+        constructor: ''
+        inClass: FButtonStyle
+      changes:
+        - kind: removeParameter
+          name: 'iconStyle'
+```
 
 ## Code Generation
 
@@ -358,9 +419,9 @@ class FWidgetStyle with Diagnosticable, _$FWidgetStyleFunctions { // --- (4) (5)
 
   FWidgetStyle({required this.someDouble, required this.color});
 
-  FWidgetStyle.inherit({FFont font, FColorScheme scheme}):
+  FWidgetStyle.inherit({FTypoegraphy typography, FColors colors}):
     someDouble = 16,
-    color = scheme.primary; // --- (6)
+    color = colors.primary; // --- (6)
 }
 ```
 
@@ -382,9 +443,9 @@ Platform variants (touch, desktop, android, iOS, etc.) are automatically include
 ## Leak Tracking
 
 To detect memory leaks, [`leak_tracker_flutter_testing`](https://github.com/dart-lang/leak_tracker/blob/main/doc/leak_tracking/DETECT.md)
-is enabled by default in all tests. 
+is enabled by default in all tests.
 
-Leak tracking results currently are not shown when running tests via an IntelliJ run  configuration. As a workaround, 
+Leak tracking results currently are not shown when running tests via an IntelliJ run  configuration. As a workaround,
 run the tests via the terminal.
 
 It is recommended to wrap disposable objects created in tests with `autoDispose(...)`, i.e. `final focus = autoDispose(FocusNode())`.
@@ -405,8 +466,8 @@ should *not** commit locally generated golden images.
 
 ### Blue Screen Tests
 
-Blue screen tests are a special type of golden tests. All widgets should have a blue screen test. It uses a special 
-theme that is all blue. This allows us to verify that custom/inherited themes are being applied correctly. The resultant 
+Blue screen tests are a special type of golden tests. All widgets should have a blue screen test. It uses a special
+theme that is all blue. This allows us to verify that custom/inherited themes are being applied correctly. The resultant
 image should be completely blue if applied correctly, hence the name.
 
 Example
@@ -435,13 +496,13 @@ if necessary.
 
 [forui.dev](https://forui.dev/docs) is split into two parts:
 * The [doc snippets website](./docs_snippets), which is a Flutter webapp that provides the example widgets & other code blocks.
-* The [documentation website](./docs), which provides overviews and examples of widgets from the docs snippets website embedded 
+* The [documentation website](./docs), which provides overviews and examples of widgets from the docs snippets website embedded
   using `<Widget/>` components in MDX files.
 
 We will use a secondary-styled button as an example in the following sections.
- 
 
-### Creating a Example
+
+### Creating an Example
 
 The [button's corresponding sample](https://github.com/forus-labs/forui/blob/bb45cef78459a710824c299a192b5de59b61c9b3/samples/lib/widgets/button.dart#L15)
 is:
@@ -474,15 +535,15 @@ class ButtonTextPage extends Example { // - (1)
 }
 ```
 
-1. Examples should extend `Example`/`StatefulExample` which centers and wraps the widget returned by the overridden 
+1. Examples should extend `Example`/`StatefulExample` which centers and wraps the widget returned by the overridden
   `example(...)`  method in a `FTheme`.
 2. The current theme, provided as a URL query parameter.
 
 The docs_snippets website uses `auto_route` to generate a route for each example. In general, each example has its own page and
-URL. Generate the route by running `dart pub run build_runner build --delete-conflicting-outputs`. After which, 
+URL. Generate the route by running `dart pub run build_runner build --delete-conflicting-outputs`. After which,
 register the route with [`_AppRouter` in main.dart](https://github.com/forus-labs/forui/blob/bb45cef78459a710824c299a192b5de59b61c9b3/samples/lib/main.dart#L67).
 
-A route's path should follow the format `/<widget-name>/<variant>` in kebab-case. In this case, the button route's path 
+A route's path should follow the format `/<widget-name>/<variant>` in kebab-case. In this case, the button route's path
 is `/button/text`. `<variant>` should default to `default` and never be empty.
 
 See the snippet generator's [README](./docs_snippets/README.md) for more details.
@@ -490,7 +551,7 @@ See the snippet generator's [README](./docs_snippets/README.md) for more details
 
 ### Creating a Documentation Page
 
-Each widget should have its own MDX file in the documentation website's [docs folder](./docs/app/docs). 
+Each widget should have its own MDX file in the documentation website's [docs folder](./docs/app/docs).
 
 The file should contain the following sections:
 * A brief overview and minimal example.
@@ -499,14 +560,14 @@ The file should contain the following sections:
 
 See `FButton`'s [mdx file](https://github.com/forus-labs/forui/blob/bb45cef78459a710824c299a192b5de59b61c9b3/docs/pages/docs/button.mdx?plain=1#L58).
 
-Each example should be wrapped in a `<Tabs/>` component. It contains a `<Widget/>` component and a code block. The 
-`<Widget/>` component is used to display a example widget hosted on the docs_snippets website, while the code block displays 
+Each example should be wrapped in a `<Tabs/>` component. It contains a `<Widget/>` component and a code block. The
+`<Widget/>` component is used to display a example widget hosted on the docs_snippets website, while the code block displays
 the corresponding Dart code.
 
 ```mdx
 <Tabs items={['Preview', 'Code']}>
   <Tabs.Tab>
-    <Widget 
+    <Widget
       name='button' <!-- (1) -->
       variant='text' <!-- (2) -->
       query={{style: 'secondary'}} <!-- (3) -->
@@ -533,11 +594,11 @@ the corresponding Dart code.
 
 ## Updating Localizations
 
-In most cases, you will not need to update localizations. However, if you do, please read 
+In most cases, you will not need to update localizations. However, if you do, please read
 [Internationalizing Flutter apps](https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization).
 before continuing.
 
-Each ARB file in the `lib/l10n` represents a localization for a specific language. We try to maintain parity with the 
+Each ARB file in the `lib/l10n` represents a localization for a specific language. We try to maintain parity with the
 languages Flutter natively supports. To add a missing language, run the `fetch_arb` script in the `tool` directory.
 
 After adding the necessary localization messages, run the following command in the `forui` project directory which will

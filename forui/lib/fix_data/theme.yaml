@@ -1,0 +1,53 @@
+version: 1
+transforms:
+  # FAnimatedTheme - must come before FTheme rename due to order dependency
+  - title: 'Rename FAnimatedTheme to FTheme'
+    date: 2026-01-08
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      class: FAnimatedTheme
+    changes:
+      - kind: rename
+        newName: 'FTheme'
+
+  # FAnimatedThemeMotion
+  - title: 'Rename FAnimatedThemeMotion to FThemeMotion'
+    date: 2026-01-08
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      class: FAnimatedThemeMotion
+    changes:
+      - kind: rename
+        newName: 'FThemeMotion'
+
+  # FTheme
+  - title: 'Rename FTheme to FBasicTheme'
+    date: 2026-01-08
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      class: FTheme
+    changes:
+      - kind: rename
+        newName: 'FBasicTheme'
+
+  # FThemeData
+  - title: 'Rename FThemeData.tileStyle to FThemeData.tileStyles'
+    date: 2026-02-03
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      getter: 'tileStyle'
+      inClass: FThemeData
+    changes:
+      - kind: rename
+        newName: 'tileStyles'
+
+  - title: 'Rename FThemeData.copyWith(tileStyle: ...) to FThemeData.copyWith(tileStyles: ...)'
+    date: 2026-02-03
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      method: 'copyWith'
+      inClass: FThemeData
+    changes:
+      - kind: renameParameter
+        oldName: 'tileStyle'
+        newName: 'tileStyles'
