@@ -28,37 +28,6 @@ class FChangeNotifier with ChangeNotifier {
   }
 }
 
-/// A [ValueNotifier] that provides additional life-cycle tracking capabilities.
-@Deprecated(
-  "Use ValueNotifier instead. Please open an issue at https://github.com/duobaseio/forui/issues if that doesn't cover your use case.",
-)
-class FValueNotifier<T> extends ValueNotifier<T> {
-  final List<ValueChanged<T>> _listeners = [];
-
-  /// Creates a [FValueNotifier].
-  @Deprecated('Use ValueNotifier instead.')
-  FValueNotifier(super._value);
-
-  @override
-  @protected
-  void notifyListeners() {
-    super.notifyListeners();
-    for (final listener in _listeners) {
-      listener(value);
-    }
-  }
-
-  @override
-  bool get hasListeners => super.hasListeners || _listeners.isNotEmpty;
-
-  @override
-  @mustCallSuper
-  void dispose() {
-    _listeners.clear();
-    super.dispose();
-  }
-}
-
 /// A notifier that manages a set of values.
 class FMultiValueNotifier<T> extends ValueNotifier<Set<T>> {
   final int _min;
