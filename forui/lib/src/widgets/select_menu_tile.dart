@@ -662,25 +662,10 @@ class _Notifier<T> implements FMultiValueNotifier<T> {
   void addListener(VoidCallback listener) => delegate.addListener(listener);
 
   @override
-  void addValueListener(ValueChanged<Set<T>>? listener) => delegate.addValueListener(listener);
-
-  @override
-  void addUpdateListener(ValueChanged<(T, bool)>? listener) => delegate.addUpdateListener(listener);
-
-  @override
   void removeListener(VoidCallback listener) => delegate.removeListener(listener);
 
   @override
-  void removeValueListener(ValueChanged<Set<T>>? listener) => delegate.removeValueListener(listener);
-
-  @override
-  void removeUpdateListener(ValueChanged<(T, bool)>? listener) => delegate.removeUpdateListener(listener);
-
-  @override
   void notifyListeners() => delegate.notifyListeners();
-
-  @override
-  void notifyUpdateListeners(T value, {required bool add}) => delegate.notifyUpdateListeners(value, add: add);
 
   @override
   Set<T> get value => delegate.value;

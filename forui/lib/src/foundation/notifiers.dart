@@ -34,27 +34,10 @@ class FChangeNotifier with ChangeNotifier {
 )
 class FValueNotifier<T> extends ValueNotifier<T> {
   final List<ValueChanged<T>> _listeners = [];
-  bool _disposed = false;
 
   /// Creates a [FValueNotifier].
   @Deprecated('Use ValueNotifier instead.')
   FValueNotifier(super._value);
-
-  /// Registers a closure to be called with a new value when the notifier changes if not null.
-  @Deprecated(
-    "Use lifted state instead. Please open an issue at https://github.com/duobaseio/forui/issues if that doesn't cover your use case.",
-  )
-  void addValueListener(ValueChanged<T>? listener) {
-    if (listener != null) {
-      _listeners.add(listener);
-    }
-  }
-
-  /// Removes a previously registered closure from the list of closures that are notified when the object changes.
-  @Deprecated(
-    "Use lifted state instead. Please open an issue at https://github.com/duobaseio/forui/issues if that doesn't cover your use case.",
-  )
-  void removeValueListener(ValueChanged<T>? listener) => _listeners.remove(listener);
 
   @override
   @protected
@@ -68,23 +51,19 @@ class FValueNotifier<T> extends ValueNotifier<T> {
   @override
   bool get hasListeners => super.hasListeners || _listeners.isNotEmpty;
 
-  /// True if this notifier has been disposed.
-  bool get disposed => _disposed;
-
   @override
   @mustCallSuper
   void dispose() {
     _listeners.clear();
     super.dispose();
-    _disposed = true;
   }
 }
 
 /// A notifier that manages a set of values.
-class FMultiValueNotifier<T> extends FValueNotifier<Set<T>> {
-  final List<ValueChanged<(T, bool)>> _updateListeners = [];
+class FMultiValueNotifier<T> extends ValueNotifier<Set<T>> {
   final int _min;
   final int? _max;
+  bool _disposed = false;
 
   /// Creates a [FMultiValueNotifier] with a [min] and [max] number of elements allowed. Defaults to no min and max.
   ///
@@ -105,7 +84,6 @@ class FMultiValueNotifier<T> extends FValueNotifier<Set<T>> {
   /// Adds or removes the [value] from this notifier.
   ///
   /// Subclasses _must_:
-  /// * call [notifyUpdateListeners] after changing the value.
   /// * additionally override [FMultiValueNotifier.value].
   void update(T value, {required bool add}) {
     if (add) {
@@ -114,39 +92,12 @@ class FMultiValueNotifier<T> extends FValueNotifier<Set<T>> {
       }
 
       super.value = {...this.value, value};
-      notifyUpdateListeners(value, add: add);
     } else {
       if (this.value.length <= _min) {
         return;
       }
 
       super.value = {...this.value}..remove(value);
-      notifyUpdateListeners(value, add: add);
-    }
-  }
-
-  /// Registers a closure to be called whenever [update] successfully adds/removes an element if not null.
-  @Deprecated(
-    "Use lifted state instead. Please open an issue at https://github.com/duobaseio/forui/issues if that doesn't cover your use case.",
-  )
-  void addUpdateListener(ValueChanged<(T, bool)>? listener) {
-    if (listener != null) {
-      _updateListeners.add(listener);
-    }
-  }
-
-  /// Removes a previously registered closure from the list of closures that are notified whenever [update] successfully
-  /// adds/removes a value.
-  @Deprecated(
-    "Use lifted state instead. Please open an issue at https://github.com/duobaseio/forui/issues if that doesn't cover your use case.",
-  )
-  void removeUpdateListener(ValueChanged<(T, bool)>? listener) => _updateListeners.remove(listener);
-
-  /// Notifies all registered update listeners of a change.
-  @protected
-  void notifyUpdateListeners(T value, {required bool add}) {
-    for (final listener in _updateListeners) {
-      listener((value, add));
     }
   }
 
@@ -165,10 +116,13 @@ class FMultiValueNotifier<T> extends FValueNotifier<Set<T>> {
     super.value = {...value};
   }
 
+  /// True if this notifier has been disposed.
+  bool get disposed => _disposed;
+
   @override
   void dispose() {
-    _updateListeners.clear();
     super.dispose();
+    _disposed = true;
   }
 }
 
@@ -182,7 +136,6 @@ class _RadioNotifier<T> extends FMultiValueNotifier<T> {
     }
 
     super.value = {value};
-    notifyUpdateListeners(value, add: add);
   }
 
   @override

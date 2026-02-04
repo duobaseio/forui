@@ -20,7 +20,7 @@ DateTime _truncateAndStripTimezone(DateTime date) => .utc(date.year, date.month,
 /// * [FCalendarController.date] for selecting a single date.
 /// * [FCalendarController.dates] for selecting multiple dates.
 /// * [FCalendarController.range] for selecting a single range.
-abstract class FCalendarController<T> extends FValueNotifier<T> {
+abstract class FCalendarController<T> extends ValueNotifier<T> {
   /// Creates a [FCalendarController] that allows only a single date to be selected, with the given initially selected
   /// date.
   ///

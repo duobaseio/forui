@@ -163,9 +163,9 @@ are not available for most of these changes due to the tool's limitations.
   Wrap existing values with `.all(...)`, e.g. `.all(IconThemeData(...))`.
 * **Breaking** Rename `FSelectStyle.selectFieldStyle` to `FSelectStyle.fieldStyle`.
 * **Breaking** Rename `FSelectSearchStyle.textFieldStyle` to `FSelectSearchStyle.fieldStyle`.
-
 * **Breaking** Remove `FSelectStyle.iconStyle`. Use `FSelectStyle.fieldStyle.iconStyle` instead.
 * **Breaking** Remove `FSelectSearchStyle.iconStyle`. Use `FSelectSearchStyle.fieldStyle.iconStyle` instead.
+* Undeprecate `FSelect.contentScrollHandle`.
 
 * Fix `FMultiSelect` still allowing tags to be removed when disabled.
 

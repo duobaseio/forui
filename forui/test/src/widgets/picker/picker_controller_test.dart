@@ -75,7 +75,6 @@ void main() {
 
     controller.dispose();
 
-    expect(controller.disposed, true);
     for (final wheel in controller.wheels) {
       expect(wheel.notifyListeners, throwsFlutterError);
     }

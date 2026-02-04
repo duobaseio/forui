@@ -5,7 +5,7 @@ import 'package:forui/forui.dart';
 part 'select_controller.control.dart';
 
 /// The [FSelect]'s controller.
-class FSelectController<T> extends FValueNotifier<T?> {
+class FSelectController<T> extends ValueNotifier<T?> {
   /// True if the items in the select can toggled (unselected). Defaults to false.
   final bool toggleable;
 

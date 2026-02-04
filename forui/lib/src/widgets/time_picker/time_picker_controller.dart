@@ -9,7 +9,7 @@ import 'package:forui/forui.dart';
 part 'time_picker_controller.control.dart';
 
 /// A [FTimePicker]'s controller.
-final class FTimePickerController extends FValueNotifier<FTime> {
+final class FTimePickerController extends ValueNotifier<FTime> {
   FPickerController? _picker;
   bool _mutating = false;
   String? _pattern;

@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 part 'date_field_controller.control.dart';
 
 /// The date field's controller.
-class FDateFieldController implements FValueNotifier<DateTime?> {
+class FDateFieldController implements ValueNotifier<DateTime?> {
   static String? _defaultValidator(DateTime? _) => null;
 
   /// Returns an error string to display if the input is invalid, or null otherwise. It is also used to determine
@@ -31,16 +31,11 @@ class FDateFieldController implements FValueNotifier<DateTime?> {
   void addListener(VoidCallback listener) => _calendar.addListener(listener);
 
   @override
-  void addValueListener(ValueChanged<DateTime?>? listener) => _calendar.addValueListener(listener);
-
-  @override
+  @protected
   void notifyListeners() => _calendar.notifyListeners();
 
   @override
   void removeListener(VoidCallback listener) => _calendar.removeListener(listener);
-
-  @override
-  void removeValueListener(ValueChanged<DateTime?>? listener) => _calendar.removeValueListener(listener);
 
   @override
   bool get hasListeners => _calendar.hasListeners;
@@ -50,9 +45,6 @@ class FDateFieldController implements FValueNotifier<DateTime?> {
 
   @override
   set value(DateTime? value) => _calendar.value = value;
-
-  @override
-  bool get disposed => _calendar.disposed;
 
   @override
   void dispose() => _calendar.dispose();
@@ -117,13 +109,7 @@ class _ProxyCalendarController implements FCalendarController<DateTime?> {
   void addListener(VoidCallback listener) => _controller.addListener(listener);
 
   @override
-  void addValueListener(ValueChanged<DateTime?>? listener) => _controller.addValueListener(listener);
-
-  @override
   void dispose() => _controller.dispose();
-
-  @override
-  bool get disposed => _controller.disposed;
 
   @override
   bool get hasListeners => _controller.hasListeners;
@@ -133,9 +119,6 @@ class _ProxyCalendarController implements FCalendarController<DateTime?> {
 
   @override
   void removeListener(VoidCallback listener) => _controller.removeListener(listener);
-
-  @override
-  void removeValueListener(ValueChanged<DateTime?>? listener) => _controller.removeValueListener(listener);
 }
 
 /// A [FDateFieldControl] defines how a [FDateField] is controlled.

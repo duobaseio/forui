@@ -13,7 +13,7 @@ part 'picker_controller.control.dart';
 /// The [value] contains the index of the selected item in each wheel. The indexes are ordered:
 /// * From left to right if the current text direction is LTR
 /// * From right to left if the current text direction is RTL
-class FPickerController extends FValueNotifier<List<int>> {
+class FPickerController extends ValueNotifier<List<int>> {
   /// The controllers for the individual picker wheels.
   ///
   /// The controllers are ordered:

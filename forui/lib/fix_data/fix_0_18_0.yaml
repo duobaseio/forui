@@ -473,3 +473,13 @@ transforms:
       - kind: renameParameter
         oldName: 'tileStyle'
         newName: 'tileStyles'
+
+  # FValueNotifier
+  - title: 'Rename FValueNotifier to ValueNotifier'
+    date: 2026-02-04
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      class: FValueNotifier
+    changes:
+      - kind: rename
+        newName: 'ValueNotifier'

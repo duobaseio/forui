@@ -195,9 +195,6 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   final ScrollController? contentScrollController;
 
   /// True if the content should show scroll handles instead of a scrollbar. Defaults to false.
-  @Deprecated(
-    'Usage of scroll handles seem to be low while its maintenance burden far outweighs its benefits. Please open an issue at https://github.com/duobaseio/forui/issues if you use it and think otherwise.',
-  )
   final bool contentScrollHandles;
 
   /// The content's scroll physics. Defaults to [ClampingScrollPhysics].
@@ -251,9 +248,6 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     bool autoHide = true,
     Widget Function(BuildContext context, FSelectStyle style) contentEmptyBuilder = defaultContentEmptyBuilder,
     ScrollController? contentScrollController,
-    @Deprecated(
-      'Usage of scroll handles seem to be low while its maintenance burden far outweighs its benefits. Please open an issue at https://github.com/duobaseio/forui/issues if you use it and think otherwise.',
-    )
     bool contentScrollHandles = false,
     ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
     FItemDivider contentDivider = .none,
@@ -346,9 +340,6 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     bool autoHide,
     Widget Function(BuildContext context, FSelectStyle style) contentEmptyBuilder,
     ScrollController? contentScrollController,
-    @Deprecated(
-      'Usage of scroll handles seem to be low while its maintenance burden far outweighs its benefits. Please open an issue at https://github.com/duobaseio/forui/issues if you use it and think otherwise.',
-    )
     bool contentScrollHandles,
     ScrollPhysics contentPhysics,
     FItemDivider contentDivider,
@@ -413,9 +404,6 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     bool autoHide = true,
     Widget Function(BuildContext context, FSelectStyle style) contentEmptyBuilder = defaultContentEmptyBuilder,
     ScrollController? contentScrollController,
-    @Deprecated(
-      'Usage of scroll handles seem to be low while its maintenance burden far outweighs its benefits. Please open an issue at https://github.com/duobaseio/forui/issues if you use it and think otherwise.',
-    )
     bool contentScrollHandles = false,
     ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
     FItemDivider contentDivider = .none,
@@ -531,9 +519,6 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     bool autoHide,
     Widget Function(BuildContext context, FSelectStyle style) contentEmptyBuilder,
     ScrollController? contentScrollController,
-    @Deprecated(
-      'Usage of scroll handles seem to be low while its maintenance burden far outweighs its benefits. Please open an issue at https://github.com/duobaseio/forui/issues if you use it and think otherwise.',
-    )
     bool contentScrollHandles,
     ScrollPhysics contentPhysics,
     FItemDivider contentDivider,
@@ -578,9 +563,6 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     this.autoHide = true,
     this.contentEmptyBuilder = defaultContentEmptyBuilder,
     this.contentScrollController,
-    @Deprecated(
-      'Usage of scroll handles seem to be low while its maintenance burden far outweighs its benefits. Please open an issue at https://github.com/duobaseio/forui/issues if you use it and think otherwise.',
-    )
     this.contentScrollHandles = false,
     this.contentPhysics = const ClampingScrollPhysics(),
     this.contentDivider = .none,

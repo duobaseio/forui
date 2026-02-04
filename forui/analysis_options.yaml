@@ -1,9 +1,8 @@
 include: package:flint/analysis_options.flutter.yaml
 analyzer:
   errors:
-    deprecated_member_use_from_same_package: ignore # Temporary ignore until deprecated members are removed.
     prefer_asserts_with_message: ignore
-    unused_result: ignore
+    unused_result: ignore # Re-enable once Dart 3.11 lands
 
 linter:
   rules:

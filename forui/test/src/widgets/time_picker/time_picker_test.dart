@@ -100,7 +100,6 @@ void main() {
         ),
       );
 
-      expect(initial.disposed, false);
       expect(current.value, const FTime(10, 30));
       expect(current.picker?.value, [10, 30, 0]);
     });

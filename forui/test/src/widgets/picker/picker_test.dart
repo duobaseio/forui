@@ -32,7 +32,6 @@ void main() {
     await tester.pumpWidget(picker(newController));
     await tester.pumpAndSettle();
 
-    expect(initialController.disposed, false);
     expect(newController.value, [2, 1, 0]);
     expect(newController.wheels.map((w) => w.selectedItem).toList(), [2, 1, 0]);
 
@@ -75,7 +74,6 @@ void main() {
     await tester.pumpWidget(picker(newController));
     await tester.pumpAndSettle();
 
-    expect(initialController.disposed, false);
     expect(newController.value, [2, 1, 1]);
     expect(newController.wheels.map((w) => w.selectedItem).toList(), [2, 1, 1]);
 

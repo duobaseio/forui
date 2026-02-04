@@ -9,7 +9,7 @@ import 'package:forui/forui.dart';
 part 'time_field_controller.control.dart';
 
 /// The time field's controller.
-class FTimeFieldController extends FValueNotifier<FTime?> {
+class FTimeFieldController extends ValueNotifier<FTime?> {
   static String? _defaultValidator(FTime? _) => null;
 
   /// Returns an error string to display if the input is invalid, or null otherwise. It is also used to determine
@@ -25,21 +25,21 @@ class FTimeFieldController extends FValueNotifier<FTime?> {
   FTimeFieldController({FTime? time, this.validator = _defaultValidator})
     : _picker = FTimePickerController(time: time ?? const FTime()),
       super(time) {
-    _picker.addValueListener((time) {
+    _picker.addListener(() {
       try {
         _mutating = true;
-        value = time;
+        value = _picker.value;
       } finally {
         _mutating = false;
       }
     });
 
-    addValueListener(_update);
+    addListener(_update);
   }
 
-  void _update(FTime? time) {
-    if (!_mutating && time != null) {
-      _picker.value = time;
+  void _update() {
+    if (!_mutating && value != null) {
+      _picker.value = value!;
     }
   }
 

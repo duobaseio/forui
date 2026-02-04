@@ -61,13 +61,7 @@ class _ProxyController implements FCalendarController<DateTime?> {
   void addListener(VoidCallback listener) => _controller.addListener(listener);
 
   @override
-  void addValueListener(ValueChanged<DateTime?>? listener) => _controller.addValueListener(listener);
-
-  @override
   void dispose() => _controller.dispose();
-
-  @override
-  bool get disposed => _controller.disposed;
 
   @override
   bool get hasListeners => _controller.hasListeners;
@@ -77,9 +71,6 @@ class _ProxyController implements FCalendarController<DateTime?> {
 
   @override
   void removeListener(VoidCallback listener) => _controller.removeListener(listener);
-
-  @override
-  void removeValueListener(ValueChanged<DateTime?>? listener) => _controller.removeValueListener(listener);
 }
 
 /// A [FLineCalendarControl] defines how a [FLineCalendar] is controlled.
