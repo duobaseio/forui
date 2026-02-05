@@ -1,5 +1,6 @@
+import 'dart:ui';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/services.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
@@ -463,7 +464,7 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
   @override
   Widget _decorate(BuildContext _, Widget child) {
     if (bounce case final bounce?) {
-      return ScaleTransition(scale: bounce, child: child);
+      return _Bounce(bounce: bounce, bounceFloor: _style?.motion.bounceFloor, child: child);
     } else {
       return child;
     }
@@ -489,6 +490,104 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(DiagnosticsProperty('bounce', bounce));
+  }
+}
+
+class _Bounce extends SingleChildRenderObjectWidget {
+  final Animation<double> bounce;
+  final double? bounceFloor;
+
+  const _Bounce({required this.bounce, required this.bounceFloor, required super.child});
+
+  @override
+  RenderObject createRenderObject(BuildContext context) => _RenderBounce(bounce, bounceFloor);
+
+  @override
+  void updateRenderObject(BuildContext context, _RenderBounce renderObject) {
+    renderObject
+      ..bounce = bounce
+      ..bounceFloor = bounceFloor;
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('bounce', bounce))
+      ..add(DoubleProperty('bounceFloor', bounceFloor));
+  }
+}
+
+class _RenderBounce extends RenderProxyBox {
+  Animation<double> _bounce;
+  double? _bounceFloor;
+
+  _RenderBounce(this._bounce, this._bounceFloor) {
+    _bounce.addListener(markNeedsPaint);
+  }
+
+  @override
+  void detach() {
+    _bounce.removeListener(markNeedsPaint);
+    super.detach();
+  }
+
+  @override
+  void paint(PaintingContext context, Offset offset) {
+    if (child == null) {
+      return;
+    }
+
+    if (_bounce.value == 1.0) {
+      context.paintChild(child!, offset);
+      return;
+    }
+
+    final double scale;
+    if (_bounceFloor case final bounceFloor?) {
+      final floor = 1.0 - (bounceFloor / size.longestSide);
+      scale = _bounce.value.clamp(floor, 1.0);
+    } else {
+      scale = _bounce.value;
+    }
+
+    final center = size.center(.zero);
+    context.pushTransform(
+      needsCompositing,
+      offset,
+      .identity()
+        ..translateByDouble(center.dx, center.dy, 1, 1)
+        ..scaleByDouble(scale, scale, 1, 1)
+        ..translateByDouble(-center.dx, -center.dy, 1, 1),
+      super.paint,
+    );
+  }
+
+  Animation<double> get bounce => _bounce;
+
+  set bounce(Animation<double> value) {
+    if (_bounce != value) {
+      _bounce.removeListener(markNeedsPaint);
+      _bounce = value..addListener(markNeedsPaint);
+      markNeedsPaint();
+    }
+  }
+
+  double? get bounceFloor => _bounceFloor;
+
+  set bounceFloor(double? value) {
+    if (_bounceFloor != value) {
+      _bounceFloor = value;
+      markNeedsPaint();
+    }
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('bounce', bounce))
+      ..add(DoubleProperty('bounceFloor', bounceFloor));
   }
 }
 
@@ -555,6 +654,15 @@ class FTappableMotion with Diagnosticable, _$FTappableMotionFunctions {
   @override
   final Animatable<double> bounceTween;
 
+  /// The maximum number of pixels that the tappable can shrink during the bounce animation regardless of widget size.
+  /// Defaults to 5.
+  ///
+  /// This prevents large widgets from shrinking too much. For example, with the default [bounceFloor]:
+  /// * A 100px widget would shrink to 97px (3% shrink)
+  /// * A 500px widget would shrink to 495px (1% shrink)
+  @override
+  final double? bounceFloor;
+
   /// Creates a [FTappableMotion].
   const FTappableMotion({
     this.bounceDownDuration = const Duration(milliseconds: 100),
@@ -562,5 +670,6 @@ class FTappableMotion with Diagnosticable, _$FTappableMotionFunctions {
     this.bounceDownCurve = Curves.easeOutQuart,
     this.bounceUpCurve = Curves.easeOutCubic,
     this.bounceTween = defaultBounceTween,
+    this.bounceFloor = 5,
   });
 }
