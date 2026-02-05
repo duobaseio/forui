@@ -219,9 +219,11 @@ are not available for most of these changes due to the tool's limitations.
 
 
 ### `FTappable`
-* **Breaking** Rename `FTappable.onStateChange` to `FTappable.onVariantChange`.
+* Add `FTappableMotion.bounceFloor` to limit maximum shrink to an absolute pixel value regardless of widget size.
+
 * **Breaking** Change `FTappableVariantChangeCallback` signature from `void Function(Set<FTappableVariant>)` to
 `void Function(Set<FTappableVariant> previous, Set<FTappableVariant> current)`.
+* **Breaking** Rename `FTappable.onStateChange` to `FTappable.onVariantChange`.
 
 
 ### `FTile` & `FTileGroup`
@@ -246,6 +248,7 @@ are not available for most of these changes due to the tool's limitations.
 
 ### `FTheme`
 * Add `FTheme.textDirection`.
+* Add `FTheme.tooltipGroupActiveDuration` and `FBasicTheme.tooltipGroupActiveDuration`.
 
 * **Breaking** Rename `FTheme` to `FBasicTheme`.
 * **Breaking** Rename `FAnimatedTheme` to `FTheme`.
@@ -263,6 +266,8 @@ are not available for most of these changes due to the tool's limitations.
 
 
 ### `FTooltip`
+* Add `FTooltipGroup` for grouping tooltips so subsequent ones appear instantly after the first.
+
 * Change `FTooltipController(motion: ...)` from `FTooltipMotion` to `FTooltipMotionDelta`.
 
 

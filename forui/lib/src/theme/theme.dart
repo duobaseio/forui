@@ -98,6 +98,11 @@ class FTheme extends ImplicitlyAnimatedWidget {
   /// The platform variant. Defaults to the current platform.
   final FPlatformVariant? platform;
 
+  /// The duration for which subsequent [FTooltip]s will appear instantly after one is shown. Defaults to 300ms.
+  ///
+  /// See [FTooltipGroup.activeDuration] for more details.
+  final Duration tooltipGroupActiveDuration;
+
   /// The widget below this widget in the tree.
   final Widget child;
 
@@ -107,6 +112,7 @@ class FTheme extends ImplicitlyAnimatedWidget {
     required this.child,
     this.textDirection,
     this.platform,
+    this.tooltipGroupActiveDuration = const Duration(milliseconds: 300),
     this.motion = const FThemeMotion(),
     super.onEnd,
     super.key,
@@ -122,7 +128,8 @@ class FTheme extends ImplicitlyAnimatedWidget {
       ..add(DiagnosticsProperty('motion', motion))
       ..add(DiagnosticsProperty('data', data))
       ..add(EnumProperty('textDirection', textDirection))
-      ..add(DiagnosticsProperty('platform', platform));
+      ..add(DiagnosticsProperty('platform', platform))
+      ..add(DiagnosticsProperty('tooltipGroupActiveDuration', tooltipGroupActiveDuration));
   }
 }
 
@@ -139,6 +146,7 @@ class _State extends AnimatedWidgetBaseState<FTheme> {
     data: _tween!.evaluate(animation),
     textDirection: widget.textDirection ?? Directionality.maybeOf(context) ?? .ltr,
     platform: widget.platform,
+    tooltipGroupActiveDuration: widget.tooltipGroupActiveDuration,
     child: widget.child,
   );
 }
@@ -227,11 +235,21 @@ class FBasicTheme extends StatelessWidget {
   /// The platform variant. Defaults to the current platform.
   final FPlatformVariant? platform;
 
+  /// The duration for which subsequent [FTooltip]s will appear instantly after one is shown. Defaults to 300ms.
+  final Duration tooltipGroupActiveDuration;
+
   /// The widget below this widget in the tree.
   final Widget child;
 
   /// Creates a [FTheme] that applies [data] to all descendant widgets in [child].
-  const FBasicTheme({required this.data, required this.child, this.textDirection, this.platform, super.key});
+  const FBasicTheme({
+    required this.data,
+    required this.child,
+    this.textDirection,
+    this.platform,
+    this.tooltipGroupActiveDuration = const Duration(milliseconds: 300),
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) => FAdaptiveScope(
@@ -245,7 +263,7 @@ class FBasicTheme extends StatelessWidget {
             fontFamily: data.typography.defaultFontFamily,
             color: data.colors.foreground,
           ),
-          child: child,
+          child: FTooltipGroup(activeDuration: tooltipGroupActiveDuration, child: child),
         ),
       ),
     ),
@@ -257,7 +275,8 @@ class FBasicTheme extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('data', data, showName: false))
       ..add(EnumProperty('textDirection', textDirection))
-      ..add(DiagnosticsProperty('platform', platform));
+      ..add(DiagnosticsProperty('platform', platform))
+      ..add(DiagnosticsProperty('tooltipGroupActiveDuration', tooltipGroupActiveDuration));
   }
 }
 

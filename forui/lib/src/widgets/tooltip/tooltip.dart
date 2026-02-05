@@ -11,6 +11,7 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
 import 'package:forui/src/theme/delta.dart';
 import 'package:forui/src/widgets/tooltip/tooltip_controller.dart';
+import 'package:forui/src/widgets/tooltip/tooltip_group.dart';
 
 @Sentinels(FTooltipStyle, {'backgroundFilter': 'imageFilterSentinel'})
 part 'tooltip.design.dart';
@@ -25,6 +26,7 @@ part 'tooltip.design.dart';
 /// * https://forui.dev/docs/overlay/tooltip for working examples.
 /// * [FTooltipController] for controlling a tooltip.
 /// * [FTooltipStyle] for customizing a tooltip's appearance.
+/// * [FTooltipGroup] for grouping tooltips together where subsequent tooltips appear instantly after the initial one.
 class FTooltip extends StatefulWidget {
   static Widget _builder(BuildContext _, FTooltipController _, Widget? child) => child!;
 
@@ -192,6 +194,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
   @override
   Widget build(BuildContext context) {
     final style = widget.style(context.theme.tooltipStyle);
+    final group = TooltipGroupScope.maybeOf(context);
     final direction = Directionality.maybeOf(context) ?? .ltr;
 
     var child = widget.builder(context, _controller, widget.child);
@@ -227,6 +230,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
         onLongPressStart: (_) async {
           _monotonic++;
           await _controller.show();
+          group?.show();
         },
         onLongPressEnd: (_) async {
           final count = ++_monotonic;
@@ -234,6 +238,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
 
           if (count == _monotonic && !_controller.disposed) {
             await _controller.hide();
+            group?.hide();
           }
         },
         child: child,
@@ -308,11 +313,16 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
   }
 
   Future<void> _enter() async {
+    final group = TooltipGroupScope.maybeOf(context);
     final fencingToken = ++_monotonic;
-    await Future.delayed(widget.hoverEnterDuration);
+
+    if (!(group?.active ?? false)) {
+      await Future.delayed(widget.hoverEnterDuration);
+    }
 
     if (fencingToken == _monotonic && !_controller.disposed) {
       await _controller.show();
+      group?.show();
     }
   }
 
@@ -322,6 +332,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
 
     if (count == _monotonic && !_controller.disposed) {
       await _controller.hide();
+      TooltipGroupScope.maybeOf(context)?.hide();
     }
   }
 }

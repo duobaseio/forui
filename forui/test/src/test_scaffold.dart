@@ -79,6 +79,7 @@ class TestScaffold extends StatelessWidget {
   final Color? background;
   final Locale? locale;
   final TextDirection? textDirection;
+  final Duration tooltipGroupActiveDuration;
   final Widget child;
   final Alignment alignment;
   final bool padded;
@@ -90,6 +91,7 @@ class TestScaffold extends StatelessWidget {
     this.textDirection,
     this.alignment = .center,
     this.padded = true,
+    this.tooltipGroupActiveDuration = const Duration(milliseconds: 300),
     FThemeData? theme,
     super.key,
   }) : locale = null,
@@ -108,6 +110,7 @@ class TestScaffold extends StatelessWidget {
     this.textDirection,
     this.alignment = .center,
     this.padded = true,
+    this.tooltipGroupActiveDuration = const Duration(milliseconds: 300),
     FThemeData? theme,
     super.key,
   }) : theme = theme ?? FThemes.zinc.light,
@@ -123,6 +126,7 @@ class TestScaffold extends StatelessWidget {
       background = blueScreen.colors.background,
       locale = null,
       textDirection = null,
+      tooltipGroupActiveDuration = const Duration(milliseconds: 300),
       padded = false,
       wrapped = true;
 
@@ -138,6 +142,7 @@ class TestScaffold extends StatelessWidget {
           platform: platform,
           data: theme,
           textDirection: textDirection,
+          tooltipGroupActiveDuration: tooltipGroupActiveDuration,
           child: Container(
             color: background ?? theme.colors.background,
             padding: padded ? const .all(16) : null,
@@ -151,6 +156,7 @@ class TestScaffold extends StatelessWidget {
         platform: platform,
         data: theme,
         textDirection: textDirection,
+        tooltipGroupActiveDuration: tooltipGroupActiveDuration,
         child: Container(
           color: background ?? theme.colors.background,
           padding: padded ? const .all(16) : null,
