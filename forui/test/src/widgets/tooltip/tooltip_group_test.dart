@@ -14,14 +14,8 @@ void main() {
             activeDuration: const Duration(seconds: 1),
             child: Row(
               children: [
-                FTooltip(
-                  tipBuilder: (_, _) => const Text('Tooltip 1'),
-                  child: const Text('Target 1'),
-                ),
-                FTooltip(
-                  tipBuilder: (_, _) => const Text('Tooltip 2'),
-                  child: const Text('Target 2'),
-                ),
+                FTooltip(tipBuilder: (_, _) => const Text('Tooltip 1'), child: const Text('Target 1')),
+                FTooltip(tipBuilder: (_, _) => const Text('Tooltip 2'), child: const Text('Target 2')),
               ],
             ),
           ),
@@ -52,14 +46,8 @@ void main() {
             activeDuration: const Duration(seconds: 1),
             child: Row(
               children: [
-                FTooltip(
-                  tipBuilder: (_, _) => const Text('Tooltip 1'),
-                  child: const Text('Target 1'),
-                ),
-                FTooltip(
-                  tipBuilder: (_, _) => const Text('Tooltip 2'),
-                  child: const Text('Target 2'),
-                ),
+                FTooltip(tipBuilder: (_, _) => const Text('Tooltip 1'), child: const Text('Target 1')),
+                FTooltip(tipBuilder: (_, _) => const Text('Tooltip 2'), child: const Text('Target 2')),
               ],
             ),
           ),

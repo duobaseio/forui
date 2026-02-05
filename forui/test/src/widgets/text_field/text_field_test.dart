@@ -228,17 +228,13 @@ void main() {
   });
 
   testWidgets('updates error when error changes', (tester) async {
-    await tester.pumpWidget(
-      TestScaffold.app(child: const FTextField(error: Text('Error A'))),
-    );
+    await tester.pumpWidget(TestScaffold.app(child: const FTextField(error: Text('Error A'))));
     await tester.pumpAndSettle();
 
     expect(find.text('Error A'), findsOneWidget);
     expect(find.text('Error B'), findsNothing);
 
-    await tester.pumpWidget(
-      TestScaffold.app(child: const FTextField(error: Text('Error B'))),
-    );
+    await tester.pumpWidget(TestScaffold.app(child: const FTextField(error: Text('Error B'))));
     await tester.pumpAndSettle();
 
     expect(find.text('Error A'), findsNothing);

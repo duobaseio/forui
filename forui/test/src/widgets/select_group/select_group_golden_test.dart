@@ -89,14 +89,22 @@ void main() {
 
           await tester.pumpWidget(
             sheet.record(
-              TestScaffold.app(theme: theme.data, child: _checkbox(enabled: fromEnabled, error: fromError)),
+              TestScaffold.app(
+                theme: theme.data,
+                child: _checkbox(enabled: fromEnabled, error: fromError),
+              ),
               recording: false,
             ),
           );
           await tester.pumpAndSettle();
 
           await tester.pumpFrames(
-            sheet.record(TestScaffold.app(theme: theme.data, child: _checkbox(enabled: toEnabled, error: toError))),
+            sheet.record(
+              TestScaffold.app(
+                theme: theme.data,
+                child: _checkbox(enabled: toEnabled, error: toError),
+              ),
+            ),
             const Duration(milliseconds: 150),
           );
 
@@ -148,14 +156,22 @@ void main() {
 
           await tester.pumpWidget(
             sheet.record(
-              TestScaffold.app(theme: theme.data, child: _radio(enabled: fromEnabled, error: fromError)),
+              TestScaffold.app(
+                theme: theme.data,
+                child: _radio(enabled: fromEnabled, error: fromError),
+              ),
               recording: false,
             ),
           );
           await tester.pumpAndSettle();
 
           await tester.pumpFrames(
-            sheet.record(TestScaffold.app(theme: theme.data, child: _radio(enabled: toEnabled, error: toError))),
+            sheet.record(
+              TestScaffold.app(
+                theme: theme.data,
+                child: _radio(enabled: toEnabled, error: toError),
+              ),
+            ),
             const Duration(milliseconds: 150),
           );
 

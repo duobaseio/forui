@@ -2,8 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/forui.dart';
 
+import 'package:forui/forui.dart';
 
 @internal
 class TooltipGroupScope extends InheritedWidget {
@@ -74,7 +74,6 @@ class _FTooltipGroupState extends State<FTooltipGroup> {
     setState(() {
       _active = true;
     });
-
   }
 
   void _hide() {
