@@ -136,6 +136,12 @@ are not available for most of these changes due to the tool's limitations.
 * **Breaking** Rename `FHeaderAction.onStateChange` to `FHeaderAction.onVariantChange`.
 
 
+### `FLabel`
+* Add transition between different states.
+
+* Add `FLabelMotion`.
+
+
 ### `FItem` & `FItemGroup`
 * Add destructive `FItem` variant.
 * Add default styling for selected `FItem`s.

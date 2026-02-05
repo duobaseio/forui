@@ -202,6 +202,7 @@ class FSwitchStyle extends FLabelStyle with _$FSwitchStyleFunctions {
     super.descriptionPadding,
     super.errorPadding,
     super.childPadding,
+    super.labelMotion,
   });
 
   /// Creates a [FSwitchStyle] that inherits its properties.

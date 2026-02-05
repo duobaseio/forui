@@ -118,6 +118,7 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
     super.descriptionPadding,
     super.errorPadding,
     super.childPadding,
+    super.labelMotion,
   });
 
   /// Creates a [FTextFieldStyle] that inherits its properties.

@@ -388,6 +388,7 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
     super.descriptionPadding = const .only(top: 7.5),
     super.errorPadding = const .only(top: 5),
     super.childPadding,
+    super.labelMotion,
   });
 
   /// Creates a [FTileGroupStyle] that inherits from the given arguments.

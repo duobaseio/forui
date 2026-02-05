@@ -13,6 +13,7 @@ class DialogPage extends Example {
 
   @override
   Widget example(BuildContext context) => FButton(
+    variants: {.outline},
     mainAxisSize: .min,
     onPress: () => showFDialog(
       context: context,
@@ -45,6 +46,7 @@ class VerticalDialogPage extends Example {
 
   @override
   Widget example(BuildContext context) => FButton(
+    variants: {.outline},
     mainAxisSize: .min,
     onPress: () => showFDialog(
       context: context,
@@ -74,6 +76,7 @@ class BlurredDialogPage extends Example {
 
   @override
   Widget example(BuildContext context) => FButton(
+    variants: {.outline},
     mainAxisSize: .min,
     onPress: () => showFDialog(
       context: context,

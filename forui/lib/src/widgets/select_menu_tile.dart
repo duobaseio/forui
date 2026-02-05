@@ -701,6 +701,7 @@ class FSelectMenuTileStyle extends FLabelStyle with _$FSelectMenuTileStyleFuncti
     super.descriptionPadding,
     super.errorPadding,
     super.childPadding,
+    super.labelMotion,
   });
 
   /// Creates a [FSelectMenuTileStyle] that inherits its properties.

@@ -136,6 +136,7 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
     super.descriptionPadding,
     super.errorPadding = const .only(top: 5),
     super.childPadding,
+    super.labelMotion,
   }) : assert(0 < thumbSize, 'thumbSize must be > 0');
 
   /// Creates a [FSliderStyle] that inherits its properties.

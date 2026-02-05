@@ -206,6 +206,7 @@ class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
     super.descriptionPadding,
     super.errorPadding,
     super.childPadding,
+    super.labelMotion,
   });
 
   /// Creates a [FCheckboxStyle] that inherits its properties.

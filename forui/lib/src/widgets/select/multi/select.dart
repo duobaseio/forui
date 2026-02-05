@@ -893,6 +893,7 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
     super.descriptionPadding,
     super.errorPadding,
     super.childPadding,
+    super.labelMotion,
   });
 
   /// Creates a [FMultiSelectFieldStyle] that inherits its properties.

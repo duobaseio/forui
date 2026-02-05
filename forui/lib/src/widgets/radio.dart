@@ -207,6 +207,7 @@ class FRadioStyle extends FLabelStyle with _$FRadioStyleFunctions {
     super.descriptionPadding,
     super.errorPadding,
     super.childPadding,
+    super.labelMotion,
   });
 
   /// Creates a [FRadioStyle] that inherits its properties.
