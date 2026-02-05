@@ -266,5 +266,53 @@ void main() {
         );
       });
     });
+
+    for (final (name, fromError, toError) in [
+      ('enabled-to-error', null, 'An error has occurred.'),
+      ('error-to-enabled', 'An error has occurred.', null),
+    ]) {
+      testWidgets('${theme.name} $name transition', (tester) async {
+        final sheet = autoDispose(AnimationSheetBuilder(frameSize: const Size(300, 150)));
+
+        await tester.pumpWidget(
+          sheet.record(
+            TestScaffold.app(
+              theme: theme.data,
+              child: SizedBox(
+                width: 300,
+                child: FTextFormField(
+                  label: const Text('My Label'),
+                  hint: 'hint',
+                  description: const Text('Some help text.'),
+                  forceErrorText: fromError,
+                ),
+              ),
+            ),
+            recording: false,
+          ),
+        );
+        await tester.pumpAndSettle();
+
+        await tester.pumpFrames(
+          sheet.record(
+            TestScaffold.app(
+              theme: theme.data,
+              child: SizedBox(
+                width: 300,
+                child: FTextFormField(
+                  label: const Text('My Label'),
+                  hint: 'hint',
+                  description: const Text('Some help text.'),
+                  forceErrorText: toError,
+                ),
+              ),
+            ),
+          ),
+          const Duration(milliseconds: 120),
+        );
+
+        await expectLater(sheet.collate(5), matchesGoldenFile('text-form-field/${theme.name}/$name.png'));
+      });
+    }
   }
 }

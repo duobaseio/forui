@@ -20,6 +20,8 @@ Widget defaultSelectMenuTileBuilder<T>(BuildContext _, Set<dynamic>? _, Widget? 
 ///
 /// For desktop, an [FSelectGroup] is generally recommended over this.
 ///
+/// {@macro forui.widgets.label.error_transition}
+///
 /// See:
 /// * https://forui.dev/docs/tile/select-menu-tile for working examples.
 /// * [FSelectTile] for a single select tile.

@@ -217,4 +217,22 @@ void main() {
 
     expect(find.text('密码'), findsOneWidget);
   });
+
+  testWidgets('updates error when forceErrorText changes', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(child: const FTextFormField(forceErrorText: 'Error A')),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Error A'), findsOneWidget);
+    expect(find.text('Error B'), findsNothing);
+
+    await tester.pumpWidget(
+      TestScaffold.app(child: const FTextFormField(forceErrorText: 'Error B')),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Error A'), findsNothing);
+    expect(find.text('Error B'), findsOneWidget);
+  });
 }

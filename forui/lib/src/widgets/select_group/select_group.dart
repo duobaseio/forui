@@ -70,6 +70,8 @@ class FSelectGroupItemData<T> extends InheritedWidget {
 ///
 /// For touch devices, a [FSelectTileGroup] is generally recommended over this.
 ///
+/// {@macro forui.widgets.label.error_transition}
+///
 /// See:
 /// * https://forui.dev/docs/form/select-group for working examples.
 /// * [FSelectGroupStyle] for customizing a select group's appearance.

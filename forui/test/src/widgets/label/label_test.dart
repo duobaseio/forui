@@ -95,4 +95,24 @@ void main() {
     expect(find.text('Child'), findsOneWidget);
     expect(find.text('Error'), findsNothing);
   });
+
+  testWidgets('updates error when error changes', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold(
+        child: FLabel(axis: .vertical, variants: {.error}, error: const Text('Error A'), child: const Text('Child')),
+      ),
+    );
+
+    expect(find.text('Error A'), findsOneWidget);
+    expect(find.text('Error B'), findsNothing);
+
+    await tester.pumpWidget(
+      TestScaffold(
+        child: FLabel(axis: .vertical, variants: {.error}, error: const Text('Error B'), child: const Text('Child')),
+      ),
+    );
+
+    expect(find.text('Error A'), findsNothing);
+    expect(find.text('Error B'), findsOneWidget);
+  });
 }

@@ -243,11 +243,20 @@ class Input extends StatefulWidget {
 class _InputState extends State<Input> {
   late WidgetStatesController _statesController;
 
+  // Error should never be null as doing so causes the widget tree to change. This causes overlays attached to
+  // the textfield to fail as it is not smart enough to track the new location of the textfield in the widget tree.
+  //
+  // `widget.error` cannot be directly used because `_statesController` is updated one frame after `build`. When
+  // transitioning from error → non-erro, this causes the build method to be called once with an error variant but no
+  // error widget, causing a layout "jump".
+  late Widget _error;
+
   @override
   void initState() {
     super.initState();
     _statesController = widget.statesController ?? .new();
     _statesController.addListener(_handleStatesChange);
+    _error = widget.error ?? const SizedBox();
   }
 
   @override
@@ -262,12 +271,20 @@ class _InputState extends State<Input> {
 
       _statesController = widget.statesController ?? .new();
       _statesController.addListener(_handleStatesChange);
+      _error = widget.error ?? const SizedBox();
+    }
+
+    if (widget.error != null && old.error != null) {
+      // Error content changed but controller won't fire (both non-null)
+      _error = widget.error ?? const SizedBox();
     }
   }
 
   void _handleStatesChange() => SchedulerBinding.instance.addPostFrameCallback((_) {
     if (mounted) {
-      setState(() {});
+      setState(() {
+        _error = widget.error ?? const SizedBox();
+      });
     }
   });
 
@@ -346,9 +363,7 @@ class _InputState extends State<Input> {
       label: widget.label,
       style: style,
       description: widget.description,
-      // Error should never be null as doing so causes the widget tree to change. This causes overlays attached to
-      // the textfield to fail as it is not smart enough to track the new location of the textfield in the widget tree.
-      error: widget.error ?? const SizedBox(),
+      error: _error,
       expands: widget.expands,
       child: widget.builder(context, style, variants, textfield),
     );

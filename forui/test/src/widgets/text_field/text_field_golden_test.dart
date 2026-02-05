@@ -312,5 +312,53 @@ void main() {
         );
       });
     });
+
+    for (final (name, fromError, toError) in [
+      ('enabled-to-error', null, const Text('An error has occurred.')),
+      ('error-to-enabled', const Text('An error has occurred.'), null),
+    ]) {
+      testWidgets('${theme.name} $name transition', (tester) async {
+        final sheet = autoDispose(AnimationSheetBuilder(frameSize: const Size(300, 150)));
+
+        await tester.pumpWidget(
+          sheet.record(
+            TestScaffold.app(
+              theme: theme.data,
+              child: SizedBox(
+                width: 300,
+                child: FTextField(
+                  label: const Text('My Label'),
+                  hint: 'hint',
+                  description: const Text('Some help text.'),
+                  error: fromError,
+                ),
+              ),
+            ),
+            recording: false,
+          ),
+        );
+        await tester.pumpAndSettle();
+
+        await tester.pumpFrames(
+          sheet.record(
+            TestScaffold.app(
+              theme: theme.data,
+              child: SizedBox(
+                width: 300,
+                child: FTextField(
+                  label: const Text('My Label'),
+                  hint: 'hint',
+                  description: const Text('Some help text.'),
+                  error: toError,
+                ),
+              ),
+            ),
+          ),
+          const Duration(milliseconds: 120),
+        );
+
+        await expectLater(sheet.collate(5), matchesGoldenFile('text-field/${theme.name}/$name.png'));
+      });
+    }
   }
 }

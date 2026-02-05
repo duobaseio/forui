@@ -41,6 +41,8 @@ part 'tile_group.design.dart';
 /// );
 /// ```
 ///
+/// {@macro forui.widgets.label.error_transition}
+///
 ///
 /// See:
 /// * https://forui.dev/docs/tile/tile-group for working examples.
