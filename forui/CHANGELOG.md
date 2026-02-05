@@ -162,6 +162,16 @@ are not available for most of these changes due to the tool's limitations.
 * Change error message when given unbounded constraints to be more descriptive.
 
 
+### `FRadio`
+* Add transition between different states. 
+* Add `FRadioMotion.transitionDuration`.
+* Add `FRadioMotion.transitionCurve`.
+
+* **Breaking** Rename `FRadioMotion.duration` to `FRadioMotion.selectDuration`.
+* **Breaking** Rename `FRadioMotion.reverseDuration` to `FRadioMotion.unselectDuration`.
+* **Breaking** Rename `FRadioMotion.curve` to `FRadioMotion.selectCurve`.
+
+
 ### `FSelect` & `FMultiSelect`
 * **Breaking** Add `enabled` parameter to `FMultiSelectTagBuilder` at position 1 (after `context`).
 

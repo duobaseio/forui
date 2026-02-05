@@ -86,5 +86,51 @@ void main() {
         },
       );
     }
+
+    for (final (name, fromEnabled, fromValue, fromError, toEnabled, toValue, toError) in [
+      ('enabled-to-disabled', true, false, false, false, false, false),
+      ('disabled-to-enabled', false, false, false, true, false, false),
+      ('enabled-to-error', true, false, false, true, false, true),
+      ('error-to-enabled', true, false, true, true, false, false),
+      ('unselected-to-selected', true, false, false, true, true, false),
+      ('selected-to-unselected', true, true, false, true, false, false),
+    ]) {
+      testWidgets('${theme.name} $name transition', (tester) async {
+        final sheet = autoDispose(AnimationSheetBuilder(frameSize: const Size(100, 100)));
+
+        await tester.pumpWidget(
+          sheet.record(
+            TestScaffold.app(
+              theme: theme.data,
+              child: FRadio(
+                label: const SizedBox.shrink(),
+                enabled: fromEnabled,
+                value: fromValue,
+                error: fromError ? const SizedBox() : null,
+              ),
+            ),
+            recording: false,
+          ),
+        );
+        await tester.pumpAndSettle();
+
+        await tester.pumpFrames(
+          sheet.record(
+            TestScaffold.app(
+              theme: theme.data,
+              child: FRadio(
+                label: const SizedBox.shrink(),
+                enabled: toEnabled,
+                value: toValue,
+                error: toError ? const SizedBox() : null,
+              ),
+            ),
+          ),
+          const Duration(milliseconds: 150),
+        );
+
+        await expectLater(sheet.collate(5), matchesGoldenFile('radio/${theme.name}/$name.png'));
+      });
+    }
   }
 }

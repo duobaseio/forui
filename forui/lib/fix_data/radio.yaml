@@ -1,0 +1,65 @@
+version: 1
+transforms:
+  # FRadioMotion
+  - title: 'Rename FRadioMotion(duration: ...) to FRadioMotion(selectDuration: ...)'
+    date: 2026-02-05
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FRadioMotion
+    changes:
+      - kind: renameParameter
+        oldName: 'duration'
+        newName: 'selectDuration'
+
+  - title: 'Rename FRadioMotion(reverseDuration: ...) to FRadioMotion(unselectDuration: ...)'
+    date: 2026-02-05
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FRadioMotion
+    changes:
+      - kind: renameParameter
+        oldName: 'reverseDuration'
+        newName: 'unselectDuration'
+
+  - title: 'Rename FRadioMotion(curve: ...) to FRadioMotion(selectCurve: ...)'
+    date: 2026-02-05
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FRadioMotion
+    changes:
+      - kind: renameParameter
+        oldName: 'curve'
+        newName: 'selectCurve'
+
+  - title: 'Rename FRadioMotion.duration to FRadioMotion.selectDuration'
+    date: 2026-02-05
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      getter: 'duration'
+      inClass: FRadioMotion
+    changes:
+      - kind: rename
+        newName: 'selectDuration'
+
+  - title: 'Rename FRadioMotion.reverseDuration to FRadioMotion.unselectDuration'
+    date: 2026-02-05
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      getter: 'reverseDuration'
+      inClass: FRadioMotion
+    changes:
+      - kind: rename
+        newName: 'unselectDuration'
+
+  - title: 'Rename FRadioMotion.curve to FRadioMotion.selectCurve'
+    date: 2026-02-05
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      getter: 'curve'
+      inClass: FRadioMotion
+    changes:
+      - kind: rename
+        newName: 'selectCurve'

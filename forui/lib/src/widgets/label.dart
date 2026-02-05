@@ -29,6 +29,12 @@ part 'label.design.dart';
 /// |-----------------|
 /// ```
 ///
+/// {@template forui.widgets.label.error_transition}
+/// ## Error transition caveats
+/// Error transitions require either a [label] or [description] to function. In the rare case where only an [error] is
+/// needed, set [label] or [description] to an empty widget, e.g. [SizedBox.shrink].
+/// {@endtemplate}
+///
 /// See:
 /// * https://forui.dev/docs/form/label for working examples.
 /// * [FLabelStyles] for customizing a label's appearance.
@@ -98,6 +104,9 @@ class FLabel extends StatelessWidget {
       .vertical => context.theme.labelStyles.verticalStyle,
     });
 
+    // This messes up error transitions if a label and description weren't previously provided. However, it is an
+    // extremely rare edge case to want an error message without a label & description.
+    // In those cases, users can just set label/description to an empty SizedBox().
     if (label == null && description == null && error == null) {
       return Padding(padding: style.childPadding, child: child);
     }

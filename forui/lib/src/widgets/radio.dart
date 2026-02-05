@@ -22,6 +22,8 @@ part 'radio.design.dart';
 /// It is recommended to use [FSelectGroup] in conjunction with [FSelectGroupItemMixin.radio] to create a group of radio
 /// buttons.
 ///
+/// {@macro forui.widgets.label.error_transition}
+///
 /// See:
 /// * https://forui.dev/docs/form/radio for working examples.
 /// * [FRadioStyle] for customizing a radio's appearance.
@@ -125,7 +127,9 @@ class FRadio extends StatelessWidget {
             child: Stack(
               alignment: .center,
               children: [
-                Container(
+                AnimatedContainer(
+                  duration: style.motion.transitionDuration,
+                  curve: style.motion.transitionCurve,
                   padding: const .all(2),
                   decoration: BoxDecoration(
                     border: .all(color: style.borderColor.resolve(variants)),
@@ -134,12 +138,14 @@ class FRadio extends StatelessWidget {
                   ),
                   child: const SizedBox.square(dimension: 10),
                 ),
-                DecoratedBox(
+                AnimatedContainer(
+                  duration: style.motion.transitionDuration,
+                  curve: style.motion.transitionCurve,
                   decoration: BoxDecoration(color: style.indicatorColor.resolve(variants), shape: .circle),
                   child: AnimatedSize(
-                    duration: style.motion.duration,
-                    reverseDuration: style.motion.reverseDuration,
-                    curve: style.motion.curve,
+                    duration: style.motion.selectDuration,
+                    reverseDuration: style.motion.unselectDuration,
+                    curve: style.motion.selectCurve,
                     child: value ? const SizedBox.square(dimension: 9) : const SizedBox.shrink(),
                   ),
                 ),
@@ -246,22 +252,32 @@ class FRadioStyle extends FLabelStyle with _$FRadioStyleFunctions {
 
 /// The motion-related properties for a [FRadio].
 class FRadioMotion with Diagnosticable, _$FRadioMotionFunctions {
+  /// The duration of the transition between states. Defaults to 100ms.
+  @override
+  final Duration transitionDuration;
+
+  /// The curve of the transition between states. Defaults to [Curves.linear].
+  @override
+  final Curve transitionCurve;
+
   /// The duration of the animation when selected. Defaults to 100ms.
   @override
-  final Duration duration;
+  final Duration selectDuration;
 
-  /// The duration of the reverse animation when unselected. Defaults to 100ms.
+  /// The duration of the animation when unselected. Defaults to 100ms.
   @override
-  final Duration reverseDuration;
+  final Duration unselectDuration;
 
-  /// The curve of the animation. Defaults to [Curves.easeOutCirc].
+  /// The curve of the select & unselect animation. Defaults to [Curves.easeOutCirc].
   @override
-  final Curve curve;
+  final Curve selectCurve;
 
   /// Creates a [FRadioMotion].
   const FRadioMotion({
-    this.duration = const Duration(milliseconds: 100),
-    this.reverseDuration = const Duration(milliseconds: 100),
-    this.curve = Curves.easeOutCirc,
+    this.transitionDuration = const Duration(milliseconds: 100),
+    this.transitionCurve = Curves.linear,
+    this.selectDuration = const Duration(milliseconds: 100),
+    this.unselectDuration = const Duration(milliseconds: 100),
+    this.selectCurve = Curves.easeOutCirc,
   });
 }
