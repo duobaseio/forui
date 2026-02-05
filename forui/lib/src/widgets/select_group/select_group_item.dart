@@ -13,7 +13,7 @@ mixin FSelectGroupItemMixin<T> on Widget {
     Widget? description,
     Widget? error,
     String? semanticsLabel,
-    bool enabled = true,
+    bool? enabled,
     bool autofocus = false,
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
@@ -38,7 +38,7 @@ mixin FSelectGroupItemMixin<T> on Widget {
     Widget? error,
     String? semanticsLabel,
     FRadioStyle? style,
-    bool enabled = true,
+    bool? enabled,
     bool autofocus = false,
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
@@ -67,7 +67,7 @@ class _Checkbox<T> extends StatelessWidget with FSelectGroupItemMixin<T> {
   final Widget? description;
   final Widget? error;
   final String? semanticsLabel;
-  final bool enabled;
+  final bool? enabled;
   final bool autofocus;
   final FocusNode? focusNode;
   final ValueChanged<bool>? onFocusChange;
@@ -79,7 +79,7 @@ class _Checkbox<T> extends StatelessWidget with FSelectGroupItemMixin<T> {
     this.description,
     this.error,
     this.semanticsLabel,
-    this.enabled = true,
+    this.enabled,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
@@ -88,17 +88,17 @@ class _Checkbox<T> extends StatelessWidget with FSelectGroupItemMixin<T> {
 
   @override
   Widget build(BuildContext context) {
-    final FSelectGroupItemData(:controller, :selected, :style) = .of<T>(context);
+    final FSelectGroupItemData(:controller, :style, :enabled, :selected, :error) = .of<T>(context);
     final checkboxStyle = this.style ?? style.checkboxStyle;
     return FCheckbox(
       style: checkboxStyle,
       label: label,
       description: description,
       semanticsLabel: semanticsLabel,
-      error: error,
+      enabled: this.enabled ?? enabled,
       value: selected,
       onChange: (state) => controller.update(value, add: state),
-      enabled: enabled,
+      error: this.error ?? (error ? const SizedBox.shrink() : null),
       autofocus: autofocus,
       focusNode: focusNode,
       onFocusChange: onFocusChange,
@@ -128,7 +128,7 @@ class _Radio<T> extends StatelessWidget with FSelectGroupItemMixin<T> {
   final Widget? description;
   final Widget? error;
   final String? semanticsLabel;
-  final bool enabled;
+  final bool? enabled;
   final bool autofocus;
   final FocusNode? focusNode;
   final ValueChanged<bool>? onFocusChange;
@@ -140,7 +140,7 @@ class _Radio<T> extends StatelessWidget with FSelectGroupItemMixin<T> {
     this.description,
     this.error,
     this.semanticsLabel,
-    this.enabled = true,
+    this.enabled,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
@@ -149,7 +149,7 @@ class _Radio<T> extends StatelessWidget with FSelectGroupItemMixin<T> {
 
   @override
   Widget build(BuildContext context) {
-    final FSelectGroupItemData(:controller, :selected, :style) = .of<T>(context);
+    final FSelectGroupItemData(:controller, :selected, :style, :enabled, :error) = .of<T>(context);
     final radioStyle = this.style ?? style.radioStyle;
 
     return FRadio(
@@ -157,10 +157,10 @@ class _Radio<T> extends StatelessWidget with FSelectGroupItemMixin<T> {
       label: label,
       description: description,
       semanticsLabel: semanticsLabel,
-      error: error,
+      enabled: this.enabled ?? enabled,
       value: selected,
       onChange: (state) => controller.update(value, add: state),
-      enabled: enabled,
+      error: this.error ?? (error ? const SizedBox.shrink() : null),
       autofocus: autofocus,
       focusNode: focusNode,
       onFocusChange: onFocusChange,

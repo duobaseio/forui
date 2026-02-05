@@ -186,6 +186,12 @@ are not available for most of these changes due to the tool's limitations.
 * Fix `FMultiSelect` still allowing tags to be removed when disabled.
 
 
+### `FSelectGroup`
+* Add transition between different states.
+
+* Fix `FSelectGroupItem`s not inheriting disabled and error state from `FSelectGroup`.
+
+
 ### `FSelectTile`
 * **Breaking** Rename `FSelectTile.onStatesChange` to `FSelectTile.onVariantChange`.
 
