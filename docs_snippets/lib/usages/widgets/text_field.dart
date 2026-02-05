@@ -57,6 +57,7 @@ final textField = FTextField(
   selectionControls: null,
   dragStartBehavior: .start,
   groupId: EditableText,
+  statesController: null,
   undoController: null,
   // {@endcategory}
   // {@category "Lines/Length"}
@@ -136,6 +137,7 @@ final textFieldEmail = FTextField.email(
   selectionControls: null,
   dragStartBehavior: .start,
   groupId: EditableText,
+  statesController: null,
   undoController: null,
   // {@endcategory}
   // {@category "Lines/Length"}
@@ -165,6 +167,7 @@ final textFieldEmail = FTextField.email(
 final textFieldMultiline = FTextField.multiline(
   // {@category "Core"}
   style: const .delta(contentPadding: .symmetric(horizontal: 10)),
+  statesController: null,
   enabled: true,
   label: const Text('Label'),
   hint: 'Enter text...',
@@ -296,6 +299,7 @@ final textFieldPassword = FTextField.password(
   selectionControls: null,
   dragStartBehavior: .start,
   groupId: EditableText,
+  statesController: null,
   undoController: null,
   // {@endcategory}
   // {@category "Lines/Length"}

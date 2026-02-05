@@ -5,6 +5,9 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 final tile = FTile(
+  // {@category "Variants"}
+  variants: const {},
+  // {@endcategory}
   // {@category "Core"}
   style: const .delta(margin: .zero),
   enabled: true,
@@ -34,6 +37,9 @@ final tile = FTile(
 );
 
 final tileRaw = FTile.raw(
+  // {@category "Variants"}
+  variants: const {},
+  // {@endcategory}
   // {@category "Core"}
   style: const .delta(margin: .zero),
   enabled: true,
@@ -58,3 +64,11 @@ final tileRaw = FTile.raw(
   onVariantChange: (previous, current) {},
   // {@endcategory}
 );
+
+// {@category "Variants" "Primary"}
+/// The tile's primary (base) variant.
+final Set<FItemVariant> primary = {};
+
+// {@category "Variants" "Destructive"}
+/// The tile's destructive variant.
+final Set<FItemVariant> destructive = {.destructive};

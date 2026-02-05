@@ -5,6 +5,9 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 final item = FItem(
+  // {@category "Variants"}
+  variants: const {},
+  // {@endcategory}
   // {@category "Core"}
   style: const .delta(margin: .zero),
   enabled: true,
@@ -34,6 +37,9 @@ final item = FItem(
 );
 
 final raw = FItem.raw(
+  // {@category "Variants"}
+  variants: const {},
+  // {@endcategory}
   // {@category "Core"}
   style: const .delta(margin: .zero),
   enabled: true,
@@ -58,3 +64,11 @@ final raw = FItem.raw(
   onVariantChange: (previous, current) {},
   // {@endcategory}
 );
+
+// {@category "Variants" "Primary"}
+/// The item's primary (base) variant.
+final Set<FItemVariant> primary = {};
+
+// {@category "Variants" "Destructive"}
+/// The item's destructive variant.
+final Set<FItemVariant> destructive = {.destructive};

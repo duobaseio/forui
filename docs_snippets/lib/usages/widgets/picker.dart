@@ -12,6 +12,7 @@ final picker = FPicker(
     const Text(':'),
     FPickerWheel(children: [for (var i = 0; i < 60; i++) Text('$i'.padLeft(2, '0'))]),
   ],
+  debugLabel: '',
   // {@endcategory}
   // {@category "Control"}
   control: const .managed(),
