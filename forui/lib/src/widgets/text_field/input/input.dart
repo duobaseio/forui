@@ -247,7 +247,7 @@ class _InputState extends State<Input> {
   // the textfield to fail as it is not smart enough to track the new location of the textfield in the widget tree.
   //
   // `widget.error` cannot be directly used because `_statesController` is updated one frame after `build`. When
-  // transitioning from error → non-erro, this causes the build method to be called once with an error variant but no
+  // transitioning from error → non-error, this causes the build method to be called once with an error variant but no
   // error widget, causing a layout "jump".
   late Widget _error;
 

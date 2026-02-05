@@ -248,7 +248,8 @@ are not available for most of these changes due to the tool's limitations.
 
 ### `FTheme`
 * Add `FTheme.textDirection`.
-* Add `FTheme.tooltipGroupActiveDuration` and `FBasicTheme.tooltipGroupActiveDuration`.
+* Add `FTheme.tooltipGroupActiveDuration`.
+* Add `FBasicTheme.tooltipGroupActiveDuration`.
 
 * **Breaking** Rename `FTheme` to `FBasicTheme`.
 * **Breaking** Rename `FAnimatedTheme` to `FTheme`.

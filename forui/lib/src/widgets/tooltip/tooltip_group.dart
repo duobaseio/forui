@@ -16,7 +16,7 @@ class TooltipGroupScope extends InheritedWidget {
   const TooltipGroupScope._(this.active, this.show, this.hide, {required super.child});
 
   @override
-  bool updateShouldNotify(TooltipGroupScope old) => false;
+  bool updateShouldNotify(TooltipGroupScope old) => active != old.active || show != old.show || hide != old.hide;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
