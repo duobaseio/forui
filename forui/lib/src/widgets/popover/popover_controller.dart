@@ -20,19 +20,33 @@ class FPopoverController extends FChangeNotifier {
   late Animation<double> _fade;
 
   /// Creates a [FPopoverController] with the given [vsync], [shown] and [motion].
-  FPopoverController({required TickerProvider vsync, bool shown = false, FPopoverMotion motion = const .new()}) {
+  FPopoverController({
+    required TickerProvider vsync,
+    bool shown = false,
+    FPopoverMotionDelta motion = const FPopoverMotion(),
+  }) {
     if (shown) {
       _overlay.show();
     }
+    final popoverMotion = motion(const FPopoverMotion());
+
     _animation = AnimationController(
       vsync: vsync,
-      duration: motion.entranceDuration,
-      reverseDuration: motion.exitDuration,
+      duration: popoverMotion.entranceDuration,
+      reverseDuration: popoverMotion.exitDuration,
     )..value = shown ? 1 : 0;
-    _curveFade = CurvedAnimation(parent: _animation, curve: motion.fadeInCurve, reverseCurve: motion.fadeOutCurve);
-    _curveScale = CurvedAnimation(parent: _animation, curve: motion.expandCurve, reverseCurve: motion.collapseCurve);
-    _scale = motion.scaleTween.animate(_curveScale);
-    _fade = motion.fadeTween.animate(_curveFade);
+    _curveFade = CurvedAnimation(
+      parent: _animation,
+      curve: popoverMotion.fadeInCurve,
+      reverseCurve: popoverMotion.fadeOutCurve,
+    );
+    _curveScale = CurvedAnimation(
+      parent: _animation,
+      curve: popoverMotion.expandCurve,
+      reverseCurve: popoverMotion.collapseCurve,
+    );
+    _scale = popoverMotion.scaleTween.animate(_curveScale);
+    _fade = popoverMotion.fadeTween.animate(_curveFade);
   }
 
   /// Convenience method for showing/hiding the popover.
@@ -217,7 +231,7 @@ class FPopoverManagedControl extends FPopoverControl with Diagnosticable, _$FPop
 
   @override
   FPopoverController createController(TickerProvider vsync) =>
-      controller ?? .new(vsync: vsync, shown: initial ?? false, motion: motion ?? const .new());
+      controller ?? .new(vsync: vsync, shown: initial ?? false, motion: motion ?? const FPopoverMotion());
 }
 
 class _Lifted extends FPopoverControl with _$_LiftedMixin {

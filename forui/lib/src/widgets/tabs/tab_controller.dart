@@ -6,11 +6,18 @@ final class FTabController extends FChangeNotifier {
   FTabMotion _motion;
 
   /// Creates a [FTabController].
-  FTabController({required int length, required TickerProvider vsync, int index = 0, FTabMotion motion = const .new()})
-    : this._(
-        TabController(initialIndex: index, length: length, animationDuration: motion.duration, vsync: vsync),
-        motion,
-      );
+  factory FTabController({
+    required int length,
+    required TickerProvider vsync,
+    int index = 0,
+    FTabMotionDelta motion = const FTabMotion(),
+  }) {
+    final tabMotion = motion(const FTabMotion());
+    return ._(
+      TabController(initialIndex: index, length: length, animationDuration: tabMotion.duration, vsync: vsync),
+      tabMotion,
+    );
+  }
 
   FTabController._(this._controller, this._motion);
 
@@ -190,7 +197,7 @@ class FTabManagedControl extends FTabControl with _$FTabManagedControlMixin {
 
   @override
   FTabController createController(TickerProvider vsync, int length) =>
-      controller ?? .new(length: length, vsync: vsync, index: initial ?? 0, motion: motion ?? const .new());
+      controller ?? .new(length: length, vsync: vsync, index: initial ?? 0, motion: motion ?? const FTabMotion());
 }
 
 class _Lifted extends FTabControl with _$_LiftedMixin {

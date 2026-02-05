@@ -20,19 +20,33 @@ class FTooltipController extends FChangeNotifier {
   late final Animation<double> _scale;
 
   /// Creates a [FTooltipController] with the given [vsync], [shown] and [motion].
-  FTooltipController({required TickerProvider vsync, bool shown = false, FTooltipMotion motion = const .new()}) {
+  FTooltipController({
+    required TickerProvider vsync,
+    bool shown = false,
+    FTooltipMotionDelta motion = const FTooltipMotion(),
+  }) {
     if (shown) {
       _overlay.show();
     }
+
+    final tooltipMotion = motion(const FTooltipMotion());
     _animation = AnimationController(
       vsync: vsync,
-      duration: motion.entranceDuration,
-      reverseDuration: motion.exitDuration,
+      duration: tooltipMotion.entranceDuration,
+      reverseDuration: tooltipMotion.exitDuration,
     )..value = shown ? 1 : 0;
-    _curveFade = CurvedAnimation(parent: _animation, curve: motion.fadeInCurve, reverseCurve: motion.fadeOutCurve);
-    _curveScale = CurvedAnimation(parent: _animation, curve: motion.expandCurve, reverseCurve: motion.collapseCurve);
-    _fade = motion.fadeTween.animate(_curveFade);
-    _scale = motion.scaleTween.animate(_curveScale);
+    _curveFade = CurvedAnimation(
+      parent: _animation,
+      curve: tooltipMotion.fadeInCurve,
+      reverseCurve: tooltipMotion.fadeOutCurve,
+    );
+    _curveScale = CurvedAnimation(
+      parent: _animation,
+      curve: tooltipMotion.expandCurve,
+      reverseCurve: tooltipMotion.collapseCurve,
+    );
+    _fade = tooltipMotion.fadeTween.animate(_curveFade);
+    _scale = tooltipMotion.scaleTween.animate(_curveScale);
   }
 
   /// Convenience method for showing/hiding the tooltip.
@@ -217,7 +231,7 @@ class FTooltipManagedControl extends FTooltipControl with Diagnosticable, _$FToo
 
   @override
   FTooltipController createController(TickerProvider vsync) =>
-      controller ?? .new(vsync: vsync, shown: initial ?? false, motion: motion ?? const .new());
+      controller ?? .new(vsync: vsync, shown: initial ?? false, motion: motion ?? const FTooltipMotion());
 }
 
 class _Lifted extends FTooltipControl with _$_LiftedMixin {

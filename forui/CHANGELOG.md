@@ -162,6 +162,10 @@ are not available for most of these changes due to the tool's limitations.
 * Change error message when given unbounded constraints to be more descriptive.
 
 
+### `FPopover`
+* Change `FPopoverController(motion: ...)` from `FPopoverMotion` to `FPopoverMotionDelta`.
+
+
 ### `FRadio`
 * Add transition between different states. 
 * Add `FRadioMotion.transitionDuration`.
@@ -211,6 +215,8 @@ are not available for most of these changes due to the tool's limitations.
 ### `FTabs`
 * Add `FTabs.expands`.
 
+* Change `FTabController(motion: ...)` from `FTabMotion` to `FTabMotionDelta`.
+
 
 ### `FTappable`
 * **Breaking** Rename `FTappable.onStateChange` to `FTappable.onVariantChange`.
@@ -254,6 +260,10 @@ are not available for most of these changes due to the tool's limitations.
 * **Breaking** Remove `FThemeData.tileStyle`.
 
 * **Breaking** Change `FThemeData.copyWith(...)` to accept `Delta`s instead of callbacks.
+
+
+### `FTooltip`
+* Change `FTooltipController(motion: ...)` from `FTooltipMotion` to `FTooltipMotionDelta`.
 
 
 ### `FTimeField`
