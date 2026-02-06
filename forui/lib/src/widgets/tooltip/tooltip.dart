@@ -87,21 +87,28 @@ class FTooltip extends StatefulWidget {
   /// Defaults to [FPortalOverflow.flip].
   final FPortalOverflow overflow;
 
-  /// True if the tooltip should be shown when hovered over. Defaults to true.
-  final bool hover;
+  /// True if the tooltip should be shown when hovered over. Defaults to [FTooltipGroup.hover], typically true.
+  final bool? hover;
 
-  /// The duration to wait before showing the tooltip after the user hovers over the target. Defaults to 0.5 seconds.
-  final Duration hoverEnterDuration;
+  /// The duration to wait before showing the tooltip after the user hovers over the target.
+  ///
+  /// Defaults to the enclosing [FTooltipGroup.hoverEnterDuration], typically 500ms.
+  final Duration? hoverEnterDuration;
 
-  /// The duration to wait before hiding the tooltip after the user has stopped hovering over the target. Defaults to 0.
-  final Duration hoverExitDuration;
+  /// The duration to wait before hiding the tooltip after the user has stopped hovering over the target.
+  ///
+  /// Defaults to the enclosing [FTooltipGroup.hoverExitDuration], typically 0ms.
+  final Duration? hoverExitDuration;
 
-  /// True if the tooltip should be shown when long pressed. Defaults to true.
-  final bool longPress;
+  /// True if the tooltip should be shown when long pressed.
+  ///
+  /// Defaults to the enclosing [FTooltipGroup.longPress], typically true.
+  final bool? longPress;
 
-  /// The duration to wait before hiding the tooltip after the user has stopped pressing the target. Defaults to 1.5
-  /// seconds.
-  final Duration longPressExitDuration;
+  /// The duration to wait before hiding the tooltip after the user has stopped pressing the target.
+  ///
+  /// Defaults to the enclosing [FTooltipGroup.longPressExitDuration], typically 1500ms.
+  final Duration? longPressExitDuration;
 
   /// The tip builder. The child passed to [tipBuilder] will always be null.
   final Widget Function(BuildContext context, FTooltipController controller) tipBuilder;
@@ -128,11 +135,11 @@ class FTooltip extends StatefulWidget {
     this.childAnchor = .topCenter,
     this.spacing = const .spacing(4),
     this.overflow = .flip,
-    this.hover = true,
-    this.hoverEnterDuration = const Duration(milliseconds: 500),
-    this.hoverExitDuration = .zero,
-    this.longPress = true,
-    this.longPressExitDuration = const Duration(milliseconds: 1500),
+    this.hover,
+    this.hoverEnterDuration,
+    this.hoverExitDuration,
+    this.longPress,
+    this.longPressExitDuration,
     this.builder = _builder,
     this.child,
     super.key,
@@ -196,9 +203,11 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
     final style = widget.style(context.theme.tooltipStyle);
     final group = TooltipGroupScope.maybeOf(context);
     final direction = Directionality.maybeOf(context) ?? .ltr;
+    final hover = widget.hover ?? group?.hover ?? true;
+    final longPress = widget.longPress ?? group?.longPress ?? true;
 
     var child = widget.builder(context, _controller, widget.child);
-    if (widget.hover || widget.longPress) {
+    if (hover || longPress) {
       child = CallbackShortcuts(
         bindings: {const SingleActivator(.escape): _exit},
         child: Focus(
@@ -214,7 +223,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
       );
     }
 
-    if (widget.hover) {
+    if (hover) {
       child = MouseRegion(
         onEnter: (_) => _enter(),
         onExit: (_) => _exit(),
@@ -225,7 +234,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
     }
 
     // TODO: haptic feedback.
-    if (widget.longPress) {
+    if (longPress) {
       child = GestureDetector(
         onLongPressStart: (_) async {
           _monotonic++;
@@ -234,7 +243,9 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
         },
         onLongPressEnd: (_) async {
           final count = ++_monotonic;
-          await Future.delayed(widget.longPressExitDuration);
+          await Future.delayed(
+            widget.longPressExitDuration ?? group?.longPressExitDuration ?? FTooltipGroup.defaultLongPressExitDuration,
+          );
 
           if (count == _monotonic && !_controller.disposed) {
             await _controller.hide();
@@ -317,7 +328,9 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
     final fencingToken = ++_monotonic;
 
     if (!(group?.active ?? false)) {
-      await Future.delayed(widget.hoverEnterDuration);
+      await Future.delayed(
+        widget.hoverEnterDuration ?? group?.hoverEnterDuration ?? FTooltipGroup.defaultHoverEnterDuration,
+      );
     }
 
     if (fencingToken == _monotonic && !_controller.disposed) {
@@ -327,12 +340,15 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
   }
 
   Future<void> _exit() async {
+    final group = TooltipGroupScope.maybeOf(context);
     final count = ++_monotonic;
-    await Future.delayed(widget.hoverExitDuration);
+    await Future.delayed(
+      widget.hoverExitDuration ?? group?.hoverExitDuration ?? FTooltipGroup.defaultHoverExitDuration,
+    );
 
     if (count == _monotonic && !_controller.disposed) {
       await _controller.hide();
-      TooltipGroupScope.maybeOf(context)?.hide();
+      group?.hide();
     }
   }
 }

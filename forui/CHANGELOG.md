@@ -269,6 +269,7 @@ are not available for most of these changes due to the tool's limitations.
 ### `FTooltip`
 * Add `FTooltipGroup` for grouping tooltips so subsequent ones appear instantly after the first.
 
+* Change `FTooltip` fields to be nullable and inherit from the enclosing `FTooltipGroup`.
 * Change `FTooltipController(motion: ...)` from `FTooltipMotion` to `FTooltipMotionDelta`.
 
 

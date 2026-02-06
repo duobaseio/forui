@@ -7,6 +7,39 @@ import '../../test_scaffold.dart';
 
 void main() {
   group('FTooltipGroup', () {
+    testWidgets('disable hover for child tooltip', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTooltipGroup(
+            hover: false,
+            child: FTooltip(tipBuilder: (_, _) => const Text('Tooltip'), child: const Text('Target')),
+          ),
+        ),
+      );
+
+      final gesture = await tester.createPointerGesture();
+      await tester.pump();
+
+      await gesture.moveTo(tester.getCenter(find.text('Target')));
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+      expect(find.text('Tooltip'), findsNothing);
+    });
+
+    testWidgets('disable long press for child tooltip', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTooltipGroup(
+            longPress: false,
+            child: FTooltip(tipBuilder: (_, _) => const Text('Tooltip'), child: const Text('Target')),
+          ),
+        ),
+      );
+
+      await tester.longPress(find.text('Target'));
+      await tester.pumpAndSettle();
+      expect(find.text('Tooltip'), findsNothing);
+    });
+
     testWidgets('hover eliminates warmup', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(

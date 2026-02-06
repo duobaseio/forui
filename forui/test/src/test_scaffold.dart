@@ -142,7 +142,6 @@ class TestScaffold extends StatelessWidget {
           platform: platform,
           data: theme,
           textDirection: textDirection,
-          tooltipGroupActiveDuration: tooltipGroupActiveDuration,
           child: Container(
             color: background ?? theme.colors.background,
             padding: padded ? const .all(16) : null,
@@ -156,7 +155,6 @@ class TestScaffold extends StatelessWidget {
         platform: platform,
         data: theme,
         textDirection: textDirection,
-        tooltipGroupActiveDuration: tooltipGroupActiveDuration,
         child: Container(
           color: background ?? theme.colors.background,
           padding: padded ? const .all(16) : null,

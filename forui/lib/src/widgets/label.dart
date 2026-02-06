@@ -248,6 +248,8 @@ abstract class _State<T extends _Label> extends State<T> with TickerProviderStat
 
   @override
   void dispose() {
+    _curvedFade.dispose();
+    _curvedSize.dispose();
     _fadeController.dispose();
     _sizeController.dispose();
     super.dispose();

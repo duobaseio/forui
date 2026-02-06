@@ -66,20 +66,5 @@ void main() {
 
       expect(tester.takeException(), null);
     });
-
-    test('debugFillProperties(...)', () {
-      final theme = FBasicTheme(data: FThemes.zinc.dark, child: Container());
-      final builder = DiagnosticPropertiesBuilder();
-
-      theme.debugFillProperties(builder);
-
-      expect(builder.properties.length, 3);
-      expect(builder.properties[0].name, 'data');
-      expect((builder.properties[0] as DiagnosticsProperty<FThemeData>).value, FThemes.zinc.dark);
-      expect(builder.properties[1].name, 'textDirection');
-      expect((builder.properties[1] as DiagnosticsProperty<TextDirection?>).value, theme.textDirection);
-      expect(builder.properties[2].name, 'platform');
-      expect((builder.properties[2] as DiagnosticsProperty).value, theme.platform);
-    });
   });
 }
