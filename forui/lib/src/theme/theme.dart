@@ -231,13 +231,7 @@ class FBasicTheme extends StatelessWidget {
   final Widget child;
 
   /// Creates a [FTheme] that applies [data] to all descendant widgets in [child].
-  const FBasicTheme({
-    required this.data,
-    required this.child,
-    this.textDirection,
-    this.platform,
-    super.key,
-  });
+  const FBasicTheme({required this.data, required this.child, this.textDirection, this.platform, super.key});
 
   @override
   Widget build(BuildContext context) => FAdaptiveScope(
