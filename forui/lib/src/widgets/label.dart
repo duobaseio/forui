@@ -31,7 +31,7 @@ part 'label.design.dart';
 ///
 /// {@template forui.widgets.label.error_transition}
 /// ## Error transition caveats
-/// Error transitions require either a [label] or [description] to function. In the rare case where only an [error] is
+/// Error transitions require either a [label] or [description] to function. In the rare case where only an `error` is
 /// needed, set [label] or [description] to an empty widget, e.g. [SizedBox.shrink].
 /// {@endtemplate}
 ///
