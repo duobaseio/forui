@@ -5,6 +5,18 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 final show = showFPersistentSheet(
+  // {@category "Layout"}
+  mainAxisMaxRatio: 9 / 16,
+  constraints: const BoxConstraints(),
+  useSafeArea: false,
+  resizeToAvoidBottomInset: true,
+  anchorPoint: null,
+  // {@endcategory}
+  // {@category "Behavior"}
+  draggable: true,
+  keepAliveOffstage: false,
+  onClosing: () {},
+  // {@endcategory}
   // {@category "Core"}
   context: context,
   style: const .delta(flingVelocity: 700),
@@ -19,18 +31,6 @@ final show = showFPersistentSheet(
       ],
     ),
   ),
-  // {@endcategory}
-  // {@category "Layout"}
-  mainAxisMaxRatio: 9 / 16,
-  constraints: const BoxConstraints(),
-  useSafeArea: false,
-  resizeToAvoidBottomInset: true,
-  anchorPoint: null,
-  // {@endcategory}
-  // {@category "Behavior"}
-  draggable: true,
-  keepAliveOffstage: false,
-  onClosing: () {},
   // {@endcategory}
 );
 

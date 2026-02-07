@@ -5,10 +5,6 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 final dateField = FDateField(
-  // {@category "Core"}
-  style: const .delta(fieldStyle: .delta()),
-  enabled: true,
-  // {@endcategory}
   // {@category "Control"}
   control: const .managed(),
   // {@endcategory}
@@ -47,13 +43,13 @@ final dateField = FDateField(
   autofocus: false,
   focusNode: null,
   // {@endcategory}
-);
-
-final calendar = FDateField.calendar(
   // {@category "Core"}
   style: const .delta(fieldStyle: .delta()),
   enabled: true,
   // {@endcategory}
+);
+
+final calendar = FDateField.calendar(
   // {@category "Control"}
   control: const .managed(),
   // {@endcategory}
@@ -103,13 +99,13 @@ final calendar = FDateField.calendar(
   autofocus: false,
   focusNode: null,
   // {@endcategory}
-);
-
-final input = FDateField.input(
   // {@category "Core"}
   style: const .delta(fieldStyle: .delta()),
   enabled: true,
   // {@endcategory}
+);
+
+final input = FDateField.input(
   // {@category "Control"}
   control: const .managed(),
   // {@endcategory}
@@ -141,6 +137,10 @@ final input = FDateField.input(
   // {@category "Accessibility"}
   autofocus: false,
   focusNode: null,
+  // {@endcategory}
+  // {@category "Core"}
+  style: const .delta(fieldStyle: .delta()),
+  enabled: true,
   // {@endcategory}
 );
 

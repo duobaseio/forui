@@ -5,6 +5,11 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 final sidebar = FSidebar(
+  // {@category "Accessibility"}
+  autofocus: false,
+  focusNode: null,
+  traversalEdgeBehavior: null,
+  // {@endcategory}
   // {@category "Core"}
   style: const .delta(headerPadding: .fromLTRB(0, 16, 0, 0)),
   header: const Text('Header'),
@@ -19,14 +24,14 @@ final sidebar = FSidebar(
   ],
   footer: const Text('Footer'),
   // {@endcategory}
+);
+
+final sidebarBuilder = FSidebar.builder(
   // {@category "Accessibility"}
   autofocus: false,
   focusNode: null,
   traversalEdgeBehavior: null,
   // {@endcategory}
-);
-
-final sidebarBuilder = FSidebar.builder(
   // {@category "Core"}
   style: const .delta(headerPadding: .fromLTRB(0, 16, 0, 0)),
   header: const Text('Header'),
@@ -34,14 +39,14 @@ final sidebarBuilder = FSidebar.builder(
   itemCount: 10,
   footer: const Text('Footer'),
   // {@endcategory}
+);
+
+final sidebarRaw = FSidebar.raw(
   // {@category "Accessibility"}
   autofocus: false,
   focusNode: null,
   traversalEdgeBehavior: null,
   // {@endcategory}
-);
-
-final sidebarRaw = FSidebar.raw(
   // {@category "Core"}
   style: const .delta(headerPadding: .fromLTRB(0, 16, 0, 0)),
   header: const Text('Header'),
@@ -50,14 +55,15 @@ final sidebarRaw = FSidebar.raw(
   ),
   footer: const Text('Footer'),
   // {@endcategory}
-  // {@category "Accessibility"}
-  autofocus: false,
-  focusNode: null,
-  traversalEdgeBehavior: null,
-  // {@endcategory}
 );
 
 final sidebarGroup = FSidebarGroup(
+  // {@category "Callbacks"}
+  onActionHoverChange: (hovered) {},
+  onActionVariantChange: (previous, current) {},
+  onActionPress: () {},
+  onActionLongPress: () {},
+  // {@endcategory}
   // {@category "Core"}
   style: const .delta(padding: .symmetric(horizontal: 8)),
   label: const Text('Navigation'),
@@ -67,15 +73,19 @@ final sidebarGroup = FSidebarGroup(
     FSidebarItem(label: const Text('Settings'), onPress: () {}),
   ],
   // {@endcategory}
-  // {@category "Callbacks"}
-  onActionHoverChange: (hovered) {},
-  onActionVariantChange: (previous, current) {},
-  onActionPress: () {},
-  onActionLongPress: () {},
-  // {@endcategory}
 );
 
 final sidebarItem = FSidebarItem(
+  // {@category "Accessibility"}
+  autofocus: false,
+  focusNode: null,
+  // {@endcategory}
+  // {@category "Callbacks"}
+  onPress: () {},
+  onLongPress: () {},
+  onHoverChange: (hovered) {},
+  onVariantChange: (previous, current) {},
+  // {@endcategory}
   // {@category "Core"}
   style: const .delta(padding: .symmetric(horizontal: 8)),
   selected: false,
@@ -86,15 +96,5 @@ final sidebarItem = FSidebarItem(
     FSidebarItem(label: const Text('Nested Item 1'), onPress: () {}),
     FSidebarItem(label: const Text('Nested Item 2'), onPress: () {}),
   ],
-  // {@endcategory}
-  // {@category "Accessibility"}
-  autofocus: false,
-  focusNode: null,
-  // {@endcategory}
-  // {@category "Callbacks"}
-  onPress: () {},
-  onLongPress: () {},
-  onHoverChange: (hovered) {},
-  onVariantChange: (previous, current) {},
   // {@endcategory}
 );

@@ -5,12 +5,6 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 final slider = FSlider(
-  // {@category "Core"}
-  style: const .delta(thumbSize: 20),
-  enabled: true,
-  layout: .ltr,
-  marks: const [FSliderMark(value: 0), FSliderMark(value: 0.5), FSliderMark(value: 1)],
-  // {@endcategory}
   // {@category "Control"}
   control: const .managedContinuous(),
   // {@endcategory}
@@ -39,6 +33,12 @@ final slider = FSlider(
   // {@endcategory}
   // {@category "Callbacks"}
   onEnd: (value) {},
+  // {@endcategory}
+  // {@category "Core"}
+  style: const .delta(thumbSize: 20),
+  enabled: true,
+  layout: .ltr,
+  marks: const [FSliderMark(value: 0), FSliderMark(value: 0.5), FSliderMark(value: 1)],
   // {@endcategory}
 );
 

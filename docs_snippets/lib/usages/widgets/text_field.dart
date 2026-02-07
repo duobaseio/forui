@@ -5,14 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
 final textField = FTextField(
-  // {@category "Core"}
-  style: const .delta(contentPadding: .symmetric(horizontal: 10)),
-  enabled: true,
-  label: const Text('Label'),
-  hint: 'Enter text...',
-  description: const Text('Description'),
-  error: null,
-  // {@endcategory}
   // {@category "Control"}
   control: const .managed(),
   // {@endcategory}
@@ -82,17 +74,17 @@ final textField = FTextField(
   onSubmit: (value) {},
   onAppPrivateCommand: (action, data) {},
   // {@endcategory}
-);
-
-final textFieldEmail = FTextField.email(
   // {@category "Core"}
   style: const .delta(contentPadding: .symmetric(horizontal: 10)),
   enabled: true,
-  label: const Text('Email'),
-  hint: 'Enter email...',
+  label: const Text('Label'),
+  hint: 'Enter text...',
   description: const Text('Description'),
   error: null,
   // {@endcategory}
+);
+
+final textFieldEmail = FTextField.email(
   // {@category "Control"}
   control: const .managed(),
   // {@endcategory}
@@ -162,18 +154,17 @@ final textFieldEmail = FTextField.email(
   onSubmit: (value) {},
   onAppPrivateCommand: (action, data) {},
   // {@endcategory}
-);
-
-final textFieldMultiline = FTextField.multiline(
   // {@category "Core"}
   style: const .delta(contentPadding: .symmetric(horizontal: 10)),
-  statesController: null,
   enabled: true,
-  label: const Text('Label'),
-  hint: 'Enter text...',
+  label: const Text('Email'),
+  hint: 'Enter email...',
   description: const Text('Description'),
   error: null,
   // {@endcategory}
+);
+
+final textFieldMultiline = FTextField.multiline(
   // {@category "Control"}
   control: const .managed(),
   // {@endcategory}
@@ -242,17 +233,18 @@ final textFieldMultiline = FTextField.multiline(
   onSubmit: (value) {},
   onAppPrivateCommand: (action, data) {},
   // {@endcategory}
-);
-
-final textFieldPassword = FTextField.password(
   // {@category "Core"}
   style: const .delta(contentPadding: .symmetric(horizontal: 10)),
+  statesController: null,
   enabled: true,
-  label: const Text('Password'),
-  hint: 'Enter password...',
+  label: const Text('Label'),
+  hint: 'Enter text...',
   description: const Text('Description'),
   error: null,
   // {@endcategory}
+);
+
+final textFieldPassword = FTextField.password(
   // {@category "Control"}
   control: const .managed(),
   // {@endcategory}
@@ -323,6 +315,14 @@ final textFieldPassword = FTextField.password(
   onEditingComplete: () {},
   onSubmit: (value) {},
   onAppPrivateCommand: (action, data) {},
+  // {@endcategory}
+  // {@category "Core"}
+  style: const .delta(contentPadding: .symmetric(horizontal: 10)),
+  enabled: true,
+  label: const Text('Password'),
+  hint: 'Enter password...',
+  description: const Text('Description'),
+  error: null,
   // {@endcategory}
 );
 

@@ -6,11 +6,6 @@ import 'package:forui/forui.dart';
 import 'package:intl/intl.dart';
 
 final timeField = FTimeField(
-  // {@category "Core"}
-  style: const .delta(fieldStyle: .delta(labelPadding: .symmetric(vertical: 7))),
-  enabled: true,
-  hour24: false,
-  // {@endcategory}
   // {@category "Control"}
   control: const .managed(),
   // {@endcategory}
@@ -44,14 +39,14 @@ final timeField = FTimeField(
   autofocus: false,
   focusNode: null,
   // {@endcategory}
-);
-
-final timeFieldPicker = FTimeField.picker(
   // {@category "Core"}
   style: const .delta(fieldStyle: .delta(labelPadding: .symmetric(vertical: 7))),
   enabled: true,
   hour24: false,
   // {@endcategory}
+);
+
+final timeFieldPicker = FTimeField.picker(
   // {@category "Control"}
   control: const .managed(),
   // {@endcategory}
@@ -96,6 +91,11 @@ final timeFieldPicker = FTimeField.picker(
   // {@category "Accessibility"}
   autofocus: false,
   focusNode: null,
+  // {@endcategory}
+  // {@category "Core"}
+  style: const .delta(fieldStyle: .delta(labelPadding: .symmetric(vertical: 7))),
+  enabled: true,
+  hour24: false,
   // {@endcategory}
 );
 

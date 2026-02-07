@@ -4,14 +4,6 @@
 import 'package:forui/forui.dart';
 
 final calendar = FCalendar(
-  // {@category "Core"}
-  style: const .delta(padding: .zero),
-  start: .utc(1900),
-  end: .utc(2100),
-  today: .now(),
-  initialMonth: .now(),
-  initialType: .day,
-  // {@endcategory}
   // {@category "Control"}
   control: .managedDate(),
   // {@endcategory}
@@ -22,6 +14,14 @@ final calendar = FCalendar(
   onMonthChange: (month) {},
   onPress: (date) {},
   onLongPress: (date) {},
+  // {@endcategory}
+  // {@category "Core"}
+  style: const .delta(padding: .zero),
+  start: .utc(1900),
+  end: .utc(2100),
+  today: .now(),
+  initialMonth: .now(),
+  initialType: .day,
   // {@endcategory}
 );
 

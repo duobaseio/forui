@@ -8,6 +8,21 @@ final item = FItem(
   // {@category "Variants"}
   variants: const {},
   // {@endcategory}
+  // {@category "Accessibility"}
+  autofocus: false,
+  focusNode: null,
+  onFocusChange: (focused) {},
+  semanticsLabel: 'Item',
+  shortcuts: null,
+  actions: null,
+  // {@endcategory}
+  // {@category "Callbacks"}
+  onLongPress: () {},
+  onSecondaryPress: () {},
+  onSecondaryLongPress: () {},
+  onHoverChange: (hovered) {},
+  onVariantChange: (previous, current) {},
+  // {@endcategory}
   // {@category "Core"}
   style: const .delta(margin: .zero),
   enabled: true,
@@ -19,6 +34,12 @@ final item = FItem(
   details: const Text('Details'),
   suffix: const Icon(FIcons.chevronRight),
   // {@endcategory}
+);
+
+final raw = FItem.raw(
+  // {@category "Variants"}
+  variants: const {},
+  // {@endcategory}
   // {@category "Accessibility"}
   autofocus: false,
   focusNode: null,
@@ -33,12 +54,6 @@ final item = FItem(
   onSecondaryLongPress: () {},
   onHoverChange: (hovered) {},
   onVariantChange: (previous, current) {},
-  // {@endcategory}
-);
-
-final raw = FItem.raw(
-  // {@category "Variants"}
-  variants: const {},
   // {@endcategory}
   // {@category "Core"}
   style: const .delta(margin: .zero),
@@ -47,21 +62,6 @@ final raw = FItem.raw(
   onPress: () {},
   child: const Text('Content'),
   prefix: const Icon(FIcons.user),
-  // {@endcategory}
-  // {@category "Accessibility"}
-  autofocus: false,
-  focusNode: null,
-  onFocusChange: (focused) {},
-  semanticsLabel: 'Item',
-  shortcuts: null,
-  actions: null,
-  // {@endcategory}
-  // {@category "Callbacks"}
-  onLongPress: () {},
-  onSecondaryPress: () {},
-  onSecondaryLongPress: () {},
-  onHoverChange: (hovered) {},
-  onVariantChange: (previous, current) {},
   // {@endcategory}
 );
 

@@ -5,6 +5,16 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 final tileGroup = FTileGroup(
+  // {@category "Scroll"}
+  scrollController: null,
+  physics: const ClampingScrollPhysics(),
+  cacheExtent: null,
+  maxHeight: double.infinity,
+  dragStartBehavior: .start,
+  // {@endcategory}
+  // {@category "Accessibility"}
+  semanticsLabel: 'Tile Group',
+  // {@endcategory}
   // {@category "Core"}
   style: const .delta(dividerWidth: 1),
   enabled: true,
@@ -17,6 +27,9 @@ final tileGroup = FTileGroup(
     .tile(title: const Text('Tile 2'), onPress: () {}),
   ],
   // {@endcategory}
+);
+
+final tileGroupBuilder = FTileGroup.builder(
   // {@category "Scroll"}
   scrollController: null,
   physics: const ClampingScrollPhysics(),
@@ -27,9 +40,6 @@ final tileGroup = FTileGroup(
   // {@category "Accessibility"}
   semanticsLabel: 'Tile Group',
   // {@endcategory}
-);
-
-final tileGroupBuilder = FTileGroup.builder(
   // {@category "Core"}
   style: const .delta(dividerWidth: 1),
   enabled: true,
@@ -40,6 +50,9 @@ final tileGroupBuilder = FTileGroup.builder(
   tileBuilder: (context, index) => FTile(title: Text('Tile $index'), onPress: () {}),
   count: 10,
   // {@endcategory}
+);
+
+final tileGroupMerge = FTileGroup.merge(
   // {@category "Scroll"}
   scrollController: null,
   physics: const ClampingScrollPhysics(),
@@ -50,9 +63,6 @@ final tileGroupBuilder = FTileGroup.builder(
   // {@category "Accessibility"}
   semanticsLabel: 'Tile Group',
   // {@endcategory}
-);
-
-final tileGroupMerge = FTileGroup.merge(
   // {@category "Core"}
   style: const .delta(dividerWidth: 1),
   enabled: true,
@@ -68,15 +78,5 @@ final tileGroupMerge = FTileGroup.merge(
       children: [.tile(title: const Text('Group 2 Tile'), onPress: () {})],
     ),
   ],
-  // {@endcategory}
-  // {@category "Scroll"}
-  scrollController: null,
-  physics: const ClampingScrollPhysics(),
-  cacheExtent: null,
-  maxHeight: double.infinity,
-  dragStartBehavior: .start,
-  // {@endcategory}
-  // {@category "Accessibility"}
-  semanticsLabel: 'Tile Group',
   // {@endcategory}
 );

@@ -5,12 +5,6 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 final tooltip = FTooltip(
-  // {@category "Core"}
-  style: const .delta(padding: .symmetric(horizontal: 14, vertical: 10)),
-  tipBuilder: (context, controller) => const Text('Tooltip content'),
-  builder: (context, controller, child) => child!,
-  child: const Text('Hover me'),
-  // {@endcategory}
   // {@category "Control"}
   control: const .managed(),
   // {@endcategory}
@@ -26,6 +20,12 @@ final tooltip = FTooltip(
   hoverExitDuration: .zero,
   longPress: true,
   longPressExitDuration: const Duration(milliseconds: 1500),
+  // {@endcategory}
+  // {@category "Core"}
+  style: const .delta(padding: .symmetric(horizontal: 14, vertical: 10)),
+  tipBuilder: (context, controller) => const Text('Tooltip content'),
+  builder: (context, controller, child) => child!,
+  child: const Text('Hover me'),
   // {@endcategory}
 );
 

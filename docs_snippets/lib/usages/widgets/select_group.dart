@@ -5,15 +5,6 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 final selectGroup = FSelectGroup<String>(
-  // {@category "Core"}
-  style: const .delta(itemPadding: .symmetric(vertical: 2)),
-  enabled: true,
-  children: [
-    .checkbox(value: 'apple', label: const Text('Apple')),
-    .checkbox(value: 'banana', label: const Text('Banana')),
-    .checkbox(value: 'cherry', label: const Text('Cherry')),
-  ],
-  // {@endcategory}
   // {@category "Control"}
   control: const .managed(),
   // {@endcategory}
@@ -27,26 +18,24 @@ final selectGroup = FSelectGroup<String>(
   validator: (values) => null,
   errorBuilder: FFormFieldProperties.defaultErrorBuilder,
   // {@endcategory}
+  // {@category "Core"}
+  style: const .delta(itemPadding: .symmetric(vertical: 2)),
+  enabled: true,
+  children: [
+    .checkbox(value: 'apple', label: const Text('Apple')),
+    .checkbox(value: 'banana', label: const Text('Banana')),
+    .checkbox(value: 'cherry', label: const Text('Cherry')),
+  ],
+  // {@endcategory}
 );
 
 final selectGroupCheckbox = FSelectGroupItemMixin.checkbox<String>(
-  // {@category "Core"}
-  style: null,
-  value: 'apple',
-  enabled: true,
-  label: const Text('Apple'),
-  description: const Text('A red fruit'),
-  error: null,
-  // {@endcategory}
   // {@category "Accessibility"}
   autofocus: false,
   focusNode: null,
   onFocusChange: (focused) {},
   semanticsLabel: 'Apple checkbox',
   // {@endcategory}
-);
-
-final selectGroupRadio = FSelectGroupItemMixin.radio<String>(
   // {@category "Core"}
   style: null,
   value: 'apple',
@@ -55,11 +44,22 @@ final selectGroupRadio = FSelectGroupItemMixin.radio<String>(
   description: const Text('A red fruit'),
   error: null,
   // {@endcategory}
+);
+
+final selectGroupRadio = FSelectGroupItemMixin.radio<String>(
   // {@category "Accessibility"}
   autofocus: false,
   focusNode: null,
   onFocusChange: (focused) {},
   semanticsLabel: 'Apple radio',
+  // {@endcategory}
+  // {@category "Core"}
+  style: null,
+  value: 'apple',
+  enabled: true,
+  label: const Text('Apple'),
+  description: const Text('A red fruit'),
+  error: null,
   // {@endcategory}
 );
 

@@ -8,12 +8,6 @@ final button = FButton(
   // {@category "Variants"}
   variants: const {},
   // {@endcategory}
-  // {@category "Core"}
-  style: const .inherit(),
-  selected: false,
-  onPress: () {},
-  child: const Text('Button'),
-  // {@endcategory}
   // {@category "Content"}
   prefix: const Icon(FIcons.mail),
   suffix: null,
@@ -36,11 +30,31 @@ final button = FButton(
   onHoverChange: (hovered) {},
   onVariantChange: (previous, current) {},
   // {@endcategory}
+  // {@category "Core"}
+  style: const .inherit(),
+  selected: false,
+  onPress: () {},
+  child: const Text('Button'),
+  // {@endcategory}
 );
 
 final icon = FButton.icon(
   // {@category "Variants"}
   variants: {.outline},
+  // {@endcategory}
+  // {@category "Accessibility"}
+  autofocus: false,
+  focusNode: null,
+  onFocusChange: (focused) {},
+  shortcuts: null,
+  actions: null,
+  // {@endcategory}
+  // {@category "Callbacks"}
+  onLongPress: null,
+  onSecondaryPress: null,
+  onSecondaryLongPress: null,
+  onHoverChange: (hovered) {},
+  onVariantChange: (previous, current) {},
   // {@endcategory}
   // {@category "Core"}
   style: const .inherit(),
@@ -48,32 +62,12 @@ final icon = FButton.icon(
   onPress: () {},
   child: const Icon(FIcons.mail),
   // {@endcategory}
-  // {@category "Accessibility"}
-  autofocus: false,
-  focusNode: null,
-  onFocusChange: (focused) {},
-  shortcuts: null,
-  actions: null,
-  // {@endcategory}
-  // {@category "Callbacks"}
-  onLongPress: null,
-  onSecondaryPress: null,
-  onSecondaryLongPress: null,
-  onHoverChange: (hovered) {},
-  onVariantChange: (previous, current) {},
-  // {@endcategory}
 );
 
 final raw = FButton.raw(
   // {@category "Variants"}
   variants: const {},
   // {@endcategory}
-  // {@category "Core"}
-  style: const .inherit(),
-  selected: false,
-  onPress: () {},
-  child: const Text('Button'),
-  // {@endcategory}
   // {@category "Accessibility"}
   autofocus: false,
   focusNode: null,
@@ -87,6 +81,12 @@ final raw = FButton.raw(
   onSecondaryLongPress: null,
   onHoverChange: (hovered) {},
   onVariantChange: (previous, current) {},
+  // {@endcategory}
+  // {@category "Core"}
+  style: const .inherit(),
+  selected: false,
+  onPress: () {},
+  child: const Text('Button'),
   // {@endcategory}
 );
 

@@ -5,13 +5,13 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 const pagination = FPagination(
+  // {@category "Control"}
+  control: .managed(),
+  // {@endcategory}
   // {@category "Core"}
   style: .delta(itemPadding: .symmetric(horizontal: 2)),
   previous: Icon(FIcons.chevronLeft),
   next: Icon(FIcons.chevronRight),
-  // {@endcategory}
-  // {@category "Control"}
-  control: .managed(),
   // {@endcategory}
 );
 

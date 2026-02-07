@@ -5,6 +5,16 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 final itemGroup = FItemGroup(
+  // {@category "Scroll"}
+  scrollController: null,
+  cacheExtent: null,
+  maxHeight: .infinity,
+  dragStartBehavior: .start,
+  physics: const ClampingScrollPhysics(),
+  // {@endcategory}
+  // {@category "Accessibility"}
+  semanticsLabel: 'Item group',
+  // {@endcategory}
   // {@category "Core"}
   style: const .delta(spacing: 4),
   enabled: true,
@@ -14,6 +24,9 @@ final itemGroup = FItemGroup(
     .item(title: const Text('Item 2'), onPress: () {}),
   ],
   // {@endcategory}
+);
+
+final builder = FItemGroup.builder(
   // {@category "Scroll"}
   scrollController: null,
   cacheExtent: null,
@@ -24,9 +37,6 @@ final itemGroup = FItemGroup(
   // {@category "Accessibility"}
   semanticsLabel: 'Item group',
   // {@endcategory}
-);
-
-final builder = FItemGroup.builder(
   // {@category "Core"}
   style: const .delta(spacing: 4),
   enabled: true,
@@ -34,6 +44,9 @@ final builder = FItemGroup.builder(
   itemBuilder: (context, index) => FItem(title: Text('Item $index'), onPress: () {}),
   count: 10,
   // {@endcategory}
+);
+
+final merge = FItemGroup.merge(
   // {@category "Scroll"}
   scrollController: null,
   cacheExtent: null,
@@ -44,9 +57,6 @@ final builder = FItemGroup.builder(
   // {@category "Accessibility"}
   semanticsLabel: 'Item group',
   // {@endcategory}
-);
-
-final merge = FItemGroup.merge(
   // {@category "Core"}
   style: const .delta(spacing: 4),
   enabled: true,
@@ -59,15 +69,5 @@ final merge = FItemGroup.merge(
       children: [.item(title: const Text('Group 2 Item'), onPress: () {})],
     ),
   ],
-  // {@endcategory}
-  // {@category "Scroll"}
-  scrollController: null,
-  cacheExtent: null,
-  maxHeight: .infinity,
-  dragStartBehavior: .start,
-  physics: const ClampingScrollPhysics(),
-  // {@endcategory}
-  // {@category "Accessibility"}
-  semanticsLabel: 'Item group',
   // {@endcategory}
 );

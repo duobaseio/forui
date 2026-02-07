@@ -5,12 +5,6 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 final select = FSelect<String>(
-  // {@category "Core"}
-  style: const .delta(emptyTextStyle: .delta()),
-  enabled: true,
-  contentScrollHandles: true,
-  items: const {'Apple': 'apple', 'Banana': 'banana', 'Cherry': 'cherry'},
-  // {@endcategory}
   // {@category "Control"}
   control: const .managed(),
   // {@endcategory}
@@ -59,9 +53,63 @@ final select = FSelect<String>(
   autofocus: false,
   focusNode: null,
   // {@endcategory}
+  // {@category "Core"}
+  style: const .delta(emptyTextStyle: .delta()),
+  enabled: true,
+  contentScrollHandles: true,
+  items: const {'Apple': 'apple', 'Banana': 'banana', 'Cherry': 'cherry'},
+  // {@endcategory}
 );
 
 final selectRich = FSelect<String>.rich(
+  // {@category "Control"}
+  control: const .managed(),
+  // {@endcategory}
+  // {@category "Popover Control"}
+  popoverControl: const .managed(),
+  // {@endcategory}
+  // {@category "Form"}
+  label: const Text('Label'),
+  description: const Text('Description'),
+  onSaved: (value) {},
+  onReset: () {},
+  autovalidateMode: .onUnfocus,
+  forceErrorText: null,
+  validator: (value) => null,
+  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
+  // {@endcategory}
+  // {@category "Field"}
+  hint: 'Select a fruit',
+  textAlign: .start,
+  textAlignVertical: null,
+  textDirection: null,
+  expands: false,
+  mouseCursor: .defer,
+  canRequestFocus: true,
+  clearable: false,
+  builder: (context, style, states, child) => child,
+  prefixBuilder: null,
+  suffixBuilder: FSelect.defaultIconBuilder,
+  // {@endcategory}
+  // {@category "Content"}
+  contentAnchor: AlignmentDirectional.topStart,
+  fieldAnchor: AlignmentDirectional.bottomStart,
+  contentConstraints: const FAutoWidthPortalConstraints(maxHeight: 300),
+  contentSpacing: const .spacing(4),
+  contentOverflow: .flip,
+  contentOffset: .zero,
+  contentHideRegion: .excludeChild,
+  contentGroupId: null,
+  autoHide: true,
+  contentEmptyBuilder: FSelect.defaultContentEmptyBuilder,
+  contentScrollController: null,
+  contentPhysics: const ClampingScrollPhysics(),
+  contentDivider: .none,
+  // {@endcategory}
+  // {@category "Accessibility"}
+  autofocus: false,
+  focusNode: null,
+  // {@endcategory}
   // {@category "Core"}
   style: const .delta(emptyTextStyle: .delta()),
   enabled: true,
@@ -73,6 +121,9 @@ final selectRich = FSelect<String>.rich(
     .section(label: const Text('More'), items: {'Cherry': 'cherry', 'Date': 'date', 'Elderberry': 'elderberry'}),
   ],
   // {@endcategory}
+);
+
+final selectSearch = FSelect<String>.search(
   // {@category "Control"}
   control: const .managed(),
   // {@endcategory}
@@ -90,7 +141,7 @@ final selectRich = FSelect<String>.rich(
   errorBuilder: FFormFieldProperties.defaultErrorBuilder,
   // {@endcategory}
   // {@category "Field"}
-  hint: 'Select a fruit',
+  hint: 'Search fruits',
   textAlign: .start,
   textAlignVertical: null,
   textDirection: null,
@@ -103,6 +154,7 @@ final selectRich = FSelect<String>.rich(
   suffixBuilder: FSelect.defaultIconBuilder,
   // {@endcategory}
   // {@category "Content"}
+  searchFieldProperties: const FSelectSearchFieldProperties(),
   contentAnchor: AlignmentDirectional.topStart,
   fieldAnchor: AlignmentDirectional.bottomStart,
   contentConstraints: const FAutoWidthPortalConstraints(maxHeight: 300),
@@ -113,6 +165,8 @@ final selectRich = FSelect<String>.rich(
   contentGroupId: null,
   autoHide: true,
   contentEmptyBuilder: FSelect.defaultContentEmptyBuilder,
+  contentLoadingBuilder: FSelect.defaultContentLoadingBuilder,
+  contentErrorBuilder: null,
   contentScrollController: null,
   contentPhysics: const ClampingScrollPhysics(),
   contentDivider: .none,
@@ -121,9 +175,6 @@ final selectRich = FSelect<String>.rich(
   autofocus: false,
   focusNode: null,
   // {@endcategory}
-);
-
-final selectSearch = FSelect<String>.search(
   // {@category "Core"}
   style: const .delta(emptyTextStyle: .delta()),
   enabled: true,
@@ -131,6 +182,9 @@ final selectSearch = FSelect<String>.search(
   filter: (query) => ['apple', 'banana', 'cherry'].where((e) => e.startsWith(query)),
   items: const {'Apple': 'apple', 'Banana': 'banana', 'Cherry': 'cherry'},
   // {@endcategory}
+);
+
+final selectSearchBuilder = FSelect<String>.searchBuilder(
   // {@category "Control"}
   control: const .managed(),
   // {@endcategory}
@@ -171,8 +225,8 @@ final selectSearch = FSelect<String>.search(
   contentHideRegion: .excludeChild,
   contentGroupId: null,
   autoHide: true,
-  contentEmptyBuilder: FSelect.defaultContentEmptyBuilder,
   contentLoadingBuilder: FSelect.defaultContentLoadingBuilder,
+  contentEmptyBuilder: FSelect.defaultContentEmptyBuilder,
   contentErrorBuilder: null,
   contentScrollController: null,
   contentPhysics: const ClampingScrollPhysics(),
@@ -182,9 +236,6 @@ final selectSearch = FSelect<String>.search(
   autofocus: false,
   focusNode: null,
   // {@endcategory}
-);
-
-final selectSearchBuilder = FSelect<String>.searchBuilder(
   // {@category "Core"}
   style: const .delta(emptyTextStyle: .delta()),
   enabled: true,
@@ -192,57 +243,6 @@ final selectSearchBuilder = FSelect<String>.searchBuilder(
   format: (value) => value,
   filter: (query) => ['apple', 'banana', 'cherry'].where((e) => e.startsWith(query)),
   contentBuilder: (context, style, values) => [for (final value in values) .item(title: Text(value), value: value)],
-  // {@endcategory}
-  // {@category "Control"}
-  control: const .managed(),
-  // {@endcategory}
-  // {@category "Popover Control"}
-  popoverControl: const .managed(),
-  // {@endcategory}
-  // {@category "Form"}
-  label: const Text('Label'),
-  description: const Text('Description'),
-  onSaved: (value) {},
-  onReset: () {},
-  autovalidateMode: .onUnfocus,
-  forceErrorText: null,
-  validator: (value) => null,
-  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
-  // {@endcategory}
-  // {@category "Field"}
-  hint: 'Search fruits',
-  textAlign: .start,
-  textAlignVertical: null,
-  textDirection: null,
-  expands: false,
-  mouseCursor: .defer,
-  canRequestFocus: true,
-  clearable: false,
-  builder: (context, style, states, child) => child,
-  prefixBuilder: null,
-  suffixBuilder: FSelect.defaultIconBuilder,
-  // {@endcategory}
-  // {@category "Content"}
-  searchFieldProperties: const FSelectSearchFieldProperties(),
-  contentAnchor: AlignmentDirectional.topStart,
-  fieldAnchor: AlignmentDirectional.bottomStart,
-  contentConstraints: const FAutoWidthPortalConstraints(maxHeight: 300),
-  contentSpacing: const .spacing(4),
-  contentOverflow: .flip,
-  contentOffset: .zero,
-  contentHideRegion: .excludeChild,
-  contentGroupId: null,
-  autoHide: true,
-  contentLoadingBuilder: FSelect.defaultContentLoadingBuilder,
-  contentEmptyBuilder: FSelect.defaultContentEmptyBuilder,
-  contentErrorBuilder: null,
-  contentScrollController: null,
-  contentPhysics: const ClampingScrollPhysics(),
-  contentDivider: .none,
-  // {@endcategory}
-  // {@category "Accessibility"}
-  autofocus: false,
-  focusNode: null,
   // {@endcategory}
 );
 

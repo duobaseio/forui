@@ -3,13 +3,6 @@
 import 'package:forui/forui.dart';
 
 final lineCalendar = FLineCalendar(
-  // {@category "Core"}
-  style: const .delta(padding: .zero),
-  start: .utc(1900),
-  end: .utc(2100),
-  today: .now(),
-  builder: (context, data, child) => child!,
-  // {@endcategory}
   // {@category "Control"}
   control: const .managed(),
   // {@endcategory}
@@ -19,6 +12,13 @@ final lineCalendar = FLineCalendar(
   cacheExtent: null,
   keyboardDismissBehavior: .manual,
   physics: null,
+  // {@endcategory}
+  // {@category "Core"}
+  style: const .delta(padding: .zero),
+  start: .utc(1900),
+  end: .utc(2100),
+  today: .now(),
+  builder: (context, data, child) => child!,
   // {@endcategory}
 );
 

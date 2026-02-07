@@ -5,12 +5,6 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 final show = showFSheet(
-  // {@category "Core"}
-  context: context,
-  style: const .delta(flingVelocity: 700),
-  side: .btt,
-  builder: (context) => const Padding(padding: .all(16), child: Text('Sheet content')),
-  // {@endcategory}
   // {@category "Layout"}
   mainAxisMaxRatio: 9 / 16,
   constraints: const BoxConstraints(),
@@ -31,14 +25,15 @@ final show = showFSheet(
   anchorPoint: null,
   transitionAnimationController: null,
   // {@endcategory}
-);
-
-final route = FModalSheetRoute<void>(
   // {@category "Core"}
-  style: const FModalSheetStyle(),
+  context: context,
+  style: const .delta(flingVelocity: 700),
   side: .btt,
   builder: (context) => const Padding(padding: .all(16), child: Text('Sheet content')),
   // {@endcategory}
+);
+
+final route = FModalSheetRoute<void>(
   // {@category "Layout"}
   mainAxisMaxRatio: 9 / 16,
   constraints: const BoxConstraints(),
@@ -59,6 +54,11 @@ final route = FModalSheetRoute<void>(
   settings: null,
   anchorPoint: null,
   transitionAnimationController: null,
+  // {@endcategory}
+  // {@category "Core"}
+  style: const FModalSheetStyle(),
+  side: .btt,
+  builder: (context) => const Padding(padding: .all(16), child: Text('Sheet content')),
   // {@endcategory}
 );
 

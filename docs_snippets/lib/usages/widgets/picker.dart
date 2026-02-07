@@ -5,6 +5,9 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 final picker = FPicker(
+  // {@category "Control"}
+  control: const .managed(),
+  // {@endcategory}
   // {@category "Core"}
   style: const .delta(spacing: 5),
   children: [
@@ -14,35 +17,32 @@ final picker = FPicker(
   ],
   debugLabel: '',
   // {@endcategory}
-  // {@category "Control"}
-  control: const .managed(),
-  // {@endcategory}
 );
 
 final pickerWheel = FPickerWheel(
+  // {@category "Accessibility"}
+  autofocus: false,
+  focusNode: null,
+  onFocusChange: (focused) {},
+  // {@endcategory}
   // {@category "Core"}
   loop: false,
   flex: 1,
   itemExtent: null,
   children: [for (var i = 1; i <= 12; i++) Text('$i')],
   // {@endcategory}
+);
+
+final pickerWheelBuilder = FPickerWheel.builder(
   // {@category "Accessibility"}
   autofocus: false,
   focusNode: null,
   onFocusChange: (focused) {},
   // {@endcategory}
-);
-
-final pickerWheelBuilder = FPickerWheel.builder(
   // {@category "Core"}
   flex: 1,
   itemExtent: null,
   builder: (context, index) => Text('$index'),
-  // {@endcategory}
-  // {@category "Accessibility"}
-  autofocus: false,
-  focusNode: null,
-  onFocusChange: (focused) {},
   // {@endcategory}
 );
 

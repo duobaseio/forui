@@ -5,13 +5,6 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 final portal = FPortal(
-  // {@category "Core"}
-  controller: null,
-  portalBuilder: (context, controller) => const Text('Portal content'),
-  builder: (context, controller, child) => child!,
-  child: const Text('Child'),
-  barrier: null,
-  // {@endcategory}
   // {@category "Layout"}
   constraints: const FPortalConstraints(),
   portalAnchor: .topCenter,
@@ -20,5 +13,12 @@ final portal = FPortal(
   overflow: .flip,
   offset: .zero,
   viewInsets: null,
+  // {@endcategory}
+  // {@category "Core"}
+  controller: null,
+  portalBuilder: (context, controller) => const Text('Portal content'),
+  builder: (context, controller, child) => child!,
+  child: const Text('Child'),
+  barrier: null,
   // {@endcategory}
 );

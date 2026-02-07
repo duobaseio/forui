@@ -5,6 +5,50 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 final selectMenuTile = FSelectMenuTile<String>(
+  // {@category "Select Control"}
+  selectControl: const .managedRadio(),
+  // {@endcategory}
+  // {@category "Popover Control"}
+  popoverControl: const .managed(),
+  // {@endcategory}
+  // {@category "Form"}
+  label: const Text('Label'),
+  description: const Text('Description'),
+  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
+  onSaved: (values) {},
+  onReset: () {},
+  validator: (values) => null,
+  forceErrorText: null,
+  autovalidateMode: .disabled,
+  // {@endcategory}
+  // {@category "Layout"}
+  menuAnchor: .topRight,
+  tileAnchor: .bottomRight,
+  menuSpacing: const .spacing(4),
+  menuOverflow: .flip,
+  menuOffset: .zero,
+  menuHideRegion: .excludeChild,
+  menuOnTapHide: null,
+  menuGroupId: null,
+  // {@endcategory}
+  // {@category "Scroll"}
+  scrollController: null,
+  cacheExtent: null,
+  maxHeight: .infinity,
+  dragStartBehavior: .start,
+  physics: const ClampingScrollPhysics(),
+  // {@endcategory}
+  // {@category "Accessibility"}
+  autofocus: false,
+  menuFocusNode: null,
+  menuOnFocusChange: (focused) {},
+  menuTraversalEdgeBehavior: null,
+  menuBarrierSemanticsLabel: null,
+  menuBarrierSemanticsDismissible: true,
+  semanticsLabel: 'Select menu',
+  shortcuts: null,
+  actions: null,
+  // {@endcategory}
   // {@category "Core"}
   style: const .delta(labelPadding: .symmetric(vertical: 7)),
   enabled: true,
@@ -21,6 +65,9 @@ final selectMenuTile = FSelectMenuTile<String>(
     .tile(title: Text('Option 2'), value: 'option2'),
   ],
   // {@endcategory}
+);
+
+final selectMenuTileBuilder = FSelectMenuTile<String>.builder(
   // {@category "Select Control"}
   selectControl: const .managedRadio(),
   // {@endcategory}
@@ -65,9 +112,6 @@ final selectMenuTile = FSelectMenuTile<String>(
   shortcuts: null,
   actions: null,
   // {@endcategory}
-);
-
-final selectMenuTileBuilder = FSelectMenuTile<String>.builder(
   // {@category "Core"}
   style: const .delta(labelPadding: .symmetric(vertical: 7)),
   enabled: true,
@@ -81,50 +125,6 @@ final selectMenuTileBuilder = FSelectMenuTile<String>.builder(
   suffix: const Icon(FIcons.chevronsUpDown),
   menuBuilder: (context, index) => FSelectTile(title: Text('Option $index'), value: 'option$index'),
   count: 10,
-  // {@endcategory}
-  // {@category "Select Control"}
-  selectControl: const .managedRadio(),
-  // {@endcategory}
-  // {@category "Popover Control"}
-  popoverControl: const .managed(),
-  // {@endcategory}
-  // {@category "Form"}
-  label: const Text('Label'),
-  description: const Text('Description'),
-  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
-  onSaved: (values) {},
-  onReset: () {},
-  validator: (values) => null,
-  forceErrorText: null,
-  autovalidateMode: .disabled,
-  // {@endcategory}
-  // {@category "Layout"}
-  menuAnchor: .topRight,
-  tileAnchor: .bottomRight,
-  menuSpacing: const .spacing(4),
-  menuOverflow: .flip,
-  menuOffset: .zero,
-  menuHideRegion: .excludeChild,
-  menuOnTapHide: null,
-  menuGroupId: null,
-  // {@endcategory}
-  // {@category "Scroll"}
-  scrollController: null,
-  cacheExtent: null,
-  maxHeight: .infinity,
-  dragStartBehavior: .start,
-  physics: const ClampingScrollPhysics(),
-  // {@endcategory}
-  // {@category "Accessibility"}
-  autofocus: false,
-  menuFocusNode: null,
-  menuOnFocusChange: (focused) {},
-  menuTraversalEdgeBehavior: null,
-  menuBarrierSemanticsLabel: null,
-  menuBarrierSemanticsDismissible: true,
-  semanticsLabel: 'Select menu',
-  shortcuts: null,
-  actions: null,
   // {@endcategory}
 );
 

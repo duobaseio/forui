@@ -5,6 +5,13 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 final tabs = FTabs(
+  // {@category "Control"}
+  control: const .managed(),
+  // {@endcategory}
+  // {@category "Tab Bar"}
+  scrollable: false,
+  physics: null,
+  // {@endcategory}
   // {@category "Core"}
   style: const .delta(spacing: 10),
   mouseCursor: .defer,
@@ -14,13 +21,6 @@ final tabs = FTabs(
     FTabEntry(label: Text('Tab 2'), child: Text('Content 2')),
   ],
   expands: false,
-  // {@endcategory}
-  // {@category "Control"}
-  control: const .managed(),
-  // {@endcategory}
-  // {@category "Tab Bar"}
-  scrollable: false,
-  physics: null,
   // {@endcategory}
 );
 

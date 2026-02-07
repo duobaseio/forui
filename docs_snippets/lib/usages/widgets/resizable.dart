@@ -5,15 +5,6 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 final resizable = FResizable(
-  // {@category "Core"}
-  style: const .inherit(),
-  axis: .vertical,
-  divider: .dividerWithThumb,
-  children: [
-    FResizableRegion(initialExtent: 200, builder: (context, data, child) => child!),
-    FResizableRegion(initialExtent: 200, minExtent: 100, builder: (context, data, child) => child!),
-  ],
-  // {@endcategory}
   // {@category "Control"}
   control: const .managedCascade(),
   // {@endcategory}
@@ -24,6 +15,15 @@ final resizable = FResizable(
   // {@endcategory}
   // {@category "Accessibility"}
   semanticFormatterCallback: (first, second) => '${first.extent.current}, ${second.extent.current}',
+  // {@endcategory}
+  // {@category "Core"}
+  style: const .inherit(),
+  axis: .vertical,
+  divider: .dividerWithThumb,
+  children: [
+    FResizableRegion(initialExtent: 200, builder: (context, data, child) => child!),
+    FResizableRegion(initialExtent: 200, minExtent: 100, builder: (context, data, child) => child!),
+  ],
   // {@endcategory}
 );
 

@@ -5,12 +5,6 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 final dialog = FDialog(
-  // {@category "Core"}
-  style: const .delta(insetPadding: .zero),
-  title: const Text('Title'),
-  body: const Text('Body'),
-  actions: [FButton(onPress: () {}, child: const Text('Action'))],
-  // {@endcategory}
   // {@category "Layout"}
   direction: .vertical,
   constraints: const BoxConstraints(minWidth: 280, maxWidth: 560),
@@ -21,15 +15,15 @@ final dialog = FDialog(
   // {@category "Others"}
   animation: null,
   // {@endcategory}
-);
-
-final adaptive = FDialog.adaptive(
   // {@category "Core"}
   style: const .delta(insetPadding: .zero),
   title: const Text('Title'),
   body: const Text('Body'),
   actions: [FButton(onPress: () {}, child: const Text('Action'))],
   // {@endcategory}
+);
+
+final adaptive = FDialog.adaptive(
   // {@category "Layout"}
   constraints: const BoxConstraints(minWidth: 280, maxWidth: 560),
   // {@endcategory}
@@ -38,14 +32,16 @@ final adaptive = FDialog.adaptive(
   // {@endcategory}
   // {@category "Others"}
   animation: null,
+  // {@endcategory}
+  // {@category "Core"}
+  style: const .delta(insetPadding: .zero),
+  title: const Text('Title'),
+  body: const Text('Body'),
+  actions: [FButton(onPress: () {}, child: const Text('Action'))],
   // {@endcategory}
 );
 
 final raw = FDialog.raw(
-  // {@category "Core"}
-  style: const .delta(insetPadding: .zero),
-  builder: (context, style) => const Text('Custom content'),
-  // {@endcategory}
   // {@category "Layout"}
   constraints: const BoxConstraints(minWidth: 280, maxWidth: 560),
   // {@endcategory}
@@ -55,9 +51,24 @@ final raw = FDialog.raw(
   // {@category "Others"}
   animation: null,
   // {@endcategory}
+  // {@category "Core"}
+  style: const .delta(insetPadding: .zero),
+  builder: (context, style) => const Text('Custom content'),
+  // {@endcategory}
 );
 
 final show = showFDialog(
+  // {@category "Barrier"}
+  barrierLabel: 'Dismiss',
+  barrierDismissible: true,
+  // {@endcategory}
+  // {@category "Navigation"}
+  useRootNavigator: false,
+  useSafeArea: false,
+  routeSettings: null,
+  anchorPoint: null,
+  transitionAnimationController: null,
+  // {@endcategory}
   // {@category "Core"}
   context: context,
   style: const .delta(insetPadding: .zero),
@@ -69,17 +80,6 @@ final show = showFDialog(
     body: const Text('Body'),
     actions: [FButton(onPress: () => Navigator.of(context).pop(), child: const Text('Close'))],
   ),
-  // {@endcategory}
-  // {@category "Barrier"}
-  barrierLabel: 'Dismiss',
-  barrierDismissible: true,
-  // {@endcategory}
-  // {@category "Navigation"}
-  useRootNavigator: false,
-  useSafeArea: false,
-  routeSettings: null,
-  anchorPoint: null,
-  transitionAnimationController: null,
   // {@endcategory}
 );
 

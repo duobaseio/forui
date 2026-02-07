@@ -5,23 +5,16 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 const accordion = FAccordion(
+  // {@category "Control"}
+  control: .managed(min: 1, max: 2),
+  // {@endcategory}
   // {@category "Core"}
   style: .delta(titlePadding: .zero),
   children: [FAccordionItem(title: Text('Title'), child: SizedBox())],
   // {@endcategory}
-  // {@category "Control"}
-  control: .managed(min: 1, max: 2),
-  // {@endcategory}
 );
 
 final accordionItem = FAccordionItem(
-  // {@category "Core"}
-  style: const .delta(titlePadding: .zero),
-  title: const Text('Title'),
-  icon: const Icon(FIcons.chevronDown),
-  initiallyExpanded: false,
-  child: const Text('Content'),
-  // {@endcategory}
   // {@category "Accessibility"}
   autofocus: false,
   focusNode: null,
@@ -30,6 +23,13 @@ final accordionItem = FAccordionItem(
   // {@category "Callbacks"}
   onHoverChange: (hovered) {},
   onVariantChange: (previous, current) {},
+  // {@endcategory}
+  // {@category "Core"}
+  style: const .delta(titlePadding: .zero),
+  title: const Text('Title'),
+  icon: const Icon(FIcons.chevronDown),
+  initiallyExpanded: false,
+  child: const Text('Content'),
   // {@endcategory}
 );
 

@@ -5,6 +5,23 @@ import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
 final tappable = FTappable(
+  // {@category "Accessibility"}
+  autofocus: false,
+  focusNode: null,
+  onFocusChange: (focused) {},
+  semanticsLabel: 'Tappable button',
+  excludeSemantics: false,
+  shortcuts: null,
+  actions: null,
+  // {@endcategory}
+  // {@category "Callbacks"}
+  onPress: () {},
+  onLongPress: () {},
+  onSecondaryPress: () {},
+  onSecondaryLongPress: () {},
+  onHoverChange: (hovered) {},
+  onVariantChange: (previous, current) {},
+  // {@endcategory}
   // {@category "Core"}
   style: const .delta(motion: FTappableMotion.none),
   focusedOutlineStyle: const .delta(color: Colors.black),
@@ -13,6 +30,9 @@ final tappable = FTappable(
   builder: (context, states, child) => child!,
   child: const Text('Tap me'),
   // {@endcategory}
+);
+
+final tappableStatic = FTappable.static(
   // {@category "Accessibility"}
   autofocus: false,
   focusNode: null,
@@ -30,9 +50,6 @@ final tappable = FTappable(
   onHoverChange: (hovered) {},
   onVariantChange: (previous, current) {},
   // {@endcategory}
-);
-
-final tappableStatic = FTappable.static(
   // {@category "Core"}
   style: const .delta(motion: FTappableMotion.none),
   focusedOutlineStyle: const .delta(color: Color(0xFF000000)),
@@ -40,22 +57,5 @@ final tappableStatic = FTappable.static(
   behavior: .translucent,
   builder: (context, states, child) => child!,
   child: const Text('Tap me'),
-  // {@endcategory}
-  // {@category "Accessibility"}
-  autofocus: false,
-  focusNode: null,
-  onFocusChange: (focused) {},
-  semanticsLabel: 'Tappable button',
-  excludeSemantics: false,
-  shortcuts: null,
-  actions: null,
-  // {@endcategory}
-  // {@category "Callbacks"}
-  onPress: () {},
-  onLongPress: () {},
-  onSecondaryPress: () {},
-  onSecondaryLongPress: () {},
-  onHoverChange: (hovered) {},
-  onVariantChange: (previous, current) {},
   // {@endcategory}
 );

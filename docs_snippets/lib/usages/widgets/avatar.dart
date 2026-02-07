@@ -5,14 +5,14 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 final avatar = FAvatar(
+  // {@category "Others"}
+  fallback: const Text('AB'),
+  semanticsLabel: 'User avatar',
+  // {@endcategory}
   // {@category "Core"}
   style: const .delta(backgroundColor: Color(0xFF000000)),
   size: 40.0,
   image: const NetworkImage('https://example.com/avatar.png'),
-  // {@endcategory}
-  // {@category "Others"}
-  fallback: const Text('AB'),
-  semanticsLabel: 'User avatar',
   // {@endcategory}
 );
 

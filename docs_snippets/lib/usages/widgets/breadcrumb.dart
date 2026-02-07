@@ -16,11 +16,6 @@ const breadcrumb = FBreadcrumb(
 );
 
 final breadcrumbItem = FBreadcrumbItem(
-  // {@category "Core"}
-  current: false,
-  onPress: () {},
-  child: const Text('Home'),
-  // {@endcategory}
   // {@category "Accessibility"}
   autofocus: false,
   focusNode: null,
@@ -30,21 +25,14 @@ final breadcrumbItem = FBreadcrumbItem(
   onHoverChange: (hovered) {},
   onVariantChange: (previous, current) {},
   // {@endcategory}
+  // {@category "Core"}
+  current: false,
+  onPress: () {},
+  child: const Text('Home'),
+  // {@endcategory}
 );
 
 final breadcrumbItemCollapsed = FBreadcrumbItem.collapsed(
-  // {@category "Core"}
-  divider: .full,
-  menu: [
-    FItemGroup(
-      children: [
-        FItem(title: const Text('Page 1'), onPress: () {}),
-        FItem(title: const Text('Page 2'), onPress: () {}),
-      ],
-    ),
-  ],
-  popoverMenuStyle: const .delta(maxWidth: 200),
-  // {@endcategory}
   // {@category "Popover Control"}
   popoverControl: const .managed(),
   // {@endcategory}
@@ -74,21 +62,21 @@ final breadcrumbItemCollapsed = FBreadcrumbItem.collapsed(
   onHoverChange: (hovered) {},
   onVariantChange: (previous, current) {},
   // {@endcategory}
-);
-
-final breadcrumbItemCollapsedTiles = FBreadcrumbItem.collapsedTiles(
   // {@category "Core"}
   divider: .full,
   menu: [
-    FTileGroup(
+    FItemGroup(
       children: [
-        FTile(title: const Text('Page 1'), onPress: () {}),
-        FTile(title: const Text('Page 2'), onPress: () {}),
+        FItem(title: const Text('Page 1'), onPress: () {}),
+        FItem(title: const Text('Page 2'), onPress: () {}),
       ],
     ),
   ],
   popoverMenuStyle: const .delta(maxWidth: 200),
   // {@endcategory}
+);
+
+final breadcrumbItemCollapsedTiles = FBreadcrumbItem.collapsedTiles(
   // {@category "Popover Control"}
   popoverControl: const .managed(),
   // {@endcategory}
@@ -116,6 +104,18 @@ final breadcrumbItemCollapsedTiles = FBreadcrumbItem.collapsedTiles(
   // {@category "Callbacks"}
   onHoverChange: (hovered) {},
   onVariantChange: (previous, current) {},
+  // {@endcategory}
+  // {@category "Core"}
+  divider: .full,
+  menu: [
+    FTileGroup(
+      children: [
+        FTile(title: const Text('Page 1'), onPress: () {}),
+        FTile(title: const Text('Page 2'), onPress: () {}),
+      ],
+    ),
+  ],
+  popoverMenuStyle: const .delta(maxWidth: 200),
   // {@endcategory}
 );
 

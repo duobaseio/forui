@@ -5,6 +5,12 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 final switchWidget = FSwitch(
+  // {@category "Accessibility"}
+  autofocus: false,
+  focusNode: null,
+  onFocusChange: (focused) {},
+  semanticsLabel: 'Enable notifications switch',
+  // {@endcategory}
   // {@category "Core"}
   style: const .delta(labelPadding: .only(left: 8)),
   enabled: true,
@@ -14,11 +20,5 @@ final switchWidget = FSwitch(
   label: const Text('Enable notifications'),
   description: const Text('Receive push notifications'),
   error: null,
-  // {@endcategory}
-  // {@category "Accessibility"}
-  autofocus: false,
-  focusNode: null,
-  onFocusChange: (focused) {},
-  semanticsLabel: 'Enable notifications switch',
   // {@endcategory}
 );

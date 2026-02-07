@@ -5,6 +5,12 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 final checkbox = FCheckbox(
+  // {@category "Accessibility"}
+  semanticsLabel: 'Accept terms checkbox',
+  autofocus: false,
+  focusNode: null,
+  onFocusChange: (focused) {},
+  // {@endcategory}
   // {@category "Core"}
   style: const .delta(size: 20),
   enabled: true,
@@ -13,11 +19,5 @@ final checkbox = FCheckbox(
   label: const Text('Accept terms'),
   description: const Text('You agree to our terms of service'),
   error: null,
-  // {@endcategory}
-  // {@category "Accessibility"}
-  semanticsLabel: 'Accept terms checkbox',
-  autofocus: false,
-  focusNode: null,
-  onFocusChange: (focused) {},
   // {@endcategory}
 );

@@ -38,16 +38,16 @@ final showToast = showFToast(
 );
 
 final showRawToast = showRawFToast(
-  // {@category "Core"}
-  context: context,
-  style: const .delta(padding: .all(16)),
-  builder: (context, entry) => const Text('Custom toast content'),
-  // {@endcategory}
   // {@category "Behavior"}
   alignment: .bottomEnd,
   swipeToDismiss: const [.right],
   duration: const Duration(seconds: 5),
   onDismiss: () {},
+  // {@endcategory}
+  // {@category "Core"}
+  context: context,
+  style: const .delta(padding: .all(16)),
+  builder: (context, entry) => const Text('Custom toast content'),
   // {@endcategory}
 );
 

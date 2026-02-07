@@ -5,6 +5,36 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 final popoverMenu = FPopoverMenu(
+  // {@category "Control"}
+  control: const .managed(),
+  // {@endcategory}
+  // {@category "Layout"}
+  menuAnchor: .topCenter,
+  childAnchor: .bottomCenter,
+  maxHeight: .infinity,
+  spacing: const .spacing(4),
+  overflow: .flip,
+  offset: .zero,
+  // {@endcategory}
+  // {@category "Tap Region"}
+  groupId: null,
+  hideRegion: .excludeChild,
+  onTapHide: () {},
+  // {@endcategory}
+  // {@category "Scroll"}
+  scrollController: null,
+  cacheExtent: null,
+  dragStartBehavior: .start,
+  // {@endcategory}
+  // {@category "Accessibility"}
+  autofocus: null,
+  focusNode: null,
+  onFocusChange: (focused) {},
+  semanticsLabel: 'Menu',
+  traversalEdgeBehavior: null,
+  barrierSemanticsLabel: null,
+  barrierSemanticsDismissible: true,
+  // {@endcategory}
   // {@category "Core"}
   style: const .delta(maxWidth: 250),
   divider: .full,
@@ -20,13 +50,16 @@ final popoverMenu = FPopoverMenu(
   builder: (context, controller, child) => child!,
   child: FButton(onPress: () {}, child: const Text('Menu')),
   // {@endcategory}
+);
+
+final popoverMenuTiles = FPopoverMenu.tiles(
   // {@category "Control"}
   control: const .managed(),
   // {@endcategory}
   // {@category "Layout"}
+  maxHeight: .infinity,
   menuAnchor: .topCenter,
   childAnchor: .bottomCenter,
-  maxHeight: .infinity,
   spacing: const .spacing(4),
   overflow: .flip,
   offset: .zero,
@@ -50,9 +83,6 @@ final popoverMenu = FPopoverMenu(
   barrierSemanticsLabel: null,
   barrierSemanticsDismissible: true,
   // {@endcategory}
-);
-
-final popoverMenuTiles = FPopoverMenu.tiles(
   // {@category "Core"}
   style: const .delta(maxWidth: 250),
   divider: .full,
@@ -67,36 +97,6 @@ final popoverMenuTiles = FPopoverMenu.tiles(
   menuBuilder: (context, controller, menu) => menu!,
   builder: (context, controller, child) => child!,
   child: FButton(onPress: () {}, child: const Text('Menu')),
-  // {@endcategory}
-  // {@category "Control"}
-  control: const .managed(),
-  // {@endcategory}
-  // {@category "Layout"}
-  maxHeight: .infinity,
-  menuAnchor: .topCenter,
-  childAnchor: .bottomCenter,
-  spacing: const .spacing(4),
-  overflow: .flip,
-  offset: .zero,
-  // {@endcategory}
-  // {@category "Tap Region"}
-  groupId: null,
-  hideRegion: .excludeChild,
-  onTapHide: () {},
-  // {@endcategory}
-  // {@category "Scroll"}
-  scrollController: null,
-  cacheExtent: null,
-  dragStartBehavior: .start,
-  // {@endcategory}
-  // {@category "Accessibility"}
-  autofocus: null,
-  focusNode: null,
-  onFocusChange: (focused) {},
-  semanticsLabel: 'Menu',
-  traversalEdgeBehavior: null,
-  barrierSemanticsLabel: null,
-  barrierSemanticsDismissible: true,
   // {@endcategory}
 );
 

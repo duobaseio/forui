@@ -5,11 +5,6 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 final multiSelect = FMultiSelect<String>(
-  // {@category "Core"}
-  style: const .delta(emptyTextStyle: .delta()),
-  enabled: true,
-  items: const {'Apple': 'apple', 'Banana': 'banana', 'Cherry': 'cherry'},
-  // {@endcategory}
   // {@category "Control"}
   control: const .managed(),
   // {@endcategory}
@@ -56,9 +51,60 @@ final multiSelect = FMultiSelect<String>(
   autofocus: false,
   focusNode: null,
   // {@endcategory}
+  // {@category "Core"}
+  style: const .delta(emptyTextStyle: .delta()),
+  enabled: true,
+  items: const {'Apple': 'apple', 'Banana': 'banana', 'Cherry': 'cherry'},
+  // {@endcategory}
 );
 
 final multiSelectRich = FMultiSelect<String>.rich(
+  // {@category "Control"}
+  control: const .managed(),
+  // {@endcategory}
+  // {@category "Popover Control"}
+  popoverControl: const .managed(),
+  // {@endcategory}
+  // {@category "Form"}
+  label: const Text('Label'),
+  description: const Text('Description'),
+  onSaved: (values) {},
+  onReset: () {},
+  autovalidateMode: .onUnfocus,
+  forceErrorText: null,
+  validator: (values) => null,
+  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
+  // {@endcategory}
+  // {@category "Field"}
+  hint: const Text('Select fruits'),
+  keepHint: true,
+  sort: null,
+  tagBuilder: FMultiSelect.defaultTagBuilder,
+  textAlign: .start,
+  textDirection: null,
+  clearable: false,
+  prefixBuilder: null,
+  suffixBuilder: FMultiSelect.defaultIconBuilder,
+  // {@endcategory}
+  // {@category "Content"}
+  contentAnchor: AlignmentDirectional.topStart,
+  fieldAnchor: AlignmentDirectional.bottomStart,
+  contentConstraints: const FAutoWidthPortalConstraints(maxHeight: 300),
+  contentSpacing: const .spacing(4),
+  contentOverflow: .flip,
+  contentOffset: .zero,
+  contentHideRegion: .excludeChild,
+  contentGroupId: null,
+  contentEmptyBuilder: FMultiSelect.defaultContentEmptyBuilder,
+  contentScrollController: null,
+  contentScrollHandles: false,
+  contentPhysics: const ClampingScrollPhysics(),
+  contentDivider: .none,
+  // {@endcategory}
+  // {@category "Accessibility"}
+  autofocus: false,
+  focusNode: null,
+  // {@endcategory}
   // {@category "Core"}
   style: const .delta(emptyTextStyle: .delta()),
   enabled: true,
@@ -69,6 +115,9 @@ final multiSelectRich = FMultiSelect<String>.rich(
     .section(label: const Text('More'), items: {'Cherry': 'cherry', 'Date': 'date'}),
   ],
   // {@endcategory}
+);
+
+final multiSelectSearch = FMultiSelect<String>.search(
   // {@category "Control"}
   control: const .managed(),
   // {@endcategory}
@@ -86,7 +135,7 @@ final multiSelectRich = FMultiSelect<String>.rich(
   errorBuilder: FFormFieldProperties.defaultErrorBuilder,
   // {@endcategory}
   // {@category "Field"}
-  hint: const Text('Select fruits'),
+  hint: const Text('Search fruits'),
   keepHint: true,
   sort: null,
   tagBuilder: FMultiSelect.defaultTagBuilder,
@@ -97,6 +146,7 @@ final multiSelectRich = FMultiSelect<String>.rich(
   suffixBuilder: FMultiSelect.defaultIconBuilder,
   // {@endcategory}
   // {@category "Content"}
+  searchFieldProperties: const FSelectSearchFieldProperties(),
   contentAnchor: AlignmentDirectional.topStart,
   fieldAnchor: AlignmentDirectional.bottomStart,
   contentConstraints: const FAutoWidthPortalConstraints(maxHeight: 300),
@@ -106,6 +156,8 @@ final multiSelectRich = FMultiSelect<String>.rich(
   contentHideRegion: .excludeChild,
   contentGroupId: null,
   contentEmptyBuilder: FMultiSelect.defaultContentEmptyBuilder,
+  contentLoadingBuilder: FMultiSelect.defaultContentLoadingBuilder,
+  contentErrorBuilder: null,
   contentScrollController: null,
   contentScrollHandles: false,
   contentPhysics: const ClampingScrollPhysics(),
@@ -115,15 +167,15 @@ final multiSelectRich = FMultiSelect<String>.rich(
   autofocus: false,
   focusNode: null,
   // {@endcategory}
-);
-
-final multiSelectSearch = FMultiSelect<String>.search(
   // {@category "Core"}
   const {'Apple': 'apple', 'Banana': 'banana', 'Cherry': 'cherry'},
   style: const .delta(emptyTextStyle: .delta()),
   enabled: true,
   filter: (query) => ['apple', 'banana', 'cherry'].where((e) => e.startsWith(query)),
   // {@endcategory}
+);
+
+final multiSelectSearchBuilder = FMultiSelect<String>.searchBuilder(
   // {@category "Control"}
   control: const .managed(),
   // {@endcategory}
@@ -173,64 +225,12 @@ final multiSelectSearch = FMultiSelect<String>.search(
   autofocus: false,
   focusNode: null,
   // {@endcategory}
-);
-
-final multiSelectSearchBuilder = FMultiSelect<String>.searchBuilder(
   // {@category "Core"}
   style: const .delta(emptyTextStyle: .delta()),
   enabled: true,
   filter: (query) => ['apple', 'banana', 'cherry'].where((e) => e.startsWith(query)),
   format: Text.new,
   contentBuilder: (context, style, values) => [for (final value in values) .item(title: Text(value), value: value)],
-  // {@endcategory}
-  // {@category "Control"}
-  control: const .managed(),
-  // {@endcategory}
-  // {@category "Popover Control"}
-  popoverControl: const .managed(),
-  // {@endcategory}
-  // {@category "Form"}
-  label: const Text('Label'),
-  description: const Text('Description'),
-  onSaved: (values) {},
-  onReset: () {},
-  autovalidateMode: .onUnfocus,
-  forceErrorText: null,
-  validator: (values) => null,
-  errorBuilder: FFormFieldProperties.defaultErrorBuilder,
-  // {@endcategory}
-  // {@category "Field"}
-  hint: const Text('Search fruits'),
-  keepHint: true,
-  sort: null,
-  tagBuilder: FMultiSelect.defaultTagBuilder,
-  textAlign: .start,
-  textDirection: null,
-  clearable: false,
-  prefixBuilder: null,
-  suffixBuilder: FMultiSelect.defaultIconBuilder,
-  // {@endcategory}
-  // {@category "Content"}
-  searchFieldProperties: const FSelectSearchFieldProperties(),
-  contentAnchor: AlignmentDirectional.topStart,
-  fieldAnchor: AlignmentDirectional.bottomStart,
-  contentConstraints: const FAutoWidthPortalConstraints(maxHeight: 300),
-  contentSpacing: const .spacing(4),
-  contentOverflow: .flip,
-  contentOffset: .zero,
-  contentHideRegion: .excludeChild,
-  contentGroupId: null,
-  contentEmptyBuilder: FMultiSelect.defaultContentEmptyBuilder,
-  contentLoadingBuilder: FMultiSelect.defaultContentLoadingBuilder,
-  contentErrorBuilder: null,
-  contentScrollController: null,
-  contentScrollHandles: false,
-  contentPhysics: const ClampingScrollPhysics(),
-  contentDivider: .none,
-  // {@endcategory}
-  // {@category "Accessibility"}
-  autofocus: false,
-  focusNode: null,
   // {@endcategory}
 );
 
