@@ -32,10 +32,11 @@ class DesignTransformationsExtension extends TransformationsExtension {
                 borderRadiusGeometry.isAssignableFromType(type) ||
                 boxConstraints.isAssignableFromType(type) ||
                 decoration.isAssignableFromType(type) ||
-                color.isAssignableFromType(type) ||
                 edgeInsetsGeometry.isAssignableFromType(type) ||
                 textStyle.isAssignableFromType(type) =>
           '.lerp($name, other.$name, t) ?? $name',
+        //
+        _  when color.isAssignableFromType(type) => 'FColors.lerpColor($name, other.$name, t) ?? $name',
         //
         _ when iconThemeData.isAssignableFromType(type) => '.lerp($name, other.$name, t)',
         //

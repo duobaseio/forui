@@ -13,7 +13,7 @@ import 'brand_color.dart';
 final theme =
     // {@snippet constructor}
     FThemeData(
-      colors: FThemes.zinc.light.colors,
+      colors: FThemes.neutral.light.colors,
       // ... other theme properties
       extensions: [const BrandColor(color: Color(0xFF6366F1))],
     );

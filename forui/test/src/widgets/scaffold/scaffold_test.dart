@@ -14,9 +14,9 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           theme: FThemeData(
-            colors: FThemes.zinc.light.colors,
-            typography: FThemes.zinc.light.typography,
-            style: FThemes.zinc.light.style.copyWith(
+            colors: FThemes.neutral.light.colors,
+            typography: FThemes.neutral.light.typography,
+            style: FThemes.neutral.light.style.copyWith(
               iconStyle: const .value(IconThemeData(color: testIconColor, size: testIconSize)),
             ),
           ),

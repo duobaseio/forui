@@ -213,7 +213,7 @@ extension $FGoldenStyleTransformations on FGoldenStyle {
     boxConstraints: .lerp(boxConstraints, other.boxConstraints, t) ?? boxConstraints,
     boxDecoration: .lerp(boxDecoration, other.boxDecoration, t) ?? boxDecoration,
     decoration: .lerp(decoration, other.decoration, t) ?? decoration,
-    color: .lerp(color, other.color, t) ?? color,
+    color: FColors.lerpColor(color, other.color, t) ?? color,
     edgeInsets: .lerp(edgeInsets, other.edgeInsets, t) ?? edgeInsets,
     edgeInsetsDirectional: .lerp(edgeInsetsDirectional, other.edgeInsetsDirectional, t) ?? edgeInsetsDirectional,
     edgeInsetsGeometry: .lerp(edgeInsetsGeometry, other.edgeInsetsGeometry, t) ?? edgeInsetsGeometry,

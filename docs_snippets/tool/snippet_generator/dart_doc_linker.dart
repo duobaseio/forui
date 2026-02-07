@@ -93,7 +93,7 @@ class DartDocLinker extends RecursiveAstVisitor<void> {
   /// expression rather than a compile-time identifier. [visitPrefixedIdentifier] handles `prefix.identifier` where
   /// both parts are compile-time identifiers.
   ///
-  /// Also handles record field access like `FThemes.zinc.light` where the field has no element - links to the parent
+  /// Also handles record field access like `FThemes.neutral.light` where the field has no element - links to the parent
   /// expression's element instead.
   @override
   void visitPropertyAccess(PropertyAccess node) {
@@ -117,7 +117,7 @@ class DartDocLinker extends RecursiveAstVisitor<void> {
 
   /// Links targeted top level function/method invocations to their method documentation.
   ///
-  /// Handles expressions like `FThemes.zinc.light()` or `instance.instanceMethod()`.
+  /// Handles expressions like `instance.instanceMethod()`.
   ///
   /// See [visitDotShorthandInvocation] for dot shorthand method invocations.
   @override

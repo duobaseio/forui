@@ -16,7 +16,7 @@ class Application extends StatelessWidget {
   // {@highlight}
   Widget build(BuildContext context) => CupertinoApp(
     // {@endhighlight}
-    builder: (context, child) => FTheme(data: FThemes.zinc.light, child: child!),
+    builder: (context, child) => FTheme(data: FThemes.neutral.light, child: child!),
     home: const FScaffold(child: Placeholder()),
   );
 }

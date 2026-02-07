@@ -10,13 +10,13 @@ class Foo extends StatelessWidget {
   const Foo({required this.child, super.key});
 
   @override
-  Widget build(BuildContext context) => FBasicTheme(data: FThemes.zinc.dark, textDirection: .ltr, child: child);
+  Widget build(BuildContext context) => FBasicTheme(data: FThemes.neutral.dark, textDirection: .ltr, child: child);
 }
 
 void main() {
   group('FBasicTheme', () {
     testWidgets('ThemeData is visible in child widgets', (tester) async {
-      await tester.pumpWidget(Foo(child: Builder(builder: (context) => Text('${context.theme == FThemes.zinc.dark}'))));
+      await tester.pumpWidget(Foo(child: Builder(builder: (context) => Text('${context.theme == FThemes.neutral.dark}'))));
 
       expect(find.text('true'), findsOneWidget);
     });
@@ -26,7 +26,7 @@ void main() {
 
       await tester.pumpWidget(
         FBasicTheme(
-          data: FThemes.zinc.light,
+          data: FThemes.neutral.light,
           textDirection: .ltr,
           child: Builder(builder: (context) => Text(context.theme.toString(), key: key)),
         ),
@@ -35,7 +35,7 @@ void main() {
 
       await tester.pumpWidget(
         FBasicTheme(
-          data: FThemes.zinc.dark,
+          data: FThemes.neutral.dark,
           textDirection: .ltr,
           child: Builder(builder: (context) => Text(context.theme.toString(), key: key)),
         ),
@@ -49,7 +49,7 @@ void main() {
       await tester.pumpWidget(
         Directionality(
           textDirection: .ltr,
-          child: Builder(builder: (context) => Text('${context.theme == FThemes.zinc.dark}')),
+          child: Builder(builder: (context) => Text('${context.theme == FThemes.neutral.dark}')),
         ),
       );
 
@@ -59,7 +59,7 @@ void main() {
     testWidgets('inherit TextDirection from parent', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: FBasicTheme(data: FThemes.zinc.dark, child: const Text('')),
+          home: FBasicTheme(data: FThemes.neutral.dark, child: const Text('')),
         ),
       );
 

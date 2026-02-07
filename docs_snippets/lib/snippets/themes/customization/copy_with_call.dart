@@ -1,8 +1,8 @@
 import 'package:forui/forui.dart';
 
-final colors = FThemes.zinc.light.colors;
-final typography = FThemes.zinc.light.typography;
-final style = FThemes.zinc.light.style;
+final colors = FThemes.neutral.light.colors;
+final typography = FThemes.neutral.light.typography;
+final style = FThemes.neutral.light.style;
 
 final a =
     // {@snippet constructor}

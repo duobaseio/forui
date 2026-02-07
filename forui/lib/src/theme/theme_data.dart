@@ -882,7 +882,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```dart
   /// // Apply a Forui theme to Material widgets
   /// MaterialApp(
-  ///   theme: FThemes.zinc.light.toApproximateMaterialTheme(),
+  ///   theme: FThemes.neutral.light.toApproximateMaterialTheme(),
   ///   // ...
   /// )
   /// ```
@@ -1234,14 +1234,14 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// @override
   /// Widget build(BuildContext context) {
   ///   final theme = FThemeData(
-  ///     colors: FThemes.zinc.light.colors.copyWith(
+  ///     colors: FThemes.neutral.light.colors.copyWith(
   ///       primary: const Color(0xFF0D47A1), // dark blue
   ///       primaryForeground: const Color(0xFFFFFFFF), // white
   ///     ),
-  ///     typography: FThemes.zinc.light.typography.copyWith(
+  ///     typography: FThemes.neutral.light.typography.copyWith(
   ///       // ...
   ///     ).scale(sizeScalar: 0.8),
-  ///     style: FThemes.zinc.light.style.copyWith(
+  ///     style: FThemes.neutral.light.style.copyWith(
   ///       borderRadius: .zero,
   ///     ),
   ///   );

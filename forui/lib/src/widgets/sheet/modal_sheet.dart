@@ -364,7 +364,7 @@ class FModalSheetStyle extends FSheetStyle with Diagnosticable, _$FModalSheetSty
 
   /// Creates a [FSheetStyle] that inherits its colors from the given [FColors].
   FModalSheetStyle.inherit({required FColors colors})
-    : this(barrierFilter: (v) => ColorFilter.mode(.lerp(Colors.transparent, colors.barrier, v)!, .srcOver));
+    : this(barrierFilter: (v) => ColorFilter.mode(FColors.lerpColor(Colors.transparent, colors.barrier, v)!, .srcOver));
 }
 
 /// The motion-related properties for a modal sheet.

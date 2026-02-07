@@ -276,7 +276,7 @@ void main() {
       late List<FSliderMark> marks;
 
       setUp(() {
-        final sliderStyles = FThemes.zinc.light.sliderStyles;
+        final sliderStyles = FThemes.neutral.light.sliderStyles;
         sliderStyle = sliderStyles.resolve({if (layout.vertical) FSliderAxisVariant.vertical});
 
         positive = layout.vertical ? .centerLeft : .topCenter;

@@ -277,6 +277,7 @@ extension type FButtonStyles._(FVariants<FButtonVariantConstraint, FButtonStyle,
                 BoxDecoration(
                   border: .all(color: colors.border),
                   borderRadius: style.borderRadius,
+                  color: colors.background,
                 ),
                 variants: {
                   [.disabled]: .delta(border: .all(color: colors.disable(colors.border))),

@@ -5,7 +5,7 @@ import 'package:forui/forui.dart';
 @override
 Widget build(BuildContext context) => MaterialApp(
   // {@highlight}
-  theme: FThemes.zinc.light.toApproximateMaterialTheme(),
+  theme: FThemes.neutral.light.toApproximateMaterialTheme(),
   // {@endhighlight}
   home: Scaffold(
     body: Center(

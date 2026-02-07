@@ -31,6 +31,18 @@ import 'package:forui/forui.dart';
 ///
 /// See [FThemes] for predefined themes and color schemes.
 final class FColors with Diagnosticable {
+  /// Linearly interpolates between two colors [a] and [b] using the given factor [t].
+  ///
+  /// Both colors are converted to Display P3 if they do not share the same color space.
+  static Color? lerpColor(Color? a, Color? b, double t) {
+    if (a != null && b != null && a.colorSpace != b.colorSpace) {
+      a = a.withValues(colorSpace: .displayP3);
+      b = b.withValues(colorSpace: .displayP3);
+    }
+
+    return Color.lerp(a, b, t)!;
+  }
+
   /// The system brightness.
   ///
   /// This is typically used to determine the appearance of native UI elements such as on-screen keyboards.
@@ -163,20 +175,20 @@ final class FColors with Diagnosticable {
   factory FColors.lerp(FColors a, FColors b, double t) => .new(
     brightness: t < 0.5 ? a.brightness : b.brightness,
     systemOverlayStyle: t < 0.5 ? a.systemOverlayStyle : b.systemOverlayStyle,
-    barrier: .lerp(a.barrier, b.barrier, t)!,
-    background: .lerp(a.background, b.background, t)!,
-    foreground: .lerp(a.foreground, b.foreground, t)!,
-    primary: .lerp(a.primary, b.primary, t)!,
-    primaryForeground: .lerp(a.primaryForeground, b.primaryForeground, t)!,
-    secondary: .lerp(a.secondary, b.secondary, t)!,
-    secondaryForeground: .lerp(a.secondaryForeground, b.secondaryForeground, t)!,
-    muted: .lerp(a.muted, b.muted, t)!,
-    mutedForeground: .lerp(a.mutedForeground, b.mutedForeground, t)!,
-    destructive: .lerp(a.destructive, b.destructive, t)!,
-    destructiveForeground: .lerp(a.destructiveForeground, b.destructiveForeground, t)!,
-    error: .lerp(a.error, b.error, t)!,
-    errorForeground: .lerp(a.errorForeground, b.errorForeground, t)!,
-    border: .lerp(a.border, b.border, t)!,
+    barrier: FColors.lerpColor(a.barrier, b.barrier, t)!,
+    background: FColors.lerpColor(a.background, b.background, t)!,
+    foreground: FColors.lerpColor(a.foreground, b.foreground, t)!,
+    primary: FColors.lerpColor(a.primary, b.primary, t)!,
+    primaryForeground: FColors.lerpColor(a.primaryForeground, b.primaryForeground, t)!,
+    secondary: FColors.lerpColor(a.secondary, b.secondary, t)!,
+    secondaryForeground: FColors.lerpColor(a.secondaryForeground, b.secondaryForeground, t)!,
+    muted: FColors.lerpColor(a.muted, b.muted, t)!,
+    mutedForeground: FColors.lerpColor(a.mutedForeground, b.mutedForeground, t)!,
+    destructive: FColors.lerpColor(a.destructive, b.destructive, t)!,
+    destructiveForeground: FColors.lerpColor(a.destructiveForeground, b.destructiveForeground, t)!,
+    error: FColors.lerpColor(a.error, b.error, t)!,
+    errorForeground: FColors.lerpColor(a.errorForeground, b.errorForeground, t)!,
+    border: FColors.lerpColor(a.border, b.border, t)!,
     hoverLighten: lerpDouble(a.hoverLighten, b.hoverLighten, t)!,
     hoverDarken: lerpDouble(a.hoverDarken, b.hoverDarken, t)!,
     disabledOpacity: lerpDouble(a.disabledOpacity, b.disabledOpacity, t)!,
@@ -189,23 +201,40 @@ final class FColors with Diagnosticable {
   ///
   /// The lightening and darkening are controlled by [hoverLighten] and [hoverDarken].
   Color hover(Color color) {
+    // This results in a slight precision lost when using Display P3 colors, but it's negligible for hover effects.
     final hsl = HSLColor.fromColor(color);
     final l = hsl.lightness;
 
-    // More aggressive color change when close to extremes & less when in the middle.
+    // More aggressive color change when lightness is close to extremes & less when in the middle.
     final (space, factor, sign) = l > 0.5 ? (1.0 - l, hoverDarken, -1) : (l, hoverLighten, 1);
     final aggressiveness = 1 + ((0.5 - space) / 0.5);
     final adjustment = factor * aggressiveness * sign;
     final lightness = clampDouble(l + adjustment, 0, 1);
 
-    return hsl.withLightness(lightness).toColor();
-  }
+    // This isn't accurate since Display P3 colors will be interpreted in sRGB space. We keep this since converting to
+    // Display P3 causes a noticeable color shift. A proper fix will require oklch.
+    final hovered = hsl.withLightness(lightness).toColor();
+    if (hovered.colorSpace != color.colorSpace) {
+      return hovered.withValues(colorSpace: color.colorSpace);
+    }
+
+    return hovered;
+}
 
   /// Returns a disabled color for the [foreground] on the [background].
   ///
+  /// Both colors are converted to Display P3 if they do not share the same color space.
+  ///
   /// [FColors.background] is used if [background] is not given.
-  Color disable(Color foreground, [Color? background]) =>
-      .alphaBlend(foreground.withValues(alpha: disabledOpacity), background ?? this.background);
+  Color disable(Color foreground, [Color? background]) {
+    background ??= this.background;
+    if (foreground.colorSpace != background.colorSpace) {
+      foreground = foreground.withValues(colorSpace: .displayP3);
+      background = background.withValues(colorSpace: .displayP3);
+    }
+
+    return .alphaBlend(foreground.withValues(alpha: disabledOpacity), background);
+  }
 
   /// Returns a copy of this [FColors] with the given properties replaced.
   ///

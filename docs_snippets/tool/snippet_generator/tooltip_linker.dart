@@ -87,7 +87,7 @@ class TooltipLinker extends DartDocLinker {
   ///
   /// Handles expressions like `context.theme.paginationStyle`. See [visitPrefixedIdentifier] for compile-time identifiers.
   ///
-  /// Also handles record field access like `FThemes.zinc.light` where the field has no element - links to the parent
+  /// Also handles record field access like `FThemes.neutral.light` where the field has no element - links to the parent
   /// expression's element instead.
   @override
   void visitPropertyAccess(PropertyAccess node) {

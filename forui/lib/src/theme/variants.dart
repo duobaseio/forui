@@ -30,7 +30,7 @@ class FVariants<K extends FVariantConstraint, V, D extends Delta> with Diagnosti
     FVariants<K, Color, D> a,
     FVariants<K, Color, D> b,
     double t,
-  ) => lerpWhere(a, b, t, Color.lerp);
+  ) => lerpWhere(a, b, t, FColors.lerpColor);
 
   /// Linearly interpolates between two [FVariants] containing [IconThemeData]s.
   ///

@@ -51,9 +51,9 @@ void main() {
                 backgroundFilter: .blur(sigmaX: 5, sigmaY: 5),
                 decoration: .value(
                   BoxDecoration(
-                    color: FThemes.zinc.light.colors.background.withValues(alpha: 0.5),
-                    borderRadius: FThemes.zinc.light.style.borderRadius,
-                    border: .all(width: FThemes.zinc.light.style.borderWidth, color: FThemes.zinc.light.colors.border),
+                    color: FThemes.neutral.light.colors.background.withValues(alpha: 0.5),
+                    borderRadius: FThemes.neutral.light.style.borderRadius,
+                    border: .all(width: FThemes.neutral.light.style.borderWidth, color: FThemes.neutral.light.colors.border),
                   ),
                 ),
               ),

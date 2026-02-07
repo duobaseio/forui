@@ -6,9 +6,9 @@ import 'package:forui/forui.dart';
 @override
 Widget build(BuildContext context) => FTheme(
   data: FThemeData(
-    colors: FThemes.zinc.light.colors,
+    colors: FThemes.neutral.light.colors,
     // {@highlight}
-    typography: FThemes.zinc.light.typography
+    typography: FThemes.neutral.light.typography
         .copyWith(xs: const TextStyle(fontSize: 12, height: 1))
         .scale(sizeScalar: 0.8),
     // {@endhighlight}

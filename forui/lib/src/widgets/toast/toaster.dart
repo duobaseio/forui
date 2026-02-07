@@ -225,7 +225,7 @@ final class FToastAlignment {
 /// ```dart
 /// MaterialApp(
 ///   builder: (context, child) => FAnimatedTheme(
-///     data: FThemes.zinc.light,
+///     data: FThemes.neutral.light,
 ///     child: FToaster(child: child!),
 ///   ),
 ///   home: HomePage(),

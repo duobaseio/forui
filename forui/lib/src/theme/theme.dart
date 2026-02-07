@@ -18,7 +18,7 @@ part 'theme.design.dart';
 /// class Parent extends StatelessWidget {
 ///   @override
 ///   Widget build(BuildContext context) => FTheme(
-///      data: FThemes.zinc.light,
+///      data: FThemes.neutral.light,
 ///      child: Child(),
 ///    );
 ///  }
@@ -38,13 +38,13 @@ part 'theme.design.dart';
 /// * [FBasicTheme], the non-animated theme widget wrapped by this widget.
 /// * [FThemeData] which describes the actual configuration of a theme.
 class FTheme extends ImplicitlyAnimatedWidget {
-  /// Returns the current [FThemeData], or `FThemes.zinc.light` if there is no ancestor [FTheme].
+  /// Returns the current [FThemeData], or `FThemes.neutral.light` if there is no ancestor [FTheme].
   ///
   /// It is recommended to use the terser [FThemeBuildContext.theme] getter instead.
   ///
   /// ## Troubleshooting:
   ///
-  /// ### [FTheme.of] always returns `FThemes.zinc.light`
+  /// ### [FTheme.of] always returns `FThemes.neutral.light`
   ///
   /// One of the most common causes is calling [FTheme.of] in the same context which [FTheme] was declared. To fix this,
   /// move the call to [FTheme.of] to a descendant widget.
@@ -54,7 +54,7 @@ class FTheme extends ImplicitlyAnimatedWidget {
   /// class Parent extends StatelessWidget {
   ///   @override
   ///   Widget build(BuildContext context) => FTheme(
-  ///      data: FThemes.zinc.light,
+  ///      data: FThemes.neutral.light,
   ///      child: Child(),
   ///    );
   ///  }
@@ -73,7 +73,7 @@ class FTheme extends ImplicitlyAnimatedWidget {
   /// class Parent extends StatelessWidget {
   ///   @override
   ///   Widget build(BuildContext context) => FTheme(
-  ///      data: FThemes.zinc.light,
+  ///      data: FThemes.neutral.light,
   ///      child: SomeWidget(
   ///        theme: FTheme.of(context), // Whoops!
   ///      ),
@@ -83,7 +83,7 @@ class FTheme extends ImplicitlyAnimatedWidget {
   @useResult
   static FThemeData of(BuildContext context) {
     final theme = context.dependOnInheritedWidgetOfExactType<_InheritedTheme>();
-    return theme?.data ?? FThemes.zinc.light;
+    return theme?.data ?? FThemes.neutral.light;
   }
 
   /// Motion-related properties for the animation.
@@ -169,11 +169,11 @@ class FThemeMotion with Diagnosticable, _$FThemeMotionFunctions {
 
 /// Provides functions for accessing the current [FThemeData].
 extension FThemeBuildContext on BuildContext {
-  /// Returns the current [FThemeData], or `FThemes.zinc.light` if there is no ancestor [FTheme].
+  /// Returns the current [FThemeData], or `FThemes.neutral.light` if there is no ancestor [FTheme].
   ///
   /// ## Troubleshooting:
   ///
-  /// ### [theme] always returns `FThemes.zinc.light`
+  /// ### [theme] always returns `FThemes.neutral.light`
   ///
   /// One of the most common causes is calling [theme] in the same context which [FTheme] was declared. To fix this,
   /// move the call to [theme] to a descendant widget.
@@ -183,7 +183,7 @@ extension FThemeBuildContext on BuildContext {
   /// class Parent extends StatelessWidget {
   ///   @override
   ///   Widget build(BuildContext context) => FTheme(
-  ///      data: FThemes.zinc.light,
+  ///      data: FThemes.neutral.light,
   ///      child: Child(),
   ///    );
   ///  }
@@ -202,7 +202,7 @@ extension FThemeBuildContext on BuildContext {
   /// class Parent extends StatelessWidget {
   ///   @override
   ///   Widget build(BuildContext context) => FTheme(
-  ///      data: FThemes.zinc.light,
+  ///      data: FThemes.neutral.light,
   ///      child: SomeWidget(
   ///        theme: context.theme, // Whoops!
   ///      ),

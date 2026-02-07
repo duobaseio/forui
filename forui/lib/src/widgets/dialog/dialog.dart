@@ -193,7 +193,7 @@ class FDialogRouteStyle with Diagnosticable, _$FDialogRouteStyleFunctions {
 
   /// Creates a [FDialogRouteStyle] that inherits its properties.
   FDialogRouteStyle.inherit({required FColors colors})
-    : this(barrierFilter: (v) => ColorFilter.mode(.lerp(Colors.transparent, colors.barrier, v)!, .srcOver));
+    : this(barrierFilter: (v) => ColorFilter.mode(FColors.lerpColor(Colors.transparent, colors.barrier, v)!, .srcOver));
 }
 
 /// Motion-related properties for [FDialogRoute].

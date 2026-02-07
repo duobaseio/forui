@@ -12,7 +12,7 @@ import 'theme/theme.dart';
 
 // {@endsnippet}
 
-final zincLight = FThemes.zinc.light;
+final neutralLight = FThemes.neutral.light;
 
 // {@snippet}
 void main() {
@@ -26,7 +26,7 @@ class Application extends StatelessWidget {
   Widget build(BuildContext context) {
     // Assign the generated theme to `theme`.
     // {@highlight}
-    final theme = zincLight;
+    final theme = neutralLight;
     // {@endhighlight}
 
     return MaterialApp(

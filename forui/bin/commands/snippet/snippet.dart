@@ -27,7 +27,7 @@ class Application extends StatelessWidget {
     /// ```shell
     /// dart forui theme create [theme template].
     /// ```
-    final theme = FThemes.zinc.dark;
+    final theme = FThemes.neutral.dark;
 
     return MaterialApp(
       // TODO: replace with your application's supported locales.

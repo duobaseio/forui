@@ -16,8 +16,8 @@ FAccordionStyle accordionStyle({required FColors colors, required FTypography ty
     throw UnimplementedError();
 
 // {@snippet}
-FThemeData get zincLight {
-  final colors = FThemes.zinc.light.colors;
+FThemeData get neutralLight {
+  final colors = FThemes.neutral.light.colors;
 
   final typography = _typography(colors: colors);
   final style = _style(colors: colors, typography: typography);
