@@ -128,10 +128,10 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
       colors: colors,
       typography: typography,
       style: style,
-    ).resolve({FButtonVariant.ghost});
+    ).resolve({FButtonVariant.ghost}).resolve({FButtonSizeVariant.sm});
     final textStyle = typography.sm.copyWith(fontFamily: typography.defaultFontFamily);
     final iconStyle = FVariants<FTextFieldVariantConstraint, IconThemeData, IconThemeDataDelta>.delta(
-      IconThemeData(color: colors.mutedForeground, size: 17),
+      IconThemeData(color: colors.mutedForeground, size: 16),
       variants: {
         [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
       },

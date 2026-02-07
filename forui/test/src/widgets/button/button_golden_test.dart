@@ -12,7 +12,7 @@ void main() {
         TestScaffold.blue(
           child: FButton(
             autofocus: true,
-            style: TestScaffold.blueScreen.buttonStyles.base,
+            style: TestScaffold.blueScreen.buttonStyles.base.base,
             prefix: const Icon(FIcons.circlePlay),
             suffix: const Icon(FIcons.circleStop),
             onPress: () {},
@@ -28,8 +28,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FButton.icon(
-            variants: const {},
-            style: TestScaffold.blueScreen.buttonStyles.base,
+            style: TestScaffold.blueScreen.buttonStyles.base.base,
             child: const Icon(FIcons.circleStop),
             onPress: () {},
           ),
@@ -41,19 +40,19 @@ void main() {
   });
 
   for (final theme in TestScaffold.themes) {
-    for (final (name, Set<FButtonVariant> variants) in [
-      ('primary', {}),
-      ('secondary', {.secondary}),
-      ('destructive', {.destructive}),
-      ('outline', {.outline}),
-      ('ghost', {.ghost}),
+    for (final (name, FButtonVariant? variant) in [
+      ('primary', null),
+      ('secondary', .secondary),
+      ('destructive', .destructive),
+      ('outline', .outline),
+      ('ghost', .ghost),
     ]) {
       testWidgets('${theme.name} enabled with FButtonContent', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
             child: FButton(
-              variants: variants,
+              variant: variant,
               prefix: const Icon(FIcons.circlePlay),
               suffix: const Icon(FIcons.circleStop),
               onPress: () {},
@@ -73,7 +72,7 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: FButton(
-              variants: variants,
+              variant: variant,
               mainAxisSize: .min,
               prefix: const Icon(FIcons.circlePlay),
               suffix: const Icon(FIcons.circleStop),
@@ -94,7 +93,7 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: FButton(
-              variants: variants,
+              variant: variant,
               prefix: const Icon(FIcons.circlePlay),
               suffix: const Icon(FIcons.circleStop),
               onPress: () {},
@@ -120,7 +119,7 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: FButton(
-              variants: variants,
+              variant: variant,
               prefix: const Icon(FIcons.circlePlay),
               suffix: const Icon(FIcons.circleStop),
               onPress: () {},
@@ -147,7 +146,7 @@ void main() {
             theme: theme.data,
             child: FButton(
               autofocus: true,
-              variants: variants,
+              variant: variant,
               prefix: const Icon(FIcons.circlePlay),
               suffix: const Icon(FIcons.circleStop),
               onPress: () {},
@@ -164,7 +163,7 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: FButton(
-              variants: variants,
+              variant: variant,
               prefix: const Icon(FIcons.circlePlay),
               suffix: const Icon(FIcons.circleStop),
               onPress: null,
@@ -184,7 +183,7 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: FButton.raw(
-              variants: variants,
+              variant: variant,
               onPress: () {},
               child: Padding(
                 padding: const .all(50),
@@ -214,7 +213,7 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: FButton.raw(
-              variants: variants,
+              variant: variant,
               onPress: null,
               child: Padding(
                 padding: const .all(50),
@@ -243,7 +242,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FButton.icon(onPress: () {}, variants: variants, child: const Icon(FIcons.chevronRight)),
+            child: FButton.icon(onPress: () {}, variant: variant, child: const Icon(FIcons.chevronRight)),
           ),
         );
 
@@ -257,7 +256,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FButton.icon(onPress: null, variants: variants, child: const Icon(FIcons.chevronRight)),
+            child: FButton.icon(onPress: null, variant: variant, child: const Icon(FIcons.chevronRight)),
           ),
         );
 
@@ -271,7 +270,7 @@ void main() {
             child: FButton(
               prefix: const FCircularProgress(),
               onPress: () {},
-              variants: variants,
+              variant: variant,
               child: const Text('Loading'),
             ),
           ),
@@ -290,7 +289,7 @@ void main() {
             child: FButton(
               prefix: const FCircularProgress(),
               onPress: null,
-              variants: variants,
+              variant: variant,
               child: const Text('Loading'),
             ),
           ),
@@ -302,5 +301,35 @@ void main() {
         );
       });
     }
+  }
+
+  for (final (name, FButtonSizeVariant? size) in [('xs', .xs), ('sm', .sm), ('base', null), ('lg', .lg)]) {
+    testWidgets('$name content', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FButton(
+            variant: .outline,
+            size: size,
+            mainAxisSize: .min,
+            prefix: const Icon(FIcons.mail),
+            suffix: const Icon(FIcons.chevronRight),
+            onPress: () {},
+            child: const Text('Button'),
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('button/size/$name-content.png'));
+    });
+
+    testWidgets('$name icon', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FButton.icon(size: size, onPress: () {}, child: const Icon(FIcons.chevronRight)),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('button/size/$name-icon.png'));
+    });
   }
 }

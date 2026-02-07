@@ -129,7 +129,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// dart run forui style create buttons
   /// ```
   @override
-  final FVariants<FButtonVariantConstraint, FButtonStyle, FButtonStyleDelta> buttonStyles;
+  final FVariants<FButtonVariantConstraint, FButtonSizes, FButtonSizesDelta> buttonStyles;
 
   /// The calendar style.
   ///
@@ -584,7 +584,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FVariants<FBadgeVariantConstraint, FBadgeStyle, FBadgeStyleDelta>? badgeStyles,
     FBottomNavigationBarStyle? bottomNavigationBarStyle,
     FBreadcrumbStyle? breadcrumbStyle,
-    FVariants<FButtonVariantConstraint, FButtonStyle, FButtonStyleDelta>? buttonStyles,
+    FVariants<FButtonVariantConstraint, FButtonSizes, FButtonSizesDelta>? buttonStyles,
     FCalendarStyle? calendarStyle,
     FCardStyle? cardStyle,
     FCheckboxStyle? checkboxStyle,
@@ -702,15 +702,44 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     badgeStyles: FVariants.lerpWhere(a.badgeStyles, b.badgeStyles, t, (a, b, t) => a!.lerp(b!, t)),
     bottomNavigationBarStyle: a.bottomNavigationBarStyle.lerp(b.bottomNavigationBarStyle, t),
     breadcrumbStyle: a.breadcrumbStyle.lerp(b.breadcrumbStyle, t),
-    buttonStyles: FVariants.lerpWhere(a.buttonStyles, b.buttonStyles, t, (a, b, t) => a!.lerp(b!, t)),
+    buttonStyles: FVariants.lerpWhere(a.buttonStyles, b.buttonStyles, t, (a, b, t) {
+      if (a == null) {
+        return b;
+      }
+
+      if (b == null) {
+        return a;
+      }
+
+      return FVariants.lerpWhere(a, b, t, (a, b, t) {
+        if (a == null) {
+          return b;
+        }
+
+        if (b == null) {
+          return a;
+        }
+
+        return a.lerp(b, t);
+      });
+    }),
+
     calendarStyle: a.calendarStyle.lerp(b.calendarStyle, t),
+
     cardStyle: a.cardStyle.lerp(b.cardStyle, t),
+
     checkboxStyle: a.checkboxStyle.lerp(b.checkboxStyle, t),
+
     circularProgressStyle: a.circularProgressStyle.lerp(b.circularProgressStyle, t),
+
     dateFieldStyle: a.dateFieldStyle.lerp(b.dateFieldStyle, t),
+
     determinateProgressStyle: a.determinateProgressStyle.lerp(b.determinateProgressStyle, t),
+
     dialogRouteStyle: a.dialogRouteStyle.lerp(b.dialogRouteStyle, t),
+
     dialogStyle: a.dialogStyle.lerp(b.dialogStyle, t),
+
     dividerStyles: FVariants.lerpWhere(a.dividerStyles, b.dividerStyles, t, (a, b, t) => a!.lerp(b!, t)),
     headerStyles: FVariants.lerpWhere(a.headerStyles, b.headerStyles, t, (a, b, t) => a!.lerp(b!, t)),
     itemStyles: FVariants.lerpWhere(a.itemStyles, b.itemStyles, t, (a, b, t) => a!.lerp(b!, t)),
@@ -1020,46 +1049,54 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
           textStyle: .resolveWith(
-            (states) =>
-                buttonStyles.resolve({FButtonVariant.secondary}).contentStyle.textStyle.resolve(toVariants(states)),
+            (states) => buttonStyles
+                .resolve({FButtonVariant.secondary})
+                .base
+                .contentStyle
+                .textStyle
+                .resolve(toVariants(states)),
           ),
           backgroundColor: .resolveWith(
             (states) =>
-                buttonStyles.resolve({FButtonVariant.secondary}).decoration.resolve(toVariants(states)).color ??
+                buttonStyles.resolve({FButtonVariant.secondary}).base.decoration.resolve(toVariants(states)).color ??
                 colors.secondary,
           ),
           foregroundColor: .resolveWith(
             (states) =>
                 buttonStyles
                     .resolve({FButtonVariant.secondary})
+                    .base
                     .contentStyle
                     .textStyle
                     .resolve(toVariants(states))
                     .color ??
                 colors.secondaryForeground,
           ),
-          padding: .all(buttonStyles.resolve({FButtonVariant.secondary}).contentStyle.padding),
+          padding: .all(buttonStyles.resolve({FButtonVariant.secondary}).base.contentStyle.padding),
           shape: .all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
         ),
       ),
 
       filledButtonTheme: FilledButtonThemeData(
         style: ButtonStyle(
-          textStyle: .resolveWith((states) => buttonStyles.base.contentStyle.textStyle.resolve(toVariants(states))),
+          textStyle: .resolveWith(
+            (states) => buttonStyles.base.base.contentStyle.textStyle.resolve(toVariants(states)),
+          ),
           backgroundColor: .resolveWith(
-            (states) => buttonStyles.base.decoration.resolve(toVariants(states)).color ?? colors.secondary,
+            (states) => buttonStyles.base.base.decoration.resolve(toVariants(states)).color ?? colors.secondary,
           ),
           foregroundColor: .resolveWith(
             (states) =>
                 buttonStyles
                     .resolve({FButtonVariant.secondary})
+                    .base
                     .contentStyle
                     .textStyle
                     .resolve(toVariants(states))
                     .color ??
                 colors.secondaryForeground,
           ),
-          padding: .all(buttonStyles.base.contentStyle.padding),
+          padding: .all(buttonStyles.base.base.contentStyle.padding),
           shape: .all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
         ),
       ),
@@ -1068,26 +1105,32 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
         style: ButtonStyle(
           textStyle: .resolveWith(
             (states) =>
-                buttonStyles.resolve({FButtonVariant.outline}).contentStyle.textStyle.resolve(toVariants(states)),
+                buttonStyles.resolve({FButtonVariant.outline}).base.contentStyle.textStyle.resolve(toVariants(states)),
           ),
           backgroundColor: .resolveWith(
             (states) =>
-                buttonStyles.resolve({FButtonVariant.outline}).decoration.resolve(toVariants(states)).color ??
+                buttonStyles.resolve({FButtonVariant.outline}).base.decoration.resolve(toVariants(states)).color ??
                 Colors.transparent,
           ),
           foregroundColor: .resolveWith(
             (states) =>
                 buttonStyles
                     .resolve({FButtonVariant.outline})
+                    .base
                     .contentStyle
                     .textStyle
                     .resolve(toVariants(states))
                     .color ??
                 Colors.transparent,
           ),
-          padding: .all(buttonStyles.resolve({FButtonVariant.outline}).contentStyle.padding),
+          padding: .all(buttonStyles.resolve({FButtonVariant.outline}).base.contentStyle.padding),
           side: .resolveWith((states) {
-            final border = buttonStyles.resolve({FButtonVariant.outline}).decoration.resolve(toVariants(states)).border;
+            final border = buttonStyles
+                .resolve({FButtonVariant.outline})
+                .base
+                .decoration
+                .resolve(toVariants(states))
+                .border;
             return BorderSide(
               color:
                   border?.top.color ??
@@ -1102,7 +1145,12 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
           shape: .resolveWith(
             (states) => RoundedRectangleBorder(
               borderRadius:
-                  buttonStyles.resolve({FButtonVariant.outline}).decoration.resolve(toVariants(states)).borderRadius ??
+                  buttonStyles
+                      .resolve({FButtonVariant.outline})
+                      .base
+                      .decoration
+                      .resolve(toVariants(states))
+                      .borderRadius ??
                   style.borderRadius,
             ),
           ),
@@ -1112,22 +1160,34 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
           textStyle: .resolveWith(
-            (states) => buttonStyles.resolve({FButtonVariant.ghost}).contentStyle.textStyle.resolve(toVariants(states)),
+            (states) =>
+                buttonStyles.resolve({FButtonVariant.ghost}).base.contentStyle.textStyle.resolve(toVariants(states)),
           ),
           backgroundColor: .resolveWith(
             (states) =>
-                buttonStyles.resolve({FButtonVariant.ghost}).decoration.resolve(toVariants(states)).color ??
+                buttonStyles.resolve({FButtonVariant.ghost}).base.decoration.resolve(toVariants(states)).color ??
                 Colors.transparent,
           ),
           foregroundColor: .resolveWith(
             (states) =>
-                buttonStyles.resolve({FButtonVariant.ghost}).contentStyle.textStyle.resolve(toVariants(states)).color ??
+                buttonStyles
+                    .resolve({FButtonVariant.ghost})
+                    .base
+                    .contentStyle
+                    .textStyle
+                    .resolve(toVariants(states))
+                    .color ??
                 colors.secondaryForeground,
           ),
           shape: .resolveWith(
             (states) => RoundedRectangleBorder(
               borderRadius:
-                  buttonStyles.resolve({FButtonVariant.ghost}).decoration.resolve(toVariants(states)).borderRadius ??
+                  buttonStyles
+                      .resolve({FButtonVariant.ghost})
+                      .base
+                      .decoration
+                      .resolve(toVariants(states))
+                      .borderRadius ??
                   style.borderRadius,
             ),
           ),
@@ -1135,12 +1195,12 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       ),
 
       floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: buttonStyles.base.decoration.base.color,
-        foregroundColor: buttonStyles.base.contentStyle.textStyle.base.color,
-        hoverColor: buttonStyles.base.decoration.resolve({FTappableVariant.hovered}).color,
+        backgroundColor: buttonStyles.base.base.decoration.base.color,
+        foregroundColor: buttonStyles.base.base.contentStyle.textStyle.base.color,
+        hoverColor: buttonStyles.base.base.decoration.resolve({FTappableVariant.hovered}).color,
         disabledElevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: buttonStyles.base.decoration.base.borderRadius ?? style.borderRadius,
+          borderRadius: buttonStyles.base.base.decoration.base.borderRadius ?? style.borderRadius,
         ),
       ),
 
@@ -1148,18 +1208,29 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
         style: ButtonStyle(
           backgroundColor: .resolveWith(
             (states) =>
-                buttonStyles.resolve({FButtonVariant.ghost}).decoration.resolve(toVariants(states)).color ??
+                buttonStyles.resolve({FButtonVariant.ghost}).base.decoration.resolve(toVariants(states)).color ??
                 Colors.transparent,
           ),
           foregroundColor: .resolveWith(
             (states) =>
-                buttonStyles.resolve({FButtonVariant.ghost}).contentStyle.textStyle.resolve(toVariants(states)).color ??
+                buttonStyles
+                    .resolve({FButtonVariant.ghost})
+                    .base
+                    .contentStyle
+                    .textStyle
+                    .resolve(toVariants(states))
+                    .color ??
                 colors.secondaryForeground,
           ),
           shape: .resolveWith(
             (states) => RoundedRectangleBorder(
               borderRadius:
-                  buttonStyles.resolve({FButtonVariant.ghost}).decoration.resolve(toVariants(states)).borderRadius ??
+                  buttonStyles
+                      .resolve({FButtonVariant.ghost})
+                      .base
+                      .decoration
+                      .resolve(toVariants(states))
+                      .borderRadius ??
                   style.borderRadius,
             ),
           ),
@@ -1169,22 +1240,34 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       segmentedButtonTheme: SegmentedButtonThemeData(
         style: ButtonStyle(
           textStyle: .resolveWith(
-            (states) => buttonStyles.resolve({FButtonVariant.ghost}).contentStyle.textStyle.resolve(toVariants(states)),
+            (states) =>
+                buttonStyles.resolve({FButtonVariant.ghost}).base.contentStyle.textStyle.resolve(toVariants(states)),
           ),
           backgroundColor: .resolveWith(
             (states) =>
-                buttonStyles.resolve({FButtonVariant.ghost}).decoration.resolve(toVariants(states)).color ??
+                buttonStyles.resolve({FButtonVariant.ghost}).base.decoration.resolve(toVariants(states)).color ??
                 Colors.transparent,
           ),
           foregroundColor: .resolveWith(
             (states) =>
-                buttonStyles.resolve({FButtonVariant.ghost}).contentStyle.textStyle.resolve(toVariants(states)).color ??
+                buttonStyles
+                    .resolve({FButtonVariant.ghost})
+                    .base
+                    .contentStyle
+                    .textStyle
+                    .resolve(toVariants(states))
+                    .color ??
                 colors.secondaryForeground,
           ),
           shape: .resolveWith(
             (states) => RoundedRectangleBorder(
               borderRadius:
-                  buttonStyles.resolve({FButtonVariant.ghost}).decoration.resolve(toVariants(states)).borderRadius ??
+                  buttonStyles
+                      .resolve({FButtonVariant.ghost})
+                      .base
+                      .decoration
+                      .resolve(toVariants(states))
+                      .borderRadius ??
                   style.borderRadius,
             ),
           ),
@@ -1272,7 +1355,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FVariantsDelta<FBadgeVariantConstraint, FBadgeVariant, FBadgeStyle, FBadgeStyleDelta>? badgeStyles,
     FBottomNavigationBarStyleDelta? bottomNavigationBarStyle,
     FBreadcrumbStyleDelta? breadcrumbStyle,
-    FVariantsDelta<FButtonVariantConstraint, FButtonVariant, FButtonStyle, FButtonStyleDelta>? buttonStyles,
+    FVariantsDelta<FButtonVariantConstraint, FButtonVariant, FButtonSizes, FButtonSizesDelta>? buttonStyles,
     FCalendarStyleDelta? calendarStyle,
     FCardStyleDelta? cardStyle,
     FCheckboxStyleDelta? checkboxStyle,

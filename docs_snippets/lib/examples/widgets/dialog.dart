@@ -13,7 +13,7 @@ class DialogPage extends Example {
 
   @override
   Widget example(BuildContext context) => FButton(
-    variants: {.outline},
+    variant: .outline,
     mainAxisSize: .min,
     onPress: () => showFDialog(
       context: context,
@@ -30,7 +30,7 @@ class DialogPage extends Example {
             'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
           ),
           actions: [
-            FButton(variants: {.outline}, child: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
+            FButton(variant: .outline, child: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
             FButton(child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
           ],
         ),
@@ -46,7 +46,7 @@ class VerticalDialogPage extends Example {
 
   @override
   Widget example(BuildContext context) => FButton(
-    variants: {.outline},
+    variant: .outline,
     mainAxisSize: .min,
     onPress: () => showFDialog(
       context: context,
@@ -61,7 +61,7 @@ class VerticalDialogPage extends Example {
           ),
           actions: [
             FButton(child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
-            FButton(variants: {.outline}, child: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
+            FButton(variant: .outline, child: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
           ],
         ),
       ),
@@ -76,7 +76,7 @@ class BlurredDialogPage extends Example {
 
   @override
   Widget example(BuildContext context) => FButton(
-    variants: {.outline},
+    variant: .outline,
     mainAxisSize: .min,
     onPress: () => showFDialog(
       context: context,
@@ -100,7 +100,7 @@ class BlurredDialogPage extends Example {
           ),
           actions: [
             FButton(child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
-            FButton(variants: {.outline}, child: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
+            FButton(variant: .outline, child: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
           ],
         ),
       ),

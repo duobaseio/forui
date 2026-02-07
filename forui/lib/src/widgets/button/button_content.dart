@@ -114,29 +114,6 @@ class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFunctions {
     this.padding = const .symmetric(horizontal: 16, vertical: 12.5),
     this.spacing = 10,
   });
-
-  /// Creates a [FButtonContentStyle] that inherits its properties.
-  FButtonContentStyle.inherit({required FTypography typography, required Color enabled, required Color disabled})
-    : this(
-        textStyle: .delta(
-          typography.base.copyWith(color: enabled, fontWeight: .w500, height: 1),
-          variants: {
-            [.disabled]: .delta(color: disabled),
-          },
-        ),
-        iconStyle: .delta(
-          IconThemeData(color: enabled, size: 20),
-          variants: {
-            [.disabled]: .delta(color: disabled),
-          },
-        ),
-        circularProgressStyle: .delta(
-          FCircularProgressStyle(iconStyle: IconThemeData(color: enabled, size: 20)),
-          variants: {
-            [.disabled]: .delta(iconStyle: .delta(color: disabled)),
-          },
-        ),
-      );
 }
 
 /// [FButton] icon content's style.
@@ -151,15 +128,4 @@ class FButtonIconContentStyle with Diagnosticable, _$FButtonIconContentStyleFunc
 
   /// Creates a [FButtonIconContentStyle].
   const FButtonIconContentStyle({required this.iconStyle, this.padding = const .all(7.5)});
-
-  /// Creates a [FButtonIconContentStyle] that inherits its properties.
-  FButtonIconContentStyle.inherit({required Color enabled, required Color disabled})
-    : this(
-        iconStyle: .delta(
-          IconThemeData(color: enabled, size: 20),
-          variants: {
-            [.disabled]: .delta(color: disabled),
-          },
-        ),
-      );
 }

@@ -907,7 +907,7 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
       colors: colors,
       typography: typography,
       style: style,
-    ).resolve({FButtonVariant.ghost});
+    ).resolve({FButtonVariant.ghost}).resolve({FButtonSizeVariant.sm});
 
     return .new(
       decoration: FVariants(
@@ -937,25 +937,13 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
         },
       ),
       iconStyle: .delta(
-        IconThemeData(color: colors.mutedForeground, size: 17),
+        IconThemeData(color: colors.mutedForeground, size: 16),
         variants: {
           [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
         },
       ),
       clearButtonStyle: ghost.copyWith(
-        iconContentStyle: ghost.iconContentStyle.copyWith(
-          iconStyle: FVariantsDelta.value(
-            .new(
-              IconThemeData(color: colors.mutedForeground, size: 17),
-              variants: {
-                [FTappableVariantConstraint.disabled]: IconThemeData(
-                  color: colors.disable(colors.mutedForeground),
-                  size: 17,
-                ),
-              },
-            ),
-          ),
-        ),
+        iconContentStyle: .delta(iconStyle: .apply([.onAll(.delta(color: colors.mutedForeground))])),
       ),
       tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
       labelTextStyle: style.formFieldStyle.labelTextStyle,

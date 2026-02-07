@@ -112,8 +112,20 @@ are not available for most of these changes due to the tool's limitations.
 
 
 ### `FButton`
+* Add `FButton.variant`.
+* Add `FButton.size`.
+* Add `FButtonSizeVariant`
+* Add `FButtonSizeVariantConstraint`.
+* Add `FButtonSizeStyles` extension type.
+* Add `FButtonSizes` type alias.
+* Add `FButtonSizesDelta` type alias.
+
 * Change destructive variant to match latest shadcn/ui.
+* Change base `FButtonStyle` values to scale more appropriately with different sizes.
 * Change `FButtonVariant.outline` background color from transparent to `background`.
+* **Breaking** Remove `FButtonStyle.inherit`. Use `FButtonSizeStyles.inherit` instead.
+* **Breaking** Remove `FButtonContentStyle.inherit`. Construct `FButtonContentStyle` directly instead.
+* **Breaking** Remove `FButtonIconContentStyle.inherit`. Construct `FButtonIconContentStyle` directly instead.
 * **Breaking** Rename `FButton.onStateChange` to `FButton.onVariantChange`.
 * **Breaking** Rename `FButtonData.states` to `FButtonData.variants`.
 

@@ -5,8 +5,11 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 final button = FButton(
-  // {@category "Variants"}
-  variants: const {},
+  // {@category "Variant"}
+  variant: null,
+  // {@endcategory}
+  // {@category "Size"}
+  size: null,
   // {@endcategory}
   // {@category "Core"}
   style: const .inherit(),
@@ -39,8 +42,9 @@ final button = FButton(
 );
 
 final icon = FButton.icon(
-  // {@category "Variants"}
-  variants: {.outline},
+  // {@category "Variant"}
+  variant: .outline,
+  size: null,
   // {@endcategory}
   // {@category "Core"}
   style: const .inherit(),
@@ -65,8 +69,9 @@ final icon = FButton.icon(
 );
 
 final raw = FButton.raw(
-  // {@category "Variants"}
-  variants: const {},
+  // {@category "Variant"}
+  variant: null,
+  size: null,
   // {@endcategory}
   // {@category "Core"}
   style: const .inherit(),
@@ -90,22 +95,38 @@ final raw = FButton.raw(
   // {@endcategory}
 );
 
-// {@category "Variants" "Primary"}
+// {@category "Variant" "Primary"}
 /// The button's primary (base) variant.
-final Set<FButtonVariant> primary = {};
+const FButtonVariant? primary = null;
 
-// {@category "Variants" "Secondary"}
+// {@category "Variant" "Secondary"}
 /// The button's secondary variant.
-final Set<FButtonVariant> secondary = {.secondary};
+const FButtonVariant secondary = .secondary;
 
-// {@category "Variants" "Destructive"}
+// {@category "Variant" "Destructive"}
 /// The button's destructive variant.
-final Set<FButtonVariant> destructive = {.destructive};
+const FButtonVariant destructive = .destructive;
 
-// {@category "Variants" "Outline"}
+// {@category "Variant" "Outline"}
 /// The button's outline variant.
-final Set<FButtonVariant> outline = {.outline};
+const FButtonVariant outline = .outline;
 
-// {@category "Variants" "Ghost"}
+// {@category "Variant" "Ghost"}
 /// The button's ghost variant.
-final Set<FButtonVariant> ghost = {.ghost};
+const FButtonVariant ghost = .ghost;
+
+// {@category "Size" "Base"}
+/// The button's base (default) size.
+const FButtonSizeVariant? base = null;
+
+// {@category "Size" "Extra Small"}
+/// The button's extra small size.
+const FButtonSizeVariant xs = .xs;
+
+// {@category "Size" "Small"}
+/// The button's small size.
+const FButtonSizeVariant sm = .sm;
+
+// {@category "Size" "Large"}
+/// The button's large size.
+const FButtonSizeVariant lg = .lg;
