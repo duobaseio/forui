@@ -67,7 +67,7 @@ class FButton extends StatelessWidget {
   /// ```dart
   /// FButton(
   ///   variant: .destructive,
-  ///   size: .small,
+  ///   size: .sm,
   ///   style: .delta(contentStyle: .delta(padding: .all(20))),
   ///   onPress: () {},
   ///   child: Text('Small destructive button with extra padding'),

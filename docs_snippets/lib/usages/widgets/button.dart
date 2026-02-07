@@ -43,7 +43,9 @@ final button = FButton(
 
 final icon = FButton.icon(
   // {@category "Variant"}
-  variant: .outline,
+  variant: null,
+  // {@endcategory}
+  // {@category "Size"}
   size: null,
   // {@endcategory}
   // {@category "Core"}
@@ -71,6 +73,8 @@ final icon = FButton.icon(
 final raw = FButton.raw(
   // {@category "Variant"}
   variant: null,
+  // {@endcategory}
+  // {@category "Size"}
   size: null,
   // {@endcategory}
   // {@category "Core"}
