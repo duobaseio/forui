@@ -29,7 +29,6 @@ void main() {
       border: Colors.lightBlue,
     );
 
-
     group('lerpColor(...)', () {
       const p3White = Color.from(alpha: 1, red: 1, green: 1, blue: 1, colorSpace: .displayP3);
       const p3Red = Color.from(alpha: 1, red: 0.8, green: 0.1, blue: 0.1, colorSpace: .displayP3);
@@ -56,7 +55,6 @@ void main() {
         expect(result!.colorSpace, ColorSpace.displayP3);
       });
     });
-
 
     group('lerp(...)', () {
       const schemeB = FColors(
@@ -118,7 +116,11 @@ void main() {
     group('hover(...)', () {
       for (final (name, color, expected) in [
         ('sRGB', const Color(0xFF3366CC), ColorSpace.sRGB),
-        ('Display P3', const Color.from(alpha: 1, red: 0.2, green: 0.4, blue: 0.8, colorSpace: .displayP3), ColorSpace.displayP3),
+        (
+          'Display P3',
+          const Color.from(alpha: 1, red: 0.2, green: 0.4, blue: 0.8, colorSpace: .displayP3),
+          ColorSpace.displayP3,
+        ),
       ]) {
         test('$name color in, $name color out', () {
           final result = scheme.hover(color);

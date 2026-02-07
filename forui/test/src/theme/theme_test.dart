@@ -16,7 +16,9 @@ class Foo extends StatelessWidget {
 void main() {
   group('FBasicTheme', () {
     testWidgets('ThemeData is visible in child widgets', (tester) async {
-      await tester.pumpWidget(Foo(child: Builder(builder: (context) => Text('${context.theme == FThemes.neutral.dark}'))));
+      await tester.pumpWidget(
+        Foo(child: Builder(builder: (context) => Text('${context.theme == FThemes.neutral.dark}'))),
+      );
 
       expect(find.text('true'), findsOneWidget);
     });

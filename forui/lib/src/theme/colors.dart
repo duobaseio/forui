@@ -219,7 +219,7 @@ final class FColors with Diagnosticable {
     }
 
     return hovered;
-}
+  }
 
   /// Returns a disabled color for the [foreground] on the [background].
   ///

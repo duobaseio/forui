@@ -53,7 +53,10 @@ void main() {
                   BoxDecoration(
                     color: FThemes.neutral.light.colors.background.withValues(alpha: 0.5),
                     borderRadius: FThemes.neutral.light.style.borderRadius,
-                    border: .all(width: FThemes.neutral.light.style.borderWidth, color: FThemes.neutral.light.colors.border),
+                    border: .all(
+                      width: FThemes.neutral.light.style.borderWidth,
+                      color: FThemes.neutral.light.colors.border,
+                    ),
                   ),
                 ),
               ),

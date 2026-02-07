@@ -168,7 +168,7 @@ enum Style {
     null,
     <String>['dialog-route', 'dialogroute'],
     <String>['FDialogRouteStyle'],
-    'FDialogRouteStyle dialogRouteStyle({required FColors colors}) =>\n    FDialogRouteStyle(\n      barrierFilter: (v) => ColorFilter.mode(\n        .lerp(Colors.transparent, colors.barrier, v)!,\n        .srcOver,\n      ),\n      motion: const FDialogRouteMotion(),\n    );\n',
+    'FDialogRouteStyle dialogRouteStyle({required FColors colors}) =>\n    FDialogRouteStyle(\n      barrierFilter: (v) => ColorFilter.mode(\n        FColors.lerpColor(Colors.transparent, colors.barrier, v)!,\n        .srcOver,\n      ),\n      motion: const FDialogRouteMotion(),\n    );\n',
   ),
   fdialogstyle(
     'FDialogStyle',
@@ -259,7 +259,7 @@ enum Style {
     null,
     <String>['modal-sheet', 'modalsheet'],
     <String>['FModalSheetStyle'],
-    'FModalSheetStyle modalSheetStyle({required FColors colors}) => FModalSheetStyle(\n  barrierFilter: (v) =>\n      ColorFilter.mode(.lerp(Colors.transparent, colors.barrier, v)!, .srcOver),\n  motion: const FModalSheetMotion(),\n  flingVelocity: 700,\n  closeProgressThreshold: 0.5,\n);\n',
+    'FModalSheetStyle modalSheetStyle({required FColors colors}) => FModalSheetStyle(\n  barrierFilter: (v) => ColorFilter.mode(\n    FColors.lerpColor(Colors.transparent, colors.barrier, v)!,\n    .srcOver,\n  ),\n  motion: const FModalSheetMotion(),\n  flingVelocity: 700,\n  closeProgressThreshold: 0.5,\n);\n',
   ),
   fmultiselectfieldstyle(
     'FMultiSelectFieldStyle',
