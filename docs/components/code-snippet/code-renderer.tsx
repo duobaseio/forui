@@ -9,9 +9,10 @@ import { TokenGroup } from './token-span';
 interface Props {
   snippet: SnippetData;
   isTooltip?: boolean;
+  lineClasses?: Map<number, string>;
 }
 
-export function CodeRenderer({ snippet, isTooltip = false }: Props) {
+export function CodeRenderer({ snippet, isTooltip = false, lineClasses }: Props) {
   const [processedLines, setProcessedLines] = useState<ProcessedLine[] | null>(null);
   const [error, setError] = useState<string | null>(null);
 
@@ -67,7 +68,7 @@ export function CodeRenderer({ snippet, isTooltip = false }: Props) {
   return (
     <code className={cn('block bg-transparent border-0 whitespace-pre', isTooltip ? 'text-xs' : '')}>
       {processedLines.map((line, lineIdx) => (
-        <div key={lineIdx} className={cn('leading-relaxed', line.highlighted && 'bg-accent/50')}>
+        <div key={lineIdx} className={cn('leading-relaxed', line.highlighted && 'bg-blue-500/10', lineClasses?.get(lineIdx))}>
           {!isTooltip && (
             <span className="select-none text-muted-foreground text-right pr-4 inline-block w-8">{lineIdx + 1}</span>
           )}

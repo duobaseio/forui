@@ -7,6 +7,7 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.button/
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import primarySnippet from '@/snippets/examples/button/primary.json';
 import secondarySnippet from '@/snippets/examples/button/secondary.json';
 import destructiveSnippet from '@/snippets/examples/button/destructive.json';
@@ -15,6 +16,9 @@ import ghostSnippet from '@/snippets/examples/button/ghost.json';
 import iconSnippet from '@/snippets/examples/button/icon.json';
 import onlyIconSnippet from '@/snippets/examples/button/only-icon.json';
 import circularProgressSnippet from '@/snippets/examples/button/circular-progress.json';
+import buttonUsage from '@/snippets/usages/widgets/button/button.json';
+import buttonIconUsage from '@/snippets/usages/widgets/button/icon.json';
+import buttonRawUsage from '@/snippets/usages/widgets/button/raw.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
@@ -36,37 +40,13 @@ dart run forui style create button
 ## Usage
 
 ### `FButton(...)`
+<UsageSnippet usage={buttonUsage} />
 
-```dart copy
-FButton(
-  child: const Text('Button'),
-  style: FButtonStyle.primary(),
-  prefix: const Icon(FIcons.mail),
-  suffix: const Icon(FIcons.chevronRight),
-  mainAxisSize: MainAxisSize.min,
-  onPress: () {},
-  onLongPress: () {},
-  onSecondaryPress: () {},
-  onSecondaryLongPress: () {},
-  shortcuts: {SingleActivator(LogicalKeyboardKey.enter): ActivateIntent()},
-  actions: {ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {})},
-);
-```
+### `FButton.icon(...)`
+<UsageSnippet usage={buttonIconUsage} />
 
 ### `FButton.raw(...)`
-
-```dart copy
-FButton.raw(
-  child: const Text('Button'),
-  style: FButtonStyle.primary(),
-  onPress: () {},
-  onLongPress: () {},
-  onSecondaryPress: () {},
-  onSecondaryLongPress: () {},
-  shortcuts: {SingleActivator(LogicalKeyboardKey.enter): ActivateIntent()},
-  actions: {ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {})},
-);
-```
+<UsageSnippet usage={buttonRawUsage} />
 
 ## Examples
 
