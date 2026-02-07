@@ -104,6 +104,7 @@ are not available for most of these changes due to the tool's limitations.
 
 
 ### `FButton`
+* Change destructive variant to match latest shadcn/ui.
 * Change `FButtonVariant.outline` background color from transparent to `background`.
 * **Breaking** Rename `FButton.onStateChange` to `FButton.onVariantChange`.
 * **Breaking** Rename `FButtonData.states` to `FButtonData.variants`.

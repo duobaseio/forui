@@ -247,78 +247,101 @@ class FButton extends StatelessWidget {
 extension type FButtonStyles._(FVariants<FButtonVariantConstraint, FButtonStyle, FButtonStyleDelta> _)
     implements FVariants<FButtonVariantConstraint, FButtonStyle, FButtonStyleDelta> {
   /// Creates a [FButtonStyles] that inherits its properties.
-  FButtonStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this._(
-        FVariants(
-          .inherit(
+  factory FButtonStyles.inherit({required FColors colors, required FTypography typography, required FStyle style}) {
+    final destructive = colors.destructive.withValues(alpha: colors.brightness == .light ? 0.1 : 0.2);
+    final disabledDestructive = colors.destructive.withValues(alpha: colors.brightness == .light ? 0.05 : 0.1);
+    final hoveredPressedDestructive = colors.destructive.withValues(alpha: colors.brightness == .light ? 0.2 : 0.3);
+    final disabledDestructiveContent = colors.destructive.withValues(alpha: 0.5);
+
+    return FButtonStyles._(
+      FVariants(
+        .inherit(
+          colors: colors,
+          style: style,
+          typography: typography,
+          color: colors.primary,
+          foregroundColor: colors.primaryForeground,
+        ),
+        variants: {
+          [.secondary]: .inherit(
             colors: colors,
             style: style,
             typography: typography,
-            color: colors.primary,
-            foregroundColor: colors.primaryForeground,
+            color: colors.secondary,
+            foregroundColor: colors.secondaryForeground,
           ),
-          variants: {
-            [.secondary]: .inherit(
-              colors: colors,
-              style: style,
-              typography: typography,
-              color: colors.secondary,
-              foregroundColor: colors.secondaryForeground,
+          [.destructive]: FButtonStyle(
+            decoration: .delta(
+              BoxDecoration(borderRadius: style.borderRadius, color: destructive),
+              variants: {
+                [.disabled]: .delta(color: disabledDestructive),
+                [.hovered, .pressed]: .delta(color: hoveredPressedDestructive),
+              },
             ),
-            [.destructive]: .inherit(
-              colors: colors,
-              style: style,
+            focusedOutlineStyle: style.focusedOutlineStyle,
+            contentStyle: .inherit(
               typography: typography,
-              color: colors.destructive,
-              foregroundColor: colors.destructiveForeground,
+              enabled: colors.destructive,
+              disabled: disabledDestructiveContent,
             ),
-            [.outline]: FButtonStyle(
-              decoration: .delta(
-                BoxDecoration(
-                  border: .all(color: colors.border),
-                  borderRadius: style.borderRadius,
-                  color: colors.background,
-                ),
+            iconContentStyle: FButtonIconContentStyle(
+              iconStyle: .delta(
+                IconThemeData(color: colors.destructive, size: 20),
                 variants: {
-                  [.disabled]: .delta(border: .all(color: colors.disable(colors.border))),
-                  [.hovered, .pressed]: .delta(color: colors.secondary),
+                  [.disabled]: .delta(color: disabledDestructiveContent),
                 },
               ),
-              focusedOutlineStyle: style.focusedOutlineStyle,
-              contentStyle: .inherit(
-                typography: typography,
-                enabled: colors.secondaryForeground,
-                disabled: colors.disable(colors.secondaryForeground),
-              ),
-              iconContentStyle: .inherit(
-                enabled: colors.secondaryForeground,
-                disabled: colors.disable(colors.secondaryForeground),
-              ),
-              tappableStyle: style.tappableStyle,
             ),
-            [.ghost]: FButtonStyle(
-              decoration: .delta(
-                BoxDecoration(borderRadius: style.borderRadius),
-                variants: {
-                  [.disabled]: const .delta(),
-                  [.hovered, .pressed]: .delta(color: colors.secondary),
-                },
+            tappableStyle: style.tappableStyle,
+          ),
+          [.outline]: FButtonStyle(
+            decoration: .delta(
+              BoxDecoration(
+                border: .all(color: colors.border),
+                borderRadius: style.borderRadius,
+                color: colors.background,
               ),
-              focusedOutlineStyle: style.focusedOutlineStyle,
-              contentStyle: .inherit(
-                typography: typography,
-                enabled: colors.secondaryForeground,
-                disabled: colors.disable(colors.secondaryForeground),
-              ),
-              iconContentStyle: .inherit(
-                enabled: colors.secondaryForeground,
-                disabled: colors.disable(colors.secondaryForeground),
-              ),
-              tappableStyle: style.tappableStyle,
+              variants: {
+                [.disabled]: .delta(border: .all(color: colors.disable(colors.border))),
+                [.hovered, .pressed]: .delta(color: colors.secondary),
+              },
             ),
-          },
-        ),
-      );
+            focusedOutlineStyle: style.focusedOutlineStyle,
+            contentStyle: .inherit(
+              typography: typography,
+              enabled: colors.secondaryForeground,
+              disabled: colors.disable(colors.secondaryForeground),
+            ),
+            iconContentStyle: .inherit(
+              enabled: colors.secondaryForeground,
+              disabled: colors.disable(colors.secondaryForeground),
+            ),
+            tappableStyle: style.tappableStyle,
+          ),
+          [.ghost]: FButtonStyle(
+            decoration: .delta(
+              BoxDecoration(borderRadius: style.borderRadius),
+              variants: {
+                [.disabled]: const .delta(),
+                [.hovered, .pressed]: .delta(color: colors.secondary),
+              },
+            ),
+            focusedOutlineStyle: style.focusedOutlineStyle,
+            contentStyle: .inherit(
+              typography: typography,
+              enabled: colors.secondaryForeground,
+              disabled: colors.disable(colors.secondaryForeground),
+            ),
+            iconContentStyle: .inherit(
+              enabled: colors.secondaryForeground,
+              disabled: colors.disable(colors.secondaryForeground),
+            ),
+            tappableStyle: style.tappableStyle,
+          ),
+        },
+      ),
+    );
+  }
 }
 
 /// A [FButton]'s style.
