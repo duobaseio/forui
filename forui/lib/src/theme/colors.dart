@@ -40,7 +40,7 @@ final class FColors with Diagnosticable {
       b = b.withValues(colorSpace: .displayP3);
     }
 
-    return Color.lerp(a, b, t)!;
+    return Color.lerp(a, b, t);
   }
 
   /// The system brightness.
@@ -201,7 +201,7 @@ final class FColors with Diagnosticable {
   ///
   /// The lightening and darkening are controlled by [hoverLighten] and [hoverDarken].
   Color hover(Color color) {
-    // This results in a slight precision lost when using Display P3 colors, but it's negligible for hover effects.
+    // This results in a slight precision loss when using Display P3 colors, but it's negligible for hover effects.
     final hsl = HSLColor.fromColor(color);
     final l = hsl.lightness;
 
