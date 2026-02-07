@@ -34,7 +34,7 @@ export function Theme({title, color}) {
     );
 }
 
-Forui themes allow you to define a consistent visual style across your application & widgets. It relies on the [CLI](cli)
+Forui themes allow you to define a consistent visual style across your application & widgets. It relies on the [CLI](/docs/cli)
 to generate themes and styles that can be directly modified in your project.
 
 ## Getting Started
@@ -48,17 +48,18 @@ to generate themes and styles that can be directly modified in your project.
 
 Forui includes predefined themes that can be used out of the box. They are heavily inspired by [shadcn/ui](https://ui.shadcn.com/themes).
 
-| Theme                                    | Light Accessor         | Dark Accessor         |
-|:-----------------------------------------|:-----------------------|:----------------------|
-| <Theme title="Zinc" color="#18181b" />   | `FThemes.zinc.light`   | `FThemes.zinc.dark`   |
-| <Theme title="Slate" color="#64748b" />  | `FThemes.slate.light`  | `FThemes.slate.dark`  |
-| <Theme title="Red" color="#dc2626" />    | `FThemes.red.light`    | `FThemes.red.dark`    |
-| <Theme title="Rose" color="#e11d48" />   | `FThemes.rose.light`   | `FThemes.rose.dark`   |
-| <Theme title="Orange" color="#f97316" /> | `FThemes.orange.light` | `FThemes.orange.dark` |
-| <Theme title="Green" color="#16a34a" />  | `FThemes.green.light`  | `FThemes.green.dark`  |
-| <Theme title="Blue" color="#2563eb" />   | `FThemes.blue.light`   | `FThemes.blue.dark`   |
-| <Theme title="Yellow" color="#facc15" /> | `FThemes.yellow.light` | `FThemes.yellow.dark` |
-| <Theme title="Violet" color="#7c3aed" /> | `FThemes.violet.light` | `FThemes.violet.dark` |
+| Theme                                     | Light Accessor          | Dark Accessor         |
+|:------------------------------------------|:------------------------|:----------------------|
+| <Theme title="Neutral" color="#171717" /> | `FThemes.neutral.light` | `FThemes.neutral.dark`|
+| <Theme title="Zinc" color="#18181b" />    | `FThemes.zinc.light`    | `FThemes.zinc.dark`   |
+| <Theme title="Slate" color="#0f172b" />   | `FThemes.slate.light`   | `FThemes.slate.dark`  |
+| <Theme title="Blue" color="#1447E6" />    | `FThemes.blue.light`    | `FThemes.blue.dark`   |
+| <Theme title="Green" color="#5ea500" />   | `FThemes.green.light`   | `FThemes.green.dark`  |
+| <Theme title="Orange" color="#f54a00" />  | `FThemes.orange.light`  | `FThemes.orange.dark` |
+| <Theme title="Red" color="#e7000b" />     | `FThemes.red.light`     | `FThemes.red.dark`    |
+| <Theme title="Rose" color="#ec003f" />    | `FThemes.rose.light`    | `FThemes.rose.dark`   |
+| <Theme title="Violet" color="#7f22fe" />  | `FThemes.violet.light`  | `FThemes.violet.dark` |
+| <Theme title="Yellow" color="#fcc800" />  | `FThemes.yellow.light`  | `FThemes.yellow.dark` |
 
 ## Theme Components
 
@@ -196,7 +197,7 @@ Forui provides **2** ways to customize themes and widget styles.
 
 ### Themes
 
-The following section demonstrates how to use the [CLI](cli) generate a **theme** and **widget style** that you can
+The following section demonstrates how to use the [CLI](/docs/cli) generate a **theme** and **widget style** that you can
 directly modify to fit your design needs.
 
 We use [`FAccordionStyle`](https://pub.dev/documentation/forui/latest/forui.widgets.accordion/FAccordionStyle-class.html)
@@ -218,10 +219,10 @@ This generates a `main.dart` file where you will add your generated theme:
 
 #### Generate a Theme
 
-Run to generate a theme based on [zinc](#getting-started)'s light variant:
+Run to generate a theme based on [neutral](#getting-started)'s light variant:
 
 ```shell copy
-dart run forui theme create zinc-light
+dart run forui theme create neutral-light
 ```
 
 <Callout type="info">
@@ -300,6 +301,7 @@ This example shows how to add underlining when the accordion title is focused, i
 See [`FWidgetStateMap`](#fwidgetstatemap) for more information on `FWidgetStateMap`s.
 
 ##### Pass the Style
+
 
 <CodeSnippet snippet={passStyleSnippet} />
 
