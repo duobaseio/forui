@@ -99,6 +99,10 @@ are not available for most of these changes due to the tool's limitations.
 * **Breaking** Rename `FAccordionItem.onStateChange` to `FAccordionItem.onVariantChange`.
 
 
+### `FAlert`
+* Change destructive variant to match latest shadcn/ui.
+
+
 ### `FBottomNavigationBarItem`
 * **Breaking** Rename `FBottomNavigationBarItem.onStateChange` to `FBottomNavigationBarItem.onVariantChange`.
 
