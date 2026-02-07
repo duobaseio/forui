@@ -226,6 +226,8 @@ are not available for most of these changes due to the tool's limitations.
 `void Function(Set<FTappableVariant> previous, Set<FTappableVariant> current)`.
 * **Breaking** Rename `FTappable.onStateChange` to `FTappable.onVariantChange`.
 
+* Fix disabled `FTappable` still being able to receive focus.
+
 
 ### `FTile` & `FTileGroup`
 * Add destructive `FItem` variant.

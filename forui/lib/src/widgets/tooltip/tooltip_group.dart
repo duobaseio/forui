@@ -21,12 +21,12 @@ class TooltipGroupScope extends InheritedWidget {
   const TooltipGroupScope._(
     this.active,
     this.show,
-    this.hide, {
-    required this.hover,
-    required this.hoverEnterDuration,
-    required this.hoverExitDuration,
-    required this.longPress,
-    required this.longPressExitDuration,
+    this.hide,
+    this.hover,
+    this.hoverEnterDuration,
+    this.hoverExitDuration,
+    this.longPress,
+    this.longPressExitDuration, {
     required super.child,
   });
 
@@ -138,11 +138,11 @@ class _FTooltipGroupState extends State<FTooltipGroup> {
     _active,
     _show,
     _hide,
-    hover: widget.hover,
-    hoverEnterDuration: widget.hoverEnterDuration,
-    hoverExitDuration: widget.hoverExitDuration,
-    longPress: widget.longPress,
-    longPressExitDuration: widget.longPressExitDuration,
+    widget.hover,
+    widget.hoverEnterDuration,
+    widget.hoverExitDuration,
+    widget.longPress,
+    widget.longPressExitDuration,
     child: widget.child,
   );
 

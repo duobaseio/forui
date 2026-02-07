@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
@@ -307,6 +308,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
           child: Focus(
             autofocus: widget.autofocus,
             focusNode: _focus,
+            canRequestFocus: !widget._disabled,
             onFocusChange: (focused) {
               setState(() {
                 _update(.focused, focused);

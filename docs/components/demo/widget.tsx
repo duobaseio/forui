@@ -12,7 +12,7 @@ interface Props {
 
 function Component({ name, variant = 'default', height = 200, query = {} }: Props) {
   const { resolvedTheme } = useTheme();
-  const params = { ...query, theme: `zinc-${resolvedTheme}` };
+  const params = { ...query, theme: `neutral-${resolvedTheme}` };
 
   const url = process.env['NEXT_PUBLIC_SNIPPETS_URL'];
 

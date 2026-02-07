@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
 /// The themes.
-// TODO: Rename to neutral-light & neutral-dark once website is ready.
-final themes = {'zinc-light': FThemes.neutral.light, 'zinc-dark': FThemes.neutral.dark};
+final themes = {'neutral-light': FThemes.neutral.light, 'neutral-dark': FThemes.neutral.dark};
 
 abstract class Example extends StatelessWidget {
   final FThemeData theme;
@@ -14,7 +13,7 @@ abstract class Example extends StatelessWidget {
   final double top;
 
   Example({
-    String theme = 'zinc-light',
+    String theme = 'neutral-light',
     this.alignment = .center,
     this.maxWidth = 400,
     this.maxHeight = .infinity,
@@ -59,7 +58,7 @@ abstract class StatefulExample extends StatefulWidget {
   final double top;
 
   StatefulExample({
-    String theme = 'zinc-light',
+    String theme = 'neutral-light',
     this.alignment = .center,
     this.maxWidth = 400,
     this.maxHeight = .infinity,

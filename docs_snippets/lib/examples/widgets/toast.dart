@@ -130,7 +130,7 @@ class RawToastPage extends Example {
 class AlwaysExpandToastPage extends StatelessWidget {
   final FThemeData theme;
 
-  AlwaysExpandToastPage({@queryParam String theme = 'zinc-light'}) : theme = themes[theme]!;
+  AlwaysExpandToastPage({@queryParam String theme = 'neutral-light'}) : theme = themes[theme]!;
 
   @override
   Widget build(BuildContext context) => FTheme(
@@ -167,7 +167,7 @@ class AlwaysExpandToastPage extends StatelessWidget {
 class DisabledExpandToastPage extends StatelessWidget {
   final FThemeData theme;
 
-  DisabledExpandToastPage({@queryParam String theme = 'zinc-light'}) : theme = themes[theme]!;
+  DisabledExpandToastPage({@queryParam String theme = 'neutral-light'}) : theme = themes[theme]!;
 
   @override
   Widget build(BuildContext context) => FTheme(
@@ -204,7 +204,7 @@ class DisabledExpandToastPage extends StatelessWidget {
 class SwipeToastPage extends StatelessWidget {
   final FThemeData theme;
 
-  SwipeToastPage({@queryParam String theme = 'zinc-light'}) : theme = themes[theme]!;
+  SwipeToastPage({@queryParam String theme = 'neutral-light'}) : theme = themes[theme]!;
 
   @override
   Widget build(BuildContext _) => FTheme(
@@ -238,7 +238,7 @@ class SwipeToastPage extends StatelessWidget {
 class DownSwipeToastPage extends StatelessWidget {
   final FThemeData theme;
 
-  DownSwipeToastPage({@queryParam String theme = 'zinc-light'}) : theme = themes[theme]!;
+  DownSwipeToastPage({@queryParam String theme = 'neutral-light'}) : theme = themes[theme]!;
 
   @override
   Widget build(BuildContext _) => FTheme(
@@ -275,7 +275,7 @@ class DownSwipeToastPage extends StatelessWidget {
 class DisabledSwipeToastPage extends StatelessWidget {
   final FThemeData theme;
 
-  DisabledSwipeToastPage({@queryParam String theme = 'zinc-light'}) : theme = themes[theme]!;
+  DisabledSwipeToastPage({@queryParam String theme = 'neutral-light'}) : theme = themes[theme]!;
 
   @override
   Widget build(BuildContext _) => FTheme(

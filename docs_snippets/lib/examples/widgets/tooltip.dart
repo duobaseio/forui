@@ -9,7 +9,7 @@ import 'package:docs_snippets/example.dart';
 class TooltipPage extends StatelessWidget {
   final FThemeData theme;
 
-  TooltipPage({@queryParam String theme = 'zinc-light'}) : theme = themes[theme]!;
+  TooltipPage({@queryParam String theme = 'neutral-light'}) : theme = themes[theme]!;
 
   @override
   Widget build(BuildContext context) => FTheme(
@@ -45,7 +45,7 @@ class TooltipPage extends StatelessWidget {
 class HorizontalTooltipPage extends StatelessWidget {
   final FThemeData theme;
 
-  HorizontalTooltipPage({@queryParam String theme = 'zinc-light'}) : theme = themes[theme]!;
+  HorizontalTooltipPage({@queryParam String theme = 'neutral-light'}) : theme = themes[theme]!;
 
   @override
   Widget build(BuildContext context) => FTheme(
@@ -85,7 +85,7 @@ class HorizontalTooltipPage extends StatelessWidget {
 class LongPressOnlyTooltipPage extends StatelessWidget {
   final FThemeData theme;
 
-  LongPressOnlyTooltipPage({@queryParam String theme = 'zinc-light'}) : theme = themes[theme]!;
+  LongPressOnlyTooltipPage({@queryParam String theme = 'neutral-light'}) : theme = themes[theme]!;
 
   @override
   Widget build(BuildContext context) => FTheme(

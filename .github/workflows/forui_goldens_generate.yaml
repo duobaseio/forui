@@ -34,8 +34,9 @@ jobs:
         working-directory: .
         shell: bash
         run: |
-          git diff --exit-code -- forui && echo "changes=false" >> $GITHUB_OUTPUT || {
-            git diff --binary --full-index -- forui > changes-${{ matrix.os }}.patch
+          git add -- forui/test
+          git diff --cached --exit-code -- forui/test && echo "changes=false" >> $GITHUB_OUTPUT || {
+            git diff --cached --binary --full-index -- forui/test > changes-${{ matrix.os }}.patch
             echo "changes=true" >> $GITHUB_OUTPUT
           }
 
