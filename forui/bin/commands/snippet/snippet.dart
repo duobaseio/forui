@@ -286,6 +286,7 @@ extension CustomMaterialTheme on FThemeData {
           textStyle: .resolveWith(
             (states) => buttonStyles
                 .resolve({FButtonVariant.secondary})
+                .base
                 .contentStyle
                 .textStyle
                 .resolve(toVariants(states)),
@@ -294,6 +295,7 @@ extension CustomMaterialTheme on FThemeData {
             (states) =>
                 buttonStyles
                     .resolve({FButtonVariant.secondary})
+                    .base
                     .decoration
                     .resolve(toVariants(states))
                     .color ??
@@ -303,6 +305,7 @@ extension CustomMaterialTheme on FThemeData {
             (states) =>
                 buttonStyles
                     .resolve({FButtonVariant.secondary})
+                    .base
                     .contentStyle
                     .textStyle
                     .resolve(toVariants(states))
@@ -312,6 +315,7 @@ extension CustomMaterialTheme on FThemeData {
           padding: .all(
             buttonStyles
                 .resolve({FButtonVariant.secondary})
+                .base
                 .contentStyle
                 .padding,
           ),
@@ -321,13 +325,13 @@ extension CustomMaterialTheme on FThemeData {
       filledButtonTheme: FilledButtonThemeData(
         style: ButtonStyle(
           textStyle: .resolveWith(
-            (states) => buttonStyles.base.contentStyle.textStyle.resolve(
+            (states) => buttonStyles.base.base.contentStyle.textStyle.resolve(
               toVariants(states),
             ),
           ),
           backgroundColor: .resolveWith(
             (states) =>
-                buttonStyles.base.decoration
+                buttonStyles.base.base.decoration
                     .resolve(toVariants(states))
                     .color ??
                 colors.secondary,
@@ -336,13 +340,14 @@ extension CustomMaterialTheme on FThemeData {
             (states) =>
                 buttonStyles
                     .resolve({FButtonVariant.secondary})
+                    .base
                     .contentStyle
                     .textStyle
                     .resolve(toVariants(states))
                     .color ??
                 colors.secondaryForeground,
           ),
-          padding: .all(buttonStyles.base.contentStyle.padding),
+          padding: .all(buttonStyles.base.base.contentStyle.padding),
           shape: .all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
         ),
       ),
@@ -351,6 +356,7 @@ extension CustomMaterialTheme on FThemeData {
           textStyle: .resolveWith(
             (states) => buttonStyles
                 .resolve({FButtonVariant.outline})
+                .base
                 .contentStyle
                 .textStyle
                 .resolve(toVariants(states)),
@@ -359,6 +365,7 @@ extension CustomMaterialTheme on FThemeData {
             (states) =>
                 buttonStyles
                     .resolve({FButtonVariant.outline})
+                    .base
                     .decoration
                     .resolve(toVariants(states))
                     .color ??
@@ -368,6 +375,7 @@ extension CustomMaterialTheme on FThemeData {
             (states) =>
                 buttonStyles
                     .resolve({FButtonVariant.outline})
+                    .base
                     .contentStyle
                     .textStyle
                     .resolve(toVariants(states))
@@ -375,11 +383,16 @@ extension CustomMaterialTheme on FThemeData {
                 Colors.transparent,
           ),
           padding: .all(
-            buttonStyles.resolve({FButtonVariant.outline}).contentStyle.padding,
+            buttonStyles
+                .resolve({FButtonVariant.outline})
+                .base
+                .contentStyle
+                .padding,
           ),
           side: .resolveWith((states) {
             final border = buttonStyles
                 .resolve({FButtonVariant.outline})
+                .base
                 .decoration
                 .resolve(toVariants(states))
                 .border;
@@ -402,6 +415,7 @@ extension CustomMaterialTheme on FThemeData {
               borderRadius:
                   buttonStyles
                       .resolve({FButtonVariant.outline})
+                      .base
                       .decoration
                       .resolve(toVariants(states))
                       .borderRadius ??
@@ -415,6 +429,7 @@ extension CustomMaterialTheme on FThemeData {
           textStyle: .resolveWith(
             (states) => buttonStyles
                 .resolve({FButtonVariant.ghost})
+                .base
                 .contentStyle
                 .textStyle
                 .resolve(toVariants(states)),
@@ -423,6 +438,7 @@ extension CustomMaterialTheme on FThemeData {
             (states) =>
                 buttonStyles
                     .resolve({FButtonVariant.ghost})
+                    .base
                     .decoration
                     .resolve(toVariants(states))
                     .color ??
@@ -432,6 +448,7 @@ extension CustomMaterialTheme on FThemeData {
             (states) =>
                 buttonStyles
                     .resolve({FButtonVariant.ghost})
+                    .base
                     .contentStyle
                     .textStyle
                     .resolve(toVariants(states))
@@ -443,6 +460,7 @@ extension CustomMaterialTheme on FThemeData {
               borderRadius:
                   buttonStyles
                       .resolve({FButtonVariant.ghost})
+                      .base
                       .decoration
                       .resolve(toVariants(states))
                       .borderRadius ??
@@ -452,15 +470,16 @@ extension CustomMaterialTheme on FThemeData {
         ),
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: buttonStyles.base.decoration.base.color,
-        foregroundColor: buttonStyles.base.contentStyle.textStyle.base.color,
-        hoverColor: buttonStyles.base.decoration.resolve({
+        backgroundColor: buttonStyles.base.base.decoration.base.color,
+        foregroundColor:
+            buttonStyles.base.base.contentStyle.textStyle.base.color,
+        hoverColor: buttonStyles.base.base.decoration.resolve({
           FTappableVariant.hovered,
         }).color,
         disabledElevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius:
-              buttonStyles.base.decoration.base.borderRadius ??
+              buttonStyles.base.base.decoration.base.borderRadius ??
               style.borderRadius,
         ),
       ),
@@ -470,6 +489,7 @@ extension CustomMaterialTheme on FThemeData {
             (states) =>
                 buttonStyles
                     .resolve({FButtonVariant.ghost})
+                    .base
                     .decoration
                     .resolve(toVariants(states))
                     .color ??
@@ -479,6 +499,7 @@ extension CustomMaterialTheme on FThemeData {
             (states) =>
                 buttonStyles
                     .resolve({FButtonVariant.ghost})
+                    .base
                     .contentStyle
                     .textStyle
                     .resolve(toVariants(states))
@@ -490,6 +511,7 @@ extension CustomMaterialTheme on FThemeData {
               borderRadius:
                   buttonStyles
                       .resolve({FButtonVariant.ghost})
+                      .base
                       .decoration
                       .resolve(toVariants(states))
                       .borderRadius ??
@@ -503,6 +525,7 @@ extension CustomMaterialTheme on FThemeData {
           textStyle: .resolveWith(
             (states) => buttonStyles
                 .resolve({FButtonVariant.ghost})
+                .base
                 .contentStyle
                 .textStyle
                 .resolve(toVariants(states)),
@@ -511,6 +534,7 @@ extension CustomMaterialTheme on FThemeData {
             (states) =>
                 buttonStyles
                     .resolve({FButtonVariant.ghost})
+                    .base
                     .decoration
                     .resolve(toVariants(states))
                     .color ??
@@ -520,6 +544,7 @@ extension CustomMaterialTheme on FThemeData {
             (states) =>
                 buttonStyles
                     .resolve({FButtonVariant.ghost})
+                    .base
                     .contentStyle
                     .textStyle
                     .resolve(toVariants(states))
@@ -531,6 +556,7 @@ extension CustomMaterialTheme on FThemeData {
               borderRadius:
                   buttonStyles
                       .resolve({FButtonVariant.ghost})
+                      .base
                       .decoration
                       .resolve(toVariants(states))
                       .borderRadius ??
