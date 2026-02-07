@@ -90,12 +90,12 @@ class FBadge extends StatelessWidget {
 extension type FBadgeStyles._(FVariants<FBadgeVariantConstraint, FBadgeStyle, FBadgeStyleDelta> _)
     implements FVariants<FBadgeVariantConstraint, FBadgeStyle, FBadgeStyleDelta> {
   /// The default border radius for badges.
-  static const BorderRadius defaultBadgeRadius = BorderRadius.all(Radius.circular(100));
+  static const BorderRadius defaultBadgeRadius = .all(.circular(100));
 
   /// Creates a [FBadgeStyles] that inherits its properties.
   FBadgeStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this._(
-        FVariants.delta(
+        .delta(
           FBadgeStyle(
             decoration: BoxDecoration(color: colors.primary, borderRadius: FBadgeStyles.defaultBadgeRadius),
             contentStyle: FBadgeContentStyle(
@@ -107,16 +107,21 @@ extension type FBadgeStyles._(FVariants<FBadgeVariantConstraint, FBadgeStyle, FB
               decoration: .delta(color: colors.secondary),
               contentStyle: .delta(labelTextStyle: .delta(color: colors.secondaryForeground)),
             ),
+            [.destructive]: FBadgeStyle(
+              decoration: BoxDecoration(
+                borderRadius: FBadgeStyles.defaultBadgeRadius,
+                color: colors.destructive.withValues(alpha: colors.brightness == .light ? 0.1 : 0.2),
+              ),
+              contentStyle: FBadgeContentStyle(
+                labelTextStyle: typography.sm.copyWith(color: colors.destructive, fontWeight: .w600),
+              ),
+            ),
             [.outline]: .delta(
               decoration: .delta(
                 color: const Color(0x00000000),
                 border: .all(color: colors.border, width: style.borderWidth),
               ),
               contentStyle: .delta(labelTextStyle: .delta(color: colors.foreground)),
-            ),
-            [.destructive]: .delta(
-              decoration: .delta(color: colors.destructive),
-              contentStyle: .delta(labelTextStyle: .delta(color: colors.destructiveForeground)),
             ),
           },
         ),

@@ -103,6 +103,10 @@ are not available for most of these changes due to the tool's limitations.
 * Change destructive variant to match latest shadcn/ui.
 
 
+### `FBadge`
+* Change destructive variant to match latest shadcn/ui.
+
+
 ### `FBottomNavigationBarItem`
 * **Breaking** Rename `FBottomNavigationBarItem.onStateChange` to `FBottomNavigationBarItem.onVariantChange`.
 
