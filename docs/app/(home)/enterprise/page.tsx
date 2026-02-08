@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
 import { Code2, Compass, ArrowRightLeft, FileSearch, GraduationCap, HeartHandshake } from 'lucide-react';
 
@@ -37,6 +38,10 @@ const services = [
     description: 'Expert-led workshops for skill development.',
   },
 ];
+
+export const metadata: Metadata = {
+  title: 'Enterprise',
+};
 
 const contact = 'https://forms.gle/wdxmjUMbYEhoJTsN8';
 

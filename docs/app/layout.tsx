@@ -5,7 +5,12 @@ import { Inter } from 'next/font/google';
 export const metadata = {
   metadataBase: new URL('https://forui.dev'),
   title: {
-    template: '%s – Forui',
+    default: 'Forui',
+    template: '%s | Forui',
+  },
+  description: 'Beautiful, minimalistic, and platform-agnostic UI library for Flutter.',
+  openGraph: {
+    images: '/banners/banner-311225.png',
   },
   icons: {
     icon: '/favicon.ico',
