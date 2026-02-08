@@ -17,17 +17,17 @@ void main() {
   });
 
   for (final theme in TestScaffold.themes) {
-    for (final (name, Set<FBadgeVariant> variants) in [
-      ('primary', {}),
-      ('secondary', {.secondary}),
-      ('destructive', {.destructive}),
-      ('outline', {.outline}),
+    for (final (name, variant) in [
+      ('primary', null),
+      ('secondary', FBadgeVariant.secondary),
+      ('destructive', FBadgeVariant.destructive),
+      ('outline', FBadgeVariant.outline),
     ]) {
       testWidgets('${theme.name} with FBadgeContent', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FBadge(variants: variants, child: const Text('Badge')),
+            child: FBadge(variant: variant, child: const Text('Badge')),
           ),
         );
 
@@ -39,7 +39,7 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: FBadge.raw(
-              variants: variants,
+              variant: variant,
               builder: (_, style) => Padding(
                 padding: const .all(50),
                 child: Container(

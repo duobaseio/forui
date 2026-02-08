@@ -14,7 +14,7 @@ class AlertPrimaryPage extends Example {
   @override
   Widget example(BuildContext _) => const FAlert(
     // {@highlight}
-    variants: {},
+    variant: null,
     // {@endhighlight}
     title: Text('Heads Up!'),
     subtitle: Text('You can add components to your app using the cli.'),
@@ -26,11 +26,11 @@ class AlertDestructivePage extends Example {
   AlertDestructivePage({@queryParam super.theme});
 
   @override
-  Widget example(BuildContext _) => FAlert(
+  Widget example(BuildContext _) => const FAlert(
     // {@highlight}
-    variants: {.destructive},
+    variant: .destructive,
     // {@endhighlight}
-    title: const Text('Heads Up!'),
-    subtitle: const Text('You can add components to your app using the cli.'),
+    title: Text('Heads Up!'),
+    subtitle: Text('You can add components to your app using the cli.'),
   );
 }

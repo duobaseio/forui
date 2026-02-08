@@ -20,26 +20,25 @@ part 'alert.design.dart';
 class FAlert extends StatelessWidget {
   /// The variants used to resolve the style from [FAlertStyles].
   ///
-  /// Defaults to an empty set, which resolves to the base (primary) style. The current platform variant is automatically
-  /// included during style resolution. To change the platform variant, update the enclosing
-  /// [FTheme.platform]/[FAdaptiveScope.platform].
+  /// Defaults to the base (primary) style. The current platform variant is automatically included during style
+  /// resolution. To change the platform variant, update the enclosing [FTheme.platform]/[FAdaptiveScope.platform].
   ///
   /// For example, to create a destructive alert:
   /// ```dart
   /// FAlert(
-  ///  variant: {.destructive},
+  ///  variant: .destructive,
   ///  title: Text('This is a destructive alert'),
-  ///  )
+  /// )
   ///  ```
-  final Set<FAlertVariant> variants;
+  final FAlertVariant? variant;
 
-  /// The style delta applied to the style resolved by [variants].
+  /// The style delta applied to the style resolved by [variant].
   ///
-  /// The final style is computed by first resolving the base style from [FAlertStyles] using [variants], then applying
+  /// The final style is computed by first resolving the base style from [FAlertStyles] using [variant], then applying
   /// this delta. This allows modifying variant-specific styles:
   /// ```dart
   /// FAlert(
-  ///   variant: {.destructive},
+  ///   variant: .destructive,
   ///   style: .delta(iconStyle: .delta(size: 24)), // modifies the destructive style
   ///   title: Text('Large icon destructive alert'),
   /// )
@@ -75,14 +74,14 @@ class FAlert extends StatelessWidget {
     required this.title,
     this.icon = const Icon(FIcons.circleAlert),
     this.subtitle,
-    this.variants = const {},
+    this.variant,
     this.style = const .inherit(),
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style(context.theme.alertStyles.resolve({...variants, context.platformVariant}));
+    final style = this.style(context.theme.alertStyles.resolve({?variant, context.platformVariant}));
     return DecoratedBox(
       decoration: style.decoration,
       child: Padding(
@@ -123,7 +122,7 @@ class FAlert extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(IterableProperty('variant', variants))
+      ..add(DiagnosticsProperty('variant', variant))
       ..add(DiagnosticsProperty('style', style));
   }
 }

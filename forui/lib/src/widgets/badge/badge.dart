@@ -23,26 +23,25 @@ part 'badge.design.dart';
 class FBadge extends StatelessWidget {
   /// The variants used to resolve the style from [FBadgeStyles].
   ///
-  /// Defaults to an empty set, which resolves to the base (primary) style. The current platform variant is automatically
-  /// included during style resolution. To change the platform variant, update the enclosing
-  /// [FTheme.platform]/[FAdaptiveScope.platform].
+  /// Defaults to the base (primary) style. The current platform variant is automatically included during style
+  /// resolution. To change the platform variant, update the enclosing [FTheme.platform]/[FAdaptiveScope.platform].
   ///
   /// For example, to create a destructive badge:
   /// ```dart
   /// FBadge(
-  ///   variants: {.destructive},
+  ///   variant: .destructive,
   ///   child: Text('Destructive'),
   /// )
   /// ```
-  final Set<FBadgeVariant> variants;
+  final FBadgeVariant? variant;
 
-  /// The style delta applied to the style resolved by [variants].
+  /// The style delta applied to the style resolved by [variant].
   ///
-  /// The final style is computed by first resolving the base style from [FBadgeStyles] using [variants], then applying
+  /// The final style is computed by first resolving the base style from [FBadgeStyles] using [variant], then applying
   /// this delta. This allows modifying variant-specific styles:
   /// ```dart
   /// FBadge(
-  ///   variants: {.destructive},
+  ///   variant: .destructive,
   ///   style: .delta(decoration: .delta(borderRadius: .all(.circular(4)))),
   ///   child: Text('Custom destructive badge'),
   /// )
@@ -60,15 +59,15 @@ class FBadge extends StatelessWidget {
   final Widget Function(BuildContext context, FBadgeStyle style) builder;
 
   /// Creates a [FBadge].
-  FBadge({required Widget child, this.variants = const {}, this.style = const .inherit(), super.key})
+  FBadge({required Widget child, this.variant, this.style = const .inherit(), super.key})
     : builder = ((_, style) => Content(style: style, child: child));
 
   /// Creates a [FBadge] with a custom builder.
-  const FBadge.raw({required this.builder, this.variants = const {}, this.style = const .inherit(), super.key});
+  const FBadge.raw({required this.builder, this.variant, this.style = const .inherit(), super.key});
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style(context.theme.badgeStyles.resolve({...variants, context.platformVariant}));
+    final style = this.style(context.theme.badgeStyles.resolve({?variant, context.platformVariant}));
     return IntrinsicWidth(
       child: IntrinsicHeight(
         child: DecoratedBox(decoration: style.decoration, child: builder(context, style)),
@@ -80,7 +79,7 @@ class FBadge extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(IterableProperty('variants', variants))
+      ..add(DiagnosticsProperty('variant', variant))
       ..add(DiagnosticsProperty('style', style))
       ..add(ObjectFlagProperty.has('builder', builder));
   }

@@ -5,8 +5,8 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 const alert = FAlert(
-  // {@category "Variants"}
-  variants: {},
+  // {@category "Variant"}
+  variant: null,
   // {@endcategory}
   // {@category "Core"}
   style: .inherit(),
@@ -16,10 +16,10 @@ const alert = FAlert(
   // {@endcategory}
 );
 
-// {@category "Variants" "`Primary)`"}
+// {@category "Variant" "`Primary)`"}
 /// The alert's primary variant.
-const Set<FAlertVariant> primary = {};
+const FAlertVariant? primary = null;
 
-// {@category "Variants" "`Destructive`"}
+// {@category "Variant" "`Destructive`"}
 /// The alert's destructive variant.
-final Set<FAlertVariant> destructive = {.destructive};
+const FAlertVariant destructive = .destructive;

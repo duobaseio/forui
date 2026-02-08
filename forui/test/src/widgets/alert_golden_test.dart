@@ -21,16 +21,16 @@ void main() {
   });
 
   for (final theme in TestScaffold.themes) {
-    for (final (name, Set<FAlertVariant> variants) in [
-      ('primary', {}),
-      ('destructive', {.destructive}),
+    for (final (name, variant) in [
+      ('primary', null),
+      ('destructive', FAlertVariant.destructive),
     ]) {
       testWidgets('${theme.name} with default icon', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
             child: FAlert(
-              variants: variants,
+              variant: variant,
               title: const Text('Alert Title'),
               subtitle: const Text('Alert description with extra text'),
             ),
@@ -45,7 +45,7 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: FAlert(
-              variants: variants,
+              variant: variant,
               icon: const Icon(FIcons.badgeAlert),
               title: const Text('Alert Title'),
               subtitle: const Text('Alert description with extra text'),

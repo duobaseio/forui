@@ -5,8 +5,8 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 final badge = FBadge(
-  // {@category "Variants"}
-  variants: const {},
+  // {@category "Variant"}
+  variant: null,
   // {@endcategory}
   // {@category "Core"}
   style: const .inherit(),
@@ -15,8 +15,8 @@ final badge = FBadge(
 );
 
 final raw = FBadge.raw(
-  // {@category "Variants"}
-  variants: const {},
+  // {@category "Variant"}
+  variant: null,
   // {@endcategory}
   // {@category "Core"}
   style: const .inherit(),
@@ -24,18 +24,18 @@ final raw = FBadge.raw(
   // {@endcategory}
 );
 
-// {@category "Variants" "Primary"}
+// {@category "Variant" "Primary"}
 /// The badge's primary (base) variant.
-final Set<FBadgeVariant> primary = {};
+const FBadgeVariant? primary = null;
 
-// {@category "Variants" "Secondary"}
+// {@category "Variant" "Secondary"}
 /// The badge's secondary variant.
-final Set<FBadgeVariant> secondary = {.secondary};
+const FBadgeVariant secondary = .secondary;
 
-// {@category "Variants" "Outline"}
+// {@category "Variant" "Outline"}
 /// The badge's outline variant.
-final Set<FBadgeVariant> outline = {.outline};
+const FBadgeVariant outline = .outline;
 
-// {@category "Variants" "Destructive"}
+// {@category "Variant" "Destructive"}
 /// The badge's destructive variant.
-final Set<FBadgeVariant> destructive = {.destructive};
+const FBadgeVariant destructive = .destructive;

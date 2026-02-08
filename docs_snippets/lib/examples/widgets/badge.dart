@@ -20,7 +20,7 @@ class BadgeSecondaryPage extends Example {
   @override
   Widget example(BuildContext _) => FBadge(
     // {@highlight}
-    variants: {.secondary},
+    variant: .secondary,
     // {@endhighlight}
     child: const Text('Badge'),
   );
@@ -33,7 +33,7 @@ class BadgeDestructivePage extends Example {
   @override
   Widget example(BuildContext _) => FBadge(
     // {@highlight}
-    variants: {.destructive},
+    variant: .destructive,
     // {@endhighlight}
     child: const Text('Badge'),
   );
@@ -46,7 +46,7 @@ class BadgeOutlinePage extends Example {
   @override
   Widget example(BuildContext _) => FBadge(
     // {@highlight}
-    variants: {.outline},
+    variant: .outline,
     // {@endhighlight}
     child: const Text('Badge'),
   );
