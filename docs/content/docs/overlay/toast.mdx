@@ -8,7 +8,12 @@ import { Callout } from 'fumadocs-ui/components/callout';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/toast/default.json';
+import showToastUsage from '@/snippets/usages/widgets/toast/showToast.json';
+import showRawToastUsage from '@/snippets/usages/widgets/toast/showRawToast.json';
+import toastUsage from '@/snippets/usages/widgets/toast/toast.json';
+import toasterUsage from '@/snippets/usages/widgets/toast/toaster.json';
 import rawSnippet from '@/snippets/examples/toast/raw.json';
 import swipeSnippet from '@/snippets/examples/toast/swipe.json';
 import swipeDownSnippet from '@/snippets/examples/toast/swipe-down.json';
@@ -54,45 +59,16 @@ dart run forui style create toast
 ## Usage
 
 ### `showFToast(...)`
-
-```dart copy
-showFToast(
-  context: context,
-  title: const Text('Download Complete'),
-  style: (style) => style.copyWith(...),
-  icon: const Icon(FIcons.triangleAlert),
-  description: const Text('Your file has been downloaded.'),
-  suffixBuilder: (context, entry) => FButton(child: const Text('Undo'), onPress: entry.dismiss),
-  alignment: FToastAlignment.topRight,
-  swipeToDismiss: [AxisDirection.left, AxisDirection.down],
-  duration: const Duration(seconds: 5),
-  onDismiss: () {},
-);
-```
+<UsageSnippet usage={showToastUsage} />
 
 ### `showRawFToast(...)`
+<UsageSnippet usage={showRawToastUsage} />
 
-```dart copy
-showRawFToast(
-  context: context,
-  style: (style) => style.copyWith(...),
-  alignment: FToastAlignment.topRight,
-  swipeToDismiss: [AxisDirection.left, AxisDirection.down],
-  duration: const Duration(seconds: 5),
-  onDismiss: () {},
-  builder: (context, entry) => FCard(
-    title: const Text('Download Complete'),
-    subtitle: Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      spacing: 10,
-      children: [
-        const Text('Your file has been downloaded.'),
-        FButton(child: const Text('Dismiss'), onPress: entry.dismiss),
-      ],
-    ),
-  ),
-);
-```
+### `FToast(...)`
+<UsageSnippet usage={toastUsage} />
+
+### `FToaster(...)`
+<UsageSnippet usage={toasterUsage} />
 
 ## Examples
 

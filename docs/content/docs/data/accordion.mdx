@@ -7,8 +7,11 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.accordion
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/accordion/default.json';
 import maxSnippet from '@/snippets/examples/accordion/max.json';
+import accordionUsage from '@/snippets/usages/widgets/accordion/accordion.json';
+import accordionItemUsage from '@/snippets/usages/widgets/accordion/accordionItem.json';
 
 <Tabs items={['Preview', 'Code']}>
     <Tab value="Preview">
@@ -30,39 +33,10 @@ dart run forui style create accordion
 ## Usage
 
 ### `FAccordion(...)`
-
-```dart copy
-FAccordion(
-  control: FAccordionControl.managed(
-    controller: FAccordionController(min: 1, max: 2),
-    onChange: (expanded) {},
-  ),
-  style: (style) => style.copyWith(...),
-  children: [
-    FAccordionItem(
-      title: const Text('Is it accessible?'),
-      child: const Text('Yes. It follows WAI-ARIA design patterns.'),
-    ),
-  ],
-);
-```
+<UsageSnippet usage={accordionUsage} />
 
 ### `FAccordionItem(...)`
-
-```dart copy
-FAccordionItem(
-  title: const Text('Title'),
-  child: const Text('Content'),
-  style: FAccordionStyle(...),
-  icon: const Icon(FIcons.chevronDown),
-  initiallyExpanded: true,
-  autofocus: false,
-  focusNode: FocusNode(),
-  onFocusChange: (focused) {},
-  onHoverChange: (hovered) {},
-  onStateChange: (states) {},
-);
-```
+<UsageSnippet usage={accordionItemUsage} />
 
 ## Examples
 

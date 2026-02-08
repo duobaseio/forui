@@ -8,12 +8,16 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Callout } from 'fumadocs-ui/components/callout';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/item-group/default.json';
 import scrollableSnippet from '@/snippets/examples/item-group/scrollable.json';
 import lazySnippet from '@/snippets/examples/item-group/lazy.json';
 import mergeSnippet from '@/snippets/examples/item-group/merge.json';
 import fullSnippet from '@/snippets/examples/item-group/full.json';
 import indentedSnippet from '@/snippets/examples/item-group/indented.json';
+import itemGroupUsage from '@/snippets/usages/widgets/item_group/itemGroup.json';
+import itemGroupBuilderUsage from '@/snippets/usages/widgets/item_group/builder.json';
+import itemGroupMergeUsage from '@/snippets/usages/widgets/item_group/merge.json';
 
 <Callout type="info">
     This widget is typically used to create more complex widgets rather than being used directly.
@@ -39,60 +43,13 @@ dart run forui style create item-group
 ## Usage
 
 ### `FItemGroup(...)`
-
-```dart copy
-FItemGroup(
-  children: [
-    FItem(title: const Text('Item')),
-  ],
-  style: (style) => style.copyWith(...),
-  scrollController: ScrollController(),
-  cacheExtent: 100,
-  maxHeight: 200,
-  dragStartBehavior: DragStartBehavior.start,
-  physics: const ClampingScrollPhysics(),
-  enabled: true,
-  divider: FItemDivider.none,
-  semanticsLabel: 'Settings',
-);
-```
+<UsageSnippet usage={itemGroupUsage} />
 
 ### `FItemGroup.builder(...)`
-
-```dart copy
-FItemGroup.builder(
-  itemBuilder: (context, index) => index < 10 ? FItem(title: Text('Item $index')) : null,
-  count: 100,
-  style: (style) => style.copyWith(...),
-  scrollController: ScrollController(),
-  cacheExtent: 100,
-  maxHeight: 200,
-  dragStartBehavior: DragStartBehavior.start,
-  physics: const ClampingScrollPhysics(),
-  enabled: true,
-  divider: FItemDivider.none,
-  semanticsLabel: 'Settings',
-);
-```
+<UsageSnippet usage={itemGroupBuilderUsage} />
 
 ### `FItemGroup.merge(...)`
-
-```dart copy
-FItemGroup.merge(
-  children: [
-    FItemGroup(children: []),
-  ],
-  style: (style) => style.copyWith(...),
-  scrollController: ScrollController(),
-  cacheExtent: 100,
-  maxHeight: 200,
-  dragStartBehavior: DragStartBehavior.start,
-  physics: const ClampingScrollPhysics(),
-  enabled: true,
-  divider: FItemDivider.full,
-  semanticsLabel: 'Settings',
-);
-```
+<UsageSnippet usage={itemGroupMergeUsage} />
 
 ## Examples
 

@@ -7,6 +7,9 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.autocompl
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import autocompleteUsage from '@/snippets/usages/widgets/autocomplete/autocomplete.json';
+import autocompleteBuilderUsage from '@/snippets/usages/widgets/autocomplete/builder.json';
 import defaultSnippet from '@/snippets/examples/autocomplete/default.json';
 import detailedSnippet from '@/snippets/examples/autocomplete/detailed.json';
 import sectionSnippet from '@/snippets/examples/autocomplete/section.json';
@@ -37,65 +40,10 @@ dart run forui style create autocomplete
 ## Usage
 
 ### `FAutocomplete(...)`
-
-```dart copy
-FAutocomplete(
-  controller: FAutocompleteController(vsync: this),
-  style: (style) => style,
-  label: const Text('Country'),
-  description: const Text('Select your country of residence'),
-  hint: 'Type to search countries',
-  onChange: (value) => print('Selected country: $value'),
-  onSaved: (value) => print('Saved country: $value'),
-  onReset: () => print('Reset'),
-  autovalidateMode: AutovalidateMode.onUserInteraction,
-  builder: (context, styles, child) => child!,
-  prefixBuilder: (context, style, states) => Icon(FIcons.globe),
-  suffixBuilder: (context, style, states) => Icon(FIcons.search),
-  contentConstraints: const FAutoWidthPortalConstraints(maxHeight: 400),
-  clearable: (value) => value.text.isNotEmpty,
-  rightArrowToComplete: true,
-  initialText: 'Canada',
-  items: [
-    'United States',
-    'Canada',
-    'Japan',
-    'United Kingdom',
-    'Germany',
-    'France',
-    'Australia',
-  ],
-);
-```
+<UsageSnippet usage={autocompleteUsage} />
 
 ### `FAutocomplete.builder(...)`
-
-```dart copy
-FAutocomplete.builder(
-  filter: (text) async {
-    const countries = ['United States', 'Canada', 'Japan'];
-    return countries.where((country) => country.toLowerCase().contains(query.toLowerCase()));
-  },
-  contentBuilder: (context, text, suggestions) => [
-    for (final suggestion in suggestions) FAutocompleteItem(value: suggestion)
-  ],
-  controller: FAutocompleteController(vsync: this),
-  style: (style) => style,
-  label: const Text('Country'),
-  description: const Text('Select your country of residence'),
-  hint: 'Type to search countries',
-  onChange: (value) => print('Selected country: $value'),
-  onSaved: (value) => print('Saved country: $value'),
-  onReset: () => print('Reset'),
-  autovalidateMode: AutovalidateMode.onUserInteraction,
-  builder: (context, styles, child) => child!,
-  prefixBuilder: (context, style, states) => Icon(FIcons.globe),
-  suffixBuilder: (context, style, states) => Icon(FIcons.search),
-  contentConstraints: const FAutoWidthPortalConstraints(maxHeight: 300),
-  rightArrowToComplete: true,
-  clearable: (value) => value.text.isNotEmpty,
-);
-```
+<UsageSnippet usage={autocompleteBuilderUsage} />
 
 ## Examples
 

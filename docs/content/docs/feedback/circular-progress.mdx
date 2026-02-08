@@ -7,7 +7,11 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.progress/
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import circularSnippet from '@/snippets/examples/progress/circular.json';
+import circularProgressUsage from '@/snippets/usages/widgets/progress/circularProgress.json';
+import circularProgressLoaderUsage from '@/snippets/usages/widgets/progress/circularProgressLoader.json';
+import circularProgressPinwheelUsage from '@/snippets/usages/widgets/progress/circularProgressPinwheel.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
@@ -29,29 +33,10 @@ dart run forui style create circular-progress
 ## Usage
 
 ### `FCircularProgress(...)`
-
-```dart copy
-FCircularProgress(
-  style: (style) => style.copyWith(...),
-  semanticsLabel: 'Label',
-  icon: FIcons.loaderCircle,
-);
-```
+<UsageSnippet usage={circularProgressUsage} />
 
 ### `FCircularProgress.loader(...)`
-
-```dart copy
-FCircularProgress.loader(
-  style: (style) => style.copyWith(...),
-  semanticsLabel: 'Label',
-);
-```
+<UsageSnippet usage={circularProgressLoaderUsage} />
 
 ### `FCircularProgress.pinwheel(...)`
-
-```dart copy
-FCircularProgress.pinwheel(
-  style: (style) => style.copyWith(...),
-  semanticsLabel: 'Label',
-);
-```
+<UsageSnippet usage={circularProgressPinwheelUsage} />

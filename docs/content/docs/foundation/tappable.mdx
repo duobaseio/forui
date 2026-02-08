@@ -8,7 +8,10 @@ import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Callout } from 'fumadocs-ui/components/callout';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import tappableDefault from '@/snippets/examples/tappable/default.json';
+import tappableUsage from '@/snippets/usages/foundation/tappable/tappable.json';
+import tappableStaticUsage from '@/snippets/usages/foundation/tappable/tappableStatic.json';
 
 <Callout type="info">
   This widget is typically used to create other high-level widgets, e.g., [button](../form/button). You should prefer
@@ -27,58 +30,13 @@ import tappableDefault from '@/snippets/examples/tappable/default.json';
 ## Usage
 
 ### `FTappable(...)`
-
-```dart copy
-FTappable(
-  style: (style) => style.copyWith(...),
-  focusedOutlineStyle: (style) => style.copyWith(...),
-  semanticsLabel: 'Label',
-  excludeSemantics: false,
-  autofocus: false,
-  focusNode: FocusNode(),
-  onFocusChange: (focused) {},
-  onHoverChange: (hovered) {},
-  onStateChange: (delta) {},
-  selected: false,
-  behavior: HitTestBehavior.translucent,
-  onPress: () {},
-  onLongPress: () {},
-  onSecondaryPress: () {},
-  onSecondaryLongPress: () {},
-  shortcuts: {SingleActivator(LogicalKeyboardKey.enter): ActivateIntent()},
-  actions: {ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {})},
-  builder: (context, states, child) => child!,
-  child: const Text('Tappable'),
-);
-```
+<UsageSnippet usage={tappableUsage} />
 
 ### `FTappable.static(...)`
 
 A variant of `FTappable` without any animation. This is similar to using `FTappableMotion.none`.
 
-```dart copy
-FTappable.static(
-  style: (style) => style.copyWith(...),
-  focusedOutlineStyle: (style) => style.copyWith(...),
-  semanticsLabel: 'Label',
-  excludeSemantics: false,
-  autofocus: false,
-  focusNode: FocusNode(),
-  onFocusChange: (focused) {},
-  onHoverChange: (hovered) {},
-  onStateChange: (delta) {},
-  selected: false,
-  behavior: HitTestBehavior.translucent,
-  onPress: () {},
-  onLongPress: () {},
-  onSecondaryPress: () {},
-  onSecondaryLongPress: () {},
-  shortcuts: {SingleActivator(LogicalKeyboardKey.enter): ActivateIntent()},
-  actions: {ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {})},
-  builder: (context, states, child) => child!,
-  child: const Text('Tappable'),
-);
-```
+<UsageSnippet usage={tappableStaticUsage} />
 
 ## Custom Bounce Animation
 

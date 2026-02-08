@@ -7,7 +7,9 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.progress/
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import determinateSnippet from '@/snippets/examples/progress/determinate.json';
+import determinateProgressUsage from '@/snippets/usages/widgets/progress/determinateProgress.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
@@ -29,11 +31,4 @@ dart run forui style create determinate-progress
 ## Usage
 
 ### `FDeterminateProgress(...)`
-
-```dart copy
-FDeterminateProgress(
-  value: 0.7,
-  style: (style) => style.copyWith(...),
-  semanticsLabel: 'Label',
-);
-```
+<UsageSnippet usage={determinateProgressUsage} />

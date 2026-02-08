@@ -8,6 +8,10 @@ import { Callout } from 'fumadocs-ui/components/callout';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import dateFieldUsage from '@/snippets/usages/widgets/date_field/dateField.json';
+import dateFieldCalendarUsage from '@/snippets/usages/widgets/date_field/calendar.json';
+import dateFieldInputUsage from '@/snippets/usages/widgets/date_field/input.json';
 import defaultSnippet from '@/snippets/examples/date-field/default.json';
 import calendarSnippet from '@/snippets/examples/date-field/calendar.json';
 import inputSnippet from '@/snippets/examples/date-field/input.json';
@@ -57,107 +61,13 @@ dart run forui style create date-field
 ## Usage
 
 ### `FDateField(...)`
-
-```dart copy
-FDateField(
-  control: FDateFieldControl.managed(
-    initial: DateTime(2024, 1, 1),
-    validator: (date) => date?.isBefore(DateTime.now()) ?? false ? 'Date must be in the future' : null,
-  ),
-  style: (style) => style.copyWith(...),
-  label: const Text('Select Date'),
-  description: const Text('Choose a date from the calendar or input field'),
-  textAlign: TextAlign.start,
-  textAlignVertical: TextAlignVertical.center,
-  autofocus: false,
-  expands: false,
-  onEditingComplete: () {},
-  onSubmit: (date) {},
-  mouseCursor: SystemMouseCursors.text,
-  canRequestFocus: true,
-  baselineInputYear: 2000,
-  builder: (context, style, states, child) => child!,
-  prefixBuilder: (context, style, states) => const Icon(FIcons.calendar),
-  suffixBuilder: (context, style, states) => const Icon(FIcons.calendar),
-  clearable: true,
-  calendar: FDateFieldCalendarProperties(),
-  enabled: true,
-  onSaved: (date) {},
-  onReset: () {},
-  autovalidateMode: AutovalidateMode.onUnfocus,
-  forceErrorText: null,
-  errorBuilder: (context, error) => Text(error),
-);
-```
+<UsageSnippet usage={dateFieldUsage} />
 
 ### `FDateField.calendar(...)`
-
-```dart copy
-FDateField.calendar(
-  control: FDateFieldControl.managed(initial: DateTime(2024, 1, 1)),
-  style: (style) => style.copyWith(...),
-  label: const Text('Calendar Date'),
-  description: const Text('Select a date from the calendar'),
-  format: DateFormat('d MMM y'),
-  hint: 'Select a date',
-  textAlign: TextAlign.start,
-  textAlignVertical: TextAlignVertical.center,
-  expands: false,
-  mouseCursor: SystemMouseCursors.text,
-  canRequestFocus: true,
-  clearable: true,
-  start: DateTime(2024),
-  end: DateTime(2025),
-  today: DateTime.now(),
-  initialType: FCalendarPickerType.yearMonth,
-  autoHide: true,
-  anchor: Alignment.topLeft,
-  fieldAnchor: Alignment.bottomLeft,
-  spacing: FPortalSpacing(4),
-  overflow: FPortalOverflow.flip,
-  offset: Offset.zero,
-  hideRegion: FPopoverHideRegion.excludeChild,
-  builder: (context, style, states, child) => child!,
-  prefixBuilder: (context, style, states) => const Icon(FIcons.calendar),
-  suffixBuilder: (context, style, states) => const Icon(FIcons.calendar),
-  enabled: true,
-  onSaved: (date) {},
-  onReset: () {},
-  autovalidateMode: AutovalidateMode.onUnfocus,
-  forceErrorText: null,
-  errorBuilder: (context, error) => Text(error),
-);
-```
+<UsageSnippet usage={dateFieldCalendarUsage} />
 
 ### `FDateField.input(...)`
-
-```dart copy
-FDateField.input(
-  control: FDateFieldControl.managed(initial: DateTime(2024, 1, 1)),
-  style: (style) => style.copyWith(...),
-  label: const Text('Input Date'),
-  description: const Text('Enter a date'),
-  textInputAction: TextInputAction.done,
-  textAlign: TextAlign.start,
-  textAlignVertical: TextAlignVertical.center,
-  expands: false,
-  onEditingComplete: () {},
-  onSubmit: (date) {},
-  mouseCursor: SystemMouseCursors.text,
-  canRequestFocus: true,
-  clearable: true,
-  baselineInputYear: 2000,
-  builder: (context, style, states, child) => child!,
-  prefixBuilder: (context, style, states) => const Icon(FIcons.calendar),
-  suffixBuilder: (context, style, states) => const Icon(FIcons.calendar),
-  enabled: true,
-  onSaved: (date) {},
-  onReset: () {},
-  autovalidateMode: AutovalidateMode.onUnfocus,
-  forceErrorText: null,
-  errorBuilder: (context, error) => Text(error),
-);
-```
+<UsageSnippet usage={dateFieldInputUsage} />
 
 ## Examples
 

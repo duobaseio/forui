@@ -7,9 +7,14 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.dialog/
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/dialog/default.json';
 import verticalSnippet from '@/snippets/examples/dialog/vertical.json';
 import blurredSnippet from '@/snippets/examples/dialog/blurred.json';
+import dialogShowUsage from '@/snippets/usages/widgets/dialog/show.json';
+import dialogUsage from '@/snippets/usages/widgets/dialog/dialog.json';
+import dialogAdaptiveUsage from '@/snippets/usages/widgets/dialog/adaptive.json';
+import dialogRawUsage from '@/snippets/usages/widgets/dialog/raw.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
@@ -31,68 +36,16 @@ dart run forui style create dialog
 ## Usage
 
 ### `showFDialog(...)`
-
-```dart copy
-showFDialog<T>(
-  context: context,
-  builder: (context, style, animation) => FDialog(...),
-  useRootNavigator: false,
-  routeStyle: (style) => style.copyWith(...),
-  style: (style) => style.copyWith(...),
-  barrierLabel: 'Label',
-  barrierDismissible: true,
-  routeSettings: RouteSettings(...),
-  anchorPoint: Offset.zero,
-  useSafeArea: false,
-);
-```
+<UsageSnippet usage={dialogShowUsage} />
 
 ### `FDialog(...)`
-
-```dart copy
-FDialog(
-  style: (style) => style.copyWith(...),
-  animation: animation,
-  semanticsLabel: 'Dialog',
-  constraints: BoxConstraints(minWidth: 280, maxWidth: 560),
-  direction: Axis.horizontal,
-  title: const Text('Title'),
-  body: const Text('Body'),
-  actions: [
-    FButton(style: FButtonStyle.outline(), child: const Text('Cancel'), onPress: () {}),
-    FButton(child: const Text('Continue'), onPress: () {}),
-  ],
-);
-```
+<UsageSnippet usage={dialogUsage} />
 
 ### `FDialog.adaptive(...)`
-
-```dart copy
-FDialog.adaptive(
-  style: (style) => style.copyWith(...),
-  animation: animation,
-  semanticsLabel: 'Dialog',
-  constraints: BoxConstraints(minWidth: 280, maxWidth: 560),
-  title: const Text('Title'),
-  body: const Text('Body'),
-  actions: [
-    FButton(style: FButtonStyle.outline(), child: const Text('Cancel'), onPress: () {}),
-    FButton(child: const Text('Continue'), onPress: () {}),
-  ],
-);
-```
+<UsageSnippet usage={dialogAdaptiveUsage} />
 
 ### `FDialog.raw(...)`
-
-```dart copy
-FDialog.raw(
-  style: (style) => style.copyWith(...),
-  animation: animation,
-  semanticsLabel: 'Dialog',
-  constraints: BoxConstraints(minWidth: 280, maxWidth: 560),
-  builder: (context, style) => const Placeholder(),
-);
-```
+<UsageSnippet usage={dialogRawUsage} />
 
 ## Examples
 

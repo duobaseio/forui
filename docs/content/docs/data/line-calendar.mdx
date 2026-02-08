@@ -8,7 +8,9 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Callout } from 'fumadocs-ui/components/callout';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/line-calendar/default.json';
+import lineCalendarUsage from '@/snippets/usages/widgets/line_calendar/lineCalendar.json';
 
 <Callout type="info">
   Hold `Shift` while scrolling to navigate through dates on desktop and web.
@@ -34,25 +36,4 @@ dart run forui style create line-calendar
 ## Usage
 
 ### `FLineCalendar(...)`
-
-```dart copy
-FLineCalendar(
-  control: FLineCalendarControl.managed(
-    controller: FCalendarController.date(...),
-    initial: DateTime.now(),
-    toggleable: false,
-    selectable: (date) => true,
-    onChange: (date) {},
-  ),
-  style: (style) => style.copyWith(...),
-  initialScrollAlignment: AlignmentDirectional.center,
-  physics: const AlwaysScrollableScrollPhysics(),
-  cacheExtent: 100,
-  keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.manual,
-  builder: (context, data, child) => child!,
-  start: DateTime(1900),
-  end: DateTime(2050),
-  initialScroll: DateTime.now(),
-  today: DateTime.now(),
-);
-```
+<UsageSnippet usage={lineCalendarUsage} />

@@ -8,7 +8,9 @@ import { Callout } from 'fumadocs-ui/components/callout';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/radio/default.json';
+import radioUsage from '@/snippets/usages/widgets/radio/radio.json';
 
 <Callout type="info">
     We recommend using a [select group](/docs/form/select-group#radio-form) to create a group of radio buttons instead of using `FRadio` directly.
@@ -34,19 +36,4 @@ dart run forui style create radio
 ## Usage
 
 ### `FRadio(...)`
-
-```dart copy
-FRadio(
-  style: (style) => style.copyWith(...),
-  label: const Text('Default'),
-  description: const Text('The description of the default option.'),
-  error: const Text('Please select the default option.'),
-  semanticsLabel: 'Default',
-  value: true,
-  onChange: (value) {},
-  enabled: true,
-  autofocus: true,
-  focusNode: FocusNode(),
-  onFocusChange: (focused) {},
-);
-```
+<UsageSnippet usage={radioUsage} />

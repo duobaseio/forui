@@ -8,11 +8,14 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Callout } from 'fumadocs-ui/components/callout';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/item/default.json';
 import untappableSnippet from '@/snippets/examples/item/untappable.json';
 import disabledSnippet from '@/snippets/examples/item/disabled.json';
 import subtitleSnippet from '@/snippets/examples/item/subtitle.json';
 import detailsSnippet from '@/snippets/examples/item/details.json';
+import itemUsage from '@/snippets/usages/widgets/item/item.json';
+import itemRawUsage from '@/snippets/usages/widgets/item/raw.json';
 
 <Callout type="info">
     This widget is typically used to create more complex widgets rather than being used directly.
@@ -38,55 +41,10 @@ dart run forui style create item
 ## Usage
 
 ### `FItem(...)`
-
-```dart copy
-FItem(
-  title: const Text('Title'),
-  style: (style) => style.copyWith(...),
-  enabled: true,
-  selected: false,
-  semanticsLabel: 'Label',
-  autofocus: false,
-  focusNode: FocusNode(),
-  onFocusChange: (focused) {},
-  onHoverChange: (hovered) {},
-  onStateChange: (delta) {},
-  onPress: () {},
-  onLongPress: () {},
-  onSecondaryPress: () {},
-  onSecondaryLongPress: () {},
-  shortcuts: {SingleActivator(LogicalKeyboardKey.enter): ActivateIntent()},
-  actions: {ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {})},
-  prefix: Icon(FIcons.user),
-  subtitle: const Text('Subtitle'),
-  details: const Text('Details'),
-  suffix: Icon(FIcons.chevronRight),
-);
-```
+<UsageSnippet usage={itemUsage} />
 
 ### `FItem.raw(...)`
-
-```dart copy
-FItem.raw(
-  child: const Text('Title'),
-  style: (style) => style.copyWith(...),
-  enabled: true,
-  selected: false,
-  semanticsLabel: 'Label',
-  autofocus: false,
-  focusNode: FocusNode(),
-  onFocusChange: (focused) {},
-  onHoverChange: (hovered) {},
-  onStateChange: (delta) {},
-  onPress: () {},
-  onLongPress: () {},
-  onSecondaryPress: () {},
-  onSecondaryLongPress: () {},
-  shortcuts: {SingleActivator(LogicalKeyboardKey.enter): ActivateIntent()},
-  actions: {ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {})},
-  prefix: Icon(FIcons.user),
-);
-```
+<UsageSnippet usage={itemRawUsage} />
 
 ## Examples
 

@@ -7,7 +7,10 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.tabs/
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/tabs/default.json';
+import tabsUsage from '@/snippets/usages/widgets/tabs/tabs.json';
+import tabEntryUsage from '@/snippets/usages/widgets/tabs/tabEntry.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
@@ -29,15 +32,7 @@ dart run forui style create tabs
 ## Usage
 
 ### `FTabs(...)`
+<UsageSnippet usage={tabsUsage} />
 
-```dart copy
-FTabs(
-  style: (style) => style.copyWith(...),
-  initialIndex: 1,
-  onPress: (index) {},
-  children: const [
-    FTabEntry(label: Text('Account'), child: Placeholder()),
-    FTabEntry(label: Text('Password'), child: Placeholder()),
-  ],
-);
-```
+### `FTabEntry(...)`
+<UsageSnippet usage={tabEntryUsage} />

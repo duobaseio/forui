@@ -1,7 +1,7 @@
 import type { SnippetData } from '@/components/code-snippet/types';
 import type { CategoryVariant, UsageSnippetData } from './types';
 
-const PLACEHOLDER_RE = /\{\{(\w+)\}\}/g;
+const PLACEHOLDER_RE = /\{\{([^}]+)\}\}/g;
 
 interface Insertion {
   originalIndex: number;

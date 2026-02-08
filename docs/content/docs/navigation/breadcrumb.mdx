@@ -7,9 +7,14 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.breadcrum
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/breadcrumb/default.json';
 import tilesSnippet from '@/snippets/examples/breadcrumb/tiles.json';
 import dividerSnippet from '@/snippets/examples/breadcrumb/divider.json';
+import breadcrumbUsage from '@/snippets/usages/widgets/breadcrumb/breadcrumb.json';
+import breadcrumbItemUsage from '@/snippets/usages/widgets/breadcrumb/breadcrumbItem.json';
+import breadcrumbItemCollapsedUsage from '@/snippets/usages/widgets/breadcrumb/breadcrumbItemCollapsed.json';
+import breadcrumbItemCollapsedTilesUsage from '@/snippets/usages/widgets/breadcrumb/breadcrumbItemCollapsedTiles.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
@@ -31,31 +36,16 @@ dart run forui style create breadcrumb
 ## Usage
 
 ### `FBreadcrumb(...)`
+<UsageSnippet usage={breadcrumbUsage} />
 
-```dart copy
-FBreadcrumb(
-  style: (style) => style.copyWith(...),
-  divider: const Icon(FIcons.chevronRight, size: 14),
-  children: [
-    FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),
-    FBreadcrumbItem.collapsed(
-      menu: [
-        FItemGroup(
-          children: [
-            FItem(title: const Text('Documentation'), onPress: () {}),
-            FItem(title: const Text('Themes'), onPress: () {}),
-          ],
-        ),
-      ],
-      spacing: FPortalSpacing.spacing(4),
-      offset: Offset.zero,
-      traversalEdgeBehavior: TraversalEdgeBehavior.closedLoop,
-    ),
-    FBreadcrumbItem(onPress: () {}, child: const Text('Themes')),
-    const FBreadcrumbItem(current: true, child: Text('Widgets')),
-  ],
-);
-```
+### `FBreadcrumbItem(...)`
+<UsageSnippet usage={breadcrumbItemUsage} />
+
+### `FBreadcrumbItem.collapsed(...)`
+<UsageSnippet usage={breadcrumbItemCollapsedUsage} />
+
+### `FBreadcrumbItem.collapsedTiles(...)`
+<UsageSnippet usage={breadcrumbItemCollapsedTilesUsage} />
 
 ## Examples
 

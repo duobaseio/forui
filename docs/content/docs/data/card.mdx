@@ -7,7 +7,10 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.card/
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/card/default.json';
+import cardUsage from '@/snippets/usages/widgets/card/card.json';
+import cardRawUsage from '@/snippets/usages/widgets/card/raw.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
@@ -29,23 +32,7 @@ dart run forui style create card
 ## Usage
 
 ### `FCard(...)`
-
-```dart copy
-FCard(
-  image: const Placeholder(),
-  title: const Text('Notification'),
-  subtitle: const Text('You have 3 unread messages.'),
-  child: FButton(child: const Text('Read messages'), onPress: () {}),
-  mainAxisSize: MainAxisSize.min,
-  style: (style) => style.copyWith(...),
-);
-```
+<UsageSnippet usage={cardUsage} />
 
 ### `FCard.raw(...)`
-
-```dart copy
-FCard.raw(
-  child: const Placeholder(),
-  style: (style) => style.copyWith(...),
-);
-```
+<UsageSnippet usage={cardRawUsage} />

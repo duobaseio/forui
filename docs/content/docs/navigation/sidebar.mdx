@@ -8,10 +8,16 @@ import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Callout } from 'fumadocs-ui/components/callout';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/sidebar/default.json';
 import nestedSnippet from '@/snippets/examples/sidebar/nested.json';
 import customWidthSnippet from '@/snippets/examples/sidebar/custom-width.json';
 import sheetSnippet from '@/snippets/examples/sidebar/sheet.json';
+import sidebarUsage from '@/snippets/usages/widgets/sidebar/sidebar.json';
+import sidebarBuilderUsage from '@/snippets/usages/widgets/sidebar/sidebarBuilder.json';
+import sidebarRawUsage from '@/snippets/usages/widgets/sidebar/sidebarRaw.json';
+import sidebarGroupUsage from '@/snippets/usages/widgets/sidebar/sidebarGroup.json';
+import sidebarItemUsage from '@/snippets/usages/widgets/sidebar/sidebarItem.json';
 
 <Callout type="info">
   A sidebar is typically used with `FScaffold`. Usage of `FScaffold` can be found [here](/docs/layout/scaffold).
@@ -59,67 +65,19 @@ Represents an item on the sidebar. May be nested in `FSidebarItem.children` to c
 ## Usage
 
 ### `FSidebar(...)`
-
-```dart copy
-FSidebar(
-  style: (style) => style.copyWith(...),
-  header: const Text('Header'),
-  footer: const Text('Footer'),
-  children: [FSidebarGroup(...)],
-);
-```
+<UsageSnippet usage={sidebarUsage} />
 
 ### `FSidebar.builder(...)`
-
-```dart copy
-FSidebar.builder(
-  style: (style) => style.copyWith(...),
-  header: const Text('Header'),
-  footer: const Text('Footer'),
-  itemCount: 5,
-  itemBuilder: (context, index) => FSidebarGroup(...),
-);
-```
+<UsageSnippet usage={sidebarBuilderUsage} />
 
 ### `FSidebar.raw(...)`
-
-```dart copy
-FSidebar.raw(
-  style: (style) => style.copyWith(...),
-  header: const Text('Header'),
-  footer: const Text('Footer'),
-  child: const SizedBox(),
-);
-```
+<UsageSnippet usage={sidebarRawUsage} />
 
 ### `FSidebarGroup(...)`
-
-```dart copy
-FSidebarGroup(
-  style: (style) => style.copyWith(...),
-  label: const Text('Group'),
-  action: const Icon(FIcons.plus),
-  onActionPress: () {},
-  children: [FSidebarItem(...)],
-);
-```
+<UsageSnippet usage={sidebarGroupUsage} />
 
 ### `FSidebarItem(...)`
-
-```dart copy
-FSidebarItem(
-  style: (style) => style.copyWith(...),
-  icon: const Icon(FIcons.box),
-  label: const Text('Item'),
-  selected: false,
-  initiallyExpanded: false,
-  onPress: () {},
-  onLongPress: () {},
-  onHoverChange: (hovered) {},
-  onStateChange: (delta) {},
-  children: [FSidebarItem(...)],
-);
-```
+<UsageSnippet usage={sidebarItemUsage} />
 
 ## Examples
 

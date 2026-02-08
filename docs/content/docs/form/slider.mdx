@@ -7,6 +7,7 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.slider/
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/slider/default.json';
 import labelledSnippet from '@/snippets/examples/slider/labelled.json';
 import disabledSnippet from '@/snippets/examples/slider/disabled.json';
@@ -22,6 +23,8 @@ import slideThumbSnippet from '@/snippets/examples/slider/slide-thumb.json';
 import tapSnippet from '@/snippets/examples/slider/tap.json';
 import tapAndSlideThumbSnippet from '@/snippets/examples/slider/tap-and-slide-thumb.json';
 import formSnippet from '@/snippets/examples/slider/form.json';
+import sliderUsage from '@/snippets/usages/widgets/slider/slider.json';
+import sliderMarkUsage from '@/snippets/usages/widgets/slider/sliderMark.json';
 
 ## CLI
 
@@ -43,25 +46,10 @@ dart run forui style create slider
 </Tabs>
 
 ### `FSlider(...)`
+<UsageSnippet usage={sliderUsage} />
 
-```dart copy
-FSlider(
-  control: FSliderControl.managedContinuous(
-    initial: FSliderValue(max: 0.75, constraints: (min: 0, max: 0.8)),
-    interaction: FSliderInteraction.tap,
-    onChange: (value) {},
-  ),
-  style: (style) => style.copyWith(...),
-  layout: FLayout.rtl,
-  tooltipBuilder: (style, value) => Text('${value.toStringAsFixed(2)}%'),
-  marks: const [
-    FSliderMark(value: 0, label: Text('0%')),
-    FSliderMark(value: 0.5, label: Text('50%')),
-    FSliderMark(value: 1, label: Text('100%')),
-  ],
-  onEnd: (value) {},
-);
-```
+### `FSliderMark(...)`
+<UsageSnippet usage={sliderMarkUsage} />
 
 ## Examples
 

@@ -8,7 +8,9 @@ import { Callout } from 'fumadocs-ui/components/callout';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/scaffold/default.json';
+import scaffoldUsage from '@/snippets/usages/widgets/scaffold/scaffold.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
@@ -34,26 +36,4 @@ dart run forui style create scaffold
 </Callout>
 
 ### `FScaffold(...)`
-
-```dart copy
-FScaffold(
-  scaffoldStyle: (style) => style.copyWith(...),
-  header: FHeader(
-    title: const Text('Settings'),
-    suffixes: [FHeaderAction(icon: Icon(FIcons.ellipsis), onPress: () {})],
-  ),
-  sidebar: FSidebar(children: const []),
-  footer: FBottomNavigationBar(children: const []),
-  childPad: true,
-  resizeToAvoidBottomInset: true,
-  child: Column(
-    children: [
-      FCard(
-        title: const Text('Notification'),
-        subtitle: const Text('You have 3 unread messages.'),
-        child: FButton(child: const Text('Read messages'), onPress: () {}),
-      ),
-    ],
-  ),
-);
-```
+<UsageSnippet usage={scaffoldUsage} />

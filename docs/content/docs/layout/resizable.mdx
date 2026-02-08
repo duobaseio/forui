@@ -7,11 +7,14 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.resizable
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/resizable/default.json';
 import horizontalSnippet from '@/snippets/examples/resizable/horizontal.json';
 import dividerSnippet from '@/snippets/examples/resizable/divider.json';
 import noDividerSnippet from '@/snippets/examples/resizable/no-divider.json';
 import noCascadingSnippet from '@/snippets/examples/resizable/no-cascading.json';
+import resizableUsage from '@/snippets/usages/widgets/resizable/resizable.json';
+import resizableRegionUsage from '@/snippets/usages/widgets/resizable/resizableRegion.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
@@ -33,30 +36,10 @@ dart run forui style create resizable
 ## Usage
 
 ### `FResizable(...)`
+<UsageSnippet usage={resizableUsage} />
 
-```dart copy
-FResizable(
-  control: FResizableControl.managedCascade(
-    onResizeUpdate: (regions) {},
-    onResizeEnd: (regions) {},
-  ),
-  style: (style) => style.copyWith(...),
-  axis: Axis.vertical,
-  divider: FResizableDivider.dividerWithThumb,
-  crossAxisExtent: 400,
-  hitRegionExtent: 10,
-  resizePercentage: 0.005,
-  semanticFormatterCallback: (left, right) => '${left.extent.current}, ${right.extent.current}',
-  children: [
-    FResizableRegion(
-      initialExtent: 200,
-      minExtent: 100,
-      builder: (context, data, child) => child!,
-      child: const Placeholder(),
-    ),
-  ],
-);
-```
+### `FResizableRegion(...)`
+<UsageSnippet usage={resizableRegionUsage} />
 
 ## Examples
 

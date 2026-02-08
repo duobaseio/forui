@@ -25,6 +25,16 @@ const CATEGORY_COLORS: CategoryColor[] = [
     border: 'border-amber-500/25 dark:border-amber-500/30',
     text: 'text-amber-700 dark:text-amber-300',
   },
+  {
+    lineBg: 'bg-rose-500/10 dark:bg-rose-500/15',
+    border: 'border-rose-500/25 dark:border-rose-500/30',
+    text: 'text-rose-700 dark:text-rose-300',
+  },
+  {
+    lineBg: 'bg-cyan-500/10 dark:bg-cyan-500/15',
+    border: 'border-cyan-500/25 dark:border-cyan-500/30',
+    text: 'text-cyan-700 dark:text-cyan-300',
+  },
 ];
 
 export function getCategoryColor(index: number): CategoryColor {

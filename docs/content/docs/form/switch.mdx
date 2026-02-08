@@ -7,9 +7,11 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.switch_/
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/switch/default.json';
 import disabledSnippet from '@/snippets/examples/switch/disabled.json';
 import formSnippet from '@/snippets/examples/switch/form.json';
+import switchUsage from '@/snippets/usages/widgets/switch/switchWidget.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
@@ -31,22 +33,7 @@ dart run forui style create switch
 ## Usage
 
 ### `FSwitch(...)`
-
-```dart copy
-FSwitch(
-  style: (style) => style.copyWith(...),
-  label: const Text('Airplane Mode'),
-  description: const Text('Turn on airplane mode to disable all wireless connections.'),
-  error: const Text('Please turn on airplane mode.'),
-  semanticsLabel: 'Airplane Mode',
-  value: true,
-  onChange: (value) {},
-  enabled: true,
-  autofocus: true,
-  focusNode: FocusNode(),
-  onFocusChange: (focused) {},
-);
-```
+<UsageSnippet usage={switchUsage} />
 
 ## Examples
 

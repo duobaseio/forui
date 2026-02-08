@@ -8,7 +8,11 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Callout } from 'fumadocs-ui/components/callout';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import tileGroupDefault from '@/snippets/examples/tile-group/default.json';
+import tileGroupUsage from '@/snippets/usages/widgets/tile_group/tileGroup.json';
+import tileGroupBuilderUsage from '@/snippets/usages/widgets/tile_group/tileGroupBuilder.json';
+import tileGroupMergeUsage from '@/snippets/usages/widgets/tile_group/tileGroupMerge.json';
 import tileGroupLazy from '@/snippets/examples/tile-group/lazy.json';
 import tileGroupMerge from '@/snippets/examples/tile-group/merge.json';
 import tileGroupScrollable from '@/snippets/examples/tile-group/scrollable.json';
@@ -35,65 +39,13 @@ dart run forui style create tile-group
 ## Usage
 
 ### `FTileGroup(...)`
-
-```dart copy
-FTileGroup(
-  children: [],
-  style: (style) => style.copyWith(...),
-  scrollController: ScrollController(),
-  cacheExtent: 100,
-  maxHeight: 200,
-  dragStartBehavior: DragStartBehavior.start,
-  physics: const ClampingScrollPhysics(),
-  enabled: true,
-  divider: FItemDivider.indented,
-  semanticsLabel: 'Settings',
-  label: const Text('Settings'),
-  description: const Text('Personalize your experience'),
-  error: const Text('Error message'),
-);
-```
+<UsageSnippet usage={tileGroupUsage} />
 
 ### `FTileGroup.builder(...)`
-
-```dart copy
-FTileGroup.builder(
-  tileBuilder: (context, index) => FTile(title: Text('Tile $index')),
-  count: 100,
-  style: (style) => style.copyWith(...),
-  scrollController: ScrollController(),
-  cacheExtent: 100,
-  maxHeight: 200,
-  dragStartBehavior: DragStartBehavior.start,
-  physics: const ClampingScrollPhysics(),
-  enabled: true,
-  divider: FItemDivider.indented,
-  semanticsLabel: 'Settings',
-  label: const Text('Settings'),
-  description: const Text('Personalize your experience'),
-  error: const Text('Error message'),
-);
-```
+<UsageSnippet usage={tileGroupBuilderUsage} />
 
 ### `FTileGroup.merge(...)`
-
-```dart copy
-FTileGroup.merge(
-  children: [],
-  style: (style) => style.copyWith(...),
-  scrollController: ScrollController(),
-  cacheExtent: 100,
-  maxHeight: 200,
-  dragStartBehavior: DragStartBehavior.start,
-  physics: const ClampingScrollPhysics(),
-  enabled: true,
-  divider: FItemDivider.full,
-  semanticsLabel: 'Settings',
-  label: const Text('Settings'),
-  description: const Text('Personalize your experience'),
-  error: const Text('Error message'),
-);
-```
+<UsageSnippet usage={tileGroupMergeUsage} />
 
 ## Examples
 

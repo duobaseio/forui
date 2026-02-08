@@ -7,7 +7,9 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.divider/
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/divider/default.json';
+import dividerUsage from '@/snippets/usages/widgets/divider/divider.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
@@ -29,10 +31,4 @@ dart run forui style create dividers
 ## Usage
 
 ### `FDivider(...)`
-
-```dart copy
-FDivider(
-  style: (style) => style.copyWith(...),
-  axis: Axis.vertical,
-);
-```
+<UsageSnippet usage={dividerUsage} />

@@ -7,6 +7,10 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.picker/
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import pickerUsage from '@/snippets/usages/widgets/picker/picker.json';
+import pickerWheelUsage from '@/snippets/usages/widgets/picker/pickerWheel.json';
+import pickerWheelBuilderUsage from '@/snippets/usages/widgets/picker/pickerWheelBuilder.json';
 import defaultSnippet from '@/snippets/examples/picker/default.json';
 import loopSnippet from '@/snippets/examples/picker/loop.json';
 import builderSnippet from '@/snippets/examples/picker/builder.json';
@@ -40,34 +44,13 @@ dart run forui style create picker
 ## Usage
 
 ### `FPicker(...)`
+<UsageSnippet usage={pickerUsage} />
 
-```dart copy
-const FPicker(
-  controller: FPickerController(initialIndexes: []),
-  style: FPickerStyle(...),
-  onChange: (indexes) {},
-  children: [
-    FPickerWheel(
-      flex: 2,
-      loop: true,
-      autofocus: true,
-      focusNode: FocusNode(),
-      onFocusChange: (focused) {},
-      children: const [
-        Text('1'),
-        Text('2'),
-      ],
-    ),
-    FPickerWheel.builder(
-      flex: 2,
-      autofocus: true,
-      focusNode: FocusNode(),
-      onFocusChange: (focused) {},
-      builder: (context, index) => Text('$index'),
-    ),
-  ],
-);
-```
+### `FPickerWheel(...)`
+<UsageSnippet usage={pickerWheelUsage} />
+
+### `FPickerWheel.builder(...)`
+<UsageSnippet usage={pickerWheelBuilderUsage} />
 
 ## Examples
 

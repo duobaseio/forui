@@ -8,12 +8,17 @@ import { Callout } from 'fumadocs-ui/components/callout';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/text-field/default.json';
 import disabledSnippet from '@/snippets/examples/text-field/disabled.json';
 import clearableSnippet from '@/snippets/examples/text-field/clearable.json';
 import emailSnippet from '@/snippets/examples/text-field/email.json';
 import passwordSnippet from '@/snippets/examples/text-field/password.json';
 import multilineSnippet from '@/snippets/examples/text-field/multiline.json';
+import textFieldUsage from '@/snippets/usages/widgets/text_field/textField.json';
+import textFieldEmailUsage from '@/snippets/usages/widgets/text_field/textFieldEmail.json';
+import textFieldMultilineUsage from '@/snippets/usages/widgets/text_field/textFieldMultiline.json';
+import textFieldPasswordUsage from '@/snippets/usages/widgets/text_field/textFieldPassword.json';
 
 <Callout type="info">
   See [`FTextFormField`](/docs/form/text-form-field) for using text fields in forms.
@@ -39,22 +44,16 @@ dart run forui style create text-field
 ## Usage
 
 ### `FTextField(...)`
+<UsageSnippet usage={textFieldUsage} />
 
-```dart copy
-FTextField(
-  control: FTextFieldControl.managed(initial: TextEditingValue(text: '...')),
-  style: (style) => style.copyWith(...),
-  label: const Text('Email'),
-  hint: 'john@doe.com',
-  description: const Text('Enter your email associated with your Forui account.'),
-  error: const Text('Error'),
-  keyboardType: TextInputType.emailAddress,
-  textCapitalization: TextCapitalization.none,
-  enabled: true,
-  clearable: (value) => value.text.isNotEmpty,
-  maxLines: 1,
-);
-```
+### `FTextField.email(...)`
+<UsageSnippet usage={textFieldEmailUsage} />
+
+### `FTextField.password(...)`
+<UsageSnippet usage={textFieldPasswordUsage} />
+
+### `FTextField.multiline(...)`
+<UsageSnippet usage={textFieldMultilineUsage} />
 
 ## Examples
 

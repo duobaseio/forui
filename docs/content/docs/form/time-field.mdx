@@ -8,11 +8,14 @@ import { Callout } from 'fumadocs-ui/components/callout';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/time-field/default.json';
 import hour24Snippet from '@/snippets/examples/time-field/hour24.json';
 import pickerSnippet from '@/snippets/examples/time-field/picker.json';
 import validatorSnippet from '@/snippets/examples/time-field/validator.json';
 import formSnippet from '@/snippets/examples/time-field/form.json';
+import timeFieldUsage from '@/snippets/usages/widgets/time_field/timeField.json';
+import timeFieldPickerUsage from '@/snippets/usages/widgets/time_field/timeFieldPicker.json';
 
 <Callout type="info">
     It is recommended to use [FTimeField.picker](#ftimefieldpicker) on touch devices and [FTimeField.new](#ftimefield)
@@ -67,61 +70,10 @@ dart run forui style create time-field
 ## Usage
 
 ### `FTimeField(...)`
-
-```dart copy
-FTimeField(
-  control: FTimeFieldControl.managed(
-    initial: FTime(12, 30),
-    validator: (time) => time != null && time < FTime(14, 30) ? 'Time must be in the future' : null,
-    onChange: (time) {},
-  ),
-  style: (style) => style.copyWith(...),
-  hour24: false,
-  textAlign: TextAlign.start,
-  textAlignVertical: TextAlignVertical.center,
-  autofocus: false,
-  expands: false,
-  onEditingComplete: () {},
-  onSubmit: (time) {},
-  mouseCursor: SystemMouseCursors.text,
-  canRequestFocus: true,
-  builder: (context, styles, child) => child,
-  prefixBuilder: (context, styles, _) => Icon(FIcons.clock4),
-  suffixBuilder: null,
-  label: const Text('Select Time'),
-  description: const Text('Choose a time'),
-  enabled: true,
-  onSaved: (time) {},
-  onReset: () {},
-  autovalidateMode: AutovalidateMode.onUnfocus,
-);
-```
+<UsageSnippet usage={timeFieldUsage} />
 
 ### `FTimeField.picker(...)`
-
-```dart copy
-FTimeField.picker(
-  control: FTimeFieldControl.managed(
-    initial: FTime(12, 30),
-    validator: (time) => time != null && time < FTime(14, 30) ? 'Time must be in the future' : null,
-    onChange: (time) {},
-  ),
-  style: (style) => style.copyWith(...),
-  hour24: false,
-  hint: 'Select a time',
-  hourInterval: 1,
-  minuteInterval: 1,
-  builder: (context, styles, child) => child,
-  prefixBuilder: (context, styles, _) => Icon(FIcons.clock4),
-  suffixBuilder: null,
-  label: const Text('Picker Time'),
-  description: const Text('Select a time'),
-  enabled: true,
-  onSaved: (time) {},
-  onReset: () {},
-  autovalidateMode: AutovalidateMode.onUnfocus,
-);
-```
+<UsageSnippet usage={timeFieldPickerUsage} />
 
 ## Examples
 

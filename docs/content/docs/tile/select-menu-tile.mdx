@@ -8,7 +8,10 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Callout } from 'fumadocs-ui/components/callout';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import selectMenuTileDefault from '@/snippets/examples/select-menu-tile/default.json';
+import selectMenuTileUsage from '@/snippets/usages/widgets/select_menu_tile/selectMenuTile.json';
+import selectMenuTileBuilderUsage from '@/snippets/usages/widgets/select_menu_tile/selectMenuTileBuilder.json';
 import selectMenuTileLazy from '@/snippets/examples/select-menu-tile/lazy.json';
 import selectMenuTileScrollable from '@/snippets/examples/select-menu-tile/scrollable.json';
 import selectMenuTileNoAutoHide from '@/snippets/examples/select-menu-tile/no-auto-hide.json';
@@ -38,107 +41,10 @@ dart run forui style create select-menu-tile
 ## Usage
 
 ### `FSelectMenuTile(...)`
-
-```dart copy
-FSelectMenuTile<Value>(
-  title: const Text('Notifications'),
-  menu: [
-    FSelectTile(title: const Text('Option 1'), value: Value.option1),
-  ],
-  selectControl: FMultiValueControl.managed(initial: {Value.option1}),
-  popoverControl: FPopoverControl.managed(),
-  scrollController: ScrollController(),
-  style: (style) => style.copyWith(...),
-  cacheExtent: 100,
-  maxHeight: 200,
-  dragStartBehavior: DragStartBehavior.start,
-  physics: const ClampingScrollPhysics(),
-  divider: FItemDivider.indented,
-  menuAnchor: Alignment.topRight,
-  tileAnchor: Alignment.bottomRight,
-  menuSpacing: FPortalSpacing.spacing(4),
-  menuOverflow: FPortalOverflow.flip,
-  menuOffset: Offset.zero,
-  menuHideRegion: FPopoverHideRegion.excludeChild,
-  menuOnTapHide: () {},
-  menuGroupId: 'group-id',
-  autoHide: true,
-  label: const Text('Sidebar'),
-  description: const Text('Select the items you want to display in the sidebar.'),
-  autofocus: false,
-  menuFocusNode: FocusScopeNode(),
-  menuOnFocusChange: (focused) {},
-  menuTraversalEdgeBehavior: TraversalEdgeBehavior.closedLoop,
-  menuBarrierSemanticsLabel: 'Dismiss',
-  menuBarrierSemanticsDismissible: true,
-  semanticsLabel: 'Notifications',
-  prefix: const Icon(FIcons.bell),
-  subtitle: const Text('subtitle'),
-  detailsBuilder: (context, values, child) => const Placeholder(),
-  details: const Text('All'),
-  suffix: const Icon(FIcons.chevronsUpDown),
-  shortcuts: {SingleActivator(LogicalKeyboardKey.enter): ActivateIntent()},
-  actions: {ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {})},
-  errorBuilder: (context, error) => Text(error),
-  onSaved: (values) {},
-  onReset: () {},
-  validator: (values) => values?.isEmpty ?? true ? 'Select an item' : null,
-  forceErrorText: null,
-  enabled: true,
-  autovalidateMode: AutovalidateMode.disabled,
-);
-```
+<UsageSnippet usage={selectMenuTileUsage} />
 
 ### `FSelectMenuTile.builder(...)`
-
-```dart copy
-FSelectMenuTile<int>.builder(
-  title: const Text('Applicable values'),
-  menuBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index),
-  count: 100,
-  selectControl: FMultiValueControl.managed(initial: {1}),
-  popoverControl: FPopoverControl.managed(),
-  scrollController: ScrollController(),
-  style: (style) => style.copyWith(...),
-  cacheExtent: 100,
-  maxHeight: 200,
-  dragStartBehavior: DragStartBehavior.start,
-  physics: const ClampingScrollPhysics(),
-  divider: FItemDivider.indented,
-  menuAnchor: Alignment.topRight,
-  tileAnchor: Alignment.bottomRight,
-  menuSpacing: FPortalSpacing.spacing(4),
-  menuOverflow: FPortalOverflow.flip,
-  menuOffset: Offset.zero,
-  menuHideRegion: FPopoverHideRegion.excludeChild,
-  menuOnTapHide: () {},
-  menuGroupId: 'group-id',
-  autoHide: true,
-  label: const Text('Settings'),
-  description: const Text('Select the items you want to display.'),
-  autofocus: false,
-  menuFocusNode: FocusScopeNode(),
-  menuOnFocusChange: (focused) {},
-  menuTraversalEdgeBehavior: TraversalEdgeBehavior.closedLoop,
-  menuBarrierSemanticsLabel: 'Dismiss',
-  menuBarrierSemanticsDismissible: true,
-  semanticsLabel: 'Values',
-  prefix: const Icon(FIcons.variable),
-  subtitle: const Text('subtitle'),
-  detailsBuilder: (context, values, child) => const Placeholder(),
-  details: const Text('Details'),
-  suffix: const Icon(FIcons.chevronsUpDown),
-  shortcuts: {SingleActivator(LogicalKeyboardKey.enter): ActivateIntent()},
-  actions: {ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {})},
-  errorBuilder: (context, error) => Text(error),
-  onSaved: (values) {},
-  onReset: () {},
-  validator: (values) => values?.isEmpty ?? true ? 'Select an item' : null,
-  forceErrorText: null,
-  enabled: true,
-  autovalidateMode: AutovalidateMode.disabled,
-);
-```
+<UsageSnippet usage={selectMenuTileBuilderUsage} />
 
 ## Examples
 

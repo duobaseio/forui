@@ -7,11 +7,13 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.paginatio
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/pagination/default.json';
 import siblingsSnippet from '@/snippets/examples/pagination/siblings.json';
 import hideEdgesSnippet from '@/snippets/examples/pagination/hide-edges.json';
 import pageViewSnippet from '@/snippets/examples/pagination/page-view.json';
 import customIconSnippet from '@/snippets/examples/pagination/custom-icon.json';
+import paginationUsage from '@/snippets/usages/widgets/pagination/pagination.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
@@ -33,21 +35,7 @@ dart run forui style create pagination
 ## Usage
 
 ### `FPagination(...)`
-
-```dart copy
-FPagination(
-  control: FPaginationControl.managed(
-    pages: 20,
-    initial: 4,
-    showEdges: false,
-    siblings: 2,
-    onChange: (page) {},
-  ),
-  style: (style) => style.copyWith(...),
-  previous: const Placeholder(),
-  next: const Placeholder(),
-);
-```
+<UsageSnippet usage={paginationUsage} />
 
 ## Examples
 

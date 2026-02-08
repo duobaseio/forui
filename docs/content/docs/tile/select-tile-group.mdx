@@ -8,7 +8,12 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Callout } from 'fumadocs-ui/components/callout';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import selectTileGroupDefault from '@/snippets/examples/select-tile-group/default.json';
+import selectTileGroupUsage from '@/snippets/usages/widgets/select_tile_group/selectTileGroup.json';
+import selectTileGroupBuilderUsage from '@/snippets/usages/widgets/select_tile_group/selectTileGroupBuilder.json';
+import selectTileUsage from '@/snippets/usages/widgets/select_tile_group/selectTile.json';
+import selectTileSuffixUsage from '@/snippets/usages/widgets/select_tile_group/selectTileSuffix.json';
 import selectTileGroupRadio from '@/snippets/examples/select-tile-group/radio.json';
 import selectTileGroupMultiValue from '@/snippets/examples/select-tile-group/multi-value.json';
 import selectTileGroupSuffix from '@/snippets/examples/select-tile-group/suffix.json';
@@ -41,59 +46,16 @@ dart run forui style create select-tile-group
 ## Usage
 
 ### `FSelectTileGroup(...)`
-
-```dart copy
-FSelectTileGroup<Value>(
-  children: [
-    FSelectTile(title: const Text('Option 1'), value: Value.option1),
-  ],
-  control: FMultiValueControl.managed(initial: {Value.option1}),
-  scrollController: ScrollController(),
-  style: FTileGroupStyle(...),
-  cacheExtent: 100,
-  maxHeight: 200,
-  dragStartBehavior: DragStartBehavior.start,
-  physics: const ClampingScrollPhysics(),
-  divider: FItemDivider.indented,
-  label: const Text('Sidebar'),
-  description: const Text('Select the items you want to display in the sidebar.'),
-  semanticsLabel: 'Sidebar',
-  errorBuilder: (context, error) => Text(error),
-  onSaved: (values) {},
-  onReset: () {},
-  validator: (values) => values?.isEmpty ?? true ? 'Select an item' : null,
-  forceErrorText: null,
-  enabled: true,
-  autovalidateMode: AutovalidateMode.disabled,
-);
-```
+<UsageSnippet usage={selectTileGroupUsage} />
 
 ### `FSelectTileGroup.builder(...)`
+<UsageSnippet usage={selectTileGroupBuilderUsage} />
 
-```dart copy
-FSelectTileGroup<int>.builder(
-  tileBuilder: (context, index) => FSelectTile(title: Text('Tile $index'), value: index),
-  count: 100,
-  control: FMultiValueControl.managed(initial: {1}),
-  scrollController: ScrollController(),
-  style: FTileGroupStyle(...),
-  cacheExtent: 100,
-  maxHeight: 200,
-  dragStartBehavior: DragStartBehavior.start,
-  physics: const ClampingScrollPhysics(),
-  divider: FItemDivider.indented,
-  label: const Text('Settings'),
-  description: const Text('Personalize your experience'),
-  semanticsLabel: 'Settings',
-  errorBuilder: (context, error) => Text(error),
-  onSaved: (values) {},
-  onReset: () {},
-  validator: (values) => values?.isEmpty ?? true ? 'Select an item' : null,
-  forceErrorText: null,
-  enabled: true,
-  autovalidateMode: AutovalidateMode.disabled,
-);
-```
+### `FSelectTile(...)`
+<UsageSnippet usage={selectTileUsage} />
+
+### `FSelectTile.suffix(...)`
+<UsageSnippet usage={selectTileSuffixUsage} />
 
 ## Examples
 

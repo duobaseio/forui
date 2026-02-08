@@ -7,8 +7,11 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.popover_m
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/popover-menu/default.json';
 import tilesSnippet from '@/snippets/examples/popover-menu/tiles.json';
+import popoverMenuUsage from '@/snippets/usages/widgets/popover_menu/popoverMenu.json';
+import popoverMenuTilesUsage from '@/snippets/usages/widgets/popover_menu/popoverMenuTiles.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
@@ -30,61 +33,10 @@ dart run forui style create popover-menu
 ## Usage
 
 ### `FPopoverMenu(...)`
-
-```dart copy
-FPopoverMenu(
-  control: FPopoverControl.managed(),
-  scrollController: ScrollController(),
-  style: (style) => style.copyWith(...),
-  cacheExtent: 100,
-  maxHeight: double.infinity,
-  dragStartBehavior: DragStartBehavior.start,
-  divider: FItemDivider.full,
-  menuAnchor: Alignment.topCenter,
-  childAnchor: Alignment.bottomCenter,
-  spacing: FPortalSpacing.spacing(4),
-  overflow: FPortalOverflow.flip,
-  offset: Offset.zero,
-  groupId: 'popover-menu-group',
-  hideRegion: FPopoverHideRegion.excludeChild,
-  onTapHide: () {},
-  autofocus: true,
-  focusNode: FocusScopeNode(),
-  onFocusChange: (focused) {},
-  traversalEdgeBehavior: TraversalEdgeBehavior.closedLoop,
-  menu: [FItemGroup(children: [])],
-  builder: (context, controller, child) => const Placeholder(),
-  child: const Placeholder(),
-);
-```
+<UsageSnippet usage={popoverMenuUsage} />
 
 ### `FPopoverMenu.tiles(...)`
-
-```dart copy
-FPopoverMenu.tiles(
-  control: FPopoverControl.managed(),
-  scrollController: ScrollController(),
-  style: (style) => style.copyWith(...),
-  cacheExtent: 100,
-  maxHeight: double.infinity,
-  dragStartBehavior: DragStartBehavior.start,
-  divider: FTileDivider.full,
-  menuAnchor: Alignment.topCenter,
-  childAnchor: Alignment.bottomCenter,
-  spacing: FPortalSpacing.spacing(4),
-  overflow: FPortalOverflow.flip,
-  offset: Offset.zero,
-  groupId: 'popover-menu-group',
-  hideRegion: FPopoverHideRegion.excludeChild,
-  autofocus: true,
-  focusNode: FocusScopeNode(),
-  onFocusChange: (focused) {},
-  traversalEdgeBehavior: TraversalEdgeBehavior.closedLoop,
-  menu: [FTileGroup(children: [])],
-  builder: (context, controller, child) => const Placeholder(),
-  child: const Placeholder(),
-);
-```
+<UsageSnippet usage={popoverMenuTilesUsage} />
 
 ## Examples
 

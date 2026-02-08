@@ -7,7 +7,9 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.foundation/FColla
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import collapsibleDefault from '@/snippets/examples/collapsible/default.json';
+import collapsibleUsage from '@/snippets/usages/foundation/collapsible/collapsible.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
@@ -21,10 +23,4 @@ import collapsibleDefault from '@/snippets/examples/collapsible/default.json';
 ## Usage
 
 ### `FCollapsible(...)`
-
-```dart copy
-FCollapsible(
-  value: 1.0, // 0.0 for collapsed, 1.0 for expanded.
-  child: const Text('child'),
-);
-```
+<UsageSnippet usage={collapsibleUsage} />

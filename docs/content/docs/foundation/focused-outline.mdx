@@ -7,7 +7,9 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.foundation/FFocus
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import focusedOutlineDefault from '@/snippets/examples/focused-outline/default.json';
+import focusedOutlineUsage from '@/snippets/usages/foundation/focused_outline/focusedOutline.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
@@ -17,3 +19,8 @@ import focusedOutlineDefault from '@/snippets/examples/focused-outline/default.j
     <CodeSnippet snippet={focusedOutlineDefault} />
   </Tab>
 </Tabs>
+
+## Usage
+
+### `FFocusedOutline(...)`
+<UsageSnippet usage={focusedOutlineUsage} />

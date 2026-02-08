@@ -8,9 +8,12 @@ import { Callout } from 'fumadocs-ui/components/callout';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/modal-sheet/default.json';
 import blurredSnippet from '@/snippets/examples/modal-sheet/blurred.json';
 import draggableSnippet from '@/snippets/examples/modal-sheet/draggable.json';
+import sheetShowUsage from '@/snippets/usages/widgets/modal_sheet/show.json';
+import sheetRouteUsage from '@/snippets/usages/widgets/modal_sheet/route.json';
 
 It navigates to a new page each time.
 
@@ -39,27 +42,10 @@ dart run forui style create modal-sheet
 ## Usage
 
 ### `showFSheet(...)`
+<UsageSnippet usage={sheetShowUsage} />
 
-```dart copy
-showFSheet(
-  context: context,
-  side: FLayout.ltr,
-  useRootNavigator: false,
-  style: (style) => style.copyWith(...),
-  mainAxisMaxRatio: 9 / 16,
-  useSafeArea: false,
-  resizeToAvoidBottomInset: true,
-  barrierLabel: 'Dismiss',
-  barrierDismissible: true,
-  constraints: BoxConstraints(),
-  draggable: true,
-  routeSettings: RouteSettings(),
-  transitionAnimationController: AnimationController(...),
-  anchorPoint: Offset.zero,
-  onClosing: () {},
-  builder: (context) => const Placeholder(),
-);
-```
+### `FModalSheetRoute(...)`
+<UsageSnippet usage={sheetRouteUsage} />
 
 ## Examples
 

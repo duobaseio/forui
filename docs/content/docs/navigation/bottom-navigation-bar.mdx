@@ -8,7 +8,10 @@ import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Callout } from 'fumadocs-ui/components/callout';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/bottom-navigation-bar/default.json';
+import bottomNavigationBarUsage from '@/snippets/usages/widgets/bottom_navigation_bar/bottomNavigationBar.json';
+import bottomNavigationBarItemUsage from '@/snippets/usages/widgets/bottom_navigation_bar/bottomNavigationBarItem.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
@@ -34,23 +37,7 @@ dart run forui style create bottom-navigation-bar
 </Callout>
 
 ### `FBottomNavigationBar(...)`
+<UsageSnippet usage={bottomNavigationBarUsage} />
 
-```dart copy
-FBottomNavigationBar(
-  index: 0,
-  onChange: (index) {},
-  style: (style) => style.copyWith(...),
-  children: [
-    FBottomNavigationBarItem(
-      icon: const Icon(FIcons.house),
-      label: const Text('Home'),
-      style: (style) => style.copyWith(...),
-      autofocus: false,
-      focusNode: FocusNode(),
-      onFocusChange: (focused) {},
-      onHoverChange: (hovered) {},
-      onStateChange: (delta) {},
-    ),
-  ],
-);
-```
+### `FBottomNavigationBarItem(...)`
+<UsageSnippet usage={bottomNavigationBarItemUsage} />

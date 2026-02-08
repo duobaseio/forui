@@ -8,9 +8,12 @@ import { Callout } from 'fumadocs-ui/components/callout';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/persistent-sheet/default.json';
 import draggableSnippet from '@/snippets/examples/persistent-sheet/draggable.json';
 import keepAliveOffstageSnippet from '@/snippets/examples/persistent-sheet/keep-alive-offstage.json';
+import persistentSheetShowUsage from '@/snippets/usages/widgets/persistent_sheet/show.json';
+import persistentSheetSheetsUsage from '@/snippets/usages/widgets/persistent_sheet/sheets.json';
 
 It is part of [FScaffold](/docs/layout/scaffold), which should be preferred in most cases.
 
@@ -44,23 +47,10 @@ dart run forui style create persistent-sheet
 ## Usage
 
 ### `showFPersistentSheet(...)`
+<UsageSnippet usage={persistentSheetShowUsage} />
 
-```dart copy
-showFPersistentSheet(
-  context: context,
-  side: FLayout.ltr,
-  style: (style) => style.copyWith(...),
-  mainAxisMaxRatio: 9 / 16,
-  constraints: const BoxConstraints(maxWidth: 450, maxHeight: 450),
-  draggable: true,
-  anchorPoint: Offset.zero,
-  useSafeArea: false,
-  resizeToAvoidBottomInset: true,
-  keepAliveOffstage: false,
-  onClosing: () {},
-  builder: (context, controller) => const Placeholder(),
-);
-```
+### `FSheets(...)`
+<UsageSnippet usage={persistentSheetSheetsUsage} />
 
 ## Examples
 

@@ -8,6 +8,11 @@ import { Callout } from 'fumadocs-ui/components/callout';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import selectUsage from '@/snippets/usages/widgets/select/select.json';
+import selectRichUsage from '@/snippets/usages/widgets/select/selectRich.json';
+import selectSearchUsage from '@/snippets/usages/widgets/select/selectSearch.json';
+import selectSearchBuilderUsage from '@/snippets/usages/widgets/select/selectSearchBuilder.json';
 import defaultSnippet from '@/snippets/examples/select/default.json';
 import detailedSnippet from '@/snippets/examples/select/detailed.json';
 import sectionSnippet from '@/snippets/examples/select/section.json';
@@ -48,158 +53,16 @@ dart run forui style create select
 ## Usage
 
 ### `FSelect(...)`
-
-```dart copy
-FSelect<Locale>(
-  items: {
-    'United States': Locale('en', 'US'),
-    'Canada': Locale('en', 'CA'),
-    'Japan': Locale('ja', 'JP'),
-  },
-  controller: FSelectController<Locale>(vsync: this),
-  style: FSelectStyle.inherit(...),
-  label: const Text('Country'),
-  description: const Text('Select your country of residence'),
-  hint: 'Choose a country',
-  format: (value) => value.toUpperCase(),
-  onChange: (value) => print('Selected country: $value'),
-  onSaved: (value) => print('Saved country: $value'),
-  onReset: () => print('Reset'),
-  autovalidateMode: AutovalidateMode.onUserInteraction,
-  builder: (context, style, state, child) => child,
-  prefixBuilder: (context, style, states) => Icon(FIcons.globe),
-  suffixBuilder: (context, style, states) => Icon(FIcons.arrowDown),
-  popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 400),
-  clearable: true,
-  contentScrollHandles: true,
-);
-```
+<UsageSnippet usage={selectUsage} />
 
 ### `FSelect.rich(...)`
-
-```dart copy
-FSelect<String>.rich(
-  controller: FSelectController<String>(vsync: this),
-  style: FSelectStyle(...),
-  label: const Text('Country'),
-  description: const Text('Select your country of residence'),
-  hint: 'Choose a country',
-  format: (value) => value.toUpperCase(),
-  onChange: (value) => print('Selected country: $value'),
-  onSaved: (value) => print('Saved country: $value'),
-  onReset: () => print('Reset'),
-  autovalidateMode: AutovalidateMode.onUserInteraction,
-  builder: (context, style, state, child) => child,
-  prefixBuilder: (context, style, states) => Icon(FIcons.globe),
-  suffixBuilder: (context, style, states) => Icon(FIcons.arrowDown),
-  popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 400),
-  clearable: true,
-  contentDivider: FItemDivider.none,
-  contentScrollHandles: true,
-  initialValue: 'ca',
-  children: [
-    FSelectSection(
-      label: const Text('North American Countries'),
-      divider: FItemDivider.none,
-      children: [
-        FSelectItem(
-          title: const Text('United States'),
-          divider: FItemDivider.none,
-          value: 'us',
-        ),
-        FSelectItem(
-          title: Text('Canada'),
-          value: 'ca',
-        ),
-      ],
-    ),
-    FSelectItem(
-      title: Text('Japan'),
-      value: 'jp',
-    ),
-  ],
-);
-```
+<UsageSnippet usage={selectRichUsage} />
 
 ### `FSelect.search(...)`
-
-```dart copy
-FSelect<User>.search(
-  items: {
-    'Bob Ross': User(firstName: 'Bob', lastName: 'Ross'),
-    'John Doe': User(firstName: 'John', lastName: 'Doe'),
-    'Mary Jane': User(firstName: 'Mary', lastName: 'Jane'),
-    'Peter Parker': User(firstName: 'Peter', lastName: 'Parker'),
-  },
-  controller: FSelectController<User>(),
-  style: FSelectStyle.inherit(...),
-  label: const Text('User'),
-  description: const Text('Search and select a user'),
-  builder: (context, styles, child) => child!,
-  format: (user) => '${user.firstName} ${user.lastName}',
-  hint: 'Search users...',
-  popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 400),
-  clearable: true,
-  autoHide: false,
-  onChange: (value) => print('Selected country: $value'),
-  initialValue: 'value',
-  contentDivider: FItemDivider.none,
-  contentScrollHandles: false,
-  contentPhysics: const BouncingScrollPhysics(),
-  contentEmptyBuilder: (context, style) => Text('No results'),
-  filter: (query) async {
-    // Fetch users based on search query
-    return fetchUsers(query);
-  },
-  contentBuilder: (context, style, users) => [
-    for (final user in users)
-      FSelectItem(title: Text('${user.firstName} ${user.lastName}'), value: user),
-  ],
-  searchFieldProperties: FSelectSearchFieldProperties(
-    autofocus: true,
-    hint: 'Type to search...',
-  ),
-  contentLoadingBuilder: (context, style) => Text('Loading...'),
-  contentErrorBuilder: (context, error, stackTrace) => Text('Error...'),
-);
-```
+<UsageSnippet usage={selectSearchUsage} />
 
 ### `FSelect.searchBuilder(...)`
-
-```dart copy
-FSelect<User>.searchBuilder(
-  controller: FSelectController<User>(),
-  style: FSelectStyle.inherit(...),
-  label: const Text('User'),
-  description: const Text('Search and select a user'),
-  builder: (context, styles, child) => child!,
-  format: (user) => '${user.firstName} ${user.lastName}',
-  hint: 'Search users...',
-  popoverConstraints: const FAutoWidthPortalConstraints(maxHeight: 400),
-  clearable: true,
-  autoHide: false,
-  onChange: (value) => print('Selected country: $value'),
-  initialValue: 'value',
-  contentDivider: FItemDivider.none,
-  contentScrollHandles: false,
-  contentPhysics: const BouncingScrollPhysics(),
-  contentEmptyBuilder: (context, style) => Text('No results'),
-  filter: (query) async {
-    // Fetch users based on search query
-    return fetchUsers(query);
-  },
-  contentBuilder: (context, users) => [
-    for (final user in users)
-      FSelectItem(title: Text('${user.firstName} ${user.lastName}'), value: user),
-  ],
-  searchFieldProperties: FSelectSearchFieldProperties(
-    autofocus: true,
-    hint: 'Type to search...',
-  ),
-  contentLoadingBuilder: (context, style) => Text('Loading...'),
-  contentErrorBuilder: (context, error, stackTrace) => Text('Error...'),
-);
-```
+<UsageSnippet usage={selectSearchBuilderUsage} />
 
 ## Examples
 

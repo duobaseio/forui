@@ -7,7 +7,9 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.tooltip/
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/tooltip/default.json';
+import tooltipUsage from '@/snippets/usages/widgets/tooltip/tooltip.json';
 import horizontalSnippet from '@/snippets/examples/tooltip/horizontal.json';
 import longPressOnlySnippet from '@/snippets/examples/tooltip/long-press-only.json';
 
@@ -31,25 +33,7 @@ dart run forui style create tooltip
 ## Usage
 
 ### `FTooltip(...)`
-
-```dart copy
-FTooltip(
-  control: FTooltipControl.managed(),
-  style: (style) => style.copyWith(...),
-  tipAnchor: Alignment.bottomCenter,
-  childAnchor: Alignment.topCenter,
-  spacing: FPortalSpacing.spacing(4),
-  overflow: FPortalOverflow.flip,
-  hover: true,
-  hoverEnterDuration: Duration(milliseconds: 500),
-  hoverExitDuration: Duration.zero,
-  longPress: true,
-  longPressExitDuration: Duration(milliseconds: 1500),
-  tipBuilder: (context, controller) => const Text('Tooltip'),
-  builder: (context, controller, child) => child!,
-  child: const Placeholder(),
-);
-```
+<UsageSnippet usage={tooltipUsage} />
 
 ## Examples
 

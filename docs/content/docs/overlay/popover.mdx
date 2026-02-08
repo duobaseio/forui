@@ -7,6 +7,7 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.popover/
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/popover/default.json';
 import horizontalSnippet from '@/snippets/examples/popover/horizontal.json';
 import slideSnippet from '@/snippets/examples/popover/slide.json';
@@ -15,6 +16,7 @@ import allowOverflowSnippet from '@/snippets/examples/popover/allow-overflow.jso
 import noHideRegionSnippet from '@/snippets/examples/popover/no-hide-region.json';
 import nestedSnippet from '@/snippets/examples/popover/nested.json';
 import blurredSnippet from '@/snippets/examples/popover/blurred.json';
+import popoverUsage from '@/snippets/usages/widgets/popover/popover.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
@@ -36,25 +38,7 @@ dart run forui style create popover
 ## Usage
 
 ### `FPopover(...)`
-
-```dart copy
-FPopover(
-  control: FPopoverControl.managed(),
-  style: (style) => style.copyWith(...),
-  constraints: const FPortalConstraints(),
-  popoverAnchor: Alignment.topCenter,
-  childAnchor: Alignment.bottomCenter,
-  spacing: const FPortalSpacing(4),
-  overflow: FPortalOverflow.flip,
-  offset: Offset.zero,
-  groupId: 'popover-group',
-  hideRegion: FPopoverHideRegion.excludeChild,
-  onTapHide: () {},
-  popoverBuilder: (context, controller) => const Placeholder(),
-  builder: (context, controller, child) => const Placeholder(),
-  child: const Placeholder(),
-);
-```
+<UsageSnippet usage={popoverUsage} />
 
 ## Examples
 

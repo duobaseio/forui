@@ -8,7 +8,9 @@ import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Callout } from 'fumadocs-ui/components/callout';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import portalDefault from '@/snippets/examples/portal/default.json';
+import portalUsage from '@/snippets/usages/foundation/portal/portal.json';
 
 <Callout type="info">
   This widget is typically used to create other high-level widgets, e.g., [popover](../overlay/popover) or
@@ -27,23 +29,7 @@ import portalDefault from '@/snippets/examples/portal/default.json';
 ## Usage
 
 ### `FPortal(...)`
-
-```dart copy
-FPortal(
-  controller: OverlayPortalController(),
-  constraints: const FPortalConstraints(),
-  portalAnchor: Alignment.topCenter,
-  childAnchor: Alignment.bottomCenter,
-  spacing: FPortalSpacing.zero,
-  overflow: FPortalOverflow.flip,
-  offset: Offset.zero,
-  viewInsets: EdgeInsets.zero,
-  barrier: Container(color: Colors.blue),
-  portalBuilder: (context, controller) => const Text('portal'),
-  builder: (context, controller, child) => child!,
-  child: const Text('child'),
-);
-```
+<UsageSnippet usage={portalUsage} />
 
 ## Visualization
 

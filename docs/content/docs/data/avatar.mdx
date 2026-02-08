@@ -7,9 +7,12 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.avatar/
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/avatar/default.json';
 import rawSnippet from '@/snippets/examples/avatar/raw.json';
 import invalidSnippet from '@/snippets/examples/avatar/invalid.json';
+import avatarUsage from '@/snippets/usages/widgets/avatar/avatar.json';
+import avatarRawUsage from '@/snippets/usages/widgets/avatar/raw.json';
 
 ## Overview
 
@@ -33,26 +36,10 @@ dart run forui style create avatar
 ## Usage
 
 ### `FAvatar(...)`
-
-```dart copy
-FAvatar(
-  image: const NetworkImage('https://example.com/profile.jpg'),
-  style: (style) => style.copyWith(...),
-  size: 40.0,
-  semanticsLabel: 'User avatar',
-  fallback: const Text('JD'),
-);
-```
+<UsageSnippet usage={avatarUsage} />
 
 ### `FAvatar.raw(...)`
-
-```dart copy
-FAvatar.raw(
-  child: const Text('MN'),
-  style: (style) => style.copyWith(...),
-  size: 40.0,
-);
-```
+<UsageSnippet usage={avatarRawUsage} />
 
 ## Examples
 

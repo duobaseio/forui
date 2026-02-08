@@ -8,7 +8,12 @@ import { Callout } from 'fumadocs-ui/components/callout';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/text-form-field/default.json';
+import textFormFieldUsage from '@/snippets/usages/widgets/text_form_field/textFormField.json';
+import textFormFieldEmailUsage from '@/snippets/usages/widgets/text_form_field/textFormFieldEmail.json';
+import textFormFieldMultilineUsage from '@/snippets/usages/widgets/text_form_field/textFormFieldMultiline.json';
+import textFormFieldPasswordUsage from '@/snippets/usages/widgets/text_form_field/textFormFieldPassword.json';
 
 <Callout type="info">
   `FTextFormField` wraps [`FTextField`](/docs/form/text-field) and provides a
@@ -35,82 +40,13 @@ dart run forui style create text-field
 ## Usage
 
 ### `FTextFormField(...)`
-
-```dart copy
-FTextFormField(
-  control: FTextFieldControl.managed(initial: TextEditingValue(text: '...')),
-  style: (style) => style.copyWith(...),
-  label: const Text('Email'),
-  hint: 'john@doe.com',
-  description: const Text('Enter your email associated with your Forui account.'),
-  keyboardType: TextInputType.emailAddress,
-  textCapitalization: TextCapitalization.none,
-  enabled: true,
-  clearable: (value) => value.text.isNotEmpty,
-  onSaved: (value) {},
-  onReset: () {},
-  validator: (value) => null,
-  autovalidateMode: AutovalidateMode.onUserInteraction,
-  forceErrorText: 'Error',
-  errorBuilder: (context, error) => Text(error),
-);
-```
+<UsageSnippet usage={textFormFieldUsage} />
 
 ### `FTextFormField.email(...)`
-
-```dart copy
-FTextFormField.email(
-  control: FTextFieldControl.managed(initial: TextEditingValue(text: '...')),
-  style: (style) => style.copyWith(...),
-  hint: 'john@doe.com',
-  description: const Text('Enter your email associated with your Forui account.'),
-  enabled: true,
-  clearable: (value) => value.text.isNotEmpty,
-  onSaved: (value) {},
-  onReset: () {},
-  validator: (value) => null,
-  autovalidateMode: AutovalidateMode.onUserInteraction,
-  forceErrorText: 'Error',
-  errorBuilder: (context, error) => Text(error),
-);
-```
+<UsageSnippet usage={textFormFieldEmailUsage} />
 
 ### `FTextFormField.password(...)`
-
-```dart copy
-FTextFormField.password(
-  control: FTextFieldControl.managed(initial: TextEditingValue(text: '...')),
-  obscureTextControl: FObscureTextControl.managed(),
-  style: (style) => style.copyWith(...),
-  hint: 'Enter password',
-  description: const Text('Enter your password.'),
-  enabled: true,
-  clearable: (value) => value.text.isNotEmpty,
-  onSaved: (value) {},
-  onReset: () {},
-  validator: (value) => null,
-  autovalidateMode: AutovalidateMode.onUserInteraction,
-  forceErrorText: 'Error',
-  errorBuilder: (context, error) => Text(error),
-);
-```
+<UsageSnippet usage={textFormFieldPasswordUsage} />
 
 ### `FTextFormField.multiline(...)`
-
-```dart copy
-FTextFormField.multiline(
-  control: FTextFieldControl.managed(initial: TextEditingValue(text: '...')),
-  style: (style) => style.copyWith(...),
-  label: const Text('Description'),
-  hint: 'Enter description',
-  description: const Text('Enter your description.'),
-  enabled: true,
-  clearable: (value) => value.text.isNotEmpty,
-  onSaved: (value) {},
-  onReset: () {},
-  validator: (value) => null,
-  autovalidateMode: AutovalidateMode.onUserInteraction,
-  forceErrorText: 'Error',
-  errorBuilder: (context, error) => Text(error),
-);
-```
+<UsageSnippet usage={textFormFieldMultilineUsage} />

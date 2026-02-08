@@ -8,7 +8,10 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Callout } from 'fumadocs-ui/components/callout';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import tileDefault from '@/snippets/examples/tile/default.json';
+import tileUsage from '@/snippets/usages/widgets/tile/tile.json';
+import tileRawUsage from '@/snippets/usages/widgets/tile/tileRaw.json';
 import tileUntappable from '@/snippets/examples/tile/untappable.json';
 import tileDisabled from '@/snippets/examples/tile/disabled.json';
 import tileSubtitle from '@/snippets/examples/tile/subtitle.json';
@@ -38,55 +41,10 @@ dart run forui style create tile
 ## Usage
 
 ### `FTile(...)`
-
-```dart copy
-FTile(
-  title: const Text('Title'),
-  style: (style) => style.copyWith(...),
-  enabled: true,
-  selected: false,
-  semanticsLabel: 'Label',
-  autofocus: false,
-  focusNode: FocusNode(),
-  onFocusChange: (focused) {},
-  onHoverChange: (hovered) {},
-  onStateChange: (delta) {},
-  onPress: () {},
-  onLongPress: () {},
-  onSecondaryPress: () {},
-  onSecondaryLongPress: () {},
-  shortcuts: {SingleActivator(LogicalKeyboardKey.enter): ActivateIntent()},
-  actions: {ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {})},
-  prefix: const Icon(FIcons.user),
-  subtitle: const Text('Subtitle'),
-  details: const Text('Details'),
-  suffix: const Icon(FIcons.chevronRight),
-);
-```
+<UsageSnippet usage={tileUsage} />
 
 ### `FTile.raw(...)`
-
-```dart copy
-FTile.raw(
-  child: const Text('Title'),
-  style: (style) => style.copyWith(...),
-  enabled: true,
-  selected: false,
-  semanticsLabel: 'Label',
-  autofocus: false,
-  focusNode: FocusNode(),
-  onFocusChange: (focused) {},
-  onHoverChange: (hovered) {},
-  onStateChange: (delta) {},
-  onPress: () {},
-  onLongPress: () {},
-  onSecondaryPress: () {},
-  onSecondaryLongPress: () {},
-  shortcuts: {SingleActivator(LogicalKeyboardKey.enter): ActivateIntent()},
-  actions: {ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) {})},
-  prefix: const Icon(FIcons.user),
-);
-```
+<UsageSnippet usage={tileRawUsage} />
 
 ## Examples
 

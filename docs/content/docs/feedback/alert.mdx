@@ -7,8 +7,10 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.alert/
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import primarySnippet from '@/snippets/examples/alert/primary.json';
 import destructiveSnippet from '@/snippets/examples/alert/destructive.json';
+import alertUsage from '@/snippets/usages/widgets/alert/alert.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
@@ -30,15 +32,7 @@ dart run forui style create alerts
 ## Usage
 
 ### `FAlert(...)`
-
-```dart copy
-FAlert(
-  title: const Text('Heads Up!'),
-  icon: const Icon(FIcons.circleAlert),
-  subtitle: const Text('You can add components to your app using the cli.'),
-  style: FAlertStyle.primary(),
-);
-```
+<UsageSnippet usage={alertUsage} />
 
 ## Examples
 

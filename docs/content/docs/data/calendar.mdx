@@ -8,10 +8,12 @@ import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Callout } from 'fumadocs-ui/components/callout';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/calendar/default.json';
 import datesSnippet from '@/snippets/examples/calendar/dates.json';
 import unselectableSnippet from '@/snippets/examples/calendar/unselectable.json';
 import rangeSnippet from '@/snippets/examples/calendar/range.json';
+import calendarUsage from '@/snippets/usages/widgets/calendar/calendar.json';
 
 The calendar supports swipe gestures on mobile platforms, allowing users to navigate between pages by swiping left or right.
 
@@ -46,29 +48,7 @@ dart run forui style create calendar
 ## Usage
 
 ### `FCalendar(...)`
-
-```dart copy
-FCalendar(
-  control: FCalendarControl.managedDate(
-    controller: FCalendarController.date(...),
-    initial: DateTime(2024, 9, 13),
-    selectable: (date) => allowedDates.contains(date),
-    toggleable: true,
-    truncateAndStripTimezone: true,
-    onChange: (date) {},
-  ),
-  style: (style) => style.copyWith(...),
-  dayBuilder: (context, data, child) => child!,
-  start: DateTime(2024),
-  end: DateTime(2030),
-  today: DateTime(2024, 7, 14),
-  initialType: FCalendarPickerType.yearMonth,
-  initialMonth: DateTime(2024, 9),
-  onMonthChange: (date) {},
-  onPress: (date) {},
-  onLongPress: (date) {},
-);
-```
+<UsageSnippet usage={calendarUsage} />
 
 ## Examples
 

@@ -7,10 +7,12 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.time_pick
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/time-picker/default.json';
 import hour24Snippet from '@/snippets/examples/time-picker/hour24.json';
 import intervalSnippet from '@/snippets/examples/time-picker/interval.json';
 import animatedSnippet from '@/snippets/examples/time-picker/animated.json';
+import timePickerUsage from '@/snippets/usages/widgets/time_picker/timePicker.json';
 
 The picker supports arrow key navigation:
 
@@ -39,16 +41,7 @@ dart run forui style create time-picker
 ## Usage
 
 ### `FTimePicker(...)`
-
-```dart copy
-FTimePicker(
-  control: FTimePickerControl.managed(initial: FTime.now(), onChange: (time) {}),
-  style: (style) => style.copyWith(...),
-  hour24: false,
-  hourInterval: 1,
-  minuteInterval: 1,
-);
-```
+<UsageSnippet usage={timePickerUsage} />
 
 ## Examples
 

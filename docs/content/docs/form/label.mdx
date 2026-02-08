@@ -7,10 +7,12 @@ apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.label/
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import horizontalSnippet from '@/snippets/examples/label/horizontal.json';
 import verticalSnippet from '@/snippets/examples/label/vertical.json';
 import disabledSnippet from '@/snippets/examples/label/disabled.json';
 import errorSnippet from '@/snippets/examples/label/error.json';
+import labelUsage from '@/snippets/usages/widgets/label/label.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
@@ -32,19 +34,7 @@ dart run forui style create label
 ## Usage
 
 ### `FLabel(...)`
-
-```dart copy
-FLabel(
-  axis: Axis.horizontal,
-  child: const Placeholder(),
-  style: (style) => style.copyWith(...),
-  label: const Text('Accept terms and conditions'),
-  description: const Text('You agree to our terms and conditions.'),
-  error: const Text('Please accept the terms and conditions.'),
-  expands: false,
-  states: {WidgetState.error},
-);
-```
+<UsageSnippet usage={labelUsage} />
 
 ## Examples
 

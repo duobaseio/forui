@@ -8,6 +8,10 @@ import { Callout } from 'fumadocs-ui/components/callout';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import selectGroupUsage from '@/snippets/usages/widgets/select_group/selectGroup.json';
+import selectGroupCheckboxUsage from '@/snippets/usages/widgets/select_group/selectGroupCheckbox.json';
+import selectGroupRadioUsage from '@/snippets/usages/widgets/select_group/selectGroupRadio.json';
 import defaultSnippet from '@/snippets/examples/select-group/default.json';
 import checkboxFormSnippet from '@/snippets/examples/select-group/checkbox-form.json';
 import radioFormSnippet from '@/snippets/examples/select-group/radio-form.json';
@@ -37,24 +41,13 @@ dart run forui style create select-group
 ## Usage
 
 ### `FSelectGroup(...)`
+<UsageSnippet usage={selectGroupUsage} />
 
-```dart copy
-FSelectGroup<Value>(
-  control: FSelectGroupControl.managed(
-    initial: {Value.checkbox},
-    onChange: (all) {},
-    onSelect: (selection) {},
-  ),
-  style: (style) => style.copyWith(...),
-  label: const Text('Sidebar'),
-  description: const Text('Select the items you want to display in the sidebar.'),
-  children: [
-    FSelectGroupItem.checkbox(value: Value.checkbox, label: const Text('Checkbox')),
-    // or
-    FSelectGroupItem.radio(value: Value.radio, label: const Text('Radio')),
-  ],
-);
-```
+### `FSelectGroupItemMixin.checkbox(...)`
+<UsageSnippet usage={selectGroupCheckboxUsage} />
+
+### `FSelectGroupItemMixin.radio(...)`
+<UsageSnippet usage={selectGroupRadioUsage} />
 
 ## Examples
 
