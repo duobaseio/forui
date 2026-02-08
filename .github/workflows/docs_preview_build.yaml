@@ -47,6 +47,10 @@ jobs:
         run: |
           SHA="${{ github.event.pull_request.head.sha }}"
           echo "sha=${SHA:0:7}" >> $GITHUB_OUTPUT
+      - id: snippets-slug
+        run: |
+          SLUG="${{ steps.escape-branch.outputs.branch }}-${{ steps.short-sha.outputs.sha }}"
+          echo "slug=${SLUG:0:28}" >> $GITHUB_OUTPUT
 
       # Build docs
       - uses: actions/setup-node@v6
@@ -62,7 +66,7 @@ jobs:
         env:
           # We don't use the CLOUDFLARE_SNIPPETS_PROJECT_NAME environment variable since it requires us to set the
           # environment for this workflow, unintentionally leaking environment secrets.
-          NEXT_PUBLIC_SNIPPETS_URL: https://${{ steps.escape-branch.outputs.branch }}-${{ steps.short-sha.outputs.sha }}.forui-docs-snippets-dev.pages.dev
+          NEXT_PUBLIC_SNIPPETS_URL: https://${{ steps.snippets-slug.outputs.slug }}.forui-docs-snippets-dev.pages.dev
       - uses: actions/upload-artifact@v6
         with:
           name: docs-build
