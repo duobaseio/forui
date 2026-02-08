@@ -21,10 +21,7 @@ void main() {
   });
 
   for (final theme in TestScaffold.themes) {
-    for (final (name, variant) in [
-      ('primary', null),
-      ('destructive', FAlertVariant.destructive),
-    ]) {
+    for (final (name, variant) in [('primary', null), ('destructive', FAlertVariant.destructive)]) {
       testWidgets('${theme.name} with default icon', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
