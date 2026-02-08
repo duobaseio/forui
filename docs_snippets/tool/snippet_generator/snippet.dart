@@ -1,6 +1,6 @@
 /// The code snippet.
 class Snippet {
-  /// The line ranges to highlight, 1-indexed and inclusive.
+  /// The line ranges to highlight, 0-indexed and inclusive.
   final List<(int start, int end)> highlights = [];
 
   // We use a list instead of a SplayTreeMap as spans are mutable, and mutable keys are never a good idea.
@@ -58,7 +58,7 @@ class Snippet {
         cumulative += lineLength;
       } else if (trimmed == '// {@endhighlight}') {
         if (highlightStart != null && highlightStart < lineNumber) {
-          highlights.add((highlightStart + 1, lineNumber));
+          highlights.add((highlightStart, lineNumber - 1));
         }
         highlightStart = null;
         cumulative += lineLength;

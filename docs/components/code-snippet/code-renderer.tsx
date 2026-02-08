@@ -20,7 +20,7 @@ export function CodeRenderer({ snippet, isTooltip = false, lineClasses }: Props)
     async function tokenize() {
       try {
         const { codeToTokensWithThemes } = await import('shiki');
-        const result = await codeToTokensWithThemes(snippet.text.trim(), {
+        const result = await codeToTokensWithThemes(snippet.text, {
           lang: 'dart',
           themes: {
             light: 'github-light',
@@ -48,7 +48,7 @@ export function CodeRenderer({ snippet, isTooltip = false, lineClasses }: Props)
   }
 
   if (!processedLines) {
-    const lines = snippet.text.trim().split('\n');
+    const lines = snippet.text.split('\n');
     return (
       <code className={cn('block bg-transparent border-0 whitespace-pre', isTooltip && 'text-xs')}>
         {lines.map((line, lineIdx) => (
