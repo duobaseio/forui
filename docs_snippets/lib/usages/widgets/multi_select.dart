@@ -1,4 +1,4 @@
-// ignore_for_file: avoid_redundant_argument_values, sort_child_properties_last
+// ignore_for_file: avoid_redundant_argument_values
 
 import 'package:flutter/widgets.dart';
 
