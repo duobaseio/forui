@@ -10,8 +10,8 @@ import 'constructors.dart';
 import 'main.dart';
 
 final _type = RegExp(r'^F.*Styles?$');
-final _mapConstructor = RegExp(r'F([^ ]*?Styles?)\.inherit');
-final _traverseConstructor = RegExp(r'(F[^ ]*?Styles?)\.inherit');
+final _mapConstructor = RegExp(r'F(\w*?Styles?)\.inherit');
+final _traverseConstructor = RegExp(r'(F\w*?Styles?)\.inherit');
 
 String generateStyles(Map<String, ConstructorFragment> fragments) {
   final registry = LibraryBuilder()

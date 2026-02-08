@@ -56,10 +56,19 @@ class ConstructorFragment {
   }
 
   static String _factory(String type, RegExp pattern, ConstructorMatch match) {
+    final returnType = match.wrapped ?? type;
     var source = match.constructor
         .toSource()
-        .replaceAll('factory $type.inherit', '$type ${type.substring(1).toCamelCase()}')
+        .replaceAll('factory $type.inherit', '$returnType ${type.substring(1).toCamelCase()}')
         .replaceAllMapped(pattern, (m) => '_${m.group(1)!.toCamelCase()}');
+
+    // Unwraps `FVariants` extension types such as FButtonSizeStyles that use a private factory constructor since the
+    // private constructor is not accessible to users.
+    //
+    // It assumes a block body and that the type is only ever wrapped in the extension type in the return statement.
+    if (match.wrapped != null) {
+      source = source.replaceFirst('return $type._(', 'return ').replaceFirst(RegExp(r',?\s*\);\s*}\s*$'), ';\n}');
+    }
 
     final visitor = _ConstructorInvocationVisitor(type);
     match.constructor.body.accept(visitor);
