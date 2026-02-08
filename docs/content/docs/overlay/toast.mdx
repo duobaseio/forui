@@ -102,7 +102,7 @@ dart run forui style create toast
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='toast' variant='behavior' query={{behavior: 'always'}} height={300}/>
+    <Widget name='toast' variant='always-expand' height={300}/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={alwaysExpandSnippet} />
@@ -113,7 +113,7 @@ dart run forui style create toast
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='toast' variant='behavior' query={{behavior: 'disabled'}}/>
+    <Widget name='toast' variant='disabled-expand'/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={disabledExpandSnippet} />
@@ -128,7 +128,7 @@ By default, toasts are dismissible by horizontally swiping towards the closest e
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='toast' variant='swipe' query={{down: false}} height={300}/>
+    <Widget name='toast' variant='swipe' height={300}/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={swipeSnippet} />
@@ -139,7 +139,7 @@ By default, toasts are dismissible by horizontally swiping towards the closest e
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='toast' variant='swipe' query={{down: true}} height={300}/>
+    <Widget name='toast' variant='swipe-down' height={300}/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={swipeDownSnippet} />
@@ -150,7 +150,7 @@ By default, toasts are dismissible by horizontally swiping towards the closest e
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='toast' variant='swipe' query={{}} height={300}/>
+    <Widget name='toast' variant='swipe-disabled' height={300}/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={swipeDisabledSnippet} />
