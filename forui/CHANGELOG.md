@@ -146,7 +146,6 @@ are not available for most of these changes due to the tool's limitations.
 
 ### `FDateField`
 * **Breaking** Rename `FDateFieldStyle.selectFieldStyle` to `FDateFieldStyle.fieldStyle`.
-
 * **Breaking** Remove `FDateFieldStyle.iconStyle`. Use nested `FDateFieldStyle.fieldStyle.iconStyle` instead.
 
 
@@ -194,6 +193,7 @@ are not available for most of these changes due to the tool's limitations.
 
 
 ### `FPopover`
+* Change default background color from `FColors.background` to `FColors.popover`.
 * Change `FPopoverController(motion: ...)` from `FPopoverMotion` to `FPopoverMotionDelta`.
 
 
@@ -210,6 +210,8 @@ are not available for most of these changes due to the tool's limitations.
 ### `FSelect` & `FMultiSelect`
 * **Breaking** Add `enabled` parameter to `FMultiSelectTagBuilder` at position 1 (after `context`).
 
+* Change `FMultiSelectFieldStyle` default background color to `FColors.field`.
+* Change `FSelectScrollHandleStyle` default background color to `FColors.popover`.
 * **Breaking** Change `FMultiSelectFieldStyle.iconStyle` type from `IconThemeData` to `FWidgetStateMap<IconThemeData>`.
   Wrap existing values with `.all(...)`, e.g. `.all(IconThemeData(...))`.
 * **Breaking** Change `FSelectSearchFieldProperties.autofocus` to default to true on desktop and false on touch devices.
@@ -281,8 +283,7 @@ are not available for most of these changes due to the tool's limitations.
 
 * Change `FTextFieldStyle.clearButtonStyle` to not bounce by default.
 * Change `FTextFieldStyle.obscureButtonStyle` to not bounce by default.
-* Change default fill color to `FColors.field`.
-* Change focused fill color to `FColors.background`.
+* Change default background color to `FColors.field`.
 * **Breaking** Remove `FTextFieldStyle.filled`.
 
 
@@ -317,6 +318,7 @@ are not available for most of these changes due to the tool's limitations.
 ### `FTooltip`
 * Add `FTooltipGroup` for grouping tooltips so subsequent ones appear instantly after the first.
 
+* Change default background color from `FColors.background` to `FColors.popover`.
 * Change `FTooltip` fields to be nullable and inherit from the enclosing `FTooltipGroup`.
 * Change `FTooltipController(motion: ...)` from `FTooltipMotion` to `FTooltipMotionDelta`.
 

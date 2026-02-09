@@ -55,7 +55,7 @@ extension FThemes on Never {
         error: Color(0xFFFF6467),
         errorForeground: Color(0xFFFAFAFA),
         border: Color(0x1AFFFFFF),
-        field: Color(0xFF141414),
+        field: Color(0xFF171717),
       ),
     ),
   );

@@ -391,7 +391,7 @@ class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
   FTooltipStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         decoration: BoxDecoration(
-          color: colors.background,
+          color: colors.popover,
           borderRadius: style.borderRadius,
           border: .all(width: style.borderWidth, color: colors.border),
           boxShadow: FTooltipStyle.shadow,

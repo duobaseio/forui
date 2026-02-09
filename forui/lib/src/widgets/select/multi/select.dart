@@ -918,42 +918,46 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
       style: style,
     ).resolve({FButtonVariant.ghost}).resolve({FButtonSizeVariant.sm});
 
+    final iconStyle = FVariants<FTextFieldVariantConstraint, IconThemeData, IconThemeDataDelta>.delta(
+      IconThemeData(color: colors.mutedForeground, size: 16),
+      variants: {
+        [.disabled]: .delta(color: colors.disable(colors.mutedForeground, colors.field)),
+      },
+    );
+
     return .new(
       decoration: FVariants(
         BoxDecoration(
           border: .all(color: colors.border, width: style.borderWidth),
           borderRadius: style.borderRadius,
+          color: colors.field,
         ),
         variants: {
           [.error]: BoxDecoration(
             border: .all(color: colors.error, width: style.borderWidth),
             borderRadius: style.borderRadius,
+            color: colors.field,
           ),
           [.disabled]: BoxDecoration(
             border: .all(color: colors.disable(colors.border), width: style.borderWidth),
             borderRadius: style.borderRadius,
+            color: colors.field,
           ),
           [.focused]: BoxDecoration(
             border: .all(color: colors.primary, width: style.borderWidth),
             borderRadius: style.borderRadius,
+            color: colors.field,
           ),
         },
       ),
       hintTextStyle: .delta(
         typography.sm.copyWith(color: colors.mutedForeground),
         variants: {
-          [.disabled]: .delta(color: colors.disable(colors.border)),
+          [.disabled]: .delta(color: colors.disable(colors.mutedForeground, colors.field)),
         },
       ),
-      iconStyle: .delta(
-        IconThemeData(color: colors.mutedForeground, size: 16),
-        variants: {
-          [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
-        },
-      ),
-      clearButtonStyle: ghost.copyWith(
-        iconContentStyle: .delta(iconStyle: .apply([.onAll(.delta(color: colors.mutedForeground))])),
-      ),
+      iconStyle: iconStyle,
+      clearButtonStyle: ghost.copyWith(iconContentStyle: .delta(iconStyle: .value(iconStyle.cast()))),
       tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
       labelTextStyle: style.formFieldStyle.labelTextStyle,
       descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,

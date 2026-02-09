@@ -166,6 +166,6 @@ class FSelectScrollHandleStyle with Diagnosticable, _$FSelectScrollHandleStyleFu
   FSelectScrollHandleStyle.inherit({required FColors colors})
     : this(
         iconStyle: IconThemeData(color: colors.primary, size: 17),
-        background: colors.background,
+        background: colors.popover,
       );
 }
