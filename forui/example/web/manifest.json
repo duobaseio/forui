@@ -1,11 +1,11 @@
 {
-    "name": "samples",
-    "short_name": "samples",
+    "name": "forui_example",
+    "short_name": "forui_example",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "Forui Samples",
+    "description": "A new Flutter project.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
