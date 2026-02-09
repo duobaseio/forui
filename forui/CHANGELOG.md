@@ -100,7 +100,7 @@ are not available for most of these changes due to the tool's limitations.
 
 
 ### `FAlert`
-* Change destructive variant to match latest shadcn/ui.
+* Change variants to match latest shadcn/ui.
 
 
 ### `FBadge`
@@ -128,6 +128,15 @@ are not available for most of these changes due to the tool's limitations.
 * **Breaking** Remove `FButtonIconContentStyle.inherit`. Construct `FButtonIconContentStyle` directly instead.
 * **Breaking** Rename `FButton.onStateChange` to `FButton.onVariantChange`.
 * **Breaking** Rename `FButtonData.states` to `FButtonData.variants`.
+
+
+### `FCalendar`
+* Change default colors from `FColors.background`/`FColors.foreground` to `FColors.card`/`FColors.cardForeground`.
+
+
+### `FCard`
+* Change default background color from `FColors.background` to `FColors.card`.
+* Change title color from `FColors.foreground` to `FColors.cardForeground`.
 
 
 ### `FCircularProgress`
@@ -277,6 +286,11 @@ are not available for most of these changes due to the tool's limitations.
 * Add `FTheme.tooltipGroupActiveDuration`.
 * Add `FBasicTheme.tooltipGroupActiveDuration`.
 * Add `FThemes.neutral`.
+* Add `FColors.card`.
+* Add `FColors.cardForeground`.
+* Add `FColors.popover`.
+* Add `FColors.popoverForeground`.
+* Add `FColors.field`.
 * Add `FColors.lerpColor(...)`.
 
 * **Breaking** Change `FThemes` colors to match latest shadcn/ui.

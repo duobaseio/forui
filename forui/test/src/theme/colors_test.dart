@@ -16,6 +16,10 @@ void main() {
       barrier: Color(0xFF03A9F4),
       background: Colors.black,
       foreground: Colors.black12,
+      card: Colors.cyan,
+      cardForeground: Colors.cyanAccent,
+      popover: Colors.deepOrange,
+      popoverForeground: Colors.deepOrangeAccent,
       primary: Colors.black26,
       primaryForeground: Colors.black38,
       secondary: Colors.black45,
@@ -27,6 +31,7 @@ void main() {
       error: Colors.red,
       errorForeground: Colors.redAccent,
       border: Colors.lightBlue,
+      field: Colors.lime,
     );
 
     group('lerpColor(...)', () {
@@ -63,6 +68,10 @@ void main() {
         barrier: Colors.red,
         background: Colors.white,
         foreground: Colors.white70,
+        card: Colors.amber,
+        cardForeground: Colors.amberAccent,
+        popover: Colors.deepPurple,
+        popoverForeground: Colors.deepPurpleAccent,
         primary: Colors.blue,
         primaryForeground: Colors.white,
         secondary: Colors.green,
@@ -74,6 +83,7 @@ void main() {
         error: Colors.yellow,
         errorForeground: Colors.white30,
         border: Colors.purple,
+        field: Colors.tealAccent,
         hoverLighten: 0.1,
         hoverDarken: 0.08,
         disabledOpacity: 0.3,
@@ -166,6 +176,10 @@ void main() {
           barrier: Colors.red,
           background: Colors.red,
           foreground: Colors.greenAccent,
+          card: Colors.amber,
+          cardForeground: Colors.amberAccent,
+          popover: Colors.deepPurple,
+          popoverForeground: Colors.deepPurpleAccent,
           primary: Colors.yellow,
           primaryForeground: Colors.orange,
           secondary: Colors.purple,
@@ -177,6 +191,7 @@ void main() {
           error: Colors.blueAccent,
           errorForeground: Colors.blueGrey,
           border: Colors.lime,
+          field: Colors.tealAccent,
           hoverLighten: 0.3,
           hoverDarken: 0.2,
           disabledOpacity: 0.1,
@@ -186,6 +201,10 @@ void main() {
         expect(copy.barrier, equals(Colors.red));
         expect(copy.background, equals(Colors.red));
         expect(copy.foreground, equals(Colors.greenAccent));
+        expect(copy.card, equals(Colors.amber));
+        expect(copy.cardForeground, equals(Colors.amberAccent));
+        expect(copy.popover, equals(Colors.deepPurple));
+        expect(copy.popoverForeground, equals(Colors.deepPurpleAccent));
         expect(copy.primary, equals(Colors.yellow));
         expect(copy.primaryForeground, equals(Colors.orange));
         expect(copy.secondary, equals(Colors.purple));
@@ -197,6 +216,7 @@ void main() {
         expect(copy.error, equals(Colors.blueAccent));
         expect(copy.errorForeground, equals(Colors.blueGrey));
         expect(copy.border, equals(Colors.lime));
+        expect(copy.field, equals(Colors.tealAccent));
         expect(copy.hoverLighten, 0.3);
         expect(copy.hoverDarken, 0.2);
         expect(copy.disabledOpacity, 0.1);
@@ -215,6 +235,10 @@ void main() {
           ColorProperty('barrier', const Color(0xFF03A9F4)),
           ColorProperty('background', Colors.black),
           ColorProperty('foreground', Colors.black12),
+          ColorProperty('card', Colors.cyan),
+          ColorProperty('cardForeground', Colors.cyanAccent),
+          ColorProperty('popover', Colors.deepOrange),
+          ColorProperty('popoverForeground', Colors.deepOrangeAccent),
           ColorProperty('primary', Colors.black26),
           ColorProperty('primaryForeground', Colors.black38),
           ColorProperty('secondary', Colors.black45),
@@ -226,6 +250,7 @@ void main() {
           ColorProperty('error', Colors.red),
           ColorProperty('errorForeground', Colors.redAccent),
           ColorProperty('border', Colors.lightBlue),
+          ColorProperty('field', Colors.lime),
           PercentProperty('hoverLighten', 0.075),
           PercentProperty('hoverDarken', 0.05),
           PercentProperty('disabledOpacity', 0.5),

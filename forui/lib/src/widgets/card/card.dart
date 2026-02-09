@@ -102,10 +102,10 @@ class FCardStyle with Diagnosticable, _$FCardStyleFunctions {
         decoration: BoxDecoration(
           border: .all(color: colors.border),
           borderRadius: style.borderRadius,
-          color: colors.background,
+          color: colors.card,
         ),
         contentStyle: FCardContentStyle(
-          titleTextStyle: typography.xl2.copyWith(fontWeight: .w600, color: colors.foreground, height: 1.5),
+          titleTextStyle: typography.xl2.copyWith(fontWeight: .w600, color: colors.cardForeground, height: 1.5),
           subtitleTextStyle: typography.sm.copyWith(color: colors.mutedForeground),
         ),
       );

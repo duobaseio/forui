@@ -191,13 +191,28 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
     required FColors colors,
     required FTypography typography,
     required FStyle style,
+    required Color background,
+    required Color foreground,
   }) => .new(
     focusedOutlineStyle: style.focusedOutlineStyle,
-    buttonStyle: FButtonStyles.inherit(
-      colors: colors,
-      typography: typography,
-      style: style,
-    ).resolve({FButtonVariant.outline}).resolve({FButtonSizeVariant.sm}),
-    headerTextStyle: typography.base.copyWith(color: colors.primary, fontWeight: .w600),
+    buttonStyle: FButtonStyles.inherit(colors: colors, typography: typography, style: style)
+        .resolve({FButtonVariant.outline})
+        .resolve({FButtonSizeVariant.sm})
+        .copyWith(
+          decoration: .value(
+            .delta(
+              BoxDecoration(
+                border: .all(color: colors.border),
+                borderRadius: style.borderRadius,
+                color: background,
+              ),
+              variants: {
+                [.disabled]: .delta(border: .all(color: colors.disable(colors.border))),
+                [.hovered, .pressed]: .delta(color: colors.secondary),
+              },
+            ),
+          ),
+        ),
+    headerTextStyle: typography.base.copyWith(color: foreground, fontWeight: .w600),
   );
 }

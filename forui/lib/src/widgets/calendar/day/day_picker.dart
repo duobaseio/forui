@@ -228,12 +228,17 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
        assert(0 < tileSize, 'tileSize ($tileSize) must be positive');
 
   /// Creates a [FCalendarDayPickerStyle] that inherits its properties.
-  factory FCalendarDayPickerStyle.inherit({required FColors colors, required FTypography typography}) {
+  factory FCalendarDayPickerStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required Color background,
+    required Color foreground,
+  }) {
     final mutedTextStyle = typography.base.copyWith(color: colors.disable(colors.mutedForeground), fontWeight: .w500);
 
-    final background = <List<FTappableVariantConstraint>, Color>{
+    final backgroundColor = <List<FTappableVariantConstraint>, Color>{
       [.disabled.and(.selected)]: colors.primaryForeground,
-      [.disabled]: colors.background,
+      [.disabled]: background,
       [.hovered, .pressed]: colors.secondary,
     };
 
@@ -241,8 +246,8 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
       null,
       variants: {
         [.disabled.and(.selected).and(.focused)]: colors.primaryForeground,
-        [.disabled.and(.focused)]: colors.background,
-        [.focused]: colors.foreground,
+        [.disabled.and(.focused)]: background,
+        [.focused]: foreground,
       },
     );
 
@@ -250,27 +255,27 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
       headerTextStyle: typography.xs.copyWith(color: colors.mutedForeground),
       current: FCalendarEntryStyle(
         backgroundColor: FVariants(
-          colors.background,
+          background,
           variants: {
-            ...background,
-            [.selected]: colors.foreground,
+            ...backgroundColor,
+            [.selected]: foreground,
           },
         ),
         borderColor: border,
         textStyle: .delta(
-          typography.base.copyWith(color: colors.foreground, fontWeight: .w500),
+          typography.base.copyWith(color: foreground, fontWeight: .w500),
           variants: {
             [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
-            [.selected]: .delta(color: colors.background),
+            [.selected]: .delta(color: background),
           },
         ),
         radius: const .circular(4),
       ),
       enclosing: FCalendarEntryStyle(
         backgroundColor: FVariants(
-          colors.background,
+          background,
           variants: {
-            ...background,
+            ...backgroundColor,
             [.selected]: colors.primaryForeground,
           },
         ),

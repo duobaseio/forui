@@ -51,6 +51,10 @@ class TestScaffold extends StatelessWidget {
       barrier: Color(0xFF03A9F4),
       background: Color(0xFF03A9F4),
       foreground: Color(0xFF03A9F4),
+      card: Color(0xFF03A9F4),
+      cardForeground: Color(0xFF03A9F4),
+      popover: Color(0xFF03A9F4),
+      popoverForeground: Color(0xFF03A9F4),
       primary: Color(0xFF03A9F4),
       primaryForeground: Color(0xFF03A9F4),
       secondary: Color(0xFF03A9F4),
@@ -62,6 +66,7 @@ class TestScaffold extends StatelessWidget {
       error: Color(0xFF03A9F4),
       errorForeground: Color(0xFF03A9F4),
       border: Color(0xFF03A9F4),
+      field: Color(0xFF03A9F4),
     );
     final typography = FTypography.inherit(colors: colors);
     final style = FStyle.inherit(colors: colors, typography: typography).copyWith(shadow: []);

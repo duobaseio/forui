@@ -262,37 +262,53 @@ class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
   });
 
   /// Creates a [FCalendarStyle] that inherits its properties.
-  FCalendarStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        headerStyle: .inherit(colors: colors, typography: typography, style: style),
-        dayPickerStyle: .inherit(colors: colors, typography: typography),
-        yearMonthPickerStyle: FCalendarEntryStyle(
-          backgroundColor: FVariants(
-            colors.background,
-            variants: {
-              [.disabled]: colors.background,
-              [.hovered, .pressed]: colors.secondary,
-            },
-          ),
-          borderColor: FVariants(
-            null,
-            variants: {
-              [.disabled]: colors.background,
-              [.focused]: colors.foreground,
-            },
-          ),
-          textStyle: .delta(
-            typography.base.copyWith(color: colors.foreground, fontWeight: .w500),
-            variants: {
-              [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
-            },
-          ),
-          radius: const .circular(8),
+  factory FCalendarStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+    Color? background,
+    Color? foreground,
+  }) {
+    background ??= colors.card;
+    foreground ??= colors.cardForeground;
+
+    return FCalendarStyle(
+      headerStyle: .inherit(
+        colors: colors,
+        typography: typography,
+        style: style,
+        background: background,
+        foreground: foreground,
+      ),
+      dayPickerStyle: .inherit(colors: colors, typography: typography, background: background, foreground: foreground),
+      yearMonthPickerStyle: FCalendarEntryStyle(
+        backgroundColor: FVariants(
+          background,
+          variants: {
+            [.disabled]: background,
+            [.hovered, .pressed]: colors.secondary,
+          },
         ),
-        decoration: BoxDecoration(
-          borderRadius: style.borderRadius,
-          border: .all(color: colors.border),
-          color: colors.background,
+        borderColor: FVariants(
+          null,
+          variants: {
+            [.disabled]: background,
+            [.focused]: foreground,
+          },
         ),
-      );
+        textStyle: .delta(
+          typography.base.copyWith(color: foreground, fontWeight: .w500),
+          variants: {
+            [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
+          },
+        ),
+        radius: const .circular(8),
+      ),
+      decoration: BoxDecoration(
+        borderRadius: style.borderRadius,
+        border: .all(color: colors.border),
+        color: background,
+      ),
+    );
+  }
 }
