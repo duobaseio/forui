@@ -121,10 +121,7 @@ void main() {
             control: const .managed(initial: '99'),
             format: (s) => s,
             filter: (_) => [],
-            contentBuilder: (_, _, _) => [
-              for (var i = 0; i < 100; i++)
-                .item(title: Text('Item $i'), value: '$i'),
-            ],
+            contentBuilder: (_, _, _) => [for (var i = 0; i < 100; i++) .item(title: Text('Item $i'), value: '$i')],
           ),
         ),
       );
