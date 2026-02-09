@@ -166,6 +166,7 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
       enabled: enabled,
       autofocusFirst: false,
       autofocus: content.autofocus,
+      visible: content.visible,
       ensureVisible: content.ensureVisible,
       child: Column(
         mainAxisSize: .min,
@@ -181,9 +182,10 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
             ContentData<T>(
               style: style,
               enabled: enabled,
-              ensureVisible: content.ensureVisible,
               autofocusFirst: content.autofocusFirst,
               autofocus: content.autofocus,
+              visible: content.visible,
+              ensureVisible: content.ensureVisible,
               child: FInheritedItemData.merge(
                 styles: .all(style.itemStyle),
                 divider: divider,
@@ -413,7 +415,7 @@ abstract class _State<W extends FSelectItem<T>, T> extends State<W> {
       }
 
       final content = ContentData.of<T>(context);
-      if (content.autofocus(widget.value)) {
+      if (content.visible(widget.value)) {
         content.ensureVisible(context);
       }
     });

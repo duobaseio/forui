@@ -131,14 +131,6 @@ In some situations, it is unrealistic to implement things ourselves. In these ca
 
 Lastly, types from 3rd party packages should not be publicly exported by Forui.
 
-### Avoid translucent colors
-
-Translucent colors may not render as expected on different backgrounds. They are usually used as disabled and hovered
-states. Instead, use the `FColors.disable` and `FColors.hover` functions to generate colors for disabled and hovered
-states respectively.
-
-Alternatively, use alpha-blending to generate an equivalent solid color.
-
 ### Prefer `AlignmentGeometry`/`BorderRadiusGeometry`/`EdgeInsetsGeometry` over `Alignment`/`BorderRadius`/`EdgeInsets`
 
 Prefer the `Geometry` variants when possible because they are more flexible.

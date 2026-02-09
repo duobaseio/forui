@@ -22,6 +22,7 @@ class ContentData<T> extends InheritedWidget {
   final bool enabled;
   final bool autofocusFirst;
   final bool Function(T) autofocus;
+  final bool Function(T) visible;
   final ValueChanged<BuildContext> ensureVisible;
 
   const ContentData({
@@ -29,6 +30,7 @@ class ContentData<T> extends InheritedWidget {
     required this.enabled,
     required this.autofocusFirst,
     required this.autofocus,
+    required this.visible,
     required this.ensureVisible,
     required super.child,
     super.key,
@@ -40,6 +42,7 @@ class ContentData<T> extends InheritedWidget {
       autofocusFirst != old.autofocusFirst ||
       enabled != old.enabled ||
       autofocus != old.autofocus ||
+      visible != old.visible ||
       ensureVisible != old.ensureVisible;
 
   @override
@@ -50,6 +53,7 @@ class ContentData<T> extends InheritedWidget {
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'))
       ..add(ObjectFlagProperty.has('autofocus', autofocus))
       ..add(FlagProperty('autofocusFirst', value: autofocusFirst, ifTrue: 'autofocusFirst'))
+      ..add(ObjectFlagProperty.has('visible', visible))
       ..add(ObjectFlagProperty.has('ensureVisible', ensureVisible));
   }
 }
@@ -64,6 +68,7 @@ class Content<T> extends StatefulWidget {
   final FItemDivider divider;
   final bool autofocusFirst;
   final bool Function(T) autofocus;
+  final bool Function(T) visible;
   final List<FSelectItemMixin> children;
 
   const Content({
@@ -75,6 +80,7 @@ class Content<T> extends StatefulWidget {
     required this.divider,
     required this.autofocusFirst,
     required this.autofocus,
+    required this.visible,
     required this.children,
     super.key,
   });
@@ -92,6 +98,7 @@ class Content<T> extends StatefulWidget {
       ..add(FlagProperty('scrollHandles', value: scrollHandles, ifTrue: 'scroll handles'))
       ..add(FlagProperty('autofocusFirst', value: autofocusFirst, ifTrue: 'autofocusFirst'))
       ..add(ObjectFlagProperty.has('autofocus', autofocus))
+      ..add(ObjectFlagProperty.has('visible', visible))
       ..add(DiagnosticsProperty('physics', physics))
       ..add(EnumProperty('divider', divider));
   }
@@ -146,6 +153,7 @@ class _ContentState<T> extends State<Content<T>> {
       enabled: widget.enabled,
       autofocusFirst: false,
       autofocus: widget.autofocus,
+      visible: widget.visible,
       ensureVisible: _ensureVisible,
       child: Padding(
         padding: widget.style.padding,
@@ -168,6 +176,7 @@ class _ContentState<T> extends State<Content<T>> {
                   enabled: widget.enabled,
                   autofocusFirst: widget.autofocusFirst,
                   autofocus: widget.autofocus,
+                  visible: widget.visible,
                   ensureVisible: _ensureVisible,
                   child: FInheritedItemData(
                     data: FItemData(

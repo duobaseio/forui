@@ -69,6 +69,7 @@ class _BasicSelectState<T> extends _FMultiSelectState<_BasicSelect<T>, T> {
       physics: widget.contentPhysics,
       autofocusFirst: autofocusFirst,
       autofocus: autofocus,
+      visible: autofocus,
       divider: widget.contentDivider,
       children: widget.children,
     );

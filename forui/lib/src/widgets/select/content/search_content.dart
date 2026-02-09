@@ -220,6 +220,7 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
         divider: widget.divider,
         autofocusFirst: widget.autofocusFirst && !autofocusSearch,
         autofocus: (value) => widget.autofocus(value) && !autofocusSearch,
+        visible: widget.autofocus,
         children: children,
       ),
     );

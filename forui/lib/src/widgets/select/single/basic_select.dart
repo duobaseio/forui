@@ -73,6 +73,7 @@ class _BasicSelectState<T> extends _State<_BasicSelect<T>, T> {
       divider: widget.contentDivider,
       autofocusFirst: autofocusFirst,
       autofocus: autofocus,
+      visible: autofocus,
       children: widget.children,
     );
   }
