@@ -329,6 +329,11 @@ are not available for most of these changes due to the tool's limitations.
 * Change error message when given unbounded constraints to be more descriptive.
 
 
+### `FToast`
+* Change default background color from `FColors.background` to `FColors.popover`.
+* Change icon and title color from `FColors.primary` to `FColors.popoverForeground`.
+
+
 ### `FToaster`
 * Change `FToastAlignment` from an enum to final class to allow fine-grained control over positioning.
 

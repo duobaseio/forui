@@ -223,10 +223,10 @@ class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
         decoration: BoxDecoration(
           border: .all(color: colors.border),
           borderRadius: style.borderRadius,
-          color: colors.background,
+          color: colors.popover,
         ),
-        iconStyle: IconThemeData(color: colors.primary, size: 18),
-        titleTextStyle: typography.sm.copyWith(color: colors.primary, fontWeight: .w500),
+        iconStyle: IconThemeData(color: colors.popoverForeground, size: 18),
+        titleTextStyle: typography.sm.copyWith(color: colors.popoverForeground, fontWeight: .w500),
         titleSpacing: 5,
         descriptionTextStyle: typography.sm.copyWith(color: colors.mutedForeground, overflow: .ellipsis),
       );

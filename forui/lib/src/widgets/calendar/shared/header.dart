@@ -52,7 +52,7 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
   }
 
   @override
-  Widget build(BuildContext context) => FTappable(
+  Widget build(BuildContext context) => FTappable.static(
     focusedOutlineStyle: widget.style.focusedOutlineStyle,
     onPress: () => widget.type.value = switch (widget.type.value) {
       .day => .yearMonth,
