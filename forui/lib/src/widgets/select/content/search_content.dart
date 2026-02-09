@@ -21,11 +21,12 @@ class SearchContent<T> extends StatefulWidget {
   final FSelectSearchStyle searchStyle;
   final FSelectContentStyle contentStyle;
   final FSelectSearchFieldProperties properties;
-  final bool first;
   final bool enabled;
   final bool scrollHandles;
   final ScrollPhysics physics;
   final FItemDivider divider;
+  final bool autofocusFirst;
+  final bool Function(T) autofocus;
   final FutureOr<Iterable<T>> Function(String query) filter;
   final Widget Function(BuildContext context, FSelectSearchStyle style) loadingBuilder;
   final FSelectSearchContentBuilder<T> builder;
@@ -37,11 +38,12 @@ class SearchContent<T> extends StatefulWidget {
     required this.searchStyle,
     required this.contentStyle,
     required this.properties,
-    required this.first,
+    required this.autofocusFirst,
     required this.enabled,
     required this.scrollHandles,
     required this.physics,
     required this.divider,
+    required this.autofocus,
     required this.filter,
     required this.loadingBuilder,
     required this.builder,
@@ -60,11 +62,12 @@ class SearchContent<T> extends StatefulWidget {
       ..add(DiagnosticsProperty('scrollController', scrollController))
       ..add(DiagnosticsProperty('searchStyle', searchStyle))
       ..add(DiagnosticsProperty('contentStyle', contentStyle))
-      ..add(FlagProperty('first', value: first, ifTrue: 'first'))
+      ..add(FlagProperty('first', value: autofocusFirst, ifTrue: 'first'))
       ..add(DiagnosticsProperty('enabled', enabled))
       ..add(DiagnosticsProperty('scrollHandles', scrollHandles))
       ..add(DiagnosticsProperty('physics', physics))
       ..add(EnumProperty('divider', divider))
+      ..add(ObjectFlagProperty.has('autofocus', autofocus))
       ..add(ObjectFlagProperty.has('filter', filter))
       ..add(ObjectFlagProperty.has('loadingBuilder', loadingBuilder))
       ..add(ObjectFlagProperty.has('builder', builder))
@@ -121,6 +124,8 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
   @override
   Widget build(BuildContext context) {
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
+    final autofocusSearch = widget.properties.autofocus ?? context.platformVariant.desktop;
+
     return Column(
       mainAxisSize: .min,
       children: [
@@ -138,7 +143,7 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
             textAlign: widget.properties.textAlign,
             textAlignVertical: widget.properties.textAlignVertical,
             textDirection: widget.properties.textDirection,
-            autofocus: widget.properties.autofocus,
+            autofocus: autofocusSearch,
             autocorrect: widget.properties.autocorrect,
             smartDashesType: widget.properties.smartDashesType,
             smartQuotesType: widget.properties.smartQuotesType,
@@ -181,7 +186,7 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
         ),
         FDivider(style: widget.searchStyle.dividerStyle),
         switch (_data) {
-          final Iterable<T> data => _content(context, data),
+          final Iterable<T> data => _content(context, data, autofocusSearch: autofocusSearch),
           final Future<Iterable<T>> future => FutureBuilder(
             future: future,
             builder: (context, snapshot) => switch (snapshot.connectionState) {
@@ -191,7 +196,7 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
                 snapshot.error,
                 snapshot.stackTrace!,
               ),
-              _ => _content(context, snapshot.data ?? []),
+              _ => _content(context, snapshot.data ?? [], autofocusSearch: autofocusSearch),
             },
           ),
         },
@@ -199,7 +204,7 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
     );
   }
 
-  Widget _content(BuildContext context, Iterable<T> data) {
+  Widget _content(BuildContext context, Iterable<T> data, {required bool autofocusSearch}) {
     final children = widget.builder(context, _controller.text, data);
     if (children.isEmpty) {
       return widget.emptyBuilder(context);
@@ -209,11 +214,12 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
       child: Content<T>(
         controller: widget.scrollController,
         style: widget.contentStyle,
-        first: widget.first,
         enabled: widget.enabled,
         scrollHandles: widget.scrollHandles,
         physics: widget.physics,
         divider: widget.divider,
+        autofocusFirst: widget.autofocusFirst && !autofocusSearch,
+        autofocus: (value) => widget.autofocus(value) && !autofocusSearch,
         children: children,
       ),
     );

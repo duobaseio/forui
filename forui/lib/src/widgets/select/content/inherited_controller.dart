@@ -15,13 +15,11 @@ class InheritedSelectController<T> extends InheritedWidget {
 
   final FPopoverController popover;
   final bool Function(T) contains;
-  final bool Function(T) focus;
   final ValueChanged<T> onPress;
 
   const InheritedSelectController({
     required this.popover,
     required this.contains,
-    required this.focus,
     required this.onPress,
     required super.child,
     super.key,
@@ -29,7 +27,7 @@ class InheritedSelectController<T> extends InheritedWidget {
 
   @override
   bool updateShouldNotify(InheritedSelectController<T> old) =>
-      popover != old.popover || contains != old.contains || focus != old.focus || onPress != old.onPress;
+      popover != old.popover || contains != old.contains || onPress != old.onPress;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -37,7 +35,6 @@ class InheritedSelectController<T> extends InheritedWidget {
     properties
       ..add(DiagnosticsProperty('popover', popover))
       ..add(ObjectFlagProperty.has('contains', contains))
-      ..add(ObjectFlagProperty.has('focus', focus))
       ..add(ObjectFlagProperty.has('onPress', onPress));
   }
 }

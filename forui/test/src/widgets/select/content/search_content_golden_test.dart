@@ -86,6 +86,30 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/search_content/sync.png'));
     });
 
+    testWidgets('desktop', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          platform: .macOS,
+          alignment: .topCenter,
+          child: FSelect<String>.searchBuilder(
+            key: key,
+            format: (s) => s,
+            filter: (_) => [],
+            contentBuilder: (_, _, _) => [.item(title: const Text('A'), value: 'A')],
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('select/${theme.name}/search_content/desktop.png'),
+      );
+    });
+
     testWidgets('async', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(

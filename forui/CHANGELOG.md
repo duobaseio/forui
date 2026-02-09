@@ -203,12 +203,14 @@ are not available for most of these changes due to the tool's limitations.
 
 * **Breaking** Change `FMultiSelectFieldStyle.iconStyle` type from `IconThemeData` to `FWidgetStateMap<IconThemeData>`.
   Wrap existing values with `.all(...)`, e.g. `.all(IconThemeData(...))`.
+* **Breaking** Change `FSelectSearchFieldProperties.autofocus` to default to true on desktop and false on touch devices.
 * **Breaking** Rename `FSelectStyle.selectFieldStyle` to `FSelectStyle.fieldStyle`.
 * **Breaking** Rename `FSelectSearchStyle.textFieldStyle` to `FSelectSearchStyle.fieldStyle`.
 * **Breaking** Remove `FSelectStyle.iconStyle`. Use `FSelectStyle.fieldStyle.iconStyle` instead.
 * **Breaking** Remove `FSelectSearchStyle.iconStyle`. Use `FSelectSearchStyle.fieldStyle.iconStyle` instead.
 * Restore `FSelect.contentScrollHandle`.
 
+* Fix search field not receiving focus when popover opens even with `FSelectSearchFieldProperties.autofocus` set to `true`.
 * Fix `FMultiSelect` still allowing tags to be removed when disabled.
 
 

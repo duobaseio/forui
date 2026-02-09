@@ -54,7 +54,12 @@ class _BasicSelect<T> extends FSelect<T> {
 
 class _BasicSelectState<T> extends _State<_BasicSelect<T>, T> {
   @override
-  Widget content(BuildContext context, FSelectStyle style) {
+  Widget content(
+    BuildContext context,
+    FSelectStyle style, {
+    required bool autofocusFirst,
+    required bool Function(T) autofocus,
+  }) {
     if (widget.children.isEmpty) {
       return widget.contentEmptyBuilder(context, style);
     }
@@ -62,11 +67,12 @@ class _BasicSelectState<T> extends _State<_BasicSelect<T>, T> {
     return Content<T>(
       controller: widget.contentScrollController,
       style: style.contentStyle,
-      first: _controller.value == null,
       enabled: widget.enabled,
       scrollHandles: widget.contentScrollHandles,
       physics: widget.contentPhysics,
       divider: widget.contentDivider,
+      autofocusFirst: autofocusFirst,
+      autofocus: autofocus,
       children: widget.children,
     );
   }

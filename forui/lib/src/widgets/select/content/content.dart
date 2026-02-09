@@ -20,13 +20,15 @@ class ContentData<T> extends InheritedWidget {
 
   final FSelectSectionStyle style;
   final bool enabled;
-  final bool first;
+  final bool autofocusFirst;
+  final bool Function(T) autofocus;
   final ValueChanged<BuildContext> ensureVisible;
 
   const ContentData({
     required this.style,
     required this.enabled,
-    required this.first,
+    required this.autofocusFirst,
+    required this.autofocus,
     required this.ensureVisible,
     required super.child,
     super.key,
@@ -34,7 +36,11 @@ class ContentData<T> extends InheritedWidget {
 
   @override
   bool updateShouldNotify(ContentData<T> old) =>
-      style != old.style || first != old.first || enabled != old.enabled || ensureVisible != old.ensureVisible;
+      style != old.style ||
+      autofocusFirst != old.autofocusFirst ||
+      enabled != old.enabled ||
+      autofocus != old.autofocus ||
+      ensureVisible != old.ensureVisible;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -42,8 +48,9 @@ class ContentData<T> extends InheritedWidget {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'))
-      ..add(FlagProperty('first', value: first, ifTrue: 'first'))
-      ..add(ObjectFlagProperty('ensureVisible', ensureVisible, ifPresent: 'ensureVisible'));
+      ..add(ObjectFlagProperty.has('autofocus', autofocus))
+      ..add(FlagProperty('autofocusFirst', value: autofocusFirst, ifTrue: 'autofocusFirst'))
+      ..add(ObjectFlagProperty.has('ensureVisible', ensureVisible));
   }
 }
 
@@ -51,21 +58,23 @@ class ContentData<T> extends InheritedWidget {
 class Content<T> extends StatefulWidget {
   final ScrollController? controller;
   final FSelectContentStyle style;
-  final bool first;
   final bool enabled;
   final bool scrollHandles;
   final ScrollPhysics physics;
   final FItemDivider divider;
+  final bool autofocusFirst;
+  final bool Function(T) autofocus;
   final List<FSelectItemMixin> children;
 
   const Content({
     required this.controller,
     required this.style,
-    required this.first,
     required this.enabled,
     required this.scrollHandles,
     required this.physics,
     required this.divider,
+    required this.autofocusFirst,
+    required this.autofocus,
     required this.children,
     super.key,
   });
@@ -79,9 +88,10 @@ class Content<T> extends StatefulWidget {
     properties
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('style', style))
-      ..add(FlagProperty('first', value: first, ifTrue: 'first'))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'))
       ..add(FlagProperty('scrollHandles', value: scrollHandles, ifTrue: 'scroll handles'))
+      ..add(FlagProperty('autofocusFirst', value: autofocusFirst, ifTrue: 'autofocusFirst'))
+      ..add(ObjectFlagProperty.has('autofocus', autofocus))
       ..add(DiagnosticsProperty('physics', physics))
       ..add(EnumProperty('divider', divider));
   }
@@ -133,8 +143,9 @@ class _ContentState<T> extends State<Content<T>> {
     final style = widget.style.sectionStyle.itemStyle;
     Widget content = ContentData<T>(
       style: widget.style.sectionStyle,
-      first: false,
       enabled: widget.enabled,
+      autofocusFirst: false,
+      autofocus: widget.autofocus,
       ensureVisible: _ensureVisible,
       child: Padding(
         padding: widget.style.padding,
@@ -154,8 +165,9 @@ class _ContentState<T> extends State<Content<T>> {
               if (widget.children.firstOrNull case final first?)
                 ContentData<T>(
                   style: widget.style.sectionStyle,
-                  first: widget.first,
                   enabled: widget.enabled,
+                  autofocusFirst: widget.autofocusFirst,
+                  autofocus: widget.autofocus,
                   ensureVisible: _ensureVisible,
                   child: FInheritedItemData(
                     data: FItemData(

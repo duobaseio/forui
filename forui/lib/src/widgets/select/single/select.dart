@@ -752,7 +752,6 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
             child: InheritedSelectController<T>(
               popover: popoverController,
               contains: (value) => _controller.value == value,
-              focus: (value) => _controller.value == value,
               onPress: (value) async {
                 if (widget.autoHide) {
                   _focus.requestFocus();
@@ -761,7 +760,12 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
 
                 _controller.value = value;
               },
-              child: content(context, style),
+              child: content(
+                context,
+                style,
+                autofocusFirst: _controller.value == null,
+                autofocus: (value) => _controller.value == value,
+              ),
             ),
           ),
           child: CallbackShortcuts(
@@ -773,7 +777,12 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
     );
   }
 
-  Widget content(BuildContext context, FSelectStyle style);
+  Widget content(
+    BuildContext context,
+    FSelectStyle style, {
+    required bool autofocusFirst,
+    required bool Function(T) autofocus,
+  });
 
   void _toggle() {
     _popoverController.status.isCompleted ? _focus.requestFocus() : _focus.unfocus();

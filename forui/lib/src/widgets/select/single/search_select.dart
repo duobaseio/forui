@@ -74,13 +74,19 @@ class _SearchSelect<T> extends FSelect<T> {
 
 class _SearchSelectState<T> extends _State<_SearchSelect<T>, T> {
   @override
-  Widget content(BuildContext context, FSelectStyle style) => SearchContent<T>(
+  Widget content(
+    BuildContext context,
+    FSelectStyle style, {
+    required bool autofocusFirst,
+    required bool Function(T) autofocus,
+  }) => SearchContent<T>(
     scrollController: widget.contentScrollController,
     searchStyle: style.searchStyle,
     contentStyle: style.contentStyle,
     properties: widget.searchFieldProperties,
     scrollHandles: widget.contentScrollHandles,
-    first: _controller.value == null,
+    autofocusFirst: autofocusFirst,
+    autofocus: autofocus,
     enabled: widget.enabled,
     physics: widget.contentPhysics,
     divider: widget.contentDivider,

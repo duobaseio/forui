@@ -44,8 +44,12 @@ class FSelectSearchFieldProperties with Diagnosticable {
   /// {@macro forui.text_field.textDirection}
   final TextDirection? textDirection;
 
-  /// {@macro forui.text_field.autofocus}
-  final bool autofocus;
+  /// Whether this text field should focus itself if nothing else is already focused. Defaults to true on desktop and
+  /// false on touch devices.
+  ///
+  /// If true, the keyboard will open as soon as this text field obtains focus. Otherwise, the keyboard is only shown
+  /// after the user taps the text field.
+  final bool? autofocus;
 
   /// {@macro forui.text_field.autocorrect}
   final bool autocorrect;
@@ -189,7 +193,7 @@ class FSelectSearchFieldProperties with Diagnosticable {
     this.textAlign = .start,
     this.textAlignVertical,
     this.textDirection,
-    this.autofocus = false,
+    this.autofocus,
     this.autocorrect = true,
     this.smartDashesType,
     this.smartQuotesType,

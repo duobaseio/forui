@@ -113,7 +113,9 @@ void main() {
           child: FSelect<String>.searchBuilder(
             key: key,
             format: (s) => s,
-            style: TestScaffold.blueScreen.selectStyle,
+            style: TestScaffold.blueScreen.selectStyle.copyWith(
+              searchStyle: const .delta(fieldStyle: .delta(cursorColor: Color(0xFF03A9F4))),
+            ),
             contentScrollHandles: true,
             filter: (_) => [],
             contentBuilder: (_, _, _) => [for (int i = 0; i < 10; i++) FSelectItem(title: Text('$i'), value: '$i')],
@@ -133,7 +135,9 @@ void main() {
           child: FSelect<String>.searchBuilder(
             key: key,
             format: (s) => s,
-            style: TestScaffold.blueScreen.selectStyle,
+            style: TestScaffold.blueScreen.selectStyle.copyWith(
+              searchStyle: const .delta(fieldStyle: .delta(cursorColor: Color(0xFF03A9F4))),
+            ),
             contentScrollHandles: true,
             filter: (_) async {
               await Future.delayed(const Duration(seconds: 1));
@@ -156,7 +160,9 @@ void main() {
           child: FSelect<int>.search(
             items: {for (int i = 0; i < 10; i++) '$i': i},
             key: key,
-            style: TestScaffold.blueScreen.selectStyle,
+            style: TestScaffold.blueScreen.selectStyle.copyWith(
+              searchStyle: const .delta(fieldStyle: .delta(cursorColor: Color(0xFF03A9F4))),
+            ),
             contentScrollHandles: true,
             filter: (_) => [],
           ),

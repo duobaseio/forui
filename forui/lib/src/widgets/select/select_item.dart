@@ -164,7 +164,8 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
     return ContentData<T>(
       style: style,
       enabled: enabled,
-      first: false,
+      autofocusFirst: false,
+      autofocus: content.autofocus,
       ensureVisible: content.ensureVisible,
       child: Column(
         mainAxisSize: .min,
@@ -179,9 +180,10 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
           if (children.firstOrNull case final first?)
             ContentData<T>(
               style: style,
-              first: content.first,
               enabled: enabled,
               ensureVisible: content.ensureVisible,
+              autofocusFirst: content.autofocusFirst,
+              autofocus: content.autofocus,
               child: FInheritedItemData.merge(
                 styles: .all(style.itemStyle),
                 divider: divider,
@@ -410,9 +412,8 @@ abstract class _State<W extends FSelectItem<T>, T> extends State<W> {
         return;
       }
 
-      final InheritedSelectController(:focus, :onPress) = .of<T>(context);
       final content = ContentData.of<T>(context);
-      if (focus(widget.value)) {
+      if (content.autofocus(widget.value)) {
         content.ensureVisible(context);
       }
     });
@@ -426,14 +427,14 @@ abstract class _State<W extends FSelectItem<T>, T> extends State<W> {
 
   @override
   Widget build(BuildContext context) {
-    final InheritedSelectController(:popover, :contains, :focus, :onPress) = .of<T>(context);
+    final InheritedSelectController(:popover, :contains, :onPress) = .of<T>(context);
     final content = ContentData.of<T>(context);
 
     return _item(
       context,
       widget.enabled ?? content.enabled,
       contains(widget.value),
-      focus(widget.value) || content.first,
+      content.autofocus(widget.value) || content.autofocusFirst,
       (previous, current) {
         final added = current.difference(previous);
         final removed = previous.difference(current);

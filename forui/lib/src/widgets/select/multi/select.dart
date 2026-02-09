@@ -701,9 +701,13 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
               popoverBuilder: (context, controller) => InheritedSelectController<T>(
                 popover: _popoverController,
                 contains: (value) => _controller.value.contains(value),
-                focus: (value) => _controller.value.lastOrNull == value,
                 onPress: (value) => _controller.update(value, add: !_controller.value.contains(value)),
-                child: content(context, style),
+                child: content(
+                  context,
+                  style,
+                  autofocusFirst: _controller.value.isEmpty,
+                  autofocus: (value) => _controller.value.lastOrNull == value,
+                ),
               ),
               child: FTappable(
                 style: style.fieldStyle.tappableStyle,
@@ -785,7 +789,12 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
   }
 
   /// Builds the content displayed in the popover.
-  Widget content(BuildContext context, FMultiSelectStyle style);
+  Widget content(
+    BuildContext context,
+    FMultiSelectStyle style, {
+    required bool autofocusFirst,
+    required bool Function(T) autofocus,
+  });
 }
 
 /// A [FMultiSelect]'s style.
