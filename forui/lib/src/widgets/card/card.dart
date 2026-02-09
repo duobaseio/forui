@@ -105,7 +105,7 @@ class FCardStyle with Diagnosticable, _$FCardStyleFunctions {
           color: colors.card,
         ),
         contentStyle: FCardContentStyle(
-          titleTextStyle: typography.xl2.copyWith(fontWeight: .w600, color: colors.cardForeground, height: 1.5),
+          titleTextStyle: typography.xl2.copyWith(fontWeight: .w600, color: colors.foreground, height: 1.5),
           subtitleTextStyle: typography.sm.copyWith(color: colors.mutedForeground),
         ),
       );

@@ -19,7 +19,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('collapsible/${theme.name}/fully_expanded.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('collapsible/${theme.name}/fully-expanded.png'));
       });
 
       testWidgets('half expanded', (tester) async {
@@ -33,7 +33,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('collapsible/${theme.name}/half_expanded.png'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('collapsible/${theme.name}/half-expanded.png'));
       });
 
       testWidgets('fully collapsed', (tester) async {
@@ -49,7 +49,7 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('collapsible/${theme.name}/fully_collapsed.png'),
+          matchesGoldenFile('collapsible/${theme.name}/fully-collapsed.png'),
         );
       });
     }

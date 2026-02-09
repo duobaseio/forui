@@ -68,26 +68,6 @@ final class FColors with Diagnosticable {
   /// Typically used to color widgets against a [background].
   final Color foreground;
 
-  /// The card color.
-  ///
-  /// Typically used as a background for card widgets.
-  final Color card;
-
-  /// The card foreground color.
-  ///
-  /// Typically used to color widgets against a [card] colored background.
-  final Color cardForeground;
-
-  /// The popover color.
-  ///
-  /// Typically used as a background for popover widgets such as tooltips and dropdowns.
-  final Color popover;
-
-  /// The popover foreground color.
-  ///
-  /// Typically used to color widgets against a [popover] colored background.
-  final Color popoverForeground;
-
   /// The primary color.
   ///
   /// Typically used as a background for [primaryForeground] colored widgets.
@@ -138,13 +118,13 @@ final class FColors with Diagnosticable {
   /// Typically used to color widgets against a [error] colored background.
   final Color errorForeground;
 
+  /// The card color.
+  ///
+  /// Typically used as a background for card widgets.
+  final Color card;
+
   /// The border color.
   final Color border;
-
-  /// The field color.
-  ///
-  /// Typically used as a background for text fields.
-  final Color field;
 
   /// The percentage to lighten dark colors by. A higher value will result in a more pronounced lightening effect.
   ///
@@ -162,7 +142,9 @@ final class FColors with Diagnosticable {
   /// `0.0 <= hoverDarken <= 1.0`
   final double hoverDarken;
 
-  /// The opacity of the foreground color when a widget is disabled. Defaults to 0.5.
+  /// The factor by which to multiply a color's opacity when a widget is disabled. Defaults to 0.5.
+  ///
+  /// For example, a fully opaque color will become 50% transparent, and a color at 80% opacity will become 40%.
   ///
   /// ## Contract
   /// Throws [AssertionError] if the value is less than 0 or greater than 1.
@@ -178,10 +160,6 @@ final class FColors with Diagnosticable {
     required this.barrier,
     required this.background,
     required this.foreground,
-    required this.card,
-    required this.cardForeground,
-    required this.popover,
-    required this.popoverForeground,
     required this.primary,
     required this.primaryForeground,
     required this.secondary,
@@ -192,8 +170,8 @@ final class FColors with Diagnosticable {
     required this.destructiveForeground,
     required this.error,
     required this.errorForeground,
+    required this.card,
     required this.border,
-    required this.field,
     this.hoverLighten = 0.075,
     this.hoverDarken = 0.05,
     this.disabledOpacity = 0.5,
@@ -208,10 +186,6 @@ final class FColors with Diagnosticable {
     barrier: FColors.lerpColor(a.barrier, b.barrier, t)!,
     background: FColors.lerpColor(a.background, b.background, t)!,
     foreground: FColors.lerpColor(a.foreground, b.foreground, t)!,
-    card: FColors.lerpColor(a.card, b.card, t)!,
-    cardForeground: FColors.lerpColor(a.cardForeground, b.cardForeground, t)!,
-    popover: FColors.lerpColor(a.popover, b.popover, t)!,
-    popoverForeground: FColors.lerpColor(a.popoverForeground, b.popoverForeground, t)!,
     primary: FColors.lerpColor(a.primary, b.primary, t)!,
     primaryForeground: FColors.lerpColor(a.primaryForeground, b.primaryForeground, t)!,
     secondary: FColors.lerpColor(a.secondary, b.secondary, t)!,
@@ -222,8 +196,8 @@ final class FColors with Diagnosticable {
     destructiveForeground: FColors.lerpColor(a.destructiveForeground, b.destructiveForeground, t)!,
     error: FColors.lerpColor(a.error, b.error, t)!,
     errorForeground: FColors.lerpColor(a.errorForeground, b.errorForeground, t)!,
+    card: FColors.lerpColor(a.card, b.card, t)!,
     border: FColors.lerpColor(a.border, b.border, t)!,
-    field: FColors.lerpColor(a.field, b.field, t)!,
     hoverLighten: lerpDouble(a.hoverLighten, b.hoverLighten, t)!,
     hoverDarken: lerpDouble(a.hoverDarken, b.hoverDarken, t)!,
     disabledOpacity: lerpDouble(a.disabledOpacity, b.disabledOpacity, t)!,
@@ -256,20 +230,8 @@ final class FColors with Diagnosticable {
     return hovered;
   }
 
-  /// Returns a disabled color for the [foreground] on the [background].
-  ///
-  /// Both colors are converted to Display P3 if they do not share the same color space.
-  ///
-  /// [FColors.background] is used if [background] is not given.
-  Color disable(Color foreground, [Color? background]) {
-    background ??= this.background;
-    if (foreground.colorSpace != background.colorSpace) {
-      foreground = foreground.withValues(colorSpace: .displayP3);
-      background = background.withValues(colorSpace: .displayP3);
-    }
-
-    return .alphaBlend(foreground.withValues(alpha: disabledOpacity), background);
-  }
+  /// Returns a disabled variant of the [color] by multiplying its opacity by [disabledOpacity].
+  Color disable(Color color) => color.withValues(alpha: color.a * disabledOpacity);
 
   /// Returns a copy of this [FColors] with the given properties replaced.
   ///
@@ -292,10 +254,6 @@ final class FColors with Diagnosticable {
     Color? barrier,
     Color? background,
     Color? foreground,
-    Color? card,
-    Color? cardForeground,
-    Color? popover,
-    Color? popoverForeground,
     Color? primary,
     Color? primaryForeground,
     Color? secondary,
@@ -306,8 +264,8 @@ final class FColors with Diagnosticable {
     Color? destructiveForeground,
     Color? error,
     Color? errorForeground,
+    Color? card,
     Color? border,
-    Color? field,
     double? hoverLighten,
     double? hoverDarken,
     double? disabledOpacity,
@@ -317,10 +275,6 @@ final class FColors with Diagnosticable {
     barrier: barrier ?? this.barrier,
     background: background ?? this.background,
     foreground: foreground ?? this.foreground,
-    card: card ?? this.card,
-    cardForeground: cardForeground ?? this.cardForeground,
-    popover: popover ?? this.popover,
-    popoverForeground: popoverForeground ?? this.popoverForeground,
     primary: primary ?? this.primary,
     primaryForeground: primaryForeground ?? this.primaryForeground,
     secondary: secondary ?? this.secondary,
@@ -331,8 +285,8 @@ final class FColors with Diagnosticable {
     destructiveForeground: destructiveForeground ?? this.destructiveForeground,
     error: error ?? this.error,
     errorForeground: errorForeground ?? this.errorForeground,
+    card: card ?? this.card,
     border: border ?? this.border,
-    field: field ?? this.field,
     hoverLighten: hoverLighten ?? this.hoverLighten,
     hoverDarken: hoverDarken ?? this.hoverDarken,
     disabledOpacity: disabledOpacity ?? this.disabledOpacity,
@@ -347,10 +301,6 @@ final class FColors with Diagnosticable {
       ..add(ColorProperty('barrier', barrier))
       ..add(ColorProperty('background', background))
       ..add(ColorProperty('foreground', foreground))
-      ..add(ColorProperty('card', card))
-      ..add(ColorProperty('cardForeground', cardForeground))
-      ..add(ColorProperty('popover', popover))
-      ..add(ColorProperty('popoverForeground', popoverForeground))
       ..add(ColorProperty('primary', primary))
       ..add(ColorProperty('primaryForeground', primaryForeground))
       ..add(ColorProperty('secondary', secondary))
@@ -361,8 +311,8 @@ final class FColors with Diagnosticable {
       ..add(ColorProperty('destructiveForeground', destructiveForeground))
       ..add(ColorProperty('error', error))
       ..add(ColorProperty('errorForeground', errorForeground))
+      ..add(ColorProperty('card', card))
       ..add(ColorProperty('border', border))
-      ..add(ColorProperty('field', field))
       ..add(PercentProperty('hoverLighten', hoverLighten))
       ..add(PercentProperty('hoverDarken', hoverDarken))
       ..add(PercentProperty('disabledOpacity', disabledOpacity));
@@ -377,10 +327,6 @@ final class FColors with Diagnosticable {
           barrier == other.barrier &&
           background == other.background &&
           foreground == other.foreground &&
-          card == other.card &&
-          cardForeground == other.cardForeground &&
-          popover == other.popover &&
-          popoverForeground == other.popoverForeground &&
           primary == other.primary &&
           primaryForeground == other.primaryForeground &&
           secondary == other.secondary &&
@@ -391,8 +337,8 @@ final class FColors with Diagnosticable {
           destructiveForeground == other.destructiveForeground &&
           error == other.error &&
           errorForeground == other.errorForeground &&
+          card == other.card &&
           border == other.border &&
-          field == other.field &&
           hoverLighten == other.hoverLighten &&
           hoverDarken == other.hoverDarken &&
           disabledOpacity == other.disabledOpacity;
@@ -404,10 +350,6 @@ final class FColors with Diagnosticable {
       barrier.hashCode ^
       background.hashCode ^
       foreground.hashCode ^
-      card.hashCode ^
-      cardForeground.hashCode ^
-      popover.hashCode ^
-      popoverForeground.hashCode ^
       primary.hashCode ^
       primaryForeground.hashCode ^
       secondary.hashCode ^
@@ -418,8 +360,8 @@ final class FColors with Diagnosticable {
       destructiveForeground.hashCode ^
       error.hashCode ^
       errorForeground.hashCode ^
+      card.hashCode ^
       border.hashCode ^
-      field.hashCode ^
       hoverLighten.hashCode ^
       hoverDarken.hashCode ^
       disabledOpacity.hashCode;

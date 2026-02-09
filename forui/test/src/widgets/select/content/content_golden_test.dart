@@ -73,7 +73,7 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('select/${theme.name}/content/both_scroll_handles.png'),
+          matchesGoldenFile('select/${theme.name}/content/both-scroll-handles.png'),
         );
       });
 
@@ -101,7 +101,7 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('select/${theme.name}/content/hide_start_scroll_handle.png'),
+          matchesGoldenFile('select/${theme.name}/content/hide-start-scroll-handle.png'),
         );
       });
 
@@ -133,7 +133,7 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('select/${theme.name}/content/hide_end_scroll_handle.png'),
+          matchesGoldenFile('select/${theme.name}/content/hide-end-scroll-handle.png'),
         );
       });
 
@@ -164,7 +164,7 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('select/${theme.name}/content/no_scroll_handles.png'),
+          matchesGoldenFile('select/${theme.name}/content/no-scroll-handles.png'),
         );
       });
 
@@ -196,7 +196,7 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('select/${theme.name}/content/all_items_visible.png'),
+          matchesGoldenFile('select/${theme.name}/content/all-items-visible.png'),
         );
       });
     });
@@ -329,7 +329,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('select/${theme.name}/content/focused_selected_item.png'),
+        matchesGoldenFile('select/${theme.name}/content/focused-selected-item.png'),
       );
     });
   }
@@ -350,6 +350,6 @@ void main() {
     await tester.tap(find.byKey(key));
     await tester.pumpAndSettle();
 
-    expect(find.byType(TestScaffold), matchesGoldenFile('select/content/leaky_inherited_fitemdata.png'));
+    expect(find.byType(TestScaffold), matchesGoldenFile('select/content/leaky-inherited-fitemdata.png'));
   });
 }

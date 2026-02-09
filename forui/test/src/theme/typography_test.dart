@@ -56,10 +56,6 @@ void main() {
         barrier: Colors.black12,
         background: Colors.black,
         foreground: Colors.black12,
-        card: Colors.cyan,
-        cardForeground: Colors.cyanAccent,
-        popover: Colors.deepOrange,
-        popoverForeground: Colors.deepOrangeAccent,
         primary: Colors.black26,
         primaryForeground: Colors.black38,
         secondary: Colors.black45,
@@ -70,8 +66,8 @@ void main() {
         destructiveForeground: Colors.blueGrey,
         error: Colors.red,
         errorForeground: Colors.redAccent,
+        card: Colors.cyan,
         border: Colors.lightBlue,
-        field: Colors.lime,
       );
 
       test('no arguments', () {

@@ -921,7 +921,7 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
     final iconStyle = FVariants<FTextFieldVariantConstraint, IconThemeData, IconThemeDataDelta>.delta(
       IconThemeData(color: colors.mutedForeground, size: 16),
       variants: {
-        [.disabled]: .delta(color: colors.disable(colors.mutedForeground, colors.field)),
+        [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
       },
     );
 
@@ -930,30 +930,35 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
         BoxDecoration(
           border: .all(color: colors.border, width: style.borderWidth),
           borderRadius: style.borderRadius,
-          color: colors.field,
+          color: colors.card,
         ),
         variants: {
+          [.disabled.and(.error)]: BoxDecoration(
+            border: .all(color: colors.disable(colors.error), width: style.borderWidth),
+            borderRadius: style.borderRadius,
+            color: colors.disable(colors.card),
+          ),
           [.error]: BoxDecoration(
             border: .all(color: colors.error, width: style.borderWidth),
             borderRadius: style.borderRadius,
-            color: colors.field,
+            color: colors.card,
           ),
           [.disabled]: BoxDecoration(
             border: .all(color: colors.disable(colors.border), width: style.borderWidth),
             borderRadius: style.borderRadius,
-            color: colors.field,
+            color: colors.card,
           ),
           [.focused]: BoxDecoration(
             border: .all(color: colors.primary, width: style.borderWidth),
             borderRadius: style.borderRadius,
-            color: colors.field,
+            color: colors.card,
           ),
         },
       ),
       hintTextStyle: .delta(
         typography.sm.copyWith(color: colors.mutedForeground),
         variants: {
-          [.disabled]: .delta(color: colors.disable(colors.mutedForeground, colors.field)),
+          [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
         },
       ),
       iconStyle: iconStyle,

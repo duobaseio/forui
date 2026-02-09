@@ -30,7 +30,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('select/${theme.name}/search_content/no_results.png'),
+        matchesGoldenFile('select/${theme.name}/search-content/no-results.png'),
       );
     });
 
@@ -62,7 +62,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('select/${theme.name}/search_content/selected-result.png'),
+        matchesGoldenFile('select/${theme.name}/search-content/selected-result.png'),
       );
     });
 
@@ -83,7 +83,7 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/search_content/sync.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/search-content/sync.png'));
     });
 
     testWidgets('desktop', (tester) async {
@@ -106,7 +106,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('select/${theme.name}/search_content/desktop.png'),
+        matchesGoldenFile('select/${theme.name}/search-content/desktop.png'),
       );
     });
 
@@ -131,7 +131,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('select/${theme.name}/search_content/desktop_selected.png'),
+        matchesGoldenFile('select/${theme.name}/search-content/desktop-selected.png'),
       );
     });
 
@@ -155,7 +155,7 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle(const Duration(seconds: 5));
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/search_content/async.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/search-content/async.png'));
     });
 
     testWidgets('async error with error builder', (tester) async {
@@ -181,7 +181,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('select/${theme.name}/search_content/async_error_with_error_builder.png'),
+        matchesGoldenFile('select/${theme.name}/search-content/async-error-with-error-builder.png'),
       );
 
       await tester.pumpAndSettle();
@@ -209,7 +209,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('select/${theme.name}/search_content/async_error.png'),
+        matchesGoldenFile('select/${theme.name}/search-content/async-error.png'),
       );
 
       await tester.pumpAndSettle();
@@ -240,7 +240,7 @@ void main() {
 
       await expectLater(
         find.byType(TestScaffold),
-        matchesGoldenFile('select/${theme.name}/search_content/async_loading.png'),
+        matchesGoldenFile('select/${theme.name}/search-content/async-loading.png'),
       );
 
       completer.complete();

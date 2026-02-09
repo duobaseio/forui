@@ -191,8 +191,6 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
     required FColors colors,
     required FTypography typography,
     required FStyle style,
-    required Color background,
-    required Color foreground,
   }) => .new(
     focusedOutlineStyle: style.focusedOutlineStyle,
     buttonStyle: FButtonStyles.inherit(colors: colors, typography: typography, style: style)
@@ -202,9 +200,9 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
           iconContentStyle: .delta(
             iconStyle: .value(
               .delta(
-                IconThemeData(color: foreground, size: 16),
+                IconThemeData(color: colors.foreground, size: 16),
                 variants: {
-                  [.disabled]: .delta(color: colors.disable(foreground, background)),
+                  [.disabled]: .delta(color: colors.disable(colors.foreground)),
                 },
               ),
             ),
@@ -214,7 +212,7 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
               BoxDecoration(
                 border: .all(color: colors.border),
                 borderRadius: style.borderRadius,
-                color: background,
+                color: colors.card,
               ),
               variants: {
                 [.disabled]: .delta(border: .all(color: colors.disable(colors.border))),
@@ -223,6 +221,6 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
             ),
           ),
         ),
-    headerTextStyle: typography.base.copyWith(color: foreground, fontWeight: .w600),
+    headerTextStyle: typography.base.copyWith(color: colors.foreground, fontWeight: .w600),
   );
 }

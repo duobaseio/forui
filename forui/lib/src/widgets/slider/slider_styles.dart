@@ -154,7 +154,7 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
          activeColor: FVariants(
            colors.primary,
            variants: {
-             [.disabled]: colors.disable(colors.primary, colors.secondary),
+             [.disabled]: colors.disable(colors.primary),
            },
          ),
          inactiveColor: .all(colors.secondary),

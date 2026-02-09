@@ -412,7 +412,7 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
           },
         ),
         tileStyles: .delta(
-          FTileStyle.inherit(
+          .inherit(
             colors: colors,
             typography: typography,
             style: style,

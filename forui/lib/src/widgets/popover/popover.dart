@@ -572,7 +572,7 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
   FPopoverStyle.inherit({required FColors colors, required FStyle style})
     : this(
         decoration: BoxDecoration(
-          color: colors.popover,
+          color: colors.card,
           borderRadius: style.borderRadius,
           border: .all(width: style.borderWidth, color: colors.border),
           boxShadow: style.shadow,

@@ -349,10 +349,10 @@ class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
   /// Creates a [FTileStyle].
   FTileStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        backgroundColor: .all(colors.background),
+        backgroundColor: .all(colors.card),
         decoration: .delta(
           BoxDecoration(
-            color: colors.background,
+            color: colors.card,
             border: .all(color: colors.border),
             borderRadius: style.borderRadius,
           ),

@@ -33,13 +33,9 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
   @override
   final Color cursorColor;
 
-  /// The base fill color of the decoration's container.
+  /// The fill color of the text-field.
   @override
-  final Color? fillColor;
-
-  /// The fill color of the decoration's container when hovered.
-  @override
-  final Color? hoveredFillColor;
+  final FVariants<FTextFieldVariantConstraint, Color?, Delta> color;
 
   /// The padding surrounding this text field's content.
   ///
@@ -97,6 +93,7 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
   /// Creates a [FTextFieldStyle].
   FTextFieldStyle({
     required this.keyboardAppearance,
+    required this.color,
     required this.iconStyle,
     required this.clearButtonStyle,
     required this.obscureButtonStyle,
@@ -108,8 +105,6 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
     required super.descriptionTextStyle,
     required super.errorTextStyle,
     this.cursorColor = CupertinoColors.activeBlue,
-    this.fillColor,
-    this.hoveredFillColor,
     this.contentPadding = const .symmetric(horizontal: 10, vertical: 10),
     this.clearButtonPadding = const .directional(end: 4),
     this.obscureButtonPadding = const .directional(end: 4),
@@ -133,7 +128,7 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
     final iconStyle = FVariants<FTextFieldVariantConstraint, IconThemeData, IconThemeDataDelta>.delta(
       IconThemeData(color: colors.mutedForeground, size: 16),
       variants: {
-        [.disabled]: .delta(color: colors.disable(colors.mutedForeground, colors.field)),
+        [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
       },
     );
     final bounceableButtonStyle = ghost.copyWith(
@@ -142,6 +137,12 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
 
     return .new(
       keyboardAppearance: colors.brightness,
+      color: FVariants(
+        colors.card,
+        variants: {
+          [.disabled]: colors.disable(colors.card),
+        },
+      ),
       iconStyle: iconStyle,
       clearButtonStyle: bounceableButtonStyle,
       obscureButtonStyle: bounceableButtonStyle.copyWith(
@@ -150,13 +151,13 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
       contentTextStyle: .delta(
         textStyle.copyWith(color: colors.primary),
         variants: {
-          [.disabled]: .delta(color: colors.disable(colors.primary, colors.field)),
+          [.disabled]: .delta(color: colors.disable(colors.primary)),
         },
       ),
       hintTextStyle: .delta(
         textStyle.copyWith(color: colors.mutedForeground),
         variants: {
-          [.disabled]: .delta(color: colors.disable(colors.mutedForeground, colors.field)),
+          [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
         },
       ),
       counterTextStyle: .delta(
@@ -165,8 +166,6 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
           [.disabled]: .delta(color: colors.disable(colors.primary)),
         },
       ),
-      fillColor: colors.field,
-      hoveredFillColor: colors.field,
       border: FVariants(
         OutlineInputBorder(
           borderSide: BorderSide(color: colors.border, width: style.borderWidth),

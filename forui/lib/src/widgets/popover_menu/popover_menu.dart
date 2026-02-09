@@ -358,6 +358,14 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
             borderRadius: style.borderRadius,
           ),
         ),
+        itemStyles: .apply([
+          .onBase(
+            .delta(
+              backgroundColor: .value(.all(colors.card)),
+              decoration: .apply([.onBase(.delta(color: colors.card))]),
+            ),
+          ),
+        ]),
       ),
       tileGroupStyle = .inherit(colors: colors, style: style, typography: typography),
       maxWidth = 250,

@@ -135,8 +135,8 @@ extension type FAlertStyles._(FVariants<FAlertVariantConstraint, FAlertStyle, FA
     : this._(
         .delta(
           FAlertStyle(
-            iconStyle: IconThemeData(color: colors.cardForeground, size: 20),
-            titleTextStyle: typography.base.copyWith(fontWeight: .w500, color: colors.cardForeground, height: 1.2),
+            iconStyle: IconThemeData(color: colors.foreground, size: 20),
+            titleTextStyle: typography.base.copyWith(fontWeight: .w500, color: colors.foreground, height: 1.2),
             subtitleTextStyle: typography.sm.copyWith(color: colors.mutedForeground),
             decoration: BoxDecoration(
               border: .all(color: colors.border),

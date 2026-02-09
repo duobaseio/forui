@@ -16,10 +16,6 @@ void main() {
       barrier: Color(0xFF03A9F4),
       background: Colors.black,
       foreground: Colors.black12,
-      card: Colors.cyan,
-      cardForeground: Colors.cyanAccent,
-      popover: Colors.deepOrange,
-      popoverForeground: Colors.deepOrangeAccent,
       primary: Colors.black26,
       primaryForeground: Colors.black38,
       secondary: Colors.black45,
@@ -30,8 +26,8 @@ void main() {
       destructiveForeground: Colors.blueGrey,
       error: Colors.red,
       errorForeground: Colors.redAccent,
+      card: Colors.cyan,
       border: Colors.lightBlue,
-      field: Colors.lime,
     );
 
     group('lerpColor(...)', () {
@@ -68,10 +64,6 @@ void main() {
         barrier: Colors.red,
         background: Colors.white,
         foreground: Colors.white70,
-        card: Colors.amber,
-        cardForeground: Colors.amberAccent,
-        popover: Colors.deepPurple,
-        popoverForeground: Colors.deepPurpleAccent,
         primary: Colors.blue,
         primaryForeground: Colors.white,
         secondary: Colors.green,
@@ -82,8 +74,8 @@ void main() {
         destructiveForeground: Colors.white38,
         error: Colors.yellow,
         errorForeground: Colors.white30,
+        card: Colors.amber,
         border: Colors.purple,
-        field: Colors.tealAccent,
         hoverLighten: 0.1,
         hoverDarken: 0.08,
         disabledOpacity: 0.3,
@@ -140,29 +132,21 @@ void main() {
     });
 
     group('disable(...)', () {
-      const p3White = Color.from(alpha: 1, red: 1, green: 1, blue: 1, colorSpace: .displayP3);
-      const p3Red = Color.from(alpha: 1, red: 0.8, green: 0.1, blue: 0.1, colorSpace: .displayP3);
-      const srgbWhite = Color(0xFFFFFFFF);
-      const srgbRed = Color(0xFFCC1A1A);
-
-      test('sRGB foreground with P3 background', () {
-        final result = scheme.copyWith(background: p3White).disable(srgbRed, p3White);
-        expect(result.colorSpace, ColorSpace.displayP3);
+      test('multiplies opacity by disabledOpacity', () {
+        final result = scheme.disable(const Color.from(alpha: 0.8, red: 1, green: 0, blue: 0));
+        expect(result.a, closeTo(0.4, 0.001)); // 0.8 * 0.5
       });
 
-      test('P3 foreground with sRGB background', () {
-        final result = scheme.copyWith(background: srgbWhite).disable(p3Red, srgbWhite);
+      test('preserves color space', () {
+        const p3Red = Color.from(alpha: 1, red: 0.8, green: 0.1, blue: 0.1, colorSpace: .displayP3);
+        final result = scheme.disable(p3Red);
         expect(result.colorSpace, ColorSpace.displayP3);
+        expect(result.a, closeTo(0.5, 0.001));
       });
 
-      test('P3 foreground with P3 background', () {
-        final result = scheme.copyWith(background: p3White).disable(p3Red, p3White);
-        expect(result.colorSpace, ColorSpace.displayP3);
-      });
-
-      test('sRGB foreground with sRGB background', () {
-        final result = scheme.copyWith(background: srgbWhite).disable(srgbRed, srgbWhite);
-        expect(result.colorSpace, ColorSpace.sRGB);
+      test('fully opaque becomes disabledOpacity', () {
+        final result = scheme.disable(const Color(0xFFCC1A1A));
+        expect(result.a, closeTo(0.5, 0.001));
       });
     });
 
@@ -176,10 +160,6 @@ void main() {
           barrier: Colors.red,
           background: Colors.red,
           foreground: Colors.greenAccent,
-          card: Colors.amber,
-          cardForeground: Colors.amberAccent,
-          popover: Colors.deepPurple,
-          popoverForeground: Colors.deepPurpleAccent,
           primary: Colors.yellow,
           primaryForeground: Colors.orange,
           secondary: Colors.purple,
@@ -190,8 +170,8 @@ void main() {
           destructiveForeground: Colors.pink,
           error: Colors.blueAccent,
           errorForeground: Colors.blueGrey,
+          card: Colors.amber,
           border: Colors.lime,
-          field: Colors.tealAccent,
           hoverLighten: 0.3,
           hoverDarken: 0.2,
           disabledOpacity: 0.1,
@@ -201,10 +181,6 @@ void main() {
         expect(copy.barrier, equals(Colors.red));
         expect(copy.background, equals(Colors.red));
         expect(copy.foreground, equals(Colors.greenAccent));
-        expect(copy.card, equals(Colors.amber));
-        expect(copy.cardForeground, equals(Colors.amberAccent));
-        expect(copy.popover, equals(Colors.deepPurple));
-        expect(copy.popoverForeground, equals(Colors.deepPurpleAccent));
         expect(copy.primary, equals(Colors.yellow));
         expect(copy.primaryForeground, equals(Colors.orange));
         expect(copy.secondary, equals(Colors.purple));
@@ -215,8 +191,8 @@ void main() {
         expect(copy.destructiveForeground, equals(Colors.pink));
         expect(copy.error, equals(Colors.blueAccent));
         expect(copy.errorForeground, equals(Colors.blueGrey));
+        expect(copy.card, equals(Colors.amber));
         expect(copy.border, equals(Colors.lime));
-        expect(copy.field, equals(Colors.tealAccent));
         expect(copy.hoverLighten, 0.3);
         expect(copy.hoverDarken, 0.2);
         expect(copy.disabledOpacity, 0.1);
@@ -235,10 +211,6 @@ void main() {
           ColorProperty('barrier', const Color(0xFF03A9F4)),
           ColorProperty('background', Colors.black),
           ColorProperty('foreground', Colors.black12),
-          ColorProperty('card', Colors.cyan),
-          ColorProperty('cardForeground', Colors.cyanAccent),
-          ColorProperty('popover', Colors.deepOrange),
-          ColorProperty('popoverForeground', Colors.deepOrangeAccent),
           ColorProperty('primary', Colors.black26),
           ColorProperty('primaryForeground', Colors.black38),
           ColorProperty('secondary', Colors.black45),
@@ -249,8 +221,8 @@ void main() {
           ColorProperty('destructiveForeground', Colors.blueGrey),
           ColorProperty('error', Colors.red),
           ColorProperty('errorForeground', Colors.redAccent),
+          ColorProperty('card', Colors.cyan),
           ColorProperty('border', Colors.lightBlue),
-          ColorProperty('field', Colors.lime),
           PercentProperty('hoverLighten', 0.075),
           PercentProperty('hoverDarken', 0.05),
           PercentProperty('disabledOpacity', 0.5),

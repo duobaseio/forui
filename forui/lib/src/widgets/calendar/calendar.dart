@@ -266,40 +266,32 @@ class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
     required FColors colors,
     required FTypography typography,
     required FStyle style,
-    Color? background,
-    Color? foreground,
-  }) {
-    background ??= colors.card;
-    foreground ??= colors.cardForeground;
-
-    return FCalendarStyle(
+  }) => FCalendarStyle(
       headerStyle: .inherit(
         colors: colors,
         typography: typography,
         style: style,
-        background: background,
-        foreground: foreground,
       ),
-      dayPickerStyle: .inherit(colors: colors, typography: typography, background: background, foreground: foreground),
+      dayPickerStyle: .inherit(colors: colors, typography: typography),
       yearMonthPickerStyle: FCalendarEntryStyle(
         backgroundColor: FVariants(
-          background,
+          colors.card,
           variants: {
-            [.disabled]: background,
+            [.disabled]: colors.card,
             [.hovered, .pressed]: colors.secondary,
           },
         ),
         borderColor: FVariants(
           null,
           variants: {
-            [.disabled]: background,
-            [.focused]: foreground,
+            [.disabled]: colors.card,
+            [.focused]: colors.foreground,
           },
         ),
         textStyle: .delta(
-          typography.base.copyWith(color: foreground, fontWeight: .w500),
+          typography.base.copyWith(color: colors.foreground, fontWeight: .w500),
           variants: {
-            [.disabled]: .delta(color: colors.disable(foreground, background)),
+            [.disabled]: .delta(color: colors.disable(colors.foreground)),
           },
         ),
         radius: const .circular(8),
@@ -307,8 +299,7 @@ class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
       decoration: BoxDecoration(
         borderRadius: style.borderRadius,
         border: .all(color: colors.border),
-        color: background,
+        color: colors.card,
       ),
     );
-  }
 }
