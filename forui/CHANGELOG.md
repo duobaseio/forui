@@ -270,7 +270,9 @@ are not available for most of these changes due to the tool's limitations.
 
 
 ### `FTextField` & `FTextFormField`
-* **Breaking** Add `FTextFieldStyle.iconStyle`.
+* Add `FTextFieldStyle.iconStyle`.
+* Add `FTextFieldStyle.hoveredFillColor`.
+
 * **Breaking** Remove `FTextField.statesController`.
 * **Breaking** Remove `FTextFormField.statesController`.
 * **Breaking** Change `FFieldBuilder` to use `Set<FTextFieldVariant>` instead of `Set<WidgetState>`.
@@ -279,6 +281,9 @@ are not available for most of these changes due to the tool's limitations.
 
 * Change `FTextFieldStyle.clearButtonStyle` to not bounce by default.
 * Change `FTextFieldStyle.obscureButtonStyle` to not bounce by default.
+* Change default fill color to `FColors.field`.
+* Change focused fill color to `FColors.background`.
+* **Breaking** Remove `FTextFieldStyle.filled`.
 
 
 ### `FTheme` & `FThemes`

@@ -265,7 +265,7 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
         textStyle: .delta(
           typography.base.copyWith(color: foreground, fontWeight: .w500),
           variants: {
-            [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
+            [.disabled]: .delta(color: colors.disable(colors.mutedForeground, background)),
             [.selected]: .delta(color: background),
           },
         ),

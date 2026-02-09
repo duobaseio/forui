@@ -28,23 +28,31 @@ class Application extends StatefulWidget {
 
 class _ApplicationState extends State<Application> with SingleTickerProviderStateMixin {
   int index = 4;
+  bool dark = true;
 
-  @override
-  void initState() {
-    super.initState();
-  }
+  FThemeData get _theme => dark ? FThemes.neutral.dark : FThemes.neutral.light;
+
+  void toggleTheme() => setState(() => dark = !dark);
 
   @override
   Widget build(BuildContext context) => MaterialApp(
     locale: const Locale('en', 'US'),
     localizationsDelegates: FLocalizations.localizationsDelegates,
     supportedLocales: FLocalizations.supportedLocales,
-    theme: FThemes.neutral.light.toApproximateMaterialTheme(),
-    builder: (context, child) => FTheme(data: FThemes.neutral.light, child: child!),
+    theme: _theme.toApproximateMaterialTheme(),
+    builder: (context, child) => FTheme(data: _theme, child: FToaster(child: child!)),
     home: Builder(
       builder: (context) {
         return FScaffold(
-          header: const FHeader(title: Text('Example (B)')),
+          header: FHeader(
+            title: const Text('Example'),
+            suffixes: [
+              FHeaderAction(
+                icon: Icon(dark ? FIcons.sun : FIcons.moon),
+                onPress: toggleTheme,
+              ),
+            ],
+          ),
           footer: FBottomNavigationBar(
             index: index,
             onChange: (index) => setState(() => this.index = index),

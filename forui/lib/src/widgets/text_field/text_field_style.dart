@@ -33,13 +33,13 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
   @override
   final Color cursorColor;
 
-  /// The base fill color of the decoration's container colors.
+  /// The base fill color of the decoration's container.
   @override
   final Color? fillColor;
 
-  /// If true the decoration's container is filled with [fillColor]. Defaults to false.
+  /// The fill color of the decoration's container when hovered.
   @override
-  final bool filled;
+  final Color? hoveredFillColor;
 
   /// The padding surrounding this text field's content.
   ///
@@ -109,7 +109,7 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
     required super.errorTextStyle,
     this.cursorColor = CupertinoColors.activeBlue,
     this.fillColor,
-    this.filled = false,
+    this.hoveredFillColor,
     this.contentPadding = const .symmetric(horizontal: 10, vertical: 10),
     this.clearButtonPadding = const .directional(end: 4),
     this.obscureButtonPadding = const .directional(end: 4),
@@ -133,7 +133,7 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
     final iconStyle = FVariants<FTextFieldVariantConstraint, IconThemeData, IconThemeDataDelta>.delta(
       IconThemeData(color: colors.mutedForeground, size: 16),
       variants: {
-        [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
+        [.disabled]: .delta(color: colors.disable(colors.mutedForeground, colors.field)),
       },
     );
     final bounceableButtonStyle = ghost.copyWith(
@@ -150,13 +150,13 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
       contentTextStyle: .delta(
         textStyle.copyWith(color: colors.primary),
         variants: {
-          [.disabled]: .delta(color: colors.disable(colors.primary)),
+          [.disabled]: .delta(color: colors.disable(colors.primary, colors.field)),
         },
       ),
       hintTextStyle: .delta(
         textStyle.copyWith(color: colors.mutedForeground),
         variants: {
-          [.disabled]: .delta(color: colors.disable(colors.border)),
+          [.disabled]: .delta(color: colors.disable(colors.mutedForeground, colors.field)),
         },
       ),
       counterTextStyle: .delta(
@@ -165,6 +165,8 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
           [.disabled]: .delta(color: colors.disable(colors.primary)),
         },
       ),
+      fillColor: colors.field,
+      hoveredFillColor: colors.field,
       border: FVariants(
         OutlineInputBorder(
           borderSide: BorderSide(color: colors.border, width: style.borderWidth),

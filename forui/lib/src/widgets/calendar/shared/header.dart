@@ -199,6 +199,16 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
         .resolve({FButtonVariant.outline})
         .resolve({FButtonSizeVariant.sm})
         .copyWith(
+          iconContentStyle: .delta(
+            iconStyle: .value(
+              .delta(
+                IconThemeData(color: foreground, size: 16),
+                variants: {
+                  [.disabled]: .delta(color: colors.disable(foreground, background)),
+                },
+              ),
+            ),
+          ),
           decoration: .value(
             .delta(
               BoxDecoration(
