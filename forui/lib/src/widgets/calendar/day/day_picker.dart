@@ -232,17 +232,19 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
     final backgroundColor = FVariants<FTappableVariantConstraint, Color, Delta>(
       colors.card,
       variants: {
-        [.selected]: colors.primary,
-        [.disabled.and(.selected)]: colors.disable(colors.primary),
         [.hovered, .pressed]: colors.secondary,
+        //
+        [.selected]: colors.primary,
+        [.selected.and(.disabled)]: colors.disable(colors.primary),
       },
     );
     final border = FVariants<FTappableVariantConstraint, Color?, Delta>(
       null,
       variants: {
+        [.focused]: colors.primary,
+        //
         [.disabled.and(.selected).and(.focused)]: null,
         [.disabled.and(.focused)]: null,
-        [.focused]: colors.foreground,
       },
     );
 
@@ -255,8 +257,9 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
           typography.base.copyWith(color: colors.foreground, fontWeight: .w500),
           variants: {
             [.disabled]: .delta(color: colors.disable(colors.foreground)),
+            //
             [.selected]: .delta(color: colors.primaryForeground),
-            [.disabled.and(.selected)]: .delta(color: colors.disable(colors.primaryForeground)),
+            [.selected.and(.disabled)]: .delta(color: colors.disable(colors.primaryForeground)),
           },
         ),
         radius: const .circular(4),
@@ -268,8 +271,9 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
           typography.base.copyWith(color: colors.mutedForeground, fontWeight: .w500),
           variants: {
             [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
+            //
             [.selected]: .delta(color: colors.primaryForeground),
-            [.disabled.and(.selected)]: .delta(color: colors.disable(colors.primaryForeground)),
+            [.selected.and(.disabled)]: .delta(color: colors.disable(colors.primaryForeground)),
           },
         ),
         radius: const .circular(4),

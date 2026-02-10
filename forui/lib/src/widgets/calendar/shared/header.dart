@@ -215,8 +215,9 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
                 color: colors.card,
               ),
               variants: {
-                [.disabled]: .delta(border: .all(color: colors.disable(colors.border))),
                 [.hovered, .pressed]: .delta(color: colors.secondary),
+                //
+                [.disabled]: .delta(border: .all(color: colors.disable(colors.border))),
               },
             ),
           ),

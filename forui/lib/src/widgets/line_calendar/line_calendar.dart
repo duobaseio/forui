@@ -250,11 +250,12 @@ class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
         colors.foreground,
         variants: {
           [.hovered, .pressed]: colors.hover(colors.foreground),
+          //
           [.disabled]: colors.disable(colors.foreground),
           //
           [.selected]: colors.primaryForeground,
-          [.selected.and(.disabled)]: colors.disable(colors.primaryForeground),
           [.selected.and(.hovered), .selected.and(.pressed)]: colors.hover(colors.primaryForeground),
+          [.selected.and(.disabled)]: colors.disable(colors.primaryForeground),
         },
       ),
       dateTextStyle: .delta(

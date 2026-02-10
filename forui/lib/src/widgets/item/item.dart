@@ -552,10 +552,12 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
         decoration: .delta(
           BoxDecoration(color: colors.background, borderRadius: style.borderRadius),
           variants: {
-            [.disabled.and(.selected)]: .delta(color: colors.disable(colors.secondary)),
-            [.disabled]: const .delta(),
-            [.selected]: .delta(color: colors.secondary),
             [.hovered, .pressed]: .delta(color: colors.secondary),
+            //
+            [.disabled]: const .delta(),
+            //
+            [.selected]: .delta(color: colors.secondary),
+            [.selected.and(.disabled)]: .delta(color: colors.disable(colors.secondary)),
           },
         ),
         contentStyle: .inherit(

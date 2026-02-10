@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart' show Colors;
 import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
@@ -359,10 +358,11 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
           },
         ),
         backgroundColor: FVariants(
-          Colors.transparent,
+          colors.background,
           variants: {
             [.selected, .hovered, .pressed]: colors.secondary,
-            [.disabled]: Colors.transparent,
+            //
+            [.disabled]: colors.background,
           },
         ),
         borderRadius: style.borderRadius,

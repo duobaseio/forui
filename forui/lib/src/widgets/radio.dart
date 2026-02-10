@@ -223,20 +223,20 @@ class FRadioStyle extends FLabelStyle with _$FRadioStyleFunctions {
       tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
       focusedOutlineStyle: FFocusedOutlineStyle(color: colors.primary, borderRadius: .circular(100)),
       borderColor: FVariants(
-        colors.foreground,
+        colors.mutedForeground,
         variants: {
-          [.disabled]: colors.disable(colors.foreground),
+          [.disabled]: colors.disable(colors.mutedForeground),
           //
           [.error]: colors.error,
           [.error.and(.disabled)]: colors.disable(colors.error),
-          //
-          [.selected]: colors.primary,
-          [.selected.and(.disabled)]: colors.disable(colors.primary),
-          [.selected.and(.error)]: colors.error,
-          [.selected.and(.disabled).and(.error)]: colors.disable(colors.error),
         },
       ),
-      backgroundColor: .all(colors.background),
+      backgroundColor: FVariants(
+        colors.card,
+        variants: {
+          [.disabled]: colors.disable(colors.card),
+        },
+      ),
       indicatorColor: FVariants(
         colors.primary,
         variants: {

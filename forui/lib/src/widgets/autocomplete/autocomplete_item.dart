@@ -268,8 +268,8 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
         decoration: FVariants(
           const BoxDecoration(),
           variants: {
-            [.disabled]: const BoxDecoration(),
             [.focused, .hovered, .pressed]: BoxDecoration(color: colors.secondary, borderRadius: style.borderRadius),
+            [.disabled]: const BoxDecoration(),
           },
         ),
         contentStyle:

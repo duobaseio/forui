@@ -117,7 +117,7 @@ extension type FBadgeStyles._(FVariants<FBadgeVariantConstraint, FBadgeStyle, FB
             ),
             [.outline]: .delta(
               decoration: .delta(
-                color: const Color(0x00000000),
+                color: colors.card,
                 border: .all(color: colors.border, width: style.borderWidth),
               ),
               contentStyle: .delta(labelTextStyle: .delta(color: colors.foreground)),

@@ -277,15 +277,17 @@ class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
         backgroundColor: FVariants(
           colors.card,
           variants: {
-            [.disabled]: colors.card,
             [.hovered, .pressed]: colors.secondary,
+            //
+            [.disabled]: colors.card,
           },
         ),
         borderColor: FVariants(
           null,
           variants: {
-            [.disabled]: colors.card,
             [.focused]: colors.foreground,
+            //
+            [.disabled]: null,
           },
         ),
         textStyle: .delta(

@@ -279,8 +279,9 @@ extension type FButtonStyles._(FVariants<FButtonVariantConstraint, FButtonSizes,
             decoration: .delta(
               BoxDecoration(borderRadius: style.borderRadius, color: colors.primary),
               variants: {
-                [.disabled]: .delta(color: colors.disable(colors.primary)),
                 [.hovered, .pressed]: .delta(color: colors.hover(colors.primary)),
+                //
+                [.disabled]: .delta(color: colors.disable(colors.primary)),
               },
             ),
             foregroundColor: colors.primaryForeground,
@@ -293,8 +294,9 @@ extension type FButtonStyles._(FVariants<FButtonVariantConstraint, FButtonSizes,
               decoration: .delta(
                 BoxDecoration(borderRadius: style.borderRadius, color: colors.secondary),
                 variants: {
-                  [.disabled]: .delta(color: colors.disable(colors.secondary)),
                   [.hovered, .pressed]: .delta(color: colors.hover(colors.secondary)),
+                  //
+                  [.disabled]: .delta(color: colors.disable(colors.secondary)),
                 },
               ),
               foregroundColor: colors.secondaryForeground,
@@ -309,11 +311,12 @@ extension type FButtonStyles._(FVariants<FButtonVariantConstraint, FButtonSizes,
                   color: colors.destructive.withValues(alpha: colors.brightness == .light ? 0.1 : 0.2),
                 ),
                 variants: {
-                  [.disabled]: .delta(
-                    color: colors.destructive.withValues(alpha: colors.brightness == .light ? 0.05 : 0.1),
-                  ),
                   [.hovered, .pressed]: .delta(
                     color: colors.destructive.withValues(alpha: colors.brightness == .light ? 0.2 : 0.3),
+                  ),
+                  //
+                  [.disabled]: .delta(
+                    color: colors.destructive.withValues(alpha: colors.brightness == .light ? 0.05 : 0.1),
                   ),
                 },
               ),
@@ -327,11 +330,12 @@ extension type FButtonStyles._(FVariants<FButtonVariantConstraint, FButtonSizes,
                 BoxDecoration(
                   border: .all(color: colors.border),
                   borderRadius: style.borderRadius,
-                  color: colors.background,
+                  color: colors.card,
                 ),
                 variants: {
-                  [.disabled]: const .delta(),
                   [.hovered, .pressed]: .delta(color: colors.secondary),
+                  //
+                  [.disabled]: .delta(color: colors.disable(colors.card)),
                 },
               ),
               foregroundColor: colors.secondaryForeground,
@@ -343,8 +347,9 @@ extension type FButtonStyles._(FVariants<FButtonVariantConstraint, FButtonSizes,
               decoration: .delta(
                 BoxDecoration(borderRadius: style.borderRadius),
                 variants: {
-                  [.disabled]: const .delta(),
                   [.hovered, .pressed]: .delta(color: colors.secondary),
+                  //
+                  [.disabled]: const .delta(),
                 },
               ),
               foregroundColor: colors.secondaryForeground,
@@ -384,7 +389,12 @@ extension type FButtonSizeStyles._(FVariants<FButtonSizeVariantConstraint, FButt
       focusedOutlineStyle: style.focusedOutlineStyle,
       contentStyle: FButtonContentStyle(
         textStyle: .delta(
-          textStyle,
+          textStyle.copyWith(
+            color: foregroundColor,
+            fontWeight: .w500,
+            height: 1,
+            leadingDistribution: .even,
+          ),
           variants: {
             [.disabled]: .delta(color: disabledForegroundColor),
           },
@@ -421,12 +431,7 @@ extension type FButtonSizeStyles._(FVariants<FButtonSizeVariantConstraint, FButt
     return FButtonSizeStyles._(
       FVariants(
         button(
-          textStyle: typography.base.copyWith(
-            color: foregroundColor,
-            fontWeight: .w500,
-            height: 1,
-            leadingDistribution: .even,
-          ),
+          textStyle: typography.base,
           contentPadding: const .symmetric(horizontal: 16, vertical: 12),
           contentSpacing: 10,
           iconSize: 20,
@@ -434,36 +439,21 @@ extension type FButtonSizeStyles._(FVariants<FButtonSizeVariantConstraint, FButt
         ),
         variants: {
           [.xs]: button(
-            textStyle: typography.xs.copyWith(
-              color: foregroundColor,
-              fontWeight: .w500,
-              height: 1,
-              leadingDistribution: .even,
-            ),
+            textStyle: typography.xs,
             contentPadding: const .symmetric(horizontal: 8, vertical: 8),
             contentSpacing: 6,
             iconSize: 14,
             iconPadding: const .all(7),
           ),
           [.sm]: button(
-            textStyle: typography.sm.copyWith(
-              color: foregroundColor,
-              fontWeight: .w500,
-              height: 1,
-              leadingDistribution: .even,
-            ),
+            textStyle: typography.sm,
             contentPadding: const .symmetric(horizontal: 12, vertical: 10),
             contentSpacing: 8,
             iconSize: 16,
             iconPadding: const .all(8),
           ),
           [.lg]: button(
-            textStyle: typography.base.copyWith(
-              color: foregroundColor,
-              fontWeight: .w500,
-              height: 1,
-              leadingDistribution: .even,
-            ),
+            textStyle: typography.base,
             contentPadding: const .symmetric(horizontal: 32, vertical: 14),
             contentSpacing: 10,
             iconSize: 24,

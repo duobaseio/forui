@@ -228,12 +228,12 @@ class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
         BoxDecoration(
           borderRadius: style.borderRadius,
           border: .all(color: colors.mutedForeground, width: 0.6),
-          color: colors.background,
+          color: colors.card,
         ),
         variants: {
           [.disabled]: .delta(
             border: .all(color: colors.disable(colors.mutedForeground), width: 0.6),
-            color: colors.disable(colors.background),
+            color: colors.disable(colors.card),
           ),
           //
           [.selected]: .delta(border: null, color: colors.primary),
@@ -242,7 +242,7 @@ class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
           [.error]: .delta(border: .all(color: colors.error, width: 0.6)),
           [.error.and(.disabled)]: .delta(
             border: .all(color: colors.disable(colors.error), width: 0.6),
-            color: colors.disable(colors.background),
+            color: colors.disable(colors.card),
           ),
           [.error.and(.selected)]: .delta(border: null, color: colors.error),
           [.error.and(.disabled).and(.selected)]: .delta(border: null, color: colors.disable(colors.error)),

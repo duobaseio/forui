@@ -65,7 +65,7 @@ class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
         itemDecoration: .delta(
           BoxDecoration(borderRadius: style.borderRadius, color: colors.background),
           variants: {
-            [.hovered]: .delta(color: colors.border),
+            [.hovered, .pressed]: .delta(color: colors.secondary),
             //
             [.selected]: .delta(color: colors.primary),
             [.selected.and(.hovered), .selected.and(.pressed)]: .delta(color: colors.hover(colors.primary)),

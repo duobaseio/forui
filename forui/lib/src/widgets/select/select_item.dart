@@ -283,6 +283,7 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
           const BoxDecoration(),
           variants: {
             [.focused, .hovered, .pressed]: .delta(color: colors.secondary, borderRadius: style.borderRadius),
+            //
             [.disabled]: const .delta(),
           },
         ),

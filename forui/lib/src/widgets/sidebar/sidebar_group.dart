@@ -222,7 +222,7 @@ class FSidebarGroupStyle with Diagnosticable, _$FSidebarGroupStyleFunctions {
         actionStyle: .delta(
           IconThemeData(color: colors.mutedForeground, size: 18),
           variants: {
-            [.hovered, .pressed]: .delta(color: colors.primary),
+            [.hovered, .pressed]: .delta(color: colors.foreground),
           },
         ),
         tappableStyle: style.tappableStyle,

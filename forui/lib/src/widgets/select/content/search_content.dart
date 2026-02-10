@@ -249,7 +249,7 @@ class FSelectSearchStyle with Diagnosticable, _$FSelectSearchStyleFunctions {
     : this(
         fieldStyle: .inherit(colors: colors, typography: typography, style: style).copyWith(
           color: .value(const .all(null)),
-          border: .value(const .all(OutlineInputBorder(borderSide: BorderSide(color: Colors.transparent)))),
+          border: .value(const .all(OutlineInputBorder(borderSide: .none))),
           iconStyle: .value(.all(IconThemeData(size: 15, color: colors.mutedForeground))),
         ),
         dividerStyle: FDividerStyles.inherit(

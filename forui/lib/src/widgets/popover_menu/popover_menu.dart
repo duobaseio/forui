@@ -363,11 +363,51 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
             .delta(
               backgroundColor: .value(.all(colors.card)),
               decoration: .apply([.onBase(.delta(color: colors.card))]),
+              contentStyle: FItemContentStyle.inherit(
+                colors: colors,
+                typography: typography,
+                prefix: colors.foreground,
+                foreground: colors.foreground,
+                mutedForeground: colors.mutedForeground,
+              ),
+              rawItemContentStyle: FRawItemContentStyle.inherit(
+                colors: colors,
+                typography: typography,
+                prefix: colors.foreground,
+                color: colors.foreground,
+              ),
             ),
           ),
         ]),
       ),
-      tileGroupStyle = .inherit(colors: colors, style: style, typography: typography),
+      tileGroupStyle = .inherit(colors: colors, style: style, typography: typography).copyWith(
+        tileStyles: .apply([
+          .onBase(
+            .delta(
+              contentStyle: .delta(
+                prefixIconStyle: .value(
+                  .delta(
+                    IconThemeData(color: colors.foreground, size: 18),
+                    variants: {
+                      [.disabled]: .delta(color: colors.disable(colors.foreground)),
+                    },
+                  ),
+                ),
+              ),
+              rawItemContentStyle: .delta(
+                prefixIconStyle: .value(
+                  .delta(
+                    IconThemeData(color: colors.foreground, size: 18),
+                    variants: {
+                      [.disabled]: .delta(color: colors.disable(colors.foreground)),
+                    },
+                  ),
+                ),
+              ),
+            ),
+          ),
+        ]),
+      ),
       maxWidth = 250,
       super.inherit();
 }

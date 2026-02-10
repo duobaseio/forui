@@ -30,7 +30,7 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
   int index = 4;
   bool dark = true;
 
-  FThemeData get _theme => dark ? FThemes.neutral.dark : FThemes.neutral.light;
+  FThemeData get _theme => dark ? FThemes.green.dark : FThemes.green.light;
 
   void toggleTheme() => setState(() => dark = !dark);
 
