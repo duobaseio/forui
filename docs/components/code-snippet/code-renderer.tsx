@@ -50,7 +50,7 @@ export function CodeRenderer({ snippet, isTooltip = false, lineClasses }: Props)
   if (!processedLines) {
     const lines = snippet.text.split('\n');
     return (
-      <code className={cn('block bg-transparent border-0 whitespace-pre', isTooltip && 'text-xs')}>
+      <code className={cn('block w-fit min-w-full bg-transparent border-0 whitespace-pre', isTooltip && 'text-xs')}>
         {lines.map((line, lineIdx) => (
           <div key={lineIdx} className="leading-relaxed">
             {!isTooltip && (
@@ -66,9 +66,9 @@ export function CodeRenderer({ snippet, isTooltip = false, lineClasses }: Props)
   }
 
   return (
-    <code className={cn('block bg-transparent border-0 whitespace-pre', isTooltip ? 'text-xs' : '')}>
+    <code className={cn('block w-fit min-w-full bg-transparent border-0 whitespace-pre', isTooltip ? 'text-xs' : '')}>
       {processedLines.map((line, lineIdx) => (
-        <div key={lineIdx} className={cn('leading-relaxed', line.highlighted && 'bg-blue-500/10', lineClasses?.get(lineIdx))}>
+        <div key={lineIdx} className={cn('leading-relaxed transition-colors', line.highlighted && 'bg-blue-500/10', lineClasses?.get(lineIdx))}>
           {!isTooltip && (
             <span className="select-none text-muted-foreground text-right pr-4 inline-block w-8">{lineIdx + 1}</span>
           )}

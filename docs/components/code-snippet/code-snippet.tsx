@@ -14,7 +14,7 @@ interface Props {
 
 export function CodeSnippet({ snippet, className }: Props) {
   return (
-    <div className={cn('group relative rounded-2xl border bg-muted shadow', className)}>
+    <div className={cn('group relative overflow-hidden rounded-2xl border bg-muted shadow', className)}>
       <div className="overflow-x-auto p-2">
         <CodeRenderer snippet={snippet} />
       </div>

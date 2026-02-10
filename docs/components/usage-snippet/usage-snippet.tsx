@@ -51,7 +51,7 @@ export function UsageSnippet({ usage, className }: Props) {
   }, [lineCategories, categoryColors, selections]);
 
   return (
-    <div className={cn('group rounded-2xl border bg-muted shadow', className)}>
+    <div className={cn('group overflow-hidden rounded-2xl border bg-muted shadow', className)}>
       <CategoryControls
         categories={usage.categories}
         selections={selections}

@@ -9,14 +9,14 @@ interface Props {
 
 export function TooltipContent({ snippet }: Props) {
   return (
-    <div className="max-w-md">
+    <div className="max-w-lg max-h-80 overflow-auto">
       {snippet.container && (
         <div className="mb-2">
           <a
             href={snippet.container.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="font-semibold hover:underline"
+            className="font-semibold underline"
           >
             {snippet.container.name}
           </a>

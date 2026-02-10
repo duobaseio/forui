@@ -48,7 +48,7 @@ export function TokenGroup({ group, isTooltip }: Props) {
     element = (
       <HoverCard openDelay={200} closeDelay={100}>
         <HoverCardTrigger asChild>{element}</HoverCardTrigger>
-        <HoverCardContent className="w-auto max-w-lg p-3" side="top" align="start">
+        <HoverCardContent className="w-auto p-3" side="top" align="start">
           <TooltipContent snippet={tooltipAnnotation.snippet} />
         </HoverCardContent>
       </HoverCard>
