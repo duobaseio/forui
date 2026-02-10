@@ -30,7 +30,6 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
   @override
   final FVariants<FTextFieldVariantConstraint, Color?, Delta> color;
 
-
   /// The color of the cursor. Defaults to [CupertinoColors.activeBlue].
   ///
   /// The cursor indicates the current location of text insertion point in the field.

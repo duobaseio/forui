@@ -40,18 +40,16 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
     localizationsDelegates: FLocalizations.localizationsDelegates,
     supportedLocales: FLocalizations.supportedLocales,
     theme: _theme.toApproximateMaterialTheme(),
-    builder: (context, child) => FTheme(data: _theme, child: FToaster(child: child!)),
+    builder: (context, child) => FTheme(
+      data: _theme,
+      child: FToaster(child: child!),
+    ),
     home: Builder(
       builder: (context) {
         return FScaffold(
           header: FHeader(
             title: const Text('Example'),
-            suffixes: [
-              FHeaderAction(
-                icon: Icon(dark ? FIcons.sun : FIcons.moon),
-                onPress: toggleTheme,
-              ),
-            ],
+            suffixes: [FHeaderAction(icon: Icon(dark ? FIcons.sun : FIcons.moon), onPress: toggleTheme)],
           ),
           footer: FBottomNavigationBar(
             index: index,

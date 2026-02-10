@@ -262,46 +262,39 @@ class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
   });
 
   /// Creates a [FCalendarStyle] that inherits its properties.
-  factory FCalendarStyle.inherit({
-    required FColors colors,
-    required FTypography typography,
-    required FStyle style,
-  }) => FCalendarStyle(
-      headerStyle: .inherit(
-        colors: colors,
-        typography: typography,
-        style: style,
-      ),
-      dayPickerStyle: .inherit(colors: colors, typography: typography),
-      yearMonthPickerStyle: FCalendarEntryStyle(
-        backgroundColor: FVariants(
-          colors.card,
-          variants: {
-            [.hovered, .pressed]: colors.secondary,
-            //
-            [.disabled]: colors.card,
-          },
+  factory FCalendarStyle.inherit({required FColors colors, required FTypography typography, required FStyle style}) =>
+      FCalendarStyle(
+        headerStyle: .inherit(colors: colors, typography: typography, style: style),
+        dayPickerStyle: .inherit(colors: colors, typography: typography),
+        yearMonthPickerStyle: FCalendarEntryStyle(
+          backgroundColor: FVariants(
+            colors.card,
+            variants: {
+              [.hovered, .pressed]: colors.secondary,
+              //
+              [.disabled]: colors.card,
+            },
+          ),
+          borderColor: FVariants(
+            null,
+            variants: {
+              [.focused]: colors.foreground,
+              //
+              [.disabled]: null,
+            },
+          ),
+          textStyle: .delta(
+            typography.base.copyWith(color: colors.foreground, fontWeight: .w500),
+            variants: {
+              [.disabled]: .delta(color: colors.disable(colors.foreground)),
+            },
+          ),
+          radius: const .circular(8),
         ),
-        borderColor: FVariants(
-          null,
-          variants: {
-            [.focused]: colors.foreground,
-            //
-            [.disabled]: null,
-          },
+        decoration: BoxDecoration(
+          borderRadius: style.borderRadius,
+          border: .all(color: colors.border),
+          color: colors.card,
         ),
-        textStyle: .delta(
-          typography.base.copyWith(color: colors.foreground, fontWeight: .w500),
-          variants: {
-            [.disabled]: .delta(color: colors.disable(colors.foreground)),
-          },
-        ),
-        radius: const .circular(8),
-      ),
-      decoration: BoxDecoration(
-        borderRadius: style.borderRadius,
-        border: .all(color: colors.border),
-        color: colors.card,
-      ),
-    );
+      );
 }

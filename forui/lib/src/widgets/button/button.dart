@@ -389,12 +389,7 @@ extension type FButtonSizeStyles._(FVariants<FButtonSizeVariantConstraint, FButt
       focusedOutlineStyle: style.focusedOutlineStyle,
       contentStyle: FButtonContentStyle(
         textStyle: .delta(
-          textStyle.copyWith(
-            color: foregroundColor,
-            fontWeight: .w500,
-            height: 1,
-            leadingDistribution: .even,
-          ),
+          textStyle.copyWith(color: foregroundColor, fontWeight: .w500, height: 1, leadingDistribution: .even),
           variants: {
             [.disabled]: .delta(color: disabledForegroundColor),
           },
