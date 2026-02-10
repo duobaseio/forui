@@ -15,7 +15,6 @@ import 'package:forui/src/theme/variant.dart';
   'hovered': (1, 'The interaction variant when the user drags their mouse cursor over the given widget.'),
   'pressed': (1, 'The interaction variant when the user is actively pressing down on the given widget.'),
 })
-@Sentinels(FTextFieldStyle, {'fillColor': 'colorSentinel', 'hoveredFillColor': 'colorSentinel'})
 part 'text_field_style.design.dart';
 
 /// The text field style.

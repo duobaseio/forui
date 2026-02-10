@@ -95,7 +95,7 @@ Automated fixes via [Data Driven Fixes](https://github.com/flutter/flutter/blob/
 are not available for most of these changes due to the tool's limitations.
 
 
-### `FAccordionItem`
+### `FAccordion`
 * **Breaking** Rename `FAccordionItem.onStateChange` to `FAccordionItem.onVariantChange`.
 
 
@@ -182,10 +182,6 @@ are not available for most of these changes due to the tool's limitations.
 * **Breaking** Rename `FItem.onStateChange` to `FItem.onVariantChange`.
 
 
-### `FMultiSelectTag`
-* **Breaking** Rename `FMultiSelectTag.onStateChange` to `FMultiSelectTag.onVariantChange`.
-
-
 ### `FPicker`
 * Change error message when given unbounded constraints to be more descriptive.
 
@@ -208,7 +204,7 @@ are not available for most of these changes due to the tool's limitations.
 ### `FSelect` & `FMultiSelect`
 * **Breaking** Add `enabled` parameter to `FMultiSelectTagBuilder`.
 
-* * Change default background color to `card`.
+* Change default background color to `card`.
 * **Breaking** Change `FMultiSelectFieldStyle.iconStyle` type from `IconThemeData` to `FWidgetStateMap<IconThemeData>`.
   Wrap existing values with `.all(...)`, e.g. `.all(IconThemeData(...))`.
 * **Breaking** Change `FSelectSearchFieldProperties.autofocus` to default to true on desktop and false on touch devices.
@@ -216,6 +212,7 @@ are not available for most of these changes due to the tool's limitations.
 * **Breaking** Rename `FSelectSearchStyle.textFieldStyle` to `FSelectSearchStyle.fieldStyle`.
 * **Breaking** Remove `FSelectStyle.iconStyle`. Use `FSelectStyle.fieldStyle.iconStyle` instead.
 * **Breaking** Remove `FSelectSearchStyle.iconStyle`. Use `FSelectSearchStyle.fieldStyle.iconStyle` instead.
+* **Breaking** Rename `FMultiSelectTag.onStateChange` to `FMultiSelectTag.onVariantChange`.
 * Unmark `FSelect.contentScrollHandle` as deprecated.
 
 * Fix search field not receiving focus when popover opens even with `FSelectSearchFieldProperties.autofocus` set to `true`.
@@ -232,11 +229,8 @@ are not available for most of these changes due to the tool's limitations.
 * **Breaking** Rename `FSelectTile.onStatesChange` to `FSelectTile.onVariantChange`.
 
 
-### `FSidebarGroup`
+### `FSidebar`
 * **Breaking** Rename `FSidebarGroup.onActionStateChange` to `FSidebarGroup.onActionVariantChange`.
-
-
-### `FSidebarItem`
 * **Breaking** Rename `FSidebarItem.onStateChange` to `FSidebarItem.onVariantChange`.
 
 
@@ -316,7 +310,6 @@ are not available for most of these changes due to the tool's limitations.
 ### `FTimeField`
 * Change error message when localizations are missing to be more descriptive.
 * **Breaking** Rename `FTimeFieldStyle.selectFieldStyle` to `FTimeFieldStyle.fieldStyle`.
-
 * **Breaking** Remove `FTimeFieldStyle.iconStyle`. Use `FTimeFieldStyle.fieldStyle.iconStyle` instead.
 
 * Fix `FTimeField` incorrectly handling traversal when no localizations are provided.
@@ -327,11 +320,7 @@ are not available for most of these changes due to the tool's limitations.
 
 
 ### `FToast`
-* Change default background color from `FColors.background` to `FColors.popover`.
-* Change icon and title color from `FColors.primary` to `FColors.popoverForeground`.
-
-
-### `FToaster`
+* Change default background color to `card`.
 * Change `FToastAlignment` from an enum to final class to allow fine-grained control over positioning.
 
 
