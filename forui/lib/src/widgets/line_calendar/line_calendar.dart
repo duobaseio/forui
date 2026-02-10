@@ -220,54 +220,59 @@ class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
     return .new(
       decoration: .delta(
         BoxDecoration(
-          color: colors.background,
+          color: colors.card,
           border: .all(color: colors.border),
           borderRadius: style.borderRadius,
         ),
         variants: {
+          [.focused]: .delta(border: focusedBorder),
+          [.hovered, .pressed]: .delta(color: colors.secondary),
+          [.hovered.and(.focused), .pressed.and(.focused)]: .delta(color: colors.secondary, border: focusedBorder),
+          //
+          [.disabled]: .delta(color: colors.disable(colors.card)),
+          [.disabled.and(.focused)]: .delta(color: colors.disable(colors.card), border: focusedBorder),
           [.disabled.and(.selected).and(.focused)]: .delta(
             color: colors.disable(colors.primary),
             border: focusedBorder,
           ),
-          [.disabled.and(.selected)]: .delta(color: colors.disable(colors.primary)),
-          [.disabled.and(.focused)]: .delta(color: colors.disable(colors.background), border: focusedBorder),
-          [.disabled]: .delta(color: colors.disable(colors.background)),
+          //
+          [.selected]: .delta(color: colors.primary, border: null),
+          [.selected.and(.focused)]: .delta(color: colors.primary, border: focusedBorder),
+          [.selected.and(.hovered), .selected.and(.pressed)]: .delta(color: colors.hover(colors.primary), border: null),
           [.selected.and(.hovered).and(.focused), .selected.and(.pressed).and(.focused)]: .delta(
             color: colors.hover(colors.primary),
             border: focusedBorder,
           ),
-          [.selected.and(.hovered), .selected.and(.pressed)]: .delta(color: colors.hover(colors.primary), border: null),
-          [.selected.and(.focused)]: .delta(color: colors.primary, border: focusedBorder),
-          [.selected]: .delta(color: colors.primary, border: null),
-          [.hovered.and(.focused), .pressed.and(.focused)]: .delta(color: colors.secondary, border: focusedBorder),
-          [.hovered, .pressed]: .delta(color: colors.secondary),
-          [.focused]: .delta(border: focusedBorder),
+          [.selected.and(.disabled)]: .delta(color: colors.disable(colors.primary)),
         },
       ),
       todayIndicatorColor: FVariants(
-        colors.primary,
+        colors.foreground,
         variants: {
-          [.disabled.and(.selected)]: colors.disable(colors.primaryForeground),
-          [.disabled]: colors.disable(colors.mutedForeground),
-          [.selected.and(.hovered), .selected.and(.pressed)]: colors.hover(colors.primaryForeground),
+          [.hovered, .pressed]: colors.hover(colors.foreground),
+          [.disabled]: colors.disable(colors.foreground),
+          //
           [.selected]: colors.primaryForeground,
-          [.hovered, .pressed]: colors.hover(colors.primary),
+          [.selected.and(.disabled)]: colors.disable(colors.primaryForeground),
+          [.selected.and(.hovered), .selected.and(.pressed)]: colors.hover(colors.primaryForeground),
         },
       ),
       dateTextStyle: .delta(
-        typography.xl.copyWith(color: colors.primary, fontWeight: .w500, height: 0),
+        typography.xl.copyWith(color: colors.foreground, fontWeight: .w500, height: 0),
         variants: {
-          [.disabled.and(.selected)]: .delta(color: colors.disable(colors.primaryForeground)),
-          [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
+          [.disabled]: .delta(color: colors.disable(colors.foreground)),
+          //
           [.selected]: .delta(color: colors.primaryForeground),
+          [.selected.and(.disabled)]: .delta(color: colors.disable(colors.primaryForeground)),
         },
       ),
       weekdayTextStyle: .delta(
         typography.xs.copyWith(color: colors.mutedForeground, fontWeight: .w500, height: 0),
         variants: {
-          [.disabled.and(.selected)]: .delta(color: colors.disable(colors.primaryForeground)),
           [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
+          //
           [.selected]: .delta(color: colors.primaryForeground),
+          [.selected.and(.disabled)]: .delta(color: colors.disable(colors.primaryForeground)),
         },
       ),
       tappableStyle: style.tappableStyle,

@@ -272,6 +272,7 @@ are not available for most of these changes due to the tool's limitations.
 ### `FTextField` & `FTextFormField`
 * Add `FTextFieldStyle.iconStyle`.
 
+* Change default cursor color from blue to `primary`.
 * Change default background color to `card`.
 * Change `FTextFieldStyle.clearButtonStyle` to not bounce by default.
 * Change `FTextFieldStyle.obscureButtonStyle` to not bounce by default.
@@ -346,6 +347,7 @@ are not available for most of these changes due to the tool's limitations.
 * **Breaking** Remove `FWidgetStatesDelta`.
 * **Breaking** Remove `FValueNotifier` - use `ValueNotifier` instead.
 
+* Fix default styles across various widgets incorrectly using `primary` color.
 * Fix CLI incorrectly parsing `FStyle`.
 
 

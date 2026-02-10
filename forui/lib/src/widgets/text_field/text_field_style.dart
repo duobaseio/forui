@@ -26,15 +26,16 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
   @override
   final Brightness keyboardAppearance;
 
+  /// The fill color of the text-field.
+  @override
+  final FVariants<FTextFieldVariantConstraint, Color?, Delta> color;
+
+
   /// The color of the cursor. Defaults to [CupertinoColors.activeBlue].
   ///
   /// The cursor indicates the current location of text insertion point in the field.
   @override
   final Color cursorColor;
-
-  /// The fill color of the text-field.
-  @override
-  final FVariants<FTextFieldVariantConstraint, Color?, Delta> color;
 
   /// The padding surrounding this text field's content.
   ///
@@ -142,15 +143,16 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
           [.disabled]: colors.disable(colors.card),
         },
       ),
+      cursorColor: colors.primary,
       iconStyle: iconStyle,
       clearButtonStyle: bounceableButtonStyle,
       obscureButtonStyle: bounceableButtonStyle.copyWith(
         tappableStyle: const .delta(motion: .delta(bounceTween: FTappableMotion.noBounceTween)),
       ),
       contentTextStyle: .delta(
-        textStyle.copyWith(color: colors.primary),
+        textStyle.copyWith(color: colors.foreground),
         variants: {
-          [.disabled]: .delta(color: colors.disable(colors.primary)),
+          [.disabled]: .delta(color: colors.disable(colors.foreground)),
         },
       ),
       hintTextStyle: .delta(
@@ -160,9 +162,9 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
         },
       ),
       counterTextStyle: .delta(
-        textStyle.copyWith(color: colors.primary),
+        textStyle.copyWith(color: colors.foreground),
         variants: {
-          [.disabled]: .delta(color: colors.disable(colors.primary)),
+          [.disabled]: .delta(color: colors.disable(colors.foreground)),
         },
       ),
       border: FVariants(
@@ -171,20 +173,22 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
           borderRadius: style.borderRadius,
         ),
         variants: {
-          [.disabled.and(.error)]: OutlineInputBorder(
-            borderSide: BorderSide(color: colors.disable(colors.error), width: style.borderWidth),
+          [.focused]: OutlineInputBorder(
+            borderSide: BorderSide(color: colors.primary, width: style.borderWidth),
             borderRadius: style.borderRadius,
           ),
-          [.error]: OutlineInputBorder(
-            borderSide: BorderSide(color: colors.error, width: style.borderWidth),
-            borderRadius: style.borderRadius,
-          ),
+          //
           [.disabled]: OutlineInputBorder(
             borderSide: BorderSide(color: colors.disable(colors.border), width: style.borderWidth),
             borderRadius: style.borderRadius,
           ),
-          [.focused]: OutlineInputBorder(
-            borderSide: BorderSide(color: colors.primary, width: style.borderWidth),
+          //
+          [.error]: OutlineInputBorder(
+            borderSide: BorderSide(color: colors.error, width: style.borderWidth),
+            borderRadius: style.borderRadius,
+          ),
+          [.error.and(.disabled)]: OutlineInputBorder(
+            borderSide: BorderSide(color: colors.disable(colors.error), width: style.borderWidth),
             borderRadius: style.borderRadius,
           ),
         },

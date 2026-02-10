@@ -280,11 +280,12 @@ class FSelectGroupStyle extends FLabelStyle with Diagnosticable, _$FSelectGroupS
     final vertical = FLabelStyles.inherit(style: style).verticalStyle;
 
     final itemLabelTextStyle = FVariants<FFormFieldVariantConstraint, TextStyle, TextStyleDelta>.delta(
-      typography.sm.copyWith(color: colors.primary, fontWeight: .w500),
+      typography.sm.copyWith(color: colors.foreground, fontWeight: .w500),
       variants: {
+        [.disabled]: .delta(color: colors.disable(colors.foreground)),
+        //
         [.error]: .delta(color: colors.error),
-        [.disabled]: .delta(color: colors.disable(colors.primary)),
-        [.disabled.and(.error)]: .delta(color: colors.disable(colors.error)),
+        [.error.and(.disabled)]: .delta(color: colors.disable(colors.error)),
       },
     );
     final itemDescriptionTextStyle = FVariants<FFormFieldVariantConstraint, TextStyle, TextStyleDelta>.delta(

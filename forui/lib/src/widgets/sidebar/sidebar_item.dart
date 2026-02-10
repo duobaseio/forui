@@ -361,8 +361,8 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
         backgroundColor: FVariants(
           Colors.transparent,
           variants: {
+            [.selected, .hovered, .pressed]: colors.secondary,
             [.disabled]: Colors.transparent,
-            [.selected, .hovered, .pressed]: colors.hover(colors.secondary),
           },
         ),
         borderRadius: style.borderRadius,

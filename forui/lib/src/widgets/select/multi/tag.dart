@@ -190,11 +190,12 @@ class FMultiSelectTagStyle with Diagnosticable, _$FMultiSelectTagStyleFunctions 
         decoration: FVariants(
           BoxDecoration(borderRadius: style.borderRadius, color: colors.secondary),
           variants: {
-            [.disabled]: BoxDecoration(borderRadius: style.borderRadius, color: colors.disable(colors.secondary)),
             [.hovered, .pressed]: BoxDecoration(
               borderRadius: style.borderRadius,
               color: colors.hover(colors.secondary),
             ),
+            //
+            [.disabled]: BoxDecoration(borderRadius: style.borderRadius, color: colors.disable(colors.secondary)),
           },
         ),
         labelTextStyle: .delta(

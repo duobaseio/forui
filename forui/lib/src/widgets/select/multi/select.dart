@@ -933,25 +933,27 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
           color: colors.card,
         ),
         variants: {
-          [.disabled.and(.error)]: BoxDecoration(
-            border: .all(color: colors.disable(colors.error), width: style.borderWidth),
-            borderRadius: style.borderRadius,
-            color: colors.disable(colors.card),
-          ),
-          [.error]: BoxDecoration(
-            border: .all(color: colors.error, width: style.borderWidth),
+          [.focused]: BoxDecoration(
+            border: .all(color: colors.primary, width: style.borderWidth),
             borderRadius: style.borderRadius,
             color: colors.card,
           ),
+          //
           [.disabled]: BoxDecoration(
             border: .all(color: colors.disable(colors.border), width: style.borderWidth),
             borderRadius: style.borderRadius,
             color: colors.card,
           ),
-          [.focused]: BoxDecoration(
-            border: .all(color: colors.primary, width: style.borderWidth),
+          //
+          [.error]: BoxDecoration(
+            border: .all(color: colors.error, width: style.borderWidth),
             borderRadius: style.borderRadius,
             color: colors.card,
+          ),
+          [.error.and(.disabled)]: BoxDecoration(
+            border: .all(color: colors.disable(colors.error), width: style.borderWidth),
+            borderRadius: style.borderRadius,
+            color: colors.disable(colors.card),
           ),
         },
       ),

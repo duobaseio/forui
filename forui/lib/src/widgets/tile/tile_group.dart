@@ -404,11 +404,11 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
         dividerWidth: style.borderWidth,
         labelTextStyle: .delta(
           typography.base.copyWith(
-            color: style.formFieldStyle.labelTextStyle.base.color ?? colors.primary,
+            color: style.formFieldStyle.labelTextStyle.base.color ?? colors.foreground,
             fontWeight: .w600,
           ),
           variants: {
-            [.disabled]: .delta(color: colors.disable(colors.primary)),
+            [.disabled]: .delta(color: colors.disable(colors.foreground)),
           },
         ),
         tileStyles: .delta(
@@ -420,16 +420,17 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
           variants: {
             [.destructive]: .delta(
               contentStyle: FItemContentStyle.inherit(
+                colors: colors,
                 typography: typography,
+                prefix: colors.destructive,
                 foreground: colors.destructive,
                 mutedForeground: colors.destructive,
-                disabledForeground: colors.disable(colors.destructive),
-                disabledMutedForeground: colors.disable(colors.destructive),
               ),
               rawItemContentStyle: FRawItemContentStyle.inherit(
+                colors: colors,
                 typography: typography,
-                enabled: colors.destructive,
-                disabled: colors.disable(colors.destructive),
+                prefix: colors.destructive,
+                color: colors.destructive,
               ),
             ),
           },

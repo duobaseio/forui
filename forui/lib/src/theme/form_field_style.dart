@@ -40,10 +40,10 @@ class FFormFieldStyle with Diagnosticable, _$FFormFieldStyleFunctions {
   /// Creates a [FFormFieldStyle] that inherits its properties.
   FFormFieldStyle.inherit({required FColors colors, required FTypography typography})
     : labelTextStyle = .delta(
-        typography.sm.copyWith(color: colors.primary, fontWeight: .w600),
+        typography.sm.copyWith(color: colors.foreground, fontWeight: .w600),
         variants: {
           [.error]: .delta(color: colors.error),
-          [.disabled]: .delta(color: colors.disable(colors.primary)),
+          [.disabled]: .delta(color: colors.disable(colors.foreground)),
           [.disabled.and(.error)]: .delta(color: colors.disable(colors.error)),
         },
       ),

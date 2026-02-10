@@ -476,12 +476,10 @@ class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
         textStyle: .delta(
           typography.sm.copyWith(fontWeight: .w400, color: colors.mutedForeground),
           variants: {
-            [.selected.and(.hovered), .selected.and(.pressed)]: .delta(
-              color: colors.foreground,
-              decoration: .underline,
-            ),
+            [.hovered, .pressed]: .delta(color: colors.foreground),
+            //
             [.selected]: .delta(color: colors.foreground),
-            [.hovered, .pressed]: .delta(color: colors.foreground, decoration: .underline),
+            [.selected.and(.hovered), .selected.and(.pressed)]: .delta(color: colors.hover(colors.foreground)),
           },
         ),
         iconStyle: IconThemeData(color: colors.mutedForeground, size: 16),

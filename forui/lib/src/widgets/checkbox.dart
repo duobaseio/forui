@@ -218,31 +218,34 @@ class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
       iconStyle: .delta(
         IconThemeData(color: colors.primaryForeground, size: 14),
         variants: {
-          [.disabled.and(.error)]: .delta(color: colors.disable(colors.errorForeground)),
-          [.error]: .delta(color: colors.errorForeground),
           [.disabled]: .delta(color: colors.disable(colors.primaryForeground)),
+          //
+          [.error]: .delta(color: colors.errorForeground),
+          [.error.and(.disabled)]: .delta(color: colors.disable(colors.errorForeground)),
         },
       ),
       decoration: .delta(
         BoxDecoration(
           borderRadius: style.borderRadius,
-          border: .all(color: colors.primary, width: 0.6),
+          border: .all(color: colors.mutedForeground, width: 0.6),
           color: colors.background,
         ),
         variants: {
-          [.disabled.and(.error).and(.selected)]: .delta(border: null, color: colors.disable(colors.error)),
-          [.disabled.and(.error)]: .delta(
+          [.disabled]: .delta(
+            border: .all(color: colors.disable(colors.mutedForeground), width: 0.6),
+            color: colors.disable(colors.background),
+          ),
+          //
+          [.selected]: .delta(border: null, color: colors.primary),
+          [.selected.and(.disabled)]: .delta(border: null, color: colors.disable(colors.primary)),
+          //
+          [.error]: .delta(border: .all(color: colors.error, width: 0.6)),
+          [.error.and(.disabled)]: .delta(
             border: .all(color: colors.disable(colors.error), width: 0.6),
             color: colors.disable(colors.background),
           ),
           [.error.and(.selected)]: .delta(border: null, color: colors.error),
-          [.error]: .delta(border: .all(color: colors.error, width: 0.6)),
-          [.disabled.and(.selected)]: .delta(border: null, color: colors.disable(colors.primary)),
-          [.disabled]: .delta(
-            border: .all(color: colors.disable(colors.primary), width: 0.6),
-            color: colors.disable(colors.background),
-          ),
-          [.selected]: .delta(border: null, color: colors.primary),
+          [.error.and(.disabled).and(.selected)]: .delta(border: null, color: colors.disable(colors.error)),
         },
       ),
       labelTextStyle: style.formFieldStyle.labelTextStyle,

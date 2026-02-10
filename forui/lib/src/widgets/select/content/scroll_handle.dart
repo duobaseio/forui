@@ -165,7 +165,7 @@ class FSelectScrollHandleStyle with Diagnosticable, _$FSelectScrollHandleStyleFu
   /// Creates a [FSelectScrollHandleStyle] that inherits its properties.
   FSelectScrollHandleStyle.inherit({required FColors colors})
     : this(
-        iconStyle: IconThemeData(color: colors.primary, size: 17),
+        iconStyle: IconThemeData(color: colors.foreground, size: 17),
         background: colors.card,
       );
 }

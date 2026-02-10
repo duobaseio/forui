@@ -311,16 +311,17 @@ extension type FTileStyles._(FVariants<FItemVariantConstraint, FTileStyle, FTile
           variants: {
             [.destructive]: .delta(
               contentStyle: FItemContentStyle.inherit(
+                colors: colors,
                 typography: typography,
+                prefix: colors.destructive,
                 foreground: colors.destructive,
                 mutedForeground: colors.destructive,
-                disabledForeground: colors.disable(colors.destructive),
-                disabledMutedForeground: colors.disable(colors.destructive),
               ),
               rawItemContentStyle: FRawItemContentStyle.inherit(
+                colors: colors,
                 typography: typography,
-                enabled: colors.destructive,
-                disabled: colors.disable(colors.destructive),
+                prefix: colors.destructive,
+                color: colors.destructive,
               ),
             ),
           },
@@ -357,8 +358,9 @@ class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
             borderRadius: style.borderRadius,
           ),
           variants: {
-            [.disabled]: .delta(color: colors.disable(colors.secondary)),
             [.hovered, .pressed]: .delta(color: colors.secondary),
+            //
+            [.disabled]: .delta(color: colors.disable(colors.secondary)),
           },
         ),
         contentStyle: FItemContentStyle(
@@ -372,7 +374,7 @@ class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
           titleTextStyle: .delta(
             typography.base,
             variants: {
-              [.disabled]: .delta(color: colors.disable(colors.primary)),
+              [.disabled]: .delta(color: colors.disable(colors.foreground)),
             },
           ),
           subtitleTextStyle: .delta(
@@ -405,7 +407,7 @@ class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
           childTextStyle: .delta(
             typography.base,
             variants: {
-              [.disabled]: .delta(color: colors.disable(colors.primary)),
+              [.disabled]: .delta(color: colors.disable(colors.foreground)),
             },
           ),
         ),
