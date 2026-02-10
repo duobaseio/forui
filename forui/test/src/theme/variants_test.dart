@@ -48,6 +48,20 @@ void main() {
       expect(result.variants[a]?.color?.r, closeTo(0.5, 0.01));
     });
 
+    test('lerpDecoration', () {
+      final first = createVariants<FVariant, Decoration, Delta>(const BoxDecoration(color: Color(0xFF000000)), {
+        a: const BoxDecoration(color: Color(0xFF000000)),
+      });
+      final second = createVariants<FVariant, Decoration, Delta>(const BoxDecoration(color: Color(0xFFFFFFFF)), {
+        a: const BoxDecoration(color: Color(0xFFFFFFFF)),
+      });
+
+      final result = FVariants.lerpDecoration(first, second, 0.5);
+
+      expect((result.base as BoxDecoration).color?.r, closeTo(0.5, 0.01));
+      expect((result.variants[a] as BoxDecoration?)?.color?.r, closeTo(0.5, 0.01));
+    });
+
     test('lerpColor', () {
       final first = createVariants<FVariant, Color, Delta>(const Color(0xFF000000), {a: const Color(0xFF000000)});
       final second = createVariants<FVariant, Color, Delta>(const Color(0xFFFFFFFF), {a: const Color(0xFFFFFFFF)});

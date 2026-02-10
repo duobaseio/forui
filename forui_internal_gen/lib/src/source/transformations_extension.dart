@@ -1,5 +1,4 @@
 import 'package:analyzer/dart/element/element.dart';
-import 'package:analyzer/dart/element/type.dart';
 import 'package:build/build.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:forui_internal_gen/src/source/docs.dart';
@@ -88,18 +87,5 @@ class TransformationsExtension {
     );
   }
 
-  /// Checks if the type is a nested motion.
-  @protected
-  bool nestedMotion(DartType type) {
-    final typeName = type.getDisplayString();
-    return typeName.startsWith('F') && typeName.endsWith('Motion');
-  }
 
-  /// Checks if the type is a nested style.
-  @protected
-  bool nestedStyle(DartType type) {
-    final typeName = type.getDisplayString();
-    return (typeName.startsWith('F') && !typeName.startsWith('FInherited')) &&
-        (typeName.endsWith('Style') || typeName.endsWith('Styles'));
-  }
 }

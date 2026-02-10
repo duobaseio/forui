@@ -36,26 +36,20 @@ class FGoldenStyle with Diagnosticable, _$FGoldenStyleFunctions {
   final List<Shadow> shadows;
   final FVariants<FGoldenVariantConstraint, BoxDecoration, BoxDecorationDelta> boxDecorationVariants;
   final FVariants<FGoldenVariantConstraint, BoxDecoration?, BoxDecorationDelta> nullableBoxDecorationVariants;
+  final FVariants<FGoldenVariantConstraint, Decoration, Delta> decorationVariants;
+  final FVariants<FGoldenVariantConstraint, Decoration?, Delta> nullableDecorationVariants;
   final FVariants<FGoldenVariantConstraint, Color, Delta> colorVariants;
   final FVariants<FGoldenVariantConstraint, Color?, Delta> nullableColorVariants;
   final FVariants<FGoldenVariantConstraint, IconThemeData, IconThemeDataDelta> iconThemeDataVariants;
   final FVariants<FGoldenVariantConstraint, IconThemeData?, IconThemeDataDelta> nullableIconThemeDataVariants;
   final FVariants<FGoldenVariantConstraint, TextStyle, TextStyleDelta> textStyleVariants;
   final FVariants<FGoldenVariantConstraint, TextStyle?, TextStyleDelta> nullableTextStyleVariants;
+  final FVariants<FGoldenVariantConstraint, FGoldenNestedMotion, FGoldenNestedMotionDelta> nestedMotionVariants;
   final FGoldenNestedMotion nestedMotion;
   final FGoldenNestedStyle nestedStyle;
   final List<String> list;
   final Set<String> set;
   final Map<String, int> map;
-
-  /// Variants with generic delta.
-  /// * [FGoldenVariantConstraint]
-  final FVariants<FGoldenVariantConstraint, Color, Delta> variantsWithGenericDelta;
-
-  /// Variants with specific delta.
-  /// * [FGoldenVariantConstraint]
-  final FVariants<FGoldenVariantConstraint, TextStyle, TextStyleDelta> variantsWithSpecificDelta;
-
   FGoldenStyle({
     required this.someDouble,
     required this.alignment,
@@ -75,19 +69,20 @@ class FGoldenStyle with Diagnosticable, _$FGoldenStyleFunctions {
     required this.shadows,
     required this.boxDecorationVariants,
     required this.nullableBoxDecorationVariants,
+    required this.decorationVariants,
+    required this.nullableDecorationVariants,
     required this.colorVariants,
     required this.nullableColorVariants,
     required this.iconThemeDataVariants,
     required this.nullableIconThemeDataVariants,
     required this.textStyleVariants,
     required this.nullableTextStyleVariants,
+    required this.nestedMotionVariants,
     required this.nestedMotion,
     required this.nestedStyle,
     required this.list,
     required this.set,
     required this.map,
-    required this.variantsWithGenericDelta,
-    required this.variantsWithSpecificDelta,
   });
 }
 

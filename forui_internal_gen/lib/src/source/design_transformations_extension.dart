@@ -4,6 +4,7 @@ import 'package:analyzer/dart/element/type.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:forui_internal_gen/src/source/transformations_extension.dart';
 import 'package:forui_internal_gen/src/source/types.dart';
+import 'package:meta/meta.dart';
 
 /// Generates a [TransformationsExtension] that provides `copyWith` and `lerp` methods.
 class DesignTransformationsExtension extends TransformationsExtension {
@@ -23,6 +24,7 @@ class DesignTransformationsExtension extends TransformationsExtension {
   Future<Method> get _lerp async {
     Future<String> invocation(FieldElement field) async {
       final type = field.type;
+      final typeName = type.getDisplayString();
       final name = field.name!;
 
       // DO NOT REORDER, we need the subclass (Alignment) to dominate the superclass (AlignmentGeometry) pattern.
@@ -36,7 +38,7 @@ class DesignTransformationsExtension extends TransformationsExtension {
                 textStyle.isAssignableFromType(type) =>
           '.lerp($name, other.$name, t) ?? $name',
         //
-        _  when color.isAssignableFromType(type) => 'FColors.lerpColor($name, other.$name, t) ?? $name',
+        _ when color.isAssignableFromType(type) => 'FColors.lerpColor($name, other.$name, t) ?? $name',
         //
         _ when iconThemeData.isAssignableFromType(type) => '.lerp($name, other.$name, t)',
         //
@@ -54,19 +56,23 @@ class DesignTransformationsExtension extends TransformationsExtension {
             return switch (typeArguments.arguments[1].toSource()) {
               'BoxDecoration' => '.lerpBoxDecoration($name, other.$name, t)',
               'BoxDecoration?' => '.lerpWhere($name, other.$name, t, BoxDecoration.lerp)',
+              'Decoration' => '.lerpDecoration($name, other.$name, t)',
+              'Decoration?' => '.lerpWhere($name, other.$name, t, Decoration.lerp)',
               'Color' => '.lerpColor($name, other.$name, t)',
               'Color?' => '.lerpWhere($name, other.$name, t, Color.lerp)',
               'IconThemeData' => '.lerpIconThemeData($name, other.$name, t)',
               'IconThemeData?' => '.lerpWhere($name, other.$name, t, IconThemeData.lerp)',
               'TextStyle' => '.lerpTextStyle($name, other.$name, t)',
               'TextStyle?' => '.lerpWhere($name, other.$name, t, TextStyle.lerp)',
+              final nested when nestedMotion(nested) || nestedStyle(nested) =>
+                '.lerpWhere($name, other.$name, t, (a, b, t) => a!.lerp(b!, t))',
               _ => 't < 0.5 ? $name : other.$name',
             };
           }
           return 't < 0.5 ? $name : other.$name';
         }(),
         // Nested motion/style
-        _ when nestedMotion(type) || nestedStyle(type) => '$name.lerp(other.$name, t)',
+        _ when nestedMotion(typeName) || nestedStyle(typeName) => '$name.lerp(other.$name, t)',
         //
         _ => 't < 0.5 ? $name : other.$name',
       };
@@ -99,4 +105,13 @@ class DesignTransformationsExtension extends TransformationsExtension {
         ..body = Code('.new($assignments)\n'),
     );
   }
+
+  /// Checks if the type is a nested motion.
+  @protected
+  bool nestedMotion(String type) => type.startsWith('F') && type.endsWith('Motion');
+
+  /// Checks if the type is a nested style.
+  @protected
+  bool nestedStyle(String type) =>
+      (type.startsWith('F') && !type.startsWith('FInherited')) && (type.endsWith('Style') || type.endsWith('Styles'));
 }

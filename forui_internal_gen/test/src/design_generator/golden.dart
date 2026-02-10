@@ -115,19 +115,20 @@ extension $FGoldenStyleTransformations on FGoldenStyle {
   /// * [FGoldenStyle.shadows]
   /// * [FGoldenStyle.boxDecorationVariants]
   /// * [FGoldenStyle.nullableBoxDecorationVariants]
+  /// * [FGoldenStyle.decorationVariants]
+  /// * [FGoldenStyle.nullableDecorationVariants]
   /// * [FGoldenStyle.colorVariants]
   /// * [FGoldenStyle.nullableColorVariants]
   /// * [FGoldenStyle.iconThemeDataVariants]
   /// * [FGoldenStyle.nullableIconThemeDataVariants]
   /// * [FGoldenStyle.textStyleVariants]
   /// * [FGoldenStyle.nullableTextStyleVariants]
+  /// * [FGoldenStyle.nestedMotionVariants]
   /// * [FGoldenStyle.nestedMotion]
   /// * [FGoldenStyle.nestedStyle]
   /// * [FGoldenStyle.list]
   /// * [FGoldenStyle.set]
   /// * [FGoldenStyle.map]
-  /// * [FGoldenStyle.variantsWithGenericDelta] - Variants with generic delta.
-  /// * [FGoldenStyle.variantsWithSpecificDelta] - Variants with specific delta.
   @useResult
   FGoldenStyle copyWith({
     double someDouble = double.infinity,
@@ -149,6 +150,8 @@ extension $FGoldenStyleTransformations on FGoldenStyle {
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration, BoxDecorationDelta>? boxDecorationVariants,
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration?, BoxDecorationDelta>?
     nullableBoxDecorationVariants,
+    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration>? decorationVariants,
+    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration?>? nullableDecorationVariants,
     FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color>? colorVariants,
     FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color?>? nullableColorVariants,
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, IconThemeData, IconThemeDataDelta>? iconThemeDataVariants,
@@ -156,13 +159,13 @@ extension $FGoldenStyleTransformations on FGoldenStyle {
     nullableIconThemeDataVariants,
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, TextStyle, TextStyleDelta>? textStyleVariants,
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, TextStyle?, TextStyleDelta>? nullableTextStyleVariants,
+    FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, FGoldenNestedMotion, FGoldenNestedMotionDelta>?
+    nestedMotionVariants,
     FGoldenNestedMotionDelta? nestedMotion,
     FGoldenNestedStyleDelta? nestedStyle,
     List<String>? list,
     Set<String>? set,
     Map<String, int>? map,
-    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color>? variantsWithGenericDelta,
-    FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, TextStyle, TextStyleDelta>? variantsWithSpecificDelta,
   }) => .new(
     someDouble: someDouble == double.infinity ? this.someDouble : someDouble,
     alignment: alignment ?? this.alignment,
@@ -183,6 +186,9 @@ extension $FGoldenStyleTransformations on FGoldenStyle {
     boxDecorationVariants: boxDecorationVariants?.call(this.boxDecorationVariants) ?? this.boxDecorationVariants,
     nullableBoxDecorationVariants:
         nullableBoxDecorationVariants?.call(this.nullableBoxDecorationVariants) ?? this.nullableBoxDecorationVariants,
+    decorationVariants: decorationVariants?.call(this.decorationVariants) ?? this.decorationVariants,
+    nullableDecorationVariants:
+        nullableDecorationVariants?.call(this.nullableDecorationVariants) ?? this.nullableDecorationVariants,
     colorVariants: colorVariants?.call(this.colorVariants) ?? this.colorVariants,
     nullableColorVariants: nullableColorVariants?.call(this.nullableColorVariants) ?? this.nullableColorVariants,
     iconThemeDataVariants: iconThemeDataVariants?.call(this.iconThemeDataVariants) ?? this.iconThemeDataVariants,
@@ -191,15 +197,12 @@ extension $FGoldenStyleTransformations on FGoldenStyle {
     textStyleVariants: textStyleVariants?.call(this.textStyleVariants) ?? this.textStyleVariants,
     nullableTextStyleVariants:
         nullableTextStyleVariants?.call(this.nullableTextStyleVariants) ?? this.nullableTextStyleVariants,
+    nestedMotionVariants: nestedMotionVariants?.call(this.nestedMotionVariants) ?? this.nestedMotionVariants,
     nestedMotion: nestedMotion?.call(this.nestedMotion) ?? this.nestedMotion,
     nestedStyle: nestedStyle?.call(this.nestedStyle) ?? this.nestedStyle,
     list: list ?? this.list,
     set: set ?? this.set,
     map: map ?? this.map,
-    variantsWithGenericDelta:
-        variantsWithGenericDelta?.call(this.variantsWithGenericDelta) ?? this.variantsWithGenericDelta,
-    variantsWithSpecificDelta:
-        variantsWithSpecificDelta?.call(this.variantsWithSpecificDelta) ?? this.variantsWithSpecificDelta,
   );
 
   /// Linearly interpolate between this and another [FGoldenStyle] using the given factor [t].
@@ -228,6 +231,13 @@ extension $FGoldenStyleTransformations on FGoldenStyle {
       t,
       BoxDecoration.lerp,
     ),
+    decorationVariants: .lerpDecoration(decorationVariants, other.decorationVariants, t),
+    nullableDecorationVariants: .lerpWhere(
+      nullableDecorationVariants,
+      other.nullableDecorationVariants,
+      t,
+      Decoration.lerp,
+    ),
     colorVariants: .lerpColor(colorVariants, other.colorVariants, t),
     nullableColorVariants: .lerpWhere(nullableColorVariants, other.nullableColorVariants, t, Color.lerp),
     iconThemeDataVariants: .lerpIconThemeData(iconThemeDataVariants, other.iconThemeDataVariants, t),
@@ -244,13 +254,12 @@ extension $FGoldenStyleTransformations on FGoldenStyle {
       t,
       TextStyle.lerp,
     ),
+    nestedMotionVariants: .lerpWhere(nestedMotionVariants, other.nestedMotionVariants, t, (a, b, t) => a!.lerp(b!, t)),
     nestedMotion: nestedMotion.lerp(other.nestedMotion, t),
     nestedStyle: nestedStyle.lerp(other.nestedStyle, t),
     list: t < 0.5 ? list : other.list,
     set: t < 0.5 ? set : other.set,
     map: t < 0.5 ? map : other.map,
-    variantsWithGenericDelta: .lerpColor(variantsWithGenericDelta, other.variantsWithGenericDelta, t),
-    variantsWithSpecificDelta: .lerpTextStyle(variantsWithSpecificDelta, other.variantsWithSpecificDelta, t),
   );
 }
 
@@ -277,19 +286,20 @@ mixin _$FGoldenStyleFunctions on Diagnosticable implements FGoldenStyleDelta {
   List<Shadow> get shadows;
   FVariants<FGoldenVariantConstraint, BoxDecoration, BoxDecorationDelta> get boxDecorationVariants;
   FVariants<FGoldenVariantConstraint, BoxDecoration?, BoxDecorationDelta> get nullableBoxDecorationVariants;
+  FVariants<FGoldenVariantConstraint, Decoration, Delta> get decorationVariants;
+  FVariants<FGoldenVariantConstraint, Decoration?, Delta> get nullableDecorationVariants;
   FVariants<FGoldenVariantConstraint, Color, Delta> get colorVariants;
   FVariants<FGoldenVariantConstraint, Color?, Delta> get nullableColorVariants;
   FVariants<FGoldenVariantConstraint, IconThemeData, IconThemeDataDelta> get iconThemeDataVariants;
   FVariants<FGoldenVariantConstraint, IconThemeData?, IconThemeDataDelta> get nullableIconThemeDataVariants;
   FVariants<FGoldenVariantConstraint, TextStyle, TextStyleDelta> get textStyleVariants;
   FVariants<FGoldenVariantConstraint, TextStyle?, TextStyleDelta> get nullableTextStyleVariants;
+  FVariants<FGoldenVariantConstraint, FGoldenNestedMotion, FGoldenNestedMotionDelta> get nestedMotionVariants;
   FGoldenNestedMotion get nestedMotion;
   FGoldenNestedStyle get nestedStyle;
   List<String> get list;
   Set<String> get set;
   Map<String, int> get map;
-  FVariants<FGoldenVariantConstraint, Color, Delta> get variantsWithGenericDelta;
-  FVariants<FGoldenVariantConstraint, TextStyle, TextStyleDelta> get variantsWithSpecificDelta;
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
@@ -312,19 +322,20 @@ mixin _$FGoldenStyleFunctions on Diagnosticable implements FGoldenStyleDelta {
       ..add(IterableProperty('shadows', shadows, level: .debug))
       ..add(DiagnosticsProperty('boxDecorationVariants', boxDecorationVariants, level: .debug))
       ..add(DiagnosticsProperty('nullableBoxDecorationVariants', nullableBoxDecorationVariants, level: .debug))
+      ..add(DiagnosticsProperty('decorationVariants', decorationVariants, level: .debug))
+      ..add(DiagnosticsProperty('nullableDecorationVariants', nullableDecorationVariants, level: .debug))
       ..add(DiagnosticsProperty('colorVariants', colorVariants, level: .debug))
       ..add(DiagnosticsProperty('nullableColorVariants', nullableColorVariants, level: .debug))
       ..add(DiagnosticsProperty('iconThemeDataVariants', iconThemeDataVariants, level: .debug))
       ..add(DiagnosticsProperty('nullableIconThemeDataVariants', nullableIconThemeDataVariants, level: .debug))
       ..add(DiagnosticsProperty('textStyleVariants', textStyleVariants, level: .debug))
       ..add(DiagnosticsProperty('nullableTextStyleVariants', nullableTextStyleVariants, level: .debug))
+      ..add(DiagnosticsProperty('nestedMotionVariants', nestedMotionVariants, level: .debug))
       ..add(DiagnosticsProperty('nestedMotion', nestedMotion, level: .debug))
       ..add(DiagnosticsProperty('nestedStyle', nestedStyle, level: .debug))
       ..add(IterableProperty('list', list, level: .debug))
       ..add(IterableProperty('set', set, level: .debug))
-      ..add(DiagnosticsProperty('map', map, level: .debug))
-      ..add(DiagnosticsProperty('variantsWithGenericDelta', variantsWithGenericDelta, level: .debug))
-      ..add(DiagnosticsProperty('variantsWithSpecificDelta', variantsWithSpecificDelta, level: .debug));
+      ..add(DiagnosticsProperty('map', map, level: .debug));
   }
 
   @override
@@ -350,19 +361,20 @@ mixin _$FGoldenStyleFunctions on Diagnosticable implements FGoldenStyleDelta {
           listEquals(shadows, other.shadows) &&
           boxDecorationVariants == other.boxDecorationVariants &&
           nullableBoxDecorationVariants == other.nullableBoxDecorationVariants &&
+          decorationVariants == other.decorationVariants &&
+          nullableDecorationVariants == other.nullableDecorationVariants &&
           colorVariants == other.colorVariants &&
           nullableColorVariants == other.nullableColorVariants &&
           iconThemeDataVariants == other.iconThemeDataVariants &&
           nullableIconThemeDataVariants == other.nullableIconThemeDataVariants &&
           textStyleVariants == other.textStyleVariants &&
           nullableTextStyleVariants == other.nullableTextStyleVariants &&
+          nestedMotionVariants == other.nestedMotionVariants &&
           nestedMotion == other.nestedMotion &&
           nestedStyle == other.nestedStyle &&
           listEquals(list, other.list) &&
           setEquals(set, other.set) &&
-          mapEquals(map, other.map) &&
-          variantsWithGenericDelta == other.variantsWithGenericDelta &&
-          variantsWithSpecificDelta == other.variantsWithSpecificDelta);
+          mapEquals(map, other.map));
 
   @override
   int get hashCode =>
@@ -384,19 +396,20 @@ mixin _$FGoldenStyleFunctions on Diagnosticable implements FGoldenStyleDelta {
       const ListEquality().hash(shadows) ^
       boxDecorationVariants.hashCode ^
       nullableBoxDecorationVariants.hashCode ^
+      decorationVariants.hashCode ^
+      nullableDecorationVariants.hashCode ^
       colorVariants.hashCode ^
       nullableColorVariants.hashCode ^
       iconThemeDataVariants.hashCode ^
       nullableIconThemeDataVariants.hashCode ^
       textStyleVariants.hashCode ^
       nullableTextStyleVariants.hashCode ^
+      nestedMotionVariants.hashCode ^
       nestedMotion.hashCode ^
       nestedStyle.hashCode ^
       const ListEquality().hash(list) ^
       const SetEquality().hash(set) ^
-      const MapEquality().hash(map) ^
-      variantsWithGenericDelta.hashCode ^
-      variantsWithSpecificDelta.hashCode;
+      const MapEquality().hash(map);
 }
 
 /// A delta that applies modifications to a [FGoldenStyle].
@@ -427,19 +440,20 @@ sealed class FGoldenStyleDelta with Delta {
   /// * [FGoldenStyle.shadows]
   /// * [FGoldenStyle.boxDecorationVariants]
   /// * [FGoldenStyle.nullableBoxDecorationVariants]
+  /// * [FGoldenStyle.decorationVariants]
+  /// * [FGoldenStyle.nullableDecorationVariants]
   /// * [FGoldenStyle.colorVariants]
   /// * [FGoldenStyle.nullableColorVariants]
   /// * [FGoldenStyle.iconThemeDataVariants]
   /// * [FGoldenStyle.nullableIconThemeDataVariants]
   /// * [FGoldenStyle.textStyleVariants]
   /// * [FGoldenStyle.nullableTextStyleVariants]
+  /// * [FGoldenStyle.nestedMotionVariants]
   /// * [FGoldenStyle.nestedMotion]
   /// * [FGoldenStyle.nestedStyle]
   /// * [FGoldenStyle.list]
   /// * [FGoldenStyle.set]
   /// * [FGoldenStyle.map]
-  /// * [FGoldenStyle.variantsWithGenericDelta] - Variants with generic delta.
-  /// * [FGoldenStyle.variantsWithSpecificDelta] - Variants with specific delta.
   const factory FGoldenStyleDelta.delta({
     double someDouble,
     Alignment? alignment,
@@ -460,6 +474,8 @@ sealed class FGoldenStyleDelta with Delta {
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration, BoxDecorationDelta>? boxDecorationVariants,
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration?, BoxDecorationDelta>?
     nullableBoxDecorationVariants,
+    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration>? decorationVariants,
+    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration?>? nullableDecorationVariants,
     FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color>? colorVariants,
     FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color?>? nullableColorVariants,
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, IconThemeData, IconThemeDataDelta>? iconThemeDataVariants,
@@ -467,13 +483,13 @@ sealed class FGoldenStyleDelta with Delta {
     nullableIconThemeDataVariants,
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, TextStyle, TextStyleDelta>? textStyleVariants,
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, TextStyle?, TextStyleDelta>? nullableTextStyleVariants,
+    FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, FGoldenNestedMotion, FGoldenNestedMotionDelta>?
+    nestedMotionVariants,
     FGoldenNestedMotionDelta? nestedMotion,
     FGoldenNestedStyleDelta? nestedStyle,
     List<String>? list,
     Set<String>? set,
     Map<String, int>? map,
-    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color>? variantsWithGenericDelta,
-    FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, TextStyle, TextStyleDelta>? variantsWithSpecificDelta,
   }) = _FGoldenStyleDelta;
 
   @override
@@ -507,19 +523,20 @@ class _FGoldenStyleDelta implements FGoldenStyleDelta {
     this.shadows,
     this.boxDecorationVariants,
     this.nullableBoxDecorationVariants,
+    this.decorationVariants,
+    this.nullableDecorationVariants,
     this.colorVariants,
     this.nullableColorVariants,
     this.iconThemeDataVariants,
     this.nullableIconThemeDataVariants,
     this.textStyleVariants,
     this.nullableTextStyleVariants,
+    this.nestedMotionVariants,
     this.nestedMotion,
     this.nestedStyle,
     this.list,
     this.set,
     this.map,
-    this.variantsWithGenericDelta,
-    this.variantsWithSpecificDelta,
   });
 
   final double someDouble;
@@ -560,6 +577,10 @@ class _FGoldenStyleDelta implements FGoldenStyleDelta {
   final FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration?, BoxDecorationDelta>?
   nullableBoxDecorationVariants;
 
+  final FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration>? decorationVariants;
+
+  final FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration?>? nullableDecorationVariants;
+
   final FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color>? colorVariants;
 
   final FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color?>? nullableColorVariants;
@@ -574,6 +595,9 @@ class _FGoldenStyleDelta implements FGoldenStyleDelta {
 
   final FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, TextStyle?, TextStyleDelta>? nullableTextStyleVariants;
 
+  final FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, FGoldenNestedMotion, FGoldenNestedMotionDelta>?
+  nestedMotionVariants;
+
   final FGoldenNestedMotionDelta? nestedMotion;
 
   final FGoldenNestedStyleDelta? nestedStyle;
@@ -583,10 +607,6 @@ class _FGoldenStyleDelta implements FGoldenStyleDelta {
   final Set<String>? set;
 
   final Map<String, int>? map;
-
-  final FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color>? variantsWithGenericDelta;
-
-  final FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, TextStyle, TextStyleDelta>? variantsWithSpecificDelta;
 
   @override
   FGoldenStyle call(FGoldenStyle original) => FGoldenStyle(
@@ -611,6 +631,9 @@ class _FGoldenStyleDelta implements FGoldenStyleDelta {
     nullableBoxDecorationVariants:
         nullableBoxDecorationVariants?.call(original.nullableBoxDecorationVariants) ??
         original.nullableBoxDecorationVariants,
+    decorationVariants: decorationVariants?.call(original.decorationVariants) ?? original.decorationVariants,
+    nullableDecorationVariants:
+        nullableDecorationVariants?.call(original.nullableDecorationVariants) ?? original.nullableDecorationVariants,
     colorVariants: colorVariants?.call(original.colorVariants) ?? original.colorVariants,
     nullableColorVariants:
         nullableColorVariants?.call(original.nullableColorVariants) ?? original.nullableColorVariants,
@@ -622,15 +645,12 @@ class _FGoldenStyleDelta implements FGoldenStyleDelta {
     textStyleVariants: textStyleVariants?.call(original.textStyleVariants) ?? original.textStyleVariants,
     nullableTextStyleVariants:
         nullableTextStyleVariants?.call(original.nullableTextStyleVariants) ?? original.nullableTextStyleVariants,
+    nestedMotionVariants: nestedMotionVariants?.call(original.nestedMotionVariants) ?? original.nestedMotionVariants,
     nestedMotion: nestedMotion?.call(original.nestedMotion) ?? original.nestedMotion,
     nestedStyle: nestedStyle?.call(original.nestedStyle) ?? original.nestedStyle,
     list: list ?? original.list,
     set: set ?? original.set,
     map: map ?? original.map,
-    variantsWithGenericDelta:
-        variantsWithGenericDelta?.call(original.variantsWithGenericDelta) ?? original.variantsWithGenericDelta,
-    variantsWithSpecificDelta:
-        variantsWithSpecificDelta?.call(original.variantsWithSpecificDelta) ?? original.variantsWithSpecificDelta,
   );
 }
 

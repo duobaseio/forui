@@ -23,6 +23,15 @@ class FVariants<K extends FVariantConstraint, V, D extends Delta> with Diagnosti
     double t,
   ) => lerpWhere(a, b, t, BoxDecoration.lerp);
 
+  /// Linearly interpolates between two [FVariants] containing [Decoration]s.
+  ///
+  /// {@macro forui.FVariants.lerpWhereUsing}
+  static FVariants<K, Decoration, D> lerpDecoration<K extends FVariantConstraint, D extends Delta>(
+    FVariants<K, Decoration, D> a,
+    FVariants<K, Decoration, D> b,
+    double t,
+  ) => lerpWhere(a, b, t, Decoration.lerp);
+
   /// Linearly interpolates between two [FVariants] containing [Color]s.
   ///
   /// {@macro forui.FVariants.lerpWhereUsing}
