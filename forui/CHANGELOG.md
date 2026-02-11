@@ -149,6 +149,11 @@ are not available for most of these changes due to the tool's limitations.
 
 
 ### `FDialog`
+* Add `FDialogContentStyle.titleSpacing`, `FDialogContentStyle.bodySpacing`, and `FDialogContentStyle.contentSpacing`.
+
+* Change default styling to be more visually pleasing.
+* **Breaking** Change `FDialog` and `FDialog.adaptive` to use "primary first" action ordering. In horizontal layouts,
+  the actions list is reversed so the primary action is at the end.
 * **Breaking** Change `showFDialog`'s `style` parameter from `FDialogStyle Function(FDialogStyle)?` to `FDialogStyleDelta?`.
 * **Breaking** Change `showFDialog`'s `routeStyle` parameter from `FDialogRouteStyle Function(FDialogRouteStyle)?` to
   `FDialogRouteStyleDelta?`.
