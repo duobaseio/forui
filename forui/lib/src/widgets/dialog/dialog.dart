@@ -555,7 +555,7 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
             padding: const .only(left: 16, right: 16, top: 8, bottom: 14),
             titleSpacing: 6,
             bodySpacing: 6,
-              actionSpacing: 8,
+            actionSpacing: 8,
           ),
         },
       ),
