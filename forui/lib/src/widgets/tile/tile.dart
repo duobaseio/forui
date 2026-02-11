@@ -310,18 +310,53 @@ extension type FTileStyles._(FVariants<FItemVariantConstraint, FTileStyle, FTile
           .inherit(colors: colors, typography: typography, style: style),
           variants: {
             [.destructive]: .delta(
-              contentStyle: FItemContentStyle.inherit(
-                colors: colors,
-                typography: typography,
-                prefix: colors.destructive,
-                foreground: colors.destructive,
-                mutedForeground: colors.destructive,
+              contentStyle: FItemContentStyle(
+                padding: const .fromSTEB(15, 13, 10, 13),
+                prefixIconStyle: .delta(
+                  IconThemeData(color: colors.destructive, size: 18),
+                  variants: {
+                    [.disabled]: .delta(color: colors.disable(colors.destructive)),
+                  },
+                ),
+                titleTextStyle: .delta(
+                  typography.base.copyWith(color: colors.destructive),
+                  variants: {
+                    [.disabled]: .delta(color: colors.disable(colors.destructive)),
+                  },
+                ),
+                subtitleTextStyle: .delta(
+                  typography.xs.copyWith(color: colors.destructive),
+                  variants: {
+                    [.disabled]: .delta(color: colors.disable(colors.destructive)),
+                  },
+                ),
+                detailsTextStyle: .delta(
+                  typography.base.copyWith(color: colors.destructive),
+                  variants: {
+                    [.disabled]: .delta(color: colors.disable(colors.destructive)),
+                  },
+                ),
+                suffixIconStyle: .delta(
+                  IconThemeData(color: colors.destructive, size: 18),
+                  variants: {
+                    [.disabled]: .delta(color: colors.disable(colors.destructive)),
+                  },
+                ),
               ),
-              rawItemContentStyle: FRawItemContentStyle.inherit(
-                colors: colors,
-                typography: typography,
-                prefix: colors.destructive,
-                color: colors.destructive,
+              rawItemContentStyle: FRawItemContentStyle(
+                padding: const .fromSTEB(15, 13, 10, 13),
+                prefixIconStyle: .delta(
+                  IconThemeData(color: colors.destructive, size: 18),
+                  variants: {
+                    [.disabled]: .delta(color: colors.disable(colors.destructive)),
+                  },
+                ),
+                childTextStyle: .delta(
+                  typography.base.copyWith(color: colors.destructive),
+                  variants: {
+                    [.disabled]: .delta(color: colors.disable(colors.destructive)),
+                  },
+                ),
               ),
             ),
           },

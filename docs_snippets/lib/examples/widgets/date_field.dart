@@ -93,6 +93,7 @@ class _FormDateFieldPageState extends StatefulExampleState<FormDateFieldPage> {
   Widget example(BuildContext _) => Form(
     key: _key,
     child: Column(
+      spacing: 16,
       children: [
         FDateField(
           control: .managed(controller: _startController),
@@ -114,15 +115,21 @@ class _FormDateFieldPageState extends StatefulExampleState<FormDateFieldPage> {
           description: const Text('Select an end date'),
           autovalidateMode: .disabled,
         ),
-        const SizedBox(height: 25),
-        FButton(
-          child: const Text('Submit'),
-          onPress: () {
-            if (_key.currentState!.validate()) {
-              // Form is valid, process the dates
-            }
-          },
-        ),
+        Row(
+          mainAxisAlignment: .end,
+          children: [
+            FButton(
+              size: .sm,
+              mainAxisSize: .min,
+              child: const Text('Submit'),
+              onPress: () {
+                if (_key.currentState!.validate()) {
+                  // Form is valid, do something.
+                }
+              },
+            ),
+          ],
+        )
       ],
     ),
   );

@@ -50,7 +50,7 @@ final FPopoverControl managedInternal = .managed(initial: false, onChange: (show
 // {@category "Control" "`.managed()` with external controller"}
 /// Uses an external controller to control the popover's state.
 final FPopoverControl managedExternal = .managed(
-  // For demonstration purposes only. Don't create a controller inline, store it in a State instead.
+  // Don't create a controller inline. Store it in a State instead.
   controller: FPopoverController(vsync: vsync, shown: false, motion: const FPopoverMotion()),
   onChange: (shown) {},
 );

@@ -13,7 +13,7 @@ class ToastPage extends Example {
   Widget example(BuildContext context) => Column(
     mainAxisSize: .min,
     mainAxisAlignment: .center,
-    spacing: 5,
+    spacing: 10,
     children: [
       for (final (FToastAlignment alignment, description) in [
         (.topLeft, 'Top Left'),
@@ -24,6 +24,8 @@ class ToastPage extends Example {
         (.bottomRight, 'Bottom Right'),
       ])
         FButton(
+          variant: .outline,
+          size: .sm,
           onPress: () => showFToast(
             context: context,
             alignment: alignment,
@@ -44,7 +46,7 @@ class ToastPage extends Example {
               ),
             ),
           ),
-          child: Text('Show $description Toast'),
+          child: Text(description),
         ),
     ],
   );
@@ -56,17 +58,19 @@ class CustomAlignmentToastPage extends Example {
 
   @override
   Widget example(BuildContext context) => FButton(
+    variant: .outline,
+    size: .sm,
     mainAxisSize: .min,
     onPress: () => showFToast(
       context: context,
       // {@highlight}
-      alignment: FToastAlignment(const Alignment(-0.5, -1), -1),
+      alignment: FToastAlignment(const Alignment(-0.5, 1), 1),
       // {@endhighlight}
       icon: const Icon(FIcons.info),
       title: const Text('Event has been created'),
       description: const Text('Friday, May 23, 2025 at 9:00 AM'),
     ),
-    child: const Text('Show Custom Alignment Toast'),
+    child: const Text('Show Toast'),
   );
 }
 
@@ -76,6 +80,8 @@ class NoAutoDismissToastPage extends Example {
 
   @override
   Widget example(BuildContext context) => FButton(
+    variant: .outline,
+    size: .sm,
     mainAxisSize: .min,
     onPress: () => showFToast(
       context: context,
@@ -95,6 +101,8 @@ class RawToastPage extends Example {
 
   @override
   Widget example(BuildContext context) => FButton(
+    variant: .outline,
+    size: .sm,
     mainAxisSize: .min,
     // {@highlight}
     onPress: () => showRawFToast(
@@ -146,6 +154,8 @@ class AlwaysExpandToastPage extends StatelessWidget {
             child: Builder(
               builder: (context) => Center(
                 child: FButton(
+                  variant: .outline,
+                  size: .sm,
                   mainAxisSize: .min,
                   onPress: () => showFToast(
                     context: context,
@@ -183,6 +193,8 @@ class DisabledExpandToastPage extends StatelessWidget {
             child: Builder(
               builder: (context) => Center(
                 child: FButton(
+                  variant: .outline,
+                  size: .sm,
                   mainAxisSize: .min,
                   onPress: () => showFToast(
                     context: context,
@@ -217,6 +229,8 @@ class SwipeToastPage extends StatelessWidget {
             child: Builder(
               builder: (context) => Center(
                 child: FButton(
+                  variant: .outline,
+                  size: .sm,
                   mainAxisSize: .min,
                   onPress: () => showFToast(
                     context: context,
@@ -251,6 +265,8 @@ class DownSwipeToastPage extends StatelessWidget {
             child: Builder(
               builder: (context) => Center(
                 child: FButton(
+                  variant: .outline,
+                  size: .sm,
                   mainAxisSize: .min,
                   onPress: () => showFToast(
                     context: context,
@@ -288,6 +304,8 @@ class DisabledSwipeToastPage extends StatelessWidget {
             child: Builder(
               builder: (context) => Center(
                 child: FButton(
+                  variant: .outline,
+                  size: .sm,
                   mainAxisSize: .min,
                   onPress: () => showFToast(
                     context: context,

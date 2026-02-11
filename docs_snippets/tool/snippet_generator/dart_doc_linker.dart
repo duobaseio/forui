@@ -255,6 +255,9 @@ class DartDocLinker extends RecursiveAstVisitor<void> {
         FieldElement(:final enclosingElement, :final name, :final isConst) when isConst =>
           '$base/${enclosingElement.name}/$name-constant.html',
         FieldElement(:final enclosingElement, :final name) => '$base/${enclosingElement.name}/$name.html',
+        PropertyAccessorElement(:final enclosingElement, :final name, :final FieldElement variable)
+            when variable.isConst =>
+          '$base/${enclosingElement.name}/$name-constant.html',
         PropertyAccessorElement(:final enclosingElement, :final name) => '$base/${enclosingElement.name}/$name.html',
         ConstructorElement(:final enclosingElement, :final name?) =>
           '$base/${enclosingElement.name}/${enclosingElement.name}${name == 'new' ? '' : '.$name'}.html',

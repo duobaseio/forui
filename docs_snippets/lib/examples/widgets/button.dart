@@ -6,25 +6,6 @@ import 'package:forui/forui.dart';
 import 'package:docs_snippets/example.dart';
 
 @RoutePage()
-class ButtonSizesPage extends Example {
-  ButtonSizesPage({@queryParam super.theme});
-
-  @override
-  Widget example(BuildContext _) => Row(
-    mainAxisSize: .min,
-    spacing: 10,
-    children: [
-      // {@highlight}
-      FButton(variant: .outline, size: .xs, mainAxisSize: .min, onPress: () {}, child: const Text('xs')),
-      FButton(variant: .outline, size: .sm, mainAxisSize: .min, onPress: () {}, child: const Text('sm')),
-      FButton(variant: .outline, mainAxisSize: .min, onPress: () {}, child: const Text('base')),
-      FButton(variant: .outline, size: .lg, mainAxisSize: .min, onPress: () {}, child: const Text('lg')),
-      // {@endhighlight}
-    ],
-  );
-}
-
-@RoutePage()
 class ButtonPrimaryPage extends Example {
   ButtonPrimaryPage({@queryParam super.theme});
 
@@ -89,6 +70,41 @@ class ButtonOutlinePage extends Example {
     mainAxisSize: .min,
     onPress: () {},
     child: const Text('Button'),
+  );
+}
+
+@RoutePage()
+class ButtonSizesPage extends Example {
+  ButtonSizesPage({@queryParam super.theme});
+
+  @override
+  Widget example(BuildContext _) => Column(
+    mainAxisSize: .min,
+    spacing: 20,
+    children: [
+      // {@highlight}
+      Row(
+        mainAxisSize: .min,
+        spacing: 10,
+        children: [
+          FButton(variant: .outline, size: .xs, mainAxisSize: .min, onPress: () {}, child: const Text('xs')),
+          FButton(variant: .outline, size: .sm, mainAxisSize: .min, onPress: () {}, child: const Text('sm')),
+          FButton(variant: .outline, mainAxisSize: .min, onPress: () {}, child: const Text('base')),
+          FButton(variant: .outline, size: .lg, mainAxisSize: .min, onPress: () {}, child: const Text('lg')),
+        ],
+      ),
+      Row(
+        mainAxisSize: .min,
+        spacing: 10,
+        children: [
+          FButton.icon(size: .xs, onPress: () {}, child: const Icon(FIcons.chevronRight)),
+          FButton.icon(size: .sm, onPress: () {}, child: const Icon(FIcons.chevronRight)),
+          FButton.icon(onPress: () {}, child: const Icon(FIcons.chevronRight)),
+          FButton.icon(size: .lg, onPress: () {}, child: const Icon(FIcons.chevronRight)),
+        ],
+      ),
+      // {@endhighlight}
+    ],
   );
 }
 

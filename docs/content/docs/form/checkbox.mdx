@@ -26,7 +26,7 @@ import checkboxUsage from '@/snippets/usages/widgets/checkbox/checkbox.json';
 
 <Tabs items={['Preview', 'Code']}>
     <Tab value="Preview">
-        <Widget name='checkbox' query={{enabled: 'true'}}/>
+        <Widget name='checkbox'/>
     </Tab>
     <Tab value="Code">
         <CodeSnippet snippet={defaultSnippet} />
@@ -53,7 +53,7 @@ dart run forui style create checkbox
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='checkbox' query={{initialValue: 'true', enabled: 'false'}}/>
+    <Widget name='checkbox' variant='disabled'/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={disabledSnippet} />
@@ -64,7 +64,7 @@ dart run forui style create checkbox
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='checkbox' query={{ error: 'Please accept the terms and conditions.' }}/>
+    <Widget name='checkbox' variant='error'/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={errorSnippet} />
@@ -75,7 +75,7 @@ dart run forui style create checkbox
 
 <Tabs items={['Preview', 'Code']}>
     <Tab value="Preview">
-        <Widget name='checkbox' variant='raw' query={{ }}/>
+        <Widget name='checkbox' variant='raw'/>
     </Tab>
     <Tab value="Code">
         <CodeSnippet snippet={rawSnippet} />
@@ -87,7 +87,7 @@ dart run forui style create checkbox
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='checkbox' variant='form' query={{}} height={550}/>
+    <Widget name='checkbox' variant='form' height={550}/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={formSnippet} />

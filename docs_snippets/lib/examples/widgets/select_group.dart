@@ -66,17 +66,20 @@ class _SelectGroupCheckboxFormPageState extends StatefulExampleState<SelectGroup
             .checkbox(value: .python, label: const Text('Python')),
           ],
         ),
-        FButton(
-          child: const Text('Submit'),
-          onPress: () {
-            if (!_key.currentState!.validate()) {
-              // Handle errors here.
-              return;
-            }
-
-            _key.currentState!.save();
-            // Do something.
-          },
+        Row(
+          mainAxisAlignment: .end,
+          children: [
+            FButton(
+              size: .sm,
+              mainAxisSize: .min,
+              child: const Text('Submit'),
+              onPress: () {
+                if (_key.currentState!.validate()) {
+                  // Form is valid, do something.
+                }
+              },
+            ),
+          ],
         ),
       ],
     ),
@@ -101,7 +104,7 @@ class _SelectGroupRadioFormPageState extends StatefulExampleState<SelectGroupRad
     child: Column(
       mainAxisAlignment: .center,
       crossAxisAlignment: .start,
-      spacing: 20,
+      spacing: 16,
       children: [
         FSelectGroup<Notification>(
           // {@highlight}
@@ -116,17 +119,20 @@ class _SelectGroupRadioFormPageState extends StatefulExampleState<SelectGroupRad
             .radio(value: .nothing, label: const Text('Nothing')),
           ],
         ),
-        FButton(
-          child: const Text('Save'),
-          onPress: () {
-            if (!_key.currentState!.validate()) {
-              // Handle errors here.
-              return;
-            }
-
-            _key.currentState!.save();
-            // Do something.
-          },
+        Row(
+          mainAxisAlignment: .end,
+          children: [
+            FButton(
+              size: .sm,
+              mainAxisSize: .min,
+              child: const Text('Save'),
+              onPress: () {
+                if (_key.currentState!.validate()) {
+                  // Form is valid, do something.
+                }
+              },
+            ),
+          ],
         ),
       ],
     ),

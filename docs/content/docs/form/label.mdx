@@ -16,7 +16,7 @@ import labelUsage from '@/snippets/usages/widgets/label/label.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='label' variant='horizontal' query={{}}/>
+    <Widget name='label' variant='horizontal'/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={horizontalSnippet} />
@@ -42,7 +42,7 @@ dart run forui style create label
 
 <Tabs items={['Preview', 'Code']}>
     <Tab value="Preview">
-        <Widget name='label' variant='vertical' query={{}}/>
+        <Widget name='label' variant='vertical'/>
     </Tab>
     <Tab value="Code">
         <CodeSnippet snippet={verticalSnippet} />
@@ -53,7 +53,7 @@ dart run forui style create label
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='label' variant='horizontal' query={{ state: 'disabled' }}/>
+    <Widget name='label' variant='disabled'/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={disabledSnippet} />
@@ -64,7 +64,7 @@ dart run forui style create label
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='label' variant='horizontal' query={{ state: 'error' }}/>
+    <Widget name='label' variant='error'/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={errorSnippet} />

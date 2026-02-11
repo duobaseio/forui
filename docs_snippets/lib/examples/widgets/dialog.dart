@@ -28,7 +28,8 @@ class DialogPage extends Example {
           // {@endhighlight}
           title: const Text('Are you absolutely sure?'),
           body: const Text(
-            'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+            'This action cannot be undone. This will permanently delete your account and '
+            'remove your data from our servers.',
           ),
           actions: [
             FButton(size: .sm, child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
@@ -64,7 +65,8 @@ class VerticalDialogPage extends Example {
           animation: animation,
           title: const Text('Are you absolutely sure?'),
           body: const Text(
-            'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+            'This action cannot be undone. This will permanently delete your account and '
+            'remove your data from our servers.',
           ),
           actions: [
             FButton(size: .sm, child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
@@ -109,11 +111,17 @@ class BlurredDialogPage extends Example {
           animation: animation,
           title: const Text('Are you absolutely sure?'),
           body: const Text(
-            'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+            'This action cannot be undone. This will permanently delete your account and '
+            'remove your data from our servers.',
           ),
           actions: [
             FButton(size: .sm, child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
-            FButton(size: .sm, variant: .outline, child: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
+            FButton(
+              size: .sm,
+              variant: .outline,
+              child: const Text('Cancel'),
+              onPress: () => Navigator.of(context).pop(),
+            ),
           ],
         ),
       ),

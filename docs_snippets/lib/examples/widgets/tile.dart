@@ -21,6 +21,22 @@ class TilePage extends Example {
 }
 
 @RoutePage()
+class TileDestructivePage extends Example {
+  TileDestructivePage({@queryParam super.theme});
+
+  @override
+  Widget example(BuildContext _) => FTile(
+    // {@highlight}
+    variants: {FItemVariant.destructive},
+    // {@endhighlight}
+    prefix: const Icon(FIcons.trash),
+    title: const Text('Delete Account'),
+    suffix: const Icon(FIcons.chevronRight),
+    onPress: () {},
+  );
+}
+
+@RoutePage()
 class DisabledTilePage extends Example {
   DisabledTilePage({@queryParam super.theme});
 

@@ -38,7 +38,7 @@ final FLineCalendarControl managedInternal = .managed(
 // {@category "Control" "`.managed()` with external controller"}
 /// Uses an external controller to control the line calendar's state.
 final FLineCalendarControl managedExternal = .managed(
-  // For demonstration purposes only. Don't create a controller inline, store it in a State instead.
+  // Don't create a controller inline. Store it in a State instead.
   controller: .date(initial: .now(), selectable: (date) => true, toggleable: false, truncateAndStripTimezone: true),
   onChange: (date) {},
 );

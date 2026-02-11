@@ -224,6 +224,7 @@ class _FormAutocompletePageState extends StatefulExampleState<FormAutocompletePa
     key: _key,
     child: Column(
       crossAxisAlignment: .start,
+      spacing: 16,
       children: [
         FAutocomplete(
           label: const Text('Department'),
@@ -232,15 +233,22 @@ class _FormAutocompletePageState extends StatefulExampleState<FormAutocompletePa
           validator: (department) => department == null || department.isEmpty ? 'Please select a department' : null,
           items: const ['Engineering', 'Marketing', 'Sales', 'Human Resources', 'Finance'],
         ),
-        const SizedBox(height: 25),
-        FButton(
-          child: const Text('Submit'),
-          onPress: () {
-            if (_key.currentState!.validate()) {
-              // Form is valid, do something with department.
-            }
-          },
-        ),
+        Row(
+          mainAxisAlignment: .end,
+          children: [
+            FButton(
+              size: .sm,
+              mainAxisSize: .min,
+              child: const Text('Submit'),
+              onPress: () {
+                if (_key.currentState!.validate()) {
+                  // Form is valid, do something with department.
+                }
+              },
+            ),
+          ],
+        )
+
       ],
     ),
   );

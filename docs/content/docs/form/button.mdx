@@ -15,6 +15,7 @@ import outlineSnippet from '@/snippets/examples/button/outline.json';
 import ghostSnippet from '@/snippets/examples/button/ghost.json';
 import iconSnippet from '@/snippets/examples/button/icon.json';
 import onlyIconSnippet from '@/snippets/examples/button/only-icon.json';
+import sizesSnippet from '@/snippets/examples/button/sizes.json';
 import circularProgressSnippet from '@/snippets/examples/button/circular-progress.json';
 import buttonUsage from '@/snippets/usages/widgets/button/button.json';
 import buttonIconUsage from '@/snippets/usages/widgets/button/icon.json';
@@ -107,13 +108,24 @@ dart run forui style create button
   </Tab>
 </Tabs>
 
+#### Sizes
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='button' variant='sizes'/>
+  </Tab>
+  <Tab value="Code">
+    <CodeSnippet snippet={sizesSnippet} />
+  </Tab>
+</Tabs>
+
 ### Content
 
 #### With Text and Icon
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='button' variant='icon' query={{}}/>
+    <Widget name='button' variant='icon'/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={iconSnippet} />
@@ -124,7 +136,7 @@ dart run forui style create button
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='button' variant='only-icon' query={{}}/>
+    <Widget name='button' variant='only-icon'/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={onlyIconSnippet} />
@@ -135,7 +147,7 @@ dart run forui style create button
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='button' variant='circular-progress' query={{}}/>
+    <Widget name='button' variant='circular-progress'/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={circularProgressSnippet} />

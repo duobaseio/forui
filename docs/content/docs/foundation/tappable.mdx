@@ -12,6 +12,7 @@ import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import tappableDefault from '@/snippets/examples/tappable/default.json';
 import tappableUsage from '@/snippets/usages/foundation/tappable/tappable.json';
 import tappableStaticUsage from '@/snippets/usages/foundation/tappable/tappableStatic.json';
+import bounceSnippet from '@/snippets/snippets/foundation/tappable/bounce.json';
 
 <Callout type="info">
   This widget is typically used to create other high-level widgets, e.g., [button](../form/button). You should prefer
@@ -20,7 +21,7 @@ import tappableStaticUsage from '@/snippets/usages/foundation/tappable/tappableS
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='tappable' query={{}} height={300}/>
+    <Widget name='tappable' height={300}/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={tappableDefault} />
@@ -40,13 +41,4 @@ A variant of `FTappable` without any animation. This is similar to using `FTappa
 
 ## Custom Bounce Animation
 
-```dart copy
-// Default animation.
-FTappableMotion(bounceTween: FTappableMotion.defaultBounceTween);
-
-// No animation.
-FTappableMotion(bounceTween: FTappableMotion.noBounceTween);
-
-// Custom tween.
-FTappableMotion(bounceTween: Tween(begin: 1.0, end: 0.97));
-```
+<CodeSnippet snippet={bounceSnippet} />

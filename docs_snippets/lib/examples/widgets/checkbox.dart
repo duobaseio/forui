@@ -106,6 +106,7 @@ class _FormCheckboxPageState extends StatefulExampleState<FormCheckboxPage> {
     child: Column(
       mainAxisAlignment: .center,
       crossAxisAlignment: .start,
+      spacing: 16,
       children: [
         FTextFormField.email(
           hint: 'janedoe@foruslabs.com',
@@ -130,19 +131,21 @@ class _FormCheckboxPageState extends StatefulExampleState<FormCheckboxPage> {
             onChange: (value) => state.didChange(value),
           ),
         ),
-        const SizedBox(height: 20),
-        FButton(
-          child: const Text('Register'),
-          onPress: () {
-            if (!_key.currentState!.validate()) {
-              // Handle errors here.
-              return;
-            }
-
-            _key.currentState!.save();
-            // Do something.
-          },
-        ),
+        Row(
+          mainAxisAlignment: .end,
+          children: [
+            FButton(
+              size: .sm,
+              mainAxisSize: .min,
+              child: const Text('Register'),
+              onPress: () {
+                if (_key.currentState!.validate()) {
+                  // Form is valid, do something.
+                }
+              },
+            ),
+          ],
+        )
       ],
     ),
   );

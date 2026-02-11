@@ -62,7 +62,7 @@ final FPickerControl managedInternal = .managed(initial: [0, 0], onChange: (inde
 // {@category "Control" "`.managed()` with external controller"}
 /// Uses an external controller to control the picker's state.
 final FPickerControl managedExternal = .managed(
-  // For demonstration purposes only. Don't create a controller inline, store it in a State instead.
+  // Don't create a controller inline. Store it in a State instead.
   controller: FPickerController(indexes: [0, 0]),
   onChange: (indexes) {},
 );

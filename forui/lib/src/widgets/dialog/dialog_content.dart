@@ -141,7 +141,7 @@ class FDialogContentStyle with Diagnosticable, _$FDialogContentStyleFunctions {
     required this.padding,
     required this.titleSpacing,
     required this.bodySpacing,
-    this.contentSpacing = 8,
     required this.actionSpacing,
+    this.contentSpacing = 8,
   });
 }

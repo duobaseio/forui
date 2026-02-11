@@ -106,6 +106,7 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/item/untappable', page: ItemUntappableRoute.page),
     AutoRoute(path: '/item/subtitle', page: ItemSubtitleRoute.page),
     AutoRoute(path: '/item/details', page: ItemDetailsRoute.page),
+    AutoRoute(path: '/item/destructive', page: ItemDestructiveRoute.page),
     AutoRoute(path: '/item-group/default', page: ItemGroupRoute.page),
     AutoRoute(path: '/item-group/indented', page: ItemGroupIndentedRoute.page),
     AutoRoute(path: '/item-group/full', page: ItemGroupFullRoute.page),
@@ -228,6 +229,7 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/text-field/multiline', page: MultilineTextFieldRoute.page),
     AutoRoute(path: '/text-form-field/default', page: TextFormFieldRoute.page),
     AutoRoute(path: '/tile/default', page: TileRoute.page),
+    AutoRoute(path: '/tile/destructive', page: TileDestructiveRoute.page),
     AutoRoute(path: '/tile/disabled', page: DisabledTileRoute.page),
     AutoRoute(path: '/tile/untappable', page: UntappableTileRoute.page),
     AutoRoute(path: '/tile/subtitle', page: TileSubtitleRoute.page),
@@ -259,5 +261,6 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/tooltip/default', page: TooltipRoute.page),
     AutoRoute(path: '/tooltip/horizontal', page: HorizontalTooltipRoute.page),
     AutoRoute(path: '/tooltip/long-press-only', page: LongPressOnlyTooltipRoute.page),
+    AutoRoute(path: '/tooltip/group', page: GroupTooltipRoute.page),
   ];
 }

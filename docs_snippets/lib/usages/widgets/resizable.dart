@@ -43,7 +43,7 @@ final FResizableControl managedInternal = .managed(onResizeUpdate: (resized) {},
 // {@category "Control" "`.managed()` with external controller"}
 /// Non-cascading resize with external controller.
 final FResizableControl managedExternal = .managed(
-  // For demonstration purposes only. Don't create a controller inline, store it in a State instead.
+  // Don't create a controller inline. Store it in a State instead.
   controller: FResizableController(onResizeUpdate: (resized) {}, onResizeEnd: (resized) {}),
 );
 
@@ -54,6 +54,6 @@ final FResizableControl managedCascadeInternal = .managedCascade(onResizeUpdate:
 // {@category "Control" "`.managedCascade()` with external controller"}
 /// Cascading resize with external controller.
 final FResizableControl managedCascadeExternal = .managedCascade(
-  // For demonstration purposes only. Don't create a controller inline, store it in a State instead.
+  // Don't create a controller inline. Store it in a State instead.
   controller: FResizableController.cascade(onResizeUpdate: (resized) {}, onResizeEnd: (all) {}),
 );

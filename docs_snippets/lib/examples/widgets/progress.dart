@@ -43,13 +43,21 @@ class _DeterminateProgressPageState extends StatefulExampleState<DeterminateProg
     spacing: 20,
     children: [
       FDeterminateProgress(value: _value),
-      FButton(
-        child: const Text('Reset'),
-        onPress: () => setState(() {
-          _value = 0.2;
-          _timer.cancel();
-          _timer = Timer(const Duration(seconds: 1), () => setState(() => _value = 0.7));
-        }),
+      Row(
+        mainAxisAlignment: .end,
+        children: [
+          FButton(
+            variant: .outline,
+            size: .sm,
+            mainAxisSize: .min,
+            child: const Text('Reset'),
+            onPress: () => setState(() {
+              _value = 0.2;
+              _timer.cancel();
+              _timer = Timer(const Duration(seconds: 1), () => setState(() => _value = 0.7));
+            }),
+          ),
+        ],
       ),
     ],
   );

@@ -46,7 +46,7 @@ final FCalendarControl<DateTime?> managedDateInternal = .managedDate(
 // {@category "Control" "`.managedDate()` with external controller"}
 /// Single date selection with external controller.
 final FCalendarControl<DateTime?> managedDateExternal = .managedDate(
-  // For demonstration purposes only. Don't create a controller inline, store it in a State instead.
+  // Don't create a controller inline. Store it in a State instead.
   controller: .date(
     initial: null,
     selectable: (date) => true,
@@ -68,7 +68,7 @@ final FCalendarControl<Set<DateTime>> managedDatesInternal = .managedDates(
 // {@category "Control" "`.managedDates()` with external controller"}
 /// Multiple dates selection with external controller.
 final FCalendarControl<Set<DateTime>> managedDatesExternal = .managedDates(
-  // For demonstration purposes only. Don't create a controller inline, store it in a State instead.
+  // Don't create a controller inline. Store it in a State instead.
   controller: .dates(
     initial: {},
     selectable: (date) => true,
@@ -91,7 +91,7 @@ final FCalendarControl<(DateTime, DateTime)?> managedRangeInternal =
 /// Range selection with external controller.
 final FCalendarControl<(DateTime, DateTime)?>
 managedRangeExternal = .managedRange(
-  // For demonstration purposes only. Don't create a controller inline, store it in a State instead.
+  // Don't create a controller inline. Store it in a State instead.
   controller: .range(
     initial: (.utc(2000), .utc(2001)),
     selectable: (date) => true,

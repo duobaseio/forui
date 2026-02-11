@@ -28,10 +28,12 @@ class _CollapsiblePageState extends StatefulExampleState<CollapsiblePage> with S
   @override
   Widget example(BuildContext _) => Column(
     mainAxisSize: .min,
-    crossAxisAlignment: .start,
     spacing: 16,
     children: [
       FButton(
+        variant: .outline,
+        size: .sm,
+        mainAxisSize: .min,
         onPress: () {
           setState(() => _expanded = !_expanded);
           _controller.toggle();

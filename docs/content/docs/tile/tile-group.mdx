@@ -21,7 +21,7 @@ import tileGroupNoDivider from '@/snippets/examples/tile-group/no-divider.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='tile-group' variant='default' query={{}}/>
+    <Widget name='tile-group'/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={tileGroupDefault} />
@@ -55,7 +55,7 @@ dart run forui style create tile-group
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='tile-group' variant='scrollable' query={{}} height={300}/>
+    <Widget name='tile-group' variant='scrollable' height={300}/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={tileGroupScrollable} />
@@ -66,7 +66,7 @@ dart run forui style create tile-group
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='tile-group' variant='lazy' query={{}} height={300}/>
+    <Widget name='tile-group' variant='lazy' height={300}/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={tileGroupLazy} />
@@ -80,7 +80,7 @@ several sections.
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='tile-group' variant='merge' query={{}} height={300}/>
+    <Widget name='tile-group' variant='merge' height={300}/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={tileGroupMerge} />
@@ -93,7 +93,7 @@ several sections.
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='tile-group' variant='default' query={{divider: 'full'}}/>
+    <Widget name='tile-group' variant='full-divider'/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={tileGroupFullDivider} />
@@ -104,7 +104,7 @@ several sections.
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='tile-group' variant='default' query={{divider: 'none'}}/>
+    <Widget name='tile-group' variant='no-divider'/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={tileGroupNoDivider} />

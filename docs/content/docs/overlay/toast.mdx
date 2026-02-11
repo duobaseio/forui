@@ -41,7 +41,7 @@ import customAlignmentSnippet from '@/snippets/examples/toast/custom-alignment.j
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='toast' query={{}} height={500}/>
+    <Widget name='toast' height={500}/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={defaultSnippet} />
@@ -74,11 +74,22 @@ dart run forui style create toast
 
 ### Appearance
 
+#### Custom Alignment
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='toast' variant='custom-alignment' height={300}/>
+  </Tab>
+  <Tab value="Code">
+    <CodeSnippet snippet={customAlignmentSnippet} />
+  </Tab>
+</Tabs>
+
 #### No Auto-Dismiss
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='toast' variant='no-auto-dismiss' query={{}} height={300}/>
+    <Widget name='toast' variant='no-auto-dismiss' height={300}/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={noAutoDismissSnippet} />
@@ -89,7 +100,7 @@ dart run forui style create toast
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='toast' variant='raw' query={{}} height={620}/>
+    <Widget name='toast' variant='raw' height={620}/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={rawSnippet} />

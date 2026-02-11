@@ -52,7 +52,7 @@ The following locales will default to Chinese (zh):
 
 <Tabs items={['Preview', 'Code']}>
     <Tab value="Preview">
-        <Widget name='time-field' query={{}}/>
+        <Widget name='time-field'/>
     </Tab>
     <Tab value="Code">
         <CodeSnippet snippet={defaultSnippet} />
@@ -81,7 +81,7 @@ dart run forui style create time-field
 
 <Tabs items={['Preview', 'Code']}>
     <Tab value="Preview">
-        <Widget name='time-field'  query={{hour24: 'true'}}/>
+        <Widget name='time-field' variant='hour24'/>
     </Tab>
     <Tab value="Code">
         <CodeSnippet snippet={hour24Snippet} />
@@ -92,7 +92,7 @@ dart run forui style create time-field
 
 <Tabs items={['Preview', 'Code']}>
     <Tab value="Preview">
-        <Widget name='time-field' variant='picker' query={{}} height={500}/>
+        <Widget name='time-field' variant='picker' height={500}/>
     </Tab>
     <Tab value="Code">
         <CodeSnippet snippet={pickerSnippet} />
@@ -103,7 +103,7 @@ dart run forui style create time-field
 
 <Tabs items={['Preview', 'Code']}>
     <Tab value="Preview">
-        <Widget name='time-field' variant='validator' query={{}} height={500}/>
+        <Widget name='time-field' variant='validator' height={500}/>
     </Tab>
     <Tab value="Code">
         <CodeSnippet snippet={validatorSnippet} />
@@ -115,7 +115,7 @@ dart run forui style create time-field
 
 <Tabs items={['Preview', 'Code']}>
     <Tab value="Preview">
-        <Widget name='time-field' variant='form' query={{}} height={600}/>
+        <Widget name='time-field' variant='form' height={600}/>
     </Tab>
     <Tab value="Code">
         <CodeSnippet snippet={formSnippet} />

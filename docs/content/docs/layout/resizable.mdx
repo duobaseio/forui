@@ -18,7 +18,7 @@ import resizableRegionUsage from '@/snippets/usages/widgets/resizable/resizableR
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='resizable' query={{}} height={700}/>
+    <Widget name='resizable' height={700}/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={defaultSnippet} />
@@ -47,7 +47,7 @@ dart run forui style create resizable
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='resizable' variant='no-cascading' query={{}} height={700}/>
+    <Widget name='resizable' variant='no-cascading' height={700}/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={noCascadingSnippet} />
@@ -58,7 +58,7 @@ dart run forui style create resizable
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='resizable' variant='horizontal' query={{}} height={400}/>
+    <Widget name='resizable' variant='horizontal' height={400}/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={horizontalSnippet} />
@@ -69,7 +69,7 @@ dart run forui style create resizable
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='resizable' variant='horizontal' query={{divider: 'divider'}} height={400}/>
+    <Widget name='resizable' variant='divider' height={400}/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={dividerSnippet} />
@@ -80,7 +80,7 @@ dart run forui style create resizable
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='resizable' variant='horizontal' query={{divider: 'none'}} height={400}/>
+    <Widget name='resizable' variant='no-divider' height={400}/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={noDividerSnippet} />

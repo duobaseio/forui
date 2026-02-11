@@ -40,7 +40,7 @@ final FTooltipControl managedInternal = .managed(initial: false, onChange: (show
 // {@category "Control" "`.managed()` with external controller"}
 /// Uses an external controller for tooltip management.
 final FTooltipControl managedExternal = .managed(
-  // For demonstration purposes only. Don't create a controller inline, store it in a State instead.
+  // Don't create a controller inline. Store it in a State instead.
   controller: FTooltipController(vsync: vsync, shown: false, motion: const FTooltipMotion()),
   onChange: (shown) {},
 );
