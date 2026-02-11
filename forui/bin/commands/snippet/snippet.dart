@@ -42,7 +42,7 @@ class Application extends StatelessWidget {
       theme: theme.toApproximateMaterialTheme(),
       builder: (_, child) => FTheme(
         data: theme,
-        child: FTooltipGroup(child: child!),
+        child: FToaster(child: FTooltipGroup(child: child!)),
       ),
       // You can also replace FScaffold with Material Scaffold.
       home: const FScaffold(
