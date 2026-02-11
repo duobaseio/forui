@@ -4,6 +4,11 @@ description: Abstractions over controllers that define where widget state lives.
 ---
 
 import {Callout} from "fumadocs-ui/components/callout";
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import liftedSnippet from '@/snippets/snippets/core_concepts/controls/lifted.json';
+import managedSnippet from '@/snippets/snippets/core_concepts/controls/managed.json';
+import customManagedSnippet from '@/snippets/snippets/core_concepts/controls/custom_managed.json';
+import extendManagedSnippet from '@/snippets/snippets/core_concepts/controls/extend_managed.json';
 
 Controls are abstractions over controllers, e.g. `TextEditingController`, that define where state lives.
 Instead of passing controllers to Forui widgets, you pass controls (that optionally wrap controllers).
@@ -15,14 +20,7 @@ There are **2** types of controls.
 You externally manage the state. The widget is "dumb" and just reflects the passed-in values. This is similar
 to React's [controlled components](https://react.dev/learn/sharing-state-between-components#controlled-and-uncontrolled-components).
 
-```dart
-FPopover(
-  control: .lifted(
-    shown: _shown,
-    onChange: (shown) => setState(() => _shown = shown),
-  ),
-);
-```
+<CodeSnippet snippet={liftedSnippet} />
 
 ## Managed
 
@@ -30,13 +28,7 @@ The widget internally manages its own state, either through an internal controll
 values, or through a passed-in external controller. In the latter case, you are responsible for managing the controller's
 lifecycle.
 
-```dart
-// FPopover manages its own state using an internal controller.
-FPopover(control: .managed(initial: false, onChange: print));
-
-// FPopover manages its own state using an external controller.
-FPopover(control: .managed(controller: _externalController));
-```
+<CodeSnippet snippet={managedSnippet} />
 
 
 ## When to Use Which?
@@ -84,40 +76,7 @@ custom controller to a widget.
 
 Pass the custom controller via a managed control.
 
-```dart
-class CustomController extends FPopoverController {
-  // Custom logic here.
-}
-
-class MyWidget extends StatefulWidget {
-  const MyWidget({super.key});
-
-  @override
-  State<MyWidget> createState() => _MyWidgetState();
-}
-
-class _MyWidgetState extends State<MyWidget> with SingleTickerProviderStateMixin {
-  late final CustomController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = CustomController(vsync: this);
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) => FPopover(
-    control: .managed(controller: _controller),
-    // ...
-  );
-}
-```
+<CodeSnippet snippet={customManagedSnippet} />
 
 The downside of this approach is that you have to manage the controller's lifecycle yourself.
 
@@ -125,27 +84,6 @@ The downside of this approach is that you have to manage the controller's lifecy
 
 Alternatively, you can extend managed control (`FPopoverManagedControl`) to create your custom controller.
 
-```dart
-class CustomController extends FPopoverController {
-  final int customValue;
-
-  CustomController({required this.customValue, required super.vsync});
-}
-
-class CustomManagedControl extends FPopoverManagedControl {
-  final int customValue;
-
-  CustomManagedControl({required this.customValue});
-
-  @override
-  CustomController createController(TickerProvider vsync) => CustomController(
-    customValue: customValue,
-    vsync: vsync,
-  );
-}
-
-// Usage:
-FPopover(control: CustomManagedControl(customValue: 42));
-```
+<CodeSnippet snippet={extendManagedSnippet} />
 
 This way, the widget manages the controller's lifecycle for you.

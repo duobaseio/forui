@@ -7,19 +7,18 @@ import 'package:forui/forui.dart';
 // {@snippet}
 FAccordionStyle accordionStyle({required FColors colors, required FTypography typography, required FStyle style}) =>
     FAccordionStyle(
-      titleTextStyle: .delta(
+      titleTextStyle: FVariants.delta(
         // This text style is applied when the accordion is NOT hovered OR pressed.
         typography.base.copyWith(fontWeight: .w500, color: colors.foreground),
         variants: {
           // This text style is applied when the accordion is hovered OR pressed.
           // {@highlight}
           [.hovered, .pressed]: const .delta(decoration: .underline),
+          // {@endhiglight}
         },
       ),
-      // {@endsnippet}
       childTextStyle: typography.sm.copyWith(color: colors.foreground),
-      // This decoration is ALWAYS applied.
-      iconStyle: .all(IconThemeData(color: colors.primary, size: 20)),
+      iconStyle: .all(IconThemeData(color: colors.mutedForeground, size: 20)),
       focusedOutlineStyle: style.focusedOutlineStyle,
       dividerStyle: FDividerStyle(color: colors.border, padding: .zero),
       tappableStyle: style.tappableStyle.copyWith(motion: const .delta(bounceTween: FTappableMotion.noBounceTween)),
@@ -28,3 +27,4 @@ FAccordionStyle accordionStyle({required FColors colors, required FTypography ty
       motion: const FAccordionMotion(),
     );
 // {@endsnippet}
+

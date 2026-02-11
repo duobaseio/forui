@@ -25,14 +25,15 @@ class Application extends StatelessWidget {
       // TODO: add your application's localizations delegates.
       localizationsDelegates: const [...FLocalizations.localizationsDelegates],
       // MaterialApp's theme is also animated by default with the same duration and curve.
-      // See https://api.flutter.dev/flutter/material/MaterialApp/themeAnimationStyle.html for how to configure this.
+      // See https://api.flutter.dev/flutter/material/MaterialApp/themeAnimationStyle.html 
+      // for how to configure this.
       //
-      // There is a known issue with implicitly animated widgets where their transition occurs AFTER the theme's.
-      // See https://github.com/duobaseio/forui/issues/670.
+      // There is a known issue with implicitly animated widgets where their transition 
+      // occurs AFTER the theme's. See https://github.com/duobaseio/forui/issues/670.
       theme: theme.toApproximateMaterialTheme(),
       builder: (_, child) => FTheme(
         data: theme,
-        child: FToaster(child: child!),
+        child: FToaster(child: FTooltipGroup(child: child!)),
       ),
       // You can also replace FScaffold with Material Scaffold.
       home: const FScaffold(

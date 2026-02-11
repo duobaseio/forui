@@ -8,5 +8,5 @@ library forui.widgets.tooltip;
 
 export '../src/widgets/tooltip/tooltip.dart';
 export '../src/widgets/tooltip/tooltip_controller.dart'
-    hide FTooltipManagedControl, InternalFTooltipControl, InternalTooltipController;
+    hide InternalFTooltipControl, InternalTooltipController;
 export '../src/widgets/tooltip/tooltip_group.dart' hide TooltipGroupScope;

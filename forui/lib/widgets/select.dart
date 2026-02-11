@@ -14,4 +14,4 @@ export '../src/widgets/select/content/search_field_properties.dart';
 export '../src/widgets/select/multi/select.dart';
 export '../src/widgets/select/multi/tag.dart';
 export '../src/widgets/select/single/select.dart';
-export '../src/widgets/select/single/select_controller.dart' hide FSelectManagedControl, InternalFSelectControl;
+export '../src/widgets/select/single/select_controller.dart' hide InternalFSelectControl;
