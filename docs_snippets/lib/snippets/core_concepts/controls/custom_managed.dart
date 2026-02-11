@@ -40,4 +40,5 @@ class _MyWidgetState extends State<MyWidget> with SingleTickerProviderStateMixin
     popoverBuilder: (_, _) => const Placeholder(),
   );
 }
+
 // {@endsnippet}

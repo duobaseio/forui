@@ -9,7 +9,7 @@ final FVariants<FTappableVariantConstraint, BoxDecoration, BoxDecorationDelta> d
       const BoxDecoration(color: Colors.white),
       variants: {
         // NOT hovered
-        [.not(.hovered)]: const BoxDecoration(color: Colors.red,),
+        [.not(.hovered)]: const BoxDecoration(color: Colors.red),
         // hovered OR pressed
         [.hovered, .pressed]: const BoxDecoration(color: Colors.grey),
         // disabled AND pressed
@@ -17,5 +17,3 @@ final FVariants<FTappableVariantConstraint, BoxDecoration, BoxDecorationDelta> d
       },
     );
 // {@endsnippet}
-
-

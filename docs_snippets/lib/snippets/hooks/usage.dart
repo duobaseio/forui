@@ -1,14 +1,15 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_hooks/flutter_hooks.dart';
 
+import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:forui/forui.dart';
-// {@highlight}
 import 'package:forui_hooks/forui_hooks.dart';
+
+// {@highlight}
 // {@endhighlight}
 
 // {@highlight}
 class Example extends HookWidget {
-// {@endhighlight}
+  // {@endhighlight}
   @override
   Widget build(BuildContext _) {
     // {@highlight}

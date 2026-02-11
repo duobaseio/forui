@@ -247,8 +247,7 @@ class _FormAutocompletePageState extends StatefulExampleState<FormAutocompletePa
               },
             ),
           ],
-        )
-
+        ),
       ],
     ),
   );

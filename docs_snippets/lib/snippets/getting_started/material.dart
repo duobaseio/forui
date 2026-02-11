@@ -1,8 +1,10 @@
 // {@highlight}
+
 import 'package:flutter/cupertino.dart';
-// {@endhighlight}
 
 import 'package:forui/forui.dart';
+
+// {@endhighlight}
 
 void main() {
   runApp(const Application());

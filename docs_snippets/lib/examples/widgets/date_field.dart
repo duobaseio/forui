@@ -129,7 +129,7 @@ class _FormDateFieldPageState extends StatefulExampleState<FormDateFieldPage> {
               },
             ),
           ],
-        )
+        ),
       ],
     ),
   );

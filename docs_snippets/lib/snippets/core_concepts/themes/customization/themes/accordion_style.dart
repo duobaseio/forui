@@ -27,4 +27,3 @@ FAccordionStyle accordionStyle({required FColors colors, required FTypography ty
       motion: const FAccordionMotion(),
     );
 // {@endsnippet}
-

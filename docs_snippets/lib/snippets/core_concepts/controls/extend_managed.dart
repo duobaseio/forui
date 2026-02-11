@@ -15,10 +15,7 @@ class CustomManagedControl extends FPopoverManagedControl {
   CustomManagedControl({required this.customValue});
 
   @override
-  CustomController createController(TickerProvider vsync) => CustomController(
-    customValue: customValue,
-    vsync: vsync,
-  );
+  CustomController createController(TickerProvider vsync) => CustomController(customValue: customValue, vsync: vsync);
 }
 
 // Usage:

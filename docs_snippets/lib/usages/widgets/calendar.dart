@@ -89,13 +89,13 @@ final FCalendarControl<(DateTime, DateTime)?> managedRangeInternal =
 
 // {@category "Control" "`.managedRange()` with external controller"}
 /// Range selection with external controller.
-final FCalendarControl<(DateTime, DateTime)?>
-managedRangeExternal = .managedRange(
-  // Don't create a controller inline. Store it in a State instead.
-  controller: .range(
-    initial: (.utc(2000), .utc(2001)),
-    selectable: (date) => true,
-    truncateAndStripTimezone: true,
-  ),
-  onChange: (range) {},
-);
+final FCalendarControl<(DateTime, DateTime)?> managedRangeExternal =
+    .managedRange(
+      // Don't create a controller inline. Store it in a State instead.
+      controller: .range(
+        initial: (.utc(2000), .utc(2001)),
+        selectable: (date) => true,
+        truncateAndStripTimezone: true,
+      ),
+      onChange: (range) {},
+    );

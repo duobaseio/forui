@@ -54,6 +54,12 @@ class PortalPage extends Example {
         ),
       ),
     ),
-    builder: (context, controller, _) => FButton(variant: .outline, size: .sm, mainAxisSize: .min, onPress: controller.toggle, child: const Text('Portal')),
+    builder: (context, controller, _) => FButton(
+      variant: .outline,
+      size: .sm,
+      mainAxisSize: .min,
+      onPress: controller.toggle,
+      child: const Text('Portal'),
+    ),
   );
 }

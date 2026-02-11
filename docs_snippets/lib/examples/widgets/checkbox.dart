@@ -145,7 +145,7 @@ class _FormCheckboxPageState extends StatefulExampleState<FormCheckboxPage> {
               },
             ),
           ],
-        )
+        ),
       ],
     ),
   );
