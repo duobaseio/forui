@@ -154,7 +154,7 @@ enum Style {
     null,
     <String>['dialog-route', 'dialogroute'],
     <String>['FDialogRouteStyle'],
-    'FDialogRouteStyle dialogRouteStyle({required FColors colors}) =>\n    FDialogRouteStyle(\n      barrierFilter: (v) => ImageFilter.compose(\n        outer: ImageFilter.blur(sigmaX: v * 5, sigmaY: v * 5),\n        inner: ColorFilter.mode(\n          FColors.lerpColor(Colors.transparent, colors.barrier, v)!,\n          .srcOver,\n        ),\n      ),\n      motion: const FDialogRouteMotion(),\n    );\n',
+    'FDialogRouteStyle dialogRouteStyle({required FColors colors}) =>\n    FDialogRouteStyle(\n      barrierFilter: (v) => .compose(\n        outer: .blur(sigmaX: v * 5, sigmaY: v * 5),\n        inner: ColorFilter.mode(\n          FColors.lerpColor(Colors.transparent, colors.barrier, v)!,\n          .srcOver,\n        ),\n      ),\n      motion: const FDialogRouteMotion(),\n    );\n',
   ),
   fdialogstyle(
     'FDialogStyle',

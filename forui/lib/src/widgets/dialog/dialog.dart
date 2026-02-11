@@ -194,8 +194,8 @@ class FDialogRouteStyle with Diagnosticable, _$FDialogRouteStyleFunctions {
   /// Creates a [FDialogRouteStyle] that inherits its properties.
   FDialogRouteStyle.inherit({required FColors colors})
     : this(
-        barrierFilter: (v) => ImageFilter.compose(
-          outer: ImageFilter.blur(sigmaX: v * 5, sigmaY: v * 5),
+        barrierFilter: (v) => .compose(
+          outer: .blur(sigmaX: v * 5, sigmaY: v * 5),
           inner: ColorFilter.mode(FColors.lerpColor(Colors.transparent, colors.barrier, v)!, .srcOver),
         ),
       );
