@@ -283,7 +283,7 @@ class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
               [.disabled]: null,
             },
           ),
-          textStyle: .delta(
+          textStyle: .variants(
             typography.base.copyWith(color: colors.foreground, fontWeight: .w500),
             variants: {
               [.disabled]: .delta(color: colors.disable(colors.foreground)),

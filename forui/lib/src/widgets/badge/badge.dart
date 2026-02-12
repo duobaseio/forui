@@ -94,7 +94,7 @@ extension type FBadgeStyles._(FVariants<FBadgeVariantConstraint, FBadgeStyle, FB
   /// Creates a [FBadgeStyles] that inherits its properties.
   FBadgeStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this._(
-        .delta(
+        .variants(
           FBadgeStyle(
             decoration: BoxDecoration(color: colors.primary, borderRadius: FBadgeStyles.defaultBadgeRadius),
             contentStyle: FBadgeContentStyle(

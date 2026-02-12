@@ -469,7 +469,7 @@ extension type FItemStyles._(FVariants<FItemVariantConstraint, FItemStyle, FItem
   /// Creates a [FItemStyles] that inherits its properties.
   FItemStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this._(
-        .delta(
+        .variants(
           .inherit(colors: colors, typography: typography, style: style),
           variants: {
             [.destructive]: .delta(
@@ -549,7 +549,7 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
             [.disabled]: colors.background,
           },
         ),
-        decoration: .delta(
+        decoration: .variants(
           BoxDecoration(color: colors.background, borderRadius: style.borderRadius),
           variants: {
             [.hovered, .pressed]: .delta(color: colors.secondary),

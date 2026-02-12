@@ -29,6 +29,9 @@ final class _ColorSentinel extends Color {
 
 final class _ImageFilterSentinel implements ImageFilter {
   const _ImageFilterSentinel();
+
+  @override
+  String get debugShortDescription => throw UnimplementedError();
 }
 
 // ignore: avoid_implementing_value_types
@@ -299,6 +302,7 @@ const _fontWeightSentinel = _FontWeightSentinel();
 const _locale = Locale('sentinel');
 const _textDecorationSentinel = _TextDecorationSentinel();
 
+// ignore: avoid_implementing_value_types
 final class _FontWeightSentinel implements FontWeight {
   const _FontWeightSentinel();
 

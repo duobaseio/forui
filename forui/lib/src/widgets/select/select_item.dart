@@ -255,13 +255,13 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
     required FTypography typography,
   }) {
     const padding = EdgeInsetsDirectional.only(start: 11, top: 7.5, bottom: 7.5, end: 6);
-    final iconStyle = FVariants<FTappableVariantConstraint, IconThemeData, IconThemeDataDelta>.delta(
+    final iconStyle = FVariants<FTappableVariantConstraint, IconThemeData, IconThemeDataDelta>.variants(
       IconThemeData(color: colors.foreground, size: 15),
       variants: {
         [.disabled]: .delta(color: colors.disable(colors.foreground)),
       },
     );
-    final textStyle = FVariants<FTappableVariantConstraint, TextStyle, TextStyleDelta>.delta(
+    final textStyle = FVariants<FTappableVariantConstraint, TextStyle, TextStyleDelta>.variants(
       typography.sm.copyWith(color: colors.foreground),
       variants: {
         [.disabled]: .delta(color: colors.disable(colors.foreground)),
@@ -269,7 +269,7 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
     );
 
     return .new(
-      labelTextStyle: .delta(
+      labelTextStyle: .variants(
         typography.sm.copyWith(color: colors.foreground, fontWeight: .w600),
         variants: {
           [.disabled]: .delta(color: colors.disable(colors.foreground)),
@@ -279,7 +279,7 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
       dividerWidth: style.borderWidth,
       itemStyle: FItemStyle(
         backgroundColor: const .all(null),
-        decoration: .delta(
+        decoration: .variants(
           const BoxDecoration(),
           variants: {
             [.focused, .hovered, .pressed]: .delta(color: colors.secondary, borderRadius: style.borderRadius),

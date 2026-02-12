@@ -473,7 +473,7 @@ class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
   /// Creates a [FBreadcrumbStyle] that inherits its properties.
   FBreadcrumbStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        textStyle: .delta(
+        textStyle: .variants(
           typography.sm.copyWith(fontWeight: .w400, color: colors.mutedForeground),
           variants: {
             [.hovered, .pressed]: .delta(color: colors.foreground),

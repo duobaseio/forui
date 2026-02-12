@@ -21,7 +21,7 @@ extension type FSliderStyles._(FVariants<FSliderAxisVariantConstraint, FSliderSt
   /// Creates a [FSliderStyles] that inherits its properties.
   FSliderStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this._(
-        .delta(
+        .variants(
           .inherit(
             colors: colors,
             typography: typography,

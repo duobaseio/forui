@@ -62,7 +62,7 @@ class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
   FPaginationStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         itemIconStyle: .all(IconThemeData(color: colors.foreground, size: 18)),
-        itemDecoration: .delta(
+        itemDecoration: .variants(
           BoxDecoration(borderRadius: style.borderRadius, color: colors.background),
           variants: {
             [.hovered, .pressed]: .delta(color: colors.secondary),
@@ -71,7 +71,7 @@ class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
             [.selected.and(.hovered), .selected.and(.pressed)]: .delta(color: colors.hover(colors.primary)),
           },
         ),
-        itemTextStyle: .delta(
+        itemTextStyle: .variants(
           typography.sm.copyWith(color: colors.foreground),
           variants: {
             [.selected]: .delta(color: colors.primaryForeground),

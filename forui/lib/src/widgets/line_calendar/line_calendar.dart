@@ -218,7 +218,7 @@ class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
   }) {
     final focusedBorder = Border.all(color: colors.primary, width: style.borderWidth);
     return .new(
-      decoration: .delta(
+      decoration: .variants(
         BoxDecoration(
           color: colors.card,
           border: .all(color: colors.border),
@@ -258,7 +258,7 @@ class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
           [.selected.and(.disabled)]: colors.disable(colors.primaryForeground),
         },
       ),
-      dateTextStyle: .delta(
+      dateTextStyle: .variants(
         typography.xl.copyWith(color: colors.foreground, fontWeight: .w500, height: 0),
         variants: {
           [.disabled]: .delta(color: colors.disable(colors.foreground)),
@@ -267,7 +267,7 @@ class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
           [.selected.and(.disabled)]: .delta(color: colors.disable(colors.primaryForeground)),
         },
       ),
-      weekdayTextStyle: .delta(
+      weekdayTextStyle: .variants(
         typography.xs.copyWith(color: colors.mutedForeground, fontWeight: .w500, height: 0),
         variants: {
           [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),

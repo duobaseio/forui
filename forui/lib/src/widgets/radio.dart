@@ -110,7 +110,7 @@ class FRadio extends StatelessWidget {
       focusNode: focusNode,
       onFocusChange: onFocusChange,
       builder: (context, tappableVariants, _) {
-        final variants = {...tappableVariants, ...formVariants};
+        final variants = <FVariant>{...tappableVariants, ...formVariants};
 
         return FLabel(
           axis: .horizontal,

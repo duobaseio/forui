@@ -123,7 +123,7 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
       style: style,
     ).resolve({FButtonVariant.ghost}).resolve({FButtonSizeVariant.sm});
     final textStyle = typography.sm.copyWith(fontFamily: typography.defaultFontFamily);
-    final iconStyle = FVariants<FTextFieldVariantConstraint, IconThemeData, IconThemeDataDelta>.delta(
+    final iconStyle = FVariants<FTextFieldVariantConstraint, IconThemeData, IconThemeDataDelta>.variants(
       IconThemeData(color: colors.mutedForeground, size: 16),
       variants: {
         [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
@@ -147,19 +147,19 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
       obscureButtonStyle: bounceableButtonStyle.copyWith(
         tappableStyle: const .delta(motion: .delta(bounceTween: FTappableMotion.noBounceTween)),
       ),
-      contentTextStyle: .delta(
+      contentTextStyle: .variants(
         textStyle.copyWith(color: colors.foreground),
         variants: {
           [.disabled]: .delta(color: colors.disable(colors.foreground)),
         },
       ),
-      hintTextStyle: .delta(
+      hintTextStyle: .variants(
         textStyle.copyWith(color: colors.mutedForeground),
         variants: {
           [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
         },
       ),
-      counterTextStyle: .delta(
+      counterTextStyle: .variants(
         textStyle.copyWith(color: colors.foreground),
         variants: {
           [.disabled]: .delta(color: colors.disable(colors.foreground)),

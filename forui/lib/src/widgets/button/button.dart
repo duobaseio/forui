@@ -276,7 +276,7 @@ extension type FButtonStyles._(FVariants<FButtonVariantConstraint, FButtonSizes,
           FButtonSizeStyles.inherit(
             typography: typography,
             style: style,
-            decoration: .delta(
+            decoration: .variants(
               BoxDecoration(borderRadius: style.borderRadius, color: colors.primary),
               variants: {
                 [.hovered, .pressed]: .delta(color: colors.hover(colors.primary)),
@@ -291,7 +291,7 @@ extension type FButtonStyles._(FVariants<FButtonVariantConstraint, FButtonSizes,
             [.secondary]: FButtonSizeStyles.inherit(
               typography: typography,
               style: style,
-              decoration: .delta(
+              decoration: .variants(
                 BoxDecoration(borderRadius: style.borderRadius, color: colors.secondary),
                 variants: {
                   [.hovered, .pressed]: .delta(color: colors.hover(colors.secondary)),
@@ -305,7 +305,7 @@ extension type FButtonStyles._(FVariants<FButtonVariantConstraint, FButtonSizes,
             [.destructive]: FButtonSizeStyles.inherit(
               typography: typography,
               style: style,
-              decoration: .delta(
+              decoration: .variants(
                 BoxDecoration(
                   borderRadius: style.borderRadius,
                   color: colors.destructive.withValues(alpha: colors.brightness == .light ? 0.1 : 0.2),
@@ -326,7 +326,7 @@ extension type FButtonStyles._(FVariants<FButtonVariantConstraint, FButtonSizes,
             [.outline]: FButtonSizeStyles.inherit(
               typography: typography,
               style: style,
-              decoration: .delta(
+              decoration: .variants(
                 BoxDecoration(
                   border: .all(color: colors.border),
                   borderRadius: style.borderRadius,
@@ -344,7 +344,7 @@ extension type FButtonStyles._(FVariants<FButtonVariantConstraint, FButtonSizes,
             [.ghost]: FButtonSizeStyles.inherit(
               typography: typography,
               style: style,
-              decoration: .delta(
+              decoration: .variants(
                 BoxDecoration(borderRadius: style.borderRadius),
                 variants: {
                   [.hovered, .pressed]: .delta(color: colors.secondary),
@@ -388,19 +388,19 @@ extension type FButtonSizeStyles._(FVariants<FButtonSizeVariantConstraint, FButt
       decoration: decoration,
       focusedOutlineStyle: style.focusedOutlineStyle,
       contentStyle: FButtonContentStyle(
-        textStyle: .delta(
+        textStyle: .variants(
           textStyle.copyWith(color: foregroundColor, fontWeight: .w500, height: 1, leadingDistribution: .even),
           variants: {
             [.disabled]: .delta(color: disabledForegroundColor),
           },
         ),
-        iconStyle: .delta(
+        iconStyle: .variants(
           IconThemeData(color: foregroundColor, size: iconSize),
           variants: {
             [.disabled]: .delta(color: disabledForegroundColor),
           },
         ),
-        circularProgressStyle: .delta(
+        circularProgressStyle: .variants(
           FCircularProgressStyle(
             iconStyle: IconThemeData(color: foregroundColor, size: iconSize),
           ),
@@ -412,7 +412,7 @@ extension type FButtonSizeStyles._(FVariants<FButtonSizeVariantConstraint, FButt
         spacing: contentSpacing,
       ),
       iconContentStyle: FButtonIconContentStyle(
-        iconStyle: .delta(
+        iconStyle: .variants(
           IconThemeData(color: foregroundColor, size: iconSize),
           variants: {
             [.disabled]: .delta(color: disabledForegroundColor),

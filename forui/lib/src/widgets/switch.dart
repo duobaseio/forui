@@ -114,7 +114,7 @@ class FSwitch extends StatelessWidget {
   Widget build(BuildContext context) {
     final style = this.style(context.theme.switchStyle);
     final formVariants = <FFormFieldVariant>{if (!enabled) .disabled, if (error != null) .error};
-    final variants = {if (value) FSwitchVariant.selected, ...formVariants};
+    final variants = <FVariant>{if (value) FSwitchVariant.selected, ...formVariants};
 
     // The label is wrapped in a GestureDetector to improve affordance.
     return GestureDetector(

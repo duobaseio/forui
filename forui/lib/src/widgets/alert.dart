@@ -133,7 +133,7 @@ extension type FAlertStyles._(FVariants<FAlertVariantConstraint, FAlertStyle, FA
   /// Creates a [FAlertStyles] that inherits its properties.
   FAlertStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this._(
-        .delta(
+        .variants(
           FAlertStyle(
             iconStyle: IconThemeData(color: colors.foreground, size: 20),
             titleTextStyle: typography.base.copyWith(fontWeight: .w500, color: colors.foreground, height: 1.2),

@@ -714,7 +714,7 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
                 focusNode: _focus,
                 onPress: widget.enabled ? _toggle : null,
                 builder: (context, tappableVariants, child) {
-                  final variants = {...tappableVariants, ...formVariants};
+                  final variants = <FVariant>{...tappableVariants, ...formVariants};
                   return DecoratedBox(
                     decoration: style.fieldStyle.decoration.resolve(variants),
                     child: Padding(
@@ -918,7 +918,7 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
       style: style,
     ).resolve({FButtonVariant.ghost}).resolve({FButtonSizeVariant.sm});
 
-    final iconStyle = FVariants<FTextFieldVariantConstraint, IconThemeData, IconThemeDataDelta>.delta(
+    final iconStyle = FVariants<FTextFieldVariantConstraint, IconThemeData, IconThemeDataDelta>.variants(
       IconThemeData(color: colors.mutedForeground, size: 16),
       variants: {
         [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
@@ -957,7 +957,7 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
           ),
         },
       ),
-      hintTextStyle: .delta(
+      hintTextStyle: .variants(
         typography.sm.copyWith(color: colors.mutedForeground),
         variants: {
           [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),

@@ -306,37 +306,37 @@ extension type FTileStyles._(FVariants<FItemVariantConstraint, FTileStyle, FTile
   /// Creates a [FTileStyles] that inherits its properties.
   FTileStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this._(
-        .delta(
+        .variants(
           .inherit(colors: colors, typography: typography, style: style),
           variants: {
             [.destructive]: .delta(
               contentStyle: FItemContentStyle(
                 padding: const .fromSTEB(15, 13, 10, 13),
-                prefixIconStyle: .delta(
+                prefixIconStyle: .variants(
                   IconThemeData(color: colors.destructive, size: 18),
                   variants: {
                     [.disabled]: .delta(color: colors.disable(colors.destructive)),
                   },
                 ),
-                titleTextStyle: .delta(
+                titleTextStyle: .variants(
                   typography.base.copyWith(color: colors.destructive),
                   variants: {
                     [.disabled]: .delta(color: colors.disable(colors.destructive)),
                   },
                 ),
-                subtitleTextStyle: .delta(
+                subtitleTextStyle: .variants(
                   typography.xs.copyWith(color: colors.destructive),
                   variants: {
                     [.disabled]: .delta(color: colors.disable(colors.destructive)),
                   },
                 ),
-                detailsTextStyle: .delta(
+                detailsTextStyle: .variants(
                   typography.base.copyWith(color: colors.destructive),
                   variants: {
                     [.disabled]: .delta(color: colors.disable(colors.destructive)),
                   },
                 ),
-                suffixIconStyle: .delta(
+                suffixIconStyle: .variants(
                   IconThemeData(color: colors.destructive, size: 18),
                   variants: {
                     [.disabled]: .delta(color: colors.disable(colors.destructive)),
@@ -345,13 +345,13 @@ extension type FTileStyles._(FVariants<FItemVariantConstraint, FTileStyle, FTile
               ),
               rawItemContentStyle: FRawItemContentStyle(
                 padding: const .fromSTEB(15, 13, 10, 13),
-                prefixIconStyle: .delta(
+                prefixIconStyle: .variants(
                   IconThemeData(color: colors.destructive, size: 18),
                   variants: {
                     [.disabled]: .delta(color: colors.disable(colors.destructive)),
                   },
                 ),
-                childTextStyle: .delta(
+                childTextStyle: .variants(
                   typography.base.copyWith(color: colors.destructive),
                   variants: {
                     [.disabled]: .delta(color: colors.disable(colors.destructive)),
@@ -386,7 +386,7 @@ class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
   FTileStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         backgroundColor: .all(colors.card),
-        decoration: .delta(
+        decoration: .variants(
           BoxDecoration(
             color: colors.card,
             border: .all(color: colors.border),
@@ -400,31 +400,31 @@ class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
         ),
         contentStyle: FItemContentStyle(
           padding: const .fromSTEB(15, 13, 10, 13),
-          prefixIconStyle: .delta(
+          prefixIconStyle: .variants(
             IconThemeData(color: colors.primary, size: 18),
             variants: {
               [.disabled]: .delta(color: colors.disable(colors.primary)),
             },
           ),
-          titleTextStyle: .delta(
+          titleTextStyle: .variants(
             typography.base,
             variants: {
               [.disabled]: .delta(color: colors.disable(colors.foreground)),
             },
           ),
-          subtitleTextStyle: .delta(
+          subtitleTextStyle: .variants(
             typography.xs.copyWith(color: colors.mutedForeground),
             variants: {
               [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
             },
           ),
-          detailsTextStyle: .delta(
+          detailsTextStyle: .variants(
             typography.base.copyWith(color: colors.mutedForeground),
             variants: {
               [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
             },
           ),
-          suffixIconStyle: .delta(
+          suffixIconStyle: .variants(
             IconThemeData(color: colors.mutedForeground, size: 18),
             variants: {
               [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
@@ -433,13 +433,13 @@ class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
         ),
         rawItemContentStyle: FRawItemContentStyle(
           padding: const .fromSTEB(15, 13, 10, 13),
-          prefixIconStyle: .delta(
+          prefixIconStyle: .variants(
             IconThemeData(color: colors.primary, size: 18),
             variants: {
               [.disabled]: .delta(color: colors.disable(colors.primary)),
             },
           ),
-          childTextStyle: .delta(
+          childTextStyle: .variants(
             typography.base,
             variants: {
               [.disabled]: .delta(color: colors.disable(colors.foreground)),

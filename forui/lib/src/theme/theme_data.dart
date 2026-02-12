@@ -904,9 +904,8 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// * Apply your Forui theme consistently to both Forui and Material widgets
   /// * Create a gradual migration path from Material Design to Forui
   ///
-  /// Note that this conversion is approximate and experimental. Some styling properties may not map
-  /// perfectly between the two design systems, and the resulting Material theme might not capture
-  /// all the nuances of your Forui theme.
+  /// Note that this conversion is approximate. Some styling properties may not map perfectly between the two design
+  /// systems, and the resulting Material theme might not capture all the nuances of your Forui theme.
   ///
   /// ```dart
   /// // Apply a Forui theme to Material widgets
@@ -915,7 +914,6 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   ///   // ...
   /// )
   /// ```
-  @experimental
   ThemeData toApproximateMaterialTheme() {
     // Material requires height to be 1, certain widgets will overflow without it.
     // TextBaseline.alphabetic is required as TextField requires it.

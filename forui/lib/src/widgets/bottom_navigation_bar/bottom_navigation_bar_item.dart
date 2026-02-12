@@ -153,13 +153,13 @@ class FBottomNavigationBarItemStyle with Diagnosticable, _$FBottomNavigationBarI
     required FTypography typography,
     required FStyle style,
   }) : this(
-         iconStyle: .delta(
+         iconStyle: .variants(
            IconThemeData(color: colors.disable(colors.foreground), size: 24),
            variants: {
              [.selected]: .delta(color: colors.primary),
            },
          ),
-         textStyle: .delta(
+         textStyle: .variants(
            typography.base.copyWith(color: colors.disable(colors.foreground), fontSize: 10),
            variants: {
              [.selected]: .delta(color: colors.primary),

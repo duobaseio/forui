@@ -198,13 +198,13 @@ class FMultiSelectTagStyle with Diagnosticable, _$FMultiSelectTagStyleFunctions 
             [.disabled]: BoxDecoration(borderRadius: style.borderRadius, color: colors.disable(colors.secondary)),
           },
         ),
-        labelTextStyle: .delta(
+        labelTextStyle: .variants(
           typography.sm.copyWith(color: colors.secondaryForeground),
           variants: {
             [.disabled]: .delta(color: colors.disable(colors.secondaryForeground)),
           },
         ),
-        iconStyle: .delta(
+        iconStyle: .variants(
           IconThemeData(color: colors.mutedForeground, size: 15),
           variants: {
             [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),

@@ -39,7 +39,7 @@ class FFormFieldStyle with Diagnosticable, _$FFormFieldStyleFunctions {
 
   /// Creates a [FFormFieldStyle] that inherits its properties.
   FFormFieldStyle.inherit({required FColors colors, required FTypography typography})
-    : labelTextStyle = .delta(
+    : labelTextStyle = .variants(
         typography.sm.copyWith(color: colors.foreground, fontWeight: .w600),
         variants: {
           [.error]: .delta(color: colors.error),
@@ -47,13 +47,13 @@ class FFormFieldStyle with Diagnosticable, _$FFormFieldStyleFunctions {
           [.disabled.and(.error)]: .delta(color: colors.disable(colors.error)),
         },
       ),
-      descriptionTextStyle = .delta(
+      descriptionTextStyle = .variants(
         typography.sm.copyWith(color: colors.mutedForeground),
         variants: {
           [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
         },
       ),
-      errorTextStyle = .delta(
+      errorTextStyle = .variants(
         typography.sm.copyWith(color: colors.error, fontWeight: .w600),
         variants: {
           [.disabled]: .delta(color: colors.disable(colors.error)),

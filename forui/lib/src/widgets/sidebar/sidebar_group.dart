@@ -219,7 +219,7 @@ class FSidebarGroupStyle with Diagnosticable, _$FSidebarGroupStyleFunctions {
   FSidebarGroupStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         labelStyle: typography.sm.copyWith(color: colors.mutedForeground, overflow: .ellipsis, fontWeight: .w500),
-        actionStyle: .delta(
+        actionStyle: .variants(
           IconThemeData(color: colors.mutedForeground, size: 18),
           variants: {
             [.hovered, .pressed]: .delta(color: colors.foreground),

@@ -6,7 +6,7 @@ final radio =
     // {@snippet constructor}
     FRadio(
       style: .delta(
-        borderColor: .apply([
+        borderColor: .delta([
           // Change ONLY the base border color.
           .onBase(Colors.blue),
           // Set the border color when selected, adds a new constraint

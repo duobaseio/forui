@@ -72,7 +72,7 @@ class FTabsStyle with Diagnosticable, _$FTabsStyleFunctions {
           borderRadius: style.borderRadius,
           color: colors.muted,
         ),
-        labelTextStyle: .delta(
+        labelTextStyle: .variants(
           typography.sm.copyWith(
             fontWeight: .w500,
             fontFamily: typography.defaultFontFamily,

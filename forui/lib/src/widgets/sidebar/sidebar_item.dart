@@ -339,19 +339,19 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
   /// Creates a [FSidebarItemStyle] that inherits its properties.
   FSidebarItemStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        textStyle: .delta(
+        textStyle: .variants(
           typography.base.copyWith(color: colors.foreground, overflow: .ellipsis, height: 1),
           variants: {
             [.disabled]: .delta(color: colors.mutedForeground),
           },
         ),
-        iconStyle: .delta(
+        iconStyle: .variants(
           IconThemeData(color: colors.foreground, size: 16),
           variants: {
             [.disabled]: .delta(color: colors.mutedForeground),
           },
         ),
-        collapsibleIconStyle: .delta(
+        collapsibleIconStyle: .variants(
           IconThemeData(color: colors.foreground, size: 16),
           variants: {
             [.disabled]: .delta(color: colors.mutedForeground),

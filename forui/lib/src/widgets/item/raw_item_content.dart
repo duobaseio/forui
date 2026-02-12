@@ -121,7 +121,7 @@ class FRawItemContentStyle with Diagnosticable, _$FRawItemContentStyleFunctions 
     required Color prefix,
     required Color color,
   }) : this(
-         prefixIconStyle: .delta(
+         prefixIconStyle: .variants(
            IconThemeData(color: prefix, size: 15),
            variants: {
              [.disabled]: .delta(color: colors.disable(prefix)),

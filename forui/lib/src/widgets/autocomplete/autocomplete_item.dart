@@ -242,20 +242,20 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
     required FTypography typography,
   }) {
     const padding = EdgeInsetsDirectional.only(start: 11, top: 7.5, bottom: 7.5, end: 6);
-    final iconStyle = FVariants<FTappableVariantConstraint, IconThemeData, IconThemeDataDelta>.delta(
+    final iconStyle = FVariants<FTappableVariantConstraint, IconThemeData, IconThemeDataDelta>.variants(
       IconThemeData(color: colors.foreground, size: 15),
       variants: {
         [.disabled]: .delta(color: colors.disable(colors.foreground)),
       },
     );
-    final textStyle = FVariants<FTappableVariantConstraint, TextStyle, TextStyleDelta>.delta(
+    final textStyle = FVariants<FTappableVariantConstraint, TextStyle, TextStyleDelta>.variants(
       typography.sm,
       variants: {
         [.disabled]: .delta(color: colors.disable(colors.foreground)),
       },
     );
     return .new(
-      labelTextStyle: .delta(
+      labelTextStyle: .variants(
         typography.sm.copyWith(color: colors.foreground, fontWeight: .w600),
         variants: {
           [.disabled]: .delta(color: colors.disable(colors.foreground)),

@@ -199,7 +199,7 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
         .copyWith(
           iconContentStyle: .delta(
             iconStyle: .value(
-              .delta(
+              .variants(
                 IconThemeData(color: colors.foreground, size: 16),
                 variants: {
                   [.disabled]: .delta(color: colors.disable(colors.foreground)),
@@ -208,7 +208,7 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
             ),
           ),
           decoration: .value(
-            .delta(
+            .variants(
               BoxDecoration(
                 border: .all(color: colors.border),
                 borderRadius: style.borderRadius,

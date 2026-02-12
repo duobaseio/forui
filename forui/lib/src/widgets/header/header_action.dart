@@ -216,7 +216,7 @@ class FHeaderActionStyle with Diagnosticable, _$FHeaderActionStyleFunctions {
 
   /// Creates a [FHeaderActionStyle] that inherits its properties.
   FHeaderActionStyle.inherit({required FColors colors, required FStyle style, required double size})
-    : iconStyle = .delta(
+    : iconStyle = .variants(
         IconThemeData(color: colors.foreground, size: size),
         variants: {
           [.disabled]: .delta(color: colors.disable(colors.foreground)),

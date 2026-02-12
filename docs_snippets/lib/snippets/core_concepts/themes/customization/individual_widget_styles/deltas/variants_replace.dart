@@ -7,7 +7,7 @@ final accordion =
     FAccordion(
       style: .delta(
         titleTextStyle: .value(
-          FVariants.delta(
+          FVariants.variants(
             const TextStyle(fontSize: 18, fontWeight: .bold),
             variants: {
               [.hovered, .pressed]: const .delta(decoration: .underline),

@@ -4,7 +4,7 @@ import 'package:forui/forui.dart';
 
 final FVariants<FTappableVariantConstraint, BoxDecoration, BoxDecorationDelta> delta =
     // {@snippet constructor}
-    FVariants.delta(
+    FVariants.variants(
       // base (default if no variants match)
       const BoxDecoration(color: Colors.white, borderRadius: .all(.circular(8))),
       variants: {

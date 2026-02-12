@@ -199,7 +199,7 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
   /// Creates a [FDividerStyles] that inherits its properties.
   FAccordionStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        titleTextStyle: .delta(
+        titleTextStyle: .variants(
           typography.base.copyWith(fontWeight: .w500, color: colors.foreground),
           variants: {
             [.hovered, .pressed]: const .delta(decoration: .underline),

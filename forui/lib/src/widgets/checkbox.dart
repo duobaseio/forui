@@ -110,7 +110,7 @@ class FCheckbox extends StatelessWidget {
       focusNode: focusNode,
       onFocusChange: onFocusChange,
       builder: (context, tappableVariants, _) {
-        final variants = {...tappableVariants, ...formVariants};
+        final variants = <FVariant>{...tappableVariants, ...formVariants};
 
         final iconTheme = style.iconStyle.resolve(variants);
         final decoration = style.decoration.resolve(variants);
@@ -215,7 +215,7 @@ class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
     return .new(
       tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
       focusedOutlineStyle: style.focusedOutlineStyle.copyWith(borderRadius: .circular(4)),
-      iconStyle: .delta(
+      iconStyle: .variants(
         IconThemeData(color: colors.primaryForeground, size: 14),
         variants: {
           [.disabled]: .delta(color: colors.disable(colors.primaryForeground)),
@@ -224,7 +224,7 @@ class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
           [.error.and(.disabled)]: .delta(color: colors.disable(colors.errorForeground)),
         },
       ),
-      decoration: .delta(
+      decoration: .variants(
         BoxDecoration(
           borderRadius: style.borderRadius,
           border: .all(color: colors.mutedForeground, width: 0.6),

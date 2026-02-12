@@ -6,7 +6,7 @@ final accordion =
     // {@snippet constructor}
     FAccordion(
       style: .delta(
-        titleTextStyle: .apply([
+        titleTextStyle: .delta([
           // Change ONLY the base title color.
           .onBase(const .delta(color: Colors.red)),
           // Make hovered AND focused titles underlined, adds a new constraint

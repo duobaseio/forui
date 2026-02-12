@@ -253,7 +253,7 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
       current: FCalendarEntryStyle(
         backgroundColor: backgroundColor,
         borderColor: border,
-        textStyle: .delta(
+        textStyle: .variants(
           typography.base.copyWith(color: colors.foreground, fontWeight: .w500),
           variants: {
             [.disabled]: .delta(color: colors.disable(colors.foreground)),
@@ -267,7 +267,7 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
       enclosing: FCalendarEntryStyle(
         backgroundColor: backgroundColor,
         borderColor: border,
-        textStyle: .delta(
+        textStyle: .variants(
           typography.base.copyWith(color: colors.mutedForeground, fontWeight: .w500),
           variants: {
             [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),

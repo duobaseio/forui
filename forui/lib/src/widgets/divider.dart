@@ -76,7 +76,7 @@ extension type FDividerStyles._(FVariants<FDividerAxisVariantConstraint, FDivide
   /// Creates a [FDividerStyles] that inherits its properties.
   FDividerStyles.inherit({required FColors colors, required FStyle style})
     : this._(
-        .delta(
+        .variants(
           FDividerStyle(
             color: colors.secondary,
             padding: FDividerStyle.defaultPadding.horizontalStyle,

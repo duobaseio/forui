@@ -122,8 +122,8 @@ class FVariants<K extends FVariantConstraint, V, D extends Delta> with Diagnosti
           for (final constraint in constraints) constraint: value,
       };
 
-  /// Creates an [FVariants] with variants created from deltas applied to [base].
-  FVariants.delta(this.base, {required Map<List<K>, D> variants})
+  /// Creates an [FVariants] with variants derived from deltas applied to [base].
+  FVariants.variants(this.base, {required Map<List<K>, D> variants})
     : variants = (() {
         final map = <K, V>{};
         for (final MapEntry(key: constraints, value: delta) in variants.entries) {
@@ -150,9 +150,9 @@ class FVariants<K extends FVariantConstraint, V, D extends Delta> with Diagnosti
   /// final variants = FVariants(
   ///   'base',
   ///   variants: {
-  ///     {.hovered}: 'A',
-  ///     {.hovered.and(.focused)}: 'B',
-  ///     {.disabled}: 'C',
+  ///     [.hovered]: 'A',
+  ///     [.hovered.and(.focused)]: 'B',
+  ///     [.disabled]: 'C',
   ///   },
   /// );
   ///
@@ -192,7 +192,7 @@ class FVariants<K extends FVariantConstraint, V, D extends Delta> with Diagnosti
   /// * [applyValues] for applying value-based operations.
   @useResult
   FVariants<K, V, D> apply<E extends FVariant>(List<FVariantOperation<K, E, V, D>> operations) =>
-      FVariantsDelta.apply(operations)(this);
+      FVariantsDelta.delta(operations)(this);
 
   /// Applies a sequence of value-based [operations] to this [FVariants].
   ///
@@ -207,7 +207,7 @@ class FVariants<K extends FVariantConstraint, V, D extends Delta> with Diagnosti
   /// * [apply] for applying delta-based operations.
   @useResult
   FVariants<K, V, Delta> applyValues<E extends FVariant>(List<FVariantValueDeltaOperation<K, E, V>> operations) =>
-      FVariantsValueDelta.apply(operations)(this);
+      FVariantsValueDelta.delta(operations)(this);
 
   /// Returns a new [FVariants] with the constraint type parameter cast to [T].
   ///
@@ -244,7 +244,7 @@ class FVariantsDelta<K extends FVariantConstraint, E extends FVariant, V, D exte
   FVariantsDelta.value(FVariants<K, V, D> variants) : _call = ((_, _) => variants);
 
   /// Creates a sequence of concrete modifications to [FVariants].
-  FVariantsDelta.apply(List<FVariantOperation<K, E, V, D>> operations)
+  FVariantsDelta.delta(List<FVariantOperation<K, E, V, D>> operations)
     : _call = ((base, variants) {
         for (final operation in operations) {
           final result = operation._call(base, variants);
@@ -259,7 +259,7 @@ class FVariantsDelta<K extends FVariantConstraint, E extends FVariant, V, D exte
   FVariants<K, V, D> call(covariant FVariants<K, V, D> variants) => _call(variants.base, variants.variants);
 }
 
-/// An operation in [FVariantsDelta.apply] that modifies [FVariants] using deltas.
+/// An operation in [FVariantsDelta.delta] that modifies [FVariants] using deltas.
 class FVariantOperation<K extends FVariantConstraint, E extends FVariant, V, D extends Delta> {
   final FVariants<K, V, D> Function(V base, Map<K, V> variants) _call;
 
@@ -404,7 +404,7 @@ class FVariantsValueDelta<K extends FVariantConstraint, E extends FVariant, V> w
   FVariantsValueDelta.value(FVariants<K, V, Delta> variants) : _call = ((_, _) => variants);
 
   /// Creates a sequence of modifications to [FVariants].
-  FVariantsValueDelta.apply(List<FVariantValueDeltaOperation<K, E, V>> operations)
+  FVariantsValueDelta.delta(List<FVariantValueDeltaOperation<K, E, V>> operations)
     : _call = ((base, variants) {
         for (final operation in operations) {
           final result = operation._call(base, variants);
@@ -419,7 +419,7 @@ class FVariantsValueDelta<K extends FVariantConstraint, E extends FVariant, V> w
   FVariants<K, V, Delta> call(covariant FVariants<K, V, Delta> variants) => _call(variants.base, variants.variants);
 }
 
-/// An operation in [FVariantsValueDelta.apply] that modifies [FVariants] using concrete values.
+/// An operation in [FVariantsValueDelta.delta] that modifies [FVariants] using concrete values.
 class FVariantValueDeltaOperation<K extends FVariantConstraint, E extends FVariant, V> {
   final FVariants<K, V, Delta> Function(V base, Map<K, V> variants) _call;
 
