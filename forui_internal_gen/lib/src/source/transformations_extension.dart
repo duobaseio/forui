@@ -86,6 +86,4 @@ class TransformationsExtension {
         ..body = Code('.new(${assignments.join()})\n'),
     );
   }
-
-
 }
