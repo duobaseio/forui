@@ -13,7 +13,7 @@ import styleSnippet from '@/snippets/snippets/concepts/themes/components/style.j
 import variantsSnippet from '@/snippets/snippets/concepts/themes/components/variants.json';
 import variantsDeltaSnippet from '@/snippets/snippets/concepts/themes/components/variants_delta.json';
 import customFontFamilySnippet from '@/snippets/snippets/concepts/themes/components/custom_font_family.json';
-import approximateMaterialThemeSnippet from '@/snippets/snippets/concepts/themes/material_interop/apporximate_material_theme.json';
+import approximateMaterialThemeSnippet from '@/snippets/snippets/concepts/themes/material_interop/approximate_material_theme.json';
 
 export function Theme({title, color}) {
     return (
@@ -25,7 +25,7 @@ export function Theme({title, color}) {
 }
 
 Forui themes allow you to define a consistent visual style across your application & widgets. It optionally relies on
-the [CLI](/docs/cli) to generate themes and styles that can be directly modified in your project.
+the [CLI](/docs/reference/cli) to generate themes and styles that can be directly modified in your project.
 
 # Getting Started
 
@@ -165,7 +165,7 @@ method is provided to quickly scale all the font sizes.
 
 ## Style
 
-The `FStyle` class the theme's miscellaneous styling options such as the default border radius and icon size.
+The `FStyle` class defines the theme's miscellaneous styling options such as the default border radius and icon size.
 
 <CodeSnippet snippet={styleSnippet} />
 
