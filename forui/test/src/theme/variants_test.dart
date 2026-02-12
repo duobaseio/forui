@@ -197,8 +197,8 @@ void main() {
     test('apply', () {
       final variants = createVariants<FVariant, FVariant, int, _Add>(0, {a: 1, b: 2});
       final result = variants.apply([
-        .on({c}, const _Add(3)),
-        .onAll(const _Add(10)),
+        .exact({c}, const _Add(3)),
+        .all(const _Add(10)),
       ]);
 
       expect(result.base, 10);
@@ -208,8 +208,8 @@ void main() {
     test('applyValues', () {
       final variants = createVariants<FVariant, FVariant, int, Delta>(0, {a: 1, b: 2});
       final result = variants.applyValues([
-        .on({c}, 3),
-        .onAll(10),
+        .exact({c}, 3),
+        .all(10),
       ]);
 
       expect(result.base, 10);
@@ -229,8 +229,8 @@ void main() {
     group('apply(...)', () {
       test('in order', () {
         final delta = FVariantsDelta<FVariant, FVariant, int, _Add>.delta([
-          .on({c}, const _Add(3)),
-          .onAll(const _Add(10)),
+          .exact({c}, const _Add(3)),
+          .all(const _Add(10)),
         ]);
         final result = delta(createVariants(0, {a: 1, b: 2}));
 
@@ -254,17 +254,17 @@ void main() {
     const c = FVariant(1, 'c');
     const d = FVariant(1, 'd');
 
-    test('onBase(...)', () {
-      final delta = FVariantsDelta<FVariant, FVariant, int, _Add>.delta([.onBase(const _Add(10))]);
+    test('base(...)', () {
+      final delta = FVariantsDelta<FVariant, FVariant, int, _Add>.delta([.base(const _Add(10))]);
       final result = delta(createVariants(5, {a: 1}));
 
       expect(result.base, 15);
       expect(result.variants, {a: 1});
     });
 
-    test('on(...)', () {
+    test('exact(...)', () {
       final delta = FVariantsDelta<FVariant, FVariant, int, _Add>.delta([
-        .on({b, c}, const _Add(10)),
+        .exact({b, c}, const _Add(10)),
       ]);
       final result = delta(createVariants(0, {a: 1, b: 2}));
 
@@ -277,8 +277,8 @@ void main() {
       ('none', {d}, {a: 1, b: 2, c: 3}),
       ('single', {b}, {a: 1, b: 12, c: 3}),
     ]) {
-      test('onMatching - $description', () {
-        final delta = FVariantsDelta<FVariant, FVariant, int, _Add>.delta([.onMatching(variants, const _Add(10))]);
+      test('match - $description', () {
+        final delta = FVariantsDelta<FVariant, FVariant, int, _Add>.delta([.match(variants, const _Add(10))]);
         final result = delta(createVariants(0, {a: 1, b: 2, c: 3}));
 
         expect(result.base, 0);
@@ -286,8 +286,8 @@ void main() {
       });
     }
 
-    test('onAll(...)', () {
-      final delta = FVariantsDelta<FVariant, FVariant, int, _Add>.delta([.onAll(const _Add(10))]);
+    test('all(...)', () {
+      final delta = FVariantsDelta<FVariant, FVariant, int, _Add>.delta([.all(const _Add(10))]);
       final result = delta(createVariants(0, {a: 1, b: 2}));
 
       expect(result.base, 10);
@@ -304,9 +304,9 @@ void main() {
       expect(result.variants, {c: 3});
     });
 
-    test('removeMatching(...)', () {
+    test('removeMatch(...)', () {
       final delta = FVariantsDelta<FVariantConstraint, FVariant, int, _Add>.delta([
-        .removeMatching({a, b}),
+        .removeMatch({a, b}),
       ]);
       final result = delta(createVariants(0, <FVariantConstraint, int>{a: 1, b: 2, c: 3, ab: 4, ac: 5}));
 
@@ -335,8 +335,8 @@ void main() {
     group('apply(...)', () {
       test('in order', () {
         final delta = FVariantsValueDelta<FVariant, FVariant, int, Delta>.delta([
-          .on({c}, 3),
-          .onAll(10),
+          .exact({c}, 3),
+          .all(10),
         ]);
         final result = delta(createVariants(0, {a: 1, b: 2}));
 
@@ -360,8 +360,8 @@ void main() {
     const c = FVariant(1, 'c');
     const d = FVariant(1, 'd');
 
-    test('onBase(...)', () {
-      final delta = FVariantsValueDelta<FVariant, FVariant, int, Delta>.delta([.onBase(5)]);
+    test('base(...)', () {
+      final delta = FVariantsValueDelta<FVariant, FVariant, int, Delta>.delta([.base(5)]);
       final result = delta(createVariants(0, {a: 1}));
 
       expect(result.base, 5);
@@ -372,8 +372,8 @@ void main() {
       (' new', {c}, {a: 1, b: 2, c: 10}),
       ('overwrite', {b}, {a: 1, b: 10}),
     ]) {
-      test('on(...) - $description', () {
-        final delta = FVariantsValueDelta<FVariant, FVariant, int, Delta>.delta([.on(constraints, 10)]);
+      test('exact(...) - $description', () {
+        final delta = FVariantsValueDelta<FVariant, FVariant, int, Delta>.delta([.exact(constraints, 10)]);
         final result = delta(createVariants(0, {a: 1, b: 2}));
 
         expect(result.base, 0);
@@ -386,8 +386,8 @@ void main() {
       ('none', {d}, {a: 1, b: 2, c: 3}),
       ('single', {b}, {a: 1, b: 10, c: 3}),
     ]) {
-      test('onMatching(...) - $description', () {
-        final delta = FVariantsValueDelta<FVariant, FVariant, int, Delta>.delta([.onMatching(variants, 10)]);
+      test('match(...) - $description', () {
+        final delta = FVariantsValueDelta<FVariant, FVariant, int, Delta>.delta([.match(variants, 10)]);
         final result = delta(createVariants(0, {a: 1, b: 2, c: 3}));
 
         expect(result.base, 0);
@@ -400,8 +400,8 @@ void main() {
       ('single', {a: 1}, {a: 10}),
       ('many', {a: 1, b: 2, c: 3}, {a: 10, b: 10, c: 10}),
     ]) {
-      test('onVariants(...) - $description', () {
-        final delta = FVariantsValueDelta<FVariant, FVariant, int, Delta>.delta([.onVariants(10)]);
+      test('variants(...) - $description', () {
+        final delta = FVariantsValueDelta<FVariant, FVariant, int, Delta>.delta([.variants(10)]);
         final result = delta(createVariants(0, initial));
 
         expect(result.base, 0);
@@ -409,8 +409,8 @@ void main() {
       });
     }
 
-    test('onAll(...)', () {
-      final delta = FVariantsValueDelta<FVariant, FVariant, int, Delta>.delta([.onAll(10)]);
+    test('all(...)', () {
+      final delta = FVariantsValueDelta<FVariant, FVariant, int, Delta>.delta([.all(10)]);
       final result = delta(createVariants(0, {a: 1, b: 2}));
 
       expect(result.base, 10);
@@ -427,9 +427,9 @@ void main() {
       expect(result.variants, {c: 3, ab: 4});
     });
 
-    test('removeMatching(...)', () {
+    test('removeMatch(...)', () {
       final delta = FVariantsValueDelta<FVariantConstraint, FVariant, int, Delta>.delta([
-        .removeMatching({a, b}),
+        .removeMatch({a, b}),
       ]);
       final result = delta(createVariants(0, <FVariantConstraint, int>{a: 1, b: 2, c: 3, ab: 4, ac: 5}));
 

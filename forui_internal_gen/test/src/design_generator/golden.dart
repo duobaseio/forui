@@ -419,9 +419,6 @@ mixin _$FGoldenStyleFunctions on Diagnosticable implements FGoldenStyleDelta {
 ///
 /// A [FGoldenStyle] is itself a [FGoldenStyleDelta].
 sealed class FGoldenStyleDelta with Delta {
-  /// Creates a delta that returns the [FGoldenStyle] in the current context.
-  const factory FGoldenStyleDelta.context() = _FGoldenStyleContext;
-
   /// Creates a partial modification of a [FGoldenStyle].
   ///
   /// ## Parameters
@@ -495,15 +492,11 @@ sealed class FGoldenStyleDelta with Delta {
     Map<String, int>? map,
   }) = _FGoldenStyleDelta;
 
+  /// Creates a delta that returns the [FGoldenStyle] in the current context.
+  const factory FGoldenStyleDelta.context() = _FGoldenStyleContext;
+
   @override
   FGoldenStyle call(covariant FGoldenStyle value);
-}
-
-class _FGoldenStyleContext implements FGoldenStyleDelta {
-  const _FGoldenStyleContext();
-
-  @override
-  FGoldenStyle call(FGoldenStyle original) => original;
 }
 
 class _FGoldenStyleDelta implements FGoldenStyleDelta {
@@ -657,6 +650,13 @@ class _FGoldenStyleDelta implements FGoldenStyleDelta {
   );
 }
 
+class _FGoldenStyleContext implements FGoldenStyleDelta {
+  const _FGoldenStyleContext();
+
+  @override
+  FGoldenStyle call(FGoldenStyle original) => original;
+}
+
 /// Provides [copyWith] and [lerp] methods.
 extension $FGoldenNestedMotionTransformations on FGoldenNestedMotion {
   /// Returns a copy of this [FGoldenNestedMotion] with the given properties replaced.
@@ -712,9 +712,6 @@ mixin _$FGoldenNestedMotionFunctions on Diagnosticable implements FGoldenNestedM
 ///
 /// A [FGoldenNestedMotion] is itself a [FGoldenNestedMotionDelta].
 sealed class FGoldenNestedMotionDelta with Delta {
-  /// Creates a delta that returns the [FGoldenNestedMotion] in the current context.
-  const factory FGoldenNestedMotionDelta.context() = _FGoldenNestedMotionContext;
-
   /// Creates a partial modification of a [FGoldenNestedMotion].
   ///
   /// ## Parameters
@@ -724,15 +721,11 @@ sealed class FGoldenNestedMotionDelta with Delta {
   const factory FGoldenNestedMotionDelta.delta({double? someDouble, Duration? duration, Curve? curve}) =
       _FGoldenNestedMotionDelta;
 
+  /// Creates a delta that returns the [FGoldenNestedMotion] in the current context.
+  const factory FGoldenNestedMotionDelta.context() = _FGoldenNestedMotionContext;
+
   @override
   FGoldenNestedMotion call(covariant FGoldenNestedMotion value);
-}
-
-class _FGoldenNestedMotionContext implements FGoldenNestedMotionDelta {
-  const _FGoldenNestedMotionContext();
-
-  @override
-  FGoldenNestedMotion call(FGoldenNestedMotion original) => original;
 }
 
 class _FGoldenNestedMotionDelta implements FGoldenNestedMotionDelta {
@@ -750,6 +743,13 @@ class _FGoldenNestedMotionDelta implements FGoldenNestedMotionDelta {
     duration: duration ?? original.duration,
     curve: curve ?? original.curve,
   );
+}
+
+class _FGoldenNestedMotionContext implements FGoldenNestedMotionDelta {
+  const _FGoldenNestedMotionContext();
+
+  @override
+  FGoldenNestedMotion call(FGoldenNestedMotion original) => original;
 }
 
 /// Provides [copyWith] and [lerp] methods.
@@ -784,23 +784,16 @@ mixin _$FGoldenNestedStyleFunctions on Diagnosticable implements FGoldenNestedSt
 ///
 /// A [FGoldenNestedStyle] is itself a [FGoldenNestedStyleDelta].
 sealed class FGoldenNestedStyleDelta with Delta {
-  /// Creates a delta that returns the [FGoldenNestedStyle] in the current context.
-  const factory FGoldenNestedStyleDelta.context() = _FGoldenNestedStyleContext;
-
   /// Creates a partial modification of a [FGoldenNestedStyle].
   ///
   /// ## Parameters
   const factory FGoldenNestedStyleDelta.delta() = _FGoldenNestedStyleDelta;
 
+  /// Creates a delta that returns the [FGoldenNestedStyle] in the current context.
+  const factory FGoldenNestedStyleDelta.context() = _FGoldenNestedStyleContext;
+
   @override
   FGoldenNestedStyle call(covariant FGoldenNestedStyle value);
-}
-
-class _FGoldenNestedStyleContext implements FGoldenNestedStyleDelta {
-  const _FGoldenNestedStyleContext();
-
-  @override
-  FGoldenNestedStyle call(FGoldenNestedStyle original) => original;
 }
 
 class _FGoldenNestedStyleDelta implements FGoldenNestedStyleDelta {
@@ -808,5 +801,12 @@ class _FGoldenNestedStyleDelta implements FGoldenNestedStyleDelta {
 
   @override
   FGoldenNestedStyle call(FGoldenNestedStyle original) => FGoldenNestedStyle();
+}
+
+class _FGoldenNestedStyleContext implements FGoldenNestedStyleDelta {
+  const _FGoldenNestedStyleContext();
+
+  @override
+  FGoldenNestedStyle call(FGoldenNestedStyle original) => original;
 }
 ''';

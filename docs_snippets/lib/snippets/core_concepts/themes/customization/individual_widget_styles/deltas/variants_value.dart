@@ -8,13 +8,13 @@ final radio =
       style: .delta(
         borderColor: .delta([
           // Change ONLY the base border color.
-          .onBase(Colors.blue),
+          .base(Colors.blue),
           // Set the border color when selected, adds a new constraint
           // if it doesn't already exist.
-          .on({.selected}, Colors.green),
+          .exact({.selected}, Colors.green),
           // Set the border color for all existing constraints containing
           // disabled, does nothing if none exist.
-          .onMatching({.disabled}, Colors.grey),
+          .match({.disabled}, Colors.grey),
         ]),
       ),
     );

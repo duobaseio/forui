@@ -319,7 +319,7 @@ extension type FTileStyles._(FVariants<FItemVariantConstraint, FItemVariant, FTi
                 foreground: colors.destructive,
                 mutedForeground: colors.destructive,
               ),
-              rawItemContentStyle: FTileRawContentStyle.inherit(
+              rawItemContentStyle: FRawTileContentStyle.inherit(
                 colors: colors,
                 typography: typography,
                 prefix: colors.destructive,
@@ -372,7 +372,7 @@ class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
           foreground: colors.foreground,
           mutedForeground: colors.mutedForeground,
         ),
-        rawItemContentStyle: FTileRawContentStyle.inherit(
+        rawItemContentStyle: FRawTileContentStyle.inherit(
           colors: colors,
           typography: typography,
           prefix: colors.primary,
@@ -448,17 +448,17 @@ class FTileContentStyle extends FItemContentStyle with _$FTileContentStyleFuncti
 }
 
 /// A tile-specific [FRawItemContentStyle].
-class FTileRawContentStyle extends FRawItemContentStyle with _$FTileRawContentStyleFunctions {
-  /// Creates a [FTileRawContentStyle].
-  FTileRawContentStyle({
+class FRawTileContentStyle extends FRawItemContentStyle with _$FRawTileContentStyleFunctions {
+  /// Creates a [FRawTileContentStyle].
+  FRawTileContentStyle({
     required super.prefixIconStyle,
     required super.childTextStyle,
     super.padding = const EdgeInsets.fromLTRB(15, 13, 10, 13),
     super.prefixIconSpacing,
   });
 
-  /// Creates a [FTileRawContentStyle] that inherits its properties.
-  FTileRawContentStyle.inherit({
+  /// Creates a [FRawTileContentStyle] that inherits its properties.
+  FRawTileContentStyle.inherit({
     required FColors colors,
     required FTypography typography,
     required Color prefix,

@@ -416,7 +416,7 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
             colors: colors,
             typography: typography,
             style: style,
-          ).copyWith(decoration: .delta([.onAll(const .delta(border: null, borderRadius: null))])),
+          ).copyWith(decoration: .delta([.all(const .delta(border: null, borderRadius: null))])),
           variants: {
             [.destructive]: .delta(
               contentStyle: FItemContentStyle.inherit(
@@ -436,10 +436,10 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
           },
         ),
         descriptionTextStyle: style.formFieldStyle.descriptionTextStyle.apply([
-          .onAll(.delta(fontSize: typography.xs.fontSize, height: typography.xs.height)),
+          .all(.delta(fontSize: typography.xs.fontSize, height: typography.xs.height)),
         ]),
         errorTextStyle: style.formFieldStyle.errorTextStyle.apply([
-          .onAll(.delta(fontSize: typography.xs.fontSize, height: typography.xs.height, fontWeight: .w400)),
+          .all(.delta(fontSize: typography.xs.fontSize, height: typography.xs.height, fontWeight: .w400)),
         ]),
       );
 }

@@ -359,10 +359,10 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
           ),
         ),
         itemStyles: .delta([
-          .onBase(
+          .base(
             .delta(
               backgroundColor: FVariants.all(colors.card),
-              decoration: .delta([.onBase(.delta(color: colors.card))]),
+              decoration: .delta([.base(.delta(color: colors.card))]),
               contentStyle: FItemContentStyle.inherit(
                 colors: colors,
                 typography: typography,
@@ -382,7 +382,7 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
       ),
       tileGroupStyle = .inherit(colors: colors, style: style, typography: typography).copyWith(
         tileStyles: .delta([
-          .onBase(
+          .base(
             .delta(
               contentStyle: .delta(
                 prefixIconStyle: FVariants.from(

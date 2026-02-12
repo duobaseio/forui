@@ -1028,8 +1028,8 @@ class FAutocompleteStyle with Diagnosticable, _$FAutocompleteStyleFunctions {
     final field = FTextFieldStyle.inherit(colors: colors, typography: typography, style: style);
     return .new(
       fieldStyle: field,
-      composingTextStyle: field.contentTextStyle.apply([.onAll(const .delta(decoration: .underline))]),
-      typeaheadTextStyle: field.contentTextStyle.apply([.onAll(.delta(color: colors.mutedForeground))]),
+      composingTextStyle: field.contentTextStyle.apply([.all(const .delta(decoration: .underline))]),
+      typeaheadTextStyle: field.contentTextStyle.apply([.all(.delta(color: colors.mutedForeground))]),
       contentStyle: .inherit(colors: colors, typography: typography, style: style),
     );
   }
