@@ -14,12 +14,15 @@ class ModalSheetPage extends Example {
   ModalSheetPage({@queryParam super.theme});
 
   @override
-  Widget example(BuildContext context) => Column(
+  Widget example(BuildContext context) => Row(
     mainAxisAlignment: .center,
     mainAxisSize: .min,
-    spacing: 5,
+    spacing: 10,
     children: [
       FButton(
+        variant: .outline,
+        size: .sm,
+        mainAxisSize: .min,
         child: const Text('Left'),
         onPress: () => showFSheet(
           context: context,
@@ -28,6 +31,9 @@ class ModalSheetPage extends Example {
         ),
       ),
       FButton(
+        variant: .outline,
+        size: .sm,
+        mainAxisSize: .min,
         child: const Text('Top'),
         onPress: () => showFSheet(
           context: context,
@@ -36,19 +42,25 @@ class ModalSheetPage extends Example {
         ),
       ),
       FButton(
-        child: const Text('Right'),
-        onPress: () => showFSheet(
-          context: context,
-          side: .rtl,
-          builder: (context) => const Form(side: .rtl),
-        ),
-      ),
-      FButton(
+        variant: .outline,
+        size: .sm,
+        mainAxisSize: .min,
         child: const Text('Bottom'),
         onPress: () => showFSheet(
           context: context,
           side: .btt,
           builder: (context) => const Form(side: .btt),
+        ),
+      ),
+      FButton(
+        variant: .outline,
+        size: .sm,
+        mainAxisSize: .min,
+        child: const Text('Right'),
+        onPress: () => showFSheet(
+          context: context,
+          side: .rtl,
+          builder: (context) => const Form(side: .rtl),
         ),
       ),
     ],
@@ -61,21 +73,55 @@ class BlurredModalSheetPage extends Example {
   BlurredModalSheetPage({@queryParam super.theme});
 
   @override
-  Widget example(BuildContext context) => FButton(
-    child: const Text('Open'),
-    onPress: () => showFSheet(
-      style: .delta(
-        // {@highlight}
-        barrierFilter: (animation) => .compose(
-          outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
-          inner: ColorFilter.mode(context.theme.colors.barrier, .srcOver),
+  Widget example(BuildContext context) => Row(
+    mainAxisAlignment: .end,
+    spacing: 20,
+    children: [
+      FButton(
+        variant: .outline,
+        size: .sm,
+        mainAxisSize: .min,
+        child: const Text('Open'),
+        onPress: () => showFSheet(
+          style: .delta(
+            // {@highlight}
+            barrierFilter: (animation) => .compose(
+              outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
+              inner: ColorFilter.mode(context.theme.colors.barrier, .srcOver),
+            ),
+            // {@endhighlight}
+          ),
+          context: context,
+          side: .rtl,
+          builder: (context) => const Form(side: .rtl),
         ),
-        // {@endhighlight}
       ),
-      context: context,
-      side: .ltr,
-      builder: (context) => const Form(side: .ltr),
-    ),
+      Expanded(
+        child: Column(
+          mainAxisSize: .min,
+          crossAxisAlignment: .start,
+          spacing: 8,
+          children: [
+            Text('Account Settings', style: context.theme.typography.lg.copyWith(fontWeight: .w600)),
+            Text('Manage your preferences and profile details.', style: context.theme.typography.sm),
+            const FDivider(),
+            Row(
+              spacing: 8,
+              children: [
+                FAvatar(image: const NetworkImage('https://picsum.photos/200'), fallback: const Text('JR')),
+                Column(
+                  crossAxisAlignment: .start,
+                  children: [
+                    Text('John Renalo', style: context.theme.typography.sm.copyWith(fontWeight: .w600)),
+                    Text('john@doe.com', style: context.theme.typography.xs),
+                  ],
+                ),
+              ],
+            ),
+          ],
+        ),
+      ),
+    ],
   );
 }
 
@@ -113,16 +159,24 @@ class Form extends StatelessWidget {
               'Make changes to your account here. Click save when you are done.',
               style: context.theme.typography.sm.copyWith(color: context.theme.colors.mutedForeground),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 12),
             SizedBox(
               width: 450,
               child: Column(
                 children: [
                   const FTextField(label: Text('Name'), hint: 'John Renalo'),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 12),
                   const FTextField(label: Text('Email'), hint: 'john@doe.com'),
-                  const SizedBox(height: 16),
-                  FButton(child: const Text('Save'), onPress: () => Navigator.of(context).pop()),
+                  const SizedBox(height: 20),
+                  Align(
+                    alignment: .centerRight,
+                    child: FButton(
+                      size: .sm,
+                      mainAxisSize: .min,
+                      child: const Text('Save'),
+                      onPress: () => Navigator.of(context).pop(),
+                    ),
+                  ),
                 ],
               ),
             ),
@@ -139,6 +193,9 @@ class DraggableModalSheetPage extends Example {
 
   @override
   Widget example(BuildContext context) => FButton(
+    variant: .outline,
+    size: .sm,
+    mainAxisSize: .min,
     child: const Text('Click me'),
     onPress: () => showFSheet(
       context: context,

@@ -15,7 +15,7 @@ import switchUsage from '@/snippets/usages/widgets/switch/switchWidget.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='switch' query={{enabled: 'true'}}/>
+    <Widget name='switch'/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={defaultSnippet} />
@@ -41,7 +41,7 @@ dart run forui style create switch
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='switch' query={{enabled: false}}/>
+    <Widget name='switch' variant='disabled'/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={disabledSnippet} />
@@ -52,7 +52,7 @@ dart run forui style create switch
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='switch' variant='form' query={{}} height={500}/>
+    <Widget name='switch' variant='form' height={500}/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={formSnippet} />

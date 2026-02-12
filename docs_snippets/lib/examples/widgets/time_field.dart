@@ -102,14 +102,21 @@ class _FormTimeFieldPageState extends StatefulExampleState<FormTimeFieldPage> {
           description: const Text('Select an end time.'),
           autovalidateMode: .disabled,
         ),
-        const SizedBox(height: 25),
-        FButton(
-          child: const Text('Submit'),
-          onPress: () {
-            if (_key.currentState!.validate()) {
-              // Form is valid, process the dates
-            }
-          },
+        const SizedBox(height: 16),
+        Row(
+          mainAxisAlignment: .end,
+          children: [
+            FButton(
+              size: .sm,
+              mainAxisSize: .min,
+              child: const Text('Submit'),
+              onPress: () {
+                if (_key.currentState!.validate()) {
+                  // Form is valid, do something.
+                }
+              },
+            ),
+          ],
         ),
       ],
     ),

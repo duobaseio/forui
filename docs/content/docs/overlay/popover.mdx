@@ -20,7 +20,7 @@ import popoverUsage from '@/snippets/usages/widgets/popover/popover.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='popover' query={{alignment: 'topCenter'}} height={500}/>
+    <Widget name='popover' height={500}/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={defaultSnippet} />
@@ -65,7 +65,7 @@ You can change how the popover is aligned to the button.
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='popover' query={{axis: 'horizontal'}} height={500}/>
+    <Widget name='popover' variant='horizontal' height={500}/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={horizontalSnippet} />
@@ -76,7 +76,7 @@ You can change how the popover is aligned to the button.
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='popover' query={{alignment: 'topCenter', hideRegion: 'none'}} height={500}/>
+    <Widget name='popover' variant='no-hide-region' height={500}/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={noHideRegionSnippet} />
@@ -100,7 +100,7 @@ The popover can be flipped along the overflowing axis to stay within the viewpor
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='popover' query={{alignment: 'bottomCenter', overflow: 'flip'}} height={500}/>
+    <Widget name='popover' variant='flip' height={500}/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={flipSnippet} />
@@ -113,7 +113,7 @@ The popover can be slid along the overflowing axis to stay within the viewport b
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='popover' query={{overflow: 'slide'}} height={500}/>
+    <Widget name='popover' variant='slide' height={500}/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={slideSnippet} />
@@ -126,7 +126,7 @@ The popover is not shifted to stay within the viewport boundaries, even if it ov
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='popover' query={{overflow: 'allow'}} height={500}/>
+    <Widget name='popover' variant='allow-overflow' height={500}/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={allowOverflowSnippet} />

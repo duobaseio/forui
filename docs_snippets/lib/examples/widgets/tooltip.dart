@@ -27,6 +27,7 @@ class TooltipPage extends StatelessWidget {
                   tipBuilder: (context, _) => const Text('Add to library'),
                   child: FButton(
                     variant: .outline,
+                    size: .sm,
                     mainAxisSize: .min,
                     onPress: () {},
                     child: const Text('Long press/Hover'),
@@ -39,6 +40,40 @@ class TooltipPage extends StatelessWidget {
       ),
     ),
   );
+}
+
+@RoutePage()
+class GroupTooltipPage extends Example {
+  GroupTooltipPage({@queryParam super.theme});
+
+  @override
+  Widget example(BuildContext context) =>
+      // {@highlight}
+      FTooltipGroup(
+        // {@endhighlight}
+        child: Row(
+          mainAxisSize: .min,
+          spacing: 2,
+          children: [
+            FTooltip(
+              tipBuilder: (context, _) => const Text('Bold'),
+              child: FButton.icon(variant: .ghost, size: .sm, onPress: () {}, child: const Icon(FIcons.bold)),
+            ),
+            FTooltip(
+              tipBuilder: (context, _) => const Text('Italic'),
+              child: FButton.icon(variant: .ghost, size: .sm, onPress: () {}, child: const Icon(FIcons.italic)),
+            ),
+            FTooltip(
+              tipBuilder: (context, _) => const Text('Underline'),
+              child: FButton.icon(variant: .ghost, size: .sm, onPress: () {}, child: const Icon(FIcons.underline)),
+            ),
+            FTooltip(
+              tipBuilder: (context, _) => const Text('Strikethrough'),
+              child: FButton.icon(variant: .ghost, size: .sm, onPress: () {}, child: const Icon(FIcons.strikethrough)),
+            ),
+          ],
+        ),
+      );
 }
 
 @RoutePage()
@@ -67,6 +102,7 @@ class HorizontalTooltipPage extends StatelessWidget {
                   tipBuilder: (context, _) => const Text('Add to library'),
                   child: FButton(
                     variant: .outline,
+                    size: .sm,
                     mainAxisSize: .min,
                     onPress: () {},
                     child: const Text('Long press/Hover'),
@@ -106,6 +142,7 @@ class LongPressOnlyTooltipPage extends StatelessWidget {
                   tipBuilder: (context, _) => const Text('Add to library'),
                   child: FButton(
                     variant: .outline,
+                    size: .sm,
                     mainAxisSize: .min,
                     onPress: () {},
                     child: const Text('Long press'),

@@ -39,7 +39,7 @@ sealed class Content extends StatelessWidget {
       children: [
         if (title case final title?)
           Padding(
-            padding: const .only(bottom: 4),
+            padding: .only(bottom: style.titleSpacing),
             child: Semantics(
               container: true,
               child: DefaultTextStyle.merge(textAlign: titleTextAlign, style: style.titleTextStyle, child: title),
@@ -48,14 +48,14 @@ sealed class Content extends StatelessWidget {
         if (body case final body?)
           Flexible(
             child: Padding(
-              padding: const .only(bottom: 4),
+              padding: .only(bottom: style.bodySpacing),
               child: Semantics(
                 container: true,
                 child: DefaultTextStyle.merge(textAlign: bodyTextAlign, style: style.bodyTextStyle, child: body),
               ),
             ),
           ),
-        if (title != null && body != null) const SizedBox(height: 8),
+        if (title != null && body != null) SizedBox(height: style.contentSpacing),
         _actions(context),
       ],
     ),
@@ -118,6 +118,18 @@ class FDialogContentStyle with Diagnosticable, _$FDialogContentStyleFunctions {
   @override
   final EdgeInsetsGeometry padding;
 
+  /// The spacing below the title.
+  @override
+  final double titleSpacing;
+
+  /// The spacing below the body.
+  @override
+  final double bodySpacing;
+
+  /// The spacing between the content (title/body) and the actions. Defaults to 8.
+  @override
+  final double contentSpacing;
+
   /// The space between actions.
   @override
   final double actionSpacing;
@@ -127,6 +139,9 @@ class FDialogContentStyle with Diagnosticable, _$FDialogContentStyleFunctions {
     required this.titleTextStyle,
     required this.bodyTextStyle,
     required this.padding,
+    required this.titleSpacing,
+    required this.bodySpacing,
     required this.actionSpacing,
+    this.contentSpacing = 8,
   });
 }

@@ -257,7 +257,7 @@ final FSelectControl<String> managedInternal = .managed(initial: null, toggleabl
 // {@category "Control" "`.managed()` with external controller"}
 /// Uses an external controller to control the select's state.
 final FSelectControl<String> managedExternal = .managed(
-  // For demonstration purposes only. Don't create a controller inline, store it in a State instead.
+  // Don't create a controller inline. Store it in a State instead.
   controller: FSelectController<String>(value: null, toggleable: false),
   onChange: (value) {},
 );
@@ -273,7 +273,7 @@ final FPopoverControl popoverInternal = .managed(initial: false, onChange: (show
 // {@category "Popover Control" "`.managed()` with external controller"}
 /// Uses an external controller to control the popover's visibility.
 final FPopoverControl popoverExternal = .managed(
-  // For demonstration purposes only. Don't create a controller inline, store it in a State instead.
+  // Don't create a controller inline. Store it in a State instead.
   controller: FPopoverController(vsync: vsync, shown: false, motion: const FPopoverMotion()),
   onChange: (shown) {},
 );

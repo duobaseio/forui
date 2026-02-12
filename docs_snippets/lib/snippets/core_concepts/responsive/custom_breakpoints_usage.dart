@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
 
-import 'package:docs_snippets/snippets/responsive/custom_breakpoints.dart';
-import 'package:docs_snippets/snippets/responsive/usage.dart';
+import 'package:docs_snippets/snippets/core_concepts/responsive/custom_breakpoints.dart';
+import 'package:docs_snippets/snippets/core_concepts/responsive/usage.dart';
 
 class SuperSmallWidget extends StatelessWidget {
   const SuperSmallWidget();

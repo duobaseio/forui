@@ -42,7 +42,7 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
     theme: _theme.toApproximateMaterialTheme(),
     builder: (context, child) => FTheme(
       data: _theme,
-      child: FToaster(child: child!),
+      child: FToaster(child: FTooltipGroup(child: child!)),
     ),
     home: Builder(
       builder: (context) {

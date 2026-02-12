@@ -119,7 +119,7 @@ final FTimeFieldControl managedInternal = .managed(
 // {@category "Control" "`.managed()` with external controller"}
 /// Uses an external controller for time field management.
 final FTimeFieldControl managedExternal = .managed(
-  // For demonstration purposes only. Don't create a controller inline, store it in a State instead.
+  // Don't create a controller inline. Store it in a State instead.
   controller: FTimeFieldController(time: const FTime(9, 30)),
   onChange: (time) {},
 );
@@ -135,7 +135,7 @@ final FPopoverControl popoverInternal = .managed(initial: true, onChange: (shown
 // {@category "Popover Control" "`.managed()` with external controller"}
 /// Uses an external `FPopoverController` to control the popover's visibility.
 final FPopoverControl popoverExternal = .managed(
-  // For demonstration purposes only. Don't create a controller inline, store it in a State instead.
+  // Don't create a controller inline. Store it in a State instead.
   controller: FPopoverController(vsync: vsync, shown: true, motion: const FPopoverMotion()),
   onChange: (shown) {},
 );

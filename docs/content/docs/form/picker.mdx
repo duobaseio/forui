@@ -26,7 +26,7 @@ Recommended for touch devices.
 
 <Tabs items={['Preview', 'Code']}>
     <Tab value="Preview">
-        <Widget name='picker' query={{}}/>
+        <Widget name='picker'/>
     </Tab>
     <Tab value="Code">
         <CodeSnippet snippet={defaultSnippet} />
@@ -58,7 +58,7 @@ dart run forui style create picker
 
 <Tabs items={['Preview', 'Code']}>
     <Tab value="Preview">
-        <Widget name='picker' query={{loop: 'true'}}/>
+        <Widget name='picker' variant='loop'/>
     </Tab>
     <Tab value="Code">
         <CodeSnippet snippet={loopSnippet} />
@@ -69,7 +69,7 @@ dart run forui style create picker
 
 <Tabs items={['Preview', 'Code']}>
     <Tab value="Preview">
-        <Widget name='picker' query={{builder: 'true'}}/>
+        <Widget name='picker' variant='builder'/>
     </Tab>
     <Tab value="Code">
         <CodeSnippet snippet={builderSnippet} />

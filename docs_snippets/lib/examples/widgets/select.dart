@@ -334,7 +334,7 @@ class _FormSelectPageState extends StatefulExampleState<FormSelectPage> with Sin
     key: _key,
     child: Column(
       crossAxisAlignment: .start,
-      spacing: 25,
+      spacing: 16,
       children: [
         FSelect<String>.rich(
           label: const Text('Department'),
@@ -347,13 +347,20 @@ class _FormSelectPageState extends StatefulExampleState<FormSelectPage> with Sin
               .item(title: Text(department), value: department),
           ],
         ),
-        FButton(
-          child: const Text('Submit'),
-          onPress: () {
-            if (_key.currentState!.validate()) {
-              // Form is valid, do something with department.
-            }
-          },
+        Row(
+          mainAxisAlignment: .end,
+          children: [
+            FButton(
+              size: .sm,
+              mainAxisSize: .min,
+              child: const Text('Submit'),
+              onPress: () {
+                if (_key.currentState!.validate()) {
+                  // Form is valid, do something with department.
+                }
+              },
+            ),
+          ],
         ),
       ],
     ),

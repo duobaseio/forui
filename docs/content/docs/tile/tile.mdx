@@ -16,6 +16,7 @@ import tileUntappable from '@/snippets/examples/tile/untappable.json';
 import tileDisabled from '@/snippets/examples/tile/disabled.json';
 import tileSubtitle from '@/snippets/examples/tile/subtitle.json';
 import tileDetails from '@/snippets/examples/tile/details.json';
+import tileDestructive from '@/snippets/examples/tile/destructive.json';
 
 <Callout type="info">
     Tiles can be grouped together inside a [FTileGroup](/docs/tile/tile-group).
@@ -23,7 +24,7 @@ import tileDetails from '@/snippets/examples/tile/details.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='tile' variant='default' query={{}}/>
+    <Widget name='tile'/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={tileDefault} />
@@ -48,11 +49,22 @@ dart run forui style create tile
 
 ## Examples
 
+### Destructive
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='tile' variant='destructive'/>
+  </Tab>
+  <Tab value="Code">
+    <CodeSnippet snippet={tileDestructive} />
+  </Tab>
+</Tabs>
+
 ### Untappable
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='tile' variant='default' query={{tappable: false}}/>
+    <Widget name='tile' variant='untappable'/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={tileUntappable} />
@@ -63,7 +75,7 @@ dart run forui style create tile
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='tile' variant='default' query={{enabled: false}}/>
+    <Widget name='tile' variant='disabled'/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={tileDisabled} />
@@ -74,7 +86,7 @@ dart run forui style create tile
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='tile' variant='subtitle' query={{}}/>
+    <Widget name='tile' variant='subtitle'/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={tileSubtitle} />
@@ -85,7 +97,7 @@ dart run forui style create tile
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='tile' variant='details' query={{}}/>
+    <Widget name='tile' variant='details'/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={tileDetails} />

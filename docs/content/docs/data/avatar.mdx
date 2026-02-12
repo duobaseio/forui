@@ -14,11 +14,9 @@ import invalidSnippet from '@/snippets/examples/avatar/invalid.json';
 import avatarUsage from '@/snippets/usages/widgets/avatar/avatar.json';
 import avatarRawUsage from '@/snippets/usages/widgets/avatar/raw.json';
 
-## Overview
-
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-      <Widget name='avatar' variant='default' query={{}}/>
+      <Widget name='avatar'/>
   </Tab>
   <Tab value="Code">
       <CodeSnippet snippet={defaultSnippet} />
@@ -47,7 +45,7 @@ dart run forui style create avatar
 
 <Tabs items={['Preview', 'Code']}>
     <Tab value="Preview">
-        <Widget name='avatar' variant='raw' query={{}}/>
+        <Widget name='avatar' variant='raw'/>
     </Tab>
     <Tab value="Code">
         <CodeSnippet snippet={rawSnippet} />
@@ -58,7 +56,7 @@ dart run forui style create avatar
 
 <Tabs items={['Preview', 'Code']}>
     <Tab value="Preview">
-        <Widget name='avatar' variant='invalid' query={{}}/>
+        <Widget name='avatar' variant='invalid'/>
     </Tab>
     <Tab value="Code">
         <CodeSnippet snippet={invalidSnippet} />

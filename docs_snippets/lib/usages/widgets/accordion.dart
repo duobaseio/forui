@@ -44,7 +44,7 @@ final FAccordionControl internal = .managed(min: 1, max: 2, onChange: (items) {}
 // {@category "Control" "`.managed()` with external controller"}
 /// Uses an external `FAccordionController` to control the accordion items' expanded state.
 final FAccordionControl external = .managed(
-  // For demonstration purposes only. Don't create a controller inline, store it in a State instead.
+  // Don't create a controller inline. Store it in a State instead.
   controller: FAccordionController(min: 1, max: 2),
   onChange: (items) {},
 );

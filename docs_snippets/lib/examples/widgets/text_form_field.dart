@@ -32,16 +32,21 @@ class _TextFormFieldPageState extends StatefulExampleState<TextFormFieldPage> {
           autovalidateMode: .onUserInteraction,
           validator: (value) => 8 <= (value?.length ?? 0) ? null : 'Password must be at least 8 characters long.',
         ),
-        const SizedBox(height: 20),
-        FButton(
-          child: const Text('Login'),
-          onPress: () {
-            if (!_key.currentState!.validate()) {
-              return; // Form is invalid.
-            }
-
-            // Form is valid, do something.
-          },
+        const SizedBox(height: 16),
+        Row(
+          mainAxisAlignment: .end,
+          children: [
+            FButton(
+              size: .sm,
+              mainAxisSize: .min,
+              child: const Text('Login'),
+              onPress: () {
+                if (_key.currentState!.validate()) {
+                  // Form is valid, do something.
+                }
+              },
+            ),
+          ],
         ),
       ],
     ),

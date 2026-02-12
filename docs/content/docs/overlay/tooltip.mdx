@@ -12,6 +12,7 @@ import defaultSnippet from '@/snippets/examples/tooltip/default.json';
 import tooltipUsage from '@/snippets/usages/widgets/tooltip/tooltip.json';
 import horizontalSnippet from '@/snippets/examples/tooltip/horizontal.json';
 import longPressOnlySnippet from '@/snippets/examples/tooltip/long-press-only.json';
+import groupSnippet from '@/snippets/examples/tooltip/group.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
@@ -37,13 +38,26 @@ dart run forui style create tooltip
 
 ## Examples
 
+### Group
+
+Wrap multiple tooltips in an `FTooltipGroup` so that subsequent tooltips appear instantly after the first one is shown.
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='tooltip' variant='group' height={300}/>
+  </Tab>
+  <Tab value="Code">
+    <CodeSnippet snippet={groupSnippet} />
+  </Tab>
+</Tabs>
+
 ### Horizontal Alignment
 
 You can change how the tooltip is aligned to the button.
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='tooltip' query={{axis: 'horizontal'}} height={300}/>
+    <Widget name='tooltip' variant='horizontal' height={300}/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={horizontalSnippet} />
@@ -54,7 +68,7 @@ You can change how the tooltip is aligned to the button.
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='tooltip' query={{hover: 'false'}} height={300}/>
+    <Widget name='tooltip' variant='long-press-only' height={300}/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={longPressOnlySnippet} />

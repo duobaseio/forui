@@ -68,15 +68,15 @@ class _SheetState extends State<_Sheet> {
       }
     };
 
-    return Column(
+    return Row(
       mainAxisAlignment: .center,
       mainAxisSize: .min,
-      spacing: 5,
+      spacing: 10,
       children: [
-        FButton(onPress: onPress(.ltr), child: const Text('Left')),
-        FButton(onPress: onPress(.ttb), child: const Text('Top')),
-        FButton(onPress: onPress(.rtl), child: const Text('Right')),
-        FButton(onPress: onPress(.btt), child: const Text('Bottom')),
+        FButton(variant: .outline, size: .sm, mainAxisSize: .min, onPress: onPress(.ltr), child: const Text('Left')),
+        FButton(variant: .outline, size: .sm, mainAxisSize: .min, onPress: onPress(.ttb), child: const Text('Top')),
+        FButton(variant: .outline, size: .sm, mainAxisSize: .min, onPress: onPress(.btt), child: const Text('Bottom')),
+        FButton(variant: .outline, size: .sm, mainAxisSize: .min, onPress: onPress(.rtl), child: const Text('Right')),
       ],
     );
   }
@@ -98,39 +98,41 @@ class Form extends StatelessWidget {
           ? .symmetric(horizontal: BorderSide(color: context.theme.colors.border))
           : .symmetric(vertical: BorderSide(color: context.theme.colors.border)),
     ),
-    child: Padding(
-      padding: const .symmetric(horizontal: 15, vertical: 8.0),
-      child: Column(
-        mainAxisAlignment: .center,
-        mainAxisSize: .min,
-        crossAxisAlignment: .start,
-        children: [
-          Text(
-            'Account',
-            style: context.theme.typography.xl2.copyWith(
-              fontWeight: .w600,
-              color: context.theme.colors.foreground,
-              height: 1.5,
+    child: Center(
+      child: Padding(
+        padding: const .symmetric(horizontal: 15, vertical: 8.0),
+        child: Column(
+          mainAxisAlignment: .center,
+          mainAxisSize: .min,
+          crossAxisAlignment: .start,
+          children: [
+            Text(
+              'Account',
+              style: context.theme.typography.xl2.copyWith(
+                fontWeight: .w600,
+                color: context.theme.colors.foreground,
+                height: 1.5,
+              ),
             ),
-          ),
-          Text(
-            'Make changes to your account here. Click save when you are done.',
-            style: context.theme.typography.sm.copyWith(color: context.theme.colors.mutedForeground),
-          ),
-          const SizedBox(height: 8),
-          SizedBox(
-            width: 450,
-            child: Column(
-              children: [
-                const FTextField(label: Text('Name'), hint: 'John Renalo'),
-                const SizedBox(height: 10),
-                const FTextField(label: Text('Email'), hint: 'john@doe.com'),
-                const SizedBox(height: 16),
-                FButton(onPress: controller.toggle, child: const Text('Save')),
-              ],
+            Text(
+              'Make changes to your account here. Click save when you are done.',
+              style: context.theme.typography.sm.copyWith(color: context.theme.colors.mutedForeground),
             ),
-          ),
-        ],
+            const SizedBox(height: 8),
+            SizedBox(
+              width: 450,
+              child: Column(
+                children: [
+                  const FTextField(label: Text('Name'), hint: 'John Renalo'),
+                  const SizedBox(height: 10),
+                  const FTextField(label: Text('Email'), hint: 'john@doe.com'),
+                  const SizedBox(height: 16),
+                  FButton(onPress: controller.toggle, child: const Text('Save')),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     ),
   );
@@ -155,6 +157,9 @@ class _DraggableState extends StatefulExampleState<DraggablePersistentSheetPage>
 
   @override
   Widget example(BuildContext context) => FButton(
+    variant: .outline,
+    size: .sm,
+    mainAxisSize: .min,
     child: const Text('Click me'),
     onPress: () {
       if (controller != null) {

@@ -350,7 +350,7 @@ class _FormMultiSelectPageState extends StatefulExampleState<FormMultiSelectPage
     key: _key,
     child: Column(
       crossAxisAlignment: .start,
-      spacing: 25,
+      spacing: 16,
       children: [
         FMultiSelect<String>.rich(
           label: const Text('Department'),
@@ -363,13 +363,20 @@ class _FormMultiSelectPageState extends StatefulExampleState<FormMultiSelectPage
               .item(title: Text(department), value: department),
           ],
         ),
-        FButton(
-          child: const Text('Submit'),
-          onPress: () {
-            if (_key.currentState!.validate()) {
-              // Form is valid, do something with departments
-            }
-          },
+        Row(
+          mainAxisAlignment: .end,
+          children: [
+            FButton(
+              size: .sm,
+              mainAxisSize: .min,
+              child: const Text('Submit'),
+              onPress: () {
+                if (_key.currentState!.validate()) {
+                  // Form is valid, do something with department.
+                }
+              },
+            ),
+          ],
         ),
       ],
     ),

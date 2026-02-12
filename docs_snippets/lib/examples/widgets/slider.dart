@@ -240,12 +240,13 @@ class _SliderFormPageState extends StatefulExampleState<SliderFormPage> {
     child: Column(
       mainAxisAlignment: .center,
       crossAxisAlignment: .start,
-      spacing: 20,
+      spacing: 16,
       children: [
         FSlider(
           control: .managedContinuous(initial: FSliderValue(max: 0.35)),
           label: const Text('Brightness'),
           description: const Text('Adjust the brightness level.'),
+          validator: (value) => value!.max > 0.8 ? 'Brightness is too high.' : null,
           marks: const [
             .mark(value: 0, label: Text('0%')),
             .mark(value: 0.25, tick: false),
@@ -254,17 +255,20 @@ class _SliderFormPageState extends StatefulExampleState<SliderFormPage> {
             .mark(value: 1, label: Text('100%')),
           ],
         ),
-        FButton(
-          child: const Text('Save'),
-          onPress: () {
-            if (!_key.currentState!.validate()) {
-              // Handle errors here.
-              return;
-            }
-
-            _key.currentState!.save();
-            // Do something.
-          },
+        Row(
+          mainAxisAlignment: .end,
+          children: [
+            FButton(
+              size: .sm,
+              mainAxisSize: .min,
+              child: const Text('Save'),
+              onPress: () {
+                if (_key.currentState!.validate()) {
+                  // Form is valid, do something with.
+                }
+              },
+            ),
+          ],
         ),
       ],
     ),

@@ -14,6 +14,7 @@ import untappableSnippet from '@/snippets/examples/item/untappable.json';
 import disabledSnippet from '@/snippets/examples/item/disabled.json';
 import subtitleSnippet from '@/snippets/examples/item/subtitle.json';
 import detailsSnippet from '@/snippets/examples/item/details.json';
+import destructiveSnippet from '@/snippets/examples/item/destructive.json';
 import itemUsage from '@/snippets/usages/widgets/item/item.json';
 import itemRawUsage from '@/snippets/usages/widgets/item/raw.json';
 
@@ -23,7 +24,7 @@ import itemRawUsage from '@/snippets/usages/widgets/item/raw.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='item' variant='default' query={{}}/>
+    <Widget name='item'/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={defaultSnippet} />
@@ -48,11 +49,22 @@ dart run forui style create item
 
 ## Examples
 
+### Destructive
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='item' variant='destructive'/>
+  </Tab>
+  <Tab value="Code">
+    <CodeSnippet snippet={destructiveSnippet} />
+  </Tab>
+</Tabs>
+
 ### Untappable
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='item' variant='default' query={{tappable: false}}/>
+    <Widget name='item' variant='untappable'/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={untappableSnippet} />
@@ -63,7 +75,7 @@ dart run forui style create item
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='item' variant='default' query={{enabled: false}}/>
+    <Widget name='item' variant='disabled'/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={disabledSnippet} />
@@ -74,7 +86,7 @@ dart run forui style create item
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='item' variant='subtitle' query={{}}/>
+    <Widget name='item' variant='subtitle'/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={subtitleSnippet} />
@@ -85,7 +97,7 @@ dart run forui style create item
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='item' variant='details' query={{}}/>
+    <Widget name='item' variant='details'/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={detailsSnippet} />

@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
 
-import 'theme/accordion_style.dart';
+import '../../themes/accordion_style.dart';
 
 // {@snippet}
 // {@highlight}

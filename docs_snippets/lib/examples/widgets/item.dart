@@ -21,6 +21,22 @@ class ItemPage extends Example {
 }
 
 @RoutePage()
+class ItemDestructivePage extends Example {
+  ItemDestructivePage({@queryParam super.theme});
+
+  @override
+  Widget example(BuildContext _) => FItem(
+    // {@highlight}
+    variants: {FItemVariant.destructive},
+    // {@endhighlight}
+    prefix: const Icon(FIcons.trash),
+    title: const Text('Delete Account'),
+    suffix: const Icon(FIcons.chevronRight),
+    onPress: () {},
+  );
+}
+
+@RoutePage()
 class ItemDisabledPage extends Example {
   ItemDisabledPage({@queryParam super.theme});
 

@@ -193,7 +193,12 @@ class FDialogRouteStyle with Diagnosticable, _$FDialogRouteStyleFunctions {
 
   /// Creates a [FDialogRouteStyle] that inherits its properties.
   FDialogRouteStyle.inherit({required FColors colors})
-    : this(barrierFilter: (v) => ColorFilter.mode(FColors.lerpColor(Colors.transparent, colors.barrier, v)!, .srcOver));
+    : this(
+        barrierFilter: (v) => .compose(
+          outer: .blur(sigmaX: v * 5, sigmaY: v * 5),
+          inner: ColorFilter.mode(FColors.lerpColor(Colors.transparent, colors.barrier, v)!, .srcOver),
+        ),
+      );
 }
 
 /// Motion-related properties for [FDialogRoute].
@@ -281,27 +286,30 @@ class FDialog extends StatefulWidget {
   /// The [direction] determines the layout of the actions. It is recommended to use [Axis.vertical] on smaller devices,
   /// such as mobile phones, and [Axis.horizontal] on larger devices, such as tablets and desktops.
   ///
-  /// The [Axis.vertical] layout with two possibles actions is:
+  /// The [actions] should always be ordered with the primary action first. In vertical layouts, the primary action is
+  /// on **top**. In horizontal layouts, the primary action is at the **end** (i.e. the list is reversed).
+  ///
+  /// The [Axis.vertical] layout with two actions is:
   /// ```diagram
   /// |--------------------|
   /// | [title]            |
   /// |                    |
   /// | [body]             |
   /// |                    |
-  /// | [first action]     |
-  /// | [second action]    |
+  /// | [primary action]   |
+  /// | [secondary action] |
   /// |--------------------|
   /// ```
   ///
-  /// The [Axis.horizontal] layout with two possibles actions is:
+  /// The [Axis.horizontal] layout with two actions (in LTR locale) is:
   /// ```diagram
-  /// |--------------------------------------------|
-  /// | [title]                                    |
-  /// |                                            |
-  /// | [body]                                     |
-  /// |                                            |
-  /// |             [first action] [second action] |
-  /// |--------------------------------------------|
+  /// |----------------------------------------------|
+  /// | [title]                                      |
+  /// |                                              |
+  /// | [body]                                       |
+  /// |                                              |
+  /// |          [secondary action] [primary action] |
+  /// |----------------------------------------------|
   FDialog({
     required List<Widget> actions,
     this.style = const .inherit(),
@@ -317,7 +325,7 @@ class FDialog extends StatefulWidget {
            style: style.contentStyle.resolve({context.platformVariant}),
            title: title,
            body: body,
-           actions: actions,
+           actions: actions.reversed.toList(),
          ),
          .vertical => (context, style) => VerticalContent(
            style: style.contentStyle.resolve({context.platformVariant, FDialogAxisVariant.vertical}),
@@ -327,8 +335,11 @@ class FDialog extends StatefulWidget {
          ),
        };
 
-  /// Creates a adaptive [FDialog] that lays out the [actions] vertically on [FBreakpoints.sm] devices and
+  /// Creates an adaptive [FDialog] that lays out the [actions] vertically on [FBreakpoints.sm] devices and
   /// horizontally on larger devices.
+  ///
+  /// The [actions] should always be ordered with the primary action first. In vertical layouts, the primary action is
+  /// on **top**. In horizontal layouts, the primary action is at the **end** (i.e. the list is reversed).
   FDialog.adaptive({
     required List<Widget> actions,
     this.style = const .inherit(),
@@ -349,7 +360,7 @@ class FDialog extends StatefulWidget {
            style: style.contentStyle.resolve({context.platformVariant}),
            title: title,
            body: body,
-           actions: actions,
+           actions: actions.reversed.toList(),
          ),
        });
 
@@ -523,19 +534,27 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
     final title = typography.lg.copyWith(fontWeight: .w600, color: colors.foreground);
     final body = typography.sm.copyWith(color: colors.mutedForeground);
     return .new(
-      decoration: BoxDecoration(borderRadius: style.borderRadius, color: colors.background),
+      decoration: BoxDecoration(
+        border: .all(color: colors.border),
+        borderRadius: style.borderRadius,
+        color: colors.card,
+      ),
       contentStyle: FVariants(
         FDialogContentStyle(
           titleTextStyle: title,
           bodyTextStyle: body,
-          padding: const .symmetric(horizontal: 25, vertical: 25),
-          actionSpacing: 7,
+          padding: const .only(left: 16, right: 16, top: 8, bottom: 14),
+          titleSpacing: 8,
+          bodySpacing: 8,
+          actionSpacing: 10,
         ),
         variants: {
           [.vertical]: FDialogContentStyle(
             titleTextStyle: title,
             bodyTextStyle: body,
-            padding: const .symmetric(horizontal: 30, vertical: 25),
+            padding: const .only(left: 16, right: 16, top: 8, bottom: 14),
+            titleSpacing: 6,
+            bodySpacing: 6,
             actionSpacing: 8,
           ),
         },

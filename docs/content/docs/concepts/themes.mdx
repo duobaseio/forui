@@ -5,25 +5,30 @@ description: Define consistent visual styles across your Flutter application wit
 
 import {Callout} from "fumadocs-ui/components/callout";
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
-import gettingStartedSnippet from '@/snippets/snippets/themes/getting_started/getting_started.json';
-import componentsSnippet from '@/snippets/snippets/themes/components/components.json';
-import colorsSnippet from '@/snippets/snippets/themes/components/colors.json';
-import typographySnippet from '@/snippets/snippets/themes/components/typography.json';
-import styleSnippet from '@/snippets/snippets/themes/components/style.json';
-import mainSnippet from '@/snippets/snippets/themes/customization/main.json';
-import themeSnippet from '@/snippets/snippets/themes/customization/theme/theme.json';
-import accordionStyleSnippet from '@/snippets/snippets/themes/customization/theme/accordion_style.json';
-import copyWithSnippet from '@/snippets/snippets/themes/customization/copy_with.json';
-import copyWithCallSnippet from '@/snippets/snippets/themes/customization/copy_with_call.json';
-import modifyStyleSnippet from '@/snippets/snippets/themes/customization/modify_style.json';
-import passStyleSnippet from '@/snippets/snippets/themes/customization/pass_style.json';
-import customFontFamilySnippet from '@/snippets/snippets/themes/customization/custom_font_family.json';
-import brandColorSnippet from '@/snippets/snippets/themes/custom_properties/brand_color.json';
-import extensionsSnippet from '@/snippets/snippets/themes/custom_properties/extensions.json';
-import getterSnippet from '@/snippets/snippets/themes/custom_properties/getter.json';
-import accessPropertiesSnippet from '@/snippets/snippets/themes/custom_properties/access_properties.json';
-import copyWithExtensionsSnippet from '@/snippets/snippets/themes/custom_properties/copy_with.json';
-import approximateMaterialThemeSnippet from '@/snippets/snippets/themes/material_interop/apporximate_material_theme.json';
+import gettingStartedSnippet from '@/snippets/snippets/core_concepts/themes/getting_started/getting_started.json';
+import componentsSnippet from '@/snippets/snippets/core_concepts/themes/components/components.json';
+import colorsSnippet from '@/snippets/snippets/core_concepts/themes/components/colors.json';
+import typographySnippet from '@/snippets/snippets/core_concepts/themes/components/typography.json';
+import styleSnippet from '@/snippets/snippets/core_concepts/themes/components/style.json';
+import variantsSnippet from '@/snippets/snippets/core_concepts/themes/components/variants.json';
+import variantsDeltaSnippet from '@/snippets/snippets/core_concepts/themes/components/variants_delta.json';
+import mainSnippet from '@/snippets/snippets/core_concepts/themes/customization/themes/main.json';
+import themeSnippet from '@/snippets/snippets/core_concepts/themes/customization/themes/theme.json';
+import accordionStyleSnippet from '@/snippets/snippets/core_concepts/themes/customization/themes/accordion_style.json';
+import deltaSnippet from '@/snippets/snippets/core_concepts/themes/customization/individual_widget_styles/deltas/delta.json';
+import replaceSnippet from '@/snippets/snippets/core_concepts/themes/customization/individual_widget_styles/deltas/replace.json';
+import variantsDeltaApplySnippet from '@/snippets/snippets/core_concepts/themes/customization/individual_widget_styles/deltas/variants_delta.json';
+import variantsValueApplySnippet from '@/snippets/snippets/core_concepts/themes/customization/individual_widget_styles/deltas/variants_value.json';
+import variantsReplaceSnippet from '@/snippets/snippets/core_concepts/themes/customization/individual_widget_styles/deltas/variants_replace.json';
+import modifyStyleSnippet from '@/snippets/snippets/core_concepts/themes/customization/individual_widget_styles/cli/modify_style.json';
+import passStyleSnippet from '@/snippets/snippets/core_concepts/themes/customization/individual_widget_styles/cli/pass_style.json';
+import customFontFamilySnippet from '@/snippets/snippets/core_concepts/themes/components/custom_font_family.json';
+import brandColorSnippet from '@/snippets/snippets/core_concepts/themes/custom_properties/brand_color.json';
+import extensionsSnippet from '@/snippets/snippets/core_concepts/themes/custom_properties/extensions.json';
+import getterSnippet from '@/snippets/snippets/core_concepts/themes/custom_properties/getter.json';
+import accessPropertiesSnippet from '@/snippets/snippets/core_concepts/themes/custom_properties/access_properties.json';
+import copyWithExtensionsSnippet from '@/snippets/snippets/core_concepts/themes/custom_properties/copy_with.json';
+import approximateMaterialThemeSnippet from '@/snippets/snippets/core_concepts/themes/material_interop/apporximate_material_theme.json';
 
 export function Theme({title, color}) {
     return (
@@ -34,32 +39,32 @@ export function Theme({title, color}) {
     );
 }
 
-Forui themes allow you to define a consistent visual style across your application & widgets. It relies on the [CLI](/docs/cli)
-to generate themes and styles that can be directly modified in your project.
+Forui themes allow you to define a consistent visual style across your application & widgets. It optionally relies on
+the [CLI](/docs/cli) to generate themes and styles that can be directly modified in your project.
 
 ## Getting Started
 
 <Callout type="info" title="Theme Brightness">
     Forui does not manage the theme brightness (light or dark) automatically.
-    You need to specify the theme explicitly in `FAnimatedTheme(...)`.
+    You need to specify the theme explicitly in `FTheme(...)`.
 
     <CodeSnippet snippet={gettingStartedSnippet} />
 </Callout>
 
 Forui includes predefined themes that can be used out of the box. They are heavily inspired by [shadcn/ui](https://ui.shadcn.com/themes).
 
-| Theme                                     | Light Accessor          | Dark Accessor         |
-|:------------------------------------------|:------------------------|:----------------------|
-| <Theme title="Neutral" color="#171717" /> | `FThemes.neutral.light` | `FThemes.neutral.dark`|
-| <Theme title="Zinc" color="#18181b" />    | `FThemes.zinc.light`    | `FThemes.zinc.dark`   |
-| <Theme title="Slate" color="#0f172b" />   | `FThemes.slate.light`   | `FThemes.slate.dark`  |
-| <Theme title="Blue" color="#1447E6" />    | `FThemes.blue.light`    | `FThemes.blue.dark`   |
-| <Theme title="Green" color="#5ea500" />   | `FThemes.green.light`   | `FThemes.green.dark`  |
-| <Theme title="Orange" color="#f54a00" />  | `FThemes.orange.light`  | `FThemes.orange.dark` |
-| <Theme title="Red" color="#e7000b" />     | `FThemes.red.light`     | `FThemes.red.dark`    |
-| <Theme title="Rose" color="#ec003f" />    | `FThemes.rose.light`    | `FThemes.rose.dark`   |
-| <Theme title="Violet" color="#7f22fe" />  | `FThemes.violet.light`  | `FThemes.violet.dark` |
-| <Theme title="Yellow" color="#fcc800" />  | `FThemes.yellow.light`  | `FThemes.yellow.dark` |
+| Theme                                     | Light Accessor          | Dark Accessor          |
+|:------------------------------------------|:------------------------|:-----------------------|
+| <Theme title="Neutral" color="#171717" /> | `FThemes.neutral.light` | `FThemes.neutral.dark` |
+| <Theme title="Zinc" color="#18181b" />    | `FThemes.zinc.light`    | `FThemes.zinc.dark`    |
+| <Theme title="Slate" color="#0f172b" />   | `FThemes.slate.light`   | `FThemes.slate.dark`   |
+| <Theme title="Blue" color="#1447E6" />    | `FThemes.blue.light`    | `FThemes.blue.dark`    |
+| <Theme title="Green" color="#5ea500" />   | `FThemes.green.light`   | `FThemes.green.dark`   |
+| <Theme title="Orange" color="#f54a00" />  | `FThemes.orange.light`  | `FThemes.orange.dark`  |
+| <Theme title="Red" color="#e7000b" />     | `FThemes.red.light`     | `FThemes.red.dark`     |
+| <Theme title="Rose" color="#ec003f" />    | `FThemes.rose.light`    | `FThemes.rose.dark`    |
+| <Theme title="Violet" color="#7f22fe" />  | `FThemes.violet.light`  | `FThemes.violet.dark`  |
+| <Theme title="Yellow" color="#fcc800" />  | `FThemes.yellow.light`  | `FThemes.yellow.dark`  |
 
 ## Theme Components
 
@@ -68,8 +73,8 @@ Forui includes predefined themes that can be used out of the box. They are heavi
 title: Forui Theming System
 ---
 classDiagram
-class FAnimatedTheme {
-    +FAnimatedTheme(...)
+class FTheme {
+    +FTheme(...)
 }
 
 class FThemeData {
@@ -82,7 +87,7 @@ class FColors {
 
 class FTypography {
     +FTypography(...)
-    +FThemeData.inherit(colors)
+    +FTypography.inherit(colors)
 }
 
 class FStyle {
@@ -98,29 +103,39 @@ class FAccordionMotion {
     +FAccordionMotion(...)
 }
 
+class FVariants~V~ {
+    +V base
+    +FVariants(base, variants)
+}
+
 note for FAccordionStyle "Each Forui widget has a corresponding style.\nWe use FAccordionStyle here as an example."
 
-note for FAccordionMotion "Some Forui widgets have a motion which controls its animation
-properties. We use FAccordionMotion here as an example."
+note for FAccordionMotion "Some Forui widgets have a motion which controls its animation\nproperties. We use FAccordionMotion here as an example."
 
-FAnimatedTheme --> FThemeData
+note for FVariants "Maps variant constraints, e.g. hovered and pressed, to values."
+
+FTheme --> FThemeData
 FThemeData --> FColors
 FThemeData --> FTypography
 FThemeData --> FStyle
 FThemeData --> FAccordionStyle
+FThemeData --> FVariants
+FAccordionStyle --> FAccordionMotion
 ```
 
-There are **6** core components in Forui's theming system.
+There are **7** core components in Forui's theming system.
 
-- **[`FAnimatedTheme`](https://pub.dev/documentation/forui/latest/forui.theme/FAnimatedTheme-class.html)**: The root widget that provides the theme data to all widgets in the subtree.
+- **[`FTheme`](https://pub.dev/documentation/forui/latest/forui.theme/FTheme-class.html)**: The root widget that provides the theme data to all widgets in the subtree.
 - **[`FThemeData`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData-class.html)**: Main class that holds:
   - **[`FColors`](https://pub.dev/documentation/forui/latest/forui.theme/FColors-class.html)**: Color scheme including primary, foreground, and background colors.
   - **[`FTypography`](https://pub.dev/documentation/forui/latest/forui.theme/FTypography-class.html)**: Typography settings including font family and text styles.
   - **[`FStyle`](https://pub.dev/documentation/forui/latest/forui.theme/FStyle-class.html)**: Misc. options such as border radius and icon size.
+  - **[`FVariants`](https://pub.dev/documentation/forui/latest/forui.theme/FVariants-class.html)**: Maps variant constraints, e.g. hovered and pressed, to
+    values.
   - Individual widget styles.
   - Individual widget motions.
 
-The included `BuildContext` extension allows `FThemeData` can be accessed via [`context.theme`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeBuildContext.html):
+A `BuildContext` extension allows `FThemeData` can be accessed via [`context.theme`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeBuildContext.html):
 
 <CodeSnippet snippet={componentsSnippet} />
 
@@ -169,31 +184,43 @@ The `FStyle` class the theme's miscellaneous styling options such as the default
 
 <CodeSnippet snippet={styleSnippet} />
 
-### `FWidgetStateMap`
+### `FVariants`
 
-[`FWidgetStateMap`](https://pub.dev/documentation/forui/latest/forui.theme/FWidgetStateMap-class.html) lets you define
-different values based on [`WidgetState`](https://api.flutter.dev/flutter/widgets/WidgetState.html) combinations such as
-`hovered & pressed` and `focused | disabled`.
+`FVariants` lets you define a base value with optional overrides for specific variant constraints.
 
-This is useful for describing how widgets should respond to user interaction.
+This is useful for expressing a wide range of styling concepts:
+- User interaction states, e.g. hovered, pressed.
+- Semantic states, e.g. disabled, error.
+- Stylistic variants, e.g. destructive and outlined buttons.
+- Platform differences, e.g. touch vs desktop.
 
-Each combination is also known as a **constraint**. Constraints are evaluated from top to bottom. The first matching will
-be used. In general, more specific constraints should be placed above more general ones.
+Each widget defines its own variant type, e.g. `FTappableVariant` and `FCalendarVariant`, ensuring only valid variants
+can be used. Constraints are composed using `.and(...)` and `.not(...)`:
 
-In the following example, given the states `{hovered, pressed}`, the 1st constraint will **always** match.
+<CodeSnippet snippet={variantsSnippet} />
 
-{/* TODO: replace with FVariants */}
-{/* <CodeSnippet snippet={widgetStateMapSnippet} /> */}
+Variants can also be expressed as deltas (modifications) applied to a base value:
 
-Most `FWidgetStateMap` fields only support a subset of states. For example, [`FButtonStyle.decoration`](https://pub.dev/documentation/forui/latest/forui.widgets.button/FButtonStyle/decoration.html)
-only supports the disabled, hovered, pressed and focused states. A field's supported states are documented in its [API docs](https://pub.dev/documentation/forui/latest/forui.widgets.button/FButtonStyle/decoration.html).
+<CodeSnippet snippet={variantsDeltaSnippet} />
+
+Resolution uses a [**tiered most-specific-wins strategy**](https://github.com/duobaseio/forui/blob/main/design_docs/shipped/styling_2.0.md#proposed-solution-1)
+which is deterministic and order-independent.
+
+Each variant belongs to one of three tiers:
+| Tier | Category    | Examples                          |
+|:-----|:------------|:----------------------------------|
+| 2    | Semantic    | `disabled`, `selected`, `error`   |
+| 1    | Interaction | `hovered`, `focused`, `pressed`   |
+| 0    | Platform    | `android`, `iOS`, `web`           |
+
+Higher tiers always take precedence.
+
+For example, given the states `{.disabled, .pressed}`, `.disabled.and(.pressed)` wins over `.pressed` because `disabled`
+is a tier 2 (semantic) state which outranks tier 1 (interaction) states.
+
+See [deltas](#deltas) for modifying an `FVariants`.
 
 ## Customization
-
-Forui provides **2** ways to customize themes and widget styles.
-
-- [**CLI**](#themes) - major and reusable style changes, such as creating your own design system.
-- [**`copyWith(...)`**](#copywith) method - minor and one-off adjustments to existing styles.
 
 ### Themes
 
@@ -248,39 +275,52 @@ dart run forui style create accordion
     Tip: Run `dart run forui style ls` to see all available styles.
 </Callout>
 
-This generates a accordion style file which you can add to your theme:
+This generates an accordion style file which you can add to your theme:
 
 <CodeSnippet snippet={accordionStyleSnippet} />
 
-See [`FWidgetStateMap`](#fwidgetstatemap) for more information on `FWidgetStateMap`s.
-
 ### Individual Widget Styles
 
-You can customize a widget's style in **2** ways:
+#### Deltas
 
-- Use `copyWith()` - Best for minor adjustments to existing styles.
-- Generate via CLI - Best for major style overhauls.
+All widget styles have corresponding deltas that represent a partial modification to a style. Omitted fields keep the
+existing value while provided fields override it. For example,
+[`FAccordionStyle`](https://pub.dev/documentation/forui/latest/forui.widgets.accordion/FAccordionStyle-class.html) has a
+corresponding [`FAccordionStyleDelta`](https://pub.dev/documentation/forui/latest/forui.widgets.accordion/FAccordionStyleDelta-class.html).
+This is recommended for small adjustments to existing styles.
 
-#### `copyWith(...)`
+Widgets accept deltas via their `style` parameter. To change an accordion's focused outline color while keeping the rest
+of the style intact:
 
-All widgets and style `copyWith(...)`s accept style builder functions.
+<CodeSnippet snippet={deltaSnippet} />
 
-To change an accordion's focused outline color:
+Since widget styles extend their corresponding deltas, you can also pass a full style to replace the existing one entirely:
 
-<CodeSnippet snippet={copyWithSnippet} />
+<CodeSnippet snippet={replaceSnippet} />
 
-All styles implement the [`call` function](https://dart.dev/language/callable-objects). This allows a style object to be
-passed directly to a widget or style's `copyWith(...)` as a shortcut.
+Widget styles contain [`FVariants`](#fvariants) fields that can be modified using an `apply(...)` function that accepts
+a sequence of operations to transform the existing `FVariants`. Depending on the variants' type, these operations are
+either delta-based modifications or full replacements.
 
-Both are equivalent:
+There are **3** ways to modify `FVariants` fields:
 
-<CodeSnippet snippet={copyWithCallSnippet} />
+Composite types such as `BoxDecoration`, `IconThemeData`, `TextStyle`, and nested styles support delta-based modifications.
+To modify an accordion's title text style:
+
+<CodeSnippet snippet={variantsDeltaApplySnippet} />
+
+Atomic types such as `double` and `Color` only support full replacements. To modify a radio's border color:
+
+<CodeSnippet snippet={variantsValueApplySnippet} />
+
+An `FVariants` can also be replaced entirely by passing an `FVariants` via `.value(...)`. To replace an accordion's title
+text style:
+
+<CodeSnippet snippet={variantsReplaceSnippet} />
 
 #### CLI
 
-The following sections demonstrate how to override an accordion's style.
-
-##### Generate the Style
+The following section demonstrate how to override an accordion's style. This is recommended for major style overhauls.
 
 Run to generate a widget style:
 
@@ -292,18 +332,14 @@ dart run forui style create accordion
     Tip: Run `dart run forui style ls` to see all available styles.
 </Callout>
 
-##### Modify the Style
-
-This example shows how to add underlining when the accordion title is focused, in addition to the existing hover and press states:
+To add an underline to the accordion title when focused, modify the generated style:
 
 <CodeSnippet snippet={modifyStyleSnippet} />
 
-See [`FWidgetStateMap`](#fwidgetstatemap) for more information on `FWidgetStateMap`s.
-
-##### Pass the Style
-
+Lastly, pass the modified style to an `FAccordion`:
 
 <CodeSnippet snippet={passStyleSnippet} />
+
 
 ## Custom Properties
 

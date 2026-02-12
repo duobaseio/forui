@@ -98,7 +98,7 @@ final FSliderControl managedContinuousInternal = .managedContinuous(
 // {@category "Control" "`.managedContinuous()` with external controller"}
 /// Uses an external controller for a single continuous value.
 final FSliderControl managedContinuousExternal = .managedContinuous(
-  // For demonstration purposes only. Don't create a controller inline, store it in a State instead.
+  // Don't create a controller inline. Store it in a State instead.
   controller: FContinuousSliderController(
     value: FSliderValue(max: 0.5),
     stepPercentage: 0.05,
@@ -119,7 +119,7 @@ final FSliderControl managedContinuousRangeInternal = .managedContinuousRange(
 // {@category "Control" "`.managedContinuousRange()` with external controller"}
 /// Uses an external controller for a continuous range.
 final FSliderControl managedContinuousRangeExternal = .managedContinuousRange(
-  // For demonstration purposes only. Don't create a controller inline, store it in a State instead.
+  // Don't create a controller inline. Store it in a State instead.
   controller: .range(value: FSliderValue(min: 0.25, max: 0.75), stepPercentage: 0.05),
   onChange: (value) {},
 );
@@ -136,7 +136,7 @@ final FSliderControl managedDiscreteInternal = .managedDiscrete(
 // {@category "Control" "`.managedDiscrete()` with external controller"}
 /// Uses an external controller for a single discrete value.
 final FSliderControl managedDiscreteExternal = .managedDiscrete(
-  // For demonstration purposes only. Don't create a controller inline, store it in a State instead.
+  // Don't create a controller inline. Store it in a State instead.
   controller: FDiscreteSliderController(value: FSliderValue(max: 0.5), interaction: .tapAndSlideThumb, thumb: .max),
   onChange: (value) {},
 );
@@ -151,7 +151,7 @@ final FSliderControl managedDiscreteRangeInternal = .managedDiscreteRange(
 // {@category "Control" "`.managedDiscreteRange()` with external controller"}
 /// Uses an external controller for a discrete range.
 final FSliderControl managedDiscreteRangeExternal = .managedDiscreteRange(
-  // For demonstration purposes only. Don't create a controller inline, store it in a State instead.
+  // Don't create a controller inline. Store it in a State instead.
   controller: .range(value: FSliderValue(min: 0.25, max: 0.75)),
   onChange: (value) {},
 );

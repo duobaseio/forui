@@ -151,6 +151,9 @@ class SheetSidebarPage extends Example {
   @override
   Widget example(BuildContext context) => Center(
     child: FButton(
+      variant: .outline,
+      size: .sm,
+      mainAxisSize: .min,
       child: const Text('Open Sidebar'),
       onPress: () => showFSheet(
         context: context,

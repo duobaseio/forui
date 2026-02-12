@@ -136,7 +136,7 @@ final FMultiValueControl<String> managedInternal = .managed(initial: {}, min: 0,
 // {@category "Control" "`.managed()` with external controller"}
 /// Uses an external controller for multiple selections.
 final FMultiValueControl<String> managedExternal = .managed(
-  // For demonstration purposes only. Don't create a controller inline, store it in a State instead.
+  // Don't create a controller inline. Store it in a State instead.
   controller: FMultiValueNotifier<String>(value: {}, min: 0, max: 5),
   onChange: (values) {},
 );
@@ -148,7 +148,7 @@ final FMultiValueControl<String> managedRadioInternal = .managedRadio(initial: n
 // {@category "Control" "`.managedRadio()` with external controller"}
 /// Single selection with external controller (radio behavior).
 final FMultiValueControl<String> managedRadioExternal = .managedRadio(
-  // For demonstration purposes only. Don't create a controller inline, store it in a State instead.
+  // Don't create a controller inline. Store it in a State instead.
   controller: .radio(),
   onChange: (values) {},
 );

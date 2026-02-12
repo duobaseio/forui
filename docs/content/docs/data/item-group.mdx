@@ -25,7 +25,7 @@ import itemGroupMergeUsage from '@/snippets/usages/widgets/item_group/merge.json
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='item-group' variant='default' query={{}}/>
+    <Widget name='item-group'/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={defaultSnippet} />
@@ -59,7 +59,7 @@ dart run forui style create item-group
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='item-group' variant='scrollable' query={{}} height={200}/>
+    <Widget name='item-group' variant='scrollable' height={200}/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={scrollableSnippet} />
@@ -70,7 +70,7 @@ dart run forui style create item-group
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='item-group' variant='lazy' query={{}} height={300}/>
+    <Widget name='item-group' variant='lazy' height={300}/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={lazySnippet} />
@@ -84,7 +84,7 @@ several sections.
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='item-group' variant='merge' query={{}} height={300}/>
+    <Widget name='item-group' variant='merge' height={300}/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={mergeSnippet} />
@@ -97,7 +97,7 @@ several sections.
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='item-group' variant='default' query={{divider: 'full'}}/>
+    <Widget name='item-group' variant='full'/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={fullSnippet} />
@@ -108,7 +108,7 @@ several sections.
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='item-group' variant='default' query={{divider: 'indented'}}/>
+    <Widget name='item-group' variant='indented'/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={indentedSnippet} />

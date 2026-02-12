@@ -224,7 +224,7 @@ final class FToastAlignment {
 /// of the widget tree, such as `WidgetsApp.builder(...)/MaterialApp.builder(...)/CupertinoApp.builder(...)`:
 /// ```dart
 /// MaterialApp(
-///   builder: (context, child) => FAnimatedTheme(
+///   builder: (context, child) => FTheme(
 ///     data: FThemes.neutral.light,
 ///     child: FToaster(child: child!),
 ///   ),

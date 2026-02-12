@@ -14,6 +14,7 @@ class DialogPage extends Example {
   @override
   Widget example(BuildContext context) => FButton(
     variant: .outline,
+    size: .sm,
     mainAxisSize: .min,
     onPress: () => showFDialog(
       context: context,
@@ -27,11 +28,17 @@ class DialogPage extends Example {
           // {@endhighlight}
           title: const Text('Are you absolutely sure?'),
           body: const Text(
-            'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+            'This action cannot be undone. This will permanently delete your account and '
+            'remove your data from our servers.',
           ),
           actions: [
-            FButton(variant: .outline, child: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
-            FButton(child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
+            FButton(size: .sm, child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
+            FButton(
+              variant: .outline,
+              size: .sm,
+              child: const Text('Cancel'),
+              onPress: () => Navigator.of(context).pop(),
+            ),
           ],
         ),
       ),
@@ -47,6 +54,7 @@ class VerticalDialogPage extends Example {
   @override
   Widget example(BuildContext context) => FButton(
     variant: .outline,
+    size: .sm,
     mainAxisSize: .min,
     onPress: () => showFDialog(
       context: context,
@@ -57,11 +65,17 @@ class VerticalDialogPage extends Example {
           animation: animation,
           title: const Text('Are you absolutely sure?'),
           body: const Text(
-            'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+            'This action cannot be undone. This will permanently delete your account and '
+            'remove your data from our servers.',
           ),
           actions: [
-            FButton(child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
-            FButton(variant: .outline, child: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
+            FButton(size: .sm, child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
+            FButton(
+              variant: .outline,
+              size: .sm,
+              child: const Text('Cancel'),
+              onPress: () => Navigator.of(context).pop(),
+            ),
           ],
         ),
       ),
@@ -77,6 +91,7 @@ class BlurredDialogPage extends Example {
   @override
   Widget example(BuildContext context) => FButton(
     variant: .outline,
+    size: .sm,
     mainAxisSize: .min,
     onPress: () => showFDialog(
       context: context,
@@ -96,11 +111,17 @@ class BlurredDialogPage extends Example {
           animation: animation,
           title: const Text('Are you absolutely sure?'),
           body: const Text(
-            'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
+            'This action cannot be undone. This will permanently delete your account and '
+            'remove your data from our servers.',
           ),
           actions: [
-            FButton(child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
-            FButton(variant: .outline, child: const Text('Cancel'), onPress: () => Navigator.of(context).pop()),
+            FButton(size: .sm, child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
+            FButton(
+              size: .sm,
+              variant: .outline,
+              child: const Text('Cancel'),
+              onPress: () => Navigator.of(context).pop(),
+            ),
           ],
         ),
       ),

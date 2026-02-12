@@ -156,7 +156,7 @@ final FMultiValueControl<String> managedInternal = .managed(
 // {@category "Select Control" "`.managed()` with external controller"}
 /// Multiple selection mode with external controller.
 final FMultiValueControl<String> managedExternal = .managed(
-  // For demonstration purposes only. Don't create a controller inline, store it in a State instead.
+  // Don't create a controller inline. Store it in a State instead.
   controller: FMultiValueNotifier(value: const {'option1', 'option2'}, min: 1, max: 3),
   onChange: (values) {},
 );
@@ -172,7 +172,7 @@ final FPopoverControl popoverInternal = .managed(initial: false, onChange: (show
 // {@category "Popover Control" "`.managed()` with external controller"}
 /// Uses an external `FPopoverController` to control the popover's visibility.
 final FPopoverControl popoverExternal = .managed(
-  // For demonstration purposes only. Don't create a controller inline, store it in a State instead.
+  // Don't create a controller inline. Store it in a State instead.
   controller: FPopoverController(vsync: vsync, shown: false, motion: const FPopoverMotion()),
   onChange: (shown) {},
 );

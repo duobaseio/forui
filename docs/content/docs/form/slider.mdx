@@ -26,6 +26,15 @@ import formSnippet from '@/snippets/examples/slider/form.json';
 import sliderUsage from '@/snippets/usages/widgets/slider/slider.json';
 import sliderMarkUsage from '@/snippets/usages/widgets/slider/sliderMark.json';
 
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='slider'/>
+  </Tab>
+  <Tab value="Code">
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
 ## CLI
 
 To generate and customize this style:
@@ -35,15 +44,6 @@ dart run forui style create slider
 ```
 
 ## Usage
-
-<Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
-    <Widget name='slider'/>
-  </Tab>
-  <Tab value="Code">
-    <CodeSnippet snippet={defaultSnippet} />
-  </Tab>
-</Tabs>
 
 ### `FSlider(...)`
 <UsageSnippet usage={sliderUsage} />
@@ -59,7 +59,7 @@ dart run forui style create slider
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='slider' query={{label: 'Volume', description: 'Adjust the volume by dragging the slider.'}}/>
+    <Widget name='slider' variant='labelled'/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={labelledSnippet} />
@@ -70,7 +70,7 @@ dart run forui style create slider
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='slider' query={{enabled: 'false', label: 'Volume', description: 'Adjust the volume by dragging the slider.'}}/>
+    <Widget name='slider' variant='disabled'/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={disabledSnippet} />
@@ -81,7 +81,7 @@ dart run forui style create slider
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='slider' query={{label: 'Volume', description: 'Adjust the volume by dragging the slider.', error: 'Volume is too high.'}}/>
+    <Widget name='slider' variant='error'/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={errorSnippet} />
@@ -143,7 +143,7 @@ Marks provide visual reference points on the slider track. Each mark consists of
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='slider' query={{extent: 'true'}}/>
+    <Widget name='slider' variant='boundaries'/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={boundariesSnippet} />
@@ -169,7 +169,7 @@ Slide anywhere on the track or thumb to select a value.
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='slider' query={{interaction: 'slide'}}/>
+    <Widget name='slider' variant='slide'/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={slideSnippet} />
@@ -182,7 +182,7 @@ Slide the thumb to select a value.
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='slider' query={{interaction: 'slideThumb'}}/>
+    <Widget name='slider' variant='slide-thumb'/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={slideThumbSnippet} />
@@ -195,7 +195,7 @@ Tap anywhere on the track to select a value.
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='slider' query={{interaction: 'tap'}}/>
+    <Widget name='slider' variant='tap'/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={tapSnippet} />
@@ -208,7 +208,7 @@ Tap anywhere or slide the thumb to select a value.
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='slider' query={{interaction: 'tapAndSlideThumb'}}/>
+    <Widget name='slider' variant='tap-and-slide-thumb'/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={tapAndSlideThumbSnippet} />

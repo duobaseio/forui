@@ -42,7 +42,7 @@ final FTabControl managedInternal = .managed(initial: 0, motion: const FTabMotio
 // {@category "Control" "`.managed()` with external controller"}
 /// Uses an external controller for tab management.
 final FTabControl managedExternal = .managed(
-  // For demonstration purposes only. Don't create a controller inline, store it in a State instead.
+  // Don't create a controller inline. Store it in a State instead.
   controller: FTabController(length: 3, vsync: vsync),
   onChange: (index) {},
 );

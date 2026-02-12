@@ -57,8 +57,13 @@ class PopoverPage extends Example {
         ),
       ),
     ),
-    builder: (_, controller, _) =>
-        FButton(variant: .outline, mainAxisSize: .min, onPress: controller.toggle, child: const Text('Open popover')),
+    builder: (_, controller, _) => FButton(
+      variant: .outline,
+      size: .sm,
+      mainAxisSize: .min,
+      onPress: controller.toggle,
+      child: const Text('Open popover'),
+    ),
   );
 }
 
@@ -114,8 +119,13 @@ class HorizontalPopoverPage extends Example {
         ),
       ),
     ),
-    builder: (_, controller, _) =>
-        FButton(variant: .outline, mainAxisSize: .min, onPress: controller.toggle, child: const Text('Open popover')),
+    builder: (_, controller, _) => FButton(
+      variant: .outline,
+      size: .sm,
+      mainAxisSize: .min,
+      onPress: controller.toggle,
+      child: const Text('Open popover'),
+    ),
   );
 }
 
@@ -172,8 +182,13 @@ class NoHideRegionPopoverPage extends Example {
         ),
       ),
     ),
-    builder: (_, controller, _) =>
-        FButton(variant: .outline, mainAxisSize: .min, onPress: controller.toggle, child: const Text('Open popover')),
+    builder: (_, controller, _) => FButton(
+      variant: .outline,
+      size: .sm,
+      mainAxisSize: .min,
+      onPress: controller.toggle,
+      child: const Text('Open popover'),
+    ),
   );
 }
 
@@ -228,8 +243,13 @@ class NestedPopoverPage extends Example {
         ),
       ),
     ),
-    builder: (_, controller, _) =>
-        FButton(variant: .outline, mainAxisSize: .min, onPress: controller.toggle, child: const Text('Open popover')),
+    builder: (_, controller, _) => FButton(
+      variant: .outline,
+      size: .sm,
+      mainAxisSize: .min,
+      onPress: controller.toggle,
+      child: const Text('Open popover'),
+    ),
   );
 }
 
@@ -315,6 +335,7 @@ class BlurredPopoverPage extends Example {
         ),
         builder: (_, controller, _) => FButton(
           variant: .outline,
+          size: .sm,
           mainAxisSize: .min,
           onPress: controller.toggle,
           child: const Text('Open popover'),
@@ -374,8 +395,13 @@ class FlipPopoverPage extends Example {
         ),
       ),
     ),
-    builder: (_, controller, _) =>
-        FButton(variant: .outline, mainAxisSize: .min, onPress: controller.toggle, child: const Text('Open popover')),
+    builder: (_, controller, _) => FButton(
+      variant: .outline,
+      size: .sm,
+      mainAxisSize: .min,
+      onPress: controller.toggle,
+      child: const Text('Open popover'),
+    ),
   );
 }
 
@@ -432,8 +458,13 @@ class SlidePopoverPage extends Example {
         ),
       ),
     ),
-    builder: (_, controller, _) =>
-        FButton(variant: .outline, mainAxisSize: .min, onPress: controller.toggle, child: const Text('Open popover')),
+    builder: (_, controller, _) => FButton(
+      variant: .outline,
+      size: .sm,
+      mainAxisSize: .min,
+      onPress: controller.toggle,
+      child: const Text('Open popover'),
+    ),
   );
 }
 
@@ -490,7 +521,12 @@ class AllowOverflowPopoverPage extends Example {
         ),
       ),
     ),
-    builder: (_, controller, _) =>
-        FButton(variant: .outline, mainAxisSize: .min, onPress: controller.toggle, child: const Text('Open popover')),
+    builder: (_, controller, _) => FButton(
+      variant: .outline,
+      size: .sm,
+      mainAxisSize: .min,
+      onPress: controller.toggle,
+      child: const Text('Open popover'),
+    ),
   );
 }

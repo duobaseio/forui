@@ -29,7 +29,7 @@ It is part of [FScaffold](/docs/layout/scaffold), which should be preferred in m
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='persistent-sheet' query={{}} height={500}/>
+    <Widget name='persistent-sheet' height={500}/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={defaultSnippet} />
@@ -58,7 +58,7 @@ dart run forui style create persistent-sheet
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='persistent-sheet' query={{keepAliveOffstage: true}} height={500}/>
+    <Widget name='persistent-sheet' variant='keep-alive-offstage' height={500}/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={keepAliveOffstageSnippet} />
@@ -69,7 +69,7 @@ dart run forui style create persistent-sheet
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='persistent-sheet' query={{}} height={400} variant='draggable'/>
+    <Widget name='persistent-sheet' variant='draggable' height={400}/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={draggableSnippet} />
