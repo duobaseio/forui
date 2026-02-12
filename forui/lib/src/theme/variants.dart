@@ -124,7 +124,8 @@ class FVariants<K extends FVariantConstraint, E extends FVariant, V, D extends D
   final Map<K, V> variants;
 
   @override
-  FVariants<K, E, V, D> Function(V base, Map<K, V> variants) get _call => (_, _) => this;
+  FVariants<K, E, V, D> Function(V base, Map<K, V> variants) get _call =>
+      (_, _) => this;
 
   @override
   FVariants<K, E, V, D> call(covariant FVariants<K, E, V, D> _) => this;
@@ -423,8 +424,7 @@ class FVariantsValueDelta<K extends FVariantConstraint, E extends FVariant, V, D
       });
 
   @override
-  FVariants<K, E, V, D> call(covariant FVariants<K, E, V, D> variants) =>
-      _call(variants.base, variants.variants);
+  FVariants<K, E, V, D> call(covariant FVariants<K, E, V, D> variants) => _call(variants.base, variants.variants);
 }
 
 /// An operation in [FVariantsValueDelta.delta] that modifies [FVariants] using concrete values.

@@ -16,7 +16,9 @@ import 'package:forui/src/theme/variant.dart';
 part 'slider_styles.design.dart';
 
 /// A slider's styles.
-extension type FSliderStyles._(FVariants<FSliderAxisVariantConstraint, FSliderAxisVariant, FSliderStyle, FSliderStyleDelta> _)
+extension type FSliderStyles._(
+  FVariants<FSliderAxisVariantConstraint, FSliderAxisVariant, FSliderStyle, FSliderStyleDelta> _
+)
     implements FVariants<FSliderAxisVariantConstraint, FSliderAxisVariant, FSliderStyle, FSliderStyleDelta> {
   /// Creates a [FSliderStyles] that inherits its properties.
   FSliderStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})

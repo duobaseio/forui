@@ -35,12 +35,14 @@ void main() {
 
   group('FVariants', () {
     test('lerpBoxDecoration', () {
-      final first = createVariants<FVariant, FVariant, BoxDecoration, Delta>(const BoxDecoration(color: Color(0xFF000000)), {
-        a: const BoxDecoration(color: Color(0xFF000000)),
-      });
-      final second = createVariants<FVariant, FVariant, BoxDecoration, Delta>(const BoxDecoration(color: Color(0xFFFFFFFF)), {
-        a: const BoxDecoration(color: Color(0xFFFFFFFF)),
-      });
+      final first = createVariants<FVariant, FVariant, BoxDecoration, Delta>(
+        const BoxDecoration(color: Color(0xFF000000)),
+        {a: const BoxDecoration(color: Color(0xFF000000))},
+      );
+      final second = createVariants<FVariant, FVariant, BoxDecoration, Delta>(
+        const BoxDecoration(color: Color(0xFFFFFFFF)),
+        {a: const BoxDecoration(color: Color(0xFFFFFFFF))},
+      );
 
       final result = FVariants.lerpBoxDecoration(first, second, 0.5);
 
@@ -49,12 +51,14 @@ void main() {
     });
 
     test('lerpDecoration', () {
-      final first = createVariants<FVariant, FVariant, Decoration, Delta>(const BoxDecoration(color: Color(0xFF000000)), {
-        a: const BoxDecoration(color: Color(0xFF000000)),
-      });
-      final second = createVariants<FVariant, FVariant, Decoration, Delta>(const BoxDecoration(color: Color(0xFFFFFFFF)), {
-        a: const BoxDecoration(color: Color(0xFFFFFFFF)),
-      });
+      final first = createVariants<FVariant, FVariant, Decoration, Delta>(
+        const BoxDecoration(color: Color(0xFF000000)),
+        {a: const BoxDecoration(color: Color(0xFF000000))},
+      );
+      final second = createVariants<FVariant, FVariant, Decoration, Delta>(
+        const BoxDecoration(color: Color(0xFFFFFFFF)),
+        {a: const BoxDecoration(color: Color(0xFFFFFFFF))},
+      );
 
       final result = FVariants.lerpDecoration(first, second, 0.5);
 
@@ -63,8 +67,12 @@ void main() {
     });
 
     test('lerpColor', () {
-      final first = createVariants<FVariant, FVariant, Color, Delta>(const Color(0xFF000000), {a: const Color(0xFF000000)});
-      final second = createVariants<FVariant, FVariant, Color, Delta>(const Color(0xFFFFFFFF), {a: const Color(0xFFFFFFFF)});
+      final first = createVariants<FVariant, FVariant, Color, Delta>(const Color(0xFF000000), {
+        a: const Color(0xFF000000),
+      });
+      final second = createVariants<FVariant, FVariant, Color, Delta>(const Color(0xFFFFFFFF), {
+        a: const Color(0xFFFFFFFF),
+      });
 
       final result = FVariants.lerpColor(first, second, 0.5);
 
@@ -158,7 +166,12 @@ void main() {
           final first = createVariants<FVariant, FVariant, double?, _NullableDelta>(1.0, {a: 2.0});
           final second = createVariants<FVariant, FVariant, double?, _NullableDelta>(3.0, {a: 6.0});
 
-          final result = FVariants.lerpWhere<FVariant, FVariant, double?, _NullableDelta>(first, second, 0.5, (a, b, t) => null);
+          final result = FVariants.lerpWhere<FVariant, FVariant, double?, _NullableDelta>(
+            first,
+            second,
+            0.5,
+            (a, b, t) => null,
+          );
 
           expect(result.base, null);
           expect(result.variants, {a: null});

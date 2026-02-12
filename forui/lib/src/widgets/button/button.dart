@@ -368,7 +368,9 @@ typedef FButtonSizesDelta =
     FVariantsDelta<FButtonSizeVariantConstraint, FButtonSizeVariant, FButtonStyle, FButtonStyleDelta>;
 
 /// [FButtonStyle]'s size styles.
-extension type FButtonSizeStyles._(FVariants<FButtonSizeVariantConstraint, FButtonSizeVariant, FButtonStyle, FButtonStyleDelta> _)
+extension type FButtonSizeStyles._(
+  FVariants<FButtonSizeVariantConstraint, FButtonSizeVariant, FButtonStyle, FButtonStyleDelta> _
+)
     implements FVariants<FButtonSizeVariantConstraint, FButtonSizeVariant, FButtonStyle, FButtonStyleDelta> {
   /// Creates a [FButtonSizeStyles] that inherits its properties.
   factory FButtonSizeStyles.inherit({

@@ -279,27 +279,30 @@ class FSelectGroupStyle extends FLabelStyle with Diagnosticable, _$FSelectGroupS
   factory FSelectGroupStyle.inherit({required FColors colors, required FTypography typography, required FStyle style}) {
     final vertical = FLabelStyles.inherit(style: style).verticalStyle;
 
-    final itemLabelTextStyle = FVariants<FFormFieldVariantConstraint, FFormFieldVariant, TextStyle, TextStyleDelta>.from(
-      typography.sm.copyWith(color: colors.foreground, fontWeight: .w500),
-      variants: {
-        [.disabled]: .delta(color: colors.disable(colors.foreground)),
-        //
-        [.error]: .delta(color: colors.error),
-        [.error.and(.disabled)]: .delta(color: colors.disable(colors.error)),
-      },
-    );
-    final itemDescriptionTextStyle = FVariants<FFormFieldVariantConstraint, FFormFieldVariant, TextStyle, TextStyleDelta>.from(
-      typography.sm.copyWith(color: colors.mutedForeground),
-      variants: {
-        [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
-      },
-    );
-    final itemErrorTextStyle = FVariants<FFormFieldErrorVariantConstraint, FFormFieldErrorVariant, TextStyle, TextStyleDelta>.from(
-      typography.sm.copyWith(color: colors.error, fontWeight: .w500),
-      variants: {
-        [.disabled]: .delta(color: colors.disable(colors.error)),
-      },
-    );
+    final itemLabelTextStyle =
+        FVariants<FFormFieldVariantConstraint, FFormFieldVariant, TextStyle, TextStyleDelta>.from(
+          typography.sm.copyWith(color: colors.foreground, fontWeight: .w500),
+          variants: {
+            [.disabled]: .delta(color: colors.disable(colors.foreground)),
+            //
+            [.error]: .delta(color: colors.error),
+            [.error.and(.disabled)]: .delta(color: colors.disable(colors.error)),
+          },
+        );
+    final itemDescriptionTextStyle =
+        FVariants<FFormFieldVariantConstraint, FFormFieldVariant, TextStyle, TextStyleDelta>.from(
+          typography.sm.copyWith(color: colors.mutedForeground),
+          variants: {
+            [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
+          },
+        );
+    final itemErrorTextStyle =
+        FVariants<FFormFieldErrorVariantConstraint, FFormFieldErrorVariant, TextStyle, TextStyleDelta>.from(
+          typography.sm.copyWith(color: colors.error, fontWeight: .w500),
+          variants: {
+            [.disabled]: .delta(color: colors.disable(colors.error)),
+          },
+        );
 
     return .new(
       checkboxStyle: .inherit(colors: colors, style: style).copyWith(

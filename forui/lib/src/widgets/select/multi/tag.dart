@@ -163,7 +163,8 @@ class FMultiSelectTagStyle with Diagnosticable, _$FMultiSelectTagStyleFunctions 
 
   /// The icon's style.
   @override
-  final FVariants<FMultiSelectTagVariantConstraint, FMultiSelectTagVariant, IconThemeData, IconThemeDataDelta> iconStyle;
+  final FVariants<FMultiSelectTagVariantConstraint, FMultiSelectTagVariant, IconThemeData, IconThemeDataDelta>
+  iconStyle;
 
   /// The tappable style.
   @override

@@ -514,7 +514,8 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
 
   /// The dialog content's style.
   @override
-  final FVariants<FDialogAxisVariantConstraint, FDialogAxisVariant, FDialogContentStyle, FDialogContentStyleDelta> contentStyle;
+  final FVariants<FDialogAxisVariantConstraint, FDialogAxisVariant, FDialogContentStyle, FDialogContentStyleDelta>
+  contentStyle;
 
   /// Motion-related properties.
   @override

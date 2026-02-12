@@ -208,7 +208,8 @@ class FAutocompleteSection extends StatelessWidget with FAutocompleteItemMixin {
 class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyleFunctions {
   /// The enabled label's text style.
   @override
-  final FVariants<FAutocompleteSectionVariantConstraint, FAutocompleteSectionVariant, TextStyle, TextStyleDelta> labelTextStyle;
+  final FVariants<FAutocompleteSectionVariantConstraint, FAutocompleteSectionVariant, TextStyle, TextStyleDelta>
+  labelTextStyle;
 
   /// The padding around the label. Defaults to `EdgeInsetsDirectional.only(start: 15, top: 7.5, bottom: 7.5, end: 10)`.
   @override

@@ -390,7 +390,13 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// dart run forui style create resizable
   /// ```
   @override
-  final FVariants<FResizableAxisVariantConstraint, FResizableAxisVariant, FResizableDividerStyle, FResizableDividerStyleDelta> resizableStyles;
+  final FVariants<
+    FResizableAxisVariantConstraint,
+    FResizableAxisVariant,
+    FResizableDividerStyle,
+    FResizableDividerStyleDelta
+  >
+  resizableStyles;
 
   /// The scaffold style.
   ///
@@ -608,7 +614,13 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FPopoverMenuStyle? popoverMenuStyle,
     FProgressStyle? progressStyle,
     FRadioStyle? radioStyle,
-    FVariants<FResizableAxisVariantConstraint, FResizableAxisVariant, FResizableDividerStyle, FResizableDividerStyleDelta>? resizableStyles,
+    FVariants<
+      FResizableAxisVariantConstraint,
+      FResizableAxisVariant,
+      FResizableDividerStyle,
+      FResizableDividerStyleDelta
+    >?
+    resizableStyles,
     FScaffoldStyle? scaffoldStyle,
     FSelectStyle? selectStyle,
     FSelectGroupStyle? selectGroupStyle,
