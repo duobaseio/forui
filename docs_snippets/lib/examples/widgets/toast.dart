@@ -36,7 +36,9 @@ class ToastPage extends Example {
                 style: .delta(
                   contentStyle: .delta(
                     padding: const .symmetric(horizontal: 12, vertical: 7.5),
-                    textStyle: FVariants.all(context.theme.typography.xs.copyWith(color: context.theme.colors.primaryForeground)),
+                    textStyle: FVariants.all(
+                      context.theme.typography.xs.copyWith(color: context.theme.colors.primaryForeground),
+                    ),
                   ),
                 ),
                 onPress: entry.dismiss,
