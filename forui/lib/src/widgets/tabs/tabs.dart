@@ -110,7 +110,7 @@ class FTabs extends StatefulWidget {
     this.control = const .managed(),
     this.scrollable = false,
     this.physics,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.onPress,
     this.mouseCursor = .defer,
     this.expands = false,

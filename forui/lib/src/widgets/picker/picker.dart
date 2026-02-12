@@ -65,7 +65,7 @@ class FPicker extends StatefulWidget {
   const FPicker({
     required this.children,
     this.control = const .managed(),
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.debugLabel = 'FPicker',
     super.key,
   });

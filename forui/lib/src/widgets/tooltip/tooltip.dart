@@ -130,7 +130,7 @@ class FTooltip extends StatefulWidget {
   const FTooltip({
     required this.tipBuilder,
     this.control = const .managed(),
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.tipAnchor = .bottomCenter,
     this.childAnchor = .topCenter,
     this.spacing = const .spacing(4),

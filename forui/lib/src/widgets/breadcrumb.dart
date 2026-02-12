@@ -53,7 +53,7 @@ class FBreadcrumb extends StatelessWidget {
   final Widget? divider;
 
   /// Creates an [FBreadcrumb].
-  const FBreadcrumb({required this.children, this.style = const .inherit(), this.divider, super.key});
+  const FBreadcrumb({required this.children, this.style = const .context(), this.divider, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -261,7 +261,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
 
   const _CollapsedCrumb({
     required List<FItemGroup> menu,
-    this.popoverMenuStyle = const .inherit(),
+    this.popoverMenuStyle = const .context(),
     this.popoverControl = const .managed(),
     this.scrollController,
     this.cacheExtent,
@@ -288,7 +288,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
 
   const _CollapsedCrumb.tiles({
     required List<FTileGroup> menu,
-    this.popoverMenuStyle = const .inherit(),
+    this.popoverMenuStyle = const .context(),
     this.popoverControl = const .managed(),
     this.scrollController,
     this.cacheExtent,

@@ -62,7 +62,7 @@ class FSidebarGroup extends StatelessWidget {
   /// Creates a [FSidebarGroup].
   const FSidebarGroup({
     required this.children,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.label,
     this.action,
     this.onActionHoverChange,

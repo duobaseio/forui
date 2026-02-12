@@ -278,7 +278,7 @@ class FPopover extends StatefulWidget {
   const FPopover({
     required this.popoverBuilder,
     this.control = const .managed(),
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.constraints = const FPortalConstraints(),
     this.spacing = const .spacing(4),
     this.overflow = .flip,

@@ -12,7 +12,7 @@ mixin FTileGroupMixin on Widget {
     required List<FSelectTile<T>> children,
     FMultiValueControl<T>? control,
     ScrollController? scrollController,
-    FTileGroupStyleDelta style = const .inherit(),
+    FTileGroupStyleDelta style = const .context(),
     double? cacheExtent,
     double maxHeight = .infinity,
     DragStartBehavior dragStartBehavior = .start,
@@ -60,7 +60,7 @@ mixin FTileGroupMixin on Widget {
     int? count,
     FMultiValueControl<T>? control,
     ScrollController? scrollController,
-    FTileGroupStyleDelta style = const .inherit(),
+    FTileGroupStyleDelta style = const .context(),
     double? cacheExtent,
     double maxHeight = double.infinity,
     DragStartBehavior dragStartBehavior = DragStartBehavior.start,
@@ -106,7 +106,7 @@ mixin FTileGroupMixin on Widget {
   /// This function is a shorthand for [FTileGroup.new].
   static FTileGroup group({
     required List<FTileMixin> children,
-    FTileGroupStyleDelta style = const .inherit(),
+    FTileGroupStyleDelta style = const .context(),
     ScrollController? scrollController,
     double? cacheExtent,
     double maxHeight = .infinity,
@@ -142,7 +142,7 @@ mixin FTileGroupMixin on Widget {
   static FTileGroup builder({
     required NullableIndexedWidgetBuilder tileBuilder,
     int? count,
-    FTileGroupStyleDelta style = const .inherit(),
+    FTileGroupStyleDelta style = const .context(),
     ScrollController? scrollController,
     double? cacheExtent,
     double maxHeight = .infinity,
@@ -178,7 +178,7 @@ mixin FTileGroupMixin on Widget {
   /// This function is a shorthand for [FTileGroup.merge].
   static FTileGroup merge({
     required List<FTileGroupMixin> children,
-    FTileGroupStyleDelta style = const .inherit(),
+    FTileGroupStyleDelta style = const .context(),
     ScrollController? scrollController,
     double? cacheExtent,
     double maxHeight = .infinity,

@@ -51,7 +51,7 @@ class FAccordion extends StatefulWidget {
   final List<Widget> children;
 
   /// Creates a [FAccordion].
-  const FAccordion({required this.children, this.control = const .managed(), this.style = const .inherit(), super.key});
+  const FAccordion({required this.children, this.control = const .managed(), this.style = const .context(), super.key});
 
   @override
   State<FAccordion> createState() => _FAccordionState();

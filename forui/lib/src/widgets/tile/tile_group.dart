@@ -148,7 +148,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
   /// {@endtemplate}
   FTileGroup({
     required List<FTileMixin> children,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.scrollController,
     this.cacheExtent,
     this.maxHeight = .infinity,
@@ -198,7 +198,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
   FTileGroup.builder({
     required NullableIndexedWidgetBuilder tileBuilder,
     int? count,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.scrollController,
     this.cacheExtent,
     this.maxHeight = .infinity,
@@ -240,7 +240,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
   /// {@endtemplate}
   FTileGroup.merge({
     required List<FTileGroupMixin> children,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.scrollController,
     this.cacheExtent,
     this.maxHeight = .infinity,

@@ -88,7 +88,7 @@ class FLabel extends StatelessWidget {
   const FLabel({
     required this.axis,
     required this.child,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.label,
     this.description,
     this.error,

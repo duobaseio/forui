@@ -172,7 +172,7 @@ class FTile extends StatelessWidget with FTileMixin {
   FTile({
     required Widget title,
     this.variants = const {},
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.enabled,
     this.selected = false,
     this.semanticsLabel,
@@ -231,7 +231,7 @@ class FTile extends StatelessWidget with FTileMixin {
   FTile.raw({
     required Widget child,
     this.variants = const {},
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.enabled,
     this.selected = false,
     this.semanticsLabel,

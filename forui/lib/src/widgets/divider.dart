@@ -45,7 +45,7 @@ class FDivider extends StatelessWidget {
   final Axis axis;
 
   /// Creates a [FDivider].
-  const FDivider({this.style = const .inherit(), this.axis = .horizontal, super.key});
+  const FDivider({this.style = const .context(), this.axis = .horizontal, super.key});
 
   @override
   Widget build(BuildContext context) {

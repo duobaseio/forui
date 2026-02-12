@@ -28,7 +28,7 @@ mixin FSelectItemMixin on Widget {
   static FSelectSection<T> section<T>({
     required Widget label,
     required Map<String, T> items,
-    FSelectSectionStyleDelta style = const .inherit(),
+    FSelectSectionStyleDelta style = const .context(),
     bool? enabled,
     FItemDivider divider = .none,
     Key? key,
@@ -40,7 +40,7 @@ mixin FSelectItemMixin on Widget {
   static FSelectSection<T> richSection<T>({
     required Widget label,
     required List<FSelectItem<T>> children,
-    FSelectSectionStyleDelta style = const .inherit(),
+    FSelectSectionStyleDelta style = const .context(),
     bool? enabled,
     FItemDivider divider = .none,
     Key? key,
@@ -54,7 +54,7 @@ mixin FSelectItemMixin on Widget {
   static FSelectItem<T> item<T>({
     required Widget title,
     required T value,
-    FItemStyleDelta style = const .inherit(),
+    FItemStyleDelta style = const .context(),
     bool? enabled,
     Widget? prefix,
     Widget? subtitle,
@@ -78,7 +78,7 @@ mixin FSelectItemMixin on Widget {
   static FSelectItem<T> raw<T>({
     required Widget child,
     required T value,
-    FItemStyleDelta style = const .inherit(),
+    FItemStyleDelta style = const .context(),
     bool? enabled,
     Widget? prefix,
     Key? key,
@@ -130,7 +130,7 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
   FSelectSection({
     required Widget label,
     required Map<String, T> items,
-    FSelectSectionStyleDelta style = const .inherit(),
+    FSelectSectionStyleDelta style = const .context(),
     bool? enabled,
     FItemDivider divider = .none,
     Key? key,
@@ -149,7 +149,7 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
   const FSelectSection.rich({
     required this.label,
     required this.children,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.enabled,
     this.divider = .none,
     super.key,
@@ -390,7 +390,7 @@ abstract class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
     Key? key,
   }) = _RawSelectItem<T>;
 
-  const FSelectItem._({required this.value, this.style = const .inherit(), this.enabled, this.prefix, super.key});
+  const FSelectItem._({required this.value, this.style = const .context(), this.enabled, this.prefix, super.key});
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

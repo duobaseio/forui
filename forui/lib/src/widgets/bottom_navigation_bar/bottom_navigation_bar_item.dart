@@ -56,7 +56,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
   const FBottomNavigationBarItem({
     required this.icon,
     this.label,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,

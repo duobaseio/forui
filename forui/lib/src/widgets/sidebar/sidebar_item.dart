@@ -75,7 +75,7 @@ class FSidebarItem extends StatefulWidget {
 
   /// Creates a [FSidebarItem].
   const FSidebarItem({
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.icon,
     this.label,
     this.selected = false,

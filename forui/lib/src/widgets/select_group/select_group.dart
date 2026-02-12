@@ -141,7 +141,7 @@ class FSelectGroup<T> extends StatefulWidget with FFormFieldProperties<Set<T>> {
   const FSelectGroup({
     required this.children,
     this.control,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.label,
     this.description,
     this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,

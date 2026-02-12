@@ -82,7 +82,7 @@ class FRadio extends StatelessWidget {
 
   /// Creates a [FRadio].
   const FRadio({
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.label,
     this.description,
     this.error,

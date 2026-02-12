@@ -9,7 +9,7 @@ const alert = FAlert(
   variant: null,
   // {@endcategory}
   // {@category "Core"}
-  style: .inherit(),
+  style: .context(),
   icon: Icon(FIcons.circleAlert),
   title: Text('Alert Title'),
   subtitle: Text('Alert subtitle with more details'),

@@ -82,7 +82,7 @@ class FCheckbox extends StatelessWidget {
 
   /// Creates a [FCheckbox].
   const FCheckbox({
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.label,
     this.description,
     this.error,

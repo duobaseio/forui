@@ -26,7 +26,7 @@ mixin FAutocompleteItemMixin on Widget {
   static FAutocompleteSection section({
     required Widget label,
     required List<String> items,
-    FAutocompleteSectionStyleDelta style = const .inherit(),
+    FAutocompleteSectionStyleDelta style = const .context(),
     bool? enabled,
     FItemDivider divider = .none,
     Key? key,
@@ -38,7 +38,7 @@ mixin FAutocompleteItemMixin on Widget {
   static FAutocompleteSection richSection({
     required Widget label,
     required List<FAutocompleteItem> children,
-    FAutocompleteSectionStyleDelta style = const .inherit(),
+    FAutocompleteSectionStyleDelta style = const .context(),
     bool? enabled,
     FItemDivider divider = .none,
     Key? key,
@@ -51,7 +51,7 @@ mixin FAutocompleteItemMixin on Widget {
   /// This function is a shorthand for [FAutocompleteItem.new].
   static FAutocompleteItem item({
     required String value,
-    FItemStyleDelta style = const .inherit(),
+    FItemStyleDelta style = const .context(),
     bool? enabled,
     Widget? prefix,
     Widget? title,
@@ -75,7 +75,7 @@ mixin FAutocompleteItemMixin on Widget {
   static FAutocompleteItem rawItem({
     required Widget child,
     required String value,
-    FItemStyleDelta style = const .inherit(),
+    FItemStyleDelta style = const .context(),
     bool? enabled,
     Widget? prefix,
     Key? key,
@@ -127,7 +127,7 @@ class FAutocompleteSection extends StatelessWidget with FAutocompleteItemMixin {
   FAutocompleteSection({
     required Widget label,
     required List<String> items,
-    FAutocompleteSectionStyleDelta style = const .inherit(),
+    FAutocompleteSectionStyleDelta style = const .context(),
     bool? enabled,
     FItemDivider divider = .none,
     Key? key,
@@ -146,7 +146,7 @@ class FAutocompleteSection extends StatelessWidget with FAutocompleteItemMixin {
   const FAutocompleteSection.rich({
     required this.label,
     required this.children,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.enabled,
     this.divider = .none,
     super.key,
@@ -380,7 +380,7 @@ abstract class FAutocompleteItem extends StatelessWidget with FAutocompleteItemM
     Key? key,
   }) = _RawAutocompleteItem;
 
-  const FAutocompleteItem._({required this.value, this.style = const .inherit(), this.enabled, this.prefix, super.key});
+  const FAutocompleteItem._({required this.value, this.style = const .context(), this.enabled, this.prefix, super.key});
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

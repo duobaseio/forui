@@ -177,7 +177,7 @@ class FTappable extends StatefulWidget {
   /// ## Contract
   /// Throws [AssertionError] if [builder] and [child] are both null.
   const FTappable.static({
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.focusedOutlineStyle,
     this.semanticsLabel,
     this.excludeSemantics = false,

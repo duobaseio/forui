@@ -27,7 +27,7 @@ class _FNestedHeader extends FHeader {
 
   /// Creates a [_FNestedHeader].
   const _FNestedHeader({
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.prefixes = const [],
     this.suffixes = const [],
     this.titleAlignment = .center,

@@ -75,7 +75,7 @@ class FAlert extends StatelessWidget {
     this.icon = const Icon(FIcons.circleAlert),
     this.subtitle,
     this.variant,
-    this.style = const .inherit(),
+    this.style = const .context(),
     super.key,
   });
 

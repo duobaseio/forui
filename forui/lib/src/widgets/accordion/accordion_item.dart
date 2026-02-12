@@ -67,7 +67,7 @@ class FAccordionItem extends StatefulWidget with FAccordionItemMixin {
   const FAccordionItem({
     required this.title,
     required this.child,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.icon = const Icon(FIcons.chevronDown),
     this.initiallyExpanded,
     this.autofocus = false,

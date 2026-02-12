@@ -20,7 +20,7 @@ mixin FItemGroupMixin on Widget {
   /// {@macro forui.widgets.FItemGroup.new}
   static FItemGroup group({
     required List<FItemMixin> children,
-    FItemGroupStyleDelta style = const .inherit(),
+    FItemGroupStyleDelta style = const .context(),
     ScrollController? scrollController,
     double? cacheExtent,
     double maxHeight = .infinity,
@@ -48,7 +48,7 @@ mixin FItemGroupMixin on Widget {
   static FItemGroup builder({
     required NullableIndexedWidgetBuilder itemBuilder,
     int? count,
-    FItemGroupStyleDelta style = const .inherit(),
+    FItemGroupStyleDelta style = const .context(),
     ScrollController? scrollController,
     double? cacheExtent,
     double maxHeight = .infinity,
@@ -76,7 +76,7 @@ mixin FItemGroupMixin on Widget {
   /// {@macro forui.widgets.FItemGroup.merge}
   static FItemGroup merge({
     required List<FItemGroupMixin> children,
-    FItemGroupStyleDelta style = const .inherit(),
+    FItemGroupStyleDelta style = const .context(),
     ScrollController? scrollController,
     double? cacheExtent,
     double maxHeight = .infinity,
@@ -221,7 +221,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
   /// {@endtemplate}
   FItemGroup({
     required List<FItemMixin> children,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.scrollController,
     this.cacheExtent,
     this.maxHeight = .infinity,
@@ -269,7 +269,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
   FItemGroup.builder({
     required NullableIndexedWidgetBuilder itemBuilder,
     int? count,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.scrollController,
     this.cacheExtent,
     this.maxHeight = .infinity,
@@ -309,7 +309,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
   /// {@endtemplate}
   FItemGroup.merge({
     required List<FItemGroupMixin> children,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.scrollController,
     this.cacheExtent,
     this.maxHeight = .infinity,
@@ -342,7 +342,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
   /// This function is a shorthand for [FItemGroup.new].
   FItemGroup.group({
     required List<FItemMixin> children,
-    FItemGroupStyleDelta style = const .inherit(),
+    FItemGroupStyleDelta style = const .context(),
     ScrollController? scrollController,
     double? cacheExtent,
     double maxHeight = .infinity,

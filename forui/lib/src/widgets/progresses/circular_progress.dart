@@ -37,18 +37,18 @@ class FCircularProgress extends StatefulWidget {
 
   /// Creates a [FCircularProgress] that uses [FIcons.loaderCircle].
   const FCircularProgress({
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.semanticsLabel,
     this.icon = FIcons.loaderCircle,
     super.key,
   });
 
   /// Creates a [FCircularProgress] that uses [FIcons.loader].
-  const FCircularProgress.loader({this.style = const .inherit(), this.semanticsLabel, super.key})
+  const FCircularProgress.loader({this.style = const .context(), this.semanticsLabel, super.key})
     : icon = FIcons.loader;
 
   /// Creates a [FCircularProgress] that uses [FIcons.loaderPinwheel].
-  const FCircularProgress.pinwheel({this.style = const .inherit(), this.semanticsLabel, super.key})
+  const FCircularProgress.pinwheel({this.style = const .context(), this.semanticsLabel, super.key})
     : icon = FIcons.loaderPinwheel;
 
   @override

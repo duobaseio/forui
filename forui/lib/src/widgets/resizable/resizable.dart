@@ -92,7 +92,7 @@ class FResizable extends StatefulWidget {
     required this.axis,
     required this.children,
     this.control = const .managedCascade(),
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.divider = .dividerWithThumb,
     this.crossAxisExtent,
     this.hitRegionExtent,

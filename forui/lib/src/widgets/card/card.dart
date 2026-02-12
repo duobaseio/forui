@@ -58,7 +58,7 @@ class FCard extends StatelessWidget {
     Widget? subtitle,
     Widget? child,
     MainAxisSize mainAxisSize = .min,
-    this.style = const .inherit(),
+    this.style = const .context(),
     super.key,
   }) : child = Content(
          image: image,
@@ -70,7 +70,7 @@ class FCard extends StatelessWidget {
        );
 
   /// Creates a [FCard] with custom content.
-  const FCard.raw({required this.child, this.style = const .inherit(), super.key});
+  const FCard.raw({required this.child, this.style = const .context(), super.key});
 
   @override
   Widget build(BuildContext context) =>

@@ -71,7 +71,7 @@ class FMultiSelectTag extends StatelessWidget {
   /// Creates a [FMultiSelectTag].
   const FMultiSelectTag({
     required this.label,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,

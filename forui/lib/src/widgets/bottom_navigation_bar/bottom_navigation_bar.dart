@@ -63,7 +63,7 @@ class FBottomNavigationBar extends StatelessWidget {
   /// See [FBottomNavigationBarItem] for the items in a bottom navigation bar.
   const FBottomNavigationBar({
     required this.children,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.onChange,
     this.index = -1,
     this.safeAreaTop = false,

@@ -159,7 +159,7 @@ class FPopoverMenu extends StatelessWidget {
   FPopoverMenu({
     this.control = const .managed(),
     this.scrollController,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.cacheExtent,
     this.maxHeight = .infinity,
     this.dragStartBehavior = .start,
@@ -217,7 +217,7 @@ class FPopoverMenu extends StatelessWidget {
   FPopoverMenu.tiles({
     this.control = const .managed(),
     this.scrollController,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.cacheExtent,
     this.maxHeight = .infinity,
     this.dragStartBehavior = .start,

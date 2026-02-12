@@ -22,7 +22,7 @@ mixin FItemMixin on Widget {
   static FItem item({
     required Widget title,
     Set<FItemVariant> variants = const {},
-    FItemStyleDelta style = const .inherit(),
+    FItemStyleDelta style = const .context(),
     bool? enabled,
     bool selected = false,
     String? semanticsLabel,
@@ -73,7 +73,7 @@ mixin FItemMixin on Widget {
   static FItem raw({
     required Widget child,
     Set<FItemVariant> variants = const {},
-    FItemStyleDelta style = const .inherit(),
+    FItemStyleDelta style = const .context(),
     bool? enabled,
     bool selected = false,
     String? semanticsLabel,
@@ -287,7 +287,7 @@ class FItem extends StatelessWidget with FItemMixin {
   FItem({
     required Widget title,
     this.variants = const {},
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.enabled,
     this.selected = false,
     this.semanticsLabel,
@@ -338,7 +338,7 @@ class FItem extends StatelessWidget with FItemMixin {
   FItem.raw({
     required Widget child,
     this.variants = const {},
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.enabled,
     this.selected = false,
     this.semanticsLabel,

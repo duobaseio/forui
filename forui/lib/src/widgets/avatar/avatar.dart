@@ -48,7 +48,7 @@ class FAvatar extends StatelessWidget {
   /// Creates an [FAvatar].
   FAvatar({
     required ImageProvider image,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.size = 40.0,
     String? semanticsLabel,
     Widget? fallback,
@@ -56,7 +56,7 @@ class FAvatar extends StatelessWidget {
   }) : child = Content(style: style, size: size, image: image, semanticsLabel: semanticsLabel, fallback: fallback);
 
   /// Creates a [FAvatar] without a fallback.
-  FAvatar.raw({Widget? child, this.style = const .inherit(), this.size = 40.0, super.key})
+  FAvatar.raw({Widget? child, this.style = const .context(), this.size = 40.0, super.key})
     : child = child ?? PlaceholderContent(style: style, size: size);
 
   @override

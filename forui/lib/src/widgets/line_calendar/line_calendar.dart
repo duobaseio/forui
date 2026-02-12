@@ -92,7 +92,7 @@ class FLineCalendar extends StatelessWidget {
   /// * [today] < [start] or [end] <= [today].
   FLineCalendar({
     this.control = const .managed(),
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.initialScrollAlignment = .center,
     this.physics,
     this.cacheExtent,
