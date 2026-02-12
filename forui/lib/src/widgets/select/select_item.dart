@@ -221,7 +221,7 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
 class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
   /// The label's text style.
   @override
-  final FVariants<FSelectSectionVariantConstraint, TextStyle, TextStyleDelta> labelTextStyle;
+  final FVariants<FSelectSectionVariantConstraint, FSelectSectionVariant, TextStyle, TextStyleDelta> labelTextStyle;
 
   /// The padding around the label. Defaults to `EdgeInsetsDirectional.only(start: 15, top: 7.5, bottom: 7.5, end: 10)`.
   @override
@@ -229,7 +229,7 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
 
   /// The divider's style.
   @override
-  final FVariants<FSelectSectionVariantConstraint, Color, Delta> dividerColor;
+  final FVariants<FSelectSectionVariantConstraint, FSelectSectionVariant, Color, Delta> dividerColor;
 
   /// The divider's width.
   @override
@@ -255,13 +255,13 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
     required FTypography typography,
   }) {
     const padding = EdgeInsetsDirectional.only(start: 11, top: 7.5, bottom: 7.5, end: 6);
-    final iconStyle = FVariants<FTappableVariantConstraint, IconThemeData, IconThemeDataDelta>.variants(
+    final iconStyle = FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta>.from(
       IconThemeData(color: colors.foreground, size: 15),
       variants: {
         [.disabled]: .delta(color: colors.disable(colors.foreground)),
       },
     );
-    final textStyle = FVariants<FTappableVariantConstraint, TextStyle, TextStyleDelta>.variants(
+    final textStyle = FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta>.from(
       typography.sm.copyWith(color: colors.foreground),
       variants: {
         [.disabled]: .delta(color: colors.disable(colors.foreground)),
@@ -269,7 +269,7 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
     );
 
     return .new(
-      labelTextStyle: .variants(
+      labelTextStyle: FVariants.from(
         typography.sm.copyWith(color: colors.foreground, fontWeight: .w600),
         variants: {
           [.disabled]: .delta(color: colors.disable(colors.foreground)),
@@ -279,7 +279,7 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
       dividerWidth: style.borderWidth,
       itemStyle: FItemStyle(
         backgroundColor: const .all(null),
-        decoration: .variants(
+        decoration: FVariants.from(
           const BoxDecoration(),
           variants: {
             [.focused, .hovered, .pressed]: .delta(color: colors.secondary, borderRadius: style.borderRadius),
@@ -296,11 +296,11 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
               mutedForeground: colors.mutedForeground,
             ).copyWith(
               padding: padding,
-              prefixIconStyle: .value(iconStyle),
+              prefixIconStyle: iconStyle,
               prefixIconSpacing: 10,
-              titleTextStyle: .value(textStyle),
+              titleTextStyle: textStyle,
               titleSpacing: 4,
-              suffixIconStyle: .value(iconStyle),
+              suffixIconStyle: iconStyle,
             ),
         rawItemContentStyle: FRawItemContentStyle(
           padding: padding,

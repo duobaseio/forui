@@ -35,10 +35,10 @@ void main() {
 
   group('FVariants', () {
     test('lerpBoxDecoration', () {
-      final first = createVariants<FVariant, BoxDecoration, Delta>(const BoxDecoration(color: Color(0xFF000000)), {
+      final first = createVariants<FVariant, FVariant, BoxDecoration, Delta>(const BoxDecoration(color: Color(0xFF000000)), {
         a: const BoxDecoration(color: Color(0xFF000000)),
       });
-      final second = createVariants<FVariant, BoxDecoration, Delta>(const BoxDecoration(color: Color(0xFFFFFFFF)), {
+      final second = createVariants<FVariant, FVariant, BoxDecoration, Delta>(const BoxDecoration(color: Color(0xFFFFFFFF)), {
         a: const BoxDecoration(color: Color(0xFFFFFFFF)),
       });
 
@@ -49,10 +49,10 @@ void main() {
     });
 
     test('lerpDecoration', () {
-      final first = createVariants<FVariant, Decoration, Delta>(const BoxDecoration(color: Color(0xFF000000)), {
+      final first = createVariants<FVariant, FVariant, Decoration, Delta>(const BoxDecoration(color: Color(0xFF000000)), {
         a: const BoxDecoration(color: Color(0xFF000000)),
       });
-      final second = createVariants<FVariant, Decoration, Delta>(const BoxDecoration(color: Color(0xFFFFFFFF)), {
+      final second = createVariants<FVariant, FVariant, Decoration, Delta>(const BoxDecoration(color: Color(0xFFFFFFFF)), {
         a: const BoxDecoration(color: Color(0xFFFFFFFF)),
       });
 
@@ -63,8 +63,8 @@ void main() {
     });
 
     test('lerpColor', () {
-      final first = createVariants<FVariant, Color, Delta>(const Color(0xFF000000), {a: const Color(0xFF000000)});
-      final second = createVariants<FVariant, Color, Delta>(const Color(0xFFFFFFFF), {a: const Color(0xFFFFFFFF)});
+      final first = createVariants<FVariant, FVariant, Color, Delta>(const Color(0xFF000000), {a: const Color(0xFF000000)});
+      final second = createVariants<FVariant, FVariant, Color, Delta>(const Color(0xFFFFFFFF), {a: const Color(0xFFFFFFFF)});
 
       final result = FVariants.lerpColor(first, second, 0.5);
 
@@ -73,10 +73,10 @@ void main() {
     });
 
     test('lerpIconThemeData', () {
-      final first = createVariants<FVariant, IconThemeData, Delta>(const IconThemeData(size: 10), {
+      final first = createVariants<FVariant, FVariant, IconThemeData, Delta>(const IconThemeData(size: 10), {
         a: const IconThemeData(size: 15),
       });
-      final second = createVariants<FVariant, IconThemeData, Delta>(const IconThemeData(size: 20), {
+      final second = createVariants<FVariant, FVariant, IconThemeData, Delta>(const IconThemeData(size: 20), {
         a: const IconThemeData(size: 25),
       });
 
@@ -87,10 +87,10 @@ void main() {
     });
 
     test('lerpTextStyle', () {
-      final first = createVariants<FVariant, TextStyle, Delta>(const TextStyle(fontSize: 10), {
+      final first = createVariants<FVariant, FVariant, TextStyle, Delta>(const TextStyle(fontSize: 10), {
         a: const TextStyle(fontSize: 15),
       });
-      final second = createVariants<FVariant, TextStyle, Delta>(const TextStyle(fontSize: 20), {
+      final second = createVariants<FVariant, FVariant, TextStyle, Delta>(const TextStyle(fontSize: 20), {
         a: const TextStyle(fontSize: 25),
       });
 
@@ -108,8 +108,8 @@ void main() {
           ('keys only in second', {a: 2.0}, {a: 6.0, b: 8.0}, {a: 4.0}),
         ]) {
           test(description, () {
-            final first = createVariants<FVariant, double, Delta>(1.0, firstVariants);
-            final second = createVariants<FVariant, double, Delta>(3.0, secondVariants);
+            final first = createVariants<FVariant, FVariant, double, Delta>(1.0, firstVariants);
+            final second = createVariants<FVariant, FVariant, double, Delta>(3.0, secondVariants);
 
             final result = FVariants.lerpWhere(first, second, 0.5, lerpDouble);
 
@@ -120,8 +120,8 @@ void main() {
 
         for (final (t, expected) in [(0.4, 1.0), (0.5, 3.0)]) {
           test('base fallback at t=$t', () {
-            final first = createVariants<FVariant, double, Delta>(1.0, {});
-            final second = createVariants<FVariant, double, Delta>(3.0, {});
+            final first = createVariants<FVariant, FVariant, double, Delta>(1.0, {});
+            final second = createVariants<FVariant, FVariant, double, Delta>(3.0, {});
 
             final result = FVariants.lerpWhere(first, second, t, (a, b, t) => null);
 
@@ -139,10 +139,10 @@ void main() {
           ('null values in both', <FVariant, double?>{a: null}, <FVariant, double?>{a: null}, {a: null}),
         ]) {
           test(description, () {
-            final first = createVariants<FVariant, double?, _NullableDelta>(1.0, firstVariants);
-            final second = createVariants<FVariant, double?, _NullableDelta>(3.0, secondVariants);
+            final first = createVariants<FVariant, FVariant, double?, _NullableDelta>(1.0, firstVariants);
+            final second = createVariants<FVariant, FVariant, double?, _NullableDelta>(3.0, secondVariants);
 
-            final result = FVariants.lerpWhere<FVariant, double?, _NullableDelta>(
+            final result = FVariants.lerpWhere<FVariant, FVariant, double?, _NullableDelta>(
               first,
               second,
               0.5,
@@ -155,10 +155,10 @@ void main() {
         }
 
         test('lerp returning null includes key with null value', () {
-          final first = createVariants<FVariant, double?, _NullableDelta>(1.0, {a: 2.0});
-          final second = createVariants<FVariant, double?, _NullableDelta>(3.0, {a: 6.0});
+          final first = createVariants<FVariant, FVariant, double?, _NullableDelta>(1.0, {a: 2.0});
+          final second = createVariants<FVariant, FVariant, double?, _NullableDelta>(3.0, {a: 6.0});
 
-          final result = FVariants.lerpWhere<FVariant, double?, _NullableDelta>(first, second, 0.5, (a, b, t) => null);
+          final result = FVariants.lerpWhere<FVariant, FVariant, double?, _NullableDelta>(first, second, 0.5, (a, b, t) => null);
 
           expect(result.base, null);
           expect(result.variants, {a: null});
@@ -177,12 +177,12 @@ void main() {
     }
 
     test('cast', () {
-      final variants = createVariants<FTextFieldVariantConstraint, int, Delta>(0, {.disabled: 1});
-      expect(() => variants.cast<FFormFieldVariantConstraint>(), returnsNormally);
+      final variants = createVariants<FTextFieldVariantConstraint, FTextFieldVariant, int, Delta>(0, {.disabled: 1});
+      expect(() => variants.cast<FFormFieldVariantConstraint, FFormFieldVariant>(), returnsNormally);
     });
 
     test('apply', () {
-      final variants = createVariants<FVariant, int, _Add>(0, {a: 1, b: 2});
+      final variants = createVariants<FVariant, FVariant, int, _Add>(0, {a: 1, b: 2});
       final result = variants.apply([
         .on({c}, const _Add(3)),
         .onAll(const _Add(10)),
@@ -193,7 +193,7 @@ void main() {
     });
 
     test('applyValues', () {
-      final variants = createVariants<FVariant, int, Delta>(0, {a: 1, b: 2});
+      final variants = createVariants<FVariant, FVariant, int, Delta>(0, {a: 1, b: 2});
       final result = variants.applyValues([
         .on({c}, 3),
         .onAll(10),
@@ -206,7 +206,7 @@ void main() {
 
   group('FVariantsDelta', () {
     test('replaces entire FVariants', () {
-      final delta = FVariantsDelta<FVariant, FVariant, int, _Add>.value(createVariants(10, {c: 30}));
+      final FVariantsDelta<FVariant, FVariant, int, _Add> delta = createVariants(10, {c: 30});
       final result = delta(createVariants(0, {a: 1, b: 2}));
 
       expect(result.base, 10);
@@ -312,7 +312,7 @@ void main() {
 
   group('FVariantsValueDelta', () {
     test('replaces entire FVariants', () {
-      final delta = FVariantsValueDelta<FVariant, FVariant, int>.value(createVariants(10, {c: 30}));
+      final FVariantsValueDelta<FVariant, FVariant, int, Delta> delta = createVariants(10, {c: 30});
       final result = delta(createVariants(0, {a: 1, b: 2}));
 
       expect(result.base, 10);
@@ -321,7 +321,7 @@ void main() {
 
     group('apply(...)', () {
       test('in order', () {
-        final delta = FVariantsValueDelta<FVariant, FVariant, int>.delta([
+        final delta = FVariantsValueDelta<FVariant, FVariant, int, Delta>.delta([
           .on({c}, 3),
           .onAll(10),
         ]);
@@ -332,7 +332,7 @@ void main() {
       });
 
       test('no operations', () {
-        final delta = FVariantsValueDelta<FVariant, FVariant, int>.delta([]);
+        final delta = FVariantsValueDelta<FVariant, FVariant, int, Delta>.delta([]);
         final result = delta(createVariants(0, {a: 1}));
 
         expect(result.base, 0);
@@ -348,7 +348,7 @@ void main() {
     const d = FVariant(1, 'd');
 
     test('onBase(...)', () {
-      final delta = FVariantsValueDelta<FVariant, FVariant, int>.delta([.onBase(5)]);
+      final delta = FVariantsValueDelta<FVariant, FVariant, int, Delta>.delta([.onBase(5)]);
       final result = delta(createVariants(0, {a: 1}));
 
       expect(result.base, 5);
@@ -360,7 +360,7 @@ void main() {
       ('overwrite', {b}, {a: 1, b: 10}),
     ]) {
       test('on(...) - $description', () {
-        final delta = FVariantsValueDelta<FVariant, FVariant, int>.delta([.on(constraints, 10)]);
+        final delta = FVariantsValueDelta<FVariant, FVariant, int, Delta>.delta([.on(constraints, 10)]);
         final result = delta(createVariants(0, {a: 1, b: 2}));
 
         expect(result.base, 0);
@@ -374,7 +374,7 @@ void main() {
       ('single', {b}, {a: 1, b: 10, c: 3}),
     ]) {
       test('onMatching(...) - $description', () {
-        final delta = FVariantsValueDelta<FVariant, FVariant, int>.delta([.onMatching(variants, 10)]);
+        final delta = FVariantsValueDelta<FVariant, FVariant, int, Delta>.delta([.onMatching(variants, 10)]);
         final result = delta(createVariants(0, {a: 1, b: 2, c: 3}));
 
         expect(result.base, 0);
@@ -388,7 +388,7 @@ void main() {
       ('many', {a: 1, b: 2, c: 3}, {a: 10, b: 10, c: 10}),
     ]) {
       test('onVariants(...) - $description', () {
-        final delta = FVariantsValueDelta<FVariant, FVariant, int>.delta([.onVariants(10)]);
+        final delta = FVariantsValueDelta<FVariant, FVariant, int, Delta>.delta([.onVariants(10)]);
         final result = delta(createVariants(0, initial));
 
         expect(result.base, 0);
@@ -397,7 +397,7 @@ void main() {
     }
 
     test('onAll(...)', () {
-      final delta = FVariantsValueDelta<FVariant, FVariant, int>.delta([.onAll(10)]);
+      final delta = FVariantsValueDelta<FVariant, FVariant, int, Delta>.delta([.onAll(10)]);
       final result = delta(createVariants(0, {a: 1, b: 2}));
 
       expect(result.base, 10);
@@ -405,7 +405,7 @@ void main() {
     });
 
     test('remove(...)', () {
-      final delta = FVariantsValueDelta<FVariantConstraint, FVariant, int>.delta([
+      final delta = FVariantsValueDelta<FVariantConstraint, FVariant, int, Delta>.delta([
         .remove({a, b, d}),
       ]);
       final result = delta(createVariants(0, <FVariantConstraint, int>{a: 1, b: 2, c: 3, ab: 4}));
@@ -415,7 +415,7 @@ void main() {
     });
 
     test('removeMatching(...)', () {
-      final delta = FVariantsValueDelta<FVariantConstraint, FVariant, int>.delta([
+      final delta = FVariantsValueDelta<FVariantConstraint, FVariant, int, Delta>.delta([
         .removeMatching({a, b}),
       ]);
       final result = delta(createVariants(0, <FVariantConstraint, int>{a: 1, b: 2, c: 3, ab: 4, ac: 5}));
@@ -425,7 +425,7 @@ void main() {
     });
 
     test('removeAll(...)', () {
-      final delta = FVariantsValueDelta<FVariant, FVariant, int>.delta([.removeAll()]);
+      final delta = FVariantsValueDelta<FVariant, FVariant, int, Delta>.delta([.removeAll()]);
       final result = delta(createVariants(0, {a: 1, b: 2}));
 
       expect(result.base, 0);

@@ -198,28 +198,24 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
         .resolve({FButtonSizeVariant.sm})
         .copyWith(
           iconContentStyle: .delta(
-            iconStyle: .value(
-              .variants(
-                IconThemeData(color: colors.foreground, size: 16),
-                variants: {
-                  [.disabled]: .delta(color: colors.disable(colors.foreground)),
-                },
-              ),
-            ),
-          ),
-          decoration: .value(
-            .variants(
-              BoxDecoration(
-                border: .all(color: colors.border),
-                borderRadius: style.borderRadius,
-                color: colors.card,
-              ),
+            iconStyle: FVariants.from(
+              IconThemeData(color: colors.foreground, size: 16),
               variants: {
-                [.hovered, .pressed]: .delta(color: colors.secondary),
-                //
-                [.disabled]: .delta(border: .all(color: colors.disable(colors.border))),
+                [.disabled]: .delta(color: colors.disable(colors.foreground)),
               },
             ),
+          ),
+          decoration: FVariants.from(
+            BoxDecoration(
+              border: .all(color: colors.border),
+              borderRadius: style.borderRadius,
+              color: colors.card,
+            ),
+            variants: {
+              [.hovered, .pressed]: .delta(color: colors.secondary),
+              //
+              [.disabled]: .delta(border: .all(color: colors.disable(colors.border))),
+            },
           ),
         ),
     headerTextStyle: typography.base.copyWith(color: colors.foreground, fontWeight: .w600),

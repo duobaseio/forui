@@ -227,11 +227,11 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
 class FSliderThumbStyle with Diagnosticable, _$FSliderThumbStyleFunctions {
   /// The thumb's color.
   @override
-  final FVariants<FSliderVariantConstraint, Color, Delta> color;
+  final FVariants<FSliderVariantConstraint, FSliderVariant, Color, Delta> color;
 
   /// The border's color.
   @override
-  final FVariants<FSliderVariantConstraint, Color, Delta> borderColor;
+  final FVariants<FSliderVariantConstraint, FSliderVariant, Color, Delta> borderColor;
 
   /// The border's width. Defaults to `2`.
   ///

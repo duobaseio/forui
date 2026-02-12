@@ -184,11 +184,11 @@ class FSwitchStyle extends FLabelStyle with _$FSwitchStyleFunctions {
 
   /// The track's color.
   @override
-  final FVariants<FSwitchVariantConstraint, Color, Delta> trackColor;
+  final FVariants<FSwitchVariantConstraint, FSwitchVariant, Color, Delta> trackColor;
 
   /// The thumb's color.
   @override
-  final FVariants<FSwitchVariantConstraint, Color, Delta> thumbColor;
+  final FVariants<FSwitchVariantConstraint, FSwitchVariant, Color, Delta> thumbColor;
 
   /// Creates a [FSwitchStyle].
   const FSwitchStyle({

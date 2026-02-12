@@ -144,15 +144,15 @@ Future<(String type, String assignment, String? sentinel)> deltaField(
   // FVariants<K extends FVariantConstraint, V, D extends Delta<V>>
   if (field.type case InterfaceType(:final element) when element.name == 'FVariants') {
     final type = ((await step.resolver.astNodeFor(field.firstFragment))!.parent! as VariableDeclarationList).type!;
-    final [kAst, vAst, dAst] = (type as NamedType).typeArguments!.arguments;
+    final [kAst, eAst, vAst, dAst] = (type as NamedType).typeArguments!.arguments;
 
     final k = kAst.toSource();
-    final e = k.substring(0, k.indexOf('Constraint'));
+    final e = eAst.toSource();
     final v = vAst.toSource();
     final d = dAst.toSource();
 
     final deltaType = (dAst as NamedType).name.lexeme == 'Delta'
-        ? 'FVariantsValueDelta<$k, $e, $v>'
+        ? 'FVariantsValueDelta<$k, $e, $v, $d>'
         : 'FVariantsDelta<$k, $e, $v, $d>';
 
     return ('$deltaType?', '$name?.call($prefix.$name) ?? $prefix.$name', null);

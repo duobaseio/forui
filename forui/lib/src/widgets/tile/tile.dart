@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
@@ -301,62 +303,27 @@ class FTile extends StatelessWidget with FTileMixin {
 }
 
 /// The tile styles.
-extension type FTileStyles._(FVariants<FItemVariantConstraint, FTileStyle, FTileStyleDelta> _)
-    implements FVariants<FItemVariantConstraint, FTileStyle, FTileStyleDelta> {
+extension type FTileStyles._(FVariants<FItemVariantConstraint, FItemVariant, FTileStyle, FTileStyleDelta> _)
+    implements FVariants<FItemVariantConstraint, FItemVariant, FTileStyle, FTileStyleDelta> {
   /// Creates a [FTileStyles] that inherits its properties.
   FTileStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this._(
-        .variants(
+        FVariants.from(
           .inherit(colors: colors, typography: typography, style: style),
           variants: {
             [.destructive]: .delta(
-              contentStyle: FItemContentStyle(
-                padding: const .fromSTEB(15, 13, 10, 13),
-                prefixIconStyle: .variants(
-                  IconThemeData(color: colors.destructive, size: 18),
-                  variants: {
-                    [.disabled]: .delta(color: colors.disable(colors.destructive)),
-                  },
-                ),
-                titleTextStyle: .variants(
-                  typography.base.copyWith(color: colors.destructive),
-                  variants: {
-                    [.disabled]: .delta(color: colors.disable(colors.destructive)),
-                  },
-                ),
-                subtitleTextStyle: .variants(
-                  typography.xs.copyWith(color: colors.destructive),
-                  variants: {
-                    [.disabled]: .delta(color: colors.disable(colors.destructive)),
-                  },
-                ),
-                detailsTextStyle: .variants(
-                  typography.base.copyWith(color: colors.destructive),
-                  variants: {
-                    [.disabled]: .delta(color: colors.disable(colors.destructive)),
-                  },
-                ),
-                suffixIconStyle: .variants(
-                  IconThemeData(color: colors.destructive, size: 18),
-                  variants: {
-                    [.disabled]: .delta(color: colors.disable(colors.destructive)),
-                  },
-                ),
+              contentStyle: FTileContentStyle.inherit(
+                colors: colors,
+                typography: typography,
+                prefix: colors.destructive,
+                foreground: colors.destructive,
+                mutedForeground: colors.destructive,
               ),
-              rawItemContentStyle: FRawItemContentStyle(
-                padding: const .fromSTEB(15, 13, 10, 13),
-                prefixIconStyle: .variants(
-                  IconThemeData(color: colors.destructive, size: 18),
-                  variants: {
-                    [.disabled]: .delta(color: colors.disable(colors.destructive)),
-                  },
-                ),
-                childTextStyle: .variants(
-                  typography.base.copyWith(color: colors.destructive),
-                  variants: {
-                    [.disabled]: .delta(color: colors.disable(colors.destructive)),
-                  },
-                ),
+              rawItemContentStyle: FTileRawContentStyle.inherit(
+                colors: colors,
+                typography: typography,
+                prefix: colors.destructive,
+                color: colors.destructive,
               ),
             ),
           },
@@ -365,8 +332,8 @@ extension type FTileStyles._(FVariants<FItemVariantConstraint, FTileStyle, FTile
 }
 
 @internal
-extension FTileStylesConversion on FVariants<FItemVariantConstraint, FTileStyle, FTileStyleDelta> {
-  FVariants<FItemVariantConstraint, FItemStyle, FItemStyleDelta> toItemStyles() => .raw(base, variants);
+extension FTileStylesConversion on FVariants<FItemVariantConstraint, FItemVariant, FTileStyle, FTileStyleDelta> {
+  FVariants<FItemVariantConstraint, FItemVariant, FItemStyle, FItemStyleDelta> toItemStyles() => .raw(base, variants);
 }
 
 /// A [FTile]'s style.
@@ -386,7 +353,7 @@ class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
   FTileStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         backgroundColor: .all(colors.card),
-        decoration: .variants(
+        decoration: FVariants.from(
           BoxDecoration(
             color: colors.card,
             border: .all(color: colors.border),
@@ -398,53 +365,18 @@ class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
             [.disabled]: .delta(color: colors.disable(colors.secondary)),
           },
         ),
-        contentStyle: FItemContentStyle(
-          padding: const .fromSTEB(15, 13, 10, 13),
-          prefixIconStyle: .variants(
-            IconThemeData(color: colors.primary, size: 18),
-            variants: {
-              [.disabled]: .delta(color: colors.disable(colors.primary)),
-            },
-          ),
-          titleTextStyle: .variants(
-            typography.base,
-            variants: {
-              [.disabled]: .delta(color: colors.disable(colors.foreground)),
-            },
-          ),
-          subtitleTextStyle: .variants(
-            typography.xs.copyWith(color: colors.mutedForeground),
-            variants: {
-              [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
-            },
-          ),
-          detailsTextStyle: .variants(
-            typography.base.copyWith(color: colors.mutedForeground),
-            variants: {
-              [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
-            },
-          ),
-          suffixIconStyle: .variants(
-            IconThemeData(color: colors.mutedForeground, size: 18),
-            variants: {
-              [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
-            },
-          ),
+        contentStyle: FTileContentStyle.inherit(
+          colors: colors,
+          typography: typography,
+          prefix: colors.primary,
+          foreground: colors.foreground,
+          mutedForeground: colors.mutedForeground,
         ),
-        rawItemContentStyle: FRawItemContentStyle(
-          padding: const .fromSTEB(15, 13, 10, 13),
-          prefixIconStyle: .variants(
-            IconThemeData(color: colors.primary, size: 18),
-            variants: {
-              [.disabled]: .delta(color: colors.disable(colors.primary)),
-            },
-          ),
-          childTextStyle: .variants(
-            typography.base,
-            variants: {
-              [.disabled]: .delta(color: colors.disable(colors.foreground)),
-            },
-          ),
+        rawItemContentStyle: FTileRawContentStyle.inherit(
+          colors: colors,
+          typography: typography,
+          prefix: colors.primary,
+          color: colors.foreground,
         ),
         tappableStyle: style.tappableStyle.copyWith(
           motion: FTappableMotion.none,
@@ -453,4 +385,96 @@ class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
         ),
         focusedOutlineStyle: style.focusedOutlineStyle,
       );
+}
+
+/// A tile-specific [FItemContentStyle].
+class FTileContentStyle extends FItemContentStyle with _$FTileContentStyleFunctions {
+  /// Creates a [FTileContentStyle].
+  FTileContentStyle({
+    required super.prefixIconStyle,
+    required super.titleTextStyle,
+    required super.subtitleTextStyle,
+    required super.detailsTextStyle,
+    required super.suffixIconStyle,
+    super.padding = const EdgeInsets.fromLTRB(15, 13, 10, 13),
+    super.prefixIconSpacing,
+    super.titleSpacing,
+    super.middleSpacing,
+    super.suffixIconSpacing,
+  });
+
+  /// Creates a [FTileContentStyle] that inherits its properties.
+  factory FTileContentStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required Color prefix,
+    required Color foreground,
+    required Color mutedForeground,
+  }) {
+    final disabledMutedForeground = colors.disable(mutedForeground);
+    return FTileContentStyle(
+      prefixIconStyle: FVariants.from(
+        IconThemeData(color: prefix, size: 18),
+        variants: {
+          [.disabled]: .delta(color: colors.disable(prefix)),
+        },
+      ),
+      titleTextStyle: FVariants.from(
+        typography.base.copyWith(color: foreground),
+        variants: {
+          [.disabled]: .delta(color: colors.disable(foreground)),
+        },
+      ),
+      subtitleTextStyle: FVariants.from(
+        typography.xs.copyWith(color: mutedForeground),
+        variants: {
+          [.disabled]: .delta(color: disabledMutedForeground),
+        },
+      ),
+      detailsTextStyle: FVariants.from(
+        typography.base.copyWith(color: mutedForeground),
+        variants: {
+          [.disabled]: .delta(color: disabledMutedForeground),
+        },
+      ),
+      suffixIconStyle: FVariants.from(
+        IconThemeData(color: mutedForeground, size: 18),
+        variants: {
+          [.disabled]: .delta(color: disabledMutedForeground),
+        },
+      ),
+    );
+  }
+}
+
+/// A tile-specific [FRawItemContentStyle].
+class FTileRawContentStyle extends FRawItemContentStyle with _$FTileRawContentStyleFunctions {
+  /// Creates a [FTileRawContentStyle].
+  FTileRawContentStyle({
+    required super.prefixIconStyle,
+    required super.childTextStyle,
+    super.padding = const EdgeInsets.fromLTRB(15, 13, 10, 13),
+    super.prefixIconSpacing,
+  });
+
+  /// Creates a [FTileRawContentStyle] that inherits its properties.
+  FTileRawContentStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required Color prefix,
+    required Color color,
+  }) : this(
+         prefixIconStyle: FVariants.from(
+           IconThemeData(color: prefix, size: 18),
+           variants: {
+             [.disabled]: .delta(color: colors.disable(prefix)),
+           },
+         ),
+         childTextStyle: FVariants(
+           typography.base.copyWith(color: color),
+           variants: {
+             [.disabled]: typography.base.copyWith(color: colors.disable(color)),
+           },
+         ),
+       );
 }

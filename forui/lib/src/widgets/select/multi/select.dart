@@ -843,7 +843,7 @@ class FMultiSelectStyle with Diagnosticable, _$FMultiSelectStyleFunctions {
 class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSelectFieldStyleFunctions {
   /// The multi-select field's decoration.
   @override
-  final FVariants<FTextFieldVariantConstraint, Decoration, Delta> decoration;
+  final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, Decoration, Delta> decoration;
 
   /// The multi-select field's padding. Defaults to `EdgeInsets.only(start: 10, top: 6, bottom: 6, end: 8)`.
   @override
@@ -859,7 +859,7 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
 
   /// The multi-select field hint's text style.
   @override
-  final FVariants<FTextFieldVariantConstraint, TextStyle, TextStyleDelta> hintTextStyle;
+  final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, TextStyle, TextStyleDelta> hintTextStyle;
 
   /// The multi-select field's hint padding. Defaults to `EdgeInsetsDirectional.only(start: 4, top: 4, bottom: 4)`.
   ///
@@ -869,7 +869,7 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
 
   /// The multi-select field's icon style.
   @override
-  final FVariants<FTextFieldVariantConstraint, IconThemeData, IconThemeDataDelta> iconStyle;
+  final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, IconThemeData, IconThemeDataDelta> iconStyle;
 
   /// The clear button's style when [FMultiSelect.clearable] is true.
   @override
@@ -918,7 +918,7 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
       style: style,
     ).resolve({FButtonVariant.ghost}).resolve({FButtonSizeVariant.sm});
 
-    final iconStyle = FVariants<FTextFieldVariantConstraint, IconThemeData, IconThemeDataDelta>.variants(
+    final iconStyle = FVariants<FTextFieldVariantConstraint, FTextFieldVariant, IconThemeData, IconThemeDataDelta>.from(
       IconThemeData(color: colors.mutedForeground, size: 16),
       variants: {
         [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
@@ -957,14 +957,14 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
           ),
         },
       ),
-      hintTextStyle: .variants(
+      hintTextStyle: FVariants.from(
         typography.sm.copyWith(color: colors.mutedForeground),
         variants: {
           [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
         },
       ),
       iconStyle: iconStyle,
-      clearButtonStyle: ghost.copyWith(iconContentStyle: .delta(iconStyle: .value(iconStyle.cast()))),
+      clearButtonStyle: ghost.copyWith(iconContentStyle: .delta(iconStyle: iconStyle.cast())),
       tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
       labelTextStyle: style.formFieldStyle.labelTextStyle,
       descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,

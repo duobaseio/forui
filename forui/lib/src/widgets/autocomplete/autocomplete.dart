@@ -999,13 +999,13 @@ class FAutocompleteStyle with Diagnosticable, _$FAutocompleteStyleFunctions {
   /// are the same size to prevent visual discrepancies between the actual and typeahead text.
   /// {@endtemplate}
   @override
-  final FVariants<FTextFieldVariantConstraint, TextStyle, TextStyleDelta> composingTextStyle;
+  final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, TextStyle, TextStyleDelta> composingTextStyle;
 
   /// The typeahead's [TextStyle].
   ///
   /// {@macro forui.text_field.composingTextStyle}
   @override
-  final FVariants<FTextFieldVariantConstraint, TextStyle, TextStyleDelta> typeaheadTextStyle;
+  final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, TextStyle, TextStyleDelta> typeaheadTextStyle;
 
   /// The content's style.
   @override

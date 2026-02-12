@@ -2,7 +2,7 @@ include: package:flint/analysis_options.flutter.yaml
 analyzer:
   errors:
     prefer_asserts_with_message: ignore
-    unused_result: ignore # Re-enable once Dart 3.11 lands
+    unused_result: ignore # Re-enable once Dart 3.12 lands
 
 linter:
   rules:

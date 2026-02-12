@@ -367,7 +367,7 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
 
   /// The divider's style.
   @override
-  final FVariants<FItemGroupVariantConstraint, Color, Delta> dividerColor;
+  final FVariants<FItemGroupVariantConstraint, FItemGroupVariant, Color, Delta> dividerColor;
 
   /// The divider's width.
   @override
@@ -375,7 +375,7 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
 
   /// The tile's styles.
   @override
-  final FVariants<FItemVariantConstraint, FTileStyle, FTileStyleDelta> tileStyles;
+  final FVariants<FItemVariantConstraint, FItemVariant, FTileStyle, FTileStyleDelta> tileStyles;
 
   /// Creates a [FTileGroupStyle].
   FTileGroupStyle({
@@ -402,7 +402,7 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
         ),
         dividerColor: .all(colors.border),
         dividerWidth: style.borderWidth,
-        labelTextStyle: .variants(
+        labelTextStyle: FVariants.from(
           typography.base.copyWith(
             color: style.formFieldStyle.labelTextStyle.base.color ?? colors.foreground,
             fontWeight: .w600,
@@ -411,7 +411,7 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
             [.disabled]: .delta(color: colors.disable(colors.foreground)),
           },
         ),
-        tileStyles: .variants(
+        tileStyles: FVariants.from(
           .inherit(
             colors: colors,
             typography: typography,

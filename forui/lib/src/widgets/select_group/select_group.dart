@@ -279,7 +279,7 @@ class FSelectGroupStyle extends FLabelStyle with Diagnosticable, _$FSelectGroupS
   factory FSelectGroupStyle.inherit({required FColors colors, required FTypography typography, required FStyle style}) {
     final vertical = FLabelStyles.inherit(style: style).verticalStyle;
 
-    final itemLabelTextStyle = FVariants<FFormFieldVariantConstraint, TextStyle, TextStyleDelta>.variants(
+    final itemLabelTextStyle = FVariants<FFormFieldVariantConstraint, FFormFieldVariant, TextStyle, TextStyleDelta>.from(
       typography.sm.copyWith(color: colors.foreground, fontWeight: .w500),
       variants: {
         [.disabled]: .delta(color: colors.disable(colors.foreground)),
@@ -288,13 +288,13 @@ class FSelectGroupStyle extends FLabelStyle with Diagnosticable, _$FSelectGroupS
         [.error.and(.disabled)]: .delta(color: colors.disable(colors.error)),
       },
     );
-    final itemDescriptionTextStyle = FVariants<FFormFieldVariantConstraint, TextStyle, TextStyleDelta>.variants(
+    final itemDescriptionTextStyle = FVariants<FFormFieldVariantConstraint, FFormFieldVariant, TextStyle, TextStyleDelta>.from(
       typography.sm.copyWith(color: colors.mutedForeground),
       variants: {
         [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
       },
     );
-    final itemErrorTextStyle = FVariants<FFormFieldErrorVariantConstraint, TextStyle, TextStyleDelta>.variants(
+    final itemErrorTextStyle = FVariants<FFormFieldErrorVariantConstraint, FFormFieldErrorVariant, TextStyle, TextStyleDelta>.from(
       typography.sm.copyWith(color: colors.error, fontWeight: .w500),
       variants: {
         [.disabled]: .delta(color: colors.disable(colors.error)),
@@ -303,14 +303,14 @@ class FSelectGroupStyle extends FLabelStyle with Diagnosticable, _$FSelectGroupS
 
     return .new(
       checkboxStyle: .inherit(colors: colors, style: style).copyWith(
-        labelTextStyle: .value(itemLabelTextStyle),
-        descriptionTextStyle: .value(itemDescriptionTextStyle),
-        errorTextStyle: .value(itemErrorTextStyle),
+        labelTextStyle: itemLabelTextStyle,
+        descriptionTextStyle: itemDescriptionTextStyle,
+        errorTextStyle: itemErrorTextStyle,
       ),
       radioStyle: .inherit(colors: colors, style: style).copyWith(
-        labelTextStyle: .value(itemLabelTextStyle),
-        descriptionTextStyle: .value(itemDescriptionTextStyle),
-        errorTextStyle: .value(itemErrorTextStyle),
+        labelTextStyle: itemLabelTextStyle,
+        descriptionTextStyle: itemDescriptionTextStyle,
+        errorTextStyle: itemErrorTextStyle,
       ),
       labelTextStyle: style.formFieldStyle.labelTextStyle,
       descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,

@@ -361,7 +361,7 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
         itemStyles: .delta([
           .onBase(
             .delta(
-              backgroundColor: .value(.all(colors.card)),
+              backgroundColor: FVariants.all(colors.card),
               decoration: .delta([.onBase(.delta(color: colors.card))]),
               contentStyle: FItemContentStyle.inherit(
                 colors: colors,
@@ -385,23 +385,19 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
           .onBase(
             .delta(
               contentStyle: .delta(
-                prefixIconStyle: .value(
-                  .variants(
-                    IconThemeData(color: colors.foreground, size: 18),
-                    variants: {
-                      [.disabled]: .delta(color: colors.disable(colors.foreground)),
-                    },
-                  ),
+                prefixIconStyle: FVariants.from(
+                  IconThemeData(color: colors.foreground, size: 18),
+                  variants: {
+                    [.disabled]: .delta(color: colors.disable(colors.foreground)),
+                  },
                 ),
               ),
               rawItemContentStyle: .delta(
-                prefixIconStyle: .value(
-                  .variants(
-                    IconThemeData(color: colors.foreground, size: 18),
-                    variants: {
-                      [.disabled]: .delta(color: colors.disable(colors.foreground)),
-                    },
-                  ),
+                prefixIconStyle: FVariants.from(
+                  IconThemeData(color: colors.foreground, size: 18),
+                  variants: {
+                    [.disabled]: .delta(color: colors.disable(colors.foreground)),
+                  },
                 ),
               ),
             ),

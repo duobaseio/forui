@@ -459,7 +459,7 @@ class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
 
   /// The divider's style.
   @override
-  final FVariants<FItemGroupVariantConstraint, Color, Delta> dividerColor;
+  final FVariants<FItemGroupVariantConstraint, FItemGroupVariant, Color, Delta> dividerColor;
 
   /// The divider's width.
   @override
@@ -467,7 +467,7 @@ class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
 
   /// The item's styles.
   @override
-  final FVariants<FItemVariantConstraint, FItemStyle, FItemStyleDelta> itemStyles;
+  final FVariants<FItemVariantConstraint, FItemVariant, FItemStyle, FItemStyleDelta> itemStyles;
 
   /// Creates a [FItemGroupStyle].
   FItemGroupStyle({

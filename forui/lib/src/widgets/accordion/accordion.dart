@@ -149,7 +149,7 @@ class InheritedAccordionData extends InheritedWidget {
 class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
   /// The title's text style.
   @override
-  final FVariants<FTappableVariantConstraint, TextStyle, TextStyleDelta> titleTextStyle;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> titleTextStyle;
 
   /// The child's default text style.
   @override
@@ -165,7 +165,7 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
 
   /// The icon's style.
   @override
-  final FVariants<FTappableVariantConstraint, IconThemeData, IconThemeDataDelta> iconStyle;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> iconStyle;
 
   /// The focused outline style.
   @override
@@ -199,7 +199,7 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
   /// Creates a [FDividerStyles] that inherits its properties.
   FAccordionStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        titleTextStyle: .variants(
+        titleTextStyle: FVariants.from(
           typography.base.copyWith(fontWeight: .w500, color: colors.foreground),
           variants: {
             [.hovered, .pressed]: const .delta(decoration: .underline),

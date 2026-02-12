@@ -16,12 +16,12 @@ import 'package:forui/src/theme/variant.dart';
 part 'slider_styles.design.dart';
 
 /// A slider's styles.
-extension type FSliderStyles._(FVariants<FSliderAxisVariantConstraint, FSliderStyle, FSliderStyleDelta> _)
-    implements FVariants<FSliderAxisVariantConstraint, FSliderStyle, FSliderStyleDelta> {
+extension type FSliderStyles._(FVariants<FSliderAxisVariantConstraint, FSliderAxisVariant, FSliderStyle, FSliderStyleDelta> _)
+    implements FVariants<FSliderAxisVariantConstraint, FSliderAxisVariant, FSliderStyle, FSliderStyleDelta> {
   /// Creates a [FSliderStyles] that inherits its properties.
   FSliderStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this._(
-        .variants(
+        FVariants.from(
           .inherit(
             colors: colors,
             typography: typography,
@@ -57,11 +57,11 @@ extension type FSliderStyles._(FVariants<FSliderAxisVariantConstraint, FSliderSt
 class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
   /// The slider's active track colors.
   @override
-  final FVariants<FSliderVariantConstraint, Color, Delta> activeColor;
+  final FVariants<FSliderVariantConstraint, FSliderVariant, Color, Delta> activeColor;
 
   /// The slider's inactive track colors.
   @override
-  final FVariants<FSliderVariantConstraint, Color, Delta> inactiveColor;
+  final FVariants<FSliderVariantConstraint, FSliderVariant, Color, Delta> inactiveColor;
 
   /// The slider's border radius.
   @override

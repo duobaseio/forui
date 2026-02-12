@@ -226,15 +226,15 @@ class _Content extends StatelessWidget {
 class FCalendarEntryStyle with Diagnosticable, _$FCalendarEntryStyleFunctions {
   /// The day's background color.
   @override
-  final FVariants<FTappableVariantConstraint, Color, Delta> backgroundColor;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, Color, Delta> backgroundColor;
 
   /// The border.
   @override
-  final FVariants<FTappableVariantConstraint, Color?, Delta> borderColor;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, Color?, Delta> borderColor;
 
   /// The day's text style.
   @override
-  final FVariants<FTappableVariantConstraint, TextStyle, TextStyleDelta> textStyle;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> textStyle;
 
   /// The entry border's radius. Defaults to `Radius.circular(4)`.
   @override

@@ -150,10 +150,10 @@ extension $FGoldenStyleTransformations on FGoldenStyle {
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration, BoxDecorationDelta>? boxDecorationVariants,
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration?, BoxDecorationDelta>?
     nullableBoxDecorationVariants,
-    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration>? decorationVariants,
-    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration?>? nullableDecorationVariants,
-    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color>? colorVariants,
-    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color?>? nullableColorVariants,
+    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration, Delta>? decorationVariants,
+    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration?, Delta>? nullableDecorationVariants,
+    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color, Delta>? colorVariants,
+    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color?, Delta>? nullableColorVariants,
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, IconThemeData, IconThemeDataDelta>? iconThemeDataVariants,
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, IconThemeData?, IconThemeDataDelta>?
     nullableIconThemeDataVariants,
@@ -284,17 +284,20 @@ mixin _$FGoldenStyleFunctions on Diagnosticable implements FGoldenStyleDelta {
   TextStyle get textStyle;
   List<BoxShadow> get boxShadows;
   List<Shadow> get shadows;
-  FVariants<FGoldenVariantConstraint, BoxDecoration, BoxDecorationDelta> get boxDecorationVariants;
-  FVariants<FGoldenVariantConstraint, BoxDecoration?, BoxDecorationDelta> get nullableBoxDecorationVariants;
-  FVariants<FGoldenVariantConstraint, Decoration, Delta> get decorationVariants;
-  FVariants<FGoldenVariantConstraint, Decoration?, Delta> get nullableDecorationVariants;
-  FVariants<FGoldenVariantConstraint, Color, Delta> get colorVariants;
-  FVariants<FGoldenVariantConstraint, Color?, Delta> get nullableColorVariants;
-  FVariants<FGoldenVariantConstraint, IconThemeData, IconThemeDataDelta> get iconThemeDataVariants;
-  FVariants<FGoldenVariantConstraint, IconThemeData?, IconThemeDataDelta> get nullableIconThemeDataVariants;
-  FVariants<FGoldenVariantConstraint, TextStyle, TextStyleDelta> get textStyleVariants;
-  FVariants<FGoldenVariantConstraint, TextStyle?, TextStyleDelta> get nullableTextStyleVariants;
-  FVariants<FGoldenVariantConstraint, FGoldenNestedMotion, FGoldenNestedMotionDelta> get nestedMotionVariants;
+  FVariants<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration, BoxDecorationDelta> get boxDecorationVariants;
+  FVariants<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration?, BoxDecorationDelta>
+  get nullableBoxDecorationVariants;
+  FVariants<FGoldenVariantConstraint, FGoldenVariant, Decoration, Delta> get decorationVariants;
+  FVariants<FGoldenVariantConstraint, FGoldenVariant, Decoration?, Delta> get nullableDecorationVariants;
+  FVariants<FGoldenVariantConstraint, FGoldenVariant, Color, Delta> get colorVariants;
+  FVariants<FGoldenVariantConstraint, FGoldenVariant, Color?, Delta> get nullableColorVariants;
+  FVariants<FGoldenVariantConstraint, FGoldenVariant, IconThemeData, IconThemeDataDelta> get iconThemeDataVariants;
+  FVariants<FGoldenVariantConstraint, FGoldenVariant, IconThemeData?, IconThemeDataDelta>
+  get nullableIconThemeDataVariants;
+  FVariants<FGoldenVariantConstraint, FGoldenVariant, TextStyle, TextStyleDelta> get textStyleVariants;
+  FVariants<FGoldenVariantConstraint, FGoldenVariant, TextStyle?, TextStyleDelta> get nullableTextStyleVariants;
+  FVariants<FGoldenVariantConstraint, FGoldenVariant, FGoldenNestedMotion, FGoldenNestedMotionDelta>
+  get nestedMotionVariants;
   FGoldenNestedMotion get nestedMotion;
   FGoldenNestedStyle get nestedStyle;
   List<String> get list;
@@ -474,10 +477,10 @@ sealed class FGoldenStyleDelta with Delta {
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration, BoxDecorationDelta>? boxDecorationVariants,
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration?, BoxDecorationDelta>?
     nullableBoxDecorationVariants,
-    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration>? decorationVariants,
-    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration?>? nullableDecorationVariants,
-    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color>? colorVariants,
-    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color?>? nullableColorVariants,
+    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration, Delta>? decorationVariants,
+    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration?, Delta>? nullableDecorationVariants,
+    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color, Delta>? colorVariants,
+    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color?, Delta>? nullableColorVariants,
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, IconThemeData, IconThemeDataDelta>? iconThemeDataVariants,
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, IconThemeData?, IconThemeDataDelta>?
     nullableIconThemeDataVariants,
@@ -577,13 +580,13 @@ class _FGoldenStyleDelta implements FGoldenStyleDelta {
   final FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration?, BoxDecorationDelta>?
   nullableBoxDecorationVariants;
 
-  final FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration>? decorationVariants;
+  final FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration, Delta>? decorationVariants;
 
-  final FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration?>? nullableDecorationVariants;
+  final FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration?, Delta>? nullableDecorationVariants;
 
-  final FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color>? colorVariants;
+  final FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color, Delta>? colorVariants;
 
-  final FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color?>? nullableColorVariants;
+  final FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color?, Delta>? nullableColorVariants;
 
   final FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, IconThemeData, IconThemeDataDelta>?
   iconThemeDataVariants;

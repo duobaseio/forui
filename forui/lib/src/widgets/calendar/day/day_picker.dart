@@ -229,7 +229,7 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
 
   /// Creates a [FCalendarDayPickerStyle] that inherits its properties.
   factory FCalendarDayPickerStyle.inherit({required FColors colors, required FTypography typography}) {
-    final backgroundColor = FVariants<FTappableVariantConstraint, Color, Delta>(
+    final backgroundColor = FVariants<FTappableVariantConstraint, FTappableVariant, Color, Delta>(
       colors.card,
       variants: {
         [.hovered, .pressed]: colors.secondary,
@@ -238,7 +238,7 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
         [.selected.and(.disabled)]: colors.disable(colors.primary),
       },
     );
-    final border = FVariants<FTappableVariantConstraint, Color?, Delta>(
+    final border = FVariants<FTappableVariantConstraint, FTappableVariant, Color?, Delta>(
       null,
       variants: {
         [.focused]: colors.primary,
@@ -253,7 +253,7 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
       current: FCalendarEntryStyle(
         backgroundColor: backgroundColor,
         borderColor: border,
-        textStyle: .variants(
+        textStyle: FVariants.from(
           typography.base.copyWith(color: colors.foreground, fontWeight: .w500),
           variants: {
             [.disabled]: .delta(color: colors.disable(colors.foreground)),
@@ -267,7 +267,7 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
       enclosing: FCalendarEntryStyle(
         backgroundColor: backgroundColor,
         borderColor: border,
-        textStyle: .variants(
+        textStyle: FVariants.from(
           typography.base.copyWith(color: colors.mutedForeground, fontWeight: .w500),
           variants: {
             [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),

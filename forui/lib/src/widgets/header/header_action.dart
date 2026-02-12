@@ -201,7 +201,7 @@ class FHeaderAction extends StatelessWidget {
 class FHeaderActionStyle with Diagnosticable, _$FHeaderActionStyleFunctions {
   /// The icon's style.
   @override
-  final FVariants<FTappableVariantConstraint, IconThemeData, IconThemeDataDelta> iconStyle;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> iconStyle;
 
   /// The outline style when this action is focused.
   @override
@@ -216,7 +216,7 @@ class FHeaderActionStyle with Diagnosticable, _$FHeaderActionStyleFunctions {
 
   /// Creates a [FHeaderActionStyle] that inherits its properties.
   FHeaderActionStyle.inherit({required FColors colors, required FStyle style, required double size})
-    : iconStyle = .variants(
+    : iconStyle = FVariants.from(
         IconThemeData(color: colors.foreground, size: size),
         variants: {
           [.disabled]: .delta(color: colors.disable(colors.foreground)),

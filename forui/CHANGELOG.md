@@ -260,7 +260,9 @@ are not available for most of these changes due to the tool's limitations.
 
 
 ### `FTile` & `FTileGroup`
-* Add destructive `FItem` variant.
+* Add destructive `FTile` variant.
+* Add `FTileContentStyle`.
+* Add `FRawTileContentStyle`.
 * Add `FTileStyles`.
 
 * Change default background color to `card`.

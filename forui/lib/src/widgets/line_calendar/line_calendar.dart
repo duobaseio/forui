@@ -180,19 +180,19 @@ class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
 
   /// The decoration.
   @override
-  final FVariants<FTappableVariantConstraint, BoxDecoration, BoxDecorationDelta> decoration;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, BoxDecoration, BoxDecorationDelta> decoration;
 
   /// The color of the today indicator.
   @override
-  final FVariants<FTappableVariantConstraint, Color, Delta> todayIndicatorColor;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, Color, Delta> todayIndicatorColor;
 
   /// The text style for the date.
   @override
-  final FVariants<FTappableVariantConstraint, TextStyle, TextStyleDelta> dateTextStyle;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> dateTextStyle;
 
   /// The text style for the day of the week.
   @override
-  final FVariants<FTappableVariantConstraint, TextStyle, TextStyleDelta> weekdayTextStyle;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> weekdayTextStyle;
 
   /// The tappable style.
   @override
@@ -218,7 +218,7 @@ class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
   }) {
     final focusedBorder = Border.all(color: colors.primary, width: style.borderWidth);
     return .new(
-      decoration: .variants(
+      decoration: FVariants.from(
         BoxDecoration(
           color: colors.card,
           border: .all(color: colors.border),
@@ -258,7 +258,7 @@ class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
           [.selected.and(.disabled)]: colors.disable(colors.primaryForeground),
         },
       ),
-      dateTextStyle: .variants(
+      dateTextStyle: FVariants.from(
         typography.xl.copyWith(color: colors.foreground, fontWeight: .w500, height: 0),
         variants: {
           [.disabled]: .delta(color: colors.disable(colors.foreground)),
@@ -267,7 +267,7 @@ class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
           [.selected.and(.disabled)]: .delta(color: colors.disable(colors.primaryForeground)),
         },
       ),
-      weekdayTextStyle: .variants(
+      weekdayTextStyle: FVariants.from(
         typography.xs.copyWith(color: colors.mutedForeground, fontWeight: .w500, height: 0),
         variants: {
           [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),

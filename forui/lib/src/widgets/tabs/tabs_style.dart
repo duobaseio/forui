@@ -30,7 +30,7 @@ class FTabsStyle with Diagnosticable, _$FTabsStyleFunctions {
 
   /// The label's [TextStyle].
   @override
-  final FVariants<FTabVariantConstraint, TextStyle, TextStyleDelta> labelTextStyle;
+  final FVariants<FTabVariantConstraint, FTabVariant, TextStyle, TextStyleDelta> labelTextStyle;
 
   /// The indicator.
   @override
@@ -72,7 +72,7 @@ class FTabsStyle with Diagnosticable, _$FTabsStyleFunctions {
           borderRadius: style.borderRadius,
           color: colors.muted,
         ),
-        labelTextStyle: .variants(
+        labelTextStyle: FVariants.from(
           typography.sm.copyWith(
             fontWeight: .w500,
             fontFamily: typography.defaultFontFamily,

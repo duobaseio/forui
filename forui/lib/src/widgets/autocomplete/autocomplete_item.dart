@@ -208,7 +208,7 @@ class FAutocompleteSection extends StatelessWidget with FAutocompleteItemMixin {
 class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyleFunctions {
   /// The enabled label's text style.
   @override
-  final FVariants<FAutocompleteSectionVariantConstraint, TextStyle, TextStyleDelta> labelTextStyle;
+  final FVariants<FAutocompleteSectionVariantConstraint, FAutocompleteSectionVariant, TextStyle, TextStyleDelta> labelTextStyle;
 
   /// The padding around the label. Defaults to `EdgeInsetsDirectional.only(start: 15, top: 7.5, bottom: 7.5, end: 10)`.
   @override
@@ -216,7 +216,7 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
 
   /// The divider's style.
   @override
-  final FVariants<FItemGroupVariantConstraint, Color, Delta> dividerColor;
+  final FVariants<FItemGroupVariantConstraint, FItemGroupVariant, Color, Delta> dividerColor;
 
   /// The divider's width.
   @override
@@ -242,20 +242,20 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
     required FTypography typography,
   }) {
     const padding = EdgeInsetsDirectional.only(start: 11, top: 7.5, bottom: 7.5, end: 6);
-    final iconStyle = FVariants<FTappableVariantConstraint, IconThemeData, IconThemeDataDelta>.variants(
+    final iconStyle = FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta>.from(
       IconThemeData(color: colors.foreground, size: 15),
       variants: {
         [.disabled]: .delta(color: colors.disable(colors.foreground)),
       },
     );
-    final textStyle = FVariants<FTappableVariantConstraint, TextStyle, TextStyleDelta>.variants(
+    final textStyle = FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta>.from(
       typography.sm,
       variants: {
         [.disabled]: .delta(color: colors.disable(colors.foreground)),
       },
     );
     return .new(
-      labelTextStyle: .variants(
+      labelTextStyle: FVariants.from(
         typography.sm.copyWith(color: colors.foreground, fontWeight: .w600),
         variants: {
           [.disabled]: .delta(color: colors.disable(colors.foreground)),
@@ -281,11 +281,11 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
               mutedForeground: colors.mutedForeground,
             ).copyWith(
               padding: padding,
-              prefixIconStyle: .value(iconStyle),
+              prefixIconStyle: iconStyle,
               prefixIconSpacing: 10,
-              titleTextStyle: .value(textStyle),
+              titleTextStyle: textStyle,
               titleSpacing: 4,
-              suffixIconStyle: .value(iconStyle),
+              suffixIconStyle: iconStyle,
             ),
         rawItemContentStyle: FRawItemContentStyle(
           padding: padding,

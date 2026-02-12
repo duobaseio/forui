@@ -598,7 +598,7 @@ class _RenderBounce extends RenderProxyBox {
 class FTappableStyle with Diagnosticable, _$FTappableStyleFunctions {
   /// The mouse cursor for mouse pointers that are hovering over the region. Defaults to [MouseCursor.defer].
   @override
-  final FVariants<FTappableVariantConstraint, MouseCursor, Delta> cursor;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, MouseCursor, Delta> cursor;
 
   /// The duration to wait before applying the pressed effect after the user presses the tile. Defaults to 200ms.
   @override

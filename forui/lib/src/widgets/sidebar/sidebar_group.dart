@@ -179,7 +179,7 @@ class FSidebarGroupStyle with Diagnosticable, _$FSidebarGroupStyleFunctions {
 
   /// The action's style.
   @override
-  final FVariants<FTappableVariantConstraint, IconThemeData, IconThemeDataDelta> actionStyle;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> actionStyle;
 
   /// The spacing between children. Defaults to 2.
   @override
@@ -219,7 +219,7 @@ class FSidebarGroupStyle with Diagnosticable, _$FSidebarGroupStyleFunctions {
   FSidebarGroupStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         labelStyle: typography.sm.copyWith(color: colors.mutedForeground, overflow: .ellipsis, fontWeight: .w500),
-        actionStyle: .variants(
+        actionStyle: FVariants.from(
           IconThemeData(color: colors.mutedForeground, size: 18),
           variants: {
             [.hovered, .pressed]: .delta(color: colors.foreground),

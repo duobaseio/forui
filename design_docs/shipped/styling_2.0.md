@@ -685,13 +685,14 @@ We observe that a base value **is** the default value, and modifications are del
 created using either mapping to deltas or concrete values.
 
 ```dart
-class FVariants<K extends FVariantConstraint, V, D extends Delta<V>> {
+class FVariants<K extends FVariantConstraint, E extends FVariant, V, D extends Delta>
+    implements FVariantsDelta<K, E, V, D>, FVariantsValueDelta<K, E, V, D> {
   final V base;
   final Map<K, V> variants;
 
   FVariants(this.base, {required Map<List<K>, V> variants});
 
-  FVariants.delta(this.base, {required Map<List<K>, D> variants});
+  FVariants.from(this.base, {required Map<List<K>, D> variants});
 
   const FVariants.all(this.base) : variants = const {};
 }
@@ -709,7 +710,7 @@ FooStyle(
 
 // Creation using deltas
 FTappableStyle(
-  decoration: FVariants.delta(
+  decoration: FVariants.from(
     BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.circular(8),
@@ -722,8 +723,8 @@ FTappableStyle(
 );
 ```
 
-Unlike style deltas, `FVariantsDelta` and `FVariantsValueDelta` use `.apply(...)` instead of `.delta(...)` since typical 
-usage is a sequence of operations and order matters (add-then-modify ≠ modify-then-add). 
+`FVariants` implements both `FVariantsDelta` and `FVariantsValueDelta`, allowing it to be passed directly where a delta
+is expected. This eliminates the need for a `.value(...)` constructor on the delta types.
 
 In general, there are 3 types of operations:
 * Adding a new variant.
@@ -731,17 +732,14 @@ In general, there are 3 types of operations:
 * Removing an existing variant.
 
 ```dart
-class FVariantsDelta<K extends FVariantConstraint, E extends FVariant, V, D extends Delta<V>>
-    with Delta<FVariants<K, V, D>> {
+class FVariantsDelta<K extends FVariantConstraint, E extends FVariant, V, D extends Delta>
+    with Delta {
   // Creates a sequence of modifications to [FVariants].
-  FVariantsDelta.apply(List<FVariantDeltaOperation<V, T, D>> operations);
-
-  // Creates a complete replacement of a [FVariants].
-  FVariantsDelta.value(FVariants<V, T, D> variants);
+  FVariantsDelta.delta(List<FVariantOperation<K, E, V, D>> operations);
 }
 
 // Delta-based operations.
-class FVariantOperation<K extends FVariantConstraint, E extends FVariant, V, D extends Delta<V>> {
+class FVariantOperation<K extends FVariantConstraint, E extends FVariant, V, D extends Delta> {
   // Applies [delta] to the base without modifying existing variants.
   FVariantOperation.onBase(D delta);
 
@@ -770,16 +768,14 @@ class FVariantOperation<K extends FVariantConstraint, E extends FVariant, V, D e
 ```
 
 ```dart
-class FVariantsValueDelta<K extends FVariantConstraint, E extends FVariant, V> with Delta<FVariants<K, V, Delta<V>>>  {
+class FVariantsValueDelta<K extends FVariantConstraint, E extends FVariant, V, D extends Delta>
+    with Delta {
   // Creates a sequence of modifications to [FVariants].
-  FVariantsValueDelta.apply(List<FVariantValueDeltaOperation<K, E, V>> operations);
-
-  // Creates a complete replacement of a [FVariants].
-  FVariantsValueDelta.value(FVariants<K, V, Delta<V>> variants);
+  FVariantsValueDelta.delta(List<FVariantValueDeltaOperation<K, E, V, D>> operations);
 }
 
 // Concrete value-based operations
-class FVariantValueDeltaOperation<K extends FVariantConstraint, E extends FVariant, V>  {
+class FVariantValueDeltaOperation<K extends FVariantConstraint, E extends FVariant, V, D extends Delta> {
   // Replaces the base with [base].
   FVariantValueDeltaOperation.onBase(V base);
 
@@ -814,7 +810,7 @@ In contrast, `onMatching` and `removeMatching` match constraints whose variants 
 For example, `.onMatching({.hovered, .focused}, delta)` affects constraints that are **satisfied by** `{.hovered, .focused}`:
 
 ```dart
-final decoration = FVariants.delta(
+final decoration = FVariants.from(
   BoxDecoration(color: Colors.white),
   variants: {
     [.hovered]: .delta(color: Colors.blue),                   // ✓ hovered ⊆ {hovered, focused}
@@ -834,7 +830,7 @@ FTappable(
   // Delta using style delta
   style: .delta(
     // Apply all modifications without needing to extract base variant.
-    decoration: .apply([
+    decoration: .delta([
       .onMatching({.hovered}, .delta(color: Colors.blue)),
       .onMatching({.pressed}, .delta(color: Colors.darkBlue)),
     ]),
