@@ -33,7 +33,7 @@ class FFocusedOutline extends SingleChildRenderObjectWidget {
   final bool focused;
 
   /// Creates a [FFocusedOutline].
-  const FFocusedOutline({required this.focused, required super.child, this.style = const .inherit(), super.key});
+  const FFocusedOutline({required this.focused, required super.child, this.style = const .context(), super.key});
 
   @override
   RenderObject createRenderObject(BuildContext context) => _Outline(

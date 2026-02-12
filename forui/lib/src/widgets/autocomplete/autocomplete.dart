@@ -329,7 +329,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     required List<String> items,
     FAutocompleteControl control = const .managed(),
     FPopoverControl popoverControl = const .managed(),
-    FAutocompleteStyleDelta style = const .inherit(),
+    FAutocompleteStyleDelta style = const .context(),
     Widget? label,
     String? hint,
     Widget? description,
@@ -504,7 +504,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     required this.contentBuilder,
     this.control = const .managed(),
     this.popoverControl = const .managed(),
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.label,
     this.hint,
     this.description,
@@ -999,13 +999,13 @@ class FAutocompleteStyle with Diagnosticable, _$FAutocompleteStyleFunctions {
   /// are the same size to prevent visual discrepancies between the actual and typeahead text.
   /// {@endtemplate}
   @override
-  final FVariants<FTextFieldVariantConstraint, TextStyle, TextStyleDelta> composingTextStyle;
+  final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, TextStyle, TextStyleDelta> composingTextStyle;
 
   /// The typeahead's [TextStyle].
   ///
   /// {@macro forui.text_field.composingTextStyle}
   @override
-  final FVariants<FTextFieldVariantConstraint, TextStyle, TextStyleDelta> typeaheadTextStyle;
+  final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, TextStyle, TextStyleDelta> typeaheadTextStyle;
 
   /// The content's style.
   @override
@@ -1028,8 +1028,8 @@ class FAutocompleteStyle with Diagnosticable, _$FAutocompleteStyleFunctions {
     final field = FTextFieldStyle.inherit(colors: colors, typography: typography, style: style);
     return .new(
       fieldStyle: field,
-      composingTextStyle: field.contentTextStyle.apply([.onAll(const .delta(decoration: .underline))]),
-      typeaheadTextStyle: field.contentTextStyle.apply([.onAll(.delta(color: colors.mutedForeground))]),
+      composingTextStyle: field.contentTextStyle.apply([.all(const .delta(decoration: .underline))]),
+      typeaheadTextStyle: field.contentTextStyle.apply([.all(.delta(color: colors.mutedForeground))]),
       contentStyle: .inherit(colors: colors, typography: typography, style: style),
     );
   }

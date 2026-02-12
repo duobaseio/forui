@@ -34,7 +34,7 @@ final button = FButton(
   onVariantChange: (previous, current) {},
   // {@endcategory}
   // {@category "Core"}
-  style: const .inherit(),
+  style: const .context(),
   selected: false,
   onPress: () {},
   child: const Text('Button'),
@@ -63,7 +63,7 @@ final icon = FButton.icon(
   onVariantChange: (previous, current) {},
   // {@endcategory}
   // {@category "Core"}
-  style: const .inherit(),
+  style: const .context(),
   selected: false,
   onPress: () {},
   child: const Icon(FIcons.mail),
@@ -92,7 +92,7 @@ final raw = FButton.raw(
   onVariantChange: (previous, current) {},
   // {@endcategory}
   // {@category "Core"}
-  style: const .inherit(),
+  style: const .context(),
   selected: false,
   onPress: () {},
   child: const Text('Button'),

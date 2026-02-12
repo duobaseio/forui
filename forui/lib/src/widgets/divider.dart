@@ -45,7 +45,7 @@ class FDivider extends StatelessWidget {
   final Axis axis;
 
   /// Creates a [FDivider].
-  const FDivider({this.style = const .inherit(), this.axis = .horizontal, super.key});
+  const FDivider({this.style = const .context(), this.axis = .horizontal, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -71,12 +71,14 @@ class FDivider extends StatelessWidget {
 }
 
 /// The [FDivider] styles.
-extension type FDividerStyles._(FVariants<FDividerAxisVariantConstraint, FDividerStyle, FDividerStyleDelta> _)
-    implements FVariants<FDividerAxisVariantConstraint, FDividerStyle, FDividerStyleDelta> {
+extension type FDividerStyles._(
+  FVariants<FDividerAxisVariantConstraint, FDividerAxisVariant, FDividerStyle, FDividerStyleDelta> _
+)
+    implements FVariants<FDividerAxisVariantConstraint, FDividerAxisVariant, FDividerStyle, FDividerStyleDelta> {
   /// Creates a [FDividerStyles] that inherits its properties.
   FDividerStyles.inherit({required FColors colors, required FStyle style})
     : this._(
-        .delta(
+        FVariants.from(
           FDividerStyle(
             color: colors.secondary,
             padding: FDividerStyle.defaultPadding.horizontalStyle,

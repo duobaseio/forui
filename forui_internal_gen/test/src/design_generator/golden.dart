@@ -150,10 +150,10 @@ extension $FGoldenStyleTransformations on FGoldenStyle {
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration, BoxDecorationDelta>? boxDecorationVariants,
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration?, BoxDecorationDelta>?
     nullableBoxDecorationVariants,
-    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration>? decorationVariants,
-    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration?>? nullableDecorationVariants,
-    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color>? colorVariants,
-    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color?>? nullableColorVariants,
+    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration, Delta>? decorationVariants,
+    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration?, Delta>? nullableDecorationVariants,
+    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color, Delta>? colorVariants,
+    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color?, Delta>? nullableColorVariants,
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, IconThemeData, IconThemeDataDelta>? iconThemeDataVariants,
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, IconThemeData?, IconThemeDataDelta>?
     nullableIconThemeDataVariants,
@@ -284,17 +284,20 @@ mixin _$FGoldenStyleFunctions on Diagnosticable implements FGoldenStyleDelta {
   TextStyle get textStyle;
   List<BoxShadow> get boxShadows;
   List<Shadow> get shadows;
-  FVariants<FGoldenVariantConstraint, BoxDecoration, BoxDecorationDelta> get boxDecorationVariants;
-  FVariants<FGoldenVariantConstraint, BoxDecoration?, BoxDecorationDelta> get nullableBoxDecorationVariants;
-  FVariants<FGoldenVariantConstraint, Decoration, Delta> get decorationVariants;
-  FVariants<FGoldenVariantConstraint, Decoration?, Delta> get nullableDecorationVariants;
-  FVariants<FGoldenVariantConstraint, Color, Delta> get colorVariants;
-  FVariants<FGoldenVariantConstraint, Color?, Delta> get nullableColorVariants;
-  FVariants<FGoldenVariantConstraint, IconThemeData, IconThemeDataDelta> get iconThemeDataVariants;
-  FVariants<FGoldenVariantConstraint, IconThemeData?, IconThemeDataDelta> get nullableIconThemeDataVariants;
-  FVariants<FGoldenVariantConstraint, TextStyle, TextStyleDelta> get textStyleVariants;
-  FVariants<FGoldenVariantConstraint, TextStyle?, TextStyleDelta> get nullableTextStyleVariants;
-  FVariants<FGoldenVariantConstraint, FGoldenNestedMotion, FGoldenNestedMotionDelta> get nestedMotionVariants;
+  FVariants<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration, BoxDecorationDelta> get boxDecorationVariants;
+  FVariants<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration?, BoxDecorationDelta>
+  get nullableBoxDecorationVariants;
+  FVariants<FGoldenVariantConstraint, FGoldenVariant, Decoration, Delta> get decorationVariants;
+  FVariants<FGoldenVariantConstraint, FGoldenVariant, Decoration?, Delta> get nullableDecorationVariants;
+  FVariants<FGoldenVariantConstraint, FGoldenVariant, Color, Delta> get colorVariants;
+  FVariants<FGoldenVariantConstraint, FGoldenVariant, Color?, Delta> get nullableColorVariants;
+  FVariants<FGoldenVariantConstraint, FGoldenVariant, IconThemeData, IconThemeDataDelta> get iconThemeDataVariants;
+  FVariants<FGoldenVariantConstraint, FGoldenVariant, IconThemeData?, IconThemeDataDelta>
+  get nullableIconThemeDataVariants;
+  FVariants<FGoldenVariantConstraint, FGoldenVariant, TextStyle, TextStyleDelta> get textStyleVariants;
+  FVariants<FGoldenVariantConstraint, FGoldenVariant, TextStyle?, TextStyleDelta> get nullableTextStyleVariants;
+  FVariants<FGoldenVariantConstraint, FGoldenVariant, FGoldenNestedMotion, FGoldenNestedMotionDelta>
+  get nestedMotionVariants;
   FGoldenNestedMotion get nestedMotion;
   FGoldenNestedStyle get nestedStyle;
   List<String> get list;
@@ -416,9 +419,6 @@ mixin _$FGoldenStyleFunctions on Diagnosticable implements FGoldenStyleDelta {
 ///
 /// A [FGoldenStyle] is itself a [FGoldenStyleDelta].
 sealed class FGoldenStyleDelta with Delta {
-  /// Creates a delta that returns the [FGoldenStyle] in the current context.
-  const factory FGoldenStyleDelta.inherit() = _FGoldenStyleInherit;
-
   /// Creates a partial modification of a [FGoldenStyle].
   ///
   /// ## Parameters
@@ -474,10 +474,10 @@ sealed class FGoldenStyleDelta with Delta {
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration, BoxDecorationDelta>? boxDecorationVariants,
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration?, BoxDecorationDelta>?
     nullableBoxDecorationVariants,
-    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration>? decorationVariants,
-    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration?>? nullableDecorationVariants,
-    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color>? colorVariants,
-    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color?>? nullableColorVariants,
+    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration, Delta>? decorationVariants,
+    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration?, Delta>? nullableDecorationVariants,
+    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color, Delta>? colorVariants,
+    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color?, Delta>? nullableColorVariants,
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, IconThemeData, IconThemeDataDelta>? iconThemeDataVariants,
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, IconThemeData?, IconThemeDataDelta>?
     nullableIconThemeDataVariants,
@@ -492,15 +492,11 @@ sealed class FGoldenStyleDelta with Delta {
     Map<String, int>? map,
   }) = _FGoldenStyleDelta;
 
+  /// Creates a delta that returns the [FGoldenStyle] in the current context.
+  const factory FGoldenStyleDelta.context() = _FGoldenStyleContext;
+
   @override
   FGoldenStyle call(covariant FGoldenStyle value);
-}
-
-class _FGoldenStyleInherit implements FGoldenStyleDelta {
-  const _FGoldenStyleInherit();
-
-  @override
-  FGoldenStyle call(FGoldenStyle original) => original;
 }
 
 class _FGoldenStyleDelta implements FGoldenStyleDelta {
@@ -577,13 +573,13 @@ class _FGoldenStyleDelta implements FGoldenStyleDelta {
   final FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration?, BoxDecorationDelta>?
   nullableBoxDecorationVariants;
 
-  final FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration>? decorationVariants;
+  final FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration, Delta>? decorationVariants;
 
-  final FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration?>? nullableDecorationVariants;
+  final FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration?, Delta>? nullableDecorationVariants;
 
-  final FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color>? colorVariants;
+  final FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color, Delta>? colorVariants;
 
-  final FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color?>? nullableColorVariants;
+  final FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color?, Delta>? nullableColorVariants;
 
   final FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, IconThemeData, IconThemeDataDelta>?
   iconThemeDataVariants;
@@ -654,6 +650,13 @@ class _FGoldenStyleDelta implements FGoldenStyleDelta {
   );
 }
 
+class _FGoldenStyleContext implements FGoldenStyleDelta {
+  const _FGoldenStyleContext();
+
+  @override
+  FGoldenStyle call(FGoldenStyle original) => original;
+}
+
 /// Provides [copyWith] and [lerp] methods.
 extension $FGoldenNestedMotionTransformations on FGoldenNestedMotion {
   /// Returns a copy of this [FGoldenNestedMotion] with the given properties replaced.
@@ -709,9 +712,6 @@ mixin _$FGoldenNestedMotionFunctions on Diagnosticable implements FGoldenNestedM
 ///
 /// A [FGoldenNestedMotion] is itself a [FGoldenNestedMotionDelta].
 sealed class FGoldenNestedMotionDelta with Delta {
-  /// Creates a delta that returns the [FGoldenNestedMotion] in the current context.
-  const factory FGoldenNestedMotionDelta.inherit() = _FGoldenNestedMotionInherit;
-
   /// Creates a partial modification of a [FGoldenNestedMotion].
   ///
   /// ## Parameters
@@ -721,15 +721,11 @@ sealed class FGoldenNestedMotionDelta with Delta {
   const factory FGoldenNestedMotionDelta.delta({double? someDouble, Duration? duration, Curve? curve}) =
       _FGoldenNestedMotionDelta;
 
+  /// Creates a delta that returns the [FGoldenNestedMotion] in the current context.
+  const factory FGoldenNestedMotionDelta.context() = _FGoldenNestedMotionContext;
+
   @override
   FGoldenNestedMotion call(covariant FGoldenNestedMotion value);
-}
-
-class _FGoldenNestedMotionInherit implements FGoldenNestedMotionDelta {
-  const _FGoldenNestedMotionInherit();
-
-  @override
-  FGoldenNestedMotion call(FGoldenNestedMotion original) => original;
 }
 
 class _FGoldenNestedMotionDelta implements FGoldenNestedMotionDelta {
@@ -747,6 +743,13 @@ class _FGoldenNestedMotionDelta implements FGoldenNestedMotionDelta {
     duration: duration ?? original.duration,
     curve: curve ?? original.curve,
   );
+}
+
+class _FGoldenNestedMotionContext implements FGoldenNestedMotionDelta {
+  const _FGoldenNestedMotionContext();
+
+  @override
+  FGoldenNestedMotion call(FGoldenNestedMotion original) => original;
 }
 
 /// Provides [copyWith] and [lerp] methods.
@@ -781,23 +784,16 @@ mixin _$FGoldenNestedStyleFunctions on Diagnosticable implements FGoldenNestedSt
 ///
 /// A [FGoldenNestedStyle] is itself a [FGoldenNestedStyleDelta].
 sealed class FGoldenNestedStyleDelta with Delta {
-  /// Creates a delta that returns the [FGoldenNestedStyle] in the current context.
-  const factory FGoldenNestedStyleDelta.inherit() = _FGoldenNestedStyleInherit;
-
   /// Creates a partial modification of a [FGoldenNestedStyle].
   ///
   /// ## Parameters
   const factory FGoldenNestedStyleDelta.delta() = _FGoldenNestedStyleDelta;
 
+  /// Creates a delta that returns the [FGoldenNestedStyle] in the current context.
+  const factory FGoldenNestedStyleDelta.context() = _FGoldenNestedStyleContext;
+
   @override
   FGoldenNestedStyle call(covariant FGoldenNestedStyle value);
-}
-
-class _FGoldenNestedStyleInherit implements FGoldenNestedStyleDelta {
-  const _FGoldenNestedStyleInherit();
-
-  @override
-  FGoldenNestedStyle call(FGoldenNestedStyle original) => original;
 }
 
 class _FGoldenNestedStyleDelta implements FGoldenNestedStyleDelta {
@@ -805,5 +801,12 @@ class _FGoldenNestedStyleDelta implements FGoldenNestedStyleDelta {
 
   @override
   FGoldenNestedStyle call(FGoldenNestedStyle original) => FGoldenNestedStyle();
+}
+
+class _FGoldenNestedStyleContext implements FGoldenNestedStyleDelta {
+  const _FGoldenNestedStyleContext();
+
+  @override
+  FGoldenNestedStyle call(FGoldenNestedStyle original) => original;
 }
 ''';

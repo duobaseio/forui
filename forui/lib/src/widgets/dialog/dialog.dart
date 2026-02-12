@@ -56,8 +56,8 @@ Future<T?> showFDialog<T>({
   required BuildContext context,
   required Widget Function(BuildContext context, FDialogStyle style, Animation<double> animation) builder,
   bool useRootNavigator = false,
-  FDialogRouteStyleDelta routeStyle = const .inherit(),
-  FDialogStyleDelta style = const .inherit(),
+  FDialogRouteStyleDelta routeStyle = const .context(),
+  FDialogStyleDelta style = const .context(),
   String? barrierLabel,
   bool barrierDismissible = true,
   RouteSettings? routeSettings,
@@ -312,7 +312,7 @@ class FDialog extends StatefulWidget {
   /// |----------------------------------------------|
   FDialog({
     required List<Widget> actions,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.animation,
     this.semanticsLabel,
     this.constraints = const BoxConstraints(minWidth: 280, maxWidth: 560),
@@ -342,7 +342,7 @@ class FDialog extends StatefulWidget {
   /// on **top**. In horizontal layouts, the primary action is at the **end** (i.e. the list is reversed).
   FDialog.adaptive({
     required List<Widget> actions,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.animation,
     this.semanticsLabel,
     this.constraints = const BoxConstraints(minWidth: 280, maxWidth: 560),
@@ -367,7 +367,7 @@ class FDialog extends StatefulWidget {
   /// Creates a [FDialog] with a custom builder.
   const FDialog.raw({
     required this.builder,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.animation,
     this.semanticsLabel,
     this.constraints = const BoxConstraints(minWidth: 280, maxWidth: 560),
@@ -514,7 +514,8 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
 
   /// The dialog content's style.
   @override
-  final FVariants<FDialogAxisVariantConstraint, FDialogContentStyle, FDialogContentStyleDelta> contentStyle;
+  final FVariants<FDialogAxisVariantConstraint, FDialogAxisVariant, FDialogContentStyle, FDialogContentStyleDelta>
+  contentStyle;
 
   /// Motion-related properties.
   @override

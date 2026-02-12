@@ -34,7 +34,7 @@ class FProgress extends StatefulWidget {
   final String? semanticsLabel;
 
   /// Creates a determinate [FProgress].
-  const FProgress({this.style = const .inherit(), this.semanticsLabel, super.key});
+  const FProgress({this.style = const .context(), this.semanticsLabel, super.key});
 
   @override
   State<FProgress> createState() => _ProgressState();

@@ -75,7 +75,7 @@ class FSidebarItem extends StatefulWidget {
 
   /// Creates a [FSidebarItem].
   const FSidebarItem({
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.icon,
     this.label,
     this.selected = false,
@@ -269,7 +269,7 @@ class _FSidebarItemState extends State<FSidebarItem> with TickerProviderStateMix
 class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
   /// The label's text style.
   @override
-  final FVariants<FTappableVariantConstraint, TextStyle, TextStyleDelta> textStyle;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> textStyle;
 
   /// The spacing between the icon and label. Defaults to 8.
   @override
@@ -277,7 +277,7 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
 
   /// The icon's style.
   @override
-  final FVariants<FTappableVariantConstraint, IconThemeData, IconThemeDataDelta> iconStyle;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> iconStyle;
 
   /// The spacing between the label and collapsible widget. Defaults to 8.
   @override
@@ -285,7 +285,7 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
 
   /// The collapsible icon's style.
   @override
-  final FVariants<FTappableVariantConstraint, IconThemeData, IconThemeDataDelta> collapsibleIconStyle;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> collapsibleIconStyle;
 
   /// The spacing between child items. Defaults to 2.
   @override
@@ -297,7 +297,7 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
 
   /// The background color.
   @override
-  final FVariants<FTappableVariantConstraint, Color, Delta> backgroundColor;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, Color, Delta> backgroundColor;
 
   /// The padding around the content. Defaults to `EdgeInsets.symmetric(horizontal: 12, vertical: 10)`.
   @override
@@ -339,19 +339,19 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
   /// Creates a [FSidebarItemStyle] that inherits its properties.
   FSidebarItemStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        textStyle: .delta(
+        textStyle: FVariants.from(
           typography.base.copyWith(color: colors.foreground, overflow: .ellipsis, height: 1),
           variants: {
             [.disabled]: .delta(color: colors.mutedForeground),
           },
         ),
-        iconStyle: .delta(
+        iconStyle: FVariants.from(
           IconThemeData(color: colors.foreground, size: 16),
           variants: {
             [.disabled]: .delta(color: colors.mutedForeground),
           },
         ),
-        collapsibleIconStyle: .delta(
+        collapsibleIconStyle: FVariants.from(
           IconThemeData(color: colors.foreground, size: 16),
           variants: {
             [.disabled]: .delta(color: colors.mutedForeground),

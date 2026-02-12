@@ -68,7 +68,7 @@ class FTimePicker extends StatefulWidget {
   /// Creates a [FTimePicker].
   const FTimePicker({
     this.control = const .managed(),
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.hour24 = false,
     this.hourInterval = 1,
     this.minuteInterval = 1,

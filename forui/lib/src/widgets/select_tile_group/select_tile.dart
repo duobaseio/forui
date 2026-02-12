@@ -86,7 +86,7 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
   const FSelectTile({
     required this.title,
     required this.value,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.checkedIcon = const Icon(FIcons.check),
     this.uncheckedIcon = const Icon(FIcons.check, color: Colors.transparent),
     this.subtitle,
@@ -136,7 +136,7 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
   const FSelectTile.suffix({
     required this.title,
     required this.value,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.checkedIcon = const Icon(FIcons.check),
     this.uncheckedIcon = const Icon(FIcons.check, color: Colors.transparent),
     this.subtitle,

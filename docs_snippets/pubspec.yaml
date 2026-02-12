@@ -4,8 +4,8 @@ publish_to: 'none'
 version: 0.0.0
 
 environment:
-  sdk: '>=3.10.0 <4.0.0'
-  flutter: ">=3.38.0"
+  sdk: '>=3.11.0 <4.0.0'
+  flutter: ">=3.41.0"
 resolution: workspace
 
 dependencies:
@@ -25,7 +25,7 @@ dependencies:
   sugar: ^4.0.0
 
 dev_dependencies:
-  analyzer: ^8.0.0
+  analyzer: ^9.0.0
   auto_route_generator: ^10.2.4
   build_runner: any
   dart_style: ^3.1.3

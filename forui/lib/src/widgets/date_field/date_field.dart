@@ -125,7 +125,7 @@ abstract class FDateField extends StatefulWidget {
 
   const FDateField._({
     this.control = const .managed(),
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.autofocus = false,
     this.focusNode,
     this.builder = _fieldBuilder,

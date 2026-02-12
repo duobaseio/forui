@@ -26,7 +26,7 @@ mixin FAutocompleteItemMixin on Widget {
   static FAutocompleteSection section({
     required Widget label,
     required List<String> items,
-    FAutocompleteSectionStyleDelta style = const .inherit(),
+    FAutocompleteSectionStyleDelta style = const .context(),
     bool? enabled,
     FItemDivider divider = .none,
     Key? key,
@@ -38,7 +38,7 @@ mixin FAutocompleteItemMixin on Widget {
   static FAutocompleteSection richSection({
     required Widget label,
     required List<FAutocompleteItem> children,
-    FAutocompleteSectionStyleDelta style = const .inherit(),
+    FAutocompleteSectionStyleDelta style = const .context(),
     bool? enabled,
     FItemDivider divider = .none,
     Key? key,
@@ -51,7 +51,7 @@ mixin FAutocompleteItemMixin on Widget {
   /// This function is a shorthand for [FAutocompleteItem.new].
   static FAutocompleteItem item({
     required String value,
-    FItemStyleDelta style = const .inherit(),
+    FItemStyleDelta style = const .context(),
     bool? enabled,
     Widget? prefix,
     Widget? title,
@@ -75,7 +75,7 @@ mixin FAutocompleteItemMixin on Widget {
   static FAutocompleteItem rawItem({
     required Widget child,
     required String value,
-    FItemStyleDelta style = const .inherit(),
+    FItemStyleDelta style = const .context(),
     bool? enabled,
     Widget? prefix,
     Key? key,
@@ -127,7 +127,7 @@ class FAutocompleteSection extends StatelessWidget with FAutocompleteItemMixin {
   FAutocompleteSection({
     required Widget label,
     required List<String> items,
-    FAutocompleteSectionStyleDelta style = const .inherit(),
+    FAutocompleteSectionStyleDelta style = const .context(),
     bool? enabled,
     FItemDivider divider = .none,
     Key? key,
@@ -146,7 +146,7 @@ class FAutocompleteSection extends StatelessWidget with FAutocompleteItemMixin {
   const FAutocompleteSection.rich({
     required this.label,
     required this.children,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.enabled,
     this.divider = .none,
     super.key,
@@ -208,7 +208,8 @@ class FAutocompleteSection extends StatelessWidget with FAutocompleteItemMixin {
 class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyleFunctions {
   /// The enabled label's text style.
   @override
-  final FVariants<FAutocompleteSectionVariantConstraint, TextStyle, TextStyleDelta> labelTextStyle;
+  final FVariants<FAutocompleteSectionVariantConstraint, FAutocompleteSectionVariant, TextStyle, TextStyleDelta>
+  labelTextStyle;
 
   /// The padding around the label. Defaults to `EdgeInsetsDirectional.only(start: 15, top: 7.5, bottom: 7.5, end: 10)`.
   @override
@@ -216,7 +217,7 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
 
   /// The divider's style.
   @override
-  final FVariants<FItemGroupVariantConstraint, Color, Delta> dividerColor;
+  final FVariants<FItemGroupVariantConstraint, FItemGroupVariant, Color, Delta> dividerColor;
 
   /// The divider's width.
   @override
@@ -242,20 +243,20 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
     required FTypography typography,
   }) {
     const padding = EdgeInsetsDirectional.only(start: 11, top: 7.5, bottom: 7.5, end: 6);
-    final iconStyle = FVariants<FTappableVariantConstraint, IconThemeData, IconThemeDataDelta>.delta(
+    final iconStyle = FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta>.from(
       IconThemeData(color: colors.foreground, size: 15),
       variants: {
         [.disabled]: .delta(color: colors.disable(colors.foreground)),
       },
     );
-    final textStyle = FVariants<FTappableVariantConstraint, TextStyle, TextStyleDelta>.delta(
+    final textStyle = FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta>.from(
       typography.sm,
       variants: {
         [.disabled]: .delta(color: colors.disable(colors.foreground)),
       },
     );
     return .new(
-      labelTextStyle: .delta(
+      labelTextStyle: FVariants.from(
         typography.sm.copyWith(color: colors.foreground, fontWeight: .w600),
         variants: {
           [.disabled]: .delta(color: colors.disable(colors.foreground)),
@@ -281,11 +282,11 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
               mutedForeground: colors.mutedForeground,
             ).copyWith(
               padding: padding,
-              prefixIconStyle: .value(iconStyle),
+              prefixIconStyle: iconStyle,
               prefixIconSpacing: 10,
-              titleTextStyle: .value(textStyle),
+              titleTextStyle: textStyle,
               titleSpacing: 4,
-              suffixIconStyle: .value(iconStyle),
+              suffixIconStyle: iconStyle,
             ),
         rawItemContentStyle: FRawItemContentStyle(
           padding: padding,
@@ -380,7 +381,7 @@ abstract class FAutocompleteItem extends StatelessWidget with FAutocompleteItemM
     Key? key,
   }) = _RawAutocompleteItem;
 
-  const FAutocompleteItem._({required this.value, this.style = const .inherit(), this.enabled, this.prefix, super.key});
+  const FAutocompleteItem._({required this.value, this.style = const .context(), this.enabled, this.prefix, super.key});
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

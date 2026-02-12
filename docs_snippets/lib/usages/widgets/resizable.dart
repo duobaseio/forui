@@ -17,7 +17,7 @@ final resizable = FResizable(
   semanticFormatterCallback: (first, second) => '${first.extent.current}, ${second.extent.current}',
   // {@endcategory}
   // {@category "Core"}
-  style: const .inherit(),
+  style: const .context(),
   axis: .vertical,
   divider: .dividerWithThumb,
   children: [

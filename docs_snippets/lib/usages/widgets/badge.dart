@@ -9,7 +9,7 @@ final badge = FBadge(
   variant: null,
   // {@endcategory}
   // {@category "Core"}
-  style: const .inherit(),
+  style: const .context(),
   child: const Text('Badge'),
   // {@endcategory}
 );
@@ -19,7 +19,7 @@ final raw = FBadge.raw(
   variant: null,
   // {@endcategory}
   // {@category "Core"}
-  style: const .inherit(),
+  style: const .context(),
   builder: (context, style) => const Text('Badge'),
   // {@endcategory}
 );

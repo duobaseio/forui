@@ -28,7 +28,7 @@ mixin FSelectItemMixin on Widget {
   static FSelectSection<T> section<T>({
     required Widget label,
     required Map<String, T> items,
-    FSelectSectionStyleDelta style = const .inherit(),
+    FSelectSectionStyleDelta style = const .context(),
     bool? enabled,
     FItemDivider divider = .none,
     Key? key,
@@ -40,7 +40,7 @@ mixin FSelectItemMixin on Widget {
   static FSelectSection<T> richSection<T>({
     required Widget label,
     required List<FSelectItem<T>> children,
-    FSelectSectionStyleDelta style = const .inherit(),
+    FSelectSectionStyleDelta style = const .context(),
     bool? enabled,
     FItemDivider divider = .none,
     Key? key,
@@ -54,7 +54,7 @@ mixin FSelectItemMixin on Widget {
   static FSelectItem<T> item<T>({
     required Widget title,
     required T value,
-    FItemStyleDelta style = const .inherit(),
+    FItemStyleDelta style = const .context(),
     bool? enabled,
     Widget? prefix,
     Widget? subtitle,
@@ -78,7 +78,7 @@ mixin FSelectItemMixin on Widget {
   static FSelectItem<T> raw<T>({
     required Widget child,
     required T value,
-    FItemStyleDelta style = const .inherit(),
+    FItemStyleDelta style = const .context(),
     bool? enabled,
     Widget? prefix,
     Key? key,
@@ -130,7 +130,7 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
   FSelectSection({
     required Widget label,
     required Map<String, T> items,
-    FSelectSectionStyleDelta style = const .inherit(),
+    FSelectSectionStyleDelta style = const .context(),
     bool? enabled,
     FItemDivider divider = .none,
     Key? key,
@@ -149,7 +149,7 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
   const FSelectSection.rich({
     required this.label,
     required this.children,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.enabled,
     this.divider = .none,
     super.key,
@@ -221,7 +221,7 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
 class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
   /// The label's text style.
   @override
-  final FVariants<FSelectSectionVariantConstraint, TextStyle, TextStyleDelta> labelTextStyle;
+  final FVariants<FSelectSectionVariantConstraint, FSelectSectionVariant, TextStyle, TextStyleDelta> labelTextStyle;
 
   /// The padding around the label. Defaults to `EdgeInsetsDirectional.only(start: 15, top: 7.5, bottom: 7.5, end: 10)`.
   @override
@@ -229,7 +229,7 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
 
   /// The divider's style.
   @override
-  final FVariants<FSelectSectionVariantConstraint, Color, Delta> dividerColor;
+  final FVariants<FSelectSectionVariantConstraint, FSelectSectionVariant, Color, Delta> dividerColor;
 
   /// The divider's width.
   @override
@@ -255,13 +255,13 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
     required FTypography typography,
   }) {
     const padding = EdgeInsetsDirectional.only(start: 11, top: 7.5, bottom: 7.5, end: 6);
-    final iconStyle = FVariants<FTappableVariantConstraint, IconThemeData, IconThemeDataDelta>.delta(
+    final iconStyle = FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta>.from(
       IconThemeData(color: colors.foreground, size: 15),
       variants: {
         [.disabled]: .delta(color: colors.disable(colors.foreground)),
       },
     );
-    final textStyle = FVariants<FTappableVariantConstraint, TextStyle, TextStyleDelta>.delta(
+    final textStyle = FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta>.from(
       typography.sm.copyWith(color: colors.foreground),
       variants: {
         [.disabled]: .delta(color: colors.disable(colors.foreground)),
@@ -269,7 +269,7 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
     );
 
     return .new(
-      labelTextStyle: .delta(
+      labelTextStyle: FVariants.from(
         typography.sm.copyWith(color: colors.foreground, fontWeight: .w600),
         variants: {
           [.disabled]: .delta(color: colors.disable(colors.foreground)),
@@ -279,7 +279,7 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
       dividerWidth: style.borderWidth,
       itemStyle: FItemStyle(
         backgroundColor: const .all(null),
-        decoration: .delta(
+        decoration: FVariants.from(
           const BoxDecoration(),
           variants: {
             [.focused, .hovered, .pressed]: .delta(color: colors.secondary, borderRadius: style.borderRadius),
@@ -296,11 +296,11 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
               mutedForeground: colors.mutedForeground,
             ).copyWith(
               padding: padding,
-              prefixIconStyle: .value(iconStyle),
+              prefixIconStyle: iconStyle,
               prefixIconSpacing: 10,
-              titleTextStyle: .value(textStyle),
+              titleTextStyle: textStyle,
               titleSpacing: 4,
-              suffixIconStyle: .value(iconStyle),
+              suffixIconStyle: iconStyle,
             ),
         rawItemContentStyle: FRawItemContentStyle(
           padding: padding,
@@ -390,7 +390,7 @@ abstract class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
     Key? key,
   }) = _RawSelectItem<T>;
 
-  const FSelectItem._({required this.value, this.style = const .inherit(), this.enabled, this.prefix, super.key});
+  const FSelectItem._({required this.value, this.style = const .context(), this.enabled, this.prefix, super.key});
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

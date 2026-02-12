@@ -17,7 +17,7 @@ class _FRootHeader extends FHeader {
   final List<Widget> suffixes;
 
   /// Creates a [FHeader].
-  const _FRootHeader({this.style = const .inherit(), this.suffixes = const [], super.title, super.key}) : super._();
+  const _FRootHeader({this.style = const .context(), this.suffixes = const [], super.title, super.key}) : super._();
 
   @override
   Widget build(BuildContext context) {

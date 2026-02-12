@@ -87,15 +87,15 @@ class IconContent extends StatelessWidget {
 class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFunctions {
   /// The [TextStyle].
   @override
-  final FVariants<FTappableVariantConstraint, TextStyle, TextStyleDelta> textStyle;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> textStyle;
 
   /// The icon's style.
   @override
-  final FVariants<FTappableVariantConstraint, IconThemeData, IconThemeDataDelta> iconStyle;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> iconStyle;
 
   /// The circular progress's style.
   @override
-  final FVariants<FTappableVariantConstraint, FCircularProgressStyle, FCircularProgressStyleDelta>
+  final FVariants<FTappableVariantConstraint, FTappableVariant, FCircularProgressStyle, FCircularProgressStyleDelta>
   circularProgressStyle;
 
   /// The padding. Defaults to `EdgeInsets.symmetric(horizontal: 16, vertical: 12.5)`.
@@ -120,7 +120,7 @@ class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFunctions {
 class FButtonIconContentStyle with Diagnosticable, _$FButtonIconContentStyleFunctions {
   /// The icon's style.
   @override
-  final FVariants<FTappableVariantConstraint, IconThemeData, IconThemeDataDelta> iconStyle;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> iconStyle;
 
   /// The padding. Defaults to `EdgeInsets.all(7.5)`.
   @override

@@ -119,7 +119,7 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderValue> {
   /// Creates a [FSlider].
   FSlider({
     this.control = const .managedContinuous(),
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.layout,
     this.label,
     this.description,

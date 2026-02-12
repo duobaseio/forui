@@ -27,7 +27,7 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
 
   /// The fill color of the text-field.
   @override
-  final FVariants<FTextFieldVariantConstraint, Color?, Delta> color;
+  final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, Color?, Delta> color;
 
   /// The color of the cursor. Defaults to [CupertinoColors.activeBlue].
   ///
@@ -62,7 +62,7 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
 
   /// The prefix & suffix icon styles.
   @override
-  final FVariants<FTextFieldVariantConstraint, IconThemeData, IconThemeDataDelta> iconStyle;
+  final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, IconThemeData, IconThemeDataDelta> iconStyle;
 
   /// The clear button's style when [FTextField.clearable] is true.
   @override
@@ -74,19 +74,19 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
 
   /// The content's [TextStyle].
   @override
-  final FVariants<FTextFieldVariantConstraint, TextStyle, TextStyleDelta> contentTextStyle;
+  final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, TextStyle, TextStyleDelta> contentTextStyle;
 
   /// The hint's [TextStyle].
   @override
-  final FVariants<FTextFieldVariantConstraint, TextStyle, TextStyleDelta> hintTextStyle;
+  final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, TextStyle, TextStyleDelta> hintTextStyle;
 
   /// The counter's [TextStyle].
   @override
-  final FVariants<FTextFieldVariantConstraint, TextStyle, TextStyleDelta> counterTextStyle;
+  final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, TextStyle, TextStyleDelta> counterTextStyle;
 
   /// The border.
   @override
-  final FVariants<FTextFieldVariantConstraint, InputBorder, Delta> border;
+  final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, InputBorder, Delta> border;
 
   /// Creates a [FTextFieldStyle].
   FTextFieldStyle({
@@ -123,14 +123,14 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
       style: style,
     ).resolve({FButtonVariant.ghost}).resolve({FButtonSizeVariant.sm});
     final textStyle = typography.sm.copyWith(fontFamily: typography.defaultFontFamily);
-    final iconStyle = FVariants<FTextFieldVariantConstraint, IconThemeData, IconThemeDataDelta>.delta(
+    final iconStyle = FVariants<FTextFieldVariantConstraint, FTextFieldVariant, IconThemeData, IconThemeDataDelta>.from(
       IconThemeData(color: colors.mutedForeground, size: 16),
       variants: {
         [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
       },
     );
     final bounceableButtonStyle = ghost.copyWith(
-      iconContentStyle: ghost.iconContentStyle.copyWith(iconStyle: .value(iconStyle.cast())),
+      iconContentStyle: ghost.iconContentStyle.copyWith(iconStyle: iconStyle.cast()),
     );
 
     return .new(
@@ -147,19 +147,19 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
       obscureButtonStyle: bounceableButtonStyle.copyWith(
         tappableStyle: const .delta(motion: .delta(bounceTween: FTappableMotion.noBounceTween)),
       ),
-      contentTextStyle: .delta(
+      contentTextStyle: FVariants.from(
         textStyle.copyWith(color: colors.foreground),
         variants: {
           [.disabled]: .delta(color: colors.disable(colors.foreground)),
         },
       ),
-      hintTextStyle: .delta(
+      hintTextStyle: FVariants.from(
         textStyle.copyWith(color: colors.mutedForeground),
         variants: {
           [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
         },
       ),
-      counterTextStyle: .delta(
+      counterTextStyle: FVariants.from(
         textStyle.copyWith(color: colors.foreground),
         variants: {
           [.disabled]: .delta(color: colors.disable(colors.foreground)),

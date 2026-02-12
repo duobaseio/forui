@@ -69,8 +69,8 @@ class DesignGenerator extends Generator {
               .toString(),
           _emitter.visitMixin(await DesignFunctionsMixin(step, type).generate()).toString(),
           _emitter.visitClass(await delta.generateSealed()).toString(),
-          _emitter.visitClass(delta.generateInherit()).toString(),
           _emitter.visitClass(await delta.generateDelta()).toString(),
+          _emitter.visitClass(delta.generateContext()).toString(),
         ]);
       } else if (_motion.hasMatch(type.name!)) {
         final delta = DeltaClass(step, type, sentinelValues[type.name] ?? {});
@@ -91,8 +91,8 @@ class DesignGenerator extends Generator {
               .toString(),
           _emitter.visitMixin(await DesignFunctionsMixin(step, type).generate()).toString(),
           _emitter.visitClass(await delta.generateSealed()).toString(),
-          _emitter.visitClass(delta.generateInherit()).toString(),
           _emitter.visitClass(await delta.generateDelta()).toString(),
+          _emitter.visitClass(delta.generateContext()).toString(),
         ]);
       } else if (type.name == 'FThemeData') {
         generated.add(_emitter.visitMixin(await FunctionsMixin(step, type).generate()).toString());

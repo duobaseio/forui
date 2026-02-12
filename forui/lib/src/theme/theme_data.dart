@@ -74,7 +74,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// dart run forui style create alerts
   /// ```
   @override
-  final FVariants<FAlertVariantConstraint, FAlertStyle, FAlertStyleDelta> alertStyles;
+  final FVariants<FAlertVariantConstraint, FAlertVariant, FAlertStyle, FAlertStyleDelta> alertStyles;
 
   /// The avatar style.
   ///
@@ -96,7 +96,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// dart run forui style create badges
   /// ```
   @override
-  final FVariants<FBadgeVariantConstraint, FBadgeStyle, FBadgeStyleDelta> badgeStyles;
+  final FVariants<FBadgeVariantConstraint, FBadgeVariant, FBadgeStyle, FBadgeStyleDelta> badgeStyles;
 
   /// The bottom navigation bar style.
   ///
@@ -129,7 +129,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// dart run forui style create buttons
   /// ```
   @override
-  final FVariants<FButtonVariantConstraint, FButtonSizes, FButtonSizesDelta> buttonStyles;
+  final FVariants<FButtonVariantConstraint, FButtonVariant, FButtonSizes, FButtonSizesDelta> buttonStyles;
 
   /// The calendar style.
   ///
@@ -228,7 +228,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// dart run forui style create dividers
   /// ```
   @override
-  final FVariants<FDividerAxisVariantConstraint, FDividerStyle, FDividerStyleDelta> dividerStyles;
+  final FVariants<FDividerAxisVariantConstraint, FDividerAxisVariant, FDividerStyle, FDividerStyleDelta> dividerStyles;
 
   /// The header styles.
   ///
@@ -239,7 +239,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// dart run forui style create headers
   /// ```
   @override
-  final FVariants<FHeaderVariantConstraint, FHeaderStyle, FHeaderStyleDelta> headerStyles;
+  final FVariants<FHeaderVariantConstraint, FHeaderVariant, FHeaderStyle, FHeaderStyleDelta> headerStyles;
 
   /// The item styles.
   ///
@@ -249,7 +249,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// dart run forui style create item
   /// ```
   @override
-  final FVariants<FItemVariantConstraint, FItemStyle, FItemStyleDelta> itemStyles;
+  final FVariants<FItemVariantConstraint, FItemVariant, FItemStyle, FItemStyleDelta> itemStyles;
 
   /// The item group style.
   ///
@@ -390,7 +390,13 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// dart run forui style create resizable
   /// ```
   @override
-  final FVariants<FResizableAxisVariantConstraint, FResizableDividerStyle, FResizableDividerStyleDelta> resizableStyles;
+  final FVariants<
+    FResizableAxisVariantConstraint,
+    FResizableAxisVariant,
+    FResizableDividerStyle,
+    FResizableDividerStyleDelta
+  >
+  resizableStyles;
 
   /// The scaffold style.
   ///
@@ -456,7 +462,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// dart run forui style create sliders
   /// ```
   @override
-  final FVariants<FSliderAxisVariantConstraint, FSliderStyle, FSliderStyleDelta> sliderStyles;
+  final FVariants<FSliderAxisVariantConstraint, FSliderAxisVariant, FSliderStyle, FSliderStyleDelta> sliderStyles;
 
   /// The toaster style.
   ///
@@ -522,7 +528,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// dart run forui style create tile
   /// ```
   @override
-  final FVariants<FItemVariantConstraint, FTileStyle, FTileStyleDelta> tileStyles;
+  final FVariants<FItemVariantConstraint, FItemVariant, FTileStyle, FTileStyleDelta> tileStyles;
 
   /// The tile group's style.
   ///
@@ -579,12 +585,12 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FStyle? style,
     FAccordionStyle? accordionStyle,
     FAutocompleteStyle? autocompleteStyle,
-    FVariants<FAlertVariantConstraint, FAlertStyle, FAlertStyleDelta>? alertStyles,
+    FVariants<FAlertVariantConstraint, FAlertVariant, FAlertStyle, FAlertStyleDelta>? alertStyles,
     FAvatarStyle? avatarStyle,
-    FVariants<FBadgeVariantConstraint, FBadgeStyle, FBadgeStyleDelta>? badgeStyles,
+    FVariants<FBadgeVariantConstraint, FBadgeVariant, FBadgeStyle, FBadgeStyleDelta>? badgeStyles,
     FBottomNavigationBarStyle? bottomNavigationBarStyle,
     FBreadcrumbStyle? breadcrumbStyle,
-    FVariants<FButtonVariantConstraint, FButtonSizes, FButtonSizesDelta>? buttonStyles,
+    FVariants<FButtonVariantConstraint, FButtonVariant, FButtonSizes, FButtonSizesDelta>? buttonStyles,
     FCalendarStyle? calendarStyle,
     FCardStyle? cardStyle,
     FCheckboxStyle? checkboxStyle,
@@ -593,9 +599,9 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FDeterminateProgressStyle? determinateProgressStyle,
     FDialogRouteStyle? dialogRouteStyle,
     FDialogStyle? dialogStyle,
-    FVariants<FDividerAxisVariantConstraint, FDividerStyle, FDividerStyleDelta>? dividerStyles,
-    FVariants<FHeaderVariantConstraint, FHeaderStyle, FHeaderStyleDelta>? headerStyles,
-    FVariants<FItemVariantConstraint, FItemStyle, FItemStyleDelta>? itemStyles,
+    FVariants<FDividerAxisVariantConstraint, FDividerAxisVariant, FDividerStyle, FDividerStyleDelta>? dividerStyles,
+    FVariants<FHeaderVariantConstraint, FHeaderVariant, FHeaderStyle, FHeaderStyleDelta>? headerStyles,
+    FVariants<FItemVariantConstraint, FItemVariant, FItemStyle, FItemStyleDelta>? itemStyles,
     FItemGroupStyle? itemGroupStyle,
     FLabelStyles? labelStyles,
     FLineCalendarStyle? lineCalendarStyle,
@@ -608,19 +614,25 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FPopoverMenuStyle? popoverMenuStyle,
     FProgressStyle? progressStyle,
     FRadioStyle? radioStyle,
-    FVariants<FResizableAxisVariantConstraint, FResizableDividerStyle, FResizableDividerStyleDelta>? resizableStyles,
+    FVariants<
+      FResizableAxisVariantConstraint,
+      FResizableAxisVariant,
+      FResizableDividerStyle,
+      FResizableDividerStyleDelta
+    >?
+    resizableStyles,
     FScaffoldStyle? scaffoldStyle,
     FSelectStyle? selectStyle,
     FSelectGroupStyle? selectGroupStyle,
     FSelectMenuTileStyle? selectMenuTileStyle,
     FSidebarStyle? sidebarStyle,
-    FVariants<FSliderAxisVariantConstraint, FSliderStyle, FSliderStyleDelta>? sliderStyles,
+    FVariants<FSliderAxisVariantConstraint, FSliderAxisVariant, FSliderStyle, FSliderStyleDelta>? sliderStyles,
     FToasterStyle? toasterStyle,
     FSwitchStyle? switchStyle,
     FTabsStyle? tabsStyle,
     FTappableStyle? tappableStyle,
     FTextFieldStyle? textFieldStyle,
-    FVariants<FItemVariantConstraint, FTileStyle, FTileStyleDelta>? tileStyles,
+    FVariants<FItemVariantConstraint, FItemVariant, FTileStyle, FTileStyleDelta>? tileStyles,
     FTileGroupStyle? tileGroupStyle,
     FTimeFieldStyle? timeFieldStyle,
     FTimePickerStyle? timePickerStyle,
@@ -904,9 +916,8 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// * Apply your Forui theme consistently to both Forui and Material widgets
   /// * Create a gradual migration path from Material Design to Forui
   ///
-  /// Note that this conversion is approximate and experimental. Some styling properties may not map
-  /// perfectly between the two design systems, and the resulting Material theme might not capture
-  /// all the nuances of your Forui theme.
+  /// Note that this conversion is approximate. Some styling properties may not map perfectly between the two design
+  /// systems, and the resulting Material theme might not capture all the nuances of your Forui theme.
   ///
   /// ```dart
   /// // Apply a Forui theme to Material widgets
@@ -915,7 +926,6 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   ///   // ...
   /// )
   /// ```
-  @experimental
   ThemeData toApproximateMaterialTheme() {
     // Material requires height to be 1, certain widgets will overflow without it.
     // TextBaseline.alphabetic is required as TextField requires it.

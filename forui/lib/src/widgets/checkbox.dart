@@ -82,7 +82,7 @@ class FCheckbox extends StatelessWidget {
 
   /// Creates a [FCheckbox].
   const FCheckbox({
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.label,
     this.description,
     this.error,
@@ -110,7 +110,7 @@ class FCheckbox extends StatelessWidget {
       focusNode: focusNode,
       onFocusChange: onFocusChange,
       builder: (context, tappableVariants, _) {
-        final variants = {...tappableVariants, ...formVariants};
+        final variants = <FVariant>{...tappableVariants, ...formVariants};
 
         final iconTheme = style.iconStyle.resolve(variants);
         final decoration = style.decoration.resolve(variants);
@@ -181,11 +181,11 @@ class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
 
   /// The icon style.
   @override
-  final FVariants<FFormFieldVariantConstraint, IconThemeData, IconThemeDataDelta> iconStyle;
+  final FVariants<FFormFieldVariantConstraint, FFormFieldVariant, IconThemeData, IconThemeDataDelta> iconStyle;
 
   /// The box decoration.
   @override
-  final FVariants<FCheckboxVariantConstraint, BoxDecoration, BoxDecorationDelta> decoration;
+  final FVariants<FCheckboxVariantConstraint, FCheckboxVariant, BoxDecoration, BoxDecorationDelta> decoration;
 
   /// The motion-related properties.
   @override
@@ -215,7 +215,7 @@ class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
     return .new(
       tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
       focusedOutlineStyle: style.focusedOutlineStyle.copyWith(borderRadius: .circular(4)),
-      iconStyle: .delta(
+      iconStyle: FVariants.from(
         IconThemeData(color: colors.primaryForeground, size: 14),
         variants: {
           [.disabled]: .delta(color: colors.disable(colors.primaryForeground)),
@@ -224,7 +224,7 @@ class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
           [.error.and(.disabled)]: .delta(color: colors.disable(colors.errorForeground)),
         },
       ),
-      decoration: .delta(
+      decoration: FVariants.from(
         BoxDecoration(
           borderRadius: style.borderRadius,
           border: .all(color: colors.mutedForeground, width: 0.6),

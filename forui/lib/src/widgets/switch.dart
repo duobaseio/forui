@@ -95,7 +95,7 @@ class FSwitch extends StatelessWidget {
 
   /// Creates a [FSwitch].
   const FSwitch({
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.label,
     this.description,
     this.error,
@@ -114,7 +114,7 @@ class FSwitch extends StatelessWidget {
   Widget build(BuildContext context) {
     final style = this.style(context.theme.switchStyle);
     final formVariants = <FFormFieldVariant>{if (!enabled) .disabled, if (error != null) .error};
-    final variants = {if (value) FSwitchVariant.selected, ...formVariants};
+    final variants = <FVariant>{if (value) FSwitchVariant.selected, ...formVariants};
 
     // The label is wrapped in a GestureDetector to improve affordance.
     return GestureDetector(
@@ -184,11 +184,11 @@ class FSwitchStyle extends FLabelStyle with _$FSwitchStyleFunctions {
 
   /// The track's color.
   @override
-  final FVariants<FSwitchVariantConstraint, Color, Delta> trackColor;
+  final FVariants<FSwitchVariantConstraint, FSwitchVariant, Color, Delta> trackColor;
 
   /// The thumb's color.
   @override
-  final FVariants<FSwitchVariantConstraint, Color, Delta> thumbColor;
+  final FVariants<FSwitchVariantConstraint, FSwitchVariant, Color, Delta> thumbColor;
 
   /// Creates a [FSwitchStyle].
   const FSwitchStyle({

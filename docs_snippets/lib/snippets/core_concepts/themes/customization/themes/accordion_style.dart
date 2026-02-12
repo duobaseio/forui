@@ -7,7 +7,7 @@ import 'package:forui/forui.dart';
 // {@snippet}
 FAccordionStyle accordionStyle({required FColors colors, required FTypography typography, required FStyle style}) =>
     FAccordionStyle(
-      titleTextStyle: FVariants.delta(
+      titleTextStyle: FVariants.from(
         // This text style is applied when the accordion is NOT hovered OR pressed.
         typography.base.copyWith(fontWeight: .w500, color: colors.foreground),
         variants: {

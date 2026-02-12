@@ -159,7 +159,7 @@ class FPopoverMenu extends StatelessWidget {
   FPopoverMenu({
     this.control = const .managed(),
     this.scrollController,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.cacheExtent,
     this.maxHeight = .infinity,
     this.dragStartBehavior = .start,
@@ -217,7 +217,7 @@ class FPopoverMenu extends StatelessWidget {
   FPopoverMenu.tiles({
     this.control = const .managed(),
     this.scrollController,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.cacheExtent,
     this.maxHeight = .infinity,
     this.dragStartBehavior = .start,
@@ -358,11 +358,11 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
             borderRadius: style.borderRadius,
           ),
         ),
-        itemStyles: .apply([
-          .onBase(
+        itemStyles: .delta([
+          .base(
             .delta(
-              backgroundColor: .value(.all(colors.card)),
-              decoration: .apply([.onBase(.delta(color: colors.card))]),
+              backgroundColor: FVariants.all(colors.card),
+              decoration: .delta([.base(.delta(color: colors.card))]),
               contentStyle: FItemContentStyle.inherit(
                 colors: colors,
                 typography: typography,
@@ -381,27 +381,23 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
         ]),
       ),
       tileGroupStyle = .inherit(colors: colors, style: style, typography: typography).copyWith(
-        tileStyles: .apply([
-          .onBase(
+        tileStyles: .delta([
+          .base(
             .delta(
               contentStyle: .delta(
-                prefixIconStyle: .value(
-                  .delta(
-                    IconThemeData(color: colors.foreground, size: 18),
-                    variants: {
-                      [.disabled]: .delta(color: colors.disable(colors.foreground)),
-                    },
-                  ),
+                prefixIconStyle: FVariants.from(
+                  IconThemeData(color: colors.foreground, size: 18),
+                  variants: {
+                    [.disabled]: .delta(color: colors.disable(colors.foreground)),
+                  },
                 ),
               ),
               rawItemContentStyle: .delta(
-                prefixIconStyle: .value(
-                  .delta(
-                    IconThemeData(color: colors.foreground, size: 18),
-                    variants: {
-                      [.disabled]: .delta(color: colors.disable(colors.foreground)),
-                    },
-                  ),
+                prefixIconStyle: FVariants.from(
+                  IconThemeData(color: colors.foreground, size: 18),
+                  variants: {
+                    [.disabled]: .delta(color: colors.disable(colors.foreground)),
+                  },
                 ),
               ),
             ),

@@ -1,6 +1,3 @@
-// ignore_for_file: deprecated_member_use - Wait for changes to stabilize before migrating.
-// https://github.com/dart-lang/sdk/blob/main/pkg/analyzer/doc/element_model_migration_guide.md
-
 import 'dart:io';
 
 import 'package:analyzer/dart/analysis/analysis_context_collection.dart';
@@ -81,8 +78,8 @@ class ConstructorFragment {
           .map((p) => p.name.label.name)
           .toSet();
       final additional = [
-        for (final p in constructor.formalParameters.where((p) => p.isOptionalNamed && !given.contains(p.name3)))
-          if (p.defaultValueCode case final defaultValue? when defaultValue.isNotEmpty) '${p.name3}: $defaultValue',
+        for (final p in constructor.formalParameters.where((p) => p.isOptionalNamed && !given.contains(p.name)))
+          if (p.defaultValueCode case final defaultValue? when defaultValue.isNotEmpty) '${p.name}: $defaultValue',
       ];
 
       final creationSource = invocation.toSource();
@@ -114,8 +111,8 @@ class ConstructorFragment {
     final to = constructor.initializers.whereType<RedirectingConstructorInvocation>().single;
     final given = to.argumentList.arguments.whereType<NamedExpression>().map((p) => p.name.label.name).toSet();
     final additional = [
-      for (final p in to.element!.formalParameters.where((p) => p.isOptionalNamed && !given.contains(p.name3)))
-        if (p.defaultValueCode case final defaultValue? when defaultValue.isNotEmpty) '${p.name3}: $defaultValue',
+      for (final p in to.element!.formalParameters.where((p) => p.isOptionalNamed && !given.contains(p.name)))
+        if (p.defaultValueCode case final defaultValue? when defaultValue.isNotEmpty) '${p.name}: $defaultValue',
     ];
 
     final closingParenthesis = source.lastIndexOf(')');
@@ -220,7 +217,7 @@ class _ConstructorInvocationVisitor extends RecursiveAstVisitor<void> {
 
   @override
   void visitInstanceCreationExpression(InstanceCreationExpression node) {
-    if (node.constructorName.type.name2.lexeme == type) {
+    if (node.constructorName.type.name.lexeme == type) {
       constructorInvocations.add(node);
     }
     super.visitInstanceCreationExpression(node);

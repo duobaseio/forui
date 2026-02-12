@@ -97,8 +97,8 @@ class FHeaderData extends InheritedWidget {
 }
 
 /// [FHeader]'s styles.
-extension type FHeaderStyles._(FVariants<FHeaderVariantConstraint, FHeaderStyle, FHeaderStyleDelta> _)
-    implements FVariants<FHeaderVariantConstraint, FHeaderStyle, FHeaderStyleDelta> {
+extension type FHeaderStyles._(FVariants<FHeaderVariantConstraint, FHeaderVariant, FHeaderStyle, FHeaderStyleDelta> _)
+    implements FVariants<FHeaderVariantConstraint, FHeaderVariant, FHeaderStyle, FHeaderStyleDelta> {
   /// Creates a [FHeaderStyles] that inherits its properties.
   FHeaderStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this._(

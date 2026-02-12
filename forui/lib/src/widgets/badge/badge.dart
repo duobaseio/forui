@@ -59,11 +59,11 @@ class FBadge extends StatelessWidget {
   final Widget Function(BuildContext context, FBadgeStyle style) builder;
 
   /// Creates a [FBadge].
-  FBadge({required Widget child, this.variant, this.style = const .inherit(), super.key})
+  FBadge({required Widget child, this.variant, this.style = const .context(), super.key})
     : builder = ((_, style) => Content(style: style, child: child));
 
   /// Creates a [FBadge] with a custom builder.
-  const FBadge.raw({required this.builder, this.variant, this.style = const .inherit(), super.key});
+  const FBadge.raw({required this.builder, this.variant, this.style = const .context(), super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -86,15 +86,15 @@ class FBadge extends StatelessWidget {
 }
 
 /// The [FBadgeStyle]s.
-extension type FBadgeStyles._(FVariants<FBadgeVariantConstraint, FBadgeStyle, FBadgeStyleDelta> _)
-    implements FVariants<FBadgeVariantConstraint, FBadgeStyle, FBadgeStyleDelta> {
+extension type FBadgeStyles._(FVariants<FBadgeVariantConstraint, FBadgeVariant, FBadgeStyle, FBadgeStyleDelta> _)
+    implements FVariants<FBadgeVariantConstraint, FBadgeVariant, FBadgeStyle, FBadgeStyleDelta> {
   /// The default border radius for badges.
   static const BorderRadius defaultBadgeRadius = .all(.circular(100));
 
   /// Creates a [FBadgeStyles] that inherits its properties.
   FBadgeStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this._(
-        .delta(
+        FVariants.from(
           FBadgeStyle(
             decoration: BoxDecoration(color: colors.primary, borderRadius: FBadgeStyles.defaultBadgeRadius),
             contentStyle: FBadgeContentStyle(

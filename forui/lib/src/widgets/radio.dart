@@ -82,7 +82,7 @@ class FRadio extends StatelessWidget {
 
   /// Creates a [FRadio].
   const FRadio({
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.label,
     this.description,
     this.error,
@@ -110,7 +110,7 @@ class FRadio extends StatelessWidget {
       focusNode: focusNode,
       onFocusChange: onFocusChange,
       builder: (context, tappableVariants, _) {
-        final variants = {...tappableVariants, ...formVariants};
+        final variants = <FVariant>{...tappableVariants, ...formVariants};
 
         return FLabel(
           axis: .horizontal,
@@ -184,15 +184,15 @@ class FRadioStyle extends FLabelStyle with _$FRadioStyleFunctions {
 
   /// The [FRadio]'s border color.
   @override
-  final FVariants<FRadioVariantConstraint, Color, Delta> borderColor;
+  final FVariants<FRadioVariantConstraint, FRadioVariant, Color, Delta> borderColor;
 
   /// The [FRadio]'s background color.
   @override
-  final FVariants<FRadioVariantConstraint, Color, Delta> backgroundColor;
+  final FVariants<FRadioVariantConstraint, FRadioVariant, Color, Delta> backgroundColor;
 
   /// The [FRadio]'s indicator color.
   @override
-  final FVariants<FRadioVariantConstraint, Color, Delta> indicatorColor;
+  final FVariants<FRadioVariantConstraint, FRadioVariant, Color, Delta> indicatorColor;
 
   /// The motion-related properties.
   @override

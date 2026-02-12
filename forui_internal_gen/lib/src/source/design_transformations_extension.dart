@@ -53,7 +53,7 @@ class DesignTransformationsExtension extends TransformationsExtension {
         InterfaceType(:final element) when element.name == 'FVariants' => await () async {
           final node = await step.resolver.astNodeFor(field.firstFragment);
           if (node?.parent case VariableDeclarationList(type: NamedType(:final typeArguments?))) {
-            return switch (typeArguments.arguments[1].toSource()) {
+            return switch (typeArguments.arguments[2].toSource()) {
               'BoxDecoration' => '.lerpBoxDecoration($name, other.$name, t)',
               'BoxDecoration?' => '.lerpWhere($name, other.$name, t, BoxDecoration.lerp)',
               'Decoration' => '.lerpDecoration($name, other.$name, t)',

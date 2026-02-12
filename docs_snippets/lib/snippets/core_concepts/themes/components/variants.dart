@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
 
-final FVariants<FTappableVariantConstraint, BoxDecoration, BoxDecorationDelta> decoration =
+final FVariants<FTappableVariantConstraint, FTappableVariant, BoxDecoration, BoxDecorationDelta> decoration =
     // {@snippet constructor}
     FVariants(
       // base (default if no variants match)

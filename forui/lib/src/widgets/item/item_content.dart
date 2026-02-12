@@ -18,7 +18,7 @@ class ItemContent extends StatelessWidget {
   final double top;
   final double bottom;
   final Set<FTappableVariant> variants;
-  final FVariants<FItemGroupVariantConstraint, Color, Delta>? dividerColor;
+  final FVariants<FItemGroupVariantConstraint, FItemGroupVariant, Color, Delta>? dividerColor;
   final double? dividerWidth;
   final FItemDivider dividerType;
   final Widget? prefix;
@@ -140,7 +140,7 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
 
   /// The prefix icon style.
   @override
-  final FVariants<FTappableVariantConstraint, IconThemeData, IconThemeDataDelta> prefixIconStyle;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> prefixIconStyle;
 
   /// The horizontal spacing between the prefix icon and title and the subtitle. Defaults to 10.
   ///
@@ -151,7 +151,7 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
 
   /// The title's text style.
   @override
-  final FVariants<FTappableVariantConstraint, TextStyle, TextStyleDelta> titleTextStyle;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> titleTextStyle;
 
   /// The vertical spacing between the title and the subtitle. Defaults to 4.
   ///
@@ -162,7 +162,7 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
 
   /// The subtitle's text style.
   @override
-  final FVariants<FTappableVariantConstraint, TextStyle, TextStyleDelta> subtitleTextStyle;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> subtitleTextStyle;
 
   /// The minimum horizontal spacing between the title, subtitle, combined, and the details. Defaults to 4.
   ///
@@ -173,11 +173,11 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
 
   /// The details text style.
   @override
-  final FVariants<FTappableVariantConstraint, TextStyle, TextStyleDelta> detailsTextStyle;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> detailsTextStyle;
 
   /// The suffix icon style.
   @override
-  final FVariants<FTappableVariantConstraint, IconThemeData, IconThemeDataDelta> suffixIconStyle;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> suffixIconStyle;
 
   /// The horizontal spacing between the details and suffix icon. Defaults to 10.
   ///
@@ -213,31 +213,31 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
   }) {
     final disabledMutedForeground = colors.disable(mutedForeground);
     return FItemContentStyle(
-      prefixIconStyle: .delta(
+      prefixIconStyle: FVariants.from(
         IconThemeData(color: prefix, size: 15),
         variants: {
           [.disabled]: .delta(color: colors.disable(prefix)),
         },
       ),
-      titleTextStyle: .delta(
+      titleTextStyle: FVariants.from(
         typography.sm.copyWith(color: foreground),
         variants: {
           [.disabled]: .delta(color: colors.disable(foreground)),
         },
       ),
-      subtitleTextStyle: .delta(
+      subtitleTextStyle: FVariants.from(
         typography.xs.copyWith(color: mutedForeground),
         variants: {
           [.disabled]: .delta(color: disabledMutedForeground),
         },
       ),
-      detailsTextStyle: .delta(
+      detailsTextStyle: FVariants.from(
         typography.xs.copyWith(color: mutedForeground),
         variants: {
           [.disabled]: .delta(color: disabledMutedForeground),
         },
       ),
-      suffixIconStyle: .delta(
+      suffixIconStyle: FVariants.from(
         IconThemeData(color: mutedForeground, size: 15),
         variants: {
           [.disabled]: .delta(color: disabledMutedForeground),

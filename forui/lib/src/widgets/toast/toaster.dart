@@ -28,7 +28,7 @@ import 'package:forui/src/widgets/toast/toaster_stack.dart';
 FToasterEntry showFToast({
   required BuildContext context,
   required Widget title,
-  FToastStyleDelta style = const .inherit(),
+  FToastStyleDelta style = const .context(),
   Widget? icon,
   Widget? description,
   Widget Function(BuildContext context, FToasterEntry entry)? suffixBuilder,
@@ -95,7 +95,7 @@ FToasterEntry showFToast({
 FToasterEntry showRawFToast({
   required BuildContext context,
   required Widget Function(BuildContext context, FToasterEntry entry) builder,
-  FToastStyleDelta style = const .inherit(),
+  FToastStyleDelta style = const .context(),
   FToastAlignment? alignment,
   List<AxisDirection>? swipeToDismiss,
   Duration? duration = const Duration(seconds: 5),
@@ -259,7 +259,7 @@ class FToaster extends StatefulWidget {
   final Widget child;
 
   /// Creates a [FToaster] widget.
-  const FToaster({required this.child, this.style = const .inherit(), super.key});
+  const FToaster({required this.child, this.style = const .context(), super.key});
 
   @override
   State<FToaster> createState() => FToasterState();
@@ -283,7 +283,7 @@ class FToasterState extends State<FToaster> {
   FToasterEntry show({
     required Widget Function(BuildContext context, FToasterEntry entry) builder,
     BuildContext? context,
-    FToastStyleDelta style = const .inherit(),
+    FToastStyleDelta style = const .context(),
     FToastAlignment? alignment,
     List<AxisDirection>? swipeToDismiss,
     Duration? duration = const Duration(seconds: 5),

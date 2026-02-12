@@ -148,7 +148,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
   /// {@endtemplate}
   FTileGroup({
     required List<FTileMixin> children,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.scrollController,
     this.cacheExtent,
     this.maxHeight = .infinity,
@@ -198,7 +198,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
   FTileGroup.builder({
     required NullableIndexedWidgetBuilder tileBuilder,
     int? count,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.scrollController,
     this.cacheExtent,
     this.maxHeight = .infinity,
@@ -240,7 +240,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
   /// {@endtemplate}
   FTileGroup.merge({
     required List<FTileGroupMixin> children,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.scrollController,
     this.cacheExtent,
     this.maxHeight = .infinity,
@@ -367,7 +367,7 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
 
   /// The divider's style.
   @override
-  final FVariants<FItemGroupVariantConstraint, Color, Delta> dividerColor;
+  final FVariants<FItemGroupVariantConstraint, FItemGroupVariant, Color, Delta> dividerColor;
 
   /// The divider's width.
   @override
@@ -375,7 +375,7 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
 
   /// The tile's styles.
   @override
-  final FVariants<FItemVariantConstraint, FTileStyle, FTileStyleDelta> tileStyles;
+  final FVariants<FItemVariantConstraint, FItemVariant, FTileStyle, FTileStyleDelta> tileStyles;
 
   /// Creates a [FTileGroupStyle].
   FTileGroupStyle({
@@ -402,7 +402,7 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
         ),
         dividerColor: .all(colors.border),
         dividerWidth: style.borderWidth,
-        labelTextStyle: .delta(
+        labelTextStyle: FVariants.from(
           typography.base.copyWith(
             color: style.formFieldStyle.labelTextStyle.base.color ?? colors.foreground,
             fontWeight: .w600,
@@ -411,12 +411,12 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
             [.disabled]: .delta(color: colors.disable(colors.foreground)),
           },
         ),
-        tileStyles: .delta(
+        tileStyles: FVariants.from(
           .inherit(
             colors: colors,
             typography: typography,
             style: style,
-          ).copyWith(decoration: .apply([.onAll(const .delta(border: null, borderRadius: null))])),
+          ).copyWith(decoration: .delta([.all(const .delta(border: null, borderRadius: null))])),
           variants: {
             [.destructive]: .delta(
               contentStyle: FItemContentStyle.inherit(
@@ -436,10 +436,10 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
           },
         ),
         descriptionTextStyle: style.formFieldStyle.descriptionTextStyle.apply([
-          .onAll(.delta(fontSize: typography.xs.fontSize, height: typography.xs.height)),
+          .all(.delta(fontSize: typography.xs.fontSize, height: typography.xs.height)),
         ]),
         errorTextStyle: style.formFieldStyle.errorTextStyle.apply([
-          .onAll(.delta(fontSize: typography.xs.fontSize, height: typography.xs.height, fontWeight: .w400)),
+          .all(.delta(fontSize: typography.xs.fontSize, height: typography.xs.height, fontWeight: .w400)),
         ]),
       );
 }

@@ -146,7 +146,7 @@ class FButton extends StatelessWidget {
     required Widget child,
     this.variant,
     this.size,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.onLongPress,
     this.onSecondaryPress,
     this.onSecondaryLongPress,
@@ -183,7 +183,7 @@ class FButton extends StatelessWidget {
     required Widget child,
     this.variant = .outline,
     this.size,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.onLongPress,
     this.onSecondaryPress,
     this.onSecondaryLongPress,
@@ -204,7 +204,7 @@ class FButton extends StatelessWidget {
     required this.child,
     this.variant,
     this.size,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.onLongPress,
     this.onSecondaryPress,
     this.onSecondaryLongPress,
@@ -267,8 +267,8 @@ class FButton extends StatelessWidget {
 }
 
 /// [FButtonStyle]'s style.
-extension type FButtonStyles._(FVariants<FButtonVariantConstraint, FButtonSizes, FButtonSizesDelta> _)
-    implements FVariants<FButtonVariantConstraint, FButtonSizes, FButtonSizesDelta> {
+extension type FButtonStyles._(FVariants<FButtonVariantConstraint, FButtonVariant, FButtonSizes, FButtonSizesDelta> _)
+    implements FVariants<FButtonVariantConstraint, FButtonVariant, FButtonSizes, FButtonSizesDelta> {
   /// Creates a [FButtonStyles] that inherits its properties.
   FButtonStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this._(
@@ -276,7 +276,7 @@ extension type FButtonStyles._(FVariants<FButtonVariantConstraint, FButtonSizes,
           FButtonSizeStyles.inherit(
             typography: typography,
             style: style,
-            decoration: .delta(
+            decoration: FVariants.from(
               BoxDecoration(borderRadius: style.borderRadius, color: colors.primary),
               variants: {
                 [.hovered, .pressed]: .delta(color: colors.hover(colors.primary)),
@@ -291,7 +291,7 @@ extension type FButtonStyles._(FVariants<FButtonVariantConstraint, FButtonSizes,
             [.secondary]: FButtonSizeStyles.inherit(
               typography: typography,
               style: style,
-              decoration: .delta(
+              decoration: FVariants.from(
                 BoxDecoration(borderRadius: style.borderRadius, color: colors.secondary),
                 variants: {
                   [.hovered, .pressed]: .delta(color: colors.hover(colors.secondary)),
@@ -305,7 +305,7 @@ extension type FButtonStyles._(FVariants<FButtonVariantConstraint, FButtonSizes,
             [.destructive]: FButtonSizeStyles.inherit(
               typography: typography,
               style: style,
-              decoration: .delta(
+              decoration: FVariants.from(
                 BoxDecoration(
                   borderRadius: style.borderRadius,
                   color: colors.destructive.withValues(alpha: colors.brightness == .light ? 0.1 : 0.2),
@@ -326,7 +326,7 @@ extension type FButtonStyles._(FVariants<FButtonVariantConstraint, FButtonSizes,
             [.outline]: FButtonSizeStyles.inherit(
               typography: typography,
               style: style,
-              decoration: .delta(
+              decoration: FVariants.from(
                 BoxDecoration(
                   border: .all(color: colors.border),
                   borderRadius: style.borderRadius,
@@ -344,7 +344,7 @@ extension type FButtonStyles._(FVariants<FButtonVariantConstraint, FButtonSizes,
             [.ghost]: FButtonSizeStyles.inherit(
               typography: typography,
               style: style,
-              decoration: .delta(
+              decoration: FVariants.from(
                 BoxDecoration(borderRadius: style.borderRadius),
                 variants: {
                   [.hovered, .pressed]: .delta(color: colors.secondary),
@@ -360,21 +360,23 @@ extension type FButtonStyles._(FVariants<FButtonVariantConstraint, FButtonSizes,
       );
 }
 
-/// An alias for `FVariants<FButtonSizeVariantConstraint, FButtonStyle, FButtonStyleDelta>`.
-typedef FButtonSizes = FVariants<FButtonSizeVariantConstraint, FButtonStyle, FButtonStyleDelta>;
+/// An alias for `FVariants<FButtonSizeVariantConstraint, FButtonSizeVariant, FButtonStyle, FButtonStyleDelta>`.
+typedef FButtonSizes = FVariants<FButtonSizeVariantConstraint, FButtonSizeVariant, FButtonStyle, FButtonStyleDelta>;
 
 /// An alias for the [FButtonSizeStyles]' delta.
 typedef FButtonSizesDelta =
     FVariantsDelta<FButtonSizeVariantConstraint, FButtonSizeVariant, FButtonStyle, FButtonStyleDelta>;
 
 /// [FButtonStyle]'s size styles.
-extension type FButtonSizeStyles._(FVariants<FButtonSizeVariantConstraint, FButtonStyle, FButtonStyleDelta> _)
-    implements FVariants<FButtonSizeVariantConstraint, FButtonStyle, FButtonStyleDelta> {
+extension type FButtonSizeStyles._(
+  FVariants<FButtonSizeVariantConstraint, FButtonSizeVariant, FButtonStyle, FButtonStyleDelta> _
+)
+    implements FVariants<FButtonSizeVariantConstraint, FButtonSizeVariant, FButtonStyle, FButtonStyleDelta> {
   /// Creates a [FButtonSizeStyles] that inherits its properties.
   factory FButtonSizeStyles.inherit({
     required FTypography typography,
     required FStyle style,
-    required FVariants<FTappableVariantConstraint, BoxDecoration, BoxDecorationDelta> decoration,
+    required FVariants<FTappableVariantConstraint, FTappableVariant, BoxDecoration, BoxDecorationDelta> decoration,
     required Color foregroundColor,
     required Color disabledForegroundColor,
   }) {
@@ -388,19 +390,19 @@ extension type FButtonSizeStyles._(FVariants<FButtonSizeVariantConstraint, FButt
       decoration: decoration,
       focusedOutlineStyle: style.focusedOutlineStyle,
       contentStyle: FButtonContentStyle(
-        textStyle: .delta(
+        textStyle: FVariants.from(
           textStyle.copyWith(color: foregroundColor, fontWeight: .w500, height: 1, leadingDistribution: .even),
           variants: {
             [.disabled]: .delta(color: disabledForegroundColor),
           },
         ),
-        iconStyle: .delta(
+        iconStyle: FVariants.from(
           IconThemeData(color: foregroundColor, size: iconSize),
           variants: {
             [.disabled]: .delta(color: disabledForegroundColor),
           },
         ),
-        circularProgressStyle: .delta(
+        circularProgressStyle: FVariants.from(
           FCircularProgressStyle(
             iconStyle: IconThemeData(color: foregroundColor, size: iconSize),
           ),
@@ -412,7 +414,7 @@ extension type FButtonSizeStyles._(FVariants<FButtonSizeVariantConstraint, FButt
         spacing: contentSpacing,
       ),
       iconContentStyle: FButtonIconContentStyle(
-        iconStyle: .delta(
+        iconStyle: FVariants.from(
           IconThemeData(color: foregroundColor, size: iconSize),
           variants: {
             [.disabled]: .delta(color: disabledForegroundColor),
@@ -464,7 +466,7 @@ extension type FButtonSizeStyles._(FVariants<FButtonSizeVariantConstraint, FButt
 final class FButtonStyle with Diagnosticable, _$FButtonStyleFunctions {
   /// The box decoration.
   @override
-  final FVariants<FTappableVariantConstraint, BoxDecoration, BoxDecorationDelta> decoration;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, BoxDecoration, BoxDecorationDelta> decoration;
 
   /// The content's style.
   @override

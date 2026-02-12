@@ -215,7 +215,7 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
     this.selectControl,
     this.popoverControl = const .managed(),
     this.scrollController,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.cacheExtent,
     this.maxHeight = .infinity,
     this.dragStartBehavior = .start,
@@ -271,7 +271,7 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
     FMultiValueControl<T>? selectControl,
     FPopoverControl popoverControl = const .managed(),
     ScrollController? scrollController,
-    FSelectMenuTileStyleDelta style = const .inherit(),
+    FSelectMenuTileStyleDelta style = const .context(),
     double? cacheExtent,
     double maxHeight = .infinity,
     DragStartBehavior dragStartBehavior = .start,
@@ -381,7 +381,7 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
     this.selectControl,
     this.popoverControl = const .managed(),
     this.scrollController,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.cacheExtent,
     this.maxHeight = .infinity,
     this.dragStartBehavior = .start,
@@ -528,7 +528,7 @@ class _FSelectMenuTileState<T> extends State<FSelectMenuTile<T>> with TickerProv
     final selectMenuTileStyle = widget.style(global);
 
     final menuStyle = selectMenuTileStyle.menuStyle;
-    final tileStyle = widget.style == const .inherit()
+    final tileStyle = widget.style == const .context()
         ? (inheritedStyle?.tileStyles.base ?? global.tileStyle)
         : selectMenuTileStyle.tileStyle;
 

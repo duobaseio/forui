@@ -56,7 +56,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
   const FBottomNavigationBarItem({
     required this.icon,
     this.label,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
@@ -115,11 +115,11 @@ class FBottomNavigationBarItem extends StatelessWidget {
 class FBottomNavigationBarItemStyle with Diagnosticable, _$FBottomNavigationBarItemStyleFunctions {
   /// The icon's style.
   @override
-  final FVariants<FTappableVariantConstraint, IconThemeData, IconThemeDataDelta> iconStyle;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> iconStyle;
 
   /// The text style.
   @override
-  final FVariants<FTappableVariantConstraint, TextStyle, TextStyleDelta> textStyle;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> textStyle;
 
   /// The padding. Defaults to `EdgeInsets.all(5)`.
   @override
@@ -153,13 +153,13 @@ class FBottomNavigationBarItemStyle with Diagnosticable, _$FBottomNavigationBarI
     required FTypography typography,
     required FStyle style,
   }) : this(
-         iconStyle: .delta(
+         iconStyle: FVariants.from(
            IconThemeData(color: colors.disable(colors.foreground), size: 24),
            variants: {
              [.selected]: .delta(color: colors.primary),
            },
          ),
-         textStyle: .delta(
+         textStyle: FVariants.from(
            typography.base.copyWith(color: colors.disable(colors.foreground), fontSize: 10),
            variants: {
              [.selected]: .delta(color: colors.primary),

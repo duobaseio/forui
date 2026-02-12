@@ -20,15 +20,15 @@ part 'form_field_style.design.dart';
 class FFormFieldStyle with Diagnosticable, _$FFormFieldStyleFunctions {
   /// The label's text style.
   @override
-  final FVariants<FFormFieldVariantConstraint, TextStyle, TextStyleDelta> labelTextStyle;
+  final FVariants<FFormFieldVariantConstraint, FFormFieldVariant, TextStyle, TextStyleDelta> labelTextStyle;
 
   /// The description's text style.
   @override
-  final FVariants<FFormFieldVariantConstraint, TextStyle, TextStyleDelta> descriptionTextStyle;
+  final FVariants<FFormFieldVariantConstraint, FFormFieldVariant, TextStyle, TextStyleDelta> descriptionTextStyle;
 
   /// The error's text style.
   @override
-  final FVariants<FFormFieldErrorVariantConstraint, TextStyle, TextStyleDelta> errorTextStyle;
+  final FVariants<FFormFieldErrorVariantConstraint, FFormFieldErrorVariant, TextStyle, TextStyleDelta> errorTextStyle;
 
   /// Creates a [FFormFieldStyle].
   const FFormFieldStyle({
@@ -39,7 +39,7 @@ class FFormFieldStyle with Diagnosticable, _$FFormFieldStyleFunctions {
 
   /// Creates a [FFormFieldStyle] that inherits its properties.
   FFormFieldStyle.inherit({required FColors colors, required FTypography typography})
-    : labelTextStyle = .delta(
+    : labelTextStyle = FVariants.from(
         typography.sm.copyWith(color: colors.foreground, fontWeight: .w600),
         variants: {
           [.error]: .delta(color: colors.error),
@@ -47,13 +47,13 @@ class FFormFieldStyle with Diagnosticable, _$FFormFieldStyleFunctions {
           [.disabled.and(.error)]: .delta(color: colors.disable(colors.error)),
         },
       ),
-      descriptionTextStyle = .delta(
+      descriptionTextStyle = FVariants.from(
         typography.sm.copyWith(color: colors.mutedForeground),
         variants: {
           [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
         },
       ),
-      errorTextStyle = .delta(
+      errorTextStyle = FVariants.from(
         typography.sm.copyWith(color: colors.error, fontWeight: .w600),
         variants: {
           [.disabled]: .delta(color: colors.disable(colors.error)),

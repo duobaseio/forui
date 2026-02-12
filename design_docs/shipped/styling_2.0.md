@@ -685,13 +685,14 @@ We observe that a base value **is** the default value, and modifications are del
 created using either mapping to deltas or concrete values.
 
 ```dart
-class FVariants<K extends FVariantConstraint, V, D extends Delta<V>> {
+class FVariants<K extends FVariantConstraint, E extends FVariant, V, D extends Delta>
+    implements FVariantsDelta<K, E, V, D>, FVariantsValueDelta<K, E, V, D> {
   final V base;
   final Map<K, V> variants;
 
   FVariants(this.base, {required Map<List<K>, V> variants});
 
-  FVariants.delta(this.base, {required Map<List<K>, D> variants});
+  FVariants.from(this.base, {required Map<List<K>, D> variants});
 
   const FVariants.all(this.base) : variants = const {};
 }
@@ -709,7 +710,7 @@ FooStyle(
 
 // Creation using deltas
 FTappableStyle(
-  decoration: FVariants.delta(
+  decoration: FVariants.from(
     BoxDecoration(
       color: Colors.white,
       borderRadius: BorderRadius.circular(8),
@@ -722,8 +723,8 @@ FTappableStyle(
 );
 ```
 
-Unlike style deltas, `FVariantsDelta` and `FVariantsValueDelta` use `.apply(...)` instead of `.delta(...)` since typical 
-usage is a sequence of operations and order matters (add-then-modify ≠ modify-then-add). 
+`FVariants` implements both `FVariantsDelta` and `FVariantsValueDelta`, allowing it to be passed directly where a delta
+is expected. This eliminates the need for a `.value(...)` constructor on the delta types.
 
 In general, there are 3 types of operations:
 * Adding a new variant.
@@ -731,38 +732,35 @@ In general, there are 3 types of operations:
 * Removing an existing variant.
 
 ```dart
-class FVariantsDelta<K extends FVariantConstraint, E extends FVariant, V, D extends Delta<V>>
-    with Delta<FVariants<K, V, D>> {
+class FVariantsDelta<K extends FVariantConstraint, E extends FVariant, V, D extends Delta>
+    with Delta {
   // Creates a sequence of modifications to [FVariants].
-  FVariantsDelta.apply(List<FVariantDeltaOperation<V, T, D>> operations);
-
-  // Creates a complete replacement of a [FVariants].
-  FVariantsDelta.value(FVariants<V, T, D> variants);
+  FVariantsDelta.delta(List<FVariantOperation<K, E, V, D>> operations);
 }
 
 // Delta-based operations.
-class FVariantOperation<K extends FVariantConstraint, E extends FVariant, V, D extends Delta<V>> {
+class FVariantOperation<K extends FVariantConstraint, E extends FVariant, V, D extends Delta> {
   // Applies [delta] to the base without modifying existing variants.
-  FVariantOperation.onBase(D delta);
+  FVariantOperation.base(D delta);
 
   // Applies [delta] to the base and associates the result with each constraint in [constraints].
   // Creates exact entries rather than matching existing variants.
-  FVariantOperation.on(Set<K> constraints, D delta);
+  FVariantOperation.exact(Set<K> constraints, D delta);
 
   // Applies [delta] to existing variants whose constraint's variants are all present in [variants].
-  FVariantOperation.onMatching(Set<E> variants, D delta);
+  FVariantOperation.match(Set<E> variants, D delta);
 
   // Applies [delta] to all variants.
-  FVariantOperation.onVariants(D delta);
+  FVariantOperation.variants(D delta);
 
   // Applies [delta] to all variants and base.
-  FVariantOperation.onAll(D delta);
+  FVariantOperation.all(D delta);
 
   // Removes exact [constraints] from existing variants.
   FVariantOperation.remove(Set<K> constraints);
 
   // Removes existing variants whose constraint's variants are all present in [variants].
-  FVariantOperation.removeMatching(Set<E> variants);
+  FVariantOperation.removeMatch(Set<E> variants);
 
   // Removes all variants.
   FVariantOperation.removeAll();
@@ -770,51 +768,49 @@ class FVariantOperation<K extends FVariantConstraint, E extends FVariant, V, D e
 ```
 
 ```dart
-class FVariantsValueDelta<K extends FVariantConstraint, E extends FVariant, V> with Delta<FVariants<K, V, Delta<V>>>  {
+class FVariantsValueDelta<K extends FVariantConstraint, E extends FVariant, V, D extends Delta>
+    with Delta {
   // Creates a sequence of modifications to [FVariants].
-  FVariantsValueDelta.apply(List<FVariantValueDeltaOperation<K, E, V>> operations);
-
-  // Creates a complete replacement of a [FVariants].
-  FVariantsValueDelta.value(FVariants<K, V, Delta<V>> variants);
+  FVariantsValueDelta.delta(List<FVariantValueDeltaOperation<K, E, V, D>> operations);
 }
 
 // Concrete value-based operations
-class FVariantValueDeltaOperation<K extends FVariantConstraint, E extends FVariant, V>  {
+class FVariantValueDeltaOperation<K extends FVariantConstraint, E extends FVariant, V, D extends Delta> {
   // Replaces the base with [base].
-  FVariantValueDeltaOperation.onBase(V base);
+  FVariantValueDeltaOperation.base(V base);
 
   // Sets [value] for each constraint in [constraints], creating or overriding entries.
   // Creates exact entries rather than matching existing variants.
-  FVariantValueDeltaOperation.on(Set<K> constraints, V value);
+  FVariantValueDeltaOperation.exact(Set<K> constraints, V value);
 
   // Replaces existing variants whose constraint's variants are all present in [variants].
-  FVariantValueDeltaOperation.onMatching(Set<E> variants, V value);
+  FVariantValueDeltaOperation.match(Set<E> variants, V value);
 
   // Replaces all variants with [value].
-  FVariantValueDeltaOperation.onVariants(V value);
+  FVariantValueDeltaOperation.variants(V value);
 
   // Replaces all variants and base with [value].
-  FVariantValueDeltaOperation.onAll(V value);
+  FVariantValueDeltaOperation.all(V value);
 
   // Removes exact [constraints] from existing variants.
   FVariantValueDeltaOperation.remove(Set<K> constraints);
 
   // Removes existing variants whose constraint's variants are all present in [variants].
-  FVariantValueDeltaOperation.removeMatching(Set<E> variants);
+  FVariantValueDeltaOperation.removeMatch(Set<E> variants);
 
   // Removes all variants.
   FVariantValueDeltaOperation.removeAll();
 }
 ```
 
-The `on` and `remove` operations work on **exact** constraint entries. For example, `.on({.hovered, .focused}, delta)`
+The `exact` and `remove` operations work on **exact** constraint entries. For example, `.exact({.hovered, .focused}, delta)`
 creates separate entries for `.hovered` and `.focused`, but not `.hovered.and(.focused)`.
 
-In contrast, `onMatching` and `removeMatching` match constraints whose variants are all present in the given set.
-For example, `.onMatching({.hovered, .focused}, delta)` affects constraints that are **satisfied by** `{.hovered, .focused}`:
+In contrast, `match` and `removeMatch` match constraints whose variants are all present in the given set.
+For example, `.match({.hovered, .focused}, delta)` affects constraints that are **satisfied by** `{.hovered, .focused}`:
 
 ```dart
-final decoration = FVariants.delta(
+final decoration = FVariants.from(
   BoxDecoration(color: Colors.white),
   variants: {
     [.hovered]: .delta(color: Colors.blue),                   // ✓ hovered ⊆ {hovered, focused}
@@ -834,9 +830,9 @@ FTappable(
   // Delta using style delta
   style: .delta(
     // Apply all modifications without needing to extract base variant.
-    decoration: .apply([
-      .onMatching({.hovered}, .delta(color: Colors.blue)),
-      .onMatching({.pressed}, .delta(color: Colors.darkBlue)),
+    decoration: .delta([
+      .match({.hovered}, .delta(color: Colors.blue)),
+      .match({.pressed}, .delta(color: Colors.darkBlue)),
     ]),
   ),
 )
@@ -849,8 +845,8 @@ Lastly, `FVariants` also provides `apply(...)` and `applyValues(...)` which dire
 
 ```dart
 final updated = variants.apply([
-  .onAll(.delta(color: Colors.blue)),
-  .on({.disabled}, .delta(color: Colors.grey)),
+  .all(.delta(color: Colors.blue)),
+  .exact({.disabled}, .delta(color: Colors.grey)),
 ]);
 ```
 

@@ -39,7 +39,7 @@ class FToast extends StatelessWidget {
   /// Creates a [FToast].
   const FToast({
     required this.title,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.icon,
     this.description,
     this.suffix,

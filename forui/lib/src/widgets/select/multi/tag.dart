@@ -71,7 +71,7 @@ class FMultiSelectTag extends StatelessWidget {
   /// Creates a [FMultiSelectTag].
   const FMultiSelectTag({
     required this.label,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
@@ -145,7 +145,7 @@ class FMultiSelectTag extends StatelessWidget {
 class FMultiSelectTagStyle with Diagnosticable, _$FMultiSelectTagStyleFunctions {
   /// The decoration.
   @override
-  final FVariants<FMultiSelectTagVariantConstraint, Decoration, Delta> decoration;
+  final FVariants<FMultiSelectTagVariantConstraint, FMultiSelectTagVariant, Decoration, Delta> decoration;
 
   /// The padding. Defaults to `EdgeInsets.symmetric(vertical: 4, horizontal: 8)`.
   ///
@@ -159,11 +159,12 @@ class FMultiSelectTagStyle with Diagnosticable, _$FMultiSelectTagStyleFunctions 
 
   /// The label's text style.
   @override
-  final FVariants<FMultiSelectTagVariantConstraint, TextStyle, TextStyleDelta> labelTextStyle;
+  final FVariants<FMultiSelectTagVariantConstraint, FMultiSelectTagVariant, TextStyle, TextStyleDelta> labelTextStyle;
 
   /// The icon's style.
   @override
-  final FVariants<FMultiSelectTagVariantConstraint, IconThemeData, IconThemeDataDelta> iconStyle;
+  final FVariants<FMultiSelectTagVariantConstraint, FMultiSelectTagVariant, IconThemeData, IconThemeDataDelta>
+  iconStyle;
 
   /// The tappable style.
   @override
@@ -198,13 +199,13 @@ class FMultiSelectTagStyle with Diagnosticable, _$FMultiSelectTagStyleFunctions 
             [.disabled]: BoxDecoration(borderRadius: style.borderRadius, color: colors.disable(colors.secondary)),
           },
         ),
-        labelTextStyle: .delta(
+        labelTextStyle: FVariants.from(
           typography.sm.copyWith(color: colors.secondaryForeground),
           variants: {
             [.disabled]: .delta(color: colors.disable(colors.secondaryForeground)),
           },
         ),
-        iconStyle: .delta(
+        iconStyle: FVariants.from(
           IconThemeData(color: colors.mutedForeground, size: 15),
           variants: {
             [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),

@@ -74,7 +74,7 @@ Future<T?> showFSheet<T>({
   required WidgetBuilder builder,
   required FLayout side,
   bool useRootNavigator = false,
-  FModalSheetStyleDelta style = const .inherit(),
+  FModalSheetStyleDelta style = const .context(),
   double? mainAxisMaxRatio = 9 / 16,
   bool useSafeArea = false,
   bool resizeToAvoidBottomInset = true,

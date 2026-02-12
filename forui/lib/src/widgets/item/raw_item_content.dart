@@ -18,7 +18,7 @@ class RawItemContent extends StatelessWidget {
   final double top;
   final double bottom;
   final Set<FTappableVariant> variants;
-  final FVariants<FItemGroupVariantConstraint, Color, Delta>? dividerColor;
+  final FVariants<FItemGroupVariantConstraint, FItemGroupVariant, Color, Delta>? dividerColor;
   final double? dividerWidth;
   final FItemDivider dividerType;
   final Widget? prefix;
@@ -93,7 +93,7 @@ class FRawItemContentStyle with Diagnosticable, _$FRawItemContentStyleFunctions 
 
   /// The prefix icon style.
   @override
-  final FVariants<FTappableVariantConstraint, IconThemeData, IconThemeDataDelta> prefixIconStyle;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> prefixIconStyle;
 
   /// The horizontal spacing between the prefix icon and child. Defaults to 10.
   ///
@@ -104,7 +104,7 @@ class FRawItemContentStyle with Diagnosticable, _$FRawItemContentStyleFunctions 
 
   /// The child's text style.
   @override
-  final FVariants<FTappableVariantConstraint, TextStyle, TextStyleDelta> childTextStyle;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> childTextStyle;
 
   /// Creates a [FRawItemContentStyle].
   FRawItemContentStyle({
@@ -121,7 +121,7 @@ class FRawItemContentStyle with Diagnosticable, _$FRawItemContentStyleFunctions 
     required Color prefix,
     required Color color,
   }) : this(
-         prefixIconStyle: .delta(
+         prefixIconStyle: FVariants.from(
            IconThemeData(color: prefix, size: 15),
            variants: {
              [.disabled]: .delta(color: colors.disable(prefix)),

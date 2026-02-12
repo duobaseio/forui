@@ -96,7 +96,7 @@ class FCalendar extends StatefulWidget {
   /// new [initialMonth]. This will reset the widget's interactive state.
   FCalendar({
     required this.control,
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.dayBuilder = defaultDayBuilder,
     this.onMonthChange,
     this.onPress,
@@ -283,7 +283,7 @@ class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
               [.disabled]: null,
             },
           ),
-          textStyle: .delta(
+          textStyle: FVariants.from(
             typography.base.copyWith(color: colors.foreground, fontWeight: .w500),
             variants: {
               [.disabled]: .delta(color: colors.disable(colors.foreground)),

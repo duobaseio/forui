@@ -38,7 +38,7 @@ class FDeterminateProgress extends StatefulWidget {
   final double value;
 
   /// Creates a determinate [FDeterminateProgress].
-  const FDeterminateProgress({required this.value, this.style = const .inherit(), this.semanticsLabel, super.key})
+  const FDeterminateProgress({required this.value, this.style = const .context(), this.semanticsLabel, super.key})
     : assert((0.0 <= value && value <= 1.0), 'value ($value) must be between 0.0 and 1.0');
 
   @override

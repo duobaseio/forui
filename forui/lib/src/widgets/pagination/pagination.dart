@@ -50,7 +50,7 @@ class FPagination extends StatefulWidget {
   /// Creates an [FPagination].
   const FPagination({
     this.control = const .managed(),
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.previous,
     this.next,
     super.key,

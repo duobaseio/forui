@@ -65,7 +65,7 @@ class FSliderMark with Diagnosticable {
 class FSliderMarkStyle with Diagnosticable, _$FSliderMarkStyleFunctions {
   /// The tick's color.
   @override
-  final FVariants<FSliderVariantConstraint, Color, Delta> tickColor;
+  final FVariants<FSliderVariantConstraint, FSliderVariant, Color, Delta> tickColor;
 
   /// The tick's size. Defaults to 3.
   ///
@@ -76,7 +76,7 @@ class FSliderMarkStyle with Diagnosticable, _$FSliderMarkStyleFunctions {
 
   /// The label's default text style.
   @override
-  final FVariants<FSliderVariantConstraint, TextStyle, TextStyleDelta> labelTextStyle;
+  final FVariants<FSliderVariantConstraint, FSliderVariant, TextStyle, TextStyleDelta> labelTextStyle;
 
   /// The label's anchor to which the [labelOffset] is applied.
   @override

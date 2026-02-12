@@ -22,7 +22,7 @@ mixin FItemMixin on Widget {
   static FItem item({
     required Widget title,
     Set<FItemVariant> variants = const {},
-    FItemStyleDelta style = const .inherit(),
+    FItemStyleDelta style = const .context(),
     bool? enabled,
     bool selected = false,
     String? semanticsLabel,
@@ -73,7 +73,7 @@ mixin FItemMixin on Widget {
   static FItem raw({
     required Widget child,
     Set<FItemVariant> variants = const {},
-    FItemStyleDelta style = const .inherit(),
+    FItemStyleDelta style = const .context(),
     bool? enabled,
     bool selected = false,
     String? semanticsLabel,
@@ -255,7 +255,7 @@ class FItem extends StatelessWidget with FItemMixin {
     double top,
     double bottom,
     Set<FTappableVariant> variants,
-    FVariants<FItemGroupVariantConstraint, Color, Delta>? color,
+    FVariants<FItemGroupVariantConstraint, FItemGroupVariant, Color, Delta>? color,
     double? width,
     FItemDivider divider,
   )
@@ -287,7 +287,7 @@ class FItem extends StatelessWidget with FItemMixin {
   FItem({
     required Widget title,
     this.variants = const {},
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.enabled,
     this.selected = false,
     this.semanticsLabel,
@@ -338,7 +338,7 @@ class FItem extends StatelessWidget with FItemMixin {
   FItem.raw({
     required Widget child,
     this.variants = const {},
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.enabled,
     this.selected = false,
     this.semanticsLabel,
@@ -464,12 +464,12 @@ class FItem extends StatelessWidget with FItemMixin {
 }
 
 /// The item styles.
-extension type FItemStyles._(FVariants<FItemVariantConstraint, FItemStyle, FItemStyleDelta> _)
-    implements FVariants<FItemVariantConstraint, FItemStyle, FItemStyleDelta> {
+extension type FItemStyles._(FVariants<FItemVariantConstraint, FItemVariant, FItemStyle, FItemStyleDelta> _)
+    implements FVariants<FItemVariantConstraint, FItemVariant, FItemStyle, FItemStyleDelta> {
   /// Creates a [FItemStyles] that inherits its properties.
   FItemStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this._(
-        .delta(
+        FVariants.from(
           .inherit(colors: colors, typography: typography, style: style),
           variants: {
             [.destructive]: .delta(
@@ -501,7 +501,7 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
   ///
   /// This is useful for setting a background color when [margin] is not zero.
   @override
-  final FVariants<FTappableVariantConstraint, Color?, Delta> backgroundColor;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, Color?, Delta> backgroundColor;
 
   /// The margin around the item, including the [decoration].
   ///
@@ -511,7 +511,7 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
 
   /// The item's decoration.
   @override
-  final FVariants<FTappableVariantConstraint, BoxDecoration, BoxDecorationDelta> decoration;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, BoxDecoration, BoxDecorationDelta> decoration;
 
   /// The default item content's style.
   @override
@@ -549,7 +549,7 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
             [.disabled]: colors.background,
           },
         ),
-        decoration: .delta(
+        decoration: FVariants.from(
           BoxDecoration(color: colors.background, borderRadius: style.borderRadius),
           variants: {
             [.hovered, .pressed]: .delta(color: colors.secondary),

@@ -6,14 +6,12 @@ final accordion =
     // {@snippet constructor}
     FAccordion(
       style: .delta(
-        titleTextStyle: .value(
-          FVariants.delta(
-            const TextStyle(fontSize: 18, fontWeight: .bold),
-            variants: {
-              [.hovered, .pressed]: const .delta(decoration: .underline),
-              [.disabled]: const .delta(color: Colors.grey),
-            },
-          ),
+        titleTextStyle: FVariants.from(
+          const TextStyle(fontSize: 18, fontWeight: .bold),
+          variants: {
+            [.hovered, .pressed]: const TextStyleDelta.delta(decoration: TextDecoration.underline),
+            [.disabled]: const TextStyleDelta.delta(color: Colors.grey),
+          },
         ),
       ),
       children: const [],

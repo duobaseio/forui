@@ -32,7 +32,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   static Widget password({
     FTextFieldControl control = const .managed(),
     FObscureTextControl obscureTextControl = const .managed(),
-    FTextFieldStyleDelta style = const .inherit(),
+    FTextFieldStyleDelta style = const .context(),
     FFieldBuilder<FTextFieldStyle> builder = Input.defaultBuilder,
     Widget? label = const LocalizedText.password(),
     String? hint,
@@ -378,7 +378,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   /// Creates a [FTextFormField].
   const FTextFormField({
     this.control = const .managed(),
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.builder = Input.defaultBuilder,
     this.label,
     this.hint,
@@ -449,7 +449,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   /// Creates a [FTextFormField] configured for emails.
   const FTextFormField.email({
     this.control = const .managed(),
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.builder = Input.defaultBuilder,
     this.label = const LocalizedText.email(),
     this.hint,
@@ -524,7 +524,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   /// [maxLines].
   const FTextFormField.multiline({
     this.control = const .managed(),
-    this.style = const .inherit(),
+    this.style = const .context(),
     this.builder = Input.defaultBuilder,
     this.label,
     this.hint,

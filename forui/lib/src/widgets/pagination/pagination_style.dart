@@ -19,15 +19,15 @@ class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
 
   /// The icon's style.
   @override
-  final FVariants<FTappableVariantConstraint, IconThemeData, IconThemeDataDelta> itemIconStyle;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> itemIconStyle;
 
   /// The decoration applied to the pagination item.
   @override
-  final FVariants<FTappableVariantConstraint, BoxDecoration, BoxDecorationDelta> itemDecoration;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, BoxDecoration, BoxDecorationDelta> itemDecoration;
 
   /// The default text style applied to the pagination item.
   @override
-  final FVariants<FTappableVariantConstraint, TextStyle, TextStyleDelta> itemTextStyle;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> itemTextStyle;
 
   /// The ellipsis's text style.
   @override
@@ -62,7 +62,7 @@ class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
   FPaginationStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         itemIconStyle: .all(IconThemeData(color: colors.foreground, size: 18)),
-        itemDecoration: .delta(
+        itemDecoration: FVariants.from(
           BoxDecoration(borderRadius: style.borderRadius, color: colors.background),
           variants: {
             [.hovered, .pressed]: .delta(color: colors.secondary),
@@ -71,7 +71,7 @@ class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
             [.selected.and(.hovered), .selected.and(.pressed)]: .delta(color: colors.hover(colors.primary)),
           },
         ),
-        itemTextStyle: .delta(
+        itemTextStyle: FVariants.from(
           typography.sm.copyWith(color: colors.foreground),
           variants: {
             [.selected]: .delta(color: colors.primaryForeground),
