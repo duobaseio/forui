@@ -28,9 +28,9 @@ class Application extends StatefulWidget {
 
 class _ApplicationState extends State<Application> with SingleTickerProviderStateMixin {
   int index = 4;
-  bool dark = true;
+  bool dark = false;
 
-  FThemeData get _theme => dark ? FThemes.green.dark : FThemes.green.light;
+  FThemeData get _theme => dark ? FThemes.zinc.dark : FThemes.zinc.light;
 
   void toggleTheme() => setState(() => dark = !dark);
 
