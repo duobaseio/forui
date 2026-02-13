@@ -61,7 +61,7 @@ class DesignGenerator extends Generator {
                   copyWithDocsHeader: [
                     '/// Returns a copy of this [${type.name!}] with the given properties replaced.',
                     '///',
-                    '/// Consider [using the CLI to generate a style](https://forui.dev/docs/themes#individual-widget-styles).',
+                    '/// See [customizing widget styles](https://forui.dev/docs/guides/customizing-widget-styles).',
                     '///',
                   ],
                 ).generate(),

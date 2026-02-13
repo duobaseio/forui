@@ -30,7 +30,7 @@ mixin _Usage {
 
   String get usage => _wrap('$description\n\n') + _usageWithoutDescription;
 
-  String get usageFooter => '\nSee https://forui.dev/docs/cli for more information.';
+  String get usageFooter => '\nSee https://forui.dev/docs/reference/cli for more information.';
 
   String _wrap(String text, {int? hangingIndent}) =>
       wrapText(text, length: argParser.usageLineLength, hangingIndent: hangingIndent);

@@ -3,7 +3,9 @@ import 'package:analyzer/dart/ast/visitor.dart';
 
 import '../main.dart';
 
-const materialThemeMapping = 'material-mapping';
+const materialThemeName = 'material-theme';
+const materialThemeFile = 'material_theme';
+
 
 String mapMaterialThemeMapping(String method) => fragmentFormatter.format('''
 import 'package:flutter/material.dart';

@@ -20,15 +20,25 @@ class InitCommand extends ForuiCommand {
   final Configuration configuration;
 
   InitCommand(this.configuration) {
-    argParser.addFlag('force', abbr: 'f', help: 'Overwrite existing files if they exist.', negatable: false);
+    argParser
+      ..addFlag('force', abbr: 'f', help: 'Overwrite existing files if they exist.', negatable: false)
+      ..addOption(
+        'template',
+        abbr: 't',
+        help: 'The main.dart template to generate.',
+        allowed: ['basic', 'router'],
+        defaultsTo: 'basic',
+      );
   }
 
   @override
   void run() {
+    final template = argResults!['template'] as String;
+
     _configuration().writeAsStringSync(defaults);
     stdout.writeln('${emoji ? '✅' : '[Done]'} Created forui.yaml.');
 
-    _main().writeAsStringSync(snippets['main']!);
+    _main().writeAsStringSync(formatter.format(snippets['main-$template']!.$2));
     stdout.writeln('${emoji ? '✅' : '[Done]'} Created lib/main.dart.');
   }
 
@@ -62,7 +72,10 @@ class InitCommand extends ForuiCommand {
     }
 
     if (file.existsSync()) {
-      _prompt('lib/main.dart', 'You can generate a main.dart later by running "dart forui snippet create main". ');
+      _prompt(
+        'lib/main.dart',
+        'You can generate a main.dart later by running "dart forui snippet create main-basic/main-router". ',
+      );
     }
 
     return file;

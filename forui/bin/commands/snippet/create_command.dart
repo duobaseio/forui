@@ -1,7 +1,5 @@
 import 'dart:io';
 
-import 'package:sugar/sugar.dart';
-
 import '../../args/command.dart';
 import '../../args/utils.dart';
 import '../../configuration.dart';
@@ -102,11 +100,11 @@ class SnippetCreateCommand extends ForuiCommand {
     final existing = <String>{};
 
     for (final snippet in arguments) {
-      final file = snippet.toLowerCase().toSnakeCase();
+      final (file, source) = snippets[snippet.toLowerCase()]!;
       final path =
           '${configuration.root.path}${Platform.pathSeparator}${output.endsWith('.dart') ? output : '$output${Platform.pathSeparator}$file.dart'}';
 
-      paths[path] = snippets[snippet.toLowerCase()]!;
+      paths[path] = source;
 
       if (File(path).existsSync()) {
         existing.add(path);

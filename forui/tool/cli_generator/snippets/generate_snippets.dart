@@ -4,15 +4,14 @@ import 'package:analyzer/dart/analysis/analysis_context_collection.dart';
 import 'package:analyzer/dart/analysis/results.dart';
 import 'package:code_builder/code_builder.dart';
 import 'package:path/path.dart' as p;
-import 'package:sugar/sugar.dart';
 
 import '../main.dart';
 import 'generate_icon_mapping.dart';
-import 'generate_material_mapping.dart';
+import 'generate_material_theme.dart';
 
-String generateSnippets(Map<String, String> mapped) {
+String generateSnippets(Map<String, (String, String)> mapped) {
   final sources = [
-    for (final MapEntry(:key, value: source) in [...mapped.entries]) "'$key': r'''$source'''",
+    for (final MapEntry(:key, value: (name, source)) in mapped.entries) "'$key': ('$name', r'''$source''')",
   ];
 
   final library = LibraryBuilder()
@@ -30,12 +29,8 @@ String generateSnippets(Map<String, String> mapped) {
 }
 
 /// Traverses & maps the library and finds all targets to convert into snippets.
-Future<Map<String, String>> mapSnippets(AnalysisContextCollection collection) async {
+Future<Map<String, (String, String)>> mapSnippets(AnalysisContextCollection collection) async {
   final directory = p.join(Directory.current.parent.path, 'forui', 'tool', 'cli_generator', 'snippets', 'literals');
-  final staticSnippets = {
-    for (final file in Directory(directory).listSync(recursive: true).whereType<File>())
-      p.basenameWithoutExtension(file.path).toSnakeCase(): file.readAsStringSync(),
-  };
 
   final files = Directory(
     library,
@@ -60,8 +55,9 @@ Future<Map<String, String>> mapSnippets(AnalysisContextCollection collection) as
   }
 
   return {
-    ...staticSnippets,
-    materialThemeMapping: mapMaterialThemeMapping(approximateMaterialThemeFinder.snippet!),
-    iconMapping: mapIconMapping(iconFinder.icons),
+    'main-basic': ('main', File(p.join(directory, 'main_basic.dart')).readAsStringSync()),
+    'main-router': ('main', File(p.join(directory, 'main_router.dart')).readAsStringSync()),
+    materialThemeName: (materialThemeFile, mapMaterialThemeMapping(approximateMaterialThemeFinder.snippet!)),
+    iconMappingName: (iconMappingFile, mapIconMapping(iconFinder.icons)),
   };
 }

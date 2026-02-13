@@ -94,7 +94,7 @@ extension type const FGoldenVariant._(FVariant _) implements FGoldenVariantConst
 extension $FGoldenStyleTransformations on FGoldenStyle {
   /// Returns a copy of this [FGoldenStyle] with the given properties replaced.
   ///
-  /// Consider [using the CLI to generate a style](https://forui.dev/docs/themes#individual-widget-styles).
+  /// See [customizing widget styles](https://forui.dev/docs/guides/customizing-widget-styles).
   ///
   /// ## Parameters
   /// * [FGoldenStyle.someDouble] - This is a field's summary.
@@ -756,7 +756,7 @@ class _FGoldenNestedMotionContext implements FGoldenNestedMotionDelta {
 extension $FGoldenNestedStyleTransformations on FGoldenNestedStyle {
   /// Returns a copy of this [FGoldenNestedStyle] with the given properties replaced.
   ///
-  /// Consider [using the CLI to generate a style](https://forui.dev/docs/themes#individual-widget-styles).
+  /// See [customizing widget styles](https://forui.dev/docs/guides/customizing-widget-styles).
   ///
   /// ## Parameters
   @useResult
