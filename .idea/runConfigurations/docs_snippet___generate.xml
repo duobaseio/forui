@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="docs_snippet - generate" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+    <option name="filePath" value="$PROJECT_DIR$/docs_snippets/tool/snippet_generator/main.dart" />
+    <option name="workingDirectory" value="$PROJECT_DIR$/docs_snippets" />
+    <method v="2" />
+  </configuration>
+</component>

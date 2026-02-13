@@ -129,6 +129,8 @@ are not available for most of these changes due to the tool's limitations.
 * **Breaking** Rename `FButton.onStateChange` to `FButton.onVariantChange`.
 * **Breaking** Rename `FButtonData.states` to `FButtonData.variants`.
 
+* Fix `FButton` not having default styles for selected state.
+
 
 ### `FCalendar`
 * Change default background color to `card`.

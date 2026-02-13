@@ -1,0 +1,7 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="cli - generate" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+    <option name="filePath" value="$PROJECT_DIR$/forui/tool/cli_generator/main.dart" />
+    <option name="workingDirectory" value="$PROJECT_DIR$/forui" />
+    <method v="2" />
+  </configuration>
+</component>

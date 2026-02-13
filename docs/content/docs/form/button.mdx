@@ -17,6 +17,7 @@ import iconSnippet from '@/snippets/examples/button/icon.json';
 import onlyIconSnippet from '@/snippets/examples/button/only-icon.json';
 import sizesSnippet from '@/snippets/examples/button/sizes.json';
 import circularProgressSnippet from '@/snippets/examples/button/circular-progress.json';
+import toggleSnippet from '@/snippets/examples/button/toggle.json';
 import buttonUsage from '@/snippets/usages/widgets/button/button.json';
 import buttonIconUsage from '@/snippets/usages/widgets/button/icon.json';
 import buttonRawUsage from '@/snippets/usages/widgets/button/raw.json';
@@ -117,6 +118,17 @@ dart run forui style create button
   <Tab value="Code">
     <CodeSnippet snippet={sizesSnippet} />
   </Tab>
+</Tabs>
+
+### Toggleable
+
+<Tabs items={['Preview', 'Code']}>
+    <Tab value="Preview">
+        <Widget name='button' variant='toggle'/>
+    </Tab>
+    <Tab value="Code">
+        <CodeSnippet snippet={toggleSnippet} />
+    </Tab>
 </Tabs>
 
 ### Content

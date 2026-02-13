@@ -282,6 +282,9 @@ extension type FButtonStyles._(FVariants<FButtonVariantConstraint, FButtonVarian
                 [.hovered, .pressed]: .delta(color: colors.hover(colors.primary)),
                 //
                 [.disabled]: .delta(color: colors.disable(colors.primary)),
+                //
+                [.selected]: .delta(color: colors.hover(colors.primary)),
+                [.selected.and(.disabled)]: .delta(color: colors.disable(colors.hover(colors.primary))),
               },
             ),
             foregroundColor: colors.primaryForeground,
@@ -297,6 +300,9 @@ extension type FButtonStyles._(FVariants<FButtonVariantConstraint, FButtonVarian
                   [.hovered, .pressed]: .delta(color: colors.hover(colors.secondary)),
                   //
                   [.disabled]: .delta(color: colors.disable(colors.secondary)),
+                  //
+                  [.selected]: .delta(color: colors.hover(colors.secondary)),
+                  [.selected.and(.disabled)]: .delta(color: colors.disable(colors.hover(colors.secondary))),
                 },
               ),
               foregroundColor: colors.secondaryForeground,
@@ -318,6 +324,15 @@ extension type FButtonStyles._(FVariants<FButtonVariantConstraint, FButtonVarian
                   [.disabled]: .delta(
                     color: colors.destructive.withValues(alpha: colors.brightness == .light ? 0.05 : 0.1),
                   ),
+                  //
+                  [.selected]: .delta(
+                    color: colors.destructive.withValues(alpha: colors.brightness == .light ? 0.2 : 0.3),
+                  ),
+                  [.selected.and(.disabled)]: .delta(
+                    color: colors.disable(
+                      colors.destructive.withValues(alpha: colors.brightness == .light ? 0.2 : 0.3),
+                    ),
+                  ),
                 },
               ),
               foregroundColor: colors.destructive,
@@ -336,6 +351,9 @@ extension type FButtonStyles._(FVariants<FButtonVariantConstraint, FButtonVarian
                   [.hovered, .pressed]: .delta(color: colors.secondary),
                   //
                   [.disabled]: .delta(color: colors.disable(colors.card)),
+                  //
+                  [.selected]: .delta(color: colors.secondary),
+                  [.selected.and(.disabled)]: .delta(color: colors.disable(colors.secondary)),
                 },
               ),
               foregroundColor: colors.secondaryForeground,
@@ -350,6 +368,9 @@ extension type FButtonStyles._(FVariants<FButtonVariantConstraint, FButtonVarian
                   [.hovered, .pressed]: .delta(color: colors.secondary),
                   //
                   [.disabled]: const .delta(),
+                  //
+                  [.selected]: .delta(color: colors.secondary),
+                  [.selected.and(.disabled)]: .delta(color: colors.disable(colors.secondary)),
                 },
               ),
               foregroundColor: colors.secondaryForeground,
