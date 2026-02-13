@@ -226,10 +226,9 @@ class FVariants<K extends FVariantConstraint, E extends FVariant, V, D extends D
   @override
   FVariants<K, E, V, D> call(covariant FVariants<K, E, V, D> _) => this;
 
-
   @override
   FVariants<K, E, V, D> Function(V base, Map<K, V> variants) get _call =>
-          (_, _) => this;
+      (_, _) => this;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
