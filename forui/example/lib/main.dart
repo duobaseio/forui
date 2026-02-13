@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_driver/driver_extension.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui_example/sandbox.dart';
 import 'package:wakelock_plus/wakelock_plus.dart';
 
 void main() {
+  enableFlutterDriverExtension();
+
   WidgetsFlutterBinding.ensureInitialized();
   WakelockPlus.enable();
 
