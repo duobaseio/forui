@@ -10,7 +10,7 @@ export const metadata = {
   },
   description: 'Beautiful, minimalistic, and platform-agnostic UI library for Flutter.',
   openGraph: {
-    images: '/banners/banner-311225.png',
+    images: '/banners/banner-text-130226.png',
   },
   icons: {
     icon: '/favicon.ico',

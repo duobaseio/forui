@@ -28,7 +28,7 @@
 
 <br />
 <div align="center">
- <img width="800" alt="Forui" src="docs/public/banners/banner-160724.png">
+ <img width="800" alt="Forui" src="docs/public/banners/banner-text-130226.png">
 </div>
 
 > [!IMPORTANT]
