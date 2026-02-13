@@ -1,3 +1,6 @@
+@TestOn('mac-os')
+library;
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -6,7 +9,7 @@ import 'package:forui/forui.dart';
 import '../test_scaffold.dart';
 
 void main() {
-  testWidgets('consistent height', variant: const TargetPlatformVariant({.macOS}), (tester) async {
+  testWidgets('consistent height', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
         child: Column(
