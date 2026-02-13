@@ -92,7 +92,7 @@ sealed class FVariantConstraint {
   /// .hovered.and(.focused).satisfiedBy(variants);    // true
   /// .hovered.and(.pressed).satisfiedBy(variants);    // false
   /// ```
-  bool satisfiedBy(Iterable<FVariant> variants);
+  bool satisfiedBy(Set<FVariant> variants);
 
   void _accept(List<String> operands, List<int> tiers);
 }
@@ -116,7 +116,7 @@ class Value implements FVariant {
   const Value(this._tier, this._value);
 
   @override
-  bool satisfiedBy(Iterable<FVariant> variants) => variants.contains(this);
+  bool satisfiedBy(Set<FVariant> variants) => variants.contains(this);
 
   @override
   void _accept(List<String> operands, List<int> tiers) {
@@ -143,7 +143,7 @@ class And implements FVariantConstraint {
   const And(this._left, this._right);
 
   @override
-  bool satisfiedBy(Iterable<FVariant> variants) => _left.satisfiedBy(variants) && _right.satisfiedBy(variants);
+  bool satisfiedBy(Set<FVariant> variants) => _left.satisfiedBy(variants) && _right.satisfiedBy(variants);
 
   @override
   void _accept(List<String> operands, List<int> tiers) {
@@ -172,7 +172,7 @@ class Not implements FVariantConstraint {
   const Not(this._operand);
 
   @override
-  bool satisfiedBy(Iterable<FVariant> variants) => !_operand.satisfiedBy(variants);
+  bool satisfiedBy(Set<FVariant> variants) => !_operand.satisfiedBy(variants);
 
   @override
   void _accept(List<String> operands, List<int> tiers) => _operand._accept(operands, tiers);

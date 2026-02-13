@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 import '../test_scaffold.dart';
 
 void main() {
-  testWidgets('consistent height', (tester) async {
+  testWidgets('consistent height', variant: const TargetPlatformVariant({.macOS}), (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
         child: Column(

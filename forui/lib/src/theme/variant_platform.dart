@@ -57,7 +57,7 @@ class Touch implements FVariant {
   const Touch();
 
   @override
-  bool satisfiedBy(Iterable<FVariant> variants) => variants.any((v) => v is Touch);
+  bool satisfiedBy(Set<FVariant> variants) => variants.any((v) => v is Touch);
 
   @override
   void _accept(List<String> operands, List<int> tiers) {
@@ -73,7 +73,7 @@ class _Android extends Touch {
   const _Android();
 
   @override
-  bool satisfiedBy(Iterable<FVariant> variants) => variants.contains(const _Android());
+  bool satisfiedBy(Set<FVariant> variants) => variants.contains(const _Android());
 
   @override
   void _accept(List<String> operands, List<int> tiers) {
@@ -91,7 +91,7 @@ class _Ios extends Touch {
   const _Ios();
 
   @override
-  bool satisfiedBy(Iterable<FVariant> variants) => variants.contains(const _Ios());
+  bool satisfiedBy(Set<FVariant> variants) => variants.contains(const _Ios());
 
   @override
   void _accept(List<String> operands, List<int> tiers) {
@@ -109,7 +109,7 @@ class _Fuchsia extends Touch {
   const _Fuchsia();
 
   @override
-  bool satisfiedBy(Iterable<FVariant> variants) => variants.contains(const _Fuchsia());
+  bool satisfiedBy(Set<FVariant> variants) => variants.contains(const _Fuchsia());
 
   @override
   void _accept(List<String> operands, List<int> tiers) {
@@ -128,7 +128,7 @@ class Desktop implements FVariant {
   const Desktop();
 
   @override
-  bool satisfiedBy(Iterable<FVariant> variants) => variants.any((v) => v is Desktop);
+  bool satisfiedBy(Set<FVariant> variants) => variants.any((v) => v is Desktop);
 
   @override
   void _accept(List<String> operands, List<int> tiers) {
@@ -144,7 +144,7 @@ class _Windows extends Desktop {
   const _Windows();
 
   @override
-  bool satisfiedBy(Iterable<FVariant> variants) => variants.contains(const _Windows());
+  bool satisfiedBy(Set<FVariant> variants) => variants.contains(const _Windows());
 
   @override
   void _accept(List<String> operands, List<int> tiers) {
@@ -162,7 +162,7 @@ class _MacOS extends Desktop {
   const _MacOS();
 
   @override
-  bool satisfiedBy(Iterable<FVariant> variants) => variants.contains(const _MacOS());
+  bool satisfiedBy(Set<FVariant> variants) => variants.contains(const _MacOS());
 
   @override
   void _accept(List<String> operands, List<int> tiers) {
@@ -180,7 +180,7 @@ class _Linux extends Desktop {
   const _Linux();
 
   @override
-  bool satisfiedBy(Iterable<FVariant> variants) => variants.contains(const _Linux());
+  bool satisfiedBy(Set<FVariant> variants) => variants.contains(const _Linux());
 
   @override
   void _accept(List<String> operands, List<int> tiers) {
@@ -198,7 +198,7 @@ class _Web implements FVariant {
   const _Web();
 
   @override
-  bool satisfiedBy(Iterable<FVariant> variants) => variants.contains(const _Web());
+  bool satisfiedBy(Set<FVariant> variants) => variants.contains(const _Web());
 
   @override
   void _accept(List<String> operands, List<int> tiers) {
