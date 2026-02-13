@@ -123,13 +123,6 @@ class FVariants<K extends FVariantConstraint, E extends FVariant, V, D extends D
   /// The variants.
   final Map<K, V> variants;
 
-  @override
-  FVariants<K, E, V, D> Function(V base, Map<K, V> variants) get _call =>
-      (_, _) => this;
-
-  @override
-  FVariants<K, E, V, D> call(covariant FVariants<K, E, V, D> _) => this;
-
   /// Creates an [FVariants] with concrete variants.
   FVariants(this.base, {required Map<List<K>, V> variants})
     : variants = {
@@ -171,13 +164,13 @@ class FVariants<K extends FVariantConstraint, E extends FVariant, V, D extends D
   ///   },
   /// );
   ///
-  /// variants.resolve({.hovered});           // 'A'
-  /// variants.resolve({.hovered, .focused}); // 'B' (more tier-1 operands)
-  /// variants.resolve({.hovered, .disabled}); // 'C' (tier 2 > tier 1)
-  /// variants.resolve({.pressed});           // 'base' (no match)
+  /// variants.resolve([.hovered]);           // 'A'
+  /// variants.resolve([.hovered, .focused]); // 'B' (more tier-1 operands)
+  /// variants.resolve([.hovered, .disabled]); // 'C' (tier 2 > tier 1)
+  /// variants.resolve([.pressed]);           // 'base' (no match)
   /// ```
   @useResult
-  V resolve(Set<FVariant> variants) {
+  V resolve(Iterable<FVariant> variants) {
     K? constraint;
     V? variant;
     for (final MapEntry(key: current, :value) in this.variants.entries) {
@@ -199,7 +192,7 @@ class FVariants<K extends FVariantConstraint, E extends FVariant, V, D extends D
   /// ```dart
   /// final updated = variants.apply([
   ///   .all(.delta(color: Colors.blue)),
-  ///   .exact({.disabled}, .delta(color: Colors.grey)),
+  ///   .exact([.disabled], .delta(color: Colors.grey)),
   /// ]);
   /// ```
   ///
@@ -213,7 +206,7 @@ class FVariants<K extends FVariantConstraint, E extends FVariant, V, D extends D
   /// ```dart
   /// final updated = variants.applyValues([
   ///   .all(Colors.blue),
-  ///   .exact({.disabled}, Colors.grey),
+  ///   .exact([.disabled], Colors.grey),
   /// ]);
   /// ```
   ///
@@ -229,6 +222,14 @@ class FVariants<K extends FVariantConstraint, E extends FVariant, V, D extends D
   /// This is always valid if [T1] and [T2] are both extension types over [FVariantConstraint] and [FVariant] as in the
   /// case with the generated widget-specific variant constraints.
   FVariants<T1, T2, V, D> cast<T1 extends FVariantConstraint, T2 extends FVariant>() => this as FVariants<T1, T2, V, D>;
+
+  @override
+  FVariants<K, E, V, D> call(covariant FVariants<K, E, V, D> _) => this;
+
+
+  @override
+  FVariants<K, E, V, D> Function(V base, Map<K, V> variants) get _call =>
+          (_, _) => this;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -294,7 +295,7 @@ class FVariantOperation<K extends FVariantConstraint, E extends FVariant, V, D e
   ///
   /// ```dart
   /// // Given base: 0, {a: 1, b: 1}
-  /// .exact({b, c}, Delta(2)) // {a: 1, b: 2, c: 2}
+  /// .exact([b, c], Delta(2)) // {a: 1, b: 2, c: 2}
   /// ```
   ///
   /// See also:
@@ -302,7 +303,7 @@ class FVariantOperation<K extends FVariantConstraint, E extends FVariant, V, D e
   /// * [FVariantOperation.base] for applying to the base.
   /// * [FVariantOperation.variants] for applying to all variants.
   /// * [FVariantOperation.all] for applying to all variants and base.
-  FVariantOperation.exact(Set<K> constraints, D delta)
+  FVariantOperation.exact(Iterable<K> constraints, D delta)
     : _call = ((base, existing) {
         final addition = delta(base) as V;
         return .raw(base, {...existing, for (final constraint in constraints) constraint: addition});
@@ -312,7 +313,7 @@ class FVariantOperation<K extends FVariantConstraint, E extends FVariant, V, D e
   ///
   /// ```dart
   /// // Given base: 0, {a: 1, b: 2, c: 3, a & b: 4, a & c: 5}
-  /// .match({a, b}, AddDelta(10)) // base: 0, {a: 11, b: 12, c: 3, a & b: 14, a & c: 5}
+  /// .match([a, b], AddDelta(10)) // base: 0, {a: 11, b: 12, c: 3, a & b: 14, a & c: 5}
   /// ```
   ///
   /// See also:
@@ -320,7 +321,7 @@ class FVariantOperation<K extends FVariantConstraint, E extends FVariant, V, D e
   /// * [FVariantOperation.base] for applying to the base.
   /// * [FVariantOperation.variants] for applying to all variants.
   /// * [FVariantOperation.all] for applying to all variants and base.
-  FVariantOperation.match(Set<E> variants, D delta)
+  FVariantOperation.match(Iterable<E> variants, D delta)
     : _call = ((base, existing) => .raw(base, {
         for (final MapEntry(key: constraint, :value) in existing.entries)
           constraint: constraint.satisfiedBy(variants) ? delta(value) as V : value,
@@ -366,13 +367,13 @@ class FVariantOperation<K extends FVariantConstraint, E extends FVariant, V, D e
   ///
   /// ```dart
   /// // Given {a: 1, b: 2, c: 3}
-  /// .remove({a, b}) // {c: 3}
+  /// .remove([a, b]) // {c: 3}
   /// ```
   ///
   /// See also:
   /// * [FVariantOperation.removeMatch] for removing variants whose constraint's variants are all present.
   /// * [FVariantOperation.removeAll] for removing all variants.
-  FVariantOperation.remove(Set<K> constraints)
+  FVariantOperation.remove(Iterable<K> constraints)
     : _call = ((base, existing) => .raw(base, {
         for (final MapEntry(key: constraint, :value) in existing.entries)
           if (!constraints.contains(constraint)) constraint: value,
@@ -382,13 +383,13 @@ class FVariantOperation<K extends FVariantConstraint, E extends FVariant, V, D e
   ///
   /// ```dart
   /// // Given {a: 1, b: 2, c: 3, a & b: 4, a & c: 5}
-  /// .removeMatch({a, b}) // {c: 3, a & c: 5}
+  /// .removeMatch([a, b]) // {c: 3, a & c: 5}
   /// ```
   ///
   /// See also:
   /// * [FVariantOperation.remove] for removing exact constraint entries.
   /// * [FVariantOperation.removeAll] for removing all variants.
-  FVariantOperation.removeMatch(Set<E> variants)
+  FVariantOperation.removeMatch(Iterable<E> variants)
     : _call = ((base, existing) => .raw(base, {
         for (final MapEntry(key: constraint, :value) in existing.entries)
           if (!constraint.satisfiedBy(variants)) constraint: value,
@@ -451,7 +452,7 @@ class FVariantValueDeltaOperation<K extends FVariantConstraint, E extends FVaria
   ///
   /// ```dart
   /// // Given {a: 1, b: 1}
-  /// .exact({b, c}, 2) // {a: 1, b: 2, c: 2}
+  /// .exact([b, c], 2) // {a: 1, b: 2, c: 2}
   /// ```
   ///
   /// See also:
@@ -459,14 +460,14 @@ class FVariantValueDeltaOperation<K extends FVariantConstraint, E extends FVaria
   /// * [FVariantValueDeltaOperation.match] for replacing variants whose constraint's variants are all present.
   /// * [FVariantValueDeltaOperation.variants] for replacing all variants.
   /// * [FVariantValueDeltaOperation.all] for replacing all variants and base.
-  FVariantValueDeltaOperation.exact(Set<K> constraints, V value)
+  FVariantValueDeltaOperation.exact(Iterable<K> constraints, V value)
     : _call = ((base, existing) => .raw(base, {...existing, for (final constraint in constraints) constraint: value}));
 
   /// Replaces existing variants whose constraint's variants are all present in [variants].
   ///
   /// ```dart
   /// // Given {a: 1, b: 2, c: 3, a & b: 4, a & c: 5}
-  /// .match({a, b}, 10) // {a: 10, b: 10, c: 3, a & b: 10, a & c: 5}
+  /// .match([a, b], 10) // {a: 10, b: 10, c: 3, a & b: 10, a & c: 5}
   /// ```
   ///
   /// See also:
@@ -474,7 +475,7 @@ class FVariantValueDeltaOperation<K extends FVariantConstraint, E extends FVaria
   /// * [FVariantValueDeltaOperation.base] for replacing the base.
   /// * [FVariantValueDeltaOperation.variants] for replacing all variants.
   /// * [FVariantValueDeltaOperation.all] for replacing all variants and base.
-  FVariantValueDeltaOperation.match(Set<E> variants, V value)
+  FVariantValueDeltaOperation.match(Iterable<E> variants, V value)
     : _call = ((base, existing) => .raw(base, {
         for (final MapEntry(key: constraint, value: v) in existing.entries)
           constraint: constraint.satisfiedBy(variants) ? value : v,
@@ -516,13 +517,13 @@ class FVariantValueDeltaOperation<K extends FVariantConstraint, E extends FVaria
   ///
   /// ```dart
   /// // Given {a: 1, b: 2, c: 3}
-  /// .remove({a, b}) // {c: 3}
+  /// .remove([a, b]) // {c: 3}
   /// ```
   ///
   /// See also:
   /// * [FVariantValueDeltaOperation.removeMatch] for removing variants whose constraint's variants are all present.
   /// * [FVariantValueDeltaOperation.removeAll] for removing all variants.
-  FVariantValueDeltaOperation.remove(Set<K> constraints)
+  FVariantValueDeltaOperation.remove(Iterable<K> constraints)
     : _call = ((base, existing) => .raw(base, {
         for (final MapEntry(key: constraint, :value) in existing.entries)
           if (!constraints.contains(constraint)) constraint: value,
@@ -532,13 +533,13 @@ class FVariantValueDeltaOperation<K extends FVariantConstraint, E extends FVaria
   ///
   /// ```dart
   /// // Given {a: 1, b: 2, c: 3, a & b: 4, a & c: 5}
-  /// .removeMatch({a, b}) // {c: 3, a & c: 5}
+  /// .removeMatch([a, b]) // {c: 3, a & c: 5}
   /// ```
   ///
   /// See also:
   /// * [FVariantValueDeltaOperation.remove] for removing exact constraint entries.
   /// * [FVariantValueDeltaOperation.removeAll] for removing all variants.
-  FVariantValueDeltaOperation.removeMatch(Set<E> variants)
+  FVariantValueDeltaOperation.removeMatch(Iterable<E> variants)
     : _call = ((base, existing) => .raw(base, {
         for (final MapEntry(key: constraint, :value) in existing.entries)
           if (!constraint.satisfiedBy(variants)) constraint: value,
