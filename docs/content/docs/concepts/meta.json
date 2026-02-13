@@ -1,4 +1,5 @@
 {
   "title": "Concepts",
-  "pages": ["themes", "controls", "localization", "responsive"]
+  "pages": ["themes", "controls", "localization", "responsive"],
+  "defaultOpen": true
 }
