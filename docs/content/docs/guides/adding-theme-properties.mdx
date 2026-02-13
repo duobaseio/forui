@@ -13,7 +13,7 @@ import copyWithExtensionsSnippet from '@/snippets/snippets/guides/adding_theme_p
 Forui themes can be extended with your own application-specific properties using Flutter's [`ThemeExtension`](https://api.flutter.dev/flutter/material/ThemeExtension-class.html)
 system.
 
-# Create a Theme Extension
+## Create a Theme Extension
 
 Theme extensions must extend `ThemeExtension` and implement `copyWith()` and `lerp()`.
 
@@ -27,7 +27,7 @@ You can also add extensions to existing themes using `copyWith(...)`:
 
 <CodeSnippet snippet={copyWithExtensionsSnippet} />
 
-# Accessing the Properties
+## Accessing the Properties
 
 Retrieve your custom theme extension via [`extension<T>()`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/extension.html):
 

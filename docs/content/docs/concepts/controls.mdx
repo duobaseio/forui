@@ -13,14 +13,14 @@ Instead of passing controllers to Forui widgets, you pass controls (that optiona
 
 There are **2** types of controls.
 
-# Lifted
+# #Lifted
 
 You externally manage the state. The widget is "dumb" and just reflects the passed-in values. This is similar
 to React's [controlled components](https://react.dev/learn/sharing-state-between-components#controlled-and-uncontrolled-components).
 
 <CodeSnippet snippet={liftedSnippet} />
 
-# Managed
+## Managed
 
 The widget internally manages its own state, either through an internal controller configured using the passed-in initial
 values, or through a passed-in external controller. In the latter case, you are responsible for managing the controller's
@@ -29,7 +29,7 @@ lifecycle.
 <CodeSnippet snippet={managedSnippet} />
 
 
-# When to Use Which?
+## When to Use Which?
 
 <Callout type="info">
     **TL;DR**: Start with "Managed with internal controller" for simplicity and switch as needed.
@@ -50,7 +50,7 @@ flowchart TD
     E(["Managed control with internal controller"])
 ```
 
-## Common scenarios
+### Common scenarios
 * Lifted:
   * Syncing state between your state management solution, e.g. [Riverpod](https://riverpod.dev/), and the widget.
   * Reacting to every state change and potentially modifying the state.

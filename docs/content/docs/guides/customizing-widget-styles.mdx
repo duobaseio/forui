@@ -15,7 +15,7 @@ import passStyleSnippet from '@/snippets/snippets/guides/customizing_widget_styl
 
 There are **2** ways to customize individual widget styles: **deltas** for small tweaks and the **CLI** for major overhauls.
 
-# Deltas
+## Deltas
 
 All widget styles have corresponding deltas that represent a partial modification. For example,
 [`FAccordionStyle`](https://pub.dev/documentation/forui/latest/forui.widgets.accordion/FAccordionStyle-class.html) has a
@@ -30,7 +30,7 @@ Since widget styles extend their corresponding deltas, you can also pass a full 
 
 <CodeSnippet snippet={replaceSnippet} />
 
-## Variants
+### Variants
 
 Widget styles contain [`FVariants`](/docs/concepts/themes#variants) fields which can be modified using a `delta(...)` function that accepts
 a sequence of operations. Depending on the variant's type, operations are either delta-based modifications or full
@@ -53,7 +53,7 @@ accordion's title text style:
 <CodeSnippet snippet={variantsReplaceSnippet} />
 
 
-# CLI
+## CLI
 
 The following section demonstrates how to override an accordion's style. This is recommended for major style overhauls.
 

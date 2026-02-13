@@ -27,7 +27,7 @@ export function Theme({title, color}) {
 Forui themes allow you to define a consistent visual style across your application & widgets. It optionally relies on
 the [CLI](/docs/reference/cli) to generate themes and styles that can be directly modified in your project.
 
-# Getting Started
+## Getting Started
 
 <Callout type="info" title="Theme Brightness">
     Forui does not manage the theme brightness (light or dark) automatically.
@@ -51,7 +51,7 @@ Forui includes predefined themes that can be used out of the box. They are heavi
 | <Theme title="Violet" color="#7f22fe" />  | `FThemes.violet.light`  | `FThemes.violet.dark`  |
 | <Theme title="Yellow" color="#fcc800" />  | `FThemes.yellow.light`  | `FThemes.yellow.dark`  |
 
-# Theme Components
+## Theme Components
 
 ```mermaid
 ---
@@ -124,7 +124,7 @@ A `BuildContext` extension allows `FThemeData` can be accessed via [`context.the
 
 <CodeSnippet snippet={componentsSnippet} />
 
-## Colors
+### Colors
 
 The `FColors` class contains the theme's color scheme. Colors come in **pairs** - a main color and its corresponding
 foreground color for text and icons.
@@ -137,12 +137,12 @@ For example:
 
 <CodeSnippet snippet={colorsSnippet} />
 
-### Hovered and Disabled Colors
+#### Hovered and Disabled Colors
 
 To create hovered and disabled color variants, use the [`FColors.hover`](https://pub.dev/documentation/forui/latest/forui.theme/FColors/hover.html)
 and [`FColors.disable`](https://pub.dev/documentation/forui/latest/forui.theme/FColors/disable.html) methods.
 
-## Typography
+### Typography
 
 The `FTypography` class contains the theme's typography settings, including the default font family and various text
 styles.
@@ -156,20 +156,20 @@ styles.
 
 <CodeSnippet snippet={typographySnippet} />
 
-### Custom Font Family
+#### Custom Font Family
 
 Use the `copyWith()` method to change the default font family. As some fonts may have different sizes, the `scale()`
 method is provided to quickly scale all the font sizes.
 
 <CodeSnippet snippet={customFontFamilySnippet} />
 
-## Style
+### Style
 
 The `FStyle` class defines the theme's miscellaneous styling options such as the default border radius and icon size.
 
 <CodeSnippet snippet={styleSnippet} />
 
-## Variants
+### Variants
 
 `FVariants` lets you define a base value with optional overrides for specific variant constraints.
 
@@ -206,7 +206,7 @@ is a tier 2 (semantic) state which outranks tier 1 (interaction) states.
 To learn how to customize styles and `FVariants`, see the [customizing widget styles](/docs/guides/customizing-widget-styles)
 guide.
 
-# Material Interoperability
+## Material Interoperability
 
 Forui provides **2** ways to convert [`FThemeData`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData-class.html)
 to Material's [`ThemeData`](https://api.flutter.dev/flutter/material/ThemeData-class.html).
