@@ -1,14 +1,8 @@
-// ignore_for_file: always_use_package_imports
-
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
 
-import 'brand_color.dart';
-
-// {@snippet}
-
-// {@endsnippet}
+import 'package:docs_snippets/snippets/guides/adding_theme_properties/brand_color.dart';
 
 final theme =
     // {@snippet constructor}

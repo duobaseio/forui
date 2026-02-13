@@ -1,0 +1,27 @@
+---
+title: Creating Custom Controllers
+description: Extend Forui controllers with custom logic and pass them to widgets.
+---
+
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import customManagedSnippet from '@/snippets/snippets/guides/creating_custom_controllers/custom_managed.json';
+import extendManagedSnippet from '@/snippets/snippets/guides/creating_custom_controllers/extend_managed.json';
+
+Suppose you extend a controller, e.g. `FPopoverController`, to add custom logic. You have **2** options when passing the
+custom controller to a widget.
+
+## Managed Control with External Controller
+
+Pass the custom controller via a managed control.
+
+<CodeSnippet snippet={customManagedSnippet} />
+
+The downside of this approach is that you have to manage the controller's lifecycle yourself.
+
+## Extend Managed Control
+
+Alternatively, you can extend managed control (`FPopoverManagedControl`) to create your custom controller.
+
+<CodeSnippet snippet={extendManagedSnippet} />
+
+This way, the widget manages the controller's lifecycle for you.

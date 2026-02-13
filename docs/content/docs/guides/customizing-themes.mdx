@@ -1,0 +1,66 @@
+---
+title: Customizing Themes
+description: Generate and customize themes and widget styles using the CLI.
+---
+
+import {Callout} from "fumadocs-ui/components/callout";
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import mainSnippet from '@/snippets/snippets/guides/customizing_themes/main.json';
+import themeSnippet from '@/snippets/snippets/guides/customizing_themes/theme.json';
+import accordionStyleSnippet from '@/snippets/snippets/guides/customizing_themes/accordion_style.json';
+
+This guide uses [`FAccordionStyle`](https://pub.dev/documentation/forui/latest/forui.widgets.accordion/FAccordionStyle-class.html)
+as an example, but the same principles apply to all Forui widgets. It relies on the [CLI](/docs/reference/cli).
+
+## Generate `main.dart`
+
+Navigate to your project directory.
+
+Generate a `main.dart`:
+
+```shell copy
+dart run forui init
+```
+
+This generates a `main.dart` file where you will add your generated theme:
+
+<CodeSnippet snippet={mainSnippet} />
+
+## Generate a Style
+
+<Callout type="info">
+    Tip: Run `dart run forui style ls` to see all available styles.
+</Callout>
+
+Generate a [`FAccordionStyle`](https://pub.dev/documentation/forui/latest/forui.widgets.accordion/FAccordionStyle-class.html):
+
+```shell copy
+dart run forui style create accordion
+```
+
+This generates an accordion style file which you can add to your theme:
+
+<CodeSnippet snippet={accordionStyleSnippet} />
+
+<Callout type="info">
+    To learn how to customize widget styles, see the [customizing widget styles](/docs/guides/customizing-widget-styles#deltas)
+    guide.
+</Callout>
+
+## Generate a Theme
+
+<Callout type="info">
+    Tip: Run `dart run forui theme ls` to see all available themes.
+</Callout>
+
+Generate a theme based on [neutral](/docs/concepts/themes#getting-started)'s light variant:
+
+```shell copy
+dart run forui theme create neutral-light
+```
+
+This generates a theme file which you can:
+- add to your generated `main.dart`.
+- add the generated styles to.
+
+<CodeSnippet snippet={themeSnippet} />

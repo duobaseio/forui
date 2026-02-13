@@ -7,9 +7,6 @@ import 'package:forui/forui.dart';
 
 import 'theme.dart';
 
-// {@highlight}
-// {@endhighlight}
-
 // {@endsnippet}
 
 final neutralLight = FThemes.neutral.light;

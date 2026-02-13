@@ -5,10 +5,8 @@ description: Abstractions over controllers that define where widget state lives.
 
 import {Callout} from "fumadocs-ui/components/callout";
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
-import liftedSnippet from '@/snippets/snippets/core_concepts/controls/lifted.json';
-import managedSnippet from '@/snippets/snippets/core_concepts/controls/managed.json';
-import customManagedSnippet from '@/snippets/snippets/core_concepts/controls/custom_managed.json';
-import extendManagedSnippet from '@/snippets/snippets/core_concepts/controls/extend_managed.json';
+import liftedSnippet from '@/snippets/snippets/concepts/controls/lifted.json';
+import managedSnippet from '@/snippets/snippets/concepts/controls/managed.json';
 
 Controls are abstractions over controllers, e.g. `TextEditingController`, that define where state lives.
 Instead of passing controllers to Forui widgets, you pass controls (that optionally wrap controllers).
@@ -65,25 +63,3 @@ flowchart TD
   * Prototyping.
   * Simply setting an initial value.
   * Passively observing state changes.
-
-
-## Custom Controllers
-
-Suppose you extend a controller, e.g. `FPopoverController`, to add custom logic. You have **2** options when passing the
-custom controller to a widget.
-
-### Managed Control with External Controller
-
-Pass the custom controller via a managed control.
-
-<CodeSnippet snippet={customManagedSnippet} />
-
-The downside of this approach is that you have to manage the controller's lifecycle yourself.
-
-### Extend Managed Control
-
-Alternatively, you can extend managed control (`FPopoverManagedControl`) to create your custom controller.
-
-<CodeSnippet snippet={extendManagedSnippet} />
-
-This way, the widget manages the controller's lifecycle for you.

@@ -1,0 +1,76 @@
+---
+title: Customizing Widget Styles
+description: Customize individual widget styles using deltas and the CLI.
+---
+
+import {Callout} from "fumadocs-ui/components/callout";
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import deltaSnippet from '@/snippets/snippets/guides/customizing_widget_styles/deltas/delta.json';
+import replaceSnippet from '@/snippets/snippets/guides/customizing_widget_styles/deltas/replace.json';
+import variantsDeltaApplySnippet from '@/snippets/snippets/guides/customizing_widget_styles/deltas/variants_delta.json';
+import variantsValueApplySnippet from '@/snippets/snippets/guides/customizing_widget_styles/deltas/variants_value.json';
+import variantsReplaceSnippet from '@/snippets/snippets/guides/customizing_widget_styles/deltas/variants_replace.json';
+import modifyStyleSnippet from '@/snippets/snippets/guides/customizing_widget_styles/cli/modify_style.json';
+import passStyleSnippet from '@/snippets/snippets/guides/customizing_widget_styles/cli/pass_style.json';
+
+There are **2** ways to customize individual widget styles: **deltas** for small tweaks and the **CLI** for major overhauls.
+
+## Deltas
+
+All widget styles have corresponding deltas that represent a partial modification. For example,
+[`FAccordionStyle`](https://pub.dev/documentation/forui/latest/forui.widgets.accordion/FAccordionStyle-class.html) has a
+corresponding [`FAccordionStyleDelta`](https://pub.dev/documentation/forui/latest/forui.widgets.accordion/FAccordionStyleDelta-class.html).
+
+Widgets accept deltas via their `style` parameter. To change an accordion's focused outline color while preserving the
+rest of the style:
+
+<CodeSnippet snippet={deltaSnippet} />
+
+Since widget styles extend their corresponding deltas, you can also pass a full style to replace the existing one entirely:
+
+<CodeSnippet snippet={replaceSnippet} />
+
+### Variants
+
+Widget styles contain [`FVariants`](/docs/concepts/themes#variants) fields which can be modified using a `delta(...)` function that accepts
+a sequence of operations. Depending on the variant's type, operations are either delta-based modifications or full
+replacements.
+
+There are **3** ways to modify `FVariants` fields:
+
+Composite types such as `BoxDecoration`, `IconThemeData`, `TextStyle`, and nested styles support delta-based modifications.
+To modify an accordion's title text style:
+
+<CodeSnippet snippet={variantsDeltaApplySnippet} />
+
+Atomic types such as `double` and `Color` only support full replacements. To modify a radio's border color:
+
+<CodeSnippet snippet={variantsValueApplySnippet} />
+
+Like widget styles, `FVariants` can also be replaced entirely by passing an `FVariants` directly. To replace an
+accordion's title text style:
+
+<CodeSnippet snippet={variantsReplaceSnippet} />
+
+
+## CLI
+
+The following section demonstrates how to override an accordion's style. This is recommended for major style overhauls.
+
+Run to generate a widget style:
+
+```shell copy
+dart run forui style create accordion
+```
+
+<Callout type="info">
+    Tip: Run `dart run forui style ls` to see all available styles.
+</Callout>
+
+To add an underline to the accordion title when focused, modify the generated style:
+
+<CodeSnippet snippet={modifyStyleSnippet} />
+
+Lastly, pass the modified style to an `FAccordion`:
+
+<CodeSnippet snippet={passStyleSnippet} />

@@ -1,0 +1,38 @@
+---
+title: Adding Theme Properties
+description: Extend Forui themes with application-specific properties using Flutter's ThemeExtension system.
+---
+
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import brandColorSnippet from '@/snippets/snippets/guides/adding_theme_properties/brand_color.json';
+import extensionsSnippet from '@/snippets/snippets/guides/adding_theme_properties/extensions.json';
+import getterSnippet from '@/snippets/snippets/guides/adding_theme_properties/getter.json';
+import accessPropertiesSnippet from '@/snippets/snippets/guides/adding_theme_properties/access_properties.json';
+import copyWithExtensionsSnippet from '@/snippets/snippets/guides/adding_theme_properties/copy_with.json';
+
+Forui themes can be extended with your own application-specific properties using Flutter's [`ThemeExtension`](https://api.flutter.dev/flutter/material/ThemeExtension-class.html)
+system.
+
+## Create a Theme Extension
+
+Theme extensions must extend `ThemeExtension` and implement `copyWith()` and `lerp()`.
+
+<CodeSnippet snippet={brandColorSnippet} />
+
+Add the extension to `FThemeData(...)` via its `extensions` parameter:
+
+<CodeSnippet snippet={extensionsSnippet} />
+
+You can also add extensions to existing themes using `copyWith(...)`:
+
+<CodeSnippet snippet={copyWithExtensionsSnippet} />
+
+## Accessing the Properties
+
+Retrieve your custom theme extension via [`extension<T>()`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/extension.html):
+
+<CodeSnippet snippet={accessPropertiesSnippet} />
+
+Optionally, we recommend creating a getter on `FThemeData`:
+
+<CodeSnippet snippet={getterSnippet} />

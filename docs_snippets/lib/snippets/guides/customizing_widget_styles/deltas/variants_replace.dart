@@ -6,6 +6,7 @@ final accordion =
     // {@snippet constructor}
     FAccordion(
       style: .delta(
+        // {@highlight}
         titleTextStyle: FVariants.from(
           const TextStyle(fontSize: 18, fontWeight: .bold),
           variants: {
@@ -13,6 +14,7 @@ final accordion =
             [.disabled]: const TextStyleDelta.delta(color: Colors.grey),
           },
         ),
+        // {@endhighlight}
       ),
       children: const [],
     );
