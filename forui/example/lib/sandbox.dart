@@ -32,10 +32,7 @@ class _SandboxState extends State<Sandbox> {
             label: const Text('Start Date'),
             description: const Text('Select a start date'),
           ),
-          FDateField(
-            label: const Text('End Date'),
-            description: const Text('Select an end date'),
-          ),
+          FDateField(label: const Text('End Date'), description: const Text('Select an end date')),
           FSlider(
             control: .managedContinuous(initial: FSliderValue(max: 0.35)),
             marks: const [
