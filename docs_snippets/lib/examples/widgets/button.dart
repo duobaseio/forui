@@ -150,10 +150,7 @@ class _ButtonTogglePageState extends StatefulExampleState<ButtonTogglePage> {
     selected: _italic,
     onPress: () => setState(() => _italic = !_italic),
     prefix: const Icon(FIcons.italic),
-    child: Text(
-      'Italic',
-      style: TextStyle(decoration: _italic ? .underline : null),
-    ),
+    child: Text('Italic', style: TextStyle(decoration: _italic ? .underline : null)),
   );
 }
 
