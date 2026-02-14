@@ -224,8 +224,20 @@ class DartDocLinker extends RecursiveAstVisitor<void> {
 
   /// Returns the Dart docs link, or null if it shouldn't be linked.
   String? dartDocUrl(Element element) {
-    final n = element.library?.uri.pathSegments.first;
-    if (packages.firstWhereOrNull((p) => p.name == n) case Package(name: final package, :final version)) {
+    final uri = element.library?.uri;
+    if (uri == null) {
+      return null;
+    }
+
+    var base = '';
+
+    // dart:ui types → api.flutter.dev/flutter/dart-ui/
+    if (uri.scheme == 'dart' && uri.path == 'ui') {
+      base = 'https://api.flutter.dev/flutter/dart-ui';
+    } else if (packages.firstWhereOrNull((p) => p.name == uri.pathSegments.first) case Package(
+      name: final package,
+      :final version,
+    )) {
       // We check enclosingElement != null to avoid top level functions being treated as methods.
       final type = switch (element) {
         FieldElement() ||
@@ -235,38 +247,44 @@ class DartDocLinker extends RecursiveAstVisitor<void> {
         _ => element.name,
       };
 
-      var base = '';
       for (final Package(:library) in packages) {
-        if (_barrel(library, type!)?.name case final name?) {
-          base = 'https://pub.dev/documentation/$package/$version/${name.isEmpty ? package : name}';
+        if (_barrel(library, type!) case final barrel?) {
+          if (package == 'flutter') {
+            base = 'https://api.flutter.dev/flutter/${p.basenameWithoutExtension(barrel.uri.pathSegments.last)}';
+          } else {
+            final name = barrel.name;
+            base = 'https://pub.dev/documentation/$package/$version/${name == null || name.isEmpty ? package : name}';
+          }
           break;
         }
       }
       assert(base.isNotEmpty, 'Could not find barrel library for type "$type" in package "$package".');
-
-      return switch (element) {
-        TopLevelFunctionElement(:final name) => '$base/$name.html',
-        EnumElement(:final name) => '$base/$name.html',
-        ExtensionElement(:final name) => '$base/$name.html',
-        MixinElement(:final name) => '$base/$name-mixin.html',
-        ClassElement(:final name) || InterfaceElement(:final name) => '$base/$name-class.html',
-        FieldElement(:final enclosingElement, :final name, :final isEnumConstant) when isEnumConstant =>
-          '$base/${enclosingElement.name}.html#$name',
-        FieldElement(:final enclosingElement, :final name, :final isConst) when isConst =>
-          '$base/${enclosingElement.name}/$name-constant.html',
-        FieldElement(:final enclosingElement, :final name) => '$base/${enclosingElement.name}/$name.html',
-        PropertyAccessorElement(:final enclosingElement, :final name, :final FieldElement variable)
-            when variable.isConst =>
-          '$base/${enclosingElement.name}/$name-constant.html',
-        PropertyAccessorElement(:final enclosingElement, :final name) => '$base/${enclosingElement.name}/$name.html',
-        ConstructorElement(:final enclosingElement, :final name?) =>
-          '$base/${enclosingElement.name}/${enclosingElement.name}${name == 'new' ? '' : '.$name'}.html',
-        MethodElement(:final enclosingElement?, :final name) => '$base/${enclosingElement.name}/$name.html',
-        _ => null,
-      };
     }
 
-    return null;
+    if (base.isEmpty) {
+      return null;
+    }
+
+    return switch (element) {
+      TopLevelFunctionElement(:final name) => '$base/$name.html',
+      EnumElement(:final name) => '$base/$name.html',
+      ExtensionElement(:final name) => '$base/$name.html',
+      MixinElement(:final name) => '$base/$name-mixin.html',
+      ClassElement(:final name) || InterfaceElement(:final name) => '$base/$name-class.html',
+      FieldElement(:final enclosingElement, :final name, :final isEnumConstant) when isEnumConstant =>
+        '$base/${enclosingElement.name}.html#$name',
+      FieldElement(:final enclosingElement, :final name, :final isConst) when isConst =>
+        '$base/${enclosingElement.name}/$name-constant.html',
+      FieldElement(:final enclosingElement, :final name) => '$base/${enclosingElement.name}/$name.html',
+      PropertyAccessorElement(:final enclosingElement, :final name, :final FieldElement variable)
+          when variable.isConst =>
+        '$base/${enclosingElement.name}/$name-constant.html',
+      PropertyAccessorElement(:final enclosingElement, :final name) => '$base/${enclosingElement.name}/$name.html',
+      ConstructorElement(:final enclosingElement, :final name?) =>
+        '$base/${enclosingElement.name}/${enclosingElement.name}${name == 'new' ? '' : '.$name'}.html',
+      MethodElement(:final enclosingElement?, :final name) => '$base/${enclosingElement.name}/$name.html',
+      _ => null,
+    };
   }
 
   /// Returns the deepest barrel library that exports [type].
