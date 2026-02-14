@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
@@ -59,7 +60,23 @@ class MultiValueFormFieldState<T> extends FormFieldState<Set<T>> {
   // cases, we'll also receive change notifications for changes originating from within this class -- for example, the
   // reset() method. In such cases, the FormField value will already have been set.
   void _handleControllerChange() {
-    if (!setEquals(widget.controller.value, value)) {
+    if (setEquals(widget.controller.value, value)) {
+      return;
+    }
+
+    // [SchedulerPhase.persistentCallbacks] is the build/layout/paint pipeline according to the source code in
+    // [SchedulerBinding.handleDrawFrame].
+    //
+    // This is needed because proxy controllers notify listeners during didUpdateWidget, which runs in the build phase.
+    // Calling didChange synchronously would trigger Form.setState() on a parent Form when it has already been built.
+    if (SchedulerBinding.instance.schedulerPhase == .persistentCallbacks) {
+      final current = {...widget.controller.value}; // This assumes values are immutable.
+      SchedulerBinding.instance.addPostFrameCallback((_) {
+        if (mounted && setEquals(widget.controller.value, current) && !setEquals(widget.controller.value, value)) {
+          didChange(widget.controller.value);
+        }
+      });
+    } else {
       didChange(widget.controller.value);
     }
   }
