@@ -234,8 +234,10 @@ class DartDocLinker extends RecursiveAstVisitor<void> {
     // dart:ui types → api.flutter.dev/flutter/dart-ui/
     if (uri.scheme == 'dart' && uri.path == 'ui') {
       base = 'https://api.flutter.dev/flutter/dart-ui';
-    } else if (packages.firstWhereOrNull((p) => p.name == uri.pathSegments.first)
-        case Package(name: final package, :final version)) {
+    } else if (packages.firstWhereOrNull((p) => p.name == uri.pathSegments.first) case Package(
+      name: final package,
+      :final version,
+    )) {
       // We check enclosingElement != null to avoid top level functions being treated as methods.
       final type = switch (element) {
         FieldElement() ||
