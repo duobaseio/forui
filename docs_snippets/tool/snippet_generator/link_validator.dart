@@ -5,7 +5,7 @@ import 'dart:io';
 
 import 'main.dart';
 
-/// Quicky & dirty script that validates that all URLs in samples/output JSON files don't return 404.
+/// Quick & dirty script that validates that all URLs in samples/output JSON files don't return 404.
 ///
 /// Usage: dart run tool/link_validator.dart
 Future<void> main() async {

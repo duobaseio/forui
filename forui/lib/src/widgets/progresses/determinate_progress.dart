@@ -102,7 +102,7 @@ class _State extends State<FDeterminateProgress> with SingleTickerProviderStateM
       child: DecoratedBox(
         decoration: _style!.trackDecoration,
         child: Align(
-          alignment: AlignmentDirectional.centerStart,
+          alignment: .centerStart,
           child: AnimatedBuilder(
             animation: _animation,
             builder: (_, child) => FractionallySizedBox(widthFactor: _animation.value, child: child!),

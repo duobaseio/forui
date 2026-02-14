@@ -149,7 +149,7 @@ class FPopover extends StatefulWidget {
   /// {@template forui.widgets.FPopover.childAnchor}
   /// The anchor point on the [child] used for positioning relative to the popover's anchor.
   ///
-  /// For example, with `childAnchor: Alignment.bottomCenter` and `popoverAnchor: Alignment.topCenter`,
+  /// For example, with `childAnchor: .bottomCenter` and `popoverAnchor: .topCenter`,
   /// the child's bottom edge will align with the popover's top edge.
   /// {@endtemplate}
   ///

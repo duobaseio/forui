@@ -35,8 +35,8 @@ final select = FSelect<String>(
   suffixBuilder: FSelect.defaultIconBuilder,
   // {@endcategory}
   // {@category "Content"}
-  contentAnchor: AlignmentDirectional.topStart,
-  fieldAnchor: AlignmentDirectional.bottomStart,
+  contentAnchor: .topStart,
+  fieldAnchor: .bottomStart,
   contentConstraints: const FAutoWidthPortalConstraints(maxHeight: 300),
   contentSpacing: const .spacing(4),
   contentOverflow: .flip,
@@ -92,8 +92,8 @@ final selectRich = FSelect<String>.rich(
   suffixBuilder: FSelect.defaultIconBuilder,
   // {@endcategory}
   // {@category "Content"}
-  contentAnchor: AlignmentDirectional.topStart,
-  fieldAnchor: AlignmentDirectional.bottomStart,
+  contentAnchor: .topStart,
+  fieldAnchor: .bottomStart,
   contentConstraints: const FAutoWidthPortalConstraints(maxHeight: 300),
   contentSpacing: const .spacing(4),
   contentOverflow: .flip,
@@ -155,8 +155,8 @@ final selectSearch = FSelect<String>.search(
   // {@endcategory}
   // {@category "Content"}
   searchFieldProperties: const FSelectSearchFieldProperties(),
-  contentAnchor: AlignmentDirectional.topStart,
-  fieldAnchor: AlignmentDirectional.bottomStart,
+  contentAnchor: .topStart,
+  fieldAnchor: .bottomStart,
   contentConstraints: const FAutoWidthPortalConstraints(maxHeight: 300),
   contentSpacing: const .spacing(4),
   contentOverflow: .flip,
@@ -216,8 +216,8 @@ final selectSearchBuilder = FSelect<String>.searchBuilder(
   // {@endcategory}
   // {@category "Content"}
   searchFieldProperties: const FSelectSearchFieldProperties(),
-  contentAnchor: AlignmentDirectional.topStart,
-  fieldAnchor: AlignmentDirectional.bottomStart,
+  contentAnchor: .topStart,
+  fieldAnchor: .bottomStart,
   contentConstraints: const FAutoWidthPortalConstraints(maxHeight: 300),
   contentSpacing: const .spacing(4),
   contentOverflow: .flip,
