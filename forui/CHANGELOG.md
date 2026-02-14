@@ -1,3 +1,6 @@
+## 0.18.1
+* Fix lifted controls causing `setState() during build` assertion error when used inside a `Form`.
+
 
 ## 0.18.0+1
 Fix banner image.
