@@ -1,3 +1,7 @@
+## 0.18.0+1
+Fix banner image
+
+
 ## 0.18.0
 
 This update overhauls the Styling API as outlined in [Styling 2.0](https://github.com/duobaseio/forui/blob/main/design_docs/shipped/styling_2.0.md). 

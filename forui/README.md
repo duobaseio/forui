@@ -25,7 +25,7 @@
 
 <br />
 <div align="center">
- <img width="800" alt="Forui" src="docs/public/banners/banner-text-130226.png">
+ <img width="800" alt="Forui" src="https://raw.githubusercontent.com/duobaseio/forui/main/docs/public/banners/banner-text-130226.png">
 </div>
 
 > [!IMPORTANT]
