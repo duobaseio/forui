@@ -1,3 +1,7 @@
+## 0.18.0
+Add support for Forui `0.18.0`.
+
+
 ## 0.17.0
 To simplify updating to the latest version, we've included [Data Driven Fixes](https://github.com/flutter/flutter/blob/master/docs/contributing/Data-driven-Fixes.md).
 This allows you to run automated fixes on your codebase to update it to be compatible with the latest version of `forui_hooks`.

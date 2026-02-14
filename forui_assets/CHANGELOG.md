@@ -1,3 +1,7 @@
+## 0.18.0
+* Update icons to Lucide 0.564.0
+
+
 ## 0.17.1
 * Fix `lucide.ttf` not being updated.
 
