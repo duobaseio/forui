@@ -16,11 +16,13 @@ class FSelectController<T> extends ValueNotifier<T?> {
   set value(T? value) => super.value = toggleable && super.value == value ? null : value;
 }
 
-class _ProyController<T> extends FSelectController<T> {
+class _ProxyController<T> extends FSelectController<T> {
   T? _unsynced;
   ValueChanged<T?> _onChange;
 
-  _ProyController({required super.value, required ValueChanged<T?> onChange}) : _unsynced = value, _onChange = onChange;
+  _ProxyController({required super.value, required ValueChanged<T?> onChange})
+    : _unsynced = value,
+      _onChange = onChange;
 
   void _update(T? newValue, ValueChanged<T?> onChange) {
     _onChange = onChange;
@@ -118,9 +120,9 @@ class _Lifted<T> extends FSelectControl<T> with _$_LiftedMixin<T> {
   const _Lifted({required this.value, required this.onChange}) : super._();
 
   @override
-  FSelectController<T> createController() => _ProyController(value: value, onChange: onChange);
+  FSelectController<T> createController() => _ProxyController(value: value, onChange: onChange);
 
   @override
   void _updateController(FSelectController<T> controller) =>
-      (controller as _ProyController<T>)._update(value, onChange);
+      (controller as _ProxyController<T>)._update(value, onChange);
 }
