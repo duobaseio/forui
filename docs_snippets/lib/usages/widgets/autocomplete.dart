@@ -75,8 +75,8 @@ final autocomplete = FAutocomplete(
   // {@endcategory}
   // {@category "Content"}
   autoHide: true,
-  contentAnchor: AlignmentDirectional.topStart,
-  fieldAnchor: AlignmentDirectional.bottomStart,
+  contentAnchor: .topStart,
+  fieldAnchor: .bottomStart,
   contentConstraints: const FAutoWidthPortalConstraints(maxHeight: 300),
   contentSpacing: const .spacing(4),
   contentOverflow: .flip,
@@ -176,8 +176,8 @@ final builder = FAutocomplete.builder(
   contentEmptyBuilder: FAutocomplete.defaultContentEmptyBuilder,
   contentLoadingBuilder: FAutocomplete.defaultContentLoadingBuilder,
   contentErrorBuilder: (context, error, stackTrace) => const Text('Error'),
-  contentAnchor: AlignmentDirectional.topStart,
-  fieldAnchor: AlignmentDirectional.bottomStart,
+  contentAnchor: .topStart,
+  fieldAnchor: .bottomStart,
   contentConstraints: const FAutoWidthPortalConstraints(maxHeight: 300),
   contentSpacing: const .spacing(4),
   contentOverflow: .flip,

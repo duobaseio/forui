@@ -249,6 +249,7 @@ class DartDocLinker extends RecursiveAstVisitor<void> {
         EnumElement(:final name) => '$base/$name.html',
         ExtensionElement(:final name) => '$base/$name.html',
         MixinElement(:final name) => '$base/$name-mixin.html',
+        ExtensionTypeElement(:final name) => '$base/$name-extension-type.html',
         ClassElement(:final name) || InterfaceElement(:final name) => '$base/$name-class.html',
         FieldElement(:final enclosingElement, :final name, :final isEnumConstant) when isEnumConstant =>
           '$base/${enclosingElement.name}.html#$name',

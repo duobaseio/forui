@@ -76,7 +76,7 @@ class FPopoverMenu extends StatelessWidget {
 
   /// The anchor point on the menu used for positioning relative to the [childAnchor].
   ///
-  /// For example, with `menuAnchor: Alignment.topCenter` and `childAnchor: Alignment.bottomCenter`,
+  /// For example, with `menuAnchor: .topCenter` and `childAnchor: .bottomCenter`,
   /// the menu's top edge will align with the child's bottom edge.
   ///
   /// Defaults to [Alignment.topCenter].
@@ -84,7 +84,7 @@ class FPopoverMenu extends StatelessWidget {
 
   /// The anchor point on the child used for positioning relative to the [menuAnchor].
   ///
-  /// For example, with `childAnchor: Alignment.bottomCenter` and `menuAnchor: Alignment.topCenter`,
+  /// For example, with `childAnchor: .bottomCenter` and `menuAnchor: .topCenter`,
   /// the child's bottom edge will align with the menu's top edge.
   ///
   /// Defaults to [Alignment.bottomCenter].

@@ -33,8 +33,8 @@ final multiSelect = FMultiSelect<String>(
   suffixBuilder: FMultiSelect.defaultIconBuilder,
   // {@endcategory}
   // {@category "Content"}
-  contentAnchor: AlignmentDirectional.topStart,
-  fieldAnchor: AlignmentDirectional.bottomStart,
+  contentAnchor: .topStart,
+  fieldAnchor: .bottomStart,
   contentConstraints: const FAutoWidthPortalConstraints(maxHeight: 300),
   contentSpacing: const .spacing(4),
   contentOverflow: .flip,
@@ -87,8 +87,8 @@ final multiSelectRich = FMultiSelect<String>.rich(
   suffixBuilder: FMultiSelect.defaultIconBuilder,
   // {@endcategory}
   // {@category "Content"}
-  contentAnchor: AlignmentDirectional.topStart,
-  fieldAnchor: AlignmentDirectional.bottomStart,
+  contentAnchor: .topStart,
+  fieldAnchor: .bottomStart,
   contentConstraints: const FAutoWidthPortalConstraints(maxHeight: 300),
   contentSpacing: const .spacing(4),
   contentOverflow: .flip,
@@ -147,8 +147,8 @@ final multiSelectSearch = FMultiSelect<String>.search(
   // {@endcategory}
   // {@category "Content"}
   searchFieldProperties: const FSelectSearchFieldProperties(),
-  contentAnchor: AlignmentDirectional.topStart,
-  fieldAnchor: AlignmentDirectional.bottomStart,
+  contentAnchor: .topStart,
+  fieldAnchor: .bottomStart,
   contentConstraints: const FAutoWidthPortalConstraints(maxHeight: 300),
   contentSpacing: const .spacing(4),
   contentOverflow: .flip,
@@ -205,8 +205,8 @@ final multiSelectSearchBuilder = FMultiSelect<String>.searchBuilder(
   // {@endcategory}
   // {@category "Content"}
   searchFieldProperties: const FSelectSearchFieldProperties(),
-  contentAnchor: AlignmentDirectional.topStart,
-  fieldAnchor: AlignmentDirectional.bottomStart,
+  contentAnchor: .topStart,
+  fieldAnchor: .bottomStart,
   contentConstraints: const FAutoWidthPortalConstraints(maxHeight: 300),
   contentSpacing: const .spacing(4),
   contentOverflow: .flip,

@@ -258,7 +258,7 @@ abstract class _State<T extends _Label> extends State<T> with TickerProviderStat
   Widget _animatedError(BuildContext context, [TextHeightBehavior? behavior]) => AnimatedBuilder(
     animation: _curvedSize,
     builder: (context, child) => Align(
-      alignment: AlignmentDirectional.topStart,
+      alignment: .topStart,
       heightFactor: _curvedSize.value,
       widthFactor: 1.0,
       child: child,

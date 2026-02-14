@@ -1,5 +1,6 @@
+
 ## 0.18.0+1
-Fix banner image
+Fix banner image.
 
 
 ## 0.18.0

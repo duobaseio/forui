@@ -161,10 +161,10 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// True if a clear button should be shown. Defaults to false.
   final bool clearable;
 
-  /// The alignment point on the popover. Defaults to [AlignmentDirectional.topStart].
+  /// The alignment point on the popover. Defaults to [AlignmentGeometry.topStart].
   final AlignmentGeometry contentAnchor;
 
-  /// The alignment point on the select's field. Defaults to [AlignmentDirectional.bottomStart].
+  /// The alignment point on the select's field. Defaults to [AlignmentGeometry.bottomStart].
   final AlignmentGeometry fieldAnchor;
 
   /// The constraints to apply to the popover. Defaults to `const FAutoWidthPortalConstraints(maxHeight: 300)`.
@@ -237,8 +237,8 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     MouseCursor mouseCursor = .defer,
     bool canRequestFocus = true,
     bool clearable = false,
-    AlignmentGeometry contentAnchor = AlignmentDirectional.topStart,
-    AlignmentGeometry fieldAnchor = AlignmentDirectional.bottomStart,
+    AlignmentGeometry contentAnchor = .topStart,
+    AlignmentGeometry fieldAnchor = .bottomStart,
     FPortalConstraints contentConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
     FPortalSpacing contentSpacing = const .spacing(4),
     FPortalOverflow contentOverflow = .flip,
@@ -393,8 +393,8 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     MouseCursor mouseCursor = .defer,
     bool canRequestFocus = true,
     bool clearable = false,
-    AlignmentGeometry contentAnchor = AlignmentDirectional.topStart,
-    AlignmentGeometry fieldAnchor = AlignmentDirectional.bottomStart,
+    AlignmentGeometry contentAnchor = .topStart,
+    AlignmentGeometry fieldAnchor = .bottomStart,
     FPortalConstraints contentConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
     FPortalSpacing contentSpacing = const .spacing(4),
     FPortalOverflow contentOverflow = .flip,
@@ -552,8 +552,8 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     this.mouseCursor = .defer,
     this.canRequestFocus = true,
     this.clearable = false,
-    this.contentAnchor = AlignmentDirectional.topStart,
-    this.fieldAnchor = AlignmentDirectional.bottomStart,
+    this.contentAnchor = .topStart,
+    this.fieldAnchor = .bottomStart,
     this.contentConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
     this.contentSpacing = const .spacing(4),
     this.contentOverflow = .flip,

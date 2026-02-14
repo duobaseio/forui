@@ -134,12 +134,12 @@ final class FToastAlignment {
   /// Aligns the toasts to the top start of the screen, depending on the locale's text direction.
   ///
   /// Top left in LTR locales, top right in RTL locales.
-  static const topStart = FToastAlignment._(AlignmentDirectional.topStart, Alignment.bottomCenter);
+  static const topStart = FToastAlignment._(.topStart, .bottomCenter);
 
   /// Aligns the toasts to the start of the screen, depending on the locale's text direction.
   ///
   /// Top right in LTR locales, top left in RTL locales.
-  static const topEnd = FToastAlignment._(AlignmentDirectional.topEnd, Alignment.bottomCenter);
+  static const topEnd = FToastAlignment._(.topEnd, .bottomCenter);
 
   /// Aligns the toasts to the top left of the screen.
   static const topLeft = FToastAlignment._(.topLeft, .bottomCenter);
@@ -153,12 +153,12 @@ final class FToastAlignment {
   /// Aligns the toasts to the bottom start of the screen, depending on the locale's text direction.
   ///
   /// Bottom left in LTR locales, bottom right in RTL locales.
-  static const bottomStart = FToastAlignment._(AlignmentDirectional.bottomStart, .topCenter);
+  static const bottomStart = FToastAlignment._(.bottomStart, .topCenter);
 
   /// Aligns the toasts to the bottom end of the screen, depending on the locale's text direction.
   ///
   /// Bottom right in LTR locales, bottom right in RTL locales.
-  static const bottomEnd = FToastAlignment._(AlignmentDirectional.bottomEnd, .topCenter);
+  static const bottomEnd = FToastAlignment._(.bottomEnd, .topCenter);
 
   /// Aligns the toasts to the bottom left of the screen.
   static const bottomLeft = FToastAlignment._(.bottomLeft, .topCenter);
