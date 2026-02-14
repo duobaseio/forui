@@ -13,7 +13,7 @@ FAccordionStyle accordionStyle({required FColors colors, required FTypography ty
         variants: {
           // This text style is applied when the accordion is hovered OR pressed OR focused (new).
           // {@highlight}
-          [.hovered, .pressed, .focused]: const TextStyleDelta.delta(decoration: TextDecoration.underline),
+          [.hovered, .pressed, .focused]: const .delta(decoration: TextDecoration.underline),
         },
       ),
       // {@endsnippet}

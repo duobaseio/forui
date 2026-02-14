@@ -282,6 +282,9 @@ extension type FButtonStyles._(FVariants<FButtonVariantConstraint, FButtonVarian
                 [.hovered, .pressed]: .delta(color: colors.hover(colors.primary)),
                 //
                 [.disabled]: .delta(color: colors.disable(colors.primary)),
+                //
+                [.selected]: .delta(color: colors.hover(colors.primary)),
+                [.selected.and(.disabled)]: .delta(color: colors.disable(colors.hover(colors.primary))),
               },
             ),
             foregroundColor: colors.primaryForeground,
@@ -297,6 +300,9 @@ extension type FButtonStyles._(FVariants<FButtonVariantConstraint, FButtonVarian
                   [.hovered, .pressed]: .delta(color: colors.hover(colors.secondary)),
                   //
                   [.disabled]: .delta(color: colors.disable(colors.secondary)),
+                  //
+                  [.selected]: .delta(color: colors.hover(colors.secondary)),
+                  [.selected.and(.disabled)]: .delta(color: colors.disable(colors.hover(colors.secondary))),
                 },
               ),
               foregroundColor: colors.secondaryForeground,
@@ -318,6 +324,15 @@ extension type FButtonStyles._(FVariants<FButtonVariantConstraint, FButtonVarian
                   [.disabled]: .delta(
                     color: colors.destructive.withValues(alpha: colors.brightness == .light ? 0.05 : 0.1),
                   ),
+                  //
+                  [.selected]: .delta(
+                    color: colors.destructive.withValues(alpha: colors.brightness == .light ? 0.2 : 0.3),
+                  ),
+                  [.selected.and(.disabled)]: .delta(
+                    color: colors.disable(
+                      colors.destructive.withValues(alpha: colors.brightness == .light ? 0.2 : 0.3),
+                    ),
+                  ),
                 },
               ),
               foregroundColor: colors.destructive,
@@ -336,6 +351,9 @@ extension type FButtonStyles._(FVariants<FButtonVariantConstraint, FButtonVarian
                   [.hovered, .pressed]: .delta(color: colors.secondary),
                   //
                   [.disabled]: .delta(color: colors.disable(colors.card)),
+                  //
+                  [.selected]: .delta(color: colors.secondary),
+                  [.selected.and(.disabled)]: .delta(color: colors.disable(colors.secondary)),
                 },
               ),
               foregroundColor: colors.secondaryForeground,
@@ -350,6 +368,9 @@ extension type FButtonStyles._(FVariants<FButtonVariantConstraint, FButtonVarian
                   [.hovered, .pressed]: .delta(color: colors.secondary),
                   //
                   [.disabled]: const .delta(),
+                  //
+                  [.selected]: .delta(color: colors.secondary),
+                  [.selected.and(.disabled)]: .delta(color: colors.disable(colors.secondary)),
                 },
               ),
               foregroundColor: colors.secondaryForeground,
@@ -429,32 +450,32 @@ extension type FButtonSizeStyles._(
       FVariants(
         button(
           textStyle: typography.base,
-          contentPadding: const .symmetric(horizontal: 16, vertical: 12),
+          contentPadding: const .symmetric(horizontal: 16, vertical: 11),
           contentSpacing: 10,
-          iconSize: 20,
-          iconPadding: const .all(8),
+          iconSize: typography.base.fontSize ?? 16,
+          iconPadding: const .all(11),
         ),
         variants: {
           [.xs]: button(
             textStyle: typography.xs,
-            contentPadding: const .symmetric(horizontal: 8, vertical: 8),
+            contentPadding: const .symmetric(horizontal: 8, vertical: 7),
             contentSpacing: 6,
-            iconSize: 14,
+            iconSize: typography.xs.fontSize ?? 12,
             iconPadding: const .all(7),
           ),
           [.sm]: button(
             textStyle: typography.sm,
-            contentPadding: const .symmetric(horizontal: 12, vertical: 10),
+            contentPadding: const .symmetric(horizontal: 12, vertical: 9),
             contentSpacing: 8,
-            iconSize: 16,
-            iconPadding: const .all(8),
+            iconSize: typography.sm.fontSize ?? 14,
+            iconPadding: const .all(9),
           ),
           [.lg]: button(
             textStyle: typography.base,
             contentPadding: const .symmetric(horizontal: 32, vertical: 14),
             contentSpacing: 10,
-            iconSize: 24,
-            iconPadding: const .all(8),
+            iconSize: typography.base.fontSize ?? 16,
+            iconPadding: const .all(14),
           ),
         },
       ),

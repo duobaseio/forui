@@ -132,6 +132,29 @@ class ButtonOnlyIconPage extends Example {
 }
 
 @RoutePage()
+class ButtonTogglePage extends StatefulExample {
+  ButtonTogglePage({@queryParam super.theme});
+
+  @override
+  State<ButtonTogglePage> createState() => _ButtonTogglePageState();
+}
+
+class _ButtonTogglePageState extends StatefulExampleState<ButtonTogglePage> {
+  bool _italic = false;
+
+  @override
+  Widget example(BuildContext _) => FButton(
+    variant: .outline,
+    size: .sm,
+    mainAxisSize: .min,
+    selected: _italic,
+    onPress: () => setState(() => _italic = !_italic),
+    prefix: const Icon(FIcons.italic),
+    child: Text('Italic', style: TextStyle(decoration: _italic ? .underline : null)),
+  );
+}
+
+@RoutePage()
 class ButtonCircularProgressPage extends Example {
   ButtonCircularProgressPage({@queryParam super.theme});
 

@@ -4,7 +4,8 @@ import 'package:code_builder/code_builder.dart';
 
 import '../main.dart';
 
-const iconMapping = 'icon-mapping';
+const iconMappingName = 'icon-mapping';
+const iconMappingFile = 'icon_mapping';
 
 String mapIconMapping(List<String> icons) {
   final library = LibraryBuilder()

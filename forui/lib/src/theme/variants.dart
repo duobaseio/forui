@@ -123,13 +123,6 @@ class FVariants<K extends FVariantConstraint, E extends FVariant, V, D extends D
   /// The variants.
   final Map<K, V> variants;
 
-  @override
-  FVariants<K, E, V, D> Function(V base, Map<K, V> variants) get _call =>
-      (_, _) => this;
-
-  @override
-  FVariants<K, E, V, D> call(covariant FVariants<K, E, V, D> _) => this;
-
   /// Creates an [FVariants] with concrete variants.
   FVariants(this.base, {required Map<List<K>, V> variants})
     : variants = {
@@ -229,6 +222,13 @@ class FVariants<K extends FVariantConstraint, E extends FVariant, V, D extends D
   /// This is always valid if [T1] and [T2] are both extension types over [FVariantConstraint] and [FVariant] as in the
   /// case with the generated widget-specific variant constraints.
   FVariants<T1, T2, V, D> cast<T1 extends FVariantConstraint, T2 extends FVariant>() => this as FVariants<T1, T2, V, D>;
+
+  @override
+  FVariants<K, E, V, D> call(covariant FVariants<K, E, V, D> _) => this;
+
+  @override
+  FVariants<K, E, V, D> Function(V base, Map<K, V> variants) get _call =>
+      (_, _) => this;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

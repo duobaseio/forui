@@ -4,8 +4,10 @@ description: Get started with Forui in your Flutter project.
 ---
 
 import {Callout} from "fumadocs-ui/components/callout";
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
-import gettingStartedSnippet from '@/snippets/snippets/getting_started/getting_started.json';
+import mainBasicSnippet from '@/snippets/snippets/getting_started/main_basic.json';
+import mainRouterSnippet from '@/snippets/snippets/getting_started/main_router.json';
 import materialSnippet from '@/snippets/snippets/getting_started/material.json';
 
 This guide assumes you have a basic understanding of Flutter and have already set up your development environment.
@@ -63,13 +65,29 @@ To use Forui widgets in your Flutter app, import the Forui package and place the
 
 To generate a basic Forui app structure in your project, run:
 
-```bash filename="bash" copy
-dart run forui init
-```
+<Tabs items={['Basic', 'Router']}>
+    <Tab value="Basic">
+        ```bash filename="bash" copy
+        dart run forui init
+        ```
+    </Tab>
+    <Tab value="Router">
+        ```bash filename="bash" copy
+        dart run forui init --template=router
+        ```
+    </Tab>
+</Tabs>
 
 Or copy & paste the following code snippet:
 
-<CodeSnippet snippet={gettingStartedSnippet} />
+<Tabs items={['Basic', 'Router']}>
+    <Tab value="Basic">
+        <CodeSnippet snippet={mainBasicSnippet} />
+    </Tab>
+    <Tab value="Router">
+        <CodeSnippet snippet={mainRouterSnippet} />
+    </Tab>
+</Tabs>
 
 It is perfectly fine to use Cupertino/Material widgets alongside Forui widgets!
 

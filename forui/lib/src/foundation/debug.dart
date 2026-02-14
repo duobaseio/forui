@@ -193,7 +193,7 @@ bool debugCheckFLocalizationsInitialized(FLocalizations localizations) {
           '  localizationsDelegates: FLocalizations.localizationsDelegates,\n'
           '  supportedLocales: FLocalizations.supportedLocales,\n'
           ')\n\n'
-          'See https://forui.dev/docs/localization for more information.',
+          'See https://forui.dev/docs/concepts/localization for more information.',
         ),
       ]);
     }

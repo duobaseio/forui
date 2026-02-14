@@ -75,6 +75,7 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/button/outline', page: ButtonOutlineRoute.page),
     AutoRoute(path: '/button/icon', page: ButtonIconRoute.page),
     AutoRoute(path: '/button/only-icon', page: ButtonOnlyIconRoute.page),
+    AutoRoute(path: '/button/toggle', page: ButtonToggleRoute.page),
     AutoRoute(path: '/button/circular-progress', page: ButtonCircularProgressRoute.page),
     AutoRoute(path: '/calendar/default', page: CalendarRoute.page),
     AutoRoute(path: '/calendar/dates', page: DatesCalendarRoute.page),

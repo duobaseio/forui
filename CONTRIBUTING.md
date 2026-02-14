@@ -489,100 +489,16 @@ if necessary.
 [forui.dev](https://forui.dev/docs) is split into two parts:
 * The [doc snippets website](./docs_snippets), which is a Flutter webapp that provides the example widgets & other code blocks.
 * The [documentation website](./docs), which provides overviews and examples of widgets from the docs snippets website embedded
-  using `<Widget/>` components in MDX files.
+  in MDX files.
 
-We will use a secondary-styled button as an example in the following sections.
+A widget's documentation page typically consists of the following sections:
+* **Introduction**: A brief description of the widget along with an interactive code block of basic usage.
+* **CLI**: The command to generate and customize the widget's style.
+* **Usage**: Constructor/Function signatures with selectable categories (e.g., core, control, accessibility).
+* **Examples**: Various use cases organized by appearance, content, and behavior.
 
-
-### Creating an Example
-
-The [button's corresponding sample](https://github.com/forus-labs/forui/blob/bb45cef78459a710824c299a192b5de59b61c9b3/samples/lib/widgets/button.dart#L15)
-is:
-```dart
-import 'package:flutter/material.dart';
-
-import 'package:auto_route/auto_route.dart';
-import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/button/button.dart';
-
-import 'package:docs_snippets/example.dart';
-
-@RoutePage()
-class ButtonTextPage extends Example { // - (1)
-  final Variant variant;
-  final String label;
-
-  ButtonTextPage({
-    @queryParam super.theme, // - (2)
-  }) : variant = variants[style] ?? Variant.primary;
-
-  @override
-  Widget example(BuildContext context) => IntrinsicWidth(
-        child: FButton(
-          label: Text(label),
-          style: variant,
-          onPress: () {},
-        ),
-      );
-}
-```
-
-1. Examples should extend `Example`/`StatefulExample` which centers and wraps the widget returned by the overridden
-  `example(...)`  method in a `FTheme`.
-2. The current theme, provided as a URL query parameter.
-
-The docs_snippets website uses `auto_route` to generate a route for each example. In general, each example has its own page and
-URL. Generate the route by running `dart pub run build_runner build --delete-conflicting-outputs`. After which,
-register the route with [`_AppRouter` in main.dart](https://github.com/forus-labs/forui/blob/bb45cef78459a710824c299a192b5de59b61c9b3/samples/lib/main.dart#L67).
-
-A route's path should follow the format `/<widget-name>/<variant>` in kebab-case. In this case, the button route's path
-is `/button/text`. `<variant>` should default to `default` and never be empty.
-
-See the snippet generator's [README](./docs_snippets/README.md) for more details.
-
-
-### Creating a Documentation Page
-
-Each widget should have its own MDX file in the documentation website's [docs folder](./docs/app/docs).
-
-The file should contain the following sections:
-* A brief overview and minimal example.
-* Usage section that details the various constructors and their parameters.
-* Examples.
-
-See `FButton`'s [mdx file](https://github.com/forus-labs/forui/blob/bb45cef78459a710824c299a192b5de59b61c9b3/docs/pages/docs/button.mdx?plain=1#L58).
-
-Each example should be wrapped in a `<Tabs/>` component. It contains a `<Widget/>` component and a code block. The
-`<Widget/>` component is used to display a example widget hosted on the docs_snippets website, while the code block displays
-the corresponding Dart code.
-
-```mdx
-<Tabs items={['Preview', 'Code']}>
-  <Tabs.Tab>
-    <Widget
-      name='button' <!-- (1) -->
-      variant='text' <!-- (2) -->
-      query={{style: 'secondary'}} <!-- (3) -->
-      height={500} <!-- (4) -->
-    />
-  </Tabs.Tab>
-  <Tabs.Tab>
-    ```dart {3} <!-- (5) -->
-    FButton(
-      label: const Text('Button'),
-      style: FButtonStyle.secondary,
-      onPress: () {},
-    );
-    ```
-  </Tabs.Tab>
-</Tabs>
-```
-
-1. The name corresponds to a `<widget-name>` in the docs_snippets website's route paths.
-2. The variant corresponds to a `<variant>` in the docs_snippets website's route paths. Defaults to `default` if not specified.
-3. The query parameters to pass to the example widget.
-4. The height of the `<Widget/>` component.
-5. `{}` specifies the lines to highlight.
+See the [docs snippets README](./docs_snippets/README.md) for detailed information on the three snippet types (usages,
+examples, and snippets) and their syntax.
 
 ## Updating Localizations
 

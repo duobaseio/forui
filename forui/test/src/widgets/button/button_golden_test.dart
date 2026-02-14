@@ -300,6 +300,45 @@ void main() {
           matchesGoldenFile('button/${theme.name}/$name/circular-progress-disabled-button.png'),
         );
       });
+
+      testWidgets('${theme.name} selected', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme.data,
+            child: FButton(
+              variant: variant,
+              selected: true,
+              prefix: const Icon(FIcons.circlePlay),
+              suffix: const Icon(FIcons.circleStop),
+              onPress: () {},
+              child: const Text('Button'),
+            ),
+          ),
+        );
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('button/${theme.name}/$name/selected.png'));
+      });
+
+      testWidgets('${theme.name} selected and disabled', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme.data,
+            child: FButton(
+              variant: variant,
+              selected: true,
+              prefix: const Icon(FIcons.circlePlay),
+              suffix: const Icon(FIcons.circleStop),
+              onPress: null,
+              child: const Text('Button'),
+            ),
+          ),
+        );
+
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('button/${theme.name}/$name/selected-disabled.png'),
+        );
+      });
     }
   }
 
