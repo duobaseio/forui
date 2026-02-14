@@ -61,6 +61,14 @@ Future<void> main() async {
     );
   }
 
+  packages.add(
+    Package(
+      name: 'flutter',
+      version: '',
+      library: (await session.getLibraryByUri('package:flutter/material.dart') as LibraryElementResult).element,
+    ),
+  );
+
   // Process examples.
   for (final (route, snippet) in (await Examples.generate(session, provider, packages, [_examples]))) {
     final json = const JsonEncoder.withIndent('  ').convert(snippet.toJson());

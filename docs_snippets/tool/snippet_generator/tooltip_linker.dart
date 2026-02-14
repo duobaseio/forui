@@ -219,7 +219,10 @@ class TooltipLinker extends DartDocLinker {
     super.visitSimpleFormalParameter(node);
   }
 
-  bool _forui(Element element) => packages.any((p) => p.name == element.library?.uri.pathSegments.first);
+  bool _forui(Element element) {
+    final name = element.library?.uri.pathSegments.first;
+    return name != null && name != 'flutter' && packages.any((p) => p.name == name);
+  }
 
   void tooltip(SyntacticEntity node, FragmentSnippetKind kind, String text, [Element? container]) {
     tooltips.add(
