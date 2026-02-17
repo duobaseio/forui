@@ -81,12 +81,7 @@ class _Delta implements EdgeInsetsDelta {
   final double? right;
   final double? bottom;
 
-  const _Delta({
-    this.left = .infinity,
-    this.top = .infinity,
-    this.right = .infinity,
-    this.bottom = .infinity,
-  });
+  const _Delta({this.left = .infinity, this.top = .infinity, this.right = .infinity, this.bottom = .infinity});
 
   @override
   EdgeInsets call(EdgeInsets? insets) => (insets ?? .zero).copyWith(

@@ -238,9 +238,9 @@ class FButton extends StatelessWidget {
       onSecondaryLongPress: onSecondaryLongPress,
       selected: selected,
       builder: (_, variants, _) => DecoratedBox(
-          decoration: style.decoration.resolve(variants),
-          child: FButtonData(style: style, variants: variants, child: child),
-        ),
+        decoration: style.decoration.resolve(variants),
+        child: FButtonData(style: style, variants: variants, child: child),
+      ),
     );
   }
 

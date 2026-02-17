@@ -348,8 +348,9 @@ void main() {
       (0.3, const Offset(0, -70), true),
       (0.8, const Offset(0, -70), false),
     ]) {
-      testWidgets('dismissThreshold $threshold with $offset - ${dismissed ? 'dismisses' : 'does not dismiss'}',
-          (tester) async {
+      testWidgets('dismissThreshold $threshold with $offset - ${dismissed ? 'dismisses' : 'does not dismiss'}', (
+        tester,
+      ) async {
         final direction = offset.dx == 0 ? AxisDirection.up : AxisDirection.left;
 
         await tester.pumpWidget(
@@ -358,7 +359,9 @@ void main() {
               child: Center(
                 child: Column(
                   mainAxisSize: .min,
-                  children: [button(.bottomCenter, [direction], const Duration(seconds: 5), threshold)],
+                  children: [
+                    button(.bottomCenter, [direction], const Duration(seconds: 5), threshold),
+                  ],
                 ),
               ),
             ),
