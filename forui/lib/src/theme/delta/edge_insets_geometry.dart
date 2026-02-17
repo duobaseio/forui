@@ -8,7 +8,7 @@ abstract class EdgeInsetsGeometryDelta with Delta {
   /// [EdgeInsetsDirectional] stays [EdgeInsetsDirectional]).
   ///
   /// ```dart
-  /// .scale(0.5).(.all(10)); // .all(5)
+  /// .scale(0.5)(.all(10)); // .all(5)
   /// ```
   const factory EdgeInsetsGeometryDelta.scale(double factor) = _GeometryScale;
 
