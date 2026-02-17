@@ -30,6 +30,10 @@
 ### `FThemeData`
 * **Breaking** Change `FThemeData` variant-based field types to use wrapped extension types (`FAlertStyles`, `FBadgeStyles`, etc.).
 
+### `FTappable`
+* Fix `onVariantChange` callback receiving a mutated set instead of the original previous set.
+
+
 ### `FTile`
 * Add `FTileStyles.primary` and `FTileStyles.destructive` getters.
 

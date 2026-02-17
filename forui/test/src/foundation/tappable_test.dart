@@ -514,6 +514,37 @@ void main() {
       );
     });
 
+    testWidgets('variants are replaced rather than modified', (tester) async {
+      late Set<FTappableVariant> variants;
+      late StateSetter setState;
+      var selected = false;
+
+      await tester.pumpWidget(
+        TestScaffold(
+          child: StatefulBuilder(
+            builder: (context, setter) {
+              setState = setter;
+              return FTappable.static(
+                selected: selected,
+                builder: (_, v, _) {
+                  variants = v;
+                  return const Text('tappable');
+                },
+                onPress: () {},
+              );
+            },
+          ),
+        ),
+      );
+
+      final before = identityHashCode(variants);
+
+      setState(() => selected = true);
+      await tester.pumpAndSettle();
+
+      expect(identityHashCode(variants), isNot(before));
+    });
+
     testWidgets('onVariantChange & onHoverChange callback called', (tester) async {
       Set<FTappableVariant>? previous;
       Set<FTappableVariant>? current;
