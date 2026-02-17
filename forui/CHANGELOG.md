@@ -33,6 +33,9 @@
 ### `FTile`
 * Add `FTileStyles.primary` and `FTileStyles.destructive` getters.
 
+### `FToaster`
+* Add `dismissThreshold` to `showFToast`, `showRawFToast`, and `FToasterState.show`.
+
 
 ## 0.18.1
 * Fix lifted controls causing `setState() during build` assertion error when used inside a `Form`.

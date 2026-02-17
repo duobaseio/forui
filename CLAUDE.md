@@ -16,11 +16,12 @@
 
 ## Changelog organization
 
-Each release section is a level 2 heading. Make sure you're always adding entries in the latest release.
+Each release section is a level 2 heading. Make sure you're always adding entries in the unreleased section at the top.
 
-Entries should be grouped by widgets in alphabetical order. Each widget section should be a level 3 heading with the
-widget names in backticks. Related widgets should be grouped under the same heading (e.g., `FItem` & `FItemGroup`,
-`FSelect` & `FMultiSelect`).
+* Group entries by widget in alphabetical order.
+* Each widget section should be a level 3 heading with the widget names in backticks.
+* Related widgets should be grouped under the same heading (e.g., `FItem` & `FItemGroup`, `FSelect` & `FMultiSelect`).
+* Separate each widget section with 2 newlines.
 
 Within each widget section, order entries as follows:
 1. Additions (start with "Add")
@@ -32,6 +33,12 @@ Separate each category with a blank line. Breaking changes must start with `**Br
 
 Example:
 ```markdown
+### `FButton`
+* Add `FButtonStyles.primary` getter.
+
+* **Breaking** Remove `FButtonSizes` typedef. Use `FButtonSizeStyles` instead.
+
+
 ### `FSelect` & `FMultiSelect`
 * Add `FSelect.search(...)`.
 

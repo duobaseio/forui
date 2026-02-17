@@ -30,6 +30,9 @@ class AnimatedToast extends StatefulWidget {
   /// The directions which to swipe to dismiss the toast.
   final List<AxisDirection> swipeToDismiss;
 
+  /// The threshold for determining whether the toast should be dismissed when swiped.
+  final double dismissThreshold;
+
   /// The toast's show duration.
   final Duration? duration;
 
@@ -60,6 +63,7 @@ class AnimatedToast extends StatefulWidget {
     required this.index,
     required this.length,
     required this.swipeToDismiss,
+    required this.dismissThreshold,
     required this.duration,
     required this.expand,
     required this.visible,
@@ -83,6 +87,7 @@ class AnimatedToast extends StatefulWidget {
       ..add(IntProperty('index', index))
       ..add(IntProperty('length', length))
       ..add(IterableProperty('swipeToDismiss', swipeToDismiss))
+      ..add(PercentProperty('dismissThreshold', dismissThreshold))
       ..add(DiagnosticsProperty('duration', duration))
       ..add(PercentProperty('expand', expand))
       ..add(FlagProperty('visible', value: visible, ifTrue: 'visible'))
@@ -324,8 +329,8 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
               onHorizontalDragEnd: (_) {
                 if (!disjoint(widget.swipeToDismiss, _horizontal)) {
                   _swipeFractionEnd = switch (_swipeFraction.dx) {
-                    < -0.5 => const Offset(-1, 0),
-                    > 0.5 => const Offset(1, 0),
+                    < 0 when _swipeFraction.dx < -widget.dismissThreshold => const Offset(-1, 0),
+                    > 0 when _swipeFraction.dx > widget.dismissThreshold => const Offset(1, 0),
                     _ => Offset.zero,
                   };
                   _swipeCompletionController.forward();
@@ -354,8 +359,8 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
               onVerticalDragEnd: (_) {
                 if (!disjoint(widget.swipeToDismiss, _vertical)) {
                   _swipeFractionEnd = switch (_swipeFraction.dy) {
-                    < -0.5 => const Offset(0, -1),
-                    > 0.5 => const Offset(0, 1),
+                    < 0 when _swipeFraction.dy < -widget.dismissThreshold => const Offset(0, -1),
+                    > 0 when _swipeFraction.dy > widget.dismissThreshold => const Offset(0, 1),
                     _ => Offset.zero,
                   };
                   _swipeCompletionController.forward();
