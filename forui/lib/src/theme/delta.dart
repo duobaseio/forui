@@ -167,7 +167,7 @@ final class _GradientSentinel extends Gradient {
 }
 
 /// A delta that applies modifications to a [BoxDecoration].
-sealed class BoxDecorationDelta with Delta {
+abstract class BoxDecorationDelta with Delta {
   /// Creates a partial modification of a [BoxDecoration].
   const factory BoxDecorationDelta.delta({
     Color? color,
@@ -231,7 +231,7 @@ class _BoxDecorationValue implements BoxDecorationDelta {
 }
 
 /// A delta that applies modifications to an [IconThemeData].
-sealed class IconThemeDataDelta with Delta {
+abstract class IconThemeDataDelta with Delta {
   /// Creates a partial modification of an [IconThemeData].
   const factory IconThemeDataDelta.delta({
     Color? color,
@@ -325,7 +325,7 @@ final class _TextDecorationSentinel implements TextDecoration {
 }
 
 /// A delta that applies modifications to a [TextStyle].
-sealed class TextStyleDelta with Delta {
+abstract class TextStyleDelta with Delta {
   /// Creates a partial modification of a [TextStyle].
   const factory TextStyleDelta.delta({
     bool? inherit,

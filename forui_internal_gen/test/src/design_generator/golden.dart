@@ -418,7 +418,7 @@ mixin _$FGoldenStyleFunctions on Diagnosticable implements FGoldenStyleDelta {
 /// A delta that applies modifications to a [FGoldenStyle].
 ///
 /// A [FGoldenStyle] is itself a [FGoldenStyleDelta].
-sealed class FGoldenStyleDelta with Delta {
+abstract class FGoldenStyleDelta with Delta {
   /// Creates a partial modification of a [FGoldenStyle].
   ///
   /// ## Parameters
@@ -711,7 +711,7 @@ mixin _$FGoldenNestedMotionFunctions on Diagnosticable implements FGoldenNestedM
 /// A delta that applies modifications to a [FGoldenNestedMotion].
 ///
 /// A [FGoldenNestedMotion] is itself a [FGoldenNestedMotionDelta].
-sealed class FGoldenNestedMotionDelta with Delta {
+abstract class FGoldenNestedMotionDelta with Delta {
   /// Creates a partial modification of a [FGoldenNestedMotion].
   ///
   /// ## Parameters
@@ -783,7 +783,7 @@ mixin _$FGoldenNestedStyleFunctions on Diagnosticable implements FGoldenNestedSt
 /// A delta that applies modifications to a [FGoldenNestedStyle].
 ///
 /// A [FGoldenNestedStyle] is itself a [FGoldenNestedStyleDelta].
-sealed class FGoldenNestedStyleDelta with Delta {
+abstract class FGoldenNestedStyleDelta with Delta {
   /// Creates a partial modification of a [FGoldenNestedStyle].
   ///
   /// ## Parameters

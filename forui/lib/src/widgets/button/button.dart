@@ -267,11 +267,13 @@ class FButton extends StatelessWidget {
 }
 
 /// [FButtonStyle]'s style.
-extension type FButtonStyles._(FVariants<FButtonVariantConstraint, FButtonVariant, FButtonSizes, FButtonSizesDelta> _)
-    implements FVariants<FButtonVariantConstraint, FButtonVariant, FButtonSizes, FButtonSizesDelta> {
+extension type FButtonStyles(
+  FVariants<FButtonVariantConstraint, FButtonVariant, FButtonSizeStyles, FButtonSizesDelta> _
+)
+    implements FVariants<FButtonVariantConstraint, FButtonVariant, FButtonSizeStyles, FButtonSizesDelta> {
   /// Creates a [FButtonStyles] that inherits its properties.
   FButtonStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this._(
+    : this(
         FVariants(
           FButtonSizeStyles.inherit(
             typography: typography,
@@ -379,17 +381,29 @@ extension type FButtonStyles._(FVariants<FButtonVariantConstraint, FButtonVarian
           },
         ),
       );
-}
 
-/// An alias for `FVariants<FButtonSizeVariantConstraint, FButtonSizeVariant, FButtonStyle, FButtonStyleDelta>`.
-typedef FButtonSizes = FVariants<FButtonSizeVariantConstraint, FButtonSizeVariant, FButtonStyle, FButtonStyleDelta>;
+  /// The primary button size styles.
+  FButtonSizeStyles get primary => base;
+
+  /// The secondary button size styles.
+  FButtonSizeStyles get secondary => resolve({FButtonVariant.secondary});
+
+  /// The destructive button size styles.
+  FButtonSizeStyles get destructive => resolve({FButtonVariant.destructive});
+
+  /// The outline button size styles.
+  FButtonSizeStyles get outline => resolve({FButtonVariant.outline});
+
+  /// The ghost button size styles.
+  FButtonSizeStyles get ghost => resolve({FButtonVariant.ghost});
+}
 
 /// An alias for the [FButtonSizeStyles]' delta.
 typedef FButtonSizesDelta =
     FVariantsDelta<FButtonSizeVariantConstraint, FButtonSizeVariant, FButtonStyle, FButtonStyleDelta>;
 
 /// [FButtonStyle]'s size styles.
-extension type FButtonSizeStyles._(
+extension type FButtonSizeStyles(
   FVariants<FButtonSizeVariantConstraint, FButtonSizeVariant, FButtonStyle, FButtonStyleDelta> _
 )
     implements FVariants<FButtonSizeVariantConstraint, FButtonSizeVariant, FButtonStyle, FButtonStyleDelta> {
@@ -411,19 +425,19 @@ extension type FButtonSizeStyles._(
       decoration: decoration,
       focusedOutlineStyle: style.focusedOutlineStyle,
       contentStyle: FButtonContentStyle(
-        textStyle: FVariants.from(
+        textStyle: .from(
           textStyle.copyWith(color: foregroundColor, fontWeight: .w500, height: 1, leadingDistribution: .even),
           variants: {
             [.disabled]: .delta(color: disabledForegroundColor),
           },
         ),
-        iconStyle: FVariants.from(
+        iconStyle: .from(
           IconThemeData(color: foregroundColor, size: iconSize),
           variants: {
             [.disabled]: .delta(color: disabledForegroundColor),
           },
         ),
-        circularProgressStyle: FVariants.from(
+        circularProgressStyle: .from(
           FCircularProgressStyle(
             iconStyle: IconThemeData(color: foregroundColor, size: iconSize),
           ),
@@ -435,7 +449,7 @@ extension type FButtonSizeStyles._(
         spacing: contentSpacing,
       ),
       iconContentStyle: FButtonIconContentStyle(
-        iconStyle: FVariants.from(
+        iconStyle: .from(
           IconThemeData(color: foregroundColor, size: iconSize),
           variants: {
             [.disabled]: .delta(color: disabledForegroundColor),
@@ -446,7 +460,7 @@ extension type FButtonSizeStyles._(
       tappableStyle: style.tappableStyle,
     );
 
-    return FButtonSizeStyles._(
+    return FButtonSizeStyles(
       FVariants(
         button(
           textStyle: typography.base,
@@ -481,6 +495,15 @@ extension type FButtonSizeStyles._(
       ),
     );
   }
+
+  /// The extra small button style.
+  FButtonStyle get xs => resolve({FButtonSizeVariant.xs});
+
+  /// The small button style.
+  FButtonStyle get sm => resolve({FButtonSizeVariant.sm});
+
+  /// The large button style.
+  FButtonStyle get lg => resolve({FButtonSizeVariant.lg});
 }
 
 /// A [FButton]'s style.

@@ -916,7 +916,7 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
       colors: colors,
       typography: typography,
       style: style,
-    ).resolve({FButtonVariant.ghost}).resolve({FButtonSizeVariant.sm});
+    ).ghost.sm;
 
     final iconStyle = FVariants<FTextFieldVariantConstraint, FTextFieldVariant, IconThemeData, IconThemeDataDelta>.from(
       IconThemeData(color: colors.mutedForeground, size: 16),

@@ -16,14 +16,14 @@ import 'package:forui/src/theme/variant.dart';
 part 'slider_styles.design.dart';
 
 /// A slider's styles.
-extension type FSliderStyles._(
+extension type FSliderStyles(
   FVariants<FSliderAxisVariantConstraint, FSliderAxisVariant, FSliderStyle, FSliderStyleDelta> _
 )
     implements FVariants<FSliderAxisVariantConstraint, FSliderAxisVariant, FSliderStyle, FSliderStyleDelta> {
   /// Creates a [FSliderStyles] that inherits its properties.
   FSliderStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this._(
-        FVariants.from(
+    : this(
+        .from(
           .inherit(
             colors: colors,
             typography: typography,
@@ -53,6 +53,12 @@ extension type FSliderStyles._(
           },
         ),
       );
+
+  /// The horizontal slider style.
+  FSliderStyle get horizontal => base;
+
+  /// The vertical slider style.
+  FSliderStyle get vertical => resolve({FSliderAxisVariant.vertical});
 }
 
 /// A slider's style.

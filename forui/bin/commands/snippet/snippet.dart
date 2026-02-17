@@ -297,26 +297,28 @@ extension CustomMaterialTheme on FThemeData {
         shape: RoundedRectangleBorder(borderRadius: style.borderRadius),
       ),
       sliderTheme: SliderThemeData(
-        activeTrackColor: sliderStyles.base.activeColor.base,
-        inactiveTrackColor: sliderStyles.base.inactiveColor.base,
-        disabledActiveTrackColor: sliderStyles.base.activeColor.resolve({
+        activeTrackColor: sliderStyles.horizontal.activeColor.base,
+        inactiveTrackColor: sliderStyles.horizontal.inactiveColor.base,
+        disabledActiveTrackColor: sliderStyles.horizontal.activeColor.resolve({
           FSliderVariant.disabled,
         }),
-        disabledInactiveTrackColor: sliderStyles.base.inactiveColor.resolve({
-          FSliderVariant.disabled,
-        }),
-        activeTickMarkColor: sliderStyles.base.markStyle.tickColor.base,
-        inactiveTickMarkColor: sliderStyles.base.markStyle.tickColor.base,
-        disabledActiveTickMarkColor: sliderStyles.base.markStyle.tickColor
+        disabledInactiveTrackColor: sliderStyles.horizontal.inactiveColor
             .resolve({FSliderVariant.disabled}),
-        disabledInactiveTickMarkColor: sliderStyles.base.markStyle.tickColor
+        activeTickMarkColor: sliderStyles.horizontal.markStyle.tickColor.base,
+        inactiveTickMarkColor: sliderStyles.horizontal.markStyle.tickColor.base,
+        disabledActiveTickMarkColor: sliderStyles.horizontal.markStyle.tickColor
             .resolve({FSliderVariant.disabled}),
-        thumbColor: sliderStyles.base.thumbStyle.borderColor.base,
-        disabledThumbColor: sliderStyles.base.thumbStyle.borderColor.resolve({
-          FSliderVariant.disabled,
-        }),
-        valueIndicatorColor: sliderStyles.base.tooltipStyle.decoration.color,
-        valueIndicatorTextStyle: sliderStyles.base.tooltipStyle.textStyle,
+        disabledInactiveTickMarkColor: sliderStyles
+            .horizontal
+            .markStyle
+            .tickColor
+            .resolve({FSliderVariant.disabled}),
+        thumbColor: sliderStyles.horizontal.thumbStyle.borderColor.base,
+        disabledThumbColor: sliderStyles.horizontal.thumbStyle.borderColor
+            .resolve({FSliderVariant.disabled}),
+        valueIndicatorColor:
+            sliderStyles.horizontal.tooltipStyle.decoration.color,
+        valueIndicatorTextStyle: sliderStyles.horizontal.tooltipStyle.textStyle,
       ),
       switchTheme: SwitchThemeData(
         thumbColor: .resolveWith(
@@ -332,116 +334,74 @@ extension CustomMaterialTheme on FThemeData {
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ButtonStyle(
           textStyle: .resolveWith(
-            (states) => buttonStyles
-                .resolve({FButtonVariant.secondary})
-                .base
-                .contentStyle
-                .textStyle
+            (states) => buttonStyles.secondary.base.contentStyle.textStyle
                 .resolve(toVariants(states)),
           ),
           backgroundColor: .resolveWith(
             (states) =>
-                buttonStyles
-                    .resolve({FButtonVariant.secondary})
-                    .base
-                    .decoration
+                buttonStyles.secondary.base.decoration
                     .resolve(toVariants(states))
                     .color ??
                 colors.secondary,
           ),
           foregroundColor: .resolveWith(
             (states) =>
-                buttonStyles
-                    .resolve({FButtonVariant.secondary})
-                    .base
-                    .contentStyle
-                    .textStyle
+                buttonStyles.secondary.base.contentStyle.textStyle
                     .resolve(toVariants(states))
                     .color ??
                 colors.secondaryForeground,
           ),
-          padding: .all(
-            buttonStyles
-                .resolve({FButtonVariant.secondary})
-                .base
-                .contentStyle
-                .padding,
-          ),
+          padding: .all(buttonStyles.secondary.base.contentStyle.padding),
           shape: .all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
         ),
       ),
       filledButtonTheme: FilledButtonThemeData(
         style: ButtonStyle(
           textStyle: .resolveWith(
-            (states) => buttonStyles.base.base.contentStyle.textStyle.resolve(
-              toVariants(states),
-            ),
+            (states) => buttonStyles.primary.base.contentStyle.textStyle
+                .resolve(toVariants(states)),
           ),
           backgroundColor: .resolveWith(
             (states) =>
-                buttonStyles.base.base.decoration
+                buttonStyles.primary.base.decoration
                     .resolve(toVariants(states))
                     .color ??
                 colors.secondary,
           ),
           foregroundColor: .resolveWith(
             (states) =>
-                buttonStyles
-                    .resolve({FButtonVariant.secondary})
-                    .base
-                    .contentStyle
-                    .textStyle
+                buttonStyles.secondary.base.contentStyle.textStyle
                     .resolve(toVariants(states))
                     .color ??
                 colors.secondaryForeground,
           ),
-          padding: .all(buttonStyles.base.base.contentStyle.padding),
+          padding: .all(buttonStyles.primary.base.contentStyle.padding),
           shape: .all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: ButtonStyle(
           textStyle: .resolveWith(
-            (states) => buttonStyles
-                .resolve({FButtonVariant.outline})
-                .base
-                .contentStyle
-                .textStyle
+            (states) => buttonStyles.outline.base.contentStyle.textStyle
                 .resolve(toVariants(states)),
           ),
           backgroundColor: .resolveWith(
             (states) =>
-                buttonStyles
-                    .resolve({FButtonVariant.outline})
-                    .base
-                    .decoration
+                buttonStyles.outline.base.decoration
                     .resolve(toVariants(states))
                     .color ??
                 Colors.transparent,
           ),
           foregroundColor: .resolveWith(
             (states) =>
-                buttonStyles
-                    .resolve({FButtonVariant.outline})
-                    .base
-                    .contentStyle
-                    .textStyle
+                buttonStyles.outline.base.contentStyle.textStyle
                     .resolve(toVariants(states))
                     .color ??
                 Colors.transparent,
           ),
-          padding: .all(
-            buttonStyles
-                .resolve({FButtonVariant.outline})
-                .base
-                .contentStyle
-                .padding,
-          ),
+          padding: .all(buttonStyles.outline.base.contentStyle.padding),
           side: .resolveWith((states) {
-            final border = buttonStyles
-                .resolve({FButtonVariant.outline})
-                .base
-                .decoration
+            final border = buttonStyles.outline.base.decoration
                 .resolve(toVariants(states))
                 .border;
             return BorderSide(
@@ -461,10 +421,7 @@ extension CustomMaterialTheme on FThemeData {
           shape: .resolveWith(
             (states) => RoundedRectangleBorder(
               borderRadius:
-                  buttonStyles
-                      .resolve({FButtonVariant.outline})
-                      .base
-                      .decoration
+                  buttonStyles.outline.base.decoration
                       .resolve(toVariants(states))
                       .borderRadius ??
                   style.borderRadius,
@@ -475,30 +432,20 @@ extension CustomMaterialTheme on FThemeData {
       textButtonTheme: TextButtonThemeData(
         style: ButtonStyle(
           textStyle: .resolveWith(
-            (states) => buttonStyles
-                .resolve({FButtonVariant.ghost})
-                .base
-                .contentStyle
-                .textStyle
-                .resolve(toVariants(states)),
+            (states) => buttonStyles.ghost.base.contentStyle.textStyle.resolve(
+              toVariants(states),
+            ),
           ),
           backgroundColor: .resolveWith(
             (states) =>
-                buttonStyles
-                    .resolve({FButtonVariant.ghost})
-                    .base
-                    .decoration
+                buttonStyles.ghost.base.decoration
                     .resolve(toVariants(states))
                     .color ??
                 Colors.transparent,
           ),
           foregroundColor: .resolveWith(
             (states) =>
-                buttonStyles
-                    .resolve({FButtonVariant.ghost})
-                    .base
-                    .contentStyle
-                    .textStyle
+                buttonStyles.ghost.base.contentStyle.textStyle
                     .resolve(toVariants(states))
                     .color ??
                 colors.secondaryForeground,
@@ -506,10 +453,7 @@ extension CustomMaterialTheme on FThemeData {
           shape: .resolveWith(
             (states) => RoundedRectangleBorder(
               borderRadius:
-                  buttonStyles
-                      .resolve({FButtonVariant.ghost})
-                      .base
-                      .decoration
+                  buttonStyles.ghost.base.decoration
                       .resolve(toVariants(states))
                       .borderRadius ??
                   style.borderRadius,
@@ -518,16 +462,16 @@ extension CustomMaterialTheme on FThemeData {
         ),
       ),
       floatingActionButtonTheme: FloatingActionButtonThemeData(
-        backgroundColor: buttonStyles.base.base.decoration.base.color,
+        backgroundColor: buttonStyles.primary.base.decoration.base.color,
         foregroundColor:
-            buttonStyles.base.base.contentStyle.textStyle.base.color,
-        hoverColor: buttonStyles.base.base.decoration.resolve({
+            buttonStyles.primary.base.contentStyle.textStyle.base.color,
+        hoverColor: buttonStyles.primary.base.decoration.resolve({
           FTappableVariant.hovered,
         }).color,
         disabledElevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius:
-              buttonStyles.base.base.decoration.base.borderRadius ??
+              buttonStyles.primary.base.decoration.base.borderRadius ??
               style.borderRadius,
         ),
       ),
@@ -535,21 +479,14 @@ extension CustomMaterialTheme on FThemeData {
         style: ButtonStyle(
           backgroundColor: .resolveWith(
             (states) =>
-                buttonStyles
-                    .resolve({FButtonVariant.ghost})
-                    .base
-                    .decoration
+                buttonStyles.ghost.base.decoration
                     .resolve(toVariants(states))
                     .color ??
                 Colors.transparent,
           ),
           foregroundColor: .resolveWith(
             (states) =>
-                buttonStyles
-                    .resolve({FButtonVariant.ghost})
-                    .base
-                    .contentStyle
-                    .textStyle
+                buttonStyles.ghost.base.contentStyle.textStyle
                     .resolve(toVariants(states))
                     .color ??
                 colors.secondaryForeground,
@@ -557,10 +494,7 @@ extension CustomMaterialTheme on FThemeData {
           shape: .resolveWith(
             (states) => RoundedRectangleBorder(
               borderRadius:
-                  buttonStyles
-                      .resolve({FButtonVariant.ghost})
-                      .base
-                      .decoration
+                  buttonStyles.ghost.base.decoration
                       .resolve(toVariants(states))
                       .borderRadius ??
                   style.borderRadius,
@@ -571,30 +505,20 @@ extension CustomMaterialTheme on FThemeData {
       segmentedButtonTheme: SegmentedButtonThemeData(
         style: ButtonStyle(
           textStyle: .resolveWith(
-            (states) => buttonStyles
-                .resolve({FButtonVariant.ghost})
-                .base
-                .contentStyle
-                .textStyle
-                .resolve(toVariants(states)),
+            (states) => buttonStyles.ghost.base.contentStyle.textStyle.resolve(
+              toVariants(states),
+            ),
           ),
           backgroundColor: .resolveWith(
             (states) =>
-                buttonStyles
-                    .resolve({FButtonVariant.ghost})
-                    .base
-                    .decoration
+                buttonStyles.ghost.base.decoration
                     .resolve(toVariants(states))
                     .color ??
                 Colors.transparent,
           ),
           foregroundColor: .resolveWith(
             (states) =>
-                buttonStyles
-                    .resolve({FButtonVariant.ghost})
-                    .base
-                    .contentStyle
-                    .textStyle
+                buttonStyles.ghost.base.contentStyle.textStyle
                     .resolve(toVariants(states))
                     .color ??
                 colors.secondaryForeground,
@@ -602,10 +526,7 @@ extension CustomMaterialTheme on FThemeData {
           shape: .resolveWith(
             (states) => RoundedRectangleBorder(
               borderRadius:
-                  buttonStyles
-                      .resolve({FButtonVariant.ghost})
-                      .base
-                      .decoration
+                  buttonStyles.ghost.base.decoration
                       .resolve(toVariants(states))
                       .borderRadius ??
                   style.borderRadius,
@@ -626,8 +547,8 @@ extension CustomMaterialTheme on FThemeData {
         shape: RoundedRectangleBorder(borderRadius: style.borderRadius),
       ),
       dividerTheme: DividerThemeData(
-        color: dividerStyles.resolve({}).color,
-        thickness: dividerStyles.resolve({}).width,
+        color: dividerStyles.horizontal.color,
+        thickness: dividerStyles.horizontal.width,
       ),
       iconTheme: IconThemeData(color: colors.primary, size: 20),
     );

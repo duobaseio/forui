@@ -117,11 +117,7 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
   /// Creates a [FTextFieldStyle] that inherits its properties.
   factory FTextFieldStyle.inherit({required FColors colors, required FTypography typography, required FStyle style}) {
     final label = FLabelStyles.inherit(style: style).verticalStyle;
-    final ghost = FButtonStyles.inherit(
-      colors: colors,
-      typography: typography,
-      style: style,
-    ).resolve({FButtonVariant.ghost}).resolve({FButtonSizeVariant.sm});
+    final ghost = FButtonStyles.inherit(colors: colors, typography: typography, style: style).ghost.sm;
     final textStyle = typography.sm.copyWith(fontFamily: typography.defaultFontFamily);
     final iconStyle = FVariants<FTextFieldVariantConstraint, FTextFieldVariant, IconThemeData, IconThemeDataDelta>.from(
       IconThemeData(color: colors.mutedForeground, size: 16),

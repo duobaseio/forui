@@ -194,8 +194,8 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
   }) => .new(
     focusedOutlineStyle: style.focusedOutlineStyle,
     buttonStyle: FButtonStyles.inherit(colors: colors, typography: typography, style: style)
-        .resolve({FButtonVariant.outline})
-        .resolve({FButtonSizeVariant.sm})
+        .outline
+        .sm
         .copyWith(
           decoration: FVariants.from(
             BoxDecoration(

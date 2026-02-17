@@ -1,3 +1,39 @@
+## 0.19.0
+
+### `FAlert`
+* Add `FAlertStyles.primary` and `FAlertStyles.destructive` getters.
+
+### `FBadge`
+* Add `FBadgeStyles.primary`, `FBadgeStyles.secondary`, `FBadgeStyles.destructive`, and `FBadgeStyles.outline` getters.
+
+### `FButton`
+* Add `FButtonStyles.primary`, `FButtonStyles.secondary`, `FButtonStyles.destructive`, `FButtonStyles.outline`, and `FButtonStyles.ghost` getters.
+* Add `FButtonSizeStyles.xs`, `FButtonSizeStyles.sm`, and `FButtonSizeStyles.lg` getters.
+
+* **Breaking** Remove `FButtonSizes` typedef. Use `FButtonSizeStyles` instead.
+
+### `FDivider`
+* Add `FDividerStyles.horizontal` and `FDividerStyles.vertical` getters.
+
+### `FHeader`
+* Add `FHeaderStyles.root` and `FHeaderStyles.nested` getters.
+
+### `FItem`
+* Add `FItemStyles.primary` and `FItemStyles.destructive` getters.
+
+### `FResizable`
+* Add `FResizableStyles.horizontal` and `FResizableStyles.vertical` getters.
+
+### `FSlider`
+* Add `FSliderStyles.horizontal` and `FSliderStyles.vertical` getters.
+
+### `FThemeData`
+* **Breaking** Change `FThemeData` variant-based field types to use wrapped extension types (`FAlertStyles`, `FBadgeStyles`, etc.).
+
+### `FTile`
+* Add `FTileStyles.primary` and `FTileStyles.destructive` getters.
+
+
 ## 0.18.1
 * Fix lifted controls causing `setState() during build` assertion error when used inside a `Form`.
 

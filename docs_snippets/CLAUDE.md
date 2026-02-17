@@ -1,3 +1,40 @@
+## Project Structure
+
+```
+docs_snippets/
+├── lib/
+│   ├── main.dart                 # Flutter web app entry point with route definitions
+│   ├── main.gr.dart              # Generated auto_route routes
+│   ├── example.dart              # Base classes (StatelessExample, StatefulExample, etc.)
+│   ├── examples/                 # Interactive widget examples (one file per widget)
+│   │   ├── foundation/
+│   │   └── widgets/
+│   ├── snippets/                 # Code fragments for documentation pages
+│   │   ├── concepts/
+│   │   ├── foundation/
+│   │   ├── getting_started/
+│   │   ├── guides/
+│   │   └── ...
+│   └── usages/                   # Widget constructor usage with selectable categories
+│       ├── foundation/
+│       └── widgets/
+│
+├── test/                         # Widget tests
+├── tool/
+│   └── snippet_generator/        # Transforms Dart sources into JSON for forui.dev
+│       ├── main.dart             # Entry point
+│       ├── examples/             # Processes lib/examples/ into interactive previews
+│       ├── snippets/             # Processes lib/snippets/ into code fragments
+│       ├── usages/               # Processes lib/usages/ into categorized constructor usage
+│       ├── argument_elision.dart  # Removes unnecessary arguments from code
+│       ├── dart_doc_linker.dart   # Links Dart symbols to API docs
+│       ├── link_validator.dart    # Validates doc links
+│       ├── stubber.dart           # Stubs out non-displayed code
+│       └── tooltip_linker.dart    # Adds tooltips to linked symbols
+├── assets/                       # Images used in examples
+└── prototype/                    # HTML/Python prototyping tools
+```
+
 # Docs Snippets
 
 This project contains the following used in [forui.dev](https://forui.dev):

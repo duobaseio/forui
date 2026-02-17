@@ -1,3 +1,28 @@
+## Project Structure
+
+```
+forui_internal_gen/
+├── lib/
+│   ├── forui_internal_gen.dart           # Public API barrel export
+│   └── src/
+│       ├── control_generator.dart        # Generator for .control.dart files (widget controls)
+│       ├── design_generator.dart         # Generator for .design.dart files (styles/variants)
+│       └── source/                       # Source templates for generated code
+│           ├── control_*.dart                   # Control mixin/extension templates
+│           ├── design_*.dart                    # Design (style) mixin/extension templates
+│           ├── delta_class.dart                 # Delta class template
+│           ├── variant_extension_type.dart      # Variant/constraint extension type template
+│           └── ...                              # Shared utilities (docs, types, etc.)
+│
+└── test/
+    └── src/
+        ├── control_generator_golden_test.dart   # Golden tests for control generation
+        └── design_generator/
+            ├── design_generator_golden_test.dart # Golden tests for design generation
+            ├── golden.dart                       # Expected golden output
+            └── source.dart                       # Test source input
+```
+
 ## Updating Test Goldens
 
 To update test goldens:

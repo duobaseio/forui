@@ -271,7 +271,7 @@ class _FResizableState extends State<FResizable> {
 }
 
 /// A [FResizable]'s style.
-extension type FResizableStyles._(
+extension type FResizableStyles(
   FVariants<FResizableAxisVariantConstraint, FResizableAxisVariant, FResizableDividerStyle, FResizableDividerStyleDelta>
   _
 )
@@ -284,7 +284,7 @@ extension type FResizableStyles._(
         > {
   /// Creates a [FResizableStyles] that inherits its properties.
   FResizableStyles.inherit({required FColors colors, required FStyle style})
-    : this._(
+    : this(
         FVariants(
           FResizableDividerStyle(
             color: colors.border,
@@ -310,6 +310,12 @@ extension type FResizableStyles._(
           },
         ),
       );
+
+  /// The horizontal resizable divider style.
+  FResizableDividerStyle get horizontal => base;
+
+  /// The vertical resizable divider style.
+  FResizableDividerStyle get vertical => resolve({FResizableAxisVariant.vertical});
 }
 
 @internal

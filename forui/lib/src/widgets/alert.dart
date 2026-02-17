@@ -128,12 +128,12 @@ class FAlert extends StatelessWidget {
 }
 
 /// The alert styles.
-extension type FAlertStyles._(FVariants<FAlertVariantConstraint, FAlertVariant, FAlertStyle, FAlertStyleDelta> _)
+extension type FAlertStyles(FVariants<FAlertVariantConstraint, FAlertVariant, FAlertStyle, FAlertStyleDelta> _)
     implements FVariants<FAlertVariantConstraint, FAlertVariant, FAlertStyle, FAlertStyleDelta> {
   /// Creates a [FAlertStyles] that inherits its properties.
   FAlertStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this._(
-        FVariants.from(
+    : this(
+        .from(
           FAlertStyle(
             iconStyle: IconThemeData(color: colors.foreground, size: 20),
             titleTextStyle: typography.base.copyWith(fontWeight: .w500, color: colors.foreground, height: 1.2),
@@ -153,6 +153,12 @@ extension type FAlertStyles._(FVariants<FAlertVariantConstraint, FAlertVariant, 
           },
         ),
       );
+
+  /// The primary alert style.
+  FAlertStyle get primary => base;
+
+  /// The destructive alert style.
+  FAlertStyle get destructive => resolve({FAlertVariant.destructive});
 }
 
 /// A [FAlert] style.

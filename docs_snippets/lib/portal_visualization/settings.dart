@@ -194,7 +194,7 @@ class Settings extends StatelessWidget {
                 child: Row(
                   spacing: 4,
                   children: [
-                    Text('Diagonal', style: context.theme.labelStyles.verticalStyle.labelTextStyle.resolve({})),
+                    Text('Diagonal', style: context.theme.labelStyles.verticalStyle.labelTextStyle.base),
                     ListenableBuilder(
                       listenable: value,
                       builder: (context, _) => FSwitch(value: value.diagonal, onChange: (v) => value.diagonal = v),

@@ -464,12 +464,12 @@ class FItem extends StatelessWidget with FItemMixin {
 }
 
 /// The item styles.
-extension type FItemStyles._(FVariants<FItemVariantConstraint, FItemVariant, FItemStyle, FItemStyleDelta> _)
+extension type FItemStyles(FVariants<FItemVariantConstraint, FItemVariant, FItemStyle, FItemStyleDelta> _)
     implements FVariants<FItemVariantConstraint, FItemVariant, FItemStyle, FItemStyleDelta> {
   /// Creates a [FItemStyles] that inherits its properties.
   FItemStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this._(
-        FVariants.from(
+    : this(
+        .from(
           .inherit(colors: colors, typography: typography, style: style),
           variants: {
             [.destructive]: .delta(
@@ -490,6 +490,12 @@ extension type FItemStyles._(FVariants<FItemVariantConstraint, FItemVariant, FIt
           },
         ),
       );
+
+  /// The primary item style.
+  FItemStyle get primary => base;
+
+  /// The destructive item style.
+  FItemStyle get destructive => resolve({FItemVariant.destructive});
 }
 
 /// A [FItem]'s style.
