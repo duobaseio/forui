@@ -1,0 +1,26 @@
+---
+title: Creating Custom Deltas
+description: Create custom delta classes for transformations not provided out of the box.
+---
+
+import {Callout} from "fumadocs-ui/components/callout";
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import implementSnippet from '@/snippets/snippets/guides/creating_custom_deltas/implement.json';
+import usageSnippet from '@/snippets/snippets/guides/creating_custom_deltas/usage.json';
+
+<Callout type="info">
+    If you are not yet familiar with deltas, see the [customizing widget styles](/docs/guides/customizing-widget-styles)
+    guide first.
+</Callout>
+
+When the built-in delta factory constructors do not cover your use case, implement the delta class directly and override
+`call`. Suppose you want to mirror a widget's EdgeInsets padding. To do so, implement `EdgeInsetsDelta` with a `call`
+method that swaps the edges:
+
+<CodeSnippet snippet={implementSnippet} />
+
+Pass it anywhere an `EdgeInsetsDelta` is accepted:
+
+<CodeSnippet snippet={usageSnippet} />
+
+The same pattern works for any delta class. Implement it and override call.

@@ -255,7 +255,7 @@ class FSelectSearchStyle with Diagnosticable, _$FSelectSearchStyleFunctions {
         dividerStyle: FDividerStyles.inherit(
           colors: colors,
           style: style,
-        ).horizontal.copyWith(width: 2, padding: .zero),
+        ).horizontal.copyWith(width: 2, padding: const .value(.zero)),
         progressStyle: .inherit(colors: colors),
       );
 }

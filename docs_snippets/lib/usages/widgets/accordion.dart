@@ -9,7 +9,7 @@ const accordion = FAccordion(
   control: .managed(min: 1, max: 2),
   // {@endcategory}
   // {@category "Core"}
-  style: .delta(titlePadding: .zero),
+  style: .delta(titlePadding: .value(.zero)),
   children: [FAccordionItem(title: Text('Title'), child: SizedBox())],
   // {@endcategory}
 );
@@ -25,7 +25,7 @@ final accordionItem = FAccordionItem(
   onVariantChange: (previous, current) {},
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(titlePadding: .zero),
+  style: const .delta(titlePadding: .value(.zero)),
   title: const Text('Title'),
   icon: const Icon(FIcons.chevronDown),
   initiallyExpanded: false,

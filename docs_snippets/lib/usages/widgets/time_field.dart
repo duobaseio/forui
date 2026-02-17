@@ -40,7 +40,7 @@ final timeField = FTimeField(
   focusNode: null,
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(fieldStyle: .delta(labelPadding: .symmetric(vertical: 7))),
+  style: const .delta(fieldStyle: .delta(labelPadding: .value(.symmetric(vertical: 7)))),
   enabled: true,
   hour24: false,
   // {@endcategory}
@@ -93,7 +93,7 @@ final timeFieldPicker = FTimeField.picker(
   focusNode: null,
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(fieldStyle: .delta(labelPadding: .symmetric(vertical: 7))),
+  style: const .delta(fieldStyle: .delta(labelPadding: .value(.symmetric(vertical: 7)))),
   enabled: true,
   hour24: false,
   // {@endcategory}

@@ -16,7 +16,7 @@ final dialog = FDialog(
   animation: null,
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(insetPadding: .zero),
+  style: const .delta(insetPadding: .value(.zero)),
   title: const Text('Title'),
   body: const Text('Body'),
   actions: [FButton(onPress: () {}, child: const Text('Action'))],
@@ -34,7 +34,7 @@ final adaptive = FDialog.adaptive(
   animation: null,
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(insetPadding: .zero),
+  style: const .delta(insetPadding: .value(.zero)),
   title: const Text('Title'),
   body: const Text('Body'),
   actions: [FButton(onPress: () {}, child: const Text('Action'))],
@@ -52,7 +52,7 @@ final raw = FDialog.raw(
   animation: null,
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(insetPadding: .zero),
+  style: const .delta(insetPadding: .value(.zero)),
   builder: (context, style) => const Text('Custom content'),
   // {@endcategory}
 );
@@ -71,7 +71,7 @@ final show = showFDialog(
   // {@endcategory}
   // {@category "Core"}
   context: context,
-  style: const .delta(insetPadding: .zero),
+  style: const .delta(insetPadding: .value(.zero)),
   routeStyle: const .delta(motion: .delta()),
   builder: (context, style, animation) => FDialog(
     style: style,

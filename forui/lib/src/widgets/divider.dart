@@ -85,7 +85,7 @@ extension type FDividerStyles(
             width: style.borderWidth,
           ),
           variants: {
-            [.vertical]: .delta(padding: FDividerStyle.defaultPadding.verticalStyle),
+            [.vertical]: .delta(padding: .value(FDividerStyle.defaultPadding.verticalStyle)),
           },
         ),
       );

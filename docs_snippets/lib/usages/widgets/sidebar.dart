@@ -11,7 +11,7 @@ final sidebar = FSidebar(
   traversalEdgeBehavior: null,
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(headerPadding: .fromLTRB(0, 16, 0, 0)),
+  style: const .delta(headerPadding: .value(.fromLTRB(0, 16, 0, 0))),
   header: const Text('Header'),
   children: [
     FSidebarGroup(
@@ -33,7 +33,7 @@ final sidebarBuilder = FSidebar.builder(
   traversalEdgeBehavior: null,
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(headerPadding: .fromLTRB(0, 16, 0, 0)),
+  style: const .delta(headerPadding: .value(.fromLTRB(0, 16, 0, 0))),
   header: const Text('Header'),
   itemBuilder: (context, index) => FSidebarItem(label: Text('Item $index'), onPress: () {}),
   itemCount: 10,
@@ -48,7 +48,7 @@ final sidebarRaw = FSidebar.raw(
   traversalEdgeBehavior: null,
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(headerPadding: .fromLTRB(0, 16, 0, 0)),
+  style: const .delta(headerPadding: .value(.fromLTRB(0, 16, 0, 0))),
   header: const Text('Header'),
   child: ListView(
     children: [FSidebarItem(label: const Text('Custom Item'), onPress: () {})],
@@ -65,7 +65,7 @@ final sidebarGroup = FSidebarGroup(
   onActionLongPress: () {},
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(padding: .symmetric(horizontal: 8)),
+  style: const .delta(padding: .value(.symmetric(horizontal: 8))),
   label: const Text('Navigation'),
   action: const Icon(FIcons.plus),
   children: [
@@ -87,7 +87,7 @@ final sidebarItem = FSidebarItem(
   onVariantChange: (previous, current) {},
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(padding: .symmetric(horizontal: 8)),
+  style: const .delta(padding: .value(.symmetric(horizontal: 8))),
   selected: false,
   initiallyExpanded: false,
   icon: const Icon(FIcons.house),

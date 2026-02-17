@@ -236,8 +236,19 @@ To generate files, run `dart run build_runner build --delete-conflicting-outputs
 
 Platform variants (touch, desktop, android, iOS, etc.) are automatically included in generated variant types.
 
-## Testing
+## CLI Style Generation
+
+When regenerating style files with `dart run forui style create -af`:
+1. Only run from `forui/forui/example` (never from `forui/forui`).
+2. After running, delete the generated `forui/forui/example/lib/theme/` folder.
+
+If you change source files that affect the CLI registry (e.g., `.inherit` constructors), run
+`dart run tool/cli_generator/main.dart` in `forui/forui` first to regenerate `bin/commands/style/style.dart`.
+
+## Testing & Verification
 
 Parameterize tests using for-each loop to cover multiple scenarios when sensible.
 
 Prefer literals to matchers where possible, e.g. `expect(value, null)` instead of `expect(value, isNull)`.
+
+After API changes, analyze all in-repo consumers: `forui/forui`, `forui/forui/example`, and `docs_snippets`.

@@ -87,7 +87,7 @@ final selectTile = FSelectTile<String>(
   onVariantChange: (previous, current) {},
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(margin: .zero),
+  style: const .delta(margin: .value(.zero)),
   enabled: true,
   value: 'apple',
   title: const Text('Apple'),
@@ -113,7 +113,7 @@ final selectTileSuffix = FSelectTile<String>.suffix(
   onVariantChange: (previous, current) {},
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(margin: .zero),
+  style: const .delta(margin: .value(.zero)),
   enabled: true,
   value: 'apple',
   title: const Text('Apple'),

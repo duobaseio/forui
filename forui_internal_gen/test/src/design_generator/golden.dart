@@ -140,9 +140,9 @@ extension $FGoldenStyleTransformations on FGoldenStyle {
     BoxDecorationDelta? boxDecoration,
     Decoration? decoration,
     Color color = colorSentinel,
-    EdgeInsets? edgeInsets,
-    EdgeInsetsDirectional? edgeInsetsDirectional,
-    EdgeInsetsGeometry? edgeInsetsGeometry,
+    EdgeInsetsDelta? edgeInsets,
+    EdgeInsetsDirectionalDelta? edgeInsetsDirectional,
+    EdgeInsetsGeometryDelta? edgeInsetsGeometry,
     IconThemeDataDelta? iconThemeData,
     TextStyleDelta? textStyle,
     List<BoxShadow>? boxShadows,
@@ -176,9 +176,9 @@ extension $FGoldenStyleTransformations on FGoldenStyle {
     boxDecoration: boxDecoration?.call(this.boxDecoration) ?? this.boxDecoration,
     decoration: decoration ?? this.decoration,
     color: color == colorSentinel ? this.color : color,
-    edgeInsets: edgeInsets ?? this.edgeInsets,
-    edgeInsetsDirectional: edgeInsetsDirectional ?? this.edgeInsetsDirectional,
-    edgeInsetsGeometry: edgeInsetsGeometry ?? this.edgeInsetsGeometry,
+    edgeInsets: edgeInsets?.call(this.edgeInsets) ?? this.edgeInsets,
+    edgeInsetsDirectional: edgeInsetsDirectional?.call(this.edgeInsetsDirectional) ?? this.edgeInsetsDirectional,
+    edgeInsetsGeometry: edgeInsetsGeometry?.call(this.edgeInsetsGeometry) ?? this.edgeInsetsGeometry,
     iconThemeData: iconThemeData?.call(this.iconThemeData) ?? this.iconThemeData,
     textStyle: textStyle?.call(this.textStyle) ?? this.textStyle,
     boxShadows: boxShadows ?? this.boxShadows,
@@ -464,9 +464,9 @@ abstract class FGoldenStyleDelta with Delta {
     BoxDecorationDelta? boxDecoration,
     Decoration? decoration,
     Color color,
-    EdgeInsets? edgeInsets,
-    EdgeInsetsDirectional? edgeInsetsDirectional,
-    EdgeInsetsGeometry? edgeInsetsGeometry,
+    EdgeInsetsDelta? edgeInsets,
+    EdgeInsetsDirectionalDelta? edgeInsetsDirectional,
+    EdgeInsetsGeometryDelta? edgeInsetsGeometry,
     IconThemeDataDelta? iconThemeData,
     TextStyleDelta? textStyle,
     List<BoxShadow>? boxShadows,
@@ -553,11 +553,11 @@ class _FGoldenStyleDelta implements FGoldenStyleDelta {
 
   final Color color;
 
-  final EdgeInsets? edgeInsets;
+  final EdgeInsetsDelta? edgeInsets;
 
-  final EdgeInsetsDirectional? edgeInsetsDirectional;
+  final EdgeInsetsDirectionalDelta? edgeInsetsDirectional;
 
-  final EdgeInsetsGeometry? edgeInsetsGeometry;
+  final EdgeInsetsGeometryDelta? edgeInsetsGeometry;
 
   final IconThemeDataDelta? iconThemeData;
 
@@ -615,9 +615,10 @@ class _FGoldenStyleDelta implements FGoldenStyleDelta {
     boxDecoration: boxDecoration?.call(original.boxDecoration) ?? original.boxDecoration,
     decoration: decoration ?? original.decoration,
     color: color == colorSentinel ? original.color : color,
-    edgeInsets: edgeInsets ?? original.edgeInsets,
-    edgeInsetsDirectional: edgeInsetsDirectional ?? original.edgeInsetsDirectional,
-    edgeInsetsGeometry: edgeInsetsGeometry ?? original.edgeInsetsGeometry,
+    edgeInsets: edgeInsets?.call(original.edgeInsets) ?? original.edgeInsets,
+    edgeInsetsDirectional:
+        edgeInsetsDirectional?.call(original.edgeInsetsDirectional) ?? original.edgeInsetsDirectional,
+    edgeInsetsGeometry: edgeInsetsGeometry?.call(original.edgeInsetsGeometry) ?? original.edgeInsetsGeometry,
     iconThemeData: iconThemeData?.call(original.iconThemeData) ?? original.iconThemeData,
     textStyle: textStyle?.call(original.textStyle) ?? original.textStyle,
     boxShadows: boxShadows ?? original.boxShadows,

@@ -12,7 +12,6 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
 import 'package:forui/src/foundation/debug.dart';
 import 'package:forui/src/foundation/rendering.dart';
-import 'package:forui/src/theme/delta.dart';
 import 'package:forui/src/theme/variant.dart';
 
 @Variants('FHeader', {'nested': (1, 'The nested header variant.')})

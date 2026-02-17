@@ -32,7 +32,7 @@ final popover = FPopover(
   shortcuts: null,
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(viewInsets: .all(5)),
+  style: const .delta(viewInsets: .value(.all(5))),
   popoverBuilder: (context, controller) => const Padding(padding: .all(8), child: Text('Popover content')),
   builder: (context, controller, child) => child!,
   child: FButton(onPress: () {}, child: const Text('Show Popover')),

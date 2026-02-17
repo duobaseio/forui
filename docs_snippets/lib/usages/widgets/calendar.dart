@@ -1,6 +1,7 @@
 // dart format width=80
 // ignore_for_file: avoid_redundant_argument_values
 
+
 import 'package:forui/forui.dart';
 
 final calendar = FCalendar(
@@ -16,7 +17,7 @@ final calendar = FCalendar(
   onLongPress: (date) {},
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(padding: .zero),
+  style: const .delta(padding: .value(.zero)),
   start: .utc(1900),
   end: .utc(2100),
   today: .now(),

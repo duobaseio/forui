@@ -323,7 +323,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             child: FSlider(
-              style: const .delta(childPadding: .only(left: 20, top: 40, right: 10, bottom: 30)),
+              style: const .delta(childPadding: .value(.only(left: 20, top: 40, right: 10, bottom: 30))),
               control: .managedContinuous(initial: FSliderValue(min: 0.30, max: 0.60)),
               layout: layout,
               marks: marks,

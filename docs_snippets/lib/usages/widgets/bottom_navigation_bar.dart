@@ -10,7 +10,7 @@ final bottomNavigationBar = FBottomNavigationBar(
   safeAreaBottom: false,
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(padding: .zero),
+  style: const .delta(padding: .value(.zero)),
   index: 0,
   onChange: (index) {},
   children: const [FBottomNavigationBarItem(icon: Icon(FIcons.house), label: Text('Home'))],
@@ -28,7 +28,7 @@ final bottomNavigationBarItem = FBottomNavigationBarItem(
   onVariantChange: (previous, current) {},
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(padding: .zero),
+  style: const .delta(padding: .value(.zero)),
   icon: const Icon(FIcons.house),
   label: const Text('Home'),
   // {@endcategory}

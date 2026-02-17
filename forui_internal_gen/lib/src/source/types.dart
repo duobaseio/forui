@@ -141,6 +141,10 @@ Future<(String type, String assignment, String? sentinel)> deltaField(
     return ('${typeName}Delta?', '$name?.call($prefix.$name) ?? $prefix.$name', null);
   }
 
+  if (typeName == 'EdgeInsetsGeometry' || typeName == 'EdgeInsets' || typeName == 'EdgeInsetsDirectional') {
+    return ('${typeName}Delta?', '$name?.call($prefix.$name) ?? $prefix.$name', null);
+  }
+
   // FVariants<K extends FVariantConstraint, V, D extends Delta<V>>
   if (field.type case InterfaceType(:final element) when element.name == 'FVariants') {
     final type = ((await step.resolver.astNodeFor(field.firstFragment))!.parent! as VariableDeclarationList).type!;

@@ -37,6 +37,13 @@
 * Add `dismissThreshold` to `showFToast`, `showRawFToast`, and `FToasterState.show`.
 
 
+### Others
+* Add `EdgeInsetsGeometryDelta`, `EdgeInsetsDelta`, and `EdgeInsetsDirectionalDelta` delta classes.
+
+* **Breaking** Change `EdgeInsets`, `EdgeInsetsDirectional`, and `EdgeInsetsGeometry` fields in style deltas to accept
+  delta types (`EdgeInsetsDelta`, `EdgeInsetsDirectionalDelta`, `EdgeInsetsGeometryDelta`) instead of raw values.
+
+
 ## 0.18.1
 * Fix lifted controls causing `setState() during build` assertion error when used inside a `Form`.
 

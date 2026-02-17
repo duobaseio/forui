@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 
 const scaffold = FScaffold(
   // {@category "Core"}
-  scaffoldStyle: .delta(childPadding: .zero),
+  scaffoldStyle: .delta(childPadding: .value(.zero)),
   childPad: true,
   resizeToAvoidBottomInset: true,
   header: Text('Header'),

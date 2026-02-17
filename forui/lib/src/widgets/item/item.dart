@@ -5,7 +5,6 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
-import 'package:forui/src/theme/delta.dart';
 import 'package:forui/src/theme/variant.dart';
 import 'package:forui/src/widgets/item/item_content.dart';
 import 'package:forui/src/widgets/item/raw_item_content.dart';

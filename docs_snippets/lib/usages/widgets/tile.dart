@@ -24,7 +24,7 @@ final tile = FTile(
   onVariantChange: (previous, current) {},
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(margin: .zero),
+  style: const .delta(margin: .value(.zero)),
   enabled: true,
   selected: false,
   onPress: () {},
@@ -56,7 +56,7 @@ final tileRaw = FTile.raw(
   onVariantChange: (previous, current) {},
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(margin: .zero),
+  style: const .delta(margin: .value(.zero)),
   enabled: true,
   selected: false,
   onPress: () {},

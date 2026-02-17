@@ -19,7 +19,7 @@ final selectGroup = FSelectGroup<String>(
   errorBuilder: FFormFieldProperties.defaultErrorBuilder,
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(itemPadding: .symmetric(vertical: 2)),
+  style: const .delta(itemPadding: .value(.symmetric(vertical: 2))),
   enabled: true,
   children: [
     .checkbox(value: 'apple', label: const Text('Apple')),

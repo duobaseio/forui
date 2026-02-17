@@ -16,7 +16,7 @@ const toast = FToast(
 
 const toaster = FToaster(
   // {@category "Core"}
-  style: .delta(padding: .all(16)),
+  style: .delta(padding: .value(.all(16))),
   child: Placeholder(),
   // {@endcategory}
 );
@@ -24,7 +24,7 @@ const toaster = FToaster(
 final showToast = showFToast(
   // {@category "Core"}
   context: context,
-  style: const .delta(padding: .all(16)),
+  style: const .delta(padding: .value(.all(16))),
   icon: const Icon(FIcons.info),
   title: const Text('Title'),
   description: const Text('Description'),
@@ -46,7 +46,7 @@ final showRawToast = showRawFToast(
   // {@endcategory}
   // {@category "Core"}
   context: context,
-  style: const .delta(padding: .all(16)),
+  style: const .delta(padding: .value(.all(16))),
   builder: (context, entry) => const Text('Custom toast content'),
   // {@endcategory}
 );

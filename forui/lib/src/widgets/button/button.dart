@@ -237,10 +237,13 @@ class FButton extends StatelessWidget {
       onSecondaryPress: onSecondaryPress,
       onSecondaryLongPress: onSecondaryLongPress,
       selected: selected,
-      builder: (_, variants, _) => DecoratedBox(
-        decoration: style.decoration.resolve(variants),
-        child: FButtonData(style: style, variants: variants, child: child),
-      ),
+      builder: (_, variants, _) {
+        print(identityHashCode(variants));
+        return DecoratedBox(
+          decoration: style.decoration.resolve(variants),
+          child: FButtonData(style: style, variants: variants, child: child),
+        );
+      },
     );
   }
 
@@ -278,7 +281,7 @@ extension type FButtonStyles(
           FButtonSizeStyles.inherit(
             typography: typography,
             style: style,
-            decoration: FVariants.from(
+            decoration: .from(
               BoxDecoration(borderRadius: style.borderRadius, color: colors.primary),
               variants: {
                 [.hovered, .pressed]: .delta(color: colors.hover(colors.primary)),
@@ -296,7 +299,7 @@ extension type FButtonStyles(
             [.secondary]: FButtonSizeStyles.inherit(
               typography: typography,
               style: style,
-              decoration: FVariants.from(
+              decoration: .from(
                 BoxDecoration(borderRadius: style.borderRadius, color: colors.secondary),
                 variants: {
                   [.hovered, .pressed]: .delta(color: colors.hover(colors.secondary)),
@@ -313,7 +316,7 @@ extension type FButtonStyles(
             [.destructive]: FButtonSizeStyles.inherit(
               typography: typography,
               style: style,
-              decoration: FVariants.from(
+              decoration: .from(
                 BoxDecoration(
                   borderRadius: style.borderRadius,
                   color: colors.destructive.withValues(alpha: colors.brightness == .light ? 0.1 : 0.2),
@@ -343,7 +346,7 @@ extension type FButtonStyles(
             [.outline]: FButtonSizeStyles.inherit(
               typography: typography,
               style: style,
-              decoration: FVariants.from(
+              decoration: .from(
                 BoxDecoration(
                   border: .all(color: colors.border),
                   borderRadius: style.borderRadius,
@@ -364,7 +367,7 @@ extension type FButtonStyles(
             [.ghost]: FButtonSizeStyles.inherit(
               typography: typography,
               style: style,
-              decoration: FVariants.from(
+              decoration: .from(
                 BoxDecoration(borderRadius: style.borderRadius),
                 variants: {
                   [.hovered, .pressed]: .delta(color: colors.secondary),
