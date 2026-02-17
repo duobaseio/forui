@@ -9,12 +9,8 @@ class MirrorDelta implements EdgeInsetsDelta {
   @override
   EdgeInsets call(EdgeInsets? insets) {
     final resolved = insets ?? .zero;
-    return .only(
-      left: resolved.right,
-      top: resolved.top,
-      right: resolved.left,
-      bottom: resolved.bottom,
-    );
+    return .only(left: resolved.right, top: resolved.top, right: resolved.left, bottom: resolved.bottom);
   }
 }
+
 // {@endsnippet}
