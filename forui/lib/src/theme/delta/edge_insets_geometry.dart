@@ -4,11 +4,18 @@ import 'package:forui/src/theme/delta/delta.dart';
 
 /// A delta that applies modifications to an [EdgeInsetsGeometry].
 abstract class EdgeInsetsGeometryDelta with Delta {
+  /// Creates an additive modification, adding the specified [insets] to the current edges.
+  ///
+  /// ```dart
+  /// .add(.only(left: 5))(.fromLTRB(10, 20, 30, 40)); // .fromLTRB(15, 20, 30, 40)
+  /// ```
+  const factory EdgeInsetsGeometryDelta.add(EdgeInsetsGeometry insets) = _GeometryAdd;
+
   /// Scales all edges by [factor]. Preserves the concrete type (i.e. [EdgeInsets] stays [EdgeInsets],
   /// [EdgeInsetsDirectional] stays [EdgeInsetsDirectional]).
   ///
   /// ```dart
-  /// .scale(0.5).(.all(10)); // .all(5)
+  /// .scale(0.5)(.all(10)); // .all(5)
   /// ```
   const factory EdgeInsetsGeometryDelta.scale(double factor) = _GeometryScale;
 
@@ -21,6 +28,15 @@ abstract class EdgeInsetsGeometryDelta with Delta {
 
   @override
   EdgeInsetsGeometry call(EdgeInsetsGeometry? insets);
+}
+
+class _GeometryAdd implements EdgeInsetsGeometryDelta {
+  final EdgeInsetsGeometry _insets;
+
+  const _GeometryAdd(this._insets);
+
+  @override
+  EdgeInsetsGeometry call(EdgeInsetsGeometry? insets) => (insets ?? .zero).add(_insets);
 }
 
 class _GeometryScale implements EdgeInsetsGeometryDelta {

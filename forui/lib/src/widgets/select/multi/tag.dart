@@ -145,7 +145,7 @@ class FMultiSelectTag extends StatelessWidget {
 class FMultiSelectTagStyle with Diagnosticable, _$FMultiSelectTagStyleFunctions {
   /// The decoration.
   @override
-  final FVariants<FMultiSelectTagVariantConstraint, FMultiSelectTagVariant, Decoration, Delta> decoration;
+  final FVariants<FMultiSelectTagVariantConstraint, FMultiSelectTagVariant, Decoration, DecorationDelta> decoration;
 
   /// The padding. Defaults to `EdgeInsets.symmetric(vertical: 4, horizontal: 8)`.
   ///

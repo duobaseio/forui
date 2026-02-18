@@ -6,6 +6,27 @@ import 'package:forui/forui.dart';
 
 void main() {
   group('EdgeInsetsGeometryDelta', () {
+    test('add(...) adds to EdgeInsets', () {
+      const delta = EdgeInsetsGeometryDelta.add(EdgeInsets.only(left: 5));
+      final result = delta(const EdgeInsets.fromLTRB(10, 20, 30, 40));
+
+      expect(result, const EdgeInsets.fromLTRB(15, 20, 30, 40));
+    });
+
+    test('add(...) adds to EdgeInsetsDirectional', () {
+      const delta = EdgeInsetsGeometryDelta.add(EdgeInsetsDirectional.only(start: 5));
+      final result = delta(const EdgeInsetsDirectional.fromSTEB(10, 20, 30, 40));
+
+      expect(result, const EdgeInsetsDirectional.fromSTEB(15, 20, 30, 40));
+    });
+
+    test('add(...) with null defaults to zero', () {
+      const delta = EdgeInsetsGeometryDelta.add(EdgeInsets.all(5));
+      final result = delta(null);
+
+      expect(result, const EdgeInsets.all(5));
+    });
+
     test('scale(...) scales EdgeInsets', () {
       const delta = EdgeInsetsGeometryDelta.scale(0.5);
       final result = delta(const EdgeInsets.all(10));

@@ -22,6 +22,7 @@ Each release section is a level 2 heading. Make sure you're always adding entrie
 * Each widget section should be a level 3 heading with the widget names in backticks.
 * Related widgets should be grouped under the same heading (e.g., `FItem` & `FItemGroup`, `FSelect` & `FMultiSelect`).
 * Separate each widget section with 2 newlines.
+* Wrap each line at 120 characters.
 
 Within each widget section, order entries as follows:
 1. Additions (start with "Add")

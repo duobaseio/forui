@@ -843,7 +843,7 @@ class FMultiSelectStyle with Diagnosticable, _$FMultiSelectStyleFunctions {
 class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSelectFieldStyleFunctions {
   /// The multi-select field's decoration.
   @override
-  final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, Decoration, Delta> decoration;
+  final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, Decoration, DecorationDelta> decoration;
 
   /// The multi-select field's padding. Defaults to `EdgeInsets.only(start: 10, top: 6, bottom: 6, end: 8)`.
   @override

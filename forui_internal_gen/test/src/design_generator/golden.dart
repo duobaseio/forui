@@ -138,7 +138,7 @@ extension $FGoldenStyleTransformations on FGoldenStyle {
     BorderRadiusGeometry? borderRadiusGeometry,
     BoxConstraints? boxConstraints,
     BoxDecorationDelta? boxDecoration,
-    Decoration? decoration,
+    DecorationDelta? decoration,
     Color color = colorSentinel,
     EdgeInsetsDelta? edgeInsets,
     EdgeInsetsDirectionalDelta? edgeInsetsDirectional,
@@ -150,8 +150,8 @@ extension $FGoldenStyleTransformations on FGoldenStyle {
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration, BoxDecorationDelta>? boxDecorationVariants,
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration?, BoxDecorationDelta>?
     nullableBoxDecorationVariants,
-    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration, Delta>? decorationVariants,
-    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration?, Delta>? nullableDecorationVariants,
+    FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration, DecorationDelta>? decorationVariants,
+    FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration?, DecorationDelta>? nullableDecorationVariants,
     FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color, Delta>? colorVariants,
     FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color?, Delta>? nullableColorVariants,
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, IconThemeData, IconThemeDataDelta>? iconThemeDataVariants,
@@ -174,7 +174,7 @@ extension $FGoldenStyleTransformations on FGoldenStyle {
     borderRadiusGeometry: borderRadiusGeometry ?? this.borderRadiusGeometry,
     boxConstraints: boxConstraints ?? this.boxConstraints,
     boxDecoration: boxDecoration?.call(this.boxDecoration) ?? this.boxDecoration,
-    decoration: decoration ?? this.decoration,
+    decoration: decoration?.call(this.decoration) ?? this.decoration,
     color: color == colorSentinel ? this.color : color,
     edgeInsets: edgeInsets?.call(this.edgeInsets) ?? this.edgeInsets,
     edgeInsetsDirectional: edgeInsetsDirectional?.call(this.edgeInsetsDirectional) ?? this.edgeInsetsDirectional,
@@ -287,8 +287,8 @@ mixin _$FGoldenStyleFunctions on Diagnosticable implements FGoldenStyleDelta {
   FVariants<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration, BoxDecorationDelta> get boxDecorationVariants;
   FVariants<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration?, BoxDecorationDelta>
   get nullableBoxDecorationVariants;
-  FVariants<FGoldenVariantConstraint, FGoldenVariant, Decoration, Delta> get decorationVariants;
-  FVariants<FGoldenVariantConstraint, FGoldenVariant, Decoration?, Delta> get nullableDecorationVariants;
+  FVariants<FGoldenVariantConstraint, FGoldenVariant, Decoration, DecorationDelta> get decorationVariants;
+  FVariants<FGoldenVariantConstraint, FGoldenVariant, Decoration?, DecorationDelta> get nullableDecorationVariants;
   FVariants<FGoldenVariantConstraint, FGoldenVariant, Color, Delta> get colorVariants;
   FVariants<FGoldenVariantConstraint, FGoldenVariant, Color?, Delta> get nullableColorVariants;
   FVariants<FGoldenVariantConstraint, FGoldenVariant, IconThemeData, IconThemeDataDelta> get iconThemeDataVariants;
@@ -462,7 +462,7 @@ abstract class FGoldenStyleDelta with Delta {
     BorderRadiusGeometry? borderRadiusGeometry,
     BoxConstraints? boxConstraints,
     BoxDecorationDelta? boxDecoration,
-    Decoration? decoration,
+    DecorationDelta? decoration,
     Color color,
     EdgeInsetsDelta? edgeInsets,
     EdgeInsetsDirectionalDelta? edgeInsetsDirectional,
@@ -474,8 +474,8 @@ abstract class FGoldenStyleDelta with Delta {
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration, BoxDecorationDelta>? boxDecorationVariants,
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration?, BoxDecorationDelta>?
     nullableBoxDecorationVariants,
-    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration, Delta>? decorationVariants,
-    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration?, Delta>? nullableDecorationVariants,
+    FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration, DecorationDelta>? decorationVariants,
+    FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration?, DecorationDelta>? nullableDecorationVariants,
     FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color, Delta>? colorVariants,
     FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color?, Delta>? nullableColorVariants,
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, IconThemeData, IconThemeDataDelta>? iconThemeDataVariants,
@@ -549,7 +549,7 @@ class _FGoldenStyleDelta implements FGoldenStyleDelta {
 
   final BoxDecorationDelta? boxDecoration;
 
-  final Decoration? decoration;
+  final DecorationDelta? decoration;
 
   final Color color;
 
@@ -573,9 +573,9 @@ class _FGoldenStyleDelta implements FGoldenStyleDelta {
   final FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration?, BoxDecorationDelta>?
   nullableBoxDecorationVariants;
 
-  final FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration, Delta>? decorationVariants;
+  final FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration, DecorationDelta>? decorationVariants;
 
-  final FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration?, Delta>? nullableDecorationVariants;
+  final FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration?, DecorationDelta>? nullableDecorationVariants;
 
   final FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color, Delta>? colorVariants;
 
@@ -613,7 +613,7 @@ class _FGoldenStyleDelta implements FGoldenStyleDelta {
     borderRadiusGeometry: borderRadiusGeometry ?? original.borderRadiusGeometry,
     boxConstraints: boxConstraints ?? original.boxConstraints,
     boxDecoration: boxDecoration?.call(original.boxDecoration) ?? original.boxDecoration,
-    decoration: decoration ?? original.decoration,
+    decoration: decoration?.call(original.decoration) ?? original.decoration,
     color: color == colorSentinel ? original.color : color,
     edgeInsets: edgeInsets?.call(original.edgeInsets) ?? original.edgeInsets,
     edgeInsetsDirectional:

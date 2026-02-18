@@ -35,11 +35,11 @@ void main() {
 
   group('FVariants', () {
     test('lerpBoxDecoration', () {
-      final first = createVariants<FVariant, FVariant, BoxDecoration, Delta>(
+      final first = createVariants<FVariant, FVariant, BoxDecoration, BoxDecorationDelta>(
         const BoxDecoration(color: Color(0xFF000000)),
         {a: const BoxDecoration(color: Color(0xFF000000))},
       );
-      final second = createVariants<FVariant, FVariant, BoxDecoration, Delta>(
+      final second = createVariants<FVariant, FVariant, BoxDecoration, BoxDecorationDelta>(
         const BoxDecoration(color: Color(0xFFFFFFFF)),
         {a: const BoxDecoration(color: Color(0xFFFFFFFF))},
       );
@@ -51,11 +51,11 @@ void main() {
     });
 
     test('lerpDecoration', () {
-      final first = createVariants<FVariant, FVariant, Decoration, Delta>(
+      final first = createVariants<FVariant, FVariant, Decoration, DecorationDelta>(
         const BoxDecoration(color: Color(0xFF000000)),
         {a: const BoxDecoration(color: Color(0xFF000000))},
       );
-      final second = createVariants<FVariant, FVariant, Decoration, Delta>(
+      final second = createVariants<FVariant, FVariant, Decoration, DecorationDelta>(
         const BoxDecoration(color: Color(0xFFFFFFFF)),
         {a: const BoxDecoration(color: Color(0xFFFFFFFF))},
       );
