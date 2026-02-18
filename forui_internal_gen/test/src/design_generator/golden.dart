@@ -575,7 +575,8 @@ class _FGoldenStyleDelta implements FGoldenStyleDelta {
 
   final FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration, DecorationDelta>? decorationVariants;
 
-  final FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration?, DecorationDelta>? nullableDecorationVariants;
+  final FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, Decoration?, DecorationDelta>?
+  nullableDecorationVariants;
 
   final FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color, Delta>? colorVariants;
 

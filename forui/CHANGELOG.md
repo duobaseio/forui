@@ -57,6 +57,8 @@
 * Add `DecorationDelta`, `EdgeInsetsGeometryDelta`, `EdgeInsetsDelta`, `EdgeInsetsDirectionalDelta`, and 
   `ShapeDecorationDelta` delta classes.
 
+* **Breaking** Change `TextStyleDelta.delta(decoration: ...)` from `TextDecoration?` to
+  `TextDecoration? Function()?`. `TextDecoration` is slated to become final in a future Flutter release.
 * **Breaking** Change `EdgeInsets`, `EdgeInsetsDirectional`, and `EdgeInsetsGeometry` fields in style deltas to accept
   delta types (`EdgeInsetsDelta`, `EdgeInsetsDirectionalDelta`, `EdgeInsetsGeometryDelta`) instead of raw values.
 

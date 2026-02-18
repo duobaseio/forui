@@ -92,7 +92,7 @@ void main() {
           locale: null,
           foreground: () => null,
           background: () => null,
-          decoration: null,
+          decoration: () => null,
           decorationColor: null,
           decorationStyle: () => null,
           decorationThickness: null,

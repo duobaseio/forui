@@ -4,7 +4,6 @@ import 'package:forui/src/theme/delta/delta.dart';
 
 const _fontWeightSentinel = _FontWeightSentinel();
 const _locale = Locale('sentinel');
-const _textDecorationSentinel = _TextDecorationSentinel();
 
 // ignore: avoid_implementing_value_types
 final class _FontWeightSentinel implements FontWeight {
@@ -15,17 +14,6 @@ final class _FontWeightSentinel implements FontWeight {
 
   @override
   int get value => throw UnimplementedError();
-}
-
-// ignore: avoid_implementing_value_types
-final class _TextDecorationSentinel implements TextDecoration {
-  const _TextDecorationSentinel();
-
-  @override
-  bool contains(TextDecoration other) => throw UnimplementedError();
-
-  // This needs to be provided: https://github.com/flutter/flutter/issues/181662
-  int get maskValue => 0;
 }
 
 /// A delta that applies modifications to a [TextStyle].
@@ -49,7 +37,7 @@ abstract class TextStyleDelta with Delta {
     List<Shadow>? shadows,
     List<FontFeature>? fontFeatures,
     List<FontVariation>? fontVariations,
-    TextDecoration? decoration,
+    TextDecoration? Function()? decoration,
     Color? decorationColor,
     TextDecorationStyle? Function()? decorationStyle,
     double? decorationThickness,
@@ -85,7 +73,7 @@ class _TextStyleDelta implements TextStyleDelta {
   final List<Shadow>? shadows;
   final List<FontFeature>? fontFeatures;
   final List<FontVariation>? fontVariations;
-  final TextDecoration? decoration;
+  final TextDecoration? Function()? decoration;
   final Color? decorationColor;
   final TextDecorationStyle? Function()? decorationStyle;
   final double? decorationThickness;
@@ -113,7 +101,7 @@ class _TextStyleDelta implements TextStyleDelta {
     this.shadows,
     this.fontFeatures,
     this.fontVariations,
-    this.decoration = _textDecorationSentinel,
+    this.decoration,
     this.decorationColor = colorSentinel,
     this.decorationStyle,
     this.decorationThickness = .infinity,
@@ -143,7 +131,7 @@ class _TextStyleDelta implements TextStyleDelta {
     shadows: shadows ?? style?.shadows,
     fontFeatures: fontFeatures ?? style?.fontFeatures,
     fontVariations: fontVariations ?? style?.fontVariations,
-    decoration: identical(decoration, _textDecorationSentinel) ? style?.decoration : decoration,
+    decoration: decoration != null ? decoration!() : style?.decoration,
     decorationColor: identical(decorationColor, colorSentinel) ? style?.decorationColor : decorationColor,
     decorationStyle: decorationStyle != null ? decorationStyle!() : style?.decorationStyle,
     decorationThickness: identical(decorationThickness, double.infinity)

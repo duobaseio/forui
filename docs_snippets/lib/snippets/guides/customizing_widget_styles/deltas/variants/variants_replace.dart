@@ -10,7 +10,7 @@ final accordion =
         titleTextStyle: FVariants.from(
           const TextStyle(fontSize: 18, fontWeight: .bold),
           variants: {
-            [.hovered, .pressed]: const .delta(decoration: TextDecoration.underline),
+            [.hovered, .pressed]: .delta(decoration: () => TextDecoration.underline),
             [.disabled]: const .delta(color: Colors.grey),
           },
         ),

@@ -14,7 +14,7 @@ enum Style {
     null,
     <String>['accordion'],
     <String>['FAccordionStyle'],
-    'FAccordionStyle accordionStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FAccordionStyle(\n  titleTextStyle: FVariants.from(\n    typography.base.copyWith(fontWeight: .w500, color: colors.foreground),\n    variants: {\n      [.hovered, .pressed]: const .delta(decoration: .underline),\n    },\n  ),\n  childTextStyle: typography.sm.copyWith(color: colors.foreground),\n  iconStyle: .all(IconThemeData(color: colors.mutedForeground, size: 20)),\n  focusedOutlineStyle: style.focusedOutlineStyle,\n  dividerStyle: FDividerStyle(color: colors.border, padding: .zero),\n  tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),\n  titlePadding: const .symmetric(vertical: 15),\n  childPadding: const .only(bottom: 15),\n  motion: const FAccordionMotion(),\n);\n',
+    'FAccordionStyle accordionStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FAccordionStyle(\n  titleTextStyle: FVariants.from(\n    typography.base.copyWith(fontWeight: .w500, color: colors.foreground),\n    variants: {\n      [.hovered, .pressed]: .delta(decoration: () => .underline),\n    },\n  ),\n  childTextStyle: typography.sm.copyWith(color: colors.foreground),\n  iconStyle: .all(IconThemeData(color: colors.mutedForeground, size: 20)),\n  focusedOutlineStyle: style.focusedOutlineStyle,\n  dividerStyle: FDividerStyle(color: colors.border, padding: .zero),\n  tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),\n  titlePadding: const .symmetric(vertical: 15),\n  childPadding: const .only(bottom: 15),\n  motion: const FAccordionMotion(),\n);\n',
   ),
   falertstyles(
     'FAlertStyles',
@@ -42,7 +42,7 @@ enum Style {
     null,
     <String>['autocomplete'],
     <String>['FAutocompleteStyle', 'FTextFieldStyle', 'FLabelStyles', 'FButtonStyles', 'FButtonSizeStyles'],
-    'FAutocompleteStyle autocompleteStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) {\n  final field = _textFieldStyle(\n    colors: colors,\n    typography: typography,\n    style: style,\n  );\n  return .new(\n    fieldStyle: field,\n    composingTextStyle: field.contentTextStyle.apply([\n      .all(const .delta(decoration: .underline)),\n    ]),\n    typeaheadTextStyle: field.contentTextStyle.apply([\n      .all(.delta(color: colors.mutedForeground)),\n    ]),\n    contentStyle: .inherit(\n      colors: colors,\n      typography: typography,\n      style: style,\n    ),\n  );\n}\n',
+    'FAutocompleteStyle autocompleteStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) {\n  final field = _textFieldStyle(\n    colors: colors,\n    typography: typography,\n    style: style,\n  );\n  return .new(\n    fieldStyle: field,\n    composingTextStyle: field.contentTextStyle.apply([\n      .all(.delta(decoration: () => .underline)),\n    ]),\n    typeaheadTextStyle: field.contentTextStyle.apply([\n      .all(.delta(color: colors.mutedForeground)),\n    ]),\n    contentStyle: .inherit(\n      colors: colors,\n      typography: typography,\n      style: style,\n    ),\n  );\n}\n',
   ),
   favatarstyle(
     'FAvatarStyle',
