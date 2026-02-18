@@ -912,11 +912,7 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
     required FStyle style,
   }) {
     final label = FLabelStyles.inherit(style: style).verticalStyle;
-    final ghost = FButtonStyles.inherit(
-      colors: colors,
-      typography: typography,
-      style: style,
-    ).ghost.sm;
+    final ghost = FButtonStyles.inherit(colors: colors, typography: typography, style: style).ghost.sm;
 
     final iconStyle = FVariants<FTextFieldVariantConstraint, FTextFieldVariant, IconThemeData, IconThemeDataDelta>.from(
       IconThemeData(color: colors.mutedForeground, size: 16),

@@ -1350,7 +1350,8 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FDeterminateProgressStyleDelta? determinateProgressStyle,
     FDialogRouteStyleDelta? dialogRouteStyle,
     FDialogStyleDelta? dialogStyle,
-    FVariantsDelta<FDividerAxisVariantConstraint, FDividerAxisVariant, FDividerStyle, FDividerStyleDelta>? dividerStyles,
+    FVariantsDelta<FDividerAxisVariantConstraint, FDividerAxisVariant, FDividerStyle, FDividerStyleDelta>?
+    dividerStyles,
     FVariantsDelta<FHeaderVariantConstraint, FHeaderVariant, FHeaderStyle, FHeaderStyleDelta>? headerStyles,
     FVariantsDelta<FItemVariantConstraint, FItemVariant, FItemStyle, FItemStyleDelta>? itemStyles,
     FItemGroupStyleDelta? itemGroupStyle,
@@ -1428,7 +1429,9 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     popoverMenuStyle: popoverMenuStyle?.call(this.popoverMenuStyle) ?? this.popoverMenuStyle,
     progressStyle: progressStyle?.call(this.progressStyle) ?? this.progressStyle,
     radioStyle: radioStyle?.call(this.radioStyle) ?? this.radioStyle,
-    resizableStyles: resizableStyles == null ? this.resizableStyles : FResizableStyles(resizableStyles(this.resizableStyles)),
+    resizableStyles: resizableStyles == null
+        ? this.resizableStyles
+        : FResizableStyles(resizableStyles(this.resizableStyles)),
     scaffoldStyle: scaffoldStyle?.call(this.scaffoldStyle) ?? this.scaffoldStyle,
     selectStyle: selectStyle?.call(this.selectStyle) ?? this.selectStyle,
     selectGroupStyle: selectGroupStyle?.call(this.selectGroupStyle) ?? this.selectGroupStyle,

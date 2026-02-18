@@ -315,7 +315,14 @@ class FToasterState extends State<FToaster> {
     final resolved = (alignment ?? toasterStyle.toastAlignment)._alignment.resolve(direction);
     final directions = swipeToDismiss ?? [if (resolved.x < 1) .left else .right];
 
-    final entry = ToasterEntry(style(toasterStyle.toastStyle), resolved, directions, dismissThreshold, duration, builder);
+    final entry = ToasterEntry(
+      style(toasterStyle.toastStyle),
+      resolved,
+      directions,
+      dismissThreshold,
+      duration,
+      builder,
+    );
     entry.onDismiss = () {
       entry.dismissing.value = true;
       _remove(entry);

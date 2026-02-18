@@ -224,15 +224,15 @@ class _DecorationBoxDelta extends _BoxDelta implements DecorationDelta {
       BoxBorder border => (border, null, .rectangle),
       CircleBorder(:final side) => (side == .none ? null : .fromBorderSide(side), null, .circle),
       final OutlinedBorder border => (
-      border.side == .none ? null : .fromBorderSide(border.side),
-      switch (border) {
-        BeveledRectangleBorder(:final borderRadius) => borderRadius,
-        ContinuousRectangleBorder(:final borderRadius) => borderRadius,
-        RoundedRectangleBorder(:final borderRadius) => borderRadius,
-        RoundedSuperellipseBorder(:final borderRadius) => borderRadius,
-        _ => null,
-      },
-          .rectangle,
+        border.side == .none ? null : .fromBorderSide(border.side),
+        switch (border) {
+          BeveledRectangleBorder(:final borderRadius) => borderRadius,
+          ContinuousRectangleBorder(:final borderRadius) => borderRadius,
+          RoundedRectangleBorder(:final borderRadius) => borderRadius,
+          RoundedSuperellipseBorder(:final borderRadius) => borderRadius,
+          _ => null,
+        },
+        .rectangle,
       ),
       _ => (null, null, .rectangle),
     };
@@ -251,13 +251,7 @@ class _DecorationBoxDelta extends _BoxDelta implements DecorationDelta {
 }
 
 class _DecorationShapeDelta extends _ShapeDelta implements DecorationDelta {
-  const _DecorationShapeDelta({
-    super.color,
-    super.image,
-    super.gradient,
-    super.shadows,
-    super.shape,
-  });
+  const _DecorationShapeDelta({super.color, super.image, super.gradient, super.shadows, super.shape});
 
   @override
   ShapeDecoration call(covariant Decoration? decoration) => switch (decoration) {

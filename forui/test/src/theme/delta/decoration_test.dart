@@ -289,11 +289,7 @@ void main() {
           shape: RoundedRectangleBorder(borderRadius: .all(.circular(12))),
         );
 
-        const delta = ShapeDecorationDelta.delta(
-          color: null,
-          image: null,
-          gradient: null,
-        );
+        const delta = ShapeDecorationDelta.delta(color: null, image: null, gradient: null);
 
         final result = delta(original);
 
