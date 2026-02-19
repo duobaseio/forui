@@ -192,7 +192,7 @@ class ChildLayer extends ContainerLayer {
 /// [ChildLayer].
 ///
 /// ## Implementation details:
-/// This class is a copy of [LayerLink] with the only differences being:
+/// This class is a copy of [FollowerLayer] with the only differences being:
 /// * Contains a [ChildLayerLink] instead of [LayerLink]
 @internal
 class PortalLayer extends ContainerLayer {
@@ -202,7 +202,7 @@ class PortalLayer extends ContainerLayer {
   /// must be non-null before the compositing phase of the pipeline.
   PortalLayer({
     required this.link,
-    this.showWhenUnlinked = true,
+    this.showWhenUnlinked = false,
     this.unlinkedOffset = Offset.zero,
     this.linkedOffset = Offset.zero,
   });
