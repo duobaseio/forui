@@ -37,7 +37,7 @@ const directional = {
 };
 
 // UPDATE BEFORE EACH RELEASE.
-const url = 'https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.564.0/icons';
+const url = 'https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.574.0/icons';
 
 void main() {
   // ignore: avoid_print

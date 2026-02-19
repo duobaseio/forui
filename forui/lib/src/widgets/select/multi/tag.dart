@@ -56,6 +56,9 @@ class FMultiSelectTag extends StatelessWidget {
   /// {@macro forui.foundation.FTappable.onLongPress}
   final VoidCallback? onLongPress;
 
+  /// {@macro forui.foundation.FTappable.onDoubleTap}
+  final VoidCallback? onDoubleTap;
+
   /// {@macro forui.foundation.FTappable.onSecondaryPress}
   final VoidCallback? onSecondaryPress;
 
@@ -79,6 +82,7 @@ class FMultiSelectTag extends StatelessWidget {
     this.onVariantChange,
     this.onPress,
     this.onLongPress,
+    this.onDoubleTap,
     this.onSecondaryPress,
     this.onSecondaryLongPress,
     this.shortcuts,
@@ -98,6 +102,7 @@ class FMultiSelectTag extends StatelessWidget {
       onVariantChange: onVariantChange,
       onPress: onPress,
       onLongPress: onLongPress,
+      onDoubleTap: onDoubleTap,
       onSecondaryPress: onSecondaryPress,
       onSecondaryLongPress: onSecondaryLongPress,
       shortcuts: shortcuts,
@@ -134,6 +139,7 @@ class FMultiSelectTag extends StatelessWidget {
       ..add(ObjectFlagProperty.has('onVariantChange', onVariantChange))
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
+      ..add(ObjectFlagProperty.has('onDoubleTap', onDoubleTap))
       ..add(ObjectFlagProperty.has('onSecondaryPress', onSecondaryPress))
       ..add(ObjectFlagProperty.has('onSecondaryLongPress', onSecondaryLongPress))
       ..add(DiagnosticsProperty('shortcuts', shortcuts))

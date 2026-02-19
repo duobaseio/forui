@@ -35,6 +35,10 @@ This is a minor follow-up that adds some missing features and addresses some QoL
 * Add `FResizableStyles.horizontal` and `FResizableStyles.vertical` getters.
 
 
+### `FSelect` & `FMultiSelect`
+* Add `FMultiSelectTag.onDoubleTap` callback.
+
+
 ### `FSlider`
 * Add `FSliderStyles.horizontal` and `FSliderStyles.vertical` getters.
 
