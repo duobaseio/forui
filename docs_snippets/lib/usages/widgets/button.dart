@@ -28,6 +28,7 @@ final button = FButton(
   // {@endcategory}
   // {@category "Callbacks"}
   onLongPress: null,
+  onDoubleTap: null,
   onSecondaryPress: null,
   onSecondaryLongPress: null,
   onHoverChange: (hovered) {},
@@ -57,6 +58,7 @@ final icon = FButton.icon(
   // {@endcategory}
   // {@category "Callbacks"}
   onLongPress: null,
+  onDoubleTap: null,
   onSecondaryPress: null,
   onSecondaryLongPress: null,
   onHoverChange: (hovered) {},
@@ -86,6 +88,7 @@ final raw = FButton.raw(
   // {@endcategory}
   // {@category "Callbacks"}
   onLongPress: null,
+  onDoubleTap: null,
   onSecondaryPress: null,
   onSecondaryLongPress: null,
   onHoverChange: (hovered) {},
