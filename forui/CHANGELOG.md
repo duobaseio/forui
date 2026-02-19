@@ -24,6 +24,7 @@ This is a minor follow-up that adds some missing features and addresses some QoL
 
 
 ### `FHeader`
+* Add `FHeaderAction.onDoubleTap` callback.
 * Add `FHeaderStyles.root` and `FHeaderStyles.nested` getters.
 
 

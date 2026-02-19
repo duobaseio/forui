@@ -54,6 +54,9 @@ class FHeaderAction extends StatelessWidget {
   /// {@macro forui.foundation.FTappable.onLongPress}
   final VoidCallback? onLongPress;
 
+  /// {@macro forui.foundation.FTappable.onDoubleTap}
+  final VoidCallback? onDoubleTap;
+
   /// {@macro forui.foundation.FTappable.onSecondaryPress}
   final VoidCallback? onSecondaryPress;
 
@@ -79,6 +82,7 @@ class FHeaderAction extends StatelessWidget {
     this.onHoverChange,
     this.onVariantChange,
     this.onLongPress,
+    this.onDoubleTap,
     this.onSecondaryPress,
     this.onSecondaryLongPress,
     this.shortcuts,
@@ -97,6 +101,7 @@ class FHeaderAction extends StatelessWidget {
     ValueChanged<bool>? onHoverChange,
     FTappableVariantChangeCallback? onVariantChange,
     VoidCallback? onLongPress,
+    VoidCallback? onDoubleTap,
     VoidCallback? onSecondaryPress,
     VoidCallback? onSecondaryLongPress,
     Map<ShortcutActivator, Intent>? shortcuts,
@@ -113,6 +118,7 @@ class FHeaderAction extends StatelessWidget {
     onHoverChange: onHoverChange,
     onVariantChange: onVariantChange,
     onLongPress: onLongPress,
+    onDoubleTap: onDoubleTap,
     onSecondaryPress: onSecondaryPress,
     onSecondaryLongPress: onSecondaryLongPress,
     shortcuts: shortcuts,
@@ -130,6 +136,7 @@ class FHeaderAction extends StatelessWidget {
     ValueChanged<bool>? onHoverChange,
     FTappableVariantChangeCallback? onVariantChange,
     VoidCallback? onLongPress,
+    VoidCallback? onDoubleTap,
     VoidCallback? onSecondaryPress,
     VoidCallback? onSecondaryLongPress,
     Map<ShortcutActivator, Intent>? shortcuts,
@@ -145,6 +152,7 @@ class FHeaderAction extends StatelessWidget {
     onHoverChange: onHoverChange,
     onVariantChange: onVariantChange,
     onLongPress: onLongPress,
+    onDoubleTap: onDoubleTap,
     onSecondaryPress: onSecondaryPress,
     onSecondaryLongPress: onSecondaryLongPress,
     shortcuts: shortcuts,
@@ -166,6 +174,7 @@ class FHeaderAction extends StatelessWidget {
       semanticsLabel: semanticsLabel,
       onPress: onPress,
       onLongPress: onLongPress,
+      onDoubleTap: onDoubleTap,
       onSecondaryPress: onSecondaryPress,
       onSecondaryLongPress: onSecondaryLongPress,
       shortcuts: shortcuts,
@@ -190,6 +199,7 @@ class FHeaderAction extends StatelessWidget {
       ..add(ObjectFlagProperty.has('onVariantChange', onVariantChange))
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
+      ..add(ObjectFlagProperty.has('onDoubleTap', onDoubleTap))
       ..add(ObjectFlagProperty.has('onSecondaryPress', onSecondaryPress))
       ..add(ObjectFlagProperty.has('onSecondaryLongPress', onSecondaryLongPress))
       ..add(DiagnosticsProperty('shortcuts', shortcuts))
