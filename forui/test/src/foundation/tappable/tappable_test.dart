@@ -230,17 +230,12 @@ void main() {
       expect(find.text(set(true).toString()), findsOneWidget);
     });
 
-
     testWidgets('bounce when onPress set and primary button pressed', (tester) async {
       final key = GlobalKey<AnimatedTappableState>();
 
       await tester.pumpWidget(
         TestScaffold(
-          child: FTappable(
-            key: key,
-            builder: (_, states, _) => Text('$states'),
-            onPress: () {},
-          ),
+          child: FTappable(key: key, builder: (_, states, _) => Text('$states'), onPress: () {}),
         ),
       );
       expect(key.currentState?.bounce.value, 1);
@@ -261,11 +256,7 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold(
-          child: FTappable(
-            key: key,
-            builder: (_, states, _) => Text('$states'),
-            onSecondaryPress: () {},
-          ),
+          child: FTappable(key: key, builder: (_, states, _) => Text('$states'), onSecondaryPress: () {}),
         ),
       );
       expect(key.currentState?.bounce.value, 1);
@@ -548,11 +539,7 @@ void main() {
     testWidgets('enabled when only onDoubleTap given', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          child: FTappable.static(
-            focusNode: focusNode,
-            builder: (_, states, _) => Text('$states'),
-            onDoubleTap: () {},
-          ),
+          child: FTappable.static(focusNode: focusNode, builder: (_, states, _) => Text('$states'), onDoubleTap: () {}),
         ),
       );
 
