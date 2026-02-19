@@ -1,5 +1,7 @@
 ## 0.19.0
 
+This is a minor follow-up that adds some missing features and addresses some QoL issues discovered after the 0.18.0 release.
+
 ### `FAlert`
 * Add `FAlertStyles.primary` and `FAlertStyles.destructive` getters.
 
@@ -9,6 +11,7 @@
 
 
 ### `FButton`
+* Add `FButton.onDoubleTap` callback.
 * Add `FButtonStyles.primary`, `FButtonStyles.secondary`, `FButtonStyles.destructive`, `FButtonStyles.outline`, and
   `FButtonStyles.ghost` getters.
 * Add `FButtonSizeStyles.xs`, `FButtonSizeStyles.sm`, and `FButtonSizeStyles.lg` getters.
