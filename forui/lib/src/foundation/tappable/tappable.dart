@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
@@ -9,6 +10,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
+import 'package:forui/src/foundation/tappable/bounce.dart';
 import 'package:forui/src/theme/variant.dart';
 
 @Variants('FTappable', {
@@ -88,6 +90,7 @@ class FTappable extends StatefulWidget {
   /// The widget will be disabled if the following are null:
   /// * [onPress]
   /// * [onLongPress]
+  /// * [onDoubleTap]
   /// * [onSecondaryPress]
   /// * [onSecondaryLongPress]
   /// {@endtemplate}
@@ -99,10 +102,23 @@ class FTappable extends StatefulWidget {
   /// The widget will be disabled if the following are null:
   /// * [onPress]
   /// * [onLongPress]
+  /// * [onDoubleTap]
   /// * [onSecondaryPress]
   /// * [onSecondaryLongPress]
   /// {@endtemplate}
   final VoidCallback? onLongPress;
+
+  /// {@template forui.foundation.FTappable.onDoubleTap}
+  /// A callback for when the widget is double tapped.
+  ///
+  /// The widget will be disabled if the following are null:
+  /// * [onPress]
+  /// * [onLongPress]
+  /// * [onDoubleTap]
+  /// * [onSecondaryPress]
+  /// * [onSecondaryLongPress]
+  /// {@endtemplate}
+  final VoidCallback? onDoubleTap;
 
   /// {@template forui.foundation.FTappable.onSecondaryPress}
   /// A callback for when the widget is pressed with a secondary button (usually right-click on desktop).
@@ -110,6 +126,7 @@ class FTappable extends StatefulWidget {
   /// The widget will be disabled if the following are null:
   /// * [onPress]
   /// * [onLongPress]
+  /// * [onDoubleTap]
   /// * [onSecondaryPress]
   /// * [onSecondaryLongPress]
   /// {@endtemplate}
@@ -121,6 +138,7 @@ class FTappable extends StatefulWidget {
   /// The widget will be disabled if the following are null:
   /// * [onPress]
   /// * [onLongPress]
+  /// * [onDoubleTap]
   /// * [onSecondaryPress]
   /// * [onSecondaryLongPress]
   /// {@endtemplate}
@@ -163,6 +181,7 @@ class FTappable extends StatefulWidget {
     HitTestBehavior behavior,
     VoidCallback? onPress,
     VoidCallback? onLongPress,
+    VoidCallback? onDoubleTap,
     VoidCallback? onSecondaryPress,
     VoidCallback? onSecondaryLongPress,
     Map<ShortcutActivator, Intent>? shortcuts,
@@ -190,6 +209,7 @@ class FTappable extends StatefulWidget {
     this.behavior = .translucent,
     this.onPress,
     this.onLongPress,
+    this.onDoubleTap,
     this.onSecondaryPress,
     this.onSecondaryLongPress,
     this.actions,
@@ -220,6 +240,7 @@ class FTappable extends StatefulWidget {
       ..add(EnumProperty('behavior', behavior))
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
+      ..add(ObjectFlagProperty.has('onDoubleTap', onDoubleTap))
       ..add(ObjectFlagProperty.has('onSecondaryPress', onSecondaryPress))
       ..add(ObjectFlagProperty.has('onSecondaryLongPress', onSecondaryLongPress))
       ..add(DiagnosticsProperty('shortcuts', shortcuts))
@@ -227,14 +248,23 @@ class FTappable extends StatefulWidget {
       ..add(ObjectFlagProperty.has('builder', builder));
   }
 
+  bool _animate(int button) =>
+      (button == kPrimaryButton && (onPress != null || onLongPress != null || onDoubleTap != null)) ||
+      (button == kSecondaryButton && (onSecondaryPress != null || onSecondaryLongPress != null));
+
   bool get _disabled =>
-      onPress == null && onLongPress == null && onSecondaryPress == null && onSecondaryLongPress == null;
+      onPress == null &&
+      onLongPress == null &&
+      onDoubleTap == null &&
+      onSecondaryPress == null &&
+      onSecondaryLongPress == null;
 }
 
 class _FTappableState<T extends FTappable> extends State<T> {
   late FocusNode _focus;
   late Set<FTappableVariant> _current;
   int _monotonic = 0;
+  int _buttons = 0;
 
   @override
   void initState() {
@@ -331,10 +361,10 @@ class _FTappableState<T extends FTappable> extends State<T> {
               // GestureArena and only 1 GestureDetector will win. This is problematic if this tappable is wrapped in
               // another GestureDetector as onTapDown and onTapUp might absorb EVERY gesture, including drags and pans.
               child: Listener(
-                onPointerDown: (_) async {
+                onPointerDown: (event) async {
                   final count = ++_monotonic;
-                  if (!widget._disabled) {
-                    onPressedStart();
+                  if (widget._animate(_buttons = event.buttons)) {
+                    onPressStart();
                   }
 
                   await Future.delayed(style.pressedEnterDuration);
@@ -342,22 +372,31 @@ class _FTappableState<T extends FTappable> extends State<T> {
                     setState(() => _update(.pressed, true));
                   }
                 },
-                onPointerMove: (event) {
+                onPointerMove: (event) async {
                   // The RenderObject should almost always be a [RenderBox] since it is wrapped in a Semantics which
                   // required the child to be a [RenderBox] as well. We use a pattern match anyways just to be safe.
-                  if (context.findRenderObject() case final RenderBox box?
-                      when !box.size.contains(event.localPosition)) {
-                    ++_monotonic;
-                    if (!widget._disabled) {
-                      onPressedEnd();
-                    }
-                    setState(() => _update(.pressed, false));
+                  if (context.findRenderObject() case RenderBox(:final size) when size.contains(event.localPosition)) {
+                    return;
                   }
+
+                  // Avoid unnecessary state updates.
+                  if (!_current.contains(FTappableVariant.pressed)) {
+                    return;
+                  }
+
+                  ++_monotonic;
+                  if (widget._animate(_buttons)) {
+                    onPressEnd();
+                  }
+
+                  // It does not make sense from a UX perspective to wait for [pressedExitDuration] before updating
+                  // state if the user drags their pointer outside of the tappable.
+                  setState(() => _update(.pressed, false));
                 },
-                onPointerUp: (_) async {
+                onPointerUp: (event) async {
                   final count = ++_monotonic;
-                  if (!widget._disabled) {
-                    onPressedEnd();
+                  if (widget._animate(_buttons)) {
+                    onPressEnd();
                   }
 
                   await Future.delayed(style.pressedExitDuration);
@@ -369,6 +408,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
                   behavior: widget.behavior,
                   onTap: widget.onPress,
                   onLongPress: widget.onLongPress,
+                  onDoubleTap: widget.onDoubleTap,
                   onSecondaryTap: widget.onSecondaryPress,
                   onSecondaryLongPress: widget.onSecondaryLongPress,
                   child: tappable,
@@ -389,9 +429,9 @@ class _FTappableState<T extends FTappable> extends State<T> {
 
   Widget _decorate(BuildContext _, Widget child) => child;
 
-  void onPressedStart() {}
+  void onPressStart() {}
 
-  void onPressedEnd() {}
+  void onPressEnd() {}
 }
 
 @internal
@@ -410,6 +450,7 @@ class AnimatedTappable extends FTappable {
     super.behavior,
     super.onPress,
     super.onLongPress,
+    super.onDoubleTap,
     super.onSecondaryPress,
     super.onSecondaryLongPress,
     super.shortcuts,
@@ -426,7 +467,7 @@ class AnimatedTappable extends FTappable {
 @internal
 class AnimatedTappableState extends _FTappableState<AnimatedTappable> with SingleTickerProviderStateMixin {
   @visibleForTesting
-  Animation<double>? bounce;
+  late Animation<double> bounce;
 
   FTappableStyle? _style;
   late final AnimationController _bounceController = AnimationController(vsync: this);
@@ -466,16 +507,11 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
   }
 
   @override
-  Widget _decorate(BuildContext _, Widget child) {
-    if (bounce case final bounce?) {
-      return _Bounce(bounce: bounce, bounceFloor: _style?.motion.bounceFloor, child: child);
-    } else {
-      return child;
-    }
-  }
+  Widget _decorate(BuildContext _, Widget child) =>
+      Bounce(bounce: bounce, bounceFloor: _style?.motion.bounceFloor, child: child);
 
   @override
-  void onPressedStart() {
+  void onPressStart() {
     // Check if it's mounted due to a non-deterministic race condition, https://github.com/duobaseio/forui/issues/482.
     if (mounted) {
       _bounceController.forward();
@@ -483,7 +519,7 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
   }
 
   @override
-  void onPressedEnd() {
+  void onPressEnd() {
     // Check if it's mounted due to a non-deterministic race condition, https://github.com/duobaseio/forui/issues/482.
     if (mounted) {
       _bounceController.reverse();
@@ -494,104 +530,6 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(DiagnosticsProperty('bounce', bounce));
-  }
-}
-
-class _Bounce extends SingleChildRenderObjectWidget {
-  final Animation<double> bounce;
-  final double? bounceFloor;
-
-  const _Bounce({required this.bounce, required this.bounceFloor, required super.child});
-
-  @override
-  RenderObject createRenderObject(BuildContext context) => _RenderBounce(bounce, bounceFloor);
-
-  @override
-  void updateRenderObject(BuildContext context, _RenderBounce renderObject) {
-    renderObject
-      ..bounce = bounce
-      ..bounceFloor = bounceFloor;
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('bounce', bounce))
-      ..add(DoubleProperty('bounceFloor', bounceFloor));
-  }
-}
-
-class _RenderBounce extends RenderProxyBox {
-  Animation<double> _bounce;
-  double? _bounceFloor;
-
-  _RenderBounce(this._bounce, this._bounceFloor) {
-    _bounce.addListener(markNeedsPaint);
-  }
-
-  @override
-  void detach() {
-    _bounce.removeListener(markNeedsPaint);
-    super.detach();
-  }
-
-  @override
-  void paint(PaintingContext context, Offset offset) {
-    if (child == null) {
-      return;
-    }
-
-    if (_bounce.value == 1.0) {
-      context.paintChild(child!, offset);
-      return;
-    }
-
-    final double scale;
-    if (_bounceFloor case final bounceFloor?) {
-      final floor = 1.0 - (bounceFloor / size.longestSide);
-      scale = _bounce.value.clamp(floor, 1.0);
-    } else {
-      scale = _bounce.value;
-    }
-
-    final center = size.center(.zero);
-    context.pushTransform(
-      needsCompositing,
-      offset,
-      .identity()
-        ..translateByDouble(center.dx, center.dy, 1, 1)
-        ..scaleByDouble(scale, scale, 1, 1)
-        ..translateByDouble(-center.dx, -center.dy, 1, 1),
-      super.paint,
-    );
-  }
-
-  Animation<double> get bounce => _bounce;
-
-  set bounce(Animation<double> value) {
-    if (_bounce != value) {
-      _bounce.removeListener(markNeedsPaint);
-      _bounce = value..addListener(markNeedsPaint);
-      markNeedsPaint();
-    }
-  }
-
-  double? get bounceFloor => _bounceFloor;
-
-  set bounceFloor(double? value) {
-    if (_bounceFloor != value) {
-      _bounceFloor = value;
-      markNeedsPaint();
-    }
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('bounce', bounce))
-      ..add(DoubleProperty('bounceFloor', bounceFloor));
   }
 }
 

@@ -37,6 +37,9 @@
 
 
 ### `FTappable`
+* Add `FTappable.onDoubleTap` callback.
+
+* Fix bounce animation triggering for all pointer types instead of only those with matching callbacks.
 * Fix `onVariantChange` callback receiving a mutated set instead of the original previous set.
 
 
