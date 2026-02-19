@@ -269,11 +269,12 @@ class _FTappableState<T extends FTappable> extends State<T> {
   }
 
   void _update(FTappableVariant variant, bool add) {
-    final previous = {..._current};
-    if (add ? _current.add(variant) : _current.remove(variant)) {
+    final current = {..._current};
+    if (add ? current.add(variant) : current.remove(variant)) {
       if (widget.onVariantChange case final onVariantChange?) {
-        onVariantChange(previous, {..._current});
+        onVariantChange(_current, current);
       }
+      _current = current;
     }
   }
 

@@ -36,8 +36,8 @@ class FGoldenStyle with Diagnosticable, _$FGoldenStyleFunctions {
   final List<Shadow> shadows;
   final FVariants<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration, BoxDecorationDelta> boxDecorationVariants;
   final FVariants<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration?, BoxDecorationDelta> nullableBoxDecorationVariants;
-  final FVariants<FGoldenVariantConstraint, FGoldenVariant, Decoration, Delta> decorationVariants;
-  final FVariants<FGoldenVariantConstraint, FGoldenVariant, Decoration?, Delta> nullableDecorationVariants;
+  final FVariants<FGoldenVariantConstraint, FGoldenVariant, Decoration, DecorationDelta> decorationVariants;
+  final FVariants<FGoldenVariantConstraint, FGoldenVariant, Decoration?, DecorationDelta> nullableDecorationVariants;
   final FVariants<FGoldenVariantConstraint, FGoldenVariant, Color, Delta> colorVariants;
   final FVariants<FGoldenVariantConstraint, FGoldenVariant, Color?, Delta> nullableColorVariants;
   final FVariants<FGoldenVariantConstraint, FGoldenVariant, IconThemeData, IconThemeDataDelta> iconThemeDataVariants;

@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 
 const label = FLabel(
   // {@category "Core"}
-  style: .delta(labelPadding: .zero),
+  style: .delta(labelPadding: .value(.zero)),
   axis: .vertical,
   expands: false,
   variants: {},

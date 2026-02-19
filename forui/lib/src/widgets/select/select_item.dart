@@ -295,7 +295,7 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
               foreground: colors.foreground,
               mutedForeground: colors.mutedForeground,
             ).copyWith(
-              padding: padding,
+              padding: const .value(padding),
               prefixIconStyle: iconStyle,
               prefixIconSpacing: 10,
               titleTextStyle: textStyle,

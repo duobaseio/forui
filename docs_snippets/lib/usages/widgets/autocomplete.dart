@@ -94,7 +94,7 @@ final autocomplete = FAutocomplete(
   contentErrorBuilder: (context, error, stackTrace) => const Text('Error'),
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(fieldStyle: .delta(contentPadding: .zero)),
+  style: const .delta(fieldStyle: .delta(contentPadding: .value(.zero))),
   enabled: true,
   hint: 'Hint',
   items: const ['Apple', 'Banana', 'Cherry'],
@@ -190,7 +190,7 @@ final builder = FAutocomplete.builder(
   contentDivider: .none,
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(fieldStyle: .delta(contentPadding: .zero)),
+  style: const .delta(fieldStyle: .delta(contentPadding: .value(.zero))),
   enabled: true,
   filter: (query) => ['Apple', 'Banana'].where((item) => item.toLowerCase().startsWith(query.toLowerCase())),
   contentBuilder: (context, query, values) => [for (final value in values) .item(value: value)],

@@ -12,7 +12,7 @@ final switchWidget = FSwitch(
   semanticsLabel: 'Enable notifications switch',
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(labelPadding: .only(left: 8)),
+  style: const .delta(labelPadding: .value(.only(left: 8))),
   enabled: true,
   value: false,
   onChange: (value) {},

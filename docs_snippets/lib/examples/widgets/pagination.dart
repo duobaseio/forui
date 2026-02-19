@@ -74,7 +74,7 @@ class _PaginationCustomIconPageState extends StatefulExampleState<PaginationCust
           child: FButton.icon(
             variant: .ghost,
             onPress: _controller.next,
-            child: IconTheme(data: style.itemIconStyle.resolve({}), child: const Icon(FIcons.bird)),
+            child: IconTheme(data: style.itemIconStyle.base, child: const Icon(FIcons.bird)),
           ),
         ),
       ),
@@ -85,7 +85,7 @@ class _PaginationCustomIconPageState extends StatefulExampleState<PaginationCust
           child: FButton.icon(
             variant: .ghost,
             onPress: _controller.previous,
-            child: IconTheme(data: style.itemIconStyle.resolve({}), child: const Icon(FIcons.anchor)),
+            child: IconTheme(data: style.itemIconStyle.base, child: const Icon(FIcons.anchor)),
           ),
         ),
       ),

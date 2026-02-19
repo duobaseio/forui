@@ -25,7 +25,7 @@ class DeltaClass {
           '/// ',
           '/// A [${_class.name}] is itself a [${_class.name}Delta].',
         ])
-        ..sealed = true
+        ..abstract = true
         ..name = '${_class.name}Delta'
         ..mixins.add(refer('Delta'))
         ..constructors.addAll([

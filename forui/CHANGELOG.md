@@ -1,3 +1,68 @@
+## 0.19.0
+
+### `FAlert`
+* Add `FAlertStyles.primary` and `FAlertStyles.destructive` getters.
+
+
+### `FBadge`
+* Add `FBadgeStyles.primary`, `FBadgeStyles.secondary`, `FBadgeStyles.destructive`, and `FBadgeStyles.outline` getters.
+
+
+### `FButton`
+* Add `FButtonStyles.primary`, `FButtonStyles.secondary`, `FButtonStyles.destructive`, `FButtonStyles.outline`, and
+  `FButtonStyles.ghost` getters.
+* Add `FButtonSizeStyles.xs`, `FButtonSizeStyles.sm`, and `FButtonSizeStyles.lg` getters.
+
+* **Breaking** Remove `FButtonSizes` typedef. Use `FButtonSizeStyles` instead.
+
+
+### `FDivider`
+* Add `FDividerStyles.horizontal` and `FDividerStyles.vertical` getters.
+
+
+### `FHeader`
+* Add `FHeaderStyles.root` and `FHeaderStyles.nested` getters.
+
+
+### `FItem`
+* Add `FItemStyles.primary` and `FItemStyles.destructive` getters.
+
+
+### `FResizable`
+* Add `FResizableStyles.horizontal` and `FResizableStyles.vertical` getters.
+
+
+### `FSlider`
+* Add `FSliderStyles.horizontal` and `FSliderStyles.vertical` getters.
+
+
+### `FTappable`
+* Fix `onVariantChange` callback receiving a mutated set instead of the original previous set.
+
+
+### `FThemeData`
+* **Breaking** Change `FThemeData` variant-based field types to use wrapped extension types (`FAlertStyles`,
+  `FBadgeStyles`, etc.).
+
+
+### `FTile`
+* Add `FTileStyles.primary` and `FTileStyles.destructive` getters.
+
+
+### `FToaster`
+* Add `dismissThreshold` to `showFToast`, `showRawFToast`, and `FToasterState.show`.
+
+
+### Others
+* Add `DecorationDelta`, `EdgeInsetsGeometryDelta`, `EdgeInsetsDelta`, `EdgeInsetsDirectionalDelta`, and 
+  `ShapeDecorationDelta` delta classes.
+
+* **Breaking** Change `TextStyleDelta.delta(decoration: ...)` from `TextDecoration?` to
+  `TextDecoration? Function()?`. `TextDecoration` is slated to become final in a future Flutter release.
+* **Breaking** Change `EdgeInsets`, `EdgeInsetsDirectional`, and `EdgeInsetsGeometry` fields in style deltas to accept
+  delta types (`EdgeInsetsDelta`, `EdgeInsetsDirectionalDelta`, `EdgeInsetsGeometryDelta`) instead of raw values.
+
+
 ## 0.18.1
 * Fix lifted controls causing `setState() during build` assertion error when used inside a `Form`.
 

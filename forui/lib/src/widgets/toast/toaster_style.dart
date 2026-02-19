@@ -7,7 +7,6 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
-import 'package:forui/src/theme/delta.dart';
 
 @Sentinels(FToastStyle, {'backgroundFilter': 'imageFilterSentinel'})
 part 'toaster_style.design.dart';

@@ -9,7 +9,6 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
-import 'package:forui/src/theme/delta.dart';
 import 'package:forui/src/widgets/tooltip/tooltip_controller.dart';
 import 'package:forui/src/widgets/tooltip/tooltip_group.dart';
 

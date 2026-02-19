@@ -4,7 +4,7 @@ import 'package:forui/forui.dart';
 
 const divider = FDivider(
   // {@category "Core"}
-  style: .delta(padding: .zero),
+  style: .delta(padding: .value(.zero)),
   axis: .horizontal,
   // {@endcategory}
 );

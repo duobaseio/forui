@@ -9,7 +9,7 @@ const timePicker = FTimePicker(
   control: .managed(),
   // {@endcategory}
   // {@category "Core"}
-  style: .delta(padding: .all(5)),
+  style: .delta(padding: .value(.all(5))),
   hour24: false,
   hourInterval: 1,
   minuteInterval: 1,

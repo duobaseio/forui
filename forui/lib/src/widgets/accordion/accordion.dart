@@ -202,7 +202,7 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
         titleTextStyle: FVariants.from(
           typography.base.copyWith(fontWeight: .w500, color: colors.foreground),
           variants: {
-            [.hovered, .pressed]: const .delta(decoration: .underline),
+            [.hovered, .pressed]: .delta(decoration: () => .underline),
           },
         ),
         childTextStyle: typography.sm.copyWith(color: colors.foreground),

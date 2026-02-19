@@ -14,11 +14,16 @@ import 'package:forui/src/widgets/toast/toaster_stack.dart';
 ///
 /// Set [swipeToDismiss] to an empty list to disable swiping to dismiss.
 ///
+/// [dismissThreshold] is the fraction of the toast's width/height that must be swiped before the toast is dismissed.
+/// The higher the threshold, the more the user has to swipe to dismiss the toast. Defaults to 0.5.
+///
 /// [duration] controls the duration which the toast is shown. Defaults to 5 seconds. Set [duration] to null to disable
 /// auto-dismissing.
 ///
 /// ## Contract
-/// Throws [FlutterError] if there is no ancestor [FToaster] in the given [context].
+/// Throws an error if:
+/// * there is no ancestor [FToaster] in the given [context].
+/// * [dismissThreshold] is not in the range `[0, 1]`.
 ///
 /// See:
 /// * https://forui.dev/docs/overlay/toast for working examples.
@@ -34,6 +39,7 @@ FToasterEntry showFToast({
   Widget Function(BuildContext context, FToasterEntry entry)? suffixBuilder,
   FToastAlignment? alignment,
   List<AxisDirection>? swipeToDismiss,
+  double dismissThreshold = 0.5,
   Duration? duration = const Duration(seconds: 5),
   VoidCallback? onDismiss,
 }) {
@@ -66,6 +72,7 @@ FToasterEntry showFToast({
     style: style,
     alignment: alignment,
     swipeToDismiss: swipeToDismiss,
+    dismissThreshold: dismissThreshold,
     duration: duration,
     onDismiss: onDismiss,
   );
@@ -81,11 +88,16 @@ FToasterEntry showFToast({
 ///
 /// Set [swipeToDismiss] to an empty list to disable swiping to dismiss.
 ///
+/// [dismissThreshold] is the fraction of the toast's width/height that must be swiped before the toast is dismissed.
+/// The higher the threshold, the more the user has to swipe to dismiss the toast. Defaults to 0.5.
+///
 /// [duration] controls the duration which the toast is shown. Defaults to 5 seconds. Set [duration] to null to disable
 /// auto-closing.
 ///
 /// ## Contract
-/// Throws [FlutterError] if there is no ancestor [FToaster] in the given [context].
+/// Throws an error if:
+/// * there is no ancestor [FToaster] in the given [context].
+/// * [dismissThreshold] is not in the range `[0, 1]`.
 ///
 /// See:
 /// * https://forui.dev/docs/overlay/toast for working examples.
@@ -98,6 +110,7 @@ FToasterEntry showRawFToast({
   FToastStyleDelta style = const .context(),
   FToastAlignment? alignment,
   List<AxisDirection>? swipeToDismiss,
+  double dismissThreshold = 0.5,
   Duration? duration = const Duration(seconds: 5),
   VoidCallback? onDismiss,
 }) {
@@ -124,6 +137,7 @@ FToasterEntry showRawFToast({
     style: style,
     alignment: alignment,
     swipeToDismiss: swipeToDismiss,
+    dismissThreshold: dismissThreshold,
     duration: duration,
     onDismiss: onDismiss,
   );
@@ -277,6 +291,9 @@ class FToasterState extends State<FToaster> {
 
   /// Displays a toast in this toaster.
   ///
+  /// [dismissThreshold] is the fraction of the toast's width/height that must be swiped before the toast is dismissed.
+  /// Defaults to 0.5.
+  ///
   /// It is generally recommend to use [showFToast] or [showRawFToast] instead.
   ///
   /// See [showRawFToast] for more information about the parameters.
@@ -286,9 +303,11 @@ class FToasterState extends State<FToaster> {
     FToastStyleDelta style = const .context(),
     FToastAlignment? alignment,
     List<AxisDirection>? swipeToDismiss,
+    double dismissThreshold = 0.5,
     Duration? duration = const Duration(seconds: 5),
     VoidCallback? onDismiss,
   }) {
+    assert(0 <= dismissThreshold && dismissThreshold <= 1);
     context ??= this.context;
 
     final direction = Directionality.maybeOf(context) ?? .ltr;
@@ -296,7 +315,14 @@ class FToasterState extends State<FToaster> {
     final resolved = (alignment ?? toasterStyle.toastAlignment)._alignment.resolve(direction);
     final directions = swipeToDismiss ?? [if (resolved.x < 1) .left else .right];
 
-    final entry = ToasterEntry(style(toasterStyle.toastStyle), resolved, directions, duration, builder);
+    final entry = ToasterEntry(
+      style(toasterStyle.toastStyle),
+      resolved,
+      directions,
+      dismissThreshold,
+      duration,
+      builder,
+    );
     entry.onDismiss = () {
       entry.dismissing.value = true;
       _remove(entry);
@@ -384,12 +410,13 @@ class ToasterEntry with FToasterEntry {
   final FToastStyle? style;
   final Alignment alignment;
   List<AxisDirection> swipeToDismiss;
+  final double dismissThreshold;
   final Duration? duration;
   final ValueNotifier<bool> dismissing = ValueNotifier(false);
   final Widget Function(BuildContext context, FToasterEntry entry) builder;
   VoidCallback? onDismiss;
 
-  ToasterEntry(this.style, this.alignment, this.swipeToDismiss, this.duration, this.builder);
+  ToasterEntry(this.style, this.alignment, this.swipeToDismiss, this.dismissThreshold, this.duration, this.builder);
 
   @override
   void dismiss() {

@@ -34,6 +34,7 @@ Widget button([
   FToastAlignment alignment = .bottomRight,
   List<AxisDirection>? swipeToDismiss,
   Duration? duration = const Duration(seconds: 5),
+  double dismissThreshold = 0.5,
 ]) => Builder(
   builder: (context) => FButton(
     mainAxisSize: .min,
@@ -42,6 +43,7 @@ Widget button([
         showRawFToast(
           alignment: alignment,
           swipeToDismiss: swipeToDismiss,
+          dismissThreshold: dismissThreshold,
           context: context,
           duration: duration,
           builder: (_, _) => Container(
@@ -337,6 +339,48 @@ void main() {
             expect(find.text('3'), findsOne);
           });
         }
+      });
+    }
+
+    for (final (threshold, offset, dismissed) in [
+      (0.3, const Offset(-100, 0), true),
+      (0.8, const Offset(-100, 0), false),
+      (0.3, const Offset(0, -70), true),
+      (0.8, const Offset(0, -70), false),
+    ]) {
+      testWidgets('dismissThreshold $threshold with $offset - ${dismissed ? 'dismisses' : 'does not dismiss'}', (
+        tester,
+      ) async {
+        final direction = offset.dx == 0 ? AxisDirection.up : AxisDirection.left;
+
+        await tester.pumpWidget(
+          TestScaffold(
+            child: FToaster(
+              child: Center(
+                child: Column(
+                  mainAxisSize: .min,
+                  children: [
+                    button(.bottomCenter, [direction], const Duration(seconds: 5), threshold),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+
+        await tester.tap(find.text('button'));
+        await tester.pumpAndSettle();
+
+        final gesture = await tester.createPointerGesture();
+        await tester.pump();
+
+        await gesture.moveTo(tester.getCenter(find.text('3')));
+        await tester.pumpAndSettle(const Duration(seconds: 1));
+
+        await tester.timedDrag(find.text('2'), offset, const Duration(seconds: 1));
+        await tester.pumpAndSettle();
+
+        expect(find.text('2'), dismissed ? findsNothing : findsOne);
       });
     }
   });

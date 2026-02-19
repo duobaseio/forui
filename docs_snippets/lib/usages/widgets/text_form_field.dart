@@ -83,7 +83,7 @@ final textFormField = FTextFormField(
   onAppPrivateCommand: (action, data) {},
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(contentPadding: .symmetric(horizontal: 10)),
+  style: const .delta(contentPadding: .value(.symmetric(horizontal: 10))),
   enabled: true,
   label: const Text('Label'),
   hint: 'Enter text...',
@@ -170,7 +170,7 @@ final textFormFieldEmail = FTextFormField.email(
   onAppPrivateCommand: (action, data) {},
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(contentPadding: .symmetric(horizontal: 10)),
+  style: const .delta(contentPadding: .value(.symmetric(horizontal: 10))),
   enabled: true,
   label: const Text('Email'),
   hint: 'Enter email...',
@@ -256,7 +256,7 @@ final textFormFieldMultiline = FTextFormField.multiline(
   onAppPrivateCommand: (action, data) {},
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(contentPadding: .symmetric(horizontal: 10)),
+  style: const .delta(contentPadding: .value(.symmetric(horizontal: 10))),
   statesController: null,
   enabled: true,
   label: const Text('Label'),
@@ -346,7 +346,7 @@ final textFormFieldPassword = FTextFormField.password(
   onAppPrivateCommand: (action, data) {},
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(contentPadding: .symmetric(horizontal: 10)),
+  style: const .delta(contentPadding: .value(.symmetric(horizontal: 10))),
   enabled: true,
   label: const Text('Password'),
   hint: 'Enter password...',

@@ -137,6 +137,7 @@ class _ToasterStackState extends State<ToasterStack> with SingleTickerProviderSt
               length: widget.entries.length,
               duration: entry.duration,
               swipeToDismiss: entry.swipeToDismiss,
+              dismissThreshold: entry.dismissThreshold,
               expand: _expand.value,
               visible: (widget.entries.length - 1 - index) < (widget.style.max),
               autoDismiss: _autoDismiss,

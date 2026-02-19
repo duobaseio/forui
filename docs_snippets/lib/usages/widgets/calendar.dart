@@ -16,7 +16,7 @@ final calendar = FCalendar(
   onLongPress: (date) {},
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(padding: .zero),
+  style: const .delta(padding: .value(.zero)),
   start: .utc(1900),
   end: .utc(2100),
   today: .now(),

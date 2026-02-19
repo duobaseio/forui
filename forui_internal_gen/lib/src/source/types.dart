@@ -137,7 +137,16 @@ Future<(String type, String assignment, String? sentinel)> deltaField(
   }
 
   // Supported Flutter in-built types
-  if (typeName == 'BoxDecoration' || typeName == 'IconThemeData' || typeName == 'TextStyle') {
+  if (const {
+    'BoxDecoration',
+    'Decoration',
+    'EdgeInsets',
+    'EdgeInsetsDirectional',
+    'EdgeInsetsGeometry',
+    'IconThemeData',
+    'ShapeDecoration',
+    'TextStyle',
+  }.contains(typeName)) {
     return ('${typeName}Delta?', '$name?.call($prefix.$name) ?? $prefix.$name', null);
   }
 

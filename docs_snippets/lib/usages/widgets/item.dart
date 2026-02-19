@@ -24,7 +24,7 @@ final item = FItem(
   onVariantChange: (previous, current) {},
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(margin: .zero),
+  style: const .delta(margin: .value(.zero)),
   enabled: true,
   selected: false,
   onPress: () {},
@@ -56,7 +56,7 @@ final raw = FItem.raw(
   onVariantChange: (previous, current) {},
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(margin: .zero),
+  style: const .delta(margin: .value(.zero)),
   enabled: true,
   selected: false,
   onPress: () {},

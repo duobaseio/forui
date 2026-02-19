@@ -50,7 +50,7 @@ final selectMenuTile = FSelectMenuTile<String>(
   actions: null,
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(labelPadding: .symmetric(vertical: 7)),
+  style: const .delta(labelPadding: .value(.symmetric(vertical: 7))),
   enabled: true,
   autoHide: true,
   divider: .full,
@@ -113,7 +113,7 @@ final selectMenuTileBuilder = FSelectMenuTile<String>.builder(
   actions: null,
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(labelPadding: .symmetric(vertical: 7)),
+  style: const .delta(labelPadding: .value(.symmetric(vertical: 7))),
   enabled: true,
   autoHide: true,
   divider: .full,

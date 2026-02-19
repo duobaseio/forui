@@ -22,7 +22,7 @@ final tooltip = FTooltip(
   longPressExitDuration: const Duration(milliseconds: 1500),
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(padding: .symmetric(horizontal: 14, vertical: 10)),
+  style: const .delta(padding: .value(.symmetric(horizontal: 14, vertical: 10))),
   tipBuilder: (context, controller) => const Text('Tooltip content'),
   builder: (context, controller, child) => child!,
   child: const Text('Hover me'),

@@ -86,15 +86,15 @@ class FBadge extends StatelessWidget {
 }
 
 /// The [FBadgeStyle]s.
-extension type FBadgeStyles._(FVariants<FBadgeVariantConstraint, FBadgeVariant, FBadgeStyle, FBadgeStyleDelta> _)
+extension type FBadgeStyles(FVariants<FBadgeVariantConstraint, FBadgeVariant, FBadgeStyle, FBadgeStyleDelta> _)
     implements FVariants<FBadgeVariantConstraint, FBadgeVariant, FBadgeStyle, FBadgeStyleDelta> {
   /// The default border radius for badges.
   static const BorderRadius defaultBadgeRadius = .all(.circular(100));
 
   /// Creates a [FBadgeStyles] that inherits its properties.
   FBadgeStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this._(
-        FVariants.from(
+    : this(
+        .from(
           FBadgeStyle(
             decoration: BoxDecoration(color: colors.primary, borderRadius: FBadgeStyles.defaultBadgeRadius),
             contentStyle: FBadgeContentStyle(
@@ -125,6 +125,18 @@ extension type FBadgeStyles._(FVariants<FBadgeVariantConstraint, FBadgeVariant, 
           },
         ),
       );
+
+  /// The primary badge style.
+  FBadgeStyle get primary => base;
+
+  /// The secondary badge style.
+  FBadgeStyle get secondary => resolve({FBadgeVariant.secondary});
+
+  /// The destructive badge style.
+  FBadgeStyle get destructive => resolve({FBadgeVariant.destructive});
+
+  /// The outline badge style.
+  FBadgeStyle get outline => resolve({FBadgeVariant.outline});
 }
 
 /// A [FBadge]'s style.

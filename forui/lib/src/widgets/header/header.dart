@@ -12,7 +12,6 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
 import 'package:forui/src/foundation/debug.dart';
 import 'package:forui/src/foundation/rendering.dart';
-import 'package:forui/src/theme/delta.dart';
 import 'package:forui/src/theme/variant.dart';
 
 @Variants('FHeader', {'nested': (1, 'The nested header variant.')})
@@ -97,11 +96,11 @@ class FHeaderData extends InheritedWidget {
 }
 
 /// [FHeader]'s styles.
-extension type FHeaderStyles._(FVariants<FHeaderVariantConstraint, FHeaderVariant, FHeaderStyle, FHeaderStyleDelta> _)
+extension type FHeaderStyles(FVariants<FHeaderVariantConstraint, FHeaderVariant, FHeaderStyle, FHeaderStyleDelta> _)
     implements FVariants<FHeaderVariantConstraint, FHeaderVariant, FHeaderStyle, FHeaderStyleDelta> {
   /// Creates a [FHeaderStyles] that inherits its properties.
   FHeaderStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this._(
+    : this(
         FVariants(
           FHeaderStyle(
             systemOverlayStyle: colors.systemOverlayStyle,
@@ -119,6 +118,12 @@ extension type FHeaderStyles._(FVariants<FHeaderVariantConstraint, FHeaderVarian
           },
         ),
       );
+
+  /// The root header style.
+  FHeaderStyle get root => base;
+
+  /// The nested header style.
+  FHeaderStyle get nested => resolve({FHeaderVariant.nested});
 }
 
 /// A header's style.

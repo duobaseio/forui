@@ -303,12 +303,12 @@ class FTile extends StatelessWidget with FTileMixin {
 }
 
 /// The tile styles.
-extension type FTileStyles._(FVariants<FItemVariantConstraint, FItemVariant, FTileStyle, FTileStyleDelta> _)
+extension type FTileStyles(FVariants<FItemVariantConstraint, FItemVariant, FTileStyle, FTileStyleDelta> _)
     implements FVariants<FItemVariantConstraint, FItemVariant, FTileStyle, FTileStyleDelta> {
   /// Creates a [FTileStyles] that inherits its properties.
   FTileStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this._(
-        FVariants.from(
+    : this(
+        .from(
           .inherit(colors: colors, typography: typography, style: style),
           variants: {
             [.destructive]: .delta(
@@ -329,6 +329,12 @@ extension type FTileStyles._(FVariants<FItemVariantConstraint, FItemVariant, FTi
           },
         ),
       );
+
+  /// The primary tile style.
+  FTileStyle get primary => base;
+
+  /// The destructive tile style.
+  FTileStyle get destructive => resolve({FItemVariant.destructive});
 }
 
 @internal
