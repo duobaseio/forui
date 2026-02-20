@@ -1,3 +1,9 @@
+## 0.20.0
+
+### `FTappable` & `FTappableGroup`
+* Add `FTappableGroup` that enables slide-across interaction between `FTappable`s.
+
+
 ## 0.19.0
 
 This is a minor follow-up that adds some missing features and addresses some QoL issues discovered after the 0.18.0 release.
