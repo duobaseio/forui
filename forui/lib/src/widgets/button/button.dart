@@ -88,6 +88,9 @@ class FButton extends StatelessWidget {
   /// {@macro forui.foundation.FTappable.onLongPress}
   final VoidCallback? onLongPress;
 
+  /// {@macro forui.foundation.FTappable.onDoubleTap}
+  final VoidCallback? onDoubleTap;
+
   /// {@macro forui.foundation.FTappable.onSecondaryPress}
   final VoidCallback? onSecondaryPress;
 
@@ -148,6 +151,7 @@ class FButton extends StatelessWidget {
     this.size,
     this.style = const .context(),
     this.onLongPress,
+    this.onDoubleTap,
     this.onSecondaryPress,
     this.onSecondaryLongPress,
     this.autofocus = false,
@@ -185,6 +189,7 @@ class FButton extends StatelessWidget {
     this.size,
     this.style = const .context(),
     this.onLongPress,
+    this.onDoubleTap,
     this.onSecondaryPress,
     this.onSecondaryLongPress,
     this.autofocus = false,
@@ -206,6 +211,7 @@ class FButton extends StatelessWidget {
     this.size,
     this.style = const .context(),
     this.onLongPress,
+    this.onDoubleTap,
     this.onSecondaryPress,
     this.onSecondaryLongPress,
     this.autofocus = false,
@@ -234,6 +240,7 @@ class FButton extends StatelessWidget {
       onVariantChange: onVariantChange,
       onPress: onPress,
       onLongPress: onLongPress,
+      onDoubleTap: onDoubleTap,
       onSecondaryPress: onSecondaryPress,
       onSecondaryLongPress: onSecondaryLongPress,
       selected: selected,
@@ -253,6 +260,7 @@ class FButton extends StatelessWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
+      ..add(ObjectFlagProperty.has('onDoubleTap', onDoubleTap))
       ..add(ObjectFlagProperty.has('onSecondaryPress', onSecondaryPress))
       ..add(ObjectFlagProperty.has('onSecondaryLongPress', onSecondaryLongPress))
       ..add(FlagProperty('autofocus', value: autofocus, defaultValue: false, ifTrue: 'autofocus'))

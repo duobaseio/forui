@@ -9,7 +9,7 @@ export 'src/foundation/focused_outline.dart';
 export 'src/foundation/form_field_properties.dart';
 export 'src/foundation/notifiers.dart' hide InternalFMultiValueControl;
 export 'src/foundation/rendering.dart' hide Alignments, DefaultData, RenderBoxes;
-export 'src/foundation/tappable.dart' hide AnimatedTappable, AnimatedTappableState;
+export 'src/foundation/tappable/tappable.dart' hide AnimatedTappable, AnimatedTappableState;
 export 'src/foundation/time.dart';
 export 'src/foundation/tween.dart';
 export 'src/foundation/typeahead_controller.dart';

@@ -32,6 +32,7 @@ final showToast = showFToast(
   // {@category "Behavior"}
   alignment: .bottomEnd,
   swipeToDismiss: const [.right],
+  dismissThreshold: 0.5,
   duration: const Duration(seconds: 5),
   onDismiss: () {},
   // {@endcategory}
@@ -41,6 +42,7 @@ final showRawToast = showRawFToast(
   // {@category "Behavior"}
   alignment: .bottomEnd,
   swipeToDismiss: const [.right],
+  dismissThreshold: 0.5,
   duration: const Duration(seconds: 5),
   onDismiss: () {},
   // {@endcategory}

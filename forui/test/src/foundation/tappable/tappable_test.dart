@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/tappable.dart';
-import '../test_scaffold.dart';
+import 'package:forui/src/foundation/tappable/tappable.dart';
+import '../../test_scaffold.dart';
 
 // ignore: avoid_positional_boolean_parameters
 Set<FTappableVariant> set(bool enabled) => {if (!enabled) .disabled, .android};
@@ -21,8 +21,8 @@ class _StubTappable extends AnimatedTappable {
 
 class _StubTappableState extends AnimatedTappableState {
   @override
-  void onPressedEnd() {
-    Future.delayed(const Duration(seconds: 1)).then((_) => super.onPressedEnd());
+  void onPressEnd() {
+    Future.delayed(const Duration(seconds: 1)).then((_) => super.onPressEnd());
   }
 }
 
@@ -141,17 +141,17 @@ void main() {
           ),
         );
         expect(find.text(set(enabled).toString()), findsOneWidget);
-        expect(key.currentState?.bounce?.value, 1);
+        expect(key.currentState?.bounce.value, 1);
 
         final gesture = await tester.press(find.byType(AnimatedTappable));
         await tester.pumpAndSettle(const Duration(milliseconds: 200));
         expect(find.text({...set(enabled), FTappableVariant.pressed}.toString()), findsOneWidget);
-        expect(key.currentState?.bounce?.value, enabled ? 0.97 : 1.0);
+        expect(key.currentState?.bounce.value, enabled ? 0.97 : 1.0);
 
         await gesture.up();
         await tester.pumpAndSettle();
         expect(find.text(set(enabled).toString()), findsOneWidget);
-        expect(key.currentState?.bounce?.value, 1);
+        expect(key.currentState?.bounce.value, 1);
       });
 
       testWidgets('press, hold & move outside - $enabled', (tester) async {
@@ -163,18 +163,18 @@ void main() {
           ),
         );
         expect(find.text(set(enabled).toString()), findsOneWidget);
-        expect(key.currentState?.bounce?.value, 1);
+        expect(key.currentState?.bounce.value, 1);
 
         final gesture = await tester.press(find.byType(AnimatedTappable));
         await tester.pumpAndSettle(const Duration(milliseconds: 200));
         expect(find.text({...set(enabled), FTappableVariant.pressed}.toString()), findsOneWidget);
-        expect(key.currentState?.bounce?.value, enabled ? 0.97 : 1.0);
+        expect(key.currentState?.bounce.value, enabled ? 0.97 : 1.0);
 
         await gesture.moveTo(.zero);
         await tester.pumpAndSettle(const Duration(milliseconds: 200));
 
         expect(find.text({...set(enabled)}.toString()), findsOneWidget);
-        expect(key.currentState?.bounce?.value, 1.0);
+        expect(key.currentState?.bounce.value, 1.0);
       });
 
       testWidgets('shortcut', (tester) async {
@@ -218,6 +218,59 @@ void main() {
       );
 
       expect(find.text(set(true).toString()), findsOneWidget);
+    });
+
+    testWidgets('enabled when only onDoubleTap given', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FTappable(focusNode: focusNode, builder: (_, states, _) => Text('$states'), onDoubleTap: () {}),
+        ),
+      );
+
+      expect(find.text(set(true).toString()), findsOneWidget);
+    });
+
+    testWidgets('bounce when onPress set and primary button pressed', (tester) async {
+      final key = GlobalKey<AnimatedTappableState>();
+
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FTappable(key: key, builder: (_, states, _) => Text('$states'), onPress: () {}),
+        ),
+      );
+      expect(key.currentState?.bounce.value, 1);
+
+      final gesture = await tester.press(find.byType(AnimatedTappable));
+      await tester.pumpAndSettle(const Duration(milliseconds: 200));
+
+      expect(find.text({...set(true), FTappableVariant.pressed}.toString()), findsOneWidget);
+      expect(key.currentState?.bounce.value, 0.97);
+
+      await gesture.up();
+      await tester.pumpAndSettle();
+      expect(key.currentState?.bounce.value, 1);
+    });
+
+    testWidgets('no bounce when secondary callbacks set and primary button pressed', (tester) async {
+      final key = GlobalKey<AnimatedTappableState>();
+
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FTappable(key: key, builder: (_, states, _) => Text('$states'), onSecondaryPress: () {}),
+        ),
+      );
+      expect(key.currentState?.bounce.value, 1);
+
+      final gesture = await tester.press(find.byType(AnimatedTappable));
+      await tester.pumpAndSettle(const Duration(milliseconds: 200));
+
+      // Pressed variant should still be set, but bounce should NOT animate since primary button
+      // was pressed and only secondary callbacks are set.
+      expect(find.text({...set(true), FTappableVariant.pressed}.toString()), findsOneWidget);
+      expect(key.currentState?.bounce.value, 1.0);
+
+      await gesture.up();
+      await tester.pumpAndSettle();
     });
 
     testWidgets('simulated race condition between animation and unmounting of widget', (tester) async {
@@ -477,6 +530,16 @@ void main() {
             builder: (_, states, _) => Text('$states'),
             onSecondaryPress: () {},
           ),
+        ),
+      );
+
+      expect(find.text(set(true).toString()), findsOneWidget);
+    });
+
+    testWidgets('enabled when only onDoubleTap given', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FTappable.static(focusNode: focusNode, builder: (_, states, _) => Text('$states'), onDoubleTap: () {}),
         ),
       );
 

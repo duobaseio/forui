@@ -1,5 +1,7 @@
 ## 0.19.0
 
+This is a minor follow-up that adds some missing features and addresses some QoL issues discovered after the 0.18.0 release.
+
 ### `FAlert`
 * Add `FAlertStyles.primary` and `FAlertStyles.destructive` getters.
 
@@ -9,6 +11,7 @@
 
 
 ### `FButton`
+* Add `FButton.onDoubleTap` callback.
 * Add `FButtonStyles.primary`, `FButtonStyles.secondary`, `FButtonStyles.destructive`, `FButtonStyles.outline`, and
   `FButtonStyles.ghost` getters.
 * Add `FButtonSizeStyles.xs`, `FButtonSizeStyles.sm`, and `FButtonSizeStyles.lg` getters.
@@ -21,6 +24,7 @@
 
 
 ### `FHeader`
+* Add `FHeaderAction.onDoubleTap` callback.
 * Add `FHeaderStyles.root` and `FHeaderStyles.nested` getters.
 
 
@@ -32,11 +36,18 @@
 * Add `FResizableStyles.horizontal` and `FResizableStyles.vertical` getters.
 
 
+### `FSelect` & `FMultiSelect`
+* Add `FMultiSelectTag.onDoubleTap` callback.
+
+
 ### `FSlider`
 * Add `FSliderStyles.horizontal` and `FSliderStyles.vertical` getters.
 
 
 ### `FTappable`
+* Add `FTappable.onDoubleTap` callback.
+
+* Fix bounce animation triggering for all pointer types instead of only those with matching callbacks.
 * Fix `onVariantChange` callback receiving a mutated set instead of the original previous set.
 
 

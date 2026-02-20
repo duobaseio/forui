@@ -17,6 +17,7 @@ final tappable = FTappable(
   // {@category "Callbacks"}
   onPress: () {},
   onLongPress: () {},
+  onDoubleTap: () {},
   onSecondaryPress: () {},
   onSecondaryLongPress: () {},
   onHoverChange: (hovered) {},
@@ -45,6 +46,7 @@ final tappableStatic = FTappable.static(
   // {@category "Callbacks"}
   onPress: () {},
   onLongPress: () {},
+  onDoubleTap: () {},
   onSecondaryPress: () {},
   onSecondaryLongPress: () {},
   onHoverChange: (hovered) {},
