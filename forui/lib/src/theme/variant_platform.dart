@@ -1,9 +1,48 @@
 part of 'variant.dart';
 
+/// Represents a combination of platform variants.
+///
+/// See also:
+/// * [FPlatformVariant], which represents individual platform variants.
+extension type const FPlatformVariantConstraint._(FVariantConstraint _) implements FVariantConstraint {
+  /// Creates a [FPlatformVariantConstraint] that negates [variant].
+  factory FPlatformVariantConstraint.not(FPlatformVariant variant) => FPlatformVariantConstraint._(Not(variant));
+
+  /// A platform variant that matches all touch-based platforms, [android], [iOS] and [fuchsia].
+  static const touch = FPlatformVariant(Touch());
+
+  /// A platform variant that matches all desktop-based platforms, [windows], [macOS] and [linux].
+  static const desktop = FPlatformVariant(Desktop());
+
+  /// The Android platform variant.
+  static const android = FPlatformVariant.android;
+
+  /// The iOS platform variant.
+  static const iOS = FPlatformVariant.iOS;
+
+  /// The Fuchsia platform variant.
+  static const fuchsia = FPlatformVariant.fuchsia;
+
+  /// The Windows platform variant.
+  static const windows = FPlatformVariant.windows;
+
+  /// The macOS platform variant.
+  static const macOS = FPlatformVariant.macOS;
+
+  /// The Linux platform variant.
+  static const linux = FPlatformVariant.linux;
+
+  /// The web platform variant.
+  static const web = FPlatformVariant.web;
+
+  /// Combines this with [other] using a logical AND operation.
+  FPlatformVariantConstraint and(FPlatformVariantConstraint other) => FPlatformVariantConstraint._(And(this, other));
+}
+
 /// Represents a platform.
 ///
 /// Platform variants are tier 0, the lowest tier. Interaction and semantic variants take precedence during resolution.
-extension type const FPlatformVariant(FVariant _) implements FVariant {
+extension type const FPlatformVariant(FVariant _) implements FPlatformVariantConstraint, FVariant {
   /// The Android platform variant.
   ///
   /// More specific than [touch] in variant resolution.

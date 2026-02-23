@@ -599,11 +599,11 @@ class FTappableStyle with Diagnosticable, _$FTappableStyleFunctions {
   @override
   final FVariants<FTappableVariantConstraint, FTappableVariant, MouseCursor, Delta> cursor;
 
-  /// The duration to wait before applying the pressed effect after the user presses the tile. Defaults to 200ms.
+  /// The duration to wait before applying the pressed effect after the user presses the tile. Defaults to 100ms.
   @override
   final Duration pressedEnterDuration;
 
-  /// The duration to wait before removing the pressed effect after the user stops pressing the tile. Defaults to 0s.
+  /// The duration to wait before removing the pressed effect after the user stops pressing the tile. Defaults to 100s.
   @override
   final Duration pressedExitDuration;
 
@@ -616,8 +616,8 @@ class FTappableStyle with Diagnosticable, _$FTappableStyleFunctions {
   /// Creates a [FTappableStyle].
   FTappableStyle({
     this.cursor = const .all(.defer),
-    this.pressedEnterDuration = const Duration(milliseconds: 200),
-    this.pressedExitDuration = .zero,
+    this.pressedEnterDuration = const Duration(milliseconds: 100),
+    this.pressedExitDuration = const Duration(milliseconds: 100),
     this.motion = const FTappableMotion(),
   });
 }
@@ -638,7 +638,7 @@ class FTappableMotion with Diagnosticable, _$FTappableMotionFunctions {
   @override
   final Duration bounceDownDuration;
 
-  /// The bounce animation's duration when the tappable is released (up). Defaults to 120ms.
+  /// The bounce animation's duration when the tappable is released (up). Defaults to 100ms.
   @override
   final Duration bounceUpDuration;
 
@@ -668,7 +668,7 @@ class FTappableMotion with Diagnosticable, _$FTappableMotionFunctions {
   /// Creates a [FTappableMotion].
   const FTappableMotion({
     this.bounceDownDuration = const Duration(milliseconds: 100),
-    this.bounceUpDuration = const Duration(milliseconds: 120),
+    this.bounceUpDuration = const Duration(milliseconds: 100),
     this.bounceDownCurve = Curves.easeOutQuart,
     this.bounceUpCurve = Curves.easeOutCubic,
     this.bounceTween = defaultBounceTween,

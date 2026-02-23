@@ -252,3 +252,6 @@ Parameterize tests using for-each loop to cover multiple scenarios when sensible
 Prefer literals to matchers where possible, e.g. `expect(value, null)` instead of `expect(value, isNull)`.
 
 After API changes, analyze all in-repo consumers: `forui/forui`, `forui/forui/example`, and `docs_snippets`.
+
+When using the `analyze_files` MCP tool, always analyze full project roots (without `paths`) rather than specific files.
+Analyzing individual files can miss cross-file errors that only surface during full-project analysis.

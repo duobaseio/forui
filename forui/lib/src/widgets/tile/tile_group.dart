@@ -281,6 +281,22 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
       return sliver;
     }
 
+    Widget child = FTileGroupStyleData(
+      style: style,
+      child: CustomScrollView(
+        controller: scrollController,
+        cacheExtent: cacheExtent,
+        dragStartBehavior: dragStartBehavior,
+        shrinkWrap: true,
+        physics: physics,
+        slivers: [sliver],
+      ),
+    );
+
+    if (maxHeight.isInfinite && style.slideableTiles.resolve({context.platformVariant})) {
+      child = FTappableGroup(child: child);
+    }
+
     return FLabel(
       style: style,
       axis: .vertical,
@@ -297,20 +313,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
           // ignore: use_decorated_box
           child: Container(
             decoration: style.decoration,
-            child: ClipRRect(
-              borderRadius: style.decoration.borderRadius ?? .zero,
-              child: FTileGroupStyleData(
-                style: style,
-                child: CustomScrollView(
-                  controller: scrollController,
-                  cacheExtent: cacheExtent,
-                  dragStartBehavior: dragStartBehavior,
-                  shrinkWrap: true,
-                  physics: physics,
-                  slivers: [sliver],
-                ),
-              ),
-            ),
+            child: ClipRRect(borderRadius: style.decoration.borderRadius ?? .zero, child: child),
           ),
         ),
       ),
@@ -377,6 +380,12 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
   @override
   final FVariants<FItemVariantConstraint, FItemVariant, FTileStyle, FTileStyleDelta> tileStyles;
 
+  /// Whether the tiles support pressing a tile and sliding to another. Defaults to true.
+  ///
+  /// This is ignored if the tile group's content is scrollable, i.e. `maxHeight` is finite.
+  @override
+  final FVariants<FItemGroupVariantConstraint, FItemGroupVariant, bool, Delta> slideableTiles;
+
   /// Creates a [FTileGroupStyle].
   FTileGroupStyle({
     required this.decoration,
@@ -386,6 +395,7 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
     required super.labelTextStyle,
     required super.descriptionTextStyle,
     required super.errorTextStyle,
+    this.slideableTiles = const .all(true),
     super.labelPadding = const .symmetric(vertical: 7.7),
     super.descriptionPadding = const .only(top: 7.5),
     super.errorPadding = const .only(top: 5),
@@ -402,6 +412,7 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
         ),
         dividerColor: .all(colors.border),
         dividerWidth: style.borderWidth,
+        slideableTiles: const .all(true),
         labelTextStyle: FVariants.from(
           typography.base.copyWith(
             color: style.formFieldStyle.labelTextStyle.base.color ?? colors.foreground,

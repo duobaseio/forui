@@ -222,6 +222,8 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/switch/form', page: FormSwitchRoute.page),
     AutoRoute(path: '/tabs/default', page: TabsRoute.page),
     AutoRoute(path: '/tappable/default', page: TappableRoute.page),
+    AutoRoute(path: '/tappable/bounce', page: TappableBounceRoute.page),
+    AutoRoute(path: '/tappable-group/default', page: TappableGroupRoute.page),
     AutoRoute(path: '/text-field/default', page: TextFieldRoute.page),
     AutoRoute(path: '/text-field/disabled', page: DisabledTextFieldRoute.page),
     AutoRoute(path: '/text-field/clearable', page: ClearableTextFieldRoute.page),

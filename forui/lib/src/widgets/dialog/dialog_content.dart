@@ -12,6 +12,7 @@ part 'dialog_content.design.dart';
 @internal
 sealed class Content extends StatelessWidget {
   final FDialogContentStyle style;
+  final bool slideableActions;
   final CrossAxisAlignment alignment;
   final Widget? title;
   final TextAlign titleTextAlign;
@@ -21,6 +22,7 @@ sealed class Content extends StatelessWidget {
 
   const Content({
     required this.style,
+    required this.slideableActions,
     required this.alignment,
     required this.title,
     required this.titleTextAlign,
@@ -56,7 +58,7 @@ sealed class Content extends StatelessWidget {
             ),
           ),
         if (title != null && body != null) SizedBox(height: style.contentSpacing),
-        _actions(context),
+        if (slideableActions) FTappableGroup(child: _actions(context)) else _actions(context),
       ],
     ),
   );
@@ -68,6 +70,7 @@ sealed class Content extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
+      ..add(FlagProperty('slideableActions', value: slideableActions, ifTrue: 'slideableActions'))
       ..add(EnumProperty('alignment', alignment))
       ..add(EnumProperty('titleTextAlign', titleTextAlign))
       ..add(EnumProperty('bodyTextAlign', bodyTextAlign))
@@ -79,6 +82,7 @@ sealed class Content extends StatelessWidget {
 class HorizontalContent extends Content {
   const HorizontalContent({
     required super.style,
+    required super.slideableActions,
     required super.title,
     required super.body,
     required super.actions,
@@ -94,6 +98,7 @@ class HorizontalContent extends Content {
 class VerticalContent extends Content {
   const VerticalContent({
     required super.style,
+    required super.slideableActions,
     required super.title,
     required super.body,
     required super.actions,

@@ -40,6 +40,7 @@ enum TappableGroupGestureRecognizerState {
   ///
   /// Transitions to:
   /// * [idle] — pointer up (fires onPress) or pointer cancel.
+  /// * [longPressing] — long press timer fires.
   /// * [sliding] — pointer moves to empty space.
   slidePressing,
 }
@@ -97,6 +98,7 @@ class TappableGroupGestureRecognizer extends OneSequenceGestureRecognizer {
           _state = .slidePressing;
           _current = entry;
           _current!.onPressStart(buttons);
+          _start();
         }
 
       case PointerUpEvent(:final pointer):
@@ -107,6 +109,16 @@ class TappableGroupGestureRecognizer extends OneSequenceGestureRecognizer {
             _current?.onPress?.call();
 
           case .slidePressing || .pressing:
+            _current?.onPressEnd();
+            _pendingOnPress = _current?.onPress;
+
+          // These two cases provide consistency with .slidePressing triggering onPress even if the tappable which was
+          // slided to has been held for a long time.
+          case .longPressing when _current?.onLongPress == null && _accepted:
+            _current?.onPressEnd();
+            _current?.onPress?.call();
+
+          case .longPressing when _current?.onLongPress == null:
             _current?.onPressEnd();
             _pendingOnPress = _current?.onPress;
 
@@ -162,7 +174,7 @@ class TappableGroupGestureRecognizer extends OneSequenceGestureRecognizer {
   void _start() {
     final current = _current;
     _longPressTimer = Timer(kLongPressTimeout, () {
-      if (_current == current && _state == .pressing) {
+      if (_current == current && (_state == .pressing || _state == .slidePressing)) {
         _state = .longPressing;
         _current?.onLongPress?.call(); // We immediately call this to mirror [LongPressGestureRecognizer]'s behaviour.
         resolve(.accepted);

@@ -323,12 +323,14 @@ class FDialog extends StatefulWidget {
   }) : builder = switch (direction) {
          .horizontal => (context, style) => HorizontalContent(
            style: style.contentStyle.resolve({context.platformVariant}),
+           slideableActions: style.slideableActions.resolve({context.platformVariant}),
            title: title,
            body: body,
            actions: actions.reversed.toList(),
          ),
          .vertical => (context, style) => VerticalContent(
            style: style.contentStyle.resolve({context.platformVariant, FDialogAxisVariant.vertical}),
+           slideableActions: style.slideableActions.resolve({context.platformVariant, FDialogAxisVariant.vertical}),
            title: title,
            body: body,
            actions: actions,
@@ -352,12 +354,14 @@ class FDialog extends StatefulWidget {
   }) : builder = ((context, style) => switch (MediaQuery.sizeOf(context).width) {
          final width when width < context.theme.breakpoints.sm => VerticalContent(
            style: style.contentStyle.resolve({context.platformVariant, FDialogAxisVariant.vertical}),
+           slideableActions: style.slideableActions.resolve({context.platformVariant, FDialogAxisVariant.vertical}),
            title: title,
            body: body,
            actions: actions,
          ),
          _ => HorizontalContent(
            style: style.contentStyle.resolve({context.platformVariant}),
+           slideableActions: style.slideableActions.resolve({context.platformVariant}),
            title: title,
            body: body,
            actions: actions.reversed.toList(),
@@ -517,6 +521,10 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
   final FVariants<FDialogAxisVariantConstraint, FDialogAxisVariant, FDialogContentStyle, FDialogContentStyleDelta>
   contentStyle;
 
+  /// Whether the dialog's actions support pressing an action and sliding to another. Defaults to true on touch platforms.
+  @override
+  final FVariants<FDialogAxisVariantConstraint, FDialogAxisVariant, bool, Delta> slideableActions;
+
   /// Motion-related properties.
   @override
   final FDialogMotion motion;
@@ -526,6 +534,7 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
     required this.decoration,
     required this.contentStyle,
     this.backgroundFilter,
+    this.slideableActions = const .all(false),
     this.insetPadding = const .symmetric(horizontal: 40, vertical: 24),
     this.motion = const FDialogMotion(),
   });
@@ -540,6 +549,7 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
         borderRadius: style.borderRadius,
         color: colors.card,
       ),
+      slideableActions: FVariants(false, variants: {[.touch]: true}),
       contentStyle: FVariants(
         FDialogContentStyle(
           titleTextStyle: title,

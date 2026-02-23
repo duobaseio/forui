@@ -14,8 +14,10 @@ import usageSnippet from '@/snippets/snippets/guides/creating_custom_deltas/usag
 </Callout>
 
 When the built-in delta factory constructors do not cover your use case, implement the delta class directly and override
-`call`. Suppose you want to mirror a widget's EdgeInsets padding. To do so, implement `EdgeInsetsDelta` with a `call`
-method that swaps the edges:
+`call`.
+
+Suppose you want to mirror a widget's EdgeInsets padding. To do so, implement `EdgeInsetsDelta` with a `call` method
+that swaps the edges:
 
 <CodeSnippet snippet={implementSnippet} />
 
