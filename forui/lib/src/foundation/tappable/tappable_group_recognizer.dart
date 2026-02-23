@@ -1,8 +1,10 @@
 import 'dart:async';
 
-import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
+
+import 'package:collection/collection.dart';
+
 import 'package:forui/src/foundation/tappable/tappable_group.dart';
 
 /// The possible states of a [TappableGroupGestureRecognizer].

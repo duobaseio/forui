@@ -549,7 +549,12 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
         borderRadius: style.borderRadius,
         color: colors.card,
       ),
-      slideableActions: FVariants(false, variants: {[.touch]: true}),
+      slideableActions: FVariants(
+        false,
+        variants: {
+          [.touch]: true,
+        },
+      ),
       contentStyle: FVariants(
         FDialogContentStyle(
           titleTextStyle: title,

@@ -6,13 +6,13 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:forui/src/foundation/tappable/tappable_group.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
 import 'package:forui/src/foundation/tappable/bounce.dart';
+import 'package:forui/src/foundation/tappable/tappable_group.dart';
 import 'package:forui/src/theme/variant.dart';
 
 @Variants('FTappable', {
@@ -299,7 +299,6 @@ class _FTappableState<T extends FTappable> extends State<T> {
 
   @override
   void didUpdateWidget(covariant T old) {
-
     super.didUpdateWidget(old);
     _style = widget.style(context.theme.tappableStyle);
     _update(.selected, widget.selected);
