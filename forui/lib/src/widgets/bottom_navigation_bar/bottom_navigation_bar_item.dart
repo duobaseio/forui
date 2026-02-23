@@ -154,15 +154,17 @@ class FBottomNavigationBarItemStyle with Diagnosticable, _$FBottomNavigationBarI
     required FStyle style,
   }) : this(
          iconStyle: FVariants.from(
-           IconThemeData(color: colors.disable(colors.foreground), size: 24),
+           IconThemeData(color: colors.mutedForeground, size: 24),
            variants: {
-             [.selected]: .delta(color: colors.primary),
+             [.hovered, .pressed]: .delta(color: colors.hover(colors.mutedForeground)),
+             [.selected]: .delta(color: colors.primary, weight: 700),
            },
          ),
          textStyle: FVariants.from(
-           typography.base.copyWith(color: colors.disable(colors.foreground), fontSize: 10),
+           typography.base.copyWith(color: colors.mutedForeground, fontSize: 10),
            variants: {
-             [.selected]: .delta(color: colors.primary),
+             [.hovered, .pressed]: .delta(color: colors.hover(colors.mutedForeground)),
+             [.selected]: .delta(color: colors.primary, fontWeight: .bold),
            },
          ),
          tappableStyle: style.tappableStyle,

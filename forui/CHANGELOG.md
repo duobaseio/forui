@@ -1,3 +1,36 @@
+## 0.20.0
+
+### `FBottomNavigationBar`
+* Add `FBottomNavigationBarStyle.slideableItems` for slide-across interaction.
+
+* **Breaking** Change `FBottomNavigationBarItemStyle.inherit` icon and text colors/variants.
+
+
+### `FDialog`
+* Add `FDialogStyle.slideableActions` for slide-across interaction between dialog actions.
+
+
+### `FItemGroup`
+* Add `FItemGroupStyle.slideableItems` for slide-across interaction.
+
+
+### `FTappable` & `FTappableGroup`
+* Add `FTappableGroup` that enables slide-across interaction between `FTappable`s.
+* Add slide-across long press support to `FTappableGroup`.
+
+* **Breaking** Change `FTappableStyle.pressedEnterDuration` default from 200ms to 100ms.
+* **Breaking** Change `FTappableStyle.pressedExitDuration` default from 0ms to 100ms.
+* **Breaking** Change `FTappableMotion.bounceUpDuration` default from 120ms to 100ms.
+
+
+### `FTileGroup`
+* Add `FTileGroupStyle.slideableTiles` for slide-across interaction.
+
+
+### Others
+* Add `FPlatformVariantConstraint` extension type.
+
+
 ## 0.19.0
 
 This is a minor follow-up that adds some missing features and addresses some QoL issues discovered after the 0.18.0 release.

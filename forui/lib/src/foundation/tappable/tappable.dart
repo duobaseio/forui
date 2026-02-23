@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
@@ -11,6 +12,7 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
 import 'package:forui/src/foundation/tappable/bounce.dart';
+import 'package:forui/src/foundation/tappable/tappable_group.dart';
 import 'package:forui/src/theme/variant.dart';
 
 @Variants('FTappable', {
@@ -248,9 +250,9 @@ class FTappable extends StatefulWidget {
       ..add(ObjectFlagProperty.has('builder', builder));
   }
 
-  bool _animate(int button) =>
-      (button == kPrimaryButton && (onPress != null || onLongPress != null || onDoubleTap != null)) ||
-      (button == kSecondaryButton && (onSecondaryPress != null || onSecondaryLongPress != null));
+  bool _animate(int buttons) =>
+      (buttons & kPrimaryButton != 0 && (onPress != null || onLongPress != null || onDoubleTap != null)) ||
+      (buttons & kSecondaryButton != 0 && (onSecondaryPress != null || onSecondaryLongPress != null));
 
   bool get _disabled =>
       onPress == null &&
@@ -261,10 +263,13 @@ class FTappable extends StatefulWidget {
 }
 
 class _FTappableState<T extends FTappable> extends State<T> {
+  late FTappableStyle _style;
   late FocusNode _focus;
   late Set<FTappableVariant> _current;
   int _monotonic = 0;
   int _buttons = 0;
+  List<GroupEntry>? _entries;
+  GroupEntry? _entry;
 
   @override
   void initState() {
@@ -280,13 +285,22 @@ class _FTappableState<T extends FTappable> extends State<T> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
+    _style = widget.style(context.theme.tappableStyle);
     // This cast is always fine since extension types are erased at runtime.
     _current.add(context.platformVariant as FTappableVariant);
+
+    final entries = TappableGroupScope.maybeOf(context);
+    if (entries != _entries) {
+      _unregister();
+      _entries = entries;
+      _register();
+    }
   }
 
   @override
   void didUpdateWidget(covariant T old) {
     super.didUpdateWidget(old);
+    _style = widget.style(context.theme.tappableStyle);
     _update(.selected, widget.selected);
     _update(.disabled, widget._disabled);
 
@@ -295,6 +309,13 @@ class _FTappableState<T extends FTappable> extends State<T> {
         _focus.dispose();
       }
       _focus = widget.focusNode ?? .new(debugLabel: 'FTappable');
+    }
+
+    // Update the existing registration if callbacks changed.
+    if (_entry case final entry?) {
+      entry
+        ..onPress = widget.onPress
+        ..onLongPress = widget.onLongPress;
     }
   }
 
@@ -310,15 +331,37 @@ class _FTappableState<T extends FTappable> extends State<T> {
 
   @override
   void dispose() {
+    _unregister();
     if (widget.focusNode == null) {
       _focus.dispose();
     }
     super.dispose();
   }
 
+  void _register() {
+    if (_entries case final entries?) {
+      entries.add(
+        _entry = GroupEntry(
+          context: context,
+          onPressStart: _start,
+          onPressCancel: _cancel,
+          onPressEnd: _end,
+          onPress: widget.onPress,
+          onLongPress: widget.onLongPress,
+        ),
+      );
+    }
+  }
+
+  void _unregister() {
+    if (_entries case final entries?) {
+      entries.remove(_entry);
+      _entries = null;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
-    final style = widget.style(context.theme.tappableStyle);
     var tappable = _decorate(context, widget.builder(context, _current, widget.child));
     tappable = Shortcuts(
       shortcuts: widget.shortcuts,
@@ -348,7 +391,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
               widget.onFocusChange?.call(focused);
             },
             child: MouseRegion(
-              cursor: style.cursor.resolve(_current),
+              cursor: _style.cursor.resolve(_current),
               onEnter: (_) {
                 setState(() => _update(.hovered, true));
                 widget.onHoverChange?.call(true);
@@ -357,57 +400,38 @@ class _FTappableState<T extends FTappable> extends State<T> {
                 _update(.hovered, false);
                 widget.onHoverChange?.call(false);
               }),
+              // When in a group, the group's gesture recognizer handles primary press/long-press.
+              // The Listener and primary GestureDetector callbacks are nullified.
+              //
               // We use a separate Listener instead of the GestureDetector in _child as GestureDetectors fight in
               // GestureArena and only 1 GestureDetector will win. This is problematic if this tappable is wrapped in
               // another GestureDetector as onTapDown and onTapUp might absorb EVERY gesture, including drags and pans.
               child: Listener(
-                onPointerDown: (event) async {
-                  final count = ++_monotonic;
-                  if (widget._animate(_buttons = event.buttons)) {
-                    onPressStart();
-                  }
+                onPointerDown: _entries == null ? (event) => _start(event.buttons) : null,
+                onPointerMove: _entries == null
+                    ? (event) async {
+                        // Avoid unnecessary state updates.
+                        if (!_current.contains(FTappableVariant.pressed)) {
+                          return;
+                        }
 
-                  await Future.delayed(style.pressedEnterDuration);
-                  if (mounted && count == _monotonic && !_current.contains(FTappableVariant.pressed)) {
-                    setState(() => _update(.pressed, true));
-                  }
-                },
-                onPointerMove: (event) async {
-                  // The RenderObject should almost always be a [RenderBox] since it is wrapped in a Semantics which
-                  // required the child to be a [RenderBox] as well. We use a pattern match anyways just to be safe.
-                  if (context.findRenderObject() case RenderBox(:final size) when size.contains(event.localPosition)) {
-                    return;
-                  }
+                        // The RenderObject should almost always be a [RenderBox] since it is wrapped in a Semantics
+                        // which required the child to be a [RenderBox] as well. We use a pattern match anyways just to
+                        // be safe.
+                        if (context.findRenderObject() case RenderBox(
+                          :final size,
+                        ) when size.contains(event.localPosition)) {
+                          return;
+                        }
 
-                  // Avoid unnecessary state updates.
-                  if (!_current.contains(FTappableVariant.pressed)) {
-                    return;
-                  }
-
-                  ++_monotonic;
-                  if (widget._animate(_buttons)) {
-                    onPressEnd();
-                  }
-
-                  // It does not make sense from a UX perspective to wait for [pressedExitDuration] before updating
-                  // state if the user drags their pointer outside of the tappable.
-                  setState(() => _update(.pressed, false));
-                },
-                onPointerUp: (event) async {
-                  final count = ++_monotonic;
-                  if (widget._animate(_buttons)) {
-                    onPressEnd();
-                  }
-
-                  await Future.delayed(style.pressedExitDuration);
-                  if (mounted && count == _monotonic && _current.contains(FTappableVariant.pressed)) {
-                    setState(() => _update(.pressed, false));
-                  }
-                },
+                        await _cancel();
+                      }
+                    : null,
+                onPointerUp: _entries == null ? (_) => _end() : null,
                 child: GestureDetector(
                   behavior: widget.behavior,
-                  onTap: widget.onPress,
-                  onLongPress: widget.onLongPress,
+                  onTap: _entries == null ? widget.onPress : null,
+                  onLongPress: _entries == null ? widget.onLongPress : null,
                   onDoubleTap: widget.onDoubleTap,
                   onSecondaryTap: widget.onSecondaryPress,
                   onSecondaryLongPress: widget.onSecondaryLongPress,
@@ -428,6 +452,41 @@ class _FTappableState<T extends FTappable> extends State<T> {
   }
 
   Widget _decorate(BuildContext _, Widget child) => child;
+
+  Future<void> _start(int buttons) async {
+    final count = ++_monotonic;
+    if (widget._animate(_buttons = buttons)) {
+      onPressStart();
+    }
+
+    await Future.delayed(_style.pressedEnterDuration);
+    if (mounted && count == _monotonic && !_current.contains(FTappableVariant.pressed)) {
+      setState(() => _update(.pressed, true));
+    }
+  }
+
+  Future<void> _cancel() async {
+    ++_monotonic;
+    if (widget._animate(_buttons)) {
+      onPressEnd();
+    }
+
+    // It does not make sense from a UX perspective to wait for [pressedExitDuration] before
+    // updating state if the user drags their pointer outside of the tappable.
+    setState(() => _update(.pressed, false));
+  }
+
+  Future<void> _end() async {
+    final count = ++_monotonic;
+    if (widget._animate(_buttons)) {
+      onPressEnd();
+    }
+
+    await Future.delayed(_style.pressedExitDuration);
+    if (mounted && count == _monotonic && _current.contains(FTappableVariant.pressed)) {
+      setState(() => _update(.pressed, false));
+    }
+  }
 
   void onPressStart() {}
 
@@ -469,7 +528,7 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
   @visibleForTesting
   late Animation<double> bounce;
 
-  FTappableStyle? _style;
+  FTappableMotion? _motion;
   late final AnimationController _bounceController = AnimationController(vsync: this);
   late final CurvedAnimation _curvedBounce = CurvedAnimation(parent: _bounceController, curve: Curves.linear);
 
@@ -486,16 +545,16 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
   }
 
   void _setupBounceAnimation() {
-    final style = widget.style(context.theme.tappableStyle);
-    if (_style != style) {
-      _style = style;
+    final motion = _style.motion;
+    if (_motion != motion) {
+      _motion = motion;
       _bounceController
-        ..duration = style.motion.bounceDownDuration
-        ..reverseDuration = style.motion.bounceUpDuration;
+        ..duration = motion.bounceDownDuration
+        ..reverseDuration = motion.bounceUpDuration;
       _curvedBounce
-        ..curve = style.motion.bounceDownCurve
-        ..reverseCurve = style.motion.bounceUpCurve;
-      bounce = style.motion.bounceTween.animate(_curvedBounce);
+        ..curve = motion.bounceDownCurve
+        ..reverseCurve = motion.bounceUpCurve;
+      bounce = motion.bounceTween.animate(_curvedBounce);
     }
   }
 
@@ -508,7 +567,7 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
 
   @override
   Widget _decorate(BuildContext _, Widget child) =>
-      Bounce(bounce: bounce, bounceFloor: _style?.motion.bounceFloor, child: child);
+      Bounce(bounce: bounce, bounceFloor: _style.motion.bounceFloor, child: child);
 
   @override
   void onPressStart() {
@@ -539,11 +598,11 @@ class FTappableStyle with Diagnosticable, _$FTappableStyleFunctions {
   @override
   final FVariants<FTappableVariantConstraint, FTappableVariant, MouseCursor, Delta> cursor;
 
-  /// The duration to wait before applying the pressed effect after the user presses the tile. Defaults to 200ms.
+  /// The duration to wait before applying the pressed effect after the user presses the tile. Defaults to 100ms.
   @override
   final Duration pressedEnterDuration;
 
-  /// The duration to wait before removing the pressed effect after the user stops pressing the tile. Defaults to 0s.
+  /// The duration to wait before removing the pressed effect after the user stops pressing the tile. Defaults to 100s.
   @override
   final Duration pressedExitDuration;
 
@@ -556,8 +615,8 @@ class FTappableStyle with Diagnosticable, _$FTappableStyleFunctions {
   /// Creates a [FTappableStyle].
   FTappableStyle({
     this.cursor = const .all(.defer),
-    this.pressedEnterDuration = const Duration(milliseconds: 200),
-    this.pressedExitDuration = .zero,
+    this.pressedEnterDuration = const Duration(milliseconds: 100),
+    this.pressedExitDuration = const Duration(milliseconds: 100),
     this.motion = const FTappableMotion(),
   });
 }
@@ -578,7 +637,7 @@ class FTappableMotion with Diagnosticable, _$FTappableMotionFunctions {
   @override
   final Duration bounceDownDuration;
 
-  /// The bounce animation's duration when the tappable is released (up). Defaults to 120ms.
+  /// The bounce animation's duration when the tappable is released (up). Defaults to 100ms.
   @override
   final Duration bounceUpDuration;
 
@@ -608,7 +667,7 @@ class FTappableMotion with Diagnosticable, _$FTappableMotionFunctions {
   /// Creates a [FTappableMotion].
   const FTappableMotion({
     this.bounceDownDuration = const Duration(milliseconds: 100),
-    this.bounceUpDuration = const Duration(milliseconds: 120),
+    this.bounceUpDuration = const Duration(milliseconds: 100),
     this.bounceDownCurve = Curves.easeOutQuart,
     this.bounceUpCurve = Curves.easeOutCubic,
     this.bounceTween = defaultBounceTween,

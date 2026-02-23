@@ -75,6 +75,26 @@ class FBottomNavigationBar extends StatelessWidget {
     final style = this.style(context.theme.bottomNavigationBarStyle);
     final padding = style.padding.resolve(Directionality.maybeOf(context) ?? .ltr);
 
+    Widget row = Row(
+      mainAxisAlignment: .spaceAround,
+      children: [
+        for (final (i, child) in children.indexed)
+          Expanded(
+            child: FBottomNavigationBarData(
+              itemStyle: style.itemStyle,
+              index: i,
+              selected: i == index,
+              onChange: onChange,
+              child: child,
+            ),
+          ),
+      ],
+    );
+
+    if (style.slideableItems.resolve({context.platformVariant})) {
+      row = FTappableGroup(child: row);
+    }
+
     Widget bar = DecoratedBox(
       decoration: style.decoration,
       child: SafeArea(
@@ -82,21 +102,7 @@ class FBottomNavigationBar extends StatelessWidget {
         bottom: safeAreaBottom,
         child: Padding(
           padding: padding.copyWith(bottom: padding.bottom + (MediaQuery.viewPaddingOf(context).bottom * 2 / 3)),
-          child: Row(
-            mainAxisAlignment: .spaceAround,
-            children: [
-              for (final (i, child) in children.indexed)
-                Expanded(
-                  child: FBottomNavigationBarData(
-                    itemStyle: style.itemStyle,
-                    index: i,
-                    selected: i == index,
-                    onChange: onChange,
-                    child: child,
-                  ),
-                ),
-            ],
-          ),
+          child: row,
         ),
       ),
     );
@@ -219,12 +225,17 @@ class FBottomNavigationBarStyle with Diagnosticable, _$FBottomNavigationBarStyle
   @override
   final FBottomNavigationBarItemStyle itemStyle;
 
+  /// Whether the items support pressing an item and sliding to another. Defaults to true.
+  @override
+  final FVariants<FPlatformVariantConstraint, FPlatformVariant, bool, Delta> slideableItems;
+
   /// Creates a [FBottomNavigationBarStyle].
   const FBottomNavigationBarStyle({
     required this.decoration,
     required this.itemStyle,
     this.backgroundFilter,
     this.padding = const .all(5),
+    this.slideableItems = const .all(true),
   });
 
   /// Creates a [FBottomNavigationBarStyle] that inherits its properties.

@@ -10,9 +10,10 @@ import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
 import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import tappableDefault from '@/snippets/examples/tappable/default.json';
+import tappableGroupDefault from '@/snippets/examples/tappable-group/default.json';
+import tappableBounce from '@/snippets/examples/tappable/bounce.json';
 import tappableUsage from '@/snippets/usages/foundation/tappable/tappable.json';
 import tappableStaticUsage from '@/snippets/usages/foundation/tappable/tappableStatic.json';
-import bounceSnippet from '@/snippets/snippets/foundation/tappable/bounce.json';
 
 <Callout type="info">
   This widget is typically used to create other high-level widgets, e.g., [button](../form/button). You should prefer
@@ -41,4 +42,27 @@ A variant of `FTappable` without any animation. This is similar to using `FTappa
 
 ## Custom Bounce Animation
 
-<CodeSnippet snippet={bounceSnippet} />
+You can customize a tappable's bounce animation by passing a `FTappableMotion`.
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='tappable' variant='bounce' height={300}/>
+  </Tab>
+  <Tab value="Code">
+    <CodeSnippet snippet={tappableBounce} />
+  </Tab>
+</Tabs>
+
+## Slide-across Interaction
+
+Several tappables can be placed in a `FTappableGroup` to enable slide-across interaction. When you press one tappable
+and slide across to another, the pressed state transfers to the new tappable.
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='tappable-group' height={300}/>
+  </Tab>
+  <Tab value="Code">
+    <CodeSnippet snippet={tappableGroupDefault} />
+  </Tab>
+</Tabs>

@@ -377,6 +377,22 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
       return sliver;
     }
 
+    Widget child = FItemGroupStyleData(
+      style: style,
+      child: CustomScrollView(
+        controller: scrollController,
+        cacheExtent: cacheExtent,
+        dragStartBehavior: dragStartBehavior,
+        shrinkWrap: true,
+        physics: physics,
+        slivers: [sliver],
+      ),
+    );
+
+    if (maxHeight.isInfinite && style.slideableItems.resolve({context.platformVariant})) {
+      child = FTappableGroup(child: child);
+    }
+
     return Semantics(
       container: true,
       label: semanticsLabel,
@@ -388,17 +404,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
           decoration: style.decoration,
           child: ClipRRect(
             borderRadius: style.decoration.borderRadius?.resolve(Directionality.maybeOf(context) ?? .ltr) ?? .zero,
-            child: FItemGroupStyleData(
-              style: style,
-              child: CustomScrollView(
-                controller: scrollController,
-                cacheExtent: cacheExtent,
-                dragStartBehavior: dragStartBehavior,
-                shrinkWrap: true,
-                physics: physics,
-                slivers: [sliver],
-              ),
-            ),
+            child: child,
           ),
         ),
       ),
@@ -469,11 +475,18 @@ class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
   @override
   final FVariants<FItemVariantConstraint, FItemVariant, FItemStyle, FItemStyleDelta> itemStyles;
 
+  /// Whether the items support pressing an item and sliding to another. Defaults to true.
+  ///
+  /// This is ignored if the item group's content is scrollable, i.e. `maxHeight` is finite.
+  @override
+  final FVariants<FItemGroupVariantConstraint, FItemGroupVariant, bool, Delta> slideableItems;
+
   /// Creates a [FItemGroupStyle].
   FItemGroupStyle({
     required this.dividerColor,
     required this.dividerWidth,
     required this.itemStyles,
+    this.slideableItems = const .all(true),
     this.decoration = const BoxDecoration(),
     this.spacing = 4,
   });
@@ -483,6 +496,7 @@ class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
     : this(
         dividerColor: .all(colors.border),
         dividerWidth: style.borderWidth,
+        slideableItems: const .all(true),
         itemStyles: FItemStyles.inherit(colors: colors, typography: typography, style: style),
       );
 }
