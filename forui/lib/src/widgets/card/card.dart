@@ -87,7 +87,7 @@ class FCard extends StatelessWidget {
 class FCardStyle with Diagnosticable, _$FCardStyleFunctions {
   /// The decoration.
   @override
-  final BoxDecoration decoration;
+  final Decoration decoration;
 
   /// The card content's style.
   @override
@@ -99,9 +99,8 @@ class FCardStyle with Diagnosticable, _$FCardStyleFunctions {
   /// Creates a [FCardStyle] that inherits its properties.
   FCardStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        decoration: BoxDecoration(
-          border: .all(color: colors.border),
-          borderRadius: style.borderRadius,
+        decoration: ShapeDecoration(
+          shape: RoundedSuperellipseBorder(side: BorderSide(color: colors.border), borderRadius: style.borderRadius),
           color: colors.card,
         ),
         contentStyle: FCardContentStyle(

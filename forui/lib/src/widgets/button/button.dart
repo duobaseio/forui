@@ -287,14 +287,17 @@ extension type FButtonStyles(
             typography: typography,
             style: style,
             decoration: .from(
-              BoxDecoration(borderRadius: style.borderRadius, color: colors.primary),
+              ShapeDecoration(
+                shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius),
+                color: colors.primary,
+              ),
               variants: {
-                [.hovered, .pressed]: .delta(color: colors.hover(colors.primary)),
+                [.hovered, .pressed]: .shapeDelta(color: colors.hover(colors.primary)),
                 //
-                [.disabled]: .delta(color: colors.disable(colors.primary)),
+                [.disabled]: .shapeDelta(color: colors.disable(colors.primary)),
                 //
-                [.selected]: .delta(color: colors.hover(colors.primary)),
-                [.selected.and(.disabled)]: .delta(color: colors.disable(colors.hover(colors.primary))),
+                [.selected]: .shapeDelta(color: colors.hover(colors.primary)),
+                [.selected.and(.disabled)]: .shapeDelta(color: colors.disable(colors.hover(colors.primary))),
               },
             ),
             foregroundColor: colors.primaryForeground,
@@ -305,14 +308,17 @@ extension type FButtonStyles(
               typography: typography,
               style: style,
               decoration: .from(
-                BoxDecoration(borderRadius: style.borderRadius, color: colors.secondary),
+                ShapeDecoration(
+                  shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius),
+                  color: colors.secondary,
+                ),
                 variants: {
-                  [.hovered, .pressed]: .delta(color: colors.hover(colors.secondary)),
+                  [.hovered, .pressed]: .shapeDelta(color: colors.hover(colors.secondary)),
                   //
-                  [.disabled]: .delta(color: colors.disable(colors.secondary)),
+                  [.disabled]: .shapeDelta(color: colors.disable(colors.secondary)),
                   //
-                  [.selected]: .delta(color: colors.hover(colors.secondary)),
-                  [.selected.and(.disabled)]: .delta(color: colors.disable(colors.hover(colors.secondary))),
+                  [.selected]: .shapeDelta(color: colors.hover(colors.secondary)),
+                  [.selected.and(.disabled)]: .shapeDelta(color: colors.disable(colors.hover(colors.secondary))),
                 },
               ),
               foregroundColor: colors.secondaryForeground,
@@ -322,23 +328,23 @@ extension type FButtonStyles(
               typography: typography,
               style: style,
               decoration: .from(
-                BoxDecoration(
-                  borderRadius: style.borderRadius,
+                ShapeDecoration(
+                  shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius),
                   color: colors.destructive.withValues(alpha: colors.brightness == .light ? 0.1 : 0.2),
                 ),
                 variants: {
-                  [.hovered, .pressed]: .delta(
+                  [.hovered, .pressed]: .shapeDelta(
                     color: colors.destructive.withValues(alpha: colors.brightness == .light ? 0.2 : 0.3),
                   ),
                   //
-                  [.disabled]: .delta(
+                  [.disabled]: .shapeDelta(
                     color: colors.destructive.withValues(alpha: colors.brightness == .light ? 0.05 : 0.1),
                   ),
                   //
-                  [.selected]: .delta(
+                  [.selected]: .shapeDelta(
                     color: colors.destructive.withValues(alpha: colors.brightness == .light ? 0.2 : 0.3),
                   ),
-                  [.selected.and(.disabled)]: .delta(
+                  [.selected.and(.disabled)]: .shapeDelta(
                     color: colors.disable(
                       colors.destructive.withValues(alpha: colors.brightness == .light ? 0.2 : 0.3),
                     ),
@@ -352,18 +358,19 @@ extension type FButtonStyles(
               typography: typography,
               style: style,
               decoration: .from(
-                BoxDecoration(
-                  border: .all(color: colors.border),
-                  borderRadius: style.borderRadius,
+                ShapeDecoration(
+                  shape: RoundedSuperellipseBorder(
+                    borderRadius: style.borderRadius,
+                  ).copyWith(side: BorderSide(color: colors.border)),
                   color: colors.card,
                 ),
                 variants: {
-                  [.hovered, .pressed]: .delta(color: colors.secondary),
+                  [.hovered, .pressed]: .shapeDelta(color: colors.secondary),
                   //
-                  [.disabled]: .delta(color: colors.disable(colors.card)),
+                  [.disabled]: .shapeDelta(color: colors.disable(colors.card)),
                   //
-                  [.selected]: .delta(color: colors.secondary),
-                  [.selected.and(.disabled)]: .delta(color: colors.disable(colors.secondary)),
+                  [.selected]: .shapeDelta(color: colors.secondary),
+                  [.selected.and(.disabled)]: .shapeDelta(color: colors.disable(colors.secondary)),
                 },
               ),
               foregroundColor: colors.secondaryForeground,
@@ -373,14 +380,14 @@ extension type FButtonStyles(
               typography: typography,
               style: style,
               decoration: .from(
-                BoxDecoration(borderRadius: style.borderRadius),
+                ShapeDecoration(shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius)),
                 variants: {
-                  [.hovered, .pressed]: .delta(color: colors.secondary),
+                  [.hovered, .pressed]: .shapeDelta(color: colors.secondary),
                   //
-                  [.disabled]: const .delta(),
+                  [.disabled]: const .shapeDelta(),
                   //
-                  [.selected]: .delta(color: colors.secondary),
-                  [.selected.and(.disabled)]: .delta(color: colors.disable(colors.secondary)),
+                  [.selected]: .shapeDelta(color: colors.secondary),
+                  [.selected.and(.disabled)]: .shapeDelta(color: colors.disable(colors.secondary)),
                 },
               ),
               foregroundColor: colors.secondaryForeground,
@@ -419,7 +426,7 @@ extension type FButtonSizeStyles(
   factory FButtonSizeStyles.inherit({
     required FTypography typography,
     required FStyle style,
-    required FVariants<FTappableVariantConstraint, FTappableVariant, BoxDecoration, BoxDecorationDelta> decoration,
+    required FVariants<FTappableVariantConstraint, FTappableVariant, Decoration, DecorationDelta> decoration,
     required Color foregroundColor,
     required Color disabledForegroundColor,
   }) {
@@ -518,7 +525,7 @@ extension type FButtonSizeStyles(
 final class FButtonStyle with Diagnosticable, _$FButtonStyleFunctions {
   /// The box decoration.
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, BoxDecoration, BoxDecorationDelta> decoration;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, Decoration, DecorationDelta> decoration;
 
   /// The content's style.
   @override

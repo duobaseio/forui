@@ -96,19 +96,22 @@ extension type FBadgeStyles(FVariants<FBadgeVariantConstraint, FBadgeVariant, FB
     : this(
         .from(
           FBadgeStyle(
-            decoration: BoxDecoration(color: colors.primary, borderRadius: FBadgeStyles.defaultBadgeRadius),
+            decoration: ShapeDecoration(
+              color: colors.primary,
+              shape: const RoundedSuperellipseBorder(borderRadius: FBadgeStyles.defaultBadgeRadius),
+            ),
             contentStyle: FBadgeContentStyle(
               labelTextStyle: typography.sm.copyWith(color: colors.primaryForeground, fontWeight: .w600),
             ),
           ),
           variants: {
             [.secondary]: .delta(
-              decoration: .delta(color: colors.secondary),
+              decoration: .shapeDelta(color: colors.secondary),
               contentStyle: .delta(labelTextStyle: .delta(color: colors.secondaryForeground)),
             ),
             [.destructive]: FBadgeStyle(
-              decoration: BoxDecoration(
-                borderRadius: FBadgeStyles.defaultBadgeRadius,
+              decoration: ShapeDecoration(
+                shape: const RoundedSuperellipseBorder(borderRadius: FBadgeStyles.defaultBadgeRadius),
                 color: colors.destructive.withValues(alpha: colors.brightness == .light ? 0.1 : 0.2),
               ),
               contentStyle: FBadgeContentStyle(
@@ -116,9 +119,12 @@ extension type FBadgeStyles(FVariants<FBadgeVariantConstraint, FBadgeVariant, FB
               ),
             ),
             [.outline]: .delta(
-              decoration: .delta(
+              decoration: .shapeDelta(
                 color: colors.card,
-                border: .all(color: colors.border, width: style.borderWidth),
+                shape: RoundedSuperellipseBorder(
+                  side: BorderSide(color: colors.border, width: style.borderWidth),
+                  borderRadius: FBadgeStyles.defaultBadgeRadius,
+                ),
               ),
               contentStyle: .delta(labelTextStyle: .delta(color: colors.foreground)),
             ),
@@ -143,7 +149,7 @@ extension type FBadgeStyles(FVariants<FBadgeVariantConstraint, FBadgeVariant, FB
 final class FBadgeStyle with Diagnosticable, _$FBadgeStyleFunctions {
   /// The decoration.
   @override
-  final BoxDecoration decoration;
+  final Decoration decoration;
 
   /// The content's style.
   @override

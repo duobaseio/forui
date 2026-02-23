@@ -1,17 +1,101 @@
 ## 0.20.0
 
+### Others
+* Add `FBorderRadius` with size tokens (`xs`, `sm`, `base`, `lg`, `xl`, `xl2`, `xl3`).
+
+* **Breaking** Change `FStyle.borderRadius` from `BorderRadius` to `FBorderRadius`.
+
+
+### `FAlert`
+* **Breaking** Change `FAlertStyle.decoration` type from `BoxDecoration` to `Decoration`.
+
+
+### `FBadge`
+* **Breaking** Change `FBadgeStyle.decoration` type from `BoxDecoration` to `Decoration`.
+* **Breaking** Rename `FBadgeStyles.defaultBadgeRadius` to `FBadgeStyles.defaultBadgeShape`.
+
+
 ### `FBottomNavigationBar`
 * Add `FBottomNavigationBarStyle.slideableItems` for slide-across interaction.
 
+* **Breaking** Change `FBottomNavigationBarStyle.decoration` type from `BoxDecoration` to `Decoration`.
 * **Breaking** Change `FBottomNavigationBarItemStyle.inherit` icon and text colors/variants.
+
+
+### `FButton`
+* **Breaking** Change `FButtonStyle.decoration` type from `FVariants<..., BoxDecoration, BoxDecorationDelta>` to
+  `FVariants<..., Decoration, DecorationDelta>`.
+
+
+### `FCalendar`
+* **Breaking** Change `FCalendarStyle.decoration` type from `BoxDecoration` to `Decoration`.
+
+
+### `FCard`
+* **Breaking** Change `FCardStyle.decoration` type from `BoxDecoration` to `Decoration`.
+
+
+### `FCheckbox`
+* **Breaking** Change `FCheckboxStyle.decoration` type from `FVariants<..., BoxDecoration, BoxDecorationDelta>` to
+  `FVariants<..., Decoration, DecorationDelta>`.
+
+
+### `FDeterminateProgress`
+* **Breaking** Change `FDeterminateProgressStyle.trackDecoration` and `fillDecoration` types from `BoxDecoration` to
+  `Decoration`.
 
 
 ### `FDialog`
 * Add `FDialogStyle.slideableActions` for slide-across interaction between dialog actions.
 
+* **Breaking** Change `FDialogStyle.decoration` type from `BoxDecoration` to `Decoration`.
 
-### `FItemGroup`
+
+### `FHeader`
+* **Breaking** Change `FHeaderStyle.decoration` type from `BoxDecoration` to `Decoration`.
+
+
+### `FItem` & `FItemGroup`
 * Add `FItemGroupStyle.slideableItems` for slide-across interaction.
+
+* **Breaking** Change `FItemStyle.decoration` type from `FVariants<..., BoxDecoration, BoxDecorationDelta>` to
+  `FVariants<..., Decoration, DecorationDelta>`.
+* **Breaking** Change `FItemGroupStyle.decoration` type from `BoxDecoration` to `Decoration`.
+
+
+### `FLineCalendar`
+* **Breaking** Change `FLineCalendarStyle.decoration` type from `FVariants<..., BoxDecoration, BoxDecorationDelta>` to
+  `FVariants<..., Decoration, DecorationDelta>`.
+
+
+### `FPagination`
+* **Breaking** Change `FPaginationStyle.itemDecoration` type from `FVariants<..., BoxDecoration, BoxDecorationDelta>`
+  to `FVariants<..., Decoration, DecorationDelta>`.
+
+
+### `FPopover`
+* **Breaking** Change `FPopoverStyle.decoration` type from `BoxDecoration` to `Decoration`.
+
+
+### `FProgress`
+* **Breaking** Change `FProgressStyle.trackDecoration` and `fillDecoration` types from `BoxDecoration` to `Decoration`.
+
+
+### `FResizable`
+* **Breaking** Change `FResizableDividerThumbStyle.decoration` type from `BoxDecoration` to `Decoration`.
+
+
+### `FScaffold`
+* **Breaking** Change `FScaffoldStyle.headerDecoration` and `footerDecoration` types from `BoxDecoration` to
+  `Decoration`.
+
+
+### `FSidebar`
+* **Breaking** Change `FSidebarStyle.decoration` type from `BoxDecoration` to `Decoration`.
+
+
+### `FTabs`
+* **Breaking** Change `FTabsStyle.decoration` and `indicatorDecoration` types from `BoxDecoration` to `Decoration`.
 
 
 ### `FTappable` & `FTappableGroup`
@@ -26,9 +110,24 @@
 ### `FTileGroup`
 * Add `FTileGroupStyle.slideableTiles` for slide-across interaction.
 
+* **Breaking** Change `FTileGroupStyle.decoration` type from `BoxDecoration` to `Decoration`.
+
+
+### `FToast`
+* **Breaking** Change `FToastStyle.decoration` type from `BoxDecoration` to `Decoration`.
+
+
+### `FTooltip`
+* **Breaking** Change `FTooltipStyle.decoration` type from `BoxDecoration` to `Decoration`.
+
 
 ### Others
+* Add `Decorations` extension on `Decoration` for extracting common visual properties.
+
+* Change default border shape from `RoundedRectangleBorder` to `RoundedSuperellipseBorder` in widget `.inherit()` constructors.
 * Add `FPlatformVariantConstraint` extension type.
+
+* Fix widget `.inherit()` constructors not using `FStyle.borderWidth` for `BorderSide` widths.
 
 
 ## 0.19.0

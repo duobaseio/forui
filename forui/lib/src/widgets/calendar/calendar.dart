@@ -241,7 +241,7 @@ class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
 
   /// The decoration surrounding the header & picker.
   @override
-  final BoxDecoration decoration;
+  final Decoration decoration;
 
   /// The padding surrounding the header & picker. Defaults to `EdgeInsets.symmetric(horizontal: 12, vertical: 16)`.
   @override
@@ -291,9 +291,8 @@ class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
           ),
           radius: const .circular(8),
         ),
-        decoration: BoxDecoration(
-          borderRadius: style.borderRadius,
-          border: .all(color: colors.border),
+        decoration: ShapeDecoration(
+          shape: RoundedSuperellipseBorder(side: BorderSide(color: colors.border), borderRadius: style.borderRadius),
           color: colors.card,
         ),
       );

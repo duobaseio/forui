@@ -1037,30 +1037,30 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
 
       // Navigation Bar
       navigationBarTheme: NavigationBarThemeData(
-        indicatorShape: RoundedRectangleBorder(borderRadius: style.borderRadius),
+        indicatorShape: RoundedRectangleBorder(borderRadius: style.borderRadius.base),
       ),
 
       // Navigation Drawer
       navigationDrawerTheme: NavigationDrawerThemeData(
-        indicatorShape: RoundedRectangleBorder(borderRadius: style.borderRadius),
+        indicatorShape: RoundedRectangleBorder(borderRadius: style.borderRadius.base),
       ),
 
       // Navigation Rail
       navigationRailTheme: NavigationRailThemeData(
-        indicatorShape: RoundedRectangleBorder(borderRadius: style.borderRadius),
+        indicatorShape: RoundedRectangleBorder(borderRadius: style.borderRadius.base),
       ),
 
       // Card
       cardTheme: CardThemeData(
         elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: style.borderRadius,
+          borderRadius: style.borderRadius.base,
           side: BorderSide(width: style.borderWidth, color: colors.border),
         ),
       ),
 
       // Chip
-      chipTheme: ChipThemeData(shape: RoundedRectangleBorder(borderRadius: style.borderRadius)),
+      chipTheme: ChipThemeData(shape: RoundedRectangleBorder(borderRadius: style.borderRadius.base)),
 
       // Input
       inputDecorationTheme: InputDecorationTheme(
@@ -1076,22 +1076,22 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
 
       // Date Picker
       datePickerTheme: DatePickerThemeData(
-        shape: RoundedRectangleBorder(borderRadius: style.borderRadius),
-        dayShape: .all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
-        rangePickerShape: RoundedRectangleBorder(borderRadius: style.borderRadius),
+        shape: RoundedRectangleBorder(borderRadius: style.borderRadius.base),
+        dayShape: .all(RoundedRectangleBorder(borderRadius: style.borderRadius.base)),
+        rangePickerShape: RoundedRectangleBorder(borderRadius: style.borderRadius.base),
       ),
 
       // Time Picker
       timePickerTheme: TimePickerThemeData(
         hourMinuteTextColor: colors.secondaryForeground,
         hourMinuteColor: colors.secondary,
-        hourMinuteShape: RoundedRectangleBorder(borderRadius: style.borderRadius),
+        hourMinuteShape: RoundedRectangleBorder(borderRadius: style.borderRadius.base),
         dayPeriodTextColor: colors.foreground,
         dayPeriodColor: colors.secondary,
         dayPeriodBorderSide: BorderSide(color: colors.border),
-        dayPeriodShape: RoundedRectangleBorder(borderRadius: style.borderRadius),
+        dayPeriodShape: RoundedRectangleBorder(borderRadius: style.borderRadius.base),
         dialBackgroundColor: colors.secondary,
-        shape: RoundedRectangleBorder(borderRadius: style.borderRadius),
+        shape: RoundedRectangleBorder(borderRadius: style.borderRadius.base),
       ),
 
       // Slider
@@ -1132,7 +1132,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
                 colors.secondaryForeground,
           ),
           padding: .all(buttonStyles.secondary.base.contentStyle.padding),
-          shape: .all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
+          shape: .all(RoundedRectangleBorder(borderRadius: style.borderRadius.base)),
         ),
       ),
 
@@ -1150,7 +1150,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
                 colors.secondaryForeground,
           ),
           padding: .all(buttonStyles.primary.base.contentStyle.padding),
-          shape: .all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
+          shape: .all(RoundedRectangleBorder(borderRadius: style.borderRadius.base)),
         ),
       ),
 
@@ -1170,22 +1170,26 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
           padding: .all(buttonStyles.outline.base.contentStyle.padding),
           side: .resolveWith((states) {
             final border = buttonStyles.outline.base.decoration.resolve(toVariants(states)).border;
+            final side = switch (border) {
+              OutlinedBorder(:final side) || BoxBorder(top: final side) => side,
+              _ => null,
+            };
             return BorderSide(
               color:
-                  border?.top.color ??
+                  side?.color ??
                   switch (states) {
                     _ when states.contains(WidgetState.disabled) => colors.disable(colors.border),
                     _ when states.contains(WidgetState.hovered) => colors.hover(colors.border),
                     _ => colors.border,
                   },
-              width: border?.top.width ?? style.borderWidth,
+              width: side?.width ?? style.borderWidth,
             );
           }),
           shape: .resolveWith(
-            (states) => RoundedRectangleBorder(
-              borderRadius:
-                  buttonStyles.outline.base.decoration.resolve(toVariants(states)).borderRadius ?? style.borderRadius,
-            ),
+            (states) => switch (buttonStyles.outline.base.decoration.resolve(toVariants(states)).border) {
+              final OutlinedBorder border => border,
+              _ => RoundedRectangleBorder(borderRadius: style.borderRadius.base),
+            },
           ),
         ),
       ),
@@ -1204,10 +1208,10 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
                 colors.secondaryForeground,
           ),
           shape: .resolveWith(
-            (states) => RoundedRectangleBorder(
-              borderRadius:
-                  buttonStyles.ghost.base.decoration.resolve(toVariants(states)).borderRadius ?? style.borderRadius,
-            ),
+            (states) => switch (buttonStyles.ghost.base.decoration.resolve(toVariants(states)).border) {
+              final OutlinedBorder border => border,
+              _ => RoundedRectangleBorder(borderRadius: style.borderRadius.base),
+            },
           ),
         ),
       ),
@@ -1217,9 +1221,10 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
         foregroundColor: buttonStyles.primary.base.contentStyle.textStyle.base.color,
         hoverColor: buttonStyles.primary.base.decoration.resolve({FTappableVariant.hovered}).color,
         disabledElevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: buttonStyles.primary.base.decoration.base.borderRadius ?? style.borderRadius,
-        ),
+        shape: switch (buttonStyles.primary.base.decoration.base.border) {
+          final OutlinedBorder border => border,
+          _ => RoundedRectangleBorder(borderRadius: style.borderRadius.base),
+        },
       ),
 
       iconButtonTheme: IconButtonThemeData(
@@ -1233,10 +1238,10 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
                 colors.secondaryForeground,
           ),
           shape: .resolveWith(
-            (states) => RoundedRectangleBorder(
-              borderRadius:
-                  buttonStyles.ghost.base.decoration.resolve(toVariants(states)).borderRadius ?? style.borderRadius,
-            ),
+            (states) => switch (buttonStyles.ghost.base.decoration.resolve(toVariants(states)).border) {
+              final OutlinedBorder border => border,
+              _ => RoundedRectangleBorder(borderRadius: style.borderRadius.base),
+            },
           ),
         ),
       ),
@@ -1255,25 +1260,25 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
                 colors.secondaryForeground,
           ),
           shape: .resolveWith(
-            (states) => RoundedRectangleBorder(
-              borderRadius:
-                  buttonStyles.ghost.base.decoration.resolve(toVariants(states)).borderRadius ?? style.borderRadius,
-            ),
+            (states) => switch (buttonStyles.ghost.base.decoration.resolve(toVariants(states)).border) {
+              final OutlinedBorder border => border,
+              _ => RoundedRectangleBorder(borderRadius: style.borderRadius.base),
+            },
           ),
         ),
       ),
 
       /// Dialog
-      dialogTheme: DialogThemeData(shape: RoundedRectangleBorder(borderRadius: style.borderRadius)),
+      dialogTheme: DialogThemeData(shape: RoundedRectangleBorder(borderRadius: style.borderRadius.base)),
 
       /// Bottom Sheet
-      bottomSheetTheme: BottomSheetThemeData(shape: RoundedRectangleBorder(borderRadius: style.borderRadius)),
+      bottomSheetTheme: BottomSheetThemeData(shape: RoundedRectangleBorder(borderRadius: style.borderRadius.base)),
 
       /// Snack Bar
-      snackBarTheme: SnackBarThemeData(shape: RoundedRectangleBorder(borderRadius: style.borderRadius)),
+      snackBarTheme: SnackBarThemeData(shape: RoundedRectangleBorder(borderRadius: style.borderRadius.base)),
 
       /// List Tile
-      listTileTheme: ListTileThemeData(shape: RoundedRectangleBorder(borderRadius: style.borderRadius)),
+      listTileTheme: ListTileThemeData(shape: RoundedRectangleBorder(borderRadius: style.borderRadius.base)),
 
       /// Divider
       dividerTheme: DividerThemeData(color: dividerStyles.horizontal.color, thickness: dividerStyles.horizontal.width),

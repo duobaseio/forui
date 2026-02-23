@@ -5,7 +5,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-/// Definitions for the various typographical styles that are part of a [FThemeData].
+/// The typographical tokens.
 ///
 /// A [FTypography] contains scalar values for scaling a [TextStyle]'s corresponding properties. It also contains labelled
 /// font sizes, such as [FTypography.xs], which are based on [Tailwind CSS](https://tailwindcss.com/docs/font-size).
