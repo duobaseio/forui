@@ -124,10 +124,7 @@ class _FPickerState extends State<FPicker> {
     Widget picker = Stack(
       alignment: .center,
       children: [
-        Container(
-          height: selectionExtent,
-          decoration: style.selectionDecoration,
-        ),
+        Container(height: selectionExtent, decoration: style.selectionDecoration),
         // Syncs the controller's value with the wheel's scroll controller when the widget is updated.
         NotificationListener<ScrollMetricsNotification>(
           onNotification: (_) {

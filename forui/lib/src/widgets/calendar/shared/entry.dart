@@ -202,10 +202,7 @@ class _Content extends StatelessWidget {
 
     return DecoratedBox(
       decoration: ShapeDecoration(
-        shape: RoundedSuperellipseBorder(
-          side: style.borderSide.resolve(variants) ?? .none,
-          borderRadius: borderRadius,
-        ),
+        shape: RoundedSuperellipseBorder(side: style.borderSide.resolve(variants) ?? .none, borderRadius: borderRadius),
         color: style.backgroundColor.resolve(variants),
       ),
       child: Center(child: Text(text, style: textStyle)),

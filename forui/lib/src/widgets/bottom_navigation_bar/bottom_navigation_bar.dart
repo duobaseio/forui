@@ -242,7 +242,9 @@ class FBottomNavigationBarStyle with Diagnosticable, _$FBottomNavigationBarStyle
   FBottomNavigationBarStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         decoration: BoxDecoration(
-          border: Border(top: BorderSide(color: colors.border, width: style.borderWidth)),
+          border: Border(
+            top: BorderSide(color: colors.border, width: style.borderWidth),
+          ),
           color: colors.background,
         ),
         itemStyle: .inherit(colors: colors, typography: typography, style: style),
