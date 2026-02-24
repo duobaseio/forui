@@ -33,6 +33,15 @@ void main() {
       expect(borderRadius.xl3, BorderRadius.circular(28));
     });
 
+    test('inherit clamps negative values to 0', () {
+      final borderRadius = FBorderRadius.inherit(3);
+
+      expect(borderRadius.xs2, BorderRadius.circular(0));
+      expect(borderRadius.xs, BorderRadius.circular(0));
+      expect(borderRadius.sm, BorderRadius.circular(1));
+      expect(borderRadius.base, BorderRadius.circular(3));
+    });
+
     test('lerp', () {
       final a = FBorderRadius.inherit(10);
       final b = FBorderRadius.inherit(20);

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/painting.dart';
 
@@ -46,11 +48,13 @@ final class FBorderRadius with Diagnosticable {
   });
 
   /// Creates a [FBorderRadius] that inherits its values from a single [base] radius.
+  ///
+  /// Smaller tiers are clamped to 0.
   FBorderRadius.inherit(double base)
     : this(
-        xs2: .circular(base - 6),
-        xs: .circular(base - 4),
-        sm: .circular(base - 2),
+        xs2: .circular(max(base - 6, 0)),
+        xs: .circular(max(base - 4, 0)),
+        sm: .circular(max(base - 2, 0)),
         base: .circular(base),
         lg: .circular(base + 4),
         xl: .circular(base + 8),

@@ -498,7 +498,7 @@ class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
   /// Creates a [FItemGroupStyle] that inherits from the given arguments.
   FItemGroupStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        decoration: ShapeDecoration(shape: RoundedRectangleBorder(borderRadius: style.borderRadius.base)),
+        decoration: ShapeDecoration(shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base)),
         dividerColor: .all(colors.border),
         dividerWidth: style.borderWidth,
         slideableItems: const .all(true),
