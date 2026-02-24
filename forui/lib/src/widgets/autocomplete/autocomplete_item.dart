@@ -270,7 +270,7 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
           const ShapeDecoration(shape: RoundedSuperellipseBorder()),
           variants: {
             [.focused, .hovered, .pressed]: ShapeDecoration(
-              shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base),
+              shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
               color: colors.secondary,
             ),
             [.disabled]: const ShapeDecoration(shape: RoundedSuperellipseBorder()),

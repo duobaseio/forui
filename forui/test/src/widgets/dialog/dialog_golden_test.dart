@@ -89,7 +89,7 @@ void main() {
                     backgroundFilter: (v) => .blur(sigmaX: v * 5, sigmaY: v * 5),
                     decoration: .value(
                       BoxDecoration(
-                        borderRadius: theme.data.style.borderRadius.base,
+                        borderRadius: theme.data.style.borderRadius.md,
                         color: theme.data.colors.background.withValues(alpha: 0.5),
                       ),
                     ),

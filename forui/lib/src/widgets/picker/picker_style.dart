@@ -81,9 +81,9 @@ class FPickerStyle with Diagnosticable, _$FPickerStyleFunctions {
   /// Creates a [FPickerStyle] that inherits its properties.
   FPickerStyle.inherit({required FColors colors, required FStyle style, required FTypography typography})
     : this(
-        textStyle: typography.base.copyWith(fontWeight: .w500),
+        textStyle: typography.md.copyWith(fontWeight: .w500),
         selectionDecoration: ShapeDecoration(
-          shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base),
+          shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
           color: colors.muted,
         ),
         focusedOutlineStyle: style.focusedOutlineStyle,

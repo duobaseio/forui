@@ -125,7 +125,7 @@ class SidebarPage extends Example {
             child: Container(
               decoration: BoxDecoration(
                 color: context.theme.colors.muted,
-                borderRadius: context.theme.style.borderRadius.base,
+                borderRadius: context.theme.style.borderRadius.md,
               ),
             ),
           ),
@@ -134,7 +134,7 @@ class SidebarPage extends Example {
             child: Container(
               decoration: BoxDecoration(
                 color: context.theme.colors.muted,
-                borderRadius: context.theme.style.borderRadius.base,
+                borderRadius: context.theme.style.borderRadius.md,
               ),
             ),
           ),

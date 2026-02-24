@@ -340,7 +340,7 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
   FSidebarItemStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         textStyle: FVariants.from(
-          typography.base.copyWith(color: colors.foreground, overflow: .ellipsis, height: 1),
+          typography.md.copyWith(color: colors.foreground, overflow: .ellipsis, height: 1),
           variants: {
             [.disabled]: .delta(color: colors.mutedForeground),
           },
@@ -365,7 +365,7 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
             [.disabled]: colors.background,
           },
         ),
-        borderRadius: style.borderRadius.base,
+        borderRadius: style.borderRadius.md,
         tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
         focusedOutlineStyle: style.focusedOutlineStyle.copyWith(spacing: 0),
       );

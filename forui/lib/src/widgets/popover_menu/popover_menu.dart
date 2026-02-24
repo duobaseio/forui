@@ -356,7 +356,7 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
           ShapeDecoration(
             shape: RoundedSuperellipseBorder(
               side: BorderSide(color: colors.border, width: style.borderWidth),
-              borderRadius: style.borderRadius.base,
+              borderRadius: style.borderRadius.md,
             ),
           ),
         ),

@@ -10,7 +10,10 @@ import 'package:forui/src/theme/variant.dart';
 import 'package:forui/src/widgets/resizable/divider.dart';
 import 'package:forui/src/widgets/resizable/resizable_controller.dart';
 
-@Variants('FResizableAxis', {'vertical': (1, 'The vertical resizable variant.')})
+@Variants('FResizableAxis', {
+  'horizontal': (1, 'The horizontal resizable variant.'),
+  'vertical': (1, 'The vertical resizable variant.'),
+})
 part 'resizable.design.dart';
 
 /// A resizable allows its children to be resized along either the horizontal or vertical main axis.
@@ -189,7 +192,7 @@ class _FResizableState extends State<FResizable> {
 
     final styles = context.theme.resizableStyles;
     if (widget.axis == .horizontal) {
-      final dividerStyle = widget.style(styles.resolve({context.platformVariant}));
+      final dividerStyle = widget.style(styles.resolve({FResizableAxisVariant.horizontal, context.platformVariant}));
       return SizedBox(
         height: widget.crossAxisExtent,
         child: LayoutBuilder(
@@ -283,42 +286,35 @@ extension type FResizableStyles(
           FResizableDividerStyleDelta
         > {
   /// Creates a [FResizableStyles] that inherits its properties.
-  FResizableStyles.inherit({required FColors colors, required FStyle style})
-    : this(
-        FVariants(
-          FResizableDividerStyle(
-            color: colors.border,
-            focusedOutlineStyle: style.focusedOutlineStyle,
-            thumbStyle: FResizableDividerThumbStyle(
-              decoration: ShapeDecoration(
-                shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base),
-                color: colors.border,
-              ),
-              foregroundColor: colors.foreground,
-              height: 20,
-              width: 10,
-            ),
-          ),
-          variants: {
-            [.vertical]: FResizableDividerStyle(
-              color: colors.border,
-              focusedOutlineStyle: style.focusedOutlineStyle,
-              thumbStyle: FResizableDividerThumbStyle(
-                decoration: ShapeDecoration(
-                  shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base),
-                  color: colors.border,
-                ),
-                foregroundColor: colors.foreground,
-                height: 10,
-                width: 20,
-              ),
-            ),
-          },
+  factory FResizableStyles.inherit({required FColors colors, required FStyle style}) {
+    FResizableDividerStyle dividerStyle({required double height, required double width}) => FResizableDividerStyle(
+      color: colors.border,
+      focusedOutlineStyle: style.focusedOutlineStyle,
+      thumbStyle: FResizableDividerThumbStyle(
+        decoration: ShapeDecoration(
+          shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
+          color: colors.border,
         ),
-      );
+        foregroundColor: colors.foreground,
+        height: height,
+        width: width,
+      ),
+    );
+
+    final horizontal = dividerStyle(height: 20, width: 10);
+    return FResizableStyles(
+      FVariants(
+        horizontal,
+        variants: {
+          [.horizontal]: horizontal,
+          [.vertical]: dividerStyle(height: 10, width: 20),
+        },
+      ),
+    );
+  }
 
   /// The horizontal resizable divider style.
-  FResizableDividerStyle get horizontal => base;
+  FResizableDividerStyle get horizontal => resolve({FResizableAxisVariant.horizontal});
 
   /// The vertical resizable divider style.
   FResizableDividerStyle get vertical => resolve({FResizableAxisVariant.vertical});

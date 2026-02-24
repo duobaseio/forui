@@ -89,7 +89,7 @@ class _FormSwitchPageState extends StatefulExampleState<FormSwitchPage> {
                       children: [
                         Text(
                           'Marketing Emails',
-                          style: theme.typography.base.copyWith(
+                          style: theme.typography.md.copyWith(
                             fontWeight: .w500,
                             color: theme.colors.foreground,
                             height: 1.5,
@@ -128,7 +128,7 @@ class _FormSwitchPageState extends StatefulExampleState<FormSwitchPage> {
                       children: [
                         Text(
                           'Security emails',
-                          style: theme.typography.base.copyWith(
+                          style: theme.typography.md.copyWith(
                             fontWeight: .w500,
                             color: theme.colors.foreground,
                             height: 1.5,

@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 
 final badge = FBadge(
   // {@category "Variant"}
-  variant: null,
+  variant: .primary,
   // {@endcategory}
   // {@category "Core"}
   style: const .context(),
@@ -16,7 +16,7 @@ final badge = FBadge(
 
 final raw = FBadge.raw(
   // {@category "Variant"}
-  variant: null,
+  variant: .primary,
   // {@endcategory}
   // {@category "Core"}
   style: const .context(),
@@ -26,7 +26,7 @@ final raw = FBadge.raw(
 
 // {@category "Variant" "Primary"}
 /// The badge's primary (base) variant.
-const FBadgeVariant? primary = null;
+const FBadgeVariant primary = .primary;
 
 // {@category "Variant" "Secondary"}
 /// The badge's secondary variant.

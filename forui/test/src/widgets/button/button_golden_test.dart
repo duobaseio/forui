@@ -40,12 +40,12 @@ void main() {
   });
 
   for (final theme in TestScaffold.themes) {
-    for (final (name, FButtonVariant? variant) in [
-      ('primary', null),
-      ('secondary', .secondary),
-      ('destructive', .destructive),
-      ('outline', .outline),
-      ('ghost', .ghost),
+    for (final (name, variant) in [
+      ('primary', FButtonVariant.primary),
+      ('secondary', FButtonVariant.secondary),
+      ('destructive', FButtonVariant.destructive),
+      ('outline', FButtonVariant.outline),
+      ('ghost', FButtonVariant.ghost),
     ]) {
       testWidgets('${theme.name} enabled with FButtonContent', (tester) async {
         await tester.pumpWidget(
@@ -342,7 +342,12 @@ void main() {
     }
   }
 
-  for (final (name, FButtonSizeVariant? size) in [('xs', .xs), ('sm', .sm), ('base', null), ('lg', .lg)]) {
+  for (final (name, size) in [
+    ('xs', FButtonSizeVariant.xs),
+    ('sm', FButtonSizeVariant.sm),
+    ('base', FButtonSizeVariant.md),
+    ('lg', FButtonSizeVariant.lg),
+  ]) {
     testWidgets('$name content', (tester) async {
       await tester.pumpWidget(
         TestScaffold(

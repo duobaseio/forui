@@ -21,7 +21,7 @@ class _FRootHeader extends FHeader {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style(context.theme.headerStyles.resolve({context.platformVariant}));
+    final style = this.style(context.theme.headerStyles.resolve({FHeaderVariant.root, context.platformVariant}));
     Widget header = SafeArea(
       bottom: false,
       child: Semantics(

@@ -416,14 +416,14 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
         decoration: ShapeDecoration(
           shape: RoundedSuperellipseBorder(
             side: BorderSide(color: colors.border, width: style.borderWidth),
-            borderRadius: style.borderRadius.base,
+            borderRadius: style.borderRadius.md,
           ),
         ),
         dividerColor: .all(colors.border),
         dividerWidth: style.borderWidth,
         slideableTiles: const .all(true),
         labelTextStyle: FVariants.from(
-          typography.base.copyWith(
+          typography.md.copyWith(
             color: style.formFieldStyle.labelTextStyle.base.color ?? colors.foreground,
             fontWeight: .w600,
           ),

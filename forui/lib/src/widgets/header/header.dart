@@ -14,7 +14,7 @@ import 'package:forui/src/foundation/debug.dart';
 import 'package:forui/src/foundation/rendering.dart';
 import 'package:forui/src/theme/variant.dart';
 
-@Variants('FHeader', {'nested': (1, 'The nested header variant.')})
+@Variants('FHeader', {'root': (1, 'The root header variant.'), 'nested': (1, 'The nested header variant.')})
 @Sentinels(FHeaderStyle, {'backgroundFilter': 'imageFilterSentinel'})
 part 'header.design.dart';
 
@@ -99,28 +99,32 @@ class FHeaderData extends InheritedWidget {
 extension type FHeaderStyles(FVariants<FHeaderVariantConstraint, FHeaderVariant, FHeaderStyle, FHeaderStyleDelta> _)
     implements FVariants<FHeaderVariantConstraint, FHeaderVariant, FHeaderStyle, FHeaderStyleDelta> {
   /// Creates a [FHeaderStyles] that inherits its properties.
-  FHeaderStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        FVariants(
-          FHeaderStyle(
+  factory FHeaderStyles.inherit({required FColors colors, required FTypography typography, required FStyle style}) {
+    final root = FHeaderStyle(
+      systemOverlayStyle: colors.systemOverlayStyle,
+      titleTextStyle: typography.xl3.copyWith(color: colors.foreground, fontWeight: .w700, height: 1),
+      actionStyle: FHeaderActionStyle.inherit(colors: colors, style: style, size: 30),
+      padding: style.pagePadding.copyWith(bottom: 15),
+    );
+
+    return FHeaderStyles(
+      FVariants(
+        root,
+        variants: {
+          [.root]: root,
+          [.nested]: FHeaderStyle(
             systemOverlayStyle: colors.systemOverlayStyle,
-            titleTextStyle: typography.xl3.copyWith(color: colors.foreground, fontWeight: .w700, height: 1),
-            actionStyle: .inherit(colors: colors, style: style, size: 30),
+            titleTextStyle: typography.xl.copyWith(color: colors.foreground, fontWeight: .w600, height: 1),
+            actionStyle: FHeaderActionStyle.inherit(colors: colors, style: style, size: 25),
             padding: style.pagePadding.copyWith(bottom: 15),
           ),
-          variants: {
-            [.nested]: FHeaderStyle(
-              systemOverlayStyle: colors.systemOverlayStyle,
-              titleTextStyle: typography.xl.copyWith(color: colors.foreground, fontWeight: .w600, height: 1),
-              actionStyle: .inherit(colors: colors, style: style, size: 25),
-              padding: style.pagePadding.copyWith(bottom: 15),
-            ),
-          },
-        ),
-      );
+        },
+      ),
+    );
+  }
 
   /// The root header style.
-  FHeaderStyle get root => base;
+  FHeaderStyle get root => resolve({FHeaderVariant.root});
 
   /// The nested header style.
   FHeaderStyle get nested => resolve({FHeaderVariant.nested});

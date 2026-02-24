@@ -9,9 +9,10 @@ import 'package:forui/src/theme/variant.dart';
 import 'package:forui/src/widgets/badge/badge_content.dart';
 
 @Variants('FBadge', {
+  'primary': (2, 'The primary badge style.'),
   'secondary': (2, 'The secondary badge style.'),
-  'outline': (3, 'The outline badge style.'),
-  'destructive': (4, 'The destructive badge style.'),
+  'outline': (2, 'The outline badge style.'),
+  'destructive': (2, 'The destructive badge style.'),
 })
 part 'badge.design.dart';
 
@@ -23,7 +24,7 @@ part 'badge.design.dart';
 class FBadge extends StatelessWidget {
   /// The variants used to resolve the style from [FBadgeStyles].
   ///
-  /// Defaults to the base (primary) style. The current platform variant is automatically included during style
+  /// Defaults to [FBadgeVariant.primary]. The current platform variant is automatically included during style
   /// resolution. To change the platform variant, update the enclosing [FTheme.platform]/[FAdaptiveScope.platform].
   ///
   /// For example, to create a destructive badge:
@@ -33,7 +34,7 @@ class FBadge extends StatelessWidget {
   ///   child: Text('Destructive'),
   /// )
   /// ```
-  final FBadgeVariant? variant;
+  final FBadgeVariant variant;
 
   /// The style delta applied to the style resolved by [variant].
   ///
@@ -59,15 +60,15 @@ class FBadge extends StatelessWidget {
   final Widget Function(BuildContext context, FBadgeStyle style) builder;
 
   /// Creates a [FBadge].
-  FBadge({required Widget child, this.variant, this.style = const .context(), super.key})
+  FBadge({required Widget child, this.variant = .primary, this.style = const .context(), super.key})
     : builder = ((_, style) => Content(style: style, child: child));
 
   /// Creates a [FBadge] with a custom builder.
-  const FBadge.raw({required this.builder, this.variant, this.style = const .context(), super.key});
+  const FBadge.raw({required this.builder, this.variant = .primary, this.style = const .context(), super.key});
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style(context.theme.badgeStyles.resolve({?variant, context.platformVariant}));
+    final style = this.style(context.theme.badgeStyles.resolve({variant, context.platformVariant}));
     return IntrinsicWidth(
       child: IntrinsicHeight(
         child: DecoratedBox(decoration: style.decoration, child: builder(context, style)),
@@ -102,6 +103,7 @@ extension type FBadgeStyles(FVariants<FBadgeVariantConstraint, FBadgeVariant, FB
             ),
           ),
           variants: {
+            [.primary]: const .delta(),
             [.secondary]: .delta(
               decoration: .shapeDelta(color: colors.secondary),
               contentStyle: .delta(labelTextStyle: .delta(color: colors.secondaryForeground)),
@@ -130,7 +132,7 @@ extension type FBadgeStyles(FVariants<FBadgeVariantConstraint, FBadgeVariant, FB
       );
 
   /// The primary badge style.
-  FBadgeStyle get primary => base;
+  FBadgeStyle get primary => resolve({FBadgeVariant.primary});
 
   /// The secondary badge style.
   FBadgeStyle get secondary => resolve({FBadgeVariant.secondary});

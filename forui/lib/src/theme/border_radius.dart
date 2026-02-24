@@ -16,8 +16,8 @@ final class FBorderRadius with Diagnosticable {
   /// The small border radius. Defaults to 8px.
   final BorderRadius sm;
 
-  /// The base border radius. Defaults to 10px.
-  final BorderRadius base;
+  /// The medium border radius. Defaults to 10px.
+  final BorderRadius md;
 
   /// The large border radius. Defaults to 14px.
   final BorderRadius lg;
@@ -39,7 +39,7 @@ final class FBorderRadius with Diagnosticable {
     this.xs2 = const .all(.circular(4)),
     this.xs = const .all(.circular(6)),
     this.sm = const .all(.circular(8)),
-    this.base = const .all(.circular(10)),
+    this.md = const .all(.circular(10)),
     this.lg = const .all(.circular(14)),
     this.xl = const .all(.circular(18)),
     this.xl2 = const .all(.circular(22)),
@@ -47,19 +47,19 @@ final class FBorderRadius with Diagnosticable {
     this.pill = const .all(.circular(100)),
   });
 
-  /// Creates a [FBorderRadius] that inherits its values from a single [base] radius.
+  /// Creates a [FBorderRadius] that inherits its values from a single [md] radius.
   ///
   /// Smaller tiers are clamped to 0.
-  FBorderRadius.inherit(double base)
+  FBorderRadius.inherit(double md)
     : this(
-        xs2: .circular(max(base - 6, 0)),
-        xs: .circular(max(base - 4, 0)),
-        sm: .circular(max(base - 2, 0)),
-        base: .circular(base),
-        lg: .circular(base + 4),
-        xl: .circular(base + 8),
-        xl2: .circular(base + 12),
-        xl3: .circular(base + 16),
+        xs2: .circular(max(md - 6, 0)),
+        xs: .circular(max(md - 4, 0)),
+        sm: .circular(max(md - 2, 0)),
+        md: .circular(md),
+        lg: .circular(md + 4),
+        xl: .circular(md + 8),
+        xl2: .circular(md + 12),
+        xl3: .circular(md + 16),
       );
 
   /// Scales all border radii by the given [scalar].
@@ -69,14 +69,14 @@ final class FBorderRadius with Diagnosticable {
   ///
   /// final scaled = borderRadius.scale(1.5);
   ///
-  /// print(scaled.base); // .circular(15)
+  /// print(scaled.md); // .circular(15)
   /// ```
   @useResult
   FBorderRadius scale(double scalar) => FBorderRadius(
     xs2: xs2 * scalar,
     xs: xs * scalar,
     sm: sm * scalar,
-    base: base * scalar,
+    md: md * scalar,
     lg: lg * scalar,
     xl: xl * scalar,
     xl2: xl2 * scalar,
@@ -90,7 +90,7 @@ final class FBorderRadius with Diagnosticable {
     BorderRadius? xs2,
     BorderRadius? xs,
     BorderRadius? sm,
-    BorderRadius? base,
+    BorderRadius? md,
     BorderRadius? lg,
     BorderRadius? xl,
     BorderRadius? xl2,
@@ -100,7 +100,7 @@ final class FBorderRadius with Diagnosticable {
     xs2: xs2 ?? this.xs2,
     xs: xs ?? this.xs,
     sm: sm ?? this.sm,
-    base: base ?? this.base,
+    md: md ?? this.md,
     lg: lg ?? this.lg,
     xl: xl ?? this.xl,
     xl2: xl2 ?? this.xl2,
@@ -114,7 +114,7 @@ final class FBorderRadius with Diagnosticable {
     xs2: BorderRadius.lerp(xs2, other.xs2, t) ?? xs2,
     xs: BorderRadius.lerp(xs, other.xs, t) ?? xs,
     sm: BorderRadius.lerp(sm, other.sm, t) ?? sm,
-    base: BorderRadius.lerp(base, other.base, t) ?? base,
+    md: BorderRadius.lerp(md, other.md, t) ?? md,
     lg: BorderRadius.lerp(lg, other.lg, t) ?? lg,
     xl: BorderRadius.lerp(xl, other.xl, t) ?? xl,
     xl2: BorderRadius.lerp(xl2, other.xl2, t) ?? xl2,
@@ -129,7 +129,7 @@ final class FBorderRadius with Diagnosticable {
       ..add(DiagnosticsProperty('xs2', xs2, level: .debug))
       ..add(DiagnosticsProperty('xs', xs, level: .debug))
       ..add(DiagnosticsProperty('sm', sm, level: .debug))
-      ..add(DiagnosticsProperty('base', base, level: .debug))
+      ..add(DiagnosticsProperty('md', md, level: .debug))
       ..add(DiagnosticsProperty('lg', lg, level: .debug))
       ..add(DiagnosticsProperty('xl', xl, level: .debug))
       ..add(DiagnosticsProperty('xl2', xl2, level: .debug))
@@ -145,7 +145,7 @@ final class FBorderRadius with Diagnosticable {
           xs2 == other.xs2 &&
           xs == other.xs &&
           sm == other.sm &&
-          base == other.base &&
+          md == other.md &&
           lg == other.lg &&
           xl == other.xl &&
           xl2 == other.xl2 &&
@@ -157,7 +157,7 @@ final class FBorderRadius with Diagnosticable {
       xs2.hashCode ^
       xs.hashCode ^
       sm.hashCode ^
-      base.hashCode ^
+      md.hashCode ^
       lg.hashCode ^
       xl.hashCode ^
       xl2.hashCode ^

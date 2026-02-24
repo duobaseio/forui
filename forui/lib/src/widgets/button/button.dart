@@ -10,14 +10,16 @@ import 'package:forui/src/theme/variant.dart';
 import 'package:forui/src/widgets/button/button_content.dart';
 
 @Variants('FButton', {
+  'primary': (2, 'The primary button style.'),
   'secondary': (2, 'The secondary button style.'),
-  'destructive': (3, 'The destructive button style.'),
-  'outline': (4, 'The outline button style.'),
-  'ghost': (5, 'The ghost button style.'),
+  'destructive': (2, 'The destructive button style.'),
+  'outline': (2, 'The outline button style.'),
+  'ghost': (2, 'The ghost button style.'),
 })
 @Variants('FButtonSize', {
   'xs': (1, 'The extra small button size.'),
   'sm': (1, 'The small button size.'),
+  'md': (1, 'The medium (default) button size.'),
   'lg': (1, 'The large button size.'),
 })
 part 'button.design.dart';
@@ -31,7 +33,7 @@ part 'button.design.dart';
 /// * https://forui.dev/docs/form/button for working examples.
 /// * [FButtonStyle] for customizing a button's appearance.
 class FButton extends StatelessWidget {
-  /// The variant. Defaults to the base (primary) style.
+  /// The variant. Defaults to [FButtonVariant.primary].
   ///
   /// The current platform variant is automatically included during style resolution. To change the platform variant,
   /// update the enclosing [FTheme.platform]/[FAdaptiveScope.platform].
@@ -44,9 +46,9 @@ class FButton extends StatelessWidget {
   ///   child: Text('Delete'),
   /// )
   /// ```
-  final FButtonVariant? variant;
+  final FButtonVariant variant;
 
-  /// The button size. Defaults to the base size.
+  /// The button size. Defaults to [FButtonSizeVariant.md].
   ///
   /// The current platform variant is automatically included during style resolution. To change the platform variant,
   /// update the enclosing [FTheme.platform]/[FAdaptiveScope.platform].
@@ -60,7 +62,7 @@ class FButton extends StatelessWidget {
   ///   child: Text('Delete'),
   /// )
   /// ```
-  final FButtonSizeVariant? size;
+  final FButtonSizeVariant size;
 
   /// The style delta applied to the style resolved by [variant] and [size].
   ///
@@ -147,8 +149,8 @@ class FButton extends StatelessWidget {
   FButton({
     required this.onPress,
     required Widget child,
-    this.variant,
-    this.size,
+    this.variant = .primary,
+    this.size = .md,
     this.style = const .context(),
     this.onLongPress,
     this.onDoubleTap,
@@ -186,7 +188,7 @@ class FButton extends StatelessWidget {
     required this.onPress,
     required Widget child,
     this.variant = .outline,
-    this.size,
+    this.size = .md,
     this.style = const .context(),
     this.onLongPress,
     this.onDoubleTap,
@@ -207,8 +209,8 @@ class FButton extends StatelessWidget {
   const FButton.raw({
     required this.onPress,
     required this.child,
-    this.variant,
-    this.size,
+    this.variant = .primary,
+    this.size = .md,
     this.style = const .context(),
     this.onLongPress,
     this.onDoubleTap,
@@ -227,8 +229,9 @@ class FButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final sizeStyles = context.theme.buttonStyles.resolve({?variant, context.platformVariant});
-    final style = this.style(sizeStyles.resolve({?size, context.platformVariant}));
+    final style = this.style(
+      context.theme.buttonStyles.resolve({variant, context.platformVariant}).resolve({size, context.platformVariant}),
+    );
 
     return FTappable(
       style: style.tappableStyle,
@@ -280,36 +283,39 @@ extension type FButtonStyles(
 )
     implements FVariants<FButtonVariantConstraint, FButtonVariant, FButtonSizeStyles, FButtonSizesDelta> {
   /// Creates a [FButtonStyles] that inherits its properties.
-  FButtonStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        FVariants(
-          FButtonSizeStyles.inherit(
-            typography: typography,
-            style: style,
-            decoration: .from(
-              ShapeDecoration(
-                shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base),
-                color: colors.primary,
-              ),
-              variants: {
-                [.hovered, .pressed]: .shapeDelta(color: colors.hover(colors.primary)),
-                //
-                [.disabled]: .shapeDelta(color: colors.disable(colors.primary)),
-                //
-                [.selected]: .shapeDelta(color: colors.hover(colors.primary)),
-                [.selected.and(.disabled)]: .shapeDelta(color: colors.disable(colors.hover(colors.primary))),
-              },
-            ),
-            foregroundColor: colors.primaryForeground,
-            disabledForegroundColor: colors.disable(colors.primaryForeground),
-          ),
-          variants: {
-            [.secondary]: FButtonSizeStyles.inherit(
+  factory FButtonStyles.inherit({required FColors colors, required FTypography typography, required FStyle style}) {
+    final primary = FButtonSizeStyles.inherit(
+      typography: typography,
+      style: style,
+      decoration: .from(
+        ShapeDecoration(
+          shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
+          color: colors.primary,
+        ),
+        variants: {
+          [.hovered, .pressed]: .shapeDelta(color: colors.hover(colors.primary)),
+          //
+          [.disabled]: .shapeDelta(color: colors.disable(colors.primary)),
+          //
+          [.selected]: .shapeDelta(color: colors.hover(colors.primary)),
+          [.selected.and(.disabled)]: .shapeDelta(color: colors.disable(colors.hover(colors.primary))),
+        },
+      ),
+      foregroundColor: colors.primaryForeground,
+      disabledForegroundColor: colors.disable(colors.primaryForeground),
+    );
+
+    return FButtonStyles(
+      FVariants(
+        primary,
+        variants: {
+          [.primary]: primary,
+          [.secondary]: FButtonSizeStyles.inherit(
               typography: typography,
               style: style,
               decoration: .from(
                 ShapeDecoration(
-                  shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base),
+                  shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
                   color: colors.secondary,
                 ),
                 variants: {
@@ -329,7 +335,7 @@ extension type FButtonStyles(
               style: style,
               decoration: .from(
                 ShapeDecoration(
-                  shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base),
+                  shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
                   color: colors.destructive.withValues(alpha: colors.brightness == .light ? 0.1 : 0.2),
                 ),
                 variants: {
@@ -361,7 +367,7 @@ extension type FButtonStyles(
                 ShapeDecoration(
                   shape: RoundedSuperellipseBorder(
                     side: BorderSide(color: colors.border, width: style.borderWidth),
-                    borderRadius: style.borderRadius.base,
+                    borderRadius: style.borderRadius.md,
                   ),
                   color: colors.card,
                 ),
@@ -381,7 +387,7 @@ extension type FButtonStyles(
               typography: typography,
               style: style,
               decoration: .from(
-                ShapeDecoration(shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base)),
+                ShapeDecoration(shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md)),
                 variants: {
                   [.hovered, .pressed]: .shapeDelta(color: colors.secondary),
                   //
@@ -397,9 +403,10 @@ extension type FButtonStyles(
           },
         ),
       );
+  }
 
   /// The primary button size styles.
-  FButtonSizeStyles get primary => base;
+  FButtonSizeStyles get primary => resolve({FButtonVariant.primary});
 
   /// The secondary button size styles.
   FButtonSizeStyles get secondary => resolve({FButtonVariant.secondary});
@@ -476,15 +483,17 @@ extension type FButtonSizeStyles(
       tappableStyle: style.tappableStyle,
     );
 
+    final md = button(
+      textStyle: typography.md,
+      contentPadding: const .symmetric(horizontal: 16, vertical: 11),
+      contentSpacing: 10,
+      iconSize: typography.md.fontSize ?? 16,
+      iconPadding: const .all(11),
+    );
+
     return FButtonSizeStyles(
       FVariants(
-        button(
-          textStyle: typography.base,
-          contentPadding: const .symmetric(horizontal: 16, vertical: 11),
-          contentSpacing: 10,
-          iconSize: typography.base.fontSize ?? 16,
-          iconPadding: const .all(11),
-        ),
+        md,
         variants: {
           [.xs]: button(
             textStyle: typography.xs,
@@ -500,11 +509,12 @@ extension type FButtonSizeStyles(
             iconSize: typography.sm.fontSize ?? 14,
             iconPadding: const .all(9),
           ),
+          [.md]: md,
           [.lg]: button(
-            textStyle: typography.base,
+            textStyle: typography.md,
             contentPadding: const .symmetric(horizontal: 32, vertical: 14),
             contentSpacing: 10,
-            iconSize: typography.base.fontSize ?? 16,
+            iconSize: typography.md.fontSize ?? 16,
             iconPadding: const .all(14),
           ),
         },
@@ -517,6 +527,9 @@ extension type FButtonSizeStyles(
 
   /// The small button style.
   FButtonStyle get sm => resolve({FButtonSizeVariant.sm});
+
+  /// The medium (default) button style.
+  FButtonStyle get md => resolve({FButtonSizeVariant.md});
 
   /// The large button style.
   FButtonStyle get lg => resolve({FButtonSizeVariant.lg});

@@ -9,7 +9,7 @@ import 'package:forui/src/theme/variant.dart';
 import 'package:forui/src/widgets/item/item_content.dart';
 import 'package:forui/src/widgets/item/raw_item_content.dart';
 
-@Variants('FItem', {'destructive': (2, 'The destructive item style.')})
+@Variants('FItem', {'primary': (1, 'The primary item style.'), 'destructive': (2, 'The destructive item style.')})
 @Sentinels(FItemStyle, {'focusedOutlineStyle': 'focusedOutlineStyleSentinel'})
 part 'item.design.dart';
 
@@ -152,8 +152,9 @@ class FItem extends StatelessWidget with FItemMixin {
   /// The variants used to resolve the style from [FItemStyles].
   ///
   /// Defaults to an empty set, which resolves to the base (primary) style. The current platform variant is automatically
-  /// included during style resolution. To change the platform variant, update the enclosing
-  /// [FTheme.platform]/[FAdaptiveScope.platform].
+  /// included during style resolution.
+  ///
+  /// To change the platform variant, update the enclosing [FTheme.platform]/[FAdaptiveScope.platform].
   ///
   /// For example, to create a destructive item:
   /// ```dart
@@ -485,32 +486,35 @@ class FItem extends StatelessWidget with FItemMixin {
 extension type FItemStyles(FVariants<FItemVariantConstraint, FItemVariant, FItemStyle, FItemStyleDelta> _)
     implements FVariants<FItemVariantConstraint, FItemVariant, FItemStyle, FItemStyleDelta> {
   /// Creates a [FItemStyles] that inherits its properties.
-  FItemStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        .from(
-          .inherit(colors: colors, typography: typography, style: style),
-          variants: {
-            [.destructive]: .delta(
-              contentStyle: FItemContentStyle.inherit(
-                colors: colors,
-                typography: typography,
-                prefix: colors.destructive,
-                foreground: colors.destructive,
-                mutedForeground: colors.destructive,
-              ),
-              rawItemContentStyle: FRawItemContentStyle.inherit(
-                colors: colors,
-                typography: typography,
-                prefix: colors.primary,
-                color: colors.primary,
-              ),
+  factory FItemStyles.inherit({required FColors colors, required FTypography typography, required FStyle style}) {
+    final primary = FItemStyle.inherit(colors: colors, typography: typography, style: style);
+    return FItemStyles(
+      FVariants.from(
+        primary,
+        variants: {
+          [.primary]: primary,
+          [.destructive]: .delta(
+            contentStyle: FItemContentStyle.inherit(
+              colors: colors,
+              typography: typography,
+              prefix: colors.destructive,
+              foreground: colors.destructive,
+              mutedForeground: colors.destructive,
             ),
-          },
-        ),
-      );
+            rawItemContentStyle: FRawItemContentStyle.inherit(
+              colors: colors,
+              typography: typography,
+              prefix: colors.primary,
+              color: colors.primary,
+            ),
+          ),
+        },
+      ),
+    );
+  }
 
   /// The primary item style.
-  FItemStyle get primary => base;
+  FItemStyle get primary => resolve({FItemVariant.primary});
 
   /// The destructive item style.
   FItemStyle get destructive => resolve({FItemVariant.destructive});
@@ -575,7 +579,7 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
         ),
         decoration: FVariants.from(
           ShapeDecoration(
-            shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base),
+            shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
             color: colors.background,
           ),
           variants: {

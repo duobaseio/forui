@@ -283,7 +283,7 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
           const ShapeDecoration(shape: RoundedSuperellipseBorder()),
           variants: {
             [.focused, .hovered, .pressed]: .shapeDelta(
-              shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base),
+              shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
               color: colors.secondary,
             ),
             //

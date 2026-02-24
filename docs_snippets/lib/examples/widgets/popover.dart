@@ -23,7 +23,7 @@ class PopoverPage extends Example {
           mainAxisSize: .min,
           crossAxisAlignment: .start,
           children: [
-            Text('Dimensions', style: context.theme.typography.base),
+            Text('Dimensions', style: context.theme.typography.md),
             const SizedBox(height: 7),
             Text(
               'Set the dimensions for the layer.',
@@ -85,7 +85,7 @@ class HorizontalPopoverPage extends Example {
           mainAxisSize: .min,
           crossAxisAlignment: .start,
           children: [
-            Text('Dimensions', style: context.theme.typography.base),
+            Text('Dimensions', style: context.theme.typography.md),
             const SizedBox(height: 7),
             Text(
               'Set the dimensions for the layer.',
@@ -148,7 +148,7 @@ class NoHideRegionPopoverPage extends Example {
           mainAxisSize: .min,
           crossAxisAlignment: .start,
           children: [
-            Text('Dimensions', style: context.theme.typography.base),
+            Text('Dimensions', style: context.theme.typography.md),
             const SizedBox(height: 7),
             Text(
               'Set the dimensions for the layer.',
@@ -209,7 +209,7 @@ class NestedPopoverPage extends Example {
           mainAxisSize: .min,
           crossAxisAlignment: .start,
           children: [
-            Text('Dimensions', style: context.theme.typography.base),
+            Text('Dimensions', style: context.theme.typography.md),
             const SizedBox(height: 7),
             Text(
               'Set the dimensions for the layer.',
@@ -299,7 +299,7 @@ class BlurredPopoverPage extends Example {
               mainAxisSize: .min,
               crossAxisAlignment: .start,
               children: [
-                Text('Dimensions', style: context.theme.typography.base),
+                Text('Dimensions', style: context.theme.typography.md),
                 const SizedBox(height: 7),
                 Text(
                   'Set the dimensions for the layer.',
@@ -361,7 +361,7 @@ class FlipPopoverPage extends Example {
           mainAxisSize: .min,
           crossAxisAlignment: .start,
           children: [
-            Text('Dimensions', style: context.theme.typography.base),
+            Text('Dimensions', style: context.theme.typography.md),
             const SizedBox(height: 7),
             Text(
               'Set the dimensions for the layer.',
@@ -424,7 +424,7 @@ class SlidePopoverPage extends Example {
           mainAxisSize: .min,
           crossAxisAlignment: .start,
           children: [
-            Text('Dimensions', style: context.theme.typography.base),
+            Text('Dimensions', style: context.theme.typography.md),
             const SizedBox(height: 7),
             Text(
               'Set the dimensions for the layer.',
@@ -487,7 +487,7 @@ class AllowOverflowPopoverPage extends Example {
           mainAxisSize: .min,
           crossAxisAlignment: .start,
           children: [
-            Text('Dimensions', style: context.theme.typography.base),
+            Text('Dimensions', style: context.theme.typography.md),
             const SizedBox(height: 7),
             Text(
               'Set the dimensions for the layer.',

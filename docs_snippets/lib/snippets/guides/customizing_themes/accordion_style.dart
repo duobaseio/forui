@@ -9,7 +9,7 @@ FAccordionStyle accordionStyle({required FColors colors, required FTypography ty
     FAccordionStyle(
       titleTextStyle: FVariants.from(
         // This text style is applied when the accordion is NOT hovered OR pressed.
-        typography.base.copyWith(fontWeight: .w500, color: colors.foreground),
+        typography.md.copyWith(fontWeight: .w500, color: colors.foreground),
         variants: {
           // This text style is applied when the accordion is hovered OR pressed.
           // {@highlight}

@@ -12,7 +12,7 @@ void main() {
       expect(borderRadius.xs2, const BorderRadius.all(.circular(4)));
       expect(borderRadius.xs, const BorderRadius.all(.circular(6)));
       expect(borderRadius.sm, const BorderRadius.all(.circular(8)));
-      expect(borderRadius.base, const BorderRadius.all(.circular(10)));
+      expect(borderRadius.md, const BorderRadius.all(.circular(10)));
       expect(borderRadius.lg, const BorderRadius.all(.circular(14)));
       expect(borderRadius.xl, const BorderRadius.all(.circular(18)));
       expect(borderRadius.xl2, const BorderRadius.all(.circular(22)));
@@ -26,7 +26,7 @@ void main() {
       expect(borderRadius.xs2, BorderRadius.circular(6));
       expect(borderRadius.xs, BorderRadius.circular(8));
       expect(borderRadius.sm, BorderRadius.circular(10));
-      expect(borderRadius.base, BorderRadius.circular(12));
+      expect(borderRadius.md, BorderRadius.circular(12));
       expect(borderRadius.lg, BorderRadius.circular(16));
       expect(borderRadius.xl, BorderRadius.circular(20));
       expect(borderRadius.xl2, BorderRadius.circular(24));
@@ -39,7 +39,7 @@ void main() {
       expect(borderRadius.xs2, BorderRadius.circular(0));
       expect(borderRadius.xs, BorderRadius.circular(0));
       expect(borderRadius.sm, BorderRadius.circular(1));
-      expect(borderRadius.base, BorderRadius.circular(3));
+      expect(borderRadius.md, BorderRadius.circular(3));
     });
 
     test('lerp', () {
@@ -47,15 +47,15 @@ void main() {
       final b = FBorderRadius.inherit(20);
       final result = a.lerp(b, 0.5);
 
-      expect(result.base, BorderRadius.lerp(a.base, b.base, 0.5));
+      expect(result.md, BorderRadius.lerp(a.md, b.md, 0.5));
     });
 
     test('copyWith', () {
       final original = FBorderRadius.inherit(10);
-      final modified = original.copyWith(base: .circular(20));
+      final modified = original.copyWith(md: .circular(20));
 
       expect(modified.xs, original.xs);
-      expect(modified.base, BorderRadius.circular(20));
+      expect(modified.md, BorderRadius.circular(20));
       expect(modified.xl, original.xl);
     });
 

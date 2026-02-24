@@ -198,7 +198,7 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
         ShapeDecoration(
           shape: RoundedSuperellipseBorder(
             side: BorderSide(color: colors.border, width: style.borderWidth),
-            borderRadius: style.borderRadius.base,
+            borderRadius: style.borderRadius.md,
           ),
           color: colors.card,
         ),
@@ -208,12 +208,12 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
           [.disabled]: .shapeDelta(
             shape: RoundedSuperellipseBorder(
               side: BorderSide(color: colors.disable(colors.border), width: style.borderWidth),
-              borderRadius: style.borderRadius.base,
+              borderRadius: style.borderRadius.md,
             ),
           ),
         },
       ),
     ),
-    headerTextStyle: typography.base.copyWith(color: colors.foreground, fontWeight: .w600),
+    headerTextStyle: typography.md.copyWith(color: colors.foreground, fontWeight: .w600),
   );
 }

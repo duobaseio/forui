@@ -485,7 +485,7 @@ class _FDialogState extends State<FDialog> {
         context: context,
         child: Align(
           child: DefaultTextStyle(
-            style: context.theme.typography.base.copyWith(color: theme.colors.foreground),
+            style: context.theme.typography.md.copyWith(color: theme.colors.foreground),
             child: Semantics(
               scopesRoute: true,
               explicitChildNodes: true,
@@ -547,7 +547,7 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
       decoration: ShapeDecoration(
         shape: RoundedSuperellipseBorder(
           side: BorderSide(color: colors.border, width: style.borderWidth),
-          borderRadius: style.borderRadius.base,
+          borderRadius: style.borderRadius.md,
         ),
         color: colors.card,
       ),

@@ -26,7 +26,7 @@ class PortalPage extends Example {
           mainAxisSize: .min,
           crossAxisAlignment: .start,
           children: [
-            Text('Dimensions', style: context.theme.typography.base),
+            Text('Dimensions', style: context.theme.typography.md),
             const SizedBox(height: 7),
             Text(
               'Set the dimensions for the layer.',

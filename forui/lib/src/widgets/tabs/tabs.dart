@@ -172,7 +172,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
     final localizations = Localizations.of<MaterialLocalizations>(context, MaterialLocalizations);
 
     final content = DefaultTextStyle(
-      style: theme.typography.base.copyWith(
+      style: theme.typography.md.copyWith(
         fontFamily: theme.typography.defaultFontFamily,
         color: theme.colors.foreground,
       ),

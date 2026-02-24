@@ -51,3 +51,69 @@ transforms:
       - kind: renameParameter
         oldName: 'tileStyle'
         newName: 'tileStyles'
+
+  # FBorderRadius
+  - title: 'Rename FBorderRadius.base to FBorderRadius.md'
+    date: 2026-02-24
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      getter: 'base'
+      inClass: FBorderRadius
+    changes:
+      - kind: rename
+        newName: 'md'
+
+  - title: 'Rename FBorderRadius(base: ...) to FBorderRadius(md: ...)'
+    date: 2026-02-24
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FBorderRadius
+    changes:
+      - kind: renameParameter
+        oldName: 'base'
+        newName: 'md'
+
+  - title: 'Rename FBorderRadius.copyWith(base: ...) to FBorderRadius.copyWith(md: ...)'
+    date: 2026-02-24
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      method: 'copyWith'
+      inClass: FBorderRadius
+    changes:
+      - kind: renameParameter
+        oldName: 'base'
+        newName: 'md'
+
+  # FTypography
+  - title: 'Rename FTypography.base to FTypography.md'
+    date: 2026-02-24
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      getter: 'base'
+      inClass: FTypography
+    changes:
+      - kind: rename
+        newName: 'md'
+
+  - title: 'Rename FTypography(base: ...) to FTypography(md: ...)'
+    date: 2026-02-24
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FTypography
+    changes:
+      - kind: renameParameter
+        oldName: 'base'
+        newName: 'md'
+
+  - title: 'Rename FTypography.copyWith(base: ...) to FTypography.copyWith(md: ...)'
+    date: 2026-02-24
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      method: 'copyWith'
+      inClass: FTypography
+    changes:
+      - kind: renameParameter
+        oldName: 'base'
+        newName: 'md'
