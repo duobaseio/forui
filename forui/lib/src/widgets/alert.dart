@@ -149,7 +149,7 @@ extension type FAlertStyles(FVariants<FAlertVariantConstraint, FAlertVariant, FA
       FVariants.from(
         primary,
         variants: {
-          [.primary]: .delta(),
+          [.primary]: const .delta(),
           [.destructive]: .delta(
             iconStyle: .delta(color: colors.destructive),
             titleTextStyle: .delta(color: colors.destructive),
