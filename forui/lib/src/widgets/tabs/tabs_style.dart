@@ -22,7 +22,7 @@ enum FTabBarIndicatorSize {
 class FTabsStyle with Diagnosticable, _$FTabsStyleFunctions {
   /// The decoration.
   @override
-  final BoxDecoration decoration;
+  final Decoration decoration;
 
   /// The padding.
   @override
@@ -34,7 +34,7 @@ class FTabsStyle with Diagnosticable, _$FTabsStyleFunctions {
 
   /// The indicator.
   @override
-  final BoxDecoration indicatorDecoration;
+  final Decoration indicatorDecoration;
 
   /// The indicator size.
   @override
@@ -67,9 +67,11 @@ class FTabsStyle with Diagnosticable, _$FTabsStyleFunctions {
   /// Creates a [FTabsStyle] that inherits its properties.
   FTabsStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        decoration: BoxDecoration(
-          border: .all(color: colors.muted),
-          borderRadius: style.borderRadius,
+        decoration: ShapeDecoration(
+          shape: RoundedSuperellipseBorder(
+            side: BorderSide(color: colors.muted, width: style.borderWidth),
+            borderRadius: style.borderRadius.base,
+          ),
           color: colors.muted,
         ),
         labelTextStyle: FVariants.from(
@@ -82,7 +84,10 @@ class FTabsStyle with Diagnosticable, _$FTabsStyleFunctions {
             [.selected]: .delta(color: colors.foreground),
           },
         ),
-        indicatorDecoration: BoxDecoration(color: colors.background, borderRadius: style.borderRadius),
+        indicatorDecoration: ShapeDecoration(
+          shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base),
+          color: colors.background,
+        ),
         focusedOutlineStyle: style.focusedOutlineStyle,
       );
 }

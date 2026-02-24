@@ -156,8 +156,7 @@ class FTimePickerStyle extends FPickerStyle with _$FTimePickerStyleFunctions {
   /// Creates a [FTimePickerStyle].
   const FTimePickerStyle({
     required super.textStyle,
-    required super.selectionBorderRadius,
-    required super.selectionColor,
+    required super.selectionDecoration,
     required super.focusedOutlineStyle,
     super.diameterRatio,
     super.squeeze,
@@ -176,8 +175,10 @@ class FTimePickerStyle extends FPickerStyle with _$FTimePickerStyleFunctions {
   FTimePickerStyle.inherit({required FColors colors, required FStyle style, required FTypography typography})
     : this(
         textStyle: typography.base.copyWith(fontWeight: .w500),
-        selectionBorderRadius: style.borderRadius,
-        selectionColor: colors.muted,
+        selectionDecoration: ShapeDecoration(
+          shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base),
+          color: colors.muted,
+        ),
         selectionHeightAdjustment: 5,
         spacing: 2,
         focusedOutlineStyle: style.focusedOutlineStyle,

@@ -274,7 +274,7 @@ class FResizableDividerStyle with Diagnosticable, _$FResizableDividerStyleFuncti
 class FResizableDividerThumbStyle with Diagnosticable, _$FResizableDividerThumbStyleFunctions {
   /// The background color.
   @override
-  final BoxDecoration decoration;
+  final Decoration decoration;
 
   /// The foreground color.
   @override

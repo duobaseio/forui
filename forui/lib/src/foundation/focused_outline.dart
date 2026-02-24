@@ -71,17 +71,10 @@ class _Outline extends RenderProxyBox {
   void paint(PaintingContext context, Offset offset) {
     context.paintChild(child!, offset);
     if (focused) {
-      final radius = _style.borderRadius.resolve(_textDirection);
       context.canvas.drawPath(
-        Path()..addRRect(
-          .fromRectAndCorners(
-            (offset & child!.size).inflate(_style.spacing),
-            topLeft: radius.topLeft,
-            topRight: radius.topRight,
-            bottomLeft: radius.bottomLeft,
-            bottomRight: radius.bottomRight,
-          ),
-        ),
+        RoundedSuperellipseBorder(
+          borderRadius: _style.borderRadius.resolve(_textDirection),
+        ).getOuterPath((offset & child!.size).inflate(_style.spacing), textDirection: _textDirection),
         Paint()
           ..style = .stroke
           ..color = _style.color

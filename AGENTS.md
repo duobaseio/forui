@@ -1,3 +1,18 @@
+## Repository Overview
+
+Forui is a Flutter widget library. This is a monorepo with the following packages:
+
+| Package              | Description                                                        |
+|----------------------|--------------------------------------------------------------------|
+| `forui/`             | Main widget library (published to pub.dev)                         |
+| `forui_assets/`      | Font and icon assets                                               |
+| `forui_hooks/`       | Flutter Hooks integration                                          |
+| `forui_internal_gen/`| Code generator for styles, controls, and variants (`build_runner`) |
+| `docs_snippets/`     | Code snippets and examples for [forui.dev](https://forui.dev)      |
+| `docs/`              | Documentation site (Next.js)                                       |
+
+Bootstrapping: `make bootstrap` (or `make bs`). Run `make help` for all commands.
+
 ## Style Guide
 
 * Prefix publicly exported widgets and styles with `F`.
@@ -11,10 +26,10 @@
   FWidgetStyle style = .new(...);  // Don't do this
   FWidgetStyle style = FWidgetStyle(...);  // Do this instead
   ```
-* Prefer `AlignmentGeometry`/`BorderRadiusGeometry`/`EdgeInsetsGeometry` over `Alignment`/`BorderRadius`/`EdgeInsets`. 
+* Prefer `AlignmentGeometry`/`BorderRadiusGeometry`/`EdgeInsetsGeometry` over `Alignment`/`BorderRadius`/`EdgeInsets`.
 * Minimize dependency on Cupertino/Material.
 
-## Changelog organization
+## Changelog Organization
 
 Each release section is a level 2 heading. Make sure you're always adding entries in the unreleased section at the top.
 
@@ -60,10 +75,10 @@ its related classes (e.g., FButton, FButtonStyle, FButtonController). Fixes insi
 in alphabetical order.
 
 ```yaml
- # Example: button.yaml - All FButton-related fixes in one file                                                                                                                                                                                
-   
-  version: 1                                                                                                                                                                                                                                    
-  transforms:               
+ # Example: button.yaml - All FButton-related fixes in one file
+
+  version: 1
+  transforms:
     # FButton
     - title: 'Rename FButton(onStateChange: ...) to FButton(onVariantChange: ...)'
       date: 2026-01-26
@@ -109,3 +124,8 @@ in alphabetical order.
         - kind: removeParameter
           name: 'iconStyle'
 ```
+
+## Pull Requests
+
+Always use the PR template at `.github/pull_request_template.md`. Format the description as a bulleted list, not a
+wall of text.

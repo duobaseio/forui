@@ -42,8 +42,9 @@ abstract class Entry extends StatelessWidget {
     final entryStyle = current ? style.current : style.enclosing;
 
     Widget builder(BuildContext context, Set<FTappableVariant> variants, Widget? _) {
-      final yesterday = isSelected && selected(date.yesterday) ? Radius.zero : entryStyle.radius;
-      final tomorrow = isSelected && selected(date.tomorrow) ? Radius.zero : entryStyle.radius;
+      final radius = entryStyle.borderRadius.topLeft;
+      final yesterday = isSelected && selected(date.yesterday) ? Radius.zero : radius;
+      final tomorrow = isSelected && selected(date.tomorrow) ? Radius.zero : radius;
       return dayBuilder(
         context,
         (
@@ -89,7 +90,7 @@ abstract class Entry extends StatelessWidget {
   }) {
     Widget builder(BuildContext _, Set<FTappableVariant> variants, Widget? _) => _Content(
       style: style,
-      borderRadius: .all(style.radius),
+      borderRadius: style.borderRadius,
       text: format(date),
       variants: {...variants, if (!selectable) .disabled},
       current: current,
@@ -199,11 +200,9 @@ class _Content extends StatelessWidget {
       textStyle = textStyle.copyWith(decoration: .underline);
     }
 
-    final borderColor = style.borderColor.resolve(variants);
     return DecoratedBox(
-      decoration: BoxDecoration(
-        border: borderColor == null ? null : .all(color: borderColor),
-        borderRadius: borderRadius,
+      decoration: ShapeDecoration(
+        shape: RoundedSuperellipseBorder(side: style.borderSide.resolve(variants) ?? .none, borderRadius: borderRadius),
         color: style.backgroundColor.resolve(variants),
       ),
       child: Center(child: Text(text, style: textStyle)),
@@ -228,23 +227,23 @@ class FCalendarEntryStyle with Diagnosticable, _$FCalendarEntryStyleFunctions {
   @override
   final FVariants<FTappableVariantConstraint, FTappableVariant, Color, Delta> backgroundColor;
 
-  /// The border.
+  /// The border side.
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, Color?, Delta> borderColor;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, BorderSide?, Delta> borderSide;
 
   /// The day's text style.
   @override
   final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> textStyle;
 
-  /// The entry border's radius. Defaults to `Radius.circular(4)`.
+  /// The entry border's radius.
   @override
-  final Radius radius;
+  final BorderRadius borderRadius;
 
   /// Creates a [FCalendarEntryStyle].
   FCalendarEntryStyle({
     required this.backgroundColor,
-    required this.borderColor,
+    required this.borderSide,
     required this.textStyle,
-    required this.radius,
+    required this.borderRadius,
   });
 }

@@ -32,6 +32,7 @@ mixin FItemMixin on Widget {
     FTappableVariantChangeCallback? onVariantChange,
     VoidCallback? onPress,
     VoidCallback? onLongPress,
+    VoidCallback? onDoubleTap,
     VoidCallback? onSecondaryPress,
     VoidCallback? onSecondaryLongPress,
     Map<ShortcutActivator, Intent>? shortcuts,
@@ -55,6 +56,7 @@ mixin FItemMixin on Widget {
     onVariantChange: onVariantChange,
     onPress: onPress,
     onLongPress: onLongPress,
+    onDoubleTap: onDoubleTap,
     onSecondaryPress: onSecondaryPress,
     onSecondaryLongPress: onSecondaryLongPress,
     shortcuts: shortcuts,
@@ -83,6 +85,7 @@ mixin FItemMixin on Widget {
     FTappableVariantChangeCallback? onVariantChange,
     VoidCallback? onPress,
     VoidCallback? onLongPress,
+    VoidCallback? onDoubleTap,
     VoidCallback? onSecondaryPress,
     VoidCallback? onSecondaryLongPress,
     Map<ShortcutActivator, Intent>? shortcuts,
@@ -102,6 +105,7 @@ mixin FItemMixin on Widget {
     onVariantChange: onVariantChange,
     onPress: onPress,
     onLongPress: onLongPress,
+    onDoubleTap: onDoubleTap,
     onSecondaryPress: onSecondaryPress,
     onSecondaryLongPress: onSecondaryLongPress,
     shortcuts: shortcuts,
@@ -211,6 +215,7 @@ class FItem extends StatelessWidget with FItemMixin {
   /// The item is not interactable if the following are all null:
   /// * [onPress]
   /// * [onLongPress]
+  /// * [onDoubleTap]
   /// * [onSecondaryPress]
   /// * [onSecondaryLongPress]
   final VoidCallback? onPress;
@@ -220,15 +225,20 @@ class FItem extends StatelessWidget with FItemMixin {
   /// The item is not interactable if the following are all null:
   /// * [onPress]
   /// * [onLongPress]
+  /// * [onDoubleTap]
   /// * [onSecondaryPress]
   /// * [onSecondaryLongPress]
   final VoidCallback? onLongPress;
+
+  /// {@macro forui.foundation.FTappable.onDoubleTap}
+  final VoidCallback? onDoubleTap;
 
   /// A callback for when the widget is pressed with a secondary button (usually right-click on desktop).
   ///
   /// The item is not interactable if the following are all null:
   /// * [onPress]
   /// * [onLongPress]
+  /// * [onDoubleTap]
   /// * [onSecondaryPress]
   /// * [onSecondaryLongPress]
   final VoidCallback? onSecondaryPress;
@@ -238,6 +248,7 @@ class FItem extends StatelessWidget with FItemMixin {
   /// The item is not interactable if the following are all null:
   /// * [onPress]
   /// * [onLongPress]
+  /// * [onDoubleTap]
   /// * [onSecondaryPress]
   /// * [onSecondaryLongPress]
   final VoidCallback? onSecondaryLongPress;
@@ -297,6 +308,7 @@ class FItem extends StatelessWidget with FItemMixin {
     this.onVariantChange,
     this.onPress,
     this.onLongPress,
+    this.onDoubleTap,
     this.onSecondaryPress,
     this.onSecondaryLongPress,
     this.shortcuts,
@@ -348,6 +360,7 @@ class FItem extends StatelessWidget with FItemMixin {
     this.onVariantChange,
     this.onPress,
     this.onLongPress,
+    this.onDoubleTap,
     this.onSecondaryPress,
     this.onSecondaryLongPress,
     this.shortcuts,
@@ -388,7 +401,11 @@ class FItem extends StatelessWidget with FItemMixin {
       bottom: margin.bottom + bottom + (divider == FItemDivider.none ? 0 : data.dividerWidth),
     );
 
-    if (onPress == null && onLongPress == null && onSecondaryPress == null && onSecondaryLongPress == null) {
+    if (onPress == null &&
+        onLongPress == null &&
+        onDoubleTap == null &&
+        onSecondaryPress == null &&
+        onSecondaryLongPress == null) {
       return ColoredBox(
         color: style.backgroundColor.resolve(formVariants) ?? Colors.transparent,
         child: Padding(
@@ -416,6 +433,7 @@ class FItem extends StatelessWidget with FItemMixin {
           selected: selected,
           onPress: enabled ? (onPress ?? () {}) : null,
           onLongPress: enabled ? (onLongPress ?? () {}) : null,
+          onDoubleTap: enabled ? onDoubleTap : null,
           onSecondaryPress: enabled ? (onSecondaryPress ?? () {}) : null,
           onSecondaryLongPress: enabled ? (onSecondaryLongPress ?? () {}) : null,
           shortcuts: shortcuts,
@@ -455,6 +473,7 @@ class FItem extends StatelessWidget with FItemMixin {
       ..add(ObjectFlagProperty.has('onVariantChange', onVariantChange))
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
+      ..add(ObjectFlagProperty.has('onDoubleTap', onDoubleTap))
       ..add(ObjectFlagProperty.has('onSecondaryPress', onSecondaryPress))
       ..add(ObjectFlagProperty.has('onSecondaryLongPress', onSecondaryLongPress))
       ..add(DiagnosticsProperty('shortcuts', shortcuts))
@@ -516,7 +535,7 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
 
   /// The item's decoration.
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, BoxDecoration, BoxDecorationDelta> decoration;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, Decoration, DecorationDelta> decoration;
 
   /// The default item content's style.
   @override
@@ -555,14 +574,17 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
           },
         ),
         decoration: FVariants.from(
-          BoxDecoration(color: colors.background, borderRadius: style.borderRadius),
+          ShapeDecoration(
+            shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base),
+            color: colors.background,
+          ),
           variants: {
-            [.hovered, .pressed]: .delta(color: colors.secondary),
+            [.hovered, .pressed]: .shapeDelta(color: colors.secondary),
             //
-            [.disabled]: const .delta(),
+            [.disabled]: const .shapeDelta(),
             //
-            [.selected]: .delta(color: colors.secondary),
-            [.selected.and(.disabled)]: .delta(color: colors.disable(colors.secondary)),
+            [.selected]: .shapeDelta(color: colors.secondary),
+            [.selected.and(.disabled)]: .shapeDelta(color: colors.disable(colors.secondary)),
           },
         ),
         contentStyle: .inherit(

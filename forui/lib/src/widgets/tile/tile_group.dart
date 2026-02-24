@@ -313,7 +313,14 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
           // ignore: use_decorated_box
           child: Container(
             decoration: style.decoration,
-            child: ClipRRect(borderRadius: style.decoration.borderRadius ?? .zero, child: child),
+            child: switch (style.decoration) {
+              ShapeDecoration(:final shape) => ClipPath(
+                clipper: ShapeBorderClipper(shape: shape, textDirection: Directionality.maybeOf(context)),
+                child: child,
+              ),
+              BoxDecoration(:final borderRadius?) => ClipRRect(borderRadius: borderRadius, child: child),
+              _ => child,
+            },
           ),
         ),
       ),
@@ -366,7 +373,7 @@ class FTileGroupStyleData extends InheritedWidget {
 class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
   /// The group's decoration.
   @override
-  final BoxDecoration decoration;
+  final Decoration decoration;
 
   /// The divider's style.
   @override
@@ -406,9 +413,11 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
   /// Creates a [FTileGroupStyle] that inherits from the given arguments.
   factory FTileGroupStyle.inherit({required FColors colors, required FTypography typography, required FStyle style}) =>
       .new(
-        decoration: BoxDecoration(
-          border: .all(color: colors.border, width: style.borderWidth),
-          borderRadius: style.borderRadius,
+        decoration: ShapeDecoration(
+          shape: RoundedSuperellipseBorder(
+            side: BorderSide(color: colors.border, width: style.borderWidth),
+            borderRadius: style.borderRadius.base,
+          ),
         ),
         dividerColor: .all(colors.border),
         dividerWidth: style.borderWidth,
@@ -427,7 +436,7 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
             colors: colors,
             typography: typography,
             style: style,
-          ).copyWith(decoration: .delta([.all(const .delta(border: null, borderRadius: null))])),
+          ).copyWith(decoration: .delta([.all(const .shapeDelta(shape: RoundedSuperellipseBorder()))])),
           variants: {
             [.destructive]: .delta(
               contentStyle: FItemContentStyle.inherit(

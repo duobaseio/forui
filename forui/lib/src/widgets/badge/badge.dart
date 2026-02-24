@@ -88,27 +88,27 @@ class FBadge extends StatelessWidget {
 /// The [FBadgeStyle]s.
 extension type FBadgeStyles(FVariants<FBadgeVariantConstraint, FBadgeVariant, FBadgeStyle, FBadgeStyleDelta> _)
     implements FVariants<FBadgeVariantConstraint, FBadgeVariant, FBadgeStyle, FBadgeStyleDelta> {
-  /// The default border radius for badges.
-  static const BorderRadius defaultBadgeRadius = .all(.circular(100));
-
   /// Creates a [FBadgeStyles] that inherits its properties.
   FBadgeStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         .from(
           FBadgeStyle(
-            decoration: BoxDecoration(color: colors.primary, borderRadius: FBadgeStyles.defaultBadgeRadius),
+            decoration: ShapeDecoration(
+              shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.pill),
+              color: colors.primary,
+            ),
             contentStyle: FBadgeContentStyle(
               labelTextStyle: typography.sm.copyWith(color: colors.primaryForeground, fontWeight: .w600),
             ),
           ),
           variants: {
             [.secondary]: .delta(
-              decoration: .delta(color: colors.secondary),
+              decoration: .shapeDelta(color: colors.secondary),
               contentStyle: .delta(labelTextStyle: .delta(color: colors.secondaryForeground)),
             ),
             [.destructive]: FBadgeStyle(
-              decoration: BoxDecoration(
-                borderRadius: FBadgeStyles.defaultBadgeRadius,
+              decoration: ShapeDecoration(
+                shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.pill),
                 color: colors.destructive.withValues(alpha: colors.brightness == .light ? 0.1 : 0.2),
               ),
               contentStyle: FBadgeContentStyle(
@@ -116,9 +116,12 @@ extension type FBadgeStyles(FVariants<FBadgeVariantConstraint, FBadgeVariant, FB
               ),
             ),
             [.outline]: .delta(
-              decoration: .delta(
+              decoration: .shapeDelta(
+                shape: RoundedSuperellipseBorder(
+                  side: BorderSide(color: colors.border, width: style.borderWidth),
+                  borderRadius: style.borderRadius.pill,
+                ),
                 color: colors.card,
-                border: .all(color: colors.border, width: style.borderWidth),
               ),
               contentStyle: .delta(labelTextStyle: .delta(color: colors.foreground)),
             ),
@@ -143,7 +146,7 @@ extension type FBadgeStyles(FVariants<FBadgeVariantConstraint, FBadgeVariant, FB
 final class FBadgeStyle with Diagnosticable, _$FBadgeStyleFunctions {
   /// The decoration.
   @override
-  final BoxDecoration decoration;
+  final Decoration decoration;
 
   /// The content's style.
   @override

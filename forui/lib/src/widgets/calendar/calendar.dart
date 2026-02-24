@@ -241,7 +241,7 @@ class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
 
   /// The decoration surrounding the header & picker.
   @override
-  final BoxDecoration decoration;
+  final Decoration decoration;
 
   /// The padding surrounding the header & picker. Defaults to `EdgeInsets.symmetric(horizontal: 12, vertical: 16)`.
   @override
@@ -265,7 +265,7 @@ class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
   factory FCalendarStyle.inherit({required FColors colors, required FTypography typography, required FStyle style}) =>
       FCalendarStyle(
         headerStyle: .inherit(colors: colors, typography: typography, style: style),
-        dayPickerStyle: .inherit(colors: colors, typography: typography),
+        dayPickerStyle: .inherit(colors: colors, typography: typography, style: style),
         yearMonthPickerStyle: FCalendarEntryStyle(
           backgroundColor: FVariants(
             colors.card,
@@ -275,10 +275,10 @@ class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
               [.disabled]: colors.card,
             },
           ),
-          borderColor: FVariants(
+          borderSide: FVariants<FTappableVariantConstraint, FTappableVariant, BorderSide?, Delta>(
             null,
             variants: {
-              [.focused]: colors.foreground,
+              [.focused]: BorderSide(color: colors.foreground, width: style.borderWidth),
               //
               [.disabled]: null,
             },
@@ -289,11 +289,13 @@ class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
               [.disabled]: .delta(color: colors.disable(colors.foreground)),
             },
           ),
-          radius: const .circular(8),
+          borderRadius: style.borderRadius.base,
         ),
-        decoration: BoxDecoration(
-          borderRadius: style.borderRadius,
-          border: .all(color: colors.border),
+        decoration: ShapeDecoration(
+          shape: RoundedSuperellipseBorder(
+            side: BorderSide(color: colors.border, width: style.borderWidth),
+            borderRadius: style.borderRadius.base,
+          ),
           color: colors.card,
         ),
       );

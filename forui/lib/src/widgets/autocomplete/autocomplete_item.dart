@@ -267,10 +267,13 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
       itemStyle: FItemStyle(
         backgroundColor: const .all(null),
         decoration: FVariants(
-          const BoxDecoration(),
+          const ShapeDecoration(shape: RoundedSuperellipseBorder()),
           variants: {
-            [.focused, .hovered, .pressed]: BoxDecoration(color: colors.secondary, borderRadius: style.borderRadius),
-            [.disabled]: const BoxDecoration(),
+            [.focused, .hovered, .pressed]: ShapeDecoration(
+              shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base),
+              color: colors.secondary,
+            ),
+            [.disabled]: const ShapeDecoration(shape: RoundedSuperellipseBorder()),
           },
         ),
         contentStyle:

@@ -14,7 +14,7 @@ Widget build(BuildContext context) {
     decoration: BoxDecoration(
       // {@highlight}
       border: .all(color: colors.border, width: style.borderWidth),
-      borderRadius: style.borderRadius,
+      borderRadius: style.borderRadius.base,
       color: colors.primary,
       // {@endhighlight}
     ),

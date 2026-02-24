@@ -249,7 +249,7 @@ class FSidebarData extends InheritedWidget {
 class FSidebarStyle with Diagnosticable, _$FSidebarStyleFunctions {
   /// The decoration.
   @override
-  final BoxDecoration decoration;
+  final Decoration decoration;
 
   /// An optional background filter applied to the sidebar.
   ///

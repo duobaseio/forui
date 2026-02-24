@@ -290,7 +290,10 @@ extension type FResizableStyles(
             color: colors.border,
             focusedOutlineStyle: style.focusedOutlineStyle,
             thumbStyle: FResizableDividerThumbStyle(
-              decoration: BoxDecoration(color: colors.border, borderRadius: style.borderRadius),
+              decoration: ShapeDecoration(
+                shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base),
+                color: colors.border,
+              ),
               foregroundColor: colors.foreground,
               height: 20,
               width: 10,
@@ -301,7 +304,10 @@ extension type FResizableStyles(
               color: colors.border,
               focusedOutlineStyle: style.focusedOutlineStyle,
               thumbStyle: FResizableDividerThumbStyle(
-                decoration: BoxDecoration(color: colors.border, borderRadius: style.borderRadius),
+                decoration: ShapeDecoration(
+                  shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base),
+                  color: colors.border,
+                ),
                 foregroundColor: colors.foreground,
                 height: 10,
                 width: 20,

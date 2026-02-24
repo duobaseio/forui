@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
@@ -125,10 +124,7 @@ class _FPickerState extends State<FPicker> {
     Widget picker = Stack(
       alignment: .center,
       children: [
-        Container(
-          height: selectionExtent,
-          decoration: BoxDecoration(color: style.selectionColor, borderRadius: style.selectionBorderRadius),
-        ),
+        Container(height: selectionExtent, decoration: style.selectionDecoration),
         // Syncs the controller's value with the wheel's scroll controller when the widget is updated.
         NotificationListener<ScrollMetricsNotification>(
           onNotification: (_) {

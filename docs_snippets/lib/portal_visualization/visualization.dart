@@ -74,7 +74,7 @@ class Visualization extends StatelessWidget {
     clipBehavior: .hardEdge,
     decoration: BoxDecoration(
       border: .all(color: context.theme.colors.border),
-      borderRadius: context.theme.style.borderRadius,
+      borderRadius: context.theme.style.borderRadius.base,
     ),
     padding: const .symmetric(horizontal: 75, vertical: 30),
     child: Center(

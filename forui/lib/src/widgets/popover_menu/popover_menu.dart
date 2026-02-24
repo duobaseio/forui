@@ -353,16 +353,18 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
   FPopoverMenuStyle.inherit({required super.colors, required super.style, required FTypography typography})
     : itemGroupStyle = .inherit(colors: colors, style: style, typography: typography).copyWith(
         decoration: .value(
-          BoxDecoration(
-            border: .all(color: colors.border, width: style.borderWidth),
-            borderRadius: style.borderRadius,
+          ShapeDecoration(
+            shape: RoundedSuperellipseBorder(
+              side: BorderSide(color: colors.border, width: style.borderWidth),
+              borderRadius: style.borderRadius.base,
+            ),
           ),
         ),
         itemStyles: .delta([
           .base(
             .delta(
               backgroundColor: FVariants.all(colors.card),
-              decoration: .delta([.base(.delta(color: colors.card))]),
+              decoration: .delta([.base(.shapeDelta(color: colors.card))]),
               contentStyle: FItemContentStyle.inherit(
                 colors: colors,
                 typography: typography,

@@ -206,9 +206,9 @@ class _FSidebarItemState extends State<FSidebarItem> with TickerProviderStateMix
         onVariantChange: widget.onVariantChange,
         builder: (_, variants, child) => Container(
           padding: _style!.padding,
-          decoration: BoxDecoration(
+          decoration: ShapeDecoration(
+            shape: RoundedSuperellipseBorder(borderRadius: _style!.borderRadius),
             color: _style!.backgroundColor.resolve(variants),
-            borderRadius: _style!.borderRadius,
           ),
           child: Row(
             spacing: _style!.collapsibleIconSpacing,
@@ -365,7 +365,7 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
             [.disabled]: colors.background,
           },
         ),
-        borderRadius: style.borderRadius,
+        borderRadius: style.borderRadius.base,
         tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
         focusedOutlineStyle: style.focusedOutlineStyle.copyWith(spacing: 0),
       );

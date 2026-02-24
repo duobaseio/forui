@@ -46,13 +46,9 @@ class FPickerStyle with Diagnosticable, _$FPickerStyleFunctions {
   @override
   final double selectionHeightAdjustment;
 
-  /// The selection's border radius.
+  /// The selection's decoration.
   @override
-  final BorderRadiusGeometry selectionBorderRadius;
-
-  /// The selection's color.
-  @override
-  final Color selectionColor;
+  final Decoration selectionDecoration;
 
   /// The focused outline style.
   @override
@@ -61,8 +57,7 @@ class FPickerStyle with Diagnosticable, _$FPickerStyleFunctions {
   /// Creates a [FPickerStyle].
   const FPickerStyle({
     required this.textStyle,
-    required this.selectionBorderRadius,
-    required this.selectionColor,
+    required this.selectionDecoration,
     required this.focusedOutlineStyle,
     this.diameterRatio = 1.07,
     this.squeeze = 1,
@@ -87,8 +82,10 @@ class FPickerStyle with Diagnosticable, _$FPickerStyleFunctions {
   FPickerStyle.inherit({required FColors colors, required FStyle style, required FTypography typography})
     : this(
         textStyle: typography.base.copyWith(fontWeight: .w500),
-        selectionBorderRadius: style.borderRadius,
-        selectionColor: colors.muted,
+        selectionDecoration: ShapeDecoration(
+          shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base),
+          color: colors.muted,
+        ),
         focusedOutlineStyle: style.focusedOutlineStyle,
       );
 }

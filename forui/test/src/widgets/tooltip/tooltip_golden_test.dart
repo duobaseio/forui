@@ -56,7 +56,7 @@ void main() {
                   decoration: .value(
                     BoxDecoration(
                       color: theme.data.colors.background.withValues(alpha: 0.5),
-                      borderRadius: theme.data.style.borderRadius,
+                      borderRadius: theme.data.style.borderRadius.base,
                       border: .all(width: theme.data.style.borderWidth, color: theme.data.colors.border),
                     ),
                   ),

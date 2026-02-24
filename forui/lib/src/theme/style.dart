@@ -27,9 +27,9 @@ class FStyle with Diagnosticable, _$FStyleFunctions {
   @override
   final IconThemeData iconStyle;
 
-  /// The border radius. Defaults to `FLerpBorderRadius.circular(8)`.
+  /// The border radius.
   @override
-  final BorderRadius borderRadius;
+  final FBorderRadius borderRadius;
 
   /// The border width. Defaults to 1.
   @override
@@ -56,18 +56,82 @@ class FStyle with Diagnosticable, _$FStyleFunctions {
     required this.focusedOutlineStyle,
     required this.iconStyle,
     required this.tappableStyle,
-    this.borderRadius = const FLerpBorderRadius.all(.circular(8), min: 24),
+    this.borderRadius = const FBorderRadius(),
     this.borderWidth = 1,
     this.pagePadding = const .symmetric(vertical: 8, horizontal: 12),
     this.shadow = const [BoxShadow(color: Color(0x0d000000), offset: Offset(0, 1), blurRadius: 2)],
   });
 
   /// Creates an [FStyle] that inherits its properties.
-  FStyle.inherit({required FColors colors, required FTypography typography})
-    : this(
-        formFieldStyle: .inherit(colors: colors, typography: typography),
-        focusedOutlineStyle: FFocusedOutlineStyle(color: colors.primary, borderRadius: const .all(.circular(8))),
-        iconStyle: IconThemeData(color: colors.foreground, size: 20),
-        tappableStyle: FTappableStyle(),
-      );
+  factory FStyle.inherit({required FColors colors, required FTypography typography}) {
+    const borderRadius = FBorderRadius();
+    return FStyle(
+      formFieldStyle: .inherit(colors: colors, typography: typography),
+      focusedOutlineStyle: FFocusedOutlineStyle(color: colors.primary, borderRadius: borderRadius.base),
+      iconStyle: IconThemeData(color: colors.foreground, size: 20),
+      tappableStyle: FTappableStyle(),
+      borderRadius: borderRadius, // ignore: avoid_redundant_argument_values
+    );
+  }
+}
+
+/// Provides function to access common visual properties from a [Decoration].
+///
+/// This is a best-effort conversion. Only [BoxDecoration] and [ShapeDecoration] are supported, all other [Decoration]s
+/// will always return null.
+extension Decorations on Decoration {
+  /// The background color, or null if the decoration doesn't define one.
+  Color? get color => switch (this) {
+    BoxDecoration(:final color) || ShapeDecoration(:final color) => color,
+    _ => null,
+  };
+
+  /// The [DecorationImage], or null if the decoration doesn't define one.
+  DecorationImage? get image => switch (this) {
+    BoxDecoration(:final image) || ShapeDecoration(:final image) => image,
+    _ => null,
+  };
+
+  /// The shape border, or null if one can't be derived.
+  ShapeBorder? get border => switch (this) {
+    BoxDecoration(shape: .circle, :final border) => CircleBorder(side: border?.top ?? .none),
+    BoxDecoration(:final borderRadius, :final border) => RoundedRectangleBorder(
+      borderRadius: borderRadius ?? .zero,
+      side: border?.top ?? .none,
+    ),
+    ShapeDecoration(:final shape) => shape,
+    _ => null,
+  };
+
+  /// The [BorderRadiusGeometry], or null if the decoration doesn't define one.
+  BorderRadiusGeometry? get borderRadius => switch (this) {
+    BoxDecoration(:final borderRadius) => borderRadius,
+    ShapeDecoration(:final shape) => switch (shape) {
+      BeveledRectangleBorder(:final borderRadius) ||
+      ContinuousRectangleBorder(:final borderRadius) ||
+      RoundedRectangleBorder(:final borderRadius) ||
+      RoundedSuperellipseBorder(:final borderRadius) => borderRadius,
+      _ => null,
+    },
+    _ => null,
+  };
+
+  /// The list of shadows, or null if the decoration doesn't define one.
+  List<BoxShadow>? get shadows => switch (this) {
+    BoxDecoration(:final boxShadow) => boxShadow,
+    ShapeDecoration(:final shadows) => shadows,
+    _ => null,
+  };
+
+  /// The [Gradient], or null if the decoration doesn't define one.
+  Gradient? get gradient => switch (this) {
+    BoxDecoration(:final gradient) || ShapeDecoration(:final gradient) => gradient,
+    _ => null,
+  };
+
+  /// The [BlendMode] applied to the color or gradient background, or null if the decoration doesn't define one.
+  BlendMode? get backgroundBlendMode => switch (this) {
+    BoxDecoration(:final backgroundBlendMode) => backgroundBlendMode,
+    _ => null,
+  };
 }

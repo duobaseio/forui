@@ -499,7 +499,7 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
 class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
   /// The popover's decoration.
   @override
-  final BoxDecoration decoration;
+  final Decoration decoration;
 
   /// {@template forui.widgets.FPopoverStyle.barrierFilter}
   /// An optional callback that takes the current animation transition value (0.0 to 1.0) and returns an [ImageFilter]
@@ -571,10 +571,12 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
   /// Creates a [FPopoverStyle] that inherits its properties.
   FPopoverStyle.inherit({required FColors colors, required FStyle style})
     : this(
-        decoration: BoxDecoration(
-          borderRadius: style.borderRadius,
-          border: .all(width: style.borderWidth, color: colors.border),
-          boxShadow: style.shadow,
+        decoration: ShapeDecoration(
+          shape: RoundedSuperellipseBorder(
+            side: BorderSide(color: colors.border, width: style.borderWidth),
+            borderRadius: style.borderRadius.base,
+          ),
+          shadows: style.shadow,
           color: colors.card,
         ),
       );

@@ -126,11 +126,15 @@ class FTile extends StatelessWidget with FTileMixin {
   /// The tile is not hoverable if both [onPress] and [onLongPress] are null.
   final VoidCallback? onLongPress;
 
+  /// {@macro forui.foundation.FTappable.onDoubleTap}
+  final VoidCallback? onDoubleTap;
+
   /// A callback for when the widget is pressed with a secondary button (usually right-click on desktop).
   ///
   /// The item is not interactable if the following are all null:
   /// * [onPress]
   /// * [onLongPress]
+  /// * [onDoubleTap]
   /// * [onSecondaryPress]
   /// * [onSecondaryLongPress]
   final VoidCallback? onSecondaryPress;
@@ -140,6 +144,7 @@ class FTile extends StatelessWidget with FTileMixin {
   /// The item is not interactable if the following are all null:
   /// * [onPress]
   /// * [onLongPress]
+  /// * [onDoubleTap]
   /// * [onSecondaryPress]
   /// * [onSecondaryLongPress]
   final VoidCallback? onSecondaryLongPress;
@@ -183,6 +188,7 @@ class FTile extends StatelessWidget with FTileMixin {
     this.onVariantChange,
     this.onPress,
     this.onLongPress,
+    this.onDoubleTap,
     this.onSecondaryPress,
     this.onSecondaryLongPress,
     this.shortcuts,
@@ -206,6 +212,7 @@ class FTile extends StatelessWidget with FTileMixin {
          onVariantChange: onVariantChange,
          onPress: onPress,
          onLongPress: onLongPress,
+         onDoubleTap: onDoubleTap,
          onSecondaryPress: onSecondaryPress,
          onSecondaryLongPress: onSecondaryLongPress,
          shortcuts: shortcuts,
@@ -242,6 +249,7 @@ class FTile extends StatelessWidget with FTileMixin {
     this.onVariantChange,
     this.onPress,
     this.onLongPress,
+    this.onDoubleTap,
     this.onSecondaryPress,
     this.onSecondaryLongPress,
     this.shortcuts,
@@ -261,6 +269,7 @@ class FTile extends StatelessWidget with FTileMixin {
          onVariantChange: onVariantChange,
          onPress: onPress,
          onLongPress: onLongPress,
+         onDoubleTap: onDoubleTap,
          onSecondaryPress: onSecondaryPress,
          onSecondaryLongPress: onSecondaryLongPress,
          shortcuts: shortcuts,
@@ -295,6 +304,7 @@ class FTile extends StatelessWidget with FTileMixin {
       ..add(ObjectFlagProperty.has('onVariantChange', onVariantChange))
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
+      ..add(ObjectFlagProperty.has('onDoubleTap', onDoubleTap))
       ..add(ObjectFlagProperty.has('onSecondaryPress', onSecondaryPress))
       ..add(ObjectFlagProperty.has('onSecondaryLongPress', onSecondaryLongPress))
       ..add(DiagnosticsProperty('shortcuts', shortcuts))
@@ -360,15 +370,17 @@ class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
     : this(
         backgroundColor: .all(colors.card),
         decoration: FVariants.from(
-          BoxDecoration(
+          ShapeDecoration(
+            shape: RoundedSuperellipseBorder(
+              side: BorderSide(color: colors.border, width: style.borderWidth),
+              borderRadius: style.borderRadius.base,
+            ),
             color: colors.card,
-            border: .all(color: colors.border),
-            borderRadius: style.borderRadius,
           ),
           variants: {
-            [.hovered, .pressed]: .delta(color: colors.secondary),
+            [.hovered, .pressed]: .shapeDelta(color: colors.secondary),
             //
-            [.disabled]: .delta(color: colors.disable(colors.secondary)),
+            [.disabled]: .shapeDelta(color: colors.disable(colors.secondary)),
           },
         ),
         contentStyle: FTileContentStyle.inherit(
@@ -402,7 +414,7 @@ class FTileContentStyle extends FItemContentStyle with _$FTileContentStyleFuncti
     required super.subtitleTextStyle,
     required super.detailsTextStyle,
     required super.suffixIconStyle,
-    super.padding = const EdgeInsets.fromLTRB(15, 13, 10, 13),
+    super.padding = const .fromLTRB(15, 13, 10, 13),
     super.prefixIconSpacing,
     super.titleSpacing,
     super.middleSpacing,
@@ -459,7 +471,7 @@ class FRawTileContentStyle extends FRawItemContentStyle with _$FRawTileContentSt
   FRawTileContentStyle({
     required super.prefixIconStyle,
     required super.childTextStyle,
-    super.padding = const EdgeInsets.fromLTRB(15, 13, 10, 13),
+    super.padding = const .fromLTRB(15, 13, 10, 13),
     super.prefixIconSpacing,
   });
 

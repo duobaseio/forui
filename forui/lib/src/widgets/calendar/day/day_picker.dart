@@ -228,7 +228,11 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
        assert(0 < tileSize, 'tileSize ($tileSize) must be positive');
 
   /// Creates a [FCalendarDayPickerStyle] that inherits its properties.
-  factory FCalendarDayPickerStyle.inherit({required FColors colors, required FTypography typography}) {
+  factory FCalendarDayPickerStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+  }) {
     final backgroundColor = FVariants<FTappableVariantConstraint, FTappableVariant, Color, Delta>(
       colors.card,
       variants: {
@@ -238,10 +242,10 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
         [.selected.and(.disabled)]: colors.disable(colors.primary),
       },
     );
-    final border = FVariants<FTappableVariantConstraint, FTappableVariant, Color?, Delta>(
+    final border = FVariants<FTappableVariantConstraint, FTappableVariant, BorderSide?, Delta>(
       null,
       variants: {
-        [.focused]: colors.primary,
+        [.focused]: BorderSide(color: colors.primary, width: style.borderWidth),
         //
         [.disabled.and(.selected).and(.focused)]: null,
         [.disabled.and(.focused)]: null,
@@ -252,7 +256,7 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
       headerTextStyle: typography.xs.copyWith(color: colors.mutedForeground),
       current: FCalendarEntryStyle(
         backgroundColor: backgroundColor,
-        borderColor: border,
+        borderSide: border,
         textStyle: FVariants.from(
           typography.base.copyWith(color: colors.foreground, fontWeight: .w500),
           variants: {
@@ -262,11 +266,11 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
             [.selected.and(.disabled)]: .delta(color: colors.disable(colors.primaryForeground)),
           },
         ),
-        radius: const .circular(4),
+        borderRadius: style.borderRadius.base,
       ),
       enclosing: FCalendarEntryStyle(
         backgroundColor: backgroundColor,
-        borderColor: border,
+        borderSide: border,
         textStyle: FVariants.from(
           typography.base.copyWith(color: colors.mutedForeground, fontWeight: .w500),
           variants: {
@@ -276,7 +280,7 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
             [.selected.and(.disabled)]: .delta(color: colors.disable(colors.primaryForeground)),
           },
         ),
-        radius: const .circular(4),
+        borderRadius: style.borderRadius.base,
       ),
     );
   }

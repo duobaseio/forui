@@ -402,10 +402,14 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
         // ignore: use_decorated_box
         child: Container(
           decoration: style.decoration,
-          child: ClipRRect(
-            borderRadius: style.decoration.borderRadius?.resolve(Directionality.maybeOf(context) ?? .ltr) ?? .zero,
-            child: child,
-          ),
+          child: switch (style.decoration) {
+            ShapeDecoration(:final shape) => ClipPath(
+              clipper: ShapeBorderClipper(shape: shape, textDirection: Directionality.maybeOf(context)),
+              child: child,
+            ),
+            BoxDecoration(:final borderRadius?) => ClipRRect(borderRadius: borderRadius, child: child),
+            _ => child,
+          },
         ),
       ),
     );
@@ -457,7 +461,7 @@ class FItemGroupStyleData extends InheritedWidget {
 class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
   /// The group's decoration.
   @override
-  final BoxDecoration decoration;
+  final Decoration decoration;
 
   /// The vertical spacing at the top and bottom of each group. Defaults to 4.
   @override
@@ -483,17 +487,18 @@ class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
 
   /// Creates a [FItemGroupStyle].
   FItemGroupStyle({
+    required this.decoration,
     required this.dividerColor,
     required this.dividerWidth,
     required this.itemStyles,
     this.slideableItems = const .all(true),
-    this.decoration = const BoxDecoration(),
     this.spacing = 4,
   });
 
   /// Creates a [FItemGroupStyle] that inherits from the given arguments.
   FItemGroupStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
+        decoration: ShapeDecoration(shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base)),
         dividerColor: .all(colors.border),
         dividerWidth: style.borderWidth,
         slideableItems: const .all(true),

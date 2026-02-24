@@ -8,10 +8,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-/// A set of colors that is part of a [FThemeData]. It is used to configure the color properties of Forui widgets.
-///
-/// These properties are not used directly by Forui widgets. Instead, they are the defaults for the corresponding colors
-/// of widget styles configured via `inherit(...)` constructors.
+/// The color tokens.
 ///
 /// The main color groups in this scheme are [primary], [secondary], [muted], [destructive], and [error].
 /// * Primary colors are used for key widgets across the UI.

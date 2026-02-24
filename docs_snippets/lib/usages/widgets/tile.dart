@@ -17,6 +17,7 @@ final tile = FTile(
   actions: null,
   // {@endcategory}
   // {@category "Callbacks"}
+  onDoubleTap: () {},
   onLongPress: () {},
   onSecondaryPress: () {},
   onSecondaryLongPress: () {},
@@ -49,6 +50,7 @@ final tileRaw = FTile.raw(
   actions: null,
   // {@endcategory}
   // {@category "Callbacks"}
+  onDoubleTap: () {},
   onLongPress: () {},
   onSecondaryPress: () {},
   onSecondaryLongPress: () {},

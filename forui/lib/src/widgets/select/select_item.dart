@@ -280,11 +280,14 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
       itemStyle: FItemStyle(
         backgroundColor: const .all(null),
         decoration: FVariants.from(
-          const BoxDecoration(),
+          const ShapeDecoration(shape: RoundedSuperellipseBorder()),
           variants: {
-            [.focused, .hovered, .pressed]: .delta(color: colors.secondary, borderRadius: style.borderRadius),
+            [.focused, .hovered, .pressed]: .shapeDelta(
+              shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base),
+              color: colors.secondary,
+            ),
             //
-            [.disabled]: const .delta(),
+            [.disabled]: const .shapeDelta(),
           },
         ),
         contentStyle:
