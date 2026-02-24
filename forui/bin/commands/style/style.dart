@@ -203,7 +203,7 @@ enum Style {
     null,
     <String>['item-group', 'itemgroup'],
     <String>['FItemGroupStyle', 'FItemStyles', 'FItemContentStyle', 'FRawItemContentStyle'],
-    'FItemGroupStyle itemGroupStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FItemGroupStyle(\n  decoration: ShapeDecoration(\n    shape: RoundedRectangleBorder(borderRadius: style.borderRadius.base),\n  ),\n  dividerColor: .all(colors.border),\n  dividerWidth: style.borderWidth,\n  slideableItems: const .all(true),\n  itemStyles: _itemStyles(colors: colors, typography: typography, style: style),\n  spacing: 4,\n);\n',
+    'FItemGroupStyle itemGroupStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FItemGroupStyle(\n  decoration: ShapeDecoration(\n    shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base),\n  ),\n  dividerColor: .all(colors.border),\n  dividerWidth: style.borderWidth,\n  slideableItems: const .all(true),\n  itemStyles: _itemStyles(colors: colors, typography: typography, style: style),\n  spacing: 4,\n);\n',
   ),
   fitemstyle(
     'FItemStyle',
