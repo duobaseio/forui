@@ -14,7 +14,7 @@ class AlertPrimaryPage extends Example {
   @override
   Widget example(BuildContext _) => const FAlert(
     // {@highlight}
-    variant: null,
+    variant: .primary,
     // {@endhighlight}
     title: Text('Heads Up!'),
     subtitle: Text('You can add components to your app using the cli.'),

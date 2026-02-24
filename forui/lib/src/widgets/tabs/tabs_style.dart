@@ -70,7 +70,7 @@ class FTabsStyle with Diagnosticable, _$FTabsStyleFunctions {
         decoration: ShapeDecoration(
           shape: RoundedSuperellipseBorder(
             side: BorderSide(color: colors.muted, width: style.borderWidth),
-            borderRadius: style.borderRadius.base,
+            borderRadius: style.borderRadius.md,
           ),
           color: colors.muted,
         ),
@@ -85,7 +85,7 @@ class FTabsStyle with Diagnosticable, _$FTabsStyleFunctions {
           },
         ),
         indicatorDecoration: ShapeDecoration(
-          shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base),
+          shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
           color: colors.background,
         ),
         focusedOutlineStyle: style.focusedOutlineStyle,

@@ -218,14 +218,15 @@ class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
   }) {
     final focusedShape = RoundedSuperellipseBorder(
       side: BorderSide(color: colors.primary, width: style.borderWidth),
-      borderRadius: style.borderRadius.base,
+      borderRadius: style.borderRadius.md,
     );
+
     return .new(
       decoration: FVariants.from(
         ShapeDecoration(
           shape: RoundedSuperellipseBorder(
             side: BorderSide(color: colors.border, width: style.borderWidth),
-            borderRadius: style.borderRadius.base,
+            borderRadius: style.borderRadius.md,
           ),
           color: colors.card,
         ),
@@ -242,12 +243,12 @@ class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
           ),
           //
           [.selected]: .shapeDelta(
-            shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base),
+            shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
             color: colors.primary,
           ),
           [.selected.and(.focused)]: .shapeDelta(color: colors.primary, shape: focusedShape),
           [.selected.and(.hovered), .selected.and(.pressed)]: .shapeDelta(
-            shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base),
+            shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
             color: colors.hover(colors.primary),
           ),
           [.selected.and(.hovered).and(.focused), .selected.and(.pressed).and(.focused)]: .shapeDelta(

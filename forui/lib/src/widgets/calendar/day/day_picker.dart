@@ -258,7 +258,7 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
         backgroundColor: backgroundColor,
         borderSide: border,
         textStyle: FVariants.from(
-          typography.base.copyWith(color: colors.foreground, fontWeight: .w500),
+          typography.md.copyWith(color: colors.foreground, fontWeight: .w500),
           variants: {
             [.disabled]: .delta(color: colors.disable(colors.foreground)),
             //
@@ -266,13 +266,13 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
             [.selected.and(.disabled)]: .delta(color: colors.disable(colors.primaryForeground)),
           },
         ),
-        borderRadius: style.borderRadius.base,
+        borderRadius: style.borderRadius.md,
       ),
       enclosing: FCalendarEntryStyle(
         backgroundColor: backgroundColor,
         borderSide: border,
         textStyle: FVariants.from(
-          typography.base.copyWith(color: colors.mutedForeground, fontWeight: .w500),
+          typography.md.copyWith(color: colors.mutedForeground, fontWeight: .w500),
           variants: {
             [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
             //
@@ -280,7 +280,7 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
             [.selected.and(.disabled)]: .delta(color: colors.disable(colors.primaryForeground)),
           },
         ),
-        borderRadius: style.borderRadius.base,
+        borderRadius: style.borderRadius.md,
       ),
     );
   }

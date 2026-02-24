@@ -6,7 +6,7 @@ import 'package:forui/forui.dart';
 
 const alert = FAlert(
   // {@category "Variant"}
-  variant: null,
+  variant: .primary,
   // {@endcategory}
   // {@category "Core"}
   style: .context(),
@@ -16,9 +16,9 @@ const alert = FAlert(
   // {@endcategory}
 );
 
-// {@category "Variant" "`Primary)`"}
+// {@category "Variant" "`Primary`"}
 /// The alert's primary variant.
-const FAlertVariant? primary = null;
+const FAlertVariant primary = .primary;
 
 // {@category "Variant" "`Destructive`"}
 /// The alert's destructive variant.

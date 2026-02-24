@@ -200,7 +200,7 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
   FAccordionStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         titleTextStyle: FVariants.from(
-          typography.base.copyWith(fontWeight: .w500, color: colors.foreground),
+          typography.md.copyWith(fontWeight: .w500, color: colors.foreground),
           variants: {
             [.hovered, .pressed]: .delta(decoration: () => .underline),
           },

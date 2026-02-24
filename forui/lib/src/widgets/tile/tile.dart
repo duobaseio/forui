@@ -52,7 +52,8 @@ class FTile extends StatelessWidget with FTileMixin {
   /// The variants used to resolve the style from [FTileStyles].
   ///
   /// Defaults to an empty set, which resolves to the base (primary) style. The current platform variant is automatically
-  /// included during style resolution. To change the platform variant, update the enclosing
+  /// included during style
+  /// resolution. To change the platform variant, update the enclosing
   /// [FTheme.platform]/[FAdaptiveScope.platform].
   ///
   /// For example, to create a destructive tile:
@@ -316,32 +317,36 @@ class FTile extends StatelessWidget with FTileMixin {
 extension type FTileStyles(FVariants<FItemVariantConstraint, FItemVariant, FTileStyle, FTileStyleDelta> _)
     implements FVariants<FItemVariantConstraint, FItemVariant, FTileStyle, FTileStyleDelta> {
   /// Creates a [FTileStyles] that inherits its properties.
-  FTileStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        .from(
-          .inherit(colors: colors, typography: typography, style: style),
-          variants: {
-            [.destructive]: .delta(
-              contentStyle: FTileContentStyle.inherit(
-                colors: colors,
-                typography: typography,
-                prefix: colors.destructive,
-                foreground: colors.destructive,
-                mutedForeground: colors.destructive,
-              ),
-              rawItemContentStyle: FRawTileContentStyle.inherit(
-                colors: colors,
-                typography: typography,
-                prefix: colors.destructive,
-                color: colors.destructive,
-              ),
+  factory FTileStyles.inherit({required FColors colors, required FTypography typography, required FStyle style}) {
+    final primary = FTileStyle.inherit(colors: colors, typography: typography, style: style);
+
+    return FTileStyles(
+      FVariants.from(
+        primary,
+        variants: {
+          [.primary]: primary,
+          [.destructive]: .delta(
+            contentStyle: FTileContentStyle.inherit(
+              colors: colors,
+              typography: typography,
+              prefix: colors.destructive,
+              foreground: colors.destructive,
+              mutedForeground: colors.destructive,
             ),
-          },
-        ),
-      );
+            rawItemContentStyle: FRawTileContentStyle.inherit(
+              colors: colors,
+              typography: typography,
+              prefix: colors.destructive,
+              color: colors.destructive,
+            ),
+          ),
+        },
+      ),
+    );
+  }
 
   /// The primary tile style.
-  FTileStyle get primary => base;
+  FTileStyle get primary => resolve({FItemVariant.primary});
 
   /// The destructive tile style.
   FTileStyle get destructive => resolve({FItemVariant.destructive});
@@ -373,7 +378,7 @@ class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
           ShapeDecoration(
             shape: RoundedSuperellipseBorder(
               side: BorderSide(color: colors.border, width: style.borderWidth),
-              borderRadius: style.borderRadius.base,
+              borderRadius: style.borderRadius.md,
             ),
             color: colors.card,
           ),
@@ -438,7 +443,7 @@ class FTileContentStyle extends FItemContentStyle with _$FTileContentStyleFuncti
         },
       ),
       titleTextStyle: FVariants.from(
-        typography.base.copyWith(color: foreground),
+        typography.md.copyWith(color: foreground),
         variants: {
           [.disabled]: .delta(color: colors.disable(foreground)),
         },
@@ -450,7 +455,7 @@ class FTileContentStyle extends FItemContentStyle with _$FTileContentStyleFuncti
         },
       ),
       detailsTextStyle: FVariants.from(
-        typography.base.copyWith(color: mutedForeground),
+        typography.md.copyWith(color: mutedForeground),
         variants: {
           [.disabled]: .delta(color: disabledMutedForeground),
         },
@@ -489,9 +494,9 @@ class FRawTileContentStyle extends FRawItemContentStyle with _$FRawTileContentSt
            },
          ),
          childTextStyle: FVariants(
-           typography.base.copyWith(color: color),
+           typography.md.copyWith(color: color),
            variants: {
-             [.disabled]: typography.base.copyWith(color: colors.disable(color)),
+             [.disabled]: typography.md.copyWith(color: colors.disable(color)),
            },
          ),
        );

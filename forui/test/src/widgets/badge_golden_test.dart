@@ -18,7 +18,7 @@ void main() {
 
   for (final theme in TestScaffold.themes) {
     for (final (name, variant) in [
-      ('primary', null),
+      ('primary', FBadgeVariant.primary),
       ('secondary', FBadgeVariant.secondary),
       ('destructive', FBadgeVariant.destructive),
       ('outline', FBadgeVariant.outline),

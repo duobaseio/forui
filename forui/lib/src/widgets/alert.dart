@@ -7,7 +7,7 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
 import 'package:forui/src/theme/variant.dart';
 
-@Variants('FAlert', {'destructive': (2, 'The destructive alert style.')})
+@Variants('FAlert', {'primary': (1, 'The primary alert style.'), 'destructive': (2, 'The destructive alert style.')})
 part 'alert.design.dart';
 
 /// A visual element displaying status information (info, warning, success, or error).
@@ -20,7 +20,7 @@ part 'alert.design.dart';
 class FAlert extends StatelessWidget {
   /// The variants used to resolve the style from [FAlertStyles].
   ///
-  /// Defaults to the base (primary) style. The current platform variant is automatically included during style
+  /// Defaults to [FAlertVariant.primary]. The current platform variant is automatically included during style
   /// resolution. To change the platform variant, update the enclosing [FTheme.platform]/[FAdaptiveScope.platform].
   ///
   /// For example, to create a destructive alert:
@@ -30,7 +30,7 @@ class FAlert extends StatelessWidget {
   ///  title: Text('This is a destructive alert'),
   /// )
   ///  ```
-  final FAlertVariant? variant;
+  final FAlertVariant variant;
 
   /// The style delta applied to the style resolved by [variant].
   ///
@@ -74,14 +74,14 @@ class FAlert extends StatelessWidget {
     required this.title,
     this.icon = const Icon(FIcons.circleAlert),
     this.subtitle,
-    this.variant,
+    this.variant = .primary,
     this.style = const .context(),
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style(context.theme.alertStyles.resolve({?variant, context.platformVariant}));
+    final style = this.style(context.theme.alertStyles.resolve({variant, context.platformVariant}));
     return DecoratedBox(
       decoration: style.decoration,
       child: Padding(
@@ -131,33 +131,37 @@ class FAlert extends StatelessWidget {
 extension type FAlertStyles(FVariants<FAlertVariantConstraint, FAlertVariant, FAlertStyle, FAlertStyleDelta> _)
     implements FVariants<FAlertVariantConstraint, FAlertVariant, FAlertStyle, FAlertStyleDelta> {
   /// Creates a [FAlertStyles] that inherits its properties.
-  FAlertStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        .from(
-          FAlertStyle(
-            iconStyle: IconThemeData(color: colors.foreground, size: 20),
-            titleTextStyle: typography.base.copyWith(fontWeight: .w500, color: colors.foreground, height: 1.2),
-            subtitleTextStyle: typography.sm.copyWith(color: colors.mutedForeground),
-            decoration: ShapeDecoration(
-              shape: RoundedSuperellipseBorder(
-                side: BorderSide(color: colors.border, width: style.borderWidth),
-                borderRadius: style.borderRadius.base,
-              ),
-              color: colors.card,
-            ),
-          ),
-          variants: {
-            [.destructive]: .delta(
-              iconStyle: .delta(color: colors.destructive),
-              titleTextStyle: .delta(color: colors.destructive),
-              subtitleTextStyle: .delta(color: colors.destructive),
-            ),
-          },
+  factory FAlertStyles.inherit({required FColors colors, required FTypography typography, required FStyle style}) {
+    final primary = FAlertStyle(
+      iconStyle: IconThemeData(color: colors.foreground, size: 20),
+      titleTextStyle: typography.md.copyWith(fontWeight: .w500, color: colors.foreground, height: 1.2),
+      subtitleTextStyle: typography.sm.copyWith(color: colors.mutedForeground),
+      decoration: ShapeDecoration(
+        shape: RoundedSuperellipseBorder(
+          side: BorderSide(color: colors.border, width: style.borderWidth),
+          borderRadius: style.borderRadius.md,
         ),
-      );
+        color: colors.card,
+      ),
+    );
+
+    return FAlertStyles(
+      FVariants.from(
+        primary,
+        variants: {
+          [.primary]: const .delta(),
+          [.destructive]: .delta(
+            iconStyle: .delta(color: colors.destructive),
+            titleTextStyle: .delta(color: colors.destructive),
+            subtitleTextStyle: .delta(color: colors.destructive),
+          ),
+        },
+      ),
+    );
+  }
 
   /// The primary alert style.
-  FAlertStyle get primary => base;
+  FAlertStyle get primary => resolve({FAlertVariant.primary});
 
   /// The destructive alert style.
   FAlertStyle get destructive => resolve({FAlertVariant.destructive});

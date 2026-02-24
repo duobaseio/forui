@@ -9,7 +9,10 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
 import 'package:forui/src/theme/variant.dart';
 
-@Variants('FSliderAxis', {'vertical': (1, 'The vertical slider variant.')})
+@Variants('FSliderAxis', {
+  'horizontal': (1, 'The horizontal slider variant.'),
+  'vertical': (1, 'The vertical slider variant.'),
+})
 @Variants('FSlider', {
   'disabled': (2, 'The semantic variant when this widget is disabled and cannot be interacted with.'),
 })
@@ -21,41 +24,45 @@ extension type FSliderStyles(
 )
     implements FVariants<FSliderAxisVariantConstraint, FSliderAxisVariant, FSliderStyle, FSliderStyleDelta> {
   /// Creates a [FSliderStyles] that inherits its properties.
-  FSliderStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        .from(
-          .inherit(
-            colors: colors,
-            typography: typography,
-            style: style,
-            labelAnchor: .topCenter,
-            labelOffset: 10,
-            descriptionPadding: const .only(top: 10),
-            childPadding: const .only(top: 10, bottom: 20, left: 10, right: 10),
+  factory FSliderStyles.inherit({required FColors colors, required FTypography typography, required FStyle style}) {
+    final base = FSliderStyle.inherit(
+      colors: colors,
+      typography: typography,
+      style: style,
+      labelAnchor: .topCenter,
+      labelOffset: 10,
+      descriptionPadding: const .only(top: 10),
+      childPadding: const .only(top: 10, bottom: 20, left: 10, right: 10),
+    );
+
+    return FSliderStyles(
+      .from(
+        base,
+        variants: {
+          [.horizontal]: base,
+          [.horizontal.and(.touch)]: const .delta(thumbSize: 25),
+          [.vertical]: const .delta(
+            markStyle: .delta(labelAnchor: .centerRight, labelOffset: -10),
+            tooltipTipAnchor: .centerLeft,
+            tooltipThumbAnchor: .centerRight,
+            descriptionPadding: .value(.only(top: 5)),
+            childPadding: .value(.all(10)),
           ),
-          variants: {
-            [.touch]: const .delta(thumbSize: 25),
-            [.vertical]: const .delta(
-              markStyle: .delta(labelAnchor: .centerRight, labelOffset: -10),
-              tooltipTipAnchor: .centerLeft,
-              tooltipThumbAnchor: .centerRight,
-              descriptionPadding: .value(.only(top: 5)),
-              childPadding: .value(.all(10)),
-            ),
-            [.vertical.and(.touch)]: const .delta(
-              markStyle: .delta(labelAnchor: .centerRight, labelOffset: -10),
-              tooltipTipAnchor: .bottomCenter,
-              tooltipThumbAnchor: .topCenter,
-              thumbSize: 25,
-              descriptionPadding: .value(.only(top: 5)),
-              childPadding: .value(.all(10)),
-            ),
-          },
-        ),
-      );
+          [.vertical.and(.touch)]: const .delta(
+            markStyle: .delta(labelAnchor: .centerRight, labelOffset: -10),
+            tooltipTipAnchor: .bottomCenter,
+            tooltipThumbAnchor: .topCenter,
+            thumbSize: 25,
+            descriptionPadding: .value(.only(top: 5)),
+            childPadding: .value(.all(10)),
+          ),
+        },
+      ),
+    );
+  }
 
   /// The horizontal slider style.
-  FSliderStyle get horizontal => base;
+  FSliderStyle get horizontal => resolve({FSliderAxisVariant.horizontal});
 
   /// The vertical slider style.
   FSliderStyle get vertical => resolve({FSliderAxisVariant.vertical});

@@ -284,17 +284,17 @@ class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
             },
           ),
           textStyle: FVariants.from(
-            typography.base.copyWith(color: colors.foreground, fontWeight: .w500),
+            typography.md.copyWith(color: colors.foreground, fontWeight: .w500),
             variants: {
               [.disabled]: .delta(color: colors.disable(colors.foreground)),
             },
           ),
-          borderRadius: style.borderRadius.base,
+          borderRadius: style.borderRadius.md,
         ),
         decoration: ShapeDecoration(
           shape: RoundedSuperellipseBorder(
             side: BorderSide(color: colors.border, width: style.borderWidth),
-            borderRadius: style.borderRadius.base,
+            borderRadius: style.borderRadius.md,
           ),
           color: colors.card,
         ),

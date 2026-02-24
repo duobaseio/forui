@@ -1,10 +1,18 @@
 ## 0.20.0
 
 ### `FAlert`
+* Add `FAlertVariant.primary`.
+
+* **Breaking** Change `FAlert.variant` type from `FAlertVariant?` to `FAlertVariant`. Use `FAlertVariant.primary` instead
+  of `null`.
 * **Breaking** Change `FAlertStyle.decoration` type from `BoxDecoration` to `Decoration`.
 
 
 ### `FBadge`
+* Add `FBadgeVariant.primary`.
+
+* **Breaking** Change `FBadge.variant` type from `FBadgeVariant?` to `FBadgeVariant`. Use `FBadgeVariant.primary` instead
+  of `null`.
 * **Breaking** Change `FBadgeStyle.decoration` type from `BoxDecoration` to `Decoration`.
 * **Breaking** Remove `FBadgeStyles.defaultBadgeRadius`. Use `FBorderRadius.pill` instead.
 
@@ -17,6 +25,13 @@
 
 
 ### `FButton`
+* Add `FButtonVariant.primary`.
+* Add `FButtonSizeVariant.md`.
+
+* **Breaking** Change `FButton.variant` type from `FButtonVariant?` to `FButtonVariant`. Use `FButtonVariant.primary`
+  instead of `null`.
+* **Breaking** Change `FButton.size` type from `FButtonSizeVariant?` to `FButtonSizeVariant`. Use `FButtonSizeVariant.md`
+  instead of `null`.
 * **Breaking** Change `FButtonStyle.decoration` type from `FVariants<..., BoxDecoration, BoxDecorationDelta>` to
   `FVariants<..., Decoration, DecorationDelta>`.
 
@@ -46,10 +61,13 @@
 
 
 ### `FHeader`
+* Add `FHeaderVariant.root`.
+
 * **Breaking** Change `FHeaderStyle.decoration` type from `BoxDecoration` to `Decoration`.
 
 
 ### `FItem` & `FItemGroup`
+* Add `FItemVariant.primary`.
 * Add `FItem.onDoubleTap`.
 * Add `FItemGroupStyle.slideableItems` for slide-across interaction.
 
@@ -105,6 +123,7 @@
 
 
 ### `FTile` & `FTileGroup`
+* Add `FTileStyles.primary` resolving via `FItemVariant.primary`.
 * Add `FTile.onDoubleTap`.
 * Add `FTileGroupStyle.slideableTiles` for slide-across interaction.
 
@@ -121,7 +140,10 @@
 
 ### Others
 * Add `Decorations` extension on `Decoration` for extracting common visual properties.
-* Add `FBorderRadius` with size tokens (`xs`, `sm`, `base`, `lg`, `xl`, `xl2`, `xl3`, `pill`).
+* Add `FBorderRadius` with size tokens (`xs`, `sm`, `md`, `lg`, `xl`, `xl2`, `xl3`, `pill`).
+
+* **Breaking** Rename `FBorderRadius.base` to `FBorderRadius.md`.
+* **Breaking** Rename `FTypography.base` to `FTypography.md`.
 * Add `FPlatformVariantConstraint` extension type.
 
 * Change default border shape from `RoundedRectangleBorder` to `RoundedSuperellipseBorder` in widget `.inherit()` constructors.
@@ -166,6 +188,7 @@ This is a minor follow-up that adds some missing features and addresses some QoL
 
 
 ### `FResizable`
+* Add `FResizableAxisVariant.horizontal`.
 * Add `FResizableStyles.horizontal` and `FResizableStyles.vertical` getters.
 
 
@@ -174,6 +197,7 @@ This is a minor follow-up that adds some missing features and addresses some QoL
 
 
 ### `FSlider`
+* Add `FSliderAxisVariant.horizontal`.
 * Add `FSliderStyles.horizontal` and `FSliderStyles.vertical` getters.
 
 

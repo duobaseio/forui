@@ -6,10 +6,10 @@ import 'package:forui/forui.dart';
 
 final button = FButton(
   // {@category "Variant"}
-  variant: null,
+  variant: .primary,
   // {@endcategory}
   // {@category "Size"}
-  size: null,
+  size: .md,
   // {@endcategory}
   // {@category "Content"}
   prefix: const Icon(FIcons.mail),
@@ -44,10 +44,10 @@ final button = FButton(
 
 final icon = FButton.icon(
   // {@category "Variant"}
-  variant: null,
+  variant: .outline,
   // {@endcategory}
   // {@category "Size"}
-  size: null,
+  size: .md,
   // {@endcategory}
   // {@category "Accessibility"}
   autofocus: false,
@@ -74,10 +74,10 @@ final icon = FButton.icon(
 
 final raw = FButton.raw(
   // {@category "Variant"}
-  variant: null,
+  variant: .primary,
   // {@endcategory}
   // {@category "Size"}
-  size: null,
+  size: .md,
   // {@endcategory}
   // {@category "Accessibility"}
   autofocus: false,
@@ -104,7 +104,7 @@ final raw = FButton.raw(
 
 // {@category "Variant" "Primary"}
 /// The button's primary (base) variant.
-const FButtonVariant? primary = null;
+const FButtonVariant primary = .primary;
 
 // {@category "Variant" "Secondary"}
 /// The button's secondary variant.
@@ -122,9 +122,9 @@ const FButtonVariant outline = .outline;
 /// The button's ghost variant.
 const FButtonVariant ghost = .ghost;
 
-// {@category "Size" "Base"}
-/// The button's base (default) size.
-const FButtonSizeVariant? base = null;
+// {@category "Size" "Medium"}
+/// The button's medium (default) size.
+const FButtonSizeVariant md = .md;
 
 // {@category "Size" "Extra Small"}
 /// The button's extra small size.

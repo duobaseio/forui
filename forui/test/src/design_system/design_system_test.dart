@@ -34,7 +34,7 @@ void main() {
   for (final (size, name) in [
     (FButtonSizeVariant.xs, 'xs'),
     (FButtonSizeVariant.sm, 'sm'),
-    (null, 'base'),
+    (FButtonSizeVariant.md, 'base'),
     (FButtonSizeVariant.lg, 'lg'),
   ]) {
     testWidgets('$name button and icon button have consistent height', (tester) async {

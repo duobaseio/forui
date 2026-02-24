@@ -33,7 +33,7 @@ class TappableBouncePage extends Example {
               color: states.contains(FTappableVariant.pressed)
                   ? context.theme.colors.secondary
                   : context.theme.colors.background,
-              borderRadius: context.theme.style.borderRadius.base,
+              borderRadius: context.theme.style.borderRadius.md,
               border: .all(color: context.theme.colors.border),
             ),
             padding: const .symmetric(vertical: 8.0, horizontal: 12),

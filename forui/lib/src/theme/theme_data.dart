@@ -999,12 +999,12 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       headlineMedium: typography.xl2.copyWith(height: 1, textBaseline: typography.xl2.textBaseline ?? .alphabetic),
       headlineSmall: typography.xl.copyWith(height: 1, textBaseline: typography.xl.textBaseline ?? .alphabetic),
       titleLarge: typography.lg.copyWith(height: 1, textBaseline: typography.lg.textBaseline ?? .alphabetic),
-      titleMedium: typography.base.copyWith(height: 1, textBaseline: typography.base.textBaseline ?? .alphabetic),
+      titleMedium: typography.md.copyWith(height: 1, textBaseline: typography.md.textBaseline ?? .alphabetic),
       titleSmall: typography.sm.copyWith(height: 1, textBaseline: typography.sm.textBaseline ?? .alphabetic),
-      labelLarge: typography.base.copyWith(height: 1, textBaseline: typography.base.textBaseline ?? .alphabetic),
+      labelLarge: typography.md.copyWith(height: 1, textBaseline: typography.md.textBaseline ?? .alphabetic),
       labelMedium: typography.sm.copyWith(height: 1, textBaseline: typography.sm.textBaseline ?? .alphabetic),
       labelSmall: typography.xs.copyWith(height: 1, textBaseline: typography.xs.textBaseline ?? .alphabetic),
-      bodyLarge: typography.base.copyWith(height: 1, textBaseline: typography.base.textBaseline ?? .alphabetic),
+      bodyLarge: typography.md.copyWith(height: 1, textBaseline: typography.md.textBaseline ?? .alphabetic),
       bodyMedium: typography.sm.copyWith(height: 1, textBaseline: typography.sm.textBaseline ?? .alphabetic),
       bodySmall: typography.xs.copyWith(height: 1, textBaseline: typography.xs.textBaseline ?? .alphabetic),
     )..apply(fontFamily: typography.defaultFontFamily, bodyColor: colors.foreground, displayColor: colors.foreground);
@@ -1037,30 +1037,30 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
 
       // Navigation Bar
       navigationBarTheme: NavigationBarThemeData(
-        indicatorShape: RoundedRectangleBorder(borderRadius: style.borderRadius.base),
+        indicatorShape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
       ),
 
       // Navigation Drawer
       navigationDrawerTheme: NavigationDrawerThemeData(
-        indicatorShape: RoundedRectangleBorder(borderRadius: style.borderRadius.base),
+        indicatorShape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
       ),
 
       // Navigation Rail
       navigationRailTheme: NavigationRailThemeData(
-        indicatorShape: RoundedRectangleBorder(borderRadius: style.borderRadius.base),
+        indicatorShape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
       ),
 
       // Card
       cardTheme: CardThemeData(
         elevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius: style.borderRadius.base,
+        shape: RoundedSuperellipseBorder(
+          borderRadius: style.borderRadius.md,
           side: BorderSide(color: colors.border, width: style.borderWidth),
         ),
       ),
 
       // Chip
-      chipTheme: ChipThemeData(shape: RoundedRectangleBorder(borderRadius: style.borderRadius.base)),
+      chipTheme: ChipThemeData(shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md)),
 
       // Input
       inputDecorationTheme: InputDecorationTheme(
@@ -1076,22 +1076,22 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
 
       // Date Picker
       datePickerTheme: DatePickerThemeData(
-        shape: RoundedRectangleBorder(borderRadius: style.borderRadius.base),
-        dayShape: .all(RoundedRectangleBorder(borderRadius: style.borderRadius.base)),
-        rangePickerShape: RoundedRectangleBorder(borderRadius: style.borderRadius.base),
+        shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
+        dayShape: .all(RoundedSuperellipseBorder(borderRadius: style.borderRadius.md)),
+        rangePickerShape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
       ),
 
       // Time Picker
       timePickerTheme: TimePickerThemeData(
         hourMinuteTextColor: colors.secondaryForeground,
         hourMinuteColor: colors.secondary,
-        hourMinuteShape: RoundedRectangleBorder(borderRadius: style.borderRadius.base),
+        hourMinuteShape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
         dayPeriodTextColor: colors.foreground,
         dayPeriodColor: colors.secondary,
         dayPeriodBorderSide: BorderSide(color: colors.border),
-        dayPeriodShape: RoundedRectangleBorder(borderRadius: style.borderRadius.base),
+        dayPeriodShape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
         dialBackgroundColor: colors.secondary,
-        shape: RoundedRectangleBorder(borderRadius: style.borderRadius.base),
+        shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
       ),
 
       // Slider
@@ -1132,7 +1132,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
                 colors.secondaryForeground,
           ),
           padding: .all(buttonStyles.secondary.base.contentStyle.padding),
-          shape: .all(RoundedRectangleBorder(borderRadius: style.borderRadius.base)),
+          shape: .all(RoundedSuperellipseBorder(borderRadius: style.borderRadius.md)),
         ),
       ),
 
@@ -1150,7 +1150,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
                 colors.secondaryForeground,
           ),
           padding: .all(buttonStyles.primary.base.contentStyle.padding),
-          shape: .all(RoundedRectangleBorder(borderRadius: style.borderRadius.base)),
+          shape: .all(RoundedSuperellipseBorder(borderRadius: style.borderRadius.md)),
         ),
       ),
 
@@ -1188,7 +1188,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
           shape: .resolveWith(
             (states) => switch (buttonStyles.outline.base.decoration.resolve(toVariants(states)).border) {
               final OutlinedBorder border => border,
-              _ => RoundedRectangleBorder(borderRadius: style.borderRadius.base),
+              _ => RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
             },
           ),
         ),
@@ -1210,7 +1210,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
           shape: .resolveWith(
             (states) => switch (buttonStyles.ghost.base.decoration.resolve(toVariants(states)).border) {
               final OutlinedBorder border => border,
-              _ => RoundedRectangleBorder(borderRadius: style.borderRadius.base),
+              _ => RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
             },
           ),
         ),
@@ -1223,7 +1223,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
         disabledElevation: 0,
         shape: switch (buttonStyles.primary.base.decoration.base.border) {
           final OutlinedBorder border => border,
-          _ => RoundedRectangleBorder(borderRadius: style.borderRadius.base),
+          _ => RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
         },
       ),
 
@@ -1240,7 +1240,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
           shape: .resolveWith(
             (states) => switch (buttonStyles.ghost.base.decoration.resolve(toVariants(states)).border) {
               final OutlinedBorder border => border,
-              _ => RoundedRectangleBorder(borderRadius: style.borderRadius.base),
+              _ => RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
             },
           ),
         ),
@@ -1262,23 +1262,23 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
           shape: .resolveWith(
             (states) => switch (buttonStyles.ghost.base.decoration.resolve(toVariants(states)).border) {
               final OutlinedBorder border => border,
-              _ => RoundedRectangleBorder(borderRadius: style.borderRadius.base),
+              _ => RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
             },
           ),
         ),
       ),
 
       /// Dialog
-      dialogTheme: DialogThemeData(shape: RoundedRectangleBorder(borderRadius: style.borderRadius.base)),
+      dialogTheme: DialogThemeData(shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md)),
 
       /// Bottom Sheet
-      bottomSheetTheme: BottomSheetThemeData(shape: RoundedRectangleBorder(borderRadius: style.borderRadius.base)),
+      bottomSheetTheme: BottomSheetThemeData(shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md)),
 
       /// Snack Bar
-      snackBarTheme: SnackBarThemeData(shape: RoundedRectangleBorder(borderRadius: style.borderRadius.base)),
+      snackBarTheme: SnackBarThemeData(shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md)),
 
       /// List Tile
-      listTileTheme: ListTileThemeData(shape: RoundedRectangleBorder(borderRadius: style.borderRadius.base)),
+      listTileTheme: ListTileThemeData(shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md)),
 
       /// Divider
       dividerTheme: DividerThemeData(color: dividerStyles.horizontal.color, thickness: dividerStyles.horizontal.width),

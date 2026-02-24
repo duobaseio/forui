@@ -241,7 +241,7 @@ class FBasicTheme extends StatelessWidget {
       child: Directionality(
         textDirection: textDirection ?? Directionality.maybeOf(context) ?? .ltr,
         child: DefaultTextStyle(
-          style: data.typography.base.copyWith(
+          style: data.typography.md.copyWith(
             fontFamily: data.typography.defaultFontFamily,
             color: data.colors.foreground,
           ),

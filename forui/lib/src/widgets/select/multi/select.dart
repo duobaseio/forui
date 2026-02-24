@@ -926,7 +926,7 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
         ShapeDecoration(
           shape: RoundedSuperellipseBorder(
             side: BorderSide(color: colors.border, width: style.borderWidth),
-            borderRadius: style.borderRadius.base,
+            borderRadius: style.borderRadius.md,
           ),
           color: colors.card,
         ),
@@ -934,7 +934,7 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
           [.focused]: ShapeDecoration(
             shape: RoundedSuperellipseBorder(
               side: BorderSide(color: colors.primary, width: style.borderWidth),
-              borderRadius: style.borderRadius.base,
+              borderRadius: style.borderRadius.md,
             ),
             color: colors.card,
           ),
@@ -942,7 +942,7 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
           [.disabled]: ShapeDecoration(
             shape: RoundedSuperellipseBorder(
               side: BorderSide(color: colors.disable(colors.border), width: style.borderWidth),
-              borderRadius: style.borderRadius.base,
+              borderRadius: style.borderRadius.md,
             ),
             color: colors.card,
           ),
@@ -950,14 +950,14 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
           [.error]: ShapeDecoration(
             shape: RoundedSuperellipseBorder(
               side: BorderSide(color: colors.error, width: style.borderWidth),
-              borderRadius: style.borderRadius.base,
+              borderRadius: style.borderRadius.md,
             ),
             color: colors.card,
           ),
           [.error.and(.disabled)]: ShapeDecoration(
             shape: RoundedSuperellipseBorder(
               side: BorderSide(color: colors.disable(colors.error), width: style.borderWidth),
-              borderRadius: style.borderRadius.base,
+              borderRadius: style.borderRadius.md,
             ),
             color: colors.disable(colors.card),
           ),

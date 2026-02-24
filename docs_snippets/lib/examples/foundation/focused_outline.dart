@@ -17,7 +17,7 @@ class FocusedOutlinePage extends Example {
       padding: const .symmetric(vertical: 8.0, horizontal: 12),
       child: Text(
         'Focused',
-        style: context.theme.typography.base.copyWith(color: context.theme.colors.primaryForeground),
+        style: context.theme.typography.md.copyWith(color: context.theme.colors.primaryForeground),
       ),
     ),
   );

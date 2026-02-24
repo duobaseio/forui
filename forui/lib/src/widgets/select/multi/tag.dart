@@ -196,17 +196,17 @@ class FMultiSelectTagStyle with Diagnosticable, _$FMultiSelectTagStyleFunctions 
     : this(
         decoration: FVariants(
           ShapeDecoration(
-            shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base),
+            shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
             color: colors.secondary,
           ),
           variants: {
             [.hovered, .pressed]: ShapeDecoration(
-              shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base),
+              shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
               color: colors.hover(colors.secondary),
             ),
             //
             [.disabled]: ShapeDecoration(
-              shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base),
+              shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
               color: colors.disable(colors.secondary),
             ),
           },

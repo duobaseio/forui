@@ -64,7 +64,7 @@ class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
         itemIconStyle: .all(IconThemeData(color: colors.foreground, size: 18)),
         itemDecoration: FVariants.from(
           ShapeDecoration(
-            shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base),
+            shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
             color: colors.background,
           ),
           variants: {

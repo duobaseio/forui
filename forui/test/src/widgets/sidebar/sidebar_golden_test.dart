@@ -218,7 +218,7 @@ void main() {
                   decoration: .value(
                     BoxDecoration(
                       color: theme.data.colors.background.withValues(alpha: 0.5),
-                      borderRadius: theme.data.style.borderRadius.base,
+                      borderRadius: theme.data.style.borderRadius.md,
                     ),
                   ),
                 ),

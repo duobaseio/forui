@@ -40,7 +40,7 @@ class Content extends StatelessWidget {
           if (image case final image?)
             ClipPath(
               clipper: ShapeBorderClipper(
-                shape: RoundedSuperellipseBorder(borderRadius: context.theme.style.borderRadius.base),
+                shape: RoundedSuperellipseBorder(borderRadius: context.theme.style.borderRadius.md),
               ),
               child: image,
             ),

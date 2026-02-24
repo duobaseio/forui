@@ -222,7 +222,7 @@ class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
         decoration: ShapeDecoration(
           shape: RoundedSuperellipseBorder(
             side: BorderSide(color: colors.border, width: style.borderWidth),
-            borderRadius: style.borderRadius.base,
+            borderRadius: style.borderRadius.md,
           ),
           color: colors.card,
         ),
