@@ -1,12 +1,5 @@
 ## 0.20.0
 
-### Others
-* Add `FBorderRadius` with size tokens (`xs`, `sm`, `base`, `lg`, `xl`, `xl2`, `xl3`, `pill`).
-
-* **Breaking** Change `FStyle.borderRadius` from `BorderRadius` to `FBorderRadius`.
-* **Breaking** Remove `FLerpBorderRadius`. Use `BorderRadius` instead.
-
-
 ### `FAlert`
 * **Breaking** Change `FAlertStyle.decoration` type from `BoxDecoration` to `Decoration`.
 
@@ -128,9 +121,12 @@
 
 ### Others
 * Add `Decorations` extension on `Decoration` for extracting common visual properties.
+* Add `FBorderRadius` with size tokens (`xs`, `sm`, `base`, `lg`, `xl`, `xl2`, `xl3`, `pill`).
+* Add `FPlatformVariantConstraint` extension type.
 
 * Change default border shape from `RoundedRectangleBorder` to `RoundedSuperellipseBorder` in widget `.inherit()` constructors.
-* Add `FPlatformVariantConstraint` extension type.
+* **Breaking** Change `FStyle.borderRadius` from `BorderRadius` to `FBorderRadius`.
+* **Breaking** Remove `FLerpBorderRadius`. Use `BorderRadius` instead.
 
 * Fix widget `.inherit()` constructors not using `FStyle.borderWidth` for `BorderSide` widths.
 

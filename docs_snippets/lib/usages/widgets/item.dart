@@ -17,6 +17,7 @@ final item = FItem(
   actions: null,
   // {@endcategory}
   // {@category "Callbacks"}
+  onDoubleTap: () {},
   onLongPress: () {},
   onSecondaryPress: () {},
   onSecondaryLongPress: () {},
@@ -49,6 +50,7 @@ final raw = FItem.raw(
   actions: null,
   // {@endcategory}
   // {@category "Callbacks"}
+  onDoubleTap: () {},
   onLongPress: () {},
   onSecondaryPress: () {},
   onSecondaryLongPress: () {},
