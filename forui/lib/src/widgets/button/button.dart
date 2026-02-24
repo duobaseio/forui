@@ -311,98 +311,96 @@ extension type FButtonStyles(
         variants: {
           [.primary]: primary,
           [.secondary]: FButtonSizeStyles.inherit(
-              typography: typography,
-              style: style,
-              decoration: .from(
-                ShapeDecoration(
-                  shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
-                  color: colors.secondary,
+            typography: typography,
+            style: style,
+            decoration: .from(
+              ShapeDecoration(
+                shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
+                color: colors.secondary,
+              ),
+              variants: {
+                [.hovered, .pressed]: .shapeDelta(color: colors.hover(colors.secondary)),
+                //
+                [.disabled]: .shapeDelta(color: colors.disable(colors.secondary)),
+                //
+                [.selected]: .shapeDelta(color: colors.hover(colors.secondary)),
+                [.selected.and(.disabled)]: .shapeDelta(color: colors.disable(colors.hover(colors.secondary))),
+              },
+            ),
+            foregroundColor: colors.secondaryForeground,
+            disabledForegroundColor: colors.disable(colors.secondaryForeground),
+          ),
+          [.destructive]: FButtonSizeStyles.inherit(
+            typography: typography,
+            style: style,
+            decoration: .from(
+              ShapeDecoration(
+                shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
+                color: colors.destructive.withValues(alpha: colors.brightness == .light ? 0.1 : 0.2),
+              ),
+              variants: {
+                [.hovered, .pressed]: .shapeDelta(
+                  color: colors.destructive.withValues(alpha: colors.brightness == .light ? 0.2 : 0.3),
                 ),
-                variants: {
-                  [.hovered, .pressed]: .shapeDelta(color: colors.hover(colors.secondary)),
-                  //
-                  [.disabled]: .shapeDelta(color: colors.disable(colors.secondary)),
-                  //
-                  [.selected]: .shapeDelta(color: colors.hover(colors.secondary)),
-                  [.selected.and(.disabled)]: .shapeDelta(color: colors.disable(colors.hover(colors.secondary))),
-                },
-              ),
-              foregroundColor: colors.secondaryForeground,
-              disabledForegroundColor: colors.disable(colors.secondaryForeground),
-            ),
-            [.destructive]: FButtonSizeStyles.inherit(
-              typography: typography,
-              style: style,
-              decoration: .from(
-                ShapeDecoration(
-                  shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
-                  color: colors.destructive.withValues(alpha: colors.brightness == .light ? 0.1 : 0.2),
+                //
+                [.disabled]: .shapeDelta(
+                  color: colors.destructive.withValues(alpha: colors.brightness == .light ? 0.05 : 0.1),
                 ),
-                variants: {
-                  [.hovered, .pressed]: .shapeDelta(
-                    color: colors.destructive.withValues(alpha: colors.brightness == .light ? 0.2 : 0.3),
-                  ),
-                  //
-                  [.disabled]: .shapeDelta(
-                    color: colors.destructive.withValues(alpha: colors.brightness == .light ? 0.05 : 0.1),
-                  ),
-                  //
-                  [.selected]: .shapeDelta(
-                    color: colors.destructive.withValues(alpha: colors.brightness == .light ? 0.2 : 0.3),
-                  ),
-                  [.selected.and(.disabled)]: .shapeDelta(
-                    color: colors.disable(
-                      colors.destructive.withValues(alpha: colors.brightness == .light ? 0.2 : 0.3),
-                    ),
-                  ),
-                },
-              ),
-              foregroundColor: colors.destructive,
-              disabledForegroundColor: colors.destructive.withValues(alpha: 0.5),
-            ),
-            [.outline]: FButtonSizeStyles.inherit(
-              typography: typography,
-              style: style,
-              decoration: .from(
-                ShapeDecoration(
-                  shape: RoundedSuperellipseBorder(
-                    side: BorderSide(color: colors.border, width: style.borderWidth),
-                    borderRadius: style.borderRadius.md,
-                  ),
-                  color: colors.card,
+                //
+                [.selected]: .shapeDelta(
+                  color: colors.destructive.withValues(alpha: colors.brightness == .light ? 0.2 : 0.3),
                 ),
-                variants: {
-                  [.hovered, .pressed]: .shapeDelta(color: colors.secondary),
-                  //
-                  [.disabled]: .shapeDelta(color: colors.disable(colors.card)),
-                  //
-                  [.selected]: .shapeDelta(color: colors.secondary),
-                  [.selected.and(.disabled)]: .shapeDelta(color: colors.disable(colors.secondary)),
-                },
-              ),
-              foregroundColor: colors.secondaryForeground,
-              disabledForegroundColor: colors.disable(colors.secondaryForeground),
+                [.selected.and(.disabled)]: .shapeDelta(
+                  color: colors.disable(colors.destructive.withValues(alpha: colors.brightness == .light ? 0.2 : 0.3)),
+                ),
+              },
             ),
-            [.ghost]: FButtonSizeStyles.inherit(
-              typography: typography,
-              style: style,
-              decoration: .from(
-                ShapeDecoration(shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md)),
-                variants: {
-                  [.hovered, .pressed]: .shapeDelta(color: colors.secondary),
-                  //
-                  [.disabled]: const .shapeDelta(),
-                  //
-                  [.selected]: .shapeDelta(color: colors.secondary),
-                  [.selected.and(.disabled)]: .shapeDelta(color: colors.disable(colors.secondary)),
-                },
+            foregroundColor: colors.destructive,
+            disabledForegroundColor: colors.destructive.withValues(alpha: 0.5),
+          ),
+          [.outline]: FButtonSizeStyles.inherit(
+            typography: typography,
+            style: style,
+            decoration: .from(
+              ShapeDecoration(
+                shape: RoundedSuperellipseBorder(
+                  side: BorderSide(color: colors.border, width: style.borderWidth),
+                  borderRadius: style.borderRadius.md,
+                ),
+                color: colors.card,
               ),
-              foregroundColor: colors.secondaryForeground,
-              disabledForegroundColor: colors.disable(colors.secondaryForeground),
+              variants: {
+                [.hovered, .pressed]: .shapeDelta(color: colors.secondary),
+                //
+                [.disabled]: .shapeDelta(color: colors.disable(colors.card)),
+                //
+                [.selected]: .shapeDelta(color: colors.secondary),
+                [.selected.and(.disabled)]: .shapeDelta(color: colors.disable(colors.secondary)),
+              },
             ),
-          },
-        ),
-      );
+            foregroundColor: colors.secondaryForeground,
+            disabledForegroundColor: colors.disable(colors.secondaryForeground),
+          ),
+          [.ghost]: FButtonSizeStyles.inherit(
+            typography: typography,
+            style: style,
+            decoration: .from(
+              ShapeDecoration(shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md)),
+              variants: {
+                [.hovered, .pressed]: .shapeDelta(color: colors.secondary),
+                //
+                [.disabled]: const .shapeDelta(),
+                //
+                [.selected]: .shapeDelta(color: colors.secondary),
+                [.selected.and(.disabled)]: .shapeDelta(color: colors.disable(colors.secondary)),
+              },
+            ),
+            foregroundColor: colors.secondaryForeground,
+            disabledForegroundColor: colors.disable(colors.secondaryForeground),
+          ),
+        },
+      ),
+    );
   }
 
   /// The primary button size styles.
