@@ -362,7 +362,7 @@ class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
 
   /// The box decoration.
   @override
-  final BoxDecoration decoration;
+  final Decoration decoration;
 
   /// An optional background filter applied to the tooltip.
   ///
@@ -389,11 +389,13 @@ class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
   /// Creates a [FTooltipStyle] that inherits its properties.
   FTooltipStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        decoration: BoxDecoration(
+        decoration: ShapeDecoration(
+          shape: RoundedSuperellipseBorder(
+            side: BorderSide(color: colors.border, width: style.borderWidth),
+            borderRadius: style.borderRadius.base,
+          ),
           color: colors.card,
-          borderRadius: style.borderRadius,
-          border: .all(width: style.borderWidth, color: colors.border),
-          boxShadow: FTooltipStyle.shadow,
+          shadows: FTooltipStyle.shadow,
         ),
         textStyle: typography.sm,
       );

@@ -63,13 +63,16 @@ class FStyle with Diagnosticable, _$FStyleFunctions {
   });
 
   /// Creates an [FStyle] that inherits its properties.
-  FStyle.inherit({required FColors colors, required FTypography typography})
-    : this(
-        formFieldStyle: .inherit(colors: colors, typography: typography),
-        focusedOutlineStyle: FFocusedOutlineStyle(color: colors.primary, borderRadius: const .all(.circular(8))),
-        iconStyle: IconThemeData(color: colors.foreground, size: 20),
-        tappableStyle: FTappableStyle(),
-      );
+  factory FStyle.inherit({required FColors colors, required FTypography typography}) {
+    const borderRadius = FBorderRadius();
+    return FStyle(
+      formFieldStyle: .inherit(colors: colors, typography: typography),
+      focusedOutlineStyle: FFocusedOutlineStyle(color: colors.primary, borderRadius: borderRadius.base),
+      iconStyle: IconThemeData(color: colors.foreground, size: 20),
+      tappableStyle: FTappableStyle(),
+      borderRadius: borderRadius, // ignore: avoid_redundant_argument_values
+    );
+  }
 }
 
 /// Provides function to access common visual properties from a [Decoration].

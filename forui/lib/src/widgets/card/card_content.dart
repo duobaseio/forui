@@ -37,7 +37,13 @@ class Content extends StatelessWidget {
         crossAxisAlignment: .start,
         mainAxisSize: mainAxisSize,
         children: [
-          if (image case final image?) ClipRRect(borderRadius: context.theme.style.borderRadius, child: image),
+          if (image case final image?)
+            ClipPath(
+              clipper: ShapeBorderClipper(
+                shape: RoundedSuperellipseBorder(borderRadius: context.theme.style.borderRadius.base),
+              ),
+              child: image,
+            ),
           if ((title != null || subtitle != null || child != null) && image != null)
             SizedBox(height: style.imageSpacing),
           if (title case final title?)

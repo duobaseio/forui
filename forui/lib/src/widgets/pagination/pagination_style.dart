@@ -23,7 +23,7 @@ class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
 
   /// The decoration applied to the pagination item.
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, BoxDecoration, BoxDecorationDelta> itemDecoration;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, Decoration, DecorationDelta> itemDecoration;
 
   /// The default text style applied to the pagination item.
   @override
@@ -63,12 +63,15 @@ class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
     : this(
         itemIconStyle: .all(IconThemeData(color: colors.foreground, size: 18)),
         itemDecoration: FVariants.from(
-          BoxDecoration(borderRadius: style.borderRadius, color: colors.background),
+          ShapeDecoration(
+            shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base),
+            color: colors.background,
+          ),
           variants: {
-            [.hovered, .pressed]: .delta(color: colors.secondary),
+            [.hovered, .pressed]: .shapeDelta(color: colors.secondary),
             //
-            [.selected]: .delta(color: colors.primary),
-            [.selected.and(.hovered), .selected.and(.pressed)]: .delta(color: colors.hover(colors.primary)),
+            [.selected]: .shapeDelta(color: colors.primary),
+            [.selected.and(.hovered), .selected.and(.pressed)]: .shapeDelta(color: colors.hover(colors.primary)),
           },
         ),
         itemTextStyle: FVariants.from(

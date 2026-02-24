@@ -122,11 +122,11 @@ class FDeterminateProgressStyle with Diagnosticable, _$FDeterminateProgressStyle
 
   /// The track's decoration.
   @override
-  final BoxDecoration trackDecoration;
+  final Decoration trackDecoration;
 
   /// The fill's decoration.
   @override
-  final BoxDecoration fillDecoration;
+  final Decoration fillDecoration;
 
   /// The motion-related properties for an indeterminate [FDeterminateProgress].
   @override
@@ -143,8 +143,14 @@ class FDeterminateProgressStyle with Diagnosticable, _$FDeterminateProgressStyle
   /// Creates a [FDeterminateProgressStyle] that inherits its properties.
   FDeterminateProgressStyle.inherit({required FColors colors, required FStyle style})
     : this(
-        trackDecoration: BoxDecoration(borderRadius: style.borderRadius, color: colors.secondary),
-        fillDecoration: BoxDecoration(borderRadius: style.borderRadius, color: colors.primary),
+        trackDecoration: ShapeDecoration(
+          shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.pill),
+          color: colors.secondary,
+        ),
+        fillDecoration: ShapeDecoration(
+          shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.pill),
+          color: colors.primary,
+        ),
       );
 }
 

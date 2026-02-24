@@ -237,28 +237,28 @@ extension CustomMaterialTheme on FThemeData {
       useMaterial3: true,
       navigationBarTheme: NavigationBarThemeData(
         indicatorShape: RoundedRectangleBorder(
-          borderRadius: style.borderRadius,
+          borderRadius: style.borderRadius.base,
         ),
       ),
       navigationDrawerTheme: NavigationDrawerThemeData(
         indicatorShape: RoundedRectangleBorder(
-          borderRadius: style.borderRadius,
+          borderRadius: style.borderRadius.base,
         ),
       ),
       navigationRailTheme: NavigationRailThemeData(
         indicatorShape: RoundedRectangleBorder(
-          borderRadius: style.borderRadius,
+          borderRadius: style.borderRadius.base,
         ),
       ),
       cardTheme: CardThemeData(
         elevation: 0,
         shape: RoundedRectangleBorder(
-          borderRadius: style.borderRadius,
-          side: BorderSide(width: style.borderWidth, color: colors.border),
+          borderRadius: style.borderRadius.base,
+          side: BorderSide(color: colors.border, width: style.borderWidth),
         ),
       ),
       chipTheme: ChipThemeData(
-        shape: RoundedRectangleBorder(borderRadius: style.borderRadius),
+        shape: RoundedRectangleBorder(borderRadius: style.borderRadius.base),
       ),
       inputDecorationTheme: InputDecorationTheme(
         border: WidgetStateInputBorder.resolveWith(
@@ -273,28 +273,28 @@ extension CustomMaterialTheme on FThemeData {
         contentPadding: textFieldStyle.contentPadding,
       ),
       datePickerTheme: DatePickerThemeData(
-        shape: RoundedRectangleBorder(borderRadius: style.borderRadius),
+        shape: RoundedRectangleBorder(borderRadius: style.borderRadius.base),
         dayShape: .all(
-          RoundedRectangleBorder(borderRadius: style.borderRadius),
+          RoundedRectangleBorder(borderRadius: style.borderRadius.base),
         ),
         rangePickerShape: RoundedRectangleBorder(
-          borderRadius: style.borderRadius,
+          borderRadius: style.borderRadius.base,
         ),
       ),
       timePickerTheme: TimePickerThemeData(
         hourMinuteTextColor: colors.secondaryForeground,
         hourMinuteColor: colors.secondary,
         hourMinuteShape: RoundedRectangleBorder(
-          borderRadius: style.borderRadius,
+          borderRadius: style.borderRadius.base,
         ),
         dayPeriodTextColor: colors.foreground,
         dayPeriodColor: colors.secondary,
         dayPeriodBorderSide: BorderSide(color: colors.border),
         dayPeriodShape: RoundedRectangleBorder(
-          borderRadius: style.borderRadius,
+          borderRadius: style.borderRadius.base,
         ),
         dialBackgroundColor: colors.secondary,
-        shape: RoundedRectangleBorder(borderRadius: style.borderRadius),
+        shape: RoundedRectangleBorder(borderRadius: style.borderRadius.base),
       ),
       sliderTheme: SliderThemeData(
         activeTrackColor: sliderStyles.horizontal.activeColor.base,
@@ -352,7 +352,9 @@ extension CustomMaterialTheme on FThemeData {
                 colors.secondaryForeground,
           ),
           padding: .all(buttonStyles.secondary.base.contentStyle.padding),
-          shape: .all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
+          shape: .all(
+            RoundedRectangleBorder(borderRadius: style.borderRadius.base),
+          ),
         ),
       ),
       filledButtonTheme: FilledButtonThemeData(
@@ -376,7 +378,9 @@ extension CustomMaterialTheme on FThemeData {
                 colors.secondaryForeground,
           ),
           padding: .all(buttonStyles.primary.base.contentStyle.padding),
-          shape: .all(RoundedRectangleBorder(borderRadius: style.borderRadius)),
+          shape: .all(
+            RoundedRectangleBorder(borderRadius: style.borderRadius.base),
+          ),
         ),
       ),
       outlinedButtonTheme: OutlinedButtonThemeData(
@@ -404,9 +408,13 @@ extension CustomMaterialTheme on FThemeData {
             final border = buttonStyles.outline.base.decoration
                 .resolve(toVariants(states))
                 .border;
+            final side = switch (border) {
+              OutlinedBorder(:final side) || BoxBorder(top: final side) => side,
+              _ => null,
+            };
             return BorderSide(
               color:
-                  border?.top.color ??
+                  side?.color ??
                   switch (states) {
                     _ when states.contains(WidgetState.disabled) =>
                       colors.disable(colors.border),
@@ -415,17 +423,18 @@ extension CustomMaterialTheme on FThemeData {
                     ),
                     _ => colors.border,
                   },
-              width: border?.top.width ?? style.borderWidth,
+              width: side?.width ?? style.borderWidth,
             );
           }),
           shape: .resolveWith(
-            (states) => RoundedRectangleBorder(
-              borderRadius:
-                  buttonStyles.outline.base.decoration
-                      .resolve(toVariants(states))
-                      .borderRadius ??
-                  style.borderRadius,
-            ),
+            (states) => switch (buttonStyles.outline.base.decoration
+                .resolve(toVariants(states))
+                .border) {
+              final OutlinedBorder border => border,
+              _ => RoundedRectangleBorder(
+                borderRadius: style.borderRadius.base,
+              ),
+            },
           ),
         ),
       ),
@@ -451,13 +460,14 @@ extension CustomMaterialTheme on FThemeData {
                 colors.secondaryForeground,
           ),
           shape: .resolveWith(
-            (states) => RoundedRectangleBorder(
-              borderRadius:
-                  buttonStyles.ghost.base.decoration
-                      .resolve(toVariants(states))
-                      .borderRadius ??
-                  style.borderRadius,
-            ),
+            (states) => switch (buttonStyles.ghost.base.decoration
+                .resolve(toVariants(states))
+                .border) {
+              final OutlinedBorder border => border,
+              _ => RoundedRectangleBorder(
+                borderRadius: style.borderRadius.base,
+              ),
+            },
           ),
         ),
       ),
@@ -469,11 +479,10 @@ extension CustomMaterialTheme on FThemeData {
           FTappableVariant.hovered,
         }).color,
         disabledElevation: 0,
-        shape: RoundedRectangleBorder(
-          borderRadius:
-              buttonStyles.primary.base.decoration.base.borderRadius ??
-              style.borderRadius,
-        ),
+        shape: switch (buttonStyles.primary.base.decoration.base.border) {
+          final OutlinedBorder border => border,
+          _ => RoundedRectangleBorder(borderRadius: style.borderRadius.base),
+        },
       ),
       iconButtonTheme: IconButtonThemeData(
         style: ButtonStyle(
@@ -492,13 +501,14 @@ extension CustomMaterialTheme on FThemeData {
                 colors.secondaryForeground,
           ),
           shape: .resolveWith(
-            (states) => RoundedRectangleBorder(
-              borderRadius:
-                  buttonStyles.ghost.base.decoration
-                      .resolve(toVariants(states))
-                      .borderRadius ??
-                  style.borderRadius,
-            ),
+            (states) => switch (buttonStyles.ghost.base.decoration
+                .resolve(toVariants(states))
+                .border) {
+              final OutlinedBorder border => border,
+              _ => RoundedRectangleBorder(
+                borderRadius: style.borderRadius.base,
+              ),
+            },
           ),
         ),
       ),
@@ -524,27 +534,28 @@ extension CustomMaterialTheme on FThemeData {
                 colors.secondaryForeground,
           ),
           shape: .resolveWith(
-            (states) => RoundedRectangleBorder(
-              borderRadius:
-                  buttonStyles.ghost.base.decoration
-                      .resolve(toVariants(states))
-                      .borderRadius ??
-                  style.borderRadius,
-            ),
+            (states) => switch (buttonStyles.ghost.base.decoration
+                .resolve(toVariants(states))
+                .border) {
+              final OutlinedBorder border => border,
+              _ => RoundedRectangleBorder(
+                borderRadius: style.borderRadius.base,
+              ),
+            },
           ),
         ),
       ),
       dialogTheme: DialogThemeData(
-        shape: RoundedRectangleBorder(borderRadius: style.borderRadius),
+        shape: RoundedRectangleBorder(borderRadius: style.borderRadius.base),
       ),
       bottomSheetTheme: BottomSheetThemeData(
-        shape: RoundedRectangleBorder(borderRadius: style.borderRadius),
+        shape: RoundedRectangleBorder(borderRadius: style.borderRadius.base),
       ),
       snackBarTheme: SnackBarThemeData(
-        shape: RoundedRectangleBorder(borderRadius: style.borderRadius),
+        shape: RoundedRectangleBorder(borderRadius: style.borderRadius.base),
       ),
       listTileTheme: ListTileThemeData(
-        shape: RoundedRectangleBorder(borderRadius: style.borderRadius),
+        shape: RoundedRectangleBorder(borderRadius: style.borderRadius.base),
       ),
       dividerTheme: DividerThemeData(
         color: dividerStyles.horizontal.color,

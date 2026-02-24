@@ -185,7 +185,7 @@ class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
 
   /// The box decoration.
   @override
-  final FVariants<FCheckboxVariantConstraint, FCheckboxVariant, BoxDecoration, BoxDecorationDelta> decoration;
+  final FVariants<FCheckboxVariantConstraint, FCheckboxVariant, Decoration, DecorationDelta> decoration;
 
   /// The motion-related properties.
   @override
@@ -225,27 +225,52 @@ class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
         },
       ),
       decoration: FVariants.from(
-        BoxDecoration(
-          borderRadius: style.borderRadius,
-          border: .all(color: colors.mutedForeground, width: 0.6),
+        ShapeDecoration(
+          shape: RoundedSuperellipseBorder(
+            side: BorderSide(color: colors.mutedForeground, width: 0.6),
+            borderRadius: style.borderRadius.xs2,
+          ),
           color: colors.card,
         ),
         variants: {
-          [.disabled]: .delta(
-            border: .all(color: colors.disable(colors.mutedForeground), width: 0.6),
+          [.disabled]: .shapeDelta(
+            shape: RoundedSuperellipseBorder(
+              side: BorderSide(color: colors.disable(colors.mutedForeground), width: 0.6),
+              borderRadius: style.borderRadius.xs2,
+            ),
             color: colors.disable(colors.card),
           ),
           //
-          [.selected]: .delta(border: null, color: colors.primary),
-          [.selected.and(.disabled)]: .delta(border: null, color: colors.disable(colors.primary)),
+          [.selected]: .shapeDelta(
+            shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.xs2),
+            color: colors.primary,
+          ),
+          [.selected.and(.disabled)]: .shapeDelta(
+            shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.xs2),
+            color: colors.disable(colors.primary),
+          ),
           //
-          [.error]: .delta(border: .all(color: colors.error, width: 0.6)),
-          [.error.and(.disabled)]: .delta(
-            border: .all(color: colors.disable(colors.error), width: 0.6),
+          [.error]: .shapeDelta(
+            shape: RoundedSuperellipseBorder(
+              side: BorderSide(color: colors.error, width: 0.6),
+              borderRadius: style.borderRadius.xs2,
+            ),
+          ),
+          [.error.and(.disabled)]: .shapeDelta(
+            shape: RoundedSuperellipseBorder(
+              side: BorderSide(color: colors.disable(colors.error), width: 0.6),
+              borderRadius: style.borderRadius.xs2,
+            ),
             color: colors.disable(colors.card),
           ),
-          [.error.and(.selected)]: .delta(border: null, color: colors.error),
-          [.error.and(.disabled).and(.selected)]: .delta(border: null, color: colors.disable(colors.error)),
+          [.error.and(.selected)]: .shapeDelta(
+            shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.xs2),
+            color: colors.error,
+          ),
+          [.error.and(.disabled).and(.selected)]: .shapeDelta(
+            shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.xs2),
+            color: colors.disable(colors.error),
+          ),
         },
       ),
       labelTextStyle: style.formFieldStyle.labelTextStyle,

@@ -23,7 +23,7 @@ class TappableGroupPage extends Example {
                 color: states.contains(FTappableVariant.pressed)
                     ? context.theme.colors.secondary
                     : context.theme.colors.background,
-                borderRadius: context.theme.style.borderRadius,
+                borderRadius: context.theme.style.borderRadius.base,
                 border: .all(color: context.theme.colors.border),
               ),
               padding: const .symmetric(vertical: 8.0, horizontal: 12),

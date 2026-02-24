@@ -510,7 +510,7 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
 
   /// The decoration.
   @override
-  final BoxDecoration decoration;
+  final Decoration decoration;
 
   /// The inset padding. Defaults to `EdgeInsets.symmetric(horizontal: 40, vertical: 24)`.
   @override
@@ -544,9 +544,11 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
     final title = typography.lg.copyWith(fontWeight: .w600, color: colors.foreground);
     final body = typography.sm.copyWith(color: colors.mutedForeground);
     return .new(
-      decoration: BoxDecoration(
-        border: .all(color: colors.border),
-        borderRadius: style.borderRadius,
+      decoration: ShapeDecoration(
+        shape: RoundedSuperellipseBorder(
+          side: BorderSide(color: colors.border, width: style.borderWidth),
+          borderRadius: style.borderRadius.base,
+        ),
         color: colors.card,
       ),
       slideableActions: FVariants(

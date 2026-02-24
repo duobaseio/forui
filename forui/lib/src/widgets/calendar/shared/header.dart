@@ -195,15 +195,22 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
     focusedOutlineStyle: style.focusedOutlineStyle,
     buttonStyle: FButtonStyles.inherit(colors: colors, typography: typography, style: style).outline.sm.copyWith(
       decoration: FVariants.from(
-        BoxDecoration(
-          border: .all(color: colors.border),
-          borderRadius: style.borderRadius,
+        ShapeDecoration(
+          shape: RoundedSuperellipseBorder(
+            side: BorderSide(color: colors.border, width: style.borderWidth),
+            borderRadius: style.borderRadius.base,
+          ),
           color: colors.card,
         ),
         variants: {
-          [.hovered, .pressed]: .delta(color: colors.secondary),
+          [.hovered, .pressed]: .shapeDelta(color: colors.secondary),
           //
-          [.disabled]: .delta(border: .all(color: colors.disable(colors.border))),
+          [.disabled]: .shapeDelta(
+            shape: RoundedSuperellipseBorder(
+              side: BorderSide(color: colors.disable(colors.border), width: style.borderWidth),
+              borderRadius: style.borderRadius.base,
+            ),
+          ),
         },
       ),
     ),

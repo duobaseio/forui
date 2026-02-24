@@ -88,17 +88,14 @@ class FBadge extends StatelessWidget {
 /// The [FBadgeStyle]s.
 extension type FBadgeStyles(FVariants<FBadgeVariantConstraint, FBadgeVariant, FBadgeStyle, FBadgeStyleDelta> _)
     implements FVariants<FBadgeVariantConstraint, FBadgeVariant, FBadgeStyle, FBadgeStyleDelta> {
-  /// The default border radius for badges.
-  static const BorderRadius defaultBadgeRadius = .all(.circular(100));
-
   /// Creates a [FBadgeStyles] that inherits its properties.
   FBadgeStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         .from(
           FBadgeStyle(
             decoration: ShapeDecoration(
+              shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.pill),
               color: colors.primary,
-              shape: const RoundedSuperellipseBorder(borderRadius: FBadgeStyles.defaultBadgeRadius),
             ),
             contentStyle: FBadgeContentStyle(
               labelTextStyle: typography.sm.copyWith(color: colors.primaryForeground, fontWeight: .w600),
@@ -111,7 +108,7 @@ extension type FBadgeStyles(FVariants<FBadgeVariantConstraint, FBadgeVariant, FB
             ),
             [.destructive]: FBadgeStyle(
               decoration: ShapeDecoration(
-                shape: const RoundedSuperellipseBorder(borderRadius: FBadgeStyles.defaultBadgeRadius),
+                shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.pill),
                 color: colors.destructive.withValues(alpha: colors.brightness == .light ? 0.1 : 0.2),
               ),
               contentStyle: FBadgeContentStyle(
@@ -120,11 +117,11 @@ extension type FBadgeStyles(FVariants<FBadgeVariantConstraint, FBadgeVariant, FB
             ),
             [.outline]: .delta(
               decoration: .shapeDelta(
-                color: colors.card,
                 shape: RoundedSuperellipseBorder(
                   side: BorderSide(color: colors.border, width: style.borderWidth),
-                  borderRadius: FBadgeStyles.defaultBadgeRadius,
+                  borderRadius: style.borderRadius.pill,
                 ),
+                color: colors.card,
               ),
               contentStyle: .delta(labelTextStyle: .delta(color: colors.foreground)),
             ),

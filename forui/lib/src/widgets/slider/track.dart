@@ -194,7 +194,10 @@ class _Track extends StatelessWidget {
     final (height, width) = layout.vertical ? (null, crossAxisExtent) : (crossAxisExtent, null);
 
     return DecoratedBox(
-      decoration: BoxDecoration(borderRadius: style.borderRadius, color: style.inactiveColor.resolve(variants)),
+      decoration: ShapeDecoration(
+        shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius),
+        color: style.inactiveColor.resolve(variants),
+      ),
       child: SizedBox(
         height: height,
         width: width,
@@ -206,7 +209,7 @@ class _Track extends StatelessWidget {
                 position(
                   offset: value * extent + half - ((markStyle ??= style.markStyle).tickSize / 2),
                   child: DecoratedBox(
-                    decoration: BoxDecoration(shape: BoxShape.circle, color: markStyle.tickColor.resolve(variants)),
+                    decoration: BoxDecoration(shape: .circle, color: markStyle.tickColor.resolve(variants)),
                     child: SizedBox.square(dimension: markStyle.tickSize),
                   ),
                 ),
@@ -235,7 +238,10 @@ class ActiveTrack extends StatelessWidget {
     return layout.position(
       offset: pixels.min,
       child: DecoratedBox(
-        decoration: BoxDecoration(borderRadius: style.borderRadius, color: style.activeColor.resolve(variants)),
+        decoration: ShapeDecoration(
+          shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius),
+          color: style.activeColor.resolve(variants),
+        ),
         child: SizedBox(height: height, width: width),
       ),
     );

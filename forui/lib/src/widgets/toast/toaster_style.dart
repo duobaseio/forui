@@ -139,7 +139,7 @@ class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
 
   /// The toast's decoration.
   @override
-  final BoxDecoration decoration;
+  final Decoration decoration;
 
   /// An optional background filter. This only takes effect if the [decoration] has a transparent or translucent
   /// background color.
@@ -219,9 +219,11 @@ class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
   /// Creates a [FToastStyle] that inherits its properties.
   FToastStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        decoration: BoxDecoration(
-          border: .all(color: colors.border),
-          borderRadius: style.borderRadius,
+        decoration: ShapeDecoration(
+          shape: RoundedSuperellipseBorder(
+            side: BorderSide(color: colors.border, width: style.borderWidth),
+            borderRadius: style.borderRadius.base,
+          ),
           color: colors.card,
         ),
         iconStyle: IconThemeData(color: colors.foreground, size: 18),

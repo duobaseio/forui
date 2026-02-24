@@ -923,32 +923,42 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
 
     return .new(
       decoration: FVariants(
-        BoxDecoration(
-          border: .all(color: colors.border, width: style.borderWidth),
-          borderRadius: style.borderRadius,
+        ShapeDecoration(
+          shape: RoundedSuperellipseBorder(
+            side: BorderSide(color: colors.border, width: style.borderWidth),
+            borderRadius: style.borderRadius.base,
+          ),
           color: colors.card,
         ),
         variants: {
-          [.focused]: BoxDecoration(
-            border: .all(color: colors.primary, width: style.borderWidth),
-            borderRadius: style.borderRadius,
+          [.focused]: ShapeDecoration(
+            shape: RoundedSuperellipseBorder(
+              side: BorderSide(color: colors.primary, width: style.borderWidth),
+              borderRadius: style.borderRadius.base,
+            ),
             color: colors.card,
           ),
           //
-          [.disabled]: BoxDecoration(
-            border: .all(color: colors.disable(colors.border), width: style.borderWidth),
-            borderRadius: style.borderRadius,
+          [.disabled]: ShapeDecoration(
+            shape: RoundedSuperellipseBorder(
+              side: BorderSide(color: colors.disable(colors.border), width: style.borderWidth),
+              borderRadius: style.borderRadius.base,
+            ),
             color: colors.card,
           ),
           //
-          [.error]: BoxDecoration(
-            border: .all(color: colors.error, width: style.borderWidth),
-            borderRadius: style.borderRadius,
+          [.error]: ShapeDecoration(
+            shape: RoundedSuperellipseBorder(
+              side: BorderSide(color: colors.error, width: style.borderWidth),
+              borderRadius: style.borderRadius.base,
+            ),
             color: colors.card,
           ),
-          [.error.and(.disabled)]: BoxDecoration(
-            border: .all(color: colors.disable(colors.error), width: style.borderWidth),
-            borderRadius: style.borderRadius,
+          [.error.and(.disabled)]: ShapeDecoration(
+            shape: RoundedSuperellipseBorder(
+              side: BorderSide(color: colors.disable(colors.error), width: style.borderWidth),
+              borderRadius: style.borderRadius.base,
+            ),
             color: colors.disable(colors.card),
           ),
         },

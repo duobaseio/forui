@@ -146,9 +146,11 @@ abstract class _State<T extends FPickerWheel> extends State<T> {
             if (_focused)
               Container(
                 height: extent,
-                decoration: BoxDecoration(
-                  border: .all(color: style.focusedOutlineStyle.color, width: style.focusedOutlineStyle.width),
-                  borderRadius: style.focusedOutlineStyle.borderRadius,
+                decoration: ShapeDecoration(
+                  shape: RoundedSuperellipseBorder(
+                    side: BorderSide(color: style.focusedOutlineStyle.color, width: style.focusedOutlineStyle.width),
+                    borderRadius: style.focusedOutlineStyle.borderRadius,
+                  ),
                 ),
               ),
             ScrollConfiguration(

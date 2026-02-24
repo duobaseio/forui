@@ -138,9 +138,11 @@ extension type FAlertStyles(FVariants<FAlertVariantConstraint, FAlertVariant, FA
             iconStyle: IconThemeData(color: colors.foreground, size: 20),
             titleTextStyle: typography.base.copyWith(fontWeight: .w500, color: colors.foreground, height: 1.2),
             subtitleTextStyle: typography.sm.copyWith(color: colors.mutedForeground),
-            decoration: BoxDecoration(
-              border: .all(color: colors.border),
-              borderRadius: style.borderRadius,
+            decoration: ShapeDecoration(
+              shape: RoundedSuperellipseBorder(
+                side: BorderSide(color: colors.border, width: style.borderWidth),
+                borderRadius: style.borderRadius.base,
+              ),
               color: colors.card,
             ),
           ),
@@ -165,7 +167,7 @@ extension type FAlertStyles(FVariants<FAlertVariantConstraint, FAlertVariant, FA
 final class FAlertStyle with Diagnosticable, _$FAlertStyleFunctions {
   /// The decoration.
   @override
-  final BoxDecoration decoration;
+  final Decoration decoration;
 
   /// The padding. Defaults to `EdgeInsets.fromLTRB(16, 12, 16, 12)`.
   @override

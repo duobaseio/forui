@@ -180,7 +180,7 @@ class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
 
   /// The decoration.
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, BoxDecoration, BoxDecorationDelta> decoration;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, Decoration, DecorationDelta> decoration;
 
   /// The color of the today indicator.
   @override
@@ -216,34 +216,45 @@ class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
     required FTypography typography,
     required FStyle style,
   }) {
-    final focusedBorder = Border.all(color: colors.primary, width: style.borderWidth);
+    final focusedShape = RoundedSuperellipseBorder(
+      side: BorderSide(color: colors.primary, width: style.borderWidth),
+      borderRadius: style.borderRadius.base,
+    );
     return .new(
       decoration: FVariants.from(
-        BoxDecoration(
+        ShapeDecoration(
+          shape: RoundedSuperellipseBorder(
+            side: BorderSide(color: colors.border, width: style.borderWidth),
+            borderRadius: style.borderRadius.base,
+          ),
           color: colors.card,
-          border: .all(color: colors.border),
-          borderRadius: style.borderRadius,
         ),
         variants: {
-          [.focused]: .delta(border: focusedBorder),
-          [.hovered, .pressed]: .delta(color: colors.secondary),
-          [.hovered.and(.focused), .pressed.and(.focused)]: .delta(color: colors.secondary, border: focusedBorder),
+          [.focused]: .shapeDelta(shape: focusedShape),
+          [.hovered, .pressed]: .shapeDelta(color: colors.secondary),
+          [.hovered.and(.focused), .pressed.and(.focused)]: .shapeDelta(color: colors.secondary, shape: focusedShape),
           //
-          [.disabled]: .delta(color: colors.disable(colors.card)),
-          [.disabled.and(.focused)]: .delta(color: colors.disable(colors.card), border: focusedBorder),
-          [.disabled.and(.selected).and(.focused)]: .delta(
+          [.disabled]: .shapeDelta(color: colors.disable(colors.card)),
+          [.disabled.and(.focused)]: .shapeDelta(color: colors.disable(colors.card), shape: focusedShape),
+          [.disabled.and(.selected).and(.focused)]: .shapeDelta(
+            shape: focusedShape,
             color: colors.disable(colors.primary),
-            border: focusedBorder,
           ),
           //
-          [.selected]: .delta(color: colors.primary, border: null),
-          [.selected.and(.focused)]: .delta(color: colors.primary, border: focusedBorder),
-          [.selected.and(.hovered), .selected.and(.pressed)]: .delta(color: colors.hover(colors.primary), border: null),
-          [.selected.and(.hovered).and(.focused), .selected.and(.pressed).and(.focused)]: .delta(
-            color: colors.hover(colors.primary),
-            border: focusedBorder,
+          [.selected]: .shapeDelta(
+            shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base),
+            color: colors.primary,
           ),
-          [.selected.and(.disabled)]: .delta(color: colors.disable(colors.primary)),
+          [.selected.and(.focused)]: .shapeDelta(color: colors.primary, shape: focusedShape),
+          [.selected.and(.hovered), .selected.and(.pressed)]: .shapeDelta(
+            shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base),
+            color: colors.hover(colors.primary),
+          ),
+          [.selected.and(.hovered).and(.focused), .selected.and(.pressed).and(.focused)]: .shapeDelta(
+            shape: focusedShape,
+            color: colors.hover(colors.primary),
+          ),
+          [.selected.and(.disabled)]: .shapeDelta(color: colors.disable(colors.primary)),
         },
       ),
       todayIndicatorColor: FVariants(

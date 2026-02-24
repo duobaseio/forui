@@ -1055,7 +1055,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
         elevation: 0,
         shape: RoundedRectangleBorder(
           borderRadius: style.borderRadius.base,
-          side: BorderSide(width: style.borderWidth, color: colors.border),
+          side: BorderSide(color: colors.border, width: style.borderWidth),
         ),
       ),
 

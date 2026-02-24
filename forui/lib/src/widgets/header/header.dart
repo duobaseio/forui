@@ -134,7 +134,7 @@ class FHeaderStyle with Diagnosticable, _$FHeaderStyleFunctions {
 
   /// The decoration.
   @override
-  final BoxDecoration decoration;
+  final Decoration decoration;
 
   /// An optional background filter. This only takes effect if the [decoration] has a transparent or translucent
   /// background color.

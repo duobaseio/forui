@@ -195,14 +195,20 @@ class FMultiSelectTagStyle with Diagnosticable, _$FMultiSelectTagStyleFunctions 
   FMultiSelectTagStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         decoration: FVariants(
-          BoxDecoration(borderRadius: style.borderRadius, color: colors.secondary),
+          ShapeDecoration(
+            shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base),
+            color: colors.secondary,
+          ),
           variants: {
-            [.hovered, .pressed]: BoxDecoration(
-              borderRadius: style.borderRadius,
+            [.hovered, .pressed]: ShapeDecoration(
+              shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base),
               color: colors.hover(colors.secondary),
             ),
             //
-            [.disabled]: BoxDecoration(borderRadius: style.borderRadius, color: colors.disable(colors.secondary)),
+            [.disabled]: ShapeDecoration(
+              shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base),
+              color: colors.disable(colors.secondary),
+            ),
           },
         ),
         labelTextStyle: FVariants.from(

@@ -27,7 +27,7 @@ void main() {
             width: 100,
             height: 100,
             decoration: BoxDecoration(
-              borderRadius: theme.data.style.borderRadius,
+              borderRadius: theme.data.style.borderRadius.base,
               border: .all(color: theme.data.colors.secondary),
             ),
           ),
@@ -36,7 +36,7 @@ void main() {
             width: 100,
             height: 100,
             decoration: BoxDecoration(
-              borderRadius: theme.data.style.borderRadius,
+              borderRadius: theme.data.style.borderRadius.base,
               border: .all(color: theme.data.colors.secondary),
             ),
           ),

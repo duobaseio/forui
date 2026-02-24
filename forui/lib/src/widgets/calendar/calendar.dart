@@ -265,7 +265,7 @@ class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
   factory FCalendarStyle.inherit({required FColors colors, required FTypography typography, required FStyle style}) =>
       FCalendarStyle(
         headerStyle: .inherit(colors: colors, typography: typography, style: style),
-        dayPickerStyle: .inherit(colors: colors, typography: typography),
+        dayPickerStyle: .inherit(colors: colors, typography: typography, style: style),
         yearMonthPickerStyle: FCalendarEntryStyle(
           backgroundColor: FVariants(
             colors.card,
@@ -275,10 +275,10 @@ class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
               [.disabled]: colors.card,
             },
           ),
-          borderColor: FVariants(
+          borderSide: FVariants<FTappableVariantConstraint, FTappableVariant, BorderSide?, Delta>(
             null,
             variants: {
-              [.focused]: colors.foreground,
+              [.focused]: BorderSide(color: colors.foreground, width: style.borderWidth),
               //
               [.disabled]: null,
             },
@@ -289,10 +289,13 @@ class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
               [.disabled]: .delta(color: colors.disable(colors.foreground)),
             },
           ),
-          radius: const .circular(8),
+          borderRadius: style.borderRadius.base,
         ),
         decoration: ShapeDecoration(
-          shape: RoundedSuperellipseBorder(side: BorderSide(color: colors.border), borderRadius: style.borderRadius),
+          shape: RoundedSuperellipseBorder(
+            side: BorderSide(color: colors.border, width: style.borderWidth),
+            borderRadius: style.borderRadius.base,
+          ),
           color: colors.card,
         ),
       );

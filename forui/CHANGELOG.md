@@ -1,9 +1,10 @@
 ## 0.20.0
 
 ### Others
-* Add `FBorderRadius` with size tokens (`xs`, `sm`, `base`, `lg`, `xl`, `xl2`, `xl3`).
+* Add `FBorderRadius` with size tokens (`xs`, `sm`, `base`, `lg`, `xl`, `xl2`, `xl3`, `pill`).
 
 * **Breaking** Change `FStyle.borderRadius` from `BorderRadius` to `FBorderRadius`.
+* **Breaking** Remove `FLerpBorderRadius`. Use `BorderRadius` instead.
 
 
 ### `FAlert`
@@ -12,7 +13,7 @@
 
 ### `FBadge`
 * **Breaking** Change `FBadgeStyle.decoration` type from `BoxDecoration` to `Decoration`.
-* **Breaking** Rename `FBadgeStyles.defaultBadgeRadius` to `FBadgeStyles.defaultBadgeShape`.
+* **Breaking** Remove `FBadgeStyles.defaultBadgeRadius`. Use `FBorderRadius.pill` instead.
 
 
 ### `FBottomNavigationBar`
@@ -56,6 +57,7 @@
 
 
 ### `FItem` & `FItemGroup`
+* Add `FItem.onDoubleTap`.
 * Add `FItemGroupStyle.slideableItems` for slide-across interaction.
 
 * **Breaking** Change `FItemStyle.decoration` type from `FVariants<..., BoxDecoration, BoxDecorationDelta>` to
@@ -97,6 +99,8 @@
 ### `FTabs`
 * **Breaking** Change `FTabsStyle.decoration` and `indicatorDecoration` types from `BoxDecoration` to `Decoration`.
 
+* Fix `FTabs` showing Material hover overlay on tabs.
+
 
 ### `FTappable` & `FTappableGroup`
 * Add `FTappableGroup` that enables slide-across interaction between `FTappable`s.
@@ -107,7 +111,8 @@
 * **Breaking** Change `FTappableMotion.bounceUpDuration` default from 120ms to 100ms.
 
 
-### `FTileGroup`
+### `FTile` & `FTileGroup`
+* Add `FTile.onDoubleTap`.
 * Add `FTileGroupStyle.slideableTiles` for slide-across interaction.
 
 * **Breaking** Change `FTileGroupStyle.decoration` type from `BoxDecoration` to `Decoration`.

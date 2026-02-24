@@ -86,6 +86,7 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
 
   /// The border.
   @override
+  // TODO: Change this to Decoration once Flutter provides a raw text field, EditableText is awful to work with.
   final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, InputBorder, Delta> border;
 
   /// Creates a [FTextFieldStyle].
@@ -164,26 +165,26 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
       border: FVariants(
         OutlineInputBorder(
           borderSide: BorderSide(color: colors.border, width: style.borderWidth),
-          borderRadius: style.borderRadius,
+          borderRadius: style.borderRadius.base,
         ),
         variants: {
           [.focused]: OutlineInputBorder(
             borderSide: BorderSide(color: colors.primary, width: style.borderWidth),
-            borderRadius: style.borderRadius,
+            borderRadius: style.borderRadius.base,
           ),
           //
           [.disabled]: OutlineInputBorder(
             borderSide: BorderSide(color: colors.disable(colors.border), width: style.borderWidth),
-            borderRadius: style.borderRadius,
+            borderRadius: style.borderRadius.base,
           ),
           //
           [.error]: OutlineInputBorder(
             borderSide: BorderSide(color: colors.error, width: style.borderWidth),
-            borderRadius: style.borderRadius,
+            borderRadius: style.borderRadius.base,
           ),
           [.error.and(.disabled)]: OutlineInputBorder(
             borderSide: BorderSide(color: colors.disable(colors.error), width: style.borderWidth),
-            borderRadius: style.borderRadius,
+            borderRadius: style.borderRadius.base,
           ),
         },
       ),

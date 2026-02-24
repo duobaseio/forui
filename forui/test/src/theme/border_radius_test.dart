@@ -5,49 +5,32 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/forui.dart';
 
 void main() {
-  group('FLerpBorderRadius', () {
-    for (final (Rect rect, RRect expected) in [
-      (const .fromLTWH(0, 0, 30, 30), .fromLTRBR(0.0, 0.0, 30.0, 30.0, const .circular(10))),
-      (const .fromLTWH(0, 0, 15, 35), .fromLTRBR(0.0, 0.0, 15.0, 35.0, const .circular(5))),
-    ]) {
-      test('toRRect', () {
-        const radius = FLerpBorderRadius.all(.circular(10), min: 30);
-        expect(radius.toRRect(rect), expected);
-      });
-    }
-  });
-
   group('FBorderRadius', () {
     test('default constructor', () {
-      const borderRadius = FBorderRadius(
-        xs: FLerpBorderRadius.all(.circular(6), min: 18),
-        sm: FLerpBorderRadius.all(.circular(8), min: 24),
-        base: FLerpBorderRadius.all(.circular(10), min: 30),
-        lg: FLerpBorderRadius.all(.circular(14), min: 42),
-        xl: FLerpBorderRadius.all(.circular(18), min: 54),
-        xl2: FLerpBorderRadius.all(.circular(22), min: 66),
-        xl3: FLerpBorderRadius.all(.circular(26), min: 78),
-      );
+      const borderRadius = FBorderRadius();
 
-      expect(borderRadius.xs, const FLerpBorderRadius.all(.circular(6), min: 18));
-      expect(borderRadius.sm, const FLerpBorderRadius.all(.circular(8), min: 24));
-      expect(borderRadius.base, const FLerpBorderRadius.all(.circular(10), min: 30));
-      expect(borderRadius.lg, const FLerpBorderRadius.all(.circular(14), min: 42));
-      expect(borderRadius.xl, const FLerpBorderRadius.all(.circular(18), min: 54));
-      expect(borderRadius.xl2, const FLerpBorderRadius.all(.circular(22), min: 66));
-      expect(borderRadius.xl3, const FLerpBorderRadius.all(.circular(26), min: 78));
+      expect(borderRadius.xs2, const BorderRadius.all(.circular(4)));
+      expect(borderRadius.xs, const BorderRadius.all(.circular(6)));
+      expect(borderRadius.sm, const BorderRadius.all(.circular(8)));
+      expect(borderRadius.base, const BorderRadius.all(.circular(10)));
+      expect(borderRadius.lg, const BorderRadius.all(.circular(14)));
+      expect(borderRadius.xl, const BorderRadius.all(.circular(18)));
+      expect(borderRadius.xl2, const BorderRadius.all(.circular(22)));
+      expect(borderRadius.xl3, const BorderRadius.all(.circular(26)));
+      expect(borderRadius.pill, const BorderRadius.all(.circular(100)));
     });
 
     test('inherit', () {
-      final borderRadius = FBorderRadius.inherit(10);
+      final borderRadius = FBorderRadius.inherit(12);
 
-      expect(borderRadius.xs, FLerpBorderRadius.circular(6));
-      expect(borderRadius.sm, FLerpBorderRadius.circular(8));
-      expect(borderRadius.base, FLerpBorderRadius.circular(10));
-      expect(borderRadius.lg, FLerpBorderRadius.circular(14));
-      expect(borderRadius.xl, FLerpBorderRadius.circular(18));
-      expect(borderRadius.xl2, FLerpBorderRadius.circular(22));
-      expect(borderRadius.xl3, FLerpBorderRadius.circular(26));
+      expect(borderRadius.xs2, BorderRadius.circular(6));
+      expect(borderRadius.xs, BorderRadius.circular(8));
+      expect(borderRadius.sm, BorderRadius.circular(10));
+      expect(borderRadius.base, BorderRadius.circular(12));
+      expect(borderRadius.lg, BorderRadius.circular(16));
+      expect(borderRadius.xl, BorderRadius.circular(20));
+      expect(borderRadius.xl2, BorderRadius.circular(24));
+      expect(borderRadius.xl3, BorderRadius.circular(28));
     });
 
     test('lerp', () {
@@ -60,7 +43,7 @@ void main() {
 
     test('copyWith', () {
       final original = FBorderRadius.inherit(10);
-      final modified = original.copyWith(base: BorderRadius.circular(20));
+      final modified = original.copyWith(base: .circular(20));
 
       expect(modified.xs, original.xs);
       expect(modified.base, BorderRadius.circular(20));

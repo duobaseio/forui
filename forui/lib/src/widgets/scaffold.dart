@@ -179,7 +179,7 @@ class FScaffoldStyle with Diagnosticable, _$FScaffoldStyleFunctions {
 
   /// The header decoration.
   @override
-  final BoxDecoration headerDecoration;
+  final Decoration headerDecoration;
 
   /// The footer decoration.
   ///
@@ -188,7 +188,7 @@ class FScaffoldStyle with Diagnosticable, _$FScaffoldStyleFunctions {
   /// top border must be removed from both [FBottomNavigationBarStyle.decoration] and [FScaffoldStyle.footerDecoration]
   /// for the changes to take effect.
   @override
-  final BoxDecoration footerDecoration;
+  final Decoration footerDecoration;
 
   /// Creates a [FScaffoldStyle].
   FScaffoldStyle({

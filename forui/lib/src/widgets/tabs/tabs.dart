@@ -198,6 +198,8 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
               dividerColor: Colors.transparent,
               labelStyle: style.labelTextStyle.resolve({context.platformVariant, FTabVariant.selected}),
               unselectedLabelStyle: style.labelTextStyle.resolve({context.platformVariant}),
+              overlayColor: const WidgetStatePropertyAll(Colors.transparent),
+              splashFactory: NoSplash.splashFactory,
               onTap: widget.onPress,
             ),
           ),

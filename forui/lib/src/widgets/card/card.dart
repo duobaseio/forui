@@ -100,7 +100,10 @@ class FCardStyle with Diagnosticable, _$FCardStyleFunctions {
   FCardStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         decoration: ShapeDecoration(
-          shape: RoundedSuperellipseBorder(side: BorderSide(color: colors.border), borderRadius: style.borderRadius),
+          shape: RoundedSuperellipseBorder(
+            side: BorderSide(color: colors.border, width: style.borderWidth),
+            borderRadius: style.borderRadius.base,
+          ),
           color: colors.card,
         ),
         contentStyle: FCardContentStyle(

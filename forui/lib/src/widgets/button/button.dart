@@ -288,7 +288,7 @@ extension type FButtonStyles(
             style: style,
             decoration: .from(
               ShapeDecoration(
-                shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius),
+                shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base),
                 color: colors.primary,
               ),
               variants: {
@@ -309,7 +309,7 @@ extension type FButtonStyles(
               style: style,
               decoration: .from(
                 ShapeDecoration(
-                  shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius),
+                  shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base),
                   color: colors.secondary,
                 ),
                 variants: {
@@ -329,7 +329,7 @@ extension type FButtonStyles(
               style: style,
               decoration: .from(
                 ShapeDecoration(
-                  shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius),
+                  shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base),
                   color: colors.destructive.withValues(alpha: colors.brightness == .light ? 0.1 : 0.2),
                 ),
                 variants: {
@@ -360,8 +360,9 @@ extension type FButtonStyles(
               decoration: .from(
                 ShapeDecoration(
                   shape: RoundedSuperellipseBorder(
-                    borderRadius: style.borderRadius,
-                  ).copyWith(side: BorderSide(color: colors.border)),
+                    side: BorderSide(color: colors.border, width: style.borderWidth),
+                    borderRadius: style.borderRadius.base,
+                  ),
                   color: colors.card,
                 ),
                 variants: {
@@ -380,7 +381,7 @@ extension type FButtonStyles(
               typography: typography,
               style: style,
               decoration: .from(
-                ShapeDecoration(shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius)),
+                ShapeDecoration(shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.base)),
                 variants: {
                   [.hovered, .pressed]: .shapeDelta(color: colors.secondary),
                   //

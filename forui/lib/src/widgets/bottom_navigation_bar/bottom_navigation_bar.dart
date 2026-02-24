@@ -190,7 +190,7 @@ class FBottomNavigationBarStyle with Diagnosticable, _$FBottomNavigationBarStyle
   /// top border must be removed from both [FBottomNavigationBarStyle.decoration] and [FScaffoldStyle.footerDecoration]
   /// for the changes to take effect.
   @override
-  final BoxDecoration decoration;
+  final Decoration decoration;
 
   /// An optional background filter. This only takes effect if the [decoration] has a transparent or translucent
   /// background color.
@@ -242,7 +242,7 @@ class FBottomNavigationBarStyle with Diagnosticable, _$FBottomNavigationBarStyle
   FBottomNavigationBarStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         decoration: BoxDecoration(
-          border: Border(top: BorderSide(color: colors.border)),
+          border: Border(top: BorderSide(color: colors.border, width: style.borderWidth)),
           color: colors.background,
         ),
         itemStyle: .inherit(colors: colors, typography: typography, style: style),
