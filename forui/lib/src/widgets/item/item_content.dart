@@ -134,7 +134,7 @@ class ItemContent extends StatelessWidget {
 
 /// An [FItem] content's style.
 class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
-  /// The content's padding. Defaults to `const EdgeInsetsDirectional.only(start: 11, top: 7.5, bottom: 7.5, end: 6)`.
+  /// The content's padding. Defaults to `const EdgeInsetsDirectional.only(start: 10, top: 6, bottom: 6, end: 6)`.
   @override
   final EdgeInsetsGeometry padding;
 
@@ -142,7 +142,7 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
   @override
   final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> prefixIconStyle;
 
-  /// The horizontal spacing between the prefix icon and title and the subtitle. Defaults to 10.
+  /// The horizontal spacing between the prefix icon and title and the subtitle. Defaults to 8.
   ///
   /// ## Contract
   /// Throws [AssertionError] if [prefixIconSpacing] is negative.
@@ -179,7 +179,7 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
   @override
   final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> suffixIconStyle;
 
-  /// The horizontal spacing between the details and suffix icon. Defaults to 10.
+  /// The horizontal spacing between the details and suffix icon. Defaults to 8.
   ///
   /// ## Contract
   /// Throws [AssertionError] if [suffixIconSpacing] is negative.
@@ -193,11 +193,11 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
     required this.subtitleTextStyle,
     required this.detailsTextStyle,
     required this.suffixIconStyle,
-    this.padding = const .directional(start: 11, top: 7.5, bottom: 7.5, end: 6),
-    this.prefixIconSpacing = 10,
-    this.titleSpacing = 3,
+    this.padding = const .directional(start: 10, top: 6, bottom: 6, end: 6),
+    this.prefixIconSpacing = 8,
+    this.titleSpacing = 4,
     this.middleSpacing = 4,
-    this.suffixIconSpacing = 5,
+    this.suffixIconSpacing = 8,
   }) : assert(0 <= prefixIconSpacing, 'prefixIconSpacing ($prefixIconSpacing) must be >= 0'),
        assert(0 <= titleSpacing, 'titleSpacing ($titleSpacing) must be >= 0'),
        assert(0 <= middleSpacing, 'middleSpacing ($middleSpacing) must be >= 0'),
@@ -214,7 +214,7 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
     final disabledMutedForeground = colors.disable(mutedForeground);
     return FItemContentStyle(
       prefixIconStyle: FVariants.from(
-        IconThemeData(color: prefix, size: 15),
+        IconThemeData(color: prefix, size: typography.md.fontSize),
         variants: {
           [.disabled]: .delta(color: colors.disable(prefix)),
         },
@@ -238,7 +238,7 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
         },
       ),
       suffixIconStyle: FVariants.from(
-        IconThemeData(color: mutedForeground, size: 15),
+        IconThemeData(color: mutedForeground, size: typography.md.fontSize),
         variants: {
           [.disabled]: .delta(color: disabledMutedForeground),
         },

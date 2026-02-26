@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
@@ -82,7 +84,7 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
                   data: widget.style.buttonStyle.iconContentStyle.iconStyle
                       .resolve(variants)
                       .copyWith(color: widget.style.headerTextStyle.color),
-                  child: const Icon(FIcons.chevronRight, size: 15),
+                  child: Icon(FIcons.chevronRight, size: widget.style.headerIconSize),
                 ),
               ),
             ),
@@ -174,6 +176,10 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
   @override
   final TextStyle headerTextStyle;
 
+  /// The header's icon size. Defaults to 16.
+  @override
+  final double headerIconSize;
+
   /// The arrow turn animation's duration. Defaults to 200ms.
   @override
   final Duration animationDuration;
@@ -183,6 +189,7 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
     required this.focusedOutlineStyle,
     required this.buttonStyle,
     required this.headerTextStyle,
+    this.headerIconSize = 16,
     this.animationDuration = const Duration(milliseconds: 200),
   });
 
@@ -193,27 +200,8 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
     required FStyle style,
   }) => .new(
     focusedOutlineStyle: style.focusedOutlineStyle,
-    buttonStyle: FButtonStyles.inherit(colors: colors, typography: typography, style: style).outline.sm.copyWith(
-      decoration: FVariants.from(
-        ShapeDecoration(
-          shape: RoundedSuperellipseBorder(
-            side: BorderSide(color: colors.border, width: style.borderWidth),
-            borderRadius: style.borderRadius.md,
-          ),
-          color: colors.card,
-        ),
-        variants: {
-          [.hovered, .pressed]: .shapeDelta(color: colors.secondary),
-          //
-          [.disabled]: .shapeDelta(
-            shape: RoundedSuperellipseBorder(
-              side: BorderSide(color: colors.disable(colors.border), width: style.borderWidth),
-              borderRadius: style.borderRadius.md,
-            ),
-          ),
-        },
-      ),
-    ),
-    headerTextStyle: typography.md.copyWith(color: colors.foreground, fontWeight: .w600),
+    buttonStyle: FButtonStyles.inherit(colors: colors, typography: typography, style: style).outline.sm,
+    headerTextStyle: typography.sm.copyWith(color: colors.foreground, fontWeight: .w500),
+    headerIconSize: typography.md.fontSize!,
   );
 }

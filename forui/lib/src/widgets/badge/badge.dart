@@ -99,7 +99,7 @@ extension type FBadgeStyles(FVariants<FBadgeVariantConstraint, FBadgeVariant, FB
               color: colors.primary,
             ),
             contentStyle: FBadgeContentStyle(
-              labelTextStyle: typography.sm.copyWith(color: colors.primaryForeground, fontWeight: .w600),
+              labelTextStyle: typography.xs.copyWith(color: colors.primaryForeground, fontWeight: .w500),
             ),
           ),
           variants: {
@@ -114,7 +114,7 @@ extension type FBadgeStyles(FVariants<FBadgeVariantConstraint, FBadgeVariant, FB
                 color: colors.destructive.withValues(alpha: colors.brightness == .light ? 0.1 : 0.2),
               ),
               contentStyle: FBadgeContentStyle(
-                labelTextStyle: typography.sm.copyWith(color: colors.destructive, fontWeight: .w600),
+                labelTextStyle: typography.xs.copyWith(color: colors.destructive, fontWeight: .w500),
               ),
             ),
             [.outline]: .delta(

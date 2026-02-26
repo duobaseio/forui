@@ -243,7 +243,7 @@ class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
   @override
   final Decoration decoration;
 
-  /// The padding surrounding the header & picker. Defaults to `EdgeInsets.symmetric(horizontal: 12, vertical: 16)`.
+  /// The padding surrounding the header & picker. Defaults to `EdgeInsets.all(12)`.
   @override
   final EdgeInsetsGeometry padding;
 
@@ -257,7 +257,7 @@ class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
     required this.dayPickerStyle,
     required this.yearMonthPickerStyle,
     required this.decoration,
-    this.padding = const .symmetric(horizontal: 12, vertical: 16),
+    this.padding = const .all(12),
     this.pageAnimationDuration = const Duration(milliseconds: 200),
   });
 
@@ -284,7 +284,7 @@ class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
             },
           ),
           textStyle: FVariants.from(
-            typography.md.copyWith(color: colors.foreground, fontWeight: .w500),
+            typography.sm.copyWith(color: colors.foreground, fontWeight: .w500),
             variants: {
               [.disabled]: .delta(color: colors.disable(colors.foreground)),
             },

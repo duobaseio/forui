@@ -146,7 +146,7 @@ class FRadio extends StatelessWidget {
                     duration: style.motion.selectDuration,
                     reverseDuration: style.motion.unselectDuration,
                     curve: style.motion.selectCurve,
-                    child: value ? const SizedBox.square(dimension: 9) : const SizedBox.shrink(),
+                    child: value ? const SizedBox.square(dimension: 8) : const SizedBox.shrink(),
                   ),
                 ),
               ],

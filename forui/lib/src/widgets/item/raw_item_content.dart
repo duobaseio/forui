@@ -87,7 +87,7 @@ class RawItemContent extends StatelessWidget {
 
 /// An [FItem] raw content's style.
 class FRawItemContentStyle with Diagnosticable, _$FRawItemContentStyleFunctions {
-  /// The content's padding. Defaults to `EdgeInsetsDirectional.only(15, 13, 10, 13)`.
+  /// The content's padding. Defaults to `EdgeInsetsDirectional.only(start: 10, top: 6, bottom: 6, end: 6)`.
   @override
   final EdgeInsetsGeometry padding;
 
@@ -110,8 +110,8 @@ class FRawItemContentStyle with Diagnosticable, _$FRawItemContentStyleFunctions 
   FRawItemContentStyle({
     required this.prefixIconStyle,
     required this.childTextStyle,
-    this.padding = const .directional(start: 15, top: 7.5, bottom: 7.5, end: 10),
-    this.prefixIconSpacing = 10,
+    this.padding = const .directional(start: 10, top: 6, bottom: 6, end: 6),
+    this.prefixIconSpacing = 8,
   }) : assert(0 <= prefixIconSpacing, 'prefixIconSpacing ($prefixIconSpacing) must be >= 0');
 
   /// Creates a [FRawItemContentStyle] that inherits its properties.
@@ -122,7 +122,7 @@ class FRawItemContentStyle with Diagnosticable, _$FRawItemContentStyleFunctions 
     required Color color,
   }) : this(
          prefixIconStyle: FVariants.from(
-           IconThemeData(color: prefix, size: 15),
+           IconThemeData(color: prefix, size: typography.md.fontSize),
            variants: {
              [.disabled]: .delta(color: colors.disable(prefix)),
            },

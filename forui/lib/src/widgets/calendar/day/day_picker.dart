@@ -220,7 +220,7 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
     required this.current,
     required this.enclosing,
     this.startDayOfWeek,
-    this.tileSize = 42,
+    this.tileSize = 32,
   }) : assert(
          startDayOfWeek == null || (DateTime.monday <= startDayOfWeek && startDayOfWeek <= DateTime.sunday),
          'startDayOfWeek ($startDayOfWeek) must be between DateTime.monday (1) and DateTime.sunday (7)',
@@ -258,7 +258,7 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
         backgroundColor: backgroundColor,
         borderSide: border,
         textStyle: FVariants.from(
-          typography.md.copyWith(color: colors.foreground, fontWeight: .w500),
+          typography.xs.copyWith(color: colors.foreground, fontWeight: .w500),
           variants: {
             [.disabled]: .delta(color: colors.disable(colors.foreground)),
             //
@@ -266,13 +266,13 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
             [.selected.and(.disabled)]: .delta(color: colors.disable(colors.primaryForeground)),
           },
         ),
-        borderRadius: style.borderRadius.md,
+        borderRadius: style.borderRadius.sm,
       ),
       enclosing: FCalendarEntryStyle(
         backgroundColor: backgroundColor,
         borderSide: border,
         textStyle: FVariants.from(
-          typography.md.copyWith(color: colors.mutedForeground, fontWeight: .w500),
+          typography.xs.copyWith(color: colors.mutedForeground, fontWeight: .w500),
           variants: {
             [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
             //
@@ -280,7 +280,7 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
             [.selected.and(.disabled)]: .delta(color: colors.disable(colors.primaryForeground)),
           },
         ),
-        borderRadius: style.borderRadius.md,
+        borderRadius: style.borderRadius.sm,
       ),
     );
   }

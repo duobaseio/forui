@@ -449,7 +449,7 @@ class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
   @override
   final IconThemeData iconStyle;
 
-  /// The padding. Defaults to `EdgeInsets.symmetric(horizontal: 5)`.
+  /// The padding. Defaults to `EdgeInsets.symmetric(horizontal: 6)`.
   @override
   final EdgeInsetsGeometry padding;
 
@@ -467,7 +467,7 @@ class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
     required this.iconStyle,
     required this.tappableStyle,
     required this.focusedOutlineStyle,
-    this.padding = const .symmetric(horizontal: 5),
+    this.padding = const .symmetric(horizontal: 6),
   });
 
   /// Creates a [FBreadcrumbStyle] that inherits its properties.
@@ -482,7 +482,7 @@ class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
             [.selected.and(.hovered), .selected.and(.pressed)]: .delta(color: colors.hover(colors.foreground)),
           },
         ),
-        iconStyle: IconThemeData(color: colors.mutedForeground, size: 16),
+        iconStyle: IconThemeData(color: colors.mutedForeground, size: typography.md.fontSize),
         tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
         focusedOutlineStyle: style.focusedOutlineStyle,
       );

@@ -8,6 +8,10 @@
 * **Breaking** Change `FAlertStyle.decoration` type from `BoxDecoration` to `Decoration`.
 
 
+### `FAutocomplete`
+* Change `FAutocompleteSection` layout to better align with the latest shadcn version.
+
+
 ### `FBadge`
 * Add `FBadgeVariant.primary`.
 
@@ -103,6 +107,10 @@
   `Decoration`.
 
 
+### `FSelect` & `FMultiSelect`
+* Change `FSelectSection` layout to better align with the latest shadcn version.
+
+
 ### `FSidebar`
 * **Breaking** Change `FSidebarStyle.decoration` type from `BoxDecoration` to `Decoration`.
 
@@ -131,6 +139,8 @@
 
 
 ### `FToast`
+* Change `FToast` layout to better align with the latest shadcn version.
+
 * **Breaking** Change `FToastStyle.decoration` type from `BoxDecoration` to `Decoration`.
 
 

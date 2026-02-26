@@ -169,7 +169,7 @@ class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
   @override
   final ImageFilter? backgroundFilter;
 
-  /// The toast content's padding. Defaults to `EdgeInsets.all(16)`.
+  /// The toast content's padding. Defaults to `EdgeInsets.symmetric(horizontal: 16, vertical: 12)`.
   @override
   final EdgeInsetsGeometry padding;
 
@@ -208,7 +208,7 @@ class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
     required this.titleTextStyle,
     required this.descriptionTextStyle,
     this.constraints = const BoxConstraints(maxHeight: 250, maxWidth: 400),
-    this.padding = const .all(16),
+    this.padding = const .symmetric(horizontal: 16, vertical: 12),
     this.backgroundFilter,
     this.iconSpacing = 10,
     this.titleSpacing = 1,
@@ -226,9 +226,10 @@ class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
           ),
           color: colors.card,
         ),
-        iconStyle: IconThemeData(color: colors.foreground, size: 18),
+        iconStyle: IconThemeData(color: colors.foreground, size: typography.md.fontSize),
+        iconSpacing: 10,
         titleTextStyle: typography.sm.copyWith(color: colors.foreground, fontWeight: .w500),
-        titleSpacing: 5,
+        titleSpacing: 2,
         descriptionTextStyle: typography.sm.copyWith(color: colors.mutedForeground, overflow: .ellipsis),
       );
 }

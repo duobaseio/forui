@@ -37,7 +37,7 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
 
   /// The padding surrounding this text field's content.
   ///
-  /// Defaults to `const EdgeInsets.symmetric(horizontal: 14, vertical: 14)`.
+  /// Defaults to `const EdgeInsets.symmetric(horizontal: 10, vertical: 9)`.
   @override
   final EdgeInsetsGeometry contentPadding;
 
@@ -104,7 +104,7 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
     required super.descriptionTextStyle,
     required super.errorTextStyle,
     this.cursorColor = CupertinoColors.activeBlue,
-    this.contentPadding = const .symmetric(horizontal: 10, vertical: 10),
+    this.contentPadding = const .symmetric(horizontal: 10, vertical: 9),
     this.clearButtonPadding = const .directional(end: 4),
     this.obscureButtonPadding = const .directional(end: 4),
     this.scrollPadding = const .all(20),
@@ -121,7 +121,7 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
     final ghost = FButtonStyles.inherit(colors: colors, typography: typography, style: style).ghost.sm;
     final textStyle = typography.sm.copyWith(fontFamily: typography.defaultFontFamily);
     final iconStyle = FVariants<FTextFieldVariantConstraint, FTextFieldVariant, IconThemeData, IconThemeDataDelta>.from(
-      IconThemeData(color: colors.mutedForeground, size: 16),
+      IconThemeData(color: colors.mutedForeground, size: typography.md.fontSize),
       variants: {
         [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
       },

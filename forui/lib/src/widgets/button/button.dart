@@ -482,11 +482,11 @@ extension type FButtonSizeStyles(
     );
 
     final md = button(
-      textStyle: typography.md,
-      contentPadding: const .symmetric(horizontal: 16, vertical: 11),
-      contentSpacing: 10,
+      textStyle: typography.sm,
+      contentPadding: const .symmetric(horizontal: 10, vertical: 11),
+      contentSpacing: 6,
       iconSize: typography.md.fontSize ?? 16,
-      iconPadding: const .all(11),
+      iconPadding: const .all(10),
     );
 
     return FButtonSizeStyles(
@@ -495,25 +495,25 @@ extension type FButtonSizeStyles(
         variants: {
           [.xs]: button(
             textStyle: typography.xs,
-            contentPadding: const .symmetric(horizontal: 8, vertical: 7),
-            contentSpacing: 6,
+            contentPadding: const .symmetric(horizontal: 8, vertical: 6),
+            contentSpacing: 4,
             iconSize: typography.xs.fontSize ?? 12,
-            iconPadding: const .all(7),
+            iconPadding: const .all(6),
           ),
           [.sm]: button(
             textStyle: typography.sm,
-            contentPadding: const .symmetric(horizontal: 12, vertical: 9),
-            contentSpacing: 8,
-            iconSize: typography.sm.fontSize ?? 14,
-            iconPadding: const .all(9),
+            contentPadding: const .symmetric(horizontal: 10, vertical: 9),
+            contentSpacing: 4,
+            iconSize: typography.md.fontSize ?? 16,
+            iconPadding: const .all(8),
           ),
           [.md]: md,
           [.lg]: button(
-            textStyle: typography.md,
-            contentPadding: const .symmetric(horizontal: 32, vertical: 14),
-            contentSpacing: 10,
+            textStyle: typography.sm,
+            contentPadding: const .symmetric(horizontal: 10, vertical: 13),
+            contentSpacing: 6,
             iconSize: typography.md.fontSize ?? 16,
-            iconPadding: const .all(14),
+            iconPadding: const .all(12),
           ),
         },
       ),
