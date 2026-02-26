@@ -263,7 +263,7 @@ class FSelectContentStyle extends FPopoverStyle with Diagnosticable, _$FSelectCo
   @override
   final FSelectScrollHandleStyle scrollHandleStyle;
 
-  /// The padding surrounding the content. Defaults to `const EdgeInsets.symmetric(vertical: 5)`.
+  /// The padding surrounding the content. Defaults to `const EdgeInsets.symmetric(6)`.
   @override
   final EdgeInsetsGeometry padding;
 
@@ -272,7 +272,7 @@ class FSelectContentStyle extends FPopoverStyle with Diagnosticable, _$FSelectCo
     required this.sectionStyle,
     required this.scrollHandleStyle,
     required super.decoration,
-    this.padding = const .symmetric(vertical: 5),
+    this.padding = const .symmetric(vertical: 6),
     super.barrierFilter,
     super.backgroundFilter,
     super.viewInsets,
@@ -282,6 +282,6 @@ class FSelectContentStyle extends FPopoverStyle with Diagnosticable, _$FSelectCo
   FSelectContentStyle.inherit({required super.colors, required super.style, required FTypography typography})
     : sectionStyle = .inherit(colors: colors, style: style, typography: typography),
       scrollHandleStyle = .inherit(colors: colors),
-      padding = const .symmetric(vertical: 5),
+      padding = const .symmetric(vertical: 6),
       super.inherit();
 }

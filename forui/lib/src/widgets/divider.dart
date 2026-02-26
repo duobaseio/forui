@@ -103,8 +103,8 @@ extension type FDividerStyles(
 class FDividerStyle with Diagnosticable, _$FDividerStyleFunctions {
   /// The default padding for horizontal and vertical dividers.
   static const defaultPadding = (
-    horizontalStyle: EdgeInsets.symmetric(vertical: 20),
-    verticalStyle: EdgeInsets.symmetric(horizontal: 20),
+    horizontalStyle: EdgeInsets.symmetric(vertical: 16),
+    verticalStyle: EdgeInsets.symmetric(horizontal: 16),
   );
 
   /// The color of the separating line.

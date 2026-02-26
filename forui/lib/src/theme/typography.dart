@@ -38,6 +38,13 @@ final class FTypography with Diagnosticable {
   /// Throws an [AssertionError] if empty.
   final String defaultFontFamily;
 
+  /// The font size for extra extra small text.
+  ///
+  /// Defaults to:
+  /// * `fontSize` = 10.
+  /// * `height` = 1.
+  final TextStyle xs2;
+
   /// The font size for extra small text.
   ///
   /// Defaults to:
@@ -125,6 +132,7 @@ final class FTypography with Diagnosticable {
   /// Creates a [FTypography].
   const FTypography({
     this.defaultFontFamily = 'packages/forui/Inter',
+    this.xs2 = const TextStyle(fontSize: 10, height: 1),
     this.xs = const TextStyle(fontSize: 12, height: 1),
     this.sm = const TextStyle(fontSize: 14, height: 1.25),
     this.md = const TextStyle(fontSize: 16, height: 1.5),
@@ -141,7 +149,8 @@ final class FTypography with Diagnosticable {
 
   /// Creates a [FTypography] that inherits its properties.
   FTypography.inherit({required FColors colors, this.defaultFontFamily = 'packages/forui/Inter'})
-    : xs = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 12, height: 1),
+    : xs2 = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 10, height: 1),
+      xs = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 12, height: 1),
       sm = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 14, height: 1.25),
       md = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 16, height: 1.5),
       lg = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 18, height: 1.75),
@@ -158,6 +167,7 @@ final class FTypography with Diagnosticable {
   /// Creates a linear interpolation between two [FTypography]s using the given factor [t].
   factory FTypography.lerp(FTypography a, FTypography b, double t) => .new(
     defaultFontFamily: t < 0.5 ? a.defaultFontFamily : b.defaultFontFamily,
+    xs2: .lerp(a.xs2, b.xs2, t)!,
     xs: .lerp(a.xs, b.xs, t)!,
     sm: .lerp(a.sm, b.sm, t)!,
     md: .lerp(a.md, b.md, t)!,
@@ -188,6 +198,7 @@ final class FTypography with Diagnosticable {
   @useResult
   FTypography scale({double sizeScalar = 1}) => .new(
     defaultFontFamily: defaultFontFamily,
+    xs2: _scaleTextStyle(style: xs2, sizeScalar: sizeScalar),
     xs: _scaleTextStyle(style: xs, sizeScalar: sizeScalar),
     sm: _scaleTextStyle(style: sm, sizeScalar: sizeScalar),
     md: _scaleTextStyle(style: md, sizeScalar: sizeScalar),
@@ -225,6 +236,7 @@ final class FTypography with Diagnosticable {
   /// ```
   @useResult
   FTypography copyWith({
+    TextStyle? xs2,
     TextStyle? xs,
     TextStyle? sm,
     TextStyle? md,
@@ -239,6 +251,7 @@ final class FTypography with Diagnosticable {
     TextStyle? xl8,
   }) => FTypography(
     defaultFontFamily: defaultFontFamily,
+    xs2: xs2 ?? this.xs2,
     xs: xs ?? this.xs,
     sm: sm ?? this.sm,
     md: md ?? this.md,
@@ -258,6 +271,7 @@ final class FTypography with Diagnosticable {
     super.debugFillProperties(properties);
     properties
       ..add(StringProperty('defaultFontFamily', defaultFontFamily, defaultValue: 'packages/forui/Inter'))
+      ..add(DiagnosticsProperty('xs2', xs2))
       ..add(DiagnosticsProperty('xs', xs))
       ..add(DiagnosticsProperty('sm', sm))
       ..add(DiagnosticsProperty('md', md))
@@ -278,6 +292,7 @@ final class FTypography with Diagnosticable {
       other is FTypography &&
           runtimeType == other.runtimeType &&
           defaultFontFamily == other.defaultFontFamily &&
+          xs2 == other.xs2 &&
           xs == other.xs &&
           sm == other.sm &&
           md == other.md &&
@@ -294,6 +309,7 @@ final class FTypography with Diagnosticable {
   @override
   int get hashCode =>
       defaultFontFamily.hashCode ^
+      xs2.hashCode ^
       xs.hashCode ^
       sm.hashCode ^
       md.hashCode ^

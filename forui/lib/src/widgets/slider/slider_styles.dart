@@ -82,14 +82,14 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
   @override
   final BorderRadius borderRadius;
 
-  /// The slider's cross-axis extent. Defaults to 8.
+  /// The slider's cross-axis extent. Defaults to 6.
   ///
   /// ## Contract:
   /// Throws [AssertionError] if it is not positive.
   @override
   final double crossAxisExtent;
 
-  /// The thumb's size. Defaults to `25` on primarily touch devices and `20` on non-primarily touch devices.
+  /// The thumb's size. Defaults to `20` on primarily touch devices and `16` on non-primarily touch devices.
   ///
   /// ## Contract
   /// Throws [AssertionError] if [thumbSize] is not positive.
@@ -142,8 +142,8 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
     required super.descriptionTextStyle,
     required super.errorTextStyle,
     this.borderRadius = const .all(.circular(4)),
-    this.crossAxisExtent = 8,
-    this.thumbSize = 20,
+    this.crossAxisExtent = 6,
+    this.thumbSize = 16,
     this.tooltipMotion = const FTooltipMotion(),
     this.tooltipTipAnchor = .bottomCenter,
     this.tooltipThumbAnchor = .topCenter,

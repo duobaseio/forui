@@ -40,7 +40,7 @@ class Content extends StatelessWidget {
           if (image case final image?)
             ClipPath(
               clipper: ShapeBorderClipper(
-                shape: RoundedSuperellipseBorder(borderRadius: context.theme.style.borderRadius.md),
+                shape: RoundedSuperellipseBorder(borderRadius: context.theme.style.borderRadius.lg),
               ),
               child: image,
             ),
@@ -83,11 +83,11 @@ class Content extends StatelessWidget {
 
 /// [FCard] content's style.
 class FCardContentStyle with Diagnosticable, _$FCardContentStyleFunctions {
-  /// The spacing between the image and the title, subtitle, and child if any of them is provided. Defaults to 10.
+  /// The spacing between the image and the title, subtitle, and child if any of them is provided. Defaults to 24.
   @override
   final double imageSpacing;
 
-  /// The spacing between the title/subtitle and the child if an image is provided. Defaults to 8.
+  /// The spacing between the title/subtitle and the child if an image is provided. Defaults to 4.
   @override
   final double subtitleSpacing;
 
@@ -99,7 +99,7 @@ class FCardContentStyle with Diagnosticable, _$FCardContentStyleFunctions {
   @override
   final TextStyle subtitleTextStyle;
 
-  /// The padding. Defaults to `EdgeInsets.all(16)`.
+  /// The padding. Defaults to `EdgeInsets.all(24)`.
   @override
   final EdgeInsetsGeometry padding;
 
@@ -107,8 +107,8 @@ class FCardContentStyle with Diagnosticable, _$FCardContentStyleFunctions {
   const FCardContentStyle({
     required this.titleTextStyle,
     required this.subtitleTextStyle,
-    this.imageSpacing = 10,
-    this.subtitleSpacing = 8,
-    this.padding = const .all(16),
+    this.imageSpacing = 24,
+    this.subtitleSpacing = 4,
+    this.padding = const .all(24),
   });
 }

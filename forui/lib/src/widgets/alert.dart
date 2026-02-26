@@ -94,7 +94,7 @@ class FAlert extends StatelessWidget {
                 IconTheme(data: style.iconStyle, child: icon),
                 Flexible(
                   child: Padding(
-                    padding: const .only(left: 8),
+                    padding: const .only(left: 10),
                     child: DefaultTextStyle.merge(style: style.titleTextStyle, child: title),
                   ),
                 ),
@@ -106,7 +106,7 @@ class FAlert extends StatelessWidget {
                   SizedBox(width: style.iconStyle.size),
                   Flexible(
                     child: Padding(
-                      padding: const .only(top: 3, left: 8),
+                      padding: const .only(top: 2, left: 10),
                       child: DefaultTextStyle.merge(style: style.subtitleTextStyle, child: subtitle),
                     ),
                   ),
@@ -133,8 +133,8 @@ extension type FAlertStyles(FVariants<FAlertVariantConstraint, FAlertVariant, FA
   /// Creates a [FAlertStyles] that inherits its properties.
   factory FAlertStyles.inherit({required FColors colors, required FTypography typography, required FStyle style}) {
     final primary = FAlertStyle(
-      iconStyle: IconThemeData(color: colors.foreground, size: 20),
-      titleTextStyle: typography.md.copyWith(fontWeight: .w500, color: colors.foreground, height: 1.2),
+      iconStyle: IconThemeData(color: colors.foreground, size: typography.md.fontSize),
+      titleTextStyle: typography.sm.copyWith(fontWeight: .w500, color: colors.foreground),
       subtitleTextStyle: typography.sm.copyWith(color: colors.mutedForeground),
       decoration: ShapeDecoration(
         shape: RoundedSuperellipseBorder(
@@ -173,7 +173,7 @@ final class FAlertStyle with Diagnosticable, _$FAlertStyleFunctions {
   @override
   final Decoration decoration;
 
-  /// The padding. Defaults to `EdgeInsets.fromLTRB(16, 12, 16, 12)`.
+  /// The padding. Defaults to `EdgeInsets.symmetric(horizontal: 16, vertical: 12)`.
   @override
   final EdgeInsetsGeometry padding;
 
@@ -195,6 +195,6 @@ final class FAlertStyle with Diagnosticable, _$FAlertStyleFunctions {
     required this.iconStyle,
     required this.titleTextStyle,
     required this.subtitleTextStyle,
-    this.padding = const .fromLTRB(16, 12, 16, 12),
+    this.padding = const .symmetric(horizontal: 16, vertical: 12),
   });
 }

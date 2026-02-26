@@ -45,7 +45,7 @@ part 'picker/picker_time_field.dart';
 abstract class FTimeField extends StatefulWidget {
   /// The default prefix builder that shows a clock icon.
   static Widget defaultIconBuilder(BuildContext _, FTimeFieldStyle style, Set<FTextFieldVariant> variants) => Padding(
-    padding: const EdgeInsetsDirectional.only(start: 14.0, end: 8.0),
+    padding: const EdgeInsetsDirectional.only(start: 12.0, end: 4.0),
     child: IconTheme(data: style.fieldStyle.iconStyle.resolve(variants), child: const Icon(FIcons.clock4)),
   );
 

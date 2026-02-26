@@ -60,7 +60,7 @@ class FTabsStyle with Diagnosticable, _$FTabsStyleFunctions {
     required this.focusedOutlineStyle,
     this.padding = const .all(4),
     this.indicatorSize = .tab,
-    this.height = 35,
+    this.height = 36,
     this.spacing = 10,
   });
 

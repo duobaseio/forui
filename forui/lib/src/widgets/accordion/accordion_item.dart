@@ -178,6 +178,7 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
           builder: (_, variants, _) => Padding(
             padding: style.titlePadding,
             child: Row(
+              crossAxisAlignment: .start,
               children: [
                 Expanded(
                   child: DefaultTextStyle.merge(

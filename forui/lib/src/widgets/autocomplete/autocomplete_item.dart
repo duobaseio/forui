@@ -189,6 +189,7 @@ class FAutocompleteSection extends StatelessWidget with FAutocompleteItemMixin {
               last: i == children.length - 1,
               child: child,
             ),
+          if (style.spacing > 0) SizedBox(height: style.spacing),
         ],
       ),
     );
@@ -211,15 +212,15 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
   final FVariants<FAutocompleteSectionVariantConstraint, FAutocompleteSectionVariant, TextStyle, TextStyleDelta>
   labelTextStyle;
 
-  /// The padding around the label. Defaults to `EdgeInsetsDirectional.only(start: 15, top: 7.5, bottom: 7.5, end: 10)`.
+  /// The padding around the label. Defaults to `EdgeInsetsDirectional.only(start: 14, top: 6, bottom: 6, end: 10)`.
   @override
   final EdgeInsetsGeometry labelPadding;
 
-  /// The divider's style.
+  /// The color of the divider between items in this section.
   @override
   final FVariants<FItemGroupVariantConstraint, FItemGroupVariant, Color, Delta> dividerColor;
 
-  /// The divider's width.
+  /// The width of the divider between items in this section.
   @override
   final double dividerWidth;
 
@@ -227,80 +228,68 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
   @override
   final FItemStyle itemStyle;
 
+  /// The spacing below the section. Defaults to 4.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [spacing] is negative.
+  @override
+  final double spacing;
+
   /// Creates a [FAutocompleteSectionStyle].
   FAutocompleteSectionStyle({
     required this.labelTextStyle,
     required this.dividerColor,
     required this.dividerWidth,
     required this.itemStyle,
-    this.labelPadding = const .directional(start: 15, top: 7.5, bottom: 7.5, end: 10),
-  });
+    this.labelPadding = const .directional(start: 14, top: 6, bottom: 6, end: 10),
+    this.spacing = 4,
+  }) : assert(0 <= spacing, 'spacing ($spacing) must be >= 0');
 
   /// Creates a [FAutocompleteSectionStyle] that inherits its properties.
   factory FAutocompleteSectionStyle.inherit({
     required FColors colors,
     required FStyle style,
     required FTypography typography,
-  }) {
-    const padding = EdgeInsetsDirectional.only(start: 11, top: 7.5, bottom: 7.5, end: 6);
-    final iconStyle = FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta>.from(
-      IconThemeData(color: colors.foreground, size: 15),
+  }) => .new(
+    labelTextStyle: FVariants.from(
+      typography.xs.copyWith(color: colors.mutedForeground),
       variants: {
-        [.disabled]: .delta(color: colors.disable(colors.foreground)),
+        [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
       },
-    );
-    final textStyle = FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta>.from(
-      typography.sm,
-      variants: {
-        [.disabled]: .delta(color: colors.disable(colors.foreground)),
-      },
-    );
-    return .new(
-      labelTextStyle: FVariants.from(
-        typography.sm.copyWith(color: colors.foreground, fontWeight: .w600),
+    ),
+    dividerColor: .all(colors.border),
+    dividerWidth: style.borderWidth,
+    itemStyle: FItemStyle(
+      backgroundColor: const .all(null),
+      decoration: FVariants.from(
+        const ShapeDecoration(shape: RoundedSuperellipseBorder()),
         variants: {
-          [.disabled]: .delta(color: colors.disable(colors.foreground)),
+          [.focused, .hovered, .pressed]: .shapeDelta(
+            shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
+            color: colors.secondary,
+          ),
+          //
+          [.disabled]: const .shapeDelta(),
         },
       ),
-      dividerColor: .all(colors.border),
-      dividerWidth: style.borderWidth,
-      itemStyle: FItemStyle(
-        backgroundColor: const .all(null),
-        decoration: FVariants(
-          const ShapeDecoration(shape: RoundedSuperellipseBorder()),
-          variants: {
-            [.focused, .hovered, .pressed]: ShapeDecoration(
-              shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
-              color: colors.secondary,
-            ),
-            [.disabled]: const ShapeDecoration(shape: RoundedSuperellipseBorder()),
-          },
-        ),
-        contentStyle:
-            .inherit(
-              colors: colors,
-              typography: typography,
-              prefix: colors.foreground,
-              foreground: colors.foreground,
-              mutedForeground: colors.mutedForeground,
-            ).copyWith(
-              padding: const .value(padding),
-              prefixIconStyle: iconStyle,
-              prefixIconSpacing: 10,
-              titleTextStyle: textStyle,
-              titleSpacing: 4,
-              suffixIconStyle: iconStyle,
-            ),
-        rawItemContentStyle: FRawItemContentStyle(
-          padding: padding,
-          prefixIconStyle: iconStyle,
-          childTextStyle: textStyle,
-        ),
-        tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
-        focusedOutlineStyle: null,
+      contentStyle: .inherit(
+        colors: colors,
+        typography: typography,
+        prefix: colors.foreground,
+        foreground: colors.foreground,
+        mutedForeground: colors.mutedForeground,
       ),
-    );
-  }
+      rawItemContentStyle: FRawItemContentStyle.inherit(
+        colors: colors,
+        typography: typography,
+        prefix: colors.foreground,
+        color: colors.foreground,
+      ),
+      tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
+      focusedOutlineStyle: null,
+      margin: const .symmetric(horizontal: 4),
+    ),
+  );
 }
 
 /// A suggestion in a [FAutocomplete] that can optionally be nested in a [FAutocompleteSection].

@@ -457,9 +457,9 @@ class FLabelStyles with Diagnosticable, _$FLabelStylesFunctions {
       ),
       verticalStyle = .inherit(
         style: style,
-        labelPadding: const .only(bottom: 5),
-        descriptionPadding: const .only(top: 5),
-        errorPadding: const .only(top: 5),
+        labelPadding: const .only(bottom: 6),
+        descriptionPadding: const .only(top: 6),
+        errorPadding: const .only(top: 6),
       );
 }
 

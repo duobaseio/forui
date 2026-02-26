@@ -257,7 +257,7 @@ class FSidebarStyle with Diagnosticable, _$FSidebarStyleFunctions {
   @override
   final ImageFilter? backgroundFilter;
 
-  /// The sidebar's width. Defaults to `BoxConstraints.tightFor(width: 250)`.
+  /// The sidebar's width. Defaults to `BoxConstraints.tightFor(width: 256)`.
   @override
   final BoxConstraints constraints;
 
@@ -265,21 +265,21 @@ class FSidebarStyle with Diagnosticable, _$FSidebarStyleFunctions {
   @override
   final FSidebarGroupStyle groupStyle;
 
-  /// The padding for the header section. Defaults to `EdgeInsets.fromLTRB(0, 16, 0, 0)`.
+  /// The padding for the header section. Defaults to `EdgeInsets.fromLTRB(0, 8, 0, 0)`.
   ///
   /// It is recommended to set the horizontal padding to 0. This ensures that the elements such as the scrollbar is not
   /// overlapped by the content.
   @override
   final EdgeInsetsGeometry headerPadding;
 
-  /// The padding for the content section. Defaults to `EdgeInsets.symmetric(vertical: 12)`.
+  /// The padding for the content section. Defaults to `EdgeInsets.symmetric(vertical: 8)`.
   ///
   /// It is recommended to set the horizontal padding to 0. This ensures that the elements such as the scrollbar is not
   /// overlapped by the content.
   @override
   final EdgeInsetsGeometry contentPadding;
 
-  /// The padding for the footer section. Defaults to `EdgeInsets.fromLTRB(0, 0, 0, 16)`.
+  /// The padding for the footer section. Defaults to `EdgeInsets.fromLTRB(0, 0, 0, 8)`.
   ///
   /// It is recommended to set the horizontal padding to 0. This ensures that the elements such as the scrollbar is not
   /// overlapped by the content.
@@ -290,11 +290,11 @@ class FSidebarStyle with Diagnosticable, _$FSidebarStyleFunctions {
   const FSidebarStyle({
     required this.decoration,
     required this.groupStyle,
-    this.constraints = const .tightFor(width: 250),
+    this.constraints = const .tightFor(width: 256),
     this.backgroundFilter,
-    this.headerPadding = const .fromLTRB(0, 16, 0, 0),
-    this.contentPadding = const .symmetric(vertical: 12),
-    this.footerPadding = const .fromLTRB(0, 0, 0, 16),
+    this.headerPadding = const .fromLTRB(0, 8, 0, 0),
+    this.contentPadding = const .symmetric(vertical: 8),
+    this.footerPadding = const .fromLTRB(0, 0, 0, 8),
   });
 
   /// Creates a [FSidebarStyle] that inherits its properties.

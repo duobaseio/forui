@@ -14,7 +14,7 @@ part 'time_picker.design.dart';
 
 /// A time picker that allows a time to be selected.
 ///
-/// Recommended for touch devices.
+/// Recommended for touch devices. Prefer [FTimeField] on desktop.
 ///
 /// The time picker supports arrow key navigation:
 /// * Up/Down arrows: Increment/decrement selected value

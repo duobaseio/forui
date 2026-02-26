@@ -169,7 +169,7 @@ class FSidebarGroupStyle with Diagnosticable, _$FSidebarGroupStyleFunctions {
   @override
   final double headerSpacing;
 
-  /// The padding around the header. Defaults to `EdgeInsets.fromLTRB(12, 0, 8, 2)`.
+  /// The padding around the header. Defaults to `EdgeInsets.fromLTRB(8, 0, 8, 2)`.
   @override
   final EdgeInsetsGeometry headerPadding;
 
@@ -181,11 +181,11 @@ class FSidebarGroupStyle with Diagnosticable, _$FSidebarGroupStyleFunctions {
   @override
   final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> actionStyle;
 
-  /// The spacing between children. Defaults to 2.
+  /// The spacing between children. Defaults to 4.
   @override
   final double childrenSpacing;
 
-  /// The padding around the children. Defaults to `EdgeInsets.fromLTRB(0, 0, 0, 24)`.
+  /// The padding around the children. Defaults to `EdgeInsets.fromLTRB(0, 0, 0, 16)`.
   @override
   final EdgeInsetsGeometry childrenPadding;
 
@@ -210,17 +210,17 @@ class FSidebarGroupStyle with Diagnosticable, _$FSidebarGroupStyleFunctions {
     required this.itemStyle,
     this.padding = const .symmetric(horizontal: 16),
     this.headerSpacing = 8,
-    this.headerPadding = const .fromLTRB(12, 0, 8, 2),
-    this.childrenSpacing = 2,
-    this.childrenPadding = const .fromLTRB(0, 0, 0, 24),
+    this.headerPadding = const .fromLTRB(8, 0, 8, 2),
+    this.childrenSpacing = 4,
+    this.childrenPadding = const .fromLTRB(0, 0, 0, 16),
   });
 
   /// Creates a [FSidebarGroupStyle] that inherits its properties.
   FSidebarGroupStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        labelStyle: typography.sm.copyWith(color: colors.mutedForeground, overflow: .ellipsis, fontWeight: .w500),
+        labelStyle: typography.xs.copyWith(color: colors.mutedForeground, overflow: .ellipsis, fontWeight: .w500),
         actionStyle: FVariants.from(
-          IconThemeData(color: colors.mutedForeground, size: 18),
+          IconThemeData(color: colors.mutedForeground, size: typography.md.fontSize),
           variants: {
             [.hovered, .pressed]: .delta(color: colors.foreground),
           },

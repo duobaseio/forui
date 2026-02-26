@@ -102,12 +102,12 @@ class FCardStyle with Diagnosticable, _$FCardStyleFunctions {
         decoration: ShapeDecoration(
           shape: RoundedSuperellipseBorder(
             side: BorderSide(color: colors.border, width: style.borderWidth),
-            borderRadius: style.borderRadius.md,
+            borderRadius: style.borderRadius.lg,
           ),
           color: colors.card,
         ),
         contentStyle: FCardContentStyle(
-          titleTextStyle: typography.xl2.copyWith(fontWeight: .w600, color: colors.foreground, height: 1.5),
+          titleTextStyle: typography.md.copyWith(fontWeight: .w500, color: colors.foreground),
           subtitleTextStyle: typography.sm.copyWith(color: colors.mutedForeground),
         ),
       );

@@ -287,7 +287,7 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
   @override
   final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> collapsibleIconStyle;
 
-  /// The spacing between child items. Defaults to 2.
+  /// The spacing between child items. Defaults to 4.
   @override
   final double childrenSpacing;
 
@@ -299,7 +299,7 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
   @override
   final FVariants<FTappableVariantConstraint, FTappableVariant, Color, Delta> backgroundColor;
 
-  /// The padding around the content. Defaults to `EdgeInsets.symmetric(horizontal: 12, vertical: 10)`.
+  /// The padding around the content. Defaults to `EdgeInsets.all(8)`.
   @override
   final EdgeInsetsGeometry padding;
 
@@ -330,9 +330,9 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
     required this.focusedOutlineStyle,
     this.iconSpacing = 8,
     this.collapsibleIconSpacing = 8,
-    this.childrenSpacing = 2,
+    this.childrenSpacing = 4,
     this.childrenPadding = const .only(left: 26, top: 2),
-    this.padding = const .symmetric(horizontal: 12, vertical: 10),
+    this.padding = const .all(8),
     this.motion = const FSidebarItemMotion(),
   });
 
@@ -340,7 +340,7 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
   FSidebarItemStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         textStyle: FVariants.from(
-          typography.md.copyWith(color: colors.foreground, overflow: .ellipsis, height: 1),
+          typography.sm.copyWith(color: colors.foreground, overflow: .ellipsis, height: 1),
           variants: {
             [.disabled]: .delta(color: colors.mutedForeground),
           },

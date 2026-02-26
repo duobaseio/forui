@@ -10,7 +10,7 @@ import 'package:forui/src/widgets/picker/picker_controller.dart';
 /// A generic picker that allows an item to be selected. It is composed of one or more [FPickerWheel]s, optionally,
 /// with separators between those wheels.
 ///
-/// Recommended for touch devices.
+/// Recommended for touch devices. Prefer [FSelect] on desktop.
 ///
 /// The picker supports arrow key navigation:
 /// * Up/Down arrows: Increment/decrement selected value
