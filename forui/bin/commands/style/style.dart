@@ -511,7 +511,7 @@ enum Style {
     null,
     <String>['tooltip'],
     <String>['FTooltipStyle'],
-    'FTooltipStyle tooltipStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FTooltipStyle(\n  decoration: ShapeDecoration(\n    shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.xs2),\n    color: colors.foreground,\n  ),\n  textStyle: typography.xs.copyWith(color: colors.background),\n  padding: const .symmetric(horizontal: 8, vertical: 4),\n);\n',
+    'FTooltipStyle tooltipStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FTooltipStyle(\n  decoration: ShapeDecoration(\n    shape: RoundedSuperellipseBorder(\n      side: BorderSide(color: colors.border, width: style.borderWidth),\n      borderRadius: style.borderRadius.md,\n    ),\n    color: colors.card,\n    shadows: FTooltipStyle.shadow,\n  ),\n  padding: const .symmetric(horizontal: 14, vertical: 10),\n  textStyle: typography.xs,\n);\n',
   );
 
   const Style(this.type, this.wrapped, this.aliases, this.closure, this.source);

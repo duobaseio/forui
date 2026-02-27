@@ -105,7 +105,7 @@ void main() {
 
   group('range slider tooltip', () {
     Widget slider({FSliderValue? value}) => TestScaffold.app(
-      theme: FThemes.neutral.light,
+      theme: FThemes.neutral.light.touch,
       child: FSlider(control: .managedContinuousRange(initial: value ?? FSliderValue(max: 0.75))),
     );
 

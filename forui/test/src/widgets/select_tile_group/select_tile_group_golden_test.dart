@@ -306,7 +306,7 @@ void main() {
             children: [
               const .tile(title: Text('WiFi'), details: Text('FL (5G)'), suffix: Icon(FIcons.chevronRight), value: 1),
               .tile(
-                style: FThemes.blue.dark.tileGroupStyle.tileStyles.base,
+                style: FThemes.blue.dark.touch.tileGroupStyle.tileStyles.base,
                 title: const Text('Bluetooth'),
                 subtitle: const Text('Fee, Fo'),
                 details: const Text('FL (5G)'),

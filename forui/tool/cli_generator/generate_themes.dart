@@ -17,6 +17,9 @@ typedef ThemesConstructors = ({
 
 typedef ThemeConstructor = ({String theme, String variant, String colors});
 
+final _colors = p.join(library, 'src', 'theme', 'colors.dart');
+final _themes = p.join(library, 'src', 'theme', 'themes.dart');
+
 final _typography = RegExp('FTypography');
 final _typographyConstructor = RegExp(r'(FTypography)\.inherit');
 final _style = RegExp(r'^FStyle$');
@@ -35,7 +38,7 @@ String generateThemes(Map<(String, String?), String> fragments) {
                       ..name = '$theme${variant == null ? '' : variant.capitalize()}'
                       ..arguments.addAll([
                         literalString('$theme${variant == null ? '' : '-$variant'}'),
-                        literalString(source),
+                        literalString(source.replaceAll(r'$', r'\$')),
                       ]))
                     .build(),
             ])
@@ -115,19 +118,58 @@ Future<ThemesConstructors> traverseThemes(AnalysisContextCollection collection) 
   final typography = await ConstructorMatch.traverse(collection, _typography, _typographyConstructor, {'FTypography'});
   final style = await ConstructorMatch.traverse(collection, _style, _styleConstructor, {'FStyle'});
 
-  final themes = p.join(library, 'src', 'theme', 'themes.dart');
-  if (await collection.contextFor(themes).currentSession.getResolvedUnit(themes) case final ResolvedUnitResult result) {
-    final visitor = _Visitor();
+  // Parse colors.dart to build a map from field name to inline FColors(...) expression.
+  final colors = <String, String>{};
+  if (await collection.contextFor(_colors).currentSession.getResolvedUnit(_colors)
+      case final ResolvedUnitResult result) {
+    final visitor = _ColorsVisitor();
+    result.unit.accept(visitor);
+    colors.addAll(visitor.colors);
+  }
+
+  if (await collection.contextFor(_themes).currentSession.getResolvedUnit(_themes)
+      case final ResolvedUnitResult result) {
+    final visitor = _ThemesVisitor(colors);
     result.unit.accept(visitor);
 
     return (typography: typography, style: style, themes: visitor.themes);
   }
 
-  throw Exception('Failed to parse $themes');
+  throw Exception('Failed to parse $_colors & $_themes');
 }
 
-class _Visitor extends RecursiveAstVisitor<void> {
+class _ColorsVisitor extends RecursiveAstVisitor<void> {
+  final Map<String, String> colors = {};
+  bool _inside = false;
+
+  @override
+  void visitClassDeclaration(ClassDeclaration declaration) {
+    if (declaration.name.lexeme == 'FColors') {
+      _inside = true;
+      super.visitClassDeclaration(declaration);
+      _inside = false;
+    }
+  }
+
+  @override
+  void visitFieldDeclaration(FieldDeclaration field) {
+    if (!_inside || !field.isStatic) {
+      return;
+    }
+
+    for (final variable in field.fields.variables) {
+      if (variable.initializer != null) {
+        colors[variable.name.lexeme] = variable.initializer!.toSource();
+      }
+    }
+  }
+}
+
+class _ThemesVisitor extends RecursiveAstVisitor<void> {
+  final Map<String, String> _colors;
   final Map<(String, String?), List<ThemeConstructor>> themes = {};
+
+  _ThemesVisitor(this._colors);
 
   @override
   void visitFieldDeclaration(FieldDeclaration field) {
@@ -138,20 +180,43 @@ class _Visitor extends RecursiveAstVisitor<void> {
     for (final variable in field.fields.variables) {
       final theme = variable.name.lexeme;
 
-      if (variable.initializer case final RecordLiteral record) {
-        for (final field in record.fields.whereType<NamedExpression>()) {
-          if (field.expression case final InstanceCreationExpression creation) {
-            var colors = '';
-            for (final expression in creation.argumentList.arguments.whereType<NamedExpression>()) {
-              if (expression.name.label.name == 'colors') {
-                colors = expression.expression.toSource();
+      // Match FAutoThemeData(light: () => FPlatformThemeData(...), dark: () => FPlatformThemeData(...))
+      if (variable.initializer case final InstanceCreationExpression autoTheme) {
+        for (final NamedExpression(:name, :expression)
+            in autoTheme.argumentList.arguments.whereType<NamedExpression>()) {
+          final variant = name.label.name; // "light" or "dark"
+
+          // () => FPlatformThemeData(desktop: ..., touch: ...)
+          if (expression case FunctionExpression(
+            body: ExpressionFunctionBody(expression: final InstanceCreationExpression platformTheme),
+          )) {
+            // Extract colors from the touch variant of FPlatformThemeData
+            for (final NamedExpression(:name, :expression)
+                in platformTheme.argumentList.arguments.whereType<NamedExpression>()) {
+              if (name.label.name != 'touch') {
+                continue;
+              }
+
+              // () => FThemeData(colors: ...)
+              if (expression case FunctionExpression(
+                body: ExpressionFunctionBody(expression: final InstanceCreationExpression themeData),
+              )) {
+                var colors = '';
+                for (final expression in themeData.argumentList.arguments.whereType<NamedExpression>()) {
+                  if (expression.name.label.name == 'colors') {
+                    final source = expression.expression.toSource();
+                    // Resolve named constants (e.g. FColors.zincLight) to their inline definition.
+                    colors = source.startsWith('FColors.')
+                        ? (_colors[source.substring('FColors.'.length)] ?? source)
+                        : source;
+                  }
+                }
+
+                final constructor = (theme: theme, variant: variant, colors: colors);
+                (themes[(theme, null)] ??= []).add(constructor);
+                (themes[(theme, constructor.variant)] ??= []).add(constructor);
               }
             }
-
-            final constructor = (theme: theme, variant: field.name.label.name, colors: colors);
-
-            (themes[(theme, null)] ??= []).add(constructor);
-            (themes[(theme, constructor.variant)] ??= []).add(constructor);
           }
         }
       }

@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
@@ -28,43 +29,58 @@ class Application extends StatefulWidget {
 
 class _ApplicationState extends State<Application> with SingleTickerProviderStateMixin {
   int index = 4;
-  bool dark = false;
-
-  FThemeData get _theme => dark ? FThemes.zinc.dark : FThemes.zinc.light;
-
-  void toggleTheme() => setState(() => dark = !dark);
+  Brightness brightness = .light;
+  FPlatformVariant platform = (defaultTargetPlatform == .iOS || defaultTargetPlatform == .android) ? .iOS : .macOS;
 
   @override
-  Widget build(BuildContext context) => MaterialApp(
-    locale: const Locale('en', 'US'),
-    localizationsDelegates: FLocalizations.localizationsDelegates,
-    supportedLocales: FLocalizations.supportedLocales,
-    theme: _theme.toApproximateMaterialTheme(),
-    builder: (context, child) => FTheme(
-      data: _theme,
-      child: FToaster(child: FTooltipGroup(child: child!)),
-    ),
-    home: Builder(
-      builder: (context) {
-        return FScaffold(
-          header: FHeader(
-            title: const Text('Example'),
-            suffixes: [FHeaderAction(icon: Icon(dark ? FIcons.sun : FIcons.moon), onPress: toggleTheme)],
-          ),
-          footer: FBottomNavigationBar(
-            index: index,
-            onChange: (index) => setState(() => this.index = index),
-            children: const [
-              FBottomNavigationBarItem(icon: Icon(FIcons.house), label: Text('Home')),
-              FBottomNavigationBarItem(icon: Icon(FIcons.layoutGrid), label: Text('Grid')),
-              FBottomNavigationBarItem(icon: Icon(FIcons.search), label: Text('Search')),
-              FBottomNavigationBarItem(icon: Icon(FIcons.settings), label: Text('Settings')),
-              FBottomNavigationBarItem(icon: Icon(FIcons.castle), label: Text('Sandbox')),
-            ],
-          ),
-          child: _pages[index],
-        );
-      },
-    ),
-  );
+  Widget build(BuildContext context) {
+    final theme = FThemes.zinc.resolve(brightness, platform);
+
+    return MaterialApp(
+      locale: const Locale('en', 'US'),
+      localizationsDelegates: FLocalizations.localizationsDelegates,
+      supportedLocales: FLocalizations.supportedLocales,
+      theme: theme.toApproximateMaterialTheme(),
+      builder: (context, child) => FTheme(
+        data: FThemes.zinc,
+        brightness: brightness,
+        platform: platform,
+        child: FToaster(child: FTooltipGroup(child: child!)),
+      ),
+      home: Builder(
+        builder: (context) {
+          return FScaffold(
+            header: FHeader(
+              title: const Text('Example'),
+              suffixes: [
+                FHeaderAction(
+                  icon: Icon(platform.desktop ? FIcons.smartphone : FIcons.monitor),
+                  onPress: togglePlatform,
+                ),
+                FHeaderAction(
+                  icon: Icon(brightness == .dark ? FIcons.sun : FIcons.moon),
+                  onPress: toggleTheme,
+                ),
+              ],
+            ),
+            footer: FBottomNavigationBar(
+              index: index,
+              onChange: (index) => setState(() => this.index = index),
+              children: const [
+                FBottomNavigationBarItem(icon: Icon(FIcons.house), label: Text('Home')),
+                FBottomNavigationBarItem(icon: Icon(FIcons.layoutGrid), label: Text('Grid')),
+                FBottomNavigationBarItem(icon: Icon(FIcons.search), label: Text('Search')),
+                FBottomNavigationBarItem(icon: Icon(FIcons.settings), label: Text('Settings')),
+                FBottomNavigationBarItem(icon: Icon(FIcons.castle), label: Text('Sandbox')),
+              ],
+            ),
+            child: _pages[index],
+          );
+        },
+      ),
+    );
+  }
+
+  void toggleTheme() => setState(() => brightness = brightness == .light ? .dark : .light);
+  void togglePlatform() => setState(() => platform = platform.desktop ? .iOS : .macOS);
 }

@@ -72,8 +72,8 @@ class TestScaffold extends StatelessWidget {
   }();
 
   static List<({String name, FThemeData data})> get themes => [
-    (name: 'neutral-light', data: FThemes.neutral.light),
-    (name: 'neutral-dark', data: FThemes.neutral.dark),
+    (name: 'neutral-light', data: FThemes.neutral.light.touch),
+    (name: 'neutral-dark', data: FThemes.neutral.dark.touch),
   ];
 
   final FThemeData theme;
@@ -97,10 +97,10 @@ class TestScaffold extends StatelessWidget {
     FThemeData? theme,
     super.key,
   }) : locale = null,
-       theme = theme ?? FThemes.neutral.light,
+       theme = theme ?? FThemes.neutral.light.touch,
        background = switch (theme) {
-         _ when theme == FThemes.neutral.light => const Color(0xFFEEFFFF),
-         _ when theme == FThemes.neutral.dark => const Color(0xFF06111C),
+         _ when theme == FThemes.neutral.light.touch => const Color(0xFFEEFFFF),
+         _ when theme == FThemes.neutral.dark.touch => const Color(0xFF06111C),
          _ => null,
        },
        wrapped = false;
@@ -115,16 +115,16 @@ class TestScaffold extends StatelessWidget {
     this.tooltipGroupActiveDuration = const Duration(milliseconds: 300),
     FThemeData? theme,
     super.key,
-  }) : theme = theme ?? FThemes.neutral.light,
+  }) : theme = theme ?? FThemes.neutral.light.touch,
        background = switch (theme) {
-         _ when theme == FThemes.neutral.light => const Color(0xFFEEFFFF),
-         _ when theme == FThemes.neutral.dark => const Color(0xFF06111C),
+         _ when theme == FThemes.neutral.light.touch => const Color(0xFFEEFFFF),
+         _ when theme == FThemes.neutral.dark.touch => const Color(0xFF06111C),
          _ => null,
        },
        wrapped = true;
 
   TestScaffold.blue({required this.child, this.platform, this.alignment = .center, super.key})
-    : theme = FThemes.neutral.light,
+    : theme = FThemes.neutral.light.touch,
       background = blueScreen.colors.background,
       locale = null,
       textDirection = null,

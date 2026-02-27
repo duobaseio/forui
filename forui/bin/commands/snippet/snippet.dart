@@ -11,7 +11,8 @@
 const snippets = {
   'main-basic': (
     'main',
-    r'''import 'package:flutter/material.dart';
+    r'''import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
 void main() {
@@ -29,7 +30,9 @@ class Application extends StatelessWidget {
     /// ```shell
     /// dart forui theme create [theme template].
     /// ```
-    final theme = FThemes.neutral.dark;
+    final theme = const <TargetPlatform>{.android, .iOS, .fuchsia}.contains(defaultTargetPlatform)
+        ? FThemes.neutral.dark.touch
+        : FThemes.neutral.dark.desktop;
 
     return MaterialApp(
       // TODO: replace with your application's supported locales.
@@ -85,7 +88,8 @@ class _ExampleState extends State<Example> {
   ),
   'main-router': (
     'main',
-    r'''import 'package:flutter/material.dart';
+    r'''import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
 void main() {
@@ -103,7 +107,9 @@ class Application extends StatelessWidget {
     /// ```shell
     /// dart forui theme create [theme template].
     /// ```
-    final theme = FThemes.neutral.dark;
+    final theme = const <TargetPlatform>{.android, .iOS, .fuchsia}.contains(defaultTargetPlatform)
+        ? FThemes.neutral.dark.touch
+        : FThemes.neutral.dark.desktop;
 
     return MaterialApp.router(
       // TODO: replace with your application's supported locales.
