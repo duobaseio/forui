@@ -143,6 +143,7 @@ sizes consistent across each platform.
 * Add `FPlatformThemeData`.
 * Add `FBorderRadius` with size tokens (`xs`, `sm`, `md`, `lg`, `xl`, `xl2`, `xl3`, `pill`).
 * Add color scheme constants to `FColors`.
+* Add `FTypography.xs3`.
 * Add `FTypography.xs2`.
 * Add `FTypography.inherit(desktop: ...)`.
 

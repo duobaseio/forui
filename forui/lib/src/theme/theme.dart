@@ -166,6 +166,7 @@ class FTheme extends StatelessWidget {
     // forcing users to wrap their [FTheme] in an [FAdaptiveScope].
     data: data.resolve(brightness ?? MediaQuery.platformBrightnessOf(context), platform ?? context.platformVariant),
     textDirection: textDirection ?? Directionality.maybeOf(context) ?? .ltr,
+    platform: platform,
     motion: motion,
     onEnd: onEnd,
     child: child,
@@ -187,12 +188,14 @@ class FTheme extends StatelessWidget {
 class _AnimatedTheme extends ImplicitlyAnimatedWidget {
   final FThemeData data;
   final TextDirection textDirection;
+  final FPlatformVariant? platform;
   final Widget child;
 
   _AnimatedTheme({
     required this.data,
     required this.textDirection,
     required this.child,
+    this.platform,
     FThemeMotion motion = const FThemeMotion(),
     super.onEnd,
   }) : super(duration: motion.duration, curve: motion.curve);
@@ -205,7 +208,8 @@ class _AnimatedTheme extends ImplicitlyAnimatedWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('data', data))
-      ..add(EnumProperty('textDirection', textDirection));
+      ..add(EnumProperty('textDirection', textDirection))
+      ..add(DiagnosticsProperty('platform', platform));
   }
 }
 
@@ -218,8 +222,12 @@ class _AnimatedThemeState extends AnimatedWidgetBaseState<_AnimatedTheme> {
   }
 
   @override
-  Widget build(BuildContext context) =>
-      FBasicTheme(data: _tween!.evaluate(animation), textDirection: widget.textDirection, child: widget.child);
+  Widget build(BuildContext context) => FBasicTheme(
+    data: _tween!.evaluate(animation),
+    textDirection: widget.textDirection,
+    platform: widget.platform,
+    child: widget.child,
+  );
 }
 
 class _Tween extends Tween<FThemeData> {

@@ -14,6 +14,21 @@ class Foo extends StatelessWidget {
 }
 
 void main() {
+  group('FTheme', () {
+    testWidgets('passed in platform is propagated', (tester) async {
+      await tester.pumpWidget(
+        FTheme(
+          data: FThemes.neutral.dark,
+          platform: .macOS,
+          child: Builder(builder: (context) => Text('${context.platformVariant}', textDirection: .ltr)),
+        ),
+      );
+
+      await tester.pumpAndSettle();
+      expect(find.text('${FPlatformVariant.macOS}'), findsOneWidget);
+    });
+  });
+
   group('FBasicTheme', () {
     testWidgets('passed in platform is respected', (tester) async {
       await tester.pumpWidget(

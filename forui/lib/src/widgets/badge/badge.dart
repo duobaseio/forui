@@ -90,46 +90,68 @@ class FBadge extends StatelessWidget {
 extension type FBadgeStyles(FVariants<FBadgeVariantConstraint, FBadgeVariant, FBadgeStyle, FBadgeStyleDelta> _)
     implements FVariants<FBadgeVariantConstraint, FBadgeVariant, FBadgeStyle, FBadgeStyleDelta> {
   /// Creates a [FBadgeStyles] that inherits its properties.
-  FBadgeStyles.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        .from(
-          FBadgeStyle(
-            decoration: ShapeDecoration(
-              shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.pill),
-              color: colors.primary,
-            ),
-            contentStyle: FBadgeContentStyle(
-              labelTextStyle: typography.xs.copyWith(color: colors.primaryForeground, fontWeight: .w500),
+  factory FBadgeStyles.inherit({required FColors colors, required FTypography typography, required FStyle style}) {
+    const desktopPadding = EdgeInsets.symmetric(horizontal: 10, vertical: 6);
+
+    final destructiveTextStyle = typography.xs.copyWith(color: colors.destructive, fontWeight: .w500);
+    final destructiveDecoration = ShapeDecoration(
+      shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.pill),
+      color: colors.destructive.withValues(alpha: colors.brightness == .light ? 0.1 : 0.2),
+    );
+
+    final outlineShape = RoundedSuperellipseBorder(
+      side: BorderSide(color: colors.border, width: style.borderWidth),
+      borderRadius: style.borderRadius.pill,
+    );
+
+    return FBadgeStyles(
+      .from(
+        FBadgeStyle(
+          decoration: ShapeDecoration(
+            shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.pill),
+            color: colors.primary,
+          ),
+          contentStyle: FBadgeContentStyle(
+            labelTextStyle: typography.xs.copyWith(color: colors.primaryForeground, fontWeight: .w500),
+          ),
+        ),
+        variants: {
+          [.primary]: const .delta(),
+          [.primary.and(.desktop)]: const .delta(contentStyle: .delta(padding: .value(desktopPadding))),
+          [.secondary]: .delta(
+            decoration: .shapeDelta(color: colors.secondary),
+            contentStyle: .delta(labelTextStyle: .delta(color: colors.secondaryForeground)),
+          ),
+          [.secondary.and(.desktop)]: .delta(
+            decoration: .shapeDelta(color: colors.secondary),
+            contentStyle: .delta(
+              labelTextStyle: .delta(color: colors.secondaryForeground),
+              padding: const .value(desktopPadding),
             ),
           ),
-          variants: {
-            [.primary]: const .delta(),
-            [.secondary]: .delta(
-              decoration: .shapeDelta(color: colors.secondary),
-              contentStyle: .delta(labelTextStyle: .delta(color: colors.secondaryForeground)),
+          [.destructive]: FBadgeStyle(
+            decoration: destructiveDecoration,
+            contentStyle: FBadgeContentStyle(labelTextStyle: destructiveTextStyle),
+          ),
+          [.destructive.and(.desktop)]: FBadgeStyle(
+            decoration: destructiveDecoration,
+            contentStyle: FBadgeContentStyle(labelTextStyle: destructiveTextStyle, padding: desktopPadding),
+          ),
+          [.outline]: .delta(
+            decoration: .shapeDelta(shape: outlineShape, color: colors.card),
+            contentStyle: .delta(labelTextStyle: .delta(color: colors.foreground)),
+          ),
+          [.outline.and(.desktop)]: .delta(
+            decoration: .shapeDelta(shape: outlineShape, color: colors.card),
+            contentStyle: .delta(
+              labelTextStyle: .delta(color: colors.foreground),
+              padding: const .value(desktopPadding),
             ),
-            [.destructive]: FBadgeStyle(
-              decoration: ShapeDecoration(
-                shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.pill),
-                color: colors.destructive.withValues(alpha: colors.brightness == .light ? 0.1 : 0.2),
-              ),
-              contentStyle: FBadgeContentStyle(
-                labelTextStyle: typography.xs.copyWith(color: colors.destructive, fontWeight: .w500),
-              ),
-            ),
-            [.outline]: .delta(
-              decoration: .shapeDelta(
-                shape: RoundedSuperellipseBorder(
-                  side: BorderSide(color: colors.border, width: style.borderWidth),
-                  borderRadius: style.borderRadius.pill,
-                ),
-                color: colors.card,
-              ),
-              contentStyle: .delta(labelTextStyle: .delta(color: colors.foreground)),
-            ),
-          },
-        ),
-      );
+          ),
+        },
+      ),
+    );
+  }
 
   /// The primary badge style.
   FBadgeStyle get primary => resolve({FBadgeVariant.primary});
