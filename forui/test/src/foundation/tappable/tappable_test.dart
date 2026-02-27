@@ -315,6 +315,29 @@ void main() {
       );
     });
 
+    testWidgets('platform change', (tester) async {
+      late StateSetter setState;
+      FPlatformVariant platform = .macOS;
+
+      await tester.pumpWidget(
+        StatefulBuilder(
+          builder: (_, setter) {
+            setState = setter;
+            return TestScaffold(
+              platform: platform,
+              child: FTappable(builder: (_, states, _) => Text('$states'), onPress: () {}),
+            );
+          },
+        ),
+      );
+      expect(find.text({FTappableVariant.macOS}.toString()), findsOneWidget);
+
+      setState(() => platform = .iOS);
+      await tester.pumpAndSettle();
+
+      expect(find.text({FTappableVariant.iOS}.toString()), findsOneWidget);
+    });
+
     testWidgets('onVariantChange callback called', (tester) async {
       Set<FTappableVariant>? previous;
       Set<FTappableVariant>? current;
@@ -655,7 +678,7 @@ void main() {
           focusNode: focus,
           onPress: focus.requestFocus,
           onVariantChange: (_, current) => focused = current.contains(FTappableVariant.focused),
-          focusedOutlineStyle: FThemes.neutral.light.style.focusedOutlineStyle,
+          focusedOutlineStyle: FThemes.neutral.light.touch.style.focusedOutlineStyle,
           child: const Text('focus'),
         ),
       ),
@@ -676,7 +699,7 @@ void main() {
       TestScaffold.app(
         child: FTappable(
           onVariantChange: (_, current) => focused = current.contains(FTappableVariant.focused),
-          focusedOutlineStyle: FThemes.neutral.light.style.focusedOutlineStyle,
+          focusedOutlineStyle: FThemes.neutral.light.touch.style.focusedOutlineStyle,
           child: FButton(onPress: focus.requestFocus, focusNode: focus, child: const Text('focus')),
         ),
       ),
