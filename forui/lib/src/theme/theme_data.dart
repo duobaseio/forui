@@ -9,6 +9,64 @@ import 'package:forui/forui.dart';
 
 part 'theme_data.design.dart';
 
+/// A mixin for types that can resolve to a [FThemeData] based on the current [Brightness] and [FPlatformVariant].
+///
+/// This is typically implemented by theme sets that contain multiple theme variants (e.g. light/dark, desktop/touch).
+///
+/// See:
+/// * [FAutoThemeData], which lazily creates light/dark [FPlatformThemeData] variants.
+/// * [FPlatformThemeData], which lazily creates desktop/touch [FThemeData] variants.
+mixin FThemeDataMixin {
+  /// Resolves the appropriate [FThemeData] for the given [brightness] and [platformVariant].
+  FThemeData resolve(Brightness brightness, FPlatformVariant platformVariant);
+}
+
+/// A [FThemeDataMixin] that lazily creates brightness-specific [FPlatformThemeData] variants.
+///
+/// The [light] and [dark] factories are called at most once, when first needed.
+class FAutoThemeData with FThemeDataMixin {
+  /// The light [FPlatformThemeData], created lazily on first access.
+  late final FPlatformThemeData light = _light();
+
+  /// The dark [FPlatformThemeData], created lazily on first access.
+  late final FPlatformThemeData dark = _dark();
+
+  final FPlatformThemeData Function() _light;
+  final FPlatformThemeData Function() _dark;
+
+  /// Creates a [FAutoThemeData] with lazy factories for [light] and [dark] platform theme data.
+  FAutoThemeData({required FPlatformThemeData Function() light, required FPlatformThemeData Function() dark})
+    : _light = light,
+      _dark = dark;
+
+  @override
+  FThemeData resolve(Brightness brightness, FPlatformVariant platformVariant) =>
+      (brightness == .light ? light : dark).resolve(brightness, platformVariant);
+}
+
+/// A [FThemeDataMixin] that lazily creates platform-specific [FThemeData] variants.
+///
+/// The [desktop] and [touch] factories are called at most once, when first needed.
+class FPlatformThemeData with FThemeDataMixin {
+  /// The desktop [FThemeData], created lazily on first access.
+  late final FThemeData desktop = _desktop();
+
+  /// The touch [FThemeData], created lazily on first access.
+  late final FThemeData touch = _touch();
+
+  final FThemeData Function() _desktop;
+  final FThemeData Function() _touch;
+
+  /// Creates a [FPlatformThemeData] with lazy factories for [desktop] and [touch] theme data.
+  FPlatformThemeData({required FThemeData Function() desktop, required FThemeData Function() touch})
+    : _desktop = desktop,
+      _touch = touch;
+
+  @override
+  FThemeData resolve(Brightness brightness, FPlatformVariant platformVariant) =>
+      platformVariant.desktop ? desktop : touch;
+}
+
 /// Defines the configuration of the overall visual [FTheme] for a widget subtree.
 ///
 /// A [FThemeData] is composed of [colors], [typography], [style], widget styles, and [extensions].
@@ -22,7 +80,7 @@ part 'theme_data.design.dart';
 ///
 /// Widget styles provide an `inherit(...)` constructor. The constructor configures the widget style using the defaults
 /// provided by the [colors], [typography], and [style].
-final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
+final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctions {
   /// A label that is used in the [toString] output. Intended to aid with identifying themes in debug output.
   @override
   final String? debugLabel;
@@ -909,6 +967,9 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     required Map<Object, ThemeExtension<dynamic>> extensions,
   }) : _extensions = extensions;
 
+  @override
+  FThemeData resolve(Brightness _, FPlatformVariant _) => this;
+
   /// Obtains a particular [ThemeExtension].
   ///
   /// {@template forui.theme.FThemeData.extension}
@@ -984,7 +1045,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```dart
   /// // Apply a Forui theme to Material widgets
   /// MaterialApp(
-  ///   theme: FThemes.neutral.light.toApproximateMaterialTheme(),
+  ///   theme: FThemes.neutral.light.touch.toApproximateMaterialTheme(),
   ///   // ...
   /// )
   /// ```
@@ -1308,14 +1369,14 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// @override
   /// Widget build(BuildContext context) {
   ///   final theme = FThemeData(
-  ///     colors: FThemes.neutral.light.colors.copyWith(
+  ///     colors: FThemes.neutral.light.touch.colors.copyWith(
   ///       primary: const Color(0xFF0D47A1), // dark blue
   ///       primaryForeground: const Color(0xFFFFFFFF), // white
   ///     ),
-  ///     typography: FThemes.neutral.light.typography.copyWith(
+  ///     typography: FThemes.neutral.light.touch.typography.copyWith(
   ///       // ...
   ///     ).scale(sizeScalar: 0.8),
-  ///     style: FThemes.neutral.light.style.copyWith(
+  ///     style: FThemes.neutral.light.touch.style.copyWith(
   ///       borderRadius: .zero,
   ///     ),
   ///   );

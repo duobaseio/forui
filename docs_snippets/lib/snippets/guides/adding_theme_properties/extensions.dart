@@ -7,7 +7,7 @@ import 'package:docs_snippets/snippets/guides/adding_theme_properties/brand_colo
 final theme =
     // {@snippet constructor}
     FThemeData(
-      colors: FThemes.neutral.light.colors,
+      colors: FThemes.neutral.light.touch.colors,
       // ... other theme properties
       extensions: [const BrandColor(color: Color(0xFF6366F1))],
     );

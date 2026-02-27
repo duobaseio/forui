@@ -9,9 +9,9 @@ final accordion =
     FAccordion(
       // Replace the entire style with a new one based on the green theme.
       style: FAccordionStyle.inherit(
-        colors: FThemes.green.light.colors,
-        typography: FThemes.green.light.typography,
-        style: FThemes.green.light.style,
+        colors: FThemes.green.light.touch.colors,
+        typography: FThemes.green.light.touch.typography,
+        style: FThemes.green.light.touch.style,
       ),
       children: const [],
     );

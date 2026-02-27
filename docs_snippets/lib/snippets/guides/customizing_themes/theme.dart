@@ -17,7 +17,7 @@ FAccordionStyle accordionStyle({required FColors colors, required FTypography ty
 
 // {@snippet}
 FThemeData get neutralLight {
-  final colors = FThemes.neutral.light.colors;
+  final colors = FThemes.neutral.light.touch.colors;
 
   final typography = _typography(colors: colors);
   final style = _style(colors: colors, typography: typography);

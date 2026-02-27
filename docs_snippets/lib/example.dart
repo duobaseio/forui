@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
 /// The themes.
-final themes = {'neutral-light': FThemes.neutral.light, 'neutral-dark': FThemes.neutral.dark};
+final themes = {'neutral-light': FThemes.neutral.light.desktop, 'neutral-dark': FThemes.neutral.dark.desktop};
 
 abstract class Example extends StatelessWidget {
   final FThemeData theme;

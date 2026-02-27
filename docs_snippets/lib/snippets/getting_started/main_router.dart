@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
@@ -17,7 +18,9 @@ class Application extends StatelessWidget {
     /// ```shell
     /// dart forui theme create [theme template].
     /// ```
-    final theme = FThemes.neutral.dark;
+    final theme = const <TargetPlatform>{.android, .iOS, .fuchsia}.contains(defaultTargetPlatform)
+        ? FThemes.neutral.dark.touch
+        : FThemes.neutral.dark.desktop;
 
     return MaterialApp.router(
       // TODO: replace with your application's supported locales.

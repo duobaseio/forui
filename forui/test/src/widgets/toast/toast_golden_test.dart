@@ -51,11 +51,11 @@ void main() {
                 backgroundFilter: .blur(sigmaX: 5, sigmaY: 5),
                 decoration: .value(
                   BoxDecoration(
-                    color: FThemes.neutral.light.colors.background.withValues(alpha: 0.5),
-                    borderRadius: FThemes.neutral.light.style.borderRadius.md,
+                    color: FThemes.neutral.light.touch.colors.background.withValues(alpha: 0.5),
+                    borderRadius: FThemes.neutral.light.touch.style.borderRadius.md,
                     border: .all(
-                      width: FThemes.neutral.light.style.borderWidth,
-                      color: FThemes.neutral.light.colors.border,
+                      width: FThemes.neutral.light.touch.style.borderWidth,
+                      color: FThemes.neutral.light.touch.colors.border,
                     ),
                   ),
                 ),

@@ -10,9 +10,9 @@ void main() {
   testWidgets('FTheme', (tester) async {
     final sheet = autoDispose(AnimationSheetBuilder(frameSize: const Size(200, 200)));
 
-    await tester.pumpWidget(sheet.record(Application(data: FThemes.neutral.light, key: const ValueKey('key'))));
+    await tester.pumpWidget(sheet.record(Application(data: FThemes.neutral.light.touch, key: const ValueKey('key'))));
     await tester.pumpFrames(
-      sheet.record(Application(data: FThemes.neutral.dark, key: const ValueKey('key'))),
+      sheet.record(Application(data: FThemes.neutral.dark.desktop, key: const ValueKey('key'))),
       const Duration(milliseconds: 250),
     );
 
