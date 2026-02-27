@@ -1,4 +1,7 @@
-## 0.20.0
+## 0.20.0 (Next)
+
+This update builds upon the styling overhaul by introducing desktop and touch variants of each theme and making widget
+sizes consistent across each platform.
 
 ### `FAlert`
 * Add `FAlertVariant.primary`.
@@ -129,6 +132,37 @@
 * **Breaking** Change `FTappableStyle.pressedExitDuration` default from 0ms to 100ms.
 * **Breaking** Change `FTappableMotion.bounceUpDuration` default from 120ms to 100ms.
 
+* Fix incorrectly handling of platform changes.
+
+
+### `FTheme` & `FBasicTheme`
+* Add `FTheme.brightness`.
+* Add `FBasicTheme.brightness`.
+* Add `FThemeDataMixin`.
+* Add `FAutoThemeData`.
+* Add `FPlatformThemeData`.
+* Add `FBorderRadius` with size tokens (`xs`, `sm`, `md`, `lg`, `xl`, `xl2`, `xl3`, `pill`).
+* Add color scheme constants to `FColors`.
+* Add `FTypography.xs2`.
+* Add `FTypography.inherit(desktop: ...)`.
+
+* Change `FTheme.data` and `FBasicTheme.data` types from `FThemeData` to `FThemeDataMixin`.
+* Change `FThemeData` to mix in `FThemeDataMixin`.
+* **Breaking** Change default `FTheme`/`FBasicTheme` text size from `md` to `sm`.
+* **Breaking** Change `FStyle.borderRadius` from `BorderRadius` to `FBorderRadius`.
+* **Breaking** Remove `FLerpBorderRadius`. Use `BorderRadius` instead.
+* **Breaking** Rename `FTypography.base` to `FTypography.md`.
+* **Breaking** Change `FTypography` default sizes — each token is now one level larger.
+
+
+### Others
+* Add `Decorations` extension on `Decoration` for extracting common visual properties.
+* Add `FPlatformVariantConstraint` extension type.
+
+* Change default border shape from `RoundedRectangleBorder` to `RoundedSuperellipseBorder`.
+
+* Fix widget `.inherit()` constructors not using `FStyle.borderWidth` for `BorderSide` widths.
+
 
 ### `FTile` & `FTileGroup`
 * Add `FTileStyles.primary` resolving via `FItemVariant.primary`.
@@ -146,21 +180,6 @@
 
 ### `FTooltip`
 * **Breaking** Change `FTooltipStyle.decoration` type from `BoxDecoration` to `Decoration`.
-
-
-### Others
-* Add `Decorations` extension on `Decoration` for extracting common visual properties.
-* Add `FBorderRadius` with size tokens (`xs`, `sm`, `md`, `lg`, `xl`, `xl2`, `xl3`, `pill`).
-
-* **Breaking** Rename `FBorderRadius.base` to `FBorderRadius.md`.
-* **Breaking** Rename `FTypography.base` to `FTypography.md`.
-* Add `FPlatformVariantConstraint` extension type.
-
-* Change default border shape from `RoundedRectangleBorder` to `RoundedSuperellipseBorder` in widget `.inherit()` constructors.
-* **Breaking** Change `FStyle.borderRadius` from `BorderRadius` to `FBorderRadius`.
-* **Breaking** Remove `FLerpBorderRadius`. Use `BorderRadius` instead.
-
-* Fix widget `.inherit()` constructors not using `FStyle.borderWidth` for `BorderSide` widths.
 
 
 ## 0.19.0
