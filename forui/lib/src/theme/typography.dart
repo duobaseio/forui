@@ -38,6 +38,13 @@ final class FTypography with Diagnosticable {
   /// Throws an [AssertionError] if empty.
   final String defaultFontFamily;
 
+  /// The font size for extra extra extra small text.
+  ///
+  /// Defaults to:
+  /// * Desktop — `fontSize` = 8, `height` = 1.
+  /// * Touch — `fontSize` = 10, `height` = 1.
+  final TextStyle xs3;
+
   /// The font size for extra extra small text.
   ///
   /// Defaults to:
@@ -132,6 +139,7 @@ final class FTypography with Diagnosticable {
   /// Creates a [FTypography] that defaults to touch font sizes.
   const FTypography({
     this.defaultFontFamily = 'packages/forui/Inter',
+    this.xs3 = const TextStyle(fontSize: 10, height: 1),
     this.xs2 = const TextStyle(fontSize: 12, height: 1),
     this.xs = const TextStyle(fontSize: 14, height: 1.25),
     this.sm = const TextStyle(fontSize: 16, height: 1.5),
@@ -160,6 +168,7 @@ final class FTypography with Diagnosticable {
     if (desktop) {
       return FTypography(
         defaultFontFamily: defaultFontFamily,
+        xs3: TextStyle(color: color, fontFamily: font, fontSize: 8, height: 1),
         xs2: TextStyle(color: color, fontFamily: font, fontSize: 10, height: 1),
         xs: TextStyle(color: color, fontFamily: font, fontSize: 12, height: 1),
         sm: TextStyle(color: color, fontFamily: font, fontSize: 14, height: 1.25),
@@ -177,6 +186,7 @@ final class FTypography with Diagnosticable {
     } else {
       return FTypography(
         defaultFontFamily: defaultFontFamily,
+        xs3: TextStyle(color: color, fontFamily: font, fontSize: 10, height: 1),
         xs2: TextStyle(color: color, fontFamily: font, fontSize: 12, height: 1),
         xs: TextStyle(color: color, fontFamily: font, fontSize: 14, height: 1.25),
         sm: TextStyle(color: color, fontFamily: font, fontSize: 16, height: 1.5),
@@ -197,6 +207,7 @@ final class FTypography with Diagnosticable {
   /// Creates a linear interpolation between two [FTypography]s using the given factor [t].
   factory FTypography.lerp(FTypography a, FTypography b, double t) => .new(
     defaultFontFamily: t < 0.5 ? a.defaultFontFamily : b.defaultFontFamily,
+    xs3: .lerp(a.xs3, b.xs3, t)!,
     xs2: .lerp(a.xs2, b.xs2, t)!,
     xs: .lerp(a.xs, b.xs, t)!,
     sm: .lerp(a.sm, b.sm, t)!,
@@ -228,6 +239,7 @@ final class FTypography with Diagnosticable {
   @useResult
   FTypography scale({double sizeScalar = 1}) => .new(
     defaultFontFamily: defaultFontFamily,
+    xs3: _scaleTextStyle(style: xs3, sizeScalar: sizeScalar),
     xs2: _scaleTextStyle(style: xs2, sizeScalar: sizeScalar),
     xs: _scaleTextStyle(style: xs, sizeScalar: sizeScalar),
     sm: _scaleTextStyle(style: sm, sizeScalar: sizeScalar),
@@ -266,6 +278,7 @@ final class FTypography with Diagnosticable {
   /// ```
   @useResult
   FTypography copyWith({
+    TextStyle? xs3,
     TextStyle? xs2,
     TextStyle? xs,
     TextStyle? sm,
@@ -281,6 +294,7 @@ final class FTypography with Diagnosticable {
     TextStyle? xl8,
   }) => FTypography(
     defaultFontFamily: defaultFontFamily,
+    xs3: xs3 ?? this.xs3,
     xs2: xs2 ?? this.xs2,
     xs: xs ?? this.xs,
     sm: sm ?? this.sm,
@@ -301,6 +315,7 @@ final class FTypography with Diagnosticable {
     super.debugFillProperties(properties);
     properties
       ..add(StringProperty('defaultFontFamily', defaultFontFamily, defaultValue: 'packages/forui/Inter'))
+      ..add(DiagnosticsProperty('xs3', xs3))
       ..add(DiagnosticsProperty('xs2', xs2))
       ..add(DiagnosticsProperty('xs', xs))
       ..add(DiagnosticsProperty('sm', sm))
@@ -322,6 +337,7 @@ final class FTypography with Diagnosticable {
       other is FTypography &&
           runtimeType == other.runtimeType &&
           defaultFontFamily == other.defaultFontFamily &&
+          xs3 == other.xs3 &&
           xs2 == other.xs2 &&
           xs == other.xs &&
           sm == other.sm &&
@@ -339,6 +355,7 @@ final class FTypography with Diagnosticable {
   @override
   int get hashCode =>
       defaultFontFamily.hashCode ^
+      xs3.hashCode ^
       xs2.hashCode ^
       xs.hashCode ^
       sm.hashCode ^

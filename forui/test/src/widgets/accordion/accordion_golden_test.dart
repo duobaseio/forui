@@ -39,6 +39,26 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('accordion/${theme.name}/shown.png'));
     });
 
+    testWidgets('shown - desktop', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          theme: theme.data,
+          platform: .macOS,
+          child: const FAccordion(
+            children: [
+              FAccordionItem(
+                initiallyExpanded: true,
+                title: Text('Title'),
+                child: ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
+              ),
+            ],
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('accordion/${theme.name}/shown-desktop.png'));
+    });
+
     testWidgets('focused', (tester) async {
       await tester.pumpWidget(
         TestScaffold(

@@ -42,6 +42,6 @@ final class FBadgeContentStyle with Diagnosticable, _$FBadgeContentStyleFunction
   /// Creates a [FBadgeContentStyle].
   const FBadgeContentStyle({
     required this.labelTextStyle,
-    this.padding = const .symmetric(horizontal: 10, vertical: 6),
+    this.padding = const .symmetric(horizontal: 12, vertical: 6),
   });
 }

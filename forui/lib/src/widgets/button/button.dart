@@ -287,11 +287,8 @@ extension type FButtonStyles(
     final primary = FButtonSizeStyles.inherit(
       typography: typography,
       style: style,
-      decoration: .from(
-        ShapeDecoration(
-          shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
-          color: colors.primary,
-        ),
+      decoration: (radius) => .from(
+        ShapeDecoration(shape: RoundedSuperellipseBorder(borderRadius: radius), color: colors.primary),
         variants: {
           [.hovered, .pressed]: .shapeDelta(color: colors.hover(colors.primary)),
           //
@@ -313,11 +310,8 @@ extension type FButtonStyles(
           [.secondary]: FButtonSizeStyles.inherit(
             typography: typography,
             style: style,
-            decoration: .from(
-              ShapeDecoration(
-                shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
-                color: colors.secondary,
-              ),
+            decoration: (radius) => .from(
+              ShapeDecoration(shape: RoundedSuperellipseBorder(borderRadius: radius), color: colors.secondary),
               variants: {
                 [.hovered, .pressed]: .shapeDelta(color: colors.hover(colors.secondary)),
                 //
@@ -333,9 +327,9 @@ extension type FButtonStyles(
           [.destructive]: FButtonSizeStyles.inherit(
             typography: typography,
             style: style,
-            decoration: .from(
+            decoration: (radius) => .from(
               ShapeDecoration(
-                shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
+                shape: RoundedSuperellipseBorder(borderRadius: radius),
                 color: colors.destructive.withValues(alpha: colors.brightness == .light ? 0.1 : 0.2),
               ),
               variants: {
@@ -361,11 +355,11 @@ extension type FButtonStyles(
           [.outline]: FButtonSizeStyles.inherit(
             typography: typography,
             style: style,
-            decoration: .from(
+            decoration: (radius) => .from(
               ShapeDecoration(
                 shape: RoundedSuperellipseBorder(
                   side: BorderSide(color: colors.border, width: style.borderWidth),
-                  borderRadius: style.borderRadius.md,
+                  borderRadius: radius,
                 ),
                 color: colors.card,
               ),
@@ -384,8 +378,8 @@ extension type FButtonStyles(
           [.ghost]: FButtonSizeStyles.inherit(
             typography: typography,
             style: style,
-            decoration: .from(
-              ShapeDecoration(shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md)),
+            decoration: (radius) => .from(
+              ShapeDecoration(shape: RoundedSuperellipseBorder(borderRadius: radius)),
               variants: {
                 [.hovered, .pressed]: .shapeDelta(color: colors.secondary),
                 //
@@ -432,18 +426,22 @@ extension type FButtonSizeStyles(
   factory FButtonSizeStyles.inherit({
     required FTypography typography,
     required FStyle style,
-    required FVariants<FTappableVariantConstraint, FTappableVariant, Decoration, DecorationDelta> decoration,
+    required FVariants<FTappableVariantConstraint, FTappableVariant, Decoration, DecorationDelta> Function(
+      BorderRadiusGeometry radius,
+    ) decoration,
     required Color foregroundColor,
     required Color disabledForegroundColor,
   }) {
     FButtonStyle button({
+      required BorderRadiusGeometry borderRadius,
       required TextStyle textStyle,
       required EdgeInsetsGeometry contentPadding,
       required double contentSpacing,
+      required double contentIconSize,
       required double iconSize,
       required EdgeInsetsGeometry iconPadding,
     }) => FButtonStyle(
-      decoration: decoration,
+      decoration: decoration(borderRadius),
       focusedOutlineStyle: style.focusedOutlineStyle,
       contentStyle: FButtonContentStyle(
         textStyle: .from(
@@ -453,14 +451,14 @@ extension type FButtonSizeStyles(
           },
         ),
         iconStyle: .from(
-          IconThemeData(color: foregroundColor, size: iconSize),
+          IconThemeData(color: foregroundColor, size: contentIconSize),
           variants: {
             [.disabled]: .delta(color: disabledForegroundColor),
           },
         ),
         circularProgressStyle: .from(
           FCircularProgressStyle(
-            iconStyle: IconThemeData(color: foregroundColor, size: iconSize),
+            iconStyle: IconThemeData(color: foregroundColor, size: contentIconSize),
           ),
           variants: {
             [.disabled]: .delta(iconStyle: .delta(color: disabledForegroundColor)),
@@ -482,11 +480,13 @@ extension type FButtonSizeStyles(
     );
 
     final md = button(
+      borderRadius: style.borderRadius.md,
       textStyle: typography.sm,
-      contentPadding: const .symmetric(horizontal: 10, vertical: 11),
+      contentPadding: const .symmetric(horizontal: 12, vertical: 14),
       contentSpacing: 6,
-      iconSize: typography.md.fontSize ?? 16,
-      iconPadding: const .all(10),
+      contentIconSize: typography.sm.fontSize ?? 16,
+      iconSize: typography.md.fontSize ?? 18,
+      iconPadding: const .all(13),
     );
 
     return FButtonSizeStyles(
@@ -494,26 +494,68 @@ extension type FButtonSizeStyles(
         md,
         variants: {
           [.xs]: button(
+            borderRadius: style.borderRadius.sm,
+            textStyle: typography.xs,
+            contentPadding: const .symmetric(horizontal: 10, vertical: 9),
+            contentSpacing: 4,
+            contentIconSize: typography.xs.fontSize ?? 14,
+            iconSize: typography.sm.fontSize ?? 16,
+            iconPadding: const .all(8),
+          ),
+          [.xs.and(.desktop)]: button(
+            borderRadius: style.borderRadius.sm,
             textStyle: typography.xs,
             contentPadding: const .symmetric(horizontal: 8, vertical: 6),
             contentSpacing: 4,
-            iconSize: typography.xs.fontSize ?? 12,
-            iconPadding: const .all(6),
+            contentIconSize: typography.xs.fontSize ?? 12,
+            iconSize: typography.sm.fontSize ?? 14,
+            iconPadding: const .all(5),
           ),
           [.sm]: button(
+            borderRadius: style.borderRadius.md,
+            textStyle: typography.sm,
+            contentPadding: const .symmetric(horizontal: 12, vertical: 12),
+            contentSpacing: 4,
+            contentIconSize: typography.sm.fontSize ?? 16,
+            iconSize: typography.md.fontSize ?? 18,
+            iconPadding: const .all(11),
+          ),
+          [.sm.and(.desktop)]: button(
+            borderRadius: style.borderRadius.md,
             textStyle: typography.sm,
             contentPadding: const .symmetric(horizontal: 10, vertical: 9),
             contentSpacing: 4,
+            contentIconSize: typography.sm.fontSize ?? 14,
             iconSize: typography.md.fontSize ?? 16,
             iconPadding: const .all(8),
           ),
           [.md]: md,
+          [.md.and(.desktop)]: button(
+            borderRadius: style.borderRadius.md,
+            textStyle: typography.sm,
+            contentPadding: const .symmetric(horizontal: 10, vertical: 11),
+            contentSpacing: 6,
+            contentIconSize: typography.sm.fontSize ?? 14,
+            iconSize: typography.md.fontSize ?? 16,
+            iconPadding: const .all(10),
+          ),
           [.lg]: button(
+            borderRadius: style.borderRadius.md,
+            textStyle: typography.sm,
+            contentPadding: const .symmetric(horizontal: 12, vertical: 16),
+            contentSpacing: 6,
+            contentIconSize: typography.sm.fontSize ?? 16,
+            iconSize: typography.lg.fontSize ?? 20,
+            iconPadding: const .all(14),
+          ),
+          [.lg.and(.desktop)]: button(
+            borderRadius: style.borderRadius.md,
             textStyle: typography.sm,
             contentPadding: const .symmetric(horizontal: 10, vertical: 13),
             contentSpacing: 6,
-            iconSize: typography.md.fontSize ?? 16,
-            iconPadding: const .all(12),
+            contentIconSize: typography.sm.fontSize ?? 14,
+            iconSize: typography.lg.fontSize ?? 18,
+            iconPadding: const .all(11),
           ),
         },
       ),
