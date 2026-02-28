@@ -8,6 +8,11 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
 import 'package:forui/src/theme/variant.dart';
 
+@Variants('FTextFieldSize', {
+  'sm': (1, 'The small text field size.'),
+  'md': (1, 'The medium (default) text field size.'),
+  'lg': (1, 'The large text field size.'),
+})
 @Variants('FTextField', {
   'disabled': (2, 'The semantic variant when this widget is disabled and cannot be interacted with.'),
   'error': (2, 'The semantic variant when this widget is in an error state.'),
@@ -16,6 +21,102 @@ import 'package:forui/src/theme/variant.dart';
   'pressed': (1, 'The interaction variant when the user is actively pressing down on the given widget.'),
 })
 part 'text_field_style.design.dart';
+
+/// [FTextFieldStyle]'s size styles.
+extension type FTextFieldSizeStyles(
+  FVariants<FTextFieldSizeVariantConstraint, FTextFieldSizeVariant, FTextFieldStyle, FTextFieldStyleDelta> _
+)
+    implements
+        FVariants<FTextFieldSizeVariantConstraint, FTextFieldSizeVariant, FTextFieldStyle, FTextFieldStyleDelta> {
+  /// Creates a [FTextFieldSizeStyles] that inherits its properties.
+  factory FTextFieldSizeStyles.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+  }) {
+    final label = FLabelStyles.inherit(style: style).verticalStyle;
+    final textStyle = typography.sm.copyWith(fontFamily: typography.defaultFontFamily);
+
+    final iconStyle = FVariants<FTextFieldVariantConstraint, FTextFieldVariant, IconThemeData, IconThemeDataDelta>.from(
+      IconThemeData(color: colors.mutedForeground, size: typography.sm.fontSize),
+      variants: {
+        [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
+      },
+    );
+
+    final ghost = FButtonStyles.inherit(colors: colors, typography: typography, style: style).ghost;
+    final buttonStyle = ghost.sm.copyWith(
+      iconContentStyle: ghost.sm.iconContentStyle.copyWith(iconStyle: iconStyle.cast()),
+    );
+
+    FTextFieldStyle textField({
+      required FVariants<FTextFieldVariantConstraint, FTextFieldVariant, IconThemeData, IconThemeDataDelta> iconStyle,
+      required FButtonStyle buttonStyle,
+      required EdgeInsetsGeometry contentPadding,
+    }) => FTextFieldStyle.inherit(
+      colors: colors,
+      style: style,
+      label: label,
+      textStyle: textStyle,
+      iconStyle: iconStyle,
+      buttonStyle: buttonStyle,
+      contentPadding: contentPadding,
+    );
+
+    final md = textField(
+      iconStyle: iconStyle,
+      buttonStyle: buttonStyle,
+      contentPadding: const .symmetric(horizontal: 12, vertical: 10),
+    );
+
+    return FTextFieldSizeStyles(
+      FVariants(
+        md,
+        variants: {
+          [.sm]: textField(
+            iconStyle: iconStyle,
+            buttonStyle: buttonStyle,
+            contentPadding: const .symmetric(horizontal: 12, vertical: 8),
+          ),
+          [.sm.and(.desktop)]: textField(
+            iconStyle: iconStyle,
+            buttonStyle: ghost.xs.copyWith(
+              iconContentStyle: ghost.xs.iconContentStyle.copyWith(iconStyle: iconStyle.cast()),
+            ),
+            contentPadding: const .symmetric(horizontal: 10, vertical: 7),
+          ),
+          //
+          [.md]: md,
+          [.md.and(.desktop)]: textField(
+            iconStyle: iconStyle,
+            buttonStyle: buttonStyle,
+            contentPadding: const .symmetric(horizontal: 10, vertical: 9),
+          ),
+          //
+          [.lg]: textField(
+            iconStyle: iconStyle,
+            buttonStyle: buttonStyle,
+            contentPadding: const .symmetric(horizontal: 12, vertical: 12),
+          ),
+          [.lg.and(.desktop)]: textField(
+            iconStyle: iconStyle,
+            buttonStyle: buttonStyle,
+            contentPadding: const .symmetric(horizontal: 10, vertical: 11),
+          ),
+        },
+      ),
+    );
+  }
+
+  /// The small text field style.
+  FTextFieldStyle get sm => resolve({FTextFieldSizeVariant.sm});
+
+  /// The medium (default) text field style.
+  FTextFieldStyle get md => resolve({FTextFieldSizeVariant.md});
+
+  /// The large text field style.
+  FTextFieldStyle get lg => resolve({FTextFieldSizeVariant.lg});
+}
 
 /// The text field style.
 class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
@@ -116,85 +217,79 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
   });
 
   /// Creates a [FTextFieldStyle] that inherits its properties.
-  factory FTextFieldStyle.inherit({required FColors colors, required FTypography typography, required FStyle style}) {
-    final label = FLabelStyles.inherit(style: style).verticalStyle;
-    final ghost = FButtonStyles.inherit(colors: colors, typography: typography, style: style).ghost.sm;
-    final textStyle = typography.sm.copyWith(fontFamily: typography.defaultFontFamily);
-    final iconStyle = FVariants<FTextFieldVariantConstraint, FTextFieldVariant, IconThemeData, IconThemeDataDelta>.from(
-      IconThemeData(color: colors.mutedForeground, size: typography.md.fontSize),
-      variants: {
-        [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
-      },
-    );
-    final bounceableButtonStyle = ghost.copyWith(
-      iconContentStyle: ghost.iconContentStyle.copyWith(iconStyle: iconStyle.cast()),
-    );
-
-    return .new(
-      keyboardAppearance: colors.brightness,
-      color: FVariants(
-        colors.card,
-        variants: {
-          [.disabled]: colors.disable(colors.card),
-        },
-      ),
-      cursorColor: colors.primary,
-      iconStyle: iconStyle,
-      clearButtonStyle: bounceableButtonStyle,
-      obscureButtonStyle: bounceableButtonStyle.copyWith(
-        tappableStyle: const .delta(motion: .delta(bounceTween: FTappableMotion.noBounceTween)),
-      ),
-      contentTextStyle: FVariants.from(
-        textStyle.copyWith(color: colors.foreground),
-        variants: {
-          [.disabled]: .delta(color: colors.disable(colors.foreground)),
-        },
-      ),
-      hintTextStyle: FVariants.from(
-        textStyle.copyWith(color: colors.mutedForeground),
-        variants: {
-          [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
-        },
-      ),
-      counterTextStyle: FVariants.from(
-        textStyle.copyWith(color: colors.foreground),
-        variants: {
-          [.disabled]: .delta(color: colors.disable(colors.foreground)),
-        },
-      ),
-      border: FVariants(
-        OutlineInputBorder(
-          borderSide: BorderSide(color: colors.border, width: style.borderWidth),
-          borderRadius: style.borderRadius.md,
-        ),
-        variants: {
-          [.focused]: OutlineInputBorder(
-            borderSide: BorderSide(color: colors.primary, width: style.borderWidth),
-            borderRadius: style.borderRadius.md,
-          ),
-          //
-          [.disabled]: OutlineInputBorder(
-            borderSide: BorderSide(color: colors.disable(colors.border), width: style.borderWidth),
-            borderRadius: style.borderRadius.md,
-          ),
-          //
-          [.error]: OutlineInputBorder(
-            borderSide: BorderSide(color: colors.error, width: style.borderWidth),
-            borderRadius: style.borderRadius.md,
-          ),
-          [.error.and(.disabled)]: OutlineInputBorder(
-            borderSide: BorderSide(color: colors.disable(colors.error), width: style.borderWidth),
-            borderRadius: style.borderRadius.md,
-          ),
-        },
-      ),
-      labelTextStyle: style.formFieldStyle.labelTextStyle,
-      descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,
-      errorTextStyle: style.formFieldStyle.errorTextStyle,
-      labelPadding: label.labelPadding,
-      descriptionPadding: label.descriptionPadding,
-      errorPadding: label.errorPadding,
-      childPadding: label.childPadding,
-    );
-  }
+  FTextFieldStyle.inherit({
+    required FColors colors,
+    required FStyle style,
+    required FLabelStyle label,
+    required TextStyle textStyle,
+    required FVariants<FTextFieldVariantConstraint, FTextFieldVariant, IconThemeData, IconThemeDataDelta> iconStyle,
+    required FButtonStyle buttonStyle,
+    required EdgeInsetsGeometry contentPadding,
+  }) : this(
+         keyboardAppearance: colors.brightness,
+         color: FVariants(
+           colors.card,
+           variants: {
+             [.disabled]: colors.disable(colors.card),
+           },
+         ),
+         cursorColor: colors.primary,
+         contentPadding: contentPadding,
+         iconStyle: iconStyle,
+         clearButtonStyle: buttonStyle,
+         obscureButtonStyle: buttonStyle.copyWith(
+           tappableStyle: const .delta(motion: .delta(bounceTween: FTappableMotion.noBounceTween)),
+         ),
+         contentTextStyle: FVariants.from(
+           textStyle.copyWith(color: colors.foreground),
+           variants: {
+             [.disabled]: .delta(color: colors.disable(colors.foreground)),
+           },
+         ),
+         hintTextStyle: FVariants.from(
+           textStyle.copyWith(color: colors.mutedForeground),
+           variants: {
+             [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
+           },
+         ),
+         counterTextStyle: FVariants.from(
+           textStyle.copyWith(color: colors.foreground),
+           variants: {
+             [.disabled]: .delta(color: colors.disable(colors.foreground)),
+           },
+         ),
+         border: FVariants(
+           OutlineInputBorder(
+             borderSide: BorderSide(color: colors.border, width: style.borderWidth),
+             borderRadius: style.borderRadius.md,
+           ),
+           variants: {
+             [.focused]: OutlineInputBorder(
+               borderSide: BorderSide(color: colors.primary, width: style.borderWidth),
+               borderRadius: style.borderRadius.md,
+             ),
+             //
+             [.disabled]: OutlineInputBorder(
+               borderSide: BorderSide(color: colors.disable(colors.border), width: style.borderWidth),
+               borderRadius: style.borderRadius.md,
+             ),
+             //
+             [.error]: OutlineInputBorder(
+               borderSide: BorderSide(color: colors.error, width: style.borderWidth),
+               borderRadius: style.borderRadius.md,
+             ),
+             [.error.and(.disabled)]: OutlineInputBorder(
+               borderSide: BorderSide(color: colors.disable(colors.error), width: style.borderWidth),
+               borderRadius: style.borderRadius.md,
+             ),
+           },
+         ),
+         labelTextStyle: style.formFieldStyle.labelTextStyle,
+         descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,
+         errorTextStyle: style.formFieldStyle.errorTextStyle,
+         labelPadding: label.labelPadding,
+         descriptionPadding: label.descriptionPadding,
+         errorPadding: label.errorPadding,
+         childPadding: label.childPadding,
+       );
 }

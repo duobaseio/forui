@@ -209,7 +209,7 @@ final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctio
   /// dart run forui style create card
   /// ```
   @override
-  final FCardStyle cardStyle;
+  final FCardStyles cardStyles;
 
   /// The checkbox style.
   ///
@@ -560,7 +560,7 @@ final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctio
   @override
   final FTappableStyle tappableStyle;
 
-  /// The text field style.
+  /// The text field styles.
   ///
   /// ## CLI
   /// To generate and customize this style:
@@ -569,7 +569,7 @@ final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctio
   /// dart run forui style create text-field
   /// ```
   @override
-  final FTextFieldStyle textFieldStyle;
+  final FTextFieldSizeStyles textFieldStyles;
 
   /// The tile's styles.
   ///
@@ -644,7 +644,7 @@ final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctio
     FBreadcrumbStyle? breadcrumbStyle,
     FVariants<FButtonVariantConstraint, FButtonVariant, FButtonSizeStyles, FButtonSizesDelta>? buttonStyles,
     FCalendarStyle? calendarStyle,
-    FCardStyle? cardStyle,
+    FVariants<FCardVariantConstraint, FCardVariant, FCardStyle, FCardStyleDelta>? cardStyles,
     FCheckboxStyle? checkboxStyle,
     FCircularProgressStyle? circularProgressStyle,
     FDateFieldStyle? dateFieldStyle,
@@ -683,7 +683,8 @@ final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctio
     FSwitchStyle? switchStyle,
     FTabsStyle? tabsStyle,
     FTappableStyle? tappableStyle,
-    FTextFieldStyle? textFieldStyle,
+    FVariants<FTextFieldSizeVariantConstraint, FTextFieldSizeVariant, FTextFieldStyle, FTextFieldStyleDelta>?
+        textFieldStyles,
     FVariants<FItemVariantConstraint, FItemVariant, FTileStyle, FTileStyleDelta>? tileStyles,
     FTileGroupStyle? tileGroupStyle,
     FTimeFieldStyle? timeFieldStyle,
@@ -715,7 +716,9 @@ final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctio
           ? FButtonStyles.inherit(colors: colors, typography: typography, style: style)
           : FButtonStyles(buttonStyles),
       calendarStyle: calendarStyle ?? .inherit(colors: colors, typography: typography, style: style),
-      cardStyle: cardStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      cardStyles: cardStyles == null
+          ? FCardStyles.inherit(colors: colors, typography: typography, style: style)
+          : FCardStyles(cardStyles),
       checkboxStyle: checkboxStyle ?? .inherit(colors: colors, style: style),
       circularProgressStyle: circularProgressStyle ?? .inherit(colors: colors),
       dateFieldStyle: dateFieldStyle ?? .inherit(colors: colors, typography: typography, style: style),
@@ -758,7 +761,9 @@ final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctio
       switchStyle: switchStyle ?? .inherit(colors: colors, style: style),
       tabsStyle: tabsStyle ?? .inherit(colors: colors, typography: typography, style: style),
       tappableStyle: tappableStyle ?? FTappableStyle(),
-      textFieldStyle: textFieldStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      textFieldStyles: textFieldStyles == null
+          ? FTextFieldSizeStyles.inherit(colors: colors, typography: typography, style: style)
+          : FTextFieldSizeStyles(textFieldStyles),
       tileStyles: tileStyles == null
           ? FTileStyles.inherit(colors: colors, typography: typography, style: style)
           : FTileStyles(tileStyles),
@@ -822,7 +827,13 @@ final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctio
 
     calendarStyle: a.calendarStyle.lerp(b.calendarStyle, t),
 
-    cardStyle: a.cardStyle.lerp(b.cardStyle, t),
+    cardStyles: FVariants.lerpWhereUsing(
+      a.cardStyles,
+      b.cardStyles,
+      t,
+      (a, b, t) => a!.lerp(b!, t),
+      (base, variants) => FCardStyles(.raw(base, variants)),
+    ),
 
     checkboxStyle: a.checkboxStyle.lerp(b.checkboxStyle, t),
 
@@ -892,7 +903,13 @@ final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctio
     switchStyle: a.switchStyle.lerp(b.switchStyle, t),
     tabsStyle: a.tabsStyle.lerp(b.tabsStyle, t),
     tappableStyle: a.tappableStyle.lerp(b.tappableStyle, t),
-    textFieldStyle: a.textFieldStyle.lerp(b.textFieldStyle, t),
+    textFieldStyles: FVariants.lerpWhereUsing(
+      a.textFieldStyles,
+      b.textFieldStyles,
+      t,
+      (a, b, t) => a!.lerp(b!, t),
+      (base, variants) => FTextFieldSizeStyles(.raw(base, variants)),
+    ),
     tileStyles: FVariants.lerpWhereUsing(
       a.tileStyles,
       b.tileStyles,
@@ -925,7 +942,7 @@ final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctio
     required this.breadcrumbStyle,
     required this.buttonStyles,
     required this.calendarStyle,
-    required this.cardStyle,
+    required this.cardStyles,
     required this.checkboxStyle,
     required this.circularProgressStyle,
     required this.dateFieldStyle,
@@ -958,7 +975,7 @@ final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctio
     required this.switchStyle,
     required this.tabsStyle,
     required this.tappableStyle,
-    required this.textFieldStyle,
+    required this.textFieldStyles,
     required this.tileStyles,
     required this.tileGroupStyle,
     required this.timeFieldStyle,
@@ -1125,14 +1142,14 @@ final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctio
 
       // Input
       inputDecorationTheme: InputDecorationTheme(
-        border: WidgetStateInputBorder.resolveWith((states) => textFieldStyle.border.resolve(toVariants(states))),
-        labelStyle: textFieldStyle.descriptionTextStyle.base,
-        floatingLabelStyle: textFieldStyle.labelTextStyle.base,
-        hintStyle: textFieldStyle.hintTextStyle.base,
-        errorStyle: textFieldStyle.errorTextStyle.base,
-        helperStyle: textFieldStyle.descriptionTextStyle.base,
-        counterStyle: textFieldStyle.counterTextStyle.base,
-        contentPadding: textFieldStyle.contentPadding,
+        border: WidgetStateInputBorder.resolveWith((states) => textFieldStyles.md.border.resolve(toVariants(states))),
+        labelStyle: textFieldStyles.md.descriptionTextStyle.base,
+        floatingLabelStyle: textFieldStyles.md.labelTextStyle.base,
+        hintStyle: textFieldStyles.md.hintTextStyle.base,
+        errorStyle: textFieldStyles.md.errorTextStyle.base,
+        helperStyle: textFieldStyles.md.descriptionTextStyle.base,
+        counterStyle: textFieldStyles.md.counterTextStyle.base,
+        contentPadding: textFieldStyles.md.contentPadding,
       ),
 
       // Date Picker
@@ -1383,8 +1400,8 @@ final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctio
   ///
   ///   return FTheme(
   ///     data: theme.copyWith(
-  ///       cardStyle: theme.cardStyle.copyWith(
-  ///         decoration: .delta(borderRadius: const .all(.circular(8))),
+  ///       cardStyles: (styles) => styles.map(
+  ///         (style) => style.copyWith(decoration: .delta(borderRadius: const .all(.circular(8)))),
   ///       ),
   ///     ),
   ///     child: const FScaffold(...),
@@ -1409,7 +1426,7 @@ final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctio
     FBreadcrumbStyleDelta? breadcrumbStyle,
     FVariantsDelta<FButtonVariantConstraint, FButtonVariant, FButtonSizeStyles, FButtonSizesDelta>? buttonStyles,
     FCalendarStyleDelta? calendarStyle,
-    FCardStyleDelta? cardStyle,
+    FVariantsDelta<FCardVariantConstraint, FCardVariant, FCardStyle, FCardStyleDelta>? cardStyles,
     FCheckboxStyleDelta? checkboxStyle,
     FCircularProgressStyleDelta? circularProgressStyle,
     FDateFieldStyleDelta? dateFieldStyle,
@@ -1449,7 +1466,8 @@ final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctio
     FSwitchStyleDelta? switchStyle,
     FTabsStyleDelta? tabsStyle,
     FTappableStyleDelta? tappableStyle,
-    FTextFieldStyleDelta? textFieldStyle,
+    FVariantsDelta<FTextFieldSizeVariantConstraint, FTextFieldSizeVariant, FTextFieldStyle, FTextFieldStyleDelta>?
+        textFieldStyles,
     FVariantsDelta<FItemVariantConstraint, FItemVariant, FTileStyle, FTileStyleDelta>? tileStyles,
     FTileGroupStyleDelta? tileGroupStyle,
     FTimeFieldStyleDelta? timeFieldStyle,
@@ -1472,7 +1490,7 @@ final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctio
     breadcrumbStyle: breadcrumbStyle?.call(this.breadcrumbStyle) ?? this.breadcrumbStyle,
     buttonStyles: buttonStyles == null ? this.buttonStyles : FButtonStyles(buttonStyles(this.buttonStyles)),
     calendarStyle: calendarStyle?.call(this.calendarStyle) ?? this.calendarStyle,
-    cardStyle: cardStyle?.call(this.cardStyle) ?? this.cardStyle,
+    cardStyles: cardStyles == null ? this.cardStyles : FCardStyles(cardStyles(this.cardStyles)),
     checkboxStyle: checkboxStyle?.call(this.checkboxStyle) ?? this.checkboxStyle,
     circularProgressStyle: circularProgressStyle?.call(this.circularProgressStyle) ?? this.circularProgressStyle,
     dateFieldStyle: dateFieldStyle?.call(this.dateFieldStyle) ?? this.dateFieldStyle,
@@ -1508,7 +1526,9 @@ final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctio
     switchStyle: switchStyle?.call(this.switchStyle) ?? this.switchStyle,
     tabsStyle: tabsStyle?.call(this.tabsStyle) ?? this.tabsStyle,
     tappableStyle: tappableStyle?.call(this.tappableStyle) ?? this.tappableStyle,
-    textFieldStyle: textFieldStyle?.call(this.textFieldStyle) ?? this.textFieldStyle,
+    textFieldStyles: textFieldStyles == null
+        ? this.textFieldStyles
+        : FTextFieldSizeStyles(textFieldStyles(this.textFieldStyles)),
     tileStyles: tileStyles == null ? this.tileStyles : FTileStyles(tileStyles(this.tileStyles)),
     tileGroupStyle: tileGroupStyle?.call(this.tileGroupStyle) ?? this.tileGroupStyle,
     timeFieldStyle: timeFieldStyle?.call(this.timeFieldStyle) ?? this.timeFieldStyle,

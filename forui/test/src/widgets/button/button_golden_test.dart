@@ -345,7 +345,7 @@ void main() {
   for (final (name, size) in [
     ('xs', FButtonSizeVariant.xs),
     ('sm', FButtonSizeVariant.sm),
-    ('base', FButtonSizeVariant.md),
+    ('md', FButtonSizeVariant.md),
     ('lg', FButtonSizeVariant.lg),
   ]) {
     testWidgets('$name content', (tester) async {

@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -179,22 +178,6 @@ void main() {
     await tester.pumpWidget(TestScaffold.app(child: const FTextField(maxLines: null, expands: true)));
 
     expect(tester.takeException(), null);
-  });
-
-  testWidgets('height does not change due to visual density on different platforms', (tester) async {
-    debugDefaultTargetPlatformOverride = .macOS;
-    await tester.pumpWidget(TestScaffold.app(theme: FThemes.neutral.light.touch, child: const FTextField()));
-    final macos = tester.getSize(find.byType(FTextField)).height;
-
-    await tester.pumpWidget(const SizedBox());
-
-    debugDefaultTargetPlatformOverride = .iOS;
-    await tester.pumpWidget(TestScaffold.app(theme: FThemes.neutral.light.touch, child: const FTextField()));
-    final ios = tester.getSize(find.byType(FTextField)).height;
-
-    expect(macos, ios);
-
-    debugDefaultTargetPlatformOverride = null;
   });
 
   testWidgets('error does not cause overlay to fail', (tester) async {

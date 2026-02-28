@@ -27,8 +27,8 @@ void main() {
             width: 100,
             height: 100,
             decoration: BoxDecoration(
-              borderRadius: theme.data.style.borderRadius.md,
-              border: .all(color: theme.data.colors.secondary),
+              borderRadius: theme.data.touch.style.borderRadius.md,
+              border: .all(color: theme.data.touch.colors.secondary),
             ),
           ),
           FDivider(axis: axis),
@@ -36,8 +36,8 @@ void main() {
             width: 100,
             height: 100,
             decoration: BoxDecoration(
-              borderRadius: theme.data.style.borderRadius.md,
-              border: .all(color: theme.data.colors.secondary),
+              borderRadius: theme.data.touch.style.borderRadius.md,
+              border: .all(color: theme.data.touch.colors.secondary),
             ),
           ),
         ];

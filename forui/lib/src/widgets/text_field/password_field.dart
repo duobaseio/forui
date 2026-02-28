@@ -242,9 +242,10 @@ class PasswordField extends StatefulWidget {
   }
 
   final TextEditingController controller;
+  final FTextFieldSizeVariant size;
   final PasswordFieldProperties properties;
 
-  const PasswordField({required this.controller, required this.properties, super.key});
+  const PasswordField({required this.controller, required this.size, required this.properties, super.key});
 
   @override
   State<PasswordField> createState() => _State();
@@ -254,6 +255,7 @@ class PasswordField extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('size', size))
       ..add(DiagnosticsProperty('properties', this.properties));
   }
 }
@@ -292,6 +294,7 @@ class _State extends State<PasswordField> {
     valueListenable: _controller,
     builder: (context, obscured, child) => Input(
       controller: widget.controller,
+      size: widget.size,
       style: widget.properties.style,
       builder: widget.properties.builder,
       label: widget.properties.label,

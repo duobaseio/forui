@@ -83,7 +83,7 @@ void main() {
                   FBottomNavigationBar(
                     style: .delta(
                       backgroundFilter: .blur(sigmaX: 5, sigmaY: 5),
-                      decoration: .value(BoxDecoration(color: theme.data.colors.background.withValues(alpha: 0.5))),
+                      decoration: .value(BoxDecoration(color: theme.data.touch.colors.background.withValues(alpha: 0.5))),
                     ),
                     index: 2,
                     children: const [

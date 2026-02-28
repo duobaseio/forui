@@ -217,8 +217,8 @@ void main() {
                   backgroundFilter: .blur(sigmaX: 5, sigmaY: 5),
                   decoration: .value(
                     BoxDecoration(
-                      color: theme.data.colors.background.withValues(alpha: 0.5),
-                      borderRadius: theme.data.style.borderRadius.md,
+                      color: theme.data.touch.colors.background.withValues(alpha: 0.5),
+                      borderRadius: theme.data.touch.style.borderRadius.md,
                     ),
                   ),
                 ),

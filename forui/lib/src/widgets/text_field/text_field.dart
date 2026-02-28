@@ -66,6 +66,7 @@ class FTextField extends StatelessWidget {
   static Widget password({
     FTextFieldControl control = const .managed(),
     FObscureTextControl obscureTextControl = const .managed(),
+    FTextFieldSizeVariant size = .md,
     FTextFieldStyleDelta style = const .context(),
     FFieldBuilder<FTextFieldStyle> builder = Input.defaultBuilder,
     Widget? label = const LocalizedText.password(),
@@ -131,6 +132,7 @@ class FTextField extends StatelessWidget {
     control: control,
     builder: (context, controller, _) => PasswordField(
       controller: controller,
+      size: size,
       properties: PasswordFieldProperties(
         style: style,
         builder: builder,
@@ -196,8 +198,13 @@ class FTextField extends StatelessWidget {
     ),
   );
 
+  /// {@template forui.text_field.size}
+  /// The text field's size variant. Defaults to [FTextFieldSizeVariant.md].
+  /// {@endtemplate}
+  final FTextFieldSizeVariant size;
+
   /// {@template forui.text_field.style}
-  /// The text field's style. Defaults to [FThemeData.textFieldStyle].
+  /// The text field's style. Defaults to [FThemeData.textFieldStyles].
   ///
   /// To modify the current style:
   /// ```dart
@@ -827,6 +834,7 @@ class FTextField extends StatelessWidget {
   /// Creates a [FTextField].
   const FTextField({
     this.control = const .managed(),
+    this.size = .md,
     this.style = const .context(),
     this.builder = Input.defaultBuilder,
     this.label,
@@ -893,6 +901,7 @@ class FTextField extends StatelessWidget {
   /// Creates a [FTextField] configured for emails.
   const FTextField.email({
     this.control = const .managed(),
+    this.size = .md,
     this.style = const .context(),
     this.builder = Input.defaultBuilder,
     this.label = const LocalizedText.email(),
@@ -963,6 +972,7 @@ class FTextField extends StatelessWidget {
   /// [maxLines].
   const FTextField.multiline({
     this.control = const .managed(),
+    this.size = .md,
     this.style = const .context(),
     this.builder = Input.defaultBuilder,
     this.label,
@@ -1031,6 +1041,7 @@ class FTextField extends StatelessWidget {
     control: control,
     builder: (context, controller, _) => Input(
       controller: controller,
+      size: size,
       style: style,
       builder: builder,
       label: label,
@@ -1099,6 +1110,7 @@ class FTextField extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('control', control))
+      ..add(DiagnosticsProperty('size', size))
       ..add(DiagnosticsProperty('style', style))
       ..add(ObjectFlagProperty.has('builder', builder))
       ..add(StringProperty('hint', hint))

@@ -17,7 +17,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.blue(
         child: FTextFormField(
-          style: TestScaffold.blueScreen.textFieldStyle,
+          style: TestScaffold.blueScreen.textFieldStyles.md,
           label: const Text('My Label'),
           hint: 'hint',
           description: const Text('Some help text.'),
@@ -272,7 +272,7 @@ void main() {
       ('error-to-enabled', 'An error has occurred.', null),
     ]) {
       testWidgets('${theme.name} $name transition', (tester) async {
-        final sheet = autoDispose(AnimationSheetBuilder(frameSize: const Size(300, 150)));
+        final sheet = autoDispose(AnimationSheetBuilder(frameSize: const Size(300, 200)));
 
         await tester.pumpWidget(
           sheet.record(

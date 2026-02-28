@@ -32,6 +32,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   static Widget password({
     FTextFieldControl control = const .managed(),
     FObscureTextControl obscureTextControl = const .managed(),
+    FTextFieldSizeVariant size = .md,
     FTextFieldStyleDelta style = const .context(),
     FFieldBuilder<FTextFieldStyle> builder = Input.defaultBuilder,
     Widget? label = const LocalizedText.password(),
@@ -100,6 +101,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     Key? key,
   }) => PasswordFormField(
     control: control,
+    size: size,
     properties: PasswordFieldProperties(
       style: style,
       builder: builder,
@@ -175,6 +177,9 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
 
   /// {@macro forui.text_field.control}
   final FTextFieldControl control;
+
+  /// {@macro forui.text_field.size}
+  final FTextFieldSizeVariant size;
 
   /// {@macro forui.text_field.style}
   final FTextFieldStyleDelta style;
@@ -378,6 +383,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   /// Creates a [FTextFormField].
   const FTextFormField({
     this.control = const .managed(),
+    this.size = .md,
     this.style = const .context(),
     this.builder = Input.defaultBuilder,
     this.label,
@@ -449,6 +455,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   /// Creates a [FTextFormField] configured for emails.
   const FTextFormField.email({
     this.control = const .managed(),
+    this.size = .md,
     this.style = const .context(),
     this.builder = Input.defaultBuilder,
     this.label = const LocalizedText.email(),
@@ -524,6 +531,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   /// [maxLines].
   const FTextFormField.multiline({
     this.control = const .managed(),
+    this.size = .md,
     this.style = const .context(),
     this.builder = Input.defaultBuilder,
     this.label,
@@ -607,6 +615,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
       restorationId: restorationId,
       builder: (state) => Input(
         controller: controller,
+        size: size,
         style: style,
         builder: builder,
         label: label,
@@ -679,6 +688,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('control', control))
+      ..add(DiagnosticsProperty('size', size))
       ..add(DiagnosticsProperty('style', style))
       ..add(ObjectFlagProperty.has('builder', builder))
       ..add(StringProperty('hint', hint))

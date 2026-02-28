@@ -17,7 +17,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.blue(
         child: FTextField(
-          style: TestScaffold.blueScreen.textFieldStyle,
+          style: TestScaffold.blueScreen.textFieldStyles.md,
           label: const Text('My Label'),
           hint: 'hint',
           description: const Text('Some help text.'),
@@ -318,7 +318,7 @@ void main() {
       ('error-to-enabled', const Text('An error has occurred.'), null),
     ]) {
       testWidgets('${theme.name} $name transition', (tester) async {
-        final sheet = autoDispose(AnimationSheetBuilder(frameSize: const Size(300, 150)));
+        final sheet = autoDispose(AnimationSheetBuilder(frameSize: const Size(300, 200)));
 
         await tester.pumpWidget(
           sheet.record(
@@ -360,5 +360,45 @@ void main() {
         await expectLater(sheet.collate(5), matchesGoldenFile('text-field/${theme.name}/$name.png'));
       });
     }
+  }
+
+  for (final (name, size) in [
+    ('sm', FTextFieldSizeVariant.sm),
+    ('md', FTextFieldSizeVariant.md),
+    ('lg', FTextFieldSizeVariant.lg),
+  ]) {
+    testWidgets('$name plain', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTextField(
+            size: size,
+            label: const Text('Label'),
+            hint: 'hint',
+            description: const Text('Description'),
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('text-field/size/$name-plain.png'));
+    });
+
+    testWidgets('$name prefix clearable', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTextField(
+            control: const .managed(initial: TextEditingValue(text: 'text')),
+            size: size,
+            label: const Text('Label'),
+            hint: 'hint',
+            prefixBuilder: (_, _, _) => const Icon(FIcons.mail),
+            clearable: (_) => true,
+          ),
+        ),
+      );
+
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('text-field/size/$name-prefix-clearable.png'));
+    });
   }
 }

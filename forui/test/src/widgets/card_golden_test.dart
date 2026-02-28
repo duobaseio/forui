@@ -10,7 +10,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.blue(
         child: FCard(
-          style: TestScaffold.blueScreen.cardStyle,
+          style: TestScaffold.blueScreen.cardStyles.resolve({}),
           title: const Text('Notifications'),
           subtitle: const Text('You have 3 unread messages.'),
         ),
@@ -37,7 +37,7 @@ void main() {
         TestScaffold(
           theme: theme.data,
           child: FCard(
-            image: Container(color: Colors.blue, height: 100, width: 200),
+            image: Container(color: Colors.blue, height: 100, width: 250),
             title: const Text('Notifications'),
             subtitle: const Text('You have 3 unread messages.'),
           ),

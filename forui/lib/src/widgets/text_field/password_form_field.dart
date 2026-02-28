@@ -11,6 +11,8 @@ import 'package:forui/src/widgets/text_field/text_field_control.dart';
 class PasswordFormField extends StatelessWidget with FFormFieldProperties<String> {
   final FTextFieldControl control;
 
+  final FTextFieldSizeVariant size;
+
   final PasswordFieldProperties properties;
 
   @override
@@ -33,6 +35,7 @@ class PasswordFormField extends StatelessWidget with FFormFieldProperties<String
 
   PasswordFormField({
     required this.control,
+    required this.size,
     required this.properties,
     required this.onSaved,
     required this.onReset,
@@ -59,6 +62,7 @@ class PasswordFormField extends StatelessWidget with FFormFieldProperties<String
       restorationId: properties.restorationId,
       builder: (state) => PasswordField(
         controller: controller,
+        size: size,
         properties: PasswordFieldProperties(
           style: properties.style,
           builder: properties.builder,
@@ -142,6 +146,7 @@ class PasswordFormField extends StatelessWidget with FFormFieldProperties<String
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('control', control))
+      ..add(DiagnosticsProperty('size', size))
       ..add(DiagnosticsProperty('properties', properties));
   }
 }

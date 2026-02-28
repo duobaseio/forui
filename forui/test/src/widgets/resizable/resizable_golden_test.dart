@@ -42,7 +42,7 @@ void main() {
                 theme: theme.data,
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                    border: .all(color: theme.data.colors.border),
+                    border: .all(color: theme.data.touch.colors.border),
                     borderRadius: .circular(8),
                   ),
                   child: FResizable(
@@ -75,7 +75,7 @@ void main() {
                 theme: theme.data,
                 child: DecoratedBox(
                   decoration: BoxDecoration(
-                    border: .all(color: theme.data.colors.border),
+                    border: .all(color: theme.data.touch.colors.border),
                     borderRadius: .circular(8),
                   ),
                   child: FResizable(
