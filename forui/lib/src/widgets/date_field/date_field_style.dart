@@ -26,7 +26,7 @@ class FDateFieldStyle with Diagnosticable, _$FDateFieldStyleFunctions {
   /// Creates a [FDateFieldStyle] that inherits its properties.
   FDateFieldStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        fieldStyle: .inherit(colors: colors, typography: typography, style: style),
+        fieldStyle: FTextFieldSizeStyles.inherit(colors: colors, typography: typography, style: style).md,
         popoverStyle: .inherit(colors: colors, style: style),
         calendarStyle: .inherit(colors: colors, typography: typography, style: style),
       );

@@ -26,7 +26,7 @@ class FTimeFieldStyle with Diagnosticable, _$FTimeFieldStyleFunctions {
   /// Creates a [FTimeFieldStyle] that inherits its properties.
   FTimeFieldStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        fieldStyle: .inherit(colors: colors, typography: typography, style: style),
+        fieldStyle: FTextFieldSizeStyles.inherit(colors: colors, typography: typography, style: style).md,
         popoverStyle: .inherit(colors: colors, style: style),
         pickerStyle: .inherit(colors: colors, typography: typography, style: style),
       );

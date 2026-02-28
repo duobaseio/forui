@@ -30,7 +30,7 @@ class Content extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style(context.theme.cardStyle).contentStyle;
+    final style = this.style(context.theme.cardStyles.resolve({context.platformVariant})).contentStyle;
     return Padding(
       padding: style.padding,
       child: Column(
@@ -55,6 +55,8 @@ class Content extends StatelessWidget {
               style: style.titleTextStyle,
               child: title,
             ),
+
+          if (title != null && subtitle != null) SizedBox(height: style.titleSpacing),
           if (subtitle case final subtitle?)
             DefaultTextStyle.merge(
               textHeightBehavior: const TextHeightBehavior(
@@ -64,7 +66,7 @@ class Content extends StatelessWidget {
               style: style.subtitleTextStyle,
               child: subtitle,
             ),
-          if (title != null && subtitle != null && image == null) SizedBox(height: style.subtitleSpacing),
+          if (title != null && subtitle != null && child != null) SizedBox(height: style.subtitleSpacing),
           ?child,
         ],
       ),
@@ -87,7 +89,11 @@ class FCardContentStyle with Diagnosticable, _$FCardContentStyleFunctions {
   @override
   final double imageSpacing;
 
-  /// The spacing between the title/subtitle and the child if an image is provided. Defaults to 4.
+  /// The spacing between the title and the subtitle. Defaults to 2.
+  @override
+  final double titleSpacing;
+
+  /// The spacing between the title/subtitle and the child. Defaults to 6.
   @override
   final double subtitleSpacing;
 
@@ -99,7 +105,7 @@ class FCardContentStyle with Diagnosticable, _$FCardContentStyleFunctions {
   @override
   final TextStyle subtitleTextStyle;
 
-  /// The padding. Defaults to `EdgeInsets.all(24)`.
+  /// The padding. Defaults to `EdgeInsets.all(16)`.
   @override
   final EdgeInsetsGeometry padding;
 
@@ -108,7 +114,8 @@ class FCardContentStyle with Diagnosticable, _$FCardContentStyleFunctions {
     required this.titleTextStyle,
     required this.subtitleTextStyle,
     this.imageSpacing = 24,
-    this.subtitleSpacing = 4,
-    this.padding = const .all(24),
+    this.titleSpacing = 2,
+    this.subtitleSpacing = 6,
+    this.padding = const .all(16),
   });
 }

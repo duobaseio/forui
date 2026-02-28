@@ -29,7 +29,7 @@ void main() {
                   FLocalizations.of(context)!,
                   FTimeFieldController(time: const FTime(12, 15)),
                   .jm(locale.toString()),
-                  context.theme.textFieldStyle,
+                  context.theme.textFieldStyles.md,
                 );
 
                 parts = controller.selector.split(DateFormat.jm(locale.toString()).format(_date));
@@ -58,7 +58,7 @@ void main() {
                   FLocalizations.of(context)!,
                   FTimeFieldController(time: const FTime(12, 15)),
                   .Hm(locale.toString()),
-                  context.theme.textFieldStyle,
+                  context.theme.textFieldStyles.md,
                 );
 
                 parts = controller.selector.split(DateFormat.Hm(locale.toString()).format(_date));

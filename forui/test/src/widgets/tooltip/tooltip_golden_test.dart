@@ -55,9 +55,9 @@ void main() {
                   backgroundFilter: .blur(sigmaX: 5, sigmaY: 5),
                   decoration: .value(
                     BoxDecoration(
-                      color: theme.data.colors.background.withValues(alpha: 0.5),
-                      borderRadius: theme.data.style.borderRadius.md,
-                      border: .all(width: theme.data.style.borderWidth, color: theme.data.colors.border),
+                      color: theme.data.touch.colors.background.withValues(alpha: 0.5),
+                      borderRadius: theme.data.touch.style.borderRadius.md,
+                      border: .all(width: theme.data.touch.style.borderWidth, color: theme.data.touch.colors.border),
                     ),
                   ),
                 ),

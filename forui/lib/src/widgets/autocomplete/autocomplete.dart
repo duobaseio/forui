@@ -1025,7 +1025,7 @@ class FAutocompleteStyle with Diagnosticable, _$FAutocompleteStyleFunctions {
     required FTypography typography,
     required FStyle style,
   }) {
-    final field = FTextFieldStyle.inherit(colors: colors, typography: typography, style: style);
+    final field = FTextFieldSizeStyles.inherit(colors: colors, typography: typography, style: style).md;
     return .new(
       fieldStyle: field,
       composingTextStyle: field.contentTextStyle.apply([.all(.delta(decoration: () => .underline))]),

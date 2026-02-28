@@ -268,15 +268,15 @@ extension CustomMaterialTheme on FThemeData {
       ),
       inputDecorationTheme: InputDecorationTheme(
         border: WidgetStateInputBorder.resolveWith(
-          (states) => textFieldStyle.border.resolve(toVariants(states)),
+          (states) => textFieldStyles.md.border.resolve(toVariants(states)),
         ),
-        labelStyle: textFieldStyle.descriptionTextStyle.base,
-        floatingLabelStyle: textFieldStyle.labelTextStyle.base,
-        hintStyle: textFieldStyle.hintTextStyle.base,
-        errorStyle: textFieldStyle.errorTextStyle.base,
-        helperStyle: textFieldStyle.descriptionTextStyle.base,
-        counterStyle: textFieldStyle.counterTextStyle.base,
-        contentPadding: textFieldStyle.contentPadding,
+        labelStyle: textFieldStyles.md.descriptionTextStyle.base,
+        floatingLabelStyle: textFieldStyles.md.labelTextStyle.base,
+        hintStyle: textFieldStyles.md.hintTextStyle.base,
+        errorStyle: textFieldStyles.md.errorTextStyle.base,
+        helperStyle: textFieldStyles.md.descriptionTextStyle.base,
+        counterStyle: textFieldStyles.md.counterTextStyle.base,
+        contentPadding: textFieldStyles.md.contentPadding,
       ),
       datePickerTheme: DatePickerThemeData(
         shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
