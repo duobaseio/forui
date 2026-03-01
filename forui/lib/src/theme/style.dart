@@ -68,9 +68,8 @@ class FStyle with Diagnosticable, _$FStyleFunctions {
     return FStyle(
       formFieldStyle: .inherit(colors: colors, typography: typography),
       focusedOutlineStyle: FFocusedOutlineStyle(color: colors.primary, borderRadius: borderRadius.md),
-      iconStyle: IconThemeData(color: colors.foreground, size: 20),
+      iconStyle: IconThemeData(color: colors.foreground, size: typography.lg.fontSize),
       tappableStyle: FTappableStyle(),
-      borderRadius: borderRadius, // ignore: avoid_redundant_argument_values
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'dart:collection';
+import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -104,7 +105,7 @@ class _DayPickerState extends State<DayPicker> {
 
   @override
   Widget build(BuildContext context) {
-    final tileSize = widget.style.tileSize.resolve({context.platformVariant});
+    final tileSize = widget.style.tileSize;
     return SizedBox(
       width: DateTime.daysPerWeek * tileSize,
       child: GridView.custom(
@@ -211,15 +212,15 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
 
   /// The tile's size. Defaults to 44 on touch platforms and 32 on desktop.
   @override
-  final FVariants<FPlatformVariantConstraint, FPlatformVariant, double, Delta> tileSize;
+  final double tileSize;
 
   /// Creates a [FCalendarDayPickerStyle].
   const FCalendarDayPickerStyle({
     required this.headerTextStyle,
     required this.current,
+    required this.tileSize,
     required this.enclosing,
     this.startDayOfWeek,
-    this.tileSize = const .raw(44, {.desktop: 32}),
   }) : assert(
          startDayOfWeek == null || (DateTime.monday <= startDayOfWeek && startDayOfWeek <= DateTime.sunday),
          'startDayOfWeek ($startDayOfWeek) must be between DateTime.monday (1) and DateTime.sunday (7)',
@@ -230,6 +231,7 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
     required FColors colors,
     required FTypography typography,
     required FStyle style,
+    bool desktop = false,
   }) {
     final backgroundColor = FVariants<FTappableVariantConstraint, FTappableVariant, Color, Delta>(
       colors.card,
@@ -249,67 +251,53 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
         [.disabled.and(.focused)]: null,
       },
     );
-
-    return .new(
-      headerTextStyle: typography.xs.copyWith(color: colors.mutedForeground),
-      current: FCalendarEntryStyle(
-        backgroundColor: backgroundColor,
-        borderSide: border,
-        textStyle: FVariants.from(
-          typography.sm.copyWith(color: colors.foreground, fontWeight: .w500),
-          variants: {
-            [.disabled.and(.touch)]: .delta(color: colors.disable(colors.foreground)),
-            [.disabled.and(.desktop)]: .delta(
-              color: colors.disable(colors.foreground),
-              fontSize: typography.xs.fontSize,
-              height: typography.xs.height,
-            ),
-            //
-            [.selected.and(.touch)]: .delta(color: colors.primaryForeground),
-            [.selected.and(.desktop)]: .delta(
-              color: colors.primaryForeground,
-              fontSize: typography.xs.fontSize,
-              height: typography.xs.height,
-            ),
-            [.selected.and(.disabled).and(.touch)]: .delta(color: colors.disable(colors.primaryForeground)),
-            [.selected.and(.disabled).and(.desktop)]: .delta(
-              color: colors.disable(colors.primaryForeground),
-              fontSize: typography.xs.fontSize,
-              height: typography.xs.height,
-            ),
-          },
-        ),
-        borderRadius: style.borderRadius.sm,
-      ),
-      enclosing: FCalendarEntryStyle(
-        backgroundColor: backgroundColor,
-        borderSide: border,
-        textStyle: FVariants.from(
-          typography.sm.copyWith(color: colors.mutedForeground, fontWeight: .w500),
-          variants: {
-            [.disabled.and(.touch)]: .delta(color: colors.disable(colors.mutedForeground)),
-            [.disabled.and(.desktop)]: .delta(
-              color: colors.disable(colors.mutedForeground),
-              fontSize: typography.xs.fontSize,
-              height: typography.xs.height,
-            ),
-            //
-            [.selected.and(.touch)]: .delta(color: colors.primaryForeground),
-            [.selected.and(.desktop)]: .delta(
-              color: colors.primaryForeground,
-              fontSize: typography.xs.fontSize,
-              height: typography.xs.height,
-            ),
-            [.selected.and(.disabled).and(.touch)]: .delta(color: colors.disable(colors.primaryForeground)),
-            [.selected.and(.disabled).and(.desktop)]: .delta(
-              color: colors.disable(colors.primaryForeground),
-              fontSize: typography.xs.fontSize,
-              height: typography.xs.height,
-            ),
-          },
-        ),
-        borderRadius: style.borderRadius.sm,
-      ),
+    FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> textStyle(
+      TextStyle textStyle,
+      Color color,
+    ) => FVariants.from(
+      textStyle.copyWith(color: color, fontWeight: .w500),
+      variants: {
+        [.disabled]: .delta(color: colors.disable(color)),
+        //
+        [.selected]: .delta(color: colors.primaryForeground),
+        [.selected.and(.disabled)]: .delta(color: colors.disable(colors.primaryForeground)),
+      },
     );
+
+    if (desktop) {
+      return .new(
+        headerTextStyle: typography.xs.copyWith(color: colors.mutedForeground),
+        tileSize: 32,
+        current: FCalendarEntryStyle(
+          backgroundColor: backgroundColor,
+          borderSide: border,
+          textStyle: textStyle(typography.sm, colors.foreground),
+          borderRadius: style.borderRadius.sm,
+        ),
+        enclosing: FCalendarEntryStyle(
+          backgroundColor: backgroundColor,
+          borderSide: border,
+          textStyle: textStyle(typography.sm, colors.mutedForeground),
+          borderRadius: style.borderRadius.sm,
+        ),
+      );
+    } else {
+      return .new(
+        headerTextStyle: typography.xs2.copyWith(color: colors.mutedForeground),
+        tileSize: 44,
+        current: FCalendarEntryStyle(
+          backgroundColor: backgroundColor,
+          borderSide: border,
+          textStyle: textStyle(typography.sm, colors.foreground),
+          borderRadius: style.borderRadius.md,
+        ),
+        enclosing: FCalendarEntryStyle(
+          backgroundColor: backgroundColor,
+          borderSide: border,
+          textStyle: textStyle(typography.sm, colors.mutedForeground),
+          borderRadius: style.borderRadius.md,
+        ),
+      );
+    }
   }
 }

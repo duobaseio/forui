@@ -66,7 +66,7 @@ class _MonthPickerState extends State<MonthPicker> {
 
   @override
   Widget build(BuildContext context) {
-    final tileSize = widget.dayStyle.tileSize.resolve({context.platformVariant});
+    final tileSize = widget.dayStyle.tileSize;
     return Padding(
       padding: const .only(top: 5.0),
       child: GridView(

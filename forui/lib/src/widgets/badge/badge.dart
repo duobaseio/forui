@@ -90,9 +90,12 @@ class FBadge extends StatelessWidget {
 extension type FBadgeStyles(FVariants<FBadgeVariantConstraint, FBadgeVariant, FBadgeStyle, FBadgeStyleDelta> _)
     implements FVariants<FBadgeVariantConstraint, FBadgeVariant, FBadgeStyle, FBadgeStyleDelta> {
   /// Creates a [FBadgeStyles] that inherits its properties.
-  factory FBadgeStyles.inherit({required FColors colors, required FTypography typography, required FStyle style}) {
-    const desktopPadding = EdgeInsets.symmetric(horizontal: 10, vertical: 6);
-
+  factory FBadgeStyles.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+    bool desktop = false,
+  }) {
     final destructiveTextStyle = typography.xs.copyWith(color: colors.destructive, fontWeight: .w500);
     final destructiveDecoration = ShapeDecoration(
       shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.pill),
@@ -104,6 +107,10 @@ extension type FBadgeStyles(FVariants<FBadgeVariantConstraint, FBadgeVariant, FB
       borderRadius: style.borderRadius.pill,
     );
 
+    final padding = desktop
+        ? const EdgeInsets.symmetric(horizontal: 10, vertical: 6)
+        : const EdgeInsets.symmetric(horizontal: 12, vertical: 6);
+
     return FBadgeStyles(
       .from(
         FBadgeStyle(
@@ -113,40 +120,22 @@ extension type FBadgeStyles(FVariants<FBadgeVariantConstraint, FBadgeVariant, FB
           ),
           contentStyle: FBadgeContentStyle(
             labelTextStyle: typography.xs.copyWith(color: colors.primaryForeground, fontWeight: .w500),
+            padding: padding,
           ),
         ),
         variants: {
-          [.primary.and(.touch)]: const .delta(),
-          [.primary.and(.desktop)]: const .delta(contentStyle: .delta(padding: .value(desktopPadding))),
-          [.secondary.and(.touch)]: .delta(
+          [.primary]: const .delta(),
+          [.secondary]: .delta(
             decoration: .shapeDelta(color: colors.secondary),
             contentStyle: .delta(labelTextStyle: .delta(color: colors.secondaryForeground)),
           ),
-          [.secondary.and(.desktop)]: .delta(
-            decoration: .shapeDelta(color: colors.secondary),
-            contentStyle: .delta(
-              labelTextStyle: .delta(color: colors.secondaryForeground),
-              padding: const .value(desktopPadding),
-            ),
-          ),
-          [.destructive.and(.touch)]: FBadgeStyle(
+          [.destructive]: FBadgeStyle(
             decoration: destructiveDecoration,
-            contentStyle: FBadgeContentStyle(labelTextStyle: destructiveTextStyle),
+            contentStyle: FBadgeContentStyle(labelTextStyle: destructiveTextStyle, padding: padding),
           ),
-          [.destructive.and(.desktop)]: FBadgeStyle(
-            decoration: destructiveDecoration,
-            contentStyle: FBadgeContentStyle(labelTextStyle: destructiveTextStyle, padding: desktopPadding),
-          ),
-          [.outline.and(.touch)]: .delta(
+          [.outline]: .delta(
             decoration: .shapeDelta(shape: outlineShape, color: colors.card),
             contentStyle: .delta(labelTextStyle: .delta(color: colors.foreground)),
-          ),
-          [.outline.and(.desktop)]: .delta(
-            decoration: .shapeDelta(shape: outlineShape, color: colors.card),
-            contentStyle: .delta(
-              labelTextStyle: .delta(color: colors.foreground),
-              padding: const .value(desktopPadding),
-            ),
           ),
         },
       ),

@@ -486,8 +486,14 @@ class FItem extends StatelessWidget with FItemMixin {
 extension type FItemStyles(FVariants<FItemVariantConstraint, FItemVariant, FItemStyle, FItemStyleDelta> _)
     implements FVariants<FItemVariantConstraint, FItemVariant, FItemStyle, FItemStyleDelta> {
   /// Creates a [FItemStyles] that inherits its properties.
-  factory FItemStyles.inherit({required FColors colors, required FTypography typography, required FStyle style}) {
-    final primary = FItemStyle.inherit(colors: colors, typography: typography, style: style);
+  factory FItemStyles.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+    bool desktop = false,
+  }) {
+    final primary = FItemStyle.inherit(colors: colors, typography: typography, style: style, desktop: desktop);
+
     return FItemStyles(
       FVariants.from(
         primary,
@@ -500,12 +506,14 @@ extension type FItemStyles(FVariants<FItemVariantConstraint, FItemVariant, FItem
               prefix: colors.destructive,
               foreground: colors.destructive,
               mutedForeground: colors.destructive,
+              desktop: desktop,
             ),
             rawItemContentStyle: FRawItemContentStyle.inherit(
               colors: colors,
               typography: typography,
               prefix: colors.primary,
               color: colors.primary,
+              desktop: desktop,
             ),
           ),
         },
@@ -569,46 +577,52 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
   });
 
   /// Creates a [FTileGroupStyle] that inherits from the given arguments.
-  FItemStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        backgroundColor: FVariants(
-          colors.background,
-          variants: {
-            [.disabled]: colors.background,
-          },
+  factory FItemStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+    bool desktop = false,
+  }) => FItemStyle(
+      backgroundColor: FVariants(
+        colors.background,
+        variants: {
+          [.disabled]: colors.background,
+        },
+      ),
+      decoration: .from(
+        ShapeDecoration(
+          shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
+          color: colors.background,
         ),
-        decoration: FVariants.from(
-          ShapeDecoration(
-            shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
-            color: colors.background,
-          ),
-          variants: {
-            [.hovered, .pressed]: .shapeDelta(color: colors.secondary),
-            //
-            [.disabled]: const .shapeDelta(),
-            //
-            [.selected]: .shapeDelta(color: colors.secondary),
-            [.selected.and(.disabled)]: .shapeDelta(color: colors.disable(colors.secondary)),
-          },
-        ),
-        contentStyle: .inherit(
-          colors: colors,
-          typography: typography,
-          prefix: colors.primary,
-          foreground: colors.foreground,
-          mutedForeground: colors.mutedForeground,
-        ),
-        rawItemContentStyle: .inherit(
-          colors: colors,
-          typography: typography,
-          prefix: colors.foreground,
-          color: colors.foreground,
-        ),
-        tappableStyle: style.tappableStyle.copyWith(
-          motion: FTappableMotion.none,
-          pressedEnterDuration: .zero,
-          pressedExitDuration: const Duration(milliseconds: 25),
-        ),
-        focusedOutlineStyle: style.focusedOutlineStyle,
-      );
+        variants: {
+          [.hovered, .pressed]: .shapeDelta(color: colors.secondary),
+          //
+          [.disabled]: const .shapeDelta(),
+          //
+          [.selected]: .shapeDelta(color: colors.secondary),
+          [.selected.and(.disabled)]: .shapeDelta(color: colors.disable(colors.secondary)),
+        },
+      ),
+      contentStyle: .inherit(
+        colors: colors,
+        typography: typography,
+        prefix: colors.primary,
+        foreground: colors.foreground,
+        mutedForeground: colors.mutedForeground,
+        desktop: desktop,
+      ),
+      rawItemContentStyle: .inherit(
+        colors: colors,
+        typography: typography,
+        prefix: colors.foreground,
+        color: colors.foreground,
+        desktop: desktop,
+      ),
+      tappableStyle: style.tappableStyle.copyWith(
+        motion: FTappableMotion.none,
+        pressedEnterDuration: .zero,
+        pressedExitDuration: const Duration(milliseconds: 25),
+      ),
+      focusedOutlineStyle: style.focusedOutlineStyle,
+    );
 }

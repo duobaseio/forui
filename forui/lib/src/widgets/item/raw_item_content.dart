@@ -45,7 +45,7 @@ class RawItemContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ItemContentLayout(
     margin: margin,
-    padding: style.padding.resolve({context.platformVariant}),
+    padding: style.padding,
     top: top,
     bottom: bottom,
     dividerColor: dividerColor?.resolve(variants),
@@ -88,12 +88,8 @@ class RawItemContent extends StatelessWidget {
 /// An [FItem] raw content's style.
 class FRawItemContentStyle with Diagnosticable, _$FRawItemContentStyleFunctions {
   /// The content's padding.
-  ///
-  /// Defaults to:
-  /// * touch: `EdgeInsetsDirectional.only(start: 10, top: 12.5, bottom: 12.5, end: 6)`
-  /// * desktop: `EdgeInsetsDirectional.only(start: 10, top: 6, bottom: 6, end: 6)`
   @override
-  final FVariants<FPlatformVariantConstraint, FPlatformVariant, EdgeInsetsGeometry, Delta> padding;
+  final EdgeInsetsGeometry padding;
 
   /// The prefix icon style.
   @override
@@ -114,9 +110,7 @@ class FRawItemContentStyle with Diagnosticable, _$FRawItemContentStyleFunctions 
   FRawItemContentStyle({
     required this.prefixIconStyle,
     required this.childTextStyle,
-    this.padding = const .raw(.directional(start: 10, top: 12.5, bottom: 12.5, end: 6), {
-      .desktop: .directional(start: 10, top: 5.5, bottom: 5.5, end: 6),
-    }),
+    required this.padding,
     this.prefixIconSpacing = 8,
   }) : assert(0 <= prefixIconSpacing, 'prefixIconSpacing ($prefixIconSpacing) must be >= 0');
 
@@ -126,8 +120,9 @@ class FRawItemContentStyle with Diagnosticable, _$FRawItemContentStyleFunctions 
     required FTypography typography,
     required Color prefix,
     required Color color,
+    bool desktop = false,
   }) : this(
-         prefixIconStyle: FVariants.from(
+         prefixIconStyle: .from(
            IconThemeData(color: prefix, size: typography.md.fontSize),
            variants: {
              [.disabled]: .delta(color: colors.disable(prefix)),
@@ -139,5 +134,8 @@ class FRawItemContentStyle with Diagnosticable, _$FRawItemContentStyleFunctions 
              [.disabled]: typography.sm.copyWith(color: colors.disable(color)),
            },
          ),
+         padding: desktop
+             ? const .directional(start: 10, top: 6, bottom: 5, end: 5)
+             : const .directional(start: 10, top: 12.5, bottom: 12.5, end: 6),
        );
 }

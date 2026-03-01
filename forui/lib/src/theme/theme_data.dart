@@ -9,64 +9,6 @@ import 'package:forui/forui.dart';
 
 part 'theme_data.design.dart';
 
-/// A mixin for types that can resolve to a [FThemeData] based on the current [Brightness] and [FPlatformVariant].
-///
-/// This is typically implemented by theme sets that contain multiple theme variants (e.g. light/dark, desktop/touch).
-///
-/// See:
-/// * [FAutoThemeData], which lazily creates light/dark [FPlatformThemeData] variants.
-/// * [FPlatformThemeData], which lazily creates desktop/touch [FThemeData] variants.
-mixin FThemeDataMixin {
-  /// Resolves the appropriate [FThemeData] for the given [brightness] and [platformVariant].
-  FThemeData resolve(Brightness brightness, FPlatformVariant platformVariant);
-}
-
-/// A [FThemeDataMixin] that lazily creates brightness-specific [FPlatformThemeData] variants.
-///
-/// The [light] and [dark] factories are called at most once, when first needed.
-class FAutoThemeData with FThemeDataMixin {
-  /// The light [FPlatformThemeData], created lazily on first access.
-  late final FPlatformThemeData light = _light();
-
-  /// The dark [FPlatformThemeData], created lazily on first access.
-  late final FPlatformThemeData dark = _dark();
-
-  final FPlatformThemeData Function() _light;
-  final FPlatformThemeData Function() _dark;
-
-  /// Creates a [FAutoThemeData] with lazy factories for [light] and [dark] platform theme data.
-  FAutoThemeData({required FPlatformThemeData Function() light, required FPlatformThemeData Function() dark})
-    : _light = light,
-      _dark = dark;
-
-  @override
-  FThemeData resolve(Brightness brightness, FPlatformVariant platformVariant) =>
-      (brightness == .light ? light : dark).resolve(brightness, platformVariant);
-}
-
-/// A [FThemeDataMixin] that lazily creates platform-specific [FThemeData] variants.
-///
-/// The [desktop] and [touch] factories are called at most once, when first needed.
-class FPlatformThemeData with FThemeDataMixin {
-  /// The desktop [FThemeData], created lazily on first access.
-  late final FThemeData desktop = _desktop();
-
-  /// The touch [FThemeData], created lazily on first access.
-  late final FThemeData touch = _touch();
-
-  final FThemeData Function() _desktop;
-  final FThemeData Function() _touch;
-
-  /// Creates a [FPlatformThemeData] with lazy factories for [desktop] and [touch] theme data.
-  FPlatformThemeData({required FThemeData Function() desktop, required FThemeData Function() touch})
-    : _desktop = desktop,
-      _touch = touch;
-
-  @override
-  FThemeData resolve(Brightness brightness, FPlatformVariant platformVariant) =>
-      platformVariant.desktop ? desktop : touch;
-}
-
 /// Defines the configuration of the overall visual [FTheme] for a widget subtree.
 ///
 /// A [FThemeData] is composed of [colors], [typography], [style], widget styles, and [extensions].
@@ -80,7 +22,7 @@ class FPlatformThemeData with FThemeDataMixin {
 ///
 /// Widget styles provide an `inherit(...)` constructor. The constructor configures the widget style using the defaults
 /// provided by the [colors], [typography], and [style].
-final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctions {
+final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// A label that is used in the [toString] output. Intended to aid with identifying themes in debug output.
   @override
   final String? debugLabel;
@@ -209,7 +151,7 @@ final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctio
   /// dart run forui style create card
   /// ```
   @override
-  final FCardStyles cardStyles;
+  final FCardStyle cardStyle;
 
   /// The checkbox style.
   ///
@@ -628,9 +570,13 @@ final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctio
 
   final Map<Object, ThemeExtension<dynamic>> _extensions;
 
-  /// Creates a [FThemeData] that configures the widget styles using the given properties if not given.
+  /// Creates a [FThemeData].
+  ///
+  /// Set [desktop] to true for desktop-optimized sizing (smaller touch targets, tighter spacing).
+  /// Defaults to false (touch/mobile-first).
   factory FThemeData({
     required FColors colors,
+    bool desktop = false,
     String? debugLabel,
     FBreakpoints breakpoints = const FBreakpoints(),
     FTypography? typography,
@@ -644,7 +590,7 @@ final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctio
     FBreadcrumbStyle? breadcrumbStyle,
     FVariants<FButtonVariantConstraint, FButtonVariant, FButtonSizeStyles, FButtonSizesDelta>? buttonStyles,
     FCalendarStyle? calendarStyle,
-    FVariants<FCardVariantConstraint, FCardVariant, FCardStyle, FCardStyleDelta>? cardStyles,
+    FCardStyle? cardStyle,
     FCheckboxStyle? checkboxStyle,
     FCircularProgressStyle? circularProgressStyle,
     FDateFieldStyle? dateFieldStyle,
@@ -684,7 +630,7 @@ final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctio
     FTabsStyle? tabsStyle,
     FTappableStyle? tappableStyle,
     FVariants<FTextFieldSizeVariantConstraint, FTextFieldSizeVariant, FTextFieldStyle, FTextFieldStyleDelta>?
-        textFieldStyles,
+    textFieldStyles,
     FVariants<FItemVariantConstraint, FItemVariant, FTileStyle, FTileStyleDelta>? tileStyles,
     FTileGroupStyle? tileGroupStyle,
     FTimeFieldStyle? timeFieldStyle,
@@ -692,7 +638,7 @@ final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctio
     FTooltipStyle? tooltipStyle,
     Iterable<ThemeExtension<dynamic>> extensions = const [],
   }) {
-    typography ??= .inherit(colors: colors);
+    typography ??= .inherit(colors: colors, desktop: desktop);
     style ??= .inherit(colors: colors, typography: typography);
     return ._(
       debugLabel: debugLabel,
@@ -700,28 +646,29 @@ final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctio
       colors: colors,
       typography: typography,
       style: style,
-      accordionStyle: accordionStyle ?? .inherit(colors: colors, typography: typography, style: style),
-      autocompleteStyle: autocompleteStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      accordionStyle:
+          accordionStyle ?? .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
+      autocompleteStyle:
+          autocompleteStyle ?? .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
       alertStyles: alertStyles == null
           ? FAlertStyles.inherit(colors: colors, typography: typography, style: style)
           : FAlertStyles(alertStyles),
       avatarStyle: avatarStyle ?? .inherit(colors: colors, typography: typography),
       badgeStyles: badgeStyles == null
-          ? FBadgeStyles.inherit(colors: colors, typography: typography, style: style)
+          ? FBadgeStyles.inherit(colors: colors, typography: typography, style: style, desktop: desktop)
           : FBadgeStyles(badgeStyles),
       bottomNavigationBarStyle:
           bottomNavigationBarStyle ?? .inherit(colors: colors, typography: typography, style: style),
       breadcrumbStyle: breadcrumbStyle ?? .inherit(colors: colors, typography: typography, style: style),
       buttonStyles: buttonStyles == null
-          ? FButtonStyles.inherit(colors: colors, typography: typography, style: style)
+          ? FButtonStyles.inherit(colors: colors, typography: typography, style: style, desktop: desktop)
           : FButtonStyles(buttonStyles),
-      calendarStyle: calendarStyle ?? .inherit(colors: colors, typography: typography, style: style),
-      cardStyles: cardStyles == null
-          ? FCardStyles.inherit(colors: colors, typography: typography, style: style)
-          : FCardStyles(cardStyles),
+      calendarStyle: calendarStyle ?? .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
+      cardStyle: cardStyle ?? .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
       checkboxStyle: checkboxStyle ?? .inherit(colors: colors, style: style),
       circularProgressStyle: circularProgressStyle ?? .inherit(colors: colors),
-      dateFieldStyle: dateFieldStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      dateFieldStyle:
+          dateFieldStyle ?? .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
       determinateProgressStyle: determinateProgressStyle ?? .inherit(colors: colors, style: style),
       dialogRouteStyle: dialogRouteStyle ?? .inherit(colors: colors),
       dialogStyle: dialogStyle ?? .inherit(colors: colors, typography: typography, style: style),
@@ -737,7 +684,8 @@ final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctio
       itemGroupStyle: itemGroupStyle ?? .inherit(colors: colors, typography: typography, style: style),
       labelStyles: labelStyles ?? .inherit(style: style),
       lineCalendarStyle: lineCalendarStyle ?? .inherit(colors: colors, typography: typography, style: style),
-      multiSelectStyle: multiSelectStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      multiSelectStyle:
+          multiSelectStyle ?? .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
       modalSheetStyle: modalSheetStyle ?? .inherit(colors: colors),
       paginationStyle: paginationStyle ?? .inherit(colors: colors, typography: typography, style: style),
       persistentSheetStyle: persistentSheetStyle ?? const FPersistentSheetStyle(),
@@ -750,7 +698,7 @@ final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctio
           ? FResizableStyles.inherit(colors: colors, style: style)
           : FResizableStyles(resizableStyles),
       scaffoldStyle: scaffoldStyle ?? .inherit(colors: colors, style: style),
-      selectStyle: selectStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      selectStyle: selectStyle ?? .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
       selectGroupStyle: selectGroupStyle ?? .inherit(colors: colors, typography: typography, style: style),
       selectMenuTileStyle: selectMenuTileStyle ?? .inherit(colors: colors, typography: typography, style: style),
       sidebarStyle: sidebarStyle ?? .inherit(colors: colors, typography: typography, style: style),
@@ -762,13 +710,14 @@ final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctio
       tabsStyle: tabsStyle ?? .inherit(colors: colors, typography: typography, style: style),
       tappableStyle: tappableStyle ?? FTappableStyle(),
       textFieldStyles: textFieldStyles == null
-          ? FTextFieldSizeStyles.inherit(colors: colors, typography: typography, style: style)
+          ? FTextFieldSizeStyles.inherit(colors: colors, typography: typography, style: style, desktop: desktop)
           : FTextFieldSizeStyles(textFieldStyles),
       tileStyles: tileStyles == null
           ? FTileStyles.inherit(colors: colors, typography: typography, style: style)
           : FTileStyles(tileStyles),
       tileGroupStyle: tileGroupStyle ?? .inherit(colors: colors, typography: typography, style: style),
-      timeFieldStyle: timeFieldStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      timeFieldStyle:
+          timeFieldStyle ?? .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
       timePickerStyle: timePickerStyle ?? .inherit(colors: colors, typography: typography, style: style),
       tooltipStyle: tooltipStyle ?? .inherit(colors: colors, typography: typography, style: style),
       extensions: .unmodifiable({for (final extension in extensions) extension.type: extension}),
@@ -776,7 +725,7 @@ final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctio
   }
 
   /// Creates a linear interpolation between two [FThemeData] using the given factor [t].
-  factory FThemeData.lerp(FThemeData a, FThemeData b, double t) => .new(
+  factory FThemeData.lerp(FThemeData a, FThemeData b, double t) => ._(
     debugLabel: t < 0.5 ? a.debugLabel : b.debugLabel,
     breakpoints: t < 0.5 ? a.breakpoints : b.breakpoints,
     colors: .lerp(a.colors, b.colors, t),
@@ -824,29 +773,14 @@ final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctio
         }),
       );
     }, (base, variants) => FButtonStyles(.raw(base, variants))),
-
     calendarStyle: a.calendarStyle.lerp(b.calendarStyle, t),
-
-    cardStyles: FVariants.lerpWhereUsing(
-      a.cardStyles,
-      b.cardStyles,
-      t,
-      (a, b, t) => a!.lerp(b!, t),
-      (base, variants) => FCardStyles(.raw(base, variants)),
-    ),
-
+    cardStyle: a.cardStyle.lerp(b.cardStyle, t),
     checkboxStyle: a.checkboxStyle.lerp(b.checkboxStyle, t),
-
     circularProgressStyle: a.circularProgressStyle.lerp(b.circularProgressStyle, t),
-
     dateFieldStyle: a.dateFieldStyle.lerp(b.dateFieldStyle, t),
-
     determinateProgressStyle: a.determinateProgressStyle.lerp(b.determinateProgressStyle, t),
-
     dialogRouteStyle: a.dialogRouteStyle.lerp(b.dialogRouteStyle, t),
-
     dialogStyle: a.dialogStyle.lerp(b.dialogStyle, t),
-
     dividerStyles: FVariants.lerpWhereUsing(
       a.dividerStyles,
       b.dividerStyles,
@@ -922,9 +856,8 @@ final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctio
     timePickerStyle: a.timePickerStyle.lerp(b.timePickerStyle, t),
     tooltipStyle: a.tooltipStyle.lerp(b.tooltipStyle, t),
     // Copied from Flutter's [ThemeData].
-    extensions: (a._extensions.map(
-      (id, extensionA) => MapEntry(id, extensionA.lerp(b._extensions[id], t)),
-    )..addEntries(b._extensions.entries.where((entry) => !a._extensions.containsKey(entry.key)))).values,
+    extensions: a._extensions.map((id, extensionA) => MapEntry(id, extensionA.lerp(b._extensions[id], t)))
+      ..addEntries(b._extensions.entries.where((entry) => !a._extensions.containsKey(entry.key))),
   );
 
   FThemeData._({
@@ -942,7 +875,7 @@ final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctio
     required this.breadcrumbStyle,
     required this.buttonStyles,
     required this.calendarStyle,
-    required this.cardStyles,
+    required this.cardStyle,
     required this.checkboxStyle,
     required this.circularProgressStyle,
     required this.dateFieldStyle,
@@ -983,9 +916,6 @@ final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctio
     required this.tooltipStyle,
     required Map<Object, ThemeExtension<dynamic>> extensions,
   }) : _extensions = extensions;
-
-  @override
-  FThemeData resolve(Brightness _, FPlatformVariant _) => this;
 
   /// Obtains a particular [ThemeExtension].
   ///
@@ -1379,8 +1309,8 @@ final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctio
   /// print(theme.avatarStyle == copy.avatarStyle); // false
   /// ```
   ///
-  /// To modify [colors], [typography], and/or [style], create a new `FThemeData` using [FThemeData] first.
-  /// This allows the global theme data to propagate to widget-specific theme data.
+  /// To modify [colors], [typography], and/or [style], create a new `FThemeData` using [FThemeData] first. This allows
+  /// the global theme data to propagate to widget-specific theme data.
   ///
   /// ```dart
   /// @override
@@ -1400,9 +1330,7 @@ final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctio
   ///
   ///   return FTheme(
   ///     data: theme.copyWith(
-  ///       cardStyles: (styles) => styles.map(
-  ///         (style) => style.copyWith(decoration: .delta(borderRadius: const .all(.circular(8)))),
-  ///       ),
+  ///       cardStyle: .delta(decoration: .delta(borderRadius: const .all(.circular(8)))),
   ///     ),
   ///     child: const FScaffold(...),
   ///   );
@@ -1426,7 +1354,7 @@ final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctio
     FBreadcrumbStyleDelta? breadcrumbStyle,
     FVariantsDelta<FButtonVariantConstraint, FButtonVariant, FButtonSizeStyles, FButtonSizesDelta>? buttonStyles,
     FCalendarStyleDelta? calendarStyle,
-    FVariantsDelta<FCardVariantConstraint, FCardVariant, FCardStyle, FCardStyleDelta>? cardStyles,
+    FCardStyleDelta? cardStyle,
     FCheckboxStyleDelta? checkboxStyle,
     FCircularProgressStyleDelta? circularProgressStyle,
     FDateFieldStyleDelta? dateFieldStyle,
@@ -1467,7 +1395,7 @@ final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctio
     FTabsStyleDelta? tabsStyle,
     FTappableStyleDelta? tappableStyle,
     FVariantsDelta<FTextFieldSizeVariantConstraint, FTextFieldSizeVariant, FTextFieldStyle, FTextFieldStyleDelta>?
-        textFieldStyles,
+    textFieldStyles,
     FVariantsDelta<FItemVariantConstraint, FItemVariant, FTileStyle, FTileStyleDelta>? tileStyles,
     FTileGroupStyleDelta? tileGroupStyle,
     FTimeFieldStyleDelta? timeFieldStyle,
@@ -1490,7 +1418,7 @@ final class FThemeData with FThemeDataMixin, Diagnosticable, _$FThemeDataFunctio
     breadcrumbStyle: breadcrumbStyle?.call(this.breadcrumbStyle) ?? this.breadcrumbStyle,
     buttonStyles: buttonStyles == null ? this.buttonStyles : FButtonStyles(buttonStyles(this.buttonStyles)),
     calendarStyle: calendarStyle?.call(this.calendarStyle) ?? this.calendarStyle,
-    cardStyles: cardStyles == null ? this.cardStyles : FCardStyles(cardStyles(this.cardStyles)),
+    cardStyle: cardStyle?.call(this.cardStyle) ?? this.cardStyle,
     checkboxStyle: checkboxStyle?.call(this.checkboxStyle) ?? this.checkboxStyle,
     circularProgressStyle: circularProgressStyle?.call(this.circularProgressStyle) ?? this.circularProgressStyle,
     dateFieldStyle: dateFieldStyle?.call(this.dateFieldStyle) ?? this.dateFieldStyle,

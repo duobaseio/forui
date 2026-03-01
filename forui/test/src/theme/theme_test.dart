@@ -15,10 +15,10 @@ class Foo extends StatelessWidget {
 
 void main() {
   group('FTheme', () {
-    testWidgets('passed in platform is propagated', (tester) async {
+    testWidgets('passed in platform is respected', (tester) async {
       await tester.pumpWidget(
         FTheme(
-          data: FThemes.neutral.dark,
+          data: FThemes.neutral.dark.touch,
           platform: .macOS,
           child: Builder(builder: (context) => Text('${context.platformVariant}', textDirection: .ltr)),
         ),
@@ -33,22 +33,8 @@ void main() {
     testWidgets('passed in platform is respected', (tester) async {
       await tester.pumpWidget(
         FBasicTheme(
-          data: FThemes.neutral.dark,
+          data: FThemes.neutral.dark.touch,
           platform: .macOS,
-          textDirection: .ltr,
-          child: Builder(builder: (context) => Text('${context.theme == FThemes.neutral.dark.desktop}')),
-        ),
-      );
-
-      expect(find.text('true'), findsOneWidget);
-    });
-
-    testWidgets('passed in brightness is respected', (tester) async {
-      await tester.pumpWidget(
-        FBasicTheme(
-          data: FThemes.neutral,
-          brightness: .dark,
-          platform: .iOS,
           textDirection: .ltr,
           child: Builder(builder: (context) => Text('${context.theme == FThemes.neutral.dark.touch}')),
         ),

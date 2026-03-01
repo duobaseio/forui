@@ -9,14 +9,14 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  for (final (platform, platformName, height) in [
-    (FPlatformVariant.macOS, 'macOS', 28.0),
-    (FPlatformVariant.iOS, 'iOS', 44.0),
+  for (final (theme, themeName, height) in [
+    (FThemes.neutral.light.desktop, 'desktop', 28.0),
+    (FThemes.neutral.light.touch, 'touch', 44.0),
   ]) {
-    testWidgets('$platformName item has consistent height ($height)', (tester) async {
+    testWidgets('$themeName item has consistent height ($height)', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          platform: platform,
+          theme: theme,
           child: FItem(key: const Key('item'), title: const Text('Item'), onPress: () {}),
         ),
       );
@@ -24,10 +24,10 @@ void main() {
       expect(tester.getSize(find.byKey(const Key('item'))).height, closeTo(height, 0.001));
     });
 
-    testWidgets('$platformName raw item has consistent height ($height)', (tester) async {
+    testWidgets('$themeName raw item has consistent height ($height)', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          platform: platform,
+          theme: theme,
           child: FItem.raw(key: const Key('raw-item'), onPress: () {}, child: const Text('Item')),
         ),
       );

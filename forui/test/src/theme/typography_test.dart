@@ -12,19 +12,20 @@ void main() {
     setUp(() {
       typography = const FTypography(
         defaultFontFamily: 'Roboto',
-        xs2: TextStyle(fontSize: 1),
-        xs: TextStyle(fontSize: 2),
-        sm: TextStyle(fontSize: 3),
-        md: TextStyle(fontSize: 4),
-        lg: TextStyle(fontSize: 5),
-        xl: TextStyle(fontSize: 6),
-        xl2: TextStyle(fontSize: 7),
-        xl3: TextStyle(fontSize: 8),
-        xl4: TextStyle(fontSize: 9),
-        xl5: TextStyle(fontSize: 10),
-        xl6: TextStyle(fontSize: 11),
-        xl7: TextStyle(fontSize: 12),
-        xl8: TextStyle(fontSize: 13),
+        xs3: TextStyle(fontSize: 1),
+        xs2: TextStyle(fontSize: 2),
+        xs: TextStyle(fontSize: 3),
+        sm: TextStyle(fontSize: 4),
+        md: TextStyle(fontSize: 5),
+        lg: TextStyle(fontSize: 6),
+        xl: TextStyle(fontSize: 7),
+        xl2: TextStyle(fontSize: 8),
+        xl3: TextStyle(fontSize: 9),
+        xl4: TextStyle(fontSize: 10),
+        xl5: TextStyle(fontSize: 11),
+        xl6: TextStyle(fontSize: 12),
+        xl7: TextStyle(fontSize: 13),
+        xl8: TextStyle(fontSize: 14),
       );
     });
 
@@ -33,6 +34,7 @@ void main() {
         const typography = FTypography();
 
         expect(typography.defaultFontFamily, 'packages/forui/Inter');
+        expect(typography.xs3, const TextStyle(fontSize: 10, height: 1));
         expect(typography.xs2, const TextStyle(fontSize: 12, height: 1));
         expect(typography.xs, const TextStyle(fontSize: 14, height: 1.25));
         expect(typography.sm, const TextStyle(fontSize: 16, height: 1.5));
@@ -51,7 +53,7 @@ void main() {
       test('blank font family', () => expect(() => FTypography(defaultFontFamily: ''), throwsAssertionError));
     });
 
-    group('inherit constructor', () {
+    group('inherit', () {
       const colors = FColors(
         brightness: .light,
         systemOverlayStyle: .dark,
@@ -78,6 +80,7 @@ void main() {
         final color = colors.foreground;
 
         expect(typography.defaultFontFamily, 'packages/forui/Inter');
+        expect(typography.xs3, TextStyle(color: color, fontFamily: font, fontSize: 10, height: 1));
         expect(typography.xs2, TextStyle(color: color, fontFamily: font, fontSize: 12, height: 1));
         expect(typography.xs, TextStyle(color: color, fontFamily: font, fontSize: 14, height: 1.25));
         expect(typography.sm, TextStyle(color: color, fontFamily: font, fontSize: 16, height: 1.5));
@@ -99,6 +102,7 @@ void main() {
         final color = colors.foreground;
 
         expect(typography.defaultFontFamily, 'packages/forui/Inter');
+        expect(typography.xs3, TextStyle(color: color, fontFamily: font, fontSize: 8, height: 1));
         expect(typography.xs2, TextStyle(color: color, fontFamily: font, fontSize: 10, height: 1));
         expect(typography.xs, TextStyle(color: color, fontFamily: font, fontSize: 12, height: 1));
         expect(typography.sm, TextStyle(color: color, fontFamily: font, fontSize: 14, height: 1.25));
@@ -113,11 +117,6 @@ void main() {
         expect(typography.xl7, TextStyle(color: color, fontFamily: font, fontSize: 72, height: 1));
         expect(typography.xl8, TextStyle(color: color, fontFamily: font, fontSize: 96, height: 1));
       });
-
-      test(
-        'blank font family',
-        () => expect(() => FTypography.inherit(colors: colors, defaultFontFamily: ''), throwsAssertionError),
-      );
     });
 
     group('scale(...)', () {
@@ -125,38 +124,40 @@ void main() {
         typography = typography.scale();
 
         expect(typography.defaultFontFamily, 'Roboto');
-        expect(typography.xs2, const TextStyle(fontSize: 1));
-        expect(typography.xs, const TextStyle(fontSize: 2));
-        expect(typography.sm, const TextStyle(fontSize: 3));
-        expect(typography.md, const TextStyle(fontSize: 4));
-        expect(typography.lg, const TextStyle(fontSize: 5));
-        expect(typography.xl, const TextStyle(fontSize: 6));
-        expect(typography.xl2, const TextStyle(fontSize: 7));
-        expect(typography.xl3, const TextStyle(fontSize: 8));
-        expect(typography.xl4, const TextStyle(fontSize: 9));
-        expect(typography.xl5, const TextStyle(fontSize: 10));
-        expect(typography.xl6, const TextStyle(fontSize: 11));
-        expect(typography.xl7, const TextStyle(fontSize: 12));
-        expect(typography.xl8, const TextStyle(fontSize: 13));
+        expect(typography.xs3, const TextStyle(fontSize: 1));
+        expect(typography.xs2, const TextStyle(fontSize: 2));
+        expect(typography.xs, const TextStyle(fontSize: 3));
+        expect(typography.sm, const TextStyle(fontSize: 4));
+        expect(typography.md, const TextStyle(fontSize: 5));
+        expect(typography.lg, const TextStyle(fontSize: 6));
+        expect(typography.xl, const TextStyle(fontSize: 7));
+        expect(typography.xl2, const TextStyle(fontSize: 8));
+        expect(typography.xl3, const TextStyle(fontSize: 9));
+        expect(typography.xl4, const TextStyle(fontSize: 10));
+        expect(typography.xl5, const TextStyle(fontSize: 11));
+        expect(typography.xl6, const TextStyle(fontSize: 12));
+        expect(typography.xl7, const TextStyle(fontSize: 13));
+        expect(typography.xl8, const TextStyle(fontSize: 14));
       });
 
       test('all arguments', () {
         typography = typography.scale(sizeScalar: 10);
 
         expect(typography.defaultFontFamily, 'Roboto');
-        expect(typography.xs2, const TextStyle(fontSize: 10));
-        expect(typography.xs, const TextStyle(fontSize: 20));
-        expect(typography.sm, const TextStyle(fontSize: 30));
-        expect(typography.md, const TextStyle(fontSize: 40));
-        expect(typography.lg, const TextStyle(fontSize: 50));
-        expect(typography.xl, const TextStyle(fontSize: 60));
-        expect(typography.xl2, const TextStyle(fontSize: 70));
-        expect(typography.xl3, const TextStyle(fontSize: 80));
-        expect(typography.xl4, const TextStyle(fontSize: 90));
-        expect(typography.xl5, const TextStyle(fontSize: 100));
-        expect(typography.xl6, const TextStyle(fontSize: 110));
-        expect(typography.xl7, const TextStyle(fontSize: 120));
-        expect(typography.xl8, const TextStyle(fontSize: 130));
+        expect(typography.xs3, const TextStyle(fontSize: 10));
+        expect(typography.xs2, const TextStyle(fontSize: 20));
+        expect(typography.xs, const TextStyle(fontSize: 30));
+        expect(typography.sm, const TextStyle(fontSize: 40));
+        expect(typography.md, const TextStyle(fontSize: 50));
+        expect(typography.lg, const TextStyle(fontSize: 60));
+        expect(typography.xl, const TextStyle(fontSize: 70));
+        expect(typography.xl2, const TextStyle(fontSize: 80));
+        expect(typography.xl3, const TextStyle(fontSize: 90));
+        expect(typography.xl4, const TextStyle(fontSize: 100));
+        expect(typography.xl5, const TextStyle(fontSize: 110));
+        expect(typography.xl6, const TextStyle(fontSize: 120));
+        expect(typography.xl7, const TextStyle(fontSize: 130));
+        expect(typography.xl8, const TextStyle(fontSize: 140));
       });
     });
 
@@ -166,6 +167,7 @@ void main() {
         typography = typography.copyWith();
 
         expect(typography.defaultFontFamily, 'Roboto');
+        expect(typography.xs3, const TextStyle(fontSize: 10, height: 1));
         expect(typography.xs2, const TextStyle(fontSize: 12, height: 1));
         expect(typography.xs, const TextStyle(fontSize: 14, height: 1.25));
         expect(typography.sm, const TextStyle(fontSize: 16, height: 1.5));
@@ -183,35 +185,37 @@ void main() {
 
       test('all arguments', () {
         final typography = const FTypography().copyWith(
-          xs2: const TextStyle(fontSize: 1),
-          xs: const TextStyle(fontSize: 2),
-          sm: const TextStyle(fontSize: 3),
-          md: const TextStyle(fontSize: 4),
-          lg: const TextStyle(fontSize: 5),
-          xl: const TextStyle(fontSize: 6),
-          xl2: const TextStyle(fontSize: 7),
-          xl3: const TextStyle(fontSize: 8),
-          xl4: const TextStyle(fontSize: 9),
-          xl5: const TextStyle(fontSize: 10),
-          xl6: const TextStyle(fontSize: 11),
-          xl7: const TextStyle(fontSize: 12),
-          xl8: const TextStyle(fontSize: 13),
+          xs3: const TextStyle(fontSize: 1),
+          xs2: const TextStyle(fontSize: 2),
+          xs: const TextStyle(fontSize: 3),
+          sm: const TextStyle(fontSize: 4),
+          md: const TextStyle(fontSize: 5),
+          lg: const TextStyle(fontSize: 6),
+          xl: const TextStyle(fontSize: 7),
+          xl2: const TextStyle(fontSize: 8),
+          xl3: const TextStyle(fontSize: 9),
+          xl4: const TextStyle(fontSize: 10),
+          xl5: const TextStyle(fontSize: 11),
+          xl6: const TextStyle(fontSize: 12),
+          xl7: const TextStyle(fontSize: 13),
+          xl8: const TextStyle(fontSize: 14),
         );
 
         expect(typography.defaultFontFamily, 'packages/forui/Inter');
-        expect(typography.xs2, const TextStyle(fontSize: 1));
-        expect(typography.xs, const TextStyle(fontSize: 2));
-        expect(typography.sm, const TextStyle(fontSize: 3));
-        expect(typography.md, const TextStyle(fontSize: 4));
-        expect(typography.lg, const TextStyle(fontSize: 5));
-        expect(typography.xl, const TextStyle(fontSize: 6));
-        expect(typography.xl2, const TextStyle(fontSize: 7));
-        expect(typography.xl3, const TextStyle(fontSize: 8));
-        expect(typography.xl4, const TextStyle(fontSize: 9));
-        expect(typography.xl5, const TextStyle(fontSize: 10));
-        expect(typography.xl6, const TextStyle(fontSize: 11));
-        expect(typography.xl7, const TextStyle(fontSize: 12));
-        expect(typography.xl8, const TextStyle(fontSize: 13));
+        expect(typography.xs3, const TextStyle(fontSize: 1));
+        expect(typography.xs2, const TextStyle(fontSize: 2));
+        expect(typography.xs, const TextStyle(fontSize: 3));
+        expect(typography.sm, const TextStyle(fontSize: 4));
+        expect(typography.md, const TextStyle(fontSize: 5));
+        expect(typography.lg, const TextStyle(fontSize: 6));
+        expect(typography.xl, const TextStyle(fontSize: 7));
+        expect(typography.xl2, const TextStyle(fontSize: 8));
+        expect(typography.xl3, const TextStyle(fontSize: 9));
+        expect(typography.xl4, const TextStyle(fontSize: 10));
+        expect(typography.xl5, const TextStyle(fontSize: 11));
+        expect(typography.xl6, const TextStyle(fontSize: 12));
+        expect(typography.xl7, const TextStyle(fontSize: 13));
+        expect(typography.xl8, const TextStyle(fontSize: 14));
       });
     });
 
@@ -223,19 +227,20 @@ void main() {
         builder.properties.map((p) => p.toString()),
         [
           StringProperty('defaultFontFamily', 'Roboto'),
-          DiagnosticsProperty('xs2', const TextStyle(fontSize: 1)),
-          DiagnosticsProperty('xs', const TextStyle(fontSize: 2)),
-          DiagnosticsProperty('sm', const TextStyle(fontSize: 3)),
-          DiagnosticsProperty('md', const TextStyle(fontSize: 4)),
-          DiagnosticsProperty('lg', const TextStyle(fontSize: 5)),
-          DiagnosticsProperty('xl', const TextStyle(fontSize: 6)),
-          DiagnosticsProperty('xl2', const TextStyle(fontSize: 7)),
-          DiagnosticsProperty('xl3', const TextStyle(fontSize: 8)),
-          DiagnosticsProperty('xl4', const TextStyle(fontSize: 9)),
-          DiagnosticsProperty('xl5', const TextStyle(fontSize: 10)),
-          DiagnosticsProperty('xl6', const TextStyle(fontSize: 11)),
-          DiagnosticsProperty('xl7', const TextStyle(fontSize: 12)),
-          DiagnosticsProperty('xl8', const TextStyle(fontSize: 13)),
+          DiagnosticsProperty('xs3', const TextStyle(fontSize: 1)),
+          DiagnosticsProperty('xs2', const TextStyle(fontSize: 2)),
+          DiagnosticsProperty('xs', const TextStyle(fontSize: 3)),
+          DiagnosticsProperty('sm', const TextStyle(fontSize: 4)),
+          DiagnosticsProperty('md', const TextStyle(fontSize: 5)),
+          DiagnosticsProperty('lg', const TextStyle(fontSize: 6)),
+          DiagnosticsProperty('xl', const TextStyle(fontSize: 7)),
+          DiagnosticsProperty('xl2', const TextStyle(fontSize: 8)),
+          DiagnosticsProperty('xl3', const TextStyle(fontSize: 9)),
+          DiagnosticsProperty('xl4', const TextStyle(fontSize: 10)),
+          DiagnosticsProperty('xl5', const TextStyle(fontSize: 11)),
+          DiagnosticsProperty('xl6', const TextStyle(fontSize: 12)),
+          DiagnosticsProperty('xl7', const TextStyle(fontSize: 13)),
+          DiagnosticsProperty('xl8', const TextStyle(fontSize: 14)),
         ].map((p) => p.toString()),
       );
     });
@@ -248,7 +253,7 @@ void main() {
       });
 
       test('not equal', () {
-        final copy = typography.copyWith(xs2: const TextStyle(fontSize: 100));
+        final copy = typography.copyWith(xs3: const TextStyle(fontSize: 100));
         expect(copy, isNot(typography));
         expect(copy.hashCode, isNot(typography.hashCode));
       });
@@ -257,6 +262,7 @@ void main() {
     group('lerp(...)', () {
       const typographyB = FTypography(
         defaultFontFamily: 'Arial',
+        xs3: TextStyle(fontSize: 6, height: 1, color: Colors.cyan),
         xs2: TextStyle(fontSize: 8, height: 1.25, color: Colors.amber),
         xs: TextStyle(fontSize: 10, height: 1.5, color: Colors.red),
         sm: TextStyle(fontSize: 12, height: 1.75, color: Colors.green),
@@ -275,6 +281,7 @@ void main() {
       test('interpolation at t=0', () {
         final result = FTypography.lerp(typography, typographyB, 0.0);
         expect(result.defaultFontFamily, typography.defaultFontFamily);
+        expect(result.xs3, TextStyle.lerp(typography.xs3, typographyB.xs3, 0));
         expect(result.xs, TextStyle.lerp(typography.xs, typographyB.xs, 0));
         expect(result.sm, TextStyle.lerp(typography.sm, typographyB.sm, 0));
         expect(result.md, TextStyle.lerp(typography.md, typographyB.md, 0));
@@ -283,6 +290,7 @@ void main() {
       test('interpolation at t=1', () {
         final result = FTypography.lerp(typography, typographyB, 1.0);
         expect(result.defaultFontFamily, typographyB.defaultFontFamily);
+        expect(result.xs3, TextStyle.lerp(typography.xs3, typographyB.xs3, 1));
         expect(result.xs, TextStyle.lerp(typography.xs, typographyB.xs, 1));
         expect(result.sm, TextStyle.lerp(typography.sm, typographyB.sm, 1));
         expect(result.md, TextStyle.lerp(typography.md, typographyB.md, 1));
@@ -291,6 +299,7 @@ void main() {
       test('interpolation at t=0.5', () {
         final result = FTypography.lerp(typography, typographyB, 0.5);
         expect(result.defaultFontFamily, typographyB.defaultFontFamily);
+        expect(result.xs3, TextStyle.lerp(typography.xs3, typographyB.xs3, 0.5));
         expect(result.xs, TextStyle.lerp(typography.xs, typographyB.xs, 0.5));
         expect(result.sm, TextStyle.lerp(typography.sm, typographyB.sm, 0.5));
         expect(result.md, TextStyle.lerp(typography.md, typographyB.md, 0.5));

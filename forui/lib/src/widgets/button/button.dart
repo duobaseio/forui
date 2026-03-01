@@ -283,10 +283,16 @@ extension type FButtonStyles(
 )
     implements FVariants<FButtonVariantConstraint, FButtonVariant, FButtonSizeStyles, FButtonSizesDelta> {
   /// Creates a [FButtonStyles] that inherits its properties.
-  factory FButtonStyles.inherit({required FColors colors, required FTypography typography, required FStyle style}) {
+  factory FButtonStyles.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+    bool desktop = false,
+  }) {
     final primary = FButtonSizeStyles.inherit(
       typography: typography,
       style: style,
+      desktop: desktop,
       decoration: (radius) => .from(
         ShapeDecoration(shape: RoundedSuperellipseBorder(borderRadius: radius), color: colors.primary),
         variants: {
@@ -310,6 +316,7 @@ extension type FButtonStyles(
           [.secondary]: FButtonSizeStyles.inherit(
             typography: typography,
             style: style,
+            desktop: desktop,
             decoration: (radius) => .from(
               ShapeDecoration(shape: RoundedSuperellipseBorder(borderRadius: radius), color: colors.secondary),
               variants: {
@@ -327,6 +334,7 @@ extension type FButtonStyles(
           [.destructive]: FButtonSizeStyles.inherit(
             typography: typography,
             style: style,
+            desktop: desktop,
             decoration: (radius) => .from(
               ShapeDecoration(
                 shape: RoundedSuperellipseBorder(borderRadius: radius),
@@ -355,6 +363,7 @@ extension type FButtonStyles(
           [.outline]: FButtonSizeStyles.inherit(
             typography: typography,
             style: style,
+            desktop: desktop,
             decoration: (radius) => .from(
               ShapeDecoration(
                 shape: RoundedSuperellipseBorder(
@@ -378,6 +387,7 @@ extension type FButtonStyles(
           [.ghost]: FButtonSizeStyles.inherit(
             typography: typography,
             style: style,
+            desktop: desktop,
             decoration: (radius) => .from(
               ShapeDecoration(shape: RoundedSuperellipseBorder(borderRadius: radius)),
               variants: {
@@ -431,135 +441,117 @@ extension type FButtonSizeStyles(
     ) decoration,
     required Color foregroundColor,
     required Color disabledForegroundColor,
+    bool desktop = false,
   }) {
-    FButtonStyle button({
-      required BorderRadiusGeometry borderRadius,
-      required TextStyle textStyle,
-      required EdgeInsetsGeometry contentPadding,
-      required double contentSpacing,
-      required double contentIconSize,
-      required double iconSize,
-      required EdgeInsetsGeometry iconPadding,
-    }) => FButtonStyle(
-      decoration: decoration(borderRadius),
-      focusedOutlineStyle: style.focusedOutlineStyle,
-      contentStyle: FButtonContentStyle(
-        textStyle: .from(
-          textStyle.copyWith(color: foregroundColor, fontWeight: .w500, height: 1, leadingDistribution: .even),
-          variants: {
-            [.disabled]: .delta(color: disabledForegroundColor),
-          },
-        ),
-        iconStyle: .from(
-          IconThemeData(color: foregroundColor, size: contentIconSize),
-          variants: {
-            [.disabled]: .delta(color: disabledForegroundColor),
-          },
-        ),
-        circularProgressStyle: .from(
-          FCircularProgressStyle(
-            iconStyle: IconThemeData(color: foregroundColor, size: contentIconSize),
-          ),
-          variants: {
-            [.disabled]: .delta(iconStyle: .delta(color: disabledForegroundColor)),
-          },
-        ),
-        padding: contentPadding,
-        spacing: contentSpacing,
-      ),
-      iconContentStyle: FButtonIconContentStyle(
-        iconStyle: .from(
-          IconThemeData(color: foregroundColor, size: iconSize),
-          variants: {
-            [.disabled]: .delta(color: disabledForegroundColor),
-          },
-        ),
-        padding: iconPadding,
-      ),
-      tappableStyle: style.tappableStyle,
-    );
+    if (desktop) {
+      final md = FButtonStyle.inherit(
+        style: style,
+        foregroundColor: foregroundColor,
+        disabledForegroundColor: disabledForegroundColor,
+        decoration: decoration(style.borderRadius.md),
+        textStyle: typography.sm,
+        contentPadding: const .symmetric(horizontal: 10, vertical: 11),
+        contentSpacing: 6,
+        iconSize: typography.md.fontSize ?? 16,
+        iconPadding: const .all(10),
+      );
 
-    final md = button(
-      borderRadius: style.borderRadius.md,
-      textStyle: typography.sm,
-      contentPadding: const .symmetric(horizontal: 12, vertical: 14),
-      contentSpacing: 6,
-      contentIconSize: typography.sm.fontSize ?? 16,
-      iconSize: typography.md.fontSize ?? 18,
-      iconPadding: const .all(13),
-    );
+      return FButtonSizeStyles(
+        FVariants(
+          md,
+          variants: {
+            [.xs]: FButtonStyle.inherit(
+              style: style,
+              foregroundColor: foregroundColor,
+              disabledForegroundColor: disabledForegroundColor,
+              decoration: decoration(style.borderRadius.sm),
+              textStyle: typography.xs,
+              contentPadding: const .symmetric(horizontal: 8, vertical: 6),
+              contentSpacing: 4,
+              iconSize: typography.sm.fontSize ?? 14,
+              iconPadding: const .all(5),
+            ),
+            [.sm]: FButtonStyle.inherit(
+              style: style,
+              foregroundColor: foregroundColor,
+              disabledForegroundColor: disabledForegroundColor,
+              decoration: decoration(style.borderRadius.md),
+              textStyle: typography.sm,
+              contentPadding: const .symmetric(horizontal: 10, vertical: 9),
+              contentSpacing: 4,
+              iconSize: typography.md.fontSize ?? 16,
+              iconPadding: const .all(8),
+            ),
+            [.md]: md,
+            [.lg]: FButtonStyle.inherit(
+              style: style,
+              foregroundColor: foregroundColor,
+              disabledForegroundColor: disabledForegroundColor,
+              decoration: decoration(style.borderRadius.md),
+              textStyle: typography.sm,
+              contentPadding: const .symmetric(horizontal: 10, vertical: 13),
+              contentSpacing: 6,
+              iconSize: typography.lg.fontSize ?? 18,
+              iconPadding: const .all(11),
+            ),
+          },
+        ),
+      );
+    } else {
+      final md = FButtonStyle.inherit(
+        style: style,
+        foregroundColor: foregroundColor,
+        disabledForegroundColor: disabledForegroundColor,
+        decoration: decoration(style.borderRadius.md),
+        textStyle: typography.sm,
+        contentPadding: const .symmetric(horizontal: 12, vertical: 14),
+        contentSpacing: 6,
+        iconSize: typography.md.fontSize ?? 18,
+        iconPadding: const .all(13),
+      );
 
-    return FButtonSizeStyles(
-      FVariants(
-        md,
-        variants: {
-          [.xs.and(.touch)]: button(
-            borderRadius: style.borderRadius.sm,
-            textStyle: typography.xs,
-            contentPadding: const .symmetric(horizontal: 10, vertical: 9),
-            contentSpacing: 4,
-            contentIconSize: typography.xs.fontSize ?? 14,
-            iconSize: typography.sm.fontSize ?? 16,
-            iconPadding: const .all(8),
-          ),
-          [.xs.and(.desktop)]: button(
-            borderRadius: style.borderRadius.sm,
-            textStyle: typography.xs,
-            contentPadding: const .symmetric(horizontal: 8, vertical: 6),
-            contentSpacing: 4,
-            contentIconSize: typography.xs.fontSize ?? 12,
-            iconSize: typography.sm.fontSize ?? 14,
-            iconPadding: const .all(5),
-          ),
-          [.sm.and(.touch)]: button(
-            borderRadius: style.borderRadius.md,
-            textStyle: typography.sm,
-            contentPadding: const .symmetric(horizontal: 12, vertical: 12),
-            contentSpacing: 4,
-            contentIconSize: typography.sm.fontSize ?? 16,
-            iconSize: typography.md.fontSize ?? 18,
-            iconPadding: const .all(11),
-          ),
-          [.sm.and(.desktop)]: button(
-            borderRadius: style.borderRadius.md,
-            textStyle: typography.sm,
-            contentPadding: const .symmetric(horizontal: 10, vertical: 9),
-            contentSpacing: 4,
-            contentIconSize: typography.sm.fontSize ?? 14,
-            iconSize: typography.md.fontSize ?? 16,
-            iconPadding: const .all(8),
-          ),
-          [.md.and(.touch)]: md,
-          [.md.and(.desktop)]: button(
-            borderRadius: style.borderRadius.md,
-            textStyle: typography.sm,
-            contentPadding: const .symmetric(horizontal: 10, vertical: 11),
-            contentSpacing: 6,
-            contentIconSize: typography.sm.fontSize ?? 14,
-            iconSize: typography.md.fontSize ?? 16,
-            iconPadding: const .all(10),
-          ),
-          [.lg.and(.touch)]: button(
-            borderRadius: style.borderRadius.md,
-            textStyle: typography.sm,
-            contentPadding: const .symmetric(horizontal: 12, vertical: 16),
-            contentSpacing: 6,
-            contentIconSize: typography.sm.fontSize ?? 16,
-            iconSize: typography.lg.fontSize ?? 20,
-            iconPadding: const .all(14),
-          ),
-          [.lg.and(.desktop)]: button(
-            borderRadius: style.borderRadius.md,
-            textStyle: typography.sm,
-            contentPadding: const .symmetric(horizontal: 10, vertical: 13),
-            contentSpacing: 6,
-            contentIconSize: typography.sm.fontSize ?? 14,
-            iconSize: typography.lg.fontSize ?? 18,
-            iconPadding: const .all(11),
-          ),
-        },
-      ),
-    );
+      return FButtonSizeStyles(
+        FVariants(
+          md,
+          variants: {
+            [.xs]: FButtonStyle.inherit(
+              style: style,
+              foregroundColor: foregroundColor,
+              disabledForegroundColor: disabledForegroundColor,
+              decoration: decoration(style.borderRadius.sm),
+              textStyle: typography.xs,
+              contentPadding: const .symmetric(horizontal: 10, vertical: 9),
+              contentSpacing: 4,
+              iconSize: typography.sm.fontSize ?? 16,
+              iconPadding: const .all(8),
+            ),
+            [.sm]: FButtonStyle.inherit(
+              style: style,
+              foregroundColor: foregroundColor,
+              disabledForegroundColor: disabledForegroundColor,
+              decoration: decoration(style.borderRadius.md),
+              textStyle: typography.sm,
+              contentPadding: const .symmetric(horizontal: 12, vertical: 12),
+              contentSpacing: 4,
+              iconSize: typography.md.fontSize ?? 18,
+              iconPadding: const .all(11),
+            ),
+            [.md]: md,
+            [.lg]: FButtonStyle.inherit(
+              style: style,
+              foregroundColor: foregroundColor,
+              disabledForegroundColor: disabledForegroundColor,
+              decoration: decoration(style.borderRadius.md),
+              textStyle: typography.sm,
+              contentPadding: const .symmetric(horizontal: 12, vertical: 16),
+              contentSpacing: 6,
+              iconSize: typography.lg.fontSize ?? 20,
+              iconPadding: const .all(14),
+            ),
+          },
+        ),
+      );
+    }
   }
 
   /// The extra small button style.
@@ -605,6 +597,56 @@ final class FButtonStyle with Diagnosticable, _$FButtonStyleFunctions {
     required this.tappableStyle,
     required this.focusedOutlineStyle,
   });
+
+  /// Creates a [FButtonStyle] that inherits its properties.
+  factory FButtonStyle.inherit({
+    required FStyle style,
+    required FVariants<FTappableVariantConstraint, FTappableVariant, Decoration, DecorationDelta> decoration,
+    required Color foregroundColor,
+    required Color disabledForegroundColor,
+    required TextStyle textStyle,
+    required EdgeInsetsGeometry contentPadding,
+    required double contentSpacing,
+    required double iconSize,
+    required EdgeInsetsGeometry iconPadding,
+  }) => FButtonStyle(
+    decoration: decoration,
+    focusedOutlineStyle: style.focusedOutlineStyle,
+    contentStyle: FButtonContentStyle(
+      textStyle: .from(
+        textStyle.copyWith(color: foregroundColor, fontWeight: .w500, height: 1, leadingDistribution: .even),
+        variants: {
+          [.disabled]: .delta(color: disabledForegroundColor),
+        },
+      ),
+      iconStyle: .from(
+        IconThemeData(color: foregroundColor, size: textStyle.fontSize),
+        variants: {
+          [.disabled]: .delta(color: disabledForegroundColor),
+        },
+      ),
+      circularProgressStyle: .from(
+        FCircularProgressStyle(
+          iconStyle: IconThemeData(color: foregroundColor, size: textStyle.fontSize),
+        ),
+        variants: {
+          [.disabled]: .delta(iconStyle: .delta(color: disabledForegroundColor)),
+        },
+      ),
+      padding: contentPadding,
+      spacing: contentSpacing,
+    ),
+    iconContentStyle: FButtonIconContentStyle(
+      iconStyle: .from(
+        IconThemeData(color: foregroundColor, size: iconSize),
+        variants: {
+          [.disabled]: .delta(color: disabledForegroundColor),
+        },
+      ),
+      padding: iconPadding,
+    ),
+    tappableStyle: style.tappableStyle,
+  );
 }
 
 /// A button's data.

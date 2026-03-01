@@ -7,9 +7,10 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  for (final (platform, sizes) in [
+  for (final (theme, themeName, sizes) in [
     (
-      FPlatformVariant.macOS,
+      FThemes.neutral.light.desktop,
+      'desktop',
       [
         (FTextFieldSizeVariant.sm, 'sm', 32.0),
         (FTextFieldSizeVariant.md, 'md', 36.0),
@@ -17,7 +18,8 @@ void main() {
       ],
     ),
     (
-      FPlatformVariant.iOS,
+      FThemes.neutral.light.touch,
+      'touch',
       [
         (FTextFieldSizeVariant.sm, 'sm', 40.0),
         (FTextFieldSizeVariant.md, 'md', 44.0),
@@ -25,12 +27,11 @@ void main() {
       ],
     ),
   ]) {
-    final platformName = platform == FPlatformVariant.macOS ? 'macOS' : 'iOS';
     for (final (size, name, height) in sizes) {
-      testWidgets('$platformName $name text field has consistent height ($height)', (tester) async {
+      testWidgets('$themeName $name text field has consistent height ($height)', (tester) async {
         await tester.pumpWidget(
           TestScaffold.app(
-            platform: platform,
+            theme: theme,
             child: FTextField(size: size),
           ),
         );

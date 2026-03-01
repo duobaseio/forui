@@ -197,26 +197,29 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
   });
 
   /// Creates a [FDividerStyles] that inherits its properties.
-  FAccordionStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        titleTextStyle: FVariants.from(
-          typography.sm.copyWith(fontWeight: .w500, color: colors.foreground),
-          variants: {
-            [.hovered, .pressed]: .delta(decoration: () => .underline),
-          },
-        ),
-        childTextStyle: typography.sm.copyWith(color: colors.foreground),
-        iconStyle: .from(
-          IconThemeData(color: colors.mutedForeground, size: typography.lg.fontSize),
-          variants: {
-            [.touch]: const .delta(),
-            [.desktop]: .delta(size: typography.md.fontSize),
-          },
-        ),
-        focusedOutlineStyle: style.focusedOutlineStyle,
-        dividerStyle: FDividerStyle(color: colors.border, padding: .zero),
-        tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
-      );
+  FAccordionStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+    bool desktop = false,
+  }) : this(
+         titleTextStyle: .from(
+           typography.sm.copyWith(fontWeight: .w500, color: colors.foreground),
+           variants: {
+             [.hovered, .pressed]: .delta(decoration: () => .underline),
+           },
+         ),
+         childTextStyle: typography.sm.copyWith(color: colors.foreground),
+         iconStyle: .all(
+           IconThemeData(
+             color: colors.mutedForeground,
+             size: desktop ? typography.md.fontSize : typography.lg.fontSize,
+           ),
+         ),
+         focusedOutlineStyle: style.focusedOutlineStyle,
+         dividerStyle: FDividerStyle(color: colors.border, padding: .zero),
+         tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
+       );
 }
 
 /// Motion-related properties for [FAccordion].
