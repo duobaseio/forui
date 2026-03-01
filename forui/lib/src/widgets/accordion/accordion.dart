@@ -209,6 +209,7 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
         iconStyle: .from(
           IconThemeData(color: colors.mutedForeground, size: typography.lg.fontSize),
           variants: {
+            [.touch]: const .delta(),
             [.desktop]: .delta(size: typography.md.fontSize),
           },
         ),

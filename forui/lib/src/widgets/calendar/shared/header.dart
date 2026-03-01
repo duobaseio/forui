@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
@@ -21,7 +22,11 @@ enum FCalendarPickerType {
 
 @internal
 class Header extends StatefulWidget {
-  static const height = 31.0;
+  static double height(FCalendarHeaderStyle style) => math.max(
+    (style.headerTextStyle.fontSize ?? 16) * (style.headerTextStyle.height ?? 1),
+    style.buttonStyle.resolve(variants).iconContentStyle.padding.vertical +
+        (style.buttonStyle.iconContentStyle.iconStyle.base.size ?? 16),
+  );
 
   final FCalendarHeaderStyle style;
   final ValueNotifier<FCalendarPickerType> type;
@@ -44,6 +49,7 @@ class Header extends StatefulWidget {
 
 class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
+  late double _height;
 
   @override
   void initState() {
@@ -51,6 +57,7 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
     widget.type.addListener(_animate);
     _controller = AnimationController(vsync: this, duration: widget.style.animationDuration);
     _controller.value = widget.type.value == .day ? 0.0 : 1.0;
+    _height = Header.height(widget.style);
   }
 
   @override
@@ -62,7 +69,7 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
     },
     excludeSemantics: true,
     builder: (_, variants, _) => SizedBox(
-      height: Header.height,
+      height: _height,
       child: Padding(
         padding: const .symmetric(horizontal: 15),
         child: Row(
@@ -99,6 +106,7 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
     super.didUpdateWidget(old);
     old.type.removeListener(_animate);
     widget.type.addListener(_animate);
+    _height = Header.height(widget.style);
   }
 
   @override
@@ -133,7 +141,7 @@ class Navigation extends StatelessWidget {
   Widget build(BuildContext _) => Padding(
     padding: const .only(bottom: 5),
     child: SizedBox(
-      height: Header.height,
+      height: Header.height(style),
       child: Row(
         mainAxisAlignment: .spaceBetween,
         children: [
@@ -168,9 +176,9 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
   @override
   final FFocusedOutlineStyle focusedOutlineStyle;
 
-  /// The button style.
+  /// The button style. Defaults to outline sm on touch and outline xs on desktop.
   @override
-  final FButtonStyle buttonStyle;
+  final FVariants<FPlatformVariantConstraint, FPlatformVariant, FButtonStyle, FButtonStyleDelta> buttonStyle;
 
   /// The header's text style.
   @override
@@ -198,10 +206,18 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
     required FColors colors,
     required FTypography typography,
     required FStyle style,
-  }) => .new(
-    focusedOutlineStyle: style.focusedOutlineStyle,
-    buttonStyle: FButtonStyles.inherit(colors: colors, typography: typography, style: style).outline.sm,
-    headerTextStyle: typography.sm.copyWith(color: colors.foreground, fontWeight: .w500),
-    headerIconSize: typography.md.fontSize!,
-  );
+  }) {
+    final buttons = FButtonStyles.inherit(colors: colors, typography: typography, style: style).outline;
+    return .new(
+      focusedOutlineStyle: style.focusedOutlineStyle,
+      buttonStyle: FVariants(
+        buttons.xs,
+        variants: {
+          [.desktop]: buttons.sm,
+        },
+      ),
+      headerTextStyle: typography.sm.copyWith(color: colors.foreground, fontWeight: .w500),
+      headerIconSize: typography.md.fontSize!,
+    );
+  }
 }

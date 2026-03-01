@@ -367,7 +367,7 @@ class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
     required super.rawItemContentStyle,
     required super.tappableStyle,
     required super.focusedOutlineStyle,
-    super.margin = .zero,
+    super.margin = const .all(.zero),
   });
 
   /// Creates a [FTileStyle].
@@ -419,7 +419,7 @@ class FTileContentStyle extends FItemContentStyle with _$FTileContentStyleFuncti
     required super.subtitleTextStyle,
     required super.detailsTextStyle,
     required super.suffixIconStyle,
-    super.padding = const .fromLTRB(15, 13, 10, 13),
+    super.padding = const .all(.fromLTRB(15, 13, 10, 13)),
     super.prefixIconSpacing,
     super.titleSpacing,
     super.middleSpacing,
@@ -476,7 +476,7 @@ class FRawTileContentStyle extends FRawItemContentStyle with _$FRawTileContentSt
   FRawTileContentStyle({
     required super.prefixIconStyle,
     required super.childTextStyle,
-    super.padding = const .fromLTRB(15, 13, 10, 13),
+    super.padding = const .all(.fromLTRB(15, 13, 10, 13)),
     super.prefixIconSpacing,
   });
 

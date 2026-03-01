@@ -1,5 +1,4 @@
 import 'dart:collection';
-import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -104,32 +103,35 @@ class _DayPickerState extends State<DayPicker> {
   }
 
   @override
-  Widget build(BuildContext context) => SizedBox(
-    width: DateTime.daysPerWeek * widget.style.tileSize,
-    child: GridView.custom(
-      padding: .zero,
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: _GridDelegate(widget.style.tileSize),
-      childrenDelegate: SliverChildListDelegate(addRepaintBoundaries: false, [
-        ..._headers(context),
-        for (final MapEntry(key: date, value: focusNode) in _days.entries)
-          Entry.day(
-            style: widget.style,
-            localizations: widget.localization,
-            dayBuilder: widget.dayBuilder,
-            date: date,
-            focusNode: focusNode,
-            current: date.month == widget.month.month,
-            today: date == widget.today,
-            selectable: widget.selectable,
-            selected: widget.selected,
-            onPress: widget.onPress,
-            onLongPress: widget.onLongPress,
-          ),
-      ]),
-    ),
-  );
+  Widget build(BuildContext context) {
+    final tileSize = widget.style.tileSize.resolve({context.platformVariant});
+    return SizedBox(
+      width: DateTime.daysPerWeek * tileSize,
+      child: GridView.custom(
+        padding: .zero,
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: _GridDelegate(tileSize),
+        childrenDelegate: SliverChildListDelegate(addRepaintBoundaries: false, [
+          ..._headers(context),
+          for (final MapEntry(key: date, value: focusNode) in _days.entries)
+            Entry.day(
+              style: widget.style,
+              localizations: widget.localization,
+              dayBuilder: widget.dayBuilder,
+              date: date,
+              focusNode: focusNode,
+              current: date.month == widget.month.month,
+              today: date == widget.today,
+              selectable: widget.selectable,
+              selected: widget.selected,
+              onPress: widget.onPress,
+              onLongPress: widget.onLongPress,
+            ),
+        ]),
+      ),
+    );
+  }
 
   List<Widget> _headers(BuildContext _) {
     final firstDayOfWeek = widget.style.startDayOfWeek ?? widget.localization.firstDayOfWeek;
@@ -207,12 +209,9 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
   @override
   final int? startDayOfWeek;
 
-  /// The tile's size. Defaults to 42.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if [tileSize] is not positive.
+  /// The tile's size. Defaults to 44 on touch platforms and 32 on desktop.
   @override
-  final double tileSize;
+  final FVariants<FPlatformVariantConstraint, FPlatformVariant, double, Delta> tileSize;
 
   /// Creates a [FCalendarDayPickerStyle].
   const FCalendarDayPickerStyle({
@@ -220,12 +219,11 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
     required this.current,
     required this.enclosing,
     this.startDayOfWeek,
-    this.tileSize = 32,
+    this.tileSize = const .raw(44, {.desktop: 32}),
   }) : assert(
          startDayOfWeek == null || (DateTime.monday <= startDayOfWeek && startDayOfWeek <= DateTime.sunday),
          'startDayOfWeek ($startDayOfWeek) must be between DateTime.monday (1) and DateTime.sunday (7)',
-       ),
-       assert(0 < tileSize, 'tileSize ($tileSize) must be positive');
+       );
 
   /// Creates a [FCalendarDayPickerStyle] that inherits its properties.
   factory FCalendarDayPickerStyle.inherit({
@@ -258,12 +256,27 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
         backgroundColor: backgroundColor,
         borderSide: border,
         textStyle: FVariants.from(
-          typography.xs.copyWith(color: colors.foreground, fontWeight: .w500),
+          typography.sm.copyWith(color: colors.foreground, fontWeight: .w500),
           variants: {
-            [.disabled]: .delta(color: colors.disable(colors.foreground)),
+            [.disabled.and(.touch)]: .delta(color: colors.disable(colors.foreground)),
+            [.disabled.and(.desktop)]: .delta(
+              color: colors.disable(colors.foreground),
+              fontSize: typography.xs.fontSize,
+              height: typography.xs.height,
+            ),
             //
-            [.selected]: .delta(color: colors.primaryForeground),
-            [.selected.and(.disabled)]: .delta(color: colors.disable(colors.primaryForeground)),
+            [.selected.and(.touch)]: .delta(color: colors.primaryForeground),
+            [.selected.and(.desktop)]: .delta(
+              color: colors.primaryForeground,
+              fontSize: typography.xs.fontSize,
+              height: typography.xs.height,
+            ),
+            [.selected.and(.disabled).and(.touch)]: .delta(color: colors.disable(colors.primaryForeground)),
+            [.selected.and(.disabled).and(.desktop)]: .delta(
+              color: colors.disable(colors.primaryForeground),
+              fontSize: typography.xs.fontSize,
+              height: typography.xs.height,
+            ),
           },
         ),
         borderRadius: style.borderRadius.sm,
@@ -272,12 +285,27 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
         backgroundColor: backgroundColor,
         borderSide: border,
         textStyle: FVariants.from(
-          typography.xs.copyWith(color: colors.mutedForeground, fontWeight: .w500),
+          typography.sm.copyWith(color: colors.mutedForeground, fontWeight: .w500),
           variants: {
-            [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
+            [.disabled.and(.touch)]: .delta(color: colors.disable(colors.mutedForeground)),
+            [.disabled.and(.desktop)]: .delta(
+              color: colors.disable(colors.mutedForeground),
+              fontSize: typography.xs.fontSize,
+              height: typography.xs.height,
+            ),
             //
-            [.selected]: .delta(color: colors.primaryForeground),
-            [.selected.and(.disabled)]: .delta(color: colors.disable(colors.primaryForeground)),
+            [.selected.and(.touch)]: .delta(color: colors.primaryForeground),
+            [.selected.and(.desktop)]: .delta(
+              color: colors.primaryForeground,
+              fontSize: typography.xs.fontSize,
+              height: typography.xs.height,
+            ),
+            [.selected.and(.disabled).and(.touch)]: .delta(color: colors.disable(colors.primaryForeground)),
+            [.selected.and(.disabled).and(.desktop)]: .delta(
+              color: colors.disable(colors.primaryForeground),
+              fontSize: typography.xs.fontSize,
+              height: typography.xs.height,
+            ),
           },
         ),
         borderRadius: style.borderRadius.sm,

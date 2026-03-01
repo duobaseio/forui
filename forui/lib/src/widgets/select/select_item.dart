@@ -299,7 +299,6 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
       ),
       tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
       focusedOutlineStyle: null,
-      margin: const .symmetric(horizontal: 4),
     ),
   );
 }

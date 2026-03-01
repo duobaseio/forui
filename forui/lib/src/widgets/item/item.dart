@@ -321,7 +321,7 @@ class FItem extends StatelessWidget with FItemMixin {
     super.key,
   }) : _builder = ((context, style, top, bottom, variants, color, width, divider) => ItemContent(
          style: style.contentStyle,
-         margin: style.margin,
+         margin: style.margin.resolve({context.platformVariant}),
          top: top,
          bottom: bottom,
          variants: variants,
@@ -370,7 +370,7 @@ class FItem extends StatelessWidget with FItemMixin {
     super.key,
   }) : _builder = ((context, style, top, bottom, variants, color, width, divider) => RawItemContent(
          style: style.rawItemContentStyle,
-         margin: style.margin,
+         margin: style.margin.resolve({context.platformVariant}),
          top: top,
          bottom: bottom,
          variants: variants,
@@ -396,7 +396,7 @@ class FItem extends StatelessWidget with FItemMixin {
     final top = data.index == 0 ? data.spacing : 0.0;
     final bottom = data.last ? data.spacing : 0.0;
 
-    var margin = style.margin.resolve(Directionality.maybeOf(context) ?? .ltr);
+    var margin = style.margin.resolve({context.platformVariant}).resolve(Directionality.maybeOf(context) ?? .ltr);
     margin = margin.copyWith(
       top: margin.top + top,
       bottom: margin.bottom + bottom + (divider == FItemDivider.none ? 0 : data.dividerWidth),
@@ -531,11 +531,11 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
   @override
   final FVariants<FTappableVariantConstraint, FTappableVariant, Color?, Delta> backgroundColor;
 
-  /// The margin around the item, including the [decoration].
-  ///
-  /// Defaults to `const EdgeInsets.symmetric(vertical: 2, horizontal: 4)`.
+  /// The margin around the item, including the [decoration]. Defaults to:
+  /// * touch: `EdgeInsets.zero`
+  /// * desktop: `EdgeInsets.symmetric(vertical: 2, horizontal: 4)`
   @override
-  final EdgeInsetsGeometry margin;
+  final FVariants<FPlatformVariantConstraint, FPlatformVariant, EdgeInsetsGeometry, Delta> margin;
 
   /// The item's decoration.
   @override
@@ -565,7 +565,7 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
     required this.rawItemContentStyle,
     required this.tappableStyle,
     required this.focusedOutlineStyle,
-    this.margin = const .symmetric(vertical: 2, horizontal: 4),
+    this.margin = const .all(.symmetric(horizontal: 4)),
   });
 
   /// Creates a [FTileGroupStyle] that inherits from the given arguments.

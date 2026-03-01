@@ -45,7 +45,7 @@ class RawItemContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ItemContentLayout(
     margin: margin,
-    padding: style.padding,
+    padding: style.padding.resolve({context.platformVariant}),
     top: top,
     bottom: bottom,
     dividerColor: dividerColor?.resolve(variants),
@@ -87,9 +87,13 @@ class RawItemContent extends StatelessWidget {
 
 /// An [FItem] raw content's style.
 class FRawItemContentStyle with Diagnosticable, _$FRawItemContentStyleFunctions {
-  /// The content's padding. Defaults to `EdgeInsetsDirectional.only(start: 10, top: 6, bottom: 6, end: 6)`.
+  /// The content's padding.
+  ///
+  /// Defaults to:
+  /// * touch: `EdgeInsetsDirectional.only(start: 10, top: 12.5, bottom: 12.5, end: 6)`
+  /// * desktop: `EdgeInsetsDirectional.only(start: 10, top: 6, bottom: 6, end: 6)`
   @override
-  final EdgeInsetsGeometry padding;
+  final FVariants<FPlatformVariantConstraint, FPlatformVariant, EdgeInsetsGeometry, Delta> padding;
 
   /// The prefix icon style.
   @override
@@ -110,7 +114,9 @@ class FRawItemContentStyle with Diagnosticable, _$FRawItemContentStyleFunctions 
   FRawItemContentStyle({
     required this.prefixIconStyle,
     required this.childTextStyle,
-    this.padding = const .directional(start: 10, top: 6, bottom: 6, end: 6),
+    this.padding = const .raw(.directional(start: 10, top: 12.5, bottom: 12.5, end: 6), {
+      .desktop: .directional(start: 10, top: 5.5, bottom: 5.5, end: 6),
+    }),
     this.prefixIconSpacing = 8,
   }) : assert(0 <= prefixIconSpacing, 'prefixIconSpacing ($prefixIconSpacing) must be >= 0');
 
