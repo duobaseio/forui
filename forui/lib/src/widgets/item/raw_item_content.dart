@@ -87,7 +87,7 @@ class RawItemContent extends StatelessWidget {
 
 /// An [FItem] raw content's style.
 class FRawItemContentStyle with Diagnosticable, _$FRawItemContentStyleFunctions {
-  /// The content's padding. Defaults to `EdgeInsetsDirectional.only(15, 13, 10, 13)`.
+  /// The content's padding.
   @override
   final EdgeInsetsGeometry padding;
 
@@ -110,8 +110,8 @@ class FRawItemContentStyle with Diagnosticable, _$FRawItemContentStyleFunctions 
   FRawItemContentStyle({
     required this.prefixIconStyle,
     required this.childTextStyle,
-    this.padding = const .directional(start: 15, top: 7.5, bottom: 7.5, end: 10),
-    this.prefixIconSpacing = 10,
+    required this.padding,
+    this.prefixIconSpacing = 8,
   }) : assert(0 <= prefixIconSpacing, 'prefixIconSpacing ($prefixIconSpacing) must be >= 0');
 
   /// Creates a [FRawItemContentStyle] that inherits its properties.
@@ -120,9 +120,10 @@ class FRawItemContentStyle with Diagnosticable, _$FRawItemContentStyleFunctions 
     required FTypography typography,
     required Color prefix,
     required Color color,
+    bool desktop = false,
   }) : this(
-         prefixIconStyle: FVariants.from(
-           IconThemeData(color: prefix, size: 15),
+         prefixIconStyle: .from(
+           IconThemeData(color: prefix, size: typography.md.fontSize),
            variants: {
              [.disabled]: .delta(color: colors.disable(prefix)),
            },
@@ -133,5 +134,8 @@ class FRawItemContentStyle with Diagnosticable, _$FRawItemContentStyleFunctions 
              [.disabled]: typography.sm.copyWith(color: colors.disable(color)),
            },
          ),
+         padding: desktop
+             ? const .directional(start: 10, top: 6, bottom: 5, end: 5)
+             : const .directional(start: 10, top: 12.5, bottom: 12.5, end: 6),
        );
 }

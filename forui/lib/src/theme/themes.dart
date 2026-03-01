@@ -1,486 +1,124 @@
-import 'dart:ui';
-
 import 'package:forui/forui.dart';
 
 /// The Forui themes.
 extension FThemes on Never {
-  /// The light and dark variants of the [Neutral](https://ui.shadcn.com/docs/theming#neutral) theme.
+  /// The [Neutral](https://ui.shadcn.com/docs/theming#neutral) theme.
   static final neutral = (
-    light: FThemeData(
-      debugLabel: 'Neutral Light ThemeData',
-      colors: const FColors(
-        brightness: .light,
-        systemOverlayStyle: .dark,
-        barrier: Color(0x33000000),
-        background: Color(0xFFFFFFFF),
-        foreground: Color(0xFF0A0A0A),
-        primary: Color(0xFF171717),
-        primaryForeground: Color(0xFFFAFAFA),
-        secondary: Color(0xFFF5F5F5),
-        secondaryForeground: Color(0xFF171717),
-        muted: Color(0xFFF5F5F5),
-        mutedForeground: Color(0xFF737373),
-        destructive: Color(0xFFE7000B),
-        destructiveForeground: Color(0xFFFAFAFA),
-        error: Color(0xFFE7000B),
-        errorForeground: Color(0xFFFAFAFA),
-        card: Color(0xFFFFFFFF),
-        border: Color(0xFFE5E5E5),
-      ),
+    light: (
+      desktop: FThemeData(desktop: true, debugLabel: 'Neutral Light Desktop', colors: FColors.neutralLight),
+      touch: FThemeData(debugLabel: 'Neutral Light Touch', colors: FColors.neutralLight),
     ),
-    dark: FThemeData(
-      debugLabel: 'Neutral Dark ThemeData',
-      colors: const FColors(
-        brightness: .dark,
-        systemOverlayStyle: .light,
-        barrier: Color(0x7A000000),
-        background: Color(0xFF0A0A0A),
-        foreground: Color(0xFFFAFAFA),
-        primary: Color(0xFFE5E5E5),
-        primaryForeground: Color(0xFF171717),
-        secondary: Color(0xFF262626),
-        secondaryForeground: Color(0xFFFAFAFA),
-        muted: Color(0xFF262626),
-        mutedForeground: Color(0xFFA1A1A1),
-        destructive: Color(0xFFFF6467),
-        destructiveForeground: Color(0xFFFAFAFA),
-        error: Color(0xFFFF6467),
-        errorForeground: Color(0xFFFAFAFA),
-        card: Color(0xFF171717),
-        border: Color(0x1AFFFFFF),
-      ),
+    dark: (
+      desktop: FThemeData(desktop: true, debugLabel: 'Neutral Dark Desktop', colors: FColors.neutralDark),
+      touch: FThemeData(debugLabel: 'Neutral Dark Touch', colors: FColors.neutralDark),
     ),
   );
 
-  /// The light and dark variants of the [Zinc](https://ui.shadcn.com/docs/theming#zinc) theme.
+  /// The [Zinc](https://ui.shadcn.com/docs/theming#zinc) theme.
   static final zinc = (
-    light: FThemeData(
-      debugLabel: 'Zinc Light ThemeData',
-      colors: const FColors(
-        brightness: .light,
-        systemOverlayStyle: .dark,
-        barrier: Color(0x33000000),
-        background: Color(0xFFFFFFFF),
-        foreground: Color(0xFF09090B),
-        primary: Color(0xFF18181B),
-        primaryForeground: Color(0xFFFAFAFA),
-        secondary: Color(0xFFF4F4F5),
-        secondaryForeground: Color(0xFF18181B),
-        muted: Color(0xFFF4F4F5),
-        mutedForeground: Color(0xFF71717B),
-        destructive: Color(0xFFE7000B),
-        destructiveForeground: Color(0xFFFAFAFA),
-        error: Color(0xFFE7000B),
-        errorForeground: Color(0xFFFAFAFA),
-        card: Color(0xFFFFFFFF),
-        border: Color(0xFFE4E4E7),
-      ),
+    light: (
+      desktop: FThemeData(desktop: true, debugLabel: 'Zinc Light Desktop', colors: FColors.zincLight),
+      touch: FThemeData(debugLabel: 'Zinc Light Touch', colors: FColors.zincLight),
     ),
-    dark: FThemeData(
-      debugLabel: 'Zinc Dark ThemeData',
-      colors: const FColors(
-        brightness: .dark,
-        systemOverlayStyle: .light,
-        barrier: Color(0x7A000000),
-        background: Color(0xFF09090B),
-        foreground: Color(0xFFFAFAFA),
-        primary: Color(0xFFE4E4E7),
-        primaryForeground: Color(0xFF18181B),
-        secondary: Color(0xFF27272A),
-        secondaryForeground: Color(0xFFFAFAFA),
-        muted: Color(0xFF27272A),
-        mutedForeground: Color(0xFF9F9FA9),
-        destructive: Color(0xFFFF6467),
-        destructiveForeground: Color(0xFFFAFAFA),
-        error: Color(0xFFFF6467),
-        errorForeground: Color(0xFFFAFAFA),
-        card: Color(0xFF18181B),
-        border: Color(0x1AFFFFFF),
-      ),
+    dark: (
+      desktop: FThemeData(desktop: true, debugLabel: 'Zinc Dark Desktop', colors: FColors.zincDark),
+      touch: FThemeData(debugLabel: 'Zinc Dark Touch', colors: FColors.zincDark),
     ),
   );
 
-  /// The light and dark variants of the [Slate](https://ui.shadcn.com/docs/theming#slate) theme.
+  /// The [Slate](https://ui.shadcn.com/docs/theming#slate) theme.
   static final slate = (
-    light: FThemeData(
-      debugLabel: 'Slate Light ThemeData',
-      colors: const FColors(
-        brightness: .light,
-        systemOverlayStyle: .dark,
-        barrier: Color(0x33000000),
-        background: Color(0xFFFFFFFF),
-        foreground: Color(0xFF020618),
-        primary: Color(0xFF0F172B),
-        primaryForeground: Color(0xFFF8FAFC),
-        secondary: Color(0xFFF1F5F9),
-        secondaryForeground: Color(0xFF0F172B),
-        muted: Color(0xFFF1F5F9),
-        mutedForeground: Color(0xFF62748E),
-        destructive: Color(0xFFE7000B),
-        destructiveForeground: Color(0xFFFAFAFA),
-        error: Color(0xFFE7000B),
-        errorForeground: Color(0xFFFAFAFA),
-        card: Color(0xFFFFFFFF),
-        border: Color(0xFFE2E8F0),
-      ),
+    light: (
+      desktop: FThemeData(desktop: true, debugLabel: 'Slate Light Desktop', colors: FColors.slateLight),
+      touch: FThemeData(debugLabel: 'Slate Light Touch', colors: FColors.slateLight),
     ),
-    dark: FThemeData(
-      debugLabel: 'Slate Dark ThemeData',
-      colors: const FColors(
-        brightness: .dark,
-        systemOverlayStyle: .light,
-        barrier: Color(0x7A000000),
-        background: Color(0xFF020618),
-        foreground: Color(0xFFF8FAFC),
-        primary: Color(0xFFE2E8F0),
-        primaryForeground: Color(0xFF0F172B),
-        secondary: Color(0xFF1D293D),
-        secondaryForeground: Color(0xFFF8FAFC),
-        muted: Color(0xFF1D293D),
-        mutedForeground: Color(0xFF90A1B9),
-        destructive: Color(0xFFFF6467),
-        destructiveForeground: Color(0xFFFAFAFA),
-        error: Color(0xFFFF6467),
-        errorForeground: Color(0xFFFAFAFA),
-        card: Color(0xFF0F172B),
-        border: Color(0x1AFFFFFF),
-      ),
+    dark: (
+      desktop: FThemeData(desktop: true, debugLabel: 'Slate Dark Desktop', colors: FColors.slateDark),
+      touch: FThemeData(debugLabel: 'Slate Dark Touch', colors: FColors.slateDark),
     ),
   );
 
-  /// The light and dark variants of the [Blue](https://ui.shadcn.com/themes) theme.
+  /// The [Blue](https://ui.shadcn.com/themes) theme.
   static final blue = (
-    light: FThemeData(
-      debugLabel: 'Blue Light ThemeData',
-      colors: const FColors(
-        brightness: .light,
-        systemOverlayStyle: .dark,
-        barrier: Color(0x33000000),
-        background: Color(0xFFFFFFFF),
-        foreground: Color(0xFF09090B),
-        primary: Color(0xFF1447E6),
-        primaryForeground: Color(0xFFEFF6FF),
-        secondary: Color(0xFFF4F4F5),
-        secondaryForeground: Color(0xFF18181B),
-        muted: Color(0xFFF4F4F5),
-        mutedForeground: Color(0xFF71717B),
-        destructive: Color(0xFFE7000B),
-        destructiveForeground: Color(0xFFFAFAFA),
-        error: Color(0xFFE7000B),
-        errorForeground: Color(0xFFFAFAFA),
-        card: Color(0xFFFFFFFF),
-        border: Color(0xFFE4E4E7),
-      ),
+    light: (
+      desktop: FThemeData(desktop: true, debugLabel: 'Blue Light Desktop', colors: FColors.blueLight),
+      touch: FThemeData(debugLabel: 'Blue Light Touch', colors: FColors.blueLight),
     ),
-    dark: FThemeData(
-      debugLabel: 'Blue Dark ThemeData',
-      colors: const FColors(
-        brightness: .dark,
-        systemOverlayStyle: .light,
-        barrier: Color(0x7A000000),
-        background: Color(0xFF09090B),
-        foreground: Color(0xFFFAFAFA),
-        primary: Color(0xFF1447E6),
-        primaryForeground: Color(0xFFEFF6FF),
-        secondary: Color(0xFF27272A),
-        secondaryForeground: Color(0xFFFAFAFA),
-        muted: Color(0xFF27272A),
-        mutedForeground: Color(0xFF9F9FA9),
-        destructive: Color(0xFFFF6467),
-        destructiveForeground: Color(0xFFFAFAFA),
-        error: Color(0xFFFF6467),
-        errorForeground: Color(0xFFFAFAFA),
-        card: Color(0xFF18181B),
-        border: Color(0x1AFFFFFF),
-      ),
+    dark: (
+      desktop: FThemeData(desktop: true, debugLabel: 'Blue Dark Desktop', colors: FColors.blueDark),
+      touch: FThemeData(debugLabel: 'Blue Dark Touch', colors: FColors.blueDark),
     ),
   );
 
-  /// The light and dark variants of the [Green](https://ui.shadcn.com/themes) theme.
+  /// The [Green](https://ui.shadcn.com/themes) theme.
   static final green = (
-    light: FThemeData(
-      debugLabel: 'Green Light ThemeData',
-      colors: const FColors(
-        brightness: .light,
-        systemOverlayStyle: .dark,
-        barrier: Color(0x33000000),
-        background: Color(0xFFFFFFFF),
-        foreground: Color(0xFF09090B),
-        primary: Color(0xFF5EA500),
-        primaryForeground: Color(0xFFF7FEE7),
-        secondary: Color(0xFFF4F4F5),
-        secondaryForeground: Color(0xFF18181B),
-        muted: Color(0xFFF4F4F5),
-        mutedForeground: Color(0xFF71717B),
-        destructive: Color(0xFFE7000B),
-        destructiveForeground: Color(0xFFFAFAFA),
-        error: Color(0xFFE7000B),
-        errorForeground: Color(0xFFFAFAFA),
-        card: Color(0xFFFFFFFF),
-        border: Color(0xFFE4E4E7),
-      ),
+    light: (
+      desktop: FThemeData(desktop: true, debugLabel: 'Green Light Desktop', colors: FColors.greenLight),
+      touch: FThemeData(debugLabel: 'Green Light Touch', colors: FColors.greenLight),
     ),
-    dark: FThemeData(
-      debugLabel: 'Green Dark ThemeData',
-      colors: const FColors(
-        brightness: .dark,
-        systemOverlayStyle: .light,
-        barrier: Color(0x7A000000),
-        background: Color(0xFF09090B),
-        foreground: Color(0xFFFAFAFA),
-        primary: Color(0xFF5EA500),
-        primaryForeground: Color(0xFFF7FEE7),
-        secondary: Color(0xFF27272A),
-        secondaryForeground: Color(0xFFFAFAFA),
-        muted: Color(0xFF27272A),
-        mutedForeground: Color(0xFF9F9FA9),
-        destructive: Color(0xFFFF6467),
-        destructiveForeground: Color(0xFFFAFAFA),
-        error: Color(0xFFFF6467),
-        errorForeground: Color(0xFFFAFAFA),
-        card: Color(0xFF18181B),
-        border: Color(0x1AFFFFFF),
-      ),
+    dark: (
+      desktop: FThemeData(desktop: true, debugLabel: 'Green Dark Desktop', colors: FColors.greenDark),
+      touch: FThemeData(debugLabel: 'Green Dark Touch', colors: FColors.greenDark),
     ),
   );
 
-  /// The light and dark variants of the [Orange](https://ui.shadcn.com/themes) theme.
+  /// The [Orange](https://ui.shadcn.com/themes) theme.
   static final orange = (
-    light: FThemeData(
-      debugLabel: 'Orange Light ThemeData',
-      colors: const FColors(
-        brightness: .light,
-        systemOverlayStyle: .dark,
-        barrier: Color(0x33000000),
-        background: Color(0xFFFFFFFF),
-        foreground: Color(0xFF09090B),
-        primary: Color(0xFFF54A00),
-        primaryForeground: Color(0xFFFFF7ED),
-        secondary: Color(0xFFF4F4F5),
-        secondaryForeground: Color(0xFF18181B),
-        muted: Color(0xFFF4F4F5),
-        mutedForeground: Color(0xFF71717B),
-        destructive: Color(0xFFE7000B),
-        destructiveForeground: Color(0xFFFAFAFA),
-        error: Color(0xFFE7000B),
-        errorForeground: Color(0xFFFAFAFA),
-        card: Color(0xFFFFFFFF),
-        border: Color(0xFFE4E4E7),
-      ),
+    light: (
+      desktop: FThemeData(desktop: true, debugLabel: 'Orange Light Desktop', colors: FColors.orangeLight),
+      touch: FThemeData(debugLabel: 'Orange Light Touch', colors: FColors.orangeLight),
     ),
-    dark: FThemeData(
-      debugLabel: 'Orange Dark ThemeData',
-      colors: const FColors(
-        brightness: .dark,
-        systemOverlayStyle: .light,
-        barrier: Color(0x7A000000),
-        background: Color(0xFF09090B),
-        foreground: Color(0xFFFAFAFA),
-        primary: Color(0xFFFF6900),
-        primaryForeground: Color(0xFFFFF7ED),
-        secondary: Color(0xFF27272A),
-        secondaryForeground: Color(0xFFFAFAFA),
-        muted: Color(0xFF27272A),
-        mutedForeground: Color(0xFF9F9FA9),
-        destructive: Color(0xFFFF6467),
-        destructiveForeground: Color(0xFFFAFAFA),
-        error: Color(0xFFFF6467),
-        errorForeground: Color(0xFFFAFAFA),
-        card: Color(0xFF18181B),
-        border: Color(0x1AFFFFFF),
-      ),
+    dark: (
+      desktop: FThemeData(desktop: true, debugLabel: 'Orange Dark Desktop', colors: FColors.orangeDark),
+      touch: FThemeData(debugLabel: 'Orange Dark Touch', colors: FColors.orangeDark),
     ),
   );
 
-  /// The light and dark variants of the [Red](https://ui.shadcn.com/themes) theme.
+  /// The [Red](https://ui.shadcn.com/themes) theme.
   static final red = (
-    light: FThemeData(
-      debugLabel: 'Red Light ThemeData',
-      colors: const FColors(
-        brightness: .light,
-        systemOverlayStyle: .dark,
-        barrier: Color(0x33000000),
-        background: Color(0xFFFFFFFF),
-        foreground: Color(0xFF09090B),
-        primary: Color(0xFFE7000B),
-        primaryForeground: Color(0xFFFEF2F2),
-        secondary: Color(0xFFF4F4F5),
-        secondaryForeground: Color(0xFF18181B),
-        muted: Color(0xFFF4F4F5),
-        mutedForeground: Color(0xFF71717B),
-        destructive: Color(0xFFE7000B),
-        destructiveForeground: Color(0xFFFAFAFA),
-        error: Color(0xFFE7000B),
-        errorForeground: Color(0xFFFAFAFA),
-        card: Color(0xFFFFFFFF),
-        border: Color(0xFFE4E4E7),
-      ),
+    light: (
+      desktop: FThemeData(desktop: true, debugLabel: 'Red Light Desktop', colors: FColors.redLight),
+      touch: FThemeData(debugLabel: 'Red Light Touch', colors: FColors.redLight),
     ),
-    dark: FThemeData(
-      debugLabel: 'Red Dark ThemeData',
-      colors: const FColors(
-        brightness: .dark,
-        systemOverlayStyle: .light,
-        barrier: Color(0x7A000000),
-        background: Color(0xFF09090B),
-        foreground: Color(0xFFFAFAFA),
-        primary: Color(0xFFFB2C36),
-        primaryForeground: Color(0xFFFEF2F2),
-        secondary: Color(0xFF27272A),
-        secondaryForeground: Color(0xFFFAFAFA),
-        muted: Color(0xFF27272A),
-        mutedForeground: Color(0xFF9F9FA9),
-        destructive: Color(0xFFFF6467),
-        destructiveForeground: Color(0xFFFAFAFA),
-        error: Color(0xFFFF6467),
-        errorForeground: Color(0xFFFAFAFA),
-        card: Color(0xFF18181B),
-        border: Color(0x1AFFFFFF),
-      ),
+    dark: (
+      desktop: FThemeData(desktop: true, debugLabel: 'Red Dark Desktop', colors: FColors.redDark),
+      touch: FThemeData(debugLabel: 'Red Dark Touch', colors: FColors.redDark),
     ),
   );
 
-  /// The light and dark variants of the [Rose](https://ui.shadcn.com/themes) theme.
+  /// The [Rose](https://ui.shadcn.com/themes) theme.
   static final rose = (
-    light: FThemeData(
-      debugLabel: 'Rose Light ThemeData',
-      colors: const FColors(
-        brightness: .light,
-        systemOverlayStyle: .dark,
-        barrier: Color(0x33000000),
-        background: Color(0xFFFFFFFF),
-        foreground: Color(0xFF09090B),
-        primary: Color(0xFFEC003F),
-        primaryForeground: Color(0xFFFFF1F2),
-        secondary: Color(0xFFF4F4F5),
-        secondaryForeground: Color(0xFF18181B),
-        muted: Color(0xFFF4F4F5),
-        mutedForeground: Color(0xFF71717B),
-        destructive: Color(0xFFE7000B),
-        destructiveForeground: Color(0xFFFAFAFA),
-        error: Color(0xFFE7000B),
-        errorForeground: Color(0xFFFAFAFA),
-        card: Color(0xFFFFFFFF),
-        border: Color(0xFFE4E4E7),
-      ),
+    light: (
+      desktop: FThemeData(desktop: true, debugLabel: 'Rose Light Desktop', colors: FColors.roseLight),
+      touch: FThemeData(debugLabel: 'Rose Light Touch', colors: FColors.roseLight),
     ),
-    dark: FThemeData(
-      debugLabel: 'Rose Dark ThemeData',
-      colors: const FColors(
-        brightness: .dark,
-        systemOverlayStyle: .light,
-        barrier: Color(0x7A000000),
-        background: Color(0xFF09090B),
-        foreground: Color(0xFFFAFAFA),
-        primary: Color(0xFFFF2056),
-        primaryForeground: Color(0xFFFFF1F2),
-        secondary: Color(0xFF27272A),
-        secondaryForeground: Color(0xFFFAFAFA),
-        muted: Color(0xFF27272A),
-        mutedForeground: Color(0xFF9F9FA9),
-        destructive: Color(0xFFFF6467),
-        destructiveForeground: Color(0xFFFAFAFA),
-        error: Color(0xFFFF6467),
-        errorForeground: Color(0xFFFAFAFA),
-        card: Color(0xFF18181B),
-        border: Color(0x1AFFFFFF),
-      ),
+    dark: (
+      desktop: FThemeData(desktop: true, debugLabel: 'Rose Dark Desktop', colors: FColors.roseDark),
+      touch: FThemeData(debugLabel: 'Rose Dark Touch', colors: FColors.roseDark),
     ),
   );
 
-  /// The light and dark variants of the [Violet](https://ui.shadcn.com/themes) theme.
+  /// The [Violet](https://ui.shadcn.com/themes) theme.
   static final violet = (
-    light: FThemeData(
-      debugLabel: 'Violet Light ThemeData',
-      colors: const FColors(
-        brightness: .light,
-        systemOverlayStyle: .dark,
-        barrier: Color(0x33000000),
-        background: Color(0xFFFFFFFF),
-        foreground: Color(0xFF09090B),
-        primary: Color(0xFF7F22FE),
-        primaryForeground: Color(0xFFF5F3FF),
-        secondary: Color(0xFFF4F4F5),
-        secondaryForeground: Color(0xFF18181B),
-        muted: Color(0xFFF4F4F5),
-        mutedForeground: Color(0xFF71717B),
-        destructive: Color(0xFFE7000B),
-        destructiveForeground: Color(0xFFFAFAFA),
-        error: Color(0xFFE7000B),
-        errorForeground: Color(0xFFFAFAFA),
-        card: Color(0xFFFFFFFF),
-        border: Color(0xFFE4E4E7),
-      ),
+    light: (
+      desktop: FThemeData(desktop: true, debugLabel: 'Violet Light Desktop', colors: FColors.violetLight),
+      touch: FThemeData(debugLabel: 'Violet Light Touch', colors: FColors.violetLight),
     ),
-    dark: FThemeData(
-      debugLabel: 'Violet Dark ThemeData',
-      colors: const FColors(
-        brightness: .dark,
-        systemOverlayStyle: .light,
-        barrier: Color(0x7A000000),
-        background: Color(0xFF09090B),
-        foreground: Color(0xFFFAFAFA),
-        primary: Color(0xFF8E51FF),
-        primaryForeground: Color(0xFFF5F3FF),
-        secondary: Color(0xFF27272A),
-        secondaryForeground: Color(0xFFFAFAFA),
-        muted: Color(0xFF27272A),
-        mutedForeground: Color(0xFF9F9FA9),
-        destructive: Color(0xFFFF6467),
-        destructiveForeground: Color(0xFFFAFAFA),
-        error: Color(0xFFFF6467),
-        errorForeground: Color(0xFFFAFAFA),
-        card: Color(0xFF18181B),
-        border: Color(0x1AFFFFFF),
-      ),
+    dark: (
+      desktop: FThemeData(desktop: true, debugLabel: 'Violet Dark Desktop', colors: FColors.violetDark),
+      touch: FThemeData(debugLabel: 'Violet Dark Touch', colors: FColors.violetDark),
     ),
   );
 
-  /// The light and dark variants of the [Yellow](https://ui.shadcn.com/themes) theme.
+  /// The [Yellow](https://ui.shadcn.com/themes) theme.
   static final yellow = (
-    light: FThemeData(
-      debugLabel: 'Yellow Light ThemeData',
-      colors: const FColors(
-        brightness: .light,
-        systemOverlayStyle: .dark,
-        barrier: Color(0x33000000),
-        background: Color(0xFFFFFFFF),
-        foreground: Color(0xFF09090B),
-        primary: Color(0xFFFCC800),
-        primaryForeground: Color(0xFF733E0A),
-        secondary: Color(0xFFF4F4F5),
-        secondaryForeground: Color(0xFF18181B),
-        muted: Color(0xFFF4F4F5),
-        mutedForeground: Color(0xFF71717B),
-        destructive: Color(0xFFE7000B),
-        destructiveForeground: Color(0xFFFAFAFA),
-        error: Color(0xFFE7000B),
-        errorForeground: Color(0xFFFAFAFA),
-        card: Color(0xFFFFFFFF),
-        border: Color(0xFFE4E4E7),
-      ),
+    light: (
+      desktop: FThemeData(desktop: true, debugLabel: 'Yellow Light Desktop', colors: FColors.yellowLight),
+      touch: FThemeData(debugLabel: 'Yellow Light Touch', colors: FColors.yellowLight),
     ),
-    dark: FThemeData(
-      debugLabel: 'Yellow Dark ThemeData',
-      colors: const FColors(
-        brightness: .dark,
-        systemOverlayStyle: .light,
-        barrier: Color(0x7A000000),
-        background: Color(0xFF09090B),
-        foreground: Color(0xFFFAFAFA),
-        primary: Color(0xFFEFB100),
-        primaryForeground: Color(0xFF733E0A),
-        secondary: Color(0xFF27272A),
-        secondaryForeground: Color(0xFFFAFAFA),
-        muted: Color(0xFF27272A),
-        mutedForeground: Color(0xFF9F9FA9),
-        destructive: Color(0xFFFF6467),
-        destructiveForeground: Color(0xFFFAFAFA),
-        error: Color(0xFFFF6467),
-        errorForeground: Color(0xFFFAFAFA),
-        card: Color(0xFF18181B),
-        border: Color(0x1AFFFFFF),
-      ),
+    dark: (
+      desktop: FThemeData(desktop: true, debugLabel: 'Yellow Dark Desktop', colors: FColors.yellowDark),
+      touch: FThemeData(debugLabel: 'Yellow Dark Touch', colors: FColors.yellowDark),
     ),
   );
 }

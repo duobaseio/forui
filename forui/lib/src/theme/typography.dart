@@ -38,126 +38,177 @@ final class FTypography with Diagnosticable {
   /// Throws an [AssertionError] if empty.
   final String defaultFontFamily;
 
+  /// The font size for extra extra extra small text.
+  ///
+  /// Defaults to:
+  /// * Desktop — `fontSize` = 8, `height` = 1.
+  /// * Touch — `fontSize` = 10, `height` = 1.
+  final TextStyle xs3;
+
+  /// The font size for extra extra small text.
+  ///
+  /// Defaults to:
+  /// * Desktop — `fontSize` = 10, `height` = 1.
+  /// * Touch — `fontSize` = 12, `height` = 1.
+  final TextStyle xs2;
+
   /// The font size for extra small text.
   ///
   /// Defaults to:
-  /// * `fontSize` = 12.
-  /// * `height` = 1.
+  /// * Desktop — `fontSize` = 12, `height` = 1.
+  /// * Touch — `fontSize` = 14, `height` = 1.25.
   final TextStyle xs;
 
   /// The font size for small text.
   ///
   /// Defaults to:
-  /// * `fontSize` = 14.
-  /// * `height` = 1.25.
+  /// * Desktop — `fontSize` = 14, `height` = 1.25.
+  /// * Touch — `fontSize` = 16, `height` = 1.5.
   final TextStyle sm;
 
   /// The font size for medium text.
   ///
   /// Defaults to:
-  /// * `fontSize` = 16.
-  /// * `height` = 1.5.
+  /// * Desktop — `fontSize` = 16, `height` = 1.5.
+  /// * Touch — `fontSize` = 18, `height` = 1.75.
   final TextStyle md;
 
   /// The font size for large text.
   ///
   /// Defaults to:
-  /// * `fontSize` = 18.
-  /// * `height` = 1.75.
+  /// * Desktop — `fontSize` = 18, `height` = 1.75.
+  /// * Touch — `fontSize` = 20, `height` = 1.75.
   final TextStyle lg;
 
   /// The font size for extra large text.
   ///
   /// Defaults to:
-  /// * `fontSize` = 20.
-  /// * `height` = 1.75.
+  /// * Desktop — `fontSize` = 20, `height` = 1.75.
+  /// * Touch — `fontSize` = 22, `height` = 2.
   final TextStyle xl;
 
   /// The font size for extra large text.
   ///
   /// Defaults to:
-  /// * `fontSize` = 22.
-  /// * `height` = 2.
+  /// * Desktop — `fontSize` = 22, `height` = 2.
+  /// * Touch — `fontSize` = 30, `height` = 2.25.
   final TextStyle xl2;
 
   /// The font size for extra large text.
   ///
   /// Defaults to:
-  /// * `fontSize` = 30.
-  /// * `height` = 2.25.
+  /// * Desktop — `fontSize` = 30, `height` = 2.25.
+  /// * Touch — `fontSize` = 36, `height` = 2.5.
   final TextStyle xl3;
 
   /// The font size for extra large text.
   ///
   /// Defaults to:
-  /// * `fontSize` = 36.
-  /// * `height` = 2.5.
+  /// * Desktop — `fontSize` = 36, `height` = 2.5.
+  /// * Touch — `fontSize` = 48, `height` = 1.
   final TextStyle xl4;
 
   /// The font size for extra large text.
   ///
   /// Defaults to:
-  /// * `fontSize` = 48.
-  /// * `height` = 1.
+  /// * Desktop — `fontSize` = 48, `height` = 1.
+  /// * Touch — `fontSize` = 60, `height` = 1.
   final TextStyle xl5;
 
   /// The font size for extra large text.
   ///
   /// Defaults to:
-  /// * `fontSize` = 60.
-  /// * `height` = 1.
+  /// * Desktop — `fontSize` = 60, `height` = 1.
+  /// * Touch — `fontSize` = 72, `height` = 1.
   final TextStyle xl6;
 
   /// The font size for extra large text.
   ///
   /// Defaults to:
-  /// * `fontSize` = 72.
-  /// * `height` = 1.
+  /// * Desktop — `fontSize` = 72, `height` = 1.
+  /// * Touch — `fontSize` = 96, `height` = 1.
   final TextStyle xl7;
 
   /// The font size for extra large text.
   ///
   /// Defaults to:
-  /// * `fontSize` = 96.
-  /// * `height` = 1.
+  /// * Desktop — `fontSize` = 96, `height` = 1.
+  /// * Touch — `fontSize` = 108, `height` = 1.
   final TextStyle xl8;
 
-  /// Creates a [FTypography].
+  /// Creates a [FTypography] that defaults to touch font sizes.
   const FTypography({
     this.defaultFontFamily = 'packages/forui/Inter',
-    this.xs = const TextStyle(fontSize: 12, height: 1),
-    this.sm = const TextStyle(fontSize: 14, height: 1.25),
-    this.md = const TextStyle(fontSize: 16, height: 1.5),
-    this.lg = const TextStyle(fontSize: 18, height: 1.75),
-    this.xl = const TextStyle(fontSize: 20, height: 1.75),
-    this.xl2 = const TextStyle(fontSize: 22, height: 2),
-    this.xl3 = const TextStyle(fontSize: 30, height: 2.25),
-    this.xl4 = const TextStyle(fontSize: 36, height: 2.5),
-    this.xl5 = const TextStyle(fontSize: 48, height: 1),
-    this.xl6 = const TextStyle(fontSize: 60, height: 1),
-    this.xl7 = const TextStyle(fontSize: 72, height: 1),
-    this.xl8 = const TextStyle(fontSize: 96, height: 1),
+    this.xs3 = const TextStyle(fontSize: 10, height: 1),
+    this.xs2 = const TextStyle(fontSize: 12, height: 1),
+    this.xs = const TextStyle(fontSize: 14, height: 1.25),
+    this.sm = const TextStyle(fontSize: 16, height: 1.5),
+    this.md = const TextStyle(fontSize: 18, height: 1.75),
+    this.lg = const TextStyle(fontSize: 20, height: 1.75),
+    this.xl = const TextStyle(fontSize: 22, height: 2),
+    this.xl2 = const TextStyle(fontSize: 30, height: 2.25),
+    this.xl3 = const TextStyle(fontSize: 36, height: 2.5),
+    this.xl4 = const TextStyle(fontSize: 48, height: 1),
+    this.xl5 = const TextStyle(fontSize: 60, height: 1),
+    this.xl6 = const TextStyle(fontSize: 72, height: 1),
+    this.xl7 = const TextStyle(fontSize: 96, height: 1),
+    this.xl8 = const TextStyle(fontSize: 108, height: 1),
   }) : assert(0 < defaultFontFamily.length, 'defaultFontFamily ($defaultFontFamily) should not be empty.');
 
   /// Creates a [FTypography] that inherits its properties.
-  FTypography.inherit({required FColors colors, this.defaultFontFamily = 'packages/forui/Inter'})
-    : xs = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 12, height: 1),
-      sm = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 14, height: 1.25),
-      md = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 16, height: 1.5),
-      lg = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 18, height: 1.75),
-      xl = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 20, height: 1.75),
-      xl2 = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 22, height: 2),
-      xl3 = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 30, height: 2.25),
-      xl4 = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 36, height: 2.5),
-      xl5 = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 48, height: 1),
-      xl6 = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 60, height: 1),
-      xl7 = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 72, height: 1),
-      xl8 = TextStyle(color: colors.foreground, fontFamily: defaultFontFamily, fontSize: 96, height: 1),
-      assert(defaultFontFamily.isNotEmpty, 'defaultFontFamily ($defaultFontFamily) should not be empty.');
+  factory FTypography.inherit({
+    required FColors colors,
+    String defaultFontFamily = 'packages/forui/Inter',
+    bool desktop = false,
+  }) {
+    assert(defaultFontFamily.isNotEmpty, 'defaultFontFamily ($defaultFontFamily) should not be empty.');
+    final color = colors.foreground;
+    final font = defaultFontFamily;
+
+    if (desktop) {
+      return FTypography(
+        defaultFontFamily: defaultFontFamily,
+        xs3: TextStyle(color: color, fontFamily: font, fontSize: 8, height: 1),
+        xs2: TextStyle(color: color, fontFamily: font, fontSize: 10, height: 1),
+        xs: TextStyle(color: color, fontFamily: font, fontSize: 12, height: 1),
+        sm: TextStyle(color: color, fontFamily: font, fontSize: 14, height: 1.25),
+        md: TextStyle(color: color, fontFamily: font, fontSize: 16, height: 1.5),
+        lg: TextStyle(color: color, fontFamily: font, fontSize: 18, height: 1.75),
+        xl: TextStyle(color: color, fontFamily: font, fontSize: 20, height: 1.75),
+        xl2: TextStyle(color: color, fontFamily: font, fontSize: 22, height: 2),
+        xl3: TextStyle(color: color, fontFamily: font, fontSize: 30, height: 2.25),
+        xl4: TextStyle(color: color, fontFamily: font, fontSize: 36, height: 2.5),
+        xl5: TextStyle(color: color, fontFamily: font, fontSize: 48, height: 1),
+        xl6: TextStyle(color: color, fontFamily: font, fontSize: 60, height: 1),
+        xl7: TextStyle(color: color, fontFamily: font, fontSize: 72, height: 1),
+        xl8: TextStyle(color: color, fontFamily: font, fontSize: 96, height: 1),
+      );
+    } else {
+      return FTypography(
+        defaultFontFamily: defaultFontFamily,
+        xs3: TextStyle(color: color, fontFamily: font, fontSize: 10, height: 1),
+        xs2: TextStyle(color: color, fontFamily: font, fontSize: 12, height: 1),
+        xs: TextStyle(color: color, fontFamily: font, fontSize: 14, height: 1.25),
+        sm: TextStyle(color: color, fontFamily: font, fontSize: 16, height: 1.5),
+        md: TextStyle(color: color, fontFamily: font, fontSize: 18, height: 1.75),
+        lg: TextStyle(color: color, fontFamily: font, fontSize: 20, height: 1.75),
+        xl: TextStyle(color: color, fontFamily: font, fontSize: 22, height: 2),
+        xl2: TextStyle(color: color, fontFamily: font, fontSize: 30, height: 2.25),
+        xl3: TextStyle(color: color, fontFamily: font, fontSize: 36, height: 2.5),
+        xl4: TextStyle(color: color, fontFamily: font, fontSize: 48, height: 1),
+        xl5: TextStyle(color: color, fontFamily: font, fontSize: 60, height: 1),
+        xl6: TextStyle(color: color, fontFamily: font, fontSize: 72, height: 1),
+        xl7: TextStyle(color: color, fontFamily: font, fontSize: 96, height: 1),
+        xl8: TextStyle(color: color, fontFamily: font, fontSize: 108, height: 1),
+      );
+    }
+  }
 
   /// Creates a linear interpolation between two [FTypography]s using the given factor [t].
   factory FTypography.lerp(FTypography a, FTypography b, double t) => .new(
     defaultFontFamily: t < 0.5 ? a.defaultFontFamily : b.defaultFontFamily,
+    xs3: .lerp(a.xs3, b.xs3, t)!,
+    xs2: .lerp(a.xs2, b.xs2, t)!,
     xs: .lerp(a.xs, b.xs, t)!,
     sm: .lerp(a.sm, b.sm, t)!,
     md: .lerp(a.md, b.md, t)!,
@@ -188,6 +239,8 @@ final class FTypography with Diagnosticable {
   @useResult
   FTypography scale({double sizeScalar = 1}) => .new(
     defaultFontFamily: defaultFontFamily,
+    xs3: _scaleTextStyle(style: xs3, sizeScalar: sizeScalar),
+    xs2: _scaleTextStyle(style: xs2, sizeScalar: sizeScalar),
     xs: _scaleTextStyle(style: xs, sizeScalar: sizeScalar),
     sm: _scaleTextStyle(style: sm, sizeScalar: sizeScalar),
     md: _scaleTextStyle(style: md, sizeScalar: sizeScalar),
@@ -225,6 +278,8 @@ final class FTypography with Diagnosticable {
   /// ```
   @useResult
   FTypography copyWith({
+    TextStyle? xs3,
+    TextStyle? xs2,
     TextStyle? xs,
     TextStyle? sm,
     TextStyle? md,
@@ -239,6 +294,8 @@ final class FTypography with Diagnosticable {
     TextStyle? xl8,
   }) => FTypography(
     defaultFontFamily: defaultFontFamily,
+    xs3: xs3 ?? this.xs3,
+    xs2: xs2 ?? this.xs2,
     xs: xs ?? this.xs,
     sm: sm ?? this.sm,
     md: md ?? this.md,
@@ -258,6 +315,8 @@ final class FTypography with Diagnosticable {
     super.debugFillProperties(properties);
     properties
       ..add(StringProperty('defaultFontFamily', defaultFontFamily, defaultValue: 'packages/forui/Inter'))
+      ..add(DiagnosticsProperty('xs3', xs3))
+      ..add(DiagnosticsProperty('xs2', xs2))
       ..add(DiagnosticsProperty('xs', xs))
       ..add(DiagnosticsProperty('sm', sm))
       ..add(DiagnosticsProperty('md', md))
@@ -278,6 +337,8 @@ final class FTypography with Diagnosticable {
       other is FTypography &&
           runtimeType == other.runtimeType &&
           defaultFontFamily == other.defaultFontFamily &&
+          xs3 == other.xs3 &&
+          xs2 == other.xs2 &&
           xs == other.xs &&
           sm == other.sm &&
           md == other.md &&
@@ -294,6 +355,8 @@ final class FTypography with Diagnosticable {
   @override
   int get hashCode =>
       defaultFontFamily.hashCode ^
+      xs3.hashCode ^
+      xs2.hashCode ^
       xs.hashCode ^
       sm.hashCode ^
       md.hashCode ^

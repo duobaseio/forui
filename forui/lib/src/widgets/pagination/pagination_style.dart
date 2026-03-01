@@ -13,7 +13,7 @@ class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
   @override
   final EdgeInsets itemPadding;
 
-  /// The item's constraints. Defaults to `BoxConstraints(maxWidth: 40, minWidth: 40, maxHeight: 40, minHeight: 40)`.
+  /// The item's constraints. Defaults to `BoxConstraints(maxWidth: 36, minWidth: 36, maxHeight: 36, minHeight: 36)`.
   @override
   final BoxConstraints itemConstraints;
 
@@ -55,13 +55,13 @@ class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
     required this.pageTappableStyle,
     required this.focusedOutlineStyle,
     this.itemPadding = const .symmetric(horizontal: 2),
-    this.itemConstraints = const .tightFor(width: 40.0, height: 40.0),
+    this.itemConstraints = const .tightFor(width: 32.0, height: 32.0),
   });
 
   /// Creates a [FPaginationStyle] that inherits its properties.
   FPaginationStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        itemIconStyle: .all(IconThemeData(color: colors.foreground, size: 18)),
+        itemIconStyle: .all(IconThemeData(color: colors.foreground, size: typography.md.fontSize)),
         itemDecoration: FVariants.from(
           ShapeDecoration(
             shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),

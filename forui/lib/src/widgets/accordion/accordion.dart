@@ -155,11 +155,11 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
   @override
   final TextStyle childTextStyle;
 
-  /// The padding around the title. Defaults to `EdgeInsets.symmetric(vertical: 15)`.
+  /// The padding around the title. Defaults to `EdgeInsets.symmetric(vertical: 16)`.
   @override
   final EdgeInsetsGeometry titlePadding;
 
-  /// The padding around the content. Defaults to `EdgeInsets.only(bottom: 15)`.
+  /// The padding around the content. Defaults to `EdgeInsets.only(bottom: 16)`.
   @override
   final EdgeInsetsGeometry childPadding;
 
@@ -191,26 +191,35 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
     required this.focusedOutlineStyle,
     required this.dividerStyle,
     required this.tappableStyle,
-    this.titlePadding = const .symmetric(vertical: 15),
-    this.childPadding = const .only(bottom: 15),
+    this.titlePadding = const .symmetric(vertical: 16),
+    this.childPadding = const .only(bottom: 16),
     this.motion = const FAccordionMotion(),
   });
 
   /// Creates a [FDividerStyles] that inherits its properties.
-  FAccordionStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        titleTextStyle: FVariants.from(
-          typography.md.copyWith(fontWeight: .w500, color: colors.foreground),
-          variants: {
-            [.hovered, .pressed]: .delta(decoration: () => .underline),
-          },
-        ),
-        childTextStyle: typography.sm.copyWith(color: colors.foreground),
-        iconStyle: .all(IconThemeData(color: colors.mutedForeground, size: 20)),
-        focusedOutlineStyle: style.focusedOutlineStyle,
-        dividerStyle: FDividerStyle(color: colors.border, padding: .zero),
-        tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
-      );
+  FAccordionStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+    bool desktop = false,
+  }) : this(
+         titleTextStyle: .from(
+           typography.sm.copyWith(fontWeight: .w500, color: colors.foreground),
+           variants: {
+             [.hovered, .pressed]: .delta(decoration: () => .underline),
+           },
+         ),
+         childTextStyle: typography.sm.copyWith(color: colors.foreground),
+         iconStyle: .all(
+           IconThemeData(
+             color: colors.mutedForeground,
+             size: desktop ? typography.md.fontSize : typography.lg.fontSize,
+           ),
+         ),
+         focusedOutlineStyle: style.focusedOutlineStyle,
+         dividerStyle: FDividerStyle(color: colors.border, padding: .zero),
+         tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
+       );
 }
 
 /// Motion-related properties for [FAccordion].

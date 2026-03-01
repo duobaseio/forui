@@ -18,7 +18,7 @@ part 'theme.design.dart';
 /// class Parent extends StatelessWidget {
 ///   @override
 ///   Widget build(BuildContext context) => FTheme(
-///      data: FThemes.neutral.light,
+///      data: FThemes.neutral.light.touch,
 ///      child: Child(),
 ///    );
 ///  }
@@ -37,14 +37,14 @@ part 'theme.design.dart';
 /// See:
 /// * [FBasicTheme], the non-animated theme widget wrapped by this widget.
 /// * [FThemeData] which describes the actual configuration of a theme.
-class FTheme extends ImplicitlyAnimatedWidget {
-  /// Returns the current [FThemeData], or `FThemes.neutral.light` if there is no ancestor [FTheme].
+class FTheme extends StatelessWidget {
+  /// Returns the current [FThemeData], or `FThemes.neutral.light.touch` if there is no ancestor [FTheme].
   ///
   /// It is recommended to use the terser [FThemeBuildContext.theme] getter instead.
   ///
   /// ## Troubleshooting:
   ///
-  /// ### [FTheme.of] always returns `FThemes.neutral.light`
+  /// ### [FTheme.of] always returns `FThemes.neutral.light.touch`
   ///
   /// One of the most common causes is calling [FTheme.of] in the same context which [FTheme] was declared. To fix this,
   /// move the call to [FTheme.of] to a descendant widget.
@@ -54,7 +54,7 @@ class FTheme extends ImplicitlyAnimatedWidget {
   /// class Parent extends StatelessWidget {
   ///   @override
   ///   Widget build(BuildContext context) => FTheme(
-  ///      data: FThemes.neutral.light,
+  ///      data: FThemes.neutral.light.touch,
   ///      child: Child(),
   ///    );
   ///  }
@@ -73,7 +73,7 @@ class FTheme extends ImplicitlyAnimatedWidget {
   /// class Parent extends StatelessWidget {
   ///   @override
   ///   Widget build(BuildContext context) => FTheme(
-  ///      data: FThemes.neutral.light,
+  ///      data: FThemes.neutral.light.touch,
   ///      child: SomeWidget(
   ///        theme: FTheme.of(context), // Whoops!
   ///      ),
@@ -83,7 +83,7 @@ class FTheme extends ImplicitlyAnimatedWidget {
   @useResult
   static FThemeData of(BuildContext context) {
     final theme = context.dependOnInheritedWidgetOfExactType<_InheritedTheme>();
-    return theme?.data ?? FThemes.neutral.light;
+    return theme?.data ?? FThemes.neutral.light.touch;
   }
 
   /// Motion-related properties for the animation.
@@ -98,22 +98,32 @@ class FTheme extends ImplicitlyAnimatedWidget {
   /// The platform variant. Defaults to the current platform.
   final FPlatformVariant? platform;
 
+  /// Called every time an animation completes.
+  final VoidCallback? onEnd;
+
   /// The widget below this widget in the tree.
   final Widget child;
 
   /// Creates an animated theme.
-  FTheme({
+  const FTheme({
     required this.data,
     required this.child,
     this.textDirection,
     this.platform,
     this.motion = const FThemeMotion(),
-    super.onEnd,
+    this.onEnd,
     super.key,
-  }) : super(duration: motion.duration, curve: motion.curve);
+  });
 
   @override
-  AnimatedWidgetBaseState<FTheme> createState() => _State();
+  Widget build(BuildContext context) => _AnimatedTheme(
+    data: data,
+    textDirection: textDirection ?? Directionality.maybeOf(context) ?? .ltr,
+    platform: platform,
+    motion: motion,
+    onEnd: onEnd,
+    child: child,
+  );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -122,11 +132,40 @@ class FTheme extends ImplicitlyAnimatedWidget {
       ..add(DiagnosticsProperty('motion', motion))
       ..add(DiagnosticsProperty('data', data))
       ..add(EnumProperty('textDirection', textDirection))
+      ..add(DiagnosticsProperty('platform', platform))
+      ..add(ObjectFlagProperty.has('onEnd', onEnd));
+  }
+}
+
+class _AnimatedTheme extends ImplicitlyAnimatedWidget {
+  final FThemeData data;
+  final TextDirection textDirection;
+  final FPlatformVariant? platform;
+  final Widget child;
+
+  _AnimatedTheme({
+    required this.data,
+    required this.textDirection,
+    required this.child,
+    this.platform,
+    FThemeMotion motion = const FThemeMotion(),
+    super.onEnd,
+  }) : super(duration: motion.duration, curve: motion.curve);
+
+  @override
+  AnimatedWidgetBaseState<_AnimatedTheme> createState() => _AnimatedThemeState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('data', data))
+      ..add(EnumProperty('textDirection', textDirection))
       ..add(DiagnosticsProperty('platform', platform));
   }
 }
 
-class _State extends AnimatedWidgetBaseState<FTheme> {
+class _AnimatedThemeState extends AnimatedWidgetBaseState<_AnimatedTheme> {
   _Tween? _tween;
 
   @override
@@ -137,7 +176,7 @@ class _State extends AnimatedWidgetBaseState<FTheme> {
   @override
   Widget build(BuildContext context) => FBasicTheme(
     data: _tween!.evaluate(animation),
-    textDirection: widget.textDirection ?? Directionality.maybeOf(context) ?? .ltr,
+    textDirection: widget.textDirection,
     platform: widget.platform,
     child: widget.child,
   );
@@ -169,11 +208,11 @@ class FThemeMotion with Diagnosticable, _$FThemeMotionFunctions {
 
 /// Provides functions for accessing the current [FThemeData].
 extension FThemeBuildContext on BuildContext {
-  /// Returns the current [FThemeData], or `FThemes.neutral.light` if there is no ancestor [FTheme].
+  /// Returns the current [FThemeData], or `FThemes.neutral.light.touch` if there is no ancestor [FTheme].
   ///
   /// ## Troubleshooting:
   ///
-  /// ### [theme] always returns `FThemes.neutral.light`
+  /// ### [theme] always returns `FThemes.neutral.light.touch`
   ///
   /// One of the most common causes is calling [theme] in the same context which [FTheme] was declared. To fix this,
   /// move the call to [theme] to a descendant widget.
@@ -183,7 +222,7 @@ extension FThemeBuildContext on BuildContext {
   /// class Parent extends StatelessWidget {
   ///   @override
   ///   Widget build(BuildContext context) => FTheme(
-  ///      data: FThemes.neutral.light,
+  ///      data: FThemes.neutral.light.touch,
   ///      child: Child(),
   ///    );
   ///  }
@@ -202,7 +241,7 @@ extension FThemeBuildContext on BuildContext {
   /// class Parent extends StatelessWidget {
   ///   @override
   ///   Widget build(BuildContext context) => FTheme(
-  ///      data: FThemes.neutral.light,
+  ///      data: FThemes.neutral.light.touch,
   ///      child: SomeWidget(
   ///        theme: context.theme, // Whoops!
   ///      ),
@@ -241,7 +280,7 @@ class FBasicTheme extends StatelessWidget {
       child: Directionality(
         textDirection: textDirection ?? Directionality.maybeOf(context) ?? .ltr,
         child: DefaultTextStyle(
-          style: data.typography.md.copyWith(
+          style: data.typography.sm.copyWith(
             fontFamily: data.typography.defaultFontFamily,
             color: data.colors.foreground,
           ),

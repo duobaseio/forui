@@ -397,7 +397,8 @@ class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
           color: colors.card,
           shadows: FTooltipStyle.shadow,
         ),
-        textStyle: typography.sm,
+        padding: const .symmetric(horizontal: 14, vertical: 10),
+        textStyle: typography.xs,
       );
 }
 

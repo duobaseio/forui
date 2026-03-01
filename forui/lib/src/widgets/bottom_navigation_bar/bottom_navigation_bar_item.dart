@@ -161,7 +161,7 @@ class FBottomNavigationBarItemStyle with Diagnosticable, _$FBottomNavigationBarI
            },
          ),
          textStyle: FVariants.from(
-           typography.md.copyWith(color: colors.mutedForeground, fontSize: 10),
+           typography.xs3.copyWith(color: colors.mutedForeground, height: 1.5),
            variants: {
              [.hovered, .pressed]: .delta(color: colors.hover(colors.mutedForeground)),
              [.selected]: .delta(color: colors.primary, fontWeight: .bold),

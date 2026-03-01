@@ -831,7 +831,7 @@ class FSelectStyle with Diagnosticable, _$FSelectStyleFunctions {
   /// Creates a [FSelectStyle] that inherits its properties.
   FSelectStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
-        fieldStyle: .inherit(colors: colors, typography: typography, style: style),
+        fieldStyle: FTextFieldSizeStyles.inherit(colors: colors, typography: typography, style: style).md,
         searchStyle: .inherit(colors: colors, typography: typography, style: style),
         contentStyle: .inherit(colors: colors, typography: typography, style: style),
         emptyTextStyle: typography.sm,

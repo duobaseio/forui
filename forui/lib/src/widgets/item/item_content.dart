@@ -134,7 +134,9 @@ class ItemContent extends StatelessWidget {
 
 /// An [FItem] content's style.
 class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
-  /// The content's padding. Defaults to `const EdgeInsetsDirectional.only(start: 11, top: 7.5, bottom: 7.5, end: 6)`.
+  /// The content's padding.
+  ///
+  /// Defaults to `EdgeInsetsDirectional.only(start: 10, top: 12.5, bottom: 12.5, end: 6)`
   @override
   final EdgeInsetsGeometry padding;
 
@@ -142,7 +144,7 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
   @override
   final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> prefixIconStyle;
 
-  /// The horizontal spacing between the prefix icon and title and the subtitle. Defaults to 10.
+  /// The horizontal spacing between the prefix icon and title and the subtitle. Defaults to 8.
   ///
   /// ## Contract
   /// Throws [AssertionError] if [prefixIconSpacing] is negative.
@@ -179,7 +181,7 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
   @override
   final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> suffixIconStyle;
 
-  /// The horizontal spacing between the details and suffix icon. Defaults to 10.
+  /// The horizontal spacing between the details and suffix icon. Defaults to 8.
   ///
   /// ## Contract
   /// Throws [AssertionError] if [suffixIconSpacing] is negative.
@@ -193,11 +195,11 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
     required this.subtitleTextStyle,
     required this.detailsTextStyle,
     required this.suffixIconStyle,
-    this.padding = const .directional(start: 11, top: 7.5, bottom: 7.5, end: 6),
-    this.prefixIconSpacing = 10,
-    this.titleSpacing = 3,
+    required this.padding,
+    this.prefixIconSpacing = 8,
+    this.titleSpacing = 4,
     this.middleSpacing = 4,
-    this.suffixIconSpacing = 5,
+    this.suffixIconSpacing = 8,
   }) : assert(0 <= prefixIconSpacing, 'prefixIconSpacing ($prefixIconSpacing) must be >= 0'),
        assert(0 <= titleSpacing, 'titleSpacing ($titleSpacing) must be >= 0'),
        assert(0 <= middleSpacing, 'middleSpacing ($middleSpacing) must be >= 0'),
@@ -210,39 +212,43 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
     required Color prefix,
     required Color foreground,
     required Color mutedForeground,
+    bool desktop = false,
   }) {
     final disabledMutedForeground = colors.disable(mutedForeground);
     return FItemContentStyle(
-      prefixIconStyle: FVariants.from(
-        IconThemeData(color: prefix, size: 15),
+      prefixIconStyle: .from(
+        IconThemeData(color: prefix, size: typography.md.fontSize),
         variants: {
           [.disabled]: .delta(color: colors.disable(prefix)),
         },
       ),
-      titleTextStyle: FVariants.from(
+      titleTextStyle: .from(
         typography.sm.copyWith(color: foreground),
         variants: {
           [.disabled]: .delta(color: colors.disable(foreground)),
         },
       ),
-      subtitleTextStyle: FVariants.from(
+      subtitleTextStyle: .from(
         typography.xs.copyWith(color: mutedForeground),
         variants: {
           [.disabled]: .delta(color: disabledMutedForeground),
         },
       ),
-      detailsTextStyle: FVariants.from(
+      detailsTextStyle: .from(
         typography.xs.copyWith(color: mutedForeground),
         variants: {
           [.disabled]: .delta(color: disabledMutedForeground),
         },
       ),
-      suffixIconStyle: FVariants.from(
-        IconThemeData(color: mutedForeground, size: 15),
+      suffixIconStyle: .from(
+        IconThemeData(color: mutedForeground, size: typography.md.fontSize),
         variants: {
           [.disabled]: .delta(color: disabledMutedForeground),
         },
       ),
+      padding: desktop
+          ? const .directional(start: 10, top: 6, bottom: 5, end: 5)
+          : const .directional(start: 10, top: 12.5, bottom: 12.5, end: 6),
     );
   }
 }

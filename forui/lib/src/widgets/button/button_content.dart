@@ -98,11 +98,11 @@ class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFunctions {
   final FVariants<FTappableVariantConstraint, FTappableVariant, FCircularProgressStyle, FCircularProgressStyleDelta>
   circularProgressStyle;
 
-  /// The padding. Defaults to `EdgeInsets.symmetric(horizontal: 16, vertical: 12.5)`.
+  /// The padding.
   @override
   final EdgeInsetsGeometry padding;
 
-  /// The spacing between prefix, child, and suffix. Defaults to 10.
+  /// The spacing between prefix, child, and suffix..
   @override
   final double spacing;
 
@@ -111,8 +111,8 @@ class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFunctions {
     required this.textStyle,
     required this.iconStyle,
     required this.circularProgressStyle,
-    this.padding = const .symmetric(horizontal: 16, vertical: 12.5),
-    this.spacing = 10,
+    this.padding = const .symmetric(horizontal: 10, vertical: 11),
+    this.spacing = 6,
   });
 }
 
@@ -122,10 +122,10 @@ class FButtonIconContentStyle with Diagnosticable, _$FButtonIconContentStyleFunc
   @override
   final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> iconStyle;
 
-  /// The padding. Defaults to `EdgeInsets.all(7.5)`.
+  /// The padding. Defaults to `EdgeInsets.all(10)`.
   @override
   final EdgeInsetsGeometry padding;
 
   /// Creates a [FButtonIconContentStyle].
-  const FButtonIconContentStyle({required this.iconStyle, this.padding = const .all(7.5)});
+  const FButtonIconContentStyle({required this.iconStyle, this.padding = const .all(10)});
 }

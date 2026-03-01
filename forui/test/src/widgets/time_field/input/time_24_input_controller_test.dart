@@ -67,7 +67,7 @@ void main() {
           FLocalizationsFrCa(),
           autoDispose(FTimeFieldController()),
           DateFormat.jm('fr_CA'),
-          TestScaffold.blueScreen.textFieldStyle,
+          TestScaffold.blueScreen.textFieldStyles.md,
           'HH h MM',
           old,
         )..value = value;
@@ -97,7 +97,7 @@ void main() {
           FLocalizationsFrCa(),
           autoDispose(FTimeFieldController()),
           DateFormat.jm('fr_CA'),
-          TestScaffold.blueScreen.textFieldStyle,
+          TestScaffold.blueScreen.textFieldStyles.md,
           'HH h MM',
           value,
         )..traverse(forward: true);
@@ -125,7 +125,7 @@ void main() {
           FLocalizationsFrCa(),
           autoDispose(FTimeFieldController()),
           DateFormat.jm('fr_CA'),
-          TestScaffold.blueScreen.textFieldStyle,
+          TestScaffold.blueScreen.textFieldStyles.md,
           'HH h MM',
           value,
         )..traverse(forward: false);
@@ -164,7 +164,7 @@ void main() {
           FLocalizationsFrCa(),
           autoDispose(FTimeFieldController()),
           DateFormat.jm('fr_CA'),
-          TestScaffold.blueScreen.textFieldStyle,
+          TestScaffold.blueScreen.textFieldStyles.md,
           'HH h MM',
           value,
         ),
@@ -210,7 +210,7 @@ void main() {
           FLocalizationsEu(),
           autoDispose(FTimeFieldController()),
           DateFormat.jm('eu'),
-          TestScaffold.blueScreen.textFieldStyle,
+          TestScaffold.blueScreen.textFieldStyles.md,
         );
 
         expect(controller.selector.navigate(value), expected);
@@ -253,7 +253,7 @@ void main() {
           FLocalizationsFrCa(),
           autoDispose(FTimeFieldController()),
           DateFormat.jm('fr_CA'),
-          TestScaffold.blueScreen.textFieldStyle,
+          TestScaffold.blueScreen.textFieldStyles.md,
         );
 
         expect(controller.selector.navigate(value), expected);
@@ -283,7 +283,7 @@ void main() {
           FLocalizationsBg(),
           autoDispose(FTimeFieldController()),
           DateFormat.jm('bg'),
-          TestScaffold.blueScreen.textFieldStyle,
+          TestScaffold.blueScreen.textFieldStyles.md,
         );
 
         expect(controller.selector.navigate(value), expected);
@@ -301,7 +301,7 @@ void main() {
         FLocalizationsBg(),
         timeController,
         DateFormat.jm('bg'),
-        TestScaffold.blueScreen.textFieldStyle,
+        TestScaffold.blueScreen.textFieldStyles.md,
       );
       timeController.value = value;
 

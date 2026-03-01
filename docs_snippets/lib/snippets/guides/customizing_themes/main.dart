@@ -9,7 +9,7 @@ import 'theme.dart';
 
 // {@endsnippet}
 
-final neutralLight = FThemes.neutral.light;
+final neutralLight = FThemes.neutral.light.touch;
 
 // {@snippet}
 void main() {

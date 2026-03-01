@@ -152,7 +152,7 @@ class FAutocompleteContentStyle extends FPopoverStyle with Diagnosticable, _$FAu
   @override
   final TextStyle emptyTextStyle;
 
-  /// The padding surrounding the content. Defaults to `const EdgeInsets.symmetric(vertical: 5)`.
+  /// The padding surrounding the content. Defaults to `const EdgeInsets.symmetric(vertical: 6)`.
   @override
   final EdgeInsetsGeometry padding;
 
@@ -170,7 +170,7 @@ class FAutocompleteContentStyle extends FPopoverStyle with Diagnosticable, _$FAu
     required this.progressStyle,
     required this.sectionStyle,
     required super.decoration,
-    this.padding = const .symmetric(vertical: 5),
+    this.padding = const .symmetric(vertical: 6),
     super.barrierFilter,
     super.backgroundFilter,
     super.viewInsets,
@@ -181,6 +181,6 @@ class FAutocompleteContentStyle extends FPopoverStyle with Diagnosticable, _$FAu
     : emptyTextStyle = typography.sm,
       progressStyle = .inherit(colors: colors),
       sectionStyle = .inherit(colors: colors, style: style, typography: typography),
-      padding = const .symmetric(vertical: 5),
+      padding = const .symmetric(vertical: 6),
       super.inherit();
 }

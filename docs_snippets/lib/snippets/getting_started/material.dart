@@ -18,7 +18,7 @@ class Application extends StatelessWidget {
   Widget build(BuildContext context) => CupertinoApp(
     // {@endhighlight}
     builder: (context, child) => FTheme(
-      data: FThemes.neutral.light,
+      data: FThemes.neutral.light.touch,
       child: FToaster(child: FTooltipGroup(child: child!)),
     ),
     home: const FScaffold(child: Placeholder()),

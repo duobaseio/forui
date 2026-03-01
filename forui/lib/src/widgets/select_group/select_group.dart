@@ -256,7 +256,7 @@ class FSelectGroupStyle extends FLabelStyle with Diagnosticable, _$FSelectGroupS
   @override
   final FRadioStyle radioStyle;
 
-  /// The padding surrounding an item. Defaults to `EdgeInsets.symmetric(vertical: 2)`.
+  /// The padding surrounding an item. Defaults to `EdgeInsets.symmetric(vertical: 4)`.
   @override
   final EdgeInsetsGeometry itemPadding;
 
@@ -267,7 +267,7 @@ class FSelectGroupStyle extends FLabelStyle with Diagnosticable, _$FSelectGroupS
     required super.labelTextStyle,
     required super.descriptionTextStyle,
     required super.errorTextStyle,
-    this.itemPadding = const .symmetric(vertical: 2),
+    this.itemPadding = const .symmetric(vertical: 4),
     super.labelPadding,
     super.descriptionPadding,
     super.errorPadding,

@@ -26,6 +26,8 @@ part 'nested_header.dart';
 
 /// A header contains the page's title and actions.
 ///
+/// Recommended for touch devices. Prefer [FSidebar] on desktop and larger screens.
+///
 /// See:
 /// * https://forui.dev/docs/navigation/header for working examples.
 /// * [FHeaderStyle] for customizing a header's appearance.

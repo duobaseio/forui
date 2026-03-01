@@ -13,6 +13,8 @@ part 'line_calendar.design.dart';
 
 /// A line calendar displays dates in a single horizontal, scrollable line.
 ///
+/// Recommended for touch devices. Prefer [FCalendar] on desktop and larger screens.
+///
 /// ## Desktop and web note
 /// As the dates scroll on the horizontal axis (left to right or right to left), hold Shift while using the mouse
 /// scroll wheel to scroll the list.

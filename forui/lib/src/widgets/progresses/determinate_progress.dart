@@ -116,7 +116,7 @@ class _State extends State<FDeterminateProgress> with SingleTickerProviderStateM
 
 /// A [FDeterminateProgress]'s style.
 class FDeterminateProgressStyle with Diagnosticable, _$FDeterminateProgressStyleFunctions {
-  /// The linear progress's constraints. Defaults to a height of 10.0 and no horizontal constraint.
+  /// The linear progress's constraints. Defaults to a height of 6.0 and no horizontal constraint.
   @override
   final BoxConstraints constraints;
 
@@ -136,7 +136,7 @@ class FDeterminateProgressStyle with Diagnosticable, _$FDeterminateProgressStyle
   const FDeterminateProgressStyle({
     required this.trackDecoration,
     required this.fillDecoration,
-    this.constraints = const .tightFor(height: 10.0),
+    this.constraints = const .tightFor(height: 6.0),
     this.motion = const FDeterminateProgressMotion(),
   });
 
@@ -145,7 +145,7 @@ class FDeterminateProgressStyle with Diagnosticable, _$FDeterminateProgressStyle
     : this(
         trackDecoration: ShapeDecoration(
           shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.pill),
-          color: colors.secondary,
+          color: colors.muted,
         ),
         fillDecoration: ShapeDecoration(
           shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.pill),

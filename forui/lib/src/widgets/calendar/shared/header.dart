@@ -1,3 +1,6 @@
+import 'dart:math' as math;
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
@@ -19,7 +22,11 @@ enum FCalendarPickerType {
 
 @internal
 class Header extends StatefulWidget {
-  static const height = 31.0;
+  static double height(FCalendarHeaderStyle style) => math.max(
+    (style.headerTextStyle.fontSize ?? 16) * (style.headerTextStyle.height ?? 1),
+    style.buttonStyle.iconContentStyle.padding.vertical +
+        (style.buttonStyle.iconContentStyle.iconStyle.base.size ?? 16),
+  );
 
   final FCalendarHeaderStyle style;
   final ValueNotifier<FCalendarPickerType> type;
@@ -42,6 +49,7 @@ class Header extends StatefulWidget {
 
 class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
+  late double _height;
 
   @override
   void initState() {
@@ -49,6 +57,7 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
     widget.type.addListener(_animate);
     _controller = AnimationController(vsync: this, duration: widget.style.animationDuration);
     _controller.value = widget.type.value == .day ? 0.0 : 1.0;
+    _height = Header.height(widget.style);
   }
 
   @override
@@ -60,7 +69,7 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
     },
     excludeSemantics: true,
     builder: (_, variants, _) => SizedBox(
-      height: Header.height,
+      height: _height,
       child: Padding(
         padding: const .symmetric(horizontal: 15),
         child: Row(
@@ -77,12 +86,12 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
                 end: Directionality.maybeOf(context) == .rtl ? -0.25 : 0.25,
               ).animate(_controller),
               child: Padding(
-                padding: const .all(2.0),
+                padding: const .symmetric(horizontal: 2.0),
                 child: IconTheme(
                   data: widget.style.buttonStyle.iconContentStyle.iconStyle
                       .resolve(variants)
                       .copyWith(color: widget.style.headerTextStyle.color),
-                  child: const Icon(FIcons.chevronRight, size: 15),
+                  child: Icon(FIcons.chevronRight, size: widget.style.headerIconSize),
                 ),
               ),
             ),
@@ -97,6 +106,7 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
     super.didUpdateWidget(old);
     old.type.removeListener(_animate);
     widget.type.addListener(_animate);
+    _height = Header.height(widget.style);
   }
 
   @override
@@ -131,7 +141,7 @@ class Navigation extends StatelessWidget {
   Widget build(BuildContext _) => Padding(
     padding: const .only(bottom: 5),
     child: SizedBox(
-      height: Header.height,
+      height: Header.height(style),
       child: Row(
         mainAxisAlignment: .spaceBetween,
         children: [
@@ -139,7 +149,6 @@ class Navigation extends StatelessWidget {
             padding: const .directional(start: 7),
             child: FButton.icon(style: style.buttonStyle, onPress: onPrevious, child: const Icon(FIcons.chevronLeft)),
           ),
-
           const Expanded(child: SizedBox()),
           Padding(
             padding: const .directional(end: 7),
@@ -166,13 +175,17 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
   @override
   final FFocusedOutlineStyle focusedOutlineStyle;
 
-  /// The button style.
+  /// The button style. Defaults to outline sm on touch and outline xs on desktop.
   @override
   final FButtonStyle buttonStyle;
 
   /// The header's text style.
   @override
   final TextStyle headerTextStyle;
+
+  /// The header's icon size. Defaults to 16.
+  @override
+  final double headerIconSize;
 
   /// The arrow turn animation's duration. Defaults to 200ms.
   @override
@@ -183,6 +196,7 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
     required this.focusedOutlineStyle,
     required this.buttonStyle,
     required this.headerTextStyle,
+    this.headerIconSize = 16,
     this.animationDuration = const Duration(milliseconds: 200),
   });
 
@@ -191,29 +205,37 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
     required FColors colors,
     required FTypography typography,
     required FStyle style,
-  }) => .new(
-    focusedOutlineStyle: style.focusedOutlineStyle,
-    buttonStyle: FButtonStyles.inherit(colors: colors, typography: typography, style: style).outline.sm.copyWith(
-      decoration: FVariants.from(
-        ShapeDecoration(
-          shape: RoundedSuperellipseBorder(
-            side: BorderSide(color: colors.border, width: style.borderWidth),
-            borderRadius: style.borderRadius.md,
-          ),
-          color: colors.card,
+    bool desktop = false,
+  }) {
+    if (desktop) {
+      return FCalendarHeaderStyle(
+        focusedOutlineStyle: style.focusedOutlineStyle,
+        buttonStyle: FButtonStyles.inherit(
+          colors: colors,
+          typography: typography,
+          style: style,
+          desktop: desktop,
+        ).outline.xs,
+        headerTextStyle: typography.sm.copyWith(color: colors.foreground, fontWeight: .w500),
+        headerIconSize: typography.md.fontSize!,
+      );
+    } else {
+      return FCalendarHeaderStyle(
+        focusedOutlineStyle: style.focusedOutlineStyle,
+        buttonStyle: FButtonStyles.inherit(
+          colors: colors,
+          typography: typography,
+          style: style,
+          desktop: desktop,
+        ).outline.md,
+        headerTextStyle: typography.md.copyWith(
+          color: colors.foreground,
+          fontWeight: .w500,
+          height: 1,
+          leadingDistribution: .even,
         ),
-        variants: {
-          [.hovered, .pressed]: .shapeDelta(color: colors.secondary),
-          //
-          [.disabled]: .shapeDelta(
-            shape: RoundedSuperellipseBorder(
-              side: BorderSide(color: colors.disable(colors.border), width: style.borderWidth),
-              borderRadius: style.borderRadius.md,
-            ),
-          ),
-        },
-      ),
-    ),
-    headerTextStyle: typography.md.copyWith(color: colors.foreground, fontWeight: .w600),
-  );
+        headerIconSize: typography.md.fontSize!,
+      );
+    }
+  }
 }

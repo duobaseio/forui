@@ -502,7 +502,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   @override
   final FTappableStyle tappableStyle;
 
-  /// The text field style.
+  /// The text field styles.
   ///
   /// ## CLI
   /// To generate and customize this style:
@@ -511,7 +511,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// dart run forui style create text-field
   /// ```
   @override
-  final FTextFieldStyle textFieldStyle;
+  final FTextFieldSizeStyles textFieldStyles;
 
   /// The tile's styles.
   ///
@@ -570,9 +570,13 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
 
   final Map<Object, ThemeExtension<dynamic>> _extensions;
 
-  /// Creates a [FThemeData] that configures the widget styles using the given properties if not given.
+  /// Creates a [FThemeData].
+  ///
+  /// Set [desktop] to true for desktop-optimized sizing (smaller touch targets, tighter spacing).
+  /// Defaults to false (touch/mobile-first).
   factory FThemeData({
     required FColors colors,
+    bool desktop = false,
     String? debugLabel,
     FBreakpoints breakpoints = const FBreakpoints(),
     FTypography? typography,
@@ -625,7 +629,8 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FSwitchStyle? switchStyle,
     FTabsStyle? tabsStyle,
     FTappableStyle? tappableStyle,
-    FTextFieldStyle? textFieldStyle,
+    FVariants<FTextFieldSizeVariantConstraint, FTextFieldSizeVariant, FTextFieldStyle, FTextFieldStyleDelta>?
+    textFieldStyles,
     FVariants<FItemVariantConstraint, FItemVariant, FTileStyle, FTileStyleDelta>? tileStyles,
     FTileGroupStyle? tileGroupStyle,
     FTimeFieldStyle? timeFieldStyle,
@@ -633,7 +638,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FTooltipStyle? tooltipStyle,
     Iterable<ThemeExtension<dynamic>> extensions = const [],
   }) {
-    typography ??= .inherit(colors: colors);
+    typography ??= .inherit(colors: colors, desktop: desktop);
     style ??= .inherit(colors: colors, typography: typography);
     return ._(
       debugLabel: debugLabel,
@@ -641,26 +646,29 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       colors: colors,
       typography: typography,
       style: style,
-      accordionStyle: accordionStyle ?? .inherit(colors: colors, typography: typography, style: style),
-      autocompleteStyle: autocompleteStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      accordionStyle:
+          accordionStyle ?? .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
+      autocompleteStyle:
+          autocompleteStyle ?? .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
       alertStyles: alertStyles == null
           ? FAlertStyles.inherit(colors: colors, typography: typography, style: style)
           : FAlertStyles(alertStyles),
       avatarStyle: avatarStyle ?? .inherit(colors: colors, typography: typography),
       badgeStyles: badgeStyles == null
-          ? FBadgeStyles.inherit(colors: colors, typography: typography, style: style)
+          ? FBadgeStyles.inherit(colors: colors, typography: typography, style: style, desktop: desktop)
           : FBadgeStyles(badgeStyles),
       bottomNavigationBarStyle:
           bottomNavigationBarStyle ?? .inherit(colors: colors, typography: typography, style: style),
       breadcrumbStyle: breadcrumbStyle ?? .inherit(colors: colors, typography: typography, style: style),
       buttonStyles: buttonStyles == null
-          ? FButtonStyles.inherit(colors: colors, typography: typography, style: style)
+          ? FButtonStyles.inherit(colors: colors, typography: typography, style: style, desktop: desktop)
           : FButtonStyles(buttonStyles),
-      calendarStyle: calendarStyle ?? .inherit(colors: colors, typography: typography, style: style),
-      cardStyle: cardStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      calendarStyle: calendarStyle ?? .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
+      cardStyle: cardStyle ?? .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
       checkboxStyle: checkboxStyle ?? .inherit(colors: colors, style: style),
       circularProgressStyle: circularProgressStyle ?? .inherit(colors: colors),
-      dateFieldStyle: dateFieldStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      dateFieldStyle:
+          dateFieldStyle ?? .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
       determinateProgressStyle: determinateProgressStyle ?? .inherit(colors: colors, style: style),
       dialogRouteStyle: dialogRouteStyle ?? .inherit(colors: colors),
       dialogStyle: dialogStyle ?? .inherit(colors: colors, typography: typography, style: style),
@@ -676,7 +684,8 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       itemGroupStyle: itemGroupStyle ?? .inherit(colors: colors, typography: typography, style: style),
       labelStyles: labelStyles ?? .inherit(style: style),
       lineCalendarStyle: lineCalendarStyle ?? .inherit(colors: colors, typography: typography, style: style),
-      multiSelectStyle: multiSelectStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      multiSelectStyle:
+          multiSelectStyle ?? .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
       modalSheetStyle: modalSheetStyle ?? .inherit(colors: colors),
       paginationStyle: paginationStyle ?? .inherit(colors: colors, typography: typography, style: style),
       persistentSheetStyle: persistentSheetStyle ?? const FPersistentSheetStyle(),
@@ -689,7 +698,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
           ? FResizableStyles.inherit(colors: colors, style: style)
           : FResizableStyles(resizableStyles),
       scaffoldStyle: scaffoldStyle ?? .inherit(colors: colors, style: style),
-      selectStyle: selectStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      selectStyle: selectStyle ?? .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
       selectGroupStyle: selectGroupStyle ?? .inherit(colors: colors, typography: typography, style: style),
       selectMenuTileStyle: selectMenuTileStyle ?? .inherit(colors: colors, typography: typography, style: style),
       sidebarStyle: sidebarStyle ?? .inherit(colors: colors, typography: typography, style: style),
@@ -700,12 +709,15 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       switchStyle: switchStyle ?? .inherit(colors: colors, style: style),
       tabsStyle: tabsStyle ?? .inherit(colors: colors, typography: typography, style: style),
       tappableStyle: tappableStyle ?? FTappableStyle(),
-      textFieldStyle: textFieldStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      textFieldStyles: textFieldStyles == null
+          ? FTextFieldSizeStyles.inherit(colors: colors, typography: typography, style: style, desktop: desktop)
+          : FTextFieldSizeStyles(textFieldStyles),
       tileStyles: tileStyles == null
           ? FTileStyles.inherit(colors: colors, typography: typography, style: style)
           : FTileStyles(tileStyles),
       tileGroupStyle: tileGroupStyle ?? .inherit(colors: colors, typography: typography, style: style),
-      timeFieldStyle: timeFieldStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      timeFieldStyle:
+          timeFieldStyle ?? .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
       timePickerStyle: timePickerStyle ?? .inherit(colors: colors, typography: typography, style: style),
       tooltipStyle: tooltipStyle ?? .inherit(colors: colors, typography: typography, style: style),
       extensions: .unmodifiable({for (final extension in extensions) extension.type: extension}),
@@ -713,7 +725,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   }
 
   /// Creates a linear interpolation between two [FThemeData] using the given factor [t].
-  factory FThemeData.lerp(FThemeData a, FThemeData b, double t) => .new(
+  factory FThemeData.lerp(FThemeData a, FThemeData b, double t) => ._(
     debugLabel: t < 0.5 ? a.debugLabel : b.debugLabel,
     breakpoints: t < 0.5 ? a.breakpoints : b.breakpoints,
     colors: .lerp(a.colors, b.colors, t),
@@ -761,23 +773,14 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
         }),
       );
     }, (base, variants) => FButtonStyles(.raw(base, variants))),
-
     calendarStyle: a.calendarStyle.lerp(b.calendarStyle, t),
-
     cardStyle: a.cardStyle.lerp(b.cardStyle, t),
-
     checkboxStyle: a.checkboxStyle.lerp(b.checkboxStyle, t),
-
     circularProgressStyle: a.circularProgressStyle.lerp(b.circularProgressStyle, t),
-
     dateFieldStyle: a.dateFieldStyle.lerp(b.dateFieldStyle, t),
-
     determinateProgressStyle: a.determinateProgressStyle.lerp(b.determinateProgressStyle, t),
-
     dialogRouteStyle: a.dialogRouteStyle.lerp(b.dialogRouteStyle, t),
-
     dialogStyle: a.dialogStyle.lerp(b.dialogStyle, t),
-
     dividerStyles: FVariants.lerpWhereUsing(
       a.dividerStyles,
       b.dividerStyles,
@@ -834,7 +837,13 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     switchStyle: a.switchStyle.lerp(b.switchStyle, t),
     tabsStyle: a.tabsStyle.lerp(b.tabsStyle, t),
     tappableStyle: a.tappableStyle.lerp(b.tappableStyle, t),
-    textFieldStyle: a.textFieldStyle.lerp(b.textFieldStyle, t),
+    textFieldStyles: FVariants.lerpWhereUsing(
+      a.textFieldStyles,
+      b.textFieldStyles,
+      t,
+      (a, b, t) => a!.lerp(b!, t),
+      (base, variants) => FTextFieldSizeStyles(.raw(base, variants)),
+    ),
     tileStyles: FVariants.lerpWhereUsing(
       a.tileStyles,
       b.tileStyles,
@@ -847,9 +856,8 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     timePickerStyle: a.timePickerStyle.lerp(b.timePickerStyle, t),
     tooltipStyle: a.tooltipStyle.lerp(b.tooltipStyle, t),
     // Copied from Flutter's [ThemeData].
-    extensions: (a._extensions.map(
-      (id, extensionA) => MapEntry(id, extensionA.lerp(b._extensions[id], t)),
-    )..addEntries(b._extensions.entries.where((entry) => !a._extensions.containsKey(entry.key)))).values,
+    extensions: a._extensions.map((id, extensionA) => MapEntry(id, extensionA.lerp(b._extensions[id], t)))
+      ..addEntries(b._extensions.entries.where((entry) => !a._extensions.containsKey(entry.key))),
   );
 
   FThemeData._({
@@ -900,7 +908,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     required this.switchStyle,
     required this.tabsStyle,
     required this.tappableStyle,
-    required this.textFieldStyle,
+    required this.textFieldStyles,
     required this.tileStyles,
     required this.tileGroupStyle,
     required this.timeFieldStyle,
@@ -984,7 +992,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```dart
   /// // Apply a Forui theme to Material widgets
   /// MaterialApp(
-  ///   theme: FThemes.neutral.light.toApproximateMaterialTheme(),
+  ///   theme: FThemes.neutral.light.touch.toApproximateMaterialTheme(),
   ///   // ...
   /// )
   /// ```
@@ -1064,14 +1072,14 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
 
       // Input
       inputDecorationTheme: InputDecorationTheme(
-        border: WidgetStateInputBorder.resolveWith((states) => textFieldStyle.border.resolve(toVariants(states))),
-        labelStyle: textFieldStyle.descriptionTextStyle.base,
-        floatingLabelStyle: textFieldStyle.labelTextStyle.base,
-        hintStyle: textFieldStyle.hintTextStyle.base,
-        errorStyle: textFieldStyle.errorTextStyle.base,
-        helperStyle: textFieldStyle.descriptionTextStyle.base,
-        counterStyle: textFieldStyle.counterTextStyle.base,
-        contentPadding: textFieldStyle.contentPadding,
+        border: WidgetStateInputBorder.resolveWith((states) => textFieldStyles.md.border.resolve(toVariants(states))),
+        labelStyle: textFieldStyles.md.descriptionTextStyle.base,
+        floatingLabelStyle: textFieldStyles.md.labelTextStyle.base,
+        hintStyle: textFieldStyles.md.hintTextStyle.base,
+        errorStyle: textFieldStyles.md.errorTextStyle.base,
+        helperStyle: textFieldStyles.md.descriptionTextStyle.base,
+        counterStyle: textFieldStyles.md.counterTextStyle.base,
+        contentPadding: textFieldStyles.md.contentPadding,
       ),
 
       // Date Picker
@@ -1301,30 +1309,28 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// print(theme.avatarStyle == copy.avatarStyle); // false
   /// ```
   ///
-  /// To modify [colors], [typography], and/or [style], create a new `FThemeData` using [FThemeData] first.
-  /// This allows the global theme data to propagate to widget-specific theme data.
+  /// To modify [colors], [typography], and/or [style], create a new `FThemeData` using [FThemeData] first. This allows
+  /// the global theme data to propagate to widget-specific theme data.
   ///
   /// ```dart
   /// @override
   /// Widget build(BuildContext context) {
   ///   final theme = FThemeData(
-  ///     colors: FThemes.neutral.light.colors.copyWith(
+  ///     colors: FThemes.neutral.light.touch.colors.copyWith(
   ///       primary: const Color(0xFF0D47A1), // dark blue
   ///       primaryForeground: const Color(0xFFFFFFFF), // white
   ///     ),
-  ///     typography: FThemes.neutral.light.typography.copyWith(
+  ///     typography: FThemes.neutral.light.touch.typography.copyWith(
   ///       // ...
   ///     ).scale(sizeScalar: 0.8),
-  ///     style: FThemes.neutral.light.style.copyWith(
+  ///     style: FThemes.neutral.light.touch.style.copyWith(
   ///       borderRadius: .zero,
   ///     ),
   ///   );
   ///
   ///   return FTheme(
   ///     data: theme.copyWith(
-  ///       cardStyle: theme.cardStyle.copyWith(
-  ///         decoration: .delta(borderRadius: const .all(.circular(8))),
-  ///       ),
+  ///       cardStyle: .delta(decoration: .delta(borderRadius: const .all(.circular(8)))),
   ///     ),
   ///     child: const FScaffold(...),
   ///   );
@@ -1388,7 +1394,8 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FSwitchStyleDelta? switchStyle,
     FTabsStyleDelta? tabsStyle,
     FTappableStyleDelta? tappableStyle,
-    FTextFieldStyleDelta? textFieldStyle,
+    FVariantsDelta<FTextFieldSizeVariantConstraint, FTextFieldSizeVariant, FTextFieldStyle, FTextFieldStyleDelta>?
+    textFieldStyles,
     FVariantsDelta<FItemVariantConstraint, FItemVariant, FTileStyle, FTileStyleDelta>? tileStyles,
     FTileGroupStyleDelta? tileGroupStyle,
     FTimeFieldStyleDelta? timeFieldStyle,
@@ -1447,7 +1454,9 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     switchStyle: switchStyle?.call(this.switchStyle) ?? this.switchStyle,
     tabsStyle: tabsStyle?.call(this.tabsStyle) ?? this.tabsStyle,
     tappableStyle: tappableStyle?.call(this.tappableStyle) ?? this.tappableStyle,
-    textFieldStyle: textFieldStyle?.call(this.textFieldStyle) ?? this.textFieldStyle,
+    textFieldStyles: textFieldStyles == null
+        ? this.textFieldStyles
+        : FTextFieldSizeStyles(textFieldStyles(this.textFieldStyles)),
     tileStyles: tileStyles == null ? this.tileStyles : FTileStyles(tileStyles(this.tileStyles)),
     tileGroupStyle: tileGroupStyle?.call(this.tileGroupStyle) ?? this.tileGroupStyle,
     timeFieldStyle: timeFieldStyle?.call(this.timeFieldStyle) ?? this.timeFieldStyle,

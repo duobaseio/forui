@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/painting.dart';
 
@@ -47,25 +45,10 @@ final class FBorderRadius with Diagnosticable {
     this.pill = const .all(.circular(100)),
   });
 
-  /// Creates a [FBorderRadius] that inherits its values from a single [md] radius.
-  ///
-  /// Smaller tiers are clamped to 0.
-  FBorderRadius.inherit(double md)
-    : this(
-        xs2: .circular(max(md - 6, 0)),
-        xs: .circular(max(md - 4, 0)),
-        sm: .circular(max(md - 2, 0)),
-        md: .circular(md),
-        lg: .circular(md + 4),
-        xl: .circular(md + 8),
-        xl2: .circular(md + 12),
-        xl3: .circular(md + 16),
-      );
-
   /// Scales all border radii by the given [scalar].
   ///
   /// ```dart
-  /// final borderRadius = FBorderRadius.inherit(10);
+  /// final borderRadius = FBorderRadius();
   ///
   /// final scaled = borderRadius.scale(1.5);
   ///

@@ -73,8 +73,10 @@ class FCard extends StatelessWidget {
   const FCard.raw({required this.child, this.style = const .context(), super.key});
 
   @override
-  Widget build(BuildContext context) =>
-      DecoratedBox(decoration: style(context.theme.cardStyle).decoration, child: child);
+  Widget build(BuildContext context) => DecoratedBox(
+    decoration: style(context.theme.cardStyle).decoration,
+    child: child,
+  );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -97,18 +99,22 @@ class FCardStyle with Diagnosticable, _$FCardStyleFunctions {
   FCardStyle({required this.decoration, required this.contentStyle});
 
   /// Creates a [FCardStyle] that inherits its properties.
-  FCardStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        decoration: ShapeDecoration(
-          shape: RoundedSuperellipseBorder(
-            side: BorderSide(color: colors.border, width: style.borderWidth),
-            borderRadius: style.borderRadius.md,
-          ),
-          color: colors.card,
-        ),
-        contentStyle: FCardContentStyle(
-          titleTextStyle: typography.xl2.copyWith(fontWeight: .w600, color: colors.foreground, height: 1.5),
-          subtitleTextStyle: typography.sm.copyWith(color: colors.mutedForeground),
-        ),
-      );
+  FCardStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+    bool desktop = false,
+  }) : this(
+         decoration: ShapeDecoration(
+           shape: RoundedSuperellipseBorder(
+             side: BorderSide(color: colors.border, width: style.borderWidth),
+             borderRadius: style.borderRadius.lg,
+           ),
+           color: colors.card,
+         ),
+         contentStyle: FCardContentStyle(
+           titleTextStyle: (desktop ? typography.md : typography.lg).copyWith(fontWeight: .w500, color: colors.foreground),
+           subtitleTextStyle: typography.sm.copyWith(color: colors.mutedForeground),
+         ),
+       );
 }

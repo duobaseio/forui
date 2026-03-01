@@ -104,32 +104,35 @@ class _DayPickerState extends State<DayPicker> {
   }
 
   @override
-  Widget build(BuildContext context) => SizedBox(
-    width: DateTime.daysPerWeek * widget.style.tileSize,
-    child: GridView.custom(
-      padding: .zero,
-      shrinkWrap: true,
-      physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: _GridDelegate(widget.style.tileSize),
-      childrenDelegate: SliverChildListDelegate(addRepaintBoundaries: false, [
-        ..._headers(context),
-        for (final MapEntry(key: date, value: focusNode) in _days.entries)
-          Entry.day(
-            style: widget.style,
-            localizations: widget.localization,
-            dayBuilder: widget.dayBuilder,
-            date: date,
-            focusNode: focusNode,
-            current: date.month == widget.month.month,
-            today: date == widget.today,
-            selectable: widget.selectable,
-            selected: widget.selected,
-            onPress: widget.onPress,
-            onLongPress: widget.onLongPress,
-          ),
-      ]),
-    ),
-  );
+  Widget build(BuildContext context) {
+    final tileSize = widget.style.tileSize;
+    return SizedBox(
+      width: DateTime.daysPerWeek * tileSize,
+      child: GridView.custom(
+        padding: .zero,
+        shrinkWrap: true,
+        physics: const NeverScrollableScrollPhysics(),
+        gridDelegate: _GridDelegate(tileSize),
+        childrenDelegate: SliverChildListDelegate(addRepaintBoundaries: false, [
+          ..._headers(context),
+          for (final MapEntry(key: date, value: focusNode) in _days.entries)
+            Entry.day(
+              style: widget.style,
+              localizations: widget.localization,
+              dayBuilder: widget.dayBuilder,
+              date: date,
+              focusNode: focusNode,
+              current: date.month == widget.month.month,
+              today: date == widget.today,
+              selectable: widget.selectable,
+              selected: widget.selected,
+              onPress: widget.onPress,
+              onLongPress: widget.onLongPress,
+            ),
+        ]),
+      ),
+    );
+  }
 
   List<Widget> _headers(BuildContext _) {
     final firstDayOfWeek = widget.style.startDayOfWeek ?? widget.localization.firstDayOfWeek;
@@ -207,10 +210,7 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
   @override
   final int? startDayOfWeek;
 
-  /// The tile's size. Defaults to 42.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if [tileSize] is not positive.
+  /// The tile's size. Defaults to 44 on touch platforms and 32 on desktop.
   @override
   final double tileSize;
 
@@ -218,20 +218,20 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
   const FCalendarDayPickerStyle({
     required this.headerTextStyle,
     required this.current,
+    required this.tileSize,
     required this.enclosing,
     this.startDayOfWeek,
-    this.tileSize = 42,
   }) : assert(
          startDayOfWeek == null || (DateTime.monday <= startDayOfWeek && startDayOfWeek <= DateTime.sunday),
          'startDayOfWeek ($startDayOfWeek) must be between DateTime.monday (1) and DateTime.sunday (7)',
-       ),
-       assert(0 < tileSize, 'tileSize ($tileSize) must be positive');
+       );
 
   /// Creates a [FCalendarDayPickerStyle] that inherits its properties.
   factory FCalendarDayPickerStyle.inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,
+    bool desktop = false,
   }) {
     final backgroundColor = FVariants<FTappableVariantConstraint, FTappableVariant, Color, Delta>(
       colors.card,
@@ -251,37 +251,53 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
         [.disabled.and(.focused)]: null,
       },
     );
-
-    return .new(
-      headerTextStyle: typography.xs.copyWith(color: colors.mutedForeground),
-      current: FCalendarEntryStyle(
-        backgroundColor: backgroundColor,
-        borderSide: border,
-        textStyle: FVariants.from(
-          typography.md.copyWith(color: colors.foreground, fontWeight: .w500),
-          variants: {
-            [.disabled]: .delta(color: colors.disable(colors.foreground)),
-            //
-            [.selected]: .delta(color: colors.primaryForeground),
-            [.selected.and(.disabled)]: .delta(color: colors.disable(colors.primaryForeground)),
-          },
-        ),
-        borderRadius: style.borderRadius.md,
-      ),
-      enclosing: FCalendarEntryStyle(
-        backgroundColor: backgroundColor,
-        borderSide: border,
-        textStyle: FVariants.from(
-          typography.md.copyWith(color: colors.mutedForeground, fontWeight: .w500),
-          variants: {
-            [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
-            //
-            [.selected]: .delta(color: colors.primaryForeground),
-            [.selected.and(.disabled)]: .delta(color: colors.disable(colors.primaryForeground)),
-          },
-        ),
-        borderRadius: style.borderRadius.md,
-      ),
+    FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> textStyle(
+      TextStyle textStyle,
+      Color color,
+    ) => FVariants.from(
+      textStyle.copyWith(color: color, fontWeight: .w500),
+      variants: {
+        [.disabled]: .delta(color: colors.disable(color)),
+        //
+        [.selected]: .delta(color: colors.primaryForeground),
+        [.selected.and(.disabled)]: .delta(color: colors.disable(colors.primaryForeground)),
+      },
     );
+
+    if (desktop) {
+      return .new(
+        headerTextStyle: typography.xs.copyWith(color: colors.mutedForeground),
+        tileSize: 32,
+        current: FCalendarEntryStyle(
+          backgroundColor: backgroundColor,
+          borderSide: border,
+          textStyle: textStyle(typography.sm, colors.foreground),
+          borderRadius: style.borderRadius.sm,
+        ),
+        enclosing: FCalendarEntryStyle(
+          backgroundColor: backgroundColor,
+          borderSide: border,
+          textStyle: textStyle(typography.sm, colors.mutedForeground),
+          borderRadius: style.borderRadius.sm,
+        ),
+      );
+    } else {
+      return .new(
+        headerTextStyle: typography.xs2.copyWith(color: colors.mutedForeground),
+        tileSize: 44,
+        current: FCalendarEntryStyle(
+          backgroundColor: backgroundColor,
+          borderSide: border,
+          textStyle: textStyle(typography.sm, colors.foreground),
+          borderRadius: style.borderRadius.md,
+        ),
+        enclosing: FCalendarEntryStyle(
+          backgroundColor: backgroundColor,
+          borderSide: border,
+          textStyle: textStyle(typography.sm, colors.mutedForeground),
+          borderRadius: style.borderRadius.md,
+        ),
+      );
+    }
   }
 }
