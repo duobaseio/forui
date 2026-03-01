@@ -33,10 +33,10 @@ extension type FTextFieldSizeStyles(
     required FColors colors,
     required FTypography typography,
     required FStyle style,
+    bool desktop = false,
   }) {
     final label = FLabelStyles.inherit(style: style).verticalStyle;
     final textStyle = typography.sm.copyWith(fontFamily: typography.defaultFontFamily);
-
     final iconStyle = FVariants<FTextFieldVariantConstraint, FTextFieldVariant, IconThemeData, IconThemeDataDelta>.from(
       IconThemeData(color: colors.mutedForeground, size: typography.sm.fontSize),
       variants: {
@@ -44,16 +44,7 @@ extension type FTextFieldSizeStyles(
       },
     );
 
-    final ghost = FButtonStyles.inherit(colors: colors, typography: typography, style: style).ghost;
-    final buttonStyle = ghost.sm.copyWith(
-      iconContentStyle: ghost.sm.iconContentStyle.copyWith(iconStyle: iconStyle.cast()),
-    );
-
-    FTextFieldStyle textField({
-      required FVariants<FTextFieldVariantConstraint, FTextFieldVariant, IconThemeData, IconThemeDataDelta> iconStyle,
-      required FButtonStyle buttonStyle,
-      required EdgeInsetsGeometry contentPadding,
-    }) => FTextFieldStyle.inherit(
+    FTextFieldStyle textField(FButtonStyle buttonStyle, EdgeInsetsGeometry contentPadding) => FTextFieldStyle.inherit(
       colors: colors,
       style: style,
       label: label,
@@ -63,49 +54,39 @@ extension type FTextFieldSizeStyles(
       contentPadding: contentPadding,
     );
 
-    final md = textField(
-      iconStyle: iconStyle,
-      buttonStyle: buttonStyle,
-      contentPadding: const .symmetric(horizontal: 12, vertical: 10),
+    final ghost = FButtonStyles.inherit(colors: colors, typography: typography, style: style, desktop: desktop).ghost;
+    final buttonStyle = ghost.sm.copyWith(
+      iconContentStyle: ghost.sm.iconContentStyle.copyWith(iconStyle: iconStyle.cast()),
     );
 
-    return FTextFieldSizeStyles(
-      FVariants(
-        md,
-        variants: {
-          [.sm.and(.touch)]: textField(
-            iconStyle: iconStyle,
-            buttonStyle: buttonStyle,
-            contentPadding: const .symmetric(horizontal: 12, vertical: 8),
-          ),
-          [.sm.and(.desktop)]: textField(
-            iconStyle: iconStyle,
-            buttonStyle: ghost.xs.copyWith(
-              iconContentStyle: ghost.xs.iconContentStyle.copyWith(iconStyle: iconStyle.cast()),
+    if (desktop) {
+      final md = textField(buttonStyle, const .symmetric(horizontal: 10, vertical: 9));
+      return FTextFieldSizeStyles(
+        FVariants(
+          md,
+          variants: {
+            [.sm]: textField(
+              ghost.xs.copyWith(iconContentStyle: ghost.xs.iconContentStyle.copyWith(iconStyle: iconStyle.cast())),
+              const .symmetric(horizontal: 10, vertical: 7),
             ),
-            contentPadding: const .symmetric(horizontal: 10, vertical: 7),
-          ),
-          //
-          [.md.and(.touch)]: md,
-          [.md.and(.desktop)]: textField(
-            iconStyle: iconStyle,
-            buttonStyle: buttonStyle,
-            contentPadding: const .symmetric(horizontal: 10, vertical: 9),
-          ),
-          //
-          [.lg.and(.touch)]: textField(
-            iconStyle: iconStyle,
-            buttonStyle: buttonStyle,
-            contentPadding: const .symmetric(horizontal: 12, vertical: 12),
-          ),
-          [.lg.and(.desktop)]: textField(
-            iconStyle: iconStyle,
-            buttonStyle: buttonStyle,
-            contentPadding: const .symmetric(horizontal: 10, vertical: 11),
-          ),
-        },
-      ),
-    );
+            [.md]: md,
+            [.lg]: textField(buttonStyle, const .symmetric(horizontal: 10, vertical: 11)),
+          },
+        ),
+      );
+    } else {
+      final md = textField(buttonStyle, const .symmetric(horizontal: 12, vertical: 10));
+      return FTextFieldSizeStyles(
+        FVariants(
+          md,
+          variants: {
+            [.sm]: textField(buttonStyle, const .symmetric(horizontal: 12, vertical: 8)),
+            [.md]: md,
+            [.lg]: textField(buttonStyle, const .symmetric(horizontal: 12, vertical: 12)),
+          },
+        ),
+      );
+    }
   }
 
   /// The small text field style.

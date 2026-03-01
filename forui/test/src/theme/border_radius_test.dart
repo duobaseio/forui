@@ -20,38 +20,16 @@ void main() {
       expect(borderRadius.pill, const BorderRadius.all(.circular(100)));
     });
 
-    test('inherit', () {
-      final borderRadius = FBorderRadius.inherit(12);
-
-      expect(borderRadius.xs2, BorderRadius.circular(6));
-      expect(borderRadius.xs, BorderRadius.circular(8));
-      expect(borderRadius.sm, BorderRadius.circular(10));
-      expect(borderRadius.md, BorderRadius.circular(12));
-      expect(borderRadius.lg, BorderRadius.circular(16));
-      expect(borderRadius.xl, BorderRadius.circular(20));
-      expect(borderRadius.xl2, BorderRadius.circular(24));
-      expect(borderRadius.xl3, BorderRadius.circular(28));
-    });
-
-    test('inherit clamps negative values to 0', () {
-      final borderRadius = FBorderRadius.inherit(3);
-
-      expect(borderRadius.xs2, BorderRadius.circular(0));
-      expect(borderRadius.xs, BorderRadius.circular(0));
-      expect(borderRadius.sm, BorderRadius.circular(1));
-      expect(borderRadius.md, BorderRadius.circular(3));
-    });
-
     test('lerp', () {
-      final a = FBorderRadius.inherit(10);
-      final b = FBorderRadius.inherit(20);
+      const a = FBorderRadius();
+      final b = a.scale(2);
       final result = a.lerp(b, 0.5);
 
       expect(result.md, BorderRadius.lerp(a.md, b.md, 0.5));
     });
 
     test('copyWith', () {
-      final original = FBorderRadius.inherit(10);
+      const original = FBorderRadius();
       final modified = original.copyWith(md: .circular(20));
 
       expect(modified.xs, original.xs);
@@ -60,9 +38,9 @@ void main() {
     });
 
     test('equality', () {
-      final a = FBorderRadius.inherit(10);
-      final b = FBorderRadius.inherit(10);
-      final c = FBorderRadius.inherit(12);
+      const a = FBorderRadius();
+      const b = FBorderRadius();
+      final c = b.scale(1.2);
 
       expect(a, b);
       expect(a, isNot(c));

@@ -66,17 +66,19 @@ class TestScaffold extends StatelessWidget {
       border: Color(0xFF03A9F4),
     );
     final typography = FTypography.inherit(colors: colors);
-    final style = FStyle.inherit(colors: colors, typography: typography).copyWith(shadow: []);
-
-    return FThemeData(colors: colors, typography: typography, style: style);
+    return FThemeData(
+      colors: colors,
+      typography: typography,
+      style: .inherit(colors: colors, typography: typography).copyWith(shadow: []),
+    );
   }();
 
-  static List<({String name, FPlatformThemeData data})> get themes => [
-    (name: 'neutral-light', data: FThemes.neutral.light),
-    (name: 'neutral-dark', data: FThemes.neutral.dark),
+  static List<({String name, FThemeData data})> get themes => [
+    (name: 'neutral-light', data: FThemes.neutral.light.touch),
+    (name: 'neutral-dark', data: FThemes.neutral.dark.touch),
   ];
 
-  final FThemeDataMixin theme;
+  final FThemeData theme;
   final FPlatformVariant? platform;
   final Color? background;
   final Locale? locale;
@@ -94,13 +96,13 @@ class TestScaffold extends StatelessWidget {
     this.alignment = .center,
     this.padded = true,
     this.tooltipGroupActiveDuration = const Duration(milliseconds: 300),
-    FThemeDataMixin? theme,
+    FThemeData? theme,
     super.key,
   }) : locale = null,
-       theme = theme ?? FThemes.neutral.light,
+       theme = theme ?? FThemes.neutral.light.touch,
        background = switch (theme) {
-         _ when theme == FThemes.neutral.light => const Color(0xFFEEFFFF),
-         _ when theme == FThemes.neutral.dark => const Color(0xFF06111C),
+         _ when theme == FThemes.neutral.light.touch => const Color(0xFFEEFFFF),
+         _ when theme == FThemes.neutral.dark.touch => const Color(0xFF06111C),
          _ => null,
        },
        wrapped = false;
@@ -113,18 +115,18 @@ class TestScaffold extends StatelessWidget {
     this.alignment = .center,
     this.padded = true,
     this.tooltipGroupActiveDuration = const Duration(milliseconds: 300),
-    FThemeDataMixin? theme,
+    FThemeData? theme,
     super.key,
-  }) : theme = theme ?? FThemes.neutral.light,
+  }) : theme = theme ?? FThemes.neutral.light.touch,
        background = switch (theme) {
-         _ when theme == FThemes.neutral.light => const Color(0xFFEEFFFF),
-         _ when theme == FThemes.neutral.dark => const Color(0xFF06111C),
+         _ when theme == FThemes.neutral.light.touch => const Color(0xFFEEFFFF),
+         _ when theme == FThemes.neutral.dark.touch => const Color(0xFF06111C),
          _ => null,
        },
        wrapped = true;
 
   TestScaffold.blue({required this.child, this.platform, this.alignment = .center, super.key})
-    : theme = FThemes.neutral.light,
+    : theme = FThemes.neutral.light.touch,
       background = blueScreen.colors.background,
       locale = null,
       textDirection = null,
@@ -145,8 +147,7 @@ class TestScaffold extends StatelessWidget {
           data: theme,
           textDirection: textDirection,
           child: Container(
-            // This isn't 100% correct but we shouldn't pass an brightness aware theme to TestScaffold.
-            color: background ?? theme.resolve(.light, .iOS).colors.background,
+            color: background ?? theme.colors.background,
             padding: padded ? const .all(16) : null,
             child: child!,
           ),
@@ -159,8 +160,7 @@ class TestScaffold extends StatelessWidget {
         data: theme,
         textDirection: textDirection,
         child: Container(
-          // This isn't 100% correct but we shouldn't pass an brightness aware theme to TestScaffold.
-          color: background ?? theme.resolve(.light, .iOS).colors.background,
+          color: background ?? theme.colors.background,
           padding: padded ? const .all(16) : null,
           child: Align(alignment: alignment, child: child),
         ),

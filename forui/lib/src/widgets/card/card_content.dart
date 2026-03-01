@@ -30,7 +30,7 @@ class Content extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style(context.theme.cardStyles.resolve({context.platformVariant})).contentStyle;
+    final style = this.style(context.theme.cardStyle).contentStyle;
     return Padding(
       padding: style.padding,
       child: Column(

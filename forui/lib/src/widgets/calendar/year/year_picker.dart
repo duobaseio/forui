@@ -69,15 +69,13 @@ class _YearPickerState extends State<YearPicker> {
   }
 
   @override
-  Widget build(BuildContext context) {
-    final tileSize = widget.dayStyle.tileSize.resolve({context.platformVariant});
-    return Padding(
+  Widget build(BuildContext context) => Padding(
       padding: const EdgeInsets.only(top: 5.0),
       child: GridView(
         padding: EdgeInsets.zero,
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: YearPicker.columns,
-          mainAxisExtent: ((tileSize - 5.0) * DayPicker.maxRows) / YearPicker.rows,
+          mainAxisExtent: ((widget.dayStyle.tileSize - 5.0) * DayPicker.maxRows) / YearPicker.rows,
           mainAxisSpacing: 5.0,
         ),
         children: [
@@ -94,7 +92,6 @@ class _YearPickerState extends State<YearPicker> {
         ],
       ),
     );
-  }
 
   @override
   void didUpdateWidget(YearPicker old) {

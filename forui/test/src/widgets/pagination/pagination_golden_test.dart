@@ -76,7 +76,7 @@ void main() {
     });
 
     testWidgets('custom icon', (tester) async {
-      final style = theme.data.touch.paginationStyle;
+      final style = theme.data.paginationStyle;
       final controller = autoDispose(FPaginationController(pages: 10, page: 4));
 
       await tester.pumpWidget(

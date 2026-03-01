@@ -15,7 +15,7 @@ final app =
         // Add locales supported by your application here.
         // {@endhighlight}
       ],
-      builder: (context, child) => FTheme(data: FThemes.neutral.light, child: child!),
+      builder: (context, child) => FTheme(data: FThemes.neutral.light.touch, child: child!),
       home: const FScaffold(child: Placeholder()),
     );
 // {@endsnippet}

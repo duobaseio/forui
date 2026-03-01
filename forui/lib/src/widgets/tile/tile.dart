@@ -419,7 +419,7 @@ class FTileContentStyle extends FItemContentStyle with _$FTileContentStyleFuncti
     required super.subtitleTextStyle,
     required super.detailsTextStyle,
     required super.suffixIconStyle,
-    super.padding = const .all(.fromLTRB(15, 13, 10, 13)),
+    super.padding = const .directional(start: 15, top: 13, bottom: 13, end: 13),
     super.prefixIconSpacing,
     super.titleSpacing,
     super.middleSpacing,
@@ -476,7 +476,7 @@ class FRawTileContentStyle extends FRawItemContentStyle with _$FRawTileContentSt
   FRawTileContentStyle({
     required super.prefixIconStyle,
     required super.childTextStyle,
-    super.padding = const .all(.fromLTRB(15, 13, 10, 13)),
+    super.padding = const .directional(start: 15, top: 13, bottom: 13, end: 13),
     super.prefixIconSpacing,
   });
 

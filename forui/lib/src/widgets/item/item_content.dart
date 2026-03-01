@@ -51,7 +51,7 @@ class ItemContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ItemContentLayout(
     margin: margin,
-    padding: style.padding.resolve({context.platformVariant}),
+    padding: style.padding,
     top: top,
     bottom: bottom,
     dividerColor: dividerColor?.resolve(variants),
@@ -136,11 +136,9 @@ class ItemContent extends StatelessWidget {
 class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
   /// The content's padding.
   ///
-  /// Defaults to:
-  /// * touch: `EdgeInsetsDirectional.only(start: 10, top: 12.5, bottom: 12.5, end: 6)`
-  /// * desktop: `EdgeInsetsDirectional.only(start: 10, top: 6, bottom: 6, end: 6)`
+  /// Defaults to `EdgeInsetsDirectional.only(start: 10, top: 12.5, bottom: 12.5, end: 6)`
   @override
-  final FVariants<FPlatformVariantConstraint, FPlatformVariant, EdgeInsetsGeometry, Delta> padding;
+  final EdgeInsetsGeometry padding;
 
   /// The prefix icon style.
   @override
@@ -197,9 +195,7 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
     required this.subtitleTextStyle,
     required this.detailsTextStyle,
     required this.suffixIconStyle,
-    this.padding = const .raw(.directional(start: 10, top: 12.5, bottom: 12.5, end: 6), {
-      .desktop: .directional(start: 10, top: 5.5, bottom: 5.5, end: 6),
-    }),
+    required this.padding,
     this.prefixIconSpacing = 8,
     this.titleSpacing = 4,
     this.middleSpacing = 4,
@@ -216,39 +212,43 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
     required Color prefix,
     required Color foreground,
     required Color mutedForeground,
+    bool desktop = false,
   }) {
     final disabledMutedForeground = colors.disable(mutedForeground);
     return FItemContentStyle(
-      prefixIconStyle: FVariants.from(
+      prefixIconStyle: .from(
         IconThemeData(color: prefix, size: typography.md.fontSize),
         variants: {
           [.disabled]: .delta(color: colors.disable(prefix)),
         },
       ),
-      titleTextStyle: FVariants.from(
+      titleTextStyle: .from(
         typography.sm.copyWith(color: foreground),
         variants: {
           [.disabled]: .delta(color: colors.disable(foreground)),
         },
       ),
-      subtitleTextStyle: FVariants.from(
+      subtitleTextStyle: .from(
         typography.xs.copyWith(color: mutedForeground),
         variants: {
           [.disabled]: .delta(color: disabledMutedForeground),
         },
       ),
-      detailsTextStyle: FVariants.from(
+      detailsTextStyle: .from(
         typography.xs.copyWith(color: mutedForeground),
         variants: {
           [.disabled]: .delta(color: disabledMutedForeground),
         },
       ),
-      suffixIconStyle: FVariants.from(
+      suffixIconStyle: .from(
         IconThemeData(color: mutedForeground, size: typography.md.fontSize),
         variants: {
           [.disabled]: .delta(color: disabledMutedForeground),
         },
       ),
+      padding: desktop
+          ? const .directional(start: 10, top: 6, bottom: 5, end: 5)
+          : const .directional(start: 10, top: 12.5, bottom: 12.5, end: 6),
     );
   }
 }

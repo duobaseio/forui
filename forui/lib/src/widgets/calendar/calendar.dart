@@ -170,13 +170,13 @@ class _State extends State<FCalendar> {
   @override
   Widget build(BuildContext context) {
     final style = widget.style(context.theme.calendarStyle);
-    final tileSize = style.dayPickerStyle.tileSize.resolve({context.platformVariant});
+    final tileSize = style.dayPickerStyle.tileSize;
     return DecoratedBox(
       decoration: style.decoration,
       child: Padding(
         padding: style.padding,
         child: SizedBox(
-          height: (DayPicker.maxRows * tileSize) + Header.height(style.headerStyle),
+          height: (DayPicker.maxRows * tileSize) + Header.height(style.headerStyle) + 7,
           width: DateTime.daysPerWeek * tileSize,
           child: Stack(
             alignment: .topCenter,
@@ -263,41 +263,48 @@ class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
   });
 
   /// Creates a [FCalendarStyle] that inherits its properties.
-  factory FCalendarStyle.inherit({required FColors colors, required FTypography typography, required FStyle style}) =>
-      FCalendarStyle(
-        headerStyle: .inherit(colors: colors, typography: typography, style: style),
-        dayPickerStyle: .inherit(colors: colors, typography: typography, style: style),
-        yearMonthPickerStyle: FCalendarEntryStyle(
-          backgroundColor: FVariants(
-            colors.card,
-            variants: {
-              [.hovered, .pressed]: colors.secondary,
-              //
-              [.disabled]: colors.card,
-            },
-          ),
-          borderSide: FVariants<FTappableVariantConstraint, FTappableVariant, BorderSide?, Delta>(
-            null,
-            variants: {
-              [.focused]: BorderSide(color: colors.foreground, width: style.borderWidth),
-              //
-              [.disabled]: null,
-            },
-          ),
-          textStyle: FVariants.from(
-            typography.sm.copyWith(color: colors.foreground, fontWeight: .w500),
-            variants: {
-              [.disabled]: .delta(color: colors.disable(colors.foreground)),
-            },
-          ),
-          borderRadius: style.borderRadius.md,
+  factory FCalendarStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+    bool desktop = false,
+  }) {
+    final borderRadius = desktop ? style.borderRadius.md : style.borderRadius.lg;
+    return FCalendarStyle(
+      headerStyle: .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
+      dayPickerStyle: .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
+      yearMonthPickerStyle: FCalendarEntryStyle(
+        backgroundColor: FVariants(
+          colors.card,
+          variants: {
+            [.hovered, .pressed]: colors.secondary,
+            //
+            [.disabled]: colors.card,
+          },
         ),
-        decoration: ShapeDecoration(
-          shape: RoundedSuperellipseBorder(
-            side: BorderSide(color: colors.border, width: style.borderWidth),
-            borderRadius: style.borderRadius.md,
-          ),
-          color: colors.card,
+        borderSide: FVariants<FTappableVariantConstraint, FTappableVariant, BorderSide?, Delta>(
+          null,
+          variants: {
+            [.focused]: BorderSide(color: colors.foreground, width: style.borderWidth),
+            //
+            [.disabled]: null,
+          },
         ),
-      );
+        textStyle: FVariants.from(
+          typography.sm.copyWith(color: colors.foreground, fontWeight: .w500),
+          variants: {
+            [.disabled]: .delta(color: colors.disable(colors.foreground)),
+          },
+        ),
+        borderRadius: borderRadius,
+      ),
+      decoration: ShapeDecoration(
+        shape: RoundedSuperellipseBorder(
+          side: BorderSide(color: colors.border, width: style.borderWidth),
+          borderRadius: borderRadius,
+        ),
+        color: colors.card,
+      ),
+    );
+  }
 }

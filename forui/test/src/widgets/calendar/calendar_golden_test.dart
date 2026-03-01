@@ -254,4 +254,32 @@ void main() {
       }, experimentalLeakTesting: LeakTesting.settings.withIgnoredAll());
     });
   }
+
+  testWidgets('desktop day picker', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold(
+        theme: FThemes.neutral.light.desktop,
+        child: FCalendar(
+          control: .managedDates(
+            initial: {DateTime.utc(2026, 5, 10), DateTime.utc(2026, 5, 15)},
+            selectable: (date) => date != .utc(2026, 5, 3),
+          ),
+          start: DateTime(1900, 1, 8),
+          end: DateTime(2030),
+          today: DateTime(2026, 5, 14),
+        ),
+      ),
+    );
+
+    final gesture = await tester.createPointerGesture();
+    await tester.pump();
+
+    await gesture.moveTo(tester.getCenter(find.text('8')));
+    await tester.pumpAndSettle();
+
+    await expectLater(
+      find.byType(TestScaffold),
+      matchesGoldenFile('calendar/neutral-light/day-picker/desktop.png'),
+    );
+  }, experimentalLeakTesting: LeakTesting.settings.withIgnoredAll());
 }

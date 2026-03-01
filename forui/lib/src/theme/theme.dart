@@ -18,7 +18,7 @@ part 'theme.design.dart';
 /// class Parent extends StatelessWidget {
 ///   @override
 ///   Widget build(BuildContext context) => FTheme(
-///      data: FThemes.neutral.light,
+///      data: FThemes.neutral.light.touch,
 ///      child: Child(),
 ///    );
 ///  }
@@ -36,8 +36,6 @@ part 'theme.design.dart';
 ///
 /// See:
 /// * [FBasicTheme], the non-animated theme widget wrapped by this widget.
-/// * [FThemeDataMixin] which describes a dynamic theme that can resolve to different [FThemeData] based on brightness
-///    and platform variant.
 /// * [FThemeData] which describes the actual configuration of a theme.
 class FTheme extends StatelessWidget {
   /// Returns the current [FThemeData], or `FThemes.neutral.light.touch` if there is no ancestor [FTheme].
@@ -56,7 +54,7 @@ class FTheme extends StatelessWidget {
   /// class Parent extends StatelessWidget {
   ///   @override
   ///   Widget build(BuildContext context) => FTheme(
-  ///      data: FThemes.neutral.light,
+  ///      data: FThemes.neutral.light.touch,
   ///      child: Child(),
   ///    );
   ///  }
@@ -75,7 +73,7 @@ class FTheme extends StatelessWidget {
   /// class Parent extends StatelessWidget {
   ///   @override
   ///   Widget build(BuildContext context) => FTheme(
-  ///      data: FThemes.neutral.light,
+  ///      data: FThemes.neutral.light.touch,
   ///      child: SomeWidget(
   ///        theme: FTheme.of(context), // Whoops!
   ///      ),
@@ -92,52 +90,10 @@ class FTheme extends StatelessWidget {
   final FThemeMotion motion;
 
   /// The theme.
-  ///
-  /// An [FAutoThemeData] automatically resolves to light or dark based on [brightness]:
-  /// ```dart
-  /// FTheme(
-  ///   data: FThemes.neutral, // Resolves based on the platform's brightness.
-  ///   child: Child(),
-  /// );
-  /// ```
-  ///
-  /// A [FThemeData] ignores [brightness] and [platform]:
-  /// ```dart
-  /// FTheme(
-  ///   data: FThemes.neutral.light.touch, // Always light and touch-optimized.
-  ///   child: Child(),
-  /// );
-  /// ```
-  final FThemeDataMixin data;
+  final FThemeData data;
 
   /// The text direction. Defaults to the text direction inherited from its nearest ancestor.
   final TextDirection? textDirection;
-
-  /// The theme's brightness. Defaults to the current platform's brightness.
-  ///
-  /// ## Troubleshooting:
-  ///
-  /// ### Theme does not change with brightness
-  ///
-  /// One of the most common cause is passing a pre-resolved theme, e.g. `FThemes.neutral.light`. To fix this, pass a
-  /// [FAutoThemeData] or brightness-aware theme such as [FThemes.neutral].
-  ///
-  /// ✅ Do:
-  /// ```dart
-  /// FTheme(
-  ///   data: FThemes.neutral, // Resolves to light or dark based on the platform's brightness.
-  ///   child: Child(),
-  /// );
-  /// ```
-  ///
-  /// ❌ Do not:
-  /// ```dart
-  /// FTheme(
-  ///   data: FThemes.neutral.light, // Always light, ignores the platform's brightness
-  ///   child: Child(),
-  /// );
-  /// ```
-  final Brightness? brightness;
 
   /// The platform variant. Defaults to the current platform.
   final FPlatformVariant? platform;
@@ -153,7 +109,6 @@ class FTheme extends StatelessWidget {
     required this.data,
     required this.child,
     this.textDirection,
-    this.brightness,
     this.platform,
     this.motion = const FThemeMotion(),
     this.onEnd,
@@ -162,9 +117,7 @@ class FTheme extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => _AnimatedTheme(
-    // This isn't technically correct since there is not [FAdaptiveScope] above this widget but it is better than
-    // forcing users to wrap their [FTheme] in an [FAdaptiveScope].
-    data: data.resolve(brightness ?? MediaQuery.platformBrightnessOf(context), platform ?? context.platformVariant),
+    data: data,
     textDirection: textDirection ?? Directionality.maybeOf(context) ?? .ltr,
     platform: platform,
     motion: motion,
@@ -179,7 +132,6 @@ class FTheme extends StatelessWidget {
       ..add(DiagnosticsProperty('motion', motion))
       ..add(DiagnosticsProperty('data', data))
       ..add(EnumProperty('textDirection', textDirection))
-      ..add(EnumProperty('brightness', brightness))
       ..add(DiagnosticsProperty('platform', platform))
       ..add(ObjectFlagProperty.has('onEnd', onEnd));
   }
@@ -270,7 +222,7 @@ extension FThemeBuildContext on BuildContext {
   /// class Parent extends StatelessWidget {
   ///   @override
   ///   Widget build(BuildContext context) => FTheme(
-  ///      data: FThemes.neutral.light,
+  ///      data: FThemes.neutral.light.touch,
   ///      child: Child(),
   ///    );
   ///  }
@@ -289,7 +241,7 @@ extension FThemeBuildContext on BuildContext {
   /// class Parent extends StatelessWidget {
   ///   @override
   ///   Widget build(BuildContext context) => FTheme(
-  ///      data: FThemes.neutral.light,
+  ///      data: FThemes.neutral.light.touch,
   ///      child: SomeWidget(
   ///        theme: context.theme, // Whoops!
   ///      ),
@@ -303,57 +255,13 @@ extension FThemeBuildContext on BuildContext {
 ///
 /// See:
 /// * [FTheme] which is an animated version of this widget.
-/// * [FThemeDataMixin] which describes a dynamic theme that can resolve to different [FThemeData] based on brightness
-///    and platform variant.
 /// * [FThemeData] which describes the actual configuration of a theme.
 class FBasicTheme extends StatelessWidget {
   /// The color and typography values for descendant Forui widgets.
-  ///
-  /// An [FAutoThemeData] automatically resolves to light or dark based on [brightness]:
-  /// ```dart
-  /// FBasicTheme(
-  ///   data: FThemes.neutral, // Resolves based on the platform's brightness.
-  ///   child: Child(),
-  /// );
-  /// ```
-  ///
-  /// A [FThemeData] ignores [brightness] and [platform]:
-  /// ```dart
-  /// FBasicTheme(
-  ///   data: FThemes.neutral.light.touch, // Always light and touch-optimized.
-  ///   child: Child(),
-  /// );
-  /// ```
-  final FThemeDataMixin data;
+  final FThemeData data;
 
   /// The text direction. Defaults to the text direction inherited from its nearest ancestor.
   final TextDirection? textDirection;
-
-  /// The theme's brightness. Defaults to the current platform's brightness.
-  ///
-  /// ## Troubleshooting:
-  ///
-  /// ### Theme does not change with brightness
-  ///
-  /// One of the most common cause is passing a pre-resolved theme, e.g. `FThemes.neutral.light`. To fix this, pass a
-  /// [FAutoThemeData] or brightness-aware theme such as [FThemes.neutral].
-  ///
-  /// ✅ Do:
-  /// ```dart
-  /// FBasicTheme(
-  ///   data: FThemes.neutral, // Resolves to light or dark based on the platform's brightness.
-  ///   child: Child(),
-  /// );
-  /// ```
-  ///
-  /// ❌ Do not:
-  /// ```dart
-  /// FBasicTheme(
-  ///   data: FThemes.neutral.light, // Always light, ignores the platform's brightness
-  ///   child: Child(),
-  /// );
-  /// ```
-  final Brightness? brightness;
 
   /// The platform variant. Defaults to the current platform.
   final FPlatformVariant? platform;
@@ -362,35 +270,23 @@ class FBasicTheme extends StatelessWidget {
   final Widget child;
 
   /// Creates a [FTheme] that applies [data] to all descendant widgets in [child].
-  const FBasicTheme({
-    required this.data,
-    required this.child,
-    this.textDirection,
-    this.brightness,
-    this.platform,
-    super.key,
-  });
+  const FBasicTheme({required this.data, required this.child, this.textDirection, this.platform, super.key});
 
   @override
   Widget build(BuildContext context) => FAdaptiveScope(
     platform: platform,
-    child: Builder(
-      builder: (context) {
-        final data = this.data.resolve(brightness ?? MediaQuery.platformBrightnessOf(context), context.platformVariant);
-        return _InheritedTheme(
-          data: data,
-          child: Directionality(
-            textDirection: textDirection ?? Directionality.maybeOf(context) ?? .ltr,
-            child: DefaultTextStyle(
-              style: data.typography.sm.copyWith(
-                fontFamily: data.typography.defaultFontFamily,
-                color: data.colors.foreground,
-              ),
-              child: child,
-            ),
+    child: _InheritedTheme(
+      data: data,
+      child: Directionality(
+        textDirection: textDirection ?? Directionality.maybeOf(context) ?? .ltr,
+        child: DefaultTextStyle(
+          style: data.typography.sm.copyWith(
+            fontFamily: data.typography.defaultFontFamily,
+            color: data.colors.foreground,
           ),
-        );
-      },
+          child: child,
+        ),
+      ),
     ),
   );
 
@@ -400,7 +296,6 @@ class FBasicTheme extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('data', data, showName: false))
       ..add(EnumProperty('textDirection', textDirection))
-      ..add(EnumProperty('brightness', brightness))
       ..add(DiagnosticsProperty('platform', platform));
   }
 }

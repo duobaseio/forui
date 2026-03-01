@@ -34,7 +34,8 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
 
   @override
   Widget build(BuildContext context) {
-    final theme = FThemes.zinc.resolve(brightness, platform);
+    final brightnessTheme = brightness == .light ? FThemes.zinc.light : FThemes.zinc.dark;
+    final theme = platform.desktop ? brightnessTheme.desktop : brightnessTheme.touch;
 
     return MaterialApp(
       locale: const Locale('en', 'US'),
@@ -42,8 +43,7 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
       supportedLocales: FLocalizations.supportedLocales,
       theme: theme.toApproximateMaterialTheme(),
       builder: (context, child) => FTheme(
-        data: FThemes.zinc,
-        brightness: brightness,
+        data: theme,
         platform: platform,
         child: FToaster(child: FTooltipGroup(child: child!)),
       ),
@@ -57,10 +57,8 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
                   icon: Icon(platform.desktop ? FIcons.smartphone : FIcons.monitor),
                   onPress: togglePlatform,
                 ),
-                FHeaderAction(
-                  icon: Icon(brightness == .dark ? FIcons.sun : FIcons.moon),
-                  onPress: toggleTheme,
-                ),
+                FHeaderAction(icon: Icon(brightness == .dark ? FIcons.sun : FIcons.moon), onPress: toggleTheme),
+                FHeaderAction(icon: const Icon(FIcons.mousePointerClick), onPress: toggleWidgetInspector),
               ],
             ),
             footer: FBottomNavigationBar(
@@ -81,6 +79,12 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
     );
   }
 
-  void toggleTheme() => setState(() => brightness = brightness == .light ? .dark : .light);
   void togglePlatform() => setState(() => platform = platform.desktop ? .iOS : .macOS);
+
+  void toggleTheme() => setState(() => brightness = brightness == .light ? .dark : .light);
+
+  void toggleWidgetInspector() => setState(() {
+    final binding = WidgetsBinding.instance;
+    binding.debugShowWidgetInspectorOverride = !binding.debugShowWidgetInspectorOverride;
+  });
 }

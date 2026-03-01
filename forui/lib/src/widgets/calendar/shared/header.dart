@@ -24,7 +24,7 @@ enum FCalendarPickerType {
 class Header extends StatefulWidget {
   static double height(FCalendarHeaderStyle style) => math.max(
     (style.headerTextStyle.fontSize ?? 16) * (style.headerTextStyle.height ?? 1),
-    style.buttonStyle.resolve(variants).iconContentStyle.padding.vertical +
+    style.buttonStyle.iconContentStyle.padding.vertical +
         (style.buttonStyle.iconContentStyle.iconStyle.base.size ?? 16),
   );
 
@@ -86,7 +86,7 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
                 end: Directionality.maybeOf(context) == .rtl ? -0.25 : 0.25,
               ).animate(_controller),
               child: Padding(
-                padding: const .all(2.0),
+                padding: const .symmetric(horizontal: 2.0),
                 child: IconTheme(
                   data: widget.style.buttonStyle.iconContentStyle.iconStyle
                       .resolve(variants)
@@ -149,7 +149,6 @@ class Navigation extends StatelessWidget {
             padding: const .directional(start: 7),
             child: FButton.icon(style: style.buttonStyle, onPress: onPrevious, child: const Icon(FIcons.chevronLeft)),
           ),
-
           const Expanded(child: SizedBox()),
           Padding(
             padding: const .directional(end: 7),
@@ -178,7 +177,7 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
 
   /// The button style. Defaults to outline sm on touch and outline xs on desktop.
   @override
-  final FVariants<FPlatformVariantConstraint, FPlatformVariant, FButtonStyle, FButtonStyleDelta> buttonStyle;
+  final FButtonStyle buttonStyle;
 
   /// The header's text style.
   @override
@@ -206,18 +205,37 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
     required FColors colors,
     required FTypography typography,
     required FStyle style,
+    bool desktop = false,
   }) {
-    final buttons = FButtonStyles.inherit(colors: colors, typography: typography, style: style).outline;
-    return .new(
-      focusedOutlineStyle: style.focusedOutlineStyle,
-      buttonStyle: FVariants(
-        buttons.xs,
-        variants: {
-          [.desktop]: buttons.sm,
-        },
-      ),
-      headerTextStyle: typography.sm.copyWith(color: colors.foreground, fontWeight: .w500),
-      headerIconSize: typography.md.fontSize!,
-    );
+    if (desktop) {
+      return FCalendarHeaderStyle(
+        focusedOutlineStyle: style.focusedOutlineStyle,
+        buttonStyle: FButtonStyles.inherit(
+          colors: colors,
+          typography: typography,
+          style: style,
+          desktop: desktop,
+        ).outline.xs,
+        headerTextStyle: typography.sm.copyWith(color: colors.foreground, fontWeight: .w500),
+        headerIconSize: typography.md.fontSize!,
+      );
+    } else {
+      return FCalendarHeaderStyle(
+        focusedOutlineStyle: style.focusedOutlineStyle,
+        buttonStyle: FButtonStyles.inherit(
+          colors: colors,
+          typography: typography,
+          style: style,
+          desktop: desktop,
+        ).outline.md,
+        headerTextStyle: typography.md.copyWith(
+          color: colors.foreground,
+          fontWeight: .w500,
+          height: 1,
+          leadingDistribution: .even,
+        ),
+        headerIconSize: typography.md.fontSize!,
+      );
+    }
   }
 }
