@@ -287,7 +287,6 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
       ),
       tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
       focusedOutlineStyle: null,
-      margin: const .symmetric(horizontal: 4),
     ),
   );
 }

@@ -51,7 +51,7 @@ class ItemContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ItemContentLayout(
     margin: margin,
-    padding: style.padding,
+    padding: style.padding.resolve({context.platformVariant}),
     top: top,
     bottom: bottom,
     dividerColor: dividerColor?.resolve(variants),
@@ -134,9 +134,13 @@ class ItemContent extends StatelessWidget {
 
 /// An [FItem] content's style.
 class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
-  /// The content's padding. Defaults to `const EdgeInsetsDirectional.only(start: 10, top: 6, bottom: 6, end: 6)`.
+  /// The content's padding.
+  ///
+  /// Defaults to:
+  /// * touch: `EdgeInsetsDirectional.only(start: 10, top: 12.5, bottom: 12.5, end: 6)`
+  /// * desktop: `EdgeInsetsDirectional.only(start: 10, top: 6, bottom: 6, end: 6)`
   @override
-  final EdgeInsetsGeometry padding;
+  final FVariants<FPlatformVariantConstraint, FPlatformVariant, EdgeInsetsGeometry, Delta> padding;
 
   /// The prefix icon style.
   @override
@@ -193,7 +197,9 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
     required this.subtitleTextStyle,
     required this.detailsTextStyle,
     required this.suffixIconStyle,
-    this.padding = const .directional(start: 10, top: 6, bottom: 6, end: 6),
+    this.padding = const .raw(.directional(start: 10, top: 12.5, bottom: 12.5, end: 6), {
+      .desktop: .directional(start: 10, top: 5.5, bottom: 5.5, end: 6),
+    }),
     this.prefixIconSpacing = 8,
     this.titleSpacing = 4,
     this.middleSpacing = 4,

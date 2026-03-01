@@ -25,7 +25,7 @@ final item = FItem(
   onVariantChange: (previous, current) {},
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(margin: .value(.zero)),
+  style: const .delta(margin: FVariants.all(EdgeInsets.zero)),
   enabled: true,
   selected: false,
   onPress: () {},
@@ -58,7 +58,7 @@ final raw = FItem.raw(
   onVariantChange: (previous, current) {},
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(margin: .value(.zero)),
+  style: const .delta(margin: FVariants.all(EdgeInsets.zero)),
   enabled: true,
   selected: false,
   onPress: () {},

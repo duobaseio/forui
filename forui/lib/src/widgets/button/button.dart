@@ -493,7 +493,7 @@ extension type FButtonSizeStyles(
       FVariants(
         md,
         variants: {
-          [.xs]: button(
+          [.xs.and(.touch)]: button(
             borderRadius: style.borderRadius.sm,
             textStyle: typography.xs,
             contentPadding: const .symmetric(horizontal: 10, vertical: 9),
@@ -511,7 +511,7 @@ extension type FButtonSizeStyles(
             iconSize: typography.sm.fontSize ?? 14,
             iconPadding: const .all(5),
           ),
-          [.sm]: button(
+          [.sm.and(.touch)]: button(
             borderRadius: style.borderRadius.md,
             textStyle: typography.sm,
             contentPadding: const .symmetric(horizontal: 12, vertical: 12),
@@ -529,7 +529,7 @@ extension type FButtonSizeStyles(
             iconSize: typography.md.fontSize ?? 16,
             iconPadding: const .all(8),
           ),
-          [.md]: md,
+          [.md.and(.touch)]: md,
           [.md.and(.desktop)]: button(
             borderRadius: style.borderRadius.md,
             textStyle: typography.sm,
@@ -539,7 +539,7 @@ extension type FButtonSizeStyles(
             iconSize: typography.md.fontSize ?? 16,
             iconPadding: const .all(10),
           ),
-          [.lg]: button(
+          [.lg.and(.touch)]: button(
             borderRadius: style.borderRadius.md,
             textStyle: typography.sm,
             contentPadding: const .symmetric(horizontal: 12, vertical: 16),

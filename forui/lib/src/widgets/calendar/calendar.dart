@@ -170,13 +170,14 @@ class _State extends State<FCalendar> {
   @override
   Widget build(BuildContext context) {
     final style = widget.style(context.theme.calendarStyle);
+    final tileSize = style.dayPickerStyle.tileSize.resolve({context.platformVariant});
     return DecoratedBox(
       decoration: style.decoration,
       child: Padding(
         padding: style.padding,
         child: SizedBox(
-          height: (DayPicker.maxRows * style.dayPickerStyle.tileSize) + Header.height + 5,
-          width: DateTime.daysPerWeek * style.dayPickerStyle.tileSize,
+          height: (DayPicker.maxRows * tileSize) + Header.height(style.headerStyle),
+          width: DateTime.daysPerWeek * tileSize,
           child: Stack(
             alignment: .topCenter,
             children: [

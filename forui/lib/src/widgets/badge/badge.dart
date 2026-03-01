@@ -116,9 +116,9 @@ extension type FBadgeStyles(FVariants<FBadgeVariantConstraint, FBadgeVariant, FB
           ),
         ),
         variants: {
-          [.primary]: const .delta(),
+          [.primary.and(.touch)]: const .delta(),
           [.primary.and(.desktop)]: const .delta(contentStyle: .delta(padding: .value(desktopPadding))),
-          [.secondary]: .delta(
+          [.secondary.and(.touch)]: .delta(
             decoration: .shapeDelta(color: colors.secondary),
             contentStyle: .delta(labelTextStyle: .delta(color: colors.secondaryForeground)),
           ),
@@ -129,7 +129,7 @@ extension type FBadgeStyles(FVariants<FBadgeVariantConstraint, FBadgeVariant, FB
               padding: const .value(desktopPadding),
             ),
           ),
-          [.destructive]: FBadgeStyle(
+          [.destructive.and(.touch)]: FBadgeStyle(
             decoration: destructiveDecoration,
             contentStyle: FBadgeContentStyle(labelTextStyle: destructiveTextStyle),
           ),
@@ -137,7 +137,7 @@ extension type FBadgeStyles(FVariants<FBadgeVariantConstraint, FBadgeVariant, FB
             decoration: destructiveDecoration,
             contentStyle: FBadgeContentStyle(labelTextStyle: destructiveTextStyle, padding: desktopPadding),
           ),
-          [.outline]: .delta(
+          [.outline.and(.touch)]: .delta(
             decoration: .shapeDelta(shape: outlineShape, color: colors.card),
             contentStyle: .delta(labelTextStyle: .delta(color: colors.foreground)),
           ),

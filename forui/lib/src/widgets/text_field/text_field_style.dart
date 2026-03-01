@@ -73,7 +73,7 @@ extension type FTextFieldSizeStyles(
       FVariants(
         md,
         variants: {
-          [.sm]: textField(
+          [.sm.and(.touch)]: textField(
             iconStyle: iconStyle,
             buttonStyle: buttonStyle,
             contentPadding: const .symmetric(horizontal: 12, vertical: 8),
@@ -86,14 +86,14 @@ extension type FTextFieldSizeStyles(
             contentPadding: const .symmetric(horizontal: 10, vertical: 7),
           ),
           //
-          [.md]: md,
+          [.md.and(.touch)]: md,
           [.md.and(.desktop)]: textField(
             iconStyle: iconStyle,
             buttonStyle: buttonStyle,
             contentPadding: const .symmetric(horizontal: 10, vertical: 9),
           ),
           //
-          [.lg]: textField(
+          [.lg.and(.touch)]: textField(
             iconStyle: iconStyle,
             buttonStyle: buttonStyle,
             contentPadding: const .symmetric(horizontal: 12, vertical: 12),
