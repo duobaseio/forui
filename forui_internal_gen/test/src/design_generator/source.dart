@@ -47,6 +47,7 @@ class FGoldenStyle with Diagnosticable, _$FGoldenStyleFunctions {
   final FVariants<FGoldenVariantConstraint, FGoldenVariant, FGoldenNestedMotion, FGoldenNestedMotionDelta> nestedMotionVariants;
   final FGoldenNestedMotion nestedMotion;
   final FGoldenNestedStyle nestedStyle;
+  final FAlertStyles alertStyles;
   final List<String> list;
   final Set<String> set;
   final Map<String, int> map;
@@ -80,6 +81,7 @@ class FGoldenStyle with Diagnosticable, _$FGoldenStyleFunctions {
     required this.nestedMotionVariants,
     required this.nestedMotion,
     required this.nestedStyle,
+    required this.alertStyles,
     required this.list,
     required this.set,
     required this.map,

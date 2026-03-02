@@ -10,7 +10,6 @@ import 'package:forui/src/widgets/text_field/obscure_text_control.dart';
 /// A callback for building a field's icon.
 ///
 /// [style] is the field's style.
-/// [size] is the field's size variant.
 /// [obscure] controls the visibility of the password.
 /// [variants] is the current variants.
 ///

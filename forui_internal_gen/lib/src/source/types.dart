@@ -4,7 +4,7 @@ import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/nullability_suffix.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:build/build.dart';
-import 'package:code_builder/code_builder.dart';
+import 'package:code_builder/code_builder.dart' hide RepresentationDeclaration;
 import 'package:source_gen/source_gen.dart';
 
 // ignore_for_file: public_member_api_docs
@@ -122,32 +122,31 @@ Future<(String type, String assignment, String? sentinel)> deltaField(
   String prefix = 'this',
   bool cast = false,
 }) async {
-  final name = field.name!;
+  final fieldName = field.name!;
   final typeName = field.type.getDisplayString();
 
-  // Nested styles
-  if ((typeName.startsWith('F') && !typeName.startsWith('FInherited')) &&
-      (typeName.endsWith('Style') || typeName.endsWith('Styles'))) {
-    return ('${typeName}Delta?', '$name?.call($prefix.$name) ?? $prefix.$name', null);
-  }
+  // Extension types wrapping FVariants - use AST to get types (generated types may not be resolved yet)
+  if (field.type case InterfaceType(:final ExtensionTypeElement element)) {
+    var extension = await step.resolver.astNodeFor(element.firstFragment);
+    while (extension != null && extension is! ExtensionTypeDeclaration) {
+      extension = extension.parent;
+    }
 
-  // Nested motions
-  if (typeName.startsWith('F') && typeName.endsWith('Motion')) {
-    return ('${typeName}Delta?', '$name?.call($prefix.$name) ?? $prefix.$name', null);
-  }
+    if (extension case ExtensionTypeDeclaration(
+      representation: RepresentationDeclaration(fieldType: NamedType(:final name, :final typeArguments?)),
+    ) when name.lexeme == 'FVariants') {
+      final [kAst, eAst, vAst, dAst] = typeArguments.arguments;
+      final k = kAst.toSource();
+      final e = eAst.toSource();
+      final v = vAst.toSource();
+      final d = dAst.toSource();
 
-  // Supported Flutter in-built types
-  if (const {
-    'BoxDecoration',
-    'Decoration',
-    'EdgeInsets',
-    'EdgeInsetsDirectional',
-    'EdgeInsetsGeometry',
-    'IconThemeData',
-    'ShapeDecoration',
-    'TextStyle',
-  }.contains(typeName)) {
-    return ('${typeName}Delta?', '$name?.call($prefix.$name) ?? $prefix.$name', null);
+      final deltaType = (dAst as NamedType).name.lexeme == 'Delta'
+          ? 'FVariantsValueDelta<$k, $e, $v, $d>'
+          : 'FVariantsDelta<$k, $e, $v, $d>';
+
+      return ('$deltaType?', '$typeName($fieldName?.call($prefix.$fieldName) ?? $prefix.$fieldName)', null);
+    }
   }
 
   // FVariants<K extends FVariantConstraint, V, D extends Delta<V>>
@@ -164,21 +163,46 @@ Future<(String type, String assignment, String? sentinel)> deltaField(
         ? 'FVariantsValueDelta<$k, $e, $v, $d>'
         : 'FVariantsDelta<$k, $e, $v, $d>';
 
-    return ('$deltaType?', '$name?.call($prefix.$name) ?? $prefix.$name', null);
+    return ('$deltaType?', '$fieldName?.call($prefix.$fieldName) ?? $prefix.$fieldName', null);
+  }
+
+  // Nested styles
+  if ((typeName.startsWith('F') && !typeName.startsWith('FInherited')) &&
+      (typeName.endsWith('Style') || typeName.endsWith('Styles'))) {
+    return ('${typeName}Delta?', '$fieldName?.call($prefix.$fieldName) ?? $prefix.$fieldName', null);
+  }
+
+  // Nested motions
+  if (typeName.startsWith('F') && typeName.endsWith('Motion')) {
+    return ('${typeName}Delta?', '$fieldName?.call($prefix.$fieldName) ?? $prefix.$fieldName', null);
+  }
+
+  // Supported Flutter in-built types
+  if (const {
+    'BoxDecoration',
+    'Decoration',
+    'EdgeInsets',
+    'EdgeInsetsDirectional',
+    'EdgeInsetsGeometry',
+    'IconThemeData',
+    'ShapeDecoration',
+    'TextStyle',
+  }.contains(typeName)) {
+    return ('${typeName}Delta?', '$fieldName?.call($prefix.$fieldName) ?? $prefix.$fieldName', null);
   }
 
   // Nullable types with explicit sentinel values
   if (sentinels[field.name] case final sentinel?) {
-    return (typeName, '$name == $sentinel ? $prefix.$name : $name', sentinel);
+    return (typeName, '$fieldName == $sentinel ? $prefix.$fieldName : $fieldName', sentinel);
   }
 
   // Enums and nullable types without explicit sentinel values
   if (field.type.nullabilitySuffix == NullabilitySuffix.question &&
       (enumeration.isAssignableFromType(field.type) || !sentinels.containsKey(field.name))) {
-    return ('$typeName Function()?', '$name == null ? $prefix.$name : $name${cast ? '!' : ''}()', null);
+    return ('$typeName Function()?', '$fieldName == null ? $prefix.$fieldName : $fieldName${cast ? '!' : ''}()', null);
   }
 
-  return ('$typeName?', '$name ?? $prefix.$name', null);
+  return ('$typeName?', '$fieldName ?? $prefix.$fieldName', null);
 }
 
 /// Returns the type string for a field, handling FVariants circular dependency.

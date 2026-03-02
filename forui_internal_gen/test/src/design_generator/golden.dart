@@ -126,6 +126,7 @@ extension $FGoldenStyleTransformations on FGoldenStyle {
   /// * [FGoldenStyle.nestedMotionVariants]
   /// * [FGoldenStyle.nestedMotion]
   /// * [FGoldenStyle.nestedStyle]
+  /// * [FGoldenStyle.alertStyles]
   /// * [FGoldenStyle.list]
   /// * [FGoldenStyle.set]
   /// * [FGoldenStyle.map]
@@ -163,6 +164,7 @@ extension $FGoldenStyleTransformations on FGoldenStyle {
     nestedMotionVariants,
     FGoldenNestedMotionDelta? nestedMotion,
     FGoldenNestedStyleDelta? nestedStyle,
+    FVariantsDelta<FAlertVariantConstraint, FAlertVariant, FAlertStyle, FAlertStyleDelta>? alertStyles,
     List<String>? list,
     Set<String>? set,
     Map<String, int>? map,
@@ -200,6 +202,7 @@ extension $FGoldenStyleTransformations on FGoldenStyle {
     nestedMotionVariants: nestedMotionVariants?.call(this.nestedMotionVariants) ?? this.nestedMotionVariants,
     nestedMotion: nestedMotion?.call(this.nestedMotion) ?? this.nestedMotion,
     nestedStyle: nestedStyle?.call(this.nestedStyle) ?? this.nestedStyle,
+    alertStyles: FAlertStyles(alertStyles?.call(this.alertStyles) ?? this.alertStyles),
     list: list ?? this.list,
     set: set ?? this.set,
     map: map ?? this.map,
@@ -257,6 +260,7 @@ extension $FGoldenStyleTransformations on FGoldenStyle {
     nestedMotionVariants: .lerpWhere(nestedMotionVariants, other.nestedMotionVariants, t, (a, b, t) => a!.lerp(b!, t)),
     nestedMotion: nestedMotion.lerp(other.nestedMotion, t),
     nestedStyle: nestedStyle.lerp(other.nestedStyle, t),
+    alertStyles: FAlertStyles(.lerpWhere(alertStyles, other.alertStyles, t, (a, b, t) => a!.lerp(b!, t))),
     list: t < 0.5 ? list : other.list,
     set: t < 0.5 ? set : other.set,
     map: t < 0.5 ? map : other.map,
@@ -300,6 +304,7 @@ mixin _$FGoldenStyleFunctions on Diagnosticable implements FGoldenStyleDelta {
   get nestedMotionVariants;
   FGoldenNestedMotion get nestedMotion;
   FGoldenNestedStyle get nestedStyle;
+  FAlertStyles get alertStyles;
   List<String> get list;
   Set<String> get set;
   Map<String, int> get map;
@@ -336,6 +341,7 @@ mixin _$FGoldenStyleFunctions on Diagnosticable implements FGoldenStyleDelta {
       ..add(DiagnosticsProperty('nestedMotionVariants', nestedMotionVariants, level: .debug))
       ..add(DiagnosticsProperty('nestedMotion', nestedMotion, level: .debug))
       ..add(DiagnosticsProperty('nestedStyle', nestedStyle, level: .debug))
+      ..add(DiagnosticsProperty('alertStyles', alertStyles, level: .debug))
       ..add(IterableProperty('list', list, level: .debug))
       ..add(IterableProperty('set', set, level: .debug))
       ..add(DiagnosticsProperty('map', map, level: .debug));
@@ -375,6 +381,7 @@ mixin _$FGoldenStyleFunctions on Diagnosticable implements FGoldenStyleDelta {
           nestedMotionVariants == other.nestedMotionVariants &&
           nestedMotion == other.nestedMotion &&
           nestedStyle == other.nestedStyle &&
+          alertStyles == other.alertStyles &&
           listEquals(list, other.list) &&
           setEquals(set, other.set) &&
           mapEquals(map, other.map));
@@ -410,6 +417,7 @@ mixin _$FGoldenStyleFunctions on Diagnosticable implements FGoldenStyleDelta {
       nestedMotionVariants.hashCode ^
       nestedMotion.hashCode ^
       nestedStyle.hashCode ^
+      alertStyles.hashCode ^
       const ListEquality().hash(list) ^
       const SetEquality().hash(set) ^
       const MapEquality().hash(map);
@@ -451,6 +459,7 @@ abstract class FGoldenStyleDelta with Delta {
   /// * [FGoldenStyle.nestedMotionVariants]
   /// * [FGoldenStyle.nestedMotion]
   /// * [FGoldenStyle.nestedStyle]
+  /// * [FGoldenStyle.alertStyles]
   /// * [FGoldenStyle.list]
   /// * [FGoldenStyle.set]
   /// * [FGoldenStyle.map]
@@ -487,6 +496,7 @@ abstract class FGoldenStyleDelta with Delta {
     nestedMotionVariants,
     FGoldenNestedMotionDelta? nestedMotion,
     FGoldenNestedStyleDelta? nestedStyle,
+    FVariantsDelta<FAlertVariantConstraint, FAlertVariant, FAlertStyle, FAlertStyleDelta>? alertStyles,
     List<String>? list,
     Set<String>? set,
     Map<String, int>? map,
@@ -530,6 +540,7 @@ class _FGoldenStyleDelta implements FGoldenStyleDelta {
     this.nestedMotionVariants,
     this.nestedMotion,
     this.nestedStyle,
+    this.alertStyles,
     this.list,
     this.set,
     this.map,
@@ -599,6 +610,8 @@ class _FGoldenStyleDelta implements FGoldenStyleDelta {
 
   final FGoldenNestedStyleDelta? nestedStyle;
 
+  final FVariantsDelta<FAlertVariantConstraint, FAlertVariant, FAlertStyle, FAlertStyleDelta>? alertStyles;
+
   final List<String>? list;
 
   final Set<String>? set;
@@ -646,6 +659,7 @@ class _FGoldenStyleDelta implements FGoldenStyleDelta {
     nestedMotionVariants: nestedMotionVariants?.call(original.nestedMotionVariants) ?? original.nestedMotionVariants,
     nestedMotion: nestedMotion?.call(original.nestedMotion) ?? original.nestedMotion,
     nestedStyle: nestedStyle?.call(original.nestedStyle) ?? original.nestedStyle,
+    alertStyles: FAlertStyles(alertStyles?.call(original.alertStyles) ?? original.alertStyles),
     list: list ?? original.list,
     set: set ?? original.set,
     map: map ?? original.map,

@@ -1,7 +1,7 @@
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
-import 'package:code_builder/code_builder.dart';
+import 'package:code_builder/code_builder.dart' hide RepresentationDeclaration;
 import 'package:forui_internal_gen/src/source/transformations_extension.dart';
 import 'package:forui_internal_gen/src/source/types.dart';
 import 'package:meta/meta.dart';
@@ -49,9 +49,39 @@ class DesignTransformationsExtension extends TransformationsExtension {
           final t when shadow.isAssignableFromType(t) => 'Shadow.lerpList($name, other.$name, t) ?? $name',
           _ => 't < 0.5 ? $name : other.$name',
         },
+        // Extension types wrapping FVariants - use AST to get V type (generated types may not be resolved yet)
+        InterfaceType(:final ExtensionTypeElement element) => await () async {
+          var extension = await step.resolver.astNodeFor(element.firstFragment);
+          while (extension != null && extension is! ExtensionTypeDeclaration) {
+            extension = extension.parent;
+          }
+
+          if (extension case ExtensionTypeDeclaration(
+            representation: RepresentationDeclaration(fieldType: NamedType(name: final representationName, :final typeArguments?)),
+          ) when representationName.lexeme == 'FVariants') {
+            // Supported inner types:
+            return switch (typeArguments.arguments[2].toSource()) {
+              'BoxDecoration' => '$typeName(.lerpBoxDecoration($name, other.$name, t))',
+              'BoxDecoration?' => '$typeName(.lerpWhere($name, other.$name, t, BoxDecoration.lerp))',
+              'Decoration' => '$typeName(.lerpDecoration($name, other.$name, t))',
+              'Decoration?' => '$typeName(.lerpWhere($name, other.$name, t, Decoration.lerp))',
+              'Color' => '$typeName(.lerpColor($name, other.$name, t))',
+              'Color?' => '$typeName(.lerpWhere($name, other.$name, t, Color.lerp))',
+              'IconThemeData' => '$typeName(.lerpIconThemeData($name, other.$name, t))',
+              'IconThemeData?' => '$typeName(.lerpWhere($name, other.$name, t, IconThemeData.lerp))',
+              'TextStyle' => '$typeName(.lerpTextStyle($name, other.$name, t))',
+              'TextStyle?' => '$typeName(.lerpWhere($name, other.$name, t, TextStyle.lerp))',
+              final nested when nestedMotion(nested) || nestedStyle(nested) =>
+                '$typeName(.lerpWhere($name, other.$name, t, (a, b, t) => a!.lerp(b!, t)))',
+              _ => 't < 0.5 ? $name : other.$name',
+            };
+          }
+          return 't < 0.5 ? $name : other.$name';
+        }(),
         // FVariants<K, V, D> - use AST to get type due to circular dependency
         InterfaceType(:final element) when element.name == 'FVariants' => await () async {
           final node = await step.resolver.astNodeFor(field.firstFragment);
+
           if (node?.parent case VariableDeclarationList(type: NamedType(:final typeArguments?))) {
             return switch (typeArguments.arguments[2].toSource()) {
               'BoxDecoration' => '.lerpBoxDecoration($name, other.$name, t)',
