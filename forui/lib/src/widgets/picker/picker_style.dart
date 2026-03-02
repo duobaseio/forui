@@ -34,11 +34,11 @@ class FPickerStyle with Diagnosticable, _$FPickerStyleFunctions {
   @override
   final double spacing;
 
-  /// The picker's default text style.
+  /// The picker's text style.
   @override
   final TextStyle textStyle;
 
-  /// The picker's default text height behavior.
+  /// The picker's text height behavior.
   @override
   final TextHeightBehavior textHeightBehavior;
 
@@ -81,7 +81,7 @@ class FPickerStyle with Diagnosticable, _$FPickerStyleFunctions {
   /// Creates a [FPickerStyle] that inherits its properties.
   FPickerStyle.inherit({required FColors colors, required FStyle style, required FTypography typography})
     : this(
-        textStyle: typography.md.copyWith(fontWeight: .w500),
+        textStyle: typography.sm.copyWith(fontWeight: .w500),
         selectionDecoration: ShapeDecoration(
           shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
           color: colors.muted,

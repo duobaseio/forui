@@ -12,7 +12,10 @@ import 'package:forui/src/theme/delta/delta.dart';
 import 'package:forui/src/theme/variant.dart';
 import 'package:forui/src/widgets/dialog/dialog_content.dart';
 
-@Variants('FDialogAxis', {'vertical': (1, 'The vertical dialog variant.')})
+@Variants('FDialogAxis', {
+  'horizontal': (1, 'The horizontal dialog variant.'),
+  'vertical': (1, 'The vertical dialog variant.'),
+})
 @Sentinels(FDialogStyle, {'backgroundFilter': 'imageFilterFunctionSentinel'})
 part 'dialog.design.dart';
 
@@ -540,9 +543,23 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
   });
 
   /// Creates a [FDialogStyle] that inherits its properties.
-  factory FDialogStyle.inherit({required FStyle style, required FColors colors, required FTypography typography}) {
+  factory FDialogStyle.inherit({
+    required FStyle style,
+    required FColors colors,
+    required FTypography typography,
+  }) {
     final title = typography.lg.copyWith(fontWeight: .w600, color: colors.foreground);
     final body = typography.sm.copyWith(color: colors.mutedForeground);
+
+    final horizontal = FDialogContentStyle(
+      titleTextStyle: title,
+      bodyTextStyle: body,
+      padding: const .only(left: 16, right: 16, top: 8, bottom: 14),
+      titleSpacing: 4,
+      bodySpacing: 8,
+      actionSpacing: 10,
+    );
+
     return .new(
       decoration: ShapeDecoration(
         shape: RoundedSuperellipseBorder(
@@ -558,20 +575,14 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
         },
       ),
       contentStyle: FVariants(
-        FDialogContentStyle(
-          titleTextStyle: title,
-          bodyTextStyle: body,
-          padding: const .only(left: 16, right: 16, top: 8, bottom: 14),
-          titleSpacing: 8,
-          bodySpacing: 8,
-          actionSpacing: 10,
-        ),
+        horizontal,
         variants: {
+          [.horizontal]: horizontal,
           [.vertical]: FDialogContentStyle(
             titleTextStyle: title,
             bodyTextStyle: body,
             padding: const .only(left: 16, right: 16, top: 8, bottom: 14),
-            titleSpacing: 6,
+            titleSpacing: 4,
             bodySpacing: 6,
             actionSpacing: 8,
           ),

@@ -132,8 +132,8 @@ class FTextField extends StatelessWidget {
     control: control,
     builder: (context, controller, _) => PasswordField(
       controller: controller,
-      size: size,
       properties: PasswordFieldProperties(
+        size: size,
         style: style,
         builder: builder,
         label: label,

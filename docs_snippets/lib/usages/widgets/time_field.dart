@@ -40,7 +40,8 @@ final timeField = FTimeField(
   focusNode: null,
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(fieldStyle: .delta(labelPadding: .value(.symmetric(vertical: 7)))),
+  size: .md,
+  style: .delta(fieldStyles: .delta([.all(const .delta(labelPadding: .value(.symmetric(vertical: 7))))])),
   enabled: true,
   hour24: false,
   // {@endcategory}
@@ -93,7 +94,8 @@ final timeFieldPicker = FTimeField.picker(
   focusNode: null,
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(fieldStyle: .delta(labelPadding: .value(.symmetric(vertical: 7)))),
+  size: .md,
+  style: .delta(fieldStyles: .delta([.all(const .delta(labelPadding: .value(.symmetric(vertical: 7))))])),
   enabled: true,
   hour24: false,
   // {@endcategory}
@@ -139,5 +141,17 @@ final FPopoverControl popoverExternal = .managed(
   controller: FPopoverController(vsync: vsync, shown: true, motion: const FPopoverMotion()),
   onChange: (shown) {},
 );
+
+// {@category "Size" "Small"}
+/// The time field's small size.
+const FTextFieldSizeVariant sm = .sm;
+
+// {@category "Size" "Medium"}
+/// The time field's medium (default) size.
+const FTextFieldSizeVariant md = .md;
+
+// {@category "Size" "Large"}
+/// The time field's large size.
+const FTextFieldSizeVariant lg = .lg;
 
 TickerProvider get vsync => throw UnimplementedError();

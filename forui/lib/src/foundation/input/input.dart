@@ -12,6 +12,8 @@ import 'package:forui/src/localizations/localizations_en.dart';
 @internal
 abstract class Input<T> extends StatefulWidget {
   final ValueNotifier<T?> controller;
+  final FTextFieldSizeVariant size;
+  final FPlatformVariant platformVariant;
   final Widget Function(BuildContext context, FTextFieldStyle style, Set<FTextFieldVariant> variants, Widget child)
   builder;
   final Widget? label;
@@ -41,6 +43,8 @@ abstract class Input<T> extends StatefulWidget {
 
   const Input({
     required this.controller,
+    required this.size,
+    required this.platformVariant,
     required this.builder,
     required this.label,
     required this.description,
@@ -74,6 +78,8 @@ abstract class Input<T> extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('size', size))
+      ..add(DiagnosticsProperty('platformVariant', platformVariant))
       ..add(ObjectFlagProperty.has('builder', builder))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
       ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
@@ -149,6 +155,7 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
           forceErrorText: widget.forceErrorText,
           builder: (state) => FTextField(
             control: .managed(controller: inputController),
+            size: widget.size,
             style: textFieldStyle,
             statesController: inputController.statesController,
             builder: widget.builder,

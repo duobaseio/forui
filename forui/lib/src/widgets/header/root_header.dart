@@ -22,6 +22,22 @@ class _FRootHeader extends FHeader {
   @override
   Widget build(BuildContext context) {
     final style = this.style(context.theme.headerStyles.resolve({FHeaderVariant.root, context.platformVariant}));
+
+    Widget actions;
+    if (suffixes.isEmpty) {
+      // We still want to reserve space for suffixes to prevent layout shifts when they appear.
+      actions = SizedBox(height: style.actionStyle.iconStyle.base.size! + style.actionStyle.padding.vertical);
+    } else {
+      actions = FHeaderData(
+        actionStyle: style.actionStyle,
+        child: Row(children: suffixes.expand((action) => [SizedBox(width: style.actionSpacing), action]).toList()),
+      );
+
+      if (style.slidableActions.resolve({context.platformVariant})) {
+        actions = FTappableGroup(child: actions);
+      }
+    }
+
     Widget header = SafeArea(
       bottom: false,
       child: Semantics(
@@ -44,12 +60,7 @@ class _FRootHeader extends FHeader {
                   child: title,
                 ),
               ),
-              FHeaderData(
-                actionStyle: style.actionStyle,
-                child: Row(
-                  children: suffixes.expand((action) => [SizedBox(width: style.actionSpacing), action]).toList(),
-                ),
-              ),
+              actions,
             ],
           ),
         ),

@@ -55,6 +55,7 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
     this.minuteInterval = 1,
     super.control,
     super.popoverControl,
+    super.size,
     super.style,
     super.hour24,
     super.autofocus,
@@ -175,7 +176,8 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
       builder: (state) => FTextField(
         control: .managed(controller: _textController),
         focusNode: _focus,
-        style: style.fieldStyle,
+        size: widget.size,
+        style: style.fieldStyles.resolve({widget.size, context.platformVariant}),
         textAlign: widget.textAlign,
         textAlignVertical: widget.textAlignVertical,
         textDirection: widget.textDirection,
@@ -187,12 +189,8 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
         hint: widget.hint ?? localizations.dateFieldHint,
         readOnly: true,
         enableInteractiveSelection: false,
-        prefixBuilder: widget.prefixBuilder == null
-            ? null
-            : (context, _, variants) => widget.prefixBuilder!(context, style, variants),
-        suffixBuilder: widget.suffixBuilder == null
-            ? null
-            : (context, _, variants) => widget.suffixBuilder!(context, style, variants),
+        prefixBuilder: widget.prefixBuilder,
+        suffixBuilder: widget.suffixBuilder,
         label: widget.label,
         description: widget.description,
         enabled: widget.enabled,

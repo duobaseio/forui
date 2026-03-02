@@ -18,7 +18,8 @@ class RawItemContent extends StatelessWidget {
   final double top;
   final double bottom;
   final Set<FTappableVariant> variants;
-  final FVariants<FItemGroupVariantConstraint, FItemGroupVariant, Color, Delta>? dividerColor;
+  final FVariants<FItemGroupVariantConstraint, FItemGroupVariant, Color, Delta>? dividerForeground;
+  final Color? dividerBackground;
   final double? dividerWidth;
   final FItemDivider dividerType;
   final Widget? prefix;
@@ -30,14 +31,15 @@ class RawItemContent extends StatelessWidget {
     required this.bottom,
     required this.top,
     required this.variants,
-    required this.dividerColor,
+    required this.dividerForeground,
+    required this.dividerBackground,
     required this.dividerWidth,
     required this.dividerType,
     required this.prefix,
     required this.child,
     super.key,
   }) : assert(
-         (dividerColor != null && dividerWidth != null) || dividerType == FItemDivider.none,
+         (dividerForeground != null && dividerWidth != null) || dividerType == FItemDivider.none,
          'dividerColor and dividerWidth must be provided if dividerType is not FItemDivider.none. This is a bug unless '
          "you're creating your own custom item container.",
        );
@@ -48,7 +50,8 @@ class RawItemContent extends StatelessWidget {
     padding: style.padding,
     top: top,
     bottom: bottom,
-    dividerColor: dividerColor?.resolve(variants),
+    dividerColor: dividerForeground?.resolve(variants),
+    dividerBackgroundColor: dividerBackground,
     dividerWidth: dividerWidth,
     dividerType: dividerType,
     children: [
@@ -79,7 +82,8 @@ class RawItemContent extends StatelessWidget {
       ..add(IterableProperty('variants', variants))
       ..add(DoubleProperty('top', top))
       ..add(DoubleProperty('bottom', bottom))
-      ..add(DiagnosticsProperty('dividerColor', dividerColor))
+      ..add(DiagnosticsProperty('dividerForeground', dividerForeground))
+      ..add(ColorProperty('dividerBackground', dividerBackground))
       ..add(DoubleProperty('dividerWidth', dividerWidth))
       ..add(DiagnosticsProperty('dividerType', dividerType));
   }

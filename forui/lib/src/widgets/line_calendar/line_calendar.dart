@@ -273,7 +273,7 @@ class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
         },
       ),
       dateTextStyle: FVariants.from(
-        typography.xl.copyWith(color: colors.foreground, fontWeight: .w500, height: 0),
+        typography.lg.copyWith(color: colors.foreground, fontWeight: .w500, height: 0),
         variants: {
           [.disabled]: .delta(color: colors.disable(colors.foreground)),
           //
@@ -282,7 +282,7 @@ class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
         },
       ),
       weekdayTextStyle: FVariants.from(
-        typography.xs.copyWith(color: colors.mutedForeground, fontWeight: .w500, height: 0),
+        typography.xs2.copyWith(color: colors.mutedForeground, fontWeight: .w500, height: 0),
         variants: {
           [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
           //

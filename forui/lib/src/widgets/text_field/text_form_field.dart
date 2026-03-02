@@ -101,8 +101,8 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     Key? key,
   }) => PasswordFormField(
     control: control,
-    size: size,
     properties: PasswordFieldProperties(
+      size: size,
       style: style,
       builder: builder,
       label: label,

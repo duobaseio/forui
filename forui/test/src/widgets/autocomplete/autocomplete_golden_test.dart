@@ -35,7 +35,7 @@ void main() {
           child: FAutocomplete(
             key: key,
             style: TestScaffold.blueScreen.autocompleteStyle.copyWith(
-              fieldStyle: const .delta(cursorColor: Color(0xFF03A9F4)),
+              fieldStyles: .delta([.all(const .delta(cursorColor: Color(0xFF03A9F4)))]),
             ),
             items: fruits,
           ),
@@ -54,7 +54,7 @@ void main() {
           child: FAutocomplete.builder(
             key: key,
             style: TestScaffold.blueScreen.autocompleteStyle.copyWith(
-              fieldStyle: const .delta(cursorColor: Color(0xFF03A9F4)),
+              fieldStyles: .delta([.all(const .delta(cursorColor: Color(0xFF03A9F4)))]),
             ),
             filter: (_) => [],
             contentBuilder: (_, _, _) => [for (int i = 0; i < 10; i++) FAutocompleteItem.item(value: '$i')],
@@ -74,7 +74,7 @@ void main() {
           child: FAutocomplete.builder(
             key: key,
             style: TestScaffold.blueScreen.autocompleteStyle.copyWith(
-              fieldStyle: const .delta(cursorColor: Color(0xFF03A9F4)),
+              fieldStyles: .delta([.all(const .delta(cursorColor: Color(0xFF03A9F4)))]),
             ),
             filter: (_) async {
               await Future.delayed(const Duration(seconds: 1));
@@ -97,7 +97,7 @@ void main() {
           child: FAutocomplete.builder(
             key: key,
             style: TestScaffold.blueScreen.autocompleteStyle.copyWith(
-              fieldStyle: const .delta(cursorColor: Color(0xFF03A9F4)),
+              fieldStyles: .delta([.all(const .delta(cursorColor: Color(0xFF03A9F4)))]),
             ),
             filter: (_) => [],
             contentBuilder: (_, _, _) => [],

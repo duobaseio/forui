@@ -20,6 +20,8 @@ class TimeInput extends Input<FTime?> {
     required this.timeController,
     required this.hour24,
     required this.style,
+    required super.size,
+    required super.platformVariant,
     required super.controller,
     required super.builder,
     required super.label,
@@ -111,12 +113,17 @@ class _TimeFieldState extends InputState<TimeInput, FTime?> {
     final format = widget.hour24
         ? DateFormat.Hm(localizations.localeName)
         : (localizations is FDefaultLocalizations ? _default12Hour : DateFormat.jm(localizations.localeName));
-    return TimeInputController(localizations, widget.timeController, format, widget.style.fieldStyle);
+    return TimeInputController(
+      localizations,
+      widget.timeController,
+      format,
+      widget.style.fieldStyles.resolve({widget.size, widget.platformVariant}),
+    );
   }
 
   @override
   @protected
-  FTextFieldStyle get textFieldStyle => widget.style.fieldStyle;
+  FTextFieldStyle get textFieldStyle => widget.style.fieldStyles.resolve({widget.size, widget.platformVariant});
 
   @override
   @protected

@@ -30,6 +30,7 @@ class _InputDateField extends FDateField {
     this.baselineInputYear = 2000,
     this.calendar = const FDateFieldCalendarProperties(),
     super.control,
+    super.size,
     super.style,
     super.autofocus,
     super.focusNode,
@@ -125,6 +126,8 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
         controller: _controller,
         calendarController: _controller.calendar,
         onTap: widget.calendar == null ? null : _popoverController.show,
+        size: widget.size,
+        platformVariant: context.platformVariant,
         style: style,
         label: widget.label,
         description: widget.description,
@@ -146,12 +149,8 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
         onEditingComplete: widget.onEditingComplete,
         mouseCursor: widget.mouseCursor,
         canRequestFocus: widget.canRequestFocus,
-        prefixBuilder: widget.prefixBuilder == null
-            ? null
-            : (context, _, variants) => widget.prefixBuilder!(context, style, variants),
-        suffixBuilder: widget.suffixBuilder == null
-            ? null
-            : (context, _, variants) => widget.suffixBuilder!(context, style, variants),
+        prefixBuilder: widget.prefixBuilder,
+        suffixBuilder: widget.suffixBuilder,
         localizations: FLocalizations.of(context) ?? FDefaultLocalizations(),
         baselineYear: widget.baselineInputYear,
         builder: switch (widget.calendar) {
@@ -197,6 +196,7 @@ class _InputOnlyDateField extends FDateField {
     this.clearable = false,
     this.baselineInputYear = 2000,
     super.control,
+    super.size,
     super.style,
     super.autofocus,
     super.focusNode,
@@ -270,6 +270,8 @@ class _InputOnlyDateFieldState extends _FDateFieldState<_InputOnlyDateField> {
       controller: _controller,
       calendarController: _controller.calendar,
       onTap: null,
+      size: widget.size,
+      platformVariant: context.platformVariant,
       style: style,
       label: widget.label,
       description: widget.description,
@@ -291,12 +293,8 @@ class _InputOnlyDateFieldState extends _FDateFieldState<_InputOnlyDateField> {
       onEditingComplete: widget.onEditingComplete,
       mouseCursor: widget.mouseCursor,
       canRequestFocus: widget.canRequestFocus,
-      prefixBuilder: widget.prefixBuilder == null
-          ? null
-          : (context, _, variants) => widget.prefixBuilder!(context, style, variants),
-      suffixBuilder: widget.suffixBuilder == null
-          ? null
-          : (context, _, variants) => widget.suffixBuilder!(context, style, variants),
+      prefixBuilder: widget.prefixBuilder,
+      suffixBuilder: widget.suffixBuilder,
       localizations: FLocalizations.of(context) ?? FDefaultLocalizations(),
       baselineYear: widget.baselineInputYear,
       builder: (context, _, variants, child) => widget.builder(context, style, variants, child),

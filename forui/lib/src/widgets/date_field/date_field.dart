@@ -37,15 +37,18 @@ part 'input/input_date_field.dart';
 /// * [FDateFieldStyle] for customizing a date field's appearance.
 abstract class FDateField extends StatefulWidget {
   /// The default prefix builder that shows a calendar icon.
-  static Widget defaultIconBuilder(BuildContext _, FDateFieldStyle style, Set<FTextFieldVariant> variants) => Padding(
+  static Widget defaultIconBuilder(BuildContext _, FTextFieldStyle style, Set<FTextFieldVariant> variants) => Padding(
     padding: const .directional(start: 12.0, end: 4.0),
-    child: IconTheme(data: style.fieldStyle.iconStyle.resolve(variants), child: const Icon(FIcons.calendar)),
+    child: IconTheme(data: style.iconStyle.resolve(variants), child: const Icon(FIcons.calendar)),
   );
 
   static Widget _fieldBuilder(BuildContext _, FDateFieldStyle _, Set<FTextFieldVariant> _, Widget child) => child;
 
   /// The control for managing the date field's state.
   final FDateFieldControl control;
+
+  /// {@macro forui.text_field.size}
+  final FTextFieldSizeVariant size;
 
   /// The style.
   ///
@@ -80,11 +83,11 @@ abstract class FDateField extends StatefulWidget {
 
   /// Builds a widget at the start of the input field that can be pressed to toggle the calendar popover. Defaults to
   /// [defaultIconBuilder].
-  final FFieldIconBuilder<FDateFieldStyle>? prefixBuilder;
+  final FFieldIconBuilder<FTextFieldStyle>? prefixBuilder;
 
   /// Builds a widget at the end of the input field that can be pressed to toggle the calendar popover. Defaults to
   /// no prefix.
-  final FFieldIconBuilder<FDateFieldStyle>? suffixBuilder;
+  final FFieldIconBuilder<FTextFieldStyle>? suffixBuilder;
 
   /// The label.
   final Widget? label;
@@ -125,6 +128,7 @@ abstract class FDateField extends StatefulWidget {
 
   const FDateField._({
     this.control = const .managed(),
+    this.size = .md,
     this.style = const .context(),
     this.autofocus = false,
     this.focusNode,
@@ -180,6 +184,7 @@ abstract class FDateField extends StatefulWidget {
   const factory FDateField({
     FDateFieldControl control,
     FPopoverControl popoverControl,
+    FTextFieldSizeVariant size,
     FDateFieldStyleDelta style,
     FocusNode? focusNode,
     TextInputAction? textInputAction,
@@ -195,8 +200,8 @@ abstract class FDateField extends StatefulWidget {
     bool clearable,
     int baselineInputYear,
     FFieldBuilder<FDateFieldStyle> builder,
-    FFieldIconBuilder<FDateFieldStyle>? prefixBuilder,
-    FFieldIconBuilder<FDateFieldStyle>? suffixBuilder,
+    FFieldIconBuilder<FTextFieldStyle>? prefixBuilder,
+    FFieldIconBuilder<FTextFieldStyle>? suffixBuilder,
     FDateFieldCalendarProperties calendar,
     Widget? label,
     Widget? description,
@@ -263,6 +268,7 @@ abstract class FDateField extends StatefulWidget {
   const factory FDateField.calendar({
     FDateFieldControl control,
     FPopoverControl popoverControl,
+    FTextFieldSizeVariant size,
     FDateFieldStyleDelta style,
     DateFormat? format,
     TextAlign textAlign,
@@ -290,8 +296,8 @@ abstract class FDateField extends StatefulWidget {
     FPopoverHideRegion hideRegion,
     VoidCallback? onTapHide,
     FFieldBuilder<FDateFieldStyle> builder,
-    FFieldIconBuilder<FDateFieldStyle>? prefixBuilder,
-    FFieldIconBuilder<FDateFieldStyle>? suffixBuilder,
+    FFieldIconBuilder<FTextFieldStyle>? prefixBuilder,
+    FFieldIconBuilder<FTextFieldStyle>? suffixBuilder,
     Widget? label,
     Widget? description,
     bool enabled,
@@ -334,12 +340,13 @@ abstract class FDateField extends StatefulWidget {
   /// * [FDateField.calendar] - Creates a date field with only a calendar.
   const factory FDateField.input({
     FDateFieldControl control,
+    FTextFieldSizeVariant size,
     FDateFieldStyleDelta style,
     bool autofocus,
     FocusNode? focusNode,
     FFieldBuilder<FDateFieldStyle> builder,
-    FFieldIconBuilder<FDateFieldStyle>? prefixBuilder,
-    FFieldIconBuilder<FDateFieldStyle>? suffixBuilder,
+    FFieldIconBuilder<FTextFieldStyle>? prefixBuilder,
+    FFieldIconBuilder<FTextFieldStyle>? suffixBuilder,
     TextInputAction? textInputAction,
     TextAlign textAlign,
     TextAlignVertical? textAlignVertical,
@@ -367,6 +374,7 @@ abstract class FDateField extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('control', control))
+      ..add(DiagnosticsProperty('size', size))
       ..add(DiagnosticsProperty('style', style))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))

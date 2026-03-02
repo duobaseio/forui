@@ -34,7 +34,7 @@ void main() {
           child: FAutocomplete.builder(
             key: key,
             style: TestScaffold.blueScreen.autocompleteStyle.copyWith(
-              fieldStyle: const .delta(cursorColor: Color(0xFF03A9F4)),
+              fieldStyles: .delta([.all(const .delta(cursorColor: Color(0xFF03A9F4)))]),
             ),
             filter: (query) => fruits.where((f) => f.toLowerCase().startsWith(query.toLowerCase())),
             contentBuilder: (context, query, items) => [

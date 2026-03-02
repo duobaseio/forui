@@ -12,7 +12,12 @@ sizes consistent across each platform.
 
 
 ### `FAutocomplete`
+* Add `FAutocomplete.size`.
+
 * Change `FAutocompleteSection` layout to better align with the latest shadcn version.
+
+* **Breaking** Rename `FAutocompleteStyle.fieldStyle` to `FAutocompleteStyle.fieldStyles`. Type changed from
+  `FTextFieldStyle` to `FTextFieldSizeStyles`.
 
 
 ### `FBadge`
@@ -61,6 +66,13 @@ sizes consistent across each platform.
   `Decoration`.
 
 
+### `FDateField`
+* Add `FDateField.size`.
+
+* **Breaking** Rename `FDateFieldStyle.fieldStyle` to `FDateFieldStyle.fieldStyles`. Type changed from
+  `FTextFieldStyle` to `FTextFieldSizeStyles`.
+
+
 ### `FDialog`
 * Add `FDialogStyle.slideableActions` for slide-across interaction between dialog actions.
 
@@ -69,6 +81,7 @@ sizes consistent across each platform.
 
 ### `FHeader`
 * Add `FHeaderVariant.root`.
+* Add `FHeaderStyle.slidableActions` for slide-across interaction between header actions.
 
 * **Breaking** Change `FHeaderStyle.decoration` type from `BoxDecoration` to `Decoration`.
 
@@ -81,6 +94,8 @@ sizes consistent across each platform.
 * **Breaking** Change `FItemStyle.decoration` type from `FVariants<..., BoxDecoration, BoxDecorationDelta>` to
   `FVariants<..., Decoration, DecorationDelta>`.
 * **Breaking** Change `FItemGroupStyle.decoration` type from `BoxDecoration` to `Decoration`.
+
+* Fix `FItemDivider.indented` not masking the gap area with the item's background color.
 
 
 ### `FLineCalendar`
@@ -111,7 +126,12 @@ sizes consistent across each platform.
 
 
 ### `FSelect` & `FMultiSelect`
+* Add `FSelect.size`.
+
 * Change `FSelectSection` layout to better align with the latest shadcn version.
+
+* **Breaking** Rename `FSelectStyle.fieldStyle` to `FSelectStyle.fieldStyles`. Type changed from `FTextFieldStyle` to
+  `FTextFieldSizeStyles`.
 
 
 ### `FSidebar`
@@ -135,20 +155,24 @@ sizes consistent across each platform.
 * Fix incorrectly handling of platform changes.
 
 
+### `FTimeField`
+* Add `FTimeField.size`.
+
+* **Breaking** Rename `FTimeFieldStyle.fieldStyle` to `FTimeFieldStyle.fieldStyles`. Type changed from
+  `FTextFieldStyle` to `FTextFieldSizeStyles`.
+
+
 ### `FTheme` & `FBasicTheme`
-* Add `FTheme.brightness`.
-* Add `FBasicTheme.brightness`.
-* Add `FThemeDataMixin`.
-* Add `FAutoThemeData`.
-* Add `FPlatformThemeData`.
 * Add `FBorderRadius` with size tokens (`xs`, `sm`, `md`, `lg`, `xl`, `xl2`, `xl3`, `pill`).
 * Add color scheme constants to `FColors`.
 * Add `FTypography.xs3`.
 * Add `FTypography.xs2`.
 * Add `FTypography.inherit(desktop: ...)`.
+* Add `FThemeData(desktop: ...)`.
 
-* Change `FTheme.data` and `FBasicTheme.data` types from `FThemeData` to `FThemeDataMixin`.
-* Change `FThemeData` to mix in `FThemeDataMixin`.
+* **Breaking** Change `FThemes.*.light`/`dark` from `FThemeData` to `FThemes.*.*.desktop/touch`.
+* **Breaking** Rename `FThemeData.textFieldStyle` to `FThemeData.textFieldStyles`. Type changed from `FTextFieldStyle`
+  to `FTextFieldSizeStyles`.
 * **Breaking** Change default `FTheme`/`FBasicTheme` text size from `md` to `sm`.
 * **Breaking** Change `FStyle.borderRadius` from `BorderRadius` to `FBorderRadius`.
 * **Breaking** Remove `FLerpBorderRadius`. Use `BorderRadius` instead.

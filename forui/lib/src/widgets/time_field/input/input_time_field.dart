@@ -23,6 +23,7 @@ class _InputTimeField extends FTimeField {
     this.canRequestFocus = true,
     super.control,
     super.popoverControl,
+    super.size,
     super.style,
     super.hour24,
     super.autofocus,
@@ -76,6 +77,8 @@ class _InputTimeFieldState extends _FTimeFieldState<_InputTimeField> {
       controller: _controller,
       timeController: _controller,
       hour24: widget.hour24,
+      size: widget.size,
+      platformVariant: context.platformVariant,
       style: style,
       label: widget.label,
       description: widget.description,
@@ -97,12 +100,8 @@ class _InputTimeFieldState extends _FTimeFieldState<_InputTimeField> {
       mouseCursor: widget.mouseCursor,
       onTap: null,
       canRequestFocus: widget.canRequestFocus,
-      prefixBuilder: widget.prefixBuilder == null
-          ? null
-          : (context, _, variants) => widget.prefixBuilder!(context, style, variants),
-      suffixBuilder: widget.suffixBuilder == null
-          ? null
-          : (context, _, variants) => widget.suffixBuilder!(context, style, variants),
+      prefixBuilder: widget.prefixBuilder,
+      suffixBuilder: widget.suffixBuilder,
       localizations: FLocalizations.of(context) ?? FDefaultLocalizations(),
       builder: (context, _, variants, field) => widget.builder(context, style, variants, field),
     );

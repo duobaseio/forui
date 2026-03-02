@@ -411,7 +411,12 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
   });
 
   /// Creates a [FTileGroupStyle] that inherits from the given arguments.
-  factory FTileGroupStyle.inherit({required FColors colors, required FTypography typography, required FStyle style}) =>
+  factory FTileGroupStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+    bool desktop = false,
+  }) =>
       .new(
         decoration: ShapeDecoration(
           shape: RoundedSuperellipseBorder(
@@ -423,7 +428,7 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
         dividerWidth: style.borderWidth,
         slideableTiles: const .all(true),
         labelTextStyle: FVariants.from(
-          typography.md.copyWith(
+          typography.sm.copyWith(
             color: style.formFieldStyle.labelTextStyle.base.color ?? colors.foreground,
             fontWeight: .w600,
           ),
@@ -445,21 +450,23 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
                 prefix: colors.destructive,
                 foreground: colors.destructive,
                 mutedForeground: colors.destructive,
+                desktop: desktop,
               ),
               rawItemContentStyle: FRawItemContentStyle.inherit(
                 colors: colors,
                 typography: typography,
                 prefix: colors.destructive,
                 color: colors.destructive,
+                desktop: desktop,
               ),
             ),
           },
         ),
         descriptionTextStyle: style.formFieldStyle.descriptionTextStyle.apply([
-          .all(.delta(fontSize: typography.xs.fontSize, height: typography.xs.height)),
+          .all(.delta(fontSize: typography.xs2.fontSize, height: typography.xs2.height)),
         ]),
         errorTextStyle: style.formFieldStyle.errorTextStyle.apply([
-          .all(.delta(fontSize: typography.xs.fontSize, height: typography.xs.height, fontWeight: .w400)),
+          .all(.delta(fontSize: typography.xs2.fontSize, height: typography.xs2.height)),
         ]),
       );
 }

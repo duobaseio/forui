@@ -44,7 +44,8 @@ final dateField = FDateField(
   focusNode: null,
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(fieldStyle: .delta()),
+  size: .md,
+  style: .delta(fieldStyles: .delta([])),
   enabled: true,
   // {@endcategory}
 );
@@ -100,7 +101,8 @@ final calendar = FDateField.calendar(
   focusNode: null,
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(fieldStyle: .delta()),
+  size: .md,
+  style: .delta(fieldStyles: .delta([])),
   enabled: true,
   // {@endcategory}
 );
@@ -139,7 +141,8 @@ final input = FDateField.input(
   focusNode: null,
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(fieldStyle: .delta()),
+  size: .md,
+  style: .delta(fieldStyles: .delta([])),
   enabled: true,
   // {@endcategory}
 );
@@ -175,5 +178,17 @@ final FPopoverControl popoverExternal = .managed(
   controller: FPopoverController(vsync: vsync, shown: true, motion: const FPopoverMotion()),
   onChange: (shown) {},
 );
+
+// {@category "Size" "Small"}
+/// The date field's small size.
+const FTextFieldSizeVariant sm = .sm;
+
+// {@category "Size" "Medium"}
+/// The date field's medium (default) size.
+const FTextFieldSizeVariant md = .md;
+
+// {@category "Size" "Large"}
+/// The date field's large size.
+const FTextFieldSizeVariant lg = .lg;
 
 TickerProvider get vsync => throw UnimplementedError();

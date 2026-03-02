@@ -14,6 +14,7 @@ class ItemContentLayout extends MultiChildRenderObjectWidget {
   final double top;
   final double bottom;
   final Color? dividerColor;
+  final Color? dividerBackgroundColor;
   final double? dividerWidth;
   final FItemDivider dividerType;
 
@@ -23,6 +24,7 @@ class ItemContentLayout extends MultiChildRenderObjectWidget {
     required this.top,
     required this.bottom,
     required this.dividerColor,
+    required this.dividerBackgroundColor,
     required this.dividerWidth,
     required this.dividerType,
     super.children,
@@ -38,6 +40,7 @@ class ItemContentLayout extends MultiChildRenderObjectWidget {
       top,
       bottom,
       dividerColor,
+      dividerBackgroundColor,
       dividerWidth,
       dividerType,
       direction,
@@ -53,7 +56,8 @@ class ItemContentLayout extends MultiChildRenderObjectWidget {
       ..padding = padding.resolve(direction)
       ..top = top
       ..bottom = bottom
-      ..dividerColor = dividerColor
+      ..dividerForeground = dividerColor
+      ..dividerBackground = dividerBackgroundColor
       ..dividerWidth = dividerWidth
       ..dividerType = dividerType
       ..textDirection = direction;
@@ -68,6 +72,7 @@ class ItemContentLayout extends MultiChildRenderObjectWidget {
       ..add(DoubleProperty('top', top))
       ..add(DoubleProperty('bottom', bottom))
       ..add(ColorProperty('dividerColor', dividerColor))
+      ..add(ColorProperty('dividerBackgroundColor', dividerBackgroundColor))
       ..add(DoubleProperty('dividerWidth', dividerWidth))
       ..add(EnumProperty('dividerType', dividerType));
   }
@@ -79,7 +84,8 @@ class _RenderItemContent extends RenderBox
   EdgeInsets _padding;
   double _top;
   double _bottom;
-  Color? _dividerColor;
+  Color? _dividerForeground;
+  Color? _dividerBackground;
   double? _dividerWidth;
   FItemDivider _dividerType;
   TextDirection _textDirection;
@@ -89,7 +95,8 @@ class _RenderItemContent extends RenderBox
     this._padding,
     this._top,
     this._bottom,
-    this._dividerColor,
+    this._dividerForeground,
+    this._dividerBackground,
     this._dividerWidth,
     this._dividerType,
     this._textDirection,
@@ -156,32 +163,47 @@ class _RenderItemContent extends RenderBox
 
     final paint = Paint()
       ..isAntiAlias = false
-      ..color = _dividerColor!
+      ..color = _dividerForeground!
       ..strokeWidth = _dividerWidth!;
 
-    if (_dividerType == FItemDivider.indented) {
-      final prefix = firstChild!;
-      final spacing = _textDirection == .ltr ? left : right;
-
-      if (_textDirection == .ltr) {
-        context.canvas.drawLine(
-          Offset(offset.dx + spacing + prefix.size.width, y),
-          Offset(offset.dx + size.width + _margin.right, y),
-          paint,
-        );
-      } else {
-        context.canvas.drawLine(
-          Offset(offset.dx - _margin.left, y),
-          Offset(offset.dx + size.width - spacing - prefix.size.width, y),
-          paint,
-        );
-      }
-    } else {
+    if (_dividerType == .full) {
       context.canvas.drawLine(
         Offset(offset.dx - _margin.left, y),
         Offset(offset.dx + size.width + _margin.right, y),
         paint,
       );
+      return;
+    }
+
+    final prefix = firstChild!;
+    final spacing = _textDirection == .ltr ? left : right;
+
+    if (_textDirection == .ltr) {
+      if (_dividerBackground case final background?) {
+        context.canvas.drawLine(
+          Offset(offset.dx - _margin.left, y),
+          Offset(offset.dx + spacing + prefix.size.width, y),
+          paint..color = background,
+        );
+      }
+      context.canvas.drawLine(
+        Offset(offset.dx + spacing + prefix.size.width, y),
+        Offset(offset.dx + size.width + _margin.right, y),
+        paint..color = _dividerForeground!,
+      );
+    } else {
+      context.canvas.drawLine(
+        Offset(offset.dx - _margin.left, y),
+        Offset(offset.dx + size.width - spacing - prefix.size.width, y),
+        paint..color = _dividerForeground!,
+      );
+      if (_dividerBackground case final background?) {
+        context.canvas.drawLine(
+          Offset(offset.dx + size.width - spacing - prefix.size.width, y),
+          Offset(offset.dx + size.width + _margin.right, y),
+          paint..color = background,
+        );
+      }
     }
   }
 
@@ -202,7 +224,8 @@ class _RenderItemContent extends RenderBox
       ..add(DiagnosticsProperty('padding', padding))
       ..add(DoubleProperty('top', top))
       ..add(DoubleProperty('bottom', bottom))
-      ..add(ColorProperty('dividerColor', dividerColor))
+      ..add(ColorProperty('dividerForeground', dividerForeground))
+      ..add(ColorProperty('dividerBackground', dividerBackground))
       ..add(DoubleProperty('dividerWidth', dividerWidth))
       ..add(EnumProperty('dividerType', dividerType))
       ..add(EnumProperty('textDirection', textDirection));
@@ -244,11 +267,20 @@ class _RenderItemContent extends RenderBox
     }
   }
 
-  Color? get dividerColor => _dividerColor;
+  Color? get dividerForeground => _dividerForeground;
 
-  set dividerColor(Color? value) {
-    if (_dividerColor != value) {
-      _dividerColor = value;
+  set dividerForeground(Color? value) {
+    if (_dividerForeground != value) {
+      _dividerForeground = value;
+      markNeedsPaint();
+    }
+  }
+
+  Color? get dividerBackground => _dividerBackground;
+
+  set dividerBackground(Color? value) {
+    if (_dividerBackground != value) {
+      _dividerBackground = value;
       markNeedsPaint();
     }
   }

@@ -67,6 +67,7 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
     this.initialType = .day,
     this.autoHide = true,
     super.control,
+    super.size,
     super.style,
     super.autofocus,
     super.focusNode,
@@ -187,7 +188,8 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
       builder: (state) => FTextField(
         control: .managed(controller: _textController),
         focusNode: _focus,
-        style: style.fieldStyle,
+        size: widget.size,
+        style: style.fieldStyles.resolve({widget.size, context.platformVariant}),
         textAlign: widget.textAlign,
         textAlignVertical: widget.textAlignVertical,
         textDirection: widget.textDirection,
@@ -199,12 +201,8 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
         hint: hint,
         readOnly: true,
         enableInteractiveSelection: false,
-        prefixBuilder: widget.prefixBuilder == null
-            ? null
-            : (context, _, variants) => widget.prefixBuilder!(context, style, variants),
-        suffixBuilder: widget.suffixBuilder == null
-            ? null
-            : (context, _, variants) => widget.suffixBuilder!(context, style, variants),
+        prefixBuilder: widget.prefixBuilder,
+        suffixBuilder: widget.suffixBuilder,
         clearable: widget.clearable ? (value) => value.text.isNotEmpty : (_) => false,
         label: widget.label,
         description: widget.description,

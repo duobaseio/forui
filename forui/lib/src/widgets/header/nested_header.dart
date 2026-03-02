@@ -39,6 +39,22 @@ class _FNestedHeader extends FHeader {
   Widget build(BuildContext context) {
     final style = this.style(context.theme.headerStyles.resolve({context.platformVariant, FHeaderVariant.nested}));
     final alignment = titleAlignment.resolve(Directionality.maybeOf(context) ?? .ltr);
+    final slidable = style.slidableActions.resolve({context.platformVariant});
+
+    Widget prefixes;
+    if (this.prefixes.isEmpty && this.suffixes.isEmpty) {
+      prefixes = SizedBox(height: style.actionStyle.iconStyle.base.size! + style.actionStyle.padding.vertical);
+    } else {
+      prefixes = Row(mainAxisSize: .min, spacing: style.actionSpacing, children: this.prefixes);
+      if (slidable) {
+        prefixes = FTappableGroup(child: prefixes);
+      }
+    }
+
+    Widget suffixes = Row(mainAxisSize: .min, spacing: style.actionSpacing, children: this.suffixes);
+    if (slidable) {
+      suffixes = FTappableGroup(child: suffixes);
+    }
 
     Widget header = SafeArea(
       bottom: false,
@@ -52,7 +68,7 @@ class _FNestedHeader extends FHeader {
               actionStyle: style.actionStyle,
               child: _NestedHeader(
                 alignment: alignment,
-                prefixes: Row(mainAxisSize: .min, spacing: style.actionSpacing, children: prefixes),
+                prefixes: prefixes,
                 title: Padding(
                   padding: const .symmetric(horizontal: 10.0),
                   child: DefaultTextStyle.merge(
@@ -67,7 +83,7 @@ class _FNestedHeader extends FHeader {
                     child: title,
                   ),
                 ),
-                suffixes: Row(mainAxisSize: .min, spacing: style.actionSpacing, children: suffixes),
+                suffixes: suffixes,
               ),
             ),
           ),

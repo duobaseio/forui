@@ -8,9 +8,9 @@ part 'date_field_style.design.dart';
 
 /// A date field's style.
 class FDateFieldStyle with Diagnosticable, _$FDateFieldStyleFunctions {
-  /// The date field's textfield style.
+  /// The date field's textfield styles.
   @override
-  final FTextFieldStyle fieldStyle;
+  final FTextFieldSizeStyles fieldStyles;
 
   /// The date field calendar's popover style.
   @override
@@ -21,13 +21,17 @@ class FDateFieldStyle with Diagnosticable, _$FDateFieldStyleFunctions {
   final FCalendarStyle calendarStyle;
 
   /// Creates a [FDateFieldStyle].
-  const FDateFieldStyle({required this.fieldStyle, required this.popoverStyle, required this.calendarStyle});
+  FDateFieldStyle({required this.fieldStyles, required this.popoverStyle, required this.calendarStyle});
 
   /// Creates a [FDateFieldStyle] that inherits its properties.
-  FDateFieldStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        fieldStyle: FTextFieldSizeStyles.inherit(colors: colors, typography: typography, style: style).md,
-        popoverStyle: .inherit(colors: colors, style: style),
-        calendarStyle: .inherit(colors: colors, typography: typography, style: style),
-      );
+  FDateFieldStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+    bool desktop = false,
+  }) : this(
+         fieldStyles: .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
+         popoverStyle: .inherit(colors: colors, style: style),
+         calendarStyle: .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
+       );
 }

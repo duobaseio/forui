@@ -19,6 +19,8 @@ class DateInput extends Input<DateTime?> {
     required this.style,
     required this.baselineYear,
     required super.controller,
+    required super.size,
+    required super.platformVariant,
     required super.builder,
     required super.label,
     required super.description,
@@ -56,27 +58,6 @@ class DateInput extends Input<DateTime?> {
     properties
       ..add(DiagnosticsProperty('calendarController', calendarController))
       ..add(DiagnosticsProperty('style', style))
-      ..add(ObjectFlagProperty.has('builder', builder))
-      ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
-      ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
-      ..add(ObjectFlagProperty.has('onSaved', onSaved))
-      ..add(ObjectFlagProperty.has('validator', validator))
-      ..add(EnumProperty('autovalidateMode', autovalidateMode))
-      ..add(StringProperty('forceErrorText', forceErrorText))
-      ..add(DiagnosticsProperty('focusNode', focusNode))
-      ..add(EnumProperty('textInputAction', textInputAction))
-      ..add(EnumProperty('textAlign', textAlign))
-      ..add(DiagnosticsProperty('textAlignVertical', textAlignVertical))
-      ..add(EnumProperty('textDirection', textDirection))
-      ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
-      ..add(FlagProperty('expands', value: expands, ifTrue: 'expands'))
-      ..add(ObjectFlagProperty.has('onEditingComplete', onEditingComplete))
-      ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
-      ..add(ObjectFlagProperty.has('onTap', onTap))
-      ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
-      ..add(DiagnosticsProperty('prefixBuilder', prefixBuilder))
-      ..add(DiagnosticsProperty('suffixBuilder', suffixBuilder))
-      ..add(DiagnosticsProperty('localizations', localizations))
       ..add(IntProperty('baselineYear', baselineYear));
   }
 }
@@ -99,8 +80,12 @@ class _DateInputState extends InputState<DateInput, DateTime?> {
 
   @override
   @protected
-  InputController createController() =>
-      DateInputController(widget.calendarController, localizations, widget.style.fieldStyle, widget.baselineYear);
+  InputController createController() => DateInputController(
+    widget.calendarController,
+    localizations,
+    widget.style.fieldStyles.resolve({widget.size, widget.platformVariant}),
+    widget.baselineYear,
+  );
 
   @override
   @protected
@@ -108,7 +93,7 @@ class _DateInputState extends InputState<DateInput, DateTime?> {
 
   @override
   @protected
-  FTextFieldStyle get textFieldStyle => widget.style.fieldStyle;
+  FTextFieldStyle get textFieldStyle => widget.style.fieldStyles.resolve({widget.size, widget.platformVariant});
 
   @override
   @protected
