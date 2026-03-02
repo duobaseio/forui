@@ -9,16 +9,18 @@ import 'package:forui/forui.dart';
 /// The search field's properties.
 class FSelectSearchFieldProperties with Diagnosticable {
   /// The search field's default prefix builder that displays a search icon.
-  static Widget defaultIconBuilder(BuildContext _, FSelectSearchStyle style, Set<FTextFieldVariant> variants) =>
-      Padding(
-        padding: const .directional(start: 10.0, end: 4.0),
-        child: IconTheme(data: style.fieldStyle.iconStyle.resolve(variants), child: const Icon(FIcons.search)),
-      );
+  static Widget defaultIconBuilder(BuildContext _, FTextFieldStyle style, Set<FTextFieldVariant> variants) => Padding(
+    padding: const .directional(start: 12.0, end: 4.0),
+    child: IconTheme(data: style.iconStyle.resolve(variants), child: const Icon(FIcons.search)),
+  );
 
   static bool _clearable(TextEditingValue _) => false;
 
   /// The search field's control.
   final FTextFieldControl control;
+
+  /// The search field's size. Defaults to [FTextFieldSizeVariant.md].
+  final FTextFieldSizeVariant size;
 
   /// {@macro forui.text_field.hint}
   final String? hint;
@@ -174,16 +176,17 @@ class FSelectSearchFieldProperties with Diagnosticable {
   final SpellCheckConfiguration? spellCheckConfiguration;
 
   /// The prefix builder. Defaults to a search icon.
-  final FFieldIconBuilder<FSelectSearchStyle>? prefixBuilder;
+  final FFieldIconBuilder<FTextFieldStyle>? prefixBuilder;
 
   /// {@macro forui.text_field.suffixBuilder}
-  final FFieldIconBuilder<FSelectSearchStyle>? suffixBuilder;
+  final FFieldIconBuilder<FTextFieldStyle>? suffixBuilder;
 
   /// {@macro forui.text_field.clearable}
   final bool Function(TextEditingValue value) clearable;
 
   /// Creates a [FSelectSearchFieldProperties].
   const FSelectSearchFieldProperties({
+    this.size = FTextFieldSizeVariant.md,
     this.control = const .managed(),
     this.hint,
     this.magnifierConfiguration,
@@ -236,6 +239,7 @@ class FSelectSearchFieldProperties with Diagnosticable {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('control', control))
+      ..add(DiagnosticsProperty('size', size))
       ..add(StringProperty('hint', hint))
       ..add(DiagnosticsProperty('magnifierConfiguration', magnifierConfiguration))
       ..add(DiagnosticsProperty('keyboardType', keyboardType))

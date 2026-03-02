@@ -34,9 +34,9 @@ part 'select.design.dart';
 /// * [FSelectStyle] for customizing the appearance of a select.
 abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// The default suffix builder that shows a upward and downward facing chevron icon.
-  static Widget defaultIconBuilder(BuildContext _, FSelectStyle style, Set<FTextFieldVariant> variants) => Padding(
+  static Widget defaultIconBuilder(BuildContext _, FTextFieldStyle style, Set<FTextFieldVariant> variants) => Padding(
     padding: const .directional(end: 8.0),
-    child: IconTheme(data: style.fieldStyle.iconStyle.resolve(variants), child: const Icon(FIcons.chevronDown)),
+    child: IconTheme(data: style.iconStyle.resolve(variants), child: const Icon(FIcons.chevronDown)),
   );
 
   /// The default content loading builder that shows a spinner when an asynchronous search is pending.
@@ -67,6 +67,9 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   ///
   /// Defaults to [FPopoverControl.managed].
   final FPopoverControl popoverControl;
+
+  /// {@macro forui.text_field.size}
+  final FTextFieldSizeVariant size;
 
   /// The style.
   ///
@@ -100,11 +103,11 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   final FFieldBuilder<FSelectStyle> builder;
 
   /// Builds a widget at the start of the select that can be pressed to toggle the popover. Defaults to no icon.
-  final FFieldIconBuilder<FSelectStyle>? prefixBuilder;
+  final FFieldIconBuilder<FTextFieldStyle>? prefixBuilder;
 
   /// Builds a widget at the end of the select that can be pressed to toggle the popover. Defaults to
   /// [defaultIconBuilder].
-  final FFieldIconBuilder<FSelectStyle>? suffixBuilder;
+  final FFieldIconBuilder<FTextFieldStyle>? suffixBuilder;
 
   @override
   final Widget? label;
@@ -214,12 +217,13 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     required Map<String, T> items,
     FSelectControl<T>? control,
     FPopoverControl popoverControl = const .managed(),
+    FTextFieldSizeVariant size = .md,
     FSelectStyleDelta style = const .context(),
     bool autofocus = false,
     FocusNode? focusNode,
     FFieldBuilder<FSelectStyle> builder = _fieldBuilder,
-    FFieldIconBuilder<FSelectStyle>? prefixBuilder,
-    FFieldIconBuilder<FSelectStyle>? suffixBuilder = defaultIconBuilder,
+    FFieldIconBuilder<FTextFieldStyle>? prefixBuilder,
+    FFieldIconBuilder<FTextFieldStyle>? suffixBuilder = defaultIconBuilder,
     Widget? label,
     Widget? description,
     bool enabled = true,
@@ -257,6 +261,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     return .rich(
       control: control,
       popoverControl: popoverControl,
+      size: size,
       style: style,
       autofocus: autofocus,
       focusNode: focusNode,
@@ -306,12 +311,13 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     required List<FSelectItemMixin> children,
     FSelectControl<T>? control,
     FPopoverControl popoverControl,
+    FTextFieldSizeVariant size,
     FSelectStyleDelta style,
     bool autofocus,
     FocusNode? focusNode,
     FFieldBuilder<FSelectStyle> builder,
-    FFieldIconBuilder<FSelectStyle>? prefixBuilder,
-    FFieldIconBuilder<FSelectStyle>? suffixBuilder,
+    FFieldIconBuilder<FTextFieldStyle>? prefixBuilder,
+    FFieldIconBuilder<FTextFieldStyle>? suffixBuilder,
     Widget? label,
     Widget? description,
     bool enabled,
@@ -370,12 +376,13 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder,
     FSelectControl<T>? control,
     FPopoverControl popoverControl = const .managed(),
+    FTextFieldSizeVariant size = .md,
     FSelectStyleDelta style = const .context(),
     bool autofocus = false,
     FocusNode? focusNode,
     FFieldBuilder<FSelectStyle> builder = _fieldBuilder,
-    FFieldIconBuilder<FSelectStyle>? prefixBuilder,
-    FFieldIconBuilder<FSelectStyle>? suffixBuilder = defaultIconBuilder,
+    FFieldIconBuilder<FTextFieldStyle>? prefixBuilder,
+    FFieldIconBuilder<FTextFieldStyle>? suffixBuilder = defaultIconBuilder,
     Widget? label,
     Widget? description,
     bool enabled = true,
@@ -426,6 +433,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       contentErrorBuilder: contentErrorBuilder,
       control: control,
       popoverControl: popoverControl,
+      size: size,
       style: style,
       autofocus: autofocus,
       focusNode: focusNode,
@@ -485,12 +493,13 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder,
     FSelectControl<T>? control,
     FPopoverControl popoverControl,
+    FTextFieldSizeVariant size,
     FSelectStyleDelta style,
     bool autofocus,
     FocusNode? focusNode,
     FFieldBuilder<FSelectStyle> builder,
-    FFieldIconBuilder<FSelectStyle>? prefixBuilder,
-    FFieldIconBuilder<FSelectStyle>? suffixBuilder,
+    FFieldIconBuilder<FTextFieldStyle>? prefixBuilder,
+    FFieldIconBuilder<FTextFieldStyle>? suffixBuilder,
     Widget? label,
     Widget? description,
     bool enabled,
@@ -529,6 +538,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     required this.format,
     this.control,
     this.popoverControl = const .managed(),
+    this.size = .md,
     this.style = const .context(),
     this.autofocus = false,
     this.focusNode,
@@ -575,6 +585,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     properties
       ..add(DiagnosticsProperty('control', control))
       ..add(DiagnosticsProperty('popoverControl', popoverControl))
+      ..add(DiagnosticsProperty('size', size))
       ..add(DiagnosticsProperty('style', style))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
@@ -713,7 +724,8 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
       builder: (state) => FTextField(
         control: .managed(controller: _textController),
         focusNode: _focus,
-        style: style.fieldStyle,
+        size: widget.size,
+        style: style.fieldStyles.resolve({widget.size, context.platformVariant}),
         textAlign: widget.textAlign,
         textAlignVertical: widget.textAlignVertical,
         textDirection: widget.textDirection,
@@ -725,12 +737,8 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
         hint: widget.hint ?? localizations.selectHint,
         readOnly: true,
         enableInteractiveSelection: false,
-        prefixBuilder: widget.prefixBuilder == null
-            ? null
-            : (context, _, variants) => widget.prefixBuilder!(context, style, variants),
-        suffixBuilder: widget.suffixBuilder == null
-            ? null
-            : (context, _, variants) => widget.suffixBuilder!(context, style, variants),
+        prefixBuilder: widget.prefixBuilder,
+        suffixBuilder: widget.suffixBuilder,
         clearable: widget.clearable ? (_) => _controller.value != null : (_) => false,
         label: widget.label,
         description: widget.description,
@@ -804,9 +812,9 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
 
 /// A [FSelect]'s style.
 class FSelectStyle with Diagnosticable, _$FSelectStyleFunctions {
-  /// The select field's style.
+  /// The select field's size styles.
   @override
-  final FTextFieldStyle fieldStyle;
+  final FTextFieldSizeStyles fieldStyles;
 
   /// The search's style.
   @override
@@ -822,18 +830,22 @@ class FSelectStyle with Diagnosticable, _$FSelectStyleFunctions {
 
   /// Creates a [FSelectStyle].
   FSelectStyle({
-    required this.fieldStyle,
+    required this.fieldStyles,
     required this.searchStyle,
     required this.contentStyle,
     required this.emptyTextStyle,
   });
 
   /// Creates a [FSelectStyle] that inherits its properties.
-  FSelectStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        fieldStyle: FTextFieldSizeStyles.inherit(colors: colors, typography: typography, style: style).md,
-        searchStyle: .inherit(colors: colors, typography: typography, style: style),
-        contentStyle: .inherit(colors: colors, typography: typography, style: style),
-        emptyTextStyle: typography.sm,
-      );
+  FSelectStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+    bool desktop = false,
+  }) : this(
+         fieldStyles: .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
+         searchStyle: .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
+         contentStyle: .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
+         emptyTextStyle: typography.xs,
+       );
 }

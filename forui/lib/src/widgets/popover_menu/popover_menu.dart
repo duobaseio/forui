@@ -350,8 +350,12 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
   }) : assert(0 < maxWidth, 'maxWidth ($maxWidth) must be > 0');
 
   /// Creates a [FPopoverMenuStyle] that inherits its properties.
-  FPopoverMenuStyle.inherit({required super.colors, required super.style, required FTypography typography})
-    : itemGroupStyle = .inherit(colors: colors, style: style, typography: typography).copyWith(
+  FPopoverMenuStyle.inherit({
+    required super.colors,
+    required super.style,
+    required FTypography typography,
+    bool desktop = false,
+  }) : itemGroupStyle = .inherit(colors: colors, style: style, typography: typography, desktop: desktop).copyWith(
         decoration: .value(
           ShapeDecoration(
             shape: RoundedSuperellipseBorder(
@@ -371,18 +375,20 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
                 prefix: colors.foreground,
                 foreground: colors.foreground,
                 mutedForeground: colors.mutedForeground,
+                desktop: desktop,
               ),
               rawItemContentStyle: FRawItemContentStyle.inherit(
                 colors: colors,
                 typography: typography,
                 prefix: colors.foreground,
                 color: colors.foreground,
+                desktop: desktop,
               ),
             ),
           ),
         ]),
       ),
-      tileGroupStyle = .inherit(colors: colors, style: style, typography: typography).copyWith(
+      tileGroupStyle = .inherit(colors: colors, style: style, typography: typography, desktop: desktop).copyWith(
         tileStyles: .delta([
           .base(
             .delta(

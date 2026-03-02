@@ -829,14 +829,18 @@ class FMultiSelectStyle with Diagnosticable, _$FMultiSelectStyleFunctions {
   });
 
   /// Creates a [FMultiSelectStyle] that inherits its properties.
-  FMultiSelectStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        fieldStyle: .inherit(colors: colors, typography: typography, style: style),
-        tagStyle: .inherit(colors: colors, typography: typography, style: style),
-        searchStyle: .inherit(colors: colors, typography: typography, style: style),
-        contentStyle: .inherit(colors: colors, typography: typography, style: style),
-        emptyTextStyle: typography.sm,
-      );
+  FMultiSelectStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+    bool desktop = false,
+  }) : this(
+         fieldStyle: .inherit(colors: colors, typography: typography, style: style),
+         tagStyle: .inherit(colors: colors, typography: typography, style: style),
+         searchStyle: .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
+         contentStyle: .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
+         emptyTextStyle: typography.sm,
+       );
 }
 
 /// A [FMultiSelectFieldStyle]'s style.

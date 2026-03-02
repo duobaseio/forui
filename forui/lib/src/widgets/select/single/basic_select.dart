@@ -8,6 +8,7 @@ class _BasicSelect<T> extends FSelect<T> {
     required super.format,
     super.control,
     super.popoverControl,
+    super.size,
     super.style,
     super.autofocus,
     super.focusNode,

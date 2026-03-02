@@ -69,6 +69,10 @@ sizes consistent across each platform.
 ### `FDateField`
 * Add `FDateField.size`.
 
+* **Breaking** Change `FDateField.prefixBuilder` type from `FFieldIconBuilder<FDateFieldStyle>?` to
+  `FFieldIconBuilder<FTextFieldStyle>?`.
+* **Breaking** Change `FDateField.suffixBuilder` type from `FFieldIconBuilder<FDateFieldStyle>?` to
+  `FFieldIconBuilder<FTextFieldStyle>?`.
 * **Breaking** Rename `FDateFieldStyle.fieldStyle` to `FDateFieldStyle.fieldStyles`. Type changed from
   `FTextFieldStyle` to `FTextFieldSizeStyles`.
 
@@ -127,11 +131,22 @@ sizes consistent across each platform.
 
 ### `FSelect` & `FMultiSelect`
 * Add `FSelect.size`.
+* Add `FSelectSearchFieldProperties.size`.
 
 * Change `FSelectSection` layout to better align with the latest shadcn version.
 
+* **Breaking** Change `FSelect.prefixBuilder` type from `FFieldIconBuilder<FSelectStyle>?` to
+  `FFieldIconBuilder<FTextFieldStyle>?`.
+* **Breaking** Change `FSelect.suffixBuilder` type from `FFieldIconBuilder<FSelectStyle>?` to
+  `FFieldIconBuilder<FTextFieldStyle>?`.
+* **Breaking** Change `FSelectSearchFieldProperties.prefixBuilder` type from `FFieldIconBuilder<FSelectSearchStyle>?`
+  to `FFieldIconBuilder<FTextFieldStyle>?`.
+* **Breaking** Change `FSelectSearchFieldProperties.suffixBuilder` type from `FFieldIconBuilder<FSelectSearchStyle>?`
+  to `FFieldIconBuilder<FTextFieldStyle>?`.
 * **Breaking** Rename `FSelectStyle.fieldStyle` to `FSelectStyle.fieldStyles`. Type changed from `FTextFieldStyle` to
   `FTextFieldSizeStyles`.
+* **Breaking** Rename `FSelectSearchStyle.fieldStyle` to `FSelectSearchStyle.fieldStyles`. Type changed from
+  `FTextFieldStyle` to `FTextFieldSizeStyles`.
 
 
 ### `FSidebar`
@@ -160,6 +175,11 @@ sizes consistent across each platform.
 
 * **Breaking** Rename `FTimeFieldStyle.fieldStyle` to `FTimeFieldStyle.fieldStyles`. Type changed from
   `FTextFieldStyle` to `FTextFieldSizeStyles`.
+
+
+### `FTextField` & `FTextFormField`
+* Add `FTextField.size` and `FTextFormField.size` for `sm`, `md`, and `lg` size variants.
+* Add `FTextFieldSizeStyles` and `FTextFieldSizeVariant`.
 
 
 ### `FTheme` & `FBasicTheme`

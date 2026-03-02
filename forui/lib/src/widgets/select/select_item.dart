@@ -262,6 +262,7 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
     required FColors colors,
     required FStyle style,
     required FTypography typography,
+    bool desktop = false,
   }) => .new(
     labelTextStyle: FVariants.from(
       typography.xs.copyWith(color: colors.mutedForeground),
@@ -273,7 +274,7 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
     dividerWidth: style.borderWidth,
     itemStyle: FItemStyle(
       backgroundColor: const .all(null),
-      decoration: FVariants.from(
+      decoration: .from(
         const ShapeDecoration(shape: RoundedSuperellipseBorder()),
         variants: {
           [.focused, .hovered, .pressed]: .shapeDelta(
@@ -290,12 +291,14 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
         prefix: colors.foreground,
         foreground: colors.foreground,
         mutedForeground: colors.mutedForeground,
+        desktop: desktop,
       ),
-      rawItemContentStyle: FRawItemContentStyle.inherit(
+      rawItemContentStyle: .inherit(
         colors: colors,
         typography: typography,
         prefix: colors.foreground,
         color: colors.foreground,
+        desktop: desktop,
       ),
       tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
       focusedOutlineStyle: null,

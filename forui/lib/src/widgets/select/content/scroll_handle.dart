@@ -163,9 +163,9 @@ class FSelectScrollHandleStyle with Diagnosticable, _$FSelectScrollHandleStyleFu
   }) : assert(0 < pixelsPerSecond, 'pixelsPerSecond ($pixelsPerSecond) must be > 0');
 
   /// Creates a [FSelectScrollHandleStyle] that inherits its properties.
-  FSelectScrollHandleStyle.inherit({required FColors colors})
+  FSelectScrollHandleStyle.inherit({required FColors colors, required FTypography typography})
     : this(
-        iconStyle: IconThemeData(color: colors.foreground, size: 17),
+        iconStyle: IconThemeData(color: colors.foreground, size: typography.md.fontSize),
         background: colors.card,
       );
 }

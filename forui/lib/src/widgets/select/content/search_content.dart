@@ -134,7 +134,7 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
           child: FTextField(
             control: .managed(controller: _controller, onChange: widget.properties.onChange),
             focusNode: _focus,
-            style: widget.searchStyle.fieldStyle,
+            style: widget.searchStyle.fieldStyles.resolve({widget.properties.size, context.platformVariant}),
             hint: widget.properties.hint ?? localizations.selectSearchHint,
             magnifierConfiguration: widget.properties.magnifierConfiguration,
             keyboardType: widget.properties.keyboardType,
@@ -175,12 +175,8 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
             contextMenuBuilder: widget.properties.contextMenuBuilder,
             undoController: widget.properties.undoController,
             spellCheckConfiguration: widget.properties.spellCheckConfiguration,
-            prefixBuilder: widget.properties.prefixBuilder == null
-                ? null
-                : (context, _, variants) => widget.properties.prefixBuilder!(context, widget.searchStyle, variants),
-            suffixBuilder: widget.properties.suffixBuilder == null
-                ? null
-                : (context, _, variants) => widget.properties.suffixBuilder!(context, widget.searchStyle, variants),
+            prefixBuilder: widget.properties.prefixBuilder,
+            suffixBuilder: widget.properties.suffixBuilder,
             clearable: widget.properties.clearable,
           ),
         ),
@@ -229,9 +225,9 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
 
 /// A [FSelect]'s search field style.
 class FSelectSearchStyle with Diagnosticable, _$FSelectSearchStyleFunctions {
-  /// The search field's style.
+  /// The search field's size styles.
   @override
-  final FTextFieldStyle fieldStyle;
+  final FTextFieldSizeStyles fieldStyles;
 
   /// The style of the divider between the search field and results.
   @override
@@ -242,19 +238,32 @@ class FSelectSearchStyle with Diagnosticable, _$FSelectSearchStyleFunctions {
   final FCircularProgressStyle progressStyle;
 
   /// Creates a [FSelectSearchStyle].
-  FSelectSearchStyle({required this.fieldStyle, required this.dividerStyle, required this.progressStyle});
+  FSelectSearchStyle({required this.fieldStyles, required this.dividerStyle, required this.progressStyle});
 
-  /// Creates a copy of this [FSelectSearchStyle] but with the given fields replaced with the new values.
-  FSelectSearchStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        fieldStyle: FTextFieldSizeStyles.inherit(colors: colors, typography: typography, style: style).md.copyWith(
-          color: const FVariants.all(null),
-          border: const FVariants.all(OutlineInputBorder(borderSide: .none)),
-        ),
-        dividerStyle: FDividerStyles.inherit(
-          colors: colors,
-          style: style,
-        ).horizontal.copyWith(width: 2, padding: const .value(.zero)),
-        progressStyle: .inherit(colors: colors),
-      );
+  /// Creates a [FSelectSearchStyle] that inherits its properties.
+  factory FSelectSearchStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+    bool desktop = false,
+  }) {
+    final styles = FTextFieldSizeStyles.inherit(colors: colors, typography: typography, style: style, desktop: desktop);
+    return FSelectSearchStyle(
+      fieldStyles: FTextFieldSizeStyles(
+        styles.apply([
+          .all(
+            const .delta(
+              color: FVariants.all(null),
+              border: FVariants.all(OutlineInputBorder(borderSide: .none)),
+            ),
+          ),
+        ]),
+      ),
+      dividerStyle: FDividerStyles.inherit(
+        colors: colors,
+        style: style,
+      ).horizontal.copyWith(width: 2, padding: const .value(.zero)),
+      progressStyle: FCircularProgressStyle.inherit(colors: colors),
+    );
+  }
 }

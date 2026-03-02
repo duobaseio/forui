@@ -279,9 +279,13 @@ class FSelectContentStyle extends FPopoverStyle with Diagnosticable, _$FSelectCo
   });
 
   /// Creates a [FSelectContentStyle] that inherits its properties.
-  FSelectContentStyle.inherit({required super.colors, required super.style, required FTypography typography})
-    : sectionStyle = .inherit(colors: colors, style: style, typography: typography),
-      scrollHandleStyle = .inherit(colors: colors),
-      padding = const .symmetric(vertical: 6),
-      super.inherit();
+  FSelectContentStyle.inherit({
+    required super.colors,
+    required super.style,
+    required FTypography typography,
+    bool desktop = false,
+  }) : sectionStyle = .inherit(colors: colors, style: style, typography: typography, desktop: desktop),
+       scrollHandleStyle = .inherit(colors: colors, typography: typography),
+       padding = const .symmetric(vertical: 6),
+       super.inherit();
 }
