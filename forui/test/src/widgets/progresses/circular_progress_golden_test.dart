@@ -8,7 +8,7 @@ import '../../test_scaffold.dart';
 void main() {
   testWidgets('blue screen', (tester) async {
     await tester.pumpWidget(
-      TestScaffold.blue(child: FCircularProgress(style: TestScaffold.blueScreen.circularProgressStyle)),
+      TestScaffold.blue(child: FCircularProgress(style: TestScaffold.blueScreen.circularProgressStyles.md)),
     );
 
     await expectBlueScreen();
@@ -24,6 +24,20 @@ void main() {
       );
 
       await expectLater(sheet.collate(10), matchesGoldenFile('progresses/circular/$name.png'));
+    });
+  }
+
+  for (final (name, size) in [
+    ('xs', FCircularProgressSizeVariant.xs),
+    ('sm', FCircularProgressSizeVariant.sm),
+    ('md', FCircularProgressSizeVariant.md),
+    ('lg', FCircularProgressSizeVariant.lg),
+    ('xl', FCircularProgressSizeVariant.xl),
+  ]) {
+    testWidgets('FCircularProgress - $name', (tester) async {
+      await tester.pumpWidget(TestScaffold.app(child: FCircularProgress(size: size)));
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('progresses/circular/size-$name.png'));
     });
   }
 

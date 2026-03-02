@@ -61,6 +61,14 @@ sizes consistent across each platform.
   `FVariants<..., Decoration, DecorationDelta>`.
 
 
+### `FCircularProgress`
+* Add `FCircularProgress.size`.
+* Add `FCircularProgressSizeStyles` and `FCircularProgressSizeVariant`.
+
+* **Breaking** Rename `FThemeData.circularProgressStyle` to `FThemeData.circularProgressStyles`. Type changed from
+  `FCircularProgressStyle` to `FCircularProgressSizeStyles`.
+
+
 ### `FDeterminateProgress`
 * **Breaking** Change `FDeterminateProgressStyle.trackDecoration` and `fillDecoration` types from `BoxDecoration` to
   `Decoration`.
