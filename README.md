@@ -56,7 +56,7 @@ are exposed as hooks in the companion `forui_hooks` package.
 
 ## Contributing
 
-Please read the [contributing guide](/CONTRIBUTING.md).
+Please read the [contributing guide](CONTRIBUTING.md).
 
 ## Nightly Builds
 
