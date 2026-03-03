@@ -28,7 +28,7 @@ class Application extends StatelessWidget {
           ),
         ),
       ),
-      home: FScaffold(
+      home: const FScaffold(
         child: Button(),
       ),
     );
