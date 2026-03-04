@@ -13,11 +13,16 @@ sizes consistent across each platform.
 
 ### `FAutocomplete`
 * Add `FAutocomplete.size`.
+* Add `FAutocompleteSizeStyles`.
 
 * Change `FAutocompleteSection` layout to better align with the latest shadcn version.
 
-* **Breaking** Rename `FAutocompleteStyle.fieldStyle` to `FAutocompleteStyle.fieldStyles`. Type changed from
-  `FTextFieldStyle` to `FTextFieldSizeStyles`.
+* **Breaking** Change `FAutocompleteStyle` to extend `FTextFieldStyle`. The `fieldStyles` field is removed; text field
+  properties are now inherited.
+* **Breaking** Change `FAutocompleteStyle.composingTextStyle` and `FAutocompleteStyle.typeaheadTextStyle` type from
+  `FVariants<FTextFieldVariantConstraint, FTextFieldVariant, TextStyle, TextStyleDelta>` to `TextStyle`.
+* **Breaking** Rename `FThemeData.autocompleteStyle` to `FThemeData.autocompleteStyles`. Type changed from
+  `FAutocompleteStyle` to `FAutocompleteSizeStyles`.
 
 
 ### `FBadge`
@@ -101,13 +106,16 @@ sizes consistent across each platform.
 ### `FItem` & `FItemGroup`
 * Add `FItemVariant.primary`.
 * Add `FItem.onDoubleTap`.
+* Add `FItemStyle.shape` for clipping items.
 * Add `FItemGroupStyle.slideableItems` for slide-across interaction.
 
 * **Breaking** Change `FItemStyle.decoration` type from `FVariants<..., BoxDecoration, BoxDecorationDelta>` to
   `FVariants<..., Decoration, DecorationDelta>`.
 * **Breaking** Change `FItemGroupStyle.decoration` type from `BoxDecoration` to `Decoration`.
+* **Breaking** Rename `FItemStyle.border` to `FItemStyle.shape`.
 
 * Fix `FItemDivider.indented` not masking the gap area with the item's background color.
+* Fix `FItem` not being clipped to its shape.
 
 
 ### `FLineCalendar`
@@ -195,8 +203,8 @@ sizes consistent across each platform.
 * Add color scheme constants to `FColors`.
 * Add `FTypography.xs3`.
 * Add `FTypography.xs2`.
-* Add `FTypography.inherit(desktop: ...)`.
-* Add `FThemeData(desktop: ...)`.
+* Add `FTypography.inherit(touch: ...)`.
+* Add `FThemeData(touch: ...)`.
 
 * **Breaking** Change `FThemes.*.light`/`dark` from `FThemeData` to `FThemes.*.*.desktop/touch`.
 * **Breaking** Rename `FThemeData.textFieldStyle` to `FThemeData.textFieldStyles`. Type changed from `FTextFieldStyle`
@@ -208,18 +216,10 @@ sizes consistent across each platform.
 * **Breaking** Change `FTypography` default sizes — each token is now one level larger.
 
 
-### Others
-* Add `Decorations` extension on `Decoration` for extracting common visual properties.
-* Add `FPlatformVariantConstraint` extension type.
-
-* Change default border shape from `RoundedRectangleBorder` to `RoundedSuperellipseBorder`.
-
-* Fix widget `.inherit()` constructors not using `FStyle.borderWidth` for `BorderSide` widths.
-
-
 ### `FTile` & `FTileGroup`
 * Add `FTileStyles.primary` resolving via `FItemVariant.primary`.
 * Add `FTile.onDoubleTap`.
+* Add `FTileStyle.shape` for clipping standalone tiles.
 * Add `FTileGroupStyle.slideableTiles` for slide-across interaction.
 
 * **Breaking** Change `FTileGroupStyle.decoration` type from `BoxDecoration` to `Decoration`.
@@ -233,6 +233,18 @@ sizes consistent across each platform.
 
 ### `FTooltip`
 * **Breaking** Change `FTooltipStyle.decoration` type from `BoxDecoration` to `Decoration`.
+
+
+### Others
+* Add `Decorations` extension on `Decoration` for extracting common visual properties.
+* Add `FPlatformVariantConstraint` extension type.
+
+* Change default border shape from `RoundedRectangleBorder` to `RoundedSuperellipseBorder`.
+
+* **Breaking** Rename `desktop` parameter to `touch` (with inverted logic) and change from `bool desktop = false` to
+  `required bool touch` in all `.inherit()` constructors and `FThemeData(...)`.
+
+* Fix widget `.inherit()` constructors not using `FStyle.borderWidth` for `BorderSide` widths.
 
 
 ## 0.19.0

@@ -18,6 +18,9 @@ const colorSentinel = _ColorSentinel();
 const focusedOutlineStyleSentinel = _FocusedOutlineStyleSentinel();
 
 @internal
+const shapeBorderSentinel = _ShapeBorderSentinel();
+
+@internal
 const imageFilterSentinel = _ImageFilterSentinel();
 
 @internal
@@ -64,6 +67,25 @@ final class _FocusedOutlineStyleSentinel implements FFocusedOutlineStyle {
 
   @override
   String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) => throw UnimplementedError();
+}
+
+final class _ShapeBorderSentinel extends ShapeBorder {
+  const _ShapeBorderSentinel();
+
+  @override
+  EdgeInsetsGeometry get dimensions => throw UnimplementedError();
+
+  @override
+  Path getInnerPath(Rect rect, {TextDirection? textDirection}) => throw UnimplementedError();
+
+  @override
+  Path getOuterPath(Rect rect, {TextDirection? textDirection}) => throw UnimplementedError();
+
+  @override
+  void paint(Canvas canvas, Rect rect, {TextDirection? textDirection}) => throw UnimplementedError();
+
+  @override
+  ShapeBorder scale(double t) => throw UnimplementedError();
 }
 
 /// A mixin for types that can be applied to a base value to produce a new value.

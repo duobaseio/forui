@@ -415,7 +415,7 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
     required FColors colors,
     required FTypography typography,
     required FStyle style,
-    bool desktop = false,
+    required bool touch,
   }) =>
       .new(
         decoration: ShapeDecoration(
@@ -450,14 +450,14 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
                 prefix: colors.destructive,
                 foreground: colors.destructive,
                 mutedForeground: colors.destructive,
-                padding: FItemStyle.menuInsets(desktop: desktop).$1,
+                padding: FItemStyle.menuInsets(touch: touch).$1,
               ),
               rawItemContentStyle: FRawItemContentStyle.inherit(
                 colors: colors,
                 typography: typography,
                 prefix: colors.destructive,
                 color: colors.destructive,
-                padding: FItemStyle.menuInsets(desktop: desktop).$1,
+                padding: FItemStyle.menuInsets(touch: touch).$1,
               ),
             ),
           },

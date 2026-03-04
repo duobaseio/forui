@@ -12,6 +12,7 @@ final accordion =
         colors: FThemes.green.light.touch.colors,
         typography: FThemes.green.light.touch.typography,
         style: FThemes.green.light.touch.style,
+        touch: true,
       ),
       children: const [],
     );

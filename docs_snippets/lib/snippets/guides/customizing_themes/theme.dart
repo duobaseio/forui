@@ -26,6 +26,7 @@ FThemeData get neutralLight {
     colors: colors,
     typography: typography,
     style: style,
+    touch: true,
     // Add your generated styles here.
     // {@highlight}
     accordionStyle: accordionStyle(colors: colors, typography: typography, style: style),

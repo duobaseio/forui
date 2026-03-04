@@ -500,12 +500,12 @@ class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
     required FColors colors,
     required FTypography typography,
     required FStyle style,
-    bool desktop = false,
+    required bool touch,
   }) : this(
          decoration: ShapeDecoration(shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md)),
          dividerColor: .all(colors.border),
          dividerWidth: style.borderWidth,
          slideableItems: const .all(true),
-         itemStyles: FItemStyles.inherit(colors: colors, typography: typography, style: style, desktop: desktop),
+         itemStyles: FItemStyles.inherit(colors: colors, typography: typography, style: style, touch: touch),
        );
 }

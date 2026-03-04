@@ -201,7 +201,7 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
     required FColors colors,
     required FTypography typography,
     required FStyle style,
-    bool desktop = false,
+    required bool touch,
   }) : this(
          titleTextStyle: .from(
            typography.sm.copyWith(fontWeight: .w500, color: colors.foreground),
@@ -213,7 +213,7 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
          iconStyle: .all(
            IconThemeData(
              color: colors.mutedForeground,
-             size: desktop ? typography.md.fontSize : typography.lg.fontSize,
+             size: touch ? typography.lg.fontSize : typography.md.fontSize,
            ),
          ),
          focusedOutlineStyle: style.focusedOutlineStyle,

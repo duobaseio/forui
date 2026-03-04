@@ -28,9 +28,9 @@ class FTimeFieldStyle with Diagnosticable, _$FTimeFieldStyleFunctions {
     required FColors colors,
     required FTypography typography,
     required FStyle style,
-    bool desktop = false,
+    required bool touch,
   }) : this(
-         fieldStyles: .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
+         fieldStyles: .inherit(colors: colors, typography: typography, style: style, touch: touch),
          popoverStyle: .inherit(colors: colors, style: style),
          pickerStyle: .inherit(colors: colors, typography: typography, style: style),
        );

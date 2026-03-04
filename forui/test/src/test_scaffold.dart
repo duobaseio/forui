@@ -65,11 +65,12 @@ class TestScaffold extends StatelessWidget {
       card: Color(0xFF03A9F4),
       border: Color(0xFF03A9F4),
     );
-    final typography = FTypography.inherit(colors: colors);
+    final typography = FTypography.inherit(colors: colors, touch: true);
     return FThemeData(
       colors: colors,
       typography: typography,
       style: .inherit(colors: colors, typography: typography).copyWith(shadow: []),
+      touch: true,
     );
   }();
 

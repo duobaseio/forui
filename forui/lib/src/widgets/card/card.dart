@@ -103,7 +103,7 @@ class FCardStyle with Diagnosticable, _$FCardStyleFunctions {
     required FColors colors,
     required FTypography typography,
     required FStyle style,
-    bool desktop = false,
+    required bool touch,
   }) : this(
          decoration: ShapeDecoration(
            shape: RoundedSuperellipseBorder(
@@ -113,7 +113,7 @@ class FCardStyle with Diagnosticable, _$FCardStyleFunctions {
            color: colors.card,
          ),
          contentStyle: FCardContentStyle(
-           titleTextStyle: (desktop ? typography.md : typography.lg).copyWith(fontWeight: .w500, color: colors.foreground),
+           titleTextStyle: (touch ? typography.lg : typography.md).copyWith(fontWeight: .w500, color: colors.foreground),
            subtitleTextStyle: typography.sm.copyWith(color: colors.mutedForeground),
          ),
        );

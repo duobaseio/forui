@@ -12,6 +12,7 @@ Widget build(BuildContext context) => FTheme(
         .copyWith(xs: const TextStyle(fontSize: 12, height: 1))
         .scale(sizeScalar: 0.8),
     // {@endhighlight}
+    touch: true,
   ),
   child: const FScaffold(child: Placeholder()),
 );

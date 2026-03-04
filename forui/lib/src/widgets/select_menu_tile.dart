@@ -711,10 +711,11 @@ class FSelectMenuTileStyle extends FLabelStyle with _$FSelectMenuTileStyleFuncti
     required FColors colors,
     required FTypography typography,
     required FStyle style,
+    required bool touch,
   }) {
-    final groupStyle = FTileGroupStyle.inherit(colors: colors, style: style, typography: typography);
+    final groupStyle = FTileGroupStyle.inherit(colors: colors, style: style, typography: typography, touch: touch);
     return .new(
-      menuStyle: .inherit(colors: colors, style: style, typography: typography),
+      menuStyle: .inherit(colors: colors, style: style, typography: typography, touch: touch),
       tileStyle: .inherit(colors: colors, typography: typography, style: style),
       labelTextStyle: groupStyle.labelTextStyle,
       descriptionTextStyle: groupStyle.descriptionTextStyle,

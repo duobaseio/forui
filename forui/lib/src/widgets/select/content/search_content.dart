@@ -245,9 +245,9 @@ class FSelectSearchStyle with Diagnosticable, _$FSelectSearchStyleFunctions {
     required FColors colors,
     required FTypography typography,
     required FStyle style,
-    bool desktop = false,
+    required bool touch,
   }) {
-    final styles = FTextFieldSizeStyles.inherit(colors: colors, typography: typography, style: style, desktop: desktop);
+    final styles = FTextFieldSizeStyles.inherit(colors: colors, typography: typography, style: style, touch: touch);
     return FSelectSearchStyle(
       fieldStyles: FTextFieldSizeStyles(
         styles.apply([

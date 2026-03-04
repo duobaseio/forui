@@ -250,9 +250,9 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
     required FColors colors,
     required FStyle style,
     required FTypography typography,
-    bool desktop = false,
+    required bool touch,
   }) {
-    final (padding, margin) = FItemStyle.selectInsets(desktop: desktop);
+    final (padding, margin) = FItemStyle.selectInsets(touch: touch);
     return .new(
       labelTextStyle: .from(
         typography.xs.copyWith(color: colors.mutedForeground),

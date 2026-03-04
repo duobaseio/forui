@@ -13,7 +13,7 @@ class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
   @override
   final EdgeInsets itemPadding;
 
-  /// The item's constraints. Defaults to `BoxConstraints(maxWidth: 36, minWidth: 36, maxHeight: 36, minHeight: 36)`.
+  /// The item's constraints.
   @override
   final BoxConstraints itemConstraints;
 
@@ -54,35 +54,39 @@ class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
     required this.actionTappableStyle,
     required this.pageTappableStyle,
     required this.focusedOutlineStyle,
+    required this.itemConstraints,
     this.itemPadding = const .symmetric(horizontal: 2),
-    this.itemConstraints = const .tightFor(width: 32.0, height: 32.0),
   });
 
   /// Creates a [FPaginationStyle] that inherits its properties.
-  FPaginationStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        itemIconStyle: .all(IconThemeData(color: colors.foreground, size: typography.md.fontSize)),
-        itemDecoration: FVariants.from(
-          ShapeDecoration(
-            shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
-            color: colors.background,
-          ),
-          variants: {
-            [.hovered, .pressed]: .shapeDelta(color: colors.secondary),
-            //
-            [.selected]: .shapeDelta(color: colors.primary),
-            [.selected.and(.hovered), .selected.and(.pressed)]: .shapeDelta(color: colors.hover(colors.primary)),
-          },
-        ),
-        itemTextStyle: FVariants.from(
-          typography.sm.copyWith(color: colors.foreground),
-          variants: {
-            [.selected]: .delta(color: colors.primaryForeground),
-          },
-        ),
-        ellipsisTextStyle: typography.sm.copyWith(color: colors.foreground),
-        actionTappableStyle: style.tappableStyle,
-        pageTappableStyle: style.tappableStyle,
-        focusedOutlineStyle: style.focusedOutlineStyle,
-      );
+  FPaginationStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+    required bool touch,
+  }) : this(
+         itemIconStyle: .all(IconThemeData(color: colors.foreground, size: typography.md.fontSize)),
+         itemDecoration: FVariants.from(
+           ShapeDecoration(shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md)),
+           variants: {
+             [.hovered, .pressed]: .shapeDelta(color: colors.secondary),
+             //
+             [.selected]: .shapeDelta(color: colors.primary),
+             [.selected.and(.hovered), .selected.and(.pressed)]: .shapeDelta(color: colors.hover(colors.primary)),
+           },
+         ),
+         itemTextStyle: FVariants.from(
+           typography.sm.copyWith(color: colors.foreground),
+           variants: {
+             [.selected]: .delta(color: colors.primaryForeground),
+           },
+         ),
+         ellipsisTextStyle: typography.sm.copyWith(color: colors.foreground),
+         actionTappableStyle: style.tappableStyle,
+         pageTappableStyle: style.tappableStyle,
+         focusedOutlineStyle: style.focusedOutlineStyle,
+         itemConstraints: touch
+             ? const .tightFor(width: 44.0, height: 44.0)
+             : const .tightFor(width: 32.0, height: 32.0),
+       );
 }

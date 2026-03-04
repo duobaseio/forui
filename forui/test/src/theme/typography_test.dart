@@ -75,7 +75,7 @@ void main() {
       );
 
       test('touch', () {
-        typography = FTypography.inherit(colors: colors);
+        typography = FTypography.inherit(colors: colors, touch: true);
         final font = typography.defaultFontFamily;
         final color = colors.foreground;
 
@@ -97,7 +97,7 @@ void main() {
       });
 
       test('desktop', () {
-        typography = FTypography.inherit(colors: colors, desktop: true);
+        typography = FTypography.inherit(colors: colors, touch: false);
         final font = typography.defaultFontFamily;
         final color = colors.foreground;
 

@@ -231,7 +231,7 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
     required FColors colors,
     required FTypography typography,
     required FStyle style,
-    bool desktop = false,
+    required bool touch,
   }) {
     final backgroundColor = FVariants<FTappableVariantConstraint, FTappableVariant, Color, Delta>(
       colors.card,
@@ -264,24 +264,7 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
       },
     );
 
-    if (desktop) {
-      return .new(
-        headerTextStyle: typography.xs.copyWith(color: colors.mutedForeground),
-        tileSize: 32,
-        current: FCalendarEntryStyle(
-          backgroundColor: backgroundColor,
-          borderSide: border,
-          textStyle: textStyle(typography.sm, colors.foreground),
-          borderRadius: style.borderRadius.sm,
-        ),
-        enclosing: FCalendarEntryStyle(
-          backgroundColor: backgroundColor,
-          borderSide: border,
-          textStyle: textStyle(typography.sm, colors.mutedForeground),
-          borderRadius: style.borderRadius.sm,
-        ),
-      );
-    } else {
+    if (touch) {
       return .new(
         headerTextStyle: typography.xs2.copyWith(color: colors.mutedForeground),
         tileSize: 44,
@@ -296,6 +279,23 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
           borderSide: border,
           textStyle: textStyle(typography.sm, colors.mutedForeground),
           borderRadius: style.borderRadius.md,
+        ),
+      );
+    } else {
+      return .new(
+        headerTextStyle: typography.xs.copyWith(color: colors.mutedForeground),
+        tileSize: 32,
+        current: FCalendarEntryStyle(
+          backgroundColor: backgroundColor,
+          borderSide: border,
+          textStyle: textStyle(typography.sm, colors.foreground),
+          borderRadius: style.borderRadius.sm,
+        ),
+        enclosing: FCalendarEntryStyle(
+          backgroundColor: backgroundColor,
+          borderSide: border,
+          textStyle: textStyle(typography.sm, colors.mutedForeground),
+          borderRadius: style.borderRadius.sm,
         ),
       );
     }

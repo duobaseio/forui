@@ -9,6 +9,7 @@ final theme =
     FThemeData(
       colors: FThemes.neutral.light.touch.colors,
       // ... other theme properties
+      touch: true,
       extensions: [const BrandColor(color: Color(0xFF6366F1))],
     );
 // {@endsnippet}

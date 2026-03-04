@@ -267,12 +267,12 @@ class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
     required FColors colors,
     required FTypography typography,
     required FStyle style,
-    bool desktop = false,
+    required bool touch,
   }) {
-    final borderRadius = desktop ? style.borderRadius.md : style.borderRadius.lg;
+    final borderRadius = touch ? style.borderRadius.lg : style.borderRadius.md;
     return FCalendarStyle(
-      headerStyle: .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
-      dayPickerStyle: .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
+      headerStyle: .inherit(colors: colors, typography: typography, style: style, touch: touch),
+      dayPickerStyle: .inherit(colors: colors, typography: typography, style: style, touch: touch),
       yearMonthPickerStyle: FCalendarEntryStyle(
         backgroundColor: FVariants(
           colors.card,

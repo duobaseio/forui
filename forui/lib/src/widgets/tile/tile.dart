@@ -367,6 +367,7 @@ class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
     required super.rawItemContentStyle,
     required super.tappableStyle,
     required super.focusedOutlineStyle,
+    required super.shape,
     super.margin = .zero,
   });
 
@@ -407,6 +408,7 @@ class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
           pressedExitDuration: const Duration(milliseconds: 25),
         ),
         focusedOutlineStyle: style.focusedOutlineStyle,
+        shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
       );
 }
 

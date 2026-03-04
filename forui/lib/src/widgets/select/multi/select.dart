@@ -833,12 +833,12 @@ class FMultiSelectStyle with Diagnosticable, _$FMultiSelectStyleFunctions {
     required FColors colors,
     required FTypography typography,
     required FStyle style,
-    bool desktop = false,
+    required bool touch,
   }) : this(
-         fieldStyle: .inherit(colors: colors, typography: typography, style: style),
+         fieldStyle: .inherit(colors: colors, typography: typography, style: style, touch: touch),
          tagStyle: .inherit(colors: colors, typography: typography, style: style),
-         searchStyle: .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
-         contentStyle: .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
+         searchStyle: .inherit(colors: colors, typography: typography, style: style, touch: touch),
+         contentStyle: .inherit(colors: colors, typography: typography, style: style, touch: touch),
          emptyTextStyle: typography.sm,
        );
 }
@@ -914,9 +914,10 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
     required FColors colors,
     required FTypography typography,
     required FStyle style,
+    required bool touch,
   }) {
     final label = FLabelStyles.inherit(style: style).verticalStyle;
-    final ghost = FButtonStyles.inherit(colors: colors, typography: typography, style: style).ghost.sm;
+    final ghost = FButtonStyles.inherit(colors: colors, typography: typography, style: style, touch: touch).ghost.sm;
 
     final iconStyle = FVariants<FTextFieldVariantConstraint, FTextFieldVariant, IconThemeData, IconThemeDataDelta>.from(
       IconThemeData(color: colors.mutedForeground, size: 16),

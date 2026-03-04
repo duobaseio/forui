@@ -354,8 +354,8 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
     required super.colors,
     required super.style,
     required FTypography typography,
-    bool desktop = false,
-  }) : itemGroupStyle = .inherit(colors: colors, style: style, typography: typography, desktop: desktop).copyWith(
+    required bool touch,
+  }) : itemGroupStyle = .inherit(colors: colors, style: style, typography: typography, touch: touch).copyWith(
         decoration: .value(
           ShapeDecoration(
             shape: RoundedSuperellipseBorder(
@@ -375,20 +375,20 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
                 prefix: colors.foreground,
                 foreground: colors.foreground,
                 mutedForeground: colors.mutedForeground,
-                padding: FItemStyle.menuInsets(desktop: desktop).$1,
+                padding: FItemStyle.menuInsets(touch: touch).$1,
               ),
               rawItemContentStyle: FRawItemContentStyle.inherit(
                 colors: colors,
                 typography: typography,
                 prefix: colors.foreground,
                 color: colors.foreground,
-                padding: FItemStyle.menuInsets(desktop: desktop).$1,
+                padding: FItemStyle.menuInsets(touch: touch).$1,
               ),
             ),
           ),
         ]),
       ),
-      tileGroupStyle = .inherit(colors: colors, style: style, typography: typography, desktop: desktop).copyWith(
+      tileGroupStyle = .inherit(colors: colors, style: style, typography: typography, touch: touch).copyWith(
         tileStyles: .delta([
           .base(
             .delta(

@@ -94,7 +94,7 @@ extension type FBadgeStyles(FVariants<FBadgeVariantConstraint, FBadgeVariant, FB
     required FColors colors,
     required FTypography typography,
     required FStyle style,
-    bool desktop = false,
+    required bool touch,
   }) {
     final destructiveTextStyle = typography.xs.copyWith(color: colors.destructive, fontWeight: .w500);
     final destructiveDecoration = ShapeDecoration(
@@ -107,9 +107,9 @@ extension type FBadgeStyles(FVariants<FBadgeVariantConstraint, FBadgeVariant, FB
       borderRadius: style.borderRadius.pill,
     );
 
-    final padding = desktop
-        ? const EdgeInsets.symmetric(horizontal: 10, vertical: 6)
-        : const EdgeInsets.symmetric(horizontal: 12, vertical: 6);
+    final padding = touch
+        ? const EdgeInsets.symmetric(horizontal: 12, vertical: 6)
+        : const EdgeInsets.symmetric(horizontal: 10, vertical: 6);
 
     return FBadgeStyles(
       .from(

@@ -33,7 +33,7 @@ extension type FTextFieldSizeStyles(
     required FColors colors,
     required FTypography typography,
     required FStyle style,
-    bool desktop = false,
+    required bool touch,
   }) {
     final label = FLabelStyles.inherit(style: style).verticalStyle;
     final textStyle = typography.sm.copyWith(fontFamily: typography.defaultFontFamily);
@@ -54,12 +54,24 @@ extension type FTextFieldSizeStyles(
       contentPadding: contentPadding,
     );
 
-    final ghost = FButtonStyles.inherit(colors: colors, typography: typography, style: style, desktop: desktop).ghost;
+    final ghost = FButtonStyles.inherit(colors: colors, typography: typography, style: style, touch: touch).ghost;
     final buttonStyle = ghost.sm.copyWith(
       iconContentStyle: ghost.sm.iconContentStyle.copyWith(iconStyle: iconStyle.cast()),
     );
 
-    if (desktop) {
+    if (touch) {
+      final md = textField(buttonStyle, const .symmetric(horizontal: 12, vertical: 10));
+      return FTextFieldSizeStyles(
+        FVariants(
+          md,
+          variants: {
+            [.sm]: textField(buttonStyle, const .symmetric(horizontal: 12, vertical: 8)),
+            [.md]: md,
+            [.lg]: textField(buttonStyle, const .symmetric(horizontal: 12, vertical: 12)),
+          },
+        ),
+      );
+    } else {
       final md = textField(buttonStyle, const .symmetric(horizontal: 10, vertical: 9));
       return FTextFieldSizeStyles(
         FVariants(
@@ -71,18 +83,6 @@ extension type FTextFieldSizeStyles(
             ),
             [.md]: md,
             [.lg]: textField(buttonStyle, const .symmetric(horizontal: 10, vertical: 11)),
-          },
-        ),
-      );
-    } else {
-      final md = textField(buttonStyle, const .symmetric(horizontal: 12, vertical: 10));
-      return FTextFieldSizeStyles(
-        FVariants(
-          md,
-          variants: {
-            [.sm]: textField(buttonStyle, const .symmetric(horizontal: 12, vertical: 8)),
-            [.md]: md,
-            [.lg]: textField(buttonStyle, const .symmetric(horizontal: 12, vertical: 12)),
           },
         ),
       );

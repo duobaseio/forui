@@ -158,32 +158,14 @@ final class FTypography with Diagnosticable {
   /// Creates a [FTypography] that inherits its properties.
   factory FTypography.inherit({
     required FColors colors,
+    required bool touch,
     String defaultFontFamily = 'packages/forui/Inter',
-    bool desktop = false,
   }) {
     assert(defaultFontFamily.isNotEmpty, 'defaultFontFamily ($defaultFontFamily) should not be empty.');
     final color = colors.foreground;
     final font = defaultFontFamily;
 
-    if (desktop) {
-      return FTypography(
-        defaultFontFamily: defaultFontFamily,
-        xs3: TextStyle(color: color, fontFamily: font, fontSize: 8, height: 1),
-        xs2: TextStyle(color: color, fontFamily: font, fontSize: 10, height: 1),
-        xs: TextStyle(color: color, fontFamily: font, fontSize: 12, height: 1),
-        sm: TextStyle(color: color, fontFamily: font, fontSize: 14, height: 1.25),
-        md: TextStyle(color: color, fontFamily: font, fontSize: 16, height: 1.5),
-        lg: TextStyle(color: color, fontFamily: font, fontSize: 18, height: 1.75),
-        xl: TextStyle(color: color, fontFamily: font, fontSize: 20, height: 1.75),
-        xl2: TextStyle(color: color, fontFamily: font, fontSize: 22, height: 2),
-        xl3: TextStyle(color: color, fontFamily: font, fontSize: 30, height: 2.25),
-        xl4: TextStyle(color: color, fontFamily: font, fontSize: 36, height: 2.5),
-        xl5: TextStyle(color: color, fontFamily: font, fontSize: 48, height: 1),
-        xl6: TextStyle(color: color, fontFamily: font, fontSize: 60, height: 1),
-        xl7: TextStyle(color: color, fontFamily: font, fontSize: 72, height: 1),
-        xl8: TextStyle(color: color, fontFamily: font, fontSize: 96, height: 1),
-      );
-    } else {
+    if (touch) {
       return FTypography(
         defaultFontFamily: defaultFontFamily,
         xs3: TextStyle(color: color, fontFamily: font, fontSize: 10, height: 1),
@@ -200,6 +182,24 @@ final class FTypography with Diagnosticable {
         xl6: TextStyle(color: color, fontFamily: font, fontSize: 72, height: 1),
         xl7: TextStyle(color: color, fontFamily: font, fontSize: 96, height: 1),
         xl8: TextStyle(color: color, fontFamily: font, fontSize: 108, height: 1),
+      );
+    } else {
+      return FTypography(
+        defaultFontFamily: defaultFontFamily,
+        xs3: TextStyle(color: color, fontFamily: font, fontSize: 8, height: 1),
+        xs2: TextStyle(color: color, fontFamily: font, fontSize: 10, height: 1),
+        xs: TextStyle(color: color, fontFamily: font, fontSize: 12, height: 1),
+        sm: TextStyle(color: color, fontFamily: font, fontSize: 14, height: 1.25),
+        md: TextStyle(color: color, fontFamily: font, fontSize: 16, height: 1.5),
+        lg: TextStyle(color: color, fontFamily: font, fontSize: 18, height: 1.75),
+        xl: TextStyle(color: color, fontFamily: font, fontSize: 20, height: 1.75),
+        xl2: TextStyle(color: color, fontFamily: font, fontSize: 22, height: 2),
+        xl3: TextStyle(color: color, fontFamily: font, fontSize: 30, height: 2.25),
+        xl4: TextStyle(color: color, fontFamily: font, fontSize: 36, height: 2.5),
+        xl5: TextStyle(color: color, fontFamily: font, fontSize: 48, height: 1),
+        xl6: TextStyle(color: color, fontFamily: font, fontSize: 60, height: 1),
+        xl7: TextStyle(color: color, fontFamily: font, fontSize: 72, height: 1),
+        xl8: TextStyle(color: color, fontFamily: font, fontSize: 96, height: 1),
       );
     }
   }

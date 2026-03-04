@@ -572,11 +572,10 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
 
   /// Creates a [FThemeData].
   ///
-  /// Set [desktop] to true for desktop-optimized sizing (smaller touch targets, tighter spacing).
-  /// Defaults to false (touch/mobile-first).
+  /// Set [touch] to true for touch-optimized sizing.
   factory FThemeData({
     required FColors colors,
-    bool desktop = false,
+    required bool touch,
     String? debugLabel,
     FBreakpoints breakpoints = const FBreakpoints(),
     FTypography? typography,
@@ -644,7 +643,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FTooltipStyle? tooltipStyle,
     Iterable<ThemeExtension<dynamic>> extensions = const [],
   }) {
-    typography ??= .inherit(colors: colors, desktop: desktop);
+    typography ??= .inherit(colors: colors, touch: touch);
     style ??= .inherit(colors: colors, typography: typography);
     return ._(
       debugLabel: debugLabel,
@@ -653,30 +652,30 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       typography: typography,
       style: style,
       accordionStyle:
-          accordionStyle ?? .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
+          accordionStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       autocompleteStyle:
-          autocompleteStyle ?? .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
+          autocompleteStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       alertStyles: alertStyles == null
           ? FAlertStyles.inherit(colors: colors, typography: typography, style: style)
           : FAlertStyles(alertStyles),
       avatarStyle: avatarStyle ?? .inherit(colors: colors, typography: typography),
       badgeStyles: badgeStyles == null
-          ? FBadgeStyles.inherit(colors: colors, typography: typography, style: style, desktop: desktop)
+          ? FBadgeStyles.inherit(colors: colors, typography: typography, style: style, touch: touch)
           : FBadgeStyles(badgeStyles),
       bottomNavigationBarStyle:
           bottomNavigationBarStyle ?? .inherit(colors: colors, typography: typography, style: style),
       breadcrumbStyle: breadcrumbStyle ?? .inherit(colors: colors, typography: typography, style: style),
       buttonStyles: buttonStyles == null
-          ? FButtonStyles.inherit(colors: colors, typography: typography, style: style, desktop: desktop)
+          ? FButtonStyles.inherit(colors: colors, typography: typography, style: style, touch: touch)
           : FButtonStyles(buttonStyles),
-      calendarStyle: calendarStyle ?? .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
-      cardStyle: cardStyle ?? .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
+      calendarStyle: calendarStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
+      cardStyle: cardStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       checkboxStyle: checkboxStyle ?? .inherit(colors: colors, style: style),
       circularProgressStyles: circularProgressStyles == null
           ? FCircularProgressSizeStyles.inherit(colors: colors, typography: typography)
           : FCircularProgressSizeStyles(circularProgressStyles),
       dateFieldStyle:
-          dateFieldStyle ?? .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
+          dateFieldStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       determinateProgressStyle: determinateProgressStyle ?? .inherit(colors: colors, style: style),
       dialogRouteStyle: dialogRouteStyle ?? .inherit(colors: colors),
       dialogStyle: dialogStyle ?? .inherit(colors: colors, typography: typography, style: style),
@@ -687,30 +686,30 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
           ? FHeaderStyles.inherit(colors: colors, typography: typography, style: style)
           : FHeaderStyles(headerStyles),
       itemStyles: itemStyles == null
-          ? FItemStyles.inherit(colors: colors, typography: typography, style: style, desktop: desktop)
+          ? FItemStyles.inherit(colors: colors, typography: typography, style: style, touch: touch)
           : FItemStyles(itemStyles),
       itemGroupStyle:
-          itemGroupStyle ?? .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
+          itemGroupStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       labelStyles: labelStyles ?? .inherit(style: style),
       lineCalendarStyle: lineCalendarStyle ?? .inherit(colors: colors, typography: typography, style: style),
       multiSelectStyle:
-          multiSelectStyle ?? .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
+          multiSelectStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       modalSheetStyle: modalSheetStyle ?? .inherit(colors: colors),
-      paginationStyle: paginationStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      paginationStyle: paginationStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       persistentSheetStyle: persistentSheetStyle ?? const FPersistentSheetStyle(),
       pickerStyle: pickerStyle ?? .inherit(colors: colors, style: style, typography: typography),
       popoverStyle: popoverStyle ?? .inherit(colors: colors, style: style),
       popoverMenuStyle:
-          popoverMenuStyle ?? .inherit(colors: colors, style: style, typography: typography, desktop: desktop),
+          popoverMenuStyle ?? .inherit(colors: colors, style: style, typography: typography, touch: touch),
       progressStyle: progressStyle ?? .inherit(colors: colors, style: style),
       radioStyle: radioStyle ?? .inherit(colors: colors, style: style),
       resizableStyles: resizableStyles == null
           ? FResizableStyles.inherit(colors: colors, style: style)
           : FResizableStyles(resizableStyles),
       scaffoldStyle: scaffoldStyle ?? .inherit(colors: colors, style: style),
-      selectStyle: selectStyle ?? .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
+      selectStyle: selectStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       selectGroupStyle: selectGroupStyle ?? .inherit(colors: colors, typography: typography, style: style),
-      selectMenuTileStyle: selectMenuTileStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      selectMenuTileStyle: selectMenuTileStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       sidebarStyle: sidebarStyle ?? .inherit(colors: colors, typography: typography, style: style),
       sliderStyles: sliderStyles == null
           ? FSliderStyles.inherit(colors: colors, typography: typography, style: style)
@@ -720,15 +719,15 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       tabsStyle: tabsStyle ?? .inherit(colors: colors, typography: typography, style: style),
       tappableStyle: tappableStyle ?? FTappableStyle(),
       textFieldStyles: textFieldStyles == null
-          ? FTextFieldSizeStyles.inherit(colors: colors, typography: typography, style: style, desktop: desktop)
+          ? FTextFieldSizeStyles.inherit(colors: colors, typography: typography, style: style, touch: touch)
           : FTextFieldSizeStyles(textFieldStyles),
       tileStyles: tileStyles == null
           ? FTileStyles.inherit(colors: colors, typography: typography, style: style)
           : FTileStyles(tileStyles),
       tileGroupStyle:
-          tileGroupStyle ?? .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
+          tileGroupStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       timeFieldStyle:
-          timeFieldStyle ?? .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
+          timeFieldStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       timePickerStyle: timePickerStyle ?? .inherit(colors: colors, typography: typography, style: style),
       tooltipStyle: tooltipStyle ?? .inherit(colors: colors, typography: typography, style: style),
       extensions: .unmodifiable({for (final extension in extensions) extension.type: extension}),
@@ -1426,6 +1425,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FTooltipStyleDelta? tooltipStyle,
     Iterable<ThemeExtension<dynamic>>? extensions,
   }) => FThemeData(
+    touch: true,
     debugLabel: debugLabel ?? this.debugLabel,
     breakpoints: breakpoints ?? this.breakpoints,
     colors: colors ?? this.colors,

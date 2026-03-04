@@ -92,6 +92,7 @@ Map<(String, String?), String> mapThemes(ThemesConstructors themes) {
             colors: colors,
             typography: typography,
             style: style,
+            touch: true,
           );
         }
         
@@ -180,27 +181,21 @@ class _ThemesVisitor extends RecursiveAstVisitor<void> {
     for (final variable in field.fields.variables) {
       final theme = variable.name.lexeme;
 
-      // Match FAutoThemeData(light: () => FPlatformThemeData(...), dark: () => FPlatformThemeData(...))
-      if (variable.initializer case final InstanceCreationExpression autoTheme) {
-        for (final NamedExpression(:name, :expression)
-            in autoTheme.argumentList.arguments.whereType<NamedExpression>()) {
+      // Match (light: (desktop: FThemeData(touch: false, ...), touch: FThemeData(touch: true, ...)), dark: ...)
+      if (variable.initializer case final RecordLiteral autoTheme) {
+        for (final NamedExpression(:name, :expression) in autoTheme.fields.whereType<NamedExpression>()) {
           final variant = name.label.name; // "light" or "dark"
 
-          // () => FPlatformThemeData(desktop: ..., touch: ...)
-          if (expression case FunctionExpression(
-            body: ExpressionFunctionBody(expression: final InstanceCreationExpression platformTheme),
-          )) {
-            // Extract colors from the touch variant of FPlatformThemeData
-            for (final NamedExpression(:name, :expression)
-                in platformTheme.argumentList.arguments.whereType<NamedExpression>()) {
+          // (desktop: FThemeData(touch: false, ...), touch: FThemeData(touch: true, ...))
+          if (expression case final RecordLiteral platformTheme) {
+            // Extract colors from the touch variant
+            for (final NamedExpression(:name, :expression) in platformTheme.fields.whereType<NamedExpression>()) {
               if (name.label.name != 'touch') {
                 continue;
               }
 
-              // () => FThemeData(colors: ...)
-              if (expression case FunctionExpression(
-                body: ExpressionFunctionBody(expression: final InstanceCreationExpression themeData),
-              )) {
+              // FThemeData(colors: ...)
+              if (expression case final InstanceCreationExpression themeData) {
                 var colors = '';
                 for (final expression in themeData.argumentList.arguments.whereType<NamedExpression>()) {
                   if (expression.name.label.name == 'colors') {

@@ -19,6 +19,7 @@ void main() {
             style: FThemes.neutral.light.touch.style.copyWith(
               iconStyle: const .value(IconThemeData(color: testIconColor, size: testIconSize)),
             ),
+            touch: true,
           ),
           child: const FScaffold(child: Center(child: Icon(FIcons.star))),
         ),

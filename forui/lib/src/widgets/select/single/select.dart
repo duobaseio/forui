@@ -841,11 +841,11 @@ class FSelectStyle with Diagnosticable, _$FSelectStyleFunctions {
     required FColors colors,
     required FTypography typography,
     required FStyle style,
-    bool desktop = false,
+    required bool touch,
   }) : this(
-         fieldStyles: .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
-         searchStyle: .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
-         contentStyle: .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
+         fieldStyles: .inherit(colors: colors, typography: typography, style: style, touch: touch),
+         searchStyle: .inherit(colors: colors, typography: typography, style: style, touch: touch),
+         contentStyle: .inherit(colors: colors, typography: typography, style: style, touch: touch),
          emptyTextStyle: typography.xs,
        );
 }

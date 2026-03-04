@@ -205,18 +205,23 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
     required FColors colors,
     required FTypography typography,
     required FStyle style,
-    bool desktop = false,
+    required bool touch,
   }) {
-    if (desktop) {
+    if (touch) {
       return FCalendarHeaderStyle(
         focusedOutlineStyle: style.focusedOutlineStyle,
         buttonStyle: FButtonStyles.inherit(
           colors: colors,
           typography: typography,
           style: style,
-          desktop: desktop,
-        ).outline.xs,
-        headerTextStyle: typography.sm.copyWith(color: colors.foreground, fontWeight: .w500),
+          touch: touch,
+        ).outline.md,
+        headerTextStyle: typography.md.copyWith(
+          color: colors.foreground,
+          fontWeight: .w500,
+          height: 1,
+          leadingDistribution: .even,
+        ),
         headerIconSize: typography.md.fontSize!,
       );
     } else {
@@ -226,14 +231,9 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
           colors: colors,
           typography: typography,
           style: style,
-          desktop: desktop,
-        ).outline.md,
-        headerTextStyle: typography.md.copyWith(
-          color: colors.foreground,
-          fontWeight: .w500,
-          height: 1,
-          leadingDistribution: .even,
-        ),
+          touch: touch,
+        ).outline.xs,
+        headerTextStyle: typography.sm.copyWith(color: colors.foreground, fontWeight: .w500),
         headerIconSize: typography.md.fontSize!,
       );
     }

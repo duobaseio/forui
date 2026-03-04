@@ -1015,10 +1015,10 @@ class FAutocompleteStyle with Diagnosticable, _$FAutocompleteStyleFunctions {
     required FColors colors,
     required FTypography typography,
     required FStyle style,
-    bool desktop = false,
+    required bool touch,
   }) : this(
-         fieldStyles: .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
-         contentStyle: .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
+         fieldStyles: .inherit(colors: colors, typography: typography, style: style, touch: touch),
+         contentStyle: .inherit(colors: colors, typography: typography, style: style, touch: touch),
        );
 }
 
@@ -1039,9 +1039,9 @@ extension type FAutocompleteSizeStyles(
     required FColors colors,
     required FTypography typography,
     required FStyle style,
-    bool desktop = false,
+    required bool touch,
   }) {
-    final sizes = FTextFieldSizeStyles.inherit(colors: colors, typography: typography, style: style, desktop: desktop);
+    final sizes = FTextFieldSizeStyles.inherit(colors: colors, typography: typography, style: style, touch: touch);
 
     final md = FAutocompleteFieldStyle.inherit(colors: colors, field: sizes.md);
     return FAutocompleteSizeStyles(

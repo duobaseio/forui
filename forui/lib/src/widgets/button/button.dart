@@ -287,12 +287,12 @@ extension type FButtonStyles(
     required FColors colors,
     required FTypography typography,
     required FStyle style,
-    bool desktop = false,
+    required bool touch,
   }) {
     final primary = FButtonSizeStyles.inherit(
       typography: typography,
       style: style,
-      desktop: desktop,
+      touch: touch,
       decoration: (radius) => .from(
         ShapeDecoration(shape: RoundedSuperellipseBorder(borderRadius: radius), color: colors.primary),
         variants: {
@@ -316,7 +316,7 @@ extension type FButtonStyles(
           [.secondary]: FButtonSizeStyles.inherit(
             typography: typography,
             style: style,
-            desktop: desktop,
+            touch: touch,
             decoration: (radius) => .from(
               ShapeDecoration(shape: RoundedSuperellipseBorder(borderRadius: radius), color: colors.secondary),
               variants: {
@@ -334,7 +334,7 @@ extension type FButtonStyles(
           [.destructive]: FButtonSizeStyles.inherit(
             typography: typography,
             style: style,
-            desktop: desktop,
+            touch: touch,
             decoration: (radius) => .from(
               ShapeDecoration(
                 shape: RoundedSuperellipseBorder(borderRadius: radius),
@@ -363,7 +363,7 @@ extension type FButtonStyles(
           [.outline]: FButtonSizeStyles.inherit(
             typography: typography,
             style: style,
-            desktop: desktop,
+            touch: touch,
             decoration: (radius) => .from(
               ShapeDecoration(
                 shape: RoundedSuperellipseBorder(
@@ -387,7 +387,7 @@ extension type FButtonStyles(
           [.ghost]: FButtonSizeStyles.inherit(
             typography: typography,
             style: style,
-            desktop: desktop,
+            touch: touch,
             decoration: (radius) => .from(
               ShapeDecoration(shape: RoundedSuperellipseBorder(borderRadius: radius)),
               variants: {
@@ -441,63 +441,9 @@ extension type FButtonSizeStyles(
     ) decoration,
     required Color foregroundColor,
     required Color disabledForegroundColor,
-    bool desktop = false,
+    required bool touch,
   }) {
-    if (desktop) {
-      final md = FButtonStyle.inherit(
-        style: style,
-        foregroundColor: foregroundColor,
-        disabledForegroundColor: disabledForegroundColor,
-        decoration: decoration(style.borderRadius.md),
-        textStyle: typography.sm,
-        contentPadding: const .symmetric(horizontal: 10, vertical: 11),
-        contentSpacing: 6,
-        iconSize: typography.md.fontSize ?? 16,
-        iconPadding: const .all(10),
-      );
-
-      return FButtonSizeStyles(
-        FVariants(
-          md,
-          variants: {
-            [.xs]: FButtonStyle.inherit(
-              style: style,
-              foregroundColor: foregroundColor,
-              disabledForegroundColor: disabledForegroundColor,
-              decoration: decoration(style.borderRadius.sm),
-              textStyle: typography.xs,
-              contentPadding: const .symmetric(horizontal: 8, vertical: 6),
-              contentSpacing: 4,
-              iconSize: typography.sm.fontSize ?? 14,
-              iconPadding: const .all(5),
-            ),
-            [.sm]: FButtonStyle.inherit(
-              style: style,
-              foregroundColor: foregroundColor,
-              disabledForegroundColor: disabledForegroundColor,
-              decoration: decoration(style.borderRadius.md),
-              textStyle: typography.sm,
-              contentPadding: const .symmetric(horizontal: 10, vertical: 9),
-              contentSpacing: 4,
-              iconSize: typography.md.fontSize ?? 16,
-              iconPadding: const .all(8),
-            ),
-            [.md]: md,
-            [.lg]: FButtonStyle.inherit(
-              style: style,
-              foregroundColor: foregroundColor,
-              disabledForegroundColor: disabledForegroundColor,
-              decoration: decoration(style.borderRadius.md),
-              textStyle: typography.sm,
-              contentPadding: const .symmetric(horizontal: 10, vertical: 13),
-              contentSpacing: 6,
-              iconSize: typography.lg.fontSize ?? 18,
-              iconPadding: const .all(11),
-            ),
-          },
-        ),
-      );
-    } else {
+    if (touch) {
       final md = FButtonStyle.inherit(
         style: style,
         foregroundColor: foregroundColor,
@@ -547,6 +493,60 @@ extension type FButtonSizeStyles(
               contentSpacing: 6,
               iconSize: typography.lg.fontSize ?? 20,
               iconPadding: const .all(14),
+            ),
+          },
+        ),
+      );
+    } else {
+      final md = FButtonStyle.inherit(
+        style: style,
+        foregroundColor: foregroundColor,
+        disabledForegroundColor: disabledForegroundColor,
+        decoration: decoration(style.borderRadius.md),
+        textStyle: typography.sm,
+        contentPadding: const .symmetric(horizontal: 10, vertical: 11),
+        contentSpacing: 6,
+        iconSize: typography.md.fontSize ?? 16,
+        iconPadding: const .all(10),
+      );
+
+      return FButtonSizeStyles(
+        FVariants(
+          md,
+          variants: {
+            [.xs]: FButtonStyle.inherit(
+              style: style,
+              foregroundColor: foregroundColor,
+              disabledForegroundColor: disabledForegroundColor,
+              decoration: decoration(style.borderRadius.sm),
+              textStyle: typography.xs,
+              contentPadding: const .symmetric(horizontal: 8, vertical: 6),
+              contentSpacing: 4,
+              iconSize: typography.sm.fontSize ?? 14,
+              iconPadding: const .all(5),
+            ),
+            [.sm]: FButtonStyle.inherit(
+              style: style,
+              foregroundColor: foregroundColor,
+              disabledForegroundColor: disabledForegroundColor,
+              decoration: decoration(style.borderRadius.md),
+              textStyle: typography.sm,
+              contentPadding: const .symmetric(horizontal: 10, vertical: 9),
+              contentSpacing: 4,
+              iconSize: typography.md.fontSize ?? 16,
+              iconPadding: const .all(8),
+            ),
+            [.md]: md,
+            [.lg]: FButtonStyle.inherit(
+              style: style,
+              foregroundColor: foregroundColor,
+              disabledForegroundColor: disabledForegroundColor,
+              decoration: decoration(style.borderRadius.md),
+              textStyle: typography.sm,
+              contentPadding: const .symmetric(horizontal: 10, vertical: 13),
+              contentSpacing: 6,
+              iconSize: typography.lg.fontSize ?? 18,
+              iconPadding: const .all(11),
             ),
           },
         ),
