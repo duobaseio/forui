@@ -148,6 +148,12 @@ void main() {
         final result = scheme.disable(const Color(0xFFCC1A1A));
         expect(result.a, closeTo(0.5, 0.001));
       });
+
+      test('alpha-blends against background when provided', () {
+        final result = scheme.disable(const Color(0xFFFF0000), const Color(0xFFFFFFFF));
+        expect(result.a, 1.0);
+        expect(result, Color.alphaBlend(const Color(0xFFFF0000).withValues(alpha: 0.5), const Color(0xFFFFFFFF)));
+      });
     });
 
     group('copyWith(...)', () {

@@ -714,7 +714,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       sliderStyles: sliderStyles == null
           ? FSliderStyles.inherit(colors: colors, typography: typography, style: style)
           : FSliderStyles(sliderStyles),
-      toasterStyle: toasterStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      toasterStyle: toasterStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       switchStyle: switchStyle ?? .inherit(colors: colors, style: style),
       tabsStyle: tabsStyle ?? .inherit(colors: colors, typography: typography, style: style),
       tappableStyle: tappableStyle ?? FTappableStyle(),

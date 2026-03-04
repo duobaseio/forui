@@ -169,6 +169,10 @@ sizes consistent across each platform.
 * **Breaking** Change `FSidebarStyle.decoration` type from `BoxDecoration` to `Decoration`.
 
 
+### `FSlider`
+* Fix disabled slider ticks showing through active track due to transparency.
+
+
 ### `FTabs`
 * **Breaking** Change `FTabsStyle.decoration` and `indicatorDecoration` types from `BoxDecoration` to `Decoration`.
 
@@ -206,6 +210,7 @@ sizes consistent across each platform.
 * Add `FTypography.inherit(touch: ...)`.
 * Add `FThemeData(touch: ...)`.
 
+* Re-add `FColors.disable(background: ...)` optional parameter for alpha-blending disabled colors against a background.
 * **Breaking** Change `FThemes.*.light`/`dark` from `FThemeData` to `FThemes.*.*.desktop/touch`.
 * **Breaking** Rename `FThemeData.textFieldStyle` to `FThemeData.textFieldStyles`. Type changed from `FTextFieldStyle`
   to `FTextFieldSizeStyles`.

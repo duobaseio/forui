@@ -73,10 +73,8 @@ class FCard extends StatelessWidget {
   const FCard.raw({required this.child, this.style = const .context(), super.key});
 
   @override
-  Widget build(BuildContext context) => DecoratedBox(
-    decoration: style(context.theme.cardStyle).decoration,
-    child: child,
-  );
+  Widget build(BuildContext context) =>
+      DecoratedBox(decoration: style(context.theme.cardStyle).decoration, child: child);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -99,22 +97,39 @@ class FCardStyle with Diagnosticable, _$FCardStyleFunctions {
   FCardStyle({required this.decoration, required this.contentStyle});
 
   /// Creates a [FCardStyle] that inherits its properties.
-  FCardStyle.inherit({
+  factory FCardStyle.inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,
     required bool touch,
-  }) : this(
-         decoration: ShapeDecoration(
-           shape: RoundedSuperellipseBorder(
-             side: BorderSide(color: colors.border, width: style.borderWidth),
-             borderRadius: style.borderRadius.lg,
-           ),
-           color: colors.card,
-         ),
-         contentStyle: FCardContentStyle(
-           titleTextStyle: (touch ? typography.lg : typography.md).copyWith(fontWeight: .w500, color: colors.foreground),
-           subtitleTextStyle: typography.sm.copyWith(color: colors.mutedForeground),
-         ),
-       );
+  }) {
+    TextStyle titleTextStyle;
+    double titleSpacing;
+    double subtitleSpacing;
+    if (touch) {
+      titleTextStyle = typography.lg.copyWith(fontWeight: .w500, color: colors.foreground);
+      titleSpacing = 4;
+      subtitleSpacing = 8;
+    } else {
+      titleTextStyle = typography.md.copyWith(fontWeight: .w500, color: colors.foreground);
+      titleSpacing = 2;
+      subtitleSpacing = 6;
+    }
+
+    return FCardStyle(
+      decoration: ShapeDecoration(
+        shape: RoundedSuperellipseBorder(
+          side: BorderSide(color: colors.border, width: style.borderWidth),
+          borderRadius: style.borderRadius.lg,
+        ),
+        color: colors.card,
+      ),
+      contentStyle: FCardContentStyle(
+        titleTextStyle: titleTextStyle,
+        subtitleTextStyle: typography.sm.copyWith(color: colors.mutedForeground),
+        titleSpacing: titleSpacing,
+        subtitleSpacing: subtitleSpacing,
+      ),
+    );
+  }
 }

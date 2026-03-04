@@ -53,31 +53,26 @@ class FToast extends StatelessWidget {
       decoration: style.decoration,
       child: Padding(
         padding: style.padding,
-        child: Column(
+        child: Row(
           mainAxisSize: .min,
           children: [
-            Row(
-              children: [
-                if (icon case final icon?) ...[
-                  IconTheme(data: style.iconStyle, child: icon),
-                  SizedBox(width: style.iconSpacing),
-                ],
-                Flexible(child: DefaultTextStyle(style: style.titleTextStyle, maxLines: 100, child: title)),
-                if (suffix case final suffix?) ...[SizedBox(width: style.suffixSpacing), suffix],
-              ],
-            ),
-            if (description case final description?)
-              Row(
+            if (icon case final icon?) ...[
+              IconTheme(data: style.iconStyle, child: icon),
+              SizedBox(width: style.iconSpacing),
+            ],
+            Flexible(
+              child: Column(
+                crossAxisAlignment: .start,
+                mainAxisSize: .min,
+                spacing: style.titleSpacing,
                 children: [
-                  if (icon != null) SizedBox(width: (style.iconStyle.size ?? 0) + style.iconSpacing),
-                  Flexible(
-                    child: Padding(
-                      padding: .only(top: style.titleSpacing),
-                      child: DefaultTextStyle(style: style.descriptionTextStyle, maxLines: 100, child: description),
-                    ),
-                  ),
+                  DefaultTextStyle(style: style.titleTextStyle, maxLines: 100, child: title),
+                  if (description case final description?)
+                    DefaultTextStyle(style: style.descriptionTextStyle, maxLines: 100, child: description),
                 ],
               ),
+            ),
+            if (suffix case final suffix?) ...[SizedBox(width: style.suffixSpacing), suffix],
           ],
         ),
       ),

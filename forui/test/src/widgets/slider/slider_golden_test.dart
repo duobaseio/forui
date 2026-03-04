@@ -123,91 +123,25 @@ void main() {
     });
   });
 
-  for (final theme in TestScaffold.themes) {
+  for (final theme in [
+    (name: 'neutral-light-touch', data: FThemes.neutral.light.touch, platform: FPlatformVariant.iOS),
+    (name: 'neutral-light-desktop', data: FThemes.neutral.light.desktop, platform: FPlatformVariant.macOS),
+    (name: 'neutral-dark-touch', data: FThemes.neutral.dark.touch, platform: FPlatformVariant.iOS),
+    (name: 'neutral-dark-desktop', data: FThemes.neutral.dark.desktop, platform: FPlatformVariant.macOS),
+  ]) {
     for (final layout in FLayout.values) {
-      for (final touch in [true, false]) {
-        for (final enabled in [true, false]) {
-          testWidgets('${theme.name} - $layout - ${enabled ? 'enabled' : 'disabled'}', (tester) async {
-            await tester.pumpWidget(
-              TestScaffold.app(
-                theme: theme.data,
-                platform: touch ? .android : .macOS,
-                child: FSlider(
-                  label: const Text('Label'),
-                  description: const Text('Description'),
-                  control: .managedContinuousRange(initial: FSliderValue(min: 0.30, max: 0.60)),
-                  layout: layout,
-                  enabled: enabled,
-                  trackMainAxisExtent: 300,
-                  marks: const [
-                    .mark(value: 0.0, label: Text('0')),
-                    .mark(value: 0.25, label: Text('25'), tick: false),
-                    .mark(value: 0.5, label: Text('50')),
-                    .mark(value: 0.75, label: Text('75'), tick: false),
-                    .mark(value: 1.0, label: Text('100')),
-                  ],
-                ),
-              ),
-            );
-
-            final gesture = await tester.createPointerGesture();
-            await tester.pump();
-
-            await gesture.moveTo(tester.getCenter(find.byType(Thumb).first));
-            await tester.pumpAndSettle(const Duration(seconds: 1));
-
-            await expectLater(
-              find.byType(TestScaffold),
-              matchesGoldenFile(
-                'slider/range-slider/${theme.name}/$layout-${touch ? 'touch' : 'desktop'}-${enabled ? 'enabled' : 'disabled'}.png',
-              ),
-            );
-          });
-        }
-
-        testWidgets('${theme.name} - $layout - focused', (tester) async {
+      for (final enabled in [true, false]) {
+        testWidgets('${theme.name} - $layout - ${enabled ? 'enabled' : 'disabled'}', (tester) async {
           await tester.pumpWidget(
             TestScaffold.app(
               theme: theme.data,
-              platform: touch ? .android : .macOS,
+              platform: theme.platform,
               child: FSlider(
                 label: const Text('Label'),
                 description: const Text('Description'),
-                forceErrorText: 'Error',
                 control: .managedContinuousRange(initial: FSliderValue(min: 0.30, max: 0.60)),
                 layout: layout,
-                trackMainAxisExtent: 300,
-                marks: const [
-                  .mark(value: 0.0, label: Text('0')),
-                  .mark(value: 0.25, label: Text('25'), tick: false),
-                  .mark(value: 0.5, label: Text('50')),
-                  .mark(value: 0.75, label: Text('75'), tick: false),
-                  .mark(value: 1.0, label: Text('100')),
-                ],
-              ),
-            ),
-          );
-
-          Focus.of(tester.element(find.byType(FFocusedOutline).first)).requestFocus();
-          await tester.pumpAndSettle();
-
-          await expectLater(
-            find.byType(TestScaffold),
-            matchesGoldenFile('slider/range-slider/${theme.name}/$layout-${touch ? 'touch' : 'desktop'}-focused.png'),
-          );
-        });
-
-        testWidgets('${theme.name} - $layout - error', (tester) async {
-          await tester.pumpWidget(
-            TestScaffold.app(
-              theme: theme.data,
-              platform: touch ? .android : .macOS,
-              child: FSlider(
-                label: const Text('Label'),
-                description: const Text('Description'),
-                forceErrorText: 'Error',
-                control: .managedContinuousRange(initial: FSliderValue(min: 0.30, max: 0.60)),
-                layout: layout,
+                enabled: enabled,
                 trackMainAxisExtent: 300,
                 marks: const [
                   .mark(value: 0.0, label: Text('0')),
@@ -228,10 +162,77 @@ void main() {
 
           await expectLater(
             find.byType(TestScaffold),
-            matchesGoldenFile('slider/range-slider/${theme.name}/$layout-${touch ? 'touch' : 'desktop'}-error.png'),
+            matchesGoldenFile('slider/range-slider/${theme.name}/$layout-${enabled ? 'enabled' : 'disabled'}.png'),
           );
         });
       }
+
+      testWidgets('${theme.name} - $layout - focused', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme.data,
+            platform: theme.platform,
+            child: FSlider(
+              label: const Text('Label'),
+              description: const Text('Description'),
+              forceErrorText: 'Error',
+              control: .managedContinuousRange(initial: FSliderValue(min: 0.30, max: 0.60)),
+              layout: layout,
+              trackMainAxisExtent: 300,
+              marks: const [
+                .mark(value: 0.0, label: Text('0')),
+                .mark(value: 0.25, label: Text('25'), tick: false),
+                .mark(value: 0.5, label: Text('50')),
+                .mark(value: 0.75, label: Text('75'), tick: false),
+                .mark(value: 1.0, label: Text('100')),
+              ],
+            ),
+          ),
+        );
+
+        Focus.of(tester.element(find.byType(FFocusedOutline).first)).requestFocus();
+        await tester.pumpAndSettle();
+
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('slider/range-slider/${theme.name}/$layout-focused.png'),
+        );
+      });
+
+      testWidgets('${theme.name} - $layout - error', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme.data,
+            platform: theme.platform,
+            child: FSlider(
+              label: const Text('Label'),
+              description: const Text('Description'),
+              forceErrorText: 'Error',
+              control: .managedContinuousRange(initial: FSliderValue(min: 0.30, max: 0.60)),
+              layout: layout,
+              trackMainAxisExtent: 300,
+              marks: const [
+                .mark(value: 0.0, label: Text('0')),
+                .mark(value: 0.25, label: Text('25'), tick: false),
+                .mark(value: 0.5, label: Text('50')),
+                .mark(value: 0.75, label: Text('75'), tick: false),
+                .mark(value: 1.0, label: Text('100')),
+              ],
+            ),
+          ),
+        );
+
+        final gesture = await tester.createPointerGesture();
+        await tester.pump();
+
+        await gesture.moveTo(tester.getCenter(find.byType(Thumb).first));
+        await tester.pumpAndSettle(const Duration(seconds: 1));
+
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('slider/range-slider/${theme.name}/$layout-error.png'),
+        );
+      });
     }
   }
 

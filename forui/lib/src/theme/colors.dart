@@ -648,7 +648,12 @@ final class FColors with Diagnosticable {
   }
 
   /// Returns a disabled variant of the [color] by multiplying its opacity by [disabledOpacity].
-  Color disable(Color color) => color.withValues(alpha: color.a * disabledOpacity);
+  Color disable(Color color, [Color? background]) {
+    final disabled = color.withValues(alpha: color.a * disabledOpacity);
+    // This is required for cases where there are other elements beneath the disabled widget that would show through the
+    // transparency, e.g. slider's active track and the ticks beneath it.
+    return background == null ? disabled : Color.alphaBlend(disabled, background);
+  }
 
   /// Returns a copy of this [FColors] with the given properties replaced.
   ///

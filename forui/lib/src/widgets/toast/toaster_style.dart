@@ -96,10 +96,14 @@ class FToasterStyle with Diagnosticable, _$FToasterStyleFunctions {
   });
 
   /// Creates a [FToasterStyle] that inherits its properties.
-  FToasterStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        toastStyle: .inherit(colors: colors, typography: typography, style: style),
-      );
+  FToasterStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+    required bool touch,
+  }) : this(
+         toastStyle: .inherit(colors: colors, typography: typography, style: style, touch: touch),
+       );
 }
 
 /// The motion-related properties for [FToaster] that affect all toasts.
@@ -169,7 +173,7 @@ class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
   @override
   final ImageFilter? backgroundFilter;
 
-  /// The toast content's padding. Defaults to `EdgeInsets.symmetric(horizontal: 16, vertical: 12)`.
+  /// The toast content's padding.
   @override
   final EdgeInsetsGeometry padding;
 
@@ -207,8 +211,8 @@ class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
     required this.iconStyle,
     required this.titleTextStyle,
     required this.descriptionTextStyle,
+    required this.padding,
     this.constraints = const BoxConstraints(maxHeight: 250, maxWidth: 400),
-    this.padding = const .symmetric(horizontal: 16, vertical: 12),
     this.backgroundFilter,
     this.iconSpacing = 10,
     this.titleSpacing = 1,
@@ -217,21 +221,40 @@ class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
   });
 
   /// Creates a [FToastStyle] that inherits its properties.
-  FToastStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        decoration: ShapeDecoration(
-          shape: RoundedSuperellipseBorder(
-            side: BorderSide(color: colors.border, width: style.borderWidth),
-            borderRadius: style.borderRadius.md,
-          ),
-          color: colors.card,
+  factory FToastStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+    required bool touch,
+  }) {
+    double titleSpacing;
+    TextStyle descriptionTextStyle;
+    EdgeInsetsGeometry padding;
+    if (touch) {
+      titleSpacing = 4;
+      descriptionTextStyle = typography.xs.copyWith(color: colors.mutedForeground, overflow: TextOverflow.ellipsis);
+      padding = const EdgeInsets.symmetric(horizontal: 16, vertical: 14);
+    } else {
+      titleSpacing = 2;
+      descriptionTextStyle = typography.sm.copyWith(color: colors.mutedForeground, overflow: TextOverflow.ellipsis);
+      padding = const EdgeInsets.symmetric(horizontal: 16, vertical: 12);
+    }
+
+    return FToastStyle(
+      decoration: ShapeDecoration(
+        shape: RoundedSuperellipseBorder(
+          side: BorderSide(color: colors.border, width: style.borderWidth),
+          borderRadius: style.borderRadius.md,
         ),
-        iconStyle: IconThemeData(color: colors.foreground, size: typography.md.fontSize),
-        iconSpacing: 10,
-        titleTextStyle: typography.sm.copyWith(color: colors.foreground, fontWeight: .w500),
-        titleSpacing: 2,
-        descriptionTextStyle: typography.sm.copyWith(color: colors.mutedForeground, overflow: .ellipsis),
-      );
+        color: colors.card,
+      ),
+      iconStyle: IconThemeData(color: colors.foreground, size: typography.md.fontSize),
+      titleTextStyle: typography.sm.copyWith(color: colors.foreground, fontWeight: .w500, height: 1),
+      titleSpacing: titleSpacing,
+      descriptionTextStyle: descriptionTextStyle,
+      padding: padding,
+    );
+  }
 }
 
 /// The motion-related properties for [FToaster] that affect individual toasts.
