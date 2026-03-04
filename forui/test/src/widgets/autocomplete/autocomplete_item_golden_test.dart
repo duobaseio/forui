@@ -166,4 +166,24 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('autocomplete/${theme.name}/item/raw.png'));
     });
   }
+
+  testWidgets('desktop hovered', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        theme: FThemes.neutral.light.desktop,
+        alignment: .topCenter,
+        child: FAutocomplete(key: key, items: const ['Apple', 'Banana']),
+      ),
+    );
+
+    await tester.tap(find.byKey(key));
+    await tester.pumpAndSettle();
+
+    final gesture = await tester.createPointerGesture();
+
+    await gesture.moveTo(tester.getCenter(find.text('Apple')));
+    await tester.pump();
+
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('autocomplete/item/desktop/hover.png'));
+  });
 }

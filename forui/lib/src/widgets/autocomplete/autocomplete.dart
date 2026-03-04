@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter/material.dart' show InputBorder;
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -61,6 +62,9 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   ///
   /// Defaults to [FPopoverControl.managed].
   final FPopoverControl popoverControl;
+
+  /// {@macro forui.text_field.size}
+  final FTextFieldSizeVariant size;
 
   /// The style.
   ///
@@ -329,6 +333,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     required List<String> items,
     FAutocompleteControl control = const .managed(),
     FPopoverControl popoverControl = const .managed(),
+    FTextFieldSizeVariant size = .md,
     FAutocompleteStyleDelta style = const .context(),
     Widget? label,
     String? hint,
@@ -417,6 +422,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
              contentBuilder ?? (context, query, values) => [for (final value in values) .item(value: value)],
          control: control,
          popoverControl: popoverControl,
+         size: size,
          style: style,
          label: label,
          hint: hint,
@@ -504,6 +510,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     required this.contentBuilder,
     this.control = const .managed(),
     this.popoverControl = const .managed(),
+    this.size = .md,
     this.style = const .context(),
     this.label,
     this.hint,
@@ -593,6 +600,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     properties
       ..add(DiagnosticsProperty('control', control))
       ..add(DiagnosticsProperty('popoverControl', popoverControl))
+      ..add(DiagnosticsProperty('size', size))
       ..add(DiagnosticsProperty('style', style))
       ..add(StringProperty('hint', hint))
       ..add(DiagnosticsProperty('magnifierConfiguration', magnifierConfiguration))
@@ -792,6 +800,8 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     final style = widget.style(context.theme.autocompleteStyle);
+    final fieldStyle = style.fieldStyles.resolve({widget.size, context.platformVariant});
+
     // On desktop, the textfield selects the entire text when focused (except when tapped). However, refocusing on the
     // textfield after keyboard navigation of completions should NOT select the entire text.
     //
@@ -809,7 +819,8 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
       },
       child: FTextFormField(
         control: .managed(controller: _controller),
-        style: style.fieldStyle,
+        size: widget.size,
+        style: fieldStyle,
         label: widget.label,
         hint: widget.hint,
         description: widget.description,
@@ -925,8 +936,8 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
                 ),
               ),
             ),
-            child: InheritedAutocompleteStyle(
-              style: style,
+            child: AutocompleteFieldScope(
+              style: fieldStyle,
               variants: variants,
               child: CallbackShortcuts(
                 bindings: {
@@ -959,23 +970,23 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
 }
 
 @internal
-final class InheritedAutocompleteStyle extends InheritedWidget {
+final class AutocompleteFieldScope extends InheritedWidget {
   @useResult
-  static InheritedAutocompleteStyle of(BuildContext context) {
-    assert(debugCheckHasAncestor<InheritedAutocompleteStyle>('FAutocomplete', context));
-    return context.dependOnInheritedWidgetOfExactType<InheritedAutocompleteStyle>()!;
+  static AutocompleteFieldScope of(BuildContext context) {
+    assert(debugCheckHasAncestor<AutocompleteFieldScope>('FAutocomplete', context));
+    return context.dependOnInheritedWidgetOfExactType<AutocompleteFieldScope>()!;
   }
 
-  /// The autocomplete style.
-  final FAutocompleteStyle style;
+  /// The autocomplete field style.
+  final FAutocompleteFieldStyle style;
 
   /// The current widget variants.
   final Set<FTextFieldVariant> variants;
 
-  const InheritedAutocompleteStyle({required this.style, required this.variants, required super.child, super.key});
+  const AutocompleteFieldScope({required this.style, required this.variants, required super.child, super.key});
 
   @override
-  bool updateShouldNotify(InheritedAutocompleteStyle old) => style != old.style || variants != old.variants;
+  bool updateShouldNotify(AutocompleteFieldScope old) => style != old.style || variants != old.variants;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -988,10 +999,75 @@ final class InheritedAutocompleteStyle extends InheritedWidget {
 
 /// An [FAutocomplete]'s style.
 class FAutocompleteStyle with Diagnosticable, _$FAutocompleteStyleFunctions {
-  /// The select field's style.
+  /// The field's styles.
   @override
-  final FTextFieldStyle fieldStyle;
+  final FAutocompleteSizeStyles fieldStyles;
 
+  /// The content's style.
+  @override
+  final FAutocompleteContentStyle contentStyle;
+
+  /// Creates a [FAutocompleteStyle].
+  FAutocompleteStyle({required this.fieldStyles, required this.contentStyle});
+
+  /// Creates a [FAutocompleteStyle] that inherits its properties.
+  FAutocompleteStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+    bool desktop = false,
+  }) : this(
+         fieldStyles: .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
+         contentStyle: .inherit(colors: colors, typography: typography, style: style, desktop: desktop),
+       );
+}
+
+/// [FAutocompleteStyle]'s size styles.
+extension type FAutocompleteSizeStyles(
+  FVariants<FTextFieldSizeVariantConstraint, FTextFieldSizeVariant, FAutocompleteFieldStyle, FAutocompleteFieldStyleDelta>
+      _
+)
+    implements
+        FVariants<
+          FTextFieldSizeVariantConstraint,
+          FTextFieldSizeVariant,
+          FAutocompleteFieldStyle,
+          FAutocompleteFieldStyleDelta
+        > {
+  /// Creates [FAutocompleteSizeStyles] that inherit their properties.
+  factory FAutocompleteSizeStyles.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+    bool desktop = false,
+  }) {
+    final sizes = FTextFieldSizeStyles.inherit(colors: colors, typography: typography, style: style, desktop: desktop);
+
+    final md = FAutocompleteFieldStyle.inherit(colors: colors, field: sizes.md);
+    return FAutocompleteSizeStyles(
+      FVariants(
+        md,
+        variants: {
+          [.sm]: .inherit(colors: colors, field: sizes.sm),
+          [.md]: md,
+          [.lg]: .inherit(colors: colors, field: sizes.lg),
+        },
+      ),
+    );
+  }
+
+  /// The small autocomplete field style.
+  FAutocompleteFieldStyle get sm => resolve({FTextFieldSizeVariant.sm});
+
+  /// The medium (default) autocomplete field style.
+  FAutocompleteFieldStyle get md => resolve({FTextFieldSizeVariant.md});
+
+  /// The large autocomplete field style.
+  FAutocompleteFieldStyle get lg => resolve({FTextFieldSizeVariant.lg});
+}
+
+/// An autocomplete field's style.
+class FAutocompleteFieldStyle extends FTextFieldStyle with _$FAutocompleteFieldStyleFunctions {
   /// The composing text's [TextStyle].
   ///
   /// {@template forui.text_field.composingTextStyle}
@@ -1007,30 +1083,60 @@ class FAutocompleteStyle with Diagnosticable, _$FAutocompleteStyleFunctions {
   @override
   final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, TextStyle, TextStyleDelta> typeaheadTextStyle;
 
-  /// The content's style.
-  @override
-  final FAutocompleteContentStyle contentStyle;
-
-  /// Creates a [FAutocompleteStyle].
-  FAutocompleteStyle({
-    required this.fieldStyle,
+  /// Creates a [FAutocompleteFieldStyle].
+  FAutocompleteFieldStyle({
     required this.composingTextStyle,
     required this.typeaheadTextStyle,
-    required this.contentStyle,
+    required super.keyboardAppearance,
+    required super.color,
+    required super.iconStyle,
+    required super.clearButtonStyle,
+    required super.obscureButtonStyle,
+    required super.contentTextStyle,
+    required super.hintTextStyle,
+    required super.counterTextStyle,
+    required super.border,
+    required super.labelTextStyle,
+    required super.descriptionTextStyle,
+    required super.errorTextStyle,
+    super.cursorColor,
+    super.contentPadding,
+    super.clearButtonPadding,
+    super.obscureButtonPadding,
+    super.scrollPadding,
+    super.labelPadding,
+    super.descriptionPadding,
+    super.errorPadding,
+    super.childPadding,
+    super.labelMotion,
   });
 
-  /// Creates a [FAutocompleteStyle] that inherits its properties.
-  factory FAutocompleteStyle.inherit({
-    required FColors colors,
-    required FTypography typography,
-    required FStyle style,
-  }) {
-    final field = FTextFieldSizeStyles.inherit(colors: colors, typography: typography, style: style).md;
-    return .new(
-      fieldStyle: field,
-      composingTextStyle: field.contentTextStyle.apply([.all(.delta(decoration: () => .underline))]),
-      typeaheadTextStyle: field.contentTextStyle.apply([.all(.delta(color: colors.mutedForeground))]),
-      contentStyle: .inherit(colors: colors, typography: typography, style: style),
-    );
-  }
+  /// Creates an [FAutocompleteFieldStyle] from a [FTextFieldStyle].
+  FAutocompleteFieldStyle.inherit({required FColors colors, required FTextFieldStyle field})
+    : this(
+        composingTextStyle: field.contentTextStyle.apply([.all(.delta(decoration: () => .underline))]),
+        typeaheadTextStyle: field.contentTextStyle.apply([.all(.delta(color: colors.mutedForeground))]),
+        keyboardAppearance: field.keyboardAppearance,
+        color: field.color,
+        cursorColor: field.cursorColor,
+        contentPadding: field.contentPadding,
+        clearButtonPadding: field.clearButtonPadding,
+        obscureButtonPadding: field.obscureButtonPadding,
+        scrollPadding: field.scrollPadding,
+        iconStyle: field.iconStyle,
+        clearButtonStyle: field.clearButtonStyle,
+        obscureButtonStyle: field.obscureButtonStyle,
+        contentTextStyle: field.contentTextStyle,
+        hintTextStyle: field.hintTextStyle,
+        counterTextStyle: field.counterTextStyle,
+        border: field.border,
+        labelTextStyle: field.labelTextStyle,
+        descriptionTextStyle: field.descriptionTextStyle,
+        errorTextStyle: field.errorTextStyle,
+        labelPadding: field.labelPadding,
+        descriptionPadding: field.descriptionPadding,
+        errorPadding: field.errorPadding,
+        childPadding: field.childPadding,
+        labelMotion: field.labelMotion,
+      );
 }

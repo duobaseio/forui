@@ -124,7 +124,7 @@ class FRawItemContentStyle with Diagnosticable, _$FRawItemContentStyleFunctions 
     required FTypography typography,
     required Color prefix,
     required Color color,
-    bool desktop = false,
+    required EdgeInsetsGeometry padding,
   }) : this(
          prefixIconStyle: .from(
            IconThemeData(color: prefix, size: typography.md.fontSize),
@@ -138,8 +138,6 @@ class FRawItemContentStyle with Diagnosticable, _$FRawItemContentStyleFunctions 
              [.disabled]: typography.sm.copyWith(color: colors.disable(color)),
            },
          ),
-         padding: desktop
-             ? const .directional(start: 10, top: 6, bottom: 5, end: 5)
-             : const .directional(start: 10, top: 12.5, bottom: 12.5, end: 6),
+         padding: padding,
        );
 }

@@ -13,22 +13,24 @@ void main() {
     (FThemes.neutral.light.desktop, 'desktop', 30.0),
     (FThemes.neutral.light.touch, 'touch', 44.0),
   ]) {
-    testWidgets('$themeName item has consistent height ($height)', (tester) async {
+    final itemStyle = theme.selectStyle.contentStyle.sectionStyle.itemStyle;
+
+    testWidgets('$themeName select item has consistent height ($height)', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme,
-          child: FItem(key: const Key('item'), title: const Text('Item'), onPress: () {}),
+          child: FItem(key: const Key('item'), style: itemStyle, title: const Text('Item'), onPress: () {}),
         ),
       );
 
       expect(tester.getSize(find.byKey(const Key('item'))).height, closeTo(height, 0.001));
     });
 
-    testWidgets('$themeName raw item has consistent height ($height)', (tester) async {
+    testWidgets('$themeName raw select item has consistent height ($height)', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme,
-          child: FItem.raw(key: const Key('raw-item'), onPress: () {}, child: const Text('Item')),
+          child: FItem.raw(key: const Key('raw-item'), style: itemStyle, onPress: () {}, child: const Text('Item')),
         ),
       );
 

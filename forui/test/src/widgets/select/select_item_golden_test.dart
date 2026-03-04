@@ -270,4 +270,24 @@ void main() {
       });
     });
   }
+
+  testWidgets('desktop hovered', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        theme: FThemes.neutral.light.desktop,
+        alignment: .topCenter,
+        child: FSelect<String>(items: const {'A': 'A', 'B': 'B'}, key: key),
+      ),
+    );
+
+    await tester.tap(find.byKey(key));
+    await tester.pumpAndSettle();
+
+    final gesture = await tester.createPointerGesture();
+
+    await gesture.moveTo(tester.getCenter(find.text('A')));
+    await tester.pump();
+
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/desktop/item/hover.png'));
+  });
 }

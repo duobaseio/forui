@@ -177,10 +177,14 @@ class FAutocompleteContentStyle extends FPopoverStyle with Diagnosticable, _$FAu
   });
 
   /// Creates a [FAutocompleteContentStyle] that inherits its properties.
-  FAutocompleteContentStyle.inherit({required super.colors, required FTypography typography, required super.style})
-    : emptyTextStyle = typography.sm,
+  FAutocompleteContentStyle.inherit({
+    required super.colors,
+    required FTypography typography,
+    required super.style,
+    bool desktop = false,
+  }) : emptyTextStyle = typography.sm,
       progressStyle = .inherit(colors: colors),
-      sectionStyle = .inherit(colors: colors, style: style, typography: typography),
+      sectionStyle = .inherit(colors: colors, style: style, typography: typography, desktop: desktop),
       padding = const .symmetric(vertical: 6),
       super.inherit();
 }

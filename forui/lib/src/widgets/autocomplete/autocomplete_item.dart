@@ -250,45 +250,52 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
     required FColors colors,
     required FStyle style,
     required FTypography typography,
-  }) => .new(
-    labelTextStyle: FVariants.from(
-      typography.xs.copyWith(color: colors.mutedForeground),
-      variants: {
-        [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
-      },
-    ),
-    dividerColor: .all(colors.border),
-    dividerWidth: style.borderWidth,
-    itemStyle: FItemStyle(
-      backgroundColor: const .all(null),
-      decoration: FVariants.from(
-        const ShapeDecoration(shape: RoundedSuperellipseBorder()),
+    bool desktop = false,
+  }) {
+    final (padding, margin) = FItemStyle.selectInsets(desktop: desktop);
+    return .new(
+      labelTextStyle: .from(
+        typography.xs.copyWith(color: colors.mutedForeground),
         variants: {
-          [.focused, .hovered, .pressed]: .shapeDelta(
-            shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
-            color: colors.secondary,
-          ),
-          //
-          [.disabled]: const .shapeDelta(),
+          [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
         },
       ),
-      contentStyle: .inherit(
-        colors: colors,
-        typography: typography,
-        prefix: colors.foreground,
-        foreground: colors.foreground,
-        mutedForeground: colors.mutedForeground,
+      dividerColor: .all(colors.border),
+      dividerWidth: style.borderWidth,
+      itemStyle: FItemStyle(
+        backgroundColor: const .all(null),
+        decoration: .from(
+          const ShapeDecoration(shape: RoundedSuperellipseBorder()),
+          variants: {
+            [.focused, .hovered, .pressed]: .shapeDelta(
+              shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
+              color: colors.secondary,
+            ),
+            //
+            [.disabled]: const .shapeDelta(),
+          },
+        ),
+        contentStyle: .inherit(
+          colors: colors,
+          typography: typography,
+          prefix: colors.foreground,
+          foreground: colors.foreground,
+          mutedForeground: colors.mutedForeground,
+          padding: padding,
+        ),
+        rawItemContentStyle: .inherit(
+          colors: colors,
+          typography: typography,
+          prefix: colors.foreground,
+          color: colors.foreground,
+          padding: padding,
+        ),
+        tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
+        focusedOutlineStyle: null,
+        margin: margin,
       ),
-      rawItemContentStyle: FRawItemContentStyle.inherit(
-        colors: colors,
-        typography: typography,
-        prefix: colors.foreground,
-        color: colors.foreground,
-      ),
-      tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
-      focusedOutlineStyle: null,
-    ),
-  );
+    );
+  }
 }
 
 /// A suggestion in a [FAutocomplete] that can optionally be nested in a [FAutocompleteSection].

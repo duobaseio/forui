@@ -322,7 +322,7 @@ class FItem extends StatelessWidget with FItemMixin {
     super.key,
   }) : _builder = ((context, style, top, bottom, variants, color, background, width, divider) => ItemContent(
          style: style.contentStyle,
-         margin: style.margin.resolve({context.platformVariant}),
+         margin: style.margin,
          top: top,
          bottom: bottom,
          variants: variants,
@@ -372,7 +372,7 @@ class FItem extends StatelessWidget with FItemMixin {
     super.key,
   }) : _builder = ((context, style, top, bottom, variants, color, background, width, divider) => RawItemContent(
          style: style.rawItemContentStyle,
-         margin: style.margin.resolve({context.platformVariant}),
+         margin: style.margin,
          top: top,
          bottom: bottom,
          variants: variants,
@@ -399,7 +399,7 @@ class FItem extends StatelessWidget with FItemMixin {
     final top = data.index == 0 ? data.spacing : 0.0;
     final bottom = data.last ? data.spacing : 0.0;
 
-    var margin = style.margin.resolve({context.platformVariant}).resolve(Directionality.maybeOf(context) ?? .ltr);
+    var margin = style.margin.resolve(Directionality.maybeOf(context) ?? .ltr);
     margin = margin.copyWith(
       top: margin.top + top,
       bottom: margin.bottom + bottom + (divider == FItemDivider.none ? 0 : data.dividerWidth),
@@ -457,29 +457,29 @@ class FItem extends StatelessWidget with FItemMixin {
           builder: (context, variants, _) {
             final decoration = style.decoration.resolve(variants);
             return DecoratedBox(
-            position: .foreground,
-            decoration: switch (style.focusedOutlineStyle) {
-              final outline? when variants.contains(FTappableVariant.focused) => BoxDecoration(
-                border: .all(color: outline.color, width: outline.width),
-                borderRadius: outline.borderRadius,
+              position: .foreground,
+              decoration: switch (style.focusedOutlineStyle) {
+                final outline? when variants.contains(FTappableVariant.focused) => BoxDecoration(
+                  border: .all(color: outline.color, width: outline.width),
+                  borderRadius: outline.borderRadius,
+                ),
+                _ => const BoxDecoration(),
+              },
+              child: DecoratedBox(
+                decoration: decoration,
+                child: _builder(
+                  context,
+                  style,
+                  top,
+                  bottom,
+                  variants,
+                  data.dividerColor,
+                  decoration.color ?? background,
+                  data.dividerWidth,
+                  divider,
+                ),
               ),
-              _ => const BoxDecoration(),
-            },
-            child: DecoratedBox(
-              decoration: decoration,
-              child: _builder(
-                context,
-                style,
-                top,
-                bottom,
-                variants,
-                data.dividerColor,
-                decoration.color ?? background,
-                data.dividerWidth,
-                divider,
-              ),
-            ),
-          );
+            );
           },
         ),
       ),
@@ -534,14 +534,14 @@ extension type FItemStyles(FVariants<FItemVariantConstraint, FItemVariant, FItem
               prefix: colors.destructive,
               foreground: colors.destructive,
               mutedForeground: colors.destructive,
-              desktop: desktop,
+              padding: primary.contentStyle.padding,
             ),
             rawItemContentStyle: FRawItemContentStyle.inherit(
               colors: colors,
               typography: typography,
               prefix: colors.primary,
               color: colors.primary,
-              desktop: desktop,
+              padding: primary.rawItemContentStyle.padding,
             ),
           ),
         },
@@ -558,6 +558,16 @@ extension type FItemStyles(FVariants<FItemVariantConstraint, FItemVariant, FItem
 
 /// A [FItem]'s style.
 class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
+  /// The padding and margin for the item when used in a menu.
+  static (EdgeInsetsGeometry padding, EdgeInsetsGeometry margin) menuInsets({required bool desktop}) => desktop
+      ? (const EdgeInsetsDirectional.fromSTEB(10, 3.5, 5, 3.5), const .symmetric(vertical: 3, horizontal: 4))
+      : (const EdgeInsetsDirectional.fromSTEB(10, 12.5, 6, 12.5), const .symmetric(horizontal: 4));
+
+  /// The padding and margin for the item when used in a autocomplete/select.
+  static (EdgeInsetsGeometry padding, EdgeInsetsGeometry margin) selectInsets({required bool desktop}) => desktop
+      ? (const EdgeInsetsDirectional.fromSTEB(10, 6.5, 5, 6.5), const .symmetric(horizontal: 4))
+      : (const EdgeInsetsDirectional.fromSTEB(10, 12.5, 6, 12.5), const .symmetric(horizontal: 4));
+
   /// The item's background color.
   ///
   /// It is applied to the entire item, including [margin]. Since it is applied before [decoration] in the z-layer,
@@ -567,11 +577,9 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
   @override
   final FVariants<FTappableVariantConstraint, FTappableVariant, Color?, Delta> backgroundColor;
 
-  /// The margin around the item, including the [decoration]. Defaults to:
-  /// * touch: `EdgeInsets.zero`
-  /// * desktop: `EdgeInsets.symmetric(vertical: 2, horizontal: 4)`
+  /// The margin around the item, including the [decoration].
   @override
-  final FVariants<FPlatformVariantConstraint, FPlatformVariant, EdgeInsetsGeometry, Delta> margin;
+  final EdgeInsetsGeometry margin;
 
   /// The item's decoration.
   @override
@@ -601,7 +609,7 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
     required this.rawItemContentStyle,
     required this.tappableStyle,
     required this.focusedOutlineStyle,
-    this.margin = const .all(.symmetric(horizontal: 4)),
+    required this.margin,
   });
 
   /// Creates a [FTileGroupStyle] that inherits from the given arguments.
@@ -610,47 +618,51 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
     required FTypography typography,
     required FStyle style,
     bool desktop = false,
-  }) => FItemStyle(
-    backgroundColor: FVariants(
-      colors.background,
-      variants: {
-        [.disabled]: colors.background,
-      },
-    ),
-    decoration: .from(
-      ShapeDecoration(
-        shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
-        color: colors.background,
+  }) {
+    final (padding, margin) = FItemStyle.menuInsets(desktop: desktop);
+    return FItemStyle(
+      backgroundColor: FVariants(
+        colors.background,
+        variants: {
+          [.disabled]: colors.background,
+        },
       ),
-      variants: {
-        [.hovered, .pressed]: .shapeDelta(color: colors.secondary),
-        //
-        [.disabled]: const .shapeDelta(),
-        //
-        [.selected]: .shapeDelta(color: colors.secondary),
-        [.selected.and(.disabled)]: .shapeDelta(color: colors.disable(colors.secondary)),
-      },
-    ),
-    contentStyle: .inherit(
-      colors: colors,
-      typography: typography,
-      prefix: colors.primary,
-      foreground: colors.foreground,
-      mutedForeground: colors.mutedForeground,
-      desktop: desktop,
-    ),
-    rawItemContentStyle: .inherit(
-      colors: colors,
-      typography: typography,
-      prefix: colors.foreground,
-      color: colors.foreground,
-      desktop: desktop,
-    ),
-    tappableStyle: style.tappableStyle.copyWith(
-      motion: FTappableMotion.none,
-      pressedEnterDuration: .zero,
-      pressedExitDuration: const Duration(milliseconds: 25),
-    ),
-    focusedOutlineStyle: style.focusedOutlineStyle,
-  );
+      decoration: .from(
+        ShapeDecoration(
+          shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
+          color: colors.background,
+        ),
+        variants: {
+          [.hovered, .pressed]: .shapeDelta(color: colors.secondary),
+          //
+          [.disabled]: const .shapeDelta(),
+          //
+          [.selected]: .shapeDelta(color: colors.secondary),
+          [.selected.and(.disabled)]: .shapeDelta(color: colors.disable(colors.secondary)),
+        },
+      ),
+      contentStyle: .inherit(
+        colors: colors,
+        typography: typography,
+        prefix: colors.primary,
+        foreground: colors.foreground,
+        mutedForeground: colors.mutedForeground,
+        padding: padding,
+      ),
+      rawItemContentStyle: .inherit(
+        colors: colors,
+        typography: typography,
+        prefix: colors.foreground,
+        color: colors.foreground,
+        padding: padding,
+      ),
+      tappableStyle: style.tappableStyle.copyWith(
+        motion: FTappableMotion.none,
+        pressedEnterDuration: .zero,
+        pressedExitDuration: const Duration(milliseconds: 25),
+      ),
+      focusedOutlineStyle: style.focusedOutlineStyle,
+      margin: margin,
+    );
+  }
 }

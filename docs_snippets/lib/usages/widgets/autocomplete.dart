@@ -94,7 +94,8 @@ final autocomplete = FAutocomplete(
   contentErrorBuilder: (context, error, stackTrace) => const Text('Error'),
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(fieldStyle: .delta(contentPadding: .value(.zero))),
+  style: const .delta(),
+  size: .md,
   enabled: true,
   hint: 'Hint',
   items: const ['Apple', 'Banana', 'Cherry'],
@@ -190,7 +191,8 @@ final builder = FAutocomplete.builder(
   contentDivider: .none,
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(fieldStyle: .delta(contentPadding: .value(.zero))),
+  size: .md,
+  style: const .delta(),
   enabled: true,
   filter: (query) => ['Apple', 'Banana'].where((item) => item.toLowerCase().startsWith(query.toLowerCase())),
   contentBuilder: (context, query, values) => [for (final value in values) .item(value: value)],
@@ -228,5 +230,17 @@ final FPopoverControl popoverExternal = .managed(
   controller: FPopoverController(vsync: vsync, shown: true, motion: const FPopoverMotion()),
   onChange: (shown) {},
 );
+
+// {@category "Size" "Small"}
+/// The autocomplete's small size.
+const FTextFieldSizeVariant sm = .sm;
+
+// {@category "Size" "Medium"}
+/// The autocomplete's medium (default) size.
+const FTextFieldSizeVariant md = .md;
+
+// {@category "Size" "Large"}
+/// The autocomplete's large size.
+const FTextFieldSizeVariant lg = .lg;
 
 TickerProvider get vsync => throw UnimplementedError();

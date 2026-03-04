@@ -481,6 +481,40 @@ void main() {
       });
     }
 
+    testWidgets('desktop hovered', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          theme: FThemes.neutral.light.desktop,
+          child: FItemGroup(
+            divider: .indented,
+            children: [
+              FItem(
+                prefix: const Icon(FIcons.wifi),
+                title: const Text('WiFi'),
+                suffix: const Icon(FIcons.chevronRight),
+                onPress: () {},
+              ),
+              FItem(
+                prefix: const Icon(FIcons.bluetooth),
+                title: const Text('Bluetooth'),
+                subtitle: const Text('Fee, Fo'),
+                suffix: const Icon(FIcons.chevronRight),
+                onPress: () {},
+              ),
+            ],
+          ),
+        ),
+      );
+
+      final gesture = await tester.createPointerGesture();
+      await tester.pump();
+
+      await gesture.moveTo(tester.getCenter(find.byType(FItem).at(0)));
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('item/group/desktop/hovered.png'));
+    });
+
     testWidgets('item style overrides group style', (tester) async {
       await tester.pumpWidget(
         TestScaffold(

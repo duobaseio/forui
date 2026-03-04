@@ -118,7 +118,7 @@ void main() {
             key: key,
             format: Text.new,
             style: TestScaffold.blueScreen.multiSelectStyle.copyWith(
-              searchStyle: const .delta(fieldStyle: .delta(cursorColor: Color(0xFF03A9F4))),
+              searchStyle: .delta(fieldStyles: .delta([.all(const .delta(cursorColor: Color(0xFF03A9F4)))])),
             ),
             contentScrollHandles: true,
             filter: (_) => [],
@@ -140,7 +140,7 @@ void main() {
             key: key,
             format: Text.new,
             style: TestScaffold.blueScreen.multiSelectStyle.copyWith(
-              searchStyle: const .delta(fieldStyle: .delta(cursorColor: Color(0xFF03A9F4))),
+              searchStyle: .delta(fieldStyles: .delta([.all(const .delta(cursorColor: Color(0xFF03A9F4)))])),
             ),
             contentScrollHandles: true,
             filter: (_) async {
@@ -165,7 +165,7 @@ void main() {
             {for (int i = 0; i < 10; i++) '$i': i},
             key: key,
             style: TestScaffold.blueScreen.multiSelectStyle.copyWith(
-              searchStyle: const .delta(fieldStyle: .delta(cursorColor: Color(0xFF03A9F4))),
+              searchStyle: .delta(fieldStyles: .delta([.all(const .delta(cursorColor: Color(0xFF03A9F4)))])),
             ),
             contentScrollHandles: true,
             filter: (_) => [],

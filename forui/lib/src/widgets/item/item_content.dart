@@ -216,7 +216,7 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
     required Color prefix,
     required Color foreground,
     required Color mutedForeground,
-    bool desktop = false,
+    required EdgeInsetsGeometry padding,
   }) {
     final disabledMutedForeground = colors.disable(mutedForeground);
     return FItemContentStyle(
@@ -250,9 +250,7 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
           [.disabled]: .delta(color: disabledMutedForeground),
         },
       ),
-      padding: desktop
-          ? const .directional(start: 10, top: 6, bottom: 5, end: 5)
-          : const .directional(start: 10, top: 12.5, bottom: 12.5, end: 6),
+      padding: padding,
     );
   }
 }
