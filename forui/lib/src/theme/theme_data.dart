@@ -710,7 +710,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       selectStyle: selectStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       selectGroupStyle: selectGroupStyle ?? .inherit(colors: colors, typography: typography, style: style),
       selectMenuTileStyle: selectMenuTileStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
-      sidebarStyle: sidebarStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      sidebarStyle: sidebarStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       sliderStyles: sliderStyles == null
           ? FSliderStyles.inherit(colors: colors, typography: typography, style: style)
           : FSliderStyles(sliderStyles),

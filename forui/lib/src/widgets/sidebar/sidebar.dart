@@ -298,14 +298,18 @@ class FSidebarStyle with Diagnosticable, _$FSidebarStyleFunctions {
   });
 
   /// Creates a [FSidebarStyle] that inherits its properties.
-  FSidebarStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        decoration: BoxDecoration(
-          color: colors.background,
-          border: .fromSTEB(
-            end: BorderSide(color: colors.border, width: style.borderWidth),
-          ),
-        ),
-        groupStyle: .inherit(colors: colors, typography: typography, style: style),
-      );
+  FSidebarStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+    required bool touch,
+  }) : this(
+         decoration: BoxDecoration(
+           color: colors.background,
+           border: .fromSTEB(
+             end: BorderSide(color: colors.border, width: style.borderWidth),
+           ),
+         ),
+         groupStyle: .inherit(colors: colors, typography: typography, style: style, touch: touch),
+       );
 }

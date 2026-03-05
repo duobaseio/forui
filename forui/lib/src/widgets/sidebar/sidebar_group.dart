@@ -216,17 +216,21 @@ class FSidebarGroupStyle with Diagnosticable, _$FSidebarGroupStyleFunctions {
   });
 
   /// Creates a [FSidebarGroupStyle] that inherits its properties.
-  FSidebarGroupStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        labelStyle: typography.xs.copyWith(color: colors.mutedForeground, overflow: .ellipsis, fontWeight: .w500),
-        actionStyle: FVariants.from(
-          IconThemeData(color: colors.mutedForeground, size: typography.md.fontSize),
-          variants: {
-            [.hovered, .pressed]: .delta(color: colors.foreground),
-          },
-        ),
-        tappableStyle: style.tappableStyle,
-        focusedOutlineStyle: style.focusedOutlineStyle,
-        itemStyle: .inherit(colors: colors, typography: typography, style: style),
-      );
+  FSidebarGroupStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+    required bool touch,
+  }) : this(
+         labelStyle: typography.xs.copyWith(color: colors.mutedForeground, overflow: .ellipsis, fontWeight: .w500),
+         actionStyle: FVariants.from(
+           IconThemeData(color: colors.mutedForeground, size: typography.md.fontSize),
+           variants: {
+             [.hovered, .pressed]: .delta(color: colors.foreground),
+           },
+         ),
+         tappableStyle: style.tappableStyle,
+         focusedOutlineStyle: style.focusedOutlineStyle,
+         itemStyle: .inherit(colors: colors, typography: typography, style: style, touch: touch),
+       );
 }
