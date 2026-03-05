@@ -16,6 +16,7 @@ class _SearchSelect<T> extends FMultiSelect<T> {
     this.contentErrorBuilder,
     super.control,
     super.popoverControl,
+    super.size,
     super.style,
     super.autofocus,
     super.focusNode,

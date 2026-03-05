@@ -4,8 +4,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:meta/meta.dart';
-
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/form/form_field.dart';
 import 'package:forui/src/widgets/popover/popover_controller.dart';
@@ -17,8 +15,6 @@ import 'package:forui/src/widgets/select/single/select_controller.dart';
 part 'basic_select.dart';
 
 part 'search_select.dart';
-
-part 'select.design.dart';
 
 /// A select displays a list of options for the user to pick from.
 ///
@@ -808,44 +804,4 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
     }
     super.dispose();
   }
-}
-
-/// A [FSelect]'s style.
-class FSelectStyle with Diagnosticable, _$FSelectStyleFunctions {
-  /// The select field's size styles.
-  @override
-  final FTextFieldSizeStyles fieldStyles;
-
-  /// The search's style.
-  @override
-  final FSelectSearchStyle searchStyle;
-
-  /// The content's style.
-  @override
-  final FSelectContentStyle contentStyle;
-
-  /// The default text style when there are no results.
-  @override
-  final TextStyle emptyTextStyle;
-
-  /// Creates a [FSelectStyle].
-  FSelectStyle({
-    required this.fieldStyles,
-    required this.searchStyle,
-    required this.contentStyle,
-    required this.emptyTextStyle,
-  });
-
-  /// Creates a [FSelectStyle] that inherits its properties.
-  FSelectStyle.inherit({
-    required FColors colors,
-    required FTypography typography,
-    required FStyle style,
-    required bool touch,
-  }) : this(
-         fieldStyles: .inherit(colors: colors, typography: typography, style: style, touch: touch),
-         searchStyle: .inherit(colors: colors, typography: typography, style: style, touch: touch),
-         contentStyle: .inherit(colors: colors, typography: typography, style: style, touch: touch),
-         emptyTextStyle: typography.xs,
-       );
 }

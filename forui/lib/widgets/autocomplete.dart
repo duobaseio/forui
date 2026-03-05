@@ -6,6 +6,7 @@
 library forui.widgets.autocomplete;
 
 export '../src/widgets/autocomplete/autocomplete.dart' hide AutocompleteFieldScope;
+export '../src/widgets/autocomplete/autocomplete_style.dart';
 export '../src/widgets/autocomplete/autocomplete_content.dart' hide Content, ContentData;
 export '../src/widgets/autocomplete/autocomplete_controller.dart'
     hide InheritedAutocompleteController, InternalFAutocompleteControl;

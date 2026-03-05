@@ -503,4 +503,34 @@ void main() {
 
     await expectLater(find.byType(TestScaffold), matchesGoldenFile('multi-select/sort.png'));
   });
+
+  for (final (theme, name) in [
+    (FThemes.neutral.light.desktop, 'desktop'),
+    (FThemes.neutral.light.touch, 'touch'),
+  ]) {
+    testWidgets('$name sizes', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme,
+          alignment: .topCenter,
+          child: Column(
+            spacing: 8,
+            mainAxisSize: .min,
+            children: [
+              for (final size in [FTextFieldSizeVariant.sm, FTextFieldSizeVariant.md, FTextFieldSizeVariant.lg]) ...[
+                FMultiSelect(
+                  control: const .managed(initial: {'Apple'}),
+                  size: size,
+                  items: letters,
+                  hint: const Text('Fruits'),
+                ),
+              ],
+            ],
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('multi-select/$name-sizes.png'));
+    });
+  }
 }

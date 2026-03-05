@@ -47,7 +47,7 @@ extension type FTextFieldSizeStyles(
     FTextFieldStyle textField(FButtonStyle buttonStyle, EdgeInsetsGeometry contentPadding) => FTextFieldStyle.inherit(
       colors: colors,
       style: style,
-      label: label,
+      labelStyle: label,
       textStyle: textStyle,
       iconStyle: iconStyle,
       buttonStyle: buttonStyle,
@@ -201,7 +201,7 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
   FTextFieldStyle.inherit({
     required FColors colors,
     required FStyle style,
-    required FLabelStyle label,
+    required FLabelStyle labelStyle,
     required TextStyle textStyle,
     required FVariants<FTextFieldVariantConstraint, FTextFieldVariant, IconThemeData, IconThemeDataDelta> iconStyle,
     required FButtonStyle buttonStyle,
@@ -268,9 +268,9 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
          labelTextStyle: style.formFieldStyle.labelTextStyle,
          descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,
          errorTextStyle: style.formFieldStyle.errorTextStyle,
-         labelPadding: label.labelPadding,
-         descriptionPadding: label.descriptionPadding,
-         errorPadding: label.errorPadding,
-         childPadding: label.childPadding,
+         labelPadding: labelStyle.labelPadding,
+         descriptionPadding: labelStyle.descriptionPadding,
+         errorPadding: labelStyle.errorPadding,
+         childPadding: labelStyle.childPadding,
        );
 }

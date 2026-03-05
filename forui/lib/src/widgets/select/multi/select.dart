@@ -1,14 +1,12 @@
 // ignore_for_file: avoid_positional_boolean_parameters
 
 import 'dart:async';
-import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:collection/collection.dart';
-import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/form/multi_value_form_field.dart';
@@ -22,15 +20,13 @@ part 'basic_select.dart';
 
 part 'search_select.dart';
 
-part 'select.design.dart';
-
 /// A function that builds a tag in a [FMultiSelect].
 typedef FMultiSelectTagBuilder<T> =
     Widget Function(
       BuildContext context,
       bool enabled,
       FMultiValueNotifier<T> controller,
-      FMultiSelectStyle style,
+      FMultiSelectFieldStyle style,
       T value,
       Widget label,
     );
@@ -49,17 +45,18 @@ typedef FMultiSelectTagBuilder<T> =
 /// * [FMultiSelectStyle] for customizing the appearance of a select.
 abstract class FMultiSelect<T> extends StatefulWidget {
   /// The default suffix builder that shows a upward and downward facing chevron icon.
-  static Widget defaultIconBuilder(BuildContext _, FMultiSelectStyle style, Set<FTextFieldVariant> variants) => Padding(
-    padding: const .directional(start: 4),
-    child: IconTheme(data: style.fieldStyle.iconStyle.resolve(variants), child: const Icon(FIcons.chevronDown)),
-  );
+  static Widget defaultIconBuilder(BuildContext _, FMultiSelectFieldStyle style, Set<FTextFieldVariant> variants) =>
+      Padding(
+        padding: const .directional(start: 4),
+        child: IconTheme(data: style.iconStyle.resolve(variants), child: const Icon(FIcons.chevronDown)),
+      );
 
   /// The default tag builder that builds a [FMultiSelectTag] with the given value.
   static Widget defaultTagBuilder<T>(
     BuildContext context,
     bool enabled,
     FMultiValueNotifier<T> controller,
-    FMultiSelectStyle style,
+    FMultiSelectFieldStyle style,
     T value,
     Widget label,
   ) => FMultiSelectTag(
@@ -95,6 +92,9 @@ abstract class FMultiSelect<T> extends StatefulWidget {
   /// Defaults to [FPopoverControl.managed].
   final FPopoverControl popoverControl;
 
+  /// {@macro forui.text_field.size}
+  final FTextFieldSizeVariant size;
+
   /// The style.
   ///
   /// To modify the current style:
@@ -122,10 +122,10 @@ abstract class FMultiSelect<T> extends StatefulWidget {
   final FocusNode? focusNode;
 
   /// Builds a widget at the start of the select that can be pressed to toggle the popover. Defaults to no icon.
-  final FFieldIconBuilder<FMultiSelectStyle>? prefixBuilder;
+  final FFieldIconBuilder<FMultiSelectFieldStyle>? prefixBuilder;
 
   /// Builds a widget at the end of the select that can be pressed to toggle the popover. Defaults to [defaultIconBuilder].
-  final FFieldIconBuilder<FMultiSelectStyle>? suffixBuilder;
+  final FFieldIconBuilder<FMultiSelectFieldStyle>? suffixBuilder;
 
   /// The label.
   final Widget? label;
@@ -228,11 +228,12 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     required Map<String, T> items,
     FMultiValueControl<T>? control,
     FPopoverControl popoverControl = const .managed(),
+    FTextFieldSizeVariant size = .md,
     FMultiSelectStyleDelta style = const .context(),
     bool autofocus = false,
     FocusNode? focusNode,
-    FFieldIconBuilder<FMultiSelectStyle>? prefixBuilder,
-    FFieldIconBuilder<FMultiSelectStyle>? suffixBuilder = defaultIconBuilder,
+    FFieldIconBuilder<FMultiSelectFieldStyle>? prefixBuilder,
+    FFieldIconBuilder<FMultiSelectFieldStyle>? suffixBuilder = defaultIconBuilder,
     Widget? label,
     Widget? description,
     bool enabled = true,
@@ -269,6 +270,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     return .rich(
       control: control,
       popoverControl: popoverControl,
+      size: size,
       style: style,
       autofocus: autofocus,
       focusNode: focusNode,
@@ -315,11 +317,12 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     required List<FSelectItemMixin> children,
     FMultiValueControl<T>? control,
     FPopoverControl popoverControl,
+    FTextFieldSizeVariant size,
     FMultiSelectStyleDelta style,
     bool autofocus,
     FocusNode? focusNode,
-    FFieldIconBuilder<FMultiSelectStyle>? prefixBuilder,
-    FFieldIconBuilder<FMultiSelectStyle>? suffixBuilder,
+    FFieldIconBuilder<FMultiSelectFieldStyle>? prefixBuilder,
+    FFieldIconBuilder<FMultiSelectFieldStyle>? suffixBuilder,
     Widget? label,
     Widget? description,
     bool enabled,
@@ -376,11 +379,12 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder,
     FMultiValueControl<T>? control,
     FPopoverControl popoverControl = const .managed(),
+    FTextFieldSizeVariant size = .md,
     FMultiSelectStyleDelta style = const .context(),
     bool autofocus = false,
     FocusNode? focusNode,
-    FFieldIconBuilder<FMultiSelectStyle>? prefixBuilder,
-    FFieldIconBuilder<FMultiSelectStyle>? suffixBuilder = defaultIconBuilder,
+    FFieldIconBuilder<FMultiSelectFieldStyle>? prefixBuilder,
+    FFieldIconBuilder<FMultiSelectFieldStyle>? suffixBuilder = defaultIconBuilder,
     Widget? label,
     Widget? description,
     bool enabled = true,
@@ -429,6 +433,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
       contentErrorBuilder: contentErrorBuilder,
       control: control,
       popoverControl: popoverControl,
+      size: size,
       style: style,
       autofocus: autofocus,
       focusNode: focusNode,
@@ -485,11 +490,12 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder,
     FMultiValueControl<T>? control,
     FPopoverControl popoverControl,
+    FTextFieldSizeVariant size,
     FMultiSelectStyleDelta style,
     bool autofocus,
     FocusNode? focusNode,
-    FFieldIconBuilder<FMultiSelectStyle>? prefixBuilder,
-    FFieldIconBuilder<FMultiSelectStyle>? suffixBuilder,
+    FFieldIconBuilder<FMultiSelectFieldStyle>? prefixBuilder,
+    FFieldIconBuilder<FMultiSelectFieldStyle>? suffixBuilder,
     Widget? label,
     Widget? description,
     bool enabled,
@@ -526,6 +532,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     required this.format,
     this.control,
     this.popoverControl = const .managed(),
+    this.size = .md,
     this.style = const .context(),
     this.autofocus = false,
     this.focusNode,
@@ -569,6 +576,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     properties
       ..add(DiagnosticsProperty('control', control))
       ..add(DiagnosticsProperty('popoverControl', popoverControl))
+      ..add(DiagnosticsProperty('size', size))
       ..add(DiagnosticsProperty('style', style))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
@@ -661,9 +669,10 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
   @override
   Widget build(BuildContext context) {
     final style = widget.style(context.theme.multiSelectStyle);
+    final fieldStyle = style.fieldStyles.resolve({widget.size, context.platformVariant});
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
     final direction = widget.textDirection ?? Directionality.maybeOf(context) ?? .ltr;
-    final padding = style.fieldStyle.contentPadding.resolve(direction);
+    final padding = fieldStyle.contentPadding.resolve(direction);
 
     return MultiValueFormField<T>(
       controller: _controller,
@@ -682,7 +691,7 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
             axis: .vertical,
             variants: formVariants,
             label: widget.label,
-            style: style.fieldStyle,
+            style: fieldStyle,
             description: widget.description,
             // Error should never be null as doing so causes the widget tree to change.
             error: state.errorText == null ? const SizedBox() : widget.errorBuilder(context, state.errorText!),
@@ -710,13 +719,13 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
                 ),
               ),
               child: FTappable(
-                style: style.fieldStyle.tappableStyle,
+                style: fieldStyle.tappableStyle,
                 focusNode: _focus,
                 onPress: widget.enabled ? _toggle : null,
                 builder: (context, tappableVariants, child) {
                   final variants = <FVariant>{...tappableVariants, ...formVariants};
                   return DecoratedBox(
-                    decoration: style.fieldStyle.decoration.resolve(variants),
+                    decoration: fieldStyle.decoration.resolve(variants),
                     child: Padding(
                       padding: padding.copyWith(top: 0, bottom: 0),
                       child: DefaultTextStyle.merge(
@@ -725,29 +734,29 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             if (widget.prefixBuilder case final prefix?)
-                              prefix(context, style, variants as Set<FTextFieldVariant>),
+                              prefix(context, fieldStyle, variants as Set<FTextFieldVariant>),
                             Expanded(
                               child: Padding(
                                 padding: padding.copyWith(left: 0, right: 0),
                                 child: Wrap(
                                   crossAxisAlignment: WrapCrossAlignment.center,
-                                  spacing: style.fieldStyle.spacing,
-                                  runSpacing: style.fieldStyle.runSpacing,
+                                  spacing: fieldStyle.spacing,
+                                  runSpacing: fieldStyle.runSpacing,
                                   children: [
                                     for (final value in values)
                                       widget.tagBuilder(
                                         context,
                                         widget.enabled,
                                         _controller,
-                                        style,
+                                        fieldStyle,
                                         value,
                                         widget.format(value),
                                       ),
                                     if (widget.keepHint || _controller.value.isEmpty)
                                       Padding(
-                                        padding: style.fieldStyle.hintPadding,
+                                        padding: fieldStyle.hintPadding,
                                         child: DefaultTextStyle.merge(
-                                          style: style.fieldStyle.hintTextStyle.resolve(variants),
+                                          style: fieldStyle.hintTextStyle.resolve(variants),
                                           child: widget.hint ?? Text(localizations.multiSelectHint),
                                         ),
                                       ),
@@ -757,9 +766,9 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
                             ),
                             if (widget.enabled && widget.clearable && _controller.value.isNotEmpty)
                               Padding(
-                                padding: style.fieldStyle.clearButtonPadding,
+                                padding: fieldStyle.clearButtonPadding,
                                 child: FButton.icon(
-                                  style: style.fieldStyle.clearButtonStyle,
+                                  style: fieldStyle.clearButtonStyle,
                                   onPress: () => _controller.value = {},
                                   child: Icon(
                                     FIcons.x,
@@ -768,7 +777,7 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
                                 ),
                               ),
                             if (widget.suffixBuilder case final suffix?)
-                              suffix(context, style, variants as Set<FTextFieldVariant>),
+                              suffix(context, fieldStyle, variants as Set<FTextFieldVariant>),
                           ],
                         ),
                       ),
@@ -795,195 +804,4 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
     required bool autofocusFirst,
     required bool Function(T) autofocus,
   });
-}
-
-/// A [FMultiSelect]'s style.
-class FMultiSelectStyle with Diagnosticable, _$FMultiSelectStyleFunctions {
-  /// The field's style.
-  @override
-  final FMultiSelectFieldStyle fieldStyle;
-
-  /// The tag's style.
-  @override
-  final FMultiSelectTagStyle tagStyle;
-
-  /// The search's style.
-  @override
-  final FSelectSearchStyle searchStyle;
-
-  /// The content's style.
-  @override
-  final FSelectContentStyle contentStyle;
-
-  /// The default text style when there are no results.
-  @override
-  final TextStyle emptyTextStyle;
-
-  /// Creates a [FMultiSelectStyle].
-  FMultiSelectStyle({
-    required this.fieldStyle,
-    required this.tagStyle,
-    required this.searchStyle,
-    required this.contentStyle,
-    required this.emptyTextStyle,
-  });
-
-  /// Creates a [FMultiSelectStyle] that inherits its properties.
-  FMultiSelectStyle.inherit({
-    required FColors colors,
-    required FTypography typography,
-    required FStyle style,
-    required bool touch,
-  }) : this(
-         fieldStyle: .inherit(colors: colors, typography: typography, style: style, touch: touch),
-         tagStyle: .inherit(colors: colors, typography: typography, style: style),
-         searchStyle: .inherit(colors: colors, typography: typography, style: style, touch: touch),
-         contentStyle: .inherit(colors: colors, typography: typography, style: style, touch: touch),
-         emptyTextStyle: typography.sm,
-       );
-}
-
-/// A [FMultiSelectFieldStyle]'s style.
-class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSelectFieldStyleFunctions {
-  /// The multi-select field's decoration.
-  @override
-  final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, Decoration, DecorationDelta> decoration;
-
-  /// The multi-select field's padding. Defaults to `EdgeInsets.only(start: 10, top: 6, bottom: 6, end: 8)`.
-  @override
-  final EdgeInsetsGeometry contentPadding;
-
-  /// The spacing between tags. Defaults to 4.
-  @override
-  final double spacing;
-
-  /// The spacing between the rows of tags. Defaults to 4.
-  @override
-  final double runSpacing;
-
-  /// The multi-select field hint's text style.
-  @override
-  final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, TextStyle, TextStyleDelta> hintTextStyle;
-
-  /// The multi-select field's hint padding. Defaults to `EdgeInsetsDirectional.only(start: 4, top: 4, bottom: 4)`.
-  ///
-  /// The vertical padding should typically be the same as the [FMultiSelectTagStyle.padding].
-  @override
-  final EdgeInsetsGeometry hintPadding;
-
-  /// The multi-select field's icon style.
-  @override
-  final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, IconThemeData, IconThemeDataDelta> iconStyle;
-
-  /// The clear button's style when [FMultiSelect.clearable] is true.
-  @override
-  final FButtonStyle clearButtonStyle;
-
-  /// The padding surrounding the clear button. Defaults to [EdgeInsets.zero].
-  @override
-  final EdgeInsetsGeometry clearButtonPadding;
-
-  /// The multi-select field's tappable style.
-  @override
-  final FTappableStyle tappableStyle;
-
-  /// Creates a [FMultiSelectFieldStyle].
-  FMultiSelectFieldStyle({
-    required this.decoration,
-    required this.hintTextStyle,
-    required this.iconStyle,
-    required this.clearButtonStyle,
-    required this.tappableStyle,
-    required super.labelTextStyle,
-    required super.descriptionTextStyle,
-    required super.errorTextStyle,
-    this.contentPadding = const .directional(start: 10, top: 6, bottom: 6, end: 8),
-    this.hintPadding = const .directional(start: 4, top: 4, bottom: 4),
-    this.spacing = 4,
-    this.runSpacing = 4,
-    this.clearButtonPadding = .zero,
-    super.labelPadding,
-    super.descriptionPadding,
-    super.errorPadding,
-    super.childPadding,
-    super.labelMotion,
-  });
-
-  /// Creates a [FMultiSelectFieldStyle] that inherits its properties.
-  factory FMultiSelectFieldStyle.inherit({
-    required FColors colors,
-    required FTypography typography,
-    required FStyle style,
-    required bool touch,
-  }) {
-    final label = FLabelStyles.inherit(style: style).verticalStyle;
-    final ghost = FButtonStyles.inherit(colors: colors, typography: typography, style: style, touch: touch).ghost.sm;
-
-    final iconStyle = FVariants<FTextFieldVariantConstraint, FTextFieldVariant, IconThemeData, IconThemeDataDelta>.from(
-      IconThemeData(color: colors.mutedForeground, size: 16),
-      variants: {
-        [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
-      },
-    );
-
-    return .new(
-      decoration: FVariants(
-        ShapeDecoration(
-          shape: RoundedSuperellipseBorder(
-            side: BorderSide(color: colors.border, width: style.borderWidth),
-            borderRadius: style.borderRadius.md,
-          ),
-          color: colors.card,
-        ),
-        variants: {
-          [.focused]: ShapeDecoration(
-            shape: RoundedSuperellipseBorder(
-              side: BorderSide(color: colors.primary, width: style.borderWidth),
-              borderRadius: style.borderRadius.md,
-            ),
-            color: colors.card,
-          ),
-          //
-          [.disabled]: ShapeDecoration(
-            shape: RoundedSuperellipseBorder(
-              side: BorderSide(color: colors.disable(colors.border), width: style.borderWidth),
-              borderRadius: style.borderRadius.md,
-            ),
-            color: colors.card,
-          ),
-          //
-          [.error]: ShapeDecoration(
-            shape: RoundedSuperellipseBorder(
-              side: BorderSide(color: colors.error, width: style.borderWidth),
-              borderRadius: style.borderRadius.md,
-            ),
-            color: colors.card,
-          ),
-          [.error.and(.disabled)]: ShapeDecoration(
-            shape: RoundedSuperellipseBorder(
-              side: BorderSide(color: colors.disable(colors.error), width: style.borderWidth),
-              borderRadius: style.borderRadius.md,
-            ),
-            color: colors.disable(colors.card),
-          ),
-        },
-      ),
-      hintTextStyle: FVariants.from(
-        typography.sm.copyWith(color: colors.mutedForeground),
-        variants: {
-          [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
-        },
-      ),
-      iconStyle: iconStyle,
-      clearButtonStyle: ghost.copyWith(iconContentStyle: .delta(iconStyle: iconStyle.cast())),
-      tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
-      labelTextStyle: style.formFieldStyle.labelTextStyle,
-      descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,
-      errorTextStyle: style.formFieldStyle.errorTextStyle,
-      labelPadding: label.labelPadding,
-      descriptionPadding: label.descriptionPadding,
-      errorPadding: label.errorPadding,
-      childPadding: label.childPadding,
-    );
-  }
 }

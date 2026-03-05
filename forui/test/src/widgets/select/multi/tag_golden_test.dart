@@ -31,7 +31,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.blue(
           child: FMultiSelectTag(
-            style: TestScaffold.blueScreen.multiSelectStyle.tagStyle,
+            style: TestScaffold.blueScreen.multiSelectStyle.fieldStyles.md.tagStyle,
             label: const Text('Tag'),
             key: key,
           ),

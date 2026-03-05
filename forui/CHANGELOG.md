@@ -146,11 +146,17 @@ sizes consistent across each platform.
 
 
 ### `FSelect` & `FMultiSelect`
+* Add `FMultiSelect.size`.
+* Add `FMultiSelectFieldStyles`.
 * Add `FSelect.size`.
 * Add `FSelectSearchFieldProperties.size`.
 
 * Change `FSelectSection` layout to better align with the latest shadcn version.
 
+* **Breaking** Change `FMultiSelect.prefixBuilder` type from `FFieldIconBuilder<FMultiSelectStyle>?` to
+  `FFieldIconBuilder<FMultiSelectFieldStyle>?`.
+* **Breaking** Change `FMultiSelect.suffixBuilder` type from `FFieldIconBuilder<FMultiSelectStyle>?` to
+  `FFieldIconBuilder<FMultiSelectFieldStyle>?`.
 * **Breaking** Change `FSelect.prefixBuilder` type from `FFieldIconBuilder<FSelectStyle>?` to
   `FFieldIconBuilder<FTextFieldStyle>?`.
 * **Breaking** Change `FSelect.suffixBuilder` type from `FFieldIconBuilder<FSelectStyle>?` to
@@ -159,6 +165,11 @@ sizes consistent across each platform.
   to `FFieldIconBuilder<FTextFieldStyle>?`.
 * **Breaking** Change `FSelectSearchFieldProperties.suffixBuilder` type from `FFieldIconBuilder<FSelectSearchStyle>?`
   to `FFieldIconBuilder<FTextFieldStyle>?`.
+* **Breaking** Change `FMultiSelectTagBuilder` `style` parameter type from `FMultiSelectStyle` to
+  `FMultiSelectFieldStyle`.
+* **Breaking** Move `FMultiSelectStyle.tagStyle` to `FMultiSelectFieldStyle.tagStyle`.
+* **Breaking** Rename `FMultiSelectStyle.fieldStyle` to `FMultiSelectStyle.fieldStyles`. Type changed from
+  `FMultiSelectFieldStyle` to `FMultiSelectFieldStyles`.
 * **Breaking** Rename `FSelectStyle.fieldStyle` to `FSelectStyle.fieldStyles`. Type changed from `FTextFieldStyle` to
   `FTextFieldSizeStyles`.
 * **Breaking** Rename `FSelectSearchStyle.fieldStyle` to `FSelectSearchStyle.fieldStyles`. Type changed from

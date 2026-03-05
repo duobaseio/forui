@@ -92,7 +92,7 @@ class FMultiSelectTag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style(context.theme.multiSelectStyle.tagStyle);
+    final style = this.style(context.theme.multiSelectStyle.fieldStyles.md.tagStyle);
     return FTappable(
       style: style.tappableStyle,
       autofocus: autofocus,
@@ -157,7 +157,7 @@ class FMultiSelectTagStyle with Diagnosticable, _$FMultiSelectTagStyleFunctions 
   ///
   /// The vertical padding should typically be the same as the [FMultiSelectFieldStyle.hintPadding].
   @override
-  final EdgeInsets padding;
+  final EdgeInsetsGeometry padding;
 
   /// The spacing between the label and the icon. Defaults to 4.
   @override
@@ -187,43 +187,49 @@ class FMultiSelectTagStyle with Diagnosticable, _$FMultiSelectTagStyleFunctions 
     required this.iconStyle,
     required this.tappableStyle,
     required this.focusedOutlineStyle,
-    this.padding = const EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+    required this.padding,
     this.spacing = 4,
   });
 
   /// Creates a [FMultiSelectTagStyle] that inherits its properties.
-  FMultiSelectTagStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        decoration: FVariants(
-          ShapeDecoration(
-            shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
-            color: colors.secondary,
-          ),
-          variants: {
-            [.hovered, .pressed]: ShapeDecoration(
-              shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
-              color: colors.hover(colors.secondary),
-            ),
-            //
-            [.disabled]: ShapeDecoration(
-              shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
-              color: colors.disable(colors.secondary),
-            ),
-          },
+  factory FMultiSelectTagStyle.inherit({
+    required FColors colors,
+    required FStyle style,
+    required TextStyle textStyle,
+    required EdgeInsetsGeometry padding,
+    required BorderRadiusGeometry borderRadius,
+  }) => FMultiSelectTagStyle(
+    decoration: FVariants(
+      ShapeDecoration(
+        shape: RoundedSuperellipseBorder(borderRadius: borderRadius),
+        color: colors.secondary,
+      ),
+      variants: {
+        [.hovered, .pressed]: ShapeDecoration(
+          shape: RoundedSuperellipseBorder(borderRadius: borderRadius),
+          color: colors.hover(colors.secondary),
         ),
-        labelTextStyle: FVariants.from(
-          typography.sm.copyWith(color: colors.secondaryForeground),
-          variants: {
-            [.disabled]: .delta(color: colors.disable(colors.secondaryForeground)),
-          },
+        //
+        [.disabled]: ShapeDecoration(
+          shape: RoundedSuperellipseBorder(borderRadius: borderRadius),
+          color: colors.disable(colors.secondary),
         ),
-        iconStyle: FVariants.from(
-          IconThemeData(color: colors.mutedForeground, size: 15),
-          variants: {
-            [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
-          },
-        ),
-        tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
-        focusedOutlineStyle: style.focusedOutlineStyle,
-      );
+      },
+    ),
+    labelTextStyle: FVariants.from(
+      textStyle.copyWith(color: colors.secondaryForeground),
+      variants: {
+        [.disabled]: .delta(color: colors.disable(colors.secondaryForeground)),
+      },
+    ),
+    iconStyle: FVariants.from(
+      IconThemeData(color: colors.mutedForeground, size: textStyle.fontSize),
+      variants: {
+        [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
+      },
+    ),
+    tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
+    focusedOutlineStyle: style.focusedOutlineStyle,
+    padding: padding,
+  );
 }
