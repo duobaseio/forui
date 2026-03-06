@@ -400,7 +400,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
           focusedOutlineStyle: style.focusedOutlineStyle,
           onPress: _controller.toggle,
           child: Padding(
-            padding: style.padding,
+            padding: style.collapsedPadding,
             child: IconTheme(data: style.iconStyle, child: const Icon(FIcons.ellipsis)),
           ),
         ),
@@ -430,7 +430,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
           focusedOutlineStyle: style.focusedOutlineStyle,
           onPress: _controller.toggle,
           child: Padding(
-            padding: style.padding,
+            padding: style.collapsedPadding,
             child: IconTheme(data: style.iconStyle, child: const Icon(FIcons.ellipsis)),
           ),
         ),
@@ -449,9 +449,13 @@ class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
   @override
   final IconThemeData iconStyle;
 
-  /// The padding. Defaults to `EdgeInsets.symmetric(horizontal: 6)`.
+  /// The padding for breadcrumb items.
   @override
   final EdgeInsetsGeometry padding;
+
+  /// The padding for collapsed breadcrumb items.
+  @override
+  final EdgeInsetsGeometry collapsedPadding;
 
   /// The tappable's style.
   @override
@@ -467,23 +471,42 @@ class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
     required this.iconStyle,
     required this.tappableStyle,
     required this.focusedOutlineStyle,
-    this.padding = const .symmetric(horizontal: 6),
+    required this.padding,
+    required this.collapsedPadding,
   });
 
   /// Creates a [FBreadcrumbStyle] that inherits its properties.
-  FBreadcrumbStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        textStyle: FVariants.from(
-          typography.sm.copyWith(fontWeight: .w400, color: colors.mutedForeground),
-          variants: {
-            [.hovered, .pressed]: .delta(color: colors.foreground),
-            //
-            [.selected]: .delta(color: colors.foreground),
-            [.selected.and(.hovered), .selected.and(.pressed)]: .delta(color: colors.hover(colors.foreground)),
-          },
-        ),
-        iconStyle: IconThemeData(color: colors.mutedForeground, size: typography.md.fontSize),
-        tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
-        focusedOutlineStyle: style.focusedOutlineStyle,
-      );
+  factory FBreadcrumbStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+    required bool touch,
+  }) {
+    EdgeInsetsGeometry padding;
+    EdgeInsetsGeometry collapsedPadding;
+    if (touch) {
+      padding = const .symmetric(horizontal: 6, vertical: 10);
+      collapsedPadding = const .symmetric(horizontal: 6, vertical: 13);
+    } else {
+      padding = const .symmetric(horizontal: 6);
+      collapsedPadding = const .symmetric(horizontal: 6);
+    }
+
+    return FBreadcrumbStyle(
+      textStyle: FVariants.from(
+        typography.sm.copyWith(color: colors.mutedForeground),
+        variants: {
+          [.hovered, .pressed]: .delta(color: colors.foreground),
+          //
+          [.selected]: .delta(color: colors.foreground),
+          [.selected.and(.hovered), .selected.and(.pressed)]: .delta(color: colors.hover(colors.foreground)),
+        },
+      ),
+      iconStyle: IconThemeData(color: colors.mutedForeground, size: typography.md.fontSize),
+      tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
+      focusedOutlineStyle: style.focusedOutlineStyle,
+      padding: padding,
+      collapsedPadding: collapsedPadding,
+    );
+  }
 }

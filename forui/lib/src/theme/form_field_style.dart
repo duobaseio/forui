@@ -38,25 +38,29 @@ class FFormFieldStyle with Diagnosticable, _$FFormFieldStyleFunctions {
   });
 
   /// Creates a [FFormFieldStyle] that inherits its properties.
-  FFormFieldStyle.inherit({required FColors colors, required FTypography typography})
-    : labelTextStyle = FVariants.from(
-        typography.sm.copyWith(color: colors.foreground, fontWeight: .w500),
+  factory FFormFieldStyle.inherit({required FColors colors, required FTypography typography, required bool touch}) {
+    final textStyle = touch ? typography.xs : typography.sm;
+    return FFormFieldStyle(
+      labelTextStyle: FVariants.from(
+        textStyle.copyWith(color: colors.foreground, fontWeight: .w500),
         variants: {
           [.error]: .delta(color: colors.error),
           [.disabled]: .delta(color: colors.disable(colors.foreground)),
           [.disabled.and(.error)]: .delta(color: colors.disable(colors.error)),
         },
       ),
-      descriptionTextStyle = FVariants.from(
-        typography.sm.copyWith(color: colors.mutedForeground),
+      descriptionTextStyle: FVariants.from(
+        textStyle.copyWith(color: colors.mutedForeground),
         variants: {
           [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
         },
       ),
-      errorTextStyle = FVariants.from(
-        typography.sm.copyWith(color: colors.error),
+      errorTextStyle: FVariants.from(
+        textStyle.copyWith(color: colors.error),
         variants: {
           [.disabled]: .delta(color: colors.disable(colors.error)),
         },
-      );
+      ),
+    );
+  }
 }

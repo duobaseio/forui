@@ -29,7 +29,7 @@ String generateStyles(Map<String, ConstructorFragment> fragments) {
                         if (fragment.wrapped == null) literalNull else literalString(fragment.wrapped!),
                         literalList(_aliases(fragment), refer('String')),
                         literalList(fragment.closure, refer('String')),
-                        literalString(fragment.source),
+                        literalString(fragment.source.replaceAll(r'$', r'\$')),
                       ]))
                     .build(),
             ])

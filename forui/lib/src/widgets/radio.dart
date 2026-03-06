@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
@@ -130,13 +132,13 @@ class FRadio extends StatelessWidget {
                 AnimatedContainer(
                   duration: style.motion.transitionDuration,
                   curve: style.motion.transitionCurve,
-                  padding: const .all(2),
+                  padding: style.padding,
                   decoration: BoxDecoration(
-                    border: .all(color: style.borderColor.resolve(variants)),
+                    border: .all(color: style.borderColor.resolve(variants), width: style.borderWidth),
                     color: style.backgroundColor.resolve(variants),
                     shape: .circle,
                   ),
-                  child: const SizedBox.square(dimension: 10),
+                  child: SizedBox.square(dimension: style.indicatorSize),
                 ),
                 AnimatedContainer(
                   duration: style.motion.transitionDuration,
@@ -146,7 +148,7 @@ class FRadio extends StatelessWidget {
                     duration: style.motion.selectDuration,
                     reverseDuration: style.motion.unselectDuration,
                     curve: style.motion.selectCurve,
-                    child: value ? const SizedBox.square(dimension: 8) : const SizedBox.shrink(),
+                    child: value ? SizedBox.square(dimension: style.indicatorSize) : const SizedBox.shrink(),
                   ),
                 ),
               ],
@@ -182,9 +184,17 @@ class FRadioStyle extends FLabelStyle with _$FRadioStyleFunctions {
   @override
   final FFocusedOutlineStyle focusedOutlineStyle;
 
+  /// The padding between the border and indicator circles.
+  @override
+  final EdgeInsetsGeometry padding;
+
   /// The [FRadio]'s border color.
   @override
   final FVariants<FRadioVariantConstraint, FRadioVariant, Color, Delta> borderColor;
+
+  /// The border width.
+  @override
+  final double borderWidth;
 
   /// The [FRadio]'s background color.
   @override
@@ -194,6 +204,11 @@ class FRadioStyle extends FLabelStyle with _$FRadioStyleFunctions {
   @override
   final FVariants<FRadioVariantConstraint, FRadioVariant, Color, Delta> indicatorColor;
 
+  /// The inner indicator's size.
+  @override
+  final double indicatorSize;
+
+
   /// The motion-related properties.
   @override
   final FRadioMotion motion;
@@ -202,9 +217,12 @@ class FRadioStyle extends FLabelStyle with _$FRadioStyleFunctions {
   const FRadioStyle({
     required this.tappableStyle,
     required this.focusedOutlineStyle,
+    required this.padding,
     required this.borderColor,
+    required this.borderWidth,
     required this.backgroundColor,
     required this.indicatorColor,
+    required this.indicatorSize,
     required super.labelTextStyle,
     required super.descriptionTextStyle,
     required super.errorTextStyle,
@@ -217,11 +235,17 @@ class FRadioStyle extends FLabelStyle with _$FRadioStyleFunctions {
   });
 
   /// Creates a [FRadioStyle] that inherits its properties.
-  factory FRadioStyle.inherit({required FColors colors, required FStyle style}) {
+  factory FRadioStyle.inherit({required FColors colors, required FStyle style, required bool touch}) {
     final label = FLabelStyles.inherit(style: style).horizontalStyle;
+    final (padding, indicatorSize) = switch (touch) {
+      true => (const EdgeInsets.all(3), 12.0),
+      false => (const EdgeInsets.all(3), 8.0),
+    };
+
     return .new(
       tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
       focusedOutlineStyle: FFocusedOutlineStyle(color: colors.primary, borderRadius: .circular(100)),
+      padding: padding,
       borderColor: FVariants(
         colors.mutedForeground,
         variants: {
@@ -231,6 +255,8 @@ class FRadioStyle extends FLabelStyle with _$FRadioStyleFunctions {
           [.error.and(.disabled)]: colors.disable(colors.error),
         },
       ),
+      borderWidth: style.borderWidth,
+      indicatorSize: indicatorSize,
       backgroundColor: FVariants(
         colors.card,
         variants: {

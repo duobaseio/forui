@@ -69,7 +69,7 @@ class TestScaffold extends StatelessWidget {
     return FThemeData(
       colors: colors,
       typography: typography,
-      style: .inherit(colors: colors, typography: typography).copyWith(shadow: []),
+      style: .inherit(colors: colors, typography: typography, touch: true).copyWith(shadow: []),
       touch: true,
     );
   }();

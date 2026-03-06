@@ -63,10 +63,10 @@ class FStyle with Diagnosticable, _$FStyleFunctions {
   });
 
   /// Creates an [FStyle] that inherits its properties.
-  factory FStyle.inherit({required FColors colors, required FTypography typography}) {
+  factory FStyle.inherit({required FColors colors, required FTypography typography, required bool touch}) {
     const borderRadius = FBorderRadius();
     return FStyle(
-      formFieldStyle: .inherit(colors: colors, typography: typography),
+      formFieldStyle: .inherit(colors: colors, typography: typography, touch: touch),
       focusedOutlineStyle: FFocusedOutlineStyle(color: colors.primary, borderRadius: borderRadius.md),
       iconStyle: IconThemeData(color: colors.foreground, size: typography.lg.fontSize),
       tappableStyle: FTappableStyle(),

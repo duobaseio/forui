@@ -131,11 +131,16 @@ class FAlert extends StatelessWidget {
 extension type FAlertStyles(FVariants<FAlertVariantConstraint, FAlertVariant, FAlertStyle, FAlertStyleDelta> _)
     implements FVariants<FAlertVariantConstraint, FAlertVariant, FAlertStyle, FAlertStyleDelta> {
   /// Creates a [FAlertStyles] that inherits its properties.
-  factory FAlertStyles.inherit({required FColors colors, required FTypography typography, required FStyle style}) {
+  factory FAlertStyles.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+    required bool touch,
+  }) {
     final primary = FAlertStyle(
       iconStyle: IconThemeData(color: colors.foreground, size: typography.md.fontSize),
-      titleTextStyle: typography.sm.copyWith(fontWeight: .w500, color: colors.foreground),
-      subtitleTextStyle: typography.sm.copyWith(color: colors.mutedForeground),
+      titleTextStyle: typography.sm.copyWith(fontWeight: .w500, color: colors.foreground, leadingDistribution: .even),
+      subtitleTextStyle: (touch ? typography.xs : typography.sm).copyWith(color: colors.mutedForeground),
       decoration: ShapeDecoration(
         shape: RoundedSuperellipseBorder(
           side: BorderSide(color: colors.border, width: style.borderWidth),

@@ -644,7 +644,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     Iterable<ThemeExtension<dynamic>> extensions = const [],
   }) {
     typography ??= .inherit(colors: colors, touch: touch);
-    style ??= .inherit(colors: colors, typography: typography);
+    style ??= .inherit(colors: colors, typography: typography, touch: touch);
     return ._(
       debugLabel: debugLabel,
       breakpoints: breakpoints,
@@ -656,7 +656,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       autocompleteStyle:
           autocompleteStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       alertStyles: alertStyles == null
-          ? FAlertStyles.inherit(colors: colors, typography: typography, style: style)
+          ? FAlertStyles.inherit(colors: colors, typography: typography, style: style, touch: touch)
           : FAlertStyles(alertStyles),
       avatarStyle: avatarStyle ?? .inherit(colors: colors, typography: typography),
       badgeStyles: badgeStyles == null
@@ -664,13 +664,13 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
           : FBadgeStyles(badgeStyles),
       bottomNavigationBarStyle:
           bottomNavigationBarStyle ?? .inherit(colors: colors, typography: typography, style: style),
-      breadcrumbStyle: breadcrumbStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      breadcrumbStyle: breadcrumbStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       buttonStyles: buttonStyles == null
           ? FButtonStyles.inherit(colors: colors, typography: typography, style: style, touch: touch)
           : FButtonStyles(buttonStyles),
       calendarStyle: calendarStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       cardStyle: cardStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
-      checkboxStyle: checkboxStyle ?? .inherit(colors: colors, style: style),
+      checkboxStyle: checkboxStyle ?? .inherit(colors: colors, style: style, touch: touch),
       circularProgressStyles: circularProgressStyles == null
           ? FCircularProgressSizeStyles.inherit(colors: colors, typography: typography)
           : FCircularProgressSizeStyles(circularProgressStyles),
@@ -702,13 +702,13 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       popoverMenuStyle:
           popoverMenuStyle ?? .inherit(colors: colors, style: style, typography: typography, touch: touch),
       progressStyle: progressStyle ?? .inherit(colors: colors, style: style),
-      radioStyle: radioStyle ?? .inherit(colors: colors, style: style),
+      radioStyle: radioStyle ?? .inherit(colors: colors, style: style, touch: touch),
       resizableStyles: resizableStyles == null
           ? FResizableStyles.inherit(colors: colors, style: style)
           : FResizableStyles(resizableStyles),
       scaffoldStyle: scaffoldStyle ?? .inherit(colors: colors, style: style),
       selectStyle: selectStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
-      selectGroupStyle: selectGroupStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      selectGroupStyle: selectGroupStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       selectMenuTileStyle: selectMenuTileStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       sidebarStyle: sidebarStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       sliderStyles: sliderStyles == null

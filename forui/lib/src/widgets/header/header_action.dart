@@ -238,14 +238,17 @@ class FHeaderActionStyle with Diagnosticable, _$FHeaderActionStyleFunctions {
     required FColors colors,
     required FStyle style,
     required double size,
-    required this.padding,
-  }) : iconStyle = FVariants.from(
-        IconThemeData(color: colors.foreground, size: size),
-        variants: {
-          [.hovered, .pressed]: .delta(color: colors.hover(colors.foreground)),
-          [.disabled]: .delta(color: colors.disable(colors.foreground)),
-        },
-      ),
-      focusedOutlineStyle = style.focusedOutlineStyle,
-      tappableStyle = style.tappableStyle;
+    required EdgeInsetsGeometry padding,
+  }) : this(
+         iconStyle: FVariants.from(
+           IconThemeData(color: colors.foreground, size: size),
+           variants: {
+             [.hovered, .pressed]: .delta(color: colors.hover(colors.foreground)),
+             [.disabled]: .delta(color: colors.disable(colors.foreground)),
+           },
+         ),
+         padding: padding,
+         focusedOutlineStyle: style.focusedOutlineStyle,
+         tappableStyle: style.tappableStyle,
+       );
 }

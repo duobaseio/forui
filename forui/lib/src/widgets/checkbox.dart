@@ -175,7 +175,7 @@ class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
   @override
   final FFocusedOutlineStyle focusedOutlineStyle;
 
-  /// The checkboxes size. Defaults to 16.
+  /// The checkboxes size.
   @override
   final double size;
 
@@ -210,13 +210,20 @@ class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
   });
 
   /// Creates a [FCheckboxStyle] that inherits its properties.
-  factory FCheckboxStyle.inherit({required FColors colors, required FStyle style}) {
+  factory FCheckboxStyle.inherit({required FColors colors, required FStyle style, required bool touch}) {
     final label = FLabelStyles.inherit(style: style).horizontalStyle;
+
+    final (size, iconSize) = switch (touch) {
+      true => (20.0, 18.0),
+      false => (16.0, 14.0),
+    };
+
     return .new(
       tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
       focusedOutlineStyle: style.focusedOutlineStyle.copyWith(borderRadius: .circular(4)),
+      size: size,
       iconStyle: FVariants.from(
-        IconThemeData(color: colors.primaryForeground, size: 14),
+        IconThemeData(color: colors.primaryForeground, size: iconSize),
         variants: {
           [.disabled]: .delta(color: colors.disable(colors.primaryForeground)),
           //

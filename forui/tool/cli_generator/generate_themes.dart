@@ -83,16 +83,19 @@ Map<(String, String?), String> mapThemes(ThemesConstructors themes) {
       final themeFunctionName = '${constructor.theme}${constructor.variant.capitalize()}';
       buffer.writeln('''
         FThemeData get $themeFunctionName {
+          // Change this to false to generate a desktop variant of the theme.
+          const touch = true;
+          
           const colors = ${constructor.colors.startsWith('const ') ? constructor.colors.replaceFirst('const ', '') : constructor.colors};
           
-          final typography = _typography(colors: colors);
-          final style = _style(colors: colors, typography: typography);
+          final typography = _typography(colors: colors, touch: touch);
+          final style = _style(colors: colors, typography: typography, touch: touch);
           
           return FThemeData(
             colors: colors,
             typography: typography,
             style: style,
-            touch: true,
+            touch: touch,
           );
         }
         

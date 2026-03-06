@@ -276,7 +276,12 @@ class FSelectGroupStyle extends FLabelStyle with Diagnosticable, _$FSelectGroupS
   });
 
   /// Creates a [FSelectGroupStyle] that inherits its properties.
-  factory FSelectGroupStyle.inherit({required FColors colors, required FTypography typography, required FStyle style}) {
+  factory FSelectGroupStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+    required bool touch,
+  }) {
     final vertical = FLabelStyles.inherit(style: style).verticalStyle;
 
     final itemLabelTextStyle =
@@ -305,12 +310,12 @@ class FSelectGroupStyle extends FLabelStyle with Diagnosticable, _$FSelectGroupS
         );
 
     return .new(
-      checkboxStyle: .inherit(colors: colors, style: style).copyWith(
+      checkboxStyle: .inherit(colors: colors, style: style, touch: touch).copyWith(
         labelTextStyle: itemLabelTextStyle,
         descriptionTextStyle: itemDescriptionTextStyle,
         errorTextStyle: itemErrorTextStyle,
       ),
-      radioStyle: .inherit(colors: colors, style: style).copyWith(
+      radioStyle: .inherit(colors: colors, style: style, touch: touch).copyWith(
         labelTextStyle: itemLabelTextStyle,
         descriptionTextStyle: itemDescriptionTextStyle,
         errorTextStyle: itemErrorTextStyle,
