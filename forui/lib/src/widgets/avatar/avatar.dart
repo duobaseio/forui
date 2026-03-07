@@ -35,7 +35,7 @@ class FAvatar extends StatelessWidget {
   /// To generate and customize this style:
   ///
   /// ```shell
-  /// dart run forui style create accordion
+  /// dart run forui style create avatar
   /// ```
   final FAvatarStyleDelta style;
 

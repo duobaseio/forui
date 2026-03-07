@@ -22,6 +22,13 @@ class FToast extends StatelessWidget {
   /// ```dart
   /// style: FToastStyle(...)
   /// ```
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create toast
+  /// ```
   final FToastStyleDelta style;
 
   /// An optional icon aligned to the start of the toast (left in LTR locales).

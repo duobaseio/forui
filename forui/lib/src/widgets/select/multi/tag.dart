@@ -31,6 +31,13 @@ class FMultiSelectTag extends StatelessWidget {
   /// ```dart
   /// style: FMultiSelectTagStyle(...)
   /// ```
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create multi-select-tag
+  /// ```
   final FMultiSelectTagStyleDelta style;
 
   /// {@macro forui.foundation.doc_templates.autofocus}

@@ -267,6 +267,13 @@ class FToaster extends StatefulWidget {
   /// ```dart
   /// style: FToasterStyle(...)
   /// ```
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create toaster
+  /// ```
   final FToasterStyleDelta style;
 
   /// The child.

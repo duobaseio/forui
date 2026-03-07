@@ -39,6 +39,13 @@ class FCircularProgress extends StatefulWidget {
   /// ```dart
   /// style: FCircularProgressStyle(...)
   /// ```
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create circular-progress
+  /// ```
   final FCircularProgressStyleDelta style;
 
   /// The semantics label. Defaults to [FLocalizations.progressSemanticsLabel].

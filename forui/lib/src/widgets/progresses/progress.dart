@@ -28,6 +28,13 @@ class FProgress extends StatefulWidget {
   /// ```dart
   /// style: FProgressStyle(...)
   /// ```
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create progress
+  /// ```
   final FProgressStyleDelta style;
 
   /// The semantics label. Defaults to [FLocalizations.progressSemanticsLabel].

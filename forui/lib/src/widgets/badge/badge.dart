@@ -52,7 +52,7 @@ class FBadge extends StatelessWidget {
   /// To generate and customize this style:
   ///
   /// ```shell
-  /// dart run forui style create badge
+  /// dart run forui style create badges
   /// ```
   final FBadgeStyleDelta style;
 

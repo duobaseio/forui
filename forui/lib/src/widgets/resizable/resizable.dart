@@ -50,7 +50,7 @@ class FResizable extends StatefulWidget {
   /// To generate and customize this style:
   ///
   /// ```shell
-  /// dart run forui style create resizable
+  /// dart run forui style create resizables
   /// ```
   final FResizableDividerStyleDelta style;
 

@@ -48,7 +48,7 @@ class FAlert extends StatelessWidget {
   /// To generate and customize this style:
   ///
   /// ```shell
-  /// dart run forui style create alert
+  /// dart run forui style create alerts
   /// ```
   final FAlertStyleDelta style;
 
