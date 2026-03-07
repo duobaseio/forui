@@ -651,8 +651,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       colors: colors,
       typography: typography,
       style: style,
-      accordionStyle:
-          accordionStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
+      accordionStyle: accordionStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       autocompleteStyle:
           autocompleteStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       alertStyles: alertStyles == null
@@ -674,8 +673,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       circularProgressStyles: circularProgressStyles == null
           ? FCircularProgressSizeStyles.inherit(colors: colors, typography: typography)
           : FCircularProgressSizeStyles(circularProgressStyles),
-      dateFieldStyle:
-          dateFieldStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
+      dateFieldStyle: dateFieldStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       determinateProgressStyle: determinateProgressStyle ?? .inherit(colors: colors, style: style),
       dialogRouteStyle: dialogRouteStyle ?? .inherit(colors: colors),
       dialogStyle: dialogStyle ?? .inherit(colors: colors, typography: typography, style: style),
@@ -688,8 +686,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       itemStyles: itemStyles == null
           ? FItemStyles.inherit(colors: colors, typography: typography, style: style, touch: touch)
           : FItemStyles(itemStyles),
-      itemGroupStyle:
-          itemGroupStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
+      itemGroupStyle: itemGroupStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       labelStyles: labelStyles ?? .inherit(style: style),
       lineCalendarStyle: lineCalendarStyle ?? .inherit(colors: colors, typography: typography, style: style),
       multiSelectStyle:
@@ -708,8 +705,10 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
           : FResizableStyles(resizableStyles),
       scaffoldStyle: scaffoldStyle ?? .inherit(colors: colors, style: style),
       selectStyle: selectStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
-      selectGroupStyle: selectGroupStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
-      selectMenuTileStyle: selectMenuTileStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
+      selectGroupStyle:
+          selectGroupStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
+      selectMenuTileStyle:
+          selectMenuTileStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       sidebarStyle: sidebarStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       sliderStyles: sliderStyles == null
           ? FSliderStyles.inherit(colors: colors, typography: typography, style: style)
@@ -724,10 +723,8 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       tileStyles: tileStyles == null
           ? FTileStyles.inherit(colors: colors, typography: typography, style: style)
           : FTileStyles(tileStyles),
-      tileGroupStyle:
-          tileGroupStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
-      timeFieldStyle:
-          timeFieldStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
+      tileGroupStyle: tileGroupStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
+      timeFieldStyle: timeFieldStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       timePickerStyle: timePickerStyle ?? .inherit(colors: colors, typography: typography, style: style),
       tooltipStyle: tooltipStyle ?? .inherit(colors: colors, typography: typography, style: style),
       extensions: .unmodifiable({for (final extension in extensions) extension.type: extension}),

@@ -154,7 +154,11 @@ void main() {
           theme: theme.data,
           locale: const Locale('en', 'SG'),
           alignment: .topCenter,
-          child: const FTimeField.picker(key: key, enabled: false, control: .managed(initial: FTime(10, 30))),
+          child: const FTimeField.picker(
+            key: key,
+            enabled: false,
+            control: .managed(initial: FTime(10, 30)),
+          ),
         ),
       );
 

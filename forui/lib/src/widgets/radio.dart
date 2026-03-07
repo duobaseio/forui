@@ -208,7 +208,6 @@ class FRadioStyle extends FLabelStyle with _$FRadioStyleFunctions {
   @override
   final double indicatorSize;
 
-
   /// The motion-related properties.
   @override
   final FRadioMotion motion;

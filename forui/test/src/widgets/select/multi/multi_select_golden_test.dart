@@ -504,10 +504,7 @@ void main() {
     await expectLater(find.byType(TestScaffold), matchesGoldenFile('multi-select/sort.png'));
   });
 
-  for (final (theme, name) in [
-    (FThemes.neutral.light.desktop, 'desktop'),
-    (FThemes.neutral.light.touch, 'touch'),
-  ]) {
+  for (final (theme, name) in [(FThemes.neutral.light.desktop, 'desktop'), (FThemes.neutral.light.touch, 'touch')]) {
     testWidgets('$name sizes', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(

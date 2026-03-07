@@ -62,7 +62,11 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         locale: const Locale('en', 'SG'),
-        child: FTimeField.picker(key: key, clearable: true, control: .managed(controller: controller)),
+        child: FTimeField.picker(
+          key: key,
+          clearable: true,
+          control: .managed(controller: controller),
+        ),
       ),
     );
 
@@ -92,7 +96,11 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         locale: const Locale('en', 'SG'),
-        child: const FTimeField.picker(key: key, hour24: true, control: .managed(initial: FTime())),
+        child: const FTimeField.picker(
+          key: key,
+          hour24: true,
+          control: .managed(initial: FTime()),
+        ),
       ),
     );
 
@@ -129,7 +137,11 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         locale: const Locale('en', 'SG'),
-        child: FTimeField.picker(key: key, format: .jms('en_SG'), control: const .managed(initial: FTime())),
+        child: FTimeField.picker(
+          key: key,
+          format: .jms('en_SG'),
+          control: const .managed(initial: FTime()),
+        ),
       ),
     );
 

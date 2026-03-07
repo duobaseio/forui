@@ -105,12 +105,7 @@ extension type FHeaderStyles(FVariants<FHeaderVariantConstraint, FHeaderVariant,
     final root = FHeaderStyle(
       systemOverlayStyle: colors.systemOverlayStyle,
       titleTextStyle: typography.xl2.copyWith(color: colors.foreground, fontWeight: .w700, height: 1),
-      actionStyle: .inherit(
-        colors: colors,
-        style: style,
-        size: typography.xl2.fontSize ?? 30,
-        padding: const .all(7),
-      ),
+      actionStyle: .inherit(colors: colors, style: style, size: typography.xl2.fontSize ?? 30, padding: const .all(7)),
       padding: style.pagePadding.copyWith(bottom: 10),
     );
 

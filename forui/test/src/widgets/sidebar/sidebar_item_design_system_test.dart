@@ -19,7 +19,9 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme,
-          child: FSidebar(children: const [FSidebarItem(label: Text('Item'), key: key)]),
+          child: FSidebar(
+            children: const [FSidebarItem(label: Text('Item'), key: key)],
+          ),
         ),
       );
 

@@ -277,9 +277,6 @@ void main() {
     await gesture.moveTo(tester.getCenter(find.text('8')));
     await tester.pumpAndSettle();
 
-    await expectLater(
-      find.byType(TestScaffold),
-      matchesGoldenFile('calendar/neutral-light/day-picker/desktop.png'),
-    );
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('calendar/neutral-light/day-picker/desktop.png'));
   }, experimentalLeakTesting: LeakTesting.settings.withIgnoredAll());
 }

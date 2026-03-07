@@ -211,10 +211,7 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
          ),
          childTextStyle: typography.sm.copyWith(color: colors.foreground),
          iconStyle: .all(
-           IconThemeData(
-             color: colors.mutedForeground,
-             size: touch ? typography.lg.fontSize : typography.md.fontSize,
-           ),
+           IconThemeData(color: colors.mutedForeground, size: touch ? typography.lg.fontSize : typography.md.fontSize),
          ),
          focusedOutlineStyle: style.focusedOutlineStyle,
          dividerStyle: FDividerStyle(color: colors.border, padding: .zero),

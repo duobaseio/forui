@@ -418,57 +418,56 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
     required FTypography typography,
     required FStyle style,
     required bool touch,
-  }) =>
-      .new(
-        decoration: ShapeDecoration(
-          shape: RoundedSuperellipseBorder(
-            side: BorderSide(color: colors.border, width: style.borderWidth),
-            borderRadius: style.borderRadius.md,
-          ),
-        ),
-        dividerColor: .all(colors.border),
-        dividerWidth: style.borderWidth,
-        slideableTiles: const .all(true),
-        labelTextStyle: FVariants.from(
-          typography.sm.copyWith(
-            color: style.formFieldStyle.labelTextStyle.base.color ?? colors.foreground,
-            fontWeight: .w600,
-          ),
-          variants: {
-            [.disabled]: .delta(color: colors.disable(colors.foreground)),
-          },
-        ),
-        tileStyles: FVariants.from(
-          .inherit(
+  }) => .new(
+    decoration: ShapeDecoration(
+      shape: RoundedSuperellipseBorder(
+        side: BorderSide(color: colors.border, width: style.borderWidth),
+        borderRadius: style.borderRadius.md,
+      ),
+    ),
+    dividerColor: .all(colors.border),
+    dividerWidth: style.borderWidth,
+    slideableTiles: const .all(true),
+    labelTextStyle: FVariants.from(
+      typography.sm.copyWith(
+        color: style.formFieldStyle.labelTextStyle.base.color ?? colors.foreground,
+        fontWeight: .w600,
+      ),
+      variants: {
+        [.disabled]: .delta(color: colors.disable(colors.foreground)),
+      },
+    ),
+    tileStyles: FVariants.from(
+      .inherit(
+        colors: colors,
+        typography: typography,
+        style: style,
+      ).copyWith(decoration: .delta([.all(const .shapeDelta(shape: RoundedSuperellipseBorder()))])),
+      variants: {
+        [.destructive]: .delta(
+          contentStyle: FItemContentStyle.inherit(
             colors: colors,
             typography: typography,
-            style: style,
-          ).copyWith(decoration: .delta([.all(const .shapeDelta(shape: RoundedSuperellipseBorder()))])),
-          variants: {
-            [.destructive]: .delta(
-              contentStyle: FItemContentStyle.inherit(
-                colors: colors,
-                typography: typography,
-                prefix: colors.destructive,
-                foreground: colors.destructive,
-                mutedForeground: colors.destructive,
-                padding: FItemStyle.menuInsets(touch: touch).$1,
-              ),
-              rawItemContentStyle: FRawItemContentStyle.inherit(
-                colors: colors,
-                typography: typography,
-                prefix: colors.destructive,
-                color: colors.destructive,
-                padding: FItemStyle.menuInsets(touch: touch).$1,
-              ),
-            ),
-          },
+            prefix: colors.destructive,
+            foreground: colors.destructive,
+            mutedForeground: colors.destructive,
+            padding: FItemStyle.menuInsets(touch: touch).$1,
+          ),
+          rawItemContentStyle: FRawItemContentStyle.inherit(
+            colors: colors,
+            typography: typography,
+            prefix: colors.destructive,
+            color: colors.destructive,
+            padding: FItemStyle.menuInsets(touch: touch).$1,
+          ),
         ),
-        descriptionTextStyle: style.formFieldStyle.descriptionTextStyle.apply([
-          .all(.delta(fontSize: typography.xs2.fontSize, height: typography.xs2.height)),
-        ]),
-        errorTextStyle: style.formFieldStyle.errorTextStyle.apply([
-          .all(.delta(fontSize: typography.xs2.fontSize, height: typography.xs2.height)),
-        ]),
-      );
+      },
+    ),
+    descriptionTextStyle: style.formFieldStyle.descriptionTextStyle.apply([
+      .all(.delta(fontSize: typography.xs2.fontSize, height: typography.xs2.height)),
+    ]),
+    errorTextStyle: style.formFieldStyle.errorTextStyle.apply([
+      .all(.delta(fontSize: typography.xs2.fontSize, height: typography.xs2.height)),
+    ]),
+  );
 }

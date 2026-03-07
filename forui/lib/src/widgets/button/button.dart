@@ -296,7 +296,10 @@ extension type FButtonStyles(
       style: style,
       touch: touch,
       decoration: (radius) => .from(
-        ShapeDecoration(shape: RoundedSuperellipseBorder(borderRadius: radius), color: colors.primary),
+        ShapeDecoration(
+          shape: RoundedSuperellipseBorder(borderRadius: radius),
+          color: colors.primary,
+        ),
         variants: {
           [.hovered, .pressed]: .shapeDelta(color: colors.hover(colors.primary)),
           //
@@ -320,7 +323,10 @@ extension type FButtonStyles(
             style: style,
             touch: touch,
             decoration: (radius) => .from(
-              ShapeDecoration(shape: RoundedSuperellipseBorder(borderRadius: radius), color: colors.secondary),
+              ShapeDecoration(
+                shape: RoundedSuperellipseBorder(borderRadius: radius),
+                color: colors.secondary,
+              ),
               variants: {
                 [.hovered, .pressed]: .shapeDelta(color: colors.hover(colors.secondary)),
                 //
@@ -440,7 +446,8 @@ extension type FButtonSizeStyles(
     required FStyle style,
     required FVariants<FTappableVariantConstraint, FTappableVariant, Decoration, DecorationDelta> Function(
       BorderRadiusGeometry radius,
-    ) decoration,
+    )
+    decoration,
     required Color foregroundColor,
     required Color disabledForegroundColor,
     required bool touch,

@@ -356,62 +356,62 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
     required FTypography typography,
     required bool touch,
   }) : itemGroupStyle = .inherit(colors: colors, style: style, typography: typography, touch: touch).copyWith(
-        decoration: .value(
-          ShapeDecoration(
-            shape: RoundedSuperellipseBorder(
-              side: BorderSide(color: colors.border, width: style.borderWidth),
-              borderRadius: style.borderRadius.md,
-            ),
-          ),
-        ),
-        itemStyles: .delta([
-          .base(
-            .delta(
-              backgroundColor: FVariants.all(colors.card),
-              decoration: .delta([.base(.shapeDelta(color: colors.card))]),
-              contentStyle: FItemContentStyle.inherit(
-                colors: colors,
-                typography: typography,
-                prefix: colors.foreground,
-                foreground: colors.foreground,
-                mutedForeground: colors.mutedForeground,
-                padding: FItemStyle.menuInsets(touch: touch).$1,
-              ),
-              rawItemContentStyle: FRawItemContentStyle.inherit(
-                colors: colors,
-                typography: typography,
-                prefix: colors.foreground,
-                color: colors.foreground,
-                padding: FItemStyle.menuInsets(touch: touch).$1,
-              ),
-            ),
-          ),
-        ]),
-      ),
-      tileGroupStyle = .inherit(colors: colors, style: style, typography: typography, touch: touch).copyWith(
-        tileStyles: .delta([
-          .base(
-            .delta(
-              contentStyle: .delta(
-                prefixIconStyle: FVariants.from(
-                  IconThemeData(color: colors.foreground, size: 18),
-                  variants: {
-                    [.disabled]: .delta(color: colors.disable(colors.foreground)),
-                  },
-                ),
-              ),
-              rawItemContentStyle: .delta(
-                prefixIconStyle: FVariants.from(
-                  IconThemeData(color: colors.foreground, size: 18),
-                  variants: {
-                    [.disabled]: .delta(color: colors.disable(colors.foreground)),
-                  },
-                ),
-              ),
-            ),
-          ),
-        ]),
-      ),
-      maxWidth = 250,
-      super.inherit();
+         decoration: .value(
+           ShapeDecoration(
+             shape: RoundedSuperellipseBorder(
+               side: BorderSide(color: colors.border, width: style.borderWidth),
+               borderRadius: style.borderRadius.md,
+             ),
+           ),
+         ),
+         itemStyles: .delta([
+           .base(
+             .delta(
+               backgroundColor: FVariants.all(colors.card),
+               decoration: .delta([.base(.shapeDelta(color: colors.card))]),
+               contentStyle: FItemContentStyle.inherit(
+                 colors: colors,
+                 typography: typography,
+                 prefix: colors.foreground,
+                 foreground: colors.foreground,
+                 mutedForeground: colors.mutedForeground,
+                 padding: FItemStyle.menuInsets(touch: touch).$1,
+               ),
+               rawItemContentStyle: FRawItemContentStyle.inherit(
+                 colors: colors,
+                 typography: typography,
+                 prefix: colors.foreground,
+                 color: colors.foreground,
+                 padding: FItemStyle.menuInsets(touch: touch).$1,
+               ),
+             ),
+           ),
+         ]),
+       ),
+       tileGroupStyle = .inherit(colors: colors, style: style, typography: typography, touch: touch).copyWith(
+         tileStyles: .delta([
+           .base(
+             .delta(
+               contentStyle: .delta(
+                 prefixIconStyle: FVariants.from(
+                   IconThemeData(color: colors.foreground, size: 18),
+                   variants: {
+                     [.disabled]: .delta(color: colors.disable(colors.foreground)),
+                   },
+                 ),
+               ),
+               rawItemContentStyle: .delta(
+                 prefixIconStyle: FVariants.from(
+                   IconThemeData(color: colors.foreground, size: 18),
+                   variants: {
+                     [.disabled]: .delta(color: colors.disable(colors.foreground)),
+                   },
+                 ),
+               ),
+             ),
+           ),
+         ]),
+       ),
+       maxWidth = 250,
+       super.inherit();
 }

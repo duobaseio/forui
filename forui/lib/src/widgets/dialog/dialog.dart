@@ -543,11 +543,7 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
   });
 
   /// Creates a [FDialogStyle] that inherits its properties.
-  factory FDialogStyle.inherit({
-    required FStyle style,
-    required FColors colors,
-    required FTypography typography,
-  }) {
+  factory FDialogStyle.inherit({required FStyle style, required FColors colors, required FTypography typography}) {
     final title = typography.lg.copyWith(fontWeight: .w600, color: colors.foreground);
     final body = typography.sm.copyWith(color: colors.mutedForeground);
 
