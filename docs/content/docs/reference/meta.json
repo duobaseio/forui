@@ -3,6 +3,7 @@
     "cli",
     "icon-library",
     "hooks",
+    "llms",
     "external:[API Reference](https://pub.dev/documentation/forui)",
     "external:[Pub Dev](https://pub.dev/packages/forui)"
   ],
