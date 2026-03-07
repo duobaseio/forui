@@ -193,6 +193,53 @@ void main() {
     });
   });
 
+  group('overlay isolation', () {
+    testWidgets('FTappable inside FPortal does not register with outer FTappableGroup', (tester) async {
+      final controller = OverlayPortalController();
+      var outerPressed = 0;
+      var innerPressed = 0;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTappableGroup(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SizedBox(
+                  key: const ValueKey('outer'),
+                  height: 50,
+                  width: 200,
+                  child: FTappable(onPress: () => outerPressed++, child: const Text('Outer')),
+                ),
+                FPortal(
+                  controller: controller,
+                  portalBuilder: (context, _) => SizedBox(
+                    key: const ValueKey('inner'),
+                    height: 50,
+                    width: 200,
+                    child: FTappable(onPress: () => innerPressed++, child: const Text('Inner')),
+                  ),
+                  child: const SizedBox.shrink(),
+                ),
+              ],
+            ),
+          ),
+        ),
+      );
+
+      controller.show();
+      await tester.pumpAndSettle();
+
+      // Tap the inner tappable inside the overlay.
+      await tester.tap(find.byKey(const ValueKey('inner')));
+      await tester.pumpAndSettle();
+
+      // The inner tappable should fire its own onPress, not be intercepted by the outer group.
+      expect(innerPressed, 1);
+      expect(outerPressed, 0);
+    });
+  });
+
   group('hover and focus', () {
     testWidgets('hover still works', (tester) async {
       await tester.pumpWidget(buildGroup([(label: 'A', key: null, onPress: () {})]));

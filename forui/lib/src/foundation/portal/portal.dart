@@ -178,7 +178,9 @@ class _State extends State<FPortal> {
                 portal = Stack(children: [barrier, portal]);
               }
 
-              return portal;
+              // Prevents the portal from inheriting FTappableGroups in the widget.builder/widget.child since
+              // FTappableGroup does not hit test across layers.
+              return FTappableGroup.isolate(child: portal);
             },
             child: RepaintBoundary(child: widget.builder(context, _controller, widget.child)),
           ),

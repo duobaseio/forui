@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:forui/forui.dart';
+
 @internal
 extension Control on Never {
   /// {@template forui.foundation.doc_templates.control}
@@ -78,6 +80,22 @@ extension Semantics on Never {
   /// {@endtemplate}
   @internal
   static const semanticsLabel = '';
+}
+
+@internal
+extension TappableGroup on Never {
+  /// {@template forui.foundation.FTappableGroup.overlay}
+  /// ## Why do tappables inside [OverlayPortal]s sometimes not respond to taps?
+  ///
+  /// Wrap the overlay content in [FTappableGroup.isolate].
+  ///
+  /// This is probably caused by the [OverlayPortal] being wrapped in an [FTappableGroup]. Since an [OverlayPortal]
+  /// reparents inherited widgets, the [FTappable]s are registered with the ancestor [FTappableGroup] which does not hit
+  /// test across rendering layers.
+  ///
+  /// [FPortal]-based widgets handle this automatically.
+  /// {@endtemplate}
+  static const overlay = '';
 }
 
 @internal

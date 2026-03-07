@@ -144,6 +144,8 @@ mixin FItemMixin on Widget {
 /// );
 /// ```
 ///
+/// {@macro forui.foundation.FTappableGroup.overlay}
+///
 /// See:
 /// * https://forui.dev/docs/data/item for working examples.
 /// * [FTile] for a specialized item for touch devices.

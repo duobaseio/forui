@@ -29,6 +29,8 @@ part 'button.design.dart';
 /// [FButton] typically contains icons and/or a label. If the [onPress] and [onLongPress] callbacks are null, then this
 /// button will be disabled, and it will not react to touch.
 ///
+/// {@macro forui.foundation.FTappableGroup.overlay}
+///
 /// See:
 /// * https://forui.dev/docs/form/button for working examples.
 /// * [FButtonStyle] for customizing a button's appearance.

@@ -40,6 +40,8 @@ part 'tile.design.dart';
 /// );
 /// ```
 ///
+/// {@macro forui.foundation.FTappableGroup.overlay}
+///
 ///
 /// See:
 /// * https://forui.dev/docs/tile/tile for working examples.

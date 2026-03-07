@@ -12,7 +12,28 @@ import 'package:forui/src/foundation/tappable/tappable_group_recognizer.dart';
 ///
 /// Only primary press and long-press gestures are group-managed. Other gestures like [FTappable.onDoubleTap],
 /// [FTappable.onSecondaryPress], and [FTappable.onSecondaryLongPress] remain on individual tappables.
+///
+/// {@macro forui.foundation.FTappableGroup.overlay}
 class FTappableGroup extends StatefulWidget {
+  /// Prevents widgets in the [child] subtree from registering with ancestor [FTappableGroup]s.
+  ///
+  /// This is required when an [OverlayPortal] inside an [FTappableGroup] contains [FTappable]s since [OverlayPortal]s
+  /// reparent inherited widgets but [FTappableGroup]s do not hit test across rendering layers.
+  ///
+  /// ```dart
+  /// FTappableGroup(
+  ///   child: OverlayPortal(
+  ///     overlayChildBuilder: (context) => FTappableGroup.isolate(
+  ///       child: FTappable(onPress: () {}, child: Text('Inside overlay')),
+  ///     ),
+  ///     child: child,
+  ///   ),
+  /// );
+  /// ```
+  ///
+  /// [FPortal] automatically applies this.
+  static Widget isolate({required Widget child}) => TappableGroupScope(entries: null, child: child);
+
   /// The child widget, typically containing multiple [FTappable]s.
   final Widget child;
 
@@ -46,7 +67,7 @@ class TappableGroupScope extends InheritedWidget {
   static List<GroupEntry>? maybeOf(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<TappableGroupScope>()?.entries;
 
-  final List<GroupEntry> entries;
+  final List<GroupEntry>? entries;
 
   const TappableGroupScope({required this.entries, required super.child, super.key});
 

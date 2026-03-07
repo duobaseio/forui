@@ -131,6 +131,8 @@ mixin FItemGroupMixin on Widget {
 /// );
 /// ```
 ///
+/// {@macro forui.foundation.FTappableGroup.overlay}
+///
 ///
 /// See:
 /// * https://forui.dev/docs/data/item-group for working examples.
