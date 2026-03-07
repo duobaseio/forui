@@ -102,7 +102,7 @@ class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFunctions {
   @override
   final EdgeInsetsGeometry padding;
 
-  /// The spacing between prefix, child, and suffix..
+  /// The spacing between prefix, child, and suffix.
   @override
   final double spacing;
 

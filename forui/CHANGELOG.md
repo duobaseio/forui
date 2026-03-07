@@ -14,15 +14,14 @@ sizes consistent across each platform.
 ### `FAutocomplete`
 * Add `FAutocomplete.size`.
 * Add `FAutocompleteSizeStyles`.
+* Add `FAutocompleteFieldStyle`.
 
 * Change `FAutocompleteSection` layout to better align with the latest shadcn version.
 
-* **Breaking** Change `FAutocompleteStyle` to extend `FTextFieldStyle`. The `fieldStyles` field is removed; text field
-  properties are now inherited.
-* **Breaking** Change `FAutocompleteStyle.composingTextStyle` and `FAutocompleteStyle.typeaheadTextStyle` type from
-  `FVariants<FTextFieldVariantConstraint, FTextFieldVariant, TextStyle, TextStyleDelta>` to `TextStyle`.
-* **Breaking** Rename `FThemeData.autocompleteStyle` to `FThemeData.autocompleteStyles`. Type changed from
-  `FAutocompleteStyle` to `FAutocompleteSizeStyles`.
+* **Breaking** Rename `FAutocompleteStyle.fieldStyle` to `FAutocompleteStyle.fieldStyles`. Type changed from
+  `FTextFieldStyle` to `FAutocompleteSizeStyles`.
+* **Breaking** Move `FAutocompleteStyle.composingTextStyle` and `FAutocompleteStyle.typeaheadTextStyle` to
+  `FAutocompleteFieldStyle`.
 
 
 ### `FBadge`

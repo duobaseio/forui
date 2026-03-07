@@ -718,72 +718,75 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
                   autofocus: (value) => _controller.value.lastOrNull == value,
                 ),
               ),
-              child: FTappable(
-                style: fieldStyle.tappableStyle,
-                focusNode: _focus,
-                onPress: widget.enabled ? _toggle : null,
-                builder: (context, tappableVariants, child) {
-                  final variants = <FVariant>{...tappableVariants, ...formVariants};
-                  return DecoratedBox(
-                    decoration: fieldStyle.decoration.resolve(variants),
-                    child: Padding(
-                      padding: padding.copyWith(top: 0, bottom: 0),
-                      child: DefaultTextStyle.merge(
-                        textAlign: widget.textAlign,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            if (widget.prefixBuilder case final prefix?)
-                              prefix(context, fieldStyle, variants as Set<FTextFieldVariant>),
-                            Expanded(
-                              child: Padding(
-                                padding: padding.copyWith(left: 0, right: 0),
-                                child: Wrap(
-                                  crossAxisAlignment: WrapCrossAlignment.center,
-                                  spacing: fieldStyle.spacing,
-                                  runSpacing: fieldStyle.runSpacing,
-                                  children: [
-                                    for (final value in values)
-                                      widget.tagBuilder(
-                                        context,
-                                        widget.enabled,
-                                        _controller,
-                                        fieldStyle,
-                                        value,
-                                        widget.format(value),
-                                      ),
-                                    if (widget.keepHint || _controller.value.isEmpty)
-                                      Padding(
-                                        padding: fieldStyle.hintPadding,
-                                        child: DefaultTextStyle.merge(
-                                          style: fieldStyle.hintTextStyle.resolve(variants),
-                                          child: widget.hint ?? Text(localizations.multiSelectHint),
+              child: MultiSelectFieldScope(
+                style: fieldStyle,
+                child: FTappable(
+                  style: fieldStyle.tappableStyle,
+                  focusNode: _focus,
+                  onPress: widget.enabled ? _toggle : null,
+                  builder: (context, tappableVariants, child) {
+                    final variants = <FVariant>{...tappableVariants, ...formVariants};
+                    return DecoratedBox(
+                      decoration: fieldStyle.decoration.resolve(variants),
+                      child: Padding(
+                        padding: padding.copyWith(top: 0, bottom: 0),
+                        child: DefaultTextStyle.merge(
+                          textAlign: widget.textAlign,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              if (widget.prefixBuilder case final prefix?)
+                                prefix(context, fieldStyle, variants as Set<FTextFieldVariant>),
+                              Expanded(
+                                child: Padding(
+                                  padding: padding.copyWith(left: 0, right: 0),
+                                  child: Wrap(
+                                    crossAxisAlignment: WrapCrossAlignment.center,
+                                    spacing: fieldStyle.spacing,
+                                    runSpacing: fieldStyle.runSpacing,
+                                    children: [
+                                      for (final value in values)
+                                        widget.tagBuilder(
+                                          context,
+                                          widget.enabled,
+                                          _controller,
+                                          fieldStyle,
+                                          value,
+                                          widget.format(value),
                                         ),
-                                      ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            if (widget.enabled && widget.clearable && _controller.value.isNotEmpty)
-                              Padding(
-                                padding: fieldStyle.clearButtonPadding,
-                                child: FButton.icon(
-                                  style: fieldStyle.clearButtonStyle,
-                                  onPress: () => _controller.value = {},
-                                  child: Icon(
-                                    FIcons.x,
-                                    semanticLabel: localizations.textFieldClearButtonSemanticsLabel,
+                                      if (widget.keepHint || _controller.value.isEmpty)
+                                        Padding(
+                                          padding: fieldStyle.hintPadding,
+                                          child: DefaultTextStyle.merge(
+                                            style: fieldStyle.hintTextStyle.resolve(variants),
+                                            child: widget.hint ?? Text(localizations.multiSelectHint),
+                                          ),
+                                        ),
+                                    ],
                                   ),
                                 ),
                               ),
-                            if (widget.suffixBuilder case final suffix?)
-                              suffix(context, fieldStyle, variants as Set<FTextFieldVariant>),
-                          ],
+                              if (widget.enabled && widget.clearable && _controller.value.isNotEmpty)
+                                Padding(
+                                  padding: fieldStyle.clearButtonPadding,
+                                  child: FButton.icon(
+                                    style: fieldStyle.clearButtonStyle,
+                                    onPress: () => _controller.value = {},
+                                    child: Icon(
+                                      FIcons.x,
+                                      semanticLabel: localizations.textFieldClearButtonSemanticsLabel,
+                                    ),
+                                  ),
+                                ),
+                              if (widget.suffixBuilder case final suffix?)
+                                suffix(context, fieldStyle, variants as Set<FTextFieldVariant>),
+                            ],
+                          ),
                         ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             ),
           ),
@@ -804,4 +807,23 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
     required bool autofocusFirst,
     required bool Function(T) autofocus,
   });
+}
+
+@internal
+class MultiSelectFieldScope extends InheritedWidget {
+  static MultiSelectFieldScope? maybeOf(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<MultiSelectFieldScope>();
+
+  final FMultiSelectFieldStyle style;
+
+  const MultiSelectFieldScope({required this.style, required super.child, super.key});
+
+  @override
+  bool updateShouldNotify(MultiSelectFieldScope old) => style != old.style;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('style', style));
+  }
 }

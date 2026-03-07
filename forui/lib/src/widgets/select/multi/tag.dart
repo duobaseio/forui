@@ -92,7 +92,9 @@ class FMultiSelectTag extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style(context.theme.multiSelectStyle.fieldStyles.md.tagStyle);
+    final style = this.style(
+      MultiSelectFieldScope.maybeOf(context)?.style.tagStyle ?? context.theme.multiSelectStyle.fieldStyles.md.tagStyle,
+    );
     return FTappable(
       style: style.tappableStyle,
       autofocus: autofocus,

@@ -210,7 +210,7 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
   @override
   final int? startDayOfWeek;
 
-  /// The tile's size. Defaults to 44 on touch platforms and 32 on desktop.
+  /// The tile's size.
   @override
   final double tileSize;
 

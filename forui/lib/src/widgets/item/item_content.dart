@@ -46,8 +46,8 @@ class ItemContent extends StatelessWidget {
     super.key,
   }) : assert(
          (dividerForeground != null && dividerWidth != null) || dividerType == .none,
-         'dividerColor and dividerWidth must be provided if dividerType is not FItemDivider.none. This is a bug unless '
-         "you're creating your own custom item container.",
+         'dividerForeground and dividerWidth must be provided if dividerType is not FItemDivider.none. This is a bug '
+         "unless you're creating your own custom item container.",
        );
 
   @override

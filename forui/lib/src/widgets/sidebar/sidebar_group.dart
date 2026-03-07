@@ -34,7 +34,7 @@ class FSidebarGroup extends StatelessWidget {
   /// To generate and customize this style:
   ///
   /// ```shell
-  /// dart run forui style create sidebar
+  /// dart run forui style create sidebar-group
   /// ```
   final FSidebarGroupStyleDelta style;
 

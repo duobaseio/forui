@@ -34,7 +34,7 @@ class FSidebarItem extends StatefulWidget {
   /// To generate and customize this style:
   ///
   /// ```shell
-  /// dart run forui style create sidebar
+  /// dart run forui style create sidebar-item
   /// ```
   final FSidebarItemStyleDelta style;
 
