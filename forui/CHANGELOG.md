@@ -89,6 +89,8 @@ sizes consistent across each platform.
 * **Breaking** Rename `FDateFieldStyle.fieldStyle` to `FDateFieldStyle.fieldStyles`. Type changed from
   `FTextFieldStyle` to `FTextFieldSizeStyles`.
 
+* Fix `FDateField.calendar` clear button not resetting controller value to null.
+
 
 ### `FDialog`
 * Add `FDialogStyle.slideableActions` for slide-across interaction between dialog actions.
@@ -202,15 +204,21 @@ sizes consistent across each platform.
 
 
 ### `FTimeField`
+* Add `FTimeField.clearable`.
 * Add `FTimeField.size`.
 
 * **Breaking** Rename `FTimeFieldStyle.fieldStyle` to `FTimeFieldStyle.fieldStyles`. Type changed from
   `FTextFieldStyle` to `FTextFieldSizeStyles`.
 
+* Fix `FTimeField.picker` not showing hint text when no initial time is provided.
+* Fix `FTimeField.picker` clear button not resetting controller value to null.
+
 
 ### `FTextField` & `FTextFormField`
 * Add `FTextField.size` and `FTextFormField.size` for `sm`, `md`, and `lg` size variants.
 * Add `FTextFieldSizeStyles` and `FTextFieldSizeVariant`.
+
+* Fix `FTextField.clearable` clear icon not appearing immediately when text changes while focused.
 
 
 ### `FTheme` & `FBasicTheme`

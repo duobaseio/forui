@@ -141,6 +141,33 @@ void main() {
       expect(find.text('Testing'), findsNothing);
     });
 
+    testWidgets('shows clear icon when controller text changes while focused', (tester) async {
+      final controller = TextEditingController();
+      addTearDown(controller.dispose);
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: FThemes.neutral.light.touch,
+          child: FTextField(
+            control: .managed(controller: controller),
+            clearable: (value) => value.text.isNotEmpty,
+          ),
+        ),
+      );
+
+      // Focus the field first
+      await tester.tap(find.byType(EditableText));
+      await tester.pumpAndSettle();
+
+      expect(find.bySemanticsLabel('Clear'), findsNothing);
+
+      // Programmatically set text while already focused
+      controller.text = 'hello';
+      await tester.pumpAndSettle();
+
+      expect(find.bySemanticsLabel('Clear'), findsOneWidget);
+    });
+
     testWidgets('suffix & clears text-field', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(

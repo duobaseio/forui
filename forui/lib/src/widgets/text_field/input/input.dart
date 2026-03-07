@@ -259,6 +259,9 @@ class _InputState extends State<Input> {
     super.initState();
     _statesController = widget.statesController ?? .new();
     _statesController.addListener(_handleStatesChange);
+    if (widget.clearable != Input.defaultClearable) {
+      widget.controller.addListener(_handleTextChange);
+    }
     _error = widget.error ?? const SizedBox();
   }
 
@@ -277,6 +280,13 @@ class _InputState extends State<Input> {
       _error = widget.error ?? const SizedBox();
     }
 
+    if (widget.clearable != old.clearable || widget.controller != old.controller) {
+      old.controller.removeListener(_handleTextChange);
+      if (widget.clearable != Input.defaultClearable) {
+        widget.controller.addListener(_handleTextChange);
+      }
+    }
+
     if (widget.error != null && old.error != null) {
       // Error content changed but controller won't fire (both non-null)
       _error = widget.error ?? const SizedBox();
@@ -290,6 +300,12 @@ class _InputState extends State<Input> {
       });
     }
   });
+
+  void _handleTextChange() {
+    if (mounted) {
+      setState(() {});
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -463,6 +479,7 @@ class _InputState extends State<Input> {
 
   @override
   void dispose() {
+    widget.controller.removeListener(_handleTextChange);
     if (widget.statesController == null) {
       _statesController.dispose();
     } else {

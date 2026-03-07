@@ -233,6 +233,38 @@ void main() {
 
       expect(find.bySemanticsLabel('Clear'), findsOne);
     });
+
+    testWidgets('clearing resets controller value', (tester) async {
+      final controller = autoDispose(FDateFieldController());
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          locale: const Locale('en', 'SG'),
+          child: FDateField.calendar(
+            key: key,
+            today: .utc(2025, 1, 15),
+            clearable: true,
+            control: .managed(controller: controller),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('15'));
+      await tester.pumpAndSettle(const Duration(seconds: 3));
+
+      expect(controller.value, DateTime.utc(2025, 1, 15));
+      expect(find.bySemanticsLabel('Clear'), findsOne);
+
+      await tester.tap(find.bySemanticsLabel('Clear'));
+      await tester.pumpAndSettle();
+
+      expect(controller.value, null);
+      expect(find.bySemanticsLabel('Clear'), findsNothing);
+      expect(find.text('Pick a date'), findsOneWidget);
+    });
   });
 
   group('focus', () {

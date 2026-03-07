@@ -46,8 +46,8 @@ class TimeInput extends Input<FTime?> {
     required super.canRequestFocus,
     required super.prefixBuilder,
     required super.suffixBuilder,
+    required super.clearable,
     required super.localizations,
-    super.clearable = false,
     super.key,
   });
 
@@ -120,6 +120,9 @@ class _TimeFieldState extends InputState<TimeInput, FTime?> {
       widget.style.fieldStyles.resolve({widget.size, widget.platformVariant}),
     );
   }
+
+  @override
+  bool clearable(TextEditingValue value) => value.text != inputController.placeholder;
 
   @override
   @protected

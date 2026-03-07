@@ -106,6 +106,9 @@ abstract class FTimeField extends StatefulWidget {
   /// no suffix.
   final FFieldIconBuilder<FTextFieldStyle>? suffixBuilder;
 
+  /// If true, the input field will show a clear button when a time is selected. Defaults to false.
+  final bool clearable;
+
   /// The label.
   final Widget? label;
 
@@ -154,6 +157,7 @@ abstract class FTimeField extends StatefulWidget {
     this.builder = _fieldBuilder,
     this.prefixBuilder = defaultIconBuilder,
     this.suffixBuilder,
+    this.clearable = false,
     this.label,
     this.description,
     this.enabled = true,
@@ -186,6 +190,8 @@ abstract class FTimeField extends StatefulWidget {
   ///
   /// If [canRequestFocus] is false, the input field cannot obtain focus but can still be selected.
   ///
+  /// If [clearable] is true, the input field will show a clear button when a time is selected. Defaults to false.
+  ///
   /// See also:
   /// * [FTimeField.picker] - Creates a time field with only a picker.
   const factory FTimeField({
@@ -199,6 +205,7 @@ abstract class FTimeField extends StatefulWidget {
     FFieldBuilder<FTimeFieldStyle> builder,
     FFieldIconBuilder<FTextFieldStyle>? prefixBuilder,
     FFieldIconBuilder<FTextFieldStyle>? suffixBuilder,
+    bool clearable,
     TextInputAction? textInputAction,
     TextAlign textAlign,
     TextAlignVertical? textAlignVertical,
@@ -262,6 +269,8 @@ abstract class FTimeField extends StatefulWidget {
   /// [hourInterval] and [minuteInterval] control the increment/decrement interval of the hour and minute respectively.
   /// Default to 1.
   ///
+  /// If [clearable] is true, the input field will show a clear button when a time is selected. Defaults to false.
+  ///
   /// See also:
   /// * [FTimeField.new] - Creates a time field with only an input field.
   const factory FTimeField.picker({
@@ -294,6 +303,7 @@ abstract class FTimeField extends StatefulWidget {
     FFieldBuilder<FTimeFieldStyle> builder,
     FFieldIconBuilder<FTextFieldStyle>? prefixBuilder,
     FFieldIconBuilder<FTextFieldStyle>? suffixBuilder,
+    bool clearable,
     Widget? label,
     Widget? description,
     bool enabled,
@@ -319,6 +329,7 @@ abstract class FTimeField extends StatefulWidget {
       ..add(ObjectFlagProperty.has('builder', builder))
       ..add(ObjectFlagProperty.has('prefixBuilder', prefixBuilder))
       ..add(ObjectFlagProperty.has('suffixBuilder', suffixBuilder))
+      ..add(FlagProperty('clearable', value: clearable, ifTrue: 'clearable'))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
       ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
       ..add(ObjectFlagProperty.has('onSaved', onSaved))

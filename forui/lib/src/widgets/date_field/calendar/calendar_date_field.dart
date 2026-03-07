@@ -117,6 +117,7 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
   @override
   void initState() {
     super.initState();
+    _textController.addListener(_onTextChange);
     _popoverController = widget.popoverControl.create(_handleOnPopoverChange, this);
     _controller = widget.control.create(_handleOnChange, this);
   }
@@ -145,8 +146,16 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
   void dispose() {
     widget.popoverControl.dispose(_popoverController, _handleOnPopoverChange);
     widget.control.dispose(_controller, _handleOnChange);
-    _textController.dispose();
+    _textController
+      ..removeListener(_onTextChange)
+      ..dispose();
     super.dispose();
+  }
+
+  void _onTextChange() {
+    if (_textController.text.isEmpty) {
+      _controller.value = null;
+    }
   }
 
   void _handleOnChange() {

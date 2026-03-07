@@ -148,6 +148,24 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-field/${theme.name}/picker/text.png'));
     });
 
+    testWidgets('${theme.name} text disabled', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          locale: const Locale('en', 'SG'),
+          alignment: .topCenter,
+          child: const FTimeField.picker(key: key, enabled: false, control: .managed(initial: FTime(10, 30))),
+        ),
+      );
+
+      await tester.pumpAndSettle();
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('time-field/${theme.name}/picker/text-disabled.png'),
+      );
+    });
+
     testWidgets('${theme.name} disabled', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(

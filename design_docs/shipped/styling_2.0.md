@@ -1,7 +1,7 @@
 # Styling 2.0
 
 Author: Matt (Pante)
-Status: Shipped (Forui 0.18.0)
+Status: Initially shipped in Forui 0.18.0. Further amendments made in 0.19.0 and 0.20.0.
 
 ## Summary
 
@@ -209,6 +209,28 @@ Foo(
 
 Style deltas will be generated while Flutter type deltas, e.g. `BoxDecoration`, and sentinel values will be manually
 implemented.
+
+Some manually implemented delta types support additional operations beyond `.delta(...)` and `.value(...)`. For example,
+`EdgeInsets` deltas  also provide `.add(...)` for additive modifications and `.scale(...)` for multiplicative scaling.
+
+```dart
+abstract class EdgeInsetsDelta with Delta {
+  const factory EdgeInsetsDelta.delta({double? left, double? top, double? right, double? bottom}) = _Delta;
+
+  const factory EdgeInsetsDelta.add({double? left, double? top, double? right, double? bottom}) = _Add;
+
+  const factory EdgeInsetsDelta.scale(double factor) = _Scale;
+
+  const factory EdgeInsetsDelta.value(EdgeInsets insets) = _Value;
+}
+```
+
+Usage:
+```dart
+.add(left: 5)(.fromLTRB(10, 20, 30, 40));    // .fromLTRB(15, 20, 30, 40) — adds to edges
+.scale(0.5)(.all(10));                        // .all(5) — scales all edges
+```
+
 
 ### Alternatives
 
@@ -684,6 +706,10 @@ We observe that a base value **is** the default value, and modifications are del
 [simplifying style modification](#2-simplifying-style-modification), `FVariants` will have `base` field and can be 
 created using either mapping to deltas or concrete values.
 
+For semantic variants like sizes, the default size (e.g., `md`) is registered as an explicit entry in the `variants` map 
+in addition to being set as `base`. This allows `.md` to be modified without affecting all other variants as modifying
+`base` will.
+
 ```dart
 class FVariants<K extends FVariantConstraint, E extends FVariant, V, D extends Delta>
     implements FVariantsDelta<K, E, V, D>, FVariantsValueDelta<K, E, V, D> {
@@ -703,6 +729,7 @@ FooStyle(
     16,
     variants: {
       [.compact]: 8,
+      [.md]: 16, // Explicit entry for the default semantic variant
       [.expanded]: 24,
     },
   ),
@@ -848,6 +875,30 @@ final updated = variants.apply([
   .all(.delta(color: Colors.blue)),
   .exact({.disabled}, .delta(color: Colors.grey)),
 ]);
+```
+
+Some `FVariants` will also be wrapped in an extension type. Doing so allows us to:
+* Consolidate initialization logic in the extension type's `inherit(...)` constructor.
+* Provide a meaningful (and terser) alias for the generic `FVariants` type.
+* Provide convenience getters which improve readability.
+
+```dart
+/// [FButtonStyle]'s size styles.
+extension type FButtonSizeStyles(
+  FVariants<FButtonSizeVariantConstraint, FButtonSizeVariant, FButtonStyle, FButtonStyleDelta> _
+) implements FVariants<FButtonSizeVariantConstraint, FButtonSizeVariant, FButtonStyle, FButtonStyleDelta> {
+  /// The extra small button style.
+  FButtonStyle get xs => resolve({FButtonSizeVariant.xs});
+
+  /// The small button style.
+  FButtonStyle get sm => resolve({FButtonSizeVariant.sm});
+
+  /// The medium (default) button style.
+  FButtonStyle get md => resolve({FButtonSizeVariant.md});
+
+  /// The large button style.
+  FButtonStyle get lg => resolve({FButtonSizeVariant.lg});
+}
 ```
 
 

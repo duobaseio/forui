@@ -56,17 +56,46 @@ void main() {
     });
   }
 
+  testWidgets('clearable', (tester) async {
+    final controller = autoDispose(FTimeFieldController());
+
+    await tester.pumpWidget(
+      TestScaffold.app(
+        locale: const Locale('en', 'SG'),
+        child: FTimeField.picker(key: key, clearable: true, control: .managed(controller: controller)),
+      ),
+    );
+
+    expect(find.bySemanticsLabel('Clear'), findsNothing);
+
+    await tester.tap(find.byKey(key));
+    await tester.pumpAndSettle();
+
+    await tester.drag(find.byType(BuilderWheel).first, const Offset(0, 50));
+    await tester.pumpAndSettle();
+
+    await tester.tapAt(.zero);
+    await tester.pumpAndSettle();
+
+    expect(find.bySemanticsLabel('Clear'), findsOneWidget);
+    expect(controller.value, isNotNull);
+
+    await tester.tap(find.bySemanticsLabel('Clear'));
+    await tester.pumpAndSettle();
+
+    expect(find.bySemanticsLabel('Clear'), findsNothing);
+    expect(controller.value, null);
+    expect(find.text('Pick a time'), findsOneWidget);
+  });
+
   testWidgets('24 hours', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
         locale: const Locale('en', 'SG'),
-        child: const FTimeField.picker(key: key, hour24: true),
+        child: const FTimeField.picker(key: key, hour24: true, control: .managed(initial: FTime())),
       ),
     );
 
-    await tester.tap(find.byKey(key));
-    await tester.pumpAndSettle();
-    await tester.tapAt(.zero);
     await tester.pumpAndSettle();
 
     expect(find.text('00:00'), findsOneWidget);
@@ -100,9 +129,11 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         locale: const Locale('en', 'SG'),
-        child: FTimeField.picker(key: key, format: .jms('en_SG')),
+        child: FTimeField.picker(key: key, format: .jms('en_SG'), control: const .managed(initial: FTime())),
       ),
     );
+
+    await tester.pumpAndSettle();
 
     expect(find.text('12:00:00 am'), findsOneWidget);
   });

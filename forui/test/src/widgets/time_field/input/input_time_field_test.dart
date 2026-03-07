@@ -106,6 +106,28 @@ void main() {
     expect(find.text('1:00 am'), findsOneWidget);
   });
 
+  testWidgets('clearable', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        locale: const Locale('en', 'SG'),
+        child: const FTimeField(key: key, clearable: true),
+      ),
+    );
+
+    expect(find.bySemanticsLabel('Clear'), findsNothing);
+
+    await tester.enterText(find.byKey(key), '12:30 pm');
+    await tester.pumpAndSettle();
+
+    expect(find.bySemanticsLabel('Clear'), findsOneWidget);
+
+    await tester.tap(find.bySemanticsLabel('Clear'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('HH:MM --'), findsOneWidget);
+    expect(find.bySemanticsLabel('Clear'), findsNothing);
+  });
+
   group('validator', () {
     testWidgets('placeholder', (tester) async {
       debugDefaultTargetPlatformOverride = .macOS;
