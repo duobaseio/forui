@@ -43,12 +43,7 @@ FThemeData get neutralLight {
   final typography = _typography(colors: colors, touch: touch);
   final style = _style(colors: colors, typography: typography, touch: touch);
 
-  return FThemeData(
-    colors: colors,
-    typography: typography,
-    style: style,
-    touch: touch,
-  );
+  return FThemeData(colors: colors, typography: typography, style: style, touch: touch);
 }
 
 FTypography _typography({
@@ -56,10 +51,7 @@ FTypography _typography({
   required bool touch,
   String defaultFontFamily = 'packages/forui/Inter',
 }) {
-  assert(
-  defaultFontFamily.isNotEmpty,
-  'defaultFontFamily ($defaultFontFamily) should not be empty.',
-  );
+  assert(defaultFontFamily.isNotEmpty, 'defaultFontFamily ($defaultFontFamily) should not be empty.');
   final color = colors.foreground;
   final font = defaultFontFamily;
   if (touch) {
@@ -72,12 +64,7 @@ FTypography _typography({
       md: TextStyle(color: color, fontFamily: font, fontSize: 18, height: 1.75),
       lg: TextStyle(color: color, fontFamily: font, fontSize: 20, height: 1.75),
       xl: TextStyle(color: color, fontFamily: font, fontSize: 22, height: 2),
-      xl2: TextStyle(
-        color: color,
-        fontFamily: font,
-        fontSize: 30,
-        height: 2.25,
-      ),
+      xl2: TextStyle(color: color, fontFamily: font, fontSize: 30, height: 2.25),
       xl3: TextStyle(color: color, fontFamily: font, fontSize: 36, height: 2.5),
       xl4: TextStyle(color: color, fontFamily: font, fontSize: 48, height: 1),
       xl5: TextStyle(color: color, fontFamily: font, fontSize: 60, height: 1),
@@ -96,12 +83,7 @@ FTypography _typography({
       lg: TextStyle(color: color, fontFamily: font, fontSize: 18, height: 1.75),
       xl: TextStyle(color: color, fontFamily: font, fontSize: 20, height: 1.75),
       xl2: TextStyle(color: color, fontFamily: font, fontSize: 22, height: 2),
-      xl3: TextStyle(
-        color: color,
-        fontFamily: font,
-        fontSize: 30,
-        height: 2.25,
-      ),
+      xl3: TextStyle(color: color, fontFamily: font, fontSize: 30, height: 2.25),
       xl4: TextStyle(color: color, fontFamily: font, fontSize: 36, height: 2.5),
       xl5: TextStyle(color: color, fontFamily: font, fontSize: 48, height: 1),
       xl6: TextStyle(color: color, fontFamily: font, fontSize: 60, height: 1),
@@ -111,33 +93,18 @@ FTypography _typography({
   }
 }
 
-FStyle _style({
-  required FColors colors,
-  required FTypography typography,
-  required bool touch,
-}) {
+FStyle _style({required FColors colors, required FTypography typography, required bool touch}) {
   const borderRadius = FBorderRadius();
   return FStyle(
-    formFieldStyle: .inherit(
-      colors: colors,
-      typography: typography,
-      touch: touch,
-    ),
-    focusedOutlineStyle: FFocusedOutlineStyle(
-      color: colors.primary,
-      borderRadius: borderRadius.md,
-    ),
-    iconStyle: IconThemeData(
-      color: colors.foreground,
-      size: typography.lg.fontSize,
-    ),
+    formFieldStyle: .inherit(colors: colors, typography: typography, touch: touch),
+    focusedOutlineStyle: FFocusedOutlineStyle(color: colors.primary, borderRadius: borderRadius.md),
+    iconStyle: IconThemeData(color: colors.foreground, size: typography.lg.fontSize),
     tappableStyle: FTappableStyle(),
     borderRadius: const FBorderRadius(),
     borderWidth: 1,
     pagePadding: const .symmetric(vertical: 8, horizontal: 12),
-    shadow: const [
-      BoxShadow(color: Color(0x0d000000), offset: Offset(0, 1), blurRadius: 2),
-    ],
+    shadow: const [BoxShadow(color: Color(0x0d000000), offset: Offset(0, 1), blurRadius: 2)],
   );
 }
+
 // {@endsnippet}
