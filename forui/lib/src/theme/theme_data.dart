@@ -1422,6 +1422,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FTooltipStyleDelta? tooltipStyle,
     Iterable<ThemeExtension<dynamic>>? extensions,
   }) => FThemeData(
+    // This does not affect anything since it's only used to configure null parameters, and parameters are never null.
     touch: true,
     debugLabel: debugLabel ?? this.debugLabel,
     breakpoints: breakpoints ?? this.breakpoints,
