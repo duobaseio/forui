@@ -412,12 +412,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             theme: theme,
-            child: FItem.raw(
-              key: const Key('raw-item'),
-              style: itemStyle,
-              onPress: () {},
-              child: const Text('Item'),
-            ),
+            child: FItem.raw(key: const Key('raw-item'), style: itemStyle, onPress: () {}, child: const Text('Item')),
           ),
         );
 
