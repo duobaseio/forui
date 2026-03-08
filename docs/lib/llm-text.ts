@@ -4,7 +4,7 @@ import remarkMdx from 'remark-mdx';
 import remarkStringify from 'remark-stringify';
 import { readFile } from 'fs/promises';
 import path from 'path';
-import type { Root, RootContent, Code, Paragraph, Strong, Text, Blockquote } from 'mdast';
+import type { Root, RootContent, Code, Paragraph, Strong, Text, Blockquote, BlockContent, DefinitionContent } from 'mdast';
 
 interface MdxJsxAttribute {
   type: string;
@@ -128,22 +128,32 @@ async function transformUsageSnippet(
   return [makeCodeBlock(sig ?? snippet.text)];
 }
 
-/** Converts a `<Callout>` JSX element into a blockquote with a bold type label (e.g. **Warning:**). */
-function transformCallout(node: MdxJsxFlowElement): RootContent[] {
+/** Converts a `<Callout>` JSX element into a blockquote with a bold type label (e.g. **Warning:**). Handles JSX children (e.g. CodeSnippet) by recursively transforming them. */
+async function transformCallout(node: MdxJsxFlowElement, snippetMap: Map<string, string>): Promise<RootContent[]> {
   const calloutType = getAttr(node, 'type') ?? 'info';
   const label = calloutType.charAt(0).toUpperCase() + calloutType.slice(1);
 
-  const blockquoteChildren: Paragraph[] = [];
+  const blockquoteChildren: Array<BlockContent | DefinitionContent> = [];
+  let isFirst = true;
 
   for (const child of node.children) {
     if (child.type === 'paragraph') {
-      const para: Paragraph = {
-        type: 'paragraph',
-        children: [makeBold(`${label}:`), makeText(' '), ...child.children],
-      };
-      blockquoteChildren.push(para);
+      if (isFirst) {
+        blockquoteChildren.push({
+          type: 'paragraph',
+          children: [makeBold(`${label}:`), makeText(' '), ...child.children],
+        } as Paragraph);
+        isFirst = false;
+      } else {
+        blockquoteChildren.push(child as Paragraph);
+      }
+    } else if (child.type === 'mdxJsxFlowElement') {
+      const transformed = await transformJSX(child, snippetMap);
+      for (const t of transformed) {
+        blockquoteChildren.push(t as BlockContent);
+      }
     } else {
-      blockquoteChildren.push({ type: 'paragraph', children: [makeText(String((child as Text).value ?? ''))] });
+      blockquoteChildren.push(child as BlockContent);
     }
   }
 
@@ -189,6 +199,19 @@ async function transformTabs(node: MdxJsxFlowElement, snippetMap: Map<string, st
   return result;
 }
 
+/** Converts an `<Accordion>` JSX element into a bold title paragraph followed by the accordion's children. */
+async function transformAccordion(node: MdxJsxFlowElement, snippetMap: Map<string, string>): Promise<RootContent[]> {
+  const title = getAttr(node, 'title');
+  const result: RootContent[] = [];
+  if (title) {
+    result.push({ type: 'paragraph', children: [makeBold(title)] } as Paragraph);
+  }
+  for (const child of node.children) {
+    result.push(...(await transformJSX(child, snippetMap)));
+  }
+  return result;
+}
+
 /** Routes a top-level MDX JSX element to the appropriate transform function, dropping unknown elements. */
 async function transformJSX(node: RootContent, snippetMap: Map<string, string>): Promise<RootContent[]> {
   const jsx = node as MdxJsxFlowElement;
@@ -202,12 +225,19 @@ async function transformJSX(node: RootContent, snippetMap: Map<string, string>):
     case 'UsageSnippet':
       return transformUsageSnippet(jsx, snippetMap);
     case 'Callout':
-      return transformCallout(jsx);
+      return transformCallout(jsx, snippetMap);
+    case 'Accordion':
+      return transformAccordion(jsx, snippetMap);
     case 'Widget':
     case 'Tab':
       return []; // Drop standalone widgets/tabs
-    default:
-      return []; // Drop unknown JSX elements
+    default: {
+      const result: RootContent[] = [];
+      for (const child of jsx.children) {
+        result.push(...(await transformJSX(child, snippetMap)));
+      }
+      return result;
+    }
   }
 }
 
