@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
@@ -249,5 +251,63 @@ void main() {
 
     expect(find.text('Error A'), findsNothing);
     expect(find.text('Error B'), findsOneWidget);
+  });
+
+  group('design system', skip: !Platform.isMacOS, () {
+    for (final (theme, themeName, sizes) in [
+      (
+        FThemes.neutral.light.desktop,
+        'desktop',
+        [
+          (FTextFieldSizeVariant.sm, 'sm', FThemes.neutral.light.desktop.style.sizes.field.sm),
+          (FTextFieldSizeVariant.md, 'md', FThemes.neutral.light.desktop.style.sizes.field.md),
+          (FTextFieldSizeVariant.lg, 'lg', FThemes.neutral.light.desktop.style.sizes.field.lg),
+        ],
+      ),
+      (
+        FThemes.neutral.light.touch,
+        'touch',
+        [
+          (FTextFieldSizeVariant.sm, 'sm', FThemes.neutral.light.touch.style.sizes.field.sm),
+          (FTextFieldSizeVariant.md, 'md', FThemes.neutral.light.touch.style.sizes.field.md),
+          (FTextFieldSizeVariant.lg, 'lg', FThemes.neutral.light.touch.style.sizes.field.lg),
+        ],
+      ),
+    ]) {
+      for (final (size, name, height) in sizes) {
+        testWidgets('$themeName $name default text field has consistent height ($height)', (tester) async {
+          await tester.pumpWidget(
+            TestScaffold.app(
+              theme: theme,
+              child: FTextField(size: size),
+            ),
+          );
+
+          expect(tester.getSize(find.byType(FTextField)).height, closeTo(height, 0.001));
+        });
+
+        testWidgets('$themeName $name email text field has consistent height ($height)', (tester) async {
+          await tester.pumpWidget(
+            TestScaffold.app(
+              theme: theme,
+              child: FTextField.email(size: size, label: null),
+            ),
+          );
+
+          expect(tester.getSize(find.byType(FTextField)).height, closeTo(height, 0.001));
+        });
+
+        testWidgets('$themeName $name password text field has consistent height ($height)', (tester) async {
+          await tester.pumpWidget(
+            TestScaffold.app(
+              theme: theme,
+              child: FTextField.password(size: size, label: null, key: const Key('password')),
+            ),
+          );
+
+          expect(tester.getSize(find.byKey(const Key('password'))).height, closeTo(height, 0.001));
+        });
+      }
+    }
   });
 }

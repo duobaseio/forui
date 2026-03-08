@@ -318,7 +318,7 @@ extension type FButtonStyles(
         primary,
         variants: {
           [.primary]: primary,
-          [.secondary]: FButtonSizeStyles.inherit(
+          [.secondary]: .inherit(
             typography: typography,
             style: style,
             touch: touch,
@@ -339,7 +339,7 @@ extension type FButtonStyles(
             foregroundColor: colors.secondaryForeground,
             disabledForegroundColor: colors.disable(colors.secondaryForeground),
           ),
-          [.destructive]: FButtonSizeStyles.inherit(
+          [.destructive]: .inherit(
             typography: typography,
             style: style,
             touch: touch,
@@ -368,7 +368,7 @@ extension type FButtonStyles(
             foregroundColor: colors.destructive,
             disabledForegroundColor: colors.destructive.withValues(alpha: 0.5),
           ),
-          [.outline]: FButtonSizeStyles.inherit(
+          [.outline]: .inherit(
             typography: typography,
             style: style,
             touch: touch,
@@ -392,7 +392,7 @@ extension type FButtonStyles(
             foregroundColor: colors.secondaryForeground,
             disabledForegroundColor: colors.disable(colors.secondaryForeground),
           ),
-          [.ghost]: FButtonSizeStyles.inherit(
+          [.ghost]: .inherit(
             typography: typography,
             style: style,
             touch: touch,

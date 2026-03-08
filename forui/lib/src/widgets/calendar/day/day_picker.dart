@@ -267,7 +267,7 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
     if (touch) {
       return .new(
         headerTextStyle: typography.xs2.copyWith(color: colors.mutedForeground),
-        tileSize: 44,
+        tileSize: style.sizes.calendar,
         current: FCalendarEntryStyle(
           backgroundColor: backgroundColor,
           borderSide: border,
@@ -284,7 +284,7 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
     } else {
       return .new(
         headerTextStyle: typography.xs.copyWith(color: colors.mutedForeground),
-        tileSize: 32,
+        tileSize: style.sizes.calendar,
         current: FCalendarEntryStyle(
           backgroundColor: backgroundColor,
           borderSide: border,

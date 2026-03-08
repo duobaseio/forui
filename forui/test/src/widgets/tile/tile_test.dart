@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -95,5 +97,19 @@ void main() {
     await tester.pumpAndSettle(const Duration(seconds: 5));
 
     expect(count, 1);
+  });
+
+  group('design system', skip: !Platform.isMacOS, () {
+    testWidgets('touch tile has consistent height', (tester) async {
+      final theme = FThemes.neutral.light.touch;
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme,
+          child: FTile(key: const Key('tile'), title: const Text('Tile'), onPress: () {}),
+        ),
+      );
+
+      expect(tester.getSize(find.byKey(const Key('tile'))).height, closeTo(theme.style.sizes.tile, 0.001));
+    });
   });
 }

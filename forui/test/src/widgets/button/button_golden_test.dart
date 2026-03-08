@@ -376,4 +376,5 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('button/size/$name-icon.png'));
     });
   }
+
 }

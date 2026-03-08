@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -450,5 +452,59 @@ void main() {
 
       debugDefaultTargetPlatformOverride = null;
     });
+  });
+
+  group('design system', skip: !Platform.isMacOS, () {
+    const key = ValueKey('select');
+
+    for (final (theme, themeName, sizes) in [
+      (
+        FThemes.neutral.light.desktop,
+        'desktop',
+        [
+          (FTextFieldSizeVariant.sm, 'sm', FThemes.neutral.light.desktop.style.sizes.field.sm),
+          (FTextFieldSizeVariant.md, 'md', FThemes.neutral.light.desktop.style.sizes.field.md),
+          (FTextFieldSizeVariant.lg, 'lg', FThemes.neutral.light.desktop.style.sizes.field.lg),
+        ],
+      ),
+      (
+        FThemes.neutral.light.touch,
+        'touch',
+        [
+          (FTextFieldSizeVariant.sm, 'sm', FThemes.neutral.light.touch.style.sizes.field.sm),
+          (FTextFieldSizeVariant.md, 'md', FThemes.neutral.light.touch.style.sizes.field.md),
+          (FTextFieldSizeVariant.lg, 'lg', FThemes.neutral.light.touch.style.sizes.field.lg),
+        ],
+      ),
+    ]) {
+      for (final (size, name, height) in sizes) {
+        testWidgets('$themeName $name empty multi-select has consistent height ($height)', (tester) async {
+          await tester.pumpWidget(
+            TestScaffold.app(
+              theme: theme,
+              child: FMultiSelect<String>(items: const {}, size: size, key: key),
+            ),
+          );
+
+          expect(tester.getSize(find.byKey(key)).height, closeTo(height, 0.001));
+        });
+
+        testWidgets('$themeName $name multi-select with 1 item has consistent height ($height)', (tester) async {
+          await tester.pumpWidget(
+            TestScaffold.app(
+              theme: theme,
+              child: FMultiSelect<String>(
+                items: const {'Item': 'item'},
+                control: const .managed(initial: {'item'}),
+                size: size,
+                key: key,
+              ),
+            ),
+          );
+
+          expect(tester.getSize(find.byKey(key)).height, closeTo(height, 0.001));
+        });
+      }
+    }
   });
 }

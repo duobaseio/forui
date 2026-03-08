@@ -27,6 +27,10 @@ class FStyle with Diagnosticable, _$FStyleFunctions {
   @override
   final IconThemeData iconStyle;
 
+  /// The size tokens.
+  @override
+  final FSizes sizes;
+
   /// The border radius.
   @override
   final FBorderRadius borderRadius;
@@ -55,6 +59,7 @@ class FStyle with Diagnosticable, _$FStyleFunctions {
     required this.formFieldStyle,
     required this.focusedOutlineStyle,
     required this.iconStyle,
+    required this.sizes,
     required this.tappableStyle,
     this.borderRadius = const FBorderRadius(),
     this.borderWidth = 1,
@@ -68,6 +73,7 @@ class FStyle with Diagnosticable, _$FStyleFunctions {
     return FStyle(
       formFieldStyle: .inherit(colors: colors, typography: typography, touch: touch),
       focusedOutlineStyle: FFocusedOutlineStyle(color: colors.primary, borderRadius: borderRadius.md),
+      sizes: FSizes.inherit(touch: touch),
       iconStyle: IconThemeData(color: colors.foreground, size: typography.lg.fontSize),
       tappableStyle: FTappableStyle(),
     );

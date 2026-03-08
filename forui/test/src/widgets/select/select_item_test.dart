@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -82,5 +84,42 @@ void main() {
       expect(find.text('B'), findsOne);
       expect(controller.value, 'B');
     });
+  });
+
+  group('design system', skip: !Platform.isMacOS, () {
+    for (final (theme, themeName) in [
+      (FThemes.neutral.light.desktop, 'desktop'),
+      (FThemes.neutral.light.touch, 'touch'),
+    ]) {
+      final itemStyle = theme.selectStyle.contentStyle.sectionStyle.itemStyle;
+      final height = theme.style.sizes.item;
+
+      testWidgets('$themeName select item has consistent height ($height)', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme,
+            child: FItem(key: const Key('item'), style: itemStyle, title: const Text('Item'), onPress: () {}),
+          ),
+        );
+
+        expect(tester.getSize(find.byKey(const Key('item'))).height, closeTo(height, 0.001));
+      });
+
+      testWidgets('$themeName raw select item has consistent height ($height)', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme,
+            child: FItem.raw(
+              key: const Key('raw-item'),
+              style: itemStyle,
+              onPress: () {},
+              child: const Text('Item'),
+            ),
+          ),
+        );
+
+        expect(tester.getSize(find.byKey(const Key('raw-item'))).height, closeTo(height, 0.001));
+      });
+    }
   });
 }
