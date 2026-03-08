@@ -61,8 +61,12 @@
     "react-day-picker": "^9.13.0",
     "react-dom": "^19.2.3",
     "react-resizable-panels": "^4.1.0",
+    "remark-mdx": "^3.1.0",
+    "remark-parse": "^11.0.0",
+    "remark-stringify": "^11.0.0",
     "recharts": "2.15.4",
     "shiki": "^3.22.0",
+    "unified": "^11.0.0",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.4.0",
     "zod": "^4.3.5"
