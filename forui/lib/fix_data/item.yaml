@@ -1,0 +1,47 @@
+version: 1
+transforms:
+  # FItem
+  - title: "Rename FItem(variants: ...) to FItem(variant: ...)"
+    date: 2026-03-08
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FItem
+    changes:
+      - kind: renameParameter
+        oldName: 'variants'
+        newName: 'variant'
+
+  - title: "Rename FItem.raw(variants: ...) to FItem.raw(variant: ...)"
+    date: 2026-03-08
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'raw'
+      inClass: FItem
+    changes:
+      - kind: renameParameter
+        oldName: 'variants'
+        newName: 'variant'
+
+  # FTile
+  - title: "Rename FTile(variants: ...) to FTile(variant: ...)"
+    date: 2026-03-08
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FTile
+    changes:
+      - kind: renameParameter
+        oldName: 'variants'
+        newName: 'variant'
+
+  - title: "Rename FTile.raw(variants: ...) to FTile.raw(variant: ...)"
+    date: 2026-03-08
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'raw'
+      inClass: FTile
+    changes:
+      - kind: renameParameter
+        oldName: 'variants'
+        newName: 'variant'

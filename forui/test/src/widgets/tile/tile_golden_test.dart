@@ -71,18 +71,18 @@ void main() {
   });
 
   for (final theme in TestScaffold.themes) {
-    for (final (name, Set<FItemVariant> variants, bool enabled) in [
-      ('enabled', {}, true),
-      ('disabled', {}, false),
-      ('destructive', {FItemVariant.destructive}, true),
-      ('destructive-disabled', {FItemVariant.destructive}, false),
+    for (final (name, FItemVariant variant, bool enabled) in [
+      ('enabled', .primary, true),
+      ('disabled', .primary, false),
+      ('destructive', .destructive, true),
+      ('destructive-disabled', .destructive, false),
     ]) {
       testWidgets('$name - ${theme.name}', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
             child: FTile(
-              variants: variants,
+              variant: variant,
               enabled: enabled,
               prefix: const Icon(FIcons.bluetooth),
               title: const Text('Lorem'),

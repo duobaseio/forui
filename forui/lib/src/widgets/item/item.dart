@@ -20,7 +20,7 @@ mixin FItemMixin on Widget {
   /// This function is a shorthand for [FItem.new].
   static FItem item({
     required Widget title,
-    Set<FItemVariant> variants = const {},
+    FItemVariant variant = .primary,
     FItemStyleDelta style = const .context(),
     bool? enabled,
     bool selected = false,
@@ -44,7 +44,7 @@ mixin FItemMixin on Widget {
     Key? key,
   }) => .new(
     title: title,
-    variants: variants,
+    variant: variant,
     style: style,
     enabled: enabled,
     selected: selected,
@@ -73,7 +73,7 @@ mixin FItemMixin on Widget {
   /// This function is a shorthand for [FItem.raw].
   static FItem raw({
     required Widget child,
-    Set<FItemVariant> variants = const {},
+    FItemVariant variant = .primary,
     FItemStyleDelta style = const .context(),
     bool? enabled,
     bool selected = false,
@@ -93,7 +93,7 @@ mixin FItemMixin on Widget {
     Widget? prefix,
     Key? key,
   }) => .raw(
-    variants: variants,
+    variant: variant,
     style: style,
     enabled: enabled,
     selected: selected,
@@ -151,21 +151,20 @@ mixin FItemMixin on Widget {
 /// * [FTile] for a specialized item for touch devices.
 /// * [FItemStyle] for customizing an item's appearance.
 class FItem extends StatelessWidget with FItemMixin {
-  /// The variants used to resolve the style from [FItemStyles].
+  /// The variant used to resolve the style from [FItemStyles].
   ///
-  /// Defaults to an empty set, which resolves to the base (primary) style. The current platform variant is automatically
-  /// included during style resolution.
+  /// Defaults to [FItemVariant.primary]. The current platform variant is automatically included during style resolution.
   ///
   /// To change the platform variant, update the enclosing [FTheme.platform]/[FAdaptiveScope.platform].
   ///
   /// For example, to create a destructive item:
   /// ```dart
   /// FItem(
-  ///   variants: {FItemVariant.destructive},
+  ///   variant: .destructive,
   ///   title: Text('Delete'),
   /// )
   /// ```
-  final Set<FItemVariant> variants;
+  final FItemVariant variant;
 
   /// The item's style. Defaults to [FItemData.styles] if present.
   ///
@@ -300,7 +299,7 @@ class FItem extends StatelessWidget with FItemMixin {
   /// {@endtemplate}
   FItem({
     required Widget title,
-    this.variants = const {},
+    this.variant = .primary,
     this.style = const .context(),
     this.enabled,
     this.selected = false,
@@ -353,7 +352,7 @@ class FItem extends StatelessWidget with FItemMixin {
   /// {@endtemplate}
   FItem.raw({
     required Widget child,
-    this.variants = const {},
+    this.variant = .primary,
     this.style = const .context(),
     this.enabled,
     this.selected = false,
@@ -389,7 +388,7 @@ class FItem extends StatelessWidget with FItemMixin {
   @override
   Widget build(BuildContext context) {
     final data = FInheritedItemData.maybeOf(context) ?? const FItemData();
-    final style = this.style((data.styles ?? context.theme.itemStyles).resolve({...variants, context.platformVariant}));
+    final style = this.style((data.styles ?? context.theme.itemStyles).resolve({variant, context.platformVariant}));
     final enabled = this.enabled ?? data.enabled;
     final formVariants = <FTappableVariant>{
       context.platformVariant as FTappableVariant,
@@ -486,7 +485,7 @@ class FItem extends StatelessWidget with FItemMixin {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(IterableProperty('variants', variants))
+      ..add(DiagnosticsProperty('variant', variant))
       ..add(DiagnosticsProperty('style', style))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
       ..add(FlagProperty('selected', value: selected, ifTrue: 'selected'))

@@ -5,8 +5,8 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 final item = FItem(
-  // {@category "Variants"}
-  variants: const {},
+  // {@category "Variant"}
+  variant: .primary,
   // {@endcategory}
   // {@category "Accessibility"}
   autofocus: false,
@@ -38,8 +38,8 @@ final item = FItem(
 );
 
 final raw = FItem.raw(
-  // {@category "Variants"}
-  variants: const {},
+  // {@category "Variant"}
+  variant: .primary,
   // {@endcategory}
   // {@category "Accessibility"}
   autofocus: false,

@@ -5,8 +5,8 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 final tile = FTile(
-  // {@category "Variants"}
-  variants: const {},
+  // {@category "Variant"}
+  variant: .primary,
   // {@endcategory}
   // {@category "Accessibility"}
   autofocus: false,
@@ -38,8 +38,8 @@ final tile = FTile(
 );
 
 final tileRaw = FTile.raw(
-  // {@category "Variants"}
-  variants: const {},
+  // {@category "Variant"}
+  variant: .primary,
   // {@endcategory}
   // {@category "Accessibility"}
   autofocus: false,

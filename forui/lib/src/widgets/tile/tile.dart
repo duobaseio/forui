@@ -51,21 +51,19 @@ part 'tile.design.dart';
 class FTile extends StatelessWidget with FTileMixin {
   // The fields aren't strictly needed, but we keep them to improve documentation.
 
-  /// The variants used to resolve the style from [FTileStyles].
+  /// The variant used to resolve the style from [FTileStyles].
   ///
-  /// Defaults to an empty set, which resolves to the base (primary) style. The current platform variant is automatically
-  /// included during style
-  /// resolution. To change the platform variant, update the enclosing
-  /// [FTheme.platform]/[FAdaptiveScope.platform].
+  /// Defaults to [FItemVariant.primary]. The current platform variant is automatically included during style resolution.
+  /// To change the platform variant, update the enclosing [FTheme.platform]/[FAdaptiveScope.platform].
   ///
   /// For example, to create a destructive tile:
   /// ```dart
   /// FTile(
-  ///   variants: {FItemVariant.destructive},
+  ///   variant: .destructive,
   ///   title: Text('Delete'),
   /// )
   /// ```
-  final Set<FItemVariant> variants;
+  final FItemVariant variant;
 
   /// The tile's style. Defaults to the ancestor tile group's style if present.
   ///
@@ -179,7 +177,7 @@ class FTile extends StatelessWidget with FTileMixin {
   /// {@endtemplate}
   FTile({
     required Widget title,
-    this.variants = const {},
+    this.variant = .primary,
     this.style = const .context(),
     this.enabled,
     this.selected = false,
@@ -203,7 +201,7 @@ class FTile extends StatelessWidget with FTileMixin {
     super.key,
   }) : _child = FItem(
          title: title,
-         variants: variants,
+         variant: variant,
          style: style,
          enabled: enabled,
          selected: selected,
@@ -240,7 +238,7 @@ class FTile extends StatelessWidget with FTileMixin {
   /// {@endtemplate}
   FTile.raw({
     required Widget child,
-    this.variants = const {},
+    this.variant = .primary,
     this.style = const .context(),
     this.enabled,
     this.selected = false,
@@ -260,7 +258,7 @@ class FTile extends StatelessWidget with FTileMixin {
     Widget? prefix,
     super.key,
   }) : _child = FItem.raw(
-         variants: variants,
+         variant: variant,
          style: style,
          enabled: enabled,
          selected: selected,
@@ -295,7 +293,7 @@ class FTile extends StatelessWidget with FTileMixin {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(IterableProperty('variants', variants))
+      ..add(DiagnosticsProperty('variant', variant))
       ..add(DiagnosticsProperty('style', style))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
       ..add(FlagProperty('selected', value: selected, ifTrue: 'selected'))

@@ -27,7 +27,7 @@ class TileDestructivePage extends Example {
   @override
   Widget example(BuildContext _) => FTile(
     // {@highlight}
-    variants: {FItemVariant.destructive},
+    variant: .destructive,
     // {@endhighlight}
     prefix: const Icon(FIcons.trash),
     title: const Text('Delete Account'),

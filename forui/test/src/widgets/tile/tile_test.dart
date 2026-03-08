@@ -100,16 +100,21 @@ void main() {
   });
 
   group('design system', skip: !Platform.isMacOS, () {
-    testWidgets('touch tile has consistent height', (tester) async {
-      final theme = FThemes.neutral.light.touch;
-      await tester.pumpWidget(
-        TestScaffold.app(
-          theme: theme,
-          child: FTile(key: const Key('tile'), title: const Text('Tile'), onPress: () {}),
-        ),
-      );
+    for (final (variant, name) in [
+      (FItemVariant.primary, 'normal'),
+      (FItemVariant.destructive, 'destructive'),
+    ]) {
+      testWidgets('touch $name tile has consistent height', (tester) async {
+        final theme = FThemes.neutral.light.touch;
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme,
+            child: FTile(key: const Key('tile'), variant: variant, title: const Text('Tile'), onPress: () {}),
+          ),
+        );
 
-      expect(tester.getSize(find.byKey(const Key('tile'))).height, closeTo(theme.style.sizes.tile, 0.001));
-    });
+        expect(tester.getSize(find.byKey(const Key('tile'))).height, closeTo(theme.style.sizes.tile, 0.001));
+      });
+    }
   });
 }

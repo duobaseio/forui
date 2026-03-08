@@ -71,21 +71,21 @@ void main() {
   });
 
   for (final theme in TestScaffold.themes) {
-    for (final (name, Set<FItemVariant> variants, bool enabled, bool selected) in [
-      ('enabled', {}, true, false),
-      ('disabled', {}, false, false),
-      ('selected', {}, true, true),
-      ('disabled-selected', {}, false, true),
-      ('destructive', {FItemVariant.destructive}, true, false),
-      ('destructive-disabled', {FItemVariant.destructive}, false, false),
-      ('destructive-selected', {FItemVariant.destructive}, true, true),
+    for (final (name, FItemVariant variant, bool enabled, bool selected) in [
+      ('enabled', .primary, true, false),
+      ('disabled', .primary, false, false),
+      ('selected', .primary, true, true),
+      ('disabled-selected', .primary, false, true),
+      ('destructive', .destructive, true, false),
+      ('destructive-disabled', .destructive, false, false),
+      ('destructive-selected', .destructive, true, true),
     ]) {
       testWidgets('$name - ${theme.name}', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
             child: FItem(
-              variants: variants,
+              variant: variant,
               enabled: enabled,
               selected: selected,
               prefix: const Icon(FIcons.bluetooth),
