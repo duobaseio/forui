@@ -115,5 +115,7 @@ jobs:
 
       # Check that all relative URLs are working
       - uses: actions/setup-go@v6
+        with:
+          go-version: '1.25'
       - run: go install github.com/raviqqe/muffet/v2@latest
       - run: muffet ${{ steps.publish-docs.outputs.preview-url }} --buffer-size=32768 --exclude="(\/cdn-cgi\/)|(github.com)|(pub.dev)|(shadcn.com)"
