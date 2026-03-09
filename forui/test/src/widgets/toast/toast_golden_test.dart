@@ -26,10 +26,7 @@ void main() {
           ),
         );
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('toast/${theme.name}/$name-everything.png'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/${theme.name}/$name-everything.png'));
       });
 
       testWidgets('${theme.name} $name title & description', (tester) async {

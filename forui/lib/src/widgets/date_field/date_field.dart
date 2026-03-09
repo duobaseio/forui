@@ -51,7 +51,8 @@ abstract class FDateField extends StatefulWidget {
     child: IconTheme(data: style.iconStyle.resolve(variants), child: const Icon(FIcons.calendar)),
   );
 
-  static Widget _popoverBuilder(BuildContext _, FDateFieldController _, FPopoverController _, Widget content) => content;
+  static Widget _popoverBuilder(BuildContext _, FDateFieldController _, FPopoverController _, Widget content) =>
+      content;
 
   static Widget _fieldBuilder(BuildContext _, FDateFieldStyle _, Set<FTextFieldVariant> _, Widget child) => child;
 

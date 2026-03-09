@@ -100,10 +100,7 @@ void main() {
   });
 
   group('design system', skip: !Platform.isMacOS, () {
-    for (final (variant, name) in [
-      (FItemVariant.primary, 'normal'),
-      (FItemVariant.destructive, 'destructive'),
-    ]) {
+    for (final (variant, name) in [(FItemVariant.primary, 'normal'), (FItemVariant.destructive, 'destructive')]) {
       testWidgets('touch $name tile has consistent height', (tester) async {
         final theme = FThemes.neutral.light.touch;
         await tester.pumpWidget(

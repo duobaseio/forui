@@ -60,7 +60,8 @@ abstract class FTimeField extends StatefulWidget {
 
   static Widget _fieldBuilder(BuildContext _, FTimeFieldStyle _, Set<FTextFieldVariant> _, Widget child) => child;
 
-  static Widget _popoverBuilder(BuildContext _, FTimeFieldController _, FPopoverController _, Widget content) => content;
+  static Widget _popoverBuilder(BuildContext _, FTimeFieldController _, FPopoverController _, Widget content) =>
+      content;
 
   /// The control for managing the time field's state.
   final FTimeFieldControl control;
