@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-
 import 'package:forui/forui.dart';
 import 'package:forui/src/localizations/localized_text.dart';
 import 'package:forui/src/widgets/text_field/input/form_input.dart';
@@ -650,6 +649,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
         maxLength: maxLength,
         maxLengthEnforcement: maxLengthEnforcement,
         onTap: onTap,
+        onTapOutside: onTapOutside,
         onTapAlwaysCalled: onTapAlwaysCalled,
         onEditingComplete: onEditingComplete,
         onSubmit: onSubmit,
