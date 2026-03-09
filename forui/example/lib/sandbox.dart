@@ -59,7 +59,6 @@ class _SandboxState extends State<Sandbox> {
             keyboardType: .number,
             textInputAction: .send,
             onTapOutside: (event) {
-              print('onTapOutside ${event.toString()}');
               FocusManager.instance.primaryFocus?.unfocus();
             },
           ),
