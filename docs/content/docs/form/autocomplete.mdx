@@ -4,6 +4,7 @@ description: An autocomplete provides a list of suggestions based on the user's 
 apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/
 ---
 
+import {Callout} from "fumadocs-ui/components/callout";
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
@@ -19,6 +20,13 @@ import asyncLoadingSnippet from '@/snippets/examples/autocomplete/async-loading.
 import asyncErrorSnippet from '@/snippets/examples/autocomplete/async-error.json';
 import clearableSnippet from '@/snippets/examples/autocomplete/clearable.json';
 import formSnippet from '@/snippets/examples/autocomplete/form.json';
+
+<Callout type="info" title="Not a searchable select">
+    An autocomplete is not a searchable select. it is a text-field with suggestions. Values are not limited to one of
+    suggestions, users can type anything. If you need a searchable select, use
+    [a searchable select](/docs/form/select#searchable)
+    or [a searchable multi select](/docs/form/multi-select#searchable)
+</Callout>
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">

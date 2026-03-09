@@ -54,6 +54,7 @@ final select = FSelect<String>(
   focusNode: null,
   // {@endcategory}
   // {@category "Core"}
+  size: .md,
   style: const .delta(emptyTextStyle: .delta()),
   enabled: true,
   contentScrollHandles: true,
@@ -111,6 +112,7 @@ final selectRich = FSelect<String>.rich(
   focusNode: null,
   // {@endcategory}
   // {@category "Core"}
+  size: .md,
   style: const .delta(emptyTextStyle: .delta()),
   enabled: true,
   contentScrollHandles: true,
@@ -176,6 +178,7 @@ final selectSearch = FSelect<String>.search(
   focusNode: null,
   // {@endcategory}
   // {@category "Core"}
+  size: .md,
   style: const .delta(emptyTextStyle: .delta()),
   enabled: true,
   contentScrollHandles: true,
@@ -237,6 +240,7 @@ final selectSearchBuilder = FSelect<String>.searchBuilder(
   focusNode: null,
   // {@endcategory}
   // {@category "Core"}
+  size: .md,
   style: const .delta(emptyTextStyle: .delta()),
   enabled: true,
   contentScrollHandles: true,
@@ -277,5 +281,17 @@ final FPopoverControl popoverExternal = .managed(
   controller: FPopoverController(vsync: vsync, shown: false, motion: const FPopoverMotion()),
   onChange: (shown) {},
 );
+
+// {@category "Size" "Small"}
+/// The select's small size.
+const FTextFieldSizeVariant sm = .sm;
+
+// {@category "Size" "Medium"}
+/// The select's medium (default) size.
+const FTextFieldSizeVariant md = .md;
+
+// {@category "Size" "Large"}
+/// The select's large size.
+const FTextFieldSizeVariant lg = .lg;
 
 TickerProvider get vsync => throw UnimplementedError();

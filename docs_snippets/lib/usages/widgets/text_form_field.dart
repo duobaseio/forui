@@ -83,6 +83,7 @@ final textFormField = FTextFormField(
   onAppPrivateCommand: (action, data) {},
   // {@endcategory}
   // {@category "Core"}
+  size: .md,
   style: const .delta(contentPadding: .value(.symmetric(horizontal: 10))),
   enabled: true,
   label: const Text('Label'),
@@ -170,6 +171,7 @@ final textFormFieldEmail = FTextFormField.email(
   onAppPrivateCommand: (action, data) {},
   // {@endcategory}
   // {@category "Core"}
+  size: .md,
   style: const .delta(contentPadding: .value(.symmetric(horizontal: 10))),
   enabled: true,
   label: const Text('Email'),
@@ -256,6 +258,7 @@ final textFormFieldMultiline = FTextFormField.multiline(
   onAppPrivateCommand: (action, data) {},
   // {@endcategory}
   // {@category "Core"}
+  size: .md,
   style: const .delta(contentPadding: .value(.symmetric(horizontal: 10))),
   statesController: null,
   enabled: true,
@@ -346,6 +349,7 @@ final textFormFieldPassword = FTextFormField.password(
   onAppPrivateCommand: (action, data) {},
   // {@endcategory}
   // {@category "Core"}
+  size: .md,
   style: const .delta(contentPadding: .value(.symmetric(horizontal: 10))),
   enabled: true,
   label: const Text('Password'),
@@ -370,6 +374,18 @@ final FTextFieldControl managedExternal = .managed(
   controller: TextEditingController(),
   onChange: (value) {},
 );
+
+// {@category "Size" "Small"}
+/// The text form field's small size.
+const FTextFieldSizeVariant sm = .sm;
+
+// {@category "Size" "Medium"}
+/// The text form field's medium (default) size.
+const FTextFieldSizeVariant md = .md;
+
+// {@category "Size" "Large"}
+/// The text form field's large size.
+const FTextFieldSizeVariant lg = .lg;
 
 // {@category "Obscure Control" "`.lifted()`"}
 /// Externally controls the obscure text state.

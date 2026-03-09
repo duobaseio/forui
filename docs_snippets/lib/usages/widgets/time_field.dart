@@ -34,6 +34,7 @@ final timeField = FTimeField(
   builder: (context, style, states, field) => field,
   prefixBuilder: FTimeField.defaultIconBuilder,
   suffixBuilder: null,
+  clearable: false,
   // {@endcategory}
   // {@category "Accessibility"}
   autofocus: false,
@@ -75,6 +76,7 @@ final timeFieldPicker = FTimeField.picker(
   builder: (context, style, states, field) => field,
   prefixBuilder: FTimeField.defaultIconBuilder,
   suffixBuilder: null,
+  clearable: false,
   // {@endcategory}
   // {@category "Picker"}
   hourInterval: 1,

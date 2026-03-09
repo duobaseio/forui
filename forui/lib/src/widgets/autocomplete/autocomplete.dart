@@ -23,6 +23,11 @@ typedef FAutoCompleteContentBuilder =
 ///
 /// It is a [FormField] and therefore can be used in a [Form] widget.
 ///
+/// ## Not a searchable select
+/// An autocomplete is not a searchable select. it is a text-field with suggestions. Values are not limited to one of
+/// suggestions, users can type anything. If you need a searchable select, use [FSelect.search] or [FMultiSelect.search]
+/// instead.
+///
 /// ## Note
 /// The autocomplete does not support using arrow keys to navigate the suggestions on web.
 ///
