@@ -317,6 +317,11 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   /// Defaults to returning the given child.
   final FFieldBuilder<FAutocompleteStyle> builder;
 
+  /// Whether the field should retain focus after a suggestion is tapped.
+  ///
+  /// Defaults to true on desktop and false on touch.
+  final bool? retainFocus;
+
   /// Whether the autocomplete should complete the text when a completion is available and the user presses right arrow.
   /// Defaults to false.
   final bool rightArrowToComplete;
@@ -423,6 +428,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     FPopoverHideRegion contentHideRegion = .excludeChild,
     Object? contentGroupId,
     bool autoHide = true,
+    bool? retainFocus,
     FFieldBuilder<FAutocompleteStyle> builder = _builder,
     bool rightArrowToComplete = false,
     FutureOr<Iterable<String>> Function(String query)? filter,
@@ -513,6 +519,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
          contentHideRegion: contentHideRegion,
          contentGroupId: contentGroupId,
          autoHide: autoHide,
+         retainFocus: retainFocus,
          builder: builder,
          rightArrowToComplete: rightArrowToComplete,
          contentScrollController: contentScrollController,
@@ -602,6 +609,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     this.contentHideRegion = .excludeChild,
     this.contentGroupId,
     this.autoHide = true,
+    this.retainFocus,
     this.builder = _builder,
     this.rightArrowToComplete = false,
     this.contentScrollController,
@@ -701,6 +709,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
       ..add(DiagnosticsProperty('contentGroupId', contentGroupId))
       ..add(ObjectFlagProperty.has('contentOnTapHide', contentOnTapHide))
       ..add(FlagProperty('autoHide', value: autoHide, ifTrue: 'autoHide'))
+      ..add(FlagProperty('retainFocus', value: retainFocus, ifTrue: 'retainFocus'))
       ..add(ObjectFlagProperty.has('builder', builder))
       ..add(FlagProperty('rightArrowToComplete', value: rightArrowToComplete, ifTrue: 'rightArrowToComplete'))
       ..add(ObjectFlagProperty.has('filter', filter))
@@ -873,7 +882,10 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
         onTap: _popoverController.show,
         onTapAlwaysCalled: true,
         onEditingComplete: widget.onEditingComplete,
-        onSubmit: widget.onSubmit,
+        onSubmit: (value) {
+          _popoverController.hide();
+          widget.onSubmit?.call(value);
+        },
         onAppPrivateCommand: widget.onAppPrivateCommand,
         inputFormatters: widget.inputFormatters,
         enabled: widget.enabled,
@@ -933,9 +945,18 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
               child: InheritedAutocompleteController(
                 popover: popoverController,
                 onPress: (value) {
+                  final retainFocus = widget.retainFocus ?? switch (defaultTargetPlatform) {
+                    .macOS || .windows || .linux => true,
+                    _ => false,
+                  };
+                  if (!retainFocus) {
+                    _fieldFocus.unfocus(); // Hides on-screen keyboard.
+                  }
+
                   if (widget.autoHide) {
                     _popoverController.hide();
                   }
+
                   _previous = value;
                   _controller.text = value;
                 },

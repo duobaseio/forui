@@ -12,10 +12,13 @@ sizes consistent across each platform.
 
 
 ### `FAutocomplete`
+* Add `FAutocomplete.retainFocus`.
 * Add `FAutocomplete.popoverBuilder`.
 * Add `FAutocomplete.size`.
 * Add `FAutocompleteSizeStyles`.
 * Add `FAutocompleteFieldStyle`.
+
+* Fix `FAutocomplete` not closing suggestions popover when pressing enter/done.
 
 * Change `FAutocompleteSection` layout to better align with the latest shadcn version.
 

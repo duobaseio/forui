@@ -75,6 +75,7 @@ final autocomplete = FAutocomplete(
   // {@endcategory}
   // {@category "Content"}
   autoHide: true,
+  retainFocus: null,
   popoverBuilder: (context, controller, popoverController, content) => content,
   contentAnchor: .topStart,
   fieldAnchor: .bottomStart,
@@ -175,6 +176,7 @@ final builder = FAutocomplete.builder(
   // {@endcategory}
   // {@category "Content"}
   autoHide: true,
+  retainFocus: null,
   popoverBuilder: (context, controller, popoverController, content) => content,
   contentAnchor: .topStart,
   fieldAnchor: .bottomStart,
