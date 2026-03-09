@@ -574,12 +574,19 @@ enum Style {
     <String>['FToastStyle'],
     'FToastStyle toastStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n  required bool touch,\n}) {\n  double titleSpacing;\n  TextStyle descriptionTextStyle;\n  EdgeInsetsGeometry padding;\n  if (touch) {\n    titleSpacing = 4;\n    descriptionTextStyle = typography.xs.copyWith(\n      color: colors.mutedForeground,\n      overflow: TextOverflow.ellipsis,\n    );\n    padding = const EdgeInsets.symmetric(horizontal: 16, vertical: 14);\n  } else {\n    titleSpacing = 2;\n    descriptionTextStyle = typography.sm.copyWith(\n      color: colors.mutedForeground,\n      overflow: TextOverflow.ellipsis,\n    );\n    padding = const EdgeInsets.symmetric(horizontal: 16, vertical: 12);\n  }\n  return FToastStyle(\n    decoration: ShapeDecoration(\n      shape: RoundedSuperellipseBorder(\n        side: BorderSide(color: colors.border, width: style.borderWidth),\n        borderRadius: style.borderRadius.md,\n      ),\n      color: colors.card,\n    ),\n    iconStyle: IconThemeData(\n      color: colors.foreground,\n      size: typography.md.fontSize,\n    ),\n    titleTextStyle: typography.sm.copyWith(\n      color: colors.foreground,\n      fontWeight: .w500,\n      height: 1,\n      leadingDistribution: .even,\n    ),\n    titleSpacing: titleSpacing,\n    descriptionTextStyle: descriptionTextStyle,\n    padding: padding,\n    constraints: const BoxConstraints(maxHeight: 250, maxWidth: 400),\n    iconSpacing: 10,\n    suffixSpacing: 12,\n    motion: const FToastMotion(),\n  );\n}\n',
   ),
+  ftoaststyles(
+    'FToastStyles',
+    'FVariants<FToastVariantConstraint, FToastVariant, FToastStyle, FToastStyleDelta>',
+    <String>['toasts'],
+    <String>['FToastStyles', 'FToastStyle'],
+    'FToastStyles toastStyles({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n  required bool touch,\n}) {\n  final primary = _toastStyle(\n    colors: colors,\n    typography: typography,\n    style: style,\n    touch: touch,\n  );\n  return FToastStyles(\n    FVariants.from(\n      primary,\n      variants: {\n        [.primary]: const .delta(),\n        [.destructive]: .delta(\n          iconStyle: .delta(color: colors.destructive),\n          titleTextStyle: .delta(color: colors.destructive),\n          descriptionTextStyle: .delta(color: colors.destructive),\n        ),\n      },\n    ),\n  );\n}\n',
+  ),
   ftoasterstyle(
     'FToasterStyle',
     null,
     <String>['toaster'],
     <String>['FToasterStyle'],
-    'FToasterStyle toasterStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n  required bool touch,\n}) => FToasterStyle(\n  toastStyle: .inherit(\n    colors: colors,\n    typography: typography,\n    style: style,\n    touch: touch,\n  ),\n  max: 3,\n  padding: const .symmetric(horizontal: 20, vertical: 15),\n  expandBehavior: .hoverOrPress,\n  expandHoverEnterDuration: const Duration(milliseconds: 200),\n  expandHoverExitDuration: const Duration(milliseconds: 200),\n  expandStartSpacing: 0,\n  expandSpacing: 10,\n  collapsedProtrusion: 12,\n  collapsedScale: 0.9,\n  motion: const FToasterMotion(),\n  toastAlignment: .bottomEnd,\n);\n',
+    'FToasterStyle toasterStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n  required bool touch,\n}) => FToasterStyle(\n  toastStyles: .inherit(\n    colors: colors,\n    typography: typography,\n    style: style,\n    touch: touch,\n  ),\n  max: 3,\n  padding: const .symmetric(horizontal: 20, vertical: 15),\n  expandBehavior: .hoverOrPress,\n  expandHoverEnterDuration: const Duration(milliseconds: 200),\n  expandHoverExitDuration: const Duration(milliseconds: 200),\n  expandStartSpacing: 0,\n  expandSpacing: 10,\n  collapsedProtrusion: 12,\n  collapsedScale: 0.9,\n  motion: const FToasterMotion(),\n  toastAlignment: .bottomEnd,\n);\n',
   ),
   ftooltipstyle(
     'FTooltipStyle',
