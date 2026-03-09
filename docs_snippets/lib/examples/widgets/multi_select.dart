@@ -350,12 +350,7 @@ class PopoverBuilderMultiSelectPage extends Example {
         children: [
           content,
           const FDivider(style: .delta(padding: .value(.zero))),
-          FButton(
-            variant: .ghost,
-            prefix: const Icon(FIcons.plus),
-            child: const Text('Create New'),
-            onPress: () {},
-          ),
+          FButton(variant: .ghost, prefix: const Icon(FIcons.plus), child: const Text('Create New'), onPress: () {}),
         ],
       ),
     ),

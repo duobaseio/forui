@@ -53,12 +53,7 @@ class PopoverBuilderTimeFieldPage extends Example {
       children: [
         Expanded(child: content),
         const FDivider(style: .delta(padding: .value(.zero))),
-        FButton(
-          variant: .ghost,
-          prefix: const Icon(FIcons.list),
-          child: const Text('Browse All'),
-          onPress: () {},
-        ),
+        FButton(variant: .ghost, prefix: const Icon(FIcons.list), child: const Text('Browse All'), onPress: () {}),
       ],
     ),
     // {@highlight}
