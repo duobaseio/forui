@@ -7,7 +7,9 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
+import 'package:forui/src/theme/variant.dart';
 
+@Variants('FToast', {'primary': (1, 'The primary toast style.'), 'destructive': (2, 'The destructive toast style.')})
 @Sentinels(FToastStyle, {'backgroundFilter': 'imageFilterSentinel'})
 part 'toaster_style.design.dart';
 
@@ -75,13 +77,13 @@ class FToasterStyle with Diagnosticable, _$FToasterStyleFunctions {
   @override
   final FToastAlignment toastAlignment;
 
-  /// The contained toasts' style.
+  /// The toast variant styles.
   @override
-  final FToastStyle toastStyle;
+  final FToastStyles toastStyles;
 
   /// Creates a [FToasterStyle].
   const FToasterStyle({
-    required this.toastStyle,
+    required this.toastStyles,
     this.max = 3,
     this.padding = const .symmetric(horizontal: 20, vertical: 15),
     this.expandBehavior = .hoverOrPress,
@@ -102,8 +104,42 @@ class FToasterStyle with Diagnosticable, _$FToasterStyleFunctions {
     required FStyle style,
     required bool touch,
   }) : this(
-         toastStyle: .inherit(colors: colors, typography: typography, style: style, touch: touch),
+         toastStyles: .inherit(colors: colors, typography: typography, style: style, touch: touch),
        );
+}
+
+/// The toast styles.
+extension type FToastStyles(FVariants<FToastVariantConstraint, FToastVariant, FToastStyle, FToastStyleDelta> _)
+    implements FVariants<FToastVariantConstraint, FToastVariant, FToastStyle, FToastStyleDelta> {
+  /// Creates a [FToastStyles] that inherits its properties.
+  factory FToastStyles.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+    required bool touch,
+  }) {
+    final primary = FToastStyle.inherit(colors: colors, typography: typography, style: style, touch: touch);
+
+    return FToastStyles(
+      FVariants.from(
+        primary,
+        variants: {
+          [.primary]: const .delta(),
+          [.destructive]: .delta(
+            iconStyle: .delta(color: colors.destructive),
+            titleTextStyle: .delta(color: colors.destructive),
+            descriptionTextStyle: .delta(color: colors.destructive),
+          ),
+        },
+      ),
+    );
+  }
+
+  /// The primary toast style.
+  FToastStyle get primary => resolve({FToastVariant.primary});
+
+  /// The destructive toast style.
+  FToastStyle get destructive => resolve({FToastVariant.destructive});
 }
 
 /// The motion-related properties for [FToaster] that affect all toasts.

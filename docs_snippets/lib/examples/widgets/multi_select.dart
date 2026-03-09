@@ -335,6 +335,36 @@ class SortedMultiSelectPage extends Example {
 }
 
 @RoutePage()
+@Options(include: [fruits])
+class PopoverBuilderMultiSelectPage extends Example {
+  PopoverBuilderMultiSelectPage({@queryParam super.theme}) : super(alignment: .topCenter, top: 15);
+
+  @override
+  Widget example(BuildContext _) => FMultiSelect<String>.rich(
+    hint: const Text('Select a fruit'),
+    format: Text.new,
+    // {@highlight}
+    popoverBuilder: (context, controller, popoverController, content) => SingleChildScrollView(
+      child: Column(
+        mainAxisSize: .min,
+        children: [
+          content,
+          const FDivider(style: .delta(padding: .value(.zero))),
+          FButton(
+            variant: .ghost,
+            prefix: const Icon(FIcons.plus),
+            child: const Text('Create New'),
+            onPress: () {},
+          ),
+        ],
+      ),
+    ),
+    // {@endhighlight}
+    children: [for (final fruit in fruits) .item(title: Text(fruit), value: fruit)],
+  );
+}
+
+@RoutePage()
 class FormMultiSelectPage extends StatefulExample {
   FormMultiSelectPage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 30});
 

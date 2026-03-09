@@ -29,6 +29,7 @@ class _BasicSelect<T> extends FMultiSelect<T> {
     super.textAlign,
     super.textDirection,
     super.clearable,
+    super.popoverBuilder,
     super.contentAnchor,
     super.fieldAnchor,
     super.contentConstraints,

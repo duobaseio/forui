@@ -35,6 +35,8 @@ final select = FSelect<String>(
   suffixBuilder: FSelect.defaultIconBuilder,
   // {@endcategory}
   // {@category "Content"}
+  autoHide: true,
+  popoverBuilder: (context, controller, popoverController, content) => content,
   contentAnchor: .topStart,
   fieldAnchor: .bottomStart,
   contentConstraints: const FAutoWidthPortalConstraints(maxHeight: 300),
@@ -43,7 +45,6 @@ final select = FSelect<String>(
   contentOffset: .zero,
   contentHideRegion: .excludeChild,
   contentGroupId: null,
-  autoHide: true,
   contentEmptyBuilder: FSelect.defaultContentEmptyBuilder,
   contentScrollController: null,
   contentPhysics: const ClampingScrollPhysics(),
@@ -93,6 +94,8 @@ final selectRich = FSelect<String>.rich(
   suffixBuilder: FSelect.defaultIconBuilder,
   // {@endcategory}
   // {@category "Content"}
+  autoHide: true,
+  popoverBuilder: (context, controller, popoverController, content) => content,
   contentAnchor: .topStart,
   fieldAnchor: .bottomStart,
   contentConstraints: const FAutoWidthPortalConstraints(maxHeight: 300),
@@ -101,7 +104,6 @@ final selectRich = FSelect<String>.rich(
   contentOffset: .zero,
   contentHideRegion: .excludeChild,
   contentGroupId: null,
-  autoHide: true,
   contentEmptyBuilder: FSelect.defaultContentEmptyBuilder,
   contentScrollController: null,
   contentPhysics: const ClampingScrollPhysics(),
@@ -156,6 +158,8 @@ final selectSearch = FSelect<String>.search(
   suffixBuilder: FSelect.defaultIconBuilder,
   // {@endcategory}
   // {@category "Content"}
+  autoHide: true,
+  popoverBuilder: (context, controller, popoverController, content) => content,
   searchFieldProperties: const FSelectSearchFieldProperties(),
   contentAnchor: .topStart,
   fieldAnchor: .bottomStart,
@@ -165,7 +169,6 @@ final selectSearch = FSelect<String>.search(
   contentOffset: .zero,
   contentHideRegion: .excludeChild,
   contentGroupId: null,
-  autoHide: true,
   contentEmptyBuilder: FSelect.defaultContentEmptyBuilder,
   contentLoadingBuilder: FSelect.defaultContentLoadingBuilder,
   contentErrorBuilder: null,
@@ -218,6 +221,8 @@ final selectSearchBuilder = FSelect<String>.searchBuilder(
   suffixBuilder: FSelect.defaultIconBuilder,
   // {@endcategory}
   // {@category "Content"}
+  autoHide: true,
+  popoverBuilder: (context, controller, popoverController, content) => content,
   searchFieldProperties: const FSelectSearchFieldProperties(),
   contentAnchor: .topStart,
   fieldAnchor: .bottomStart,
@@ -227,7 +232,6 @@ final selectSearchBuilder = FSelect<String>.searchBuilder(
   contentOffset: .zero,
   contentHideRegion: .excludeChild,
   contentGroupId: null,
-  autoHide: true,
   contentLoadingBuilder: FSelect.defaultContentLoadingBuilder,
   contentEmptyBuilder: FSelect.defaultContentEmptyBuilder,
   contentErrorBuilder: null,

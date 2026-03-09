@@ -12,6 +12,7 @@ import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/time-field/default.json';
 import hour24Snippet from '@/snippets/examples/time-field/hour24.json';
 import pickerSnippet from '@/snippets/examples/time-field/picker.json';
+import popoverBuilderSnippet from '@/snippets/examples/time-field/popover-builder.json';
 import validatorSnippet from '@/snippets/examples/time-field/validator.json';
 import formSnippet from '@/snippets/examples/time-field/form.json';
 import timeFieldUsage from '@/snippets/usages/widgets/time_field/timeField.json';
@@ -96,6 +97,17 @@ dart run forui style create time-field
     </Tab>
     <Tab value="Code">
         <CodeSnippet snippet={pickerSnippet} />
+    </Tab>
+</Tabs>
+
+### Popover Builder
+
+<Tabs items={['Preview', 'Code']}>
+    <Tab value="Preview">
+        <Widget name='time-field' variant='popover-builder' height={500}/>
+    </Tab>
+    <Tab value="Code">
+        <CodeSnippet snippet={popoverBuilderSnippet} />
     </Tab>
 </Tabs>
 

@@ -12,6 +12,7 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
   final MouseCursor mouseCursor;
   final bool canRequestFocus;
   final bool clearable;
+  final FDateFieldPopoverBuilder popoverBuilder;
   @override
   final AlignmentGeometry anchor;
   @override
@@ -52,6 +53,7 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
     this.mouseCursor = .defer,
     this.canRequestFocus = true,
     this.clearable = false,
+    this.popoverBuilder = FDateField._popoverBuilder,
     this.anchor = .topLeft,
     this.fieldAnchor = .bottomLeft,
     this.spacing = const .spacing(4),
@@ -102,7 +104,8 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
       ..add(ObjectFlagProperty.has('onTapHide', onTapHide))
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
       ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
-      ..add(FlagProperty('clearable', value: clearable, ifTrue: 'clearable'));
+      ..add(FlagProperty('clearable', value: clearable, ifTrue: 'clearable'))
+      ..add(ObjectFlagProperty.has('popoverBuilder', popoverBuilder));
   }
 }
 
@@ -219,7 +222,8 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
         enabled: widget.enabled,
         builder: (context, _, variants, field) => _CalendarPopover(
           popoverController: _popoverController,
-          calendarController: _controller.calendar,
+          controller: _controller,
+          popoverBuilder: widget.popoverBuilder,
           style: style,
           properties: widget,
           autofocus: true,
@@ -242,8 +246,9 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
 }
 
 class _CalendarPopover extends StatelessWidget {
+  final FDateFieldController controller;
   final FPopoverController popoverController;
-  final FCalendarController<DateTime?> calendarController;
+  final FDateFieldPopoverBuilder popoverBuilder;
   final FDateFieldStyle style;
   final FDateFieldCalendarProperties properties;
   final bool autofocus;
@@ -251,8 +256,9 @@ class _CalendarPopover extends StatelessWidget {
   final Widget child;
 
   const _CalendarPopover({
+    required this.controller,
     required this.popoverController,
-    required this.calendarController,
+    required this.popoverBuilder,
     required this.style,
     required this.properties,
     required this.autofocus,
@@ -274,24 +280,29 @@ class _CalendarPopover extends StatelessWidget {
     groupId: properties.groupId,
     autofocus: autofocus,
     shortcuts: {const SingleActivator(.escape): _hide},
-    popoverBuilder: (_, _) => TextFieldTapRegion(
-      child: ValueListenableBuilder(
-        valueListenable: calendarController,
-        builder: (_, value, _) => FCalendar(
-          control: .managedDate(controller: calendarController),
-          style: style.calendarStyle,
-          initialMonth: switch (value) {
-            null => null,
-            _ when value.isBefore(properties.start ?? .utc(1900)) => properties.today,
-            _ when value.isAfter(properties.end ?? .utc(2100)) => properties.today,
-            _ => value,
-          },
-          onPress: properties.autoHide ? (_) => _hide() : null,
-          dayBuilder: properties.dayBuilder,
-          start: properties.start,
-          end: properties.end,
-          today: properties.today,
-          initialType: properties.initialType,
+    popoverBuilder: (context, _) => TextFieldTapRegion(
+      child: popoverBuilder(
+        context,
+        controller,
+        popoverController,
+        ValueListenableBuilder(
+          valueListenable: controller.calendar,
+          builder: (_, value, _) => FCalendar(
+            control: .managedDate(controller: controller.calendar),
+            style: style.calendarStyle,
+            initialMonth: switch (value) {
+              null => null,
+              _ when value.isBefore(properties.start ?? .utc(1900)) => properties.today,
+              _ when value.isAfter(properties.end ?? .utc(2100)) => properties.today,
+              _ => value,
+            },
+            onPress: properties.autoHide ? (_) => _hide() : null,
+            dayBuilder: properties.dayBuilder,
+            start: properties.start,
+            end: properties.end,
+            today: properties.today,
+            initialType: properties.initialType,
+          ),
         ),
       ),
     ),
@@ -307,8 +318,9 @@ class _CalendarPopover extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('popoverController', popoverController))
-      ..add(DiagnosticsProperty('calendarController', calendarController))
+      ..add(ObjectFlagProperty.has('popoverBuilder', popoverBuilder))
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('properties', this.properties))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))

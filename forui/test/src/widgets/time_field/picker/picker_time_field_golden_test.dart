@@ -220,4 +220,28 @@ void main() {
       );
     });
   }
+
+  testWidgets('popover builder', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        alignment: .topCenter,
+        child: FTimeField.picker(
+          popoverBuilder: (context, _, _, content) => Column(
+            mainAxisSize: .min,
+            children: [
+              const Padding(padding: .all(8), child: Text('Before')),
+              Expanded(child: content),
+              const Padding(padding: .all(8), child: Text('After')),
+            ],
+          ),
+          key: key,
+        ),
+      ),
+    );
+
+    await tester.tap(find.byKey(key));
+    await tester.pumpAndSettle();
+
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-field/picker/popover-builder.png'));
+  });
 }

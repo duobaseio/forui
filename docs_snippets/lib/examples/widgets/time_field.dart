@@ -40,6 +40,32 @@ class PickerTimeFieldPage extends Example {
 }
 
 @RoutePage()
+class PopoverBuilderTimeFieldPage extends Example {
+  PopoverBuilderTimeFieldPage({@queryParam super.theme}) : super(alignment: .topCenter, top: 30);
+
+  @override
+  Widget example(BuildContext _) => FTimeField.picker(
+    label: const Text('Appointment Time'),
+    description: const Text('Select a time for your appointment.'),
+    // {@highlight}
+    popoverBuilder: (context, controller, popoverController, content) => Column(
+      mainAxisSize: .min,
+      children: [
+        Expanded(child: content),
+        const FDivider(style: .delta(padding: .value(.zero))),
+        FButton(
+          variant: .ghost,
+          prefix: const Icon(FIcons.list),
+          child: const Text('Browse All'),
+          onPress: () {},
+        ),
+      ],
+    ),
+    // {@highlight}
+  );
+}
+
+@RoutePage()
 class ValidatorTimeFieldPage extends Example {
   ValidatorTimeFieldPage({@queryParam super.theme});
 

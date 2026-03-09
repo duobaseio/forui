@@ -530,4 +530,33 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('multi-select/$name-sizes.png'));
     });
   }
+
+  testWidgets('popover builder', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        alignment: .topCenter,
+        child: FMultiSelect<String>(
+          items: letters,
+          popoverBuilder: (context, _, _, content) => SingleChildScrollView(
+            child: Column(
+              mainAxisSize: .min,
+              children: [
+                const Padding(padding: .all(8), child: Text('Before')),
+                const Divider(),
+                content,
+                const Divider(),
+                const Padding(padding: .all(8), child: Text('After')),
+              ],
+            ),
+          ),
+          key: key,
+        ),
+      ),
+    );
+
+    await tester.tap(find.byKey(key));
+    await tester.pumpAndSettle();
+
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('multi-select/popover-builder.png'));
+  });
 }

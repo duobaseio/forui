@@ -25,6 +25,7 @@ import clearableSnippet from '@/snippets/examples/multi-select/clearable.json';
 import formatSnippet from '@/snippets/examples/multi-select/format.json';
 import minMaxSnippet from '@/snippets/examples/multi-select/min-max.json';
 import sortedSnippet from '@/snippets/examples/multi-select/sorted.json';
+import popoverBuilderSnippet from '@/snippets/examples/multi-select/popover-builder.json';
 import formSnippet from '@/snippets/examples/multi-select/form.json';
 
 <Callout type="info">
@@ -190,6 +191,17 @@ dart run forui style create multi-select
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={sortedSnippet} />
+  </Tab>
+</Tabs>
+
+#### Popover Builder
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='multi-select' variant='popover-builder' height={400}/>
+  </Tab>
+  <Tab value="Code">
+    <CodeSnippet snippet={popoverBuilderSnippet} />
   </Tab>
 </Tabs>
 

@@ -53,6 +53,28 @@ class ToastPage extends Example {
 }
 
 @RoutePage()
+class DestructiveToastPage extends Example {
+  DestructiveToastPage({@queryParam super.theme});
+
+  @override
+  Widget example(BuildContext context) => FButton(
+    variant: .outline,
+    size: .sm,
+    mainAxisSize: .min,
+    onPress: () => showFToast(
+      context: context,
+      // {@highlight}
+      variant: .destructive,
+      // {@endhighlight}
+      icon: const Icon(FIcons.circleX),
+      title: const Text('Something went wrong'),
+      description: const Text('There was a problem with your request.'),
+    ),
+    child: const Text('Show Toast'),
+  );
+}
+
+@RoutePage()
 class CustomAlignmentToastPage extends Example {
   CustomAlignmentToastPage({@queryParam super.theme});
 

@@ -131,7 +131,7 @@ class _ToasterStackState extends State<ToasterStack> with SingleTickerProviderSt
           for (final (index, entry) in widget.entries.indexed)
             AnimatedToast(
               key: entry.key,
-              style: entry.style ?? widget.style.toastStyle,
+              style: entry.style,
               alignTransform: widget.collapsedAlignTransform,
               index: widget.entries.length - 1 - index,
               length: widget.entries.length,

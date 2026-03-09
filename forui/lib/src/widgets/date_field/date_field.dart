@@ -13,6 +13,15 @@ import 'package:forui/src/widgets/popover/popover_controller.dart';
 part 'calendar/calendar_date_field.dart';
 part 'input/input_date_field.dart';
 
+/// A builder that wraps [FDateField]'s popover content.
+typedef FDateFieldPopoverBuilder =
+    Widget Function(
+      BuildContext context,
+      FDateFieldController controller,
+      FPopoverController popoverController,
+      Widget content,
+    );
+
 /// A date field allows a date to be selected from a calendar, input field, or both.
 ///
 /// A [FDateField] is internally a [FormField], therefore it can be used in a [Form].
@@ -41,6 +50,8 @@ abstract class FDateField extends StatefulWidget {
     padding: const .directional(start: 12.0, end: 4.0),
     child: IconTheme(data: style.iconStyle.resolve(variants), child: const Icon(FIcons.calendar)),
   );
+
+  static Widget _popoverBuilder(BuildContext _, FDateFieldController _, FPopoverController _, Widget content) => content;
 
   static Widget _fieldBuilder(BuildContext _, FDateFieldStyle _, Set<FTextFieldVariant> _, Widget child) => child;
 
@@ -198,6 +209,7 @@ abstract class FDateField extends StatefulWidget {
     MouseCursor? mouseCursor,
     bool canRequestFocus,
     bool clearable,
+    FDateFieldPopoverBuilder popoverBuilder,
     int baselineInputYear,
     FFieldBuilder<FDateFieldStyle> builder,
     FFieldIconBuilder<FTextFieldStyle>? prefixBuilder,
@@ -278,6 +290,7 @@ abstract class FDateField extends StatefulWidget {
     MouseCursor mouseCursor,
     bool canRequestFocus,
     bool clearable,
+    FDateFieldPopoverBuilder popoverBuilder,
     String? hint,
     bool autofocus,
     FocusNode? focusNode,

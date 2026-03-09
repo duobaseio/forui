@@ -79,6 +79,7 @@ final timeFieldPicker = FTimeField.picker(
   clearable: false,
   // {@endcategory}
   // {@category "Picker"}
+  popoverBuilder: (context, controller, popoverController, content) => content,
   hourInterval: 1,
   minuteInterval: 1,
   anchor: .topLeft,

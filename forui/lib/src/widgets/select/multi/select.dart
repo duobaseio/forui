@@ -20,6 +20,15 @@ part 'basic_select.dart';
 
 part 'search_select.dart';
 
+/// A builder that wraps [FMultiSelect]'s popover content.
+typedef FMultiSelectPopoverBuilder<T> =
+    Widget Function(
+      BuildContext context,
+      FMultiValueNotifier<T> controller,
+      FPopoverController popoverController,
+      Widget content,
+    );
+
 /// A function that builds a tag in a [FMultiSelect].
 typedef FMultiSelectTagBuilder<T> =
     Widget Function(
@@ -79,6 +88,9 @@ abstract class FMultiSelect<T> extends StatefulWidget {
       child: Text(localizations.selectNoResults, style: style.emptyTextStyle, textAlign: TextAlign.center),
     );
   }
+
+  static Widget _popoverBuilder(BuildContext _, FMultiValueNotifier<Object?> _, FPopoverController _, Widget content) =>
+      content;
 
   static String? _defaultValidator(Object? _) => null;
 
@@ -178,6 +190,11 @@ abstract class FMultiSelect<T> extends StatefulWidget {
   /// True if a clear button should be shown. Defaults to false.
   final bool clearable;
 
+  /// A builder that wraps the entire popover content with arbitrary widgets.
+  ///
+  /// Defaults to returning the content as-is.
+  final FMultiSelectPopoverBuilder<T> popoverBuilder;
+
   /// The alignment point on the popover. Defaults to [AlignmentGeometry.topStart].
   final AlignmentGeometry contentAnchor;
 
@@ -250,6 +267,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     TextAlign textAlign = .start,
     TextDirection? textDirection,
     bool clearable = false,
+    FMultiSelectPopoverBuilder<T> popoverBuilder = _popoverBuilder,
     AlignmentGeometry contentAnchor = .topStart,
     AlignmentGeometry fieldAnchor = .bottomStart,
     FPortalConstraints contentConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
@@ -293,6 +311,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
       textAlign: textAlign,
       textDirection: textDirection,
       clearable: clearable,
+      popoverBuilder: popoverBuilder,
       contentAnchor: contentAnchor,
       fieldAnchor: fieldAnchor,
       contentConstraints: contentConstraints,
@@ -339,6 +358,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     TextAlign textAlign,
     TextDirection? textDirection,
     bool clearable,
+    FMultiSelectPopoverBuilder<T> popoverBuilder,
     AlignmentGeometry contentAnchor,
     AlignmentGeometry fieldAnchor,
     FPortalConstraints contentConstraints,
@@ -401,6 +421,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     TextAlign textAlign = .start,
     TextDirection? textDirection,
     bool clearable = false,
+    FMultiSelectPopoverBuilder<T> popoverBuilder = _popoverBuilder,
     AlignmentGeometry contentAnchor = .topStart,
     AlignmentGeometry fieldAnchor = .bottomStart,
     FPortalConstraints contentConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
@@ -455,6 +476,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
       textAlign: textAlign,
       textDirection: textDirection,
       clearable: clearable,
+      popoverBuilder: popoverBuilder,
       contentAnchor: contentAnchor,
       fieldAnchor: fieldAnchor,
       contentConstraints: contentConstraints,
@@ -512,6 +534,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     TextAlign textAlign,
     TextDirection? textDirection,
     bool clearable,
+    FMultiSelectPopoverBuilder<T> popoverBuilder,
     AlignmentGeometry contentAnchor,
     AlignmentGeometry fieldAnchor,
     FPortalConstraints contentConstraints,
@@ -553,6 +576,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     this.textAlign = .start,
     this.textDirection,
     this.clearable = false,
+    this.popoverBuilder = _popoverBuilder,
     this.contentAnchor = .topStart,
     this.fieldAnchor = .bottomStart,
     this.contentConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
@@ -596,6 +620,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
       ..add(EnumProperty('textAlign', textAlign))
       ..add(EnumProperty('textDirection', textDirection))
       ..add(FlagProperty('clearable', value: clearable, ifTrue: 'clearable'))
+      ..add(ObjectFlagProperty.has('popoverBuilder', popoverBuilder))
       ..add(DiagnosticsProperty('contentAnchor', contentAnchor))
       ..add(DiagnosticsProperty('fieldAnchor', fieldAnchor))
       ..add(DiagnosticsProperty('contentConstraints', contentConstraints))
@@ -711,11 +736,16 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
                 popover: _popoverController,
                 contains: (value) => _controller.value.contains(value),
                 onPress: (value) => _controller.update(value, add: !_controller.value.contains(value)),
-                child: content(
+                child: widget.popoverBuilder(
                   context,
-                  style,
-                  autofocusFirst: _controller.value.isEmpty,
-                  autofocus: (value) => _controller.value.lastOrNull == value,
+                  _controller,
+                  _popoverController,
+                  content(
+                    context,
+                    style,
+                    autofocusFirst: _controller.value.isEmpty,
+                    autofocus: (value) => _controller.value.lastOrNull == value,
+                  ),
                 ),
               ),
               child: MultiSelectFieldScope(

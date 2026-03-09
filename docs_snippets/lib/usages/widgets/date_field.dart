@@ -37,6 +37,7 @@ final dateField = FDateField(
   suffixBuilder: null,
   // {@endcategory}
   // {@category "Calendar"}
+  popoverBuilder: (context, controller, popoverController, content) => content,
   calendar: const FDateFieldCalendarProperties(),
   // {@endcategory}
   // {@category "Accessibility"}
@@ -81,6 +82,7 @@ final calendar = FDateField.calendar(
   suffixBuilder: null,
   // {@endcategory}
   // {@category "Calendar"}
+  popoverBuilder: (context, controller, popoverController, content) => content,
   dayBuilder: FCalendar.defaultDayBuilder,
   start: null,
   end: null,

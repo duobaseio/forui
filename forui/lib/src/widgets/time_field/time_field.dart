@@ -16,6 +16,15 @@ part 'input/input_time_field.dart';
 
 part 'picker/picker_time_field.dart';
 
+/// A builder that wraps [FTimeField]'s popover content.
+typedef FTimeFieldPopoverBuilder =
+    Widget Function(
+      BuildContext context,
+      FTimeFieldController controller,
+      FPopoverController popoverController,
+      Widget content,
+    );
+
 /// A time field allows a time to be selected from a picker or input field.
 ///
 /// A [FTimeField] is internally a [FormField], therefore it can be used in a [Form].
@@ -50,6 +59,8 @@ abstract class FTimeField extends StatefulWidget {
   );
 
   static Widget _fieldBuilder(BuildContext _, FTimeFieldStyle _, Set<FTextFieldVariant> _, Widget child) => child;
+
+  static Widget _popoverBuilder(BuildContext _, FTimeFieldController _, FPopoverController _, Widget content) => content;
 
   /// The control for managing the time field's state.
   final FTimeFieldControl control;
@@ -304,6 +315,7 @@ abstract class FTimeField extends StatefulWidget {
     FFieldIconBuilder<FTextFieldStyle>? prefixBuilder,
     FFieldIconBuilder<FTextFieldStyle>? suffixBuilder,
     bool clearable,
+    FTimeFieldPopoverBuilder popoverBuilder,
     Widget? label,
     Widget? description,
     bool enabled,

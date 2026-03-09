@@ -21,6 +21,7 @@ import swipeDisabledSnippet from '@/snippets/examples/toast/swipe-disabled.json'
 import noAutoDismissSnippet from '@/snippets/examples/toast/no-auto-dismiss.json';
 import alwaysExpandSnippet from '@/snippets/examples/toast/always-expand.json';
 import disabledExpandSnippet from '@/snippets/examples/toast/disabled-expand.json';
+import destructiveSnippet from '@/snippets/examples/toast/destructive.json';
 import customAlignmentSnippet from '@/snippets/examples/toast/custom-alignment.json';
 
 <Callout type="info">
@@ -73,6 +74,17 @@ dart run forui style create toast
 ## Examples
 
 ### Appearance
+
+#### Destructive
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='toast' variant='destructive' height={300}/>
+  </Tab>
+  <Tab value="Code">
+    <CodeSnippet snippet={destructiveSnippet} />
+  </Tab>
+</Tabs>
 
 #### Custom Alignment
 

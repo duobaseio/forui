@@ -33,6 +33,7 @@ final multiSelect = FMultiSelect<String>(
   suffixBuilder: FMultiSelect.defaultIconBuilder,
   // {@endcategory}
   // {@category "Content"}
+  popoverBuilder: (context, controller, popoverController, content) => content,
   contentAnchor: .topStart,
   fieldAnchor: .bottomStart,
   contentConstraints: const FAutoWidthPortalConstraints(maxHeight: 300),
@@ -88,6 +89,7 @@ final multiSelectRich = FMultiSelect<String>.rich(
   suffixBuilder: FMultiSelect.defaultIconBuilder,
   // {@endcategory}
   // {@category "Content"}
+  popoverBuilder: (context, controller, popoverController, content) => content,
   contentAnchor: .topStart,
   fieldAnchor: .bottomStart,
   contentConstraints: const FAutoWidthPortalConstraints(maxHeight: 300),
@@ -148,6 +150,7 @@ final multiSelectSearch = FMultiSelect<String>.search(
   suffixBuilder: FMultiSelect.defaultIconBuilder,
   // {@endcategory}
   // {@category "Content"}
+  popoverBuilder: (context, controller, popoverController, content) => content,
   searchFieldProperties: const FSelectSearchFieldProperties(),
   contentAnchor: .topStart,
   fieldAnchor: .bottomStart,
@@ -207,6 +210,7 @@ final multiSelectSearchBuilder = FMultiSelect<String>.searchBuilder(
   suffixBuilder: FMultiSelect.defaultIconBuilder,
   // {@endcategory}
   // {@category "Content"}
+  popoverBuilder: (context, controller, popoverController, content) => content,
   searchFieldProperties: const FSelectSearchFieldProperties(),
   contentAnchor: .topStart,
   fieldAnchor: .bottomStart,

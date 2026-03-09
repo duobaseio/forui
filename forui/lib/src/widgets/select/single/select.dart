@@ -16,6 +16,15 @@ part 'basic_select.dart';
 
 part 'search_select.dart';
 
+/// A builder that wraps [FSelect]'s popover content.
+typedef FSelectPopoverBuilder<T> =
+    Widget Function(
+      BuildContext context,
+      FSelectController<T> controller,
+      FPopoverController popoverController,
+      Widget content,
+    );
+
 /// A select displays a list of options for the user to pick from.
 ///
 /// It is a [FormField] and therefore can be used in a [Form] widget.
@@ -52,7 +61,10 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
 
   static Widget _fieldBuilder(BuildContext _, FSelectStyle _, Set<FTextFieldVariant> _, Widget child) => child;
 
-  static String? _defaultValidator(Object? _) => null;
+  static Widget _popoverBuilder(BuildContext _, FSelectController<Object?> _, FPopoverController _, Widget content) =>
+      content;
+
+  static String? _validator(Object? _) => null;
 
   /// The control that manages the select's state.
   ///
@@ -160,6 +172,9 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// True if a clear button should be shown. Defaults to false.
   final bool clearable;
 
+  /// A builder that wraps the entire popover content with arbitrary widgets. Defaults to returning the content as-is.
+  final FSelectPopoverBuilder<T> popoverBuilder;
+
   /// The alignment point on the popover. Defaults to [AlignmentGeometry.topStart].
   final AlignmentGeometry contentAnchor;
 
@@ -227,7 +242,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     VoidCallback? onReset,
     AutovalidateMode autovalidateMode = .onUnfocus,
     String? forceErrorText,
-    FormFieldValidator<T> validator = _defaultValidator,
+    FormFieldValidator<T> validator = _validator,
     Widget Function(BuildContext context, String message) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     String? hint,
     TextAlign textAlign = .start,
@@ -237,6 +252,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     MouseCursor mouseCursor = .defer,
     bool canRequestFocus = true,
     bool clearable = false,
+    FSelectPopoverBuilder<T> popoverBuilder = _popoverBuilder,
     AlignmentGeometry contentAnchor = .topStart,
     AlignmentGeometry fieldAnchor = .bottomStart,
     FPortalConstraints contentConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
@@ -282,6 +298,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       mouseCursor: mouseCursor,
       canRequestFocus: canRequestFocus,
       clearable: clearable,
+      popoverBuilder: popoverBuilder,
       contentAnchor: contentAnchor,
       fieldAnchor: fieldAnchor,
       contentConstraints: contentConstraints,
@@ -331,6 +348,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     MouseCursor mouseCursor,
     bool canRequestFocus,
     bool clearable,
+    FSelectPopoverBuilder<T> popoverBuilder,
     AlignmentGeometry contentAnchor,
     AlignmentGeometry fieldAnchor,
     FPortalConstraints contentConstraints,
@@ -386,7 +404,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     VoidCallback? onReset,
     AutovalidateMode autovalidateMode = .onUnfocus,
     String? forceErrorText,
-    FormFieldValidator<T> validator = _defaultValidator,
+    FormFieldValidator<T> validator = _validator,
     Widget Function(BuildContext context, String message) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     String? hint,
     TextAlign textAlign = .start,
@@ -396,6 +414,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     MouseCursor mouseCursor = .defer,
     bool canRequestFocus = true,
     bool clearable = false,
+    FSelectPopoverBuilder<T> popoverBuilder = _popoverBuilder,
     AlignmentGeometry contentAnchor = .topStart,
     AlignmentGeometry fieldAnchor = .bottomStart,
     FPortalConstraints contentConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
@@ -453,6 +472,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       mouseCursor: mouseCursor,
       canRequestFocus: canRequestFocus,
       clearable: clearable,
+      popoverBuilder: popoverBuilder,
       contentAnchor: contentAnchor,
       fieldAnchor: fieldAnchor,
       contentConstraints: contentConstraints,
@@ -513,6 +533,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     MouseCursor mouseCursor,
     bool canRequestFocus,
     bool clearable,
+    FSelectPopoverBuilder<T> popoverBuilder,
     AlignmentGeometry contentAnchor,
     AlignmentGeometry fieldAnchor,
     FPortalConstraints contentConstraints,
@@ -548,7 +569,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     this.onReset,
     this.autovalidateMode = .onUnfocus,
     this.forceErrorText,
-    this.validator = _defaultValidator,
+    this.validator = _validator,
     this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     this.hint,
     this.textAlign = .start,
@@ -558,6 +579,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     this.mouseCursor = .defer,
     this.canRequestFocus = true,
     this.clearable = false,
+    this.popoverBuilder = _popoverBuilder,
     this.contentAnchor = .topStart,
     this.fieldAnchor = .bottomStart,
     this.contentConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
@@ -604,6 +626,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
       ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
       ..add(FlagProperty('clearable', value: clearable, ifTrue: 'clearable'))
+      ..add(ObjectFlagProperty.has('popoverBuilder', popoverBuilder))
       ..add(DiagnosticsProperty('contentAnchor', contentAnchor))
       ..add(DiagnosticsProperty('fieldAnchor', fieldAnchor))
       ..add(DiagnosticsProperty('contentConstraints', contentConstraints))
@@ -764,11 +787,16 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
 
                 _controller.value = value;
               },
-              child: content(
+              child: widget.popoverBuilder(
                 context,
-                style,
-                autofocusFirst: _controller.value == null,
-                autofocus: (value) => _controller.value == value,
+                _controller,
+                _popoverController,
+                content(
+                  context,
+                  style,
+                  autofocusFirst: _controller.value == null,
+                  autofocus: (value) => _controller.value == value,
+                ),
               ),
             ),
           ),

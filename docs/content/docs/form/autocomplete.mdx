@@ -19,6 +19,7 @@ import asyncSnippet from '@/snippets/examples/autocomplete/async.json';
 import asyncLoadingSnippet from '@/snippets/examples/autocomplete/async-loading.json';
 import asyncErrorSnippet from '@/snippets/examples/autocomplete/async-error.json';
 import clearableSnippet from '@/snippets/examples/autocomplete/clearable.json';
+import popoverBuilderSnippet from '@/snippets/examples/autocomplete/popover-builder.json';
 import formSnippet from '@/snippets/examples/autocomplete/form.json';
 
 <Callout type="info" title="Not a searchable select">
@@ -131,6 +132,17 @@ dart run forui style create autocomplete
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={clearableSnippet} />
+  </Tab>
+</Tabs>
+
+#### Popover Builder
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='autocomplete' variant='popover-builder' height={400}/>
+  </Tab>
+  <Tab value="Code">
+    <CodeSnippet snippet={popoverBuilderSnippet} />
   </Tab>
 </Tabs>
 

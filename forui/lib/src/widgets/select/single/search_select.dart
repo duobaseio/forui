@@ -40,6 +40,7 @@ class _SearchSelect<T> extends FSelect<T> {
     super.mouseCursor,
     super.canRequestFocus,
     super.clearable,
+    super.popoverBuilder,
     super.contentAnchor,
     super.fieldAnchor,
     super.contentConstraints,

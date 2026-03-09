@@ -75,6 +75,7 @@ final autocomplete = FAutocomplete(
   // {@endcategory}
   // {@category "Content"}
   autoHide: true,
+  popoverBuilder: (context, controller, popoverController, content) => content,
   contentAnchor: .topStart,
   fieldAnchor: .bottomStart,
   contentConstraints: const FAutoWidthPortalConstraints(maxHeight: 300),
@@ -86,12 +87,12 @@ final autocomplete = FAutocomplete(
   contentOnTapHide: () {},
   contentScrollController: null,
   contentPhysics: const ClampingScrollPhysics(),
-  contentDivider: .none,
-  filter: (query) => ['Apple', 'Banana'].where((item) => item.toLowerCase().startsWith(query.toLowerCase())),
   contentBuilder: (context, query, values) => [for (final value in values) .item(value: value)],
   contentEmptyBuilder: FAutocomplete.defaultContentEmptyBuilder,
   contentLoadingBuilder: FAutocomplete.defaultContentLoadingBuilder,
   contentErrorBuilder: (context, error, stackTrace) => const Text('Error'),
+  contentDivider: .none,
+  filter: (query) => ['Apple', 'Banana'].where((item) => item.toLowerCase().startsWith(query.toLowerCase())),
   // {@endcategory}
   // {@category "Core"}
   style: const .delta(),
@@ -174,9 +175,7 @@ final builder = FAutocomplete.builder(
   // {@endcategory}
   // {@category "Content"}
   autoHide: true,
-  contentEmptyBuilder: FAutocomplete.defaultContentEmptyBuilder,
-  contentLoadingBuilder: FAutocomplete.defaultContentLoadingBuilder,
-  contentErrorBuilder: (context, error, stackTrace) => const Text('Error'),
+  popoverBuilder: (context, controller, popoverController, content) => content,
   contentAnchor: .topStart,
   fieldAnchor: .bottomStart,
   contentConstraints: const FAutoWidthPortalConstraints(maxHeight: 300),
@@ -187,6 +186,9 @@ final builder = FAutocomplete.builder(
   contentGroupId: null,
   contentOnTapHide: () {},
   contentScrollController: null,
+  contentEmptyBuilder: FAutocomplete.defaultContentEmptyBuilder,
+  contentLoadingBuilder: FAutocomplete.defaultContentLoadingBuilder,
+  contentErrorBuilder: (context, error, stackTrace) => const Text('Error'),
   contentPhysics: const ClampingScrollPhysics(),
   contentDivider: .none,
   // {@endcategory}

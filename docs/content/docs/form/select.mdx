@@ -24,6 +24,7 @@ import asyncErrorSnippet from '@/snippets/examples/select/async-error.json';
 import toggleableSnippet from '@/snippets/examples/select/toggleable.json';
 import clearableSnippet from '@/snippets/examples/select/clearable.json';
 import formatSnippet from '@/snippets/examples/select/format.json';
+import popoverBuilderSnippet from '@/snippets/examples/select/popover-builder.json';
 import formSnippet from '@/snippets/examples/select/form.json';
 
 <Callout type="info">
@@ -166,6 +167,17 @@ dart run forui style create select
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={clearableSnippet} />
+  </Tab>
+</Tabs>
+
+#### Popover Builder
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='select' variant='popover-builder' height={400}/>
+  </Tab>
+  <Tab value="Code">
+    <CodeSnippet snippet={popoverBuilderSnippet} />
   </Tab>
 </Tabs>
 

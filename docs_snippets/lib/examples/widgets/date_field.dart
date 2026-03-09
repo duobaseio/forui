@@ -50,6 +50,46 @@ class ClearableDateFieldPage extends Example {
 }
 
 @RoutePage()
+class PopoverBuilderDateFieldPage extends Example {
+  PopoverBuilderDateFieldPage({@queryParam super.theme}) : super(alignment: .topCenter, top: 30);
+
+  @override
+  Widget example(BuildContext _) => FDateField.calendar(
+    style: .delta(
+      calendarStyle: .delta(
+        decoration: .boxDelta(border: .fromLTRB()),
+        padding: const .value(.only(left: 11, top: 11, right: 11)),
+      ),
+    ),
+    label: const Text('Appointment Date'),
+    description: const Text('Select a date for your appointment'),
+    // {@highlight}
+    popoverBuilder: (context, controller, popoverController, content) => Padding(
+      padding: const .all(1.0),
+      child: Column(
+        mainAxisSize: .min,
+        children: [
+          content,
+          Padding(
+            padding: const .all(8.0),
+            child: Row(
+              mainAxisSize: .min,
+              spacing: 6,
+              children: [
+                for (final label in ['Today', 'Tomorrow', 'In a week'])
+                  FButton(variant: .outline, size: .sm, child: Text(label), onPress: () {}),
+              ],
+            ),
+          ),
+        ],
+      ),
+    ),
+    // {@endhighlight}
+    // {@endhighlight}
+  );
+}
+
+@RoutePage()
 class ValidatorDateFieldPage extends Example {
   ValidatorDateFieldPage({@queryParam super.theme, super.alignment = Alignment.topCenter, super.top = 30});
 

@@ -32,6 +32,7 @@ class _BasicSelect<T> extends FSelect<T> {
     super.mouseCursor,
     super.canRequestFocus,
     super.clearable,
+    super.popoverBuilder,
     super.contentAnchor,
     super.fieldAnchor,
     super.contentConstraints,
@@ -46,6 +47,7 @@ class _BasicSelect<T> extends FSelect<T> {
     super.contentScrollHandles,
     super.contentPhysics,
     super.contentDivider,
+
     super.key,
   }) : super._();
 

@@ -32,6 +32,7 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
   final int hourInterval;
   @override
   final int minuteInterval;
+  final FTimeFieldPopoverBuilder popoverBuilder;
 
   const _PickerTimeField({
     this.format,
@@ -53,6 +54,7 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
     this.onTapHide,
     this.hourInterval = 1,
     this.minuteInterval = 1,
+    this.popoverBuilder = FTimeField._popoverBuilder,
     super.control,
     super.popoverControl,
     super.size,
@@ -89,7 +91,8 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
       ..add(EnumProperty('textDirection', textDirection))
       ..add(FlagProperty('expands', value: expands, ifTrue: 'expands'))
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
-      ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'));
+      ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
+      ..add(ObjectFlagProperty.has('popoverBuilder', popoverBuilder));
   }
 }
 
@@ -217,6 +220,7 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
         builder: (context, _, variants, field) => _PickerPopover(
           controller: _controller,
           popoverController: _popoverController,
+          popoverBuilder: widget.popoverBuilder,
           style: style,
           hour24: widget.hour24,
           properties: widget,
@@ -247,6 +251,7 @@ class _PickerPopover extends StatelessWidget {
   final bool hour24;
   final bool autofocus;
   final FocusNode? fieldFocusNode;
+  final FTimeFieldPopoverBuilder popoverBuilder;
   final Widget child;
 
   const _PickerPopover({
@@ -257,6 +262,7 @@ class _PickerPopover extends StatelessWidget {
     required this.hour24,
     required this.autofocus,
     required this.fieldFocusNode,
+    required this.popoverBuilder,
     required this.child,
   });
 
@@ -275,15 +281,20 @@ class _PickerPopover extends StatelessWidget {
     onTapHide: properties.onTapHide,
     autofocus: autofocus,
     shortcuts: {const SingleActivator(.escape): _hide},
-    popoverBuilder: (_, _) => TextFieldTapRegion(
-      child: Padding(
-        padding: const .symmetric(horizontal: 5.0),
-        child: FTimePicker(
-          control: .managed(controller: controller.picker),
-          style: style.pickerStyle,
-          hour24: hour24,
-          hourInterval: properties.hourInterval,
-          minuteInterval: properties.minuteInterval,
+    popoverBuilder: (context, _) => TextFieldTapRegion(
+      child: popoverBuilder(
+        context,
+        controller,
+        popoverController,
+        Padding(
+          padding: const .symmetric(horizontal: 5.0),
+          child: FTimePicker(
+            control: .managed(controller: controller.picker),
+            style: style.pickerStyle,
+            hour24: hour24,
+            hourInterval: properties.hourInterval,
+            minuteInterval: properties.minuteInterval,
+          ),
         ),
       ),
     ),
@@ -305,6 +316,7 @@ class _PickerPopover extends StatelessWidget {
       ..add(DiagnosticsProperty('properties', this.properties))
       ..add(DiagnosticsProperty('hour24', hour24))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
-      ..add(DiagnosticsProperty('fieldFocusNode', fieldFocusNode));
+      ..add(DiagnosticsProperty('fieldFocusNode', fieldFocusNode))
+      ..add(ObjectFlagProperty.has('popoverBuilder', popoverBuilder));
   }
 }

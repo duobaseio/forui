@@ -209,6 +209,35 @@ class ClearableAutocompletePage extends Example {
 }
 
 @RoutePage()
+@Options(include: [fruits])
+class PopoverBuilderAutocompletePage extends Example {
+  PopoverBuilderAutocompletePage({@queryParam super.theme}) : super(alignment: .topCenter, top: 20);
+
+  @override
+  Widget example(BuildContext _) => FAutocomplete(
+    hint: 'Type to search fruits',
+    items: fruits,
+    // {@highlight}
+    popoverBuilder: (context, controller, popoverController, content) => SingleChildScrollView(
+      child: Column(
+        mainAxisSize: .min,
+        children: [
+          content,
+          const FDivider(style: .delta(padding: .value(.zero))),
+          FButton(
+            variant: .ghost,
+            prefix: const Icon(FIcons.list),
+            child: const Text('Browse All'),
+            onPress: () {},
+          ),
+        ],
+      ),
+    ),
+    // {@endhighlight}
+  );
+}
+
+@RoutePage()
 class FormAutocompletePage extends StatefulExample {
   FormAutocompletePage({@queryParam super.theme}) : super(alignment: .topCenter, top: 20);
 

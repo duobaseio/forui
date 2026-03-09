@@ -370,4 +370,33 @@ void main() {
 
     await expectLater(find.byType(TestScaffold), matchesGoldenFile('autocomplete/select-move-selection.png'));
   });
+
+  testWidgets('popover builder', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        alignment: .topCenter,
+        child: FAutocomplete(
+          key: key,
+          items: fruits,
+          popoverBuilder: (context, _, _, content) => SingleChildScrollView(
+            child: Column(
+              mainAxisSize: .min,
+              children: [
+                const Padding(padding: .all(8), child: Text('Before')),
+                const Divider(),
+                content,
+                const Divider(),
+                const Padding(padding: .all(8), child: Text('After')),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+
+    await tester.tap(find.byKey(key));
+    await tester.pumpAndSettle();
+
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('autocomplete/popover-builder.png'));
+  });
 }

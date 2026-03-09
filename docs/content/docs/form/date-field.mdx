@@ -16,6 +16,7 @@ import defaultSnippet from '@/snippets/examples/date-field/default.json';
 import calendarSnippet from '@/snippets/examples/date-field/calendar.json';
 import inputSnippet from '@/snippets/examples/date-field/input.json';
 import clearableSnippet from '@/snippets/examples/date-field/clearable.json';
+import popoverBuilderSnippet from '@/snippets/examples/date-field/popover-builder.json';
 import validatorSnippet from '@/snippets/examples/date-field/validator.json';
 import formSnippet from '@/snippets/examples/date-field/form.json';
 
@@ -103,6 +104,17 @@ dart run forui style create date-field
         <CodeSnippet snippet={clearableSnippet} />
     </Tab>
 
+</Tabs>
+
+### Popover Builder
+
+<Tabs items={['Preview', 'Code']}>
+    <Tab value="Preview">
+        <Widget name='date-field' variant='popover-builder' height={500}/>
+    </Tab>
+    <Tab value="Code">
+        <CodeSnippet snippet={popoverBuilderSnippet} />
+    </Tab>
 </Tabs>
 
 ### Custom Validation

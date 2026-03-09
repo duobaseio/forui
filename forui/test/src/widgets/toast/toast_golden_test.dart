@@ -6,39 +6,54 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  testWidgets('everything', (tester) async {
-    await tester.pumpWidget(
-      TestScaffold(
-        child: const FToast(
-          icon: Icon(FIcons.triangleAlert),
-          title: Text('Event has been created'),
-          description: Text(
-            'This is a more detailed description that provides comprehensive context and additional information '
-            'about the notification, explaining what happened and what the user might expect next.',
+  for (final theme in TestScaffold.themes) {
+    for (final (name, variant) in [('primary', FToastVariant.primary), ('destructive', FToastVariant.destructive)]) {
+      testWidgets('${theme.name} $name everything', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme.data,
+            child: FToast(
+              variant: variant,
+              icon: const Icon(FIcons.triangleAlert),
+              title: const Text('Event has been created'),
+              description: const Text(
+                'This is a more detailed description that provides comprehensive context and additional information '
+                'about the notification, explaining what happened and what the user might expect next.',
+              ),
+              // This is unintentionally unstyled since suffix is typically a button.
+              suffix: const Text('Suffix'),
+            ),
           ),
-          suffix: Text('Suffix'),
-        ),
-      ),
-    );
+        );
 
-    await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/everything.png'));
-  });
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('toast/${theme.name}/$name-everything.png'),
+        );
+      });
 
-  testWidgets('title & description', (tester) async {
-    await tester.pumpWidget(
-      TestScaffold(
-        child: const FToast(
-          title: Text('Event has been created'),
-          description: Text(
-            'This is a more detailed description that provides comprehensive context and additional information '
-            'about the notification, explaining what happened and what the user might expect next.',
+      testWidgets('${theme.name} $name title & description', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme.data,
+            child: FToast(
+              variant: variant,
+              title: const Text('Event has been created'),
+              description: const Text(
+                'This is a more detailed description that provides comprehensive context and additional information '
+                'about the notification, explaining what happened and what the user might expect next.',
+              ),
+            ),
           ),
-        ),
-      ),
-    );
+        );
 
-    await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/title-description.png'));
-  });
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('toast/${theme.name}/$name-title-description.png'),
+        );
+      });
+    }
+  }
 
   testWidgets('glassmorphic', (tester) async {
     await tester.pumpWidget(

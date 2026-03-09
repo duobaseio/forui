@@ -11,16 +11,30 @@ import 'package:forui/forui.dart';
 /// * [FToasterStyle] for customizing a toaster's appearance.
 /// * [FToastStyle] for customizing a toast's appearance.
 class FToast extends StatelessWidget {
-  /// The toast's style.
+  /// The variants used to resolve the style from [FToastStyles].
   ///
-  /// To modify the current style:
+  /// Defaults to [FToastVariant.primary]. The current platform variant is automatically included during style
+  /// resolution. To change the platform variant, update the enclosing [FTheme.platform]/[FAdaptiveScope.platform].
+  ///
+  /// For example, to create a destructive toast:
   /// ```dart
-  /// style: .delta(...)
+  /// FToast(
+  ///   variant: .destructive,
+  ///   title: Text('Something went wrong'),
+  /// )
   /// ```
+  final FToastVariant variant;
+
+  /// The style delta applied to the style resolved by [variant].
   ///
-  /// To replace the style:
+  /// The final style is computed by first resolving the base style from [FToastStyles] using [variant], then applying
+  /// this delta. This allows modifying variant-specific styles:
   /// ```dart
-  /// style: FToastStyle(...)
+  /// FToast(
+  ///   variant: .destructive,
+  ///   style: .delta(iconStyle: .delta(size: 24)), // modifies the destructive style
+  ///   title: Text('Large icon destructive toast'),
+  /// )
   /// ```
   ///
   /// ## CLI
@@ -46,6 +60,7 @@ class FToast extends StatelessWidget {
   /// Creates a [FToast].
   const FToast({
     required this.title,
+    this.variant = .primary,
     this.style = const .context(),
     this.icon,
     this.description,
@@ -55,7 +70,7 @@ class FToast extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style.call(context.theme.toasterStyle.toastStyle);
+    final style = this.style(context.theme.toasterStyle.toastStyles.resolve({variant, context.platformVariant}));
     Widget toast = DecoratedBox(
       decoration: style.decoration,
       child: Padding(
@@ -104,6 +119,8 @@ class FToast extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('style', style));
+    properties
+      ..add(DiagnosticsProperty('variant', variant))
+      ..add(DiagnosticsProperty('style', style));
   }
 }

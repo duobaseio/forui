@@ -5,6 +5,9 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 const toast = FToast(
+  // {@category "Variant"}
+  variant: .primary,
+  // {@endcategory}
   // {@category "Core"}
   style: .delta(titleSpacing: 5),
   icon: Icon(FIcons.info),
@@ -22,6 +25,9 @@ const toaster = FToaster(
 );
 
 final showToast = showFToast(
+  // {@category "Variant"}
+  variant: .primary,
+  // {@endcategory}
   // {@category "Core"}
   context: context,
   style: const .delta(padding: .value(.all(16))),
@@ -52,5 +58,13 @@ final showRawToast = showRawFToast(
   builder: (context, entry) => const Text('Custom toast content'),
   // {@endcategory}
 );
+
+// {@category "Variant" "`Primary`"}
+/// The toast's primary variant.
+const FToastVariant primary = .primary;
+
+// {@category "Variant" "`Destructive`"}
+/// The toast's destructive variant.
+const FToastVariant destructive = .destructive;
 
 BuildContext get context => throw UnimplementedError();

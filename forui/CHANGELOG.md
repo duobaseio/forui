@@ -12,6 +12,7 @@ sizes consistent across each platform.
 
 
 ### `FAutocomplete`
+* Add `FAutocomplete.popoverBuilder`.
 * Add `FAutocomplete.size`.
 * Add `FAutocompleteSizeStyles`.
 * Add `FAutocompleteFieldStyle`.
@@ -79,6 +80,7 @@ sizes consistent across each platform.
 
 
 ### `FDateField`
+* Add `FDateField.popoverBuilder`.
 * Add `FDateField.size`.
 
 * **Breaking** Change `FDateField.prefixBuilder` type from `FFieldIconBuilder<FDateFieldStyle>?` to
@@ -147,6 +149,8 @@ sizes consistent across each platform.
 
 
 ### `FSelect` & `FMultiSelect`
+* Add `FSelect.popoverBuilder`.
+* Add `FMultiSelect.popoverBuilder`.
 * Add `FMultiSelect.size`.
 * Add `FMultiSelectFieldStyles`.
 * Add `FSelect.size`.
@@ -204,6 +208,7 @@ sizes consistent across each platform.
 
 ### `FTimeField`
 * Add `FTimeField.clearable`.
+* Add `FTimeField.popoverBuilder`.
 * Add `FTimeField.size`.
 
 * **Breaking** Rename `FTimeFieldStyle.fieldStyle` to `FTimeFieldStyle.fieldStyles`. Type changed from

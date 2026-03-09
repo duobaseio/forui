@@ -12,6 +12,7 @@ class _InputDateField extends FDateField {
   final MouseCursor? mouseCursor;
   final bool canRequestFocus;
   final bool clearable;
+  final FDateFieldPopoverBuilder popoverBuilder;
   final int baselineInputYear;
   final FDateFieldCalendarProperties? calendar;
 
@@ -27,6 +28,7 @@ class _InputDateField extends FDateField {
     this.mouseCursor,
     this.canRequestFocus = true,
     this.clearable = false,
+    this.popoverBuilder = FDateField._popoverBuilder,
     this.baselineInputYear = 2000,
     this.calendar = const FDateFieldCalendarProperties(),
     super.control,
@@ -66,6 +68,7 @@ class _InputDateField extends FDateField {
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
       ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
       ..add(FlagProperty('clearable', value: clearable, ifTrue: 'clearable'))
+      ..add(ObjectFlagProperty.has('popoverBuilder', popoverBuilder))
       ..add(DiagnosticsProperty('calendar', calendar))
       ..add(IntProperty('baselineInputYear', baselineInputYear));
   }
@@ -156,8 +159,9 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
         builder: switch (widget.calendar) {
           null => (context, _, variants, child) => widget.builder(context, style, variants, child),
           final properties => (context, _, variants, child) => _CalendarPopover(
+            controller: _controller,
             popoverController: _popoverController,
-            calendarController: _controller.calendar,
+            popoverBuilder: widget.popoverBuilder,
             style: style,
             properties: properties,
             autofocus: false,

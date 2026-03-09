@@ -173,4 +173,31 @@ void main() {
       );
     });
   }
+
+  testWidgets('popover builder', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        alignment: .topCenter,
+        child: FDateField.calendar(
+          today: DateTime(2025, 5, 21),
+          popoverBuilder: (context, _, _, content) => SingleChildScrollView(
+            child: Column(
+              mainAxisSize: .min,
+              children: [
+                const Padding(padding: .all(8), child: Text('Before')),
+                content,
+                const Padding(padding: .all(8), child: Text('After')),
+              ],
+            ),
+          ),
+          key: key,
+        ),
+      ),
+    );
+
+    await tester.tap(find.byKey(key));
+    await tester.pumpAndSettle();
+
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/calendar/popover-builder.png'));
+  });
 }
