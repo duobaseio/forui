@@ -144,10 +144,7 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(focus.hasFocus, false);
-      final span = controller.buildTextSpan(
-        context: tester.element(find.byType(EditableText)),
-        withComposing: false,
-      );
+      final span = controller.buildTextSpan(context: tester.element(find.byType(EditableText)), withComposing: false);
       expect(span.toPlainText(), 'App');
     });
 
@@ -169,10 +166,7 @@ void main() {
       controller.text = 'App';
       await tester.pumpAndSettle();
 
-      final span = controller.buildTextSpan(
-        context: tester.element(find.byType(EditableText)),
-        withComposing: false,
-      );
+      final span = controller.buildTextSpan(context: tester.element(find.byType(EditableText)), withComposing: false);
       expect(span.toPlainText(), 'App');
     });
 
@@ -330,10 +324,7 @@ void main() {
     });
   });
 
-  for (final (platform, retain) in [
-    (TargetPlatform.macOS, true),
-    (TargetPlatform.iOS, false),
-  ]) {
+  for (final (platform, retain) in [(TargetPlatform.macOS, true), (TargetPlatform.iOS, false)]) {
     group('retainFocus on $platform', () {
       testWidgets('default behavior', (tester) async {
         debugDefaultTargetPlatformOverride = platform;

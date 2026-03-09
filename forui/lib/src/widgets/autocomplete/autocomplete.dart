@@ -945,10 +945,12 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
               child: InheritedAutocompleteController(
                 popover: popoverController,
                 onPress: (value) {
-                  final retainFocus = widget.retainFocus ?? switch (defaultTargetPlatform) {
-                    .macOS || .windows || .linux => true,
-                    _ => false,
-                  };
+                  final retainFocus =
+                      widget.retainFocus ??
+                      switch (defaultTargetPlatform) {
+                        .macOS || .windows || .linux => true,
+                        _ => false,
+                      };
                   if (!retainFocus) {
                     _fieldFocus.unfocus(); // Hides on-screen keyboard.
                   }
