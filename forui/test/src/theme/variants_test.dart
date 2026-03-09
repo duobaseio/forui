@@ -189,6 +189,11 @@ void main() {
       test('resolve($active)', () => expect(createVariants(0, values).resolve(active), expected));
     }
 
+    test('resolve returns null when variant is explicitly null', () {
+      final variants = createVariants<FVariant, FVariant, int?, _NullableDelta>(0, {a: null});
+      expect(variants.resolve({a}), null);
+    });
+
     test('cast', () {
       final variants = createVariants<FTextFieldVariantConstraint, FTextFieldVariant, int, Delta>(0, {.disabled: 1});
       expect(() => variants.cast<FFormFieldVariantConstraint, FFormFieldVariant>(), returnsNormally);

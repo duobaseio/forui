@@ -172,7 +172,9 @@ class FVariants<K extends FVariantConstraint, E extends FVariant, V, D extends D
   @useResult
   V resolve(Set<FVariant> variants) {
     K? constraint;
-    V? variant;
+    late V variant;
+    var matched = false;
+
     for (final MapEntry(key: current, :value) in this.variants.entries) {
       if (!current.satisfiedBy(variants)) {
         continue;
@@ -181,10 +183,11 @@ class FVariants<K extends FVariantConstraint, E extends FVariant, V, D extends D
       if (constraint == null || FVariantConstraint.max(constraint, current) != constraint) {
         constraint = current;
         variant = value;
+        matched = true;
       }
     }
 
-    return variant ?? base;
+    return matched ? variant : base;
   }
 
   /// Applies a sequence of delta-based [operations] to this [FVariants].

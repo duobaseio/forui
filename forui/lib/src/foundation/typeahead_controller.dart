@@ -5,7 +5,7 @@ import 'package:flutter/widgets.dart';
 
 /// A function type that provides text styles for the typeahead controller.
 typedef FTypeaheadControllerTextStyles =
-    (TextStyle textStyle, TextStyle composingStyle, TextStyle completionStyle) Function(BuildContext context);
+    (TextStyle textStyle, TextStyle composingStyle, TextStyle? completionStyle) Function(BuildContext context);
 
 /// A [TextEditingController] with typeahead support.
 ///
@@ -59,7 +59,8 @@ class FTypeaheadController extends TextEditingController {
           TextSpan(text: value.composing.textInside(value.text), style: composingStyle),
           TextSpan(text: value.composing.textAfter(value.text), style: style),
         ],
-        if (current case (:final completion, replacement: final _)) TextSpan(text: completion, style: completionStyle),
+        if (current case (:final completion, replacement: final _) when completionStyle != null)
+          TextSpan(text: completion, style: completionStyle),
       ],
     );
   }

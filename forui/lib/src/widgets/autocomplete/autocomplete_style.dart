@@ -97,7 +97,7 @@ class FAutocompleteFieldStyle extends FTextFieldStyle with _$FAutocompleteFieldS
   ///
   /// {@macro forui.text_field.composingTextStyle}
   @override
-  final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, TextStyle, TextStyleDelta> typeaheadTextStyle;
+  final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, TextStyle?, TextStyleDelta> typeaheadTextStyle;
 
   /// Creates a [FAutocompleteFieldStyle].
   FAutocompleteFieldStyle({
@@ -131,7 +131,12 @@ class FAutocompleteFieldStyle extends FTextFieldStyle with _$FAutocompleteFieldS
   FAutocompleteFieldStyle.inherit({required FColors colors, required FTextFieldStyle field})
     : this(
         composingTextStyle: field.contentTextStyle.apply([.all(.delta(decoration: () => .underline))]),
-        typeaheadTextStyle: field.contentTextStyle.apply([.all(.delta(color: colors.mutedForeground))]),
+        typeaheadTextStyle: FVariants(
+          field.contentTextStyle.base.copyWith(color: colors.mutedForeground),
+          variants: {
+            [.disabled, .not(.focused)]: null,
+          },
+        ),
         keyboardAppearance: field.keyboardAppearance,
         color: field.color,
         cursorColor: field.cursorColor,
