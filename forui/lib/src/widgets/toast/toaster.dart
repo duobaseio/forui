@@ -109,6 +109,7 @@ FToasterEntry showFToast({
 FToasterEntry showRawFToast({
   required BuildContext context,
   required Widget Function(BuildContext context, FToasterEntry entry) builder,
+  FToastVariant variant = .primary,
   FToastStyleDelta style = const .context(),
   FToastAlignment? alignment,
   List<AxisDirection>? swipeToDismiss,
@@ -136,6 +137,7 @@ FToasterEntry showRawFToast({
   return state.show(
     context: context,
     builder: builder,
+    variant: variant,
     style: style,
     alignment: alignment,
     swipeToDismiss: swipeToDismiss,
