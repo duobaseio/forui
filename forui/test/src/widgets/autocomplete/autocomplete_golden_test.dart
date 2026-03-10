@@ -330,7 +330,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         alignment: Alignment.topCenter,
-        child: FAutocomplete(key: key, focusNode: focus, items: fruits),
+        child: FAutocomplete(key: key, focusNode: focus, retainFocus: true, items: fruits),
       ),
     );
 
@@ -353,7 +353,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         alignment: Alignment.topCenter,
-        child: FAutocomplete(key: key, focusNode: focus, items: fruits),
+        child: FAutocomplete(key: key, focusNode: focus, retainFocus: true, items: fruits),
       ),
     );
 
