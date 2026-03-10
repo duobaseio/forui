@@ -36,6 +36,11 @@ If you're stuck or unsure about anything, feel free to ask for help in our [disc
 
 ## Configuring the Development Environment
 
+Our git history is pretty large due to golden images. We recommend performing a shallow clone:
+```shell
+git clone --depth 1 https://github.com/forus-labs/forui.git
+```
+
 Bootstrap the project:
 ```shell
 make bootstrap
@@ -455,6 +460,7 @@ See [button_golden_test.dart](https://github.com/forus-labs/forui/blob/bb45cef78
 
 The CI pipeline will automatically generate golden images for all golden tests on Windows & macOS. Contributors on Linux
 should *not** commit locally generated golden images.
+
 
 ### Blue Screen Tests
 
