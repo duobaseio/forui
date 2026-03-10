@@ -303,34 +303,92 @@ void main() {
       );
     });
 
-    testWidgets('focus on selected item', (tester) async {
-      final controller = autoDispose(FSelectController<String>())..value = 'O';
-
-      await tester.pumpWidget(
-        TestScaffold.app(
-          theme: theme.data,
-          alignment: .topCenter,
-          child: FSelect<String>.rich(
-            key: key,
-            format: (string) => string,
-            control: .managed(controller: controller),
-            children: [
-              .richSection(
-                label: const Text('Lorem'),
-                children: [for (final letter in letters) .item(title: Text(letter), value: letter)],
-              ),
-            ],
+    group('focus', () {
+      testWidgets('autofocus first item on desktop', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme.data,
+            platform: .macOS,
+            alignment: .topCenter,
+            child: FSelect<String>.rich(
+              key: key,
+              format: (string) => string,
+              children: [
+                .richSection(
+                  label: const Text('Lorem'),
+                  children: [for (final letter in letters) .item(title: Text(letter), value: letter)],
+                ),
+              ],
+            ),
           ),
-        ),
-      );
+        );
 
-      await tester.tap(find.byKey(key));
-      await tester.pumpAndSettle();
+        await tester.tap(find.byKey(key));
+        await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('select/${theme.name}/content/focused-selected-item.png'),
-      );
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('select/${theme.name}/content/autofocus-first-desktop.png'),
+        );
+      });
+
+      testWidgets('no autofocus first item on touch', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme.data,
+            platform: .iOS,
+            alignment: .topCenter,
+            child: FSelect<String>.rich(
+              key: key,
+              format: (string) => string,
+              children: [
+                .richSection(
+                  label: const Text('Lorem'),
+                  children: [for (final letter in letters) .item(title: Text(letter), value: letter)],
+                ),
+              ],
+            ),
+          ),
+        );
+
+        await tester.tap(find.byKey(key));
+        await tester.pumpAndSettle();
+
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('select/${theme.name}/content/autofocus-first-touch.png'),
+        );
+      });
+
+      testWidgets('selected item', (tester) async {
+        final controller = autoDispose(FSelectController<String>())..value = 'O';
+
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme.data,
+            alignment: .topCenter,
+            child: FSelect<String>.rich(
+              key: key,
+              format: (string) => string,
+              control: .managed(controller: controller),
+              children: [
+                .richSection(
+                  label: const Text('Lorem'),
+                  children: [for (final letter in letters) .item(title: Text(letter), value: letter)],
+                ),
+              ],
+            ),
+          ),
+        );
+
+        await tester.tap(find.byKey(key));
+        await tester.pumpAndSettle();
+
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('select/${theme.name}/content/focused-selected-item.png'),
+        );
+      });
     });
   }
 

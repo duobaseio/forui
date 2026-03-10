@@ -164,6 +164,8 @@ sizes consistent across each platform.
 
 * Change `FSelectSection` layout to better align with the latest shadcn version.
 
+* Fix `FSelect` and `FMultiSelect` autofocusing first item on touch devices.
+
 * **Breaking** Change `FMultiSelect.prefixBuilder` type from `FFieldIconBuilder<FMultiSelectStyle>?` to
   `FFieldIconBuilder<FMultiSelectFieldStyle>?`.
 * **Breaking** Change `FMultiSelect.suffixBuilder` type from `FFieldIconBuilder<FMultiSelectStyle>?` to

@@ -743,7 +743,7 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
                   content(
                     context,
                     style,
-                    autofocusFirst: _controller.value.isEmpty,
+                    autofocusFirst: _controller.value.isEmpty && context.platformVariant.desktop,
                     autofocus: (value) => _controller.value.lastOrNull == value,
                   ),
                 ),

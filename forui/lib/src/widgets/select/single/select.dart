@@ -794,7 +794,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
                 content(
                   context,
                   style,
-                  autofocusFirst: _controller.value == null,
+                  autofocusFirst: _controller.value == null && context.platformVariant.desktop,
                   autofocus: (value) => _controller.value == value,
                 ),
               ),
