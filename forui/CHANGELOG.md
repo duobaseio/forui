@@ -229,6 +229,7 @@ sizes consistent across each platform.
 * Add `FTextFieldSizeStyles` and `FTextFieldSizeVariant`.
 
 * Fix `FTextField.clearable` clear icon not appearing immediately when text changes while focused.
+* Fix `FTextFormField.onTapOutside` not being used internally.
 
 
 ### `FTheme` & `FBasicTheme`
