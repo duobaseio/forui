@@ -122,10 +122,6 @@ const FButtonVariant outline = .outline;
 /// The button's ghost variant.
 const FButtonVariant ghost = .ghost;
 
-// {@category "Size" "Medium"}
-/// The button's medium (default) size.
-const FButtonSizeVariant md = .md;
-
 // {@category "Size" "Extra Small"}
 /// The button's extra small size.
 const FButtonSizeVariant xs = .xs;
@@ -133,6 +129,10 @@ const FButtonSizeVariant xs = .xs;
 // {@category "Size" "Small"}
 /// The button's small size.
 const FButtonSizeVariant sm = .sm;
+
+// {@category "Size" "Medium"}
+/// The button's medium (default) size.
+const FButtonSizeVariant md = .md;
 
 // {@category "Size" "Large"}
 /// The button's large size.

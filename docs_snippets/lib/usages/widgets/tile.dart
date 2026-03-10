@@ -67,10 +67,10 @@ final tileRaw = FTile.raw(
   // {@endcategory}
 );
 
-// {@category "Variants" "Primary"}
+// {@category "Variant" "Primary"}
 /// The tile's primary (base) variant.
 final Set<FItemVariant> primary = {};
 
-// {@category "Variants" "Destructive"}
+// {@category "Variant" "Destructive"}
 /// The tile's destructive variant.
 final Set<FItemVariant> destructive = {.destructive};

@@ -45,6 +45,9 @@ final showToast = showFToast(
 );
 
 final showRawToast = showRawFToast(
+  // {@category "Variant"}
+  variant: .primary,
+  // {@endcategory}
   // {@category "Behavior"}
   alignment: .bottomEnd,
   swipeToDismiss: const [.right],

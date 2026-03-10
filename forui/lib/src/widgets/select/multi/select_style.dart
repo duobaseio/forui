@@ -13,7 +13,7 @@ part 'select_style.design.dart';
 class FMultiSelectStyle with Diagnosticable, _$FMultiSelectStyleFunctions {
   /// The field's size styles.
   @override
-  final FMultiSelectFieldStyles fieldStyles;
+  final FMultiSelectFieldSizeStyles fieldStyles;
 
   /// The search's style.
   @override
@@ -50,7 +50,7 @@ class FMultiSelectStyle with Diagnosticable, _$FMultiSelectStyleFunctions {
 }
 
 /// [FMultiSelectFieldStyle]'s size styles.
-extension type FMultiSelectFieldStyles(
+extension type FMultiSelectFieldSizeStyles(
   FVariants<FTextFieldSizeVariantConstraint, FTextFieldSizeVariant, FMultiSelectFieldStyle, FMultiSelectFieldStyleDelta>
   _
 )
@@ -61,8 +61,8 @@ extension type FMultiSelectFieldStyles(
           FMultiSelectFieldStyle,
           FMultiSelectFieldStyleDelta
         > {
-  /// Creates a [FMultiSelectFieldStyles] that inherits its properties.
-  factory FMultiSelectFieldStyles.inherit({
+  /// Creates a [FMultiSelectFieldSizeStyles] that inherits its properties.
+  factory FMultiSelectFieldSizeStyles.inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,
@@ -118,7 +118,7 @@ extension type FMultiSelectFieldStyles(
         style.borderRadius.md,
       );
 
-      return FMultiSelectFieldStyles(
+      return FMultiSelectFieldSizeStyles(
         FVariants(
           md,
           variants: {
@@ -152,7 +152,7 @@ extension type FMultiSelectFieldStyles(
         const .symmetric(vertical: 4, horizontal: 8),
         style.borderRadius.md,
       );
-      return FMultiSelectFieldStyles(
+      return FMultiSelectFieldSizeStyles(
         FVariants(
           md,
           variants: {

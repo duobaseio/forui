@@ -67,10 +67,10 @@ final raw = FItem.raw(
   // {@endcategory}
 );
 
-// {@category "Variants" "Primary"}
+// {@category "Variant" "Primary"}
 /// The item's primary (base) variant.
 final Set<FItemVariant> primary = {};
 
-// {@category "Variants" "Destructive"}
+// {@category "Variant" "Destructive"}
 /// The item's destructive variant.
 final Set<FItemVariant> destructive = {.destructive};

@@ -12,7 +12,7 @@ part 'autocomplete_style.design.dart';
 class FAutocompleteStyle with Diagnosticable, _$FAutocompleteStyleFunctions {
   /// The field's styles.
   @override
-  final FAutocompleteSizeStyles fieldStyles;
+  final FAutocompleteFieldSizeStyles fieldStyles;
 
   /// The content's style.
   @override
@@ -34,7 +34,7 @@ class FAutocompleteStyle with Diagnosticable, _$FAutocompleteStyleFunctions {
 }
 
 /// [FAutocompleteStyle]'s size styles.
-extension type FAutocompleteSizeStyles(
+extension type FAutocompleteFieldSizeStyles(
   FVariants<
     FTextFieldSizeVariantConstraint,
     FTextFieldSizeVariant,
@@ -50,8 +50,8 @@ extension type FAutocompleteSizeStyles(
           FAutocompleteFieldStyle,
           FAutocompleteFieldStyleDelta
         > {
-  /// Creates [FAutocompleteSizeStyles] that inherit their properties.
-  factory FAutocompleteSizeStyles.inherit({
+  /// Creates [FAutocompleteFieldSizeStyles] that inherit their properties.
+  factory FAutocompleteFieldSizeStyles.inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,
@@ -60,7 +60,7 @@ extension type FAutocompleteSizeStyles(
     final sizes = FTextFieldSizeStyles.inherit(colors: colors, typography: typography, style: style, touch: touch);
 
     final md = FAutocompleteFieldStyle.inherit(colors: colors, field: sizes.md);
-    return FAutocompleteSizeStyles(
+    return FAutocompleteFieldSizeStyles(
       FVariants(
         md,
         variants: {

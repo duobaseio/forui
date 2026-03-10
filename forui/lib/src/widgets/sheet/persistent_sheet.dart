@@ -316,6 +316,10 @@ class FPersistentSheetStyle extends FSheetStyle with Diagnosticable, _$FPersiste
     super.flingVelocity,
     super.closeProgressThreshold,
   });
+
+  /// Creates a [FPersistentSheetStyle] that inherits its properties from the given arguments.
+  // This is needed because the CLI generator scans all style inherit constructors to generate the style mappings.
+  FPersistentSheetStyle.inherit() : this();
 }
 
 /// The motion-related properties for a persistent sheet.

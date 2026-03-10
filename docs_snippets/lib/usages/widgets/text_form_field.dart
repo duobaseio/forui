@@ -375,18 +375,6 @@ final FTextFieldControl managedExternal = .managed(
   onChange: (value) {},
 );
 
-// {@category "Size" "Small"}
-/// The text form field's small size.
-const FTextFieldSizeVariant sm = .sm;
-
-// {@category "Size" "Medium"}
-/// The text form field's medium (default) size.
-const FTextFieldSizeVariant md = .md;
-
-// {@category "Size" "Large"}
-/// The text form field's large size.
-const FTextFieldSizeVariant lg = .lg;
-
 // {@category "Obscure Control" "`.lifted()`"}
 /// Externally controls the obscure text state.
 final FObscureTextControl obscureLifted = .lifted(value: true, onChange: (obscured) {});
@@ -402,3 +390,15 @@ final FObscureTextControl obscureManagedExternal = .managed(
   controller: ValueNotifier<bool>(true),
   onChange: (obscured) {},
 );
+
+// {@category "Size" "Small"}
+/// The text form field's small size.
+const FTextFieldSizeVariant sm = .sm;
+
+// {@category "Size" "Medium"}
+/// The text form field's medium (default) size.
+const FTextFieldSizeVariant md = .md;
+
+// {@category "Size" "Large"}
+/// The text form field's large size.
+const FTextFieldSizeVariant lg = .lg;
