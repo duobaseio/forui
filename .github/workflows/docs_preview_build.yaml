@@ -26,7 +26,7 @@ jobs:
           flutter pub get
           dart run build_runner build --delete-conflicting-outputs
           flutter build web
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         with:
           name: docs-snippets-build
           path: ./docs_snippets/build/web
@@ -67,7 +67,7 @@ jobs:
           # We don't use the CLOUDFLARE_SNIPPETS_PROJECT_NAME environment variable since it requires us to set the
           # environment for this workflow, unintentionally leaking environment secrets.
           NEXT_PUBLIC_SNIPPETS_URL: https://${{ steps.snippets-slug.outputs.slug }}.forui-docs-snippets-dev.pages.dev
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         with:
           name: docs-build
           path: ./docs/.open-next
@@ -80,7 +80,7 @@ jobs:
           echo "${{ github.event.pull_request.head.ref }}" > pr-head-ref.txt
           echo "${{ github.event.pull_request.head.sha }}" > pr-head-sha.txt
 
-      - uses: actions/upload-artifact@v6
+      - uses: actions/upload-artifact@v7
         with:
           name: pr-metadata
           path: |

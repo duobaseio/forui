@@ -12,7 +12,7 @@ jobs:
     environment: docs-development
     steps:
       # Extract PR metadata
-      - uses: actions/download-artifact@v7
+      - uses: actions/download-artifact@v8
         with:
           name: pr-metadata
           path: ./pr-metadata
@@ -36,7 +36,7 @@ jobs:
           echo "sha=${SHA:0:7}" >> $GITHUB_OUTPUT
 
       # Deploy Snippets
-      - uses: actions/download-artifact@v7
+      - uses: actions/download-artifact@v8
         with:
           name: docs-snippets-build
           path: ./docs-snippets--build
@@ -59,7 +59,7 @@ jobs:
             docs/wrangler.jsonc
             docs/open-next.config.ts
             .github/deployment_preview_template.md
-      - uses: actions/download-artifact@v7
+      - uses: actions/download-artifact@v8
         with:
           name: docs-build
           path: ./docs/.open-next
