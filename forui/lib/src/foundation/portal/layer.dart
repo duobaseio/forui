@@ -67,6 +67,9 @@ class ChildLayerLink {
   /// [RenderChildLayer] that shares this link with its followers). This size may be outdated before and during layout.
   Size? childSize;
 
+  /// The render box of the linked child, used to compute fresh global offsets for overflow calculations.
+  RenderBox? childRenderBox;
+
   ChildLayer? get childLayer => _childLayer;
 
   @override
@@ -213,6 +216,9 @@ class PortalLayer extends ContainerLayer {
   /// the layer tree. When this layer is composited, it will apply a transform
   /// that moves its children to match the position of the [ChildLayer].
   ChildLayerLink link;
+
+  /// The render box of the portal, used to schedule repaints when the child's global offset changes during compositing.
+  RenderBox? portalRenderBox;
 
   /// Whether to show the layer's contents when the [link] does not point to a
   /// [ChildLayer].
@@ -424,6 +430,18 @@ class PortalLayer extends ContainerLayer {
     inverseTransform.multiply(forwardTransform);
     _lastTransform = inverseTransform;
     _inverseDirty = true;
+
+    // Refresh the child's global offset from the render box. This is needed because RenderChildLayer.paint() may not
+    // run when an intermediate repaint boundary (e.g. CustomScrollView's RenderViewport) blocks paint propagation.
+    // If the offset changed, schedule a repaint so the overflow calculation uses the fresh value.
+    if (link.childRenderBox case final child? when child.attached) {
+      if (child.localToGlobal(.zero) case final current when current != leader.globalOffset) {
+        leader.globalOffset = current;
+        if (portalRenderBox case final portal? when portal.attached) {
+          SchedulerBinding.instance.scheduleTask(portal.markNeedsPaint, .touch);
+        }
+      }
+    }
   }
 
   /// {@template flutter.rendering.FollowerLayer.alwaysNeedsAddToScene}

@@ -162,6 +162,8 @@ sizes consistent across each platform.
 * **Breaking** Remove `FPortal.viewInsets`. Use `FPortal.useViewPadding`, `FPortal.useViewInsets`, and `FPortal.padding`
   instead.
 
+* Fix portal not recalculating overflow whenever the child moves.
+
 
 ### `FProgress`
 * **Breaking** Change `FProgressStyle.trackDecoration` and `fillDecoration` types from `BoxDecoration` to `Decoration`.

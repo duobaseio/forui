@@ -213,7 +213,7 @@ class RenderPortalLayer extends RenderProxyBox {
 
     final linkedOffset =
         this.offset +
-        switch ((link.childLayer?.globalOffset, link.childSize, child)) {
+        switch ((link.childRenderBox?.localToGlobal(.zero), link.childSize, child)) {
           (final childOffset?, final childSize?, final portal?) => overflow(
             // There is NO guarantee that this render box's size is the window's size. Always use viewSize.
             // It's okay to use viewSize even though it's larger than the render box's size as we override paintBounds.
@@ -234,13 +234,14 @@ class RenderPortalLayer extends RenderProxyBox {
         showWhenUnlinked: showWhenUnlinked,
         linkedOffset: linkedOffset,
         unlinkedOffset: offset,
-      );
+      )..portalRenderBox = this;
     } else {
       layer
         ?..link = link
         ..showWhenUnlinked = showWhenUnlinked
         ..linkedOffset = linkedOffset
-        ..unlinkedOffset = offset;
+        ..unlinkedOffset = offset
+        ..portalRenderBox = this;
     }
 
     context.pushLayer(

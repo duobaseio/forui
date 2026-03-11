@@ -337,6 +337,86 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/unlinked.png'));
     });
 
+    testWidgets('portal recalculates overflow when scrolled inside repaint boundary', (tester) async {
+      final portalController = OverlayPortalController();
+      final scrollController = autoDispose(ScrollController());
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: ListView(
+            controller: scrollController,
+            children: [
+              const SizedBox(height: 200),
+              FPortal(
+                portalAnchor: .bottomCenter,
+                childAnchor: .topCenter,
+                controller: portalController,
+                portalBuilder: (context, _) =>
+                    const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+                child: const Center(
+                  child: ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
+                ),
+              ),
+              const SizedBox(height: 1000),
+            ],
+          ),
+        ),
+      );
+
+      portalController.show();
+      await tester.pumpAndSettle();
+
+      scrollController.jumpTo(150);
+      await tester.pump(const Duration(milliseconds: 1));
+      await tester.pump(const Duration(milliseconds: 1));
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('portal/scroll-recalculates-inside-repaint-boundary.png'),
+      );
+    });
+
+    testWidgets('portal recalculates overflow when scrolled outside repaint boundary', (tester) async {
+      final portalController = OverlayPortalController();
+      final scrollController = autoDispose(ScrollController());
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: SingleChildScrollView(
+            controller: scrollController,
+            child: Column(
+              children: [
+                const SizedBox(height: 200),
+                FPortal(
+                  portalAnchor: .bottomCenter,
+                  childAnchor: .topCenter,
+                  controller: portalController,
+                  portalBuilder: (context, _) =>
+                      const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+                  child: const Center(
+                    child: ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
+                  ),
+                ),
+                const SizedBox(height: 1000),
+              ],
+            ),
+          ),
+        ),
+      );
+
+      portalController.show();
+      await tester.pumpAndSettle();
+
+      scrollController.jumpTo(150);
+      await tester.pump(const Duration(milliseconds: 1));
+      await tester.pump(const Duration(milliseconds: 1));
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('portal/scroll-recalculates-outside-repaint-boundary.png'),
+      );
+    });
+
     testWidgets('portal repositions when child expanded', (tester) async {
       final controller = OverlayPortalController();
 

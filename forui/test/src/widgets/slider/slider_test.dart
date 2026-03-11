@@ -61,6 +61,8 @@ void main() {
 
         await tester.longPressAt(track.centerRight.translate(-50, 0));
         expect(find.byType(Text), expected);
+
+        await tester.pumpAndSettle();
       });
     }
 
@@ -88,6 +90,8 @@ void main() {
           await tester.fling(find.byType(ActiveTrack), const Offset(-300, 0), 10);
           await tester.pump();
           expect(find.byType(Text), expected);
+
+          await tester.pumpAndSettle();
         });
 
         testWidgets('drag inactive track - $interaction', (tester) async {
