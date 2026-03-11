@@ -352,7 +352,7 @@ enum Style {
     null,
     <String>['popover'],
     <String>['FPopoverStyle'],
-    'FPopoverStyle popoverStyle({required FColors colors, required FStyle style}) =>\n    FPopoverStyle(\n      decoration: ShapeDecoration(\n        shape: RoundedSuperellipseBorder(\n          side: BorderSide(color: colors.border, width: style.borderWidth),\n          borderRadius: style.borderRadius.md,\n        ),\n        shadows: style.shadow,\n        color: colors.card,\n      ),\n      viewInsets: const .all(5),\n    );\n',
+    'FPopoverStyle popoverStyle({required FColors colors, required FStyle style}) =>\n    FPopoverStyle(\n      decoration: ShapeDecoration(\n        shape: RoundedSuperellipseBorder(\n          side: BorderSide(color: colors.border, width: style.borderWidth),\n          borderRadius: style.borderRadius.md,\n        ),\n        shadows: style.shadow,\n        color: colors.card,\n      ),\n      popoverPadding: const .all(5),\n    );\n',
   ),
   fprogressstyle(
     'FProgressStyle',

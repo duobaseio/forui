@@ -21,6 +21,10 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
   @override
   final FPortalOverflow overflow;
   @override
+  final bool useViewPadding;
+  @override
+  final bool useViewInsets;
+  @override
   final Offset offset;
   @override
   final FPopoverHideRegion hideRegion;
@@ -48,6 +52,8 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
     this.constraints = const FPortalConstraints(maxWidth: 200, maxHeight: 200),
     this.spacing = const .spacing(4),
     this.overflow = .flip,
+    this.useViewPadding = true,
+    this.useViewInsets = true,
     this.offset = .zero,
     this.hideRegion = .excludeChild,
     this.groupId,
@@ -275,6 +281,8 @@ class _PickerPopover extends StatelessWidget {
     childAnchor: properties.fieldAnchor,
     spacing: properties.spacing,
     overflow: properties.overflow,
+    useViewPadding: properties.useViewPadding,
+    useViewInsets: properties.useViewInsets,
     offset: properties.offset,
     hideRegion: properties.hideRegion,
     groupId: properties.groupId,

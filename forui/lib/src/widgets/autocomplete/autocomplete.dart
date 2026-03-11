@@ -300,6 +300,16 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   /// {@macro forui.widgets.FPopover.offset}
   final Offset contentOffset;
 
+  /// {@macro forui.foundation.FPortal.useViewPadding}
+  ///
+  /// Defaults to true.
+  final bool contentUseViewPadding;
+
+  /// {@macro forui.foundation.FPortal.useViewInsets}
+  ///
+  /// Defaults to true.
+  final bool contentUseViewInsets;
+
   /// {@macro forui.widgets.FPopover.hideRegion}
   final FPopoverHideRegion contentHideRegion;
 
@@ -425,6 +435,8 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     FPortalSpacing contentSpacing = const .spacing(4),
     FPortalOverflow contentOverflow = .flip,
     Offset contentOffset = .zero,
+    bool contentUseViewPadding = true,
+    bool contentUseViewInsets = true,
     FPopoverHideRegion contentHideRegion = .excludeChild,
     Object? contentGroupId,
     bool autoHide = true,
@@ -516,6 +528,8 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
          contentSpacing: contentSpacing,
          contentOverflow: contentOverflow,
          contentOffset: contentOffset,
+         contentUseViewPadding: contentUseViewPadding,
+         contentUseViewInsets: contentUseViewInsets,
          contentHideRegion: contentHideRegion,
          contentGroupId: contentGroupId,
          autoHide: autoHide,
@@ -606,6 +620,8 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     this.contentSpacing = const .spacing(4),
     this.contentOverflow = .flip,
     this.contentOffset = .zero,
+    this.contentUseViewPadding = true,
+    this.contentUseViewInsets = true,
     this.contentHideRegion = .excludeChild,
     this.contentGroupId,
     this.autoHide = true,
@@ -705,6 +721,8 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
       ..add(DiagnosticsProperty('contentSpacing', contentSpacing))
       ..add(ObjectFlagProperty.has('contentOverflow', contentOverflow))
       ..add(DiagnosticsProperty('contentOffset', contentOffset))
+      ..add(FlagProperty('contentUseViewPadding', value: contentUseViewPadding, ifTrue: 'using view padding'))
+      ..add(FlagProperty('contentUseViewInsets', value: contentUseViewInsets, ifTrue: 'using view insets'))
       ..add(EnumProperty('contentHideRegion', contentHideRegion))
       ..add(DiagnosticsProperty('contentGroupId', contentGroupId))
       ..add(ObjectFlagProperty.has('contentOnTapHide', contentOnTapHide))
@@ -930,6 +948,8 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
             childAnchor: widget.fieldAnchor,
             spacing: widget.contentSpacing,
             overflow: widget.contentOverflow,
+            useViewPadding: widget.contentUseViewPadding,
+            useViewInsets: widget.contentUseViewInsets,
             offset: widget.contentOffset,
             hideRegion: widget.contentHideRegion,
             groupId: widget.contentGroupId,

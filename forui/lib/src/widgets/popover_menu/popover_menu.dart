@@ -131,6 +131,16 @@ class FPopoverMenu extends StatelessWidget {
   /// The menu's semantic label used by accessibility frameworks.
   final String? semanticsLabel;
 
+  /// {@macro forui.foundation.FPortal.useViewPadding}
+  ///
+  /// Defaults to true.
+  final bool useViewPadding;
+
+  /// {@macro forui.foundation.FPortal.useViewInsets}
+  ///
+  /// Defaults to true.
+  final bool useViewInsets;
+
   /// {@macro forui.widgets.FPopover.builder}
   final ValueWidgetBuilder<FPopoverController> builder;
 
@@ -179,6 +189,8 @@ class FPopoverMenu extends StatelessWidget {
     this.focusNode,
     this.onFocusChange,
     this.traversalEdgeBehavior,
+    this.useViewPadding = true,
+    this.useViewInsets = true,
     List<FItemGroupMixin> Function(BuildContext context, FPopoverController controller, List<FItemGroupMixin>? menu)
         menuBuilder =
         _defaultItemBuilder,
@@ -237,6 +249,8 @@ class FPopoverMenu extends StatelessWidget {
     this.focusNode,
     this.onFocusChange,
     this.traversalEdgeBehavior,
+    this.useViewPadding = true,
+    this.useViewInsets = true,
     List<FTileGroupMixin> Function(BuildContext context, FPopoverController controller, List<FTileGroupMixin>? menu)
         menuBuilder =
         _defaultTileBuilder,
@@ -278,6 +292,8 @@ class FPopoverMenu extends StatelessWidget {
       traversalEdgeBehavior: traversalEdgeBehavior,
       barrierSemanticsLabel: barrierSemanticsLabel,
       barrierSemanticsDismissible: barrierSemanticsDismissible,
+      useViewPadding: useViewPadding,
+      useViewInsets: useViewInsets,
       popoverBuilder: (context, controller) => FInheritedItemData(child: _menuBuilder(context, controller, style)),
       builder: builder,
       child: child,
@@ -316,6 +332,8 @@ class FPopoverMenu extends StatelessWidget {
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(EnumProperty('traversalEdgeBehavior', traversalEdgeBehavior))
+      ..add(FlagProperty('useViewPadding', value: useViewPadding, ifTrue: 'using view padding'))
+      ..add(FlagProperty('useViewInsets', value: useViewInsets, ifTrue: 'using view insets'))
       ..add(ObjectFlagProperty.has('menuBuilder', _menuBuilder))
       ..add(ObjectFlagProperty.has('builder', builder));
   }
@@ -346,7 +364,7 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
     this.maxWidth = 250,
     super.barrierFilter,
     super.backgroundFilter,
-    super.viewInsets,
+    super.popoverPadding,
   }) : assert(0 < maxWidth, 'maxWidth ($maxWidth) must be > 0');
 
   /// Creates a [FPopoverMenuStyle] that inherits its properties.

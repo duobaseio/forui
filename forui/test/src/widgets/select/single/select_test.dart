@@ -287,9 +287,10 @@ void main() {
       expect(controller.value, 'A');
     });
 
-    testWidgets('keyboard navigation', (tester) async {
+    testWidgets('keyboard navigation on desktop', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
+          platform: .macOS,
           child: FSelect<String>(
             control: .managed(controller: controller),
             items: const {'A': 'A', 'B': 'B'},
@@ -374,11 +375,12 @@ void main() {
       expect(focus.hasFocus, true);
     });
 
-    testWidgets('escape should refocus', (tester) async {
+    testWidgets('escape should refocus on desktop', (tester) async {
       final focus = autoDispose(FocusNode());
 
       await tester.pumpWidget(
         TestScaffold.app(
+          platform: .macOS,
           child: FSelect<int>(items: const {'1': 1, '2': 2}, key: key, focusNode: focus),
         ),
       );

@@ -177,6 +177,16 @@ class FPopover extends StatefulWidget {
   /// Defaults to [FPortalOverflow.flip].
   final FPortalOverflow overflow;
 
+  /// {@macro forui.foundation.FPortal.useViewPadding}
+  ///
+  /// Defaults to true.
+  final bool useViewPadding;
+
+  /// {@macro forui.foundation.FPortal.useViewInsets}
+  ///
+  /// Defaults to true.
+  final bool useViewInsets;
+
   /// {@template forui.widgets.FPopover.offset}
   /// Additional translation to apply to the popover's position.
   ///
@@ -282,6 +292,8 @@ class FPopover extends StatefulWidget {
     this.constraints = const FPortalConstraints(),
     this.spacing = const .spacing(4),
     this.overflow = .flip,
+    this.useViewPadding = true,
+    this.useViewInsets = true,
     this.offset = .zero,
     this.groupId,
     this.hideRegion = .excludeChild,
@@ -340,6 +352,8 @@ class FPopover extends StatefulWidget {
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(EnumProperty('traversalEdgeBehavior', traversalEdgeBehavior))
+      ..add(FlagProperty('useViewPadding', value: useViewPadding, ifTrue: 'using view padding'))
+      ..add(FlagProperty('useViewInsets', value: useViewInsets, ifTrue: 'using view insets'))
       ..add(DiagnosticsProperty('shortcuts', shortcuts))
       ..add(ObjectFlagProperty.has('popoverBuilder', popoverBuilder))
       ..add(ObjectFlagProperty.has('builder', builder));
@@ -417,7 +431,9 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
         constraints: widget.constraints,
         portalAnchor: popoverAnchor,
         childAnchor: childAnchor,
-        viewInsets: MediaQuery.viewPaddingOf(context) + style.viewInsets.resolve(direction),
+        useViewPadding: widget.useViewPadding,
+        useViewInsets: widget.useViewInsets,
+        padding: style.popoverPadding,
         spacing: widget.spacing,
         overflow: widget.overflow,
         offset: widget.offset,
@@ -553,19 +569,20 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
   @override
   final ImageFilter Function(double animation)? backgroundFilter;
 
-  /// The additional insets of the view. In other words, the minimum distance between the edges of the view and the
-  /// edges of the popover. This applied in addition to the insets provided by [MediaQueryData.viewPadding].
+  /// The additional padding between the edges of the view and the edges of the popover.
+  ///
+  /// This is applied on top of the view's safe area and keyboard insets.
   ///
   /// Defaults to `EdgeInsets.all(5)`.
   @override
-  final EdgeInsetsGeometry viewInsets;
+  final EdgeInsetsGeometry popoverPadding;
 
   /// Creates a [FPopoverStyle].
   const FPopoverStyle({
     required this.decoration,
     this.barrierFilter,
     this.backgroundFilter,
-    this.viewInsets = const .all(5),
+    this.popoverPadding = const .all(5),
   });
 
   /// Creates a [FPopoverStyle] that inherits its properties.

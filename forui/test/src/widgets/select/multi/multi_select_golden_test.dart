@@ -504,6 +504,27 @@ void main() {
     await expectLater(find.byType(TestScaffold), matchesGoldenFile('multi-select/sort.png'));
   });
 
+  for (final theme in TestScaffold.themes) {
+    testWidgets('${theme.name} autofocus first item when none selected on desktop', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          platform: .macOS,
+          alignment: .topCenter,
+          child: FMultiSelect<String>(items: letters, key: key),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('multi-select/${theme.name}/autofocus-first-item.png'),
+      );
+    });
+  }
+
   for (final (theme, name) in [(FThemes.neutral.light.desktop, 'desktop'), (FThemes.neutral.light.touch, 'touch')]) {
     testWidgets('$name sizes', (tester) async {
       await tester.pumpWidget(

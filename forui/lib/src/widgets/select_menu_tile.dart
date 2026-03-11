@@ -108,6 +108,16 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
   /// {@macro forui.widgets.FPopover.offset}
   final Offset menuOffset;
 
+  /// {@macro forui.foundation.FPortal.useViewPadding}
+  ///
+  /// Defaults to true.
+  final bool menuUseViewPadding;
+
+  /// {@macro forui.foundation.FPortal.useViewInsets}
+  ///
+  /// Defaults to true.
+  final bool menuUseViewInsets;
+
   /// {@macro forui.widgets.FPopover.hideRegion}
   final FPopoverHideRegion menuHideRegion;
 
@@ -225,6 +235,8 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
     this.tileAnchor = .bottomRight,
     this.menuSpacing = const .spacing(4),
     this.menuOverflow = .flip,
+    this.menuUseViewPadding = true,
+    this.menuUseViewInsets = true,
     this.menuOffset = .zero,
     this.menuHideRegion = .excludeChild,
     this.menuOnTapHide,
@@ -281,6 +293,8 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
     AlignmentGeometry tileAnchor = .bottomRight,
     FPortalSpacing menuSpacing = const .spacing(4),
     FPortalOverflow menuOverflow = .flip,
+    bool menuUseViewPadding = true,
+    bool menuUseViewInsets = true,
     Offset menuOffset = .zero,
     FPopoverHideRegion menuHideRegion = .excludeChild,
     VoidCallback? menuOnTapHide,
@@ -326,6 +340,8 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
     tileAnchor: tileAnchor,
     menuSpacing: menuSpacing,
     menuOverflow: menuOverflow,
+    menuUseViewPadding: menuUseViewPadding,
+    menuUseViewInsets: menuUseViewInsets,
     menuOffset: menuOffset,
     menuHideRegion: menuHideRegion,
     menuOnTapHide: menuOnTapHide,
@@ -391,6 +407,8 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
     this.tileAnchor = .bottomRight,
     this.menuSpacing = const .spacing(4),
     this.menuOverflow = .flip,
+    this.menuUseViewPadding = true,
+    this.menuUseViewInsets = true,
     this.menuOffset = .zero,
     this.menuHideRegion = .excludeChild,
     this.menuOnTapHide,
@@ -444,6 +462,8 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
       ..add(DiagnosticsProperty('tileAnchor', tileAnchor))
       ..add(DiagnosticsProperty('menuSpacing', menuSpacing))
       ..add(ObjectFlagProperty.has('menuOverflow', menuOverflow))
+      ..add(FlagProperty('menuUseViewPadding', value: menuUseViewPadding, ifTrue: 'using view padding'))
+      ..add(FlagProperty('menuUseViewInsets', value: menuUseViewInsets, ifTrue: 'using view insets'))
       ..add(DiagnosticsProperty('menuOffset', menuOffset))
       ..add(EnumProperty('menuHideRegion', menuHideRegion))
       ..add(ObjectFlagProperty.has('menuOnTapHide', menuOnTapHide))
@@ -557,6 +577,8 @@ class _FSelectMenuTileState<T> extends State<FSelectMenuTile<T>> with TickerProv
           childAnchor: widget.tileAnchor,
           spacing: widget.menuSpacing,
           overflow: widget.menuOverflow,
+          useViewPadding: widget.menuUseViewPadding,
+          useViewInsets: widget.menuUseViewInsets,
           offset: widget.menuOffset,
           hideRegion: widget.menuHideRegion,
           onTapHide: widget.menuOnTapHide,

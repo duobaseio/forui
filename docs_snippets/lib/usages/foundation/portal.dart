@@ -12,7 +12,7 @@ final portal = FPortal(
   spacing: .zero,
   overflow: .flip,
   offset: .zero,
-  viewInsets: null,
+  padding: .zero,
   // {@endcategory}
   // {@category "Core"}
   controller: null,

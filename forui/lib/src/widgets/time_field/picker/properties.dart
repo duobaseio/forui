@@ -23,6 +23,16 @@ class FTimeFieldPickerProperties with Diagnosticable {
   /// {@macro forui.widgets.FPopover.offset}
   final Offset offset;
 
+  /// {@macro forui.foundation.FPortal.useViewPadding}
+  ///
+  /// Defaults to true.
+  final bool useViewPadding;
+
+  /// {@macro forui.foundation.FPortal.useViewInsets}
+  ///
+  /// Defaults to true.
+  final bool useViewInsets;
+
   /// {@macro forui.widgets.FPopover.hideRegion}
   ///
   /// Defaults to [FPopoverHideRegion.excludeChild].
@@ -53,6 +63,8 @@ class FTimeFieldPickerProperties with Diagnosticable {
     this.constraints = const FPortalConstraints(maxWidth: 200, maxHeight: 200),
     this.spacing = const .spacing(4),
     this.overflow = .flip,
+    this.useViewPadding = true,
+    this.useViewInsets = true,
     this.offset = .zero,
     this.hideRegion = .excludeChild,
     this.groupId,
@@ -70,6 +82,8 @@ class FTimeFieldPickerProperties with Diagnosticable {
       ..add(DiagnosticsProperty('constraints', constraints))
       ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('overflow', overflow))
+      ..add(FlagProperty('useViewPadding', value: useViewPadding, ifTrue: 'using view padding'))
+      ..add(FlagProperty('useViewInsets', value: useViewInsets, ifTrue: 'using view insets'))
       ..add(DiagnosticsProperty('offset', offset))
       ..add(EnumProperty('hideRegion', hideRegion))
       ..add(DiagnosticsProperty('groupId', groupId))
@@ -88,6 +102,8 @@ class FTimeFieldPickerProperties with Diagnosticable {
           constraints == other.constraints &&
           spacing == other.spacing &&
           overflow == other.overflow &&
+          useViewPadding == other.useViewPadding &&
+          useViewInsets == other.useViewInsets &&
           offset == other.offset &&
           hideRegion == other.hideRegion &&
           groupId == other.groupId &&
@@ -102,6 +118,8 @@ class FTimeFieldPickerProperties with Diagnosticable {
       constraints.hashCode ^
       spacing.hashCode ^
       overflow.hashCode ^
+      useViewPadding.hashCode ^
+      useViewInsets.hashCode ^
       offset.hashCode ^
       hideRegion.hashCode ^
       groupId.hashCode ^

@@ -109,6 +109,16 @@ class FTooltip extends StatefulWidget {
   /// Defaults to the enclosing [FTooltipGroup.longPressExitDuration], typically 1500ms.
   final Duration? longPressExitDuration;
 
+  /// {@macro forui.foundation.FPortal.useViewPadding}
+  ///
+  /// Defaults to true.
+  final bool useViewPadding;
+
+  /// {@macro forui.foundation.FPortal.useViewInsets}
+  ///
+  /// Defaults to true.
+  final bool useViewInsets;
+
   /// The tip builder. The child passed to [tipBuilder] will always be null.
   final Widget Function(BuildContext context, FTooltipController controller) tipBuilder;
 
@@ -139,6 +149,8 @@ class FTooltip extends StatefulWidget {
     this.hoverExitDuration,
     this.longPress,
     this.longPressExitDuration,
+    this.useViewPadding = true,
+    this.useViewInsets = true,
     this.builder = _builder,
     this.child,
     super.key,
@@ -162,6 +174,8 @@ class FTooltip extends StatefulWidget {
       ..add(DiagnosticsProperty('hoverExitDuration', hoverExitDuration))
       ..add(FlagProperty('longPress', value: longPress, ifTrue: 'longPress'))
       ..add(DiagnosticsProperty('longPressExitDuration', longPressExitDuration))
+      ..add(FlagProperty('useViewPadding', value: useViewPadding, ifTrue: 'using view padding'))
+      ..add(FlagProperty('useViewInsets', value: useViewInsets, ifTrue: 'using view insets'))
       ..add(ObjectFlagProperty.has('tipBuilder', tipBuilder))
       ..add(ObjectFlagProperty.has('builder', builder));
   }
@@ -262,6 +276,8 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
         childAnchor: widget.childAnchor,
         portalAnchor: widget.tipAnchor,
         overflow: widget.overflow,
+        useViewPadding: widget.useViewPadding,
+        useViewInsets: widget.useViewInsets,
         portalBuilder: (context, _) {
           Widget tooltip = Semantics(
             container: true,

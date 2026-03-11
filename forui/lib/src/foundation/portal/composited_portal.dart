@@ -41,8 +41,8 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
   /// The anchor point on the [child] used for positioning relative to the [portalAnchor].
   final Alignment childAnchor;
 
-  /// The padding to avoid system intrusions.
-  final EdgeInsets viewInsets;
+  /// The padding.
+  final EdgeInsets padding;
 
   /// The spacing between the [portalAnchor] and [childAnchor].
   final Offset spacing;
@@ -63,7 +63,7 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
     required this.constraints,
     required this.portalAnchor,
     required this.childAnchor,
-    required this.viewInsets,
+    required this.padding,
     required this.spacing,
     required this.overflow,
     required this.offset,
@@ -81,7 +81,7 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
     portalConstraints: constraints,
     portalAnchor: portalAnchor,
     childAnchor: childAnchor,
-    viewInsets: viewInsets,
+    padding: padding,
     spacing: spacing,
     overflow: overflow,
     offset: offset,
@@ -96,7 +96,7 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
     ..portalConstraints = constraints
     ..portalAnchor = portalAnchor
     ..childAnchor = childAnchor
-    ..viewInsets = viewInsets
+    ..padding = padding
     ..spacing = spacing
     ..overflow = overflow
     ..offset = offset;
@@ -111,7 +111,7 @@ class CompositedPortal extends SingleChildRenderObjectWidget {
       ..add(DiagnosticsProperty('constraints', constraints))
       ..add(DiagnosticsProperty('portalAnchor', portalAnchor))
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
-      ..add(DiagnosticsProperty('viewInsets', viewInsets))
+      ..add(DiagnosticsProperty('padding', padding))
       ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('overflow', overflow))
       ..add(DiagnosticsProperty('offset', offset));
@@ -133,7 +133,7 @@ class RenderPortalLayer extends RenderProxyBox {
   FPortalConstraints _portalConstraints;
   Alignment _portalAnchor;
   Alignment _childAnchor;
-  EdgeInsets _viewInsets;
+  EdgeInsets _padding;
   Offset _spacing;
   FPortalOverflow _overflow;
   Offset _offset;
@@ -146,10 +146,11 @@ class RenderPortalLayer extends RenderProxyBox {
     required FPortalConstraints portalConstraints,
     required Alignment portalAnchor,
     required Alignment childAnchor,
-    required EdgeInsets viewInsets,
+    required EdgeInsets padding,
     required Offset spacing,
     required FPortalOverflow overflow,
     required Offset offset,
+
     RenderBox? child,
   }) : _notifier = notifier,
        _link = link,
@@ -158,7 +159,7 @@ class RenderPortalLayer extends RenderProxyBox {
        _portalConstraints = portalConstraints,
        _portalAnchor = portalAnchor,
        _childAnchor = childAnchor,
-       _viewInsets = viewInsets,
+       _padding = padding,
        _spacing = spacing,
        _overflow = overflow,
        _offset = offset,
@@ -204,7 +205,7 @@ class RenderPortalLayer extends RenderProxyBox {
   @override
   void paint(PaintingContext context, Offset offset) {
     assert(
-      link.childSize != null || link.childLayer == null || childAnchor == Alignment.topLeft,
+      link.childSize != null || link.childLayer == null || childAnchor == .topLeft,
       '$link: layer is linked to ${link.childLayer} but a valid childSize is not set. '
       'childSize is required when childAnchor is not Alignment.topLeft '
       '(current value is $childAnchor).',
@@ -216,12 +217,9 @@ class RenderPortalLayer extends RenderProxyBox {
           (final childOffset?, final childSize?, final portal?) => overflow(
             // There is NO guarantee that this render box's size is the window's size. Always use viewSize.
             // It's okay to use viewSize even though it's larger than the render box's size as we override paintBounds.
-            Size(
-              viewSize.width - (viewInsets.left + viewInsets.right),
-              viewSize.height - (viewInsets.top + viewInsets.bottom),
-            ),
+            Size(viewSize.width - (padding.left + padding.right), viewSize.height - (padding.top + padding.bottom)),
             (
-              offset: Offset(childOffset.dx - viewInsets.left, childOffset.dy - viewInsets.top),
+              offset: Offset(childOffset.dx - padding.left, childOffset.dy - padding.top),
               size: childSize,
               anchor: childAnchor,
             ),
@@ -395,14 +393,14 @@ class RenderPortalLayer extends RenderProxyBox {
     markNeedsPaint();
   }
 
-  EdgeInsets get viewInsets => _viewInsets;
+  EdgeInsets get padding => _padding;
 
-  set viewInsets(EdgeInsets value) {
-    if (_viewInsets == value) {
+  set padding(EdgeInsets value) {
+    if (_padding == value) {
       return;
     }
 
-    _viewInsets = value;
+    _padding = value;
     markNeedsPaint();
   }
 
@@ -450,7 +448,7 @@ class RenderPortalLayer extends RenderProxyBox {
       ..add(DiagnosticsProperty('portalConstraints', portalConstraints))
       ..add(DiagnosticsProperty('portalAnchor', portalAnchor))
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
-      ..add(DiagnosticsProperty('viewInsets', viewInsets))
+      ..add(DiagnosticsProperty('padding', padding))
       ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('overflow', overflow))
       ..add(DiagnosticsProperty('offset', offset))

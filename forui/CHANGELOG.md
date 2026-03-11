@@ -12,6 +12,8 @@ sizes consistent across each platform.
 
 
 ### `FAutocomplete`
+* Add `FAutocomplete.contentUseViewPadding`.
+* Add `FAutocomplete.contentUseViewInsets`.
 * Add `FAutocomplete.retainFocus`.
 * Add `FAutocomplete.popoverBuilder`.
 * Add `FAutocomplete.size`.
@@ -86,6 +88,8 @@ sizes consistent across each platform.
 
 
 ### `FDateField`
+* Add `FDateFieldCalendarProperties.useViewPadding`.
+* Add `FDateFieldCalendarProperties.useViewInsets`.
 * Add `FDateField.popoverBuilder`.
 * Add `FDateField.size`.
 
@@ -138,7 +142,25 @@ sizes consistent across each platform.
 
 
 ### `FPopover`
+* Add `FPopover.useViewPadding`.
+* Add `FPopover.useViewInsets`.
+
+* **Breaking** Rename `FPopoverStyle.viewPadding` to `FPopoverStyle.popoverPadding`.
 * **Breaking** Change `FPopoverStyle.decoration` type from `BoxDecoration` to `Decoration`.
+
+
+### `FPopoverMenu`
+* Add `FPopoverMenu.useViewPadding`.
+* Add `FPopoverMenu.useViewInsets`.
+
+
+### `FPortal`
+* Add `FPortal.useViewPadding`.
+* Add `FPortal.useViewInsets`.
+* Add `FPortal.padding`.
+
+* **Breaking** Remove `FPortal.viewInsets`. Use `FPortal.useViewPadding`, `FPortal.useViewInsets`, and `FPortal.padding`
+  instead.
 
 
 ### `FProgress`
@@ -155,6 +177,10 @@ sizes consistent across each platform.
 
 
 ### `FSelect` & `FMultiSelect`
+* Add `FSelect.contentUseViewPadding`.
+* Add `FSelect.contentUseViewInsets`.
+* Add `FMultiSelect.contentUseViewPadding`.
+* Add `FMultiSelect.contentUseViewInsets`.
 * Add `FSelect.popoverBuilder`.
 * Add `FMultiSelect.popoverBuilder`.
 * Add `FMultiSelect.size`.
@@ -214,7 +240,14 @@ sizes consistent across each platform.
 * Fix incorrectly handling of platform changes.
 
 
+### `FSelectMenuTile`
+* Add `FSelectMenuTile.menuUseViewPadding`.
+* Add `FSelectMenuTile.menuUseViewInsets`.
+
+
 ### `FTimeField`
+* Add `FTimeFieldPickerProperties.useViewPadding`.
+* Add `FTimeFieldPickerProperties.useViewInsets`.
 * Add `FTimeField.clearable`.
 * Add `FTimeField.popoverBuilder`.
 * Add `FTimeField.size`.
@@ -269,6 +302,9 @@ sizes consistent across each platform.
 
 
 ### `FTooltip`
+* Add `FTooltip.useViewPadding`.
+* Add `FTooltip.useViewInsets`.
+
 * **Breaking** Change `FTooltipStyle.decoration` type from `BoxDecoration` to `Decoration`.
 
 

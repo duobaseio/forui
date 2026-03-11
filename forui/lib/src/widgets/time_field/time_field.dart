@@ -306,6 +306,8 @@ abstract class FTimeField extends StatefulWidget {
     FPortalConstraints constraints,
     FPortalSpacing spacing,
     FPortalOverflow overflow,
+    bool useViewPadding,
+    bool useViewInsets,
     Offset offset,
     FPopoverHideRegion hideRegion,
     Object? groupId,

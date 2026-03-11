@@ -20,6 +20,16 @@ class FDateFieldCalendarProperties with Diagnosticable {
   /// {@macro forui.widgets.FPopover.offset}
   final Offset offset;
 
+  /// {@macro forui.foundation.FPortal.useViewPadding}
+  ///
+  /// Defaults to true.
+  final bool useViewPadding;
+
+  /// {@macro forui.foundation.FPortal.useViewInsets}
+  ///
+  /// Defaults to true.
+  final bool useViewInsets;
+
   /// {@macro forui.widgets.FPopover.hideRegion}
   ///
   /// Defaults to [FPopoverHideRegion.excludeChild].
@@ -61,6 +71,8 @@ class FDateFieldCalendarProperties with Diagnosticable {
     this.spacing = const .spacing(4),
     this.overflow = .flip,
     this.offset = .zero,
+    this.useViewPadding = true,
+    this.useViewInsets = true,
     this.hideRegion = .excludeChild,
     this.groupId,
     this.onTapHide,
@@ -81,6 +93,8 @@ class FDateFieldCalendarProperties with Diagnosticable {
       ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('overflow', overflow))
       ..add(DiagnosticsProperty('offset', offset))
+      ..add(FlagProperty('useViewPadding', value: useViewPadding, ifTrue: 'using view padding'))
+      ..add(FlagProperty('useViewInsets', value: useViewInsets, ifTrue: 'using view insets'))
       ..add(EnumProperty('hideRegion', hideRegion))
       ..add(DiagnosticsProperty('groupId', groupId))
       ..add(ObjectFlagProperty.has('onTapHide', onTapHide))
@@ -102,6 +116,8 @@ class FDateFieldCalendarProperties with Diagnosticable {
           spacing == other.spacing &&
           overflow == other.overflow &&
           offset == other.offset &&
+          useViewPadding == other.useViewPadding &&
+          useViewInsets == other.useViewInsets &&
           hideRegion == other.hideRegion &&
           groupId == other.groupId &&
           onTapHide == other.onTapHide &&
@@ -119,6 +135,8 @@ class FDateFieldCalendarProperties with Diagnosticable {
       spacing.hashCode ^
       overflow.hashCode ^
       offset.hashCode ^
+      useViewPadding.hashCode ^
+      useViewInsets.hashCode ^
       hideRegion.hashCode ^
       onTapHide.hashCode ^
       dayBuilder.hashCode ^

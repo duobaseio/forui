@@ -12,7 +12,7 @@ class PortalPage extends Example {
   @override
   Widget example(BuildContext _) => FPortal(
     spacing: const .spacing(8),
-    viewInsets: const .all(5),
+    padding: const .all(5),
     portalBuilder: (context, _) => Container(
       decoration: BoxDecoration(
         color: context.theme.colors.background,

@@ -21,9 +21,10 @@ void main() {
   });
 
   group('FSelectSection', () {
-    testWidgets('focus skips title', (tester) async {
+    testWidgets('focus skips title on desktop', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
+          platform: .macOS,
           child: FSelect<String>.rich(
             key: key,
             format: (s) => s,
@@ -57,9 +58,10 @@ void main() {
   });
 
   group('FSelectItem', () {
-    testWidgets('focus changes', (tester) async {
+    testWidgets('focus changes on desktop', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
+          platform: .macOS,
           child: FSelect<String>.rich(
             key: key,
             format: (s) => s,

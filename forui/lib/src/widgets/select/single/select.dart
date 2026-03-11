@@ -190,6 +190,16 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// {@macro forui.widgets.FPopover.overflow}
   final FPortalOverflow contentOverflow;
 
+  /// {@macro forui.foundation.FPortal.useViewPadding}
+  ///
+  /// Defaults to true.
+  final bool contentUseViewPadding;
+
+  /// {@macro forui.foundation.FPortal.useViewInsets}
+  ///
+  /// Defaults to true.
+  final bool contentUseViewInsets;
+
   /// {@macro forui.widgets.FPopover.offset}
   final Offset contentOffset;
 
@@ -258,6 +268,8 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     FPortalConstraints contentConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
     FPortalSpacing contentSpacing = const .spacing(4),
     FPortalOverflow contentOverflow = .flip,
+    bool contentUseViewPadding = true,
+    bool contentUseViewInsets = true,
     Offset contentOffset = .zero,
     FPopoverHideRegion contentHideRegion = .excludeChild,
     Object? contentGroupId,
@@ -304,6 +316,8 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       contentConstraints: contentConstraints,
       contentSpacing: contentSpacing,
       contentOverflow: contentOverflow,
+      contentUseViewPadding: contentUseViewPadding,
+      contentUseViewInsets: contentUseViewInsets,
       contentOffset: contentOffset,
       contentHideRegion: contentHideRegion,
       contentGroupId: contentGroupId,
@@ -354,6 +368,8 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     FPortalConstraints contentConstraints,
     FPortalSpacing contentSpacing,
     FPortalOverflow contentOverflow,
+    bool contentUseViewPadding,
+    bool contentUseViewInsets,
     Offset contentOffset,
     FPopoverHideRegion contentHideRegion,
     Object? contentGroupId,
@@ -420,6 +436,8 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     FPortalConstraints contentConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
     FPortalSpacing contentSpacing = const .spacing(4),
     FPortalOverflow contentOverflow = .flip,
+    bool contentUseViewPadding = true,
+    bool contentUseViewInsets = true,
     Offset contentOffset = .zero,
     FPopoverHideRegion contentHideRegion = .excludeChild,
     Object? contentGroupId,
@@ -478,6 +496,8 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       contentConstraints: contentConstraints,
       contentSpacing: contentSpacing,
       contentOverflow: contentOverflow,
+      contentUseViewPadding: contentUseViewPadding,
+      contentUseViewInsets: contentUseViewInsets,
       contentOffset: contentOffset,
       contentHideRegion: contentHideRegion,
       contentGroupId: contentGroupId,
@@ -539,6 +559,8 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     FPortalConstraints contentConstraints,
     FPortalSpacing contentSpacing,
     FPortalOverflow contentOverflow,
+    bool contentUseViewPadding,
+    bool contentUseViewInsets,
     Offset contentOffset,
     FPopoverHideRegion contentHideRegion,
     Object? contentGroupId,
@@ -585,6 +607,8 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     this.contentConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
     this.contentSpacing = const .spacing(4),
     this.contentOverflow = .flip,
+    this.contentUseViewPadding = true,
+    this.contentUseViewInsets = true,
     this.contentOffset = .zero,
     this.contentHideRegion = .excludeChild,
     this.contentGroupId,
@@ -632,6 +656,8 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       ..add(DiagnosticsProperty('contentConstraints', contentConstraints))
       ..add(DiagnosticsProperty('contentSpacing', contentSpacing))
       ..add(ObjectFlagProperty.has('contentOverflow', contentOverflow))
+      ..add(FlagProperty('contentUseViewPadding', value: contentUseViewPadding, ifTrue: 'using view padding'))
+      ..add(FlagProperty('contentUseViewInsets', value: contentUseViewInsets, ifTrue: 'using view insets'))
       ..add(DiagnosticsProperty('contentOffset', contentOffset))
       ..add(EnumProperty('contentHideRegion', contentHideRegion))
       ..add(DiagnosticsProperty('contentGroupId', contentGroupId))
@@ -771,6 +797,8 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
           childAnchor: widget.fieldAnchor,
           spacing: widget.contentSpacing,
           overflow: widget.contentOverflow,
+          useViewPadding: widget.contentUseViewPadding,
+          useViewInsets: widget.contentUseViewInsets,
           offset: widget.contentOffset,
           hideRegion: widget.contentHideRegion,
           groupId: widget.contentGroupId,

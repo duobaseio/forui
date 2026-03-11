@@ -354,6 +354,27 @@ void main() {
     });
   }
 
+  for (final theme in TestScaffold.themes) {
+    testWidgets('${theme.name} autofocus first item when none selected on desktop', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          platform: .macOS,
+          alignment: .topCenter,
+          child: FSelect<String>(items: letters, key: key),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('select/${theme.name}/autofocus-first-item.png'),
+      );
+    });
+  }
+
   testWidgets('popover builder', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(

@@ -173,7 +173,7 @@ class FAutocompleteContentStyle extends FPopoverStyle with Diagnosticable, _$FAu
     this.padding = const .symmetric(vertical: 6),
     super.barrierFilter,
     super.backgroundFilter,
-    super.viewInsets,
+    super.popoverPadding,
   });
 
   /// Creates a [FAutocompleteContentStyle] that inherits its properties.

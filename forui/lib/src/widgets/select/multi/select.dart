@@ -210,6 +210,16 @@ abstract class FMultiSelect<T> extends StatefulWidget {
   /// {@macro forui.widgets.FPopover.overflow}
   final FPortalOverflow contentOverflow;
 
+  /// {@macro forui.foundation.FPortal.useViewPadding}
+  ///
+  /// Defaults to true.
+  final bool contentUseViewPadding;
+
+  /// {@macro forui.foundation.FPortal.useViewInsets}
+  ///
+  /// Defaults to true.
+  final bool contentUseViewInsets;
+
   /// {@macro forui.widgets.FPopover.offset}
   final Offset contentOffset;
 
@@ -273,7 +283,9 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     FPortalConstraints contentConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
     FPortalSpacing contentSpacing = const .spacing(4),
     FPortalOverflow contentOverflow = .flip,
-    Offset contentOffset = Offset.zero,
+    bool contentUseViewPadding = true,
+    bool contentUseViewInsets = true,
+    Offset contentOffset = .zero,
     FPopoverHideRegion contentHideRegion = .excludeChild,
     Object? contentGroupId,
     Widget Function(BuildContext context, FMultiSelectStyle style) contentEmptyBuilder =
@@ -317,6 +329,8 @@ abstract class FMultiSelect<T> extends StatefulWidget {
       contentConstraints: contentConstraints,
       contentSpacing: contentSpacing,
       contentOverflow: contentOverflow,
+      contentUseViewPadding: contentUseViewPadding,
+      contentUseViewInsets: contentUseViewInsets,
       contentOffset: contentOffset,
       contentHideRegion: contentHideRegion,
       contentGroupId: contentGroupId,
@@ -364,6 +378,8 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     FPortalConstraints contentConstraints,
     FPortalSpacing contentSpacing,
     FPortalOverflow contentOverflow,
+    bool contentUseViewPadding,
+    bool contentUseViewInsets,
     Offset contentOffset,
     FPopoverHideRegion contentHideRegion,
     Object? contentGroupId,
@@ -427,6 +443,8 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     FPortalConstraints contentConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
     FPortalSpacing contentSpacing = const .spacing(4),
     FPortalOverflow contentOverflow = .flip,
+    bool contentUseViewPadding = true,
+    bool contentUseViewInsets = true,
     Offset contentOffset = .zero,
     FPopoverHideRegion contentHideRegion = .excludeChild,
     Object? contentGroupId,
@@ -482,6 +500,8 @@ abstract class FMultiSelect<T> extends StatefulWidget {
       contentConstraints: contentConstraints,
       contentSpacing: contentSpacing,
       contentOverflow: contentOverflow,
+      contentUseViewPadding: contentUseViewPadding,
+      contentUseViewInsets: contentUseViewInsets,
       contentOffset: contentOffset,
       contentHideRegion: contentHideRegion,
       contentGroupId: contentGroupId,
@@ -540,6 +560,8 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     FPortalConstraints contentConstraints,
     FPortalSpacing contentSpacing,
     FPortalOverflow contentOverflow,
+    bool contentUseViewPadding,
+    bool contentUseViewInsets,
     Offset contentOffset,
     FPopoverHideRegion contentHideRegion,
     Object? contentGroupId,
@@ -582,6 +604,8 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     this.contentConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
     this.contentSpacing = const .spacing(4),
     this.contentOverflow = .flip,
+    this.contentUseViewPadding = true,
+    this.contentUseViewInsets = true,
     this.contentOffset = .zero,
     this.contentHideRegion = .excludeChild,
     this.contentGroupId,
@@ -626,6 +650,8 @@ abstract class FMultiSelect<T> extends StatefulWidget {
       ..add(DiagnosticsProperty('contentConstraints', contentConstraints))
       ..add(DiagnosticsProperty('contentSpacing', contentSpacing))
       ..add(ObjectFlagProperty.has('contentOverflow', contentOverflow))
+      ..add(FlagProperty('contentUseViewPadding', value: contentUseViewPadding, ifTrue: 'using view padding'))
+      ..add(FlagProperty('contentUseViewInsets', value: contentUseViewInsets, ifTrue: 'using view insets'))
       ..add(DiagnosticsProperty('contentOffset', contentOffset))
       ..add(EnumProperty('contentHideRegion', contentHideRegion))
       ..add(DiagnosticsProperty('contentGroupId', contentGroupId))
@@ -728,6 +754,8 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
               childAnchor: widget.fieldAnchor,
               spacing: widget.contentSpacing,
               overflow: widget.contentOverflow,
+              useViewPadding: widget.contentUseViewPadding,
+              useViewInsets: widget.contentUseViewInsets,
               offset: widget.contentOffset,
               hideRegion: widget.contentHideRegion,
               groupId: widget.contentGroupId,
