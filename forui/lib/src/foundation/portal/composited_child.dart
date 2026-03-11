@@ -82,10 +82,7 @@ class RenderChildLayer extends RenderProxyBox {
 
   @override
   void paint(PaintingContext context, Offset offset) {
-    var globalOffset = offset;
-    if (parent case final RenderBox parent) {
-      globalOffset = parent.localToGlobal(offset);
-    }
+    final globalOffset = localToGlobal(.zero);
 
     if (layer == null) {
       layer = ChildLayer(link: link, globalOffset: globalOffset, localOffset: offset);

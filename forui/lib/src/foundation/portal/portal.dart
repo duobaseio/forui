@@ -167,55 +167,49 @@ class _State extends State<FPortal> {
   }
 
   @override
-  Widget build(BuildContext context) => Stack(
-    children: [
-      RepaintBoundary(
-        child: CompositedChild(
+  Widget build(BuildContext context) => CompositedChild(
+    notifier: _notifier,
+    link: _link,
+    child: OverlayPortal(
+      controller: _controller,
+      overlayChildBuilder: (context) {
+        final direction = Directionality.maybeOf(context) ?? .ltr;
+        final portalAnchor = widget.portalAnchor.resolve(direction);
+        final childAnchor = widget.childAnchor.resolve(direction);
+
+        final padding = widget.useViewPadding ? MediaQuery.viewPaddingOf(context) : EdgeInsets.zero;
+        final insets = widget.useViewInsets ? MediaQuery.viewInsetsOf(context) : EdgeInsets.zero;
+
+        Widget portal = CompositedPortal(
           notifier: _notifier,
           link: _link,
-          child: OverlayPortal(
-            controller: _controller,
-            overlayChildBuilder: (context) {
-              final direction = Directionality.maybeOf(context) ?? .ltr;
-              final portalAnchor = widget.portalAnchor.resolve(direction);
-              final childAnchor = widget.childAnchor.resolve(direction);
+          constraints: widget.constraints,
+          portalAnchor: portalAnchor,
+          childAnchor: childAnchor,
+          padding:
+              EdgeInsets.only(
+                left: math.max(padding.left, insets.left),
+                top: math.max(padding.top, insets.top),
+                right: math.max(padding.right, insets.right),
+                bottom: math.max(padding.bottom, insets.bottom),
+              ) +
+              widget.padding.resolve(direction),
+          spacing: widget.spacing(childAnchor, portalAnchor),
+          overflow: widget.overflow,
+          offset: widget.offset,
+          child: widget.portalBuilder(context, _controller),
+        );
 
-              final padding = widget.useViewPadding ? MediaQuery.viewPaddingOf(context) : EdgeInsets.zero;
-              final insets = widget.useViewInsets ? MediaQuery.viewInsetsOf(context) : EdgeInsets.zero;
+        if (widget.barrier case final barrier?) {
+          portal = Stack(children: [barrier, portal]);
+        }
 
-              Widget portal = CompositedPortal(
-                notifier: _notifier,
-                link: _link,
-                constraints: widget.constraints,
-                portalAnchor: portalAnchor,
-                childAnchor: childAnchor,
-                padding:
-                    EdgeInsets.only(
-                      left: math.max(padding.left, insets.left),
-                      top: math.max(padding.top, insets.top),
-                      right: math.max(padding.right, insets.right),
-                      bottom: math.max(padding.bottom, insets.bottom),
-                    ) +
-                    widget.padding.resolve(direction),
-                spacing: widget.spacing(childAnchor, portalAnchor),
-                overflow: widget.overflow,
-                offset: widget.offset,
-                child: widget.portalBuilder(context, _controller),
-              );
-
-              if (widget.barrier case final barrier?) {
-                portal = Stack(children: [barrier, portal]);
-              }
-
-              // Prevents the portal from inheriting FTappableGroups in the widget.builder/widget.child since
-              // FTappableGroup does not hit test across layers.
-              return FTappableGroup.isolate(child: portal);
-            },
-            child: RepaintBoundary(child: widget.builder(context, _controller, widget.child)),
-          ),
-        ),
-      ),
-    ],
+        // Prevents the portal from inheriting FTappableGroups in the widget.builder/widget.child since
+        // FTappableGroup does not hit test across layers.
+        return FTappableGroup.isolate(child: portal);
+      },
+      child: RepaintBoundary(child: widget.builder(context, _controller, widget.child)),
+    ),
   );
 
   @override
