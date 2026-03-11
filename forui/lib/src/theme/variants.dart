@@ -281,7 +281,7 @@ class FVariantOperation<K extends FVariantConstraint, E extends FVariant, V, D e
   ///
   /// ```dart
   /// // Given base: 0, {a: 1, b: 2}
-  /// .base(Delta(10)) // base: 10, {a: 1, b: 2}
+  /// .base(AddDelta(10)) // base: 10, {a: 1, b: 2}
   /// ```
   ///
   /// See also:
@@ -297,7 +297,7 @@ class FVariantOperation<K extends FVariantConstraint, E extends FVariant, V, D e
   ///
   /// ```dart
   /// // Given base: 0, {a: 1, b: 1}
-  /// .exact({b, c}, Delta(2)) // {a: 1, b: 2, c: 2}
+  /// .exact({b, c}, AddDelta(2)) // {a: 1, b: 3, c: 2}
   /// ```
   ///
   /// See also:
@@ -306,10 +306,10 @@ class FVariantOperation<K extends FVariantConstraint, E extends FVariant, V, D e
   /// * [FVariantOperation.variants] for applying to all variants.
   /// * [FVariantOperation.all] for applying to all variants and base.
   FVariantOperation.exact(Set<K> constraints, D delta)
-    : _call = ((base, existing) {
-        final addition = delta(base) as V;
-        return .raw(base, {...existing, for (final constraint in constraints) constraint: addition});
-      });
+    : _call = ((base, existing) => .raw(base, {
+        ...existing,
+        for (final constraint in constraints) constraint: delta(existing[constraint] ?? base) as V,
+      }));
 
   /// Applies [delta] to existing variants whose constraint's variants are all present in [variants].
   ///

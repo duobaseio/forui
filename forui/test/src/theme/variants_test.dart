@@ -274,7 +274,7 @@ void main() {
       final result = delta(createVariants(0, {a: 1, b: 2}));
 
       expect(result.base, 0);
-      expect(result.variants, {a: 1, b: 10, c: 10});
+      expect(result.variants, {a: 1, b: 12, c: 10});
     });
 
     for (final (description, variants, expected) in [
