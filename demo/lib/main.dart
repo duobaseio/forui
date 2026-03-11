@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
-import 'widgets/button.dart';
+import 'widgets/bottom_navigation_bar.dart';
 
 void main() {
   runApp(const Application());
@@ -29,7 +29,7 @@ class Application extends StatelessWidget {
         ),
       ),
       home: const FScaffold(
-        child: Button(),
+        child: BottomNavBar(),
       ),
     );
   }
