@@ -17,7 +17,7 @@ sizes consistent across each platform.
 * Add `FAutocomplete.retainFocus`.
 * Add `FAutocomplete.popoverBuilder`.
 * Add `FAutocomplete.size`.
-* Add `FAutocompleteSizeStyles`.
+* Add `FAutocompleteFieldSizeStyles`.
 * Add `FAutocompleteFieldStyle`.
 
 * Change `FAutocompleteFieldStyle.typeaheadTextStyle` type from `FVariants<..., TextStyle, ...>` to
@@ -25,7 +25,7 @@ sizes consistent across each platform.
 * Change `FAutocompleteSection` layout to better align with the latest shadcn version.
 
 * **Breaking** Rename `FAutocompleteStyle.fieldStyle` to `FAutocompleteStyle.fieldStyles`. Type changed from
-  `FTextFieldStyle` to `FAutocompleteSizeStyles`.
+  `FTextFieldStyle` to `FAutocompleteFieldSizeStyles`.
 * **Breaking** Move `FAutocompleteStyle.composingTextStyle` and `FAutocompleteStyle.typeaheadTextStyle` to
   `FAutocompleteFieldStyle`.
 * **Breaking** Remove `FAutocomplete.defaultClearable`. Use `FTextField.defaultClearable` instead.
@@ -213,7 +213,7 @@ sizes consistent across each platform.
 * Add `FSelect.popoverBuilder`.
 * Add `FMultiSelect.popoverBuilder`.
 * Add `FMultiSelect.size`.
-* Add `FMultiSelectFieldStyles`.
+* Add `FMultiSelectFieldSizeStyles`.
 * Add `FSelect.size`.
 * Add `FSelectSearchFieldProperties.size`.
 
@@ -235,7 +235,7 @@ sizes consistent across each platform.
   `FMultiSelectFieldStyle`.
 * **Breaking** Move `FMultiSelectStyle.tagStyle` to `FMultiSelectFieldStyle.tagStyle`.
 * **Breaking** Rename `FMultiSelectStyle.fieldStyle` to `FMultiSelectStyle.fieldStyles`. Type changed from
-  `FMultiSelectFieldStyle` to `FMultiSelectFieldStyles`.
+  `FMultiSelectFieldStyle` to `FMultiSelectFieldSizeStyles`.
 * **Breaking** Rename `FSelectStyle.fieldStyle` to `FSelectStyle.fieldStyles`. Type changed from `FTextFieldStyle` to
   `FTextFieldSizeStyles`.
 * **Breaking** Rename `FSelectSearchStyle.fieldStyle` to `FSelectSearchStyle.fieldStyles`. Type changed from

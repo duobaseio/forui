@@ -215,7 +215,7 @@ class FPopoverMenu extends StatelessWidget {
          children: menuBuilder(context, controller, menu),
        )),
        assert(builder != FPopover.defaultBuilder || child != null, 'Either builder or child must be provided'),
-       assert(menuBuilder != defaultTileBuilder || menu != null, 'Either menuBuilder or menu must be provided');
+       assert(menuBuilder != defaultItemBuilder || menu != null, 'Either menuBuilder or menu must be provided');
 
   /// Creates a menu of [FTile]s that is only shown when toggled.
   ///

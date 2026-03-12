@@ -122,7 +122,6 @@ class _RenderItemContent extends RenderBox
 
   @override
   double computeMaxIntrinsicWidth(double height) {
-    super.computeMaxIntrinsicWidth(height);
     final EdgeInsets(:left, :right) = _padding;
     final prefix = firstChild!;
     final column = childAfter(prefix)!;
