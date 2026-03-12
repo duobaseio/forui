@@ -368,10 +368,7 @@ void main() {
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('select/${theme.name}/autofocus-first-item.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('select/${theme.name}/autofocus-first-item.png'));
     });
   }
 

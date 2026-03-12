@@ -192,7 +192,8 @@ class _ThemesVisitor extends RecursiveAstVisitor<void> {
           // FPlatformThemeData(desktop: () => FThemeData(...), touch: () => FThemeData(...))
           if (expression case final InstanceCreationExpression platformTheme) {
             // Extract colors from the touch variant
-            for (final NamedExpression(:name, :expression) in platformTheme.argumentList.arguments.whereType<NamedExpression>()) {
+            for (final NamedExpression(:name, :expression)
+                in platformTheme.argumentList.arguments.whereType<NamedExpression>()) {
               if (name.label.name != 'touch') {
                 continue;
               }

@@ -20,7 +20,8 @@ import 'package:forui/src/widgets/tooltip/tooltip_controller.dart';
 /// * [FSliderStyles] for customizing a slider's appearance.
 class FSlider extends StatelessWidget with FFormFieldProperties<FSliderValue> {
   /// The default tooltip builder that displays the value as a percentage.
-  static Widget defaultTooltipBuilder(FTooltipController _, double value) => Text('${(value * 100).toStringAsFixed(0)}%');
+  static Widget defaultTooltipBuilder(FTooltipController _, double value) =>
+      Text('${(value * 100).toStringAsFixed(0)}%');
 
   /// The default semantic value formatter that formats the value as a percentage.
   static String defaultSemanticValueFormatter(double value) => '${(value * 100).toStringAsFixed(0)}%';

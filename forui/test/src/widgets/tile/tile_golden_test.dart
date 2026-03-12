@@ -366,11 +366,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             child: IntrinsicWidth(
-              child: FTile(
-                prefix: const Icon(FIcons.bluetooth),
-                title: const Text('Bluetooth'),
-                onPress: () {},
-              ),
+              child: FTile(prefix: const Icon(FIcons.bluetooth), title: const Text('Bluetooth'), onPress: () {}),
             ),
           ),
         );

@@ -443,61 +443,58 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
   });
 
   /// Creates a [FTileGroupStyle] that inherits from the given arguments.
-  factory FTileGroupStyle.inherit({
-    required FColors colors,
-    required FTypography typography,
-    required FStyle style,
-  }) => .new(
-      decoration: ShapeDecoration(
-        shape: RoundedSuperellipseBorder(
-          side: BorderSide(color: colors.border, width: style.borderWidth),
-          borderRadius: style.borderRadius.md,
-        ),
-      ),
-      dividerColor: .all(colors.border),
-      dividerWidth: style.borderWidth,
-      slideableTiles: const .all(true),
-      labelTextStyle: FVariants.from(
-        typography.sm.copyWith(
-          color: style.formFieldStyle.labelTextStyle.base.color ?? colors.foreground,
-          fontWeight: .w600,
-        ),
-        variants: {
-          [.disabled]: .delta(color: colors.disable(colors.foreground)),
-        },
-      ),
-      tileStyles: FVariants.from(
-        FTileStyle.inherit(
-          colors: colors,
-          typography: typography,
-          style: style,
-        ).copyWith(decoration: .delta([.all(const .shapeDelta(shape: RoundedSuperellipseBorder()))])),
-        variants: {
-          [.destructive]: .delta(
-            contentStyle: FItemContentStyle.inherit(
-              colors: colors,
-              typography: typography,
-              prefix: colors.destructive,
-              foreground: colors.destructive,
-              mutedForeground: colors.destructive,
-              suffixedPadding: FTileStyle.defaultSuffixedPadding,
-              unsuffixedPadding: FTileStyle.defaultUnsuffixedPadding,
-            ),
-            rawItemContentStyle: FRawItemContentStyle.inherit(
-              colors: colors,
-              typography: typography,
-              prefix: colors.destructive,
-              color: colors.destructive,
-              padding: FTileStyle.defaultUnsuffixedPadding,
-            ),
+  factory FTileGroupStyle.inherit({required FColors colors, required FTypography typography, required FStyle style}) =>
+      .new(
+        decoration: ShapeDecoration(
+          shape: RoundedSuperellipseBorder(
+            side: BorderSide(color: colors.border, width: style.borderWidth),
+            borderRadius: style.borderRadius.md,
           ),
-        },
-      ),
-      descriptionTextStyle: style.formFieldStyle.descriptionTextStyle.apply([
-        .all(.delta(fontSize: typography.xs2.fontSize, height: typography.xs2.height)),
-      ]),
-      errorTextStyle: style.formFieldStyle.errorTextStyle.apply([
-        .all(.delta(fontSize: typography.xs2.fontSize, height: typography.xs2.height)),
-      ]),
-    );
+        ),
+        dividerColor: .all(colors.border),
+        dividerWidth: style.borderWidth,
+        slideableTiles: const .all(true),
+        labelTextStyle: FVariants.from(
+          typography.sm.copyWith(
+            color: style.formFieldStyle.labelTextStyle.base.color ?? colors.foreground,
+            fontWeight: .w600,
+          ),
+          variants: {
+            [.disabled]: .delta(color: colors.disable(colors.foreground)),
+          },
+        ),
+        tileStyles: FVariants.from(
+          FTileStyle.inherit(
+            colors: colors,
+            typography: typography,
+            style: style,
+          ).copyWith(decoration: .delta([.all(const .shapeDelta(shape: RoundedSuperellipseBorder()))])),
+          variants: {
+            [.destructive]: .delta(
+              contentStyle: FItemContentStyle.inherit(
+                colors: colors,
+                typography: typography,
+                prefix: colors.destructive,
+                foreground: colors.destructive,
+                mutedForeground: colors.destructive,
+                suffixedPadding: FTileStyle.defaultSuffixedPadding,
+                unsuffixedPadding: FTileStyle.defaultUnsuffixedPadding,
+              ),
+              rawItemContentStyle: FRawItemContentStyle.inherit(
+                colors: colors,
+                typography: typography,
+                prefix: colors.destructive,
+                color: colors.destructive,
+                padding: FTileStyle.defaultUnsuffixedPadding,
+              ),
+            ),
+          },
+        ),
+        descriptionTextStyle: style.formFieldStyle.descriptionTextStyle.apply([
+          .all(.delta(fontSize: typography.xs2.fontSize, height: typography.xs2.height)),
+        ]),
+        errorTextStyle: style.formFieldStyle.errorTextStyle.apply([
+          .all(.delta(fontSize: typography.xs2.fontSize, height: typography.xs2.height)),
+        ]),
+      );
 }

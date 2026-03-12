@@ -416,13 +416,13 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
       style: style,
       child: intrinsicWidth
           ? IntrinsicWidth(
-            child: SingleChildScrollView(
+              child: SingleChildScrollView(
                 controller: scrollController,
                 dragStartBehavior: dragStartBehavior,
                 physics: physics,
                 child: _builder(style, enabled, true),
               ),
-          )
+            )
           : CustomScrollView(
               controller: scrollController,
               cacheExtent: cacheExtent,
