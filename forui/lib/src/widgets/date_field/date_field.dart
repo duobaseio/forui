@@ -11,6 +11,7 @@ import 'package:forui/src/widgets/date_field/input/date_input.dart';
 import 'package:forui/src/widgets/popover/popover_controller.dart';
 
 part 'calendar/calendar_date_field.dart';
+
 part 'input/input_date_field.dart';
 
 /// A builder that wraps [FDateField]'s popover content.
@@ -46,15 +47,8 @@ typedef FDateFieldPopoverBuilder =
 /// * [FDateFieldStyle] for customizing a date field's appearance.
 abstract class FDateField extends StatefulWidget {
   /// The default prefix builder that shows a calendar icon.
-  static Widget defaultIconBuilder(BuildContext _, FTextFieldStyle style, Set<FTextFieldVariant> variants) => Padding(
-    padding: const .directional(start: 12.0, end: 4.0),
-    child: IconTheme(data: style.iconStyle.resolve(variants), child: const Icon(FIcons.calendar)),
-  );
-
-  static Widget _popoverBuilder(BuildContext _, FDateFieldController _, FPopoverController _, Widget content) =>
-      content;
-
-  static Widget _fieldBuilder(BuildContext _, FDateFieldStyle _, Set<FTextFieldVariant> _, Widget child) => child;
+  static Widget defaultIconBuilder(BuildContext context, FTextFieldStyle style, Set<FTextFieldVariant> variants) =>
+      FTextField.prefixIconBuilder(context, style, variants, const Icon(FIcons.calendar));
 
   /// The control for managing the date field's state.
   final FDateFieldControl control;
@@ -144,7 +138,7 @@ abstract class FDateField extends StatefulWidget {
     this.style = const .context(),
     this.autofocus = false,
     this.focusNode,
-    this.builder = _fieldBuilder,
+    this.builder = FTextField.defaultBuilder,
     this.prefixBuilder = defaultIconBuilder,
     this.suffixBuilder,
     this.label,

@@ -27,7 +27,8 @@ part 'tooltip.design.dart';
 /// * [FTooltipStyle] for customizing a tooltip's appearance.
 /// * [FTooltipGroup] for grouping tooltips together where subsequent tooltips appear instantly after the initial one.
 class FTooltip extends StatefulWidget {
-  static Widget _builder(BuildContext _, FTooltipController _, Widget? child) => child!;
+  /// The default builder that returns the child as-is.
+  static Widget defaultBuilder(BuildContext _, FTooltipController _, Widget? child) => child!;
 
   /// Defines how the tooltip's shown state is controlled.
   ///
@@ -151,10 +152,10 @@ class FTooltip extends StatefulWidget {
     this.longPressExitDuration,
     this.useViewPadding = true,
     this.useViewInsets = true,
-    this.builder = _builder,
+    this.builder = defaultBuilder,
     this.child,
     super.key,
-  }) : assert(builder != _builder || child != null, 'Either builder or child must be provided.');
+  }) : assert(builder != defaultBuilder || child != null, 'Either builder or child must be provided.');
 
   @override
   State<FTooltip> createState() => _FTooltipState();

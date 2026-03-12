@@ -28,7 +28,8 @@ part 'resizable.design.dart';
 /// * https://forui.dev/docs/layout/resizable for working examples.
 /// * [FResizableStyles] for customizing a resizable's appearance.
 class FResizable extends StatefulWidget {
-  static String _label(FResizableRegionData left, FResizableRegionData right) =>
+  /// The default semantic label formatter that announces the extents of both regions.
+  static String defaultSemanticFormatterCallback(FResizableRegionData left, FResizableRegionData right) =>
       '${left.extent.current}, ${right.extent.current}';
 
   /// The control that manages the resizing of regions. Defaults to [FResizableControl.managedCascade].
@@ -100,7 +101,7 @@ class FResizable extends StatefulWidget {
     this.crossAxisExtent,
     this.hitRegionExtent,
     this.resizePercentage = 0.005,
-    this.semanticFormatterCallback = _label,
+    this.semanticFormatterCallback = defaultSemanticFormatterCallback,
     super.key,
   }) : assert(crossAxisExtent == null || 0 < crossAxisExtent, 'crossAxisExtent ($crossAxisExtent) must be > 0'),
        assert(hitRegionExtent == null || 0 < hitRegionExtent, 'hitRegionExtent ($hitRegionExtent) must be > 0');

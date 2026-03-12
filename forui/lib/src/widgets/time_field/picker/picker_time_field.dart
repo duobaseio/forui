@@ -60,7 +60,7 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
     this.onTapHide,
     this.hourInterval = 1,
     this.minuteInterval = 1,
-    this.popoverBuilder = FTimeField._popoverBuilder,
+    this.popoverBuilder = FPopover.defaultPopoverBuilder,
     super.control,
     super.popoverControl,
     super.size,

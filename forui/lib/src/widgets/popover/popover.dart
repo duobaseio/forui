@@ -104,7 +104,11 @@ enum FPopoverHideRegion {
 /// * [FPopoverController] for controlling a popover.
 /// * [FPopoverStyle] for customizing a popover's appearance.
 class FPopover extends StatefulWidget {
-  static Widget _builder(BuildContext _, FPopoverController _, Widget? child) => child!;
+  /// The default builder that returns the child as-is.
+  static Widget defaultBuilder(BuildContext _, FPopoverController _, Widget? child) => child!;
+
+  /// The default popover builder that returns the content as-is.
+  static Widget defaultPopoverBuilder(BuildContext _, Object _, FPopoverController _, Widget child) => child;
 
   /// Defines how the popover's shown state is controlled.
   ///
@@ -305,7 +309,7 @@ class FPopover extends StatefulWidget {
     this.barrierSemanticsDismissible = true,
     this.semanticsLabel,
     this.shortcuts,
-    this.builder = _builder,
+    this.builder = defaultBuilder,
     this.child,
     this.popoverAnchor,
     this.childAnchor,
@@ -318,7 +322,7 @@ class FPopover extends StatefulWidget {
          focusNode == null || traversalEdgeBehavior == null,
          'Cannot provide both focusNode and traversalEdgeBehavior',
        ),
-       assert(builder != _builder || child != null, 'Either builder or child must be provided');
+       assert(builder != defaultBuilder || child != null, 'Either builder or child must be provided');
 
   @override
   State<FPopover> createState() => _State();

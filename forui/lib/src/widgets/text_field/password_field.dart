@@ -222,28 +222,6 @@ class PasswordFieldProperties with Diagnosticable {
 
 @internal
 class PasswordField extends StatefulWidget {
-  static Widget defaultToggleBuilder(
-    BuildContext context,
-    FTextFieldStyle style,
-    ValueNotifier<bool> obscure,
-    Set<FTextFieldVariant> variants,
-  ) {
-    final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
-    return Padding(
-      padding: style.obscureButtonPadding,
-      child: FButton.icon(
-        style: style.obscureButtonStyle,
-        onPress: variants.contains(FTextFieldVariant.disabled) ? null : () => obscure.value = !obscure.value,
-        child: Icon(
-          obscure.value ? FIcons.eye : FIcons.eyeClosed,
-          semanticLabel: obscure.value
-              ? localizations.passwordFieldUnobscureTextButtonSemanticsLabel
-              : localizations.passwordFieldObscureTextButtonSemanticsLabel,
-        ),
-      ),
-    );
-  }
-
   final TextEditingController controller;
   final PasswordFieldProperties properties;
 

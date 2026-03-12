@@ -28,7 +28,7 @@ class _InputDateField extends FDateField {
     this.mouseCursor,
     this.canRequestFocus = true,
     this.clearable = false,
-    this.popoverBuilder = FDateField._popoverBuilder,
+    this.popoverBuilder = FPopover.defaultPopoverBuilder,
     this.baselineInputYear = 2000,
     this.calendar = const FDateFieldCalendarProperties(),
     super.control,

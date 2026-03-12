@@ -23,7 +23,8 @@ part 'line_calendar.design.dart';
 /// * https://forui.dev/docs/data/line-calendar for working examples.
 /// * [FLineCalendarStyle] for customizing a line calendar's style.
 class FLineCalendar extends StatelessWidget {
-  static Widget _builder(BuildContext _, FLineCalendarItemData _, Widget? child) => child!;
+  /// The default builder that returns the child as-is.
+  static Widget defaultBuilder(BuildContext _, FLineCalendarItemData _, Widget? child) => child!;
 
   /// Defines how this line calendar's value is controlled.
   final FLineCalendarControl control;
@@ -99,7 +100,7 @@ class FLineCalendar extends StatelessWidget {
     this.physics,
     this.cacheExtent,
     this.keyboardDismissBehavior = .manual,
-    this.builder = _builder,
+    this.builder = defaultBuilder,
     DateTime? start,
     DateTime? end,
     DateTime? initialScroll,

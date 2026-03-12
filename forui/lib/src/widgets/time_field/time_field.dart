@@ -53,15 +53,8 @@ typedef FTimeFieldPopoverBuilder =
 /// * [FTimeFieldStyle] for customizing a time field's appearance.
 abstract class FTimeField extends StatefulWidget {
   /// The default prefix builder that shows a clock icon.
-  static Widget defaultIconBuilder(BuildContext _, FTextFieldStyle style, Set<FTextFieldVariant> variants) => Padding(
-    padding: const EdgeInsetsDirectional.only(start: 12.0, end: 4.0),
-    child: IconTheme(data: style.iconStyle.resolve(variants), child: const Icon(FIcons.clock4)),
-  );
-
-  static Widget _fieldBuilder(BuildContext _, FTimeFieldStyle _, Set<FTextFieldVariant> _, Widget child) => child;
-
-  static Widget _popoverBuilder(BuildContext _, FTimeFieldController _, FPopoverController _, Widget content) =>
-      content;
+  static Widget defaultIconBuilder(BuildContext context, FTextFieldStyle style, Set<FTextFieldVariant> variants) =>
+      FTextField.prefixIconBuilder(context, style, variants, const Icon(FIcons.clock4));
 
   /// The control for managing the time field's state.
   final FTimeFieldControl control;
@@ -166,7 +159,7 @@ abstract class FTimeField extends StatefulWidget {
     this.hour24 = false,
     this.autofocus = false,
     this.focusNode,
-    this.builder = _fieldBuilder,
+    this.builder = FTextField.defaultBuilder,
     this.prefixBuilder = defaultIconBuilder,
     this.suffixBuilder,
     this.clearable = false,

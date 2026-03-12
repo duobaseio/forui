@@ -37,7 +37,8 @@ typedef FTappableVariantChangeCallback = void Function(Set<FTappableVariant> pre
 ///
 /// {@macro forui.foundation.FTappableGroup.overlay}
 class FTappable extends StatefulWidget {
-  static Widget _builder(BuildContext _, Set<FTappableVariant> _, Widget? child) => child!;
+  /// The default builder that returns the child as-is.
+  static Widget defaultBuilder(BuildContext _, Set<FTappableVariant> _, Widget? child) => child!;
 
   /// The style.
   ///
@@ -217,12 +218,12 @@ class FTappable extends StatefulWidget {
     this.onSecondaryPress,
     this.onSecondaryLongPress,
     this.actions,
-    this.builder = _builder,
+    this.builder = defaultBuilder,
     this.child,
     Map<ShortcutActivator, Intent>? shortcuts,
     super.key,
   }) : shortcuts = shortcuts ?? (onPress == null ? const {} : const {SingleActivator(.enter): ActivateIntent()}),
-       assert(builder != _builder || child != null, 'Either builder or child must be provided');
+       assert(builder != defaultBuilder || child != null, 'Either builder or child must be provided');
 
   @override
   State<FTappable> createState() => _FTappableState<FTappable>();

@@ -18,19 +18,19 @@ part 'popover_menu.design.dart';
 /// * [FPopoverMenuStyle] for customizing a popover menu's appearance.
 /// * [FTileGroup] for customizing the items in the menu.
 class FPopoverMenu extends StatelessWidget {
-  static List<FItemGroupMixin> _defaultItemBuilder(
+  /// The default item menu builder that returns the menu as-is.
+  static List<FItemGroupMixin> defaultItemBuilder(
     BuildContext context,
     FPopoverController controller,
     List<FItemGroupMixin>? menu,
   ) => menu!;
 
-  static List<FTileGroupMixin> _defaultTileBuilder(
+  /// The default tile menu builder that returns the menu as-is.
+  static List<FTileGroupMixin> defaultTileBuilder(
     BuildContext context,
     FPopoverController controller,
     List<FTileGroupMixin>? menu,
   ) => menu!;
-
-  static Widget _builder(BuildContext _, FPopoverController _, Widget? child) => child!;
 
   /// The popover menu's style.
   ///
@@ -193,9 +193,9 @@ class FPopoverMenu extends StatelessWidget {
     this.useViewInsets = true,
     List<FItemGroupMixin> Function(BuildContext context, FPopoverController controller, List<FItemGroupMixin>? menu)
         menuBuilder =
-        _defaultItemBuilder,
+        defaultItemBuilder,
     List<FItemGroupMixin>? menu,
-    this.builder = _builder,
+    this.builder = FPopover.defaultBuilder,
     this.child,
     super.key,
   }) : _menuBuilder = ((context, controller, style) => FItemGroup.merge(
@@ -206,11 +206,10 @@ class FPopoverMenu extends StatelessWidget {
          semanticsLabel: semanticsLabel,
          style: style.itemGroupStyle,
          divider: divider,
-         intrinsicWidth: true,
          children: menuBuilder(context, controller, menu),
        )),
-       assert(builder != _builder || child != null, 'Either builder or child must be provided'),
-       assert(menuBuilder != _defaultTileBuilder || menu != null, 'Either menuBuilder or menu must be provided');
+       assert(builder != FPopover.defaultBuilder || child != null, 'Either builder or child must be provided'),
+       assert(menuBuilder != defaultTileBuilder || menu != null, 'Either menuBuilder or menu must be provided');
 
   /// Creates a menu of [FTile]s that is only shown when toggled.
   ///
@@ -254,9 +253,9 @@ class FPopoverMenu extends StatelessWidget {
     this.useViewInsets = true,
     List<FTileGroupMixin> Function(BuildContext context, FPopoverController controller, List<FTileGroupMixin>? menu)
         menuBuilder =
-        _defaultTileBuilder,
+        defaultTileBuilder,
     List<FTileGroupMixin>? menu,
-    this.builder = _builder,
+    this.builder = FPopover.defaultBuilder,
     this.child,
     super.key,
   }) : _menuBuilder = ((context, controller, style) => FTileGroup.merge(
@@ -267,11 +266,10 @@ class FPopoverMenu extends StatelessWidget {
          semanticsLabel: semanticsLabel,
          style: style.tileGroupStyle,
          divider: divider,
-         intrinsicWidth: true,
          children: menuBuilder(context, controller, menu),
        )),
-       assert(builder != _builder || child != null, 'Either builder or child must be provided'),
-       assert(menuBuilder != _defaultTileBuilder || menu != null, 'Either menuBuilder or menu must be provided');
+       assert(builder != FPopover.defaultBuilder || child != null, 'Either builder or child must be provided'),
+       assert(menuBuilder != defaultTileBuilder || menu != null, 'Either menuBuilder or menu must be provided');
 
   @override
   Widget build(BuildContext context) {

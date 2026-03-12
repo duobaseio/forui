@@ -20,9 +20,6 @@ sizes consistent across each platform.
 * Add `FAutocompleteSizeStyles`.
 * Add `FAutocompleteFieldStyle`.
 
-* Fix `FAutocomplete` not closing suggestions popover when pressing enter/done.
-* Fix `FAutocomplete` showing typeahead text when disabled or unfocused.
-
 * Change `FAutocompleteFieldStyle.typeaheadTextStyle` type from `FVariants<..., TextStyle, ...>` to
   `FVariants<..., TextStyle?, ...>`.
 * Change `FAutocompleteSection` layout to better align with the latest shadcn version.
@@ -31,6 +28,12 @@ sizes consistent across each platform.
   `FTextFieldStyle` to `FAutocompleteSizeStyles`.
 * **Breaking** Move `FAutocompleteStyle.composingTextStyle` and `FAutocompleteStyle.typeaheadTextStyle` to
   `FAutocompleteFieldStyle`.
+* **Breaking** Remove `FAutocomplete.defaultClearable`. Use `FTextField.defaultClearable` instead.
+* **Breaking** Remove `FAutocomplete.defaultBuilder`. Use `FTextField.defaultBuilder` instead.
+* **Breaking** Remove `FAutocomplete.defaultPopoverBuilder`. Use `FPopover.defaultPopoverBuilder` instead.
+
+* Fix `FAutocomplete` not closing suggestions popover when pressing enter/done.
+* Fix `FAutocomplete` showing typeahead text when disabled or unfocused.
 
 
 ### `FBadge`
@@ -62,6 +65,8 @@ sizes consistent across each platform.
 
 
 ### `FCalendar`
+* Add `FCalendarControl.defaultSelectable`.
+
 * **Breaking** Change `FCalendarStyle.decoration` type from `BoxDecoration` to `Decoration`.
 
 
@@ -99,6 +104,8 @@ sizes consistent across each platform.
   `FFieldIconBuilder<FTextFieldStyle>?`.
 * **Breaking** Rename `FDateFieldStyle.fieldStyle` to `FDateFieldStyle.fieldStyles`. Type changed from
   `FTextFieldStyle` to `FTextFieldSizeStyles`.
+* **Breaking** Remove `FDateField.defaultFieldBuilder`. Use `FTextField.defaultBuilder` instead.
+* **Breaking** Remove `FDateField.defaultPopoverBuilder`. Use `FPopover.defaultPopoverBuilder` instead.
 
 * Fix `FDateField.calendar` clear button not resetting controller value to null.
 
@@ -132,6 +139,8 @@ sizes consistent across each platform.
 
 
 ### `FLineCalendar`
+* Add `FLineCalendar.defaultBuilder`.
+
 * **Breaking** Change `FLineCalendarStyle.decoration` type from `FVariants<..., BoxDecoration, BoxDecorationDelta>` to
   `FVariants<..., Decoration, DecorationDelta>`.
 
@@ -144,6 +153,8 @@ sizes consistent across each platform.
 ### `FPopover`
 * Add `FPopover.useViewPadding`.
 * Add `FPopover.useViewInsets`.
+* Add `FPopover.defaultBuilder`.
+* Add `FPopover.defaultPopoverBuilder`.
 
 * **Breaking** Rename `FPopoverStyle.viewPadding` to `FPopoverStyle.popoverPadding`.
 * **Breaking** Change `FPopoverStyle.decoration` type from `BoxDecoration` to `Decoration`.
@@ -152,6 +163,10 @@ sizes consistent across each platform.
 ### `FPopoverMenu`
 * Add `FPopoverMenu.useViewPadding`.
 * Add `FPopoverMenu.useViewInsets`.
+* Add `FPopoverMenu.defaultItemBuilder`.
+* Add `FPopoverMenu.defaultTileBuilder`.
+
+* **Breaking** Remove `FPopoverMenu.defaultBuilder`. Use `FPopover.defaultBuilder` instead.
 
 
 ### `FPortal`
@@ -170,6 +185,8 @@ sizes consistent across each platform.
 
 
 ### `FResizable`
+* Add `FResizable.defaultLabel`.
+
 * **Breaking** Change `FResizableDividerThumbStyle.decoration` type from `BoxDecoration` to `Decoration`.
 
 
@@ -192,8 +209,6 @@ sizes consistent across each platform.
 
 * Change `FSelectSection` layout to better align with the latest shadcn version.
 
-* Fix `FSelect` and `FMultiSelect` autofocusing first item on touch devices.
-
 * **Breaking** Change `FMultiSelect.prefixBuilder` type from `FFieldIconBuilder<FMultiSelectStyle>?` to
   `FFieldIconBuilder<FMultiSelectFieldStyle>?`.
 * **Breaking** Change `FMultiSelect.suffixBuilder` type from `FFieldIconBuilder<FMultiSelectStyle>?` to
@@ -215,6 +230,14 @@ sizes consistent across each platform.
   `FTextFieldSizeStyles`.
 * **Breaking** Rename `FSelectSearchStyle.fieldStyle` to `FSelectSearchStyle.fieldStyles`. Type changed from
   `FTextFieldStyle` to `FTextFieldSizeStyles`.
+* **Breaking** Remove `FSelect.defaultFieldBuilder`. Use `FTextField.defaultBuilder` instead.
+* **Breaking** Remove `FSelect.defaultPopoverBuilder`. Use `FPopover.defaultPopoverBuilder` instead.
+* **Breaking** Remove `FSelect.defaultValidator`. Use `FFormFieldProperties.defaultValidator` instead.
+* **Breaking** Remove `FMultiSelect.defaultPopoverBuilder`. Use `FPopover.defaultPopoverBuilder` instead.
+* **Breaking** Remove `FMultiSelect.defaultValidator`. Use `FFormFieldProperties.defaultValidator` instead.
+* **Breaking** Remove `FSelectSearchFieldProperties.defaultClearable`. Use `FTextField.defaultClearable` instead.
+
+* Fix `FSelect` and `FMultiSelect` autofocusing first item on touch devices.
 
 
 ### `FSidebar`
@@ -222,6 +245,9 @@ sizes consistent across each platform.
 
 
 ### `FSlider`
+* Add `FSlider.defaultTooltipBuilder`.
+* Add `FSlider.defaultSemanticValueFormatter`.
+
 * Fix disabled slider ticks showing through active track due to transparency.
 
 
@@ -234,6 +260,7 @@ sizes consistent across each platform.
 ### `FTappable` & `FTappableGroup`
 * Add `FTappableGroup` that enables slide-across interaction between `FTappable`s.
 * Add slide-across long press support to `FTappableGroup`.
+* Add `FTappable.defaultBuilder`.
 
 * **Breaking** Change `FTappableStyle.pressedEnterDuration` default from 200ms to 100ms.
 * **Breaking** Change `FTappableStyle.pressedExitDuration` default from 0ms to 100ms.
@@ -256,6 +283,8 @@ sizes consistent across each platform.
 
 * **Breaking** Rename `FTimeFieldStyle.fieldStyle` to `FTimeFieldStyle.fieldStyles`. Type changed from
   `FTextFieldStyle` to `FTextFieldSizeStyles`.
+* **Breaking** Remove `FTimeField.defaultFieldBuilder`. Use `FTextField.defaultBuilder` instead.
+* **Breaking** Remove `FTimeField.defaultPopoverBuilder`. Use `FPopover.defaultPopoverBuilder` instead.
 
 * Fix `FTimeField.picker` not showing hint text when no initial time is provided.
 * Fix `FTimeField.picker` clear button not resetting controller value to null.
@@ -264,6 +293,14 @@ sizes consistent across each platform.
 ### `FTextField` & `FTextFormField`
 * Add `FTextField.size` and `FTextFormField.size` for `sm`, `md`, and `lg` size variants.
 * Add `FTextFieldSizeStyles` and `FTextFieldSizeVariant`.
+* Add `FTextField.prefixIconBuilder`.
+* Add `FTextField.defaultBuilder`.
+* Add `FTextField.defaultClearable`.
+* Add `FTextField.defaultClearIconBuilder`.
+* Add `FTextField.defaultObscureIconBuilder`.
+* Add `FTextField.defaultContextMenuBuilder`.
+
+* **Breaking** Remove `FTextFormField.defaultErrorBuilder`. Use `FFormFieldProperties.defaultErrorBuilder` instead.
 
 * Fix `FTextField.clearable` clear icon not appearing immediately when text changes while focused.
 * Fix `FTextFormField.onTapOutside` not being used internally.
@@ -306,6 +343,7 @@ sizes consistent across each platform.
 ### `FTooltip`
 * Add `FTooltip.useViewPadding`.
 * Add `FTooltip.useViewInsets`.
+* Add `FTooltip.defaultBuilder`.
 
 * **Breaking** Change `FTooltipStyle.decoration` type from `BoxDecoration` to `Decoration`.
 
@@ -314,6 +352,8 @@ sizes consistent across each platform.
 * Add `Decorations` extension on `Decoration` for extracting common visual properties.
 * Add `FPlatformVariantConstraint` extension type.
 * Add `Sentinels`.
+* Add `FPortal.defaultBuilder`.
+* Add `FFormFieldProperties.defaultValidator`.
 
 * Change default border shape from `RoundedRectangleBorder` to `RoundedSuperellipseBorder`.
 

@@ -55,6 +55,63 @@ typedef FFieldClearIconBuilder = Widget Function(BuildContext, FTextFieldStyle s
 /// * [FTextFormField] for creating a text field that can be used in a form.
 /// * [TextField] for more details about working with a text field.
 class FTextField extends StatelessWidget {
+  /// The default builder that returns the child as-is.
+  static Widget defaultBuilder(BuildContext _, Object _, Set<FTextFieldVariant> _, Widget child) => child;
+
+  /// The default context menu builder that shows the adaptive text selection toolbar.
+  static Widget defaultContextMenuBuilder(BuildContext _, EditableTextState state) =>
+      AdaptiveTextSelectionToolbar.editableText(editableTextState: state);
+
+  /// The default toggle builder that shows an eye icon to toggle password visibility.
+  static Widget defaultObscureIconBuilder(
+    BuildContext context,
+    FTextFieldStyle style,
+    ValueNotifier<bool> obscure,
+    Set<FTextFieldVariant> variants,
+  ) {
+    final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
+    return Padding(
+      padding: style.obscureButtonPadding,
+      child: FButton.icon(
+        style: style.obscureButtonStyle,
+        onPress: variants.contains(FTextFieldVariant.disabled) ? null : () => obscure.value = !obscure.value,
+        child: Icon(
+          obscure.value ? FIcons.eye : FIcons.eyeClosed,
+          semanticLabel: obscure.value
+              ? localizations.passwordFieldUnobscureTextButtonSemanticsLabel
+              : localizations.passwordFieldObscureTextButtonSemanticsLabel,
+        ),
+      ),
+    );
+  }
+
+  /// The default clearable callback that always returns false.
+  static bool defaultClearable(TextEditingValue _) => false;
+
+  /// The default clear icon builder that shows a clear button.
+  static Widget defaultClearIconBuilder(BuildContext context, FTextFieldStyle style, VoidCallback clear) {
+    final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
+    return Padding(
+      padding: style.clearButtonPadding,
+      child: FButton.icon(
+        style: style.clearButtonStyle,
+        onPress: clear,
+        child: Icon(FIcons.x, semanticLabel: localizations.textFieldClearButtonSemanticsLabel),
+      ),
+    );
+  }
+
+  /// Returns a [FFieldIconBuilder] that displays the given [icon] as a prefix, styled using the field's icon style.
+  static Widget prefixIconBuilder(
+    BuildContext _,
+    FTextFieldStyle style,
+    Set<FTextFieldVariant> variants,
+    Widget icon,
+  ) => Padding(
+    padding: const .directional(start: 12.0, end: 4.0),
+    child: IconTheme(data: style.iconStyle.resolve(variants), child: icon),
+  );
+
   /// Creates a [FTextField] configured for password entry with a visibility toggle.
   ///
   /// By default, [suffixBuilder] is an eye icon that toggles showing and hiding the password. Replace the toggle by
@@ -68,7 +125,7 @@ class FTextField extends StatelessWidget {
     FObscureTextControl obscureTextControl = const .managed(),
     FTextFieldSizeVariant size = .md,
     FTextFieldStyleDelta style = const .context(),
-    FFieldBuilder<FTextFieldStyle> builder = Input.defaultBuilder,
+    FFieldBuilder<FTextFieldStyle> builder = defaultBuilder,
     Widget? label = const LocalizedText.password(),
     String? hint,
     Widget? description,
@@ -118,14 +175,14 @@ class FTextField extends StatelessWidget {
     bool stylusHandwritingEnabled = true,
     bool enableIMEPersonalizedLearning = true,
     ContentInsertionConfiguration? contentInsertionConfiguration,
-    EditableTextContextMenuBuilder contextMenuBuilder = Input.defaultContextMenuBuilder,
+    EditableTextContextMenuBuilder contextMenuBuilder = defaultContextMenuBuilder,
     bool canRequestFocus = true,
     UndoHistoryController? undoController,
     SpellCheckConfiguration? spellCheckConfiguration,
     FPasswordFieldIconBuilder<FTextFieldStyle>? prefixBuilder,
-    FPasswordFieldIconBuilder<FTextFieldStyle>? suffixBuilder = PasswordField.defaultToggleBuilder,
-    bool Function(TextEditingValue) clearable = Input.defaultClearable,
-    FFieldClearIconBuilder clearIconBuilder = Input.defaultClearIconBuilder,
+    FPasswordFieldIconBuilder<FTextFieldStyle>? suffixBuilder = defaultObscureIconBuilder,
+    bool Function(TextEditingValue) clearable = defaultClearable,
+    FFieldClearIconBuilder clearIconBuilder = defaultClearIconBuilder,
     Key? key,
   }) => TextFieldControl(
     key: key,
@@ -804,7 +861,9 @@ class FTextField extends StatelessWidget {
   ///
   /// It is recommended to style the prefix icon using [FTextFieldStyle.iconStyle].
   ///
-  /// See [InputDecoration.prefixIcon] for more information.
+  /// See:
+  /// * [InputDecoration.prefixIcon] for more information.
+  /// * [FTextField.prefixIconBuilder] for a convenient way to build a prefix icon.
   /// {@endtemplate}
   final FFieldIconBuilder<FTextFieldStyle>? prefixBuilder;
 
@@ -836,7 +895,7 @@ class FTextField extends StatelessWidget {
     this.control = const .managed(),
     this.size = .md,
     this.style = const .context(),
-    this.builder = Input.defaultBuilder,
+    this.builder = defaultBuilder,
     this.label,
     this.hint,
     this.description,
@@ -887,14 +946,14 @@ class FTextField extends StatelessWidget {
     this.stylusHandwritingEnabled = true,
     this.enableIMEPersonalizedLearning = true,
     this.contentInsertionConfiguration,
-    this.contextMenuBuilder = Input.defaultContextMenuBuilder,
+    this.contextMenuBuilder = defaultContextMenuBuilder,
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
     this.prefixBuilder,
     this.suffixBuilder,
-    this.clearable = Input.defaultClearable,
-    this.clearIconBuilder = Input.defaultClearIconBuilder,
+    this.clearable = defaultClearable,
+    this.clearIconBuilder = defaultClearIconBuilder,
     super.key,
   });
 
@@ -903,7 +962,7 @@ class FTextField extends StatelessWidget {
     this.control = const .managed(),
     this.size = .md,
     this.style = const .context(),
-    this.builder = Input.defaultBuilder,
+    this.builder = defaultBuilder,
     this.label = const LocalizedText.email(),
     this.hint,
     this.description,
@@ -954,14 +1013,14 @@ class FTextField extends StatelessWidget {
     this.stylusHandwritingEnabled = true,
     this.enableIMEPersonalizedLearning = true,
     this.contentInsertionConfiguration,
-    this.contextMenuBuilder = Input.defaultContextMenuBuilder,
+    this.contextMenuBuilder = defaultContextMenuBuilder,
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
     this.prefixBuilder,
     this.suffixBuilder,
-    this.clearable = Input.defaultClearable,
-    this.clearIconBuilder = Input.defaultClearIconBuilder,
+    this.clearable = defaultClearable,
+    this.clearIconBuilder = defaultClearIconBuilder,
     super.key,
   });
 
@@ -974,7 +1033,7 @@ class FTextField extends StatelessWidget {
     this.control = const .managed(),
     this.size = .md,
     this.style = const .context(),
-    this.builder = Input.defaultBuilder,
+    this.builder = defaultBuilder,
     this.label,
     this.hint,
     this.description,
@@ -1025,14 +1084,14 @@ class FTextField extends StatelessWidget {
     this.stylusHandwritingEnabled = true,
     this.enableIMEPersonalizedLearning = true,
     this.contentInsertionConfiguration,
-    this.contextMenuBuilder = Input.defaultContextMenuBuilder,
+    this.contextMenuBuilder = defaultContextMenuBuilder,
     this.canRequestFocus = true,
     this.undoController,
     this.spellCheckConfiguration,
     this.prefixBuilder,
     this.suffixBuilder,
-    this.clearable = Input.defaultClearable,
-    this.clearIconBuilder = Input.defaultClearIconBuilder,
+    this.clearable = defaultClearable,
+    this.clearIconBuilder = defaultClearIconBuilder,
     super.key,
   });
 

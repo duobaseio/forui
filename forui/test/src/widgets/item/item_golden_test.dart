@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
@@ -340,6 +341,42 @@ void main() {
       );
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('item/item/prioritize-details.png'));
+    });
+
+    group('intrinsic width', () {
+      setUp(() => debugCheckIntrinsicSizes = true);
+      tearDown(() => debugCheckIntrinsicSizes = false);
+
+      testWidgets('all children', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            child: IntrinsicWidth(
+              child: FItem(
+                prefix: const Icon(FIcons.bluetooth),
+                title: const Text('Bluetooth'),
+                subtitle: const Text('Fee, Fo, Fum'),
+                details: const Text('FL (5G)'),
+                suffix: const Icon(FIcons.chevronRight),
+                onPress: () {},
+              ),
+            ),
+          ),
+        );
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('item/item/intrinsic-width-all.png'));
+      });
+
+      testWidgets('minimal', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            child: IntrinsicWidth(
+              child: FItem(title: const Text('Bluetooth'), onPress: () {}),
+            ),
+          ),
+        );
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('item/item/intrinsic-width-minimal.png'));
+      });
     });
   });
 

@@ -4,7 +4,8 @@ part of 'calendar_controller.dart';
 ///
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FCalendarControl<T> with Diagnosticable, _$FCalendarControlMixin<T> {
-  static bool _defaultSelectable(DateTime _) => true;
+  /// The default selectable predicate that always returns true.
+  static bool defaultSelectable(DateTime _) => true;
 
   /// Creates a [FCalendarControl] for single date selection.
   static FCalendarControl<DateTime?> managedDate({
@@ -61,7 +62,7 @@ sealed class FCalendarControl<T> with Diagnosticable, _$FCalendarControlMixin<T>
   static FCalendarControl<Object?> lifted({
     required Predicate<DateTime> selected,
     required ValueChanged<DateTime> select,
-    Predicate<DateTime> selectable = _defaultSelectable,
+    Predicate<DateTime> selectable = defaultSelectable,
   }) => _Lifted(selected: selected, select: select, selectable: selectable);
 
   const FCalendarControl._();

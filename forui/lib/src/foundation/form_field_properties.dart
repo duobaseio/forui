@@ -4,6 +4,9 @@ import 'package:forui/forui.dart';
 
 /// A form field's properties.
 mixin FFormFieldProperties<T> {
+  /// The default validator that always returns null (no validation error).
+  static String? defaultValidator(Object? _) => null;
+
   /// The default builder for errors displayed below the [description].
   static Widget defaultErrorBuilder(BuildContext _, String error) => Text(error);
 

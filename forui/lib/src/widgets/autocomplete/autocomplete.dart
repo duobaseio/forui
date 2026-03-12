@@ -60,13 +60,6 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     );
   }
 
-  static bool _clearable(TextEditingValue _) => false;
-
-  static Widget _popoverBuilder(BuildContext _, FAutocompleteController _, FPopoverController _, Widget content) =>
-      content;
-
-  static Widget _builder(BuildContext _, FAutocompleteStyle _, Set<FTextFieldVariant> _, Widget? child) => child!;
-
   /// Defines how the autocomplete's state is controlled.
   ///
   /// Defaults to [FAutocompleteControl.managed].
@@ -421,8 +414,8 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     SpellCheckConfiguration? spellCheckConfiguration,
     FFieldIconBuilder<FAutocompleteStyle>? prefixBuilder,
     FFieldIconBuilder<FAutocompleteStyle>? suffixBuilder,
-    bool Function(TextEditingValue value) clearable = _clearable,
-    FAutocompletePopoverBuilder popoverBuilder = _popoverBuilder,
+    bool Function(TextEditingValue value) clearable = FTextField.defaultClearable,
+    FAutocompletePopoverBuilder popoverBuilder = FPopover.defaultPopoverBuilder,
     FormFieldSetter<String>? onSaved,
     VoidCallback? onReset,
     FormFieldValidator<String>? validator,
@@ -441,7 +434,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     Object? contentGroupId,
     bool autoHide = true,
     bool? retainFocus,
-    FFieldBuilder<FAutocompleteStyle> builder = _builder,
+    FFieldBuilder<FAutocompleteStyle> builder = FTextField.defaultBuilder,
     bool rightArrowToComplete = false,
     FutureOr<Iterable<String>> Function(String query)? filter,
     FAutoCompleteContentBuilder? contentBuilder,
@@ -606,8 +599,8 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     this.spellCheckConfiguration,
     this.prefixBuilder,
     this.suffixBuilder,
-    this.clearable = _clearable,
-    this.popoverBuilder = _popoverBuilder,
+    this.clearable = FTextField.defaultClearable,
+    this.popoverBuilder = FPopover.defaultPopoverBuilder,
     this.onSaved,
     this.onReset,
     this.validator,
@@ -626,7 +619,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     this.contentGroupId,
     this.autoHide = true,
     this.retainFocus,
-    this.builder = _builder,
+    this.builder = FTextField.defaultBuilder,
     this.rightArrowToComplete = false,
     this.contentScrollController,
     this.contentPhysics = const ClampingScrollPhysics(),

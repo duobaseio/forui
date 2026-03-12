@@ -18,7 +18,8 @@ import 'package:forui/src/foundation/portal/layer.dart';
 /// * [Visualization](http://forui.dev/docs/foundation/portal#visualization) for a visual demonstration of how
 ///   portals work.
 class FPortal extends StatefulWidget {
-  static Widget _builder(BuildContext _, OverlayPortalController _, Widget? child) => child!;
+  /// The default builder that returns the child as-is.
+  static Widget defaultBuilder(BuildContext _, OverlayPortalController _, Widget? child) => child!;
 
   /// The controller.
   final OverlayPortalController? controller;
@@ -120,10 +121,10 @@ class FPortal extends StatefulWidget {
     this.useViewInsets = true,
     this.padding = .zero,
     this.barrier,
-    this.builder = _builder,
+    this.builder = defaultBuilder,
     this.child,
     super.key,
-  }) : assert(builder != _builder || child != null, 'Either builder or child must be provided');
+  }) : assert(builder != defaultBuilder || child != null, 'Either builder or child must be provided');
 
   @override
   State<FPortal> createState() => _State();

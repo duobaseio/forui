@@ -89,11 +89,6 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     );
   }
 
-  static Widget _popoverBuilder(BuildContext _, FMultiValueNotifier<Object?> _, FPopoverController _, Widget content) =>
-      content;
-
-  static String? _defaultValidator(Object? _) => null;
-
   /// The control that manages the multi-select's state.
   ///
   /// Defaults to [FMultiValueControl.managed] if not provided.
@@ -268,7 +263,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     VoidCallback? onReset,
     AutovalidateMode autovalidateMode = .onUnfocus,
     String? forceErrorText,
-    String? Function(Set<T> values) validator = _defaultValidator,
+    String? Function(Set<T> values) validator = FFormFieldProperties.defaultValidator,
     Widget Function(BuildContext context, String message) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     Widget? hint,
     bool keepHint = true,
@@ -277,7 +272,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     TextAlign textAlign = .start,
     TextDirection? textDirection,
     bool clearable = false,
-    FMultiSelectPopoverBuilder<T> popoverBuilder = _popoverBuilder,
+    FMultiSelectPopoverBuilder<T> popoverBuilder = FPopover.defaultPopoverBuilder,
     AlignmentGeometry contentAnchor = .topStart,
     AlignmentGeometry fieldAnchor = .bottomStart,
     FPortalConstraints contentConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
@@ -428,7 +423,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     VoidCallback? onReset,
     AutovalidateMode autovalidateMode = .onUnfocus,
     String? forceErrorText,
-    String? Function(Set<T> values) validator = _defaultValidator,
+    String? Function(Set<T> values) validator = FFormFieldProperties.defaultValidator,
     Widget Function(BuildContext context, String message) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     Widget? hint,
     bool keepHint = true,
@@ -437,7 +432,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     TextAlign textAlign = .start,
     TextDirection? textDirection,
     bool clearable = false,
-    FMultiSelectPopoverBuilder<T> popoverBuilder = _popoverBuilder,
+    FMultiSelectPopoverBuilder<T> popoverBuilder = FPopover.defaultPopoverBuilder,
     AlignmentGeometry contentAnchor = .topStart,
     AlignmentGeometry fieldAnchor = .bottomStart,
     FPortalConstraints contentConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),
@@ -590,7 +585,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     this.onReset,
     this.autovalidateMode = .onUnfocus,
     this.forceErrorText,
-    this.validator = _defaultValidator,
+    this.validator = FFormFieldProperties.defaultValidator,
     this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
     this.hint,
     this.keepHint = true,
@@ -598,7 +593,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     this.textAlign = .start,
     this.textDirection,
     this.clearable = false,
-    this.popoverBuilder = _popoverBuilder,
+    this.popoverBuilder = FPopover.defaultPopoverBuilder,
     this.contentAnchor = .topStart,
     this.fieldAnchor = .bottomStart,
     this.contentConstraints = const FAutoWidthPortalConstraints(maxHeight: 300),

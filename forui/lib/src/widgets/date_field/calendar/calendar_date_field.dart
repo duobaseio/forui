@@ -57,7 +57,7 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
     this.mouseCursor = .defer,
     this.canRequestFocus = true,
     this.clearable = false,
-    this.popoverBuilder = FDateField._popoverBuilder,
+    this.popoverBuilder = FPopover.defaultPopoverBuilder,
     this.anchor = .topLeft,
     this.fieldAnchor = .bottomLeft,
     this.spacing = const .spacing(4),

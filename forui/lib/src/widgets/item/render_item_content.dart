@@ -106,6 +106,37 @@ class _RenderItemContent extends RenderBox
   void setupParentData(covariant RenderObject child) => child.parentData = DefaultData();
 
   @override
+  double computeMinIntrinsicWidth(double height) {
+    final EdgeInsets(:left, :right) = _padding;
+    final prefix = firstChild!;
+    final column = childAfter(prefix)!;
+    final details = childAfter(column)!;
+    final suffix = childAfter(details)!;
+    return left +
+        right +
+        prefix.getMinIntrinsicWidth(height) +
+        column.getMinIntrinsicWidth(height) +
+        details.getMinIntrinsicWidth(height) +
+        suffix.getMinIntrinsicWidth(height);
+  }
+
+  @override
+  double computeMaxIntrinsicWidth(double height) {
+    super.computeMaxIntrinsicWidth(height);
+    final EdgeInsets(:left, :right) = _padding;
+    final prefix = firstChild!;
+    final column = childAfter(prefix)!;
+    final details = childAfter(column)!;
+    final suffix = childAfter(details)!;
+    return left +
+        right +
+        prefix.getMaxIntrinsicWidth(height) +
+        column.getMaxIntrinsicWidth(height) +
+        details.getMaxIntrinsicWidth(height) +
+        suffix.getMaxIntrinsicWidth(height);
+  }
+
+  @override
   void performLayout() {
     final EdgeInsets(:left, :top, :right, :bottom) = _padding;
     final prefix = firstChild!;

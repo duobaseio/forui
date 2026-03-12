@@ -12,25 +12,6 @@ import 'package:forui/src/theme/variant.dart';
 
 @internal
 class Input extends StatefulWidget {
-  static bool defaultClearable(TextEditingValue _) => false;
-
-  static Widget defaultContextMenuBuilder(BuildContext _, EditableTextState state) =>
-      AdaptiveTextSelectionToolbar.editableText(editableTextState: state);
-
-  static Widget defaultBuilder(BuildContext _, FTextFieldStyle _, Set<FTextFieldVariant> _, Widget child) => child;
-
-  static Widget defaultClearIconBuilder(BuildContext context, FTextFieldStyle style, VoidCallback clear) {
-    final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
-    return Padding(
-      padding: style.clearButtonPadding,
-      child: FButton.icon(
-        style: style.clearButtonStyle,
-        onPress: clear,
-        child: Icon(FIcons.x, semanticLabel: localizations.textFieldClearButtonSemanticsLabel),
-      ),
-    );
-  }
-
   final TextEditingController controller;
   final FTextFieldSizeVariant size;
   final FTextFieldStyleDelta style;
@@ -259,7 +240,7 @@ class _InputState extends State<Input> {
     super.initState();
     _statesController = widget.statesController ?? .new();
     _statesController.addListener(_handleStatesChange);
-    if (widget.clearable != Input.defaultClearable) {
+    if (widget.clearable != FTextField.defaultClearable) {
       widget.controller.addListener(_handleTextChange);
     }
     _error = widget.error ?? const SizedBox();
@@ -282,7 +263,7 @@ class _InputState extends State<Input> {
 
     if (widget.clearable != old.clearable || widget.controller != old.controller) {
       old.controller.removeListener(_handleTextChange);
-      if (widget.clearable != Input.defaultClearable) {
+      if (widget.clearable != FTextField.defaultClearable) {
         widget.controller.addListener(_handleTextChange);
       }
     }
