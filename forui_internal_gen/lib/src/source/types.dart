@@ -41,7 +41,7 @@ const fVariants = TypeChecker.fromUrl('package:forui/src/theme/variants.dart#FVa
 
 // Annotations
 const variants = TypeChecker.fromUrl('package:forui/src/foundation/annotations.dart#Variants');
-const sentinels = TypeChecker.fromUrl('package:forui/src/foundation/annotations.dart#Sentinels');
+const sentinels = TypeChecker.fromUrl('package:forui/src/foundation/annotations.dart#SentinelValues');
 
 /// Returns the instance fields for the given [element] and its supertypes.
 List<FieldElement> transitiveInstanceFields(ClassElement element) {

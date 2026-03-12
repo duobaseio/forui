@@ -2,20 +2,6 @@ import 'package:flutter/widgets.dart';
 
 import 'package:forui/src/theme/delta/delta.dart';
 
-const _fontWeightSentinel = _FontWeightSentinel();
-const _locale = Locale('sentinel');
-
-// ignore: avoid_implementing_value_types
-final class _FontWeightSentinel implements FontWeight {
-  const _FontWeightSentinel();
-
-  @override
-  int get index => throw UnimplementedError();
-
-  @override
-  int get value => throw UnimplementedError();
-}
-
 /// A delta that applies modifications to a [TextStyle].
 abstract class TextStyleDelta with Delta {
   /// Creates a partial modification of a [TextStyle].
@@ -85,28 +71,28 @@ class _TextStyleDelta implements TextStyleDelta {
 
   const _TextStyleDelta({
     this.inherit,
-    this.color = colorSentinel,
-    this.backgroundColor = colorSentinel,
+    this.color = Sentinels.color,
+    this.backgroundColor = Sentinels.color,
     this.fontSize = .infinity,
-    this.fontWeight = _fontWeightSentinel,
+    this.fontWeight = Sentinels.fontWeight,
     this.fontStyle,
     this.letterSpacing = .infinity,
     this.wordSpacing = .infinity,
     this.textBaseline,
     this.height = .infinity,
     this.leadingDistribution,
-    this.locale = _locale,
+    this.locale = Sentinels.locale,
     this.foreground,
     this.background,
     this.shadows,
     this.fontFeatures,
     this.fontVariations,
     this.decoration,
-    this.decorationColor = colorSentinel,
+    this.decorationColor = Sentinels.color,
     this.decorationStyle,
     this.decorationThickness = .infinity,
-    this.debugLabel = stringSentinel,
-    this.fontFamily = stringSentinel,
+    this.debugLabel = Sentinels.string,
+    this.fontFamily = Sentinels.string,
     this.fontFamilyFallback,
     this.package,
     this.overflow,
@@ -115,30 +101,30 @@ class _TextStyleDelta implements TextStyleDelta {
   @override
   TextStyle call(TextStyle? style) => TextStyle(
     inherit: inherit ?? style?.inherit ?? true,
-    color: identical(color, colorSentinel) ? style?.color : color,
-    backgroundColor: identical(backgroundColor, colorSentinel) ? style?.backgroundColor : backgroundColor,
+    color: identical(color, Sentinels.color) ? style?.color : color,
+    backgroundColor: identical(backgroundColor, Sentinels.color) ? style?.backgroundColor : backgroundColor,
     fontSize: identical(fontSize, double.infinity) ? style?.fontSize : fontSize,
-    fontWeight: identical(fontWeight, _fontWeightSentinel) ? style?.fontWeight : fontWeight,
+    fontWeight: identical(fontWeight, Sentinels.fontWeight) ? style?.fontWeight : fontWeight,
     fontStyle: fontStyle != null ? fontStyle!() : style?.fontStyle,
     letterSpacing: identical(letterSpacing, double.infinity) ? style?.letterSpacing : letterSpacing,
     wordSpacing: identical(wordSpacing, double.infinity) ? style?.wordSpacing : wordSpacing,
     textBaseline: textBaseline != null ? textBaseline!() : style?.textBaseline,
     height: identical(height, double.infinity) ? style?.height : height,
     leadingDistribution: leadingDistribution != null ? leadingDistribution!() : style?.leadingDistribution,
-    locale: identical(locale, _locale) ? style?.locale : locale,
+    locale: identical(locale, Sentinels.locale) ? style?.locale : locale,
     foreground: foreground != null ? foreground!() : style?.foreground,
     background: background != null ? background!() : style?.background,
     shadows: shadows ?? style?.shadows,
     fontFeatures: fontFeatures ?? style?.fontFeatures,
     fontVariations: fontVariations ?? style?.fontVariations,
     decoration: decoration != null ? decoration!() : style?.decoration,
-    decorationColor: identical(decorationColor, colorSentinel) ? style?.decorationColor : decorationColor,
+    decorationColor: identical(decorationColor, Sentinels.color) ? style?.decorationColor : decorationColor,
     decorationStyle: decorationStyle != null ? decorationStyle!() : style?.decorationStyle,
     decorationThickness: identical(decorationThickness, double.infinity)
         ? style?.decorationThickness
         : decorationThickness,
-    debugLabel: identical(debugLabel, stringSentinel) ? style?.debugLabel : debugLabel,
-    fontFamily: identical(fontFamily, stringSentinel) ? style?.fontFamily : fontFamily,
+    debugLabel: identical(debugLabel, Sentinels.string) ? style?.debugLabel : debugLabel,
+    fontFamily: identical(fontFamily, Sentinels.string) ? style?.fontFamily : fontFamily,
     fontFamilyFallback: fontFamilyFallback ?? style?.fontFamilyFallback,
     package: package, // Special case, null means no change since it is combined with fontFamily.
     overflow: overflow != null ? overflow!() : style?.overflow,

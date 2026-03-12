@@ -313,6 +313,7 @@ sizes consistent across each platform.
 ### Others
 * Add `Decorations` extension on `Decoration` for extracting common visual properties.
 * Add `FPlatformVariantConstraint` extension type.
+* Add `Sentinels`.
 
 * Change default border shape from `RoundedRectangleBorder` to `RoundedSuperellipseBorder`.
 

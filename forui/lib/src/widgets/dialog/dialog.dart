@@ -8,7 +8,6 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
-import 'package:forui/src/theme/delta/delta.dart';
 import 'package:forui/src/theme/variant.dart';
 import 'package:forui/src/widgets/dialog/dialog_content.dart';
 
@@ -16,7 +15,7 @@ import 'package:forui/src/widgets/dialog/dialog_content.dart';
   'horizontal': (1, 'The horizontal dialog variant.'),
   'vertical': (1, 'The vertical dialog variant.'),
 })
-@Sentinels(FDialogStyle, {'backgroundFilter': 'imageFilterFunctionSentinel'})
+@SentinelValues(FDialogStyle, {'backgroundFilter': 'Sentinels.imageFilterFunction'})
 part 'dialog.design.dart';
 
 /// Shows a dialog.

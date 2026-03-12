@@ -10,7 +10,7 @@ import 'package:forui/src/widgets/item/item_content.dart';
 import 'package:forui/src/widgets/item/raw_item_content.dart';
 
 @Variants('FItem', {'primary': (1, 'The primary item style.'), 'destructive': (2, 'The destructive item style.')})
-@Sentinels(FItemStyle, {'focusedOutlineStyle': 'focusedOutlineStyleSentinel', 'shape': 'shapeBorderSentinel'})
+@SentinelValues(FItemStyle, {'focusedOutlineStyle': 'Sentinels.focusedOutlineStyle', 'shape': 'Sentinels.shapeBorder'})
 part 'item.design.dart';
 
 /// A marker interface which denotes that mixed-in widgets is an item.

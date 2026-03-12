@@ -204,7 +204,7 @@ for a reference implementation.
 
 ```dart
 @Variants(FWidget, {'hovered': 'The hovered state', 'pressed': 'The pressed state'}) // --- (1)
-@Sentinels(FWidgetStyle, {'someDouble': 'double.infinity', 'color': 'colorSentinel'}) // --- (2)
+@SentinelValues(FWidgetStyle, {'someDouble': 'double.infinity', 'color': 'Sentinels.color'}) // --- (2)
 part 'widget.design.dart'; // --- (3)
 
 class FWidget { /* ... */ }
@@ -225,8 +225,8 @@ class FWidgetStyle with Diagnosticable, _$FWidgetStyleFunctions { // --- (4) (5)
 They should:
 1. `@Variants` - Declares widget-specific variants (states). Maps variant names to documentation strings. Generates
    `FWidgetVariant` and `FWidgetVariantConstraint` extension types.
-2. `@Sentinels` - Specifies sentinel values for delta merges. Maps field names to their sentinel values (e.g.,
-   `'double.infinity'`, `'colorSentinel'`). Used to distinguish "no change" from actual values in generated delta classes.
+2. `@SentinelValues` - Specifies sentinel values for delta merges. Maps field names to their sentinel values (e.g.,
+   `'double.infinity'`, `'Sentinels.color'`). Used to distinguish "no change" from actual values in generated delta classes.
 3. Include a generated part file (`*.design.dart`) containing `_$FWidgetStyleFunctions`, delta classes, and variant types.
 4. Mix-in [Diagnosticable](https://api.flutter.dev/flutter/foundation/Diagnosticable-mixin.html).
 5. Mix-in `_$FWidgetStyleFunctions` (generated utility functions).

@@ -12,7 +12,7 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
 import 'package:forui/src/widgets/calendar/shared/entry.dart';
 
-@Sentinels(FCalendarDayPickerStyle, {'startDayOfWeek': '-1'})
+@SentinelValues(FCalendarDayPickerStyle, {'startDayOfWeek': '-1'})
 part 'day_picker.design.dart';
 
 @internal

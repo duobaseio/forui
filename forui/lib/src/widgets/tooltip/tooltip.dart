@@ -12,7 +12,7 @@ import 'package:forui/src/foundation/annotations.dart';
 import 'package:forui/src/widgets/tooltip/tooltip_controller.dart';
 import 'package:forui/src/widgets/tooltip/tooltip_group.dart';
 
-@Sentinels(FTooltipStyle, {'backgroundFilter': 'imageFilterSentinel'})
+@SentinelValues(FTooltipStyle, {'backgroundFilter': 'Sentinels.imageFilter'})
 part 'tooltip.design.dart';
 
 /// A tooltip displays information related to a widget when focused, hovered over, or long pressed.

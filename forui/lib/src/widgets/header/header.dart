@@ -15,7 +15,7 @@ import 'package:forui/src/foundation/rendering.dart';
 import 'package:forui/src/theme/variant.dart';
 
 @Variants('FHeader', {'root': (1, 'The root header variant.'), 'nested': (1, 'The nested header variant.')})
-@Sentinels(FHeaderStyle, {'backgroundFilter': 'imageFilterSentinel'})
+@SentinelValues(FHeaderStyle, {'backgroundFilter': 'Sentinels.imageFilter'})
 part 'header.design.dart';
 
 part 'header_action.dart';

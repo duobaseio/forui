@@ -36,7 +36,7 @@ class _IconThemeDataDelta implements IconThemeDataDelta {
   final bool? Function()? applyTextScaling;
 
   const _IconThemeDataDelta({
-    this.color = colorSentinel,
+    this.color = Sentinels.color,
     this.opacity = .infinity,
     this.size = .infinity,
     this.fill = .infinity,
@@ -49,7 +49,7 @@ class _IconThemeDataDelta implements IconThemeDataDelta {
 
   @override
   IconThemeData call(IconThemeData? data) => IconThemeData(
-    color: identical(color, colorSentinel) ? data?.color : color,
+    color: identical(color, Sentinels.color) ? data?.color : color,
     opacity: identical(opacity, double.infinity) ? data?.opacity : opacity,
     size: identical(size, double.infinity) ? data?.size : size,
     fill: identical(fill, double.infinity) ? data?.fill : fill,

@@ -206,6 +206,7 @@ class FPopoverMenu extends StatelessWidget {
          semanticsLabel: semanticsLabel,
          style: style.itemGroupStyle,
          divider: divider,
+         intrinsicWidth: true,
          children: menuBuilder(context, controller, menu),
        )),
        assert(builder != _builder || child != null, 'Either builder or child must be provided'),
@@ -266,6 +267,7 @@ class FPopoverMenu extends StatelessWidget {
          semanticsLabel: semanticsLabel,
          style: style.tileGroupStyle,
          divider: divider,
+         intrinsicWidth: true,
          children: menuBuilder(context, controller, menu),
        )),
        assert(builder != _builder || child != null, 'Either builder or child must be provided'),
@@ -294,7 +296,8 @@ class FPopoverMenu extends StatelessWidget {
       barrierSemanticsDismissible: barrierSemanticsDismissible,
       useViewPadding: useViewPadding,
       useViewInsets: useViewInsets,
-      popoverBuilder: (context, controller) => FInheritedItemData(child: _menuBuilder(context, controller, style)),
+      popoverBuilder: (context, controller) =>
+          IntrinsicWidth(child: FInheritedItemData(child: _menuBuilder(context, controller, style))),
       builder: builder,
       child: child,
     );

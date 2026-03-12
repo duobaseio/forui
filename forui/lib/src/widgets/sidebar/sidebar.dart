@@ -8,7 +8,7 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
 
-@Sentinels(FSidebarStyle, {'backgroundFilter': 'imageFilterSentinel'})
+@SentinelValues(FSidebarStyle, {'backgroundFilter': 'Sentinels.imageFilter'})
 part 'sidebar.design.dart';
 
 /// A sidebar widget that provides an opinionated layout on the side of the screen.

@@ -10,7 +10,7 @@ import 'package:forui/src/foundation/annotations.dart';
 import 'package:forui/src/theme/variant.dart';
 
 @Variants('FToast', {'primary': (1, 'The primary toast style.'), 'destructive': (2, 'The destructive toast style.')})
-@Sentinels(FToastStyle, {'backgroundFilter': 'imageFilterSentinel'})
+@SentinelValues(FToastStyle, {'backgroundFilter': 'Sentinels.imageFilter'})
 part 'toaster_style.design.dart';
 
 /// A toaster's expansion behavior.

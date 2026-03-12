@@ -10,7 +10,7 @@ import 'package:forui/src/theme/variant.dart';
 import 'package:meta/meta.dart';
 
 @Variants('FGolden', {'hovered': (1, 'The hovered state'), 'pressed': (1, 'The pressed state')})
-@Sentinels(FGoldenStyle, {'someDouble': 'double.infinity', 'color': 'colorSentinel'})
+@SentinelValues(FGoldenStyle, {'someDouble': 'double.infinity', 'color': 'Sentinels.color'})
 
 part 'example.design.dart';
 

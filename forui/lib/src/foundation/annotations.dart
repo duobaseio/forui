@@ -12,12 +12,12 @@ class Variants {
 }
 
 @internal
-class Sentinels {
+class SentinelValues {
   /// The corresponding style.
   final Type style;
 
   /// The field name and their associated sentinel values which is typically a const field name.
   final Map<String, String> values;
 
-  const Sentinels(this.style, this.values);
+  const SentinelValues(this.style, this.values);
 }

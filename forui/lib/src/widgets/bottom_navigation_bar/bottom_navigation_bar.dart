@@ -9,7 +9,7 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
 import 'package:forui/src/foundation/debug.dart';
 
-@Sentinels(FBottomNavigationBarStyle, {'backgroundFilter': 'imageFilterSentinel'})
+@SentinelValues(FBottomNavigationBarStyle, {'backgroundFilter': 'Sentinels.imageFilter'})
 part 'bottom_navigation_bar.design.dart';
 
 /// A bottom navigation bar.

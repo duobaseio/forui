@@ -8,10 +8,9 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
-import 'package:forui/src/theme/delta/delta.dart';
 import 'package:forui/src/widgets/sheet/sheet.dart';
 
-@Sentinels(FModalSheetStyle, {'barrierFilter': 'imageFilterFunctionSentinel'})
+@SentinelValues(FModalSheetStyle, {'barrierFilter': 'Sentinels.imageFilterFunction'})
 part 'modal_sheet.design.dart';
 
 /// Shows a modal sheet that appears from the given [side].

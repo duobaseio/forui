@@ -2,111 +2,6 @@ import 'package:flutter/widgets.dart';
 
 import 'package:forui/src/theme/delta/delta.dart';
 
-const _borderRadiusSentinel = _BorderRadiusSentinel();
-const _boxBorderSentinel = _BoxBorderSentinel();
-const _decorationImageSentinel = _DecorationImageSentinel();
-const _gradientSentinel = _GradientSentinel();
-const _shapeBorderSentinel = _ShapeBorderSentinel();
-
-final class _BorderRadiusSentinel extends BorderRadiusGeometry {
-  const _BorderRadiusSentinel();
-
-  @override
-  BorderRadiusGeometry add(BorderRadiusGeometry other) => throw UnimplementedError();
-
-  @override
-  BorderRadiusGeometry subtract(BorderRadiusGeometry other) => throw UnimplementedError();
-
-  @override
-  BorderRadiusGeometry operator -() => throw UnimplementedError();
-
-  @override
-  BorderRadiusGeometry operator *(double other) => throw UnimplementedError();
-
-  @override
-  BorderRadiusGeometry operator /(double other) => throw UnimplementedError();
-
-  @override
-  BorderRadiusGeometry operator ~/(double other) => throw UnimplementedError();
-
-  @override
-  BorderRadiusGeometry operator %(double other) => throw UnimplementedError();
-
-  @override
-  BorderRadius resolve(TextDirection? direction) => throw UnimplementedError();
-}
-
-final class _BoxBorderSentinel extends BoxBorder {
-  const _BoxBorderSentinel();
-
-  @override
-  BorderSide get bottom => throw UnimplementedError();
-
-  @override
-  BorderSide get top => throw UnimplementedError();
-
-  @override
-  EdgeInsetsGeometry get dimensions => throw UnimplementedError();
-
-  @override
-  bool get isUniform => throw UnimplementedError();
-
-  @override
-  ShapeBorder scale(double t) => throw UnimplementedError();
-
-  @override
-  void paint(
-    Canvas canvas,
-    Rect rect, {
-    TextDirection? textDirection,
-    BoxShape shape = BoxShape.rectangle,
-    BorderRadius? borderRadius,
-  }) => throw UnimplementedError();
-}
-
-final class _DecorationImageSentinel extends DecorationImage {
-  const _DecorationImageSentinel() : super(image: const _ImageProvider());
-}
-
-final class _ImageProvider extends ImageProvider {
-  const _ImageProvider();
-
-  @override
-  Future<Object> obtainKey(ImageConfiguration configuration) => throw UnimplementedError();
-}
-
-final class _GradientSentinel extends Gradient {
-  const _GradientSentinel() : super(colors: const []);
-
-  @override
-  Gradient scale(double factor) => throw UnimplementedError();
-
-  @override
-  Shader createShader(Rect rect, {TextDirection? textDirection}) => throw UnimplementedError();
-
-  @override
-  Gradient withOpacity(double opacity) => throw UnimplementedError();
-}
-
-final class _ShapeBorderSentinel extends ShapeBorder {
-  const _ShapeBorderSentinel();
-
-  @override
-  EdgeInsetsGeometry get dimensions => throw UnimplementedError();
-
-  @override
-  Path getInnerPath(Rect rect, {TextDirection? textDirection}) => throw UnimplementedError();
-
-  @override
-  Path getOuterPath(Rect rect, {TextDirection? textDirection}) => throw UnimplementedError();
-
-  @override
-  void paint(Canvas canvas, Rect rect, {TextDirection? textDirection}) => throw UnimplementedError();
-
-  @override
-  ShapeBorder scale(double t) => throw UnimplementedError();
-}
-
 /// A delta that applies modifications to a [ShapeDecoration].
 abstract class ShapeDecorationDelta with Delta {
   /// Creates a partial modification of a [ShapeDecoration].
@@ -133,20 +28,20 @@ class _ShapeDelta implements ShapeDecorationDelta {
   final ShapeBorder? shape;
 
   const _ShapeDelta({
-    this.color = colorSentinel,
-    this.image = _decorationImageSentinel,
-    this.gradient = _gradientSentinel,
+    this.color = Sentinels.color,
+    this.image = Sentinels.decorationImage,
+    this.gradient = Sentinels.gradient,
     this.shadows,
-    this.shape = _shapeBorderSentinel,
+    this.shape = Sentinels.shapeBorder,
   });
 
   @override
   ShapeDecoration call(ShapeDecoration? decoration) => ShapeDecoration(
-    color: identical(color, colorSentinel) ? decoration?.color : color,
-    image: identical(image, _decorationImageSentinel) ? decoration?.image : image,
-    gradient: identical(gradient, _gradientSentinel) ? decoration?.gradient : gradient,
+    color: identical(color, Sentinels.color) ? decoration?.color : color,
+    image: identical(image, Sentinels.decorationImage) ? decoration?.image : image,
+    gradient: identical(gradient, Sentinels.gradient) ? decoration?.gradient : gradient,
     shadows: shadows ?? decoration?.shadows,
-    shape: identical(shape, _shapeBorderSentinel) ? decoration?.shape ?? const RoundedRectangleBorder() : shape!,
+    shape: identical(shape, Sentinels.shapeBorder) ? decoration?.shape ?? const RoundedRectangleBorder() : shape!,
   );
 }
 
@@ -238,12 +133,12 @@ class _DecorationBoxDelta extends _BoxDelta implements DecorationDelta {
     };
 
     return BoxDecoration(
-      color: identical(color, colorSentinel) ? decoration.color : color,
-      image: identical(image, _decorationImageSentinel) ? decoration.image : image,
-      border: identical(this.border, _boxBorderSentinel) ? border : this.border,
-      borderRadius: identical(this.borderRadius, _borderRadiusSentinel) ? borderRadius : this.borderRadius,
+      color: identical(color, Sentinels.color) ? decoration.color : color,
+      image: identical(image, Sentinels.decorationImage) ? decoration.image : image,
+      border: identical(this.border, Sentinels.boxBorder) ? border : this.border,
+      borderRadius: identical(this.borderRadius, Sentinels.borderRadius) ? borderRadius : this.borderRadius,
       boxShadow: boxShadow ?? decoration.shadows,
-      gradient: identical(gradient, _gradientSentinel) ? decoration.gradient : gradient,
+      gradient: identical(gradient, Sentinels.gradient) ? decoration.gradient : gradient,
       backgroundBlendMode: backgroundBlendMode?.call(),
       shape: this.shape ?? shape,
     );
@@ -302,24 +197,24 @@ class _BoxDelta implements BoxDecorationDelta {
   final BoxShape? shape;
 
   const _BoxDelta({
-    this.color = colorSentinel,
-    this.image = _decorationImageSentinel,
-    this.border = _boxBorderSentinel,
-    this.borderRadius = _borderRadiusSentinel,
+    this.color = Sentinels.color,
+    this.image = Sentinels.decorationImage,
+    this.border = Sentinels.boxBorder,
+    this.borderRadius = Sentinels.borderRadius,
     this.boxShadow,
-    this.gradient = _gradientSentinel,
+    this.gradient = Sentinels.gradient,
     this.backgroundBlendMode,
     this.shape,
   });
 
   @override
   BoxDecoration call(BoxDecoration? decoration) => BoxDecoration(
-    color: identical(color, colorSentinel) ? decoration?.color : color,
-    image: identical(image, _decorationImageSentinel) ? decoration?.image : image,
-    border: identical(border, _boxBorderSentinel) ? decoration?.border : border,
-    borderRadius: identical(borderRadius, _borderRadiusSentinel) ? decoration?.borderRadius : borderRadius,
+    color: identical(color, Sentinels.color) ? decoration?.color : color,
+    image: identical(image, Sentinels.decorationImage) ? decoration?.image : image,
+    border: identical(border, Sentinels.boxBorder) ? decoration?.border : border,
+    borderRadius: identical(borderRadius, Sentinels.borderRadius) ? decoration?.borderRadius : borderRadius,
     boxShadow: boxShadow ?? decoration?.boxShadow,
-    gradient: identical(gradient, _gradientSentinel) ? decoration?.gradient : gradient,
+    gradient: identical(gradient, Sentinels.gradient) ? decoration?.gradient : gradient,
     backgroundBlendMode: backgroundBlendMode != null ? backgroundBlendMode!() : decoration?.backgroundBlendMode,
     shape: shape ?? decoration?.shape ?? .rectangle,
   );

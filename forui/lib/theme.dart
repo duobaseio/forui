@@ -7,7 +7,7 @@ export 'src/theme/border_radius.dart';
 export 'src/theme/breakpoints.dart';
 export 'src/theme/colors.dart';
 export 'src/theme/delta/decoration.dart';
-export 'src/theme/delta/delta.dart' hide imageFilterFunctionSentinel;
+export 'src/theme/delta/delta.dart';
 export 'src/theme/delta/edge_insets_geometry.dart';
 export 'src/theme/delta/icon_theme_data.dart';
 export 'src/theme/delta/text_style.dart';
