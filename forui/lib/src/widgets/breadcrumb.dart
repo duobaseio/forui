@@ -130,6 +130,7 @@ abstract interface class FBreadcrumbItem extends Widget {
     ScrollController? scrollController,
     double? cacheExtent,
     double maxHeight,
+    bool intrinsicWidth,
     DragStartBehavior dragStartBehavior,
     FItemDivider divider,
     AlignmentGeometry menuAnchor,
@@ -162,6 +163,7 @@ abstract interface class FBreadcrumbItem extends Widget {
     ScrollController? scrollController,
     double? cacheExtent,
     double maxHeight,
+    bool intrinsicWidth,
     DragStartBehavior dragStartBehavior,
     FItemDivider divider,
     AlignmentGeometry menuAnchor,
@@ -242,6 +244,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
   final ScrollController? scrollController;
   final double? cacheExtent;
   final double maxHeight;
+  final bool intrinsicWidth;
   final DragStartBehavior dragStartBehavior;
   final FItemDivider divider;
   final AlignmentGeometry menuAnchor;
@@ -266,6 +269,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
     this.scrollController,
     this.cacheExtent,
     this.maxHeight = .infinity,
+    this.intrinsicWidth = true,
     this.dragStartBehavior = .start,
     this.divider = .full,
     this.menuAnchor = .topLeft,
@@ -293,6 +297,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
     this.scrollController,
     this.cacheExtent,
     this.maxHeight = .infinity,
+    this.intrinsicWidth = true,
     this.dragStartBehavior = .start,
     this.divider = .full,
     this.menuAnchor = .topLeft,
@@ -325,6 +330,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
       ..add(DiagnosticsProperty('scrollController', scrollController))
       ..add(DoubleProperty('cacheExtent', cacheExtent))
       ..add(DoubleProperty('maxHeight', maxHeight))
+      ..add(FlagProperty('intrinsicWidth', value: intrinsicWidth, ifTrue: 'intrinsicWidth'))
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior))
       ..add(EnumProperty('divider', divider))
       ..add(DiagnosticsProperty('menuAnchor', menuAnchor))
@@ -392,6 +398,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
         scrollController: widget.scrollController,
         cacheExtent: widget.cacheExtent,
         maxHeight: widget.maxHeight,
+        intrinsicWidth: widget.intrinsicWidth,
         dragStartBehavior: widget.dragStartBehavior,
         semanticsLabel: widget.semanticsLabel,
         divider: widget.divider,
@@ -422,6 +429,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
         scrollController: widget.scrollController,
         cacheExtent: widget.cacheExtent,
         maxHeight: widget.maxHeight,
+        intrinsicWidth: widget.intrinsicWidth,
         dragStartBehavior: widget.dragStartBehavior,
         semanticsLabel: widget.semanticsLabel,
         divider: widget.divider,

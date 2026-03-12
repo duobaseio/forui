@@ -63,6 +63,7 @@ final class FInheritedItemData extends InheritedWidget {
     FVariants<FItemGroupVariantConstraint, FItemGroupVariant, Color, Delta>? dividerColor,
     double? dividerWidth,
     bool? enabled,
+    bool? intrinsicWidth,
     int? index,
   }) => Builder(
     builder: (context) {
@@ -86,6 +87,7 @@ final class FInheritedItemData extends InheritedWidget {
             (_, true) => .none,
           },
           enabled: enabled ?? parent?.enabled ?? true,
+          intrinsicWidth: intrinsicWidth ?? parent?.intrinsicWidth ?? false,
           index: index ?? parent?.index ?? 0,
           last: last,
           globalLast: globalLast,
@@ -134,6 +136,9 @@ final class FItemData with Diagnosticable {
   /// True if the item is the last item across all levels.
   final bool globalLast;
 
+  /// True if the group should intrinsically size to the widest child.
+  final bool intrinsicWidth;
+
   /// Creates a new [FItemData].
   const FItemData({
     this.styles,
@@ -145,6 +150,7 @@ final class FItemData with Diagnosticable {
     this.index = 0,
     this.last = true,
     this.globalLast = true,
+    this.intrinsicWidth = false,
   });
 
   @override
@@ -159,7 +165,8 @@ final class FItemData with Diagnosticable {
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
       ..add(IntProperty('index', index))
       ..add(FlagProperty('last', value: last, ifTrue: 'last'))
-      ..add(FlagProperty('globalLast', value: globalLast, ifTrue: 'globalLast'));
+      ..add(FlagProperty('globalLast', value: globalLast, ifTrue: 'globalLast'))
+      ..add(FlagProperty('intrinsicWidth', value: intrinsicWidth, ifTrue: 'intrinsicWidth'));
   }
 
   @override
@@ -173,11 +180,22 @@ final class FItemData with Diagnosticable {
           dividerWidth == other.dividerWidth &&
           divider == other.divider &&
           enabled == other.enabled &&
+          intrinsicWidth == other.intrinsicWidth &&
           index == other.index &&
           last == other.last &&
           globalLast == other.globalLast;
 
   @override
-  int get hashCode =>
-      Object.hash(styles, spacing, dividerColor, dividerWidth, divider, enabled, index, last, globalLast);
+  int get hashCode => Object.hash(
+    styles,
+    spacing,
+    dividerColor,
+    dividerWidth,
+    divider,
+    enabled,
+    intrinsicWidth,
+    index,
+    last,
+    globalLast,
+  );
 }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
@@ -647,6 +648,59 @@ void main() {
       );
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/builder/null-limited.png'));
+    });
+  });
+
+  group('intrinsic width', () {
+    setUp(() => debugCheckIntrinsicSizes = true);
+    tearDown(() => debugCheckIntrinsicSizes = false);
+
+    testWidgets('all children', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FTileGroup(
+            intrinsicWidth: true,
+            label: const Text('Network'),
+            children: [
+              .tile(
+                prefix: const Icon(FIcons.bluetooth),
+                title: const Text('Bluetooth'),
+                subtitle: const Text('Fee, Fo, Fum'),
+                details: const Text('FL (5G)'),
+                suffix: const Icon(FIcons.chevronRight),
+                onPress: () {},
+              ),
+              .tile(
+                prefix: const Icon(FIcons.wifi),
+                title: const Text('WiFi'),
+                subtitle: const Text('Connected'),
+                details: const Text('Duobase (5G)'),
+                suffix: const Icon(FIcons.chevronRight),
+                onPress: () {},
+              ),
+            ],
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/intrinsic-width-all.png'));
+    });
+
+    testWidgets('minimal', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FTileGroup(
+            intrinsicWidth: true,
+            label: const Text('Network'),
+            children: [
+              .tile(title: const Text('Bluetooth')),
+              .tile(title: const Text('WiFi')),
+            ],
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/intrinsic-width-minimal.png'));
     });
   });
 }

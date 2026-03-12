@@ -45,6 +45,10 @@ sizes consistent across each platform.
 * **Breaking** Remove `FBadgeStyles.defaultBadgeRadius`. Use `FBorderRadius.pill` instead.
 
 
+### `FBreadcrumb`
+* Add `FBreadcrumbItem.collapsed(intrinsicWidth: ...)`.
+
+
 ### `FBottomNavigationBar`
 * Add `FBottomNavigationBarStyle.slideableItems` for slide-across interaction.
 
@@ -126,13 +130,16 @@ sizes consistent across each platform.
 ### `FItem` & `FItemGroup`
 * Add `FItemVariant.primary`.
 * Add `FItem.onDoubleTap`.
+* Add `FItemGroup.intrinsicWidth`.
 * Add `FItemStyle.shape` for clipping items.
 * Add `FItemGroupStyle.slideableItems` for slide-across interaction.
+* Add `FItemContentStyle.unsuffixedPadding`.
 
 * **Breaking** Change `FItemStyle.decoration` type from `FVariants<..., BoxDecoration, BoxDecorationDelta>` to
   `FVariants<..., Decoration, DecorationDelta>`.
 * **Breaking** Change `FItemGroupStyle.decoration` type from `BoxDecoration` to `Decoration`.
 * **Breaking** Rename `FItemStyle.border` to `FItemStyle.shape`.
+* **Breaking** Rename `FItemContentStyle.padding` to `FItemContentStyle.suffixedPadding`.
 
 * Fix `FItemDivider.indented` not masking the gap area with the item's background color.
 * Fix `FItem` not being clipped to its shape.
@@ -161,10 +168,13 @@ sizes consistent across each platform.
 
 
 ### `FPopoverMenu`
+* Add `FPopoverMenu.intrinsicWidth`.
 * Add `FPopoverMenu.useViewPadding`.
 * Add `FPopoverMenu.useViewInsets`.
 * Add `FPopoverMenu.defaultItemBuilder`.
 * Add `FPopoverMenu.defaultTileBuilder`.
+
+* Change `FPopoverMenu` to intrinsically size to menu contents.
 
 * **Breaking** Remove `FPopoverMenu.defaultBuilder`. Use `FPopover.defaultBuilder` instead.
 
@@ -270,8 +280,13 @@ sizes consistent across each platform.
 
 
 ### `FSelectMenuTile`
+* Add `FSelectMenuTile.menuIntrinsicWidth`.
 * Add `FSelectMenuTile.menuUseViewPadding`.
 * Add `FSelectMenuTile.menuUseViewInsets`.
+
+
+### `FSelectTileGroup`
+* Add `FSelectTileGroup.intrinsicWidth`.
 
 
 ### `FTimeField`
@@ -328,6 +343,7 @@ sizes consistent across each platform.
 ### `FTile` & `FTileGroup`
 * Add `FTileStyles.primary` resolving via `FItemVariant.primary`.
 * Add `FTile.onDoubleTap`.
+* Add `FTileGroup.intrinsicWidth`.
 * Add `FTileStyle.shape` for clipping standalone tiles.
 * Add `FTileGroupStyle.slideableTiles` for slide-across interaction.
 

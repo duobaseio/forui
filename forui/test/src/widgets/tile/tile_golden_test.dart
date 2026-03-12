@@ -362,6 +362,22 @@ void main() {
         await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/intrinsic-width-all.png'));
       });
 
+      testWidgets('prefixed', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            child: IntrinsicWidth(
+              child: FTile(
+                prefix: const Icon(FIcons.bluetooth),
+                title: const Text('Bluetooth'),
+                onPress: () {},
+              ),
+            ),
+          ),
+        );
+
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/tile/intrinsic-width-prefixed.png'));
+      });
+
       testWidgets('minimal', (tester) async {
         await tester.pumpWidget(
           TestScaffold(

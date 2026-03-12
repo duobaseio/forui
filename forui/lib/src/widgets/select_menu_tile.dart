@@ -54,6 +54,11 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
   /// Throws [AssertionError] if [maxHeight] is not positive.
   final double maxHeight;
 
+  /// {@macro forui.widgets.FItemGroup.intrinsicWidth}
+  ///
+  /// Defaults to false.
+  final bool menuIntrinsicWidth;
+
   /// Determines the way that the menu's drag start behavior is handled. Defaults to [DragStartBehavior.start].
   final DragStartBehavior dragStartBehavior;
 
@@ -228,6 +233,7 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
     this.style = const .context(),
     this.cacheExtent,
     this.maxHeight = .infinity,
+    this.menuIntrinsicWidth = false,
     this.dragStartBehavior = .start,
     this.physics = const ClampingScrollPhysics(),
     this.divider = .full,
@@ -286,6 +292,7 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
     FSelectMenuTileStyleDelta style = const .context(),
     double? cacheExtent,
     double maxHeight = .infinity,
+    bool menuIntrinsicWidth = false,
     DragStartBehavior dragStartBehavior = .start,
     ScrollPhysics physics = const ClampingScrollPhysics(),
     FItemDivider divider = .full,
@@ -333,6 +340,7 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
     style: style,
     cacheExtent: cacheExtent,
     maxHeight: maxHeight,
+    menuIntrinsicWidth: menuIntrinsicWidth,
     dragStartBehavior: dragStartBehavior,
     physics: physics,
     divider: divider,
@@ -400,6 +408,7 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
     this.style = const .context(),
     this.cacheExtent,
     this.maxHeight = .infinity,
+    this.menuIntrinsicWidth = false,
     this.dragStartBehavior = .start,
     this.physics = const ClampingScrollPhysics(),
     this.divider = .full,
@@ -455,6 +464,7 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
       ..add(DiagnosticsProperty('style', style))
       ..add(DoubleProperty('cacheExtent', cacheExtent))
       ..add(DoubleProperty('maxHeight', maxHeight))
+      ..add(FlagProperty('menuIntrinsicWidth', value: menuIntrinsicWidth, ifTrue: 'menuIntrinsicWidth'))
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior))
       ..add(DiagnosticsProperty('physics', physics))
       ..add(EnumProperty('divider', divider))
@@ -597,6 +607,7 @@ class _FSelectMenuTileState<T> extends State<FSelectMenuTile<T>> with TickerProv
                   scrollController: widget.scrollController,
                   cacheExtent: widget.cacheExtent,
                   maxHeight: widget.maxHeight,
+                  intrinsicWidth: widget.menuIntrinsicWidth,
                   dragStartBehavior: widget.dragStartBehavior,
                   physics: widget.physics,
                   style: menuStyle.tileGroupStyle,
@@ -735,7 +746,7 @@ class FSelectMenuTileStyle extends FLabelStyle with _$FSelectMenuTileStyleFuncti
     required FStyle style,
     required bool touch,
   }) {
-    final groupStyle = FTileGroupStyle.inherit(colors: colors, style: style, typography: typography, touch: touch);
+    final groupStyle = FTileGroupStyle.inherit(colors: colors, style: style, typography: typography);
     return .new(
       menuStyle: .inherit(colors: colors, style: style, typography: typography, touch: touch),
       tileStyle: .inherit(colors: colors, typography: typography, style: style),

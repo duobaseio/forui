@@ -27,6 +27,7 @@ mixin FItemGroupMixin on Widget {
     DragStartBehavior dragStartBehavior = .start,
     ScrollPhysics physics = const ClampingScrollPhysics(),
     bool? enabled,
+    bool? intrinsicWidth,
     FItemDivider divider = .none,
     String? semanticsLabel,
     Key? key,
@@ -38,6 +39,7 @@ mixin FItemGroupMixin on Widget {
     dragStartBehavior: dragStartBehavior,
     physics: physics,
     enabled: enabled,
+    intrinsicWidth: intrinsicWidth,
     divider: divider,
     semanticsLabel: semanticsLabel,
     key: key,
@@ -83,6 +85,7 @@ mixin FItemGroupMixin on Widget {
     DragStartBehavior dragStartBehavior = .start,
     ScrollPhysics physics = const ClampingScrollPhysics(),
     bool? enabled,
+    bool? intrinsicWidth,
     FItemDivider divider = .full,
     String? semanticsLabel,
     Key? key,
@@ -94,6 +97,7 @@ mixin FItemGroupMixin on Widget {
     dragStartBehavior: dragStartBehavior,
     physics: physics,
     enabled: enabled,
+    intrinsicWidth: intrinsicWidth,
     divider: divider,
     semanticsLabel: semanticsLabel,
     key: key,
@@ -173,7 +177,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
   /// Items that fall in this cache area are laid out even though they are not (yet) visible on screen. It describes
   /// how many pixels the cache area extends before the leading edge and after the trailing edge of the viewport.
   ///
-  /// It is ignored if the group is part of a merged [FItemGroup].
+  /// It is ignored if the group is part of a merged [FItemGroup] or if [intrinsicWidth] is true.
   /// {@endtemplate}
   final double? cacheExtent;
 
@@ -209,14 +213,25 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
   /// True if the group is enabled. Defaults to true.
   final bool? enabled;
 
+  /// {@template forui.widgets.FItemGroup.intrinsicWidth}
+  /// Whether the group should intrinsically size to the widest child. Defaults to false.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if:
+  /// * an [FItemGroup.builder] is used in an intrinsic [FItemGroup.merge].
+  /// * a non-intrinsic [FItemGroup] is used in an intrinsic [FItemGroup.merge].
+  /// * an intrinsic [FItemGroup] is used in a non-intrinsic [FItemGroup.merge].
+  /// {@endtemplate}
+  final bool? intrinsicWidth;
+
   /// The group's semantic label.
   ///
   /// It is ignored if the group is part of a merged [FItemGroup].
   final String? semanticsLabel;
 
-  /// The delegate that builds the sliver children.
+  /// The delegate that builds the children.
   // ignore: avoid_positional_boolean_parameters
-  final Widget Function(FItemGroupStyle style, bool enabled) _builder;
+  final Widget Function(FItemGroupStyle style, bool enabled, bool intrinsicWidth) _builder;
 
   /// {@template forui.widgets.FItemGroup.new}
   /// Creates a [FItemGroup].
@@ -230,17 +245,19 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
     this.dragStartBehavior = .start,
     this.physics = const ClampingScrollPhysics(),
     this.enabled,
+    this.intrinsicWidth,
     this.divider = .none,
     this.semanticsLabel,
     super.key,
   }) : assert(0 < maxHeight, 'maxHeight ($maxHeight) must be > 0'),
-       _builder = ((style, enabled) => SliverList.list(
-         children: [
+       _builder = ((style, enabled, intrinsicWidth) {
+         final nested = [
            for (final (index, child) in children.indexed)
              FInheritedItemData.merge(
                styles: style.itemStyles,
                spacing: style.spacing,
                enabled: enabled,
+               intrinsicWidth: intrinsicWidth,
                dividerColor: style.dividerColor,
                dividerWidth: style.dividerWidth,
                divider: divider,
@@ -248,8 +265,9 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
                last: index == children.length - 1,
                child: child,
              ),
-         ],
-       ));
+         ];
+         return intrinsicWidth ? Column(mainAxisSize: .min, children: nested) : SliverList.list(children: nested);
+       });
 
   /// {@template forui.widgets.FItemGroup.builder}
   /// Creates a [FItemGroup] that lazily builds its children.
@@ -261,6 +279,9 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
   /// * It will be called only for indices <= [count] if [count] is given.
   ///
   /// The [count] is the number of items to build. If null, [itemBuilder] will be called until it returns null.
+  ///
+  /// # Contract
+  /// Throws [AssertionError] if used in a intrinsic [FItemGroup.merge].
   ///
   /// ## Notes
   /// May result in an infinite loop or run out of memory if:
@@ -283,28 +304,33 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
     super.key,
   }) : assert(0 < maxHeight, 'maxHeight ($maxHeight) must be > 0'),
        assert(count == null || 0 <= count, 'count ($count) must be >= 0'),
-       _builder = ((style, enabled) => SliverList.builder(
-         itemCount: count,
-         itemBuilder: (context, index) {
-           if (itemBuilder(context, index) case final item?) {
-             return FInheritedItemData.merge(
-               styles: style.itemStyles,
-               spacing: style.spacing,
-               enabled: enabled,
-               dividerColor: style.dividerColor,
-               dividerWidth: style.dividerWidth,
-               divider: divider,
-               index: index,
-               last: (count != null && index == count - 1) || itemBuilder(context, index + 1) == null,
-               child: item,
-             );
-           }
+       intrinsicWidth = null,
+       _builder = ((style, enabled, intrinsicWidth) {
+         assert(!intrinsicWidth, 'FItemGroup.builder does not support intrinsic width.');
+         return SliverList.builder(
+           itemCount: count,
+           itemBuilder: (context, index) {
+             if (itemBuilder(context, index) case final item?) {
+               return FInheritedItemData.merge(
+                 styles: style.itemStyles,
+                 spacing: style.spacing,
+                 enabled: enabled,
+                 dividerColor: style.dividerColor,
+                 dividerWidth: style.dividerWidth,
+                 divider: divider,
+                 index: index,
+                 last: (count != null && index == count - 1) || itemBuilder(context, index + 1) == null,
+                 child: item,
+               );
+             }
 
-           return null;
-         },
-       ));
+             return null;
+           },
+         );
+       });
 
   /// {@template forui.widgets.FItemGroup.merge}
+
   /// Creates a [FItemGroup] that merges multiple [FItemGroupMixin]s together.
   ///
   /// All group labels will be ignored.
@@ -318,17 +344,19 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
     this.dragStartBehavior = .start,
     this.physics = const ClampingScrollPhysics(),
     this.enabled,
+    this.intrinsicWidth,
     this.divider = .full,
     this.semanticsLabel,
     super.key,
   }) : assert(0 < maxHeight, 'maxHeight ($maxHeight) must be > 0'),
-       _builder = ((style, enabled) => SliverMainAxisGroup(
-         slivers: [
+       _builder = ((style, enabled, intrinsicWidth) {
+         final nested = [
            for (final (index, child) in children.indexed)
              FInheritedItemData.merge(
                styles: style.itemStyles,
                spacing: style.spacing,
                enabled: enabled,
+               intrinsicWidth: intrinsicWidth,
                dividerColor: style.dividerColor,
                dividerWidth: style.dividerWidth,
                divider: divider,
@@ -336,8 +364,9 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
                last: index == children.length - 1,
                child: child,
              ),
-         ],
-       ));
+         ];
+         return intrinsicWidth ? Column(mainAxisSize: .min, children: nested) : SliverMainAxisGroup(slivers: nested);
+       });
 
   /// {@macro forui.widgets.FItemGroup.new}
   ///
@@ -351,6 +380,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
     DragStartBehavior dragStartBehavior = .start,
     ScrollPhysics physics = const ClampingScrollPhysics(),
     bool? enabled,
+    bool? intrinsicWidth,
     FItemDivider divider = .none,
     String? semanticsLabel,
     Key? key,
@@ -363,6 +393,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
          dragStartBehavior: dragStartBehavior,
          physics: physics,
          enabled: enabled,
+         intrinsicWidth: intrinsicWidth,
          divider: divider,
          semanticsLabel: semanticsLabel,
          key: key,
@@ -373,22 +404,33 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
     final data = FInheritedItemData.maybeOf(context);
     final style = this.style(FItemGroupStyleData.of(context));
     final enabled = this.enabled ?? data?.enabled ?? true;
+    final intrinsicWidth = this.intrinsicWidth ?? data?.intrinsicWidth ?? false;
 
-    final sliver = _builder(style, enabled);
+    // When nested.
     if (data != null) {
-      return sliver;
+      return _builder(style, enabled, intrinsicWidth);
     }
 
+    // When root.
     Widget child = FItemGroupStyleData(
       style: style,
-      child: CustomScrollView(
-        controller: scrollController,
-        cacheExtent: cacheExtent,
-        dragStartBehavior: dragStartBehavior,
-        shrinkWrap: true,
-        physics: physics,
-        slivers: [sliver],
-      ),
+      child: intrinsicWidth
+          ? IntrinsicWidth(
+            child: SingleChildScrollView(
+                controller: scrollController,
+                dragStartBehavior: dragStartBehavior,
+                physics: physics,
+                child: _builder(style, enabled, true),
+              ),
+          )
+          : CustomScrollView(
+              controller: scrollController,
+              cacheExtent: cacheExtent,
+              dragStartBehavior: dragStartBehavior,
+              shrinkWrap: true,
+              physics: physics,
+              slivers: [_builder(style, enabled, false)],
+            ),
     );
 
     if (maxHeight.isInfinite && style.slideableItems.resolve({context.platformVariant})) {
@@ -428,6 +470,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior))
       ..add(DiagnosticsProperty('physics', physics))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
+      ..add(FlagProperty('intrinsicWidth', value: intrinsicWidth, ifTrue: 'intrinsicWidth'))
       ..add(EnumProperty('divider', divider))
       ..add(StringProperty('semanticsLabel', semanticsLabel));
   }

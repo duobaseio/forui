@@ -184,21 +184,27 @@ class _ThemesVisitor extends RecursiveAstVisitor<void> {
     for (final variable in field.fields.variables) {
       final theme = variable.name.lexeme;
 
-      // Match (light: (desktop: FThemeData(touch: false, ...), touch: FThemeData(touch: true, ...)), dark: ...)
+      // Match (light: FPlatformThemeData(desktop: () => FThemeData(...), touch: () => FThemeData(...)), dark: ...)
       if (variable.initializer case final RecordLiteral autoTheme) {
         for (final NamedExpression(:name, :expression) in autoTheme.fields.whereType<NamedExpression>()) {
           final variant = name.label.name; // "light" or "dark"
 
-          // (desktop: FThemeData(touch: false, ...), touch: FThemeData(touch: true, ...))
-          if (expression case final RecordLiteral platformTheme) {
+          // FPlatformThemeData(desktop: () => FThemeData(...), touch: () => FThemeData(...))
+          if (expression case final InstanceCreationExpression platformTheme) {
             // Extract colors from the touch variant
-            for (final NamedExpression(:name, :expression) in platformTheme.fields.whereType<NamedExpression>()) {
+            for (final NamedExpression(:name, :expression) in platformTheme.argumentList.arguments.whereType<NamedExpression>()) {
               if (name.label.name != 'touch') {
                 continue;
               }
 
+              // () => FThemeData(colors: ...) — unwrap the closure
+              final themeDataExpr = switch (expression) {
+                FunctionExpression(body: ExpressionFunctionBody(:final expression)) => expression,
+                _ => expression,
+              };
+
               // FThemeData(colors: ...)
-              if (expression case final InstanceCreationExpression themeData) {
+              if (themeDataExpr case final InstanceCreationExpression themeData) {
                 var colors = '';
                 for (final expression in themeData.argumentList.arguments.whereType<NamedExpression>()) {
                   if (expression.name.label.name == 'colors') {

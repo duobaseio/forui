@@ -53,7 +53,7 @@ class ItemContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ItemContentLayout(
     margin: margin,
-    padding: style.padding,
+    padding: suffix == null ? style.unsuffixedPadding : style.suffixedPadding,
     top: top,
     bottom: bottom,
     dividerColor: dividerForeground?.resolve(variants),
@@ -138,11 +138,13 @@ class ItemContent extends StatelessWidget {
 
 /// An [FItem] content's style.
 class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
-  /// The content's padding.
-  ///
-  /// Defaults to `EdgeInsetsDirectional.only(start: 10, top: 12.5, bottom: 12.5, end: 6)`
+  /// The content's padding when a suffix is present.
   @override
-  final EdgeInsetsGeometry padding;
+  final EdgeInsetsGeometry suffixedPadding;
+
+  /// The content's padding when no suffix is present.
+  @override
+  final EdgeInsetsGeometry unsuffixedPadding;
 
   /// The prefix icon style.
   @override
@@ -199,7 +201,8 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
     required this.subtitleTextStyle,
     required this.detailsTextStyle,
     required this.suffixIconStyle,
-    required this.padding,
+    required this.suffixedPadding,
+    required this.unsuffixedPadding,
     this.prefixIconSpacing = 8,
     this.titleSpacing = 4,
     this.middleSpacing = 4,
@@ -216,7 +219,8 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
     required Color prefix,
     required Color foreground,
     required Color mutedForeground,
-    required EdgeInsetsGeometry padding,
+    required EdgeInsetsGeometry suffixedPadding,
+    required EdgeInsetsGeometry unsuffixedPadding,
   }) {
     final disabledMutedForeground = colors.disable(mutedForeground);
     return FItemContentStyle(
@@ -250,7 +254,8 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
           [.disabled]: .delta(color: disabledMutedForeground),
         },
       ),
-      padding: padding,
+      suffixedPadding: suffixedPadding,
+      unsuffixedPadding: unsuffixedPadding,
     );
   }
 }

@@ -32,6 +32,9 @@ class FSelectTileGroup<T> extends StatefulWidget with FTileGroupMixin, FFormFiel
   /// {@macro forui.widgets.FTileGroup.maxHeight}
   final double maxHeight;
 
+  /// {@macro forui.widgets.FTileGroup.intrinsicWidth}
+  final bool? intrinsicWidth;
+
   /// {@macro forui.widgets.FTileGroup.dragStartBehavior}
   final DragStartBehavior dragStartBehavior;
 
@@ -119,6 +122,7 @@ class FSelectTileGroup<T> extends StatefulWidget with FTileGroupMixin, FFormFiel
     this.style = const .context(),
     this.cacheExtent,
     this.maxHeight = .infinity,
+    this.intrinsicWidth,
     this.dragStartBehavior = .start,
     this.physics = const ClampingScrollPhysics(),
     this.divider = .indented,
@@ -164,7 +168,8 @@ class FSelectTileGroup<T> extends StatefulWidget with FTileGroupMixin, FFormFiel
     this.enabled = true,
     this.autovalidateMode = .disabled,
     super.key,
-  }) : _children = null,
+  }) : intrinsicWidth = false,
+       _children = null,
        _tileBuilder = tileBuilder,
        _count = count;
 
@@ -180,6 +185,7 @@ class FSelectTileGroup<T> extends StatefulWidget with FTileGroupMixin, FFormFiel
       ..add(DiagnosticsProperty('style', style))
       ..add(DoubleProperty('cacheExtent', cacheExtent))
       ..add(DoubleProperty('maxHeight', maxHeight))
+      ..add(FlagProperty('intrinsicWidth', value: intrinsicWidth, ifTrue: 'intrinsicWidth'))
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior))
       ..add(DiagnosticsProperty('physics', physics))
       ..add(EnumProperty('divider', divider))
@@ -247,6 +253,7 @@ class _FSelectTileGroupState<T> extends State<FSelectTileGroup<T>> {
             style: groupStyle,
             cacheExtent: widget.cacheExtent,
             maxHeight: widget.maxHeight,
+            intrinsicWidth: widget.intrinsicWidth,
             dragStartBehavior: widget.dragStartBehavior,
             physics: widget.physics,
             divider: widget.divider,

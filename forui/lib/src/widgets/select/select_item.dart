@@ -264,7 +264,7 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
     required FTypography typography,
     required bool touch,
   }) {
-    final (padding, margin) = FItemStyle.selectInsets(touch: touch);
+    final (:suffixedPadding, :unsuffixedPadding, :margin) = FItemStyle.selectInsets(touch: touch);
     return .new(
       labelTextStyle: FVariants.from(
         typography.xs.copyWith(color: colors.mutedForeground),
@@ -293,14 +293,15 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
           prefix: colors.foreground,
           foreground: colors.foreground,
           mutedForeground: colors.mutedForeground,
-          padding: padding,
+          suffixedPadding: suffixedPadding,
+          unsuffixedPadding: unsuffixedPadding,
         ),
         rawItemContentStyle: .inherit(
           colors: colors,
           typography: typography,
           prefix: colors.foreground,
           color: colors.foreground,
-          padding: padding,
+          padding: unsuffixedPadding,
         ),
         tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
         focusedOutlineStyle: null,

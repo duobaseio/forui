@@ -66,6 +66,9 @@ class FPopoverMenu extends StatelessWidget {
   /// {@macro forui.widgets.FTileGroup.maxHeight}
   final double maxHeight;
 
+  /// Whether the menu should intrinsically size to the widest child. Defaults to true.
+  final bool intrinsicWidth;
+
   /// {@macro forui.widgets.FTileGroup.dragStartBehavior}
   final DragStartBehavior dragStartBehavior;
 
@@ -172,6 +175,7 @@ class FPopoverMenu extends StatelessWidget {
     this.style = const .context(),
     this.cacheExtent,
     this.maxHeight = .infinity,
+    this.intrinsicWidth = true,
     this.dragStartBehavior = .start,
     this.divider = .full,
     this.menuAnchor = .topCenter,
@@ -202,10 +206,12 @@ class FPopoverMenu extends StatelessWidget {
          scrollController: scrollController,
          cacheExtent: cacheExtent,
          maxHeight: maxHeight,
+         intrinsicWidth: intrinsicWidth,
          dragStartBehavior: dragStartBehavior,
          semanticsLabel: semanticsLabel,
          style: style.itemGroupStyle,
          divider: divider,
+
          children: menuBuilder(context, controller, menu),
        )),
        assert(builder != FPopover.defaultBuilder || child != null, 'Either builder or child must be provided'),
@@ -232,6 +238,7 @@ class FPopoverMenu extends StatelessWidget {
     this.style = const .context(),
     this.cacheExtent,
     this.maxHeight = .infinity,
+    this.intrinsicWidth = true,
     this.dragStartBehavior = .start,
     this.divider = .full,
     this.menuAnchor = .topCenter,
@@ -262,6 +269,7 @@ class FPopoverMenu extends StatelessWidget {
          scrollController: scrollController,
          cacheExtent: cacheExtent,
          maxHeight: maxHeight,
+         intrinsicWidth: intrinsicWidth,
          dragStartBehavior: dragStartBehavior,
          semanticsLabel: semanticsLabel,
          style: style.tileGroupStyle,
@@ -294,8 +302,7 @@ class FPopoverMenu extends StatelessWidget {
       barrierSemanticsDismissible: barrierSemanticsDismissible,
       useViewPadding: useViewPadding,
       useViewInsets: useViewInsets,
-      popoverBuilder: (context, controller) =>
-          IntrinsicWidth(child: FInheritedItemData(child: _menuBuilder(context, controller, style))),
+      popoverBuilder: (context, controller) => FInheritedItemData(child: _menuBuilder(context, controller, style)),
       builder: builder,
       child: child,
     );
@@ -310,6 +317,7 @@ class FPopoverMenu extends StatelessWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DoubleProperty('cacheExtent', cacheExtent))
       ..add(DoubleProperty('maxHeight', maxHeight))
+      ..add(FlagProperty('intrinsicWidth', value: intrinsicWidth, ifTrue: 'intrinsicWidth'))
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior))
       ..add(EnumProperty('divider', divider))
       ..add(DiagnosticsProperty('popoverAnchor', menuAnchor))
@@ -394,20 +402,21 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
                  prefix: colors.foreground,
                  foreground: colors.foreground,
                  mutedForeground: colors.mutedForeground,
-                 padding: FItemStyle.menuInsets(touch: touch).$1,
+                 suffixedPadding: FItemStyle.menuInsets(touch: touch).suffixedPadding,
+                 unsuffixedPadding: FItemStyle.menuInsets(touch: touch).unsuffixedPadding,
                ),
                rawItemContentStyle: FRawItemContentStyle.inherit(
                  colors: colors,
                  typography: typography,
                  prefix: colors.foreground,
                  color: colors.foreground,
-                 padding: FItemStyle.menuInsets(touch: touch).$1,
+                 padding: FItemStyle.menuInsets(touch: touch).unsuffixedPadding,
                ),
              ),
            ),
          ]),
        ),
-       tileGroupStyle = .inherit(colors: colors, style: style, typography: typography, touch: touch).copyWith(
+       tileGroupStyle = .inherit(colors: colors, style: style, typography: typography).copyWith(
          tileStyles: .delta([
            .base(
              .delta(

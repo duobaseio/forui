@@ -529,7 +529,8 @@ extension type FItemStyles(FVariants<FItemVariantConstraint, FItemVariant, FItem
               prefix: colors.destructive,
               foreground: colors.destructive,
               mutedForeground: colors.destructive,
-              padding: primary.contentStyle.padding,
+              suffixedPadding: primary.contentStyle.suffixedPadding,
+              unsuffixedPadding: primary.contentStyle.unsuffixedPadding,
             ),
             rawItemContentStyle: FRawItemContentStyle.inherit(
               colors: colors,
@@ -554,14 +555,32 @@ extension type FItemStyles(FVariants<FItemVariantConstraint, FItemVariant, FItem
 /// A [FItem]'s style.
 class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
   /// The padding and margin for the item when used in a menu.
-  static (EdgeInsetsGeometry padding, EdgeInsetsGeometry margin) menuInsets({required bool touch}) => touch
-      ? (const EdgeInsetsDirectional.fromSTEB(10, 12.5, 6, 12.5), const .symmetric(horizontal: 4))
-      : (const EdgeInsetsDirectional.fromSTEB(10, 3.5, 5, 3.5), const .symmetric(vertical: 3, horizontal: 4));
+  static ({EdgeInsetsGeometry suffixedPadding, EdgeInsetsGeometry unsuffixedPadding, EdgeInsetsGeometry margin})
+  menuInsets({required bool touch}) => touch
+      ? (
+          suffixedPadding: const EdgeInsetsDirectional.fromSTEB(10, 12.5, 6, 12.5),
+          unsuffixedPadding: const .symmetric(horizontal: 10, vertical: 12.5),
+          margin: const .symmetric(horizontal: 4),
+        )
+      : (
+          suffixedPadding: const EdgeInsetsDirectional.fromSTEB(10, 6.5, 5, 6.5),
+          unsuffixedPadding: const .symmetric(horizontal: 10, vertical: 6.5),
+          margin: const .symmetric(horizontal: 4),
+        );
 
   /// The padding and margin for the item when used in a autocomplete/select.
-  static (EdgeInsetsGeometry padding, EdgeInsetsGeometry margin) selectInsets({required bool touch}) => touch
-      ? (const EdgeInsetsDirectional.fromSTEB(10, 12.5, 6, 12.5), const .symmetric(horizontal: 4))
-      : (const EdgeInsetsDirectional.fromSTEB(10, 6.5, 5, 6.5), const .symmetric(horizontal: 4));
+  static ({EdgeInsetsGeometry suffixedPadding, EdgeInsetsGeometry unsuffixedPadding, EdgeInsetsGeometry margin})
+  selectInsets({required bool touch}) => touch
+      ? (
+          suffixedPadding: const EdgeInsetsDirectional.fromSTEB(10, 12.5, 6, 12.5),
+          unsuffixedPadding: const .symmetric(horizontal: 10, vertical: 12.5),
+          margin: const .symmetric(horizontal: 4),
+        )
+      : (
+          suffixedPadding: const EdgeInsetsDirectional.fromSTEB(10, 6.5, 5, 6.5),
+          unsuffixedPadding: const .symmetric(horizontal: 10, vertical: 6.5),
+          margin: const .symmetric(horizontal: 4),
+        );
 
   /// The item's outer shape when outside of an [FItemGroup] or other similar groups.
   ///
@@ -621,7 +640,7 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
     required FStyle style,
     required bool touch,
   }) {
-    final (padding, margin) = FItemStyle.menuInsets(touch: touch);
+    final (:suffixedPadding, :unsuffixedPadding, :margin) = FItemStyle.menuInsets(touch: touch);
     return FItemStyle(
       backgroundColor: FVariants(
         colors.background,
@@ -649,14 +668,15 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
         prefix: colors.primary,
         foreground: colors.foreground,
         mutedForeground: colors.mutedForeground,
-        padding: padding,
+        suffixedPadding: suffixedPadding,
+        unsuffixedPadding: unsuffixedPadding,
       ),
       rawItemContentStyle: .inherit(
         colors: colors,
         typography: typography,
         prefix: colors.foreground,
         color: colors.foreground,
-        padding: padding,
+        padding: unsuffixedPadding,
       ),
       tappableStyle: style.tappableStyle.copyWith(
         motion: FTappableMotion.none,

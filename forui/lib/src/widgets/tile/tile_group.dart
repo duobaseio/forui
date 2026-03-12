@@ -121,6 +121,14 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
   /// True if the group is enabled. Defaults to true.
   final bool? enabled;
 
+  /// {@template forui.widgets.FTileGroup.intrinsicWidth}
+  /// Whether the group should intrinsically size to the widest child. Defaults to false.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if a [FTileGroup.builder] is used in a [FTileGroup.merge] that has intrinsic width.
+  /// {@endtemplate}
+  final bool? intrinsicWidth;
+
   /// The group's semantic label.
   ///
   /// It is ignored if the group is part of a merged [FTileGroup].
@@ -141,9 +149,9 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
   /// It is not rendered if the group is disabled or part of a merged [FTileGroup].
   final Widget? error;
 
-  /// The delegate that builds the sliver children.
+  /// The delegate that builds the children. Returns a [Column] when intrinsic width is requested, a sliver otherwise.
   // ignore: avoid_positional_boolean_parameters
-  final Widget Function(FTileGroupStyle style, bool scrollable) _builder;
+  final Widget Function(FTileGroupStyle style, bool enabled, bool useIntrinsicWidth) _builder;
 
   /// {@template forui.widgets.FTileGroup.new}
   /// Creates a [FTileGroup].
@@ -157,6 +165,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
     this.dragStartBehavior = .start,
     this.physics = const ClampingScrollPhysics(),
     this.enabled,
+    this.intrinsicWidth,
     this.divider = .indented,
     this.semanticsLabel,
     this.label,
@@ -164,12 +173,13 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
     this.error,
     super.key,
   }) : assert(0 < maxHeight, 'maxHeight ($maxHeight) must be > 0'),
-       _builder = ((style, enabled) => SliverList.list(
-         children: [
+       _builder = ((style, enabled, intrinsicWidth) {
+         final nested = [
            for (final (index, child) in children.indexed)
              FInheritedItemData.merge(
                styles: style.tileStyles.toItemStyles(),
                enabled: enabled,
+               intrinsicWidth: intrinsicWidth,
                dividerColor: style.dividerColor,
                dividerWidth: style.dividerWidth,
                divider: divider,
@@ -177,8 +187,9 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
                last: index == children.length - 1,
                child: child,
              ),
-         ],
-       ));
+         ];
+         return intrinsicWidth ? Column(mainAxisSize: .min, children: nested) : SliverList.list(children: nested);
+       });
 
   /// Creates a [FTileGroup] that lazily builds its children.
   ///
@@ -215,25 +226,29 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
     super.key,
   }) : assert(0 < maxHeight, 'maxHeight ($maxHeight) must be > 0'),
        assert(count == null || 0 <= count, 'count ($count) must be >= 0'),
-       _builder = ((style, enabled) => SliverList.builder(
-         itemCount: count,
-         itemBuilder: (context, index) {
-           if (tileBuilder(context, index) case final tile?) {
-             return FInheritedItemData.merge(
-               styles: style.tileStyles.toItemStyles(),
-               enabled: enabled,
-               dividerColor: style.dividerColor,
-               dividerWidth: style.dividerWidth,
-               divider: divider,
-               index: index,
-               last: (count != null && index == count - 1) || tileBuilder(context, index + 1) == null,
-               child: tile,
-             );
-           }
+       intrinsicWidth = null,
+       _builder = ((style, enabled, intrinsicWidth) {
+         assert(!intrinsicWidth, 'FTileGroup.builder does not support intrinsic width.');
+         return SliverList.builder(
+           itemCount: count,
+           itemBuilder: (context, index) {
+             if (tileBuilder(context, index) case final tile?) {
+               return FInheritedItemData.merge(
+                 styles: style.tileStyles.toItemStyles(),
+                 enabled: enabled,
+                 dividerColor: style.dividerColor,
+                 dividerWidth: style.dividerWidth,
+                 divider: divider,
+                 index: index,
+                 last: (count != null && index == count - 1) || tileBuilder(context, index + 1) == null,
+                 child: tile,
+               );
+             }
 
-           return null;
-         },
-       ));
+             return null;
+           },
+         );
+       });
 
   /// {@template forui.widgets.FTileGroup.merge}
   /// Creates a [FTileGroup] that merges multiple [FTileGroupMixin]s together.
@@ -249,6 +264,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
     this.dragStartBehavior = .start,
     this.physics = const ClampingScrollPhysics(),
     this.enabled,
+    this.intrinsicWidth,
     this.divider = .full,
     this.semanticsLabel,
     this.label,
@@ -256,12 +272,13 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
     this.error,
     super.key,
   }) : assert(0 < maxHeight, 'maxHeight ($maxHeight) must be > 0'),
-       _builder = ((style, enabled) => SliverMainAxisGroup(
-         slivers: [
+       _builder = ((style, enabled, intrinsicWidth) {
+         final nested = [
            for (final (index, child) in children.indexed)
              FInheritedItemData.merge(
                styles: style.tileStyles.toItemStyles(),
                enabled: enabled,
+               intrinsicWidth: intrinsicWidth,
                dividerColor: style.dividerColor,
                dividerWidth: style.dividerWidth,
                divider: divider,
@@ -269,30 +286,42 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
                last: index == children.length - 1,
                child: child,
              ),
-         ],
-       ));
+         ];
+         return intrinsicWidth ? Column(mainAxisSize: .min, children: nested) : SliverMainAxisGroup(slivers: nested);
+       });
 
   @override
   Widget build(BuildContext context) {
     final data = FInheritedItemData.maybeOf(context);
     final style = this.style(FTileGroupStyleData.of(context));
     final enabled = this.enabled ?? data?.enabled ?? true;
+    final intrinsicWidth = this.intrinsicWidth ?? data?.intrinsicWidth ?? false;
 
-    final sliver = _builder(style, enabled);
+    // When nested.
     if (data != null) {
-      return sliver;
+      return _builder(style, enabled, intrinsicWidth);
     }
 
+    // When root.
     Widget child = FTileGroupStyleData(
       style: style,
-      child: CustomScrollView(
-        controller: scrollController,
-        cacheExtent: cacheExtent,
-        dragStartBehavior: dragStartBehavior,
-        shrinkWrap: true,
-        physics: physics,
-        slivers: [sliver],
-      ),
+      child: intrinsicWidth
+          ? IntrinsicWidth(
+              child: SingleChildScrollView(
+                controller: scrollController,
+                dragStartBehavior: dragStartBehavior,
+                physics: physics,
+                child: _builder(style, enabled, true),
+              ),
+            )
+          : CustomScrollView(
+              controller: scrollController,
+              cacheExtent: cacheExtent,
+              dragStartBehavior: dragStartBehavior,
+              shrinkWrap: true,
+              physics: physics,
+              slivers: [_builder(style, enabled, false)],
+            ),
     );
 
     if (maxHeight.isInfinite && style.slideableTiles.resolve({context.platformVariant})) {
@@ -340,6 +369,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior))
       ..add(DiagnosticsProperty('physics', physics))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
+      ..add(FlagProperty('intrinsicWidth', value: intrinsicWidth, ifTrue: 'intrinsicWidth'))
       ..add(EnumProperty('divider', divider))
       ..add(StringProperty('semanticsLabel', semanticsLabel));
   }
@@ -417,57 +447,57 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
     required FColors colors,
     required FTypography typography,
     required FStyle style,
-    required bool touch,
   }) => .new(
-    decoration: ShapeDecoration(
-      shape: RoundedSuperellipseBorder(
-        side: BorderSide(color: colors.border, width: style.borderWidth),
-        borderRadius: style.borderRadius.md,
-      ),
-    ),
-    dividerColor: .all(colors.border),
-    dividerWidth: style.borderWidth,
-    slideableTiles: const .all(true),
-    labelTextStyle: FVariants.from(
-      typography.sm.copyWith(
-        color: style.formFieldStyle.labelTextStyle.base.color ?? colors.foreground,
-        fontWeight: .w600,
-      ),
-      variants: {
-        [.disabled]: .delta(color: colors.disable(colors.foreground)),
-      },
-    ),
-    tileStyles: FVariants.from(
-      .inherit(
-        colors: colors,
-        typography: typography,
-        style: style,
-      ).copyWith(decoration: .delta([.all(const .shapeDelta(shape: RoundedSuperellipseBorder()))])),
-      variants: {
-        [.destructive]: .delta(
-          contentStyle: FItemContentStyle.inherit(
-            colors: colors,
-            typography: typography,
-            prefix: colors.destructive,
-            foreground: colors.destructive,
-            mutedForeground: colors.destructive,
-            padding: FItemStyle.menuInsets(touch: touch).$1,
-          ),
-          rawItemContentStyle: FRawItemContentStyle.inherit(
-            colors: colors,
-            typography: typography,
-            prefix: colors.destructive,
-            color: colors.destructive,
-            padding: FItemStyle.menuInsets(touch: touch).$1,
-          ),
+      decoration: ShapeDecoration(
+        shape: RoundedSuperellipseBorder(
+          side: BorderSide(color: colors.border, width: style.borderWidth),
+          borderRadius: style.borderRadius.md,
         ),
-      },
-    ),
-    descriptionTextStyle: style.formFieldStyle.descriptionTextStyle.apply([
-      .all(.delta(fontSize: typography.xs2.fontSize, height: typography.xs2.height)),
-    ]),
-    errorTextStyle: style.formFieldStyle.errorTextStyle.apply([
-      .all(.delta(fontSize: typography.xs2.fontSize, height: typography.xs2.height)),
-    ]),
-  );
+      ),
+      dividerColor: .all(colors.border),
+      dividerWidth: style.borderWidth,
+      slideableTiles: const .all(true),
+      labelTextStyle: FVariants.from(
+        typography.sm.copyWith(
+          color: style.formFieldStyle.labelTextStyle.base.color ?? colors.foreground,
+          fontWeight: .w600,
+        ),
+        variants: {
+          [.disabled]: .delta(color: colors.disable(colors.foreground)),
+        },
+      ),
+      tileStyles: FVariants.from(
+        FTileStyle.inherit(
+          colors: colors,
+          typography: typography,
+          style: style,
+        ).copyWith(decoration: .delta([.all(const .shapeDelta(shape: RoundedSuperellipseBorder()))])),
+        variants: {
+          [.destructive]: .delta(
+            contentStyle: FItemContentStyle.inherit(
+              colors: colors,
+              typography: typography,
+              prefix: colors.destructive,
+              foreground: colors.destructive,
+              mutedForeground: colors.destructive,
+              suffixedPadding: FTileStyle.defaultSuffixedPadding,
+              unsuffixedPadding: FTileStyle.defaultUnsuffixedPadding,
+            ),
+            rawItemContentStyle: FRawItemContentStyle.inherit(
+              colors: colors,
+              typography: typography,
+              prefix: colors.destructive,
+              color: colors.destructive,
+              padding: FTileStyle.defaultUnsuffixedPadding,
+            ),
+          ),
+        },
+      ),
+      descriptionTextStyle: style.formFieldStyle.descriptionTextStyle.apply([
+        .all(.delta(fontSize: typography.xs2.fontSize, height: typography.xs2.height)),
+      ]),
+      errorTextStyle: style.formFieldStyle.errorTextStyle.apply([
+        .all(.delta(fontSize: typography.xs2.fontSize, height: typography.xs2.height)),
+      ]),
+    );
 }

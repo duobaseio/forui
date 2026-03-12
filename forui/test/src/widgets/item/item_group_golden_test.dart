@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
@@ -624,6 +625,57 @@ void main() {
       );
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('item/group/builder/null-limited.png'));
+    });
+  });
+
+  group('intrinsic width', () {
+    setUp(() => debugCheckIntrinsicSizes = true);
+    tearDown(() => debugCheckIntrinsicSizes = false);
+
+    testWidgets('all children', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FItemGroup(
+            intrinsicWidth: true,
+            children: [
+              FItem(
+                prefix: const Icon(FIcons.bluetooth),
+                title: const Text('Bluetooth'),
+                subtitle: const Text('Fee, Fo, Fum'),
+                details: const Text('FL (5G)'),
+                suffix: const Icon(FIcons.chevronRight),
+                onPress: () {},
+              ),
+              FItem(
+                prefix: const Icon(FIcons.wifi),
+                title: const Text('WiFi'),
+                subtitle: const Text('Connected'),
+                details: const Text('Duobase (5G)'),
+                suffix: const Icon(FIcons.chevronRight),
+                onPress: () {},
+              ),
+            ],
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('item/group/intrinsic-width-all.png'));
+    });
+
+    testWidgets('minimal', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FItemGroup(
+            intrinsicWidth: true,
+            children: [
+              FItem(title: const Text('Bluetooth')),
+              FItem(title: const Text('WiFi')),
+            ],
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('item/group/intrinsic-width-minimal.png'));
     });
   });
 }

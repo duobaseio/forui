@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
@@ -652,5 +653,42 @@ void main() {
     );
 
     await expectLater(find.byType(TestScaffold), matchesGoldenFile('tile/group/merge/override-state.png'));
+  });
+
+  group('intrinsic width', () {
+    setUp(() => debugCheckIntrinsicSizes = true);
+    tearDown(() => debugCheckIntrinsicSizes = false);
+
+    testWidgets('intrinsic in intrinsic', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FTileGroup.merge(
+            intrinsicWidth: true,
+            label: const Text('Network'),
+            children: [
+              FTileGroup(
+                intrinsicWidth: true,
+                children: [
+                  .tile(title: const Text('Group 1 Tile 1')),
+                  .tile(title: const Text('Group 1 Tile 2')),
+                ],
+              ),
+              FTileGroup(
+                intrinsicWidth: true,
+                children: [
+                  .tile(title: const Text('Group 2 Tile 1')),
+                  .tile(title: const Text('Group 2 Tile 2')),
+                ],
+              ),
+            ],
+          ),
+        ),
+      );
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('tile/group/merge/intrinsic-width-in-intrinsic.png'),
+      );
+    });
   });
 }

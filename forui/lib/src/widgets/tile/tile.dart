@@ -359,6 +359,12 @@ extension FTileStylesConversion on FVariants<FItemVariantConstraint, FItemVarian
 
 /// A [FTile]'s style.
 class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
+  /// The default padding for suffixed tiles.
+  static const EdgeInsetsGeometry defaultSuffixedPadding = .fromSTEB(15, 14.5, 13, 14.5);
+
+  /// The default padding for unsuffixed tiles.
+  static const EdgeInsetsGeometry defaultUnsuffixedPadding = .symmetric(horizontal: 15, vertical: 14.5);
+
   /// Creates a [FTileStyle].
   FTileStyle({
     required super.backgroundColor,
@@ -421,7 +427,8 @@ class FTileContentStyle extends FItemContentStyle with _$FTileContentStyleFuncti
     required super.subtitleTextStyle,
     required super.detailsTextStyle,
     required super.suffixIconStyle,
-    super.padding = const .directional(start: 15, top: 14.5, bottom: 14.5, end: 13),
+    super.suffixedPadding = FTileStyle.defaultSuffixedPadding,
+    super.unsuffixedPadding = FTileStyle.defaultUnsuffixedPadding,
     super.prefixIconSpacing = 10,
     super.titleSpacing = 3,
     super.middleSpacing = 4,
@@ -478,7 +485,7 @@ class FRawTileContentStyle extends FRawItemContentStyle with _$FRawTileContentSt
   FRawTileContentStyle({
     required super.prefixIconStyle,
     required super.childTextStyle,
-    super.padding = const .directional(start: 15, top: 14.5, bottom: 14.5, end: 13),
+    super.padding = FTileStyle.defaultUnsuffixedPadding,
     super.prefixIconSpacing = 10,
   });
 

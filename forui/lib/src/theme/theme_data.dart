@@ -723,7 +723,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       tileStyles: tileStyles == null
           ? FTileStyles.inherit(colors: colors, typography: typography, style: style)
           : FTileStyles(tileStyles),
-      tileGroupStyle: tileGroupStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
+      tileGroupStyle: tileGroupStyle ?? .inherit(colors: colors, typography: typography, style: style),
       timeFieldStyle: timeFieldStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       timePickerStyle: timePickerStyle ?? .inherit(colors: colors, typography: typography, style: style),
       tooltipStyle: tooltipStyle ?? .inherit(colors: colors, typography: typography, style: style),
