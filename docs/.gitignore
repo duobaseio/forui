@@ -1,5 +1,6 @@
 # deps
 /node_modules
+package-lock.json
 
 # open next
 .open-next
