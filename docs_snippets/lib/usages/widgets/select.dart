@@ -20,6 +20,7 @@ final select = FSelect<String>(
   forceErrorText: null,
   validator: (value) => null,
   errorBuilder: FFormFieldProperties.defaultErrorBuilder,
+  formFieldKey: null,
   // {@endcategory}
   // {@category "Field"}
   hint: 'Select a fruit',
@@ -83,6 +84,7 @@ final selectRich = FSelect<String>.rich(
   forceErrorText: null,
   validator: (value) => null,
   errorBuilder: FFormFieldProperties.defaultErrorBuilder,
+  formFieldKey: null,
   // {@endcategory}
   // {@category "Field"}
   hint: 'Select a fruit',
@@ -151,6 +153,7 @@ final selectSearch = FSelect<String>.search(
   forceErrorText: null,
   validator: (value) => null,
   errorBuilder: FFormFieldProperties.defaultErrorBuilder,
+  formFieldKey: null,
   // {@endcategory}
   // {@category "Field"}
   hint: 'Search fruits',
@@ -218,6 +221,7 @@ final selectSearchBuilder = FSelect<String>.searchBuilder(
   forceErrorText: null,
   validator: (value) => null,
   errorBuilder: FFormFieldProperties.defaultErrorBuilder,
+  formFieldKey: null,
   // {@endcategory}
   // {@category "Field"}
   hint: 'Search fruits',

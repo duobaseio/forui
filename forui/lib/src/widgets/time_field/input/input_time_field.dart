@@ -40,6 +40,7 @@ class _InputTimeField extends FTimeField {
     super.autovalidateMode,
     super.forceErrorText,
     super.errorBuilder,
+    super.formFieldKey,
     super.key,
   }) : super._();
 
@@ -102,6 +103,7 @@ class _InputTimeFieldState extends _FTimeFieldState<_InputTimeField> {
       onTap: null,
       canRequestFocus: widget.canRequestFocus,
       clearable: widget.clearable,
+      formFieldKey: widget.formFieldKey,
       prefixBuilder: widget.prefixBuilder,
       suffixBuilder: widget.suffixBuilder,
       localizations: FLocalizations.of(context) ?? FDefaultLocalizations(),

@@ -61,6 +61,20 @@ void main() {
     expect(longPress, 1);
   });
 
+  testWidgets('long press falls back to onPress when onLongPress is null', (tester) async {
+    var press = 0;
+    await tester.pumpWidget(
+      TestScaffold(
+        child: FItem(title: const Text('Lorem'), onPress: () => press++),
+      ),
+    );
+
+    await tester.longPress(find.byType(FItem));
+    await tester.pumpAndSettle(const Duration(seconds: 5));
+
+    expect(press, 1);
+  });
+
   testWidgets('disabled long press', (tester) async {
     var press = 0;
     var longPress = 0;

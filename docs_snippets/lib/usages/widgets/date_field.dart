@@ -19,6 +19,7 @@ final dateField = FDateField(
   autovalidateMode: .onUnfocus,
   forceErrorText: null,
   errorBuilder: FFormFieldProperties.defaultErrorBuilder,
+  formFieldKey: null,
   // {@endcategory}
   // {@category "Field"}
   textInputAction: null,
@@ -66,6 +67,7 @@ final calendar = FDateField.calendar(
   autovalidateMode: .onUnfocus,
   forceErrorText: null,
   errorBuilder: FFormFieldProperties.defaultErrorBuilder,
+  formFieldKey: null,
   // {@endcategory}
   // {@category "Field"}
   format: null,
@@ -125,6 +127,7 @@ final input = FDateField.input(
   autovalidateMode: .onUnfocus,
   forceErrorText: null,
   errorBuilder: FFormFieldProperties.defaultErrorBuilder,
+  formFieldKey: null,
   // {@endcategory}
   // {@category "Field"}
   textInputAction: null,

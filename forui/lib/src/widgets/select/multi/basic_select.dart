@@ -48,6 +48,7 @@ class _BasicSelect<T> extends FMultiSelect<T> {
     super.contentPhysics,
     super.contentDivider,
     super.tagBuilder,
+    super.formFieldKey,
     super.key,
   }) : super._();
 

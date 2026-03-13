@@ -223,6 +223,9 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
   @override
   final AutovalidateMode autovalidateMode;
 
+  /// {@macro forui.foundation.doc_templates.formFieldKey}
+  final Key? formFieldKey;
+
   final List<FSelectTile<T>>? _menu;
   final FSelectTile<T>? Function(BuildContext context, int index)? _menuBuilder;
   final int? _count;
@@ -279,6 +282,7 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
     this.forceErrorText,
     this.enabled = true,
     this.autovalidateMode = .disabled,
+    this.formFieldKey,
     super.key,
   }) : _menu = menu,
        _menuBuilder = null,
@@ -340,6 +344,7 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
     String? forceErrorText,
     bool enabled = true,
     AutovalidateMode autovalidateMode = .disabled,
+    Key? formFieldKey,
     Key? key,
   }) => .new(
     title: title,
@@ -390,6 +395,7 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
     forceErrorText: forceErrorText,
     enabled: enabled,
     autovalidateMode: autovalidateMode,
+    formFieldKey: formFieldKey,
     key: key,
   );
 
@@ -460,6 +466,7 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
     this.forceErrorText,
     this.enabled = true,
     this.autovalidateMode = .disabled,
+    this.formFieldKey,
     super.key,
   }) : _menu = null,
        _menuBuilder = menuBuilder,
@@ -517,7 +524,8 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
       ..add(ObjectFlagProperty.has('validator', validator))
       ..add(StringProperty('forceErrorText', forceErrorText))
       ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
-      ..add(EnumProperty('autovalidateMode', autovalidateMode));
+      ..add(EnumProperty('autovalidateMode', autovalidateMode))
+      ..add(DiagnosticsProperty('formFieldKey', formFieldKey));
   }
 }
 
@@ -579,6 +587,7 @@ class _FSelectMenuTileState<T> extends State<FSelectMenuTile<T>> with TickerProv
         : selectMenuTileStyle.tileStyle;
 
     return MultiValueFormField<T>(
+      key: widget.formFieldKey,
       controller: _controller,
       enabled: widget.enabled,
       onSaved: widget.onSaved,

@@ -98,6 +98,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     AutovalidateMode autovalidateMode = .disabled,
     String? forceErrorText,
     Widget Function(BuildContext context, String message) errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+    Key? formFieldKey,
     Key? key,
   }) => PasswordFormField(
     control: control,
@@ -170,6 +171,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     autovalidateMode: autovalidateMode,
     forceErrorText: forceErrorText,
     errorBuilder: errorBuilder,
+    formFieldKey: formFieldKey,
     key: key,
   );
 
@@ -378,6 +380,9 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   @override
   final Widget Function(BuildContext context, String message) errorBuilder;
 
+  /// {@macro forui.foundation.doc_templates.formFieldKey}
+  final Key? formFieldKey;
+
   /// Creates a [FTextFormField].
   const FTextFormField({
     this.control = const .managed(),
@@ -447,6 +452,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     this.autovalidateMode = .disabled,
     this.forceErrorText,
     this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+    this.formFieldKey,
     super.key,
   });
 
@@ -519,6 +525,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     this.autovalidateMode = .disabled,
     this.forceErrorText,
     this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+    this.formFieldKey,
     super.key,
   });
 
@@ -595,6 +602,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     this.autovalidateMode = .disabled,
     this.forceErrorText,
     this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+    this.formFieldKey,
     super.key,
   });
 
@@ -602,6 +610,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   Widget build(BuildContext context) => TextFieldControl(
     control: control,
     builder: (context, controller, _) => FormInput(
+      key: formFieldKey,
       controller: controller,
       onSaved: onSaved,
       onReset: onReset,
@@ -677,7 +686,6 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
         suffixBuilder: suffixBuilder,
         clearable: clearable,
         clearIconBuilder: clearIconBuilder,
-        key: key,
       ),
     ),
   );
@@ -759,6 +767,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
       ..add(ObjectFlagProperty.has('validator', validator))
       ..add(EnumProperty('autovalidateMode', autovalidateMode))
       ..add(StringProperty('forceErrorText', forceErrorText))
-      ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder));
+      ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
+      ..add(DiagnosticsProperty('formFieldKey', formFieldKey));
   }
 }

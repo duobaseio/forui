@@ -137,6 +137,9 @@ class FSelectGroup<T> extends StatefulWidget with FFormFieldProperties<Set<T>> {
   @override
   final AutovalidateMode autovalidateMode;
 
+  /// {@macro forui.foundation.doc_templates.formFieldKey}
+  final Key? formFieldKey;
+
   /// Creates a [FSelectGroup].
   const FSelectGroup({
     required this.children,
@@ -151,6 +154,7 @@ class FSelectGroup<T> extends StatefulWidget with FFormFieldProperties<Set<T>> {
     this.forceErrorText,
     this.enabled = true,
     this.autovalidateMode = .disabled,
+    this.formFieldKey,
     super.key,
   });
 
@@ -169,7 +173,8 @@ class FSelectGroup<T> extends StatefulWidget with FFormFieldProperties<Set<T>> {
       ..add(ObjectFlagProperty.has('validator', validator))
       ..add(StringProperty('forceErrorText', forceErrorText))
       ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
-      ..add(EnumProperty('autovalidateMode', autovalidateMode));
+      ..add(EnumProperty('autovalidateMode', autovalidateMode))
+      ..add(DiagnosticsProperty('formFieldKey', formFieldKey));
   }
 }
 
@@ -202,6 +207,7 @@ class _FSelectGroupState<T> extends State<FSelectGroup<T>> {
     final groupStyle = widget.style(context.theme.selectGroupStyle);
 
     return MultiValueFormField<T>(
+      key: widget.formFieldKey,
       controller: _controller,
       enabled: widget.enabled,
       onSaved: widget.onSaved,

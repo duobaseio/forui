@@ -108,6 +108,9 @@ class FSelectTileGroup<T> extends StatefulWidget with FTileGroupMixin, FFormFiel
   @override
   final AutovalidateMode autovalidateMode;
 
+  /// {@macro forui.foundation.doc_templates.formFieldKey}
+  final Key? formFieldKey;
+
   final List<FSelectTile<T>>? _children;
   final FSelectTile<T>? Function(BuildContext context, int index)? _tileBuilder;
   final int? _count;
@@ -136,6 +139,7 @@ class FSelectTileGroup<T> extends StatefulWidget with FTileGroupMixin, FFormFiel
     this.forceErrorText,
     this.enabled = true,
     this.autovalidateMode = .disabled,
+    this.formFieldKey,
     super.key,
   }) : _children = children,
        _tileBuilder = null,
@@ -167,6 +171,7 @@ class FSelectTileGroup<T> extends StatefulWidget with FTileGroupMixin, FFormFiel
     this.forceErrorText,
     this.enabled = true,
     this.autovalidateMode = .disabled,
+    this.formFieldKey,
     super.key,
   }) : intrinsicWidth = false,
        _children = null,
@@ -196,7 +201,8 @@ class FSelectTileGroup<T> extends StatefulWidget with FTileGroupMixin, FFormFiel
       ..add(ObjectFlagProperty.has('validator', validator))
       ..add(StringProperty('forceErrorText', forceErrorText))
       ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
-      ..add(EnumProperty('autovalidateMode', autovalidateMode));
+      ..add(EnumProperty('autovalidateMode', autovalidateMode))
+      ..add(DiagnosticsProperty('formFieldKey', formFieldKey));
   }
 }
 
@@ -234,6 +240,7 @@ class _FSelectTileGroupState<T> extends State<FSelectTileGroup<T>> {
     final groupStyle = widget.style(context.theme.tileGroupStyle);
 
     return MultiValueFormField<T>(
+      key: widget.formFieldKey,
       controller: _controller,
       enabled: widget.enabled,
       onSaved: widget.onSaved,

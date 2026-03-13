@@ -17,6 +17,7 @@ final selectTileGroup = FSelectTileGroup<String>(
   forceErrorText: null,
   validator: (values) => null,
   errorBuilder: FFormFieldProperties.defaultErrorBuilder,
+  formFieldKey: null,
   // {@endcategory}
   // {@category "Scroll"}
   scrollController: null,
@@ -54,6 +55,7 @@ final selectTileGroupBuilder = FSelectTileGroup<String>.builder(
   forceErrorText: null,
   validator: (values) => null,
   errorBuilder: FFormFieldProperties.defaultErrorBuilder,
+  formFieldKey: null,
   // {@endcategory}
   // {@category "Scroll"}
   scrollController: null,

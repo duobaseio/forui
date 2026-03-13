@@ -15,6 +15,7 @@ final textFormField = FTextFormField(
   autovalidateMode: .disabled,
   forceErrorText: null,
   errorBuilder: (context, message) => Text(message),
+  formFieldKey: null,
   // {@endcategory}
   // {@category "Appearance"}
   expands: false,
@@ -103,6 +104,7 @@ final textFormFieldEmail = FTextFormField.email(
   autovalidateMode: .disabled,
   forceErrorText: null,
   errorBuilder: (context, message) => Text(message),
+  formFieldKey: null,
   // {@endcategory}
   // {@category "Appearance"}
   expands: false,
@@ -191,6 +193,7 @@ final textFormFieldMultiline = FTextFormField.multiline(
   autovalidateMode: .disabled,
   forceErrorText: null,
   errorBuilder: (context, message) => Text(message),
+  formFieldKey: null,
   // {@endcategory}
   // {@category "Appearance"}
   expands: false,
@@ -282,6 +285,7 @@ final textFormFieldPassword = FTextFormField.password(
   autovalidateMode: .disabled,
   forceErrorText: null,
   errorBuilder: (context, message) => Text(message),
+  formFieldKey: null,
   // {@endcategory}
   // {@category "Appearance"}
   expands: false,

@@ -131,7 +131,7 @@ class FModalBarrier extends StatelessWidget {
   /// {@template forui.foundation.FModalBarrier.cutoutBuilder}
   /// An optional callback that customizes the cutout shape.
   ///
-  /// Defaults to [defaultCutoutBuilder] which adds a plain rectangle matching the [cutout]'s bounds.
+  /// Defaults to [FModalBarrier.defaultCutoutBuilder] which adds a plain rectangle matching the [cutout]'s bounds.
   /// {@endtemplate}
   final void Function(Path path, Rect bounds) cutoutBuilder;
 

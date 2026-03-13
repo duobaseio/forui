@@ -43,7 +43,7 @@ part 'tile_group.design.dart';
 ///
 /// {@macro forui.widgets.label.error_transition}
 ///
-/// {@macro forui.foundation.FTappableGroup.overlay}
+/// {@macro forui.foundation.doc_templates.overlay}
 ///
 ///
 /// See:

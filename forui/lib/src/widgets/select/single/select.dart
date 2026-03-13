@@ -226,6 +226,9 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// The divider used to separate the content items. Defaults to [FItemDivider.none].
   final FItemDivider contentDivider;
 
+  /// {@macro forui.foundation.doc_templates.formFieldKey}
+  final Key? formFieldKey;
+
   /// Creates a [FSelect] from the given [items].
   ///
   /// For more control over the appearance of items, use [FSelect.rich].
@@ -280,6 +283,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     bool contentScrollHandles = false,
     ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
     FItemDivider contentDivider = .none,
+    Key? formFieldKey,
     Key? key,
   }) {
     final inverse = {for (final MapEntry(:key, :value) in items.entries) value: key};
@@ -330,6 +334,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       contentScrollHandles: contentScrollHandles,
       contentPhysics: contentPhysics,
       contentDivider: contentDivider,
+      formFieldKey: formFieldKey,
       key: key,
       children: [for (final MapEntry(:key, :value) in items.entries) .item(title: Text(key), value: value)],
     );
@@ -384,6 +389,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     bool contentScrollHandles,
     ScrollPhysics contentPhysics,
     FItemDivider contentDivider,
+    Key? formFieldKey,
     Key? key,
   }) = _BasicSelect<T>;
 
@@ -454,6 +460,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     bool contentScrollHandles = false,
     ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
     FItemDivider contentDivider = .none,
+    Key? formFieldKey,
     Key? key,
   }) {
     final inverse = {for (final MapEntry(:key, :value) in items.entries) value: key};
@@ -516,6 +523,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       contentScrollHandles: contentScrollHandles,
       contentPhysics: contentPhysics,
       contentDivider: contentDivider,
+      formFieldKey: formFieldKey,
       key: key,
     );
   }
@@ -581,6 +589,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     bool contentScrollHandles,
     ScrollPhysics contentPhysics,
     FItemDivider contentDivider,
+    Key? formFieldKey,
     Key? key,
   }) = _SearchSelect<T>;
 
@@ -631,6 +640,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     this.contentScrollHandles = false,
     this.contentPhysics = const ClampingScrollPhysics(),
     this.contentDivider = .none,
+    this.formFieldKey,
     super.key,
   });
 
@@ -681,7 +691,8 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       ..add(DiagnosticsProperty('contentScrollController', contentScrollController))
       ..add(FlagProperty('contentScrollHandles', value: contentScrollHandles, ifTrue: 'contentScrollHandles'))
       ..add(DiagnosticsProperty('contentPhysics', contentPhysics))
-      ..add(EnumProperty('contentDivider', contentDivider));
+      ..add(EnumProperty('contentDivider', contentDivider))
+      ..add(DiagnosticsProperty('formFieldKey', formFieldKey));
   }
 }
 
@@ -774,6 +785,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
 
     return Field<T>(
+      key: widget.formFieldKey,
       controller: _controller,
       enabled: widget.enabled,
       autovalidateMode: widget.autovalidateMode,

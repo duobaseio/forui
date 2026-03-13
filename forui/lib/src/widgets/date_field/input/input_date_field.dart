@@ -47,6 +47,7 @@ class _InputDateField extends FDateField {
     super.autovalidateMode,
     super.forceErrorText,
     super.errorBuilder,
+    super.formFieldKey,
     super.key,
   }) : super._();
 
@@ -142,6 +143,7 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
         validator: _controller.validator,
         autovalidateMode: widget.autovalidateMode,
         forceErrorText: widget.forceErrorText,
+        formFieldKey: widget.formFieldKey,
         focusNode: _focus,
         textInputAction: widget.textInputAction,
         textAlign: widget.textAlign,
@@ -215,6 +217,7 @@ class _InputOnlyDateField extends FDateField {
     super.autovalidateMode,
     super.forceErrorText,
     super.errorBuilder,
+    super.formFieldKey,
     super.key,
   }) : super._();
 
@@ -287,6 +290,7 @@ class _InputOnlyDateFieldState extends _FDateFieldState<_InputOnlyDateField> {
       validator: _controller.validator,
       autovalidateMode: widget.autovalidateMode,
       forceErrorText: widget.forceErrorText,
+      formFieldKey: widget.formFieldKey,
       focusNode: _focus,
       textInputAction: widget.textInputAction,
       textAlign: widget.textAlign,

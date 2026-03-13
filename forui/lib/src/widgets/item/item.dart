@@ -144,7 +144,7 @@ mixin FItemMixin on Widget {
 /// );
 /// ```
 ///
-/// {@macro forui.foundation.FTappableGroup.overlay}
+/// {@macro forui.foundation.doc_templates.overlay}
 ///
 /// See:
 /// * https://forui.dev/docs/data/item for working examples.
@@ -442,10 +442,10 @@ class FItem extends StatelessWidget with FItemMixin {
             onVariantChange: onVariantChange,
             selected: selected,
             onPress: enabled ? (onPress ?? () {}) : null,
-            onLongPress: enabled ? (onLongPress ?? () {}) : null,
+            onLongPress: enabled ? onLongPress : null,
             onDoubleTap: enabled ? onDoubleTap : null,
-            onSecondaryPress: enabled ? (onSecondaryPress ?? () {}) : null,
-            onSecondaryLongPress: enabled ? (onSecondaryLongPress ?? () {}) : null,
+            onSecondaryPress: enabled ? onSecondaryPress : null,
+            onSecondaryLongPress: enabled ? onSecondaryLongPress : null,
             shortcuts: shortcuts,
             actions: actions,
             builder: (context, variants, _) {

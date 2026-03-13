@@ -35,7 +35,7 @@ typedef FTappableVariantChangeCallback = void Function(Set<FTappableVariant> pre
 /// It is typically used to create other high-level widgets, i.e., [FButton]. Unless you are creating a custom widget,
 /// you should use those high-level widgets instead.
 ///
-/// {@macro forui.foundation.FTappableGroup.overlay}
+/// {@macro forui.foundation.doc_templates.overlay}
 class FTappable extends StatefulWidget {
   /// The default builder that returns the child as-is.
   static Widget defaultBuilder(BuildContext _, Set<FTappableVariant> _, Widget? child) => child!;

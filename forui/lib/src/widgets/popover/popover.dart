@@ -271,7 +271,7 @@ class FPopover extends StatefulWidget {
   /// {@template forui.widgets.FPopover.cutoutBuilder}
   /// {@macro forui.foundation.FModalBarrier.cutoutBuilder}
   ///
-  /// Does nothing if [cutout] is false or [FPopoverStyle.barrierFilter] is null.
+  /// Does nothing if `cutout` is false or [FPopoverStyle.barrierFilter] is null.
   /// {@endtemplate}
   final void Function(Path path, Rect bounds) cutoutBuilder;
 

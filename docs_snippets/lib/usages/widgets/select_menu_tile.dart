@@ -20,6 +20,7 @@ final selectMenuTile = FSelectMenuTile<String>(
   validator: (values) => null,
   forceErrorText: null,
   autovalidateMode: .disabled,
+  formFieldKey: null,
   // {@endcategory}
   // {@category "Layout"}
   menuAnchor: .topRight,
@@ -88,6 +89,7 @@ final selectMenuTileBuilder = FSelectMenuTile<String>.builder(
   validator: (values) => null,
   forceErrorText: null,
   autovalidateMode: .disabled,
+  formFieldKey: null,
   // {@endcategory}
   // {@category "Layout"}
   menuAnchor: .topRight,

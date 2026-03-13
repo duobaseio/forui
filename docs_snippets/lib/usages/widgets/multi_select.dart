@@ -20,6 +20,7 @@ final multiSelect = FMultiSelect<String>(
   forceErrorText: null,
   validator: (values) => null,
   errorBuilder: FFormFieldProperties.defaultErrorBuilder,
+  formFieldKey: null,
   // {@endcategory}
   // {@category "Field"}
   hint: const Text('Select fruits'),
@@ -80,6 +81,7 @@ final multiSelectRich = FMultiSelect<String>.rich(
   forceErrorText: null,
   validator: (values) => null,
   errorBuilder: FFormFieldProperties.defaultErrorBuilder,
+  formFieldKey: null,
   // {@endcategory}
   // {@category "Field"}
   hint: const Text('Select fruits'),
@@ -145,6 +147,7 @@ final multiSelectSearch = FMultiSelect<String>.search(
   forceErrorText: null,
   validator: (values) => null,
   errorBuilder: FFormFieldProperties.defaultErrorBuilder,
+  formFieldKey: null,
   // {@endcategory}
   // {@category "Field"}
   hint: const Text('Search fruits'),
@@ -209,6 +212,7 @@ final multiSelectSearchBuilder = FMultiSelect<String>.searchBuilder(
   forceErrorText: null,
   validator: (values) => null,
   errorBuilder: FFormFieldProperties.defaultErrorBuilder,
+  formFieldKey: null,
   // {@endcategory}
   // {@category "Field"}
   hint: const Text('Search fruits'),

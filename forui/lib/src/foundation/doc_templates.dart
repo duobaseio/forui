@@ -84,7 +84,7 @@ extension Semantics on Never {
 
 @internal
 extension TappableGroup on Never {
-  /// {@template forui.foundation.FTappableGroup.overlay}
+  /// {@template forui.foundation.doc_templates.overlay}
   /// ## Why do tappables inside [OverlayPortal]s sometimes not respond to taps?
   ///
   /// Wrap the overlay content in [FTappableGroup.isolate].
@@ -96,6 +96,17 @@ extension TappableGroup on Never {
   /// [FPortal]-based widgets handle this automatically.
   /// {@endtemplate}
   static const overlay = '';
+}
+
+@internal
+extension FormFieldKey on Never {
+  /// {@template forui.foundation.doc_templates.formFieldKey}
+  /// The key to use for the internal [FormField].
+  ///
+  /// This can be used to obtain the [FormFieldState] using a [GlobalKey] to externally validate or access
+  /// the form field's state.
+  /// {@endtemplate}
+  static const formFieldKey = '';
 }
 
 @internal

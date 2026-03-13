@@ -20,6 +20,7 @@ final timeField = FTimeField(
   autovalidateMode: .onUnfocus,
   forceErrorText: null,
   errorBuilder: FFormFieldProperties.defaultErrorBuilder,
+  formFieldKey: null,
   // {@endcategory}
   // {@category "Field"}
   textInputAction: null,
@@ -63,6 +64,7 @@ final timeFieldPicker = FTimeField.picker(
   autovalidateMode: .onUnfocus,
   forceErrorText: null,
   errorBuilder: FFormFieldProperties.defaultErrorBuilder,
+  formFieldKey: null,
   // {@endcategory}
   // {@category "Field"}
   format: DateFormat.jm(),

@@ -31,6 +31,8 @@ class PasswordFormField extends StatelessWidget with FFormFieldProperties<String
   @override
   final Widget Function(BuildContext context, String message) errorBuilder;
 
+  final Key? formFieldKey;
+
   PasswordFormField({
     required this.control,
     required this.properties,
@@ -40,14 +42,15 @@ class PasswordFormField extends StatelessWidget with FFormFieldProperties<String
     required this.autovalidateMode,
     required this.forceErrorText,
     required this.errorBuilder,
+    this.formFieldKey,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) => TextFieldControl(
-    key: key,
     control: control,
     builder: (context, controller, _) => FormInput(
+      key: formFieldKey,
       controller: controller,
       onSaved: onSaved,
       onReset: onReset,
@@ -143,6 +146,7 @@ class PasswordFormField extends StatelessWidget with FFormFieldProperties<String
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('control', control))
-      ..add(DiagnosticsProperty('properties', properties));
+      ..add(DiagnosticsProperty('properties', properties))
+      ..add(DiagnosticsProperty('formFieldKey', formFieldKey));
   }
 }

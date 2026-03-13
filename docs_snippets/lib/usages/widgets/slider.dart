@@ -20,6 +20,7 @@ final slider = FSlider(
   validator: (value) => null,
   autovalidateMode: .disabled,
   forceErrorText: null,
+  formFieldKey: null,
   // {@endcategory}
   // {@category "Appearance"}
   trackMainAxisExtent: 200,

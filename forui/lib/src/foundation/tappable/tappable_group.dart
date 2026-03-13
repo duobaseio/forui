@@ -13,7 +13,7 @@ import 'package:forui/src/foundation/tappable/tappable_group_recognizer.dart';
 /// Only primary press and long-press gestures are group-managed. Other gestures like [FTappable.onDoubleTap],
 /// [FTappable.onSecondaryPress], and [FTappable.onSecondaryLongPress] remain on individual tappables.
 ///
-/// {@macro forui.foundation.FTappableGroup.overlay}
+/// {@macro forui.foundation.doc_templates.overlay}
 class FTappableGroup extends StatefulWidget {
   /// Prevents widgets in the [child] subtree from registering with ancestor [FTappableGroup]s.
   ///

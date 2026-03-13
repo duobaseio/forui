@@ -151,6 +151,9 @@ abstract class FTimeField extends StatefulWidget {
   /// [FTimeFieldController.validator] will not be called unless [forceErrorText] is null.
   final String? forceErrorText;
 
+  /// {@macro forui.foundation.doc_templates.formFieldKey}
+  final Key? formFieldKey;
+
   const FTimeField._({
     this.control = const .managed(),
     this.popoverControl = const .managed(),
@@ -171,6 +174,7 @@ abstract class FTimeField extends StatefulWidget {
     this.autovalidateMode = .onUnfocus,
     this.forceErrorText,
     this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+    this.formFieldKey,
     super.key,
   });
 
@@ -228,6 +232,7 @@ abstract class FTimeField extends StatefulWidget {
     AutovalidateMode autovalidateMode,
     String? forceErrorText,
     Widget Function(BuildContext context, String message) errorBuilder,
+    Key? formFieldKey,
     Key? key,
   }) = _InputTimeField;
 
@@ -322,6 +327,7 @@ abstract class FTimeField extends StatefulWidget {
     AutovalidateMode autovalidateMode,
     String? forceErrorText,
     Widget Function(BuildContext context, String message) errorBuilder,
+    Key? formFieldKey,
     Key? key,
   }) = _PickerTimeField;
 
@@ -345,7 +351,8 @@ abstract class FTimeField extends StatefulWidget {
       ..add(ObjectFlagProperty.has('onSaved', onSaved))
       ..add(ObjectFlagProperty.has('onReset', onReset))
       ..add(EnumProperty('autovalidateMode', autovalidateMode))
-      ..add(StringProperty('forceErrorText', forceErrorText));
+      ..add(StringProperty('forceErrorText', forceErrorText))
+      ..add(DiagnosticsProperty('formFieldKey', formFieldKey));
   }
 }
 

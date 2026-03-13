@@ -119,6 +119,9 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderValue> {
   @override
   final String? forceErrorText;
 
+  /// {@macro forui.foundation.doc_templates.formFieldKey}
+  final Key? formFieldKey;
+
   /// Creates a [FSlider].
   FSlider({
     this.control = const .managedContinuous(),
@@ -141,6 +144,7 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderValue> {
     this.forceErrorText,
     this.enabled = true,
     this.autovalidateMode = .disabled,
+    this.formFieldKey,
     super.key,
   }) {
     if (trackMainAxisExtent == null &&
@@ -193,6 +197,7 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderValue> {
         autovalidateMode: autovalidateMode,
         forceErrorText: forceErrorText,
         enabled: enabled,
+        formFieldKey: formFieldKey,
       ),
     );
   }
@@ -217,7 +222,8 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderValue> {
       ..add(ObjectFlagProperty.has('validator', validator))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'))
       ..add(EnumProperty('autovalidateMode', autovalidateMode))
-      ..add(ObjectFlagProperty.has('forceErrorText', forceErrorText));
+      ..add(ObjectFlagProperty.has('forceErrorText', forceErrorText))
+      ..add(DiagnosticsProperty('formFieldKey', formFieldKey));
   }
 }
 
@@ -244,6 +250,7 @@ class _Slider extends StatefulWidget {
   final AutovalidateMode? autovalidateMode;
   final String? forceErrorText;
   final bool enabled;
+  final Key? formFieldKey;
 
   const _Slider({
     required this.control,
@@ -268,6 +275,7 @@ class _Slider extends StatefulWidget {
     required this.autovalidateMode,
     required this.forceErrorText,
     required this.enabled,
+    this.formFieldKey,
   });
 
   @override
@@ -318,7 +326,8 @@ class _Slider extends StatefulWidget {
       ..add(ObjectFlagProperty.has('tooltipBuilder', tooltipBuilder))
       ..add(ObjectFlagProperty.has('semanticFormatterCallback', semanticFormatterCallback))
       ..add(ObjectFlagProperty.has('semanticValueFormatterCallback', semanticValueFormatterCallback))
-      ..add(ObjectFlagProperty.has('onEnd', onEnd));
+      ..add(ObjectFlagProperty.has('onEnd', onEnd))
+      ..add(DiagnosticsProperty('formFieldKey', formFieldKey));
   }
 }
 
@@ -400,6 +409,7 @@ class _SliderState extends State<_Slider> with TickerProviderStateMixin {
         minTooltipController: widget.tooltipControls.enabled ? _minTooltipController : null,
         maxTooltipController: widget.tooltipControls.enabled ? _maxTooltipController : null,
         child: SliderFormField(
+          key: widget.formFieldKey,
           controller: _controller,
           constraints: widget.constraints,
           label: widget.label,

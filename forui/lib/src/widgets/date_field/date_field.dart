@@ -132,6 +132,9 @@ abstract class FDateField extends StatefulWidget {
   /// [FDateFieldController.validator] will not be called unless [forceErrorText] is null.
   final String? forceErrorText;
 
+  /// {@macro forui.foundation.doc_templates.formFieldKey}
+  final Key? formFieldKey;
+
   const FDateField._({
     this.control = const .managed(),
     this.size = .md,
@@ -149,6 +152,7 @@ abstract class FDateField extends StatefulWidget {
     this.autovalidateMode = .onUnfocus,
     this.forceErrorText,
     this.errorBuilder = FFormFieldProperties.defaultErrorBuilder,
+    this.formFieldKey,
     super.key,
   });
 
@@ -218,6 +222,7 @@ abstract class FDateField extends StatefulWidget {
     AutovalidateMode autovalidateMode,
     String? forceErrorText,
     Widget Function(BuildContext context, String message) errorBuilder,
+    Key? formFieldKey,
     Key? key,
   }) = _InputDateField;
 
@@ -318,6 +323,7 @@ abstract class FDateField extends StatefulWidget {
     AutovalidateMode autovalidateMode,
     String? forceErrorText,
     Widget Function(BuildContext context, String message) errorBuilder,
+    Key? formFieldKey,
     Key? key,
   }) = _CalendarDateField;
 
@@ -378,6 +384,7 @@ abstract class FDateField extends StatefulWidget {
     AutovalidateMode autovalidateMode,
     String? forceErrorText,
     Widget Function(BuildContext context, String message) errorBuilder,
+    Key? formFieldKey,
     Key? key,
   }) = _InputOnlyDateField;
 
@@ -398,7 +405,8 @@ abstract class FDateField extends StatefulWidget {
       ..add(ObjectFlagProperty.has('onSaved', onSaved))
       ..add(ObjectFlagProperty.has('onReset', onReset))
       ..add(EnumProperty('autovalidateMode', autovalidateMode))
-      ..add(StringProperty('forceErrorText', forceErrorText));
+      ..add(StringProperty('forceErrorText', forceErrorText))
+      ..add(DiagnosticsProperty('formFieldKey', formFieldKey));
   }
 }
 

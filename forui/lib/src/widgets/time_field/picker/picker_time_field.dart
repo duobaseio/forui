@@ -87,6 +87,7 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
     super.autovalidateMode = .onUnfocus,
     super.forceErrorText,
     super.errorBuilder,
+    super.formFieldKey,
     super.key,
   }) : super._();
 
@@ -200,6 +201,7 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
 
     return PickerFormField(
+      key: widget.formFieldKey,
       controller: _controller,
       enabled: widget.enabled,
       onSaved: widget.onSaved,

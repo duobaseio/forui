@@ -97,6 +97,7 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
     super.autovalidateMode,
     super.forceErrorText,
     super.errorBuilder,
+    super.formFieldKey,
     super.key,
   }) : super._();
 
@@ -203,6 +204,7 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
     final onSaved = widget.onSaved;
 
     return Field<DateTime>(
+      key: widget.formFieldKey,
       controller: _controller,
       enabled: widget.enabled,
       autovalidateMode: widget.autovalidateMode,

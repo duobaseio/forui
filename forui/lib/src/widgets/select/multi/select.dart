@@ -245,6 +245,9 @@ abstract class FMultiSelect<T> extends StatefulWidget {
   /// The divider used to separate the content items. Defaults to [FItemDivider.none].
   final FItemDivider contentDivider;
 
+  /// {@macro forui.foundation.doc_templates.formFieldKey}
+  final Key? formFieldKey;
+
   /// Creates a [FMultiSelect] from the given [items].
   ///
   /// For more control over the appearance of items, use [FMultiSelect.rich].
@@ -297,6 +300,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     bool contentScrollHandles = false,
     ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
     FItemDivider contentDivider = .none,
+    Key? formFieldKey,
     Key? key,
   }) {
     final inverse = {for (final MapEntry(:key, :value) in items.entries) value: key};
@@ -344,6 +348,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
       contentScrollHandles: contentScrollHandles,
       contentPhysics: contentPhysics,
       contentDivider: contentDivider,
+      formFieldKey: formFieldKey,
       key: key,
       children: [for (final MapEntry(:key, :value) in items.entries) .item(title: Text(key), value: value)],
     );
@@ -395,6 +400,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     bool contentScrollHandles,
     ScrollPhysics contentPhysics,
     FItemDivider contentDivider,
+    Key? formFieldKey,
     Key? key,
   }) = _BasicSelect<T>;
 
@@ -462,6 +468,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     bool contentScrollHandles = false,
     ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
     FItemDivider contentDivider = .none,
+    Key? formFieldKey,
     Key? key,
   }) {
     final inverse = {for (final MapEntry(:key, :value) in items.entries) value: key};
@@ -521,6 +528,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
       contentScrollHandles: contentScrollHandles,
       contentPhysics: contentPhysics,
       contentDivider: contentDivider,
+      formFieldKey: formFieldKey,
       key: key,
     );
   }
@@ -583,6 +591,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     bool contentScrollHandles,
     ScrollPhysics contentPhysics,
     FItemDivider contentDivider,
+    Key? formFieldKey,
     Key? key,
   }) = _SearchSelect<T>;
 
@@ -629,6 +638,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     this.contentScrollHandles = false,
     this.contentPhysics = const ClampingScrollPhysics(),
     this.contentDivider = .none,
+    this.formFieldKey,
     FMultiSelectTagBuilder<T>? tagBuilder,
     super.key,
   }) : tagBuilder = tagBuilder ?? defaultTagBuilder;
@@ -676,7 +686,8 @@ abstract class FMultiSelect<T> extends StatefulWidget {
       ..add(DiagnosticsProperty('contentScrollController', contentScrollController))
       ..add(FlagProperty('contentScrollHandles', value: contentScrollHandles, ifTrue: 'contentScrollHandles'))
       ..add(DiagnosticsProperty('contentPhysics', contentPhysics))
-      ..add(EnumProperty('contentDivider', contentDivider));
+      ..add(EnumProperty('contentDivider', contentDivider))
+      ..add(DiagnosticsProperty('formFieldKey', formFieldKey));
   }
 }
 
@@ -743,6 +754,7 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
     final padding = fieldStyle.contentPadding.resolve(direction);
 
     return MultiValueFormField<T>(
+      key: widget.formFieldKey,
       controller: _controller,
       enabled: widget.enabled,
       autovalidateMode: widget.autovalidateMode,

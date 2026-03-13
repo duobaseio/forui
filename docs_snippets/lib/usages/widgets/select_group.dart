@@ -17,6 +17,7 @@ final selectGroup = FSelectGroup<String>(
   forceErrorText: null,
   validator: (values) => null,
   errorBuilder: FFormFieldProperties.defaultErrorBuilder,
+  formFieldKey: null,
   // {@endcategory}
   // {@category "Core"}
   style: const .delta(itemPadding: .value(.symmetric(vertical: 2))),

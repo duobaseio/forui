@@ -40,7 +40,7 @@ part 'tile.design.dart';
 /// );
 /// ```
 ///
-/// {@macro forui.foundation.FTappableGroup.overlay}
+/// {@macro forui.foundation.doc_templates.overlay}
 ///
 ///
 /// See:
