@@ -77,12 +77,10 @@ void main() {
               childAnchor: .topLeft,
               portalAnchor: .bottomRight,
               controller: controller,
-              barrier: (cutout) => FModalBarrier(
-                cutout: cutout,
-                filter: ImageFilter.blur(sigmaX:  5, sigmaY: 5),
-                onDismiss: null,
-              ),
-              portalBuilder: (context, _) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+              barrier: (cutout) =>
+                  FModalBarrier(cutout: cutout, filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5), onDismiss: null),
+              portalBuilder: (context, _) =>
+                  const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
               child: const Text('Click me'),
             ),
             const Text('Outside of the portal'),

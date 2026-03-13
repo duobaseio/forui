@@ -303,7 +303,9 @@ class _RenderCutoutClipper extends RenderProxyBox {
     // from global to local coordinates, which is necessary for the cutout to be positioned correctly.
     final origin = globalToLocal(_cutout.localToGlobal(.zero));
     final bounds = origin & _cutout.size;
-    final clip = Path()..addRect(Offset.zero & size)..fillType = .evenOdd;
+    final clip = Path()
+      ..addRect(Offset.zero & size)
+      ..fillType = .evenOdd;
     _cutoutBuilder(clip, bounds);
 
     context.pushClipPath(needsCompositing, offset, Offset.zero & size, clip, super.paint);
