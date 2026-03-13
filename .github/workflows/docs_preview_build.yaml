@@ -67,11 +67,13 @@ jobs:
           # We don't use the CLOUDFLARE_SNIPPETS_PROJECT_NAME environment variable since it requires us to set the
           # environment for this workflow, unintentionally leaking environment secrets.
           NEXT_PUBLIC_SNIPPETS_URL: https://${{ steps.snippets-slug.outputs.slug }}.forui-docs-snippets-dev.pages.dev
+      - name: Archive docs build
+        working-directory: ./docs
+        run: tar -cf docs-build.tar .open-next
       - uses: actions/upload-artifact@v7
         with:
           name: docs-build
-          path: ./docs/.open-next
-          include-hidden-files: true
+          path: ./docs/docs-build.tar
           retention-days: 1
 
       # Upload PR metadata

@@ -62,9 +62,12 @@ jobs:
       - uses: actions/download-artifact@v8
         with:
           name: docs-build
-          path: ./docs/.open-next
+          path: ./docs
           github-token: ${{ secrets.GITHUB_TOKEN }}
           run-id: ${{ github.event.workflow_run.id }}
+      - name: Extract docs build
+        working-directory: ./docs
+        run: tar -xf docs-build.tar && rm docs-build.tar
       - uses: actions/setup-node@v6
         with:
           node-version: 24
