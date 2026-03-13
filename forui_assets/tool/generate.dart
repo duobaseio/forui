@@ -37,7 +37,7 @@ const directional = {
 };
 
 // UPDATE BEFORE EACH RELEASE.
-const url = 'https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.574.0/icons';
+const url = 'https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.576.0/icons';
 
 void main() {
   // ignore: avoid_print
@@ -55,17 +55,33 @@ void main() {
 
 // This script assumes that .dart_tool/lucide-font exists. The archive is manually downloaded and unzipped from
 // https://github.com/lucide-icons/lucide/releases/latest.
-List<(String, String, String)> parse() => html
-    .parse(File('./.dart_tool/lucide-font/unicode.html').readAsStringSync())
-    .getElementsByClassName('unicode-icon')
-    .map(
-      (element) => (
-        element.getElementsByTagName('h4').single.text.toCamelCase(),
-        element.getElementsByTagName('h4').single.text,
-        element.getElementsByClassName('unicode').single.text.replaceAll('&#', '').replaceAll(';', ''),
-      ),
-    )
-    .toList();
+List<(String fieldName, String actualName, String unicode)> parse() {
+  final icons = html
+      .parse(File('./.dart_tool/lucide-font/unicode.html').readAsStringSync())
+      .getElementsByClassName('unicode-icon')
+      .map(
+        (element) => (
+          element.getElementsByTagName('h4').single.text.toCamelCase(),
+          element.getElementsByTagName('h4').single.text,
+          element.getElementsByClassName('unicode').single.text.replaceAll('&#', '').replaceAll(';', ''),
+        ),
+      );
+
+  final seen = <String, String>{};
+  final result = <(String, String, String)>[];
+  for (final icon in icons) {
+    final existing = seen[icon.$1];
+    if (existing != null) {
+      print('Duplicate field name ${icon.$1} for ${icon.$2} (already used by $existing), discarding.'); // ignore: avoid_print
+      continue;
+    }
+
+    seen[icon.$1] = icon.$2;
+    result.add(icon);
+  }
+
+  return result;
+}
 
 const header =
     '''

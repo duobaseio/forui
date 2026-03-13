@@ -1,4 +1,4 @@
-## 0.20.0 (Next)
+## 0.20.0
 
 This update builds upon the styling overhaul by introducing desktop and touch variants of each theme and making widget
 sizes consistent across each platform.

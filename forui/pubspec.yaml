@@ -1,15 +1,15 @@
 name: forui
 description: Beautifully designed, minimalistic widgets for desktop & touch devices.
-version: 0.19.0
+version: 0.20.0
 homepage: https://forui.dev/
 documentation: https://forui.dev/docs
 repository: https://github.com/duobaseio/forui/tree/main/forui
 issue_tracker: https://github.com/duobaseio/forui/issues
 topics:
-  - components
+  - user-interface
   - design-system
-  - shadui
   - shadcn-ui
+  - components
   - widget
 
 environment:
@@ -27,7 +27,7 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  forui_assets: ^0.19.0
+  forui_assets: ^0.20.0
   intl: any
   meta: ^1.11.0
   sugar: ^4.0.0
