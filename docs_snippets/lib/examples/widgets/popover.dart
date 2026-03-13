@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_redundant_argument_values
+
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -289,6 +291,7 @@ class BlurredPopoverPage extends Example {
           ),
         ),
         // {@endhighlight}
+        cutoutBuilder: FModalBarrier.defaultCutoutBuilder, // Replace this to create a custom cutout shape.
         popoverAnchor: .topCenter,
         childAnchor: .bottomCenter,
         popoverBuilder: (context, _) => Padding(

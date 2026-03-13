@@ -259,6 +259,22 @@ class FPopover extends StatefulWidget {
   /// {@endtemplate}
   final bool barrierSemanticsDismissible;
 
+  /// {@template forui.widgets.FPopover.cutout}
+  /// Whether the barrier should exclude the `builder`/`child`'s area using a non-interactive cutout.
+  ///
+  /// Does nothing if [FPopoverStyle.barrierFilter] is null.
+  ///
+  /// Defaults to true.
+  /// {@endtemplate}
+  final bool cutout;
+
+  /// {@template forui.widgets.FPopover.cutoutBuilder}
+  /// {@macro forui.foundation.FModalBarrier.cutoutBuilder}
+  ///
+  /// Does nothing if [cutout] is false or [FPopoverStyle.barrierFilter] is null.
+  /// {@endtemplate}
+  final void Function(Path path, Rect bounds) cutoutBuilder;
+
   /// The popover's semantic label used by accessibility frameworks.
   final String? semanticsLabel;
 
@@ -307,6 +323,8 @@ class FPopover extends StatefulWidget {
     this.traversalEdgeBehavior,
     this.barrierSemanticsLabel,
     this.barrierSemanticsDismissible = true,
+    this.cutout = true,
+    this.cutoutBuilder = FModalBarrier.defaultCutoutBuilder,
     this.semanticsLabel,
     this.shortcuts,
     this.builder = defaultBuilder,
@@ -350,6 +368,8 @@ class FPopover extends StatefulWidget {
           ifTrue: 'barrier semantics dismissible',
         ),
       )
+      ..add(FlagProperty('cutout', value: cutout, ifTrue: 'cutout'))
+      ..add(ObjectFlagProperty.has('cutoutBuilder', cutoutBuilder))
       ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
@@ -442,7 +462,9 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
         offset: widget.offset,
         barrier: style.barrierFilter == null
             ? null
-            : FAnimatedModalBarrier(
+            : (cutout) => FAnimatedModalBarrier(
+                cutout: widget.cutout ? cutout : null,
+                cutoutBuilder: widget.cutoutBuilder,
                 animation: _controller.fade,
                 filter: style.barrierFilter!,
                 semanticsLabel: widget.barrierSemanticsLabel ?? localizations.barrierLabel,

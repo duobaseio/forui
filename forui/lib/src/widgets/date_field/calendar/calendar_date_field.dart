@@ -12,7 +12,6 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
   final MouseCursor mouseCursor;
   final bool canRequestFocus;
   final bool clearable;
-  final FDateFieldPopoverBuilder popoverBuilder;
   @override
   final AlignmentGeometry anchor;
   @override
@@ -33,6 +32,12 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
   final Object? groupId;
   @override
   final VoidCallback? onTapHide;
+  @override
+  final bool cutout;
+  @override
+  final void Function(Path path, Rect bounds) cutoutBuilder;
+  @override
+  final FDateFieldPopoverBuilder popoverBuilder;
   @override
   final ValueWidgetBuilder<FCalendarDayData> dayBuilder;
   @override
@@ -57,7 +62,6 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
     this.mouseCursor = .defer,
     this.canRequestFocus = true,
     this.clearable = false,
-    this.popoverBuilder = FPopover.defaultPopoverBuilder,
     this.anchor = .topLeft,
     this.fieldAnchor = .bottomLeft,
     this.spacing = const .spacing(4),
@@ -68,6 +72,9 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
     this.hideRegion = .excludeChild,
     this.groupId,
     this.onTapHide,
+    this.cutout = true,
+    this.cutoutBuilder = FModalBarrier.defaultCutoutBuilder,
+    this.popoverBuilder = FPopover.defaultPopoverBuilder,
     this.dayBuilder = FCalendar.defaultDayBuilder,
     this.start,
     this.end,
@@ -286,6 +293,8 @@ class _CalendarPopover extends StatelessWidget {
     useViewInsets: properties.useViewInsets,
     hideRegion: properties.hideRegion,
     groupId: properties.groupId,
+    cutout: properties.cutout,
+    cutoutBuilder: properties.cutoutBuilder,
     autofocus: autofocus,
     shortcuts: {const SingleActivator(.escape): _hide},
     popoverBuilder: (context, _) => TextFieldTapRegion(

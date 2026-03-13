@@ -44,6 +44,9 @@ final breadcrumbItemCollapsed = FBreadcrumbItem.collapsed(
   offset: .zero,
   hideRegion: .excludeChild,
   onTapHide: () {},
+  cutout: true,
+  cutoutBuilder: FModalBarrier.defaultCutoutBuilder,
+  intrinsicWidth: true,
   // {@endcategory}
   // {@category "Scroll"}
   scrollController: null,
@@ -87,6 +90,9 @@ final breadcrumbItemCollapsedTiles = FBreadcrumbItem.collapsedTiles(
   overflow: .flip,
   offset: .zero,
   hideRegion: .excludeChild,
+  cutout: true,
+  cutoutBuilder: FModalBarrier.defaultCutoutBuilder,
+  intrinsicWidth: true,
   // {@endcategory}
   // {@category "Scroll"}
   scrollController: null,

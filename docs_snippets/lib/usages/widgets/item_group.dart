@@ -18,6 +18,7 @@ final itemGroup = FItemGroup(
   // {@category "Core"}
   style: const .delta(spacing: 4),
   enabled: true,
+  intrinsicWidth: null,
   divider: .none,
   children: [
     .item(title: const Text('Item 1'), onPress: () {}),
@@ -60,6 +61,7 @@ final merge = FItemGroup.merge(
   // {@category "Core"}
   style: const .delta(spacing: 4),
   enabled: true,
+  intrinsicWidth: null,
   divider: .full,
   children: [
     .group(

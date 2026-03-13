@@ -132,6 +132,12 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
   /// {@macro forui.widgets.FPopover.groupId}
   final Object? menuGroupId;
 
+  /// {@macro forui.widgets.FPopover.cutout}
+  final bool menuCutout;
+
+  /// {@macro forui.widgets.FPopover.cutoutBuilder}
+  final void Function(Path path, Rect bounds) menuCutoutBuilder;
+
   /// True if the menu should be automatically hidden after a menu option is selected. Defaults to true.
   final bool autoHide;
 
@@ -247,6 +253,8 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
     this.menuHideRegion = .excludeChild,
     this.menuOnTapHide,
     this.menuGroupId,
+    this.menuCutout = true,
+    this.menuCutoutBuilder = FModalBarrier.defaultCutoutBuilder,
     this.autoHide = true,
     this.label,
     this.description,
@@ -306,6 +314,8 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
     FPopoverHideRegion menuHideRegion = .excludeChild,
     VoidCallback? menuOnTapHide,
     Object? menuGroupId,
+    bool menuCutout = true,
+    void Function(Path path, Rect bounds) menuCutoutBuilder = FModalBarrier.defaultCutoutBuilder,
     bool autoHide = true,
     Widget? label,
     Widget? description,
@@ -354,6 +364,8 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
     menuHideRegion: menuHideRegion,
     menuOnTapHide: menuOnTapHide,
     menuGroupId: menuGroupId,
+    menuCutout: menuCutout,
+    menuCutoutBuilder: menuCutoutBuilder,
     autoHide: autoHide,
     label: label,
     description: description,
@@ -422,6 +434,8 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
     this.menuHideRegion = .excludeChild,
     this.menuOnTapHide,
     this.menuGroupId,
+    this.menuCutout = true,
+    this.menuCutoutBuilder = FModalBarrier.defaultCutoutBuilder,
     this.autoHide = true,
     this.label,
     this.description,
@@ -478,6 +492,8 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
       ..add(EnumProperty('menuHideRegion', menuHideRegion))
       ..add(ObjectFlagProperty.has('menuOnTapHide', menuOnTapHide))
       ..add(DiagnosticsProperty('menuGroupId', menuGroupId))
+      ..add(FlagProperty('menuCutout', value: menuCutout, ifTrue: 'cutout'))
+      ..add(ObjectFlagProperty.has('menuCutoutBuilder', menuCutoutBuilder))
       ..add(FlagProperty('autoHide', value: autoHide, ifTrue: 'autoHide'))
       ..add(ObjectFlagProperty.has('errorBuilder', errorBuilder))
       ..add(StringProperty('menuBarrierSemanticsLabel', menuBarrierSemanticsLabel))
@@ -599,6 +615,8 @@ class _FSelectMenuTileState<T> extends State<FSelectMenuTile<T>> with TickerProv
           traversalEdgeBehavior: widget.menuTraversalEdgeBehavior,
           barrierSemanticsLabel: widget.menuBarrierSemanticsLabel,
           barrierSemanticsDismissible: widget.menuBarrierSemanticsDismissible,
+          cutout: widget.menuCutout,
+          cutoutBuilder: widget.menuCutoutBuilder,
           popoverBuilder: (_, _) {
             if (widget._menu case final menu?) {
               return FInheritedItemData(

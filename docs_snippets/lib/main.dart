@@ -157,6 +157,7 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/popover/slide', page: SlidePopoverRoute.page),
     AutoRoute(path: '/popover/allow-overflow', page: AllowOverflowPopoverRoute.page),
     AutoRoute(path: '/popover-menu/default', page: PopoverMenuRoute.page),
+    AutoRoute(path: '/popover-menu/blurred', page: BlurredPopoverMenuRoute.page),
     AutoRoute(path: '/popover-menu/tiles', page: TilePopoverMenuRoute.page),
     AutoRoute(path: '/portal/default', page: PortalRoute.page),
     AutoRoute(path: '/portal-visualization/default', page: PortalVisualizationRoute.page),

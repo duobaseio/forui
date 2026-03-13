@@ -79,18 +79,22 @@ final timeFieldPicker = FTimeField.picker(
   clearable: false,
   // {@endcategory}
   // {@category "Picker"}
-  popoverBuilder: (context, controller, popoverController, content) => content,
-  hourInterval: 1,
-  minuteInterval: 1,
   anchor: .topLeft,
   fieldAnchor: .bottomLeft,
   constraints: const FPortalConstraints(maxWidth: 200, maxHeight: 200),
   spacing: const FPortalSpacing(4),
   overflow: FPortalOverflow.flip,
+  useViewPadding: true,
+  useViewInsets: true,
   offset: .zero,
   hideRegion: .anywhere,
   groupId: null,
   onTapHide: () {},
+  cutout: true,
+  cutoutBuilder: FModalBarrier.defaultCutoutBuilder,
+  popoverBuilder: (context, controller, popoverController, content) => content,
+  hourInterval: 1,
+  minuteInterval: 1,
   // {@endcategory}
   // {@category "Accessibility"}
   autofocus: false,

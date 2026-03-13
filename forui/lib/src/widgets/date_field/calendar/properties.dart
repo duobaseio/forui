@@ -46,6 +46,15 @@ class FDateFieldCalendarProperties with Diagnosticable {
   /// This is only called if [hideRegion] is set to [FPopoverHideRegion.anywhere] or [FPopoverHideRegion.excludeChild].
   final VoidCallback? onTapHide;
 
+  /// {@macro forui.widgets.FPopover.cutout}
+  final bool cutout;
+
+  /// {@macro forui.widgets.FPopover.cutoutBuilder}
+  final void Function(Path path, Rect bounds) cutoutBuilder;
+
+  /// The builder used to wrap the calendar popover content.
+  final FDateFieldPopoverBuilder popoverBuilder;
+
   /// Customizes the appearance of calendar days.
   final ValueWidgetBuilder<FCalendarDayData> dayBuilder;
 
@@ -76,6 +85,9 @@ class FDateFieldCalendarProperties with Diagnosticable {
     this.hideRegion = .excludeChild,
     this.groupId,
     this.onTapHide,
+    this.cutout = true,
+    this.cutoutBuilder = FModalBarrier.defaultCutoutBuilder,
+    this.popoverBuilder = FPopover.defaultPopoverBuilder,
     this.dayBuilder = FCalendar.defaultDayBuilder,
     this.start,
     this.end,
@@ -98,6 +110,9 @@ class FDateFieldCalendarProperties with Diagnosticable {
       ..add(EnumProperty('hideRegion', hideRegion))
       ..add(DiagnosticsProperty('groupId', groupId))
       ..add(ObjectFlagProperty.has('onTapHide', onTapHide))
+      ..add(FlagProperty('cutout', value: cutout, ifTrue: 'cutout'))
+      ..add(ObjectFlagProperty.has('cutoutBuilder', cutoutBuilder))
+      ..add(ObjectFlagProperty.has('popoverBuilder', popoverBuilder))
       ..add(ObjectFlagProperty.has('dayBuilder', dayBuilder))
       ..add(DiagnosticsProperty('start', start))
       ..add(DiagnosticsProperty('end', end))
@@ -121,6 +136,9 @@ class FDateFieldCalendarProperties with Diagnosticable {
           hideRegion == other.hideRegion &&
           groupId == other.groupId &&
           onTapHide == other.onTapHide &&
+          cutout == other.cutout &&
+          cutoutBuilder == other.cutoutBuilder &&
+          popoverBuilder == other.popoverBuilder &&
           dayBuilder == other.dayBuilder &&
           start == other.start &&
           end == other.end &&
@@ -139,6 +157,9 @@ class FDateFieldCalendarProperties with Diagnosticable {
       useViewInsets.hashCode ^
       hideRegion.hashCode ^
       onTapHide.hashCode ^
+      cutout.hashCode ^
+      cutoutBuilder.hashCode ^
+      popoverBuilder.hashCode ^
       dayBuilder.hashCode ^
       start.hashCode ^
       end.hashCode ^

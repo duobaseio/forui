@@ -48,6 +48,8 @@ class _SearchSelect<T> extends FMultiSelect<T> {
     super.contentOffset,
     super.contentHideRegion,
     super.contentGroupId,
+    super.contentCutout,
+    super.contentCutoutBuilder,
     super.contentEmptyBuilder,
     super.contentScrollController,
     super.contentScrollHandles,

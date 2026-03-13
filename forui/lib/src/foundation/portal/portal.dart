@@ -66,14 +66,22 @@ class FPortal extends StatefulWidget {
   final Offset offset;
 
   /// {@template forui.foundation.FPortal.useViewPadding}
-  /// Whether to avoid [MediaQueryData.viewPadding] (static safe areas like the notch and status bar).
+  /// Whether to avoid the platform view's padding (static safe areas like the notch and status bar).
+  ///
+  /// ## Note
+  /// Values are read directly from the [View] rather than [MediaQuery] to ensure unconsumed safe area padding is used,
+  /// even when a parent widget (e.g. Material `Scaffold`) has already consumed the [MediaQuery] values.
   /// {@endtemplate}
   ///
   /// Defaults to true.
   final bool useViewPadding;
 
   /// {@template forui.foundation.FPortal.useViewInsets}
-  /// Whether to avoid [MediaQueryData.viewInsets] (the soft keyboard).
+  /// Whether to avoid the platform view's insets (the soft keyboard).
+  ///
+  /// ## Note
+  /// Values are read directly from the [View] rather than [MediaQuery] to ensure unconsumed inset values are used,
+  /// even when a parent widget (e.g. Material `Scaffold`) has already consumed the [MediaQuery] values.
   /// {@endtemplate}
   ///
   /// Defaults to true.
@@ -88,8 +96,8 @@ class FPortal extends StatefulWidget {
   /// Defaults to [EdgeInsets.zero].
   final EdgeInsetsGeometry padding;
 
-  /// An optional barrier widget that is displayed behind the portal.
-  final Widget? barrier;
+  /// An optional barrier builder that is displayed behind the portal.
+  final Widget Function(RenderBox? cutout)? barrier;
 
   /// The portal builder which returns the floating content.
   final Widget Function(BuildContext context, OverlayPortalController controller) portalBuilder;
@@ -143,6 +151,7 @@ class FPortal extends StatefulWidget {
       ..add(FlagProperty('useViewPadding', value: useViewPadding, ifTrue: 'using view padding'))
       ..add(FlagProperty('useViewInsets', value: useViewInsets, ifTrue: 'using view insets'))
       ..add(DiagnosticsProperty('padding', padding))
+      ..add(ObjectFlagProperty.has('barrier', barrier))
       ..add(ObjectFlagProperty.has('portalBuilder', portalBuilder))
       ..add(ObjectFlagProperty.has('builder', builder));
   }
@@ -178,8 +187,13 @@ class _State extends State<FPortal> {
         final portalAnchor = widget.portalAnchor.resolve(direction);
         final childAnchor = widget.childAnchor.resolve(direction);
 
-        final padding = widget.useViewPadding ? MediaQuery.viewPaddingOf(context) : EdgeInsets.zero;
-        final insets = widget.useViewInsets ? MediaQuery.viewInsetsOf(context) : EdgeInsets.zero;
+        final view = View.of(context);
+        final EdgeInsets padding = widget.useViewPadding
+            ? .fromViewPadding(view.viewPadding, view.devicePixelRatio)
+            : .zero;
+        final EdgeInsets insets = widget.useViewInsets
+            ? .fromViewPadding(view.viewInsets, view.devicePixelRatio)
+            : .zero;
 
         Widget portal = CompositedPortal(
           notifier: _notifier,
@@ -202,7 +216,20 @@ class _State extends State<FPortal> {
         );
 
         if (widget.barrier case final barrier?) {
-          portal = Stack(children: [barrier, portal]);
+          // Known limitation: semantics blocking does not work correctly here. The barrier and portal content share the
+          // same parent semantics container in the overlay. BlockSemantics(blocking: true) in FModalBarrier affects all
+          // siblings in the same container, which blocks portal content semantics too. Wrapping in
+          // Semantics(container: true) contains the blocking effect but also disables it for page content. Both
+          // restructuring approaches (widget tree and separate overlay entries) were explored but are impractical.
+          portal = BlockSemantics(
+            blocking: false,
+            child: Stack(
+              children: [
+                Semantics(container: true, child: barrier(_link.childRenderBox)),
+                portal,
+              ],
+            ),
+          );
         }
 
         // Prevents the portal from inheriting FTappableGroups in the widget.builder/widget.child since

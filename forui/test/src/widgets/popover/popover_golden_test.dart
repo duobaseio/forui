@@ -1,3 +1,6 @@
+import 'dart:async';
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -68,6 +71,7 @@ void main() {
             style: .delta(
               barrierFilter: (animation) => .blur(sigmaX: animation * 5, sigmaY: animation * 5),
             ),
+            cutout: false,
             popoverBuilder: (context, _) => const SizedBox.square(dimension: 100),
             child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
           ),
@@ -76,6 +80,76 @@ void main() {
       await tester.pumpAndSettle();
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover/barrier-${theme.name}.png'));
+    });
+
+    testWidgets('${theme.name} barrier with cutout', (tester) async {
+      final controller = autoDispose(FPopoverController(vsync: tester));
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          child: Column(
+            mainAxisSize: .min,
+            mainAxisAlignment: .center,
+            children: [
+              FPopover(
+                childAnchor: .topLeft,
+                popoverAnchor: .bottomRight,
+                control: .managed(controller: controller),
+                style: .delta(
+                  barrierFilter: (animation) => ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
+                ),
+                popoverBuilder: (context, _) =>
+                    const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+                child: const Text('Click me'),
+              ),
+              const Text('Outside of the popover'),
+            ],
+          ),
+        ),
+      );
+
+      unawaited(controller.show());
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover/barrier-cutout-${theme.name}.png'));
+    });
+
+    testWidgets('${theme.name} barrier with custom circle cutout', (tester) async {
+      final controller = autoDispose(FPopoverController(vsync: tester));
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          child: Column(
+            mainAxisSize: .min,
+            mainAxisAlignment: .center,
+            children: [
+              FPopover(
+                childAnchor: .topLeft,
+                popoverAnchor: .bottomRight,
+                control: .managed(controller: controller),
+                style: .delta(
+                  barrierFilter: (animation) => ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
+                ),
+                cutoutBuilder: (path, bounds) => path.addOval(bounds),
+                popoverBuilder: (context, _) =>
+                    const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+                child: const Text('Click me'),
+              ),
+              const Text('Outside of the popover'),
+            ],
+          ),
+        ),
+      );
+
+      unawaited(controller.show());
+      await tester.pumpAndSettle();
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('popover/barrier-cutout-circle-${theme.name}.png'),
+      );
     });
 
     testWidgets('${theme.name} glassmorphic', (tester) async {

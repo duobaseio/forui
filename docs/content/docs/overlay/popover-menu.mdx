@@ -9,6 +9,7 @@ import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
 import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/popover-menu/default.json';
+import blurredSnippet from '@/snippets/examples/popover-menu/blurred.json';
 import tilesSnippet from '@/snippets/examples/popover-menu/tiles.json';
 import popoverMenuUsage from '@/snippets/usages/widgets/popover_menu/popoverMenu.json';
 import popoverMenuTilesUsage from '@/snippets/usages/widgets/popover_menu/popoverMenuTiles.json';
@@ -52,5 +53,16 @@ To generate a specific style for customization:
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={tilesSnippet} />
+  </Tab>
+</Tabs>
+
+### Blurred Barrier
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='popover-menu' variant='blurred' height={500}/>
+  </Tab>
+  <Tab value="Code">
+    <CodeSnippet snippet={blurredSnippet} />
   </Tab>
 </Tabs>

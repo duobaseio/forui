@@ -12,9 +12,14 @@ final popoverMenu = FPopoverMenu(
   menuAnchor: .topCenter,
   childAnchor: .bottomCenter,
   maxHeight: .infinity,
+  intrinsicWidth: true,
   spacing: const .spacing(4),
   overflow: .flip,
+  useViewPadding: true,
+  useViewInsets: true,
   offset: .zero,
+  cutout: true,
+  cutoutBuilder: FModalBarrier.defaultCutoutBuilder,
   // {@endcategory}
   // {@category "Tap Region"}
   groupId: null,
@@ -58,11 +63,16 @@ final popoverMenuTiles = FPopoverMenu.tiles(
   // {@endcategory}
   // {@category "Layout"}
   maxHeight: .infinity,
+  intrinsicWidth: true,
   menuAnchor: .topCenter,
   childAnchor: .bottomCenter,
   spacing: const .spacing(4),
   overflow: .flip,
+  useViewPadding: true,
+  useViewInsets: true,
   offset: .zero,
+  cutout: true,
+  cutoutBuilder: FModalBarrier.defaultCutoutBuilder,
   // {@endcategory}
   // {@category "Tap Region"}
   groupId: null,

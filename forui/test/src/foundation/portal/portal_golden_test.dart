@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -13,7 +15,7 @@ void main() {
       TestScaffold.app(
         child: FPortal(
           controller: controller,
-          barrier: Container(color: Colors.blue),
+          barrier: (_) => Container(color: Colors.blue),
           portalBuilder: (context, _) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
           child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
         ),
@@ -49,7 +51,7 @@ void main() {
       TestScaffold.app(
         child: FPortal(
           controller: controller,
-          barrier: Container(color: Colors.blue),
+          barrier: (_) => Container(color: Colors.blue),
           portalBuilder: (context, _) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
           child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
         ),
@@ -60,6 +62,74 @@ void main() {
     await tester.pumpAndSettle();
 
     await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/barrier.png'));
+  });
+
+  testWidgets('shown with barrier and cutout', (tester) async {
+    final controller = OverlayPortalController();
+
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: Column(
+          mainAxisSize: .min,
+          mainAxisAlignment: .center,
+          children: [
+            FPortal(
+              childAnchor: .topLeft,
+              portalAnchor: .bottomRight,
+              controller: controller,
+              barrier: (cutout) => FModalBarrier(
+                cutout: cutout,
+                filter: ImageFilter.blur(sigmaX:  5, sigmaY: 5),
+                onDismiss: null,
+              ),
+              portalBuilder: (context, _) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+              child: const Text('Click me'),
+            ),
+            const Text('Outside of the portal'),
+          ],
+        ),
+      ),
+    );
+
+    controller.show();
+    await tester.pumpAndSettle();
+
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/barrier-cutout.png'));
+  });
+
+  testWidgets('shown with barrier and custom circle cutout', (tester) async {
+    final controller = OverlayPortalController();
+
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: Column(
+          mainAxisSize: .min,
+          mainAxisAlignment: .center,
+          children: [
+            FPortal(
+              childAnchor: .topLeft,
+              portalAnchor: .bottomRight,
+              controller: controller,
+              barrier: (cutout) => FModalBarrier(
+                cutout: cutout,
+                cutoutBuilder: (path, bounds) => path.addOval(bounds),
+                filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
+                onDismiss: null,
+              ),
+              portalBuilder: (context, _) =>
+                  const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+              child: const Text('Click me'),
+            ),
+            const Text('Outside of the portal'),
+          ],
+        ),
+      ),
+    );
+
+    controller.show();
+    await tester.pumpAndSettle();
+
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('portal/barrier-cutout-circle.png'));
   });
 
   group('constraints', () {
@@ -445,23 +515,21 @@ void main() {
     testWidgets('view padding only', (tester) async {
       final controller = OverlayPortalController();
 
+      tester.view.viewPadding = const FakeViewPadding(left: 100, top: 100, right: 100, bottom: 100);
+      tester.view.viewInsets = const FakeViewPadding(left: 500, top: 500, right: 500, bottom: 500);
+
       await tester.pumpWidget(
         TestScaffold.app(
-          child: Builder(
-            builder: (context) => MediaQuery(
-              data: MediaQuery.of(context).copyWith(viewPadding: const .all(100), viewInsets: const .all(200)),
-              child: Align(
-                alignment: .bottomRight,
-                child: FPortal(
-                  portalAnchor: .topLeft,
-                  childAnchor: .bottomRight,
-                  controller: controller,
-                  useViewInsets: false,
-                  portalBuilder: (context, _) =>
-                      const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
-                  child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
-                ),
-              ),
+          child: Align(
+            alignment: .bottomRight,
+            child: FPortal(
+              portalAnchor: .topLeft,
+              childAnchor: .bottomRight,
+              controller: controller,
+              useViewInsets: false,
+              portalBuilder: (context, _) =>
+                  const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
             ),
           ),
         ),
@@ -476,23 +544,21 @@ void main() {
     testWidgets('view insets only', (tester) async {
       final controller = OverlayPortalController();
 
+      tester.view.viewPadding = const FakeViewPadding(left: 200, top: 200, right: 200, bottom: 200);
+      tester.view.viewInsets = const FakeViewPadding(left: 500, top: 500, right: 500, bottom: 500);
+
       await tester.pumpWidget(
         TestScaffold.app(
-          child: Builder(
-            builder: (context) => MediaQuery(
-              data: MediaQuery.of(context).copyWith(viewPadding: const .all(200), viewInsets: const .all(100)),
-              child: Align(
-                alignment: .bottomRight,
-                child: FPortal(
-                  portalAnchor: .topLeft,
-                  childAnchor: .bottomRight,
-                  controller: controller,
-                  useViewPadding: false,
-                  portalBuilder: (context, _) =>
-                      const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
-                  child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
-                ),
-              ),
+          child: Align(
+            alignment: .bottomRight,
+            child: FPortal(
+              portalAnchor: .topLeft,
+              childAnchor: .bottomRight,
+              controller: controller,
+              useViewPadding: false,
+              portalBuilder: (context, _) =>
+                  const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
             ),
           ),
         ),
@@ -507,25 +573,23 @@ void main() {
     testWidgets('custom padding', (tester) async {
       final controller = OverlayPortalController();
 
+      tester.view.viewPadding = const FakeViewPadding(left: 200, top: 200, right: 200, bottom: 200);
+      tester.view.viewInsets = const FakeViewPadding(left: 200, top: 200, right: 200, bottom: 200);
+
       await tester.pumpWidget(
         TestScaffold.app(
-          child: Builder(
-            builder: (context) => MediaQuery(
-              data: MediaQuery.of(context).copyWith(viewPadding: const .all(200), viewInsets: const .all(200)),
-              child: Align(
-                alignment: .bottomRight,
-                child: FPortal(
-                  portalAnchor: .topLeft,
-                  childAnchor: .bottomRight,
-                  controller: controller,
-                  padding: const .all(50),
-                  useViewPadding: false,
-                  useViewInsets: false,
-                  portalBuilder: (context, _) =>
-                      const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
-                  child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
-                ),
-              ),
+          child: Align(
+            alignment: .bottomRight,
+            child: FPortal(
+              portalAnchor: .topLeft,
+              childAnchor: .bottomRight,
+              controller: controller,
+              padding: const .all(50),
+              useViewPadding: false,
+              useViewInsets: false,
+              portalBuilder: (context, _) =>
+                  const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
             ),
           ),
         ),
@@ -540,24 +604,22 @@ void main() {
     testWidgets('no padding', (tester) async {
       final controller = OverlayPortalController();
 
+      tester.view.viewPadding = const FakeViewPadding(left: 100, top: 100, right: 100, bottom: 100);
+      tester.view.viewInsets = const FakeViewPadding(left: 100, top: 100, right: 100, bottom: 100);
+
       await tester.pumpWidget(
         TestScaffold.app(
-          child: Builder(
-            builder: (context) => MediaQuery(
-              data: MediaQuery.of(context).copyWith(viewPadding: const .all(100), viewInsets: const .all(100)),
-              child: Align(
-                alignment: .bottomRight,
-                child: FPortal(
-                  portalAnchor: .topLeft,
-                  childAnchor: .bottomRight,
-                  controller: controller,
-                  useViewPadding: false,
-                  useViewInsets: false,
-                  portalBuilder: (context, _) =>
-                      const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
-                  child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
-                ),
-              ),
+          child: Align(
+            alignment: .bottomRight,
+            child: FPortal(
+              portalAnchor: .topLeft,
+              childAnchor: .bottomRight,
+              controller: controller,
+              useViewPadding: false,
+              useViewInsets: false,
+              portalBuilder: (context, _) =>
+                  const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
+              child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
             ),
           ),
         ),

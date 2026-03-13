@@ -312,6 +312,12 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   /// {@macro forui.widgets.FPopover.onTapHide}
   final VoidCallback? contentOnTapHide;
 
+  /// {@macro forui.widgets.FPopover.cutout}
+  final bool contentCutout;
+
+  /// {@macro forui.widgets.FPopover.cutoutBuilder}
+  final void Function(Path path, Rect bounds) contentCutoutBuilder;
+
   /// True if the content should be automatically hidden after an item is selected. Defaults to false.
   final bool autoHide;
 
@@ -432,6 +438,8 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     bool contentUseViewInsets = true,
     FPopoverHideRegion contentHideRegion = .excludeChild,
     Object? contentGroupId,
+    bool contentCutout = true,
+    void Function(Path path, Rect bounds) contentCutoutBuilder = FModalBarrier.defaultCutoutBuilder,
     bool autoHide = true,
     bool? retainFocus,
     FFieldBuilder<FAutocompleteStyle> builder = FTextField.defaultBuilder,
@@ -525,6 +533,8 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
          contentUseViewInsets: contentUseViewInsets,
          contentHideRegion: contentHideRegion,
          contentGroupId: contentGroupId,
+         contentCutout: contentCutout,
+         contentCutoutBuilder: contentCutoutBuilder,
          autoHide: autoHide,
          retainFocus: retainFocus,
          builder: builder,
@@ -617,6 +627,8 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     this.contentUseViewInsets = true,
     this.contentHideRegion = .excludeChild,
     this.contentGroupId,
+    this.contentCutout = true,
+    this.contentCutoutBuilder = FModalBarrier.defaultCutoutBuilder,
     this.autoHide = true,
     this.retainFocus,
     this.builder = FTextField.defaultBuilder,
@@ -718,6 +730,8 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
       ..add(FlagProperty('contentUseViewInsets', value: contentUseViewInsets, ifTrue: 'using view insets'))
       ..add(EnumProperty('contentHideRegion', contentHideRegion))
       ..add(DiagnosticsProperty('contentGroupId', contentGroupId))
+      ..add(FlagProperty('contentCutout', value: contentCutout, ifTrue: 'cutout'))
+      ..add(ObjectFlagProperty.has('contentCutoutBuilder', contentCutoutBuilder))
       ..add(ObjectFlagProperty.has('contentOnTapHide', contentOnTapHide))
       ..add(FlagProperty('autoHide', value: autoHide, ifTrue: 'autoHide'))
       ..add(FlagProperty('retainFocus', value: retainFocus, ifTrue: 'retainFocus'))
@@ -946,6 +960,8 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
             offset: widget.contentOffset,
             hideRegion: widget.contentHideRegion,
             groupId: widget.contentGroupId,
+            cutout: widget.contentCutout,
+            cutoutBuilder: widget.contentCutoutBuilder,
             onTapHide: () {
               if (_restore case final restore?) {
                 _previous = restore;

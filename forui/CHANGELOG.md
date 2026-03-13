@@ -12,6 +12,8 @@ sizes consistent across each platform.
 
 
 ### `FAutocomplete`
+* Add `FAutocomplete.contentCutout`.
+* Add `FAutocomplete.contentCutoutBuilder`.
 * Add `FAutocomplete.contentUseViewPadding`.
 * Add `FAutocomplete.contentUseViewInsets`.
 * Add `FAutocomplete.retainFocus`.
@@ -46,6 +48,8 @@ sizes consistent across each platform.
 
 
 ### `FBreadcrumb`
+* Add `FBreadcrumbItem.collapsed(cutout: ...)`.
+* Add `FBreadcrumbItem.collapsed(cutoutBuilder: ...)`.
 * Add `FBreadcrumbItem.collapsed(intrinsicWidth: ...)`.
 
 
@@ -97,6 +101,9 @@ sizes consistent across each platform.
 
 
 ### `FDateField`
+* Add `FDateFieldCalendarProperties.cutout`.
+* Add `FDateFieldCalendarProperties.cutoutBuilder`.
+* Add `FDateFieldCalendarProperties.popoverBuilder`.
 * Add `FDateFieldCalendarProperties.useViewPadding`.
 * Add `FDateFieldCalendarProperties.useViewInsets`.
 * Add `FDateField.popoverBuilder`.
@@ -152,12 +159,24 @@ sizes consistent across each platform.
   `FVariants<..., Decoration, DecorationDelta>`.
 
 
+### `FModalBarrier` & `FAnimatedModalBarrier`
+* Add `FModalBarrier.defaultCutoutBuilder`.
+* Add `FModalBarrier.cutout`.
+* Add `FModalBarrier.cutoutBuilder`.
+* Add `FAnimatedModalBarrier.cutout`.
+* Add `FAnimatedModalBarrier.cutoutBuilder`.
+
+* Fix `FModalBarrier` incorrectly excluding semantics when barrier is dismissible.
+
+
 ### `FPagination`
 * **Breaking** Change `FPaginationStyle.itemDecoration` type from `FVariants<..., BoxDecoration, BoxDecorationDelta>`
   to `FVariants<..., Decoration, DecorationDelta>`.
 
 
 ### `FPopover`
+* Add `FPopover.cutout`.
+* Add `FPopover.cutoutBuilder`.
 * Add `FPopover.useViewPadding`.
 * Add `FPopover.useViewInsets`.
 * Add `FPopover.defaultBuilder`.
@@ -168,6 +187,8 @@ sizes consistent across each platform.
 
 
 ### `FPopoverMenu`
+* Add `FPopoverMenu.cutout`.
+* Add `FPopoverMenu.cutoutBuilder`.
 * Add `FPopoverMenu.intrinsicWidth`.
 * Add `FPopoverMenu.useViewPadding`.
 * Add `FPopoverMenu.useViewInsets`.
@@ -184,6 +205,7 @@ sizes consistent across each platform.
 * Add `FPortal.useViewInsets`.
 * Add `FPortal.padding`.
 
+* **Breaking** Change `FPortal.barrier` type from `Widget?` to `Widget Function(RenderBox? cutout)?`.
 * **Breaking** Remove `FPortal.viewInsets`. Use `FPortal.useViewPadding`, `FPortal.useViewInsets`, and `FPortal.padding`
   instead.
 
@@ -206,8 +228,12 @@ sizes consistent across each platform.
 
 
 ### `FSelect` & `FMultiSelect`
+* Add `FSelect.contentCutout`.
+* Add `FSelect.contentCutoutBuilder`.
 * Add `FSelect.contentUseViewPadding`.
 * Add `FSelect.contentUseViewInsets`.
+* Add `FMultiSelect.contentCutout`.
+* Add `FMultiSelect.contentCutoutBuilder`.
 * Add `FMultiSelect.contentUseViewPadding`.
 * Add `FMultiSelect.contentUseViewInsets`.
 * Add `FSelect.popoverBuilder`.
@@ -280,6 +306,8 @@ sizes consistent across each platform.
 
 
 ### `FSelectMenuTile`
+* Add `FSelectMenuTile.menuCutout`.
+* Add `FSelectMenuTile.menuCutoutBuilder`.
 * Add `FSelectMenuTile.menuIntrinsicWidth`.
 * Add `FSelectMenuTile.menuUseViewPadding`.
 * Add `FSelectMenuTile.menuUseViewInsets`.
@@ -290,6 +318,9 @@ sizes consistent across each platform.
 
 
 ### `FTimeField`
+* Add `FTimeFieldPickerProperties.cutout`.
+* Add `FTimeFieldPickerProperties.cutoutBuilder`.
+* Add `FTimeFieldPickerProperties.popoverBuilder`.
 * Add `FTimeFieldPickerProperties.useViewPadding`.
 * Add `FTimeFieldPickerProperties.useViewInsets`.
 * Add `FTimeField.clearable`.

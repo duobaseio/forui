@@ -14,7 +14,11 @@ final popover = FPopover(
   childAnchor: .bottomCenter,
   spacing: const .spacing(4),
   overflow: .flip,
+  useViewPadding: true,
+  useViewInsets: true,
   offset: .zero,
+  cutout: true,
+  cutoutBuilder: FModalBarrier.defaultCutoutBuilder,
   // {@endcategory}
   // {@category "Tap Region"}
   groupId: null,

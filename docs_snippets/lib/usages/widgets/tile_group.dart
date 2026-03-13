@@ -18,6 +18,7 @@ final tileGroup = FTileGroup(
   // {@category "Core"}
   style: const .delta(dividerWidth: 1),
   enabled: true,
+  intrinsicWidth: null,
   divider: .indented,
   label: const Text('Label'),
   description: const Text('Description'),
@@ -66,6 +67,7 @@ final tileGroupMerge = FTileGroup.merge(
   // {@category "Core"}
   style: const .delta(dividerWidth: 1),
   enabled: true,
+  intrinsicWidth: null,
   divider: .full,
   label: const Text('Label'),
   description: const Text('Description'),

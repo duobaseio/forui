@@ -13,6 +13,8 @@ final tooltip = FTooltip(
   childAnchor: .topCenter,
   spacing: const .spacing(4),
   overflow: .flip,
+  useViewPadding: true,
+  useViewInsets: true,
   // {@endcategory}
   // {@category "Behavior"}
   hover: true,

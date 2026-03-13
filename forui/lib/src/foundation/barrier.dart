@@ -21,6 +21,12 @@ import 'package:flutter/widgets.dart';
 /// * support for [ImageFilter]s instead of just solid colors.
 /// * uses [FModalBarrier] instead of [ModalBarrier].
 class FAnimatedModalBarrier extends AnimatedWidget {
+  /// {@macro forui.foundation.FModalBarrier.cutout}
+  final RenderBox? cutout;
+
+  /// {@macro forui.foundation.FModalBarrier.cutoutBuilder}
+  final void Function(Path path, Rect bounds) cutoutBuilder;
+
   /// If non-null, applies the given [ImageFilter] to the barrier.
   final ImageFilter Function(double value)? filter;
 
@@ -52,6 +58,8 @@ class FAnimatedModalBarrier extends AnimatedWidget {
     required this.filter,
     required this.onDismiss,
     required Animation<double> animation,
+    this.cutout,
+    this.cutoutBuilder = FModalBarrier.defaultCutoutBuilder,
     this.semanticsLabel,
     this.barrierSemanticsDismissible,
     this.clipDetailsNotifier,
@@ -61,6 +69,8 @@ class FAnimatedModalBarrier extends AnimatedWidget {
 
   @override
   Widget build(BuildContext context) => FModalBarrier(
+    cutout: cutout,
+    cutoutBuilder: cutoutBuilder,
     filter: filter == null ? null : filter!(animation.value),
     onDismiss: onDismiss,
     semanticsLabel: semanticsLabel,
@@ -76,6 +86,8 @@ class FAnimatedModalBarrier extends AnimatedWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty('cutout', cutout))
+      ..add(ObjectFlagProperty.has('cutoutBuilder', cutoutBuilder))
       ..add(DiagnosticsProperty('filter', filter))
       ..add(ObjectFlagProperty.has('onDismiss', onDismiss))
       ..add(StringProperty('semanticsLabel', semanticsLabel))
@@ -108,6 +120,21 @@ class FAnimatedModalBarrier extends AnimatedWidget {
 /// * merge [ModalBarrier.dismissible] and [ModalBarrier.onDismiss].
 /// * inlined `_ModalBarrierGestureDetector`.
 class FModalBarrier extends StatelessWidget {
+  /// The default cutout builder that adds a plain rectangle matching the [cutout]'s bounds.
+  static void defaultCutoutBuilder(Path path, Rect bounds) => path.addRect(bounds);
+
+  /// {@template forui.foundation.FModalBarrier.cutout}
+  /// An optional non-interactive cutout that can be used to create a hole in the barrier for the underlying layer.
+  /// {@endtemplate}
+  final RenderBox? cutout;
+
+  /// {@template forui.foundation.FModalBarrier.cutoutBuilder}
+  /// An optional callback that customizes the cutout shape.
+  ///
+  /// Defaults to [defaultCutoutBuilder] which adds a plain rectangle matching the [cutout]'s bounds.
+  /// {@endtemplate}
+  final void Function(Path path, Rect bounds) cutoutBuilder;
+
   /// If non-null, applies the given [ImageFilter] to the barrier.
   final ImageFilter? filter;
 
@@ -148,6 +175,8 @@ class FModalBarrier extends StatelessWidget {
   const FModalBarrier({
     required this.filter,
     required this.onDismiss,
+    this.cutout,
+    this.cutoutBuilder = defaultCutoutBuilder,
     this.semanticsLabel,
     this.barrierSemanticsDismissible = true,
     this.clipDetailsNotifier,
@@ -175,6 +204,15 @@ class FModalBarrier extends StatelessWidget {
       }
     }
 
+    Widget? backdrop;
+    if (filter case final filter?) {
+      backdrop = BackdropFilter(filter: filter, child: Container());
+
+      if (cutout case final cutout? when cutout.attached && cutout.hasSize) {
+        backdrop = _CutoutClipper(cutout: cutout, cutoutBuilder: cutoutBuilder, child: backdrop);
+      }
+    }
+
     Widget barrier = Semantics(
       onTapHint: semanticsOnTapHint,
       onTap: semanticsDismissible && semanticsLabel != null ? handleDismiss : null,
@@ -183,10 +221,7 @@ class FModalBarrier extends StatelessWidget {
       textDirection: semanticsDismissible && semanticsLabel != null ? Directionality.of(context) : null,
       child: MouseRegion(
         cursor: SystemMouseCursors.basic,
-        child: ConstrainedBox(
-          constraints: const .expand(),
-          child: filter == null ? null : BackdropFilter(filter: filter!, child: Container()),
-        ),
+        child: ConstrainedBox(constraints: const .expand(), child: backdrop),
       ),
     );
 
@@ -194,14 +229,13 @@ class FModalBarrier extends StatelessWidget {
     // users to dismiss a modal BottomSheet by tapping on the Scrim focus. On iOS, some modal barriers are not
     // dismissible in accessibility mode.
     final including = semanticsDismissible && (barrierSemanticsDismissible ?? semanticsDismissible);
-
     if (clipDetailsNotifier case final notifier? when including) {
       barrier = _SemanticsClipper(clipDetailsNotifier: notifier, child: barrier);
     }
 
     return BlockSemantics(
       child: ExcludeSemantics(
-        excluding: including,
+        excluding: !including,
         child: RawGestureDetector(
           gestures: {_AnyTapGestureRecognizer: _AnyTapGestureRecognizerFactory(onAnyTapUp: handleDismiss)},
           behavior: .opaque,
@@ -215,12 +249,92 @@ class FModalBarrier extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty('cutout', cutout))
+      ..add(ObjectFlagProperty.has('cutoutBuilder', cutoutBuilder))
       ..add(DiagnosticsProperty('filter', filter))
       ..add(ObjectFlagProperty.has('onDismiss', onDismiss))
       ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(DiagnosticsProperty('barrierSemanticsDismissible', barrierSemanticsDismissible))
       ..add(DiagnosticsProperty('clipDetailsNotifier', clipDetailsNotifier))
       ..add(StringProperty('semanticsOnTapHint', semanticsOnTapHint));
+  }
+}
+
+/// Clips its child with an even-odd path that cuts out the area occupied by [cutout].
+class _CutoutClipper extends SingleChildRenderObjectWidget {
+  final RenderBox cutout;
+  final void Function(Path path, Rect bounds) cutoutBuilder;
+
+  const _CutoutClipper({required this.cutout, required this.cutoutBuilder, super.child});
+
+  @override
+  RenderObject createRenderObject(BuildContext _) => _RenderCutoutClipper(cutout: cutout, cutoutBuilder: cutoutBuilder);
+
+  @override
+  void updateRenderObject(BuildContext _, _RenderCutoutClipper renderObject) => renderObject
+    ..cutout = cutout
+    ..cutoutBuilder = cutoutBuilder;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('cutout', cutout))
+      ..add(ObjectFlagProperty.has('cutoutBuilder', cutoutBuilder));
+  }
+}
+
+class _RenderCutoutClipper extends RenderProxyBox {
+  RenderBox _cutout;
+  void Function(Path path, Rect bounds) _cutoutBuilder;
+
+  _RenderCutoutClipper({required RenderBox cutout, required void Function(Path path, Rect bounds) cutoutBuilder})
+    : _cutout = cutout,
+      _cutoutBuilder = cutoutBuilder;
+
+  @override
+  void paint(PaintingContext context, Offset offset) {
+    if (!_cutout.attached || !_cutout.hasSize) {
+      super.paint(context, offset);
+      return;
+    }
+
+    // We cannot use a [ClipPath] for this since it uses local coordinate space but does not provide a way to convert
+    // from global to local coordinates, which is necessary for the cutout to be positioned correctly.
+    final origin = globalToLocal(_cutout.localToGlobal(.zero));
+    final bounds = origin & _cutout.size;
+    final clip = Path()..addRect(Offset.zero & size)..fillType = .evenOdd;
+    _cutoutBuilder(clip, bounds);
+
+    context.pushClipPath(needsCompositing, offset, Offset.zero & size, clip, super.paint);
+  }
+
+  RenderBox get cutout => _cutout;
+
+  set cutout(RenderBox value) {
+    if (_cutout == value) {
+      return;
+    }
+    _cutout = value;
+    markNeedsPaint();
+  }
+
+  void Function(Path path, Rect bounds) get cutoutBuilder => _cutoutBuilder;
+
+  set cutoutBuilder(void Function(Path path, Rect bounds) value) {
+    if (_cutoutBuilder == value) {
+      return;
+    }
+    _cutoutBuilder = value;
+    markNeedsPaint();
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('cutout', cutout))
+      ..add(ObjectFlagProperty.has('cutoutBuilder', cutoutBuilder));
   }
 }
 

@@ -31,6 +31,7 @@ final selectTileGroup = FSelectTileGroup<String>(
   // {@category "Core"}
   style: const .delta(dividerWidth: 1),
   enabled: true,
+  intrinsicWidth: null,
   divider: .indented,
   children: const [
     .tile(title: Text('Apple'), value: 'apple'),

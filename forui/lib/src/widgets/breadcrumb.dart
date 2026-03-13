@@ -139,6 +139,8 @@ abstract interface class FBreadcrumbItem extends Widget {
     FPortalOverflow overflow,
     Offset offset,
     FPopoverHideRegion hideRegion,
+    bool cutout,
+    void Function(Path path, Rect bounds) cutoutBuilder,
     VoidCallback? onTapHide,
     bool autofocus,
     FocusScopeNode? focusNode,
@@ -172,6 +174,8 @@ abstract interface class FBreadcrumbItem extends Widget {
     FPortalOverflow overflow,
     Offset offset,
     FPopoverHideRegion hideRegion,
+    bool cutout,
+    void Function(Path path, Rect bounds) cutoutBuilder,
     bool autofocus,
     FocusScopeNode? focusNode,
     ValueChanged<bool>? onFocusChange,
@@ -254,6 +258,8 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
   final Offset offset;
   final FPopoverHideRegion hideRegion;
   final VoidCallback? onTapHide;
+  final bool cutout;
+  final void Function(Path path, Rect bounds) cutoutBuilder;
   final bool autofocus;
   final FocusScopeNode? focusNode;
   final ValueChanged<bool>? onFocusChange;
@@ -279,6 +285,8 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
     this.offset = .zero,
     this.hideRegion = .excludeChild,
     this.onTapHide,
+    this.cutout = true,
+    this.cutoutBuilder = FModalBarrier.defaultCutoutBuilder,
     this.semanticsLabel,
     this.autofocus = false,
     this.focusNode,
@@ -307,6 +315,8 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
     this.offset = .zero,
     this.hideRegion = .excludeChild,
     this.onTapHide,
+    this.cutout = true,
+    this.cutoutBuilder = FModalBarrier.defaultCutoutBuilder,
     this.semanticsLabel,
     this.autofocus = false,
     this.focusNode,
@@ -340,6 +350,8 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
       ..add(DiagnosticsProperty('offset', offset))
       ..add(EnumProperty('hideRegion', hideRegion))
       ..add(ObjectFlagProperty.has('onTapHide', onTapHide))
+      ..add(FlagProperty('cutout', value: cutout, ifTrue: 'cutout'))
+      ..add(ObjectFlagProperty.has('cutoutBuilder', cutoutBuilder))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
@@ -391,6 +403,8 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
         offset: widget.offset,
         hideRegion: widget.hideRegion,
         onTapHide: widget.onTapHide,
+        cutout: widget.cutout,
+        cutoutBuilder: widget.cutoutBuilder,
         autofocus: widget.autofocus,
         focusNode: widget.focusNode,
         onFocusChange: widget.onFocusChange,
@@ -422,6 +436,8 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
         overflow: widget.overflow,
         offset: widget.offset,
         hideRegion: widget.hideRegion,
+        cutout: widget.cutout,
+        cutoutBuilder: widget.cutoutBuilder,
         autofocus: widget.autofocus,
         focusNode: widget.focusNode,
         onFocusChange: widget.onFocusChange,

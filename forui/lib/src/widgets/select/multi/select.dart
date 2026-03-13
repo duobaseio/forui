@@ -224,6 +224,12 @@ abstract class FMultiSelect<T> extends StatefulWidget {
   /// {@macro forui.widgets.FPopover.groupId}
   final Object? contentGroupId;
 
+  /// {@macro forui.widgets.FPopover.cutout}
+  final bool contentCutout;
+
+  /// {@macro forui.widgets.FPopover.cutoutBuilder}
+  final void Function(Path path, Rect bounds) contentCutoutBuilder;
+
   /// The builder that is called when the select is empty. Defaults to [FSelect.defaultContentEmptyBuilder].
   final Widget Function(BuildContext context, FMultiSelectStyle style) contentEmptyBuilder;
 
@@ -283,6 +289,8 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     Offset contentOffset = .zero,
     FPopoverHideRegion contentHideRegion = .excludeChild,
     Object? contentGroupId,
+    bool contentCutout = true,
+    void Function(Path path, Rect bounds) contentCutoutBuilder = FModalBarrier.defaultCutoutBuilder,
     Widget Function(BuildContext context, FMultiSelectStyle style) contentEmptyBuilder =
         FMultiSelect.defaultContentEmptyBuilder,
     ScrollController? contentScrollController,
@@ -329,6 +337,8 @@ abstract class FMultiSelect<T> extends StatefulWidget {
       contentOffset: contentOffset,
       contentHideRegion: contentHideRegion,
       contentGroupId: contentGroupId,
+      contentCutout: contentCutout,
+      contentCutoutBuilder: contentCutoutBuilder,
       contentEmptyBuilder: contentEmptyBuilder,
       contentScrollController: contentScrollController,
       contentScrollHandles: contentScrollHandles,
@@ -378,6 +388,8 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     Offset contentOffset,
     FPopoverHideRegion contentHideRegion,
     Object? contentGroupId,
+    bool contentCutout,
+    void Function(Path path, Rect bounds) contentCutoutBuilder,
     Widget Function(BuildContext context, FMultiSelectStyle style) contentEmptyBuilder,
     ScrollController? contentScrollController,
     bool contentScrollHandles,
@@ -443,6 +455,8 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     Offset contentOffset = .zero,
     FPopoverHideRegion contentHideRegion = .excludeChild,
     Object? contentGroupId,
+    bool contentCutout = true,
+    void Function(Path path, Rect bounds) contentCutoutBuilder = FModalBarrier.defaultCutoutBuilder,
     Widget Function(BuildContext context, FMultiSelectStyle style) contentEmptyBuilder = defaultContentEmptyBuilder,
     ScrollController? contentScrollController,
     bool contentScrollHandles = false,
@@ -500,6 +514,8 @@ abstract class FMultiSelect<T> extends StatefulWidget {
       contentOffset: contentOffset,
       contentHideRegion: contentHideRegion,
       contentGroupId: contentGroupId,
+      contentCutout: contentCutout,
+      contentCutoutBuilder: contentCutoutBuilder,
       contentEmptyBuilder: contentEmptyBuilder,
       contentScrollController: contentScrollController,
       contentScrollHandles: contentScrollHandles,
@@ -560,6 +576,8 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     Offset contentOffset,
     FPopoverHideRegion contentHideRegion,
     Object? contentGroupId,
+    bool contentCutout,
+    void Function(Path path, Rect bounds) contentCutoutBuilder,
     Widget Function(BuildContext context, FMultiSelectStyle style) contentEmptyBuilder,
     ScrollController? contentScrollController,
     bool contentScrollHandles,
@@ -604,6 +622,8 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     this.contentOffset = .zero,
     this.contentHideRegion = .excludeChild,
     this.contentGroupId,
+    this.contentCutout = true,
+    this.contentCutoutBuilder = FModalBarrier.defaultCutoutBuilder,
     this.contentEmptyBuilder = FMultiSelect.defaultContentEmptyBuilder,
     this.contentScrollController,
     this.contentScrollHandles = false,
@@ -650,6 +670,8 @@ abstract class FMultiSelect<T> extends StatefulWidget {
       ..add(DiagnosticsProperty('contentOffset', contentOffset))
       ..add(EnumProperty('contentHideRegion', contentHideRegion))
       ..add(DiagnosticsProperty('contentGroupId', contentGroupId))
+      ..add(FlagProperty('contentCutout', value: contentCutout, ifTrue: 'cutout'))
+      ..add(ObjectFlagProperty.has('contentCutoutBuilder', contentCutoutBuilder))
       ..add(ObjectFlagProperty.has('emptyBuilder', contentEmptyBuilder))
       ..add(DiagnosticsProperty('contentScrollController', contentScrollController))
       ..add(FlagProperty('contentScrollHandles', value: contentScrollHandles, ifTrue: 'contentScrollHandles'))
@@ -754,6 +776,8 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
               offset: widget.contentOffset,
               hideRegion: widget.contentHideRegion,
               groupId: widget.contentGroupId,
+              cutout: widget.contentCutout,
+              cutoutBuilder: widget.contentCutoutBuilder,
               shortcuts: {const SingleActivator(.escape): _toggle},
               popoverBuilder: (context, controller) => InheritedSelectController<T>(
                 popover: _popoverController,

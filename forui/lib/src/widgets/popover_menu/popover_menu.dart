@@ -131,6 +131,12 @@ class FPopoverMenu extends StatelessWidget {
   /// {@macro forui.widgets.FPopover.barrierSemanticsDismissible}
   final bool barrierSemanticsDismissible;
 
+  /// {@macro forui.widgets.FPopover.cutout}
+  final bool cutout;
+
+  /// {@macro forui.widgets.FPopover.cutoutBuilder}
+  final void Function(Path path, Rect bounds) cutoutBuilder;
+
   /// The menu's semantic label used by accessibility frameworks.
   final String? semanticsLabel;
 
@@ -188,6 +194,8 @@ class FPopoverMenu extends StatelessWidget {
     this.onTapHide,
     this.barrierSemanticsLabel,
     this.barrierSemanticsDismissible = true,
+    this.cutout = true,
+    this.cutoutBuilder = FModalBarrier.defaultCutoutBuilder,
     this.semanticsLabel,
     this.autofocus,
     this.focusNode,
@@ -251,6 +259,8 @@ class FPopoverMenu extends StatelessWidget {
     this.onTapHide,
     this.barrierSemanticsLabel,
     this.barrierSemanticsDismissible = true,
+    this.cutout = true,
+    this.cutoutBuilder = FModalBarrier.defaultCutoutBuilder,
     this.semanticsLabel,
     this.autofocus,
     this.focusNode,
@@ -300,6 +310,8 @@ class FPopoverMenu extends StatelessWidget {
       traversalEdgeBehavior: traversalEdgeBehavior,
       barrierSemanticsLabel: barrierSemanticsLabel,
       barrierSemanticsDismissible: barrierSemanticsDismissible,
+      cutout: cutout,
+      cutoutBuilder: cutoutBuilder,
       useViewPadding: useViewPadding,
       useViewInsets: useViewInsets,
       popoverBuilder: (context, controller) => FInheritedItemData(child: _menuBuilder(context, controller, style)),
@@ -336,6 +348,8 @@ class FPopoverMenu extends StatelessWidget {
           ifTrue: 'barrier semantics dismissible',
         ),
       )
+      ..add(FlagProperty('cutout', value: cutout, ifTrue: 'cutout'))
+      ..add(ObjectFlagProperty.has('cutoutBuilder', cutoutBuilder))
       ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))

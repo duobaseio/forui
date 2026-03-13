@@ -47,6 +47,15 @@ class FTimeFieldPickerProperties with Diagnosticable {
   /// Callback that is called when the time picker is tapped to hide it.
   final VoidCallback? onTapHide;
 
+  /// {@macro forui.widgets.FPopover.cutout}
+  final bool cutout;
+
+  /// {@macro forui.widgets.FPopover.cutoutBuilder}
+  final void Function(Path path, Rect bounds) cutoutBuilder;
+
+  /// The builder used to wrap the time picker popover content.
+  final FTimeFieldPopoverBuilder popoverBuilder;
+
   /// The interval between hours shown in the time picker. Defaults to 1.
   ///
   /// For example, setting this to 6 will show hours like 0, 6, 12, and 18.
@@ -69,6 +78,9 @@ class FTimeFieldPickerProperties with Diagnosticable {
     this.hideRegion = .excludeChild,
     this.groupId,
     this.onTapHide,
+    this.cutout = true,
+    this.cutoutBuilder = FModalBarrier.defaultCutoutBuilder,
+    this.popoverBuilder = FPopover.defaultPopoverBuilder,
     this.hourInterval = 1,
     this.minuteInterval = 1,
   });
@@ -88,6 +100,9 @@ class FTimeFieldPickerProperties with Diagnosticable {
       ..add(EnumProperty('hideRegion', hideRegion))
       ..add(DiagnosticsProperty('groupId', groupId))
       ..add(ObjectFlagProperty.has('onTapHide', onTapHide))
+      ..add(FlagProperty('cutout', value: cutout, ifTrue: 'cutout'))
+      ..add(ObjectFlagProperty.has('cutoutBuilder', cutoutBuilder))
+      ..add(ObjectFlagProperty.has('popoverBuilder', popoverBuilder))
       ..add(IntProperty('hourInterval', hourInterval))
       ..add(IntProperty('minuteInterval', minuteInterval));
   }
@@ -108,6 +123,9 @@ class FTimeFieldPickerProperties with Diagnosticable {
           hideRegion == other.hideRegion &&
           groupId == other.groupId &&
           onTapHide == other.onTapHide &&
+          cutout == other.cutout &&
+          cutoutBuilder == other.cutoutBuilder &&
+          popoverBuilder == other.popoverBuilder &&
           hourInterval == other.hourInterval &&
           minuteInterval == other.minuteInterval;
 
@@ -124,6 +142,9 @@ class FTimeFieldPickerProperties with Diagnosticable {
       hideRegion.hashCode ^
       groupId.hashCode ^
       onTapHide.hashCode ^
+      cutout.hashCode ^
+      cutoutBuilder.hashCode ^
+      popoverBuilder.hashCode ^
       hourInterval.hashCode ^
       minuteInterval.hashCode;
 }
