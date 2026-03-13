@@ -1,0 +1,38 @@
+---
+title: Using Forui À La Shadcn/ui
+description: Take full ownership of Forui's behavior and layout by editing widget source directly.
+---
+
+import {Callout} from "fumadocs-ui/components/callout";
+
+<Callout type="warning">
+    This approach is only recommended for advanced users. Consider using the
+    [in-built styling system and CLI](/docs/guides/customizing-widget-styles) instead.
+</Callout>
+
+[Shadcn/ui](https://ui.shadcn.com) popularized copying component source into your project and editing it directly.
+You can do the same with Forui using [`dart pub unpack`](https://dart.dev/tools/pub/cmd/pub-unpack).
+
+Unlike shadcn/ui, which is a thin styling layer over headless components, Forui is fully self-contained. Unpacking gives
+you ownership of **everything**, including accessibility, gesture handling and layout, not just styling.
+
+In practice, this means more fine-grained control at the cost of a greater maintenance burden.
+
+This approach is best suited for building your own tailored design system using Forui as a base.
+
+## Unpacking
+
+To unpack Forui's source locally, run:
+```shell copy
+dart pub unpack forui -o <output>
+```
+
+Then depend on the local copy in your `pubspec.yaml`:
+```yaml
+dependencies:
+  forui:
+    path: <output>
+```
+
+Consider setting up a [Dart workspace](https://dart.dev/tools/pub/workspaces) to manage the unpacked package alongside
+your main project.

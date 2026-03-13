@@ -30,6 +30,20 @@ Since widget styles extend their corresponding deltas, you can also pass a full 
 
 <CodeSnippet snippet={replaceSnippet} />
 
+The following in-built Flutter types also have corresponding deltas:
+
+| Flutter Type                                                                                         | Delta                                                                                                                        |
+|------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------|
+| [`Decoration`](https://api.flutter.dev/flutter/painting/Decoration-class.html)                       | [`DecorationDelta`](https://pub.dev/documentation/forui/latest/forui.theme/DecorationDelta-class.html)                       |
+| [`BoxDecoration`](https://api.flutter.dev/flutter/painting/BoxDecoration-class.html)                 | [`BoxDecorationDelta`](https://pub.dev/documentation/forui/latest/forui.theme/BoxDecorationDelta-class.html)                 |
+| [`ShapeDecoration`](https://api.flutter.dev/flutter/painting/ShapeDecoration-class.html)             | [`ShapeDecorationDelta`](https://pub.dev/documentation/forui/latest/forui.theme/ShapeDecorationDelta-class.html)             |
+| [`EdgeInsetsGeometry`](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)       | [`EdgeInsetsGeometryDelta`](https://pub.dev/documentation/forui/latest/forui.theme/EdgeInsetsGeometryDelta-class.html)       |
+| [`EdgeInsets`](https://api.flutter.dev/flutter/painting/EdgeInsets-class.html)                       | [`EdgeInsetsDelta`](https://pub.dev/documentation/forui/latest/forui.theme/EdgeInsetsDelta-class.html)                       |
+| [`EdgeInsetsDirectional`](https://api.flutter.dev/flutter/painting/EdgeInsetsDirectional-class.html) | [`EdgeInsetsDirectionalDelta`](https://pub.dev/documentation/forui/latest/forui.theme/EdgeInsetsDirectionalDelta-class.html) |
+| [`IconThemeData`](https://api.flutter.dev/flutter/widgets/IconThemeData-class.html)                  | [`IconThemeDataDelta`](https://pub.dev/documentation/forui/latest/forui.theme/IconThemeDataDelta-class.html)                 |
+| [`TextStyle`](https://api.flutter.dev/flutter/painting/TextStyle-class.html)                         | [`TextStyleDelta`](https://pub.dev/documentation/forui/latest/forui.theme/TextStyleDelta-class.html)                         |
+
+
 ### Variants
 
 Widget styles contain [`FVariants`](/docs/concepts/themes#variants) fields. They can be modified using a `delta(...)`
