@@ -79,9 +79,13 @@ class FTabs extends StatefulWidget {
   /// Otherwise each tab gets an equal share of the available space.
   final bool scrollable;
 
-  /// How the tab should respond to user input.
+  /// Whether the tab content area can be scrolled horizontally. Only active when [expands] is true.
   ///
-  /// Defaults to matching platform conventions.
+  /// Defaults to matching platform conventions: true on mobile (touch devices) and false on desktop.
+  final bool? swipeablePhysics;
+
+  /// Defaults to [BouncingScrollPhysics]. Note that if [swipeablePhysics] resolves to false or [expands] is false,
+  /// the content area will not be scrollable regardless of this physics property.
   final ScrollPhysics? physics;
 
   /// A callback that is triggered when a tab is pressed. It is called **before** the tab switching animation begins
@@ -94,7 +98,7 @@ class FTabs extends StatefulWidget {
   /// Whether the tab content should expand to fill the remaining available space. Defaults to false.
   ///
   /// ## Contract
-  /// Throws an error if true and placed in a container with unbound height constraint, e.g. [ListView].
+  /// Throws an error in debug mode if true and placed in a container with unbound height constraint, e.g. [ListView].
   final bool expands;
 
   /// The tabs.
@@ -109,6 +113,7 @@ class FTabs extends StatefulWidget {
     required this.children,
     this.control = const .managed(),
     this.scrollable = false,
+    this.swipeablePhysics,
     this.physics,
     this.style = const .context(),
     this.onPress,
@@ -124,6 +129,7 @@ class FTabs extends StatefulWidget {
       ..add(DiagnosticsProperty('control', control))
       ..add(DiagnosticsProperty('style', style))
       ..add(FlagProperty('scrollable', value: scrollable, ifTrue: 'scrollable'))
+      ..add(DiagnosticsProperty('swipeablePhysics', swipeablePhysics))
       ..add(DiagnosticsProperty('physics', physics))
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
@@ -167,16 +173,36 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.expands) {
+      assert(
+        context.findRenderObject() == null || (context.findRenderObject()! as RenderBox).hasSize,
+        'FTabs(expands: true) was placed in a container with unbound height. '
+        'Consider setting expands to false or placing FTabs in a container with a fixed height.',
+      );
+    }
     final theme = context.theme;
     final style = widget.style(context.theme.tabsStyle);
     final localizations = Localizations.of<MaterialLocalizations>(context, MaterialLocalizations);
+
+    final isSwipeablePhysics = widget.swipeablePhysics ?? !context.platformVariant.desktop;
+    final useTabBarView = widget.expands && isSwipeablePhysics;
+
+    final physics = isSwipeablePhysics
+        ? (widget.physics ?? const BouncingScrollPhysics())
+        : const NeverScrollableScrollPhysics();
 
     final content = DefaultTextStyle(
       style: theme.typography.md.copyWith(
         fontFamily: theme.typography.defaultFontFamily,
         color: theme.colors.foreground,
       ),
-      child: widget.children[_controller.index].child,
+      child: useTabBarView
+          ? TabBarView(
+              controller: _controller._controller,
+              physics: physics,
+              children: [for (final tab in widget.children) tab.child],
+            )
+          : widget.children[_controller.index].child,
     );
 
     final tabs = Material(

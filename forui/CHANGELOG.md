@@ -1,3 +1,11 @@
+## Unreleased
+
+### `FTabs`
+* Add swipe navigation when `expands` is true. `physics` now defaults to `BouncingScrollPhysics` for the content area.
+* Add `FTabs.swipeablePhysics` to toggle swipe navigation independently from `scrollable`.
+* Add assertion to catch `FTabs(expands: true)` in containers with unbounded height.
+
+
 ## 0.20.0
 
 This update builds upon the styling overhaul by introducing desktop and touch variants of each theme and making widget

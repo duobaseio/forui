@@ -10,6 +10,9 @@ final tabs = FTabs(
   // {@endcategory}
   // {@category "Tab Bar"}
   scrollable: false,
+  // {@endcategory}
+  // {@category "Content"}
+  swipeablePhysics: null,
   physics: null,
   // {@endcategory}
   // {@category "Core"}

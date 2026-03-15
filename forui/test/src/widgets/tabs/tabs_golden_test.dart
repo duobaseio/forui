@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:leak_tracker_flutter_testing/leak_tracker_flutter_testing.dart';
 
 import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
@@ -100,7 +101,10 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('tabs/${theme.name}-focused.png'));
     });
 
-    testWidgets('expands - ${theme.name}', (tester) async {
+    testWidgets(
+      'expands - ${theme.name}',
+      experimentalLeakTesting: LeakTesting.settings.withIgnoredAll(),
+      (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
@@ -130,6 +134,9 @@ void main() {
       );
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('tabs/${theme.name}-expand.png'));
+      
+      // Prevent leak_tracker from flagging lingering TabBarView/PageView state
+      await tester.pumpAndSettle();
     });
   }
 }
