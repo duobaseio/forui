@@ -101,10 +101,9 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('tabs/${theme.name}-focused.png'));
     });
 
-    testWidgets(
-      'expands - ${theme.name}',
-      experimentalLeakTesting: LeakTesting.settings.withIgnoredAll(),
-      (tester) async {
+    testWidgets('expands - ${theme.name}', experimentalLeakTesting: LeakTesting.settings.withIgnoredAll(), (
+      tester,
+    ) async {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
@@ -134,7 +133,7 @@ void main() {
       );
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('tabs/${theme.name}-expand.png'));
-      
+
       // Prevent leak_tracker from flagging lingering TabBarView/PageView state
       await tester.pumpAndSettle();
     });
