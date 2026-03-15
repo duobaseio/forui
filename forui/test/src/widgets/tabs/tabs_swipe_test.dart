@@ -32,7 +32,7 @@ void main() {
       expect(find.text('Content 2'), findsNothing);
 
       // Drag from right to left to switch to Tab 2
-      await tester.drag(find.text('Content 1'), const Offset(-400, 0));
+      await tester.drag(find.text('Content 1'), const Offset(-600, 0));
       await tester.pumpAndSettle();
 
       expect(index, 1);
@@ -64,7 +64,7 @@ void main() {
       await tester.pumpAndSettle();
 
       // Attempt to drag from right to left
-      await tester.drag(find.text('Content 1'), const Offset(-400, 0));
+      await tester.drag(find.text('Content 1'), const Offset(-600, 0));
       await tester.pumpAndSettle();
 
       expect(index, 0);
