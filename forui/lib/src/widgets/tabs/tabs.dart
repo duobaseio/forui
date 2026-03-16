@@ -98,7 +98,7 @@ class FTabs extends StatefulWidget {
   /// Whether the tab content should expand to fill the remaining available space. Defaults to false.
   ///
   /// ## Contract
-  /// Throws an error in debug mode if true and placed in a container with unbound height constraint, e.g. [ListView].
+  /// Throws an error if true and placed in a container with unbound height constraint, e.g. [ListView].
   final bool expands;
 
   /// The tabs.
