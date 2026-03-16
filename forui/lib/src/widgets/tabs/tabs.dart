@@ -84,8 +84,15 @@ class FTabs extends StatefulWidget {
   /// Defaults to matching platform conventions: true on mobile (touch devices) and false on desktop.
   final bool? swipeablePhysics;
 
-  /// Defaults to [BouncingScrollPhysics]. Note that if [swipeablePhysics] resolves to false or [expands] is false,
-  /// the content area will not be scrollable regardless of this physics property.
+  /// The scroll physics used by both the tab bar (when [scrollable] is true) and the tab content area.
+  ///
+  /// When null:
+  ///  * the tab bar uses the default physics from [TabBar.physics], and
+  ///  * the tab content area, when swipeable ([expands] is true and [swipeablePhysics] resolves to true),
+  ///    uses [BouncingScrollPhysics].
+  ///
+  /// Note that if [swipeablePhysics] resolves to false or [expands] is false, the content area will not be
+  /// horizontally scrollable regardless of this physics property.
   final ScrollPhysics? physics;
 
   /// A callback that is triggered when a tab is pressed. It is called **before** the tab switching animation begins

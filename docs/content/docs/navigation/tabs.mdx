@@ -47,7 +47,7 @@ To generate a specific style for customization:
 
 #### Swipe Navigation
 
-The tab content area can be scrolled horizontally when `expands` is true.
+The tab content area supports horizontal swipe navigation when `expands` is true and `swipeablePhysics` resolves to an enabled value.
 
-- **Defaults:** True on mobile (touch devices) and false on desktop. Use `swipeablePhysics` to override.
-- **Physics:** Defaults to `BouncingScrollPhysics`.
+- **Defaults:** On non-desktop platforms (mobile and web), `swipeablePhysics` defaults to an enabled value, so swipe navigation is on when `expands` is true. On desktop it defaults to disabled. Use `swipeablePhysics` to override.
+- **Physics:** When swipe navigation is enabled, the scroll physics default to `BouncingScrollPhysics`.

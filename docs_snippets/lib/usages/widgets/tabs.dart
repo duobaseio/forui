@@ -11,11 +11,9 @@ final tabs = FTabs(
   // {@category "Tab Bar"}
   scrollable: false,
   // {@endcategory}
-  // {@category "Content"}
+  // {@category "Core"}
   swipeablePhysics: null,
   physics: null,
-  // {@endcategory}
-  // {@category "Core"}
   style: const .delta(spacing: 10),
   mouseCursor: .defer,
   onPress: (index) {},
