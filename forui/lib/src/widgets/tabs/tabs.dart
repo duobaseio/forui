@@ -187,9 +187,13 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
     final isSwipeablePhysics = widget.swipeablePhysics ?? !context.platformVariant.desktop;
     final useTabBarView = widget.expands && isSwipeablePhysics;
 
-    final physics = isSwipeablePhysics
-        ? (widget.physics ?? const BouncingScrollPhysics())
-        : const NeverScrollableScrollPhysics();
+    final ScrollPhysics physics;
+    if (isSwipeablePhysics) {
+      final ScrollPhysics basePhysics = widget.physics ?? const BouncingScrollPhysics();
+      physics = basePhysics is PageScrollPhysics ? basePhysics : PageScrollPhysics(parent: basePhysics);
+    } else {
+      physics = const NeverScrollableScrollPhysics();
+    }
 
     final content = DefaultTextStyle(
       style: theme.typography.md.copyWith(
