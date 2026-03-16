@@ -90,7 +90,25 @@ void main() {
       expect(tester.takeException(), isNull);
     });
 
-    testWidgets('defaults swipeablePhysics to true on mobile', (tester) async {
+    testWidgets('asserts when expands: true in unbounded height container', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: ListView(
+            children: [
+              FTabs(
+                expands: true,
+                swipeablePhysics: false,
+                children: const [FTabEntry(label: Text('Tab 1'), child: Text('Content 1'))],
+              ),
+            ],
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(tester.takeException(), isA<AssertionError>());
+    });
+
+    testWidgets('defaults swipeablePhysics to true on touch devices (Web & Mobile)', (tester) async {
       int index = 0;
       await tester.pumpWidget(
         TestScaffold.app(

@@ -181,18 +181,29 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     if (widget.expands) {
-      assert(
-        context.findRenderObject() == null || (context.findRenderObject()! as RenderBox).hasSize,
-        'FTabs(expands: true) was placed in a container with unbound height. '
-        'Consider setting expands to false or placing FTabs in a container with a fixed height.',
+      return LayoutBuilder(
+        builder: (context, constraints) {
+          assert(
+            constraints.hasBoundedHeight,
+            'FTabs(expands: true) was placed in a container with unbound height. '
+            'Consider setting expands to false or placing FTabs in a container with a fixed height.',
+          );
+
+          return _buildTabs(context, constraints.hasBoundedHeight);
+        },
       );
     }
+
+    return _buildTabs(context, true);
+  }
+
+  Widget _buildTabs(BuildContext context, bool hasBoundedHeight) {
     final theme = context.theme;
     final style = widget.style(context.theme.tabsStyle);
     final localizations = Localizations.of<MaterialLocalizations>(context, MaterialLocalizations);
 
-    final isSwipeablePhysics = widget.swipeablePhysics ?? !context.platformVariant.desktop;
-    final useTabBarView = widget.expands && isSwipeablePhysics;
+    final isSwipeablePhysics = widget.swipeablePhysics ?? context.platformVariant.touch;
+    final useTabBarView = widget.expands && isSwipeablePhysics && hasBoundedHeight;
 
     final ScrollPhysics physics;
     if (isSwipeablePhysics) {
