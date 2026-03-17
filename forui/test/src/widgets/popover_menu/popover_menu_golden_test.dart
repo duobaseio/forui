@@ -61,6 +61,30 @@ void main() {
   });
 
   for (final theme in TestScaffold.themes) {
+    testWidgets('${theme.name} min width', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          child: FPopoverMenu(
+            control: const .managed(initial: true),
+            menu: [
+              .group(
+                children: [
+                  .item(title: const Text('A'), onPress: () {}),
+                  .item(title: const Text('B'), onPress: () {}),
+                ],
+              ),
+            ],
+            child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover-menu/min-width-${theme.name}.png'));
+    });
+
+
     testWidgets('${theme.name} hidden ', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(

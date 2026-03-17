@@ -295,7 +295,7 @@ class FPopoverMenu extends StatelessWidget {
     return FPopover(
       control: control,
       style: style,
-      constraints: FPortalConstraints(maxWidth: style.maxWidth),
+      constraints: FPortalConstraints(minWidth: style.minWidth, maxWidth: style.maxWidth),
       popoverAnchor: menuAnchor,
       childAnchor: childAnchor,
       spacing: spacing,
@@ -372,6 +372,13 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
   @override
   final FTileGroupStyle tileGroupStyle;
 
+  /// The menu's min width. Defaults to 150.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if the width is not positive.
+  @override
+  final double minWidth;
+
   /// The menu's max width. Defaults to 250.
   ///
   /// ## Contract
@@ -384,11 +391,14 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
     required this.itemGroupStyle,
     required this.tileGroupStyle,
     required super.decoration,
+    this.minWidth = 150,
     this.maxWidth = 250,
     super.barrierFilter,
     super.backgroundFilter,
     super.popoverPadding,
-  }) : assert(0 < maxWidth, 'maxWidth ($maxWidth) must be > 0');
+  }) : assert(0 < minWidth, 'minWidth ($minWidth) must be > 0'),
+       assert(0 < maxWidth, 'maxWidth ($maxWidth) must be > 0'),
+       assert(minWidth <= maxWidth, 'minWidth ($minWidth) must be <= maxWidth ($maxWidth)');
 
   /// Creates a [FPopoverMenuStyle] that inherits its properties.
   FPopoverMenuStyle.inherit({
@@ -436,7 +446,7 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
              .delta(
                contentStyle: .delta(
                  prefixIconStyle: FVariants.from(
-                   IconThemeData(color: colors.foreground, size: 18),
+                   IconThemeData(color: colors.foreground, size: typography.md.fontSize),
                    variants: {
                      [.disabled]: .delta(color: colors.disable(colors.foreground)),
                    },
@@ -444,7 +454,7 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
                ),
                rawItemContentStyle: .delta(
                  prefixIconStyle: FVariants.from(
-                   IconThemeData(color: colors.foreground, size: 18),
+                   IconThemeData(color: colors.foreground, size: typography.md.fontSize),
                    variants: {
                      [.disabled]: .delta(color: colors.disable(colors.foreground)),
                    },
@@ -454,6 +464,7 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
            ),
          ]),
        ),
+       minWidth = 150,
        maxWidth = 250,
        super.inherit();
 }
