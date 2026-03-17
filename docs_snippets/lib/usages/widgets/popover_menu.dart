@@ -43,6 +43,7 @@ final popoverMenu = FPopoverMenu(
   // {@category "Core"}
   style: const .delta(maxWidth: 250),
   divider: .full,
+  hover: true,
   menu: [
     .group(
       children: [
@@ -96,6 +97,7 @@ final popoverMenuTiles = FPopoverMenu.tiles(
   // {@category "Core"}
   style: const .delta(maxWidth: 250),
   divider: .full,
+  hover: true,
   menu: [
     .group(
       children: [

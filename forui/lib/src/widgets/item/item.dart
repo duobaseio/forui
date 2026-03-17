@@ -284,6 +284,7 @@ class FItem extends StatelessWidget with FItemMixin {
 
   @override
   Widget build(BuildContext context) {
+    final callbacks = FInheritedItemCallbacks.maybeOf(context);
     final data = FInheritedItemData.maybeOf(context) ?? const FItemData();
     final style = this.style((data.styles ?? context.theme.itemStyles).resolve({variant, context.platformVariant}));
     final enabled = this.enabled ?? data.enabled;
@@ -304,7 +305,7 @@ class FItem extends StatelessWidget with FItemMixin {
     );
 
     final background = style.backgroundColor.resolve(formVariants);
-    return DecoratedBox(
+    Widget child = DecoratedBox(
       decoration: data.index == 0 && data.globalLast && style.shape != null
           ? ShapeDecoration(shape: style.shape!, color: background)
           : BoxDecoration(color: background),
@@ -338,7 +339,12 @@ class FItem extends StatelessWidget with FItemMixin {
             onHoverChange: onHoverChange,
             onVariantChange: onVariantChange,
             selected: selected,
-            onPress: enabled ? (onPress ?? () {}) : null,
+            onPress: enabled
+                ? () {
+                    callbacks?.onPress?.call();
+                    onPress?.call();
+                  }
+                : null,
             onLongPress: enabled ? onLongPress : null,
             onDoubleTap: enabled ? onDoubleTap : null,
             onSecondaryPress: enabled ? onSecondaryPress : null,
@@ -376,6 +382,16 @@ class FItem extends StatelessWidget with FItemMixin {
         },
       ),
     );
+
+    if (callbacks case FInheritedItemCallbacks(:final onHoverEnter, :final onHoverExit)) {
+      child = MouseRegion(
+        onEnter: onHoverEnter == null ? null : (_) => onHoverEnter(),
+        onExit: onHoverExit == null ? null : (_) => onHoverExit(),
+        child: child,
+      );
+    }
+
+    return child;
   }
 
   @override

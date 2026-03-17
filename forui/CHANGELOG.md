@@ -1,7 +1,21 @@
 ## 0.21.0 (Next)
 
+### `FItem`
+* Add `FInheritedItemCallbacks`.
+* Add `FItemMixin.submenu(...)` shorthand for `FSubmenuItem`.
+
+
 ### `FPopoverMenu`
+* Add `FSubmenuItem`.
+* Add `FSubmenuTile`.
+* Add `FPopoverMenu.hover`.
+* Add `FPopoverMenuStyle.motion`.
+* Add `FPopoverMenuMotion`.
 * Add `FPopoverMenuStyle.minWidth`.
+
+
+### `FTile`
+* Add `FTileMixin.submenu(...)` shorthand for `FSubmenuTile`.
 
 
 
