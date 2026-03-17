@@ -177,7 +177,7 @@ enum Style {
     null,
     <String>['date-field', 'datefield'],
     <String>['FDateFieldStyle'],
-    'FDateFieldStyle dateFieldStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n  required bool touch,\n}) => FDateFieldStyle(\n  fieldStyles: .inherit(\n    colors: colors,\n    typography: typography,\n    style: style,\n    touch: touch,\n  ),\n  popoverStyle: .inherit(colors: colors, style: style),\n  calendarStyle: .inherit(\n    colors: colors,\n    typography: typography,\n    style: style,\n    touch: touch,\n  ),\n);\n',
+    'FDateFieldStyle dateFieldStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n  required bool touch,\n}) => FDateFieldStyle(\n  fieldStyles: .inherit(\n    colors: colors,\n    typography: typography,\n    style: style,\n    touch: touch,\n  ),\n  popoverStyle: .inherit(colors: colors, style: style, touch: touch),\n  calendarStyle: .inherit(\n    colors: colors,\n    typography: typography,\n    style: style,\n    touch: touch,\n  ),\n);\n',
   ),
   fdeterminateprogressstyle(
     'FDeterminateProgressStyle',
@@ -352,7 +352,7 @@ enum Style {
     null,
     <String>['popover'],
     <String>['FPopoverStyle'],
-    'FPopoverStyle popoverStyle({required FColors colors, required FStyle style}) =>\n    FPopoverStyle(\n      decoration: ShapeDecoration(\n        shape: RoundedSuperellipseBorder(\n          side: BorderSide(color: colors.border, width: style.borderWidth),\n          borderRadius: style.borderRadius.md,\n        ),\n        shadows: style.shadow,\n        color: colors.card,\n      ),\n      popoverPadding: const .all(5),\n    );\n',
+    'FPopoverStyle popoverStyle({\n  required FColors colors,\n  required FStyle style,\n  required bool touch,\n}) => FPopoverStyle(\n  decoration: ShapeDecoration(\n    shape: RoundedSuperellipseBorder(\n      side: BorderSide(color: colors.border, width: style.borderWidth),\n      borderRadius: touch ? style.borderRadius.lg : style.borderRadius.md,\n    ),\n    shadows: style.shadow,\n    color: colors.card,\n  ),\n  popoverPadding: const .all(5),\n);\n',
   ),
   fprogressstyle(
     'FProgressStyle',
@@ -580,7 +580,7 @@ enum Style {
     null,
     <String>['time-field', 'timefield'],
     <String>['FTimeFieldStyle'],
-    'FTimeFieldStyle timeFieldStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n  required bool touch,\n}) => FTimeFieldStyle(\n  fieldStyles: .inherit(\n    colors: colors,\n    typography: typography,\n    style: style,\n    touch: touch,\n  ),\n  popoverStyle: .inherit(colors: colors, style: style),\n  pickerStyle: .inherit(colors: colors, typography: typography, style: style),\n);\n',
+    'FTimeFieldStyle timeFieldStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n  required bool touch,\n}) => FTimeFieldStyle(\n  fieldStyles: .inherit(\n    colors: colors,\n    typography: typography,\n    style: style,\n    touch: touch,\n  ),\n  popoverStyle: .inherit(colors: colors, style: style, touch: touch),\n  pickerStyle: .inherit(colors: colors, typography: typography, style: style),\n);\n',
   ),
   ftimepickerstyle(
     'FTimePickerStyle',
