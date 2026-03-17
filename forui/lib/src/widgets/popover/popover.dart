@@ -269,9 +269,15 @@ class FPopover extends StatefulWidget {
   final bool cutout;
 
   /// {@template forui.widgets.FPopover.cutoutBuilder}
-  /// {@macro forui.foundation.FModalBarrier.cutoutBuilder}
+  /// An optional callback that customizes the cutout shape.
   ///
+  /// Defaults to [FModalBarrier.defaultCutoutBuilder] which adds a plain rectangle matching the [cutout]'s bounds.
   /// Does nothing if `cutout` is false or [FPopoverStyle.barrierFilter] is null.
+  ///
+  /// To add a circular cutout:
+  /// ```dart
+  /// cutoutBuilder: (path, bounds) => path.addOval(bounds.deflate(3)),
+  /// ```
   /// {@endtemplate}
   final void Function(Path path, Rect bounds) cutoutBuilder;
 

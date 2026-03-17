@@ -132,6 +132,11 @@ class FModalBarrier extends StatelessWidget {
   /// An optional callback that customizes the cutout shape.
   ///
   /// Defaults to [FModalBarrier.defaultCutoutBuilder] which adds a plain rectangle matching the [cutout]'s bounds.
+  ///
+  /// To add a circular cutout:
+  /// ```dart
+  /// cutoutBuilder: (path, bounds) => path.addOval(bounds.deflate(3)),
+  /// ```
   /// {@endtemplate}
   final void Function(Path path, Rect bounds) cutoutBuilder;
 
