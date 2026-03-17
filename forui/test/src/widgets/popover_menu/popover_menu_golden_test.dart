@@ -84,7 +84,6 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover-menu/min-width-${theme.name}.png'));
     });
 
-
     testWidgets('${theme.name} hidden ', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
@@ -272,7 +271,6 @@ void main() {
         );
       });
     }
-
   }
 
   testWidgets('submenu item with custom suffix', (tester) async {
@@ -288,7 +286,9 @@ void main() {
                   title: const Text('Share'),
                   suffix: const Icon(FIcons.arrowRight),
                   submenu: [
-                    .group(children: [.item(title: const Text('Email'), onPress: () {})]),
+                    .group(
+                      children: [.item(title: const Text('Email'), onPress: () {})],
+                    ),
                   ],
                 ),
               ],
@@ -300,10 +300,7 @@ void main() {
     );
     await tester.pumpAndSettle();
 
-    await expectLater(
-      find.byType(TestScaffold),
-      matchesGoldenFile('popover-menu/submenu-custom-suffix.png'),
-    );
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover-menu/submenu-custom-suffix.png'));
   });
 
   testWidgets('submenu style propagation', (tester) async {
@@ -316,7 +313,10 @@ void main() {
           style: .delta(
             minWidth: 300,
             maxWidth: 300,
-            decoration: .boxDelta(color: Colors.amber.shade100, border: Border.all(color: Colors.red, width: 2)),
+            decoration: .boxDelta(
+              color: Colors.amber.shade100,
+              border: Border.all(color: Colors.red, width: 2),
+            ),
           ),
           menu: [
             .group(
@@ -345,10 +345,7 @@ void main() {
     await tester.tap(find.text('Share'));
     await tester.pumpAndSettle();
 
-    await expectLater(
-      find.byType(TestScaffold),
-      matchesGoldenFile('popover-menu/submenu-style-propagation.png'),
-    );
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover-menu/submenu-style-propagation.png'));
   });
 
   testWidgets('submenu RTL', (tester) async {
@@ -365,7 +362,9 @@ void main() {
                 .submenu(
                   title: const Text('Share'),
                   submenu: [
-                    .group(children: [.item(title: const Text('Email'), onPress: () {})]),
+                    .group(
+                      children: [.item(title: const Text('Email'), onPress: () {})],
+                    ),
                   ],
                 ),
               ],
@@ -380,9 +379,6 @@ void main() {
     await tester.tap(find.text('Share'));
     await tester.pumpAndSettle();
 
-    await expectLater(
-      find.byType(TestScaffold),
-      matchesGoldenFile('popover-menu/submenu-rtl.png'),
-    );
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover-menu/submenu-rtl.png'));
   });
 }

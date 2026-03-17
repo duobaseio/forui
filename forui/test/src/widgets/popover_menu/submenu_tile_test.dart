@@ -20,7 +20,9 @@ void main() {
                     .submenu(
                       title: const Text('Share'),
                       menu: [
-                        .group(children: [.tile(title: const Text('Email'), onPress: () {})]),
+                        .group(
+                          children: [.tile(title: const Text('Email'), onPress: () {})],
+                        ),
                       ],
                     ),
                   ],
@@ -51,7 +53,9 @@ void main() {
                     .submenu(
                       title: const Text('Share'),
                       menu: [
-                        .group(children: [.tile(title: const Text('Email'), onPress: () {})]),
+                        .group(
+                          children: [.tile(title: const Text('Email'), onPress: () {})],
+                        ),
                       ],
                     ),
                   ],
@@ -85,13 +89,17 @@ void main() {
                     .submenu(
                       title: const Text('Share'),
                       menu: [
-                        .group(children: [.tile(title: const Text('Email'), onPress: () {})]),
+                        .group(
+                          children: [.tile(title: const Text('Email'), onPress: () {})],
+                        ),
                       ],
                     ),
                     .submenu(
                       title: const Text('Export'),
                       menu: [
-                        .group(children: [.tile(title: const Text('PDF'), onPress: () {})]),
+                        .group(
+                          children: [.tile(title: const Text('PDF'), onPress: () {})],
+                        ),
                       ],
                     ),
                   ],
@@ -128,7 +136,9 @@ void main() {
                     .submenu(
                       title: const Text('Export'),
                       menu: [
-                        .group(children: [.tile(title: const Text('PDF'), onPress: () {})]),
+                        .group(
+                          children: [.tile(title: const Text('PDF'), onPress: () {})],
+                        ),
                       ],
                     ),
                   ],
@@ -164,7 +174,9 @@ void main() {
                     .submenu(
                       title: const Text('Export'),
                       menu: [
-                        .group(children: [.tile(title: const Text('PDF'), onPress: () {})]),
+                        .group(
+                          children: [.tile(title: const Text('PDF'), onPress: () {})],
+                        ),
                       ],
                     ),
                   ],
@@ -198,7 +210,9 @@ void main() {
                     .submenu(
                       title: const Text('Share'),
                       menu: [
-                        .group(children: [.tile(title: const Text('Email'), onPress: () {})]),
+                        .group(
+                          children: [.tile(title: const Text('Email'), onPress: () {})],
+                        ),
                       ],
                     ),
                   ],
@@ -236,7 +250,9 @@ void main() {
                     .submenu(
                       title: const Text('Share'),
                       menu: [
-                        .group(children: [.tile(title: const Text('Email'), onPress: () {})]),
+                        .group(
+                          children: [.tile(title: const Text('Email'), onPress: () {})],
+                        ),
                       ],
                     ),
                   ],
@@ -270,7 +286,9 @@ void main() {
                     .submenu(
                       title: const Text('Share'),
                       menu: [
-                        .group(children: [.tile(title: const Text('Email'), onPress: () {})]),
+                        .group(
+                          children: [.tile(title: const Text('Email'), onPress: () {})],
+                        ),
                       ],
                     ),
                   ],
@@ -306,13 +324,17 @@ void main() {
                     .submenu(
                       title: const Text('Share'),
                       menu: [
-                        .group(children: [.tile(title: const Text('Email'), onPress: () {})]),
+                        .group(
+                          children: [.tile(title: const Text('Email'), onPress: () {})],
+                        ),
                       ],
                     ),
                     .submenu(
                       title: const Text('Export'),
                       menu: [
-                        .group(children: [.tile(title: const Text('PDF'), onPress: () {})]),
+                        .group(
+                          children: [.tile(title: const Text('PDF'), onPress: () {})],
+                        ),
                       ],
                     ),
                   ],
@@ -352,7 +374,9 @@ void main() {
                     .submenu(
                       title: const Text('Share'),
                       menu: [
-                        .group(children: [.tile(title: const Text('Email'), onPress: () {})]),
+                        .group(
+                          children: [.tile(title: const Text('Email'), onPress: () {})],
+                        ),
                       ],
                     ),
                   ],
@@ -390,7 +414,9 @@ void main() {
                     .submenu(
                       title: const Text('Share'),
                       menu: [
-                        .group(children: [.tile(title: const Text('Email'), onPress: () {})]),
+                        .group(
+                          children: [.tile(title: const Text('Email'), onPress: () {})],
+                        ),
                       ],
                     ),
                   ],
@@ -570,7 +596,9 @@ void main() {
                     .submenu(
                       title: const Text('Share'),
                       menu: [
-                        .group(children: [.tile(title: const Text('Email'), onPress: () {})]),
+                        .group(
+                          children: [.tile(title: const Text('Email'), onPress: () {})],
+                        ),
                       ],
                     ),
                   ],
