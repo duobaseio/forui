@@ -10,7 +10,7 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build-artifact:
+  build-nightly:
     if: github.actor != 'auto-maid[bot]'
     name: Build Nightly Artifacts
     runs-on: ubuntu-latest
@@ -42,6 +42,23 @@ jobs:
 
       - uses: EndBug/add-and-commit@v9
         with:
-          add: '--force **/*.design.dart'
+          add: '--force **/*.design.dart **/*.control.dart'
           new_branch: 'nightly'
           push: 'origin nightly --set-upstream --force'
+
+  verify-nightly:
+    needs: build-nightly
+    name: Verify Nightly Artifacts
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: forui
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: nightly
+
+      - uses: subosito/flutter-action@v2.21.0
+      - run: flutter pub get
+      - run: flutter analyze --no-fatal-infos --no-fatal-warnings
