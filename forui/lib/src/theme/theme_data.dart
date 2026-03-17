@@ -695,7 +695,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       paginationStyle: paginationStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       persistentSheetStyle: persistentSheetStyle ?? const FPersistentSheetStyle(),
       pickerStyle: pickerStyle ?? .inherit(colors: colors, style: style, typography: typography),
-      popoverStyle: popoverStyle ?? .inherit(colors: colors, style: style),
+      popoverStyle: popoverStyle ?? .inherit(colors: colors, style: style, touch: touch),
       popoverMenuStyle:
           popoverMenuStyle ?? .inherit(colors: colors, style: style, typography: typography, touch: touch),
       progressStyle: progressStyle ?? .inherit(colors: colors, style: style),

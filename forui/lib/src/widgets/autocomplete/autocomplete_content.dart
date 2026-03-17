@@ -181,7 +181,7 @@ class FAutocompleteContentStyle extends FPopoverStyle with Diagnosticable, _$FAu
     required super.colors,
     required FTypography typography,
     required super.style,
-    required bool touch,
+    required super.touch,
   }) : emptyTextStyle = typography.sm,
        progressStyle = .inherit(colors: colors),
        sectionStyle = .inherit(colors: colors, style: style, typography: typography, touch: touch),

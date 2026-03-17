@@ -283,7 +283,7 @@ class FSelectContentStyle extends FPopoverStyle with Diagnosticable, _$FSelectCo
     required super.colors,
     required super.style,
     required FTypography typography,
-    required bool touch,
+    required super.touch,
   }) : sectionStyle = .inherit(colors: colors, style: style, typography: typography, touch: touch),
        scrollHandleStyle = .inherit(colors: colors, typography: typography),
        padding = const .symmetric(vertical: 6),

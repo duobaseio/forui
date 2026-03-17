@@ -490,7 +490,7 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
     required super.colors,
     required super.style,
     required FTypography typography,
-    required bool touch,
+    required super.touch,
   }) : itemGroupStyle = .inherit(colors: colors, style: style, typography: typography, touch: touch).copyWith(
          decoration: .value(
            ShapeDecoration(

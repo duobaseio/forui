@@ -31,7 +31,7 @@ class FDateFieldStyle with Diagnosticable, _$FDateFieldStyleFunctions {
     required bool touch,
   }) : this(
          fieldStyles: .inherit(colors: colors, typography: typography, style: style, touch: touch),
-         popoverStyle: .inherit(colors: colors, style: style),
+         popoverStyle: .inherit(colors: colors, style: style, touch: touch),
          calendarStyle: .inherit(colors: colors, typography: typography, style: style, touch: touch),
        );
 }
