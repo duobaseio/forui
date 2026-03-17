@@ -10,6 +10,43 @@ import 'package:forui/forui.dart';
 
 part 'popover_menu.design.dart';
 
+@internal
+class PopoverMenuScope extends InheritedWidget {
+  static PopoverMenuScope? maybeOf(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<PopoverMenuScope>();
+
+  final FPopoverMenuStyle style;
+
+  final Object? groupId;
+
+  final bool hover;
+
+  final ValueNotifier<Key?> active;
+
+  const PopoverMenuScope({
+    required this.style,
+    required this.groupId,
+    required this.active,
+    required super.child,
+    this.hover = false,
+    super.key,
+  });
+
+  @override
+  bool updateShouldNotify(PopoverMenuScope old) =>
+      style != old.style || groupId != old.groupId || hover != old.hover || active != old.active;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty('groupId', groupId))
+      ..add(FlagProperty('hover', value: hover, ifTrue: 'hover'))
+      ..add(DiagnosticsProperty('active', active));
+  }
+}
+
 /// A popover menu displays a menu in a portal aligned to a child.
 ///
 /// See:
@@ -17,7 +54,7 @@ part 'popover_menu.design.dart';
 /// * [FPopoverController] for controlling a popover menu.
 /// * [FPopoverMenuStyle] for customizing a popover menu's appearance.
 /// * [FTileGroup] for customizing the items in the menu.
-class FPopoverMenu extends StatelessWidget {
+class FPopoverMenu extends StatefulWidget {
   /// The default item menu builder that returns the menu as-is.
   static List<FItemGroupMixin> defaultItemBuilder(
     BuildContext context,
@@ -150,6 +187,10 @@ class FPopoverMenu extends StatelessWidget {
   /// Defaults to true.
   final bool useViewInsets;
 
+  /// Whether submenus are shown when hovering over an item. Defaults to true on desktop platforms and false on touch
+  /// platforms.
+  final bool? hover;
+
   /// {@macro forui.widgets.FPopover.builder}
   final ValueWidgetBuilder<FPopoverController> builder;
 
@@ -203,6 +244,7 @@ class FPopoverMenu extends StatelessWidget {
     this.traversalEdgeBehavior,
     this.useViewPadding = true,
     this.useViewInsets = true,
+    this.hover,
     List<FItemGroupMixin> Function(BuildContext context, FPopoverController controller, List<FItemGroupMixin>? menu)
         menuBuilder =
         defaultItemBuilder,
@@ -268,6 +310,7 @@ class FPopoverMenu extends StatelessWidget {
     this.traversalEdgeBehavior,
     this.useViewPadding = true,
     this.useViewInsets = true,
+    this.hover,
     List<FTileGroupMixin> Function(BuildContext context, FPopoverController controller, List<FTileGroupMixin>? menu)
         menuBuilder =
         defaultTileBuilder,
@@ -290,35 +333,7 @@ class FPopoverMenu extends StatelessWidget {
        assert(menuBuilder != defaultTileBuilder || menu != null, 'Either menuBuilder or menu must be provided');
 
   @override
-  Widget build(BuildContext context) {
-    final style = this.style(context.theme.popoverMenuStyle);
-    return FPopover(
-      control: control,
-      style: style,
-      constraints: FPortalConstraints(maxWidth: style.maxWidth),
-      popoverAnchor: menuAnchor,
-      childAnchor: childAnchor,
-      spacing: spacing,
-      overflow: overflow,
-      offset: offset,
-      groupId: groupId,
-      hideRegion: hideRegion,
-      onTapHide: onTapHide,
-      autofocus: autofocus,
-      focusNode: focusNode,
-      onFocusChange: onFocusChange,
-      traversalEdgeBehavior: traversalEdgeBehavior,
-      barrierSemanticsLabel: barrierSemanticsLabel,
-      barrierSemanticsDismissible: barrierSemanticsDismissible,
-      cutout: cutout,
-      cutoutBuilder: cutoutBuilder,
-      useViewPadding: useViewPadding,
-      useViewInsets: useViewInsets,
-      popoverBuilder: (context, controller) => FInheritedItemData(child: _menuBuilder(context, controller, style)),
-      builder: builder,
-      child: child,
-    );
-  }
+  State<FPopoverMenu> createState() => _FPopoverMenuState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -357,8 +372,73 @@ class FPopoverMenu extends StatelessWidget {
       ..add(EnumProperty('traversalEdgeBehavior', traversalEdgeBehavior))
       ..add(FlagProperty('useViewPadding', value: useViewPadding, ifTrue: 'using view padding'))
       ..add(FlagProperty('useViewInsets', value: useViewInsets, ifTrue: 'using view insets'))
-      ..add(ObjectFlagProperty.has('menuBuilder', _menuBuilder))
+      ..add(FlagProperty('hover', value: hover, ifTrue: 'hover'))
       ..add(ObjectFlagProperty.has('builder', builder));
+  }
+}
+
+class _FPopoverMenuState extends State<FPopoverMenu> {
+  final Key _groupId = UniqueKey();
+  final ValueNotifier<Key?> _active = ValueNotifier(null);
+
+  @override
+  void dispose() {
+    _active.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final scope = PopoverMenuScope.maybeOf(context);
+    final style = widget.style(scope == null ? context.theme.popoverMenuStyle : scope.style);
+    // groupId can only be provided if hideRegion is excludeChild since the popover. We pass widget.groupId through to
+    // improve the diagnostics when the popover menu is misused.
+    final groupId = widget.hideRegion == .excludeChild
+        ? (widget.groupId ?? scope?.groupId ?? _groupId)
+        : widget.groupId;
+    final hover = widget.hover ?? scope?.hover ?? context.platformVariant.desktop;
+
+    return FPopover(
+      control: widget.control,
+      style: style,
+      constraints: FPortalConstraints(minWidth: style.minWidth, maxWidth: style.maxWidth),
+      popoverAnchor: widget.menuAnchor,
+      childAnchor: widget.childAnchor,
+      spacing: widget.spacing,
+      overflow: widget.overflow,
+      offset: widget.offset,
+      groupId: groupId,
+      hideRegion: widget.hideRegion,
+      onTapHide: widget.onTapHide,
+      autofocus: widget.autofocus,
+      focusNode: widget.focusNode,
+      onFocusChange: widget.onFocusChange,
+      traversalEdgeBehavior: widget.traversalEdgeBehavior,
+      barrierSemanticsLabel: widget.barrierSemanticsLabel,
+      barrierSemanticsDismissible: widget.barrierSemanticsDismissible,
+      cutout: widget.cutout,
+      cutoutBuilder: widget.cutoutBuilder,
+      useViewPadding: widget.useViewPadding,
+      useViewInsets: widget.useViewInsets,
+      popoverBuilder: (context, controller) => PopoverMenuScope(
+        style: style,
+        groupId: groupId,
+        active: _active,
+        hover: hover,
+        // The default behavior for non-submenu trigger items.
+        child: FInheritedItemCallbacks(
+          onHoverEnter: hover ? () => _active.value = null : null,
+          onPress: hover ? null : () => _active.value = null,
+          // We explicitly wrap this in a `FInheritedItemData` to prevent any ancestor data from accidentally leaking
+          // into the popover menu's items.
+          //
+          // ItemGroupStyles and ItemStyles are inherited by explicitly passing the style to _menuBuilder.
+          child: FInheritedItemData(child: widget._menuBuilder(context, controller, style)),
+        ),
+      ),
+      builder: widget.builder,
+      child: widget.child,
+    );
   }
 }
 
@@ -372,6 +452,13 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
   @override
   final FTileGroupStyle tileGroupStyle;
 
+  /// The menu's min width. Defaults to 150.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if the width is not positive.
+  @override
+  final double minWidth;
+
   /// The menu's max width. Defaults to 250.
   ///
   /// ## Contract
@@ -379,16 +466,24 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
   @override
   final double maxWidth;
 
+  /// The hover motion configuration for submenus. Controls the delay before showing/hiding submenus on hover.
+  @override
+  final FPopoverMenuMotion motion;
+
   /// Creates a [FPopoverMenuStyle].
   const FPopoverMenuStyle({
     required this.itemGroupStyle,
     required this.tileGroupStyle,
     required super.decoration,
+    this.minWidth = 150,
     this.maxWidth = 250,
+    this.motion = const FPopoverMenuMotion(),
     super.barrierFilter,
     super.backgroundFilter,
     super.popoverPadding,
-  }) : assert(0 < maxWidth, 'maxWidth ($maxWidth) must be > 0');
+  }) : assert(0 < minWidth, 'minWidth ($minWidth) must be > 0'),
+       assert(0 < maxWidth, 'maxWidth ($maxWidth) must be > 0'),
+       assert(minWidth <= maxWidth, 'minWidth ($minWidth) must be <= maxWidth ($maxWidth)');
 
   /// Creates a [FPopoverMenuStyle] that inherits its properties.
   FPopoverMenuStyle.inherit({
@@ -436,7 +531,7 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
              .delta(
                contentStyle: .delta(
                  prefixIconStyle: FVariants.from(
-                   IconThemeData(color: colors.foreground, size: 18),
+                   IconThemeData(color: colors.foreground, size: typography.md.fontSize),
                    variants: {
                      [.disabled]: .delta(color: colors.disable(colors.foreground)),
                    },
@@ -444,7 +539,7 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
                ),
                rawItemContentStyle: .delta(
                  prefixIconStyle: FVariants.from(
-                   IconThemeData(color: colors.foreground, size: 18),
+                   IconThemeData(color: colors.foreground, size: typography.md.fontSize),
                    variants: {
                      [.disabled]: .delta(color: colors.disable(colors.foreground)),
                    },
@@ -454,6 +549,18 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
            ),
          ]),
        ),
+       minWidth = 150,
        maxWidth = 250,
+       motion = const FPopoverMenuMotion(),
        super.inherit();
+}
+
+/// Controls the hover timing for submenu show/hide in a [FPopoverMenu].
+class FPopoverMenuMotion with Diagnosticable, _$FPopoverMenuMotionFunctions {
+  /// The delay before showing a submenu when the pointer enters an item. Defaults to 150ms.
+  @override
+  final Duration hoverEnterDuration;
+
+  /// Creates a [FPopoverMenuMotion].
+  const FPopoverMenuMotion({this.hoverEnterDuration = const Duration(milliseconds: 150)});
 }

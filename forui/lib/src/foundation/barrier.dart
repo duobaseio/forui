@@ -120,7 +120,7 @@ class FAnimatedModalBarrier extends AnimatedWidget {
 /// * merge [ModalBarrier.dismissible] and [ModalBarrier.onDismiss].
 /// * inlined `_ModalBarrierGestureDetector`.
 class FModalBarrier extends StatelessWidget {
-  /// The default cutout builder that adds a plain rectangle matching the [cutout]'s bounds.
+  /// The default cutout builder that adds a plain rectangle matching the `cutout`'s bounds.
   static void defaultCutoutBuilder(Path path, Rect bounds) => path.addRect(bounds);
 
   /// {@template forui.foundation.FModalBarrier.cutout}
@@ -131,7 +131,12 @@ class FModalBarrier extends StatelessWidget {
   /// {@template forui.foundation.FModalBarrier.cutoutBuilder}
   /// An optional callback that customizes the cutout shape.
   ///
-  /// Defaults to [FModalBarrier.defaultCutoutBuilder] which adds a plain rectangle matching the [cutout]'s bounds.
+  /// Defaults to [FModalBarrier.defaultCutoutBuilder] which adds a plain rectangle matching the `cutout`'s bounds.
+  ///
+  /// To add a circular cutout:
+  /// ```dart
+  /// cutoutBuilder: (path, bounds) => path.addOval(bounds.deflate(3)),
+  /// ```
   /// {@endtemplate}
   final void Function(Path path, Rect bounds) cutoutBuilder;
 
@@ -260,7 +265,7 @@ class FModalBarrier extends StatelessWidget {
   }
 }
 
-/// Clips its child with an even-odd path that cuts out the area occupied by [cutout].
+/// Clips its child with an even-odd path that cuts out the area occupied by `cutout`.
 class _CutoutClipper extends SingleChildRenderObjectWidget {
   final RenderBox cutout;
   final void Function(Path path, Rect bounds) cutoutBuilder;
