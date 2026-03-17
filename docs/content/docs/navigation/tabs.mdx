@@ -40,3 +40,14 @@ To generate a specific style for customization:
 
 ### `FTabEntry(...)`
 <UsageSnippet usage={tabEntryUsage} />
+
+## Examples
+
+### Behavior
+
+#### Swipe Navigation
+
+The tab content area supports horizontal swipe navigation when `expands` is true and `swipeablePhysics` resolves to an enabled value.
+
+- **Defaults:** On non-desktop platforms (mobile and web), `swipeablePhysics` defaults to an enabled value, so swipe navigation is on when `expands` is true. On desktop it defaults to disabled. Use `swipeablePhysics` to override.
+- **Physics:** When swipe navigation is enabled, the scroll physics default to `BouncingScrollPhysics`.
