@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 
 import 'package:meta/meta.dart';
 
-/// Tokens for the various size categories.
+/// Reference tokens for the various size categories. Changing these values will not update the sizes of actual widgets.
 ///
 /// These are the canonical heights used by Forui widgets:
 /// * [field] — field-like widgets (buttons, text fields, selects).
