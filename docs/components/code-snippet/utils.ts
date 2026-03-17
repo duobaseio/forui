@@ -61,13 +61,29 @@ function splitIntoGroups(
     const allPoints = [tokenStart, ...splitPoints, tokenEnd];
 
     for (let i = 0; i < allPoints.length - 1; i++) {
-      const start = allPoints[i];
-      const end = allPoints[i + 1];
-      const content = token.content.slice(start - tokenStart, end - tokenStart);
+      let start = allPoints[i];
+      let content = token.content.slice(start - tokenStart, allPoints[i + 1] - tokenStart);
 
       if (!content) continue;
 
-      const segmentAnnotations = findAnnotationsForOffset(start, end, annotations);
+      const segmentAnnotations = findAnnotationsForOffset(start, allPoints[i + 1], annotations);
+
+      // Strip leading whitespace from annotated segments so indentation isn't linked/underlined.
+      if (segmentAnnotations.length > 0) {
+        const startWithWhitespace = content.match(/^\s+/);
+
+        if (startWithWhitespace) {
+          if (!currentGroup || currentGroup.annotations.length !== 0) {
+            currentGroup = { tokens: [], annotations: [] };
+            groups.push(currentGroup);
+          }
+          currentGroup.tokens.push({ content: startWithWhitespace[0], offset: start, variants: token.variants });
+
+          start += startWithWhitespace[0].length;
+          content = content.slice(startWithWhitespace[0].length);
+          if (!content) continue;
+        }
+      }
 
       // Start new group if annotations changed
       if (!currentGroup || !annotationsMatch(currentGroup.annotations, segmentAnnotations)) {

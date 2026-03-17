@@ -2,7 +2,7 @@ COLOR_GREEN := \033[0;32m
 COLOR_BLUE := \033[0;34m
 COLOR_RESET := \033[0m
 
-.PHONY: help bootstrap bs install i generate g build_runner br l10n l
+.PHONY: help bootstrap bs install i generate g build_runner br l10n l snippets s
 
 help:
 	@echo "Usage: make <target>"
@@ -13,6 +13,7 @@ help:
 	@echo "  generate (g)        Generate all code (build_runner and l10n)"
 	@echo "  build_runner (br)   Run build_runner"
 	@echo "  l10n (l)            Generate localization files"
+	@echo "  snippets (s)        Generate snippet JSON files"
 
 bootstrap: install generate
 	@echo ""
@@ -27,7 +28,7 @@ install:
 	@echo "$(COLOR_GREEN)✓ Install complete$(COLOR_RESET)"
 i: install
 
-generate: build_runner l10n
+generate: build_runner l10n snippets
 	@echo ""
 	@echo "$(COLOR_GREEN)✓ Generate complete$(COLOR_RESET)"
 g: generate
@@ -52,3 +53,10 @@ l10n:
 	@cd forui && flutter gen-l10n
 	@echo "$(COLOR_GREEN)✓ l10n complete$(COLOR_RESET)"
 l: l10n
+
+snippets:
+	@echo ""
+	@echo "$(COLOR_BLUE)cd docs_snippets && dart run tool/snippet_generator/main.dart$(COLOR_RESET)"
+	@cd docs_snippets && dart run tool/snippet_generator/main.dart
+	@echo "$(COLOR_GREEN)✓ Snippets complete$(COLOR_RESET)"
+s: snippets
