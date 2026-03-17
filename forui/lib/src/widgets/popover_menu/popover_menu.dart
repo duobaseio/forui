@@ -377,7 +377,7 @@ class FPopoverMenu extends StatefulWidget {
   }
 }
 
-class _FPopoverMenuState extends State<FPopoverMenu> with TickerProviderStateMixin {
+class _FPopoverMenuState extends State<FPopoverMenu> {
   final Key _groupId = UniqueKey();
   final ValueNotifier<Key?> _active = ValueNotifier(null);
 

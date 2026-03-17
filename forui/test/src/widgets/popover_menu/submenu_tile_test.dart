@@ -268,7 +268,7 @@ void main() {
 
         final gesture = await tester.createPointerGesture();
         await gesture.moveTo(tester.getCenter(find.text('Share')));
-        await tester.pump(const Duration(milliseconds: 100));
+        await tester.pump(const Duration(milliseconds: 150));
         await tester.pumpAndSettle();
 
         expect(find.text('Email'), findsOneWidget);
@@ -306,7 +306,7 @@ void main() {
         await gesture.moveTo(tester.getCenter(find.text('Share')));
         await tester.pump(const Duration(milliseconds: 50));
 
-        // Move away before hoverEnterDuration (100ms) elapses
+        // Move away before hoverEnterDuration (150ms) elapses
         await gesture.moveTo(tester.getCenter(find.text('Edit')));
         await tester.pumpAndSettle();
 
@@ -350,12 +350,12 @@ void main() {
 
         final gesture = await tester.createPointerGesture();
         await gesture.moveTo(tester.getCenter(find.text('Share')));
-        await tester.pump(const Duration(milliseconds: 100));
+        await tester.pump(const Duration(milliseconds: 150));
         await tester.pumpAndSettle();
         expect(find.text('Email'), findsOneWidget);
 
         await gesture.moveTo(tester.getCenter(find.text('Export')));
-        await tester.pump(const Duration(milliseconds: 100));
+        await tester.pump(const Duration(milliseconds: 150));
         await tester.pumpAndSettle();
         expect(find.text('Email'), findsNothing);
         expect(find.text('PDF'), findsOneWidget);
@@ -392,7 +392,7 @@ void main() {
 
         final gesture = await tester.createPointerGesture();
         await gesture.moveTo(tester.getCenter(find.text('Share')));
-        await tester.pump(const Duration(milliseconds: 100));
+        await tester.pump(const Duration(milliseconds: 150));
         await tester.pumpAndSettle();
         expect(find.text('Email'), findsOneWidget);
 
@@ -432,7 +432,7 @@ void main() {
 
         final gesture = await tester.createPointerGesture();
         await gesture.moveTo(tester.getCenter(find.text('Share')));
-        await tester.pump(const Duration(milliseconds: 100));
+        await tester.pump(const Duration(milliseconds: 150));
         await tester.pumpAndSettle();
         expect(find.text('Email'), findsOneWidget);
 
