@@ -13,109 +13,6 @@ import 'package:forui/src/widgets/item/raw_item_content.dart';
 @SentinelValues(FItemStyle, {'focusedOutlineStyle': 'Sentinels.focusedOutlineStyle', 'shape': 'Sentinels.shapeBorder'})
 part 'item.design.dart';
 
-/// A marker interface which denotes that mixed-in widgets is an item.
-mixin FItemMixin on Widget {
-  /// {@macro forui.widgets.FItem.new}
-  ///
-  /// This function is a shorthand for [FItem.new].
-  static FItem item({
-    required Widget title,
-    FItemVariant variant = .primary,
-    FItemStyleDelta style = const .context(),
-    bool? enabled,
-    bool selected = false,
-    String? semanticsLabel,
-    bool autofocus = false,
-    FocusNode? focusNode,
-    ValueChanged<bool>? onFocusChange,
-    ValueChanged<bool>? onHoverChange,
-    FTappableVariantChangeCallback? onVariantChange,
-    VoidCallback? onPress,
-    VoidCallback? onLongPress,
-    VoidCallback? onDoubleTap,
-    VoidCallback? onSecondaryPress,
-    VoidCallback? onSecondaryLongPress,
-    Map<ShortcutActivator, Intent>? shortcuts,
-    Map<Type, Action<Intent>>? actions,
-    Widget? prefix,
-    Widget? subtitle,
-    Widget? details,
-    Widget? suffix,
-    Key? key,
-  }) => .new(
-    title: title,
-    variant: variant,
-    style: style,
-    enabled: enabled,
-    selected: selected,
-    semanticsLabel: semanticsLabel,
-    autofocus: autofocus,
-    focusNode: focusNode,
-    onFocusChange: onFocusChange,
-    onHoverChange: onHoverChange,
-    onVariantChange: onVariantChange,
-    onPress: onPress,
-    onLongPress: onLongPress,
-    onDoubleTap: onDoubleTap,
-    onSecondaryPress: onSecondaryPress,
-    onSecondaryLongPress: onSecondaryLongPress,
-    shortcuts: shortcuts,
-    actions: actions,
-    prefix: prefix,
-    subtitle: subtitle,
-    details: details,
-    suffix: suffix,
-    key: key,
-  );
-
-  /// {@macro forui.widgets.FItem.raw}
-  ///
-  /// This function is a shorthand for [FItem.raw].
-  static FItem raw({
-    required Widget child,
-    FItemVariant variant = .primary,
-    FItemStyleDelta style = const .context(),
-    bool? enabled,
-    bool selected = false,
-    String? semanticsLabel,
-    bool autofocus = false,
-    FocusNode? focusNode,
-    ValueChanged<bool>? onFocusChange,
-    ValueChanged<bool>? onHoverChange,
-    FTappableVariantChangeCallback? onVariantChange,
-    VoidCallback? onPress,
-    VoidCallback? onLongPress,
-    VoidCallback? onDoubleTap,
-    VoidCallback? onSecondaryPress,
-    VoidCallback? onSecondaryLongPress,
-    Map<ShortcutActivator, Intent>? shortcuts,
-    Map<Type, Action<Intent>>? actions,
-    Widget? prefix,
-    Key? key,
-  }) => .raw(
-    variant: variant,
-    style: style,
-    enabled: enabled,
-    selected: selected,
-    semanticsLabel: semanticsLabel,
-    autofocus: autofocus,
-    focusNode: focusNode,
-    onFocusChange: onFocusChange,
-    onHoverChange: onHoverChange,
-    onVariantChange: onVariantChange,
-    onPress: onPress,
-    onLongPress: onLongPress,
-    onDoubleTap: onDoubleTap,
-    onSecondaryPress: onSecondaryPress,
-    onSecondaryLongPress: onSecondaryLongPress,
-    shortcuts: shortcuts,
-    actions: actions,
-    prefix: prefix,
-    key: key,
-    child: child,
-  );
-}
-
 /// An item that is typically used to group related information together.
 ///
 /// ## Using [FItem] in a [FPopover] when wrapped in a [FItemGroup]
@@ -387,6 +284,7 @@ class FItem extends StatelessWidget with FItemMixin {
 
   @override
   Widget build(BuildContext context) {
+    final callbacks = FInheritedItemCallbacks.maybeOf(context);
     final data = FInheritedItemData.maybeOf(context) ?? const FItemData();
     final style = this.style((data.styles ?? context.theme.itemStyles).resolve({variant, context.platformVariant}));
     final enabled = this.enabled ?? data.enabled;
@@ -407,7 +305,7 @@ class FItem extends StatelessWidget with FItemMixin {
     );
 
     final background = style.backgroundColor.resolve(formVariants);
-    return DecoratedBox(
+    Widget child = DecoratedBox(
       decoration: data.index == 0 && data.globalLast && style.shape != null
           ? ShapeDecoration(shape: style.shape!, color: background)
           : BoxDecoration(color: background),
@@ -441,7 +339,12 @@ class FItem extends StatelessWidget with FItemMixin {
             onHoverChange: onHoverChange,
             onVariantChange: onVariantChange,
             selected: selected,
-            onPress: enabled ? (onPress ?? () {}) : null,
+            onPress: enabled
+                ? () {
+                    callbacks?.onPress?.call();
+                    onPress?.call();
+                  }
+                : null,
             onLongPress: enabled ? onLongPress : null,
             onDoubleTap: enabled ? onDoubleTap : null,
             onSecondaryPress: enabled ? onSecondaryPress : null,
@@ -479,6 +382,16 @@ class FItem extends StatelessWidget with FItemMixin {
         },
       ),
     );
+
+    if (callbacks case FInheritedItemCallbacks(:final onHoverEnter, :final onHoverExit)) {
+      child = MouseRegion(
+        onEnter: onHoverEnter == null ? null : (_) => onHoverEnter(),
+        onExit: onHoverExit == null ? null : (_) => onHoverExit(),
+        child: child,
+      );
+    }
+
+    return child;
   }
 
   @override
