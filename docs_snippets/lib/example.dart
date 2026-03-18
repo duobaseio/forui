@@ -30,6 +30,7 @@ abstract class Example extends StatelessWidget {
   // That said, I'm open to suggestions on how to fix this issue.
   @override
   Widget build(BuildContext context) => FTheme(
+    platform: .macOS,
     data: theme,
     child: FToaster(
       child: FScaffold(
