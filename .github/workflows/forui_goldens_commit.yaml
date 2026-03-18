@@ -71,7 +71,7 @@ jobs:
           echo "changes=$changes" >> $GITHUB_OUTPUT
 
       - if: steps.check-changes.outputs.changes == 'true'
-        uses: actions/create-github-app-token@v2
+        uses: actions/create-github-app-token@v3
         id: generate-token
         with:
           app-id: ${{ secrets.AUTO_MAID_APP_ID }}
