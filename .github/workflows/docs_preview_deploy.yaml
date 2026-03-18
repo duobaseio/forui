@@ -71,7 +71,7 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version: 24
-      - uses: pnpm/action-setup@v4
+      - uses: pnpm/action-setup@v5
         with:
           version: 10
       - name: Deploy docs to Cloudflare Workers
@@ -91,7 +91,7 @@ jobs:
           exit $EXIT_CODE
 
       # Create/update comment with link to preview
-      - uses: actions/create-github-app-token@v2
+      - uses: actions/create-github-app-token@v3
         id: generate-token
         with:
           app-id: ${{ secrets.AUTO_MAID_APP_ID }}
