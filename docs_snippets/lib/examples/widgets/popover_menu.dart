@@ -111,6 +111,53 @@ class BlurredPopoverMenuPage extends Example {
 }
 
 @RoutePage()
+class NestedPopoverMenuPage extends Example {
+  NestedPopoverMenuPage({@queryParam super.theme});
+
+  @override
+  Widget example(BuildContext _) => FHeader(
+    title: const Text('Edit Notes'),
+    suffixes: [
+      FPopoverMenu(
+        autofocus: true,
+        menuAnchor: .topRight,
+        childAnchor: .bottomRight,
+        menu: [
+          .group(
+            children: [
+              .item(prefix: const Icon(FIcons.user), title: const Text('Personalization'), onPress: () {}),
+              .item(prefix: const Icon(FIcons.paperclip), title: const Text('Add attachments'), onPress: () {}),
+              // {@highlight}
+              .submenu(
+                title: const Text('Share'),
+                prefix: const Icon(FIcons.share2),
+                submenu: [
+                  .group(
+                    children: [
+                      .item(prefix: const Icon(FIcons.mail), title: const Text('Email'), onPress: () {}),
+                      .item(prefix: const Icon(FIcons.messageSquare), title: const Text('Message'), onPress: () {}),
+                      .item(prefix: const Icon(FIcons.link), title: const Text('Copy Link'), onPress: () {}),
+                    ],
+                  ),
+                ],
+              ),
+              // {@endhighlight}
+            ],
+          ),
+          .group(
+            children: [
+              .item(prefix: const Icon(FIcons.list), title: const Text('List View'), onPress: () {}),
+              .item(prefix: const Icon(FIcons.layoutGrid), title: const Text('Grid View'), onPress: () {}),
+            ],
+          ),
+        ],
+        builder: (_, controller, _) => FHeaderAction(icon: const Icon(FIcons.ellipsis), onPress: controller.toggle),
+      ),
+    ],
+  );
+}
+
+@RoutePage()
 class TilePopoverMenuPage extends Example {
   TilePopoverMenuPage({@queryParam super.theme});
 

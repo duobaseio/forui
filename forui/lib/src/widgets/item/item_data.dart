@@ -38,6 +38,41 @@ enum FItemDivider {
   none,
 }
 
+/// Provides inherited interaction callbacks that [FItem] reads and calls alongside its own callbacks.
+///
+/// This is used by parent widgets (e.g. popover menus) to coordinate behavior like showing submenus on hover or
+/// tracking the active item, without requiring each item to manually wire callbacks.
+class FInheritedItemCallbacks extends InheritedWidget {
+  /// Returns the [FInheritedItemCallbacks] in the given [context], or null if not found.
+  static FInheritedItemCallbacks? maybeOf(BuildContext context) =>
+      context.dependOnInheritedWidgetOfExactType<FInheritedItemCallbacks>();
+
+  /// Called when the pointer enters the item.
+  final VoidCallback? onHoverEnter;
+
+  /// Called when the pointer exits the item.
+  final VoidCallback? onHoverExit;
+
+  /// Called when the item is pressed.
+  final VoidCallback? onPress;
+
+  /// Creates a [FInheritedItemCallbacks].
+  const FInheritedItemCallbacks({required super.child, super.key, this.onHoverEnter, this.onHoverExit, this.onPress});
+
+  @override
+  bool updateShouldNotify(FInheritedItemCallbacks old) =>
+      onHoverEnter != old.onHoverEnter || onHoverExit != old.onHoverExit || onPress != old.onPress;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(ObjectFlagProperty.has('onHoverEnter', onHoverEnter))
+      ..add(ObjectFlagProperty.has('onHoverExit', onHoverExit))
+      ..add(ObjectFlagProperty.has('onPress', onPress));
+  }
+}
+
 /// An [FInheritedItemData] is used to provide data about the item's position in the current nesting level, i.e. [FTileGroup].
 ///
 /// Users that wish to create their own custom group should pass additional data to the children using a separate

@@ -1,3 +1,29 @@
+## 0.21.0 (Next)
+
+### `FItem`
+* Add `FInheritedItemCallbacks`.
+* Add `FItemMixin.submenu(...)` shorthand for `FSubmenuItem`.
+
+
+### `FPopoverMenu`
+* Add `FSubmenuItem`.
+* Add `FSubmenuTile`.
+* Add `FPopoverMenu.hover`.
+* Add `FPopoverMenuStyle.motion`.
+* Add `FPopoverMenuMotion`.
+* Add `FPopoverMenuStyle.minWidth`.
+
+
+### `FTabs`
+* Add swipe navigation when `expands` is true. When swipe navigation is enabled (i.e. `expands` is true and `swipeablePhysics` resolves to true), the content area's `physics` defaults to `BouncingScrollPhysics`.
+* Add `FTabs.swipeablePhysics` to toggle swipe navigation independently from `scrollable`.
+* Add assertion to catch `FTabs(expands: true)` in containers with unbounded height.
+
+
+### `FTile`
+* Add `FTileMixin.submenu(...)` shorthand for `FSubmenuTile`.
+
+
 ## 0.20.1
 
 ### `FCalendar`
