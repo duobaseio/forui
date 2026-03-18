@@ -192,7 +192,7 @@ class _State extends State<FPortal> {
             ? .fromViewPadding(view.viewPadding, view.devicePixelRatio)
             : .zero;
 
-        // We don't derive the the insets from the view as it does not notify dependencies of changes. This led to
+        // We don't derive the insets from the view as it does not notify dependencies of changes. This led to
         // incomplete insets being applied when a keyboard is sliding up from the bottom of the screen WHILE the portal
         // is being built.
         final insets = widget.useViewInsets ? MediaQuery.viewInsetsOf(context) : EdgeInsets.zero;

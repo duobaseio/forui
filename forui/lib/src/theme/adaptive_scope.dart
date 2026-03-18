@@ -54,6 +54,6 @@ class FAdaptiveScope extends InheritedWidget {
 
 /// Provides functions for accessing the current platform variant.
 extension FAdaptiveBuildContext on BuildContext {
-  /// Returns the current [FVariant].
+  /// Returns the current [FPlatformVariant].
   FPlatformVariant get platformVariant => FAdaptiveScope.of(this);
 }

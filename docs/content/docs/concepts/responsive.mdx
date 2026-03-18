@@ -1,16 +1,36 @@
 ---
 title: Responsive
-description: Responsive breakpoints based on Tailwind CSS for adaptive layouts.
+description: Platform variants and responsive breakpoints for adaptive layouts.
 ---
 
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import platformVariantsSnippet from '@/snippets/snippets/concepts/responsive/platform_variants.json';
 import usageSnippet from '@/snippets/snippets/concepts/responsive/usage.json';
 import customBreakpointsSnippet from '@/snippets/snippets/concepts/responsive/custom_breakpoints.json';
 import customBreakpointsUsageSnippet from '@/snippets/snippets/concepts/responsive/custom_breakpoints_usage.json';
+import platformOverrideSnippet from '@/snippets/snippets/concepts/responsive/platform_override.json';
 
-Forui contains responsive breakpoints based on [Tailwind CSS](https://tailwindcss.com/docs/responsive-design).
+Forui provides platform-aware theme variants and responsive breakpoints for building adaptive layouts.
 
-## Predefined Breakpoints
+## Platform Themes
+
+Every predefined theme includes both a **desktop** and **touch** variant. Touch variants use larger hit targets and
+spacing optimized for touch input, while desktop variants are more compact.
+
+<CodeSnippet snippet={platformVariantsSnippet} />
+
+The current platform is automatically detected and available via [`context.platformVariant`](https://pub.dev/documentation/forui/latest/forui.theme/FAdaptiveBuildContext/platformVariant.html).
+Touch platforms include Android, iOS, and Fuchsia, while desktop platforms include Windows, macOS, and Linux.
+
+The detected platform can be overridden via `FTheme`'s `platform` parameter:
+
+<CodeSnippet snippet={platformOverrideSnippet} />
+
+## Breakpoints
+
+Forui also contains responsive breakpoints based on [Tailwind CSS](https://tailwindcss.com/docs/responsive-design).
+
+### Predefined Breakpoints
 
 All breakpoints are in logical pixels. Mobile devices are typically smaller than `sm` (640), while tablet and desktop
 devices are typically larger than `md` (768) and `lg` (1024) respectively.
@@ -23,11 +43,11 @@ devices are typically larger than `md` (768) and `lg` (1024) respectively.
 | `xl`       | 1280          | `FThemeData.breakpoints.xl`  |
 | `xl2`      | 1536          | `FThemeData.breakpoints.xl2` |
 
-## Usage
+### Usage
 
 <CodeSnippet snippet={usageSnippet} />
 
-## Custom Breakpoints
+### Custom Breakpoints
 
 Additional breakpoints can be added via an extension on `FBreakpoints`:
 
