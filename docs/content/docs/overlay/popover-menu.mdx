@@ -10,6 +10,7 @@ import { CodeSnippet } from '@/components/code-snippet/code-snippet';
 import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/popover-menu/default.json';
 import blurredSnippet from '@/snippets/examples/popover-menu/blurred.json';
+import nestedSnippet from '@/snippets/examples/popover-menu/nested.json';
 import tilesSnippet from '@/snippets/examples/popover-menu/tiles.json';
 import popoverMenuUsage from '@/snippets/usages/widgets/popover_menu/popoverMenu.json';
 import popoverMenuTilesUsage from '@/snippets/usages/widgets/popover_menu/popoverMenuTiles.json';
@@ -44,6 +45,17 @@ To generate a specific style for customization:
 <UsageSnippet usage={popoverMenuTilesUsage} />
 
 ## Examples
+
+### Nested Submenu
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='popover-menu' variant='nested' height={500}/>
+  </Tab>
+  <Tab value="Code">
+    <CodeSnippet snippet={nestedSnippet} />
+  </Tab>
+</Tabs>
 
 ### Tiles
 
