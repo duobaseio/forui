@@ -125,6 +125,8 @@ class FModalBarrier extends StatelessWidget {
 
   /// {@template forui.foundation.FModalBarrier.cutout}
   /// An optional non-interactive cutout that can be used to create a hole in the barrier for the underlying layer.
+  ///
+  /// Defaults to a rectangular cutout. To customize the cutout shape, provide a `cutoutBuilder`.
   /// {@endtemplate}
   final RenderBox? cutout;
 

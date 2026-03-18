@@ -269,7 +269,7 @@ class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
     required FStyle style,
     required bool touch,
   }) {
-    final borderRadius = touch ? style.borderRadius.lg : style.borderRadius.md;
+    final borderRadius = style.borderRadius.md;
     return FCalendarStyle(
       headerStyle: .inherit(colors: colors, typography: typography, style: style, touch: touch),
       dayPickerStyle: .inherit(colors: colors, typography: typography, style: style, touch: touch),

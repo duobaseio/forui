@@ -24,6 +24,16 @@
 * Add `FTileMixin.submenu(...)` shorthand for `FSubmenuTile`.
 
 
+## 0.20.1
+
+### `FCalendar`
+* Fix inconsistent border radius.
+
+### `FPortal`
+* Fix incomplete view insets being applied when a keyboard is sliding up while the portal is being built.
+
+
+
 ## 0.20.0
 
 This update builds upon the styling overhaul by introducing desktop and touch variants of each theme and making widget

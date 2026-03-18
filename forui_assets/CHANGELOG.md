@@ -1,3 +1,8 @@
+## 0.20.1
+* Downgrade to Lucide 0.575.0 due to incorrect icon mappings provided in 0.576.0.
+  See https://github.com/lucide-icons/lucide/issues/4154.
+
+
 ## 0.20.0
 * Update icons to Lucide 0.576.0
 

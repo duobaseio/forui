@@ -191,9 +191,11 @@ class _State extends State<FPortal> {
         final EdgeInsets padding = widget.useViewPadding
             ? .fromViewPadding(view.viewPadding, view.devicePixelRatio)
             : .zero;
-        final EdgeInsets insets = widget.useViewInsets
-            ? .fromViewPadding(view.viewInsets, view.devicePixelRatio)
-            : .zero;
+
+        // We don't derive the the insets from the view as it does not notify dependencies of changes. This led to
+        // incomplete insets being applied when a keyboard is sliding up from the bottom of the screen WHILE the portal
+        // is being built.
+        final insets = widget.useViewInsets ? MediaQuery.viewInsetsOf(context) : EdgeInsets.zero;
 
         Widget portal = CompositedPortal(
           notifier: _notifier,
@@ -232,8 +234,8 @@ class _State extends State<FPortal> {
           );
         }
 
-        // Prevents the portal from inheriting FTappableGroups in the widget.builder/widget.child since
-        // FTappableGroup does not hit test across layers.
+        // Prevents the portal from inheriting FTappableGroups in the widget.builder/widget.child since FTappableGroup
+        // does not hit test across layers.
         return FTappableGroup.isolate(child: portal);
       },
       child: RepaintBoundary(child: widget.builder(context, _controller, widget.child)),

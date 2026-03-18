@@ -514,7 +514,7 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
   @override
   final EdgeInsetsGeometry margin;
 
-  /// The item's decoration.
+  /// The item's inner decoration that is drawn above the [backgroundColor] but below the content.
   @override
   final FVariants<FTappableVariantConstraint, FTappableVariant, Decoration, DecorationDelta> decoration;
 

@@ -504,7 +504,10 @@ class FItemGroupStyleData extends InheritedWidget {
 
 /// An [FItemGroup]'s style.
 class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
-  /// The group's decoration.
+  // The group's decoration, painted behind all items.
+  ///
+  /// This decoration may be obscured by individual items' [FItemStyle.backgroundColor]. To make the group decoration
+  /// visible, set item backgrounds to transparent via [itemStyles].
   @override
   final Decoration decoration;
 
