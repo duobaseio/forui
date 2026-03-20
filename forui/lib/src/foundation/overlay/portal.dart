@@ -6,9 +6,9 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/portal/composited_child.dart';
-import 'package:forui/src/foundation/portal/composited_portal.dart';
-import 'package:forui/src/foundation/portal/layer.dart';
+import 'package:forui/src/foundation/overlay/composited_child.dart';
+import 'package:forui/src/foundation/overlay/composited_portal.dart';
+import 'package:forui/src/foundation/overlay/layer.dart';
 
 /// A portal that "floats" on top of and relative to a [child] widget.
 ///

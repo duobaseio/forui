@@ -8,7 +8,7 @@ import 'package:flutter/scheduler.dart';
 
 import 'package:vector_math/vector_math_64.dart';
 
-import 'package:forui/src/foundation/portal/composited_child.dart';
+import 'package:forui/src/foundation/overlay/composited_child.dart';
 
 /// An object that a [ChildLayer] can register with. It links a [ChildLayer] to one or more [PortalLayer]s.
 ///
