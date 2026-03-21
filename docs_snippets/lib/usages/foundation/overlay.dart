@@ -7,13 +7,7 @@ import 'package:forui/forui.dart';
 final overlay = FOverlay(
   // {@category "Core"}
   controller: null,
-  overlay: const [
-    Positioned(
-      top: 42,
-      left: 0,
-      child: Text('Overlay content'),
-    ),
-  ],
+  overlay: const [Positioned(top: 42, left: 0, child: Text('Overlay content'))],
   overlayBuilder: (context, controller, childRenderBox, overlay) => overlay,
   builder: (context, controller, child) => child!,
   child: const Text('Child'),
