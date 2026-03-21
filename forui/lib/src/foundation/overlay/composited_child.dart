@@ -62,6 +62,7 @@ class RenderChildLayer extends RenderProxyBox {
   /// changes.
   Size _viewSize;
   Offset? _previousGlobalOffset;
+  Size? _previousPaintSize;
 
   RenderChildLayer({
     required FChangeNotifier notifier,
@@ -94,16 +95,18 @@ class RenderChildLayer extends RenderProxyBox {
         ..localOffset = offset;
     }
 
-    context.pushLayer(layer!, super.paint, Offset.zero);
+    context.pushLayer(layer!, super.paint, .zero);
     assert(() {
       layer!.debugCreator = debugCreator;
       return true;
     }());
 
-    if (globalOffset != _previousGlobalOffset) {
+    if (globalOffset != _previousGlobalOffset || size != _previousPaintSize) {
       _previousGlobalOffset = globalOffset;
-      // Signals to the linked [CompositedPortal]s that they need to repaint. This is requires as the child & portal
-      // are painted in separate layers and the portal might not re-paint otherwise, i.e. if the child expands in size.
+      _previousPaintSize = size;
+      // Signals to the linked [CompositedPortal]s that they need to relayout/repaint. This is required as the child &
+      // portal are painted in separate layers and the portal might not update otherwise, i.e. if the child changes
+      // position or size.
       //
       // We can create a custom notifier that wraps this, but that seems like overkill.
       // ignore: invalid_use_of_protected_member, invalid_use_of_visible_for_testing_member

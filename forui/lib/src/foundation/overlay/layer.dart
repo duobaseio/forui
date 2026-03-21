@@ -10,7 +10,7 @@ import 'package:vector_math/vector_math_64.dart';
 
 import 'package:forui/src/foundation/overlay/composited_child.dart';
 
-/// An object that a [ChildLayer] can register with. It links a [ChildLayer] to one or more [PortalLayer]s.
+/// An object that a [ChildLayer] can register with. It links a [ChildLayer] to one or more [OverlayLayer]s.
 ///
 /// ## Implementation details:
 /// This class is a copy of [LayerLink] with the only differences being:
@@ -77,7 +77,7 @@ class ChildLayerLink {
       '${describeIdentity(this)}(${_childLayer != null ? "<linked>" : "<dangling>"})';
 }
 
-/// A composited layer that can be followed by a [PortalLayer].
+/// A composited layer that can be followed by a [OverlayLayer].
 ///
 /// ## Implementation details:
 /// This class is a copy of [LeaderLayer] with the following enhancements:
@@ -139,7 +139,7 @@ class ChildLayer extends ContainerLayer {
     }
   }
 
-  /// The link which connects this [ChildLayer] to one or more [PortalLayer]s.
+  /// The link which connects this [ChildLayer] to one or more [OverlayLayer]s.
   ChildLayerLink get link => _link;
 
   set link(ChildLayerLink value) {
@@ -198,12 +198,12 @@ class ChildLayer extends ContainerLayer {
 /// This class is a copy of [FollowerLayer] with the only differences being:
 /// * Contains a [ChildLayerLink] instead of [LayerLink]
 @internal
-class PortalLayer extends ContainerLayer {
+class OverlayLayer extends ContainerLayer {
   /// Creates a follower layer.
   ///
   /// The [unlinkedOffset], [linkedOffset], and [showWhenUnlinked] properties
   /// must be non-null before the compositing phase of the pipeline.
-  PortalLayer({
+  OverlayLayer({
     required this.link,
     this.showWhenUnlinked = false,
     this.unlinkedOffset = Offset.zero,
@@ -217,8 +217,8 @@ class PortalLayer extends ContainerLayer {
   /// that moves its children to match the position of the [ChildLayer].
   ChildLayerLink link;
 
-  /// The render box of the portal, used to schedule repaints when the child's global offset changes during compositing.
-  RenderBox? portalRenderBox;
+  /// The render box of the overlay, used to schedule repaints when the child's global offset changes during compositing.
+  RenderBox? overlayRenderBox;
 
   /// Whether to show the layer's contents when the [link] does not point to a
   /// [ChildLayer].
@@ -437,8 +437,8 @@ class PortalLayer extends ContainerLayer {
     if (link.childRenderBox case final child? when child.attached && child.hasSize) {
       if (child.localToGlobal(.zero) case final current when current != leader.globalOffset) {
         leader.globalOffset = current;
-        if (portalRenderBox case final portal? when portal.attached) {
-          SchedulerBinding.instance.scheduleTask(portal.markNeedsPaint, .touch);
+        if (overlayRenderBox case final overlay? when overlay.attached) {
+          SchedulerBinding.instance.scheduleTask(overlay.markNeedsPaint, .touch);
         }
       }
     }

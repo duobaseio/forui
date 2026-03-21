@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart' hide DialogRoute;
+import 'package:flutter/material.dart' hide DialogRoute, OverlayRoute;
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
@@ -160,6 +160,7 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/popover-menu/blurred', page: BlurredPopoverMenuRoute.page),
     AutoRoute(path: '/popover-menu/nested', page: NestedPopoverMenuRoute.page),
     AutoRoute(path: '/popover-menu/tiles', page: TilePopoverMenuRoute.page),
+    AutoRoute(path: '/overlay/default', page: OverlayRoute.page),
     AutoRoute(path: '/portal/default', page: PortalRoute.page),
     AutoRoute(path: '/portal-visualization/default', page: PortalVisualizationRoute.page),
     AutoRoute(path: '/progress/default', page: ProgressRoute.page),
