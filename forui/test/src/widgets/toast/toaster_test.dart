@@ -384,4 +384,42 @@ void main() {
       });
     }
   });
+
+  testWidgets('SelectableText inside toast has Overlay ancestor', (tester) async {
+    // FToaster is placed in MaterialApp.builder (above the Navigator's Overlay) to replicate the typical app setup.
+    await tester.pumpWidget(
+      MaterialApp(
+        localizationsDelegates: FLocalizations.localizationsDelegates,
+        supportedLocales: FLocalizations.supportedLocales,
+        builder: (context, child) => FTheme(
+          data: FThemes.neutral.light.touch,
+          child: FToaster(child: child!),
+        ),
+        home: Builder(
+          builder: (context) => Center(
+            child: FButton(
+              mainAxisSize: .min,
+              onPress: () => showRawFToast(
+                alignment: .bottomRight,
+                context: context,
+                duration: null,
+                builder: (_, _) => const SizedBox(width: 250, child: SelectableText('selectable')),
+              ),
+              child: const Text('show'),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    await tester.tap(find.text('show'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('selectable'), findsOne);
+
+    await tester.longPress(find.text('selectable'));
+    await tester.pumpAndSettle();
+
+    expect(tester.takeException(), isNull);
+  });
 }

@@ -32,6 +32,12 @@
 * Fix portal not repositioning when the child widget changes size.
 
 
+## 0.20.3
+
+### `FToaster`
+* Fix `SelectableText` and other widgets that require an `Overlay` ancestor not working inside toasts.
+
+
 ## 0.20.2
 
 ### `FSelectMenuTile`
