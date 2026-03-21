@@ -151,7 +151,7 @@ class RenderOverlayLayer extends RenderProxyBox {
     if (link.childLayer == null && !showWhenUnlinked) {
       return false;
     }
-    // RenderPortalLayer objects don't check if they are themselves hit, because it's confusing to think about how the
+    // RenderOverlayLayer objects don't check if they are themselves hit, because it's confusing to think about how the
     // untransformed size and the child's transformed position interact.
     return hitTestChildren(result, position: position);
   }

@@ -104,7 +104,7 @@ class FOverlay extends StatefulWidget {
   ///
   /// Can incorporate a value-independent widget subtree from the [child] into the returned widget tree.
   ///
-  /// This can be null if the entire widget subtree the [builder] builds does not require the controller.
+  /// The [child] can be null if the entire widget subtree the [builder] builds does not require the controller.
   /// {@endtemplate}
   final ValueWidgetBuilder<OverlayPortalController> builder;
 
