@@ -6,21 +6,19 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/portal/composited_child.dart';
-import 'package:forui/src/foundation/portal/composited_portal.dart';
-import 'package:forui/src/foundation/portal/layer.dart';
+import 'package:forui/src/foundation/overlay/composited_child.dart';
+import 'package:forui/src/foundation/overlay/composited_portal.dart';
+import 'package:forui/src/foundation/overlay/layer.dart';
 
 /// A portal that "floats" on top of and relative to a [child] widget.
 ///
 /// See:
+/// * [FOverlay] for a lower-level overlay without built-in positioning and overflow handling.
 /// * [FPortalOverflow] for handling viewport overflow.
 /// * [OverlayPortalController] for controlling the portal's visibility.
 /// * [Visualization](http://forui.dev/docs/foundation/portal#visualization) for a visual demonstration of how
 ///   portals work.
 class FPortal extends StatefulWidget {
-  /// The default builder that returns the child as-is.
-  static Widget defaultBuilder(BuildContext _, OverlayPortalController _, Widget? child) => child!;
-
   /// The controller.
   final OverlayPortalController? controller;
 
@@ -102,11 +100,7 @@ class FPortal extends StatefulWidget {
   /// The portal builder which returns the floating content.
   final Widget Function(BuildContext context, OverlayPortalController controller) portalBuilder;
 
-  /// An optional builder which returns the child widget that the portal is aligned to.
-  ///
-  /// Can incorporate a value-independent widget subtree from the [child] into the returned widget tree.
-  ///
-  /// This can be null if the entire widget subtree the [builder] builds doest not require the controller.
+  /// {@macro forui.foundation.overlay.builder}
   final ValueWidgetBuilder<OverlayPortalController> builder;
 
   /// The child which the portal is aligned to.
@@ -129,10 +123,10 @@ class FPortal extends StatefulWidget {
     this.useViewInsets = true,
     this.padding = .zero,
     this.barrier,
-    this.builder = defaultBuilder,
+    this.builder = FOverlay.defaultBuilder,
     this.child,
     super.key,
-  }) : assert(builder != defaultBuilder || child != null, 'Either builder or child must be provided');
+  }) : assert(builder != FOverlay.defaultBuilder || child != null, 'Either builder or child must be provided');
 
   @override
   State<FPortal> createState() => _State();

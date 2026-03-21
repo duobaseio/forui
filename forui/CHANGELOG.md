@@ -24,6 +24,14 @@
 * Add `FTileMixin.submenu(...)` shorthand for `FSubmenuTile`.
 
 
+### `FOverlay`
+* Add `FOverlay`.
+
+
+### `FPortal`
+* Fix portal not repositioning when the child widget changes size.
+
+
 ## 0.20.3
 
 ### `FToaster`

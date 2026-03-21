@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:forui/src/foundation/portal/portal_constraints.dart';
+import 'package:forui/src/foundation/overlay/portal_constraints.dart';
 
 void main() {
   group('FPortalConstraints', () {
