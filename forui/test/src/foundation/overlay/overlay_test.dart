@@ -12,11 +12,7 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FOverlay(
-            controller: controller,
-            overlay: const [Text('overlay')],
-            child: const Text('anchor'),
-          ),
+          child: FOverlay(controller: controller, overlay: const [Text('overlay')], child: const Text('anchor')),
         ),
       );
 
@@ -42,11 +38,7 @@ void main() {
           child: FOverlay(
             controller: controller,
             overlay: const [
-              Positioned(
-                top: 100,
-                left: 0,
-                child: SizedBox.square(dimension: 20, key: Key('overlay-content')),
-              ),
+              Positioned(top: 100, left: 0, child: SizedBox.square(dimension: 20, key: Key('overlay-content'))),
             ],
             child: const SizedBox(width: 150, height: 100),
           ),
@@ -105,11 +97,7 @@ void main() {
           child: FOverlay(
             controller: controller,
             overlay: const [
-              Positioned(
-                bottom: -20,
-                left: 0,
-                child: SizedBox.square(dimension: 20, key: Key('overlay-content')),
-              ),
+              Positioned(bottom: -20, left: 0, child: SizedBox.square(dimension: 20, key: Key('overlay-content'))),
             ],
             child: ValueListenableBuilder<double>(
               valueListenable: childHeight,

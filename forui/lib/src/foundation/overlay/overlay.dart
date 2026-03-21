@@ -8,9 +8,13 @@ import 'package:forui/src/foundation/overlay/composited_overlay.dart';
 import 'package:forui/src/foundation/overlay/layer.dart';
 
 /// The signature for [FOverlay.overlayBuilder].
-typedef FOverlayBuilder = List<Widget> Function(
-  BuildContext context, OverlayPortalController controller, RenderBox? childRenderBox, List<Widget> overlay,
-);
+typedef FOverlayBuilder =
+    List<Widget> Function(
+      BuildContext context,
+      OverlayPortalController controller,
+      RenderBox? childRenderBox,
+      List<Widget> overlay,
+    );
 
 /// A low-level overlay primitive that composites content relative to a child widget using [Positioned]/
 /// [AnimatedPositioned]s similar to a [Stack].
@@ -68,7 +72,12 @@ typedef FOverlayBuilder = List<Widget> Function(
 /// * [OverlayPortalController] for controlling the overlay's visibility.
 class FOverlay extends StatefulWidget {
   /// The default overlay builder that returns the overlay widgets as-is.
-  static List<Widget> defaultOverlayBuilder(BuildContext _, OverlayPortalController _, RenderBox? _, List<Widget> overlay) => overlay;
+  static List<Widget> defaultOverlayBuilder(
+    BuildContext _,
+    OverlayPortalController _,
+    RenderBox? _,
+    List<Widget> overlay,
+  ) => overlay;
 
   /// The default builder that returns the child as-is.
   static Widget defaultBuilder(BuildContext _, OverlayPortalController _, Widget? child) => child!;
@@ -184,10 +193,8 @@ class _UnclippedStack extends Stack {
   const _UnclippedStack({super.children}) : super(clipBehavior: .none);
 
   @override
-  RenderStack createRenderObject(BuildContext context) => _RenderUnclippedStack(
-    textDirection: Directionality.maybeOf(context),
-    clipBehavior: .none,
-  );
+  RenderStack createRenderObject(BuildContext context) =>
+      _RenderUnclippedStack(textDirection: Directionality.maybeOf(context), clipBehavior: .none);
 }
 
 class _RenderUnclippedStack extends RenderStack {
