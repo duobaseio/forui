@@ -387,7 +387,6 @@ void main() {
 
   testWidgets('SelectableText inside toast has Overlay ancestor', (tester) async {
     // FToaster is placed in MaterialApp.builder (above the Navigator's Overlay) to replicate the typical app setup.
-    //
     await tester.pumpWidget(
       MaterialApp(
         localizationsDelegates: FLocalizations.localizationsDelegates,
@@ -420,5 +419,7 @@ void main() {
 
     await tester.longPress(find.text('selectable'));
     await tester.pumpAndSettle();
+
+    expect(tester.takeException(), isNull);
   });
 }
