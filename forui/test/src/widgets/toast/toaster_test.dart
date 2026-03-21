@@ -404,10 +404,7 @@ void main() {
                 alignment: .bottomRight,
                 context: context,
                 duration: null,
-                builder: (_, _) => const SizedBox(
-                  width: 250,
-                  child: SelectableText('selectable'),
-                ),
+                builder: (_, _) => const SizedBox(width: 250, child: SelectableText('selectable')),
               ),
               child: const Text('show'),
             ),

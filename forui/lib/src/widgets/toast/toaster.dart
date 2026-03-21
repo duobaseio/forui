@@ -403,7 +403,9 @@ class FToasterState extends State<FToaster> {
       );
     }
 
-    return Overlay.wrap(child: Stack(clipBehavior: .none, fit: .passthrough, children: children));
+    return Overlay.wrap(
+      child: Stack(clipBehavior: .none, fit: .passthrough, children: children),
+    );
   }
 }
 
