@@ -141,7 +141,7 @@ final class FTypography with Diagnosticable {
 
   /// Creates a [FTypography] that defaults to touch font sizes.
   FTypography({
-    this.fontFamily = defaultFontFamily,
+    this.fontFamily = FTypography.defaultFontFamily,
     TextStyle? xs3,
     TextStyle? xs2,
     TextStyle? xs,
@@ -173,7 +173,11 @@ final class FTypography with Diagnosticable {
        assert(fontFamily.isNotEmpty, 'fontFamily ($fontFamily) should not be empty.');
 
   /// Creates a [FTypography] that inherits its properties.
-  factory FTypography.inherit({required FColors colors, required bool touch, String fontFamily = defaultFontFamily}) {
+  factory FTypography.inherit({
+    required FColors colors,
+    required bool touch,
+    String fontFamily = FTypography.defaultFontFamily,
+  }) {
     assert(fontFamily.isNotEmpty, 'fontFamily ($fontFamily) should not be empty.');
     final color = colors.foreground;
     final font = fontFamily;
