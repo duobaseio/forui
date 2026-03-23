@@ -623,7 +623,7 @@ final class FButtonStyle with Diagnosticable, _$FButtonStyleFunctions {
     focusedOutlineStyle: style.focusedOutlineStyle,
     contentStyle: FButtonContentStyle(
       textStyle: .from(
-        textStyle.copyWith(color: foregroundColor, fontWeight: .w500, height: 1, leadingDistribution: .even),
+        textStyle.copyWith(color: foregroundColor, fontWeight: .w500, height: 1),
         variants: {
           [.disabled]: .delta(color: disabledForegroundColor),
         },

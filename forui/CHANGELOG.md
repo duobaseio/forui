@@ -1,5 +1,14 @@
 ## 0.21.0 (Next)
 
+### `FTypography`
+* Add `FTypography.defaultFontFamily` static constant.
+
+* Change default leading distribution from proportional to even.
+* **Breaking** Rename `FTypography.defaultFontFamily` to `FTypography.fontFamily`.
+
+* Fix default text styles created by `FTypography` to include a `fontFamily`.
+
+
 ### `FItem`
 * Add `FInheritedItemCallbacks`.
 * Add `FItemMixin.submenu(...)` shorthand for `FSubmenuItem`.

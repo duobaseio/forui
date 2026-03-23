@@ -216,12 +216,7 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
           style: style,
           touch: touch,
         ).outline.md,
-        headerTextStyle: typography.md.copyWith(
-          color: colors.foreground,
-          fontWeight: .w500,
-          height: 1,
-          leadingDistribution: .even,
-        ),
+        headerTextStyle: typography.md.copyWith(color: colors.foreground, fontWeight: .w500, height: 1),
         headerIconSize: typography.md.fontSize!,
       );
     } else {

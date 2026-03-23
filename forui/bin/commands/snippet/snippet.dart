@@ -212,7 +212,7 @@ extension CustomMaterialTheme on FThemeData {
             textBaseline: typography.xs.textBaseline ?? .alphabetic,
           ),
         )..apply(
-          fontFamily: typography.defaultFontFamily,
+          fontFamily: typography.fontFamily,
           bodyColor: colors.foreground,
           displayColor: colors.foreground,
         );
@@ -230,7 +230,7 @@ extension CustomMaterialTheme on FThemeData {
         secondaryContainer: colors.secondary,
         onSecondaryContainer: colors.secondaryForeground,
       ),
-      fontFamily: typography.defaultFontFamily,
+      fontFamily: typography.fontFamily,
       typography: Typography(
         black: textTheme,
         white: textTheme,

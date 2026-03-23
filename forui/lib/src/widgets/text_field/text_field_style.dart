@@ -35,8 +35,6 @@ extension type FTextFieldSizeStyles(
     required FStyle style,
     required bool touch,
   }) {
-    final label = FLabelStyles.inherit(style: style).verticalStyle;
-    final textStyle = typography.sm.copyWith(fontFamily: typography.defaultFontFamily);
     final iconStyle = FVariants<FTextFieldVariantConstraint, FTextFieldVariant, IconThemeData, IconThemeDataDelta>.from(
       IconThemeData(color: colors.mutedForeground, size: typography.sm.fontSize),
       variants: {
@@ -47,8 +45,8 @@ extension type FTextFieldSizeStyles(
     FTextFieldStyle textField(FButtonStyle buttonStyle, EdgeInsetsGeometry contentPadding) => FTextFieldStyle.inherit(
       colors: colors,
       style: style,
-      labelStyle: label,
-      textStyle: textStyle,
+      labelStyle: FLabelStyles.inherit(style: style).verticalStyle,
+      textStyle: typography.sm,
       iconStyle: iconStyle,
       buttonStyle: buttonStyle,
       contentPadding: contentPadding,

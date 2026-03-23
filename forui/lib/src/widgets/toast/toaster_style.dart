@@ -285,12 +285,7 @@ class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
         color: colors.card,
       ),
       iconStyle: IconThemeData(color: colors.foreground, size: typography.md.fontSize),
-      titleTextStyle: typography.sm.copyWith(
-        color: colors.foreground,
-        fontWeight: .w500,
-        height: 1,
-        leadingDistribution: .even,
-      ),
+      titleTextStyle: typography.sm.copyWith(color: colors.foreground, fontWeight: .w500, height: 1),
       titleSpacing: titleSpacing,
       descriptionTextStyle: descriptionTextStyle,
       padding: padding,

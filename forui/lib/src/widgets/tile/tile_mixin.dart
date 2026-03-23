@@ -323,7 +323,7 @@ mixin FTileMixin on Widget {
     double? submenuCacheExtent,
     bool? submenuIntrinsicWidth,
     DragStartBehavior submenuDragStartBehavior = .start,
-    FPortalSpacing submenuSpacing = .zero,
+    FPortalSpacing submenuSpacing = const .spacing(2),
     FPortalOverflow submenuOverflow = .flip,
     Offset submenuOffset = .zero,
     String? submenuSemanticsLabel,

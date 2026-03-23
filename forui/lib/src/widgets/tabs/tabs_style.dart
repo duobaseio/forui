@@ -75,11 +75,7 @@ class FTabsStyle with Diagnosticable, _$FTabsStyleFunctions {
           color: colors.muted,
         ),
         labelTextStyle: FVariants.from(
-          typography.sm.copyWith(
-            fontWeight: .w500,
-            fontFamily: typography.defaultFontFamily,
-            color: colors.mutedForeground,
-          ),
+          typography.sm.copyWith(fontWeight: .w500, color: colors.mutedForeground),
           variants: {
             [.selected]: .delta(color: colors.foreground),
           },

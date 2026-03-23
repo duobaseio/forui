@@ -53,6 +53,22 @@ class _SandboxState extends State<Sandbox> {
               FButton(variant: .destructive, onPress: () {}, child: Text('Destructive')),
             ],
           ),
+          FMultiSelect<String>(
+            hint: const Text('Select fruits'),
+            label: const Text('Fruits'),
+            items: const {
+              'Apple': 'Apple',
+              'Banana': 'Banana',
+              'Blueberry': 'Blueberry',
+              'Grapes': 'Grapes',
+              'Lemon': 'Lemon',
+              'Mango': 'Mango',
+              'Kiwi': 'Kiwi',
+              'Orange': 'Orange',
+              'Pear': 'Pear',
+              'Strawberry': 'Strawberry',
+            },
+          ),
           FTextFormField(
             label: const Text('TextFormField'),
             maxLength: 6,
