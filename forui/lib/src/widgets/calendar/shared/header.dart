@@ -220,7 +220,6 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
           color: colors.foreground,
           fontWeight: .w500,
           height: 1,
-          leadingDistribution: .even,
         ),
         headerIconSize: typography.md.fontSize!,
       );

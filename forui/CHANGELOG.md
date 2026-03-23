@@ -1,5 +1,13 @@
 ## 0.21.0 (Next)
 
+### `FTypography`
+* Add `FTypography.defaultFontFamily` static constant.
+
+* **Breaking** Rename `FTypography.defaultFontFamily` to `FTypography.fontFamily`.
+* **Breaking** Change default text styles to include `fontFamily`. Styles that previously relied on
+  `typography.fontFamily` being applied separately now have it baked in.
+
+
 ### `FItem`
 * Add `FInheritedItemCallbacks`.
 * Add `FItemMixin.submenu(...)` shorthand for `FSubmenuItem`.

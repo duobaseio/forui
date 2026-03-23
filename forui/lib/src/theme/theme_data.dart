@@ -1028,7 +1028,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       bodyLarge: typography.md.copyWith(height: 1, textBaseline: typography.md.textBaseline ?? .alphabetic),
       bodyMedium: typography.sm.copyWith(height: 1, textBaseline: typography.sm.textBaseline ?? .alphabetic),
       bodySmall: typography.xs.copyWith(height: 1, textBaseline: typography.xs.textBaseline ?? .alphabetic),
-    )..apply(fontFamily: typography.defaultFontFamily, bodyColor: colors.foreground, displayColor: colors.foreground);
+    )..apply(fontFamily: typography.fontFamily, bodyColor: colors.foreground, displayColor: colors.foreground);
 
     return ThemeData(
       colorScheme: ColorScheme(
@@ -1044,7 +1044,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
         secondaryContainer: colors.secondary,
         onSecondaryContainer: colors.secondaryForeground,
       ),
-      fontFamily: typography.defaultFontFamily,
+      fontFamily: typography.fontFamily,
       typography: Typography(
         black: textTheme,
         white: textTheme,

@@ -289,7 +289,6 @@ class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
         color: colors.foreground,
         fontWeight: .w500,
         height: 1,
-        leadingDistribution: .even,
       ),
       titleSpacing: titleSpacing,
       descriptionTextStyle: descriptionTextStyle,

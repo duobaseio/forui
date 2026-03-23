@@ -49,14 +49,14 @@ FThemeData get neutralLight {
 FTypography _typography({
   required FColors colors,
   required bool touch,
-  String defaultFontFamily = 'packages/forui/Inter',
+  String fontFamily = 'packages/forui/Inter',
 }) {
-  assert(defaultFontFamily.isNotEmpty, 'defaultFontFamily ($defaultFontFamily) should not be empty.');
+  assert(fontFamily.isNotEmpty, 'fontFamily ($fontFamily) should not be empty.');
   final color = colors.foreground;
-  final font = defaultFontFamily;
+  final font = fontFamily;
   if (touch) {
     return FTypography(
-      defaultFontFamily: defaultFontFamily,
+      fontFamily: fontFamily,
       xs3: TextStyle(color: color, fontFamily: font, fontSize: 10, height: 1),
       xs2: TextStyle(color: color, fontFamily: font, fontSize: 12, height: 1),
       xs: TextStyle(color: color, fontFamily: font, fontSize: 14, height: 1.25),
@@ -74,7 +74,7 @@ FTypography _typography({
     );
   } else {
     return FTypography(
-      defaultFontFamily: defaultFontFamily,
+      fontFamily: fontFamily,
       xs3: TextStyle(color: color, fontFamily: font, fontSize: 8, height: 1),
       xs2: TextStyle(color: color, fontFamily: font, fontSize: 10, height: 1),
       xs: TextStyle(color: color, fontFamily: font, fontSize: 12, height: 1),

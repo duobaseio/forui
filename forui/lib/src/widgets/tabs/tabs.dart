@@ -215,7 +215,6 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
 
     final content = DefaultTextStyle(
       style: theme.typography.md.copyWith(
-        fontFamily: theme.typography.defaultFontFamily,
         color: theme.colors.foreground,
       ),
       child: useTabBarView

@@ -33,10 +33,13 @@ import 'package:forui/forui.dart';
 /// ```
 final class FTypography with Diagnosticable {
   /// The default font family. Defaults to [`packages/forui/Inter`](https://fonts.google.com/specimen/Inter).
+  static const String defaultFontFamily = 'packages/forui/Inter';
+
+  /// The font family. Defaults to [defaultFontFamily].
   ///
   /// ## Contract:
   /// Throws an [AssertionError] if empty.
-  final String defaultFontFamily;
+  final String fontFamily;
 
   /// The font size for extra extra extra small text.
   ///
@@ -138,75 +141,75 @@ final class FTypography with Diagnosticable {
 
   /// Creates a [FTypography] that defaults to touch font sizes.
   const FTypography({
-    this.defaultFontFamily = 'packages/forui/Inter',
-    this.xs3 = const TextStyle(fontSize: 10, height: 1),
-    this.xs2 = const TextStyle(fontSize: 12, height: 1),
-    this.xs = const TextStyle(fontSize: 14, height: 1.25),
-    this.sm = const TextStyle(fontSize: 16, height: 1.5),
-    this.md = const TextStyle(fontSize: 18, height: 1.75),
-    this.lg = const TextStyle(fontSize: 20, height: 1.75),
-    this.xl = const TextStyle(fontSize: 22, height: 2),
-    this.xl2 = const TextStyle(fontSize: 30, height: 2.25),
-    this.xl3 = const TextStyle(fontSize: 36, height: 2.5),
-    this.xl4 = const TextStyle(fontSize: 48, height: 1),
-    this.xl5 = const TextStyle(fontSize: 60, height: 1),
-    this.xl6 = const TextStyle(fontSize: 72, height: 1),
-    this.xl7 = const TextStyle(fontSize: 96, height: 1),
-    this.xl8 = const TextStyle(fontSize: 108, height: 1),
-  }) : assert(0 < defaultFontFamily.length, 'defaultFontFamily ($defaultFontFamily) should not be empty.');
+    this.fontFamily = defaultFontFamily,
+    this.xs3 = const TextStyle(fontFamily: defaultFontFamily, fontSize: 10, height: 1, leadingDistribution: .even),
+    this.xs2 = const TextStyle(fontFamily: defaultFontFamily, fontSize: 12, height: 1, leadingDistribution: .even),
+    this.xs = const TextStyle(fontFamily: defaultFontFamily, fontSize: 14, height: 1.25, leadingDistribution: .even),
+    this.sm = const TextStyle(fontFamily: defaultFontFamily, fontSize: 16, height: 1.5, leadingDistribution: .even),
+    this.md = const TextStyle(fontFamily: defaultFontFamily, fontSize: 18, height: 1.75, leadingDistribution: .even),
+    this.lg = const TextStyle(fontFamily: defaultFontFamily, fontSize: 20, height: 1.75, leadingDistribution: .even),
+    this.xl = const TextStyle(fontFamily: defaultFontFamily, fontSize: 22, height: 2, leadingDistribution: .even),
+    this.xl2 = const TextStyle(fontFamily: defaultFontFamily, fontSize: 30, height: 2.25, leadingDistribution: .even),
+    this.xl3 = const TextStyle(fontFamily: defaultFontFamily, fontSize: 36, height: 2.5, leadingDistribution: .even),
+    this.xl4 = const TextStyle(fontFamily: defaultFontFamily, fontSize: 48, height: 1, leadingDistribution: .even),
+    this.xl5 = const TextStyle(fontFamily: defaultFontFamily, fontSize: 60, height: 1, leadingDistribution: .even),
+    this.xl6 = const TextStyle(fontFamily: defaultFontFamily, fontSize: 72, height: 1, leadingDistribution: .even),
+    this.xl7 = const TextStyle(fontFamily: defaultFontFamily, fontSize: 96, height: 1, leadingDistribution: .even),
+    this.xl8 = const TextStyle(fontFamily: defaultFontFamily, fontSize: 108, height: 1, leadingDistribution: .even),
+  }) : assert(0 < fontFamily.length, 'fontFamily ($fontFamily) should not be empty.');
 
   /// Creates a [FTypography] that inherits its properties.
   factory FTypography.inherit({
     required FColors colors,
     required bool touch,
-    String defaultFontFamily = 'packages/forui/Inter',
+    String fontFamily = defaultFontFamily,
   }) {
-    assert(defaultFontFamily.isNotEmpty, 'defaultFontFamily ($defaultFontFamily) should not be empty.');
+    assert(fontFamily.isNotEmpty, 'fontFamily ($fontFamily) should not be empty.');
     final color = colors.foreground;
-    final font = defaultFontFamily;
+    final font = fontFamily;
 
     if (touch) {
       return FTypography(
-        defaultFontFamily: defaultFontFamily,
-        xs3: TextStyle(color: color, fontFamily: font, fontSize: 10, height: 1),
-        xs2: TextStyle(color: color, fontFamily: font, fontSize: 12, height: 1),
-        xs: TextStyle(color: color, fontFamily: font, fontSize: 14, height: 1.25),
-        sm: TextStyle(color: color, fontFamily: font, fontSize: 16, height: 1.5),
-        md: TextStyle(color: color, fontFamily: font, fontSize: 18, height: 1.75),
-        lg: TextStyle(color: color, fontFamily: font, fontSize: 20, height: 1.75),
-        xl: TextStyle(color: color, fontFamily: font, fontSize: 22, height: 2),
-        xl2: TextStyle(color: color, fontFamily: font, fontSize: 30, height: 2.25),
-        xl3: TextStyle(color: color, fontFamily: font, fontSize: 36, height: 2.5),
-        xl4: TextStyle(color: color, fontFamily: font, fontSize: 48, height: 1),
-        xl5: TextStyle(color: color, fontFamily: font, fontSize: 60, height: 1),
-        xl6: TextStyle(color: color, fontFamily: font, fontSize: 72, height: 1),
-        xl7: TextStyle(color: color, fontFamily: font, fontSize: 96, height: 1),
-        xl8: TextStyle(color: color, fontFamily: font, fontSize: 108, height: 1),
+        fontFamily: fontFamily,
+        xs3: TextStyle(color: color, fontFamily: font, fontSize: 10, height: 1, leadingDistribution: .even),
+        xs2: TextStyle(color: color, fontFamily: font, fontSize: 12, height: 1, leadingDistribution: .even),
+        xs: TextStyle(color: color, fontFamily: font, fontSize: 14, height: 1.25, leadingDistribution: .even),
+        sm: TextStyle(color: color, fontFamily: font, fontSize: 16, height: 1.5, leadingDistribution: .even),
+        md: TextStyle(color: color, fontFamily: font, fontSize: 18, height: 1.75, leadingDistribution: .even),
+        lg: TextStyle(color: color, fontFamily: font, fontSize: 20, height: 1.75, leadingDistribution: .even),
+        xl: TextStyle(color: color, fontFamily: font, fontSize: 22, height: 2, leadingDistribution: .even),
+        xl2: TextStyle(color: color, fontFamily: font, fontSize: 30, height: 2.25, leadingDistribution: .even),
+        xl3: TextStyle(color: color, fontFamily: font, fontSize: 36, height: 2.5, leadingDistribution: .even),
+        xl4: TextStyle(color: color, fontFamily: font, fontSize: 48, height: 1, leadingDistribution: .even),
+        xl5: TextStyle(color: color, fontFamily: font, fontSize: 60, height: 1, leadingDistribution: .even),
+        xl6: TextStyle(color: color, fontFamily: font, fontSize: 72, height: 1, leadingDistribution: .even),
+        xl7: TextStyle(color: color, fontFamily: font, fontSize: 96, height: 1, leadingDistribution: .even),
+        xl8: TextStyle(color: color, fontFamily: font, fontSize: 108, height: 1, leadingDistribution: .even),
       );
     } else {
       return FTypography(
-        defaultFontFamily: defaultFontFamily,
-        xs3: TextStyle(color: color, fontFamily: font, fontSize: 8, height: 1),
-        xs2: TextStyle(color: color, fontFamily: font, fontSize: 10, height: 1),
-        xs: TextStyle(color: color, fontFamily: font, fontSize: 12, height: 1),
-        sm: TextStyle(color: color, fontFamily: font, fontSize: 14, height: 1.25),
-        md: TextStyle(color: color, fontFamily: font, fontSize: 16, height: 1.5),
-        lg: TextStyle(color: color, fontFamily: font, fontSize: 18, height: 1.75),
-        xl: TextStyle(color: color, fontFamily: font, fontSize: 20, height: 1.75),
-        xl2: TextStyle(color: color, fontFamily: font, fontSize: 22, height: 2),
-        xl3: TextStyle(color: color, fontFamily: font, fontSize: 30, height: 2.25),
-        xl4: TextStyle(color: color, fontFamily: font, fontSize: 36, height: 2.5),
-        xl5: TextStyle(color: color, fontFamily: font, fontSize: 48, height: 1),
-        xl6: TextStyle(color: color, fontFamily: font, fontSize: 60, height: 1),
-        xl7: TextStyle(color: color, fontFamily: font, fontSize: 72, height: 1),
-        xl8: TextStyle(color: color, fontFamily: font, fontSize: 96, height: 1),
+        fontFamily: fontFamily,
+        xs3: TextStyle(color: color, fontFamily: font, fontSize: 8, height: 1, leadingDistribution: .even),
+        xs2: TextStyle(color: color, fontFamily: font, fontSize: 10, height: 1, leadingDistribution: .even),
+        xs: TextStyle(color: color, fontFamily: font, fontSize: 12, height: 1, leadingDistribution: .even),
+        sm: TextStyle(color: color, fontFamily: font, fontSize: 14, height: 1.25, leadingDistribution: .even),
+        md: TextStyle(color: color, fontFamily: font, fontSize: 16, height: 1.5, leadingDistribution: .even),
+        lg: TextStyle(color: color, fontFamily: font, fontSize: 18, height: 1.75, leadingDistribution: .even),
+        xl: TextStyle(color: color, fontFamily: font, fontSize: 20, height: 1.75, leadingDistribution: .even),
+        xl2: TextStyle(color: color, fontFamily: font, fontSize: 22, height: 2, leadingDistribution: .even),
+        xl3: TextStyle(color: color, fontFamily: font, fontSize: 30, height: 2.25, leadingDistribution: .even),
+        xl4: TextStyle(color: color, fontFamily: font, fontSize: 36, height: 2.5, leadingDistribution: .even),
+        xl5: TextStyle(color: color, fontFamily: font, fontSize: 48, height: 1, leadingDistribution: .even),
+        xl6: TextStyle(color: color, fontFamily: font, fontSize: 60, height: 1, leadingDistribution: .even),
+        xl7: TextStyle(color: color, fontFamily: font, fontSize: 72, height: 1, leadingDistribution: .even),
+        xl8: TextStyle(color: color, fontFamily: font, fontSize: 96, height: 1, leadingDistribution: .even),
       );
     }
   }
 
   /// Creates a linear interpolation between two [FTypography]s using the given factor [t].
   factory FTypography.lerp(FTypography a, FTypography b, double t) => .new(
-    defaultFontFamily: t < 0.5 ? a.defaultFontFamily : b.defaultFontFamily,
+    fontFamily: t < 0.5 ? a.fontFamily : b.fontFamily,
     xs3: .lerp(a.xs3, b.xs3, t)!,
     xs2: .lerp(a.xs2, b.xs2, t)!,
     xs: .lerp(a.xs, b.xs, t)!,
@@ -238,7 +241,7 @@ final class FTypography with Diagnosticable {
   /// ```
   @useResult
   FTypography scale({double sizeScalar = 1}) => .new(
-    defaultFontFamily: defaultFontFamily,
+    fontFamily: fontFamily,
     xs3: _scaleTextStyle(style: xs3, sizeScalar: sizeScalar),
     xs2: _scaleTextStyle(style: xs2, sizeScalar: sizeScalar),
     xs: _scaleTextStyle(style: xs, sizeScalar: sizeScalar),
@@ -261,18 +264,18 @@ final class FTypography with Diagnosticable {
 
   /// Returns a copy of this [FTypography] with the given properties replaced.
   ///
-  /// To change the [defaultFontFamily], create a [FTypography] via its constructors instead.
+  /// To change the [fontFamily], create a [FTypography] via its constructors instead.
   ///
   /// ```dart
   /// const typography = FTypography(
-  ///   defaultFontFamily: 'packages/forui/my-font',
+  ///   fontFamily: 'packages/forui/my-font',
   ///   sm: TextStyle(fontSize: 10),
   ///   md: TextStyle(fontSize: 20),
   /// );
   ///
-  /// final copy = typography.copyWith(defaultFontFamily: 'packages/forui/another-font');
+  /// final copy = typography.copyWith(fontFamily: 'packages/forui/another-font');
   ///
-  /// print(copy.defaultFontFamily); // 'packages/forui/another-font'
+  /// print(copy.fontFamily); // 'packages/forui/another-font'
   /// print(copy.sm.fontSize); // 10
   /// print(copy.md.fontSize); // 20
   /// ```
@@ -293,7 +296,7 @@ final class FTypography with Diagnosticable {
     TextStyle? xl7,
     TextStyle? xl8,
   }) => FTypography(
-    defaultFontFamily: defaultFontFamily,
+    fontFamily: fontFamily,
     xs3: xs3 ?? this.xs3,
     xs2: xs2 ?? this.xs2,
     xs: xs ?? this.xs,
@@ -314,7 +317,7 @@ final class FTypography with Diagnosticable {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(StringProperty('defaultFontFamily', defaultFontFamily, defaultValue: 'packages/forui/Inter'))
+      ..add(StringProperty('fontFamily', fontFamily, defaultValue: defaultFontFamily))
       ..add(DiagnosticsProperty('xs3', xs3))
       ..add(DiagnosticsProperty('xs2', xs2))
       ..add(DiagnosticsProperty('xs', xs))
@@ -336,7 +339,7 @@ final class FTypography with Diagnosticable {
       identical(this, other) ||
       other is FTypography &&
           runtimeType == other.runtimeType &&
-          defaultFontFamily == other.defaultFontFamily &&
+          fontFamily == other.fontFamily &&
           xs3 == other.xs3 &&
           xs2 == other.xs2 &&
           xs == other.xs &&
@@ -354,7 +357,7 @@ final class FTypography with Diagnosticable {
 
   @override
   int get hashCode =>
-      defaultFontFamily.hashCode ^
+      fontFamily.hashCode ^
       xs3.hashCode ^
       xs2.hashCode ^
       xs.hashCode ^

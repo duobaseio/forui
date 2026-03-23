@@ -69,7 +69,7 @@ extension type FMultiSelectFieldSizeStyles(
     required bool touch,
   }) {
     final label = FLabelStyles.inherit(style: style).verticalStyle;
-    final textStyle = typography.sm.copyWith(fontFamily: typography.defaultFontFamily);
+    final textStyle = typography.sm;
     final iconStyle = FVariants<FTextFieldVariantConstraint, FTextFieldVariant, IconThemeData, IconThemeDataDelta>.from(
       IconThemeData(color: colors.mutedForeground, size: typography.sm.fontSize),
       variants: {
@@ -77,14 +77,13 @@ extension type FMultiSelectFieldSizeStyles(
       },
     );
 
-    FMultiSelectFieldStyle field(
-      FButtonStyle buttonStyle,
-      EdgeInsetsGeometry contentPadding,
-      EdgeInsetsGeometry hintPadding,
-      TextStyle tagTextStyle,
-      EdgeInsetsGeometry tagPadding,
-      BorderRadiusGeometry tagBorderRadius,
-    ) => FMultiSelectFieldStyle.inherit(
+    FMultiSelectFieldStyle field({
+      required FButtonStyle buttonStyle,
+      required EdgeInsetsGeometry contentPadding,
+      required EdgeInsetsGeometry hintPadding,
+      required EdgeInsetsGeometry tagPadding,
+      required BorderRadiusGeometry tagBorderRadius,
+    }) => FMultiSelectFieldStyle.inherit(
       colors: colors,
       style: style,
       labelStyle: label,
@@ -96,7 +95,7 @@ extension type FMultiSelectFieldSizeStyles(
       tagStyle: .inherit(
         colors: colors,
         style: style,
-        textStyle: tagTextStyle,
+        textStyle: typography.sm,
         padding: tagPadding,
         borderRadius: tagBorderRadius,
       ),
@@ -108,14 +107,12 @@ extension type FMultiSelectFieldSizeStyles(
     );
 
     if (touch) {
-      final tagTextStyle = typography.sm.copyWith(fontFamily: typography.defaultFontFamily, height: 1);
       final md = field(
-        buttonStyle,
-        const .directional(start: 12, end: 8, top: 4, bottom: 4),
-        const .directional(start: 4, top: 6, bottom: 6),
-        tagTextStyle,
-        const .symmetric(vertical: 9, horizontal: 10),
-        style.borderRadius.md,
+        buttonStyle: buttonStyle,
+        contentPadding: const .directional(start: 12, end: 8, top: 4, bottom: 4),
+        hintPadding: const .directional(start: 4, top: 6, bottom: 6),
+        tagPadding: const .symmetric(vertical: 9, horizontal: 10),
+        tagBorderRadius: style.borderRadius.md,
       );
 
       return FMultiSelectFieldSizeStyles(
@@ -123,55 +120,49 @@ extension type FMultiSelectFieldSizeStyles(
           md,
           variants: {
             [.sm]: field(
-              buttonStyle,
-              const .directional(start: 12, end: 8, top: 5, bottom: 5),
-              const .directional(start: 4, top: 3, bottom: 3),
-              tagTextStyle,
-              const .symmetric(vertical: 7, horizontal: 10),
-              style.borderRadius.sm,
+              buttonStyle: buttonStyle,
+              contentPadding: const .directional(start: 12, end: 8, top: 5, bottom: 5),
+              hintPadding: const .directional(start: 4, top: 3, bottom: 3),
+              tagPadding: const .symmetric(vertical: 7, horizontal: 10),
+              tagBorderRadius: style.borderRadius.sm,
             ),
             [.md]: md,
             [.lg]: field(
-              buttonStyle,
-              const .directional(start: 12, end: 8, top: 5, bottom: 5),
-              const .directional(start: 4, top: 7, bottom: 7),
-              tagTextStyle,
-              const .symmetric(vertical: 11, horizontal: 10),
-              style.borderRadius.md,
+              buttonStyle: buttonStyle,
+              contentPadding: const .directional(start: 12, end: 8, top: 5, bottom: 5),
+              hintPadding: const .directional(start: 4, top: 7, bottom: 7),
+              tagPadding: const .symmetric(vertical: 11, horizontal: 10),
+              tagBorderRadius: style.borderRadius.md,
             ),
           },
         ),
       );
     } else {
-      final tagTextStyle = typography.sm.copyWith(fontFamily: typography.defaultFontFamily);
       final md = field(
-        buttonStyle,
-        const .directional(start: 10, end: 8, top: 5, bottom: 5),
-        const .directional(start: 4, top: 4, bottom: 4),
-        tagTextStyle,
-        const .symmetric(vertical: 4, horizontal: 8),
-        style.borderRadius.md,
+        buttonStyle: buttonStyle,
+        contentPadding: const .directional(start: 10, end: 8, top: 5, bottom: 5),
+        hintPadding: const .directional(start: 4, top: 4, bottom: 4),
+        tagPadding: const .symmetric(vertical: 6, horizontal: 8),
+        tagBorderRadius: style.borderRadius.md,
       );
       return FMultiSelectFieldSizeStyles(
         FVariants(
           md,
           variants: {
             [.sm]: field(
-              ghost.xs.copyWith(iconContentStyle: ghost.xs.iconContentStyle.copyWith(iconStyle: iconStyle.cast())),
-              const .directional(start: 10, end: 8, top: 3, bottom: 3),
-              const .directional(start: 4, top: 4, bottom: 4),
-              tagTextStyle,
-              const .symmetric(vertical: 2, horizontal: 8),
-              style.borderRadius.xs,
+              buttonStyle: ghost.xs.copyWith(iconContentStyle: ghost.xs.iconContentStyle.copyWith(iconStyle: iconStyle.cast())),
+              contentPadding: const .directional(start: 10, end: 8, top: 3, bottom: 3),
+              hintPadding: const .directional(start: 4, top: 4, bottom: 4),
+              tagPadding: const .symmetric(vertical: 4, horizontal: 8),
+              tagBorderRadius: style.borderRadius.xs,
             ),
             [.md]: md,
             [.lg]: field(
-              buttonStyle,
-              const .directional(start: 10, end: 8, top: 5, bottom: 5),
-              const .directional(start: 4, top: 6, bottom: 6),
-              tagTextStyle,
-              const .symmetric(vertical: 6, horizontal: 8),
-              style.borderRadius.md,
+              buttonStyle: buttonStyle,
+              contentPadding: const .directional(start: 10, end: 8, top: 5, bottom: 5),
+              hintPadding: const .directional(start: 4, top: 6, bottom: 6),
+              tagPadding: const .symmetric(vertical: 8, horizontal: 8),
+              tagBorderRadius: style.borderRadius.md,
             ),
           },
         ),

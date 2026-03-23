@@ -227,7 +227,7 @@ class FMultiSelectTagStyle with Diagnosticable, _$FMultiSelectTagStyleFunctions 
       },
     ),
     labelTextStyle: FVariants.from(
-      textStyle.copyWith(color: colors.secondaryForeground),
+      textStyle.copyWith(color: colors.secondaryForeground, height: 1),
       variants: {
         [.disabled]: .delta(color: colors.disable(colors.secondaryForeground)),
       },
