@@ -173,11 +173,7 @@ final class FTypography with Diagnosticable {
        assert(fontFamily.isNotEmpty, 'fontFamily ($fontFamily) should not be empty.');
 
   /// Creates a [FTypography] that inherits its properties.
-  factory FTypography.inherit({
-    required FColors colors,
-    required bool touch,
-    String fontFamily = defaultFontFamily,
-  }) {
+  factory FTypography.inherit({required FColors colors, required bool touch, String fontFamily = defaultFontFamily}) {
     assert(fontFamily.isNotEmpty, 'fontFamily ($fontFamily) should not be empty.');
     final color = colors.foreground;
     final font = fontFamily;

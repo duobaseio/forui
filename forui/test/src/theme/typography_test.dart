@@ -12,20 +12,20 @@ void main() {
     setUp(() {
       typography = FTypography(
         fontFamily: 'Roboto',
-        xs3: TextStyle(fontSize: 1),
-        xs2: TextStyle(fontSize: 2),
-        xs: TextStyle(fontSize: 3),
-        sm: TextStyle(fontSize: 4),
-        md: TextStyle(fontSize: 5),
-        lg: TextStyle(fontSize: 6),
-        xl: TextStyle(fontSize: 7),
-        xl2: TextStyle(fontSize: 8),
-        xl3: TextStyle(fontSize: 9),
-        xl4: TextStyle(fontSize: 10),
-        xl5: TextStyle(fontSize: 11),
-        xl6: TextStyle(fontSize: 12),
-        xl7: TextStyle(fontSize: 13),
-        xl8: TextStyle(fontSize: 14),
+        xs3: const TextStyle(fontSize: 1),
+        xs2: const TextStyle(fontSize: 2),
+        xs: const TextStyle(fontSize: 3),
+        sm: const TextStyle(fontSize: 4),
+        md: const TextStyle(fontSize: 5),
+        lg: const TextStyle(fontSize: 6),
+        xl: const TextStyle(fontSize: 7),
+        xl2: const TextStyle(fontSize: 8),
+        xl3: const TextStyle(fontSize: 9),
+        xl4: const TextStyle(fontSize: 10),
+        xl5: const TextStyle(fontSize: 11),
+        xl6: const TextStyle(fontSize: 12),
+        xl7: const TextStyle(fontSize: 13),
+        xl8: const TextStyle(fontSize: 14),
       );
     });
 
@@ -37,13 +37,28 @@ void main() {
         expect(typography.fontFamily, font);
         expect(typography.xs3, const TextStyle(fontFamily: font, fontSize: 10, height: 1, leadingDistribution: .even));
         expect(typography.xs2, const TextStyle(fontFamily: font, fontSize: 12, height: 1, leadingDistribution: .even));
-        expect(typography.xs, const TextStyle(fontFamily: font, fontSize: 14, height: 1.25, leadingDistribution: .even));
+        expect(
+          typography.xs,
+          const TextStyle(fontFamily: font, fontSize: 14, height: 1.25, leadingDistribution: .even),
+        );
         expect(typography.sm, const TextStyle(fontFamily: font, fontSize: 16, height: 1.5, leadingDistribution: .even));
-        expect(typography.md, const TextStyle(fontFamily: font, fontSize: 18, height: 1.75, leadingDistribution: .even));
-        expect(typography.lg, const TextStyle(fontFamily: font, fontSize: 20, height: 1.75, leadingDistribution: .even));
+        expect(
+          typography.md,
+          const TextStyle(fontFamily: font, fontSize: 18, height: 1.75, leadingDistribution: .even),
+        );
+        expect(
+          typography.lg,
+          const TextStyle(fontFamily: font, fontSize: 20, height: 1.75, leadingDistribution: .even),
+        );
         expect(typography.xl, const TextStyle(fontFamily: font, fontSize: 22, height: 2, leadingDistribution: .even));
-        expect(typography.xl2, const TextStyle(fontFamily: font, fontSize: 30, height: 2.25, leadingDistribution: .even));
-        expect(typography.xl3, const TextStyle(fontFamily: font, fontSize: 36, height: 2.5, leadingDistribution: .even));
+        expect(
+          typography.xl2,
+          const TextStyle(fontFamily: font, fontSize: 30, height: 2.25, leadingDistribution: .even),
+        );
+        expect(
+          typography.xl3,
+          const TextStyle(fontFamily: font, fontSize: 36, height: 2.5, leadingDistribution: .even),
+        );
         expect(typography.xl4, const TextStyle(fontFamily: font, fontSize: 48, height: 1, leadingDistribution: .even));
         expect(typography.xl5, const TextStyle(fontFamily: font, fontSize: 60, height: 1, leadingDistribution: .even));
         expect(typography.xl6, const TextStyle(fontFamily: font, fontSize: 72, height: 1, leadingDistribution: .even));
@@ -81,20 +96,62 @@ void main() {
         final color = colors.foreground;
 
         expect(typography.fontFamily, 'packages/forui/Inter');
-        expect(typography.xs3, TextStyle(color: color, fontFamily: font, fontSize: 10, height: 1, leadingDistribution: .even));
-        expect(typography.xs2, TextStyle(color: color, fontFamily: font, fontSize: 12, height: 1, leadingDistribution: .even));
-        expect(typography.xs, TextStyle(color: color, fontFamily: font, fontSize: 14, height: 1.25, leadingDistribution: .even));
-        expect(typography.sm, TextStyle(color: color, fontFamily: font, fontSize: 16, height: 1.5, leadingDistribution: .even));
-        expect(typography.md, TextStyle(color: color, fontFamily: font, fontSize: 18, height: 1.75, leadingDistribution: .even));
-        expect(typography.lg, TextStyle(color: color, fontFamily: font, fontSize: 20, height: 1.75, leadingDistribution: .even));
-        expect(typography.xl, TextStyle(color: color, fontFamily: font, fontSize: 22, height: 2, leadingDistribution: .even));
-        expect(typography.xl2, TextStyle(color: color, fontFamily: font, fontSize: 30, height: 2.25, leadingDistribution: .even));
-        expect(typography.xl3, TextStyle(color: color, fontFamily: font, fontSize: 36, height: 2.5, leadingDistribution: .even));
-        expect(typography.xl4, TextStyle(color: color, fontFamily: font, fontSize: 48, height: 1, leadingDistribution: .even));
-        expect(typography.xl5, TextStyle(color: color, fontFamily: font, fontSize: 60, height: 1, leadingDistribution: .even));
-        expect(typography.xl6, TextStyle(color: color, fontFamily: font, fontSize: 72, height: 1, leadingDistribution: .even));
-        expect(typography.xl7, TextStyle(color: color, fontFamily: font, fontSize: 96, height: 1, leadingDistribution: .even));
-        expect(typography.xl8, TextStyle(color: color, fontFamily: font, fontSize: 108, height: 1, leadingDistribution: .even));
+        expect(
+          typography.xs3,
+          TextStyle(color: color, fontFamily: font, fontSize: 10, height: 1, leadingDistribution: .even),
+        );
+        expect(
+          typography.xs2,
+          TextStyle(color: color, fontFamily: font, fontSize: 12, height: 1, leadingDistribution: .even),
+        );
+        expect(
+          typography.xs,
+          TextStyle(color: color, fontFamily: font, fontSize: 14, height: 1.25, leadingDistribution: .even),
+        );
+        expect(
+          typography.sm,
+          TextStyle(color: color, fontFamily: font, fontSize: 16, height: 1.5, leadingDistribution: .even),
+        );
+        expect(
+          typography.md,
+          TextStyle(color: color, fontFamily: font, fontSize: 18, height: 1.75, leadingDistribution: .even),
+        );
+        expect(
+          typography.lg,
+          TextStyle(color: color, fontFamily: font, fontSize: 20, height: 1.75, leadingDistribution: .even),
+        );
+        expect(
+          typography.xl,
+          TextStyle(color: color, fontFamily: font, fontSize: 22, height: 2, leadingDistribution: .even),
+        );
+        expect(
+          typography.xl2,
+          TextStyle(color: color, fontFamily: font, fontSize: 30, height: 2.25, leadingDistribution: .even),
+        );
+        expect(
+          typography.xl3,
+          TextStyle(color: color, fontFamily: font, fontSize: 36, height: 2.5, leadingDistribution: .even),
+        );
+        expect(
+          typography.xl4,
+          TextStyle(color: color, fontFamily: font, fontSize: 48, height: 1, leadingDistribution: .even),
+        );
+        expect(
+          typography.xl5,
+          TextStyle(color: color, fontFamily: font, fontSize: 60, height: 1, leadingDistribution: .even),
+        );
+        expect(
+          typography.xl6,
+          TextStyle(color: color, fontFamily: font, fontSize: 72, height: 1, leadingDistribution: .even),
+        );
+        expect(
+          typography.xl7,
+          TextStyle(color: color, fontFamily: font, fontSize: 96, height: 1, leadingDistribution: .even),
+        );
+        expect(
+          typography.xl8,
+          TextStyle(color: color, fontFamily: font, fontSize: 108, height: 1, leadingDistribution: .even),
+        );
       });
 
       test('desktop', () {
@@ -103,20 +160,62 @@ void main() {
         final color = colors.foreground;
 
         expect(typography.fontFamily, 'packages/forui/Inter');
-        expect(typography.xs3, TextStyle(color: color, fontFamily: font, fontSize: 8, height: 1, leadingDistribution: .even));
-        expect(typography.xs2, TextStyle(color: color, fontFamily: font, fontSize: 10, height: 1, leadingDistribution: .even));
-        expect(typography.xs, TextStyle(color: color, fontFamily: font, fontSize: 12, height: 1, leadingDistribution: .even));
-        expect(typography.sm, TextStyle(color: color, fontFamily: font, fontSize: 14, height: 1.25, leadingDistribution: .even));
-        expect(typography.md, TextStyle(color: color, fontFamily: font, fontSize: 16, height: 1.5, leadingDistribution: .even));
-        expect(typography.lg, TextStyle(color: color, fontFamily: font, fontSize: 18, height: 1.75, leadingDistribution: .even));
-        expect(typography.xl, TextStyle(color: color, fontFamily: font, fontSize: 20, height: 1.75, leadingDistribution: .even));
-        expect(typography.xl2, TextStyle(color: color, fontFamily: font, fontSize: 22, height: 2, leadingDistribution: .even));
-        expect(typography.xl3, TextStyle(color: color, fontFamily: font, fontSize: 30, height: 2.25, leadingDistribution: .even));
-        expect(typography.xl4, TextStyle(color: color, fontFamily: font, fontSize: 36, height: 2.5, leadingDistribution: .even));
-        expect(typography.xl5, TextStyle(color: color, fontFamily: font, fontSize: 48, height: 1, leadingDistribution: .even));
-        expect(typography.xl6, TextStyle(color: color, fontFamily: font, fontSize: 60, height: 1, leadingDistribution: .even));
-        expect(typography.xl7, TextStyle(color: color, fontFamily: font, fontSize: 72, height: 1, leadingDistribution: .even));
-        expect(typography.xl8, TextStyle(color: color, fontFamily: font, fontSize: 96, height: 1, leadingDistribution: .even));
+        expect(
+          typography.xs3,
+          TextStyle(color: color, fontFamily: font, fontSize: 8, height: 1, leadingDistribution: .even),
+        );
+        expect(
+          typography.xs2,
+          TextStyle(color: color, fontFamily: font, fontSize: 10, height: 1, leadingDistribution: .even),
+        );
+        expect(
+          typography.xs,
+          TextStyle(color: color, fontFamily: font, fontSize: 12, height: 1, leadingDistribution: .even),
+        );
+        expect(
+          typography.sm,
+          TextStyle(color: color, fontFamily: font, fontSize: 14, height: 1.25, leadingDistribution: .even),
+        );
+        expect(
+          typography.md,
+          TextStyle(color: color, fontFamily: font, fontSize: 16, height: 1.5, leadingDistribution: .even),
+        );
+        expect(
+          typography.lg,
+          TextStyle(color: color, fontFamily: font, fontSize: 18, height: 1.75, leadingDistribution: .even),
+        );
+        expect(
+          typography.xl,
+          TextStyle(color: color, fontFamily: font, fontSize: 20, height: 1.75, leadingDistribution: .even),
+        );
+        expect(
+          typography.xl2,
+          TextStyle(color: color, fontFamily: font, fontSize: 22, height: 2, leadingDistribution: .even),
+        );
+        expect(
+          typography.xl3,
+          TextStyle(color: color, fontFamily: font, fontSize: 30, height: 2.25, leadingDistribution: .even),
+        );
+        expect(
+          typography.xl4,
+          TextStyle(color: color, fontFamily: font, fontSize: 36, height: 2.5, leadingDistribution: .even),
+        );
+        expect(
+          typography.xl5,
+          TextStyle(color: color, fontFamily: font, fontSize: 48, height: 1, leadingDistribution: .even),
+        );
+        expect(
+          typography.xl6,
+          TextStyle(color: color, fontFamily: font, fontSize: 60, height: 1, leadingDistribution: .even),
+        );
+        expect(
+          typography.xl7,
+          TextStyle(color: color, fontFamily: font, fontSize: 72, height: 1, leadingDistribution: .even),
+        );
+        expect(
+          typography.xl8,
+          TextStyle(color: color, fontFamily: font, fontSize: 96, height: 1, leadingDistribution: .even),
+        );
       });
     });
 
@@ -168,20 +267,62 @@ void main() {
         typography = typography.copyWith();
 
         expect(typography.fontFamily, 'Roboto');
-        expect(typography.xs3, const TextStyle(fontFamily: 'Roboto', fontSize: 10, height: 1, leadingDistribution: .even));
-        expect(typography.xs2, const TextStyle(fontFamily: 'Roboto', fontSize: 12, height: 1, leadingDistribution: .even));
-        expect(typography.xs, const TextStyle(fontFamily: 'Roboto', fontSize: 14, height: 1.25, leadingDistribution: .even));
-        expect(typography.sm, const TextStyle(fontFamily: 'Roboto', fontSize: 16, height: 1.5, leadingDistribution: .even));
-        expect(typography.md, const TextStyle(fontFamily: 'Roboto', fontSize: 18, height: 1.75, leadingDistribution: .even));
-        expect(typography.lg, const TextStyle(fontFamily: 'Roboto', fontSize: 20, height: 1.75, leadingDistribution: .even));
-        expect(typography.xl, const TextStyle(fontFamily: 'Roboto', fontSize: 22, height: 2, leadingDistribution: .even));
-        expect(typography.xl2, const TextStyle(fontFamily: 'Roboto', fontSize: 30, height: 2.25, leadingDistribution: .even));
-        expect(typography.xl3, const TextStyle(fontFamily: 'Roboto', fontSize: 36, height: 2.5, leadingDistribution: .even));
-        expect(typography.xl4, const TextStyle(fontFamily: 'Roboto', fontSize: 48, height: 1, leadingDistribution: .even));
-        expect(typography.xl5, const TextStyle(fontFamily: 'Roboto', fontSize: 60, height: 1, leadingDistribution: .even));
-        expect(typography.xl6, const TextStyle(fontFamily: 'Roboto', fontSize: 72, height: 1, leadingDistribution: .even));
-        expect(typography.xl7, const TextStyle(fontFamily: 'Roboto', fontSize: 96, height: 1, leadingDistribution: .even));
-        expect(typography.xl8, const TextStyle(fontFamily: 'Roboto', fontSize: 108, height: 1, leadingDistribution: .even));
+        expect(
+          typography.xs3,
+          const TextStyle(fontFamily: 'Roboto', fontSize: 10, height: 1, leadingDistribution: .even),
+        );
+        expect(
+          typography.xs2,
+          const TextStyle(fontFamily: 'Roboto', fontSize: 12, height: 1, leadingDistribution: .even),
+        );
+        expect(
+          typography.xs,
+          const TextStyle(fontFamily: 'Roboto', fontSize: 14, height: 1.25, leadingDistribution: .even),
+        );
+        expect(
+          typography.sm,
+          const TextStyle(fontFamily: 'Roboto', fontSize: 16, height: 1.5, leadingDistribution: .even),
+        );
+        expect(
+          typography.md,
+          const TextStyle(fontFamily: 'Roboto', fontSize: 18, height: 1.75, leadingDistribution: .even),
+        );
+        expect(
+          typography.lg,
+          const TextStyle(fontFamily: 'Roboto', fontSize: 20, height: 1.75, leadingDistribution: .even),
+        );
+        expect(
+          typography.xl,
+          const TextStyle(fontFamily: 'Roboto', fontSize: 22, height: 2, leadingDistribution: .even),
+        );
+        expect(
+          typography.xl2,
+          const TextStyle(fontFamily: 'Roboto', fontSize: 30, height: 2.25, leadingDistribution: .even),
+        );
+        expect(
+          typography.xl3,
+          const TextStyle(fontFamily: 'Roboto', fontSize: 36, height: 2.5, leadingDistribution: .even),
+        );
+        expect(
+          typography.xl4,
+          const TextStyle(fontFamily: 'Roboto', fontSize: 48, height: 1, leadingDistribution: .even),
+        );
+        expect(
+          typography.xl5,
+          const TextStyle(fontFamily: 'Roboto', fontSize: 60, height: 1, leadingDistribution: .even),
+        );
+        expect(
+          typography.xl6,
+          const TextStyle(fontFamily: 'Roboto', fontSize: 72, height: 1, leadingDistribution: .even),
+        );
+        expect(
+          typography.xl7,
+          const TextStyle(fontFamily: 'Roboto', fontSize: 96, height: 1, leadingDistribution: .even),
+        );
+        expect(
+          typography.xl8,
+          const TextStyle(fontFamily: 'Roboto', fontSize: 108, height: 1, leadingDistribution: .even),
+        );
       });
 
       test('all arguments', () {
@@ -263,20 +404,20 @@ void main() {
     group('lerp(...)', () {
       final typographyB = FTypography(
         fontFamily: 'Arial',
-        xs3: TextStyle(fontSize: 6, height: 1, color: Colors.cyan),
-        xs2: TextStyle(fontSize: 8, height: 1.25, color: Colors.amber),
-        xs: TextStyle(fontSize: 10, height: 1.5, color: Colors.red),
-        sm: TextStyle(fontSize: 12, height: 1.75, color: Colors.green),
-        md: TextStyle(fontSize: 14, height: 2.0, color: Colors.blue),
-        lg: TextStyle(fontSize: 16, height: 2.25, color: Colors.yellow),
-        xl: TextStyle(fontSize: 18, height: 2.5, color: Colors.orange),
-        xl2: TextStyle(fontSize: 20, height: 2.75, color: Colors.purple),
-        xl3: TextStyle(fontSize: 22, height: 3.0, color: Colors.pink),
-        xl4: TextStyle(fontSize: 24, height: 3.25, color: Colors.brown),
-        xl5: TextStyle(fontSize: 26, height: 3.5, color: Colors.grey),
-        xl6: TextStyle(fontSize: 28, height: 3.75, color: Colors.teal),
-        xl7: TextStyle(fontSize: 30, height: 4.0, color: Colors.indigo),
-        xl8: TextStyle(fontSize: 32, height: 4.25, color: Colors.lime),
+        xs3: const TextStyle(fontSize: 6, height: 1, color: Colors.cyan),
+        xs2: const TextStyle(fontSize: 8, height: 1.25, color: Colors.amber),
+        xs: const TextStyle(fontSize: 10, height: 1.5, color: Colors.red),
+        sm: const TextStyle(fontSize: 12, height: 1.75, color: Colors.green),
+        md: const TextStyle(fontSize: 14, height: 2.0, color: Colors.blue),
+        lg: const TextStyle(fontSize: 16, height: 2.25, color: Colors.yellow),
+        xl: const TextStyle(fontSize: 18, height: 2.5, color: Colors.orange),
+        xl2: const TextStyle(fontSize: 20, height: 2.75, color: Colors.purple),
+        xl3: const TextStyle(fontSize: 22, height: 3.0, color: Colors.pink),
+        xl4: const TextStyle(fontSize: 24, height: 3.25, color: Colors.brown),
+        xl5: const TextStyle(fontSize: 26, height: 3.5, color: Colors.grey),
+        xl6: const TextStyle(fontSize: 28, height: 3.75, color: Colors.teal),
+        xl7: const TextStyle(fontSize: 30, height: 4.0, color: Colors.indigo),
+        xl8: const TextStyle(fontSize: 32, height: 4.25, color: Colors.lime),
       );
 
       test('interpolation at t=0', () {

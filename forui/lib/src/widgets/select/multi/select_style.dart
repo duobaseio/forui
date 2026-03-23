@@ -150,7 +150,9 @@ extension type FMultiSelectFieldSizeStyles(
           md,
           variants: {
             [.sm]: field(
-              buttonStyle: ghost.xs.copyWith(iconContentStyle: ghost.xs.iconContentStyle.copyWith(iconStyle: iconStyle.cast())),
+              buttonStyle: ghost.xs.copyWith(
+                iconContentStyle: ghost.xs.iconContentStyle.copyWith(iconStyle: iconStyle.cast()),
+              ),
               contentPadding: const .directional(start: 10, end: 8, top: 3, bottom: 3),
               hintPadding: const .directional(start: 4, top: 4, bottom: 4),
               tagPadding: const .symmetric(vertical: 4, horizontal: 8),
