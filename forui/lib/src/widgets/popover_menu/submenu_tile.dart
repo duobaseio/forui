@@ -190,7 +190,7 @@ class FSubmenuTile extends StatelessWidget with FTileMixin {
     this.submenuCacheExtent,
     this.submenuIntrinsicWidth,
     this.submenuDragStartBehavior = .start,
-    this.submenuSpacing = .zero,
+    this.submenuSpacing = const .spacing(2),
     this.submenuOverflow = .flip,
     this.submenuOffset = .zero,
     this.submenuSemanticsLabel,

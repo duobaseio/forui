@@ -7,10 +7,10 @@ import 'package:forui/forui.dart';
 
 void main() {
   group('FTypography', () {
-    FTypography typography = const FTypography();
+    FTypography typography = FTypography();
 
     setUp(() {
-      typography = const FTypography(
+      typography = FTypography(
         fontFamily: 'Roboto',
         xs3: TextStyle(fontSize: 1),
         xs2: TextStyle(fontSize: 2),
@@ -31,7 +31,7 @@ void main() {
 
     group('constructor', () {
       test('no arguments', () {
-        const typography = FTypography();
+        final typography = FTypography();
         const font = FTypography.defaultFontFamily;
 
         expect(typography.fontFamily, font);
@@ -164,29 +164,28 @@ void main() {
 
     group('copyWith(...)', () {
       test('no arguments', () {
-        typography = const FTypography(fontFamily: 'Roboto');
+        typography = FTypography(fontFamily: 'Roboto');
         typography = typography.copyWith();
 
-        const font = FTypography.defaultFontFamily;
         expect(typography.fontFamily, 'Roboto');
-        expect(typography.xs3, const TextStyle(fontFamily: font, fontSize: 10, height: 1, leadingDistribution: .even));
-        expect(typography.xs2, const TextStyle(fontFamily: font, fontSize: 12, height: 1, leadingDistribution: .even));
-        expect(typography.xs, const TextStyle(fontFamily: font, fontSize: 14, height: 1.25, leadingDistribution: .even));
-        expect(typography.sm, const TextStyle(fontFamily: font, fontSize: 16, height: 1.5, leadingDistribution: .even));
-        expect(typography.md, const TextStyle(fontFamily: font, fontSize: 18, height: 1.75, leadingDistribution: .even));
-        expect(typography.lg, const TextStyle(fontFamily: font, fontSize: 20, height: 1.75, leadingDistribution: .even));
-        expect(typography.xl, const TextStyle(fontFamily: font, fontSize: 22, height: 2, leadingDistribution: .even));
-        expect(typography.xl2, const TextStyle(fontFamily: font, fontSize: 30, height: 2.25, leadingDistribution: .even));
-        expect(typography.xl3, const TextStyle(fontFamily: font, fontSize: 36, height: 2.5, leadingDistribution: .even));
-        expect(typography.xl4, const TextStyle(fontFamily: font, fontSize: 48, height: 1, leadingDistribution: .even));
-        expect(typography.xl5, const TextStyle(fontFamily: font, fontSize: 60, height: 1, leadingDistribution: .even));
-        expect(typography.xl6, const TextStyle(fontFamily: font, fontSize: 72, height: 1, leadingDistribution: .even));
-        expect(typography.xl7, const TextStyle(fontFamily: font, fontSize: 96, height: 1, leadingDistribution: .even));
-        expect(typography.xl8, const TextStyle(fontFamily: font, fontSize: 108, height: 1, leadingDistribution: .even));
+        expect(typography.xs3, const TextStyle(fontFamily: 'Roboto', fontSize: 10, height: 1, leadingDistribution: .even));
+        expect(typography.xs2, const TextStyle(fontFamily: 'Roboto', fontSize: 12, height: 1, leadingDistribution: .even));
+        expect(typography.xs, const TextStyle(fontFamily: 'Roboto', fontSize: 14, height: 1.25, leadingDistribution: .even));
+        expect(typography.sm, const TextStyle(fontFamily: 'Roboto', fontSize: 16, height: 1.5, leadingDistribution: .even));
+        expect(typography.md, const TextStyle(fontFamily: 'Roboto', fontSize: 18, height: 1.75, leadingDistribution: .even));
+        expect(typography.lg, const TextStyle(fontFamily: 'Roboto', fontSize: 20, height: 1.75, leadingDistribution: .even));
+        expect(typography.xl, const TextStyle(fontFamily: 'Roboto', fontSize: 22, height: 2, leadingDistribution: .even));
+        expect(typography.xl2, const TextStyle(fontFamily: 'Roboto', fontSize: 30, height: 2.25, leadingDistribution: .even));
+        expect(typography.xl3, const TextStyle(fontFamily: 'Roboto', fontSize: 36, height: 2.5, leadingDistribution: .even));
+        expect(typography.xl4, const TextStyle(fontFamily: 'Roboto', fontSize: 48, height: 1, leadingDistribution: .even));
+        expect(typography.xl5, const TextStyle(fontFamily: 'Roboto', fontSize: 60, height: 1, leadingDistribution: .even));
+        expect(typography.xl6, const TextStyle(fontFamily: 'Roboto', fontSize: 72, height: 1, leadingDistribution: .even));
+        expect(typography.xl7, const TextStyle(fontFamily: 'Roboto', fontSize: 96, height: 1, leadingDistribution: .even));
+        expect(typography.xl8, const TextStyle(fontFamily: 'Roboto', fontSize: 108, height: 1, leadingDistribution: .even));
       });
 
       test('all arguments', () {
-        final typography = const FTypography().copyWith(
+        final typography = FTypography().copyWith(
           xs3: const TextStyle(fontSize: 1),
           xs2: const TextStyle(fontSize: 2),
           xs: const TextStyle(fontSize: 3),
@@ -262,7 +261,7 @@ void main() {
     });
 
     group('lerp(...)', () {
-      const typographyB = FTypography(
+      final typographyB = FTypography(
         fontFamily: 'Arial',
         xs3: TextStyle(fontSize: 6, height: 1, color: Colors.cyan),
         xs2: TextStyle(fontSize: 8, height: 1.25, color: Colors.amber),

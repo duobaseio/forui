@@ -3,9 +3,10 @@
 ### `FTypography`
 * Add `FTypography.defaultFontFamily` static constant.
 
+* Change default leading distribution from proportional to even.
 * **Breaking** Rename `FTypography.defaultFontFamily` to `FTypography.fontFamily`.
-* **Breaking** Change default text styles to include `fontFamily`. Styles that previously relied on
-  `typography.fontFamily` being applied separately now have it baked in.
+
+* Fix default text styles created by `FTypography` to include a `fontFamily`.
 
 
 ### `FItem`

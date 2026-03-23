@@ -140,23 +140,37 @@ final class FTypography with Diagnosticable {
   final TextStyle xl8;
 
   /// Creates a [FTypography] that defaults to touch font sizes.
-  const FTypography({
+  FTypography({
     this.fontFamily = defaultFontFamily,
-    this.xs3 = const TextStyle(fontFamily: defaultFontFamily, fontSize: 10, height: 1, leadingDistribution: .even),
-    this.xs2 = const TextStyle(fontFamily: defaultFontFamily, fontSize: 12, height: 1, leadingDistribution: .even),
-    this.xs = const TextStyle(fontFamily: defaultFontFamily, fontSize: 14, height: 1.25, leadingDistribution: .even),
-    this.sm = const TextStyle(fontFamily: defaultFontFamily, fontSize: 16, height: 1.5, leadingDistribution: .even),
-    this.md = const TextStyle(fontFamily: defaultFontFamily, fontSize: 18, height: 1.75, leadingDistribution: .even),
-    this.lg = const TextStyle(fontFamily: defaultFontFamily, fontSize: 20, height: 1.75, leadingDistribution: .even),
-    this.xl = const TextStyle(fontFamily: defaultFontFamily, fontSize: 22, height: 2, leadingDistribution: .even),
-    this.xl2 = const TextStyle(fontFamily: defaultFontFamily, fontSize: 30, height: 2.25, leadingDistribution: .even),
-    this.xl3 = const TextStyle(fontFamily: defaultFontFamily, fontSize: 36, height: 2.5, leadingDistribution: .even),
-    this.xl4 = const TextStyle(fontFamily: defaultFontFamily, fontSize: 48, height: 1, leadingDistribution: .even),
-    this.xl5 = const TextStyle(fontFamily: defaultFontFamily, fontSize: 60, height: 1, leadingDistribution: .even),
-    this.xl6 = const TextStyle(fontFamily: defaultFontFamily, fontSize: 72, height: 1, leadingDistribution: .even),
-    this.xl7 = const TextStyle(fontFamily: defaultFontFamily, fontSize: 96, height: 1, leadingDistribution: .even),
-    this.xl8 = const TextStyle(fontFamily: defaultFontFamily, fontSize: 108, height: 1, leadingDistribution: .even),
-  }) : assert(0 < fontFamily.length, 'fontFamily ($fontFamily) should not be empty.');
+    TextStyle? xs3,
+    TextStyle? xs2,
+    TextStyle? xs,
+    TextStyle? sm,
+    TextStyle? md,
+    TextStyle? lg,
+    TextStyle? xl,
+    TextStyle? xl2,
+    TextStyle? xl3,
+    TextStyle? xl4,
+    TextStyle? xl5,
+    TextStyle? xl6,
+    TextStyle? xl7,
+    TextStyle? xl8,
+  }) : xs3 = xs3 ?? TextStyle(fontFamily: fontFamily, fontSize: 10, height: 1, leadingDistribution: .even),
+       xs2 = xs2 ?? TextStyle(fontFamily: fontFamily, fontSize: 12, height: 1, leadingDistribution: .even),
+       xs = xs ?? TextStyle(fontFamily: fontFamily, fontSize: 14, height: 1.25, leadingDistribution: .even),
+       sm = sm ?? TextStyle(fontFamily: fontFamily, fontSize: 16, height: 1.5, leadingDistribution: .even),
+       md = md ?? TextStyle(fontFamily: fontFamily, fontSize: 18, height: 1.75, leadingDistribution: .even),
+       lg = lg ?? TextStyle(fontFamily: fontFamily, fontSize: 20, height: 1.75, leadingDistribution: .even),
+       xl = xl ?? TextStyle(fontFamily: fontFamily, fontSize: 22, height: 2, leadingDistribution: .even),
+       xl2 = xl2 ?? TextStyle(fontFamily: fontFamily, fontSize: 30, height: 2.25, leadingDistribution: .even),
+       xl3 = xl3 ?? TextStyle(fontFamily: fontFamily, fontSize: 36, height: 2.5, leadingDistribution: .even),
+       xl4 = xl4 ?? TextStyle(fontFamily: fontFamily, fontSize: 48, height: 1, leadingDistribution: .even),
+       xl5 = xl5 ?? TextStyle(fontFamily: fontFamily, fontSize: 60, height: 1, leadingDistribution: .even),
+       xl6 = xl6 ?? TextStyle(fontFamily: fontFamily, fontSize: 72, height: 1, leadingDistribution: .even),
+       xl7 = xl7 ?? TextStyle(fontFamily: fontFamily, fontSize: 96, height: 1, leadingDistribution: .even),
+       xl8 = xl8 ?? TextStyle(fontFamily: fontFamily, fontSize: 108, height: 1, leadingDistribution: .even),
+       assert(fontFamily.isNotEmpty, 'fontFamily ($fontFamily) should not be empty.');
 
   /// Creates a [FTypography] that inherits its properties.
   factory FTypography.inherit({
