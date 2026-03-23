@@ -46,11 +46,7 @@ FThemeData get neutralLight {
   return FThemeData(colors: colors, typography: typography, style: style, touch: touch);
 }
 
-FTypography _typography({
-  required FColors colors,
-  required bool touch,
-  String fontFamily = 'packages/forui/Inter',
-}) {
+FTypography _typography({required FColors colors, required bool touch, String fontFamily = 'packages/forui/Inter'}) {
   assert(fontFamily.isNotEmpty, 'fontFamily ($fontFamily) should not be empty.');
   final color = colors.foreground;
   final font = fontFamily;
