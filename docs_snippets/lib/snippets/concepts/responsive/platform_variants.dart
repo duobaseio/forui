@@ -5,7 +5,7 @@ import 'package:forui/forui.dart';
 // {@snippet}
 @override
 Widget build(BuildContext context) => FTheme(
-  data: FThemes.neutral.light.touch, // or FThemes.neutral.light.desktop
+  data: FThemeData(touch: true, colors: FColors.neutral.light), // or FThemeData(touch: false, colors: FColors.neutral.light)
   child: const FScaffold(child: Placeholder()),
 );
 // {@endsnippet}

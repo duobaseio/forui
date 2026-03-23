@@ -678,7 +678,7 @@ void main() {
           focusNode: focus,
           onPress: focus.requestFocus,
           onVariantChange: (_, current) => focused = current.contains(FTappableVariant.focused),
-          focusedOutlineStyle: FThemes.neutral.light.touch.style.focusedOutlineStyle,
+          focusedOutlineStyle: FThemeData(touch: true, colors: FColors.neutral.light).style.focusedOutlineStyle,
           child: const Text('focus'),
         ),
       ),
@@ -699,7 +699,7 @@ void main() {
       TestScaffold.app(
         child: FTappable(
           onVariantChange: (_, current) => focused = current.contains(FTappableVariant.focused),
-          focusedOutlineStyle: FThemes.neutral.light.touch.style.focusedOutlineStyle,
+          focusedOutlineStyle: FThemeData(touch: true, colors: FColors.neutral.light).style.focusedOutlineStyle,
           child: FButton(onPress: focus.requestFocus, focusNode: focus, child: const Text('focus')),
         ),
       ),

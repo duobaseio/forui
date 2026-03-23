@@ -53,7 +53,7 @@ void main() {
       testWidgets('consistent height with and without actions', (tester) async {
         await tester.pumpWidget(
           TestScaffold.app(
-            theme: FThemes.neutral.light.touch,
+            theme: FThemeData(touch: true, colors: FColors.neutral.light),
             child: Column(
               mainAxisSize: .min,
               children: [
@@ -78,7 +78,7 @@ void main() {
       testWidgets('consistent height with and without actions', (tester) async {
         await tester.pumpWidget(
           TestScaffold.app(
-            theme: FThemes.neutral.light.touch,
+            theme: FThemeData(touch: true, colors: FColors.neutral.light),
             child: Column(
               mainAxisSize: .min,
               children: [

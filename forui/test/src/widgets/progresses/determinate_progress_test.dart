@@ -6,12 +6,12 @@ import '../../test_scaffold.dart';
 void main() {
   testWidgets('ticker provider', (tester) async {
     await tester.pumpWidget(
-      TestScaffold(theme: FThemes.neutral.light.touch, child: const FDeterminateProgress(value: 0.5)),
+      TestScaffold(theme: FThemeData(touch: true, colors: FColors.neutral.light), child: const FDeterminateProgress(value: 0.5)),
     );
     await tester.pump();
 
     await tester.pumpWidget(
-      TestScaffold(theme: FThemes.neutral.dark.touch, child: const FDeterminateProgress(value: 0.6)),
+      TestScaffold(theme: FThemeData(touch: true, colors: FColors.neutral.dark), child: const FDeterminateProgress(value: 0.6)),
     );
     await tester.pump();
 

@@ -80,7 +80,7 @@ void main() {
             DefaultCupertinoLocalizations.delegate,
             DefaultWidgetsLocalizations.delegate,
           ],
-          child: TestScaffold(theme: FThemes.neutral.light.touch, child: const FTextField()),
+          child: TestScaffold(theme: FThemeData(touch: true, colors: FColors.neutral.light), child: const FTextField()),
         ),
       );
 
@@ -92,7 +92,7 @@ void main() {
     testWidgets('no icon when clearable return false', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          theme: FThemes.neutral.light.touch,
+          theme: FThemeData(touch: true, colors: FColors.neutral.light),
           child: FTextField(clearable: (_) => false),
         ),
       );
@@ -103,7 +103,7 @@ void main() {
     testWidgets('no icon when disabled', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          theme: FThemes.neutral.light.touch,
+          theme: FThemeData(touch: true, colors: FColors.neutral.light),
           child: FTextField(enabled: false, clearable: (_) => true),
         ),
       );
@@ -115,7 +115,7 @@ void main() {
     testWidgets('suffix & no icon when disabled', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          theme: FThemes.neutral.light.touch,
+          theme: FThemeData(touch: true, colors: FColors.neutral.light),
           child: FTextField(enabled: false, clearable: (_) => true, suffixBuilder: (_, _, _) => const SizedBox()),
         ),
       );
@@ -127,7 +127,7 @@ void main() {
     testWidgets('clears text-field', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          theme: FThemes.neutral.light.touch,
+          theme: FThemeData(touch: true, colors: FColors.neutral.light),
           child: FTextField(
             control: const .managed(initial: TextEditingValue(text: 'Testing')),
             clearable: (value) => value.text.isNotEmpty,
@@ -149,7 +149,7 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
-          theme: FThemes.neutral.light.touch,
+          theme: FThemeData(touch: true, colors: FColors.neutral.light),
           child: FTextField(
             control: .managed(controller: controller),
             clearable: (value) => value.text.isNotEmpty,
@@ -173,7 +173,7 @@ void main() {
     testWidgets('suffix & clears text-field', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          theme: FThemes.neutral.light.touch,
+          theme: FThemeData(touch: true, colors: FColors.neutral.light),
           child: FTextField(
             control: const .managed(initial: TextEditingValue(text: 'Testing')),
             clearable: (value) => value.text.isNotEmpty,
@@ -254,23 +254,26 @@ void main() {
   });
 
   group('design system', skip: !Platform.isMacOS, () {
+    final desktop = FThemeData(touch: false, colors: FColors.neutral.light);
+    final touch = FThemeData(touch: true, colors: FColors.neutral.light);
+
     for (final (theme, themeName, sizes) in [
       (
-        FThemes.neutral.light.desktop,
+        desktop,
         'desktop',
         [
-          (FTextFieldSizeVariant.sm, 'sm', FThemes.neutral.light.desktop.style.sizes.field.sm),
-          (FTextFieldSizeVariant.md, 'md', FThemes.neutral.light.desktop.style.sizes.field.md),
-          (FTextFieldSizeVariant.lg, 'lg', FThemes.neutral.light.desktop.style.sizes.field.lg),
+          (FTextFieldSizeVariant.sm, 'sm', desktop.style.sizes.field.sm),
+          (FTextFieldSizeVariant.md, 'md', desktop.style.sizes.field.md),
+          (FTextFieldSizeVariant.lg, 'lg', desktop.style.sizes.field.lg),
         ],
       ),
       (
-        FThemes.neutral.light.touch,
+        touch,
         'touch',
         [
-          (FTextFieldSizeVariant.sm, 'sm', FThemes.neutral.light.touch.style.sizes.field.sm),
-          (FTextFieldSizeVariant.md, 'md', FThemes.neutral.light.touch.style.sizes.field.md),
-          (FTextFieldSizeVariant.lg, 'lg', FThemes.neutral.light.touch.style.sizes.field.lg),
+          (FTextFieldSizeVariant.sm, 'sm', touch.style.sizes.field.sm),
+          (FTextFieldSizeVariant.md, 'md', touch.style.sizes.field.md),
+          (FTextFieldSizeVariant.lg, 'lg', touch.style.sizes.field.lg),
         ],
       ),
     ]) {

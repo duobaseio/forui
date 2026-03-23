@@ -573,7 +573,7 @@ void main() {
         child: FTileGroup.merge(
           children: [
             .group(
-              style: FThemes.green.dark.touch.tileGroupStyle,
+              style: FThemeData(touch: true, colors: FColors.zinc.dark.withPrimary(FPrimaryColors.green.dark)).tileGroupStyle,
               children: [
                 .tile(
                   prefix: const Icon(FIcons.wifi),
@@ -583,7 +583,7 @@ void main() {
                   onPress: () {},
                 ),
                 .tile(
-                  style: FThemes.blue.dark.touch.tileGroupStyle.tileStyles.base,
+                  style: FThemeData(touch: true, colors: FColors.zinc.dark.withPrimary(FPrimaryColors.blue.dark)).tileGroupStyle.tileStyles.base,
                   prefix: const Icon(FIcons.bluetooth),
                   title: const Text('Bluetooth'),
                   subtitle: const Text('Fee, Fo'),

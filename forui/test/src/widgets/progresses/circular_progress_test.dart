@@ -9,10 +9,10 @@ import '../../test_scaffold.dart';
 
 void main() {
   testWidgets('ticker provider', (tester) async {
-    await tester.pumpWidget(TestScaffold(theme: FThemes.neutral.light.touch, child: const FCircularProgress()));
+    await tester.pumpWidget(TestScaffold(theme: FThemeData(touch: true, colors: FColors.neutral.light), child: const FCircularProgress()));
     await tester.pump();
 
-    await tester.pumpWidget(TestScaffold(theme: FThemes.neutral.dark.touch, child: const FCircularProgress()));
+    await tester.pumpWidget(TestScaffold(theme: FThemeData(touch: true, colors: FColors.neutral.dark), child: const FCircularProgress()));
     await tester.pump();
 
     expect(tester.takeException(), null);
@@ -20,8 +20,8 @@ void main() {
 
   group('design system', skip: !Platform.isMacOS, () {
     for (final (theme, themeName) in [
-      (FThemes.neutral.light.desktop, 'desktop'),
-      (FThemes.neutral.light.touch, 'touch'),
+      (FThemeData(touch: false, colors: FColors.neutral.light), 'desktop'),
+      (FThemeData(touch: true, colors: FColors.neutral.light), 'touch'),
     ]) {
       for (final (size, name, iconSize) in [
         (FCircularProgressSizeVariant.xs, 'xs', theme.typography.xs.fontSize!),

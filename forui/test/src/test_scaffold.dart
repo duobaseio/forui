@@ -74,11 +74,14 @@ class TestScaffold extends StatelessWidget {
     );
   }();
 
-  static final _default = FThemes.neutral;
+  static final _lightTheme = FThemeData(touch: true, colors: FColors.neutral.light);
+  static final _darkTheme = FThemeData(touch: true, colors: FColors.neutral.dark);
+  static final _lightDesktopTheme = FThemeData(touch: false, colors: FColors.neutral.light);
+  static final _darkDesktopTheme = FThemeData(touch: false, colors: FColors.neutral.dark);
 
   static List<({String name, FThemeData data})> get themes => [
-    (name: 'neutral-light', data: _default.light.touch),
-    (name: 'neutral-dark', data: _default.dark.touch),
+    (name: 'neutral-light', data: _lightTheme),
+    (name: 'neutral-dark', data: _darkTheme),
   ];
 
   final FThemeData theme;
@@ -102,10 +105,10 @@ class TestScaffold extends StatelessWidget {
     FThemeData? theme,
     super.key,
   }) : locale = null,
-       theme = theme ?? _default.light.touch,
+       theme = theme ?? _lightTheme,
        background = switch (theme) {
-         _ when theme == _default.light.touch || theme == _default.light.desktop => const Color(0xFFEEFFFF),
-         _ when theme == _default.dark.touch || theme == _default.dark.desktop => const Color(0xFF06111C),
+         _ when theme == _lightTheme || theme == _lightDesktopTheme => const Color(0xFFEEFFFF),
+         _ when theme == _darkTheme || theme == _darkDesktopTheme => const Color(0xFF06111C),
          _ => null,
        },
        wrapped = false;
@@ -120,16 +123,16 @@ class TestScaffold extends StatelessWidget {
     this.tooltipGroupActiveDuration = const Duration(milliseconds: 300),
     FThemeData? theme,
     super.key,
-  }) : theme = theme ?? _default.light.touch,
+  }) : theme = theme ?? _lightTheme,
        background = switch (theme) {
-         _ when theme == _default.light.touch || theme == _default.light.desktop => const Color(0xFFEEFFFF),
-         _ when theme == _default.dark.touch || theme == _default.dark.desktop => const Color(0xFF06111C),
+         _ when theme == _lightTheme || theme == _lightDesktopTheme => const Color(0xFFEEFFFF),
+         _ when theme == _darkTheme || theme == _darkDesktopTheme => const Color(0xFF06111C),
          _ => null,
        },
        wrapped = true;
 
   TestScaffold.blue({required this.child, this.platform, this.alignment = .center, super.key})
-    : theme = _default.light.touch,
+    : theme = _lightTheme,
       background = blueScreen.colors.background,
       locale = null,
       textDirection = null,

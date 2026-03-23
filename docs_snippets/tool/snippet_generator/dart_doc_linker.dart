@@ -93,7 +93,7 @@ class DartDocLinker extends RecursiveAstVisitor<void> {
   /// expression rather than a compile-time identifier. [visitPrefixedIdentifier] handles `prefix.identifier` where
   /// both parts are compile-time identifiers.
   ///
-  /// Also handles record field access like `FThemes.neutral.light` where the field has no element - links to the parent
+  /// Also handles record field access like `FColors.neutral.light` where the field has no element - links to the parent
   /// expression's element instead.
   @override
   void visitPropertyAccess(PropertyAccess node) {

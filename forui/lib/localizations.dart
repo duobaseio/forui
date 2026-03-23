@@ -12,7 +12,7 @@
 ///     // Alternatively, you can pass in `FLocalizations.supportedLocales` instead.
 ///   ],
 ///   builder: (context, child) => FTheme(
-///     data: FThemes.neutral.light,
+///     data: FThemeData(touch: true, colors: FColors.neutral.light),
 ///     child: child!,
 ///   ),
 ///   home: const FScaffold(...),

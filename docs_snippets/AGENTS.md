@@ -69,7 +69,7 @@ way to configure the control behavior.
 ```dart
 final constructor = FAccordion(
   // {@category "core"}
-  style: FThemes.zinc.light.accordionStyle,
+  style: FThemeData(touch: true, colors: FColors.zinc.light).accordionStyle,
   children: const [],
   // {@endcategory}
   // {@category "control"}

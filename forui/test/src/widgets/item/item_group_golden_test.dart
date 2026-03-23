@@ -485,7 +485,7 @@ void main() {
     testWidgets('desktop hovered', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          theme: FThemes.neutral.light.desktop,
+          theme: FThemeData(touch: false, colors: FColors.neutral.light),
           child: FItemGroup(
             divider: .indented,
             children: [
@@ -529,7 +529,7 @@ void main() {
                 onPress: () {},
               ),
               FItem(
-                style: FThemes.blue.dark.touch.itemGroupStyle.itemStyles.base,
+                style: FThemeData(touch: true, colors: FColors.zinc.dark.withPrimary(FPrimaryColors.blue.dark)).itemGroupStyle.itemStyles.base,
                 prefix: const Icon(FIcons.bluetooth),
                 title: const Text('Bluetooth'),
                 subtitle: const Text('Fee, Fo'),

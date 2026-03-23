@@ -459,23 +459,26 @@ void main() {
   group('design system', skip: !Platform.isMacOS, () {
     const key = ValueKey('select');
 
+    final desktop = FThemeData(touch: false, colors: FColors.neutral.light);
+    final touch = FThemeData(touch: true, colors: FColors.neutral.light);
+
     for (final (theme, themeName, sizes) in [
       (
-        FThemes.neutral.light.desktop,
+        desktop,
         'desktop',
         [
-          (FTextFieldSizeVariant.sm, 'sm', FThemes.neutral.light.desktop.style.sizes.field.sm),
-          (FTextFieldSizeVariant.md, 'md', FThemes.neutral.light.desktop.style.sizes.field.md),
-          (FTextFieldSizeVariant.lg, 'lg', FThemes.neutral.light.desktop.style.sizes.field.lg),
+          (FTextFieldSizeVariant.sm, 'sm', desktop.style.sizes.field.sm),
+          (FTextFieldSizeVariant.md, 'md', desktop.style.sizes.field.md),
+          (FTextFieldSizeVariant.lg, 'lg', desktop.style.sizes.field.lg),
         ],
       ),
       (
-        FThemes.neutral.light.touch,
+        touch,
         'touch',
         [
-          (FTextFieldSizeVariant.sm, 'sm', FThemes.neutral.light.touch.style.sizes.field.sm),
-          (FTextFieldSizeVariant.md, 'md', FThemes.neutral.light.touch.style.sizes.field.md),
-          (FTextFieldSizeVariant.lg, 'lg', FThemes.neutral.light.touch.style.sizes.field.lg),
+          (FTextFieldSizeVariant.sm, 'sm', touch.style.sizes.field.sm),
+          (FTextFieldSizeVariant.md, 'md', touch.style.sizes.field.md),
+          (FTextFieldSizeVariant.lg, 'lg', touch.style.sizes.field.lg),
         ],
       ),
     ]) {

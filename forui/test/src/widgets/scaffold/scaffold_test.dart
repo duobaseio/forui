@@ -10,13 +10,14 @@ void main() {
     testWidgets('apply IconTheme from FStyle', (tester) async {
       const testIconColor = Colors.red;
       const testIconSize = 30.0;
+      final base = FThemeData(touch: true, colors: FColors.neutral.light);
 
       await tester.pumpWidget(
         TestScaffold(
           theme: FThemeData(
-            colors: FThemes.neutral.light.touch.colors,
-            typography: FThemes.neutral.light.touch.typography,
-            style: FThemes.neutral.light.touch.style.copyWith(
+            colors: base.colors,
+            typography: base.typography,
+            style: base.style.copyWith(
               iconStyle: const .value(IconThemeData(color: testIconColor, size: testIconSize)),
             ),
             touch: true,

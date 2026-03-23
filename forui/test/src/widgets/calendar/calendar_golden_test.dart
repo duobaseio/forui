@@ -258,7 +258,7 @@ void main() {
   testWidgets('desktop day picker', (tester) async {
     await tester.pumpWidget(
       TestScaffold(
-        theme: FThemes.neutral.light.desktop,
+        theme: FThemeData(touch: false, colors: FColors.neutral.light),
         child: FCalendar(
           control: .managedDates(
             initial: {DateTime.utc(2026, 5, 10), DateTime.utc(2026, 5, 15)},

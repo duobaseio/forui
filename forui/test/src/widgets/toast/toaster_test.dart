@@ -392,7 +392,7 @@ void main() {
         localizationsDelegates: FLocalizations.localizationsDelegates,
         supportedLocales: FLocalizations.supportedLocales,
         builder: (context, child) => FTheme(
-          data: FThemes.neutral.light.touch,
+          data: FThemeData(touch: true, colors: FColors.neutral.light),
           child: FToaster(child: child!),
         ),
         home: Builder(

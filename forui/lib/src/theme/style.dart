@@ -54,7 +54,7 @@ class FStyle with Diagnosticable, _$FStyleFunctions {
   /// Creates an [FStyle].
   ///
   /// **Note:**
-  /// Unless you are creating a completely new style, modifying [FThemes]' predefined styles should be preferred.
+  /// Unless you are creating a completely new style, modifying [FThemeData]'s predefined styles should be preferred.
   const FStyle({
     required this.formFieldStyle,
     required this.focusedOutlineStyle,

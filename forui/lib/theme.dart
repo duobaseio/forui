@@ -16,7 +16,6 @@ export 'src/theme/sizes.dart';
 export 'src/theme/style.dart';
 export 'src/theme/theme.dart';
 export 'src/theme/theme_data.dart';
-export 'src/theme/themes.dart';
 export 'src/theme/typography.dart';
 export 'src/theme/variant.dart' hide And, Desktop, Not, Touch, Value, toTextFieldVariants;
 export 'src/theme/variants.dart' hide createVariants;

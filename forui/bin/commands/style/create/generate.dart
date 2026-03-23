@@ -47,11 +47,11 @@ import 'package:forui/forui.dart';
 /// import 'package:my_application/theme/divider_style.dart' // Your generated style file.
 ///
 /// FThemeData(
-///  color: FThemes.neutral.light.touch.color,
-///  style: FThemes.neutral.light.touch.style,
+///  color: FThemeData(touch: true, colors: FColors.neutral.light).color,
+///  style: FThemeData(touch: true, colors: FColors.neutral.light).style,
 ///  dividerStyles: CustomFDividerStyles.dividerStyles( // The function in your generated style file.
-///    color: FThemes.neutral.light.touch.color,
-///    style: FThemes.neutral.light.touch.style,
+///    color: FThemeData(touch: true, colors: FColors.neutral.light).color,
+///    style: FThemeData(touch: true, colors: FColors.neutral.light).style,
 ///   ),
 /// );
 /// ```
@@ -104,11 +104,11 @@ import 'package:forui/forui.dart';
 /// import 'package:my_application/theme/divider_style.dart' // Your generated style file.
 ///
 /// FThemeData(
-///  color: FThemes.neutral.light.touch.color,
-///  style: FThemes.neutral.light.touch.style,
+///  color: FThemeData(touch: true, colors: FColors.neutral.light).color,
+///  style: FThemeData(touch: true, colors: FColors.neutral.light).style,
 ///  dividerStyles: CustomFDividerStyles.dividerStyles( // The function in your generated style file.
-///    color: FThemes.neutral.light.touch.color,
-///    style: FThemes.neutral.light.touch.style,
+///    color: FThemeData(touch: true, colors: FColors.neutral.light).color,
+///    style: FThemeData(touch: true, colors: FColors.neutral.light).style,
 ///   ),
 /// );
 /// ```

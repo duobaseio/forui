@@ -6,8 +6,6 @@ import 'package:flutter/services.dart';
 
 import 'package:meta/meta.dart';
 
-import 'package:forui/forui.dart';
-
 /// The color tokens.
 ///
 /// The main color groups in this scheme are [primary], [secondary], [muted], [destructive], and [error].
@@ -26,426 +24,304 @@ import 'package:forui/forui.dart';
 /// Disabled colors are derived by adjusting the opacity. To derive these colors, use the [disable] method. The opacity
 /// can be adjusted with [disabledOpacity].
 ///
-/// See [FThemes] for predefined themes and color schemes.
+/// See [FColors.neutral], [FColors.zinc], and other predefined base color schemes. Use [withPrimary] and
+/// [FPrimaryColors] to swap the accent color:
+/// ```dart
+/// final colors = FColors.zinc.light.with(FPrimaryColors.blue.light);
+/// ```
 final class FColors with Diagnosticable {
-  /// The [Neutral](https://ui.shadcn.com/docs/theming#neutral) light color scheme.
-  static const neutralLight = FColors(
-    brightness: .light,
-    systemOverlayStyle: .dark,
-    barrier: Color(0x33000000),
-    background: Color(0xFFFFFFFF),
-    foreground: Color(0xFF0A0A0A),
-    primary: Color(0xFF171717),
-    primaryForeground: Color(0xFFFAFAFA),
-    secondary: Color(0xFFF5F5F5),
-    secondaryForeground: Color(0xFF171717),
-    muted: Color(0xFFF5F5F5),
-    mutedForeground: Color(0xFF737373),
-    destructive: Color(0xFFE7000B),
-    destructiveForeground: Color(0xFFFAFAFA),
-    error: Color(0xFFE7000B),
-    errorForeground: Color(0xFFFAFAFA),
-    card: Color(0xFFFFFFFF),
-    border: Color(0xFFE5E5E5),
+  /// The Neutral base color scheme.
+  static const neutral = (
+    light: FColors(
+      brightness: .light,
+      systemOverlayStyle: .dark,
+      barrier: Color(0x33000000),
+      background: Color(0xFFFFFFFF),
+      foreground: Color(0xFF0A0A0A),
+      primary: Color(0xFF171717),
+      primaryForeground: Color(0xFFFAFAFA),
+      secondary: Color(0xFFF5F5F5),
+      secondaryForeground: Color(0xFF171717),
+      muted: Color(0xFFF5F5F5),
+      mutedForeground: Color(0xFF737373),
+      destructive: Color(0xFFE7000B),
+      destructiveForeground: Color(0xFFFAFAFA),
+      error: Color(0xFFE7000B),
+      errorForeground: Color(0xFFFAFAFA),
+      card: Color(0xFFFFFFFF),
+      border: Color(0xFFE5E5E5),
+    ),
+    dark: FColors(
+      brightness: .dark,
+      systemOverlayStyle: .light,
+      barrier: Color(0x7A000000),
+      background: Color(0xFF0A0A0A),
+      foreground: Color(0xFFFAFAFA),
+      primary: Color(0xFFE5E5E5),
+      primaryForeground: Color(0xFF171717),
+      secondary: Color(0xFF262626),
+      secondaryForeground: Color(0xFFFAFAFA),
+      muted: Color(0xFF262626),
+      mutedForeground: Color(0xFFA1A1A1),
+      destructive: Color(0xFFFF6467),
+      destructiveForeground: Color(0xFFFAFAFA),
+      error: Color(0xFFFF6467),
+      errorForeground: Color(0xFFFAFAFA),
+      card: Color(0xFF171717),
+      border: Color(0x1AFFFFFF),
+    ),
   );
 
-  /// The [Neutral](https://ui.shadcn.com/docs/theming#neutral) dark color scheme.
-  static const neutralDark = FColors(
-    brightness: .dark,
-    systemOverlayStyle: .light,
-    barrier: Color(0x7A000000),
-    background: Color(0xFF0A0A0A),
-    foreground: Color(0xFFFAFAFA),
-    primary: Color(0xFFE5E5E5),
-    primaryForeground: Color(0xFF171717),
-    secondary: Color(0xFF262626),
-    secondaryForeground: Color(0xFFFAFAFA),
-    muted: Color(0xFF262626),
-    mutedForeground: Color(0xFFA1A1A1),
-    destructive: Color(0xFFFF6467),
-    destructiveForeground: Color(0xFFFAFAFA),
-    error: Color(0xFFFF6467),
-    errorForeground: Color(0xFFFAFAFA),
-    card: Color(0xFF171717),
-    border: Color(0x1AFFFFFF),
+  /// The neutral color scheme.
+  static const zinc = (
+    light: FColors(
+      brightness: .light,
+      systemOverlayStyle: .dark,
+      barrier: Color(0x33000000),
+      background: Color(0xFFFFFFFF),
+      foreground: Color(0xFF09090B),
+      primary: Color(0xFF18181B),
+      primaryForeground: Color(0xFFFAFAFA),
+      secondary: Color(0xFFF4F4F5),
+      secondaryForeground: Color(0xFF18181B),
+      muted: Color(0xFFF4F4F5),
+      mutedForeground: Color(0xFF71717B),
+      destructive: Color(0xFFE7000B),
+      destructiveForeground: Color(0xFFFAFAFA),
+      error: Color(0xFFE7000B),
+      errorForeground: Color(0xFFFAFAFA),
+      card: Color(0xFFFFFFFF),
+      border: Color(0xFFE4E4E7),
+    ),
+    dark: FColors(
+      brightness: .dark,
+      systemOverlayStyle: .light,
+      barrier: Color(0x7A000000),
+      background: Color(0xFF09090B),
+      foreground: Color(0xFFFAFAFA),
+      primary: Color(0xFFE4E4E7),
+      primaryForeground: Color(0xFF18181B),
+      secondary: Color(0xFF27272A),
+      secondaryForeground: Color(0xFFFAFAFA),
+      muted: Color(0xFF27272A),
+      mutedForeground: Color(0xFF9F9FA9),
+      destructive: Color(0xFFFF6467),
+      destructiveForeground: Color(0xFFFAFAFA),
+      error: Color(0xFFFF6467),
+      errorForeground: Color(0xFFFAFAFA),
+      card: Color(0xFF18181B),
+      border: Color(0x1AFFFFFF),
+    ),
   );
 
-  /// The [Zinc](https://ui.shadcn.com/docs/theming#zinc) light color scheme.
-  static const zincLight = FColors(
-    brightness: .light,
-    systemOverlayStyle: .dark,
-    barrier: Color(0x33000000),
-    background: Color(0xFFFFFFFF),
-    foreground: Color(0xFF09090B),
-    primary: Color(0xFF18181B),
-    primaryForeground: Color(0xFFFAFAFA),
-    secondary: Color(0xFFF4F4F5),
-    secondaryForeground: Color(0xFF18181B),
-    muted: Color(0xFFF4F4F5),
-    mutedForeground: Color(0xFF71717B),
-    destructive: Color(0xFFE7000B),
-    destructiveForeground: Color(0xFFFAFAFA),
-    error: Color(0xFFE7000B),
-    errorForeground: Color(0xFFFAFAFA),
-    card: Color(0xFFFFFFFF),
-    border: Color(0xFFE4E4E7),
+  /// The Stone color scheme.
+  static const stone = (
+    light: FColors(
+      brightness: .light,
+      systemOverlayStyle: .dark,
+      barrier: Color(0x33000000),
+      background: Color(0xFFFFFFFF),
+      foreground: Color(0xFF0C0A09),
+      primary: Color(0xFF1C1917),
+      primaryForeground: Color(0xFFFAFAF9),
+      secondary: Color(0xFFF5F5F4),
+      secondaryForeground: Color(0xFF1C1917),
+      muted: Color(0xFFF5F5F4),
+      mutedForeground: Color(0xFF79716B),
+      destructive: Color(0xFFE7000B),
+      destructiveForeground: Color(0xFFFAFAFA),
+      error: Color(0xFFE7000B),
+      errorForeground: Color(0xFFFAFAFA),
+      card: Color(0xFFFFFFFF),
+      border: Color(0xFFE7E5E4),
+    ),
+    dark: FColors(
+      brightness: .dark,
+      systemOverlayStyle: .light,
+      barrier: Color(0x7A000000),
+      background: Color(0xFF0C0A09),
+      foreground: Color(0xFFFAFAF9),
+      primary: Color(0xFFE7E5E4),
+      primaryForeground: Color(0xFF1C1917),
+      secondary: Color(0xFF292524),
+      secondaryForeground: Color(0xFFFAFAF9),
+      muted: Color(0xFF292524),
+      mutedForeground: Color(0xFFA6A09B),
+      destructive: Color(0xFFFF6467),
+      destructiveForeground: Color(0xFFFAFAFA),
+      error: Color(0xFFFF6467),
+      errorForeground: Color(0xFFFAFAFA),
+      card: Color(0xFF1C1917),
+      border: Color(0x1AFFFFFF),
+    ),
   );
 
-  /// The [Zinc](https://ui.shadcn.com/docs/theming#zinc) dark color scheme.
-  static const zincDark = FColors(
-    brightness: .dark,
-    systemOverlayStyle: .light,
-    barrier: Color(0x7A000000),
-    background: Color(0xFF09090B),
-    foreground: Color(0xFFFAFAFA),
-    primary: Color(0xFFE4E4E7),
-    primaryForeground: Color(0xFF18181B),
-    secondary: Color(0xFF27272A),
-    secondaryForeground: Color(0xFFFAFAFA),
-    muted: Color(0xFF27272A),
-    mutedForeground: Color(0xFF9F9FA9),
-    destructive: Color(0xFFFF6467),
-    destructiveForeground: Color(0xFFFAFAFA),
-    error: Color(0xFFFF6467),
-    errorForeground: Color(0xFFFAFAFA),
-    card: Color(0xFF18181B),
-    border: Color(0x1AFFFFFF),
+  /// The Mauve color scheme.
+  static const mauve = (
+    light: FColors(
+      brightness: .light,
+      systemOverlayStyle: .dark,
+      barrier: Color(0x33000000),
+      background: Color(0xFFFFFFFF),
+      foreground: Color(0xFF0C090C),
+      primary: Color(0xFF1D161E),
+      primaryForeground: Color(0xFFFAFAFA),
+      secondary: Color(0xFFF3F1F3),
+      secondaryForeground: Color(0xFF1D161E),
+      muted: Color(0xFFF3F1F3),
+      mutedForeground: Color(0xFF79697B),
+      destructive: Color(0xFFE7000B),
+      destructiveForeground: Color(0xFFFAFAFA),
+      error: Color(0xFFE7000B),
+      errorForeground: Color(0xFFFAFAFA),
+      card: Color(0xFFFFFFFF),
+      border: Color(0xFFE7E4E7),
+    ),
+    dark: FColors(
+      brightness: .dark,
+      systemOverlayStyle: .light,
+      barrier: Color(0x7A000000),
+      background: Color(0xFF0C090C),
+      foreground: Color(0xFFFAFAFA),
+      primary: Color(0xFFE7E4E7),
+      primaryForeground: Color(0xFF1D161E),
+      secondary: Color(0xFF2A212C),
+      secondaryForeground: Color(0xFFFAFAFA),
+      muted: Color(0xFF2A212C),
+      mutedForeground: Color(0xFFA89EA9),
+      destructive: Color(0xFFFF6467),
+      destructiveForeground: Color(0xFFFAFAFA),
+      error: Color(0xFFFF6467),
+      errorForeground: Color(0xFFFAFAFA),
+      card: Color(0xFF1D161E),
+      border: Color(0x1AFFFFFF),
+    ),
   );
 
-  /// The [Slate](https://ui.shadcn.com/docs/theming#slate) light color scheme.
-  static const slateLight = FColors(
-    brightness: .light,
-    systemOverlayStyle: .dark,
-    barrier: Color(0x33000000),
-    background: Color(0xFFFFFFFF),
-    foreground: Color(0xFF020618),
-    primary: Color(0xFF0F172B),
-    primaryForeground: Color(0xFFF8FAFC),
-    secondary: Color(0xFFF1F5F9),
-    secondaryForeground: Color(0xFF0F172B),
-    muted: Color(0xFFF1F5F9),
-    mutedForeground: Color(0xFF62748E),
-    destructive: Color(0xFFE7000B),
-    destructiveForeground: Color(0xFFFAFAFA),
-    error: Color(0xFFE7000B),
-    errorForeground: Color(0xFFFAFAFA),
-    card: Color(0xFFFFFFFF),
-    border: Color(0xFFE2E8F0),
+  /// The Olive color scheme.
+  static const olive = (
+    light: FColors(
+      brightness: .light,
+      systemOverlayStyle: .dark,
+      barrier: Color(0x33000000),
+      background: Color(0xFFFFFFFF),
+      foreground: Color(0xFF0C0C09),
+      primary: Color(0xFF1D1D16),
+      primaryForeground: Color(0xFFFBFBF9),
+      secondary: Color(0xFFF4F4F0),
+      secondaryForeground: Color(0xFF1D1D16),
+      muted: Color(0xFFF4F4F0),
+      mutedForeground: Color(0xFF7C7C67),
+      destructive: Color(0xFFE7000B),
+      destructiveForeground: Color(0xFFFAFAFA),
+      error: Color(0xFFE7000B),
+      errorForeground: Color(0xFFFAFAFA),
+      card: Color(0xFFFFFFFF),
+      border: Color(0xFFE8E8E3),
+    ),
+    dark: FColors(
+      brightness: .dark,
+      systemOverlayStyle: .light,
+      barrier: Color(0x7A000000),
+      background: Color(0xFF0C0C09),
+      foreground: Color(0xFFFBFBF9),
+      primary: Color(0xFFE8E8E3),
+      primaryForeground: Color(0xFF1D1D16),
+      secondary: Color(0xFF2B2B22),
+      secondaryForeground: Color(0xFFFBFBF9),
+      muted: Color(0xFF2B2B22),
+      mutedForeground: Color(0xFFABAB9C),
+      destructive: Color(0xFFFF6467),
+      destructiveForeground: Color(0xFFFAFAFA),
+      error: Color(0xFFFF6467),
+      errorForeground: Color(0xFFFAFAFA),
+      card: Color(0xFF1D1D16),
+      border: Color(0x1AFFFFFF),
+    ),
   );
 
-  /// The [Slate](https://ui.shadcn.com/docs/theming#slate) dark color scheme.
-  static const slateDark = FColors(
-    brightness: .dark,
-    systemOverlayStyle: .light,
-    barrier: Color(0x7A000000),
-    background: Color(0xFF020618),
-    foreground: Color(0xFFF8FAFC),
-    primary: Color(0xFFE2E8F0),
-    primaryForeground: Color(0xFF0F172B),
-    secondary: Color(0xFF1D293D),
-    secondaryForeground: Color(0xFFF8FAFC),
-    muted: Color(0xFF1D293D),
-    mutedForeground: Color(0xFF90A1B9),
-    destructive: Color(0xFFFF6467),
-    destructiveForeground: Color(0xFFFAFAFA),
-    error: Color(0xFFFF6467),
-    errorForeground: Color(0xFFFAFAFA),
-    card: Color(0xFF0F172B),
-    border: Color(0x1AFFFFFF),
+  /// The Mist color scheme.
+  static const mist = (
+    light: FColors(
+      brightness: .light,
+      systemOverlayStyle: .dark,
+      barrier: Color(0x33000000),
+      background: Color(0xFFFFFFFF),
+      foreground: Color(0xFF090B0C),
+      primary: Color(0xFF161B1D),
+      primaryForeground: Color(0xFFF9FBFB),
+      secondary: Color(0xFFF1F3F3),
+      secondaryForeground: Color(0xFF161B1D),
+      muted: Color(0xFFF1F3F3),
+      mutedForeground: Color(0xFF67787C),
+      destructive: Color(0xFFE7000B),
+      destructiveForeground: Color(0xFFFAFAFA),
+      error: Color(0xFFE7000B),
+      errorForeground: Color(0xFFFAFAFA),
+      card: Color(0xFFFFFFFF),
+      border: Color(0xFFE3E7E8),
+    ),
+    dark: FColors(
+      brightness: .dark,
+      systemOverlayStyle: .light,
+      barrier: Color(0x7A000000),
+      background: Color(0xFF090B0C),
+      foreground: Color(0xFFF9FBFB),
+      primary: Color(0xFFE3E7E8),
+      primaryForeground: Color(0xFF161B1D),
+      secondary: Color(0xFF22292B),
+      secondaryForeground: Color(0xFFF9FBFB),
+      muted: Color(0xFF22292B),
+      mutedForeground: Color(0xFF9CA8AB),
+      destructive: Color(0xFFFF6467),
+      destructiveForeground: Color(0xFFFAFAFA),
+      error: Color(0xFFFF6467),
+      errorForeground: Color(0xFFFAFAFA),
+      card: Color(0xFF161B1D),
+      border: Color(0x1AFFFFFF),
+    ),
   );
 
-  /// The [Blue](https://ui.shadcn.com/themes) light color scheme.
-  static const blueLight = FColors(
-    brightness: .light,
-    systemOverlayStyle: .dark,
-    barrier: Color(0x33000000),
-    background: Color(0xFFFFFFFF),
-    foreground: Color(0xFF09090B),
-    primary: Color(0xFF1447E6),
-    primaryForeground: Color(0xFFEFF6FF),
-    secondary: Color(0xFFF4F4F5),
-    secondaryForeground: Color(0xFF18181B),
-    muted: Color(0xFFF4F4F5),
-    mutedForeground: Color(0xFF71717B),
-    destructive: Color(0xFFE7000B),
-    destructiveForeground: Color(0xFFFAFAFA),
-    error: Color(0xFFE7000B),
-    errorForeground: Color(0xFFFAFAFA),
-    card: Color(0xFFFFFFFF),
-    border: Color(0xFFE4E4E7),
-  );
-
-  /// The [Blue](https://ui.shadcn.com/themes) dark color scheme.
-  static const blueDark = FColors(
-    brightness: .dark,
-    systemOverlayStyle: .light,
-    barrier: Color(0x7A000000),
-    background: Color(0xFF09090B),
-    foreground: Color(0xFFFAFAFA),
-    primary: Color(0xFF1447E6),
-    primaryForeground: Color(0xFFEFF6FF),
-    secondary: Color(0xFF27272A),
-    secondaryForeground: Color(0xFFFAFAFA),
-    muted: Color(0xFF27272A),
-    mutedForeground: Color(0xFF9F9FA9),
-    destructive: Color(0xFFFF6467),
-    destructiveForeground: Color(0xFFFAFAFA),
-    error: Color(0xFFFF6467),
-    errorForeground: Color(0xFFFAFAFA),
-    card: Color(0xFF18181B),
-    border: Color(0x1AFFFFFF),
-  );
-
-  /// The [Green](https://ui.shadcn.com/themes) light color scheme.
-  static const greenLight = FColors(
-    brightness: .light,
-    systemOverlayStyle: .dark,
-    barrier: Color(0x33000000),
-    background: Color(0xFFFFFFFF),
-    foreground: Color(0xFF09090B),
-    primary: Color(0xFF5EA500),
-    primaryForeground: Color(0xFFF7FEE7),
-    secondary: Color(0xFFF4F4F5),
-    secondaryForeground: Color(0xFF18181B),
-    muted: Color(0xFFF4F4F5),
-    mutedForeground: Color(0xFF71717B),
-    destructive: Color(0xFFE7000B),
-    destructiveForeground: Color(0xFFFAFAFA),
-    error: Color(0xFFE7000B),
-    errorForeground: Color(0xFFFAFAFA),
-    card: Color(0xFFFFFFFF),
-    border: Color(0xFFE4E4E7),
-  );
-
-  /// The [Green](https://ui.shadcn.com/themes) dark color scheme.
-  static const greenDark = FColors(
-    brightness: .dark,
-    systemOverlayStyle: .light,
-    barrier: Color(0x7A000000),
-    background: Color(0xFF09090B),
-    foreground: Color(0xFFFAFAFA),
-    primary: Color(0xFF5EA500),
-    primaryForeground: Color(0xFFF7FEE7),
-    secondary: Color(0xFF27272A),
-    secondaryForeground: Color(0xFFFAFAFA),
-    muted: Color(0xFF27272A),
-    mutedForeground: Color(0xFF9F9FA9),
-    destructive: Color(0xFFFF6467),
-    destructiveForeground: Color(0xFFFAFAFA),
-    error: Color(0xFFFF6467),
-    errorForeground: Color(0xFFFAFAFA),
-    card: Color(0xFF18181B),
-    border: Color(0x1AFFFFFF),
-  );
-
-  /// The [Orange](https://ui.shadcn.com/themes) light color scheme.
-  static const orangeLight = FColors(
-    brightness: .light,
-    systemOverlayStyle: .dark,
-    barrier: Color(0x33000000),
-    background: Color(0xFFFFFFFF),
-    foreground: Color(0xFF09090B),
-    primary: Color(0xFFF54A00),
-    primaryForeground: Color(0xFFFFF7ED),
-    secondary: Color(0xFFF4F4F5),
-    secondaryForeground: Color(0xFF18181B),
-    muted: Color(0xFFF4F4F5),
-    mutedForeground: Color(0xFF71717B),
-    destructive: Color(0xFFE7000B),
-    destructiveForeground: Color(0xFFFAFAFA),
-    error: Color(0xFFE7000B),
-    errorForeground: Color(0xFFFAFAFA),
-    card: Color(0xFFFFFFFF),
-    border: Color(0xFFE4E4E7),
-  );
-
-  /// The [Orange](https://ui.shadcn.com/themes) dark color scheme.
-  static const orangeDark = FColors(
-    brightness: .dark,
-    systemOverlayStyle: .light,
-    barrier: Color(0x7A000000),
-    background: Color(0xFF09090B),
-    foreground: Color(0xFFFAFAFA),
-    primary: Color(0xFFFF6900),
-    primaryForeground: Color(0xFFFFF7ED),
-    secondary: Color(0xFF27272A),
-    secondaryForeground: Color(0xFFFAFAFA),
-    muted: Color(0xFF27272A),
-    mutedForeground: Color(0xFF9F9FA9),
-    destructive: Color(0xFFFF6467),
-    destructiveForeground: Color(0xFFFAFAFA),
-    error: Color(0xFFFF6467),
-    errorForeground: Color(0xFFFAFAFA),
-    card: Color(0xFF18181B),
-    border: Color(0x1AFFFFFF),
-  );
-
-  /// The [Red](https://ui.shadcn.com/themes) light color scheme.
-  static const redLight = FColors(
-    brightness: .light,
-    systemOverlayStyle: .dark,
-    barrier: Color(0x33000000),
-    background: Color(0xFFFFFFFF),
-    foreground: Color(0xFF09090B),
-    primary: Color(0xFFE7000B),
-    primaryForeground: Color(0xFFFEF2F2),
-    secondary: Color(0xFFF4F4F5),
-    secondaryForeground: Color(0xFF18181B),
-    muted: Color(0xFFF4F4F5),
-    mutedForeground: Color(0xFF71717B),
-    destructive: Color(0xFFE7000B),
-    destructiveForeground: Color(0xFFFAFAFA),
-    error: Color(0xFFE7000B),
-    errorForeground: Color(0xFFFAFAFA),
-    card: Color(0xFFFFFFFF),
-    border: Color(0xFFE4E4E7),
-  );
-
-  /// The [Red](https://ui.shadcn.com/themes) dark color scheme.
-  static const redDark = FColors(
-    brightness: .dark,
-    systemOverlayStyle: .light,
-    barrier: Color(0x7A000000),
-    background: Color(0xFF09090B),
-    foreground: Color(0xFFFAFAFA),
-    primary: Color(0xFFFB2C36),
-    primaryForeground: Color(0xFFFEF2F2),
-    secondary: Color(0xFF27272A),
-    secondaryForeground: Color(0xFFFAFAFA),
-    muted: Color(0xFF27272A),
-    mutedForeground: Color(0xFF9F9FA9),
-    destructive: Color(0xFFFF6467),
-    destructiveForeground: Color(0xFFFAFAFA),
-    error: Color(0xFFFF6467),
-    errorForeground: Color(0xFFFAFAFA),
-    card: Color(0xFF18181B),
-    border: Color(0x1AFFFFFF),
-  );
-
-  /// The [Rose](https://ui.shadcn.com/themes) light color scheme.
-  static const roseLight = FColors(
-    brightness: .light,
-    systemOverlayStyle: .dark,
-    barrier: Color(0x33000000),
-    background: Color(0xFFFFFFFF),
-    foreground: Color(0xFF09090B),
-    primary: Color(0xFFEC003F),
-    primaryForeground: Color(0xFFFFF1F2),
-    secondary: Color(0xFFF4F4F5),
-    secondaryForeground: Color(0xFF18181B),
-    muted: Color(0xFFF4F4F5),
-    mutedForeground: Color(0xFF71717B),
-    destructive: Color(0xFFE7000B),
-    destructiveForeground: Color(0xFFFAFAFA),
-    error: Color(0xFFE7000B),
-    errorForeground: Color(0xFFFAFAFA),
-    card: Color(0xFFFFFFFF),
-    border: Color(0xFFE4E4E7),
-  );
-
-  /// The [Rose](https://ui.shadcn.com/themes) dark color scheme.
-  static const roseDark = FColors(
-    brightness: .dark,
-    systemOverlayStyle: .light,
-    barrier: Color(0x7A000000),
-    background: Color(0xFF09090B),
-    foreground: Color(0xFFFAFAFA),
-    primary: Color(0xFFFF2056),
-    primaryForeground: Color(0xFFFFF1F2),
-    secondary: Color(0xFF27272A),
-    secondaryForeground: Color(0xFFFAFAFA),
-    muted: Color(0xFF27272A),
-    mutedForeground: Color(0xFF9F9FA9),
-    destructive: Color(0xFFFF6467),
-    destructiveForeground: Color(0xFFFAFAFA),
-    error: Color(0xFFFF6467),
-    errorForeground: Color(0xFFFAFAFA),
-    card: Color(0xFF18181B),
-    border: Color(0x1AFFFFFF),
-  );
-
-  /// The [Violet](https://ui.shadcn.com/themes) light color scheme.
-  static const violetLight = FColors(
-    brightness: .light,
-    systemOverlayStyle: .dark,
-    barrier: Color(0x33000000),
-    background: Color(0xFFFFFFFF),
-    foreground: Color(0xFF09090B),
-    primary: Color(0xFF7F22FE),
-    primaryForeground: Color(0xFFF5F3FF),
-    secondary: Color(0xFFF4F4F5),
-    secondaryForeground: Color(0xFF18181B),
-    muted: Color(0xFFF4F4F5),
-    mutedForeground: Color(0xFF71717B),
-    destructive: Color(0xFFE7000B),
-    destructiveForeground: Color(0xFFFAFAFA),
-    error: Color(0xFFE7000B),
-    errorForeground: Color(0xFFFAFAFA),
-    card: Color(0xFFFFFFFF),
-    border: Color(0xFFE4E4E7),
-  );
-
-  /// The [Violet](https://ui.shadcn.com/themes) dark color scheme.
-  static const violetDark = FColors(
-    brightness: .dark,
-    systemOverlayStyle: .light,
-    barrier: Color(0x7A000000),
-    background: Color(0xFF09090B),
-    foreground: Color(0xFFFAFAFA),
-    primary: Color(0xFF8E51FF),
-    primaryForeground: Color(0xFFF5F3FF),
-    secondary: Color(0xFF27272A),
-    secondaryForeground: Color(0xFFFAFAFA),
-    muted: Color(0xFF27272A),
-    mutedForeground: Color(0xFF9F9FA9),
-    destructive: Color(0xFFFF6467),
-    destructiveForeground: Color(0xFFFAFAFA),
-    error: Color(0xFFFF6467),
-    errorForeground: Color(0xFFFAFAFA),
-    card: Color(0xFF18181B),
-    border: Color(0x1AFFFFFF),
-  );
-
-  /// The [Yellow](https://ui.shadcn.com/themes) light color scheme.
-  static const yellowLight = FColors(
-    brightness: .light,
-    systemOverlayStyle: .dark,
-    barrier: Color(0x33000000),
-    background: Color(0xFFFFFFFF),
-    foreground: Color(0xFF09090B),
-    primary: Color(0xFFFCC800),
-    primaryForeground: Color(0xFF733E0A),
-    secondary: Color(0xFFF4F4F5),
-    secondaryForeground: Color(0xFF18181B),
-    muted: Color(0xFFF4F4F5),
-    mutedForeground: Color(0xFF71717B),
-    destructive: Color(0xFFE7000B),
-    destructiveForeground: Color(0xFFFAFAFA),
-    error: Color(0xFFE7000B),
-    errorForeground: Color(0xFFFAFAFA),
-    card: Color(0xFFFFFFFF),
-    border: Color(0xFFE4E4E7),
-  );
-
-  /// The [Yellow](https://ui.shadcn.com/themes) dark color scheme.
-  static const yellowDark = FColors(
-    brightness: .dark,
-    systemOverlayStyle: .light,
-    barrier: Color(0x7A000000),
-    background: Color(0xFF09090B),
-    foreground: Color(0xFFFAFAFA),
-    primary: Color(0xFFEFB100),
-    primaryForeground: Color(0xFF733E0A),
-    secondary: Color(0xFF27272A),
-    secondaryForeground: Color(0xFFFAFAFA),
-    muted: Color(0xFF27272A),
-    mutedForeground: Color(0xFF9F9FA9),
-    destructive: Color(0xFFFF6467),
-    destructiveForeground: Color(0xFFFAFAFA),
-    error: Color(0xFFFF6467),
-    errorForeground: Color(0xFFFAFAFA),
-    card: Color(0xFF18181B),
-    border: Color(0x1AFFFFFF),
+  /// The Taupe color scheme.
+  static const taupe = (
+    light: FColors(
+      brightness: .light,
+      systemOverlayStyle: .dark,
+      barrier: Color(0x33000000),
+      background: Color(0xFFFFFFFF),
+      foreground: Color(0xFF0C0A09),
+      primary: Color(0xFF1D1816),
+      primaryForeground: Color(0xFFFBFAF9),
+      secondary: Color(0xFFF3F1F1),
+      secondaryForeground: Color(0xFF1D1816),
+      muted: Color(0xFFF3F1F1),
+      mutedForeground: Color(0xFF7C6D67),
+      destructive: Color(0xFFE7000B),
+      destructiveForeground: Color(0xFFFAFAFA),
+      error: Color(0xFFE7000B),
+      errorForeground: Color(0xFFFAFAFA),
+      card: Color(0xFFFFFFFF),
+      border: Color(0xFFE8E4E3),
+    ),
+    dark: FColors(
+      brightness: .dark,
+      systemOverlayStyle: .light,
+      barrier: Color(0x7A000000),
+      background: Color(0xFF0C0A09),
+      foreground: Color(0xFFFBFAF9),
+      primary: Color(0xFF1D1816),
+      primaryForeground: Color(0xFFFBFAF9),
+      secondary: Color(0xFF2B2422),
+      secondaryForeground: Color(0xFFFBFAF9),
+      muted: Color(0xFF2B2422),
+      mutedForeground: Color(0xFFABA09C),
+      destructive: Color(0xFFFF6467),
+      destructiveForeground: Color(0xFFFAFAFA),
+      error: Color(0xFFFF6467),
+      errorForeground: Color(0xFFFAFAFA),
+      card: Color(0xFF1D1816),
+      border: Color(0x1AFFFFFF),
+    ),
   );
 
   /// Linearly interpolates between two colors [a] and [b] using the given factor [t].
@@ -570,7 +446,11 @@ final class FColors with Diagnosticable {
   /// Creates a [FColors].
   ///
   /// **Note:**
-  /// Unless you are creating a completely new color scheme, modifying [FThemes]' predefined color schemes is preferred.
+  /// Unless you are creating a completely new color scheme, using the predefined base color schemes with
+  /// [withPrimary] is preferred:
+  /// ```dart
+  /// final colors = FColors.zinc.light.withPrimary(FPrimaryColors.blue.light);
+  /// ```
   const FColors({
     required this.brightness,
     required this.systemOverlayStyle,
@@ -654,6 +534,16 @@ final class FColors with Diagnosticable {
     // transparency, e.g. slider's active track and the ticks beneath it.
     return background == null ? disabled : Color.alphaBlend(disabled, background);
   }
+
+  /// Returns a copy of this [FColors] with the given [primary] and [primaryForeground] replaced.
+  ///
+  /// Typically used with [FPrimaryColors] to compose a base color scheme with an accent color:
+  /// ```dart
+  /// final colors = FColors.zinc.light.withPrimary(FPrimaryColors.blue.light);
+  /// ```
+  @useResult
+  FColors withPrimary(({Color primary, Color primaryForeground}) colors) =>
+      copyWith(primary: colors.primary, primaryForeground: colors.primaryForeground);
 
   /// Returns a copy of this [FColors] with the given properties replaced.
   ///
@@ -787,4 +677,55 @@ final class FColors with Diagnosticable {
       hoverLighten.hashCode ^
       hoverDarken.hashCode ^
       disabledOpacity.hashCode;
+}
+
+/// The primary accent colors.
+///
+/// Each color provides `light` and `dark` variants as `({Color primary, Color primaryForeground})` records.
+/// Use with [FColors.withPrimary] to compose a base color scheme with an accent:
+/// ```dart
+/// final colors = FColors.zinc.light.withPrimary(FPrimaryColors.blue.light);
+/// ```
+extension FPrimaryColors on Never {
+  /// The [Blue](https://ui.shadcn.com/themes) primary color.
+  static const blue = (
+    light: (primary: Color(0xFF1447E6), primaryForeground: Color(0xFFEFF6FF)),
+    dark: (primary: Color(0xFF1447E6), primaryForeground: Color(0xFFEFF6FF)),
+  );
+
+  /// The [Green](https://ui.shadcn.com/themes) primary color.
+  static const green = (
+    light: (primary: Color(0xFF5EA500), primaryForeground: Color(0xFFF7FEE7)),
+    dark: (primary: Color(0xFF5EA500), primaryForeground: Color(0xFFF7FEE7)),
+  );
+
+  /// The [Orange](https://ui.shadcn.com/themes) primary color.
+  static const orange = (
+    light: (primary: Color(0xFFF54A00), primaryForeground: Color(0xFFFFF7ED)),
+    dark: (primary: Color(0xFFFF6900), primaryForeground: Color(0xFFFFF7ED)),
+  );
+
+  /// The [Red](https://ui.shadcn.com/themes) primary color.
+  static const red = (
+    light: (primary: Color(0xFFE7000B), primaryForeground: Color(0xFFFEF2F2)),
+    dark: (primary: Color(0xFFFB2C36), primaryForeground: Color(0xFFFEF2F2)),
+  );
+
+  /// The [Rose](https://ui.shadcn.com/themes) primary color.
+  static const rose = (
+    light: (primary: Color(0xFFEC003F), primaryForeground: Color(0xFFFFF1F2)),
+    dark: (primary: Color(0xFFFF2056), primaryForeground: Color(0xFFFFF1F2)),
+  );
+
+  /// The [Violet](https://ui.shadcn.com/themes) primary color.
+  static const violet = (
+    light: (primary: Color(0xFF7F22FE), primaryForeground: Color(0xFFF5F3FF)),
+    dark: (primary: Color(0xFF8E51FF), primaryForeground: Color(0xFFF5F3FF)),
+  );
+
+  /// The [Yellow](https://ui.shadcn.com/themes) primary color.
+  static const yellow = (
+    light: (primary: Color(0xFFFCC800), primaryForeground: Color(0xFF733E0A)),
+    dark: (primary: Color(0xFFEFB100), primaryForeground: Color(0xFF733E0A)),
+  );
 }

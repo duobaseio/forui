@@ -45,25 +45,28 @@ void main() {
   });
 
   group('design system', skip: !Platform.isMacOS, () {
+    final desktop = FThemeData(touch: false, colors: FColors.neutral.light);
+    final touch = FThemeData(touch: true, colors: FColors.neutral.light);
+
     for (final (theme, themeName, sizes) in [
       (
-        FThemes.neutral.light.desktop,
+        desktop,
         'desktop',
         [
-          (FButtonSizeVariant.xs, 'xs', FThemes.neutral.light.desktop.style.sizes.field.xs),
-          (FButtonSizeVariant.sm, 'sm', FThemes.neutral.light.desktop.style.sizes.field.sm),
-          (FButtonSizeVariant.md, 'md', FThemes.neutral.light.desktop.style.sizes.field.md),
-          (FButtonSizeVariant.lg, 'lg', FThemes.neutral.light.desktop.style.sizes.field.lg),
+          (FButtonSizeVariant.xs, 'xs', desktop.style.sizes.field.xs),
+          (FButtonSizeVariant.sm, 'sm', desktop.style.sizes.field.sm),
+          (FButtonSizeVariant.md, 'md', desktop.style.sizes.field.md),
+          (FButtonSizeVariant.lg, 'lg', desktop.style.sizes.field.lg),
         ],
       ),
       (
-        FThemes.neutral.light.touch,
+        touch,
         'touch',
         [
-          (FButtonSizeVariant.xs, 'xs', FThemes.neutral.light.touch.style.sizes.field.xs),
-          (FButtonSizeVariant.sm, 'sm', FThemes.neutral.light.touch.style.sizes.field.sm),
-          (FButtonSizeVariant.md, 'md', FThemes.neutral.light.touch.style.sizes.field.md),
-          (FButtonSizeVariant.lg, 'lg', FThemes.neutral.light.touch.style.sizes.field.lg),
+          (FButtonSizeVariant.xs, 'xs', touch.style.sizes.field.xs),
+          (FButtonSizeVariant.sm, 'sm', touch.style.sizes.field.sm),
+          (FButtonSizeVariant.md, 'md', touch.style.sizes.field.md),
+          (FButtonSizeVariant.lg, 'lg', touch.style.sizes.field.lg),
         ],
       ),
     ]) {

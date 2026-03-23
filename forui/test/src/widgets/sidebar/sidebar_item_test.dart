@@ -45,7 +45,7 @@ void main() {
   group('design system', skip: !Platform.isMacOS, () {
     const key = ValueKey('sidebar-item');
 
-    for (final (theme, name) in [(FThemes.neutral.light.desktop, 'desktop'), (FThemes.neutral.light.touch, 'touch')]) {
+    for (final (theme, name) in [(FThemeData(touch: false, colors: FColors.neutral.light), 'desktop'), (FThemeData(touch: true, colors: FColors.neutral.light), 'touch')]) {
       final height = theme.style.sizes.item;
 
       testWidgets('$name sidebar item has consistent height ($height)', (tester) async {

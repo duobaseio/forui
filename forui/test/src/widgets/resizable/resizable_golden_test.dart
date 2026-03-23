@@ -112,7 +112,7 @@ void main() {
             child: FScaffold(
               child: DecoratedBox(
                 decoration: BoxDecoration(
-                  border: .all(color: FThemes.neutral.light.touch.colors.border),
+                  border: .all(color: FThemeData(touch: true, colors: FColors.neutral.light).colors.border),
                   borderRadius: .circular(8),
                 ),
                 child: FResizable(

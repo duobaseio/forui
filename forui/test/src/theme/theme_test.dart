@@ -4,6 +4,9 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
 
+final _darkTouch = FThemeData(touch: true, colors: FColors.neutral.dark);
+final _lightTouch = FThemeData(touch: true, colors: FColors.neutral.light);
+
 class Foo extends StatelessWidget {
   final Widget child;
 
@@ -11,7 +14,7 @@ class Foo extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) =>
-      FBasicTheme(data: FThemes.neutral.dark.touch, textDirection: .ltr, child: child);
+      FBasicTheme(data: _darkTouch, textDirection: .ltr, child: child);
 }
 
 void main() {
@@ -19,7 +22,7 @@ void main() {
     testWidgets('passed in platform is respected', (tester) async {
       await tester.pumpWidget(
         FTheme(
-          data: FThemes.neutral.dark.touch,
+          data: _darkTouch,
           platform: .macOS,
           child: Builder(builder: (context) => Text('${context.platformVariant}', textDirection: .ltr)),
         ),
@@ -34,10 +37,10 @@ void main() {
     testWidgets('passed in platform is respected', (tester) async {
       await tester.pumpWidget(
         FBasicTheme(
-          data: FThemes.neutral.dark.touch,
+          data: _darkTouch,
           platform: .macOS,
           textDirection: .ltr,
-          child: Builder(builder: (context) => Text('${context.theme == FThemes.neutral.dark.touch}')),
+          child: Builder(builder: (context) => Text('${context.theme == _darkTouch}')),
         ),
       );
 
@@ -46,7 +49,7 @@ void main() {
 
     testWidgets('ThemeData is visible in child widgets', (tester) async {
       await tester.pumpWidget(
-        Foo(child: Builder(builder: (context) => Text('${context.theme == FThemes.neutral.dark.touch}'))),
+        Foo(child: Builder(builder: (context) => Text('${context.theme == _darkTouch}'))),
       );
 
       expect(find.text('true'), findsOneWidget);
@@ -57,7 +60,7 @@ void main() {
 
       await tester.pumpWidget(
         FBasicTheme(
-          data: FThemes.neutral.light.touch,
+          data: _lightTouch,
           textDirection: .ltr,
           child: Builder(builder: (context) => Text(context.theme.toString(), key: key)),
         ),
@@ -66,7 +69,7 @@ void main() {
 
       await tester.pumpWidget(
         FBasicTheme(
-          data: FThemes.neutral.dark.touch,
+          data: _darkTouch,
           textDirection: .ltr,
           child: Builder(builder: (context) => Text(context.theme.toString(), key: key)),
         ),
@@ -80,7 +83,7 @@ void main() {
       await tester.pumpWidget(
         Directionality(
           textDirection: .ltr,
-          child: Builder(builder: (context) => Text('${context.theme == FThemes.neutral.dark.touch}')),
+          child: Builder(builder: (context) => Text('${context.theme == _darkTouch}')),
         ),
       );
 
@@ -90,7 +93,7 @@ void main() {
     testWidgets('inherit TextDirection from parent', (tester) async {
       await tester.pumpWidget(
         MaterialApp(
-          home: FBasicTheme(data: FThemes.neutral.dark.touch, child: const Text('')),
+          home: FBasicTheme(data: _darkTouch, child: const Text('')),
         ),
       );
 

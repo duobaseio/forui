@@ -525,7 +525,7 @@ void main() {
     });
   }
 
-  for (final (theme, name) in [(FThemes.neutral.light.desktop, 'desktop'), (FThemes.neutral.light.touch, 'touch')]) {
+  for (final (theme, name) in [(FThemeData(touch: false, colors: FColors.neutral.light), 'desktop'), (FThemeData(touch: true, colors: FColors.neutral.light), 'touch')]) {
     testWidgets('$name sizes', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(

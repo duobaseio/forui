@@ -1005,7 +1005,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```dart
   /// // Apply a Forui theme to Material widgets
   /// MaterialApp(
-  ///   theme: FThemes.neutral.light.touch.toApproximateMaterialTheme(),
+  ///   theme: FThemeData(touch: true, colors: FColors.neutral.light).toApproximateMaterialTheme(),
   ///   // ...
   /// )
   /// ```
@@ -1329,14 +1329,14 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// @override
   /// Widget build(BuildContext context) {
   ///   final theme = FThemeData(
-  ///     colors: FThemes.neutral.light.touch.colors.copyWith(
+  ///     colors: FColors.neutral.light.copyWith(
   ///       primary: const Color(0xFF0D47A1), // dark blue
   ///       primaryForeground: const Color(0xFFFFFFFF), // white
   ///     ),
-  ///     typography: FThemes.neutral.light.touch.typography.copyWith(
+  ///     typography: FTypography().copyWith(
   ///       // ...
   ///     ).scale(sizeScalar: 0.8),
-  ///     style: FThemes.neutral.light.touch.style.copyWith(
+  ///     style: FStyle.inherit(colors: FColors.neutral.light, typography: FTypography(), touch: true).copyWith(
   ///       borderRadius: .zero,
   ///     ),
   ///   );

@@ -12,7 +12,7 @@ class Application extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = FThemes.zinc.light.desktop;
+    final theme = FThemeData(touch: false, colors: FColors.zinc.light);
 
     return MaterialApp(
       title: 'Forui Widget Spotlight',

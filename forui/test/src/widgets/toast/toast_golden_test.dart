@@ -53,6 +53,7 @@ void main() {
   }
 
   testWidgets('glassmorphic', (tester) async {
+    final theme = FThemeData(touch: true, colors: FColors.neutral.light);
     await tester.pumpWidget(
       TestScaffold(
         child: Stack(
@@ -63,11 +64,11 @@ void main() {
                 backgroundFilter: .blur(sigmaX: 5, sigmaY: 5),
                 decoration: .value(
                   BoxDecoration(
-                    color: FThemes.neutral.light.touch.colors.background.withValues(alpha: 0.5),
-                    borderRadius: FThemes.neutral.light.touch.style.borderRadius.md,
+                    color: theme.colors.background.withValues(alpha: 0.5),
+                    borderRadius: theme.style.borderRadius.md,
                     border: .all(
-                      width: FThemes.neutral.light.touch.style.borderWidth,
-                      color: FThemes.neutral.light.touch.colors.border,
+                      width: theme.style.borderWidth,
+                      color: theme.colors.border,
                     ),
                   ),
                 ),
