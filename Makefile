@@ -3,7 +3,7 @@ COLOR_BLUE := \033[0;34m
 COLOR_RED := \033[0;31m
 COLOR_RESET := \033[0m
 
-.PHONY: help bootstrap bs install i generate g build_runner br l10n l snippets s prepare-all pa prepare p
+.PHONY: help bootstrap bs install i generate g build_runner br l10n l snippets s prepare-all pa prepare p release-all ra release r
 
 help:
 	@echo "Usage: make <target>"
@@ -17,6 +17,8 @@ help:
 	@echo "  snippets (s)        Generate snippet JSON files"
 	@echo "  prepare-all (pa)    Prepare all packages for release (v=<version>)"
 	@echo "  prepare (p)         Prepare a package release (package=<name> v=<version>)"
+	@echo "  release-all (ra)    Tag and release all packages (v=<version>)"
+	@echo "  release (r)         Tag and create GitHub release (package=<name> v=<version>)"
 
 bootstrap: install generate
 	@echo ""
@@ -142,3 +144,77 @@ prepare:
 	@echo ""
 	@echo "$(COLOR_GREEN)✓ Prepare $(package) $(v) prepared$(COLOR_RESET)"
 p: prepare
+
+release-all:
+	@if [ -z "$(v)" ]; then \
+		echo "$(COLOR_RED)Error: usage: make release-all v=<version>$(COLOR_RESET)"; \
+		exit 1; \
+	fi
+	@$(MAKE) release package=forui_assets v=$(v)
+	@$(MAKE) release package=forui v=$(v)
+	@$(MAKE) release package=forui_hooks v=$(v)
+	@echo ""
+	@echo "$(COLOR_GREEN)✓ All packages released for $(v)$(COLOR_RESET)"
+ra: release-all
+
+release:
+	@# Validate inputs
+	@if [ -z "$(package)" ] || [ -z "$(v)" ]; then \
+		echo "$(COLOR_RED)Error: usage: make release package=<forui|forui_assets|forui_hooks> v=<version>$(COLOR_RESET)"; \
+		exit 1; \
+	fi
+	@if [ "$(package)" != "forui" ] && [ "$(package)" != "forui_assets" ] && [ "$(package)" != "forui_hooks" ]; then \
+		echo "$(COLOR_RED)Error: package must be forui, forui_assets, or forui_hooks$(COLOR_RESET)"; \
+		exit 1; \
+	fi
+	@# Step 1: Validate changelog
+	@echo ""
+	@echo "$(COLOR_BLUE)Checking changelog for $(package) $(v)$(COLOR_RESET)"
+	@if ! grep -q "^## $(v)" "$(package)/CHANGELOG.md"; then \
+		echo "$(COLOR_RED)Error: no '## $(v)' entry found in $(package)/CHANGELOG.md$(COLOR_RESET)"; \
+		exit 1; \
+	fi
+	@echo "$(COLOR_GREEN)✓ Changelog entry found$(COLOR_RESET)"
+	@# Step 2: Extract changelog, tag, and create release
+	@PREV_TAG=$$(git tag -l '$(package)/*' --sort=-v:refname | grep -v '^$(package)/$(v)$$' | head -1); \
+	NOTES=$$(sed -n '/^## $(v)/,/^## /{/^## $(v)/d;/^## /d;p;}' "$(package)/CHANGELOG.md" | sed '1{/^$$/d;}' | sed '$${/^$$/d;}'); \
+	TITLE=$$(echo "$(package)" | awk '{print toupper(substr($$0,1,1)) substr($$0,2)}'); \
+	TITLE="$$TITLE $(v)"; \
+	echo ""; \
+	echo "Title:        $$TITLE"; \
+	echo "Tag:          $(package)/$(v)"; \
+	if [ -n "$$PREV_TAG" ]; then \
+		echo "Previous tag: $$PREV_TAG"; \
+	else \
+		echo "Previous tag: (none)"; \
+	fi; \
+	echo ""; \
+	echo "--- Release notes ---"; \
+	echo "$$NOTES"; \
+	echo "--- End release notes ---"; \
+	echo ""; \
+	if [ "$(force)" != "true" ]; then \
+		printf "Proceed? [y/N] "; \
+		read CONFIRM; \
+		if [ "$$CONFIRM" != "y" ] && [ "$$CONFIRM" != "Y" ]; then \
+			echo "Aborted."; \
+			exit 1; \
+		fi; \
+	fi; \
+	echo ""; \
+	echo "$(COLOR_BLUE)Creating tag $(package)/$(v)$(COLOR_RESET)"; \
+	git tag "$(package)/$(v)"; \
+	echo "$(COLOR_GREEN)✓ Tag created$(COLOR_RESET)"; \
+	echo ""; \
+	echo "$(COLOR_BLUE)Pushing tag $(package)/$(v)$(COLOR_RESET)"; \
+	git push origin "$(package)/$(v)"; \
+	echo "$(COLOR_GREEN)✓ Tag pushed$(COLOR_RESET)"; \
+	echo ""; \
+	echo "$(COLOR_BLUE)Creating GitHub release: $$TITLE$(COLOR_RESET)"; \
+	if [ -n "$$PREV_TAG" ]; then \
+		gh release create "$(package)/$(v)" --title "$$TITLE" --notes "$$NOTES" --notes-start-tag "$$PREV_TAG"; \
+	else \
+		gh release create "$(package)/$(v)" --title "$$TITLE" --notes "$$NOTES"; \
+	fi; \
+	echo "$(COLOR_GREEN)✓ Release $(package)/$(v) created$(COLOR_RESET)"
+r: release
