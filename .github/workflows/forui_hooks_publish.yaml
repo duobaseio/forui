@@ -1,0 +1,33 @@
+name: Forui Hooks Publish
+
+on:
+  push:
+    tags:
+      - 'forui_hooks/**'
+
+jobs:
+  publish:
+    name: Publish to pub.dev
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write
+    defaults:
+      run:
+        working-directory: forui_hooks
+    steps:
+      - uses: actions/checkout@v6
+      - uses: subosito/flutter-action@v2.22.0
+        with:
+          flutter-version: 3.x
+      - uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ vars.GCP_SERVICE_ACCOUNT }}
+      - working-directory: forui
+        run: |
+          flutter pub get
+          dart run build_runner build --delete-conflicting-outputs
+      - run: flutter pub get
+      - run: gcloud auth print-identity-token --audiences=https://pub.dev | dart pub token add https://pub.dev
+      - run: dart pub publish --force
