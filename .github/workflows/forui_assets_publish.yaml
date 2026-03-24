@@ -3,7 +3,7 @@ name: Forui Assets Publish
 on:
   push:
     tags:
-      - 'forui_assets/[0-9]+.[0-9]+.[0-9]+*'
+      - 'forui_assets/**'
 
 jobs:
   publish:

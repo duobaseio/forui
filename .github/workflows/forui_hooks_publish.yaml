@@ -3,7 +3,7 @@ name: Forui Hooks Publish
 on:
   push:
     tags:
-      - 'forui_hooks/[0-9]+.[0-9]+.[0-9]+*'
+      - 'forui_hooks/**'
 
 jobs:
   publish:

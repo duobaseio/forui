@@ -3,7 +3,7 @@ name: Forui Publish
 on:
   push:
     tags:
-      - 'forui/[0-9]+.[0-9]+.[0-9]+*'
+      - 'forui/**'
 
 jobs:
   publish:

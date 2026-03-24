@@ -85,7 +85,7 @@ prepare:
 		exit 1; \
 	fi
 	@if [ "$(package)" != "forui" ] && [ "$(package)" != "forui_assets" ] && [ "$(package)" != "forui_hooks" ]; then \
-		echo "$(COLOR_RED)Error: pkg must be forui, forui_assets, or forui_hooks$(COLOR_RESET)"; \
+		echo "$(COLOR_RED)Error: package must be forui, forui_assets, or forui_hooks$(COLOR_RESET)"; \
 		exit 1; \
 	fi
 	@# Step 1: Validate changelog
