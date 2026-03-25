@@ -17,7 +17,6 @@
 ### `FPopoverMenu`
 * Add `FSubmenuItem`.
 * Add `FSubmenuTile`.
-* Add `FPopoverMenu.hover`.
 * Add `FPopoverMenuStyle.motion`.
 * Add `FPopoverMenuMotion`.
 * Add `FPopoverMenuStyle.minWidth`.

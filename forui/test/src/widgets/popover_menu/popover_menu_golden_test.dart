@@ -196,7 +196,6 @@ void main() {
             platform: platform,
             child: FPopoverMenu(
               control: const .managed(initial: true),
-              hover: false,
               menu: [
                 .group(
                   children: [
@@ -237,7 +236,6 @@ void main() {
             platform: platform,
             child: FPopoverMenu.tiles(
               control: const .managed(initial: true),
-              hover: false,
               menu: [
                 .group(
                   children: [
@@ -278,7 +276,6 @@ void main() {
       TestScaffold.app(
         child: FPopoverMenu(
           control: const .managed(initial: true),
-          hover: false,
           menu: [
             .group(
               children: [
@@ -309,7 +306,6 @@ void main() {
         platform: .macOS,
         child: FPopoverMenu(
           control: const .managed(initial: true),
-          hover: false,
           style: .delta(
             minWidth: 300,
             maxWidth: 300,
@@ -355,7 +351,6 @@ void main() {
         textDirection: .rtl,
         child: FPopoverMenu(
           control: const .managed(initial: true),
-          hover: false,
           menu: [
             .group(
               children: [
