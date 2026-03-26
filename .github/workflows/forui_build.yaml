@@ -22,7 +22,7 @@ jobs:
         flutter-version: [ 3.x ]
     steps:
       - uses: actions/checkout@v6
-      - uses: subosito/flutter-action@v2.22.0
+      - uses: subosito/flutter-action@v2.23.0
         with:
           flutter-version: ${{ matrix.flutter-version }}
       - run: flutter pub get
@@ -60,7 +60,7 @@ jobs:
         working-directory: forui/example
     steps:
       - uses: actions/checkout@v6
-      - uses: subosito/flutter-action@v2.22.0
+      - uses: subosito/flutter-action@v2.23.0
         with:
           flutter-version: ${{ matrix.flutter-version }}
       - run: dart run build_runner build --delete-conflicting-outputs
@@ -90,7 +90,7 @@ jobs:
         with:
           distribution: 'temurin'
           java-version: 17
-      - uses: subosito/flutter-action@v2.22.0
+      - uses: subosito/flutter-action@v2.23.0
         with:
           flutter-version: ${{ matrix.flutter-version }}
       - run: dart run build_runner build --delete-conflicting-outputs
@@ -114,7 +114,7 @@ jobs:
         flutter-version: [ 3.x ]
     steps:
       - uses: actions/checkout@v6
-      - uses: subosito/flutter-action@v2.22.0
+      - uses: subosito/flutter-action@v2.23.0
         with:
           flutter-version: ${{ matrix.flutter-version }}
       - run: dart run build_runner build --delete-conflicting-outputs
