@@ -64,7 +64,7 @@ jobs:
           rm changes.patch
 
       - if: steps.check-changes.outputs.changes == 'true'
-        uses: EndBug/add-and-commit@v9
+        uses: EndBug/add-and-commit@v10
         with:
           pull: '--rebase --autostash'
           message: 'Prepare Forui Internal Gen for review'
