@@ -40,7 +40,7 @@ jobs:
           git checkout -B nightly origin/main
           git push origin nightly --force
 
-      - uses: EndBug/add-and-commit@v9
+      - uses: EndBug/add-and-commit@v10
         with:
           add: '--force **/*.design.dart **/*.control.dart'
           new_branch: 'nightly'
