@@ -274,6 +274,17 @@ class _InputState extends State<Input> {
     }
   }
 
+  @override
+  void dispose() {
+    widget.controller.removeListener(_handleTextChange);
+    if (widget.statesController == null) {
+      _statesController.dispose();
+    } else {
+      _statesController.removeListener(_handleStatesChange);
+    }
+    super.dispose();
+  }
+
   void _handleStatesChange() => SchedulerBinding.instance.addPostFrameCallback((_) {
     if (mounted) {
       setState(() {
@@ -299,6 +310,10 @@ class _InputState extends State<Input> {
       focusNode: widget.focusNode,
       undoController: widget.undoController,
       cursorErrorColor: style.cursorColor,
+      cursorWidth: style.cursorWidth,
+      // TextField doesn't apply cursorOpacityAnimates on macOS by default even though it should be.
+      cursorOpacityAnimates:
+          style.cursorOpacityAnimates ?? (context.platformVariant == .iOS || context.platformVariant == .macOS),
       keyboardType: widget.keyboardType,
       textInputAction: widget.textInputAction,
       textCapitalization: widget.textCapitalization,
@@ -456,16 +471,5 @@ class _InputState extends State<Input> {
       // This is done to trigger the error state. We don't pass in error directly since we build our own using FLabel.
       error: widget.error == null ? null : const SizedBox(),
     );
-  }
-
-  @override
-  void dispose() {
-    widget.controller.removeListener(_handleTextChange);
-    if (widget.statesController == null) {
-      _statesController.dispose();
-    } else {
-      _statesController.removeListener(_handleStatesChange);
-    }
-    super.dispose();
   }
 }

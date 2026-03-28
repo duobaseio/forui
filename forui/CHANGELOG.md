@@ -22,6 +22,11 @@
 * Add `FPopoverMenuStyle.minWidth`.
 
 
+### `FTextField`
+* Add `FTextFieldStyle.cursorWidth`.
+* Add `FTextFieldStyle.cursorOpacityAnimates`.
+
+
 ### `FTabs`
 * Add swipe navigation when `expands` is true. When swipe navigation is enabled (i.e. `expands` is true and `swipeablePhysics` resolves to true), the content area's `physics` defaults to `BouncingScrollPhysics`.
 * Add `FTabs.swipeablePhysics` to toggle swipe navigation independently from `scrollable`.
@@ -30,6 +35,10 @@
 
 ### `FTile`
 * Add `FTileMixin.submenu(...)` shorthand for `FSubmenuTile`.
+
+
+### `FOtpField`
+* Add `FOtpField`.
 
 
 ### `FOverlay`
