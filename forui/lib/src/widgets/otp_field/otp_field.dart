@@ -10,7 +10,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
 import 'package:forui/src/theme/variant.dart';
-import 'package:forui/src/widgets/otp_field/otp_control.dart';
+import 'package:forui/src/widgets/otp_field/otp_field_control.dart';
 import 'package:forui/src/widgets/text_field/input/form_input.dart';
 
 /// Provides the [FOtpFieldStyle] to descendants.
@@ -231,7 +231,7 @@ class FOtpField extends StatefulWidget with FFormFieldProperties<String> {
     this.selectionControls,
     this.dragStartBehavior = .start,
     this.mouseCursor,
-    this.autofillHints,
+    this.autofillHints = const [AutofillHints.oneTimeCode],
     this.restorationId,
     this.stylusHandwritingEnabled = true,
     this.enableIMEPersonalizedLearning = true,

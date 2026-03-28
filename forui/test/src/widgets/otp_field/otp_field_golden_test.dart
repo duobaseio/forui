@@ -9,7 +9,10 @@ void main() {
   testWidgets('blue screen', (tester) async {
     await tester.pumpWidget(
       TestScaffold.blue(
-        child: FOtpField(style: TestScaffold.blueScreen.otpFieldStyle, control: const .managed(initial: '123456')),
+        child: FOtpField(
+          style: TestScaffold.blueScreen.otpFieldStyle,
+          control: const .managed(initial: TextEditingValue(text: '123456')),
+        ),
       ),
     );
 
@@ -61,7 +64,7 @@ void main() {
           theme: theme.data,
           child: FOtpField(
             control: const .managed(
-              initial: '123456',
+              initial: TextEditingValue(text: '123456'),
               children: [FOtpItem(), FOtpItem(), FOtpItem(), FOtpDivider(), FOtpItem(), FOtpItem(), FOtpItem()],
             ),
             enabled: false,
@@ -71,10 +74,7 @@ void main() {
 
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('otp-field/${theme.name}/disabled-divider.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('otp-field/${theme.name}/disabled-divider.png'));
     });
 
     testWidgets('single empty item focused - ${theme.name}', (tester) async {
@@ -90,7 +90,12 @@ void main() {
 
     testWidgets('single filled item focused - ${theme.name}', (tester) async {
       await tester.pumpWidget(
-        TestScaffold.app(theme: theme.data, child: FOtpField(control: const .managed(initial: '123456'))),
+        TestScaffold.app(
+          theme: theme.data,
+          child: FOtpField(
+            control: const .managed(initial: TextEditingValue(text: '123456')),
+          ),
+        ),
       );
 
       await tester.pumpAndSettle();
@@ -125,10 +130,7 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('otp-field/${theme.name}/many-items-focused.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('otp-field/${theme.name}/many-items-focused.png'));
     });
 
     testWidgets('all items focused - ${theme.name}', (tester) async {
@@ -152,10 +154,7 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('otp-field/${theme.name}/all-items-focused.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('otp-field/${theme.name}/all-items-focused.png'));
     });
 
     testWidgets('all items focused divider - ${theme.name}', (tester) async {
@@ -191,7 +190,13 @@ void main() {
 
     testWidgets('disabled - ${theme.name}', (tester) async {
       await tester.pumpWidget(
-        TestScaffold.app(theme: theme.data, child: FOtpField(control: const .managed(initial: '123456'), enabled: false)),
+        TestScaffold.app(
+          theme: theme.data,
+          child: FOtpField(
+            control: const .managed(initial: TextEditingValue(text: '123456')),
+            enabled: false,
+          ),
+        ),
       );
 
       await tester.pumpAndSettle();
@@ -203,7 +208,10 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          child: FOtpField(control: const .managed(initial: '123456'), forceErrorText: 'An error has occurred.'),
+          child: FOtpField(
+            control: const .managed(initial: TextEditingValue(text: '123456')),
+            forceErrorText: 'An error has occurred.',
+          ),
         ),
       );
 
@@ -217,7 +225,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           child: FOtpField(
-            control: const .managed(initial: '123456'),
+            control: const .managed(initial: TextEditingValue(text: '123456')),
             enabled: false,
             forceErrorText: 'An error has occurred.',
           ),
@@ -271,7 +279,7 @@ void main() {
           theme: theme.data,
           textDirection: .rtl,
           child: FOtpField(
-            control: const .managed(initial: '123456'),
+            control: const .managed(initial: TextEditingValue(text: '123456')),
             label: const Text('My Label'),
             description: const Text('Some help text.'),
           ),

@@ -7,7 +7,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
 
-part 'otp_control.control.dart';
+part 'otp_field_control.control.dart';
 
 /// A [FOtpFieldControl] defines how a [FOtpField] is controlled.
 ///
@@ -17,7 +17,7 @@ sealed class FOtpFieldControl with Diagnosticable, _$FOtpFieldControlMixin {
   const factory FOtpFieldControl.managed({
     FOtpController? controller,
     List<Widget> children,
-    String? initial,
+    TextEditingValue? initial,
     ValueChanged<TextEditingValue>? onChange,
   }) = FOtpFieldManagedControl;
 
@@ -35,20 +35,20 @@ class FOtpFieldManagedControl extends FOtpFieldControl with _$FOtpFieldManagedCo
   @override
   final FOtpController? controller;
 
+  /// The initial value. Defaults to null.
+  ///
+  /// Ignored if [controller] is provided. Pass the initial value to the controller instead.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [initial] and [controller] are both provided.
+  @override
+  final TextEditingValue? initial;
+
   /// The children, which should be [FOtpItemMixin]s or [FOtpDivider]s. Defaults to six [FOtpItem]s.
   ///
   /// Ignored if [controller] is provided. Pass children to the controller instead.
   @override
   final List<Widget> children;
-
-  /// The initial value. Defaults to null.
-  ///
-  /// Ignored if [controller] is provided. Pass the initial text to the controller instead.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if [initial] and [controller] are both provided.
-  @override
-  final String? initial;
 
   /// Called when the value changes.
   @override
@@ -67,13 +67,7 @@ class FOtpFieldManagedControl extends FOtpFieldControl with _$FOtpFieldManagedCo
        super._();
 
   @override
-  FOtpController createController() {
-    final c = controller ?? FOtpController(children: children);
-    if (initial != null) {
-      c.text = initial!;
-    }
-    return c;
-  }
+  FOtpController createController() => controller ?? FOtpController(children: children, value: initial ?? .empty);
 }
 
 // TODO: Add support for lifted OTP field.
@@ -112,9 +106,12 @@ class FOtpController extends TextEditingController {
   int _focused;
 
   /// Creates a [FOtpController].
-  FOtpController({this.children = const [FOtpItem(), FOtpItem(), FOtpItem(), FOtpItem(), FOtpItem(), FOtpItem()]})
-    : _length = children.whereType<FOtpItemMixin>().length,
-      _focused = 0;
+  FOtpController({
+    this.children = const [FOtpItem(), FOtpItem(), FOtpItem(), FOtpItem(), FOtpItem(), FOtpItem()],
+    TextEditingValue value = .empty,
+  }) : _length = children.whereType<FOtpItemMixin>().length,
+       _focused = 0,
+       super.fromValue(value);
 
   @override
   TextSpan buildTextSpan({required BuildContext context, required bool withComposing, TextStyle? style}) {
@@ -150,9 +147,7 @@ class FOtpController extends TextEditingController {
       spans.add(WidgetSpan(alignment: .middle, child: child));
     }
 
-    return TextSpan(
-      children: Directionality.of(context) == .ltr ? spans : spans.reversed.toList(),
-    );
+    return TextSpan(children: Directionality.of(context) == .ltr ? spans : spans.reversed.toList());
   }
 
   /// Handles the traversal of the OTP items when the user presses the left or right arrow key.
@@ -176,6 +171,7 @@ class FOtpController extends TextEditingController {
 
     /// Truncates the text to the maximum length.
     if (newValue.text.characters.take(_length).string case final truncated when truncated != newValue.text) {
+      _focused = (truncated.length - 1).clamp(0, _length - 1);
       super.value = TextEditingValue(
         text: truncated,
         selection: .collapsed(offset: truncated.length),
