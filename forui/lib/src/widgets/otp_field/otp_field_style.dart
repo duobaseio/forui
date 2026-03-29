@@ -2,12 +2,12 @@ import 'dart:ui';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-import 'package:forui/src/theme/variant.dart';
 
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
+import 'package:forui/src/theme/variant.dart';
 
 @Variants('FOtpFieldItem', {
   'disabled': (2, 'The semantic variant when this widget is disabled and cannot be interacted with.'),

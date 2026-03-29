@@ -30,8 +30,7 @@ class PopoverMenuScope extends InheritedWidget {
   });
 
   @override
-  bool updateShouldNotify(PopoverMenuScope old) =>
-      style != old.style || groupId != old.groupId || active != old.active;
+  bool updateShouldNotify(PopoverMenuScope old) => style != old.style || groupId != old.groupId || active != old.active;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

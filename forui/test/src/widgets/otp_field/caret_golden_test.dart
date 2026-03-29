@@ -6,10 +6,7 @@ import 'package:forui/src/widgets/otp_field/caret.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  for (final (name, cursorOpacityAnimates) in [
-    ('caret-opacity-animates', true),
-    ('caret-discrete-blink', false),
-  ]) {
+  for (final (name, cursorOpacityAnimates) in [('caret-opacity-animates', true), ('caret-discrete-blink', false)]) {
     testWidgets(name, (tester) async {
       final sheet = autoDispose(AnimationSheetBuilder(frameSize: const Size(200, 100)));
 
