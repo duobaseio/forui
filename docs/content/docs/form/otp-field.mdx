@@ -10,6 +10,7 @@ import { CodeSnippet } from '@/components/code-snippet/code-snippet';
 import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/otp-field/default.json';
 import dividerSnippet from '@/snippets/examples/otp-field/divider.json';
+import noFilterSnippet from '@/snippets/examples/otp-field/no-filter.json';
 import otpFieldUsage from '@/snippets/usages/widgets/otp_field/otpField.json';
 
 <Tabs items={['Preview', 'Code']}>
@@ -48,6 +49,17 @@ To generate a specific style for customization:
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={dividerSnippet} />
+  </Tab>
+</Tabs>
+
+### No Filter
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='otp-field' variant='no-filter'/>
+  </Tab>
+  <Tab value="Code">
+    <CodeSnippet snippet={noFilterSnippet} />
   </Tab>
 </Tabs>
 

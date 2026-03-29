@@ -26,3 +26,15 @@ class DividerOtpFieldPage extends Example {
     // {@endhighlight}
   );
 }
+
+@RoutePage()
+class NoFilterOtpFieldPage extends Example {
+  NoFilterOtpFieldPage({@queryParam super.theme});
+
+  @override
+  Widget example(BuildContext _) => FOtpField(
+    // {@highlight}
+    inputFormatters: const [],
+    // {@endhighlight}
+  );
+}

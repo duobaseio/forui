@@ -61,7 +61,7 @@ final otpField = FOtpField(
 // {@category "Control" "`.managed()` with internal controller"}
 /// Manages the controller internally. Allows configuring children and initial value.
 final FOtpFieldControl managedInternal = .managed(
-  children: const [FOtpItem(), FOtpItem(), FOtpItem(), FOtpItem(), FOtpItem(), FOtpItem()],
+  children: const [FOtpItem(), FOtpItem(), FOtpItem(), FOtpDivider(), FOtpItem(), FOtpItem(), FOtpItem()],
   initial: null,
   onChange: (value) {},
 );

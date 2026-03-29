@@ -96,7 +96,7 @@ class FOtpField extends StatefulWidget with FFormFieldProperties<String> {
   /// {@macro forui.text_field.focusNode}
   final FocusNode? focusNode;
 
-  /// {@macro forui.text_field.keyboardType}
+  /// The type of keyboard to use for editing the text. Defaults to [TextInputType.text].
   final TextInputType? keyboardType;
 
   /// {@macro forui.text_field.textInputAction}
@@ -211,7 +211,7 @@ class FOtpField extends StatefulWidget with FFormFieldProperties<String> {
     this.magnifierConfiguration,
     this.groupId = EditableText,
     this.focusNode,
-    this.keyboardType,
+    this.keyboardType = .text,
     this.textInputAction = .done,
     this.textCapitalization = .none,
     this.textDirection,
