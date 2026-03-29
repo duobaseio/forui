@@ -138,6 +138,8 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/multi-select/sorted', page: SortedMultiSelectRoute.page),
     AutoRoute(path: '/multi-select/popover-builder', page: PopoverBuilderMultiSelectRoute.page),
     AutoRoute(path: '/multi-select/form', page: FormMultiSelectRoute.page),
+    AutoRoute(path: '/otp-field/default', page: OtpFieldRoute.page),
+    AutoRoute(path: '/otp-field/divider', page: DividerOtpFieldRoute.page),
     AutoRoute(path: '/pagination/default', page: PaginationRoute.page),
     AutoRoute(path: '/pagination/siblings', page: SiblingsPaginationRoute.page),
     AutoRoute(path: '/pagination/hide-edges', page: HideEdgesPaginationRoute.page),

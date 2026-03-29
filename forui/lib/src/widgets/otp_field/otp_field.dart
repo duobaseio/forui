@@ -318,6 +318,11 @@ class _FOtpFieldState extends State<FOtpField> {
   late FOtpController _controller;
   late WidgetStatesController _statesController;
 
+  // The error widget cannot be computed inline because `_statesController` is updated one frame after `build`. When
+  // transitioning from error → non-error, this causes the build method to be called once with an error variant but no
+  // error widget, causing a layout "jump" and the error text disappearing immediately instead of fading out.
+  Widget _error = const SizedBox();
+
   @override
   void initState() {
     super.initState();
@@ -385,6 +390,9 @@ class _FOtpFieldState extends State<FOtpField> {
       builder: (state) {
         final errorText = state.errorText;
         final error = errorText == null ? null : widget.errorBuilder(state.context, errorText);
+        if (error != null) {
+          _error = error;
+        }
 
         /// A stripped down version of the input used by [FTextField].
         final textfield = IntrinsicWidth(
@@ -461,7 +469,7 @@ class _FOtpFieldState extends State<FOtpField> {
           label: widget.label,
           style: style,
           description: widget.description,
-          error: error ?? const SizedBox(),
+          error: _error,
           child: widget.builder(context, style, variants, textfield),
         );
 

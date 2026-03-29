@@ -77,11 +77,11 @@ class FOtpFieldStyle extends FLabelStyle with _$FOtpFieldStyleFunctions {
     this.cursorColor = CupertinoColors.activeBlue,
     this.cursorWidth = 2.0,
     this.cursorOpacityAnimates,
-    this.dividerPadding = const .symmetric(horizontal: 6),
+    this.dividerPadding = const .symmetric(horizontal: 8),
     this.dividerSize = const Size(12, 1),
-    super.labelPadding,
-    super.descriptionPadding,
-    super.errorPadding,
+    super.labelPadding = const .only(bottom: 6),
+    super.descriptionPadding = const .only(top: 6),
+    super.errorPadding = const .only(top: 6),
     super.childPadding,
     super.labelMotion,
   });
@@ -90,23 +90,25 @@ class FOtpFieldStyle extends FLabelStyle with _$FOtpFieldStyleFunctions {
   FOtpFieldStyle.inherit({
     required FColors colors,
     required FTypography typography,
-    required super.style,
+    required FStyle style,
     required bool touch,
-  }) : keyboardAppearance = colors.brightness,
-       cursorColor = colors.primary,
-       cursorWidth = 2.0,
-       cursorOpacityAnimates = null,
-       itemSize = touch ? const Size(44, 44) : const Size(36, 36),
-       itemStyles = .inherit(colors: colors, typography: typography, style: style),
-       dividerPadding = const .symmetric(horizontal: 4),
-       dividerSize = const Size(12, 1),
-       dividerColor = FVariants(
-         colors.foreground,
-         variants: {
-           [.disabled]: colors.disable(colors.foreground),
-         },
-       ),
-       super.inherit(childPadding: const .symmetric(vertical: 2));
+  }) : this(
+         keyboardAppearance: colors.brightness,
+         cursorColor: colors.primary,
+         itemSize: touch ? const Size(44, 44) : const Size(36, 36),
+         itemStyles: .inherit(colors: colors, typography: typography, style: style),
+         dividerPadding: const .symmetric(horizontal: 4),
+         dividerColor: FVariants(
+           colors.foreground,
+           variants: {
+             [.disabled]: colors.disable(colors.foreground),
+           },
+         ),
+         labelTextStyle: style.formFieldStyle.labelTextStyle,
+         descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,
+         errorTextStyle: style.formFieldStyle.errorTextStyle,
+         childPadding: const .symmetric(vertical: 2),
+       );
 }
 
 /// The [FOtpFieldItemStyle]s for each variant.
