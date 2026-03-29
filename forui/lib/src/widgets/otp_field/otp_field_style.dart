@@ -53,7 +53,7 @@ class FOtpFieldStyle extends FLabelStyle with _$FOtpFieldStyleFunctions {
   @override
   final FOtpFieldItemStyles itemStyles;
 
-  /// The divider's padding. Defaults to `EdgeInsets.symmetric(horizontal: 6)`.
+  /// The divider's padding. Defaults to `EdgeInsets.symmetric(horizontal: 8)`.
   @override
   final EdgeInsetsGeometry dividerPadding;
 

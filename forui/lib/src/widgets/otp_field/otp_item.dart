@@ -5,7 +5,7 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
 import 'package:forui/src/widgets/otp_field/caret.dart';
 
-/// A marker interface which denotes that mixed-in widgets is an item in an OTP field.
+/// A marker interface which denotes that mixed-in widgets are items in an OTP field.
 mixin FOtpItemMixin on Widget {}
 
 /// Provides the state of an individual item in an [FOtpField] to its descendants.
