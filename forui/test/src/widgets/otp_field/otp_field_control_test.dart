@@ -32,11 +32,7 @@ void main() {
     });
   });
 
-  group('traverse', () {
-    setUp(() {
-      controller.value = const TextEditingValue(text: '123', selection: .collapsed(offset: 3));
-    });
-
+  group('traverse empty', () {
     test('forward does nothing', () {
       controller.traverse(forward: true);
 
@@ -49,6 +45,12 @@ void main() {
 
       expect(controller.selection, const TextSelection.collapsed(offset: 0));
       expect(controller.focused, 0);
+    });
+  });
+
+  group('traverse', () {
+    setUp(() {
+      controller.value = const TextEditingValue(text: '123', selection: .collapsed(offset: 3));
     });
 
     test('forward from collapsed', () {
