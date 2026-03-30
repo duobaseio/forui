@@ -17,10 +17,14 @@
 ### `FPopoverMenu`
 * Add `FSubmenuItem`.
 * Add `FSubmenuTile`.
-* Add `FPopoverMenu.hover`.
 * Add `FPopoverMenuStyle.motion`.
 * Add `FPopoverMenuMotion`.
 * Add `FPopoverMenuStyle.minWidth`.
+
+
+### `FTextField`
+* Add `FTextFieldStyle.cursorWidth`.
+* Add `FTextFieldStyle.cursorOpacityAnimates`.
 
 
 ### `FTabs`
@@ -31,6 +35,10 @@
 
 ### `FTile`
 * Add `FTileMixin.submenu(...)` shorthand for `FSubmenuTile`.
+
+
+### `FOtpField`
+* Add `FOtpField`.
 
 
 ### `FOverlay`

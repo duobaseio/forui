@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -115,6 +117,17 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
   @override
   final Color cursorColor;
 
+  /// The width of the cursor. Defaults to 2.0.
+  ///
+  /// The cursor indicates the current location of text insertion point in the field.
+  @override
+  final double cursorWidth;
+
+  /// Whether the cursor opacity animates. Defaults to the current platform's behavior (true on iOS and macOS, false on
+  /// other platforms).
+  @override
+  final bool? cursorOpacityAnimates;
+
   /// The padding surrounding this text field's content.
   ///
   /// Defaults to `const EdgeInsets.symmetric(horizontal: 10, vertical: 9)`.
@@ -184,6 +197,8 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
     required super.descriptionTextStyle,
     required super.errorTextStyle,
     this.cursorColor = CupertinoColors.activeBlue,
+    this.cursorWidth = 2.0,
+    this.cursorOpacityAnimates,
     this.contentPadding = const .symmetric(horizontal: 10, vertical: 9),
     this.clearButtonPadding = const .directional(end: 4),
     this.obscureButtonPadding = const .directional(end: 4),

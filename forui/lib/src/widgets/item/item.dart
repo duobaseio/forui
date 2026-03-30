@@ -471,12 +471,12 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
   static ({EdgeInsetsGeometry suffixedPadding, EdgeInsetsGeometry unsuffixedPadding, EdgeInsetsGeometry margin})
   menuInsets({required bool touch}) => touch
       ? (
-          suffixedPadding: const EdgeInsetsDirectional.fromSTEB(10, 12.5, 6, 12.5),
+          suffixedPadding: const .fromSTEB(10, 12.5, 6, 12.5),
           unsuffixedPadding: const .symmetric(horizontal: 10, vertical: 12.5),
           margin: const .symmetric(horizontal: 4),
         )
       : (
-          suffixedPadding: const EdgeInsetsDirectional.fromSTEB(10, 6.5, 5, 6.5),
+          suffixedPadding: const .fromSTEB(10, 6.5, 5, 6.5),
           unsuffixedPadding: const .symmetric(horizontal: 10, vertical: 6.5),
           margin: const .symmetric(horizontal: 4),
         );
@@ -485,12 +485,12 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
   static ({EdgeInsetsGeometry suffixedPadding, EdgeInsetsGeometry unsuffixedPadding, EdgeInsetsGeometry margin})
   selectInsets({required bool touch}) => touch
       ? (
-          suffixedPadding: const EdgeInsetsDirectional.fromSTEB(10, 12.5, 6, 12.5),
+          suffixedPadding: const .fromSTEB(10, 12.5, 6, 12.5),
           unsuffixedPadding: const .symmetric(horizontal: 10, vertical: 12.5),
           margin: const .symmetric(horizontal: 4),
         )
       : (
-          suffixedPadding: const EdgeInsetsDirectional.fromSTEB(10, 6.5, 5, 6.5),
+          suffixedPadding: const .fromSTEB(10, 6.5, 5, 6.5),
           unsuffixedPadding: const .symmetric(horizontal: 10, vertical: 6.5),
           margin: const .symmetric(horizontal: 4),
         );

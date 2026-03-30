@@ -102,7 +102,6 @@ mixin FItemMixin on Widget {
     TraversalEdgeBehavior? submenuTraversalEdgeBehavior,
     double submenuMaxHeight = .infinity,
     FItemDivider submenuDivider = .full,
-    bool? hover,
     Key? key,
   }) => .new(
     title: title,
@@ -145,7 +144,6 @@ mixin FItemMixin on Widget {
     submenuTraversalEdgeBehavior: submenuTraversalEdgeBehavior,
     submenuMaxHeight: submenuMaxHeight,
     submenuDivider: submenuDivider,
-    hover: hover,
     key: key,
   );
 

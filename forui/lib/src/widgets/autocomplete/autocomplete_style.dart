@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' show InputBorder;
 import 'package:flutter/widgets.dart';
@@ -116,6 +118,8 @@ class FAutocompleteFieldStyle extends FTextFieldStyle with _$FAutocompleteFieldS
     required super.descriptionTextStyle,
     required super.errorTextStyle,
     super.cursorColor,
+    super.cursorWidth,
+    super.cursorOpacityAnimates,
     super.contentPadding,
     super.clearButtonPadding,
     super.obscureButtonPadding,
@@ -140,6 +144,8 @@ class FAutocompleteFieldStyle extends FTextFieldStyle with _$FAutocompleteFieldS
         keyboardAppearance: field.keyboardAppearance,
         color: field.color,
         cursorColor: field.cursorColor,
+        cursorWidth: field.cursorWidth,
+        cursorOpacityAnimates: field.cursorOpacityAnimates,
         contentPadding: field.contentPadding,
         clearButtonPadding: field.clearButtonPadding,
         obscureButtonPadding: field.obscureButtonPadding,
