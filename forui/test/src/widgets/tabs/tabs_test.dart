@@ -182,96 +182,166 @@ void main() {
     expect(tester.takeException(), null);
   });
 
-  testWidgets('tap on current entry', (tester) async {
-    await tester.pumpWidget(
-      TestScaffold.app(
-        child: FTabs(
-          children: const [
-            FTabEntry(label: Text('foo'), child: Text('foo content')),
-            FTabEntry(label: Text('bar'), child: Text('bar content')),
-          ],
+  group('tap', () {
+    testWidgets('tap on current entry', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTabs(
+            children: const [
+              FTabEntry(label: Text('foo'), child: Text('foo content')),
+              FTabEntry(label: Text('bar'), child: Text('bar content')),
+            ],
+          ),
         ),
-      ),
-    );
+      );
 
-    expect(find.text('foo content'), findsOneWidget);
-    expect(find.text('bar content'), findsNothing);
+      expect(find.text('foo content'), findsOneWidget);
+      expect(find.text('bar content'), findsNothing);
 
-    await tester.tap(find.text('foo'));
-    await tester.pumpAndSettle();
+      await tester.tap(find.text('foo'));
+      await tester.pumpAndSettle();
 
-    expect(find.text('foo content'), findsOneWidget);
-    expect(find.text('bar content'), findsNothing);
+      expect(find.text('foo content'), findsOneWidget);
+      expect(find.text('bar content'), findsNothing);
+    });
+
+    testWidgets('tapping on tab switches tab entry', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTabs(
+            children: const [
+              FTabEntry(label: Text('foo'), child: Text('foo content')),
+              FTabEntry(label: Text('bar'), child: Text('bar content')),
+            ],
+          ),
+        ),
+      );
+
+      expect(find.text('bar content'), findsNothing);
+
+      await tester.tap(find.text('bar'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('bar content'), findsOneWidget);
+    });
+
+    testWidgets('using controller to switch tab entry', (tester) async {
+      final controller = autoDispose(FTabController(length: 2, vsync: tester));
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTabs(
+            control: .managed(controller: controller),
+            children: const [
+              FTabEntry(label: Text('foo'), child: Text('foo content')),
+              FTabEntry(label: Text('bar'), child: Text('bar content')),
+            ],
+          ),
+        ),
+      );
+
+      expect(find.text('bar content'), findsNothing);
+
+      controller.animateTo(1);
+      await tester.pumpAndSettle();
+
+      expect(find.text('bar content'), findsOneWidget);
+    });
+
+    testWidgets('onPress is triggered when a tab is pressed', (tester) async {
+      var index = -1;
+      final controller = autoDispose(FTabController(length: 2, vsync: tester));
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTabs(
+            control: .managed(controller: controller),
+            children: const [
+              FTabEntry(label: Text('foo'), child: Text('foo content')),
+              FTabEntry(label: Text('bar'), child: Text('bar content')),
+            ],
+            onPress: (i) => index = i,
+          ),
+        ),
+      );
+
+      await tester.tap(find.text('bar'));
+      await tester.pumpAndSettle();
+
+      expect(index, 1);
+      expect(controller.index, 1);
+      expect(find.text('foo content'), findsNothing);
+      expect(find.text('bar content'), findsOneWidget);
+
+      await tester.pumpAndSettle();
+    });
   });
 
-  testWidgets('tapping on tab switches tab entry', (tester) async {
-    await tester.pumpWidget(
-      TestScaffold.app(
-        child: FTabs(
-          children: const [
-            FTabEntry(label: Text('foo'), child: Text('foo content')),
-            FTabEntry(label: Text('bar'), child: Text('bar content')),
-          ],
+  group('swipe', () {
+    testWidgets('swiping switches tabs when expands is true', (tester) async {
+      int index = 0;
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Column(
+            children: [
+              Expanded(
+                child: FTabs(
+                  expands: true,
+                  control: .managed(onChange: (val) => index = val),
+                  children: const [
+                    FTabEntry(label: Text('Tab 1'), child: Text('Content 1')),
+                    FTabEntry(label: Text('Tab 2'), child: Text('Content 2')),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+      await tester.pumpAndSettle();
 
-    expect(find.text('bar content'), findsNothing);
+      expect(find.text('Content 1'), findsOneWidget);
+      expect(find.text('Content 2'), findsNothing);
 
-    await tester.tap(find.text('bar'));
-    await tester.pumpAndSettle();
+      // Drag from right to left to switch to Tab 2
+      await tester.drag(find.text('Content 1'), const Offset(-600, 0));
+      await tester.pumpAndSettle();
 
-    expect(find.text('bar content'), findsOneWidget);
-  });
+      expect(index, 1);
+      expect(find.text('Content 1'), findsNothing);
+      expect(find.text('Content 2'), findsOneWidget);
+    });
 
-  testWidgets('using controller to switch tab entry', (tester) async {
-    final controller = autoDispose(FTabController(length: 2, vsync: tester));
-
-    await tester.pumpWidget(
-      TestScaffold.app(
-        child: FTabs(
-          control: .managed(controller: controller),
-          children: const [
-            FTabEntry(label: Text('foo'), child: Text('foo content')),
-            FTabEntry(label: Text('bar'), child: Text('bar content')),
-          ],
+    testWidgets('swiping does NOT switch tabs when contentPhysics is NeverScrollableScrollPhysics', (tester) async {
+      int index = 0;
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Column(
+            children: [
+              Expanded(
+                child: FTabs(
+                  expands: true,
+                  contentPhysics: const NeverScrollableScrollPhysics(),
+                  control: .managed(onChange: (val) => index = val),
+                  children: const [
+                    FTabEntry(label: Text('Tab 1'), child: Text('Content 1')),
+                    FTabEntry(label: Text('Tab 2'), child: Text('Content 2')),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
-      ),
-    );
+      );
+      await tester.pumpAndSettle();
 
-    expect(find.text('bar content'), findsNothing);
+      // Attempt to drag from right to left
+      await tester.drag(find.text('Content 1'), const Offset(-600, 0));
+      await tester.pumpAndSettle();
 
-    controller.animateTo(1);
-    await tester.pumpAndSettle();
-
-    expect(find.text('bar content'), findsOneWidget);
-  });
-
-  testWidgets('onPress is triggered when a tab is pressed', (tester) async {
-    var index = -1;
-    final controller = autoDispose(FTabController(length: 2, vsync: tester));
-
-    await tester.pumpWidget(
-      TestScaffold.app(
-        child: FTabs(
-          control: .managed(controller: controller),
-          children: const [
-            FTabEntry(label: Text('foo'), child: Text('foo content')),
-            FTabEntry(label: Text('bar'), child: Text('bar content')),
-          ],
-          onPress: (i) => index = i,
-        ),
-      ),
-    );
-
-    await tester.tap(find.text('bar'));
-    await tester.pumpAndSettle();
-
-    expect(index, 1);
-    expect(controller.index, 1);
-    expect(find.text('foo content'), findsNothing);
-    expect(find.text('bar content'), findsOneWidget);
-
-    await tester.pumpAndSettle();
+      expect(index, 0);
+      expect(find.text('Content 1'), findsOneWidget);
+      expect(find.text('Content 2'), findsNothing);
+    });
   });
 }
