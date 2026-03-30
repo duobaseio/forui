@@ -28,8 +28,8 @@ class DividerOtpFieldPage extends Example {
 }
 
 @RoutePage()
-class NoFilterOtpFieldPage extends Example {
-  NoFilterOtpFieldPage({@queryParam super.theme});
+class NoFormatterOtpFieldPage extends Example {
+  NoFormatterOtpFieldPage({@queryParam super.theme});
 
   @override
   Widget example(BuildContext _) => FOtpField(
