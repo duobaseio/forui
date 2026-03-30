@@ -304,6 +304,10 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   @override
   final FModalSheetStyle modalSheetStyle;
 
+  /// The OTP field style.
+  @override
+  final FOtpFieldStyle otpFieldStyle;
+
   /// The pagination style.
   ///
   /// ## CLI
@@ -610,6 +614,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FLineCalendarStyle? lineCalendarStyle,
     FMultiSelectStyle? multiSelectStyle,
     FModalSheetStyle? modalSheetStyle,
+    FOtpFieldStyle? otpFieldStyle,
     FPaginationStyle? paginationStyle,
     FPersistentSheetStyle? persistentSheetStyle,
     FPickerStyle? pickerStyle,
@@ -692,6 +697,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       multiSelectStyle:
           multiSelectStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       modalSheetStyle: modalSheetStyle ?? .inherit(colors: colors),
+      otpFieldStyle: otpFieldStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       paginationStyle: paginationStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       persistentSheetStyle: persistentSheetStyle ?? const FPersistentSheetStyle(),
       pickerStyle: pickerStyle ?? .inherit(colors: colors, style: style, typography: typography),
@@ -820,6 +826,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     lineCalendarStyle: a.lineCalendarStyle.lerp(b.lineCalendarStyle, t),
     multiSelectStyle: a.multiSelectStyle.lerp(b.multiSelectStyle, t),
     modalSheetStyle: a.modalSheetStyle.lerp(b.modalSheetStyle, t),
+    otpFieldStyle: a.otpFieldStyle.lerp(b.otpFieldStyle, t),
     paginationStyle: a.paginationStyle.lerp(b.paginationStyle, t),
     persistentSheetStyle: a.persistentSheetStyle.lerp(b.persistentSheetStyle, t),
     pickerStyle: a.pickerStyle.lerp(b.pickerStyle, t),
@@ -903,6 +910,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     required this.lineCalendarStyle,
     required this.multiSelectStyle,
     required this.modalSheetStyle,
+    required this.otpFieldStyle,
     required this.paginationStyle,
     required this.persistentSheetStyle,
     required this.pickerStyle,
@@ -1389,6 +1397,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FLineCalendarStyleDelta? lineCalendarStyle,
     FMultiSelectStyleDelta? multiSelectStyle,
     FModalSheetStyleDelta? modalSheetStyle,
+    FOtpFieldStyleDelta? otpFieldStyle,
     FPaginationStyleDelta? paginationStyle,
     FPersistentSheetStyleDelta? persistentSheetStyle,
     FPickerStyleDelta? pickerStyle,
@@ -1457,6 +1466,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     lineCalendarStyle: lineCalendarStyle?.call(this.lineCalendarStyle) ?? this.lineCalendarStyle,
     multiSelectStyle: multiSelectStyle?.call(this.multiSelectStyle) ?? this.multiSelectStyle,
     modalSheetStyle: modalSheetStyle?.call(this.modalSheetStyle) ?? this.modalSheetStyle,
+    otpFieldStyle: otpFieldStyle?.call(this.otpFieldStyle) ?? this.otpFieldStyle,
     paginationStyle: paginationStyle?.call(this.paginationStyle) ?? this.paginationStyle,
     persistentSheetStyle: persistentSheetStyle?.call(this.persistentSheetStyle) ?? this.persistentSheetStyle,
     pickerStyle: pickerStyle?.call(this.pickerStyle) ?? this.pickerStyle,

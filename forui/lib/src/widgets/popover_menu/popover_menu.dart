@@ -19,8 +19,6 @@ class PopoverMenuScope extends InheritedWidget {
 
   final Object? groupId;
 
-  final bool hover;
-
   final ValueNotifier<Key?> active;
 
   const PopoverMenuScope({
@@ -28,13 +26,11 @@ class PopoverMenuScope extends InheritedWidget {
     required this.groupId,
     required this.active,
     required super.child,
-    this.hover = false,
     super.key,
   });
 
   @override
-  bool updateShouldNotify(PopoverMenuScope old) =>
-      style != old.style || groupId != old.groupId || hover != old.hover || active != old.active;
+  bool updateShouldNotify(PopoverMenuScope old) => style != old.style || groupId != old.groupId || active != old.active;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -42,7 +38,6 @@ class PopoverMenuScope extends InheritedWidget {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('groupId', groupId))
-      ..add(FlagProperty('hover', value: hover, ifTrue: 'hover'))
       ..add(DiagnosticsProperty('active', active));
   }
 }
@@ -187,10 +182,6 @@ class FPopoverMenu extends StatefulWidget {
   /// Defaults to true.
   final bool useViewInsets;
 
-  /// Whether submenus are shown when hovering over an item. Defaults to true on desktop platforms and false on touch
-  /// platforms.
-  final bool? hover;
-
   /// {@macro forui.widgets.FPopover.builder}
   final ValueWidgetBuilder<FPopoverController> builder;
 
@@ -244,7 +235,6 @@ class FPopoverMenu extends StatefulWidget {
     this.traversalEdgeBehavior,
     this.useViewPadding = true,
     this.useViewInsets = true,
-    this.hover,
     List<FItemGroupMixin> Function(BuildContext context, FPopoverController controller, List<FItemGroupMixin>? menu)
         menuBuilder =
         defaultItemBuilder,
@@ -310,7 +300,6 @@ class FPopoverMenu extends StatefulWidget {
     this.traversalEdgeBehavior,
     this.useViewPadding = true,
     this.useViewInsets = true,
-    this.hover,
     List<FTileGroupMixin> Function(BuildContext context, FPopoverController controller, List<FTileGroupMixin>? menu)
         menuBuilder =
         defaultTileBuilder,
@@ -372,7 +361,6 @@ class FPopoverMenu extends StatefulWidget {
       ..add(EnumProperty('traversalEdgeBehavior', traversalEdgeBehavior))
       ..add(FlagProperty('useViewPadding', value: useViewPadding, ifTrue: 'using view padding'))
       ..add(FlagProperty('useViewInsets', value: useViewInsets, ifTrue: 'using view insets'))
-      ..add(FlagProperty('hover', value: hover, ifTrue: 'hover'))
       ..add(ObjectFlagProperty.has('builder', builder));
   }
 }
@@ -396,8 +384,6 @@ class _FPopoverMenuState extends State<FPopoverMenu> {
     final groupId = widget.hideRegion == .excludeChild
         ? (widget.groupId ?? scope?.groupId ?? _groupId)
         : widget.groupId;
-    final hover = widget.hover ?? scope?.hover ?? context.platformVariant.desktop;
-
     return FPopover(
       control: widget.control,
       style: style,
@@ -424,11 +410,10 @@ class _FPopoverMenuState extends State<FPopoverMenu> {
         style: style,
         groupId: groupId,
         active: _active,
-        hover: hover,
         // The default behavior for non-submenu trigger items.
         child: FInheritedItemCallbacks(
-          onHoverEnter: hover ? () => _active.value = null : null,
-          onPress: hover ? null : () => _active.value = null,
+          onHoverEnter: () => _active.value = null,
+          onPress: () => _active.value = null,
           // We explicitly wrap this in a `FInheritedItemData` to prevent any ancestor data from accidentally leaking
           // into the popover menu's items.
           //

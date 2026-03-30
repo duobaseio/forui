@@ -7,12 +7,11 @@ import '../../test_scaffold.dart';
 
 void main() {
   group('FSubmenuTile', () {
-    group('tap mode', () {
+    group('tap', () {
       testWidgets('tap on submenu tile opens submenu', (tester) async {
         await tester.pumpWidget(
           TestScaffold.app(
             child: FPopoverMenu.tiles(
-              hover: false,
               menu: [
                 .group(
                   children: [
@@ -46,7 +45,6 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             child: FPopoverMenu.tiles(
-              hover: false,
               menu: [
                 .group(
                   children: [
@@ -82,7 +80,6 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             child: FPopoverMenu.tiles(
-              hover: false,
               menu: [
                 .group(
                   children: [
@@ -128,7 +125,6 @@ void main() {
           TestScaffold.app(
             platform: .macOS,
             child: FPopoverMenu.tiles(
-              hover: false,
               menu: [
                 .group(
                   children: [
@@ -166,7 +162,6 @@ void main() {
           TestScaffold.app(
             platform: .macOS,
             child: FPopoverMenu.tiles(
-              hover: false,
               menu: [
                 .group(
                   children: [
@@ -203,7 +198,6 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             child: FPopoverMenu.tiles(
-              hover: false,
               menu: [
                 .group(
                   children: [
@@ -237,12 +231,11 @@ void main() {
       });
     });
 
-    group('hover mode', () {
+    group('hover', () {
       testWidgets('hover over submenu tile shows submenu', (tester) async {
         await tester.pumpWidget(
           TestScaffold.app(
             child: FPopoverMenu.tiles(
-              hover: true,
               menu: [
                 .group(
                   children: [
@@ -278,7 +271,6 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             child: FPopoverMenu.tiles(
-              hover: true,
               menu: [
                 .group(
                   children: [
@@ -317,7 +309,6 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             child: FPopoverMenu.tiles(
-              hover: true,
               menu: [
                 .group(
                   children: [
@@ -366,7 +357,6 @@ void main() {
           TestScaffold.app(
             platform: .macOS,
             child: FPopoverMenu.tiles(
-              hover: true,
               menu: [
                 .group(
                   children: [
@@ -406,7 +396,6 @@ void main() {
           TestScaffold.app(
             platform: .macOS,
             child: FPopoverMenu.tiles(
-              hover: true,
               menu: [
                 .group(
                   children: [
@@ -440,6 +429,44 @@ void main() {
         await tester.pumpAndSettle();
         expect(find.text('Email'), findsNothing);
       });
+
+      testWidgets('tap on hover-opened submenu tile does not close submenu', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FPopoverMenu.tiles(
+              menu: [
+                .group(
+                  children: [
+                    .tile(title: const Text('Edit'), onPress: () {}),
+                    .submenu(
+                      title: const Text('Share'),
+                      menu: [
+                        .group(
+                          children: [.tile(title: const Text('Email'), onPress: () {})],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+              builder: (_, controller, _) => FButton(onPress: controller.toggle, child: const Text('Open')),
+            ),
+          ),
+        );
+
+        await tester.tap(find.text('Open'));
+        await tester.pumpAndSettle();
+
+        final gesture = await tester.createPointerGesture();
+        await gesture.moveTo(tester.getCenter(find.text('Share')));
+        await tester.pump(const Duration(milliseconds: 150));
+        await tester.pumpAndSettle();
+        expect(find.text('Email'), findsOneWidget);
+
+        await tester.tap(find.text('Share'));
+        await tester.pumpAndSettle();
+        expect(find.text('Email'), findsOneWidget);
+      });
     });
 
     group('nested submenus', () {
@@ -447,7 +474,6 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             child: FPopoverMenu.tiles(
-              hover: false,
               menu: [
                 .group(
                   children: [
@@ -492,7 +518,6 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             child: FPopoverMenu.tiles(
-              hover: false,
               menu: [
                 .group(
                   children: [
@@ -542,7 +567,6 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             child: FPopoverMenu.tiles(
-              hover: false,
               menu: [
                 .group(
                   children: [
@@ -589,7 +613,6 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             child: FPopoverMenu.tiles(
-              hover: false,
               menu: [
                 .group(
                   children: [
