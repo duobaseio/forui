@@ -21,9 +21,7 @@ We've adjusted `FDialog`'s styling to be more visually pleasing on touch devices
 
 * **Breaking** Change `FDialogContentStyle` fields to have defaults instead of being required.
 * **Breaking** Change `VerticalContent` alignment from center to start.
-* **Breaking** Rename `FDialogContentStyle.bodySpacing` to `FDialogContentStyle.titleSpacing`.
-
-* **Breaking** Remove `FDialogContentStyle.bodySpacing`.
+* **Breaking** Remove `FDialogContentStyle.bodySpacing`. Use `FDialogContentStyle.titleSpacing` instead.
 
 
 ### `FItem`
@@ -47,6 +45,8 @@ We've adjusted `FDialog`'s styling to be more visually pleasing on touch devices
 ### `FTabs`
 * Add swipe/scroll navigation when `expands` is true, with `BouncingScrollPhysics` by default.
 * Add `FTabs.contentPhysics` to customize the content area's scroll physics.
+
+* **Breaking** Remove `FTabs.swipeablePhysics`. Use `FTabs.contentPhysics` instead.
 
 
 ### `FTile`
