@@ -31,6 +31,10 @@ class FStyle with Diagnosticable, _$FStyleFunctions {
   @override
   final FSizes sizes;
 
+  /// The haptic feedback. Defaults to `const FHapticFeedback()`.
+  @override
+  final FHapticFeedback hapticFeedback;
+
   /// The border radius.
   @override
   final FBorderRadius borderRadius;
@@ -61,6 +65,7 @@ class FStyle with Diagnosticable, _$FStyleFunctions {
     required this.iconStyle,
     required this.sizes,
     required this.tappableStyle,
+    this.hapticFeedback = const FHapticFeedback(),
     this.borderRadius = const FBorderRadius(),
     this.borderWidth = 1,
     this.pagePadding = const .symmetric(vertical: 8, horizontal: 12),

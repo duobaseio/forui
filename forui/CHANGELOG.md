@@ -24,6 +24,10 @@ We've adjusted `FDialog`'s styling to be more visually pleasing on touch devices
 * **Breaking** Remove `FDialogContentStyle.bodySpacing`. Use `FDialogContentStyle.titleSpacing` instead.
 
 
+### `FHapticFeedback`
+* Add `FHapticFeedback`.
+
+
 ### `FItem`
 * Add `FInheritedItemCallbacks`.
 * Add `FItemMixin.submenu(...)` shorthand for `FSubmenuItem`.
@@ -63,6 +67,10 @@ We've adjusted `FDialog`'s styling to be more visually pleasing on touch devices
 
 ### `FPortal`
 * Fix portal not repositioning when the child widget changes size.
+
+
+### `FStyle`
+* Add `FStyle.hapticFeedback`.
 
 
 ## 0.20.4

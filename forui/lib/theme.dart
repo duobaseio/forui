@@ -12,6 +12,7 @@ export 'src/theme/delta/edge_insets_geometry.dart';
 export 'src/theme/delta/icon_theme_data.dart';
 export 'src/theme/delta/text_style.dart';
 export 'src/theme/form_field_style.dart';
+export 'src/theme/haptic_feedback.dart';
 export 'src/theme/sizes.dart';
 export 'src/theme/style.dart';
 export 'src/theme/theme.dart';
