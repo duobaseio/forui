@@ -1,3 +1,9 @@
+## 0.20.4
+
+### `FSelect`
+* Fix `onChange` not being called when clearing via the clear button.
+
+
 ## 0.20.3
 
 ### `FToaster`

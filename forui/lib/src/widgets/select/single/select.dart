@@ -743,6 +743,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
       return;
     }
 
+    final previous = _controller.value;
     try {
       _mutating = true;
       if (_textController.text.isEmpty) {
@@ -750,6 +751,12 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
       }
     } finally {
       _mutating = false;
+    }
+
+    if (previous != _controller.value) {
+      if (widget.control case FSelectManagedControl(:final onChange?)) {
+        onChange(_controller.value);
+      }
     }
   }
 
