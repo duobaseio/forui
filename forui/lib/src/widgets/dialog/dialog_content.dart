@@ -14,6 +14,7 @@ sealed class Content extends StatelessWidget {
   final FDialogContentStyle style;
   final bool slideableActions;
   final CrossAxisAlignment alignment;
+  final Widget? image;
   final Widget? title;
   final TextAlign titleTextAlign;
   final Widget? body;
@@ -24,6 +25,7 @@ sealed class Content extends StatelessWidget {
     required this.style,
     required this.slideableActions,
     required this.alignment,
+    required this.image,
     required this.title,
     required this.titleTextAlign,
     required this.body,
@@ -39,25 +41,29 @@ sealed class Content extends StatelessWidget {
       mainAxisSize: .min,
       crossAxisAlignment: alignment,
       children: [
+        ?image,
+        if (image != null && (title != null || body != null)) SizedBox(height: style.imageSpacing),
         if (title case final title?)
           Padding(
-            padding: .only(bottom: style.titleSpacing),
+            padding: style.titlePadding,
             child: Semantics(
               container: true,
               child: DefaultTextStyle.merge(textAlign: titleTextAlign, style: style.titleTextStyle, child: title),
             ),
           ),
+        if (title != null && body != null) SizedBox(height: style.titleSpacing),
         if (body case final body?)
           Flexible(
             child: Padding(
-              padding: .only(bottom: style.bodySpacing),
+              padding: style.bodyPadding,
               child: Semantics(
                 container: true,
                 child: DefaultTextStyle.merge(textAlign: bodyTextAlign, style: style.bodyTextStyle, child: body),
               ),
             ),
           ),
-        if (title != null && body != null) SizedBox(height: style.contentSpacing),
+        if ((image != null || title != null || body != null) && actions.isNotEmpty)
+          SizedBox(height: style.contentSpacing),
         if (slideableActions) FTappableGroup(child: _actions(context)) else _actions(context),
       ],
     ),
@@ -83,6 +89,7 @@ class HorizontalContent extends Content {
   const HorizontalContent({
     required super.style,
     required super.slideableActions,
+    required super.image,
     required super.title,
     required super.body,
     required super.actions,
@@ -90,8 +97,11 @@ class HorizontalContent extends Content {
   }) : super(alignment: .start, titleTextAlign: .start, bodyTextAlign: .start);
 
   @override
-  Widget _actions(BuildContext context) =>
-      Row(mainAxisAlignment: .end, spacing: style.actionSpacing, children: actions);
+  Widget _actions(BuildContext context) => Row(
+    mainAxisAlignment: .end,
+    spacing: style.actionSpacing,
+    children: style.expandActions ? [for (final action in actions) Expanded(child: action)] : actions,
+  );
 }
 
 @internal
@@ -99,11 +109,12 @@ class VerticalContent extends Content {
   const VerticalContent({
     required super.style,
     required super.slideableActions,
+    required super.image,
     required super.title,
     required super.body,
     required super.actions,
     super.key,
-  }) : super(alignment: .center, titleTextAlign: .center, bodyTextAlign: .center);
+  }) : super(alignment: .start, titleTextAlign: .start, bodyTextAlign: .start);
 
   @override
   Widget _actions(BuildContext context) => Column(mainAxisSize: .min, spacing: style.actionSpacing, children: actions);
@@ -119,34 +130,49 @@ class FDialogContentStyle with Diagnosticable, _$FDialogContentStyleFunctions {
   @override
   final TextStyle bodyTextStyle;
 
-  /// The padding surrounding the content.
+  /// The padding surrounding the content. Defaults to `EdgeInsets.only(left: 16, right: 16, top: 18, bottom: 18)`.
   @override
   final EdgeInsetsGeometry padding;
 
-  /// The spacing below the title.
+  /// The padding surrounding the title. Defaults to `EdgeInsets.symmetric(horizontal: 8)`.
+  @override
+  final EdgeInsetsGeometry titlePadding;
+
+  /// The padding surrounding the body. Defaults to `EdgeInsets.symmetric(horizontal: 8)`.
+  @override
+  final EdgeInsetsGeometry bodyPadding;
+
+  /// The spacing between the image and the title/body. Ignored if either is not provided. Defaults to 9.
+  @override
+  final double imageSpacing;
+
+  /// The spacing between the title and the body. Ignored if either is not provided. Defaults to 9.
   @override
   final double titleSpacing;
 
-  /// The spacing below the body.
-  @override
-  final double bodySpacing;
-
-  /// The spacing between the content (title/body) and the actions. Defaults to 8.
+  /// The spacing between the content (title/body) and the actions. Ignored if either is not provided. Defaults to 20.
   @override
   final double contentSpacing;
 
-  /// The space between actions.
+  /// The space between actions. Defaults to 10.
   @override
   final double actionSpacing;
+
+  /// Whether each action expands to fill the available width. Defaults to true.
+  @override
+  final bool expandActions;
 
   /// Creates a [FDialogContentStyle].
   FDialogContentStyle({
     required this.titleTextStyle,
     required this.bodyTextStyle,
-    required this.padding,
-    required this.titleSpacing,
-    required this.bodySpacing,
-    required this.actionSpacing,
-    this.contentSpacing = 8,
+    this.padding = const .only(left: 16, right: 16, top: 18, bottom: 18),
+    this.titlePadding = const .symmetric(horizontal: 8),
+    this.bodyPadding = const .symmetric(horizontal: 8),
+    this.imageSpacing = 9,
+    this.titleSpacing = 9,
+    this.contentSpacing = 20,
+    this.actionSpacing = 10,
+    this.expandActions = true,
   });
 }

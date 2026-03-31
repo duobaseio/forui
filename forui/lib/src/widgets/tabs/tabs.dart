@@ -79,21 +79,14 @@ class FTabs extends StatefulWidget {
   /// Otherwise each tab gets an equal share of the available space.
   final bool scrollable;
 
-  /// Whether the tab content area can be scrolled horizontally. Only active when [expands] is true.
+  /// How the tab should respond to user input.
   ///
-  /// Defaults to matching platform conventions: true on mobile (touch devices) and false on desktop.
-  final bool? swipeablePhysics;
-
-  /// The scroll physics used by both the tab bar (when [scrollable] is true) and the tab content area.
-  ///
-  /// When null:
-  ///  * the tab bar uses the default physics from [TabBar.physics], and
-  ///  * the tab content area, when swipeable ([expands] is true and [swipeablePhysics] resolves to true),
-  ///    uses [BouncingScrollPhysics].
-  ///
-  /// Note that if [swipeablePhysics] resolves to false or [expands] is false, the content area will not be
-  /// horizontally scrollable regardless of this physics property.
+  /// Defaults to matching platform conventions.
   final ScrollPhysics? physics;
+
+  /// The physics for scrolling between tab content areas horizontally using a scroll wheel on desktop and swipe
+  /// gestures on touch devices. Ignored if [expands] is false. Defaults to [BouncingScrollPhysics].
+  final ScrollPhysics contentPhysics;
 
   /// A callback that is triggered when a tab is pressed. It is called **before** the tab switching animation begins
   /// and the controller is updated.
@@ -120,8 +113,8 @@ class FTabs extends StatefulWidget {
     required this.children,
     this.control = const .managed(),
     this.scrollable = false,
-    this.swipeablePhysics,
     this.physics,
+    this.contentPhysics = const BouncingScrollPhysics(),
     this.style = const .context(),
     this.onPress,
     this.mouseCursor = .defer,
@@ -136,7 +129,7 @@ class FTabs extends StatefulWidget {
       ..add(DiagnosticsProperty('control', control))
       ..add(DiagnosticsProperty('style', style))
       ..add(FlagProperty('scrollable', value: scrollable, ifTrue: 'scrollable'))
-      ..add(DiagnosticsProperty('swipeablePhysics', swipeablePhysics))
+      ..add(DiagnosticsProperty('contentPhysics', contentPhysics))
       ..add(DiagnosticsProperty('physics', physics))
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
@@ -180,53 +173,14 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    if (widget.expands) {
-      return LayoutBuilder(
-        builder: (context, constraints) {
-          assert(
-            constraints.hasBoundedHeight,
-            'FTabs(expands: true) was placed in a container with unbound height. '
-            'Consider setting expands to false or placing FTabs in a container with a fixed height.',
-          );
-
-          return _buildTabs(context, constraints.hasBoundedHeight);
-        },
-      );
-    }
-
-    return _buildTabs(context, true);
-  }
-
-  Widget _buildTabs(BuildContext context, bool hasBoundedHeight) {
     final theme = context.theme;
     final style = widget.style(context.theme.tabsStyle);
     final localizations = Localizations.of<MaterialLocalizations>(context, MaterialLocalizations);
 
-    final isSwipeablePhysics = widget.swipeablePhysics ?? context.platformVariant.touch;
-    final useTabBarView = widget.expands && isSwipeablePhysics && hasBoundedHeight;
-
-    final ScrollPhysics physics;
-    if (isSwipeablePhysics) {
-      final ScrollPhysics basePhysics = widget.physics ?? const BouncingScrollPhysics();
-      physics = basePhysics is PageScrollPhysics ? basePhysics : PageScrollPhysics(parent: basePhysics);
-    } else {
-      physics = const NeverScrollableScrollPhysics();
-    }
-
-    final content = DefaultTextStyle(
-      style: theme.typography.md.copyWith(color: theme.colors.foreground),
-      child: useTabBarView
-          ? TabBarView(
-              controller: _controller._controller,
-              physics: physics,
-              children: [for (final tab in widget.children) tab.child],
-            )
-          : widget.children[_controller.index].child,
-    );
-
     final tabs = Material(
       color: Colors.transparent,
       child: Column(
+        mainAxisSize: .min,
         children: [
           DecoratedBox(
             decoration: style.decoration,
@@ -249,7 +203,18 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
             ),
           ),
           SizedBox(height: style.spacing),
-          if (widget.expands) Expanded(child: content) else content,
+          DefaultTextStyle(
+            style: theme.typography.md.copyWith(color: theme.colors.foreground),
+            child: widget.expands
+                ? Expanded(
+                    child: TabBarView(
+                      controller: _controller._controller,
+                      physics: widget.contentPhysics,
+                      children: [for (final tab in widget.children) tab.child],
+                    ),
+                  )
+                : widget.children[_controller.index].child,
+          ),
         ],
       ),
     );

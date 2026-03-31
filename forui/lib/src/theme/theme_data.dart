@@ -681,7 +681,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       dateFieldStyle: dateFieldStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       determinateProgressStyle: determinateProgressStyle ?? .inherit(colors: colors, style: style),
       dialogRouteStyle: dialogRouteStyle ?? .inherit(colors: colors),
-      dialogStyle: dialogStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      dialogStyle: dialogStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       dividerStyles: dividerStyles == null
           ? FDividerStyles.inherit(colors: colors, style: style)
           : FDividerStyles(dividerStyles),

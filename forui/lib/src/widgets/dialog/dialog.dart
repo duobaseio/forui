@@ -294,6 +294,8 @@ class FDialog extends StatefulWidget {
   /// The [Axis.vertical] layout with two actions is:
   /// ```diagram
   /// |--------------------|
+  /// | [image]            |
+  /// |                    |
   /// | [title]            |
   /// |                    |
   /// | [body]             |
@@ -306,6 +308,8 @@ class FDialog extends StatefulWidget {
   /// The [Axis.horizontal] layout with two actions (in LTR locale) is:
   /// ```diagram
   /// |----------------------------------------------|
+  /// | [image]                                      |
+  /// |                                              |
   /// | [title]                                      |
   /// |                                              |
   /// | [body]                                       |
@@ -318,6 +322,7 @@ class FDialog extends StatefulWidget {
     this.animation,
     this.semanticsLabel,
     this.constraints = const BoxConstraints(minWidth: 280, maxWidth: 560),
+    Widget? image,
     Widget? title,
     Widget? body,
     Axis direction = .vertical,
@@ -326,6 +331,7 @@ class FDialog extends StatefulWidget {
          .horizontal => (context, style) => HorizontalContent(
            style: style.contentStyle.resolve({context.platformVariant}),
            slideableActions: style.slideableActions.resolve({context.platformVariant}),
+           image: image,
            title: title,
            body: body,
            actions: actions.reversed.toList(),
@@ -333,6 +339,7 @@ class FDialog extends StatefulWidget {
          .vertical => (context, style) => VerticalContent(
            style: style.contentStyle.resolve({context.platformVariant, FDialogAxisVariant.vertical}),
            slideableActions: style.slideableActions.resolve({context.platformVariant, FDialogAxisVariant.vertical}),
+           image: image,
            title: title,
            body: body,
            actions: actions,
@@ -350,6 +357,7 @@ class FDialog extends StatefulWidget {
     this.animation,
     this.semanticsLabel,
     this.constraints = const BoxConstraints(minWidth: 280, maxWidth: 560),
+    Widget? image,
     Widget? title,
     Widget? body,
     super.key,
@@ -357,6 +365,7 @@ class FDialog extends StatefulWidget {
          final width when width < context.theme.breakpoints.sm => VerticalContent(
            style: style.contentStyle.resolve({context.platformVariant, FDialogAxisVariant.vertical}),
            slideableActions: style.slideableActions.resolve({context.platformVariant, FDialogAxisVariant.vertical}),
+           image: image,
            title: title,
            body: body,
            actions: actions,
@@ -364,6 +373,7 @@ class FDialog extends StatefulWidget {
          _ => HorizontalContent(
            style: style.contentStyle.resolve({context.platformVariant}),
            slideableActions: style.slideableActions.resolve({context.platformVariant}),
+           image: image,
            title: title,
            body: body,
            actions: actions.reversed.toList(),
@@ -520,8 +530,7 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
 
   /// The dialog content's style.
   @override
-  final FVariants<FDialogAxisVariantConstraint, FDialogAxisVariant, FDialogContentStyle, FDialogContentStyleDelta>
-  contentStyle;
+  final FDialogContentStyles contentStyle;
 
   /// Whether the dialog's actions support pressing an action and sliding to another. Defaults to true on touch platforms.
   @override
@@ -542,49 +551,97 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
   });
 
   /// Creates a [FDialogStyle] that inherits its properties.
-  factory FDialogStyle.inherit({required FStyle style, required FColors colors, required FTypography typography}) {
-    final title = typography.lg.copyWith(fontWeight: .w600, color: colors.foreground);
-    final body = typography.sm.copyWith(color: colors.mutedForeground);
+  factory FDialogStyle.inherit({
+    required FStyle style,
+    required FColors colors,
+    required FTypography typography,
+    required bool touch,
+  }) => .new(
+    decoration: ShapeDecoration(
+      shape: RoundedSuperellipseBorder(
+        side: BorderSide(color: colors.border, width: style.borderWidth),
+        borderRadius: style.borderRadius.md,
+      ),
+      color: colors.card,
+    ),
+    slideableActions: FVariants(
+      false,
+      variants: {
+        [.touch]: true,
+      },
+    ),
+    contentStyle: FDialogContentStyles.inherit(colors: colors, typography: typography, touch: touch),
+  );
+}
 
-    final horizontal = FDialogContentStyle(
-      titleTextStyle: title,
-      bodyTextStyle: body,
-      padding: const .only(left: 16, right: 16, top: 8, bottom: 14),
-      titleSpacing: 4,
-      bodySpacing: 8,
-      actionSpacing: 10,
-    );
+/// [FDialog] content's styles.
+extension type FDialogContentStyles(
+  FVariants<FDialogAxisVariantConstraint, FDialogAxisVariant, FDialogContentStyle, FDialogContentStyleDelta> _
+)
+    implements
+        FVariants<FDialogAxisVariantConstraint, FDialogAxisVariant, FDialogContentStyle, FDialogContentStyleDelta> {
+  /// Creates a [FDialogContentStyles] that inherits its properties.
+  factory FDialogContentStyles.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required bool touch,
+  }) {
+    if (touch) {
+      final title = typography.md.copyWith(fontWeight: .w600, color: colors.foreground, height: 1.25);
+      final body = typography.xs.copyWith(color: colors.mutedForeground);
 
-    return .new(
-      decoration: ShapeDecoration(
-        shape: RoundedSuperellipseBorder(
-          side: BorderSide(color: colors.border, width: style.borderWidth),
-          borderRadius: style.borderRadius.md,
+      final horizontal = FDialogContentStyle(titleTextStyle: title, bodyTextStyle: body);
+
+      return FDialogContentStyles(
+        FVariants.from(
+          horizontal,
+          variants: {
+            [.horizontal]: horizontal,
+            [.vertical]: FDialogContentStyle(titleTextStyle: title, bodyTextStyle: body),
+          },
         ),
-        color: colors.card,
-      ),
-      slideableActions: FVariants(
-        false,
-        variants: {
-          [.touch]: true,
-        },
-      ),
-      contentStyle: FVariants(
-        horizontal,
-        variants: {
-          [.horizontal]: horizontal,
-          [.vertical]: FDialogContentStyle(
-            titleTextStyle: title,
-            bodyTextStyle: body,
-            padding: const .only(left: 16, right: 16, top: 8, bottom: 14),
-            titleSpacing: 4,
-            bodySpacing: 6,
-            actionSpacing: 8,
-          ),
-        },
-      ),
-    );
+      );
+    } else {
+      final title = typography.md.copyWith(fontWeight: .w600, color: colors.foreground, height: 1.25);
+      final body = typography.sm.copyWith(color: colors.mutedForeground);
+
+      final horizontal = FDialogContentStyle(
+        titleTextStyle: title,
+        bodyTextStyle: body,
+        padding: const .only(left: 16, right: 16, top: 14, bottom: 14),
+        titlePadding: .zero,
+        bodyPadding: .zero,
+        titleSpacing: 5,
+        contentSpacing: 16,
+        actionSpacing: 8,
+        expandActions: false,
+      );
+
+      return FDialogContentStyles(
+        FVariants.from(
+          horizontal,
+          variants: {
+            [.horizontal]: horizontal,
+            [.vertical]: FDialogContentStyle(
+              titleTextStyle: title,
+              bodyTextStyle: body,
+              padding: const .only(left: 16, right: 16, top: 14, bottom: 14),
+              titleSpacing: 5,
+              contentSpacing: 16,
+              actionSpacing: 8,
+              expandActions: false,
+            ),
+          },
+        ),
+      );
+    }
   }
+
+  /// The horizontal content style.
+  FDialogContentStyle get horizontal => resolve({FDialogAxisVariant.horizontal});
+
+  /// The vertical content style.
+  FDialogContentStyle get vertical => resolve({FDialogAxisVariant.vertical});
 }
 
 /// Motion-related properties for [FDialog].

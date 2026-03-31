@@ -17,6 +17,7 @@ final dialog = FDialog(
   // {@endcategory}
   // {@category "Core"}
   style: const .delta(insetPadding: .value(.zero)),
+  image: null,
   title: const Text('Title'),
   body: const Text('Body'),
   actions: [FButton(onPress: () {}, child: const Text('Action'))],
@@ -35,6 +36,7 @@ final adaptive = FDialog.adaptive(
   // {@endcategory}
   // {@category "Core"}
   style: const .delta(insetPadding: .value(.zero)),
+  image: null,
   title: const Text('Title'),
   body: const Text('Body'),
   actions: [FButton(onPress: () {}, child: const Text('Action'))],

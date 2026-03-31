@@ -9,6 +9,21 @@
 * Fix default text styles created by `FTypography` to include a `fontFamily`.
 
 
+### `FDialog`
+We've adjusted `FDialog`'s styling to be more visually pleasing on touch devices.
+
+* Add `FDialog.image` parameter.
+* Add `FDialogContentStyle.titlePadding`.
+* Add `FDialogContentStyle.bodyPadding`.
+* Add `FDialogContentStyle.imageSpacing`.
+* Add `FDialogContentStyle.expandActions`.
+* Add `FDialogContentStyles` extension type.
+
+* **Breaking** Change `FDialogContentStyle` fields to have defaults instead of being required.
+* **Breaking** Change `VerticalContent` alignment from center to start.
+* **Breaking** Remove `FDialogContentStyle.bodySpacing`. Use `FDialogContentStyle.titleSpacing` instead.
+
+
 ### `FItem`
 * Add `FInheritedItemCallbacks`.
 * Add `FItemMixin.submenu(...)` shorthand for `FSubmenuItem`.
@@ -28,9 +43,10 @@
 
 
 ### `FTabs`
-* Add swipe navigation when `expands` is true. When swipe navigation is enabled (i.e. `expands` is true and `swipeablePhysics` resolves to true), the content area's `physics` defaults to `BouncingScrollPhysics`.
-* Add `FTabs.swipeablePhysics` to toggle swipe navigation independently from `scrollable`.
-* Add assertion to catch `FTabs(expands: true)` in containers with unbounded height.
+* Add swipe/scroll navigation when `expands` is true, with `BouncingScrollPhysics` by default.
+* Add `FTabs.contentPhysics` to customize the content area's scroll physics.
+
+* **Breaking** Remove `FTabs.swipeablePhysics`. Use `FTabs.contentPhysics` instead.
 
 
 ### `FTile`
@@ -47,6 +63,12 @@
 
 ### `FPortal`
 * Fix portal not repositioning when the child widget changes size.
+
+
+## 0.20.4
+
+### `FSelect`
+* Fix `onChange` not being called when clearing via the clear button.
 
 
 ## 0.20.3
