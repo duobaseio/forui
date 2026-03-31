@@ -9,6 +9,23 @@
 * Fix default text styles created by `FTypography` to include a `fontFamily`.
 
 
+### `FDialog`
+We've adjusted `FDialog`'s styling to be more visually pleasing on touch devices.
+
+* Add `FDialog.image` parameter.
+* Add `FDialogContentStyle.titlePadding`.
+* Add `FDialogContentStyle.bodyPadding`.
+* Add `FDialogContentStyle.imageSpacing`.
+* Add `FDialogContentStyle.expandActions`.
+* Add `FDialogContentStyles` extension type.
+
+* **Breaking** Change `FDialogContentStyle` fields to have defaults instead of being required.
+* **Breaking** Change `VerticalContent` alignment from center to start.
+* **Breaking** Rename `FDialogContentStyle.bodySpacing` to `FDialogContentStyle.titleSpacing`.
+
+* **Breaking** Remove `FDialogContentStyle.bodySpacing`.
+
+
 ### `FItem`
 * Add `FInheritedItemCallbacks`.
 * Add `FItemMixin.submenu(...)` shorthand for `FSubmenuItem`.

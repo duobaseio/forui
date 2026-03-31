@@ -91,6 +91,7 @@ Forui provides the following widgets:
   - Picker
   - Radio
   - Multi-select
+  - OTP Field
   - Select
   - Select Group
   - Slider

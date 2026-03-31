@@ -31,6 +31,7 @@ dependencies:
   flutter_hooks: ^0.21.0
   forui:
   intl: any
+  lottie: ^3.3.2
   sugar: ^4.0.0
   wakelock_plus: ^1.2.8
 
@@ -49,6 +50,8 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
+  assets:
+    - assets/profile.json
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
