@@ -41,7 +41,7 @@ sealed class Content extends StatelessWidget {
       mainAxisSize: .min,
       crossAxisAlignment: alignment,
       children: [
-        if (image case final image?) image,
+        ?image,
         if (image != null && (title != null || body != null)) SizedBox(height: style.imageSpacing),
         if (title case final title?)
           Padding(
@@ -62,7 +62,8 @@ sealed class Content extends StatelessWidget {
               ),
             ),
           ),
-        if ((image != null || title != null || body != null) && actions.isNotEmpty) SizedBox(height: style.contentSpacing),
+        if ((image != null || title != null || body != null) && actions.isNotEmpty)
+          SizedBox(height: style.contentSpacing),
         if (slideableActions) FTappableGroup(child: _actions(context)) else _actions(context),
       ],
     ),
@@ -116,11 +117,7 @@ class VerticalContent extends Content {
   }) : super(alignment: .start, titleTextAlign: .start, bodyTextAlign: .start);
 
   @override
-  Widget _actions(BuildContext context) => Column(
-    mainAxisSize: .min,
-    spacing: style.actionSpacing,
-    children: actions,
-  );
+  Widget _actions(BuildContext context) => Column(mainAxisSize: .min, spacing: style.actionSpacing, children: actions);
 }
 
 /// [FDialog] content's style.

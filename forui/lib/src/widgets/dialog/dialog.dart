@@ -556,29 +556,30 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
     required FColors colors,
     required FTypography typography,
     required bool touch,
-  }) =>
-    .new(
-      decoration: ShapeDecoration(
-        shape: RoundedSuperellipseBorder(
-          side: BorderSide(color: colors.border, width: style.borderWidth),
-          borderRadius: style.borderRadius.md,
-        ),
-        color: colors.card,
+  }) => .new(
+    decoration: ShapeDecoration(
+      shape: RoundedSuperellipseBorder(
+        side: BorderSide(color: colors.border, width: style.borderWidth),
+        borderRadius: style.borderRadius.md,
       ),
-      slideableActions: FVariants(
-        false,
-        variants: {
-          [.touch]: true,
-        },
-      ),
-      contentStyle: FDialogContentStyles.inherit(colors: colors, typography: typography, touch: touch),
-    );
+      color: colors.card,
+    ),
+    slideableActions: FVariants(
+      false,
+      variants: {
+        [.touch]: true,
+      },
+    ),
+    contentStyle: FDialogContentStyles.inherit(colors: colors, typography: typography, touch: touch),
+  );
 }
 
 /// [FDialog] content's styles.
 extension type FDialogContentStyles(
   FVariants<FDialogAxisVariantConstraint, FDialogAxisVariant, FDialogContentStyle, FDialogContentStyleDelta> _
-) implements FVariants<FDialogAxisVariantConstraint, FDialogAxisVariant, FDialogContentStyle, FDialogContentStyleDelta> {
+)
+    implements
+        FVariants<FDialogAxisVariantConstraint, FDialogAxisVariant, FDialogContentStyle, FDialogContentStyleDelta> {
   /// Creates a [FDialogContentStyles] that inherits its properties.
   factory FDialogContentStyles.inherit({
     required FColors colors,
@@ -589,20 +590,14 @@ extension type FDialogContentStyles(
       final title = typography.md.copyWith(fontWeight: .w600, color: colors.foreground, height: 1.25);
       final body = typography.xs.copyWith(color: colors.mutedForeground);
 
-      final horizontal = FDialogContentStyle(
-        titleTextStyle: title,
-        bodyTextStyle: body,
-      );
+      final horizontal = FDialogContentStyle(titleTextStyle: title, bodyTextStyle: body);
 
       return FDialogContentStyles(
         FVariants.from(
           horizontal,
           variants: {
             [.horizontal]: horizontal,
-            [.vertical]: FDialogContentStyle(
-              titleTextStyle: title,
-              bodyTextStyle: body,
-            ),
+            [.vertical]: FDialogContentStyle(titleTextStyle: title, bodyTextStyle: body),
           },
         ),
       );
