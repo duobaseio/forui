@@ -65,6 +65,12 @@ We've adjusted `FDialog`'s styling to be more visually pleasing on touch devices
 * Fix portal not repositioning when the child widget changes size.
 
 
+## 0.20.4
+
+### `FSelect`
+* Fix `onChange` not being called when clearing via the clear button.
+
+
 ## 0.20.3
 
 ### `FToaster`

@@ -153,6 +153,35 @@ void main() {
       await tester.pumpWidget(const SizedBox());
     });
 
+    testWidgets('onChange called when clearing via clear button', (tester) async {
+      String? value = 'A';
+      final values = <String?>[];
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: StatefulBuilder(
+            builder: (context, setState) => FSelect<String>(
+              key: key,
+              clearable: true,
+              control: .lifted(
+                value: value,
+                onChange: (v) => setState(() {
+                  value = v;
+                  values.add(v);
+                }),
+              ),
+              items: letters,
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.bySemanticsLabel('Clear'));
+      await tester.pumpAndSettle();
+
+      expect(values, [null]);
+    });
+
     testWidgets('showing popover does not cause error', (tester) async {
       String? value;
 
@@ -198,6 +227,26 @@ void main() {
       await tester.pump();
 
       expect(changedValue, 'A');
+    });
+
+    testWidgets('onChange called when clearing via clear button', (tester) async {
+      final values = <String?>[];
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FSelect<String>(
+            key: key,
+            clearable: true,
+            control: .managed(initial: 'A', onChange: values.add),
+            items: letters,
+          ),
+        ),
+      );
+
+      await tester.tap(find.bySemanticsLabel('Clear'));
+      await tester.pumpAndSettle();
+
+      expect(values, [null]);
     });
   });
 

@@ -32,6 +32,31 @@ void main() {
 
       expect(changedValue, const FTime(0, 1));
     });
+
+    testWidgets('onChange called when clearing via clear button', (tester) async {
+      final values = <FTime?>[];
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          locale: const Locale('en', 'SG'),
+          child: FTimeField(
+            key: key,
+            clearable: true,
+            control: .managed(onChange: values.add),
+          ),
+        ),
+      );
+
+      await tester.enterText(find.byKey(key), '12:30 pm');
+      await tester.pumpAndSettle();
+
+      expect(values, [const FTime(12, 30)]);
+
+      await tester.tap(find.bySemanticsLabel('Clear'));
+      await tester.pumpAndSettle();
+
+      expect(values, [const FTime(12, 30), null]);
+    });
   });
 
   group('lifted', () {
