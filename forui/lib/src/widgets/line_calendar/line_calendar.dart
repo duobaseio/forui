@@ -196,11 +196,13 @@ class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
 
   /// The text style for the date.
   @override
-  final FVariants<FLineCalendarItemVariantConstraint, FLineCalendarItemVariant, TextStyle, TextStyleDelta> dateTextStyle;
+  final FVariants<FLineCalendarItemVariantConstraint, FLineCalendarItemVariant, TextStyle, TextStyleDelta>
+  dateTextStyle;
 
   /// The text style for the day of the week.
   @override
-  final FVariants<FLineCalendarItemVariantConstraint, FLineCalendarItemVariant, TextStyle, TextStyleDelta> weekdayTextStyle;
+  final FVariants<FLineCalendarItemVariantConstraint, FLineCalendarItemVariant, TextStyle, TextStyleDelta>
+  weekdayTextStyle;
 
   /// The tappable style.
   @override
@@ -232,9 +234,7 @@ class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
     return .new(
       decoration: FVariants.from(
         ShapeDecoration(
-          shape: RoundedSuperellipseBorder(
-            borderRadius: style.borderRadius.md,
-          ),
+          shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
           color: colors.card,
         ),
         variants: {

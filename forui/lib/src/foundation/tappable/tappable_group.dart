@@ -43,11 +43,7 @@ class FTappableGroup extends StatefulWidget {
   final Widget child;
 
   /// Creates an [FTappableGroup].
-  const FTappableGroup({
-    required this.child,
-    this.slidePressHapticFeedback = FHapticFeedback.noFeedback,
-    super.key,
-  });
+  const FTappableGroup({required this.child, this.slidePressHapticFeedback = FHapticFeedback.noFeedback, super.key});
 
   @override
   State<FTappableGroup> createState() => _FTappableGroupState();
