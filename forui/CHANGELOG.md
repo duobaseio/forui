@@ -18,6 +18,7 @@ We've adjusted `FDialog`'s styling to be more visually pleasing on touch devices
 * Add `FDialogContentStyle.imageSpacing`.
 * Add `FDialogContentStyle.expandActions`.
 * Add `FDialogContentStyles` extension type.
+* Add `FDialogStyle.slidePressHapticFeedback`.
 
 * **Breaking** Change `FDialogContentStyle` fields to have defaults instead of being required.
 * **Breaking** Change `VerticalContent` alignment from center to start.
@@ -31,6 +32,10 @@ We've adjusted `FDialog`'s styling to be more visually pleasing on touch devices
 ### `FItem`
 * Add `FInheritedItemCallbacks`.
 * Add `FItemMixin.submenu(...)` shorthand for `FSubmenuItem`.
+
+
+### `FItemGroup`
+* Add `FItemGroupStyle.slidePressHapticFeedback`.
 
 
 ### `FPopoverMenu`
@@ -57,12 +62,28 @@ We've adjusted `FDialog`'s styling to be more visually pleasing on touch devices
 * Add `FTileMixin.submenu(...)` shorthand for `FSubmenuTile`.
 
 
+### `FTileGroup`
+* Add `FTileGroupStyle.slidePressHapticFeedback`.
+
+
+### `FTimePicker`
+* Add `FTimePickerStyle.hapticFeedback`.
+
+
+### `FTooltip`
+* Add `FTooltipStyle.hapticFeedback`.
+
+
 ### `FOtpField`
 * Add `FOtpField`.
 
 
 ### `FOverlay`
 * Add `FOverlay`.
+
+
+### `FPicker`
+* Add `FPickerStyle.hapticFeedback`.
 
 
 ### `FPortal`

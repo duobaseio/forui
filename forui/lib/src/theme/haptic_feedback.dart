@@ -16,7 +16,8 @@ import 'package:meta/meta.dart';
 /// FHapticFeedback(selectionClick: () async => debugPrint('click!'))
 /// ```
 final class FHapticFeedback with Diagnosticable {
-  static Future<void> _none() async {}
+  /// A no-op haptic feedback function.
+  static Future<void> noFeedback() async {}
 
   /// Provides a haptic feedback corresponding to a collision impact with a heavy mass.
   ///
@@ -59,8 +60,6 @@ final class FHapticFeedback with Diagnosticable {
   final Future<void> Function() vibrate;
 
   /// Creates an [FHapticFeedback].
-  ///
-  /// All fields default to their corresponding [HapticFeedback] static methods.
   const FHapticFeedback({
     this.heavyImpact = HapticFeedback.heavyImpact,
     this.lightImpact = HapticFeedback.lightImpact,
@@ -74,14 +73,14 @@ final class FHapticFeedback with Diagnosticable {
 
   /// Creates an [FHapticFeedback] with no haptic feedback.
   const FHapticFeedback.none()
-    : heavyImpact = _none,
-      lightImpact = _none,
-      mediumImpact = _none,
-      selectionClick = _none,
-      successNotification = _none,
-      warningNotification = _none,
-      errorNotification = _none,
-      vibrate = _none;
+    : heavyImpact = noFeedback,
+      lightImpact = noFeedback,
+      mediumImpact = noFeedback,
+      selectionClick = noFeedback,
+      successNotification = noFeedback,
+      warningNotification = noFeedback,
+      errorNotification = noFeedback,
+      vibrate = noFeedback;
 
   /// Returns a copy of this [FHapticFeedback] with the given properties replaced.
   @useResult

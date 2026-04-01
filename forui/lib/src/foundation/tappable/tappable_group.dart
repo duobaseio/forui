@@ -34,14 +34,29 @@ class FTappableGroup extends StatefulWidget {
   /// [FPortal] automatically applies this.
   static Widget isolate({required Widget child}) => TappableGroupScope(entries: null, child: child);
 
+  /// The haptic feedback for when the user slides from one tappable to another.
+  ///
+  /// Defaults to [FHapticFeedback.noFeedback].
+  final Future<void> Function() slidePressHapticFeedback;
+
   /// The child widget, typically containing multiple [FTappable]s.
   final Widget child;
 
   /// Creates an [FTappableGroup].
-  const FTappableGroup({required this.child, super.key});
+  const FTappableGroup({
+    required this.child,
+    this.slidePressHapticFeedback = FHapticFeedback.noFeedback,
+    super.key,
+  });
 
   @override
   State<FTappableGroup> createState() => _FTappableGroupState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(ObjectFlagProperty.has('slidePressHapticFeedback', slidePressHapticFeedback));
+  }
 }
 
 class _FTappableGroupState extends State<FTappableGroup> {
@@ -53,8 +68,12 @@ class _FTappableGroupState extends State<FTappableGroup> {
     child: RawGestureDetector(
       gestures: <Type, GestureRecognizerFactory>{
         TappableGroupGestureRecognizer: GestureRecognizerFactoryWithHandlers<TappableGroupGestureRecognizer>(
-          () => TappableGroupGestureRecognizer(_entries),
-          (instance) => instance.entries = _entries,
+          () => TappableGroupGestureRecognizer(_entries, widget.slidePressHapticFeedback),
+          (instance) {
+            instance
+              ..entries = _entries
+              ..slidePressHapticFeedback = widget.slidePressHapticFeedback;
+          },
         ),
       },
       child: widget.child,

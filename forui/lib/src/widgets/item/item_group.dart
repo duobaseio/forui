@@ -434,7 +434,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
     );
 
     if (maxHeight.isInfinite && style.slideableItems.resolve({context.platformVariant})) {
-      child = FTappableGroup(child: child);
+      child = FTappableGroup(slidePressHapticFeedback: style.slidePressHapticFeedback, child: child);
     }
 
     return Semantics(
@@ -533,12 +533,17 @@ class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
   @override
   final FVariants<FItemGroupVariantConstraint, FItemGroupVariant, bool, Delta> slideableItems;
 
+  /// The haptic feedback for when the user slides from one item to another when [slideableItems] is enabled.
+  @override
+  final Future<void> Function() slidePressHapticFeedback;
+
   /// Creates a [FItemGroupStyle].
   FItemGroupStyle({
     required this.decoration,
     required this.dividerColor,
     required this.dividerWidth,
     required this.itemStyles,
+    required this.slidePressHapticFeedback,
     this.slideableItems = const .all(true),
     this.spacing = 4,
   });
@@ -554,6 +559,7 @@ class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
          dividerColor: .all(colors.border),
          dividerWidth: style.borderWidth,
          slideableItems: const .all(true),
+         slidePressHapticFeedback: style.hapticFeedback.selectionClick,
          itemStyles: FItemStyles.inherit(colors: colors, typography: typography, style: style, touch: touch),
        );
 }

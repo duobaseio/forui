@@ -13,6 +13,7 @@ part 'dialog_content.design.dart';
 sealed class Content extends StatelessWidget {
   final FDialogContentStyle style;
   final bool slideableActions;
+  final Future<void> Function() slidePressHapticFeedback;
   final CrossAxisAlignment alignment;
   final Widget? image;
   final Widget? title;
@@ -24,6 +25,7 @@ sealed class Content extends StatelessWidget {
   const Content({
     required this.style,
     required this.slideableActions,
+    required this.slidePressHapticFeedback,
     required this.alignment,
     required this.image,
     required this.title,
@@ -64,7 +66,10 @@ sealed class Content extends StatelessWidget {
           ),
         if ((image != null || title != null || body != null) && actions.isNotEmpty)
           SizedBox(height: style.contentSpacing),
-        if (slideableActions) FTappableGroup(child: _actions(context)) else _actions(context),
+        if (slideableActions)
+          FTappableGroup(slidePressHapticFeedback: slidePressHapticFeedback, child: _actions(context))
+        else
+          _actions(context),
       ],
     ),
   );
@@ -77,6 +82,7 @@ sealed class Content extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(FlagProperty('slideableActions', value: slideableActions, ifTrue: 'slideableActions'))
+      ..add(ObjectFlagProperty.has('slidePressHapticFeedback', slidePressHapticFeedback))
       ..add(EnumProperty('alignment', alignment))
       ..add(EnumProperty('titleTextAlign', titleTextAlign))
       ..add(EnumProperty('bodyTextAlign', bodyTextAlign))
@@ -89,6 +95,7 @@ class HorizontalContent extends Content {
   const HorizontalContent({
     required super.style,
     required super.slideableActions,
+    required super.slidePressHapticFeedback,
     required super.image,
     required super.title,
     required super.body,
@@ -109,6 +116,7 @@ class VerticalContent extends Content {
   const VerticalContent({
     required super.style,
     required super.slideableActions,
+    required super.slidePressHapticFeedback,
     required super.image,
     required super.title,
     required super.body,

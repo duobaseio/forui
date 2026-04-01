@@ -325,7 +325,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
     );
 
     if (maxHeight.isInfinite && style.slideableTiles.resolve({context.platformVariant})) {
-      child = FTappableGroup(child: child);
+      child = FTappableGroup(slidePressHapticFeedback: style.slidePressHapticFeedback, child: child);
     }
 
     return FLabel(
@@ -425,6 +425,10 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
   @override
   final FVariants<FItemGroupVariantConstraint, FItemGroupVariant, bool, Delta> slideableTiles;
 
+  /// The haptic feedback for when the user slides from one tile to another when [slideableTiles] is enabled.
+  @override
+  final Future<void> Function() slidePressHapticFeedback;
+
   /// Creates a [FTileGroupStyle].
   FTileGroupStyle({
     required this.decoration,
@@ -434,6 +438,7 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
     required super.labelTextStyle,
     required super.descriptionTextStyle,
     required super.errorTextStyle,
+    required this.slidePressHapticFeedback,
     this.slideableTiles = const .all(true),
     super.labelPadding = const .symmetric(vertical: 7.7),
     super.descriptionPadding = const .only(top: 7.5),
@@ -454,6 +459,7 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
         dividerColor: .all(colors.border),
         dividerWidth: style.borderWidth,
         slideableTiles: const .all(true),
+        slidePressHapticFeedback: style.hapticFeedback.selectionClick,
         labelTextStyle: FVariants.from(
           typography.sm.copyWith(
             color: style.formFieldStyle.labelTextStyle.base.color ?? colors.foreground,

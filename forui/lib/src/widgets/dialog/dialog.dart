@@ -331,6 +331,7 @@ class FDialog extends StatefulWidget {
          .horizontal => (context, style) => HorizontalContent(
            style: style.contentStyle.resolve({context.platformVariant}),
            slideableActions: style.slideableActions.resolve({context.platformVariant}),
+           slidePressHapticFeedback: style.slidePressHapticFeedback,
            image: image,
            title: title,
            body: body,
@@ -339,6 +340,7 @@ class FDialog extends StatefulWidget {
          .vertical => (context, style) => VerticalContent(
            style: style.contentStyle.resolve({context.platformVariant, FDialogAxisVariant.vertical}),
            slideableActions: style.slideableActions.resolve({context.platformVariant, FDialogAxisVariant.vertical}),
+           slidePressHapticFeedback: style.slidePressHapticFeedback,
            image: image,
            title: title,
            body: body,
@@ -365,6 +367,7 @@ class FDialog extends StatefulWidget {
          final width when width < context.theme.breakpoints.sm => VerticalContent(
            style: style.contentStyle.resolve({context.platformVariant, FDialogAxisVariant.vertical}),
            slideableActions: style.slideableActions.resolve({context.platformVariant, FDialogAxisVariant.vertical}),
+           slidePressHapticFeedback: style.slidePressHapticFeedback,
            image: image,
            title: title,
            body: body,
@@ -373,6 +376,7 @@ class FDialog extends StatefulWidget {
          _ => HorizontalContent(
            style: style.contentStyle.resolve({context.platformVariant}),
            slideableActions: style.slideableActions.resolve({context.platformVariant}),
+           slidePressHapticFeedback: style.slidePressHapticFeedback,
            image: image,
            title: title,
            body: body,
@@ -536,6 +540,10 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
   @override
   final FVariants<FDialogAxisVariantConstraint, FDialogAxisVariant, bool, Delta> slideableActions;
 
+  /// The haptic feedback for when the user slides from one action to another when [slideableActions] is enabled.
+  @override
+  final Future<void> Function() slidePressHapticFeedback;
+
   /// Motion-related properties.
   @override
   final FDialogMotion motion;
@@ -544,6 +552,7 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
   FDialogStyle({
     required this.decoration,
     required this.contentStyle,
+    required this.slidePressHapticFeedback,
     this.backgroundFilter,
     this.slideableActions = const .all(false),
     this.insetPadding = const .symmetric(horizontal: 40, vertical: 24),
@@ -570,6 +579,7 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
         [.touch]: true,
       },
     ),
+    slidePressHapticFeedback: style.hapticFeedback.selectionClick,
     contentStyle: FDialogContentStyles.inherit(colors: colors, typography: typography, touch: touch),
   );
 }

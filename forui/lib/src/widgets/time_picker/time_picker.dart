@@ -158,6 +158,7 @@ class FTimePickerStyle extends FPickerStyle with _$FTimePickerStyleFunctions {
     required super.textStyle,
     required super.selectionDecoration,
     required super.focusedOutlineStyle,
+    required super.hapticFeedback,
     super.diameterRatio,
     super.squeeze,
     super.magnification,
@@ -182,6 +183,7 @@ class FTimePickerStyle extends FPickerStyle with _$FTimePickerStyleFunctions {
         selectionHeightAdjustment: 5,
         spacing: 2,
         focusedOutlineStyle: style.focusedOutlineStyle,
+        hapticFeedback: style.hapticFeedback.selectionClick,
         padding: const .only(start: 10, end: 10),
       );
 }

@@ -51,6 +51,7 @@ enum TappableGroupGestureRecognizerState {
 @internal
 class TappableGroupGestureRecognizer extends OneSequenceGestureRecognizer {
   List<GroupEntry> entries;
+  Future<void> Function() slidePressHapticFeedback;
   TappableGroupGestureRecognizerState _state;
   GroupEntry? _current;
   Timer? _longPressTimer;
@@ -60,7 +61,7 @@ class TappableGroupGestureRecognizer extends OneSequenceGestureRecognizer {
   /// the arena sweep — this lets scroll recognizers win the sweep when competing.
   VoidCallback? _pendingOnPress;
 
-  TappableGroupGestureRecognizer(this.entries) : _state = .idle;
+  TappableGroupGestureRecognizer(this.entries, this.slidePressHapticFeedback) : _state = .idle;
 
   @override
   @protected
@@ -98,6 +99,7 @@ class TappableGroupGestureRecognizer extends OneSequenceGestureRecognizer {
 
         if (entries.firstWhereOrNull((e) => e.hitTest(position)) case final entry?) {
           _state = .slidePressing;
+          unawaited(slidePressHapticFeedback());
           _current = entry;
           _current!.onPressStart(buttons);
           _start();
@@ -195,6 +197,8 @@ class TappableGroupGestureRecognizer extends OneSequenceGestureRecognizer {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(IterableProperty('entries', entries));
+    properties
+      ..add(IterableProperty('entries', entries))
+      ..add(ObjectFlagProperty.has('slidePressHapticFeedback', slidePressHapticFeedback));
   }
 }

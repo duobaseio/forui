@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:collection';
 import 'dart:ui';
 
@@ -247,11 +248,11 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
       );
     }
 
-    // TODO: haptic feedback.
     if (longPress) {
       child = GestureDetector(
         onLongPressStart: (_) async {
           _monotonic++;
+          unawaited(style.hapticFeedback());
           await _controller.show();
           group?.show();
         },
@@ -395,10 +396,15 @@ class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
   @override
   final TextStyle textStyle;
 
+  /// The haptic feedback for when the tooltip is shown via long press.
+  @override
+  final Future<void> Function() hapticFeedback;
+
   /// Creates a [FTooltipStyle].
   const FTooltipStyle({
     required this.decoration,
     required this.textStyle,
+    required this.hapticFeedback,
     this.backgroundFilter,
     this.padding = const .symmetric(horizontal: 14, vertical: 10),
   });
@@ -416,6 +422,7 @@ class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
         ),
         padding: const .symmetric(horizontal: 14, vertical: 10),
         textStyle: typography.xs,
+        hapticFeedback: style.hapticFeedback.mediumImpact,
       );
 }
 
