@@ -4,11 +4,13 @@ description: A set of layered sections of content—known as tab entries—that 
 apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.tabs/
 ---
 
+import { Callout } from 'fumadocs-ui/components/callout';
 import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
 import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
 import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/tabs/default.json';
+import swipeableSnippet from '@/snippets/examples/tabs/swipeable.json';
 import tabsUsage from '@/snippets/usages/widgets/tabs/tabs.json';
 import tabEntryUsage from '@/snippets/usages/widgets/tabs/tabEntry.json';
 
@@ -43,11 +45,18 @@ To generate a specific style for customization:
 
 ## Examples
 
-### Behavior
+### Swipeable
 
-#### Swipe Navigation
+<Callout type="info">
+  Hold `Shift` while scrolling to swipe between tabs on desktop and web.
+</Callout>
 
-The tab content area supports horizontal swipe navigation when `expands` is true and `swipeablePhysics` resolves to an enabled value.
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='tabs' variant='swipeable' height={500}/>
+  </Tab>
+  <Tab value="Code">
+    <CodeSnippet snippet={swipeableSnippet} />
+  </Tab>
+</Tabs>
 
-- **Defaults:** On non-desktop platforms (mobile and web), `swipeablePhysics` defaults to an enabled value, so swipe navigation is on when `expands` is true. On desktop it defaults to disabled. Use `swipeablePhysics` to override.
-- **Physics:** When swipe navigation is enabled, the scroll physics default to `BouncingScrollPhysics`.

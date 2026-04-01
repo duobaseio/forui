@@ -133,8 +133,6 @@ void main() {
       );
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('tabs/${theme.name}-expand.png'));
-
-      // Prevent leak_tracker from flagging lingering TabBarView/PageView state
       await tester.pumpAndSettle();
     });
   }

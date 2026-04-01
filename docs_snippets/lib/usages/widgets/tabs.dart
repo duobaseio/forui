@@ -8,12 +8,10 @@ final tabs = FTabs(
   // {@category "Control"}
   control: const .managed(),
   // {@endcategory}
-  // {@category "Tab Bar"}
-  scrollable: false,
-  // {@endcategory}
   // {@category "Core"}
-  swipeablePhysics: null,
+  scrollable: false,
   physics: null,
+  contentPhysics: const BouncingScrollPhysics(),
   style: const .delta(spacing: 10),
   mouseCursor: .defer,
   onPress: (index) {},

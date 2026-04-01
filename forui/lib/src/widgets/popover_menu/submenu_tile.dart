@@ -159,9 +159,6 @@ class FSubmenuTile extends StatelessWidget with FTileMixin {
   /// Defaults to [FItemDivider.full].
   final FItemDivider submenuDivider;
 
-  /// Whether submenus are shown when hovering over an item. Defaults to true on desktop platforms.
-  final bool? hover;
-
   /// Creates a [FSubmenuTile].
   const FSubmenuTile({
     required this.title,
@@ -202,7 +199,6 @@ class FSubmenuTile extends StatelessWidget with FTileMixin {
     this.submenuTraversalEdgeBehavior,
     this.submenuMaxHeight = .infinity,
     this.submenuDivider = .full,
-    this.hover,
     super.key,
   });
 
@@ -242,8 +238,7 @@ class FSubmenuTile extends StatelessWidget with FTileMixin {
       ..add(ObjectFlagProperty.has('submenuOnFocusChange', submenuOnFocusChange))
       ..add(EnumProperty('submenuTraversalEdgeBehavior', submenuTraversalEdgeBehavior))
       ..add(DoubleProperty('submenuMaxHeight', submenuMaxHeight))
-      ..add(EnumProperty('submenuDivider', submenuDivider))
-      ..add(FlagProperty('hover', value: hover, ifTrue: 'hover'));
+      ..add(EnumProperty('submenuDivider', submenuDivider));
   }
 
   @override
@@ -270,7 +265,6 @@ class FSubmenuTile extends StatelessWidget with FTileMixin {
       focusNode: submenuFocusNode,
       onFocusChange: submenuOnFocusChange,
       traversalEdgeBehavior: submenuTraversalEdgeBehavior,
-      hover: hover,
       menu: menu,
       builder: (context, controller, _) => _Trigger(
         controller: controller,
@@ -323,6 +317,7 @@ class _State extends State<_Trigger> {
   final Key _key = UniqueKey();
   PopoverMenuScope? _scope;
   int _monotonic = 0;
+  bool _hovered = false;
 
   @override
   void didChangeDependencies() {
@@ -350,8 +345,9 @@ class _State extends State<_Trigger> {
   @override
   Widget build(BuildContext context) => switch (_scope) {
     null => widget.child,
-    final scope when scope.hover => FInheritedItemCallbacks(
+    final scope => FInheritedItemCallbacks(
       onHoverEnter: () async {
+        _hovered = true;
         final token = _monotonic;
         await Future.delayed(scope.style.motion.hoverEnterDuration);
         if (token == _monotonic && mounted) {
@@ -359,11 +355,14 @@ class _State extends State<_Trigger> {
           unawaited(widget.controller.show());
         }
       },
-      onHoverExit: () => _monotonic++,
-      child: widget.child,
-    ),
-    final scope => FInheritedItemCallbacks(
+      onHoverExit: () {
+        _hovered = false;
+        _monotonic++;
+      },
       onPress: () {
+        if (_hovered) {
+          return;
+        }
         if (scope.active.value == _key) {
           scope.active.value = null;
           widget.controller.hide();

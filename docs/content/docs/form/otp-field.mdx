@@ -1,0 +1,65 @@
+---
+title: OTP Field
+description: A one-time password input field for verification codes.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.otp_field/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/otp-field/default.json';
+import dividerSnippet from '@/snippets/examples/otp-field/divider.json';
+import noFormatterSnippet from '@/snippets/examples/otp-field/no-formatter.json';
+import otpFieldUsage from '@/snippets/usages/widgets/otp_field/otpField.json';
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='otp-field'/>
+  </Tab>
+  <Tab value="Code">
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+To generate a specific style for customization:
+
+<Tabs items={['OTP Field']}>
+    <Tab value="OTP Field">
+        ```shell copy
+        dart run forui style create otp-field
+        ```
+    </Tab>
+</Tabs>
+
+## Usage
+
+### `FOtpField(...)`
+<UsageSnippet usage={otpFieldUsage} />
+
+## Examples
+
+### With Divider
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='otp-field' variant='divider'/>
+  </Tab>
+  <Tab value="Code">
+    <CodeSnippet snippet={dividerSnippet} />
+  </Tab>
+</Tabs>
+
+### No Formatter
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='otp-field' variant='no-formatter'/>
+  </Tab>
+  <Tab value="Code">
+    <CodeSnippet snippet={noFormatterSnippet} />
+  </Tab>
+</Tabs>
+

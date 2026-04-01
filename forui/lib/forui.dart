@@ -24,6 +24,7 @@ export 'widgets/header.dart';
 export 'widgets/item.dart';
 export 'widgets/label.dart';
 export 'widgets/line_calendar.dart';
+export 'widgets/otp_field.dart';
 export 'widgets/pagination.dart';
 export 'widgets/picker.dart';
 export 'widgets/popover.dart';

@@ -45,6 +45,31 @@ void main() {
 
         expect(changed, DateTime.utc(2025, 1, 15));
       });
+
+      testWidgets('onChange called when clearing via clear button', (tester) async {
+        final values = <DateTime?>[];
+
+        await tester.pumpWidget(
+          TestScaffold.app(
+            locale: const Locale('en', 'SG'),
+            child: FDateField.input(
+              key: key,
+              clearable: true,
+              control: .managed(onChange: values.add),
+            ),
+          ),
+        );
+
+        await tester.enterText(find.byKey(key), '15/01/2025');
+        await tester.pumpAndSettle();
+
+        expect(values, [DateTime.utc(2025, 1, 15)]);
+
+        await tester.tap(find.bySemanticsLabel('Clear'));
+        await tester.pumpAndSettle();
+
+        expect(values, [DateTime.utc(2025, 1, 15), null]);
+      });
     });
 
     group('lifted', () {
