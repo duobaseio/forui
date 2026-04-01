@@ -14,7 +14,7 @@ final lineCalendar = FLineCalendar(
   physics: null,
   // {@endcategory}
   // {@category "Core"}
-  style: const .delta(padding: .value(.zero)),
+  style: const .delta(itemSpacing: 10),
   start: .utc(1900),
   end: .utc(2100),
   today: .now(),

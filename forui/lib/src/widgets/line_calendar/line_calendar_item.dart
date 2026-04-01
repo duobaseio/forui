@@ -4,7 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 /// The state of a line calendar item used to build a line calendar item.
-typedef FLineCalendarItemData = ({FLineCalendarStyle style, DateTime date, bool today, Set<FTappableVariant> variants});
+typedef FLineCalendarItemData = ({FLineCalendarStyle style, DateTime date, Set<FLineCalendarItemVariant> variants});
 
 @internal
 class Item extends StatelessWidget {
@@ -31,27 +31,34 @@ class Item extends StatelessWidget {
       semanticsLabel: (FLocalizations.of(context) ?? FDefaultLocalizations()).fullDate(date),
       selected: selected == date,
       onPress: controller.selectable(date) ? () => controller.select(date) : null,
-      builder: (context, variants, _) => builder(
-        context,
-        (style: style, date: date, today: today, variants: variants),
-        Stack(
-          children: [
-            Positioned.fill(
-              child: ItemContent(style: style, date: date, variants: variants),
-            ),
-            if (today)
-              Positioned(
-                top: 6,
-                right: 6,
-                child: Container(
-                  height: 4,
-                  width: 4,
-                  decoration: BoxDecoration(color: style.todayIndicatorColor.resolve(variants), shape: .circle),
-                ),
+      builder: (context, v, _) {
+        final variants = {
+          for (final variant in v) variant as FLineCalendarItemVariant,
+          if (today) FLineCalendarItemVariant.today,
+        };
+
+        return builder(
+          context,
+          (style: style, date: date, variants: variants),
+          Stack(
+            children: [
+              Positioned.fill(
+                child: ItemContent(style: style, date: date, variants: variants),
               ),
-          ],
-        ),
-      ),
+              if (today)
+                Positioned(
+                  top: 6,
+                  right: 6,
+                  child: Container(
+                    height: 4,
+                    width: 4,
+                    decoration: BoxDecoration(color: style.todayIndicatorColor.resolve(variants), shape: .circle),
+                  ),
+                ),
+            ],
+          ),
+        );
+      },
     ),
   );
 
@@ -71,7 +78,7 @@ class Item extends StatelessWidget {
 class ItemContent extends StatelessWidget {
   final FLineCalendarStyle style;
   final DateTime date;
-  final Set<FTappableVariant> variants;
+  final Set<FLineCalendarItemVariant> variants;
 
   const ItemContent({required this.style, required this.date, required this.variants, super.key});
 
@@ -88,21 +95,10 @@ class ItemContent extends StatelessWidget {
           spacing: style.contentSpacing,
           children: [
             DefaultTextStyle.merge(
-              textHeightBehavior: const TextHeightBehavior(
-                applyHeightToFirstAscent: false,
-                applyHeightToLastDescent: false,
-              ),
-              style: style.dateTextStyle.resolve(variants),
-              child: Text(localizations.day(date)),
-            ),
-            DefaultTextStyle.merge(
-              textHeightBehavior: const TextHeightBehavior(
-                applyHeightToFirstAscent: false,
-                applyHeightToLastDescent: false,
-              ),
               style: style.weekdayTextStyle.resolve(variants),
               child: Text(localizations.shortWeekDays[date.weekday % 7]),
             ),
+            DefaultTextStyle.merge(style: style.dateTextStyle.resolve(variants), child: Text(localizations.day(date))),
           ],
         ),
       ),

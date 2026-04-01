@@ -7,8 +7,19 @@ import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/annotations.dart';
+import 'package:forui/src/theme/variant.dart';
 import 'package:forui/src/widgets/line_calendar/calendar_layout.dart';
 
+@Variants('FLineCalendarItem', {
+  'disabled': (2, 'The semantic variant when this widget is disabled.'),
+  'selected': (2, 'The semantic variant when this item has been selected.'),
+  'today': (2, 'The semantic variant when the item represents today.'),
+  'primaryFocused': (1, 'The interaction variant when this widget has focus.'),
+  'focused': (1, 'The interaction variant when the widget or descendants have focus.'),
+  'hovered': (1, 'The interaction variant when hovered.'),
+  'pressed': (1, 'The interaction variant when pressed.'),
+})
 part 'line_calendar.design.dart';
 
 /// A line calendar displays dates in a single horizontal, scrollable line.
@@ -163,39 +174,33 @@ class FLineCalendar extends StatelessWidget {
 
 /// [FLineCalendar]'s style.
 class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
-  /// The horizontal padding around each calendar item. Defaults to `EdgeInsets.symmetric(horizontal: 6.5)`.
+  /// The horizontal spacing between each calendar item. Defaults to 0.
   @override
-  final EdgeInsetsGeometry padding;
+  final double itemSpacing;
 
   /// The vertical height between the content and the edges. Defaults to 15.5.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if negative.
   @override
   final double contentEdgeSpacing;
 
   /// The vertical height between the date and weekday. Defaults to 2.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if negative.
   @override
   final double contentSpacing;
 
   /// The decoration.
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, Decoration, DecorationDelta> decoration;
+  final FVariants<FLineCalendarItemVariantConstraint, FLineCalendarItemVariant, Decoration, DecorationDelta> decoration;
 
   /// The color of the today indicator.
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, Color, Delta> todayIndicatorColor;
+  final FVariants<FLineCalendarItemVariantConstraint, FLineCalendarItemVariant, Color, Delta> todayIndicatorColor;
 
   /// The text style for the date.
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> dateTextStyle;
+  final FVariants<FLineCalendarItemVariantConstraint, FLineCalendarItemVariant, TextStyle, TextStyleDelta> dateTextStyle;
 
   /// The text style for the day of the week.
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> weekdayTextStyle;
+  final FVariants<FLineCalendarItemVariantConstraint, FLineCalendarItemVariant, TextStyle, TextStyleDelta> weekdayTextStyle;
 
   /// The tappable style.
   @override
@@ -208,9 +213,9 @@ class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
     required this.dateTextStyle,
     required this.weekdayTextStyle,
     required this.tappableStyle,
-    this.padding = const .symmetric(horizontal: 6.5),
-    this.contentEdgeSpacing = 15.5,
-    this.contentSpacing = 2,
+    this.itemSpacing = 10,
+    this.contentEdgeSpacing = 13,
+    this.contentSpacing = 4,
   });
 
   /// Creates a [FLineCalendarStyle] that inherits its properties.
@@ -228,7 +233,6 @@ class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
       decoration: FVariants.from(
         ShapeDecoration(
           shape: RoundedSuperellipseBorder(
-            side: BorderSide(color: colors.border, width: style.borderWidth),
             borderRadius: style.borderRadius.md,
           ),
           color: colors.card,
@@ -259,6 +263,14 @@ class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
             color: colors.hover(colors.primary),
           ),
           [.selected.and(.disabled)]: .shapeDelta(color: colors.disable(colors.primary)),
+          //
+          [.today]: .shapeDelta(color: colors.secondary),
+          [.today.and(.focused)]: .shapeDelta(color: colors.secondary, shape: focusedShape),
+          [.today.and(.hovered), .today.and(.pressed)]: .shapeDelta(color: colors.hover(colors.secondary)),
+          [.today.and(.hovered).and(.focused), .today.and(.pressed).and(.focused)]: .shapeDelta(
+            color: colors.hover(colors.secondary),
+            shape: focusedShape,
+          ),
         },
       ),
       todayIndicatorColor: FVariants(
@@ -274,7 +286,7 @@ class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
         },
       ),
       dateTextStyle: FVariants.from(
-        typography.lg.copyWith(color: colors.foreground, fontWeight: .w500, height: 0),
+        typography.sm.copyWith(color: colors.foreground, height: 1),
         variants: {
           [.disabled]: .delta(color: colors.disable(colors.foreground)),
           //
@@ -283,7 +295,7 @@ class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
         },
       ),
       weekdayTextStyle: FVariants.from(
-        typography.xs2.copyWith(color: colors.mutedForeground, fontWeight: .w500, height: 0),
+        typography.xs3.copyWith(color: colors.mutedForeground, height: 1),
         variants: {
           [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
           //

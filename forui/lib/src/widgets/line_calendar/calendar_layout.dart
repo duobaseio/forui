@@ -155,7 +155,7 @@ class _CalendarLayoutState extends State<CalendarLayout> {
           itemBuilder: (_, index) {
             final date = widget.start.plus(days: index);
             return Padding(
-              padding: widget.style.padding,
+              padding: .symmetric(horizontal: widget.style.itemSpacing / 2),
               child: Item(
                 controller: _controller,
                 style: widget.style,
@@ -197,6 +197,14 @@ class _SpeculativeBox extends RenderBox
       unselected.getDryLayout(constraints).height,
       unselectedHovered.getDryLayout(constraints).height,
     ].max!;
+
+    // Layout measurement children with tight zero constraints so they have a valid size.
+    // This prevents the widget inspector from crashing when it walks all children.
+    const zero = BoxConstraints.tightFor(width: 0, height: 0);
+    selected.layout(zero);
+    selectedHovered.layout(zero);
+    unselected.layout(zero);
+    unselectedHovered.layout(zero);
 
     final heightConstraints = constraints.copyWith(maxHeight: maxHeight);
     final viewport = childAfter(unselectedHovered)!..layout(heightConstraints, parentUsesSize: true);

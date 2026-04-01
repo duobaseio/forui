@@ -10,7 +10,7 @@
 
 
 ### `FDialog`
-We've adjusted `FDialog`'s styling to be more visually pleasing on touch devices.
+We've changed `FDialog`'s dfault styling to be more aesthetically pleasing.
 
 * Add `FDialog.image` parameter.
 * Add `FDialogContentStyle.titlePadding`.
@@ -36,6 +36,14 @@ We've adjusted `FDialog`'s styling to be more visually pleasing on touch devices
 
 ### `FItemGroup`
 * Add `FItemGroupStyle.slidePressHapticFeedback`.
+
+
+### `FLineCalendar`
+We've changed `FLineCalendar`'s default styling to be more aesthetically pleasing.
+
+* **Breaking** Change `FLineCalendarStyle.padding` to `FLineCalendarStyle.itemSpacing`.
+
+* Fix widget inspector crashing when tapping on a line calendar item.
 
 
 ### `FPopoverMenu`
