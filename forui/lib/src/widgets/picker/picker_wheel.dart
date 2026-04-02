@@ -1,6 +1,5 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
@@ -164,7 +163,7 @@ abstract class _State<T extends FPickerWheel> extends State<T> {
                 squeeze: style.squeeze,
                 overAndUnderCenterOpacity: style.overAndUnderCenterOpacity,
                 childDelegate: delegate(style),
-                onSelectedItemChanged: (_) => HapticFeedback.selectionClick(),
+                onSelectedItemChanged: (_) => style.hapticFeedback(),
               ),
             ),
           ],

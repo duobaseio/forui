@@ -54,11 +54,16 @@ class FPickerStyle with Diagnosticable, _$FPickerStyleFunctions {
   @override
   final FFocusedOutlineStyle focusedOutlineStyle;
 
+  /// The haptic feedback for when the picker snaps to an item.
+  @override
+  final Future<void> Function() hapticFeedback;
+
   /// Creates a [FPickerStyle].
   const FPickerStyle({
     required this.textStyle,
     required this.selectionDecoration,
     required this.focusedOutlineStyle,
+    required this.hapticFeedback,
     this.diameterRatio = 1.07,
     this.squeeze = 1,
     this.magnification = 1,
@@ -87,5 +92,6 @@ class FPickerStyle with Diagnosticable, _$FPickerStyleFunctions {
           color: colors.muted,
         ),
         focusedOutlineStyle: style.focusedOutlineStyle,
+        hapticFeedback: style.hapticFeedback.selectionClick,
       );
 }

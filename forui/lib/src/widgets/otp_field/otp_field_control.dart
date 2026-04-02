@@ -71,7 +71,6 @@ class FOtpFieldManagedControl extends FOtpFieldControl with _$FOtpFieldManagedCo
   FOtpController createController() => controller ?? FOtpController(children: children, value: initial ?? .empty);
 }
 
-// TODO: Add support for lifted OTP field.
 class _Lifted extends FOtpFieldControl with _$_LiftedMixin {
   const _Lifted() : super._();
 

@@ -10,7 +10,7 @@
 
 
 ### `FDialog`
-We've adjusted `FDialog`'s styling to be more visually pleasing on touch devices.
+We've changed `FDialog`'s default styling to be more aesthetically pleasing.
 
 * Add `FDialog.image` parameter.
 * Add `FDialogContentStyle.titlePadding`.
@@ -18,15 +18,32 @@ We've adjusted `FDialog`'s styling to be more visually pleasing on touch devices
 * Add `FDialogContentStyle.imageSpacing`.
 * Add `FDialogContentStyle.expandActions`.
 * Add `FDialogContentStyles` extension type.
+* Add `FDialogStyle.slidePressHapticFeedback`.
 
 * **Breaking** Change `FDialogContentStyle` fields to have defaults instead of being required.
 * **Breaking** Change `VerticalContent` alignment from center to start.
 * **Breaking** Remove `FDialogContentStyle.bodySpacing`. Use `FDialogContentStyle.titleSpacing` instead.
 
 
+### `FHapticFeedback`
+* Add `FHapticFeedback`.
+
+
 ### `FItem`
 * Add `FInheritedItemCallbacks`.
 * Add `FItemMixin.submenu(...)` shorthand for `FSubmenuItem`.
+
+
+### `FItemGroup`
+* Add `FItemGroupStyle.slidePressHapticFeedback`.
+
+
+### `FLineCalendar`
+We've changed `FLineCalendar`'s default styling to be more aesthetically pleasing.
+
+* **Breaking** Change `FLineCalendarStyle.padding` to `FLineCalendarStyle.itemSpacing`.
+
+* Fix widget inspector crashing when tapping on a line calendar item.
 
 
 ### `FPopoverMenu`
@@ -53,6 +70,18 @@ We've adjusted `FDialog`'s styling to be more visually pleasing on touch devices
 * Add `FTileMixin.submenu(...)` shorthand for `FSubmenuTile`.
 
 
+### `FTileGroup`
+* Add `FTileGroupStyle.slidePressHapticFeedback`.
+
+
+### `FTimePicker`
+* Add `FTimePickerStyle.hapticFeedback`.
+
+
+### `FTooltip`
+* Add `FTooltipStyle.hapticFeedback`.
+
+
 ### `FOtpField`
 * Add `FOtpField`.
 
@@ -61,8 +90,16 @@ We've adjusted `FDialog`'s styling to be more visually pleasing on touch devices
 * Add `FOverlay`.
 
 
+### `FPicker`
+* Add `FPickerStyle.hapticFeedback`.
+
+
 ### `FPortal`
 * Fix portal not repositioning when the child widget changes size.
+
+
+### `FStyle`
+* Add `FStyle.hapticFeedback`.
 
 
 ## 0.20.4
