@@ -174,15 +174,15 @@ class FLineCalendar extends StatelessWidget {
 
 /// [FLineCalendar]'s style.
 class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
-  /// The horizontal spacing between each calendar item. Defaults to 0.
+  /// The horizontal spacing between each calendar item. Defaults to 10.
   @override
   final double itemSpacing;
 
-  /// The vertical height between the content and the edges. Defaults to 15.5.
+  /// The vertical height between the content and the edges. Defaults to 13.
   @override
   final double contentEdgeSpacing;
 
-  /// The vertical height between the date and weekday. Defaults to 2.
+  /// The vertical height between the date and weekday. Defaults to 4.
   @override
   final double contentSpacing;
 

@@ -10,7 +10,7 @@
 
 
 ### `FDialog`
-We've changed `FDialog`'s dfault styling to be more aesthetically pleasing.
+We've changed `FDialog`'s default styling to be more aesthetically pleasing.
 
 * Add `FDialog.image` parameter.
 * Add `FDialogContentStyle.titlePadding`.
