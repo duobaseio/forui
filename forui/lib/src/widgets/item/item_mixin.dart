@@ -64,7 +64,7 @@ mixin FItemMixin on Widget {
   static FSubmenuItem submenu({
     required Widget title,
     required List<FItemGroupMixin> submenu,
-    FPopoverControl control = const .managed(motion: FPopoverMotion(exitDuration: .zero)),
+    FPopoverControl control = const .managed(),
     FItemVariant variant = .primary,
     FItemStyleDelta style = const .context(),
     bool? enabled,

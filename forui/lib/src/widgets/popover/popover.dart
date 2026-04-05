@@ -404,6 +404,12 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _controller.updateMotion(widget.style(context.theme.popoverStyle).motion);
+  }
+
+  @override
   void didUpdateWidget(covariant FPopover old) {
     super.didUpdateWidget(old);
     if (widget.groupId != old.groupId) {
@@ -421,6 +427,7 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
     }
 
     _controller = widget.control.update(old.control, _controller, _handleOnChange, this).$1;
+    _controller.updateMotion(widget.style(context.theme.popoverStyle).motion);
   }
 
   @override
@@ -608,12 +615,17 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
   @override
   final EdgeInsetsGeometry popoverPadding;
 
+  /// The popover's motion configuration.
+  @override
+  final FPopoverMotion motion;
+
   /// Creates a [FPopoverStyle].
   const FPopoverStyle({
     required this.decoration,
     this.barrierFilter,
     this.backgroundFilter,
     this.popoverPadding = const .all(5),
+    this.motion = const FPopoverMotion(),
   });
 
   /// Creates a [FPopoverStyle] that inherits its properties.

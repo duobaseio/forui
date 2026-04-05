@@ -299,7 +299,7 @@ mixin FTileMixin on Widget {
   static FSubmenuTile submenu({
     required Widget title,
     required List<FTileGroupMixin> menu,
-    FPopoverControl control = const .managed(motion: FPopoverMotion(exitDuration: .zero)),
+    FPopoverControl control = const .managed(),
     FItemStyleDelta style = const .context(),
     bool? enabled,
     String? semanticsLabel,

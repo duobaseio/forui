@@ -174,17 +174,17 @@ final FDateFieldControl managedExternal = .managed(
 
 // {@category "Popover Control" "`.lifted()`"}
 /// Externally controls the popover's visibility.
-final FPopoverControl popoverLifted = .lifted(shown: false, onChange: (shown) {}, motion: const FPopoverMotion());
+final FPopoverControl popoverLifted = .lifted(shown: false, onChange: (shown) {});
 
 // {@category "Popover Control" "`.managed()` with internal controller"}
 /// Manages the popover's visibility internally.
-final FPopoverControl popoverInternal = .managed(initial: true, onChange: (shown) {}, motion: const FPopoverMotion());
+final FPopoverControl popoverInternal = .managed(initial: true, onChange: (shown) {});
 
 // {@category "Popover Control" "`.managed()` with external controller"}
 /// Uses an external `FPopoverController` to control the popover's visibility.
 final FPopoverControl popoverExternal = .managed(
   // Don't create a controller inline. Store it in a State instead.
-  controller: FPopoverController(vsync: vsync, shown: true, motion: const FPopoverMotion()),
+  controller: FPopoverController(vsync: vsync, shown: true),
   onChange: (shown) {},
 );
 

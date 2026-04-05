@@ -45,17 +45,17 @@ final popover = FPopover(
 
 // {@category "Control" "`.lifted()`"}
 /// Externally controls the popover's visibility.
-final FPopoverControl lifted = .lifted(shown: false, onChange: (shown) {}, motion: const FPopoverMotion());
+final FPopoverControl lifted = .lifted(shown: false, onChange: (shown) {});
 
 // {@category "Control" "`.managed()` with internal controller"}
 /// Manages the popover state internally.
-final FPopoverControl managedInternal = .managed(initial: false, onChange: (shown) {}, motion: const FPopoverMotion());
+final FPopoverControl managedInternal = .managed(initial: false, onChange: (shown) {});
 
 // {@category "Control" "`.managed()` with external controller"}
 /// Uses an external controller to control the popover's state.
 final FPopoverControl managedExternal = .managed(
   // Don't create a controller inline. Store it in a State instead.
-  controller: FPopoverController(vsync: vsync, shown: false, motion: const FPopoverMotion()),
+  controller: FPopoverController(vsync: vsync, shown: false),
   onChange: (shown) {},
 );
 

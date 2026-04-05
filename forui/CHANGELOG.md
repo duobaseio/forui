@@ -46,12 +46,23 @@ We've changed `FLineCalendar`'s default styling to be more aesthetically pleasin
 * Fix widget inspector crashing when tapping on a line calendar item.
 
 
+### `FPopover`
+* Add `FPopoverStyle.motion`.
+* Add `FPopoverController.show(animated:)`.
+* Add `FPopoverController.hide(animated:)`.
+* Add `FPopoverController.toggle(animated:)`.
+
+* **Breaking** Remove `FPopoverControl.managed(motion: ...)`. Configure motion via `FPopoverStyle` instead.
+* **Breaking** Remove `FPopoverControl.lifted(motion: ...)`. Configure motion via `FPopoverStyle` instead.
+* **Breaking** Remove `FPopoverController(motion: ...)`. Configure motion via `FPopoverStyle` instead.
+
+
 ### `FPopoverMenu`
 * Add `FSubmenuItem`.
 * Add `FSubmenuTile`.
-* Add `FPopoverMenuStyle.motion`.
-* Add `FPopoverMenuMotion`.
+* Add `FPopoverMenuStyle.hoverEnterDuration`.
 * Add `FPopoverMenuStyle.minWidth`.
+* Add `FPopoverMenuStyle.hapticFeedback`.
 
 
 ### `FTextField`

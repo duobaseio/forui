@@ -15,13 +15,16 @@ class PopoverMenuScope extends InheritedWidget {
   static PopoverMenuScope? maybeOf(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<PopoverMenuScope>();
 
+  final FPopoverController controller;
+
   final FPopoverMenuStyle style;
 
   final Object? groupId;
 
-  final ValueNotifier<Key?> active;
+  final ValueNotifier<(Key?, bool)> active;
 
   const PopoverMenuScope({
+    required this.controller,
     required this.style,
     required this.groupId,
     required this.active,
@@ -30,12 +33,14 @@ class PopoverMenuScope extends InheritedWidget {
   });
 
   @override
-  bool updateShouldNotify(PopoverMenuScope old) => style != old.style || groupId != old.groupId || active != old.active;
+  bool updateShouldNotify(PopoverMenuScope old) =>
+      controller != old.controller || style != old.style || groupId != old.groupId || active != old.active;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('groupId', groupId))
       ..add(DiagnosticsProperty('active', active));
@@ -367,7 +372,7 @@ class FPopoverMenu extends StatefulWidget {
 
 class _FPopoverMenuState extends State<FPopoverMenu> {
   final Key _groupId = UniqueKey();
-  final ValueNotifier<Key?> _active = ValueNotifier(null);
+  final ValueNotifier<(Key? key, bool hovered)> _active = ValueNotifier((null, false));
 
   @override
   void dispose() {
@@ -407,14 +412,15 @@ class _FPopoverMenuState extends State<FPopoverMenu> {
       useViewPadding: widget.useViewPadding,
       useViewInsets: widget.useViewInsets,
       popoverBuilder: (context, controller) => PopoverMenuScope(
+        controller: controller,
         style: style,
         groupId: groupId,
         active: _active,
         // The default behavior for non-submenu trigger items.
         child: FInheritedItemCallbacks(
-          onHoverEnter: () => _active.value = null,
-          onPress: () => _active.value = null,
-          onLongPress: () => _active.value = null,
+          onHoverEnter: () => _active.value = (null, false),
+          onPress: () => _active.value = (null, false),
+          onLongPress: () => _active.value = (null, false),
           // We explicitly wrap this in a `FInheritedItemData` to prevent any ancestor data from accidentally leaking
           // into the popover menu's items.
           //
@@ -452,9 +458,9 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
   @override
   final double maxWidth;
 
-  /// The hover motion configuration for submenus. Controls the delay before showing/hiding submenus on hover.
+  /// The delay before showing a submenu when the pointer enters an item. Defaults to 150ms.
   @override
-  final FPopoverMenuMotion motion;
+  final Duration hoverEnterDuration;
 
   /// The haptic feedback for when a submenu is shown via long press.
   @override
@@ -468,10 +474,11 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
     required this.hapticFeedback,
     this.minWidth = 150,
     this.maxWidth = 250,
-    this.motion = const FPopoverMenuMotion(),
+    this.hoverEnterDuration = const Duration(milliseconds: 150),
     super.barrierFilter,
     super.backgroundFilter,
     super.popoverPadding,
+    super.motion,
   }) : assert(0 < minWidth, 'minWidth ($minWidth) must be > 0'),
        assert(0 < maxWidth, 'maxWidth ($maxWidth) must be > 0'),
        assert(minWidth <= maxWidth, 'minWidth ($minWidth) must be <= maxWidth ($maxWidth)');
@@ -542,17 +549,7 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
        ),
        minWidth = 150,
        maxWidth = 250,
-       motion = const FPopoverMenuMotion(),
+       hoverEnterDuration = const Duration(milliseconds: 150),
        hapticFeedback = style.hapticFeedback.mediumImpact,
        super.inherit();
-}
-
-/// Controls the hover timing for submenu show/hide in a [FPopoverMenu].
-class FPopoverMenuMotion with Diagnosticable, _$FPopoverMenuMotionFunctions {
-  /// The delay before showing a submenu when the pointer enters an item. Defaults to 150ms.
-  @override
-  final Duration hoverEnterDuration;
-
-  /// Creates a [FPopoverMenuMotion].
-  const FPopoverMenuMotion({this.hoverEnterDuration = const Duration(milliseconds: 150)});
 }

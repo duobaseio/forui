@@ -345,7 +345,7 @@ class FItem extends StatelessWidget with FItemMixin {
                     onPress?.call();
                   }
                 : null,
-            onLongPress: enabled
+            onLongPress: enabled && (callbacks?.onLongPress != null || onLongPress != null)
                 ? () {
                     callbacks?.onLongPress?.call();
                     onLongPress?.call();
