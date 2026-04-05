@@ -414,6 +414,7 @@ class _FPopoverMenuState extends State<FPopoverMenu> {
         child: FInheritedItemCallbacks(
           onHoverEnter: () => _active.value = null,
           onPress: () => _active.value = null,
+          onLongPress: () => _active.value = null,
           // We explicitly wrap this in a `FInheritedItemData` to prevent any ancestor data from accidentally leaking
           // into the popover menu's items.
           //
@@ -455,11 +456,16 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
   @override
   final FPopoverMenuMotion motion;
 
+  /// The haptic feedback for when a submenu is shown via long press.
+  @override
+  final Future<void> Function() hapticFeedback;
+
   /// Creates a [FPopoverMenuStyle].
   const FPopoverMenuStyle({
     required this.itemGroupStyle,
     required this.tileGroupStyle,
     required super.decoration,
+    required this.hapticFeedback,
     this.minWidth = 150,
     this.maxWidth = 250,
     this.motion = const FPopoverMenuMotion(),
@@ -537,6 +543,7 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
        minWidth = 150,
        maxWidth = 250,
        motion = const FPopoverMenuMotion(),
+       hapticFeedback = style.hapticFeedback.mediumImpact,
        super.inherit();
 }
 

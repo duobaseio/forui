@@ -36,13 +36,15 @@ class _CaretState extends State<Caret> with SingleTickerProviderStateMixin {
   /// The duration of half a blink.
   static const _blink = Duration(milliseconds: 500);
 
-  late final _controller = AnimationController(vsync: this)..addListener(() => setState(() {}));
-  late final _simulation = _DiscreteKeyFrameSimulation();
+  late AnimationController _controller;
+  late _DiscreteKeyFrameSimulation _simulation;
   Timer? _timer;
 
   @override
   void initState() {
     super.initState();
+    _controller = AnimationController(vsync: this)..addListener(() => setState(() {}));
+    _simulation = _DiscreteKeyFrameSimulation();
     _startBlinking();
   }
 

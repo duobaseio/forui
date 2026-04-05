@@ -169,10 +169,10 @@ abstract class _Label extends StatefulWidget {
 }
 
 abstract class _State<T extends _Label> extends State<T> with TickerProviderStateMixin {
-  late final AnimationController _sizeController;
-  late final AnimationController _fadeController;
-  late final CurvedAnimation _curvedSize;
-  late final CurvedAnimation _curvedFade;
+  late AnimationController _sizeController;
+  late AnimationController _fadeController;
+  late CurvedAnimation _curvedSize;
+  late CurvedAnimation _curvedFade;
   late Animation<double> _fade;
   Widget? _error;
 

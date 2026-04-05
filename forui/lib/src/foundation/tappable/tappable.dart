@@ -538,8 +538,15 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
   late Animation<double> bounce;
 
   FTappableMotion? _motion;
-  late final AnimationController _bounceController = AnimationController(vsync: this);
-  late final CurvedAnimation _curvedBounce = CurvedAnimation(parent: _bounceController, curve: Curves.linear);
+  late AnimationController _bounceController;
+  late CurvedAnimation _curvedBounce;
+
+  @override
+  void initState() {
+    super.initState();
+    _bounceController = AnimationController(vsync: this);
+    _curvedBounce = CurvedAnimation(parent: _bounceController, curve: Curves.linear);
+  }
 
   @override
   void didChangeDependencies() {

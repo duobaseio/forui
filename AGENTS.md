@@ -27,6 +27,7 @@ Bootstrapping: `make bootstrap` (or `make bs`). Run `make help` for all commands
   FWidgetStyle style = FWidgetStyle(...);  // Do this instead
   ```
 * Prefer `AlignmentGeometry`/`BorderRadiusGeometry`/`EdgeInsetsGeometry` over `Alignment`/`BorderRadius`/`EdgeInsets`.
+* Declare lifecycle objects (controllers, animations, focus nodes) as `late` (not `late final`) and initialize them in `initState()`.
 * Minimize dependency on Cupertino/Material.
 
 ## Changelog Organization

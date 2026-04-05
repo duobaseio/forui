@@ -87,9 +87,16 @@ class FCircularProgress extends StatefulWidget {
 
 class _CircularState extends State<FCircularProgress> with SingleTickerProviderStateMixin {
   FCircularProgressStyle? _style;
-  late final AnimationController _controller = AnimationController(vsync: this);
-  late final CurvedAnimation _curveRotation = CurvedAnimation(parent: _controller, curve: Curves.linear);
+  late AnimationController _controller;
+  late CurvedAnimation _curveRotation;
   late Animation<double> _rotation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(vsync: this);
+    _curveRotation = CurvedAnimation(parent: _controller, curve: Curves.linear);
+  }
 
   @override
   void didChangeDependencies() {

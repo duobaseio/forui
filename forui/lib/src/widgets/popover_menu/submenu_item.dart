@@ -385,6 +385,20 @@ class _State extends State<_Trigger> {
           widget.controller.show();
         }
       },
+      onLongPress: () {
+        if (_hovered) {
+          return;
+        }
+
+        unawaited(scope.style.hapticFeedback());
+        if (scope.active.value == _key) {
+          scope.active.value = null;
+          widget.controller.hide();
+        } else {
+          scope.active.value = _key;
+          widget.controller.show();
+        }
+      },
       child: widget.child,
     ),
   };
