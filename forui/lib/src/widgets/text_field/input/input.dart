@@ -373,7 +373,7 @@ class _InputState extends State<Input> {
     );
 
     Widget field = FLabel(
-      axis: .vertical,
+      layout: .vertical,
       variants: variants as Set<FFormFieldVariant>,
       label: widget.label,
       style: style,

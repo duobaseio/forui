@@ -83,5 +83,25 @@ void main() {
         },
       );
     }
+
   }
+
+  testWidgets('leading-label', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold(
+        child: FCheckbox(
+          leadingLabel: true,
+          label: const Text('Terms and Conditions'),
+          description: const Text('I agree to the terms and conditions.'),
+          error: const Text('Please check the agree to continue.'),
+          value: true,
+        ),
+      ),
+    );
+
+    await expectLater(
+      find.byType(TestScaffold),
+      matchesGoldenFile('check-box/leading-label.png'),
+    );
+  });
 }

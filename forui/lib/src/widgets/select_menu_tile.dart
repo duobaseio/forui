@@ -682,7 +682,7 @@ class _FSelectMenuTileState<T> extends State<FSelectMenuTile<T>> with TickerProv
           final error = state.errorText == null ? null : widget.errorBuilder(context, state.errorText!);
 
           tile = FLabel(
-            axis: .vertical,
+            layout: .vertical,
             style: selectMenuTileStyle,
             variants: variants,
             label: widget.label,

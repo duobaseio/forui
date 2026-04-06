@@ -9,6 +9,15 @@
 * Fix default text styles created by `FTypography` to include a `fontFamily`.
 
 
+### `FCheckbox`
+* Add `FCheckbox(leadingLabel: ...)`.
+* Add `FCheckboxStyle.leadingLabelStyle`.
+* Add `FCheckboxStyle.trailingLabelStyle`.
+
+* **Breaking** Change `FCheckboxStyle` to not extend `FLabelStyle`. Use `FCheckboxStyle.leadingLabelStyle` and
+  `FCheckboxStyle.trailingLabelStyle` instead.
+
+
 ### `FDialog`
 We've changed `FDialog`'s default styling to be more aesthetically pleasing.
 
@@ -29,6 +38,15 @@ We've changed `FDialog`'s default styling to be more aesthetically pleasing.
 * Add `FHapticFeedback`.
 
 
+### `FLabel`
+* Add `FLabelLayout` enum.
+
+* **Breaking** Replace `FLabel(axis: ...)` with `FLabel(layout: ...)`. Use `FLabelLayout.horizontalEnd` instead of
+  `Axis.horizontal` and `FLabelLayout.vertical` instead of `Axis.vertical`.
+* **Breaking** Replace `FLabelStyles.horizontalStyle` with `FLabelStyles.horizontalLeadingStyle` and
+  `FLabelStyles.horizontalTrailingStyle`.
+
+
 ### `FItem`
 * Add `FInheritedItemCallbacks`.
 * Add `FItemMixin.submenu(...)` shorthand for `FSubmenuItem`.
@@ -44,6 +62,15 @@ We've changed `FLineCalendar`'s default styling to be more aesthetically pleasin
 * **Breaking** Change `FLineCalendarStyle.padding` to `FLineCalendarStyle.itemSpacing`.
 
 * Fix widget inspector crashing when tapping on a line calendar item.
+
+
+### `FRadio`
+* Add `FRadio(leadingLabel: ...)`.
+* Add `FRadioStyle.leadingLabelStyle`.
+* Add `FRadioStyle.trailingLabelStyle`.
+
+* **Breaking** Change `FRadioStyle` to not extend `FLabelStyle`. Use `FRadioStyle.leadingLabelStyle` and
+  `FRadioStyle.trailingLabelStyle` instead.
 
 
 ### `FPopover`
@@ -141,6 +168,15 @@ We've changed `FLineCalendar`'s default styling to be more aesthetically pleasin
 
 ### `FStyle`
 * Add `FStyle.hapticFeedback`.
+
+
+### `FSwitch`
+* Add `FSwitch(leadingLabel: ...)`.
+* Add `FSwitchStyle.leadingLabelStyle`.
+* Add `FSwitchStyle.trailingLabelStyle`.
+
+* **Breaking** Change `FSwitchStyle` to not extend `FLabelStyle`. Use `FSwitchStyle.leadingLabelStyle` and
+  `FSwitchStyle.trailingLabelStyle` instead.
 
 
 ## 0.20.4

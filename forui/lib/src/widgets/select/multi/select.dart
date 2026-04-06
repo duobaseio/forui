@@ -768,7 +768,7 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
         return Directionality(
           textDirection: direction,
           child: FLabel(
-            axis: .vertical,
+            layout: .vertical,
             variants: formVariants,
             label: widget.label,
             style: fieldStyle,

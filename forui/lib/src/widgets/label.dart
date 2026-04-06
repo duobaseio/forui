@@ -7,27 +7,48 @@ import 'package:forui/forui.dart';
 
 part 'label.design.dart';
 
+/// The layout of a [FLabel].
+///
+/// See [FLabel] for usage examples.
+enum FLabelLayout {
+  /// The label/description/error is on the left, child on the right, assuming LTR text direction.
+  ///
+  /// ```diagram
+  /// |--------------------------|
+  /// |  [label]        [child]  |
+  /// |  [description]           |
+  /// |  [error]                 |
+  /// |--------------------------|
+  /// ```
+  horizontalLeading,
+
+  /// The child is on the left, label/description/error on the right, assuming LTR text direction.
+  ///
+  /// Used by default in [FCheckbox], [FRadio], [FSwitch].
+  /// ```diagram
+  /// |--------------------------|
+  /// |  [child]  [label]        |
+  /// |           [description]  |
+  /// |           [error]        |
+  /// |--------------------------|
+  /// ```
+  horizontalTrailing,
+
+  /// The label is above the child, description/error below.
+  ///
+  /// Used in [FTextField].
+  /// ```diagram
+  /// |-----------------|
+  /// |  [label]        |
+  /// |  [child]        |
+  /// |  [description]  |
+  /// |  [error]        |
+  /// |-----------------|
+  /// ```
+  vertical,
+}
+
 /// A component that describes a form field with a label, description, and error message (if any).
-///
-/// There are two different [Axis] variants for labels:
-/// * [Axis.horizontal] - Used in [FCheckbox].
-/// ```diagram
-/// |--------------------------|
-/// |  [child]  [label]        |
-/// |           [description]  |
-/// |           [error]        |
-/// |--------------------------|
-/// ```
-///
-/// * [Axis.vertical] - Used in [FTextField].
-/// ```diagram
-/// |-----------------|
-/// |  [label]        |
-/// |  [child]        |
-/// |  [description]  |
-/// |  [error]        |
-/// |-----------------|
-/// ```
 ///
 /// {@template forui.widgets.label.error_transition}
 /// ## Error transition caveats
@@ -69,13 +90,13 @@ class FLabel extends StatelessWidget {
   /// The error message.
   final Widget? error;
 
-  /// The axis that determines the layout direction.
-  final Axis axis;
+  /// The layout.
+  final FLabelLayout layout;
 
   /// Whether the child should expand to fill the available space. Defaults to false.
   ///
   /// ## Contract
-  /// Only applicable when [axis] is [Axis.vertical].
+  /// Only applicable when [layout] is [FLabelLayout.vertical].
   final bool expands;
 
   /// The label's variants.
@@ -86,7 +107,7 @@ class FLabel extends StatelessWidget {
 
   /// Creates a [FLabel].
   const FLabel({
-    required this.axis,
+    required this.layout,
     required this.child,
     this.style = const .context(),
     this.label,
@@ -95,14 +116,11 @@ class FLabel extends StatelessWidget {
     this.expands = false,
     this.variants = const {},
     super.key,
-  }) : assert(axis == .vertical || !expands, 'expands can only be true when axis is vertical');
+  }) : assert(layout == .vertical || !expands, 'expands can only be true when layout is vertical');
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style(switch (axis) {
-      .horizontal => context.theme.labelStyles.horizontalStyle,
-      .vertical => context.theme.labelStyles.verticalStyle,
-    });
+    final style = this.style(context.theme.labelStyles._style(layout));
 
     // This messes up error transitions if a label and description weren't previously provided. However, it is an
     // extremely rare edge case to want an error message without a label & description.
@@ -111,8 +129,16 @@ class FLabel extends StatelessWidget {
       return Padding(padding: style.childPadding, child: child);
     }
 
-    return switch (axis) {
-      .horizontal => _HorizontalLabel(
+    return switch (layout) {
+      .horizontalLeading => _HorizontalLeadingLabel(
+        style: style,
+        label: label,
+        description: description,
+        error: error,
+        variants: variants,
+        child: child,
+      ),
+      .horizontalTrailing => _HorizontalTrailingLabel(
         style: style,
         label: label,
         description: description,
@@ -136,7 +162,7 @@ class FLabel extends StatelessWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(EnumProperty('axis', axis))
+      ..add(EnumProperty('layout', layout))
       ..add(FlagProperty('expands', value: expands, ifTrue: 'expands'))
       ..add(IterableProperty('variants', variants));
   }
@@ -275,8 +301,8 @@ abstract class _State<T extends _Label> extends State<T> with TickerProviderStat
   );
 }
 
-class _HorizontalLabel extends _Label {
-  const _HorizontalLabel({
+class _HorizontalLeadingLabel extends _Label {
+  const _HorizontalLeadingLabel({
     required super.style,
     required super.label,
     required super.description,
@@ -286,10 +312,90 @@ class _HorizontalLabel extends _Label {
   });
 
   @override
-  State<_HorizontalLabel> createState() => _HorizontalState();
+  State<_HorizontalLeadingLabel> createState() => _HorizontalLeadingState();
 }
 
-class _HorizontalState extends _State<_HorizontalLabel> {
+class _HorizontalLeadingState extends _State<_HorizontalLeadingLabel> {
+  @override
+  Widget build(BuildContext context) => Table(
+    defaultColumnWidth: const IntrinsicColumnWidth(),
+    defaultVerticalAlignment: .middle,
+    columnWidths: const {0: IntrinsicColumnWidth(), 1: IntrinsicColumnWidth()},
+    children: [
+      TableRow(
+        children: [
+          if (widget.label != null)
+            _cell(
+              padding: widget.style.labelPadding,
+              textStyle: widget.style.labelTextStyle.resolve(widget.variants),
+              child: widget.label,
+            )
+          else
+            _cell(
+              padding: widget.style.descriptionPadding,
+              textStyle: widget.style.descriptionTextStyle.resolve(widget.variants),
+              child: widget.description,
+            ),
+          TableCell(
+            child: Padding(padding: widget.style.childPadding, child: widget.child),
+          ),
+        ],
+      ),
+      if (widget.label != null && widget.description != null)
+        TableRow(
+          children: [
+            _cell(
+              padding: widget.style.descriptionPadding,
+              textStyle: widget.style.descriptionTextStyle.resolve(widget.variants),
+              child: widget.description,
+            ),
+            const TableCell(child: SizedBox()),
+          ],
+        ),
+      if (_error != null)
+        TableRow(
+          children: [
+            TableCell(child: _animatedError(context)),
+            const TableCell(child: SizedBox()),
+          ],
+        ),
+    ],
+  );
+
+  Widget _cell({required EdgeInsetsGeometry padding, required TextStyle textStyle, Widget? child}) {
+    if (child == null) {
+      return const TableCell(child: SizedBox());
+    }
+
+    return TableCell(
+      child: Padding(
+        padding: padding,
+        child: AnimatedDefaultTextStyle(
+          style: textStyle,
+          duration: widget.style.labelMotion.textStyleTransitionDuration,
+          curve: widget.style.labelMotion.textStyleTransitionCurve,
+          child: child,
+        ),
+      ),
+    );
+  }
+}
+
+class _HorizontalTrailingLabel extends _Label {
+  const _HorizontalTrailingLabel({
+    required super.style,
+    required super.label,
+    required super.description,
+    required super.error,
+    required super.variants,
+    required super.child,
+  });
+
+  @override
+  State<_HorizontalTrailingLabel> createState() => _HorizontalTrailingState();
+}
+
+class _HorizontalTrailingState extends _State<_HorizontalTrailingLabel> {
   @override
   Widget build(BuildContext context) => Table(
     defaultColumnWidth: const IntrinsicColumnWidth(),
@@ -436,20 +542,34 @@ class _VerticalLabelState extends _State<_VerticalLabel> {
 
 /// The [FLabel]'s styles.
 class FLabelStyles with Diagnosticable, _$FLabelStylesFunctions {
-  /// The horizontal label's style.
+  /// The [FLabelLayout.horizontalLeading] style.
   @override
-  final FLabelStyle horizontalStyle;
+  final FLabelStyle horizontalLeadingStyle;
 
-  /// The vertical label's style.
+  /// The [FLabelLayout.horizontalTrailing] style.
+  @override
+  final FLabelStyle horizontalTrailingStyle;
+
+  /// The [FLabelLayout.vertical] style.
   @override
   final FLabelStyle verticalStyle;
 
   /// Creates a [FLabelStyles].
-  const FLabelStyles({required this.horizontalStyle, required this.verticalStyle});
+  const FLabelStyles({
+    required this.horizontalLeadingStyle,
+    required this.horizontalTrailingStyle,
+    required this.verticalStyle,
+  });
 
   /// Creates a [FLabelStyles] that inherits its properties.
   FLabelStyles.inherit({required FStyle style})
-    : horizontalStyle = .inherit(
+    : horizontalLeadingStyle = .inherit(
+        style: style,
+        descriptionPadding: const .only(top: 2),
+        errorPadding: const .only(top: 2),
+        childPadding: const .symmetric(horizontal: 12),
+      ),
+      horizontalTrailingStyle = .inherit(
         style: style,
         descriptionPadding: const .only(top: 2),
         errorPadding: const .only(top: 2),
@@ -461,6 +581,12 @@ class FLabelStyles with Diagnosticable, _$FLabelStylesFunctions {
         descriptionPadding: const .only(top: 6),
         errorPadding: const .only(top: 6),
       );
+
+  FLabelStyle _style(FLabelLayout layout) => switch (layout) {
+    .horizontalLeading => horizontalLeadingStyle,
+    .horizontalTrailing => horizontalTrailingStyle,
+    .vertical => verticalStyle,
+  };
 }
 
 /// The [FLabel]'s style.

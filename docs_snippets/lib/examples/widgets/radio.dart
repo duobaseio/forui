@@ -24,3 +24,26 @@ class _RadioPageState extends StatefulExampleState<RadioPage> {
     onChange: (value) => setState(() => _value = value),
   );
 }
+
+@RoutePage()
+class LeadingLabelRadioPage extends StatefulExample {
+  LeadingLabelRadioPage({@queryParam super.theme});
+
+  @override
+  State<LeadingLabelRadioPage> createState() => _LeadingLabelRadioPageState();
+}
+
+class _LeadingLabelRadioPageState extends StatefulExampleState<LeadingLabelRadioPage> {
+  bool _value = true;
+
+  @override
+  Widget example(BuildContext _) => FRadio(
+    // {@highlight}
+    leadingLabel: true,
+    // {@endhighlight}
+    label: const Text('Default'),
+    description: const Text('The description of the default option.'),
+    value: _value,
+    onChange: (value) => setState(() => _value = value),
+  );
+}

@@ -330,7 +330,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
 
     return FLabel(
       style: style,
-      axis: .vertical,
+      layout: .vertical,
       variants: {if (!enabled) .disabled, if (error != null) .error},
       label: label,
       description: description,

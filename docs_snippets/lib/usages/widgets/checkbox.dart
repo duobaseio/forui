@@ -13,6 +13,7 @@ final checkbox = FCheckbox(
   // {@endcategory}
   // {@category "Core"}
   style: const .delta(size: 20),
+  leadingLabel: false,
   enabled: true,
   value: false,
   onChange: (value) {},

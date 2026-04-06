@@ -12,8 +12,8 @@ void main() {
         child: SizedBox(
           width: 300,
           child: FLabel(
-            style: TestScaffold.blueScreen.labelStyles.horizontalStyle,
-            axis: .horizontal,
+            style: TestScaffold.blueScreen.labelStyles.horizontalTrailingStyle,
+            layout: .horizontalTrailing,
             label: const Text('Email'),
             description: const Text('Enter your email address.'),
             error: const Text('Please enter a valid email address.'),
@@ -34,14 +34,14 @@ void main() {
       ('disabled-error', {.disabled, .error}),
       ('default', {}),
     ]) {
-      testWidgets('${theme.name} horizontal with $name', (tester) async {
+      testWidgets('${theme.name} horizontal-trailing with $name', (tester) async {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
             child: SizedBox(
               width: 300,
               child: FLabel(
-                axis: .horizontal,
+                layout: .horizontalTrailing,
                 label: const Text('Email'),
                 description: const Text('Enter your email address.'),
                 error: const Text('Please enter a valid email address.'),
@@ -55,7 +55,37 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('label/${theme.name}/horizontal-$name.png'));
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('label/${theme.name}/horizontal-trailing-$name.png'),
+        );
+      });
+
+      testWidgets('${theme.name} horizontal-leading with $name', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme.data,
+            child: SizedBox(
+              width: 300,
+              child: FLabel(
+                layout: .horizontalLeading,
+                label: const Text('Email'),
+                description: const Text('Enter your email address.'),
+                error: const Text('Please enter a valid email address.'),
+                variants: variants,
+                child: const DecoratedBox(
+                  decoration: BoxDecoration(borderRadius: .all(.circular(5)), color: Colors.grey),
+                  child: SizedBox(width: 16, height: 16),
+                ),
+              ),
+            ),
+          ),
+        );
+
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('label/${theme.name}/horizontal-leading-$name.png'),
+        );
       });
     }
 
@@ -70,7 +100,7 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: FLabel(
-              axis: .vertical,
+              layout: .vertical,
               label: const Text('Email'),
               description: const Text('Enter your email address.'),
               error: const Text('Please enter a valid email address.'),
@@ -93,7 +123,7 @@ void main() {
       ('enabled-to-disabled', <FFormFieldVariant>{}, {FFormFieldVariant.disabled}),
       ('disabled-to-enabled', {FFormFieldVariant.disabled}, <FFormFieldVariant>{}),
     ]) {
-      testWidgets('${theme.name} horizontal $name transition', (tester) async {
+      testWidgets('${theme.name} horizontal-trailing $name transition', (tester) async {
         final sheet = autoDispose(AnimationSheetBuilder(frameSize: const Size(300, 100)));
 
         await tester.pumpWidget(
@@ -103,7 +133,7 @@ void main() {
               child: SizedBox(
                 width: 300,
                 child: FLabel(
-                  axis: .horizontal,
+                  layout: .horizontalTrailing,
                   label: const Text('Email'),
                   description: const Text('Enter your email address.'),
                   error: const Text('Please enter a valid email address.'),
@@ -127,7 +157,7 @@ void main() {
               child: SizedBox(
                 width: 300,
                 child: FLabel(
-                  axis: .horizontal,
+                  layout: .horizontalTrailing,
                   label: const Text('Email'),
                   description: const Text('Enter your email address.'),
                   error: const Text('Please enter a valid email address.'),
@@ -143,7 +173,66 @@ void main() {
           const Duration(milliseconds: 120),
         );
 
-        await expectLater(sheet.collate(5), matchesGoldenFile('label/${theme.name}/horizontal-$name.png'));
+        await expectLater(
+          sheet.collate(5),
+          matchesGoldenFile('label/${theme.name}/horizontal-trailing-$name.png'),
+        );
+      });
+
+      testWidgets('${theme.name} horizontal-leading $name transition', (tester) async {
+        final sheet = autoDispose(AnimationSheetBuilder(frameSize: const Size(300, 100)));
+
+        await tester.pumpWidget(
+          sheet.record(
+            TestScaffold.app(
+              theme: theme.data,
+              child: SizedBox(
+                width: 300,
+                child: FLabel(
+                  layout: .horizontalLeading,
+                  label: const Text('Email'),
+                  description: const Text('Enter your email address.'),
+                  error: const Text('Please enter a valid email address.'),
+                  variants: from,
+                  child: const DecoratedBox(
+                    decoration: BoxDecoration(borderRadius: .all(.circular(5)), color: Colors.grey),
+                    child: SizedBox(width: 16, height: 16),
+                  ),
+                ),
+              ),
+            ),
+            recording: false,
+          ),
+        );
+        await tester.pumpAndSettle();
+
+        await tester.pumpFrames(
+          sheet.record(
+            TestScaffold.app(
+              theme: theme.data,
+              child: SizedBox(
+                width: 300,
+                child: FLabel(
+                  layout: .horizontalLeading,
+                  label: const Text('Email'),
+                  description: const Text('Enter your email address.'),
+                  error: const Text('Please enter a valid email address.'),
+                  variants: to,
+                  child: const DecoratedBox(
+                    decoration: BoxDecoration(borderRadius: .all(.circular(5)), color: Colors.grey),
+                    child: SizedBox(width: 16, height: 16),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          const Duration(milliseconds: 120),
+        );
+
+        await expectLater(
+          sheet.collate(5),
+          matchesGoldenFile('label/${theme.name}/horizontal-leading-$name.png'),
+        );
       });
 
       testWidgets('${theme.name} vertical $name transition', (tester) async {
@@ -154,7 +243,7 @@ void main() {
             TestScaffold.app(
               theme: theme.data,
               child: FLabel(
-                axis: .vertical,
+                layout: .vertical,
                 label: const Text('Email'),
                 description: const Text('Enter your email address.'),
                 error: const Text('Please enter a valid email address.'),
@@ -175,7 +264,7 @@ void main() {
             TestScaffold.app(
               theme: theme.data,
               child: FLabel(
-                axis: .vertical,
+                layout: .vertical,
                 label: const Text('Email'),
                 description: const Text('Enter your email address.'),
                 error: const Text('Please enter a valid email address.'),

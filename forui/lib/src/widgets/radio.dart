@@ -50,6 +50,9 @@ class FRadio extends StatelessWidget {
   /// ```
   final FRadioStyleDelta style;
 
+  /// Whether the label is positioned before the radio (leading) instead of after it (trailing). Defaults to false.
+  final bool leadingLabel;
+
   /// The label displayed next to the radio.
   final Widget? label;
 
@@ -85,6 +88,7 @@ class FRadio extends StatelessWidget {
   /// Creates a [FRadio].
   const FRadio({
     this.style = const .context(),
+    this.leadingLabel = false,
     this.label,
     this.description,
     this.error,
@@ -102,6 +106,9 @@ class FRadio extends StatelessWidget {
   Widget build(BuildContext context) {
     final style = this.style(context.theme.radioStyle);
     final formVariants = <FFormFieldVariant>{if (!enabled) .disabled, if (error != null) .error};
+    final (layout, labelStyle) = leadingLabel
+        ? (FLabelLayout.horizontalLeading, style.leadingLabelStyle)
+        : (FLabelLayout.horizontalTrailing, style.trailingLabelStyle);
 
     return FTappable(
       style: style.tappableStyle,
@@ -115,9 +122,9 @@ class FRadio extends StatelessWidget {
         final variants = <FVariant>{...tappableVariants, ...formVariants};
 
         return FLabel(
-          axis: .horizontal,
+          layout: layout,
           variants: formVariants,
-          style: style,
+          style: labelStyle,
           label: label,
           description: description,
           error: error,
@@ -164,6 +171,7 @@ class FRadio extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
+      ..add(FlagProperty('leadingLabel', value: leadingLabel, ifTrue: 'leadingLabel'))
       ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(FlagProperty('value', value: value, ifTrue: 'checked'))
       ..add(ObjectFlagProperty.has('onChange', onChange))
@@ -175,7 +183,7 @@ class FRadio extends StatelessWidget {
 }
 
 /// A [FRadio]'s style.
-class FRadioStyle extends FLabelStyle with _$FRadioStyleFunctions {
+class FRadioStyle with Diagnosticable, _$FRadioStyleFunctions {
   /// The tappable style.
   @override
   final FTappableStyle tappableStyle;
@@ -212,6 +220,14 @@ class FRadioStyle extends FLabelStyle with _$FRadioStyleFunctions {
   @override
   final FRadioMotion motion;
 
+  /// The label style when [FRadio.leadingLabel] is true.
+  @override
+  final FLabelStyle leadingLabelStyle;
+
+  /// The label style when [FRadio.leadingLabel] is false (the default).
+  @override
+  final FLabelStyle trailingLabelStyle;
+
   /// Creates a [FRadioStyle].
   const FRadioStyle({
     required this.tappableStyle,
@@ -222,20 +238,14 @@ class FRadioStyle extends FLabelStyle with _$FRadioStyleFunctions {
     required this.backgroundColor,
     required this.indicatorColor,
     required this.indicatorSize,
-    required super.labelTextStyle,
-    required super.descriptionTextStyle,
-    required super.errorTextStyle,
+    required this.leadingLabelStyle,
+    required this.trailingLabelStyle,
     this.motion = const FRadioMotion(),
-    super.labelPadding,
-    super.descriptionPadding,
-    super.errorPadding,
-    super.childPadding,
-    super.labelMotion,
   });
 
   /// Creates a [FRadioStyle] that inherits its properties.
   factory FRadioStyle.inherit({required FColors colors, required FStyle style, required bool touch}) {
-    final label = FLabelStyles.inherit(style: style).horizontalStyle;
+    final labels = FLabelStyles.inherit(style: style);
     final (padding, indicatorSize) = switch (touch) {
       true => (const EdgeInsets.all(3), 12.0),
       false => (const EdgeInsets.all(3), 8.0),
@@ -271,13 +281,8 @@ class FRadioStyle extends FLabelStyle with _$FRadioStyleFunctions {
           [.error.and(.disabled)]: colors.disable(colors.error),
         },
       ),
-      labelTextStyle: style.formFieldStyle.labelTextStyle,
-      descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,
-      errorTextStyle: style.formFieldStyle.errorTextStyle,
-      labelPadding: label.labelPadding,
-      descriptionPadding: label.descriptionPadding,
-      errorPadding: label.errorPadding,
-      childPadding: label.childPadding,
+      leadingLabelStyle: labels.horizontalLeadingStyle,
+      trailingLabelStyle: labels.horizontalTrailingStyle,
     );
   }
 }

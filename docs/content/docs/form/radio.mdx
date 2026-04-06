@@ -10,6 +10,7 @@ import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
 import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/radio/default.json';
+import leadingLabelSnippet from '@/snippets/examples/radio/leading-label.json';
 import radioUsage from '@/snippets/usages/widgets/radio/radio.json';
 
 <Callout type="info">
@@ -41,3 +42,16 @@ To generate a specific style for customization:
 
 ### `FRadio(...)`
 <UsageSnippet usage={radioUsage} />
+
+## Examples
+
+### Leading Label
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='radio' variant='leading-label'/>
+  </Tab>
+  <Tab value="Code">
+    <CodeSnippet snippet={leadingLabelSnippet} />
+  </Tab>
+</Tabs>

@@ -464,7 +464,7 @@ class _FOtpFieldState extends State<FOtpField> {
         );
 
         Widget field = FLabel(
-          axis: .vertical,
+          layout: .vertical,
           variants: variants as Set<FFormFieldVariant>,
           label: widget.label,
           style: style,

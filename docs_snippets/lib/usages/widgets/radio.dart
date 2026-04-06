@@ -13,6 +13,7 @@ final radio = FRadio(
   // {@endcategory}
   // {@category "Core"}
   style: const .delta(motion: .delta()),
+  leadingLabel: false,
   enabled: true,
   value: false,
   onChange: (value) {},

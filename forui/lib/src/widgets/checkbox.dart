@@ -48,6 +48,9 @@ class FCheckbox extends StatelessWidget {
   /// ```
   final FCheckboxStyleDelta style;
 
+  /// Whether the label is positioned before the checkbox (leading) instead of after it (trailing). Defaults to false.
+  final bool leadingLabel;
+
   /// The label displayed next to the checkbox.
   final Widget? label;
 
@@ -83,6 +86,7 @@ class FCheckbox extends StatelessWidget {
   /// Creates a [FCheckbox].
   const FCheckbox({
     this.style = const .context(),
+    this.leadingLabel = false,
     this.label,
     this.description,
     this.error,
@@ -100,6 +104,9 @@ class FCheckbox extends StatelessWidget {
   Widget build(BuildContext context) {
     final style = this.style(context.theme.checkboxStyle);
     final formVariants = <FFormFieldVariant>{if (!enabled) .disabled, if (error != null) .error};
+    final (layout, labelStyle) = leadingLabel
+        ? (FLabelLayout.horizontalLeading, style.leadingLabelStyle)
+        : (FLabelLayout.horizontalTrailing, style.trailingLabelStyle);
 
     return FTappable(
       style: style.tappableStyle,
@@ -115,9 +122,9 @@ class FCheckbox extends StatelessWidget {
         final iconTheme = style.iconStyle.resolve(variants);
         final decoration = style.decoration.resolve(variants);
         return FLabel(
-          axis: .horizontal,
+          layout: layout,
           variants: formVariants,
-          style: style,
+          style: labelStyle,
           label: label,
           description: description,
           error: error,
@@ -155,6 +162,7 @@ class FCheckbox extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
+      ..add(FlagProperty('leadingLabel', value: leadingLabel, ifTrue: 'leadingLabel'))
       ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(FlagProperty('value', value: value, ifTrue: 'checked'))
       ..add(ObjectFlagProperty.has('onChange', onChange))
@@ -166,7 +174,7 @@ class FCheckbox extends StatelessWidget {
 }
 
 /// A checkboxes style.
-class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
+class FCheckboxStyle with Diagnosticable, _$FCheckboxStyleFunctions {
   /// The tappable style.
   @override
   final FTappableStyle tappableStyle;
@@ -191,27 +199,29 @@ class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
   @override
   final FCheckboxMotion motion;
 
+  /// The label style when [FCheckbox.leadingLabel] is true.
+  @override
+  final FLabelStyle leadingLabelStyle;
+
+  /// The label style when [FCheckbox.leadingLabel] is false (the default).
+  @override
+  final FLabelStyle trailingLabelStyle;
+
   /// Creates a [FCheckboxStyle].
   const FCheckboxStyle({
     required this.tappableStyle,
     required this.focusedOutlineStyle,
     required this.iconStyle,
     required this.decoration,
-    required super.labelTextStyle,
-    required super.descriptionTextStyle,
-    required super.errorTextStyle,
+    required this.leadingLabelStyle,
+    required this.trailingLabelStyle,
     this.size = 16,
     this.motion = const FCheckboxMotion(),
-    super.labelPadding,
-    super.descriptionPadding,
-    super.errorPadding,
-    super.childPadding,
-    super.labelMotion,
   });
 
   /// Creates a [FCheckboxStyle] that inherits its properties.
   factory FCheckboxStyle.inherit({required FColors colors, required FStyle style, required bool touch}) {
-    final label = FLabelStyles.inherit(style: style).horizontalStyle;
+    final FLabelStyles(:horizontalLeadingStyle, :horizontalTrailingStyle) = FLabelStyles.inherit(style: style);
 
     final (size, iconSize) = switch (touch) {
       true => (20.0, 18.0),
@@ -280,13 +290,8 @@ class FCheckboxStyle extends FLabelStyle with _$FCheckboxStyleFunctions {
           ),
         },
       ),
-      labelTextStyle: style.formFieldStyle.labelTextStyle,
-      descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,
-      errorTextStyle: style.formFieldStyle.errorTextStyle,
-      labelPadding: label.labelPadding,
-      descriptionPadding: label.descriptionPadding,
-      errorPadding: label.errorPadding,
-      childPadding: label.childPadding,
+      leadingLabelStyle: horizontalLeadingStyle,
+      trailingLabelStyle: horizontalTrailingStyle,
     );
   }
 }
