@@ -99,6 +99,7 @@ We've changed `FLineCalendar`'s default styling to be more aesthetically pleasin
 
 ### `FOverlay`
 * Add `FOverlay`.
+* Add `FOverlayControl`.
 
 
 ### `FPicker`
@@ -106,6 +107,8 @@ We've changed `FLineCalendar`'s default styling to be more aesthetically pleasin
 
 
 ### `FPortal`
+* **Breaking** Replace `FPortal(controller: ...)` with `FPortal(control: .managed(controller: ...))`.
+
 * Fix portal not repositioning when the child widget changes size.
 
 

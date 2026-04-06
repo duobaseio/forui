@@ -6,6 +6,7 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/overlay/composited_child.dart';
 import 'package:forui/src/foundation/overlay/composited_overlay.dart';
 import 'package:forui/src/foundation/overlay/layer.dart';
+import 'package:forui/src/foundation/overlay/overlay_controller.dart';
 
 /// The signature for [FOverlay.overlayBuilder].
 typedef FOverlayBuilder =
@@ -24,7 +25,7 @@ typedef FOverlayBuilder =
 ///
 /// ```dart
 /// FOverlay(
-///   controller: controller,
+///   control: .managed(controller: controller),
 ///   overlay: [
 ///     Positioned(
 ///       top: -40, // 40px above the child's top edge
@@ -82,8 +83,8 @@ class FOverlay extends StatefulWidget {
   /// The default builder that returns the child as-is.
   static Widget defaultBuilder(BuildContext _, OverlayPortalController _, Widget? child) => child!;
 
-  /// The controller for showing/hiding the overlay.
-  final OverlayPortalController? controller;
+  /// The control for showing/hiding the overlay.
+  final FOverlayControl control;
 
   /// The widgets to overlay on the child.
   ///
@@ -117,7 +118,7 @@ class FOverlay extends StatefulWidget {
   /// Throws [AssertionError] if [builder] and [child] are both null.
   const FOverlay({
     required this.overlay,
-    this.controller,
+    this.control = const .managed(),
     this.overlayBuilder = defaultOverlayBuilder,
     this.builder = defaultBuilder,
     this.child,
@@ -131,7 +132,7 @@ class FOverlay extends StatefulWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('control', control))
       ..add(ObjectFlagProperty.has('overlayBuilder', overlayBuilder))
       ..add(IterableProperty('overlay', overlay))
       ..add(ObjectFlagProperty.has('builder', builder));
@@ -146,15 +147,13 @@ class _State extends State<FOverlay> {
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ?? .new();
+    _controller = widget.control.create();
   }
 
   @override
   void didUpdateWidget(covariant FOverlay old) {
     super.didUpdateWidget(old);
-    if (widget.controller != old.controller) {
-      _controller = widget.controller ?? .new();
-    }
+    _controller =  widget.control.update(old.control, _controller).$1;
   }
 
   @override

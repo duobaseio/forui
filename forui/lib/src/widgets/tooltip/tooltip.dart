@@ -273,7 +273,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
 
     return BackdropGroup(
       child: FPortal(
-        controller: _controller.overlay,
+        control: .managed(controller: _controller.overlay),
         spacing: widget.spacing,
         childAnchor: widget.childAnchor,
         portalAnchor: widget.tipAnchor,

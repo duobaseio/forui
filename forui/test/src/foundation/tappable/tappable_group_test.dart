@@ -212,7 +212,7 @@ void main() {
                   child: FTappable(onPress: () => outerPressed++, child: const Text('Outer')),
                 ),
                 FPortal(
-                  controller: controller,
+                  control: .managed(controller: controller),
                   portalBuilder: (context, _) => SizedBox(
                     key: const ValueKey('inner'),
                     height: 50,

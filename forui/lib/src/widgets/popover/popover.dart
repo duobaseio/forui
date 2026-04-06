@@ -463,7 +463,7 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
 
     return BackdropGroup(
       child: FPortal(
-        controller: _controller.overlay,
+        control: .managed(controller: _controller.overlay),
         constraints: widget.constraints,
         portalAnchor: popoverAnchor,
         childAnchor: childAnchor,

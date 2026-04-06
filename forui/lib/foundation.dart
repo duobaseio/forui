@@ -14,6 +14,7 @@ export 'src/foundation/time.dart';
 export 'src/foundation/tween.dart';
 export 'src/foundation/typeahead_controller.dart';
 export 'src/foundation/overlay/overlay.dart';
+export 'src/foundation/overlay/overlay_controller.dart' hide InternalFOverlayControl;
 export 'src/foundation/overlay/portal.dart';
 export 'src/foundation/overlay/portal_constraints.dart' hide FixedConstraints;
 export 'src/foundation/overlay/portal_overflow.dart';
