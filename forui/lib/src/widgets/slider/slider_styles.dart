@@ -113,10 +113,6 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
   @override
   final FTooltipStyle tooltipStyle;
 
-  /// The tooltip's motion-related properties.
-  @override
-  final FTooltipMotion tooltipMotion;
-
   /// The anchor of the tooltip to which the [tooltipThumbAnchor] is aligned.
   ///
   /// Defaults to [Alignment.bottomCenter] on primarily touch devices and [Alignment.centerLeft] on non-primarily touch
@@ -144,7 +140,6 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
     this.borderRadius = const .all(.circular(4)),
     this.crossAxisExtent = 6,
     this.thumbSize = 16,
-    this.tooltipMotion = const FTooltipMotion(),
     this.tooltipTipAnchor = .bottomCenter,
     this.tooltipThumbAnchor = .topCenter,
     super.labelPadding = const .only(bottom: 5),

@@ -9,50 +9,42 @@ import 'package:forui/forui.dart';
 class TooltipGroupScope extends InheritedWidget {
   static TooltipGroupScope? maybeOf(BuildContext context) => context.getInheritedWidgetOfExactType<TooltipGroupScope>();
 
+  final FTooltipStyle style;
   final bool active;
   final VoidCallback show;
   final VoidCallback hide;
   final bool hover;
-  final Duration hoverEnterDuration;
-  final Duration hoverExitDuration;
   final bool longPress;
-  final Duration longPressExitDuration;
 
   const TooltipGroupScope._(
+    this.style,
     this.active,
     this.show,
     this.hide,
     this.hover,
-    this.hoverEnterDuration,
-    this.hoverExitDuration,
-    this.longPress,
-    this.longPressExitDuration, {
+    this.longPress, {
     required super.child,
   });
 
   @override
   bool updateShouldNotify(TooltipGroupScope old) =>
+      style != old.style ||
       active != old.active ||
       show != old.show ||
       hide != old.hide ||
       hover != old.hover ||
-      hoverEnterDuration != old.hoverEnterDuration ||
-      hoverExitDuration != old.hoverExitDuration ||
-      longPress != old.longPress ||
-      longPressExitDuration != old.longPressExitDuration;
+      longPress != old.longPress;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty('style', style))
       ..add(FlagProperty('active', value: active, ifTrue: 'active'))
       ..add(ObjectFlagProperty.has('show', show))
       ..add(ObjectFlagProperty.has('hide', hide))
       ..add(FlagProperty('hover', value: hover, ifTrue: 'hover'))
-      ..add(DiagnosticsProperty('hoverEnterDuration', hoverEnterDuration))
-      ..add(DiagnosticsProperty('hoverExitDuration', hoverExitDuration))
-      ..add(FlagProperty('longPress', value: longPress, ifTrue: 'longPress'))
-      ..add(DiagnosticsProperty('longPressExitDuration', longPressExitDuration));
+      ..add(FlagProperty('longPress', value: longPress, ifTrue: 'longPress'));
   }
 }
 
@@ -65,14 +57,11 @@ class TooltipGroupScope extends InheritedWidget {
 /// * https://forui.dev/docs/overlay/tooltip for working examples.
 /// * [FTooltip] for the tooltip.
 class FTooltipGroup extends StatefulWidget {
-  /// The default duration to wait before showing child [FTooltip]s after hovering.
-  static const defaultHoverEnterDuration = Duration(milliseconds: 500);
-
-  /// The default duration to wait before hiding child [FTooltip]s after the user has stopped hovering.
-  static const defaultHoverExitDuration = Duration.zero;
-
-  /// The default duration to wait before hiding child [FTooltip]s after the user has stopped pressing.
-  static const defaultLongPressExitDuration = Duration(milliseconds: 1500);
+  /// The tooltip's style.
+  ///
+  /// This style is passed down to all child [FTooltip]s in this group. Individual tooltips can override this style
+  /// using their own [FTooltip.style] parameter.
+  final FTooltipStyleDelta style;
 
   /// The duration subsequent tooltips in this group will appear instantly on hover. Defaults to 300ms.
   final Duration activeDuration;
@@ -80,17 +69,8 @@ class FTooltipGroup extends StatefulWidget {
   /// True if child [FTooltip]s should be shown when hovered over. Defaults to true.
   final bool hover;
 
-  /// The duration to wait before showing child [FTooltip]s after hovering. Defaults to 500ms.
-  final Duration hoverEnterDuration;
-
-  /// The duration to wait before hiding child [FTooltip]s after the user has stopped hovering. Defaults to 0ms.
-  final Duration hoverExitDuration;
-
   /// True if child [FTooltip]s should be shown when long pressed. Defaults to true.
   final bool longPress;
-
-  /// The duration to wait before hiding child [FTooltip]s after the user has stopped pressing. Defaults to 1500ms.
-  final Duration longPressExitDuration;
 
   /// The child widget tree containing [FTooltip]s.
   final Widget child;
@@ -98,12 +78,10 @@ class FTooltipGroup extends StatefulWidget {
   /// Creates a tooltip group.
   const FTooltipGroup({
     required this.child,
+    this.style = const .context(),
     this.activeDuration = const Duration(milliseconds: 300),
     this.hover = true,
-    this.hoverEnterDuration = defaultHoverEnterDuration,
-    this.hoverExitDuration = defaultHoverExitDuration,
     this.longPress = true,
-    this.longPressExitDuration = defaultLongPressExitDuration,
     super.key,
   });
 
@@ -114,12 +92,10 @@ class FTooltipGroup extends StatefulWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
+      ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('activeDuration', activeDuration))
       ..add(FlagProperty('hover', value: hover, ifTrue: 'hover'))
-      ..add(DiagnosticsProperty('hoverEnterDuration', hoverEnterDuration))
-      ..add(DiagnosticsProperty('hoverExitDuration', hoverExitDuration))
-      ..add(FlagProperty('longPress', value: longPress, ifTrue: 'longPress'))
-      ..add(DiagnosticsProperty('longPressExitDuration', longPressExitDuration));
+      ..add(FlagProperty('longPress', value: longPress, ifTrue: 'longPress'));
   }
 }
 
@@ -135,14 +111,12 @@ class _FTooltipGroupState extends State<FTooltipGroup> {
 
   @override
   Widget build(BuildContext context) => TooltipGroupScope._(
+    widget.style(context.theme.tooltipStyle),
     _active,
     _show,
     _hide,
     widget.hover,
-    widget.hoverEnterDuration,
-    widget.hoverExitDuration,
     widget.longPress,
-    widget.longPressExitDuration,
     child: widget.child,
   );
 

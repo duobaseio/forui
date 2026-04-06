@@ -50,7 +50,7 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
     final offset = widget.min ? controller.value.min : controller.value.max;
     final variants = InheritedVariants.of(context).variants;
     final InheritedData(
-      style: FSliderStyle(:thumbSize, :thumbStyle, :tooltipTipAnchor, :tooltipThumbAnchor),
+      style: FSliderStyle(:thumbSize, :thumbStyle, :tooltipStyle, :tooltipTipAnchor, :tooltipThumbAnchor),
       :layout,
       :tooltipBuilder,
       :semanticValueFormatterCallback,
@@ -143,6 +143,7 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
         },
         child: FTooltip(
           control: .managed(controller: tooltip),
+          style: tooltipStyle,
           tipAnchor: tooltipTipAnchor,
           childAnchor: tooltipThumbAnchor,
           tipBuilder: (_, tooltipController) => tooltipBuilder(tooltipController, offset),

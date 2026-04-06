@@ -18,10 +18,7 @@ final tooltip = FTooltip(
   // {@endcategory}
   // {@category "Behavior"}
   hover: true,
-  hoverEnterDuration: const Duration(milliseconds: 500),
-  hoverExitDuration: .zero,
   longPress: true,
-  longPressExitDuration: const Duration(milliseconds: 1500),
   // {@endcategory}
   // {@category "Core"}
   style: const .delta(padding: .value(.symmetric(horizontal: 14, vertical: 10))),
@@ -33,17 +30,17 @@ final tooltip = FTooltip(
 
 // {@category "Control" "`.lifted()`"}
 /// Externally controls the tooltip visibility.
-final FTooltipControl lifted = .lifted(shown: false, onChange: (shown) {}, motion: const FTooltipMotion());
+final FTooltipControl lifted = .lifted(shown: false, onChange: (shown) {});
 
 // {@category "Control" "`.managed()` with internal controller"}
 /// Manages tooltip state internally.
-final FTooltipControl managedInternal = .managed(initial: false, onChange: (shown) {}, motion: const FTooltipMotion());
+final FTooltipControl managedInternal = .managed(initial: false, onChange: (shown) {});
 
 // {@category "Control" "`.managed()` with external controller"}
 /// Uses an external controller for tooltip management.
 final FTooltipControl managedExternal = .managed(
   // Don't create a controller inline. Store it in a State instead.
-  controller: FTooltipController(vsync: vsync, shown: false, motion: const FTooltipMotion()),
+  controller: FTooltipController(vsync: vsync, shown: false),
   onChange: (shown) {},
 );
 

@@ -160,15 +160,15 @@ final FSliderControl managedDiscreteRangeExternal = .managedDiscreteRange(
 // {@category "Tooltip Controls" "`.lifted()`"}
 /// Externally controls the tooltip visibility.
 final FSliderTooltipControls tooltipControlsLifted = FSliderTooltipControls(
-  min: .lifted(shown: false, onChange: (shown) {}, motion: const FTooltipMotion()),
-  max: .lifted(shown: false, onChange: (shown) {}, motion: const FTooltipMotion()),
+  min: .lifted(shown: false, onChange: (shown) {}),
+  max: .lifted(shown: false, onChange: (shown) {}),
 );
 
 // {@category "Tooltip Controls" "`.managed()` with internal controller"}
 /// Manages tooltip state internally with configurable parameters.
 final FSliderTooltipControls tooltipControlsManagedInternal = FSliderTooltipControls(
-  min: .managed(initial: false, motion: const FTooltipMotion(), onChange: (shown) {}),
-  max: .managed(initial: false, motion: const FTooltipMotion(), onChange: (shown) {}),
+  min: .managed(initial: false, onChange: (shown) {}),
+  max: .managed(initial: false, onChange: (shown) {}),
 );
 
 // {@category "Tooltip Controls" "`.managed()` with external controller"}
@@ -176,11 +176,11 @@ final FSliderTooltipControls tooltipControlsManagedInternal = FSliderTooltipCont
 final FSliderTooltipControls tooltipControlsManagedExternal = FSliderTooltipControls(
   // For demonstration purposes only. Don't create controllers inline, store them in a State instead.
   min: .managed(
-    controller: FTooltipController(vsync: vsync, shown: false, motion: const FTooltipMotion()),
+    controller: FTooltipController(vsync: vsync, shown: false),
     onChange: (shown) {},
   ),
   max: .managed(
-    controller: FTooltipController(vsync: vsync, shown: false, motion: const FTooltipMotion()),
+    controller: FTooltipController(vsync: vsync, shown: false),
     onChange: (shown) {},
   ),
 );

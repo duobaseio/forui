@@ -89,8 +89,30 @@ We've changed `FLineCalendar`'s default styling to be more aesthetically pleasin
 * Add `FTimePickerStyle.hapticFeedback`.
 
 
-### `FTooltip`
+### `FSlider`
+* **Breaking** Remove `FSliderStyle.tooltipMotion`. Configure motion via `FTooltipStyle.motion` instead.
+
+
+### `FTooltip` & `FTooltipGroup`
 * Add `FTooltipStyle.hapticFeedback`.
+* Add `FTooltipStyle.motion`.
+* Add `FTooltipStyle.hoverEnterDuration`.
+* Add `FTooltipStyle.hoverExitDuration`.
+* Add `FTooltipStyle.longPressExitDuration`.
+* Add `FTooltipGroup.style`.
+* Add `FTooltipController.show(animated:)`.
+* Add `FTooltipController.hide(animated:)`.
+* Add `FTooltipController.toggle(animated:)`.
+
+* **Breaking** Remove `FTooltipControl.managed(motion: ...)`. Configure motion via `FTooltipStyle` instead.
+* **Breaking** Remove `FTooltipControl.lifted(motion: ...)`. Configure motion via `FTooltipStyle` instead.
+* **Breaking** Remove `FTooltipController(motion: ...)`. Configure motion via `FTooltipStyle` instead.
+* **Breaking** Remove `FTooltip(hoverEnterDuration: ...)`. Configure via `FTooltipStyle` instead.
+* **Breaking** Remove `FTooltip(hoverExitDuration: ...)`. Configure via `FTooltipStyle` instead.
+* **Breaking** Remove `FTooltip(longPressExitDuration: ...)`. Configure via `FTooltipStyle` instead.
+* **Breaking** Remove `FTooltipGroup(hoverEnterDuration: ...)`. Configure via `FTooltipStyle` instead.
+* **Breaking** Remove `FTooltipGroup(hoverExitDuration: ...)`. Configure via `FTooltipStyle` instead.
+* **Breaking** Remove `FTooltipGroup(longPressExitDuration: ...)`. Configure via `FTooltipStyle` instead.
 
 
 ### `FOtpField`
