@@ -492,6 +492,7 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
   }) : itemGroupStyle = .inherit(colors: colors, style: style, typography: typography, touch: touch).copyWith(
          decoration: .value(
            ShapeDecoration(
+             color: colors.card,
              shape: RoundedSuperellipseBorder(
                side: BorderSide(color: colors.border, width: style.borderWidth),
                borderRadius: style.borderRadius.md,
@@ -499,10 +500,14 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
            ),
          ),
          itemStyles: .delta([
-           .base(
+           .all(
              .delta(
                backgroundColor: FVariants.all(colors.card),
                decoration: .delta([.base(.shapeDelta(color: colors.card))]),
+             ),
+           ),
+           .base(
+             .delta(
                contentStyle: FItemContentStyle.inherit(
                  colors: colors,
                  typography: typography,

@@ -18,6 +18,11 @@ class FSubmenuTile extends StatelessWidget with FTileMixin {
   /// Defaults to `const FPopoverControl.managed()`.
   final FPopoverControl control;
 
+  /// The variant used to resolve the tile's style.
+  ///
+  /// Defaults to [FItemVariant.primary].
+  final FItemVariant variant;
+
   /// The trigger tile's style.
   ///
   /// To modify the current style:
@@ -162,6 +167,7 @@ class FSubmenuTile extends StatelessWidget with FTileMixin {
     required this.title,
     required this.menu,
     this.control = const .managed(),
+    this.variant = .primary,
     this.style = const .context(),
     this.enabled,
     this.semanticsLabel,
@@ -205,6 +211,7 @@ class FSubmenuTile extends StatelessWidget with FTileMixin {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('control', control))
+      ..add(DiagnosticsProperty('variant', variant))
       ..add(DiagnosticsProperty('style', style))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
       ..add(StringProperty('semanticsLabel', semanticsLabel))
@@ -269,6 +276,7 @@ class FSubmenuTile extends StatelessWidget with FTileMixin {
         child: ListenableBuilder(
           listenable: controller,
           builder: (context, _) => FTile(
+            variant: variant,
             style: style,
             enabled: enabled,
             selected: controller.status.isForwardOrCompleted,

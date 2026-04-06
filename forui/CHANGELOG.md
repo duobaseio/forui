@@ -64,6 +64,9 @@ We've changed `FLineCalendar`'s default styling to be more aesthetically pleasin
 * Add `FPopoverMenuStyle.minWidth`.
 * Add `FPopoverMenuStyle.hapticFeedback`.
 
+* Fix `FPopoverMenuStyle` tiles not having a selected decoration style.
+* Fix `FPopoverMenuStyle` items not showing card background.
+
 
 ### `FTextField`
 * Add `FTextFieldStyle.cursorWidth`.
@@ -79,6 +82,8 @@ We've changed `FLineCalendar`'s default styling to be more aesthetically pleasin
 
 ### `FTile`
 * Add `FTileMixin.submenu(...)` shorthand for `FSubmenuTile`.
+* Add `FTileMixin.tile(variant: ...)`.
+* Add `FTileMixin.raw(variant: ...)`.
 
 
 ### `FTileGroup`

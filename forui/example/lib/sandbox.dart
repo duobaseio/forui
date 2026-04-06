@@ -17,16 +17,6 @@ class _SandboxState extends State<Sandbox> {
         mainAxisSize: MainAxisSize.min,
         spacing: 20,
         children: [
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            spacing: 10,
-            children: [
-              FBadge(child: Text('Primary')),
-              FBadge(variant: .secondary, child: Text('Secondary')),
-              FBadge(variant: .outline, child: Text('Outline')),
-              FBadge(variant: .destructive, child: Text('Destructive')),
-            ],
-          ),
           FDateField(
             control: .managed(initial: DateTime(2025, 12, 31)),
             label: const Text('Start Date'),
@@ -41,16 +31,6 @@ class _SandboxState extends State<Sandbox> {
               .mark(value: 0.5),
               .mark(value: 0.75, tick: false),
               .mark(value: 1, label: Text('100%')),
-            ],
-          ),
-          Row(
-            mainAxisSize: MainAxisSize.min,
-            spacing: 10,
-            children: [
-              FButton(onPress: () {}, child: Text('Primary')),
-              FButton(variant: .secondary, onPress: () {}, child: Text('Secondary')),
-              FButton(variant: .outline, onPress: () {}, child: Text('Outline')),
-              FButton(variant: .destructive, onPress: () {}, child: Text('Destructive')),
             ],
           ),
           FMultiSelect<String>(

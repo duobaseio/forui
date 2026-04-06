@@ -300,6 +300,7 @@ mixin FTileMixin on Widget {
     required Widget title,
     required List<FTileGroupMixin> menu,
     FPopoverControl control = const .managed(),
+    FItemVariant variant = .primary,
     FItemStyleDelta style = const .context(),
     bool? enabled,
     String? semanticsLabel,
@@ -340,6 +341,7 @@ mixin FTileMixin on Widget {
     title: title,
     menu: menu,
     control: control,
+    variant: variant,
     style: style,
     enabled: enabled,
     semanticsLabel: semanticsLabel,
@@ -383,6 +385,7 @@ mixin FTileMixin on Widget {
   /// This function is a shorthand for [FTile.new].
   static FTile tile({
     required Widget title,
+    FItemVariant variant = .primary,
     FItemStyleDelta style = const .context(),
     bool? enabled,
     bool selected = false,
@@ -406,6 +409,7 @@ mixin FTileMixin on Widget {
     Key? key,
   }) => .new(
     title: title,
+    variant: variant,
     style: style,
     enabled: enabled,
     selected: selected,
@@ -434,6 +438,7 @@ mixin FTileMixin on Widget {
   /// This function is a shorthand for [FTile.raw].
   static FTile raw({
     required Widget child,
+    FItemVariant variant = .primary,
     FItemStyleDelta style = const .context(),
     bool? enabled,
     bool selected = false,
@@ -453,6 +458,7 @@ mixin FTileMixin on Widget {
     Widget? prefix,
     Key? key,
   }) => .raw(
+    variant: variant,
     style: style,
     enabled: enabled,
     selected: selected,
