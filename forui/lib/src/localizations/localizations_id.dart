@@ -84,6 +84,9 @@ class FLocalizationsId extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dateTimePickerToday => 'Hari ini';
+
+  @override
   String get dialogSemanticsLabel => 'Dialog';
 
   @override

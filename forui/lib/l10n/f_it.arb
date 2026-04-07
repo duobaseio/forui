@@ -28,5 +28,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "Nascondi password",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Mostra password",
   "textFieldEmailLabel": "Email",
-  "passwordFieldLabel": "Password"
+  "passwordFieldLabel": "Password",
+  "dateTimePickerToday": "Oggi"
 }

@@ -84,6 +84,9 @@ class FLocalizationsRo extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dateTimePickerToday => 'Astăzi';
+
+  @override
   String get dialogSemanticsLabel => 'Casetă de dialog';
 
   @override

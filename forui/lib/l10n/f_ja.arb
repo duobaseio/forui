@@ -28,5 +28,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "パスワードを非表示",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "パスワードを表示",
   "textFieldEmailLabel": "メール",
-  "passwordFieldLabel": "パスワード"
+  "passwordFieldLabel": "パスワード",
+  "dateTimePickerToday": "今日"
 }

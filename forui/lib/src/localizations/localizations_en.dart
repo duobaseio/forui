@@ -84,6 +84,9 @@ class FLocalizationsEn extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dateTimePickerToday => 'Today';
+
+  @override
   String get dialogSemanticsLabel => 'Dialog';
 
   @override
@@ -176,6 +179,9 @@ class FLocalizationsEnAu extends FLocalizationsEn {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get dateTimePickerToday => 'Today';
 
   @override
   String get dialogSemanticsLabel => 'Dialogue';
@@ -272,6 +278,9 @@ class FLocalizationsEnCa extends FLocalizationsEn {
   String get shortDateSuffix => '';
 
   @override
+  String get dateTimePickerToday => 'Today';
+
+  @override
   String get dialogSemanticsLabel => 'Dialog';
 
   @override
@@ -364,6 +373,9 @@ class FLocalizationsEnGb extends FLocalizationsEn {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get dateTimePickerToday => 'Today';
 
   @override
   String get dialogSemanticsLabel => 'Dialogue';
@@ -460,6 +472,9 @@ class FLocalizationsEnIe extends FLocalizationsEn {
   String get shortDateSuffix => '';
 
   @override
+  String get dateTimePickerToday => 'Today';
+
+  @override
   String get dialogSemanticsLabel => 'Dialogue';
 
   @override
@@ -552,6 +567,9 @@ class FLocalizationsEnIn extends FLocalizationsEn {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get dateTimePickerToday => 'Today';
 
   @override
   String get dialogSemanticsLabel => 'Dialogue';
@@ -648,6 +666,9 @@ class FLocalizationsEnNz extends FLocalizationsEn {
   String get shortDateSuffix => '';
 
   @override
+  String get dateTimePickerToday => 'Today';
+
+  @override
   String get dialogSemanticsLabel => 'Dialogue';
 
   @override
@@ -742,6 +763,9 @@ class FLocalizationsEnSg extends FLocalizationsEn {
   String get shortDateSuffix => '';
 
   @override
+  String get dateTimePickerToday => 'Today';
+
+  @override
   String get dialogSemanticsLabel => 'Dialogue';
 
   @override
@@ -834,6 +858,9 @@ class FLocalizationsEnZa extends FLocalizationsEn {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get dateTimePickerToday => 'Today';
 
   @override
   String get dialogSemanticsLabel => 'Dialogue';

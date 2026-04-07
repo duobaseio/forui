@@ -27,5 +27,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "مخفی کردن رمز عبور",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "نمایش رمز عبور",
   "textFieldEmailLabel": "ایمیل",
-  "passwordFieldLabel": "رمز عبور"
+  "passwordFieldLabel": "رمز عبور",
+  "dateTimePickerToday": "امروز"
 }

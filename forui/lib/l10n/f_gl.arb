@@ -27,5 +27,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "Ocultar contrasinal",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Mostrar contrasinal",
   "textFieldEmailLabel": "Correo electrónico",
-  "passwordFieldLabel": "Contrasinal"
+  "passwordFieldLabel": "Contrasinal",
+  "dateTimePickerToday": "Hoxe"
 }

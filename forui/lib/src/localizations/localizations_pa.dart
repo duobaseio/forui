@@ -84,6 +84,9 @@ class FLocalizationsPa extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dateTimePickerToday => 'ਅੱਜ';
+
+  @override
   String get dialogSemanticsLabel => 'ਵਿੰਡੋ';
 
   @override

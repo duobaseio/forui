@@ -84,6 +84,9 @@ class FLocalizationsZh extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dateTimePickerToday => '今天';
+
+  @override
   String get dialogSemanticsLabel => '对话框';
 
   @override
@@ -178,6 +181,9 @@ class FLocalizationsZhHk extends FLocalizationsZh {
   String get shortDateSuffix => '';
 
   @override
+  String get dateTimePickerToday => '今天';
+
+  @override
   String get dialogSemanticsLabel => '對話方塊';
 
   @override
@@ -270,6 +276,9 @@ class FLocalizationsZhTw extends FLocalizationsZh {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get dateTimePickerToday => '今天';
 
   @override
   String get dialogSemanticsLabel => '對話方塊';

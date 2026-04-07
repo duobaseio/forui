@@ -84,6 +84,9 @@ class FLocalizationsPs extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dateTimePickerToday => 'نن';
+
+  @override
   String get dialogSemanticsLabel => 'خبرې اترې';
 
   @override

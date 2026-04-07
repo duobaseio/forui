@@ -28,5 +28,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "Piilota salasana",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Näytä salasana",
   "textFieldEmailLabel": "Sähköposti",
-  "passwordFieldLabel": "Salasana"
+  "passwordFieldLabel": "Salasana",
+  "dateTimePickerToday": "Tänään"
 }

@@ -28,5 +28,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "پاس ورڈ چھپائیں",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "پاس ورڈ دکھائیں",
   "textFieldEmailLabel": "ای میل",
-  "passwordFieldLabel": "پاس ورڈ"
+  "passwordFieldLabel": "پاس ورڈ",
+  "dateTimePickerToday": "آج"
 }

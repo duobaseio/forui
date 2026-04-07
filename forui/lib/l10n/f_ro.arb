@@ -28,5 +28,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "Ascunde parola",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Afișează parola",
   "textFieldEmailLabel": "E-mail",
-  "passwordFieldLabel": "Parolă"
+  "passwordFieldLabel": "Parolă",
+  "dateTimePickerToday": "Astăzi"
 }

@@ -27,5 +27,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "പാസ്‌വേഡ് മറയ്ക്കുക",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "പാസ്‌വേഡ് കാണിക്കുക",
   "textFieldEmailLabel": "ഇമെയിൽ",
-  "passwordFieldLabel": "പാസ്‌വേഡ്"
+  "passwordFieldLabel": "പാസ്‌വേഡ്",
+  "dateTimePickerToday": "ഇന്ന്"
 }

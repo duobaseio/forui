@@ -28,5 +28,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "Skrij geslo",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Prikaži geslo",
   "textFieldEmailLabel": "E-pošta",
-  "passwordFieldLabel": "Geslo"
+  "passwordFieldLabel": "Geslo",
+  "dateTimePickerToday": "Danes"
 }

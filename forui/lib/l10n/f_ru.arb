@@ -27,5 +27,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "Скрыть пароль",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Показать пароль",
   "textFieldEmailLabel": "Электронная почта",
-  "passwordFieldLabel": "Пароль"
+  "passwordFieldLabel": "Пароль",
+  "dateTimePickerToday": "Сегодня"
 }

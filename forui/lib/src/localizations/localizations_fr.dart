@@ -84,6 +84,9 @@ class FLocalizationsFr extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dateTimePickerToday => 'Aujourd\'hui';
+
+  @override
   String get dialogSemanticsLabel => 'Boîte de dialogue';
 
   @override
@@ -176,6 +179,9 @@ class FLocalizationsFrCa extends FLocalizationsFr {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get dateTimePickerToday => 'Aujourd\'hui';
 
   @override
   String get dialogSemanticsLabel => 'Boîte de dialogue';

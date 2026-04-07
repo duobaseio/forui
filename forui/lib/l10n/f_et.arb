@@ -28,5 +28,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "Peida parool",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Näita parooli",
   "textFieldEmailLabel": "E-post",
-  "passwordFieldLabel": "Parool"
+  "passwordFieldLabel": "Parool",
+  "dateTimePickerToday": "Täna"
 }

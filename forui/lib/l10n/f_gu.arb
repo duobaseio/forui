@@ -27,5 +27,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "પાસવર્ડ છુપાવો",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "પાસવર્ડ બતાવો",
   "textFieldEmailLabel": "ઇમેઇલ",
-  "passwordFieldLabel": "પાસવર્ડ"
+  "passwordFieldLabel": "પાસવર્ડ",
+  "dateTimePickerToday": "આજે"
 }

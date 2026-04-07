@@ -28,5 +28,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "Ukryj hasło",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Pokaż hasło",
   "textFieldEmailLabel": "E-mail",
-  "passwordFieldLabel": "Hasło"
+  "passwordFieldLabel": "Hasło",
+  "dateTimePickerToday": "Dziś"
 }

@@ -255,3 +255,59 @@ After API changes, analyze all in-repo consumers: `forui/forui`, `forui/forui/ex
 
 When using the `analyze_files` MCP tool, always analyze full project roots (without `paths`) rather than specific files.
 Analyzing individual files can miss cross-file errors that only surface during full-project analysis.
+
+## Localization Strings
+
+Steps to add a new localized string:
+
+1. **Add key to English ARB** — Add the key, value, and `@key` metadata to `lib/l10n/f_en.arb`. Keep entries grouped by
+   widget in alphabetical order, separated by 2 blank lines between groups (matching existing file structure).
+
+   ```json
+   "myWidgetHint": "Pick something",
+   "@myWidgetHint": {
+     "description": "The hint text for the my widget."
+   }
+   ```
+
+   For parameterized strings, add a `placeholders` block:
+   ```json
+   "myWidgetCount": "{count} items selected",
+   "@myWidgetCount": {
+     "description": "The selected item count.",
+     "placeholders": {
+       "count": {
+         "type": "int"
+       }
+     }
+   }
+   ```
+
+2. **Translate to all locales** — Edit `tool/l10n.dart`:
+   - Set `key` to the new ARB key name (e.g. `'myWidgetHint'`).
+   - Replace each tuple's message in the `locales` list with the translated string for that locale. The English entry
+     is skipped automatically.
+
+3. **Run the translation script** from `forui/forui`:
+   ```shell
+   dart run tool/l10n.dart
+   ```
+   This writes the translated string into every locale's ARB file.
+
+4. **Regenerate Dart localization classes** from the repo root:
+   ```shell
+   make l10n
+   ```
+   Or equivalently, from `forui/forui`: `flutter gen-l10n`.
+
+5. **Add override to `FDefaultLocalizations`** — In `lib/src/localizations/localization.dart`, add an `@override` getter
+   (or method) for the new key with the English value. This class provides hardcoded English fallbacks when no
+   localization delegate is present. Keep overrides in alphabetical order by widget group.
+
+   ```dart
+   @override
+   String get myWidgetHint => 'Pick something';
+   ```
+
+Access the string in widgets via `FLocalizations.of(context)?.myWidgetHint` with a fallback to
+`FDefaultLocalizations()`.

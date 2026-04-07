@@ -28,5 +28,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "隱藏密碼",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "顯示密碼",
   "textFieldEmailLabel": "電郵",
-  "passwordFieldLabel": "密碼"
+  "passwordFieldLabel": "密碼",
+  "dateTimePickerToday": "今天"
 }

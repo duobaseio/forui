@@ -27,5 +27,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "הסתר סיסמה",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "הראה סיסמה",
   "textFieldEmailLabel": "דוא״ל",
-  "passwordFieldLabel": "סיסמה"
+  "passwordFieldLabel": "סיסמה",
+  "dateTimePickerToday": "היום"
 }

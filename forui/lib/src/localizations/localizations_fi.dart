@@ -84,6 +84,9 @@ class FLocalizationsFi extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dateTimePickerToday => 'Tänään';
+
+  @override
   String get dialogSemanticsLabel => 'Valintaikkuna';
 
   @override

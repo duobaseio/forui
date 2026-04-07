@@ -84,6 +84,9 @@ class FLocalizationsGsw extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dateTimePickerToday => 'Hüt';
+
+  @override
   String get dialogSemanticsLabel => 'Dialogfeld';
 
   @override

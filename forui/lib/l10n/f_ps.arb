@@ -27,5 +27,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "پټنوم پټول",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "پټنوم ښودل",
   "textFieldEmailLabel": "برېښنالیک",
-  "passwordFieldLabel": "پټنوم"
+  "passwordFieldLabel": "پټنوم",
+  "dateTimePickerToday": "نن"
 }

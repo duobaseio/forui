@@ -84,6 +84,9 @@ class FLocalizationsCa extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dateTimePickerToday => 'Avui';
+
+  @override
   String get dialogSemanticsLabel => 'Diàleg';
 
   @override

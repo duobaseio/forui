@@ -28,5 +28,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "Ficha nenosiri",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Onyesha nenosiri",
   "textFieldEmailLabel": "Barua pepe",
-  "passwordFieldLabel": "Nenosiri"
+  "passwordFieldLabel": "Nenosiri",
+  "dateTimePickerToday": "Leo"
 }

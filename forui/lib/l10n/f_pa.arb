@@ -28,5 +28,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "ਪਾਸਵਰਡ ਲੁਕਾਓ",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "ਪਾਸਵਰਡ ਦਿਖਾਓ",
   "textFieldEmailLabel": "ਈਮੇਲ",
-  "passwordFieldLabel": "ਪਾਸਵਰਡ"
+  "passwordFieldLabel": "ਪਾਸਵਰਡ",
+  "dateTimePickerToday": "ਅੱਜ"
 }

@@ -84,6 +84,9 @@ class FLocalizationsAz extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dateTimePickerToday => 'Bu gün';
+
+  @override
   String get dialogSemanticsLabel => 'Dialoq';
 
   @override

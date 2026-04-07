@@ -28,5 +28,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "পাছৱাৰ্ড লুকুৱাওক",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "পাছৱাৰ্ড দেখুৱাওক",
   "textFieldEmailLabel": "ইমেইল",
-  "passwordFieldLabel": "পাছৱাৰ্ড"
+  "passwordFieldLabel": "পাছৱাৰ্ড",
+  "dateTimePickerToday": "আজি"
 }

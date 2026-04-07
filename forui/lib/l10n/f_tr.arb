@@ -28,5 +28,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "Şifreyi gizle",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Şifreyi göster",
   "textFieldEmailLabel": "E-posta",
-  "passwordFieldLabel": "Şifre"
+  "passwordFieldLabel": "Şifre",
+  "dateTimePickerToday": "Bugün"
 }

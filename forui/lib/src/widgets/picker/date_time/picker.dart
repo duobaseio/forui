@@ -145,7 +145,7 @@ class _Western12Picker extends DateTimePicker {
     };
 
     final dateWheel = FPickerWheel.builder(
-      flex: 3,
+      flex: 2,
       builder: (_, index) {
         final date = controller.referenceDate.add(Duration(days: index * dayInterval));
         return Padding(padding: start, child: Text(dateFormat.format(date)));

@@ -27,5 +27,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "პაროლის დამალვა",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "პაროლის ჩვენება",
   "textFieldEmailLabel": "ელფოსტა",
-  "passwordFieldLabel": "პაროლი"
+  "passwordFieldLabel": "პაროლი",
+  "dateTimePickerToday": "დღეს"
 }

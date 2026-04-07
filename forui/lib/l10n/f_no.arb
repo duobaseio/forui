@@ -28,5 +28,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "Skjul passord",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Vis passord",
   "textFieldEmailLabel": "E-post",
-  "passwordFieldLabel": "Passord"
+  "passwordFieldLabel": "Passord",
+  "dateTimePickerToday": "I dag"
 }

@@ -28,5 +28,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "Itago ang password",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Ipakita ang password",
   "textFieldEmailLabel": "Email",
-  "passwordFieldLabel": "Password"
+  "passwordFieldLabel": "Password",
+  "dateTimePickerToday": "Ngayon"
 }

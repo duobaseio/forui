@@ -28,5 +28,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "Parolu gizlə",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Parolu göstər",
   "textFieldEmailLabel": "E-poçt",
-  "passwordFieldLabel": "Parol"
+  "passwordFieldLabel": "Parol",
+  "dateTimePickerToday": "Bu gün"
 }
