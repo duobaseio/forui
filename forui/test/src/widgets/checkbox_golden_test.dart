@@ -89,11 +89,11 @@ void main() {
   testWidgets('leading-label', (tester) async {
     await tester.pumpWidget(
       TestScaffold(
-        child: FCheckbox(
+        child: const FCheckbox(
           leadingLabel: true,
-          label: const Text('Terms and Conditions'),
-          description: const Text('I agree to the terms and conditions.'),
-          error: const Text('Please check the agree to continue.'),
+          label: Text('Terms and Conditions'),
+          description: Text('I agree to the terms and conditions.'),
+          error: Text('Please check the agree to continue.'),
           value: true,
         ),
       ),

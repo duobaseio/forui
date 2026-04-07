@@ -137,13 +137,13 @@ void main() {
   testWidgets('leading-label', (tester) async {
     await tester.pumpWidget(
       TestScaffold(
-        child: SizedBox(
+        child: const SizedBox(
           width: 300,
           child: FRadio(
             leadingLabel: true,
-            label: const Text('Direct messages and mentions'),
-            description: const Text('Only send me direct messages and mentions.'),
-            error: const Text('An option must be selected.'),
+            label: Text('Direct messages and mentions'),
+            description: Text('Only send me direct messages and mentions.'),
+            error: Text('An option must be selected.'),
             value: true,
           ),
         ),

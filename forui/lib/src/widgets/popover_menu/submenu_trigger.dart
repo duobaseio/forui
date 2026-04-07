@@ -66,9 +66,10 @@ class _State extends State<SubmenuTrigger> {
 
   // Cascade hiding to this submenu when the parent popover hides, otherwise it stays visible until the parent's
   // animation completes and then abruptly disappears.
-  void _handleParentHide(AnimationStatus status) {
+  Future<void> _handleParentHide(AnimationStatus status) async {
     if (status == .reverse) {
-      widget.controller.hide();
+      await widget.controller.hide();
+      _active?.value = (null, false);
     }
   }
 

@@ -9,13 +9,13 @@ void main() {
   testWidgets('leading-label', (tester) async {
     await tester.pumpWidget(
       TestScaffold(
-        child: SizedBox(
+        child: const SizedBox(
           width: 300,
           child: FSwitch(
             leadingLabel: true,
-            label: const Text('Airplane Mode'),
-            description: const Text('Disable all wireless connections.'),
-            error: const Text('Please enable to continue.'),
+            label: Text('Airplane Mode'),
+            description: Text('Disable all wireless connections.'),
+            error: Text('Please enable to continue.'),
             semanticsLabel: 'Airplane Mode',
             value: true,
           ),

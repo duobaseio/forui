@@ -85,6 +85,9 @@ We've changed `FLineCalendar`'s default styling to be more aesthetically pleasin
 
 
 ### `FPopoverMenu`
+* Add `FPopoverMenu.faded`.
+* Add `FPopoverMenuMotion`.
+* Add `FPopoverMenuStyle.menuMotion`.
 * Add `FSubmenuItem`.
 * Add `FSubmenuTile`.
 * Add `FPopoverMenuStyle.hoverEnterDuration`.
@@ -93,6 +96,7 @@ We've changed `FLineCalendar`'s default styling to be more aesthetically pleasin
 
 * Fix `FPopoverMenuStyle` tiles not having a selected decoration style.
 * Fix `FPopoverMenuStyle` items not showing card background.
+* Fix `FPopoverMenu` not resetting active submenu state when menu is closed.
 
 
 ### `FTextField`
