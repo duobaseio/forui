@@ -5,11 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:forui/forui.dart';
 
 /// Creates a [FPopoverController] that is automatically disposed.
-FPopoverController useFPopoverController({
-  TickerProvider? vsync,
-  bool shown = false,
-  List<Object?>? keys,
-}) => use(
+FPopoverController useFPopoverController({TickerProvider? vsync, bool shown = false, List<Object?>? keys}) => use(
   _PopoverControllerHook(
     vsync: vsync ??= useSingleTickerProvider(keys: keys),
     shown: shown,

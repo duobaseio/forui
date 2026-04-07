@@ -5,11 +5,7 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:forui/forui.dart';
 
 /// Creates a [FTooltipController] that is automatically disposed.
-FTooltipController useFTooltipController({
-  TickerProvider? vsync,
-  bool shown = false,
-  List<Object?>? keys,
-}) => use(
+FTooltipController useFTooltipController({TickerProvider? vsync, bool shown = false, List<Object?>? keys}) => use(
   _TooltipControllerHook(
     vsync: vsync ??= useSingleTickerProvider(keys: keys),
     shown: shown,
