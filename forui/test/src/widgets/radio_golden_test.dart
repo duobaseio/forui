@@ -150,9 +150,6 @@ void main() {
       ),
     );
 
-    await expectLater(
-      find.byType(TestScaffold),
-      matchesGoldenFile('radio/leading-label.png'),
-    );
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('radio/leading-label.png'));
   });
 }

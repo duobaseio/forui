@@ -83,7 +83,6 @@ void main() {
         },
       );
     }
-
   }
 
   testWidgets('leading-label', (tester) async {
@@ -99,9 +98,6 @@ void main() {
       ),
     );
 
-    await expectLater(
-      find.byType(TestScaffold),
-      matchesGoldenFile('check-box/leading-label.png'),
-    );
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('check-box/leading-label.png'));
   });
 }

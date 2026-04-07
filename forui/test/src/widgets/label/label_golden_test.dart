@@ -173,10 +173,7 @@ void main() {
           const Duration(milliseconds: 120),
         );
 
-        await expectLater(
-          sheet.collate(5),
-          matchesGoldenFile('label/${theme.name}/horizontal-trailing-$name.png'),
-        );
+        await expectLater(sheet.collate(5), matchesGoldenFile('label/${theme.name}/horizontal-trailing-$name.png'));
       });
 
       testWidgets('${theme.name} horizontal-leading $name transition', (tester) async {
@@ -229,10 +226,7 @@ void main() {
           const Duration(milliseconds: 120),
         );
 
-        await expectLater(
-          sheet.collate(5),
-          matchesGoldenFile('label/${theme.name}/horizontal-leading-$name.png'),
-        );
+        await expectLater(sheet.collate(5), matchesGoldenFile('label/${theme.name}/horizontal-leading-$name.png'));
       });
 
       testWidgets('${theme.name} vertical $name transition', (tester) async {

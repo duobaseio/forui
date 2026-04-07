@@ -23,10 +23,7 @@ void main() {
       ),
     );
 
-    await expectLater(
-      find.byType(TestScaffold),
-      matchesGoldenFile('switch/leading-label.png'),
-    );
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('switch/leading-label.png'));
   });
 
   for (final theme in TestScaffold.themes) {

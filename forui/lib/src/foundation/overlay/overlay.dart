@@ -153,7 +153,7 @@ class _State extends State<FOverlay> {
   @override
   void didUpdateWidget(covariant FOverlay old) {
     super.didUpdateWidget(old);
-    _controller =  widget.control.update(old.control, _controller).$1;
+    _controller = widget.control.update(old.control, _controller).$1;
   }
 
   @override

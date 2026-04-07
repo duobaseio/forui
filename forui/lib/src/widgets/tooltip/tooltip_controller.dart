@@ -169,11 +169,8 @@ class _ProxyController extends FTooltipController {
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FTooltipControl with Diagnosticable, _$FTooltipControlMixin {
   /// Creates a [FTooltipControl].
-  const factory FTooltipControl.managed({
-    FTooltipController? controller,
-    bool? initial,
-    ValueChanged<bool>? onChange,
-  }) = FTooltipManagedControl;
+  const factory FTooltipControl.managed({FTooltipController? controller, bool? initial, ValueChanged<bool>? onChange}) =
+      FTooltipManagedControl;
 
   /// Creates a [FTooltipControl] for controlling a tooltip using lifted state.
   ///

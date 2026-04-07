@@ -9,32 +9,35 @@ import '../../test_scaffold.dart';
 
 void main() {
   group('SubmenuTrigger', () {
-    Widget siblingMenu() =>
-        TestScaffold.app(
-          platform: .macOS,
-          child: FPopoverMenu(
-            control: const .managed(initial: true),
-            menu: [
+    Widget siblingMenu() => TestScaffold.app(
+      platform: .macOS,
+      child: FPopoverMenu(
+        control: const .managed(initial: true),
+        menu: [
+          .group(
+            children: [
+              .submenu(
+                title: const Text('Submenu A'),
+                submenu: [
                   .group(
-                children: [
-                      .submenu(
-                    title: const Text('Submenu A'),
-                    submenu: [
-                          .group(children: [.item(title: const Text('A1'), onPress: () {})]),
-                    ],
+                    children: [.item(title: const Text('A1'), onPress: () {})],
                   ),
-                      .submenu(
-                    title: const Text('Submenu B'),
-                    submenu: [
-                          .group(children: [.item(title: const Text('B1'), onPress: () {})]),
-                    ],
+                ],
+              ),
+              .submenu(
+                title: const Text('Submenu B'),
+                submenu: [
+                  .group(
+                    children: [.item(title: const Text('B1'), onPress: () {})],
                   ),
                 ],
               ),
             ],
-            child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
           ),
-        );
+        ],
+        child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
+      ),
+    );
 
     testWidgets('tap sibling switch shows with animation', (tester) async {
       final sheet = autoDispose(AnimationSheetBuilder(frameSize: const Size(800, 300)));
@@ -86,15 +89,15 @@ void main() {
         child: FPopoverMenu(
           control: .managed(controller: controller),
           menu: [
-                .group(
+            .group(
               children: [
-                    .submenu(
+                .submenu(
                   title: const Text('Share'),
                   submenu: [
-                        .group(
+                    .group(
                       children: [
-                            .item(title: const Text('Email'), onPress: () {}),
-                            .item(title: const Text('Message'), onPress: () {}),
+                        .item(title: const Text('Email'), onPress: () {}),
+                        .item(title: const Text('Message'), onPress: () {}),
                       ],
                     ),
                   ],
@@ -124,34 +127,33 @@ void main() {
   });
 
   group('submenu fade', () {
-    Widget touchMenu({bool? faded}) =>
-        TestScaffold.app(
-          platform: .iOS,
-          child: FPopoverMenu.tiles(
-            control: const .managed(initial: true),
-            faded: faded,
-            menu: [
+    Widget touchMenu({bool? faded}) => TestScaffold.app(
+      platform: .iOS,
+      child: FPopoverMenu.tiles(
+        control: const .managed(initial: true),
+        faded: faded,
+        menu: [
+          .group(
+            children: [
+              .tile(title: const Text('Profile'), onPress: () {}),
+              .submenu(
+                title: const Text('Share'),
+                menu: [
                   .group(
-                children: [
-                      .tile(title: const Text('Profile'), onPress: () {}),
-                      .submenu(
-                    title: const Text('Share'),
-                    menu: [
-                          .group(
-                        children: [
-                              .tile(title: const Text('Email'), onPress: () {}),
-                              .tile(title: const Text('Message'), onPress: () {}),
-                        ],
-                      ),
+                    children: [
+                      .tile(title: const Text('Email'), onPress: () {}),
+                      .tile(title: const Text('Message'), onPress: () {}),
                     ],
                   ),
-                      .tile(title: const Text('Settings'), onPress: () {}),
                 ],
               ),
+              .tile(title: const Text('Settings'), onPress: () {}),
             ],
-            child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
           ),
-        );
+        ],
+        child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 50)),
+      ),
+    );
 
     testWidgets('parent dimmed when submenu opens on touch', (tester) async {
       await tester.pumpWidget(touchMenu());
@@ -160,10 +162,7 @@ void main() {
       await tester.tap(find.text('Share'));
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('popover-menu/submenu-fade-touch-open.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover-menu/submenu-fade-touch-open.png'));
     });
 
     testWidgets('parent not dimmed on desktop', (tester) async {
@@ -173,21 +172,21 @@ void main() {
           child: FPopoverMenu(
             control: const .managed(initial: true),
             menu: [
-                  .group(
+              .group(
                 children: [
-                      .item(title: const Text('Profile'), onPress: () {}),
-                      .submenu(
+                  .item(title: const Text('Profile'), onPress: () {}),
+                  .submenu(
                     title: const Text('Share'),
                     submenu: [
-                          .group(
+                      .group(
                         children: [
-                              .item(title: const Text('Email'), onPress: () {}),
-                              .item(title: const Text('Message'), onPress: () {}),
+                          .item(title: const Text('Email'), onPress: () {}),
+                          .item(title: const Text('Message'), onPress: () {}),
                         ],
                       ),
                     ],
                   ),
-                      .item(title: const Text('Settings'), onPress: () {}),
+                  .item(title: const Text('Settings'), onPress: () {}),
                 ],
               ),
             ],
@@ -202,10 +201,7 @@ void main() {
       await tester.pump(const Duration(milliseconds: 150));
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('popover-menu/submenu-fade-desktop-open.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover-menu/submenu-fade-desktop-open.png'));
     });
 
     testWidgets('parent not dimmed when faded is false', (tester) async {
@@ -215,10 +211,7 @@ void main() {
       await tester.tap(find.text('Share'));
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('popover-menu/submenu-fade-disabled.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover-menu/submenu-fade-disabled.png'));
     });
 
     testWidgets('closing submenu restores parent opacity', (tester) async {
@@ -233,10 +226,7 @@ void main() {
       await tester.tap(find.text('Share'));
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('popover-menu/submenu-fade-closed.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover-menu/submenu-fade-closed.png'));
     });
 
     testWidgets('reopening menu after close with active submenu resets state', (tester) async {
@@ -248,13 +238,13 @@ void main() {
           child: FPopoverMenu.tiles(
             control: .managed(controller: controller),
             menu: [
-                  .group(
+              .group(
                 children: [
-                      .tile(title: const Text('Profile'), onPress: () {}),
-                      .submenu(
+                  .tile(title: const Text('Profile'), onPress: () {}),
+                  .submenu(
                     title: const Text('Share'),
                     menu: [
-                          .group(
+                      .group(
                         children: [.tile(title: const Text('Email'), onPress: () {})],
                       ),
                     ],
@@ -280,10 +270,7 @@ void main() {
       unawaited(controller.show());
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('popover-menu/submenu-fade-reopen.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover-menu/submenu-fade-reopen.png'));
     });
   });
 }

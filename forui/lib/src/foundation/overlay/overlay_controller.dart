@@ -8,26 +8,17 @@ part 'overlay_controller.control.dart';
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FOverlayControl with Diagnosticable, _$FOverlayControlMixin {
   /// Creates a [FOverlayControl].
-  const factory FOverlayControl.managed({
-    OverlayPortalController? controller,
-    bool? initial,
-  }) = FOverlayManagedControl;
+  const factory FOverlayControl.managed({OverlayPortalController? controller, bool? initial}) = FOverlayManagedControl;
 
   /// Creates a [FOverlayControl] for controlling an overlay using lifted state.
   ///
   /// The [shown] parameter indicates whether the overlay is currently shown.
   /// The [onChange] callback is invoked when the user triggers a show/hide action.
-  const factory FOverlayControl.lifted({
-    required bool shown,
-    required ValueChanged<bool> onChange,
-  }) = _Lifted;
+  const factory FOverlayControl.lifted({required bool shown, required ValueChanged<bool> onChange}) = _Lifted;
 
   const FOverlayControl._();
 
-  (OverlayPortalController, bool) _update(
-    FOverlayControl old,
-    OverlayPortalController controller,
-  );
+  (OverlayPortalController, bool) _update(FOverlayControl old, OverlayPortalController controller);
 }
 
 /// An [FOverlayManagedControl] enables widgets to manage their own controller internally while exposing parameters for
