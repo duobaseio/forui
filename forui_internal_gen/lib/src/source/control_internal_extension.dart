@@ -56,12 +56,10 @@ class ControlInternalExtension {
                           ..type = refer('VoidCallback'),
                       ),
                   ])
-                  ..body = Code(
-                    '''
+                  ..body = Code('''
                     createController(${createController.requiredParameters.map((p) => p.name).join(', ')})
                     ${listenable ? '..addListener(callback)' : ''}
-                    '''
-                  ))
+                    '''))
                 .build(),
             _update,
             if (dispose case final dispose?)

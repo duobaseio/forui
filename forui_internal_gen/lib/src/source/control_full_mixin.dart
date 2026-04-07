@@ -176,16 +176,17 @@ class _ManagedControlMixin extends ControlMixin {
   }
 
   Method? get _dispose => switch (dispose) {
-    final dispose? => (dispose.toBuilder()
-          ..annotations.add(refer('override'))
-          ..body = const Code('''
+    final dispose? =>
+      (dispose.toBuilder()
+            ..annotations.add(refer('override'))
+            ..body = const Code('''
             if (this.controller != null) {
               controller.removeListener(callback);
             } else {
               controller.dispose();
             }
           '''))
-        .build(),
+          .build(),
     null => null,
   };
 }
@@ -283,10 +284,11 @@ class _LiftedControlMixin extends ControlMixin {
   }
 
   Method? get _dispose => switch (dispose) {
-    final dispose? => (dispose.toBuilder()
-          ..annotations.add(refer('override'))
-          ..body = const Code('controller.dispose();'))
-        .build(),
+    final dispose? =>
+      (dispose.toBuilder()
+            ..annotations.add(refer('override'))
+            ..body = const Code('controller.dispose();'))
+          .build(),
     null => null,
   };
 }
