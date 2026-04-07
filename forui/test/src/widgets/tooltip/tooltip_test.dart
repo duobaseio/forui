@@ -121,7 +121,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FTooltip(
-            longPressExitDuration: duration,
+            style: const .delta(longPressExitDuration: duration),
             tipBuilder: (context, _) => const Text('tip'),
             child: FButton(onPress: () {}, child: const Text('button')),
           ),
@@ -144,7 +144,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FTooltip(
-            longPressExitDuration: duration,
+            style: const .delta(longPressExitDuration: duration),
             tipBuilder: (context, _) => const Text('tip'),
             child: FButton(onPress: () {}, child: const Text('button')),
           ),
@@ -196,7 +196,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FTooltip(
-            hoverEnterDuration: const Duration(seconds: 1),
+            style: const .delta(hoverEnterDuration: Duration(seconds: 1)),
             tipBuilder: (context, _) => const Text('tip'),
             child: FButton(onPress: () {}, child: const Text('button')),
           ),
@@ -226,8 +226,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FTooltip(
-            hoverEnterDuration: .zero,
-            hoverExitDuration: const Duration(seconds: 1),
+            style: const .delta(hoverEnterDuration: .zero, hoverExitDuration: Duration(seconds: 1)),
             tipBuilder: (context, _) => const Text('tip'),
             child: FButton(onPress: () {}, child: const Text('button')),
           ),

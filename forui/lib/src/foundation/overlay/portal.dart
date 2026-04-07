@@ -9,6 +9,7 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/overlay/composited_child.dart';
 import 'package:forui/src/foundation/overlay/composited_portal.dart';
 import 'package:forui/src/foundation/overlay/layer.dart';
+import 'package:forui/src/foundation/overlay/overlay_controller.dart';
 
 /// A portal that "floats" on top of and relative to a [child] widget.
 ///
@@ -19,8 +20,8 @@ import 'package:forui/src/foundation/overlay/layer.dart';
 /// * [Visualization](http://forui.dev/docs/foundation/portal#visualization) for a visual demonstration of how
 ///   portals work.
 class FPortal extends StatefulWidget {
-  /// The controller.
-  final OverlayPortalController? controller;
+  /// The control.
+  final FOverlayControl control;
 
   /// The portal's size constraints.
   final FPortalConstraints constraints;
@@ -112,7 +113,7 @@ class FPortal extends StatefulWidget {
   /// Throws [AssertionError] if [builder] and [child] are both null.
   const FPortal({
     required this.portalBuilder,
-    this.controller,
+    this.control = const .managed(),
     this.constraints = const FPortalConstraints(),
     this.portalAnchor = .topCenter,
     this.childAnchor = .bottomCenter,
@@ -135,7 +136,7 @@ class FPortal extends StatefulWidget {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('control', control))
       ..add(DiagnosticsProperty('constraints', constraints))
       ..add(DiagnosticsProperty('portalAnchor', portalAnchor))
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
@@ -159,15 +160,13 @@ class _State extends State<FPortal> {
   @override
   void initState() {
     super.initState();
-    _controller = widget.controller ?? .new();
+    _controller = widget.control.create();
   }
 
   @override
   void didUpdateWidget(covariant FPortal old) {
     super.didUpdateWidget(old);
-    if (widget.controller != old.controller) {
-      _controller = widget.controller ?? .new();
-    }
+    _controller = widget.control.update(old.control, _controller).$1;
   }
 
   @override

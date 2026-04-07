@@ -133,4 +133,23 @@ void main() {
       });
     }
   }
+
+  testWidgets('leading-label', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold(
+        child: const SizedBox(
+          width: 300,
+          child: FRadio(
+            leadingLabel: true,
+            label: Text('Direct messages and mentions'),
+            description: Text('Only send me direct messages and mentions.'),
+            error: Text('An option must be selected.'),
+            value: true,
+          ),
+        ),
+      ),
+    );
+
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('radio/leading-label.png'));
+  });
 }

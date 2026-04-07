@@ -400,11 +400,12 @@ abstract class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
 }
 
 abstract class _State<W extends FSelectItem<T>, T> extends State<W> {
-  late final FocusNode _focus = .new(debugLabel: widget.value.toString());
+  late FocusNode _focus;
 
   @override
   void initState() {
     super.initState();
+    _focus = FocusNode(debugLabel: widget.value.toString());
 
     // This is hacky but I'm not sure how to properly do this.
     WidgetsBinding.instance.addPostFrameCallback((_) {

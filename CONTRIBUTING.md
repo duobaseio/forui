@@ -115,6 +115,53 @@ class Foo extends StatelessWidget {
 }
 ```
 
+### Initialize lifecycle objects in `initState()`
+
+Do not use `late final` field initializers for `AnimationController`, `CurvedAnimation`, `FocusNode`, or similar
+lifecycle objects in `State` classes. Declare them as `late` and initialize them explicitly in `initState()`.
+
+Late field initialization may only occur in the `dispose()` method and try to access unmounted `State` objects, causing
+runtime errors.
+
+```dart
+class _State extends State<Foo> with SingleTickerProviderStateMixin {
+  late final AnimationController _controller = AnimationController(vsync: this);
+  
+  @override
+  Widget build(BuildContext context) {
+    if (someCondition) {
+      return Foo(controller: _controller);
+    } else {
+      return Bar();
+    }
+  }
+  
+  @override
+  void dispose() {
+    // _controller's late final initializer only runs on first access. If someCondition is always false, _controller
+    // is first accessed here in dispose(), initializing AnimationController(vsync: this) with an already unmounted State.
+    _controller.dispose();
+    super.dispose();
+  }
+}
+```
+
+Late final fields may be accidentally re-assigned in `didChangeDependencies()` or `didUpdateWidget()`. They are not checked
+at compile-time, hence causing runtime errors.
+
+```dart
+class _State extends State<Foo> with SingleTickerProviderStateMixin {
+  late final AnimationController _controller;
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Compiles fine, but throws a runtime error on the second call since _controller is already assigned.
+    _controller = AnimationController(vsync: this);
+  }
+}
+```
+
 ### Extend `FChangeNotifier` instead of `ChangeNotifier`
 
 This subclass have additional life-cycle tracking capabilities baked-in.

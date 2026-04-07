@@ -276,6 +276,7 @@ class FSelectContentStyle extends FPopoverStyle with Diagnosticable, _$FSelectCo
     super.barrierFilter,
     super.backgroundFilter,
     super.popoverPadding,
+    super.motion,
   });
 
   /// Creates a [FSelectContentStyle] that inherits its properties.

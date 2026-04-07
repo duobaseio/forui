@@ -175,7 +175,7 @@ class Settings extends StatelessWidget {
         const SizedBox(height: 10),
         FLabel(
           label: const Text('Spacing'),
-          axis: .vertical,
+          layout: .vertical,
           child: Row(
             spacing: 12,
             children: [
@@ -229,7 +229,7 @@ class _ChildSettings extends StatelessWidget {
       const SizedBox(height: 12),
       FLabel(
         label: const Text('Size'),
-        axis: .vertical,
+        layout: .vertical,
         child: Row(
           spacing: 8,
           children: [
@@ -263,7 +263,7 @@ class _ChildSettings extends StatelessWidget {
       const SizedBox(height: 12),
       FLabel(
         label: const Text('Position'),
-        axis: .vertical,
+        layout: .vertical,
         child: Row(
           spacing: 8,
           children: [
@@ -317,7 +317,7 @@ class _PortalSettings extends StatelessWidget {
       const SizedBox(height: 12),
       FLabel(
         label: const Text('Size'),
-        axis: .vertical,
+        layout: .vertical,
         child: Row(
           spacing: 8,
           children: [

@@ -57,9 +57,16 @@ class FProgress extends StatefulWidget {
 
 class _ProgressState extends State<FProgress> with SingleTickerProviderStateMixin {
   FProgressStyle? _style;
-  late final AnimationController _controller = AnimationController(vsync: this);
-  late final CurvedAnimation _curved = CurvedAnimation(parent: _controller, curve: Curves.linear);
+  late AnimationController _controller;
+  late CurvedAnimation _curved;
   late Animation<double> _animation;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(vsync: this);
+    _curved = CurvedAnimation(parent: _controller, curve: Curves.linear);
+  }
 
   @override
   void didChangeDependencies() {

@@ -20,14 +20,17 @@ abstract class ControlMixin extends FunctionsMixin {
   /// The `create` method.
   final Method createController;
 
-  /// The `_dispose` method.
-  final Method dispose;
+  /// The `_dispose` method, or null for non-listenable controllers.
+  final Method? dispose;
 
   /// The `_default` method.
   final Method default_;
 
   /// All sibling subclasses (excluding this one).
   final List<ClassElement> siblings;
+
+  /// Whether the controller type implements `Listenable`.
+  final bool listenable;
 
   /// Creates a new [ControlMixin].
   factory ControlMixin({
@@ -36,9 +39,10 @@ abstract class ControlMixin extends FunctionsMixin {
     required ClassElement supertype,
     required MethodElement update,
     required Method createController,
-    required Method dispose,
+    required Method? dispose,
     required Method default_,
     required List<ClassElement> siblings,
+    required bool listenable,
   }) => element.name!.contains('Lifted')
       ? _LiftedControlMixin(
           step: step,
@@ -49,6 +53,7 @@ abstract class ControlMixin extends FunctionsMixin {
           dispose: dispose,
           default_: default_,
           siblings: siblings,
+          listenable: listenable,
         )
       : _ManagedControlMixin(
           step: step,
@@ -59,6 +64,7 @@ abstract class ControlMixin extends FunctionsMixin {
           dispose: dispose,
           default_: default_,
           siblings: siblings,
+          listenable: listenable,
         );
 
   ControlMixin._({
@@ -70,6 +76,7 @@ abstract class ControlMixin extends FunctionsMixin {
     required this.default_,
     required this.dispose,
     required this.siblings,
+    required this.listenable,
   }) : super(step, element);
 
   String get _typeParameters =>
@@ -111,6 +118,7 @@ class _ManagedControlMixin extends ControlMixin {
     required super.dispose,
     required super.default_,
     required super.siblings,
+    required super.listenable,
   }) : assert(siblings.length == 1, '_ManagedControlMixin only supports exactly 2 variants.'),
        super._();
 
@@ -120,58 +128,67 @@ class _ManagedControlMixin extends ControlMixin {
             ..name = '_\$${element.name}Mixin'
             ..types.addAll([for (final t in supertype.typeParameters) refer(t.name!)])
             ..on = refer('Diagnosticable, ${supertype.name}$_typeParameters')
-            ..methods.addAll([...await getters, _update, _dispose, debugFillProperties, equals, hash]))
+            ..methods.addAll([...await getters, _update, ?_dispose, debugFillProperties, equals, hash]))
           .build();
 
   @override
-  Code get _updateBody => Code('''
+  Code get _updateBody {
+    final addListener = listenable ? '..addListener(callback)' : '';
+    final removeListener = listenable ? 'controller.removeListener(callback);' : '';
+    final dispose = listenable ? 'controller.dispose();' : '';
+
+    return Code('''
       switch (old) {
         case _ when old == this:
           return (_default($_defaultParameters), false);
 
         // External (Controller A) -> External (Controller B)
         case ${element.name}(controller: final old?) when this.controller != null && this.controller != old:
-          controller.removeListener(callback);
-          return (createController($_createParameters)..addListener(callback), true);
+          $removeListener
+          return (createController($_createParameters)$addListener, true);
 
         // Internal -> External
         case ${element.name}(controller: final old) when this.controller != null && old == null:
-          controller.dispose();
-          return (createController($_createParameters)..addListener(callback), true);
+          $dispose
+          return (createController($_createParameters)$addListener, true);
 
         // External -> Internal
         case ${element.name}(controller: _?) when this.controller == null:
-          controller.removeListener(callback);
-          return (createController($_createParameters)..addListener(callback), true);
+          $removeListener
+          return (createController($_createParameters)$addListener, true);
 
         // Lifted -> Managed
         case ${siblings.first.name}():
-          controller.dispose();
-          return (createController($_createParameters)..addListener(callback), true);
+          $dispose
+          return (createController($_createParameters)$addListener, true);
 
         ${element.isAbstract ? '''
         // Internal -> Internal (different type, e.g. Normal -> Cascade)
         case final ${element.name}$_typeParameters old when old.runtimeType != runtimeType:
-          controller.dispose();
-          return (createController($_createParameters)..addListener(callback), true);
+          $dispose
+          return (createController($_createParameters)$addListener, true);
         ''' : ''}
 
         default:
           return (_default($_defaultParameters), false);
       }
     ''');
+  }
 
-  Method get _dispose =>
+  Method? get _dispose => switch (dispose) {
+    final dispose? =>
       (dispose.toBuilder()
             ..annotations.add(refer('override'))
             ..body = const Code('''
-              if (this.controller != null) {
-                controller.removeListener(callback);
-              } else {
-                controller.dispose();
-              }
-        '''))
-          .build();
+            if (this.controller != null) {
+              controller.removeListener(callback);
+            } else {
+              controller.dispose();
+            }
+          '''))
+          .build(),
+    null => null,
+  };
 }
 
 class _LiftedControlMixin extends ControlMixin {
@@ -184,6 +201,7 @@ class _LiftedControlMixin extends ControlMixin {
     required super.dispose,
     required super.default_,
     required super.siblings,
+    required super.listenable,
   }) : assert(siblings.length == 1, '_LiftedControlMixin only supports exactly 2 variants.'),
        super._();
 
@@ -197,7 +215,7 @@ class _LiftedControlMixin extends ControlMixin {
               ...await getters,
               _update,
               _updateController,
-              _dispose,
+              ?_dispose,
               debugFillProperties,
               equals,
               hash,
@@ -206,10 +224,15 @@ class _LiftedControlMixin extends ControlMixin {
 
   @override
   Code get _updateBody {
+    final excludedNames = {'old', if (listenable) 'callback'};
     final updateParameters = [
       for (final p in update.formalParameters)
-        if (p.name case final name when name != 'old' && name != 'callback') p.name!,
+        if (p.name case final name when !excludedNames.contains(name)) p.name!,
     ].join(', ');
+
+    final addListener = listenable ? '..addListener(callback)' : '';
+    final removeListener = listenable ? 'controller.removeListener(callback);' : '';
+    final dispose = listenable ? 'controller.dispose();' : '';
 
     return Code('''
       switch (old) {
@@ -220,21 +243,21 @@ class _LiftedControlMixin extends ControlMixin {
         case ${element.name}() when old.runtimeType == runtimeType:
           _updateController($updateParameters);
           return (controller, true);
-          
+
        // LiftedFoo -> LiftedBar
         case ${element.name}():
-          controller.dispose();
-          return (createController($_createParameters)..addListener(callback), true);
+          $dispose
+          return (createController($_createParameters)$addListener, true);
 
         // External -> Lifted
         case ${siblings.first.name}(controller: _?):
-          controller.removeListener(callback);
-          return (createController($_createParameters)..addListener(callback), true);
+          $removeListener
+          return (createController($_createParameters)$addListener, true);
 
         // Internal -> Lifted
         case ${siblings.first.name}():
-          controller.dispose();
-          return (createController($_createParameters)..addListener(callback), true);
+          $dispose
+          return (createController($_createParameters)$addListener, true);
 
         default:
           return (_default($_defaultParameters), false);
@@ -242,24 +265,30 @@ class _LiftedControlMixin extends ControlMixin {
     ''');
   }
 
-  Method get _updateController => Method(
-    (m) => m
-      ..returns = refer('void')
-      ..name = '_updateController'
-      ..requiredParameters.addAll([
-        for (final parameter in update.formalParameters)
-          if (parameter.name case final name? when name != 'old' && name != 'callback')
-            Parameter(
-              (p) => p
-                ..name = name
-                ..type = refer(aliasAwareType(parameter.type)),
-            ),
-      ]),
-  );
+  Method get _updateController {
+    final excludedNames = {'old', if (listenable) 'callback'};
+    return Method(
+      (m) => m
+        ..returns = refer('void')
+        ..name = '_updateController'
+        ..requiredParameters.addAll([
+          for (final parameter in update.formalParameters)
+            if (parameter.name case final name? when !excludedNames.contains(name))
+              Parameter(
+                (p) => p
+                  ..name = name
+                  ..type = refer(aliasAwareType(parameter.type)),
+              ),
+        ]),
+    );
+  }
 
-  Method get _dispose =>
+  Method? get _dispose => switch (dispose) {
+    final dispose? =>
       (dispose.toBuilder()
             ..annotations.add(refer('override'))
             ..body = const Code('controller.dispose();'))
-          .build();
+          .build(),
+    null => null,
+  };
 }

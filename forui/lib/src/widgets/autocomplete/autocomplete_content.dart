@@ -174,6 +174,7 @@ class FAutocompleteContentStyle extends FPopoverStyle with Diagnosticable, _$FAu
     super.barrierFilter,
     super.backgroundFilter,
     super.popoverPadding,
+    super.motion,
   });
 
   /// Creates a [FAutocompleteContentStyle] that inherits its properties.

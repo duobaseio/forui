@@ -699,7 +699,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
 abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProviderStateMixin {
   late FSelectController<T> _controller;
   late FPopoverController _popoverController;
-  late final TextEditingController _textController;
+  late TextEditingController _textController;
   late FocusNode _focus;
   bool _mutating = false;
 

@@ -16,8 +16,11 @@ class ControlInternalExtension {
   /// The `create` method.
   final Method createController;
 
-  /// The `_dispose` method.
-  final Method dispose;
+  /// The `_dispose` method, or null for non-listenable controllers.
+  final Method? dispose;
+
+  /// Whether the controller type implements `Listenable`.
+  final bool listenable;
 
   /// Creates a new [ControlInternalExtension].
   ControlInternalExtension({
@@ -25,6 +28,7 @@ class ControlInternalExtension {
     required this.update,
     required this.createController,
     required this.dispose,
+    required this.listenable,
   });
 
   /// Generates the extension.
@@ -44,27 +48,28 @@ class ControlInternalExtension {
                   ..docs.clear()
                   ..name = 'create'
                   ..lambda = true
-                  ..requiredParameters.insert(
-                    0,
-                    Parameter(
-                      (p) => p
-                        ..name = 'callback'
-                        ..type = refer('VoidCallback'),
-                    ),
-                  )
+                  ..requiredParameters.replaceRange(0, 0, [
+                    if (listenable)
+                      Parameter(
+                        (p) => p
+                          ..name = 'callback'
+                          ..type = refer('VoidCallback'),
+                      ),
+                  ])
                   ..body = Code('''
                     createController(${createController.requiredParameters.map((p) => p.name).join(', ')})
-                    ..addListener(callback)
-            '''))
+                    ${listenable ? '..addListener(callback)' : ''}
+                    '''))
                 .build(),
             _update,
-            (dispose.toBuilder()
-                  ..name = dispose.name!.replaceFirst('_', '')
-                  ..lambda = true
-                  ..body = Code('''
-                    ${dispose.name!}(${dispose.requiredParameters.map((p) => p.name).join(', ')})
-            '''))
-                .build(),
+            if (dispose case final dispose?)
+              (dispose.toBuilder()
+                    ..name = dispose.name!.replaceFirst('_', '')
+                    ..lambda = true
+                    ..body = Code('''
+                      ${dispose.name!}(${dispose.requiredParameters.map((p) => p.name).join(', ')})
+              '''))
+                  .build(),
           ]))
         .build();
   }

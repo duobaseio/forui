@@ -24,12 +24,16 @@ class ControlParentMixin {
   /// The `_dispose` method from the sealed parent, if any.
   final MethodElement? dispose;
 
+  /// Whether the controller type implements `Listenable`.
+  final bool listenable;
+
   /// Creates a new [ControlParentMixin].
   ControlParentMixin({
     required this.supertype,
     required this.createController,
     required this.update,
     required this.dispose,
+    required this.listenable,
   });
 
   /// Generates the mixin.
@@ -39,7 +43,7 @@ class ControlParentMixin {
             ..types.addAll([for (final t in supertype.typeParameters) refer(t.name!)])
             ..methods.addAll([
               if (createController == null) _createController,
-              if (dispose == null) _dispose,
+              if (dispose == null && listenable) _dispose,
               defaultMethod,
             ]))
           .build();
@@ -84,8 +88,9 @@ class ControlParentMixin {
       ]),
   );
 
-  Method get disposeMethod => switch (dispose) {
-    null => _dispose,
+  Method? get disposeMethod => switch (dispose) {
+    null when listenable => _dispose,
+    null => null,
     final dispose => Method(
       (m) => m
         ..returns = refer(aliasAwareType(dispose.returnType))

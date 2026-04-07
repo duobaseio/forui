@@ -6,6 +6,26 @@ import 'package:forui/forui.dart';
 import '../test_scaffold.dart';
 
 void main() {
+  testWidgets('leading-label', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold(
+        child: const SizedBox(
+          width: 300,
+          child: FSwitch(
+            leadingLabel: true,
+            label: Text('Airplane Mode'),
+            description: Text('Disable all wireless connections.'),
+            error: Text('Please enable to continue.'),
+            semanticsLabel: 'Airplane Mode',
+            value: true,
+          ),
+        ),
+      ),
+    );
+
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('switch/leading-label.png'));
+  });
+
   for (final theme in TestScaffold.themes) {
     for (final (checked, value) in [('checked', true), ('unchecked', false)]) {
       testWidgets('${theme.name} - $checked - unfocused', (tester) async {

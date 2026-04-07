@@ -1,3 +1,8 @@
+## 0.21.0
+* **Breaking** Remove `useFPopoverController(motion: ...)`. Configure motion via `FPopoverStyle` instead.
+* **Breaking** Remove `useFTooltipController(motion: ...)`. Configure motion via `FTooltipStyle` instead.
+
+
 ## 0.20.0
 Add support for Forui `0.20.0`.
 

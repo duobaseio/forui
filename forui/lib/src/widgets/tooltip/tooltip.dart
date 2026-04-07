@@ -91,25 +91,10 @@ class FTooltip extends StatefulWidget {
   /// True if the tooltip should be shown when hovered over. Defaults to [FTooltipGroup.hover], typically true.
   final bool? hover;
 
-  /// The duration to wait before showing the tooltip after the user hovers over the target.
-  ///
-  /// Defaults to the enclosing [FTooltipGroup.hoverEnterDuration], typically 500ms.
-  final Duration? hoverEnterDuration;
-
-  /// The duration to wait before hiding the tooltip after the user has stopped hovering over the target.
-  ///
-  /// Defaults to the enclosing [FTooltipGroup.hoverExitDuration], typically 0ms.
-  final Duration? hoverExitDuration;
-
   /// True if the tooltip should be shown when long pressed.
   ///
   /// Defaults to the enclosing [FTooltipGroup.longPress], typically true.
   final bool? longPress;
-
-  /// The duration to wait before hiding the tooltip after the user has stopped pressing the target.
-  ///
-  /// Defaults to the enclosing [FTooltipGroup.longPressExitDuration], typically 1500ms.
-  final Duration? longPressExitDuration;
 
   /// {@macro forui.foundation.FPortal.useViewPadding}
   ///
@@ -147,10 +132,7 @@ class FTooltip extends StatefulWidget {
     this.spacing = const .spacing(4),
     this.overflow = .flip,
     this.hover,
-    this.hoverEnterDuration,
-    this.hoverExitDuration,
     this.longPress,
-    this.longPressExitDuration,
     this.useViewPadding = true,
     this.useViewInsets = true,
     this.builder = defaultBuilder,
@@ -172,10 +154,7 @@ class FTooltip extends StatefulWidget {
       ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('overflow', overflow))
       ..add(FlagProperty('hover', value: hover, ifTrue: 'hover'))
-      ..add(DiagnosticsProperty('hoverEnterDuration', hoverEnterDuration))
-      ..add(DiagnosticsProperty('hoverExitDuration', hoverExitDuration))
       ..add(FlagProperty('longPress', value: longPress, ifTrue: 'longPress'))
-      ..add(DiagnosticsProperty('longPressExitDuration', longPressExitDuration))
       ..add(FlagProperty('useViewPadding', value: useViewPadding, ifTrue: 'using view padding'))
       ..add(FlagProperty('useViewInsets', value: useViewInsets, ifTrue: 'using view insets'))
       ..add(ObjectFlagProperty.has('tipBuilder', tipBuilder))
@@ -186,6 +165,7 @@ class FTooltip extends StatefulWidget {
 class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin {
   final FocusNode _focus = .new(debugLabel: 'FTooltip', canRequestFocus: false, skipTraversal: true);
   late FTooltipController _controller;
+  late FTooltipStyle _style;
   int _monotonic = 0;
 
   @override
@@ -195,9 +175,22 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _updateStyle();
+  }
+
+  @override
   void didUpdateWidget(covariant FTooltip old) {
     super.didUpdateWidget(old);
     _controller = widget.control.update(old.control, _controller, _handleOnChange, this).$1;
+    _updateStyle();
+  }
+
+  void _updateStyle() {
+    final group = TooltipGroupScope.maybeOf(context);
+    _style = widget.style(group?.style ?? context.theme.tooltipStyle);
+    _controller.updateMotion(_style.motion);
   }
 
   @override
@@ -215,7 +208,6 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
 
   @override
   Widget build(BuildContext context) {
-    final style = widget.style(context.theme.tooltipStyle);
     final group = TooltipGroupScope.maybeOf(context);
     final direction = Directionality.maybeOf(context) ?? .ltr;
     final hover = widget.hover ?? group?.hover ?? true;
@@ -252,15 +244,13 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
       child = GestureDetector(
         onLongPressStart: (_) async {
           _monotonic++;
-          unawaited(style.hapticFeedback());
+          unawaited(_style.hapticFeedback());
           await _controller.show();
           group?.show();
         },
         onLongPressEnd: (_) async {
           final count = ++_monotonic;
-          await Future.delayed(
-            widget.longPressExitDuration ?? group?.longPressExitDuration ?? FTooltipGroup.defaultLongPressExitDuration,
-          );
+          await Future.delayed(_style.longPressExitDuration);
 
           if (count == _monotonic && !_controller.disposed) {
             await _controller.hide();
@@ -273,7 +263,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
 
     return BackdropGroup(
       child: FPortal(
-        controller: _controller.overlay,
+        control: .managed(controller: _controller.overlay),
         spacing: widget.spacing,
         childAnchor: widget.childAnchor,
         portalAnchor: widget.tipAnchor,
@@ -289,10 +279,10 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
                 alignment: widget.tipAnchor.resolve(direction),
                 scale: _controller.scale,
                 child: DecoratedBox(
-                  decoration: style.decoration,
+                  decoration: _style.decoration,
                   child: Padding(
-                    padding: style.padding,
-                    child: DefaultTextStyle(style: style.textStyle, child: widget.tipBuilder(context, _controller)),
+                    padding: _style.padding,
+                    child: DefaultTextStyle(style: _style.textStyle, child: widget.tipBuilder(context, _controller)),
                   ),
                 ),
               ),
@@ -300,7 +290,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
           );
 
           // The background filter cannot be nested in a FadeTransition because of https://github.com/flutter/flutter/issues/31706.
-          if (style.backgroundFilter case final background?) {
+          if (_style.backgroundFilter case final background?) {
             tooltip = Stack(
               children: [
                 Positioned.fill(
@@ -345,9 +335,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
     final fencingToken = ++_monotonic;
 
     if (!(group?.active ?? false)) {
-      await Future.delayed(
-        widget.hoverEnterDuration ?? group?.hoverEnterDuration ?? FTooltipGroup.defaultHoverEnterDuration,
-      );
+      await Future.delayed(_style.hoverEnterDuration);
     }
 
     if (fencingToken == _monotonic && !_controller.disposed) {
@@ -359,9 +347,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
   Future<void> _exit() async {
     final group = TooltipGroupScope.maybeOf(context);
     final count = ++_monotonic;
-    await Future.delayed(
-      widget.hoverExitDuration ?? group?.hoverExitDuration ?? FTooltipGroup.defaultHoverExitDuration,
-    );
+    await Future.delayed(_style.hoverExitDuration);
 
     if (count == _monotonic && !_controller.disposed) {
       await _controller.hide();
@@ -400,6 +386,24 @@ class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
   @override
   final Future<void> Function() hapticFeedback;
 
+  /// The tooltip's motion configuration.
+  @override
+  final FTooltipMotion motion;
+
+  /// The duration to wait before showing the tooltip after the user hovers over the target. Defaults to 500ms.
+  @override
+  final Duration hoverEnterDuration;
+
+  /// The duration to wait before hiding the tooltip after the user has stopped hovering over the target.
+  ///
+  /// Defaults to [Duration.zero].
+  @override
+  final Duration hoverExitDuration;
+
+  /// The duration to wait before hiding the tooltip after the user has stopped pressing the target. Defaults to 1500ms.
+  @override
+  final Duration longPressExitDuration;
+
   /// Creates a [FTooltipStyle].
   const FTooltipStyle({
     required this.decoration,
@@ -407,23 +411,38 @@ class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
     required this.hapticFeedback,
     this.backgroundFilter,
     this.padding = const .symmetric(horizontal: 14, vertical: 10),
+    this.motion = const FTooltipMotion(),
+    this.hoverEnterDuration = const Duration(milliseconds: 500),
+    this.hoverExitDuration = .zero,
+    this.longPressExitDuration = const Duration(milliseconds: 1500),
   });
 
   /// Creates a [FTooltipStyle] that inherits its properties.
-  FTooltipStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
-    : this(
-        decoration: ShapeDecoration(
-          shape: RoundedSuperellipseBorder(
-            side: BorderSide(color: colors.border, width: style.borderWidth),
-            borderRadius: style.borderRadius.md,
-          ),
-          color: colors.card,
-          shadows: FTooltipStyle.shadow,
-        ),
-        padding: const .symmetric(horizontal: 14, vertical: 10),
-        textStyle: typography.xs,
-        hapticFeedback: style.hapticFeedback.mediumImpact,
-      );
+  FTooltipStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+    FTooltipMotion motion = const FTooltipMotion(),
+    Duration hoverEnterDuration = const Duration(milliseconds: 500),
+    Duration hoverExitDuration = .zero,
+    Duration longPressExitDuration = const Duration(milliseconds: 1500),
+  }) : this(
+         decoration: ShapeDecoration(
+           shape: RoundedSuperellipseBorder(
+             side: BorderSide(color: colors.border, width: style.borderWidth),
+             borderRadius: style.borderRadius.md,
+           ),
+           color: colors.card,
+           shadows: FTooltipStyle.shadow,
+         ),
+         padding: const .symmetric(horizontal: 14, vertical: 10),
+         textStyle: typography.xs,
+         hapticFeedback: style.hapticFeedback.mediumImpact,
+         motion: motion,
+         hoverEnterDuration: hoverEnterDuration,
+         hoverExitDuration: hoverExitDuration,
+         longPressExitDuration: longPressExitDuration,
+       );
 }
 
 /// Motion-related properties for [FTooltip].

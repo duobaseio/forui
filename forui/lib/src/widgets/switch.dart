@@ -44,6 +44,9 @@ class FSwitch extends StatelessWidget {
   /// ```
   final FSwitchStyleDelta style;
 
+  /// Whether the label is positioned before the switch (leading) instead of after it (trailing). Defaults to false.
+  final bool leadingLabel;
+
   /// The label displayed next to the switch.
   final Widget? label;
 
@@ -96,6 +99,7 @@ class FSwitch extends StatelessWidget {
   /// Creates a [FSwitch].
   const FSwitch({
     this.style = const .context(),
+    this.leadingLabel = false,
     this.label,
     this.description,
     this.error,
@@ -115,6 +119,9 @@ class FSwitch extends StatelessWidget {
     final style = this.style(context.theme.switchStyle);
     final formVariants = <FFormFieldVariant>{if (!enabled) .disabled, if (error != null) .error};
     final variants = <FVariant>{if (value) FSwitchVariant.selected, ...formVariants};
+    final (layout, labelStyle) = leadingLabel
+        ? (FLabelLayout.horizontalLeading, style.leadingLabelStyle)
+        : (FLabelLayout.horizontalTrailing, style.trailingLabelStyle);
 
     // The label is wrapped in a GestureDetector to improve affordance.
     return GestureDetector(
@@ -129,9 +136,9 @@ class FSwitch extends StatelessWidget {
           enabled: enabled,
           toggled: value,
           child: FLabel(
-            axis: .horizontal,
+            layout: layout,
             variants: formVariants,
-            style: style,
+            style: labelStyle,
             label: label,
             description: description,
             error: error,
@@ -166,6 +173,7 @@ class FSwitch extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
+      ..add(FlagProperty('leadingLabel', value: leadingLabel, ifTrue: 'leadingLabel'))
       ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
@@ -177,7 +185,7 @@ class FSwitch extends StatelessWidget {
 }
 
 /// [FSwitch]'s style.
-class FSwitchStyle extends FLabelStyle with _$FSwitchStyleFunctions {
+class FSwitchStyle with Diagnosticable, _$FSwitchStyleFunctions {
   /// This [FSwitch]'s color when focused.
   @override
   final Color focusColor;
@@ -190,24 +198,26 @@ class FSwitchStyle extends FLabelStyle with _$FSwitchStyleFunctions {
   @override
   final FVariants<FSwitchVariantConstraint, FSwitchVariant, Color, Delta> thumbColor;
 
+  /// The label style when [FSwitch.leadingLabel] is true.
+  @override
+  final FLabelStyle leadingLabelStyle;
+
+  /// The label style when [FSwitch.leadingLabel] is false (the default).
+  @override
+  final FLabelStyle trailingLabelStyle;
+
   /// Creates a [FSwitchStyle].
   const FSwitchStyle({
     required this.focusColor,
     required this.trackColor,
     required this.thumbColor,
-    required super.labelTextStyle,
-    required super.descriptionTextStyle,
-    required super.errorTextStyle,
-    super.labelPadding,
-    super.descriptionPadding,
-    super.errorPadding,
-    super.childPadding,
-    super.labelMotion,
+    required this.leadingLabelStyle,
+    required this.trailingLabelStyle,
   });
 
   /// Creates a [FSwitchStyle] that inherits its properties.
   factory FSwitchStyle.inherit({required FColors colors, required FStyle style}) {
-    final label = FLabelStyles.inherit(style: style).horizontalStyle;
+    final labels = FLabelStyles.inherit(style: style);
     return .new(
       focusColor: colors.primary,
       trackColor: FVariants(
@@ -220,13 +230,8 @@ class FSwitchStyle extends FLabelStyle with _$FSwitchStyleFunctions {
         },
       ),
       thumbColor: .all(colors.brightness == .light ? colors.background : colors.foreground),
-      labelTextStyle: style.formFieldStyle.labelTextStyle,
-      descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,
-      errorTextStyle: style.formFieldStyle.errorTextStyle,
-      labelPadding: label.labelPadding,
-      descriptionPadding: label.descriptionPadding,
-      errorPadding: label.errorPadding,
-      childPadding: label.childPadding,
+      leadingLabelStyle: labels.horizontalLeadingStyle,
+      trailingLabelStyle: labels.horizontalTrailingStyle,
     );
   }
 }

@@ -114,7 +114,7 @@ void main() {
             menu: [
               .group(
                 children: [
-                  .item(title: const Text('Group 1 - Tile 1'), onPress: () {}),
+                  .item(title: const Text('Group 1 - Tile 1'), variant: .destructive, onPress: () {}),
                   .item(title: const Text('Group 1 - Tile 2'), onPress: () {}),
                 ],
               ),
@@ -142,7 +142,7 @@ void main() {
             control: const .managed(initial: true),
             menu: [
               .group(
-                children: [.tile(title: const Text('Group 1'), onPress: () {})],
+                children: [.tile(title: const Text('Group 1'), variant: .destructive, onPress: () {})],
               ),
               .group(
                 children: [.tile(title: const Text('Group 2'), onPress: () {})],

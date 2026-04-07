@@ -15,7 +15,7 @@ void main() {
         child: FPortal(
           portalAnchor: .topRight,
           childAnchor: .bottomLeft,
-          controller: controller,
+          control: .managed(controller: controller),
           portalBuilder: (context, _) => Padding(
             padding: const .all(5),
             child: ColoredBox(

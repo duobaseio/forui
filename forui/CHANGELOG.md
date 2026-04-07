@@ -9,6 +9,15 @@
 * Fix default text styles created by `FTypography` to include a `fontFamily`.
 
 
+### `FCheckbox`
+* Add `FCheckbox(leadingLabel: ...)`.
+* Add `FCheckboxStyle.leadingLabelStyle`.
+* Add `FCheckboxStyle.trailingLabelStyle`.
+
+* **Breaking** Change `FCheckboxStyle` to not extend `FLabelStyle`. Use `FCheckboxStyle.leadingLabelStyle` and
+  `FCheckboxStyle.trailingLabelStyle` instead.
+
+
 ### `FDialog`
 We've changed `FDialog`'s default styling to be more aesthetically pleasing.
 
@@ -29,6 +38,15 @@ We've changed `FDialog`'s default styling to be more aesthetically pleasing.
 * Add `FHapticFeedback`.
 
 
+### `FLabel`
+* Add `FLabelLayout` enum.
+
+* **Breaking** Replace `FLabel(axis: ...)` with `FLabel(layout: ...)`. Use `FLabelLayout.horizontalEnd` instead of
+  `Axis.horizontal` and `FLabelLayout.vertical` instead of `Axis.vertical`.
+* **Breaking** Replace `FLabelStyles.horizontalStyle` with `FLabelStyles.horizontalLeadingStyle` and
+  `FLabelStyles.horizontalTrailingStyle`.
+
+
 ### `FItem`
 * Add `FInheritedItemCallbacks`.
 * Add `FItemMixin.submenu(...)` shorthand for `FSubmenuItem`.
@@ -46,12 +64,39 @@ We've changed `FLineCalendar`'s default styling to be more aesthetically pleasin
 * Fix widget inspector crashing when tapping on a line calendar item.
 
 
+### `FRadio`
+* Add `FRadio(leadingLabel: ...)`.
+* Add `FRadioStyle.leadingLabelStyle`.
+* Add `FRadioStyle.trailingLabelStyle`.
+
+* **Breaking** Change `FRadioStyle` to not extend `FLabelStyle`. Use `FRadioStyle.leadingLabelStyle` and
+  `FRadioStyle.trailingLabelStyle` instead.
+
+
+### `FPopover`
+* Add `FPopoverStyle.motion`.
+* Add `FPopoverController.show(animated:)`.
+* Add `FPopoverController.hide(animated:)`.
+* Add `FPopoverController.toggle(animated:)`.
+
+* **Breaking** Remove `FPopoverControl.managed(motion: ...)`. Configure motion via `FPopoverStyle` instead.
+* **Breaking** Remove `FPopoverControl.lifted(motion: ...)`. Configure motion via `FPopoverStyle` instead.
+* **Breaking** Remove `FPopoverController(motion: ...)`. Configure motion via `FPopoverStyle` instead.
+
+
 ### `FPopoverMenu`
+* Add `FPopoverMenu.faded`.
+* Add `FPopoverMenuMotion`.
+* Add `FPopoverMenuStyle.menuMotion`.
 * Add `FSubmenuItem`.
 * Add `FSubmenuTile`.
-* Add `FPopoverMenuStyle.motion`.
-* Add `FPopoverMenuMotion`.
+* Add `FPopoverMenuStyle.hoverEnterDuration`.
 * Add `FPopoverMenuStyle.minWidth`.
+* Add `FPopoverMenuStyle.hapticFeedback`.
+
+* Fix `FPopoverMenuStyle` tiles not having a selected decoration style.
+* Fix `FPopoverMenuStyle` items not showing card background.
+* Fix `FPopoverMenu` not resetting active submenu state when menu is closed.
 
 
 ### `FTextField`
@@ -68,6 +113,8 @@ We've changed `FLineCalendar`'s default styling to be more aesthetically pleasin
 
 ### `FTile`
 * Add `FTileMixin.submenu(...)` shorthand for `FSubmenuTile`.
+* Add `FTileMixin.tile(variant: ...)`.
+* Add `FTileMixin.raw(variant: ...)`.
 
 
 ### `FTileGroup`
@@ -78,8 +125,30 @@ We've changed `FLineCalendar`'s default styling to be more aesthetically pleasin
 * Add `FTimePickerStyle.hapticFeedback`.
 
 
-### `FTooltip`
+### `FSlider`
+* **Breaking** Remove `FSliderStyle.tooltipMotion`. Configure motion via `FTooltipStyle.motion` instead.
+
+
+### `FTooltip` & `FTooltipGroup`
 * Add `FTooltipStyle.hapticFeedback`.
+* Add `FTooltipStyle.motion`.
+* Add `FTooltipStyle.hoverEnterDuration`.
+* Add `FTooltipStyle.hoverExitDuration`.
+* Add `FTooltipStyle.longPressExitDuration`.
+* Add `FTooltipGroup.style`.
+* Add `FTooltipController.show(animated:)`.
+* Add `FTooltipController.hide(animated:)`.
+* Add `FTooltipController.toggle(animated:)`.
+
+* **Breaking** Remove `FTooltipControl.managed(motion: ...)`. Configure motion via `FTooltipStyle` instead.
+* **Breaking** Remove `FTooltipControl.lifted(motion: ...)`. Configure motion via `FTooltipStyle` instead.
+* **Breaking** Remove `FTooltipController(motion: ...)`. Configure motion via `FTooltipStyle` instead.
+* **Breaking** Remove `FTooltip(hoverEnterDuration: ...)`. Configure via `FTooltipStyle` instead.
+* **Breaking** Remove `FTooltip(hoverExitDuration: ...)`. Configure via `FTooltipStyle` instead.
+* **Breaking** Remove `FTooltip(longPressExitDuration: ...)`. Configure via `FTooltipStyle` instead.
+* **Breaking** Remove `FTooltipGroup(hoverEnterDuration: ...)`. Configure via `FTooltipStyle` instead.
+* **Breaking** Remove `FTooltipGroup(hoverExitDuration: ...)`. Configure via `FTooltipStyle` instead.
+* **Breaking** Remove `FTooltipGroup(longPressExitDuration: ...)`. Configure via `FTooltipStyle` instead.
 
 
 ### `FOtpField`
@@ -88,6 +157,7 @@ We've changed `FLineCalendar`'s default styling to be more aesthetically pleasin
 
 ### `FOverlay`
 * Add `FOverlay`.
+* Add `FOverlayControl`.
 
 
 ### `FPicker`
@@ -95,11 +165,22 @@ We've changed `FLineCalendar`'s default styling to be more aesthetically pleasin
 
 
 ### `FPortal`
+* **Breaking** Replace `FPortal(controller: ...)` with `FPortal(control: .managed(controller: ...))`.
+
 * Fix portal not repositioning when the child widget changes size.
 
 
 ### `FStyle`
 * Add `FStyle.hapticFeedback`.
+
+
+### `FSwitch`
+* Add `FSwitch(leadingLabel: ...)`.
+* Add `FSwitchStyle.leadingLabelStyle`.
+* Add `FSwitchStyle.trailingLabelStyle`.
+
+* **Breaking** Change `FSwitchStyle` to not extend `FLabelStyle`. Use `FSwitchStyle.leadingLabelStyle` and
+  `FSwitchStyle.trailingLabelStyle` instead.
 
 
 ## 0.20.4

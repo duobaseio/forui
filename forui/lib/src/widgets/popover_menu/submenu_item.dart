@@ -1,11 +1,9 @@
-import 'dart:async';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/popover_menu/popover_menu.dart';
+import 'package:forui/src/widgets/popover_menu/submenu_trigger.dart';
 
 /// An item that opens a nested popover menu.
 ///
@@ -171,7 +169,7 @@ class FSubmenuItem extends StatelessWidget with FItemMixin {
   const FSubmenuItem({
     required this.title,
     required this.submenu,
-    this.control = const .managed(motion: FPopoverMotion(exitDuration: .zero)),
+    this.control = const .managed(),
     this.variant = .primary,
     this.style = const .context(),
     this.enabled,
@@ -278,7 +276,7 @@ class FSubmenuItem extends StatelessWidget with FItemMixin {
       onFocusChange: submenuOnFocusChange,
       traversalEdgeBehavior: submenuTraversalEdgeBehavior,
       menu: submenu,
-      builder: (context, controller, _) => _Trigger(
+      builder: (_, controller, _) => SubmenuTrigger(
         controller: controller,
         child: ListenableBuilder(
           listenable: controller,
@@ -309,83 +307,4 @@ class FSubmenuItem extends StatelessWidget with FItemMixin {
       ),
     );
   }
-}
-
-class _Trigger extends StatefulWidget {
-  final FPopoverController controller;
-  final Widget child;
-
-  const _Trigger({required this.controller, required this.child});
-
-  @override
-  State<_Trigger> createState() => _State();
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty<FPopoverController>('controller', controller));
-  }
-}
-
-class _State extends State<_Trigger> {
-  final Key _key = UniqueKey();
-  PopoverMenuScope? _scope;
-  int _monotonic = 0;
-  bool _hovered = false;
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    final current = PopoverMenuScope.maybeOf(context);
-    if (current?.active != _scope?.active) {
-      _scope?.active.removeListener(_handleChange);
-      _scope = current;
-      _scope?.active.addListener(_handleChange);
-    }
-  }
-
-  @override
-  void dispose() {
-    _scope?.active.removeListener(_handleChange);
-    super.dispose();
-  }
-
-  void _handleChange() {
-    if (_scope?.active case final active? when active.value != _key) {
-      widget.controller.hide();
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) => switch (_scope) {
-    null => widget.child,
-    final scope => FInheritedItemCallbacks(
-      onHoverEnter: () async {
-        _hovered = true;
-        final token = _monotonic;
-        await Future.delayed(scope.style.motion.hoverEnterDuration);
-        if (token == _monotonic && mounted) {
-          scope.active.value = _key;
-          unawaited(widget.controller.show());
-        }
-      },
-      onHoverExit: () {
-        _hovered = false;
-        _monotonic++;
-      },
-      onPress: () {
-        if (_hovered) {
-          return;
-        }
-        if (scope.active.value == _key) {
-          scope.active.value = null;
-          widget.controller.hide();
-        } else {
-          scope.active.value = _key;
-          widget.controller.show();
-        }
-      },
-      child: widget.child,
-    ),
-  };
 }

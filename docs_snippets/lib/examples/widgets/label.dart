@@ -12,7 +12,7 @@ class VerticalLabelPage extends Example {
   @override
   Widget example(BuildContext _) => const FLabel(
     // {@highlight}
-    axis: .vertical,
+    layout: .vertical,
     // {@endhighlight}
     label: Text('Email'),
     description: Text('Enter your email address.'),
@@ -30,7 +30,7 @@ class HorizontalLabelPage extends Example {
 
   @override
   Widget example(BuildContext _) => const FLabel(
-    axis: .horizontal,
+    layout: .horizontalTrailing,
     label: Text('Accept terms and conditions'),
     description: Text('You agree to our terms and conditions.'),
     error: Text('Please accept the terms.'),
@@ -47,7 +47,7 @@ class DisabledHorizontalLabelPage extends Example {
 
   @override
   Widget example(BuildContext _) => FLabel(
-    axis: .horizontal,
+    layout: .horizontalTrailing,
     label: const Text('Accept terms and conditions'),
     description: const Text('You agree to our terms and conditions.'),
     error: const Text('Please accept the terms.'),
@@ -67,7 +67,7 @@ class ErrorHorizontalLabelPage extends Example {
 
   @override
   Widget example(BuildContext _) => FLabel(
-    axis: .horizontal,
+    layout: .horizontalTrailing,
     label: const Text('Accept terms and conditions'),
     description: const Text('You agree to our terms and conditions.'),
     error: const Text('Please accept the terms.'),

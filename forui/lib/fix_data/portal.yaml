@@ -1,0 +1,24 @@
+version: 1
+transforms:
+  # FPortal
+  - title: 'Migrate FPortal(controller: ...) to control parameter'
+    date: 2026-04-06
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FPortal
+    variables:
+      controller:
+        kind: fragment
+        value: arguments[controller]
+    oneOf:
+      - if: "controller != ''"
+        changes:
+          - kind: addParameter
+            name: 'control'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(controller: {% controller %})'
+          - kind: removeParameter
+            name: 'controller'

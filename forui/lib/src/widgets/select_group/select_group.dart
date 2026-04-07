@@ -218,7 +218,7 @@ class _FSelectGroupState<T> extends State<FSelectGroup<T>> {
         final variants = <FFormFieldVariant>{if (!widget.enabled) .disabled, if (state.errorText != null) .error};
 
         return FLabel(
-          axis: .vertical,
+          layout: .vertical,
           variants: variants,
           style: groupStyle,
           label: widget.label,
@@ -317,14 +317,28 @@ class FSelectGroupStyle extends FLabelStyle with Diagnosticable, _$FSelectGroupS
 
     return .new(
       checkboxStyle: .inherit(colors: colors, style: style, touch: touch).copyWith(
-        labelTextStyle: itemLabelTextStyle,
-        descriptionTextStyle: itemDescriptionTextStyle,
-        errorTextStyle: itemErrorTextStyle,
+        leadingLabelStyle: .delta(
+          labelTextStyle: itemLabelTextStyle,
+          descriptionTextStyle: itemDescriptionTextStyle,
+          errorTextStyle: itemErrorTextStyle,
+        ),
+        trailingLabelStyle: .delta(
+          labelTextStyle: itemLabelTextStyle,
+          descriptionTextStyle: itemDescriptionTextStyle,
+          errorTextStyle: itemErrorTextStyle,
+        ),
       ),
       radioStyle: .inherit(colors: colors, style: style, touch: touch).copyWith(
-        labelTextStyle: itemLabelTextStyle,
-        descriptionTextStyle: itemDescriptionTextStyle,
-        errorTextStyle: itemErrorTextStyle,
+        leadingLabelStyle: .delta(
+          labelTextStyle: itemLabelTextStyle,
+          descriptionTextStyle: itemDescriptionTextStyle,
+          errorTextStyle: itemErrorTextStyle,
+        ),
+        trailingLabelStyle: .delta(
+          labelTextStyle: itemLabelTextStyle,
+          descriptionTextStyle: itemDescriptionTextStyle,
+          errorTextStyle: itemErrorTextStyle,
+        ),
       ),
       labelTextStyle: style.formFieldStyle.labelTextStyle,
       descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,

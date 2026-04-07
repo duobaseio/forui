@@ -231,6 +231,76 @@ void main() {
       });
     });
 
+    group('long press', () {
+      testWidgets('long press on submenu item opens submenu', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FPopoverMenu(
+              menu: [
+                .group(
+                  children: [
+                    .item(title: const Text('Edit'), onPress: () {}),
+                    .submenu(
+                      title: const Text('Share'),
+                      submenu: [
+                        .group(
+                          children: [.item(title: const Text('Email'), onPress: () {})],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+              builder: (_, controller, _) => FButton(onPress: controller.toggle, child: const Text('Open')),
+            ),
+          ),
+        );
+
+        await tester.tap(find.text('Open'));
+        await tester.pumpAndSettle();
+
+        await tester.longPress(find.text('Share'));
+        await tester.pumpAndSettle();
+
+        expect(find.text('Email'), findsOneWidget);
+      });
+
+      testWidgets('long press on open submenu item closes submenu', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FPopoverMenu(
+              menu: [
+                .group(
+                  children: [
+                    .submenu(
+                      title: const Text('Share'),
+                      submenu: [
+                        .group(
+                          children: [.item(title: const Text('Email'), onPress: () {})],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+              builder: (_, controller, _) => FButton(onPress: controller.toggle, child: const Text('Open')),
+            ),
+          ),
+        );
+
+        await tester.tap(find.text('Open'));
+        await tester.pumpAndSettle();
+
+        await tester.longPress(find.text('Share'));
+        await tester.pumpAndSettle();
+        expect(find.text('Email'), findsOneWidget);
+
+        await tester.longPress(find.text('Share'));
+        await tester.pumpAndSettle();
+        expect(find.text('Email'), findsNothing);
+      });
+    });
+
     group('hover', () {
       testWidgets('hover over submenu item shows submenu', (tester) async {
         await tester.pumpWidget(

@@ -9,6 +9,7 @@ import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
 import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/switch/default.json';
+import leadingLabelSnippet from '@/snippets/examples/switch/leading-label.json';
 import disabledSnippet from '@/snippets/examples/switch/disabled.json';
 import formSnippet from '@/snippets/examples/switch/form.json';
 import switchUsage from '@/snippets/usages/widgets/switch/switchWidget.json';
@@ -40,6 +41,17 @@ To generate a specific style for customization:
 <UsageSnippet usage={switchUsage} />
 
 ## Examples
+
+### Leading Label
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='switch' variant='leading-label'/>
+  </Tab>
+  <Tab value="Code">
+    <CodeSnippet snippet={leadingLabelSnippet} />
+  </Tab>
+</Tabs>
 
 ### Disabled
 

@@ -56,12 +56,25 @@ class FInheritedItemCallbacks extends InheritedWidget {
   /// Called when the item is pressed.
   final VoidCallback? onPress;
 
+  /// Called when the item is long-pressed.
+  final VoidCallback? onLongPress;
+
   /// Creates a [FInheritedItemCallbacks].
-  const FInheritedItemCallbacks({required super.child, super.key, this.onHoverEnter, this.onHoverExit, this.onPress});
+  const FInheritedItemCallbacks({
+    required super.child,
+    super.key,
+    this.onHoverEnter,
+    this.onHoverExit,
+    this.onPress,
+    this.onLongPress,
+  });
 
   @override
   bool updateShouldNotify(FInheritedItemCallbacks old) =>
-      onHoverEnter != old.onHoverEnter || onHoverExit != old.onHoverExit || onPress != old.onPress;
+      onHoverEnter != old.onHoverEnter ||
+      onHoverExit != old.onHoverExit ||
+      onPress != old.onPress ||
+      onLongPress != old.onLongPress;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -69,7 +82,8 @@ class FInheritedItemCallbacks extends InheritedWidget {
     properties
       ..add(ObjectFlagProperty.has('onHoverEnter', onHoverEnter))
       ..add(ObjectFlagProperty.has('onHoverExit', onHoverExit))
-      ..add(ObjectFlagProperty.has('onPress', onPress));
+      ..add(ObjectFlagProperty.has('onPress', onPress))
+      ..add(ObjectFlagProperty.has('onLongPress', onLongPress));
   }
 }
 

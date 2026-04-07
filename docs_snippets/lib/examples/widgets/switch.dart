@@ -26,6 +26,29 @@ class _SwitchPageState extends StatefulExampleState<SwitchPage> {
 }
 
 @RoutePage()
+class LeadingLabelSwitchPage extends StatefulExample {
+  LeadingLabelSwitchPage({@queryParam super.theme}) : super(maxWidth: 250);
+
+  @override
+  State<LeadingLabelSwitchPage> createState() => _LeadingLabelSwitchPageState();
+}
+
+class _LeadingLabelSwitchPageState extends StatefulExampleState<LeadingLabelSwitchPage> {
+  bool _state = false;
+
+  @override
+  Widget example(BuildContext _) => FSwitch(
+    // {@highlight}
+    leadingLabel: true,
+    // {@endhighlight}
+    label: const Text('Airplane Mode'),
+    semanticsLabel: 'Airplane Mode',
+    value: _state,
+    onChange: (value) => setState(() => _state = value),
+  );
+}
+
+@RoutePage()
 class DisabledSwitchPage extends StatefulExample {
   DisabledSwitchPage({@queryParam super.theme}) : super(maxWidth: 200);
 

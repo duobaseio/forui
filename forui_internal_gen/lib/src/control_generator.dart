@@ -1,4 +1,5 @@
 import 'package:analyzer/dart/element/element.dart';
+import 'package:analyzer/dart/element/type.dart';
 import 'package:build/build.dart';
 import 'package:code_builder/code_builder.dart' hide RecordType;
 import 'package:collection/collection.dart';
@@ -37,11 +38,15 @@ class ControlGenerator extends Generator {
         continue;
       }
 
+      final listenable = ((update.returnType as RecordType).positionalFields.first.type as InterfaceType).allSupertypes
+          .any((t) => t.element.name == 'Listenable');
+
       final parentMixin = ControlParentMixin(
         supertype: supertype,
         createController: createController,
         update: update,
         dispose: dispose,
+        listenable: listenable,
       );
       final createControllerMethod = parentMixin.createControllerMethod;
       final disposeMethod = parentMixin.disposeMethod;
@@ -59,6 +64,7 @@ class ControlGenerator extends Generator {
                   update: update,
                   dispose: disposeMethod,
                   createController: createControllerMethod,
+                  listenable: listenable,
                 ).generate(),
               )
               .toString(),
@@ -77,6 +83,7 @@ class ControlGenerator extends Generator {
                     dispose: disposeMethod,
                     default_: defaultMethod,
                     siblings: direct.whereNot((t) => t == type).toList(),
+                    listenable: listenable,
                   ).generate(),
                 )
                 .toString(),

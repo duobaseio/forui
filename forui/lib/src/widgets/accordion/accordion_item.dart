@@ -96,14 +96,22 @@ class FAccordionItem extends StatefulWidget with FAccordionItemMixin {
 }
 
 class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStateMixin {
-  late final AnimationController _controller = AnimationController(vsync: this);
-  late final CurvedAnimation _curvedReveal = CurvedAnimation(curve: Curves.linear, parent: _controller);
-  late final CurvedAnimation _curvedIconRotation = CurvedAnimation(curve: Curves.linear, parent: _controller);
+  late AnimationController _controller;
+  late CurvedAnimation _curvedReveal;
+  late CurvedAnimation _curvedIconRotation;
   late FAccordionController _accordionController;
   late int _index;
   Animation<double>? _reveal;
   Animation<double>? _iconRotation;
   bool _initialized = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(vsync: this);
+    _curvedReveal = CurvedAnimation(curve: Curves.linear, parent: _controller);
+    _curvedIconRotation = CurvedAnimation(curve: Curves.linear, parent: _controller);
+  }
 
   @override
   void didChangeDependencies() {

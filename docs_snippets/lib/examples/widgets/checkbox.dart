@@ -27,6 +27,30 @@ class _CheckboxPageState extends StatefulExampleState<CheckboxPage> {
 }
 
 @RoutePage()
+class LeadingLabelCheckboxPage extends StatefulExample {
+  LeadingLabelCheckboxPage({@queryParam super.theme}) : super(maxHeight: 320);
+
+  @override
+  State<LeadingLabelCheckboxPage> createState() => _LeadingLabelCheckboxPageState();
+}
+
+class _LeadingLabelCheckboxPageState extends StatefulExampleState<LeadingLabelCheckboxPage> {
+  bool _state = false;
+
+  @override
+  Widget example(BuildContext _) => FCheckbox(
+    // {@highlight}
+    leadingLabel: true,
+    // {@endhighlight}
+    label: const Text('Accept terms and conditions'),
+    description: const Text('You agree to our terms and conditions.'),
+    semanticsLabel: 'Accept terms and conditions',
+    value: _state,
+    onChange: (value) => setState(() => _state = value),
+  );
+}
+
+@RoutePage()
 class DisabledCheckboxPage extends StatefulExample {
   DisabledCheckboxPage({@queryParam super.theme}) : super(maxHeight: 320);
 
