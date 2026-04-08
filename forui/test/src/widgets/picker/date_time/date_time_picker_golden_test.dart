@@ -65,10 +65,7 @@ void main() {
           ),
         );
 
-        await expectLater(
-          find.byType(TestScaffold),
-          matchesGoldenFile('picker/date-time-picker/${theme.name}/$file'),
-        );
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('picker/date-time-picker/${theme.name}/$file'));
       });
     }
   }
@@ -115,10 +112,7 @@ void main() {
         const Duration(milliseconds: 300),
       );
 
-      await expectLater(
-        sheet.collate(5),
-        matchesGoldenFile('picker/date-time-picker/lifted-value-change.png'),
-      );
+      await expectLater(sheet.collate(5), matchesGoldenFile('picker/date-time-picker/lifted-value-change.png'));
     });
 
     testWidgets('drag back', (tester) async {
@@ -143,10 +137,7 @@ void main() {
       // This doesn't fully wait for animation to end but it's a good enough approximation.
       await tester.pumpFrames(widget, const Duration(milliseconds: 500));
 
-      await expectLater(
-        sheet.collate(5),
-        matchesGoldenFile('picker/date-time-picker/lifted-drag-back.png'),
-      );
+      await expectLater(sheet.collate(5), matchesGoldenFile('picker/date-time-picker/lifted-drag-back.png'));
     });
 
     testWidgets('change hour24 format', (tester) async {
@@ -188,10 +179,7 @@ void main() {
       await tester.drag(find.byType(BuilderWheel).at(1), const Offset(0, -50));
       await tester.pumpAndSettle(const Duration(seconds: 1));
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('picker/date-time-picker/lifted-hour24.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('picker/date-time-picker/lifted-hour24.png'));
     });
 
     testWidgets('change locale', (tester) async {

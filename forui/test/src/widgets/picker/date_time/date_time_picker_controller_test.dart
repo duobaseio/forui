@@ -5,8 +5,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:sugar/sugar.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/picker/picker_controller.dart';
 import 'package:forui/src/widgets/picker/date_time/date_time_picker_controller.dart';
+import 'package:forui/src/widgets/picker/picker_controller.dart';
 import '../../../test_scaffold.dart';
 
 void main() {

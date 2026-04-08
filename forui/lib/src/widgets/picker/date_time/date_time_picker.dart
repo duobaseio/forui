@@ -8,8 +8,8 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/localizations/localization.dart';
-import 'package:forui/src/widgets/picker/date_time_picker.dart';
 import 'package:forui/src/widgets/picker/date_time/date_time_picker_controller.dart';
+import 'package:forui/src/widgets/picker/date_time_picker.dart';
 
 part 'date_time_picker.design.dart';
 
@@ -25,7 +25,7 @@ part 'date_time_picker.design.dart';
 /// * [FDateTimePickerController] for controlling a date time picker.
 /// * [FDateTimePickerStyle] for customizing a date time picker's appearance.
 class FDateTimePicker extends StatefulWidget {
-   /// The default date builder for [FDateTimePicker].
+  /// The default date builder for [FDateTimePicker].
   ///
   /// Returns "Today" (localized) if [date] is today, otherwise returns the formatted date.
   static Widget defaultDateBuilder(BuildContext context, DateTime date, DateFormat format) {

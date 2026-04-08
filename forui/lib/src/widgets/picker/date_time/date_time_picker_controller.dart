@@ -3,10 +3,10 @@ import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:intl/intl.dart';
+import 'package:sugar/sugar.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/picker/picker_controller.dart';
-import 'package:sugar/sugar.dart';
 
 part 'date_time_picker_controller.control.dart';
 
