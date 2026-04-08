@@ -28,5 +28,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "Fshih fjalëkalimin",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Shfaq fjalëkalimin",
   "textFieldEmailLabel": "Email",
-  "passwordFieldLabel": "Fjalëkalimi"
+  "passwordFieldLabel": "Fjalëkalimi",
+  "dateTimePickerToday": "Sot"
 }

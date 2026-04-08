@@ -84,6 +84,9 @@ class FLocalizationsVi extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dateTimePickerToday => 'Hôm nay';
+
+  @override
   String get dialogSemanticsLabel => 'Hộp thoại';
 
   @override

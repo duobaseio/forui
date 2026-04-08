@@ -28,5 +28,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "Slėpti slaptažodį",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Rodyti slaptažodį",
   "textFieldEmailLabel": "El. paštas",
-  "passwordFieldLabel": "Slaptažodis"
+  "passwordFieldLabel": "Slaptažodis",
+  "dateTimePickerToday": "Šiandien"
 }

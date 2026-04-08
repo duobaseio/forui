@@ -28,5 +28,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "စကားဝှက်ကိုဝှက်မည်",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "စကားဝှက်ကိုပြမည်",
   "textFieldEmailLabel": "အီးမေးလ်",
-  "passwordFieldLabel": "စကားဝှက်"
+  "passwordFieldLabel": "စကားဝှက်",
+  "dateTimePickerToday": "ယနေ့"
 }

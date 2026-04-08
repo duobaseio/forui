@@ -28,5 +28,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "លាក់ពាក្យសម្ងាត់",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "បង្ហាញពាក្យសម្ងាត់",
   "textFieldEmailLabel": "អ៊ីមែល",
-  "passwordFieldLabel": "ពាក្យសម្ងាត់"
+  "passwordFieldLabel": "ពាក្យសម្ងាត់",
+  "dateTimePickerToday": "ថ្ងៃនេះ"
 }

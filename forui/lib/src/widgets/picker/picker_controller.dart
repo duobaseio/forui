@@ -8,6 +8,75 @@ import 'package:forui/forui.dart';
 
 part 'picker_controller.control.dart';
 
+@internal
+abstract class ValuePickerController<T> extends ValueNotifier<T> {
+  FPickerController? _picker;
+  bool _mutating = false;
+
+  ValuePickerController(super._value);
+
+  /// Animates the controller to the given [value].
+  Future<void> animateTo(
+    T value, {
+    Duration duration = const Duration(milliseconds: 300),
+    Curve curve = Curves.easeOutCubic,
+  }) async {
+    if (rawValue != value) {
+      await rawAnimateTo(value, duration, curve);
+    }
+  }
+
+  /// Unconditionally animates the controller to the given [value].
+  @protected
+  Future<void> rawAnimateTo(T value, Duration duration, Curve curve) async {
+    try {
+      mutating = true;
+      await picker?.animateTo(encode(value), duration: duration, curve: curve);
+      // The value does not need to be explicitly set as the picker will update it via a listener.
+    } finally {
+      mutating = false;
+    }
+  }
+
+  /// Encodes the given [value] as picker wheels.
+  @internal
+  List<int> encode(T value);
+
+  @override
+  set value(T value) {
+    if (value != rawValue) {
+      try {
+        mutating = true;
+        rawValue = value;
+        picker?.value = encode(value);
+      } finally {
+        mutating = false;
+      }
+    }
+  }
+
+  T get rawValue => super.value;
+
+  set rawValue(T value) => super.value = value;
+
+  @override
+  void dispose() {
+    _picker?.dispose();
+    super.dispose();
+  }
+}
+
+@internal
+extension InternalValuePickerController<T> on ValuePickerController<T> {
+  FPickerController? get picker => _picker;
+
+  set picker(FPickerController? controller) => _picker = controller;
+
+  bool get mutating => _mutating;
+
+  set mutating(bool value) => _mutating = value;
+}
+
 /// A picker's controller.
 ///
 /// The [value] contains the index of the selected item in each wheel. The indexes are ordered:

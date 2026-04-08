@@ -28,5 +28,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "Parolni yashirish",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Parolni koʻrsatish",
   "textFieldEmailLabel": "Elektron pochta",
-  "passwordFieldLabel": "Parol"
+  "passwordFieldLabel": "Parol",
+  "dateTimePickerToday": "Bugun"
 }

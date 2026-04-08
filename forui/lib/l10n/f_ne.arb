@@ -28,5 +28,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "पासवर्ड लुकाउनुहोस्",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "पासवर्ड देखाउनुहोस्",
   "textFieldEmailLabel": "इमेल",
-  "passwordFieldLabel": "पासवर्ड"
+  "passwordFieldLabel": "पासवर्ड",
+  "dateTimePickerToday": "आज"
 }

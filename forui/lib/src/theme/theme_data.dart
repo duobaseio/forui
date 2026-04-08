@@ -186,6 +186,17 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   @override
   final FDateFieldStyle dateFieldStyle;
 
+  /// The date time picker style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create date-time-picker
+  /// ```
+  @override
+  final FDateTimePickerStyle dateTimePickerStyle;
+
   /// The determinate progress style.
   ///
   /// ## CLI
@@ -603,6 +614,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     >?
     circularProgressStyles,
     FDateFieldStyle? dateFieldStyle,
+    FDateTimePickerStyle? dateTimePickerStyle,
     FDeterminateProgressStyle? determinateProgressStyle,
     FDialogRouteStyle? dialogRouteStyle,
     FDialogStyle? dialogStyle,
@@ -679,6 +691,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
           ? FCircularProgressSizeStyles.inherit(colors: colors, typography: typography)
           : FCircularProgressSizeStyles(circularProgressStyles),
       dateFieldStyle: dateFieldStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
+      dateTimePickerStyle: dateTimePickerStyle ?? .inherit(colors: colors, typography: typography, style: style),
       determinateProgressStyle: determinateProgressStyle ?? .inherit(colors: colors, style: style),
       dialogRouteStyle: dialogRouteStyle ?? .inherit(colors: colors),
       dialogStyle: dialogStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
@@ -797,6 +810,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       (base, variants) => FCircularProgressSizeStyles(.raw(base, variants)),
     ),
     dateFieldStyle: a.dateFieldStyle.lerp(b.dateFieldStyle, t),
+    dateTimePickerStyle: a.dateTimePickerStyle.lerp(b.dateTimePickerStyle, t),
     determinateProgressStyle: a.determinateProgressStyle.lerp(b.determinateProgressStyle, t),
     dialogRouteStyle: a.dialogRouteStyle.lerp(b.dialogRouteStyle, t),
     dialogStyle: a.dialogStyle.lerp(b.dialogStyle, t),
@@ -899,6 +913,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     required this.checkboxStyle,
     required this.circularProgressStyles,
     required this.dateFieldStyle,
+    required this.dateTimePickerStyle,
     required this.determinateProgressStyle,
     required this.dialogRouteStyle,
     required this.dialogStyle,
@@ -1385,6 +1400,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     >?
     circularProgressStyles,
     FDateFieldStyleDelta? dateFieldStyle,
+    FDateTimePickerStyleDelta? dateTimePickerStyle,
     FDeterminateProgressStyleDelta? determinateProgressStyle,
     FDialogRouteStyleDelta? dialogRouteStyle,
     FDialogStyleDelta? dialogStyle,
@@ -1454,6 +1470,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
         ? this.circularProgressStyles
         : FCircularProgressSizeStyles(circularProgressStyles(this.circularProgressStyles)),
     dateFieldStyle: dateFieldStyle?.call(this.dateFieldStyle) ?? this.dateFieldStyle,
+    dateTimePickerStyle: dateTimePickerStyle?.call(this.dateTimePickerStyle) ?? this.dateTimePickerStyle,
     determinateProgressStyle:
         determinateProgressStyle?.call(this.determinateProgressStyle) ?? this.determinateProgressStyle,
     dialogRouteStyle: dialogRouteStyle?.call(this.dialogRouteStyle) ?? this.dialogRouteStyle,

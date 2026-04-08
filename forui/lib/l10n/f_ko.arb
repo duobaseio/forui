@@ -27,5 +27,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "비밀번호 숨기기",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "비밀번호 보이기",
   "textFieldEmailLabel": "이메일",
-  "passwordFieldLabel": "비밀번호"
+  "passwordFieldLabel": "비밀번호",
+  "dateTimePickerToday": "오늘"
 }

@@ -27,5 +27,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "Απόκρυψη κωδικού",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Εμφάνιση κωδικού",
   "textFieldEmailLabel": "Email",
-  "passwordFieldLabel": "Κωδικός πρόσβασης"
+  "passwordFieldLabel": "Κωδικός πρόσβασης",
+  "dateTimePickerToday": "Σήμερα"
 }

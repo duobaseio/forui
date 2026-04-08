@@ -28,5 +28,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "Wachtwoord verbergen",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Wachtwoord tonen",
   "textFieldEmailLabel": "E-mail",
-  "passwordFieldLabel": "Wachtwoord"
+  "passwordFieldLabel": "Wachtwoord",
+  "dateTimePickerToday": "Vandaag"
 }

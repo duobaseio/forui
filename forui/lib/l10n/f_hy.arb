@@ -27,5 +27,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "Թաքցնել գաղտնաբառը",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Ցույց տալ գաղտնաբառը",
   "textFieldEmailLabel": "Էլ․ փոստ",
-  "passwordFieldLabel": "Գաղտնաբառ"
+  "passwordFieldLabel": "Գաղտնաբառ",
+  "dateTimePickerToday": "Այսօր"
 }

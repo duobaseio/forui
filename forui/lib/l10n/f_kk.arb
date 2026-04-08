@@ -27,5 +27,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "Құпия сөзді жасыру",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Құпия сөзді көрсету",
   "textFieldEmailLabel": "Электрондық пошта",
-  "passwordFieldLabel": "Құпия сөз"
+  "passwordFieldLabel": "Құпия сөз",
+  "dateTimePickerToday": "Бүгін"
 }

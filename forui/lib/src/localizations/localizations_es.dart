@@ -84,6 +84,9 @@ class FLocalizationsEs extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dateTimePickerToday => 'Hoy';
+
+  @override
   String get dialogSemanticsLabel => 'Cuadro de diálogo';
 
   @override
@@ -178,6 +181,9 @@ class FLocalizationsEs419 extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
+  String get dateTimePickerToday => 'Hoy';
+
+  @override
   String get dialogSemanticsLabel => 'Diálogo';
 
   @override
@@ -258,6 +264,9 @@ class FLocalizationsEsAr extends FLocalizationsEs {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get dateTimePickerToday => 'Hoy';
 
   @override
   String get dialogSemanticsLabel => 'Diálogo';
@@ -342,6 +351,9 @@ class FLocalizationsEsBo extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
+  String get dateTimePickerToday => 'Hoy';
+
+  @override
   String get dialogSemanticsLabel => 'Diálogo';
 
   @override
@@ -422,6 +434,9 @@ class FLocalizationsEsCl extends FLocalizationsEs {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get dateTimePickerToday => 'Hoy';
 
   @override
   String get dialogSemanticsLabel => 'Diálogo';
@@ -506,6 +521,9 @@ class FLocalizationsEsCo extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
+  String get dateTimePickerToday => 'Hoy';
+
+  @override
   String get dialogSemanticsLabel => 'Diálogo';
 
   @override
@@ -586,6 +604,9 @@ class FLocalizationsEsCr extends FLocalizationsEs {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get dateTimePickerToday => 'Hoy';
 
   @override
   String get dialogSemanticsLabel => 'Diálogo';
@@ -670,6 +691,9 @@ class FLocalizationsEsDo extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
+  String get dateTimePickerToday => 'Hoy';
+
+  @override
   String get dialogSemanticsLabel => 'Diálogo';
 
   @override
@@ -750,6 +774,9 @@ class FLocalizationsEsEc extends FLocalizationsEs {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get dateTimePickerToday => 'Hoy';
 
   @override
   String get dialogSemanticsLabel => 'Diálogo';
@@ -834,6 +861,9 @@ class FLocalizationsEsGt extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
+  String get dateTimePickerToday => 'Hoy';
+
+  @override
   String get dialogSemanticsLabel => 'Diálogo';
 
   @override
@@ -914,6 +944,9 @@ class FLocalizationsEsHn extends FLocalizationsEs {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get dateTimePickerToday => 'Hoy';
 
   @override
   String get dialogSemanticsLabel => 'Diálogo';
@@ -998,6 +1031,9 @@ class FLocalizationsEsMx extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
+  String get dateTimePickerToday => 'Hoy';
+
+  @override
   String get dialogSemanticsLabel => 'Diálogo';
 
   @override
@@ -1078,6 +1114,9 @@ class FLocalizationsEsNi extends FLocalizationsEs {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get dateTimePickerToday => 'Hoy';
 
   @override
   String get dialogSemanticsLabel => 'Diálogo';
@@ -1162,6 +1201,9 @@ class FLocalizationsEsPa extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
+  String get dateTimePickerToday => 'Hoy';
+
+  @override
   String get dialogSemanticsLabel => 'Diálogo';
 
   @override
@@ -1242,6 +1284,9 @@ class FLocalizationsEsPe extends FLocalizationsEs {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get dateTimePickerToday => 'Hoy';
 
   @override
   String get dialogSemanticsLabel => 'Diálogo';
@@ -1326,6 +1371,9 @@ class FLocalizationsEsPr extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
+  String get dateTimePickerToday => 'Hoy';
+
+  @override
   String get dialogSemanticsLabel => 'Diálogo';
 
   @override
@@ -1406,6 +1454,9 @@ class FLocalizationsEsPy extends FLocalizationsEs {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get dateTimePickerToday => 'Hoy';
 
   @override
   String get dialogSemanticsLabel => 'Diálogo';
@@ -1490,6 +1541,9 @@ class FLocalizationsEsSv extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
+  String get dateTimePickerToday => 'Hoy';
+
+  @override
   String get dialogSemanticsLabel => 'Diálogo';
 
   @override
@@ -1570,6 +1624,9 @@ class FLocalizationsEsUs extends FLocalizationsEs {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get dateTimePickerToday => 'Hoy';
 
   @override
   String get dialogSemanticsLabel => 'Diálogo';
@@ -1654,6 +1711,9 @@ class FLocalizationsEsUy extends FLocalizationsEs {
   String get shortDateSuffix => '';
 
   @override
+  String get dateTimePickerToday => 'Hoy';
+
+  @override
   String get dialogSemanticsLabel => 'Diálogo';
 
   @override
@@ -1734,6 +1794,9 @@ class FLocalizationsEsVe extends FLocalizationsEs {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get dateTimePickerToday => 'Hoy';
 
   @override
   String get dialogSemanticsLabel => 'Diálogo';

@@ -27,5 +27,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "إخفاء كلمة المرور",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "إظهار كلمة المرور",
   "textFieldEmailLabel": "البريد الإلكتروني",
-  "passwordFieldLabel": "كلمة المرور"
+  "passwordFieldLabel": "كلمة المرور",
+  "dateTimePickerToday": "اليوم"
 }

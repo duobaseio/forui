@@ -28,5 +28,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "Fihla iphasiwedi",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Bonisa iphasiwedi",
   "textFieldEmailLabel": "I-imeyili",
-  "passwordFieldLabel": "Iphasiwedi"
+  "passwordFieldLabel": "Iphasiwedi",
+  "dateTimePickerToday": "Namuhla"
 }

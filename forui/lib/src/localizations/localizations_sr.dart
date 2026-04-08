@@ -84,6 +84,9 @@ class FLocalizationsSr extends FLocalizations {
   String get shortDateSuffix => '.';
 
   @override
+  String get dateTimePickerToday => 'Данас';
+
+  @override
   String get dialogSemanticsLabel => 'Дијалог';
 
   @override
@@ -176,6 +179,9 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
 
   @override
   String get shortDateSuffix => '.';
+
+  @override
+  String get dateTimePickerToday => 'Danas';
 
   @override
   String get dialogSemanticsLabel => 'Dijalog';

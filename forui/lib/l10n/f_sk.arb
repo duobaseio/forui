@@ -28,5 +28,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "Skryť heslo",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Zobraziť heslo",
   "textFieldEmailLabel": "E-mail",
-  "passwordFieldLabel": "Heslo"
+  "passwordFieldLabel": "Heslo",
+  "dateTimePickerToday": "Dnes"
 }

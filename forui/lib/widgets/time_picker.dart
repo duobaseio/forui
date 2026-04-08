@@ -7,6 +7,6 @@
 /// See https://forui.dev/docs/form/time-picker for working examples.
 library forui.widgets.time_picker;
 
-export '../src/widgets/time_picker/time_picker.dart';
-export '../src/widgets/time_picker/time_picker_controller.dart'
+export '../src/widgets/picker/time/time_picker.dart';
+export '../src/widgets/picker/time/time_picker_controller.dart'
     hide InternalFTimePickerControl, InternalFTimePickerController;

@@ -28,5 +28,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "ይለፍ ቃል ደብቅ",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "ይለፍ ቃል አሳይ",
   "textFieldEmailLabel": "ኢሜይል",
-  "passwordFieldLabel": "የይለፍ ቃል"
+  "passwordFieldLabel": "የይለፍ ቃል",
+  "dateTimePickerToday": "ዛሬ"
 }

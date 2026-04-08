@@ -27,5 +27,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "ເຊື່ອງລະຫັດຜ່ານ",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "ສະແດງລະຫັດຜ່ານ",
   "textFieldEmailLabel": "ອີເມວ",
-  "passwordFieldLabel": "ລະຫັດຜ່ານ"
+  "passwordFieldLabel": "ລະຫັດຜ່ານ",
+  "dateTimePickerToday": "ມື້ນີ້"
 }

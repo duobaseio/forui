@@ -93,6 +93,9 @@ class FDefaultLocalizations extends FLocalizations {
   String get dateFieldInvalidDateError => 'Invalid date.';
 
   @override
+  String get dateTimePickerToday => 'Today';
+
+  @override
   String get shortDateSeparator => '/';
 
   @override

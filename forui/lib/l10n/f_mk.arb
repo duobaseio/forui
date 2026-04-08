@@ -27,5 +27,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "Сокриј лозинка",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Прикажи лозинка",
   "textFieldEmailLabel": "Е-пошта",
-  "passwordFieldLabel": "Лозинка"
+  "passwordFieldLabel": "Лозинка",
+  "dateTimePickerToday": "Денес"
 }

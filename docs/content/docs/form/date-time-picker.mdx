@@ -1,0 +1,73 @@
+---
+title: Date Time Picker
+description: A date and time picker that allows a date and time to be selected. The picker supports arrow key navigation. Recommended for touch devices.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.date_time_picker/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/date-time-picker/default.json';
+import hour24Snippet from '@/snippets/examples/date-time-picker/hour24.json';
+import intervalSnippet from '@/snippets/examples/date-time-picker/interval.json';
+import dateTimePickerUsage from '@/snippets/usages/widgets/date_time_picker/dateTimePicker.json';
+
+The picker supports arrow key navigation:
+
+- Up/Down arrows: Increment/decrement selected value
+- Left/Right arrows: Move between wheels
+
+Recommended for touch devices.
+
+<Tabs items={['Preview', 'Code']}>
+    <Tab value="Preview">
+        <Widget name='date-time-picker'/>
+    </Tab>
+    <Tab value="Code">
+        <CodeSnippet snippet={defaultSnippet} />
+    </Tab>
+</Tabs>
+
+## CLI
+
+To generate a specific style for customization:
+
+<Tabs items={['Date Time Picker']}>
+    <Tab value="Date Time Picker">
+        ```shell copy
+        dart run forui style create date-time-picker
+        ````
+    </Tab>
+</Tabs>
+
+## Usage
+
+### `FDateTimePicker(...)`
+<UsageSnippet usage={dateTimePickerUsage} />
+
+## Examples
+
+### 24 Hour Clock
+
+<Tabs items={['Preview', 'Code']}>
+    <Tab value="Preview">
+        <Widget name='date-time-picker' variant='hour24'/>
+    </Tab>
+    <Tab value="Code">
+        <CodeSnippet snippet={hour24Snippet} />
+    </Tab>
+
+</Tabs>
+
+### With Custom Intervals
+
+<Tabs items={['Preview', 'Code']}>
+    <Tab value="Preview">
+        <Widget name='date-time-picker' variant='interval'/>
+    </Tab>
+    <Tab value="Code">
+        <CodeSnippet snippet={intervalSnippet} />
+    </Tab>
+
+</Tabs>

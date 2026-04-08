@@ -1,0 +1,292 @@
+import 'package:flutter/foundation.dart';
+import 'package:flutter/scheduler.dart';
+import 'package:flutter/widgets.dart';
+
+import 'package:intl/intl.dart';
+import 'package:sugar/sugar.dart';
+
+import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/picker/picker_controller.dart';
+
+part 'date_time_picker_controller.control.dart';
+
+/// A [FDateTimePicker]'s controller.
+final class FDateTimePickerController extends ValuePickerController<DateTime> {
+  DateTime? _dateTime;
+  String? _pattern;
+  bool? _hours24;
+  int? _dayInterval;
+  int? _hourInterval;
+  int? _minuteInterval;
+
+  /// Creates a [FDateTimePickerController].
+  FDateTimePickerController({DateTime? dateTime}) : super(dateTime ?? LocalDateTime.now().toNative());
+
+  @override
+  @internal
+  List<int> encode(DateTime value) {
+    final indexes = [
+      (DateTime.utc(value.year, value.month, value.day).difference(_dateTime!).inDays / _dayInterval!).round(),
+      (value.hour / _hourInterval!).round(),
+      (value.minute / _minuteInterval!).round(),
+    ];
+
+    if (!_hours24!) {
+      final period = value.hour < 12 ? 0 : 1;
+      _pattern!.startsWith('a') ? indexes.insert(1, period) : indexes.add(period);
+    }
+
+    return indexes;
+  }
+}
+
+@internal
+extension InternalFDateTimePickerController on FDateTimePickerController {
+  bool configure(DateFormat format, int dayInterval, int hourInterval, int minuteInterval) {
+    // This behavior isn't ideal since changing the hour/minute interval causes an unintuitive time to be shown.
+    // It is difficult to fix without FixedExtentScrollController exposing the keepOffset parameter.
+    // See https://github.com/flutter/flutter/issues/162972
+    final now = LocalDateTime.now();
+    _dateTime ??= now.toNative();
+
+    final pattern = format.pattern!;
+    final hours24 = !pattern.contains('a');
+    if (_pattern == pattern &&
+        _hours24 == hours24 &&
+        _dayInterval == dayInterval &&
+        _hourInterval == hourInterval &&
+        _minuteInterval == minuteInterval) {
+      return false;
+    }
+
+    _pattern = pattern;
+    _hours24 = hours24;
+    _dayInterval = dayInterval;
+    _hourInterval = hourInterval;
+    _minuteInterval = minuteInterval;
+
+    picker?.dispose();
+    picker = FPickerController(indexes: encode(value));
+    picker?.addListener(decode);
+    return true;
+  }
+
+  /// Decodes the current picker wheels as a [DateTime].
+  void decode() {
+    final indexes = picker!.value;
+    final date = _dateTime!.add(Duration(days: indexes[0] * _dayInterval!));
+    final hourIndex = _pattern!.startsWith('a') ? 2 : 1;
+    final periodIndex = _pattern!.startsWith('a') ? 1 : 3;
+
+    var hour = (indexes[hourIndex] * _hourInterval!) % (_hours24! ? 24 : 12);
+    if (!_hours24! && indexes[periodIndex].isOdd) {
+      hour += 12;
+    }
+
+    rawValue = DateTime(date.year, date.month, date.day, hour, (indexes[hourIndex + 1] * _minuteInterval!) % 60);
+  }
+
+  bool get hours24 => _hours24!;
+
+  int get hourInterval => _hourInterval!;
+
+  int get dayInterval => _dayInterval!;
+
+  int get minuteInterval => _minuteInterval!;
+
+  DateTime get referenceDate => _dateTime!;
+}
+
+final class _ProxyController extends FDateTimePickerController {
+  DateTime _unsynced;
+  ValueChanged<DateTime> _onChange;
+  Duration _duration;
+  Curve _curve;
+  int _monotonic = 0;
+
+  _ProxyController(this._unsynced, this._onChange, this._duration, this._curve) : super(dateTime: _unsynced);
+
+  void update(
+    DateTime newValue,
+    ValueChanged<DateTime> onChange,
+    Duration duration,
+    Curve curve,
+    DateFormat format,
+    int dayInterval,
+    int hourInterval,
+    int minuteInterval,
+  ) {
+    _onChange = onChange;
+    _duration = duration;
+    _curve = curve;
+    final current = ++_monotonic;
+
+    if (configure(format, dayInterval, hourInterval, minuteInterval)) {
+      return;
+    }
+
+    if (super.rawValue != newValue) {
+      _unsynced = newValue;
+      super.rawValue = newValue;
+      _scrollTo(newValue, current);
+    } else if (_unsynced != newValue) {
+      _unsynced = newValue;
+      _scrollTo(newValue, current);
+    }
+  }
+
+  @override
+  set rawValue(DateTime value) {
+    final current = ++_monotonic;
+    if (super.rawValue != value) {
+      _unsynced = value;
+      _onChange(value);
+      _scrollTo(super.rawValue, current);
+    }
+  }
+
+  void _scrollTo(DateTime value, int current) {
+    SchedulerBinding.instance.addPostFrameCallback((_) {
+      if (current == _monotonic) {
+        rawAnimateTo(value, _duration, _curve);
+      }
+    });
+  }
+}
+
+/// A [FDateTimePickerControl] defines how a [FDateTimePicker] is controlled.
+///
+/// {@macro forui.foundation.doc_templates.control}
+sealed class FDateTimePickerControl with Diagnosticable, _$FDateTimePickerControlMixin {
+  /// Creates a [FDateTimePickerControl].
+  const factory FDateTimePickerControl.managed({
+    FDateTimePickerController? controller,
+    DateTime? initial,
+    ValueChanged<DateTime>? onChange,
+  }) = FDateTimePickerManagedControl;
+
+  /// Creates a [FDateTimePickerControl] for controlling date time picker using lifted state.
+  ///
+  /// It does not prevent the user from scrolling to invalid indexes. To animate back to the provided [dateTime],
+  /// consider passing in `onChange: (_) => setState(() {})`.
+  ///
+  /// The [dateTime] parameter contains the current selected date and time.
+  /// The [onChange] callback is invoked when the user selects a date and time.
+  /// The [duration] when animating to [dateTime] from an invalid/different value. Defaults to 200 milliseconds.
+  /// The [curve] when animating to [dateTime] from an invalid/different value. Defaults to [Curves.easeOutCubic].
+  const factory FDateTimePickerControl.lifted({
+    required DateTime dateTime,
+    required ValueChanged<DateTime> onChange,
+    Duration duration,
+    Curve curve,
+  }) = _Lifted;
+
+  const FDateTimePickerControl._();
+
+  (FDateTimePickerController, bool) _update(
+    FDateTimePickerControl old,
+    FDateTimePickerController controller,
+    VoidCallback callback,
+    DateFormat format,
+    int dayInterval,
+    int hourInterval,
+    int minuteInterval,
+  );
+
+  @override
+  FDateTimePickerController _default(
+    FDateTimePickerControl old,
+    FDateTimePickerController controller,
+    VoidCallback _,
+    DateFormat format,
+    int dayInterval,
+    int hourInterval,
+    int minuteInterval,
+  ) => controller..configure(format, dayInterval, hourInterval, minuteInterval);
+}
+
+/// A [FDateTimePickerManagedControl] enables widgets to manage their own controller internally while exposing parameters
+/// for common configurations.
+///
+/// {@macro forui.foundation.doc_templates.managed}
+class FDateTimePickerManagedControl extends FDateTimePickerControl
+    with Diagnosticable, _$FDateTimePickerManagedControlMixin {
+  /// The controller.
+  @override
+  final FDateTimePickerController? controller;
+
+  /// The initial date and time. Defaults to [DateTime.now].
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [initial] and [controller] are both provided.
+  @override
+  final DateTime? initial;
+
+  /// Called when the date and time changes.
+  @override
+  final ValueChanged<DateTime>? onChange;
+
+  /// Creates a [FDateTimePickerControl].
+  const FDateTimePickerManagedControl({this.controller, this.initial, this.onChange})
+    : assert(
+        controller == null || initial == null,
+        'Cannot provide both controller and initial date time. Pass initial date time to the controller instead.',
+      ),
+      super._();
+
+  @override
+  FDateTimePickerController createController(
+    DateFormat format,
+    int dayInterval,
+    int hourInterval,
+    int minuteInterval,
+  ) => (controller ?? .new(dateTime: initial))..configure(format, dayInterval, hourInterval, minuteInterval);
+}
+
+class _Lifted extends FDateTimePickerControl with _$_LiftedMixin {
+  @override
+  final DateTime dateTime;
+  @override
+  final ValueChanged<DateTime> onChange;
+  @override
+  final Duration duration;
+  @override
+  final Curve curve;
+
+  const _Lifted({
+    required this.dateTime,
+    required this.onChange,
+    this.duration = const Duration(milliseconds: 300),
+    this.curve = Curves.easeOutCubic,
+  }) : super._();
+
+  @override
+  FDateTimePickerController createController(
+    DateFormat format,
+    int dayInterval,
+    int hourInterval,
+    int minuteInterval,
+  ) =>
+      (_ProxyController(dateTime, onChange, duration, curve))
+        ..configure(format, dayInterval, hourInterval, minuteInterval);
+
+  @override
+  void _updateController(
+    FDateTimePickerController controller,
+    DateFormat format,
+    int dayInterval,
+    int hourInterval,
+    int minuteInterval,
+  ) {
+    (controller as _ProxyController).update(
+      dateTime,
+      onChange,
+      duration,
+      curve,
+      format,
+      dayInterval,
+      hourInterval,
+      minuteInterval,
+    );
+  }
+}

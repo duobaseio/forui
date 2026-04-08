@@ -84,6 +84,9 @@ class FLocalizationsCs extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dateTimePickerToday => 'Dnes';
+
+  @override
   String get dialogSemanticsLabel => 'Dialogové okno';
 
   @override

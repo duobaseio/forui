@@ -28,5 +28,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "Sembunyikan kata sandi",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Tampilkan kata sandi",
   "textFieldEmailLabel": "Email",
-  "passwordFieldLabel": "Kata sandi"
+  "passwordFieldLabel": "Kata sandi",
+  "dateTimePickerToday": "Hari ini"
 }

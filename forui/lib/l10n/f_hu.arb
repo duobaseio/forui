@@ -28,5 +28,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "Jelszó elrejtése",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Jelszó megjelenítése",
   "textFieldEmailLabel": "E-mail",
-  "passwordFieldLabel": "Jelszó"
+  "passwordFieldLabel": "Jelszó",
+  "dateTimePickerToday": "Ma"
 }

@@ -28,5 +28,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "ซ่อนรหัสผ่าน",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "แสดงรหัสผ่าน",
   "textFieldEmailLabel": "อีเมล",
-  "passwordFieldLabel": "รหัสผ่าน"
+  "passwordFieldLabel": "รหัสผ่าน",
+  "dateTimePickerToday": "วันนี้"
 }

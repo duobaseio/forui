@@ -84,6 +84,9 @@ class FLocalizationsPt extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dateTimePickerToday => 'Hoje';
+
+  @override
   String get dialogSemanticsLabel => 'Caixa de diálogo';
 
   @override
@@ -176,6 +179,9 @@ class FLocalizationsPtPt extends FLocalizationsPt {
 
   @override
   String get shortDateSuffix => '';
+
+  @override
+  String get dateTimePickerToday => 'Hoje';
 
   @override
   String get dialogSemanticsLabel => 'Caixa de diálogo';

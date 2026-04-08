@@ -28,5 +28,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "Dölj lösenord",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Visa lösenord",
   "textFieldEmailLabel": "E-post",
-  "passwordFieldLabel": "Lösenord"
+  "passwordFieldLabel": "Lösenord",
+  "dateTimePickerToday": "Idag"
 }

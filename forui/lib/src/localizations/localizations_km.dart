@@ -84,6 +84,9 @@ class FLocalizationsKm extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dateTimePickerToday => 'ថ្ងៃនេះ';
+
+  @override
   String get dialogSemanticsLabel => 'Dialog';
 
   @override

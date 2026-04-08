@@ -27,5 +27,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "Сырсөздү жашыруу",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Сырсөздү көрсөтүү",
   "textFieldEmailLabel": "Электрондук почта",
-  "passwordFieldLabel": "Сырсөз"
+  "passwordFieldLabel": "Сырсөз",
+  "dateTimePickerToday": "Бүгүн"
 }

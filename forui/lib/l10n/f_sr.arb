@@ -27,5 +27,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "Сакриј лозинку",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Прикажи лозинку",
   "textFieldEmailLabel": "Имејл",
-  "passwordFieldLabel": "Лозинка"
+  "passwordFieldLabel": "Лозинка",
+  "dateTimePickerToday": "Данас"
 }

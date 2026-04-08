@@ -84,6 +84,9 @@ class FLocalizationsHu extends FLocalizations {
   String get shortDateSuffix => '.';
 
   @override
+  String get dateTimePickerToday => 'Ma';
+
+  @override
   String get dialogSemanticsLabel => 'Párbeszédablak';
 
   @override

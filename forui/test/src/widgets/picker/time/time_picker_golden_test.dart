@@ -4,7 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/picker/picker_wheel.dart';
-import '../../test_scaffold.dart';
+import '../../../test_scaffold.dart';
 
 void main() {
   late FTimePickerController controller;
@@ -58,7 +58,7 @@ void main() {
           ),
         );
 
-        await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-picker/${theme.name}/$file'));
+        await expectLater(find.byType(TestScaffold), matchesGoldenFile('picker/time-picker/${theme.name}/$file'));
       });
     }
   }
@@ -105,7 +105,7 @@ void main() {
         const Duration(milliseconds: 300),
       );
 
-      await expectLater(sheet.collate(5), matchesGoldenFile('time-picker/lifted-value-change.png'));
+      await expectLater(sheet.collate(5), matchesGoldenFile('picker/time-picker/lifted-value-change.png'));
     });
 
     testWidgets('drag back', (tester) async {
@@ -129,7 +129,7 @@ void main() {
       // This doesn't fully wait for animation to end but it's a good enough approximation.
       await tester.pumpFrames(widget, const Duration(milliseconds: 500));
 
-      await expectLater(sheet.collate(5), matchesGoldenFile('time-picker/lifted-drag-back.png'));
+      await expectLater(sheet.collate(5), matchesGoldenFile('picker/time-picker/lifted-drag-back.png'));
     });
 
     testWidgets('change hour24 format', (tester) async {
@@ -170,7 +170,7 @@ void main() {
       await tester.drag(find.byType(BuilderWheel).first, const Offset(0, -50));
       await tester.pumpAndSettle(const Duration(seconds: 1));
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-picker/lifted-hour24.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('picker/time-picker/lifted-hour24.png'));
     });
 
     testWidgets('change locale', (tester) async {
@@ -211,7 +211,7 @@ void main() {
       await tester.drag(find.byType(BuilderWheel).first, const Offset(0, -50));
       await tester.pumpAndSettle();
 
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('time-picker/lifted-change-locale.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('picker/time-picker/lifted-change-locale.png'));
     });
   });
 
@@ -238,7 +238,7 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('time-picker/boundary/${locale.toLanguageTag()}-11am-12pm.png'),
+          matchesGoldenFile('picker/time-picker/boundary/${locale.toLanguageTag()}-11am-12pm.png'),
         );
 
         expect(controller.value, const FTime(12));
@@ -263,7 +263,7 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('time-picker/boundary/${locale.toLanguageTag()}-11pm-12am.png'),
+          matchesGoldenFile('picker/time-picker/boundary/${locale.toLanguageTag()}-11pm-12am.png'),
         );
 
         expect(controller.value, const FTime());
@@ -288,7 +288,7 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('time-picker/boundary/${locale.toLanguageTag()}-12pm-11am.png'),
+          matchesGoldenFile('picker/time-picker/boundary/${locale.toLanguageTag()}-12pm-11am.png'),
         );
 
         expect(controller.value, const FTime(11));
@@ -313,7 +313,7 @@ void main() {
 
         await expectLater(
           find.byType(TestScaffold),
-          matchesGoldenFile('time-picker/boundary/${locale.toLanguageTag()}-12am-11pm.png'),
+          matchesGoldenFile('picker/time-picker/boundary/${locale.toLanguageTag()}-12am-11pm.png'),
         );
 
         expect(controller.value, const FTime(23));

@@ -28,5 +28,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "Cuddio cyfrinair",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Dangos cyfrinair",
   "textFieldEmailLabel": "E-bost",
-  "passwordFieldLabel": "Cyfrinair"
+  "passwordFieldLabel": "Cyfrinair",
+  "dateTimePickerToday": "Heddiw"
 }

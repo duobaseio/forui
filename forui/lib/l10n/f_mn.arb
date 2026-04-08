@@ -27,5 +27,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "Нууц үгийг нуух",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Нууц үгийг харуулах",
   "textFieldEmailLabel": "Имэйл",
-  "passwordFieldLabel": "Нууц үг"
+  "passwordFieldLabel": "Нууц үг",
+  "dateTimePickerToday": "Өнөөдөр"
 }

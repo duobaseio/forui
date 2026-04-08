@@ -28,5 +28,6 @@
   "passwordFieldObscureTextButtonSemanticsLabel": "Sembunyikan kata laluan",
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Tunjukkan kata laluan",
   "textFieldEmailLabel": "E-mel",
-  "passwordFieldLabel": "Kata laluan"
+  "passwordFieldLabel": "Kata laluan",
+  "dateTimePickerToday": "Hari ini"
 }

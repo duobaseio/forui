@@ -84,6 +84,9 @@ class FLocalizationsCy extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String get dateTimePickerToday => 'Heddiw';
+
+  @override
   String get dialogSemanticsLabel => 'Deialog';
 
   @override

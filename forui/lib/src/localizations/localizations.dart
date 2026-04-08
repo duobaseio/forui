@@ -364,6 +364,12 @@ abstract class FLocalizations {
   /// **''**
   String get shortDateSuffix;
 
+  /// The label for today's date in the date time picker.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get dateTimePickerToday;
+
   /// The sheet's label.
   ///
   /// In en, this message translates to:
