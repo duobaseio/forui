@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
-import 'widgets/pagination.dart';
+import 'widgets/select.dart';
 
 void main() {
   runApp(const Application());
@@ -29,7 +29,7 @@ class Application extends StatelessWidget {
         ),
       ),
       home: const FScaffold(
-        child: Pagination(),
+        child: Select(),
       ),
     );
   }
