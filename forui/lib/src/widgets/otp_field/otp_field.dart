@@ -236,7 +236,7 @@ class FOtpField extends StatefulWidget with FFormFieldProperties<String> {
     this.stylusHandwritingEnabled = true,
     this.enableIMEPersonalizedLearning = true,
     this.contentInsertionConfiguration,
-    this.contextMenuBuilder,
+    this.contextMenuBuilder = FTextField.defaultContextMenuBuilder,
     this.canRequestFocus = true,
     this.undoController,
     this.onSaved,
@@ -479,14 +479,14 @@ class _FOtpFieldState extends State<FOtpField> {
             child: Theme(
               data: Theme.of(context).copyWith(
                 visualDensity: .standard,
-                textSelectionTheme: TextSelectionThemeData(
+                textSelectionTheme: const TextSelectionThemeData(
                   cursorColor: Colors.transparent,
                   selectionColor: Colors.transparent,
-                  selectionHandleColor: style.cursorColor,
+                  selectionHandleColor: Colors.transparent,
                 ),
               ),
               child: CupertinoTheme(
-                data: CupertinoTheme.of(context).copyWith(primaryColor: style.cursorColor),
+                data: CupertinoTheme.of(context).copyWith(selectionHandleColor: Colors.transparent),
                 child: field,
               ),
             ),

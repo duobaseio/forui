@@ -179,6 +179,20 @@ class FOtpController extends TextEditingController {
       return;
     }
 
+    /// Clamps selection offsets that exceed text length. This happens when dragging selection handles across empty
+    /// WidgetSpan items — the framework reports offsets based on span positions, not text length.
+    final length = newValue.text.length;
+    if (length < newValue.selection.start || length < newValue.selection.end) {
+      _focused = newValue.selection.baseOffset.clamp(0, _length - 1);
+      super.value = newValue.copyWith(
+        selection: TextSelection(
+          baseOffset: newValue.selection.baseOffset.clamp(0, length),
+          extentOffset: newValue.selection.extentOffset.clamp(0, length),
+        ),
+      );
+      return;
+    }
+
     /// Calculates the focused index and caret position. Arrow key events are intercepted and routed via `traverse`
     /// to avoid conflicts.
     ///
