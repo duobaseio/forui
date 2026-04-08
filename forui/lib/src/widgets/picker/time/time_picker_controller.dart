@@ -5,13 +5,12 @@ import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/picker/picker_controller.dart';
 
 part 'time_picker_controller.control.dart';
 
 /// A [FTimePicker]'s controller.
-final class FTimePickerController extends ValueNotifier<FTime> {
-  FPickerController? _picker;
-  bool _mutating = false;
+final class FTimePickerController extends ValuePickerController<FTime> {
   String? _pattern;
   bool? _hours24;
   int? _hourInterval;
@@ -20,48 +19,17 @@ final class FTimePickerController extends ValueNotifier<FTime> {
   /// Creates a [FTimePickerController].
   FTimePickerController({FTime time = const FTime()}) : super(time);
 
-  /// Animates the controller to the given [value].
-  Future<void> animateTo(
-    FTime value, {
-    Duration duration = const Duration(milliseconds: 300),
-    Curve curve = Curves.easeOutCubic,
-  }) async {
-    if (_rawValue != value) {
-      await _animateTo(value, duration, curve);
-    }
-  }
-
-  Future<void> _animateTo(FTime value, Duration duration, Curve curve) async {
-    try {
-      _mutating = true;
-      await _picker?.animateTo(encode(value), duration: duration, curve: curve);
-      // The value does not need to be explicitly set as the picker will update it via a listener.
-    } finally {
-      _mutating = false;
-    }
-  }
-
   @override
-  set value(FTime value) {
-    if (value != _rawValue) {
-      try {
-        _mutating = true;
-        _rawValue = value;
-        _picker?.value = encode(value);
-      } finally {
-        _mutating = false;
-      }
+  @internal
+  List<int> encode(FTime value) {
+    final indexes = [(value.hour / _hourInterval!).round(), (value.minute / _minuteInterval!).round()];
+
+    if (!_hours24!) {
+      final period = value.hour < 12 ? 0 : 1;
+      _pattern!.startsWith('a') ? indexes.insert(0, period) : indexes.add(period);
     }
-  }
 
-  FTime get _rawValue => super.value;
-
-  set _rawValue(FTime value) => super.value = value;
-
-  @override
-  void dispose() {
-    _picker?.dispose();
-    super.dispose();
+    return indexes;
   }
 }
 
@@ -85,27 +53,15 @@ extension InternalFTimePickerController on FTimePickerController {
     _hourInterval = hourInterval;
     _minuteInterval = minuteInterval;
 
-    _picker?.dispose();
-    _picker = FPickerController(indexes: encode(value));
-    _picker?.addListener(decode);
+    picker?.dispose();
+    picker = FPickerController(indexes: encode(value));
+    picker?.addListener(decode);
     return true;
-  }
-
-  /// Encodes the given [value] as picker wheels.
-  List<int> encode(FTime value) {
-    final indexes = [(value.hour / _hourInterval!).round(), (value.minute / _minuteInterval!).round()];
-
-    if (!_hours24!) {
-      final period = value.hour < 12 ? 0 : 1;
-      _pattern!.startsWith('a') ? indexes.insert(0, period) : indexes.add(period);
-    }
-
-    return indexes;
   }
 
   /// Decodes the current picker wheels as an [FTime].
   void decode() {
-    final indexes = _picker!.value;
+    final indexes = picker!.value;
     final hourIndex = _pattern!.startsWith('a') ? 1 : 0;
     final periodIndex = _pattern!.startsWith('a') ? 0 : 2;
 
@@ -114,14 +70,8 @@ extension InternalFTimePickerController on FTimePickerController {
       hour += 12;
     }
 
-    _rawValue = FTime(hour, (indexes[hourIndex + 1] * _minuteInterval!) % 60);
+    rawValue = FTime(hour, (indexes[hourIndex + 1] * _minuteInterval!) % 60);
   }
-
-  FPickerController? get picker => _picker;
-
-  set picker(FPickerController? controller) => _picker = controller;
-
-  bool get mutating => _mutating;
 
   bool get hours24 => _hours24!;
 
@@ -157,9 +107,9 @@ final class _ProxyController extends FTimePickerController {
       return;
     }
 
-    if (super._rawValue != newValue) {
+    if (super.rawValue != newValue) {
       _unsynced = newValue;
-      super._rawValue = newValue;
+      super.rawValue = newValue;
       _scrollTo(newValue, current);
     } else if (_unsynced != newValue) {
       _unsynced = newValue;
@@ -168,19 +118,19 @@ final class _ProxyController extends FTimePickerController {
   }
 
   @override
-  set _rawValue(FTime value) {
+  set rawValue(FTime value) {
     final current = ++_monotonic;
-    if (super._rawValue != value) {
+    if (super.rawValue != value) {
       _unsynced = value;
       _onChange(value);
-      _scrollTo(super._rawValue, current);
+      _scrollTo(super.rawValue, current);
     }
   }
 
   void _scrollTo(FTime value, int current) {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       if (current == _monotonic) {
-        _animateTo(value, _duration, _curve);
+        rawAnimateTo(value, _duration, _curve);
       }
     });
   }

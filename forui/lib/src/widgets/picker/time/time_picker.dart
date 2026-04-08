@@ -7,7 +7,8 @@ import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/picker/time/picker.dart';
+import 'package:forui/src/localizations/localization.dart';
+import 'package:forui/src/widgets/picker/date_time_picker.dart';
 import 'package:forui/src/widgets/picker/time/time_picker_controller.dart';
 
 part 'time_picker.design.dart';
@@ -137,18 +138,88 @@ class _FTimePickerState extends State<FTimePicker> {
   }
 
   @override
-  Widget build(BuildContext context) => TimePicker(
-    controller: _controller,
-    style: widget.style(context.theme.timePickerStyle),
-    format: _format,
-    padding: _padding,
-    hourInterval: _controller.hourInterval,
-    minuteInterval: _controller.minuteInterval,
-  );
+  Widget build(BuildContext context) {
+    final style = widget.style(context.theme.timePickerStyle);
+    final start = EdgeInsetsDirectional.only(start: style.padding.start);
+    final end = EdgeInsetsDirectional.only(end: style.padding.end);
+
+    return switch ((scriptNumerals.contains(_format.locale), _format.pattern!.contains('a'))) {
+      (false, true) => Western12Picker(
+        controller: _controller,
+        style: style,
+        dateWheels: const [],
+        timeFormat: _format,
+        padding: _padding,
+        start: start,
+        end: end,
+        hourInterval: _controller.hourInterval,
+        minuteInterval: _controller.minuteInterval,
+        hourFlex: style.hourFlex,
+        minuteFlex: style.minuteFlex,
+        periodFlex: style.periodFlex,
+        debugLabel: 'FTimePicker',
+      ),
+      (false, false) => Western24Picker(
+        controller: _controller,
+        style: style,
+        dateWheels: const [],
+        timeFormat: _format,
+        padding: _padding,
+        start: start,
+        end: end,
+        hourInterval: _controller.hourInterval,
+        minuteInterval: _controller.minuteInterval,
+        hourFlex: style.hourFlex,
+        minuteFlex: style.minuteFlex,
+        debugLabel: 'FTimePicker',
+      ),
+      (true, true) => Eastern12Picker(
+        controller: _controller,
+        style: style,
+        dateWheels: const [],
+        timeFormat: _format,
+        padding: _padding,
+        start: start,
+        end: end,
+        hourInterval: _controller.hourInterval,
+        minuteInterval: _controller.minuteInterval,
+        hourFlex: style.hourFlex,
+        minuteFlex: style.minuteFlex,
+        periodFlex: style.periodFlex,
+        debugLabel: 'FTimePicker',
+      ),
+      (true, false) => Eastern24Picker(
+        controller: _controller,
+        style: style,
+        dateWheels: const [],
+        timeFormat: _format,
+        padding: _padding,
+        start: start,
+        end: end,
+        hourInterval: _controller.hourInterval,
+        minuteInterval: _controller.minuteInterval,
+        hourFlex: style.hourFlex,
+        minuteFlex: style.minuteFlex,
+        debugLabel: 'FTimePicker',
+      ),
+    };
+  }
 }
 
 /// The style of a time picker.
 class FTimePickerStyle extends FPickerStyle with _$FTimePickerStyleFunctions {
+  /// The hour wheel's flex factor. Defaults to 1.
+  @override
+  final int hourFlex;
+
+  /// The minute wheel's flex factor. Defaults to 1.
+  @override
+  final int minuteFlex;
+
+  /// The period (AM/PM) wheel's flex factor. Defaults to 1.
+  @override
+  final int periodFlex;
+
   /// The padding.
   @override
   final EdgeInsetsDirectional padding;
@@ -159,6 +230,10 @@ class FTimePickerStyle extends FPickerStyle with _$FTimePickerStyleFunctions {
     required super.selectionDecoration,
     required super.focusedOutlineStyle,
     required super.hapticFeedback,
+    this.hourFlex = 1,
+    this.minuteFlex = 1,
+    this.periodFlex = 1,
+    this.padding = const .only(start: 10, end: 10),
     super.diameterRatio,
     super.squeeze,
     super.magnification,
@@ -169,7 +244,6 @@ class FTimePickerStyle extends FPickerStyle with _$FTimePickerStyleFunctions {
       applyHeightToLastDescent: false,
     ),
     super.selectionHeightAdjustment = 5,
-    this.padding = const .only(start: 10, end: 10),
   });
 
   /// Creates a [FTimePickerStyle] that inherits its properties.

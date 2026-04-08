@@ -18,6 +18,12 @@
   `FCheckboxStyle.trailingLabelStyle` instead.
 
 
+### `FDateTimePicker`
+* Add `FDateTimePicker`.
+* Add `FDateTimePickerController`.
+* Add `FDateTimePickerStyle`.
+
+
 ### `FDialog`
 We've changed `FDialog`'s default styling to be more aesthetically pleasing.
 
@@ -123,6 +129,9 @@ We've changed `FLineCalendar`'s default styling to be more aesthetically pleasin
 
 ### `FTimePicker`
 * Add `FTimePickerStyle.hapticFeedback`.
+* Add `FTimePickerStyle.hourFlex`.
+* Add `FTimePickerStyle.minuteFlex`.
+* Add `FTimePickerStyle.periodFlex`.
 
 
 ### `FSlider`

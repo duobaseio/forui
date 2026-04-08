@@ -7,7 +7,8 @@ import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/picker/date_time/picker.dart';
+import 'package:forui/src/localizations/localization.dart';
+import 'package:forui/src/widgets/picker/date_time_picker.dart';
 import 'package:forui/src/widgets/picker/date_time/date_time_picker_controller.dart';
 
 part 'date_time_picker.design.dart';
@@ -24,6 +25,18 @@ part 'date_time_picker.design.dart';
 /// * [FDateTimePickerController] for controlling a date time picker.
 /// * [FDateTimePickerStyle] for customizing a date time picker's appearance.
 class FDateTimePicker extends StatefulWidget {
+   /// The default date builder for [FDateTimePicker].
+  ///
+  /// Returns "Today" (localized) if [date] is today, otherwise returns the formatted date.
+  static Widget defaultDateBuilder(BuildContext context, DateTime date, DateFormat format) {
+    final now = DateTime.now();
+    if (date.year == now.year && date.month == now.month && date.day == now.day) {
+      return Text((FLocalizations.of(context) ?? FDefaultLocalizations()).dateTimePickerToday);
+    }
+
+    return Text(format.format(date));
+  }
+
   /// The control.
   final FDateTimePickerControl control;
 
@@ -70,7 +83,12 @@ class FDateTimePicker extends StatefulWidget {
   /// Throws [AssertionError] if [minuteInterval] < 1.
   final int minuteInterval;
 
-  /// Creates a [FDateTimePicker].
+  /// A builder that creates the date label for the date wheel.
+  ///
+  /// Defaults to [defaultDateBuilder], which shows "Today" for today's date and the formatted date otherwise.
+  final Widget Function(BuildContext context, DateTime date, DateFormat format) dateBuilder;
+
+  /// Creates a [FDateTimePicker] that uses a single wheel for the date.
   const FDateTimePicker({
     this.control = const .managed(),
     this.style = const .context(),
@@ -78,6 +96,7 @@ class FDateTimePicker extends StatefulWidget {
     this.dayInterval = 1,
     this.hourInterval = 1,
     this.minuteInterval = 1,
+    this.dateBuilder = defaultDateBuilder,
     super.key,
   }) : assert(0 < dayInterval, 'dayInterval ($dayInterval) must be > 0'),
        assert(0 < hourInterval, 'hourInterval ($hourInterval) must be > 0'),
@@ -95,7 +114,8 @@ class FDateTimePicker extends StatefulWidget {
       ..add(FlagProperty('hour24', value: hour24, ifTrue: '24-hour'))
       ..add(IntProperty('dayInterval', dayInterval))
       ..add(IntProperty('hourInterval', hourInterval))
-      ..add(IntProperty('minuteInterval', minuteInterval));
+      ..add(IntProperty('minuteInterval', minuteInterval))
+      ..add(ObjectFlagProperty.has('dateBuilder', dateBuilder));
   }
 }
 
@@ -161,20 +181,101 @@ class _FDateTimePickerState extends State<FDateTimePicker> {
   }
 
   @override
-  Widget build(BuildContext context) => DateTimePicker(
-    controller: _controller,
-    style: widget.style(context.theme.dateTimePickerStyle),
-    timeFormat: _timeFormat,
-    dateFormat: _dateFormat,
-    padding: _padding,
-    dayInterval: _controller.dayInterval,
-    hourInterval: _controller.hourInterval,
-    minuteInterval: _controller.minuteInterval,
-  );
+  Widget build(BuildContext context) {
+    final style = widget.style(context.theme.dateTimePickerStyle);
+    final start = EdgeInsetsDirectional.only(start: style.padding.start);
+    final end = EdgeInsetsDirectional.only(end: style.padding.end);
+    final dateWheels = [
+      FPickerWheel.builder(
+        flex: style.dateFlex,
+        builder: (_, index) {
+          final date = _controller.referenceDate.add(Duration(days: index * _controller.dayInterval));
+          return Padding(padding: start, child: widget.dateBuilder(context, date, _dateFormat));
+        },
+      ),
+    ];
+
+    return switch ((scriptNumerals.contains(_timeFormat.locale), _timeFormat.pattern!.contains('a'))) {
+      (false, true) => Western12Picker(
+        controller: _controller,
+        style: style,
+        dateWheels: dateWheels,
+        timeFormat: _timeFormat,
+        padding: _padding,
+        start: .zero,
+        end: end,
+        hourInterval: _controller.hourInterval,
+        minuteInterval: _controller.minuteInterval,
+        hourFlex: style.hourFlex,
+        minuteFlex: style.minuteFlex,
+        periodFlex: style.periodFlex,
+        debugLabel: 'FDateTimePicker',
+      ),
+      (false, false) => Western24Picker(
+        controller: _controller,
+        style: style,
+        dateWheels: dateWheels,
+        timeFormat: _timeFormat,
+        padding: _padding,
+        start: .zero,
+        end: end,
+        hourInterval: _controller.hourInterval,
+        minuteInterval: _controller.minuteInterval,
+        hourFlex: style.hourFlex,
+        minuteFlex: style.minuteFlex,
+        debugLabel: 'FDateTimePicker',
+      ),
+      (true, true) => Eastern12Picker(
+        controller: _controller,
+        style: style,
+        dateWheels: dateWheels,
+        timeFormat: _timeFormat,
+        padding: _padding,
+        start: .zero,
+        end: end,
+        hourInterval: _controller.hourInterval,
+        minuteInterval: _controller.minuteInterval,
+        hourFlex: style.hourFlex,
+        minuteFlex: style.minuteFlex,
+        periodFlex: style.periodFlex,
+        debugLabel: 'FDateTimePicker',
+      ),
+      (true, false) => Eastern24Picker(
+        controller: _controller,
+        style: style,
+        dateWheels: dateWheels,
+        timeFormat: _timeFormat,
+        padding: _padding,
+        start: .zero,
+        end: end,
+        hourInterval: _controller.hourInterval,
+        minuteInterval: _controller.minuteInterval,
+        hourFlex: style.hourFlex,
+        minuteFlex: style.minuteFlex,
+        debugLabel: 'FDateTimePicker',
+      ),
+    };
+  }
 }
 
 /// The style of a date time picker.
 class FDateTimePickerStyle extends FPickerStyle with _$FDateTimePickerStyleFunctions {
+  /// The date wheel's flex factor. Defaults to 2.
+  @override
+  final int dateFlex;
+
+  /// The hour wheel's flex factor. Defaults to 1.
+  @override
+  final int hourFlex;
+
+  /// The minute wheel's flex factor. Defaults to 1.
+  @override
+  final int minuteFlex;
+
+  /// The period (AM/PM) wheel's flex factor. Defaults to 1.
+  @override
+  final int periodFlex;
+
   /// The padding.
   @override
   final EdgeInsetsDirectional padding;
@@ -195,6 +296,10 @@ class FDateTimePickerStyle extends FPickerStyle with _$FDateTimePickerStyleFunct
       applyHeightToLastDescent: false,
     ),
     super.selectionHeightAdjustment = 5,
+    this.dateFlex = 2,
+    this.hourFlex = 1,
+    this.minuteFlex = 1,
+    this.periodFlex = 1,
     this.padding = const .only(start: 10, end: 10),
   });
 
