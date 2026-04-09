@@ -5,12 +5,12 @@ import 'package:flutter/widgets.dart';
 
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
+import 'package:sugar/sugar.dart' hide Offset;
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/localizations/localization.dart';
 import 'package:forui/src/widgets/picker/date_time/date_time_picker_controller.dart';
 import 'package:forui/src/widgets/picker/date_time_picker.dart';
-import 'package:sugar/sugar.dart' hide Offset;
 
 part 'date_time_picker.design.dart';
 
@@ -305,17 +305,23 @@ class FDateTimePickerStyle extends FPickerStyle with _$FDateTimePickerStyleFunct
   });
 
   /// Creates a [FDateTimePickerStyle] that inherits its properties.
-  FDateTimePickerStyle.inherit({required FColors colors, required FStyle style, required FTypography typography, required bool touch})
-    : this(
-        textStyle: touch ? typography.lg.copyWith(fontWeight: .w500, height: 1.25) : typography.sm.copyWith(fontWeight: .w500),
-        selectionDecoration: ShapeDecoration(
-          shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
-          color: colors.muted,
-        ),
-        selectionHeightAdjustment: 5,
-        spacing: 2,
-        focusedOutlineStyle: style.focusedOutlineStyle,
-        hapticFeedback: style.hapticFeedback.selectionClick,
-        padding: const .only(start: 10, end: 10),
-      );
+  FDateTimePickerStyle.inherit({
+    required FColors colors,
+    required FStyle style,
+    required FTypography typography,
+    required bool touch,
+  }) : this(
+         textStyle: touch
+             ? typography.lg.copyWith(fontWeight: .w500, height: 1.25)
+             : typography.sm.copyWith(fontWeight: .w500),
+         selectionDecoration: ShapeDecoration(
+           shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
+           color: colors.muted,
+         ),
+         selectionHeightAdjustment: 5,
+         spacing: 2,
+         focusedOutlineStyle: style.focusedOutlineStyle,
+         hapticFeedback: style.hapticFeedback.selectionClick,
+         padding: const .only(start: 10, end: 10),
+       );
 }

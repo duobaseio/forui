@@ -691,7 +691,8 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
           ? FCircularProgressSizeStyles.inherit(colors: colors, typography: typography)
           : FCircularProgressSizeStyles(circularProgressStyles),
       dateFieldStyle: dateFieldStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
-      dateTimePickerStyle: dateTimePickerStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
+      dateTimePickerStyle:
+          dateTimePickerStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       determinateProgressStyle: determinateProgressStyle ?? .inherit(colors: colors, style: style),
       dialogRouteStyle: dialogRouteStyle ?? .inherit(colors: colors),
       dialogStyle: dialogStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),

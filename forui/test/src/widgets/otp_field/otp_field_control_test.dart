@@ -259,10 +259,7 @@ void main() {
       controller
         ..value = const TextEditingValue(text: '12', selection: .collapsed(offset: 2))
         // Simulate dragging selection handle beyond text length (WidgetSpan offset > text.length).
-        ..value = const TextEditingValue(
-          text: '12',
-          selection: TextSelection(baseOffset: 3, extentOffset: 4),
-        );
+        ..value = const TextEditingValue(text: '12', selection: TextSelection(baseOffset: 3, extentOffset: 4));
 
       expect(controller.text, '12');
       expect(controller.selection, const TextSelection(baseOffset: 2, extentOffset: 2));
