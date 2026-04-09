@@ -133,6 +133,8 @@ We've changed `FLineCalendar`'s default styling to be more aesthetically pleasin
 * Add `FTimePickerStyle.minuteFlex`.
 * Add `FTimePickerStyle.periodFlex`.
 
+* Change `FTimePickerStyle.inherit(...)` to accept `touch` parameter.
+
 
 ### `FSlider`
 * **Breaking** Remove `FSliderStyle.tooltipMotion`. Configure motion via `FTooltipStyle.motion` instead.
@@ -171,6 +173,8 @@ We've changed `FLineCalendar`'s default styling to be more aesthetically pleasin
 
 ### `FPicker`
 * Add `FPickerStyle.hapticFeedback`.
+
+* Change `FPickerStyle.inherit(...)` to accept `touch` parameter.
 
 
 ### `FPortal`

@@ -184,7 +184,7 @@ enum Style {
     null,
     <String>['date-time-picker', 'datetimepicker'],
     <String>['FDateTimePickerStyle'],
-    'FDateTimePickerStyle dateTimePickerStyle({\n  required FColors colors,\n  required FStyle style,\n  required FTypography typography,\n}) => FDateTimePickerStyle(\n  textStyle: typography.sm.copyWith(fontWeight: .w500),\n  selectionDecoration: ShapeDecoration(\n    shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),\n    color: colors.muted,\n  ),\n  selectionHeightAdjustment: 5,\n  spacing: 2,\n  focusedOutlineStyle: style.focusedOutlineStyle,\n  hapticFeedback: style.hapticFeedback.selectionClick,\n  padding: const .only(start: 10, end: 10),\n  diameterRatio: 1.07,\n  squeeze: 1,\n  magnification: 1,\n  overAndUnderCenterOpacity: 0.25,\n  textHeightBehavior: const TextHeightBehavior(\n    applyHeightToFirstAscent: false,\n    applyHeightToLastDescent: false,\n  ),\n  dateFlex: 2,\n  hourFlex: 1,\n  minuteFlex: 1,\n  periodFlex: 1,\n);\n',
+    'FDateTimePickerStyle dateTimePickerStyle({\n  required FColors colors,\n  required FStyle style,\n  required FTypography typography,\n  required bool touch,\n}) => FDateTimePickerStyle(\n  textStyle: touch\n      ? typography.lg.copyWith(fontWeight: .w500, height: 1.25)\n      : typography.sm.copyWith(fontWeight: .w500),\n  selectionDecoration: ShapeDecoration(\n    shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),\n    color: colors.muted,\n  ),\n  selectionHeightAdjustment: 5,\n  spacing: 2,\n  focusedOutlineStyle: style.focusedOutlineStyle,\n  hapticFeedback: style.hapticFeedback.selectionClick,\n  padding: const .only(start: 10, end: 10),\n  diameterRatio: 1.07,\n  squeeze: 1,\n  magnification: 1,\n  overAndUnderCenterOpacity: 0.25,\n  textHeightBehavior: const TextHeightBehavior(\n    applyHeightToFirstAscent: false,\n    applyHeightToLastDescent: false,\n  ),\n  dateFlex: 3,\n  hourFlex: 1,\n  minuteFlex: 1,\n  periodFlex: 1,\n);\n',
   ),
   fdeterminateprogressstyle(
     'FDeterminateProgressStyle',
@@ -366,7 +366,7 @@ enum Style {
     null,
     <String>['picker'],
     <String>['FPickerStyle'],
-    'FPickerStyle pickerStyle({\n  required FColors colors,\n  required FStyle style,\n  required FTypography typography,\n}) => FPickerStyle(\n  textStyle: typography.sm.copyWith(fontWeight: .w500),\n  selectionDecoration: ShapeDecoration(\n    shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),\n    color: colors.muted,\n  ),\n  focusedOutlineStyle: style.focusedOutlineStyle,\n  hapticFeedback: style.hapticFeedback.selectionClick,\n  diameterRatio: 1.07,\n  squeeze: 1,\n  magnification: 1,\n  overAndUnderCenterOpacity: 0.25,\n  spacing: 5,\n  textHeightBehavior: const TextHeightBehavior(\n    applyHeightToFirstAscent: false,\n    applyHeightToLastDescent: false,\n  ),\n  selectionHeightAdjustment: 0,\n);\n',
+    'FPickerStyle pickerStyle({\n  required FColors colors,\n  required FStyle style,\n  required FTypography typography,\n  required bool touch,\n}) => FPickerStyle(\n  textStyle: touch\n      ? typography.lg.copyWith(fontWeight: .w500, height: 1.25)\n      : typography.sm.copyWith(fontWeight: .w500),\n  selectionDecoration: ShapeDecoration(\n    shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),\n    color: colors.muted,\n  ),\n  focusedOutlineStyle: style.focusedOutlineStyle,\n  hapticFeedback: style.hapticFeedback.selectionClick,\n  diameterRatio: 1.07,\n  squeeze: 1,\n  magnification: 1,\n  overAndUnderCenterOpacity: 0.25,\n  spacing: 5,\n  textHeightBehavior: const TextHeightBehavior(\n    applyHeightToFirstAscent: false,\n    applyHeightToLastDescent: false,\n  ),\n  selectionHeightAdjustment: 0,\n);\n',
   ),
   fpopovermenustyle(
     'FPopoverMenuStyle',
@@ -608,14 +608,14 @@ enum Style {
     null,
     <String>['time-field', 'timefield'],
     <String>['FTimeFieldStyle'],
-    'FTimeFieldStyle timeFieldStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n  required bool touch,\n}) => FTimeFieldStyle(\n  fieldStyles: .inherit(\n    colors: colors,\n    typography: typography,\n    style: style,\n    touch: touch,\n  ),\n  popoverStyle: .inherit(colors: colors, style: style),\n  pickerStyle: .inherit(colors: colors, typography: typography, style: style),\n);\n',
+    'FTimeFieldStyle timeFieldStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n  required bool touch,\n}) => FTimeFieldStyle(\n  fieldStyles: .inherit(\n    colors: colors,\n    typography: typography,\n    style: style,\n    touch: touch,\n  ),\n  popoverStyle: .inherit(colors: colors, style: style),\n  pickerStyle: .inherit(\n    colors: colors,\n    typography: typography,\n    style: style,\n    touch: touch,\n  ),\n);\n',
   ),
   ftimepickerstyle(
     'FTimePickerStyle',
     null,
     <String>['time-picker', 'timepicker'],
     <String>['FTimePickerStyle'],
-    'FTimePickerStyle timePickerStyle({\n  required FColors colors,\n  required FStyle style,\n  required FTypography typography,\n}) => FTimePickerStyle(\n  textStyle: typography.sm.copyWith(fontWeight: .w500),\n  selectionDecoration: ShapeDecoration(\n    shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),\n    color: colors.muted,\n  ),\n  selectionHeightAdjustment: 5,\n  spacing: 2,\n  focusedOutlineStyle: style.focusedOutlineStyle,\n  hapticFeedback: style.hapticFeedback.selectionClick,\n  padding: const .only(start: 10, end: 10),\n  hourFlex: 1,\n  minuteFlex: 1,\n  periodFlex: 1,\n  diameterRatio: 1.07,\n  squeeze: 1,\n  magnification: 1,\n  overAndUnderCenterOpacity: 0.25,\n  textHeightBehavior: const TextHeightBehavior(\n    applyHeightToFirstAscent: false,\n    applyHeightToLastDescent: false,\n  ),\n);\n',
+    'FTimePickerStyle timePickerStyle({\n  required FColors colors,\n  required FStyle style,\n  required FTypography typography,\n  required bool touch,\n}) => FTimePickerStyle(\n  textStyle: touch\n      ? typography.lg.copyWith(fontWeight: .w500, height: 1.25)\n      : typography.sm.copyWith(fontWeight: .w500),\n  selectionDecoration: ShapeDecoration(\n    shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),\n    color: colors.muted,\n  ),\n  selectionHeightAdjustment: 5,\n  spacing: 2,\n  focusedOutlineStyle: style.focusedOutlineStyle,\n  hapticFeedback: style.hapticFeedback.selectionClick,\n  padding: const .only(start: 10, end: 10),\n  hourFlex: 1,\n  minuteFlex: 1,\n  periodFlex: 1,\n  diameterRatio: 1.07,\n  squeeze: 1,\n  magnification: 1,\n  overAndUnderCenterOpacity: 0.25,\n  textHeightBehavior: const TextHeightBehavior(\n    applyHeightToFirstAscent: false,\n    applyHeightToLastDescent: false,\n  ),\n);\n',
   ),
   ftoaststyle(
     'FToastStyle',

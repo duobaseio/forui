@@ -265,8 +265,8 @@ void main() {
         );
 
       expect(controller.text, '12');
-      expect(controller.selection.baseOffset, lessThanOrEqualTo(2));
-      expect(controller.selection.extentOffset, lessThanOrEqualTo(2));
+      expect(controller.selection, const TextSelection(baseOffset: 2, extentOffset: 2));
+      expect(controller.focused, 2);
     });
 
     test('deleting last filled item retains focus on now-empty item', () {

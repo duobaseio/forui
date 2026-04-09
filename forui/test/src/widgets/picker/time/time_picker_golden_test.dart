@@ -63,6 +63,21 @@ void main() {
     }
   }
 
+  testWidgets('desktop default', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        theme: FThemes.neutral.light.desktop,
+        child: const SizedBox(
+          width: 300,
+          height: 300,
+          child: FTimePicker(control: .managed(initial: FTime(10, 30))),
+        ),
+      ),
+    );
+
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('picker/time-picker/desktop-default.png'));
+  });
+
   group('lifted', () {
     testWidgets('programmatically changed value', (tester) async {
       final sheet = autoDispose(AnimationSheetBuilder(frameSize: const Size(300, 300)));

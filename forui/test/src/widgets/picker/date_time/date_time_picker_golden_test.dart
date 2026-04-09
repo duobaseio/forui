@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:sugar/sugar.dart' hide Offset;
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/picker/picker_wheel.dart';
@@ -8,6 +9,14 @@ import '../../../test_scaffold.dart';
 
 void main() {
   late FDateTimePickerController controller;
+
+  setUp(() {
+    System.currentDateTime = () => DateTime.utc(2026, 4, 8);
+  });
+
+  tearDown(() {
+    System.currentDateTime = DateTime.now;
+  });
 
   testWidgets('blue screen', (tester) async {
     await tester.pumpWidget(
@@ -69,6 +78,21 @@ void main() {
       });
     }
   }
+
+  testWidgets('desktop default', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        theme: FThemes.neutral.light.desktop,
+        child: SizedBox(
+          width: 400,
+          height: 300,
+          child: FDateTimePicker(control: .managed(initial: DateTime(2026, 4, 8, 10, 30))),
+        ),
+      ),
+    );
+
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('picker/date-time-picker/desktop-default.png'));
+  });
 
   group('lifted', () {
     testWidgets('programmatically changed value', (tester) async {

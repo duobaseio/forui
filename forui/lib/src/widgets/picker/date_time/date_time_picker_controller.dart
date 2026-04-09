@@ -46,8 +46,7 @@ extension InternalFDateTimePickerController on FDateTimePickerController {
     // This behavior isn't ideal since changing the hour/minute interval causes an unintuitive time to be shown.
     // It is difficult to fix without FixedExtentScrollController exposing the keepOffset parameter.
     // See https://github.com/flutter/flutter/issues/162972
-    final now = LocalDateTime.now();
-    _dateTime ??= now.toNative();
+    _dateTime ??= .utc(value.year, value.month, value.day);
 
     final pattern = format.pattern!;
     final hours24 = !pattern.contains('a');

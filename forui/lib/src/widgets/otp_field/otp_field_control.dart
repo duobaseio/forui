@@ -183,13 +183,13 @@ class FOtpController extends TextEditingController {
     /// WidgetSpan items — the framework reports offsets based on span positions, not text length.
     final length = newValue.text.length;
     if (length < newValue.selection.start || length < newValue.selection.end) {
-      _focused = newValue.selection.baseOffset.clamp(0, _length - 1);
       super.value = newValue.copyWith(
         selection: TextSelection(
           baseOffset: newValue.selection.baseOffset.clamp(0, length),
           extentOffset: newValue.selection.extentOffset.clamp(0, length),
         ),
       );
+      _focused = length;
       return;
     }
 
