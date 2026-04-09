@@ -171,6 +171,23 @@ void main() {
     });
   }
 
+  testWidgets('desktop default', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold(
+        theme: FThemes.neutral.light.desktop,
+        child: FPicker(
+          control: const .managed(initial: [1, 5]),
+          children: [
+            const FPickerWheel(flex: 3, loop: true, children: months),
+            FPickerWheel.builder(builder: (context, index) => Text('Item $index')),
+          ],
+        ),
+      ),
+    );
+
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('picker/desktop-default.png'));
+  });
+
   testWidgets('touch dragged', (tester) async {
     const key = ValueKey('1st');
 

@@ -84,14 +84,20 @@ class FPickerStyle with Diagnosticable, _$FPickerStyleFunctions {
        assert(spacing >= 0, 'spacing ($spacing) must be >= 0');
 
   /// Creates a [FPickerStyle] that inherits its properties.
-  FPickerStyle.inherit({required FColors colors, required FStyle style, required FTypography typography})
-    : this(
-        textStyle: typography.sm.copyWith(fontWeight: .w500),
-        selectionDecoration: ShapeDecoration(
-          shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
-          color: colors.muted,
-        ),
-        focusedOutlineStyle: style.focusedOutlineStyle,
-        hapticFeedback: style.hapticFeedback.selectionClick,
-      );
+  FPickerStyle.inherit({
+    required FColors colors,
+    required FStyle style,
+    required FTypography typography,
+    required bool touch,
+  }) : this(
+         textStyle: touch
+             ? typography.lg.copyWith(fontWeight: .w500, height: 1.25)
+             : typography.sm.copyWith(fontWeight: .w500),
+         selectionDecoration: ShapeDecoration(
+           shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
+           color: colors.muted,
+         ),
+         focusedOutlineStyle: style.focusedOutlineStyle,
+         hapticFeedback: style.hapticFeedback.selectionClick,
+       );
 }

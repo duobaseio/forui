@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
+import 'package:sugar/sugar.dart' hide Offset;
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/localizations/localization.dart';
@@ -29,7 +30,7 @@ class FDateTimePicker extends StatefulWidget {
   ///
   /// Returns "Today" (localized) if [date] is today, otherwise returns the formatted date.
   static Widget defaultDateBuilder(BuildContext context, DateTime date, DateFormat format) {
-    final now = DateTime.now();
+    final now = LocalDate.now();
     if (date.year == now.year && date.month == now.month && date.day == now.day) {
       return Text((FLocalizations.of(context) ?? FDefaultLocalizations()).dateTimePickerToday);
     }
@@ -260,7 +261,7 @@ class _FDateTimePickerState extends State<FDateTimePicker> {
 
 /// The style of a date time picker.
 class FDateTimePickerStyle extends FPickerStyle with _$FDateTimePickerStyleFunctions {
-  /// The date wheel's flex factor. Defaults to 2.
+  /// The date wheel's flex factor. Defaults to 3.
   @override
   final int dateFlex;
 
@@ -296,7 +297,7 @@ class FDateTimePickerStyle extends FPickerStyle with _$FDateTimePickerStyleFunct
       applyHeightToLastDescent: false,
     ),
     super.selectionHeightAdjustment = 5,
-    this.dateFlex = 2,
+    this.dateFlex = 3,
     this.hourFlex = 1,
     this.minuteFlex = 1,
     this.periodFlex = 1,
@@ -304,17 +305,23 @@ class FDateTimePickerStyle extends FPickerStyle with _$FDateTimePickerStyleFunct
   });
 
   /// Creates a [FDateTimePickerStyle] that inherits its properties.
-  FDateTimePickerStyle.inherit({required FColors colors, required FStyle style, required FTypography typography})
-    : this(
-        textStyle: typography.sm.copyWith(fontWeight: .w500),
-        selectionDecoration: ShapeDecoration(
-          shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
-          color: colors.muted,
-        ),
-        selectionHeightAdjustment: 5,
-        spacing: 2,
-        focusedOutlineStyle: style.focusedOutlineStyle,
-        hapticFeedback: style.hapticFeedback.selectionClick,
-        padding: const .only(start: 10, end: 10),
-      );
+  FDateTimePickerStyle.inherit({
+    required FColors colors,
+    required FStyle style,
+    required FTypography typography,
+    required bool touch,
+  }) : this(
+         textStyle: touch
+             ? typography.lg.copyWith(fontWeight: .w500, height: 1.25)
+             : typography.sm.copyWith(fontWeight: .w500),
+         selectionDecoration: ShapeDecoration(
+           shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
+           color: colors.muted,
+         ),
+         selectionHeightAdjustment: 5,
+         spacing: 2,
+         focusedOutlineStyle: style.focusedOutlineStyle,
+         hapticFeedback: style.hapticFeedback.selectionClick,
+         padding: const .only(start: 10, end: 10),
+       );
 }

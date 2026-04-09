@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -88,26 +89,32 @@ void main() {
       );
     });
 
-    testWidgets('single filled item focused - ${theme.name}', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold.app(
-          theme: theme.data,
-          child: FOtpField(
-            control: const .managed(initial: TextEditingValue(text: '123456')),
+    for (final (name, platform) in [('android', TargetPlatform.android), ('ios', TargetPlatform.iOS)]) {
+      testWidgets('single filled item focused $name - ${theme.name}', (tester) async {
+        debugDefaultTargetPlatformOverride = platform;
+
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme.data,
+            child: FOtpField(
+              control: const .managed(initial: TextEditingValue(text: '123456')),
+            ),
           ),
-        ),
-      );
+        );
 
-      await tester.pumpAndSettle();
+        await tester.pumpAndSettle();
 
-      await tester.tap(find.byType(FOtpField));
-      await tester.pumpAndSettle();
+        await tester.tap(find.byType(FOtpField));
+        await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('otp-field/${theme.name}/single-filled-item-focused.png'),
-      );
-    });
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('otp-field/${theme.name}/single-filled-item-focused-$name.png'),
+        );
+
+        debugDefaultTargetPlatformOverride = null;
+      });
+    }
 
     testWidgets('many items focused - ${theme.name}', (tester) async {
       final controller = autoDispose(FOtpController());

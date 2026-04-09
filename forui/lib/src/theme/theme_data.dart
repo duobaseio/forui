@@ -691,7 +691,8 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
           ? FCircularProgressSizeStyles.inherit(colors: colors, typography: typography)
           : FCircularProgressSizeStyles(circularProgressStyles),
       dateFieldStyle: dateFieldStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
-      dateTimePickerStyle: dateTimePickerStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      dateTimePickerStyle:
+          dateTimePickerStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       determinateProgressStyle: determinateProgressStyle ?? .inherit(colors: colors, style: style),
       dialogRouteStyle: dialogRouteStyle ?? .inherit(colors: colors),
       dialogStyle: dialogStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
@@ -713,7 +714,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       otpFieldStyle: otpFieldStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       paginationStyle: paginationStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       persistentSheetStyle: persistentSheetStyle ?? const FPersistentSheetStyle(),
-      pickerStyle: pickerStyle ?? .inherit(colors: colors, style: style, typography: typography),
+      pickerStyle: pickerStyle ?? .inherit(colors: colors, style: style, typography: typography, touch: touch),
       popoverStyle: popoverStyle ?? .inherit(colors: colors, style: style),
       popoverMenuStyle:
           popoverMenuStyle ?? .inherit(colors: colors, style: style, typography: typography, touch: touch),
@@ -744,7 +745,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
           : FTileStyles(tileStyles),
       tileGroupStyle: tileGroupStyle ?? .inherit(colors: colors, typography: typography, style: style),
       timeFieldStyle: timeFieldStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
-      timePickerStyle: timePickerStyle ?? .inherit(colors: colors, typography: typography, style: style),
+      timePickerStyle: timePickerStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       tooltipStyle: tooltipStyle ?? .inherit(colors: colors, typography: typography, style: style),
       extensions: .unmodifiable({for (final extension in extensions) extension.type: extension}),
     );

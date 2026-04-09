@@ -255,6 +255,17 @@ void main() {
       expect(controller.focused, 4);
     });
 
+    test('clamps selection when offsets exceed text length', () {
+      controller
+        ..value = const TextEditingValue(text: '12', selection: .collapsed(offset: 2))
+        // Simulate dragging selection handle beyond text length (WidgetSpan offset > text.length).
+        ..value = const TextEditingValue(text: '12', selection: TextSelection(baseOffset: 3, extentOffset: 4));
+
+      expect(controller.text, '12');
+      expect(controller.selection, const TextSelection(baseOffset: 2, extentOffset: 2));
+      expect(controller.focused, 2);
+    });
+
     test('deleting last filled item retains focus on now-empty item', () {
       controller
         // Field has '123', tap last filled item → selection [2, 3].

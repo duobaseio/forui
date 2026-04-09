@@ -14,6 +14,7 @@ const dateTimePicker = FDateTimePicker(
   dayInterval: 1,
   hourInterval: 1,
   minuteInterval: 1,
+  dateBuilder: FDateTimePicker.defaultDateBuilder,
   // {@endcategory}
 );
 

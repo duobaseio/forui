@@ -242,7 +242,10 @@ class DartDocLinker extends RecursiveAstVisitor<void> {
           break;
         }
       }
-      assert(base.isNotEmpty, 'Could not find barrel library for type "$type" in package "$package".');
+
+      if (base.isEmpty) {
+        return null;
+      }
 
       return switch (element) {
         TopLevelFunctionElement(:final name) => '$base/$name.html',
