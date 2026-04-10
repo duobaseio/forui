@@ -1,12 +1,14 @@
 name: Forui Goldens Generate
 
 on:
+  # Auto-triggers disabled while goldens are paused in CI (see flutter/flutter#184182).
+  # Re-enable by uncommenting the pull_request block.
   workflow_dispatch: {}
-  pull_request:
-    branches: [ main ]
-    paths:
-      - '.github/workflows/forui_presubmit*.yaml'
-      - 'forui/**'
+  # pull_request:
+  #   branches: [ main ]
+  #   paths:
+  #     - '.github/workflows/forui_presubmit*.yaml'
+  #     - 'forui/**'
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

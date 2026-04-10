@@ -1,9 +1,12 @@
 name: Forui Goldens Commit
 
 on:
-  workflow_run:
-    workflows: ["Forui Goldens Generate"]
-    types: [completed]
+  # Auto-triggers disabled while goldens are paused in CI (see flutter/flutter#184182).
+  # Re-enable by uncommenting the workflow_run block.
+  workflow_dispatch: {}
+  # workflow_run:
+  #   workflows: ["Forui Goldens Generate"]
+  #   types: [completed]
 
 jobs:
   commit:

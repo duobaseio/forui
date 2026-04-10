@@ -228,17 +228,21 @@ class DartDocLinker extends RecursiveAstVisitor<void> {
     final n = element.library?.uri.pathSegments.first;
     if (packages.firstWhereOrNull((p) => p.name == n) case Package(name: final package, :final version)) {
       // We check enclosingElement != null to avoid top level functions being treated as methods.
-      final type = switch (element) {
+      final target = switch (element) {
         FieldElement() ||
         PropertyAccessorElement() ||
         ConstructorElement() ||
-        MethodElement() when element.enclosingElement != null => element.enclosingElement?.name,
-        _ => element.name,
+        MethodElement() when element.enclosingElement != null => element.enclosingElement,
+        _ => element,
       };
+
+      if (target == null) {
+        return null;
+      }
 
       var base = '';
       for (final Package(:library) in packages) {
-        if (_barrel(library, type!)?.name case final name?) {
+        if (_barrel(library, target)?.name case final name?) {
           base = 'https://pub.dev/documentation/$package/$version/${name.isEmpty ? package : name}';
           break;
         }
@@ -274,15 +278,19 @@ class DartDocLinker extends RecursiveAstVisitor<void> {
     return null;
   }
 
-  /// Returns the deepest barrel library that exports [type].
-  LibraryElement? _barrel(LibraryElement library, String type) {
-    if (library.exportNamespace.get2(type) == null) {
+  /// Returns the deepest barrel library that publicly re-exports [target].
+  ///
+  /// Matches by element identity, not just name, so transitively-hidden declarations (e.g. an `@internal` class re-
+  /// exported via `export '...' hide X;`) are correctly rejected.
+  LibraryElement? _barrel(LibraryElement library, Element target) {
+    final name = target.name;
+    if (name == null || library.exportNamespace.get2(name) != target) {
       return null;
     }
 
     for (final lib in library.exportedLibraries.where((l) => !l.uri.pathSegments.contains('src'))) {
-      if (lib.exportNamespace.get2(type) != null) {
-        return _barrel(lib, type);
+      if (lib.exportNamespace.get2(name) == target) {
+        return _barrel(lib, target);
       }
     }
 
