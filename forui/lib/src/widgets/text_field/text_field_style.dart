@@ -11,9 +11,9 @@ import 'package:forui/src/foundation/annotations.dart';
 import 'package:forui/src/theme/variant.dart';
 
 @Variants('FTextFieldSize', {
-  'sm': (1, 'The small text field size.'),
-  'md': (1, 'The medium (default) text field size.'),
-  'lg': (1, 'The large text field size.'),
+  'sm': (1, 'The small text field size.\n\nDefaults to:\n* Desktop — 32.\n* Touch — 40.'),
+  'md': (1, 'The medium (default) text field size.\n\nDefaults to:\n* Desktop — 36.\n* Touch — 44.'),
+  'lg': (1, 'The large text field size.\n\nDefaults to:\n* Desktop — 40.\n* Touch — 48.'),
 })
 @Variants('FTextField', {
   'disabled': (2, 'The semantic variant when this widget is disabled and cannot be interacted with.'),
