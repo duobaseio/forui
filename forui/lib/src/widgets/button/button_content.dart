@@ -10,8 +10,6 @@ import 'package:forui/forui.dart';
 part 'button_content.design.dart';
 
 /// Builds a [FButton] slot with the resolved styles.
-///
-/// [child] is the widget passed alongside the builder, or `null` if none was given. Returning `null` skips the slot.
 typedef FButtonContentBuilder =
     Widget Function(
       BuildContext context,
@@ -23,8 +21,6 @@ typedef FButtonContentBuilder =
     );
 
 /// Builds a [FButton.icon] content with the resolved icon style.
-///
-/// [child] is the widget passed alongside the builder, or `null` if none was given. Returning `null` skips rendering.
 typedef FButtonIconContentBuilder =
     Widget Function(BuildContext context, FButtonStyle style, IconThemeData iconStyle, Widget? child);
 
@@ -108,7 +104,7 @@ class Content extends StatelessWidget {
       ..add(EnumProperty('textBaseline', textBaseline))
       ..add(ObjectFlagProperty.has('prefixBuilder', prefixBuilder))
       ..add(ObjectFlagProperty.has('suffixBuilder', suffixBuilder))
-      ..add(ObjectFlagProperty.has('builder', builder));
+      ..add(DiagnosticsProperty('builder', builder));
   }
 }
 
@@ -140,7 +136,7 @@ class IconContent extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(ObjectFlagProperty.has('builder', builder));
+    properties.add(DiagnosticsProperty('builder', builder));
   }
 }
 
