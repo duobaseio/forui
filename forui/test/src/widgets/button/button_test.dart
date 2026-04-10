@@ -112,10 +112,7 @@ void main() {
     testWidgets('FButton.icon with builder only renders', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          child: FButton.icon(
-            onPress: () {},
-            builder: (context, style, iconStyle, child) => const Icon(FIcons.search),
-          ),
+          child: FButton.icon(onPress: () {}, builder: (context, style, iconStyle, child) => const Icon(FIcons.search)),
         ),
       );
 
