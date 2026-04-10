@@ -262,7 +262,7 @@ class _Visitor extends RecursiveAstVisitor<void> {
 
   @override
   void visitClassDeclaration(ClassDeclaration declaration) {
-    final name = declaration.name.lexeme;
+    final name = declaration.namePart.typeName.lexeme;
     if (_type.hasMatch(name)) {
       _name = name;
       super.visitClassDeclaration(declaration);
@@ -272,10 +272,11 @@ class _Visitor extends RecursiveAstVisitor<void> {
 
   @override
   void visitExtensionTypeDeclaration(ExtensionTypeDeclaration declaration) {
-    final name = declaration.name.lexeme;
+    final name = declaration.primaryConstructor.typeName.lexeme;
     if (_type.hasMatch(name)) {
       _name = name;
-      _wrapped = declaration.representation.fieldType.toSource();
+      _wrapped = (declaration.primaryConstructor.formalParameters.parameters.single as SimpleFormalParameter).type!
+          .toSource();
       super.visitExtensionTypeDeclaration(declaration);
       _name = null;
       _wrapped = null;

@@ -71,7 +71,7 @@ class Examples extends RecursiveAstVisitor<void> {
 
   Future<void> _schedule(ClassDeclaration node) async {
     final options = Options.extract(node);
-    final route = _routes[node.name.lexeme]!;
+    final route = _routes[node.namePart.typeName.lexeme]!;
 
     // Assumptions:
     // * inline is always a class declaration.

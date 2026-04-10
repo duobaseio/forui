@@ -12,7 +12,9 @@ final button = FButton(
   size: .md,
   // {@endcategory}
   // {@category "Content"}
+  prefixBuilder: null,
   prefix: const Icon(FIcons.mail),
+  suffixBuilder: null,
   suffix: null,
   mainAxisSize: .max,
   mainAxisAlignment: .center,
@@ -38,6 +40,7 @@ final button = FButton(
   style: const .context(),
   selected: false,
   onPress: () {},
+  builder: FButton.defaultContentBuilder,
   child: const Text('Button'),
   // {@endcategory}
 );
@@ -68,6 +71,7 @@ final icon = FButton.icon(
   style: const .context(),
   selected: false,
   onPress: () {},
+  builder: FButton.defaultIconContentBuilder,
   child: const Icon(FIcons.mail),
   // {@endcategory}
 );

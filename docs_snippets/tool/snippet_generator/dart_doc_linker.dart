@@ -3,6 +3,7 @@ import 'package:analyzer/dart/analysis/session.dart';
 import 'package:analyzer/dart/ast/ast.dart';
 import 'package:analyzer/dart/ast/syntactic_entity.dart';
 import 'package:analyzer/dart/ast/visitor.dart';
+import 'package:analyzer/source/source_range.dart';
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:analyzer/file_system/overlay_file_system.dart';
@@ -296,6 +297,9 @@ class Entity implements SyntacticEntity {
   final int end;
 
   Entity(this.offset, this.end);
+
+  @override
+  SourceRange get sourceRange => SourceRange(offset, length);
 
   @override
   int get length => end - offset;
