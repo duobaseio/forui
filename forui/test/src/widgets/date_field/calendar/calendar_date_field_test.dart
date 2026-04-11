@@ -3,6 +3,8 @@ import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:intl/intl.dart';
+
 import 'package:forui/forui.dart';
 import '../../../test_scaffold.dart';
 
@@ -166,7 +168,11 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         locale: const Locale('en', 'SG'),
-        child: FDateField.calendar(key: key, format: .yMMMMd('en_SG'), today: .utc(2025, 1, 15)),
+        child: FDateField.calendar(
+          key: key,
+          format: (_, date, _) => DateFormat.yMMMMd('en_SG').format(date),
+          today: .utc(2025, 1, 15),
+        ),
       ),
     );
 

@@ -50,6 +50,9 @@ abstract class FDateField extends StatefulWidget {
   static Widget defaultIconBuilder(BuildContext context, FTextFieldStyle style, Set<FTextFieldVariant> variants) =>
       FTextField.prefixIconBuilder(context, style, variants, const Icon(FIcons.calendar));
 
+  /// The default format for [FDateField.calendar], which formats [value] using [format].
+  static String defaultFormat(BuildContext context, DateTime value, DateFormat format) => format.format(value);
+
   /// The control for managing the date field's state.
   final FDateFieldControl control;
 
@@ -228,8 +231,7 @@ abstract class FDateField extends StatefulWidget {
 
   /// Creates a [FDateField] that allows a date to be selected using only a calendar.
   ///
-  /// The [format] customizes the appearance of the date in the input field. Defaults to the `d MMM y` in the current
-  /// locale.
+  /// The [format] customizes the appearance of the date in the input field.
   ///
   /// The [hint] is displayed when the input field is empty. Defaults to the current locale's
   /// [FLocalizations.dateFieldHint].
@@ -282,7 +284,7 @@ abstract class FDateField extends StatefulWidget {
     FPopoverControl popoverControl,
     FTextFieldSizeVariant size,
     FDateFieldStyleDelta style,
-    DateFormat? format,
+    String Function(BuildContext context, DateTime value, DateFormat format) format,
     TextAlign textAlign,
     TextAlignVertical? textAlignVertical,
     TextDirection? textDirection,

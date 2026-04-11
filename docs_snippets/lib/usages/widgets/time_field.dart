@@ -3,7 +3,6 @@
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
-import 'package:intl/intl.dart';
 
 final timeField = FTimeField(
   // {@category "Control"}
@@ -67,7 +66,7 @@ final timeFieldPicker = FTimeField.picker(
   formFieldKey: null,
   // {@endcategory}
   // {@category "Field"}
-  format: DateFormat.jm(),
+  format: FTimeField.defaultFormat,
   hint: 'Select time',
   textAlign: .start,
   textAlignVertical: null,

@@ -3,6 +3,8 @@ import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:intl/intl.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/picker/picker_wheel.dart';
 import '../../../test_scaffold.dart';
@@ -139,7 +141,7 @@ void main() {
         locale: const Locale('en', 'SG'),
         child: FTimeField.picker(
           key: key,
-          format: .jms('en_SG'),
+          format: (_, time, _) => DateFormat.jms('en_SG').format(time.withDate(DateTime(1970))),
           control: const .managed(initial: FTime()),
         ),
       ),

@@ -2,7 +2,7 @@ part of '../time_field.dart';
 
 // ignore: avoid_implementing_value_types
 class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties {
-  final DateFormat? format;
+  final String Function(BuildContext context, FTime value, DateFormat format) format;
   final String? hint;
   final TextAlign textAlign;
   final TextAlignVertical? textAlignVertical;
@@ -44,7 +44,7 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
   final int minuteInterval;
 
   const _PickerTimeField({
-    this.format,
+    this.format = FTimeField.defaultFormat,
     this.hint,
     this.textAlign = .start,
     this.textAlignVertical,
@@ -187,10 +187,7 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
     SchedulerBinding.instance.addPostFrameCallback((_) {
       _textController.text = switch (_controller.value) {
         null => '',
-        final value =>
-          widget.format?.format(value.withDate(DateTime(1970))) ??
-              _format?.format(value.withDate(DateTime(1970))) ??
-              '',
+        final value => widget.format(context, value, _format!),
       };
     });
   }

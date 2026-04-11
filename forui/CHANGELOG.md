@@ -28,6 +28,13 @@
   `FCheckboxStyle.trailingLabelStyle` instead.
 
 
+### `FDateField`
+* Add `FDateField.defaultFormat`.
+
+* **Breaking** Change `FDateField.calendar(format: ...)` from `DateFormat?` to
+  `String Function(BuildContext, DateTime, DateFormat)`.
+
+
 ### `FDateTimePicker`
 * Add `FDateTimePicker`.
 * Add `FDateTimePickerController`.
@@ -137,6 +144,13 @@ We've changed `FLineCalendar`'s default styling to be more aesthetically pleasin
 
 ### `FTileGroup`
 * Add `FTileGroupStyle.slidePressHapticFeedback`.
+
+
+### `FTimeField`
+* Add `FTimeField.defaultFormat`.
+
+* **Breaking** Change `FTimeField.picker(format: ...)` from `DateFormat?` to
+  `String Function(BuildContext, FTime, DateFormat)`.
 
 
 ### `FTimePicker`
