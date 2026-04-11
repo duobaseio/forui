@@ -80,7 +80,7 @@ class Stubber extends RecursiveAstVisitor<void> {
   @override
   void visitConstructorDeclaration(ConstructorDeclaration node) {
     if (snippet.kind == .constructor) {
-      snippet.between(node.returnType.offset, node.parameters.end);
+      snippet.between(node.typeName!.offset, node.parameters.end);
     }
   }
 
@@ -121,7 +121,7 @@ class _Linker extends DartDocLinker {
       final name = node.name?.lexeme ?? 'new';
       final constructor = name == 'new' ? type.unnamedConstructor : type.getNamedConstructor(name);
       if (constructor != null) {
-        link(Entity(node.returnType.offset, node.name?.end ?? node.returnType.end), constructor);
+        link(Entity(node.typeName!.offset, node.name?.end ?? node.typeName!.end), constructor);
       }
     }
     super.visitConstructorDeclaration(node);

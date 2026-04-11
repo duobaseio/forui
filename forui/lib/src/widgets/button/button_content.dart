@@ -9,45 +9,84 @@ import 'package:forui/forui.dart';
 
 part 'button_content.design.dart';
 
+/// Builds a [FButton] slot with the resolved styles.
+typedef FButtonContentBuilder =
+    Widget Function(
+      BuildContext context,
+      FButtonStyle style,
+      TextStyle textStyle,
+      IconThemeData iconStyle,
+      FCircularProgressStyle progressStyle,
+      Widget? child,
+    );
+
+/// Builds a [FButton.icon] content with the resolved icon style.
+typedef FButtonIconContentBuilder =
+    Widget Function(BuildContext context, FButtonStyle style, IconThemeData iconStyle, Widget? child);
+
 @internal
 class Content extends StatelessWidget {
   final MainAxisSize mainAxisSize;
   final MainAxisAlignment mainAxisAlignment;
   final CrossAxisAlignment crossAxisAlignment;
   final TextBaseline? textBaseline;
+  final FButtonContentBuilder? prefixBuilder;
   final Widget? prefix;
+  final FButtonContentBuilder? suffixBuilder;
   final Widget? suffix;
-  final Widget child;
+  final FButtonContentBuilder builder;
+  final Widget? child;
 
   const Content({
     required this.mainAxisSize,
     required this.mainAxisAlignment,
     required this.crossAxisAlignment,
     required this.textBaseline,
+    required this.prefixBuilder,
     required this.prefix,
+    required this.suffixBuilder,
     required this.suffix,
+    required this.builder,
     required this.child,
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
-    final FButtonData(style: FButtonStyle(:contentStyle), :variants) = .of(context);
-    return Padding(
-      padding: contentStyle.padding,
-      child: DefaultTextStyle.merge(
-        style: contentStyle.textStyle.resolve(variants),
-        child: IconTheme(
-          data: contentStyle.iconStyle.resolve(variants),
-          child: FInheritedCircularProgressStyle(
-            style: contentStyle.circularProgressStyle.resolve(variants),
-            child: Row(
-              mainAxisAlignment: mainAxisAlignment,
-              mainAxisSize: mainAxisSize,
-              crossAxisAlignment: crossAxisAlignment,
-              textBaseline: textBaseline,
-              spacing: contentStyle.spacing,
-              children: [?prefix, child, ?suffix],
+    final FButtonData(:style, :variants) = .of(context);
+    final contentStyle = style.contentStyle;
+    final textStyle = contentStyle.textStyle.resolve(variants);
+    final iconStyle = contentStyle.iconStyle.resolve(variants);
+    final progressStyle = contentStyle.circularProgressStyle.resolve(variants);
+
+    return ConstrainedBox(
+      constraints: contentStyle.constraints,
+      child: Padding(
+        padding: contentStyle.padding,
+        child: DefaultTextStyle.merge(
+          style: textStyle,
+          child: IconTheme(
+            data: iconStyle,
+            child: FInheritedCircularProgressStyle(
+              style: progressStyle,
+              child: Row(
+                mainAxisAlignment: mainAxisAlignment,
+                mainAxisSize: mainAxisSize,
+                crossAxisAlignment: crossAxisAlignment,
+                textBaseline: textBaseline,
+                spacing: contentStyle.spacing,
+                children: [
+                  if (prefixBuilder case final prefixBuilder?)
+                    prefixBuilder(context, style, textStyle, iconStyle, progressStyle, prefix)
+                  else
+                    ?prefix,
+                  builder(context, style, textStyle, iconStyle, progressStyle, child),
+                  if (suffixBuilder case final suffixBuilder?)
+                    suffixBuilder(context, style, textStyle, iconStyle, progressStyle, suffix)
+                  else
+                    ?suffix,
+                ],
+              ),
             ),
           ),
         ),
@@ -62,24 +101,42 @@ class Content extends StatelessWidget {
       ..add(EnumProperty('mainAxisSize', mainAxisSize, defaultValue: MainAxisSize.max))
       ..add(EnumProperty('mainAxisAlignment', mainAxisAlignment))
       ..add(EnumProperty('crossAxisAlignment', crossAxisAlignment))
-      ..add(EnumProperty('textBaseline', textBaseline));
+      ..add(EnumProperty('textBaseline', textBaseline))
+      ..add(ObjectFlagProperty.has('prefixBuilder', prefixBuilder))
+      ..add(ObjectFlagProperty.has('suffixBuilder', suffixBuilder))
+      ..add(DiagnosticsProperty('builder', builder));
   }
 }
 
 @internal
 class IconContent extends StatelessWidget {
-  final Widget child;
+  final FButtonIconContentBuilder builder;
+  final Widget? child;
 
-  const IconContent({required this.child, super.key});
+  const IconContent({required this.builder, required this.child, super.key});
 
   @override
   Widget build(BuildContext context) {
     final FButtonData(:style, :variants) = .of(context);
+    final iconStyle = style.iconContentStyle.iconStyle.resolve(variants);
 
-    return Padding(
-      padding: style.iconContentStyle.padding,
-      child: IconTheme(data: style.iconContentStyle.iconStyle.resolve(variants), child: child),
+    return ConstrainedBox(
+      constraints: style.iconContentStyle.constraints,
+      child: Padding(
+        padding: style.iconContentStyle.padding,
+        child: Center(
+          widthFactor: 1,
+          heightFactor: 1,
+          child: IconTheme(data: iconStyle, child: builder(context, style, iconStyle, child)),
+        ),
+      ),
     );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('builder', builder));
   }
 }
 
@@ -98,6 +155,10 @@ class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFunctions {
   final FVariants<FTappableVariantConstraint, FTappableVariant, FCircularProgressStyle, FCircularProgressStyleDelta>
   circularProgressStyle;
 
+  /// The constraints applied to the content.
+  @override
+  final BoxConstraints constraints;
+
   /// The padding.
   @override
   final EdgeInsetsGeometry padding;
@@ -111,6 +172,7 @@ class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFunctions {
     required this.textStyle,
     required this.iconStyle,
     required this.circularProgressStyle,
+    this.constraints = const BoxConstraints(),
     this.padding = const .symmetric(horizontal: 10, vertical: 11),
     this.spacing = 6,
   });
@@ -122,10 +184,18 @@ class FButtonIconContentStyle with Diagnosticable, _$FButtonIconContentStyleFunc
   @override
   final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> iconStyle;
 
+  /// The constraints applied to the icon content.
+  @override
+  final BoxConstraints constraints;
+
   /// The padding. Defaults to `EdgeInsets.all(10)`.
   @override
   final EdgeInsetsGeometry padding;
 
   /// Creates a [FButtonIconContentStyle].
-  const FButtonIconContentStyle({required this.iconStyle, this.padding = const .all(10)});
+  const FButtonIconContentStyle({
+    required this.iconStyle,
+    this.constraints = const BoxConstraints(),
+    this.padding = const .all(10),
+  });
 }

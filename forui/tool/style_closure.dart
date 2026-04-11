@@ -123,7 +123,7 @@ class _StyleCollector extends RecursiveAstVisitor<void> {
 
   @override
   void visitClassDeclaration(ClassDeclaration declaration) {
-    final name = declaration.name.lexeme;
+    final name = declaration.namePart.typeName.lexeme;
     if (!_stylePattern.hasMatch(name)) {
       return;
     }
@@ -131,9 +131,11 @@ class _StyleCollector extends RecursiveAstVisitor<void> {
     final fields = <String>{};
 
     // Collect fields from this class.
-    for (final member in declaration.members) {
-      if (member is FieldDeclaration) {
-        _addFieldType(member, fields);
+    if (declaration.body case BlockClassBody(:final members)) {
+      for (final member in members) {
+        if (member is FieldDeclaration) {
+          _addFieldType(member, fields);
+        }
       }
     }
 
@@ -150,7 +152,7 @@ class _StyleCollector extends RecursiveAstVisitor<void> {
 
   @override
   void visitExtensionTypeDeclaration(ExtensionTypeDeclaration declaration) {
-    final name = declaration.name.lexeme;
+    final name = declaration.primaryConstructor.typeName.lexeme;
     if (!_stylePattern.hasMatch(name)) {
       return;
     }
@@ -158,13 +160,16 @@ class _StyleCollector extends RecursiveAstVisitor<void> {
     final fields = <String>{};
 
     // For extension types wrapping FVariants<C, V, StyleType, D>, extract StyleType.
-    final representationType = declaration.representation.fieldType;
+    final representationType =
+        (declaration.primaryConstructor.formalParameters.parameters.single as SimpleFormalParameter).type!;
     _extractVariantsStyleType(representationType, fields);
 
     // Also collect any declared fields in the extension type body.
-    for (final member in declaration.members) {
-      if (member is FieldDeclaration) {
-        _addFieldType(member, fields);
+    if (declaration.body case BlockClassBody(:final members)) {
+      for (final member in members) {
+        if (member is FieldDeclaration) {
+          _addFieldType(member, fields);
+        }
       }
     }
 
@@ -226,7 +231,7 @@ class _ThemeDataVisitor extends RecursiveAstVisitor<void> {
 
   @override
   void visitClassDeclaration(ClassDeclaration declaration) {
-    if (declaration.name.lexeme == 'FThemeData') {
+    if (declaration.namePart.typeName.lexeme == 'FThemeData') {
       super.visitClassDeclaration(declaration);
     }
   }

@@ -44,6 +44,86 @@ void main() {
     expect(hovered, false);
   });
 
+  group('builders', () {
+    testWidgets('FButton prefixBuilder & suffixBuilder receive child widgets', (tester) async {
+      Widget? capturedPrefixChild;
+      Widget? capturedSuffixChild;
+
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FButton(
+            onPress: () {},
+            prefix: const Text('prefix'),
+            prefixBuilder: (context, style, textStyle, iconStyle, progressStyle, child) {
+              capturedPrefixChild = child;
+              return child!;
+            },
+            suffix: const Text('suffix'),
+            suffixBuilder: (context, style, textStyle, iconStyle, progressStyle, child) {
+              capturedSuffixChild = child;
+              return child!;
+            },
+            child: const Text('child'),
+          ),
+        ),
+      );
+
+      expect(capturedPrefixChild, isA<Text>().having((t) => t.data, 'data', 'prefix'));
+      expect(capturedSuffixChild, isA<Text>().having((t) => t.data, 'data', 'suffix'));
+    });
+
+    testWidgets('FButton with prefixBuilder only passes null child', (tester) async {
+      Widget? capturedChild;
+
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FButton(
+            onPress: () {},
+            prefixBuilder: (context, style, textStyle, iconStyle, progressStyle, child) {
+              capturedChild = child;
+              return const Text('prefix');
+            },
+            child: const Text('child'),
+          ),
+        ),
+      );
+
+      expect(capturedChild, null);
+      expect(find.text('prefix'), findsOneWidget);
+    });
+
+    testWidgets('FButton with builder only renders', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FButton(
+            onPress: () {},
+            builder: (context, style, textStyle, iconStyle, progressStyle, child) => const Text('built'),
+          ),
+        ),
+      );
+
+      expect(find.text('built'), findsOneWidget);
+    });
+
+    test('FButton asserts when neither builder nor child is provided', () {
+      expect(() => FButton(onPress: () {}), throwsAssertionError);
+    });
+
+    testWidgets('FButton.icon with builder only renders', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FButton.icon(onPress: () {}, builder: (context, style, iconStyle, child) => const Icon(FIcons.search)),
+        ),
+      );
+
+      expect(find.byIcon(FIcons.search), findsOneWidget);
+    });
+
+    test('FButton.icon asserts when neither builder nor child is provided', () {
+      expect(() => FButton.icon(onPress: () {}), throwsAssertionError);
+    });
+  });
+
   group('design system', skip: !Platform.isMacOS, () {
     for (final (theme, themeName, sizes) in [
       (

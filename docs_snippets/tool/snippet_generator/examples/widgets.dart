@@ -28,7 +28,7 @@ class Widgets extends RecursiveAstVisitor<void> {
           const states = {'State', 'StatefulExampleState'};
           if (d.extendsClause?.superclass case final supertype? when states.contains(supertype.name.lexeme)) {
             final typeArgument = supertype.typeArguments?.arguments.firstOrNull;
-            return typeArgument is NamedType && typeArgument.name.lexeme == declaration.name.lexeme;
+            return typeArgument is NamedType && typeArgument.name.lexeme == declaration.namePart.typeName.lexeme;
           }
 
           return false;
@@ -40,7 +40,7 @@ class Widgets extends RecursiveAstVisitor<void> {
         return '${widgetVisitor.transformations.apply()}\n\n${stateVisitor.transformations.apply()}';
 
       default:
-        throw UnimplementedError('Unsupported widget type: ${declaration.name.lexeme}');
+        throw UnimplementedError('Unsupported widget type: ${declaration.namePart.typeName.lexeme}');
     }
   }
 
@@ -96,7 +96,7 @@ class _StatelessWidgetClassVisitor extends Widgets {
       ..removeAll(node.metadata);
 
     // Replace `class SomePage` with `class SomeExample`.
-    if (node.name case final name when name.lexeme.endsWith('Page')) {
+    if (node.namePart.typeName case final name when name.lexeme.endsWith('Page')) {
       transformations.replace(name, name.lexeme.replaceAll('Page', 'Example'));
     }
 
@@ -157,7 +157,7 @@ class _StatefulWidgetVisitor extends Widgets {
       ..removeAll(node.metadata);
 
     // Replace `class SomePage` with `class SomeExample`.
-    if (node.name case final name when name.lexeme.endsWith('Page')) {
+    if (node.namePart.typeName case final name when name.lexeme.endsWith('Page')) {
       transformations.replace(name, name.lexeme.replaceAll('Page', 'Example'));
     }
 
@@ -212,7 +212,7 @@ class _StateVisitor extends Widgets {
       ..only(node)
       ..removeAll(node.metadata);
 
-    if (node.name case final name when name.lexeme.contains('Page')) {
+    if (node.namePart.typeName case final name when name.lexeme.contains('Page')) {
       transformations.replace(name, name.lexeme.replaceAll('Page', 'Example'));
     }
 

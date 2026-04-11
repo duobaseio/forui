@@ -1,3 +1,6 @@
+@Tags(['golden'])
+library;
+
 import 'dart:async';
 import 'dart:ui';
 

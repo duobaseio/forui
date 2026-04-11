@@ -9,6 +9,16 @@
 * Fix default text styles created by `FTypography` to include a `fontFamily`.
 
 
+### `FButton`
+* Add `FButton(prefixBuilder: ...)`.
+* Add `FButton(suffixBuilder: ...)`.
+* Add `FButton(builder: ...)`.
+* Add `FButton.icon(builder: ...)`.
+* Add `FButtonContentBuilder` typedef.
+* Add `FButtonIconContentBuilder` typedef.
+* Add `FButtonContentStyle.constraints` and `FButtonIconContentStyle.constraints` to enforce minimum size.
+
+
 ### `FCheckbox`
 * Add `FCheckbox(leadingLabel: ...)`.
 * Add `FCheckboxStyle.leadingLabelStyle`.

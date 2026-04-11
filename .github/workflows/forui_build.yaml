@@ -28,7 +28,10 @@ jobs:
       - run: flutter pub get
       - run: dart run build_runner build --delete-conflicting-outputs
       - run: flutter analyze
-      - run: flutter test --coverage
+      # Goldens are skipped in CI until the macos-latest runner image catches up to the
+      # macOS version most contributors are on. See flutter/flutter#184182. Re-enable by
+      # removing --exclude-tags.
+      - run: flutter test --coverage --exclude-tags golden
       - run: |
           if output=$(dart doc --dry-run 2>&1); then
               if echo "$output" | grep -q -i "warning:"; then

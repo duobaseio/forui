@@ -57,8 +57,12 @@ class DesignTransformationsExtension extends TransformationsExtension {
           }
 
           if (extension case ExtensionTypeDeclaration(
-            representation: RepresentationDeclaration(
-              fieldType: NamedType(name: final representationName, :final typeArguments?),
+            primaryConstructor: PrimaryConstructorDeclaration(
+              formalParameters: FormalParameterList(
+                parameters: [
+                  SimpleFormalParameter(type: NamedType(name: final representationName, :final typeArguments?)),
+                ],
+              ),
             ),
           ) when representationName.lexeme == 'FVariants') {
             // Supported inner types:

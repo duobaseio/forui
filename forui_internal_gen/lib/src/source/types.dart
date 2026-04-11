@@ -133,7 +133,11 @@ Future<(String type, String assignment, String? sentinel)> deltaField(
     }
 
     if (extension case ExtensionTypeDeclaration(
-      representation: RepresentationDeclaration(fieldType: NamedType(:final name, :final typeArguments?)),
+      primaryConstructor: PrimaryConstructorDeclaration(
+        formalParameters: FormalParameterList(
+          parameters: [SimpleFormalParameter(type: NamedType(:final name, :final typeArguments?))],
+        ),
+      ),
     ) when name.lexeme == 'FVariants') {
       final [kAst, eAst, vAst, dAst] = typeArguments.arguments;
       final k = kAst.toSource();

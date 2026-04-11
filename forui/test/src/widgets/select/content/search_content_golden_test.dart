@@ -1,3 +1,6 @@
+@Tags(['golden'])
+library;
+
 import 'dart:async';
 
 import 'package:flutter/material.dart';

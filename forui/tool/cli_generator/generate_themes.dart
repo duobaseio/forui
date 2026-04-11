@@ -148,7 +148,7 @@ class _ColorsVisitor extends RecursiveAstVisitor<void> {
 
   @override
   void visitClassDeclaration(ClassDeclaration declaration) {
-    if (declaration.name.lexeme == 'FColors') {
+    if (declaration.namePart.typeName.lexeme == 'FColors') {
       _inside = true;
       super.visitClassDeclaration(declaration);
       _inside = false;

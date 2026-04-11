@@ -133,7 +133,7 @@ class _Visitor extends RecursiveAstVisitor<void> {
 
   @override
   void visitClassDeclaration(ClassDeclaration declaration) {
-    final name = declaration.name.lexeme;
+    final name = declaration.namePart.typeName.lexeme;
     if (name == 'FThemeData') {
       super.visitClassDeclaration(declaration);
     }

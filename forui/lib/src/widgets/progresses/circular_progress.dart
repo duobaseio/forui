@@ -10,11 +10,20 @@ import 'package:forui/src/foundation/annotations.dart';
 import 'package:forui/src/theme/variant.dart';
 
 @Variants('FCircularProgressSize', {
-  'xs': (1, 'The extra small circular progress size.'),
-  'sm': (1, 'The small circular progress size.'),
-  'md': (1, 'The medium (default) circular progress size.'),
-  'lg': (1, 'The large circular progress size.'),
-  'xl': (1, 'The extra large circular progress size.'),
+  'xs': (
+    1,
+    'The extra small circular progress size. Defaults to `typography.xs.fontSize`:\n* Desktop — 12.\n* Touch — 14.',
+  ),
+  'sm': (1, 'The small circular progress size. Defaults to `typography.sm.fontSize`:\n* Desktop — 14.\n* Touch — 16.'),
+  'md': (
+    1,
+    'The medium (default) circular progress size. Defaults to `typography.md.fontSize`:\n* Desktop — 16.\n* Touch — 18.',
+  ),
+  'lg': (1, 'The large circular progress size. Defaults to `typography.lg.fontSize`:\n* Desktop — 18.\n* Touch — 20.'),
+  'xl': (
+    1,
+    'The extra large circular progress size. Defaults to `typography.xl.fontSize`:\n* Desktop — 20.\n* Touch — 22.',
+  ),
 })
 part 'circular_progress.design.dart';
 

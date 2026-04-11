@@ -73,7 +73,7 @@ class VariantExtensionType {
     for (final MapEntry(key: name, value: (_, documentation)) in variants.entries)
       Field(
         (f) => f
-          ..docs.add('/// $documentation')
+          ..docs.addAll(documentation.trim().split('\n').map((line) => '/// $line'))
           ..static = true
           ..modifier = .constant
           ..name = name
@@ -170,7 +170,7 @@ class VariantExtensionType {
     for (final MapEntry(key: name, value: (tier, documentation)) in variants.entries)
       Field(
         (f) => f
-          ..docs.add('/// $documentation')
+          ..docs.addAll(documentation.trim().split('\n').map((line) => '/// $line'))
           ..static = true
           ..modifier = .constant
           ..name = name

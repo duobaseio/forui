@@ -17,10 +17,10 @@ import 'package:forui/src/widgets/button/button_content.dart';
   'ghost': (2, 'The ghost button style.'),
 })
 @Variants('FButtonSize', {
-  'xs': (1, 'The extra small button size.'),
-  'sm': (1, 'The small button size.'),
-  'md': (1, 'The medium (default) button size.'),
-  'lg': (1, 'The large button size.'),
+  'xs': (1, 'The extra small button size.\n\nDefaults to:\n* Desktop — 24.\n* Touch — 32.'),
+  'sm': (1, 'The small button size.\n\nDefaults to:\n* Desktop — 32.\n* Touch — 40.'),
+  'md': (1, 'The medium (default) button size.\n\nDefaults to:\n* Desktop — 36.\n* Touch — 44.'),
+  'lg': (1, 'The large button size.\n\nDefaults to:\n* Desktop — 40.\n* Touch — 48.'),
 })
 part 'button.design.dart';
 
@@ -35,6 +35,24 @@ part 'button.design.dart';
 /// * https://forui.dev/docs/form/button for working examples.
 /// * [FButtonStyle] for customizing a button's appearance.
 class FButton extends StatelessWidget {
+  /// The default [FButtonContentBuilder] which returns [child] unchanged.
+  static Widget defaultContentBuilder(
+    BuildContext context,
+    FButtonStyle style,
+    TextStyle textStyle,
+    IconThemeData iconStyle,
+    FCircularProgressStyle progressStyle,
+    Widget? child,
+  ) => child!;
+
+  /// The default [FButtonIconContentBuilder] which returns [child] unchanged.
+  static Widget defaultIconContentBuilder(
+    BuildContext context,
+    FButtonStyle style,
+    IconThemeData iconStyle,
+    Widget? child,
+  ) => child!;
+
   /// The variant. Defaults to [FButtonVariant.primary].
   ///
   /// The current platform variant is automatically included during style resolution. To change the platform variant,
@@ -150,7 +168,6 @@ class FButton extends StatelessWidget {
   /// The layout is reversed for RTL locales.
   FButton({
     required this.onPress,
-    required Widget child,
     this.variant = .primary,
     this.size = .md,
     this.style = const .context(),
@@ -170,25 +187,36 @@ class FButton extends StatelessWidget {
     MainAxisAlignment mainAxisAlignment = .center,
     CrossAxisAlignment crossAxisAlignment = .center,
     TextBaseline? textBaseline,
+    FButtonContentBuilder? prefixBuilder,
     Widget? prefix,
+    FButtonContentBuilder? suffixBuilder,
     Widget? suffix,
+    FButtonContentBuilder builder = defaultContentBuilder,
+    Widget? child,
     super.key,
-  }) : child = Content(
+  }) : assert(builder != defaultContentBuilder || child != null, 'Either builder or a child must be provided.'),
+       child = Content(
          mainAxisSize: mainAxisSize,
          mainAxisAlignment: mainAxisAlignment,
          crossAxisAlignment: crossAxisAlignment,
          textBaseline: textBaseline,
          prefix: prefix,
+         prefixBuilder: prefixBuilder,
          suffix: suffix,
+         suffixBuilder: suffixBuilder,
+         builder: builder,
          child: child,
        );
 
   /// Creates a [FButton] that contains only an icon.
   ///
   /// [child] is wrapped in [IconThemeData].
+  ///
+  /// [builder] exposes the resolved [FButtonStyle] and icon style. When [child] is provided, it is passed to the
+  /// builder as its `child` argument. The builder defaults to [defaultIconContentBuilder] which returns [child]
+  /// unchanged. At least one of [child] or a custom [builder] must be provided.
   FButton.icon({
     required this.onPress,
-    required Widget child,
     this.variant = .outline,
     this.size = .md,
     this.style = const .context(),
@@ -204,8 +232,11 @@ class FButton extends StatelessWidget {
     this.selected = false,
     this.shortcuts,
     this.actions,
+    FButtonIconContentBuilder builder = defaultIconContentBuilder,
+    Widget? child,
     super.key,
-  }) : child = IconContent(child: child);
+  }) : assert(builder != defaultIconContentBuilder || child != null, 'Either builder or a child must be provided.'),
+       child = IconContent(builder: builder, child: child);
 
   /// Creates a [FButton] with custom content.
   const FButton.raw({
@@ -459,8 +490,10 @@ extension type FButtonSizeStyles(
         disabledForegroundColor: disabledForegroundColor,
         decoration: decoration(style.borderRadius.md),
         textStyle: typography.sm,
+        contentConstraints: const BoxConstraints(minWidth: 44, minHeight: 44),
         contentPadding: const .symmetric(horizontal: 12, vertical: 14),
         contentSpacing: 6,
+        iconConstraints: const BoxConstraints(minWidth: 44, minHeight: 44),
         iconSize: typography.md.fontSize ?? 18,
         iconPadding: const .all(13),
       );
@@ -475,8 +508,10 @@ extension type FButtonSizeStyles(
               disabledForegroundColor: disabledForegroundColor,
               decoration: decoration(style.borderRadius.sm),
               textStyle: typography.xs,
+              contentConstraints: const BoxConstraints(minWidth: 32, minHeight: 32),
               contentPadding: const .symmetric(horizontal: 10, vertical: 9),
               contentSpacing: 4,
+              iconConstraints: const BoxConstraints(minWidth: 32, minHeight: 32),
               iconSize: typography.sm.fontSize ?? 16,
               iconPadding: const .all(8),
             ),
@@ -486,8 +521,10 @@ extension type FButtonSizeStyles(
               disabledForegroundColor: disabledForegroundColor,
               decoration: decoration(style.borderRadius.md),
               textStyle: typography.sm,
+              contentConstraints: const BoxConstraints(minWidth: 40, minHeight: 40),
               contentPadding: const .symmetric(horizontal: 12, vertical: 12),
               contentSpacing: 4,
+              iconConstraints: const BoxConstraints(minWidth: 40, minHeight: 40),
               iconSize: typography.md.fontSize ?? 18,
               iconPadding: const .all(11),
             ),
@@ -498,8 +535,10 @@ extension type FButtonSizeStyles(
               disabledForegroundColor: disabledForegroundColor,
               decoration: decoration(style.borderRadius.md),
               textStyle: typography.sm,
+              contentConstraints: const BoxConstraints(minWidth: 48, minHeight: 48),
               contentPadding: const .symmetric(horizontal: 12, vertical: 16),
               contentSpacing: 6,
+              iconConstraints: const BoxConstraints(minWidth: 48, minHeight: 48),
               iconSize: typography.lg.fontSize ?? 20,
               iconPadding: const .all(14),
             ),
@@ -513,8 +552,10 @@ extension type FButtonSizeStyles(
         disabledForegroundColor: disabledForegroundColor,
         decoration: decoration(style.borderRadius.md),
         textStyle: typography.sm,
+        contentConstraints: const BoxConstraints(minWidth: 36, minHeight: 36),
         contentPadding: const .symmetric(horizontal: 10, vertical: 11),
         contentSpacing: 6,
+        iconConstraints: const BoxConstraints(minWidth: 36, minHeight: 36),
         iconSize: typography.md.fontSize ?? 16,
         iconPadding: const .all(10),
       );
@@ -529,8 +570,10 @@ extension type FButtonSizeStyles(
               disabledForegroundColor: disabledForegroundColor,
               decoration: decoration(style.borderRadius.sm),
               textStyle: typography.xs,
+              contentConstraints: const BoxConstraints(minWidth: 24, minHeight: 24),
               contentPadding: const .symmetric(horizontal: 8, vertical: 6),
               contentSpacing: 4,
+              iconConstraints: const BoxConstraints(minWidth: 24, minHeight: 24),
               iconSize: typography.sm.fontSize ?? 14,
               iconPadding: const .all(5),
             ),
@@ -540,8 +583,10 @@ extension type FButtonSizeStyles(
               disabledForegroundColor: disabledForegroundColor,
               decoration: decoration(style.borderRadius.md),
               textStyle: typography.sm,
+              contentConstraints: const BoxConstraints(minWidth: 32, minHeight: 32),
               contentPadding: const .symmetric(horizontal: 10, vertical: 9),
               contentSpacing: 4,
+              iconConstraints: const BoxConstraints(minWidth: 32, minHeight: 32),
               iconSize: typography.md.fontSize ?? 16,
               iconPadding: const .all(8),
             ),
@@ -552,8 +597,10 @@ extension type FButtonSizeStyles(
               disabledForegroundColor: disabledForegroundColor,
               decoration: decoration(style.borderRadius.md),
               textStyle: typography.sm,
+              contentConstraints: const BoxConstraints(minWidth: 40, minHeight: 40),
               contentPadding: const .symmetric(horizontal: 10, vertical: 13),
               contentSpacing: 6,
+              iconConstraints: const BoxConstraints(minWidth: 40, minHeight: 40),
               iconSize: typography.lg.fontSize ?? 18,
               iconPadding: const .all(11),
             ),
@@ -614,8 +661,10 @@ final class FButtonStyle with Diagnosticable, _$FButtonStyleFunctions {
     required Color foregroundColor,
     required Color disabledForegroundColor,
     required TextStyle textStyle,
+    required BoxConstraints contentConstraints,
     required EdgeInsetsGeometry contentPadding,
     required double contentSpacing,
+    required BoxConstraints iconConstraints,
     required double iconSize,
     required EdgeInsetsGeometry iconPadding,
   }) => FButtonStyle(
@@ -644,6 +693,7 @@ final class FButtonStyle with Diagnosticable, _$FButtonStyleFunctions {
       ),
       padding: contentPadding,
       spacing: contentSpacing,
+      constraints: contentConstraints,
     ),
     iconContentStyle: FButtonIconContentStyle(
       iconStyle: .from(
@@ -653,6 +703,7 @@ final class FButtonStyle with Diagnosticable, _$FButtonStyleFunctions {
         },
       ),
       padding: iconPadding,
+      constraints: iconConstraints,
     ),
     tappableStyle: style.tappableStyle,
   );
