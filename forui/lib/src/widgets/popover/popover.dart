@@ -480,8 +480,8 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
         barrier: style.barrierFilter == null
             ? null
             : (cutout) => TapRegion(
-              groupId: widget.groupId,
-              child: FAnimatedModalBarrier(
+                groupId: widget.groupId,
+                child: FAnimatedModalBarrier(
                   cutout: widget.cutout ? cutout : null,
                   cutoutBuilder: widget.cutoutBuilder,
                   animation: _controller.fade,
@@ -491,7 +491,7 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
                   semanticsOnTapHint: localizations.barrierOnTapHint(localizations.popoverSemanticsLabel),
                   onDismiss: widget.hideRegion == .none ? null : _hide,
                 ),
-            ),
+              ),
         portalBuilder: (context, _) {
           Widget popover = ScaleTransition(
             alignment: popoverAnchor.resolve(direction),
