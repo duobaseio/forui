@@ -70,7 +70,7 @@ final calendar = FDateField.calendar(
   formFieldKey: null,
   // {@endcategory}
   // {@category "Field"}
-  format: null,
+  format: FDateField.defaultFormat,
   hint: null,
   textAlign: .start,
   textAlignVertical: null,

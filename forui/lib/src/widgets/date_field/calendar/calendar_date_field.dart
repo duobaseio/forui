@@ -3,7 +3,7 @@ part of '../date_field.dart';
 // ignore: avoid_implementing_value_types
 class _CalendarDateField extends FDateField implements FDateFieldCalendarProperties {
   final FPopoverControl popoverControl;
-  final DateFormat? format;
+  final String Function(BuildContext context, DateTime value, DateFormat format) format;
   final String? hint;
   final TextAlign textAlign;
   final TextAlignVertical? textAlignVertical;
@@ -53,7 +53,7 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
 
   const _CalendarDateField({
     this.popoverControl = const .managed(),
-    this.format,
+    this.format = FDateField.defaultFormat,
     this.hint,
     this.textAlign = .start,
     this.textAlignVertical,
@@ -184,7 +184,7 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
 
   void _updateTextController() {
     if (_controller.value case final value?) {
-      _textController.text = widget.format?.format(value) ?? _format?.format(value) ?? '';
+      _textController.text = widget.format(context, value, _format!);
     } else {
       _textController.text = '';
     }

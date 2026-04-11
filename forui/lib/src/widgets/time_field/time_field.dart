@@ -56,6 +56,10 @@ abstract class FTimeField extends StatefulWidget {
   static Widget defaultIconBuilder(BuildContext context, FTextFieldStyle style, Set<FTextFieldVariant> variants) =>
       FTextField.prefixIconBuilder(context, style, variants, const Icon(FIcons.clock4));
 
+  /// The default format for [FTimeField.picker], which formats [value] using [format].
+  static String defaultFormat(BuildContext context, FTime value, DateFormat format) =>
+      format.format(value.withDate(DateTime(1970)));
+
   /// The control for managing the time field's state.
   final FTimeFieldControl control;
 
@@ -238,8 +242,7 @@ abstract class FTimeField extends StatefulWidget {
 
   /// Creates a [FTimeField] that allows a time to be selected using only a picker.
   ///
-  /// The [format] customizes the appearance of the time in the input field. Defaults to the [DateFormat.Hm] if
-  /// [hour24] is true or [DateFormat.jm] if false.
+  /// The [format] customizes the appearance of the time in the input field.
   ///
   /// The [hint] is displayed when the input field is empty. Defaults to the current locale's
   /// [FLocalizations.timeFieldHint].
@@ -289,7 +292,7 @@ abstract class FTimeField extends StatefulWidget {
     FTextFieldSizeVariant size,
     FTimeFieldStyleDelta style,
     bool hour24,
-    DateFormat? format,
+    String Function(BuildContext context, FTime value, DateFormat format) format,
     TextAlign textAlign,
     TextAlignVertical? textAlignVertical,
     TextDirection? textDirection,
