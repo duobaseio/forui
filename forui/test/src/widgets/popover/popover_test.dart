@@ -148,14 +148,14 @@ void main() {
 
     expect(find.text('popover'), findsOneWidget);
 
-    await tester.tapAt(.zero);
+    await tester.tap(find.byType(FAnimatedModalBarrier));
     await tester.pumpAndSettle();
 
     expect(count, 1);
     expect(find.text('popover'), findsNothing);
   });
 
-  testWidgets('tap outside does not hide popover', (tester) async {
+  testWidgets('tap outside with barrier and no hide region does not hide popover', (tester) async {
     var count = 0;
     await tester.pumpWidget(
       TestScaffold.app(
@@ -270,6 +270,128 @@ void main() {
 
     expect(count, 1);
     expect(find.text('follower'), findsNothing);
+  });
+
+  group('nested popovers', () {
+    Widget nested({required bool outer, required bool inner}) => TestScaffold.app(
+      child: FPopover(
+        groupId: 'nested',
+        style: outer
+            ? .delta(
+                barrierFilter: (a) => .blur(sigmaX: a * 5, sigmaY: a * 5),
+              )
+            : const .context(),
+        popoverBuilder: (context, _) => Container(
+          width: 280,
+          height: 220,
+          color: const Color(0xFFFFF4E5),
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: .start,
+            children: [
+              const Text('A body'),
+              const SizedBox(height: 12),
+              FPopover(
+                groupId: 'nested',
+                style: inner
+                    ? .delta(
+                        barrierFilter: (a) => .blur(sigmaX: a * 5, sigmaY: a * 5),
+                      )
+                    : const .context(),
+                popoverBuilder: (context, _) => Container(
+                  width: 200,
+                  height: 120,
+                  color: const Color(0xFFE5F0FF),
+                  padding: const EdgeInsets.all(16),
+                  child: const Text('B body'),
+                ),
+                builder: (_, controller, _) => FButton(onPress: controller.toggle, child: const Text('open B')),
+              ),
+            ],
+          ),
+        ),
+        builder: (_, controller, _) => FButton(onPress: controller.toggle, child: const Text('open A')),
+      ),
+    );
+
+    Future<void> openBoth(WidgetTester tester) async {
+      await tester.tap(find.text('open A'));
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('open B'));
+      await tester.pumpAndSettle();
+    }
+
+    Future<void> tapBarrier(WidgetTester tester, {bool topmost = false}) async {
+      final barrier = topmost ? find.byType(FAnimatedModalBarrier).last : find.byType(FAnimatedModalBarrier);
+      await tester.tapAt(tester.getTopLeft(barrier) + const Offset(5, 5));
+    }
+
+    testWidgets('both have barriers', (tester) async {
+      await tester.pumpWidget(nested(outer: true, inner: true));
+      await openBoth(tester);
+
+      expect(find.text('A body'), findsOneWidget);
+      expect(find.text('B body'), findsOneWidget);
+
+      await tester.tap(find.text('B body'));
+      await tester.pumpAndSettle();
+      expect(find.text('A body'), findsOneWidget);
+      expect(find.text('B body'), findsOneWidget);
+
+      await tapBarrier(tester, topmost: true);
+      await tester.pumpAndSettle();
+      expect(find.text('A body'), findsOneWidget);
+      expect(find.text('B body'), findsNothing);
+
+      await tapBarrier(tester);
+      await tester.pumpAndSettle();
+      expect(find.text('A body'), findsNothing);
+    });
+
+    testWidgets('parent has barrier, nested does not', (tester) async {
+      await tester.pumpWidget(nested(outer: true, inner: false));
+      await openBoth(tester);
+
+      expect(find.text('A body'), findsOneWidget);
+      expect(find.text('B body'), findsOneWidget);
+
+      await tester.tap(find.text('B body'));
+      await tester.pumpAndSettle();
+      expect(find.text('A body'), findsOneWidget);
+      expect(find.text('B body'), findsOneWidget);
+
+      await tester.tap(find.text('A body'));
+      await tester.pumpAndSettle();
+      expect(find.text('A body'), findsOneWidget);
+      expect(find.text('B body'), findsOneWidget);
+
+      await tapBarrier(tester);
+      await tester.pumpAndSettle();
+      expect(find.text('A body'), findsNothing);
+      expect(find.text('B body'), findsNothing);
+    });
+
+    testWidgets('parent does not have barrier, nested does', (tester) async {
+      await tester.pumpWidget(nested(outer: false, inner: true));
+      await openBoth(tester);
+
+      expect(find.text('A body'), findsOneWidget);
+      expect(find.text('B body'), findsOneWidget);
+
+      await tester.tap(find.text('B body'));
+      await tester.pumpAndSettle();
+      expect(find.text('A body'), findsOneWidget);
+      expect(find.text('B body'), findsOneWidget);
+
+      await tapBarrier(tester);
+      await tester.pumpAndSettle();
+      expect(find.text('A body'), findsOneWidget);
+      expect(find.text('B body'), findsNothing);
+
+      await tester.tapAt(const Offset(5, 5));
+      await tester.pumpAndSettle();
+      expect(find.text('A body'), findsNothing);
+    });
   });
 
   group('focus', () {

@@ -99,6 +99,8 @@ We've changed `FLineCalendar`'s default styling to be more aesthetically pleasin
 * **Breaking** Remove `FPopoverControl.lifted(motion: ...)`. Configure motion via `FPopoverStyle` instead.
 * **Breaking** Remove `FPopoverController(motion: ...)`. Configure motion via `FPopoverStyle` instead.
 
+* Fix root and nested popovers with barriers incorrectly being dismissed with a single tap.
+
 
 ### `FPopoverMenu`
 * Add `FPopoverMenu.faded`.

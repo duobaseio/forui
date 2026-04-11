@@ -458,7 +458,11 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
     var child = widget.builder(context, _controller, widget.child);
 
     if (widget.hideRegion == .excludeChild) {
-      child = TapRegion(groupId: _groupId, onTapOutside: (_) => _hide(), child: child);
+      child = TapRegion(
+        groupId: _groupId,
+        onTapOutside: style.barrierFilter != null ? null : (_) => _hide(),
+        child: child,
+      );
     }
 
     return BackdropGroup(
@@ -475,17 +479,19 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
         offset: widget.offset,
         barrier: style.barrierFilter == null
             ? null
-            : (cutout) => FAnimatedModalBarrier(
-                cutout: widget.cutout ? cutout : null,
-                cutoutBuilder: widget.cutoutBuilder,
-                animation: _controller.fade,
-                filter: style.barrierFilter!,
-                semanticsLabel: widget.barrierSemanticsLabel ?? localizations.barrierLabel,
-                barrierSemanticsDismissible: widget.barrierSemanticsDismissible,
-                semanticsOnTapHint: localizations.barrierOnTapHint(localizations.popoverSemanticsLabel),
-                // The actual dismissal logic is handled in the TapRegion below.
-                onDismiss: widget.hideRegion == .none ? null : () {},
-              ),
+            : (cutout) => TapRegion(
+              groupId: widget.groupId,
+              child: FAnimatedModalBarrier(
+                  cutout: widget.cutout ? cutout : null,
+                  cutoutBuilder: widget.cutoutBuilder,
+                  animation: _controller.fade,
+                  filter: style.barrierFilter!,
+                  semanticsLabel: widget.barrierSemanticsLabel ?? localizations.barrierLabel,
+                  barrierSemanticsDismissible: widget.barrierSemanticsDismissible,
+                  semanticsOnTapHint: localizations.barrierOnTapHint(localizations.popoverSemanticsLabel),
+                  onDismiss: widget.hideRegion == .none ? null : _hide,
+                ),
+            ),
         portalBuilder: (context, _) {
           Widget popover = ScaleTransition(
             alignment: popoverAnchor.resolve(direction),
@@ -501,7 +507,7 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
                   onFocusChange: widget.onFocusChange,
                   child: TapRegion(
                     groupId: _groupId,
-                    onTapOutside: widget.hideRegion == .none ? null : (_) => _hide(),
+                    onTapOutside: widget.hideRegion == .none || style.barrierFilter != null ? null : (_) => _hide(),
                     child: DecoratedBox(
                       decoration: style.decoration,
                       child: widget.popoverBuilder(context, _controller),
