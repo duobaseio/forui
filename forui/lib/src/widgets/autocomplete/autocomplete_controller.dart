@@ -72,8 +72,8 @@ class InheritedAutocompleteController extends InheritedWidget {
   }
 
   final FPopoverController popover;
-  final ValueChanged<String> onPress;
-  final ValueChanged<String> onFocus;
+  final ValueChanged<FTypeaheadSuggestion<Object?>> onPress;
+  final ValueChanged<FTypeaheadSuggestion<Object?>> onFocus;
 
   const InheritedAutocompleteController({
     required this.popover,
@@ -99,7 +99,7 @@ class InheritedAutocompleteController extends InheritedWidget {
 /// A [FAutocompleteControl] defines how a [FAutocomplete] is controlled.
 ///
 /// {@macro forui.foundation.doc_templates.control}
-sealed class FAutocompleteControl with Diagnosticable, _$FAutocompleteControlMixin {
+sealed class FAutocompleteControl<T> with Diagnosticable, _$FAutocompleteControlMixin<T> {
   /// Creates a [FAutocompleteControl].
   const factory FAutocompleteControl.managed({
     FAutocompleteController? controller,
@@ -116,10 +116,10 @@ sealed class FAutocompleteControl with Diagnosticable, _$FAutocompleteControlMix
   const FAutocompleteControl._();
 
   (FAutocompleteController, bool) _update(
-    FAutocompleteControl old,
+    FAutocompleteControl<T> old,
     FAutocompleteController controller,
     VoidCallback callback,
-    FutureOr<Iterable<String>> Function(String) filter,
+    FutureOr<Iterable<T>> Function(String) filter,
   );
 }
 
@@ -127,7 +127,7 @@ sealed class FAutocompleteControl with Diagnosticable, _$FAutocompleteControlMix
 /// for common configurations.
 ///
 /// {@macro forui.foundation.doc_templates.managed}
-class FAutocompleteManagedControl extends FAutocompleteControl with _$FAutocompleteManagedControlMixin {
+class FAutocompleteManagedControl<T> extends FAutocompleteControl<T> with _$FAutocompleteManagedControlMixin<T> {
   /// The controller.
   @override
   final FAutocompleteController? controller;
@@ -152,11 +152,11 @@ class FAutocompleteManagedControl extends FAutocompleteControl with _$FAutocompl
       super._();
 
   @override
-  FAutocompleteController createController(FutureOr<Iterable<String>> Function(String) _) =>
+  FAutocompleteController createController(FutureOr<Iterable<T>> Function(String) _) =>
       controller ?? .fromValue(initial);
 }
 
-class _Lifted extends FAutocompleteControl with _$_LiftedMixin {
+class _Lifted<T> extends FAutocompleteControl<T> with _$_LiftedMixin<T> {
   @override
   final TextEditingValue value;
   @override
@@ -165,13 +165,16 @@ class _Lifted extends FAutocompleteControl with _$_LiftedMixin {
   const _Lifted({required this.value, required this.onChange}) : super._();
 
   @override
-  FAutocompleteController createController(FutureOr<Iterable<String>> Function(String) _) =>
+  FAutocompleteController createController(FutureOr<Iterable<T>> Function(String) _) =>
       _ProxyController(value, onChange);
 
   @override
-  void _updateController(FAutocompleteController controller, FutureOr<Iterable<String>> Function(String) filter) {
+  void _updateController(FAutocompleteController controller, FutureOr<Iterable<T>> Function(String) filter) {
     (controller as _ProxyController)
       ..update(value, onChange)
-      ..loadSuggestions(filter(controller.text));
+      ..loadSuggestions(switch (filter(controller.text)) {
+        final Future<Iterable<T>> future => future.then((values) => values.cast<Object>()),
+        final Iterable<T> iterable => iterable.cast<Object>(),
+      });
   }
 }

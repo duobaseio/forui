@@ -1,5 +1,10 @@
 ## 0.21.0 (Next)
 
+### `FAutocomplete`
+* Add support for generic autocomplete options via `FAutocomplete<T>`.
+* Add `FAutocomplete.displayStringForOption` and `FAutocomplete.onSelect`.
+
+
 ### `FTypography`
 * Add `FTypography.defaultFontFamily` static constant.
 
