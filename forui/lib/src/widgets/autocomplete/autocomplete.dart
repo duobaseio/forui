@@ -571,10 +571,10 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<String> 
 
   /// Creates a [FAutocomplete] that uses the given [filter] to determine the results and the [contentBuilder] to build
   /// the content.
-  const FAutocomplete.builder({
+  FAutocomplete.builder({
     required this.filter,
     required this.contentBuilder,
-    this.control = const FAutocompleteControl.managed(),
+    FAutocompleteControl<T>? control,
     this.popoverControl = const .managed(),
     this.size = .md,
     this.style = const .context(),
@@ -663,7 +663,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<String> 
     this.contentLoadingBuilder = defaultContentLoadingBuilder,
     this.contentErrorBuilder,
     super.key,
-  });
+  }) : control = control ?? _defaultControl<T>();
 
   @override
   State<FAutocomplete<T>> createState() => _State<T>();
