@@ -39,11 +39,11 @@ class _Fruit {
 void main() {
   const key = ValueKey('autocomplete');
 
-  late FAutocompleteController controller;
+  late FAutocompleteController<String> controller;
   late FPopoverController popoverController;
 
   setUp(() {
-    controller = FAutocompleteController();
+    controller = FAutocompleteController<String>();
     popoverController = FPopoverController(vsync: const TestVSync());
   });
 

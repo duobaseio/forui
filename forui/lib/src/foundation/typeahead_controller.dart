@@ -31,11 +31,17 @@ class FTypeaheadSuggestion<T> {
 ///
 /// A typeahead controller manages suggestions and provides inline completions as the user types. When the current text
 /// matches the beginning of a suggestion, the remaining text is shown as a completion that can be accepted.
-class FTypeaheadController extends TextEditingController {
+class FTypeaheadController<T> extends TextEditingController {
+  /// The default converter used to derive display text from a suggestion.
+  static String defaultDisplayStringForOption(Object? option) => option.toString();
+
   final FTypeaheadControllerTextStyles _textStyles;
-  List<FTypeaheadSuggestion<Object?>> _suggestions;
+  List<FTypeaheadSuggestion<T>> _suggestions;
   ({String completion, String replacement})? _current;
-  Object? _currentData;
+  T? _currentData;
+
+  /// Converts a suggestion into the display text used for matching and completion.
+  String Function(T option) displayStringForOption;
 
   /// A monotonic counter to ensure that only latest suggestions are processed. This prevents stale data from being
   /// processed when the suggestions are provided async.
@@ -45,10 +51,13 @@ class FTypeaheadController extends TextEditingController {
   /// Creates a [FTypeaheadController] with an optional initial text and completion.
   FTypeaheadController({
     required FTypeaheadControllerTextStyles textStyles,
-    List<Object> suggestions = const [],
+    String Function(T option)? displayStringForOption,
+    List<T> suggestions = const [],
     super.text,
   }) : _textStyles = textStyles,
-       _suggestions = _normalizeSuggestions(suggestions) {
+       displayStringForOption = displayStringForOption ?? _defaultDisplayStringForOption,
+       _suggestions = [] {
+    _suggestions = _normalizeSuggestions(suggestions);
     findCompletion();
   }
 
@@ -56,10 +65,13 @@ class FTypeaheadController extends TextEditingController {
   FTypeaheadController.fromValue(
     super.value, {
     required FTypeaheadControllerTextStyles textStyles,
-    List<Object> suggestions = const [],
+    String Function(T option)? displayStringForOption,
+    List<T> suggestions = const [],
   }) : _textStyles = textStyles,
-       _suggestions = _normalizeSuggestions(suggestions),
+       displayStringForOption = displayStringForOption ?? _defaultDisplayStringForOption,
+       _suggestions = [],
        super.fromValue() {
+    _suggestions = _normalizeSuggestions(suggestions);
     findCompletion();
   }
 
@@ -90,6 +102,7 @@ class FTypeaheadController extends TextEditingController {
   void complete() {
     if (current case (completion: final _, :final replacement)) {
       current = null;
+      currentData = null;
       rawValue = TextEditingValue(
         text: replacement,
         selection: .collapsed(offset: replacement.length),
@@ -126,21 +139,21 @@ class FTypeaheadController extends TextEditingController {
   }
 
   /// Loads suggestions from a [Future] or an [Iterable].
-  Future<void> loadSuggestions(FutureOr<Iterable<Object>> suggestions) async {
+  Future<void> loadSuggestions(FutureOr<Iterable<T>> suggestions) async {
     final monotonic = ++_monotonic;
     switch (suggestions) {
-      case final Future<Iterable<Object>> future:
+      case final Future<Iterable<T>> future:
         final iterable = await future;
         if (!_disposed && monotonic == _monotonic) {
           _loadSuggestions(iterable);
         }
 
-      case final Iterable<Object> iterable:
+      case final Iterable<T> iterable:
         _loadSuggestions(iterable);
     }
   }
 
-  void _loadSuggestions(Iterable<Object> iterable) {
+  void _loadSuggestions(Iterable<T> iterable) {
     final suggestions = _normalizeSuggestions(iterable);
     if (!listEquals(_suggestions, suggestions)) {
       _suggestions = suggestions;
@@ -152,7 +165,7 @@ class FTypeaheadController extends TextEditingController {
   /// The suggestions from which a completion is derived.
   ///
   /// For example, if the user types "appl", the suggestions might include "apple", "application", etc.
-  List<String> get suggestions => [for (final suggestion in _suggestions) suggestion.text];
+  List<T> get suggestions => [for (final suggestion in _suggestions) suggestion.data];
 
   /// Updates the current [text] to the given `newText`, and removes existing selection and composing range held by the
   /// controller.
@@ -192,7 +205,7 @@ class FTypeaheadController extends TextEditingController {
   ({String completion, String replacement})? get current => _current;
 
   /// The underlying data of the current completion, or null if no completion is available.
-  Object? get currentData => _currentData;
+  T? get currentData => _currentData;
 
   @protected
   @nonVirtual
@@ -200,7 +213,7 @@ class FTypeaheadController extends TextEditingController {
 
   @protected
   @nonVirtual
-  set currentData(Object? value) => _currentData = value;
+  set currentData(T? value) => _currentData = value;
 
   @override
   @mustCallSuper
@@ -212,16 +225,10 @@ class FTypeaheadController extends TextEditingController {
     }
   }
 
-  static List<FTypeaheadSuggestion<Object?>> _normalizeSuggestions(Iterable<Object> suggestions) => [
+  List<FTypeaheadSuggestion<T>> _normalizeSuggestions(Iterable<T> suggestions) => [
     for (final suggestion in suggestions)
-      switch (suggestion) {
-        final String text => FTypeaheadSuggestion(text: text, data: text),
-        final FTypeaheadSuggestion<Object?> suggestion => suggestion,
-        _ => throw ArgumentError.value(
-          suggestion,
-          'suggestions',
-          'Suggestions must be String or FTypeaheadSuggestion instances.',
-        ),
-      },
+      FTypeaheadSuggestion(text: displayStringForOption(suggestion), data: suggestion),
   ];
+
+  static String _defaultDisplayStringForOption<T>(T option) => defaultDisplayStringForOption(option);
 }

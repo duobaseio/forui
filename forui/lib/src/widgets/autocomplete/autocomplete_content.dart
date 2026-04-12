@@ -37,7 +37,7 @@ class ContentData extends InheritedWidget {
 
 @internal
 class Content<T> extends StatelessWidget {
-  final FAutocompleteController controller;
+  final FAutocompleteController<T> controller;
   final FAutocompleteContentStyle style;
   final bool enabled;
   final ScrollController? scrollController;

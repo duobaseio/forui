@@ -20,10 +20,10 @@ typedef FAutocompleteContentBuilder<T> =
     List<FAutocompleteItemMixin> Function(BuildContext context, String query, Iterable<T> values);
 
 /// A builder that wraps [FAutocomplete]'s popover content.
-typedef FAutocompletePopoverBuilder =
+typedef FAutocompletePopoverBuilder<T> =
     Widget Function(
       BuildContext context,
-      FAutocompleteController controller,
+      FAutocompleteController<T> controller,
       FPopoverController popoverController,
       Widget content,
     );
@@ -258,7 +258,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<String> 
   /// A builder that wraps the entire popover content with arbitrary widgets.
   ///
   /// Defaults to returning the content as-is.
-  final FAutocompletePopoverBuilder popoverBuilder;
+  final FAutocompletePopoverBuilder<T> popoverBuilder;
 
   @override
   final FormFieldSetter<String>? onSaved;
@@ -432,7 +432,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<String> 
     FFieldIconBuilder<FAutocompleteStyle>? prefixBuilder,
     FFieldIconBuilder<FAutocompleteStyle>? suffixBuilder,
     bool Function(TextEditingValue value) clearable = FTextField.defaultClearable,
-    FAutocompletePopoverBuilder popoverBuilder = FPopover.defaultPopoverBuilder,
+    FAutocompletePopoverBuilder<T> popoverBuilder = FPopover.defaultPopoverBuilder,
     FormFieldSetter<String>? onSaved,
     VoidCallback? onReset,
     FormFieldValidator<String>? validator,
@@ -774,7 +774,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<String> 
 }
 
 class _State<T> extends State<FAutocomplete<T>> with TickerProviderStateMixin {
-  late FAutocompleteController _controller;
+  late FAutocompleteController<T> _controller;
   late FPopoverController _popoverController;
   late FutureOr<Iterable<T>> _data;
   late FocusNode _fieldFocus;
@@ -793,7 +793,7 @@ class _State<T> extends State<FAutocomplete<T>> with TickerProviderStateMixin {
     _fieldFocus.addListener(_focus);
     _popoverFocus = FocusScopeNode(debugLabel: 'FAutocomplete popover');
     _popoverController = widget.popoverControl.create(_handleOnPopoverChange, this);
-    _controller = widget.control.create(_update, widget.filter);
+    _controller = widget.control.create(_update, widget.filter, widget.displayStringForOption);
     _loadSuggestions(_data = widget.filter(_controller.text));
   }
 
@@ -808,11 +808,18 @@ class _State<T> extends State<FAutocomplete<T>> with TickerProviderStateMixin {
       _fieldFocus = widget.focusNode ?? .new(debugLabel: 'FAutocomplete field');
     }
 
-    final (controller, updated) = widget.control.update(old.control, _controller, _update, widget.filter);
+    final (controller, updated) = widget.control.update(
+      old.control,
+      _controller,
+      _update,
+      widget.filter,
+      widget.displayStringForOption,
+    );
     if (updated) {
       _controller = controller;
-      _loadSuggestions(widget.filter(_controller.text));
     }
+    _controller.displayStringForOption = widget.displayStringForOption;
+    _loadSuggestions(widget.filter(_controller.text));
     _popoverController = widget.popoverControl
         .update(old.popoverControl, _popoverController, _handleOnPopoverChange, this)
         .$1;
@@ -879,16 +886,7 @@ class _State<T> extends State<FAutocomplete<T>> with TickerProviderStateMixin {
     }
   }
 
-  void _loadSuggestions(FutureOr<Iterable<T>> suggestions) {
-    _controller.loadSuggestions(switch (suggestions) {
-      final Future<Iterable<T>> future => future.then(_toTypeaheadSuggestions),
-      final Iterable<T> iterable => _toTypeaheadSuggestions(iterable),
-    });
-  }
-
-  List<FTypeaheadSuggestion<T>> _toTypeaheadSuggestions(Iterable<T> values) => [
-    for (final value in values) FTypeaheadSuggestion(text: widget.displayStringForOption(value), data: value),
-  ];
+  void _loadSuggestions(FutureOr<Iterable<T>> suggestions) => _controller.loadSuggestions(suggestions);
 
   void _selectText(String text, {T? option}) {
     _previous = text;
