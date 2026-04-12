@@ -571,10 +571,10 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<String> 
 
   /// Creates a [FAutocomplete] that uses the given [filter] to determine the results and the [contentBuilder] to build
   /// the content.
-  FAutocomplete.builder({
+  const FAutocomplete.builder({
     required this.filter,
     required this.contentBuilder,
-    FAutocompleteControl<T>? control,
+    this.control = const FAutocompleteControl.managed(),
     this.popoverControl = const .managed(),
     this.size = .md,
     this.style = const .context(),
@@ -663,7 +663,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<String> 
     this.contentLoadingBuilder = defaultContentLoadingBuilder,
     this.contentErrorBuilder,
     super.key,
-  }) : control = control ?? _defaultControl<T>();
+  });
 
   @override
   State<FAutocomplete<T>> createState() => _State<T>();
@@ -1030,7 +1030,8 @@ class _State<T> extends State<FAutocomplete<T>> with TickerProviderStateMixin {
                     _popoverController.hide();
                   }
 
-                  _selectText(suggestion.text, option: suggestion.data as T?);
+                  final data = suggestion.data;
+                  _selectText(suggestion.text, option: data is T ? data : null);
                 },
                 onFocus: (suggestion) {
                   _restore ??= _controller.text;

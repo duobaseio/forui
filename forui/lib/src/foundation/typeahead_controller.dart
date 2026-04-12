@@ -123,6 +123,7 @@ class FTypeaheadController<T> extends TextEditingController {
     text ??= this.text;
     if (text.isEmpty) {
       current = null;
+      currentData = null;
       return;
     }
 
