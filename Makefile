@@ -175,10 +175,23 @@ release:
 		exit 1; \
 	fi
 	@echo "$(COLOR_GREEN)✓ Changelog entry found$(COLOR_RESET)"
-	@# Step 2: Extract changelog, tag, and create release
+	@# Step 2: Validate branch
+	@echo ""
+	@echo "$(COLOR_BLUE)Checking branch$(COLOR_RESET)"
+	@git fetch origin main --quiet
+	@if [ "$$(git branch --show-current)" != "main" ]; then \
+		echo "$(COLOR_RED)Error: must be on the main branch$(COLOR_RESET)"; \
+		exit 1; \
+	fi
+	@if [ "$$(git rev-parse HEAD)" != "$$(git rev-parse origin/main)" ]; then \
+		echo "$(COLOR_RED)Error: local main is not up to date with origin/main$(COLOR_RESET)"; \
+		exit 1; \
+	fi
+	@echo "$(COLOR_GREEN)✓ On main, up to date with origin$(COLOR_RESET)"
+	@# Step 3: Extract changelog, tag, and create release
 	@PREV_TAG=$$(git tag -l '$(package)/*' --sort=-v:refname | grep -v '^$(package)/$(v)$$' | head -1); \
 	NOTES=$$(sed -n '/^## $(v)/,/^## /{/^## $(v)/d;/^## /d;p;}' "$(package)/CHANGELOG.md" | sed '1{/^$$/d;}' | sed '$${/^$$/d;}'); \
-	TITLE=$$(echo "$(package)" | awk '{print toupper(substr($$0,1,1)) substr($$0,2)}'); \
+	TITLE=$$(echo "$(package)" | tr '_' ' ' | awk '{for(i=1;i<=NF;i++) $$i=toupper(substr($$i,1,1)) substr($$i,2)}1'); \
 	TITLE="$$TITLE $(v)"; \
 	echo ""; \
 	echo "Title:        $$TITLE"; \

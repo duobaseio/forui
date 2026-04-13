@@ -1,6 +1,7 @@
 name: Forui Assets Publish
 
 on:
+  workflow_dispatch: {}
   push:
     tags:
       - 'forui_assets/**'
@@ -25,5 +26,5 @@ jobs:
           workload_identity_provider: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ vars.GCP_SERVICE_ACCOUNT }}
       - run: flutter pub get
-      - run: gcloud auth print-identity-token --audiences=https://pub.dev | dart pub token add https://pub.dev
+      - run: gcloud auth print-identity-token --impersonate-service-account=${{ vars.GCP_SERVICE_ACCOUNT }} --audiences=https://pub.dev | dart pub token add https://pub.dev
       - run: dart pub publish --force
