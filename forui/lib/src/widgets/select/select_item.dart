@@ -264,46 +264,46 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
     required FTypography typography,
     required bool touch,
   }) => .new(
-      labelTextStyle: FVariants.from(
-        typography.xs.copyWith(color: colors.mutedForeground),
+    labelTextStyle: FVariants.from(
+      typography.xs.copyWith(color: colors.mutedForeground),
+      variants: {
+        [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
+      },
+    ),
+    dividerColor: .all(colors.border),
+    dividerWidth: style.borderWidth,
+    itemStyle: FItemStyle(
+      backgroundColor: const .all(null),
+      contentDecoration: .from(
+        const ShapeDecoration(shape: RoundedSuperellipseBorder()),
         variants: {
-          [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
+          [.focused, .hovered, .pressed]: .shapeDelta(
+            shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
+            color: colors.secondary,
+          ),
+          //
+          [.disabled]: const .shapeDelta(),
         },
       ),
-      dividerColor: .all(colors.border),
-      dividerWidth: style.borderWidth,
-      itemStyle: FItemStyle(
-        backgroundColor: const .all(null),
-        contentDecoration: .from(
-          const ShapeDecoration(shape: RoundedSuperellipseBorder()),
-          variants: {
-            [.focused, .hovered, .pressed]: .shapeDelta(
-              shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
-              color: colors.secondary,
-            ),
-            //
-            [.disabled]: const .shapeDelta(),
-          },
-        ),
-        contentStyle: .inherit(
-          colors: colors,
-          typography: typography,
-          prefix: colors.foreground,
-          foreground: colors.foreground,
-          mutedForeground: colors.mutedForeground,
-          touch: touch,
-        ),
-        rawContentStyle: .inherit(
-          colors: colors,
-          typography: typography,
-          prefix: colors.foreground,
-          color: colors.foreground,
-          touch: touch,
-        ),
-        tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
-        focusedOutlineStyle: null,
+      contentStyle: .inherit(
+        colors: colors,
+        typography: typography,
+        prefix: colors.foreground,
+        foreground: colors.foreground,
+        mutedForeground: colors.mutedForeground,
+        touch: touch,
       ),
-    );
+      rawContentStyle: .inherit(
+        colors: colors,
+        typography: typography,
+        prefix: colors.foreground,
+        color: colors.foreground,
+        touch: touch,
+      ),
+      tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
+      focusedOutlineStyle: null,
+    ),
+  );
 }
 
 /// A selectable item in a [FSelect] that can optionally be nested in a [FSelectSection].

@@ -85,6 +85,7 @@ class _RenderLayout extends RenderBox
   double _top;
   double _bottom;
   Color? _dividerForeground;
+
   /// This is necessary when painting the space unoccupied by an indented divider.
   Color? _dividerBackground;
   double? _dividerWidth;
