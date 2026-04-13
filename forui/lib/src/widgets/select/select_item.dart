@@ -263,9 +263,7 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
     required FStyle style,
     required FTypography typography,
     required bool touch,
-  }) {
-    final (:suffixedPadding, :unsuffixedPadding, :margin) = FItemStyle.selectInsets(touch: touch);
-    return .new(
+  }) => .new(
       labelTextStyle: FVariants.from(
         typography.xs.copyWith(color: colors.mutedForeground),
         variants: {
@@ -276,7 +274,7 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
       dividerWidth: style.borderWidth,
       itemStyle: FItemStyle(
         backgroundColor: const .all(null),
-        decoration: .from(
+        contentDecoration: .from(
           const ShapeDecoration(shape: RoundedSuperellipseBorder()),
           variants: {
             [.focused, .hovered, .pressed]: .shapeDelta(
@@ -293,22 +291,19 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
           prefix: colors.foreground,
           foreground: colors.foreground,
           mutedForeground: colors.mutedForeground,
-          suffixedPadding: suffixedPadding,
-          unsuffixedPadding: unsuffixedPadding,
+          touch: touch,
         ),
-        rawItemContentStyle: .inherit(
+        rawContentStyle: .inherit(
           colors: colors,
           typography: typography,
           prefix: colors.foreground,
           color: colors.foreground,
-          padding: unsuffixedPadding,
+          touch: touch,
         ),
         tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
         focusedOutlineStyle: null,
-        margin: margin,
       ),
     );
-  }
 }
 
 /// A selectable item in a [FSelect] that can optionally be nested in a [FSelectSection].

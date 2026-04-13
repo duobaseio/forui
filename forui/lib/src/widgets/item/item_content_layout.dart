@@ -13,8 +13,8 @@ class ItemContentLayout extends MultiChildRenderObjectWidget {
   final EdgeInsetsGeometry padding;
   final double top;
   final double bottom;
-  final Color? dividerColor;
-  final Color? dividerBackgroundColor;
+  final Color? dividerForeground;
+  final Color? dividerBackground;
   final double? dividerWidth;
   final FItemDivider dividerType;
 
@@ -23,8 +23,8 @@ class ItemContentLayout extends MultiChildRenderObjectWidget {
     required this.padding,
     required this.top,
     required this.bottom,
-    required this.dividerColor,
-    required this.dividerBackgroundColor,
+    required this.dividerForeground,
+    required this.dividerBackground,
     required this.dividerWidth,
     required this.dividerType,
     super.children,
@@ -34,13 +34,13 @@ class ItemContentLayout extends MultiChildRenderObjectWidget {
   @override
   RenderObject createRenderObject(BuildContext context) {
     final direction = Directionality.maybeOf(context) ?? .ltr;
-    return _RenderItemContent(
+    return _RenderLayout(
       margin.resolve(direction),
       padding.resolve(direction),
       top,
       bottom,
-      dividerColor,
-      dividerBackgroundColor,
+      dividerForeground,
+      dividerBackground,
       dividerWidth,
       dividerType,
       direction,
@@ -49,15 +49,15 @@ class ItemContentLayout extends MultiChildRenderObjectWidget {
 
   @override
   // ignore: library_private_types_in_public_api
-  void updateRenderObject(BuildContext context, covariant _RenderItemContent content) {
+  void updateRenderObject(BuildContext context, covariant _RenderLayout content) {
     final direction = Directionality.maybeOf(context) ?? .ltr;
     content
       ..margin = margin.resolve(direction)
       ..padding = padding.resolve(direction)
       ..top = top
       ..bottom = bottom
-      ..dividerForeground = dividerColor
-      ..dividerBackground = dividerBackgroundColor
+      ..dividerForeground = dividerForeground
+      ..dividerBackground = dividerBackground
       ..dividerWidth = dividerWidth
       ..dividerType = dividerType
       ..textDirection = direction;
@@ -71,26 +71,27 @@ class ItemContentLayout extends MultiChildRenderObjectWidget {
       ..add(DiagnosticsProperty('margin', margin))
       ..add(DoubleProperty('top', top))
       ..add(DoubleProperty('bottom', bottom))
-      ..add(ColorProperty('dividerColor', dividerColor))
-      ..add(ColorProperty('dividerBackgroundColor', dividerBackgroundColor))
+      ..add(ColorProperty('dividerColor', dividerForeground))
+      ..add(ColorProperty('dividerBackgroundColor', dividerBackground))
       ..add(DoubleProperty('dividerWidth', dividerWidth))
       ..add(EnumProperty('dividerType', dividerType));
   }
 }
 
-class _RenderItemContent extends RenderBox
+class _RenderLayout extends RenderBox
     with ContainerRenderObjectMixin<RenderBox, DefaultData>, RenderBoxContainerDefaultsMixin<RenderBox, DefaultData> {
   EdgeInsets _margin;
   EdgeInsets _padding;
   double _top;
   double _bottom;
   Color? _dividerForeground;
+  /// This is necessary when painting ths space unoccupied by an indented divider.
   Color? _dividerBackground;
   double? _dividerWidth;
   FItemDivider _dividerType;
   TextDirection _textDirection;
 
-  _RenderItemContent(
+  _RenderLayout(
     this._margin,
     this._padding,
     this._top,

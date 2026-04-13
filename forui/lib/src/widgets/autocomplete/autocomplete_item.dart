@@ -251,9 +251,7 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
     required FStyle style,
     required FTypography typography,
     required bool touch,
-  }) {
-    final (:suffixedPadding, :unsuffixedPadding, :margin) = FItemStyle.selectInsets(touch: touch);
-    return .new(
+  }) => .new(
       labelTextStyle: .from(
         typography.xs.copyWith(color: colors.mutedForeground),
         variants: {
@@ -264,7 +262,7 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
       dividerWidth: style.borderWidth,
       itemStyle: FItemStyle(
         backgroundColor: const .all(null),
-        decoration: .from(
+        contentDecoration: .from(
           const ShapeDecoration(shape: RoundedSuperellipseBorder()),
           variants: {
             [.focused, .hovered, .pressed]: .shapeDelta(
@@ -281,22 +279,19 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
           prefix: colors.foreground,
           foreground: colors.foreground,
           mutedForeground: colors.mutedForeground,
-          suffixedPadding: suffixedPadding,
-          unsuffixedPadding: unsuffixedPadding,
+          touch: touch,
         ),
-        rawItemContentStyle: .inherit(
+        rawContentStyle: .inherit(
           colors: colors,
           typography: typography,
           prefix: colors.foreground,
           color: colors.foreground,
-          padding: unsuffixedPadding,
+          touch: touch,
         ),
         tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
         focusedOutlineStyle: null,
-        margin: margin,
       ),
     );
-  }
 }
 
 /// A suggestion in a [FAutocomplete] that can optionally be nested in a [FAutocompleteSection].
