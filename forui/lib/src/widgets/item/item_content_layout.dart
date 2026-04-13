@@ -71,8 +71,8 @@ class ItemContentLayout extends MultiChildRenderObjectWidget {
       ..add(DiagnosticsProperty('margin', margin))
       ..add(DoubleProperty('top', top))
       ..add(DoubleProperty('bottom', bottom))
-      ..add(ColorProperty('dividerColor', dividerForeground))
-      ..add(ColorProperty('dividerBackgroundColor', dividerBackground))
+      ..add(ColorProperty('dividerForeground', dividerForeground))
+      ..add(ColorProperty('dividerBackground', dividerBackground))
       ..add(DoubleProperty('dividerWidth', dividerWidth))
       ..add(EnumProperty('dividerType', dividerType));
   }
@@ -85,7 +85,7 @@ class _RenderLayout extends RenderBox
   double _top;
   double _bottom;
   Color? _dividerForeground;
-  /// This is necessary when painting ths space unoccupied by an indented divider.
+  /// This is necessary when painting the space unoccupied by an indented divider.
   Color? _dividerBackground;
   double? _dividerWidth;
   FItemDivider _dividerType;

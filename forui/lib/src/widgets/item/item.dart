@@ -493,7 +493,7 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
   ///
   /// {@macro forui.widgets.item.ItemStyle}
   ///
-  /// As it is below [contentDecoration], setting a decoration color will paint over [backgroundColor].
+  /// As it is below [contentDecoration], setting a decoration color will paint over the [backgroundColor].
   @override
   final FVariants<FTappableVariantConstraint, FTappableVariant, Color?, Delta> backgroundColor;
 
@@ -539,7 +539,7 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
     this.shape,
   });
 
-  /// Creates a [FTileGroupStyle] that inherits from the given arguments.
+  /// Creates a [FItemStyle] that inherits from the given arguments.
   FItemStyle.inherit({
     required FColors colors,
     required FTypography typography,

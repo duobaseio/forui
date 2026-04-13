@@ -523,7 +523,7 @@ class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
   /// The group's decoration, painted below [FItemStyle.backgroundColor] and [FItemStyle.contentDecoration].
   ///
   /// As it is below [FItemStyle.backgroundColor], setting a [FItemStyle.backgroundColor]/[FItemStyle.contentDecoration]
-  /// will paint over decoration's color.
+  /// will paint over the decoration's color.
   @override
   final Decoration decoration;
 
