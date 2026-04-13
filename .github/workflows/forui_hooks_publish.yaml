@@ -21,14 +21,20 @@ jobs:
       - uses: subosito/flutter-action@v2.23.0
         with:
           flutter-version: 3.x
-      - uses: google-github-actions/auth@v3
+      - id: auth
+        uses: google-github-actions/auth@v3
         with:
           workload_identity_provider: ${{ vars.GCP_WORKLOAD_IDENTITY_PROVIDER }}
           service_account: ${{ vars.GCP_SERVICE_ACCOUNT }}
+          token_format: 'id_token'
+          id_token_audience: 'https://pub.dev'
+          id_token_include_email: true
       - working-directory: forui
         run: |
           flutter pub get
           dart run build_runner build --delete-conflicting-outputs
       - run: flutter pub get
-      - run: gcloud auth print-identity-token --impersonate-service-account=${{ vars.GCP_SERVICE_ACCOUNT }} --audiences=https://pub.dev | dart pub token add https://pub.dev
+      - run: dart pub token add https://pub.dev --env-var=PUB_TOKEN
       - run: dart pub publish --force
+        env:
+          PUB_TOKEN: ${{ steps.auth.outputs.id_token }}
