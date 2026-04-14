@@ -1,3 +1,21 @@
+## 0.22.0 (Next)
+
+
+### `FItem` & `FItemGroup`
+* Remove `FItemStyle.menuInsets(...)`. Use `FItemContentStyle.inherit(touch: ...)` and
+  `FRawItemContentStyle.inherit(touch: ...)` instead.
+* Remove `FItemStyle.selectInsets(...)`. Use `FItemContentStyle.inherit(touch: ...)` and
+  `FRawItemContentStyle.inherit(touch: ...)` instead.
+
+* **Breaking** Remove `FItemContentStyle.inherit(suffixedPadding: ...)` and
+  `FItemContentStyle.inherit(unsuffixedPadding: ...)`. Padding is now inlined based on the new `touch` parameter.
+* **Breaking** Remove `FRawItemContentStyle.inherit(padding: ...)`. Padding is now inlined based on the new `touch`
+  parameter.
+* **Breaking** Rename `FItemStyle.rawItemContentStyle` to `FItemStyle.rawContentStyle`.
+* **Breaking** Rename `FItemStyle.margin` to `FItemStyle.padding`.
+* **Breaking** Rename `FItemStyle.decoration` to `FItemStyle.contentDecoration`.
+
+
 ## 0.21.1
 
 ### `FHeader`

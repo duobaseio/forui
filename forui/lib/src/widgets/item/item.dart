@@ -220,7 +220,7 @@ class FItem extends StatelessWidget with FItemMixin {
     super.key,
   }) : _builder = ((context, style, top, bottom, variants, color, background, width, divider) => ItemContent(
          style: style.contentStyle,
-         margin: style.margin,
+         margin: style.padding,
          top: top,
          bottom: bottom,
          variants: variants,
@@ -269,8 +269,8 @@ class FItem extends StatelessWidget with FItemMixin {
     Widget? prefix,
     super.key,
   }) : _builder = ((context, style, top, bottom, variants, color, background, width, divider) => RawItemContent(
-         style: style.rawItemContentStyle,
-         margin: style.margin,
+         style: style.rawContentStyle,
+         margin: style.padding,
          top: top,
          bottom: bottom,
          variants: variants,
@@ -298,7 +298,7 @@ class FItem extends StatelessWidget with FItemMixin {
     final top = data.index == 0 ? data.spacing : 0.0;
     final bottom = data.last ? data.spacing : 0.0;
 
-    var margin = style.margin.resolve(Directionality.maybeOf(context) ?? .ltr);
+    var margin = style.padding.resolve(Directionality.maybeOf(context) ?? .ltr);
     margin = margin.copyWith(
       top: margin.top + top,
       bottom: margin.bottom + bottom + (divider == FItemDivider.none ? 0 : data.dividerWidth),
@@ -309,15 +309,16 @@ class FItem extends StatelessWidget with FItemMixin {
       decoration: data.index == 0 && data.globalLast && style.shape != null
           ? ShapeDecoration(shape: style.shape!, color: background)
           : BoxDecoration(color: background),
+
       child: Padding(
         padding: margin,
-        child: switch (onPress != null ||
-            onLongPress != null ||
-            onDoubleTap != null ||
-            onSecondaryPress != null ||
-            onSecondaryLongPress != null) {
-          false => DecoratedBox(
-            decoration: style.decoration.resolve(formVariants),
+        child: switch (onPress == null &&
+            onLongPress == null &&
+            onDoubleTap == null &&
+            onSecondaryPress == null &&
+            onSecondaryLongPress == null) {
+          true => DecoratedBox(
+            decoration: style.contentDecoration.resolve(formVariants),
             child: _builder(
               context,
               style,
@@ -330,7 +331,7 @@ class FItem extends StatelessWidget with FItemMixin {
               divider,
             ),
           ),
-          true => FTappable(
+          false => FTappable(
             style: style.tappableStyle,
             semanticsLabel: semanticsLabel,
             autofocus: autofocus,
@@ -357,7 +358,7 @@ class FItem extends StatelessWidget with FItemMixin {
             shortcuts: shortcuts,
             actions: actions,
             builder: (context, variants, _) {
-              final decoration = style.decoration.resolve(variants);
+              final decoration = style.contentDecoration.resolve(variants);
               return DecoratedBox(
                 position: .foreground,
                 decoration: switch (style.focusedOutlineStyle) {
@@ -447,15 +448,14 @@ extension type FItemStyles(FVariants<FItemVariantConstraint, FItemVariant, FItem
               prefix: colors.destructive,
               foreground: colors.destructive,
               mutedForeground: colors.destructive,
-              suffixedPadding: primary.contentStyle.suffixedPadding,
-              unsuffixedPadding: primary.contentStyle.unsuffixedPadding,
+              touch: touch,
             ),
-            rawItemContentStyle: FRawItemContentStyle.inherit(
+            rawContentStyle: FRawItemContentStyle.inherit(
               colors: colors,
               typography: typography,
               prefix: colors.primary,
               color: colors.primary,
-              padding: primary.rawItemContentStyle.padding,
+              touch: touch,
             ),
           ),
         },
@@ -471,65 +471,53 @@ extension type FItemStyles(FVariants<FItemVariantConstraint, FItemVariant, FItem
 }
 
 /// A [FItem]'s style.
+///
+/// {@template forui.widgets.item.ItemStyle}
+/// ```diagram
+/// ┌─ shape ──────────────────────────────┐
+/// │  backgroundColor     ↕ padding       │
+/// │  ┌─ contentDecoration ─────────────┐ │
+/// │  │  content                        │ │
+/// │  └─────────────────────────────────┘ │
+/// └──────────────────────────────────────┘
+/// ```
+/// {@endtemplate}
 class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
-  /// The padding and margin for the item when used in a menu.
-  static ({EdgeInsetsGeometry suffixedPadding, EdgeInsetsGeometry unsuffixedPadding, EdgeInsetsGeometry margin})
-  menuInsets({required bool touch}) => touch
-      ? (
-          suffixedPadding: const .fromSTEB(10, 12.5, 6, 12.5),
-          unsuffixedPadding: const .symmetric(horizontal: 10, vertical: 12.5),
-          margin: const .symmetric(horizontal: 4),
-        )
-      : (
-          suffixedPadding: const .fromSTEB(10, 6.5, 5, 6.5),
-          unsuffixedPadding: const .symmetric(horizontal: 10, vertical: 6.5),
-          margin: const .symmetric(horizontal: 4),
-        );
-
-  /// The padding and margin for the item when used in a autocomplete/select.
-  static ({EdgeInsetsGeometry suffixedPadding, EdgeInsetsGeometry unsuffixedPadding, EdgeInsetsGeometry margin})
-  selectInsets({required bool touch}) => touch
-      ? (
-          suffixedPadding: const .fromSTEB(10, 12.5, 6, 12.5),
-          unsuffixedPadding: const .symmetric(horizontal: 10, vertical: 12.5),
-          margin: const .symmetric(horizontal: 4),
-        )
-      : (
-          suffixedPadding: const .fromSTEB(10, 6.5, 5, 6.5),
-          unsuffixedPadding: const .symmetric(horizontal: 10, vertical: 6.5),
-          margin: const .symmetric(horizontal: 4),
-        );
-
-  /// The item's outer shape when outside of an [FItemGroup] or other similar groups.
+  /// The item's shape, only applied when outside an [FItemGroup] or other similar groups.
   ///
-  /// If provided, the entire item, including the [backgroundColor] and [margin], is clipped to this shape.
+  /// {@macro forui.widgets.item.ItemStyle}
   @override
   final ShapeBorder? shape;
 
-  /// The item's background color.
+  /// The item's background color, enclosing the [padding] and content, and below [contentDecoration].
   ///
-  /// It is applied to the entire item, including [margin]. Since it is applied before [decoration] in the z-layer,
-  /// it is not visible if [decoration] has a background color.
+  /// {@macro forui.widgets.item.ItemStyle}
   ///
-  /// This is useful for setting a background color when [margin] is not zero.
+  /// As it is below [contentDecoration], setting a decoration color will paint over the [backgroundColor].
   @override
   final FVariants<FTappableVariantConstraint, FTappableVariant, Color?, Delta> backgroundColor;
 
-  /// The margin around the item, including the [decoration].
+  /// The padding around the [contentDecoration].
+  ///
+  /// {@macro forui.widgets.item.ItemStyle}
   @override
-  final EdgeInsetsGeometry margin;
+  final EdgeInsetsGeometry padding;
 
-  /// The item's inner decoration that is drawn above the [backgroundColor] but below the content.
+  /// The content's decoration, enclosed within [padding] and [shape], and above [backgroundColor].
+  ///
+  /// {@macro forui.widgets.item.ItemStyle}
+  ///
+  /// The content's background color will default to [backgroundColor] if the decoration does not have a color.
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, Decoration, DecorationDelta> decoration;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, Decoration, DecorationDelta> contentDecoration;
 
-  /// The default item content's style.
+  /// The content's style.
   @override
   final FItemContentStyle contentStyle;
 
-  /// THe default raw item content's style.
+  /// The raw content's style.
   @override
-  final FRawItemContentStyle rawItemContentStyle;
+  final FRawItemContentStyle rawContentStyle;
 
   /// The tappable style.
   @override
@@ -542,67 +530,63 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
   /// Creates a [FItemStyle].
   FItemStyle({
     required this.backgroundColor,
-    required this.decoration,
+    required this.contentDecoration,
     required this.contentStyle,
-    required this.rawItemContentStyle,
+    required this.rawContentStyle,
     required this.tappableStyle,
     required this.focusedOutlineStyle,
-    required this.margin,
+    this.padding = const .symmetric(horizontal: 4),
     this.shape,
   });
 
-  /// Creates a [FTileGroupStyle] that inherits from the given arguments.
-  factory FItemStyle.inherit({
+  /// Creates a [FItemStyle] that inherits from the given arguments.
+  FItemStyle.inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,
     required bool touch,
-  }) {
-    final (:suffixedPadding, :unsuffixedPadding, :margin) = FItemStyle.menuInsets(touch: touch);
-    return FItemStyle(
-      backgroundColor: FVariants(
-        colors.background,
-        variants: {
-          [.disabled]: colors.background,
-        },
-      ),
-      decoration: .from(
-        ShapeDecoration(
-          shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
-          color: colors.background,
-        ),
-        variants: {
-          [.hovered, .pressed]: .shapeDelta(color: colors.secondary),
-          //
-          [.disabled]: const .shapeDelta(),
-          //
-          [.selected]: .shapeDelta(color: colors.secondary),
-          [.selected.and(.disabled)]: .shapeDelta(color: colors.disable(colors.secondary)),
-        },
-      ),
-      contentStyle: .inherit(
-        colors: colors,
-        typography: typography,
-        prefix: colors.primary,
-        foreground: colors.foreground,
-        mutedForeground: colors.mutedForeground,
-        suffixedPadding: suffixedPadding,
-        unsuffixedPadding: unsuffixedPadding,
-      ),
-      rawItemContentStyle: .inherit(
-        colors: colors,
-        typography: typography,
-        prefix: colors.foreground,
-        color: colors.foreground,
-        padding: unsuffixedPadding,
-      ),
-      tappableStyle: style.tappableStyle.copyWith(
-        motion: FTappableMotion.none,
-        pressedEnterDuration: .zero,
-        pressedExitDuration: const Duration(milliseconds: 25),
-      ),
-      focusedOutlineStyle: style.focusedOutlineStyle,
-      margin: margin,
-    );
-  }
+  }) : this(
+         backgroundColor: FVariants(
+           colors.background,
+           variants: {
+             [.disabled]: colors.background,
+           },
+         ),
+         contentDecoration: .from(
+           ShapeDecoration(
+             shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
+             color: colors.background,
+           ),
+           variants: {
+             [.hovered, .pressed]: .shapeDelta(color: colors.secondary),
+             //
+             [.disabled]: const .shapeDelta(),
+             //
+             [.selected]: .shapeDelta(color: colors.secondary),
+             [.selected.and(.disabled)]: .shapeDelta(color: colors.disable(colors.secondary)),
+           },
+         ),
+         contentStyle: .inherit(
+           colors: colors,
+           typography: typography,
+           prefix: colors.primary,
+           foreground: colors.foreground,
+           mutedForeground: colors.mutedForeground,
+           touch: touch,
+         ),
+         rawContentStyle: .inherit(
+           colors: colors,
+           typography: typography,
+           prefix: colors.foreground,
+           color: colors.foreground,
+           touch: touch,
+         ),
+         tappableStyle: style.tappableStyle.copyWith(
+           motion: FTappableMotion.none,
+           pressedEnterDuration: .zero,
+           pressedExitDuration: const Duration(milliseconds: 25),
+         ),
+         focusedOutlineStyle: style.focusedOutlineStyle,
+         padding: const .symmetric(horizontal: 4),
+       );
 }

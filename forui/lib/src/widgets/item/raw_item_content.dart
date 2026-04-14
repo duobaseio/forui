@@ -6,7 +6,7 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/item/render_item_content.dart';
+import 'package:forui/src/widgets/item/item_content_layout.dart';
 
 part 'raw_item_content.design.dart';
 
@@ -14,7 +14,6 @@ part 'raw_item_content.design.dart';
 class RawItemContent extends StatelessWidget {
   final FRawItemContentStyle style;
   final EdgeInsetsGeometry margin;
-
   final double top;
   final double bottom;
   final Set<FTappableVariant> variants;
@@ -50,8 +49,8 @@ class RawItemContent extends StatelessWidget {
     padding: style.padding,
     top: top,
     bottom: bottom,
-    dividerColor: dividerForeground?.resolve(variants),
-    dividerBackgroundColor: dividerBackground,
+    dividerForeground: dividerForeground?.resolve(variants),
+    dividerBackground: dividerBackground,
     dividerWidth: dividerWidth,
     dividerType: dividerType,
     children: [
@@ -124,7 +123,7 @@ class FRawItemContentStyle with Diagnosticable, _$FRawItemContentStyleFunctions 
     required FTypography typography,
     required Color prefix,
     required Color color,
-    required EdgeInsetsGeometry padding,
+    required bool touch,
   }) : this(
          prefixIconStyle: .from(
            IconThemeData(color: prefix, size: typography.md.fontSize),
@@ -138,6 +137,8 @@ class FRawItemContentStyle with Diagnosticable, _$FRawItemContentStyleFunctions 
              [.disabled]: typography.sm.copyWith(color: colors.disable(color)),
            },
          ),
-         padding: padding,
+         padding: touch
+             ? const .symmetric(horizontal: 10, vertical: 12.5)
+             : const .symmetric(horizontal: 10, vertical: 6.5),
        );
 }
