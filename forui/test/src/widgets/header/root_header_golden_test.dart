@@ -127,6 +127,17 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/root/${theme.name}-smaller-title.png'));
     });
 
+    testWidgets('${theme.name} with no FRootHeader actions', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          theme: theme.data,
+          child: const FHeader(title: Text(title)),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/root/${theme.name}-no-actions.png'));
+    });
+
     testWidgets('${theme.name} with focused FRootHeader actions', (tester) async {
       await tester.pumpWidget(
         TestScaffold(

@@ -1,4 +1,12 @@
-## 0.21.0 (Next)
+## 0.21.1
+
+### `FHeader`
+* Add `FHeaderStyle.constraints`.
+
+* Fix `FHeader.nested` rendering taller than `FHeader` on desktop themes.
+
+
+## 0.21.0
 
 ### `FTypography`
 * Add `FTypography.defaultFontFamily` static constant.

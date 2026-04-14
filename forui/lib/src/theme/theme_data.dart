@@ -700,7 +700,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
           ? FDividerStyles.inherit(colors: colors, style: style)
           : FDividerStyles(dividerStyles),
       headerStyles: headerStyles == null
-          ? FHeaderStyles.inherit(colors: colors, typography: typography, style: style)
+          ? FHeaderStyles.inherit(colors: colors, typography: typography, style: style, touch: touch)
           : FHeaderStyles(headerStyles),
       itemStyles: itemStyles == null
           ? FItemStyles.inherit(colors: colors, typography: typography, style: style, touch: touch)

@@ -101,12 +101,19 @@ class FHeaderData extends InheritedWidget {
 extension type FHeaderStyles(FVariants<FHeaderVariantConstraint, FHeaderVariant, FHeaderStyle, FHeaderStyleDelta> _)
     implements FVariants<FHeaderVariantConstraint, FHeaderVariant, FHeaderStyle, FHeaderStyleDelta> {
   /// Creates a [FHeaderStyles] that inherits its properties.
-  factory FHeaderStyles.inherit({required FColors colors, required FTypography typography, required FStyle style}) {
+  factory FHeaderStyles.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+    required bool touch,
+  }) {
+    final constraints = BoxConstraints(minHeight: touch ? 62 : 54);
     final root = FHeaderStyle(
       systemOverlayStyle: colors.systemOverlayStyle,
       titleTextStyle: typography.xl2.copyWith(color: colors.foreground, fontWeight: .w700, height: 1),
       actionStyle: .inherit(colors: colors, style: style, size: typography.xl2.fontSize ?? 30, padding: const .all(7)),
       padding: style.pagePadding.copyWith(bottom: 10),
+      constraints: constraints,
     );
 
     return FHeaderStyles(
@@ -117,8 +124,14 @@ extension type FHeaderStyles(FVariants<FHeaderVariantConstraint, FHeaderVariant,
           [.nested]: FHeaderStyle(
             systemOverlayStyle: colors.systemOverlayStyle,
             titleTextStyle: typography.xl.copyWith(color: colors.foreground, fontWeight: .w600, height: 1),
-            actionStyle: .inherit(colors: colors, style: style, size: 22, padding: const .all(11)),
+            actionStyle: .inherit(
+              colors: colors,
+              style: style,
+              size: typography.xl.fontSize ?? 22,
+              padding: .all(touch ? 11 : 8),
+            ),
             padding: style.pagePadding.copyWith(bottom: 10),
+            constraints: constraints,
           ),
         },
       ),
@@ -137,6 +150,10 @@ class FHeaderStyle with Diagnosticable, _$FHeaderStyleFunctions {
   /// The system overlay style.
   @override
   final SystemUiOverlayStyle systemOverlayStyle;
+
+  /// The layout constraints applied to the header.
+  @override
+  final BoxConstraints constraints;
 
   /// The decoration.
   @override
@@ -190,9 +207,10 @@ class FHeaderStyle with Diagnosticable, _$FHeaderStyleFunctions {
   /// Creates a [FHeaderStyle].
   const FHeaderStyle({
     required this.systemOverlayStyle,
+    required this.padding,
     required this.titleTextStyle,
     required this.actionStyle,
-    required this.padding,
+    this.constraints = const BoxConstraints(),
     this.decoration = const BoxDecoration(),
     this.backgroundFilter,
     this.actionSpacing = 0,

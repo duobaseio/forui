@@ -23,11 +23,8 @@ class _FRootHeader extends FHeader {
   Widget build(BuildContext context) {
     final style = this.style(context.theme.headerStyles.resolve({FHeaderVariant.root, context.platformVariant}));
 
-    Widget actions;
-    if (suffixes.isEmpty) {
-      // We still want to reserve space for suffixes to prevent layout shifts when they appear.
-      actions = SizedBox(height: style.actionStyle.iconStyle.base.size! + style.actionStyle.padding.vertical);
-    } else {
+    Widget actions = const SizedBox();
+    if (suffixes.isNotEmpty) {
       actions = FHeaderData(
         actionStyle: style.actionStyle,
         child: Row(children: suffixes.expand((action) => [SizedBox(width: style.actionSpacing), action]).toList()),
@@ -42,26 +39,29 @@ class _FRootHeader extends FHeader {
       bottom: false,
       child: Semantics(
         header: true,
-        child: Padding(
-          padding: style.padding,
-          child: Row(
-            mainAxisAlignment: .spaceBetween,
-            children: [
-              Expanded(
-                child: DefaultTextStyle.merge(
-                  overflow: .ellipsis,
-                  maxLines: 1,
-                  softWrap: false,
-                  style: style.titleTextStyle,
-                  textHeightBehavior: const TextHeightBehavior(
-                    applyHeightToFirstAscent: false,
-                    applyHeightToLastDescent: false,
+        child: ConstrainedBox(
+          constraints: style.constraints,
+          child: Padding(
+            padding: style.padding,
+            child: Row(
+              mainAxisAlignment: .spaceBetween,
+              children: [
+                Expanded(
+                  child: DefaultTextStyle.merge(
+                    overflow: .ellipsis,
+                    maxLines: 1,
+                    softWrap: false,
+                    style: style.titleTextStyle,
+                    textHeightBehavior: const TextHeightBehavior(
+                      applyHeightToFirstAscent: false,
+                      applyHeightToLastDescent: false,
+                    ),
+                    child: title,
                   ),
-                  child: title,
                 ),
-              ),
-              actions,
-            ],
+                actions,
+              ],
+            ),
           ),
         ),
       ),
