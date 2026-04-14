@@ -88,6 +88,7 @@ class FPickerStyle with Diagnosticable, _$FPickerStyleFunctions {
     required FColors colors,
     required FStyle style,
     required FTypography typography,
+    required FHapticFeedback hapticFeedback,
     required bool touch,
   }) : this(
          textStyle: touch
@@ -98,6 +99,6 @@ class FPickerStyle with Diagnosticable, _$FPickerStyleFunctions {
            color: colors.muted,
          ),
          focusedOutlineStyle: style.focusedOutlineStyle,
-         hapticFeedback: style.hapticFeedback.selectionClick,
+         hapticFeedback: hapticFeedback.selectionClick,
        );
 }

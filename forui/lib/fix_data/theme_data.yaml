@@ -1,0 +1,12 @@
+version: 1
+transforms:
+  # FStyle
+  - title: "Remove FStyle(hapticFeedback: ...). Pass hapticFeedback to FThemeData instead."
+    date: 2026-04-14
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FStyle
+    changes:
+      - kind: removeParameter
+        name: 'hapticFeedback'

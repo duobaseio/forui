@@ -448,8 +448,12 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
   });
 
   /// Creates a [FTileGroupStyle] that inherits from the given arguments.
-  factory FTileGroupStyle.inherit({required FColors colors, required FTypography typography, required FStyle style}) =>
-      .new(
+  factory FTileGroupStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+    required FHapticFeedback hapticFeedback,
+  }) => .new(
         decoration: ShapeDecoration(
           shape: RoundedSuperellipseBorder(
             side: BorderSide(color: colors.border, width: style.borderWidth),
@@ -459,7 +463,7 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
         dividerColor: .all(colors.border),
         dividerWidth: style.borderWidth,
         slideableTiles: const .all(true),
-        slidePressHapticFeedback: style.hapticFeedback.selectionClick,
+        slidePressHapticFeedback: hapticFeedback.selectionClick,
         labelTextStyle: FVariants.from(
           typography.sm.copyWith(
             color: style.formFieldStyle.labelTextStyle.base.color ?? colors.foreground,

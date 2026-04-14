@@ -564,6 +564,7 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
     required FStyle style,
     required FColors colors,
     required FTypography typography,
+    required FHapticFeedback hapticFeedback,
     required bool touch,
   }) => .new(
     decoration: ShapeDecoration(
@@ -579,7 +580,7 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
         [.touch]: true,
       },
     ),
-    slidePressHapticFeedback: style.hapticFeedback.selectionClick,
+    slidePressHapticFeedback: hapticFeedback.selectionClick,
     contentStyle: FDialogContentStyles.inherit(colors: colors, typography: typography, touch: touch),
   );
 }

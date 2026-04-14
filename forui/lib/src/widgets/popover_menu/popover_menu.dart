@@ -513,8 +513,9 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
     required super.colors,
     required super.style,
     required FTypography typography,
+    required FHapticFeedback hapticFeedback,
     required bool touch,
-  }) : itemGroupStyle = .inherit(colors: colors, style: style, typography: typography, touch: touch).copyWith(
+  }) : itemGroupStyle = .inherit(colors: colors, style: style, typography: typography, hapticFeedback: hapticFeedback, touch: touch).copyWith(
          decoration: .value(
            ShapeDecoration(
              color: colors.card,
@@ -552,7 +553,7 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
            ),
          ]),
        ),
-       tileGroupStyle = .inherit(colors: colors, style: style, typography: typography).copyWith(
+       tileGroupStyle = .inherit(colors: colors, style: style, typography: typography, hapticFeedback: hapticFeedback).copyWith(
          tileStyles: .delta([
            .base(
              .delta(
@@ -580,7 +581,7 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
        maxWidth = 250,
        hoverEnterDuration = const Duration(milliseconds: 150),
        menuMotion = const FPopoverMenuMotion(),
-       hapticFeedback = style.hapticFeedback.mediumImpact,
+       hapticFeedback = hapticFeedback.mediumImpact,
        super.inherit();
 }
 

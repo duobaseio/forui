@@ -28,10 +28,17 @@ class FTimeFieldStyle with Diagnosticable, _$FTimeFieldStyleFunctions {
     required FColors colors,
     required FTypography typography,
     required FStyle style,
+    required FHapticFeedback hapticFeedback,
     required bool touch,
   }) : this(
          fieldStyles: .inherit(colors: colors, typography: typography, style: style, touch: touch),
          popoverStyle: .inherit(colors: colors, style: style),
-         pickerStyle: .inherit(colors: colors, typography: typography, style: style, touch: touch),
+         pickerStyle: .inherit(
+           colors: colors,
+           typography: typography,
+           style: style,
+           hapticFeedback: hapticFeedback,
+           touch: touch,
+         ),
        );
 }

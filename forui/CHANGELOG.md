@@ -1,5 +1,10 @@
 ## 0.22.0 (Next)
 
+### `FStyle` & `FThemeData`
+* Add `FThemeData.hapticFeedback`.
+
+* **Breaking** Remove `FStyle.hapticFeedback`. Use `FThemeData.hapticFeedback` instead.
+
 
 ### `FItem` & `FItemGroup`
 * Remove `FItemStyle.menuInsets(...)`. Use `FItemContentStyle.inherit(touch: ...)` and
