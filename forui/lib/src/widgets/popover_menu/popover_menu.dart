@@ -528,7 +528,7 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
            .all(
              .delta(
                backgroundColor: FVariants.all(colors.card),
-               decoration: .delta([.base(.shapeDelta(color: colors.card))]),
+               contentDecoration: .delta([.base(.shapeDelta(color: colors.card))]),
              ),
            ),
            .base(
@@ -539,15 +539,14 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
                  prefix: colors.foreground,
                  foreground: colors.foreground,
                  mutedForeground: colors.mutedForeground,
-                 suffixedPadding: FItemStyle.menuInsets(touch: touch).suffixedPadding,
-                 unsuffixedPadding: FItemStyle.menuInsets(touch: touch).unsuffixedPadding,
+                 touch: touch,
                ),
-               rawItemContentStyle: FRawItemContentStyle.inherit(
+               rawContentStyle: FRawItemContentStyle.inherit(
                  colors: colors,
                  typography: typography,
                  prefix: colors.foreground,
                  color: colors.foreground,
-                 padding: FItemStyle.menuInsets(touch: touch).unsuffixedPadding,
+                 touch: touch,
                ),
              ),
            ),
@@ -565,7 +564,7 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
                    },
                  ),
                ),
-               rawItemContentStyle: .delta(
+               rawContentStyle: .delta(
                  prefixIconStyle: FVariants.from(
                    IconThemeData(color: colors.foreground, size: typography.md.fontSize),
                    variants: {

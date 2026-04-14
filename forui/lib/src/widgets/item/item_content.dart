@@ -7,7 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/item/render_item_content.dart';
+import 'package:forui/src/widgets/item/item_content_layout.dart';
 
 part 'item_content.design.dart';
 
@@ -56,8 +56,8 @@ class ItemContent extends StatelessWidget {
     padding: suffix == null ? style.unsuffixedPadding : style.suffixedPadding,
     top: top,
     bottom: bottom,
-    dividerColor: dividerForeground?.resolve(variants),
-    dividerBackgroundColor: dividerBackground,
+    dividerForeground: dividerForeground?.resolve(variants),
+    dividerBackground: dividerBackground,
     dividerWidth: dividerWidth,
     dividerType: dividerType,
     children: [
@@ -137,20 +137,39 @@ class ItemContent extends StatelessWidget {
 }
 
 /// An [FItem] content's style.
+///
+/// {@template forui.widgets.item.ItemContentStyle}
+/// ```diagram
+/// ┌─────────────────────────────────────────────────────────────────────────────────────────────────────┐
+/// │  ↕ suffixedPadding/unsuffixedPadding                                                                │
+/// │  [prefix] ← prefixIconSpacing → [title] ← middleSpacing → [details] ← suffixIconSpacing → [suffix]  │
+/// │                                 ↕ titleSpacing                                                      │
+/// │                                 [subtitle]                                                          │
+/// └─────────────────────────────────────────────────────────────────────────────────────────────────────┘
+/// ```
+/// {@endtemplate}
 class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
   /// The content's padding when a suffix is present.
+  ///
+  /// {@macro forui.widgets.item.ItemContentStyle}
   @override
   final EdgeInsetsGeometry suffixedPadding;
 
   /// The content's padding when no suffix is present.
+  ///
+  /// {@macro forui.widgets.item.ItemContentStyle}
   @override
   final EdgeInsetsGeometry unsuffixedPadding;
 
   /// The prefix icon style.
+  ///
+  /// {@macro forui.widgets.item.ItemContentStyle}
   @override
   final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> prefixIconStyle;
 
   /// The horizontal spacing between the prefix icon and title and the subtitle. Defaults to 8.
+  ///
+  /// {@macro forui.widgets.item.ItemContentStyle}
   ///
   /// ## Contract
   /// Throws [AssertionError] if [prefixIconSpacing] is negative.
@@ -163,6 +182,8 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
 
   /// The vertical spacing between the title and the subtitle. Defaults to 4.
   ///
+  /// {@macro forui.widgets.item.ItemContentStyle}
+  ///
   /// ## Contract
   /// Throws [AssertionError] if [titleSpacing] is negative.
   @override
@@ -173,6 +194,8 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
   final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> subtitleTextStyle;
 
   /// The minimum horizontal spacing between the title, subtitle, combined, and the details. Defaults to 4.
+  ///
+  /// {@macro forui.widgets.item.ItemContentStyle}
   ///
   /// ## Contract
   /// Throws [AssertionError] if [middleSpacing] is negative.
@@ -188,6 +211,8 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
   final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> suffixIconStyle;
 
   /// The horizontal spacing between the details and suffix icon. Defaults to 8.
+  ///
+  /// {@macro forui.widgets.item.ItemContentStyle}
   ///
   /// ## Contract
   /// Throws [AssertionError] if [suffixIconSpacing] is negative.
@@ -219,8 +244,7 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
     required Color prefix,
     required Color foreground,
     required Color mutedForeground,
-    required EdgeInsetsGeometry suffixedPadding,
-    required EdgeInsetsGeometry unsuffixedPadding,
+    required bool touch,
   }) {
     final disabledMutedForeground = colors.disable(mutedForeground);
     return FItemContentStyle(
@@ -254,8 +278,10 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
           [.disabled]: .delta(color: disabledMutedForeground),
         },
       ),
-      suffixedPadding: suffixedPadding,
-      unsuffixedPadding: unsuffixedPadding,
+      suffixedPadding: touch ? const .fromSTEB(10, 12.5, 6, 12.5) : const .fromSTEB(10, 6.5, 5, 6.5),
+      unsuffixedPadding: touch
+          ? const .symmetric(horizontal: 10, vertical: 12.5)
+          : const .symmetric(horizontal: 10, vertical: 6.5),
     );
   }
 }
