@@ -41,14 +41,9 @@ class _FNestedHeader extends FHeader {
     final alignment = titleAlignment.resolve(Directionality.maybeOf(context) ?? .ltr);
     final slidable = style.slidableActions.resolve({context.platformVariant});
 
-    Widget prefixes;
-    if (this.prefixes.isEmpty && this.suffixes.isEmpty) {
-      prefixes = SizedBox(height: style.actionStyle.iconStyle.base.size! + style.actionStyle.padding.vertical);
-    } else {
-      prefixes = Row(mainAxisSize: .min, spacing: style.actionSpacing, children: this.prefixes);
-      if (slidable) {
-        prefixes = FTappableGroup(child: prefixes);
-      }
+    Widget prefixes = Row(mainAxisSize: .min, spacing: style.actionSpacing, children: this.prefixes);
+    if (slidable) {
+      prefixes = FTappableGroup(child: prefixes);
     }
 
     Widget suffixes = Row(mainAxisSize: .min, spacing: style.actionSpacing, children: this.suffixes);
@@ -62,28 +57,31 @@ class _FNestedHeader extends FHeader {
         header: true,
         child: DecoratedBox(
           decoration: style.decoration,
-          child: Padding(
-            padding: style.padding,
-            child: FHeaderData(
-              actionStyle: style.actionStyle,
-              child: _NestedHeader(
-                alignment: alignment,
-                prefixes: prefixes,
-                title: Padding(
-                  padding: const .symmetric(horizontal: 10.0),
-                  child: DefaultTextStyle.merge(
-                    overflow: .ellipsis,
-                    maxLines: 1,
-                    softWrap: false,
-                    style: style.titleTextStyle,
-                    textHeightBehavior: const TextHeightBehavior(
-                      applyHeightToFirstAscent: false,
-                      applyHeightToLastDescent: false,
+          child: ConstrainedBox(
+            constraints: style.constraints,
+            child: Padding(
+              padding: style.padding,
+              child: FHeaderData(
+                actionStyle: style.actionStyle,
+                child: _NestedHeader(
+                  alignment: alignment,
+                  prefixes: prefixes,
+                  title: Padding(
+                    padding: const .symmetric(horizontal: 10.0),
+                    child: DefaultTextStyle.merge(
+                      overflow: .ellipsis,
+                      maxLines: 1,
+                      softWrap: false,
+                      style: style.titleTextStyle,
+                      textHeightBehavior: const TextHeightBehavior(
+                        applyHeightToFirstAscent: false,
+                        applyHeightToLastDescent: false,
+                      ),
+                      child: title,
                     ),
-                    child: title,
                   ),
+                  suffixes: suffixes,
                 ),
-                suffixes: suffixes,
               ),
             ),
           ),
@@ -165,14 +163,14 @@ class _RenderNestedHeader extends RenderBox
     prefixes.layout(constraints, parentUsesSize: true);
     suffixes.layout(constraints, parentUsesSize: true);
     title.layout(
-      constraints.copyWith(maxWidth: constraints.maxWidth - prefixes.size.width - suffixes.size.width),
+      constraints.copyWith(minHeight: 0, maxWidth: constraints.maxWidth - prefixes.size.width - suffixes.size.width),
       parentUsesSize: true,
     );
 
     final height = [title.size.height, prefixes.size.height, suffixes.size.height].reduce(max);
     size = constraints.constrain(Size(constraints.maxWidth, height));
 
-    final (left, right) = _direction == TextDirection.ltr ? (prefixes, suffixes) : (suffixes, prefixes);
+    final (left, right) = _direction == .ltr ? (prefixes, suffixes) : (suffixes, prefixes);
     left.data.offset = Offset(0, (size.height - left.size.height) / 2);
     right.data.offset = Offset(size.width - right.size.width, (size.height - right.size.height) / 2);
 
