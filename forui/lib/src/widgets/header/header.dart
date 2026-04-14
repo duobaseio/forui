@@ -207,10 +207,10 @@ class FHeaderStyle with Diagnosticable, _$FHeaderStyleFunctions {
   /// Creates a [FHeaderStyle].
   const FHeaderStyle({
     required this.systemOverlayStyle,
-    required this.constraints,
     required this.padding,
     required this.titleTextStyle,
     required this.actionStyle,
+    this.constraints = const BoxConstraints(),
     this.decoration = const BoxDecoration(),
     this.backgroundFilter,
     this.actionSpacing = 0,

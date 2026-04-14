@@ -163,7 +163,10 @@ class _RenderNestedHeader extends RenderBox
     prefixes.layout(constraints, parentUsesSize: true);
     suffixes.layout(constraints, parentUsesSize: true);
     title.layout(
-      constraints.copyWith(minHeight: 0, maxWidth: constraints.maxWidth - prefixes.size.width - suffixes.size.width),
+      constraints.copyWith(
+        minHeight: 0,
+        maxWidth: max(constraints.maxWidth - prefixes.size.width - suffixes.size.width, 0),
+      ),
       parentUsesSize: true,
     );
 
