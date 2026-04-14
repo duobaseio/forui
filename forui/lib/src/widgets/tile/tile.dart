@@ -333,7 +333,7 @@ extension type FTileStyles(FVariants<FItemVariantConstraint, FItemVariant, FTile
               foreground: colors.destructive,
               mutedForeground: colors.destructive,
             ),
-            rawItemContentStyle: FRawTileContentStyle.inherit(
+            rawContentStyle: FRawTileContentStyle.inherit(
               colors: colors,
               typography: typography,
               prefix: colors.destructive,
@@ -359,29 +359,23 @@ extension FTileStylesConversion on FVariants<FItemVariantConstraint, FItemVarian
 
 /// A [FTile]'s style.
 class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
-  /// The default padding for suffixed tiles.
-  static const EdgeInsetsGeometry defaultSuffixedPadding = .fromSTEB(15, 14.5, 13, 14.5);
-
-  /// The default padding for unsuffixed tiles.
-  static const EdgeInsetsGeometry defaultUnsuffixedPadding = .symmetric(horizontal: 15, vertical: 14.5);
-
   /// Creates a [FTileStyle].
   FTileStyle({
     required super.backgroundColor,
-    required super.decoration,
+    required super.contentDecoration,
     required super.contentStyle,
-    required super.rawItemContentStyle,
+    required super.rawContentStyle,
     required super.tappableStyle,
     required super.focusedOutlineStyle,
     required super.shape,
-    super.margin = .zero,
+    super.padding = .zero,
   });
 
   /// Creates a [FTileStyle].
   FTileStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         backgroundColor: .all(colors.card),
-        decoration: FVariants.from(
+        contentDecoration: FVariants.from(
           ShapeDecoration(
             shape: RoundedSuperellipseBorder(
               side: BorderSide(color: colors.border, width: style.borderWidth),
@@ -402,7 +396,7 @@ class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
           foreground: colors.foreground,
           mutedForeground: colors.mutedForeground,
         ),
-        rawItemContentStyle: FRawTileContentStyle.inherit(
+        rawContentStyle: FRawTileContentStyle.inherit(
           colors: colors,
           typography: typography,
           prefix: colors.primary,
@@ -427,8 +421,8 @@ class FTileContentStyle extends FItemContentStyle with _$FTileContentStyleFuncti
     required super.subtitleTextStyle,
     required super.detailsTextStyle,
     required super.suffixIconStyle,
-    super.suffixedPadding = FTileStyle.defaultSuffixedPadding,
-    super.unsuffixedPadding = FTileStyle.defaultUnsuffixedPadding,
+    super.suffixedPadding = const .fromSTEB(15, 14.5, 13, 14.5),
+    super.unsuffixedPadding = const .symmetric(horizontal: 15, vertical: 14.5),
     super.prefixIconSpacing = 10,
     super.titleSpacing = 3,
     super.middleSpacing = 4,
@@ -485,7 +479,7 @@ class FRawTileContentStyle extends FRawItemContentStyle with _$FRawTileContentSt
   FRawTileContentStyle({
     required super.prefixIconStyle,
     required super.childTextStyle,
-    super.padding = FTileStyle.defaultUnsuffixedPadding,
+    super.padding = const .symmetric(horizontal: 15, vertical: 14.5),
     super.prefixIconSpacing = 10,
   });
 

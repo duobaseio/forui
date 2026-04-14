@@ -95,6 +95,11 @@ prepare:
 		echo "$(COLOR_RED)Error: no '## $(v)' entry found in $(package)/CHANGELOG.md$(COLOR_RESET)"; \
 		exit 1; \
 	fi
+	@if grep -q "^## $(v) " "$(package)/CHANGELOG.md"; then \
+		SUFFIX=$$(grep "^## $(v) " "$(package)/CHANGELOG.md" | head -1 | sed 's/^## $(v) //'); \
+		echo "Removing suffix '$$SUFFIX' from changelog heading"; \
+		sed -i '' 's/^## $(v) .*/## $(v)/' "$(package)/CHANGELOG.md"; \
+	fi
 	@echo "$(COLOR_GREEN)✓ Changelog entry found$(COLOR_RESET)"
 	@# Step 2: Run build_runner and cli generator (forui only)
 	@if [ "$(package)" = "forui" ]; then \

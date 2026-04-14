@@ -503,11 +503,27 @@ class FItemGroupStyleData extends InheritedWidget {
 }
 
 /// An [FItemGroup]'s style.
+///
+/// {@template forui.widgets.item.FItemGroupStyle}
+/// ```diagram
+/// ┌─ decoration ───────────────────────────────┐
+/// │  ↕ spacing                                 │
+/// │  ┌─ FItemStyle ──────────────────────────┐ │
+/// │  │  item                                 │ │
+/// │  └───────────────────────────────────────┘ │
+/// │  ── dividerColor ── ↕ dividerWidth ─────── │
+/// │  ┌─ FItemStyle ──────────────────────────┐ │
+/// │  │  item                                 │ │
+/// │  └───────────────────────────────────────┘ │
+/// │  ↕ spacing                                 │
+/// └────────────────────────────────────────────┘
+/// ```
+/// {@endtemplate}
 class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
-  /// The group's decoration, painted behind all items.
+  /// The group's decoration, painted below [FItemStyle.backgroundColor] and [FItemStyle.contentDecoration].
   ///
-  /// This decoration may be obscured by individual items' [FItemStyle.backgroundColor]. To make the group decoration
-  /// visible, set item backgrounds to transparent via [itemStyles].
+  /// As it is below [FItemStyle.backgroundColor], setting a [FItemStyle.backgroundColor]/[FItemStyle.contentDecoration]
+  /// will paint over the decoration's color.
   @override
   final Decoration decoration;
 

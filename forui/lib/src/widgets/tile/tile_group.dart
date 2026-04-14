@@ -475,25 +475,22 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
               colors: colors,
               typography: typography,
               style: style,
-            ).copyWith(decoration: .delta([.all(const .shapeDelta(shape: RoundedSuperellipseBorder()))])),
+            ).copyWith(contentDecoration: .delta([.all(const .shapeDelta(shape: RoundedSuperellipseBorder()))])),
             variants: {
               [.primary]: const .delta(),
               [.destructive]: .delta(
-                contentStyle: FItemContentStyle.inherit(
+                contentStyle: FTileContentStyle.inherit(
                   colors: colors,
                   typography: typography,
                   prefix: colors.destructive,
                   foreground: colors.destructive,
                   mutedForeground: colors.destructive,
-                  suffixedPadding: FTileStyle.defaultSuffixedPadding,
-                  unsuffixedPadding: FTileStyle.defaultUnsuffixedPadding,
                 ),
-                rawItemContentStyle: FRawItemContentStyle.inherit(
+                rawContentStyle: FRawTileContentStyle.inherit(
                   colors: colors,
                   typography: typography,
                   prefix: colors.destructive,
                   color: colors.destructive,
-                  padding: FTileStyle.defaultUnsuffixedPadding,
                 ),
               ),
             },
