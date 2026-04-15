@@ -1,5 +1,9 @@
 ## 0.22.0 (Next)
 
+### `FButton`
+* Fix `FButton` announcing both `semanticsLabel` and child semantics when `semanticsLabel` is set.
+
+
 ### `FStyle` & `FThemeData`
 * Add `FThemeData.hapticFeedback`.
 
