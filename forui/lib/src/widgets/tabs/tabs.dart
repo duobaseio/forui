@@ -97,6 +97,10 @@ class FTabs extends StatefulWidget {
 
   /// Whether the tab content should expand to fill the remaining available space. Defaults to false.
   ///
+  /// Swiping/scrolling between tab content areas requires [expands] to be true and [contentPhysics] to be non-null.
+  /// [contentPhysics] defaults to [BouncingScrollPhysics], so setting [expands] to true is sufficient to enable
+  /// swipe gestures on touch devices and scroll wheel navigation on desktop.
+  ///
   /// ## Contract
   /// Throws an error if true and placed in a container with unbound height constraint, e.g. [ListView].
   final bool expands;
@@ -266,17 +270,17 @@ class _TabState extends State<_Tab> {
   }
 
   @override
+  void dispose() {
+    _focus?.removeListener(_handleFocusChange);
+    super.dispose();
+  }
+
+  void _handleFocusChange() => setState(() => _focused = _focus?.hasFocus ?? false);
+
+  @override
   Widget build(BuildContext _) => FFocusedOutline(
     style: widget.style.focusedOutlineStyle,
     focused: _focused,
     child: Tab(height: widget.style.height, child: widget.label),
   );
-
-  void _handleFocusChange() => setState(() => _focused = _focus?.hasFocus ?? false);
-
-  @override
-  void dispose() {
-    _focus?.removeListener(_handleFocusChange);
-    super.dispose();
-  }
 }
