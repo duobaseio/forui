@@ -10,6 +10,10 @@
 * **Breaking** Remove `FStyle.hapticFeedback`. Use `FThemeData.hapticFeedback` instead.
 
 
+### `FHeaderAction`
+* Fix `FHeaderAction.style` type from `FHeaderActionStyle?` to `FHeaderActionStyleDelta`.
+
+
 ### `FItem` & `FItemGroup`
 * Remove `FItemStyle.menuInsets(...)`. Use `FItemContentStyle.inherit(touch: ...)` and
   `FRawItemContentStyle.inherit(touch: ...)` instead.
