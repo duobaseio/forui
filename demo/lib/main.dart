@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/material.dart' hide Tooltip;
 import 'package:forui/forui.dart';
 
-import 'widgets/select.dart';
+import 'widgets/tooltip.dart';
 
 void main() {
   runApp(const Application());
@@ -29,7 +29,7 @@ class Application extends StatelessWidget {
         ),
       ),
       home: const FScaffold(
-        child: Select(),
+        child: Tooltip(),
       ),
     );
   }
