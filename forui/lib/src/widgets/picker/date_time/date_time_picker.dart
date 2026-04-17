@@ -309,6 +309,7 @@ class FDateTimePickerStyle extends FPickerStyle with _$FDateTimePickerStyleFunct
     required FColors colors,
     required FStyle style,
     required FTypography typography,
+    required FHapticFeedback hapticFeedback,
     required bool touch,
   }) : this(
          textStyle: touch
@@ -321,7 +322,7 @@ class FDateTimePickerStyle extends FPickerStyle with _$FDateTimePickerStyleFunct
          selectionHeightAdjustment: 5,
          spacing: 2,
          focusedOutlineStyle: style.focusedOutlineStyle,
-         hapticFeedback: style.hapticFeedback.selectionClick,
+         hapticFeedback: hapticFeedback.selectionClick,
          padding: const .only(start: 10, end: 10),
        );
 }

@@ -569,13 +569,14 @@ class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
     required FColors colors,
     required FTypography typography,
     required FStyle style,
+    required FHapticFeedback hapticFeedback,
     required bool touch,
   }) : this(
          decoration: ShapeDecoration(shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md)),
          dividerColor: .all(colors.border),
          dividerWidth: style.borderWidth,
          slideableItems: const .all(true),
-         slidePressHapticFeedback: style.hapticFeedback.selectionClick,
+         slidePressHapticFeedback: hapticFeedback.selectionClick,
          itemStyles: FItemStyles.inherit(colors: colors, typography: typography, style: style, touch: touch),
        );
 }

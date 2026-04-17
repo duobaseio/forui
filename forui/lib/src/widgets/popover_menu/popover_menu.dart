@@ -513,74 +513,83 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
     required super.colors,
     required super.style,
     required FTypography typography,
+    required FHapticFeedback hapticFeedback,
     required bool touch,
-  }) : itemGroupStyle = .inherit(colors: colors, style: style, typography: typography, touch: touch).copyWith(
-         decoration: .value(
-           ShapeDecoration(
-             color: colors.card,
-             shape: RoundedSuperellipseBorder(
-               side: BorderSide(color: colors.border, width: style.borderWidth),
-               borderRadius: style.borderRadius.md,
-             ),
-           ),
-         ),
-         itemStyles: .delta([
-           .all(
-             .delta(
-               backgroundColor: FVariants.all(colors.card),
-               contentDecoration: .delta([.base(.shapeDelta(color: colors.card))]),
-             ),
-           ),
-           .base(
-             .delta(
-               contentStyle: FItemContentStyle.inherit(
-                 colors: colors,
-                 typography: typography,
-                 prefix: colors.foreground,
-                 foreground: colors.foreground,
-                 mutedForeground: colors.mutedForeground,
-                 touch: touch,
-               ),
-               rawContentStyle: FRawItemContentStyle.inherit(
-                 colors: colors,
-                 typography: typography,
-                 prefix: colors.foreground,
-                 color: colors.foreground,
-                 touch: touch,
-               ),
-             ),
-           ),
-         ]),
-       ),
-       tileGroupStyle = .inherit(colors: colors, style: style, typography: typography).copyWith(
-         tileStyles: .delta([
-           .base(
-             .delta(
-               contentStyle: .delta(
-                 prefixIconStyle: FVariants.from(
-                   IconThemeData(color: colors.foreground, size: typography.md.fontSize),
-                   variants: {
-                     [.disabled]: .delta(color: colors.disable(colors.foreground)),
-                   },
-                 ),
-               ),
-               rawContentStyle: .delta(
-                 prefixIconStyle: FVariants.from(
-                   IconThemeData(color: colors.foreground, size: typography.md.fontSize),
-                   variants: {
-                     [.disabled]: .delta(color: colors.disable(colors.foreground)),
-                   },
+  }) : itemGroupStyle =
+           .inherit(
+             colors: colors,
+             style: style,
+             typography: typography,
+             hapticFeedback: hapticFeedback,
+             touch: touch,
+           ).copyWith(
+             decoration: .value(
+               ShapeDecoration(
+                 color: colors.card,
+                 shape: RoundedSuperellipseBorder(
+                   side: BorderSide(color: colors.border, width: style.borderWidth),
+                   borderRadius: style.borderRadius.md,
                  ),
                ),
              ),
+             itemStyles: .delta([
+               .all(
+                 .delta(
+                   backgroundColor: FVariants.all(colors.card),
+                   contentDecoration: .delta([.base(.shapeDelta(color: colors.card))]),
+                 ),
+               ),
+               .base(
+                 .delta(
+                   contentStyle: FItemContentStyle.inherit(
+                     colors: colors,
+                     typography: typography,
+                     prefix: colors.foreground,
+                     foreground: colors.foreground,
+                     mutedForeground: colors.mutedForeground,
+                     touch: touch,
+                   ),
+                   rawContentStyle: FRawItemContentStyle.inherit(
+                     colors: colors,
+                     typography: typography,
+                     prefix: colors.foreground,
+                     color: colors.foreground,
+                     touch: touch,
+                   ),
+                 ),
+               ),
+             ]),
            ),
-         ]),
-       ),
+       tileGroupStyle = .inherit(colors: colors, style: style, typography: typography, hapticFeedback: hapticFeedback)
+           .copyWith(
+             tileStyles: .delta([
+               .base(
+                 .delta(
+                   contentStyle: .delta(
+                     prefixIconStyle: FVariants.from(
+                       IconThemeData(color: colors.foreground, size: typography.md.fontSize),
+                       variants: {
+                         [.disabled]: .delta(color: colors.disable(colors.foreground)),
+                       },
+                     ),
+                   ),
+                   rawContentStyle: .delta(
+                     prefixIconStyle: FVariants.from(
+                       IconThemeData(color: colors.foreground, size: typography.md.fontSize),
+                       variants: {
+                         [.disabled]: .delta(color: colors.disable(colors.foreground)),
+                       },
+                     ),
+                   ),
+                 ),
+               ),
+             ]),
+           ),
        minWidth = 150,
        maxWidth = 250,
        hoverEnterDuration = const Duration(milliseconds: 150),
        menuMotion = const FPopoverMenuMotion(),
-       hapticFeedback = style.hapticFeedback.mediumImpact,
+       hapticFeedback = hapticFeedback.mediumImpact,
        super.inherit();
 }
 

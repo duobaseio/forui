@@ -67,6 +67,8 @@ class SwipeableTabsPage extends Example {
       height: 350,
       child: FTabs(
         // {@highlight}
+        // Swiping between tabs requires expands to be true and a non-null
+        // contentPhysics (defaults to BouncingScrollPhysics).
         expands: true,
         // {@endhighlight}
         children: [

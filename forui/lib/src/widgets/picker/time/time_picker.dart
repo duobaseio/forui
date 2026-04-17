@@ -251,6 +251,7 @@ class FTimePickerStyle extends FPickerStyle with _$FTimePickerStyleFunctions {
     required FColors colors,
     required FStyle style,
     required FTypography typography,
+    required FHapticFeedback hapticFeedback,
     required bool touch,
   }) : this(
          textStyle: touch
@@ -263,7 +264,7 @@ class FTimePickerStyle extends FPickerStyle with _$FTimePickerStyleFunctions {
          selectionHeightAdjustment: 5,
          spacing: 2,
          focusedOutlineStyle: style.focusedOutlineStyle,
-         hapticFeedback: style.hapticFeedback.selectionClick,
+         hapticFeedback: hapticFeedback.selectionClick,
          padding: const .only(start: 10, end: 10),
        );
 }
