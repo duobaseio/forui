@@ -774,9 +774,20 @@ class FSelectMenuTileStyle extends FLabelStyle with _$FSelectMenuTileStyleFuncti
     required FHapticFeedback hapticFeedback,
     required bool touch,
   }) {
-    final groupStyle = FTileGroupStyle.inherit(colors: colors, style: style, typography: typography, hapticFeedback: hapticFeedback);
+    final groupStyle = FTileGroupStyle.inherit(
+      colors: colors,
+      style: style,
+      typography: typography,
+      hapticFeedback: hapticFeedback,
+    );
     return .new(
-      menuStyle: .inherit(colors: colors, style: style, typography: typography, hapticFeedback: hapticFeedback, touch: touch),
+      menuStyle: .inherit(
+        colors: colors,
+        style: style,
+        typography: typography,
+        hapticFeedback: hapticFeedback,
+        touch: touch,
+      ),
       tileStyle: .inherit(colors: colors, typography: typography, style: style),
       labelTextStyle: groupStyle.labelTextStyle,
       descriptionTextStyle: groupStyle.descriptionTextStyle,

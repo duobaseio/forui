@@ -454,57 +454,57 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
     required FStyle style,
     required FHapticFeedback hapticFeedback,
   }) => .new(
-        decoration: ShapeDecoration(
-          shape: RoundedSuperellipseBorder(
-            side: BorderSide(color: colors.border, width: style.borderWidth),
-            borderRadius: style.borderRadius.md,
-          ),
-        ),
-        dividerColor: .all(colors.border),
-        dividerWidth: style.borderWidth,
-        slideableTiles: const .all(true),
-        slidePressHapticFeedback: hapticFeedback.selectionClick,
-        labelTextStyle: FVariants.from(
-          typography.sm.copyWith(
-            color: style.formFieldStyle.labelTextStyle.base.color ?? colors.foreground,
-            fontWeight: .w600,
-          ),
-          variants: {
-            [.disabled]: .delta(color: colors.disable(colors.foreground)),
-          },
-        ),
-        tileStyles: FTileStyles(
-          FVariants.from(
-            FTileStyle.inherit(
+    decoration: ShapeDecoration(
+      shape: RoundedSuperellipseBorder(
+        side: BorderSide(color: colors.border, width: style.borderWidth),
+        borderRadius: style.borderRadius.md,
+      ),
+    ),
+    dividerColor: .all(colors.border),
+    dividerWidth: style.borderWidth,
+    slideableTiles: const .all(true),
+    slidePressHapticFeedback: hapticFeedback.selectionClick,
+    labelTextStyle: FVariants.from(
+      typography.sm.copyWith(
+        color: style.formFieldStyle.labelTextStyle.base.color ?? colors.foreground,
+        fontWeight: .w600,
+      ),
+      variants: {
+        [.disabled]: .delta(color: colors.disable(colors.foreground)),
+      },
+    ),
+    tileStyles: FTileStyles(
+      FVariants.from(
+        FTileStyle.inherit(
+          colors: colors,
+          typography: typography,
+          style: style,
+        ).copyWith(contentDecoration: .delta([.all(const .shapeDelta(shape: RoundedSuperellipseBorder()))])),
+        variants: {
+          [.primary]: const .delta(),
+          [.destructive]: .delta(
+            contentStyle: FTileContentStyle.inherit(
               colors: colors,
               typography: typography,
-              style: style,
-            ).copyWith(contentDecoration: .delta([.all(const .shapeDelta(shape: RoundedSuperellipseBorder()))])),
-            variants: {
-              [.primary]: const .delta(),
-              [.destructive]: .delta(
-                contentStyle: FTileContentStyle.inherit(
-                  colors: colors,
-                  typography: typography,
-                  prefix: colors.destructive,
-                  foreground: colors.destructive,
-                  mutedForeground: colors.destructive,
-                ),
-                rawContentStyle: FRawTileContentStyle.inherit(
-                  colors: colors,
-                  typography: typography,
-                  prefix: colors.destructive,
-                  color: colors.destructive,
-                ),
-              ),
-            },
+              prefix: colors.destructive,
+              foreground: colors.destructive,
+              mutedForeground: colors.destructive,
+            ),
+            rawContentStyle: FRawTileContentStyle.inherit(
+              colors: colors,
+              typography: typography,
+              prefix: colors.destructive,
+              color: colors.destructive,
+            ),
           ),
-        ),
-        descriptionTextStyle: style.formFieldStyle.descriptionTextStyle.apply([
-          .all(.delta(fontSize: typography.xs2.fontSize, height: typography.xs2.height)),
-        ]),
-        errorTextStyle: style.formFieldStyle.errorTextStyle.apply([
-          .all(.delta(fontSize: typography.xs2.fontSize, height: typography.xs2.height)),
-        ]),
-      );
+        },
+      ),
+    ),
+    descriptionTextStyle: style.formFieldStyle.descriptionTextStyle.apply([
+      .all(.delta(fontSize: typography.xs2.fontSize, height: typography.xs2.height)),
+    ]),
+    errorTextStyle: style.formFieldStyle.errorTextStyle.apply([
+      .all(.delta(fontSize: typography.xs2.fontSize, height: typography.xs2.height)),
+    ]),
+  );
 }
