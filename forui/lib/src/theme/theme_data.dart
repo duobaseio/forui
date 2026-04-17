@@ -1404,9 +1404,6 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   FThemeData copyWith({
     String? debugLabel,
     FBreakpoints? breakpoints,
-    FColors? colors,
-    FTypography? typography,
-    FStyleDelta? style,
     FAccordionStyleDelta? accordionStyle,
     FAutocompleteStyleDelta? autocompleteStyle,
     FVariantsDelta<FAlertVariantConstraint, FAlertVariant, FAlertStyle, FAlertStyleDelta>? alertStyles,
@@ -1473,13 +1470,13 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FTooltipStyleDelta? tooltipStyle,
     Iterable<ThemeExtension<dynamic>>? extensions,
   }) => FThemeData(
-    // This does not affect anything since it's only used to configure null parameters, and parameters are never null.
     touch: true,
     debugLabel: debugLabel ?? this.debugLabel,
     breakpoints: breakpoints ?? this.breakpoints,
-    colors: colors ?? this.colors,
-    typography: typography ?? this.typography,
-    style: style?.call(this.style) ?? this.style,
+    colors: colors,
+    typography: typography,
+    style: style,
+    hapticFeedback: hapticFeedback,
     accordionStyle: accordionStyle?.call(this.accordionStyle) ?? this.accordionStyle,
     autocompleteStyle: autocompleteStyle?.call(this.autocompleteStyle) ?? this.autocompleteStyle,
     alertStyles: alertStyles == null ? this.alertStyles : FAlertStyles(alertStyles(this.alertStyles)),

@@ -8,6 +8,8 @@
 * Add `FThemeData.hapticFeedback`.
 
 * **Breaking** Remove `FStyle.hapticFeedback`. Use `FThemeData.hapticFeedback` instead.
+* **Breaking** Remove `colors`, `typography`, and `style` parameters from `FThemeData.copyWith`. Rebuild `FThemeData`
+  directly to change these.
 
 
 ### `FHeaderAction`

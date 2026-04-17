@@ -1,7 +1,7 @@
 version: 1
 transforms:
   # FStyle
-  - title: "Remove FStyle(hapticFeedback: ...). Pass hapticFeedback to FThemeData instead."
+  - title: "Remove FStyle(hapticFeedback: ...)."
     date: 2026-04-14
     element:
       uris: [ 'package:forui/forui.dart' ]
