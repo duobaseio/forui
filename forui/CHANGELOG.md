@@ -1,5 +1,20 @@
 ## 0.22.0 (Next)
 
+### `FButton`
+* Fix `FButton` announcing both `semanticsLabel` and child semantics when `semanticsLabel` is set.
+
+
+### `FStyle` & `FThemeData`
+* Add `FThemeData.hapticFeedback`.
+
+* **Breaking** Remove `FStyle.hapticFeedback`. Use `FThemeData.hapticFeedback` instead.
+* **Breaking** Remove `colors`, `typography`, and `style` parameters from `FThemeData.copyWith`. Rebuild `FThemeData`
+  directly to change these.
+
+
+### `FHeaderAction`
+* Fix `FHeaderAction.style` type from `FHeaderActionStyle?` to `FHeaderActionStyleDelta`.
+
 
 ### `FItem` & `FItemGroup`
 * Remove `FItemStyle.menuInsets(...)`. Use `FItemContentStyle.inherit(touch: ...)` and

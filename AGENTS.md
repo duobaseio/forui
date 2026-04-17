@@ -48,6 +48,9 @@ Within each widget section, order entries as follows:
 
 Separate each category with a blank line. Breaking changes must start with `**Breaking**`.
 
+Keep entries terse — one line stating what changed, no prose explaining why/how/when. Save context for the PR
+description or dartdocs.
+
 Example:
 ```markdown
 ### `FButton`

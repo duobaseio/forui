@@ -85,6 +85,11 @@ class FStyle {
     +FStyle(...)
 }
 
+class FHapticFeedback {
+    +FHapticFeedback(...)
+    +FHapticFeedback.none()
+}
+
 class FAccordionStyle {
     +FAccordionStyle(...)
     +FAccordionStyle.inherit(colors, typography, style)
@@ -109,18 +114,20 @@ FTheme --> FThemeData
 FThemeData --> FColors
 FThemeData --> FTypography
 FThemeData --> FStyle
+FThemeData --> FHapticFeedback
 FThemeData --> FAccordionStyle
 FThemeData --> FVariants
 FAccordionStyle --> FAccordionMotion
 ```
 
-There are **7** core components in Forui's theming system.
+There are **8** core components in Forui's theming system.
 
 - **[`FTheme`](https://pub.dev/documentation/forui/latest/forui.theme/FTheme-class.html)**: The root widget that provides the theme data to all widgets in the subtree.
 - **[`FThemeData`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData-class.html)**: Main class that holds:
   - **[`FColors`](https://pub.dev/documentation/forui/latest/forui.theme/FColors-class.html)**: Color scheme including primary, foreground, and background colors.
   - **[`FTypography`](https://pub.dev/documentation/forui/latest/forui.theme/FTypography-class.html)**: Typography settings including font family and text styles.
   - **[`FStyle`](https://pub.dev/documentation/forui/latest/forui.theme/FStyle-class.html)**: Misc. options such as border radius and icon size.
+  - **[`FHapticFeedback`](https://pub.dev/documentation/forui/latest/forui.theme/FHapticFeedback-class.html)**: Haptic feedback callbacks shared across widgets.
   - **[`FVariants`](https://pub.dev/documentation/forui/latest/forui.theme/FVariants-class.html)**: Maps variant constraints, e.g. hovered and pressed, to
     values.
   - Individual widget styles.
@@ -174,6 +181,12 @@ method is provided to quickly scale all the font sizes.
 The `FStyle` class defines the theme's miscellaneous styling options such as the default border radius and icon size.
 
 <CodeSnippet snippet={styleSnippet} />
+
+### Haptic Feedback
+
+The `FHapticFeedback` class holds the haptic callbacks (e.g. `selectionClick`, `mediumImpact`) that widgets such as
+`FPicker`, `FSlider`, and `FTooltip` invoke on interaction. Override it on `FThemeData` to customize or disable haptics
+across the entire theme; pass `const FHapticFeedback.none()` to disable them.
 
 ### Variants
 

@@ -24,11 +24,17 @@ extension type FSliderStyles(
 )
     implements FVariants<FSliderAxisVariantConstraint, FSliderAxisVariant, FSliderStyle, FSliderStyleDelta> {
   /// Creates a [FSliderStyles] that inherits its properties.
-  factory FSliderStyles.inherit({required FColors colors, required FTypography typography, required FStyle style}) {
+  factory FSliderStyles.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+    required FHapticFeedback hapticFeedback,
+  }) {
     final base = FSliderStyle.inherit(
       colors: colors,
       typography: typography,
       style: style,
+      hapticFeedback: hapticFeedback,
       labelAnchor: .topCenter,
       labelOffset: 10,
       descriptionPadding: const .only(top: 10),
@@ -154,6 +160,7 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
     required FColors colors,
     required FTypography typography,
     required FStyle style,
+    required FHapticFeedback hapticFeedback,
     required AlignmentGeometry labelAnchor,
     required double labelOffset,
     required EdgeInsetsGeometry descriptionPadding,
@@ -184,7 +191,7 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
            labelAnchor: labelAnchor,
            labelOffset: labelOffset,
          ),
-         tooltipStyle: .inherit(colors: colors, typography: typography, style: style),
+         tooltipStyle: .inherit(colors: colors, typography: typography, style: style, hapticFeedback: hapticFeedback),
          tooltipTipAnchor: tooltipTipAnchor,
          tooltipThumbAnchor: tooltipThumbAnchor,
          labelTextStyle: style.formFieldStyle.labelTextStyle,

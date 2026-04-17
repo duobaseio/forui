@@ -22,7 +22,7 @@ class FHeaderAction extends StatelessWidget {
   /// ```shell
   /// dart run forui style create header-action
   /// ```
-  final FHeaderActionStyle? style;
+  final FHeaderActionStyleDelta style;
 
   /// {@macro forui.foundation.doc_templates.semanticsLabel}
   final String? semanticsLabel;
@@ -73,7 +73,7 @@ class FHeaderAction extends StatelessWidget {
   const FHeaderAction({
     required this.icon,
     required this.onPress,
-    this.style,
+    this.style = const .context(),
     this.semanticsLabel,
     this.selected = false,
     this.autofocus = false,
@@ -93,7 +93,7 @@ class FHeaderAction extends StatelessWidget {
   /// Creates a [FHeaderAction] with `FIcons.arrowLeft`.
   factory FHeaderAction.back({
     required VoidCallback? onPress,
-    FHeaderActionStyle? style,
+    FHeaderActionStyleDelta style = const .context(),
     String? semanticsLabel,
     bool autofocus = false,
     FocusNode? focusNode,
@@ -129,7 +129,7 @@ class FHeaderAction extends StatelessWidget {
   /// Creates a [FHeaderAction] with `FIcons.x`.
   factory FHeaderAction.x({
     required VoidCallback? onPress,
-    FHeaderActionStyle? style,
+    FHeaderActionStyleDelta style = const .context(),
     bool autofocus = false,
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
@@ -162,7 +162,7 @@ class FHeaderAction extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final style = this.style ?? FHeaderData.of(context).actionStyle;
+    final style = this.style(FHeaderData.of(context).actionStyle);
     return FTappable(
       style: style.tappableStyle,
       autofocus: autofocus,
