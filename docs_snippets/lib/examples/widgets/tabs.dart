@@ -70,7 +70,6 @@ class SwipeableTabsPage extends Example {
         // Swiping between tabs requires expands to be true and a non-null
         // contentPhysics (defaults to BouncingScrollPhysics).
         expands: true,
-        contentPhysics: const BouncingScrollPhysics(),
         // {@endhighlight}
         children: [
           .entry(
