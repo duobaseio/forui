@@ -180,19 +180,15 @@ release:
 		exit 1; \
 	fi
 	@echo "$(COLOR_GREEN)✓ Changelog entry found$(COLOR_RESET)"
-	@# Step 2: Validate branch
+	@# Step 2: Validate HEAD is on main
 	@echo ""
-	@echo "$(COLOR_BLUE)Checking branch$(COLOR_RESET)"
+	@echo "$(COLOR_BLUE)Checking HEAD is on main$(COLOR_RESET)"
 	@git fetch origin main --quiet
-	@if [ "$$(git branch --show-current)" != "main" ]; then \
-		echo "$(COLOR_RED)Error: must be on the main branch$(COLOR_RESET)"; \
+	@if ! git merge-base --is-ancestor HEAD origin/main; then \
+		echo "$(COLOR_RED)Error: HEAD must be a commit on origin/main (ancestor of or equal to origin/main)$(COLOR_RESET)"; \
 		exit 1; \
 	fi
-	@if [ "$$(git rev-parse HEAD)" != "$$(git rev-parse origin/main)" ]; then \
-		echo "$(COLOR_RED)Error: local main is not up to date with origin/main$(COLOR_RESET)"; \
-		exit 1; \
-	fi
-	@echo "$(COLOR_GREEN)✓ On main, up to date with origin$(COLOR_RESET)"
+	@echo "$(COLOR_GREEN)✓ HEAD is on origin/main$(COLOR_RESET)"
 	@# Step 3: Extract changelog, tag, and create release
 	@PREV_TAG=$$(git tag -l '$(package)/*' --sort=-v:refname | grep -v '^$(package)/$(v)$$' | head -1); \
 	NOTES=$$(sed -n '/^## $(v)/,/^## /{/^## $(v)/d;/^## /d;p;}' "$(package)/CHANGELOG.md" | sed '1{/^$$/d;}' | sed '$${/^$$/d;}'); \

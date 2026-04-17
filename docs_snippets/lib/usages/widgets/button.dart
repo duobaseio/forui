@@ -22,6 +22,7 @@ final button = FButton(
   textBaseline: null,
   // {@endcategory}
   // {@category "Accessibility"}
+  semanticsLabel: null,
   autofocus: false,
   focusNode: null,
   onFocusChange: (focused) {},
@@ -53,6 +54,7 @@ final icon = FButton.icon(
   size: .md,
   // {@endcategory}
   // {@category "Accessibility"}
+  semanticsLabel: null,
   autofocus: false,
   focusNode: null,
   onFocusChange: (focused) {},
@@ -84,6 +86,7 @@ final raw = FButton.raw(
   size: .md,
   // {@endcategory}
   // {@category "Accessibility"}
+  semanticsLabel: null,
   autofocus: false,
   focusNode: null,
   onFocusChange: (focused) {},

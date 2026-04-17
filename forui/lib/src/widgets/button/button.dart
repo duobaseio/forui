@@ -119,6 +119,9 @@ class FButton extends StatelessWidget {
   /// {@macro forui.foundation.FTappable.onSecondaryLongPress}
   final VoidCallback? onSecondaryLongPress;
 
+  /// {@macro forui.foundation.doc_templates.semanticsLabel}
+  final String? semanticsLabel;
+
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
 
@@ -175,6 +178,7 @@ class FButton extends StatelessWidget {
     this.onDoubleTap,
     this.onSecondaryPress,
     this.onSecondaryLongPress,
+    this.semanticsLabel,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
@@ -224,6 +228,7 @@ class FButton extends StatelessWidget {
     this.onDoubleTap,
     this.onSecondaryPress,
     this.onSecondaryLongPress,
+    this.semanticsLabel,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
@@ -249,6 +254,7 @@ class FButton extends StatelessWidget {
     this.onDoubleTap,
     this.onSecondaryPress,
     this.onSecondaryLongPress,
+    this.semanticsLabel,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
@@ -280,6 +286,8 @@ class FButton extends StatelessWidget {
       onSecondaryPress: onSecondaryPress,
       onSecondaryLongPress: onSecondaryLongPress,
       selected: selected,
+      semanticsLabel: semanticsLabel,
+      excludeSemantics: semanticsLabel != null,
       builder: (_, variants, _) => DecoratedBox(
         decoration: style.decoration.resolve(variants),
         child: FButtonData(style: style, variants: variants, child: child),
@@ -299,6 +307,7 @@ class FButton extends StatelessWidget {
       ..add(ObjectFlagProperty.has('onDoubleTap', onDoubleTap))
       ..add(ObjectFlagProperty.has('onSecondaryPress', onSecondaryPress))
       ..add(ObjectFlagProperty.has('onSecondaryLongPress', onSecondaryLongPress))
+      ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(FlagProperty('autofocus', value: autofocus, defaultValue: false, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))

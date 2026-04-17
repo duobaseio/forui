@@ -84,8 +84,9 @@ class FTabs extends StatefulWidget {
   /// Defaults to matching platform conventions.
   final ScrollPhysics? physics;
 
-  /// The physics for scrolling between tab content areas horizontally using a scroll wheel on desktop and swipe
-  /// gestures on touch devices. Ignored if [expands] is false. Defaults to [BouncingScrollPhysics].
+  /// The physics for swipe gestures between tab content areas on touch devices, and scroll wheel navigation on desktop.
+  /// Use [NeverScrollableScrollPhysics] to disable the interaction. Ignored if [expands] is false. Defaults to
+  /// [BouncingScrollPhysics].
   final ScrollPhysics contentPhysics;
 
   /// A callback that is triggered when a tab is pressed. It is called **before** the tab switching animation begins
@@ -96,6 +97,9 @@ class FTabs extends StatefulWidget {
   final MouseCursor mouseCursor;
 
   /// Whether the tab content should expand to fill the remaining available space. Defaults to false.
+  ///
+  /// When true, swipe gestures on touch devices and scroll wheel navigation on desktop switch between tabs. Use
+  /// [contentPhysics] to customize or disable that interaction.
   ///
   /// ## Contract
   /// Throws an error if true and placed in a container with unbound height constraint, e.g. [ListView].
@@ -266,17 +270,17 @@ class _TabState extends State<_Tab> {
   }
 
   @override
+  void dispose() {
+    _focus?.removeListener(_handleFocusChange);
+    super.dispose();
+  }
+
+  void _handleFocusChange() => setState(() => _focused = _focus?.hasFocus ?? false);
+
+  @override
   Widget build(BuildContext _) => FFocusedOutline(
     style: widget.style.focusedOutlineStyle,
     focused: _focused,
     child: Tab(height: widget.style.height, child: widget.label),
   );
-
-  void _handleFocusChange() => setState(() => _focused = _focus?.hasFocus ?? false);
-
-  @override
-  void dispose() {
-    _focus?.removeListener(_handleFocusChange);
-    super.dispose();
-  }
 }
