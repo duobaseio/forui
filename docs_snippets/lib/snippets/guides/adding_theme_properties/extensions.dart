@@ -10,8 +10,6 @@ final theme =
       colors: FThemes.neutral.light.touch.colors,
       // ... other theme properties
       touch: true,
-      extensions: [
-        const BrandStyle(color: Color(0xFF6366F1), borderRadius: .all(.circular(8))),
-      ],
+      extensions: [const BrandStyle(color: Color(0xFF6366F1), borderRadius: .all(.circular(8)))],
     );
 // {@endsnippet}
