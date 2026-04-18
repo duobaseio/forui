@@ -15,7 +15,9 @@ class FPaginationController extends ValueNotifier<int> {
   /// Creates a [FPaginationController].
   ///
   /// # Contract:
-  /// * Throws [AssertionError] if 0 <= [page] and [page] < [pages].
+  /// * Throws [AssertionError] if [pages] <= 0.
+  /// * Throws [AssertionError] if [siblings] < 0.
+  /// * Throws [AssertionError] if [page] is not in the range `0 <= page < pages`.
   FPaginationController({required int pages, int page = 0, int siblings = 1, bool showEdges = true})
     : assert(0 < pages, 'pages ($pages) should be > 0'),
       assert(0 <= siblings, 'siblings ($siblings) >= 0'),
@@ -152,6 +154,9 @@ class _ProxyController extends FPaginationController {
     : super(page: _unsynced, pages: pages, siblings: siblings, showEdges: showEdges);
 
   void update(int page, ValueChanged<int> onChange, int pages, int siblings, bool showEdges) {
+    assert(0 < pages, 'pages ($pages) should be > 0');
+    assert(0 <= siblings, 'siblings ($siblings) >= 0');
+    assert(0 <= page && page < pages, 'page ($page) must be between 0 and pages ($pages), exclusive.');
     final changed = _pages != pages || _siblings != siblings || _showEdges != showEdges;
     _onChange = onChange;
     _pages = pages;
