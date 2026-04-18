@@ -242,9 +242,9 @@ final class FTypography with Diagnosticable {
     xl6: .lerp(a.xl6, b.xl6, t)!,
     xl7: .lerp(a.xl7, b.xl7, t)!,
     xl8: .lerp(a.xl8, b.xl8, t)!,
-    extensions: (a._extensions.map((id, extensionA) => MapEntry(id, extensionA.lerp(b._extensions[id], t)))
-          ..addEntries(b._extensions.entries.where((entry) => !a._extensions.containsKey(entry.key))))
-        .values,
+    extensions: (a._extensions.map(
+      (id, extensionA) => MapEntry(id, extensionA.lerp(b._extensions[id], t)),
+    )..addEntries(b._extensions.entries.where((entry) => !a._extensions.containsKey(entry.key)))).values,
   );
 
   /// Scales this [FTypography] by [sizeScalar].

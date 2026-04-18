@@ -17,8 +17,7 @@ class _Marker extends ThemeExtension<_Marker> {
   _Marker copyWith({String? id}) => _Marker(id ?? this.id);
 
   @override
-  _Marker lerp(ThemeExtension<_Marker>? other, double t) =>
-      t < 0.5 ? this : (other as _Marker? ?? this);
+  _Marker lerp(ThemeExtension<_Marker>? other, double t) => t < 0.5 ? this : (other as _Marker? ?? this);
 
   @override
   bool operator ==(Object other) => identical(this, other) || other is _Marker && id == other.id;

@@ -15,15 +15,13 @@ class _Marker extends FTypographyExtension<_Marker> {
   _Marker copyWith({String? id, double? size}) => _Marker(id ?? this.id, size: size ?? this.size);
 
   @override
-  _Marker lerp(ThemeExtension<_Marker>? other, double t) =>
-      t < 0.5 ? this : (other as _Marker? ?? this);
+  _Marker lerp(ThemeExtension<_Marker>? other, double t) => t < 0.5 ? this : (other as _Marker? ?? this);
 
   @override
   _Marker scale({double sizeScalar = 1.0}) => _Marker(id, size: size * sizeScalar);
 
   @override
-  bool operator ==(Object other) =>
-      identical(this, other) || other is _Marker && id == other.id && size == other.size;
+  bool operator ==(Object other) => identical(this, other) || other is _Marker && id == other.id && size == other.size;
 
   @override
   int get hashCode => id.hashCode ^ size.hashCode;
