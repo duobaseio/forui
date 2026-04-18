@@ -31,6 +31,10 @@
 * **Breaking** Rename `FItemStyle.decoration` to `FItemStyle.contentDecoration`.
 
 
+### `FPagination`
+* Add settable `FPaginationController.pages`, `FPaginationController.siblings`, and `FPaginationController.showEdges`.
+
+
 ## 0.21.1
 
 ### `FHeader`
