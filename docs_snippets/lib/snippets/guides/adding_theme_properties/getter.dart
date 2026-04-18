@@ -1,10 +1,10 @@
 import 'package:forui/forui.dart';
 
-import 'package:docs_snippets/snippets/guides/adding_theme_properties/brand_color.dart';
+import 'package:docs_snippets/snippets/guides/adding_theme_properties/brand_style.dart';
 
 // {@snippet}
-extension BrandColorExtension on FThemeData {
-  BrandColor get brand => extension<BrandColor>();
+extension BrandStyleExtension on FThemeData {
+  BrandStyle get brand => extension<BrandStyle>();
 }
 
 // {@endsnippet}

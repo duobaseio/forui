@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 import 'package:meta/meta.dart';
 
@@ -139,6 +139,8 @@ final class FTypography with Diagnosticable {
   /// * Touch — `fontSize` = 108, `height` = 1.
   final TextStyle xl8;
 
+  final Map<Object, FTypographyExtension<dynamic>> _extensions;
+
   /// Creates a [FTypography] that defaults to touch font sizes.
   FTypography({
     this.fontFamily = FTypography.defaultFontFamily,
@@ -156,6 +158,7 @@ final class FTypography with Diagnosticable {
     TextStyle? xl6,
     TextStyle? xl7,
     TextStyle? xl8,
+    Iterable<FTypographyExtension<dynamic>> extensions = const [],
   }) : xs3 = xs3 ?? TextStyle(fontFamily: fontFamily, fontSize: 10, height: 1, leadingDistribution: .even),
        xs2 = xs2 ?? TextStyle(fontFamily: fontFamily, fontSize: 12, height: 1, leadingDistribution: .even),
        xs = xs ?? TextStyle(fontFamily: fontFamily, fontSize: 14, height: 1.25, leadingDistribution: .even),
@@ -170,6 +173,7 @@ final class FTypography with Diagnosticable {
        xl6 = xl6 ?? TextStyle(fontFamily: fontFamily, fontSize: 72, height: 1, leadingDistribution: .even),
        xl7 = xl7 ?? TextStyle(fontFamily: fontFamily, fontSize: 96, height: 1, leadingDistribution: .even),
        xl8 = xl8 ?? TextStyle(fontFamily: fontFamily, fontSize: 108, height: 1, leadingDistribution: .even),
+       _extensions = {for (final extension in extensions) extension.type: extension},
        assert(fontFamily.isNotEmpty, 'fontFamily ($fontFamily) should not be empty.');
 
   /// Creates a [FTypography] that inherits its properties.
@@ -238,9 +242,12 @@ final class FTypography with Diagnosticable {
     xl6: .lerp(a.xl6, b.xl6, t)!,
     xl7: .lerp(a.xl7, b.xl7, t)!,
     xl8: .lerp(a.xl8, b.xl8, t)!,
+    extensions: (a._extensions.map(
+      (id, extensionA) => MapEntry(id, extensionA.lerp(b._extensions[id], t)),
+    )..addEntries(b._extensions.entries.where((entry) => !a._extensions.containsKey(entry.key)))).values,
   );
 
-  /// Scales the fields of this [FTypography] by the given fields.
+  /// Scales this [FTypography] by [sizeScalar].
   ///
   /// ```dart
   /// const typography = FTypography(
@@ -270,6 +277,7 @@ final class FTypography with Diagnosticable {
     xl6: _scaleTextStyle(style: xl6, sizeScalar: sizeScalar),
     xl7: _scaleTextStyle(style: xl7, sizeScalar: sizeScalar),
     xl8: _scaleTextStyle(style: xl8, sizeScalar: sizeScalar),
+    extensions: [for (final extension in _extensions.values) extension.scale(sizeScalar: sizeScalar)],
   );
 
   // default font size: https://api.flutter.dev/flutter/painting/TextStyle/fontSize.html
@@ -309,6 +317,7 @@ final class FTypography with Diagnosticable {
     TextStyle? xl6,
     TextStyle? xl7,
     TextStyle? xl8,
+    Iterable<FTypographyExtension<dynamic>>? extensions,
   }) => FTypography(
     fontFamily: fontFamily,
     xs3: xs3 ?? this.xs3,
@@ -325,7 +334,67 @@ final class FTypography with Diagnosticable {
     xl6: xl6 ?? this.xl6,
     xl7: xl7 ?? this.xl7,
     xl8: xl8 ?? this.xl8,
+    extensions: extensions ?? _extensions.values,
   );
+
+  /// Obtains a particular [ThemeExtension].
+  ///
+  /// {@template forui.theme.FTypography.extension}
+  /// ## Creating and passing a [FTypographyExtension] to [FTypography]
+  /// ```dart
+  /// class BrandTypography extends FTypographyExtension<BrandTypography> {
+  ///   final TextStyle display;
+  ///
+  ///   const BrandTypography({required this.display});
+  ///
+  ///   @override
+  ///   BrandTypography copyWith({TextStyle? display}) => BrandTypography(display: display ?? this.display);
+  ///
+  ///   @override
+  ///   BrandTypography lerp(BrandTypography? other, double t) {
+  ///     if (other is! BrandTypography) return this;
+  ///     return BrandTypography(display: TextStyle.lerp(display, other.display, t)!);
+  ///   }
+  ///
+  ///   @override
+  ///   BrandTypography scale({double sizeScalar = 1.0}) =>
+  ///       BrandTypography(display: display.copyWith(fontSize: (display.fontSize ?? 14) * sizeScalar));
+  /// }
+  /// ```
+  ///
+  /// Passing it via constructor:
+  /// ```dart
+  /// final typography = FTypography(
+  ///   extensions: [BrandTypography(display: TextStyle(fontSize: 32, fontWeight: .bold))],
+  ///   ... // other fields omitted for brevity
+  /// );
+  /// ```
+  ///
+  /// Passing it via [copyWith]:
+  /// ```dart
+  /// typography.copyWith(extensions: [
+  ///   BrandTypography(display: TextStyle(fontSize: 32, fontWeight: .bold)),
+  /// ]);
+  /// ```
+  ///
+  /// ## Accessing the extension
+  /// ```dart
+  /// final brand = context.theme.typography.extension<BrandTypography>();
+  /// ```
+  ///
+  /// It is recommended to define a getter for your [FTypographyExtension]:
+  /// ```dart
+  /// extension FTypographyBrandTypography on FTypography {
+  ///   BrandTypography get brand => extension<BrandTypography>();
+  /// }
+  /// ```
+  /// {@endtemplate}
+  T extension<T extends Object>() => _extensions[T]! as T;
+
+  /// All [ThemeExtension]s defined in this typography.
+  ///
+  /// {@macro forui.theme.FTypography.extension}
+  Set<ThemeExtension<dynamic>> get extensions => _extensions.values.toSet();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -345,7 +414,8 @@ final class FTypography with Diagnosticable {
       ..add(DiagnosticsProperty('xl5', xl5))
       ..add(DiagnosticsProperty('xl6', xl6))
       ..add(DiagnosticsProperty('xl7', xl7))
-      ..add(DiagnosticsProperty('xl8', xl8));
+      ..add(DiagnosticsProperty('xl8', xl8))
+      ..add(IterableProperty('extensions', extensions));
   }
 
   @override
@@ -367,7 +437,8 @@ final class FTypography with Diagnosticable {
           xl5 == other.xl5 &&
           xl6 == other.xl6 &&
           xl7 == other.xl7 &&
-          xl8 == other.xl8;
+          xl8 == other.xl8 &&
+          mapEquals(_extensions, other._extensions);
 
   @override
   int get hashCode =>
@@ -385,5 +456,38 @@ final class FTypography with Diagnosticable {
       xl5.hashCode ^
       xl6.hashCode ^
       xl7.hashCode ^
-      xl8.hashCode;
+      xl8.hashCode ^
+      Object.hashAllUnordered(_extensions.values);
+}
+
+/// A [ThemeExtension] for typography tokens.
+abstract class FTypographyExtension<T extends FTypographyExtension<T>> extends ThemeExtension<T> {
+  /// Creates a [FTypographyExtension].
+  const FTypographyExtension();
+
+  @override
+  FTypographyExtension<T> copyWith();
+
+  @override
+  FTypographyExtension<T> lerp(FTypographyExtension<T>? other, double t);
+
+  /// Scales this [FTypographyExtension] by [sizeScalar].
+  ///
+  /// Invoked by [FTypography.scale] for every attached extension so that custom tokens scale alongside the
+  /// built‑in font sizes.
+  ///
+  /// ```dart
+  /// class BrandTypography extends FTypographyExtension<BrandTypography> {
+  ///   final TextStyle display;
+  ///
+  ///   const BrandTypography({required this.display});
+  ///
+  ///   @override
+  ///   BrandTypography scale({double sizeScalar = 1.0}) =>
+  ///       BrandTypography(display: display.copyWith(fontSize: (display.fontSize ?? 14) * sizeScalar));
+  ///
+  ///   // copyWith / lerp omitted for brevity
+  /// }
+  /// ```
+  FTypographyExtension<T> scale({double sizeScalar = 1.0});
 }

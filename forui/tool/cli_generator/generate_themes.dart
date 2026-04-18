@@ -86,7 +86,7 @@ Map<(String, String?), String> mapThemes(ThemesConstructors themes) {
           // Change this to false to generate a desktop variant of the theme.
           const touch = true;
           
-          const colors = ${constructor.colors.startsWith('const ') ? constructor.colors.replaceFirst('const ', '') : constructor.colors};
+          final colors = ${constructor.colors.startsWith('const ') ? constructor.colors.replaceFirst('const ', '') : constructor.colors};
           
           final typography = _typography(colors: colors, touch: touch);
           final style = _style(colors: colors, typography: typography, touch: touch);
@@ -163,7 +163,7 @@ class _ColorsVisitor extends RecursiveAstVisitor<void> {
 
     for (final variable in field.fields.variables) {
       if (variable.initializer != null) {
-        colors[variable.name.lexeme] = variable.initializer!.toSource();
+        colors[variable.name.lexeme] = variable.initializer!.toSource().replaceAll('FColors._', 'FColors');
       }
     }
   }

@@ -4,7 +4,7 @@ description: Extend Forui themes with application-specific properties using Flut
 ---
 
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
-import brandColorSnippet from '@/snippets/snippets/guides/adding_theme_properties/brand_color.json';
+import brandStyleSnippet from '@/snippets/snippets/guides/adding_theme_properties/brand_style.json';
 import extensionsSnippet from '@/snippets/snippets/guides/adding_theme_properties/extensions.json';
 import getterSnippet from '@/snippets/snippets/guides/adding_theme_properties/getter.json';
 import accessPropertiesSnippet from '@/snippets/snippets/guides/adding_theme_properties/access_properties.json';
@@ -17,7 +17,7 @@ system.
 
 Theme extensions must extend `ThemeExtension` and implement `copyWith()` and `lerp()`.
 
-<CodeSnippet snippet={brandColorSnippet} />
+<CodeSnippet snippet={brandStyleSnippet} />
 
 Add the extension to `FThemeData(...)` via its `extensions` parameter:
 

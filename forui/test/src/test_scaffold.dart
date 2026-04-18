@@ -45,25 +45,25 @@ extension WidgetTesters on WidgetTester {
 
 class TestScaffold extends StatelessWidget {
   static final blueScreen = () {
-    const colors = FColors(
+    final colors = FColors(
       brightness: .light,
       systemOverlayStyle: .dark,
-      barrier: Color(0xFF03A9F4),
-      background: Color(0xFF03A9F4),
-      foreground: Color(0xFF03A9F4),
+      barrier: const Color(0xFF03A9F4),
+      background: const Color(0xFF03A9F4),
+      foreground: const Color(0xFF03A9F4),
 
-      primary: Color(0xFF03A9F4),
-      primaryForeground: Color(0xFF03A9F4),
-      secondary: Color(0xFF03A9F4),
-      secondaryForeground: Color(0xFF03A9F4),
-      muted: Color(0xFF03A9F4),
-      mutedForeground: Color(0xFF03A9F4),
-      destructive: Color(0xFF03A9F4),
-      destructiveForeground: Color(0xFF03A9F4),
-      error: Color(0xFF03A9F4),
-      errorForeground: Color(0xFF03A9F4),
-      card: Color(0xFF03A9F4),
-      border: Color(0xFF03A9F4),
+      primary: const Color(0xFF03A9F4),
+      primaryForeground: const Color(0xFF03A9F4),
+      secondary: const Color(0xFF03A9F4),
+      secondaryForeground: const Color(0xFF03A9F4),
+      muted: const Color(0xFF03A9F4),
+      mutedForeground: const Color(0xFF03A9F4),
+      destructive: const Color(0xFF03A9F4),
+      destructiveForeground: const Color(0xFF03A9F4),
+      error: const Color(0xFF03A9F4),
+      errorForeground: const Color(0xFF03A9F4),
+      card: const Color(0xFF03A9F4),
+      border: const Color(0xFF03A9F4),
     );
     final typography = FTypography.inherit(colors: colors, touch: true);
     return FThemeData(
