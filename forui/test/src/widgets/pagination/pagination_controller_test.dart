@@ -92,4 +92,89 @@ void main() {
       expect(controller.minPagesDisplayedAtEdges, expected);
     });
   }
+
+  group('pages setter', () {
+    test('grows and notifies', () {
+      var notifyCount = 0;
+      final controller = FPaginationController(pages: 5, page: 2)
+        ..addListener(() => notifyCount++)
+        ..pages = 10;
+
+      expect(controller.pages, 10);
+      expect(controller.value, 2);
+      expect(notifyCount, 1);
+    });
+
+    test('shrinks and clamps value', () {
+      var notifyCount = 0;
+      final controller = FPaginationController(pages: 10, page: 8)
+        ..addListener(() => notifyCount++)
+        ..pages = 5;
+
+      expect(controller.pages, 5);
+      expect(controller.value, 4);
+      expect(notifyCount, 1);
+    });
+
+    test('no-op when unchanged', () {
+      var notifyCount = 0;
+      FPaginationController(pages: 5)
+        ..addListener(() => notifyCount++)
+        ..pages = 5;
+
+      expect(notifyCount, 0);
+    });
+
+    test('asserts pages > 0', () {
+      final controller = FPaginationController(pages: 5);
+      expect(() => controller.pages = 0, throwsA(isA<AssertionError>()));
+    });
+  });
+
+  group('siblings setter', () {
+    test('changes and notifies', () {
+      var notifyCount = 0;
+      final controller = FPaginationController(pages: 10)
+        ..addListener(() => notifyCount++)
+        ..siblings = 2;
+
+      expect(controller.siblings, 2);
+      expect(notifyCount, 1);
+    });
+
+    test('no-op when unchanged', () {
+      var notifyCount = 0;
+      FPaginationController(pages: 10)
+        ..addListener(() => notifyCount++)
+        ..siblings = 1;
+
+      expect(notifyCount, 0);
+    });
+
+    test('asserts siblings >= 0', () {
+      final controller = FPaginationController(pages: 10);
+      expect(() => controller.siblings = -1, throwsA(isA<AssertionError>()));
+    });
+  });
+
+  group('showEdges setter', () {
+    test('changes and notifies', () {
+      var notifyCount = 0;
+      final controller = FPaginationController(pages: 10)
+        ..addListener(() => notifyCount++)
+        ..showEdges = false;
+
+      expect(controller.showEdges, false);
+      expect(notifyCount, 1);
+    });
+
+    test('no-op when unchanged', () {
+      var notifyCount = 0;
+      FPaginationController(pages: 10)
+        ..addListener(() => notifyCount++)
+        ..showEdges = true;
+
+      expect(notifyCount, 0);
+    });
+  });
 }

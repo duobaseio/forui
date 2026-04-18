@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_redundant_argument_values
+
 import 'package:flutter/material.dart';
 
 import 'package:auto_route/auto_route.dart';
@@ -67,9 +69,9 @@ class SwipeableTabsPage extends Example {
       height: 350,
       child: FTabs(
         // {@highlight}
-        // Swiping between tabs requires expands to be true and a non-null
-        // contentPhysics (defaults to BouncingScrollPhysics).
+        // Swiping between tabs requires expands to be true and contentPhysics to not be NeverScrollableScrollPhysics.
         expands: true,
+        contentPhysics: const BouncingScrollPhysics(),
         // {@endhighlight}
         children: [
           .entry(
