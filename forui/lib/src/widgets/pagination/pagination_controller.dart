@@ -8,8 +8,45 @@ part 'pagination_controller.control.dart';
 
 /// A controller that controls which page is selected.
 class FPaginationController extends ValueNotifier<int> {
+  int _pages;
+  int _siblings;
+  bool _showEdges;
+
+  /// Creates a [FPaginationController].
+  ///
+  /// # Contract:
+  /// * Throws [AssertionError] if 0 <= [page] and [page] < [pages].
+  FPaginationController({required int pages, int page = 0, int siblings = 1, bool showEdges = true})
+    : assert(0 < pages, 'pages ($pages) should be > 0'),
+      assert(0 <= siblings, 'siblings ($siblings) >= 0'),
+      assert(0 <= page && page < pages, 'initialPage ($page) must be between 0 and pages ($pages), exclusive.'),
+      _pages = pages,
+      _siblings = siblings,
+      _showEdges = showEdges,
+      super(page);
+
   /// The total number of pages.
-  final int pages;
+  ///
+  /// Setting this clamps [value] to `pages - 1` if it would otherwise be out of range.
+  ///
+  /// # Contract:
+  /// * Throws [AssertionError] if [pages] <= 0.
+  int get pages => _pages;
+
+  set pages(int pages) {
+    assert(0 < pages, 'pages ($pages) should be > 0');
+    if (_pages == pages) {
+      return;
+    }
+
+    _pages = pages;
+    if (pages <= super.value) {
+      // This already notifies listeners, so we don't need to call notifyListeners again.
+      super.value = pages - 1;
+    } else {
+      notifyListeners();
+    }
+  }
 
   /// The number of sibling pages displayed beside the current page number. Defaults to 1.
   ///
@@ -18,23 +55,32 @@ class FPaginationController extends ValueNotifier<int> {
   ///
   /// # Contract:
   /// * Throws [AssertionError] if [siblings] < 0.
-  final int siblings;
+  int get siblings => _siblings;
+
+  set siblings(int siblings) {
+    assert(0 <= siblings, 'siblings ($siblings) >= 0');
+    if (_siblings == siblings) {
+      return;
+    }
+
+    _siblings = siblings;
+    notifyListeners();
+  }
 
   /// Whether to show the first and last pages in the pagination. Defaults to `true`.
   ///
   /// If `true`, the pagination will always display the first and last page, regardless of the current page.
   /// This can be useful for allowing users to quickly navigate to the beginning or end of the paginated content.
-  final bool showEdges;
+  bool get showEdges => _showEdges;
 
-  /// Creates a [FPaginationController].
-  ///
-  /// # Contract:
-  /// * Throws [AssertionError] if 0 <= [page] and [page] < [pages].
-  FPaginationController({required this.pages, int page = 0, this.siblings = 1, this.showEdges = true})
-    : assert(0 < pages, 'pages ($pages) should be > 0'),
-      assert(0 <= siblings, 'siblings ($siblings) >= 0'),
-      assert(0 <= page && page < pages, 'initialPage ($page) must be between 0 and pages ($pages), exclusive.'),
-      super(page);
+  set showEdges(bool showEdges) {
+    if (_showEdges == showEdges) {
+      return;
+    }
+
+    _showEdges = showEdges;
+    notifyListeners();
+  }
 
   /// Moves to the next page if the current page is less than the total number of pages.
   void next() {
@@ -101,12 +147,9 @@ extension InternalFPaginationController on FPaginationController {
 class _ProxyController extends FPaginationController {
   int _unsynced;
   ValueChanged<int> _onChange;
-  int _pages;
-  int _siblings;
-  bool _showEdges;
 
-  _ProxyController(this._unsynced, this._onChange, this._pages, this._siblings, this._showEdges)
-    : super(page: _unsynced, pages: _pages, siblings: _siblings, showEdges: _showEdges);
+  _ProxyController(this._unsynced, this._onChange, int pages, int siblings, bool showEdges)
+    : super(page: _unsynced, pages: pages, siblings: siblings, showEdges: showEdges);
 
   void update(int page, ValueChanged<int> onChange, int pages, int siblings, bool showEdges) {
     final changed = _pages != pages || _siblings != siblings || _showEdges != showEdges;
@@ -123,15 +166,6 @@ class _ProxyController extends FPaginationController {
       notifyListeners();
     }
   }
-
-  @override
-  int get pages => _pages;
-
-  @override
-  int get siblings => _siblings;
-
-  @override
-  bool get showEdges => _showEdges;
 
   @override
   set _rawValue(int value) {
