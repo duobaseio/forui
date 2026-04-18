@@ -8,12 +8,31 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
 
+class _Marker extends ThemeExtension<_Marker> {
+  final String id;
+
+  const _Marker(this.id);
+
+  @override
+  _Marker copyWith({String? id}) => _Marker(id ?? this.id);
+
+  @override
+  _Marker lerp(ThemeExtension<_Marker>? other, double t) =>
+      t < 0.5 ? this : (other as _Marker? ?? this);
+
+  @override
+  bool operator ==(Object other) => identical(this, other) || other is _Marker && id == other.id;
+
+  @override
+  int get hashCode => id.hashCode;
+}
+
 void main() {
   group('FColorScheme', () {
-    const scheme = FColors(
+    final scheme = FColors(
       brightness: .light,
       systemOverlayStyle: .dark,
-      barrier: Color(0xFF03A9F4),
+      barrier: const Color(0xFF03A9F4),
       background: Colors.black,
       foreground: Colors.black12,
       primary: Colors.black26,
@@ -58,7 +77,7 @@ void main() {
     });
 
     group('lerp(...)', () {
-      const schemeB = FColors(
+      final schemeB = FColors(
         brightness: .dark,
         systemOverlayStyle: .light,
         barrier: Colors.red,
@@ -232,6 +251,7 @@ void main() {
           PercentProperty('hoverLighten', 0.075),
           PercentProperty('hoverDarken', 0.05),
           PercentProperty('disabledOpacity', 0.5),
+          IterableProperty('extensions', const <ThemeExtension<dynamic>>{}),
         ].map((p) => p.toString()),
       );
     });
@@ -247,6 +267,53 @@ void main() {
         final copy = scheme.copyWith(background: Colors.red);
         expect(copy, isNot(scheme));
         expect(copy.hashCode, isNot(scheme.hashCode));
+      });
+    });
+
+    group('extensions', () {
+      FColors withExtensions(List<ThemeExtension<dynamic>> extensions) => scheme.copyWith(extensions: extensions);
+
+      test('default is empty', () {
+        expect(scheme.extensions, <ThemeExtension<dynamic>>{});
+      });
+
+      test('retrieved via extension<T>()', () {
+        final colors = withExtensions(const [_Marker('a')]);
+        expect(colors.extension<_Marker>(), const _Marker('a'));
+        expect(colors.extensions, {const _Marker('a')});
+      });
+
+      test('copyWith replaces extensions', () {
+        final original = withExtensions(const [_Marker('a')]);
+        final copy = original.copyWith(extensions: const [_Marker('b')]);
+        expect(copy.extension<_Marker>(), const _Marker('b'));
+      });
+
+      test('copyWith without extensions preserves them', () {
+        final original = withExtensions(const [_Marker('a')]);
+        final copy = original.copyWith(background: Colors.red);
+        expect(copy.extension<_Marker>(), const _Marker('a'));
+      });
+
+      test('lerp interpolates extensions', () {
+        final a = withExtensions(const [_Marker('a')]);
+        final b = withExtensions(const [_Marker('b')]);
+        expect(FColors.lerp(a, b, 0).extension<_Marker>(), const _Marker('a'));
+        expect(FColors.lerp(a, b, 1).extension<_Marker>(), const _Marker('b'));
+      });
+
+      test('lerp retains extensions present in only one side', () {
+        final a = withExtensions(const [_Marker('a')]);
+        expect(FColors.lerp(a, scheme, 0.5).extension<_Marker>(), const _Marker('a'));
+      });
+
+      test('equality includes extensions', () {
+        final a = withExtensions(const [_Marker('a')]);
+        final b = withExtensions(const [_Marker('a')]);
+        final c = withExtensions(const [_Marker('b')]);
+        expect(a, b);
+        expect(a.hashCode, b.hashCode);
+        expect(a, isNot(c));
       });
     });
   });
