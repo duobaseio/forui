@@ -32,6 +32,50 @@ void main() {
       await tester.pumpAndSettle(const Duration(milliseconds: 500));
       expect(page, 6);
     });
+
+    testWidgets('pages, siblings, showEdges update on rebuild', (tester) async {
+      var page = 0;
+      var pages = 1;
+      var siblings = 1;
+      var showEdges = true;
+
+      Future<void> rebuild() => tester.pumpWidget(
+        TestScaffold(
+          child: FPagination(
+            control: .lifted(
+              page: page,
+              pages: pages,
+              siblings: siblings,
+              showEdges: showEdges,
+              onChange: (value) => page = value,
+            ),
+          ),
+        ),
+      );
+
+      await rebuild();
+      expect(find.text('10'), findsNothing);
+
+      pages = 10;
+      await rebuild();
+      await tester.pumpAndSettle();
+      expect(find.text('1'), findsOneWidget);
+      expect(find.text('10'), findsOneWidget);
+
+      page = 4;
+      siblings = 2;
+      await rebuild();
+      await tester.pumpAndSettle();
+      expect(find.text('3'), findsOneWidget);
+      expect(find.text('7'), findsOneWidget);
+
+      showEdges = false;
+      page = 5;
+      await rebuild();
+      await tester.pumpAndSettle();
+      expect(find.text('1'), findsNothing);
+      expect(find.text('10'), findsNothing);
+    });
   });
 
   group('managed', () {
