@@ -5,6 +5,28 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
 
+class _Marker extends FTypographyExtension<_Marker> {
+  final String id;
+  final double size;
+
+  _Marker(this.id, {this.size = 1});
+
+  @override
+  _Marker copyWith({String? id, double? size}) => _Marker(id ?? this.id, size: size ?? this.size);
+
+  @override
+  _Marker lerp(ThemeExtension<_Marker>? other, double t) => t < 0.5 ? this : (other as _Marker? ?? this);
+
+  @override
+  _Marker scale({double sizeScalar = 1.0}) => _Marker(id, size: size * sizeScalar);
+
+  @override
+  bool operator ==(Object other) => identical(this, other) || other is _Marker && id == other.id && size == other.size;
+
+  @override
+  int get hashCode => id.hashCode ^ size.hashCode;
+}
+
 void main() {
   group('FTypography', () {
     FTypography typography = FTypography();
@@ -70,7 +92,7 @@ void main() {
     });
 
     group('inherit', () {
-      const colors = FColors(
+      final colors = FColors(
         brightness: .light,
         systemOverlayStyle: .dark,
         barrier: Colors.black12,
@@ -383,6 +405,7 @@ void main() {
           DiagnosticsProperty('xl6', const TextStyle(fontSize: 12)),
           DiagnosticsProperty('xl7', const TextStyle(fontSize: 13)),
           DiagnosticsProperty('xl8', const TextStyle(fontSize: 14)),
+          IterableProperty('extensions', const <ThemeExtension<dynamic>>{}),
         ].map((p) => p.toString()),
       );
     });
@@ -445,6 +468,58 @@ void main() {
         expect(result.xs, TextStyle.lerp(typography.xs, typographyB.xs, 0.5));
         expect(result.sm, TextStyle.lerp(typography.sm, typographyB.sm, 0.5));
         expect(result.md, TextStyle.lerp(typography.md, typographyB.md, 0.5));
+      });
+    });
+
+    group('extensions', () {
+      test('defaults to empty', () {
+        expect(FTypography().extensions, <ThemeExtension<dynamic>>{});
+      });
+
+      test('retrieved via extension<T>()', () {
+        final typography = FTypography(extensions: [_Marker('a')]);
+        expect(typography.extension<_Marker>(), _Marker('a'));
+        expect(typography.extensions, {_Marker('a')});
+      });
+
+      test('copyWith replaces extensions', () {
+        final original = FTypography(extensions: [_Marker('a')]);
+        final copy = original.copyWith(extensions: [_Marker('b')]);
+        expect(copy.extension<_Marker>(), _Marker('b'));
+      });
+
+      test('copyWith without extensions preserves them', () {
+        final original = FTypography(extensions: [_Marker('a')]);
+        final copy = original.copyWith(xs3: const TextStyle(fontSize: 99));
+        expect(copy.extension<_Marker>(), _Marker('a'));
+      });
+
+      test('scale forwards sizeScalar to extensions', () {
+        final original = FTypography(extensions: [_Marker('a')]);
+        final scaled = original.scale(sizeScalar: 2);
+        expect(scaled.extension<_Marker>(), _Marker('a', size: 2));
+      });
+
+      test('lerp interpolates extensions', () {
+        final a = FTypography(extensions: [_Marker('a')]);
+        final b = FTypography(extensions: [_Marker('b')]);
+        expect(FTypography.lerp(a, b, 0).extension<_Marker>(), _Marker('a'));
+        expect(FTypography.lerp(a, b, 1).extension<_Marker>(), _Marker('b'));
+      });
+
+      test('lerp retains extensions present in only one side', () {
+        final a = FTypography(extensions: [_Marker('a')]);
+        final b = FTypography();
+        expect(FTypography.lerp(a, b, 0.5).extension<_Marker>(), _Marker('a'));
+      });
+
+      test('equality includes extensions', () {
+        final a = FTypography(extensions: [_Marker('a')]);
+        final b = FTypography(extensions: [_Marker('a')]);
+        final c = FTypography(extensions: [_Marker('b')]);
+        expect(a, b);
+        expect(a.hashCode, b.hashCode);
+        expect(a, isNot(c));
       });
     });
   });

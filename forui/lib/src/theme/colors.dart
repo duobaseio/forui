@@ -29,7 +29,7 @@ import 'package:forui/forui.dart';
 /// See [FThemes] for predefined themes and color schemes.
 final class FColors with Diagnosticable {
   /// The [Neutral](https://ui.shadcn.com/docs/theming#neutral) light color scheme.
-  static const neutralLight = FColors(
+  static const neutralLight = FColors._(
     brightness: .light,
     systemOverlayStyle: .dark,
     barrier: Color(0x33000000),
@@ -50,7 +50,7 @@ final class FColors with Diagnosticable {
   );
 
   /// The [Neutral](https://ui.shadcn.com/docs/theming#neutral) dark color scheme.
-  static const neutralDark = FColors(
+  static const neutralDark = FColors._(
     brightness: .dark,
     systemOverlayStyle: .light,
     barrier: Color(0x7A000000),
@@ -71,7 +71,7 @@ final class FColors with Diagnosticable {
   );
 
   /// The [Zinc](https://ui.shadcn.com/docs/theming#zinc) light color scheme.
-  static const zincLight = FColors(
+  static const zincLight = FColors._(
     brightness: .light,
     systemOverlayStyle: .dark,
     barrier: Color(0x33000000),
@@ -92,7 +92,7 @@ final class FColors with Diagnosticable {
   );
 
   /// The [Zinc](https://ui.shadcn.com/docs/theming#zinc) dark color scheme.
-  static const zincDark = FColors(
+  static const zincDark = FColors._(
     brightness: .dark,
     systemOverlayStyle: .light,
     barrier: Color(0x7A000000),
@@ -113,7 +113,7 @@ final class FColors with Diagnosticable {
   );
 
   /// The [Slate](https://ui.shadcn.com/docs/theming#slate) light color scheme.
-  static const slateLight = FColors(
+  static const slateLight = FColors._(
     brightness: .light,
     systemOverlayStyle: .dark,
     barrier: Color(0x33000000),
@@ -134,7 +134,7 @@ final class FColors with Diagnosticable {
   );
 
   /// The [Slate](https://ui.shadcn.com/docs/theming#slate) dark color scheme.
-  static const slateDark = FColors(
+  static const slateDark = FColors._(
     brightness: .dark,
     systemOverlayStyle: .light,
     barrier: Color(0x7A000000),
@@ -155,7 +155,7 @@ final class FColors with Diagnosticable {
   );
 
   /// The [Blue](https://ui.shadcn.com/themes) light color scheme.
-  static const blueLight = FColors(
+  static const blueLight = FColors._(
     brightness: .light,
     systemOverlayStyle: .dark,
     barrier: Color(0x33000000),
@@ -176,7 +176,7 @@ final class FColors with Diagnosticable {
   );
 
   /// The [Blue](https://ui.shadcn.com/themes) dark color scheme.
-  static const blueDark = FColors(
+  static const blueDark = FColors._(
     brightness: .dark,
     systemOverlayStyle: .light,
     barrier: Color(0x7A000000),
@@ -197,7 +197,7 @@ final class FColors with Diagnosticable {
   );
 
   /// The [Green](https://ui.shadcn.com/themes) light color scheme.
-  static const greenLight = FColors(
+  static const greenLight = FColors._(
     brightness: .light,
     systemOverlayStyle: .dark,
     barrier: Color(0x33000000),
@@ -218,7 +218,7 @@ final class FColors with Diagnosticable {
   );
 
   /// The [Green](https://ui.shadcn.com/themes) dark color scheme.
-  static const greenDark = FColors(
+  static const greenDark = FColors._(
     brightness: .dark,
     systemOverlayStyle: .light,
     barrier: Color(0x7A000000),
@@ -239,7 +239,7 @@ final class FColors with Diagnosticable {
   );
 
   /// The [Orange](https://ui.shadcn.com/themes) light color scheme.
-  static const orangeLight = FColors(
+  static const orangeLight = FColors._(
     brightness: .light,
     systemOverlayStyle: .dark,
     barrier: Color(0x33000000),
@@ -260,7 +260,7 @@ final class FColors with Diagnosticable {
   );
 
   /// The [Orange](https://ui.shadcn.com/themes) dark color scheme.
-  static const orangeDark = FColors(
+  static const orangeDark = FColors._(
     brightness: .dark,
     systemOverlayStyle: .light,
     barrier: Color(0x7A000000),
@@ -281,7 +281,7 @@ final class FColors with Diagnosticable {
   );
 
   /// The [Red](https://ui.shadcn.com/themes) light color scheme.
-  static const redLight = FColors(
+  static const redLight = FColors._(
     brightness: .light,
     systemOverlayStyle: .dark,
     barrier: Color(0x33000000),
@@ -302,7 +302,7 @@ final class FColors with Diagnosticable {
   );
 
   /// The [Red](https://ui.shadcn.com/themes) dark color scheme.
-  static const redDark = FColors(
+  static const redDark = FColors._(
     brightness: .dark,
     systemOverlayStyle: .light,
     barrier: Color(0x7A000000),
@@ -323,7 +323,7 @@ final class FColors with Diagnosticable {
   );
 
   /// The [Rose](https://ui.shadcn.com/themes) light color scheme.
-  static const roseLight = FColors(
+  static const roseLight = FColors._(
     brightness: .light,
     systemOverlayStyle: .dark,
     barrier: Color(0x33000000),
@@ -344,7 +344,7 @@ final class FColors with Diagnosticable {
   );
 
   /// The [Rose](https://ui.shadcn.com/themes) dark color scheme.
-  static const roseDark = FColors(
+  static const roseDark = FColors._(
     brightness: .dark,
     systemOverlayStyle: .light,
     barrier: Color(0x7A000000),
@@ -365,7 +365,7 @@ final class FColors with Diagnosticable {
   );
 
   /// The [Violet](https://ui.shadcn.com/themes) light color scheme.
-  static const violetLight = FColors(
+  static const violetLight = FColors._(
     brightness: .light,
     systemOverlayStyle: .dark,
     barrier: Color(0x33000000),
@@ -386,7 +386,7 @@ final class FColors with Diagnosticable {
   );
 
   /// The [Violet](https://ui.shadcn.com/themes) dark color scheme.
-  static const violetDark = FColors(
+  static const violetDark = FColors._(
     brightness: .dark,
     systemOverlayStyle: .light,
     barrier: Color(0x7A000000),
@@ -407,7 +407,7 @@ final class FColors with Diagnosticable {
   );
 
   /// The [Yellow](https://ui.shadcn.com/themes) light color scheme.
-  static const yellowLight = FColors(
+  static const yellowLight = FColors._(
     brightness: .light,
     systemOverlayStyle: .dark,
     barrier: Color(0x33000000),
@@ -428,7 +428,7 @@ final class FColors with Diagnosticable {
   );
 
   /// The [Yellow](https://ui.shadcn.com/themes) dark color scheme.
-  static const yellowDark = FColors(
+  static const yellowDark = FColors._(
     brightness: .dark,
     systemOverlayStyle: .light,
     barrier: Color(0x7A000000),
@@ -567,11 +567,59 @@ final class FColors with Diagnosticable {
   /// Throws [AssertionError] if the value is less than 0 or greater than 1.
   final double disabledOpacity;
 
+  final Map<Object, ThemeExtension<dynamic>> _extensions;
+
   /// Creates a [FColors].
   ///
   /// **Note:**
   /// Unless you are creating a completely new color scheme, modifying [FThemes]' predefined color schemes is preferred.
-  const FColors({
+  FColors({
+    required Brightness brightness,
+    required SystemUiOverlayStyle systemOverlayStyle,
+    required Color barrier,
+    required Color background,
+    required Color foreground,
+    required Color primary,
+    required Color primaryForeground,
+    required Color secondary,
+    required Color secondaryForeground,
+    required Color muted,
+    required Color mutedForeground,
+    required Color destructive,
+    required Color destructiveForeground,
+    required Color error,
+    required Color errorForeground,
+    required Color card,
+    required Color border,
+    double hoverLighten = 0.075,
+    double hoverDarken = 0.05,
+    double disabledOpacity = 0.5,
+    Iterable<ThemeExtension<dynamic>> extensions = const [],
+  }) : this._(
+         brightness: brightness,
+         systemOverlayStyle: systemOverlayStyle,
+         barrier: barrier,
+         background: background,
+         foreground: foreground,
+         primary: primary,
+         primaryForeground: primaryForeground,
+         secondary: secondary,
+         secondaryForeground: secondaryForeground,
+         muted: muted,
+         mutedForeground: mutedForeground,
+         destructive: destructive,
+         destructiveForeground: destructiveForeground,
+         error: error,
+         errorForeground: errorForeground,
+         card: card,
+         border: border,
+         hoverLighten: hoverLighten,
+         hoverDarken: hoverDarken,
+         disabledOpacity: disabledOpacity,
+         extensions: extensions.isEmpty ? const {} : {for (final extension in extensions) extension.type: extension},
+       );
+
+  const FColors._({
     required this.brightness,
     required this.systemOverlayStyle,
     required this.barrier,
@@ -592,7 +640,9 @@ final class FColors with Diagnosticable {
     this.hoverLighten = 0.075,
     this.hoverDarken = 0.05,
     this.disabledOpacity = 0.5,
-  }) : assert(0.0 <= hoverLighten && hoverLighten <= 1.0, 'hoverLighten must be between 0 and 1.'),
+    Map<Object, ThemeExtension<dynamic>> extensions = const {},
+  }) : _extensions = extensions,
+       assert(0.0 <= hoverLighten && hoverLighten <= 1.0, 'hoverLighten must be between 0 and 1.'),
        assert(0.0 <= hoverDarken && hoverDarken <= 1.0, 'hoverDarken must be between 0 and 1.'),
        assert(0 <= disabledOpacity && disabledOpacity <= 1, 'disabledOpacity must be between 0 and 1.');
 
@@ -618,6 +668,9 @@ final class FColors with Diagnosticable {
     hoverLighten: lerpDouble(a.hoverLighten, b.hoverLighten, t)!,
     hoverDarken: lerpDouble(a.hoverDarken, b.hoverDarken, t)!,
     disabledOpacity: lerpDouble(a.disabledOpacity, b.disabledOpacity, t)!,
+    extensions: (a._extensions.map(
+      (id, extensionA) => MapEntry(id, extensionA.lerp(b._extensions[id], t)),
+    )..addEntries(b._extensions.entries.where((entry) => !a._extensions.containsKey(entry.key)))).values,
   );
 
   /// Generates a hovered variant of the given [color] by darkening light colors and lighting dark colors based on their
@@ -691,6 +744,7 @@ final class FColors with Diagnosticable {
     double? hoverLighten,
     double? hoverDarken,
     double? disabledOpacity,
+    Iterable<ThemeExtension<dynamic>>? extensions,
   }) => .new(
     brightness: brightness ?? this.brightness,
     systemOverlayStyle: systemOverlayStyle ?? this.systemOverlayStyle,
@@ -712,7 +766,68 @@ final class FColors with Diagnosticable {
     hoverLighten: hoverLighten ?? this.hoverLighten,
     hoverDarken: hoverDarken ?? this.hoverDarken,
     disabledOpacity: disabledOpacity ?? this.disabledOpacity,
+    extensions: extensions ?? _extensions.values,
   );
+
+  /// Obtains a particular [ThemeExtension].
+  ///
+  /// {@template forui.theme.FColors.extension}
+  /// ## Creating and passing a [ThemeExtension] to [FColors]
+  /// ```dart
+  /// class BrandColors extends ThemeExtension<BrandColors> {
+  ///   final Color accent;
+  ///   final Color onAccent;
+  ///
+  ///   const BrandColors({required this.accent, required this.onAccent});
+  ///
+  ///   @override
+  ///   BrandColors copyWith({Color? accent, Color? onAccent}) =>
+  ///       BrandColors(accent: accent ?? this.accent, onAccent: onAccent ?? this.onAccent);
+  ///
+  ///   @override
+  ///   BrandColors lerp(BrandColors? other, double t) {
+  ///     if (other is! BrandColors) return this;
+  ///     return BrandColors(
+  ///       accent: Color.lerp(accent, other.accent, t)!,
+  ///       onAccent: Color.lerp(onAccent, other.onAccent, t)!,
+  ///     );
+  ///   }
+  /// }
+  /// ```
+  ///
+  /// Passing it via constructor:
+  /// ```dart
+  /// final colors = FColors(
+  ///   extensions: [BrandColors(accent: Color(0xFF6366F1), onAccent: Color(0xFFFFFFFF))],
+  ///   ... // other fields omitted for brevity
+  /// );
+  /// ```
+  ///
+  /// Passing it via [copyWith]:
+  /// ```dart
+  /// colors.copyWith(extensions: [
+  ///   BrandColors(accent: Color(0xFF6366F1), onAccent: Color(0xFFFFFFFF)),
+  /// ]);
+  /// ```
+  ///
+  /// ## Accessing the extension
+  /// ```dart
+  /// final brand = context.theme.colors.extension<BrandColors>();
+  /// ```
+  ///
+  /// It is recommended to define a getter for your [ThemeExtension]:
+  /// ```dart
+  /// extension FColorsBrandColors on FColors {
+  ///   BrandColors get brand => extension<BrandColors>();
+  /// }
+  /// ```
+  /// {@endtemplate}
+  T extension<T extends Object>() => _extensions[T]! as T;
+
+  /// All [ThemeExtension]s defined in these colors.
+  ///
+  /// {@macro forui.theme.FColors.extension}
+  Set<ThemeExtension<dynamic>> get extensions => _extensions.values.toSet();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -737,7 +852,8 @@ final class FColors with Diagnosticable {
       ..add(ColorProperty('border', border))
       ..add(PercentProperty('hoverLighten', hoverLighten))
       ..add(PercentProperty('hoverDarken', hoverDarken))
-      ..add(PercentProperty('disabledOpacity', disabledOpacity));
+      ..add(PercentProperty('disabledOpacity', disabledOpacity))
+      ..add(IterableProperty('extensions', extensions));
   }
 
   @override
@@ -763,7 +879,8 @@ final class FColors with Diagnosticable {
           border == other.border &&
           hoverLighten == other.hoverLighten &&
           hoverDarken == other.hoverDarken &&
-          disabledOpacity == other.disabledOpacity;
+          disabledOpacity == other.disabledOpacity &&
+          mapEquals(_extensions, other._extensions);
 
   @override
   int get hashCode =>
@@ -786,5 +903,6 @@ final class FColors with Diagnosticable {
       border.hashCode ^
       hoverLighten.hashCode ^
       hoverDarken.hashCode ^
-      disabledOpacity.hashCode;
+      disabledOpacity.hashCode ^
+      Object.hashAllUnordered(_extensions.values);
 }
