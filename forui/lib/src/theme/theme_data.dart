@@ -770,7 +770,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       tooltipStyle:
           tooltipStyle ??
           .inherit(colors: colors, typography: typography, style: style, hapticFeedback: hapticFeedback),
-      extensions: .unmodifiable({for (final extension in extensions) extension.type: extension}),
+      extensions: {for (final extension in extensions) extension.type: extension},
     );
   }
 
@@ -984,19 +984,23 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// {@template forui.theme.FThemeData.extension}
   /// ## Creating and passing a [ThemeExtension] to [FThemeData]
   /// ```dart
-  /// class BrandColor extends ThemeExtension<BrandColor> {
+  /// class BrandStyle extends ThemeExtension<BrandStyle> {
   ///   final Color color;
+  ///   final BorderRadius borderRadius;
   ///
-  ///   BrandColor(this.color);
-  ///
-  ///   @override
-  ///   BrandColor copyWith({Color? color}) => BrandColor(color ?? this.color);
+  ///   const BrandStyle({required this.color, required this.borderRadius});
   ///
   ///   @override
-  ///   BrandColor lerp(BrandColor? other, double t) {
-  ///     if (other is! BrandColor) return this;
+  ///   BrandStyle copyWith({Color? color, BorderRadius? borderRadius}) =>
+  ///       BrandStyle(color: color ?? this.color, borderRadius: borderRadius ?? this.borderRadius);
   ///
-  ///    return BrandColor(Color.lerp(color, other.color, t)!);
+  ///   @override
+  ///   BrandStyle lerp(BrandStyle? other, double t) {
+  ///     if (other is! BrandStyle) return this;
+  ///     return BrandStyle(
+  ///       color: Color.lerp(color, other.color, t)!,
+  ///       borderRadius: BorderRadius.lerp(borderRadius, other.borderRadius, t)!,
+  ///     );
   ///   }
   /// }
   /// ```
@@ -1004,26 +1008,29 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// Passing it via constructor:
   /// ```dart
   /// final theme = FThemeData(
-  ///   extensions: [BrandColor(Colors.blue)],
+  ///   extensions: [BrandStyle(color: Colors.blue, borderRadius: BorderRadius.circular(8))],
   ///   ... // other fields omitted for brevity
   /// );
   /// ```
   ///
   /// Passing it via [copyWith]:
   /// ```dart
-  /// theme.copyWith(extensions: [BrandColor(Colors.blue)]);
+  /// theme.copyWith(extensions: [
+  ///   BrandStyle(color: Colors.blue, borderRadius: BorderRadius.circular(8)),
+  /// ]);
   /// ```
   ///
   /// ## Accessing the extension
   /// ```dart
-  /// final brandColor = context.theme.extension<BrandColor>();
+  /// final brand = context.theme.extension<BrandStyle>();
   /// ```
   ///
   /// It is recommended to define a getter for your [ThemeExtension]:
-  /// ```extension FThemeDataBrandColor on FThemeData {
-  ///  BrandColor get brandColor => extension<BrandColor>();
-  ///  }
-  ///  ```
+  /// ```dart
+  /// extension FThemeDataBrandStyle on FThemeData {
+  ///   BrandStyle get brand => extension<BrandStyle>();
+  /// }
+  /// ```
   /// {@endtemplate}
   T extension<T extends Object>() => _extensions[T]! as T;
 

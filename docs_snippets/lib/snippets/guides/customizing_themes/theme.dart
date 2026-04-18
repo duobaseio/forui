@@ -1,4 +1,4 @@
-// ignore_for_file: use_named_constants, avoid_redundant_argument_values, always_use_package_imports, unused_import
+// ignore_for_file: avoid_redundant_argument_values, always_use_package_imports, unused_import
 // {@snippet}
 
 import 'package:flutter/material.dart';
@@ -20,24 +20,24 @@ FThemeData get neutralLight {
   // Change this to false to generate a desktop variant of the theme.
   const touch = true;
 
-  const colors = FColors(
+  final colors = FColors(
     brightness: .light,
     systemOverlayStyle: .dark,
-    barrier: Color(0x33000000),
-    background: Color(0xFFFFFFFF),
-    foreground: Color(0xFF0A0A0A),
-    primary: Color(0xFF171717),
-    primaryForeground: Color(0xFFFAFAFA),
-    secondary: Color(0xFFF5F5F5),
-    secondaryForeground: Color(0xFF171717),
-    muted: Color(0xFFF5F5F5),
-    mutedForeground: Color(0xFF737373),
-    destructive: Color(0xFFE7000B),
-    destructiveForeground: Color(0xFFFAFAFA),
-    error: Color(0xFFE7000B),
-    errorForeground: Color(0xFFFAFAFA),
-    card: Color(0xFFFFFFFF),
-    border: Color(0xFFE5E5E5),
+    barrier: const Color(0x33000000),
+    background: const Color(0xFFFFFFFF),
+    foreground: const Color(0xFF0A0A0A),
+    primary: const Color(0xFF171717),
+    primaryForeground: const Color(0xFFFAFAFA),
+    secondary: const Color(0xFFF5F5F5),
+    secondaryForeground: const Color(0xFF171717),
+    muted: const Color(0xFFF5F5F5),
+    mutedForeground: const Color(0xFF737373),
+    destructive: const Color(0xFFE7000B),
+    destructiveForeground: const Color(0xFFFAFAFA),
+    error: const Color(0xFFE7000B),
+    errorForeground: const Color(0xFFFAFAFA),
+    card: const Color(0xFFFFFFFF),
+    border: const Color(0xFFE5E5E5),
   );
 
   final typography = _typography(colors: colors, touch: touch);

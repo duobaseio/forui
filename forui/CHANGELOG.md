@@ -4,6 +4,10 @@
 * Fix `FButton` announcing both `semanticsLabel` and child semantics when `semanticsLabel` is set.
 
 
+### `FColors`
+* Add `ThemeExtension` support via `FColors(extensions: ...)`, `FColors.extension<T>()`, and `FColors.extensions`.
+
+
 ### `FStyle` & `FThemeData`
 * Add `FThemeData.hapticFeedback`.
 
@@ -33,6 +37,12 @@
 
 ### `FPagination`
 * Add settable `FPaginationController.pages`, `FPaginationController.siblings`, and `FPaginationController.showEdges`.
+
+
+### `FTypography`
+* Add `FTypographyExtension`.
+* Add `FTypographyExtension` support via `FTypography(extensions: ...)`, `FTypography.extension<T>()`, and
+  `FTypography.extensions`.
 
 
 ## 0.21.1
