@@ -189,8 +189,8 @@ class FItem extends StatelessWidget with FItemMixin {
   /// else [title] and [subtitle] are truncated.
   ///
   /// ## Why isn't my [title] [subtitle], or [details] rendered?
-  /// Using widgets that try to fill the available space, such as [Expanded] or [FTextField], as [details] will cause
-  /// the [title] and [subtitle] to never be rendered.
+  /// Using widgets that try to fill the available space, such as [Expanded] or [FTextField], will cause the [title]/
+  /// [subtitle]/[details] to never be rendered.
   ///
   /// Use [FItem.raw] in these cases.
   /// {@endtemplate}
