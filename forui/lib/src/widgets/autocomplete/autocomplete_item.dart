@@ -51,6 +51,7 @@ mixin FAutocompleteItemMixin on Widget {
   /// This function is a shorthand for [FAutocompleteItem.new].
   static FAutocompleteItem item({
     required String value,
+    Object? data,
     FItemStyleDelta style = const .context(),
     bool? enabled,
     Widget? prefix,
@@ -60,6 +61,7 @@ mixin FAutocompleteItemMixin on Widget {
     Key? key,
   }) => .item(
     value: value,
+    data: data,
     style: style,
     enabled: enabled,
     prefix: prefix,
@@ -75,11 +77,12 @@ mixin FAutocompleteItemMixin on Widget {
   static FAutocompleteItem rawItem({
     required Widget child,
     required String value,
+    Object? data,
     FItemStyleDelta style = const .context(),
     bool? enabled,
     Widget? prefix,
     Key? key,
-  }) => .raw(value: value, style: style, enabled: enabled, prefix: prefix, key: key, child: child);
+  }) => .raw(value: value, data: data, style: style, enabled: enabled, prefix: prefix, key: key, child: child);
 }
 
 /// A section in a [FAutocomplete] that can contain multiple [FAutocompleteItem]s.
@@ -319,6 +322,9 @@ abstract class FAutocompleteItem extends StatelessWidget with FAutocompleteItemM
   /// The value.
   final String value;
 
+  /// The underlying data associated with this item.
+  final Object? data;
+
   /// True if the item is enabled. Disabled items cannot be selected, and is skipped during traversal.
   ///
   /// Defaults to the value inherited from the parent [FAutocompleteSection] or [FAutocomplete].
@@ -334,6 +340,7 @@ abstract class FAutocompleteItem extends StatelessWidget with FAutocompleteItemM
   /// {@endtemplate}
   factory FAutocompleteItem({
     required String value,
+    Object? data,
     FItemStyleDelta style,
     bool? enabled,
     Widget? prefix,
@@ -351,6 +358,7 @@ abstract class FAutocompleteItem extends StatelessWidget with FAutocompleteItemM
   /// For even more control over the item's appearance, use [FAutocompleteItem.raw].
   factory FAutocompleteItem.item({
     required String value,
+    Object? data,
     FItemStyleDelta style,
     bool? enabled,
     Widget? prefix,
@@ -369,13 +377,21 @@ abstract class FAutocompleteItem extends StatelessWidget with FAutocompleteItemM
   factory FAutocompleteItem.raw({
     required Widget child,
     required String value,
+    Object? data,
     FItemStyleDelta style,
     bool? enabled,
     Widget? prefix,
     Key? key,
   }) = _RawAutocompleteItem;
 
-  const FAutocompleteItem._({required this.value, this.style = const .context(), this.enabled, this.prefix, super.key});
+  const FAutocompleteItem._({
+    required this.value,
+    this.data,
+    this.style = const .context(),
+    this.enabled,
+    this.prefix,
+    super.key,
+  });
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -383,6 +399,7 @@ abstract class FAutocompleteItem extends StatelessWidget with FAutocompleteItemM
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('value', value))
+      ..add(DiagnosticsProperty('data', data))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled', ifFalse: 'disabled'));
   }
 }
@@ -394,6 +411,7 @@ class _AutocompleteItem extends FAutocompleteItem {
 
   _AutocompleteItem({
     required super.value,
+    super.data,
     super.style,
     super.enabled,
     super.prefix,
@@ -414,10 +432,10 @@ class _AutocompleteItem extends FAutocompleteItem {
     return FItem(
       style: style,
       enabled: enabled,
-      onPress: () => onPress(value),
+      onPress: () => onPress(FTypeaheadSuggestion(text: value, data: data ?? value)),
       onFocusChange: (focused) {
         if (focused) {
-          onFocus(value);
+          onFocus(FTypeaheadSuggestion(text: value, data: data ?? value));
         }
       },
       prefix: prefix,
@@ -434,6 +452,7 @@ class _RawAutocompleteItem extends FAutocompleteItem {
   const _RawAutocompleteItem({
     required this.child,
     required super.value,
+    super.data,
     super.style,
     super.enabled,
     super.prefix,
@@ -450,10 +469,10 @@ class _RawAutocompleteItem extends FAutocompleteItem {
     return FItem.raw(
       style: style,
       enabled: enabled,
-      onPress: () => onPress(value),
+      onPress: () => onPress(FTypeaheadSuggestion(text: value, data: data ?? value)),
       onFocusChange: (focused) {
         if (focused) {
-          onFocus(value);
+          onFocus(FTypeaheadSuggestion(text: value, data: data ?? value));
         }
       },
       prefix: prefix,

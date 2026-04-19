@@ -26,14 +26,24 @@ const fruits = [
   'Watermelon',
 ];
 
+class _Fruit {
+  final int id;
+  final String name;
+
+  const _Fruit(this.id, this.name);
+
+  @override
+  String toString() => 'Fruit($id, $name)';
+}
+
 void main() {
   const key = ValueKey('autocomplete');
 
-  late FAutocompleteController controller;
+  late FAutocompleteController<String> controller;
   late FPopoverController popoverController;
 
   setUp(() {
-    controller = FAutocompleteController();
+    controller = FAutocompleteController<String>();
     popoverController = FPopoverController(vsync: const TestVSync());
   });
 
@@ -107,6 +117,65 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(changedValue?.text, 'app');
+    });
+  });
+
+  group('generic items', () {
+    const genericFruits = [_Fruit(1, 'Apple'), _Fruit(2, 'Banana')];
+    const duplicateNamedFruits = [_Fruit(1, 'Apple'), _Fruit(2, 'Apple'), _Fruit(3, 'Banana')];
+
+    testWidgets('uses displayStringForOption for filtering and selection', (tester) async {
+      _Fruit? selected;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FAutocomplete<_Fruit>(
+            key: key,
+            items: genericFruits,
+            displayStringForOption: (fruit) => fruit.name,
+            onSelect: (fruit) => selected = fruit,
+          ),
+        ),
+      );
+
+      await tester.enterText(find.byKey(key), 'app');
+      await tester.pumpAndSettle();
+
+      expect(find.text('Apple'), findsOneWidget);
+
+      await tester.tap(find.text('Apple'));
+      await tester.pumpAndSettle();
+
+      expect(selected, genericFruits.first);
+      expect(find.text('Apple'), findsOneWidget);
+    });
+
+    testWidgets('selects the tapped duplicate item', (tester) async {
+      _Fruit? selected;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FAutocomplete<_Fruit>(
+            key: key,
+            items: duplicateNamedFruits,
+            displayStringForOption: (fruit) => fruit.name,
+            contentBuilder: (context, query, values) => [
+              for (final fruit in values)
+                FAutocompleteItem.item(value: fruit.name, data: fruit, title: Text('${fruit.name} #${fruit.id}')),
+            ],
+            onSelect: (fruit) => selected = fruit,
+          ),
+        ),
+      );
+
+      await tester.enterText(find.byKey(key), 'app');
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('Apple #2'));
+      await tester.pumpAndSettle();
+
+      expect(selected, duplicateNamedFruits[1]);
+      expect(find.text('Apple'), findsOneWidget);
     });
   });
 
