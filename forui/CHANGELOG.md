@@ -45,6 +45,12 @@
   `FTypography.extensions`.
 
 
+## 0.21.2
+
+### `FSelectMenuTile`
+* Fix `FSelectMenuTile` rendering an extra border when a custom style is supplied inside a `FTileGroup`.
+
+
 ## 0.21.1
 
 ### `FHeader`

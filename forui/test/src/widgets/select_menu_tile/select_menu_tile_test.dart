@@ -197,6 +197,44 @@ void main() {
     expect(find.text('Item 2'), findsOne);
   });
 
+  testWidgets('.delta() style inside FTileGroup inherits group tile style', (tester) async {
+    // https://github.com/duobaseio/forui/issues/984
+    // A no-op .delta() should yield the same inner tile style as .context()
+    // when FSelectMenuTile is nested inside a FTileGroup.
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FTileGroup(
+          label: const Text('label'),
+          children: [
+            FSelectMenuTile<int>(
+              title: const Text('title'),
+              menu: const [.tile(title: Text('1'), value: 1)],
+            ),
+          ],
+        ),
+      ),
+    );
+    final contextStyle = tester.widget<FTile>(find.byType(FTile)).style;
+
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FTileGroup(
+          label: const Text('label'),
+          children: [
+            FSelectMenuTile<int>(
+              title: const Text('title'),
+              style: const .delta(),
+              menu: const [.tile(title: Text('1'), value: 1)],
+            ),
+          ],
+        ),
+      ),
+    );
+    final deltaStyle = tester.widget<FTile>(find.byType(FTile)).style;
+
+    expect(deltaStyle, contextStyle);
+  });
+
   testWidgets('selecting item in menu closes it', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
