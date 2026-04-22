@@ -10,10 +10,13 @@ import 'package:forui/src/widgets/autocomplete/autocomplete.dart';
 part 'autocomplete_controller.control.dart';
 
 /// A controller for managing autocomplete functionality in a text field.
-class FAutocompleteController extends FTypeaheadController {
+class FAutocompleteController<T> extends FTypeaheadController<T> {
+  static String _defaultDisplayStringForOption<T>(T option) => option.toString();
+
   /// Creates a [FAutocompleteController] with an optional initial text and suggestions.
-  FAutocompleteController({super.text, super.suggestions})
+  FAutocompleteController({super.text, super.suggestions = const [], String Function(T option)? displayStringForOption})
     : super(
+        displayStringForOption: displayStringForOption ?? _defaultDisplayStringForOption,
         textStyles: (context) {
           final AutocompleteFieldScope(:style, :variants) = .of(context);
           return (
@@ -25,24 +28,30 @@ class FAutocompleteController extends FTypeaheadController {
       );
 
   /// Creates a [FAutocompleteController] from a [TextEditingValue].
-  FAutocompleteController.fromValue(super.value, {super.suggestions = const []})
-    : super.fromValue(
-        textStyles: (context) {
-          final AutocompleteFieldScope(:style, :variants) = .of(context);
-          return (
-            style.contentTextStyle.resolve(variants),
-            style.composingTextStyle.resolve(variants),
-            style.typeaheadTextStyle.resolve(variants),
-          );
-        },
-      );
+  FAutocompleteController.fromValue(
+    super.value, {
+    super.suggestions = const [],
+    String Function(T option)? displayStringForOption,
+  }) : super.fromValue(
+         displayStringForOption: displayStringForOption ?? _defaultDisplayStringForOption,
+         textStyles: (context) {
+           final AutocompleteFieldScope(:style, :variants) = .of(context);
+           return (
+             style.contentTextStyle.resolve(variants),
+             style.composingTextStyle.resolve(variants),
+             style.typeaheadTextStyle.resolve(variants),
+           );
+         },
+       );
 }
 
-class _ProxyController extends FAutocompleteController {
+class _ProxyController<T> extends FAutocompleteController<T> {
   TextEditingValue? _unsynced;
   ValueChanged<TextEditingValue> _onChange;
 
-  _ProxyController(super.value, this._onChange) : _unsynced = value, super.fromValue();
+  _ProxyController(super.value, this._onChange, {required super.displayStringForOption})
+    : _unsynced = value,
+      super.fromValue();
 
   void update(TextEditingValue newValue, ValueChanged<TextEditingValue> onChange) {
     _onChange = onChange;
@@ -72,8 +81,8 @@ class InheritedAutocompleteController extends InheritedWidget {
   }
 
   final FPopoverController popover;
-  final ValueChanged<String> onPress;
-  final ValueChanged<String> onFocus;
+  final ValueChanged<FTypeaheadSuggestion<Object?>> onPress;
+  final ValueChanged<FTypeaheadSuggestion<Object?>> onFocus;
 
   const InheritedAutocompleteController({
     required this.popover,
@@ -99,10 +108,10 @@ class InheritedAutocompleteController extends InheritedWidget {
 /// A [FAutocompleteControl] defines how a [FAutocomplete] is controlled.
 ///
 /// {@macro forui.foundation.doc_templates.control}
-sealed class FAutocompleteControl with Diagnosticable, _$FAutocompleteControlMixin {
+sealed class FAutocompleteControl<T> with Diagnosticable, _$FAutocompleteControlMixin<T> {
   /// Creates a [FAutocompleteControl].
   const factory FAutocompleteControl.managed({
-    FAutocompleteController? controller,
+    FAutocompleteController<T>? controller,
     TextEditingValue? initial,
     ValueChanged<TextEditingValue>? onChange,
   }) = FAutocompleteManagedControl;
@@ -115,11 +124,12 @@ sealed class FAutocompleteControl with Diagnosticable, _$FAutocompleteControlMix
 
   const FAutocompleteControl._();
 
-  (FAutocompleteController, bool) _update(
-    FAutocompleteControl old,
-    FAutocompleteController controller,
+  (FAutocompleteController<T>, bool) _update(
+    FAutocompleteControl<T> old,
+    FAutocompleteController<T> controller,
     VoidCallback callback,
-    FutureOr<Iterable<String>> Function(String) filter,
+    FutureOr<Iterable<T>> Function(String) filter,
+    String Function(T option) displayStringForOption,
   );
 }
 
@@ -127,10 +137,10 @@ sealed class FAutocompleteControl with Diagnosticable, _$FAutocompleteControlMix
 /// for common configurations.
 ///
 /// {@macro forui.foundation.doc_templates.managed}
-class FAutocompleteManagedControl extends FAutocompleteControl with _$FAutocompleteManagedControlMixin {
+class FAutocompleteManagedControl<T> extends FAutocompleteControl<T> with _$FAutocompleteManagedControlMixin<T> {
   /// The controller.
   @override
-  final FAutocompleteController? controller;
+  final FAutocompleteController<T>? controller;
 
   /// The initial value. Defaults to null.
   ///
@@ -152,11 +162,13 @@ class FAutocompleteManagedControl extends FAutocompleteControl with _$FAutocompl
       super._();
 
   @override
-  FAutocompleteController createController(FutureOr<Iterable<String>> Function(String) _) =>
-      controller ?? .fromValue(initial);
+  FAutocompleteController<T> createController(
+    FutureOr<Iterable<T>> Function(String) _,
+    String Function(T option) displayStringForOption,
+  ) => controller ?? .fromValue(initial, displayStringForOption: displayStringForOption);
 }
 
-class _Lifted extends FAutocompleteControl with _$_LiftedMixin {
+class _Lifted<T> extends FAutocompleteControl<T> with _$_LiftedMixin<T> {
   @override
   final TextEditingValue value;
   @override
@@ -165,11 +177,13 @@ class _Lifted extends FAutocompleteControl with _$_LiftedMixin {
   const _Lifted({required this.value, required this.onChange}) : super._();
 
   @override
-  FAutocompleteController createController(FutureOr<Iterable<String>> Function(String) _) =>
-      _ProxyController(value, onChange);
+  FAutocompleteController<T> createController(
+    FutureOr<Iterable<T>> Function(String) _,
+    String Function(T option) displayStringForOption,
+  ) => _ProxyController(value, onChange, displayStringForOption: displayStringForOption);
 
   @override
-  void _updateController(FAutocompleteController controller, FutureOr<Iterable<String>> Function(String) filter) {
+  void _updateController(FAutocompleteController<T> controller, FutureOr<Iterable<T>> Function(String) filter) {
     (controller as _ProxyController)
       ..update(value, onChange)
       ..loadSuggestions(filter(controller.text));

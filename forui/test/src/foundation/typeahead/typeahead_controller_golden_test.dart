@@ -9,10 +9,10 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  late FTypeaheadController controller;
+  late FTypeaheadController<String> controller;
 
   setUp(() {
-    controller = FTypeaheadController(
+    controller = FTypeaheadController<String>(
       textStyles: (context) => (
         const TextStyle(color: Colors.black),
         const TextStyle(color: Colors.blue),

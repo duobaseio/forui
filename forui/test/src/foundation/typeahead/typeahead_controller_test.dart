@@ -9,10 +9,10 @@ import 'package:forui/forui.dart';
 const initial = ['apple', 'banana', 'cherry'];
 
 void main() {
-  late FTypeaheadController controller;
+  late FTypeaheadController<String> controller;
 
   setUp(() {
-    controller = FTypeaheadController(
+    controller = FTypeaheadController<String>(
       textStyles: (context) => (const TextStyle(), const TextStyle(), const TextStyle()),
       text: 'm',
       suggestions: initial,
@@ -126,7 +126,7 @@ void main() {
     });
 
     test('ignores async iterable when disposed', () async {
-      final controller = FTypeaheadController(
+      final controller = FTypeaheadController<String>(
         textStyles: (context) => (const TextStyle(), const TextStyle(), const TextStyle()),
         text: 'm',
         suggestions: initial,

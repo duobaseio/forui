@@ -36,16 +36,16 @@ class ContentData extends InheritedWidget {
 }
 
 @internal
-class Content extends StatelessWidget {
-  final FAutocompleteController controller;
+class Content<T> extends StatelessWidget {
+  final FAutocompleteController<T> controller;
   final FAutocompleteContentStyle style;
   final bool enabled;
   final ScrollController? scrollController;
   final ScrollPhysics physics;
   final FItemDivider divider;
-  final FutureOr<Iterable<String>> data;
+  final FutureOr<Iterable<T>> data;
   final Widget Function(BuildContext context, FAutocompleteContentStyle style) loadingBuilder;
-  final FAutoCompleteContentBuilder builder;
+  final FAutocompleteContentBuilder<T> builder;
   final Widget Function(BuildContext context, FAutocompleteContentStyle style) emptyBuilder;
   final Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? errorBuilder;
 
@@ -69,8 +69,8 @@ class Content extends StatelessWidget {
     mainAxisSize: .min,
     children: [
       switch (data) {
-        final Iterable<String> data => _content(context, data),
-        final Future<Iterable<String>> future => FutureBuilder(
+        final Iterable<T> data => _content(context, data),
+        final Future<Iterable<T>> future => FutureBuilder(
           future: future,
           builder: (context, snapshot) => switch (snapshot.connectionState) {
             ConnectionState.waiting => Center(child: loadingBuilder(context, style)),
@@ -86,7 +86,7 @@ class Content extends StatelessWidget {
     ],
   );
 
-  Widget _content(BuildContext context, Iterable<String> values) {
+  Widget _content(BuildContext context, Iterable<T> values) {
     final children = builder(context, controller.text, values);
     if (children.isEmpty) {
       return Center(child: emptyBuilder(context, style));
