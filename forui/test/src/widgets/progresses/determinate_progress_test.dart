@@ -38,8 +38,7 @@ void main() {
   }
 
   testWidgets('does not restart animation when rebuilt with the same value', (tester) async {
-    Widget tree() =>
-        TestScaffold(theme: FThemes.neutral.light.touch, child: const FDeterminateProgress(value: 0.5));
+    Widget tree() => TestScaffold(theme: FThemes.neutral.light.touch, child: const FDeterminateProgress(value: 0.5));
 
     await tester.pumpWidget(tree());
     await tester.pump(const Duration(milliseconds: 500));
