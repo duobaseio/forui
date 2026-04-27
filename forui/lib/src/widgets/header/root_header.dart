@@ -39,28 +39,31 @@ class _FRootHeader extends FHeader {
       bottom: false,
       child: Semantics(
         header: true,
-        child: ConstrainedBox(
-          constraints: style.constraints,
-          child: Padding(
-            padding: style.padding,
-            child: Row(
-              mainAxisAlignment: .spaceBetween,
-              children: [
-                Expanded(
-                  child: DefaultTextStyle.merge(
-                    overflow: .ellipsis,
-                    maxLines: 1,
-                    softWrap: false,
-                    style: style.titleTextStyle,
-                    textHeightBehavior: const TextHeightBehavior(
-                      applyHeightToFirstAscent: false,
-                      applyHeightToLastDescent: false,
+        child: DecoratedBox(
+          decoration: style.decoration,
+          child: ConstrainedBox(
+            constraints: style.constraints,
+            child: Padding(
+              padding: style.padding,
+              child: Row(
+                mainAxisAlignment: .spaceBetween,
+                children: [
+                  Expanded(
+                    child: DefaultTextStyle.merge(
+                      overflow: .ellipsis,
+                      maxLines: 1,
+                      softWrap: false,
+                      style: style.titleTextStyle,
+                      textHeightBehavior: const TextHeightBehavior(
+                        applyHeightToFirstAscent: false,
+                        applyHeightToLastDescent: false,
+                      ),
+                      child: title,
                     ),
-                    child: title,
                   ),
-                ),
-                actions,
-              ],
+                  actions,
+                ],
+              ),
             ),
           ),
         ),

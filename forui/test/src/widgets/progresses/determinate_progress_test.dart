@@ -1,3 +1,5 @@
+import 'package:flutter/widgets.dart';
+
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
@@ -17,4 +19,18 @@ void main() {
 
     expect(tester.takeException(), null);
   });
+
+  for (final curve in [Curves.linear, Curves.easeInOut, Curves.elasticOut]) {
+    testWidgets('settles at exact value with $curve', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          theme: FThemes.neutral.light.touch,
+          child: FDeterminateProgress(value: 0.5, style: .delta(motion: .delta(curve: curve))),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(tester.widget<FractionallySizedBox>(find.byType(FractionallySizedBox)).widthFactor, 0.5);
+    });
+  }
 }

@@ -45,6 +45,19 @@
   `FTypography.extensions`.
 
 
+## 0.21.3
+
+### `FDeterminateProgress`
+* **Breaking** Change `FDeterminateProgressMotion.duration` to be the total animation duration regardless of value
+  delta.
+
+* Fix `FDeterminateProgress` track fill desyncing from the value when a non-linear motion curve is used.
+
+
+### `FHeader`
+* Fix `FHeader` ignoring `FHeaderStyle.decoration` on the root variant.
+
+
 ## 0.21.2
 
 ### `FSelectMenuTile`

@@ -64,13 +64,11 @@ class FDeterminateProgress extends StatefulWidget {
 class _State extends State<FDeterminateProgress> with SingleTickerProviderStateMixin {
   FDeterminateProgressStyle? _style;
   late AnimationController _controller;
-  late CurvedAnimation _animation;
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this);
-    _animation = CurvedAnimation(parent: _controller, curve: Curves.linear);
   }
 
   @override
@@ -86,24 +84,14 @@ class _State extends State<FDeterminateProgress> with SingleTickerProviderStateM
   }
 
   void _setup() {
-    final style = widget.style(context.theme.determinateProgressStyle);
-
-    if (_style != style) {
-      _style = style;
-      _controller
-        ..value = _controller.value
-        ..duration = style.motion.duration;
-      _animation.curve = style.motion.curve;
-    }
-
+    final style = _style = widget.style(context.theme.determinateProgressStyle);
     if (widget.value != _controller.value) {
-      _controller.animateTo(widget.value, duration: style.motion.duration * (widget.value - _controller.value).abs());
+      _controller.animateTo(widget.value, duration: style.motion.duration, curve: style.motion.curve);
     }
   }
 
   @override
   void dispose() {
-    _animation.dispose();
     _controller.dispose();
     super.dispose();
   }
@@ -118,8 +106,8 @@ class _State extends State<FDeterminateProgress> with SingleTickerProviderStateM
         child: Align(
           alignment: .centerStart,
           child: AnimatedBuilder(
-            animation: _animation,
-            builder: (_, child) => FractionallySizedBox(widthFactor: _animation.value, child: child!),
+            animation: _controller,
+            builder: (_, child) => FractionallySizedBox(widthFactor: _controller.value, child: child!),
             child: Container(decoration: _style!.fillDecoration),
           ),
         ),
@@ -170,7 +158,7 @@ class FDeterminateProgressStyle with Diagnosticable, _$FDeterminateProgressStyle
 
 /// Motion-related properties for a [FDeterminateProgress].
 class FDeterminateProgressMotion with Diagnosticable, _$FDeterminateProgressMotionFunctions {
-  /// The animation's duration for a full progress from 0.0 to 1.0. Defaults to 1s.
+  /// The animation's duration. Defaults to 1s.
   @override
   final Duration duration;
 
