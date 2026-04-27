@@ -64,6 +64,7 @@ class FDeterminateProgress extends StatefulWidget {
 class _State extends State<FDeterminateProgress> with SingleTickerProviderStateMixin {
   FDeterminateProgressStyle? _style;
   late AnimationController _controller;
+  double? _target;
 
   @override
   void initState() {
@@ -85,7 +86,8 @@ class _State extends State<FDeterminateProgress> with SingleTickerProviderStateM
 
   void _setup() {
     final style = _style = widget.style(context.theme.determinateProgressStyle);
-    if (widget.value != _controller.value) {
+    if (_target != widget.value) {
+      _target = widget.value;
       _controller.animateTo(widget.value, duration: style.motion.duration, curve: style.motion.curve);
     }
   }

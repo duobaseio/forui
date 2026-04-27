@@ -36,4 +36,17 @@ void main() {
       expect(tester.widget<FractionallySizedBox>(find.byType(FractionallySizedBox)).widthFactor, 0.5);
     });
   }
+
+  testWidgets('does not restart animation when rebuilt with the same value', (tester) async {
+    Widget tree() =>
+        TestScaffold(theme: FThemes.neutral.light.touch, child: const FDeterminateProgress(value: 0.5));
+
+    await tester.pumpWidget(tree());
+    await tester.pump(const Duration(milliseconds: 500));
+
+    await tester.pumpWidget(tree());
+    await tester.pump(const Duration(milliseconds: 500));
+
+    expect(tester.widget<FractionallySizedBox>(find.byType(FractionallySizedBox)).widthFactor, 0.5);
+  });
 }
