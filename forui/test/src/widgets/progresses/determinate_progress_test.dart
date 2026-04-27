@@ -25,7 +25,10 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           theme: FThemes.neutral.light.touch,
-          child: FDeterminateProgress(value: 0.5, style: .delta(motion: .delta(curve: curve))),
+          child: FDeterminateProgress(
+            value: 0.5,
+            style: .delta(motion: .delta(curve: curve)),
+          ),
         ),
       );
       await tester.pumpAndSettle();
