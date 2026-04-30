@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart' hide Tooltip;
 import 'package:forui/forui.dart';
 
-import 'widgets/line_calendar.dart';
+import 'widgets/accordion.dart';
 
 void main() {
   runApp(const Application());
@@ -29,7 +29,7 @@ class Application extends StatelessWidget {
         ),
       ),
       home: const FScaffold(
-        child: LineCalendar(),
+        child: Accordion(),
       ),
     );
   }
