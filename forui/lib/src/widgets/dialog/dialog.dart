@@ -278,7 +278,7 @@ class FDialog extends StatefulWidget {
   /// The dialog's box constraints. Defaults to `BoxConstraints(minWidth: 280, maxWidth: 560)`.
   final BoxConstraints constraints;
 
-  /// Whether the dialog should avoid the system's view insets, typically the keyboard.  Defaults to true.
+  /// Whether the dialog should avoid the system's view insets, typically the keyboard. Defaults to true.
   ///
   /// Set this to false to avoid the dialog from becoming overly compressed on web & embedded platforms where the view
   /// insets comes from the surrounding host/browser environment.
