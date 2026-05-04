@@ -140,5 +140,47 @@ void main() {
 
       expect(tester.takeException(), null);
     });
+
+    group('resizeToAvoidInsets', () {
+      // Default style.insetPadding is EdgeInsets.symmetric(horizontal: 40, vertical: 24).
+      const styleBottomPadding = 24.0;
+      const viewInsetsBottom = 300.0;
+
+      for (final (resize, expectedBottom) in [
+        (true, viewInsetsBottom + styleBottomPadding),
+        (false, styleBottomPadding),
+      ]) {
+        testWidgets('resize=$resize -> bottom padding = $expectedBottom', (tester) async {
+          await tester.pumpWidget(
+            TestScaffold(
+              child: MediaQuery(
+                data: const MediaQueryData(viewInsets: EdgeInsets.only(bottom: viewInsetsBottom)),
+                child: FDialog(
+                  resizeToAvoidInsets: resize,
+                  title: const Text('Title'),
+                  body: const Text('Body'),
+                  actions: [FButton(onPress: () {}, child: const Text('OK'))],
+                ),
+              ),
+            ),
+          );
+          await tester.pumpAndSettle();
+
+          final padding = tester
+              .widget<AnimatedPadding>(find.byType(AnimatedPadding).first)
+              .padding
+              .resolve(TextDirection.ltr);
+          expect(padding.bottom, expectedBottom);
+        });
+      }
+
+      testWidgets('default is true across all constructors', (tester) async {
+        expect(FDialog(actions: const [], title: const Text('x')).resizeToAvoidInsets, true);
+        expect(FDialog.adaptive(actions: const []).resizeToAvoidInsets, true);
+        expect(const FDialog.raw(builder: _emptyBuilder).resizeToAvoidInsets, true);
+      });
+    });
   });
 }
+
+Widget _emptyBuilder(BuildContext _, FDialogStyle _) => const SizedBox.shrink();

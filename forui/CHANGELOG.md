@@ -8,6 +8,10 @@
 * Add `ThemeExtension` support via `FColors(extensions: ...)`, `FColors.extension<T>()`, and `FColors.extensions`.
 
 
+### `FDialog`
+* Add `FDialog.resizeToAvoidInsets` to opt out of view insets padding.
+
+
 ### `FStyle` & `FThemeData`
 * Add `FThemeData.hapticFeedback`.
 

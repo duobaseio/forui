@@ -278,6 +278,12 @@ class FDialog extends StatefulWidget {
   /// The dialog's box constraints. Defaults to `BoxConstraints(minWidth: 280, maxWidth: 560)`.
   final BoxConstraints constraints;
 
+  /// Whether the dialog should avoid the system's view insets, typically the keyboard.  Defaults to true.
+  ///
+  /// Set this to false to avoid the dialog from becoming overly compressed on web & embedded platforms where the view
+  /// insets comes from the surrounding host/browser environment.
+  final bool resizeToAvoidInsets;
+
   /// The builder for the dialog's content.
   final Widget Function(BuildContext context, FDialogStyle style) builder;
 
@@ -322,6 +328,7 @@ class FDialog extends StatefulWidget {
     this.animation,
     this.semanticsLabel,
     this.constraints = const BoxConstraints(minWidth: 280, maxWidth: 560),
+    this.resizeToAvoidInsets = true,
     Widget? image,
     Widget? title,
     Widget? body,
@@ -359,6 +366,7 @@ class FDialog extends StatefulWidget {
     this.animation,
     this.semanticsLabel,
     this.constraints = const BoxConstraints(minWidth: 280, maxWidth: 560),
+    this.resizeToAvoidInsets = true,
     Widget? image,
     Widget? title,
     Widget? body,
@@ -391,6 +399,7 @@ class FDialog extends StatefulWidget {
     this.animation,
     this.semanticsLabel,
     this.constraints = const BoxConstraints(minWidth: 280, maxWidth: 560),
+    this.resizeToAvoidInsets = true,
     super.key,
   });
 
@@ -405,6 +414,7 @@ class FDialog extends StatefulWidget {
       ..add(DiagnosticsProperty('animation', animation))
       ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(DiagnosticsProperty('constraints', constraints))
+      ..add(FlagProperty('resizeToAvoidInsets', value: resizeToAvoidInsets, ifFalse: 'do not resize for view insets'))
       ..add(ObjectFlagProperty.has('builder', builder));
   }
 }
@@ -490,7 +500,9 @@ class _FDialogState extends State<FDialog> {
     }
 
     return AnimatedPadding(
-      padding: MediaQuery.viewInsetsOf(context) + style.insetPadding.resolve(direction),
+      padding:
+          (widget.resizeToAvoidInsets ? MediaQuery.viewInsetsOf(context) : EdgeInsets.zero) +
+          style.insetPadding.resolve(direction),
       duration: style.motion.insetDuration,
       curve: style.motion.insetCurve,
       child: MediaQuery.removeViewInsets(
