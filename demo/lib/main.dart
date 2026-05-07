@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart' hide Tooltip;
+import 'package:flutter/material.dart' hide Autocomplete, Tooltip;
 import 'package:forui/forui.dart';
 
-import 'widgets/accordion.dart';
+import 'widgets/autocomplete.dart';
 
 void main() {
   runApp(const Application());
@@ -29,7 +29,7 @@ class Application extends StatelessWidget {
         ),
       ),
       home: const FScaffold(
-        child: Accordion(),
+        child: Autocomplete(),
       ),
     );
   }
