@@ -1,6 +1,7 @@
 import type { BaseLayoutProps } from 'fumadocs-ui/layouts/shared';
 import Image from 'next/image';
 import { Logo } from '@/components/logo';
+import { t } from '@/lib/i18n';
 
 const iconLinks = [
   {
@@ -27,20 +28,22 @@ const iconLinks = [
 ];
 
 // For home layout.
-export function baseOptions(): BaseLayoutProps {
+export function baseOptions(lang: string): BaseLayoutProps {
+  const nav = t(lang).nav;
   return {
+    i18n: true,
     nav: {
       title: <Logo />,
     },
     links: [
       {
-        text: 'Documentation',
-        url: '/docs',
+        text: nav.docs,
+        url: `/${lang}/docs`,
         secondary: false,
       },
       {
-        text: 'Enterprise',
-        url: '/enterprise',
+        text: nav.enterprise,
+        url: `/${lang}/enterprise`,
         secondary: false,
       },
       ...iconLinks,
@@ -49,20 +52,22 @@ export function baseOptions(): BaseLayoutProps {
 }
 
 // For docs layout.
-export function docsOptions(): BaseLayoutProps {
+export function docsOptions(lang: string): BaseLayoutProps {
+  const nav = t(lang).nav;
   return {
+    i18n: true,
     nav: {
       title: <Logo />,
     },
     links: [
       {
-        text: 'Home',
-        url: '/',
+        text: nav.home,
+        url: `/${lang}`,
         secondary: false,
       },
       {
-        text: 'Enterprise',
-        url: '/enterprise',
+        text: nav.enterprise,
+        url: `/${lang}/enterprise`,
         secondary: false,
       },
       ...iconLinks,

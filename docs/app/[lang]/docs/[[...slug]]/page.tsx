@@ -8,9 +8,11 @@ import { Separator } from '@/components/ui/separator';
 import LinkBadge from '@/components/ui/link-badge/link-badge';
 import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group';
 
-export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
-  const params = await props.params;
-  const page = source.getPage(params.slug);
+type Params = Promise<{ lang: string; slug?: string[] }>;
+
+export default async function Page(props: { params: Params }) {
+  const { lang, slug } = await props.params;
+  const page = source.getPage(slug, lang);
   if (!page) notFound();
 
   const MDX = page.data.body;
@@ -30,7 +32,7 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
       <DocsBody className="text-base!">
         <MDX
           components={getMDXComponents({
-            a: createRelativeLink(source, page), // this allows you to link to other pages with relative file paths.
+            a: createRelativeLink(source, page),
           })}
         />
       </DocsBody>
@@ -39,12 +41,12 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
 }
 
 export async function generateStaticParams() {
-  return source.generateParams();
+  return source.generateParams('slug', 'lang');
 }
 
-export async function generateMetadata(props: PageProps<'/docs/[[...slug]]'>): Promise<Metadata> {
-  const params = await props.params;
-  const page = source.getPage(params.slug);
+export async function generateMetadata(props: { params: Params }): Promise<Metadata> {
+  const { lang, slug } = await props.params;
+  const page = source.getPage(slug, lang);
   if (!page) notFound();
 
   return {

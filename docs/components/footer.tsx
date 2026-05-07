@@ -1,7 +1,10 @@
-export function Footer() {
+import { t } from '@/lib/i18n';
+
+export function Footer({ lang }: { lang: string }) {
+  const text = t(lang).footer;
   return (
     <footer className="py-6 text-center text-sm text-muted-foreground">
-      Built by{' '}
+      {text.builtBy}{' '}
       <a
         href="https://duobase.io"
         target="_blank"
@@ -10,7 +13,7 @@ export function Footer() {
       >
         Duobase
       </a>{' '}
-      from Singapore.
+      {text.fromSingapore}
     </footer>
   );
 }

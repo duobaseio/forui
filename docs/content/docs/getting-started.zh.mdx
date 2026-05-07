@@ -1,0 +1,102 @@
+---
+title: 开始使用
+description: 在你的 Flutter 项目中开始使用 Forui。
+---
+
+import {Callout} from "fumadocs-ui/components/callout";
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import mainBasicSnippet from '@/snippets/snippets/getting_started/main_basic.json';
+import mainRouterSnippet from '@/snippets/snippets/getting_started/main_router.json';
+import materialSnippet from '@/snippets/snippets/getting_started/material.json';
+
+本指南假设你已具备 Flutter 的基础知识，并已搭建好开发环境。
+如果你刚接触 Flutter，可以参考官方[安装指南](https://docs.flutter.dev/get-started)。
+
+## 安装
+
+在你的 Flutter 项目目录下执行以下命令安装 Forui。
+
+<Callout type="warning">
+    Forui 0.18.0+ 需要 Flutter **3.41.0+**。运行 `flutter --version` 查看当前的 Flutter 版本。
+</Callout>
+
+```bash filename="bash" copy
+flutter pub add forui
+```
+
+## 升级
+
+对于 `1.0.0` 之前的包，Flutter 不会自动升级其次要版本。
+
+也就是说，下面这条 `pubspec.yaml` 中的依赖**不会**自动升级到 `0.20.0`：
+
+```yaml filename="pubspec.yaml"
+dependencies:
+  forui: ^0.20.0 // ❌ 不会升级到 0.21.0
+```
+
+要升级到最新版本的 Forui，请运行以下命令：
+
+```bash filename="bash" copy
+flutter pub upgrade forui --major-versions
+```
+
+从 `0.17.0` 起，Forui 提供[数据驱动的修复](https://github.com/flutter/flutter/blob/master/docs/contributing/Data-driven-Fixes.md)。
+你可以通过运行 `dart fix --apply` 自动完成部分迁移。
+
+### Forui Icons
+
+<Callout type="info">
+    Forui Icons 已包含在 forui 包中。如果你已安装 `forui`，无需再单独安装。
+</Callout>
+
+如果你只想使用图标，请在 Flutter 项目目录下运行以下命令。
+
+```bash filename="bash" copy
+flutter pub add forui_assets
+```
+
+## 使用
+
+要在 Flutter 应用中使用 Forui widget，请导入 Forui 包，并将
+[`FTheme`](https://pub.dev/documentation/forui/latest/forui.theme/FTheme-class.html) widget 放置在 widget 树根部、
+`CupertinoApp`、`MaterialApp` 或 `WidgetsApp` 之下。
+
+要在你的项目中生成 Forui 应用的基础结构，请运行：
+
+<Tabs items={['基础', '路由']}>
+    <Tab value="基础">
+        ```bash filename="bash" copy
+        dart run forui init
+        ```
+    </Tab>
+    <Tab value="路由">
+        ```bash filename="bash" copy
+        dart run forui init --template=router
+        ```
+    </Tab>
+</Tabs>
+
+或者直接复制粘贴下面的代码片段：
+
+<Tabs items={['基础', '路由']}>
+    <Tab value="基础">
+        <CodeSnippet snippet={mainBasicSnippet} />
+    </Tab>
+    <Tab value="路由">
+        <CodeSnippet snippet={mainRouterSnippet} />
+    </Tab>
+</Tabs>
+
+将 Cupertino/Material widget 与 Forui widget 一起使用，是完全没有问题的！
+
+<CodeSnippet snippet={materialSnippet} />
+
+### 主题
+
+Forui 提供了一组开箱即用的预设主题。
+在上面的示例中，我们使用了 `FThemes.neutral.light`，即中性配色的浅色主题变体。
+
+主题是 Forui 中非常强大的构建块，让你可以自由定制应用的外观与风格。
+更多关于主题的内容，请参阅[主题](/docs/concepts/themes)页面。

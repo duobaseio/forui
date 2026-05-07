@@ -6,7 +6,7 @@ export const revalidate = false;
 export async function GET(request: Request) {
   const { protocol, host } = new URL(request.url);
   const baseUrl = `${protocol}//${host}`;
-  const pages = source.getPages();
+  const pages = source.getPages('en');
   const pageMap = new Map(pages.map((p) => [p.url, p]));
 
   const lines: string[] = [
@@ -25,7 +25,7 @@ export async function GET(request: Request) {
     lines.push(`- [${page.data.title}](${baseUrl}${page.url}.md): ${page.data.description}`);
   }
 
-  for (const child of source.pageTree.children) {
+  for (const child of source.getPageTree('en').children) {
     switch (child.type) {
       case 'page':
         renderPageItem(child);

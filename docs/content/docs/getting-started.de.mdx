@@ -1,0 +1,102 @@
+---
+title: Erste Schritte
+description: Legen Sie mit Forui in Ihrem Flutter-Projekt los.
+---
+
+import {Callout} from "fumadocs-ui/components/callout";
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import mainBasicSnippet from '@/snippets/snippets/getting_started/main_basic.json';
+import mainRouterSnippet from '@/snippets/snippets/getting_started/main_router.json';
+import materialSnippet from '@/snippets/snippets/getting_started/material.json';
+
+Diese Anleitung setzt grundlegende Flutter-Kenntnisse und eine bereits eingerichtete Entwicklungsumgebung voraus.
+Falls Sie neu bei Flutter sind, folgen Sie der offiziellen [Installationsanleitung](https://docs.flutter.dev/get-started).
+
+## Installation
+
+Führen Sie im Verzeichnis Ihres Flutter-Projekts den folgenden Befehl aus, um Forui zu installieren.
+
+<Callout type="warning">
+    Forui 0.18.0+ benötigt Flutter **3.41.0+**. Mit `flutter --version` können Sie Ihre Flutter-Version prüfen.
+</Callout>
+
+```bash filename="bash" copy
+flutter pub add forui
+```
+
+## Aktualisieren
+
+Flutter aktualisiert Minor-Versionen von Paketen vor `1.0.0` nicht automatisch.
+
+Das heißt: Der folgende Eintrag in Ihrer `pubspec.yaml` wird **nicht** automatisch auf `0.20.0` aktualisiert:
+
+```yaml filename="pubspec.yaml"
+dependencies:
+  forui: ^0.20.0 // ❌ wird nicht auf 0.21.0 aktualisiert
+```
+
+Um Forui auf die neueste Version zu aktualisieren, führen Sie folgenden Befehl aus:
+
+```bash filename="bash" copy
+flutter pub upgrade forui --major-versions
+```
+
+Ab `0.17.0` bietet Forui [datengetriebene Fixes](https://github.com/flutter/flutter/blob/master/docs/contributing/Data-driven-Fixes.md).
+Damit lässt sich ein Teil der Migration automatisieren, indem Sie `dart fix --apply` ausführen.
+
+### Forui Icons
+
+<Callout type="info">
+    Forui Icons ist im forui-Paket enthalten. Wenn Sie `forui` installieren, müssen Sie es nicht separat installieren.
+</Callout>
+
+Möchten Sie nur die Icons verwenden, führen Sie folgenden Befehl im Verzeichnis Ihres Flutter-Projekts aus.
+
+```bash filename="bash" copy
+flutter pub add forui_assets
+```
+
+## Verwendung
+
+Um Forui-Widgets in Ihrer Flutter-App zu verwenden, importieren Sie das Forui-Paket und platzieren Sie das
+[`FTheme`](https://pub.dev/documentation/forui/latest/forui.theme/FTheme-class.html)-Widget unterhalb von
+`CupertinoApp`, `MaterialApp` oder `WidgetsApp` an der Wurzel des Widget-Baums.
+
+Um eine grundlegende Forui-App-Struktur in Ihrem Projekt zu erzeugen, führen Sie aus:
+
+<Tabs items={['Einfach', 'Router']}>
+    <Tab value="Einfach">
+        ```bash filename="bash" copy
+        dart run forui init
+        ```
+    </Tab>
+    <Tab value="Router">
+        ```bash filename="bash" copy
+        dart run forui init --template=router
+        ```
+    </Tab>
+</Tabs>
+
+Oder kopieren Sie den folgenden Codeausschnitt:
+
+<Tabs items={['Einfach', 'Router']}>
+    <Tab value="Einfach">
+        <CodeSnippet snippet={mainBasicSnippet} />
+    </Tab>
+    <Tab value="Router">
+        <CodeSnippet snippet={mainRouterSnippet} />
+    </Tab>
+</Tabs>
+
+Cupertino-/Material-Widgets können problemlos zusammen mit Forui-Widgets verwendet werden!
+
+<CodeSnippet snippet={materialSnippet} />
+
+### Themes
+
+Forui bietet eine Reihe vordefinierter Themes, die sofort einsatzbereit sind.
+Im obigen Beispiel haben wir das Theme `FThemes.neutral.light` verwendet — eine helle Variante des neutralen Farbschemas.
+
+Themes sind in Forui ein sehr mächtiger Baustein, mit dem Sie das Aussehen und die Anmutung Ihrer App anpassen können.
+Mehr zu Themes finden Sie auf der Seite [Themes](/docs/concepts/themes).

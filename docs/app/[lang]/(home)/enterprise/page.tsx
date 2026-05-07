@@ -5,47 +5,28 @@ import { Code2, Compass, ArrowRightLeft, FileSearch, GraduationCap, HeartHandsha
 import { Button } from '@/components/ui/button';
 import { Card, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Footer } from '@/components/footer';
-
-const services = [
-  {
-    icon: Code2,
-    title: 'Development',
-    description: 'Expert assistance with challenging Flutter project goals.',
-  },
-  {
-    icon: Compass,
-    title: 'Technical Guidance',
-    description: 'Technology optimization and reliability for your Flutter apps.',
-  },
-  {
-    icon: ArrowRightLeft,
-    title: 'Migration Assistance',
-    description: 'Comprehensive upgrade support for Forui versions.',
-  },
-  {
-    icon: FileSearch,
-    title: 'Code Reviews',
-    description: 'In-depth reviews to prevent bugs and enforce best practices.',
-  },
-  {
-    icon: HeartHandshake,
-    title: 'Long-Term Support (LTS)',
-    description: 'Priority fixes, upgrades, and troubleshooting.',
-  },
-  {
-    icon: GraduationCap,
-    title: 'Team Training',
-    description: 'Expert-led workshops for skill development.',
-  },
-];
-
-export const metadata: Metadata = {
-  title: 'Enterprise',
-};
+import { t } from '@/lib/i18n';
 
 const contact = 'https://forms.gle/wdxmjUMbYEhoJTsN8';
 
-export default function EnterprisePage() {
+export async function generateMetadata({ params }: { params: Promise<{ lang: string }> }): Promise<Metadata> {
+  const { lang } = await params;
+  return { title: t(lang).enterprise.metadataTitle };
+}
+
+export default async function EnterprisePage({ params }: { params: Promise<{ lang: string }> }) {
+  const { lang } = await params;
+  const text = t(lang).enterprise;
+
+  const services = [
+    { icon: Code2, ...text.services.development },
+    { icon: Compass, ...text.services.guidance },
+    { icon: ArrowRightLeft, ...text.services.migration },
+    { icon: FileSearch, ...text.services.review },
+    { icon: HeartHandshake, ...text.services.lts },
+    { icon: GraduationCap, ...text.services.training },
+  ];
+
   return (
     <main className="flex flex-col">
       {/* Hero Section */}
@@ -56,19 +37,16 @@ export default function EnterprisePage() {
             <source src="/assets/enterprise.mp4" type="video/mp4; codecs=hvc1" />
             <source src="/assets/enterprise.webm" type="video/webm" />
           </video>
-          <h1 className="text-3xl sm:text-5xl font-bold tracking-tight mb-4">Enterprise Support</h1>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mb-6">
-            Get hands-on support from the team behind Forui. We work alongside you to solve complex challenges and ship
-            exceptional Flutter apps faster.
-          </p>
+          <h1 className="text-3xl sm:text-5xl font-bold tracking-tight mb-4">{text.heroTitle}</h1>
+          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mb-6">{text.heroSubtitle}</p>
           <div className="flex gap-4">
             <Button asChild>
               <a href={contact} target="_blank" rel="noopener noreferrer">
-                Get in Touch
+                {text.getInTouch}
               </a>
             </Button>
             <Button variant="outline" asChild>
-              <Link href="#services">Learn More</Link>
+              <Link href="#services">{text.learnMore}</Link>
             </Button>
           </div>
         </div>
@@ -77,7 +55,7 @@ export default function EnterprisePage() {
       {/* Services Grid */}
       <section id="services" className="px-6 py-16 bg-muted/50">
         <div className="max-w-5xl mx-auto">
-          <h2 className="text-3xl font-bold tracking-tight text-center mb-10">Accelerate Your Development</h2>
+          <h2 className="text-3xl font-bold tracking-tight text-center mb-10">{text.servicesTitle}</h2>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             {services.map((service) => (
               <Card key={service.title} className="text-left">
@@ -95,19 +73,17 @@ export default function EnterprisePage() {
       {/* CTA Section */}
       <section className="px-6 py-16">
         <div className="max-w-xl mx-auto text-center">
-          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4 ">Ready to Get Started?</h2>
-          <p className="text-base sm:text-lg text-muted-foreground mb-6">
-            Contact us to learn more about how we can help your team succeed with Flutter and Forui.
-          </p>
+          <h2 className="text-2xl sm:text-3xl font-bold tracking-tight mb-4 ">{text.ctaTitle}</h2>
+          <p className="text-base sm:text-lg text-muted-foreground mb-6">{text.ctaSubtitle}</p>
           <Button size="lg" asChild>
             <a href={contact} target="_blank" rel="noopener noreferrer">
-              Contact Us
+              {text.contactUs}
             </a>
           </Button>
         </div>
       </section>
 
-      <Footer />
+      <Footer lang={lang} />
     </main>
   );
 }

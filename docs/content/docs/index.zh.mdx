@@ -1,0 +1,65 @@
+---
+title: 关于 Forui
+description: 一个为 Flutter 设计的精美、极简、平台无关的 UI 库。
+---
+
+import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+import { Cards, Card } from 'fumadocs-ui/components/card';
+import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
+import { Sparkles, MessagesSquare, FolderGit2 } from 'lucide-react';
+
+<ImageZoom
+  src="/banners/banner-text-130226.png"
+  className="w-full border rounded mt-0"
+  alt="Forui Demo"
+  width={1200}
+  height={0}
+  priority
+/>
+
+**Forui** 是一个 Flutter UI 库，提供一组深受 [shadcn/ui](https://ui.shadcn.com/) 启发的极简 widget。
+
+## 为什么选择 Forui？
+
+- 超过 40 个精心打造的 widget。
+- 内置 [CLI](/docs/reference/cli)，用于生成主题与样式样板代码。
+- [测试覆盖完善](https://app.codecov.io/gh/duobaseio/forui)。
+- 支持本地化（l10n）。
+- 通过 [`forui_hooks`](https://pub.dev/packages/forui_hooks) 一流支持 [Flutter Hooks](https://pub.dev/packages/flutter_hooks) 集成。
+
+## 核心理念
+
+Flutter 是一款强大的跨平台开发工具，但其原生的 Material 与 Cupertino widget 在追求真正通用的设计时往往力有未逮。
+Forui 致力于成为开发者的默认平台无关替代方案，帮助你在所有设备上打造一致而优雅的 UI。
+
+我们以下列核心理念设计了本库：
+
+- **平台无关设计：** widget 经过精心打造，可无缝适配各种平台，确保在不同设备上呈现一致而精致的外观。
+- **触控优先交互：** 我们以触控交互为重，为移动端与平板用户带来自然、灵敏的操作体验。
+- **极简美学：** 本库秉持简洁、清爽的设计原则，呈现视觉上赏心悦目、毫无冗余的用户界面。
+- **可扩展、可定制：** 我们鼓励定制，并提供灵活的选项，让组件契合你独特的设计需求。
+
+## 快速链接
+
+<Cards>
+  <Card icon={<Sparkles />} title="开始使用" href="/docs/getting-started" />
+  <Card icon={<MessagesSquare />} title="讨论区" href="https://github.com/duobaseio/forui/discussions" />
+  <Card icon={<FolderGit2 />} title="源代码" href="https://github.com/duobaseio/forui" />
+</Cards>
+
+## 常见问题
+
+本节汇总了关于 Forui 的常见问题。
+如果你的问题在此找不到答案，欢迎[发起讨论](https://github.com/duobaseio/forui/discussions)。
+
+<Accordions type="multiple">
+  <Accordion title="我可以将 X 与 Forui 一起使用吗？">
+    大多数情况下，*可以*。
+    Forui 设计上兼容其他 Flutter 库与包，包括 Material 与 Cupertino widget。
+  </Accordion>
+
+  <Accordion title="为什么 Forui 不是 shadcn/ui 的移植？">
+    我们欣赏 `shadcn/ui` 的极简设计，但 Forui 的重心在于为触控设备打造最佳用户体验。
+    因此我们针对移动端与平板设备调整了设计，使其更加直观。
+  </Accordion>
+</Accordions>
