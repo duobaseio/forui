@@ -1,5 +1,8 @@
 ## 0.22.0 (Next)
 
+### `FAutocomplete`
+* Fix `FAutocomplete` not showing context menu by default.
+
 ### `FButton`
 * Fix `FButton` announcing both `semanticsLabel` and child semantics when `semanticsLabel` is set.
 

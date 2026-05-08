@@ -46,6 +46,7 @@ const timezones = {
 };
 
 @RoutePage()
+@Options(include: [features])
 class AutocompletePage extends Example {
   AutocompletePage({@queryParam super.theme});
 
