@@ -55,9 +55,9 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version: 24
-      - uses: pnpm/action-setup@v5
+      - uses: pnpm/action-setup@v6
         with:
-          version: 10
+          version: 11
 
       - run: pnpm install
       - name: Deploy to Cloudflare Workers
