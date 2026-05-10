@@ -419,6 +419,10 @@ class _FTappableState<T extends FTappable> extends State<T> {
                 onPointerDown: _entries == null ? (event) => _start(event.buttons) : null,
                 onPointerMove: _entries == null
                     ? (event) async {
+                        if (!mounted) {
+                          return;
+                        }
+
                         // Avoid unnecessary state updates.
                         if (!_current.contains(FTappableVariant.pressed)) {
                           return;
