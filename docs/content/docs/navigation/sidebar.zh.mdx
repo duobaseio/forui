@@ -1,0 +1,131 @@
+---
+title: 侧边栏
+description: 一个 sidebar widget，为屏幕侧边的导航提供风格统一的布局。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/
+---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/sidebar/default.json';
+import nestedSnippet from '@/snippets/examples/sidebar/nested.json';
+import customWidthSnippet from '@/snippets/examples/sidebar/custom-width.json';
+import sheetSnippet from '@/snippets/examples/sidebar/sheet.json';
+import sidebarUsage from '@/snippets/usages/widgets/sidebar/sidebar.json';
+import sidebarBuilderUsage from '@/snippets/usages/widgets/sidebar/sidebarBuilder.json';
+import sidebarRawUsage from '@/snippets/usages/widgets/sidebar/sidebarRaw.json';
+import sidebarGroupUsage from '@/snippets/usages/widgets/sidebar/sidebarGroup.json';
+import sidebarItemUsage from '@/snippets/usages/widgets/sidebar/sidebarItem.json';
+
+<Callout type="info">
+  Sidebar 通常与 `FScaffold` 一起使用。`FScaffold` 的用法可在[此处](/docs/layout/scaffold)找到。
+</Callout>
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='sidebar' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+要生成可定制的特定样式：
+
+<Tabs items={['Sidebar', 'Sidebar Group', 'Sidebar Item']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create sidebar
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create sidebar-group
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create sidebar-item
+        ````
+    </Tab>
+</Tabs>
+
+## 结构
+
+本节描述 sidebar 各个元素的结构。
+
+### `FSidebar`
+
+为屏幕侧边提供风格统一布局的 widget。该 widget 包含以下区块：
+
+| 名称    | 参数           | 位置       | 是否可选 |
+| :------ | :------------- | :--------- | :------- |
+| header  | header         | 固定       | 是       |
+| content | child/children | 可滚动     | 否       |
+| footer  | footer         | 固定       | 是       |
+
+### `FSidebarGroup`
+
+用于将多个 `FSidebarItem` 组合在一起的 widget。
+
+### `FSidebarItem`
+
+表示 sidebar 上的一个项。可以嵌套在 `FSidebarItem.children` 中以创建嵌套项。
+
+## 用法
+
+### `FSidebar(...)`
+<UsageSnippet usage={sidebarUsage} />
+
+### `FSidebar.builder(...)`
+<UsageSnippet usage={sidebarBuilderUsage} />
+
+### `FSidebar.raw(...)`
+<UsageSnippet usage={sidebarRawUsage} />
+
+### `FSidebarGroup(...)`
+<UsageSnippet usage={sidebarGroupUsage} />
+
+### `FSidebarItem(...)`
+<UsageSnippet usage={sidebarItemUsage} />
+
+## 示例
+
+### Sheet 侧边栏
+
+适用于屏幕空间有限的设备。
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='sidebar' variant='sheet' height={500} />
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={sheetSnippet} />
+  </Tab>
+</Tabs>
+
+### 自定义宽度
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='sidebar' variant='custom-width' height={300} />
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={customWidthSnippet} />
+  </Tab>
+</Tabs>
+
+### 嵌套的 `FSidebarItem`
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='sidebar' variant='nested' height={500} />
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={nestedSnippet} />
+  </Tab>
+</Tabs>

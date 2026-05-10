@@ -1,0 +1,22 @@
+---
+title: Lokalisierung
+description: Aktivieren Sie die Lokalisierung der Forui-Widgets für 115 Sprachen.
+---
+
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import defaultSnippet from '@/snippets/snippets/concepts/localization/default.json';
+import localizationSnippet from '@/snippets/snippets/concepts/localization/localization.json';
+
+Forui unterstützt alle 115 Sprachen, die Flutter nativ unterstützt.
+
+Um die Lokalisierung für Forui-Widgets zu aktivieren, fügen Sie beim Aufruf des Konstruktors von `CupertinoApp`, `MaterialApp` oder `WidgetsApp` den `FLocalizations.delegate` hinzu.
+Ergänzen Sie anschließend die von Ihrer Anwendung unterstützten Locales.
+
+<CodeSnippet snippet={defaultSnippet} />
+
+Die Klasse `FLocalizations` stellt außerdem automatisch generierte Listen `localizationsDelegates` und `supportedLocales` bereit.
+Sie können diese verwenden, anstatt sie manuell anzugeben, sofern Ihre Anwendung keine weiteren Lokalisierungstexte besitzt.
+
+<CodeSnippet snippet={localizationSnippet} />
+
+Weitere Informationen finden Sie unter [Internationalizing Flutter apps](https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization).

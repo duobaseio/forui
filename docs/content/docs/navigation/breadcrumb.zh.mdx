@@ -1,0 +1,76 @@
+---
+title: 面包屑
+description: 显示一个链接列表，帮助直观呈现页面在站点层级结构中的位置。它支持向上导航至任意祖先节点。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.breadcrumb/
+---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/breadcrumb/default.json';
+import tilesSnippet from '@/snippets/examples/breadcrumb/tiles.json';
+import dividerSnippet from '@/snippets/examples/breadcrumb/divider.json';
+import breadcrumbUsage from '@/snippets/usages/widgets/breadcrumb/breadcrumb.json';
+import breadcrumbItemUsage from '@/snippets/usages/widgets/breadcrumb/breadcrumbItem.json';
+import breadcrumbItemCollapsedUsage from '@/snippets/usages/widgets/breadcrumb/breadcrumbItemCollapsed.json';
+import breadcrumbItemCollapsedTilesUsage from '@/snippets/usages/widgets/breadcrumb/breadcrumbItemCollapsedTiles.json';
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='breadcrumb' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+要生成可定制的特定样式：
+
+<Tabs items={['Breadcrumb']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create breadcrumb
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+### `FBreadcrumb(...)`
+<UsageSnippet usage={breadcrumbUsage} />
+
+### `FBreadcrumbItem(...)`
+<UsageSnippet usage={breadcrumbItemUsage} />
+
+### `FBreadcrumbItem.collapsed(...)`
+<UsageSnippet usage={breadcrumbItemCollapsedUsage} />
+
+### `FBreadcrumbItem.collapsedTiles(...)`
+<UsageSnippet usage={breadcrumbItemCollapsedTilesUsage} />
+
+## 示例
+
+### 列表项
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='breadcrumb' variant='tiles' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={tilesSnippet} />
+  </Tab>
+</Tabs>
+
+### 自定义分隔符
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='breadcrumb' variant='divider' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={dividerSnippet} />
+  </Tab>
+</Tabs>

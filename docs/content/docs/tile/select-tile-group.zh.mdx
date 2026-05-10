@@ -1,0 +1,145 @@
+---
+title: 选择列表项分组
+description: 一组 tile，允许用户从一组选项中进行选择。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.select_tile/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import selectTileGroupDefault from '@/snippets/examples/select-tile-group/default.json';
+import selectTileGroupUsage from '@/snippets/usages/widgets/select_tile_group/selectTileGroup.json';
+import selectTileGroupBuilderUsage from '@/snippets/usages/widgets/select_tile_group/selectTileGroupBuilder.json';
+import selectTileUsage from '@/snippets/usages/widgets/select_tile_group/selectTile.json';
+import selectTileSuffixUsage from '@/snippets/usages/widgets/select_tile_group/selectTileSuffix.json';
+import selectTileGroupRadio from '@/snippets/examples/select-tile-group/radio.json';
+import selectTileGroupMultiValue from '@/snippets/examples/select-tile-group/multi-value.json';
+import selectTileGroupSuffix from '@/snippets/examples/select-tile-group/suffix.json';
+import selectTileGroupLazy from '@/snippets/examples/select-tile-group/lazy.json';
+import selectTileGroupScrollable from '@/snippets/examples/select-tile-group/scrollable.json';
+import selectTileGroupFullDivider from '@/snippets/examples/select-tile-group/full-divider.json';
+import selectTileGroupNoDivider from '@/snippets/examples/select-tile-group/no-divider.json';
+
+<Callout type="info">
+    在桌面端，通常更推荐使用 [select group](/docs/form/select-group)。
+</Callout>
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='select-tile-group' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={selectTileGroupDefault} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+要生成可定制的特定样式：
+
+<Tabs items={['Tile Group']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create tile-group
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+### `FSelectTileGroup(...)`
+<UsageSnippet usage={selectTileGroupUsage} />
+
+### `FSelectTileGroup.builder(...)`
+<UsageSnippet usage={selectTileGroupBuilderUsage} />
+
+### `FSelectTile(...)`
+<UsageSnippet usage={selectTileUsage} />
+
+### `FSelectTile.suffix(...)`
+<UsageSnippet usage={selectTileSuffixUsage} />
+
+## 示例
+
+### 行为
+
+#### 可滚动
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='select-tile-group' variant='scrollable' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={selectTileGroupScrollable} />
+  </Tab>
+</Tabs>
+
+#### 懒加载滚动
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='select-tile-group' variant='lazy' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={selectTileGroupLazy} />
+  </Tab>
+</Tabs>
+
+#### 多值表单
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='select-tile-group' variant='multi-value' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={selectTileGroupMultiValue} />
+  </Tab>
+</Tabs>
+
+#### 单选表单
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='select-tile-group' variant='radio' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={selectTileGroupRadio} />
+  </Tab>
+</Tabs>
+
+### 外观
+
+#### 自定义图标
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='select-tile-group' variant='suffix'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={selectTileGroupSuffix} />
+  </Tab>
+</Tabs>
+
+#### 完整分隔线
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='select-tile-group' variant='full-divider' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={selectTileGroupFullDivider} />
+  </Tab>
+</Tabs>
+
+#### 无分隔线
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='select-tile-group' variant='no-divider' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={selectTileGroupNoDivider} />
+  </Tab>
+</Tabs>

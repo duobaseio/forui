@@ -1,0 +1,181 @@
+---
+title: 自动补全
+description: autocomplete 根据用户输入提供建议列表，并为首个匹配项显示前导提示文本。它是一个表单字段，因此可在表单中使用。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/
+---
+
+import {Callout} from "fumadocs-ui/components/callout";
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import autocompleteUsage from '@/snippets/usages/widgets/autocomplete/autocomplete.json';
+import autocompleteBuilderUsage from '@/snippets/usages/widgets/autocomplete/builder.json';
+import defaultSnippet from '@/snippets/examples/autocomplete/default.json';
+import detailedSnippet from '@/snippets/examples/autocomplete/detailed.json';
+import sectionSnippet from '@/snippets/examples/autocomplete/section.json';
+import dividerSnippet from '@/snippets/examples/autocomplete/divider.json';
+import asyncSnippet from '@/snippets/examples/autocomplete/async.json';
+import asyncLoadingSnippet from '@/snippets/examples/autocomplete/async-loading.json';
+import asyncErrorSnippet from '@/snippets/examples/autocomplete/async-error.json';
+import clearableSnippet from '@/snippets/examples/autocomplete/clearable.json';
+import popoverBuilderSnippet from '@/snippets/examples/autocomplete/popover-builder.json';
+import formSnippet from '@/snippets/examples/autocomplete/form.json';
+
+<Callout type="info" title="不是可搜索的 select">
+    autocomplete 不是可搜索的 select，它是一个带建议的文本字段。值不限于建议中的某一项，用户可以输入任何内容。如果你需要可搜索的 select，请使用
+    [可搜索的 select](/docs/form/select#searchable)
+    或 [可搜索的 multi select](/docs/form/multi-select#searchable)
+</Callout>
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='autocomplete' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+要生成可定制的特定样式：
+
+<Tabs items={['Autocomplete', 'Autocomplete Field Sizes', 'Autocomplete Field', 'Autocomplete Content', 'Autocomplete Section']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create autocomplete
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create autocomplete-field-sizes
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create autocomplete-field
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create autocomplete-content
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create autocomplete-section
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+### `FAutocomplete(...)`
+<UsageSnippet usage={autocompleteUsage} />
+
+### `FAutocomplete.builder(...)`
+<UsageSnippet usage={autocompleteBuilderUsage} />
+
+## 示例
+
+### 详细
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='autocomplete' variant='detailed' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={detailedSnippet} />
+  </Tab>
+</Tabs>
+
+### 分组
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='autocomplete' variant='section' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={sectionSnippet} />
+  </Tab>
+</Tabs>
+
+### 分隔符
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='autocomplete' variant='divider' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={dividerSnippet} />
+  </Tab>
+</Tabs>
+
+### 行为
+
+#### 异步
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='autocomplete' variant='async' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={asyncSnippet} />
+  </Tab>
+</Tabs>
+
+#### 带自定义加载状态的异步
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='autocomplete' variant='async-loading' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={asyncLoadingSnippet} />
+  </Tab>
+</Tabs>
+
+#### 带自定义错误处理的异步
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='autocomplete' variant='async-error' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={asyncErrorSnippet} />
+  </Tab>
+</Tabs>
+
+#### 可清除
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='autocomplete' variant='clearable' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={clearableSnippet} />
+  </Tab>
+</Tabs>
+
+#### Popover Builder
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='autocomplete' variant='popover-builder' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={popoverBuilderSnippet} />
+  </Tab>
+</Tabs>
+
+### 表单
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='autocomplete' variant='form' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={formSnippet} />
+  </Tab>
+</Tabs>

@@ -1,0 +1,36 @@
+---
+title: 传送门
+description: Portal 渲染一个“浮”在子 widget 之上的传送门 widget。
+apiReference: https://pub.dev/documentation/forui/latest/forui.foundation/FPortal-class.html
+---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import portalDefault from '@/snippets/examples/portal/default.json';
+import portalUsage from '@/snippets/usages/foundation/portal/portal.json';
+
+<Callout type="info">
+  此 widget 通常用于构建其他高层 widget，例如 [popover](../overlay/popover) 或
+  [tooltip](../overlay/tooltip)。除非你在自定义 widget，否则应优先使用这些高层 widget。
+</Callout>
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='portal' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={portalDefault} />
+  </Tab>
+</Tabs>
+
+## 用法
+
+### `FPortal(...)`
+<UsageSnippet usage={portalUsage} />
+
+## 可视化
+
+<Widget name='portal-visualization' height={600}/>

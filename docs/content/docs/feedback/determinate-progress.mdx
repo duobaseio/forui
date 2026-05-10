@@ -12,10 +12,10 @@ import determinateSnippet from '@/snippets/examples/progress/determinate.json';
 import determinateProgressUsage from '@/snippets/usages/widgets/progress/determinateProgress.json';
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='progress' variant='determinate'/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={determinateSnippet} />
   </Tab>
 </Tabs>
@@ -25,7 +25,7 @@ import determinateProgressUsage from '@/snippets/usages/widgets/progress/determi
 To generate a specific style for customization:
 
 <Tabs items={['Determinate Progress']}>
-    <Tab value="Determinate Progress">
+    <Tab>
         ```shell copy
         dart run forui style create determinate-progress
         ````

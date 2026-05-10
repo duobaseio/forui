@@ -1,0 +1,228 @@
+---
+title: Select
+description: Ein Select zeigt eine Liste von Dropdown-Optionen zur Auswahl an. Es ist ein Formularfeld und kann daher in einem Formular verwendet werden.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.select/
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import selectUsage from '@/snippets/usages/widgets/select/select.json';
+import selectRichUsage from '@/snippets/usages/widgets/select/selectRich.json';
+import selectSearchUsage from '@/snippets/usages/widgets/select/selectSearch.json';
+import selectSearchBuilderUsage from '@/snippets/usages/widgets/select/selectSearchBuilder.json';
+import defaultSnippet from '@/snippets/examples/select/default.json';
+import detailedSnippet from '@/snippets/examples/select/detailed.json';
+import sectionSnippet from '@/snippets/examples/select/section.json';
+import dividerSnippet from '@/snippets/examples/select/divider.json';
+import syncSnippet from '@/snippets/examples/select/sync.json';
+import asyncSnippet from '@/snippets/examples/select/async.json';
+import asyncLoadingSnippet from '@/snippets/examples/select/async-loading.json';
+import asyncErrorSnippet from '@/snippets/examples/select/async-error.json';
+import toggleableSnippet from '@/snippets/examples/select/toggleable.json';
+import clearableSnippet from '@/snippets/examples/select/clearable.json';
+import formatSnippet from '@/snippets/examples/select/format.json';
+import popoverBuilderSnippet from '@/snippets/examples/select/popover-builder.json';
+import formSnippet from '@/snippets/examples/select/form.json';
+
+<Callout type="info">
+    Für Mehrfachauswahlen ziehen Sie ein [Multi-Select](/docs/form/multi-select) in Betracht.
+
+    Für Touch-Geräte wird im Allgemeinen eine [Select-Tile-Gruppe](/docs/tile/select-tile-group) oder
+    ein [Select-Menü-Tile](/docs/tile/select-menu-tile) gegenüber dieser Komponente empfohlen.
+</Callout>
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='select' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+Um einen bestimmten Style zur Anpassung zu erzeugen:
+
+<Tabs items={['Select', 'Select Search', 'Select Content', 'Select Section', 'Select Scroll Handle']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create select
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create select-search
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create select-content
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create select-section
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create select-scroll-handle
+        ````
+    </Tab>
+</Tabs>
+
+## Verwendung
+
+### `FSelect(...)`
+<UsageSnippet usage={selectUsage} />
+
+### `FSelect.rich(...)`
+<UsageSnippet usage={selectRichUsage} />
+
+### `FSelect.search(...)`
+<UsageSnippet usage={selectSearchUsage} />
+
+### `FSelect.searchBuilder(...)`
+<UsageSnippet usage={selectSearchBuilderUsage} />
+
+## Beispiele
+
+### Detailliert
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='select' variant='detailed' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={detailedSnippet} />
+  </Tab>
+</Tabs>
+
+### Abschnitte
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='select' variant='section' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={sectionSnippet} />
+  </Tab>
+</Tabs>
+
+### Trennlinien
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='select' variant='divider' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={dividerSnippet} />
+  </Tab>
+</Tabs>
+
+### Durchsuchbar
+
+#### Synchron
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='select' variant='sync' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={syncSnippet} />
+  </Tab>
+</Tabs>
+
+#### Asynchron
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='select' variant='async' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={asyncSnippet} />
+  </Tab>
+</Tabs>
+
+#### Asynchron mit eigenem Ladeverhalten
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='select' variant='async-loading' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={asyncLoadingSnippet} />
+  </Tab>
+</Tabs>
+
+#### Asynchron mit eigener Fehlerbehandlung
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='select' variant='async-error' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={asyncErrorSnippet} />
+  </Tab>
+</Tabs>
+
+### Verhalten
+
+#### Umschaltbare Einträge
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='select' variant='toggleable' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={toggleableSnippet} />
+  </Tab>
+</Tabs>
+
+#### Löschbar
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='select' variant='clearable' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={clearableSnippet} />
+  </Tab>
+</Tabs>
+
+#### Popover-Builder
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='select' variant='popover-builder' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={popoverBuilderSnippet} />
+  </Tab>
+</Tabs>
+
+#### Eigene Formatierung
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='select' variant='format' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={formatSnippet} />
+  </Tab>
+</Tabs>
+
+### Form
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='select' variant='form' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={formSnippet} />
+  </Tab>
+</Tabs>

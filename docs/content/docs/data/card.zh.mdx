@@ -1,0 +1,42 @@
+---
+title: 卡片
+description: 一种灵活的容器组件，可显示带有可选标题、副标题和子 widget 的内容。Card 常用于将相关信息和操作组合在一起。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.card/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/card/default.json';
+import cardUsage from '@/snippets/usages/widgets/card/card.json';
+import cardRawUsage from '@/snippets/usages/widgets/card/raw.json';
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+      <Widget name='card' height={400}/>
+  </Tab>
+  <Tab>
+      <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+要生成可自定义的特定样式：
+
+<Tabs items={['Card']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create card
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+### `FCard(...)`
+<UsageSnippet usage={cardUsage} />
+
+### `FCard.raw(...)`
+<UsageSnippet usage={cardRawUsage} />

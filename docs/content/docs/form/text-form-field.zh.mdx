@@ -1,0 +1,61 @@
+---
+title: 文本表单字段
+description: 一个可用于表单的文本字段，允许用户通过硬件键盘或屏幕键盘输入文本。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.text_field/
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/text-form-field/default.json';
+import textFormFieldUsage from '@/snippets/usages/widgets/text_form_field/textFormField.json';
+import textFormFieldEmailUsage from '@/snippets/usages/widgets/text_form_field/textFormFieldEmail.json';
+import textFormFieldMultilineUsage from '@/snippets/usages/widgets/text_form_field/textFormFieldMultiline.json';
+import textFormFieldPasswordUsage from '@/snippets/usages/widgets/text_form_field/textFormFieldPassword.json';
+
+<Callout type="info">
+  `FTextFormField` 包装了 [`FTextField`](/docs/form/text-field) 并提供了一个
+  [`FormField`](https://api.flutter.dev/flutter/widgets/FormField-class.html)。
+</Callout>
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='text-form-field' height={550}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+要生成可定制的特定样式：
+
+<Tabs items={['Text Field Sizes', 'Text Field']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create text-field-sizes
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create text-field
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+### `FTextFormField(...)`
+<UsageSnippet usage={textFormFieldUsage} />
+
+### `FTextFormField.email(...)`
+<UsageSnippet usage={textFormFieldEmailUsage} />
+
+### `FTextFormField.password(...)`
+<UsageSnippet usage={textFormFieldPasswordUsage} />
+
+### `FTextFormField.multiline(...)`
+<UsageSnippet usage={textFormFieldMultilineUsage} />

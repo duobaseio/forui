@@ -1,0 +1,119 @@
+---
+title: Tile
+description: Ein spezialisiertes Item für Touch-Geräte, das in der Regel zusammengehörige Informationen gruppiert.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.tile/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import tileDefault from '@/snippets/examples/tile/default.json';
+import tileUsage from '@/snippets/usages/widgets/tile/tile.json';
+import tileRawUsage from '@/snippets/usages/widgets/tile/tileRaw.json';
+import tileUntappable from '@/snippets/examples/tile/untappable.json';
+import tileDisabled from '@/snippets/examples/tile/disabled.json';
+import tileSubtitle from '@/snippets/examples/tile/subtitle.json';
+import tileDetails from '@/snippets/examples/tile/details.json';
+import tileDestructive from '@/snippets/examples/tile/destructive.json';
+
+<Callout type="info">
+    Tiles können innerhalb einer [FTileGroup](/docs/tile/tile-group) gruppiert werden.
+</Callout>
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='tile'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={tileDefault} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+Um einen bestimmten Style zur Anpassung zu erzeugen:
+
+<Tabs items={['Tiles', 'Tile', 'Tile Content']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create tiles
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create tile
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create tile-content
+        ````
+    </Tab>
+</Tabs>
+
+## Verwendung
+
+### `FTile(...)`
+<UsageSnippet usage={tileUsage} />
+
+### `FTile.raw(...)`
+<UsageSnippet usage={tileRawUsage} />
+
+## Beispiele
+
+### Destruktiv
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='tile' variant='destructive'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={tileDestructive} />
+  </Tab>
+</Tabs>
+
+### Nicht antippbar
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='tile' variant='untappable'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={tileUntappable} />
+  </Tab>
+</Tabs>
+
+### Deaktiviert
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='tile' variant='disabled'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={tileDisabled} />
+  </Tab>
+</Tabs>
+
+### Mit Untertitel
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='tile' variant='subtitle'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={tileSubtitle} />
+  </Tab>
+</Tabs>
+
+### Mit Details
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='tile' variant='details'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={tileDetails} />
+  </Tab>
+</Tabs>

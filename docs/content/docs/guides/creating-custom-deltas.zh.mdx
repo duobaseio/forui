@@ -1,0 +1,26 @@
+---
+title: 创建自定义 Delta
+description: 为开箱即用之外的变换需求创建自定义 delta 类。
+---
+
+import {Callout} from "fumadocs-ui/components/callout";
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import implementSnippet from '@/snippets/snippets/guides/creating_custom_deltas/implement.json';
+import usageSnippet from '@/snippets/snippets/guides/creating_custom_deltas/usage.json';
+
+<Callout type="info">
+    如果你还不熟悉 delta，请先阅读[自定义 widget 样式](/docs/guides/customizing-widget-styles)指南。
+</Callout>
+
+当内置的 delta 工厂构造函数无法满足你的需求时，可以直接实现 delta 类并重写 `call`。
+
+假设你想镜像某个 widget 的 EdgeInsets 内边距。为此，你可以实现 `EdgeInsetsDelta`，并在其 `call` 方法中
+交换两侧边距：
+
+<CodeSnippet snippet={implementSnippet} />
+
+随后即可在任何接受 `EdgeInsetsDelta` 的位置使用：
+
+<CodeSnippet snippet={usageSnippet} />
+
+同样的模式适用于任意 delta 类：实现它并重写 `call` 即可。

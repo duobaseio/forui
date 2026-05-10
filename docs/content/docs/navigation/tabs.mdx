@@ -15,10 +15,10 @@ import tabsUsage from '@/snippets/usages/widgets/tabs/tabs.json';
 import tabEntryUsage from '@/snippets/usages/widgets/tabs/tabEntry.json';
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='tabs' height={500}/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={defaultSnippet} />
   </Tab>
 </Tabs>
@@ -28,7 +28,7 @@ import tabEntryUsage from '@/snippets/usages/widgets/tabs/tabEntry.json';
 To generate a specific style for customization:
 
 <Tabs items={['Tabs']}>
-    <Tab value="Tabs">
+    <Tab>
         ```shell copy
         dart run forui style create tabs
         ````
@@ -52,10 +52,10 @@ To generate a specific style for customization:
 </Callout>
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='tabs' variant='swipeable' height={500}/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={swipeableSnippet} />
   </Tab>
 </Tabs>

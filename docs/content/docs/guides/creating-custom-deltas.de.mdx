@@ -1,0 +1,28 @@
+---
+title: Eigene Deltas erstellen
+description: Erstellen Sie eigene Delta-Klassen für Transformationen, die nicht von Haus aus mitgeliefert werden.
+---
+
+import {Callout} from "fumadocs-ui/components/callout";
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import implementSnippet from '@/snippets/snippets/guides/creating_custom_deltas/implement.json';
+import usageSnippet from '@/snippets/snippets/guides/creating_custom_deltas/usage.json';
+
+<Callout type="info">
+    Falls Sie mit Deltas noch nicht vertraut sind, lesen Sie zuerst den Leitfaden
+    [Widget-Styles anpassen](/docs/guides/customizing-widget-styles).
+</Callout>
+
+Wenn die mitgelieferten Delta-Factory-Konstruktoren Ihren Anwendungsfall nicht abdecken, implementieren Sie die
+Delta-Klasse direkt und überschreiben Sie `call`.
+
+Angenommen, Sie möchten das EdgeInsets-Padding eines Widgets spiegeln. Implementieren Sie dazu `EdgeInsetsDelta`
+mit einer `call`-Methode, die die Kanten vertauscht:
+
+<CodeSnippet snippet={implementSnippet} />
+
+Übergeben Sie es überall dort, wo ein `EdgeInsetsDelta` akzeptiert wird:
+
+<CodeSnippet snippet={usageSnippet} />
+
+Dasselbe Muster funktioniert für jede Delta-Klasse: implementieren und `call` überschreiben.

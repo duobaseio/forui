@@ -9,8 +9,32 @@ export const i18n = defineI18n({
 export const i18nUI = defineI18nUI(i18n, {
   translations: {
     en: { displayName: 'English' },
-    zh: { displayName: '中文' },
-    de: { displayName: 'Deutsch' },
+    zh: {
+      displayName: '中文',
+      search: '搜索文档',
+      searchNoResult: '没有结果',
+      toc: '本页内容',
+      tocNoHeadings: '没有标题',
+      lastUpdate: '最后更新',
+      chooseLanguage: '选择语言',
+      nextPage: '下一页',
+      previousPage: '上一页',
+      chooseTheme: '主题',
+      editOnGithub: '在 GitHub 上编辑',
+    },
+    de: {
+      displayName: 'Deutsch',
+      search: 'Suchen…',
+      searchNoResult: 'Keine Ergebnisse',
+      toc: 'Auf dieser Seite',
+      tocNoHeadings: 'Keine Überschriften',
+      lastUpdate: 'Zuletzt aktualisiert',
+      chooseLanguage: 'Sprache wählen',
+      nextPage: 'Nächste Seite',
+      previousPage: 'Vorherige Seite',
+      chooseTheme: 'Theme',
+      editOnGithub: 'Auf GitHub bearbeiten',
+    },
   },
 });
 
@@ -18,6 +42,7 @@ export const translations = {
   en: {
     nav: { docs: 'Documentation', enterprise: 'Enterprise', home: 'Home' },
     footer: { builtBy: 'Built by', fromSingapore: 'from Singapore.' },
+    docs: { apiReference: 'API Reference' },
     home: {
       title: 'Beautifully designed minimalistic Flutter widgets',
       subtitle:
@@ -66,6 +91,7 @@ export const translations = {
   zh: {
     nav: { docs: '文档', enterprise: '企业', home: '主页' },
     footer: { builtBy: '由', fromSingapore: '于新加坡构建。' },
+    docs: { apiReference: 'API 参考' },
     home: {
       title: '精美极简的 Flutter 组件库',
       subtitle:
@@ -114,6 +140,7 @@ export const translations = {
   de: {
     nav: { docs: 'Dokumentation', enterprise: 'Enterprise', home: 'Startseite' },
     footer: { builtBy: 'Entwickelt von', fromSingapore: 'aus Singapur.' },
+    docs: { apiReference: 'API-Referenz' },
     home: {
       title: 'Wunderschön gestaltete, minimalistische Flutter-Widgets',
       subtitle:

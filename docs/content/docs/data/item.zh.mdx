@@ -1,0 +1,119 @@
+---
+title: 列表项
+description: Item 通常用于将相关信息组合在一起。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.item/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/item/default.json';
+import untappableSnippet from '@/snippets/examples/item/untappable.json';
+import disabledSnippet from '@/snippets/examples/item/disabled.json';
+import subtitleSnippet from '@/snippets/examples/item/subtitle.json';
+import detailsSnippet from '@/snippets/examples/item/details.json';
+import destructiveSnippet from '@/snippets/examples/item/destructive.json';
+import itemUsage from '@/snippets/usages/widgets/item/item.json';
+import itemRawUsage from '@/snippets/usages/widgets/item/raw.json';
+
+<Callout type="info">
+    此 widget 通常用于构建更复杂的 widget，而不是直接使用。
+</Callout>
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='item'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+要生成可自定义的特定样式：
+
+<Tabs items={['Items', 'Item', 'Item Content']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create items
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create item
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create item-content
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+### `FItem(...)`
+<UsageSnippet usage={itemUsage} />
+
+### `FItem.raw(...)`
+<UsageSnippet usage={itemRawUsage} />
+
+## 示例
+
+### 危险
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='item' variant='destructive'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={destructiveSnippet} />
+  </Tab>
+</Tabs>
+
+### 不可点击
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='item' variant='untappable'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={untappableSnippet} />
+  </Tab>
+</Tabs>
+
+### 已禁用
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='item' variant='disabled'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={disabledSnippet} />
+  </Tab>
+</Tabs>
+
+### 带副标题
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='item' variant='subtitle'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={subtitleSnippet} />
+  </Tab>
+</Tabs>
+
+### 带详情
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='item' variant='details'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={detailsSnippet} />
+  </Tab>
+</Tabs>

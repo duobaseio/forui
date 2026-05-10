@@ -1,0 +1,38 @@
+---
+title: 进度
+description: 显示一个不确定的线性指示器，用于呈现任务的完成进度。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.progress/
+---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/progress/default.json';
+import progressUsage from '@/snippets/usages/widgets/progress/progress.json';
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='progress'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+要生成可自定义的特定样式：
+
+<Tabs items={['Progress']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create progress
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+### `FProgress(...)`
+<UsageSnippet usage={progressUsage} />

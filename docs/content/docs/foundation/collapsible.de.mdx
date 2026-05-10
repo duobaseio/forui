@@ -1,0 +1,26 @@
+---
+title: Collapsible
+description: Ein einklappbares Widget, das zwischen sichtbarem und ausgeblendetem Zustand animiert.
+apiReference: https://pub.dev/documentation/forui/latest/forui.foundation/FCollapsible-class.html
+---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import collapsibleDefault from '@/snippets/examples/collapsible/default.json';
+import collapsibleUsage from '@/snippets/usages/foundation/collapsible/collapsible.json';
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='collapsible' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={collapsibleDefault} />
+  </Tab>
+</Tabs>
+
+## Verwendung
+
+### `FCollapsible(...)`
+<UsageSnippet usage={collapsibleUsage} />

@@ -1,0 +1,134 @@
+---
+title: Item-Gruppe
+description: Eine Item Group, die typischerweise zusammengehörige Informationen gruppiert.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.item/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/item-group/default.json';
+import scrollableSnippet from '@/snippets/examples/item-group/scrollable.json';
+import lazySnippet from '@/snippets/examples/item-group/lazy.json';
+import mergeSnippet from '@/snippets/examples/item-group/merge.json';
+import fullSnippet from '@/snippets/examples/item-group/full.json';
+import indentedSnippet from '@/snippets/examples/item-group/indented.json';
+import itemGroupUsage from '@/snippets/usages/widgets/item_group/itemGroup.json';
+import itemGroupBuilderUsage from '@/snippets/usages/widgets/item_group/builder.json';
+import itemGroupMergeUsage from '@/snippets/usages/widgets/item_group/merge.json';
+
+<Callout type="info">
+    Dieses Widget dient typischerweise als Grundlage für komplexere Widgets und wird selten direkt verwendet.
+</Callout>
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='item-group'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+Um einen bestimmten Style zur Anpassung zu erzeugen:
+
+<Tabs items={['Item Group', 'Items', 'Item', 'Item Content']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create item-group
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create items
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create item
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create item-content
+        ````
+    </Tab>
+</Tabs>
+
+## Verwendung
+
+### `FItemGroup(...)`
+<UsageSnippet usage={itemGroupUsage} />
+
+### `FItemGroup.builder(...)`
+<UsageSnippet usage={itemGroupBuilderUsage} />
+
+### `FItemGroup.merge(...)`
+<UsageSnippet usage={itemGroupMergeUsage} />
+
+## Beispiele
+
+### Verhalten
+
+#### Scrollbar
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='item-group' variant='scrollable' height={200}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={scrollableSnippet} />
+  </Tab>
+</Tabs>
+
+#### Lazy scrollbar
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='item-group' variant='lazy' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={lazySnippet} />
+  </Tab>
+</Tabs>
+
+#### Mehrere Gruppen zusammenführen
+
+Diese Funktion führt mehrere `FItemGroupMixin` zu einer einzigen Gruppe zusammen. Sie eignet sich, um eine Gruppe mit mehreren Abschnitten darzustellen.
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='item-group' variant='merge' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={mergeSnippet} />
+  </Tab>
+</Tabs>
+
+### Erscheinungsbild
+
+#### Vollständiger Trenner
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='item-group' variant='full'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={fullSnippet} />
+  </Tab>
+</Tabs>
+
+#### Eingerückter Trenner
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='item-group' variant='indented'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={indentedSnippet} />
+  </Tab>
+</Tabs>

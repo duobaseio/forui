@@ -15,10 +15,10 @@ import longPressOnlySnippet from '@/snippets/examples/tooltip/long-press-only.js
 import groupSnippet from '@/snippets/examples/tooltip/group.json';
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='tooltip' height={300}/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={defaultSnippet} />
   </Tab>
 </Tabs>
@@ -28,7 +28,7 @@ import groupSnippet from '@/snippets/examples/tooltip/group.json';
 To generate a specific style for customization:
 
 <Tabs items={['Tooltip']}>
-    <Tab value="Tooltip">
+    <Tab>
         ```shell copy
         dart run forui style create tooltip
         ````
@@ -47,10 +47,10 @@ To generate a specific style for customization:
 Wrap multiple tooltips in an `FTooltipGroup` so that subsequent tooltips appear instantly after the first one is shown.
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='tooltip' variant='group' height={300}/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={groupSnippet} />
   </Tab>
 </Tabs>
@@ -60,10 +60,10 @@ Wrap multiple tooltips in an `FTooltipGroup` so that subsequent tooltips appear 
 You can change how the tooltip is aligned to the button.
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='tooltip' variant='horizontal' height={300}/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={horizontalSnippet} />
   </Tab>
 </Tabs>
@@ -71,10 +71,10 @@ You can change how the tooltip is aligned to the button.
 ### Long Press Only
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='tooltip' variant='long-press-only' height={300}/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={longPressOnlySnippet} />
   </Tab>
 </Tabs>

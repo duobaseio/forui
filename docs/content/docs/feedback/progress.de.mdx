@@ -1,0 +1,38 @@
+---
+title: Fortschritt
+description: Zeigt einen unbestimmten linearen Indikator für den Fortschritt einer Aufgabe an.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.progress/
+---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/progress/default.json';
+import progressUsage from '@/snippets/usages/widgets/progress/progress.json';
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='progress'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+Um einen bestimmten Style zur Anpassung zu erzeugen:
+
+<Tabs items={['Progress']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create progress
+        ````
+    </Tab>
+</Tabs>
+
+## Verwendung
+
+### `FProgress(...)`
+<UsageSnippet usage={progressUsage} />

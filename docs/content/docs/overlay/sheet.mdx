@@ -23,10 +23,10 @@ It navigates to a new page each time.
 </Callout>
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='modal-sheet' height={500}/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={defaultSnippet} />
   </Tab>
 </Tabs>
@@ -36,7 +36,7 @@ It navigates to a new page each time.
 To generate a specific style for customization:
 
 <Tabs items={['Modal Sheet']}>
-    <Tab value="Modal Sheet">
+    <Tab>
         ```shell copy
         dart run forui style create modal-sheet
         ````
@@ -56,10 +56,10 @@ To generate a specific style for customization:
 ### Blurred Barrier
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='modal-sheet' variant='blurred' height={500}/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={blurredSnippet} />
   </Tab>
 </Tabs>
@@ -67,10 +67,10 @@ To generate a specific style for customization:
 ### With `DraggableScrollableSheet`
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='modal-sheet' variant='draggable' height={400}/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={draggableSnippet} />
   </Tab>
 </Tabs>

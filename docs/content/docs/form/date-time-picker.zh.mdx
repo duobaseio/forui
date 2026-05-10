@@ -1,0 +1,73 @@
+---
+title: 日期时间选择器
+description: 一个日期与时间选择器，可用于选择日期和时间。该选择器支持方向键导航。推荐用于触摸设备。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.date_time_picker/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/date-time-picker/default.json';
+import hour24Snippet from '@/snippets/examples/date-time-picker/hour24.json';
+import intervalSnippet from '@/snippets/examples/date-time-picker/interval.json';
+import dateTimePickerUsage from '@/snippets/usages/widgets/date_time_picker/dateTimePicker.json';
+
+该选择器支持方向键导航：
+
+- 上/下箭头：增加/减少选中的值
+- 左/右箭头：在滚轮之间移动
+
+推荐用于触摸设备。
+
+<Tabs items={['预览', '代码']}>
+    <Tab>
+        <Widget name='date-time-picker'/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={defaultSnippet} />
+    </Tab>
+</Tabs>
+
+## CLI
+
+要生成可定制的特定样式：
+
+<Tabs items={['Date Time Picker']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create date-time-picker
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+### `FDateTimePicker(...)`
+<UsageSnippet usage={dateTimePickerUsage} />
+
+## 示例
+
+### 24 小时制
+
+<Tabs items={['预览', '代码']}>
+    <Tab>
+        <Widget name='date-time-picker' variant='hour24'/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={hour24Snippet} />
+    </Tab>
+
+</Tabs>
+
+### 自定义间隔
+
+<Tabs items={['预览', '代码']}>
+    <Tab>
+        <Widget name='date-time-picker' variant='interval'/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={intervalSnippet} />
+    </Tab>
+
+</Tabs>

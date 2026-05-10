@@ -1,0 +1,181 @@
+---
+title: 按钮
+description: 一个按钮。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.button/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import primarySnippet from '@/snippets/examples/button/primary.json';
+import secondarySnippet from '@/snippets/examples/button/secondary.json';
+import destructiveSnippet from '@/snippets/examples/button/destructive.json';
+import outlineSnippet from '@/snippets/examples/button/outline.json';
+import ghostSnippet from '@/snippets/examples/button/ghost.json';
+import iconSnippet from '@/snippets/examples/button/icon.json';
+import onlyIconSnippet from '@/snippets/examples/button/only-icon.json';
+import sizesSnippet from '@/snippets/examples/button/sizes.json';
+import circularProgressSnippet from '@/snippets/examples/button/circular-progress.json';
+import toggleSnippet from '@/snippets/examples/button/toggle.json';
+import buttonUsage from '@/snippets/usages/widgets/button/button.json';
+import buttonIconUsage from '@/snippets/usages/widgets/button/icon.json';
+import buttonRawUsage from '@/snippets/usages/widgets/button/raw.json';
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='button' variant='primary'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={primarySnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+要生成可定制的特定样式：
+
+<Tabs items={['Buttons', 'Button Sizes', 'Button']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create buttons
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create button-sizes
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create button
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+### `FButton(...)`
+<UsageSnippet usage={buttonUsage} />
+
+### `FButton.icon(...)`
+<UsageSnippet usage={buttonIconUsage} />
+
+### `FButton.raw(...)`
+<UsageSnippet usage={buttonRawUsage} />
+
+## 示例
+
+### 外观
+
+#### 主要
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='button' variant='primary'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={primarySnippet} />
+  </Tab>
+</Tabs>
+
+#### 次要
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='button' variant='secondary'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={secondarySnippet} />
+  </Tab>
+</Tabs>
+
+#### 危险
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='button' variant='destructive'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={destructiveSnippet} />
+  </Tab>
+</Tabs>
+
+#### 描边
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='button' variant='outline'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={outlineSnippet} />
+  </Tab>
+</Tabs>
+
+#### 幽灵
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='button' variant='ghost'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={ghostSnippet} />
+  </Tab>
+</Tabs>
+
+#### 尺寸
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='button' variant='sizes'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={sizesSnippet} />
+  </Tab>
+</Tabs>
+
+### 可切换
+
+<Tabs items={['预览', '代码']}>
+    <Tab>
+        <Widget name='button' variant='toggle'/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={toggleSnippet} />
+    </Tab>
+</Tabs>
+
+### 内容
+
+#### 带文本和图标
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='button' variant='icon'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={iconSnippet} />
+  </Tab>
+</Tabs>
+
+#### 仅图标
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='button' variant='only-icon'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={onlyIconSnippet} />
+  </Tab>
+</Tabs>
+
+#### 带环形进度
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='button' variant='circular-progress'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={circularProgressSnippet} />
+  </Tab>
+</Tabs>

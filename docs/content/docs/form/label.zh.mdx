@@ -1,0 +1,81 @@
+---
+title: 标签
+description: 用标签、描述以及错误信息（如有）来描述一个表单字段。该 widget 通常用于自定义表单字段。Forui 中所有的表单字段都已包装了该 widget。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.label/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import horizontalSnippet from '@/snippets/examples/label/horizontal.json';
+import verticalSnippet from '@/snippets/examples/label/vertical.json';
+import disabledSnippet from '@/snippets/examples/label/disabled.json';
+import errorSnippet from '@/snippets/examples/label/error.json';
+import labelUsage from '@/snippets/usages/widgets/label/label.json';
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='label' variant='horizontal'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={horizontalSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+要生成可定制的特定样式：
+
+<Tabs items={['Labels', 'Label']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create labels
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create label
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+### `FLabel(...)`
+<UsageSnippet usage={labelUsage} />
+
+## 示例
+
+### 垂直
+
+<Tabs items={['预览', '代码']}>
+    <Tab>
+        <Widget name='label' variant='vertical'/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={verticalSnippet} />
+    </Tab>
+</Tabs>
+
+### 禁用
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='label' variant='disabled'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={disabledSnippet} />
+  </Tab>
+</Tabs>
+
+### 错误
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='label' variant='error'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={errorSnippet} />
+  </Tab>
+</Tabs>

@@ -1,0 +1,19 @@
+{
+  "pages": [
+    "index",
+    "getting-started",
+    "concepts",
+    "guides",
+    "reference",
+    "...",
+    "---Widgets---",
+    "layout",
+    "form",
+    "data",
+    "tile",
+    "navigation",
+    "feedback",
+    "overlay",
+    "foundation"
+  ]
+}

@@ -1,0 +1,111 @@
+---
+title: 日历
+description: 用于选择和编辑日期的日历组件。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.calendar/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/calendar/default.json';
+import datesSnippet from '@/snippets/examples/calendar/dates.json';
+import unselectableSnippet from '@/snippets/examples/calendar/unselectable.json';
+import rangeSnippet from '@/snippets/examples/calendar/range.json';
+import calendarUsage from '@/snippets/usages/widgets/calendar/calendar.json';
+
+日历在移动端支持滑动手势，用户可以左右滑动以在不同页面之间切换。
+
+[`FCalendarController`](https://pub.dev/documentation/forui/latest/forui.widgets.calendar/FCalendarController-class.html)
+控制日期选择行为，包括单选日期、多选日期和日期范围选择。
+
+<Callout type="info">
+    `FCalendar` 与所有 `FCalendarController` 返回的 `DateTime` 均为 UTC 时区，并截断到最接近的整天。
+</Callout>
+
+<Callout type="info">
+  在桌面端和 Web 上滚动时按住 `Shift` 可在日期之间切换。
+</Callout>
+
+<Tabs items={['预览', '代码']}>
+    <Tab>
+        <Widget name='calendar' height={500}/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={defaultSnippet} />
+    </Tab>
+</Tabs>
+
+## CLI
+
+要生成可自定义的特定样式：
+
+<Tabs items={['Calendar', 'Calendar Header', 'Calendar Day Picker']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create calendar
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create calendar-header
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create calendar-day-picker
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+### `FCalendar(...)`
+<UsageSnippet usage={calendarUsage} />
+
+## 示例
+
+### 单个日期
+
+<Tabs items={['预览', '代码']}>
+    <Tab>
+        <Widget name='calendar' height={500}/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={defaultSnippet} />
+    </Tab>
+</Tabs>
+
+### 多个日期及初始选择
+
+<Tabs items={['预览', '代码']}>
+    <Tab>
+        <Widget name='calendar' variant='dates' height={500}/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={datesSnippet} />
+    </Tab>
+</Tabs>
+
+### 不可选日期
+
+<Tabs items={['预览', '代码']}>
+    <Tab>
+        <Widget name='calendar' variant='unselectable' height={500}/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={unselectableSnippet} />
+    </Tab>
+</Tabs>
+
+### 区间选择及初始范围
+
+<Tabs items={['预览', '代码']}>
+    <Tab>
+        <Widget name='calendar' variant='range' height={500}/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={rangeSnippet} />
+    </Tab>
+</Tabs>

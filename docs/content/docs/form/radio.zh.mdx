@@ -1,0 +1,57 @@
+---
+title: 单选
+description: 一个单选按钮，通常允许用户在一组预定义选项中只选择一个。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.radio/
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/radio/default.json';
+import leadingLabelSnippet from '@/snippets/examples/radio/leading-label.json';
+import radioUsage from '@/snippets/usages/widgets/radio/radio.json';
+
+<Callout type="info">
+    我们建议使用 [select group](/docs/form/select-group#radio-form) 来创建一组单选按钮，而不是直接使用 `FRadio`。
+</Callout>
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='radio'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+要生成可定制的特定样式：
+
+<Tabs items={['Radio']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create radio
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+### `FRadio(...)`
+<UsageSnippet usage={radioUsage} />
+
+## 示例
+
+### 前置标签
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='radio' variant='leading-label'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={leadingLabelSnippet} />
+  </Tab>
+</Tabs>

@@ -1,0 +1,65 @@
+---
+title: 自定义主题
+description: 使用 CLI 生成并自定义主题与 widget 样式。
+---
+
+import {Callout} from "fumadocs-ui/components/callout";
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import mainSnippet from '@/snippets/snippets/guides/customizing_themes/main.json';
+import themeSnippet from '@/snippets/snippets/guides/customizing_themes/theme.json';
+import accordionStyleSnippet from '@/snippets/snippets/guides/customizing_themes/accordion_style.json';
+
+本指南以 [`FAccordionStyle`](https://pub.dev/documentation/forui/latest/forui.widgets.accordion/FAccordionStyle-class.html)
+为例，但同样的原则适用于所有 Forui widget。本指南依赖 [CLI](/docs/reference/cli)。
+
+## 生成 `main.dart`
+
+进入你的项目目录。
+
+生成 `main.dart`：
+
+```shell copy
+dart run forui init
+```
+
+该命令会生成一个 `main.dart` 文件，你将在其中加入生成的主题：
+
+<CodeSnippet snippet={mainSnippet} />
+
+## 生成样式
+
+<Callout type="info">
+    提示：运行 `dart run forui style ls` 可以查看所有可用的样式。
+</Callout>
+
+生成 [`FAccordionStyle`](https://pub.dev/documentation/forui/latest/forui.widgets.accordion/FAccordionStyle-class.html)：
+
+```shell copy
+dart run forui style create accordion
+```
+
+该命令会生成一个 accordion 样式文件，你可以将它加入你的主题：
+
+<CodeSnippet snippet={accordionStyleSnippet} />
+
+<Callout type="info">
+    要了解如何自定义 widget 样式，请参阅[自定义 widget 样式](/docs/guides/customizing-widget-styles#deltas)指南。
+</Callout>
+
+## 生成主题
+
+<Callout type="info">
+    提示：运行 `dart run forui theme ls` 可以查看所有可用的主题。
+</Callout>
+
+基于 [neutral](/docs/concepts/themes#getting-started) 配色的浅色变体生成主题：
+
+```shell copy
+dart run forui theme create neutral-light
+```
+
+该命令会生成一个主题文件，你可以：
+- 将它加入生成的 `main.dart`。
+- 将生成的样式加入其中。
+
+<CodeSnippet snippet={themeSnippet} />

@@ -1,0 +1,138 @@
+---
+title: Popover
+description: Ein Popover zeigt umfangreiche Inhalte in einem Portal an, das an einem Child-Widget ausgerichtet ist.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.popover/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/popover/default.json';
+import horizontalSnippet from '@/snippets/examples/popover/horizontal.json';
+import slideSnippet from '@/snippets/examples/popover/slide.json';
+import flipSnippet from '@/snippets/examples/popover/flip.json';
+import allowOverflowSnippet from '@/snippets/examples/popover/allow-overflow.json';
+import noHideRegionSnippet from '@/snippets/examples/popover/no-hide-region.json';
+import nestedSnippet from '@/snippets/examples/popover/nested.json';
+import blurredSnippet from '@/snippets/examples/popover/blurred.json';
+import popoverUsage from '@/snippets/usages/widgets/popover/popover.json';
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='popover' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+Um einen bestimmten Style zur Anpassung zu erzeugen:
+
+<Tabs items={['Popover']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create popover
+        ````
+    </Tab>
+</Tabs>
+
+## Verwendung
+
+### `FPopover(...)`
+<UsageSnippet usage={popoverUsage} />
+
+## Beispiele
+
+### Verschachtelte Popovers
+
+Wenn Sie Widgets, die intern Popovers verwenden (z. B. `FSelect`), innerhalb eines `FPopover` platzieren, schließt sich
+das äußere Popover bei der Interaktion mit dem Dropdown des inneren Widgets. Das liegt daran, dass das innere Dropdown
+in einer eigenen Overlay-Ebene gerendert wird und ein Tippen darauf als "außerhalb" des äußeren Popovers gilt.
+
+Um dies zu verhindern, geben Sie beiden Widgets dieselbe `groupId`.
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='popover' variant='nested' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={nestedSnippet} />
+  </Tab>
+</Tabs>
+
+### Horizontale Ausrichtung
+
+Sie können ändern, wie das Popover am Button ausgerichtet wird.
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='popover' variant='horizontal' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={horizontalSnippet} />
+  </Tab>
+</Tabs>
+
+### Klick außerhalb schließt das Popover nicht
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='popover' variant='no-hide-region' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={noHideRegionSnippet} />
+  </Tab>
+</Tabs>
+
+### Unscharfe Hintergrundebene
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='popover' variant='blurred' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={blurredSnippet} />
+  </Tab>
+</Tabs>
+
+### Spiegelung entlang der Achse
+
+Das Popover kann entlang der überlaufenden Achse gespiegelt werden, um innerhalb der Viewport-Grenzen zu bleiben.
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='popover' variant='flip' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={flipSnippet} />
+  </Tab>
+</Tabs>
+
+### Verschiebung entlang der Achse
+
+Das Popover kann entlang der überlaufenden Achse verschoben werden, um innerhalb der Viewport-Grenzen zu bleiben.
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='popover' variant='slide' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={slideSnippet} />
+  </Tab>
+</Tabs>
+
+### Überlauf zulassen
+
+Das Popover wird auch dann nicht verschoben, um innerhalb der Viewport-Grenzen zu bleiben, wenn es überläuft.
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='popover' variant='allow-overflow' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={allowOverflowSnippet} />
+  </Tab>
+</Tabs>

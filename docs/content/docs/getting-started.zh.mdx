@@ -45,7 +45,7 @@ flutter pub upgrade forui --major-versions
 从 `0.17.0` 起，Forui 提供[数据驱动的修复](https://github.com/flutter/flutter/blob/master/docs/contributing/Data-driven-Fixes.md)。
 你可以通过运行 `dart fix --apply` 自动完成部分迁移。
 
-### Forui Icons
+### Forui 图标
 
 <Callout type="info">
     Forui Icons 已包含在 forui 包中。如果你已安装 `forui`，无需再单独安装。
@@ -66,12 +66,12 @@ flutter pub add forui_assets
 要在你的项目中生成 Forui 应用的基础结构，请运行：
 
 <Tabs items={['基础', '路由']}>
-    <Tab value="基础">
+    <Tab>
         ```bash filename="bash" copy
         dart run forui init
         ```
     </Tab>
-    <Tab value="路由">
+    <Tab>
         ```bash filename="bash" copy
         dart run forui init --template=router
         ```
@@ -81,10 +81,10 @@ flutter pub add forui_assets
 或者直接复制粘贴下面的代码片段：
 
 <Tabs items={['基础', '路由']}>
-    <Tab value="基础">
+    <Tab>
         <CodeSnippet snippet={mainBasicSnippet} />
     </Tab>
-    <Tab value="路由">
+    <Tab>
         <CodeSnippet snippet={mainRouterSnippet} />
     </Tab>
 </Tabs>

@@ -1,0 +1,94 @@
+---
+title: 对话框
+description: 模态对话框会打断用户并展示重要内容，期待用户做出响应。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.dialog/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/dialog/default.json';
+import verticalSnippet from '@/snippets/examples/dialog/vertical.json';
+import blurredSnippet from '@/snippets/examples/dialog/blurred.json';
+import dialogShowUsage from '@/snippets/usages/widgets/dialog/show.json';
+import dialogUsage from '@/snippets/usages/widgets/dialog/dialog.json';
+import dialogAdaptiveUsage from '@/snippets/usages/widgets/dialog/adaptive.json';
+import dialogRawUsage from '@/snippets/usages/widgets/dialog/raw.json';
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='dialog' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+要生成可定制的特定样式：
+
+<Tabs items={['Dialog', 'Dialog Route']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create dialog
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create dialog-route
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+### `showFDialog(...)`
+<UsageSnippet usage={dialogShowUsage} />
+
+### `FDialog(...)`
+<UsageSnippet usage={dialogUsage} />
+
+### `FDialog.adaptive(...)`
+<UsageSnippet usage={dialogAdaptiveUsage} />
+
+### `FDialog.raw(...)`
+<UsageSnippet usage={dialogRawUsage} />
+
+## 示例
+
+### 水平布局
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='dialog' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+### 垂直布局
+
+我们建议在移动设备上使用垂直布局。
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='dialog' variant='vertical' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={verticalSnippet} />
+  </Tab>
+</Tabs>
+
+### 模糊遮罩
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='dialog' variant='blurred' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={blurredSnippet} />
+  </Tab>
+</Tabs>

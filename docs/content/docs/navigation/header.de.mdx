@@ -1,0 +1,102 @@
+---
+title: Header
+description: Ein Header enthält den Titel und die Navigationsaktionen einer Seite. Er wird typischerweise auf Seiten an der Wurzel des Navigationsstacks verwendet.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.header/
+---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/header/default.json';
+import nestedSnippet from '@/snippets/examples/header/nested.json';
+import nestedXSnippet from '@/snippets/examples/header/nested-x.json';
+import headerUsage from '@/snippets/usages/widgets/header/header.json';
+import headerNestedUsage from '@/snippets/usages/widgets/header/nested.json';
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='header'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## Verschachtelter Header
+
+Er wird typischerweise auf verschachtelten Seiten oder Sheets verwendet.
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='header' variant='nested'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={nestedSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+Um einen bestimmten Style zur Anpassung zu erzeugen:
+
+<Tabs items={['Headers', 'Header Action']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create headers
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create header-action
+        ````
+    </Tab>
+</Tabs>
+
+## Verwendung
+
+<Callout type="info">
+  Ein Header wird üblicherweise mit `FScaffold` verwendet. Ein lauffähiges Beispiel finden Sie [hier](/docs/layout/scaffold).
+</Callout>
+
+### `FHeader(...)`
+<UsageSnippet usage={headerUsage} />
+
+### `FHeader.nested(...)`
+<UsageSnippet usage={headerNestedUsage} />
+
+## Beispiele
+
+### Header
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='header'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+### Verschachtelter Header mit Zurück-Symbol
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='header' variant='nested' />
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={nestedSnippet} />
+  </Tab>
+</Tabs>
+
+### Verschachtelter Header mit X-Symbol
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='header' variant='nested-x' />
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={nestedXSnippet} />
+  </Tab>
+</Tabs>

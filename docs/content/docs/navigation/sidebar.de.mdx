@@ -1,0 +1,131 @@
+---
+title: Sidebar
+description: Ein Sidebar-Widget, das ein vorgefertigtes Layout für die Navigation am seitlichen Bildschirmrand bereitstellt.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.sidebar/
+---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/sidebar/default.json';
+import nestedSnippet from '@/snippets/examples/sidebar/nested.json';
+import customWidthSnippet from '@/snippets/examples/sidebar/custom-width.json';
+import sheetSnippet from '@/snippets/examples/sidebar/sheet.json';
+import sidebarUsage from '@/snippets/usages/widgets/sidebar/sidebar.json';
+import sidebarBuilderUsage from '@/snippets/usages/widgets/sidebar/sidebarBuilder.json';
+import sidebarRawUsage from '@/snippets/usages/widgets/sidebar/sidebarRaw.json';
+import sidebarGroupUsage from '@/snippets/usages/widgets/sidebar/sidebarGroup.json';
+import sidebarItemUsage from '@/snippets/usages/widgets/sidebar/sidebarItem.json';
+
+<Callout type="info">
+  Eine Sidebar wird üblicherweise mit `FScaffold` verwendet. Die Verwendung von `FScaffold` finden Sie [hier](/docs/layout/scaffold).
+</Callout>
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='sidebar' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+Um einen bestimmten Style zur Anpassung zu erzeugen:
+
+<Tabs items={['Sidebar', 'Sidebar Group', 'Sidebar Item']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create sidebar
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create sidebar-group
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create sidebar-item
+        ````
+    </Tab>
+</Tabs>
+
+## Aufbau
+
+Dieser Abschnitt beschreibt den Aufbau der verschiedenen Elemente einer Sidebar.
+
+### `FSidebar`
+
+Das Widget, das ein vorgefertigtes Layout am seitlichen Bildschirmrand bereitstellt. Das Widget besitzt die folgenden Bereiche:
+
+| Name    | Parameter      | Position    | Optional |
+| :------ | :------------- | :---------- | :------- |
+| header  | header         | fest        | Ja       |
+| content | child/children | scrollbar   | Nein     |
+| footer  | footer         | fest        | Ja       |
+
+### `FSidebarGroup`
+
+Ein Widget, das verwendet wird, um mehrere `FSidebarItem`s zu gruppieren.
+
+### `FSidebarItem`
+
+Stellt einen Eintrag in der Sidebar dar. Kann in `FSidebarItem.children` verschachtelt werden, um verschachtelte Einträge zu erzeugen.
+
+## Verwendung
+
+### `FSidebar(...)`
+<UsageSnippet usage={sidebarUsage} />
+
+### `FSidebar.builder(...)`
+<UsageSnippet usage={sidebarBuilderUsage} />
+
+### `FSidebar.raw(...)`
+<UsageSnippet usage={sidebarRawUsage} />
+
+### `FSidebarGroup(...)`
+<UsageSnippet usage={sidebarGroupUsage} />
+
+### `FSidebarItem(...)`
+<UsageSnippet usage={sidebarItemUsage} />
+
+## Beispiele
+
+### Sheet-Sidebar
+
+Geeignet für Geräte mit begrenztem Bildschirmplatz.
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='sidebar' variant='sheet' height={500} />
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={sheetSnippet} />
+  </Tab>
+</Tabs>
+
+### Benutzerdefinierte Breite
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='sidebar' variant='custom-width' height={300} />
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={customWidthSnippet} />
+  </Tab>
+</Tabs>
+
+### Verschachtelter `FSidebarItem`
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='sidebar' variant='nested' height={500} />
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={nestedSnippet} />
+  </Tab>
+</Tabs>

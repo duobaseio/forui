@@ -1,0 +1,63 @@
+---
+title: Alert
+description: Zeigt einen Hinweis an, um die Aufmerksamkeit der Nutzer zu lenken.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.alert/
+---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import primarySnippet from '@/snippets/examples/alert/primary.json';
+import destructiveSnippet from '@/snippets/examples/alert/destructive.json';
+import alertUsage from '@/snippets/usages/widgets/alert/alert.json';
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='alert' variant='primary'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={primarySnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+Um einen bestimmten Style zur Anpassung zu erzeugen:
+
+<Tabs items={['Alerts']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create alerts
+        ````
+    </Tab>
+</Tabs>
+
+## Verwendung
+
+### `FAlert(...)`
+<UsageSnippet usage={alertUsage} />
+
+## Beispiele
+
+### Primär
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='alert' variant='primary'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={primarySnippet} />
+  </Tab>
+</Tabs>
+
+### Destruktiv
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='alert' variant='destructive'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={destructiveSnippet} />
+  </Tab>
+</Tabs>

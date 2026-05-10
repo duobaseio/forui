@@ -1,0 +1,103 @@
+---
+title: 选择器
+description: 一个通用的选择器，允许用户选择一个项目。它由一个或多个滚轮组成，滚轮之间可选地带有分隔符。该选择器支持方向键导航。推荐用于触摸设备。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.picker/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import pickerUsage from '@/snippets/usages/widgets/picker/picker.json';
+import pickerWheelUsage from '@/snippets/usages/widgets/picker/pickerWheel.json';
+import pickerWheelBuilderUsage from '@/snippets/usages/widgets/picker/pickerWheelBuilder.json';
+import defaultSnippet from '@/snippets/examples/picker/default.json';
+import loopSnippet from '@/snippets/examples/picker/loop.json';
+import builderSnippet from '@/snippets/examples/picker/builder.json';
+import multipleSnippet from '@/snippets/examples/picker/multiple.json';
+import separatorSnippet from '@/snippets/examples/picker/separator.json';
+
+该选择器支持方向键导航：
+
+- 上/下箭头：增加/减少选中的值
+- 左/右箭头：在滚轮之间移动
+
+推荐用于触摸设备。
+
+<Tabs items={['预览', '代码']}>
+    <Tab>
+        <Widget name='picker'/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={defaultSnippet} />
+    </Tab>
+</Tabs>
+
+## CLI
+
+要生成可定制的特定样式：
+
+<Tabs items={['Picker']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create picker
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+### `FPicker(...)`
+<UsageSnippet usage={pickerUsage} />
+
+### `FPickerWheel(...)`
+<UsageSnippet usage={pickerWheelUsage} />
+
+### `FPickerWheel.builder(...)`
+<UsageSnippet usage={pickerWheelBuilderUsage} />
+
+## 示例
+
+### 循环
+
+<Tabs items={['预览', '代码']}>
+    <Tab>
+        <Widget name='picker' variant='loop'/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={loopSnippet} />
+    </Tab>
+</Tabs>
+
+### 懒加载
+
+<Tabs items={['预览', '代码']}>
+    <Tab>
+        <Widget name='picker' variant='builder'/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={builderSnippet} />
+    </Tab>
+</Tabs>
+
+### 多个滚轮
+
+<Tabs items={['预览', '代码']}>
+    <Tab>
+        <Widget name='picker' variant='multiple'/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={multipleSnippet} />
+    </Tab>
+</Tabs>
+
+### 带分隔符
+
+<Tabs items={['预览', '代码']}>
+    <Tab>
+        <Widget name='picker' variant='separator'/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={separatorSnippet} />
+    </Tab>
+</Tabs>

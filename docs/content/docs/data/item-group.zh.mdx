@@ -1,0 +1,134 @@
+---
+title: 列表项分组
+description: Item Group 通常用于将相关信息组合在一起。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.item/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/item-group/default.json';
+import scrollableSnippet from '@/snippets/examples/item-group/scrollable.json';
+import lazySnippet from '@/snippets/examples/item-group/lazy.json';
+import mergeSnippet from '@/snippets/examples/item-group/merge.json';
+import fullSnippet from '@/snippets/examples/item-group/full.json';
+import indentedSnippet from '@/snippets/examples/item-group/indented.json';
+import itemGroupUsage from '@/snippets/usages/widgets/item_group/itemGroup.json';
+import itemGroupBuilderUsage from '@/snippets/usages/widgets/item_group/builder.json';
+import itemGroupMergeUsage from '@/snippets/usages/widgets/item_group/merge.json';
+
+<Callout type="info">
+    此 widget 通常用于构建更复杂的 widget，而不是直接使用。
+</Callout>
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='item-group'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+要生成可自定义的特定样式：
+
+<Tabs items={['Item Group', 'Items', 'Item', 'Item Content']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create item-group
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create items
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create item
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create item-content
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+### `FItemGroup(...)`
+<UsageSnippet usage={itemGroupUsage} />
+
+### `FItemGroup.builder(...)`
+<UsageSnippet usage={itemGroupBuilderUsage} />
+
+### `FItemGroup.merge(...)`
+<UsageSnippet usage={itemGroupMergeUsage} />
+
+## 示例
+
+### 行为
+
+#### 可滚动
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='item-group' variant='scrollable' height={200}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={scrollableSnippet} />
+  </Tab>
+</Tabs>
+
+#### 懒加载滚动
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='item-group' variant='lazy' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={lazySnippet} />
+  </Tab>
+</Tabs>
+
+#### 合并多个分组
+
+该函数将多个 `FItemGroupMixin` 合并为一个分组，便于呈现包含多个区段的分组。
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='item-group' variant='merge' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={mergeSnippet} />
+  </Tab>
+</Tabs>
+
+### 外观
+
+#### 完整分隔线
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='item-group' variant='full'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={fullSnippet} />
+  </Tab>
+</Tabs>
+
+#### 缩进分隔线
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='item-group' variant='indented'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={indentedSnippet} />
+  </Tab>
+</Tabs>

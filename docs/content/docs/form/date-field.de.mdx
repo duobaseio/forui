@@ -1,0 +1,146 @@
+---
+title: Datumsfeld
+description: Ein Date-Feld erlaubt die Auswahl eines Datums über einen Kalender oder ein Eingabefeld.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.date_field/
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import dateFieldUsage from '@/snippets/usages/widgets/date_field/dateField.json';
+import dateFieldCalendarUsage from '@/snippets/usages/widgets/date_field/calendar.json';
+import dateFieldInputUsage from '@/snippets/usages/widgets/date_field/input.json';
+import defaultSnippet from '@/snippets/examples/date-field/default.json';
+import calendarSnippet from '@/snippets/examples/date-field/calendar.json';
+import inputSnippet from '@/snippets/examples/date-field/input.json';
+import clearableSnippet from '@/snippets/examples/date-field/clearable.json';
+import popoverBuilderSnippet from '@/snippets/examples/date-field/popover-builder.json';
+import validatorSnippet from '@/snippets/examples/date-field/validator.json';
+import formSnippet from '@/snippets/examples/date-field/form.json';
+
+<Callout type="info">
+    Es wird empfohlen, [FDateField.calendar](#fdatefieldcalendar) auf Touch-Geräten und
+    [FDateField.new](#fdatefield)/[FDateField.input](#fdatefieldinput) auf Geräten ohne primären Touch-Eingabe zu verwenden.
+</Callout>
+
+Das Eingabefeld unterstützt Navigation per Pfeiltasten:
+
+- Pfeil nach oben/unten: Werte erhöhen/verringern
+- Pfeil nach links/rechts: Zwischen Datumssegmenten wechseln
+
+Das Eingabefeld unterstützt die folgenden Sprachregionen mit nicht-westlichen Ziffern nicht und greift auf Englisch zurück:
+
+- Arabisch
+- Assamesisch
+- Bengalisch
+- Persisch/Farsi
+- Marathi
+- Birmanisch
+- Nepalesisch
+- Paschtu
+- Tamil
+
+<Tabs items={['Vorschau', 'Code']}>
+    <Tab>
+        <Widget name='date-field' height={500}/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={defaultSnippet} />
+    </Tab>
+</Tabs>
+
+## CLI
+
+Um einen bestimmten Style zur Anpassung zu erzeugen:
+
+<Tabs items={['Date Field']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create date-field
+        ````
+    </Tab>
+</Tabs>
+
+## Verwendung
+
+### `FDateField(...)`
+<UsageSnippet usage={dateFieldUsage} />
+
+### `FDateField.calendar(...)`
+<UsageSnippet usage={dateFieldCalendarUsage} />
+
+### `FDateField.input(...)`
+<UsageSnippet usage={dateFieldInputUsage} />
+
+## Beispiele
+
+### Nur Kalender
+
+<Tabs items={['Vorschau', 'Code']}>
+    <Tab>
+        <Widget name='date-field' variant='calendar' height={500}/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={calendarSnippet} />
+    </Tab>
+</Tabs>
+
+### Nur Eingabe
+
+<Tabs items={['Vorschau', 'Code']}>
+    <Tab>
+        <Widget name='date-field' variant='input'/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={inputSnippet} />
+    </Tab>
+</Tabs>
+
+### Löschbar
+
+<Tabs items={['Vorschau', 'Code']}>
+    <Tab>
+        <Widget name='date-field' variant='clearable' height={500}/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={clearableSnippet} />
+    </Tab>
+
+</Tabs>
+
+### Popover Builder
+
+<Tabs items={['Vorschau', 'Code']}>
+    <Tab>
+        <Widget name='date-field' variant='popover-builder' height={500}/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={popoverBuilderSnippet} />
+    </Tab>
+</Tabs>
+
+### Benutzerdefinierte Validierung
+
+<Tabs items={['Vorschau', 'Code']}>
+    <Tab>
+        <Widget name='date-field' variant='validator' height={500}/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={validatorSnippet} />
+    </Tab>
+
+</Tabs>
+
+### Form
+
+<Tabs items={['Vorschau', 'Code']}>
+    <Tab>
+        <Widget name='date-field' variant='form' height={600}/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={formSnippet} />
+    </Tab>
+
+</Tabs>

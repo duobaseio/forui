@@ -1,0 +1,137 @@
+---
+title: 弹出框
+description: popover 在与子 widget 对齐的传送门中显示丰富的内容。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.popover/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/popover/default.json';
+import horizontalSnippet from '@/snippets/examples/popover/horizontal.json';
+import slideSnippet from '@/snippets/examples/popover/slide.json';
+import flipSnippet from '@/snippets/examples/popover/flip.json';
+import allowOverflowSnippet from '@/snippets/examples/popover/allow-overflow.json';
+import noHideRegionSnippet from '@/snippets/examples/popover/no-hide-region.json';
+import nestedSnippet from '@/snippets/examples/popover/nested.json';
+import blurredSnippet from '@/snippets/examples/popover/blurred.json';
+import popoverUsage from '@/snippets/usages/widgets/popover/popover.json';
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='popover' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+要生成可定制的特定样式：
+
+<Tabs items={['Popover']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create popover
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+### `FPopover(...)`
+<UsageSnippet usage={popoverUsage} />
+
+## 示例
+
+### 嵌套 popover
+
+当将内部使用 popover 的 widget（例如 `FSelect`）放置在 `FPopover` 内时，与内部 widget 的下拉菜单交互会导致外层
+popover 关闭。这是因为内部下拉菜单渲染在独立的浮层中，点击它会被视为外层 popover 之"外"。
+
+为避免这种情况，让两个 widget 共用同一个 `groupId`。
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='popover' variant='nested' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={nestedSnippet} />
+  </Tab>
+</Tabs>
+
+### 水平对齐
+
+你可以更改 popover 相对于按钮的对齐方式。
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='popover' variant='horizontal' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={horizontalSnippet} />
+  </Tab>
+</Tabs>
+
+### 点击外部不会关闭 popover
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='popover' variant='no-hide-region' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={noHideRegionSnippet} />
+  </Tab>
+</Tabs>
+
+### 模糊遮罩
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='popover' variant='blurred' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={blurredSnippet} />
+  </Tab>
+</Tabs>
+
+### 沿轴翻转
+
+popover 可以沿溢出轴翻转，以保持在视口边界内。
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='popover' variant='flip' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={flipSnippet} />
+  </Tab>
+</Tabs>
+
+### 沿轴滑动
+
+popover 可以沿溢出轴滑动，以保持在视口边界内。
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='popover' variant='slide' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={slideSnippet} />
+  </Tab>
+</Tabs>
+
+### 允许溢出
+
+即使溢出，popover 也不会移动以保持在视口边界内。
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='popover' variant='allow-overflow' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={allowOverflowSnippet} />
+  </Tab>
+</Tabs>

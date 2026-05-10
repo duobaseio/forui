@@ -1,0 +1,76 @@
+---
+title: Sheet
+description: Ein modales Sheet ist eine Alternative zu einem Menü oder Dialog und verhindert, dass die Nutzer mit dem Rest der App interagieren.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.sheet/
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/modal-sheet/default.json';
+import blurredSnippet from '@/snippets/examples/modal-sheet/blurred.json';
+import draggableSnippet from '@/snippets/examples/modal-sheet/draggable.json';
+import sheetShowUsage from '@/snippets/usages/widgets/modal_sheet/show.json';
+import sheetRouteUsage from '@/snippets/usages/widgets/modal_sheet/route.json';
+
+Es navigiert jedes Mal zu einer neuen Seite.
+
+<Callout type="info">
+    Ein eng verwandtes Widget ist das [persistente Sheet](/docs/overlay/persistent-sheet), das ergänzende Informationen
+    zum Hauptinhalt der App anzeigt, ohne die Nutzer an der Interaktion mit der App zu hindern.
+</Callout>
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='modal-sheet' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+Um einen bestimmten Style zur Anpassung zu erzeugen:
+
+<Tabs items={['Modal Sheet']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create modal-sheet
+        ````
+    </Tab>
+</Tabs>
+
+## Verwendung
+
+### `showFSheet(...)`
+<UsageSnippet usage={sheetShowUsage} />
+
+### `FModalSheetRoute(...)`
+<UsageSnippet usage={sheetRouteUsage} />
+
+## Beispiele
+
+### Unscharfe Hintergrundebene
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='modal-sheet' variant='blurred' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={blurredSnippet} />
+  </Tab>
+</Tabs>
+
+### Mit `DraggableScrollableSheet`
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='modal-sheet' variant='draggable' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={draggableSnippet} />
+  </Tab>
+</Tabs>

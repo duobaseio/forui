@@ -1,0 +1,51 @@
+---
+title: Kreisförmiger Fortschritt
+description: Zeigt einen unbestimmten kreisförmigen Indikator für den Fortschritt einer Aufgabe an.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.progress/
+---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import circularSnippet from '@/snippets/examples/progress/circular.json';
+import circularProgressUsage from '@/snippets/usages/widgets/progress/circularProgress.json';
+import circularProgressLoaderUsage from '@/snippets/usages/widgets/progress/circularProgressLoader.json';
+import circularProgressPinwheelUsage from '@/snippets/usages/widgets/progress/circularProgressPinwheel.json';
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='progress' variant='circular'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={circularSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+Um einen bestimmten Style zur Anpassung zu erzeugen:
+
+<Tabs items={['Circular Progress Sizes', 'Circular Progress']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create circular-progress-sizes
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create circular-progress
+        ````
+    </Tab>
+</Tabs>
+
+## Verwendung
+
+### `FCircularProgress(...)`
+<UsageSnippet usage={circularProgressUsage} />
+
+### `FCircularProgress.loader(...)`
+<UsageSnippet usage={circularProgressLoaderUsage} />
+
+### `FCircularProgress.pinwheel(...)`
+<UsageSnippet usage={circularProgressPinwheelUsage} />

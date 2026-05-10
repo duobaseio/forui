@@ -17,10 +17,10 @@ import resizableUsage from '@/snippets/usages/widgets/resizable/resizable.json';
 import resizableRegionUsage from '@/snippets/usages/widgets/resizable/resizableRegion.json';
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='resizable' height={700}/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={defaultSnippet} />
   </Tab>
 </Tabs>
@@ -30,7 +30,7 @@ import resizableRegionUsage from '@/snippets/usages/widgets/resizable/resizableR
 To generate a specific style for customization:
 
 <Tabs items={['Resizables']}>
-    <Tab value="Resizables">
+    <Tab>
         ```shell copy
         dart run forui style create resizables
         ````
@@ -50,10 +50,10 @@ To generate a specific style for customization:
 ### Without Cascading
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='resizable' variant='no-cascading' height={700}/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={noCascadingSnippet} />
   </Tab>
 </Tabs>
@@ -61,10 +61,10 @@ To generate a specific style for customization:
 ### Horizontal
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='resizable' variant='horizontal' height={400}/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={horizontalSnippet} />
   </Tab>
 </Tabs>
@@ -72,10 +72,10 @@ To generate a specific style for customization:
 ### Divider with No Thumb
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='resizable' variant='divider' height={400}/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={dividerSnippet} />
   </Tab>
 </Tabs>
@@ -83,10 +83,10 @@ To generate a specific style for customization:
 ### Without Divider
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='resizable' variant='no-divider' height={400}/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={noDividerSnippet} />
   </Tab>
 </Tabs>

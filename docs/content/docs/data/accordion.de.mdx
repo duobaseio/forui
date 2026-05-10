@@ -1,0 +1,57 @@
+---
+title: Akkordeon
+description: Eine vertikal gestapelte Reihe interaktiver Überschriften, die beim Anklicken die zugehörigen Inhaltsbereiche einblenden. Jeder Bereich lässt sich unabhängig auf- und zuklappen.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.accordion/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/accordion/default.json';
+import maxSnippet from '@/snippets/examples/accordion/max.json';
+import accordionUsage from '@/snippets/usages/widgets/accordion/accordion.json';
+import accordionItemUsage from '@/snippets/usages/widgets/accordion/accordionItem.json';
+
+<Tabs items={['Vorschau', 'Code']}>
+    <Tab>
+        <Widget name='accordion' height={700}/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={defaultSnippet} />
+    </Tab>
+</Tabs>
+
+## CLI
+
+Um einen bestimmten Style zur Anpassung zu erzeugen:
+
+<Tabs items={['Accordion']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create accordion
+        ````
+    </Tab>
+</Tabs>
+
+
+## Verwendung
+
+### `FAccordion(...)`
+<UsageSnippet usage={accordionUsage} />
+
+### `FAccordionItem(...)`
+<UsageSnippet usage={accordionItemUsage} />
+
+## Beispiele
+
+### Mit maximaler Anzahl ausgeklappter Einträge
+
+<Tabs items={['Vorschau', 'Code']}>
+    <Tab>
+        <Widget name='accordion' variant='max' height={600}/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={maxSnippet} />
+    </Tab>
+</Tabs>

@@ -14,10 +14,10 @@ import accordionUsage from '@/snippets/usages/widgets/accordion/accordion.json';
 import accordionItemUsage from '@/snippets/usages/widgets/accordion/accordionItem.json';
 
 <Tabs items={['Preview', 'Code']}>
-    <Tab value="Preview">
+    <Tab>
         <Widget name='accordion' height={700}/>
     </Tab>
-    <Tab value="Code">
+    <Tab>
         <CodeSnippet snippet={defaultSnippet} />
     </Tab>
 </Tabs>
@@ -27,7 +27,7 @@ import accordionItemUsage from '@/snippets/usages/widgets/accordion/accordionIte
 To generate a specific style for customization:
 
 <Tabs items={['Accordion']}>
-    <Tab value="Accordion">
+    <Tab>
         ```shell copy
         dart run forui style create accordion
         ````
@@ -48,10 +48,10 @@ To generate a specific style for customization:
 ### With Max Number of Expanded Items
 
 <Tabs items={['Preview', 'Code']}>
-    <Tab value="Preview">
+    <Tab>
         <Widget name='accordion' variant='max' height={600}/>
     </Tab>
-    <Tab value="Code">
+    <Tab>
         <CodeSnippet snippet={maxSnippet} />
     </Tab>
 </Tabs>

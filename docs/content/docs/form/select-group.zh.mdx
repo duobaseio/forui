@@ -1,0 +1,79 @@
+---
+title: 选择分组
+description: 一组项目，允许用户从一组选项中进行选择。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.select_group/
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import selectGroupUsage from '@/snippets/usages/widgets/select_group/selectGroup.json';
+import selectGroupCheckboxUsage from '@/snippets/usages/widgets/select_group/selectGroupCheckbox.json';
+import selectGroupRadioUsage from '@/snippets/usages/widgets/select_group/selectGroupRadio.json';
+import defaultSnippet from '@/snippets/examples/select-group/default.json';
+import checkboxFormSnippet from '@/snippets/examples/select-group/checkbox-form.json';
+import radioFormSnippet from '@/snippets/examples/select-group/radio-form.json';
+
+<Callout type="info">
+    对于触摸设备，通常推荐使用 [select tile group](/docs/tile/select-tile-group) 或
+    [select menu tile](/docs/tile/select-menu-tile)，而不是它。
+</Callout>
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='select-group' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+要生成可定制的特定样式：
+
+<Tabs items={['Select Group']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create select-group
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+### `FSelectGroup(...)`
+<UsageSnippet usage={selectGroupUsage} />
+
+### `FSelectGroupItemMixin.checkbox(...)`
+<UsageSnippet usage={selectGroupCheckboxUsage} />
+
+### `FSelectGroupItemMixin.radio(...)`
+<UsageSnippet usage={selectGroupRadioUsage} />
+
+## 示例
+
+### 复选框表单
+
+<Tabs items={['预览', '代码']}>
+    <Tab>
+        <Widget name='select-group' variant='checkbox-form' height={400}/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={checkboxFormSnippet} />
+    </Tab>
+
+</Tabs>
+
+### 单选按钮表单
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='select-group' variant='radio-form' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={radioFormSnippet} />
+  </Tab>
+</Tabs>

@@ -1,0 +1,43 @@
+---
+title: Linien-Kalender
+description: Eine kompakte Kalender-Komponente, die Daten in einer horizontal scrollbaren Linie anzeigt und sich ideal für die Datumsauswahl bei begrenztem Platz eignet.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.line_calendar/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/line-calendar/default.json';
+import lineCalendarUsage from '@/snippets/usages/widgets/line_calendar/lineCalendar.json';
+
+<Callout type="info">
+  Halten Sie auf Desktop und Web beim Scrollen `Shift` gedrückt, um durch die Daten zu navigieren.
+</Callout>
+
+<Tabs items={['Vorschau', 'Code']}>
+    <Tab>
+        <Widget name='line-calendar' height={200}/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={defaultSnippet} />
+    </Tab>
+</Tabs>
+
+## CLI
+
+Um einen bestimmten Style zur Anpassung zu erzeugen:
+
+<Tabs items={['Line Calendar']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create line-calendar
+        ````
+    </Tab>
+</Tabs>
+
+## Verwendung
+
+### `FLineCalendar(...)`
+<UsageSnippet usage={lineCalendarUsage} />

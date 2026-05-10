@@ -1,0 +1,26 @@
+---
+title: Fokus-Umriss
+description: Ein Umriss um ein fokussiertes Widget, der dessen Layout nicht beeinflusst.
+apiReference: https://pub.dev/documentation/forui/latest/forui.foundation/FFocusedOutline-class.html
+---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import focusedOutlineDefault from '@/snippets/examples/focused-outline/default.json';
+import focusedOutlineUsage from '@/snippets/usages/foundation/focused_outline/focusedOutline.json';
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='focused-outline' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={focusedOutlineDefault} />
+  </Tab>
+</Tabs>
+
+## Verwendung
+
+### `FFocusedOutline(...)`
+<UsageSnippet usage={focusedOutlineUsage} />

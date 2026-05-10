@@ -1,0 +1,38 @@
+---
+title: Theme-Eigenschaften hinzufügen
+description: Erweitern Sie Forui-Themes mit anwendungsspezifischen Eigenschaften über Flutters ThemeExtension-System.
+---
+
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import brandStyleSnippet from '@/snippets/snippets/guides/adding_theme_properties/brand_style.json';
+import extensionsSnippet from '@/snippets/snippets/guides/adding_theme_properties/extensions.json';
+import getterSnippet from '@/snippets/snippets/guides/adding_theme_properties/getter.json';
+import accessPropertiesSnippet from '@/snippets/snippets/guides/adding_theme_properties/access_properties.json';
+import copyWithExtensionsSnippet from '@/snippets/snippets/guides/adding_theme_properties/copy_with.json';
+
+Forui-Themes lassen sich über Flutters [`ThemeExtension`](https://api.flutter.dev/flutter/material/ThemeExtension-class.html)-System
+um eigene anwendungsspezifische Eigenschaften erweitern.
+
+## Eine Theme-Erweiterung erstellen
+
+Theme-Erweiterungen müssen `ThemeExtension` erweitern und `copyWith()` sowie `lerp()` implementieren.
+
+<CodeSnippet snippet={brandStyleSnippet} />
+
+Fügen Sie die Erweiterung über den `extensions`-Parameter zu `FThemeData(...)` hinzu:
+
+<CodeSnippet snippet={extensionsSnippet} />
+
+Sie können Erweiterungen auch mit `copyWith(...)` zu bestehenden Themes hinzufügen:
+
+<CodeSnippet snippet={copyWithExtensionsSnippet} />
+
+## Auf die Eigenschaften zugreifen
+
+Rufen Sie Ihre eigene Theme-Erweiterung über [`extension<T>()`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/extension.html) ab:
+
+<CodeSnippet snippet={accessPropertiesSnippet} />
+
+Wir empfehlen außerdem, einen Getter auf `FThemeData` zu definieren:
+
+<CodeSnippet snippet={getterSnippet} />

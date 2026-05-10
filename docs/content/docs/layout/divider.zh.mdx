@@ -1,0 +1,38 @@
+---
+title: 分隔线
+description: 在视觉或语义上分隔内容。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.divider/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/divider/default.json';
+import dividerUsage from '@/snippets/usages/widgets/divider/divider.json';
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='divider' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+要生成可自定义的特定样式：
+
+<Tabs items={['Dividers']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create dividers
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+### `FDivider(...)`
+<UsageSnippet usage={dividerUsage} />

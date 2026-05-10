@@ -1,0 +1,76 @@
+---
+title: 开关
+description: 一个切换开关组件，允许用户通过滑动动作启用或禁用某项设置。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.switch_/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/switch/default.json';
+import leadingLabelSnippet from '@/snippets/examples/switch/leading-label.json';
+import disabledSnippet from '@/snippets/examples/switch/disabled.json';
+import formSnippet from '@/snippets/examples/switch/form.json';
+import switchUsage from '@/snippets/usages/widgets/switch/switchWidget.json';
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='switch'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+要生成可定制的特定样式：
+
+<Tabs items={['Switch']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create switch
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+### `FSwitch(...)`
+<UsageSnippet usage={switchUsage} />
+
+## 示例
+
+### 前置标签
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='switch' variant='leading-label'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={leadingLabelSnippet} />
+  </Tab>
+</Tabs>
+
+### 禁用
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='switch' variant='disabled'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={disabledSnippet} />
+  </Tab>
+</Tabs>
+
+### 表单
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='switch' variant='form' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={formSnippet} />
+  </Tab>
+</Tabs>

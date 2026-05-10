@@ -1,0 +1,137 @@
+---
+title: Textfeld
+description: Ein Textfeld lässt den Nutzer Text eingeben, entweder über eine Hardware-Tastatur oder eine Bildschirmtastatur.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.text_field/
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/text-field/default.json';
+import disabledSnippet from '@/snippets/examples/text-field/disabled.json';
+import clearableSnippet from '@/snippets/examples/text-field/clearable.json';
+import emailSnippet from '@/snippets/examples/text-field/email.json';
+import passwordSnippet from '@/snippets/examples/text-field/password.json';
+import multilineSnippet from '@/snippets/examples/text-field/multiline.json';
+import textFieldUsage from '@/snippets/usages/widgets/text_field/textField.json';
+import textFieldEmailUsage from '@/snippets/usages/widgets/text_field/textFieldEmail.json';
+import textFieldMultilineUsage from '@/snippets/usages/widgets/text_field/textFieldMultiline.json';
+import textFieldPasswordUsage from '@/snippets/usages/widgets/text_field/textFieldPassword.json';
+
+<Callout type="info">
+  Für die Verwendung von Textfeldern in Forms siehe [`FTextFormField`](/docs/form/text-form-field).
+</Callout>
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='text-field'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+Um einen bestimmten Style zur Anpassung zu erzeugen:
+
+<Tabs items={['Text Field Sizes', 'Text Field']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create text-field-sizes
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create text-field
+        ````
+    </Tab>
+</Tabs>
+
+## Verwendung
+
+### `FTextField(...)`
+<UsageSnippet usage={textFieldUsage} />
+
+### `FTextField.email(...)`
+<UsageSnippet usage={textFieldEmailUsage} />
+
+### `FTextField.password(...)`
+<UsageSnippet usage={textFieldPasswordUsage} />
+
+### `FTextField.multiline(...)`
+<UsageSnippet usage={textFieldMultilineUsage} />
+
+## Beispiele
+
+### Zustände
+
+#### Aktiviert
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='text-field'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+#### Deaktiviert
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='text-field' variant='disabled'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={disabledSnippet} />
+  </Tab>
+</Tabs>
+
+### Löschbar
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='text-field' variant='clearable'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={clearableSnippet} />
+  </Tab>
+</Tabs>
+
+### Voreinstellungen
+
+#### E-Mail
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='text-field' variant='email'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={emailSnippet} />
+  </Tab>
+</Tabs>
+
+#### Passwort
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='text-field' variant='password'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={passwordSnippet} />
+  </Tab>
+</Tabs>
+
+#### Mehrzeilig
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='text-field' variant='multiline'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={multilineSnippet} />
+  </Tab>
+</Tabs>

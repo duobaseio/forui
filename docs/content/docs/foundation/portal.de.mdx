@@ -1,0 +1,37 @@
+---
+title: Portal
+description: Ein Portal rendert ein Portal-Widget, das oberhalb eines Child-Widgets "schwebt".
+apiReference: https://pub.dev/documentation/forui/latest/forui.foundation/FPortal-class.html
+---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import portalDefault from '@/snippets/examples/portal/default.json';
+import portalUsage from '@/snippets/usages/foundation/portal/portal.json';
+
+<Callout type="info">
+  Dieses Widget dient typischerweise als Grundlage für andere übergeordnete Widgets, z. B.
+  [Popover](../overlay/popover) oder [Tooltip](../overlay/tooltip). Sofern Sie kein eigenes Widget erstellen, sollten
+  Sie diese übergeordneten Widgets bevorzugen.
+</Callout>
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='portal' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={portalDefault} />
+  </Tab>
+</Tabs>
+
+## Verwendung
+
+### `FPortal(...)`
+<UsageSnippet usage={portalUsage} />
+
+## Visualisierung
+
+<Widget name='portal-visualization' height={600}/>

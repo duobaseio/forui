@@ -1,0 +1,119 @@
+---
+title: 列表项
+description: 专为触摸设备设计的 Item，通常用于将相关信息归类在一起。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.tile/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import tileDefault from '@/snippets/examples/tile/default.json';
+import tileUsage from '@/snippets/usages/widgets/tile/tile.json';
+import tileRawUsage from '@/snippets/usages/widgets/tile/tileRaw.json';
+import tileUntappable from '@/snippets/examples/tile/untappable.json';
+import tileDisabled from '@/snippets/examples/tile/disabled.json';
+import tileSubtitle from '@/snippets/examples/tile/subtitle.json';
+import tileDetails from '@/snippets/examples/tile/details.json';
+import tileDestructive from '@/snippets/examples/tile/destructive.json';
+
+<Callout type="info">
+    可以将多个 tile 组合在 [FTileGroup](/docs/tile/tile-group) 中。
+</Callout>
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='tile'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={tileDefault} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+要生成可定制的特定样式：
+
+<Tabs items={['Tiles', 'Tile', 'Tile Content']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create tiles
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create tile
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create tile-content
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+### `FTile(...)`
+<UsageSnippet usage={tileUsage} />
+
+### `FTile.raw(...)`
+<UsageSnippet usage={tileRawUsage} />
+
+## 示例
+
+### 危险
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='tile' variant='destructive'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={tileDestructive} />
+  </Tab>
+</Tabs>
+
+### 不可点击
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='tile' variant='untappable'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={tileUntappable} />
+  </Tab>
+</Tabs>
+
+### 禁用
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='tile' variant='disabled'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={tileDisabled} />
+  </Tab>
+</Tabs>
+
+### 带副标题
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='tile' variant='subtitle'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={tileSubtitle} />
+  </Tab>
+</Tabs>
+
+### 带详细信息
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='tile' variant='details'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={tileDetails} />
+  </Tab>
+</Tabs>

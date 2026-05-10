@@ -15,10 +15,10 @@ import avatarUsage from '@/snippets/usages/widgets/avatar/avatar.json';
 import avatarRawUsage from '@/snippets/usages/widgets/avatar/raw.json';
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
       <Widget name='avatar'/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
       <CodeSnippet snippet={defaultSnippet} />
   </Tab>
 </Tabs>
@@ -28,7 +28,7 @@ import avatarRawUsage from '@/snippets/usages/widgets/avatar/raw.json';
 To generate a specific style for customization:
 
 <Tabs items={['Avatar']}>
-    <Tab value="Avatar">
+    <Tab>
         ```shell copy
         dart run forui style create avatar
         ````
@@ -48,10 +48,10 @@ To generate a specific style for customization:
 ### Raw
 
 <Tabs items={['Preview', 'Code']}>
-    <Tab value="Preview">
+    <Tab>
         <Widget name='avatar' variant='raw'/>
     </Tab>
-    <Tab value="Code">
+    <Tab>
         <CodeSnippet snippet={rawSnippet} />
     </Tab>
 </Tabs>
@@ -59,10 +59,10 @@ To generate a specific style for customization:
 ### Fallback
 
 <Tabs items={['Preview', 'Code']}>
-    <Tab value="Preview">
+    <Tab>
         <Widget name='avatar' variant='invalid'/>
     </Tab>
-    <Tab value="Code">
+    <Tab>
         <CodeSnippet snippet={invalidSnippet} />
     </Tab>
 </Tabs>

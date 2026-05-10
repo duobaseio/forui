@@ -1,0 +1,43 @@
+---
+title: 线性日历
+description: 一种紧凑的日历组件，将日期以可水平滚动的横向方式呈现，适合在空间有限的场景下进行日期选择。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.line_calendar/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/line-calendar/default.json';
+import lineCalendarUsage from '@/snippets/usages/widgets/line_calendar/lineCalendar.json';
+
+<Callout type="info">
+  在桌面端和 Web 上滚动时按住 `Shift` 可在日期之间切换。
+</Callout>
+
+<Tabs items={['预览', '代码']}>
+    <Tab>
+        <Widget name='line-calendar' height={200}/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={defaultSnippet} />
+    </Tab>
+</Tabs>
+
+## CLI
+
+要生成可自定义的特定样式：
+
+<Tabs items={['Line Calendar']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create line-calendar
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+### `FLineCalendar(...)`
+<UsageSnippet usage={lineCalendarUsage} />

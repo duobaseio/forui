@@ -1,0 +1,76 @@
+---
+title: Breadcrumb
+description: Zeigt eine Liste von Links an, die helfen, die Position einer Seite innerhalb der hierarchischen Struktur einer Website zu visualisieren. Sie ermöglicht die Navigation zu beliebigen übergeordneten Ebenen.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.breadcrumb/
+---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/breadcrumb/default.json';
+import tilesSnippet from '@/snippets/examples/breadcrumb/tiles.json';
+import dividerSnippet from '@/snippets/examples/breadcrumb/divider.json';
+import breadcrumbUsage from '@/snippets/usages/widgets/breadcrumb/breadcrumb.json';
+import breadcrumbItemUsage from '@/snippets/usages/widgets/breadcrumb/breadcrumbItem.json';
+import breadcrumbItemCollapsedUsage from '@/snippets/usages/widgets/breadcrumb/breadcrumbItemCollapsed.json';
+import breadcrumbItemCollapsedTilesUsage from '@/snippets/usages/widgets/breadcrumb/breadcrumbItemCollapsedTiles.json';
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='breadcrumb' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+Um einen bestimmten Style zur Anpassung zu erzeugen:
+
+<Tabs items={['Breadcrumb']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create breadcrumb
+        ````
+    </Tab>
+</Tabs>
+
+## Verwendung
+
+### `FBreadcrumb(...)`
+<UsageSnippet usage={breadcrumbUsage} />
+
+### `FBreadcrumbItem(...)`
+<UsageSnippet usage={breadcrumbItemUsage} />
+
+### `FBreadcrumbItem.collapsed(...)`
+<UsageSnippet usage={breadcrumbItemCollapsedUsage} />
+
+### `FBreadcrumbItem.collapsedTiles(...)`
+<UsageSnippet usage={breadcrumbItemCollapsedTilesUsage} />
+
+## Beispiele
+
+### Tiles
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='breadcrumb' variant='tiles' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={tilesSnippet} />
+  </Tab>
+</Tabs>
+
+### Benutzerdefinierter Trenner
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='breadcrumb' variant='divider' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={dividerSnippet} />
+  </Tab>
+</Tabs>

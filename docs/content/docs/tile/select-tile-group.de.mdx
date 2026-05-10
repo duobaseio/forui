@@ -1,0 +1,145 @@
+---
+title: Select-Tile-Gruppe
+description: Eine Gruppe von Tiles, mit der Nutzer eine Auswahl aus einer Reihe von Optionen treffen können.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.select_tile/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import selectTileGroupDefault from '@/snippets/examples/select-tile-group/default.json';
+import selectTileGroupUsage from '@/snippets/usages/widgets/select_tile_group/selectTileGroup.json';
+import selectTileGroupBuilderUsage from '@/snippets/usages/widgets/select_tile_group/selectTileGroupBuilder.json';
+import selectTileUsage from '@/snippets/usages/widgets/select_tile_group/selectTile.json';
+import selectTileSuffixUsage from '@/snippets/usages/widgets/select_tile_group/selectTileSuffix.json';
+import selectTileGroupRadio from '@/snippets/examples/select-tile-group/radio.json';
+import selectTileGroupMultiValue from '@/snippets/examples/select-tile-group/multi-value.json';
+import selectTileGroupSuffix from '@/snippets/examples/select-tile-group/suffix.json';
+import selectTileGroupLazy from '@/snippets/examples/select-tile-group/lazy.json';
+import selectTileGroupScrollable from '@/snippets/examples/select-tile-group/scrollable.json';
+import selectTileGroupFullDivider from '@/snippets/examples/select-tile-group/full-divider.json';
+import selectTileGroupNoDivider from '@/snippets/examples/select-tile-group/no-divider.json';
+
+<Callout type="info">
+    Für Desktop wird in der Regel eine [Select Group](/docs/form/select-group) empfohlen.
+</Callout>
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='select-tile-group' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={selectTileGroupDefault} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+Um einen bestimmten Style zur Anpassung zu erzeugen:
+
+<Tabs items={['Tile Group']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create tile-group
+        ````
+    </Tab>
+</Tabs>
+
+## Verwendung
+
+### `FSelectTileGroup(...)`
+<UsageSnippet usage={selectTileGroupUsage} />
+
+### `FSelectTileGroup.builder(...)`
+<UsageSnippet usage={selectTileGroupBuilderUsage} />
+
+### `FSelectTile(...)`
+<UsageSnippet usage={selectTileUsage} />
+
+### `FSelectTile.suffix(...)`
+<UsageSnippet usage={selectTileSuffixUsage} />
+
+## Beispiele
+
+### Verhalten
+
+#### Scrollbar
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='select-tile-group' variant='scrollable' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={selectTileGroupScrollable} />
+  </Tab>
+</Tabs>
+
+#### Lazy Scrollbar
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='select-tile-group' variant='lazy' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={selectTileGroupLazy} />
+  </Tab>
+</Tabs>
+
+#### Mehrwert-Formular
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='select-tile-group' variant='multi-value' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={selectTileGroupMultiValue} />
+  </Tab>
+</Tabs>
+
+#### Radio-Formular
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='select-tile-group' variant='radio' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={selectTileGroupRadio} />
+  </Tab>
+</Tabs>
+
+### Erscheinungsbild
+
+#### Eigene Symbole
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='select-tile-group' variant='suffix'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={selectTileGroupSuffix} />
+  </Tab>
+</Tabs>
+
+#### Vollständiger Trenner
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='select-tile-group' variant='full-divider' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={selectTileGroupFullDivider} />
+  </Tab>
+</Tabs>
+
+#### Ohne Trenner
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='select-tile-group' variant='no-divider' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={selectTileGroupNoDivider} />
+  </Tab>
+</Tabs>

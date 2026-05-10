@@ -1,0 +1,68 @@
+---
+title: Avatar
+description: Eine kreisförmige Bildkomponente, die Profilbilder mit Fallback-Option anzeigt. Die Avatar-Komponente bietet eine einheitliche Möglichkeit, Nutzer in Ihrer Anwendung darzustellen, indem sie Profilbilder anzeigt und auf Initialen oder Icons zurückgreift, wenn Bilder nicht verfügbar sind.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.avatar/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/avatar/default.json';
+import rawSnippet from '@/snippets/examples/avatar/raw.json';
+import invalidSnippet from '@/snippets/examples/avatar/invalid.json';
+import avatarUsage from '@/snippets/usages/widgets/avatar/avatar.json';
+import avatarRawUsage from '@/snippets/usages/widgets/avatar/raw.json';
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+      <Widget name='avatar'/>
+  </Tab>
+  <Tab>
+      <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+Um einen bestimmten Style zur Anpassung zu erzeugen:
+
+<Tabs items={['Avatar']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create avatar
+        ````
+    </Tab>
+</Tabs>
+
+## Verwendung
+
+### `FAvatar(...)`
+<UsageSnippet usage={avatarUsage} />
+
+### `FAvatar.raw(...)`
+<UsageSnippet usage={avatarRawUsage} />
+
+## Beispiele
+
+### Raw
+
+<Tabs items={['Vorschau', 'Code']}>
+    <Tab>
+        <Widget name='avatar' variant='raw'/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={rawSnippet} />
+    </Tab>
+</Tabs>
+
+### Fallback
+
+<Tabs items={['Vorschau', 'Code']}>
+    <Tab>
+        <Widget name='avatar' variant='invalid'/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={invalidSnippet} />
+    </Tab>
+</Tabs>

@@ -1,0 +1,139 @@
+---
+title: Zeitfeld
+description: Ein Time-Feld erlaubt die Auswahl einer Uhrzeit über einen Picker oder ein Eingabefeld.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.time_field/
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/time-field/default.json';
+import hour24Snippet from '@/snippets/examples/time-field/hour24.json';
+import pickerSnippet from '@/snippets/examples/time-field/picker.json';
+import popoverBuilderSnippet from '@/snippets/examples/time-field/popover-builder.json';
+import validatorSnippet from '@/snippets/examples/time-field/validator.json';
+import formSnippet from '@/snippets/examples/time-field/form.json';
+import timeFieldUsage from '@/snippets/usages/widgets/time_field/timeField.json';
+import timeFieldPickerUsage from '@/snippets/usages/widgets/time_field/timeFieldPicker.json';
+
+<Callout type="info">
+    Es wird empfohlen, [FTimeField.picker](#ftimefieldpicker) auf Touch-Geräten und [FTimeField.new](#ftimefield)
+    auf Geräten ohne primären Touch-Eingabe zu verwenden.
+</Callout>
+
+Das Eingabefeld unterstützt Navigation per Pfeiltasten:
+
+- Pfeil nach oben/unten: Werte erhöhen/verringern
+- Pfeil nach links/rechts: Zwischen Zeitsegmenten wechseln
+
+Das Eingabefeld unterstützt die folgenden Sprachregionen mit nicht-westlichen Ziffern und Schriften, die Komposition erfordern, nicht und greift auf Englisch zurück:
+
+- Arabisch
+- Assamesisch
+- Bengalisch
+- Persisch/Farsi
+- Marathi
+- Birmanisch
+- Nepalesisch
+- Paschtu
+- Tamil
+- Amharisch
+- Kannada
+- Koreanisch
+- Punjabi
+- Thai
+
+Die folgenden Sprachregionen greifen auf Chinesisch (zh) zurück:
+
+- Chinesisch (Hongkong)
+- Chinesisch (Taiwan)
+
+<Tabs items={['Vorschau', 'Code']}>
+    <Tab>
+        <Widget name='time-field'/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={defaultSnippet} />
+    </Tab>
+</Tabs>
+
+## CLI
+
+Um einen bestimmten Style zur Anpassung zu erzeugen:
+
+<Tabs items={['Time Field']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create time-field
+        ````
+    </Tab>
+</Tabs>
+
+## Verwendung
+
+### `FTimeField(...)`
+<UsageSnippet usage={timeFieldUsage} />
+
+### `FTimeField.picker(...)`
+<UsageSnippet usage={timeFieldPickerUsage} />
+
+## Beispiele
+
+### 24 Stunden
+
+<Tabs items={['Vorschau', 'Code']}>
+    <Tab>
+        <Widget name='time-field' variant='hour24'/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={hour24Snippet} />
+    </Tab>
+</Tabs>
+
+### Nur Picker
+
+<Tabs items={['Vorschau', 'Code']}>
+    <Tab>
+        <Widget name='time-field' variant='picker' height={500}/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={pickerSnippet} />
+    </Tab>
+</Tabs>
+
+### Popover Builder
+
+<Tabs items={['Vorschau', 'Code']}>
+    <Tab>
+        <Widget name='time-field' variant='popover-builder' height={500}/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={popoverBuilderSnippet} />
+    </Tab>
+</Tabs>
+
+### Benutzerdefinierte Validierung
+
+<Tabs items={['Vorschau', 'Code']}>
+    <Tab>
+        <Widget name='time-field' variant='validator' height={500}/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={validatorSnippet} />
+    </Tab>
+
+</Tabs>
+
+### Form
+
+<Tabs items={['Vorschau', 'Code']}>
+    <Tab>
+        <Widget name='time-field' variant='form' height={600}/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={formSnippet} />
+    </Tab>
+
+</Tabs>

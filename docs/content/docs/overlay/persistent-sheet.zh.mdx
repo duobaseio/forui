@@ -1,0 +1,79 @@
+---
+title: 持久化抽屉
+description: 持久化 sheet 显示在另一个 widget 之上，同时仍允许用户与下方的 widget 交互。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.sheet/
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/persistent-sheet/default.json';
+import draggableSnippet from '@/snippets/examples/persistent-sheet/draggable.json';
+import keepAliveOffstageSnippet from '@/snippets/examples/persistent-sheet/keep-alive-offstage.json';
+import persistentSheetShowUsage from '@/snippets/usages/widgets/persistent_sheet/show.json';
+import persistentSheetSheetsUsage from '@/snippets/usages/widgets/persistent_sheet/sheets.json';
+
+它是 [FScaffold](/docs/layout/scaffold) 的一部分，多数情况下应优先使用 FScaffold。
+
+<Callout type="info">
+    与之密切相关的 widget 是 [模态 sheet](/docs/overlay/sheet)，它会阻止用户与应用的其余部分交互。
+</Callout>
+
+<Callout type="warn">
+    所有对 `showFPersistentSheet(...)` 的调用都应在拥有 `FScaffold` 或 `FSheets` 作为祖先的 widget 内部进行。
+</Callout>
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='persistent-sheet' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+要生成可定制的特定样式：
+
+<Tabs items={['Persistent Sheet']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create persistent-sheet
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+### `showFPersistentSheet(...)`
+<UsageSnippet usage={persistentSheetShowUsage} />
+
+### `FSheets(...)`
+<UsageSnippet usage={persistentSheetSheetsUsage} />
+
+## 示例
+
+### 配合 `KeepAliveOffstage`
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='persistent-sheet' variant='keep-alive-offstage' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={keepAliveOffstageSnippet} />
+  </Tab>
+</Tabs>
+
+### 配合 `DraggableScrollableSheet`
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='persistent-sheet' variant='draggable' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={draggableSnippet} />
+  </Tab>
+</Tabs>

@@ -1,0 +1,97 @@
+---
+title: 选择菜单列表项
+description: 一个 tile，触发后会显示供用户选择的选项列表。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.select_menu_tile/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import selectMenuTileDefault from '@/snippets/examples/select-menu-tile/default.json';
+import selectMenuTileUsage from '@/snippets/usages/widgets/select_menu_tile/selectMenuTile.json';
+import selectMenuTileBuilderUsage from '@/snippets/usages/widgets/select_menu_tile/selectMenuTileBuilder.json';
+import selectMenuTileLazy from '@/snippets/examples/select-menu-tile/lazy.json';
+import selectMenuTileScrollable from '@/snippets/examples/select-menu-tile/scrollable.json';
+import selectMenuTileNoAutoHide from '@/snippets/examples/select-menu-tile/no-auto-hide.json';
+import selectMenuTileForm from '@/snippets/examples/select-menu-tile/form.json';
+
+<Callout type="info">
+    在桌面端，通常更推荐使用 [select group](/docs/form/select)。
+</Callout>
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='select-menu-tile' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={selectMenuTileDefault} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+要生成可定制的特定样式：
+
+<Tabs items={['Select Menu Tile']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create select-menu-tile
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+### `FSelectMenuTile(...)`
+<UsageSnippet usage={selectMenuTileUsage} />
+
+### `FSelectMenuTile.builder(...)`
+<UsageSnippet usage={selectMenuTileBuilderUsage} />
+
+## 示例
+
+### 不自动隐藏
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='select-menu-tile' variant='no-auto-hide' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={selectMenuTileNoAutoHide} />
+  </Tab>
+</Tabs>
+
+### 可滚动
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='select-menu-tile' variant='scrollable' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={selectMenuTileScrollable} />
+  </Tab>
+</Tabs>
+
+### 懒加载滚动
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='select-menu-tile' variant='lazy' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={selectMenuTileLazy} />
+  </Tab>
+</Tabs>
+
+### 表单
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='select-menu-tile' variant='form' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={selectMenuTileForm} />
+  </Tab>
+</Tabs>

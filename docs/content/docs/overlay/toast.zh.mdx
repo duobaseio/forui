@@ -1,0 +1,194 @@
+---
+title: 提示消息
+description: 一个有主张的 toast，临时显示简短的消息。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.toast/
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/toast/default.json';
+import showToastUsage from '@/snippets/usages/widgets/toast/showToast.json';
+import showRawToastUsage from '@/snippets/usages/widgets/toast/showRawToast.json';
+import toastUsage from '@/snippets/usages/widgets/toast/toast.json';
+import toasterUsage from '@/snippets/usages/widgets/toast/toaster.json';
+import rawSnippet from '@/snippets/examples/toast/raw.json';
+import swipeSnippet from '@/snippets/examples/toast/swipe.json';
+import swipeDownSnippet from '@/snippets/examples/toast/swipe-down.json';
+import swipeDisabledSnippet from '@/snippets/examples/toast/swipe-disabled.json';
+import noAutoDismissSnippet from '@/snippets/examples/toast/no-auto-dismiss.json';
+import alwaysExpandSnippet from '@/snippets/examples/toast/always-expand.json';
+import disabledExpandSnippet from '@/snippets/examples/toast/disabled-expand.json';
+import destructiveSnippet from '@/snippets/examples/toast/destructive.json';
+import customAlignmentSnippet from '@/snippets/examples/toast/custom-alignment.json';
+
+<Callout type="info">
+    要显示 toast，请使用 `showFToast(...)` 或 `showRawFToast(...)` 函数。该函数必须从 `FToaster` 的后代中调用。
+
+    我们建议将 `FToaster` 放在 `MaterialApp`/`WidgetsApp`/`CupertinoApp` 的 `builder` 方法中：
+    ```dart
+    MaterialApp(
+      builder: (context, child) => FTheme(
+        data: FThemes.neutral.light,
+        child: FToaster(child: child!),
+      ),
+      home: HomePage(),
+    );
+    ```
+</Callout>
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='toast' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+要生成可定制的特定样式：
+
+<Tabs items={['Toaster', 'Toasts', 'Toast']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create toaster
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create toasts
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create toast
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+### `showFToast(...)`
+<UsageSnippet usage={showToastUsage} />
+
+### `showRawFToast(...)`
+<UsageSnippet usage={showRawToastUsage} />
+
+### `FToast(...)`
+<UsageSnippet usage={toastUsage} />
+
+### `FToaster(...)`
+<UsageSnippet usage={toasterUsage} />
+
+## 示例
+
+### 外观
+
+#### 危险
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='toast' variant='destructive' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={destructiveSnippet} />
+  </Tab>
+</Tabs>
+
+#### 自定义对齐
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='toast' variant='custom-alignment' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={customAlignmentSnippet} />
+  </Tab>
+</Tabs>
+
+#### 不自动消失
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='toast' variant='no-auto-dismiss' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={noAutoDismissSnippet} />
+  </Tab>
+</Tabs>
+
+#### 原始
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='toast' variant='raw' height={620}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={rawSnippet} />
+  </Tab>
+</Tabs>
+
+### 行为
+
+#### 始终展开
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='toast' variant='always-expand' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={alwaysExpandSnippet} />
+  </Tab>
+</Tabs>
+
+#### 禁用展开
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='toast' variant='disabled-expand'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={disabledExpandSnippet} />
+  </Tab>
+</Tabs>
+
+### 滑动消失
+
+#### 默认
+
+默认情况下，toast 可以通过水平滑向最近的屏幕边缘来消除。
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='toast' variant='swipe' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={swipeSnippet} />
+  </Tab>
+</Tabs>
+
+#### 向下
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='toast' variant='swipe-down' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={swipeDownSnippet} />
+  </Tab>
+</Tabs>
+
+#### 禁用
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='toast' variant='swipe-disabled' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={swipeDisabledSnippet} />
+  </Tab>
+</Tabs>

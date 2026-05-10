@@ -15,10 +15,10 @@ import errorSnippet from '@/snippets/examples/label/error.json';
 import labelUsage from '@/snippets/usages/widgets/label/label.json';
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='label' variant='horizontal'/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={horizontalSnippet} />
   </Tab>
 </Tabs>
@@ -28,12 +28,12 @@ import labelUsage from '@/snippets/usages/widgets/label/label.json';
 To generate a specific style for customization:
 
 <Tabs items={['Labels', 'Label']}>
-    <Tab value="Labels">
+    <Tab>
         ```shell copy
         dart run forui style create labels
         ````
     </Tab>
-    <Tab value="Label">
+    <Tab>
         ```shell copy
         dart run forui style create label
         ````
@@ -50,10 +50,10 @@ To generate a specific style for customization:
 ### Vertical
 
 <Tabs items={['Preview', 'Code']}>
-    <Tab value="Preview">
+    <Tab>
         <Widget name='label' variant='vertical'/>
     </Tab>
-    <Tab value="Code">
+    <Tab>
         <CodeSnippet snippet={verticalSnippet} />
     </Tab>
 </Tabs>
@@ -61,10 +61,10 @@ To generate a specific style for customization:
 ### Disabled
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='label' variant='disabled'/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={disabledSnippet} />
   </Tab>
 </Tabs>
@@ -72,10 +72,10 @@ To generate a specific style for customization:
 ### Error
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='label' variant='error'/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={errorSnippet} />
   </Tab>
 </Tabs>

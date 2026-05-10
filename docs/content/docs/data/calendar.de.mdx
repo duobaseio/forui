@@ -1,0 +1,111 @@
+---
+title: Kalender
+description: Eine Kalender-Komponente zum Auswählen und Bearbeiten von Daten.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.calendar/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/calendar/default.json';
+import datesSnippet from '@/snippets/examples/calendar/dates.json';
+import unselectableSnippet from '@/snippets/examples/calendar/unselectable.json';
+import rangeSnippet from '@/snippets/examples/calendar/range.json';
+import calendarUsage from '@/snippets/usages/widgets/calendar/calendar.json';
+
+Der Kalender unterstützt Wischgesten auf Mobilgeräten, sodass Nutzer durch Wischen nach links oder rechts zwischen Seiten navigieren können.
+
+Ein [`FCalendarController`](https://pub.dev/documentation/forui/latest/forui.widgets.calendar/FCalendarController-class.html)
+steuert das Auswahlverhalten für Daten, einschließlich Einzeldatum, mehrerer Daten und Datumsbereich.
+
+<Callout type="info">
+    `FCalendar` und alle `FCalendarController` geben `DateTime`-Werte in der UTC-Zeitzone zurück, abgeschnitten auf den nächsten Tag.
+</Callout>
+
+<Callout type="info">
+  Halten Sie auf Desktop und Web beim Scrollen `Shift` gedrückt, um durch die Daten zu navigieren.
+</Callout>
+
+<Tabs items={['Vorschau', 'Code']}>
+    <Tab>
+        <Widget name='calendar' height={500}/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={defaultSnippet} />
+    </Tab>
+</Tabs>
+
+## CLI
+
+Um einen bestimmten Style zur Anpassung zu erzeugen:
+
+<Tabs items={['Calendar', 'Calendar Header', 'Calendar Day Picker']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create calendar
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create calendar-header
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create calendar-day-picker
+        ````
+    </Tab>
+</Tabs>
+
+## Verwendung
+
+### `FCalendar(...)`
+<UsageSnippet usage={calendarUsage} />
+
+## Beispiele
+
+### Einzelnes Datum
+
+<Tabs items={['Vorschau', 'Code']}>
+    <Tab>
+        <Widget name='calendar' height={500}/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={defaultSnippet} />
+    </Tab>
+</Tabs>
+
+### Mehrere Daten mit Anfangsauswahl
+
+<Tabs items={['Vorschau', 'Code']}>
+    <Tab>
+        <Widget name='calendar' variant='dates' height={500}/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={datesSnippet} />
+    </Tab>
+</Tabs>
+
+### Nicht auswählbare Daten
+
+<Tabs items={['Vorschau', 'Code']}>
+    <Tab>
+        <Widget name='calendar' variant='unselectable' height={500}/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={unselectableSnippet} />
+    </Tab>
+</Tabs>
+
+### Bereichsauswahl mit Anfangsbereich
+
+<Tabs items={['Vorschau', 'Code']}>
+    <Tab>
+        <Widget name='calendar' variant='range' height={500}/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={rangeSnippet} />
+    </Tab>
+</Tabs>

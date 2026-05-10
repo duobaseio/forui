@@ -1,0 +1,126 @@
+---
+title: CLI
+description: 使用 Forui 的 CLI 在你的项目中生成主题与样式。
+---
+
+import {Callout} from "fumadocs-ui/components/callout";
+
+Forui 内置一个 CLI，可以在你的项目中生成主题与样式。生成的主题与样式可以直接修改，以契合你的设计需求。无需额外安装，且 CLI 不会增加应用的打包体积。
+
+## init
+
+使用 `init` 命令在项目目录中创建 `forui.yaml` 与 `main.dart` 文件。
+
+```shell copy
+dart run forui init
+```
+
+```shell copy
+Usage: forui init
+-h, --help         Print this usage information.
+-f, --force        Overwrite existing files if they exist.
+-t, --template     The main.dart template to generate.
+                   [basic (default), router]
+```
+
+## snippet
+
+### create
+
+使用 `snippet create` 命令在项目中生成代码片段。代码片段默认生成在 `lib` 目录下。
+
+```shell copy
+dart run forui snippet create [snippets]
+```
+
+```shell copy
+Usage: forui snippet create [snippets]
+-h, --help      Print this usage information.
+-f, --force     Overwrite existing files if they exist.
+-o, --output    The output directory or file, relative to the project directory.
+                (defaults to "lib")
+```
+
+### ls
+
+使用 `snippet ls` 命令列出所有可用的代码片段。
+
+```shell copy
+dart run forui snippet ls
+```
+
+```shell copy
+Usage: forui snippet ls
+-h, --help    Print this usage information.
+```
+
+## style
+
+### create
+
+使用 `style create` 命令在项目中生成样式。样式默认生成在 `lib/theme` 目录下。
+
+<Callout type="info">
+    关于如何使用生成的样式，请参阅[文档](/docs/guides/customizing-widget-styles)。
+</Callout>
+
+```shell copy
+dart run forui style create [styles]
+```
+
+```shell copy
+Usage: forui style create [styles]
+-h, --help      Print this usage information.
+-a, --all       Create all styles.
+-f, --force     Overwrite existing files if they exist.
+-o, --output    The output directory or file, relative to the project directory.
+                (defaults to "lib/theme")
+```
+
+### ls
+
+使用 `style ls` 命令列出所有可用的样式。
+
+```shell copy
+dart run forui style ls
+```
+
+```shell copy
+Usage: forui style ls
+-h, --help    Print this usage information.
+```
+
+## theme
+
+### create
+
+使用 `theme create` 命令在项目中生成主题。主题默认生成在 `lib/theme/theme.dart` 文件中。
+
+<Callout type="info">
+    关于如何使用生成的主题，请参阅[文档](/docs/guides/customizing-themes)。
+</Callout>
+
+```shell copy
+dart run forui theme create [theme]
+```
+
+```shell copy
+Usage: forui theme create [theme]
+-h, --help      Print this usage information.
+-f, --force     Overwrite existing files if they exist.
+-o, --output    The output directory or file, relative to the project directory.
+                (defaults to "lib/theme/theme.dart")
+```
+
+### ls
+
+使用 `theme ls` 命令列出所有可用的主题。
+
+```shell copy
+dart run forui theme ls
+```
+
+```shell copy
+Usage: forui theme ls
+-h, --help    Print this usage information.
+```

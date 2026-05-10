@@ -1,0 +1,26 @@
+---
+title: 创建自定义控制器
+description: 扩展 Forui 控制器以加入自定义逻辑，并将其传递给 widget。
+---
+
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import customManagedSnippet from '@/snippets/snippets/guides/creating_custom_controllers/custom_managed.json';
+import extendManagedSnippet from '@/snippets/snippets/guides/creating_custom_controllers/extend_managed.json';
+
+假设你扩展了某个控制器，例如 `FPopoverController`，以加入自定义逻辑。在将该自定义控制器传递给 widget 时，你有 **2** 种选择。
+
+## 通过外部控制器使用受管控制
+
+通过受管控制传入自定义控制器。
+
+<CodeSnippet snippet={customManagedSnippet} />
+
+这种方式的不足是，你需要自行管理控制器的生命周期。
+
+## 扩展受管控制
+
+或者，你可以扩展受管控制（`FPopoverManagedControl`）来构建你的自定义控制器。
+
+<CodeSnippet snippet={extendManagedSnippet} />
+
+这种方式下，widget 会替你管理控制器的生命周期。

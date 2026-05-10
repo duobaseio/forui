@@ -1,0 +1,236 @@
+---
+title: 滑块
+description: 一个滑动输入组件，允许用户通过拖动手柄或点击轨道在指定范围内选择一个值。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.slider/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/slider/default.json';
+import labelledSnippet from '@/snippets/examples/slider/labelled.json';
+import disabledSnippet from '@/snippets/examples/slider/disabled.json';
+import errorSnippet from '@/snippets/examples/slider/error.json';
+import tooltipSnippet from '@/snippets/examples/slider/tooltip.json';
+import marksSnippet from '@/snippets/examples/slider/marks.json';
+import discreteSnippet from '@/snippets/examples/slider/discrete.json';
+import rangeSnippet from '@/snippets/examples/slider/range.json';
+import boundariesSnippet from '@/snippets/examples/slider/boundaries.json';
+import verticalSnippet from '@/snippets/examples/slider/vertical.json';
+import slideSnippet from '@/snippets/examples/slider/slide.json';
+import slideThumbSnippet from '@/snippets/examples/slider/slide-thumb.json';
+import tapSnippet from '@/snippets/examples/slider/tap.json';
+import tapAndSlideThumbSnippet from '@/snippets/examples/slider/tap-and-slide-thumb.json';
+import formSnippet from '@/snippets/examples/slider/form.json';
+import sliderUsage from '@/snippets/usages/widgets/slider/slider.json';
+import sliderMarkUsage from '@/snippets/usages/widgets/slider/sliderMark.json';
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='slider'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+要生成可自定义的特定样式：
+
+<Tabs items={['Sliders', 'Slider']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create sliders
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create slider
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+### `FSlider(...)`
+<UsageSnippet usage={sliderUsage} />
+
+### `FSliderMark(...)`
+<UsageSnippet usage={sliderMarkUsage} />
+
+## 示例
+
+### 外观
+
+#### 带标签
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='slider' variant='labelled'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={labelledSnippet} />
+  </Tab>
+</Tabs>
+
+#### 禁用
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='slider' variant='disabled'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={disabledSnippet} />
+  </Tab>
+</Tabs>
+
+#### 错误
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='slider' variant='error'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={errorSnippet} />
+  </Tab>
+</Tabs>
+
+#### 工具提示
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='slider' variant='tooltip'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={tooltipSnippet} />
+  </Tab>
+</Tabs>
+
+#### 标记
+
+标记在 slider 轨道上提供视觉参考点。每个标记包含：
+
+- 刻度：用于显示标记位置的视觉指示符
+- 标签：描述标记值的文本（可选）
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='slider' variant='marks'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={marksSnippet} />
+  </Tab>
+</Tabs>
+
+### 布局与选择
+
+#### 离散值
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='slider' variant='discrete'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={discreteSnippet} />
+  </Tab>
+</Tabs>
+
+#### 范围选择
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='slider' variant='range'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={rangeSnippet} />
+  </Tab>
+</Tabs>
+
+#### 选择边界
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='slider' variant='boundaries'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={boundariesSnippet} />
+  </Tab>
+</Tabs>
+
+#### 垂直方向
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='slider' variant='vertical' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={verticalSnippet} />
+  </Tab>
+</Tabs>
+
+### 交互
+
+#### 滑动轨道
+
+在轨道或滑块上的任意位置滑动以选择一个值。
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='slider' variant='slide'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={slideSnippet} />
+  </Tab>
+</Tabs>
+
+#### 滑动滑块
+
+滑动滑块以选择一个值。
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='slider' variant='slide-thumb'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={slideThumbSnippet} />
+  </Tab>
+</Tabs>
+
+#### 点击
+
+点击轨道上的任意位置以选择一个值。
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='slider' variant='tap'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={tapSnippet} />
+  </Tab>
+</Tabs>
+
+#### 点击并滑动滑块
+
+点击任意位置或滑动滑块以选择一个值。
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='slider' variant='tap-and-slide-thumb'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={tapAndSlideThumbSnippet} />
+  </Tab>
+</Tabs>
+
+### 表单
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='slider' variant='form' height='500'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={formSnippet} />
+  </Tab>
+</Tabs>

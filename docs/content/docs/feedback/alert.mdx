@@ -13,10 +13,10 @@ import destructiveSnippet from '@/snippets/examples/alert/destructive.json';
 import alertUsage from '@/snippets/usages/widgets/alert/alert.json';
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='alert' variant='primary'/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={primarySnippet} />
   </Tab>
 </Tabs>
@@ -26,7 +26,7 @@ import alertUsage from '@/snippets/usages/widgets/alert/alert.json';
 To generate a specific style for customization:
 
 <Tabs items={['Alerts']}>
-    <Tab value="Alerts">
+    <Tab>
         ```shell copy
         dart run forui style create alerts
         ````
@@ -43,10 +43,10 @@ To generate a specific style for customization:
 ### Primary
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='alert' variant='primary'/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={primarySnippet} />
   </Tab>
 </Tabs>
@@ -54,10 +54,10 @@ To generate a specific style for customization:
 ### Destructive
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='alert' variant='destructive'/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={destructiveSnippet} />
   </Tab>
 </Tabs>

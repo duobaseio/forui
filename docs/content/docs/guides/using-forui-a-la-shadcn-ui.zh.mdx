@@ -1,0 +1,36 @@
+---
+title: 像 Shadcn/ui 那样使用 Forui
+description: 通过直接编辑 widget 源码，完全掌控 Forui 的行为与布局。
+---
+
+import {Callout} from "fumadocs-ui/components/callout";
+
+<Callout type="warning">
+    此方式仅推荐高级用户使用。请优先考虑使用[内置样式系统与 CLI](/docs/guides/customizing-widget-styles)。
+</Callout>
+
+[Shadcn/ui](https://ui.shadcn.com) 让"将组件源码复制到你的项目并直接编辑"这种方式广为流行。
+借助 [`dart pub unpack`](https://dart.dev/tools/pub/cmd/pub-unpack)，你也可以对 Forui 这样做。
+
+不同于 shadcn/ui（它只是无头组件之上的薄薄一层样式），Forui 是完全自包含的。Unpack 之后，你将获得**所有内容**
+的所有权，不只是样式，还包括无障碍、手势处理与布局。
+
+实践中，这意味着更细粒度的控制力，但也带来更高的维护成本。
+
+这种方式最适合以 Forui 为基础，构建你自己量身打造的设计系统。
+
+## Unpack
+
+要在本地解出 Forui 的源码，运行：
+```shell copy
+dart pub unpack forui -o <output>
+```
+
+然后在 `pubspec.yaml` 中依赖该本地副本：
+```yaml
+dependencies:
+  forui:
+    path: <output>
+```
+
+可以考虑设置一个 [Dart workspace](https://dart.dev/tools/pub/workspaces)，与你的主项目一起管理这个解出的包。

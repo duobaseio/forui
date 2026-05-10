@@ -1,0 +1,103 @@
+---
+title: Picker
+description: Ein generischer Picker zur Auswahl eines Eintrags. Er besteht aus einem oder mehreren Rädern, optional mit Trennern zwischen den Rädern. Der Picker unterstützt die Navigation per Pfeiltasten. Empfohlen für Touch-Geräte.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.picker/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import pickerUsage from '@/snippets/usages/widgets/picker/picker.json';
+import pickerWheelUsage from '@/snippets/usages/widgets/picker/pickerWheel.json';
+import pickerWheelBuilderUsage from '@/snippets/usages/widgets/picker/pickerWheelBuilder.json';
+import defaultSnippet from '@/snippets/examples/picker/default.json';
+import loopSnippet from '@/snippets/examples/picker/loop.json';
+import builderSnippet from '@/snippets/examples/picker/builder.json';
+import multipleSnippet from '@/snippets/examples/picker/multiple.json';
+import separatorSnippet from '@/snippets/examples/picker/separator.json';
+
+Der Picker unterstützt die Navigation per Pfeiltasten:
+
+- Pfeiltasten Auf/Ab: Ausgewählten Wert erhöhen/verringern
+- Pfeiltasten Links/Rechts: Zwischen den Rädern wechseln
+
+Empfohlen für Touch-Geräte.
+
+<Tabs items={['Vorschau', 'Code']}>
+    <Tab>
+        <Widget name='picker'/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={defaultSnippet} />
+    </Tab>
+</Tabs>
+
+## CLI
+
+Um einen bestimmten Style zur Anpassung zu erzeugen:
+
+<Tabs items={['Picker']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create picker
+        ````
+    </Tab>
+</Tabs>
+
+## Verwendung
+
+### `FPicker(...)`
+<UsageSnippet usage={pickerUsage} />
+
+### `FPickerWheel(...)`
+<UsageSnippet usage={pickerWheelUsage} />
+
+### `FPickerWheel.builder(...)`
+<UsageSnippet usage={pickerWheelBuilderUsage} />
+
+## Beispiele
+
+### Schleife
+
+<Tabs items={['Vorschau', 'Code']}>
+    <Tab>
+        <Widget name='picker' variant='loop'/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={loopSnippet} />
+    </Tab>
+</Tabs>
+
+### Lazy
+
+<Tabs items={['Vorschau', 'Code']}>
+    <Tab>
+        <Widget name='picker' variant='builder'/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={builderSnippet} />
+    </Tab>
+</Tabs>
+
+### Mehrere Räder
+
+<Tabs items={['Vorschau', 'Code']}>
+    <Tab>
+        <Widget name='picker' variant='multiple'/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={multipleSnippet} />
+    </Tab>
+</Tabs>
+
+### Mit Trennern
+
+<Tabs items={['Vorschau', 'Code']}>
+    <Tab>
+        <Widget name='picker' variant='separator'/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={separatorSnippet} />
+    </Tab>
+</Tabs>

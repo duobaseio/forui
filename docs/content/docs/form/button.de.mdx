@@ -1,0 +1,181 @@
+---
+title: Button
+description: Ein Button.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.button/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import primarySnippet from '@/snippets/examples/button/primary.json';
+import secondarySnippet from '@/snippets/examples/button/secondary.json';
+import destructiveSnippet from '@/snippets/examples/button/destructive.json';
+import outlineSnippet from '@/snippets/examples/button/outline.json';
+import ghostSnippet from '@/snippets/examples/button/ghost.json';
+import iconSnippet from '@/snippets/examples/button/icon.json';
+import onlyIconSnippet from '@/snippets/examples/button/only-icon.json';
+import sizesSnippet from '@/snippets/examples/button/sizes.json';
+import circularProgressSnippet from '@/snippets/examples/button/circular-progress.json';
+import toggleSnippet from '@/snippets/examples/button/toggle.json';
+import buttonUsage from '@/snippets/usages/widgets/button/button.json';
+import buttonIconUsage from '@/snippets/usages/widgets/button/icon.json';
+import buttonRawUsage from '@/snippets/usages/widgets/button/raw.json';
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='button' variant='primary'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={primarySnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+Um einen bestimmten Style zur Anpassung zu erzeugen:
+
+<Tabs items={['Buttons', 'Button Sizes', 'Button']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create buttons
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create button-sizes
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create button
+        ````
+    </Tab>
+</Tabs>
+
+## Verwendung
+
+### `FButton(...)`
+<UsageSnippet usage={buttonUsage} />
+
+### `FButton.icon(...)`
+<UsageSnippet usage={buttonIconUsage} />
+
+### `FButton.raw(...)`
+<UsageSnippet usage={buttonRawUsage} />
+
+## Beispiele
+
+### Erscheinungsbild
+
+#### Primär
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='button' variant='primary'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={primarySnippet} />
+  </Tab>
+</Tabs>
+
+#### Sekundär
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='button' variant='secondary'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={secondarySnippet} />
+  </Tab>
+</Tabs>
+
+#### Destruktiv
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='button' variant='destructive'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={destructiveSnippet} />
+  </Tab>
+</Tabs>
+
+#### Umrandet
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='button' variant='outline'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={outlineSnippet} />
+  </Tab>
+</Tabs>
+
+#### Ghost
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='button' variant='ghost'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={ghostSnippet} />
+  </Tab>
+</Tabs>
+
+#### Größen
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='button' variant='sizes'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={sizesSnippet} />
+  </Tab>
+</Tabs>
+
+### Umschaltbar
+
+<Tabs items={['Vorschau', 'Code']}>
+    <Tab>
+        <Widget name='button' variant='toggle'/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={toggleSnippet} />
+    </Tab>
+</Tabs>
+
+### Inhalt
+
+#### Mit Text und Icon
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='button' variant='icon'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={iconSnippet} />
+  </Tab>
+</Tabs>
+
+#### Nur Icon
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='button' variant='only-icon'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={onlyIconSnippet} />
+  </Tab>
+</Tabs>
+
+#### Mit Kreis-Fortschrittsanzeige
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='button' variant='circular-progress'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={circularProgressSnippet} />
+  </Tab>
+</Tabs>

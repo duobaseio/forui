@@ -1,0 +1,62 @@
+---
+title: Tabs
+description: Eine Reihe übereinanderliegender Inhaltsbereiche, sogenannte Tab-Einträge, die einzeln angezeigt werden.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.tabs/
+---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/tabs/default.json';
+import swipeableSnippet from '@/snippets/examples/tabs/swipeable.json';
+import tabsUsage from '@/snippets/usages/widgets/tabs/tabs.json';
+import tabEntryUsage from '@/snippets/usages/widgets/tabs/tabEntry.json';
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='tabs' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+Um einen bestimmten Style zur Anpassung zu erzeugen:
+
+<Tabs items={['Tabs']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create tabs
+        ````
+    </Tab>
+</Tabs>
+
+## Verwendung
+
+### `FTabs(...)`
+<UsageSnippet usage={tabsUsage} />
+
+### `FTabEntry(...)`
+<UsageSnippet usage={tabEntryUsage} />
+
+## Beispiele
+
+### Wischbar
+
+<Callout type="info">
+  Halten Sie auf Desktop und Web `Shift` während des Scrollens gedrückt, um zwischen den Tabs zu wischen.
+</Callout>
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='tabs' variant='swipeable' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={swipeableSnippet} />
+  </Tab>
+</Tabs>
+

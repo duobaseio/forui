@@ -1,0 +1,111 @@
+---
+title: Checkbox
+description: Ein Steuerelement, mit dem Nutzer zwischen aktiviert und nicht aktiviert wechseln können.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.checkbox/
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/checkbox/default.json';
+import leadingLabelSnippet from '@/snippets/examples/checkbox/leading-label.json';
+import disabledSnippet from '@/snippets/examples/checkbox/disabled.json';
+import errorSnippet from '@/snippets/examples/checkbox/error.json';
+import rawSnippet from '@/snippets/examples/checkbox/raw.json';
+import formSnippet from '@/snippets/examples/checkbox/form.json';
+import checkboxUsage from '@/snippets/usages/widgets/checkbox/checkbox.json';
+
+<Callout type="info">
+    Auf Touch-Geräten wird in der Regel ein [Switch](/docs/form/switch) gegenüber dieser Variante empfohlen.
+</Callout>
+
+<Callout type="info">
+    Wir empfehlen, eine [Select Group](/docs/form/select-group#checkbox-form) zu verwenden, um eine Gruppe von Checkboxen zu erstellen.
+</Callout>
+
+<Tabs items={['Vorschau', 'Code']}>
+    <Tab>
+        <Widget name='checkbox'/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={defaultSnippet} />
+    </Tab>
+
+</Tabs>
+
+## CLI
+
+Um einen bestimmten Style zur Anpassung zu erzeugen:
+
+<Tabs items={['Checkbox']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create checkbox
+        ````
+    </Tab>
+</Tabs>
+
+## Verwendung
+
+### `FCheckbox(...)`
+<UsageSnippet usage={checkboxUsage} />
+
+## Beispiele
+
+### Vorangestelltes Label
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='checkbox' variant='leading-label'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={leadingLabelSnippet} />
+  </Tab>
+</Tabs>
+
+### Deaktiviert
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='checkbox' variant='disabled'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={disabledSnippet} />
+  </Tab>
+</Tabs>
+
+### Fehler
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='checkbox' variant='error'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={errorSnippet} />
+  </Tab>
+</Tabs>
+
+### Ohne Label
+
+<Tabs items={['Vorschau', 'Code']}>
+    <Tab>
+        <Widget name='checkbox' variant='raw'/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={rawSnippet} />
+    </Tab>
+
+</Tabs>
+
+### Form
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='checkbox' variant='form' height={550}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={formSnippet} />
+  </Tab>
+</Tabs>

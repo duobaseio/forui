@@ -12,10 +12,10 @@ import defaultSnippet from '@/snippets/examples/progress/default.json';
 import progressUsage from '@/snippets/usages/widgets/progress/progress.json';
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='progress'/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={defaultSnippet} />
   </Tab>
 </Tabs>
@@ -25,7 +25,7 @@ import progressUsage from '@/snippets/usages/widgets/progress/progress.json';
 To generate a specific style for customization:
 
 <Tabs items={['Progress']}>
-    <Tab value="Progress">
+    <Tab>
         ```shell copy
         dart run forui style create progress
         ````

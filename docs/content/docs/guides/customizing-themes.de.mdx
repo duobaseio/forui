@@ -1,0 +1,66 @@
+---
+title: Themes anpassen
+description: Erzeugen und passen Sie Themes und Widget-Styles über das CLI an.
+---
+
+import {Callout} from "fumadocs-ui/components/callout";
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import mainSnippet from '@/snippets/snippets/guides/customizing_themes/main.json';
+import themeSnippet from '@/snippets/snippets/guides/customizing_themes/theme.json';
+import accordionStyleSnippet from '@/snippets/snippets/guides/customizing_themes/accordion_style.json';
+
+Diese Anleitung verwendet [`FAccordionStyle`](https://pub.dev/documentation/forui/latest/forui.widgets.accordion/FAccordionStyle-class.html)
+als Beispiel; dieselben Grundsätze gelten jedoch für alle Forui-Widgets. Sie setzt das [CLI](/docs/reference/cli) voraus.
+
+## `main.dart` erzeugen
+
+Wechseln Sie in das Verzeichnis Ihres Projekts.
+
+Erzeugen Sie eine `main.dart`:
+
+```shell copy
+dart run forui init
+```
+
+Damit wird eine `main.dart`-Datei erzeugt, in die Sie Ihr generiertes Theme einfügen:
+
+<CodeSnippet snippet={mainSnippet} />
+
+## Einen Style erzeugen
+
+<Callout type="info">
+    Tipp: Mit `dart run forui style ls` sehen Sie alle verfügbaren Styles.
+</Callout>
+
+Erzeugen Sie einen [`FAccordionStyle`](https://pub.dev/documentation/forui/latest/forui.widgets.accordion/FAccordionStyle-class.html):
+
+```shell copy
+dart run forui style create accordion
+```
+
+Damit wird eine Accordion-Style-Datei erzeugt, die Sie Ihrem Theme hinzufügen können:
+
+<CodeSnippet snippet={accordionStyleSnippet} />
+
+<Callout type="info">
+    Wie Sie Widget-Styles anpassen, lesen Sie im Leitfaden
+    [Widget-Styles anpassen](/docs/guides/customizing-widget-styles#deltas).
+</Callout>
+
+## Ein Theme erzeugen
+
+<Callout type="info">
+    Tipp: Mit `dart run forui theme ls` sehen Sie alle verfügbaren Themes.
+</Callout>
+
+Erzeugen Sie ein Theme auf Basis der hellen Variante von [neutral](/docs/concepts/themes#getting-started):
+
+```shell copy
+dart run forui theme create neutral-light
+```
+
+Damit wird eine Theme-Datei erzeugt, die Sie:
+- in die generierte `main.dart` einbinden,
+- mit den generierten Styles ergänzen können.
+
+<CodeSnippet snippet={themeSnippet} />

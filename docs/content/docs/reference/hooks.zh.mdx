@@ -1,0 +1,24 @@
+---
+title: Hooks
+description: Forui 控制器与 Flutter Hooks 的一流集成。
+---
+
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import usageSnippet from '@/snippets/snippets/hooks/usage.json';
+
+Forui 与 [Flutter Hooks](https://pub.dev/packages/flutter_hooks) 提供一流的集成。所有控制器都在配套的 `forui_hooks` 包中以 hook 的形式暴露。
+
+## 安装
+
+在你的 Flutter 项目目录下运行以下命令安装 `flutter_hooks` 与 `forui_hooks`。
+
+```bash filename="bash" copy
+flutter pub add flutter_hooks
+flutter pub add forui_hooks
+```
+
+## 用法
+
+要在 Flutter 应用中使用 Forui hooks，请导入 `forui_hooks` 包，并在 `HookWidget` 内初始化一个 hook。
+
+<CodeSnippet snippet={usageSnippet} />

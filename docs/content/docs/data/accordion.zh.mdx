@@ -1,0 +1,57 @@
+---
+title: 折叠面板
+description: 一组垂直堆叠的可交互标题，点击后会展开对应的内容区域。每个区域均可独立展开或折叠。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.accordion/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/accordion/default.json';
+import maxSnippet from '@/snippets/examples/accordion/max.json';
+import accordionUsage from '@/snippets/usages/widgets/accordion/accordion.json';
+import accordionItemUsage from '@/snippets/usages/widgets/accordion/accordionItem.json';
+
+<Tabs items={['预览', '代码']}>
+    <Tab>
+        <Widget name='accordion' height={700}/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={defaultSnippet} />
+    </Tab>
+</Tabs>
+
+## CLI
+
+要生成可自定义的特定样式：
+
+<Tabs items={['Accordion']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create accordion
+        ````
+    </Tab>
+</Tabs>
+
+
+## 用法
+
+### `FAccordion(...)`
+<UsageSnippet usage={accordionUsage} />
+
+### `FAccordionItem(...)`
+<UsageSnippet usage={accordionItemUsage} />
+
+## 示例
+
+### 限制最多展开数量
+
+<Tabs items={['预览', '代码']}>
+    <Tab>
+        <Widget name='accordion' variant='max' height={600}/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={maxSnippet} />
+    </Tab>
+</Tabs>

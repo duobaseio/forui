@@ -13,10 +13,10 @@ import cardUsage from '@/snippets/usages/widgets/card/card.json';
 import cardRawUsage from '@/snippets/usages/widgets/card/raw.json';
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
       <Widget name='card' height={400}/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
       <CodeSnippet snippet={defaultSnippet} />
   </Tab>
 </Tabs>
@@ -26,7 +26,7 @@ import cardRawUsage from '@/snippets/usages/widgets/card/raw.json';
 To generate a specific style for customization:
 
 <Tabs items={['Card']}>
-    <Tab value="Card">
+    <Tab>
         ```shell copy
         dart run forui style create card
         ````

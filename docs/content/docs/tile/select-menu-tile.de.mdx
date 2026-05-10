@@ -1,0 +1,97 @@
+---
+title: Select-Menü-Tile
+description: Ein Tile, das beim Auslösen eine Liste mit Optionen anzeigt, aus denen Nutzer auswählen können.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.select_menu_tile/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import selectMenuTileDefault from '@/snippets/examples/select-menu-tile/default.json';
+import selectMenuTileUsage from '@/snippets/usages/widgets/select_menu_tile/selectMenuTile.json';
+import selectMenuTileBuilderUsage from '@/snippets/usages/widgets/select_menu_tile/selectMenuTileBuilder.json';
+import selectMenuTileLazy from '@/snippets/examples/select-menu-tile/lazy.json';
+import selectMenuTileScrollable from '@/snippets/examples/select-menu-tile/scrollable.json';
+import selectMenuTileNoAutoHide from '@/snippets/examples/select-menu-tile/no-auto-hide.json';
+import selectMenuTileForm from '@/snippets/examples/select-menu-tile/form.json';
+
+<Callout type="info">
+    Für Desktop wird in der Regel eine [Select Group](/docs/form/select) empfohlen.
+</Callout>
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='select-menu-tile' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={selectMenuTileDefault} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+Um einen bestimmten Style zur Anpassung zu erzeugen:
+
+<Tabs items={['Select Menu Tile']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create select-menu-tile
+        ````
+    </Tab>
+</Tabs>
+
+## Verwendung
+
+### `FSelectMenuTile(...)`
+<UsageSnippet usage={selectMenuTileUsage} />
+
+### `FSelectMenuTile.builder(...)`
+<UsageSnippet usage={selectMenuTileBuilderUsage} />
+
+## Beispiele
+
+### Ohne automatisches Ausblenden
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='select-menu-tile' variant='no-auto-hide' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={selectMenuTileNoAutoHide} />
+  </Tab>
+</Tabs>
+
+### Scrollbar
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='select-menu-tile' variant='scrollable' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={selectMenuTileScrollable} />
+  </Tab>
+</Tabs>
+
+### Lazy Scrollbar
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='select-menu-tile' variant='lazy' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={selectMenuTileLazy} />
+  </Tab>
+</Tabs>
+
+### Formular
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='select-menu-tile' variant='form' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={selectMenuTileForm} />
+  </Tab>
+</Tabs>

@@ -1,0 +1,38 @@
+---
+title: Trenner
+description: Trennt Inhalte visuell oder semantisch voneinander.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.divider/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/divider/default.json';
+import dividerUsage from '@/snippets/usages/widgets/divider/divider.json';
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='divider' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+Um einen bestimmten Style zur Anpassung zu erzeugen:
+
+<Tabs items={['Dividers']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create dividers
+        ````
+    </Tab>
+</Tabs>
+
+## Verwendung
+
+### `FDivider(...)`
+<UsageSnippet usage={dividerUsage} />

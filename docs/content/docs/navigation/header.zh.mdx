@@ -1,0 +1,102 @@
+---
+title: 标题栏
+description: Header 包含页面的标题和导航操作。它通常用于导航栈根部的页面。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.header/
+---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/header/default.json';
+import nestedSnippet from '@/snippets/examples/header/nested.json';
+import nestedXSnippet from '@/snippets/examples/header/nested-x.json';
+import headerUsage from '@/snippets/usages/widgets/header/header.json';
+import headerNestedUsage from '@/snippets/usages/widgets/header/nested.json';
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='header'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## 嵌套 Header
+
+它通常用于嵌套页面或 sheet。
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='header' variant='nested'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={nestedSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+要生成可定制的特定样式：
+
+<Tabs items={['Headers', 'Header Action']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create headers
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create header-action
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+<Callout type="info">
+  Header 通常与 `FScaffold` 一起使用。可在[此处](/docs/layout/scaffold)找到一个可运行的示例。
+</Callout>
+
+### `FHeader(...)`
+<UsageSnippet usage={headerUsage} />
+
+### `FHeader.nested(...)`
+<UsageSnippet usage={headerNestedUsage} />
+
+## 示例
+
+### 标题栏
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='header'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+### 带返回图标的嵌套 Header
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='header' variant='nested' />
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={nestedSnippet} />
+  </Tab>
+</Tabs>
+
+### 带 X 图标的嵌套 Header
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='header' variant='nested-x' />
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={nestedXSnippet} />
+  </Tab>
+</Tabs>

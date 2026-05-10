@@ -1,0 +1,76 @@
+---
+title: 抽屉
+description: 模态 sheet 是菜单或对话框的替代品，会阻止用户与应用的其余部分交互。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.sheet/
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/modal-sheet/default.json';
+import blurredSnippet from '@/snippets/examples/modal-sheet/blurred.json';
+import draggableSnippet from '@/snippets/examples/modal-sheet/draggable.json';
+import sheetShowUsage from '@/snippets/usages/widgets/modal_sheet/show.json';
+import sheetRouteUsage from '@/snippets/usages/widgets/modal_sheet/route.json';
+
+它每次都会导航到一个新页面。
+
+<Callout type="info">
+    与之密切相关的 widget 是 [持久化 sheet](/docs/overlay/persistent-sheet)，它显示作为应用主要内容补充的信息，
+    且不会阻止用户与应用交互。
+</Callout>
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='modal-sheet' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+要生成可定制的特定样式：
+
+<Tabs items={['Modal Sheet']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create modal-sheet
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+### `showFSheet(...)`
+<UsageSnippet usage={sheetShowUsage} />
+
+### `FModalSheetRoute(...)`
+<UsageSnippet usage={sheetRouteUsage} />
+
+## 示例
+
+### 模糊遮罩
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='modal-sheet' variant='blurred' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={blurredSnippet} />
+  </Tab>
+</Tabs>
+
+### 配合 `DraggableScrollableSheet`
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='modal-sheet' variant='draggable' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={draggableSnippet} />
+  </Tab>
+</Tabs>

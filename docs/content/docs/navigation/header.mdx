@@ -16,10 +16,10 @@ import headerUsage from '@/snippets/usages/widgets/header/header.json';
 import headerNestedUsage from '@/snippets/usages/widgets/header/nested.json';
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='header'/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={defaultSnippet} />
   </Tab>
 </Tabs>
@@ -29,10 +29,10 @@ import headerNestedUsage from '@/snippets/usages/widgets/header/nested.json';
 It is typically used on nested pages or sheets.
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='header' variant='nested'/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={nestedSnippet} />
   </Tab>
 </Tabs>
@@ -42,12 +42,12 @@ It is typically used on nested pages or sheets.
 To generate a specific style for customization:
 
 <Tabs items={['Headers', 'Header Action']}>
-    <Tab value="Headers">
+    <Tab>
         ```shell copy
         dart run forui style create headers
         ````
     </Tab>
-    <Tab value="Header Action">
+    <Tab>
         ```shell copy
         dart run forui style create header-action
         ````
@@ -71,10 +71,10 @@ To generate a specific style for customization:
 ### Header
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='header'/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={defaultSnippet} />
   </Tab>
 </Tabs>
@@ -82,10 +82,10 @@ To generate a specific style for customization:
 ### Nested Header with Back Icon
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='header' variant='nested' />
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={nestedSnippet} />
   </Tab>
 </Tabs>
@@ -93,10 +93,10 @@ To generate a specific style for customization:
 ### Nested Header with X Icon
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='header' variant='nested-x' />
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={nestedXSnippet} />
   </Tab>
 </Tabs>

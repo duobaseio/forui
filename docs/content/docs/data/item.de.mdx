@@ -1,0 +1,119 @@
+---
+title: Item
+description: Ein Item wird typischerweise verwendet, um zusammengehörige Informationen zu gruppieren.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.item/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/item/default.json';
+import untappableSnippet from '@/snippets/examples/item/untappable.json';
+import disabledSnippet from '@/snippets/examples/item/disabled.json';
+import subtitleSnippet from '@/snippets/examples/item/subtitle.json';
+import detailsSnippet from '@/snippets/examples/item/details.json';
+import destructiveSnippet from '@/snippets/examples/item/destructive.json';
+import itemUsage from '@/snippets/usages/widgets/item/item.json';
+import itemRawUsage from '@/snippets/usages/widgets/item/raw.json';
+
+<Callout type="info">
+    Dieses Widget dient typischerweise als Grundlage für komplexere Widgets und wird selten direkt verwendet.
+</Callout>
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='item'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+Um einen bestimmten Style zur Anpassung zu erzeugen:
+
+<Tabs items={['Items', 'Item', 'Item Content']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create items
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create item
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create item-content
+        ````
+    </Tab>
+</Tabs>
+
+## Verwendung
+
+### `FItem(...)`
+<UsageSnippet usage={itemUsage} />
+
+### `FItem.raw(...)`
+<UsageSnippet usage={itemRawUsage} />
+
+## Beispiele
+
+### Destruktiv
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='item' variant='destructive'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={destructiveSnippet} />
+  </Tab>
+</Tabs>
+
+### Nicht antippbar
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='item' variant='untappable'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={untappableSnippet} />
+  </Tab>
+</Tabs>
+
+### Deaktiviert
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='item' variant='disabled'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={disabledSnippet} />
+  </Tab>
+</Tabs>
+
+### Mit Untertitel
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='item' variant='subtitle'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={subtitleSnippet} />
+  </Tab>
+</Tabs>
+
+### Mit Details
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='item' variant='details'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={detailsSnippet} />
+  </Tab>
+</Tabs>

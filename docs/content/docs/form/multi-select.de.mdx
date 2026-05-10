@@ -1,0 +1,236 @@
+---
+title: Multi-Select
+description: Ein Multi-Select zeigt eine Liste von Dropdown-Optionen zur Auswahl an. Es ist ein Formularfeld und kann daher in einem Formular verwendet werden.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.select/
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import multiSelectUsage from '@/snippets/usages/widgets/multi_select/multiSelect.json';
+import multiSelectRichUsage from '@/snippets/usages/widgets/multi_select/multiSelectRich.json';
+import multiSelectSearchUsage from '@/snippets/usages/widgets/multi_select/multiSelectSearch.json';
+import multiSelectSearchBuilderUsage from '@/snippets/usages/widgets/multi_select/multiSelectSearchBuilder.json';
+import defaultSnippet from '@/snippets/examples/multi-select/default.json';
+import detailedSnippet from '@/snippets/examples/multi-select/detailed.json';
+import sectionSnippet from '@/snippets/examples/multi-select/section.json';
+import dividerSnippet from '@/snippets/examples/multi-select/divider.json';
+import syncSnippet from '@/snippets/examples/multi-select/sync.json';
+import asyncSnippet from '@/snippets/examples/multi-select/async.json';
+import asyncLoadingSnippet from '@/snippets/examples/multi-select/async-loading.json';
+import asyncErrorSnippet from '@/snippets/examples/multi-select/async-error.json';
+import clearableSnippet from '@/snippets/examples/multi-select/clearable.json';
+import formatSnippet from '@/snippets/examples/multi-select/format.json';
+import minMaxSnippet from '@/snippets/examples/multi-select/min-max.json';
+import sortedSnippet from '@/snippets/examples/multi-select/sorted.json';
+import popoverBuilderSnippet from '@/snippets/examples/multi-select/popover-builder.json';
+import formSnippet from '@/snippets/examples/multi-select/form.json';
+
+<Callout type="info">
+    Für Einzelauswahlen ziehen Sie ein [Select](/docs/form/select) in Betracht.
+
+    Für Touch-Geräte wird im Allgemeinen eine [Select-Tile-Gruppe](/docs/tile/select-tile-group) oder
+    ein [Select-Menü-Tile](/docs/tile/select-menu-tile) gegenüber dieser Komponente empfohlen.
+
+</Callout>
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='multi-select' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+Um einen bestimmten Style zur Anpassung zu erzeugen:
+
+<Tabs items={['Multi Select', 'Multi Select Field Sizes', 'Multi Select Field', 'Multi Select Tag']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create multi-select
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create multi-select-field-sizes
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create multi-select-field
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create multi-select-tag
+        ````
+    </Tab>
+</Tabs>
+
+## Verwendung
+
+### `FMultiSelect(...)`
+<UsageSnippet usage={multiSelectUsage} />
+
+### `FMultiSelect.rich(...)`
+<UsageSnippet usage={multiSelectRichUsage} />
+
+### `FMultiSelect.search(...)`
+<UsageSnippet usage={multiSelectSearchUsage} />
+
+### `FMultiSelect.searchBuilder(...)`
+<UsageSnippet usage={multiSelectSearchBuilderUsage} />
+
+## Beispiele
+
+### Detailliert
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='multi-select' variant='detailed' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={detailedSnippet} />
+  </Tab>
+</Tabs>
+
+### Abschnitte
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='multi-select' variant='section' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={sectionSnippet} />
+  </Tab>
+</Tabs>
+
+### Trennlinien
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='multi-select' variant='divider' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={dividerSnippet} />
+  </Tab>
+</Tabs>
+
+### Durchsuchbar
+
+#### Synchron
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='multi-select' variant='sync' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={syncSnippet} />
+  </Tab>
+</Tabs>
+
+#### Asynchron
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='multi-select' variant='async' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={asyncSnippet} />
+  </Tab>
+</Tabs>
+
+#### Asynchron mit eigenem Ladeverhalten
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='multi-select' variant='async-loading' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={asyncLoadingSnippet} />
+  </Tab>
+</Tabs>
+
+#### Asynchron mit eigener Fehlerbehandlung
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='multi-select' variant='async-error' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={asyncErrorSnippet} />
+  </Tab>
+</Tabs>
+
+### Verhalten
+
+#### Löschbar
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='multi-select' variant='clearable' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={clearableSnippet} />
+  </Tab>
+</Tabs>
+
+#### Eigene Formatierung
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='multi-select' variant='format' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={formatSnippet} />
+  </Tab>
+</Tabs>
+
+#### Min und Max
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='multi-select' variant='min-max' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={minMaxSnippet} />
+  </Tab>
+</Tabs>
+
+#### Sortiert
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='multi-select' variant='sorted' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={sortedSnippet} />
+  </Tab>
+</Tabs>
+
+#### Popover-Builder
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='multi-select' variant='popover-builder' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={popoverBuilderSnippet} />
+  </Tab>
+</Tabs>
+
+### Form
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='multi-select' variant='form' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={formSnippet} />
+  </Tab>
+</Tabs>

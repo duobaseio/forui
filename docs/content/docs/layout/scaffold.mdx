@@ -13,10 +13,10 @@ import defaultSnippet from '@/snippets/examples/scaffold/default.json';
 import scaffoldUsage from '@/snippets/usages/widgets/scaffold/scaffold.json';
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='scaffold' height={600}/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={defaultSnippet} />
   </Tab>
 </Tabs>
@@ -26,7 +26,7 @@ import scaffoldUsage from '@/snippets/usages/widgets/scaffold/scaffold.json';
 To generate a specific style for customization:
 
 <Tabs items={['Scaffold']}>
-    <Tab value="Scaffold">
+    <Tab>
         ```shell copy
         dart run forui style create scaffold
         ````

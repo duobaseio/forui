@@ -1,0 +1,22 @@
+---
+title: 本地化
+description: 为 Forui widget 启用 115 种语言的本地化支持。
+---
+
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import defaultSnippet from '@/snippets/snippets/concepts/localization/default.json';
+import localizationSnippet from '@/snippets/snippets/concepts/localization/localization.json';
+
+Forui 支持 Flutter 原生支持的全部 115 种语言。
+
+要为 Forui widget 启用本地化，请在调用 `CupertinoApp`、`MaterialApp` 或 `WidgetsApp` 的构造函数时加入 `FLocalizations.delegate`。
+随后，添加你的应用所支持的语言区域。
+
+<CodeSnippet snippet={defaultSnippet} />
+
+`FLocalizations` 类还提供了自动生成的 `localizationsDelegates` 与 `supportedLocales` 列表。
+如果你的应用没有其他本地化消息，可以直接使用它们，而无需手动声明。
+
+<CodeSnippet snippet={localizationSnippet} />
+
+更多信息请参阅 [Internationalizing Flutter apps](https://docs.flutter.dev/ui/accessibility-and-internationalization/internationalization)。

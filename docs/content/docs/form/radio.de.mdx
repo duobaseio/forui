@@ -1,0 +1,57 @@
+---
+title: Radio
+description: Eine Optionsschaltfläche, die es Nutzern in der Regel ermöglicht, nur eine Option aus einer vordefinierten Menge auszuwählen.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.radio/
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/radio/default.json';
+import leadingLabelSnippet from '@/snippets/examples/radio/leading-label.json';
+import radioUsage from '@/snippets/usages/widgets/radio/radio.json';
+
+<Callout type="info">
+    Wir empfehlen, eine [Select Group](/docs/form/select-group#radio-form) zu verwenden, um eine Gruppe von Optionsschaltflächen zu erstellen, anstatt `FRadio` direkt zu verwenden.
+</Callout>
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='radio'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+Um einen bestimmten Style zur Anpassung zu erzeugen:
+
+<Tabs items={['Radio']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create radio
+        ````
+    </Tab>
+</Tabs>
+
+## Verwendung
+
+### `FRadio(...)`
+<UsageSnippet usage={radioUsage} />
+
+## Beispiele
+
+### Vorangestelltes Label
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='radio' variant='leading-label'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={leadingLabelSnippet} />
+  </Tab>
+</Tabs>

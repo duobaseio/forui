@@ -1,0 +1,79 @@
+---
+title: Select-Gruppe
+description: Eine Gruppe von Einträgen, die es Nutzern erlaubt, eine Auswahl aus einer Reihe von Optionen zu treffen.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.select_group/
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import selectGroupUsage from '@/snippets/usages/widgets/select_group/selectGroup.json';
+import selectGroupCheckboxUsage from '@/snippets/usages/widgets/select_group/selectGroupCheckbox.json';
+import selectGroupRadioUsage from '@/snippets/usages/widgets/select_group/selectGroupRadio.json';
+import defaultSnippet from '@/snippets/examples/select-group/default.json';
+import checkboxFormSnippet from '@/snippets/examples/select-group/checkbox-form.json';
+import radioFormSnippet from '@/snippets/examples/select-group/radio-form.json';
+
+<Callout type="info">
+    Auf Touch-Geräten wird in der Regel eine [Select-Tile-Gruppe](/docs/tile/select-tile-group) oder
+    eine [Select-Menü-Tile](/docs/tile/select-menu-tile) gegenüber dieser Variante empfohlen.
+</Callout>
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='select-group' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+Um einen bestimmten Style zur Anpassung zu erzeugen:
+
+<Tabs items={['Select Group']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create select-group
+        ````
+    </Tab>
+</Tabs>
+
+## Verwendung
+
+### `FSelectGroup(...)`
+<UsageSnippet usage={selectGroupUsage} />
+
+### `FSelectGroupItemMixin.checkbox(...)`
+<UsageSnippet usage={selectGroupCheckboxUsage} />
+
+### `FSelectGroupItemMixin.radio(...)`
+<UsageSnippet usage={selectGroupRadioUsage} />
+
+## Beispiele
+
+### Checkbox-Formular
+
+<Tabs items={['Vorschau', 'Code']}>
+    <Tab>
+        <Widget name='select-group' variant='checkbox-form' height={400}/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={checkboxFormSnippet} />
+    </Tab>
+
+</Tabs>
+
+### Radio-Formular
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='select-group' variant='radio-form' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={radioFormSnippet} />
+  </Tab>
+</Tabs>

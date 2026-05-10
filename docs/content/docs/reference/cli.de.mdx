@@ -1,0 +1,131 @@
+---
+title: CLI
+description: Erzeugen Sie Themes und Styles in Ihrem Projekt mit dem CLI von Forui.
+---
+
+import {Callout} from "fumadocs-ui/components/callout";
+
+Forui enthält ein CLI, das Themes und Styles in Ihrem Projekt erzeugt. Diese Themes und Styles lassen sich direkt
+anpassen, um Ihren Designanforderungen zu entsprechen. Eine zusätzliche Installation ist nicht nötig, und das CLI
+vergrößert auch nicht die Bundle-Größe Ihrer Anwendung.
+
+## init
+
+Mit dem Befehl `init` legen Sie die Dateien `forui.yaml` und `main.dart` im Verzeichnis Ihres Projekts an.
+
+```shell copy
+dart run forui init
+```
+
+```shell copy
+Usage: forui init
+-h, --help         Print this usage information.
+-f, --force        Overwrite existing files if they exist.
+-t, --template     The main.dart template to generate.
+                   [basic (default), router]
+```
+
+## snippet
+
+### create
+
+Mit dem Befehl `snippet create` erzeugen Sie ein Code-Snippet in Ihrem Projekt. Snippets werden standardmäßig in `lib`
+abgelegt.
+
+```shell copy
+dart run forui snippet create [snippets]
+```
+
+```shell copy
+Usage: forui snippet create [snippets]
+-h, --help      Print this usage information.
+-f, --force     Overwrite existing files if they exist.
+-o, --output    The output directory or file, relative to the project directory.
+                (defaults to "lib")
+```
+
+### ls
+
+Mit dem Befehl `snippet ls` listen Sie alle verfügbaren Snippets auf.
+
+```shell copy
+dart run forui snippet ls
+```
+
+```shell copy
+Usage: forui snippet ls
+-h, --help    Print this usage information.
+```
+
+## style
+
+### create
+
+Mit dem Befehl `style create` erzeugen Sie einen Style in Ihrem Projekt. Styles werden standardmäßig in `lib/theme`
+abgelegt.
+
+<Callout type="info">
+    Wie Sie die erzeugten Styles verwenden, erfahren Sie in der [Dokumentation](/docs/guides/customizing-widget-styles).
+</Callout>
+
+```shell copy
+dart run forui style create [styles]
+```
+
+```shell copy
+Usage: forui style create [styles]
+-h, --help      Print this usage information.
+-a, --all       Create all styles.
+-f, --force     Overwrite existing files if they exist.
+-o, --output    The output directory or file, relative to the project directory.
+                (defaults to "lib/theme")
+```
+
+### ls
+
+Mit dem Befehl `style ls` listen Sie alle verfügbaren Styles auf.
+
+```shell copy
+dart run forui style ls
+```
+
+```shell copy
+Usage: forui style ls
+-h, --help    Print this usage information.
+```
+
+## theme
+
+### create
+
+Mit dem Befehl `theme create` erzeugen Sie ein Theme in Ihrem Projekt. Das Theme wird standardmäßig in
+`lib/theme/theme.dart` abgelegt.
+
+<Callout type="info">
+    Wie Sie das erzeugte Theme verwenden, erfahren Sie in der [Dokumentation](/docs/guides/customizing-themes).
+</Callout>
+
+```shell copy
+dart run forui theme create [theme]
+```
+
+```shell copy
+Usage: forui theme create [theme]
+-h, --help      Print this usage information.
+-f, --force     Overwrite existing files if they exist.
+-o, --output    The output directory or file, relative to the project directory.
+                (defaults to "lib/theme/theme.dart")
+```
+
+### ls
+
+Mit dem Befehl `theme ls` listen Sie alle verfügbaren Themes auf.
+
+```shell copy
+dart run forui theme ls
+```
+
+```shell copy
+Usage: forui theme ls
+-h, --help    Print this usage information.
+```

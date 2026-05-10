@@ -1,0 +1,87 @@
+---
+title: 自定义 widget 样式
+description: 使用 delta 与 CLI 自定义单个 widget 的样式。
+---
+
+import {Callout} from "fumadocs-ui/components/callout";
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import deltaSnippet from '@/snippets/snippets/guides/customizing_widget_styles/deltas/delta.json';
+import replaceSnippet from '@/snippets/snippets/guides/customizing_widget_styles/deltas/replace.json';
+import variantsDeltaApplySnippet from '@/snippets/snippets/guides/customizing_widget_styles/deltas/variants/variants_delta.json';
+import variantsValueApplySnippet from '@/snippets/snippets/guides/customizing_widget_styles/deltas/variants/variants_value.json';
+import variantsReplaceSnippet from '@/snippets/snippets/guides/customizing_widget_styles/deltas/variants/variants_replace.json';
+import modifyStyleSnippet from '@/snippets/snippets/guides/customizing_widget_styles/cli/modify_style.json';
+import passStyleSnippet from '@/snippets/snippets/guides/customizing_widget_styles/cli/pass_style.json';
+
+自定义单个 widget 样式有 **2** 种方式：用 **delta** 进行小范围调整，或用 **CLI** 进行大刀阔斧的改造。
+
+## Delta
+
+每个 widget 样式都有对应的 delta，用来表示一次局部修改。例如，
+[`FAccordionStyle`](https://pub.dev/documentation/forui/latest/forui.widgets.accordion/FAccordionStyle-class.html) 对应
+[`FAccordionStyleDelta`](https://pub.dev/documentation/forui/latest/forui.widgets.accordion/FAccordionStyleDelta-class.html)。
+
+widget 通过 `style` 参数接受 delta。要在保留其余样式的前提下修改 accordion 的聚焦轮廓颜色：
+
+<CodeSnippet snippet={deltaSnippet} />
+
+由于 widget 样式继承自其对应的 delta，你也可以直接传入完整的样式来整体替换原有样式：
+
+<CodeSnippet snippet={replaceSnippet} />
+
+下列内置的 Flutter 类型同样有对应的 delta：
+
+| Flutter 类型                                                                                          | Delta                                                                                                                        |
+|------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------|
+| [`Decoration`](https://api.flutter.dev/flutter/painting/Decoration-class.html)                       | [`DecorationDelta`](https://pub.dev/documentation/forui/latest/forui.theme/DecorationDelta-class.html)                       |
+| [`BoxDecoration`](https://api.flutter.dev/flutter/painting/BoxDecoration-class.html)                 | [`BoxDecorationDelta`](https://pub.dev/documentation/forui/latest/forui.theme/BoxDecorationDelta-class.html)                 |
+| [`ShapeDecoration`](https://api.flutter.dev/flutter/painting/ShapeDecoration-class.html)             | [`ShapeDecorationDelta`](https://pub.dev/documentation/forui/latest/forui.theme/ShapeDecorationDelta-class.html)             |
+| [`EdgeInsetsGeometry`](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)       | [`EdgeInsetsGeometryDelta`](https://pub.dev/documentation/forui/latest/forui.theme/EdgeInsetsGeometryDelta-class.html)       |
+| [`EdgeInsets`](https://api.flutter.dev/flutter/painting/EdgeInsets-class.html)                       | [`EdgeInsetsDelta`](https://pub.dev/documentation/forui/latest/forui.theme/EdgeInsetsDelta-class.html)                       |
+| [`EdgeInsetsDirectional`](https://api.flutter.dev/flutter/painting/EdgeInsetsDirectional-class.html) | [`EdgeInsetsDirectionalDelta`](https://pub.dev/documentation/forui/latest/forui.theme/EdgeInsetsDirectionalDelta-class.html) |
+| [`IconThemeData`](https://api.flutter.dev/flutter/widgets/IconThemeData-class.html)                  | [`IconThemeDataDelta`](https://pub.dev/documentation/forui/latest/forui.theme/IconThemeDataDelta-class.html)                 |
+| [`TextStyle`](https://api.flutter.dev/flutter/painting/TextStyle-class.html)                         | [`TextStyleDelta`](https://pub.dev/documentation/forui/latest/forui.theme/TextStyleDelta-class.html)                         |
+
+
+### 变体
+
+widget 样式包含 [`FVariants`](/docs/concepts/themes#variants) 字段，可通过接受一组操作的 `delta(...)`
+函数进行修改。根据变体的类型，操作可能是基于 delta 的修改，也可能是整体替换。
+
+修改 `FVariants` 字段共有 **3** 种方式：
+
+复合类型，例如 `BoxDecoration`、`IconThemeData`、`TextStyle` 以及嵌套样式，支持基于 delta 的修改。
+要修改 accordion 的标题文本样式：
+
+<CodeSnippet snippet={variantsDeltaApplySnippet} />
+
+原子类型，例如 `double` 和 `Color`，仅支持整体替换。要修改 radio 的边框颜色：
+
+<CodeSnippet snippet={variantsValueApplySnippet} />
+
+与 widget 样式一样，`FVariants` 也可以通过直接传入一个 `FVariants` 来整体替换。要替换 accordion 的标题文本样式：
+
+<CodeSnippet snippet={variantsReplaceSnippet} />
+
+
+## CLI
+
+下文演示如何重写 accordion 的样式，推荐用于大幅改造样式的场景。
+
+运行以下命令生成 widget 样式：
+
+```shell copy
+dart run forui style create accordion
+```
+
+<Callout type="info">
+    提示：运行 `dart run forui style ls` 可以查看所有可用的样式。
+</Callout>
+
+要在 accordion 标题获得焦点时为其添加下划线，请修改生成的样式：
+
+<CodeSnippet snippet={modifyStyleSnippet} />
+
+最后，将修改后的样式传给 `FAccordion`：
+
+<CodeSnippet snippet={passStyleSnippet} />

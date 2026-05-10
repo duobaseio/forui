@@ -1,0 +1,182 @@
+---
+title: Autocomplete
+description: Ein Autocomplete liefert eine Liste von Vorschlägen basierend auf der Eingabe des Nutzers und zeigt einen Typeahead-Text für den ersten Treffer an. Es ist ein Form-Feld und kann daher in einer Form verwendet werden.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.autocomplete/
+---
+
+import {Callout} from "fumadocs-ui/components/callout";
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import autocompleteUsage from '@/snippets/usages/widgets/autocomplete/autocomplete.json';
+import autocompleteBuilderUsage from '@/snippets/usages/widgets/autocomplete/builder.json';
+import defaultSnippet from '@/snippets/examples/autocomplete/default.json';
+import detailedSnippet from '@/snippets/examples/autocomplete/detailed.json';
+import sectionSnippet from '@/snippets/examples/autocomplete/section.json';
+import dividerSnippet from '@/snippets/examples/autocomplete/divider.json';
+import asyncSnippet from '@/snippets/examples/autocomplete/async.json';
+import asyncLoadingSnippet from '@/snippets/examples/autocomplete/async-loading.json';
+import asyncErrorSnippet from '@/snippets/examples/autocomplete/async-error.json';
+import clearableSnippet from '@/snippets/examples/autocomplete/clearable.json';
+import popoverBuilderSnippet from '@/snippets/examples/autocomplete/popover-builder.json';
+import formSnippet from '@/snippets/examples/autocomplete/form.json';
+
+<Callout type="info" title="Kein durchsuchbares Select">
+    Ein Autocomplete ist kein durchsuchbares Select. Es ist ein Textfeld mit Vorschlägen. Werte sind nicht auf einen
+    der Vorschläge beschränkt; Nutzer können Beliebiges eingeben. Wenn Sie ein durchsuchbares Select benötigen,
+    verwenden Sie [ein durchsuchbares Select](/docs/form/select#searchable)
+    oder [ein durchsuchbares Multi-Select](/docs/form/multi-select#searchable)
+</Callout>
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='autocomplete' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+Um einen bestimmten Style zur Anpassung zu erzeugen:
+
+<Tabs items={['Autocomplete', 'Autocomplete Field Sizes', 'Autocomplete Field', 'Autocomplete Content', 'Autocomplete Section']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create autocomplete
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create autocomplete-field-sizes
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create autocomplete-field
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create autocomplete-content
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create autocomplete-section
+        ````
+    </Tab>
+</Tabs>
+
+## Verwendung
+
+### `FAutocomplete(...)`
+<UsageSnippet usage={autocompleteUsage} />
+
+### `FAutocomplete.builder(...)`
+<UsageSnippet usage={autocompleteBuilderUsage} />
+
+## Beispiele
+
+### Detailliert
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='autocomplete' variant='detailed' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={detailedSnippet} />
+  </Tab>
+</Tabs>
+
+### Abschnitte
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='autocomplete' variant='section' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={sectionSnippet} />
+  </Tab>
+</Tabs>
+
+### Trennlinien
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='autocomplete' variant='divider' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={dividerSnippet} />
+  </Tab>
+</Tabs>
+
+### Verhalten
+
+#### Asynchron
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='autocomplete' variant='async' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={asyncSnippet} />
+  </Tab>
+</Tabs>
+
+#### Asynchron mit benutzerdefiniertem Ladezustand
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='autocomplete' variant='async-loading' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={asyncLoadingSnippet} />
+  </Tab>
+</Tabs>
+
+#### Asynchron mit benutzerdefinierter Fehlerbehandlung
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='autocomplete' variant='async-error' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={asyncErrorSnippet} />
+  </Tab>
+</Tabs>
+
+#### Löschbar
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='autocomplete' variant='clearable' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={clearableSnippet} />
+  </Tab>
+</Tabs>
+
+#### Popover Builder
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='autocomplete' variant='popover-builder' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={popoverBuilderSnippet} />
+  </Tab>
+</Tabs>
+
+### Form
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='autocomplete' variant='form' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={formSnippet} />
+  </Tab>
+</Tabs>

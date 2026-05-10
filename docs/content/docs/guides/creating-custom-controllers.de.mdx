@@ -1,0 +1,27 @@
+---
+title: Eigene Controller erstellen
+description: Erweitern Sie Forui-Controller um eigene Logik und übergeben Sie sie an Widgets.
+---
+
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import customManagedSnippet from '@/snippets/snippets/guides/creating_custom_controllers/custom_managed.json';
+import extendManagedSnippet from '@/snippets/snippets/guides/creating_custom_controllers/extend_managed.json';
+
+Angenommen, Sie erweitern einen Controller, etwa `FPopoverController`, um eigene Logik. Beim Übergeben dieses
+eigenen Controllers an ein Widget haben Sie **2** Möglichkeiten.
+
+## Managed Control mit externem Controller
+
+Übergeben Sie den eigenen Controller über ein Managed Control.
+
+<CodeSnippet snippet={customManagedSnippet} />
+
+Der Nachteil dieses Ansatzes ist, dass Sie den Lebenszyklus des Controllers selbst verwalten müssen.
+
+## Managed Control erweitern
+
+Alternativ können Sie das Managed Control (`FPopoverManagedControl`) erweitern, um Ihren eigenen Controller zu erstellen.
+
+<CodeSnippet snippet={extendManagedSnippet} />
+
+Auf diese Weise übernimmt das Widget den Lebenszyklus des Controllers für Sie.

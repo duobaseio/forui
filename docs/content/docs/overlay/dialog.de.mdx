@@ -1,0 +1,94 @@
+---
+title: Dialog
+description: Ein modaler Dialog unterbricht die Nutzer mit wichtigen Inhalten und erwartet eine Reaktion.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.dialog/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/dialog/default.json';
+import verticalSnippet from '@/snippets/examples/dialog/vertical.json';
+import blurredSnippet from '@/snippets/examples/dialog/blurred.json';
+import dialogShowUsage from '@/snippets/usages/widgets/dialog/show.json';
+import dialogUsage from '@/snippets/usages/widgets/dialog/dialog.json';
+import dialogAdaptiveUsage from '@/snippets/usages/widgets/dialog/adaptive.json';
+import dialogRawUsage from '@/snippets/usages/widgets/dialog/raw.json';
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='dialog' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+Um einen bestimmten Style zur Anpassung zu erzeugen:
+
+<Tabs items={['Dialog', 'Dialog Route']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create dialog
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create dialog-route
+        ````
+    </Tab>
+</Tabs>
+
+## Verwendung
+
+### `showFDialog(...)`
+<UsageSnippet usage={dialogShowUsage} />
+
+### `FDialog(...)`
+<UsageSnippet usage={dialogUsage} />
+
+### `FDialog.adaptive(...)`
+<UsageSnippet usage={dialogAdaptiveUsage} />
+
+### `FDialog.raw(...)`
+<UsageSnippet usage={dialogRawUsage} />
+
+## Beispiele
+
+### Horizontales Layout
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='dialog' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+### Vertikales Layout
+
+Auf Mobilgeräten empfehlen wir das vertikale Layout.
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='dialog' variant='vertical' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={verticalSnippet} />
+  </Tab>
+</Tabs>
+
+### Unscharfe Hintergrundebene
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='dialog' variant='blurred' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={blurredSnippet} />
+  </Tab>
+</Tabs>

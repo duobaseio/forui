@@ -1,0 +1,68 @@
+---
+title: 头像
+description: 用于显示用户头像的圆形图片组件，并提供回退选项。Avatar 组件让你在应用中以一致的方式呈现用户：当图片不可用时，可回退为姓名首字母或图标。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.avatar/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/avatar/default.json';
+import rawSnippet from '@/snippets/examples/avatar/raw.json';
+import invalidSnippet from '@/snippets/examples/avatar/invalid.json';
+import avatarUsage from '@/snippets/usages/widgets/avatar/avatar.json';
+import avatarRawUsage from '@/snippets/usages/widgets/avatar/raw.json';
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+      <Widget name='avatar'/>
+  </Tab>
+  <Tab>
+      <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+要生成可自定义的特定样式：
+
+<Tabs items={['Avatar']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create avatar
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+### `FAvatar(...)`
+<UsageSnippet usage={avatarUsage} />
+
+### `FAvatar.raw(...)`
+<UsageSnippet usage={avatarRawUsage} />
+
+## 示例
+
+### 原始
+
+<Tabs items={['预览', '代码']}>
+    <Tab>
+        <Widget name='avatar' variant='raw'/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={rawSnippet} />
+    </Tab>
+</Tabs>
+
+### 回退
+
+<Tabs items={['预览', '代码']}>
+    <Tab>
+        <Widget name='avatar' variant='invalid'/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={invalidSnippet} />
+    </Tab>
+</Tabs>

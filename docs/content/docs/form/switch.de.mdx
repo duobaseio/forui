@@ -1,0 +1,76 @@
+---
+title: Switch
+description: Eine Schalterkomponente, mit der Nutzer eine Einstellung mit einer Schiebebewegung aktivieren oder deaktivieren können.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.switch_/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/switch/default.json';
+import leadingLabelSnippet from '@/snippets/examples/switch/leading-label.json';
+import disabledSnippet from '@/snippets/examples/switch/disabled.json';
+import formSnippet from '@/snippets/examples/switch/form.json';
+import switchUsage from '@/snippets/usages/widgets/switch/switchWidget.json';
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='switch'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+Um einen bestimmten Style zur Anpassung zu erzeugen:
+
+<Tabs items={['Switch']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create switch
+        ````
+    </Tab>
+</Tabs>
+
+## Verwendung
+
+### `FSwitch(...)`
+<UsageSnippet usage={switchUsage} />
+
+## Beispiele
+
+### Vorangestelltes Label
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='switch' variant='leading-label'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={leadingLabelSnippet} />
+  </Tab>
+</Tabs>
+
+### Deaktiviert
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='switch' variant='disabled'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={disabledSnippet} />
+  </Tab>
+</Tabs>
+
+### Form
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='switch' variant='form' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={formSnippet} />
+  </Tab>
+</Tabs>

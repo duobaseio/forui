@@ -1,0 +1,137 @@
+---
+title: 文本字段
+description: text field 让用户使用硬件键盘或屏幕键盘输入文本。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.text_field/
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/text-field/default.json';
+import disabledSnippet from '@/snippets/examples/text-field/disabled.json';
+import clearableSnippet from '@/snippets/examples/text-field/clearable.json';
+import emailSnippet from '@/snippets/examples/text-field/email.json';
+import passwordSnippet from '@/snippets/examples/text-field/password.json';
+import multilineSnippet from '@/snippets/examples/text-field/multiline.json';
+import textFieldUsage from '@/snippets/usages/widgets/text_field/textField.json';
+import textFieldEmailUsage from '@/snippets/usages/widgets/text_field/textFieldEmail.json';
+import textFieldMultilineUsage from '@/snippets/usages/widgets/text_field/textFieldMultiline.json';
+import textFieldPasswordUsage from '@/snippets/usages/widgets/text_field/textFieldPassword.json';
+
+<Callout type="info">
+  在表单中使用文本字段时，请参见 [`FTextFormField`](/docs/form/text-form-field)。
+</Callout>
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='text-field'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+要生成可定制的特定样式：
+
+<Tabs items={['Text Field Sizes', 'Text Field']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create text-field-sizes
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create text-field
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+### `FTextField(...)`
+<UsageSnippet usage={textFieldUsage} />
+
+### `FTextField.email(...)`
+<UsageSnippet usage={textFieldEmailUsage} />
+
+### `FTextField.password(...)`
+<UsageSnippet usage={textFieldPasswordUsage} />
+
+### `FTextField.multiline(...)`
+<UsageSnippet usage={textFieldMultilineUsage} />
+
+## 示例
+
+### 状态
+
+#### 启用
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='text-field'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+#### 禁用
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='text-field' variant='disabled'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={disabledSnippet} />
+  </Tab>
+</Tabs>
+
+### 可清除
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='text-field' variant='clearable'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={clearableSnippet} />
+  </Tab>
+</Tabs>
+
+### 预设
+
+#### 邮箱
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='text-field' variant='email'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={emailSnippet} />
+  </Tab>
+</Tabs>
+
+#### 密码
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='text-field' variant='password'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={passwordSnippet} />
+  </Tab>
+</Tabs>
+
+#### 多行
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='text-field' variant='multiline'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={multilineSnippet} />
+  </Tab>
+</Tabs>

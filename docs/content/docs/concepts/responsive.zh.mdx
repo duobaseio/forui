@@ -1,0 +1,57 @@
+---
+title: 响应式
+description: 平台变体与响应式断点，用于构建自适应布局。
+---
+
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import platformVariantsSnippet from '@/snippets/snippets/concepts/responsive/platform_variants.json';
+import usageSnippet from '@/snippets/snippets/concepts/responsive/usage.json';
+import customBreakpointsSnippet from '@/snippets/snippets/concepts/responsive/custom_breakpoints.json';
+import customBreakpointsUsageSnippet from '@/snippets/snippets/concepts/responsive/custom_breakpoints_usage.json';
+import platformOverrideSnippet from '@/snippets/snippets/concepts/responsive/platform_override.json';
+
+Forui 提供平台感知的主题变体与响应式断点，用于构建自适应布局。
+
+## 平台主题
+
+每个预设主题都同时包含 **desktop** 与 **touch** 两种变体。touch 变体使用更大的点击区域以及面向触控输入优化的间距，
+而 desktop 变体则更紧凑。
+
+<CodeSnippet snippet={platformVariantsSnippet} />
+
+当前平台会被自动检测，并可通过 [`context.platformVariant`](https://pub.dev/documentation/forui/latest/forui.theme/FAdaptiveBuildContext/platformVariant.html) 获取。
+触控平台包括 Android、iOS 和 Fuchsia，桌面平台包括 Windows、macOS 和 Linux。
+
+可以通过 `FTheme` 的 `platform` 参数覆盖检测到的平台：
+
+<CodeSnippet snippet={platformOverrideSnippet} />
+
+## 断点
+
+Forui 还提供了基于 [Tailwind CSS](https://tailwindcss.com/docs/responsive-design) 的响应式断点。
+
+### 预设断点
+
+所有断点均以逻辑像素为单位。移动设备通常小于 `sm`（640），平板与桌面设备通常分别大于 `md`（768）和 `lg`（1024）。
+
+| 断点    | 最小宽度 | 访问方式                       |
+| :----- | :------- | :--------------------------- |
+| `sm`   | 640      | `FThemeData.breakpoints.sm`  |
+| `md`   | 768      | `FThemeData.breakpoints.md`  |
+| `lg`   | 1024     | `FThemeData.breakpoints.lg`  |
+| `xl`   | 1280     | `FThemeData.breakpoints.xl`  |
+| `xl2`  | 1536     | `FThemeData.breakpoints.xl2` |
+
+### 用法
+
+<CodeSnippet snippet={usageSnippet} />
+
+### 自定义断点
+
+可以通过对 `FBreakpoints` 的扩展来添加额外的断点：
+
+<CodeSnippet snippet={customBreakpointsSnippet} />
+
+之后，可以像下面这样访问该自定义断点：
+
+<CodeSnippet snippet={customBreakpointsUsageSnippet} />

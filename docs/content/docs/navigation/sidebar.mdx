@@ -24,10 +24,10 @@ import sidebarItemUsage from '@/snippets/usages/widgets/sidebar/sidebarItem.json
 </Callout>
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='sidebar' height={500}/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={defaultSnippet} />
   </Tab>
 </Tabs>
@@ -37,17 +37,17 @@ import sidebarItemUsage from '@/snippets/usages/widgets/sidebar/sidebarItem.json
 To generate a specific style for customization:
 
 <Tabs items={['Sidebar', 'Sidebar Group', 'Sidebar Item']}>
-    <Tab value="Sidebar">
+    <Tab>
         ```shell copy
         dart run forui style create sidebar
         ````
     </Tab>
-    <Tab value="Sidebar Group">
+    <Tab>
         ```shell copy
         dart run forui style create sidebar-group
         ````
     </Tab>
-    <Tab value="Sidebar Item">
+    <Tab>
         ```shell copy
         dart run forui style create sidebar-item
         ````
@@ -100,10 +100,10 @@ Represents an item on the sidebar. May be nested in `FSidebarItem.children` to c
 Suited for devices with limited screen space.
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='sidebar' variant='sheet' height={500} />
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={sheetSnippet} />
   </Tab>
 </Tabs>
@@ -111,10 +111,10 @@ Suited for devices with limited screen space.
 ### Custom Width
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='sidebar' variant='custom-width' height={300} />
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={customWidthSnippet} />
   </Tab>
 </Tabs>
@@ -122,10 +122,10 @@ Suited for devices with limited screen space.
 ### Nested `FSidebarItem`
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='sidebar' variant='nested' height={500} />
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={nestedSnippet} />
   </Tab>
 </Tabs>

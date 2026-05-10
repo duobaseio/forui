@@ -7,6 +7,7 @@ import { createRelativeLink } from 'fumadocs-ui/mdx';
 import { Separator } from '@/components/ui/separator';
 import LinkBadge from '@/components/ui/link-badge/link-badge';
 import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group';
+import { t } from '@/lib/i18n';
 
 type Params = Promise<{ lang: string; slug?: string[] }>;
 
@@ -16,6 +17,7 @@ export default async function Page(props: { params: Params }) {
   if (!page) notFound();
 
   const MDX = page.data.body;
+  const text = t(lang).docs;
 
   return (
     <DocsPage toc={page.data.toc} full={page.data.full} tableOfContent={{ style: 'clerk' }}>
@@ -24,7 +26,7 @@ export default async function Page(props: { params: Params }) {
         <DocsDescription className="text-base mb-0">{page.data.description}</DocsDescription>
         {page.data.apiReference && (
           <LinkBadgeGroup className="pt-2">
-            <LinkBadge label="API Reference" href={page.data.apiReference} />
+            <LinkBadge label={text.apiReference} href={page.data.apiReference} />
           </LinkBadgeGroup>
         )}
         <Separator className="mt-2 mb-6" />

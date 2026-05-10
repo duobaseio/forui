@@ -1,0 +1,81 @@
+---
+title: Label
+description: Beschreibt ein Formularfeld mit einem Label, einer Beschreibung und einer Fehlermeldung (falls vorhanden). Dieses Widget wird in der Regel für benutzerdefinierte Formularfelder verwendet. Alle Formularfelder in Forui sind bereits mit diesem Widget umschlossen.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.label/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import horizontalSnippet from '@/snippets/examples/label/horizontal.json';
+import verticalSnippet from '@/snippets/examples/label/vertical.json';
+import disabledSnippet from '@/snippets/examples/label/disabled.json';
+import errorSnippet from '@/snippets/examples/label/error.json';
+import labelUsage from '@/snippets/usages/widgets/label/label.json';
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='label' variant='horizontal'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={horizontalSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+Um einen bestimmten Style zur Anpassung zu erzeugen:
+
+<Tabs items={['Labels', 'Label']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create labels
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create label
+        ````
+    </Tab>
+</Tabs>
+
+## Verwendung
+
+### `FLabel(...)`
+<UsageSnippet usage={labelUsage} />
+
+## Beispiele
+
+### Vertikal
+
+<Tabs items={['Vorschau', 'Code']}>
+    <Tab>
+        <Widget name='label' variant='vertical'/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={verticalSnippet} />
+    </Tab>
+</Tabs>
+
+### Deaktiviert
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='label' variant='disabled'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={disabledSnippet} />
+  </Tab>
+</Tabs>
+
+### Fehler
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='label' variant='error'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={errorSnippet} />
+  </Tab>
+</Tabs>

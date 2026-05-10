@@ -16,10 +16,10 @@ import customIconSnippet from '@/snippets/examples/pagination/custom-icon.json';
 import paginationUsage from '@/snippets/usages/widgets/pagination/pagination.json';
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='pagination' height={400}/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={defaultSnippet} />
   </Tab>
 </Tabs>
@@ -29,7 +29,7 @@ import paginationUsage from '@/snippets/usages/widgets/pagination/pagination.jso
 To generate a specific style for customization:
 
 <Tabs items={['Pagination']}>
-    <Tab value="Pagination">
+    <Tab>
         ```shell copy
         dart run forui style create pagination
         ````
@@ -46,10 +46,10 @@ To generate a specific style for customization:
 ### Siblings
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='pagination' variant='siblings' height={400}/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={siblingsSnippet} />
   </Tab>
 </Tabs>
@@ -57,10 +57,10 @@ To generate a specific style for customization:
 ### Hide Edges
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='pagination' variant='hide-edges' height={400}/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={hideEdgesSnippet} />
   </Tab>
 </Tabs>
@@ -68,10 +68,10 @@ To generate a specific style for customization:
 ### Custom Icons
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='pagination' variant='custom-icon' height={400}/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={customIconSnippet} />
   </Tab>
 </Tabs>
@@ -79,10 +79,10 @@ To generate a specific style for customization:
 ### With a `PageView`
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='pagination' variant='page-view' height={400}/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={pageViewSnippet} />
   </Tab>
 </Tabs>

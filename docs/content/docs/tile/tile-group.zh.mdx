@@ -1,0 +1,130 @@
+---
+title: 列表项分组
+description: 一个 tile 组，通常用于将相关信息归类在一起。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.tile/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import tileGroupDefault from '@/snippets/examples/tile-group/default.json';
+import tileGroupUsage from '@/snippets/usages/widgets/tile_group/tileGroup.json';
+import tileGroupBuilderUsage from '@/snippets/usages/widgets/tile_group/tileGroupBuilder.json';
+import tileGroupMergeUsage from '@/snippets/usages/widgets/tile_group/tileGroupMerge.json';
+import tileGroupLazy from '@/snippets/examples/tile-group/lazy.json';
+import tileGroupMerge from '@/snippets/examples/tile-group/merge.json';
+import tileGroupScrollable from '@/snippets/examples/tile-group/scrollable.json';
+import tileGroupFullDivider from '@/snippets/examples/tile-group/full-divider.json';
+import tileGroupNoDivider from '@/snippets/examples/tile-group/no-divider.json';
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='tile-group'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={tileGroupDefault} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+要生成可定制的特定样式：
+
+<Tabs items={['Tile Group', 'Tiles', 'Tile', 'Tile Content']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create tile-group
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create tiles
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create tile
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create tile-content
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+### `FTileGroup(...)`
+<UsageSnippet usage={tileGroupUsage} />
+
+### `FTileGroup.builder(...)`
+<UsageSnippet usage={tileGroupBuilderUsage} />
+
+### `FTileGroup.merge(...)`
+<UsageSnippet usage={tileGroupMergeUsage} />
+
+## 示例
+
+### 行为
+
+#### 可滚动
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='tile-group' variant='scrollable' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={tileGroupScrollable} />
+  </Tab>
+</Tabs>
+
+#### 懒加载滚动
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='tile-group' variant='lazy' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={tileGroupLazy} />
+  </Tab>
+</Tabs>
+
+#### 合并多个分组
+
+此函数将多个 `FTileGroupMixin` 合并为一个分组。它适用于表示包含多个区块的分组。
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='tile-group' variant='merge' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={tileGroupMerge} />
+  </Tab>
+</Tabs>
+
+### 外观
+
+#### 完整分隔线
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='tile-group' variant='full-divider'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={tileGroupFullDivider} />
+  </Tab>
+</Tabs>
+
+#### 无分隔线
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='tile-group' variant='no-divider'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={tileGroupNoDivider} />
+  </Tab>
+</Tabs>

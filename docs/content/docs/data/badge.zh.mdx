@@ -1,0 +1,91 @@
+---
+title: 徽章
+description: Badge 用于突出特定信息，例如标签和计数。可用它展示状态、通知或需要醒目呈现的小段信息。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.badge/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import primarySnippet from '@/snippets/examples/badge/primary.json';
+import secondarySnippet from '@/snippets/examples/badge/secondary.json';
+import outlineSnippet from '@/snippets/examples/badge/outline.json';
+import destructiveSnippet from '@/snippets/examples/badge/destructive.json';
+import badgeUsage from '@/snippets/usages/widgets/badge/badge.json';
+import badgeRawUsage from '@/snippets/usages/widgets/badge/raw.json';
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+      <Widget name='badge' variant='primary'/>
+  </Tab>
+  <Tab>
+      <CodeSnippet snippet={primarySnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+要生成可自定义的特定样式：
+
+<Tabs items={['Badges']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create badges
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+### `FBadge(...)`
+<UsageSnippet usage={badgeUsage} />
+
+### `FBadge.raw(...)`
+<UsageSnippet usage={badgeRawUsage} />
+
+## 示例
+
+### 主要
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+      <Widget name='badge' variant='primary'/>
+  </Tab>
+  <Tab>
+      <CodeSnippet snippet={primarySnippet} />
+  </Tab>
+</Tabs>
+
+### 次要
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+      <Widget name='badge' variant='secondary'/>
+  </Tab>
+  <Tab>
+      <CodeSnippet snippet={secondarySnippet} />
+  </Tab>
+</Tabs>
+
+### 描边
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+      <Widget name='badge' variant='outline'/>
+  </Tab>
+  <Tab>
+      <CodeSnippet snippet={outlineSnippet} />
+  </Tab>
+</Tabs>
+
+### 危险
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+      <Widget name='badge' variant='destructive'/>
+  </Tab>
+  <Tab>
+      <CodeSnippet snippet={destructiveSnippet} />
+  </Tab>
+</Tabs>

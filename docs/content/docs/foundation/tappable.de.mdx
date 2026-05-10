@@ -1,0 +1,69 @@
+---
+title: Tappable
+description: Ein Bereich, der auf Berührung reagiert.
+apiReference: https://pub.dev/documentation/forui/latest/forui.foundation/FTappable-class.html
+---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import tappableDefault from '@/snippets/examples/tappable/default.json';
+import tappableGroupDefault from '@/snippets/examples/tappable-group/default.json';
+import tappableBounce from '@/snippets/examples/tappable/bounce.json';
+import tappableUsage from '@/snippets/usages/foundation/tappable/tappable.json';
+import tappableStaticUsage from '@/snippets/usages/foundation/tappable/tappableStatic.json';
+
+<Callout type="info">
+  Dieses Widget dient typischerweise als Grundlage für andere übergeordnete Widgets, z. B. [Button](../form/button).
+  Sofern Sie kein eigenes Widget erstellen, sollten Sie diese übergeordneten Widgets bevorzugen.
+</Callout>
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='tappable' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={tappableDefault} />
+  </Tab>
+</Tabs>
+
+## Verwendung
+
+### `FTappable(...)`
+<UsageSnippet usage={tappableUsage} />
+
+### `FTappable.static(...)`
+
+Eine Variante von `FTappable` ohne Animation. Das entspricht in etwa der Verwendung von `FTappableMotion.none`.
+
+<UsageSnippet usage={tappableStaticUsage} />
+
+## Eigene Bounce-Animation
+
+Sie können die Bounce-Animation eines Tappable über ein `FTappableMotion` anpassen.
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='tappable' variant='bounce' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={tappableBounce} />
+  </Tab>
+</Tabs>
+
+## Slide-across-Interaktion
+
+Mehrere Tappables lassen sich in einer `FTappableGroup` gruppieren, um eine Slide-across-Interaktion zu aktivieren.
+Wenn Sie ein Tappable drücken und auf ein anderes hinüberziehen, wird der gedrückte Zustand auf das neue Tappable
+übertragen.
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='tappable-group' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={tappableGroupDefault} />
+  </Tab>
+</Tabs>

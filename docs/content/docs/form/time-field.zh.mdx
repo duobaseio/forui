@@ -1,0 +1,138 @@
+---
+title: 时间字段
+description: time field 允许从选择器或输入字段中选择时间。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.time_field/
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/time-field/default.json';
+import hour24Snippet from '@/snippets/examples/time-field/hour24.json';
+import pickerSnippet from '@/snippets/examples/time-field/picker.json';
+import popoverBuilderSnippet from '@/snippets/examples/time-field/popover-builder.json';
+import validatorSnippet from '@/snippets/examples/time-field/validator.json';
+import formSnippet from '@/snippets/examples/time-field/form.json';
+import timeFieldUsage from '@/snippets/usages/widgets/time_field/timeField.json';
+import timeFieldPickerUsage from '@/snippets/usages/widgets/time_field/timeFieldPicker.json';
+
+<Callout type="info">
+    建议在触摸设备上使用 [FTimeField.picker](#ftimefieldpicker)，在非主要触摸设备上使用 [FTimeField.new](#ftimefield)。
+</Callout>
+
+输入字段同时支持方向键导航：
+
+- 上/下箭头：递增/递减值
+- 左/右箭头：在时间片段之间移动
+
+输入字段不支持以下使用非西文数字以及需要组合的文字的语言区域，会默认使用英语：
+
+- 阿拉伯语
+- 阿萨姆语
+- 孟加拉语
+- 波斯语/法尔西语
+- 马拉地语
+- 缅甸语
+- 尼泊尔语
+- 普什图语
+- 泰米尔语
+- 阿姆哈拉语
+- 卡纳达语
+- 韩语
+- 旁遮普语
+- 泰语
+
+以下语言区域将默认使用中文 (zh)：
+
+- 中文（香港）
+- 中文（台湾）
+
+<Tabs items={['预览', '代码']}>
+    <Tab>
+        <Widget name='time-field'/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={defaultSnippet} />
+    </Tab>
+</Tabs>
+
+## CLI
+
+要生成可定制的特定样式：
+
+<Tabs items={['Time Field']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create time-field
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+### `FTimeField(...)`
+<UsageSnippet usage={timeFieldUsage} />
+
+### `FTimeField.picker(...)`
+<UsageSnippet usage={timeFieldPickerUsage} />
+
+## 示例
+
+### 24 小时制
+
+<Tabs items={['预览', '代码']}>
+    <Tab>
+        <Widget name='time-field' variant='hour24'/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={hour24Snippet} />
+    </Tab>
+</Tabs>
+
+### 仅选择器
+
+<Tabs items={['预览', '代码']}>
+    <Tab>
+        <Widget name='time-field' variant='picker' height={500}/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={pickerSnippet} />
+    </Tab>
+</Tabs>
+
+### Popover Builder
+
+<Tabs items={['预览', '代码']}>
+    <Tab>
+        <Widget name='time-field' variant='popover-builder' height={500}/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={popoverBuilderSnippet} />
+    </Tab>
+</Tabs>
+
+### 自定义校验
+
+<Tabs items={['预览', '代码']}>
+    <Tab>
+        <Widget name='time-field' variant='validator' height={500}/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={validatorSnippet} />
+    </Tab>
+
+</Tabs>
+
+### 表单
+
+<Tabs items={['预览', '代码']}>
+    <Tab>
+        <Widget name='time-field' variant='form' height={600}/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={formSnippet} />
+    </Tab>
+
+</Tabs>

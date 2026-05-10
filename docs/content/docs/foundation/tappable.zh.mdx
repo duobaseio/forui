@@ -1,0 +1,68 @@
+---
+title: 可点击
+description: 一个响应触摸的区域。
+apiReference: https://pub.dev/documentation/forui/latest/forui.foundation/FTappable-class.html
+---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import tappableDefault from '@/snippets/examples/tappable/default.json';
+import tappableGroupDefault from '@/snippets/examples/tappable-group/default.json';
+import tappableBounce from '@/snippets/examples/tappable/bounce.json';
+import tappableUsage from '@/snippets/usages/foundation/tappable/tappable.json';
+import tappableStaticUsage from '@/snippets/usages/foundation/tappable/tappableStatic.json';
+
+<Callout type="info">
+  此 widget 通常用于构建其他高层 widget，例如 [button](../form/button)。除非你在自定义 widget，否则应优先使用这些高层
+  widget。
+</Callout>
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='tappable' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={tappableDefault} />
+  </Tab>
+</Tabs>
+
+## 用法
+
+### `FTappable(...)`
+<UsageSnippet usage={tappableUsage} />
+
+### `FTappable.static(...)`
+
+`FTappable` 的一个不带任何动画的变体。其效果类似于使用 `FTappableMotion.none`。
+
+<UsageSnippet usage={tappableStaticUsage} />
+
+## 自定义弹跳动画
+
+你可以通过传入 `FTappableMotion` 来自定义 tappable 的弹跳动画。
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='tappable' variant='bounce' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={tappableBounce} />
+  </Tab>
+</Tabs>
+
+## 滑动切换交互
+
+可以将多个 tappable 放入一个 `FTappableGroup` 中以启用滑动切换交互。当你按下其中一个 tappable 并滑动到另一个上时，按下状态会转移到新的
+tappable。
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='tappable-group' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={tappableGroupDefault} />
+  </Tab>
+</Tabs>

@@ -1,0 +1,32 @@
+---
+title: Icons
+description: Hochwertige, in Forui mitgelieferte Lucide-Icons.
+---
+
+import {Callout} from "fumadocs-ui/components/callout";
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import usageSnippet from '@/snippets/snippets/icon_library/usage.json';
+
+Forui Assets ist eine Flutter-Bibliothek, die eine Reihe hochwertiger Icons von [Lucide](https://lucide.dev/) bereitstellt.
+
+## Installation
+
+<Callout type="info">
+    Forui Assets ist im forui-Paket enthalten. Wenn Sie `forui` installieren, müssen Sie es nicht separat installieren.
+</Callout>
+
+Führen Sie im Verzeichnis Ihres Flutter-Projekts den folgenden Befehl aus, um Forui Assets zu installieren.
+
+```bash filename="bash" copy
+flutter pub add forui_assets
+```
+
+## Verwendung
+
+<Callout type="info">
+    Am einfachsten finden Sie die verfügbaren Icons auf der Website von [Lucide](https://lucide.dev/icons/).
+    Wir aktualisieren die Icons im Paket Forui Assets mit jeder Forui-Version.
+    Sollte ein Icon in Forui Assets fehlen, [eröffnen Sie bitte ein Issue](https://github.com/duobaseio/forui/issues/new).
+</Callout>
+
+<CodeSnippet snippet={usageSnippet} />

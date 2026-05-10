@@ -1,0 +1,43 @@
+---
+title: Scaffold
+description: Erstellt ein visuelles Grundgerüst für Forui-Widgets.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.scaffold/
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/scaffold/default.json';
+import scaffoldUsage from '@/snippets/usages/widgets/scaffold/scaffold.json';
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='scaffold' height={600}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+Um einen bestimmten Style zur Anpassung zu erzeugen:
+
+<Tabs items={['Scaffold']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create scaffold
+        ````
+    </Tab>
+</Tabs>
+
+## Verwendung
+
+<Callout type="info">
+    Ein Scaffold kann eine Seitenleiste enthalten. Ein funktionierendes Beispiel finden Sie [hier](/docs/navigation/sidebar).
+</Callout>
+
+### `FScaffold(...)`
+<UsageSnippet usage={scaffoldUsage} />

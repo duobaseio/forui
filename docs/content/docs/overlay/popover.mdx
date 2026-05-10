@@ -19,10 +19,10 @@ import blurredSnippet from '@/snippets/examples/popover/blurred.json';
 import popoverUsage from '@/snippets/usages/widgets/popover/popover.json';
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='popover' height={500}/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={defaultSnippet} />
   </Tab>
 </Tabs>
@@ -32,7 +32,7 @@ import popoverUsage from '@/snippets/usages/widgets/popover/popover.json';
 To generate a specific style for customization:
 
 <Tabs items={['Popover']}>
-    <Tab value="Popover">
+    <Tab>
         ```shell copy
         dart run forui style create popover
         ````
@@ -55,10 +55,10 @@ separate overlay layer, and tapping it is considered "outside" the outer popover
 To prevent this, make both widgets share the same `groupId`.
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='popover' variant='nested' height={500}/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={nestedSnippet} />
   </Tab>
 </Tabs>
@@ -68,10 +68,10 @@ To prevent this, make both widgets share the same `groupId`.
 You can change how the popover is aligned to the button.
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='popover' variant='horizontal' height={500}/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={horizontalSnippet} />
   </Tab>
 </Tabs>
@@ -79,10 +79,10 @@ You can change how the popover is aligned to the button.
 ### Tapping Outside Does Not Close Popover
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='popover' variant='no-hide-region' height={500}/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={noHideRegionSnippet} />
   </Tab>
 </Tabs>
@@ -90,10 +90,10 @@ You can change how the popover is aligned to the button.
 ### Blurred Barrier
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='popover' variant='blurred' height={500}/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={blurredSnippet} />
   </Tab>
 </Tabs>
@@ -103,10 +103,10 @@ You can change how the popover is aligned to the button.
 The popover can be flipped along the overflowing axis to stay within the viewport boundaries.
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='popover' variant='flip' height={500}/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={flipSnippet} />
   </Tab>
 </Tabs>
@@ -116,10 +116,10 @@ The popover can be flipped along the overflowing axis to stay within the viewpor
 The popover can be slid along the overflowing axis to stay within the viewport boundaries.
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='popover' variant='slide' height={500}/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={slideSnippet} />
   </Tab>
 </Tabs>
@@ -129,10 +129,10 @@ The popover can be slid along the overflowing axis to stay within the viewport b
 The popover is not shifted to stay within the viewport boundaries, even if it overflows.
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='popover' variant='allow-overflow' height={500}/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={allowOverflowSnippet} />
   </Tab>
 </Tabs>

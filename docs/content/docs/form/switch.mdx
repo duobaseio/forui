@@ -15,10 +15,10 @@ import formSnippet from '@/snippets/examples/switch/form.json';
 import switchUsage from '@/snippets/usages/widgets/switch/switchWidget.json';
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='switch'/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={defaultSnippet} />
   </Tab>
 </Tabs>
@@ -28,7 +28,7 @@ import switchUsage from '@/snippets/usages/widgets/switch/switchWidget.json';
 To generate a specific style for customization:
 
 <Tabs items={['Switch']}>
-    <Tab value="Switch">
+    <Tab>
         ```shell copy
         dart run forui style create switch
         ````
@@ -45,10 +45,10 @@ To generate a specific style for customization:
 ### Leading Label
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='switch' variant='leading-label'/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={leadingLabelSnippet} />
   </Tab>
 </Tabs>
@@ -56,10 +56,10 @@ To generate a specific style for customization:
 ### Disabled
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='switch' variant='disabled'/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={disabledSnippet} />
   </Tab>
 </Tabs>
@@ -67,10 +67,10 @@ To generate a specific style for customization:
 ### Form
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='switch' variant='form' height={500}/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={formSnippet} />
   </Tab>
 </Tabs>

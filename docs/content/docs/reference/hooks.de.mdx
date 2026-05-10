@@ -1,0 +1,27 @@
+---
+title: Hooks
+description: Erstklassige Integration von Flutter Hooks mit Forui-Controllern.
+---
+
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import usageSnippet from '@/snippets/snippets/hooks/usage.json';
+
+Forui bietet eine erstklassige Integration mit [Flutter Hooks](https://pub.dev/packages/flutter_hooks). Sämtliche
+Controller stehen im begleitenden Paket `forui_hooks` als Hooks zur Verfügung.
+
+## Installation
+
+Führen Sie im Verzeichnis Ihres Flutter-Projekts den folgenden Befehl aus, um `flutter_hooks` und `forui_hooks` zu
+installieren.
+
+```bash filename="bash" copy
+flutter pub add flutter_hooks
+flutter pub add forui_hooks
+```
+
+## Verwendung
+
+Um Forui-Hooks in Ihrer Flutter-App zu verwenden, importieren Sie das Paket `forui_hooks` und initialisieren Sie einen
+Hook innerhalb eines `HookWidget`.
+
+<CodeSnippet snippet={usageSnippet} />

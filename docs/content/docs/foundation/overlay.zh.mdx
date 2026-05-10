@@ -1,0 +1,32 @@
+---
+title: 浮层
+description: 一个底层的覆盖层基础组件，相对于子 widget 合成内容。
+apiReference: https://pub.dev/documentation/forui/latest/forui.foundation/FOverlay-class.html
+---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import overlayDefault from '@/snippets/examples/overlay/default.json';
+import overlayUsage from '@/snippets/usages/foundation/overlay/overlay.json';
+
+<Callout type="info">
+  此 widget 通常用于构建其他高层 widget。如果你需要带锚点对齐与溢出处理的更高层次定位，请使用
+  [FPortal](../foundation/portal)。
+</Callout>
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='overlay' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={overlayDefault} />
+  </Tab>
+</Tabs>
+
+## 用法
+
+### `FOverlay(...)`
+<UsageSnippet usage={overlayUsage} />

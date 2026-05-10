@@ -1,0 +1,80 @@
+---
+title: Popover-Menü
+description: Ein Popover-Menü zeigt ein Menü in einem Portal an, das an einem Child-Widget ausgerichtet ist.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.popover_menu/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/popover-menu/default.json';
+import blurredSnippet from '@/snippets/examples/popover-menu/blurred.json';
+import nestedSnippet from '@/snippets/examples/popover-menu/nested.json';
+import tilesSnippet from '@/snippets/examples/popover-menu/tiles.json';
+import popoverMenuUsage from '@/snippets/usages/widgets/popover_menu/popoverMenu.json';
+import popoverMenuTilesUsage from '@/snippets/usages/widgets/popover_menu/popoverMenuTiles.json';
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='popover-menu' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+Um einen bestimmten Style zur Anpassung zu erzeugen:
+
+<Tabs items={['Popover Menu']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create popover-menu
+        ````
+    </Tab>
+</Tabs>
+
+## Verwendung
+
+### `FPopoverMenu(...)`
+<UsageSnippet usage={popoverMenuUsage} />
+
+### `FPopoverMenu.tiles(...)`
+<UsageSnippet usage={popoverMenuTilesUsage} />
+
+## Beispiele
+
+### Verschachteltes Untermenü
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='popover-menu' variant='nested' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={nestedSnippet} />
+  </Tab>
+</Tabs>
+
+### Tiles
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='popover-menu' variant='tiles' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={tilesSnippet} />
+  </Tab>
+</Tabs>
+
+### Unscharfe Hintergrundebene
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='popover-menu' variant='blurred' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={blurredSnippet} />
+  </Tab>
+</Tabs>

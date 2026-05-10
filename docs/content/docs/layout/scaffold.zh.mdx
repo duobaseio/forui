@@ -1,0 +1,43 @@
+---
+title: 脚手架
+description: 为 Forui widget 创建可视化的脚手架。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.scaffold/
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/scaffold/default.json';
+import scaffoldUsage from '@/snippets/usages/widgets/scaffold/scaffold.json';
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='scaffold' height={600}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+要生成可自定义的特定样式：
+
+<Tabs items={['Scaffold']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create scaffold
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+<Callout type="info">
+    Scaffold 可以包含侧边栏。可在[此处](/docs/navigation/sidebar)查看可运行示例。
+</Callout>
+
+### `FScaffold(...)`
+<UsageSnippet usage={scaffoldUsage} />

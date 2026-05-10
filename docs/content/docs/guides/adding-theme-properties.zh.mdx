@@ -1,0 +1,38 @@
+---
+title: 添加主题属性
+description: 使用 Flutter 的 ThemeExtension 系统，为 Forui 主题扩展应用专属的属性。
+---
+
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import brandStyleSnippet from '@/snippets/snippets/guides/adding_theme_properties/brand_style.json';
+import extensionsSnippet from '@/snippets/snippets/guides/adding_theme_properties/extensions.json';
+import getterSnippet from '@/snippets/snippets/guides/adding_theme_properties/getter.json';
+import accessPropertiesSnippet from '@/snippets/snippets/guides/adding_theme_properties/access_properties.json';
+import copyWithExtensionsSnippet from '@/snippets/snippets/guides/adding_theme_properties/copy_with.json';
+
+你可以通过 Flutter 的 [`ThemeExtension`](https://api.flutter.dev/flutter/material/ThemeExtension-class.html)
+系统，为 Forui 主题扩展应用专属的属性。
+
+## 创建主题扩展
+
+主题扩展必须继承 `ThemeExtension`，并实现 `copyWith()` 与 `lerp()`。
+
+<CodeSnippet snippet={brandStyleSnippet} />
+
+通过 `FThemeData(...)` 的 `extensions` 参数添加扩展：
+
+<CodeSnippet snippet={extensionsSnippet} />
+
+你也可以使用 `copyWith(...)` 向已有主题添加扩展：
+
+<CodeSnippet snippet={copyWithExtensionsSnippet} />
+
+## 访问属性
+
+通过 [`extension<T>()`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData/extension.html) 获取你的自定义主题扩展：
+
+<CodeSnippet snippet={accessPropertiesSnippet} />
+
+我们还推荐你在 `FThemeData` 上创建一个 getter：
+
+<CodeSnippet snippet={getterSnippet} />

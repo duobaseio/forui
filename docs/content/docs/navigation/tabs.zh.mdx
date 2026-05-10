@@ -1,0 +1,62 @@
+---
+title: 标签页
+description: 一组分层的内容区域（称为 tab 条目），每次只显示其中一个。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.tabs/
+---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/tabs/default.json';
+import swipeableSnippet from '@/snippets/examples/tabs/swipeable.json';
+import tabsUsage from '@/snippets/usages/widgets/tabs/tabs.json';
+import tabEntryUsage from '@/snippets/usages/widgets/tabs/tabEntry.json';
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='tabs' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+要生成可定制的特定样式：
+
+<Tabs items={['Tabs']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create tabs
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+### `FTabs(...)`
+<UsageSnippet usage={tabsUsage} />
+
+### `FTabEntry(...)`
+<UsageSnippet usage={tabEntryUsage} />
+
+## 示例
+
+### 可滑动
+
+<Callout type="info">
+  在桌面端和 web 端，按住 `Shift` 滚动即可在标签页之间滑动切换。
+</Callout>
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='tabs' variant='swipeable' height={500}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={swipeableSnippet} />
+  </Tab>
+</Tabs>
+

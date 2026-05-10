@@ -1,0 +1,80 @@
+---
+title: 工具提示
+description: 当 widget 获得焦点、被悬停或被长按时，tooltip 会显示与之相关的信息。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.tooltip/
+---
+
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/tooltip/default.json';
+import tooltipUsage from '@/snippets/usages/widgets/tooltip/tooltip.json';
+import horizontalSnippet from '@/snippets/examples/tooltip/horizontal.json';
+import longPressOnlySnippet from '@/snippets/examples/tooltip/long-press-only.json';
+import groupSnippet from '@/snippets/examples/tooltip/group.json';
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='tooltip' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+要生成可定制的特定样式：
+
+<Tabs items={['Tooltip']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create tooltip
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+### `FTooltip(...)`
+<UsageSnippet usage={tooltipUsage} />
+
+## 示例
+
+### 分组
+
+将多个 tooltip 包裹在 `FTooltipGroup` 中，这样在第一个 tooltip 显示后，后续的 tooltip 会立即出现。
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='tooltip' variant='group' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={groupSnippet} />
+  </Tab>
+</Tabs>
+
+### 水平对齐
+
+你可以更改 tooltip 相对于按钮的对齐方式。
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='tooltip' variant='horizontal' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={horizontalSnippet} />
+  </Tab>
+</Tabs>
+
+### 仅长按
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='tooltip' variant='long-press-only' height={300}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={longPressOnlySnippet} />
+  </Tab>
+</Tabs>

@@ -1,0 +1,111 @@
+---
+title: 复选框
+description: 一个允许用户在选中和未选中状态之间切换的控件。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.checkbox/
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/checkbox/default.json';
+import leadingLabelSnippet from '@/snippets/examples/checkbox/leading-label.json';
+import disabledSnippet from '@/snippets/examples/checkbox/disabled.json';
+import errorSnippet from '@/snippets/examples/checkbox/error.json';
+import rawSnippet from '@/snippets/examples/checkbox/raw.json';
+import formSnippet from '@/snippets/examples/checkbox/form.json';
+import checkboxUsage from '@/snippets/usages/widgets/checkbox/checkbox.json';
+
+<Callout type="info">
+    对于触摸设备，通常推荐使用 [switch](/docs/form/switch) 而不是它。
+</Callout>
+
+<Callout type="info">
+    我们建议使用 [select group](/docs/form/select-group#checkbox-form) 来创建一组复选框。
+</Callout>
+
+<Tabs items={['预览', '代码']}>
+    <Tab>
+        <Widget name='checkbox'/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={defaultSnippet} />
+    </Tab>
+
+</Tabs>
+
+## CLI
+
+要生成可定制的特定样式：
+
+<Tabs items={['Checkbox']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create checkbox
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+### `FCheckbox(...)`
+<UsageSnippet usage={checkboxUsage} />
+
+## 示例
+
+### 前置标签
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='checkbox' variant='leading-label'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={leadingLabelSnippet} />
+  </Tab>
+</Tabs>
+
+### 禁用
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='checkbox' variant='disabled'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={disabledSnippet} />
+  </Tab>
+</Tabs>
+
+### 错误
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='checkbox' variant='error'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={errorSnippet} />
+  </Tab>
+</Tabs>
+
+### 无标签
+
+<Tabs items={['预览', '代码']}>
+    <Tab>
+        <Widget name='checkbox' variant='raw'/>
+    </Tab>
+    <Tab>
+        <CodeSnippet snippet={rawSnippet} />
+    </Tab>
+
+</Tabs>
+
+### 表单
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='checkbox' variant='form' height={550}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={formSnippet} />
+  </Tab>
+</Tabs>

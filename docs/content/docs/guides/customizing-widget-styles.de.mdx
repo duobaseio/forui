@@ -1,0 +1,92 @@
+---
+title: Widget-Styles anpassen
+description: Passen Sie einzelne Widget-Styles über Deltas und das CLI an.
+---
+
+import {Callout} from "fumadocs-ui/components/callout";
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import deltaSnippet from '@/snippets/snippets/guides/customizing_widget_styles/deltas/delta.json';
+import replaceSnippet from '@/snippets/snippets/guides/customizing_widget_styles/deltas/replace.json';
+import variantsDeltaApplySnippet from '@/snippets/snippets/guides/customizing_widget_styles/deltas/variants/variants_delta.json';
+import variantsValueApplySnippet from '@/snippets/snippets/guides/customizing_widget_styles/deltas/variants/variants_value.json';
+import variantsReplaceSnippet from '@/snippets/snippets/guides/customizing_widget_styles/deltas/variants/variants_replace.json';
+import modifyStyleSnippet from '@/snippets/snippets/guides/customizing_widget_styles/cli/modify_style.json';
+import passStyleSnippet from '@/snippets/snippets/guides/customizing_widget_styles/cli/pass_style.json';
+
+Es gibt **2** Wege, einzelne Widget-Styles anzupassen: **Deltas** für kleine Anpassungen und das **CLI** für größere Umbauten.
+
+## Deltas
+
+Zu jedem Widget-Style gehört ein passendes Delta, das eine Teilmodifikation beschreibt. So besitzt
+[`FAccordionStyle`](https://pub.dev/documentation/forui/latest/forui.widgets.accordion/FAccordionStyle-class.html) etwa ein
+zugehöriges [`FAccordionStyleDelta`](https://pub.dev/documentation/forui/latest/forui.widgets.accordion/FAccordionStyleDelta-class.html).
+
+Widgets nehmen Deltas über ihren `style`-Parameter entgegen. Um die Fokus-Outline-Farbe eines Accordions zu ändern,
+ohne den Rest des Styles anzutasten:
+
+<CodeSnippet snippet={deltaSnippet} />
+
+Da Widget-Styles ihre zugehörigen Deltas erweitern, können Sie auch einen vollständigen Style übergeben, um den
+bestehenden komplett zu ersetzen:
+
+<CodeSnippet snippet={replaceSnippet} />
+
+Auch die folgenden in Flutter integrierten Typen besitzen passende Deltas:
+
+| Flutter-Typ                                                                                          | Delta                                                                                                                        |
+|------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------|
+| [`Decoration`](https://api.flutter.dev/flutter/painting/Decoration-class.html)                       | [`DecorationDelta`](https://pub.dev/documentation/forui/latest/forui.theme/DecorationDelta-class.html)                       |
+| [`BoxDecoration`](https://api.flutter.dev/flutter/painting/BoxDecoration-class.html)                 | [`BoxDecorationDelta`](https://pub.dev/documentation/forui/latest/forui.theme/BoxDecorationDelta-class.html)                 |
+| [`ShapeDecoration`](https://api.flutter.dev/flutter/painting/ShapeDecoration-class.html)             | [`ShapeDecorationDelta`](https://pub.dev/documentation/forui/latest/forui.theme/ShapeDecorationDelta-class.html)             |
+| [`EdgeInsetsGeometry`](https://api.flutter.dev/flutter/painting/EdgeInsetsGeometry-class.html)       | [`EdgeInsetsGeometryDelta`](https://pub.dev/documentation/forui/latest/forui.theme/EdgeInsetsGeometryDelta-class.html)       |
+| [`EdgeInsets`](https://api.flutter.dev/flutter/painting/EdgeInsets-class.html)                       | [`EdgeInsetsDelta`](https://pub.dev/documentation/forui/latest/forui.theme/EdgeInsetsDelta-class.html)                       |
+| [`EdgeInsetsDirectional`](https://api.flutter.dev/flutter/painting/EdgeInsetsDirectional-class.html) | [`EdgeInsetsDirectionalDelta`](https://pub.dev/documentation/forui/latest/forui.theme/EdgeInsetsDirectionalDelta-class.html) |
+| [`IconThemeData`](https://api.flutter.dev/flutter/widgets/IconThemeData-class.html)                  | [`IconThemeDataDelta`](https://pub.dev/documentation/forui/latest/forui.theme/IconThemeDataDelta-class.html)                 |
+| [`TextStyle`](https://api.flutter.dev/flutter/painting/TextStyle-class.html)                         | [`TextStyleDelta`](https://pub.dev/documentation/forui/latest/forui.theme/TextStyleDelta-class.html)                         |
+
+
+### Varianten
+
+Widget-Styles enthalten [`FVariants`](/docs/concepts/themes#variants)-Felder. Sie lassen sich über eine
+`delta(...)`-Funktion anpassen, die eine Folge von Operationen entgegennimmt. Je nach Typ der Variante sind diese
+Operationen entweder Delta-basierte Modifikationen oder vollständige Ersetzungen.
+
+Es gibt **3** Wege, `FVariants`-Felder anzupassen:
+
+Zusammengesetzte Typen wie `BoxDecoration`, `IconThemeData`, `TextStyle` und verschachtelte Styles unterstützen
+Delta-basierte Modifikationen. Um den Titel-Textstil eines Accordions zu ändern:
+
+<CodeSnippet snippet={variantsDeltaApplySnippet} />
+
+Atomare Typen wie `double` und `Color` unterstützen nur vollständige Ersetzungen. Um die Rahmenfarbe eines Radios zu ändern:
+
+<CodeSnippet snippet={variantsValueApplySnippet} />
+
+Wie Widget-Styles können auch `FVariants` vollständig ersetzt werden, indem Sie direkt ein `FVariants` übergeben.
+Um den Titel-Textstil eines Accordions zu ersetzen:
+
+<CodeSnippet snippet={variantsReplaceSnippet} />
+
+
+## CLI
+
+Der folgende Abschnitt zeigt, wie der Style eines Accordions überschrieben wird. Dieser Weg empfiehlt sich für größere
+Style-Umbauten.
+
+Erzeugen Sie einen Widget-Style mit:
+
+```shell copy
+dart run forui style create accordion
+```
+
+<Callout type="info">
+    Tipp: Mit `dart run forui style ls` sehen Sie alle verfügbaren Styles.
+</Callout>
+
+Um den Accordion-Titel im Fokus zu unterstreichen, passen Sie den generierten Style an:
+
+<CodeSnippet snippet={modifyStyleSnippet} />
+
+Übergeben Sie schließlich den angepassten Style an ein `FAccordion`:
+
+<CodeSnippet snippet={passStyleSnippet} />

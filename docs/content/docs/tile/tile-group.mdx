@@ -20,10 +20,10 @@ import tileGroupFullDivider from '@/snippets/examples/tile-group/full-divider.js
 import tileGroupNoDivider from '@/snippets/examples/tile-group/no-divider.json';
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='tile-group'/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={tileGroupDefault} />
   </Tab>
 </Tabs>
@@ -33,22 +33,22 @@ import tileGroupNoDivider from '@/snippets/examples/tile-group/no-divider.json';
 To generate a specific style for customization:
 
 <Tabs items={['Tile Group', 'Tiles', 'Tile', 'Tile Content']}>
-    <Tab value="Tile Group">
+    <Tab>
         ```shell copy
         dart run forui style create tile-group
         ````
     </Tab>
-    <Tab value="Tiles">
+    <Tab>
         ```shell copy
         dart run forui style create tiles
         ````
     </Tab>
-    <Tab value="Tile">
+    <Tab>
         ```shell copy
         dart run forui style create tile
         ````
     </Tab>
-    <Tab value="Tile Content">
+    <Tab>
         ```shell copy
         dart run forui style create tile-content
         ````
@@ -73,10 +73,10 @@ To generate a specific style for customization:
 #### Scrollable
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='tile-group' variant='scrollable' height={300}/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={tileGroupScrollable} />
   </Tab>
 </Tabs>
@@ -84,10 +84,10 @@ To generate a specific style for customization:
 #### Lazy Scrollable
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='tile-group' variant='lazy' height={300}/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={tileGroupLazy} />
   </Tab>
 </Tabs>
@@ -98,10 +98,10 @@ This function merges multiple `FTileGroupMixin`s into a single group. It is usef
 several sections.
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='tile-group' variant='merge' height={300}/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={tileGroupMerge} />
   </Tab>
 </Tabs>
@@ -111,10 +111,10 @@ several sections.
 #### Full Divider
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='tile-group' variant='full-divider'/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={tileGroupFullDivider} />
   </Tab>
 </Tabs>
@@ -122,10 +122,10 @@ several sections.
 #### No Divider
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='tile-group' variant='no-divider'/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={tileGroupNoDivider} />
   </Tab>
 </Tabs>

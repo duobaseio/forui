@@ -12,10 +12,10 @@ import defaultSnippet from '@/snippets/examples/divider/default.json';
 import dividerUsage from '@/snippets/usages/widgets/divider/divider.json';
 
 <Tabs items={['Preview', 'Code']}>
-  <Tab value="Preview">
+  <Tab>
     <Widget name='divider' height={300}/>
   </Tab>
-  <Tab value="Code">
+  <Tab>
     <CodeSnippet snippet={defaultSnippet} />
   </Tab>
 </Tabs>
@@ -25,7 +25,7 @@ import dividerUsage from '@/snippets/usages/widgets/divider/divider.json';
 To generate a specific style for customization:
 
 <Tabs items={['Dividers']}>
-    <Tab value="Dividers">
+    <Tab>
         ```shell copy
         dart run forui style create dividers
         ````

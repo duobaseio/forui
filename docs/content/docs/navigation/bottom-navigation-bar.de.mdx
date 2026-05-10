@@ -1,0 +1,52 @@
+---
+title: Untere Navigationsleiste
+description: Eine Bottom Navigation Bar befindet sich üblicherweise am unteren Rand von Stammseiten. Sie wird zur Navigation zwischen einer kleinen Anzahl von Ansichten verwendet, typischerweise drei bis fünf.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.bottom_navigation_bar/
+---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/bottom-navigation-bar/default.json';
+import bottomNavigationBarUsage from '@/snippets/usages/widgets/bottom_navigation_bar/bottomNavigationBar.json';
+import bottomNavigationBarItemUsage from '@/snippets/usages/widgets/bottom_navigation_bar/bottomNavigationBarItem.json';
+
+<Tabs items={['Vorschau', 'Code']}>
+  <Tab>
+    <Widget name='bottom-navigation-bar'/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+Um einen bestimmten Style zur Anpassung zu erzeugen:
+
+<Tabs items={['Bottom Navigation Bar', 'Bottom Navigation Bar Item']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create bottom-navigation-bar
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create bottom-navigation-bar-item
+        ````
+    </Tab>
+</Tabs>
+
+## Verwendung
+
+<Callout type="info">
+  Eine Bottom Navigation Bar wird üblicherweise mit `FScaffold` verwendet. Ein lauffähiges Beispiel finden Sie [hier](/docs/layout/scaffold).
+</Callout>
+
+### `FBottomNavigationBar(...)`
+<UsageSnippet usage={bottomNavigationBarUsage} />
+
+### `FBottomNavigationBarItem(...)`
+<UsageSnippet usage={bottomNavigationBarItemUsage} />

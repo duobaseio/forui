@@ -1,0 +1,58 @@
+---
+title: Responsive
+description: Plattformvarianten und responsive Breakpoints für adaptive Layouts.
+---
+
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import platformVariantsSnippet from '@/snippets/snippets/concepts/responsive/platform_variants.json';
+import usageSnippet from '@/snippets/snippets/concepts/responsive/usage.json';
+import customBreakpointsSnippet from '@/snippets/snippets/concepts/responsive/custom_breakpoints.json';
+import customBreakpointsUsageSnippet from '@/snippets/snippets/concepts/responsive/custom_breakpoints_usage.json';
+import platformOverrideSnippet from '@/snippets/snippets/concepts/responsive/platform_override.json';
+
+Forui stellt plattformbewusste Theme-Varianten und responsive Breakpoints bereit, mit denen sich adaptive Layouts umsetzen lassen.
+
+## Plattform-Themes
+
+Jedes vordefinierte Theme enthält sowohl eine **Desktop**- als auch eine **Touch**-Variante. Touch-Varianten verwenden größere Trefferflächen
+und auf Touch-Eingabe optimierte Abstände, während Desktop-Varianten kompakter sind.
+
+<CodeSnippet snippet={platformVariantsSnippet} />
+
+Die aktuelle Plattform wird automatisch erkannt und ist über [`context.platformVariant`](https://pub.dev/documentation/forui/latest/forui.theme/FAdaptiveBuildContext/platformVariant.html) verfügbar.
+Zu den Touch-Plattformen zählen Android, iOS und Fuchsia, zu den Desktop-Plattformen Windows, macOS und Linux.
+
+Die erkannte Plattform lässt sich über den Parameter `platform` von `FTheme` überschreiben:
+
+<CodeSnippet snippet={platformOverrideSnippet} />
+
+## Breakpoints
+
+Forui enthält außerdem responsive Breakpoints, die an [Tailwind CSS](https://tailwindcss.com/docs/responsive-design) angelehnt sind.
+
+### Vordefinierte Breakpoints
+
+Alle Breakpoints sind in logischen Pixeln angegeben. Mobilgeräte sind in der Regel kleiner als `sm` (640),
+während Tablet- und Desktop-Geräte üblicherweise größer als `md` (768) bzw. `lg` (1024) sind.
+
+| Breakpoint | Mindestbreite | Zugriff                      |
+| :--------- | :------------ | :--------------------------- |
+| `sm`       | 640           | `FThemeData.breakpoints.sm`  |
+| `md`       | 768           | `FThemeData.breakpoints.md`  |
+| `lg`       | 1024          | `FThemeData.breakpoints.lg`  |
+| `xl`       | 1280          | `FThemeData.breakpoints.xl`  |
+| `xl2`      | 1536          | `FThemeData.breakpoints.xl2` |
+
+### Verwendung
+
+<CodeSnippet snippet={usageSnippet} />
+
+### Eigene Breakpoints
+
+Zusätzliche Breakpoints lassen sich über eine Extension auf `FBreakpoints` ergänzen:
+
+<CodeSnippet snippet={customBreakpointsSnippet} />
+
+Anschließend kann der eigene Breakpoint wie folgt verwendet werden:
+
+<CodeSnippet snippet={customBreakpointsUsageSnippet} />

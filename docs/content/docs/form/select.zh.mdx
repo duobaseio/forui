@@ -1,0 +1,228 @@
+---
+title: 选择
+description: select 显示一个下拉选项列表，供用户挑选。它是一个表单字段，因此可在表单中使用。
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.select/
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import selectUsage from '@/snippets/usages/widgets/select/select.json';
+import selectRichUsage from '@/snippets/usages/widgets/select/selectRich.json';
+import selectSearchUsage from '@/snippets/usages/widgets/select/selectSearch.json';
+import selectSearchBuilderUsage from '@/snippets/usages/widgets/select/selectSearchBuilder.json';
+import defaultSnippet from '@/snippets/examples/select/default.json';
+import detailedSnippet from '@/snippets/examples/select/detailed.json';
+import sectionSnippet from '@/snippets/examples/select/section.json';
+import dividerSnippet from '@/snippets/examples/select/divider.json';
+import syncSnippet from '@/snippets/examples/select/sync.json';
+import asyncSnippet from '@/snippets/examples/select/async.json';
+import asyncLoadingSnippet from '@/snippets/examples/select/async-loading.json';
+import asyncErrorSnippet from '@/snippets/examples/select/async-error.json';
+import toggleableSnippet from '@/snippets/examples/select/toggleable.json';
+import clearableSnippet from '@/snippets/examples/select/clearable.json';
+import formatSnippet from '@/snippets/examples/select/format.json';
+import popoverBuilderSnippet from '@/snippets/examples/select/popover-builder.json';
+import formSnippet from '@/snippets/examples/select/form.json';
+
+<Callout type="info">
+    对于多选，请考虑使用 [multi select](/docs/form/multi-select)。
+
+    在触摸设备上，通常推荐使用 [select tile group](/docs/tile/select-tile-group) 或
+    [select menu tile](/docs/tile/select-menu-tile) 替代此组件。
+</Callout>
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='select' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+要生成可自定义的特定样式：
+
+<Tabs items={['Select', 'Select Search', 'Select Content', 'Select Section', 'Select Scroll Handle']}>
+    <Tab>
+        ```shell copy
+        dart run forui style create select
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create select-search
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create select-content
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create select-section
+        ````
+    </Tab>
+    <Tab>
+        ```shell copy
+        dart run forui style create select-scroll-handle
+        ````
+    </Tab>
+</Tabs>
+
+## 用法
+
+### `FSelect(...)`
+<UsageSnippet usage={selectUsage} />
+
+### `FSelect.rich(...)`
+<UsageSnippet usage={selectRichUsage} />
+
+### `FSelect.search(...)`
+<UsageSnippet usage={selectSearchUsage} />
+
+### `FSelect.searchBuilder(...)`
+<UsageSnippet usage={selectSearchBuilderUsage} />
+
+## 示例
+
+### 详细
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='select' variant='detailed' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={detailedSnippet} />
+  </Tab>
+</Tabs>
+
+### 分组
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='select' variant='section' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={sectionSnippet} />
+  </Tab>
+</Tabs>
+
+### 分隔线
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='select' variant='divider' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={dividerSnippet} />
+  </Tab>
+</Tabs>
+
+### 可搜索
+
+#### 同步
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='select' variant='sync' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={syncSnippet} />
+  </Tab>
+</Tabs>
+
+#### 异步
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='select' variant='async' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={asyncSnippet} />
+  </Tab>
+</Tabs>
+
+#### 异步与自定义加载
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='select' variant='async-loading' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={asyncLoadingSnippet} />
+  </Tab>
+</Tabs>
+
+#### 异步与自定义错误处理
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='select' variant='async-error' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={asyncErrorSnippet} />
+  </Tab>
+</Tabs>
+
+### 行为
+
+#### 可切换项
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='select' variant='toggleable' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={toggleableSnippet} />
+  </Tab>
+</Tabs>
+
+#### 可清除
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='select' variant='clearable' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={clearableSnippet} />
+  </Tab>
+</Tabs>
+
+#### Popover 构建器
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='select' variant='popover-builder' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={popoverBuilderSnippet} />
+  </Tab>
+</Tabs>
+
+#### 自定义格式化
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='select' variant='format' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={formatSnippet} />
+  </Tab>
+</Tabs>
+
+### 表单
+
+<Tabs items={['预览', '代码']}>
+  <Tab>
+    <Widget name='select' variant='form' height={400}/>
+  </Tab>
+  <Tab>
+    <CodeSnippet snippet={formSnippet} />
+  </Tab>
+</Tabs>
