@@ -472,10 +472,7 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
                           ? widget.popoverBuilder(context, _controller)
                           : ClipPath(
                               clipBehavior: widget.popoverClipBehavior,
-                              clipper: InnerPathClipper(
-                                decoration: style.decoration,
-                                direction: Directionality.maybeOf(context) ?? .ltr,
-                              ),
+                              clipper: InnerPathClipper(decoration: style.decoration, direction: direction),
                               child: widget.popoverBuilder(context, _controller),
                             ),
                     ),
