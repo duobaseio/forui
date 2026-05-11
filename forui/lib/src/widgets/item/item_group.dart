@@ -446,10 +446,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
         child: DecoratedBox(
           decoration: style.decoration,
           child: ClipPath(
-            clipper: InnerPathClipper(
-              decoration: style.decoration,
-              direction: Directionality.maybeOf(context) ?? .ltr,
-            ),
+            clipper: InnerPathClipper(decoration: style.decoration, direction: Directionality.maybeOf(context) ?? .ltr),
             child: child,
           ),
         ),

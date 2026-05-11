@@ -210,10 +210,7 @@ void main() {
       );
       await tester.pumpAndSettle();
 
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('popover/clip-${clip.name}.png'),
-      );
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover/clip-${clip.name}.png'));
     });
   }
 }

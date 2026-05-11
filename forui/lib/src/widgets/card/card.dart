@@ -91,10 +91,7 @@ class FCard extends StatelessWidget {
           ? child
           : ClipPath(
               clipBehavior: clipBehavior,
-              clipper: InnerPathClipper(
-                decoration: decoration,
-                direction: Directionality.maybeOf(context) ?? .ltr,
-              ),
+              clipper: InnerPathClipper(decoration: decoration, direction: Directionality.maybeOf(context) ?? .ltr),
               child: child,
             ),
     );
