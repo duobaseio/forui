@@ -57,4 +57,20 @@ void main() {
       });
     }
   }
+
+  for (final clip in [Clip.none, Clip.antiAlias]) {
+    testWidgets('clip ${clip.name}', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FAlert(
+            clipBehavior: clip,
+            style: const .delta(padding: .value(.zero)),
+            title: const ColoredBox(color: Colors.red, child: SizedBox(width: 200, height: 30)),
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('alert/clip-${clip.name}.png'));
+    });
+  }
 }

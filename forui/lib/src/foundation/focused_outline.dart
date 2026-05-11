@@ -1,3 +1,4 @@
+import 'dart:math' as math;
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
@@ -71,10 +72,12 @@ class _Outline extends RenderProxyBox {
   void paint(PaintingContext context, Offset offset) {
     context.paintChild(child!, offset);
     if (focused) {
+      final size = child!.size;
+      final spacing = math.max(_style.spacing, -math.min(size.width, size.height) / 2);
       context.canvas.drawPath(
         RoundedSuperellipseBorder(
           borderRadius: _style.borderRadius.resolve(_textDirection),
-        ).getOuterPath((offset & child!.size).inflate(_style.spacing), textDirection: _textDirection),
+        ).getOuterPath((offset & size).inflate(spacing), textDirection: _textDirection),
         Paint()
           ..style = .stroke
           ..color = _style.color
@@ -140,7 +143,7 @@ class FFocusedOutlineStyle with Diagnosticable, _$FFocusedOutlineStyleFunctions 
   @override
   final double width;
 
-  /// The spacing between the outline and the outlined widget. Defaults to 3.
+  /// The spacing between the outline and the outlined widget. Can be negative. Defaults to 3.
   @override
   final double spacing;
 

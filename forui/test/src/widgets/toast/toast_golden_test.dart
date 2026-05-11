@@ -1,7 +1,7 @@
 @Tags(['golden'])
 library;
 
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
@@ -88,4 +88,20 @@ void main() {
 
     await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/glassmorphic.png'));
   });
+
+  for (final clip in [Clip.none, Clip.antiAlias]) {
+    testWidgets('clip ${clip.name}', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FToast(
+            clipBehavior: clip,
+            style: const .delta(padding: .value(.zero)),
+            title: const ColoredBox(color: Colors.red, child: SizedBox(width: 200, height: 30)),
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('toast/clip-${clip.name}.png'));
+    });
+  }
 }

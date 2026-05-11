@@ -144,6 +144,23 @@ void main() {
       await expectBlueScreen();
     });
 
+    for (final clip in [Clip.none, Clip.antiAlias]) {
+      testWidgets('clip ${clip.name}', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme,
+            child: FDialog.raw(
+              clipBehavior: clip,
+              builder: (context, style) =>
+                  const ColoredBox(color: Colors.red, child: SizedBox(width: 200, height: 100)),
+            ),
+          ),
+        );
+
+        await expectLater(find.byType(FDialog), matchesGoldenFile('dialog/clip-${clip.name}.png'));
+      });
+    }
+
     testWidgets('raw content', (tester) async {
       await tester.pumpWidget(
         TestScaffold(

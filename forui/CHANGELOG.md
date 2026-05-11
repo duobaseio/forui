@@ -1,10 +1,18 @@
 ## 0.22.0 (Next)
 
+### `FAlert`
+* Add `FAlert.clipBehavior` to clip the alert's content to the inner path of its decoration. Defaults to `Clip.none`.
+
+
 ### `FAutocomplete`
 * Fix `FAutocomplete` not showing context menu by default.
 
 ### `FButton`
 * Fix `FButton` announcing both `semanticsLabel` and child semantics when `semanticsLabel` is set.
+
+
+### `FCard`
+* Add `FCard.clipBehavior` to clip the card's content to the inner path of its decoration. Defaults to `Clip.none`.
 
 
 ### `FColors`
@@ -13,14 +21,7 @@
 
 ### `FDialog`
 * Add `FDialog.resizeToAvoidInsets` to opt out of view insets padding.
-
-
-### `FStyle` & `FThemeData`
-* Add `FThemeData.hapticFeedback`.
-
-* **Breaking** Remove `FStyle.hapticFeedback`. Use `FThemeData.hapticFeedback` instead.
-* **Breaking** Remove `colors`, `typography`, and `style` parameters from `FThemeData.copyWith`. Rebuild `FThemeData`
-  directly to change these.
+* Add `FDialog.clipBehavior` to clip the dialog's content to the inner path of its decoration. Defaults to `Clip.none`.
 
 
 ### `FHeaderAction`
@@ -41,9 +42,36 @@
 * **Breaking** Rename `FItemStyle.margin` to `FItemStyle.padding`.
 * **Breaking** Rename `FItemStyle.decoration` to `FItemStyle.contentDecoration`.
 
+* Fix `FItemGroup` content not clipping properly at rounded corners.
+
 
 ### `FPagination`
 * Add settable `FPaginationController.pages`, `FPaginationController.siblings`, and `FPaginationController.showEdges`.
+
+
+### `FPopover`
+* Add `FPopover.popoverClipBehavior` to clip the popover's content to the inner path of its decoration. Defaults to
+  `Clip.none`.
+
+
+### `FPopoverMenu`
+* Fix `FPopoverMenu` content not clipping properly at rounded corners.
+
+
+### `FStyle` & `FThemeData`
+* Add `FThemeData.hapticFeedback`.
+
+* **Breaking** Remove `FStyle.hapticFeedback`. Use `FThemeData.hapticFeedback` instead.
+* **Breaking** Remove `colors`, `typography`, and `style` parameters from `FThemeData.copyWith`. Rebuild `FThemeData`
+  directly to change these.
+
+
+### `FToast`
+* Add `FToast.clipBehavior` to clip the toast's content to the inner path of its decoration. Defaults to `Clip.none`.
+
+
+### `FTileGroup`
+* Fix `FTileGroup` content not clipping properly at rounded corners.
 
 
 ### `FTypography`

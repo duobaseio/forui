@@ -48,5 +48,21 @@ void main() {
 
       expect(count, 0);
     });
+
+    for (final spacing in [-3.0, -50.0, -1000.0]) {
+      testWidgets('paints without crashing for negative spacing $spacing', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            child: FFocusedOutline(
+              focused: true,
+              style: FFocusedOutlineStyle(color: const Color(0xFF000000), borderRadius: .circular(4), spacing: spacing),
+              child: Container(width: 100, height: 100, color: Colors.blue),
+            ),
+          ),
+        );
+
+        expect(tester.takeException(), null);
+      });
+    }
   });
 }

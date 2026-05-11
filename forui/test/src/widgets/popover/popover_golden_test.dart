@@ -189,4 +189,31 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover/glassmorphic-${theme.name}.png'));
     });
   }
+
+  for (final clip in [Clip.none, Clip.antiAlias]) {
+    testWidgets('clip ${clip.name}', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FPopover(
+            control: const .managed(initial: true),
+            popoverClipBehavior: clip,
+            popoverBuilder: (context, _) => const Column(
+              mainAxisSize: .min,
+              children: [
+                SizedBox(width: 200, height: 30, child: ColoredBox(color: Colors.red)),
+                SizedBox(width: 200, height: 30),
+              ],
+            ),
+            child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 100)),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('popover/clip-${clip.name}.png'),
+      );
+    });
+  }
 }

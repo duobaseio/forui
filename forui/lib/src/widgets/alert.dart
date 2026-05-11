@@ -5,6 +5,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
+import 'package:forui/src/foundation/inner_path_clipper.dart';
 import 'package:forui/src/theme/variant.dart';
 
 @Variants('FAlert', {'primary': (1, 'The primary alert style.'), 'destructive': (2, 'The destructive alert style.')})
@@ -52,6 +53,14 @@ class FAlert extends StatelessWidget {
   /// ```
   final FAlertStyleDelta style;
 
+  /// The clip behavior applied to the alert's content.
+  ///
+  /// When set to a value other than [Clip.none], the alert's content is clipped to the inner path of its decoration,
+  /// so children cannot overflow the rounded corners or paint over the border ring.
+  ///
+  /// Defaults to [Clip.none].
+  final Clip clipBehavior;
+
   /// The title of the alert.
   final Widget title;
 
@@ -72,6 +81,7 @@ class FAlert extends StatelessWidget {
   /// ```
   const FAlert({
     required this.title,
+    this.clipBehavior = .none,
     this.icon = const Icon(FIcons.circleAlert),
     this.subtitle,
     this.variant = .primary,
@@ -82,39 +92,50 @@ class FAlert extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = this.style(context.theme.alertStyles.resolve({variant, context.platformVariant}));
-    return DecoratedBox(
-      decoration: style.decoration,
-      child: Padding(
-        padding: style.padding,
-        child: Column(
-          mainAxisSize: .min,
-          children: [
+    final Widget content = Padding(
+      padding: style.padding,
+      child: Column(
+        mainAxisSize: .min,
+        children: [
+          Row(
+            children: [
+              IconTheme(data: style.iconStyle, child: icon),
+              Flexible(
+                child: Padding(
+                  padding: const .only(left: 10),
+                  child: DefaultTextStyle.merge(style: style.titleTextStyle, child: title),
+                ),
+              ),
+            ],
+          ),
+          if (subtitle case final subtitle?)
             Row(
               children: [
-                IconTheme(data: style.iconStyle, child: icon),
+                SizedBox(width: style.iconStyle.size),
                 Flexible(
                   child: Padding(
-                    padding: const .only(left: 10),
-                    child: DefaultTextStyle.merge(style: style.titleTextStyle, child: title),
+                    padding: const .only(top: 2, left: 10),
+                    child: DefaultTextStyle.merge(style: style.subtitleTextStyle, child: subtitle),
                   ),
                 ),
               ],
             ),
-            if (subtitle case final subtitle?)
-              Row(
-                children: [
-                  SizedBox(width: style.iconStyle.size),
-                  Flexible(
-                    child: Padding(
-                      padding: const .only(top: 2, left: 10),
-                      child: DefaultTextStyle.merge(style: style.subtitleTextStyle, child: subtitle),
-                    ),
-                  ),
-                ],
-              ),
-          ],
-        ),
+        ],
       ),
+    );
+
+    return DecoratedBox(
+      decoration: style.decoration,
+      child: clipBehavior == .none
+          ? content
+          : ClipPath(
+              clipBehavior: clipBehavior,
+              clipper: InnerPathClipper(
+                decoration: style.decoration,
+                direction: Directionality.maybeOf(context) ?? .ltr,
+              ),
+              child: content,
+            ),
     );
   }
 
@@ -123,7 +144,8 @@ class FAlert extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('variant', variant))
-      ..add(DiagnosticsProperty('style', style));
+      ..add(DiagnosticsProperty('style', style))
+      ..add(EnumProperty('clipBehavior', clipBehavior));
   }
 }
 

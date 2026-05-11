@@ -333,6 +333,7 @@ class FItem extends StatelessWidget with FItemMixin {
           ),
           false => FTappable(
             style: style.tappableStyle,
+            focusedOutlineStyle: style.focusedOutlineStyle,
             semanticsLabel: semanticsLabel,
             autofocus: autofocus,
             focusNode: focusNode,
@@ -360,27 +361,17 @@ class FItem extends StatelessWidget with FItemMixin {
             builder: (context, variants, _) {
               final decoration = style.contentDecoration.resolve(variants);
               return DecoratedBox(
-                position: .foreground,
-                decoration: switch (style.focusedOutlineStyle) {
-                  final outline? when variants.contains(FTappableVariant.focused) => BoxDecoration(
-                    border: .all(color: outline.color, width: outline.width),
-                    borderRadius: outline.borderRadius,
-                  ),
-                  _ => const BoxDecoration(),
-                },
-                child: DecoratedBox(
-                  decoration: decoration,
-                  child: _builder(
-                    context,
-                    style,
-                    top,
-                    bottom,
-                    variants,
-                    data.dividerColor,
-                    decoration.color ?? background,
-                    data.dividerWidth,
-                    divider,
-                  ),
+                decoration: decoration,
+                child: _builder(
+                  context,
+                  style,
+                  top,
+                  bottom,
+                  variants,
+                  data.dividerColor,
+                  decoration.color ?? background,
+                  data.dividerWidth,
+                  divider,
                 ),
               );
             },
@@ -586,7 +577,7 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
            pressedEnterDuration: .zero,
            pressedExitDuration: const Duration(milliseconds: 25),
          ),
-         focusedOutlineStyle: style.focusedOutlineStyle,
+         focusedOutlineStyle: style.focusedOutlineStyle.copyWith(spacing: -style.borderWidth),
          padding: const .symmetric(horizontal: 4),
        );
 }

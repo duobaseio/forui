@@ -401,6 +401,7 @@ class _FPopoverMenuState extends State<FPopoverMenu> {
     return FPopover(
       control: widget.control,
       style: style,
+      popoverClipBehavior: .antiAlias,
       constraints: FPortalConstraints(minWidth: style.minWidth, maxWidth: style.maxWidth),
       popoverAnchor: widget.menuAnchor,
       childAnchor: widget.childAnchor,

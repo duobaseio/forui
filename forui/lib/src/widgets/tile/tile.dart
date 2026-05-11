@@ -407,7 +407,7 @@ class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
           pressedEnterDuration: .zero,
           pressedExitDuration: const Duration(milliseconds: 25),
         ),
-        focusedOutlineStyle: style.focusedOutlineStyle,
+        focusedOutlineStyle: style.focusedOutlineStyle.copyWith(spacing: -style.borderWidth * 2),
         shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
       );
 }

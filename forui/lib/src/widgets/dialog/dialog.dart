@@ -8,6 +8,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
+import 'package:forui/src/foundation/inner_path_clipper.dart';
 import 'package:forui/src/theme/variant.dart';
 import 'package:forui/src/widgets/dialog/dialog_content.dart';
 
@@ -261,6 +262,14 @@ class FDialog extends StatefulWidget {
   /// ```
   final FDialogStyleDelta style;
 
+  /// The clip behavior applied to the dialog's content.
+  ///
+  /// When set to a value other than [Clip.none], the dialog's content is clipped to the inner path of its decoration,
+  /// so children cannot overflow the rounded corners or paint over the border ring.
+  ///
+  /// Defaults to [Clip.none].
+  final Clip clipBehavior;
+
   /// The animation used to animate the dialog's entrance and exit. Settings this to null will disable the animation.
   ///
   /// It is the responsibility of the caller to manage & dispose the given [animation].
@@ -325,6 +334,7 @@ class FDialog extends StatefulWidget {
   FDialog({
     required List<Widget> actions,
     this.style = const .context(),
+    this.clipBehavior = .none,
     this.animation,
     this.semanticsLabel,
     this.constraints = const BoxConstraints(minWidth: 280, maxWidth: 560),
@@ -363,6 +373,7 @@ class FDialog extends StatefulWidget {
   FDialog.adaptive({
     required List<Widget> actions,
     this.style = const .context(),
+    this.clipBehavior = .none,
     this.animation,
     this.semanticsLabel,
     this.constraints = const BoxConstraints(minWidth: 280, maxWidth: 560),
@@ -396,6 +407,7 @@ class FDialog extends StatefulWidget {
   const FDialog.raw({
     required this.builder,
     this.style = const .context(),
+    this.clipBehavior = .none,
     this.animation,
     this.semanticsLabel,
     this.constraints = const BoxConstraints(minWidth: 280, maxWidth: 560),
@@ -415,6 +427,7 @@ class FDialog extends StatefulWidget {
       ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(DiagnosticsProperty('constraints', constraints))
       ..add(FlagProperty('resizeToAvoidInsets', value: resizeToAvoidInsets, ifFalse: 'do not resize for view insets'))
+      ..add(EnumProperty('clipBehavior', clipBehavior))
       ..add(ObjectFlagProperty.has('builder', builder));
   }
 }
@@ -469,7 +482,16 @@ class _FDialogState extends State<FDialog> {
     final style = widget.style(context.theme.dialogStyle);
     final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
 
-    Widget dialog = DecoratedBox(decoration: style.decoration, child: widget.builder(context, style));
+    Widget dialog = DecoratedBox(
+      decoration: style.decoration,
+      child: widget.clipBehavior == .none
+          ? widget.builder(context, style)
+          : ClipPath(
+              clipBehavior: widget.clipBehavior,
+              clipper: InnerPathClipper(decoration: style.decoration, direction: direction),
+              child: widget.builder(context, style),
+            ),
+    );
 
     // We cannot handle the transition in [FDialogRoute] because of https://github.com/flutter/flutter/issues/31706.
     if (_fade case final fade?) {

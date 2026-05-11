@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/inner_path_clipper.dart';
 
 /// A toast.
 ///
@@ -45,6 +46,14 @@ class FToast extends StatelessWidget {
   /// ```
   final FToastStyleDelta style;
 
+  /// The clip behavior applied to the toast's content.
+  ///
+  /// When set to a value other than [Clip.none], the toast's content is clipped to the inner path of its decoration,
+  /// so children cannot overflow the rounded corners or paint over the border ring.
+  ///
+  /// Defaults to [Clip.none].
+  final Clip clipBehavior;
+
   /// An optional icon aligned to the start of the toast (left in LTR locales).
   final Widget? icon;
 
@@ -62,6 +71,7 @@ class FToast extends StatelessWidget {
     required this.title,
     this.variant = .primary,
     this.style = const .context(),
+    this.clipBehavior = .none,
     this.icon,
     this.description,
     this.suffix,
@@ -71,33 +81,44 @@ class FToast extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = this.style(context.theme.toasterStyle.toastStyles.resolve({variant, context.platformVariant}));
-    Widget toast = DecoratedBox(
-      decoration: style.decoration,
-      child: Padding(
-        padding: style.padding,
-        child: Row(
-          mainAxisSize: .min,
-          children: [
-            if (icon case final icon?) ...[
-              IconTheme(data: style.iconStyle, child: icon),
-              SizedBox(width: style.iconSpacing),
-            ],
-            Flexible(
-              child: Column(
-                crossAxisAlignment: .start,
-                mainAxisSize: .min,
-                spacing: style.titleSpacing,
-                children: [
-                  DefaultTextStyle(style: style.titleTextStyle, maxLines: 100, child: title),
-                  if (description case final description?)
-                    DefaultTextStyle(style: style.descriptionTextStyle, maxLines: 100, child: description),
-                ],
-              ),
-            ),
-            if (suffix case final suffix?) ...[SizedBox(width: style.suffixSpacing), suffix],
+    Widget toast = Padding(
+      padding: style.padding,
+      child: Row(
+        mainAxisSize: .min,
+        children: [
+          if (icon case final icon?) ...[
+            IconTheme(data: style.iconStyle, child: icon),
+            SizedBox(width: style.iconSpacing),
           ],
-        ),
+          Flexible(
+            child: Column(
+              crossAxisAlignment: .start,
+              mainAxisSize: .min,
+              spacing: style.titleSpacing,
+              children: [
+                DefaultTextStyle(style: style.titleTextStyle, maxLines: 100, child: title),
+                if (description case final description?)
+                  DefaultTextStyle(style: style.descriptionTextStyle, maxLines: 100, child: description),
+              ],
+            ),
+          ),
+          if (suffix case final suffix?) ...[SizedBox(width: style.suffixSpacing), suffix],
+        ],
       ),
+    );
+
+    toast = DecoratedBox(
+      decoration: style.decoration,
+      child: clipBehavior == .none
+          ? toast
+          : ClipPath(
+              clipBehavior: clipBehavior,
+              clipper: InnerPathClipper(
+                decoration: style.decoration,
+                direction: Directionality.maybeOf(context) ?? .ltr,
+              ),
+              child: toast,
+            ),
     );
 
     if (style.backgroundFilter case final background?) {
@@ -121,6 +142,7 @@ class FToast extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('variant', variant))
-      ..add(DiagnosticsProperty('style', style));
+      ..add(DiagnosticsProperty('style', style))
+      ..add(EnumProperty('clipBehavior', clipBehavior));
   }
 }

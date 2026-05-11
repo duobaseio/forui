@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/inner_path_clipper.dart';
 import 'package:forui/src/widgets/card/card_content.dart';
 
 part 'card.design.dart';
@@ -36,6 +37,14 @@ class FCard extends StatelessWidget {
   /// ```
   final FCardStyleDelta style;
 
+  /// The clip behavior applied to the card's content.
+  ///
+  /// When set to a value other than [Clip.none], the card's content is clipped to the inner path of its decoration,
+  /// so children cannot overflow the rounded corners or paint over the border ring.
+  ///
+  /// Defaults to [Clip.none].
+  final Clip clipBehavior;
+
   /// The child.
   final Widget child;
 
@@ -59,6 +68,7 @@ class FCard extends StatelessWidget {
     Widget? child,
     MainAxisSize mainAxisSize = .min,
     this.style = const .context(),
+    this.clipBehavior = .none,
     super.key,
   }) : child = Content(
          image: image,
@@ -70,16 +80,32 @@ class FCard extends StatelessWidget {
        );
 
   /// Creates a [FCard] with custom content.
-  const FCard.raw({required this.child, this.style = const .context(), super.key});
+  const FCard.raw({required this.child, this.style = const .context(), this.clipBehavior = .none, super.key});
 
   @override
-  Widget build(BuildContext context) =>
-      DecoratedBox(decoration: style(context.theme.cardStyle).decoration, child: child);
+  Widget build(BuildContext context) {
+    final decoration = style(context.theme.cardStyle).decoration;
+    return DecoratedBox(
+      decoration: decoration,
+      child: clipBehavior == .none
+          ? child
+          : ClipPath(
+              clipBehavior: clipBehavior,
+              clipper: InnerPathClipper(
+                decoration: decoration,
+                direction: Directionality.maybeOf(context) ?? .ltr,
+              ),
+              child: child,
+            ),
+    );
+  }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DiagnosticsProperty('style', style));
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(EnumProperty('clipBehavior', clipBehavior));
   }
 }
 

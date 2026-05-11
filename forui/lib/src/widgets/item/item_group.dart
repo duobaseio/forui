@@ -8,6 +8,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
+import 'package:forui/src/foundation/inner_path_clipper.dart';
 import 'package:forui/src/theme/variant.dart';
 
 @Variants('FItemGroup', {
@@ -442,18 +443,15 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
       label: semanticsLabel,
       child: ConstrainedBox(
         constraints: BoxConstraints(maxHeight: maxHeight),
-        // We use a Container instead of DecoratedBox as using a DecoratedBox will cause the border to be clipped.
-        // ignore: use_decorated_box
-        child: Container(
+        child: DecoratedBox(
           decoration: style.decoration,
-          child: switch (style.decoration) {
-            ShapeDecoration(:final shape) => ClipPath(
-              clipper: ShapeBorderClipper(shape: shape, textDirection: Directionality.maybeOf(context)),
-              child: child,
+          child: ClipPath(
+            clipper: InnerPathClipper(
+              decoration: style.decoration,
+              direction: Directionality.maybeOf(context) ?? .ltr,
             ),
-            BoxDecoration(:final borderRadius?) => ClipRRect(borderRadius: borderRadius, child: child),
-            _ => child,
-          },
+            child: child,
+          ),
         ),
       ),
     );
