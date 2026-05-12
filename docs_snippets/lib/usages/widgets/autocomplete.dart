@@ -95,7 +95,7 @@ final autocomplete = FAutocomplete(
   contentBuilder: (context, query, values) => [for (final value in values) .item(value: value)],
   contentEmptyBuilder: FAutocomplete.defaultContentEmptyBuilder,
   contentLoadingBuilder: FAutocomplete.defaultContentLoadingBuilder,
-  contentErrorBuilder: (context, error, stackTrace) => const Text('Error'),
+  contentErrorBuilder: (context, style, error, stackTrace) => const Text('Error'),
   contentDivider: .none,
   filter: (query) => ['Apple', 'Banana'].where((item) => item.toLowerCase().startsWith(query.toLowerCase())),
   // {@endcategory}
@@ -198,7 +198,7 @@ final builder = FAutocomplete.builder(
   contentScrollController: null,
   contentEmptyBuilder: FAutocomplete.defaultContentEmptyBuilder,
   contentLoadingBuilder: FAutocomplete.defaultContentLoadingBuilder,
-  contentErrorBuilder: (context, error, stackTrace) => const Text('Error'),
+  contentErrorBuilder: (context, style, error, stackTrace) => const Text('Error'),
   contentPhysics: const ClampingScrollPhysics(),
   contentDivider: .none,
   // {@endcategory}

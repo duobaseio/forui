@@ -186,7 +186,7 @@ class AsyncErrorAutocompletePage extends Example {
     },
     contentBuilder: (context, query, values) => [for (final fruit in values) .item(value: fruit)],
     // {@highlight}
-    contentErrorBuilder: (context, error, trace) => Padding(
+    contentErrorBuilder: (context, style, error, trace) => Padding(
       padding: const .all(14.0),
       child: Icon(FIcons.circleX, size: 15, color: context.theme.colors.primary),
     ),

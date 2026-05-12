@@ -5,6 +5,14 @@
 
 
 ### `FAutocomplete`
+* Add `FAutocomplete.defaultContentErrorBuilder` and default `contentErrorBuilder` to it.
+
+* **Breaking** Add `FAutocompleteContentStyle` parameter to `FAutocomplete.contentErrorBuilder` callback.
+
+* Change `FAutocomplete.contentLoadingBuilder` to nullable; pass `null` to hide the popover while loading.
+* Change `FAutocomplete.contentEmptyBuilder` to nullable; pass `null` to hide the popover when there are no results.
+* Change `FAutocomplete.contentErrorBuilder`; pass `null` to hide the popover when there is an error.
+
 * Fix `FAutocomplete` not showing context menu by default.
 
 ### `FButton`

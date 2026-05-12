@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
@@ -45,12 +44,6 @@ typedef FAutocompletePopoverBuilder =
 /// * [FAutocompleteController] for customizing the behavior of an autocomplete.
 /// * [FAutocompleteStyle] for customizing the appearance of an autocomplete.
 class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
-  /// The default loading builder that shows a spinner when an asynchronous search is pending.
-  static Widget defaultContentLoadingBuilder(BuildContext _, FAutocompleteContentStyle style) => Padding(
-    padding: const .all(13),
-    child: FCircularProgress(style: style.progressStyle),
-  );
-
   /// The default empty builder that shows a localized message when there are no results.
   static Widget defaultContentEmptyBuilder(BuildContext context, FAutocompleteContentStyle style) {
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
@@ -59,6 +52,23 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
       child: Text(localizations.autocompleteNoResults, style: style.emptyTextStyle),
     );
   }
+
+  /// The default loading builder that shows a spinner when an asynchronous search is pending.
+  static Widget defaultContentLoadingBuilder(BuildContext _, FAutocompleteContentStyle style) => Padding(
+    padding: const .all(13),
+    child: FCircularProgress(style: style.progressStyle),
+  );
+
+  /// The default error builder that shows the error message when [filter] fails.
+  static Widget defaultContentErrorBuilder(
+    BuildContext context,
+    FAutocompleteContentStyle style,
+    Object? error,
+    StackTrace stackTrace,
+  ) => Padding(
+    padding: const .symmetric(horizontal: 8, vertical: 14),
+    child: Text('$error', style: style.emptyTextStyle),
+  );
 
   /// Defines how the autocomplete's state is controlled.
   ///
@@ -339,7 +349,9 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   final FutureOr<Iterable<String>> Function(String text) filter;
 
   /// The builder that is called when the select is empty. Defaults to [defaultContentEmptyBuilder].
-  final Widget Function(BuildContext context, FAutocompleteContentStyle style) contentEmptyBuilder;
+  ///
+  /// Pass `null` to hide the popover entirely when there are no results.
+  final Widget Function(BuildContext context, FAutocompleteContentStyle style)? contentEmptyBuilder;
 
   /// The content's scroll controller.
   final ScrollController? contentScrollController;
@@ -354,10 +366,16 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
   final FAutoCompleteContentBuilder contentBuilder;
 
   /// A callback that is used to show a loading indicator while the results is processed.
-  final Widget Function(BuildContext context, FAutocompleteContentStyle style) contentLoadingBuilder;
+  ///
+  /// Pass `null` to hide the popover entirely while loading.
+  final Widget Function(BuildContext context, FAutocompleteContentStyle style)? contentLoadingBuilder;
 
-  /// A callback that is used to show an error message when [filter] is asynchronous and fails.
-  final Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder;
+  /// A callback that is used to show an error message when [filter] is asynchronous and fails. Defaults to
+  /// [defaultContentErrorBuilder].
+  ///
+  /// Pass `null` to hide the popover entirely when there is an error.
+  final Widget Function(BuildContext context, FAutocompleteContentStyle style, Object? error, StackTrace stackTrace)?
+  contentErrorBuilder;
 
   /// Creates a [FAutocomplete] from the given [items].
   ///
@@ -449,11 +467,13 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     ScrollController? contentScrollController,
     ScrollPhysics contentPhysics = const ClampingScrollPhysics(),
     FItemDivider contentDivider = .none,
-    Widget Function(BuildContext context, FAutocompleteContentStyle style) contentEmptyBuilder =
+    Widget Function(BuildContext context, FAutocompleteContentStyle style)? contentEmptyBuilder =
         defaultContentEmptyBuilder,
-    Widget Function(BuildContext context, FAutocompleteContentStyle style) contentLoadingBuilder =
+    Widget Function(BuildContext context, FAutocompleteContentStyle style)? contentLoadingBuilder =
         defaultContentLoadingBuilder,
-    Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder,
+    Widget Function(BuildContext context, FAutocompleteContentStyle style, Object? error, StackTrace stackTrace)?
+        contentErrorBuilder =
+        defaultContentErrorBuilder,
     Key? key,
   }) : this.builder(
          filter: filter ?? (query) => items.where((item) => item.toLowerCase().startsWith(query.toLowerCase())),
@@ -638,7 +658,7 @@ class FAutocomplete extends StatefulWidget with FFormFieldProperties<String> {
     this.contentDivider = .none,
     this.contentEmptyBuilder = defaultContentEmptyBuilder,
     this.contentLoadingBuilder = defaultContentLoadingBuilder,
-    this.contentErrorBuilder,
+    this.contentErrorBuilder = defaultContentErrorBuilder,
     super.key,
   });
 
@@ -769,7 +789,7 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
     _popoverFocus = FocusScopeNode(debugLabel: 'FAutocomplete popover');
     _popoverController = widget.popoverControl.create(_handleOnPopoverChange, this);
     _controller = widget.control.create(_update, widget.filter);
-    _controller.loadSuggestions(_data = widget.filter(_controller.text));
+    _controller.loadSuggestions(_data = widget.filter(_controller.text)).ignore();
   }
 
   @override
@@ -786,7 +806,7 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
     final (controller, updated) = widget.control.update(old.control, _controller, _update, widget.filter);
     if (updated) {
       _controller = controller;
-      _controller.loadSuggestions(widget.filter(_controller.text));
+      _controller.loadSuggestions(widget.filter(_controller.text)).ignore();
     }
     _popoverController = widget.popoverControl
         .update(old.popoverControl, _popoverController, _handleOnPopoverChange, this)
@@ -811,22 +831,18 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
       return;
     }
 
-    if (_fieldFocus.hasFocus && !_popoverController.status.isForwardOrCompleted) {
-      final current = ++_monotonic;
-      SchedulerBinding.instance.addPostFrameCallback((_) {
-        if (current == _monotonic) {
-          _popoverController.show();
-        }
-      });
-    }
-
     setState(() {
       _previous = _controller.text;
-      _controller.loadSuggestions(_data = widget.filter(_controller.text));
+      _controller.loadSuggestions(_data = widget.filter(_controller.text)).ignore();
     });
 
     if (widget.control case FAutocompleteManagedControl(:final onChange?)) {
       onChange(_controller.value);
+    }
+
+    // Skip if text changed programmatically while the field isn't focused.
+    if (_fieldFocus.hasFocus) {
+      _toggle();
     }
   }
 
@@ -838,7 +854,7 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
         _controller.selection = TextSelection(baseOffset: 0, extentOffset: _controller.text.length);
       }
       _tapFocus = false;
-      _popoverController.show();
+      _toggle();
       // Hide the popover when the textfield loses focus and there are no completions to prevent focus from being trapped
       // in the empty popover.
     } else if (!_fieldFocus.hasFocus && _popoverFocus.descendants.isEmpty) {
@@ -846,6 +862,34 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
     }
 
     _restore = null;
+  }
+
+  void _toggle() {
+    final token = ++_monotonic;
+    final data = _data;
+
+    _apply(token, _content(data));
+    if (data is Future<Iterable<String>>) {
+      data.then(
+        (values) => _apply(token, _content(values)),
+        onError: (_, _) => _apply(token, widget.contentErrorBuilder != null),
+      );
+    }
+  }
+
+  bool _content(FutureOr<Iterable<String>> data) => switch (data) {
+    final Iterable<String> values => values.isNotEmpty || widget.contentEmptyBuilder != null,
+    Future<Iterable<String>>() => widget.contentLoadingBuilder != null,
+  };
+
+  void _apply(int token, bool show) {
+    if (mounted && token == _monotonic) {
+      if (show) {
+        _popoverController.show();
+      } else {
+        _popoverController.hide();
+      }
+    }
   }
 
   void _handleOnPopoverChange() {
@@ -904,7 +948,7 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
         showCursor: widget.showCursor,
         maxLength: widget.maxLength,
         maxLengthEnforcement: widget.maxLengthEnforcement,
-        onTap: _popoverController.show,
+        onTap: _toggle,
         onTapAlwaysCalled: true,
         onEditingComplete: widget.onEditingComplete,
         onSubmit: (value) {
@@ -1008,10 +1052,10 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
                     physics: widget.contentPhysics,
                     divider: widget.contentDivider,
                     data: _data,
-                    loadingBuilder: widget.contentLoadingBuilder,
+                    loadingBuilder: widget.contentLoadingBuilder ?? (_, _) => const SizedBox.shrink(),
                     builder: widget.contentBuilder,
-                    emptyBuilder: widget.contentEmptyBuilder,
-                    errorBuilder: widget.contentErrorBuilder,
+                    emptyBuilder: widget.contentEmptyBuilder ?? (_, _) => const SizedBox.shrink(),
+                    errorBuilder: widget.contentErrorBuilder ?? (_, _, _, _) => const SizedBox.shrink(),
                   ),
                 ),
               ),

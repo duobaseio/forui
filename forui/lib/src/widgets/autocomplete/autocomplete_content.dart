@@ -47,7 +47,8 @@ class Content extends StatelessWidget {
   final Widget Function(BuildContext context, FAutocompleteContentStyle style) loadingBuilder;
   final FAutoCompleteContentBuilder builder;
   final Widget Function(BuildContext context, FAutocompleteContentStyle style) emptyBuilder;
-  final Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? errorBuilder;
+  final Widget Function(BuildContext context, FAutocompleteContentStyle style, Object? error, StackTrace stackTrace)
+  errorBuilder;
 
   const Content({
     required this.controller,
@@ -73,12 +74,8 @@ class Content extends StatelessWidget {
         final Future<Iterable<String>> future => FutureBuilder(
           future: future,
           builder: (context, snapshot) => switch (snapshot.connectionState) {
-            ConnectionState.waiting => Center(child: loadingBuilder(context, style)),
-            _ when snapshot.hasError && errorBuilder != null => errorBuilder!.call(
-              context,
-              snapshot.error,
-              snapshot.stackTrace!,
-            ),
+            .waiting => Center(child: loadingBuilder(context, style)),
+            _ when snapshot.hasError => errorBuilder(context, style, snapshot.error, snapshot.stackTrace!),
             _ => _content(context, snapshot.data ?? []),
           },
         ),

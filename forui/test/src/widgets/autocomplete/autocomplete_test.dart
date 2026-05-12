@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:io';
 
 import 'package:flutter/foundation.dart';
@@ -556,6 +557,217 @@ void main() {
       });
     });
   }
+
+  group('contentEmptyBuilder', () {
+    testWidgets('default shows popover with localized message when results are empty', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FAutocomplete(
+            key: key,
+            popoverControl: .managed(controller: popoverController),
+            items: fruits,
+          ),
+        ),
+      );
+
+      await tester.enterText(find.byKey(key), 'zzz');
+      await tester.pumpAndSettle();
+
+      expect(popoverController.status.isForwardOrCompleted, true);
+      expect(find.text(FDefaultLocalizations().autocompleteNoResults), findsOne);
+    });
+
+    testWidgets('null hides popover when results are empty', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FAutocomplete(
+            key: key,
+            popoverControl: .managed(controller: popoverController),
+            items: fruits,
+            contentEmptyBuilder: null,
+          ),
+        ),
+      );
+
+      await tester.enterText(find.byKey(key), 'zzz');
+      await tester.pumpAndSettle();
+
+      expect(popoverController.status.isForwardOrCompleted, false);
+    });
+
+    testWidgets('null reshows popover when results become non-empty', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FAutocomplete(
+            key: key,
+            popoverControl: .managed(controller: popoverController),
+            items: fruits,
+            contentEmptyBuilder: null,
+          ),
+        ),
+      );
+
+      await tester.enterText(find.byKey(key), 'zzz');
+      await tester.pumpAndSettle();
+      expect(popoverController.status.isForwardOrCompleted, false);
+
+      await tester.enterText(find.byKey(key), 'App');
+      await tester.pumpAndSettle();
+      expect(popoverController.status.isForwardOrCompleted, true);
+    });
+
+    testWidgets('non-null shows popover when results are empty', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FAutocomplete(
+            key: key,
+            popoverControl: .managed(controller: popoverController),
+            items: fruits,
+            contentEmptyBuilder: (_, _) => const Text('no results'),
+          ),
+        ),
+      );
+
+      await tester.enterText(find.byKey(key), 'zzz');
+      await tester.pumpAndSettle();
+
+      expect(popoverController.status.isForwardOrCompleted, true);
+      expect(find.text('no results'), findsOne);
+    });
+
+    testWidgets('null hides popover after async resolution to empty', (tester) async {
+      final completer = Completer<Iterable<String>>();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FAutocomplete.builder(
+            key: key,
+            popoverControl: .managed(controller: popoverController),
+            filter: (_) => completer.future,
+            contentBuilder: (_, _, values) => [for (final v in values) .item(value: v)],
+            contentLoadingBuilder: (_, _) => const Text('loading'),
+            contentEmptyBuilder: null,
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+      expect(popoverController.status.isForwardOrCompleted, true);
+      expect(find.text('loading'), findsOne);
+
+      completer.complete(const <String>[]);
+      await tester.pumpAndSettle();
+      expect(popoverController.status.isForwardOrCompleted, false);
+    });
+  });
+
+  group('contentLoadingBuilder', () {
+    testWidgets('default shows popover with spinner during async load', (tester) async {
+      final completer = Completer<Iterable<String>>();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FAutocomplete.builder(
+            key: key,
+            popoverControl: .managed(controller: popoverController),
+            filter: (_) => completer.future,
+            contentBuilder: (_, _, values) => [for (final v in values) .item(value: v)],
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      // Don't pumpAndSettle — the spinner loops forever. Pump enough to run the show animation.
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 300));
+
+      expect(popoverController.status.isForwardOrCompleted, true);
+      expect(find.byType(FCircularProgress), findsOne);
+
+      // Resolve the future so the spinner stops before teardown.
+      completer.complete(const <String>[]);
+      await tester.pumpAndSettle();
+    });
+
+    testWidgets('null hides popover during async load', (tester) async {
+      final completer = Completer<Iterable<String>>();
+      addTearDown(() {
+        if (!completer.isCompleted) {
+          completer.complete(const <String>[]);
+        }
+      });
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FAutocomplete.builder(
+            key: key,
+            popoverControl: .managed(controller: popoverController),
+            filter: (_) => completer.future,
+            contentBuilder: (_, _, values) => [for (final v in values) .item(value: v)],
+            contentLoadingBuilder: null,
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      expect(popoverController.status.isForwardOrCompleted, false);
+    });
+  });
+
+  group('contentErrorBuilder', () {
+    testWidgets('default keeps popover shown on async failure', (tester) async {
+      final completer = Completer<Iterable<String>>();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FAutocomplete.builder(
+            key: key,
+            popoverControl: .managed(controller: popoverController),
+            filter: (_) => completer.future,
+            contentBuilder: (_, _, values) => [for (final v in values) .item(value: v)],
+            contentLoadingBuilder: (_, _) => const Text('loading'),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      completer.completeError('boom', .current);
+      await tester.pumpAndSettle();
+
+      expect(popoverController.status.isForwardOrCompleted, true);
+    });
+
+    testWidgets('null hides popover on async failure', (tester) async {
+      final completer = Completer<Iterable<String>>();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FAutocomplete.builder(
+            key: key,
+            popoverControl: .managed(controller: popoverController),
+            filter: (_) => completer.future,
+            contentBuilder: (_, _, values) => [for (final v in values) .item(value: v)],
+            contentLoadingBuilder: (_, _) => const Text('loading'),
+            contentErrorBuilder: null,
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+      expect(popoverController.status.isForwardOrCompleted, true);
+
+      completer.completeError('boom', StackTrace.current);
+      await tester.pumpAndSettle();
+
+      expect(popoverController.status.isForwardOrCompleted, false);
+    });
+  });
 
   group('design system', skip: !Platform.isMacOS, () {
     for (final (theme, themeName) in [
