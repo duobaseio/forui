@@ -715,6 +715,36 @@ void main() {
 
       expect(popoverController.status.isForwardOrCompleted, false);
     });
+
+    testWidgets('async resolution after unfocus does not re-show popover', (tester) async {
+      final completer = Completer<Iterable<String>>();
+      final focus = autoDispose(FocusNode());
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FAutocomplete.builder(
+            key: key,
+            popoverControl: .managed(controller: popoverController),
+            focusNode: focus,
+            filter: (_) => completer.future,
+            contentBuilder: (_, _, values) => [for (final v in values) .item(value: v)],
+            contentLoadingBuilder: (_, _) => const Text('loading'),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+      expect(popoverController.status.isForwardOrCompleted, true);
+
+      focus.unfocus();
+      await tester.pumpAndSettle();
+      expect(popoverController.status.isForwardOrCompleted, false);
+
+      completer.complete(fruits);
+      await tester.pumpAndSettle();
+      expect(popoverController.status.isForwardOrCompleted, false);
+    });
   });
 
   group('contentErrorBuilder', () {

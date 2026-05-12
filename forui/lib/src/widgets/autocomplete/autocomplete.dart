@@ -883,12 +883,19 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
   };
 
   void _apply(int token, bool show) {
-    if (mounted && token == _monotonic) {
-      if (show) {
-        _popoverController.show();
-      } else {
-        _popoverController.hide();
-      }
+    if (!mounted || token != _monotonic) {
+      return;
+    }
+
+    // Don't re-show after unfocus: a pending async filter completing must not reopen the popover.
+    if (show && !_fieldFocus.hasFocus) {
+      return;
+    }
+
+    if (show) {
+      _popoverController.show();
+    } else {
+      _popoverController.hide();
     }
   }
 
