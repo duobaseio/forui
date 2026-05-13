@@ -115,6 +115,7 @@ class GroupEntry {
   GestureTapMoveCallback? onPressMove;
   GestureTapUpCallback? onPressUp;
   VoidCallback? onPress;
+
   /// [onLongPressDown] is always called together with [onPressDown] in [TappableGroupGestureRecognizer] but not the
   /// stock [GestureDetector]. We keep this redundant field to simplify callback mapping.
   GestureLongPressDownCallback? onLongPressDown;
