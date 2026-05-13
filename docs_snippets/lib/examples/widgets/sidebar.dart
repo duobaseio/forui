@@ -189,7 +189,9 @@ class SheetSidebarPage extends Example {
                   child: Row(
                     spacing: 10,
                     children: [
-                      FAvatar.raw(child: Icon(FLucideIcons.userRound, size: 18, color: context.theme.colors.mutedForeground)),
+                      FAvatar.raw(
+                        child: Icon(FLucideIcons.userRound, size: 18, color: context.theme.colors.mutedForeground),
+                      ),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: .start,
@@ -240,9 +242,17 @@ class SheetSidebarPage extends Example {
                 onActionPress: () {},
                 label: const Text('Widgets'),
                 children: [
-                  FSidebarItem(icon: const Icon(FLucideIcons.circleSlash), label: const Text('Divider'), onPress: () {}),
+                  FSidebarItem(
+                    icon: const Icon(FLucideIcons.circleSlash),
+                    label: const Text('Divider'),
+                    onPress: () {},
+                  ),
                   FSidebarItem(icon: const Icon(FLucideIcons.scaling), label: const Text('Resizable'), onPress: () {}),
-                  FSidebarItem(icon: const Icon(FLucideIcons.layoutDashboard), label: const Text('Scaffold'), onPress: () {}),
+                  FSidebarItem(
+                    icon: const Icon(FLucideIcons.layoutDashboard),
+                    label: const Text('Scaffold'),
+                    onPress: () {},
+                  ),
                 ],
               ),
             ],

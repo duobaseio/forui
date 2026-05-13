@@ -36,7 +36,8 @@ class PopoverMenuPage extends Example {
             ],
           ),
         ],
-        builder: (_, controller, _) => FHeaderAction(icon: const Icon(FLucideIcons.ellipsis), onPress: controller.toggle),
+        builder: (_, controller, _) =>
+            FHeaderAction(icon: const Icon(FLucideIcons.ellipsis), onPress: controller.toggle),
       ),
     ],
   );
@@ -135,7 +136,11 @@ class NestedPopoverMenuPage extends Example {
                   .group(
                     children: [
                       .item(prefix: const Icon(FLucideIcons.mail), title: const Text('Email'), onPress: () {}),
-                      .item(prefix: const Icon(FLucideIcons.messageSquare), title: const Text('Message'), onPress: () {}),
+                      .item(
+                        prefix: const Icon(FLucideIcons.messageSquare),
+                        title: const Text('Message'),
+                        onPress: () {},
+                      ),
                       .item(prefix: const Icon(FLucideIcons.link), title: const Text('Copy Link'), onPress: () {}),
                     ],
                   ),
@@ -151,7 +156,8 @@ class NestedPopoverMenuPage extends Example {
             ],
           ),
         ],
-        builder: (_, controller, _) => FHeaderAction(icon: const Icon(FLucideIcons.ellipsis), onPress: controller.toggle),
+        builder: (_, controller, _) =>
+            FHeaderAction(icon: const Icon(FLucideIcons.ellipsis), onPress: controller.toggle),
       ),
     ],
   );
@@ -186,7 +192,8 @@ class TilePopoverMenuPage extends Example {
             ],
           ),
         ],
-        builder: (_, controller, _) => FHeaderAction(icon: const Icon(FLucideIcons.ellipsis), onPress: controller.toggle),
+        builder: (_, controller, _) =>
+            FHeaderAction(icon: const Icon(FLucideIcons.ellipsis), onPress: controller.toggle),
       ),
     ],
   );

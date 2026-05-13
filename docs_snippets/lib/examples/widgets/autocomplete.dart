@@ -225,7 +225,12 @@ class PopoverBuilderAutocompletePage extends Example {
         children: [
           content,
           const FDivider(style: .delta(padding: .value(.zero))),
-          FButton(variant: .ghost, prefix: const Icon(FLucideIcons.list), child: const Text('Browse All'), onPress: () {}),
+          FButton(
+            variant: .ghost,
+            prefix: const Icon(FLucideIcons.list),
+            child: const Text('Browse All'),
+            onPress: () {},
+          ),
         ],
       ),
     ),
