@@ -5,7 +5,7 @@ import 'package:forui_assets/forui_assets.dart';
 
 // alternatively; if you've only installed forui_assets.
 
-const dogIconWidget = Icon(FIcons.dog);
+const dogIconWidget = Icon(FLucideIcons.dog);
 
 // White cat icon with a size of 24x24.
-const catIconWidget = Icon(FIcons.cat, size: 24, color: Color(0xFFFFFFFF));
+const catIconWidget = Icon(FLucideIcons.cat, size: 24, color: Color(0xFFFFFFFF));

@@ -24,19 +24,19 @@ class PopoverMenuPage extends Example {
         menu: [
           .group(
             children: [
-              .item(prefix: const Icon(FIcons.user), title: const Text('Personalization'), onPress: () {}),
-              .item(prefix: const Icon(FIcons.paperclip), title: const Text('Add attachments'), onPress: () {}),
-              .item(prefix: const Icon(FIcons.qrCode), title: const Text('Scan Document'), onPress: () {}),
+              .item(prefix: const Icon(FLucideIcons.user), title: const Text('Personalization'), onPress: () {}),
+              .item(prefix: const Icon(FLucideIcons.paperclip), title: const Text('Add attachments'), onPress: () {}),
+              .item(prefix: const Icon(FLucideIcons.qrCode), title: const Text('Scan Document'), onPress: () {}),
             ],
           ),
           .group(
             children: [
-              .item(prefix: const Icon(FIcons.list), title: const Text('List View'), onPress: () {}),
-              .item(prefix: const Icon(FIcons.layoutGrid), title: const Text('Grid View'), onPress: () {}),
+              .item(prefix: const Icon(FLucideIcons.list), title: const Text('List View'), onPress: () {}),
+              .item(prefix: const Icon(FLucideIcons.layoutGrid), title: const Text('Grid View'), onPress: () {}),
             ],
           ),
         ],
-        builder: (_, controller, _) => FHeaderAction(icon: const Icon(FIcons.ellipsis), onPress: controller.toggle),
+        builder: (_, controller, _) => FHeaderAction(icon: const Icon(FLucideIcons.ellipsis), onPress: controller.toggle),
       ),
     ],
   );
@@ -86,15 +86,15 @@ class BlurredPopoverMenuPage extends Example {
         menu: [
           .group(
             children: [
-              .item(prefix: const Icon(FIcons.user), title: const Text('Personalization'), onPress: () {}),
-              .item(prefix: const Icon(FIcons.paperclip), title: const Text('Add attachments'), onPress: () {}),
-              .item(prefix: const Icon(FIcons.qrCode), title: const Text('Scan Document'), onPress: () {}),
+              .item(prefix: const Icon(FLucideIcons.user), title: const Text('Personalization'), onPress: () {}),
+              .item(prefix: const Icon(FLucideIcons.paperclip), title: const Text('Add attachments'), onPress: () {}),
+              .item(prefix: const Icon(FLucideIcons.qrCode), title: const Text('Scan Document'), onPress: () {}),
             ],
           ),
           .group(
             children: [
-              .item(prefix: const Icon(FIcons.list), title: const Text('List View'), onPress: () {}),
-              .item(prefix: const Icon(FIcons.layoutGrid), title: const Text('Grid View'), onPress: () {}),
+              .item(prefix: const Icon(FLucideIcons.list), title: const Text('List View'), onPress: () {}),
+              .item(prefix: const Icon(FLucideIcons.layoutGrid), title: const Text('Grid View'), onPress: () {}),
             ],
           ),
         ],
@@ -125,18 +125,18 @@ class NestedPopoverMenuPage extends Example {
         menu: [
           .group(
             children: [
-              .item(prefix: const Icon(FIcons.user), title: const Text('Personalization'), onPress: () {}),
-              .item(prefix: const Icon(FIcons.paperclip), title: const Text('Add attachments'), onPress: () {}),
+              .item(prefix: const Icon(FLucideIcons.user), title: const Text('Personalization'), onPress: () {}),
+              .item(prefix: const Icon(FLucideIcons.paperclip), title: const Text('Add attachments'), onPress: () {}),
               // {@highlight}
               .submenu(
                 title: const Text('Share'),
-                prefix: const Icon(FIcons.share2),
+                prefix: const Icon(FLucideIcons.share2),
                 submenu: [
                   .group(
                     children: [
-                      .item(prefix: const Icon(FIcons.mail), title: const Text('Email'), onPress: () {}),
-                      .item(prefix: const Icon(FIcons.messageSquare), title: const Text('Message'), onPress: () {}),
-                      .item(prefix: const Icon(FIcons.link), title: const Text('Copy Link'), onPress: () {}),
+                      .item(prefix: const Icon(FLucideIcons.mail), title: const Text('Email'), onPress: () {}),
+                      .item(prefix: const Icon(FLucideIcons.messageSquare), title: const Text('Message'), onPress: () {}),
+                      .item(prefix: const Icon(FLucideIcons.link), title: const Text('Copy Link'), onPress: () {}),
                     ],
                   ),
                 ],
@@ -146,12 +146,12 @@ class NestedPopoverMenuPage extends Example {
           ),
           .group(
             children: [
-              .item(prefix: const Icon(FIcons.list), title: const Text('List View'), onPress: () {}),
-              .item(prefix: const Icon(FIcons.layoutGrid), title: const Text('Grid View'), onPress: () {}),
+              .item(prefix: const Icon(FLucideIcons.list), title: const Text('List View'), onPress: () {}),
+              .item(prefix: const Icon(FLucideIcons.layoutGrid), title: const Text('Grid View'), onPress: () {}),
             ],
           ),
         ],
-        builder: (_, controller, _) => FHeaderAction(icon: const Icon(FIcons.ellipsis), onPress: controller.toggle),
+        builder: (_, controller, _) => FHeaderAction(icon: const Icon(FLucideIcons.ellipsis), onPress: controller.toggle),
       ),
     ],
   );
@@ -174,19 +174,19 @@ class TilePopoverMenuPage extends Example {
         menu: [
           .group(
             children: [
-              .tile(prefix: const Icon(FIcons.user), title: const Text('Personalization'), onPress: () {}),
-              .tile(prefix: const Icon(FIcons.paperclip), title: const Text('Add attachments'), onPress: () {}),
-              .tile(prefix: const Icon(FIcons.qrCode), title: const Text('Scan Document'), onPress: () {}),
+              .tile(prefix: const Icon(FLucideIcons.user), title: const Text('Personalization'), onPress: () {}),
+              .tile(prefix: const Icon(FLucideIcons.paperclip), title: const Text('Add attachments'), onPress: () {}),
+              .tile(prefix: const Icon(FLucideIcons.qrCode), title: const Text('Scan Document'), onPress: () {}),
             ],
           ),
           .group(
             children: [
-              .tile(prefix: const Icon(FIcons.list), title: const Text('List View'), onPress: () {}),
-              .tile(prefix: const Icon(FIcons.layoutGrid), title: const Text('Grid View'), onPress: () {}),
+              .tile(prefix: const Icon(FLucideIcons.list), title: const Text('List View'), onPress: () {}),
+              .tile(prefix: const Icon(FLucideIcons.layoutGrid), title: const Text('Grid View'), onPress: () {}),
             ],
           ),
         ],
-        builder: (_, controller, _) => FHeaderAction(icon: const Icon(FIcons.ellipsis), onPress: controller.toggle),
+        builder: (_, controller, _) => FHeaderAction(icon: const Icon(FLucideIcons.ellipsis), onPress: controller.toggle),
       ),
     ],
   );

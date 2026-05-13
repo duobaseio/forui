@@ -18,7 +18,7 @@ class SelectMenuTilePage extends Example {
     const {'All': .all, 'Direct Messages': .direct, 'None': .nothing},
     selectControl: const .managed(initial: {.all}),
     validator: (value) => value == null ? 'Select an item' : null,
-    prefix: const Icon(FIcons.bell),
+    prefix: const Icon(FLucideIcons.bell),
     title: const Text('Notifications'),
     detailsBuilder: (_, values, _) => Text(switch (values.firstOrNull) {
       .all => 'All',
@@ -41,7 +41,7 @@ class NoAutoHideSelectMenuTilePage extends Example {
     autoHide: false,
     // {@endhighlight}
     validator: (value) => value == null ? 'Select an item' : null,
-    prefix: const Icon(FIcons.bell),
+    prefix: const Icon(FLucideIcons.bell),
     title: const Text('Notifications'),
     detailsBuilder: (_, values, _) => Text(switch (values.firstOrNull) {
       .all => 'All',
@@ -61,7 +61,7 @@ class ScrollableSelectMenuTilePage extends Example {
     selectControl: const .managed(initial: {.all}),
     maxHeight: 150,
     validator: (value) => value == null ? 'Select an item' : null,
-    prefix: const Icon(FIcons.bell),
+    prefix: const Icon(FLucideIcons.bell),
     title: const Text('Notifications'),
     detailsBuilder: (_, values, _) => Text(switch (values.firstOrNull) {
       .all => 'All',
@@ -89,7 +89,7 @@ class LazySelectMenuTilePage extends Example {
   @override
   Widget example(BuildContext _) => FSelectMenuTile.builder(
     selectControl: const .managed(initial: {1}),
-    prefix: const Icon(FIcons.variable),
+    prefix: const Icon(FLucideIcons.variable),
     title: const Text('Applicable values'),
     maxHeight: 200,
     // {@highlight}
@@ -120,7 +120,7 @@ class _SelectMenuTileFormPageState extends StatefulExampleState<SelectMenuTileFo
         FSelectMenuTile<Notification>(
           selectControl: const .managed(initial: {.all}),
           validator: (value) => value == null ? 'Select an item' : null,
-          prefix: const Icon(FIcons.bell),
+          prefix: const Icon(FLucideIcons.bell),
           title: const Text('Notifications'),
           detailsBuilder: (_, values, _) => Text(switch (values.firstOrNull) {
             .all => 'All',

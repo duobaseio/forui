@@ -82,7 +82,7 @@ void main() {
         TestScaffold.app(
           child: FSidebar(
             focusNode: first,
-            children: [FSidebarItem(icon: const Icon(FIcons.box), label: const Text('Item 1'), onPress: () {})],
+            children: [FSidebarItem(icon: const Icon(FLucideIcons.box), label: const Text('Item 1'), onPress: () {})],
           ),
         ),
       );
@@ -94,7 +94,7 @@ void main() {
         TestScaffold.app(
           child: FSidebar(
             focusNode: second,
-            children: [FSidebarItem(icon: const Icon(FIcons.box), label: const Text('Item 1'), onPress: () {})],
+            children: [FSidebarItem(icon: const Icon(FLucideIcons.box), label: const Text('Item 1'), onPress: () {})],
           ),
         ),
       );
@@ -109,7 +109,7 @@ void main() {
         TestScaffold.app(
           child: FSidebar(
             focusNode: node,
-            children: [FSidebarItem(icon: const Icon(FIcons.box), label: const Text('Item 1'), onPress: () {})],
+            children: [FSidebarItem(icon: const Icon(FLucideIcons.box), label: const Text('Item 1'), onPress: () {})],
           ),
         ),
       );

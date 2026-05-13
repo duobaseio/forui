@@ -10,8 +10,8 @@ const pagination = FPagination(
   // {@endcategory}
   // {@category "Core"}
   style: .delta(itemPadding: .value(.symmetric(horizontal: 2))),
-  previous: Icon(FIcons.chevronLeft),
-  next: Icon(FIcons.chevronRight),
+  previous: Icon(FLucideIcons.chevronLeft),
+  next: Icon(FLucideIcons.chevronRight),
   // {@endcategory}
 );
 

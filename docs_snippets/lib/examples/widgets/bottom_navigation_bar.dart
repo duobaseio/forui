@@ -21,11 +21,11 @@ class _BottomNavigationBarPageState extends StatefulExampleState<BottomNavigatio
     index: _index,
     onChange: (index) => setState(() => _index = index),
     children: const [
-      FBottomNavigationBarItem(icon: Icon(FIcons.house), label: Text('Home')),
-      FBottomNavigationBarItem(icon: Icon(FIcons.layoutGrid), label: Text('Browse')),
-      FBottomNavigationBarItem(icon: Icon(FIcons.radio), label: Text('Radio')),
-      FBottomNavigationBarItem(icon: Icon(FIcons.libraryBig), label: Text('Library')),
-      FBottomNavigationBarItem(icon: Icon(FIcons.search), label: Text('Search')),
+      FBottomNavigationBarItem(icon: Icon(FLucideIcons.house), label: Text('Home')),
+      FBottomNavigationBarItem(icon: Icon(FLucideIcons.layoutGrid), label: Text('Browse')),
+      FBottomNavigationBarItem(icon: Icon(FLucideIcons.radio), label: Text('Radio')),
+      FBottomNavigationBarItem(icon: Icon(FLucideIcons.libraryBig), label: Text('Library')),
+      FBottomNavigationBarItem(icon: Icon(FLucideIcons.search), label: Text('Search')),
     ],
   );
 }

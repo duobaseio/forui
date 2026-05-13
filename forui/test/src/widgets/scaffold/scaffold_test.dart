@@ -21,7 +21,7 @@ void main() {
             ),
             touch: true,
           ),
-          child: const FScaffold(child: Center(child: Icon(FIcons.star))),
+          child: const FScaffold(child: Center(child: Icon(FLucideIcons.star))),
         ),
       );
 

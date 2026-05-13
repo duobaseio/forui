@@ -48,7 +48,7 @@ typedef FDateFieldPopoverBuilder =
 abstract class FDateField extends StatefulWidget {
   /// The default prefix builder that shows a calendar icon.
   static Widget defaultIconBuilder(BuildContext context, FTextFieldStyle style, Set<FTextFieldVariant> variants) =>
-      FTextField.prefixIconBuilder(context, style, variants, const Icon(FIcons.calendar));
+      FTextField.prefixIconBuilder(context, style, variants, const Icon(FLucideIcons.calendar));
 
   /// The default format for [FDateField.calendar], which formats [value] using [format].
   static String defaultFormat(BuildContext context, DateTime value, DateFormat format) => format.format(value);

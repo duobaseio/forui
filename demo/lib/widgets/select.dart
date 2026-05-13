@@ -43,19 +43,19 @@ class Select extends StatelessWidget {
               format: (s) => s,
               children: [
                 .item(
-                  prefix: const Icon(FIcons.bug),
+                  prefix: const Icon(FLucideIcons.bug),
                   title: const Text('Bug'),
                   subtitle: const Text('An unexpected problem'),
                   value: 'Bug',
                 ),
                 .item(
-                  prefix: const Icon(FIcons.filePlusCorner),
+                  prefix: const Icon(FLucideIcons.filePlusCorner),
                   title: const Text('Feature'),
                   subtitle: const Text('A new feature or enhancement'),
                   value: 'Feature',
                 ),
                 .item(
-                  prefix: const Icon(FIcons.messageCircleQuestionMark),
+                  prefix: const Icon(FLucideIcons.messageCircleQuestionMark),
                   title: const Text('Question'),
                   subtitle: const Text('A question or clarification'),
                   value: 'Question',

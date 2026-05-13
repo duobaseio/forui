@@ -17,8 +17,8 @@ final sidebar = FSidebar(
     FSidebarGroup(
       label: const Text('Navigation'),
       children: [
-        FSidebarItem(icon: const Icon(FIcons.house), label: const Text('Home'), onPress: () {}),
-        FSidebarItem(icon: const Icon(FIcons.settings), label: const Text('Settings'), onPress: () {}),
+        FSidebarItem(icon: const Icon(FLucideIcons.house), label: const Text('Home'), onPress: () {}),
+        FSidebarItem(icon: const Icon(FLucideIcons.settings), label: const Text('Settings'), onPress: () {}),
       ],
     ),
   ],
@@ -67,7 +67,7 @@ final sidebarGroup = FSidebarGroup(
   // {@category "Core"}
   style: const .delta(padding: .value(.symmetric(horizontal: 8))),
   label: const Text('Navigation'),
-  action: const Icon(FIcons.plus),
+  action: const Icon(FLucideIcons.plus),
   children: [
     FSidebarItem(label: const Text('Home'), onPress: () {}),
     FSidebarItem(label: const Text('Settings'), onPress: () {}),
@@ -90,7 +90,7 @@ final sidebarItem = FSidebarItem(
   style: const .delta(padding: .value(.symmetric(horizontal: 8))),
   selected: false,
   initiallyExpanded: false,
-  icon: const Icon(FIcons.house),
+  icon: const Icon(FLucideIcons.house),
   label: const Text('Home'),
   children: [
     FSidebarItem(label: const Text('Nested Item 1'), onPress: () {}),

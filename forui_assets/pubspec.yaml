@@ -18,7 +18,6 @@ resolution: workspace
 dependencies:
   flutter:
     sdk: flutter
-  nitrogen_types: ^0.4.0
 
 dev_dependencies:
   code_builder: ^4.10.0

@@ -97,10 +97,10 @@ class ButtonSizesPage extends Example {
         mainAxisSize: .min,
         spacing: 10,
         children: [
-          FButton.icon(size: .xs, onPress: () {}, child: const Icon(FIcons.chevronRight)),
-          FButton.icon(size: .sm, onPress: () {}, child: const Icon(FIcons.chevronRight)),
-          FButton.icon(onPress: () {}, child: const Icon(FIcons.chevronRight)),
-          FButton.icon(size: .lg, onPress: () {}, child: const Icon(FIcons.chevronRight)),
+          FButton.icon(size: .xs, onPress: () {}, child: const Icon(FLucideIcons.chevronRight)),
+          FButton.icon(size: .sm, onPress: () {}, child: const Icon(FLucideIcons.chevronRight)),
+          FButton.icon(onPress: () {}, child: const Icon(FLucideIcons.chevronRight)),
+          FButton.icon(size: .lg, onPress: () {}, child: const Icon(FLucideIcons.chevronRight)),
         ],
       ),
       // {@endhighlight}
@@ -116,7 +116,7 @@ class ButtonIconPage extends Example {
   Widget example(BuildContext _) => FButton(
     mainAxisSize: .min,
     // {@highlight}
-    prefix: const Icon(FIcons.mail),
+    prefix: const Icon(FLucideIcons.mail),
     // {@endhighlight}
     onPress: () {},
     child: const Text('Login with Email'),
@@ -128,7 +128,7 @@ class ButtonOnlyIconPage extends Example {
   ButtonOnlyIconPage({@queryParam super.theme});
 
   @override
-  Widget example(BuildContext _) => FButton.icon(child: const Icon(FIcons.chevronRight), onPress: () {});
+  Widget example(BuildContext _) => FButton.icon(child: const Icon(FLucideIcons.chevronRight), onPress: () {});
 }
 
 @RoutePage()
@@ -149,7 +149,7 @@ class _ButtonTogglePageState extends StatefulExampleState<ButtonTogglePage> {
     mainAxisSize: .min,
     selected: _italic,
     onPress: () => setState(() => _italic = !_italic),
-    prefix: const Icon(FIcons.italic),
+    prefix: const Icon(FLucideIcons.italic),
     child: Text('Italic', style: TextStyle(decoration: _italic ? .underline : null)),
   );
 }

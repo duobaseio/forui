@@ -41,7 +41,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// The default suffix builder that shows a upward and downward facing chevron icon.
   static Widget defaultIconBuilder(BuildContext _, FTextFieldStyle style, Set<FTextFieldVariant> variants) => Padding(
     padding: const .directional(end: 8.0),
-    child: IconTheme(data: style.iconStyle.resolve(variants), child: const Icon(FIcons.chevronDown)),
+    child: IconTheme(data: style.iconStyle.resolve(variants), child: const Icon(FLucideIcons.chevronDown)),
   );
 
   /// The default content loading builder that shows a spinner when an asynchronous search is pending.

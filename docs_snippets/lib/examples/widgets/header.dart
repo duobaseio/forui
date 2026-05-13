@@ -13,8 +13,8 @@ class RootHeaderPage extends Example {
   Widget example(BuildContext _) => FHeader(
     title: const Text('Edit Alarm'),
     suffixes: [
-      FHeaderAction(icon: const Icon(FIcons.alarmClock), onPress: () {}),
-      FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
+      FHeaderAction(icon: const Icon(FLucideIcons.alarmClock), onPress: () {}),
+      FHeaderAction(icon: const Icon(FLucideIcons.plus), onPress: () {}),
     ],
   );
 }
@@ -30,8 +30,8 @@ class NestedHeaderPage extends Example {
     prefixes: [FHeaderAction.back(onPress: () {})],
     // {@endhighlight}
     suffixes: [
-      FHeaderAction(icon: const Icon(FIcons.info), onPress: () {}),
-      FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
+      FHeaderAction(icon: const Icon(FLucideIcons.info), onPress: () {}),
+      FHeaderAction(icon: const Icon(FLucideIcons.plus), onPress: () {}),
     ],
   );
 }
@@ -44,8 +44,8 @@ class XNestedHeaderPage extends Example {
   Widget example(BuildContext _) => FHeader.nested(
     title: const Text('Climate'),
     prefixes: [
-      FHeaderAction(icon: const Icon(FIcons.thermometer), onPress: () {}),
-      const FHeaderAction(icon: Icon(FIcons.wind), onPress: null),
+      FHeaderAction(icon: const Icon(FLucideIcons.thermometer), onPress: () {}),
+      const FHeaderAction(icon: Icon(FLucideIcons.wind), onPress: null),
     ],
     // {@highlight}
     suffixes: [FHeaderAction.x(onPress: () {})],

@@ -49,7 +49,7 @@ class FBreadcrumb extends StatelessWidget {
 
   /// The divider placed between the children.
   ///
-  /// Defaults to [FIcons.chevronRight].
+  /// Defaults to [FLucideIcons.chevronRight].
   final Widget? divider;
 
   /// Creates an [FBreadcrumb].
@@ -58,7 +58,7 @@ class FBreadcrumb extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = this.style(context.theme.breadcrumbStyle);
-    final divider = IconTheme(data: style.iconStyle, child: this.divider ?? const Icon(FIcons.chevronRight));
+    final divider = IconTheme(data: style.iconStyle, child: this.divider ?? const Icon(FLucideIcons.chevronRight));
 
     return Row(
       children: [
@@ -422,7 +422,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
           onPress: _controller.toggle,
           child: Padding(
             padding: style.collapsedPadding,
-            child: IconTheme(data: style.iconStyle, child: const Icon(FIcons.ellipsis)),
+            child: IconTheme(data: style.iconStyle, child: const Icon(FLucideIcons.ellipsis)),
           ),
         ),
       );
@@ -455,7 +455,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
           onPress: _controller.toggle,
           child: Padding(
             padding: style.collapsedPadding,
-            child: IconTheme(data: style.iconStyle, child: const Icon(FIcons.ellipsis)),
+            child: IconTheme(data: style.iconStyle, child: const Icon(FLucideIcons.ellipsis)),
           ),
         ),
       );

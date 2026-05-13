@@ -16,11 +16,11 @@ void main() {
           child: FSidebarGroup(
             style: TestScaffold.blueScreen.sidebarStyle.groupStyle,
             label: const Text('Group'),
-            action: const Icon(FIcons.plus),
+            action: const Icon(FLucideIcons.plus),
             onActionPress: () {},
             children: [
-              FSidebarItem(icon: const Icon(FIcons.box), label: const Text('Item 1'), onPress: () {}),
-              FSidebarItem(icon: const Icon(FIcons.folder), label: const Text('Item 2'), onPress: () {}),
+              FSidebarItem(icon: const Icon(FLucideIcons.box), label: const Text('Item 1'), onPress: () {}),
+              FSidebarItem(icon: const Icon(FLucideIcons.folder), label: const Text('Item 2'), onPress: () {}),
             ],
           ),
         ),
@@ -35,11 +35,11 @@ void main() {
           child: FSidebarGroup(
             style: TestScaffold.blueScreen.sidebarStyle.groupStyle,
             label: const Text('Group'),
-            action: const Icon(FIcons.plus),
+            action: const Icon(FLucideIcons.plus),
             onActionPress: () {},
             children: [
-              FSidebarItem(icon: const Icon(FIcons.box), label: const Text('Item 1'), onPress: () {}),
-              FSidebarItem(icon: const Icon(FIcons.folder), label: const Text('Item 2'), onPress: () {}),
+              FSidebarItem(icon: const Icon(FLucideIcons.box), label: const Text('Item 1'), onPress: () {}),
+              FSidebarItem(icon: const Icon(FLucideIcons.folder), label: const Text('Item 2'), onPress: () {}),
             ],
           ),
         ),
@@ -48,7 +48,7 @@ void main() {
       final gesture = await tester.createPointerGesture();
       await tester.pump();
 
-      await gesture.moveTo(tester.getCenter(find.byIcon(FIcons.plus)));
+      await gesture.moveTo(tester.getCenter(find.byIcon(FLucideIcons.plus)));
       await tester.pumpAndSettle();
 
       await expectBlueScreen();
@@ -63,8 +63,8 @@ void main() {
           child: FSidebarGroup(
             label: const Text('Group'),
             children: [
-              FSidebarItem(icon: const Icon(FIcons.box), label: const Text('Item 1'), onPress: () {}),
-              FSidebarItem(icon: const Icon(FIcons.folder), label: const Text('Item 2'), onPress: () {}),
+              FSidebarItem(icon: const Icon(FLucideIcons.box), label: const Text('Item 1'), onPress: () {}),
+              FSidebarItem(icon: const Icon(FLucideIcons.folder), label: const Text('Item 2'), onPress: () {}),
             ],
           ),
         ),
@@ -82,11 +82,11 @@ void main() {
           theme: theme.data,
           child: FSidebarGroup(
             label: const Text('Group'),
-            action: const Icon(FIcons.plus),
+            action: const Icon(FLucideIcons.plus),
             onActionPress: () {},
             children: [
-              FSidebarItem(icon: const Icon(FIcons.box), label: const Text('Item 1'), onPress: () {}),
-              FSidebarItem(icon: const Icon(FIcons.folder), label: const Text('Item 2'), onPress: () {}),
+              FSidebarItem(icon: const Icon(FLucideIcons.box), label: const Text('Item 1'), onPress: () {}),
+              FSidebarItem(icon: const Icon(FLucideIcons.folder), label: const Text('Item 2'), onPress: () {}),
             ],
           ),
         ),
@@ -101,11 +101,11 @@ void main() {
           theme: theme.data,
           child: FSidebarGroup(
             label: const Text('Group'),
-            action: const Icon(FIcons.plus),
+            action: const Icon(FLucideIcons.plus),
             onActionPress: () {},
             children: [
-              FSidebarItem(icon: const Icon(FIcons.box), label: const Text('Item 1'), onPress: () {}),
-              FSidebarItem(icon: const Icon(FIcons.folder), label: const Text('Item 2'), onPress: () {}),
+              FSidebarItem(icon: const Icon(FLucideIcons.box), label: const Text('Item 1'), onPress: () {}),
+              FSidebarItem(icon: const Icon(FLucideIcons.folder), label: const Text('Item 2'), onPress: () {}),
             ],
           ),
         ),
@@ -114,7 +114,7 @@ void main() {
       final gesture = await tester.createPointerGesture();
       await tester.pump();
 
-      await gesture.moveTo(tester.getCenter(find.byIcon(FIcons.plus)));
+      await gesture.moveTo(tester.getCenter(find.byIcon(FLucideIcons.plus)));
       await tester.pumpAndSettle();
 
       await expectLater(
@@ -129,20 +129,20 @@ void main() {
           theme: theme.data,
           child: FSidebarGroup(
             label: const Text('Group'),
-            action: const Icon(FIcons.plus),
+            action: const Icon(FLucideIcons.plus),
             onActionPress: () {},
             children: [
               FSidebarItem(
-                icon: const Icon(FIcons.box),
+                icon: const Icon(FLucideIcons.box),
                 label: const Text('Item 1'),
                 initiallyExpanded: true,
                 children: [
-                  FSidebarItem(icon: const Icon(FIcons.file), label: const Text('Child 1'), onPress: () {}),
-                  FSidebarItem(icon: const Icon(FIcons.file), label: const Text('Child 2'), onPress: () {}),
+                  FSidebarItem(icon: const Icon(FLucideIcons.file), label: const Text('Child 1'), onPress: () {}),
+                  FSidebarItem(icon: const Icon(FLucideIcons.file), label: const Text('Child 2'), onPress: () {}),
                 ],
                 onPress: () {},
               ),
-              FSidebarItem(icon: const Icon(FIcons.folder), label: const Text('Item 2'), onPress: () {}),
+              FSidebarItem(icon: const Icon(FLucideIcons.folder), label: const Text('Item 2'), onPress: () {}),
             ],
           ),
         ),
@@ -162,11 +162,11 @@ void main() {
             width: 200,
             child: FSidebarGroup(
               label: const Text('This is a very long group label that should be truncated'),
-              action: const Icon(FIcons.plus),
+              action: const Icon(FLucideIcons.plus),
               onActionPress: () {},
               children: [
-                FSidebarItem(icon: const Icon(FIcons.box), label: const Text('Item 1'), onPress: () {}),
-                FSidebarItem(icon: const Icon(FIcons.folder), label: const Text('Item 2'), onPress: () {}),
+                FSidebarItem(icon: const Icon(FLucideIcons.box), label: const Text('Item 1'), onPress: () {}),
+                FSidebarItem(icon: const Icon(FLucideIcons.folder), label: const Text('Item 2'), onPress: () {}),
               ],
             ),
           ),
@@ -186,11 +186,11 @@ void main() {
           textDirection: .rtl,
           child: FSidebarGroup(
             label: const Text('Group'),
-            action: const Icon(FIcons.plus),
+            action: const Icon(FLucideIcons.plus),
             onActionPress: () {},
             children: [
-              FSidebarItem(icon: const Icon(FIcons.box), label: const Text('Item 1'), onPress: () {}),
-              FSidebarItem(icon: const Icon(FIcons.folder), label: const Text('Item 2'), onPress: () {}),
+              FSidebarItem(icon: const Icon(FLucideIcons.box), label: const Text('Item 1'), onPress: () {}),
+              FSidebarItem(icon: const Icon(FLucideIcons.folder), label: const Text('Item 2'), onPress: () {}),
             ],
           ),
         ),

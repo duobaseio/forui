@@ -17,11 +17,11 @@ void main() {
         TestScaffold.blue(
           child: FItem(
             style: TestScaffold.blueScreen.itemStyles.base,
-            prefix: const Icon(FIcons.bluetooth),
+            prefix: const Icon(FLucideIcons.bluetooth),
             title: const Text('Bluetooth'),
             subtitle: const Text('Fee, Fo, Fum'),
             details: const Text('Duobase (5G)'),
-            suffix: const Icon(FIcons.chevronRight),
+            suffix: const Icon(FLucideIcons.chevronRight),
             onPress: () {},
           ),
         ),
@@ -35,11 +35,11 @@ void main() {
         TestScaffold.blue(
           child: FItem(
             style: TestScaffold.blueScreen.itemStyles.base,
-            prefix: const Icon(FIcons.bluetooth),
+            prefix: const Icon(FLucideIcons.bluetooth),
             title: const Text('Bluetooth'),
             subtitle: const Text('Fee, Fo, Fum'),
             details: const Text('Duobase (5G)'),
-            suffix: const Icon(FIcons.chevronRight),
+            suffix: const Icon(FLucideIcons.chevronRight),
             onPress: () {},
           ),
         ),
@@ -60,11 +60,11 @@ void main() {
           child: FItem(
             style: TestScaffold.blueScreen.itemStyles.base,
             enabled: false,
-            prefix: const Icon(FIcons.bluetooth),
+            prefix: const Icon(FLucideIcons.bluetooth),
             title: const Text('Bluetooth'),
             subtitle: const Text('Fee, Fo, Fum'),
             details: const Text('Duobase (5G)'),
-            suffix: const Icon(FIcons.chevronRight),
+            suffix: const Icon(FLucideIcons.chevronRight),
             onPress: () {},
           ),
         ),
@@ -92,11 +92,11 @@ void main() {
               variant: variant,
               enabled: enabled,
               selected: selected,
-              prefix: const Icon(FIcons.bluetooth),
+              prefix: const Icon(FLucideIcons.bluetooth),
               title: const Text('Lorem'),
               subtitle: const Text('Fee, Fo'),
               details: const Text('FL (5G)'),
-              suffix: const Icon(FIcons.chevronRight),
+              suffix: const Icon(FLucideIcons.chevronRight),
               onPress: () {},
             ),
           ),
@@ -111,11 +111,11 @@ void main() {
         TestScaffold(
           theme: theme.data,
           child: FItem(
-            prefix: const Icon(FIcons.bluetooth),
+            prefix: const Icon(FLucideIcons.bluetooth),
             title: const Text('Lorem'),
             subtitle: const Text('Fee, Fo'),
             details: const Text('FL (5G)'),
-            suffix: const Icon(FIcons.chevronRight),
+            suffix: const Icon(FLucideIcons.chevronRight),
             onPress: () {},
           ),
         ),
@@ -137,11 +137,11 @@ void main() {
         TestScaffold(
           theme: theme.data,
           child: FItem(
-            prefix: const Icon(FIcons.bluetooth),
+            prefix: const Icon(FLucideIcons.bluetooth),
             title: const Text('Lorem'),
             subtitle: const Text('Fee, Fo'),
             details: const Text('FL (5G)'),
-            suffix: const Icon(FIcons.chevronRight),
+            suffix: const Icon(FLucideIcons.chevronRight),
             onPress: () {},
           ),
         ),
@@ -162,11 +162,11 @@ void main() {
           textDirection: TextDirection.rtl,
           child: FItem(
             autofocus: true,
-            prefix: const Icon(FIcons.bluetooth),
+            prefix: const Icon(FLucideIcons.bluetooth),
             title: const Text('Lorem'),
             subtitle: const Text('Fee, Fo'),
             details: const Text('FL (5G)'),
-            suffix: const Icon(FIcons.chevronRight),
+            suffix: const Icon(FLucideIcons.chevronRight),
             onPress: () {},
           ),
         ),
@@ -181,11 +181,11 @@ void main() {
           theme: theme.data,
           child: FItem(
             autofocus: true,
-            prefix: const Icon(FIcons.bluetooth),
+            prefix: const Icon(FLucideIcons.bluetooth),
             title: const Text('Lorem'),
             subtitle: const Text('Fee, Fo'),
             details: const Text('FL (5G)'),
-            suffix: const Icon(FIcons.chevronRight),
+            suffix: const Icon(FLucideIcons.chevronRight),
             onPress: () {},
           ),
         ),
@@ -199,10 +199,10 @@ void main() {
     await tester.pumpWidget(
       TestScaffold(
         child: FItem(
-          prefix: const Icon(FIcons.bluetooth),
+          prefix: const Icon(FLucideIcons.bluetooth),
           title: const Text('Bluetooth'),
           details: const Text('FL (5G)'),
-          suffix: const Icon(FIcons.chevronRight),
+          suffix: const Icon(FLucideIcons.chevronRight),
         ),
       ),
     );
@@ -223,10 +223,10 @@ void main() {
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 225),
             child: FItem(
-              prefix: const Icon(FIcons.bluetooth),
+              prefix: const Icon(FLucideIcons.bluetooth),
               title: const Text('Bluetooth'),
               details: const Text('FL (5G)'),
-              suffix: const Icon(FIcons.chevronRight),
+              suffix: const Icon(FLucideIcons.chevronRight),
               onPress: () {},
             ),
           ),
@@ -250,10 +250,10 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           child: FItem(
-            prefix: const Icon(FIcons.bluetooth),
+            prefix: const Icon(FLucideIcons.bluetooth),
             title: const Text('Bluetooth'),
             details: const Text('FL (5G)'),
-            suffix: const Icon(FIcons.chevronRight),
+            suffix: const Icon(FLucideIcons.chevronRight),
             onPress: () {},
           ),
         ),
@@ -267,7 +267,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           child: FItem(
-            prefix: const Icon(FIcons.bluetooth),
+            prefix: const Icon(FLucideIcons.bluetooth),
             title: const Text('Bluetooth'),
             details: const Text('FL (5G)'),
             onPress: () {},
@@ -286,10 +286,10 @@ void main() {
             child: Padding(
               padding: const .all(8.0),
               child: FItem(
-                prefix: const Icon(FIcons.bluetooth),
+                prefix: const Icon(FLucideIcons.bluetooth),
                 title: const Text('L                               ong'),
                 details: const Text('FL (5G)'),
-                suffix: const Icon(FIcons.chevronRight),
+                suffix: const Icon(FLucideIcons.chevronRight),
                 onPress: () {},
               ),
             ),
@@ -308,11 +308,11 @@ void main() {
             child: Padding(
               padding: const .all(8.0),
               child: FItem(
-                prefix: const Icon(FIcons.bluetooth),
+                prefix: const Icon(FLucideIcons.bluetooth),
                 title: const Text('Title'),
                 subtitle: const Text('L                                     ong'),
                 details: const Text('FL (5G)'),
-                suffix: const Icon(FIcons.chevronRight),
+                suffix: const Icon(FLucideIcons.chevronRight),
                 onPress: () {},
               ),
             ),
@@ -331,11 +331,11 @@ void main() {
             child: Padding(
               padding: const .all(8.0),
               child: FItem(
-                prefix: const Icon(FIcons.bluetooth),
+                prefix: const Icon(FLucideIcons.bluetooth),
                 title: const Text('Title'),
                 subtitle: const Text('L                                     ong'),
                 details: const FSwitch(),
-                suffix: const Icon(FIcons.chevronRight),
+                suffix: const Icon(FLucideIcons.chevronRight),
                 onPress: () {},
               ),
             ),
@@ -355,11 +355,11 @@ void main() {
           TestScaffold(
             child: IntrinsicWidth(
               child: FItem(
-                prefix: const Icon(FIcons.bluetooth),
+                prefix: const Icon(FLucideIcons.bluetooth),
                 title: const Text('Bluetooth'),
                 subtitle: const Text('Fee, Fo, Fum'),
                 details: const Text('FL (5G)'),
-                suffix: const Icon(FIcons.chevronRight),
+                suffix: const Icon(FLucideIcons.chevronRight),
                 onPress: () {},
               ),
             ),
@@ -373,7 +373,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             child: IntrinsicWidth(
-              child: FItem(prefix: const Icon(FIcons.bluetooth), title: const Text('Bluetooth'), onPress: () {}),
+              child: FItem(prefix: const Icon(FLucideIcons.bluetooth), title: const Text('Bluetooth'), onPress: () {}),
             ),
           ),
         );
@@ -409,7 +409,7 @@ void main() {
     testWidgets('all', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          child: FItem.raw(prefix: const Icon(FIcons.bluetooth), child: const Text('Bluetooth'), onPress: () {}),
+          child: FItem.raw(prefix: const Icon(FLucideIcons.bluetooth), child: const Text('Bluetooth'), onPress: () {}),
         ),
       );
 
@@ -419,7 +419,7 @@ void main() {
     testWidgets('expanded child', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          child: FItem.raw(prefix: const Icon(FIcons.bluetooth), child: const FTextField()),
+          child: FItem.raw(prefix: const Icon(FLucideIcons.bluetooth), child: const FTextField()),
         ),
       );
 

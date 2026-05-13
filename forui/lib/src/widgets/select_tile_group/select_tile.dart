@@ -31,7 +31,7 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
   /// ```
   final FItemStyleDelta style;
 
-  /// The checked icon. Defaults to `FIcon(FIcons.check)`.
+  /// The checked icon. Defaults to `Icon(FLucideIcons.check)`.
   final Widget? checkedIcon;
 
   /// The unchecked icon.
@@ -87,8 +87,8 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
     required this.title,
     required this.value,
     this.style = const .context(),
-    this.checkedIcon = const Icon(FIcons.check),
-    this.uncheckedIcon = const Icon(FIcons.check, color: Colors.transparent),
+    this.checkedIcon = const Icon(FLucideIcons.check),
+    this.uncheckedIcon = const Icon(FLucideIcons.check, color: Colors.transparent),
     this.subtitle,
     this.details,
     this.semanticsLabel,
@@ -137,8 +137,8 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
     required this.title,
     required this.value,
     this.style = const .context(),
-    this.checkedIcon = const Icon(FIcons.check),
-    this.uncheckedIcon = const Icon(FIcons.check, color: Colors.transparent),
+    this.checkedIcon = const Icon(FLucideIcons.check),
+    this.uncheckedIcon = const Icon(FLucideIcons.check, color: Colors.transparent),
     this.subtitle,
     this.details,
     this.semanticsLabel,

@@ -128,7 +128,7 @@ class FMultiSelectTag extends StatelessWidget {
               DefaultTextStyle(style: style.labelTextStyle.resolve(variants), child: label),
               FFocusedOutline(
                 focused: variants.contains(FTappableVariant.focused),
-                child: IconTheme(data: style.iconStyle.resolve(variants), child: const Icon(FIcons.x)),
+                child: IconTheme(data: style.iconStyle.resolve(variants), child: const Icon(FLucideIcons.x)),
               ),
             ],
           ),

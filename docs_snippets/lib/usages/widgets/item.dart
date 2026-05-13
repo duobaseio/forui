@@ -30,10 +30,10 @@ final item = FItem(
   selected: false,
   onPress: () {},
   title: const Text('Title'),
-  prefix: const Icon(FIcons.user),
+  prefix: const Icon(FLucideIcons.user),
   subtitle: const Text('Subtitle'),
   details: const Text('Details'),
-  suffix: const Icon(FIcons.chevronRight),
+  suffix: const Icon(FLucideIcons.chevronRight),
   // {@endcategory}
 );
 
@@ -63,7 +63,7 @@ final raw = FItem.raw(
   selected: false,
   onPress: () {},
   child: const Text('Content'),
-  prefix: const Icon(FIcons.user),
+  prefix: const Icon(FLucideIcons.user),
   // {@endcategory}
 );
 

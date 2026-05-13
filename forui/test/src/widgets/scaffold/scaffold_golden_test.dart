@@ -75,7 +75,7 @@ void main() {
                 Expanded(
                   child: Builder(
                     builder: (context) => FButton.icon(
-                      child: const Icon(FIcons.chevronRight),
+                      child: const Icon(FLucideIcons.chevronRight),
                       onPress: () {
                         autoDispose(
                           showFPersistentSheet(

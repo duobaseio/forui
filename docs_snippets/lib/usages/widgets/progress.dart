@@ -13,7 +13,7 @@ const circularProgress = FCircularProgress(
   // {@category "Core"}
   size: .md,
   style: .delta(iconStyle: .delta()),
-  icon: FIcons.loaderCircle,
+  icon: FLucideIcons.loaderCircle,
   semanticsLabel: 'Loading',
   // {@endcategory}
 );

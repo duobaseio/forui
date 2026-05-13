@@ -295,7 +295,7 @@ void main() {
                   onPress: () {},
                   child: Padding(
                     padding: const .all(8.0),
-                    child: FButton.icon(onPress: () {}, child: const Icon(FIcons.pencil)),
+                    child: FButton.icon(onPress: () {}, child: const Icon(FLucideIcons.pencil)),
                   ),
                 ),
               ),
@@ -324,7 +324,7 @@ void main() {
                   onPress: () {},
                   child: Padding(
                     padding: const .all(8.0),
-                    child: FButton.icon(onPress: () {}, child: const Icon(FIcons.pencil)),
+                    child: FButton.icon(onPress: () {}, child: const Icon(FLucideIcons.pencil)),
                   ),
                 ),
               ),

@@ -16,8 +16,8 @@ void main() {
           child: FButton(
             autofocus: true,
             style: TestScaffold.blueScreen.buttonStyles.base.base,
-            prefix: const Icon(FIcons.circlePlay),
-            suffix: const Icon(FIcons.circleStop),
+            prefix: const Icon(FLucideIcons.circlePlay),
+            suffix: const Icon(FLucideIcons.circleStop),
             onPress: () {},
             child: const Text('Button'),
           ),
@@ -32,7 +32,7 @@ void main() {
         TestScaffold.blue(
           child: FButton.icon(
             style: TestScaffold.blueScreen.buttonStyles.base.base,
-            child: const Icon(FIcons.circleStop),
+            child: const Icon(FLucideIcons.circleStop),
             onPress: () {},
           ),
         ),
@@ -56,8 +56,8 @@ void main() {
             theme: theme.data,
             child: FButton(
               variant: variant,
-              prefix: const Icon(FIcons.circlePlay),
-              suffix: const Icon(FIcons.circleStop),
+              prefix: const Icon(FLucideIcons.circlePlay),
+              suffix: const Icon(FLucideIcons.circleStop),
               onPress: () {},
               child: const Text('Button'),
             ),
@@ -77,8 +77,8 @@ void main() {
             child: FButton(
               variant: variant,
               mainAxisSize: .min,
-              prefix: const Icon(FIcons.circlePlay),
-              suffix: const Icon(FIcons.circleStop),
+              prefix: const Icon(FLucideIcons.circlePlay),
+              suffix: const Icon(FLucideIcons.circleStop),
               onPress: () {},
               child: const Text('Button'),
             ),
@@ -97,8 +97,8 @@ void main() {
             theme: theme.data,
             child: FButton(
               variant: variant,
-              prefix: const Icon(FIcons.circlePlay),
-              suffix: const Icon(FIcons.circleStop),
+              prefix: const Icon(FLucideIcons.circlePlay),
+              suffix: const Icon(FLucideIcons.circleStop),
               onPress: () {},
               child: const Text('Button'),
             ),
@@ -123,8 +123,8 @@ void main() {
             theme: theme.data,
             child: FButton(
               variant: variant,
-              prefix: const Icon(FIcons.circlePlay),
-              suffix: const Icon(FIcons.circleStop),
+              prefix: const Icon(FLucideIcons.circlePlay),
+              suffix: const Icon(FLucideIcons.circleStop),
               onPress: () {},
               child: const Text('Button'),
             ),
@@ -150,8 +150,8 @@ void main() {
             child: FButton(
               autofocus: true,
               variant: variant,
-              prefix: const Icon(FIcons.circlePlay),
-              suffix: const Icon(FIcons.circleStop),
+              prefix: const Icon(FLucideIcons.circlePlay),
+              suffix: const Icon(FLucideIcons.circleStop),
               onPress: () {},
               child: const Text('Button'),
             ),
@@ -167,8 +167,8 @@ void main() {
             theme: theme.data,
             child: FButton(
               variant: variant,
-              prefix: const Icon(FIcons.circlePlay),
-              suffix: const Icon(FIcons.circleStop),
+              prefix: const Icon(FLucideIcons.circlePlay),
+              suffix: const Icon(FLucideIcons.circleStop),
               onPress: null,
               child: const Text('Button'),
             ),
@@ -245,7 +245,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FButton.icon(onPress: () {}, variant: variant, child: const Icon(FIcons.chevronRight)),
+            child: FButton.icon(onPress: () {}, variant: variant, child: const Icon(FLucideIcons.chevronRight)),
           ),
         );
 
@@ -259,7 +259,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FButton.icon(onPress: null, variant: variant, child: const Icon(FIcons.chevronRight)),
+            child: FButton.icon(onPress: null, variant: variant, child: const Icon(FLucideIcons.chevronRight)),
           ),
         );
 
@@ -311,8 +311,8 @@ void main() {
             child: FButton(
               variant: variant,
               selected: true,
-              prefix: const Icon(FIcons.circlePlay),
-              suffix: const Icon(FIcons.circleStop),
+              prefix: const Icon(FLucideIcons.circlePlay),
+              suffix: const Icon(FLucideIcons.circleStop),
               onPress: () {},
               child: const Text('Button'),
             ),
@@ -329,8 +329,8 @@ void main() {
             child: FButton(
               variant: variant,
               selected: true,
-              prefix: const Icon(FIcons.circlePlay),
-              suffix: const Icon(FIcons.circleStop),
+              prefix: const Icon(FLucideIcons.circlePlay),
+              suffix: const Icon(FLucideIcons.circleStop),
               onPress: null,
               child: const Text('Button'),
             ),
@@ -358,8 +358,8 @@ void main() {
             variant: .outline,
             size: size,
             mainAxisSize: .min,
-            prefix: const Icon(FIcons.mail),
-            suffix: const Icon(FIcons.chevronRight),
+            prefix: const Icon(FLucideIcons.mail),
+            suffix: const Icon(FLucideIcons.chevronRight),
             onPress: () {},
             child: const Text('Button'),
           ),
@@ -372,7 +372,7 @@ void main() {
     testWidgets('$name icon', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          child: FButton.icon(size: size, onPress: () {}, child: const Icon(FIcons.chevronRight)),
+          child: FButton.icon(size: size, onPress: () {}, child: const Icon(FLucideIcons.chevronRight)),
         ),
       );
 

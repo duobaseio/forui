@@ -171,7 +171,7 @@ void main() {
           focusNode: focusNode,
           title: const Text('Bluetooth'),
           onPress: () => outer++,
-          suffix: FButton.icon(onPress: () => inner++, child: const Icon(FIcons.pencil)),
+          suffix: FButton.icon(onPress: () => inner++, child: const Icon(FLucideIcons.pencil)),
         ),
       ),
     );
@@ -179,7 +179,7 @@ void main() {
     await tester.sendKeyEvent(.tab);
     await tester.pumpAndSettle(const Duration(seconds: 1));
 
-    await tester.tap(find.byIcon(FIcons.pencil));
+    await tester.tap(find.byIcon(FLucideIcons.pencil));
     await tester.pumpAndSettle(const Duration(seconds: 1));
 
     expect(inner, 1);

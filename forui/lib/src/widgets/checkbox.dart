@@ -147,7 +147,7 @@ class FCheckbox extends StatelessWidget {
                 dimension: style.size,
                 child: DecoratedBox(
                   decoration: decoration,
-                  child: value ? IconTheme(data: iconTheme, child: const Icon(FIcons.check)) : const SizedBox(),
+                  child: value ? IconTheme(data: iconTheme, child: const Icon(FLucideIcons.check)) : const SizedBox(),
                 ),
               ),
             ),

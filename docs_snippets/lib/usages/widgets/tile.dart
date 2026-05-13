@@ -32,8 +32,8 @@ final tile = FTile(
   title: const Text('Title'),
   subtitle: const Text('Subtitle'),
   details: const Text('Details'),
-  prefix: const Icon(FIcons.house),
-  suffix: const Icon(FIcons.chevronRight),
+  prefix: const Icon(FLucideIcons.house),
+  suffix: const Icon(FLucideIcons.chevronRight),
   // {@endcategory}
 );
 
@@ -62,7 +62,7 @@ final tileRaw = FTile.raw(
   enabled: true,
   selected: false,
   onPress: () {},
-  prefix: const Icon(FIcons.house),
+  prefix: const Icon(FLucideIcons.house),
   child: const Text('Custom Content'),
   // {@endcategory}
 );

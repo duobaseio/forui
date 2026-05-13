@@ -17,16 +17,16 @@ void main() {
           children: [
             FSidebarGroup(
               label: const Text('Group 1'),
-              action: const Icon(FIcons.plus),
+              action: const Icon(FLucideIcons.plus),
               onActionPress: () {},
               children: [
-                FSidebarItem(icon: const Icon(FIcons.box), label: const Text('Item 1'), onPress: () {}),
-                FSidebarItem(icon: const Icon(FIcons.folder), label: const Text('Item 2'), onPress: () {}),
+                FSidebarItem(icon: const Icon(FLucideIcons.box), label: const Text('Item 1'), onPress: () {}),
+                FSidebarItem(icon: const Icon(FLucideIcons.folder), label: const Text('Item 2'), onPress: () {}),
               ],
             ),
             FSidebarGroup(
               label: const Text('Group 2'),
-              children: [FSidebarItem(icon: const Icon(FIcons.file), label: const Text('Item 3'), onPress: () {})],
+              children: [FSidebarItem(icon: const Icon(FLucideIcons.file), label: const Text('Item 3'), onPress: () {})],
             ),
           ],
         ),
@@ -47,16 +47,16 @@ void main() {
             children: [
               FSidebarGroup(
                 label: const Text('Group 1'),
-                action: const Icon(FIcons.plus),
+                action: const Icon(FLucideIcons.plus),
                 onActionPress: () {},
                 children: [
-                  FSidebarItem(icon: const Icon(FIcons.box), label: const Text('Item 1'), onPress: () {}),
-                  FSidebarItem(icon: const Icon(FIcons.folder), label: const Text('Item 2'), onPress: () {}),
+                  FSidebarItem(icon: const Icon(FLucideIcons.box), label: const Text('Item 1'), onPress: () {}),
+                  FSidebarItem(icon: const Icon(FLucideIcons.folder), label: const Text('Item 2'), onPress: () {}),
                 ],
               ),
               FSidebarGroup(
                 label: const Text('Group 2'),
-                children: [FSidebarItem(icon: const Icon(FIcons.file), label: const Text('Item 3'), onPress: () {})],
+                children: [FSidebarItem(icon: const Icon(FLucideIcons.file), label: const Text('Item 3'), onPress: () {})],
               ),
             ],
           ),
@@ -230,17 +230,17 @@ void main() {
                 children: [
                   FSidebarGroup(
                     label: const Text('Group 1'),
-                    action: const Icon(FIcons.plus),
+                    action: const Icon(FLucideIcons.plus),
                     onActionPress: () {},
                     children: [
-                      FSidebarItem(icon: const Icon(FIcons.box), label: const Text('Item 1'), onPress: () {}),
-                      FSidebarItem(icon: const Icon(FIcons.folder), label: const Text('Item 2'), onPress: () {}),
+                      FSidebarItem(icon: const Icon(FLucideIcons.box), label: const Text('Item 1'), onPress: () {}),
+                      FSidebarItem(icon: const Icon(FLucideIcons.folder), label: const Text('Item 2'), onPress: () {}),
                     ],
                   ),
                   FSidebarGroup(
                     label: const Text('Group 2'),
                     children: [
-                      FSidebarItem(icon: const Icon(FIcons.file), label: const Text('Item 3'), onPress: () {}),
+                      FSidebarItem(icon: const Icon(FLucideIcons.file), label: const Text('Item 3'), onPress: () {}),
                     ],
                   ),
                 ],
@@ -264,16 +264,16 @@ void main() {
             children: [
               FSidebarGroup(
                 label: const Text('Group 1'),
-                action: const Icon(FIcons.plus),
+                action: const Icon(FLucideIcons.plus),
                 onActionPress: () {},
                 children: [
-                  FSidebarItem(icon: const Icon(FIcons.box), label: const Text('Item 1'), onPress: () {}),
-                  FSidebarItem(icon: const Icon(FIcons.folder), label: const Text('Item 2'), onPress: () {}),
+                  FSidebarItem(icon: const Icon(FLucideIcons.box), label: const Text('Item 1'), onPress: () {}),
+                  FSidebarItem(icon: const Icon(FLucideIcons.folder), label: const Text('Item 2'), onPress: () {}),
                 ],
               ),
               FSidebarGroup(
                 label: const Text('Group 2'),
-                children: [FSidebarItem(icon: const Icon(FIcons.file), label: const Text('Item 3'), onPress: () {})],
+                children: [FSidebarItem(icon: const Icon(FLucideIcons.file), label: const Text('Item 3'), onPress: () {})],
               ),
             ],
           ),

@@ -58,7 +58,7 @@ class PlaceholderContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) =>
-      Icon(FIcons.userRound, size: size / 2, color: style.call(context.theme.avatarStyle).foregroundColor);
+      Icon(FLucideIcons.userRound, size: size / 2, color: style.call(context.theme.avatarStyle).foregroundColor);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

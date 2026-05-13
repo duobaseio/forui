@@ -11,9 +11,9 @@ class ItemPage extends Example {
 
   @override
   Widget example(BuildContext _) => FItem(
-    prefix: const Icon(FIcons.user),
+    prefix: const Icon(FLucideIcons.user),
     title: const Text('Personalization'),
-    suffix: const Icon(FIcons.chevronRight),
+    suffix: const Icon(FLucideIcons.chevronRight),
     // {@highlight}
     onPress: () {},
     // {@endhighlight}
@@ -29,9 +29,9 @@ class ItemDestructivePage extends Example {
     // {@highlight}
     variant: .destructive,
     // {@endhighlight}
-    prefix: const Icon(FIcons.trash),
+    prefix: const Icon(FLucideIcons.trash),
     title: const Text('Delete Account'),
-    suffix: const Icon(FIcons.chevronRight),
+    suffix: const Icon(FLucideIcons.chevronRight),
     onPress: () {},
   );
 }
@@ -45,9 +45,9 @@ class ItemDisabledPage extends Example {
     // {@highlight}
     enabled: false,
     // {@endhighlight}
-    prefix: const Icon(FIcons.user),
+    prefix: const Icon(FLucideIcons.user),
     title: const Text('Personalization'),
-    suffix: const Icon(FIcons.chevronRight),
+    suffix: const Icon(FLucideIcons.chevronRight),
     onPress: () {},
   );
 }
@@ -58,9 +58,9 @@ class ItemUntappablePage extends Example {
 
   @override
   Widget example(BuildContext _) => FItem(
-    prefix: const Icon(FIcons.user),
+    prefix: const Icon(FLucideIcons.user),
     title: const Text('Personalization'),
-    suffix: const Icon(FIcons.chevronRight),
+    suffix: const Icon(FLucideIcons.chevronRight),
   );
 }
 
@@ -70,12 +70,12 @@ class ItemSubtitlePage extends Example {
 
   @override
   Widget example(BuildContext _) => FItem(
-    prefix: const Icon(FIcons.bell),
+    prefix: const Icon(FLucideIcons.bell),
     title: const Text('Notifications'),
     // {@highlight}
     subtitle: const Text('Banners, Sounds, Badges'),
     // {@endhighlight}
-    suffix: const Icon(FIcons.chevronRight),
+    suffix: const Icon(FLucideIcons.chevronRight),
     onPress: () {},
   );
 }
@@ -86,12 +86,12 @@ class ItemDetailsPage extends Example {
 
   @override
   Widget example(BuildContext _) => FItem(
-    prefix: const Icon(FIcons.wifi),
+    prefix: const Icon(FLucideIcons.wifi),
     title: const Text('WiFi'),
     // {@highlight}
     details: const Text('Duobase (5G)'),
     // {@endhighlight}
-    suffix: const Icon(FIcons.chevronRight),
+    suffix: const Icon(FLucideIcons.chevronRight),
     onPress: () {},
   );
 }

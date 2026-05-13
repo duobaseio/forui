@@ -294,7 +294,7 @@ class FSubmenuTile extends StatelessWidget with FTileMixin {
             prefix: prefix,
             title: title,
             subtitle: subtitle,
-            suffix: suffix ?? const Icon(FIcons.chevronRight),
+            suffix: suffix ?? const Icon(FLucideIcons.chevronRight),
             onPress: () {},
           ),
         ),

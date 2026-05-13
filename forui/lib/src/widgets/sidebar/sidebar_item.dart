@@ -229,7 +229,7 @@ class _FSidebarItemState extends State<FSidebarItem> with TickerProviderStateMix
               if (widget.children.isNotEmpty)
                 IconTheme(
                   data: _style!.collapsibleIconStyle.resolve(variants),
-                  child: RotationTransition(turns: _iconRotation!, child: const Icon(FIcons.chevronRight)),
+                  child: RotationTransition(turns: _iconRotation!, child: const Icon(FLucideIcons.chevronRight)),
                 ),
             ],
           ),

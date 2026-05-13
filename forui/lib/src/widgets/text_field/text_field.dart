@@ -76,7 +76,7 @@ class FTextField extends StatelessWidget {
         style: style.obscureButtonStyle,
         onPress: variants.contains(FTextFieldVariant.disabled) ? null : () => obscure.value = !obscure.value,
         child: Icon(
-          obscure.value ? FIcons.eye : FIcons.eyeClosed,
+          obscure.value ? FLucideIcons.eye : FLucideIcons.eyeClosed,
           semanticLabel: obscure.value
               ? localizations.passwordFieldUnobscureTextButtonSemanticsLabel
               : localizations.passwordFieldObscureTextButtonSemanticsLabel,
@@ -96,7 +96,7 @@ class FTextField extends StatelessWidget {
       child: FButton.icon(
         style: style.clearButtonStyle,
         onPress: clear,
-        child: Icon(FIcons.x, semanticLabel: localizations.textFieldClearButtonSemanticsLabel),
+        child: Icon(FLucideIcons.x, semanticLabel: localizations.textFieldClearButtonSemanticsLabel),
       ),
     );
   }

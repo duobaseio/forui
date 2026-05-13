@@ -126,7 +126,7 @@ void main() {
               children: [
                 .item(
                   value: 'v',
-                  prefix: const Icon(FIcons.circle),
+                  prefix: const Icon(FLucideIcons.circle),
                   title: const Text('Title'),
                   subtitle: const Text('subtitle'),
                 ),
@@ -261,7 +261,7 @@ void main() {
             child: FSelect<String>.rich(
               key: key,
               format: (s) => s,
-              children: [.raw(value: 'v', prefix: const Icon(FIcons.circle), child: const Text('Title'))],
+              children: [.raw(value: 'v', prefix: const Icon(FLucideIcons.circle), child: const Text('Title'))],
             ),
           ),
         );

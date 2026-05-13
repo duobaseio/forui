@@ -126,7 +126,7 @@ class _HorizontalDividerState extends State<HorizontalDivider> {
             color: widget.style.color,
             child: SizedBox(height: widget.crossAxisExtent, width: widget.style.width),
           ),
-        if (widget.type == .dividerWithThumb) _Thumb(style: widget.style.thumbStyle, icon: FIcons.gripVertical),
+        if (widget.type == .dividerWithThumb) _Thumb(style: widget.style.thumbStyle, icon: FLucideIcons.gripVertical),
         SizedBox(
           height: widget.crossAxisExtent,
           width: widget.hitRegionExtent,
@@ -183,7 +183,7 @@ class _VerticalDividerState extends State<VerticalDivider> {
             color: widget.style.color,
             child: SizedBox(height: widget.style.width, width: widget.crossAxisExtent),
           ),
-        if (widget.type == .dividerWithThumb) _Thumb(style: widget.style.thumbStyle, icon: FIcons.gripHorizontal),
+        if (widget.type == .dividerWithThumb) _Thumb(style: widget.style.thumbStyle, icon: FLucideIcons.gripHorizontal),
         SizedBox(
           height: widget.hitRegionExtent,
           width: widget.crossAxisExtent,

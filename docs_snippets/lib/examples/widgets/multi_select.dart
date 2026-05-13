@@ -47,19 +47,19 @@ class DetailedMultiSelectPage extends Example {
     format: Text.new,
     children: [
       .item(
-        prefix: const Icon(FIcons.bug),
+        prefix: const Icon(FLucideIcons.bug),
         title: const Text('Bug'),
         subtitle: const Text('An unexpected problem or behavior'),
         value: 'Bug',
       ),
       .item(
-        prefix: const Icon(FIcons.filePlusCorner),
+        prefix: const Icon(FLucideIcons.filePlusCorner),
         title: const Text('Feature'),
         subtitle: const Text('A new feature or enhancement'),
         value: 'Feature',
       ),
       .item(
-        prefix: const Icon(FIcons.messageCircleQuestionMark),
+        prefix: const Icon(FLucideIcons.messageCircleQuestionMark),
         title: const Text('Question'),
         subtitle: const Text('A question or clarification'),
         value: 'Question',
@@ -258,7 +258,7 @@ class AsyncErrorMultiSelectPage extends Example {
       final style = context.theme.selectStyle.fieldStyles.md.iconStyle.base;
       return Padding(
         padding: const .all(8.0),
-        child: Icon(FIcons.messageCircleX, size: style.size, color: style.color),
+        child: Icon(FLucideIcons.messageCircleX, size: style.size, color: style.color),
       );
     },
     // {@endhighlight}
@@ -350,7 +350,7 @@ class PopoverBuilderMultiSelectPage extends Example {
         children: [
           content,
           const FDivider(style: .delta(padding: .value(.zero))),
-          FButton(variant: .ghost, prefix: const Icon(FIcons.plus), child: const Text('Create New'), onPress: () {}),
+          FButton(variant: .ghost, prefix: const Icon(FLucideIcons.plus), child: const Text('Create New'), onPress: () {}),
         ],
       ),
     ),

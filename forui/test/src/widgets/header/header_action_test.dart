@@ -60,7 +60,7 @@ void main() {
                 FHeader(
                   key: const Key('with-actions'),
                   title: const Text('Title'),
-                  suffixes: [FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {})],
+                  suffixes: [FHeaderAction(icon: const Icon(FLucideIcons.plus), onPress: () {})],
                 ),
                 const FHeader(key: Key('without-actions'), title: Text('Title')),
               ],
@@ -86,7 +86,7 @@ void main() {
                   key: const Key('with-actions'),
                   title: const Text('Title'),
                   prefixes: [FHeaderAction.back(onPress: () {})],
-                  suffixes: [FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {})],
+                  suffixes: [FHeaderAction(icon: const Icon(FLucideIcons.plus), onPress: () {})],
                 ),
                 const FHeader.nested(key: Key('without-actions'), title: Text('Title')),
               ],

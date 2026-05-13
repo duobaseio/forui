@@ -66,7 +66,7 @@ class DestructiveToastPage extends Example {
       // {@highlight}
       variant: .destructive,
       // {@endhighlight}
-      icon: const Icon(FIcons.circleX),
+      icon: const Icon(FLucideIcons.circleX),
       title: const Text('Something went wrong'),
       description: const Text('There was a problem with your request.'),
     ),
@@ -88,7 +88,7 @@ class CustomAlignmentToastPage extends Example {
       // {@highlight}
       alignment: FToastAlignment(const Alignment(-0.5, 1), 1),
       // {@endhighlight}
-      icon: const Icon(FIcons.info),
+      icon: const Icon(FLucideIcons.info),
       title: const Text('Event has been created'),
       description: const Text('Friday, May 23, 2025 at 9:00 AM'),
     ),
@@ -110,7 +110,7 @@ class NoAutoDismissToastPage extends Example {
       // {@highlight}
       duration: null,
       // {@endhighlight}
-      icon: const Icon(FIcons.triangleAlert),
+      icon: const Icon(FLucideIcons.triangleAlert),
       title: const Text('Event start time cannot be earlier than 8am'),
     ),
     child: const Text('Show Toast'),
@@ -181,7 +181,7 @@ class AlwaysExpandToastPage extends StatelessWidget {
                   mainAxisSize: .min,
                   onPress: () => showFToast(
                     context: context,
-                    icon: const Icon(FIcons.info),
+                    icon: const Icon(FLucideIcons.info),
                     title: const Text('Event has been created'),
                   ),
                   child: const Text('Show Toast'),
@@ -220,7 +220,7 @@ class DisabledExpandToastPage extends StatelessWidget {
                   mainAxisSize: .min,
                   onPress: () => showFToast(
                     context: context,
-                    icon: const Icon(FIcons.info),
+                    icon: const Icon(FLucideIcons.info),
                     title: const Text('Event has been created'),
                   ),
                   child: const Text('Show Toast'),
@@ -256,7 +256,7 @@ class SwipeToastPage extends StatelessWidget {
                   mainAxisSize: .min,
                   onPress: () => showFToast(
                     context: context,
-                    icon: const Icon(FIcons.info),
+                    icon: const Icon(FLucideIcons.info),
                     title: const Text('Event has been created'),
                   ),
                   child: const Text('Show Toast'),
@@ -295,7 +295,7 @@ class DownSwipeToastPage extends StatelessWidget {
                     // {@highlight}
                     swipeToDismiss: [.down],
                     // {@endhighlight}
-                    icon: const Icon(FIcons.info),
+                    icon: const Icon(FLucideIcons.info),
                     title: const Text('Event has been created'),
                   ),
                   child: const Text('Show Toast'),
@@ -334,7 +334,7 @@ class DisabledSwipeToastPage extends StatelessWidget {
                     // {@highlight}
                     swipeToDismiss: [],
                     // {@endhighlight}
-                    icon: const Icon(FIcons.info),
+                    icon: const Icon(FLucideIcons.info),
                     title: const Text('Event has been created'),
                   ),
                   child: const Text('Show Toast'),

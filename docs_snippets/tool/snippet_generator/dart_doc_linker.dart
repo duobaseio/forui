@@ -66,13 +66,13 @@ class DartDocLinker extends RecursiveAstVisitor<void> {
 
   /// Links property access and method tear-offs where both parts are compile-time identifiers.
   ///
-  /// Handles expressions like `FIcons.anchor`, `context.theme`, or `int.parse` where `prefix.identifier` are both
+  /// Handles expressions like `FLucideIcons.anchor`, `context.theme`, or `int.parse` where `prefix.identifier` are both
   /// simple identifiers known at compile time. [visitPropertyAccess] handles chained access where the target is an
   /// expression.
   @override
   void visitPrefixedIdentifier(PrefixedIdentifier node) {
     switch (node.element) {
-      // Link entire "Type.property" for static accesses like `FIcons.anchor and just the property name for instance
+      // Link entire "Type.property" for static accesses like `FLucideIcons.anchor and just the property name for instance
       // accesses like `instance.property`.
       //
       // Const fields are synthetic and treated as property accesses.

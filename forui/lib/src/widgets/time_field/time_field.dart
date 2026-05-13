@@ -54,7 +54,7 @@ typedef FTimeFieldPopoverBuilder =
 abstract class FTimeField extends StatefulWidget {
   /// The default prefix builder that shows a clock icon.
   static Widget defaultIconBuilder(BuildContext context, FTextFieldStyle style, Set<FTextFieldVariant> variants) =>
-      FTextField.prefixIconBuilder(context, style, variants, const Icon(FIcons.clock4));
+      FTextField.prefixIconBuilder(context, style, variants, const Icon(FLucideIcons.clock4));
 
   /// The default format for [FTimeField.picker], which formats [value] using [format].
   static String defaultFormat(BuildContext context, FTime value, DateFormat format) =>

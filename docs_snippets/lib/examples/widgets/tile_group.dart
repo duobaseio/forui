@@ -15,16 +15,16 @@ class TileGroupPage extends Example {
     description: const Text('Personalize your experience'),
     children: [
       .tile(
-        prefix: const Icon(FIcons.user),
+        prefix: const Icon(FLucideIcons.user),
         title: const Text('Personalization'),
-        suffix: const Icon(FIcons.chevronRight),
+        suffix: const Icon(FLucideIcons.chevronRight),
         onPress: () {},
       ),
       .tile(
-        prefix: const Icon(FIcons.wifi),
+        prefix: const Icon(FLucideIcons.wifi),
         title: const Text('WiFi'),
         details: const Text('Duobase (5G)'),
-        suffix: const Icon(FIcons.chevronRight),
+        suffix: const Icon(FLucideIcons.chevronRight),
         onPress: () {},
       ),
     ],
@@ -42,34 +42,34 @@ class ScrollableTileGroupPage extends Example {
     maxHeight: 200,
     children: [
       .tile(
-        prefix: const Icon(FIcons.user),
+        prefix: const Icon(FLucideIcons.user),
         title: const Text('Personalization'),
-        suffix: const Icon(FIcons.chevronRight),
+        suffix: const Icon(FLucideIcons.chevronRight),
         onPress: () {},
       ),
       .tile(
-        prefix: const Icon(FIcons.mail),
+        prefix: const Icon(FLucideIcons.mail),
         title: const Text('Mail'),
-        suffix: const Icon(FIcons.chevronRight),
+        suffix: const Icon(FLucideIcons.chevronRight),
         onPress: () {},
       ),
       .tile(
-        prefix: const Icon(FIcons.wifi),
+        prefix: const Icon(FLucideIcons.wifi),
         title: const Text('WiFi'),
         details: const Text('Duobase (5G)'),
-        suffix: const Icon(FIcons.chevronRight),
+        suffix: const Icon(FLucideIcons.chevronRight),
         onPress: () {},
       ),
       .tile(
-        prefix: const Icon(FIcons.alarmClock),
+        prefix: const Icon(FLucideIcons.alarmClock),
         title: const Text('Alarm Clock'),
-        suffix: const Icon(FIcons.chevronRight),
+        suffix: const Icon(FLucideIcons.chevronRight),
         onPress: () {},
       ),
       .tile(
-        prefix: const Icon(FIcons.qrCode),
+        prefix: const Icon(FLucideIcons.qrCode),
         title: const Text('QR code'),
-        suffix: const Icon(FIcons.chevronRight),
+        suffix: const Icon(FLucideIcons.chevronRight),
         onPress: () {},
       ),
     ],
@@ -87,7 +87,7 @@ class LazyTileGroupPage extends Example {
     maxHeight: 200,
     count: 200,
     tileBuilder: (context, index) =>
-        FTile(title: Text('Tile $index'), suffix: const Icon(FIcons.chevronRight), onPress: () {}),
+        FTile(title: Text('Tile $index'), suffix: const Icon(FLucideIcons.chevronRight), onPress: () {}),
   );
 }
 
@@ -107,16 +107,16 @@ class _MergeTileGroupPageState extends StatefulExampleState<MergeTileGroupPage> 
       .group(
         children: [
           .tile(
-            prefix: const Icon(FIcons.user),
+            prefix: const Icon(FLucideIcons.user),
             title: const Text('Personalization'),
-            suffix: const Icon(FIcons.chevronRight),
+            suffix: const Icon(FLucideIcons.chevronRight),
             onPress: () {},
           ),
           .tile(
-            prefix: const Icon(FIcons.wifi),
+            prefix: const Icon(FLucideIcons.wifi),
             title: const Text('WiFi'),
             details: const Text('Duobase (5G)'),
-            suffix: const Icon(FIcons.chevronRight),
+            suffix: const Icon(FLucideIcons.chevronRight),
             onPress: () {},
           ),
         ],
@@ -145,16 +145,16 @@ class FullDividerTileGroupPage extends Example {
     // {@endhighlight}
     children: [
       .tile(
-        prefix: const Icon(FIcons.user),
+        prefix: const Icon(FLucideIcons.user),
         title: const Text('Personalization'),
-        suffix: const Icon(FIcons.chevronRight),
+        suffix: const Icon(FLucideIcons.chevronRight),
         onPress: () {},
       ),
       .tile(
-        prefix: const Icon(FIcons.wifi),
+        prefix: const Icon(FLucideIcons.wifi),
         title: const Text('WiFi'),
         details: const Text('Duobase (5G)'),
-        suffix: const Icon(FIcons.chevronRight),
+        suffix: const Icon(FLucideIcons.chevronRight),
         onPress: () {},
       ),
     ],
@@ -174,16 +174,16 @@ class NoDividerTileGroupPage extends Example {
     // {@endhighlight}
     children: [
       .tile(
-        prefix: const Icon(FIcons.user),
+        prefix: const Icon(FLucideIcons.user),
         title: const Text('Personalization'),
-        suffix: const Icon(FIcons.chevronRight),
+        suffix: const Icon(FLucideIcons.chevronRight),
         onPress: () {},
       ),
       .tile(
-        prefix: const Icon(FIcons.wifi),
+        prefix: const Icon(FLucideIcons.wifi),
         title: const Text('WiFi'),
         details: const Text('Duobase (5G)'),
-        suffix: const Icon(FIcons.chevronRight),
+        suffix: const Icon(FLucideIcons.chevronRight),
         onPress: () {},
       ),
     ],

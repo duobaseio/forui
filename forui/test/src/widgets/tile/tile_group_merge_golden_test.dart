@@ -29,10 +29,10 @@ void main() {
                 label: const Text('Network'),
                 children: [
                   .tile(
-                    prefix: const Icon(FIcons.wifi),
+                    prefix: const Icon(FLucideIcons.wifi),
                     title: const Text('WiFi'),
                     details: const Text('Duobase (5G)'),
-                    suffix: const Icon(FIcons.chevronRight),
+                    suffix: const Icon(FLucideIcons.chevronRight),
                     onPress: () {},
                   ),
                 ],
@@ -53,18 +53,18 @@ void main() {
             label: const Text('Network'),
             children: [
               .tile(
-                prefix: const Icon(FIcons.wifi),
+                prefix: const Icon(FLucideIcons.wifi),
                 title: const Text('WiFi'),
                 details: const Text('Duobase (5G)'),
-                suffix: const Icon(FIcons.chevronRight),
+                suffix: const Icon(FLucideIcons.chevronRight),
                 onPress: () {},
               ),
               .tile(
-                prefix: const Icon(FIcons.bluetooth),
+                prefix: const Icon(FLucideIcons.bluetooth),
                 title: const Text('Bluetooth'),
                 subtitle: const Text('Fee, Fo, Fum'),
                 details: const Text('Duobase (5G)'),
-                suffix: const Icon(FIcons.chevronRight),
+                suffix: const Icon(FLucideIcons.chevronRight),
                 onPress: () {},
               ),
             ],
@@ -90,18 +90,18 @@ void main() {
             children: [
               .tile(
                 enabled: false,
-                prefix: const Icon(FIcons.wifi),
+                prefix: const Icon(FLucideIcons.wifi),
                 title: const Text('WiFi'),
                 details: const Text('Duobase (5G)'),
-                suffix: const Icon(FIcons.chevronRight),
+                suffix: const Icon(FLucideIcons.chevronRight),
                 onPress: () {},
               ),
               .tile(
-                prefix: const Icon(FIcons.bluetooth),
+                prefix: const Icon(FLucideIcons.bluetooth),
                 title: const Text('Bluetooth'),
                 subtitle: const Text('Fee, Fo, Fum'),
                 details: const Text('Duobase (5G)'),
-                suffix: const Icon(FIcons.chevronRight),
+                suffix: const Icon(FLucideIcons.chevronRight),
                 onPress: () {},
               ),
             ],
@@ -127,22 +127,22 @@ void main() {
                 .group(
                   children: [
                     .tile(
-                      prefix: const Icon(FIcons.wifi),
+                      prefix: const Icon(FLucideIcons.wifi),
                       title: const Text('WiFi'),
-                      suffix: const Icon(FIcons.chevronRight),
+                      suffix: const Icon(FLucideIcons.chevronRight),
                       onPress: () {},
                     ),
                     .tile(
-                      prefix: const Icon(FIcons.mail),
+                      prefix: const Icon(FLucideIcons.mail),
                       title: const Text('Mail'),
-                      suffix: const Icon(FIcons.chevronRight),
+                      suffix: const Icon(FLucideIcons.chevronRight),
                       onPress: () {},
                     ),
                     .tile(
-                      prefix: const Icon(FIcons.bluetooth),
+                      prefix: const Icon(FLucideIcons.bluetooth),
                       title: const Text('Bluetooth'),
                       subtitle: const Text('Fee, Fo'),
-                      suffix: const Icon(FIcons.chevronRight),
+                      suffix: const Icon(FLucideIcons.chevronRight),
                       onPress: () {},
                     ),
                   ],
@@ -150,16 +150,16 @@ void main() {
                 .group(
                   children: [
                     .tile(
-                      prefix: const Icon(FIcons.wifi),
+                      prefix: const Icon(FLucideIcons.wifi),
                       title: const Text('WiFi'),
-                      suffix: const Icon(FIcons.chevronRight),
+                      suffix: const Icon(FLucideIcons.chevronRight),
                       onPress: () {},
                     ),
                     .tile(
-                      prefix: const Icon(FIcons.bluetooth),
+                      prefix: const Icon(FLucideIcons.bluetooth),
                       title: const Text('Bluetooth'),
                       subtitle: const Text('Fee, Fo'),
-                      suffix: const Icon(FIcons.chevronRight),
+                      suffix: const Icon(FLucideIcons.chevronRight),
                       onPress: () {},
                     ),
                   ],
@@ -167,16 +167,16 @@ void main() {
                 .group(
                   children: [
                     .tile(
-                      prefix: const Icon(FIcons.wifi),
+                      prefix: const Icon(FLucideIcons.wifi),
                       title: const Text('WiFi'),
-                      suffix: const Icon(FIcons.chevronRight),
+                      suffix: const Icon(FLucideIcons.chevronRight),
                       onPress: () {},
                     ),
                     .tile(
-                      prefix: const Icon(FIcons.bluetooth),
+                      prefix: const Icon(FLucideIcons.bluetooth),
                       title: const Text('Bluetooth'),
                       subtitle: const Text('Fee, Fo'),
-                      suffix: const Icon(FIcons.chevronRight),
+                      suffix: const Icon(FLucideIcons.chevronRight),
                       onPress: () {},
                     ),
                   ],
@@ -202,9 +202,9 @@ void main() {
                 .group(
                   children: [
                     .tile(
-                      prefix: const Icon(FIcons.wifi),
+                      prefix: const Icon(FLucideIcons.wifi),
                       title: const Text('WiFi'),
-                      suffix: const Icon(FIcons.chevronRight),
+                      suffix: const Icon(FLucideIcons.chevronRight),
                       onPress: () {},
                     ),
                   ],
@@ -212,14 +212,14 @@ void main() {
                 .group(
                   children: [
                     .tile(
-                      prefix: const Icon(FIcons.mail),
+                      prefix: const Icon(FLucideIcons.mail),
                       title: const Text('Mail'),
-                      suffix: const Icon(FIcons.chevronRight),
+                      suffix: const Icon(FLucideIcons.chevronRight),
                     ),
                     .tile(
-                      prefix: const Icon(FIcons.bluetooth),
+                      prefix: const Icon(FLucideIcons.bluetooth),
                       title: const Text('Bluetooth'),
-                      suffix: const Icon(FIcons.chevronRight),
+                      suffix: const Icon(FLucideIcons.chevronRight),
                       onPress: () {},
                     ),
                   ],
@@ -248,9 +248,9 @@ void main() {
                 .group(
                   children: [
                     .tile(
-                      prefix: const Icon(FIcons.wifi),
+                      prefix: const Icon(FLucideIcons.wifi),
                       title: const Text('WiFi'),
-                      suffix: const Icon(FIcons.chevronRight),
+                      suffix: const Icon(FLucideIcons.chevronRight),
                       onPress: () {},
                     ),
                   ],
@@ -258,14 +258,14 @@ void main() {
                 .group(
                   children: [
                     .tile(
-                      prefix: const Icon(FIcons.mail),
+                      prefix: const Icon(FLucideIcons.mail),
                       title: const Text('Mail'),
-                      suffix: const Icon(FIcons.chevronRight),
+                      suffix: const Icon(FLucideIcons.chevronRight),
                     ),
                     .tile(
-                      prefix: const Icon(FIcons.bluetooth),
+                      prefix: const Icon(FLucideIcons.bluetooth),
                       title: const Text('Bluetooth'),
-                      suffix: const Icon(FIcons.chevronRight),
+                      suffix: const Icon(FLucideIcons.chevronRight),
                       onPress: () {},
                     ),
                   ],
@@ -296,16 +296,16 @@ void main() {
                 .group(
                   children: [
                     .tile(
-                      prefix: const Icon(FIcons.wifi),
+                      prefix: const Icon(FLucideIcons.wifi),
                       title: const Text('WiFi'),
-                      suffix: const Icon(FIcons.chevronRight),
+                      suffix: const Icon(FLucideIcons.chevronRight),
                       onPress: () {},
                     ),
                     .tile(
                       focusNode: focusNode,
-                      prefix: const Icon(FIcons.mail),
+                      prefix: const Icon(FLucideIcons.mail),
                       title: const Text('Mail'),
-                      suffix: const Icon(FIcons.chevronRight),
+                      suffix: const Icon(FLucideIcons.chevronRight),
                       onPress: () {},
                     ),
                   ],
@@ -313,15 +313,15 @@ void main() {
                 .group(
                   children: [
                     .tile(
-                      prefix: const Icon(FIcons.bluetooth),
+                      prefix: const Icon(FLucideIcons.bluetooth),
                       title: const Text('Bluetooth'),
-                      suffix: const Icon(FIcons.chevronRight),
+                      suffix: const Icon(FLucideIcons.chevronRight),
                       onPress: () {},
                     ),
                     .tile(
-                      prefix: const Icon(FIcons.arrowDown),
+                      prefix: const Icon(FLucideIcons.arrowDown),
                       title: const Text('Last'),
-                      suffix: const Icon(FIcons.chevronRight),
+                      suffix: const Icon(FLucideIcons.chevronRight),
                     ),
                   ],
                 ),
@@ -355,9 +355,9 @@ void main() {
               .group(
                 children: [
                   .tile(
-                    prefix: const Icon(FIcons.wifi),
+                    prefix: const Icon(FLucideIcons.wifi),
                     title: const Text('WiFi'),
-                    suffix: const Icon(FIcons.chevronRight),
+                    suffix: const Icon(FLucideIcons.chevronRight),
                     onPress: () {},
                   ),
                 ],
@@ -365,9 +365,9 @@ void main() {
               .group(
                 children: [
                   .tile(
-                    prefix: const Icon(FIcons.wifi),
+                    prefix: const Icon(FLucideIcons.wifi),
                     title: const Text('WiFi'),
-                    suffix: const Icon(FIcons.chevronRight),
+                    suffix: const Icon(FLucideIcons.chevronRight),
                     onPress: () {},
                   ),
                 ],
@@ -392,9 +392,9 @@ void main() {
               .group(
                 children: [
                   .tile(
-                    prefix: const Icon(FIcons.wifi),
+                    prefix: const Icon(FLucideIcons.wifi),
                     title: const Text('WiFi'),
-                    suffix: const Icon(FIcons.chevronRight),
+                    suffix: const Icon(FLucideIcons.chevronRight),
                     onPress: () {},
                   ),
                 ],
@@ -402,9 +402,9 @@ void main() {
               .group(
                 children: [
                   .tile(
-                    prefix: const Icon(FIcons.wifi),
+                    prefix: const Icon(FLucideIcons.wifi),
                     title: const Text('WiFi'),
-                    suffix: const Icon(FIcons.chevronRight),
+                    suffix: const Icon(FLucideIcons.chevronRight),
                     onPress: () {},
                   ),
                 ],
@@ -425,10 +425,10 @@ void main() {
               .group(
                 children: [
                   .tile(
-                    prefix: const Icon(FIcons.wifi),
+                    prefix: const Icon(FLucideIcons.wifi),
                     title: const Text('WiFi'),
                     details: const Text('FL (5G)'),
-                    suffix: const Icon(FIcons.chevronRight),
+                    suffix: const Icon(FLucideIcons.chevronRight),
                     onPress: () {},
                   ),
                 ],
@@ -462,15 +462,15 @@ void main() {
               divider: .none,
               children: [
                 .tile(
-                  prefix: const Icon(FIcons.list, color: Colors.transparent),
+                  prefix: const Icon(FLucideIcons.list, color: Colors.transparent),
                   title: const Text('Personalization'),
-                  suffix: const Icon(FIcons.user),
+                  suffix: const Icon(FLucideIcons.user),
                   onPress: () {},
                 ),
                 .tile(
-                  prefix: const Icon(FIcons.list, color: Colors.transparent),
+                  prefix: const Icon(FLucideIcons.list, color: Colors.transparent),
                   title: const Text('Network'),
-                  suffix: const Icon(FIcons.appWindowMac),
+                  suffix: const Icon(FLucideIcons.appWindowMac),
                   onPress: () {},
                 ),
               ],
@@ -479,15 +479,15 @@ void main() {
               divider: .none,
               children: [
                 .tile(
-                  prefix: const Icon(FIcons.list, color: Colors.transparent),
+                  prefix: const Icon(FLucideIcons.list, color: Colors.transparent),
                   title: const Text('List View'),
-                  suffix: const Icon(FIcons.list),
+                  suffix: const Icon(FLucideIcons.list),
                   onPress: () {},
                 ),
                 .tile(
-                  prefix: const Icon(FIcons.list, color: Colors.transparent),
+                  prefix: const Icon(FLucideIcons.list, color: Colors.transparent),
                   title: const Text('Grid View'),
-                  suffix: const Icon(FIcons.layoutGrid),
+                  suffix: const Icon(FLucideIcons.layoutGrid),
                   onPress: () {},
                 ),
               ],
@@ -512,10 +512,10 @@ void main() {
               error: const Text('This should not appear'),
               children: [
                 .tile(
-                  prefix: const Icon(FIcons.wifi),
+                  prefix: const Icon(FLucideIcons.wifi),
                   title: const Text('WiFi'),
                   details: const Text('FL (5G)'),
-                  suffix: const Icon(FIcons.chevronRight),
+                  suffix: const Icon(FLucideIcons.chevronRight),
                   onPress: () {},
                 ),
               ],
@@ -540,10 +540,10 @@ void main() {
               error: const Text('This should not appear'),
               children: [
                 .tile(
-                  prefix: const Icon(FIcons.wifi),
+                  prefix: const Icon(FLucideIcons.wifi),
                   title: const Text('WiFi'),
                   details: const Text('FL (5G)'),
-                  suffix: const Icon(FIcons.chevronRight),
+                  suffix: const Icon(FLucideIcons.chevronRight),
                   onPress: () {},
                 ),
               ],
@@ -554,10 +554,10 @@ void main() {
               error: const Text('This should not appear'),
               children: [
                 .tile(
-                  prefix: const Icon(FIcons.wifi),
+                  prefix: const Icon(FLucideIcons.wifi),
                   title: const Text('WiFi'),
                   details: const Text('FL (5G)'),
-                  suffix: const Icon(FIcons.chevronRight),
+                  suffix: const Icon(FLucideIcons.chevronRight),
                   onPress: () {},
                 ),
               ],
@@ -579,29 +579,29 @@ void main() {
               style: FThemes.green.dark.touch.tileGroupStyle,
               children: [
                 .tile(
-                  prefix: const Icon(FIcons.wifi),
+                  prefix: const Icon(FLucideIcons.wifi),
                   title: const Text('WiFi'),
                   details: const Text('FL (5G)'),
-                  suffix: const Icon(FIcons.chevronRight),
+                  suffix: const Icon(FLucideIcons.chevronRight),
                   onPress: () {},
                 ),
                 .tile(
                   style: FThemes.blue.dark.touch.tileGroupStyle.tileStyles.base,
-                  prefix: const Icon(FIcons.bluetooth),
+                  prefix: const Icon(FLucideIcons.bluetooth),
                   title: const Text('Bluetooth'),
                   subtitle: const Text('Fee, Fo'),
                   details: const Text('FL (5G)'),
-                  suffix: const Icon(FIcons.chevronRight),
+                  suffix: const Icon(FLucideIcons.chevronRight),
                 ),
               ],
             ),
             .group(
               children: [
                 .tile(
-                  prefix: const Icon(FIcons.wifi),
+                  prefix: const Icon(FLucideIcons.wifi),
                   title: const Text('WiFi'),
                   details: const Text('FL (5G)'),
-                  suffix: const Icon(FIcons.chevronRight),
+                  suffix: const Icon(FLucideIcons.chevronRight),
                   onPress: () {},
                 ),
               ],
@@ -623,18 +623,18 @@ void main() {
             .group(
               children: [
                 .tile(
-                  prefix: const Icon(FIcons.wifi),
+                  prefix: const Icon(FLucideIcons.wifi),
                   title: const Text('WiFi'),
                   details: const Text('FL (5G)'),
-                  suffix: const Icon(FIcons.chevronRight),
+                  suffix: const Icon(FLucideIcons.chevronRight),
                   onPress: () {},
                 ),
                 .tile(
-                  prefix: const Icon(FIcons.bluetooth),
+                  prefix: const Icon(FLucideIcons.bluetooth),
                   title: const Text('Bluetooth'),
                   subtitle: const Text('Fee, Fo'),
                   details: const Text('FL (5G)'),
-                  suffix: const Icon(FIcons.chevronRight),
+                  suffix: const Icon(FLucideIcons.chevronRight),
                 ),
               ],
             ),
@@ -642,10 +642,10 @@ void main() {
               enabled: true,
               children: [
                 .tile(
-                  prefix: const Icon(FIcons.wifi),
+                  prefix: const Icon(FLucideIcons.wifi),
                   title: const Text('WiFi'),
                   details: const Text('FL (5G)'),
-                  suffix: const Icon(FIcons.chevronRight),
+                  suffix: const Icon(FLucideIcons.chevronRight),
                   onPress: () {},
                 ),
               ],

@@ -36,7 +36,7 @@ class FAccordionItem extends StatefulWidget with FAccordionItemMixin {
   /// The title.
   final Widget title;
 
-  /// The icon, wrapped in a [IconTheme]. Defaults to `Icon(FIcons.chevronRight)`.
+  /// The icon, wrapped in a [IconTheme]. Defaults to `Icon(FLucideIcons.chevronRight)`.
   final Widget icon;
 
   /// True if the parent accordion is managed and the item is initially expanded.
@@ -68,7 +68,7 @@ class FAccordionItem extends StatefulWidget with FAccordionItemMixin {
     required this.title,
     required this.child,
     this.style = const .context(),
-    this.icon = const Icon(FIcons.chevronDown),
+    this.icon = const Icon(FLucideIcons.chevronDown),
     this.initiallyExpanded,
     this.autofocus = false,
     this.focusNode,

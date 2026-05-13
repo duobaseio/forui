@@ -20,7 +20,7 @@ class _ScaffoldPageState extends StatefulExampleState<ScaffoldPage> {
     const FHeader(title: Text('Search')),
     FHeader(
       title: const Text('Settings'),
-      suffixes: [FHeaderAction(icon: const Icon(FIcons.ellipsis), onPress: () {})],
+      suffixes: [FHeaderAction(icon: const Icon(FLucideIcons.ellipsis), onPress: () {})],
     ),
   ];
 
@@ -59,10 +59,10 @@ class _ScaffoldPageState extends StatefulExampleState<ScaffoldPage> {
         index: _index,
         onChange: (index) => setState(() => _index = index),
         children: const [
-          FBottomNavigationBarItem(icon: Icon(FIcons.house), label: Text('Home')),
-          FBottomNavigationBarItem(icon: Icon(FIcons.layoutGrid), label: Text('Categories')),
-          FBottomNavigationBarItem(icon: Icon(FIcons.search), label: Text('Search')),
-          FBottomNavigationBarItem(icon: Icon(FIcons.settings), label: Text('Settings')),
+          FBottomNavigationBarItem(icon: Icon(FLucideIcons.house), label: Text('Home')),
+          FBottomNavigationBarItem(icon: Icon(FLucideIcons.layoutGrid), label: Text('Categories')),
+          FBottomNavigationBarItem(icon: Icon(FLucideIcons.search), label: Text('Search')),
+          FBottomNavigationBarItem(icon: Icon(FLucideIcons.settings), label: Text('Settings')),
         ],
       ),
       child: _contents[_index],

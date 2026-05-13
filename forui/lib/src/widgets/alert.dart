@@ -82,7 +82,7 @@ class FAlert extends StatelessWidget {
   const FAlert({
     required this.title,
     this.clipBehavior = .none,
-    this.icon = const Icon(FIcons.circleAlert),
+    this.icon = const Icon(FLucideIcons.circleAlert),
     this.subtitle,
     this.variant = .primary,
     this.style = const .context(),

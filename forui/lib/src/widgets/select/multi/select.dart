@@ -57,7 +57,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
   static Widget defaultIconBuilder(BuildContext _, FMultiSelectFieldStyle style, Set<FTextFieldVariant> variants) =>
       Padding(
         padding: const .directional(start: 4),
-        child: IconTheme(data: style.iconStyle.resolve(variants), child: const Icon(FIcons.chevronDown)),
+        child: IconTheme(data: style.iconStyle.resolve(variants), child: const Icon(FLucideIcons.chevronDown)),
       );
 
   /// The default tag builder that builds a [FMultiSelectTag] with the given value.
@@ -862,7 +862,7 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
                                     style: fieldStyle.clearButtonStyle,
                                     onPress: () => _controller.value = {},
                                     child: Icon(
-                                      FIcons.x,
+                                      FLucideIcons.x,
                                       semanticLabel: localizations.textFieldClearButtonSemanticsLabel,
                                     ),
                                   ),

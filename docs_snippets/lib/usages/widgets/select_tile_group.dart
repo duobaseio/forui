@@ -96,7 +96,7 @@ final selectTile = FSelectTile<String>(
   title: const Text('Apple'),
   subtitle: const Text('A red fruit'),
   details: const Text(r'$1.99'),
-  checkedIcon: const Icon(FIcons.check),
+  checkedIcon: const Icon(FLucideIcons.check),
   uncheckedIcon: null,
   suffix: null,
   // {@endcategory}
@@ -122,7 +122,7 @@ final selectTileSuffix = FSelectTile<String>.suffix(
   title: const Text('Apple'),
   subtitle: const Text('A red fruit'),
   details: const Text(r'$1.99'),
-  checkedIcon: const Icon(FIcons.check),
+  checkedIcon: const Icon(FLucideIcons.check),
   uncheckedIcon: null,
   prefix: null,
   // {@endcategory}

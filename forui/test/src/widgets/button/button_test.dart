@@ -112,11 +112,11 @@ void main() {
     testWidgets('FButton.icon with builder only renders', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          child: FButton.icon(onPress: () {}, builder: (context, style, iconStyle, child) => const Icon(FIcons.search)),
+          child: FButton.icon(onPress: () {}, builder: (context, style, iconStyle, child) => const Icon(FLucideIcons.search)),
         ),
       );
 
-      expect(find.byIcon(FIcons.search), findsOneWidget);
+      expect(find.byIcon(FLucideIcons.search), findsOneWidget);
     });
 
     test('FButton.icon asserts when neither builder nor child is provided', () {
@@ -160,7 +160,7 @@ void main() {
                     key: const Key('icon-button'),
                     size: size,
                     onPress: () {},
-                    child: const Icon(FIcons.search),
+                    child: const Icon(FLucideIcons.search),
                   ),
                 ],
               ),

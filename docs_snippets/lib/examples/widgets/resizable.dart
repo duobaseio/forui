@@ -25,17 +25,17 @@ class ResizablePage extends Example {
         .region(
           initialExtent: 250,
           minExtent: 100,
-          builder: (_, data, _) => Label(data: data, icon: FIcons.sunrise, label: 'Morning'),
+          builder: (_, data, _) => Label(data: data, icon: FLucideIcons.sunrise, label: 'Morning'),
         ),
         .region(
           initialExtent: 100,
           minExtent: 100,
-          builder: (_, data, _) => Label(data: data, icon: FIcons.sun, label: 'Afternoon'),
+          builder: (_, data, _) => Label(data: data, icon: FLucideIcons.sun, label: 'Afternoon'),
         ),
         .region(
           initialExtent: 250,
           minExtent: 100,
-          builder: (_, data, _) => Label(data: data, icon: FIcons.sunset, label: 'Evening'),
+          builder: (_, data, _) => Label(data: data, icon: FLucideIcons.sunset, label: 'Evening'),
         ),
       ],
     ),
@@ -63,17 +63,17 @@ class NoCascadingResizablePage extends Example {
         .region(
           initialExtent: 200,
           minExtent: 100,
-          builder: (_, data, _) => Label(data: data, icon: FIcons.sunrise, label: 'Morning'),
+          builder: (_, data, _) => Label(data: data, icon: FLucideIcons.sunrise, label: 'Morning'),
         ),
         .region(
           initialExtent: 200,
           minExtent: 100,
-          builder: (_, data, _) => Label(data: data, icon: FIcons.sun, label: 'Afternoon'),
+          builder: (_, data, _) => Label(data: data, icon: FLucideIcons.sun, label: 'Afternoon'),
         ),
         .region(
           initialExtent: 200,
           minExtent: 100,
-          builder: (_, data, _) => Label(data: data, icon: FIcons.sunset, label: 'Evening'),
+          builder: (_, data, _) => Label(data: data, icon: FLucideIcons.sunset, label: 'Evening'),
         ),
       ],
     ),

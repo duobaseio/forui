@@ -26,7 +26,7 @@ void main() {
               child: Builder(
                 builder: (context) => Center(
                   child: FButton.icon(
-                    child: const Icon(FIcons.chevronRight),
+                    child: const Icon(FLucideIcons.chevronRight),
                     onPress: () {
                       controller = showFPersistentSheet(
                         context: context,
@@ -65,7 +65,7 @@ void main() {
               child: Builder(
                 builder: (context) => Center(
                   child: FButton.icon(
-                    child: const Icon(FIcons.chevronRight),
+                    child: const Icon(FLucideIcons.chevronRight),
                     onPress: () {
                       controller = showFPersistentSheet(
                         context: context,
@@ -104,7 +104,7 @@ void main() {
             child: Builder(
               builder: (context) => Center(
                 child: FButton.icon(
-                  child: const Icon(FIcons.chevronRight),
+                  child: const Icon(FLucideIcons.chevronRight),
                   onPress: () {
                     controller = showFPersistentSheet(
                       context: context,
@@ -140,7 +140,7 @@ void main() {
             child: Builder(
               builder: (context) => Center(
                 child: FButton.icon(
-                  child: const Icon(FIcons.chevronRight),
+                  child: const Icon(FLucideIcons.chevronRight),
                   onPress: () {
                     controller = showFPersistentSheet(
                       context: context,
@@ -177,7 +177,7 @@ void main() {
             child: Builder(
               builder: (context) => Center(
                 child: FButton.icon(
-                  child: const Icon(FIcons.chevronRight),
+                  child: const Icon(FLucideIcons.chevronRight),
                   onPress: () {
                     controller = showFPersistentSheet(
                       context: context,

@@ -8,7 +8,7 @@ final header = FHeader(
   // {@category "Core"}
   style: const .delta(padding: .value(.zero)),
   title: const Text('Title'),
-  suffixes: [FHeaderAction(icon: const Icon(FIcons.settings), onPress: () {})],
+  suffixes: [FHeaderAction(icon: const Icon(FLucideIcons.settings), onPress: () {})],
   // {@endcategory}
 );
 

@@ -17,7 +17,7 @@ void main() {
           child: TestScaffold.app(
             child: Builder(
               builder: (context) => FButton.icon(
-                child: const Icon(FIcons.chevronRight),
+                child: const Icon(FLucideIcons.chevronRight),
                 onPress: () => showFSheet(
                   context: context,
                   side: .btt,
@@ -47,7 +47,7 @@ void main() {
           child: TestScaffold.app(
             child: Builder(
               builder: (context) => FButton.icon(
-                child: const Icon(FIcons.chevronRight),
+                child: const Icon(FLucideIcons.chevronRight),
                 onPress: () => showFSheet(
                   context: context,
                   side: .btt,
@@ -77,7 +77,7 @@ void main() {
         TestScaffold.app(
           child: Builder(
             builder: (context) => FButton.icon(
-              child: const Icon(FIcons.chevronRight),
+              child: const Icon(FLucideIcons.chevronRight),
               onPress: () => showFSheet(
                 context: context,
                 side: side,
@@ -104,7 +104,7 @@ void main() {
         TestScaffold.app(
           child: Builder(
             builder: (context) => FButton.icon(
-              child: const Icon(FIcons.chevronRight),
+              child: const Icon(FLucideIcons.chevronRight),
               onPress: () => showFSheet(
                 context: context,
                 side: side,
@@ -132,7 +132,7 @@ void main() {
         TestScaffold.app(
           child: Builder(
             builder: (context) => FButton.icon(
-              child: const Icon(FIcons.chevronRight),
+              child: const Icon(FLucideIcons.chevronRight),
               onPress: () => showFSheet(
                 context: context,
                 side: side,

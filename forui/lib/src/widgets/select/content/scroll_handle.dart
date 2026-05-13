@@ -18,11 +18,11 @@ class ScrollHandle extends StatefulWidget {
 
   const ScrollHandle.up({required this.controller, required this.style, super.key})
     : alignment = .topCenter,
-      icon = FIcons.chevronUp;
+      icon = FLucideIcons.chevronUp;
 
   const ScrollHandle.down({required this.controller, required this.style, super.key})
     : alignment = .bottomCenter,
-      icon = FIcons.chevronDown;
+      icon = FLucideIcons.chevronDown;
 
   @override
   State<ScrollHandle> createState() => _ScrollHandleState();
