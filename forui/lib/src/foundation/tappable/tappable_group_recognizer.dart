@@ -56,10 +56,13 @@ class TappableGroupGestureRecognizer extends OneSequenceGestureRecognizer {
   GroupEntry? _current;
   Timer? _longPressTimer;
   bool _accepted = false;
+  Offset _origin = .zero;
+  Offset _lastPosition = .zero;
 
-  /// Stored callback to fire after winning the arena. Only set for same-child taps (pressing → idle) where we defer to
-  /// the arena sweep — this lets scroll recognizers win the sweep when competing.
-  VoidCallback? _pendingOnPress;
+  /// The entry whose tap is awaiting arena resolution, paired with the [TapUpDetails] captured at PointerUp. Only set
+  /// for same-child taps (pressing → idle) where we defer to the arena sweep — this lets scroll recognizers win the
+  /// sweep when competing. [acceptGesture] fires `onPressUp` + `onPress`; [rejectGesture] fires `onPressCancel`.
+  (GroupEntry, TapUpDetails)? _pending;
 
   TappableGroupGestureRecognizer(this.entries, this.slidePressHapticFeedback) : _state = .idle;
 
@@ -72,62 +75,127 @@ class TappableGroupGestureRecognizer extends OneSequenceGestureRecognizer {
   @protected
   void handleEvent(PointerEvent event) {
     switch (event) {
-      case PointerDownEvent(:final buttons, :final position):
+      case PointerDownEvent(:final buttons, :final position, :final kind):
         assert(
           _state == .idle,
           '_state ($_state) must be idle. '
           'This is likely a bug in Forui. Please file a bug report: https://github.com/duobaseio/forui/issues/new?template=bug_report.md',
         );
 
+        // Pressed down on an entry.
         if (entries.firstWhereOrNull((e) => e.hitTest(position)) case final entry?) {
           _state = .pressing;
           _current = entry;
-          _current!.onPressStart(buttons);
-          _start();
+          _origin = position;
+          _lastPosition = position;
+          _start(entry, buttons, position, kind);
         }
 
-      case PointerMoveEvent(:final buttons, :final position):
-        if (_current?.hitTest(position) ?? false) {
-          // Internal movements.
+      case PointerMoveEvent(:final buttons, :final position, :final kind, :final delta):
+        _lastPosition = position;
+
+        // Internal movement over the current entry.
+        if (_current case final current? when current.hitTest(position)) {
+          if (_state == .longPressing) {
+            current.onLongPressMove?.call(
+              LongPressMoveUpdateDetails(
+                globalPosition: position,
+                localPosition: current.localPosition(position),
+                offsetFromOrigin: position - _origin,
+                localOffsetFromOrigin: current.localPosition(position) - current.localPosition(_origin),
+              ),
+            );
+          } else {
+            current.onPressMove?.call(
+              TapMoveDetails(
+                globalPosition: position,
+                localPosition: current.localPosition(position),
+                kind: kind,
+                delta: delta,
+              ),
+            );
+          }
+
           return;
         }
 
-        _state = .sliding;
-        _current?.onPressCancel();
+        // Moved out of the current.
+        if (_current case final current?) {
+          current.exit();
+          if (_state == .longPressing) {
+            current.onLongPressEnd?.call(
+              LongPressEndDetails(globalPosition: position, localPosition: current.localPosition(position)),
+            );
+          } else {
+            current.onPressCancel?.call();
+            current.onLongPressCancel?.call();
+          }
+        }
         _current = null;
+        _state = .sliding;
         _cancel();
 
+        // Moved into another entry.
         if (entries.firstWhereOrNull((e) => e.hitTest(position)) case final entry?) {
           _state = .slidePressing;
           unawaited(slidePressHapticFeedback());
           _current = entry;
-          _current!.onPressStart(buttons);
-          _start();
+          _origin = position;
+          _start(entry, buttons, position, kind);
         }
 
-      case PointerUpEvent(:final pointer):
+      case PointerUpEvent(:final pointer, :final position, :final kind):
+        _lastPosition = position;
+
         switch (_state) {
           // It is possible that the gesture is accepted before [PointerUpEvent] is called.
           case .slidePressing || .pressing when _accepted:
-            _current?.onPressEnd();
-            _current?.onPress?.call();
+            if (_current case final current?) {
+              current.release();
+              current.onPressUp?.call(
+                TapUpDetails(globalPosition: position, localPosition: current.localPosition(position), kind: kind),
+              );
+              current.onPress?.call();
+              current.onLongPressCancel?.call();
+            }
 
+          // Tap not yet accepted. Defer so scroll recognizers can still win the sweep.
           case .slidePressing || .pressing:
-            _current?.onPressEnd();
-            _pendingOnPress = _current?.onPress;
+            if (_current case final current?) {
+              current.release();
+              _pending = (
+                current,
+                TapUpDetails(globalPosition: position, localPosition: current.localPosition(position), kind: kind),
+              );
+              // onLongPressCancel doesn't depend on arena; fire immediately.
+              current.onLongPressCancel?.call();
+            }
 
-          // These two cases provide consistency with .slidePressing triggering onPress even if the tappable which was
-          // slided to has been held for a long time.
-          case .longPressing when _current?.onLongPress == null && _accepted:
-            _current?.onPressEnd();
-            _current?.onPress?.call();
-
+          // Long-press recognized but current has no onLongPress. Fire onPress as the documented
+          // slide-across-after-long-press fallback, alongside the long-press end callbacks.
+          //
+          // No deferral: long-press already won the arena via the timer's resolve(.accepted) so scroll can't take this
+          // anymore.
           case .longPressing when _current?.onLongPress == null:
-            _current?.onPressEnd();
-            _pendingOnPress = _current?.onPress;
+            if (_current case final current?) {
+              current.release();
+              current.onPressUp?.call(
+                TapUpDetails(globalPosition: position, localPosition: current.localPosition(position), kind: kind),
+              );
+              current.onPress?.call();
+              current.onLongPressEnd?.call(
+                LongPressEndDetails(globalPosition: position, localPosition: current.localPosition(position)),
+              );
+            }
 
+          // Long-press completed normally — fire end, no tap callbacks.
           case .longPressing:
-            _current?.onPressEnd();
+            if (_current case final current?) {
+              current.release();
+              current.onLongPressEnd?.call(
+                LongPressEndDetails(globalPosition: position, localPosition: current.localPosition(position)),
+              );
+            }
 
           default:
         }
@@ -139,28 +207,79 @@ class TappableGroupGestureRecognizer extends OneSequenceGestureRecognizer {
         stopTrackingPointer(pointer);
 
       case PointerCancelEvent():
-        _state = .idle;
-        _current?.onPressCancel();
+        if (_current case final current?) {
+          current.exit();
+          // Both press and long press started, so we need to cancel both. We do not need to cancel anything when long
+          // pressed as the timer already cancels presses.
+          if (_state != .longPressing) {
+            current.onPressCancel?.call();
+            current.onLongPressCancel?.call();
+          }
+        }
         _current = null;
+        _state = .idle;
         _cancel();
         resolve(.rejected);
     }
   }
 
+  /// Begins a press on [entry]: fires the internal `onPressStart` hook, the user-facing `onPressDown` and
+  /// `onLongPressDown` callbacks, and arms the long-press timer.
+  void _start(GroupEntry entry, int buttons, Offset position, PointerDeviceKind kind) {
+    entry.enter(buttons);
+
+    final localPosition = entry.localPosition(position);
+    entry.onPressDown?.call(TapDownDetails(globalPosition: position, localPosition: localPosition, kind: kind));
+    entry.onLongPressDown?.call(
+      LongPressDownDetails(globalPosition: position, localPosition: localPosition, kind: kind),
+    );
+
+    _longPressTimer = Timer(kLongPressTimeout, () {
+      if (_current == entry && (_state == .pressing || _state == .slidePressing)) {
+        _state = .longPressing;
+        // Match Flutter's LongPressGestureRecognizer ordering: onLongPressStart fires before onLongPress, and
+        // onTapCancel fires when the tap is rejected by long-press winning the arena.
+        entry.onLongPressStart?.call(
+          LongPressStartDetails(globalPosition: _lastPosition, localPosition: entry.localPosition(_lastPosition)),
+        );
+        entry.onLongPress?.call();
+        entry.onPressCancel?.call();
+        resolve(.accepted);
+      }
+    });
+  }
+
   @override
   void acceptGesture(int pointer) {
     _accepted = true;
-    _pendingOnPress?.call();
-    _pendingOnPress = null;
+    if (_pending case (final entry, final details)?) {
+      entry.onPressUp?.call(details);
+      entry.onPress?.call();
+    }
+    _pending = null;
   }
 
   @override
   void rejectGesture(int pointer) {
+    if (_current case final current?) {
+      current.exit();
+      // Both press and long press started, so we need to cancel both. We do not need to cancel anything when long
+      // pressed as the timer already cancels presses.
+      if (_state != .longPressing) {
+        current.onPressCancel?.call();
+        current.onLongPressCancel?.call();
+      }
+    }
+
+    // Pending tap (PointerUp already arrived, awaiting arena) is now rejected — fire its cancel.
+    if (_pending case (final entry, _)?) {
+      entry.onPressCancel?.call();
+    }
+
+    _current = null;
+    _pending = null;
     _state = .idle;
     _accepted = false;
-    _pendingOnPress = null;
-    _current?.onPressCancel();
-    _current = null;
     _cancel();
     stopTrackingPointer(pointer);
   }
@@ -173,17 +292,6 @@ class TappableGroupGestureRecognizer extends OneSequenceGestureRecognizer {
   void dispose() {
     _cancel();
     super.dispose();
-  }
-
-  void _start() {
-    final current = _current;
-    _longPressTimer = Timer(kLongPressTimeout, () {
-      if (_current == current && (_state == .pressing || _state == .slidePressing)) {
-        _state = .longPressing;
-        _current?.onLongPress?.call(); // We immediately call this to mirror [LongPressGestureRecognizer]'s behaviour.
-        resolve(.accepted);
-      }
-    });
   }
 
   void _cancel() {

@@ -37,6 +37,7 @@ final popover = FPopover(
   // {@endcategory}
   // {@category "Core"}
   style: const .delta(popoverPadding: .value(.all(5))),
+  popoverClipBehavior: .none,
   popoverBuilder: (context, controller) => const Padding(padding: .all(8), child: Text('Popover content')),
   builder: (context, controller, child) => child!,
   child: FButton(onPress: () {}, child: const Text('Show Popover')),

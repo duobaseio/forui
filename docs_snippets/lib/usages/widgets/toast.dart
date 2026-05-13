@@ -10,6 +10,7 @@ const toast = FToast(
   // {@endcategory}
   // {@category "Core"}
   style: .delta(titleSpacing: 5),
+  clipBehavior: .none,
   icon: Icon(FIcons.info),
   title: Text('Title'),
   description: Text('Description'),

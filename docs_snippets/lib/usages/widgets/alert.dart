@@ -10,6 +10,7 @@ const alert = FAlert(
   // {@endcategory}
   // {@category "Core"}
   style: .context(),
+  clipBehavior: .none,
   icon: Icon(FIcons.circleAlert),
   title: Text('Alert Title'),
   subtitle: Text('Alert subtitle with more details'),

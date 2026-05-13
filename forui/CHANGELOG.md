@@ -74,6 +74,28 @@
   directly to change these.
 
 
+### `FTappable`
+* Add `onPressDown`.
+* Add `onPressCancel`.
+* Add `onPressMove`.
+* Add `onPressUp`.
+* Add `onLongPressDown`.
+* Add `onLongPressCancel`.
+* Add `onLongPressStart`.
+* Add `onLongPressMove`.
+* Add `onLongPressEnd`.
+* Add `onDoubleTapDown`.
+* Add `onDoubleTapCancel`.
+* Add `onSecondaryPressDown`.
+* Add `onSecondaryPressCancel`.
+* Add `onSecondaryPressUp`.
+* Add `onSecondaryLongPressDown`.
+* Add `onSecondaryLongPressCancel`.
+* Add `onSecondaryLongPressStart`.
+* Add `onSecondaryLongPressMove`.
+* Add `onSecondaryLongPressEnd`.
+
+
 ### `FToast`
 * Add `FToast.clipBehavior` to clip the toast's content to the inner path of its decoration. Defaults to `Clip.none`.
 

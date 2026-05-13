@@ -8,6 +8,7 @@ final dialog = FDialog(
   // {@category "Layout"}
   direction: .vertical,
   constraints: const BoxConstraints(minWidth: 280, maxWidth: 560),
+  resizeToAvoidInsets: true,
   // {@endcategory}
   // {@category "Accessibility"}
   semanticsLabel: 'Dialog',
@@ -17,6 +18,7 @@ final dialog = FDialog(
   // {@endcategory}
   // {@category "Core"}
   style: const .delta(insetPadding: .value(.zero)),
+  clipBehavior: .none,
   image: null,
   title: const Text('Title'),
   body: const Text('Body'),
@@ -27,6 +29,7 @@ final dialog = FDialog(
 final adaptive = FDialog.adaptive(
   // {@category "Layout"}
   constraints: const BoxConstraints(minWidth: 280, maxWidth: 560),
+  resizeToAvoidInsets: true,
   // {@endcategory}
   // {@category "Accessibility"}
   semanticsLabel: 'Dialog',
@@ -36,6 +39,7 @@ final adaptive = FDialog.adaptive(
   // {@endcategory}
   // {@category "Core"}
   style: const .delta(insetPadding: .value(.zero)),
+  clipBehavior: .none,
   image: null,
   title: const Text('Title'),
   body: const Text('Body'),
@@ -46,6 +50,7 @@ final adaptive = FDialog.adaptive(
 final raw = FDialog.raw(
   // {@category "Layout"}
   constraints: const BoxConstraints(minWidth: 280, maxWidth: 560),
+  resizeToAvoidInsets: true,
   // {@endcategory}
   // {@category "Accessibility"}
   semanticsLabel: 'Dialog',
@@ -55,6 +60,7 @@ final raw = FDialog.raw(
   // {@endcategory}
   // {@category "Core"}
   style: const .delta(insetPadding: .value(.zero)),
+  clipBehavior: .none,
   builder: (context, style) => const Text('Custom content'),
   // {@endcategory}
 );

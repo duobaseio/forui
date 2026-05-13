@@ -14,12 +14,35 @@ final tappable = FTappable(
   shortcuts: null,
   actions: null,
   // {@endcategory}
-  // {@category "Callbacks"}
+  // {@category "Primary gestures"}
+  onPressDown: (details) {},
+  onPressCancel: () {},
+  onPressMove: (details) {},
+  onPressUp: (details) {},
   onPress: () {},
+  onLongPressDown: (details) {},
+  onLongPressCancel: () {},
+  onLongPressStart: (details) {},
+  onLongPressMove: (details) {},
+  onLongPressEnd: (details) {},
   onLongPress: () {},
+  onDoubleTapDown: (details) {},
+  onDoubleTapCancel: () {},
   onDoubleTap: () {},
+  // {@endcategory}
+  // {@category "Secondary gestures"}
+  onSecondaryPressDown: (details) {},
+  onSecondaryPressCancel: () {},
+  onSecondaryPressUp: (details) {},
   onSecondaryPress: () {},
+  onSecondaryLongPressDown: (details) {},
+  onSecondaryLongPressCancel: () {},
+  onSecondaryLongPressStart: (details) {},
+  onSecondaryLongPressMove: (details) {},
+  onSecondaryLongPressEnd: (details) {},
   onSecondaryLongPress: () {},
+  // {@endcategory}
+  // {@category "State callbacks"}
   onHoverChange: (hovered) {},
   onVariantChange: (previous, current) {},
   // {@endcategory}
@@ -43,12 +66,35 @@ final tappableStatic = FTappable.static(
   shortcuts: null,
   actions: null,
   // {@endcategory}
-  // {@category "Callbacks"}
+  // {@category "Primary gestures"}
+  onPressDown: (details) {},
+  onPressCancel: () {},
+  onPressMove: (details) {},
+  onPressUp: (details) {},
   onPress: () {},
+  onLongPressDown: (details) {},
+  onLongPressCancel: () {},
+  onLongPressStart: (details) {},
+  onLongPressMove: (details) {},
+  onLongPressEnd: (details) {},
   onLongPress: () {},
+  onDoubleTapDown: (details) {},
+  onDoubleTapCancel: () {},
   onDoubleTap: () {},
+  // {@endcategory}
+  // {@category "Secondary gestures"}
+  onSecondaryPressDown: (details) {},
+  onSecondaryPressCancel: () {},
+  onSecondaryPressUp: (details) {},
   onSecondaryPress: () {},
+  onSecondaryLongPressDown: (details) {},
+  onSecondaryLongPressCancel: () {},
+  onSecondaryLongPressStart: (details) {},
+  onSecondaryLongPressMove: (details) {},
+  onSecondaryLongPressEnd: (details) {},
   onSecondaryLongPress: () {},
+  // {@endcategory}
+  // {@category "State callbacks"}
   onHoverChange: (hovered) {},
   onVariantChange: (previous, current) {},
   // {@endcategory}

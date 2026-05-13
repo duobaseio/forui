@@ -89,63 +89,184 @@ class FTappable extends StatefulWidget {
   /// The tappable's hit test behavior. Defaults to [HitTestBehavior.translucent].
   final HitTestBehavior behavior;
 
+  /// {@template forui.foundation.FTappable.onPressDown}
+  /// A callback for when a primary pointer initially contacts the widget.
+  ///
+  /// Analogous to [GestureDetector.onTapDown].
+  /// {@endtemplate}
+  final GestureTapDownCallback? onPressDown;
+
+  /// {@template forui.foundation.FTappable.onPressCancel}
+  /// A callback for when a primary pointer that previously triggered [onPressDown] will not end up causing a tap.
+  ///
+  /// Analogous to [GestureDetector.onTapCancel].
+  /// {@endtemplate}
+  final GestureTapCancelCallback? onPressCancel;
+
+  /// {@template forui.foundation.FTappable.onPressMove}
+  /// A callback for when a primary pointer that triggered a tap has moved.
+  ///
+  /// Analogous to [GestureDetector.onTapMove].
+  /// {@endtemplate}
+  final GestureTapMoveCallback? onPressMove;
+
+  /// {@template forui.foundation.FTappable.onPressUp}
+  /// A callback for when a primary pointer that previously triggered [onPressDown] stops contacting the widget at the
+  /// same location it initially contacted.
+  ///
+  /// Analogous to [GestureDetector.onTapUp]. Fires immediately before [onPress].
+  /// {@endtemplate}
+  final GestureTapUpCallback? onPressUp;
+
   /// {@template forui.foundation.FTappable.onPress}
   /// A callback for when the widget is pressed.
   ///
-  /// The widget will be disabled if the following are null:
-  /// * [onPress]
-  /// * [onLongPress]
-  /// * [onDoubleTap]
-  /// * [onSecondaryPress]
-  /// * [onSecondaryLongPress]
+  /// The widget is disabled when every primary and secondary gesture callback (including all lifecycle variants) is
+  /// null.
   /// {@endtemplate}
   final VoidCallback? onPress;
+
+  /// {@template forui.foundation.FTappable.onLongPressDown}
+  /// A callback for when a primary pointer that might cause a long press has contacted the widget.
+  ///
+  /// Analogous to [GestureDetector.onLongPressDown].
+  ///
+  /// There is no equivalent [GestureDetector.onLongPressUp]. Use [onLongPressEnd] instead.
+  /// {@endtemplate}
+  final GestureLongPressDownCallback? onLongPressDown;
+
+  /// {@template forui.foundation.FTappable.onLongPressCancel}
+  /// A callback for when the pointer that previously triggered [onLongPressDown] will not end up causing a long press.
+  ///
+  /// Analogous to [GestureDetector.onLongPressCancel].
+  /// {@endtemplate}
+  final GestureLongPressCancelCallback? onLongPressCancel;
+
+  /// {@template forui.foundation.FTappable.onLongPressStart}
+  /// A callback for when a long press has been recognised by a primary pointer.
+  ///
+  /// Analogous to [GestureDetector.onLongPressStart]. Fires alongside [onLongPress].
+  /// {@endtemplate}
+  final GestureLongPressStartCallback? onLongPressStart;
+
+  /// {@template forui.foundation.FTappable.onLongPressMove}
+  /// A callback for when a primary pointer is moving after being recognised as a long press.
+  ///
+  /// Analogous to [GestureDetector.onLongPressMoveUpdate].
+  /// {@endtemplate}
+  final GestureLongPressMoveUpdateCallback? onLongPressMove;
+
+  /// {@template forui.foundation.FTappable.onLongPressEnd}
+  /// A callback for when a long press recognised by a primary pointer is ending.
+  ///
+  /// Analogous to [GestureDetector.onLongPressEnd].
+  /// {@endtemplate}
+  final GestureLongPressEndCallback? onLongPressEnd;
 
   /// {@template forui.foundation.FTappable.onLongPress}
   /// A callback for when the widget is long pressed.
   ///
-  /// The widget will be disabled if the following are null:
-  /// * [onPress]
-  /// * [onLongPress]
-  /// * [onDoubleTap]
-  /// * [onSecondaryPress]
-  /// * [onSecondaryLongPress]
+  /// The widget is disabled when every primary and secondary gesture callback (including all lifecycle variants) is
+  /// null.
   /// {@endtemplate}
   final VoidCallback? onLongPress;
+
+  /// {@template forui.foundation.FTappable.onDoubleTapDown}
+  /// A callback for when a pointer that might cause a double tap has contacted the widget.
+  ///
+  /// Analogous to [GestureDetector.onDoubleTapDown].
+  /// {@endtemplate}
+  final GestureTapDownCallback? onDoubleTapDown;
+
+  /// {@template forui.foundation.FTappable.onDoubleTapCancel}
+  /// A callback for when the pointer that previously triggered [onDoubleTapDown] will not end up causing a double tap.
+  ///
+  /// Analogous to [GestureDetector.onDoubleTapCancel].
+  /// {@endtemplate}
+  final GestureTapCancelCallback? onDoubleTapCancel;
 
   /// {@template forui.foundation.FTappable.onDoubleTap}
   /// A callback for when the widget is double tapped.
   ///
-  /// The widget will be disabled if the following are null:
-  /// * [onPress]
-  /// * [onLongPress]
-  /// * [onDoubleTap]
-  /// * [onSecondaryPress]
-  /// * [onSecondaryLongPress]
+  /// The widget is disabled when every primary and secondary gesture callback (including all lifecycle variants) is
+  /// null.
   /// {@endtemplate}
   final VoidCallback? onDoubleTap;
+
+  /// {@template forui.foundation.FTappable.onSecondaryPressDown}
+  /// A callback for when a secondary pointer initially contacts the widget.
+  ///
+  /// Analogous to [GestureDetector.onSecondaryTapDown].
+  /// {@endtemplate}
+  final GestureTapDownCallback? onSecondaryPressDown;
+
+  /// {@template forui.foundation.FTappable.onSecondaryPressCancel}
+  /// A callback for when a secondary pointer that previously triggered [onSecondaryPressDown] will not end up causing
+  /// a tap.
+  ///
+  /// Analogous to [GestureDetector.onSecondaryTapCancel].
+  /// {@endtemplate}
+  final GestureTapCancelCallback? onSecondaryPressCancel;
+
+  /// {@template forui.foundation.FTappable.onSecondaryPressUp}
+  /// A callback for when a secondary pointer that previously triggered [onSecondaryPressDown] stops contacting the
+  /// widget.
+  ///
+  /// Analogous to [GestureDetector.onSecondaryTapUp]. Fires immediately before [onSecondaryPress].
+  /// {@endtemplate}
+  final GestureTapUpCallback? onSecondaryPressUp;
 
   /// {@template forui.foundation.FTappable.onSecondaryPress}
   /// A callback for when the widget is pressed with a secondary button (usually right-click on desktop).
   ///
-  /// The widget will be disabled if the following are null:
-  /// * [onPress]
-  /// * [onLongPress]
-  /// * [onDoubleTap]
-  /// * [onSecondaryPress]
-  /// * [onSecondaryLongPress]
+  /// The widget is disabled when every primary and secondary gesture callback (including all lifecycle variants) is
+  /// null.
   /// {@endtemplate}
   final VoidCallback? onSecondaryPress;
+
+  /// {@template forui.foundation.FTappable.onSecondaryLongPressDown}
+  /// A callback for when a secondary pointer that might cause a long press has contacted the widget.
+  ///
+  /// Analogous to [GestureDetector.onSecondaryLongPressDown].
+  ///
+  /// There is no equivalent [GestureDetector.onSecondaryLongPressUp]. Use [onSecondaryLongPressEnd] instead.
+  /// {@endtemplate}
+  final GestureLongPressDownCallback? onSecondaryLongPressDown;
+
+  /// {@template forui.foundation.FTappable.onSecondaryLongPressCancel}
+  /// A callback for when the pointer that previously triggered [onSecondaryLongPressDown] will not end up causing a
+  /// long press.
+  ///
+  /// Analogous to [GestureDetector.onSecondaryLongPressCancel].
+  /// {@endtemplate}
+  final GestureLongPressCancelCallback? onSecondaryLongPressCancel;
+
+  /// {@template forui.foundation.FTappable.onSecondaryLongPressStart}
+  /// A callback for when a long press has been recognised by a secondary pointer.
+  ///
+  /// Analogous to [GestureDetector.onSecondaryLongPressStart]. Fires alongside [onSecondaryLongPress].
+  /// {@endtemplate}
+  final GestureLongPressStartCallback? onSecondaryLongPressStart;
+
+  /// {@template forui.foundation.FTappable.onSecondaryLongPressMove}
+  /// A callback for when a secondary pointer is moving after being recognised as a long press.
+  ///
+  /// Analogous to [GestureDetector.onSecondaryLongPressMoveUpdate].
+  /// {@endtemplate}
+  final GestureLongPressMoveUpdateCallback? onSecondaryLongPressMove;
+
+  /// {@template forui.foundation.FTappable.onSecondaryLongPressEnd}
+  /// A callback for when a long press recognised by a secondary pointer is ending.
+  ///
+  /// Analogous to [GestureDetector.onSecondaryLongPressEnd].
+  /// {@endtemplate}
+  final GestureLongPressEndCallback? onSecondaryLongPressEnd;
 
   /// {@template forui.foundation.FTappable.onSecondaryLongPress}
   /// A callback for when the widget is pressed with a secondary button (usually right-click on desktop).
   ///
-  /// The widget will be disabled if the following are null:
-  /// * [onPress]
-  /// * [onLongPress]
-  /// * [onDoubleTap]
-  /// * [onSecondaryPress]
-  /// * [onSecondaryLongPress]
+  /// The widget is disabled when every primary and secondary gesture callback (including all lifecycle variants) is
+  /// null.
   /// {@endtemplate}
   final VoidCallback? onSecondaryLongPress;
 
@@ -184,10 +305,29 @@ class FTappable extends StatefulWidget {
     FTappableVariantChangeCallback? onVariantChange,
     bool selected,
     HitTestBehavior behavior,
+    GestureTapDownCallback? onPressDown,
+    GestureTapCancelCallback? onPressCancel,
+    GestureTapMoveCallback? onPressMove,
+    GestureTapUpCallback? onPressUp,
     VoidCallback? onPress,
+    GestureLongPressDownCallback? onLongPressDown,
+    GestureLongPressCancelCallback? onLongPressCancel,
+    GestureLongPressStartCallback? onLongPressStart,
+    GestureLongPressMoveUpdateCallback? onLongPressMove,
+    GestureLongPressEndCallback? onLongPressEnd,
     VoidCallback? onLongPress,
+    GestureTapDownCallback? onDoubleTapDown,
+    GestureTapCancelCallback? onDoubleTapCancel,
     VoidCallback? onDoubleTap,
+    GestureTapDownCallback? onSecondaryPressDown,
+    GestureTapCancelCallback? onSecondaryPressCancel,
+    GestureTapUpCallback? onSecondaryPressUp,
     VoidCallback? onSecondaryPress,
+    GestureLongPressDownCallback? onSecondaryLongPressDown,
+    GestureLongPressCancelCallback? onSecondaryLongPressCancel,
+    GestureLongPressStartCallback? onSecondaryLongPressStart,
+    GestureLongPressMoveUpdateCallback? onSecondaryLongPressMove,
+    GestureLongPressEndCallback? onSecondaryLongPressEnd,
     VoidCallback? onSecondaryLongPress,
     Map<ShortcutActivator, Intent>? shortcuts,
     Map<Type, Action<Intent>>? actions,
@@ -212,10 +352,29 @@ class FTappable extends StatefulWidget {
     this.onVariantChange,
     this.selected = false,
     this.behavior = .translucent,
+    this.onPressDown,
+    this.onPressCancel,
+    this.onPressMove,
+    this.onPressUp,
     this.onPress,
+    this.onLongPressDown,
+    this.onLongPressCancel,
+    this.onLongPressStart,
+    this.onLongPressMove,
+    this.onLongPressEnd,
     this.onLongPress,
+    this.onDoubleTapDown,
+    this.onDoubleTapCancel,
     this.onDoubleTap,
+    this.onSecondaryPressDown,
+    this.onSecondaryPressCancel,
+    this.onSecondaryPressUp,
     this.onSecondaryPress,
+    this.onSecondaryLongPressDown,
+    this.onSecondaryLongPressCancel,
+    this.onSecondaryLongPressStart,
+    this.onSecondaryLongPressMove,
+    this.onSecondaryLongPressEnd,
     this.onSecondaryLongPress,
     this.actions,
     this.builder = defaultBuilder,
@@ -243,10 +402,29 @@ class FTappable extends StatefulWidget {
       ..add(ObjectFlagProperty.has('onVariantChange', onVariantChange))
       ..add(FlagProperty('selected', value: selected, ifTrue: 'selected'))
       ..add(EnumProperty('behavior', behavior))
+      ..add(ObjectFlagProperty.has('onPressDown', onPressDown))
+      ..add(ObjectFlagProperty.has('onPressCancel', onPressCancel))
+      ..add(ObjectFlagProperty.has('onPressMove', onPressMove))
+      ..add(ObjectFlagProperty.has('onPressUp', onPressUp))
       ..add(ObjectFlagProperty.has('onPress', onPress))
+      ..add(ObjectFlagProperty.has('onLongPressDown', onLongPressDown))
+      ..add(ObjectFlagProperty.has('onLongPressCancel', onLongPressCancel))
+      ..add(ObjectFlagProperty.has('onLongPressStart', onLongPressStart))
+      ..add(ObjectFlagProperty.has('onLongPressMove', onLongPressMove))
+      ..add(ObjectFlagProperty.has('onLongPressEnd', onLongPressEnd))
       ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
+      ..add(ObjectFlagProperty.has('onDoubleTapDown', onDoubleTapDown))
+      ..add(ObjectFlagProperty.has('onDoubleTapCancel', onDoubleTapCancel))
       ..add(ObjectFlagProperty.has('onDoubleTap', onDoubleTap))
+      ..add(ObjectFlagProperty.has('onSecondaryPressDown', onSecondaryPressDown))
+      ..add(ObjectFlagProperty.has('onSecondaryPressCancel', onSecondaryPressCancel))
+      ..add(ObjectFlagProperty.has('onSecondaryPressUp', onSecondaryPressUp))
       ..add(ObjectFlagProperty.has('onSecondaryPress', onSecondaryPress))
+      ..add(ObjectFlagProperty.has('onSecondaryLongPressDown', onSecondaryLongPressDown))
+      ..add(ObjectFlagProperty.has('onSecondaryLongPressCancel', onSecondaryLongPressCancel))
+      ..add(ObjectFlagProperty.has('onSecondaryLongPressStart', onSecondaryLongPressStart))
+      ..add(ObjectFlagProperty.has('onSecondaryLongPressMove', onSecondaryLongPressMove))
+      ..add(ObjectFlagProperty.has('onSecondaryLongPressEnd', onSecondaryLongPressEnd))
       ..add(ObjectFlagProperty.has('onSecondaryLongPress', onSecondaryLongPress))
       ..add(DiagnosticsProperty('shortcuts', shortcuts))
       ..add(DiagnosticsProperty('actions', actions))
@@ -254,15 +432,38 @@ class FTappable extends StatefulWidget {
   }
 
   bool _animate(int buttons) =>
-      (buttons & kPrimaryButton != 0 && (onPress != null || onLongPress != null || onDoubleTap != null)) ||
-      (buttons & kSecondaryButton != 0 && (onSecondaryPress != null || onSecondaryLongPress != null));
+      (buttons & kPrimaryButton != 0 && _hasPrimaryCallback) ||
+      (buttons & kSecondaryButton != 0 && _hasSecondaryCallback);
 
-  bool get _disabled =>
-      onPress == null &&
-      onLongPress == null &&
-      onDoubleTap == null &&
-      onSecondaryPress == null &&
-      onSecondaryLongPress == null;
+  bool get _disabled => !_hasPrimaryCallback && !_hasSecondaryCallback;
+
+  bool get _hasPrimaryCallback =>
+      onPressDown != null ||
+      onPressCancel != null ||
+      onPressMove != null ||
+      onPressUp != null ||
+      onPress != null ||
+      onLongPressDown != null ||
+      onLongPressCancel != null ||
+      onLongPressStart != null ||
+      onLongPressMove != null ||
+      onLongPressEnd != null ||
+      onLongPress != null ||
+      onDoubleTapDown != null ||
+      onDoubleTapCancel != null ||
+      onDoubleTap != null;
+
+  bool get _hasSecondaryCallback =>
+      onSecondaryPressDown != null ||
+      onSecondaryPressCancel != null ||
+      onSecondaryPressUp != null ||
+      onSecondaryPress != null ||
+      onSecondaryLongPressDown != null ||
+      onSecondaryLongPressCancel != null ||
+      onSecondaryLongPressStart != null ||
+      onSecondaryLongPressMove != null ||
+      onSecondaryLongPressEnd != null ||
+      onSecondaryLongPress != null;
 }
 
 class _FTappableState<T extends FTappable> extends State<T> {
@@ -323,7 +524,16 @@ class _FTappableState<T extends FTappable> extends State<T> {
     // Update the existing registration if callbacks changed.
     if (_entry case final entry?) {
       entry
+        ..onPressDown = widget.onPressDown
+        ..onPressCancel = widget.onPressCancel
+        ..onPressMove = widget.onPressMove
+        ..onPressUp = widget.onPressUp
         ..onPress = widget.onPress
+        ..onLongPressDown = widget.onLongPressDown
+        ..onLongPressCancel = widget.onLongPressCancel
+        ..onLongPressStart = widget.onLongPressStart
+        ..onLongPressMove = widget.onLongPressMove
+        ..onLongPressEnd = widget.onLongPressEnd
         ..onLongPress = widget.onLongPress;
     }
   }
@@ -352,10 +562,19 @@ class _FTappableState<T extends FTappable> extends State<T> {
       entries.add(
         _entry = GroupEntry(
           context: context,
-          onPressStart: _start,
-          onPressCancel: _cancel,
-          onPressEnd: _end,
+          enter: _start,
+          exit: _cancel,
+          release: _end,
+          onPressDown: widget.onPressDown,
+          onPressCancel: widget.onPressCancel,
+          onPressMove: widget.onPressMove,
+          onPressUp: widget.onPressUp,
           onPress: widget.onPress,
+          onLongPressDown: widget.onLongPressDown,
+          onLongPressCancel: widget.onLongPressCancel,
+          onLongPressStart: widget.onLongPressStart,
+          onLongPressMove: widget.onLongPressMove,
+          onLongPressEnd: widget.onLongPressEnd,
           onLongPress: widget.onLongPress,
         ),
       );
@@ -444,10 +663,29 @@ class _FTappableState<T extends FTappable> extends State<T> {
                 onPointerUp: _entries == null ? (_) => _end() : null,
                 child: GestureDetector(
                   behavior: widget.behavior,
+                  onTapDown: _entries == null ? widget.onPressDown : null,
+                  onTapCancel: _entries == null ? widget.onPressCancel : null,
+                  onTapMove: _entries == null ? widget.onPressMove : null,
+                  onTapUp: _entries == null ? widget.onPressUp : null,
                   onTap: _entries == null ? widget.onPress : null,
+                  onLongPressDown: _entries == null ? widget.onLongPressDown : null,
+                  onLongPressCancel: _entries == null ? widget.onLongPressCancel : null,
+                  onLongPressStart: _entries == null ? widget.onLongPressStart : null,
+                  onLongPressMoveUpdate: _entries == null ? widget.onLongPressMove : null,
+                  onLongPressEnd: _entries == null ? widget.onLongPressEnd : null,
                   onLongPress: _entries == null ? widget.onLongPress : null,
+                  onDoubleTapDown: widget.onDoubleTapDown,
+                  onDoubleTapCancel: widget.onDoubleTapCancel,
                   onDoubleTap: widget.onDoubleTap,
+                  onSecondaryTapDown: widget.onSecondaryPressDown,
+                  onSecondaryTapCancel: widget.onSecondaryPressCancel,
+                  onSecondaryTapUp: widget.onSecondaryPressUp,
                   onSecondaryTap: widget.onSecondaryPress,
+                  onSecondaryLongPressDown: widget.onSecondaryLongPressDown,
+                  onSecondaryLongPressCancel: widget.onSecondaryLongPressCancel,
+                  onSecondaryLongPressStart: widget.onSecondaryLongPressStart,
+                  onSecondaryLongPressMoveUpdate: widget.onSecondaryLongPressMove,
+                  onSecondaryLongPressEnd: widget.onSecondaryLongPressEnd,
                   onSecondaryLongPress: widget.onSecondaryLongPress,
                   child: tappable,
                 ),
@@ -521,10 +759,29 @@ class AnimatedTappable extends FTappable {
     super.onVariantChange,
     super.selected,
     super.behavior,
+    super.onPressDown,
+    super.onPressCancel,
+    super.onPressMove,
+    super.onPressUp,
     super.onPress,
+    super.onLongPressDown,
+    super.onLongPressCancel,
+    super.onLongPressStart,
+    super.onLongPressMove,
+    super.onLongPressEnd,
     super.onLongPress,
+    super.onDoubleTapDown,
+    super.onDoubleTapCancel,
     super.onDoubleTap,
+    super.onSecondaryPressDown,
+    super.onSecondaryPressCancel,
+    super.onSecondaryPressUp,
     super.onSecondaryPress,
+    super.onSecondaryLongPressDown,
+    super.onSecondaryLongPressCancel,
+    super.onSecondaryLongPressStart,
+    super.onSecondaryLongPressMove,
+    super.onSecondaryLongPressEnd,
     super.onSecondaryLongPress,
     super.shortcuts,
     super.actions,

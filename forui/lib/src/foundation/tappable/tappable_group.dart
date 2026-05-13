@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
@@ -12,6 +13,12 @@ import 'package:forui/src/foundation/tappable/tappable_group_recognizer.dart';
 ///
 /// Only primary press and long-press gestures are group-managed. Other gestures like [FTappable.onDoubleTap],
 /// [FTappable.onSecondaryPress], and [FTappable.onSecondaryLongPress] remain on individual tappables.
+///
+/// ## Long-press and slide-across
+///
+/// When [FTappable.onLongPress] fires on an entry, the gesture is *not* terminated — the pointer is still down and
+/// slide-across remains active. If the user long-presses entry A, slides to entry B, and releases on B, **both**
+/// `A.onLongPress` *and* `B.onPress` fire from the single continuous gesture.
 ///
 /// {@macro forui.foundation.doc_templates.overlay}
 class FTappableGroup extends StatefulWidget {
@@ -100,23 +107,48 @@ class TappableGroupScope extends InheritedWidget {
 @internal
 class GroupEntry {
   final BuildContext context;
-  final Future<void> Function(int) onPressStart;
-  final Future<void> Function() onPressCancel;
-  final Future<void> Function() onPressEnd;
+  final Future<void> Function(int) enter;
+  final Future<void> Function() exit;
+  final Future<void> Function() release;
+  GestureTapDownCallback? onPressDown;
+  GestureTapCancelCallback? onPressCancel;
+  GestureTapMoveCallback? onPressMove;
+  GestureTapUpCallback? onPressUp;
   VoidCallback? onPress;
+  /// [onLongPressDown] is always called together with [onPressDown] in [TappableGroupGestureRecognizer] but not the
+  /// stock [GestureDetector]. We keep this redundant field to simplify callback mapping.
+  GestureLongPressDownCallback? onLongPressDown;
+  GestureLongPressStartCallback? onLongPressStart;
+  GestureLongPressCancelCallback? onLongPressCancel;
+  GestureLongPressMoveUpdateCallback? onLongPressMove;
+  GestureLongPressEndCallback? onLongPressEnd;
   VoidCallback? onLongPress;
 
   GroupEntry({
     required this.context,
-    required this.onPressStart,
-    required this.onPressCancel,
-    required this.onPressEnd,
+    required this.enter,
+    required this.exit,
+    required this.release,
     required this.onPress,
     required this.onLongPress,
+    this.onPressDown,
+    this.onPressCancel,
+    this.onPressMove,
+    this.onPressUp,
+    this.onLongPressDown,
+    this.onLongPressCancel,
+    this.onLongPressStart,
+    this.onLongPressMove,
+    this.onLongPressEnd,
   });
 
   bool hitTest(Offset globalPosition) {
     final box = context.findRenderObject();
     return box is RenderBox && box.size.contains(box.globalToLocal(globalPosition));
+  }
+
+  Offset localPosition(Offset globalPosition) {
+    final box = context.findRenderObject();
+    return box is RenderBox ? box.globalToLocal(globalPosition) : globalPosition;
   }
 }

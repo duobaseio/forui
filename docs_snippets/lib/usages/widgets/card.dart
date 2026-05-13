@@ -7,6 +7,7 @@ import 'package:forui/forui.dart';
 final card = FCard(
   // {@category "Core"}
   style: const .delta(decoration: .shapeDelta(color: Color(0xFFFFFFFF))),
+  clipBehavior: .none,
   mainAxisSize: .min,
   image: const Placeholder(),
   title: const Text('Title'),
@@ -18,6 +19,7 @@ final card = FCard(
 const raw = FCard.raw(
   // {@category "Core"}
   style: .delta(decoration: .shapeDelta(color: Color(0xFFFFFFFF))),
+  clipBehavior: .none,
   child: Text('Content'),
   // {@endcategory}
 );
