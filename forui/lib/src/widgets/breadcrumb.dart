@@ -58,10 +58,7 @@ class FBreadcrumb extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = this.style(context.theme.breadcrumbStyle);
-    final divider = IconTheme(
-      data: style.iconStyle,
-      child: this.divider ?? context.theme.icons.chevronRight(context),
-    );
+    final divider = IconTheme(data: style.iconStyle, child: this.divider ?? context.theme.icons.chevronRight(context));
 
     return Row(
       children: [
@@ -430,10 +427,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
           onPress: _controller.toggle,
           child: Padding(
             padding: style.collapsedPadding,
-            child: IconTheme(
-              data: style.iconStyle,
-              child: widget.icon ?? context.theme.icons.ellipsis(context),
-            ),
+            child: IconTheme(data: style.iconStyle, child: widget.icon ?? context.theme.icons.ellipsis(context)),
           ),
         ),
       );
@@ -466,10 +460,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
           onPress: _controller.toggle,
           child: Padding(
             padding: style.collapsedPadding,
-            child: IconTheme(
-              data: style.iconStyle,
-              child: widget.icon ?? context.theme.icons.ellipsis(context),
-            ),
+            child: IconTheme(data: style.iconStyle, child: widget.icon ?? context.theme.icons.ellipsis(context)),
           ),
         ),
       );

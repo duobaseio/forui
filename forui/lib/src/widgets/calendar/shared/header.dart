@@ -88,10 +88,9 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
               child: Padding(
                 padding: const .symmetric(horizontal: 2.0),
                 child: IconTheme(
-                  data: widget.style.buttonStyle.iconContentStyle.iconStyle.resolve(variants).copyWith(
-                    color: widget.style.headerTextStyle.color,
-                    size: widget.style.headerIconSize,
-                  ),
+                  data: widget.style.buttonStyle.iconContentStyle.iconStyle
+                      .resolve(variants)
+                      .copyWith(color: widget.style.headerTextStyle.color, size: widget.style.headerIconSize),
                   child: widget.style.toggleIcon(context),
                 ),
               ),
@@ -148,20 +147,12 @@ class Navigation extends StatelessWidget {
         children: [
           Padding(
             padding: const .directional(start: 7),
-            child: FButton.icon(
-              style: style.buttonStyle,
-              onPress: onPrevious,
-              child: style.previousIcon(context),
-            ),
+            child: FButton.icon(style: style.buttonStyle, onPress: onPrevious, child: style.previousIcon(context)),
           ),
           const Expanded(child: SizedBox()),
           Padding(
             padding: const .directional(end: 7),
-            child: FButton.icon(
-              style: style.buttonStyle,
-              onPress: onNext,
-              child: style.nextIcon(context),
-            ),
+            child: FButton.icon(style: style.buttonStyle, onPress: onNext, child: style.nextIcon(context)),
           ),
         ],
       ),

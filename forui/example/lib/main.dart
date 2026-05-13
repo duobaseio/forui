@@ -57,7 +57,10 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
                   icon: Icon(platform.desktop ? FLucideIcons.smartphone : FLucideIcons.monitor),
                   onPress: togglePlatform,
                 ),
-                FHeaderAction(icon: Icon(brightness == .dark ? FLucideIcons.sun : FLucideIcons.moon), onPress: toggleTheme),
+                FHeaderAction(
+                  icon: Icon(brightness == .dark ? FLucideIcons.sun : FLucideIcons.moon),
+                  onPress: toggleTheme,
+                ),
                 FHeaderAction(icon: const Icon(FLucideIcons.mousePointerClick), onPress: toggleWidgetInspector),
               ],
             ),

@@ -144,8 +144,7 @@ Future<ThemesConstructors> traverseThemes(AnalysisContextCollection collection) 
 
   // Parse icons.dart to build a map from FIcons field name to its FIcons.lucide() initializer expression.
   final icons = <String, String>{};
-  if (await collection.contextFor(_icons).currentSession.getResolvedUnit(_icons)
-      case final ResolvedUnitResult result) {
+  if (await collection.contextFor(_icons).currentSession.getResolvedUnit(_icons) case final ResolvedUnitResult result) {
     final visitor = _IconsVisitor();
     result.unit.accept(visitor);
     icons.addAll(visitor.icons);

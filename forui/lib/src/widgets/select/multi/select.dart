@@ -54,11 +54,14 @@ typedef FMultiSelectTagBuilder<T> =
 /// * [FMultiSelectStyle] for customizing the appearance of a select.
 abstract class FMultiSelect<T> extends StatefulWidget {
   /// The default suffix builder that shows a upward and downward facing chevron icon.
-  static Widget defaultIconBuilder(BuildContext context, FMultiSelectFieldStyle style, Set<FTextFieldVariant> variants) =>
-      Padding(
-        padding: const .directional(start: 4),
-        child: IconTheme(data: style.iconStyle.resolve(variants), child: context.theme.icons.chevronDown(context)),
-      );
+  static Widget defaultIconBuilder(
+    BuildContext context,
+    FMultiSelectFieldStyle style,
+    Set<FTextFieldVariant> variants,
+  ) => Padding(
+    padding: const .directional(start: 4),
+    child: IconTheme(data: style.iconStyle.resolve(variants), child: context.theme.icons.chevronDown(context)),
+  );
 
   /// The default tag builder that builds a [FMultiSelectTag] with the given value.
   static Widget defaultTagBuilder<T>(

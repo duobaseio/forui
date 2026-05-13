@@ -288,24 +288,21 @@ extension type FResizableStyles(
         > {
   /// Creates a [FResizableStyles] that inherits its properties.
   factory FResizableStyles.inherit({required FColors colors, required FIcons icons, required FStyle style}) {
-    FResizableDividerStyle dividerStyle({
-      required FIconBuilder icon,
-      required double height,
-      required double width,
-    }) => FResizableDividerStyle(
-      color: colors.border,
-      focusedOutlineStyle: style.focusedOutlineStyle,
-      thumbStyle: FResizableDividerThumbStyle(
-        decoration: ShapeDecoration(
-          shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
+    FResizableDividerStyle dividerStyle({required FIconBuilder icon, required double height, required double width}) =>
+        FResizableDividerStyle(
           color: colors.border,
-        ),
-        foregroundColor: colors.foreground,
-        icon: icon,
-        height: height,
-        width: width,
-      ),
-    );
+          focusedOutlineStyle: style.focusedOutlineStyle,
+          thumbStyle: FResizableDividerThumbStyle(
+            decoration: ShapeDecoration(
+              shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
+              color: colors.border,
+            ),
+            foregroundColor: colors.foreground,
+            icon: icon,
+            height: height,
+            width: width,
+          ),
+        );
 
     final horizontal = dividerStyle(icon: icons.gripVertical, height: 20, width: 10);
     return FResizableStyles(

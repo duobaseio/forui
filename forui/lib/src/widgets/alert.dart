@@ -101,10 +101,7 @@ class FAlert extends StatelessWidget {
         children: [
           Row(
             children: [
-              IconTheme(
-                data: style.iconStyle,
-                child: icon ?? context.theme.icons.circleAlert(context),
-              ),
+              IconTheme(data: style.iconStyle, child: icon ?? context.theme.icons.circleAlert(context)),
               Flexible(
                 child: Padding(
                   padding: const .only(left: 10),

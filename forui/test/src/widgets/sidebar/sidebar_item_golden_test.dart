@@ -87,7 +87,12 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           theme: theme.data,
-          child: FSidebarItem(icon: const Icon(FLucideIcons.box), label: const Text('Item'), selected: true, onPress: () {}),
+          child: FSidebarItem(
+            icon: const Icon(FLucideIcons.box),
+            label: const Text('Item'),
+            selected: true,
+            onPress: () {},
+          ),
         ),
       );
 

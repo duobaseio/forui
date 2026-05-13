@@ -15,11 +15,9 @@ class ScrollHandle extends StatefulWidget {
   final FSelectScrollHandleStyle style;
   final Alignment alignment;
 
-  const ScrollHandle.up({required this.controller, required this.style, super.key})
-    : alignment = .topCenter;
+  const ScrollHandle.up({required this.controller, required this.style, super.key}) : alignment = .topCenter;
 
-  const ScrollHandle.down({required this.controller, required this.style, super.key})
-    : alignment = .bottomCenter;
+  const ScrollHandle.down({required this.controller, required this.style, super.key}) : alignment = .bottomCenter;
   @override
   State<ScrollHandle> createState() => _ScrollHandleState();
 
@@ -171,14 +169,11 @@ class FSelectScrollHandleStyle with Diagnosticable, _$FSelectScrollHandleStyleFu
   }) : assert(0 < pixelsPerSecond, 'pixelsPerSecond ($pixelsPerSecond) must be > 0');
 
   /// Creates a [FSelectScrollHandleStyle] that inherits its properties.
-  FSelectScrollHandleStyle.inherit({
-    required FColors colors,
-    required FIcons icons,
-    required FTypography typography,
-  }) : this(
-         iconStyle: IconThemeData(color: colors.foreground, size: typography.md.fontSize),
-         upIcon: icons.chevronUp,
-         downIcon: icons.chevronDown,
-         background: colors.card,
-       );
+  FSelectScrollHandleStyle.inherit({required FColors colors, required FIcons icons, required FTypography typography})
+    : this(
+        iconStyle: IconThemeData(color: colors.foreground, size: typography.md.fontSize),
+        upIcon: icons.chevronUp,
+        downIcon: icons.chevronDown,
+        background: colors.card,
+      );
 }

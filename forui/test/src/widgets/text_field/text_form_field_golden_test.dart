@@ -230,7 +230,10 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             theme: theme.data,
-            child: FTextFormField(suffixBuilder: (_, _, _) => const Icon(FLucideIcons.alarmClock), clearable: (_) => true),
+            child: FTextFormField(
+              suffixBuilder: (_, _, _) => const Icon(FLucideIcons.alarmClock),
+              clearable: (_) => true,
+            ),
           ),
         );
 

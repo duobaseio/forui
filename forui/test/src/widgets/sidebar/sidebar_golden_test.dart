@@ -26,7 +26,9 @@ void main() {
             ),
             FSidebarGroup(
               label: const Text('Group 2'),
-              children: [FSidebarItem(icon: const Icon(FLucideIcons.file), label: const Text('Item 3'), onPress: () {})],
+              children: [
+                FSidebarItem(icon: const Icon(FLucideIcons.file), label: const Text('Item 3'), onPress: () {}),
+              ],
             ),
           ],
         ),
@@ -56,7 +58,9 @@ void main() {
               ),
               FSidebarGroup(
                 label: const Text('Group 2'),
-                children: [FSidebarItem(icon: const Icon(FLucideIcons.file), label: const Text('Item 3'), onPress: () {})],
+                children: [
+                  FSidebarItem(icon: const Icon(FLucideIcons.file), label: const Text('Item 3'), onPress: () {}),
+                ],
               ),
             ],
           ),
@@ -273,7 +277,9 @@ void main() {
               ),
               FSidebarGroup(
                 label: const Text('Group 2'),
-                children: [FSidebarItem(icon: const Icon(FLucideIcons.file), label: const Text('Item 3'), onPress: () {})],
+                children: [
+                  FSidebarItem(icon: const Icon(FLucideIcons.file), label: const Text('Item 3'), onPress: () {}),
+                ],
               ),
             ],
           ),

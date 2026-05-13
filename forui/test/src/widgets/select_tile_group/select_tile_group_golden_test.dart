@@ -19,7 +19,12 @@ void main() {
               style: TestScaffold.blueScreen.tileGroupStyle,
               label: const Text('Network'),
               children: const [
-                .tile(title: Text('WiFi'), details: Text('Duobase (5G)'), suffix: Icon(FLucideIcons.chevronRight), value: 1),
+                .tile(
+                  title: Text('WiFi'),
+                  details: Text('Duobase (5G)'),
+                  suffix: Icon(FLucideIcons.chevronRight),
+                  value: 1,
+                ),
                 .suffix(
                   prefix: Icon(FLucideIcons.bluetooth),
                   title: Text('Bluetooth'),
@@ -43,7 +48,12 @@ void main() {
               style: TestScaffold.blueScreen.tileGroupStyle,
               label: const Text('Network'),
               children: const [
-                .tile(title: Text('WiFi'), details: Text('Duobase (5G)'), suffix: Icon(FLucideIcons.chevronRight), value: 1),
+                .tile(
+                  title: Text('WiFi'),
+                  details: Text('Duobase (5G)'),
+                  suffix: Icon(FLucideIcons.chevronRight),
+                  value: 1,
+                ),
                 .suffix(
                   prefix: Icon(FLucideIcons.bluetooth),
                   title: Text('Bluetooth'),
@@ -74,7 +84,12 @@ void main() {
               enabled: false,
               label: const Text('Network'),
               children: const [
-                .tile(title: Text('WiFi'), details: Text('Duobase (5G)'), suffix: Icon(FLucideIcons.chevronRight), value: 1),
+                .tile(
+                  title: Text('WiFi'),
+                  details: Text('Duobase (5G)'),
+                  suffix: Icon(FLucideIcons.chevronRight),
+                  value: 1,
+                ),
                 .suffix(
                   prefix: Icon(FLucideIcons.bluetooth),
                   title: Text('Bluetooth'),
@@ -104,7 +119,12 @@ void main() {
                 errorBuilder: (context, error) => Text(error),
                 divider: divider,
                 children: const [
-                  .tile(title: Text('WiFi'), details: Text('FL (5G)'), suffix: Icon(FLucideIcons.chevronRight), value: 1),
+                  .tile(
+                    title: Text('WiFi'),
+                    details: Text('FL (5G)'),
+                    suffix: Icon(FLucideIcons.chevronRight),
+                    value: 1,
+                  ),
                   .tile(title: Text('Mail'), details: Text('42'), suffix: Icon(FLucideIcons.chevronRight), value: 2),
                   .tile(
                     title: Text('Bluetooth'),
@@ -161,7 +181,12 @@ void main() {
                     label: const Text('Network'),
                     divider: divider,
                     children: const [
-                      .tile(title: Text('WiFi'), details: Text('FL (5G)'), value: 1, suffix: Icon(FLucideIcons.chevronRight)),
+                      .tile(
+                        title: Text('WiFi'),
+                        details: Text('FL (5G)'),
+                        value: 1,
+                        suffix: Icon(FLucideIcons.chevronRight),
+                      ),
                       .tile(
                         title: Text('Bluetooth'),
                         subtitle: Text('Fee, Fo'),
@@ -238,7 +263,12 @@ void main() {
                 description: const Text('Configure your network'),
                 forceErrorText: 'This should appear',
                 children: const [
-                  .tile(title: Text('WiFi'), details: Text('FL (5G)'), suffix: Icon(FLucideIcons.chevronRight), value: 1),
+                  .tile(
+                    title: Text('WiFi'),
+                    details: Text('FL (5G)'),
+                    suffix: Icon(FLucideIcons.chevronRight),
+                    value: 1,
+                  ),
                   .tile(
                     title: Text('Bluetooth'),
                     subtitle: Text('Fee, Fo'),
@@ -307,7 +337,12 @@ void main() {
             control: const .managedRadio(initial: 1),
             label: const Text('Network'),
             children: [
-              const .tile(title: Text('WiFi'), details: Text('FL (5G)'), suffix: Icon(FLucideIcons.chevronRight), value: 1),
+              const .tile(
+                title: Text('WiFi'),
+                details: Text('FL (5G)'),
+                suffix: Icon(FLucideIcons.chevronRight),
+                value: 1,
+              ),
               .tile(
                 style: FThemes.blue.dark.touch.tileGroupStyle.tileStyles.base,
                 title: const Text('Bluetooth'),
