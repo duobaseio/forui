@@ -11,6 +11,7 @@ Widget build(BuildContext context) {
   final FColors colors = context.theme.colors;
   final FTypography typography = context.theme.typography;
   final FStyle style = context.theme.style;
+  final FIcons icons = context.theme.icons;
 
   return const Placeholder();
 }

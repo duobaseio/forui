@@ -68,7 +68,9 @@ class FAlert extends StatelessWidget {
   final Widget? subtitle;
 
   /// The icon displayed on the left side of the alert.
-  final Widget icon;
+  ///
+  /// Defaults to [FIcons.circleAlert].
+  final Widget? icon;
 
   /// Creates a [FAlert] with a title, subtitle, and icon.
   ///
@@ -82,7 +84,7 @@ class FAlert extends StatelessWidget {
   const FAlert({
     required this.title,
     this.clipBehavior = .none,
-    this.icon = const Icon(FLucideIcons.circleAlert),
+    this.icon,
     this.subtitle,
     this.variant = .primary,
     this.style = const .context(),
@@ -99,7 +101,10 @@ class FAlert extends StatelessWidget {
         children: [
           Row(
             children: [
-              IconTheme(data: style.iconStyle, child: icon),
+              IconTheme(
+                data: style.iconStyle,
+                child: icon ?? context.theme.icons.circleAlert(context),
+              ),
               Flexible(
                 child: Padding(
                   padding: const .only(left: 10),

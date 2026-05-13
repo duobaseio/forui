@@ -39,12 +39,13 @@ class FMultiSelectStyle with Diagnosticable, _$FMultiSelectStyleFunctions {
   FMultiSelectStyle.inherit({
     required FColors colors,
     required FTypography typography,
+    required FIcons icons,
     required FStyle style,
     required bool touch,
   }) : this(
-         fieldStyles: .inherit(colors: colors, typography: typography, style: style, touch: touch),
+         fieldStyles: .inherit(colors: colors, icons: icons, typography: typography, style: style, touch: touch),
          searchStyle: .inherit(colors: colors, typography: typography, style: style, touch: touch),
-         contentStyle: .inherit(colors: colors, typography: typography, style: style, touch: touch),
+         contentStyle: .inherit(colors: colors, icons: icons, typography: typography, style: style, touch: touch),
          emptyTextStyle: typography.sm,
        );
 }
@@ -64,6 +65,7 @@ extension type FMultiSelectFieldSizeStyles(
   /// Creates a [FMultiSelectFieldSizeStyles] that inherits its properties.
   factory FMultiSelectFieldSizeStyles.inherit({
     required FColors colors,
+    required FIcons icons,
     required FTypography typography,
     required FStyle style,
     required bool touch,
@@ -85,6 +87,7 @@ extension type FMultiSelectFieldSizeStyles(
       required BorderRadiusGeometry tagBorderRadius,
     }) => FMultiSelectFieldStyle.inherit(
       colors: colors,
+      icons: icons,
       style: style,
       labelStyle: label,
       textStyle: textStyle,
@@ -94,6 +97,7 @@ extension type FMultiSelectFieldSizeStyles(
       hintPadding: hintPadding,
       tagStyle: .inherit(
         colors: colors,
+        icons: icons,
         style: style,
         textStyle: typography.sm,
         padding: tagPadding,
@@ -216,6 +220,10 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
   @override
   final FButtonStyle clearButtonStyle;
 
+  /// The clear button's icon builder. Defaults to [FIcons.x].
+  @override
+  final FIconBuilder clearIcon;
+
   /// The padding surrounding the clear button. Defaults to [EdgeInsets.zero].
   @override
   final EdgeInsetsGeometry clearButtonPadding;
@@ -236,6 +244,7 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
     required this.hintPadding,
     required this.iconStyle,
     required this.clearButtonStyle,
+    required this.clearIcon,
     required this.tappableStyle,
     required this.tagStyle,
     required super.labelTextStyle,
@@ -254,6 +263,7 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
   /// Creates a [FMultiSelectFieldStyle] that inherits its properties.
   FMultiSelectFieldStyle.inherit({
     required FColors colors,
+    required FIcons icons,
     required FStyle style,
     required FLabelStyle labelStyle,
     required TextStyle textStyle,
@@ -314,6 +324,7 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
          ),
          iconStyle: iconStyle,
          clearButtonStyle: clearButtonStyle,
+         clearIcon: icons.x,
          tagStyle: tagStyle,
          tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
          labelTextStyle: style.formFieldStyle.labelTextStyle,

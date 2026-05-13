@@ -10,10 +10,7 @@ import 'package:forui/forui.dart';
 
 part 'style.design.dart';
 
-/// A set of miscellaneous properties that is part of a [FThemeData].
-///
-/// These properties are not used directly by Forui widgets. Instead, they are the defaults for the corresponding
-/// properties of widget styles configured via `inherit(...)` constructors.
+/// A set of miscellaneous tokens that are part of a [FThemeData].
 class FStyle with Diagnosticable, _$FStyleFunctions {
   /// The style for the form field.
   @override

@@ -147,7 +147,9 @@ class FCheckbox extends StatelessWidget {
                 dimension: style.size,
                 child: DecoratedBox(
                   decoration: decoration,
-                  child: value ? IconTheme(data: iconTheme, child: const Icon(FLucideIcons.check)) : const SizedBox(),
+                  child: value
+                      ? IconTheme(data: iconTheme, child: style.icon(context))
+                      : const SizedBox(),
                 ),
               ),
             ),
@@ -191,6 +193,10 @@ class FCheckboxStyle with Diagnosticable, _$FCheckboxStyleFunctions {
   @override
   final FVariants<FFormFieldVariantConstraint, FFormFieldVariant, IconThemeData, IconThemeDataDelta> iconStyle;
 
+  /// The check icon builder. Defaults to [FIcons.check].
+  @override
+  final FIconBuilder icon;
+
   /// The box decoration.
   @override
   final FVariants<FCheckboxVariantConstraint, FCheckboxVariant, Decoration, DecorationDelta> decoration;
@@ -212,6 +218,7 @@ class FCheckboxStyle with Diagnosticable, _$FCheckboxStyleFunctions {
     required this.tappableStyle,
     required this.focusedOutlineStyle,
     required this.iconStyle,
+    required this.icon,
     required this.decoration,
     required this.leadingLabelStyle,
     required this.trailingLabelStyle,
@@ -220,7 +227,12 @@ class FCheckboxStyle with Diagnosticable, _$FCheckboxStyleFunctions {
   });
 
   /// Creates a [FCheckboxStyle] that inherits its properties.
-  factory FCheckboxStyle.inherit({required FColors colors, required FStyle style, required bool touch}) {
+  factory FCheckboxStyle.inherit({
+    required FColors colors,
+    required FIcons icons,
+    required FStyle style,
+    required bool touch,
+  }) {
     final FLabelStyles(:horizontalLeadingStyle, :horizontalTrailingStyle) = FLabelStyles.inherit(style: style);
 
     final (size, iconSize) = switch (touch) {
@@ -241,6 +253,7 @@ class FCheckboxStyle with Diagnosticable, _$FCheckboxStyleFunctions {
           [.error.and(.disabled)]: .delta(color: colors.disable(colors.errorForeground)),
         },
       ),
+      icon: icons.check,
       decoration: FVariants.from(
         ShapeDecoration(
           shape: RoundedSuperellipseBorder(

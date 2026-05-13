@@ -301,6 +301,7 @@ class FSidebarStyle with Diagnosticable, _$FSidebarStyleFunctions {
   FSidebarStyle.inherit({
     required FColors colors,
     required FTypography typography,
+    required FIcons icons,
     required FStyle style,
     required bool touch,
   }) : this(
@@ -310,6 +311,6 @@ class FSidebarStyle with Diagnosticable, _$FSidebarStyleFunctions {
              end: BorderSide(color: colors.border, width: style.borderWidth),
            ),
          ),
-         groupStyle: .inherit(colors: colors, typography: typography, style: style, touch: touch),
+         groupStyle: .inherit(colors: colors, typography: typography, icons: icons, style: style, touch: touch),
        );
 }

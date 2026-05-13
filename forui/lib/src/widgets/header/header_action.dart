@@ -90,7 +90,7 @@ class FHeaderAction extends StatelessWidget {
     super.key,
   });
 
-  /// Creates a [FHeaderAction] with `FLucideIcons.arrowLeft`.
+  /// Creates a [FHeaderAction] with [FIcons.arrowLeft].
   factory FHeaderAction.back({
     required VoidCallback? onPress,
     FHeaderActionStyleDelta style = const .context(),
@@ -108,7 +108,7 @@ class FHeaderAction extends StatelessWidget {
     Map<Type, Action<Intent>>? actions,
     Key? key,
   }) => .new(
-    icon: const Icon(FLucideIcons.arrowLeft),
+    icon: Builder(builder: (context) => context.theme.icons.arrowLeft(context)),
     onPress: onPress,
     style: style,
     semanticsLabel: semanticsLabel,
@@ -126,7 +126,7 @@ class FHeaderAction extends StatelessWidget {
     key: key,
   );
 
-  /// Creates a [FHeaderAction] with `FLucideIcons.x`.
+  /// Creates a [FHeaderAction] with [FIcons.x].
   factory FHeaderAction.x({
     required VoidCallback? onPress,
     FHeaderActionStyleDelta style = const .context(),
@@ -143,7 +143,7 @@ class FHeaderAction extends StatelessWidget {
     Map<Type, Action<Intent>>? actions,
     Key? key,
   }) => .new(
-    icon: const Icon(FLucideIcons.x),
+    icon: Builder(builder: (context) => context.theme.icons.x(context)),
     onPress: onPress,
     style: style,
     autofocus: autofocus,

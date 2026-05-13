@@ -1,0 +1,41 @@
+---
+title: Customizing Icons
+description: Swap the icons used by Forui widgets with your own icons.
+---
+
+import {Callout} from "fumadocs-ui/components/callout";
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import materialSnippet from '@/snippets/snippets/guides/customizing_icons/material.json';
+import svgSnippet from '@/snippets/snippets/guides/customizing_icons/svg.json';
+
+Forui widgets use the icons defined in [`FIcons`](https://pub.dev/documentation/forui/latest/forui.theme/FIcons-class.html).
+They default to [Lucide](https://lucide.dev/) icons which may not fit your application's custom design system.
+
+To change the icons used across all Forui widgets, pass a custom `FIcons` to your [`FThemeData`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData-class.html).
+
+Icons in `FIcons` should inherit their properties from the ambient [`IconTheme`](https://api.flutter.dev/flutter/widgets/IconTheme-class.html)
+created by Forui widgets.
+
+## `IconData`
+
+Packages that represent icons as `IconData`s inherit automatically. You can also use [`FIcons.iconData`](https://pub.dev/documentation/forui/latest/forui.theme/FIcons/iconData.html)
+to simplify customization.
+
+For example, to use Flutter's built-in Material icons:
+
+<CodeSnippet snippet={materialSnippet} />
+
+## Custom Icon Widgets and SVG Icons
+
+Some packages, especially those with duotone icons, use a custom icon widget to work around the default `Icon` widget's
+limitations. Whether such a widget honors the ambient `IconTheme` depends on the package.
+
+Packages with custom icon widgets that inherit from the ambient `IconTheme` can be passed directly:
+* [`font_awesome_flutter`](https://pub.dev/packages/font_awesome_flutter)
+* [`hugeicons`](https://pub.dev/packages/hugeicons)
+
+Packages whose widgets do not inherit, and SVG icon sets, require additional work to retrieve and apply the inherited `IconThemeData`.
+Wrap the callback in a [`Builder`](https://api.flutter.dev/flutter/widgets/Builder-class.html) so [`IconTheme.of`](https://api.flutter.dev/flutter/widgets/IconTheme/of.html)
+is evaluated inside the caller's wrap:
+
+<CodeSnippet snippet={svgSnippet} />

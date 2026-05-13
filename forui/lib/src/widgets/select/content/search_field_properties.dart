@@ -10,7 +10,7 @@ import 'package:forui/forui.dart';
 class FSelectSearchFieldProperties with Diagnosticable {
   /// The search field's default prefix builder that displays a search icon.
   static Widget defaultIconBuilder(BuildContext context, FTextFieldStyle style, Set<FTextFieldVariant> variants) =>
-      FTextField.prefixIconBuilder(context, style, variants, const Icon(FLucideIcons.search));
+      FTextField.prefixIconBuilder(context, style, variants, context.theme.icons.search(context));
 
   /// The search field's control.
   final FTextFieldControl control;

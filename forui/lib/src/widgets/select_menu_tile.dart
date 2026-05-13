@@ -187,7 +187,7 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
   /// The details.
   final Widget? details;
 
-  /// The suffix. Defaults to `Icon(FLucideIcons.chevronsUpDown)`.
+  /// The suffix. Defaults to [FIcons.chevronsUpDown].
   final Widget? suffix;
 
   /// The shortcuts. Defaults to calling [ActivateIntent].
@@ -669,7 +669,7 @@ class _FSelectMenuTileState<T> extends State<FSelectMenuTile<T>> with TickerProv
               builder: widget.detailsBuilder,
               child: widget.details,
             ),
-            suffix: widget.suffix ?? const Icon(FLucideIcons.chevronsUpDown),
+            suffix: widget.suffix ?? context.theme.icons.chevronsUpDown(context),
             shortcuts: widget.shortcuts,
             actions: widget.actions,
             onPress: _controller._popover.toggle,

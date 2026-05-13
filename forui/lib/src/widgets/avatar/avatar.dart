@@ -95,6 +95,10 @@ class FAvatarStyle with Diagnosticable, _$FAvatarStyleFunctions {
   @override
   final TextStyle textStyle;
 
+  /// The fallback icon builder shown when no image is loaded. Defaults to [FIcons.userRound].
+  @override
+  final FIconBuilder fallbackIcon;
+
   /// Duration for the transition animation. Defaults to 500ms.
   @override
   final Duration fadeInDuration;
@@ -104,14 +108,16 @@ class FAvatarStyle with Diagnosticable, _$FAvatarStyleFunctions {
     required this.backgroundColor,
     required this.foregroundColor,
     required this.textStyle,
+    required this.fallbackIcon,
     this.fadeInDuration = const Duration(milliseconds: 500),
   });
 
   /// Creates a [FAvatarStyle] that inherits its properties.
-  FAvatarStyle.inherit({required FColors colors, required FTypography typography})
+  FAvatarStyle.inherit({required FColors colors, required FIcons icons, required FTypography typography})
     : this(
         backgroundColor: colors.muted,
         foregroundColor: colors.mutedForeground,
         textStyle: typography.sm.copyWith(color: colors.mutedForeground),
+        fallbackIcon: icons.userRound,
       );
 }

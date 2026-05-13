@@ -1,7 +1,13 @@
 ## 0.22.0 (Next)
 
+### `FAccordionItem`
+* **Breaking** Change `FAccordionItem.icon` from `Widget` to `Widget?`. Defaults to `FIcons.chevronDown`.
+
+
 ### `FAlert`
 * Add `FAlert.clipBehavior` to clip the alert's content to the inner path of its decoration. Defaults to `Clip.none`.
+
+* **Breaking** Change `FAlert.icon` from `Widget` to `Widget?`. Defaults to `FIcons.circleAlert`.
 
 
 ### `FAutocomplete`
@@ -15,16 +21,45 @@
 
 * Fix `FAutocomplete` not showing context menu by default.
 
+### `FAvatar`
+* **Breaking** Add `FAvatarStyle.fallbackIcon`. Defaults to `FIcons.userRound`.
+
+
+### `FBreadcrumb`
+* Add `icon` parameter to `FBreadcrumbItem.collapsed` and `FBreadcrumbItem.collapsedTiles`. Defaults to
+  `FIcons.ellipsis`.
+
+* Change `FBreadcrumb.divider` default to resolve from `FIcons.chevronRight`.
+
+
 ### `FButton`
 * Fix `FButton` announcing both `semanticsLabel` and child semantics when `semanticsLabel` is set.
+
+
+### `FCalendar`
+* **Breaking** Add `FCalendarHeaderStyle.previousIcon`, `FCalendarHeaderStyle.toggleIcon`, and
+  `FCalendarHeaderStyle.nextIcon`. Defaults to `FIcons.chevronLeft` and `FIcons.chevronRight`.
 
 
 ### `FCard`
 * Add `FCard.clipBehavior` to clip the card's content to the inner path of its decoration. Defaults to `Clip.none`.
 
 
+### `FCheckbox`
+* **Breaking** Add `FCheckboxStyle.icon`. Defaults to `FIcons.check`.
+
+
+### `FCircularProgress`
+* **Breaking** Change `FCircularProgress.icon` from `IconData` to `FIconBuilder`. The default, `.loader`, and
+  `.pinwheel` constructors resolve their icon from `FIcons` at build time.
+
+
 ### `FColors`
 * Add `ThemeExtension` support via `FColors(extensions: ...)`, `FColors.extension<T>()`, and `FColors.extensions`.
+
+
+### `FDateField`
+* Change `FDateField.defaultIconBuilder` to resolve the calendar icon from `FIcons.calendar`.
 
 
 ### `FDialog`
@@ -33,7 +68,16 @@
 
 
 ### `FHeaderAction`
+* Change `FHeaderAction.back` and `FHeaderAction.x` to resolve their icons from `FIcons.arrowLeft` and `FIcons.x`.
+
 * Fix `FHeaderAction.style` type from `FHeaderActionStyle?` to `FHeaderActionStyleDelta`.
+
+
+### `FIcons`
+Add `FIcons`, a set of semantic icon tokens exposed via `FThemeData.icons`. This allows the icons used by widgets to be
+customized globally. Defaults to Lucide-backed set, `FIcons.lucide()`.
+
+* Add `FIconBuilder` typedef and `FIcons.iconData` helper for wrapping an `IconData` as a builder.
 
 
 ### `FItem` & `FItemGroup`
@@ -56,6 +100,9 @@
 ### `FPagination`
 * Add settable `FPaginationController.pages`, `FPaginationController.siblings`, and `FPaginationController.showEdges`.
 
+* Change `FPagination.previous` and `FPagination.next` defaults to resolve from `FIcons.chevronLeft` and
+  `FIcons.chevronRight`.
+
 
 ### `FPopover`
 * Add `FPopover.popoverClipBehavior` to clip the popover's content to the inner path of its decoration. Defaults to
@@ -63,11 +110,43 @@
 
 
 ### `FPopoverMenu`
+* Change `FSubmenuItem.suffix` and `FSubmenuTile.suffix` defaults to resolve from `FIcons.chevronRight`.
+
 * Fix `FPopoverMenu` content not clipping properly at rounded corners.
+
+
+### `FResizable`
+* **Breaking** Add `FResizableDividerThumbStyle.icon`. Defaults to `FIcons.gripVertical` (horizontal axis) or
+  `FIcons.gripHorizontal` (vertical axis).
+
+
+### `FSelect` & `FMultiSelect`
+* **Breaking** Add `FMultiSelectFieldStyle.clearIcon`. Defaults to `FIcons.x`.
+* **Breaking** Add `FMultiSelectTagStyle.icon`. Defaults to `FIcons.x`.
+* **Breaking** Add `FSelectScrollHandleStyle.upIcon` and `FSelectScrollHandleStyle.downIcon`. Defaults to
+  `FIcons.chevronUp` and `FIcons.chevronDown`.
+
+* Change `FSelect.defaultIconBuilder` and `FMultiSelect.defaultIconBuilder` to resolve the chevron from
+  `FIcons.chevronDown`.
+* Change `FSelectSearchFieldProperties.defaultIconBuilder` to resolve the search icon from `FIcons.search`.
+
+
+### `FSelectMenuTile`
+* Change `FSelectMenuTile.suffix` default to resolve from `FIcons.chevronsUpDown`.
+
+
+### `FSelectTile` & `FSelectTileGroup`
+* **Breaking** Change `FSelectTile.checkedIcon` and `FSelectTile.uncheckedIcon` from `Widget` to `Widget?`. Defaults
+  to `FIcons.check`; the unchecked variant is rendered transparent to preserve layout.
+
+
+### `FSidebar` & `FSidebarItem`
+* **Breaking** Add `FSidebarItemStyle.collapsibleIcon`. Defaults to `FIcons.chevronRight`.
 
 
 ### `FStyle` & `FThemeData`
 * Add `FThemeData.hapticFeedback`.
+* Add `FThemeData.icons` for theming icons used by Forui widgets. See `FIcons`.
 
 * **Breaking** Remove `FStyle.hapticFeedback`. Use `FThemeData.hapticFeedback` instead.
 * **Breaking** Remove `colors`, `typography`, and `style` parameters from `FThemeData.copyWith`. Rebuild `FThemeData`
@@ -94,6 +173,15 @@
 * Add `onSecondaryLongPressStart`.
 * Add `onSecondaryLongPressMove`.
 * Add `onSecondaryLongPressEnd`.
+
+
+### `FTextField`
+* Change `FTextField.defaultObscureIconBuilder` to resolve eye icons from `FIcons.eye` and `FIcons.eyeClosed`.
+* Change `FTextField.defaultClearIconBuilder` to resolve the clear icon from `FIcons.x`.
+
+
+### `FTimeField`
+* Change `FTimeField.defaultIconBuilder` to resolve the clock icon from `FIcons.clock4`.
 
 
 ### `FToast`

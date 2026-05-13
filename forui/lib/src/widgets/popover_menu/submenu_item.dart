@@ -300,7 +300,7 @@ class FSubmenuItem extends StatelessWidget with FItemMixin {
             prefix: prefix,
             title: title,
             subtitle: subtitle,
-            suffix: suffix ?? const Icon(FLucideIcons.chevronRight),
+            suffix: suffix ?? context.theme.icons.chevronRight(context),
             onPress: () {}, // This is necessary to enable the item.
           ),
         ),

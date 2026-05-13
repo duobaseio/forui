@@ -287,8 +287,12 @@ extension type FResizableStyles(
           FResizableDividerStyleDelta
         > {
   /// Creates a [FResizableStyles] that inherits its properties.
-  factory FResizableStyles.inherit({required FColors colors, required FStyle style}) {
-    FResizableDividerStyle dividerStyle({required double height, required double width}) => FResizableDividerStyle(
+  factory FResizableStyles.inherit({required FColors colors, required FIcons icons, required FStyle style}) {
+    FResizableDividerStyle dividerStyle({
+      required FIconBuilder icon,
+      required double height,
+      required double width,
+    }) => FResizableDividerStyle(
       color: colors.border,
       focusedOutlineStyle: style.focusedOutlineStyle,
       thumbStyle: FResizableDividerThumbStyle(
@@ -297,18 +301,19 @@ extension type FResizableStyles(
           color: colors.border,
         ),
         foregroundColor: colors.foreground,
+        icon: icon,
         height: height,
         width: width,
       ),
     );
 
-    final horizontal = dividerStyle(height: 20, width: 10);
+    final horizontal = dividerStyle(icon: icons.gripVertical, height: 20, width: 10);
     return FResizableStyles(
       FVariants(
         horizontal,
         variants: {
           [.horizontal]: horizontal,
-          [.vertical]: dividerStyle(height: 10, width: 20),
+          [.vertical]: dividerStyle(icon: icons.gripHorizontal, height: 10, width: 20),
         },
       ),
     );

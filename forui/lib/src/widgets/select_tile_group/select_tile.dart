@@ -31,7 +31,7 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
   /// ```
   final FItemStyleDelta style;
 
-  /// The checked icon. Defaults to `Icon(FLucideIcons.check)`.
+  /// The checked icon. Defaults to [FIcons.check].
   final Widget? checkedIcon;
 
   /// The unchecked icon.
@@ -87,8 +87,8 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
     required this.title,
     required this.value,
     this.style = const .context(),
-    this.checkedIcon = const Icon(FLucideIcons.check),
-    this.uncheckedIcon = const Icon(FLucideIcons.check, color: Colors.transparent),
+    this.checkedIcon,
+    this.uncheckedIcon,
     this.subtitle,
     this.details,
     this.semanticsLabel,
@@ -113,8 +113,8 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
     required Widget title,
     required T value,
     FItemStyleDelta style,
-    Widget checkedIcon,
-    Widget uncheckedIcon,
+    Widget? checkedIcon,
+    Widget? uncheckedIcon,
     Widget? subtitle,
     Widget? details,
     String? semanticsLabel,
@@ -137,8 +137,8 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
     required this.title,
     required this.value,
     this.style = const .context(),
-    this.checkedIcon = const Icon(FLucideIcons.check),
-    this.uncheckedIcon = const Icon(FLucideIcons.check, color: Colors.transparent),
+    this.checkedIcon,
+    this.uncheckedIcon,
     this.subtitle,
     this.details,
     this.semanticsLabel,
@@ -158,20 +158,29 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
   @override
   Widget build(BuildContext context) {
     final FSelectTileData(:controller, :selected) = .of<T>(context);
+    final icons = context.theme.icons;
+    final checked = checkedIcon ?? icons.check(context);
+    final unchecked =
+        uncheckedIcon ??
+        IconTheme.merge(
+          data: const IconThemeData(color: Colors.transparent),
+          child: icons.check(context),
+        );
+
     return FTile(
       style: style,
       prefix: switch ((_suffix, selected)) {
         (true, _) => _icon,
-        (false, true) => checkedIcon,
-        (false, false) => uncheckedIcon,
+        (false, true) => checked,
+        (false, false) => unchecked,
       },
       title: title,
       subtitle: subtitle,
       details: details,
       suffix: switch ((_suffix, selected)) {
         (false, _) => _icon,
-        (true, true) => checkedIcon,
-        (true, false) => uncheckedIcon,
+        (true, true) => checked,
+        (true, false) => unchecked,
       },
       semanticsLabel: semanticsLabel,
       enabled: enabled,

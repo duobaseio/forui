@@ -39,6 +39,10 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   @override
   final FTypography typography;
 
+  /// The icon tokens. Defaults to a [FIcons.lucide].
+  @override
+  final FIcons icons;
+
   /// The style. It is used to configure the miscellaneous properties, such as border radii, of Forui widgets.
   @override
   final FStyle style;
@@ -598,6 +602,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     String? debugLabel,
     FBreakpoints breakpoints = const FBreakpoints(),
     FTypography? typography,
+    FIcons? icons,
     FStyle? style,
     FHapticFeedback hapticFeedback = const FHapticFeedback(),
     FAccordionStyle? accordionStyle,
@@ -666,12 +671,14 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     Iterable<ThemeExtension<dynamic>> extensions = const [],
   }) {
     typography ??= .inherit(colors: colors, touch: touch);
+    icons ??= FIcons.lucide();
     style ??= .inherit(colors: colors, typography: typography, touch: touch);
     return ._(
       debugLabel: debugLabel,
       breakpoints: breakpoints,
       colors: colors,
       typography: typography,
+      icons: icons,
       style: style,
       hapticFeedback: hapticFeedback,
       accordionStyle: accordionStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
@@ -680,7 +687,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       alertStyles: alertStyles == null
           ? FAlertStyles.inherit(colors: colors, typography: typography, style: style, touch: touch)
           : FAlertStyles(alertStyles),
-      avatarStyle: avatarStyle ?? .inherit(colors: colors, typography: typography),
+      avatarStyle: avatarStyle ?? .inherit(colors: colors, icons: icons, typography: typography),
       badgeStyles: badgeStyles == null
           ? FBadgeStyles.inherit(colors: colors, typography: typography, style: style, touch: touch)
           : FBadgeStyles(badgeStyles),
@@ -690,13 +697,15 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       buttonStyles: buttonStyles == null
           ? FButtonStyles.inherit(colors: colors, typography: typography, style: style, touch: touch)
           : FButtonStyles(buttonStyles),
-      calendarStyle: calendarStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
+      calendarStyle:
+          calendarStyle ?? .inherit(colors: colors, typography: typography, icons: icons, style: style, touch: touch),
       cardStyle: cardStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
-      checkboxStyle: checkboxStyle ?? .inherit(colors: colors, style: style, touch: touch),
+      checkboxStyle: checkboxStyle ?? .inherit(colors: colors, icons: icons, style: style, touch: touch),
       circularProgressStyles: circularProgressStyles == null
           ? FCircularProgressSizeStyles.inherit(colors: colors, typography: typography)
           : FCircularProgressSizeStyles(circularProgressStyles),
-      dateFieldStyle: dateFieldStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
+      dateFieldStyle:
+          dateFieldStyle ?? .inherit(colors: colors, typography: typography, icons: icons, style: style, touch: touch),
       dateTimePickerStyle:
           dateTimePickerStyle ??
           .inherit(colors: colors, typography: typography, style: style, hapticFeedback: hapticFeedback, touch: touch),
@@ -720,7 +729,8 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       labelStyles: labelStyles ?? .inherit(style: style),
       lineCalendarStyle: lineCalendarStyle ?? .inherit(colors: colors, typography: typography, style: style),
       multiSelectStyle:
-          multiSelectStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
+          multiSelectStyle ??
+          .inherit(colors: colors, icons: icons, typography: typography, style: style, touch: touch),
       modalSheetStyle: modalSheetStyle ?? .inherit(colors: colors),
       otpFieldStyle: otpFieldStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       paginationStyle: paginationStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
@@ -735,16 +745,19 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       progressStyle: progressStyle ?? .inherit(colors: colors, style: style),
       radioStyle: radioStyle ?? .inherit(colors: colors, style: style, touch: touch),
       resizableStyles: resizableStyles == null
-          ? FResizableStyles.inherit(colors: colors, style: style)
+          ? FResizableStyles.inherit(colors: colors, icons: icons, style: style)
           : FResizableStyles(resizableStyles),
       scaffoldStyle: scaffoldStyle ?? .inherit(colors: colors, style: style),
-      selectStyle: selectStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
+      selectStyle:
+          selectStyle ?? .inherit(colors: colors, icons: icons, typography: typography, style: style, touch: touch),
       selectGroupStyle:
-          selectGroupStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
+          selectGroupStyle ??
+          .inherit(colors: colors, typography: typography, icons: icons, style: style, touch: touch),
       selectMenuTileStyle:
           selectMenuTileStyle ??
           .inherit(colors: colors, typography: typography, style: style, hapticFeedback: hapticFeedback, touch: touch),
-      sidebarStyle: sidebarStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
+      sidebarStyle:
+          sidebarStyle ?? .inherit(colors: colors, typography: typography, icons: icons, style: style, touch: touch),
       sliderStyles: sliderStyles == null
           ? FSliderStyles.inherit(colors: colors, typography: typography, style: style, hapticFeedback: hapticFeedback)
           : FSliderStyles(sliderStyles),
@@ -780,6 +793,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     breakpoints: t < 0.5 ? a.breakpoints : b.breakpoints,
     colors: .lerp(a.colors, b.colors, t),
     typography: .lerp(a.typography, b.typography, t),
+    icons: t < 0.5 ? a.icons : b.icons,
     style: a.style.lerp(b.style, t),
     hapticFeedback: t < 0.5 ? a.hapticFeedback : b.hapticFeedback,
     accordionStyle: a.accordionStyle.lerp(b.accordionStyle, t),
@@ -924,6 +938,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     required this.breakpoints,
     required this.colors,
     required this.typography,
+    required this.icons,
     required this.style,
     required this.hapticFeedback,
     required this.accordionStyle,

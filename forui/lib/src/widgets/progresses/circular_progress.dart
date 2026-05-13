@@ -34,6 +34,15 @@ part 'circular_progress.design.dart';
 /// * [FCircularProgressStyle] for customizing a circular progress's appearance.
 /// * [FProgress] for for an indeterminate linear progress indicator.
 class FCircularProgress extends StatefulWidget {
+  static Widget _loaderCircle(BuildContext context, {String? semanticsLabel}) =>
+      context.theme.icons.loaderCircle(context, semanticsLabel: semanticsLabel);
+
+  static Widget _loader(BuildContext context, {String? semanticsLabel}) =>
+      context.theme.icons.loader(context, semanticsLabel: semanticsLabel);
+
+  static Widget _loaderPinwheel(BuildContext context, {String? semanticsLabel}) =>
+      context.theme.icons.loaderPinwheel(context, semanticsLabel: semanticsLabel);
+
   /// The size. Defaults to [FCircularProgressSizeVariant.md].
   final FCircularProgressSizeVariant size;
 
@@ -61,24 +70,24 @@ class FCircularProgress extends StatefulWidget {
   final String? semanticsLabel;
 
   /// The icon.
-  final IconData icon;
+  final FIconBuilder icon;
 
-  /// Creates a [FCircularProgress] that uses [FLucideIcons.loaderCircle].
+  /// Creates a [FCircularProgress] that uses [FIcons.loaderCircle].
   const FCircularProgress({
     this.size = .md,
     this.style = const .context(),
     this.semanticsLabel,
-    this.icon = FLucideIcons.loaderCircle,
+    this.icon = _loaderCircle,
     super.key,
   });
 
-  /// Creates a [FCircularProgress] that uses [FLucideIcons.loader].
+  /// Creates a [FCircularProgress] that uses [FIcons.loader].
   const FCircularProgress.loader({this.size = .md, this.style = const .context(), this.semanticsLabel, super.key})
-    : icon = FLucideIcons.loader;
+    : icon = _loader;
 
-  /// Creates a [FCircularProgress] that uses [FLucideIcons.loaderPinwheel].
+  /// Creates a [FCircularProgress] that uses [FIcons.loaderPinwheel].
   const FCircularProgress.pinwheel({this.size = .md, this.style = const .context(), this.semanticsLabel, super.key})
-    : icon = FLucideIcons.loaderPinwheel;
+    : icon = _loaderPinwheel;
 
   @override
   State<FCircularProgress> createState() => _CircularState();
@@ -90,7 +99,7 @@ class FCircularProgress extends StatefulWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('size', size))
       ..add(StringProperty('semanticsLabel', semanticsLabel))
-      ..add(IconDataProperty('icon', icon));
+      ..add(ObjectFlagProperty.has('icon', icon));
   }
 }
 
@@ -150,7 +159,7 @@ class _CircularState extends State<FCircularProgress> with SingleTickerProviderS
       builder: (_, child) => Transform.rotate(angle: _rotation.value * 2 * math.pi, child: child),
       child: IconTheme(
         data: _style!.iconStyle,
-        child: Icon(widget.icon, semanticLabel: semanticsLabel),
+        child: widget.icon(context, semanticsLabel: semanticsLabel),
       ),
     );
   }
