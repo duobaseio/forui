@@ -13,16 +13,16 @@ class ItemGroupPage extends Example {
   Widget example(BuildContext _) => FItemGroup(
     children: [
       FItem(
-        prefix: const Icon(FIcons.user),
+        prefix: const Icon(FLucideIcons.user),
         title: const Text('Personalization'),
-        suffix: const Icon(FIcons.chevronRight),
+        suffix: const Icon(FLucideIcons.chevronRight),
         onPress: () {},
       ),
       FItem(
-        prefix: const Icon(FIcons.wifi),
+        prefix: const Icon(FLucideIcons.wifi),
         title: const Text('WiFi'),
         details: const Text('Duobase (5G)'),
-        suffix: const Icon(FIcons.chevronRight),
+        suffix: const Icon(FLucideIcons.chevronRight),
         onPress: () {},
       ),
     ],
@@ -40,16 +40,16 @@ class ItemGroupIndentedPage extends Example {
     // {@endhighlight}
     children: [
       FItem(
-        prefix: const Icon(FIcons.user),
+        prefix: const Icon(FLucideIcons.user),
         title: const Text('Personalization'),
-        suffix: const Icon(FIcons.chevronRight),
+        suffix: const Icon(FLucideIcons.chevronRight),
         onPress: () {},
       ),
       FItem(
-        prefix: const Icon(FIcons.wifi),
+        prefix: const Icon(FLucideIcons.wifi),
         title: const Text('WiFi'),
         details: const Text('Duobase (5G)'),
-        suffix: const Icon(FIcons.chevronRight),
+        suffix: const Icon(FLucideIcons.chevronRight),
         onPress: () {},
       ),
     ],
@@ -67,16 +67,16 @@ class ItemGroupFullPage extends Example {
     // {@endhighlight}
     children: [
       FItem(
-        prefix: const Icon(FIcons.user),
+        prefix: const Icon(FLucideIcons.user),
         title: const Text('Personalization'),
-        suffix: const Icon(FIcons.chevronRight),
+        suffix: const Icon(FLucideIcons.chevronRight),
         onPress: () {},
       ),
       FItem(
-        prefix: const Icon(FIcons.wifi),
+        prefix: const Icon(FLucideIcons.wifi),
         title: const Text('WiFi'),
         details: const Text('Duobase (5G)'),
-        suffix: const Icon(FIcons.chevronRight),
+        suffix: const Icon(FLucideIcons.chevronRight),
         onPress: () {},
       ),
     ],
@@ -92,34 +92,34 @@ class ScrollableItemGroupPage extends Example {
     maxHeight: 150,
     children: [
       .item(
-        prefix: const Icon(FIcons.user),
+        prefix: const Icon(FLucideIcons.user),
         title: const Text('Personalization'),
-        suffix: const Icon(FIcons.chevronRight),
+        suffix: const Icon(FLucideIcons.chevronRight),
         onPress: () {},
       ),
       .item(
-        prefix: const Icon(FIcons.mail),
+        prefix: const Icon(FLucideIcons.mail),
         title: const Text('Mail'),
-        suffix: const Icon(FIcons.chevronRight),
+        suffix: const Icon(FLucideIcons.chevronRight),
         onPress: () {},
       ),
       .item(
-        prefix: const Icon(FIcons.wifi),
+        prefix: const Icon(FLucideIcons.wifi),
         title: const Text('WiFi'),
         details: const Text('Duobase (5G)'),
-        suffix: const Icon(FIcons.chevronRight),
+        suffix: const Icon(FLucideIcons.chevronRight),
         onPress: () {},
       ),
       .item(
-        prefix: const Icon(FIcons.alarmClock),
+        prefix: const Icon(FLucideIcons.alarmClock),
         title: const Text('Alarm Clock'),
-        suffix: const Icon(FIcons.chevronRight),
+        suffix: const Icon(FLucideIcons.chevronRight),
         onPress: () {},
       ),
       .item(
-        prefix: const Icon(FIcons.qrCode),
+        prefix: const Icon(FLucideIcons.qrCode),
         title: const Text('QR code'),
-        suffix: const Icon(FIcons.chevronRight),
+        suffix: const Icon(FLucideIcons.chevronRight),
         onPress: () {},
       ),
     ],
@@ -135,7 +135,7 @@ class LazyItemGroupPage extends Example {
     maxHeight: 200,
     count: 200,
     itemBuilder: (context, index) =>
-        FItem(title: Text('Item $index'), suffix: const Icon(FIcons.chevronRight), onPress: () {}),
+        FItem(title: Text('Item $index'), suffix: const Icon(FLucideIcons.chevronRight), onPress: () {}),
   );
 }
 
@@ -149,16 +149,16 @@ class MergeItemGroupPage extends Example {
       .group(
         children: [
           .item(
-            prefix: const Icon(FIcons.user),
+            prefix: const Icon(FLucideIcons.user),
             title: const Text('Personalization'),
-            suffix: const Icon(FIcons.chevronRight),
+            suffix: const Icon(FLucideIcons.chevronRight),
             onPress: () {},
           ),
           .item(
-            prefix: const Icon(FIcons.wifi),
+            prefix: const Icon(FLucideIcons.wifi),
             title: const Text('WiFi'),
             details: const Text('Duobase (5G)'),
-            suffix: const Icon(FIcons.chevronRight),
+            suffix: const Icon(FLucideIcons.chevronRight),
             onPress: () {},
           ),
         ],
@@ -166,15 +166,15 @@ class MergeItemGroupPage extends Example {
       .group(
         children: [
           .item(
-            prefix: const Icon(FIcons.list),
+            prefix: const Icon(FLucideIcons.list),
             title: const Text('List View'),
-            suffix: const Icon(FIcons.chevronRight),
+            suffix: const Icon(FLucideIcons.chevronRight),
             onPress: () {},
           ),
           .item(
-            prefix: const Icon(FIcons.grid2x2),
+            prefix: const Icon(FLucideIcons.grid2x2),
             title: const Text('Grid View'),
-            suffix: const Icon(FIcons.chevronRight),
+            suffix: const Icon(FLucideIcons.chevronRight),
             onPress: () {},
           ),
         ],

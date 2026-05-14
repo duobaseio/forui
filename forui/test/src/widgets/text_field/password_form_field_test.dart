@@ -36,17 +36,17 @@ void main() {
     );
 
     expect(find.bySemanticsLabel('Hide password'), findsOne);
-    expect(find.byIcon(FIcons.eyeClosed), findsOne);
+    expect(find.byIcon(FLucideIcons.eyeClosed), findsOne);
 
     expect(tester.widget<EditableText>(find.byType(EditableText)).obscureText, false);
 
-    await tester.tap(find.byIcon(FIcons.eyeClosed));
+    await tester.tap(find.byIcon(FLucideIcons.eyeClosed));
     await tester.pumpAndSettle(const Duration(seconds: 1));
 
     expect(find.bySemanticsLabel('Show password'), findsOne);
-    expect(find.byIcon(FIcons.eye), findsOne);
+    expect(find.byIcon(FLucideIcons.eye), findsOne);
     expect(find.bySemanticsLabel('Hide password'), findsNothing);
-    expect(find.byIcon(FIcons.eyeClosed), findsNothing);
+    expect(find.byIcon(FLucideIcons.eyeClosed), findsNothing);
 
     expect(tester.widget<EditableText>(find.byType(EditableText)).obscureText, true);
   });
@@ -69,7 +69,7 @@ void main() {
     expect(fields[0].obscureText, true);
     expect(fields[1].obscureText, true);
 
-    expect(find.byIcon(FIcons.eye), findsOneWidget);
+    expect(find.byIcon(FLucideIcons.eye), findsOneWidget);
 
     controller.value = false;
     await tester.pumpAndSettle();
@@ -93,7 +93,7 @@ void main() {
 
     expect(tester.widget<EditableText>(find.byType(EditableText)).obscureText, true);
 
-    await tester.tap(find.byIcon(FIcons.eye));
+    await tester.tap(find.byIcon(FLucideIcons.eye));
     await tester.pumpAndSettle();
     expect(received, false);
 
@@ -112,8 +112,8 @@ void main() {
 
     expect(find.bySemanticsLabel('Show password'), findsNothing);
     expect(find.bySemanticsLabel('Hide password'), findsNothing);
-    expect(find.byIcon(FIcons.eye), findsNothing);
-    expect(find.byIcon(FIcons.eyeClosed), findsNothing);
+    expect(find.byIcon(FLucideIcons.eye), findsNothing);
+    expect(find.byIcon(FLucideIcons.eyeClosed), findsNothing);
     expect(find.byIcon(Icons.lock), findsOneWidget);
 
     expect(tester.widget<EditableText>(find.byType(EditableText)).obscureText, true);

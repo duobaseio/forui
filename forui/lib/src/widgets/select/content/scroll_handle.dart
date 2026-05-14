@@ -14,16 +14,10 @@ class ScrollHandle extends StatefulWidget {
   final ScrollController controller;
   final FSelectScrollHandleStyle style;
   final Alignment alignment;
-  final IconData icon;
 
-  const ScrollHandle.up({required this.controller, required this.style, super.key})
-    : alignment = .topCenter,
-      icon = FIcons.chevronUp;
+  const ScrollHandle.up({required this.controller, required this.style, super.key}) : alignment = .topCenter;
 
-  const ScrollHandle.down({required this.controller, required this.style, super.key})
-    : alignment = .bottomCenter,
-      icon = FIcons.chevronDown;
-
+  const ScrollHandle.down({required this.controller, required this.style, super.key}) : alignment = .bottomCenter;
   @override
   State<ScrollHandle> createState() => _ScrollHandleState();
 
@@ -33,8 +27,7 @@ class ScrollHandle extends StatefulWidget {
     properties
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('alignment', alignment))
-      ..add(DiagnosticsProperty('icon', icon));
+      ..add(DiagnosticsProperty('alignment', alignment));
   }
 }
 
@@ -78,7 +71,10 @@ class _ScrollHandleState extends State<ScrollHandle> {
                 width: .infinity,
                 child: ColoredBox(
                   color: widget.style.background,
-                  child: IconTheme(data: widget.style.iconStyle, child: Icon(widget.icon)),
+                  child: IconTheme(
+                    data: widget.style.iconStyle,
+                    child: (widget.alignment == .topCenter ? widget.style.upIcon : widget.style.downIcon)(context),
+                  ),
                 ),
               ),
             ),
@@ -139,6 +135,14 @@ class FSelectScrollHandleStyle with Diagnosticable, _$FSelectScrollHandleStyleFu
   @override
   final IconThemeData iconStyle;
 
+  /// The up scroll handle icon builder. Defaults to [FIcons.chevronUp].
+  @override
+  final FIconBuilder upIcon;
+
+  /// The down scroll handle icon builder. Defaults to [FIcons.chevronDown].
+  @override
+  final FIconBuilder downIcon;
+
   /// The background color.
   @override
   final Color background;
@@ -158,14 +162,18 @@ class FSelectScrollHandleStyle with Diagnosticable, _$FSelectScrollHandleStyleFu
   const FSelectScrollHandleStyle({
     required this.background,
     required this.iconStyle,
+    required this.upIcon,
+    required this.downIcon,
     this.enterDuration = const Duration(milliseconds: 200),
     this.pixelsPerSecond = 200,
   }) : assert(0 < pixelsPerSecond, 'pixelsPerSecond ($pixelsPerSecond) must be > 0');
 
   /// Creates a [FSelectScrollHandleStyle] that inherits its properties.
-  FSelectScrollHandleStyle.inherit({required FColors colors, required FTypography typography})
+  FSelectScrollHandleStyle.inherit({required FColors colors, required FIcons icons, required FTypography typography})
     : this(
         iconStyle: IconThemeData(color: colors.foreground, size: typography.md.fontSize),
+        upIcon: icons.chevronUp,
+        downIcon: icons.chevronDown,
         background: colors.card,
       );
 }

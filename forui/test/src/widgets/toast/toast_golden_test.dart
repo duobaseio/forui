@@ -17,7 +17,7 @@ void main() {
             theme: theme.data,
             child: FToast(
               variant: variant,
-              icon: const Icon(FIcons.triangleAlert),
+              icon: const Icon(FLucideIcons.triangleAlert),
               title: const Text('Event has been created'),
               description: const Text(
                 'This is a more detailed description that provides comprehensive context and additional information '

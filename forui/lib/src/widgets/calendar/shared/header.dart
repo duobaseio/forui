@@ -90,8 +90,8 @@ class _HeaderState extends State<Header> with SingleTickerProviderStateMixin {
                 child: IconTheme(
                   data: widget.style.buttonStyle.iconContentStyle.iconStyle
                       .resolve(variants)
-                      .copyWith(color: widget.style.headerTextStyle.color),
-                  child: Icon(FIcons.chevronRight, size: widget.style.headerIconSize),
+                      .copyWith(color: widget.style.headerTextStyle.color, size: widget.style.headerIconSize),
+                  child: widget.style.toggleIcon(context),
                 ),
               ),
             ),
@@ -138,7 +138,7 @@ class Navigation extends StatelessWidget {
   const Navigation({required this.style, required this.onPrevious, required this.onNext, super.key});
 
   @override
-  Widget build(BuildContext _) => Padding(
+  Widget build(BuildContext context) => Padding(
     padding: const .only(bottom: 5),
     child: SizedBox(
       height: Header.height(style),
@@ -147,12 +147,12 @@ class Navigation extends StatelessWidget {
         children: [
           Padding(
             padding: const .directional(start: 7),
-            child: FButton.icon(style: style.buttonStyle, onPress: onPrevious, child: const Icon(FIcons.chevronLeft)),
+            child: FButton.icon(style: style.buttonStyle, onPress: onPrevious, child: style.previousIcon(context)),
           ),
           const Expanded(child: SizedBox()),
           Padding(
             padding: const .directional(end: 7),
-            child: FButton.icon(style: style.buttonStyle, onPress: onNext, child: const Icon(FIcons.chevronRight)),
+            child: FButton.icon(style: style.buttonStyle, onPress: onNext, child: style.nextIcon(context)),
           ),
         ],
       ),
@@ -187,6 +187,18 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
   @override
   final double headerIconSize;
 
+  /// The previous-month icon builder. Defaults to [FIcons.chevronLeft].
+  @override
+  final FIconBuilder previousIcon;
+
+  /// The year-month toggle icon builder. Defaults to [FIcons.chevronRight].
+  @override
+  final FIconBuilder toggleIcon;
+
+  /// The next-month icon builder. Defaults to [FIcons.chevronRight].
+  @override
+  final FIconBuilder nextIcon;
+
   /// The arrow turn animation's duration. Defaults to 200ms.
   @override
   final Duration animationDuration;
@@ -196,6 +208,9 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
     required this.focusedOutlineStyle,
     required this.buttonStyle,
     required this.headerTextStyle,
+    required this.previousIcon,
+    required this.toggleIcon,
+    required this.nextIcon,
     this.headerIconSize = 16,
     this.animationDuration = const Duration(milliseconds: 200),
   });
@@ -204,6 +219,7 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
   factory FCalendarHeaderStyle.inherit({
     required FColors colors,
     required FTypography typography,
+    required FIcons icons,
     required FStyle style,
     required bool touch,
   }) {
@@ -218,6 +234,9 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
         ).outline.md,
         headerTextStyle: typography.md.copyWith(color: colors.foreground, fontWeight: .w500, height: 1),
         headerIconSize: typography.md.fontSize!,
+        previousIcon: icons.chevronLeft,
+        toggleIcon: icons.chevronRight,
+        nextIcon: icons.chevronRight,
       );
     } else {
       return FCalendarHeaderStyle(
@@ -230,6 +249,9 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
         ).outline.xs,
         headerTextStyle: typography.sm.copyWith(color: colors.foreground, fontWeight: .w500),
         headerIconSize: typography.md.fontSize!,
+        previousIcon: icons.chevronLeft,
+        toggleIcon: icons.chevronRight,
+        nextIcon: icons.chevronRight,
       );
     }
   }

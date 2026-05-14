@@ -126,7 +126,7 @@ class _HorizontalDividerState extends State<HorizontalDivider> {
             color: widget.style.color,
             child: SizedBox(height: widget.crossAxisExtent, width: widget.style.width),
           ),
-        if (widget.type == .dividerWithThumb) _Thumb(style: widget.style.thumbStyle, icon: FIcons.gripVertical),
+        if (widget.type == .dividerWithThumb) _Thumb(style: widget.style.thumbStyle),
         SizedBox(
           height: widget.crossAxisExtent,
           width: widget.hitRegionExtent,
@@ -183,7 +183,7 @@ class _VerticalDividerState extends State<VerticalDivider> {
             color: widget.style.color,
             child: SizedBox(height: widget.style.width, width: widget.crossAxisExtent),
           ),
-        if (widget.type == .dividerWithThumb) _Thumb(style: widget.style.thumbStyle, icon: FIcons.gripHorizontal),
+        if (widget.type == .dividerWithThumb) _Thumb(style: widget.style.thumbStyle),
         SizedBox(
           height: widget.hitRegionExtent,
           width: widget.crossAxisExtent,
@@ -206,9 +206,8 @@ class _VerticalDividerState extends State<VerticalDivider> {
 
 class _Thumb extends StatelessWidget {
   final FResizableDividerThumbStyle style;
-  final IconData icon;
 
-  const _Thumb({required this.style, required this.icon});
+  const _Thumb({required this.style});
 
   @override
   Widget build(BuildContext context) => Container(
@@ -216,15 +215,16 @@ class _Thumb extends StatelessWidget {
     decoration: style.decoration,
     height: style.height,
     width: style.width,
-    child: Icon(icon, color: style.foregroundColor, size: min(style.height, style.width)),
+    child: IconTheme(
+      data: IconThemeData(color: style.foregroundColor, size: min(style.height, style.width)),
+      child: style.icon(context),
+    ),
   );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('icon', icon));
+    properties.add(DiagnosticsProperty('style', style));
   }
 }
 
@@ -280,6 +280,11 @@ class FResizableDividerThumbStyle with Diagnosticable, _$FResizableDividerThumbS
   @override
   final Color foregroundColor;
 
+  /// The thumb icon builder. Defaults to [FIcons.gripVertical] (horizontal axis) or [FIcons.gripHorizontal] (vertical
+  /// axis).
+  @override
+  final FIconBuilder icon;
+
   /// The height.
   ///
   /// ## Contract
@@ -298,6 +303,7 @@ class FResizableDividerThumbStyle with Diagnosticable, _$FResizableDividerThumbS
   FResizableDividerThumbStyle({
     required this.decoration,
     required this.foregroundColor,
+    required this.icon,
     required this.height,
     required this.width,
   }) : assert(0 < height, 'height ($height) must be > 0'),

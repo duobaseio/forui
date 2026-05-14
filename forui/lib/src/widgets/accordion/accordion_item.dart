@@ -36,8 +36,8 @@ class FAccordionItem extends StatefulWidget with FAccordionItemMixin {
   /// The title.
   final Widget title;
 
-  /// The icon, wrapped in a [IconTheme]. Defaults to `Icon(FIcons.chevronRight)`.
-  final Widget icon;
+  /// The icon. Defaults to [FIcons.chevronDown].
+  final Widget? icon;
 
   /// True if the parent accordion is managed and the item is initially expanded.
   ///
@@ -68,7 +68,7 @@ class FAccordionItem extends StatefulWidget with FAccordionItemMixin {
     required this.title,
     required this.child,
     this.style = const .context(),
-    this.icon = const Icon(FIcons.chevronDown),
+    this.icon,
     this.initiallyExpanded,
     this.autofocus = false,
     this.focusNode,
@@ -203,7 +203,10 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
                   focused: variants.contains(FTappableVariant.focused),
                   child: RotationTransition(
                     turns: _iconRotation!,
-                    child: IconTheme(data: style.iconStyle.resolve(variants), child: widget.icon),
+                    child: IconTheme(
+                      data: style.iconStyle.resolve(variants),
+                      child: widget.icon ?? context.theme.icons.chevronDown(context),
+                    ),
                   ),
                 ),
               ],

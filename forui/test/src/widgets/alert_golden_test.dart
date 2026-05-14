@@ -46,7 +46,7 @@ void main() {
             theme: theme.data,
             child: FAlert(
               variant: variant,
-              icon: const Icon(FIcons.badgeAlert),
+              icon: const Icon(FLucideIcons.badgeAlert),
               title: const Text('Alert Title'),
               subtitle: const Text('Alert description with extra text'),
             ),

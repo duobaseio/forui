@@ -45,13 +45,13 @@ void main() {
                 FHeader(
                   key: const Key('root'),
                   title: const Text('Root'),
-                  suffixes: [FHeaderAction(icon: const Icon(FIcons.bell), onPress: () {})],
+                  suffixes: [FHeaderAction(icon: const Icon(FLucideIcons.bell), onPress: () {})],
                 ),
                 FHeader.nested(
                   key: const Key('nested'),
                   title: const Text('Nested'),
                   prefixes: [FHeaderAction.back(onPress: () {})],
-                  suffixes: [FHeaderAction(icon: const Icon(FIcons.bell), onPress: () {})],
+                  suffixes: [FHeaderAction(icon: const Icon(FLucideIcons.bell), onPress: () {})],
                 ),
               ],
             ),

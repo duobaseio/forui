@@ -219,6 +219,7 @@ class FSidebarGroupStyle with Diagnosticable, _$FSidebarGroupStyleFunctions {
   FSidebarGroupStyle.inherit({
     required FColors colors,
     required FTypography typography,
+    required FIcons icons,
     required FStyle style,
     required bool touch,
   }) : this(
@@ -231,6 +232,6 @@ class FSidebarGroupStyle with Diagnosticable, _$FSidebarGroupStyleFunctions {
          ),
          tappableStyle: style.tappableStyle,
          focusedOutlineStyle: style.focusedOutlineStyle,
-         itemStyle: .inherit(colors: colors, typography: typography, style: style, touch: touch),
+         itemStyle: .inherit(colors: colors, typography: typography, icons: icons, style: style, touch: touch),
        );
 }

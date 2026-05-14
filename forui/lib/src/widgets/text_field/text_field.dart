@@ -75,12 +75,15 @@ class FTextField extends StatelessWidget {
       child: FButton.icon(
         style: style.obscureButtonStyle,
         onPress: variants.contains(FTextFieldVariant.disabled) ? null : () => obscure.value = !obscure.value,
-        child: Icon(
-          obscure.value ? FIcons.eye : FIcons.eyeClosed,
-          semanticLabel: obscure.value
-              ? localizations.passwordFieldUnobscureTextButtonSemanticsLabel
-              : localizations.passwordFieldObscureTextButtonSemanticsLabel,
-        ),
+        child: obscure.value
+            ? context.theme.icons.eye(
+                context,
+                semanticsLabel: localizations.passwordFieldUnobscureTextButtonSemanticsLabel,
+              )
+            : context.theme.icons.eyeClosed(
+                context,
+                semanticsLabel: localizations.passwordFieldObscureTextButtonSemanticsLabel,
+              ),
       ),
     );
   }
@@ -96,7 +99,7 @@ class FTextField extends StatelessWidget {
       child: FButton.icon(
         style: style.clearButtonStyle,
         onPress: clear,
-        child: Icon(FIcons.x, semanticLabel: localizations.textFieldClearButtonSemanticsLabel),
+        child: context.theme.icons.x(context, semanticsLabel: localizations.textFieldClearButtonSemanticsLabel),
       ),
     );
   }

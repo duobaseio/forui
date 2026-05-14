@@ -68,19 +68,19 @@ class DetailedAutocompletePage extends Example {
         switch (suggestion) {
           'Bug' => .item(
             value: 'Bug',
-            prefix: const Icon(FIcons.bug),
+            prefix: const Icon(FLucideIcons.bug),
             title: const Text('Bug'),
             subtitle: const Text('An unexpected problem or behavior'),
           ),
           'Feature' => .item(
             value: 'Feature',
-            prefix: const Icon(FIcons.filePlusCorner),
+            prefix: const Icon(FLucideIcons.filePlusCorner),
             title: const Text('Feature'),
             subtitle: const Text('A new feature or enhancement'),
           ),
           'Question' => .item(
             value: 'Question',
-            prefix: const Icon(FIcons.messageCircleQuestionMark),
+            prefix: const Icon(FLucideIcons.messageCircleQuestionMark),
             title: const Text('Question'),
             subtitle: const Text('A question or clarification'),
           ),
@@ -188,7 +188,7 @@ class AsyncErrorAutocompletePage extends Example {
     // {@highlight}
     contentErrorBuilder: (context, style, error, trace) => Padding(
       padding: const .all(14.0),
-      child: Icon(FIcons.circleX, size: 15, color: context.theme.colors.primary),
+      child: Icon(FLucideIcons.circleX, size: 15, color: context.theme.colors.primary),
     ),
     // {@endhighlight}
   );
@@ -225,7 +225,12 @@ class PopoverBuilderAutocompletePage extends Example {
         children: [
           content,
           const FDivider(style: .delta(padding: .value(.zero))),
-          FButton(variant: .ghost, prefix: const Icon(FIcons.list), child: const Text('Browse All'), onPress: () {}),
+          FButton(
+            variant: .ghost,
+            prefix: const Icon(FLucideIcons.list),
+            child: const Text('Browse All'),
+            onPress: () {},
+          ),
         ],
       ),
     ),

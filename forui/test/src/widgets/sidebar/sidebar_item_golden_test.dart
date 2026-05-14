@@ -15,7 +15,7 @@ void main() {
         TestScaffold.blue(
           child: FSidebarItem(
             style: TestScaffold.blueScreen.sidebarStyle.groupStyle.itemStyle,
-            icon: const Icon(FIcons.box),
+            icon: const Icon(FLucideIcons.box),
             label: const Text('Item'),
             onPress: () {},
           ),
@@ -30,7 +30,7 @@ void main() {
         TestScaffold.blue(
           child: FSidebarItem(
             style: TestScaffold.blueScreen.sidebarStyle.groupStyle.itemStyle,
-            icon: const Icon(FIcons.box),
+            icon: const Icon(FLucideIcons.box),
             label: const Text('Item'),
           ),
         ),
@@ -45,7 +45,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           theme: theme.data,
-          child: FSidebarItem(icon: const Icon(FIcons.box), label: const Text('Item'), onPress: () {}),
+          child: FSidebarItem(icon: const Icon(FLucideIcons.box), label: const Text('Item'), onPress: () {}),
         ),
       );
 
@@ -56,7 +56,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           theme: theme.data,
-          child: const FSidebarItem(icon: Icon(FIcons.box), label: Text('Item')),
+          child: const FSidebarItem(icon: Icon(FLucideIcons.box), label: Text('Item')),
         ),
       );
 
@@ -70,7 +70,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           theme: theme.data,
-          child: FSidebarItem(icon: const Icon(FIcons.box), label: const Text('Item'), onPress: () {}),
+          child: FSidebarItem(icon: const Icon(FLucideIcons.box), label: const Text('Item'), onPress: () {}),
         ),
       );
 
@@ -87,7 +87,12 @@ void main() {
       await tester.pumpWidget(
         TestScaffold(
           theme: theme.data,
-          child: FSidebarItem(icon: const Icon(FIcons.box), label: const Text('Item'), selected: true, onPress: () {}),
+          child: FSidebarItem(
+            icon: const Icon(FLucideIcons.box),
+            label: const Text('Item'),
+            selected: true,
+            onPress: () {},
+          ),
         ),
       );
 
@@ -102,11 +107,11 @@ void main() {
         TestScaffold(
           theme: theme.data,
           child: FSidebarItem(
-            icon: const Icon(FIcons.box),
+            icon: const Icon(FLucideIcons.box),
             label: const Text('Parent'),
             children: [
               FSidebarItem(label: const Text('Child 1'), onPress: () {}),
-              FSidebarItem(icon: const Icon(FIcons.folder), label: const Text('Child 2'), onPress: () {}),
+              FSidebarItem(icon: const Icon(FLucideIcons.folder), label: const Text('Child 2'), onPress: () {}),
             ],
             onPress: () {},
           ),
@@ -124,12 +129,12 @@ void main() {
         TestScaffold(
           theme: theme.data,
           child: FSidebarItem(
-            icon: const Icon(FIcons.box),
+            icon: const Icon(FLucideIcons.box),
             label: const Text('Parent'),
             initiallyExpanded: true,
             children: [
               FSidebarItem(label: const Text('Child 1'), onPress: () {}),
-              FSidebarItem(icon: const Icon(FIcons.folder), label: const Text('Child 2'), onPress: () {}),
+              FSidebarItem(icon: const Icon(FLucideIcons.folder), label: const Text('Child 2'), onPress: () {}),
             ],
             onPress: () {},
           ),
@@ -147,7 +152,7 @@ void main() {
         TestScaffold(
           theme: theme.data,
           child: FSidebarItem(
-            icon: const Icon(FIcons.box),
+            icon: const Icon(FLucideIcons.box),
             label: const Text('Parent'),
             initiallyExpanded: true,
             children: [
@@ -156,11 +161,11 @@ void main() {
                 initiallyExpanded: true,
                 children: [
                   FSidebarItem(label: const Text('Grandchild 1'), onPress: () {}),
-                  FSidebarItem(icon: const Icon(FIcons.file), label: const Text('Grandchild 2'), onPress: () {}),
+                  FSidebarItem(icon: const Icon(FLucideIcons.file), label: const Text('Grandchild 2'), onPress: () {}),
                 ],
                 onPress: () {},
               ),
-              FSidebarItem(icon: const Icon(FIcons.folder), label: const Text('Child 2'), onPress: () {}),
+              FSidebarItem(icon: const Icon(FLucideIcons.folder), label: const Text('Child 2'), onPress: () {}),
             ],
             onPress: () {},
           ),
@@ -178,7 +183,7 @@ void main() {
         TestScaffold(
           theme: theme.data,
           textDirection: .rtl,
-          child: FSidebarItem(icon: const Icon(FIcons.box), label: const Text('Item'), onPress: () {}),
+          child: FSidebarItem(icon: const Icon(FLucideIcons.box), label: const Text('Item'), onPress: () {}),
         ),
       );
 
@@ -202,7 +207,7 @@ void main() {
         child: SizedBox(
           width: 200,
           child: FSidebarItem(
-            icon: const Icon(FIcons.box),
+            icon: const Icon(FLucideIcons.box),
             label: const Text('This is a very long label that should be truncated'),
             onPress: () {},
           ),

@@ -229,7 +229,7 @@ class _FSidebarItemState extends State<FSidebarItem> with TickerProviderStateMix
               if (widget.children.isNotEmpty)
                 IconTheme(
                   data: _style!.collapsibleIconStyle.resolve(variants),
-                  child: RotationTransition(turns: _iconRotation!, child: const Icon(FIcons.chevronRight)),
+                  child: RotationTransition(turns: _iconRotation!, child: _style!.collapsibleIcon(context)),
                 ),
             ],
           ),
@@ -287,6 +287,10 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
   @override
   final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> collapsibleIconStyle;
 
+  /// The collapsible icon builder. Defaults to [FIcons.chevronRight].
+  @override
+  final FIconBuilder collapsibleIcon;
+
   /// The spacing between child items. Defaults to 4.
   @override
   final double childrenSpacing;
@@ -324,6 +328,7 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
     required this.textStyle,
     required this.iconStyle,
     required this.collapsibleIconStyle,
+    required this.collapsibleIcon,
     required this.backgroundColor,
     required this.padding,
     required this.borderRadius,
@@ -340,6 +345,7 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
   factory FSidebarItemStyle.inherit({
     required FColors colors,
     required FTypography typography,
+    required FIcons icons,
     required FStyle style,
     required bool touch,
   }) {
@@ -369,6 +375,7 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
           [.disabled]: .delta(color: colors.mutedForeground),
         },
       ),
+      collapsibleIcon: icons.chevronRight,
       backgroundColor: FVariants(
         colors.background,
         variants: {

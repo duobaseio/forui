@@ -54,22 +54,25 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
               title: const Text('Example'),
               suffixes: [
                 FHeaderAction(
-                  icon: Icon(platform.desktop ? FIcons.smartphone : FIcons.monitor),
+                  icon: Icon(platform.desktop ? FLucideIcons.smartphone : FLucideIcons.monitor),
                   onPress: togglePlatform,
                 ),
-                FHeaderAction(icon: Icon(brightness == .dark ? FIcons.sun : FIcons.moon), onPress: toggleTheme),
-                FHeaderAction(icon: const Icon(FIcons.mousePointerClick), onPress: toggleWidgetInspector),
+                FHeaderAction(
+                  icon: Icon(brightness == .dark ? FLucideIcons.sun : FLucideIcons.moon),
+                  onPress: toggleTheme,
+                ),
+                FHeaderAction(icon: const Icon(FLucideIcons.mousePointerClick), onPress: toggleWidgetInspector),
               ],
             ),
             footer: FBottomNavigationBar(
               index: index,
               onChange: (index) => setState(() => this.index = index),
               children: const [
-                FBottomNavigationBarItem(icon: Icon(FIcons.house), label: Text('Home')),
-                FBottomNavigationBarItem(icon: Icon(FIcons.layoutGrid), label: Text('Grid')),
-                FBottomNavigationBarItem(icon: Icon(FIcons.search), label: Text('Search')),
-                FBottomNavigationBarItem(icon: Icon(FIcons.settings), label: Text('Settings')),
-                FBottomNavigationBarItem(icon: Icon(FIcons.castle), label: Text('Sandbox')),
+                FBottomNavigationBarItem(icon: Icon(FLucideIcons.house), label: Text('Home')),
+                FBottomNavigationBarItem(icon: Icon(FLucideIcons.layoutGrid), label: Text('Grid')),
+                FBottomNavigationBarItem(icon: Icon(FLucideIcons.search), label: Text('Search')),
+                FBottomNavigationBarItem(icon: Icon(FLucideIcons.settings), label: Text('Settings')),
+                FBottomNavigationBarItem(icon: Icon(FLucideIcons.castle), label: Text('Sandbox')),
               ],
             ),
             child: _pages[index],

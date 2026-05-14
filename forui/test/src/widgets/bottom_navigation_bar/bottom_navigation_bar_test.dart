@@ -15,7 +15,7 @@ void main() {
         child: FBottomNavigationBar(
           children: [
             FBottomNavigationBarItem(
-              icon: const Icon(FIcons.house),
+              icon: const Icon(FLucideIcons.house),
               label: const Text('Home'),
               onVariantChange: (p, c) {
                 previous = p;

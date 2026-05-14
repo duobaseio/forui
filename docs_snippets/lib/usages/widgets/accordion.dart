@@ -27,7 +27,7 @@ final accordionItem = FAccordionItem(
   // {@category "Core"}
   style: const .delta(titlePadding: .value(.zero)),
   title: const Text('Title'),
-  icon: const Icon(FIcons.chevronDown),
+  icon: const Icon(FLucideIcons.chevronDown),
   initiallyExpanded: false,
   child: const Text('Content'),
   // {@endcategory}

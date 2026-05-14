@@ -29,7 +29,7 @@ void main() {
         ),
       );
 
-      await tester.tap(find.byIcon(FIcons.ellipsis));
+      await tester.tap(find.byIcon(FLucideIcons.ellipsis));
       await tester.pumpAndSettle();
 
       expect(shown, true);
@@ -57,7 +57,7 @@ void main() {
         ),
       );
 
-      await tester.tap(find.byIcon(FIcons.ellipsis));
+      await tester.tap(find.byIcon(FLucideIcons.ellipsis));
       await tester.pumpAndSettle();
 
       expect(shown, true);
@@ -85,7 +85,7 @@ void main() {
         ),
       );
 
-      await tester.tap(find.byIcon(FIcons.ellipsis));
+      await tester.tap(find.byIcon(FLucideIcons.ellipsis));
       await tester.pumpAndSettle();
 
       expect(changedValue, true);
@@ -111,7 +111,7 @@ void main() {
         ),
       );
 
-      await tester.tap(find.byIcon(FIcons.ellipsis));
+      await tester.tap(find.byIcon(FLucideIcons.ellipsis));
       await tester.pumpAndSettle();
 
       expect(changedValue, true);

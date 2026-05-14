@@ -290,14 +290,14 @@ void main() {
     await tester.pumpAndSettle(const Duration(seconds: 1));
 
     expect(find.text('A!'), findsOne);
-    expect(find.byIcon(FIcons.check), findsNWidgets(1));
+    expect(find.byIcon(FLucideIcons.check), findsNWidgets(1));
     expect(controller.value, {'A'});
 
     await tester.tap(find.text('A!'));
     await tester.pumpAndSettle(const Duration(seconds: 1));
 
     expect(find.text('A!'), findsNothing);
-    expect(find.byIcon(FIcons.check), findsNothing);
+    expect(find.byIcon(FLucideIcons.check), findsNothing);
     expect(controller.value, <String>{});
   });
 
@@ -317,7 +317,7 @@ void main() {
       ),
     );
 
-    expect(find.byIcon(FIcons.x), findsNothing);
+    expect(find.byIcon(FLucideIcons.x), findsNothing);
 
     await tester.tap(find.byKey(key));
     await tester.pumpAndSettle(const Duration(seconds: 1));
@@ -328,7 +328,7 @@ void main() {
     expect(find.text('A!'), findsOne);
     expect(find.text('B!'), findsOne);
 
-    await tester.tap(find.byIcon(FIcons.x).last);
+    await tester.tap(find.byIcon(FLucideIcons.x).last);
     await tester.pumpAndSettle(const Duration(seconds: 1));
 
     expect(find.text('A!'), findsNothing);

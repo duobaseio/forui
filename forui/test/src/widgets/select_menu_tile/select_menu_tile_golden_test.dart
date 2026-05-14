@@ -17,7 +17,7 @@ void main() {
             child: FSelectMenuTile(
               selectControl: const .managed(initial: {1}),
               style: TestScaffold.blueScreen.selectMenuTileStyle,
-              prefix: const Icon(FIcons.bluetooth),
+              prefix: const Icon(FLucideIcons.bluetooth),
               label: const Text('Label'),
               description: const Text('Description'),
               title: const Text('Bluetooth'),
@@ -38,7 +38,7 @@ void main() {
               selectControl: const .managed(initial: {1}),
               enabled: false,
               style: TestScaffold.blueScreen.selectMenuTileStyle,
-              prefix: const Icon(FIcons.bluetooth),
+              prefix: const Icon(FLucideIcons.bluetooth),
               label: const Text('Label'),
               description: const Text('Description'),
               title: const Text('Bluetooth'),
@@ -60,7 +60,7 @@ void main() {
             theme: theme.data,
             child: FSelectMenuTile(
               selectControl: const .managed(initial: {1}),
-              prefix: const Icon(FIcons.calendar),
+              prefix: const Icon(FLucideIcons.calendar),
               label: const Text('Label'),
               description: const Text('Description'),
               title: const Text('Repeat'),
@@ -86,7 +86,7 @@ void main() {
             theme: theme.data,
             child: FSelectMenuTile(
               selectControl: const .managedRadio(initial: 1),
-              prefix: const Icon(FIcons.calendar),
+              prefix: const Icon(FLucideIcons.calendar),
               label: const Text('Label'),
               description: const Text('Description'),
               title: const Text('Repeat'),
@@ -144,7 +144,7 @@ void main() {
             child: FSelectMenuTile(
               selectControl: const .managed(initial: {1}),
               enabled: false,
-              prefix: const Icon(FIcons.calendar),
+              prefix: const Icon(FLucideIcons.calendar),
               label: const Text('Label'),
               description: const Text('Description'),
               title: const Text('Repeat'),
@@ -167,7 +167,7 @@ void main() {
             theme: theme.data,
             child: FSelectMenuTile(
               selectControl: const .managed(initial: {1}),
-              prefix: const Icon(FIcons.calendar),
+              prefix: const Icon(FLucideIcons.calendar),
               label: const Text('Label'),
               description: const Text('Description'),
               forceErrorText: 'This should appear',
@@ -258,7 +258,7 @@ void main() {
           child: FSelectMenuTile.fromMap(
             const {'Item 1': 1, 'Item 2': 2},
             selectControl: const .managedRadio(initial: 1),
-            prefix: const Icon(FIcons.calendar),
+            prefix: const Icon(FLucideIcons.calendar),
             label: const Text('Label'),
             description: const Text('Description'),
             title: const Text('Repeat'),

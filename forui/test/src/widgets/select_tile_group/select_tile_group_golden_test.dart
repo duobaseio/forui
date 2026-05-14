@@ -19,9 +19,14 @@ void main() {
               style: TestScaffold.blueScreen.tileGroupStyle,
               label: const Text('Network'),
               children: const [
-                .tile(title: Text('WiFi'), details: Text('Duobase (5G)'), suffix: Icon(FIcons.chevronRight), value: 1),
+                .tile(
+                  title: Text('WiFi'),
+                  details: Text('Duobase (5G)'),
+                  suffix: Icon(FLucideIcons.chevronRight),
+                  value: 1,
+                ),
                 .suffix(
-                  prefix: Icon(FIcons.bluetooth),
+                  prefix: Icon(FLucideIcons.bluetooth),
                   title: Text('Bluetooth'),
                   subtitle: Text('Fee, Fo, Fum'),
                   details: Text('Duobase (5G)'),
@@ -43,9 +48,14 @@ void main() {
               style: TestScaffold.blueScreen.tileGroupStyle,
               label: const Text('Network'),
               children: const [
-                .tile(title: Text('WiFi'), details: Text('Duobase (5G)'), suffix: Icon(FIcons.chevronRight), value: 1),
+                .tile(
+                  title: Text('WiFi'),
+                  details: Text('Duobase (5G)'),
+                  suffix: Icon(FLucideIcons.chevronRight),
+                  value: 1,
+                ),
                 .suffix(
-                  prefix: Icon(FIcons.bluetooth),
+                  prefix: Icon(FLucideIcons.bluetooth),
                   title: Text('Bluetooth'),
                   subtitle: Text('Fee, Fo, Fum'),
                   details: Text('Duobase (5G)'),
@@ -74,9 +84,14 @@ void main() {
               enabled: false,
               label: const Text('Network'),
               children: const [
-                .tile(title: Text('WiFi'), details: Text('Duobase (5G)'), suffix: Icon(FIcons.chevronRight), value: 1),
+                .tile(
+                  title: Text('WiFi'),
+                  details: Text('Duobase (5G)'),
+                  suffix: Icon(FLucideIcons.chevronRight),
+                  value: 1,
+                ),
                 .suffix(
-                  prefix: Icon(FIcons.bluetooth),
+                  prefix: Icon(FLucideIcons.bluetooth),
                   title: Text('Bluetooth'),
                   subtitle: Text('Fee, Fo, Fum'),
                   details: Text('Duobase (5G)'),
@@ -104,13 +119,18 @@ void main() {
                 errorBuilder: (context, error) => Text(error),
                 divider: divider,
                 children: const [
-                  .tile(title: Text('WiFi'), details: Text('FL (5G)'), suffix: Icon(FIcons.chevronRight), value: 1),
-                  .tile(title: Text('Mail'), details: Text('42'), suffix: Icon(FIcons.chevronRight), value: 2),
+                  .tile(
+                    title: Text('WiFi'),
+                    details: Text('FL (5G)'),
+                    suffix: Icon(FLucideIcons.chevronRight),
+                    value: 1,
+                  ),
+                  .tile(title: Text('Mail'), details: Text('42'), suffix: Icon(FLucideIcons.chevronRight), value: 2),
                   .tile(
                     title: Text('Bluetooth'),
                     subtitle: Text('Fee, Fo'),
                     details: Text('FL (5G)'),
-                    suffix: Icon(FIcons.chevronRight),
+                    suffix: Icon(FLucideIcons.chevronRight),
                     value: 3,
                   ),
                 ],
@@ -161,13 +181,18 @@ void main() {
                     label: const Text('Network'),
                     divider: divider,
                     children: const [
-                      .tile(title: Text('WiFi'), details: Text('FL (5G)'), value: 1, suffix: Icon(FIcons.chevronRight)),
+                      .tile(
+                        title: Text('WiFi'),
+                        details: Text('FL (5G)'),
+                        value: 1,
+                        suffix: Icon(FLucideIcons.chevronRight),
+                      ),
                       .tile(
                         title: Text('Bluetooth'),
                         subtitle: Text('Fee, Fo'),
                         details: Text('FL (5G)'),
                         value: 2,
-                        suffix: Icon(FIcons.chevronRight),
+                        suffix: Icon(FLucideIcons.chevronRight),
                       ),
                     ],
                   ),
@@ -202,7 +227,7 @@ void main() {
                       enabled: index == 0,
                       title: const Text('WiFi'),
                       details: const Text('FL (5G)'),
-                      suffix: const Icon(FIcons.chevronRight),
+                      suffix: const Icon(FLucideIcons.chevronRight),
                       value: 1,
                     ),
                     .tile(
@@ -210,7 +235,7 @@ void main() {
                       title: const Text('Bluetooth'),
                       subtitle: const Text('Fee, Fo'),
                       details: const Text('FL (5G)'),
-                      suffix: const Icon(FIcons.chevronRight),
+                      suffix: const Icon(FLucideIcons.chevronRight),
                       value: 2,
                     ),
                   ],
@@ -238,12 +263,17 @@ void main() {
                 description: const Text('Configure your network'),
                 forceErrorText: 'This should appear',
                 children: const [
-                  .tile(title: Text('WiFi'), details: Text('FL (5G)'), suffix: Icon(FIcons.chevronRight), value: 1),
+                  .tile(
+                    title: Text('WiFi'),
+                    details: Text('FL (5G)'),
+                    suffix: Icon(FLucideIcons.chevronRight),
+                    value: 1,
+                  ),
                   .tile(
                     title: Text('Bluetooth'),
                     subtitle: Text('Fee, Fo'),
                     details: Text('FL (5G)'),
-                    suffix: Icon(FIcons.chevronRight),
+                    suffix: Icon(FLucideIcons.chevronRight),
                     value: 2,
                   ),
                 ],
@@ -266,7 +296,7 @@ void main() {
               control: const .managedRadio(initial: 1),
               label: const Text('Network'),
               children: const [
-                .tile(title: Text('WiFi'), details: Text('FL (5G)'), suffix: Icon(FIcons.chevronRight), value: 1),
+                .tile(title: Text('WiFi'), details: Text('FL (5G)'), suffix: Icon(FLucideIcons.chevronRight), value: 1),
               ],
             ),
           ),
@@ -307,13 +337,18 @@ void main() {
             control: const .managedRadio(initial: 1),
             label: const Text('Network'),
             children: [
-              const .tile(title: Text('WiFi'), details: Text('FL (5G)'), suffix: Icon(FIcons.chevronRight), value: 1),
+              const .tile(
+                title: Text('WiFi'),
+                details: Text('FL (5G)'),
+                suffix: Icon(FLucideIcons.chevronRight),
+                value: 1,
+              ),
               .tile(
                 style: FThemes.blue.dark.touch.tileGroupStyle.tileStyles.base,
                 title: const Text('Bluetooth'),
                 subtitle: const Text('Fee, Fo'),
                 details: const Text('FL (5G)'),
-                suffix: const Icon(FIcons.chevronRight),
+                suffix: const Icon(FLucideIcons.chevronRight),
                 value: 2,
               ),
             ],
@@ -336,14 +371,14 @@ void main() {
                 enabled: true,
                 title: Text('WiFi'),
                 details: Text('FL (5G)'),
-                suffix: Icon(FIcons.chevronRight),
+                suffix: Icon(FLucideIcons.chevronRight),
                 value: 1,
               ),
               .tile(
                 title: Text('Bluetooth'),
                 subtitle: Text('Fee, Fo'),
                 details: Text('FL (5G)'),
-                suffix: Icon(FIcons.chevronRight),
+                suffix: Icon(FLucideIcons.chevronRight),
                 value: 2,
               ),
             ],

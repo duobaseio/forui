@@ -17,7 +17,7 @@ class Tooltip extends StatelessWidget {
               variant: .ghost,
               size: .sm,
               onPress: () {},
-              child: const Icon(FIcons.bold),
+              child: const Icon(FLucideIcons.bold),
             ),
           ),
           FTooltip(
@@ -26,7 +26,7 @@ class Tooltip extends StatelessWidget {
               variant: .ghost,
               size: .sm,
               onPress: () {},
-              child: const Icon(FIcons.italic),
+              child: const Icon(FLucideIcons.italic),
             ),
           ),
           FTooltip(
@@ -35,7 +35,7 @@ class Tooltip extends StatelessWidget {
               variant: .ghost,
               size: .sm,
               onPress: () {},
-              child: const Icon(FIcons.underline),
+              child: const Icon(FLucideIcons.underline),
             ),
           ),
           FTooltip(
@@ -44,7 +44,7 @@ class Tooltip extends StatelessWidget {
               variant: .ghost,
               size: .sm,
               onPress: () {},
-              child: const Icon(FIcons.strikethrough),
+              child: const Icon(FLucideIcons.strikethrough),
             ),
           ),
         ],

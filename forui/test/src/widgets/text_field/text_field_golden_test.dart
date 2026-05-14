@@ -276,7 +276,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             theme: theme.data,
-            child: FTextField(suffixBuilder: (_, _, _) => const Icon(FIcons.alarmClock), clearable: (_) => true),
+            child: FTextField(suffixBuilder: (_, _, _) => const Icon(FLucideIcons.alarmClock), clearable: (_) => true),
           ),
         );
 
@@ -298,7 +298,7 @@ void main() {
             theme: theme.data,
             child: FTextField(
               clearable: (_) => true,
-              clearIconBuilder: (_, _, clear) => FButton.icon(onPress: clear, child: const Icon(FIcons.trash)),
+              clearIconBuilder: (_, _, clear) => FButton.icon(onPress: clear, child: const Icon(FLucideIcons.trash)),
             ),
           ),
         );
@@ -393,7 +393,7 @@ void main() {
             size: size,
             label: const Text('Label'),
             hint: 'hint',
-            prefixBuilder: (_, _, _) => const Icon(FIcons.mail),
+            prefixBuilder: (_, _, _) => const Icon(FLucideIcons.mail),
             clearable: (_) => true,
           ),
         ),

@@ -39,12 +39,12 @@ class FPagination extends StatefulWidget {
 
   /// The previous button placed at the beginning of the pagination.
   ///
-  /// Defaults to an `FIcons.chevronLeft` icon.
+  /// Defaults to an [FIcons.chevronLeft] icon.
   final Widget? previous;
 
   /// The next button placed at the end of the pagination.
   ///
-  /// Defaults to an `FIcons.chevronRight` icon.
+  /// Defaults to an [FIcons.chevronRight] icon.
   final Widget? next;
 
   /// Creates an [FPagination].
@@ -106,7 +106,7 @@ class _FPaginationState extends State<FPagination> {
           style: style,
           semanticsLabel: localizations.paginationPreviousSemanticsLabel,
           onPress: _controller.previous,
-          child: const Icon(FIcons.chevronLeft),
+          child: context.theme.icons.chevronLeft(context),
         );
     final next =
         widget.next ??
@@ -114,7 +114,7 @@ class _FPaginationState extends State<FPagination> {
           style: style,
           semanticsLabel: localizations.paginationNextSemanticsLabel,
           onPress: _controller.next,
-          child: const Icon(FIcons.chevronRight),
+          child: context.theme.icons.chevronRight(context),
         );
 
     final lastPage = _controller.pages - 1;

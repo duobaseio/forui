@@ -13,17 +13,17 @@ String mapIconMapping(List<String> icons) {
     ..body.addAll([
       (EnumBuilder()
             ..docs.addAll([
-              '/// Provides a mapping for [FIcons] which can be iterated over using [EnumByName].',
+              '/// Provides a mapping for [FLucideIcons] which can be iterated over using [EnumByName].',
               '///',
               '/// ## Note',
-              '/// This enum may prevent [FIcons] from being tree-shaken and result in larger bundle sizes.',
+              '/// This enum may prevent [FLucideIcons] from being tree-shaken and result in larger bundle sizes.',
             ])
-            ..name = 'FIconMapping'
+            ..name = 'FLucideIconMapping'
             ..values.addAll([
               for (final icon in icons)
                 (EnumValueBuilder()
                       ..name = icon
-                      ..arguments.addAll([refer('FIcons.$icon')]))
+                      ..arguments.addAll([refer('FLucideIcons.$icon')]))
                     .build(),
             ])
             ..fields.addAll([
@@ -60,7 +60,7 @@ class IconsFinder extends RecursiveAstVisitor<void> {
   @override
   void visitClassDeclaration(ClassDeclaration declaration) {
     final name = declaration.namePart.typeName.lexeme;
-    if (name == 'FIcons') {
+    if (name == 'FLucideIcons') {
       super.visitClassDeclaration(declaration);
     }
   }

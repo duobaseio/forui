@@ -81,6 +81,12 @@ class FTypography {
     +FTypography.inherit(colors)
 }
 
+class FIcons {
+    +FIcons(...)
+    +FIcons.lucide()
+}
+
+
 class FStyle {
     +FStyle(...)
 }
@@ -113,6 +119,7 @@ note for FVariants "Maps variant constraints, e.g. hovered and pressed, to value
 FTheme --> FThemeData
 FThemeData --> FColors
 FThemeData --> FTypography
+FThemeData --> FIcons
 FThemeData --> FStyle
 FThemeData --> FHapticFeedback
 FThemeData --> FAccordionStyle
@@ -120,12 +127,13 @@ FThemeData --> FVariants
 FAccordionStyle --> FAccordionMotion
 ```
 
-There are **8** core components in Forui's theming system.
+The main components in Forui's theming system:
 
 - **[`FTheme`](https://pub.dev/documentation/forui/latest/forui.theme/FTheme-class.html)**: The root widget that provides the theme data to all widgets in the subtree.
 - **[`FThemeData`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData-class.html)**: Main class that holds:
   - **[`FColors`](https://pub.dev/documentation/forui/latest/forui.theme/FColors-class.html)**: Color scheme including primary, foreground, and background colors.
   - **[`FTypography`](https://pub.dev/documentation/forui/latest/forui.theme/FTypography-class.html)**: Typography settings including font family and text styles.
+  - **[`FIcons`](https://pub.dev/documentation/forui/latest/forui.theme/FIcons-class.html)**: Icons used by Forui widgets.
   - **[`FStyle`](https://pub.dev/documentation/forui/latest/forui.theme/FStyle-class.html)**: Misc. options such as border radius and icon size.
   - **[`FHapticFeedback`](https://pub.dev/documentation/forui/latest/forui.theme/FHapticFeedback-class.html)**: Haptic feedback callbacks shared across widgets.
   - **[`FVariants`](https://pub.dev/documentation/forui/latest/forui.theme/FVariants-class.html)**: Maps variant constraints, e.g. hovered and pressed, to
@@ -175,6 +183,15 @@ Use the `copyWith()` method to change the default font family. As some fonts may
 method is provided to quickly scale all the font sizes.
 
 <CodeSnippet snippet={customFontFamilySnippet} />
+
+### Icons
+
+The `FIcons` class contains the icon that Forui widgets use. It defaults to [Lucide](https://lucide.dev/) icons.
+
+Pass a custom `FIcons` to[`FThemeData`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData-class.html) to
+swap icons across all Forui widgets.
+
+See the [customizing icons](/docs/guides/customizing-icons) guide for more information.
 
 ### Style
 

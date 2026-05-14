@@ -57,19 +57,29 @@ class GroupTooltipPage extends Example {
           children: [
             FTooltip(
               tipBuilder: (context, _) => const Text('Bold'),
-              child: FButton.icon(variant: .ghost, size: .sm, onPress: () {}, child: const Icon(FIcons.bold)),
+              child: FButton.icon(variant: .ghost, size: .sm, onPress: () {}, child: const Icon(FLucideIcons.bold)),
             ),
             FTooltip(
               tipBuilder: (context, _) => const Text('Italic'),
-              child: FButton.icon(variant: .ghost, size: .sm, onPress: () {}, child: const Icon(FIcons.italic)),
+              child: FButton.icon(variant: .ghost, size: .sm, onPress: () {}, child: const Icon(FLucideIcons.italic)),
             ),
             FTooltip(
               tipBuilder: (context, _) => const Text('Underline'),
-              child: FButton.icon(variant: .ghost, size: .sm, onPress: () {}, child: const Icon(FIcons.underline)),
+              child: FButton.icon(
+                variant: .ghost,
+                size: .sm,
+                onPress: () {},
+                child: const Icon(FLucideIcons.underline),
+              ),
             ),
             FTooltip(
               tipBuilder: (context, _) => const Text('Strikethrough'),
-              child: FButton.icon(variant: .ghost, size: .sm, onPress: () {}, child: const Icon(FIcons.strikethrough)),
+              child: FButton.icon(
+                variant: .ghost,
+                size: .sm,
+                onPress: () {},
+                child: const Icon(FLucideIcons.strikethrough),
+              ),
             ),
           ],
         ),

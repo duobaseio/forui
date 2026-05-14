@@ -13,7 +13,7 @@ final button = FButton(
   // {@endcategory}
   // {@category "Content"}
   prefixBuilder: null,
-  prefix: const Icon(FIcons.mail),
+  prefix: const Icon(FLucideIcons.mail),
   suffixBuilder: null,
   suffix: null,
   mainAxisSize: .max,
@@ -74,7 +74,7 @@ final icon = FButton.icon(
   selected: false,
   onPress: () {},
   builder: FButton.defaultIconContentBuilder,
-  child: const Icon(FIcons.mail),
+  child: const Icon(FLucideIcons.mail),
   // {@endcategory}
 );
 

@@ -12,12 +12,12 @@ import 'package:flutter/widgets.dart';
 /// The Lucide icons bundled with Forui.
 ///
 /// Use with the [Icon] class to show specific icons. Icons are identified by their name as listed below, e.g.
-/// [FIcons.armchair].
+/// [FLucideIcons.armchair].
 ///
 /// Search and find the perfect icon on the [Lucide Icons](https://lucide.dev/icons/) website.
 @staticIconProvider
-class FIcons {
-  const FIcons._();
+class FLucideIcons {
+  const FLucideIcons._();
 
   /// [![`a-arrow-down`](https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/0.575.0/icons/a-arrow-down.svg)](https://lucide.dev/icons/a-arrow-down)
   static const aArrowDown = IconData(58757, fontFamily: 'ForuiLucideIcons', fontPackage: 'forui_assets');

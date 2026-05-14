@@ -12,12 +12,14 @@ import 'main.dart';
 typedef ThemesConstructors = ({
   Map<String, ConstructorMatch> typography,
   Map<String, ConstructorMatch> style,
+  Map<String, String> icons,
   Map<(String, String?), List<ThemeConstructor>> themes,
 });
 
 typedef ThemeConstructor = ({String theme, String variant, String colors});
 
 final _colors = p.join(library, 'src', 'theme', 'colors.dart');
+final _icons = p.join(library, 'src', 'theme', 'icons.dart');
 final _themes = p.join(library, 'src', 'theme', 'themes.dart');
 
 final _typography = RegExp('FTypography');
@@ -73,6 +75,11 @@ String generateThemes(Map<(String, String?), String> fragments) {
 
 Map<(String, String?), String> mapThemes(ThemesConstructors themes) {
   final typography = ConstructorFragment.inline(_typographyConstructor, themes.typography).values.single;
+  final icons = StringBuffer('FIcons(\n');
+  for (final MapEntry(:key, :value) in themes.icons.entries) {
+    icons.writeln('  $key: $value,');
+  }
+  icons.writeln(');');
   final style = ConstructorFragment.inline(_styleConstructor, themes.style).values.single;
 
   final fragments = <(String, String?), String>{};
@@ -85,20 +92,24 @@ Map<(String, String?), String> mapThemes(ThemesConstructors themes) {
         FThemeData get $themeFunctionName {
           // Change this to false to generate a desktop variant of the theme.
           const touch = true;
-          
+
           final colors = ${constructor.colors.startsWith('const ') ? constructor.colors.replaceFirst('const ', '') : constructor.colors};
           
           final typography = _typography(colors: colors, touch: touch);
-          final style = _style(colors: colors, typography: typography, touch: touch);
+      
+          final icons = $icons
           
+          final style = _style(colors: colors, typography: typography, touch: touch);
+
           return FThemeData(
             colors: colors,
             typography: typography,
+            icons: icons,
             style: style,
             touch: touch,
           );
         }
-        
+
         ''');
     }
 
@@ -131,12 +142,20 @@ Future<ThemesConstructors> traverseThemes(AnalysisContextCollection collection) 
     colors.addAll(visitor.colors);
   }
 
+  // Parse icons.dart to build a map from FIcons field name to its FIcons.lucide() initializer expression.
+  final icons = <String, String>{};
+  if (await collection.contextFor(_icons).currentSession.getResolvedUnit(_icons) case final ResolvedUnitResult result) {
+    final visitor = _IconsVisitor();
+    result.unit.accept(visitor);
+    icons.addAll(visitor.icons);
+  }
+
   if (await collection.contextFor(_themes).currentSession.getResolvedUnit(_themes)
       case final ResolvedUnitResult result) {
     final visitor = _ThemesVisitor(colors);
     result.unit.accept(visitor);
 
-    return (typography: typography, style: style, themes: visitor.themes);
+    return (typography: typography, icons: icons, style: style, themes: visitor.themes);
   }
 
   throw Exception('Failed to parse $_colors & $_themes');
@@ -164,6 +183,34 @@ class _ColorsVisitor extends RecursiveAstVisitor<void> {
     for (final variable in field.fields.variables) {
       if (variable.initializer != null) {
         colors[variable.name.lexeme] = variable.initializer!.toSource().replaceAll('FColors._', 'FColors');
+      }
+    }
+  }
+}
+
+class _IconsVisitor extends RecursiveAstVisitor<void> {
+  // Icon name -> default initializer expression (qualified, e.g. `FIcons.iconData(FLucideIcons.arrowLeft)`).
+  final Map<String, String> icons = {};
+  bool _inside = false;
+
+  @override
+  void visitClassDeclaration(ClassDeclaration declaration) {
+    if (declaration.namePart.typeName.lexeme == 'FIcons') {
+      _inside = true;
+      super.visitClassDeclaration(declaration);
+      _inside = false;
+    }
+  }
+
+  @override
+  void visitConstructorDeclaration(ConstructorDeclaration declaration) {
+    if (_inside && declaration.name?.lexeme == 'lucide') {
+      for (final initializer in declaration.initializers) {
+        if (initializer case RedirectingConstructorInvocation(argumentList: ArgumentList(:final arguments))) {
+          for (final NamedExpression(:name, :expression) in arguments.whereType<NamedExpression>()) {
+            icons[name.label.name] = 'FIcons.${expression.toSource()}';
+          }
+        }
       }
     }
   }

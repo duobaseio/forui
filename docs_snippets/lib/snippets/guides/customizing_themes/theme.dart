@@ -12,8 +12,12 @@ import 'accordion_style.dart';
 
 // {@endsnippet}
 
-FAccordionStyle accordionStyle({required FColors colors, required FTypography typography, required FStyle style}) =>
-    throw UnimplementedError();
+FAccordionStyle accordionStyle({
+  required FColors colors,
+  required FTypography typography,
+  required FStyle style,
+  required bool touch,
+}) => throw UnimplementedError();
 
 // {@snippet}
 FThemeData get neutralLight {
@@ -41,9 +45,34 @@ FThemeData get neutralLight {
   );
 
   final typography = _typography(colors: colors, touch: touch);
+
+  final icons = FIcons(
+    arrowLeft: FIcons.iconData(FLucideIcons.arrowLeft),
+    calendar: FIcons.iconData(FLucideIcons.calendar),
+    check: FIcons.iconData(FLucideIcons.check),
+    chevronDown: FIcons.iconData(FLucideIcons.chevronDown),
+    chevronLeft: FIcons.iconData(FLucideIcons.chevronLeft),
+    chevronRight: FIcons.iconData(FLucideIcons.chevronRight),
+    chevronUp: FIcons.iconData(FLucideIcons.chevronUp),
+    chevronsUpDown: FIcons.iconData(FLucideIcons.chevronsUpDown),
+    circleAlert: FIcons.iconData(FLucideIcons.circleAlert),
+    clock4: FIcons.iconData(FLucideIcons.clock4),
+    ellipsis: FIcons.iconData(FLucideIcons.ellipsis),
+    eye: FIcons.iconData(FLucideIcons.eye),
+    eyeClosed: FIcons.iconData(FLucideIcons.eyeClosed),
+    gripHorizontal: FIcons.iconData(FLucideIcons.gripHorizontal),
+    gripVertical: FIcons.iconData(FLucideIcons.gripVertical),
+    loader: FIcons.iconData(FLucideIcons.loader),
+    loaderCircle: FIcons.iconData(FLucideIcons.loaderCircle),
+    loaderPinwheel: FIcons.iconData(FLucideIcons.loaderPinwheel),
+    search: FIcons.iconData(FLucideIcons.search),
+    userRound: FIcons.iconData(FLucideIcons.userRound),
+    x: FIcons.iconData(FLucideIcons.x),
+  );
+
   final style = _style(colors: colors, typography: typography, touch: touch);
 
-  return FThemeData(colors: colors, typography: typography, style: style, touch: touch);
+  return FThemeData(colors: colors, typography: typography, icons: icons, style: style, touch: touch);
 }
 
 FTypography _typography({required FColors colors, required bool touch, String fontFamily = 'packages/forui/Inter'}) {
@@ -94,8 +123,8 @@ FStyle _style({required FColors colors, required FTypography typography, require
   return FStyle(
     formFieldStyle: .inherit(colors: colors, typography: typography, touch: touch),
     focusedOutlineStyle: FFocusedOutlineStyle(color: colors.primary, borderRadius: borderRadius.md),
-    iconStyle: IconThemeData(color: colors.foreground, size: typography.lg.fontSize),
     sizes: FSizes.inherit(touch: touch),
+    iconStyle: IconThemeData(color: colors.foreground, size: typography.lg.fontSize),
     tappableStyle: FTappableStyle(),
     borderRadius: const FBorderRadius(),
     borderWidth: 1,

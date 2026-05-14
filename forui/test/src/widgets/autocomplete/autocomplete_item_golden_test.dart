@@ -157,7 +157,7 @@ void main() {
             key: key,
             filter: (query) => ['v'],
             contentBuilder: (_, _, _) => [
-              FAutocompleteItem.item(prefix: const Icon(FIcons.circle), title: const Text('Title'), value: 'v'),
+              FAutocompleteItem.item(prefix: const Icon(FLucideIcons.circle), title: const Text('Title'), value: 'v'),
             ],
           ),
         ),

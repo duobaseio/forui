@@ -128,7 +128,7 @@ class FMultiSelectTag extends StatelessWidget {
               DefaultTextStyle(style: style.labelTextStyle.resolve(variants), child: label),
               FFocusedOutline(
                 focused: variants.contains(FTappableVariant.focused),
-                child: IconTheme(data: style.iconStyle.resolve(variants), child: const Icon(FIcons.x)),
+                child: IconTheme(data: style.iconStyle.resolve(variants), child: style.icon(context)),
               ),
             ],
           ),
@@ -182,6 +182,10 @@ class FMultiSelectTagStyle with Diagnosticable, _$FMultiSelectTagStyleFunctions 
   final FVariants<FMultiSelectTagVariantConstraint, FMultiSelectTagVariant, IconThemeData, IconThemeDataDelta>
   iconStyle;
 
+  /// The dismiss icon builder. Defaults to [FIcons.x].
+  @override
+  final FIconBuilder icon;
+
   /// The tappable style.
   @override
   final FTappableStyle tappableStyle;
@@ -195,6 +199,7 @@ class FMultiSelectTagStyle with Diagnosticable, _$FMultiSelectTagStyleFunctions 
     required this.decoration,
     required this.labelTextStyle,
     required this.iconStyle,
+    required this.icon,
     required this.tappableStyle,
     required this.focusedOutlineStyle,
     required this.padding,
@@ -204,6 +209,7 @@ class FMultiSelectTagStyle with Diagnosticable, _$FMultiSelectTagStyleFunctions 
   /// Creates a [FMultiSelectTagStyle] that inherits its properties.
   factory FMultiSelectTagStyle.inherit({
     required FColors colors,
+    required FIcons icons,
     required FStyle style,
     required TextStyle textStyle,
     required EdgeInsetsGeometry padding,
@@ -238,6 +244,7 @@ class FMultiSelectTagStyle with Diagnosticable, _$FMultiSelectTagStyleFunctions 
         [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
       },
     ),
+    icon: icons.x,
     tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
     focusedOutlineStyle: style.focusedOutlineStyle,
     padding: padding,

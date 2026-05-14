@@ -9,11 +9,11 @@ const progress = FProgress(
   // {@endcategory}
 );
 
-const circularProgress = FCircularProgress(
+final circularProgress = FCircularProgress(
   // {@category "Core"}
   size: .md,
-  style: .delta(iconStyle: .delta()),
-  icon: FIcons.loaderCircle,
+  style: const .delta(iconStyle: .delta()),
+  icon: FIcons.iconData(FLucideIcons.flag),
   semanticsLabel: 'Loading',
   // {@endcategory}
 );

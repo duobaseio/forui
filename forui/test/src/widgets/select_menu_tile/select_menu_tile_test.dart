@@ -116,7 +116,7 @@ void main() {
           children: [
             FSelectMenuTile(
               key: key,
-              prefix: const Icon(FIcons.calendar),
+              prefix: const Icon(FLucideIcons.calendar),
               label: const Text('Label'),
               description: const Text('Description'),
               title: const Text('Repeat'),
@@ -142,7 +142,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         child: FSelectMenuTile(
-          prefix: const Icon(FIcons.calendar),
+          prefix: const Icon(FLucideIcons.calendar),
           label: const Text('Label'),
           description: const Text('Description'),
           title: const Text('Repeat'),
@@ -171,7 +171,7 @@ void main() {
       TestScaffold.app(
         child: FSelectMenuTile(
           autoHide: false,
-          prefix: const Icon(FIcons.calendar),
+          prefix: const Icon(FLucideIcons.calendar),
           label: const Text('Label'),
           description: const Text('Description'),
           title: const Text('Repeat'),
@@ -239,7 +239,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         child: FSelectMenuTile(
-          prefix: const Icon(FIcons.calendar),
+          prefix: const Icon(FLucideIcons.calendar),
           label: const Text('Label'),
           description: const Text('Description'),
           title: const Text('Repeat'),

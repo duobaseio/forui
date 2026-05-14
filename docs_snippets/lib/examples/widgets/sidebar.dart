@@ -40,7 +40,7 @@ class SidebarPage extends Example {
             child: Row(
               spacing: 10,
               children: [
-                FAvatar.raw(child: Icon(FIcons.userRound, size: 18, color: context.theme.colors.mutedForeground)),
+                FAvatar.raw(child: Icon(FLucideIcons.userRound, size: 18, color: context.theme.colors.mutedForeground)),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: .start,
@@ -72,7 +72,7 @@ class SidebarPage extends Example {
           label: const Text('Overview'),
           children: [
             FSidebarItem(
-              icon: const Icon(FIcons.school),
+              icon: const Icon(FLucideIcons.school),
               label: const Text('Getting Started'),
               initiallyExpanded: true,
               onPress: () {},
@@ -82,18 +82,18 @@ class SidebarPage extends Example {
                 FSidebarItem(label: const Text('Typography'), onPress: () {}),
               ],
             ),
-            FSidebarItem(icon: const Icon(FIcons.code), label: const Text('API Reference'), onPress: () {}),
-            FSidebarItem(icon: const Icon(FIcons.box), label: const Text('Pub Dev'), onPress: () {}),
+            FSidebarItem(icon: const Icon(FLucideIcons.code), label: const Text('API Reference'), onPress: () {}),
+            FSidebarItem(icon: const Icon(FLucideIcons.box), label: const Text('Pub Dev'), onPress: () {}),
           ],
         ),
         FSidebarGroup(
-          action: const Icon(FIcons.plus),
+          action: const Icon(FLucideIcons.plus),
           onActionPress: () {},
           label: const Text('Widgets'),
           children: [
-            FSidebarItem(icon: const Icon(FIcons.circleSlash), label: const Text('Divider'), onPress: () {}),
-            FSidebarItem(icon: const Icon(FIcons.scaling), label: const Text('Resizable'), onPress: () {}),
-            FSidebarItem(icon: const Icon(FIcons.layoutDashboard), label: const Text('Scaffold'), onPress: () {}),
+            FSidebarItem(icon: const Icon(FLucideIcons.circleSlash), label: const Text('Divider'), onPress: () {}),
+            FSidebarItem(icon: const Icon(FLucideIcons.scaling), label: const Text('Resizable'), onPress: () {}),
+            FSidebarItem(icon: const Icon(FLucideIcons.layoutDashboard), label: const Text('Scaffold'), onPress: () {}),
           ],
         ),
       ],
@@ -189,7 +189,9 @@ class SheetSidebarPage extends Example {
                   child: Row(
                     spacing: 10,
                     children: [
-                      FAvatar.raw(child: Icon(FIcons.userRound, size: 18, color: context.theme.colors.mutedForeground)),
+                      FAvatar.raw(
+                        child: Icon(FLucideIcons.userRound, size: 18, color: context.theme.colors.mutedForeground),
+                      ),
                       Expanded(
                         child: Column(
                           crossAxisAlignment: .start,
@@ -221,7 +223,7 @@ class SheetSidebarPage extends Example {
                 label: const Text('Overview'),
                 children: [
                   FSidebarItem(
-                    icon: const Icon(FIcons.school),
+                    icon: const Icon(FLucideIcons.school),
                     label: const Text('Getting Started'),
                     initiallyExpanded: true,
                     onPress: () {},
@@ -231,18 +233,26 @@ class SheetSidebarPage extends Example {
                       FSidebarItem(label: const Text('Typography'), onPress: () {}),
                     ],
                   ),
-                  FSidebarItem(icon: const Icon(FIcons.code), label: const Text('API Reference'), onPress: () {}),
-                  FSidebarItem(icon: const Icon(FIcons.box), label: const Text('Pub Dev'), onPress: () {}),
+                  FSidebarItem(icon: const Icon(FLucideIcons.code), label: const Text('API Reference'), onPress: () {}),
+                  FSidebarItem(icon: const Icon(FLucideIcons.box), label: const Text('Pub Dev'), onPress: () {}),
                 ],
               ),
               FSidebarGroup(
-                action: const Icon(FIcons.plus),
+                action: const Icon(FLucideIcons.plus),
                 onActionPress: () {},
                 label: const Text('Widgets'),
                 children: [
-                  FSidebarItem(icon: const Icon(FIcons.circleSlash), label: const Text('Divider'), onPress: () {}),
-                  FSidebarItem(icon: const Icon(FIcons.scaling), label: const Text('Resizable'), onPress: () {}),
-                  FSidebarItem(icon: const Icon(FIcons.layoutDashboard), label: const Text('Scaffold'), onPress: () {}),
+                  FSidebarItem(
+                    icon: const Icon(FLucideIcons.circleSlash),
+                    label: const Text('Divider'),
+                    onPress: () {},
+                  ),
+                  FSidebarItem(icon: const Icon(FLucideIcons.scaling), label: const Text('Resizable'), onPress: () {}),
+                  FSidebarItem(
+                    icon: const Icon(FLucideIcons.layoutDashboard),
+                    label: const Text('Scaffold'),
+                    onPress: () {},
+                  ),
                 ],
               ),
             ],
@@ -266,14 +276,14 @@ class CustomWidthSidebarPage extends Example {
       FSidebarGroup(
         children: [
           FSidebarItem(
-            icon: const Icon(FIcons.layoutDashboard),
+            icon: const Icon(FLucideIcons.layoutDashboard),
             label: const Text('Dashboard'),
             selected: true,
             onPress: () {},
           ),
-          FSidebarItem(icon: const Icon(FIcons.chartLine), label: const Text('Analytics'), onPress: () {}),
+          FSidebarItem(icon: const Icon(FLucideIcons.chartLine), label: const Text('Analytics'), onPress: () {}),
           FSidebarItem(
-            icon: const Icon(FIcons.chartBar),
+            icon: const Icon(FLucideIcons.chartBar),
             label: const Text('Reports'),
             initiallyExpanded: true,
             children: [
@@ -299,7 +309,7 @@ class NestedSidebarPage extends Example {
       FSidebarGroup(
         children: [
           FSidebarItem(
-            icon: const Icon(FIcons.userRound),
+            icon: const Icon(FLucideIcons.userRound),
             label: const Text('Account'),
             initiallyExpanded: true,
             children: [
@@ -329,8 +339,8 @@ class NestedSidebarPage extends Example {
               FSidebarItem(label: const Text('Notifications'), onPress: () {}),
             ],
           ),
-          FSidebarItem(icon: const Icon(FIcons.palette), label: const Text('Appearance'), onPress: () {}),
-          FSidebarItem(icon: const Icon(FIcons.settings), label: const Text('System'), onPress: () {}),
+          FSidebarItem(icon: const Icon(FLucideIcons.palette), label: const Text('Appearance'), onPress: () {}),
+          FSidebarItem(icon: const Icon(FLucideIcons.settings), label: const Text('System'), onPress: () {}),
         ],
       ),
     ],

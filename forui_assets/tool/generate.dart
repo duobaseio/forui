@@ -133,12 +133,12 @@ void generate(List<(String, String, String)> icons) {
               '/// The Lucide icons bundled with Forui.',
               '/// ',
               '/// Use with the [Icon] class to show specific icons. Icons are identified by their name as listed below, e.g. ',
-              '/// [FIcons.armchair].',
+              '/// [FLucideIcons.armchair].',
               '/// ',
               '/// Search and find the perfect icon on the [Lucide Icons](https://lucide.dev/icons/) website.',
             ])
             ..annotations.add(refer('staticIconProvider'))
-            ..name = 'FIcons'
+            ..name = 'FLucideIcons'
             ..fields.addAll([
               for (final icon in icons)
                 (FieldBuilder()

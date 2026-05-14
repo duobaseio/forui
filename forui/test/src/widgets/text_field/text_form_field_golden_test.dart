@@ -230,7 +230,10 @@ void main() {
         await tester.pumpWidget(
           TestScaffold.app(
             theme: theme.data,
-            child: FTextFormField(suffixBuilder: (_, _, _) => const Icon(FIcons.alarmClock), clearable: (_) => true),
+            child: FTextFormField(
+              suffixBuilder: (_, _, _) => const Icon(FLucideIcons.alarmClock),
+              clearable: (_) => true,
+            ),
           ),
         );
 
@@ -252,7 +255,7 @@ void main() {
             theme: theme.data,
             child: FTextFormField(
               clearable: (_) => true,
-              clearIconBuilder: (_, _, clear) => FButton.icon(onPress: clear, child: const Icon(FIcons.trash)),
+              clearIconBuilder: (_, _, clear) => FButton.icon(onPress: clear, child: const Icon(FLucideIcons.trash)),
             ),
           ),
         );

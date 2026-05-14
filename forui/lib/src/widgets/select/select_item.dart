@@ -16,7 +16,8 @@ import 'package:forui/src/widgets/select/content/inherited_controller.dart';
 })
 part 'select_item.design.dart';
 
-Widget? _defaultSuffixBuilder(BuildContext _, bool selected) => selected ? const Icon(FIcons.check) : null;
+Widget? _defaultSuffixBuilder(BuildContext context, bool selected) =>
+    selected ? context.theme.icons.check(context) : null;
 
 /// A marker interface which denotes that mixed-in widgets can be used in a [FSelect].
 mixin FSelectItemMixin on Widget {

@@ -66,7 +66,7 @@ class _ExampleState extends State<Example> {
         Text('Count: $_count'),
         FButton(
           onPress: () => setState(() => _count++),
-          suffix: const Icon(FIcons.chevronsUp),
+          suffix: const Icon(FLucideIcons.chevronsUp),
           child: const Text('Increase'),
         ),
       ],

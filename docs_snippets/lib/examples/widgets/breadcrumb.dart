@@ -75,7 +75,7 @@ class BreadcrumbDividerPage extends Example {
     children: [
       FBreadcrumb(
         // {@highlight}
-        divider: Transform.rotate(angle: -60, child: const Icon(FIcons.slash, size: 14)),
+        divider: Transform.rotate(angle: -60, child: const Icon(FLucideIcons.slash, size: 14)),
         // {@endhighlight}
         children: [
           FBreadcrumbItem(onPress: () {}, child: const Text('Forui')),

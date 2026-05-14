@@ -13,7 +13,7 @@ void main() {
         child: FSheets(
           child: Builder(
             builder: (context) => FButton.icon(
-              child: const Icon(FIcons.chevronRight),
+              child: const Icon(FLucideIcons.chevronRight),
               onPress: () {
                 autoDispose(
                   showFPersistentSheet(
@@ -49,7 +49,7 @@ void main() {
         child: FSheets(
           child: Builder(
             builder: (context) => FButton.icon(
-              child: const Icon(FIcons.chevronRight),
+              child: const Icon(FLucideIcons.chevronRight),
               onPress: () {
                 autoDispose(
                   showFPersistentSheet(
@@ -85,7 +85,7 @@ void main() {
       TestScaffold.app(
         child: Builder(
           builder: (context) => FButton.icon(
-            child: const Icon(FIcons.chevronRight),
+            child: const Icon(FLucideIcons.chevronRight),
             onPress: () {
               autoDispose(
                 showFPersistentSheet(
@@ -117,7 +117,7 @@ void main() {
         child: FSheets(
           child: Builder(
             builder: (context) => FButton.icon(
-              child: const Icon(FIcons.chevronRight),
+              child: const Icon(FLucideIcons.chevronRight),
               onPress: () {
                 autoDispose(
                   showFPersistentSheet(
@@ -158,7 +158,7 @@ void main() {
           key: key,
           child: Builder(
             builder: (context) => FButton.icon(
-              child: const Icon(FIcons.chevronRight),
+              child: const Icon(FLucideIcons.chevronRight),
               onPress: () {
                 controller = showFPersistentSheet(
                   context: context,
@@ -197,7 +197,7 @@ void main() {
           child: FSheets(
             child: Builder(
               builder: (context) => FButton.icon(
-                child: const Icon(FIcons.chevronRight),
+                child: const Icon(FLucideIcons.chevronRight),
                 onPress: () {
                   autoDispose(
                     showFPersistentSheet(
@@ -233,7 +233,7 @@ void main() {
           child: FSheets(
             child: Builder(
               builder: (context) => FButton.icon(
-                child: const Icon(FIcons.chevronRight),
+                child: const Icon(FLucideIcons.chevronRight),
                 onPress: () {
                   autoDispose(
                     showFPersistentSheet(

@@ -285,6 +285,7 @@ class FSelectGroupStyle extends FLabelStyle with Diagnosticable, _$FSelectGroupS
   factory FSelectGroupStyle.inherit({
     required FColors colors,
     required FTypography typography,
+    required FIcons icons,
     required FStyle style,
     required bool touch,
   }) {
@@ -316,7 +317,7 @@ class FSelectGroupStyle extends FLabelStyle with Diagnosticable, _$FSelectGroupS
         );
 
     return .new(
-      checkboxStyle: .inherit(colors: colors, style: style, touch: touch).copyWith(
+      checkboxStyle: .inherit(colors: colors, icons: icons, style: style, touch: touch).copyWith(
         leadingLabelStyle: .delta(
           labelTextStyle: itemLabelTextStyle,
           descriptionTextStyle: itemDescriptionTextStyle,

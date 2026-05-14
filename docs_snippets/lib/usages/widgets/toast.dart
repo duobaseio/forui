@@ -11,10 +11,10 @@ const toast = FToast(
   // {@category "Core"}
   style: .delta(titleSpacing: 5),
   clipBehavior: .none,
-  icon: Icon(FIcons.info),
+  icon: Icon(FLucideIcons.info),
   title: Text('Title'),
   description: Text('Description'),
-  suffix: Icon(FIcons.x),
+  suffix: Icon(FLucideIcons.x),
   // {@endcategory}
 );
 
@@ -32,10 +32,10 @@ final showToast = showFToast(
   // {@category "Core"}
   context: context,
   style: const .delta(padding: .value(.all(16))),
-  icon: const Icon(FIcons.info),
+  icon: const Icon(FLucideIcons.info),
   title: const Text('Title'),
   description: const Text('Description'),
-  suffixBuilder: (context, entry) => GestureDetector(onTap: entry.dismiss, child: const Icon(FIcons.x)),
+  suffixBuilder: (context, entry) => GestureDetector(onTap: entry.dismiss, child: const Icon(FLucideIcons.x)),
   // {@category "Behavior"}
   alignment: .bottomEnd,
   swipeToDismiss: const [.right],

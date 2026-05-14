@@ -279,7 +279,7 @@ void main() {
       await tester.pumpAndSettle();
 
       final gesture = await tester.createPointerGesture();
-      await gesture.moveTo(tester.getCenter(find.byIcon(FIcons.x).last));
+      await gesture.moveTo(tester.getCenter(find.byIcon(FLucideIcons.x).last));
       await tester.pumpAndSettle();
 
       await expectLater(

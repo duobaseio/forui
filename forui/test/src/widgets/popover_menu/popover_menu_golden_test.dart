@@ -284,7 +284,7 @@ void main() {
               children: [
                 .submenu(
                   title: const Text('Share'),
-                  suffix: const Icon(FIcons.arrowRight),
+                  suffix: const Icon(FLucideIcons.arrowRight),
                   submenu: [
                     .group(
                       children: [.item(title: const Text('Email'), onPress: () {})],

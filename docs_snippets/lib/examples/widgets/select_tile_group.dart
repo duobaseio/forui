@@ -23,9 +23,9 @@ class SelectTileGroupPage extends Example {
     label: const Text('Sidebar'),
     description: const Text('These will be shown in the sidebar.'),
     children: const [
-      .tile(title: Text('Recents'), suffix: Icon(FIcons.timer), value: .recents),
-      .tile(title: Text('Home'), suffix: Icon(FIcons.house), value: .home),
-      .tile(title: Text('Applications'), suffix: Icon(FIcons.appWindowMac), value: .applications),
+      .tile(title: Text('Recents'), suffix: Icon(FLucideIcons.timer), value: .recents),
+      .tile(title: Text('Home'), suffix: Icon(FLucideIcons.house), value: .home),
+      .tile(title: Text('Applications'), suffix: Icon(FLucideIcons.appWindowMac), value: .applications),
     ],
   );
 }
@@ -42,9 +42,9 @@ class ScrollableSelectTileGroupPage extends Example {
     description: const Text('These will be shown in the sidebar.'),
     maxHeight: 100,
     children: const [
-      .tile(title: Text('Recents'), suffix: Icon(FIcons.timer), value: .recents),
-      .tile(title: Text('Home'), suffix: Icon(FIcons.house), value: .home),
-      .tile(title: Text('Applications'), suffix: Icon(FIcons.appWindowMac), value: .applications),
+      .tile(title: Text('Recents'), suffix: Icon(FLucideIcons.timer), value: .recents),
+      .tile(title: Text('Home'), suffix: Icon(FLucideIcons.house), value: .home),
+      .tile(title: Text('Applications'), suffix: Icon(FLucideIcons.appWindowMac), value: .applications),
     ],
   );
 }
@@ -177,8 +177,8 @@ class _SelectTileGroupSuffixPageState extends StatefulExampleState<SelectTileGro
     label: const Text('Settings'),
     children: const [
       // {@highlight}
-      FSelectTile.suffix(prefix: Icon(FIcons.list), title: Text('List View'), value: 'List'),
-      FSelectTile.suffix(prefix: Icon(FIcons.layoutGrid), title: Text('Grid View'), value: 'Grid'),
+      FSelectTile.suffix(prefix: Icon(FLucideIcons.list), title: Text('List View'), value: 'List'),
+      FSelectTile.suffix(prefix: Icon(FLucideIcons.layoutGrid), title: Text('Grid View'), value: 'Grid'),
       // {@endhighlight}
     ],
   );
@@ -198,9 +198,9 @@ class FullDividerSelectTileGroupPage extends Example {
     divider: .full,
     // {@endhighlight}
     children: const [
-      .tile(title: Text('Recents'), suffix: Icon(FIcons.timer), value: .recents),
-      .tile(title: Text('Home'), suffix: Icon(FIcons.house), value: .home),
-      .tile(title: Text('Applications'), suffix: Icon(FIcons.appWindowMac), value: .applications),
+      .tile(title: Text('Recents'), suffix: Icon(FLucideIcons.timer), value: .recents),
+      .tile(title: Text('Home'), suffix: Icon(FLucideIcons.house), value: .home),
+      .tile(title: Text('Applications'), suffix: Icon(FLucideIcons.appWindowMac), value: .applications),
     ],
   );
 }
@@ -219,9 +219,9 @@ class NoDividerSelectTileGroupPage extends Example {
     divider: .none,
     // {@endhighlight}
     children: const [
-      .tile(title: Text('Recents'), suffix: Icon(FIcons.timer), value: .recents),
-      .tile(title: Text('Home'), suffix: Icon(FIcons.house), value: .home),
-      .tile(title: Text('Applications'), suffix: Icon(FIcons.appWindowMac), value: .applications),
+      .tile(title: Text('Recents'), suffix: Icon(FLucideIcons.timer), value: .recents),
+      .tile(title: Text('Home'), suffix: Icon(FLucideIcons.house), value: .home),
+      .tile(title: Text('Applications'), suffix: Icon(FLucideIcons.appWindowMac), value: .applications),
     ],
   );
 }

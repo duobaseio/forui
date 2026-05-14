@@ -1,3 +1,7 @@
+## 0.22.0
+* **Breaking** Rename `FIcons` to `FLucideIcons`.
+
+
 ## 0.21.0
 * No changes. Lucide icon mappings are still incorrect.
 

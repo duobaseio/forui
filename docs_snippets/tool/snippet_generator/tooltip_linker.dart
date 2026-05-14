@@ -62,12 +62,12 @@ class TooltipLinker extends DartDocLinker {
 
   /// Adds tooltips for property access and method tear-offs where both parts are compile-time identifiers.
   ///
-  /// Handles expressions like `FIcons.anchor` or `instance.property`. For static accesses, the tooltip spans the entire
+  /// Handles expressions like `FLucideIcons.anchor` or `instance.property`. For static accesses, the tooltip spans the entire
   /// expression; for instance accesses, it spans only the identifier.
   @override
   void visitPrefixedIdentifier(PrefixedIdentifier node) {
     switch (node.element) {
-      // Static accesses like `FIcons.anchor` or `instance.property`.
+      // Static accesses like `FLucideIcons.anchor` or `instance.property`.
       case final PropertyAccessorElement element when _forui(element):
         tooltip(
           element.isStatic ? node : node.identifier,

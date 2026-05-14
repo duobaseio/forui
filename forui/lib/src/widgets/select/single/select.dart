@@ -39,10 +39,11 @@ typedef FSelectPopoverBuilder<T> =
 /// * [FSelectStyle] for customizing the appearance of a select.
 abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// The default suffix builder that shows a upward and downward facing chevron icon.
-  static Widget defaultIconBuilder(BuildContext _, FTextFieldStyle style, Set<FTextFieldVariant> variants) => Padding(
-    padding: const .directional(end: 8.0),
-    child: IconTheme(data: style.iconStyle.resolve(variants), child: const Icon(FIcons.chevronDown)),
-  );
+  static Widget defaultIconBuilder(BuildContext context, FTextFieldStyle style, Set<FTextFieldVariant> variants) =>
+      Padding(
+        padding: const .directional(end: 8.0),
+        child: IconTheme(data: style.iconStyle.resolve(variants), child: context.theme.icons.chevronDown(context)),
+      );
 
   /// The default content loading builder that shows a spinner when an asynchronous search is pending.
   static Widget defaultContentLoadingBuilder(BuildContext _, FSelectSearchStyle style) => Padding(

@@ -34,7 +34,7 @@ class AvatarRawPage extends Example {
     spacing: 10,
     children: [
       FAvatar.raw(),
-      FAvatar.raw(child: Icon(FIcons.baby, color: context.theme.colors.mutedForeground)),
+      FAvatar.raw(child: Icon(FLucideIcons.baby, color: context.theme.colors.mutedForeground)),
       FAvatar.raw(child: const Text('MN')),
     ],
   );

@@ -21,10 +21,10 @@ void main() {
           title: const Text('Title'),
           prefixes: [
             FHeaderAction.back(onPress: () {}),
-            const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
+            const FHeaderAction(icon: Icon(FLucideIcons.alarmClock), onPress: null),
           ],
           suffixes: [
-            FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
+            FHeaderAction(icon: const Icon(FLucideIcons.plus), onPress: () {}),
             FHeaderAction.x(onPress: () {}),
           ],
         ),
@@ -43,10 +43,10 @@ void main() {
             title: const Text('Title'),
             prefixes: [
               FHeaderAction.back(onPress: () {}),
-              const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
+              const FHeaderAction(icon: Icon(FLucideIcons.alarmClock), onPress: null),
             ],
             suffixes: [
-              FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
+              FHeaderAction(icon: const Icon(FLucideIcons.plus), onPress: () {}),
               FHeaderAction.x(onPress: () {}),
             ],
           ),
@@ -74,10 +74,10 @@ void main() {
                     title: const Text('Title'),
                     prefixes: [
                       FHeaderAction.back(onPress: () {}),
-                      const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
+                      const FHeaderAction(icon: Icon(FLucideIcons.alarmClock), onPress: null),
                     ],
                     suffixes: [
-                      FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
+                      FHeaderAction(icon: const Icon(FLucideIcons.plus), onPress: () {}),
                       FHeaderAction.x(onPress: () {}),
                     ],
                   ),
@@ -103,8 +103,8 @@ void main() {
                   decoration: BoxDecoration(border: .all(color: context.theme.colors.primary)),
                   child: FHeader.nested(
                     title: Text('Title', style: context.theme.typography.xl3),
-                    prefixes: [FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {})],
-                    suffixes: [FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {})],
+                    prefixes: [FHeaderAction(icon: const Icon(FLucideIcons.plus), onPress: () {})],
+                    suffixes: [FHeaderAction(icon: const Icon(FLucideIcons.plus), onPress: () {})],
                   ),
                 ),
               ],
@@ -128,8 +128,8 @@ void main() {
                   decoration: BoxDecoration(border: .all(color: context.theme.colors.primary)),
                   child: FHeader.nested(
                     title: Text('Title', style: context.theme.typography.xs),
-                    prefixes: [FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {})],
-                    suffixes: [FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {})],
+                    prefixes: [FHeaderAction(icon: const Icon(FLucideIcons.plus), onPress: () {})],
+                    suffixes: [FHeaderAction(icon: const Icon(FLucideIcons.plus), onPress: () {})],
                   ),
                 ),
               ],
@@ -160,10 +160,10 @@ void main() {
             title: const Text('Title'),
             prefixes: [
               FHeaderAction.back(onPress: () {}),
-              const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
+              const FHeaderAction(icon: Icon(FLucideIcons.alarmClock), onPress: null),
             ],
             suffixes: [
-              FHeaderAction(autofocus: true, icon: const Icon(FIcons.plus), onPress: () {}),
+              FHeaderAction(autofocus: true, icon: const Icon(FLucideIcons.plus), onPress: () {}),
               FHeaderAction.x(onPress: () {}),
             ],
           ),
@@ -182,10 +182,10 @@ void main() {
             title: const Text('Title'),
             prefixes: [
               FHeaderAction.back(onPress: () {}),
-              const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
+              const FHeaderAction(icon: Icon(FLucideIcons.alarmClock), onPress: null),
             ],
             suffixes: [
-              FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
+              FHeaderAction(icon: const Icon(FLucideIcons.plus), onPress: () {}),
               FHeaderAction.x(onPress: () {}),
             ],
           ),
@@ -238,7 +238,7 @@ void main() {
           child: FHeader.nested(
             titleAlignment: .centerLeft,
             title: const Text('Title'),
-            suffixes: [FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {})],
+            suffixes: [FHeaderAction(icon: const Icon(FLucideIcons.plus), onPress: () {})],
           ),
         ),
       );
@@ -256,7 +256,7 @@ void main() {
           child: FHeader.nested(
             titleAlignment: .centerRight,
             title: const Text('Title'),
-            suffixes: [FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {})],
+            suffixes: [FHeaderAction(icon: const Icon(FLucideIcons.plus), onPress: () {})],
           ),
         ),
       );

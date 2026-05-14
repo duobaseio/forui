@@ -58,7 +58,7 @@ class FBreadcrumb extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final style = this.style(context.theme.breadcrumbStyle);
-    final divider = IconTheme(data: style.iconStyle, child: this.divider ?? const Icon(FIcons.chevronRight));
+    final divider = IconTheme(data: style.iconStyle, child: this.divider ?? context.theme.icons.chevronRight(context));
 
     return Row(
       children: [
@@ -125,6 +125,7 @@ abstract interface class FBreadcrumbItem extends Widget {
   /// displays a popover menu with the collapsed items.
   const factory FBreadcrumbItem.collapsed({
     required List<FItemGroup> menu,
+    Widget? icon,
     FPopoverMenuStyleDelta popoverMenuStyle,
     FPopoverControl popoverControl,
     ScrollController? scrollController,
@@ -160,6 +161,7 @@ abstract interface class FBreadcrumbItem extends Widget {
   /// displays a popover menu with the collapsed items.
   const factory FBreadcrumbItem.collapsedTiles({
     required List<FTileGroup> menu,
+    Widget? icon,
     FPopoverMenuStyleDelta popoverMenuStyle,
     FPopoverControl popoverControl,
     ScrollController? scrollController,
@@ -243,6 +245,7 @@ class _Crumb extends StatelessWidget implements FBreadcrumbItem {
 class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
   final List<FTileGroup>? tileMenu;
   final List<FItemGroup>? itemMenu;
+  final Widget? icon;
   final FPopoverMenuStyleDelta popoverMenuStyle;
   final FPopoverControl popoverControl;
   final ScrollController? scrollController;
@@ -270,6 +273,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
 
   const _CollapsedCrumb({
     required List<FItemGroup> menu,
+    this.icon,
     this.popoverMenuStyle = const .context(),
     this.popoverControl = const .managed(),
     this.scrollController,
@@ -300,6 +304,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
 
   const _CollapsedCrumb.tiles({
     required List<FTileGroup> menu,
+    this.icon,
     this.popoverMenuStyle = const .context(),
     this.popoverControl = const .managed(),
     this.scrollController,
@@ -422,7 +427,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
           onPress: _controller.toggle,
           child: Padding(
             padding: style.collapsedPadding,
-            child: IconTheme(data: style.iconStyle, child: const Icon(FIcons.ellipsis)),
+            child: IconTheme(data: style.iconStyle, child: widget.icon ?? context.theme.icons.ellipsis(context)),
           ),
         ),
       );
@@ -455,7 +460,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
           onPress: _controller.toggle,
           child: Padding(
             padding: style.collapsedPadding,
-            child: IconTheme(data: style.iconStyle, child: const Icon(FIcons.ellipsis)),
+            child: IconTheme(data: style.iconStyle, child: widget.icon ?? context.theme.icons.ellipsis(context)),
           ),
         ),
       );

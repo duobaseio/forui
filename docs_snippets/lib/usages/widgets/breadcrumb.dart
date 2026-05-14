@@ -7,7 +7,7 @@ import 'package:forui/forui.dart';
 const breadcrumb = FBreadcrumb(
   // {@category "Core"}
   style: .delta(padding: .value(.zero)),
-  divider: Icon(FIcons.chevronRight),
+  divider: Icon(FLucideIcons.chevronRight),
   children: [
     FBreadcrumbItem(child: Text('Home'), onPress: null),
     FBreadcrumbItem(child: Text('Products'), onPress: null),

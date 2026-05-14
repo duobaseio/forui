@@ -21,7 +21,7 @@ void main() {
           title: const Text('Title'),
           suffixes: [
             FHeaderAction.back(onPress: () {}),
-            const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
+            const FHeaderAction(icon: Icon(FLucideIcons.alarmClock), onPress: null),
           ],
         ),
       ),
@@ -38,8 +38,8 @@ void main() {
           child: FHeader(
             title: const Text(title),
             suffixes: [
-              const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
-              FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
+              const FHeaderAction(icon: Icon(FLucideIcons.alarmClock), onPress: null),
+              FHeaderAction(icon: const Icon(FLucideIcons.plus), onPress: () {}),
             ],
           ),
         ),
@@ -65,7 +65,7 @@ void main() {
                     ),
                     title: const Text('Title'),
                     suffixes: [
-                      FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {}),
+                      FHeaderAction(icon: const Icon(FLucideIcons.plus), onPress: () {}),
                       FHeaderAction.x(onPress: () {}),
                     ],
                   ),
@@ -91,7 +91,7 @@ void main() {
                   decoration: BoxDecoration(border: .all(color: context.theme.colors.primary)),
                   child: FHeader(
                     title: Text('Title', style: context.theme.typography.xl3),
-                    suffixes: [FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {})],
+                    suffixes: [FHeaderAction(icon: const Icon(FLucideIcons.plus), onPress: () {})],
                   ),
                 ),
               ],
@@ -115,7 +115,7 @@ void main() {
                   decoration: BoxDecoration(border: .all(color: context.theme.colors.primary)),
                   child: FHeader(
                     title: Text('Title', style: context.theme.typography.xs),
-                    suffixes: [FHeaderAction(icon: const Icon(FIcons.plus), onPress: () {})],
+                    suffixes: [FHeaderAction(icon: const Icon(FLucideIcons.plus), onPress: () {})],
                   ),
                 ),
               ],
@@ -145,8 +145,8 @@ void main() {
           child: FHeader(
             title: const Text(title),
             suffixes: [
-              const FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
-              FHeaderAction(autofocus: true, icon: const Icon(FIcons.plus), onPress: () {}),
+              const FHeaderAction(icon: Icon(FLucideIcons.alarmClock), onPress: null),
+              FHeaderAction(autofocus: true, icon: const Icon(FLucideIcons.plus), onPress: () {}),
             ],
           ),
         ),
@@ -163,8 +163,8 @@ void main() {
           child: const FHeader(
             title: Text(title),
             suffixes: [
-              FHeaderAction(icon: Icon(FIcons.alarmClock), onPress: null),
-              FHeaderAction(icon: Icon(FIcons.plus), onPress: null),
+              FHeaderAction(icon: Icon(FLucideIcons.alarmClock), onPress: null),
+              FHeaderAction(icon: Icon(FLucideIcons.plus), onPress: null),
             ],
           ),
         ),
