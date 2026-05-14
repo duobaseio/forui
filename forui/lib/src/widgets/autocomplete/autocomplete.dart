@@ -775,6 +775,7 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
   late FocusNode _fieldFocus;
   late FocusScopeNode _popoverFocus;
   bool _tapFocus = false;
+  bool _mutating = false;
   String? _previous;
   int _monotonic = 0;
 
@@ -831,18 +832,20 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
       return;
     }
 
-    setState(() {
-      _previous = _controller.text;
-      _controller.loadSuggestions(_data = widget.filter(_controller.text)).ignore();
-    });
-
+    _previous = _controller.text;
     if (widget.control case FAutocompleteManagedControl(:final onChange?)) {
       onChange(_controller.value);
     }
 
-    // Skip if text changed programmatically while the field isn't focused.
-    if (_fieldFocus.hasFocus) {
-      _toggle();
+    if (!_mutating) {
+      setState(() {
+        _controller.loadSuggestions(_data = widget.filter(_controller.text)).ignore();
+      });
+
+      // Skip if text changed programmatically while the field isn't focused.
+      if ( _fieldFocus.hasFocus) {
+        _toggle();
+      }
     }
   }
 
@@ -1015,8 +1018,9 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
             cutoutBuilder: widget.contentCutoutBuilder,
             onTapHide: () {
               if (_restore case final restore?) {
-                _previous = restore;
+                _mutating = true;
                 _controller.text = restore;
+                _mutating = false;
               }
               widget.contentOnTapHide?.call();
             },
@@ -1039,13 +1043,15 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
                     _popoverController.hide();
                   }
 
-                  _previous = value;
+                  _mutating = true;
                   _controller.text = value;
+                  _mutating = false;
                 },
                 onFocus: (value) {
                   _restore ??= _controller.text;
-                  _previous = value;
+                  _mutating = true;
                   _controller.text = value;
+                  _mutating = false;
                 },
                 child: widget.popoverBuilder(
                   context,
@@ -1095,8 +1101,9 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
     if (widget.autoHide) {
       _popoverController.hide();
     }
-    _previous = replacement;
+    _mutating = true;
     _controller.complete();
+    _mutating = false;
   }
 }
 
