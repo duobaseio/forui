@@ -1,13 +1,21 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-/// A [FocusTraversalPolicy] that delegates to another policy but skips [FocusScopeNode] descendants that have no
-/// traversal descendants themselves.
+/// A [FocusTraversalPolicy] that skips:
+/// * the popover's [FocusScopeNode] when the current focus is outside of it.
+/// * any [FocusScopeNode] with no traversal descendants.
+///
+/// This shifts the focus from the autocomplete to the next focusable widget when the user presses tab, instead of
+/// stepping into the popover.
+///
+/// It also allows the focus to move between suggestions when the focus is already inside of the popover and the user
+/// presses tab.
 @internal
 class SkipDelegateTraversalPolicy with Diagnosticable implements FocusTraversalPolicy {
   final FocusTraversalPolicy _delegate;
+  final FocusScopeNode _popover;
 
-  SkipDelegateTraversalPolicy(this._delegate);
+  SkipDelegateTraversalPolicy(this._delegate, this._popover);
 
   @override
   TraversalRequestFocusCallback get requestFocusCallback => _delegate.requestFocusCallback;
@@ -42,11 +50,17 @@ class SkipDelegateTraversalPolicy with Diagnosticable implements FocusTraversalP
       _delegate.inDirection(currentNode, direction);
 
   @override
-  Iterable<FocusNode> sortDescendants(Iterable<FocusNode> descendants, FocusNode currentNode) =>
-      _delegate.sortDescendants(
-        descendants.where((descendant) => descendant is! FocusScopeNode || descendant.traversalDescendants.isNotEmpty),
-        currentNode,
-      );
+  Iterable<FocusNode> sortDescendants(Iterable<FocusNode> descendants, FocusNode currentNode) {
+    final inside = currentNode == _popover || currentNode.ancestors.contains(_popover);
+    return _delegate.sortDescendants(
+      descendants.where(
+        (d) =>
+            (inside || (d != _popover && !d.ancestors.contains(_popover))) &&
+            (d is! FocusScopeNode || d.traversalDescendants.isNotEmpty),
+      ),
+      currentNode,
+    );
+  }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

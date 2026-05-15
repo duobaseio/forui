@@ -20,6 +20,10 @@
 * Change `FAutocomplete.contentErrorBuilder`; pass `null` to hide the popover when there is an error.
 
 * Fix `FAutocomplete` not showing context menu by default.
+* Fix `FAutocomplete` not notifying control's `onChange` callback when a suggestion is selected via tap or tab completion.
+* Fix `FAutocomplete` committing the first suggestion when `TextInputAction.next` or Tab is pressed while the popover
+  is open and no inline typeahead completion is available.
+* Fix `FAutocomplete` popover staying open after Tab moves focus to another form field.
 
 ### `FAvatar`
 * **Breaking** Add `FAvatarStyle.fallbackIcon`. Defaults to `FIcons.userRound`.

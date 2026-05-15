@@ -256,6 +256,145 @@ void main() {
       expect(autocompleteFocus.hasFocus, false);
       expect(buttonFocus.hasFocus, true);
     });
+
+    testWidgets('TextInputAction.next does not select suggestion when popover is open', (tester) async {
+      final autocompleteFocus = autoDispose(FocusNode());
+      final buttonFocus = autoDispose(FocusNode());
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Column(
+            children: [
+              FAutocomplete(
+                key: key,
+                control: .managed(controller: controller),
+                popoverControl: .managed(controller: popoverController),
+                focusNode: autocompleteFocus,
+                textInputAction: TextInputAction.next,
+                items: fruits,
+              ),
+              FButton(onPress: () {}, focusNode: buttonFocus, child: const Text('button')),
+            ],
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+      expect(popoverController.status.isForwardOrCompleted, true);
+
+      await tester.testTextInput.receiveAction(TextInputAction.next);
+      await tester.pumpAndSettle();
+
+      expect(controller.text, '');
+      expect(popoverController.status.isForwardOrCompleted, false);
+      expect(autocompleteFocus.hasFocus, false);
+      expect(buttonFocus.hasFocus, true);
+    });
+
+    testWidgets('tab between popover items navigates within popover', (tester) async {
+      final autocompleteFocus = autoDispose(FocusNode());
+      final buttonFocus = autoDispose(FocusNode());
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Column(
+            children: [
+              FAutocomplete(
+                key: key,
+                control: .managed(controller: controller),
+                popoverControl: .managed(controller: popoverController),
+                focusNode: autocompleteFocus,
+                items: fruits,
+              ),
+              FButton(onPress: () {}, focusNode: buttonFocus, child: const Text('button')),
+            ],
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+      expect(popoverController.status.isForwardOrCompleted, true);
+
+      await tester.sendKeyEvent(.arrowDown);
+      await tester.pumpAndSettle();
+      expect(controller.text, 'Apple');
+
+      await tester.sendKeyEvent(.tab);
+      await tester.pumpAndSettle();
+
+      expect(controller.text, 'Banana');
+      expect(popoverController.status.isForwardOrCompleted, true);
+      expect(buttonFocus.hasFocus, false);
+    });
+
+    testWidgets('TextInputAction.next does not commit completion with typed prefix', (tester) async {
+      final autocompleteFocus = autoDispose(FocusNode());
+      final buttonFocus = autoDispose(FocusNode());
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Column(
+            children: [
+              FAutocomplete(
+                key: key,
+                control: .managed(controller: controller),
+                popoverControl: .managed(controller: popoverController),
+                focusNode: autocompleteFocus,
+                textInputAction: TextInputAction.next,
+                items: fruits,
+              ),
+              FButton(onPress: () {}, focusNode: buttonFocus, child: const Text('button')),
+            ],
+          ),
+        ),
+      );
+
+      await tester.enterText(find.byKey(key), 'b');
+      await tester.pumpAndSettle();
+
+      await tester.testTextInput.receiveAction(TextInputAction.next);
+      await tester.pumpAndSettle();
+
+      expect(controller.text, 'b');
+      expect(popoverController.status.isForwardOrCompleted, false);
+      expect(buttonFocus.hasFocus, true);
+    });
+
+    testWidgets('tab from empty field with popover open closes popover and moves focus', (tester) async {
+      final autocompleteFocus = autoDispose(FocusNode());
+      final buttonFocus = autoDispose(FocusNode());
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Column(
+            children: [
+              FAutocomplete(
+                key: key,
+                control: .managed(controller: controller),
+                popoverControl: .managed(controller: popoverController),
+                focusNode: autocompleteFocus,
+                items: fruits,
+              ),
+              FButton(onPress: () {}, focusNode: buttonFocus, child: const Text('button')),
+            ],
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+      expect(popoverController.status.isForwardOrCompleted, true);
+
+      await tester.sendKeyEvent(.tab);
+      await tester.pumpAndSettle();
+
+      expect(controller.text, '');
+      expect(popoverController.status.isForwardOrCompleted, false);
+      expect(autocompleteFocus.hasFocus, false);
+      expect(buttonFocus.hasFocus, true);
+    });
   });
 
   group('right arrow completion', () {
@@ -417,6 +556,110 @@ void main() {
       });
     });
   }
+
+  group('onChange', () {
+    testWidgets('onChange callback called when suggestion is tapped', (tester) async {
+      TextEditingValue? changedValue;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FAutocomplete(
+            key: key,
+            control: .managed(controller: controller, onChange: (value) => changedValue = value),
+            items: fruits,
+          ),
+        ),
+      );
+
+      await tester.enterText(find.byKey(key), 'app');
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('Apple'));
+      await tester.pumpAndSettle();
+
+      expect(changedValue?.text, 'Apple');
+    });
+
+    testWidgets('onChange callback called when tab completes inline suggestion', (tester) async {
+      TextEditingValue? changedValue;
+      final focus = autoDispose(FocusNode());
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FAutocomplete(
+            key: key,
+            control: .managed(controller: controller, onChange: (value) => changedValue = value),
+            focusNode: focus,
+            items: fruits,
+          ),
+        ),
+      );
+
+      await tester.enterText(find.byKey(key), 'app');
+      await tester.pumpAndSettle();
+
+      await tester.sendKeyEvent(.tab);
+      await tester.pumpAndSettle();
+
+      expect(controller.text, 'Apple');
+      expect(changedValue?.text, 'Apple');
+    });
+
+    testWidgets('onChange callback called when arrow-key navigation previews a suggestion', (tester) async {
+      TextEditingValue? changedValue;
+      final focus = autoDispose(FocusNode());
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FAutocomplete(
+            key: key,
+            control: .managed(controller: controller, onChange: (value) => changedValue = value),
+            focusNode: focus,
+            items: fruits,
+          ),
+        ),
+      );
+
+      await tester.enterText(find.byKey(key), 'app');
+      await tester.pumpAndSettle();
+
+      await tester.sendKeyEvent(.arrowDown);
+      await tester.pumpAndSettle();
+
+      expect(controller.text, 'Apple');
+      expect(changedValue?.text, 'Apple');
+    });
+
+    testWidgets('onChange callback called when popover dismiss restores prior text', (tester) async {
+      final changes = <String>[];
+      final focus = autoDispose(FocusNode());
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FAutocomplete(
+            key: key,
+            control: .managed(controller: controller, onChange: (value) => changes.add(value.text)),
+            focusNode: focus,
+            items: fruits,
+          ),
+        ),
+      );
+
+      await tester.enterText(find.byKey(key), 'app');
+      await tester.pumpAndSettle();
+
+      await tester.sendKeyEvent(.arrowDown);
+      await tester.pumpAndSettle();
+      expect(controller.text, 'Apple');
+
+      await tester.sendKeyEvent(.escape);
+      await tester.pumpAndSettle();
+
+      expect(controller.text, 'app');
+      expect(changes.last, 'app');
+      expect(changes.where((c) => c == 'app').length, 2);
+    });
+  });
 
   testWidgets('enter closes popover', (tester) async {
     final focus = autoDispose(FocusNode());

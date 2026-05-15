@@ -775,6 +775,8 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
   late FocusNode _fieldFocus;
   late FocusScopeNode _popoverFocus;
   bool _tapFocus = false;
+  bool _mutating = false;
+  bool _itemTap = false;
   String? _previous;
   int _monotonic = 0;
 
@@ -831,18 +833,20 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
       return;
     }
 
-    setState(() {
-      _previous = _controller.text;
-      _controller.loadSuggestions(_data = widget.filter(_controller.text)).ignore();
-    });
-
+    _previous = _controller.text;
     if (widget.control case FAutocompleteManagedControl(:final onChange?)) {
       onChange(_controller.value);
     }
 
-    // Skip if text changed programmatically while the field isn't focused.
-    if (_fieldFocus.hasFocus) {
-      _toggle();
+    if (!_mutating) {
+      setState(() {
+        _controller.loadSuggestions(_data = widget.filter(_controller.text)).ignore();
+      });
+
+      // Skip if text changed programmatically while the field isn't focused.
+      if (_fieldFocus.hasFocus) {
+        _toggle();
+      }
     }
   }
 
@@ -855,12 +859,14 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
       }
       _tapFocus = false;
       _toggle();
-      // Hide the popover when the textfield loses focus and there are no completions to prevent focus from being trapped
-      // in the empty popover.
-    } else if (!_fieldFocus.hasFocus && _popoverFocus.descendants.isEmpty) {
+      // Hide the popover when focus leaves the autocomplete entirely (field and popover both unfocused). Keeps the
+      // popover open while the user is keyboard-navigating items (popover has focus), or while an item tap is
+      // unfocusing the field (handled by onPress's autoHide flag instead).
+    } else if (!_fieldFocus.hasFocus && !_popoverFocus.hasFocus && !_itemTap) {
       _popoverController.hide();
     }
 
+    _itemTap = false;
     _restore = null;
   }
 
@@ -997,7 +1003,10 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
         forceErrorText: widget.forceErrorText,
         errorBuilder: widget.errorBuilder,
         builder: (context, _, variants, field) => FocusTraversalGroup(
-          policy: SkipDelegateTraversalPolicy(FocusTraversalGroup.maybeOf(context) ?? ReadingOrderTraversalPolicy()),
+          policy: SkipDelegateTraversalPolicy(
+            FocusTraversalGroup.maybeOf(context) ?? ReadingOrderTraversalPolicy(),
+            _popoverFocus,
+          ),
           child: FPopover(
             control: .managed(controller: _popoverController),
             style: style.contentStyle,
@@ -1015,8 +1024,9 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
             cutoutBuilder: widget.contentCutoutBuilder,
             onTapHide: () {
               if (_restore case final restore?) {
-                _previous = restore;
+                _mutating = true;
                 _controller.text = restore;
+                _mutating = false;
               }
               widget.contentOnTapHide?.call();
             },
@@ -1031,7 +1041,9 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
                         .macOS || .windows || .linux => true,
                         _ => false,
                       };
+
                   if (!retainFocus) {
+                    _itemTap = true;
                     _fieldFocus.unfocus(); // Hides on-screen keyboard.
                   }
 
@@ -1039,13 +1051,15 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
                     _popoverController.hide();
                   }
 
-                  _previous = value;
+                  _mutating = true;
                   _controller.text = value;
+                  _mutating = false;
                 },
                 onFocus: (value) {
                   _restore ??= _controller.text;
-                  _previous = value;
+                  _mutating = true;
                   _controller.text = value;
+                  _mutating = false;
                 },
                 child: widget.popoverBuilder(
                   context,
@@ -1074,13 +1088,9 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
                 bindings: {
                   const SingleActivator(.escape): _popoverController.hide,
                   const SingleActivator(.arrowDown): () => _popoverFocus.descendants.firstOrNull?.requestFocus(),
-                  if (_controller.current case (:final replacement, completion: final _))
-                    const SingleActivator(.tab): () => _complete(replacement),
-                  if (_controller.current case (
-                    :final replacement,
-                    completion: final _,
-                  ) when widget.rightArrowToComplete)
-                    const SingleActivator(.arrowRight): () => _complete(replacement),
+                  if (_controller.current != null) const SingleActivator(.tab): _complete,
+                  if (_controller.current != null && widget.rightArrowToComplete)
+                    const SingleActivator(.arrowRight): _complete,
                 },
                 child: widget.builder(context, style, variants, field),
               ),
@@ -1091,12 +1101,13 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
     );
   }
 
-  void _complete(String replacement) {
+  void _complete() {
     if (widget.autoHide) {
       _popoverController.hide();
     }
-    _previous = replacement;
+    _mutating = true;
     _controller.complete();
+    _mutating = false;
   }
 }
 
