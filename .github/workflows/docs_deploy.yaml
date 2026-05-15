@@ -87,7 +87,7 @@ jobs:
       - run: flutter build web
 
       - name: Publish to Cloudflare Pages
-        uses: cloudflare/wrangler-action@v3
+        uses: cloudflare/wrangler-action@v4
         id: publish-docs
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}

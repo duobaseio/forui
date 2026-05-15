@@ -42,7 +42,7 @@ jobs:
           path: ./docs-snippets--build
           github-token: ${{ secrets.GITHUB_TOKEN }}
           run-id: ${{ github.event.workflow_run.id }}
-      - uses: cloudflare/wrangler-action@v3
+      - uses: cloudflare/wrangler-action@v4
         id: publish-docs-snippets
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
