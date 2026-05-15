@@ -776,6 +776,7 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
   late FocusScopeNode _popoverFocus;
   bool _tapFocus = false;
   bool _mutating = false;
+  bool _itemTap = false;
   String? _previous;
   int _monotonic = 0;
 
@@ -843,7 +844,7 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
       });
 
       // Skip if text changed programmatically while the field isn't focused.
-      if ( _fieldFocus.hasFocus) {
+      if (_fieldFocus.hasFocus) {
         _toggle();
       }
     }
@@ -858,12 +859,14 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
       }
       _tapFocus = false;
       _toggle();
-      // Hide the popover when the textfield loses focus and there are no completions to prevent focus from being trapped
-      // in the empty popover.
-    } else if (!_fieldFocus.hasFocus && _popoverFocus.descendants.isEmpty) {
+      // Hide the popover when focus leaves the autocomplete entirely (field and popover both unfocused). Keeps the
+      // popover open while the user is keyboard-navigating items (popover has focus), or while an item tap is
+      // unfocusing the field (handled by onPress's autoHide flag instead).
+    } else if (!_fieldFocus.hasFocus && !_popoverFocus.hasFocus && !_itemTap) {
       _popoverController.hide();
     }
 
+    _itemTap = false;
     _restore = null;
   }
 
@@ -1000,7 +1003,10 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
         forceErrorText: widget.forceErrorText,
         errorBuilder: widget.errorBuilder,
         builder: (context, _, variants, field) => FocusTraversalGroup(
-          policy: SkipDelegateTraversalPolicy(FocusTraversalGroup.maybeOf(context) ?? ReadingOrderTraversalPolicy()),
+          policy: SkipDelegateTraversalPolicy(
+            FocusTraversalGroup.maybeOf(context) ?? ReadingOrderTraversalPolicy(),
+            _popoverFocus,
+          ),
           child: FPopover(
             control: .managed(controller: _popoverController),
             style: style.contentStyle,
@@ -1035,7 +1041,9 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
                         .macOS || .windows || .linux => true,
                         _ => false,
                       };
+
                   if (!retainFocus) {
+                    _itemTap = true;
                     _fieldFocus.unfocus(); // Hides on-screen keyboard.
                   }
 
