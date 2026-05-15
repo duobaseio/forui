@@ -1088,13 +1088,9 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
                 bindings: {
                   const SingleActivator(.escape): _popoverController.hide,
                   const SingleActivator(.arrowDown): () => _popoverFocus.descendants.firstOrNull?.requestFocus(),
-                  if (_controller.current case (:final replacement, completion: final _))
-                    const SingleActivator(.tab): () => _complete(replacement),
-                  if (_controller.current case (
-                    :final replacement,
-                    completion: final _,
-                  ) when widget.rightArrowToComplete)
-                    const SingleActivator(.arrowRight): () => _complete(replacement),
+                  if (_controller.current != null) const SingleActivator(.tab): _complete,
+                  if (_controller.current != null && widget.rightArrowToComplete)
+                    const SingleActivator(.arrowRight): _complete,
                 },
                 child: widget.builder(context, style, variants, field),
               ),
@@ -1105,7 +1101,7 @@ class _State extends State<FAutocomplete> with TickerProviderStateMixin {
     );
   }
 
-  void _complete(String replacement) {
+  void _complete() {
     if (widget.autoHide) {
       _popoverController.hide();
     }
