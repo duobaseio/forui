@@ -11,10 +11,14 @@
 
 
 ### `FAutocomplete`
-* Add `FAutocomplete.defaultContentErrorBuilder` and default `contentErrorBuilder` to it.
+* Add `FAutocomplete.text(...)`.
+* Add `FAutocomplete.textBuilder(...)`.
+* Add `FAutocomplete.format`.
+* Add `FAutocomplete.parse`.
 
 * **Breaking** Add `FAutocompleteContentStyle` parameter to `FAutocomplete.contentErrorBuilder` callback.
-
+* **Breaking** Change `FAutocomplete` to `FAutocomplete<T>`.
+* **Breaking** Change `FAutoCompleteContentBuilder` to `FAutocompleteContentBuilder<T>`.
 * Change `FAutocomplete.contentLoadingBuilder` to nullable; pass `null` to hide the popover while loading.
 * Change `FAutocomplete.contentEmptyBuilder` to nullable; pass `null` to hide the popover when there are no results.
 * Change `FAutocomplete.contentErrorBuilder`; pass `null` to hide the popover when there is an error.

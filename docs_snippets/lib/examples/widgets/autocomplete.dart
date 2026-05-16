@@ -6,7 +6,18 @@ import 'package:forui/forui.dart';
 import 'package:docs_snippets/example.dart';
 import 'package:docs_snippets/main.dart';
 
-const features = ['Keyboard navigation', 'Typeahead suggestions', 'Tab to complete'];
+class Feature {
+  final String name;
+  final String description;
+
+  const Feature(this.name, this.description);
+}
+
+const features = [
+  Feature('Keyboard navigation', 'Use arrow keys to walk the popover suggestions'),
+  Feature('Typeahead suggestions', 'See the rest of a suggestion inline as you type'),
+  Feature('Tab to complete', 'Press Tab to accept the current inline suggestion'),
+];
 
 const fruits = ['Apple', 'Banana', 'Orange', 'Grape', 'Strawberry', 'Pineapple'];
 
@@ -46,13 +57,16 @@ const timezones = {
 };
 
 @RoutePage()
-@Options(include: [features])
+@Options(include: [Feature, features])
 class AutocompletePage extends Example {
   AutocompletePage({@queryParam super.theme});
 
   @override
-  Widget example(BuildContext _) =>
-      FAutocomplete(label: const Text('Autocomplete'), hint: 'What can it do?', items: features);
+  Widget example(BuildContext _) => FAutocomplete<Feature>(
+    label: const Text('Autocomplete'),
+    hint: 'What can it do?',
+    items: {for (final feature in features) feature.name: feature},
+  );
 }
 
 @RoutePage()
@@ -60,7 +74,7 @@ class DetailedAutocompletePage extends Example {
   DetailedAutocompletePage({@queryParam super.theme}) : super(alignment: .topCenter, top: 20);
 
   @override
-  Widget example(BuildContext _) => FAutocomplete.builder(
+  Widget example(BuildContext _) => FAutocomplete.textBuilder(
     hint: 'Type to search',
     filter: (query) => const ['Bug', 'Feature', 'Question'].where((i) => i.toLowerCase().contains(query.toLowerCase())),
     contentBuilder: (context, query, suggestions) => [
@@ -96,7 +110,7 @@ class SectionAutocompletePage extends Example {
   SectionAutocompletePage({@queryParam super.theme}) : super(alignment: .topCenter, top: 20);
 
   @override
-  Widget example(BuildContext _) => FAutocomplete.builder(
+  Widget example(BuildContext _) => FAutocomplete.textBuilder(
     hint: 'Type to search timezones',
     filter: (query) => timezones.values
         .expand((list) => list)
@@ -114,11 +128,11 @@ class DividerAutocompletePage extends Example {
   DividerAutocompletePage({@queryParam super.theme}) : super(alignment: .topCenter, top: 20);
 
   @override
-  Widget example(BuildContext _) => FAutocomplete.builder(
+  Widget example(BuildContext _) => FAutocomplete.textBuilder(
     hint: 'Type to search levels',
     filter: (query) =>
         const ['1A', '1B', '2A', '2B', '3', '4'].where((i) => i.toLowerCase().contains(query.toLowerCase())),
-    contentBuilder: (context, query, suggestions) => <FAutocompleteItemMixin>[
+    contentBuilder: (context, query, suggestions) => <FAutocompleteItemMixin<String>>[
       .richSection(
         label: const Text('Level 1'),
         divider: .indented,
@@ -130,7 +144,7 @@ class DividerAutocompletePage extends Example {
       .section(label: const Text('Level 2'), items: ['2A', '2B'].where(suggestions.contains).toList()),
       if (suggestions.contains('3')) .item(value: '3'),
       if (suggestions.contains('4')) .item(value: '4'),
-    ].where((item) => item is! FAutocompleteSection || item.children.isNotEmpty).toList(),
+    ].where((item) => item is! FAutocompleteSection<String> || item.children.isNotEmpty).toList(),
   );
 }
 
@@ -140,7 +154,7 @@ class AsyncAutocompletePage extends Example {
   AsyncAutocompletePage({@queryParam super.theme}) : super(alignment: .topCenter, top: 20);
 
   @override
-  Widget example(BuildContext _) => FAutocomplete.builder(
+  Widget example(BuildContext _) => FAutocomplete.textBuilder(
     hint: 'Type to search fruits',
     filter: (query) async {
       await Future.delayed(const Duration(seconds: 3));
@@ -156,7 +170,7 @@ class AsyncLoadingAutocompletePage extends Example {
   AsyncLoadingAutocompletePage({@queryParam super.theme}) : super(alignment: .topCenter, top: 20);
 
   @override
-  Widget example(BuildContext _) => FAutocomplete.builder(
+  Widget example(BuildContext _) => FAutocomplete.textBuilder(
     hint: 'Type to search fruits',
     filter: (query) async {
       await Future.delayed(const Duration(seconds: 3));
@@ -178,7 +192,7 @@ class AsyncErrorAutocompletePage extends Example {
   AsyncErrorAutocompletePage({@queryParam super.theme}) : super(alignment: .topCenter, top: 20);
 
   @override
-  Widget example(BuildContext _) => FAutocomplete.builder(
+  Widget example(BuildContext _) => FAutocomplete.textBuilder(
     hint: 'Type to search fruits',
     filter: (query) async {
       await Future.delayed(const Duration(seconds: 3));
@@ -200,7 +214,7 @@ class ClearableAutocompletePage extends Example {
   ClearableAutocompletePage({@queryParam super.theme}) : super(alignment: .topCenter, top: 20);
 
   @override
-  Widget example(BuildContext _) => FAutocomplete(
+  Widget example(BuildContext _) => FAutocomplete.text(
     hint: 'Type to search fruits',
     // {@highlight}
     clearable: (value) => value.text.isNotEmpty,
@@ -215,7 +229,7 @@ class PopoverBuilderAutocompletePage extends Example {
   PopoverBuilderAutocompletePage({@queryParam super.theme}) : super(alignment: .topCenter, top: 20);
 
   @override
-  Widget example(BuildContext _) => FAutocomplete(
+  Widget example(BuildContext _) => FAutocomplete.text(
     hint: 'Type to search fruits',
     items: fruits,
     // {@highlight}
@@ -256,7 +270,7 @@ class _FormAutocompletePageState extends StatefulExampleState<FormAutocompletePa
       crossAxisAlignment: .start,
       spacing: 16,
       children: [
-        FAutocomplete(
+        FAutocomplete.text(
           label: const Text('Department'),
           description: const Text('Type to search your dream department'),
           hint: 'Search departments',

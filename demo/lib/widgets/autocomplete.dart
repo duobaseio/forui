@@ -27,7 +27,7 @@ class Autocomplete extends StatelessWidget {
     padding: const EdgeInsets.all(32),
     child: SizedBox(
       width: 350,
-      child: FAutocomplete(
+      child: FAutocomplete.text(
         label: const Text('Fruit'),
         hint: 'Type a fruit',
         items: _fruits,

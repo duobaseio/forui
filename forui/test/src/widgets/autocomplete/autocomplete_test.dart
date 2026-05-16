@@ -50,7 +50,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: StatefulBuilder(
-            builder: (context, setState) => FAutocomplete(
+            builder: (context, setState) => FAutocomplete.text(
               key: key,
               control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
               items: fruits,
@@ -68,7 +68,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: StatefulBuilder(
-            builder: (context, setState) => FAutocomplete(
+            builder: (context, setState) => FAutocomplete.text(
               key: key,
               control: .lifted(value: value, onChange: (v) => setState(() => value = v)),
               items: fruits,
@@ -96,7 +96,7 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FAutocomplete(
+          child: FAutocomplete.text(
             key: key,
             control: .managed(controller: controller, onChange: (value) => changedValue = value),
             items: fruits,
@@ -116,7 +116,7 @@ void main() {
       final focus = autoDispose(FocusNode());
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FAutocomplete(key: key, items: fruits, focusNode: focus),
+          child: FAutocomplete.text(key: key, items: fruits, focusNode: focus),
         ),
       );
 
@@ -127,7 +127,7 @@ void main() {
       final focus = autoDispose(FocusNode());
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FAutocomplete(
+          child: FAutocomplete.text(
             key: key,
             control: .managed(controller: controller),
             focusNode: focus,
@@ -152,7 +152,7 @@ void main() {
     testWidgets('typeahead not shown when disabled but focused', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FAutocomplete(
+          child: FAutocomplete.text(
             key: key,
             control: .managed(controller: controller),
             enabled: false,
@@ -175,7 +175,7 @@ void main() {
       final focus = autoDispose(FocusNode());
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FAutocomplete(
+          child: FAutocomplete.text(
             key: key,
             popoverControl: .managed(controller: popoverController),
             focusNode: focus,
@@ -202,7 +202,7 @@ void main() {
         TestScaffold.app(
           child: Column(
             children: [
-              FAutocomplete(
+              FAutocomplete.text(
                 key: key,
                 popoverControl: .managed(controller: popoverController),
                 focusNode: autocompleteFocus,
@@ -234,7 +234,7 @@ void main() {
         TestScaffold.app(
           child: Column(
             children: [
-              FAutocomplete(
+              FAutocomplete.text(
                 key: key,
                 popoverControl: .managed(controller: popoverController),
                 focusNode: autocompleteFocus,
@@ -265,7 +265,7 @@ void main() {
         TestScaffold.app(
           child: Column(
             children: [
-              FAutocomplete(
+              FAutocomplete.text(
                 key: key,
                 control: .managed(controller: controller),
                 popoverControl: .managed(controller: popoverController),
@@ -300,7 +300,7 @@ void main() {
         TestScaffold.app(
           child: Column(
             children: [
-              FAutocomplete(
+              FAutocomplete.text(
                 key: key,
                 control: .managed(controller: controller),
                 popoverControl: .managed(controller: popoverController),
@@ -337,7 +337,7 @@ void main() {
         TestScaffold.app(
           child: Column(
             children: [
-              FAutocomplete(
+              FAutocomplete.text(
                 key: key,
                 control: .managed(controller: controller),
                 popoverControl: .managed(controller: popoverController),
@@ -370,7 +370,7 @@ void main() {
         TestScaffold.app(
           child: Column(
             children: [
-              FAutocomplete(
+              FAutocomplete.text(
                 key: key,
                 control: .managed(controller: controller),
                 popoverControl: .managed(controller: popoverController),
@@ -406,7 +406,7 @@ void main() {
         TestScaffold.app(
           child: Column(
             children: [
-              FAutocomplete(
+              FAutocomplete.text(
                 key: key,
                 popoverControl: .managed(controller: popoverController),
                 focusNode: autocompleteFocus,
@@ -438,7 +438,7 @@ void main() {
         TestScaffold.app(
           child: Column(
             children: [
-              FAutocomplete(
+              FAutocomplete.text(
                 key: key,
                 popoverControl: .managed(controller: popoverController),
                 focusNode: autocompleteFocus,
@@ -471,7 +471,7 @@ void main() {
         final focus = autoDispose(FocusNode());
         await tester.pumpWidget(
           TestScaffold.app(
-            child: FAutocomplete(
+            child: FAutocomplete.text(
               key: key,
               control: .managed(controller: controller),
               popoverControl: .managed(controller: popoverController),
@@ -502,7 +502,7 @@ void main() {
         final focus = autoDispose(FocusNode());
         await tester.pumpWidget(
           TestScaffold.app(
-            child: FAutocomplete(
+            child: FAutocomplete.text(
               key: key,
               control: .managed(controller: controller),
               popoverControl: .managed(controller: popoverController),
@@ -531,7 +531,7 @@ void main() {
         final focus = autoDispose(FocusNode());
         await tester.pumpWidget(
           TestScaffold.app(
-            child: FAutocomplete(
+            child: FAutocomplete.text(
               key: key,
               control: .managed(controller: controller),
               popoverControl: .managed(controller: popoverController),
@@ -563,7 +563,7 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FAutocomplete(
+          child: FAutocomplete.text(
             key: key,
             control: .managed(controller: controller, onChange: (value) => changedValue = value),
             items: fruits,
@@ -586,7 +586,7 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FAutocomplete(
+          child: FAutocomplete.text(
             key: key,
             control: .managed(controller: controller, onChange: (value) => changedValue = value),
             focusNode: focus,
@@ -611,7 +611,7 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FAutocomplete(
+          child: FAutocomplete.text(
             key: key,
             control: .managed(controller: controller, onChange: (value) => changedValue = value),
             focusNode: focus,
@@ -636,7 +636,7 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FAutocomplete(
+          child: FAutocomplete.text(
             key: key,
             control: .managed(controller: controller, onChange: (value) => changes.add(value.text)),
             focusNode: focus,
@@ -665,7 +665,7 @@ void main() {
     final focus = autoDispose(FocusNode());
     await tester.pumpWidget(
       TestScaffold.app(
-        child: FAutocomplete(
+        child: FAutocomplete.text(
           key: key,
           control: .managed(controller: controller),
           popoverControl: .managed(controller: popoverController),
@@ -696,7 +696,7 @@ void main() {
         final focus = autoDispose(FocusNode());
         await tester.pumpWidget(
           TestScaffold.app(
-            child: FAutocomplete(
+            child: FAutocomplete.text(
               key: key,
               control: .managed(controller: controller),
               popoverControl: .managed(controller: popoverController),
@@ -733,7 +733,7 @@ void main() {
         final focus = autoDispose(FocusNode());
         await tester.pumpWidget(
           TestScaffold.app(
-            child: FAutocomplete(
+            child: FAutocomplete.text(
               key: key,
               control: .managed(controller: controller),
               popoverControl: .managed(controller: popoverController),
@@ -770,7 +770,7 @@ void main() {
         final focus = autoDispose(FocusNode());
         await tester.pumpWidget(
           TestScaffold.app(
-            child: FAutocomplete(
+            child: FAutocomplete.text(
               key: key,
               popoverControl: .managed(controller: popoverController),
               focusNode: focus,
@@ -805,7 +805,7 @@ void main() {
     testWidgets('default shows popover with localized message when results are empty', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FAutocomplete(
+          child: FAutocomplete.text(
             key: key,
             popoverControl: .managed(controller: popoverController),
             items: fruits,
@@ -823,7 +823,7 @@ void main() {
     testWidgets('null hides popover when results are empty', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FAutocomplete(
+          child: FAutocomplete.text(
             key: key,
             popoverControl: .managed(controller: popoverController),
             items: fruits,
@@ -841,7 +841,7 @@ void main() {
     testWidgets('null reshows popover when results become non-empty', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FAutocomplete(
+          child: FAutocomplete.text(
             key: key,
             popoverControl: .managed(controller: popoverController),
             items: fruits,
@@ -862,7 +862,7 @@ void main() {
     testWidgets('non-null shows popover when results are empty', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FAutocomplete(
+          child: FAutocomplete.text(
             key: key,
             popoverControl: .managed(controller: popoverController),
             items: fruits,
@@ -883,7 +883,7 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FAutocomplete.builder(
+          child: FAutocomplete.textBuilder(
             key: key,
             popoverControl: .managed(controller: popoverController),
             filter: (_) => completer.future,
@@ -911,7 +911,7 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FAutocomplete.builder(
+          child: FAutocomplete.textBuilder(
             key: key,
             popoverControl: .managed(controller: popoverController),
             filter: (_) => completer.future,
@@ -943,7 +943,7 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FAutocomplete.builder(
+          child: FAutocomplete.textBuilder(
             key: key,
             popoverControl: .managed(controller: popoverController),
             filter: (_) => completer.future,
@@ -965,7 +965,7 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FAutocomplete.builder(
+          child: FAutocomplete.textBuilder(
             key: key,
             popoverControl: .managed(controller: popoverController),
             focusNode: focus,
@@ -996,7 +996,7 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FAutocomplete.builder(
+          child: FAutocomplete.textBuilder(
             key: key,
             popoverControl: .managed(controller: popoverController),
             filter: (_) => completer.future,
@@ -1020,7 +1020,7 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FAutocomplete.builder(
+          child: FAutocomplete.textBuilder(
             key: key,
             popoverControl: .managed(controller: popoverController),
             filter: (_) => completer.future,

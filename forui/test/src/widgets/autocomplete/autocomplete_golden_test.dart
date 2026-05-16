@@ -35,7 +35,7 @@ void main() {
     testWidgets('default', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(
-          child: FAutocomplete(
+          child: FAutocomplete.text(
             key: key,
             style: TestScaffold.blueScreen.autocompleteStyle.copyWith(
               fieldStyles: .delta([.all(const .delta(cursorColor: Color(0xFF03A9F4)))]),
@@ -54,7 +54,7 @@ void main() {
     testWidgets('builder', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(
-          child: FAutocomplete.builder(
+          child: FAutocomplete.textBuilder(
             key: key,
             style: TestScaffold.blueScreen.autocompleteStyle.copyWith(
               fieldStyles: .delta([.all(const .delta(cursorColor: Color(0xFF03A9F4)))]),
@@ -74,7 +74,7 @@ void main() {
     testWidgets('waiting', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(
-          child: FAutocomplete.builder(
+          child: FAutocomplete.textBuilder(
             key: key,
             style: TestScaffold.blueScreen.autocompleteStyle.copyWith(
               fieldStyles: .delta([.all(const .delta(cursorColor: Color(0xFF03A9F4)))]),
@@ -97,7 +97,7 @@ void main() {
     testWidgets('no completion', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(
-          child: FAutocomplete.builder(
+          child: FAutocomplete.textBuilder(
             key: key,
             style: TestScaffold.blueScreen.autocompleteStyle.copyWith(
               fieldStyles: .delta([.all(const .delta(cursorColor: Color(0xFF03A9F4)))]),
@@ -120,7 +120,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          child: FAutocomplete(
+          child: FAutocomplete.text(
             key: key,
             label: const Text('Fruits'),
             description: const Text('Select your favorite fruits'),
@@ -140,7 +140,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          child: FAutocomplete(
+          child: FAutocomplete.text(
             key: key,
             control: const .managed(initial: TextEditingValue(text: 'Zebra')),
             items: fruits,
@@ -160,7 +160,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          child: FAutocomplete(
+          child: FAutocomplete.text(
             key: key,
             control: const .managed(initial: TextEditingValue(text: 'App')),
             items: fruits,
@@ -184,7 +184,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FAutocomplete(key: key, items: fruits),
+          child: FAutocomplete.text(key: key, items: fruits),
         ),
       );
 
@@ -205,7 +205,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FAutocomplete(key: key, items: fruits, autoHide: false),
+          child: FAutocomplete.text(key: key, items: fruits, autoHide: false),
         ),
       );
 
@@ -229,7 +229,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FAutocomplete(
+          child: FAutocomplete.text(
             key: key,
             items: fruits,
             enabled: false,
@@ -250,7 +250,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: Alignment.topCenter,
-          child: FAutocomplete(
+          child: FAutocomplete.text(
             key: key,
             label: const Text('Fruits'),
             description: const Text('Select your favorite fruits'),
@@ -275,7 +275,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         alignment: Alignment.topCenter,
-        child: FAutocomplete(key: key, hint: 'Type to search', items: fruits),
+        child: FAutocomplete.text(key: key, hint: 'Type to search', items: fruits),
       ),
     );
 
@@ -289,7 +289,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         alignment: Alignment.topCenter,
-        child: FAutocomplete(
+        child: FAutocomplete.text(
           key: key,
           hint: 'Type to search',
           control: const .managed(initial: TextEditingValue(text: 'App')),
@@ -311,7 +311,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         alignment: Alignment.topCenter,
-        child: FAutocomplete(
+        child: FAutocomplete.text(
           key: key,
           control: const .managed(initial: TextEditingValue(text: 'B')),
           items: fruits,
@@ -333,7 +333,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         alignment: Alignment.topCenter,
-        child: FAutocomplete(key: key, focusNode: focus, retainFocus: true, items: fruits),
+        child: FAutocomplete.text(key: key, focusNode: focus, retainFocus: true, items: fruits),
       ),
     );
 
@@ -356,7 +356,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         alignment: Alignment.topCenter,
-        child: FAutocomplete(key: key, focusNode: focus, retainFocus: true, items: fruits),
+        child: FAutocomplete.text(key: key, focusNode: focus, retainFocus: true, items: fruits),
       ),
     );
 
@@ -378,7 +378,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         alignment: .topCenter,
-        child: FAutocomplete(
+        child: FAutocomplete.text(
           key: key,
           items: fruits,
           popoverBuilder: (context, _, _, content) => SingleChildScrollView(

@@ -34,7 +34,7 @@ void main() {
     testWidgets('items & sections', (tester) async {
       await tester.pumpWidget(
         TestScaffold.blue(
-          child: FAutocomplete.builder(
+          child: FAutocomplete.textBuilder(
             key: key,
             style: TestScaffold.blueScreen.autocompleteStyle.copyWith(
               fieldStyles: .delta([.all(const .delta(cursorColor: Color(0xFF03A9F4)))]),
@@ -60,7 +60,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          child: FAutocomplete.builder(
+          child: FAutocomplete.textBuilder(
             key: key,
             label: const Text('Fruits'),
             description: const Text('Select your favorite fruits'),
@@ -84,7 +84,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          child: FAutocomplete.builder(
+          child: FAutocomplete.textBuilder(
             key: key,
             label: const Text('Fruits'),
             description: const Text('Select your favorite fruits'),
@@ -110,7 +110,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: .topCenter,
-          child: FAutocomplete(key: key, items: const ['item']),
+          child: FAutocomplete.text(key: key, items: const ['item']),
         ),
       );
 
@@ -132,7 +132,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: .topCenter,
-          child: FAutocomplete(key: key, items: const ['item']),
+          child: FAutocomplete.text(key: key, items: const ['item']),
         ),
       );
 
@@ -153,7 +153,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: .topCenter,
-          child: FAutocomplete.builder(
+          child: FAutocomplete.textBuilder(
             key: key,
             filter: (query) => ['v'],
             contentBuilder: (_, _, _) => [
@@ -175,7 +175,7 @@ void main() {
       TestScaffold.app(
         theme: FThemes.neutral.light.desktop,
         alignment: .topCenter,
-        child: FAutocomplete(key: key, items: const ['Apple', 'Banana']),
+        child: FAutocomplete.text(key: key, items: const ['Apple', 'Banana']),
       ),
     );
 

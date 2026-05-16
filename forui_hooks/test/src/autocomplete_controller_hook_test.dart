@@ -19,7 +19,7 @@ void main() {
             controller = useFAutocompleteController();
             return FAutocomplete(
               control: .managed(controller: controller),
-              items: const [],
+              items: const {},
             );
           },
         ),

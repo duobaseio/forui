@@ -17,15 +17,15 @@ import 'package:forui/src/widgets/autocomplete/autocomplete_controller.dart';
 part 'autocomplete_item.design.dart';
 
 /// A marker interface which denotes that mixed-in widgets can be used in a [FAutocomplete].
-mixin FAutocompleteItemMixin on Widget {
+mixin FAutocompleteItemMixin<T> on Widget {
   /// {@macro forui.widgets.FAutocompleteSection.new}
   ///
   /// For more control over the appearance of individual items, use [richSection].
   ///
   /// This function is a shorthand for [FAutocompleteSection.new].
-  static FAutocompleteSection section({
+  static FAutocompleteSection<T> section<T>({
     required Widget label,
-    required List<String> items,
+    required List<T> items,
     FAutocompleteSectionStyleDelta style = const .context(),
     bool? enabled,
     FItemDivider divider = .none,
@@ -35,9 +35,9 @@ mixin FAutocompleteItemMixin on Widget {
   /// {@macro forui.widgets.FAutocompleteSection.rich}
   ///
   /// This function is a shorthand for [FAutocompleteSection.rich].
-  static FAutocompleteSection richSection({
+  static FAutocompleteSection<T> richSection<T>({
     required Widget label,
-    required List<FAutocompleteItem> children,
+    required List<FAutocompleteItem<T>> children,
     FAutocompleteSectionStyleDelta style = const .context(),
     bool? enabled,
     FItemDivider divider = .none,
@@ -49,8 +49,8 @@ mixin FAutocompleteItemMixin on Widget {
   /// For even more control over the item's appearance, use [rawItem].
   ///
   /// This function is a shorthand for [FAutocompleteItem.new].
-  static FAutocompleteItem item({
-    required String value,
+  static FAutocompleteItem<T> item<T>({
+    required T value,
     FItemStyleDelta style = const .context(),
     bool? enabled,
     Widget? prefix,
@@ -72,9 +72,9 @@ mixin FAutocompleteItemMixin on Widget {
   /// {@macro forui.widgets.FAutocompleteItem.raw}
   ///
   /// This function is a shorthand for [FAutocompleteItem.raw].
-  static FAutocompleteItem rawItem({
+  static FAutocompleteItem<T> rawItem<T>({
     required Widget child,
-    required String value,
+    required T value,
     FItemStyleDelta style = const .context(),
     bool? enabled,
     Widget? prefix,
@@ -83,7 +83,7 @@ mixin FAutocompleteItemMixin on Widget {
 }
 
 /// A section in a [FAutocomplete] that can contain multiple [FAutocompleteItem]s.
-class FAutocompleteSection extends StatelessWidget with FAutocompleteItemMixin {
+class FAutocompleteSection<T> extends StatelessWidget with FAutocompleteItemMixin<T> {
   /// The style. Defaults to the [FAutocompleteSectionStyle] inherited from the parent [FAutocomplete].
   ///
   /// To modify the current style:
@@ -117,7 +117,7 @@ class FAutocompleteSection extends StatelessWidget with FAutocompleteItemMixin {
   final Widget label;
 
   /// The nested [FAutocompleteItem]s.
-  final List<FAutocompleteItem> children;
+  final List<FAutocompleteItem<T>> children;
 
   /// {@template forui.widgets.FAutocompleteSection.new}
   /// Creates a [FAutocompleteSection] from the given items.
@@ -126,14 +126,14 @@ class FAutocompleteSection extends StatelessWidget with FAutocompleteItemMixin {
   /// For more control over the appearance of individual items, use [FAutocompleteSection.rich].
   FAutocompleteSection({
     required Widget label,
-    required List<String> items,
+    required List<T> items,
     FAutocompleteSectionStyleDelta style = const .context(),
     bool? enabled,
     FItemDivider divider = .none,
     Key? key,
   }) : this.rich(
          label: label,
-         children: [for (final item in items) FAutocompleteItem.item(value: item)],
+         children: [for (final item in items) FAutocompleteItem<T>.item(value: item)],
          style: style,
          enabled: enabled,
          divider: divider,
@@ -295,7 +295,7 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
 }
 
 /// A suggestion in a [FAutocomplete] that can optionally be nested in a [FAutocompleteSection].
-abstract class FAutocompleteItem extends StatelessWidget with FAutocompleteItemMixin {
+abstract class FAutocompleteItem<T> extends StatelessWidget with FAutocompleteItemMixin<T> {
   /// The style. Defaults to the [FItemStyle] inherited from the parent [FAutocompleteSection] or [FAutocomplete].
   ///
   /// To modify the current style:
@@ -317,7 +317,7 @@ abstract class FAutocompleteItem extends StatelessWidget with FAutocompleteItemM
   final FItemStyleDelta style;
 
   /// The value.
-  final String value;
+  final T value;
 
   /// True if the item is enabled. Disabled items cannot be selected, and is skipped during traversal.
   ///
@@ -333,7 +333,7 @@ abstract class FAutocompleteItem extends StatelessWidget with FAutocompleteItemM
   /// For even more control over the item's appearance, use [FAutocompleteItem.raw].
   /// {@endtemplate}
   factory FAutocompleteItem({
-    required String value,
+    required T value,
     FItemStyleDelta style,
     bool? enabled,
     Widget? prefix,
@@ -341,7 +341,7 @@ abstract class FAutocompleteItem extends StatelessWidget with FAutocompleteItemM
     Widget? subtitle,
     Widget? suffix,
     Key? key,
-  }) = _AutocompleteItem;
+  }) = _AutocompleteItem<T>;
 
   /// Creates a [FAutocompleteItem] with a custom [title] and value.
   ///
@@ -350,7 +350,7 @@ abstract class FAutocompleteItem extends StatelessWidget with FAutocompleteItemM
   ///
   /// For even more control over the item's appearance, use [FAutocompleteItem.raw].
   factory FAutocompleteItem.item({
-    required String value,
+    required T value,
     FItemStyleDelta style,
     bool? enabled,
     Widget? prefix,
@@ -358,7 +358,7 @@ abstract class FAutocompleteItem extends StatelessWidget with FAutocompleteItemM
     Widget? subtitle,
     Widget? suffix,
     Key? key,
-  }) = FAutocompleteItem;
+  }) = FAutocompleteItem<T>;
 
   /// {@template forui.widgets.FAutocompleteItem.raw}
   /// Creates a [FAutocompleteItem] with raw layout that delegates to [FItem.raw].
@@ -368,12 +368,12 @@ abstract class FAutocompleteItem extends StatelessWidget with FAutocompleteItemM
   /// {@endtemplate}
   factory FAutocompleteItem.raw({
     required Widget child,
-    required String value,
+    required T value,
     FItemStyleDelta style,
     bool? enabled,
     Widget? prefix,
     Key? key,
-  }) = _RawAutocompleteItem;
+  }) = _RawAutocompleteItem<T>;
 
   const FAutocompleteItem._({required this.value, this.style = const .context(), this.enabled, this.prefix, super.key});
 
@@ -387,26 +387,25 @@ abstract class FAutocompleteItem extends StatelessWidget with FAutocompleteItemM
   }
 }
 
-class _AutocompleteItem extends FAutocompleteItem {
+class _AutocompleteItem<T> extends FAutocompleteItem<T> {
   final Widget? subtitle;
-  final Widget title;
+  final Widget? title;
   final Widget? suffix;
 
-  _AutocompleteItem({
+  const _AutocompleteItem({
     required super.value,
     super.style,
     super.enabled,
     super.prefix,
     this.subtitle,
     this.suffix,
-    Widget? title,
+    this.title,
     super.key,
-  }) : title = title ?? Text(value),
-       super._();
+  }) : super._();
 
   @override
   Widget build(BuildContext context) {
-    final InheritedAutocompleteController(:popover, :onPress, :onFocus) = .of(context);
+    final InheritedAutocompleteController<T>(:popover, :format, :onPress, :onFocus) = .of<T>(context);
     final content = ContentData.of(context);
 
     final enabled = this.enabled ?? content.enabled;
@@ -421,14 +420,14 @@ class _AutocompleteItem extends FAutocompleteItem {
         }
       },
       prefix: prefix,
-      title: title,
+      title: title ?? Text(format(value)),
       subtitle: subtitle,
       suffix: suffix,
     );
   }
 }
 
-class _RawAutocompleteItem extends FAutocompleteItem {
+class _RawAutocompleteItem<T> extends FAutocompleteItem<T> {
   final Widget child;
 
   const _RawAutocompleteItem({
@@ -442,7 +441,7 @@ class _RawAutocompleteItem extends FAutocompleteItem {
 
   @override
   Widget build(BuildContext context) {
-    final InheritedAutocompleteController(:popover, :onPress, :onFocus) = .of(context);
+    final InheritedAutocompleteController<T>(:popover, :onPress, :onFocus) = .of<T>(context);
     final content = ContentData.of(context);
 
     final enabled = this.enabled ?? content.enabled;

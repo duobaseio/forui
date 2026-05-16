@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
@@ -65,18 +63,20 @@ class _ProxyController extends FAutocompleteController {
 }
 
 @internal
-class InheritedAutocompleteController extends InheritedWidget {
-  static InheritedAutocompleteController of(BuildContext context) {
-    assert(debugCheckHasAncestor<InheritedAutocompleteController>('$FAutocomplete', context));
-    return context.dependOnInheritedWidgetOfExactType<InheritedAutocompleteController>()!;
+class InheritedAutocompleteController<T> extends InheritedWidget {
+  static InheritedAutocompleteController<T> of<T>(BuildContext context) {
+    assert(debugCheckHasAncestor<InheritedAutocompleteController<T>>('$FAutocomplete', context));
+    return context.dependOnInheritedWidgetOfExactType<InheritedAutocompleteController<T>>()!;
   }
 
   final FPopoverController popover;
-  final ValueChanged<String> onPress;
-  final ValueChanged<String> onFocus;
+  final String Function(T option) format;
+  final void Function(T option) onPress;
+  final void Function(T option) onFocus;
 
   const InheritedAutocompleteController({
     required this.popover,
+    required this.format,
     required this.onPress,
     required this.onFocus,
     required super.child,
@@ -84,13 +84,15 @@ class InheritedAutocompleteController extends InheritedWidget {
   });
 
   @override
-  bool updateShouldNotify(InheritedAutocompleteController old) => popover != old.popover || onPress != old.onPress;
+  bool updateShouldNotify(InheritedAutocompleteController<T> old) =>
+      popover != old.popover || format != old.format || onPress != old.onPress || onFocus != old.onFocus;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('popover', popover))
+      ..add(ObjectFlagProperty.has('format', format))
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(ObjectFlagProperty.has('onFocus', onFocus));
   }
@@ -119,7 +121,6 @@ sealed class FAutocompleteControl with Diagnosticable, _$FAutocompleteControlMix
     FAutocompleteControl old,
     FAutocompleteController controller,
     VoidCallback callback,
-    FutureOr<Iterable<String>> Function(String) filter,
   );
 }
 
@@ -152,8 +153,7 @@ class FAutocompleteManagedControl extends FAutocompleteControl with _$FAutocompl
       super._();
 
   @override
-  FAutocompleteController createController(FutureOr<Iterable<String>> Function(String) _) =>
-      controller ?? .fromValue(initial);
+  FAutocompleteController createController() => controller ?? .fromValue(initial);
 }
 
 class _Lifted extends FAutocompleteControl with _$_LiftedMixin {
@@ -165,13 +165,11 @@ class _Lifted extends FAutocompleteControl with _$_LiftedMixin {
   const _Lifted({required this.value, required this.onChange}) : super._();
 
   @override
-  FAutocompleteController createController(FutureOr<Iterable<String>> Function(String) _) =>
-      _ProxyController(value, onChange);
+  FAutocompleteController createController() => _ProxyController(value, onChange);
 
   @override
-  void _updateController(FAutocompleteController controller, FutureOr<Iterable<String>> Function(String) filter) {
-    (controller as _ProxyController)
-      ..update(value, onChange)
-      ..loadSuggestions(filter(controller.text));
+  void _updateController(FAutocompleteController controller) {
+    // Suggestions are reloaded by the widget's state when the proxy controller's value notifies listeners.
+    (controller as _ProxyController).update(value, onChange);
   }
 }
