@@ -166,7 +166,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
     Widget Function(BuildContext context, FAutocompleteContentStyle style)? contentLoadingBuilder =
         defaultContentLoadingBuilder,
     Widget Function(BuildContext context, FAutocompleteContentStyle style, Object? error, StackTrace stackTrace)?
-    contentErrorBuilder =
+        contentErrorBuilder =
         defaultContentErrorBuilder,
     Key? key,
   }) => FAutocomplete<String>.builder(
@@ -359,7 +359,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
     Widget Function(BuildContext context, FAutocompleteContentStyle style)? contentLoadingBuilder =
         defaultContentLoadingBuilder,
     Widget Function(BuildContext context, FAutocompleteContentStyle style, Object? error, StackTrace stackTrace)?
-    contentErrorBuilder =
+        contentErrorBuilder =
         defaultContentErrorBuilder,
     Key? key,
   }) => FAutocomplete<String>.builder(
