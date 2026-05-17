@@ -71,9 +71,6 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
   );
 
   /// Creates a [FAutocomplete] for `String` suggestions from the given [items], with identity [format] and [parse].
-  ///
-  /// This is sugar over [FAutocomplete.new] for the common case where the option type is `String` and the display
-  /// string is the option itself.
   static FAutocomplete<String> text({
     required List<String> items,
     FAutocompleteControl control = const .managed(),
@@ -265,9 +262,6 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
 
   /// Creates a [FAutocomplete] for `String` suggestions that uses the given [filter] and [contentBuilder], with
   /// identity [format] and [parse].
-  ///
-  /// This is sugar over [FAutocomplete.builder] for the common case where the option type is `String` and the display
-  /// string is the option itself.
   static FAutocomplete<String> textBuilder({
     required FutureOr<Iterable<String>> Function(String query) filter,
     required FAutocompleteContentBuilder<String> contentBuilder,
@@ -773,7 +767,9 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
 
   /// Creates a [FAutocomplete] from the given [items].
   ///
-  /// For more control over the appearance of items, use [FAutocomplete.builder].
+  /// See:
+  /// * [FAutocomplete.builder] for more control over the appearance of items.
+  /// * [FAutocomplete.text] for a simpler autocomplete for `String` suggestions.
   FAutocomplete({
     required Map<String, T> items,
     String Function(T suggestion)? format,
@@ -972,6 +968,9 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
 
   /// Creates a [FAutocomplete] that uses the given [filter] to determine the results and the [contentBuilder] to build
   /// the content.
+  ///
+  /// See:
+  /// * [FAutocomplete.textBuilder] for a simpler autocomplete for `String` suggestions.
   const FAutocomplete.builder({
     required this.filter,
     required this.format,
