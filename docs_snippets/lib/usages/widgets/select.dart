@@ -37,6 +37,7 @@ final select = FSelect<String>(
   // {@endcategory}
   // {@category "Content"}
   autoHide: true,
+  retainFocus: null,
   popoverBuilder: (context, controller, popoverController, content) => content,
   contentAnchor: .topStart,
   fieldAnchor: .bottomStart,
@@ -101,6 +102,7 @@ final selectRich = FSelect<String>.rich(
   // {@endcategory}
   // {@category "Content"}
   autoHide: true,
+  retainFocus: null,
   popoverBuilder: (context, controller, popoverController, content) => content,
   contentAnchor: .topStart,
   fieldAnchor: .bottomStart,
@@ -170,6 +172,7 @@ final selectSearch = FSelect<String>.search(
   // {@endcategory}
   // {@category "Content"}
   autoHide: true,
+  retainFocus: null,
   popoverBuilder: (context, controller, popoverController, content) => content,
   searchFieldProperties: const FSelectSearchFieldProperties(),
   contentAnchor: .topStart,
@@ -238,6 +241,7 @@ final selectSearchBuilder = FSelect<String>.searchBuilder(
   // {@endcategory}
   // {@category "Content"}
   autoHide: true,
+  retainFocus: null,
   popoverBuilder: (context, controller, popoverController, content) => content,
   searchFieldProperties: const FSelectSearchFieldProperties(),
   contentAnchor: .topStart,

@@ -54,6 +54,7 @@ class _SearchSelect<T> extends FSelect<T> {
     super.contentCutout,
     super.contentCutoutBuilder,
     super.autoHide,
+    super.retainFocus,
     super.contentEmptyBuilder,
     super.contentScrollController,
     super.contentScrollHandles,

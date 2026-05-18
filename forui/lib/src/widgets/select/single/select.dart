@@ -212,6 +212,11 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// True if the select should be automatically hidden after an item is selected. Defaults to false.
   final bool autoHide;
 
+  /// Whether the field should retain focus after an item is selected.
+  ///
+  /// Defaults to true on desktop and false on touch.
+  final bool? retainFocus;
+
   /// The builder that is called when the select's content is empty. Defaults to [defaultContentEmptyBuilder].
   final Widget Function(BuildContext context, FSelectStyle style) contentEmptyBuilder;
 
@@ -279,6 +284,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     bool contentCutout = true,
     void Function(Path path, Rect bounds) contentCutoutBuilder = FModalBarrier.defaultCutoutBuilder,
     bool autoHide = true,
+    bool? retainFocus,
     Widget Function(BuildContext context, FSelectStyle style) contentEmptyBuilder = defaultContentEmptyBuilder,
     ScrollController? contentScrollController,
     bool contentScrollHandles = false,
@@ -330,6 +336,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       contentCutout: contentCutout,
       contentCutoutBuilder: contentCutoutBuilder,
       autoHide: autoHide,
+      retainFocus: retainFocus,
       contentEmptyBuilder: contentEmptyBuilder,
       contentScrollController: contentScrollController,
       contentScrollHandles: contentScrollHandles,
@@ -385,6 +392,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     bool contentCutout,
     void Function(Path path, Rect bounds) contentCutoutBuilder,
     bool autoHide,
+    bool? retainFocus,
     Widget Function(BuildContext context, FSelectStyle style) contentEmptyBuilder,
     ScrollController? contentScrollController,
     bool contentScrollHandles,
@@ -456,6 +464,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     bool contentCutout = true,
     void Function(Path path, Rect bounds) contentCutoutBuilder = FModalBarrier.defaultCutoutBuilder,
     bool autoHide = true,
+    bool? retainFocus,
     Widget Function(BuildContext context, FSelectStyle style) contentEmptyBuilder = defaultContentEmptyBuilder,
     ScrollController? contentScrollController,
     bool contentScrollHandles = false,
@@ -519,6 +528,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       contentCutout: contentCutout,
       contentCutoutBuilder: contentCutoutBuilder,
       autoHide: autoHide,
+      retainFocus: retainFocus,
       contentEmptyBuilder: contentEmptyBuilder,
       contentScrollController: contentScrollController,
       contentScrollHandles: contentScrollHandles,
@@ -585,6 +595,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     bool contentCutout,
     void Function(Path path, Rect bounds) contentCutoutBuilder,
     bool autoHide,
+    bool? retainFocus,
     Widget Function(BuildContext context, FSelectStyle style) contentEmptyBuilder,
     ScrollController? contentScrollController,
     bool contentScrollHandles,
@@ -636,6 +647,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     this.contentCutout = true,
     this.contentCutoutBuilder = FModalBarrier.defaultCutoutBuilder,
     this.autoHide = true,
+    this.retainFocus,
     this.contentEmptyBuilder = defaultContentEmptyBuilder,
     this.contentScrollController,
     this.contentScrollHandles = false,
@@ -688,6 +700,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       ..add(FlagProperty('contentCutout', value: contentCutout, ifTrue: 'cutout'))
       ..add(ObjectFlagProperty.has('contentCutoutBuilder', contentCutoutBuilder))
       ..add(FlagProperty('autoHide', value: autoHide, ifTrue: 'autoHide'))
+      ..add(DiagnosticsProperty('retainFocus', retainFocus))
       ..add(ObjectFlagProperty.has('emptyBuilder', contentEmptyBuilder))
       ..add(DiagnosticsProperty('contentScrollController', contentScrollController))
       ..add(FlagProperty('contentScrollHandles', value: contentScrollHandles, ifTrue: 'contentScrollHandles'))
@@ -846,7 +859,18 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
               contains: (value) => _controller.value == value,
               onPress: (value) async {
                 if (widget.autoHide) {
-                  _focus.requestFocus();
+                  final retainFocus =
+                      widget.retainFocus ??
+                      switch (defaultTargetPlatform) {
+                        .macOS || .windows || .linux => true,
+                        _ => false,
+                      };
+
+                  if (retainFocus) {
+                    _focus.requestFocus();
+                  } else {
+                    _focus.unfocus(); // Hides on-screen keyboard.
+                  }
                   await _popoverController.hide();
                 }
 

@@ -129,6 +129,8 @@ customized globally. Defaults to Lucide-backed set, `FIcons.lucide()`.
 
 
 ### `FSelect` & `FMultiSelect`
+* Add `FSelect.retainFocus`. Defaults to `true` on desktop and `false` on touch.
+
 * **Breaking** Add `FMultiSelectFieldStyle.clearIcon`. Defaults to `FIcons.x`.
 * **Breaking** Add `FMultiSelectTagStyle.icon`. Defaults to `FIcons.x`.
 * **Breaking** Add `FSelectScrollHandleStyle.upIcon` and `FSelectScrollHandleStyle.downIcon`. Defaults to
@@ -137,6 +139,8 @@ customized globally. Defaults to Lucide-backed set, `FIcons.lucide()`.
 * Change `FSelect.defaultIconBuilder` and `FMultiSelect.defaultIconBuilder` to resolve the chevron from
   `FIcons.chevronDown`.
 * Change `FSelectSearchFieldProperties.defaultIconBuilder` to resolve the search icon from `FIcons.search`.
+
+* Fix `FSelect` retaining field focus after an item is selected on touch devices.
 
 
 ### `FSelectMenuTile`

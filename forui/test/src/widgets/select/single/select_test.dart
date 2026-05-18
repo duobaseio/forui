@@ -379,32 +379,99 @@ void main() {
       expect(tester.takeException(), null);
     });
 
-    testWidgets('refocus after selection', (tester) async {
-      final focus = autoDispose(FocusNode());
-      const itemKey = ValueKey('item');
+    for (final (platform, retain) in [(TargetPlatform.macOS, true), (TargetPlatform.iOS, false)]) {
+      testWidgets('refocus after selection on $platform', (tester) async {
+        debugDefaultTargetPlatformOverride = platform;
+        final focus = autoDispose(FocusNode());
+        const itemKey = ValueKey('item');
 
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FSelect<String>.rich(
-            key: key,
-            format: (s) => s,
-            focusNode: focus,
-            children: [
-              .item(title: const Text('A'), value: 'A', key: itemKey),
-              .item(title: const Text('B'), value: 'B'),
-            ],
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FSelect<String>.rich(
+              key: key,
+              format: (s) => s,
+              focusNode: focus,
+              children: [
+                .item(title: const Text('A'), value: 'A', key: itemKey),
+                .item(title: const Text('B'), value: 'B'),
+              ],
+            ),
           ),
-        ),
-      );
+        );
 
-      await tester.tap(find.byKey(key));
-      await tester.pumpAndSettle();
+        await tester.tap(find.byKey(key));
+        await tester.pumpAndSettle();
 
-      await tester.tap(find.byKey(itemKey));
-      await tester.pumpAndSettle();
+        await tester.tap(find.byKey(itemKey));
+        await tester.pumpAndSettle();
 
-      expect(focus.hasFocus, true);
-    });
+        expect(focus.hasFocus, retain);
+
+        debugDefaultTargetPlatformOverride = null;
+      });
+
+      testWidgets('retains focus on $platform', (tester) async {
+        debugDefaultTargetPlatformOverride = platform;
+        final focus = autoDispose(FocusNode());
+        const itemKey = ValueKey('item');
+
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FSelect<String>.rich(
+              key: key,
+              format: (s) => s,
+              focusNode: focus,
+              retainFocus: true,
+              children: [
+                .item(title: const Text('A'), value: 'A', key: itemKey),
+                .item(title: const Text('B'), value: 'B'),
+              ],
+            ),
+          ),
+        );
+
+        await tester.tap(find.byKey(key));
+        await tester.pumpAndSettle();
+
+        await tester.tap(find.byKey(itemKey));
+        await tester.pumpAndSettle();
+
+        expect(focus.hasFocus, true);
+
+        debugDefaultTargetPlatformOverride = null;
+      });
+
+      testWidgets('does not retain focus on $platform', (tester) async {
+        debugDefaultTargetPlatformOverride = platform;
+        final focus = autoDispose(FocusNode());
+        const itemKey = ValueKey('item');
+
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FSelect<String>.rich(
+              key: key,
+              format: (s) => s,
+              focusNode: focus,
+              retainFocus: false,
+              children: [
+                .item(title: const Text('A'), value: 'A', key: itemKey),
+                .item(title: const Text('B'), value: 'B'),
+              ],
+            ),
+          ),
+        );
+
+        await tester.tap(find.byKey(key));
+        await tester.pumpAndSettle();
+
+        await tester.tap(find.byKey(itemKey));
+        await tester.pumpAndSettle();
+
+        expect(focus.hasFocus, false);
+
+        debugDefaultTargetPlatformOverride = null;
+      });
+    }
 
     testWidgets('tap on text-field should refocus', (tester) async {
       final focus = autoDispose(FocusNode());
