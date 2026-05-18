@@ -1,6 +1,8 @@
 ## 0.22.0
 * **Breaking** Rename `FIcons` to `FLucideIcons`.
 
+* Fix spurious `LicenseRegistry` entries, including a hyphen-only "package" name, caused by separator rows in `LICENSE`.
+
 
 ## 0.21.0
 * No changes. Lucide icon mappings are still incorrect.

@@ -206,6 +206,10 @@ customized globally. Defaults to Lucide-backed set, `FIcons.lucide()`.
   `FTypography.extensions`.
 
 
+### Others
+* Fix spurious `LicenseRegistry` entries, including a hyphen-only "package" name, caused by separator rows in `LICENSE`.
+
+
 ## 0.21.3
 
 ### `FDeterminateProgress`
