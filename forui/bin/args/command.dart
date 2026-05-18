@@ -13,12 +13,11 @@ import 'utils.dart';
 /// If we are on Windows, Unicode emojis are supported in Windows Terminal,
 /// which sets the WT_SESSION environment variable. See: https://github.com/microsoft/terminal/issues/1040
 ///
-/// JetBrains' JediTerm (the IDE's embedded Terminal tab) miscounts the width of wide characters at column 0, clipping
-/// the emoji and eating the space that follows it. Detect it via TERMINAL_EMULATOR=JetBrains-JediTerm and fall back to
-/// no emoji. The Run window is unaffected since it uses a different renderer and TERMINAL_EMULATOR is not
-/// inherited.
-///
-/// See https://youtrack-production.pub.aws.intellij.net/projects/IJPL/issues/IJPL-103740/Full-support-for-OSC8-terminal-hyperlinks.
+/// JediTerm does not handle emojis properly (rendered as 2 cells but reported as 1-cell wide), shifting the hyperlink
+/// hotspot off the rendered path text. OSC 8 hyperlinks would work around JediTerm's regex-based path detector, but
+/// JediTerm does not support them either, see https://youtrack.jetbrains.com/issue/IJPL-103740. As a workaround, we
+/// disable emojis when TERMINAL_EMULATOR=JetBrains-JediTerm. The Run window is unaffected since it uses a different
+/// renderer that sizes emojis correctly.
 bool get emoji =>
     _debugEmoji ??
     (!Platform.isWindows || Platform.environment.containsKey('WT_SESSION')) &&
