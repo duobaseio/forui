@@ -129,6 +129,11 @@ class FSubmenuTile extends StatelessWidget with FTileMixin {
   /// Defaults to [Offset.zero].
   final Offset submenuOffset;
 
+  /// {@macro forui.widgets.FPopover.hideRegion}
+  ///
+  /// Defaults to [FPopoverHideRegion.excludeChild].
+  final FPopoverHideRegion submenuHideRegion;
+
   /// The submenu's semantic label.
   final String? submenuSemanticsLabel;
 
@@ -194,6 +199,7 @@ class FSubmenuTile extends StatelessWidget with FTileMixin {
     this.submenuSpacing = const .spacing(2),
     this.submenuOverflow = .flip,
     this.submenuOffset = .zero,
+    this.submenuHideRegion = .excludeChild,
     this.submenuSemanticsLabel,
     this.submenuUseViewPadding = true,
     this.submenuUseViewInsets = true,
@@ -235,6 +241,7 @@ class FSubmenuTile extends StatelessWidget with FTileMixin {
       ..add(DiagnosticsProperty('submenuSpacing', submenuSpacing))
       ..add(ObjectFlagProperty.has('submenuOverflow', submenuOverflow))
       ..add(DiagnosticsProperty('submenuOffset', submenuOffset))
+      ..add(EnumProperty('submenuHideRegion', submenuHideRegion))
       ..add(StringProperty('submenuSemanticsLabel', submenuSemanticsLabel))
       ..add(FlagProperty('submenuUseViewPadding', value: submenuUseViewPadding, ifTrue: 'submenu using view padding'))
       ..add(FlagProperty('submenuUseViewInsets', value: submenuUseViewInsets, ifTrue: 'submenu using view insets'))
@@ -263,6 +270,7 @@ class FSubmenuTile extends StatelessWidget with FTileMixin {
       spacing: submenuSpacing,
       overflow: submenuOverflow,
       offset: submenuOffset,
+      hideRegion: submenuHideRegion,
       semanticsLabel: submenuSemanticsLabel,
       useViewPadding: submenuUseViewPadding,
       useViewInsets: submenuUseViewInsets,
