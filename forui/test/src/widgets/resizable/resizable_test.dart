@@ -92,4 +92,41 @@ void main() {
     expect(tester.getSize(find.byType(FResizableRegion).first), const Size(20, 50));
     expect(tester.getSize(find.byType(FResizableRegion).last), const Size(80, 50));
   });
+
+  testWidgets('rtl horizontal drag right shrinks first region', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        platform: .macOS,
+        textDirection: .rtl,
+        child: Center(
+          child: FResizable(crossAxisExtent: 50, axis: .horizontal, children: [top, bottom]),
+        ),
+      ),
+    );
+
+    await tester.timedDrag(find.byType(HorizontalDivider), const Offset(100, 0), const Duration(seconds: 1));
+    await tester.pumpAndSettle();
+
+    expect(tester.getSize(find.byType(FResizableRegion).first), const Size(20, 50));
+    expect(tester.getSize(find.byType(FResizableRegion).last), const Size(80, 50));
+  });
+
+  testWidgets('rtl horizontal drag left expands first region', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        platform: .macOS,
+        textDirection: .rtl,
+        child: Center(
+          child: FResizable(crossAxisExtent: 50, axis: .horizontal, children: [top, bottom]),
+        ),
+      ),
+    );
+
+    await tester.timedDrag(find.byType(HorizontalDivider), const Offset(-100, 0), const Duration(seconds: 1));
+    await tester.pumpAndSettle();
+
+    expect(tester.getSize(find.byType(FResizableRegion).first), const Size(80, 50));
+    expect(tester.getSize(find.byType(FResizableRegion).last), const Size(20, 50));
+  });
+
 }

@@ -247,6 +247,10 @@ If you change source files that affect the CLI registry (e.g., `.inherit` constr
 
 ## Testing & Verification
 
+Fix bugs test-first (TDD): write a failing test that reproduces the bug, confirm it fails for the expected reason,
+then implement the fix and re-run to confirm it passes. This stops regressions from re-landing and proves the fix
+targets the reported symptom.
+
 Parameterize tests using for-each loop to cover multiple scenarios when sensible.
 
 Prefer literals to matchers where possible, e.g. `expect(value, null)` instead of `expect(value, isNull)`.

@@ -114,37 +114,42 @@ class _HorizontalDividerState extends State<HorizontalDivider> {
   bool _focused = false;
 
   @override
-  Widget build(BuildContext context) => Positioned(
-    left: widget.controller.regions[widget.left].offset.max - (widget.hitRegionExtent / 2),
-    child: widget.focusableActionDetector(
-      shortcuts: const {SingleActivator(.arrowLeft): _Up(), SingleActivator(.arrowRight): _Down()},
-      onFocusChange: (focused) => setState(() => _focused = focused),
-      focused: _focused,
-      children: [
-        if (widget.type == .divider || widget.type == .dividerWithThumb)
-          ColoredBox(
-            color: widget.style.color,
-            child: SizedBox(height: widget.crossAxisExtent, width: widget.style.width),
-          ),
-        if (widget.type == .dividerWithThumb) _Thumb(style: widget.style.thumbStyle),
-        SizedBox(
-          height: widget.crossAxisExtent,
-          width: widget.hitRegionExtent,
-          child: GestureDetector(
-            onHorizontalDragUpdate: (details) {
-              if (details.delta.dx == 0.0) {
-                return;
-              }
+  Widget build(BuildContext context) {
+    final ltr = Directionality.of(context) == TextDirection.ltr;
+    return PositionedDirectional(
+      start: widget.controller.regions[widget.left].offset.max - (widget.hitRegionExtent / 2),
+      child: widget.focusableActionDetector(
+        shortcuts: ltr
+            ? const {SingleActivator(.arrowLeft): _Up(), SingleActivator(.arrowRight): _Down()}
+            : const {SingleActivator(.arrowLeft): _Down(), SingleActivator(.arrowRight): _Up()},
+        onFocusChange: (focused) => setState(() => _focused = focused),
+        focused: _focused,
+        children: [
+          if (widget.type == .divider || widget.type == .dividerWithThumb)
+            ColoredBox(
+              color: widget.style.color,
+              child: SizedBox(height: widget.crossAxisExtent, width: widget.style.width),
+            ),
+          if (widget.type == .dividerWithThumb) _Thumb(style: widget.style.thumbStyle),
+          SizedBox(
+            height: widget.crossAxisExtent,
+            width: widget.hitRegionExtent,
+            child: GestureDetector(
+              onHorizontalDragUpdate: (details) {
+                if (details.delta.dx == 0.0) {
+                  return;
+                }
 
-              widget.controller.update(widget.left, widget.right, details.delta.dx);
-              // TODO: haptic feedback
-            },
-            onHorizontalDragEnd: (_) => widget.controller.end(widget.left, widget.right),
+                widget.controller.update(widget.left, widget.right, ltr ? details.delta.dx : -details.delta.dx);
+                // TODO: haptic feedback
+              },
+              onHorizontalDragEnd: (_) => widget.controller.end(widget.left, widget.right),
+            ),
           ),
-        ),
-      ],
-    ),
-  );
+        ],
+      ),
+    );
+  }
 }
 
 @internal

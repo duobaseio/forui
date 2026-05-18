@@ -118,6 +118,9 @@ customized globally. Defaults to Lucide-backed set, `FIcons.lucide()`.
 
 
 ### `FPopoverMenu`
+* Add `FSubmenuItem.submenuHideRegion`.
+* Add `FSubmenuTile.submenuHideRegion`.
+
 * Change `FSubmenuItem.suffix` and `FSubmenuTile.suffix` defaults to resolve from `FIcons.chevronRight`.
 
 * Fix `FPopoverMenu` content not clipping properly at rounded corners.
@@ -126,6 +129,8 @@ customized globally. Defaults to Lucide-backed set, `FIcons.lucide()`.
 ### `FResizable`
 * **Breaking** Add `FResizableDividerThumbStyle.icon`. Defaults to `FIcons.gripVertical` (horizontal axis) or
   `FIcons.gripHorizontal` (vertical axis).
+
+* Fix horizontal `FResizable` not mirroring under `TextDirection.rtl`.
 
 
 ### `FSelect` & `FMultiSelect`

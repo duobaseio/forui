@@ -37,6 +37,47 @@ void main() {
     });
 
     for (final theme in TestScaffold.themes) {
+      for (final divider in FResizableDivider.values) {
+        testWidgets('${theme.name} - horizontal - $divider - rtl', (tester) async {
+          await tester.pumpWidget(
+            TestScaffold(
+              theme: theme.data,
+              textDirection: .rtl,
+              child: DecoratedBox(
+                decoration: BoxDecoration(
+                  border: .all(color: theme.data.colors.border),
+                  borderRadius: .circular(8),
+                ),
+                child: FResizable(
+                  axis: .horizontal,
+                  divider: divider,
+                  crossAxisExtent: 100,
+                  children: [
+                    FResizableRegion(
+                      initialExtent: 150,
+                      builder: (_, _, child) => child!,
+                      child: const Align(child: Text('A')),
+                    ),
+                    FResizableRegion(
+                      initialExtent: 300,
+                      builder: (_, _, child) => child!,
+                      child: const Align(child: Text('B')),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+
+          await expectLater(
+            find.byType(FResizable),
+            matchesGoldenFile('resizable/${theme.name}/horizontal-$divider-rtl.png'),
+          );
+        });
+      }
+    }
+
+    for (final theme in TestScaffold.themes) {
       for (final axis in Axis.values) {
         for (final divider in FResizableDivider.values) {
           testWidgets('${theme.name} - $axis - $divider', (tester) async {
