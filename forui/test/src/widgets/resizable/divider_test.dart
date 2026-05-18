@@ -64,6 +64,7 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold.app(
+          platform: .macOS,
           theme: FThemeData(
             colors: colors,
             touch: true,
