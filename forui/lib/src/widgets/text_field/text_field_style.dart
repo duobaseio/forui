@@ -44,13 +44,18 @@ extension type FTextFieldSizeStyles(
       },
     );
 
-    FTextFieldStyle textField(FButtonStyle buttonStyle, EdgeInsetsGeometry contentPadding) => FTextFieldStyle.inherit(
+    FTextFieldStyle textField(
+      FButtonStyle buttonStyle,
+      BoxConstraints constraints,
+      EdgeInsetsGeometry contentPadding,
+    ) => FTextFieldStyle.inherit(
       colors: colors,
       style: style,
       labelStyle: FLabelStyles.inherit(style: style).verticalStyle,
       textStyle: typography.sm,
       iconStyle: iconStyle,
       buttonStyle: buttonStyle,
+      constraints: constraints,
       contentPadding: contentPadding,
     );
 
@@ -60,29 +65,50 @@ extension type FTextFieldSizeStyles(
     );
 
     if (touch) {
-      final md = textField(buttonStyle, const .symmetric(horizontal: 12, vertical: 10));
+      final md = textField(
+        buttonStyle,
+        const BoxConstraints(minHeight: 44),
+        const .symmetric(horizontal: 12, vertical: 10),
+      );
       return FTextFieldSizeStyles(
         FVariants(
           md,
           variants: {
-            [.sm]: textField(buttonStyle, const .symmetric(horizontal: 12, vertical: 8)),
+            [.sm]: textField(
+              buttonStyle,
+              const BoxConstraints(minHeight: 40),
+              const .symmetric(horizontal: 12, vertical: 8),
+            ),
             [.md]: md,
-            [.lg]: textField(buttonStyle, const .symmetric(horizontal: 12, vertical: 12)),
+            [.lg]: textField(
+              buttonStyle,
+              const BoxConstraints(minHeight: 48),
+              const .symmetric(horizontal: 12, vertical: 12),
+            ),
           },
         ),
       );
     } else {
-      final md = textField(buttonStyle, const .symmetric(horizontal: 10, vertical: 9));
+      final md = textField(
+        buttonStyle,
+        const BoxConstraints(minHeight: 36),
+        const .symmetric(horizontal: 10, vertical: 9),
+      );
       return FTextFieldSizeStyles(
         FVariants(
           md,
           variants: {
             [.sm]: textField(
               ghost.xs.copyWith(iconContentStyle: ghost.xs.iconContentStyle.copyWith(iconStyle: iconStyle.cast())),
+              const BoxConstraints(minHeight: 32),
               const .symmetric(horizontal: 10, vertical: 7),
             ),
             [.md]: md,
-            [.lg]: textField(buttonStyle, const .symmetric(horizontal: 10, vertical: 11)),
+            [.lg]: textField(
+              buttonStyle,
+              const BoxConstraints(minHeight: 40),
+              const .symmetric(horizontal: 10, vertical: 11),
+            ),
           },
         ),
       );
@@ -127,6 +153,12 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
   /// other platforms).
   @override
   final bool? cursorOpacityAnimates;
+
+  /// The constraints applied to the text field.
+  ///
+  /// Defaults to `const BoxConstraints()`.
+  @override
+  final BoxConstraints constraints;
 
   /// The padding surrounding this text field's content.
   ///
@@ -199,6 +231,7 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
     this.cursorColor = CupertinoColors.activeBlue,
     this.cursorWidth = 2.0,
     this.cursorOpacityAnimates,
+    this.constraints = const BoxConstraints(),
     this.contentPadding = const .symmetric(horizontal: 10, vertical: 9),
     this.clearButtonPadding = const .directional(end: 4),
     this.obscureButtonPadding = const .directional(end: 4),
@@ -218,6 +251,7 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
     required TextStyle textStyle,
     required FVariants<FTextFieldVariantConstraint, FTextFieldVariant, IconThemeData, IconThemeDataDelta> iconStyle,
     required FButtonStyle buttonStyle,
+    required BoxConstraints constraints,
     required EdgeInsetsGeometry contentPadding,
   }) : this(
          keyboardAppearance: colors.brightness,
@@ -228,6 +262,7 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
            },
          ),
          cursorColor: colors.primary,
+         constraints: constraints,
          contentPadding: contentPadding,
          iconStyle: iconStyle,
          clearButtonStyle: buttonStyle,

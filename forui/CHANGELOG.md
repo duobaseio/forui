@@ -193,6 +193,8 @@ customized globally. Defaults to Lucide-backed set, `FIcons.lucide()`.
 
 
 ### `FTextField`
+* Add `FTextFieldStyle.constraints`, enforcing a minimum height per size variant.
+
 * Change `FTextField.defaultObscureIconBuilder` to resolve eye icons from `FIcons.eye` and `FIcons.eyeClosed`.
 * Change `FTextField.defaultClearIconBuilder` to resolve the clear icon from `FIcons.x`.
 

@@ -435,6 +435,7 @@ class _InputState extends State<Input> {
 
     return InputDecoration(
       isDense: true,
+      constraints: style.constraints,
       prefixIcon: widget.prefixBuilder?.call(context, style, variants),
       suffixIcon: switch ((suffix, clear)) {
         (final icon?, final clear?) when widget.enabled => Row(
