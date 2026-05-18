@@ -124,7 +124,7 @@ class SnippetCreateCommand extends ForuiCommand {
         ..createSync(recursive: true)
         ..writeAsStringSync(formatter.format(source));
 
-      stdout.writeln('${emoji ? '✅' : '[Done]'} $path');
+      stdout.writeln('${emoji ? '✅' : '[Done]'} ${Uri.file(path)}');
     }
   }
 
@@ -142,7 +142,7 @@ class SnippetCreateCommand extends ForuiCommand {
       ..writeln()
       ..writeln('Existing files:');
     for (final path in existing) {
-      stdout.writeln('  $path');
+      stdout.writeln('  ${Uri.file(path)}');
     }
 
     while (true) {

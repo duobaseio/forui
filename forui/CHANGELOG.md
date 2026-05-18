@@ -210,6 +210,8 @@ customized globally. Defaults to Lucide-backed set, `FIcons.lucide()`.
 
 
 ### Others
+* Change CLI to print generated file paths as `file://` URIs so they are clickable in JetBrains IDEs.
+
 * Fix spurious `LicenseRegistry` entries, including a hyphen-only "package" name, caused by separator rows in `LICENSE`.
 
 

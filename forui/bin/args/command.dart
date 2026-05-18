@@ -11,9 +11,18 @@ import 'utils.dart';
 ///
 /// Assume Unicode emojis are supported when not on Windows.
 /// If we are on Windows, Unicode emojis are supported in Windows Terminal,
-/// which sets the WT_SESSION environment variable. See:
-/// https://github.com/microsoft/terminal/issues/1040
-bool get emoji => _debugEmoji ?? !Platform.isWindows || Platform.environment.containsKey('WT_SESSION');
+/// which sets the WT_SESSION environment variable. See: https://github.com/microsoft/terminal/issues/1040
+///
+/// JetBrains' JediTerm (the IDE's embedded Terminal tab) miscounts the width of wide characters at column 0, clipping
+/// the emoji and eating the space that follows it. Detect it via TERMINAL_EMULATOR=JetBrains-JediTerm and fall back to
+/// no emoji. The Run window is unaffected since it uses a different renderer and TERMINAL_EMULATOR is not
+/// inherited.
+///
+/// See https://youtrack-production.pub.aws.intellij.net/projects/IJPL/issues/IJPL-103740/Full-support-for-OSC8-terminal-hyperlinks.
+bool get emoji =>
+    _debugEmoji ??
+    (!Platform.isWindows || Platform.environment.containsKey('WT_SESSION')) &&
+        Platform.environment['TERMINAL_EMULATOR'] != 'JetBrains-JediTerm';
 
 // ignore: avoid_positional_boolean_parameters
 set emoji(bool? value) => _debugEmoji = value;
