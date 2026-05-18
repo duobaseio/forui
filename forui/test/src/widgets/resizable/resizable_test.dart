@@ -128,5 +128,4 @@ void main() {
     expect(tester.getSize(find.byType(FResizableRegion).first), const Size(80, 50));
     expect(tester.getSize(find.byType(FResizableRegion).last), const Size(20, 50));
   });
-
 }

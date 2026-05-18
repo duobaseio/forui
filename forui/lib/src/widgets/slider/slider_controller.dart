@@ -116,7 +116,8 @@ abstract class FSliderController extends FChangeNotifier {
       final oldRange = old.pixels.max - old.pixels.min;
 
       final minBound = value.pixels.min == 0 && 0 < old.pixels.min;
-      final maxBound = value.pixels.max == value.pixelConstraints.extent && old.pixels.max < old.pixelConstraints.extent;
+      final maxBound =
+          value.pixels.max == value.pixelConstraints.extent && old.pixels.max < old.pixelConstraints.extent;
       final minRange = range == value.pixelConstraints.min && value.pixelConstraints.min < oldRange;
       final maxRange = range == value.pixelConstraints.max && oldRange < value.pixelConstraints.max;
 

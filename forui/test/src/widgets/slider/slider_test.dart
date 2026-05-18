@@ -450,12 +450,12 @@ void main() {
           theme: FThemeData(
             colors: colors,
             touch: true,
-            hapticFeedback: FHapticFeedback(
-              selectionClick: () async => ticks++,
-              lightImpact: () async => collisions++,
-            ),
+            hapticFeedback: FHapticFeedback(selectionClick: () async => ticks++, lightImpact: () async => collisions++),
           ),
-          child: SizedBox(width: 300, child: FSlider(control: control, marks: marks)),
+          child: SizedBox(
+            width: 300,
+            child: FSlider(control: control, marks: marks),
+          ),
         ),
       );
       return (tick: () => ticks, collision: () => collisions);
