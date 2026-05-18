@@ -96,8 +96,6 @@ FToasterEntry showFToast({
 ///
 /// Set [swipeToDismiss] to an empty list to disable swiping to dismiss.
 ///
-/// Set [swipeToDismiss] to an empty list to disable swiping to dismiss.
-///
 /// [dismissThreshold] is the fraction of the toast's width/height that must be swiped before the toast is dismissed.
 /// The higher the threshold, the more the user has to swipe to dismiss the toast. Defaults to 0.5.
 ///
