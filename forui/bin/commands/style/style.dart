@@ -621,7 +621,7 @@ enum Style {
     null,
     <String>['toaster'],
     <String>['FToasterStyle'],
-    'FToasterStyle toasterStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n  required bool touch,\n}) => FToasterStyle(\n  toastStyles: .inherit(\n    colors: colors,\n    typography: typography,\n    style: style,\n    touch: touch,\n  ),\n  max: 3,\n  padding: const .symmetric(horizontal: 20, vertical: 15),\n  expandBehavior: .hoverOrPress,\n  expandHoverEnterDuration: const Duration(milliseconds: 200),\n  expandHoverExitDuration: const Duration(milliseconds: 200),\n  expandStartSpacing: 0,\n  expandSpacing: 10,\n  collapsedProtrusion: 12,\n  collapsedScale: 0.9,\n  motion: const FToasterMotion(),\n  toastAlignment: .bottomEnd,\n);\n',
+    'FToasterStyle toasterStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n  required bool touch,\n}) => FToasterStyle(\n  toastStyles: .inherit(\n    colors: colors,\n    typography: typography,\n    style: style,\n    touch: touch,\n  ),\n  toastAlignment: touch ? .topCenter : .bottomEnd,\n  max: 3,\n  padding: const .symmetric(horizontal: 20, vertical: 15),\n  expandBehavior: .hoverOrPress,\n  expandHoverEnterDuration: const Duration(milliseconds: 200),\n  expandHoverExitDuration: const Duration(milliseconds: 200),\n  expandStartSpacing: 0,\n  expandSpacing: 10,\n  collapsedProtrusion: 12,\n  collapsedScale: 0.9,\n  motion: const FToasterMotion(),\n);\n',
   ),
   ftooltipstyle(
     'FTooltipStyle',

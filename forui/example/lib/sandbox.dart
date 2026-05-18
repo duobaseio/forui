@@ -1,6 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
+const _alignments = <String, FToastAlignment?>{
+  'default': null,
+  'topStart': FToastAlignment.topStart,
+  'topCenter': FToastAlignment.topCenter,
+  'topEnd': FToastAlignment.topEnd,
+  'topLeft': FToastAlignment.topLeft,
+  'topRight': FToastAlignment.topRight,
+  'bottomStart': FToastAlignment.bottomStart,
+  'bottomCenter': FToastAlignment.bottomCenter,
+  'bottomEnd': FToastAlignment.bottomEnd,
+  'bottomLeft': FToastAlignment.bottomLeft,
+  'bottomRight': FToastAlignment.bottomRight,
+};
+
 class Sandbox extends StatefulWidget {
   const Sandbox({super.key});
 
@@ -17,6 +31,24 @@ class _SandboxState extends State<Sandbox> {
         mainAxisSize: MainAxisSize.min,
         spacing: 20,
         children: [
+          Wrap(
+            spacing: 8,
+            runSpacing: 8,
+            alignment: WrapAlignment.center,
+            children: [
+              for (final MapEntry(:key, :value) in _alignments.entries)
+                FButton(
+                  mainAxisSize: .min,
+                  onPress: () => showFToast(
+                    context: context,
+                    alignment: value,
+                    title: Text(key),
+                    description: const Text('Swipe or wait to dismiss.'),
+                  ),
+                  child: Text(key),
+                ),
+            ],
+          ),
           FDateField(
             control: .managed(initial: DateTime(2025, 12, 31)),
             label: const Text('Start Date'),

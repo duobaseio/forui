@@ -8,9 +8,12 @@ import 'package:forui/src/widgets/toast/toaster_stack.dart';
 ///
 /// [alignment] defaults to [FToasterStyle.toastAlignment].
 ///
-/// [swipeToDismiss] represents axes in which to swipe to dismiss a toast. Defaults to horizontally towards the closest
-/// edge of the screen with a left bias. For example, if [alignment] is [FToastAlignment.bottomRight], the default swipe
-/// direction is [AxisDirection.right].
+/// [swipeToDismiss] represents axes in which to swipe to dismiss a toast.
+///
+/// Defaults to the directions of the toast's alignment:
+/// * Corner positions allow both vertical and horizontal swipe (e.g. [FToastAlignment.bottomRight] defaults to
+///  `[AxisDirection.down, AxisDirection.right]`).
+/// * Centered positions allow only the vertical axis (e.g. [FToastAlignment.topCenter] defaults to `[AxisDirection.up]`).
 ///
 /// Set [swipeToDismiss] to an empty list to disable swiping to dismiss.
 ///
@@ -84,9 +87,14 @@ FToasterEntry showFToast({
 ///
 /// [alignment] defaults to [FToasterStyle.toastAlignment].
 ///
-/// [swipeToDismiss] represents axes in which to swipe to dismiss a toast. Defaults to horizontally towards the closest
-/// edge of the screen with a left bias. For example, if [alignment] is [FToastAlignment.bottomRight], the default swipe
-/// direction is [AxisDirection.right].
+/// [swipeToDismiss] represents axes in which to swipe to dismiss a toast.
+///
+/// Defaults to the directions of the toast's alignment:
+/// * Corner positions allow both vertical and horizontal swipe (e.g. [FToastAlignment.bottomRight] defaults to
+///  `[AxisDirection.down, AxisDirection.right]`).
+/// * Centered positions allow only the vertical axis (e.g. [FToastAlignment.topCenter] defaults to `[AxisDirection.up]`).
+///
+/// Set [swipeToDismiss] to an empty list to disable swiping to dismiss.
 ///
 /// Set [swipeToDismiss] to an empty list to disable swiping to dismiss.
 ///
@@ -325,7 +333,12 @@ class FToasterState extends State<FToaster> {
     final direction = Directionality.maybeOf(context) ?? .ltr;
     final toasterStyle = widget.style(context.theme.toasterStyle);
     final resolved = (alignment ?? toasterStyle.toastAlignment)._alignment.resolve(direction);
-    final directions = swipeToDismiss ?? [if (resolved.x < 1) .left else .right];
+    final directions =
+        swipeToDismiss ??
+        [
+          if (resolved.y < 0) .up else if (resolved.y > 0) .down,
+          if (resolved.x < 0) .left else if (resolved.x > 0) .right,
+        ];
 
     final entry = ToasterEntry(
       style(toasterStyle.toastStyles.resolve({variant, context.platformVariant})),

@@ -192,8 +192,11 @@ customized globally. Defaults to Lucide-backed set, `FIcons.lucide()`.
 * Change `FTimeField.defaultIconBuilder` to resolve the clock icon from `FIcons.clock4`.
 
 
-### `FToast`
+### `FToast` & `FToaster`
 * Add `FToast.clipBehavior` to clip the toast's content to the inner path of its decoration. Defaults to `Clip.none`.
+
+* Change `FToasterStyle.toastAlignment` default to `FToastAlignment.topCenter` on touch devices.
+* Change `showFToast`/`showRawFToast` default `swipeToDismiss` to derive from the resolved alignment.
 
 
 ### `FTileGroup`
