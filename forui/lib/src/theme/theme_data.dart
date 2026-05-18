@@ -745,7 +745,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       progressStyle: progressStyle ?? .inherit(colors: colors, style: style),
       radioStyle: radioStyle ?? .inherit(colors: colors, style: style, touch: touch),
       resizableStyles: resizableStyles == null
-          ? FResizableStyles.inherit(colors: colors, icons: icons, style: style)
+          ? FResizableStyles.inherit(colors: colors, icons: icons, style: style, hapticFeedback: hapticFeedback)
           : FResizableStyles(resizableStyles),
       scaffoldStyle: scaffoldStyle ?? .inherit(colors: colors, style: style),
       selectStyle:

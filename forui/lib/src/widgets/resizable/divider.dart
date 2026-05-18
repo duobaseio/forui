@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 import 'dart:ui';
 
@@ -60,10 +61,22 @@ sealed class Divider extends StatefulWidget {
       onFocusChange: onFocusChange,
       actions: {
         _Up: CallbackAction(
-          onInvoke: (_) => controller.update(left, right, -resizePercentage * (controller.regions[left].extent.total)),
+          onInvoke: (_) {
+            final delta = -resizePercentage * (controller.regions[left].extent.total);
+            if (controller.update(left, right, delta)) {
+              unawaited(style.hapticFeedback());
+            }
+            return null;
+          },
         ),
         _Down: CallbackAction(
-          onInvoke: (_) => controller.update(left, right, resizePercentage * (controller.regions[left].extent.total)),
+          onInvoke: (_) {
+            final delta = resizePercentage * (controller.regions[left].extent.total);
+            if (controller.update(left, right, delta)) {
+              unawaited(style.hapticFeedback());
+            }
+            return null;
+          },
         ),
       },
       child: FFocusedOutline(
@@ -140,8 +153,10 @@ class _HorizontalDividerState extends State<HorizontalDivider> {
                   return;
                 }
 
-                widget.controller.update(widget.left, widget.right, ltr ? details.delta.dx : -details.delta.dx);
-                // TODO: haptic feedback
+                final delta = ltr ? details.delta.dx : -details.delta.dx;
+                if (widget.controller.update(widget.left, widget.right, delta)) {
+                  unawaited(widget.style.hapticFeedback());
+                }
               },
               onHorizontalDragEnd: (_) => widget.controller.end(widget.left, widget.right),
             ),
@@ -198,8 +213,9 @@ class _VerticalDividerState extends State<VerticalDivider> {
                 return;
               }
 
-              widget.controller.update(widget.left, widget.right, details.delta.dy);
-              // TODO: haptic feedback
+              if (widget.controller.update(widget.left, widget.right, details.delta.dy)) {
+                unawaited(widget.style.hapticFeedback());
+              }
             },
             onVerticalDragEnd: (_) => widget.controller.end(widget.left, widget.right),
           ),
@@ -266,11 +282,19 @@ class FResizableDividerStyle with Diagnosticable, _$FResizableDividerStyleFuncti
   @override
   final FResizableDividerThumbStyle thumbStyle;
 
+  /// The haptic feedback when a region collides with its neighbour while resizing.
+  ///
+  /// Defaults to [FHapticFeedback.lightImpact]. The collision detection and velocity gate live on
+  /// [FResizableController.hapticFeedbackVelocity].
+  @override
+  final Future<void> Function() hapticFeedback;
+
   /// Creates a [FResizableDividerStyle].
   FResizableDividerStyle({
     required this.color,
     required this.focusedOutlineStyle,
     required this.thumbStyle,
+    required this.hapticFeedback,
     this.width = 0.5,
   }) : assert(0 < width, 'width ($width) must be > 0');
 }

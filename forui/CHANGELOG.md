@@ -127,8 +127,12 @@ customized globally. Defaults to Lucide-backed set, `FIcons.lucide()`.
 
 
 ### `FResizable`
+* Add `FResizableDividerStyle.hapticFeedback`. Defaults to `FHapticFeedback.lightImpact`.
+* Add `FResizableController.hapticFeedbackVelocity`. Defaults to `6.5`.
+
 * **Breaking** Add `FResizableDividerThumbStyle.icon`. Defaults to `FIcons.gripVertical` (horizontal axis) or
   `FIcons.gripHorizontal` (vertical axis).
+* Change `FResizableStyles.inherit(...)` to require a `hapticFeedback` parameter.
 
 * Fix horizontal `FResizable` not mirroring under `TextDirection.rtl`.
 

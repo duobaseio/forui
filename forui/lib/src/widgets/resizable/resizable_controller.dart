@@ -19,20 +19,19 @@ abstract interface class FResizableController extends FChangeNotifier {
   /// Modifying the regions outside of [update] and [end] will result in undefined behavior.
   final List<FResizableRegionData> regions = [];
 
-  /// The minimum velocity, inclusive, of a drag gesture for haptic feedback to be performed on collision between two
-  /// regions, defaults to 6.5.
+  /// The minimum absolute per-frame delta, in pixels, required for haptic feedback to fire on a collision between
+  /// neighbouring regions.
   ///
-  /// Setting it to `null` disables haptic feedback while setting it to 0 will cause haptic feedback to always be
-  /// performed.
+  /// Defaults to `6.5`. Setting it to `0` fires on every collision regardless of speed.
   ///
   /// ## Contract
-  /// [_hapticFeedbackVelocity] should be a positive, finite number. It will otherwise
-  /// result in undefined behavior.
-  final double _hapticFeedbackVelocity = 6.5; // ignore: unused_field, TODO: haptic feedback
+  /// Should be a non-negative finite number.
+  final double hapticFeedbackVelocity;
 
   bool _haptic = false;
 
-  FResizableController._();
+  FResizableController._({this.hapticFeedbackVelocity = 6.5})
+    : assert(0 <= hapticFeedbackVelocity, 'hapticFeedbackVelocity ($hapticFeedbackVelocity) must be >= 0');
 
   /// Creates a [FResizableController].
   ///
@@ -45,6 +44,7 @@ abstract interface class FResizableController extends FChangeNotifier {
   factory FResizableController({
     void Function(List<FResizableRegionData> resized)? onResizeUpdate,
     void Function(List<FResizableRegionData> resized)? onResizeEnd,
+    double hapticFeedbackVelocity,
   }) = _ResizableController;
 
   /// Creates a [FResizableController] that cascades shrinking of a region below its minimum extent to its neighbours.
@@ -58,6 +58,7 @@ abstract interface class FResizableController extends FChangeNotifier {
   factory FResizableController.cascade({
     void Function(List<FResizableRegionData> resized)? onResizeUpdate,
     void Function(UnmodifiableListView<FResizableRegionData> all)? onResizeEnd,
+    double hapticFeedbackVelocity,
   }) = _CascadeController;
 
   /// Updates the regions at the given indexes in addition to their neighbours. Returns true if haptic feedback should
@@ -73,7 +74,7 @@ final class _ResizableController extends FResizableController {
   final void Function(List<FResizableRegionData> resized)? onResizeUpdate;
   final void Function(List<FResizableRegionData> resized)? onResizeEnd;
 
-  _ResizableController({this.onResizeUpdate, this.onResizeEnd}) : super._();
+  _ResizableController({this.onResizeUpdate, this.onResizeEnd, super.hapticFeedbackVelocity = 6.5}) : super._();
 
   @override
   bool update(int left, int right, double delta) {
@@ -108,7 +109,7 @@ final class _ResizableController extends FResizableController {
 
     if (_haptic) {
       _haptic = false;
-      return true;
+      return delta.abs() >= hapticFeedbackVelocity;
     } else {
       return false;
     }
@@ -127,7 +128,7 @@ final class _CascadeController extends FResizableController {
   final void Function(List<FResizableRegionData> resized)? onResizeUpdate;
   final void Function(UnmodifiableListView<FResizableRegionData> all)? onResizeEnd;
 
-  _CascadeController({this.onResizeUpdate, this.onResizeEnd}) : super._();
+  _CascadeController({this.onResizeUpdate, this.onResizeEnd, super.hapticFeedbackVelocity = 6.5}) : super._();
 
   @override
   bool update(int left, int right, double delta) {
@@ -157,7 +158,7 @@ final class _CascadeController extends FResizableController {
     if (translated == 0) {
       final haptic = _haptic;
       _haptic = false;
-      return haptic;
+      return haptic && delta.abs() >= hapticFeedbackVelocity;
     }
 
     // Update all affected regions' offsets.

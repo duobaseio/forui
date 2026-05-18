@@ -287,7 +287,12 @@ extension type FResizableStyles(
           FResizableDividerStyleDelta
         > {
   /// Creates a [FResizableStyles] that inherits its properties.
-  factory FResizableStyles.inherit({required FColors colors, required FIcons icons, required FStyle style}) {
+  factory FResizableStyles.inherit({
+    required FColors colors,
+    required FIcons icons,
+    required FStyle style,
+    required FHapticFeedback hapticFeedback,
+  }) {
     FResizableDividerStyle dividerStyle({required FIconBuilder icon, required double height, required double width}) =>
         FResizableDividerStyle(
           color: colors.border,
@@ -302,6 +307,7 @@ extension type FResizableStyles(
             height: height,
             width: width,
           ),
+          hapticFeedback: hapticFeedback.lightImpact,
         );
 
     final horizontal = dividerStyle(icon: icons.gripVertical, height: 20, width: 10);
