@@ -133,6 +133,19 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
   @override
   final AlignmentGeometry tooltipThumbAnchor;
 
+  /// The haptic feedback when the active edge collides with the track's limit, the other thumb, or a configured min
+  /// range extent.
+  ///
+  /// Defaults to [FHapticFeedback.lightImpact]. The minimum velocity is controlled by [FSliderController.hapticFeedbackVelocity].
+  @override
+  final Future<void> Function() collisionHapticFeedback;
+
+  /// The haptic feedback when the active edge lands on a new discrete tick.
+  ///
+  /// Defaults to [FHapticFeedback.selectionClick]. Fired by [FDiscreteSliderController] only.
+  @override
+  final Future<void> Function() tickHapticFeedback;
+
   /// Creates a [FSliderStyle].
   const FSliderStyle({
     required this.activeColor,
@@ -140,6 +153,8 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
     required this.thumbStyle,
     required this.markStyle,
     required this.tooltipStyle,
+    required this.collisionHapticFeedback,
+    required this.tickHapticFeedback,
     required super.labelTextStyle,
     required super.descriptionTextStyle,
     required super.errorTextStyle,
@@ -192,6 +207,8 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
            labelOffset: labelOffset,
          ),
          tooltipStyle: .inherit(colors: colors, typography: typography, style: style, hapticFeedback: hapticFeedback),
+         collisionHapticFeedback: hapticFeedback.lightImpact,
+         tickHapticFeedback: hapticFeedback.selectionClick,
          tooltipTipAnchor: tooltipTipAnchor,
          tooltipThumbAnchor: tooltipThumbAnchor,
          labelTextStyle: style.formFieldStyle.labelTextStyle,

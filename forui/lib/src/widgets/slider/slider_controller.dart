@@ -27,6 +27,15 @@ enum FSliderActiveThumb {
   max,
 }
 
+/// The haptic feedback type.
+enum FSliderHaptic {
+  /// The active edge collided with a wall: the track's lower/upper limit, the other thumb, or a minimum range extent.
+  collision,
+
+  /// The active edge landed on a new discrete tick.
+  tick,
+}
+
 /// A controller that manages a slider's active track.
 ///
 /// This class should be extended to customize value. By default, the following controllers are provided:
@@ -41,22 +50,33 @@ abstract class FSliderController extends FChangeNotifier {
   /// Whether the active track is expandable at the min and max edges.
   final ({bool min, bool max}) active;
 
+  /// The minimum absolute per-frame drag delta, in pixels, required for [FSliderHaptic.collision] to fire when an
+  /// active edge collides with the track's limit, the other thumb, or a minimum range extent.
+  ///
+  /// ## Contract
+  /// Should be a non-negative finite number.
+  final double hapticFeedbackVelocity;
+
   final FSliderValue _initial;
   FSliderValue? _value;
+  Set<double> _ticks = const {};
 
   /// Creates a [FSliderController] for selecting a single value.
   FSliderController({
     required FSliderValue value,
     this.interaction = .tapAndSlideThumb,
+    this.hapticFeedbackVelocity = 6.5,
     FSliderActiveThumb thumb = .max,
   }) : active = (min: thumb == .min, max: thumb == .max),
-       _initial = value;
+       _initial = value,
+       assert(0 <= hapticFeedbackVelocity, 'hapticFeedbackVelocity ($hapticFeedbackVelocity) must be >= 0');
 
   /// Creates a [FSliderController] for selecting a range.
-  FSliderController.range({required FSliderValue value})
+  FSliderController.range({required FSliderValue value, this.hapticFeedbackVelocity = 6.5})
     : interaction = .tapAndSlideThumb,
       active = (min: true, max: true),
-      _initial = value;
+      _initial = value,
+      assert(0 <= hapticFeedbackVelocity, 'hapticFeedbackVelocity ($hapticFeedbackVelocity) must be >= 0');
 
   /// Registers the controller to a slider with the given extent and marks.
   ///
@@ -64,57 +84,98 @@ abstract class FSliderController extends FChangeNotifier {
   void attach(double extent, List<FSliderMark> marks);
 
   /// Moves the active track on the [min] edge to the previous/next step.
-  void step({required bool min, required bool expand}) {
-    if (_value case final value?) {
-      this.value = value.step(min: min, expand: expand);
+  ///
+  /// Returns `true` when the caller should fire a tick haptic.
+  bool step({required bool min, required bool expand}) {
+    if (_value case final old? when old != (value = old.step(min: min, expand: expand))) {
+      final (from, to) = min ? (old.pixels.min, value.pixels.min) : (old.pixels.max, value.pixels.max);
+      for (final tick in _ticks) {
+        if (_cross(from, tick, to)) {
+          return true;
+        }
+      }
     }
+
+    return false;
   }
 
   /// Slides the active track to the given [offset] on the [min] edge, in logical pixels.
   ///
-  /// The delta is relative to the origin defined by [FSlider.layout].
-  void slide(double offset, {required bool min}) {
+  /// The delta is relative to the origin defined by [FSlider.layout]. [velocity] is the absolute per-frame drag delta
+  /// in pixels; it gates the [FSliderHaptic.collision] event via [hapticFeedbackVelocity].
+  ///
+  /// Returns the haptic type the caller should fire, or `null` when no haptic should fire.
+  FSliderHaptic? slide(double offset, {required bool min, double velocity = 0}) {
     if (interaction == .tap) {
-      return;
+      return null;
     }
 
     assert(min ? active.min : active.max, 'Slider is not extendable at the ${min ? 'min' : 'max'} edge.');
+    if (_value case final old? when old != (value = old.move(min: min, to: offset))) {
+      final range = value.pixels.max - value.pixels.min;
+      final oldRange = old.pixels.max - old.pixels.min;
 
-    if (_value case final value?) {
-      this.value = value.move(min: min, to: offset);
+      final minBound = value.pixels.min == 0 && 0 < old.pixels.min;
+      final maxBound = value.pixels.max == value.pixelConstraints.extent && old.pixels.max < old.pixelConstraints.extent;
+      final minRange = range == value.pixelConstraints.min && value.pixelConstraints.min < oldRange;
+      final maxRange = range == value.pixelConstraints.max && oldRange < value.pixelConstraints.max;
+
+      if ((minBound || maxBound || minRange || maxRange) && hapticFeedbackVelocity <= velocity.abs()) {
+        return .collision;
+      }
+
+      final (from, to) = min ? (old.pixels.min, value.pixels.min) : (old.pixels.max, value.pixels.max);
+      for (final tick in _ticks) {
+        if (_cross(from, tick, to)) {
+          return .tick;
+        }
+      }
+    }
+
+    return null;
+  }
+
+  bool _cross(double from, double tick, double to) {
+    if (from < to) {
+      return from < tick && tick <= to;
+    } else if (to < from) {
+      return to <= tick && tick < from;
+    } else {
+      return false;
     }
   }
 
   /// Taps the slider at given offset, in logical pixels, along the track.
   ///
-  /// Returns:
-  /// * true if the offset moves the min edge
-  /// * false if the offset moves the max edge
-  /// * null if the offset did not move either edge
+  /// Returns a record where:
+  /// * `thumb` is the edge that was moved, or `null` if no edge was moved.
+  /// * `haptic` is `true` when the caller should fire a tick haptic.
   ///
   /// The offset is relative to the origin defined by [FSlider.layout].
-  bool? tap(double offset) {
+  ({FSliderActiveThumb? thumb, bool haptic}) tap(double offset) {
     if (interaction == .slide || interaction == .slideThumb) {
-      return null;
+      return (thumb: null, haptic: false);
     }
 
-    if (_value case final value?) {
-      final min = switch (active) {
-        (min: true, max: true) when offset < value.pixels.min => true,
-        (min: true, max: true) when value.pixels.max < offset => false,
-        (min: true, max: false) => true,
-        (min: false, max: true) => false,
+    FSliderActiveThumb? thumb;
+    bool haptic = false;
+
+    if (_value case final old?) {
+      thumb = switch (active) {
+        (min: true, max: true) when offset < old.pixels.min => .min,
+        (min: true, max: true) when old.pixels.max < offset => .max,
+        (min: true, max: false) => .min,
+        (min: false, max: true) => .max,
         _ => null,
       };
 
-      if (min != null) {
-        this.value = value.move(min: min, to: offset);
+      if (thumb != null) {
+        value = old.move(min: thumb == .min, to: offset);
+        haptic = old != value && _ticks.contains(thumb == .min ? value.pixels.min : value.pixels.max);
       }
-
-      return min;
     }
 
-    return null;
+    return (thumb: thumb, haptic: haptic);
   }
 
   /// Resets the controller to its initial state.
@@ -142,14 +203,19 @@ class FContinuousSliderController extends FSliderController {
   final double stepPercentage;
 
   /// Creates a [FContinuousSliderController] for selecting a single value.
-  FContinuousSliderController({required super.value, this.stepPercentage = 0.05, super.interaction, super.thumb})
-    : assert(
-        0 <= stepPercentage && stepPercentage <= 1,
-        'stepPercentage ($stepPercentage) must be between 0 and 1, inclusive.',
-      );
+  FContinuousSliderController({
+    required super.value,
+    this.stepPercentage = 0.05,
+    super.interaction,
+    super.thumb,
+    super.hapticFeedbackVelocity,
+  }) : assert(
+         0 <= stepPercentage && stepPercentage <= 1,
+         'stepPercentage ($stepPercentage) must be between 0 and 1, inclusive.',
+       );
 
   /// Creates a [FContinuousSliderController] for selecting a range.
-  FContinuousSliderController.range({required super.value, this.stepPercentage = 0.05})
+  FContinuousSliderController.range({required super.value, this.stepPercentage = 0.05, super.hapticFeedbackVelocity})
     : assert(
         0 <= stepPercentage && stepPercentage <= 1,
         'stepPercentage ($stepPercentage) must be between 0 and 1, inclusive.',
@@ -158,7 +224,7 @@ class FContinuousSliderController extends FSliderController {
 
   @override
   @internal
-  void attach(double extent, List<FSliderMark> _) {
+  void attach(double extent, List<FSliderMark> marks) {
     final proposed = ContinuousValue(
       step: stepPercentage,
       extent: extent,
@@ -172,6 +238,11 @@ class FContinuousSliderController extends FSliderController {
     } else {
       value = proposed;
     }
+
+    _ticks = {
+      for (final FSliderMark(:tick, :value) in marks)
+        if (tick) value * extent,
+    };
   }
 
   @override
@@ -191,10 +262,10 @@ class FContinuousSliderController extends FSliderController {
 /// A controller that manages a slider's active track which represents a discrete range/value.
 class FDiscreteSliderController extends FSliderController {
   /// Creates a [FDiscreteSliderController] for selecting a single value.
-  FDiscreteSliderController({required super.value, super.interaction, super.thumb});
+  FDiscreteSliderController({required super.value, super.interaction, super.thumb, super.hapticFeedbackVelocity});
 
   /// Creates a [FDiscreteSliderController] for selecting a range.
-  FDiscreteSliderController.range({required super.value}) : super.range();
+  FDiscreteSliderController.range({required super.value, super.hapticFeedbackVelocity}) : super.range();
 
   @override
   void attach(double extent, List<FSliderMark> marks) {
@@ -213,6 +284,11 @@ class FDiscreteSliderController extends FSliderController {
     } else {
       value = proposed;
     }
+
+    _ticks = {
+      for (final FSliderMark(:tick, :value) in marks)
+        if (tick) value * extent,
+    };
   }
 
   @override
@@ -240,6 +316,7 @@ class ProxyContinuousSliderController extends FContinuousSliderController {
     required super.stepPercentage,
     required super.interaction,
     required super.thumb,
+    super.hapticFeedbackVelocity,
   }) : _onChange = onChange,
        super();
 
@@ -247,11 +324,12 @@ class ProxyContinuousSliderController extends FContinuousSliderController {
     required super.value,
     required ValueChanged<FSliderValue> onChange,
     required super.stepPercentage,
+    super.hapticFeedbackVelocity,
   }) : _onChange = onChange,
        super.range();
 
   @override
-  void attach(double extent, List<FSliderMark> _) {
+  void attach(double extent, List<FSliderMark> marks) {
     // Directly set _value without triggering _onChange - attach is internal, not user-initiated
     _value = ContinuousValue(
       step: stepPercentage,
@@ -260,6 +338,10 @@ class ProxyContinuousSliderController extends FContinuousSliderController {
       min: value.min,
       max: value.max,
     );
+    _ticks = {
+      for (final FSliderMark(:tick, :value) in marks)
+        if (tick) value * extent,
+    };
   }
 
   void update({required FSliderValue value, required ValueChanged<FSliderValue> onChange}) {
@@ -291,12 +373,16 @@ class ProxyDiscreteSliderController extends FDiscreteSliderController {
     required ValueChanged<FSliderValue> onChange,
     required super.interaction,
     required super.thumb,
+    super.hapticFeedbackVelocity,
   }) : _onChange = onChange,
        super();
 
-  ProxyDiscreteSliderController.range({required super.value, required ValueChanged<FSliderValue> onChange})
-    : _onChange = onChange,
-      super.range();
+  ProxyDiscreteSliderController.range({
+    required super.value,
+    required ValueChanged<FSliderValue> onChange,
+    super.hapticFeedbackVelocity,
+  }) : _onChange = onChange,
+       super.range();
 
   @override
   void attach(double extent, List<FSliderMark> marks) {
@@ -310,6 +396,10 @@ class ProxyDiscreteSliderController extends FDiscreteSliderController {
       max: value.max,
       ticks: .fromIterable(marks.map((mark) => mark.value), value: (_) {}),
     );
+    _ticks = {
+      for (final FSliderMark(:tick, :value) in marks)
+        if (tick) value * extent,
+    };
   }
 
   void update({required FSliderValue value, required ValueChanged<FSliderValue> onChange}) {

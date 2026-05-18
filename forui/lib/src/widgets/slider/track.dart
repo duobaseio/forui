@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math';
 
 import 'package:flutter/widgets.dart';
@@ -100,27 +101,27 @@ class _GestureDetectorState extends State<_GestureDetector> {
 
     if (layout.vertical) {
       return GestureDetector(
-        onTapDown: _tap(controller, minTooltipController, maxTooltipController, style.thumbSize, layout),
+        onTapDown: _tap(controller, style, minTooltipController, maxTooltipController, style.thumbSize, layout),
         onTapUp: (_) {
           minTooltipController?.hide();
           maxTooltipController?.hide();
           onEnd?.call(controller.value);
         },
         onVerticalDragStart: start,
-        onVerticalDragUpdate: _drag(controller, layout),
+        onVerticalDragUpdate: _drag(controller, style, layout),
         onVerticalDragEnd: end,
         child: track,
       );
     } else {
       return GestureDetector(
-        onTapDown: _tap(controller, minTooltipController, maxTooltipController, style.thumbSize, layout),
+        onTapDown: _tap(controller, style, minTooltipController, maxTooltipController, style.thumbSize, layout),
         onTapUp: (_) {
           minTooltipController?.hide();
           maxTooltipController?.hide();
           onEnd?.call(controller.value);
         },
         onHorizontalDragStart: start,
-        onHorizontalDragUpdate: _drag(controller, layout),
+        onHorizontalDragUpdate: _drag(controller, style, layout),
         onHorizontalDragEnd: end,
         child: track,
       );
@@ -129,6 +130,7 @@ class _GestureDetectorState extends State<_GestureDetector> {
 
   GestureTapDownCallback? _tap(
     FSliderController controller,
+    FSliderStyle style,
     FTooltipController? min,
     FTooltipController? max,
     double thumbSize,
@@ -144,19 +146,24 @@ class _GestureDetectorState extends State<_GestureDetector> {
         final translated => translated,
       };
 
-      switch (controller.tap(offset)) {
-        case true:
+      final (:thumb, :haptic) = controller.tap(offset);
+      switch (thumb) {
+        case .min:
           min?.show();
-        case false:
+        case .max:
           max?.show();
-        default:
+        case null:
+      }
+
+      if (haptic) {
+        unawaited(style.tickHapticFeedback());
       }
     }
 
     return tappable.contains(controller.interaction) ? down : null;
   }
 
-  GestureDragUpdateCallback? _drag(FSliderController controller, FLayout layout) {
+  GestureDragUpdateCallback? _drag(FSliderController controller, FSliderStyle style, FLayout layout) {
     if (controller.interaction != FSliderInteraction.slide) {
       return null;
     }
@@ -170,7 +177,18 @@ class _GestureDetectorState extends State<_GestureDetector> {
 
     return (details) {
       final origin = controller.active.min ? _origin!.min : _origin!.max;
-      controller.slide(origin + translate(details.localPosition - _pointerOrigin!), min: controller.active.min);
+      switch (controller.slide(
+        origin + translate(details.localPosition - _pointerOrigin!),
+        min: controller.active.min,
+        velocity: (layout.vertical ? details.delta.dy : details.delta.dx).abs(),
+      )) {
+        case .tick:
+          unawaited(style.tickHapticFeedback());
+        case .collision:
+          unawaited(style.collisionHapticFeedback());
+        case null:
+          break;
+      }
     };
   }
 }

@@ -426,6 +426,149 @@ void main() {
       expect(onEndCalled, 1);
     });
   });
+
+  group('haptic feedback', () {
+    const ticks = [
+      FSliderMark(value: 0),
+      FSliderMark(value: 0.25),
+      FSliderMark(value: 0.5),
+      FSliderMark(value: 0.75),
+      FSliderMark(value: 1),
+    ];
+
+    Future<({int Function() tick, int Function() collision})> pump(
+      WidgetTester tester, {
+      required FSliderControl control,
+      List<FSliderMark> marks = const [],
+    }) async {
+      var ticks = 0;
+      var collisions = 0;
+      final colors = FThemes.neutral.light.touch.colors;
+      await tester.pumpWidget(
+        TestScaffold.app(
+          platform: .macOS,
+          theme: FThemeData(
+            colors: colors,
+            touch: true,
+            hapticFeedback: FHapticFeedback(
+              selectionClick: () async => ticks++,
+              lightImpact: () async => collisions++,
+            ),
+          ),
+          child: SizedBox(width: 300, child: FSlider(control: control, marks: marks)),
+        ),
+      );
+      return (tick: () => ticks, collision: () => collisions);
+    }
+
+    group('drag', () {
+      testWidgets('continuous - fast drag past max limit fires collision', (tester) async {
+        final counts = await pump(tester, control: .managedContinuous(initial: FSliderValue(max: 0.7)));
+        await tester.drag(find.byType(Thumb), const Offset(400, 0));
+        await tester.pumpAndSettle();
+
+        expect(counts.collision(), greaterThanOrEqualTo(1));
+        expect(counts.tick(), 0);
+      });
+
+      testWidgets('continuous - slow drag past max limit stays silent', (tester) async {
+        final counts = await pump(tester, control: .managedContinuous(initial: FSliderValue(max: 0.7)));
+        // Per-frame delta well below the 6.5 px threshold.
+        await tester.timedDrag(find.byType(Thumb), const Offset(400, 0), const Duration(seconds: 5));
+        await tester.pumpAndSettle();
+
+        expect(counts.collision(), 0);
+        expect(counts.tick(), 0);
+      });
+
+      testWidgets('continuous with tick marks - drag across ticks fires tick', (tester) async {
+        final counts = await pump(
+          tester,
+          control: .managedContinuous(initial: FSliderValue(max: 0.25)),
+          marks: ticks,
+        );
+        await tester.drag(find.byType(Thumb), const Offset(150, 0));
+        await tester.pumpAndSettle();
+
+        expect(counts.tick(), greaterThanOrEqualTo(1));
+        expect(counts.collision(), 0);
+      });
+
+      testWidgets('discrete - drag across ticks fires tick', (tester) async {
+        final counts = await pump(
+          tester,
+          control: .managedDiscrete(initial: FSliderValue(max: 0.25)),
+          marks: ticks,
+        );
+        await tester.drag(find.byType(Thumb), const Offset(150, 0));
+        await tester.pumpAndSettle();
+
+        expect(counts.tick(), greaterThanOrEqualTo(1));
+        expect(counts.collision(), 0);
+      });
+
+      testWidgets('discrete - fast drag past max limit fires collision', (tester) async {
+        final counts = await pump(
+          tester,
+          control: .managedDiscrete(initial: FSliderValue(max: 0.75)),
+          marks: ticks,
+        );
+        await tester.drag(find.byType(Thumb), const Offset(400, 0));
+        await tester.pumpAndSettle();
+
+        expect(counts.collision(), greaterThanOrEqualTo(1));
+      });
+    });
+
+    group('tap', () {
+      testWidgets('discrete - tap on track fires tick on snap', (tester) async {
+        final counts = await pump(
+          tester,
+          control: .managedDiscrete(initial: FSliderValue(max: 0.25)),
+          marks: ticks,
+        );
+        final track = tester.getRect(find.byType(Track));
+        await tester.tapAt(track.center);
+        await tester.pumpAndSettle();
+
+        expect(counts.tick(), 1);
+        expect(counts.collision(), 0);
+      });
+
+      testWidgets('discrete - tap on same tick stays silent', (tester) async {
+        final counts = await pump(
+          tester,
+          control: .managedDiscrete(initial: FSliderValue(max: 0.5)),
+          marks: ticks,
+        );
+        final track = tester.getRect(find.byType(Track));
+        await tester.tapAt(track.center);
+        await tester.pumpAndSettle();
+
+        expect(counts.tick(), 0);
+        expect(counts.collision(), 0);
+      });
+
+      testWidgets('continuous without ticks - tap stays silent', (tester) async {
+        final counts = await pump(tester, control: .managedContinuous(initial: FSliderValue(max: 0.25)));
+        final track = tester.getRect(find.byType(Track));
+        await tester.tapAt(track.center);
+        await tester.pumpAndSettle();
+
+        expect(counts.tick(), 0);
+        expect(counts.collision(), 0);
+      });
+
+      testWidgets('tap at limit never fires collision (intentional placement)', (tester) async {
+        final counts = await pump(tester, control: .managedContinuous(initial: FSliderValue(max: 0.25)));
+        final track = tester.getRect(find.byType(Track));
+        await tester.tapAt(track.centerRight.translate(-1, 0));
+        await tester.pumpAndSettle();
+
+        expect(counts.collision(), 0);
+      });
+    });
+  });
 }
 
 extension on Rect {

@@ -116,17 +116,17 @@ void main() {
               ..attach(100, marks)
               ..addListener(() => calls++);
 
-            expect(controller.tap(50), null);
+            expect(controller.tap(50).thumb, null);
             expect(calls, 0);
             expect((controller.value.min, controller.value.max), (value.min, value.max));
           });
         }
 
         for (final (offset, expected, activeThumb, thumb) in [
-          (0.0, (min: 0.0, max: 0.75), FSliderActiveThumb.min, true),
-          (50.0, (min: 0.5, max: 0.75), FSliderActiveThumb.min, true),
-          (100.0, (min: 0.25, max: 1.0), FSliderActiveThumb.max, false),
-          (50.0, (min: 0.25, max: 0.5), FSliderActiveThumb.max, false),
+          (0.0, (min: 0.0, max: 0.75), FSliderActiveThumb.min, FSliderActiveThumb.min),
+          (50.0, (min: 0.5, max: 0.75), FSliderActiveThumb.min, FSliderActiveThumb.min),
+          (100.0, (min: 0.25, max: 1.0), FSliderActiveThumb.max, FSliderActiveThumb.max),
+          (50.0, (min: 0.25, max: 0.5), FSliderActiveThumb.max, FSliderActiveThumb.max),
         ]) {
           test('tap value', () {
             var calls = 0;
@@ -134,7 +134,7 @@ void main() {
               ..attach(100, marks)
               ..addListener(() => calls++);
 
-            expect(controller.tap(offset), thumb);
+            expect(controller.tap(offset).thumb, thumb);
             expect(calls, 1);
             expect((controller.value.min, controller.value.max), (expected.min, expected.max));
             expect(controller.value.pixels, (min: expected.min * 100, max: expected.max * 100));
@@ -145,7 +145,7 @@ void main() {
           var calls = 0;
           controller = constructor(range, .tap)..addListener(() => calls++);
 
-          expect(controller.tap(50), null);
+          expect(controller.tap(50).thumb, null);
           expect(calls, 0);
           expect(controller.value, range);
         });
@@ -252,8 +252,8 @@ void main() {
     }
 
     for (final (offset, expected, times, thumb) in [
-      (0.0, (min: 0.0, max: 0.75), 1, true),
-      (100.0, (min: 0.25, max: 1.0), 1, false),
+      (0.0, (min: 0.0, max: 0.75), 1, FSliderActiveThumb.min),
+      (100.0, (min: 0.25, max: 1.0), 1, FSliderActiveThumb.max),
       (50.0, (min: 0.25, max: 0.75), 0, null),
     ]) {
       test('tap range', () {
@@ -262,7 +262,7 @@ void main() {
           ..attach(100, [])
           ..addListener(() => calls++);
 
-        expect(controller.tap(offset), thumb);
+        expect(controller.tap(offset).thumb, thumb);
         expect(calls, times);
         expect((controller.value.min, controller.value.max), (expected.min, expected.max));
         expect(controller.value.pixels, (min: expected.min * 100, max: expected.max * 100));
@@ -300,8 +300,8 @@ void main() {
     }
 
     for (final (offset, expected, times, thumb) in [
-      (0.0, (min: 0.0, max: 0.75), 1, true),
-      (100.0, (min: 0.25, max: 1.0), 1, false),
+      (0.0, (min: 0.0, max: 0.75), 1, FSliderActiveThumb.min),
+      (100.0, (min: 0.25, max: 1.0), 1, FSliderActiveThumb.max),
       (50.0, (min: 0.25, max: 0.75), 0, null),
     ]) {
       test('tap range', () {
@@ -310,11 +310,148 @@ void main() {
           ..attach(100, marks)
           ..addListener(() => calls++);
 
-        expect(controller.tap(offset), thumb);
+        expect(controller.tap(offset).thumb, thumb);
         expect(calls, times);
         expect((controller.value.min, controller.value.max), (expected.min, expected.max));
         expect(controller.value.pixels, (min: expected.min * 100, max: expected.max * 100));
       });
     }
+  });
+
+  group('haptic feedback', () {
+    group('slide', () {
+      test('returns null when interaction is tap-only', () {
+        final controller = FContinuousSliderController(value: FSliderValue(max: 0.5), interaction: .tap)
+          ..attach(100, []);
+        expect(controller.slide(100, min: false, velocity: 50), null);
+      });
+
+      test('hapticFeedbackVelocity = 0 fires collision on any movement', () {
+        final controller = FContinuousSliderController(value: FSliderValue(max: 0.5), hapticFeedbackVelocity: 0)
+          ..attach(100, []);
+        expect(controller.slide(100, min: false, velocity: 0.1), FSliderHaptic.collision);
+      });
+
+      group('single-value continuous', () {
+        test('drag with no collision and no ticks returns null', () {
+          final controller = FContinuousSliderController(value: FSliderValue(max: 0.25))..attach(100, []);
+          expect(controller.slide(60, min: false, velocity: 20), null);
+        });
+
+        test('drag crossing a tick mark returns tick', () {
+          final controller = FContinuousSliderController(value: FSliderValue(max: 0.25))..attach(100, marks);
+          expect(controller.slide(55, min: false, velocity: 20), FSliderHaptic.tick);
+        });
+
+        test('drag between two tick marks without crossing returns null', () {
+          final controller = FContinuousSliderController(value: FSliderValue(max: 0.3))..attach(100, marks);
+          expect(controller.slide(40, min: false, velocity: 20), null);
+        });
+
+        test('fast drag past upper limit returns collision', () {
+          final controller = FContinuousSliderController(value: FSliderValue(max: 0.5))..attach(100, []);
+          expect(controller.slide(100, min: false, velocity: 50), FSliderHaptic.collision);
+        });
+
+        test('slow drag past upper limit returns null', () {
+          final controller = FContinuousSliderController(value: FSliderValue(max: 0.5))..attach(100, []);
+          expect(controller.slide(100, min: false, velocity: 1), null);
+        });
+      });
+
+      group('single-value discrete', () {
+        test('drag landing on new tick returns tick', () {
+          final controller = FDiscreteSliderController(value: FSliderValue(max: 0.25))..attach(100, marks);
+          expect(controller.slide(50, min: false, velocity: 20), FSliderHaptic.tick);
+        });
+
+        test('drag rounding to same tick returns null', () {
+          final controller = FDiscreteSliderController(value: FSliderValue(max: 0.5))..attach(100, marks);
+          expect(controller.slide(51, min: false, velocity: 20), null);
+        });
+
+        test('fast drag past upper limit returns collision', () {
+          final controller = FDiscreteSliderController(value: FSliderValue(max: 0.75))..attach(100, marks);
+          expect(controller.slide(100, min: false, velocity: 50), FSliderHaptic.collision);
+        });
+
+        test('slow drag landing on a tick returns tick even at the upper limit', () {
+          final controller = FDiscreteSliderController(value: FSliderValue(max: 0.75))..attach(100, marks);
+          expect(controller.slide(100, min: false, velocity: 1), FSliderHaptic.tick);
+        });
+      });
+
+      group('range continuous', () {
+        test('fast drag of min edge into max edge returns collision', () {
+          final controller = FContinuousSliderController.range(value: FSliderValue(min: 0.25, max: 0.75))
+            ..attach(100, []);
+          expect(controller.slide(80, min: true, velocity: 50), FSliderHaptic.collision);
+        });
+
+        test('fast drag of max edge into min edge returns collision', () {
+          final controller = FContinuousSliderController.range(value: FSliderValue(min: 0.25, max: 0.75))
+            ..attach(100, []);
+          expect(controller.slide(20, min: false, velocity: 50), FSliderHaptic.collision);
+        });
+
+        test('slow drag into other edge returns null', () {
+          final controller = FContinuousSliderController.range(value: FSliderValue(min: 0.25, max: 0.75))
+            ..attach(100, []);
+          expect(controller.slide(80, min: true, velocity: 1), null);
+        });
+      });
+
+      group('range discrete', () {
+        test('fast drag of min edge into max edge returns collision', () {
+          final controller = FDiscreteSliderController.range(value: FSliderValue(min: 0.25, max: 0.75))
+            ..attach(100, marks);
+          expect(controller.slide(80, min: true, velocity: 50), FSliderHaptic.collision);
+        });
+      });
+    });
+
+    group('step', () {
+      test('continuous returns false', () {
+        final controller = FContinuousSliderController(value: FSliderValue(max: 0.5))..attach(100, []);
+        expect(controller.step(min: false, expand: true), false);
+      });
+
+      test('continuous landing on a limit returns false (keyboard step is intentional, not a collision)', () {
+        final controller = FContinuousSliderController(value: FSliderValue(max: 0.95))..attach(100, []);
+        expect(controller.step(min: false, expand: true), false);
+      });
+
+      test('discrete returns true', () {
+        final controller = FDiscreteSliderController(value: FSliderValue(max: 0.5))..attach(100, marks);
+        expect(controller.step(min: false, expand: true), true);
+      });
+    });
+
+    group('tap', () {
+      test('discrete landing on new tick returns true', () {
+        final controller = FDiscreteSliderController(value: FSliderValue(max: 0.25))..attach(100, marks);
+        expect(controller.tap(50).haptic, true);
+      });
+
+      test('discrete landing on same tick returns false', () {
+        final controller = FDiscreteSliderController(value: FSliderValue(max: 0.5))..attach(100, marks);
+        expect(controller.tap(51).haptic, false);
+      });
+
+      test('continuous tapping exactly on a tick mark returns true', () {
+        final controller = FContinuousSliderController(value: FSliderValue(max: 0.25))..attach(100, marks);
+        expect(controller.tap(60).haptic, true);
+      });
+
+      test('continuous without ticks returns false', () {
+        final controller = FContinuousSliderController(value: FSliderValue(max: 0.25))..attach(100, []);
+        expect(controller.tap(80).haptic, false);
+      });
+
+      test('tap at limit returns false (intentional placement)', () {
+        final controller = FContinuousSliderController(value: FSliderValue(max: 0.5))..attach(100, []);
+        expect(controller.tap(100).haptic, false);
+      });
+    });
   });
 }

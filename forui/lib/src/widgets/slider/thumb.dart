@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
@@ -50,7 +51,15 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
     final offset = widget.min ? controller.value.min : controller.value.max;
     final variants = InheritedVariants.of(context).variants;
     final InheritedData(
-      style: FSliderStyle(:thumbSize, :thumbStyle, :tooltipStyle, :tooltipTipAnchor, :tooltipThumbAnchor),
+      style: FSliderStyle(
+        :thumbSize,
+        :thumbStyle,
+        :tooltipStyle,
+        :tooltipTipAnchor,
+        :tooltipThumbAnchor,
+        :tickHapticFeedback,
+        :collisionHapticFeedback,
+      ),
       :layout,
       :tooltipBuilder,
       :semanticValueFormatterCallback,
@@ -97,14 +106,18 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
         actions: {
           _ExpandIntent: CallbackAction(
             onInvoke: (_) {
-              controller.step(min: widget.min, expand: true);
+              if (controller.step(min: widget.min, expand: true)) {
+                unawaited(tickHapticFeedback());
+              }
               onEnd?.call(controller.value);
               return null;
             },
           ),
           _ShrinkIntent: CallbackAction(
             onInvoke: (_) {
-              controller.step(min: widget.min, expand: false);
+              if (controller.step(min: widget.min, expand: false)) {
+                unawaited(tickHapticFeedback());
+              }
               onEnd?.call(controller.value);
               return null;
             },
@@ -188,7 +201,7 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
         onTapDown: down,
         onTapUp: up,
         onVerticalDragStart: start,
-        onVerticalDragUpdate: _drag(controller, thumbSize, layout),
+        onVerticalDragUpdate: _drag(controller, thumbSize, layout, tickHapticFeedback, collisionHapticFeedback),
         onVerticalDragEnd: end,
         child: thumb,
       );
@@ -197,15 +210,21 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
         onTapDown: down,
         onTapUp: up,
         onHorizontalDragStart: start,
-        onHorizontalDragUpdate: _drag(controller, thumbSize, layout),
+        onHorizontalDragUpdate: _drag(controller, thumbSize, layout, tickHapticFeedback, collisionHapticFeedback),
         onHorizontalDragEnd: end,
         child: thumb,
       );
     }
   }
 
-  GestureDragUpdateCallback? _drag(FSliderController controller, double thumbSize, FLayout layout) {
-    if (controller.interaction == FSliderInteraction.tap) {
+  GestureDragUpdateCallback? _drag(
+    FSliderController controller,
+    double thumbSize,
+    FLayout layout,
+    Future<void> Function() tickHapticFeedback,
+    Future<void> Function() collisionHapticFeedback,
+  ) {
+    if (controller.interaction == .tap) {
       return null;
     }
 
@@ -213,7 +232,15 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
 
     void drag(DragUpdateDetails details) {
       final origin = widget.min ? _origin!.min : _origin!.max;
-      controller.slide(origin + translate(details.localPosition), min: widget.min);
+      final velocity = (layout.vertical ? details.delta.dy : details.delta.dx).abs();
+      switch (controller.slide(origin + translate(details.localPosition), min: widget.min, velocity: velocity)) {
+        case .tick:
+          unawaited(tickHapticFeedback());
+        case .collision:
+          unawaited(collisionHapticFeedback());
+        case null:
+          break;
+      }
     }
 
     return drag;

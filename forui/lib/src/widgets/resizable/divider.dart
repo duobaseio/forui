@@ -284,8 +284,7 @@ class FResizableDividerStyle with Diagnosticable, _$FResizableDividerStyleFuncti
 
   /// The haptic feedback when a region collides with its neighbour while resizing.
   ///
-  /// Defaults to [FHapticFeedback.lightImpact]. The collision detection and velocity gate live on
-  /// [FResizableController.hapticFeedbackVelocity].
+  /// Defaults to [FHapticFeedback.lightImpact]. The minimum velocity is controlled by [FResizableController.hapticFeedbackVelocity].
   @override
   final Future<void> Function() hapticFeedback;
 

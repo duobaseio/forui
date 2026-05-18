@@ -165,6 +165,17 @@ customized globally. Defaults to Lucide-backed set, `FIcons.lucide()`.
 * **Breaking** Add `FSidebarItemStyle.collapsibleIcon`. Defaults to `FIcons.chevronRight`.
 
 
+### `FSlider`
+* Add `FSliderHaptic` enum.
+* Add `FSliderStyle.collisionHapticFeedback`.
+* Add `FSliderStyle.tickHapticFeedback`.
+* Add `FSliderController.hapticFeedbackVelocity`.
+
+* **Breaking** Change `FSliderController.slide(...)` to return `FSliderHaptic?`.
+* **Breaking** Change `FSliderController.step(...)` to return `bool`.
+* **Breaking** Change `FSliderController.tap(...)` to return `({FSliderActiveThumb? thumb, bool haptic})` instead of `bool?`.
+
+
 ### `FStyle` & `FThemeData`
 * Add `FThemeData.hapticFeedback`.
 * Add `FThemeData.icons` for theming icons used by Forui widgets. See `FIcons`.
