@@ -11,9 +11,17 @@ import 'utils.dart';
 ///
 /// Assume Unicode emojis are supported when not on Windows.
 /// If we are on Windows, Unicode emojis are supported in Windows Terminal,
-/// which sets the WT_SESSION environment variable. See:
-/// https://github.com/microsoft/terminal/issues/1040
-bool get emoji => _debugEmoji ?? !Platform.isWindows || Platform.environment.containsKey('WT_SESSION');
+/// which sets the WT_SESSION environment variable. See: https://github.com/microsoft/terminal/issues/1040
+///
+/// JediTerm does not handle emojis properly (rendered as 2 cells but reported as 1-cell wide), shifting the hyperlink
+/// hotspot off the rendered path text. OSC 8 hyperlinks would work around JediTerm's regex-based path detector, but
+/// JediTerm does not support them either, see https://youtrack.jetbrains.com/issue/IJPL-103740. As a workaround, we
+/// disable emojis when TERMINAL_EMULATOR=JetBrains-JediTerm. The Run window is unaffected since it uses a different
+/// renderer that sizes emojis correctly.
+bool get emoji =>
+    _debugEmoji ??
+    (!Platform.isWindows || Platform.environment.containsKey('WT_SESSION')) &&
+        Platform.environment['TERMINAL_EMULATOR'] != 'JetBrains-JediTerm';
 
 // ignore: avoid_positional_boolean_parameters
 set emoji(bool? value) => _debugEmoji = value;

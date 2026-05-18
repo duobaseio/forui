@@ -73,7 +73,8 @@ class FToasterStyle with Diagnosticable, _$FToasterStyleFunctions {
   @override
   final FToasterMotion motion;
 
-  /// The toast's alignment relative to a [FToaster]. Defaults to [FToastAlignment.bottomEnd].
+  /// The toast's alignment relative to a [FToaster]. Defaults to [FToastAlignment.topCenter] on touch devices, and
+  /// [FToastAlignment.bottomEnd] otherwise.
   @override
   final FToastAlignment toastAlignment;
 
@@ -105,6 +106,7 @@ class FToasterStyle with Diagnosticable, _$FToasterStyleFunctions {
     required bool touch,
   }) : this(
          toastStyles: .inherit(colors: colors, typography: typography, style: style, touch: touch),
+         toastAlignment: touch ? .topCenter : .bottomEnd,
        );
 }
 

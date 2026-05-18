@@ -35,11 +35,11 @@ class InitCommand extends ForuiCommand {
   void run() {
     final template = argResults!['template'] as String;
 
-    _configuration().writeAsStringSync(defaults);
-    stdout.writeln('${emoji ? '✅' : '[Done]'} Created forui.yaml.');
+    final config = _configuration()..writeAsStringSync(defaults);
+    stdout.writeln('${emoji ? '✅' : '[Done]'} Created ${Uri.file(config.absolute.path)}.');
 
-    _main().writeAsStringSync(formatter.format(snippets['main-$template']!.$2));
-    stdout.writeln('${emoji ? '✅' : '[Done]'} Created lib/main.dart.');
+    final main = _main()..writeAsStringSync(formatter.format(snippets['main-$template']!.$2));
+    stdout.writeln('${emoji ? '✅' : '[Done]'} Created ${Uri.file(main.absolute.path)}.');
   }
 
   File _configuration() {
@@ -54,10 +54,9 @@ class InitCommand extends ForuiCommand {
     }
 
     if (yaml.existsSync() || yml.existsSync()) {
-      final extension = yaml.existsSync() ? 'yaml' : 'yml';
       file = yaml.existsSync() ? yaml : yml;
 
-      _prompt('forui.$extension');
+      _prompt(file);
     }
 
     return file;
@@ -73,7 +72,7 @@ class InitCommand extends ForuiCommand {
 
     if (file.existsSync()) {
       _prompt(
-        'lib/main.dart',
+        file,
         'You can generate a main.dart later by running "dart forui snippet create main-basic/main-router". ',
       );
     }
@@ -81,16 +80,17 @@ class InitCommand extends ForuiCommand {
     return file;
   }
 
-  void _prompt(String file, [String message = '']) {
+  void _prompt(File file, [String message = '']) {
     final input = !globalResults!.flag('no-input');
+    final uri = Uri.file(file.absolute.path);
 
     if (!input) {
-      stdout.writeln('$file already exists. Skipping... ');
+      stdout.writeln('$uri already exists. Skipping... ');
       exit(0);
     }
 
     while (true) {
-      stdout.write('${emoji ? '⚠️' : '[Warning]'} $file already exists. ${message}Overwrite it? [Y/n] ');
+      stdout.write('${emoji ? '⚠️' : '[Warning]'} $uri already exists. ${message}Overwrite it? [Y/n] ');
 
       switch (stdin.readLineSync()) {
         case 'y' || 'Y' || '':

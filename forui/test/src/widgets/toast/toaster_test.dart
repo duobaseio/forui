@@ -4,6 +4,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/toast/toaster.dart';
 import '../../test_scaffold.dart';
 
 Widget small(
@@ -61,6 +62,60 @@ Widget button([
 );
 
 void main() {
+  group('FToasterStyle.inherit', () {
+    test('defaults toastAlignment to topCenter on touch', () {
+      expect(FThemes.neutral.light.touch.toasterStyle.toastAlignment, FToastAlignment.topCenter);
+    });
+
+    test('defaults toastAlignment to bottomEnd on desktop', () {
+      expect(FThemes.neutral.light.desktop.toasterStyle.toastAlignment, FToastAlignment.bottomEnd);
+    });
+  });
+
+  group('default swipeToDismiss', () {
+    for (final (FToastAlignment alignment, TextDirection textDirection, List<AxisDirection> expected) in [
+      (.topCenter, .ltr, [.up]),
+      (.bottomCenter, .ltr, [.down]),
+      (.topLeft, .ltr, [.up, .left]),
+      (.topRight, .ltr, [.up, .right]),
+      (.bottomLeft, .ltr, [.down, .left]),
+      (.bottomRight, .ltr, [.down, .right]),
+      (.topStart, .ltr, [.up, .left]),
+      (.topEnd, .ltr, [.up, .right]),
+      (.topStart, .rtl, [.up, .right]),
+      (.bottomEnd, .rtl, [.down, .left]),
+    ]) {
+      testWidgets('$alignment ($textDirection) has $expected swipe to dismiss', (tester) async {
+        late BuildContext capturedContext;
+        await tester.pumpWidget(
+          TestScaffold(
+            child: Directionality(
+              textDirection: textDirection,
+              child: FToaster(
+                child: Builder(
+                  builder: (context) {
+                    capturedContext = context;
+                    return const SizedBox.shrink();
+                  },
+                ),
+              ),
+            ),
+          ),
+        );
+
+        final entry =
+            showRawFToast(
+                  context: capturedContext,
+                  alignment: alignment,
+                  builder: (_, _) => const SizedBox(width: 100, height: 50),
+                )
+                as ToasterEntry;
+
+        expect(entry.swipeToDismiss, expected);
+      });
+    }
+  });
+
   for (final behavior in FToasterExpandBehavior.values) {
     group('$behavior', () {
       testWidgets('auto-close', (tester) async {

@@ -164,7 +164,7 @@ extension Generation on StyleCreateCommand {
       ..writeln()
       ..writeln('Existing files:');
     for (final path in existing) {
-      stdout.writeln('  $path');
+      stdout.writeln('  ${Uri.file(path)}');
     }
 
     while (true) {
@@ -205,7 +205,7 @@ extension Generation on StyleCreateCommand {
         ..createSync(recursive: true)
         ..writeAsStringSync(formatter.format(buffer.toString()));
 
-      stdout.writeln('${emoji ? '✅' : '[Done]'} $path');
+      stdout.writeln('${emoji ? '✅' : '[Done]'} ${Uri.file(path)}');
     }
   }
 

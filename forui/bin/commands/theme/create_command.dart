@@ -126,7 +126,7 @@ class ThemeCreateCommand extends ForuiCommand {
       ..writeAsStringSync(formatter.format(buffer.toString()));
 
     stdout
-      ..writeln('${emoji ? '✅' : '[Done]'} $path')
+      ..writeln('${emoji ? '✅' : '[Done]'} ${Uri.file(path)}')
       ..writeln()
       ..writeln('See https://forui.dev/docs/guides/customizing-themes for how to use the generated theme.');
   }
@@ -138,7 +138,7 @@ class ThemeCreateCommand extends ForuiCommand {
     }
 
     while (true) {
-      stdout.write('${emoji ? '⚠️' : '[Warning]'} $existing already exists. Overwrite it? [Y/n] ');
+      stdout.write('${emoji ? '⚠️' : '[Warning]'} ${Uri.file(existing)} already exists. Overwrite it? [Y/n] ');
 
       switch (stdin.readLineSync()) {
         case 'y' || 'Y' || '':
