@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart' hide Autocomplete, Tooltip;
 import 'package:forui/forui.dart';
 
-import 'widgets/autocomplete.dart';
+import 'widgets/avatar.dart';
 
 void main() {
   runApp(const Application());
@@ -29,7 +29,7 @@ class Application extends StatelessWidget {
         ),
       ),
       home: const FScaffold(
-        child: Autocomplete(),
+        child: Avatar(),
       ),
     );
   }
