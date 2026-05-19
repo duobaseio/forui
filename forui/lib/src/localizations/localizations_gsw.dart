@@ -78,7 +78,7 @@ class FLocalizationsGsw extends FLocalizations {
   String get dateFieldInvalidDateError => 'Ungültigs Datum.';
 
   @override
-  String get shortDateSeparator => '.';
+  String get shortDateSeparator => '-';
 
   @override
   String get shortDateSuffix => '';

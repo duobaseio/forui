@@ -7,6 +7,7 @@ import 'package:intl/intl.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/localizations/localizations_en.dart';
 import 'package:forui/src/localizations/localizations_ko.dart';
+import 'package:forui/src/localizations/localizations_sq.dart';
 import 'package:forui/src/localizations/localizations_zh.dart';
 import 'package:forui/src/widgets/time_field/input/time_input_controller.dart';
 import '../../../test_scaffold.dart';
@@ -18,53 +19,53 @@ void main() {
     for (final (index, (old, value, expected)) in [
       // Select everything
       (
-        const TextEditingValue(text: '12:30 pm'),
-        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 0, extentOffset: 8)),
-        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 0, extentOffset: 8)),
+        const TextEditingValue(text: '12:30 pm'),
+        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 0, extentOffset: 8)),
+        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 0, extentOffset: 8)),
       ),
       // Backspace
       (
-        const TextEditingValue(text: '12:30 pm'),
+        const TextEditingValue(text: '12:30 pm'),
         TextEditingValue.empty,
-        const TextEditingValue(text: 'HH:MM --', selection: TextSelection(baseOffset: 0, extentOffset: 8)),
+        const TextEditingValue(text: 'HH:MM --', selection: TextSelection(baseOffset: 0, extentOffset: 8)),
       ),
       // Malformed paste
       (
-        const TextEditingValue(text: '12:30 pm'),
+        const TextEditingValue(text: '12:30 pm'),
         const TextEditingValue(text: '13 h 30', selection: .collapsed(offset: 4)),
-        const TextEditingValue(text: '12:30 pm'),
+        const TextEditingValue(text: '12:30 pm'),
       ),
       (
-        const TextEditingValue(text: '12:30 pm'),
+        const TextEditingValue(text: '12:30 pm'),
         const TextEditingValue(text: '12:30 :00 pm', selection: .collapsed(offset: 4)),
-        const TextEditingValue(text: '12:30 pm'),
+        const TextEditingValue(text: '12:30 pm'),
       ),
       // Changes
       (
-        const TextEditingValue(text: '12:30 pm'),
-        const TextEditingValue(text: '12:71 pm', selection: TextSelection(baseOffset: 0, extentOffset: 8)),
-        const TextEditingValue(text: '12:30 pm'),
+        const TextEditingValue(text: '12:30 pm'),
+        const TextEditingValue(text: '12:71 pm', selection: TextSelection(baseOffset: 0, extentOffset: 8)),
+        const TextEditingValue(text: '12:30 pm'),
       ),
       (
-        const TextEditingValue(text: '12:30 pm'),
-        const TextEditingValue(text: '1:30 pm', selection: .collapsed(offset: 1)),
-        const TextEditingValue(text: '1:30 pm', selection: TextSelection(baseOffset: 0, extentOffset: 1)),
+        const TextEditingValue(text: '12:30 pm'),
+        const TextEditingValue(text: '1:30 pm', selection: .collapsed(offset: 1)),
+        const TextEditingValue(text: '1:30 pm', selection: TextSelection(baseOffset: 0, extentOffset: 1)),
       ),
       (
-        const TextEditingValue(text: '12:30 pm'),
-        const TextEditingValue(text: '12:31 pm', selection: TextSelection(baseOffset: 0, extentOffset: 8)),
-        const TextEditingValue(text: '12:31 pm', selection: TextSelection(baseOffset: 6, extentOffset: 8)),
+        const TextEditingValue(text: '12:30 pm'),
+        const TextEditingValue(text: '12:31 pm', selection: TextSelection(baseOffset: 0, extentOffset: 8)),
+        const TextEditingValue(text: '12:31 pm', selection: TextSelection(baseOffset: 6, extentOffset: 8)),
       ),
       (
-        const TextEditingValue(text: '12:30 pm'),
-        const TextEditingValue(text: '12:30 am', selection: TextSelection(baseOffset: 0, extentOffset: 8)),
-        const TextEditingValue(text: '12:30 am', selection: TextSelection(baseOffset: 6, extentOffset: 8)),
+        const TextEditingValue(text: '12:30 pm'),
+        const TextEditingValue(text: '12:30 am', selection: TextSelection(baseOffset: 0, extentOffset: 8)),
+        const TextEditingValue(text: '12:30 am', selection: TextSelection(baseOffset: 6, extentOffset: 8)),
       ),
       // Select part
       (
-        const TextEditingValue(text: '12:30 pm'),
-        const TextEditingValue(text: '12:30 pm', selection: .collapsed(offset: 1)),
-        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
+        const TextEditingValue(text: '12:30 pm'),
+        const TextEditingValue(text: '12:30 pm', selection: .collapsed(offset: 1)),
+        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
       ),
     ].indexed) {
       test('single separator - $index', () {
@@ -74,7 +75,7 @@ void main() {
             autoDispose(FTimeFieldController()),
             DateFormat.jm('en_SG'),
             TestScaffold.blueScreen.textFieldStyles.md,
-            'HH:MM --',
+            'HH:MM --',
             old,
           ),
         )..value = value;
@@ -82,25 +83,42 @@ void main() {
         expect(controller.value, expected);
       });
     }
+
+    test('normalizes ASCII space to NNBSP', () {
+      final timeController = autoDispose(FTimeFieldController());
+      final controller = autoDispose(
+        TimeInputController.test(
+          FLocalizationsEnSg(),
+          timeController,
+          DateFormat.jm('en_SG'),
+          TestScaffold.blueScreen.textFieldStyles.md,
+          'HH:MM --',
+          const TextEditingValue(text: 'HH:MM --'),
+        ),
+      )..value = const TextEditingValue(text: '12:30 pm');
+
+      expect(controller.value.text, '12:30 pm');
+      expect(timeController.value, const FTime(12, 30));
+    });
   });
 
   group('traverse', () {
     for (final (index, (value, expected)) in [
       (
-        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 0, extentOffset: 8)),
-        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 6, extentOffset: 8)),
+        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 0, extentOffset: 8)),
+        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 6, extentOffset: 8)),
       ),
       (
-        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
-        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 3, extentOffset: 5)),
+        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
+        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 3, extentOffset: 5)),
       ),
       (
-        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 3, extentOffset: 5)),
-        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 6, extentOffset: 8)),
+        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 3, extentOffset: 5)),
+        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 6, extentOffset: 8)),
       ),
       (
-        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 6, extentOffset: 8)),
-        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 6, extentOffset: 8)),
+        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 6, extentOffset: 8)),
+        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 6, extentOffset: 8)),
       ),
     ].indexed) {
       test('forward - $index', () {
@@ -109,7 +127,7 @@ void main() {
           autoDispose(FTimeFieldController()),
           DateFormat.jm('en_SG'),
           TestScaffold.blueScreen.textFieldStyles.md,
-          'HH:MM --',
+          'HH:MM --',
           value,
         )..traverse(forward: true);
 
@@ -120,20 +138,20 @@ void main() {
     for (final (index, (value, expected)) in [
       // TODO: This is a quirk, but what should the expected behavior be?
       (
-        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 0, extentOffset: 8)),
-        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 3, extentOffset: 5)),
+        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 0, extentOffset: 8)),
+        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 3, extentOffset: 5)),
       ),
       (
-        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
-        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
+        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
+        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
       ),
       (
-        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 3, extentOffset: 5)),
-        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
+        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 3, extentOffset: 5)),
+        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
       ),
       (
-        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 6, extentOffset: 8)),
-        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 3, extentOffset: 5)),
+        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 6, extentOffset: 8)),
+        const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 3, extentOffset: 5)),
       ),
     ].indexed) {
       test('backward - $index', () {
@@ -142,7 +160,7 @@ void main() {
           autoDispose(FTimeFieldController()),
           DateFormat.jm('en_SG'),
           TestScaffold.blueScreen.textFieldStyles.md,
-          'HH:MM --',
+          'HH:MM --',
           value,
         )..traverse(forward: false);
 
@@ -154,24 +172,24 @@ void main() {
   for (final (index, (value, amount, expectedText)) in [
     // TODO: This is a quirk, but what should the expected behavior be?
     (
-      const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 0, extentOffset: 8)),
+      const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 0, extentOffset: 8)),
       1,
-      const TextEditingValue(text: '12:30 am', selection: TextSelection(baseOffset: 6, extentOffset: 8)),
+      const TextEditingValue(text: '12:30 am', selection: TextSelection(baseOffset: 6, extentOffset: 8)),
     ),
     (
-      const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
+      const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
       1,
-      const TextEditingValue(text: '1:30 pm', selection: TextSelection(baseOffset: 0, extentOffset: 1)),
+      const TextEditingValue(text: '1:30 pm', selection: TextSelection(baseOffset: 0, extentOffset: 1)),
     ),
     (
-      const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 3, extentOffset: 5)),
+      const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 3, extentOffset: 5)),
       1,
-      const TextEditingValue(text: '12:31 pm', selection: TextSelection(baseOffset: 3, extentOffset: 5)),
+      const TextEditingValue(text: '12:31 pm', selection: TextSelection(baseOffset: 3, extentOffset: 5)),
     ),
     (
-      const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 6, extentOffset: 8)),
+      const TextEditingValue(text: '12:30 pm', selection: TextSelection(baseOffset: 6, extentOffset: 8)),
       1,
-      const TextEditingValue(text: '12:30 am', selection: TextSelection(baseOffset: 6, extentOffset: 8)),
+      const TextEditingValue(text: '12:30 am', selection: TextSelection(baseOffset: 6, extentOffset: 8)),
     ),
   ].indexed) {
     testWidgets('adjust - $index', (tester) async {
@@ -181,7 +199,7 @@ void main() {
           autoDispose(FTimeFieldController()),
           DateFormat.jm('en_SG'),
           TestScaffold.blueScreen.textFieldStyles.md,
-          'HH:MM --',
+          'HH:MM --',
           value,
         ),
       )..adjust(amount);
@@ -194,47 +212,47 @@ void main() {
     for (final (index, (value, expected)) in [
       // 1st part
       (
-        const TextEditingValue(text: '12:30 e pasdites', selection: .collapsed(offset: 0)),
-        const TextEditingValue(text: '12:30 e pasdites', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
+        const TextEditingValue(text: '12:30 e pasdites', selection: .collapsed(offset: 0)),
+        const TextEditingValue(text: '12:30 e pasdites', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
       ),
       (
-        const TextEditingValue(text: '12:30 e pasdites', selection: .collapsed(offset: 1)),
-        const TextEditingValue(text: '12:30 e pasdites', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
+        const TextEditingValue(text: '12:30 e pasdites', selection: .collapsed(offset: 1)),
+        const TextEditingValue(text: '12:30 e pasdites', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
       ),
       (
-        const TextEditingValue(text: '12:30 e pasdites', selection: .collapsed(offset: 2)),
-        const TextEditingValue(text: '12:30 e pasdites', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
+        const TextEditingValue(text: '12:30 e pasdites', selection: .collapsed(offset: 2)),
+        const TextEditingValue(text: '12:30 e pasdites', selection: TextSelection(baseOffset: 0, extentOffset: 2)),
       ),
       // 2nd part
       (
-        const TextEditingValue(text: '12:30 e pasdites', selection: .collapsed(offset: 3)),
-        const TextEditingValue(text: '12:30 e pasdites', selection: TextSelection(baseOffset: 3, extentOffset: 5)),
+        const TextEditingValue(text: '12:30 e pasdites', selection: .collapsed(offset: 3)),
+        const TextEditingValue(text: '12:30 e pasdites', selection: TextSelection(baseOffset: 3, extentOffset: 5)),
       ),
       (
-        const TextEditingValue(text: '12:30 e pasdites', selection: .collapsed(offset: 4)),
-        const TextEditingValue(text: '12:30 e pasdites', selection: TextSelection(baseOffset: 3, extentOffset: 5)),
+        const TextEditingValue(text: '12:30 e pasdites', selection: .collapsed(offset: 4)),
+        const TextEditingValue(text: '12:30 e pasdites', selection: TextSelection(baseOffset: 3, extentOffset: 5)),
       ),
       (
-        const TextEditingValue(text: '12:30 e pasdites', selection: .collapsed(offset: 5)),
-        const TextEditingValue(text: '12:30 e pasdites', selection: TextSelection(baseOffset: 3, extentOffset: 5)),
+        const TextEditingValue(text: '12:30 e pasdites', selection: .collapsed(offset: 5)),
+        const TextEditingValue(text: '12:30 e pasdites', selection: TextSelection(baseOffset: 3, extentOffset: 5)),
       ),
       // 3rd part
       (
-        const TextEditingValue(text: '12:30 e pasdites', selection: .collapsed(offset: 6)),
-        const TextEditingValue(text: '12:30 e pasdites', selection: TextSelection(baseOffset: 6, extentOffset: 16)),
+        const TextEditingValue(text: '12:30 e pasdites', selection: .collapsed(offset: 6)),
+        const TextEditingValue(text: '12:30 e pasdites', selection: TextSelection(baseOffset: 6, extentOffset: 16)),
       ),
       (
-        const TextEditingValue(text: '12:30 e pasdites', selection: .collapsed(offset: 8)),
-        const TextEditingValue(text: '12:30 e pasdites', selection: TextSelection(baseOffset: 6, extentOffset: 16)),
+        const TextEditingValue(text: '12:30 e pasdites', selection: .collapsed(offset: 8)),
+        const TextEditingValue(text: '12:30 e pasdites', selection: TextSelection(baseOffset: 6, extentOffset: 16)),
       ),
       (
-        const TextEditingValue(text: '12:30 e pasdites', selection: .collapsed(offset: 16)),
-        const TextEditingValue(text: '12:30 e pasdites', selection: TextSelection(baseOffset: 6, extentOffset: 16)),
+        const TextEditingValue(text: '12:30 e pasdites', selection: .collapsed(offset: 16)),
+        const TextEditingValue(text: '12:30 e pasdites', selection: TextSelection(baseOffset: 6, extentOffset: 16)),
       ),
     ].indexed) {
       test('period with spaces - $index', () {
         final controller = TimeInputController(
-          FLocalizationsKo(),
+          FLocalizationsSq(),
           autoDispose(FTimeFieldController()),
           DateFormat.jm('sq'),
           TestScaffold.blueScreen.textFieldStyles.md,

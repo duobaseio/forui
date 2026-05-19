@@ -79,13 +79,13 @@ void main() {
       await tester.sendKeyEvent(.arrowUp);
       await tester.pumpAndSettle();
 
-      expect(find.text('10:30 am'), findsOneWidget);
+      expect(find.text('10:30 am'), findsOneWidget);
     });
   });
 
   for (final (index, (locale, placeholder)) in const [
-    (null, 'HH:MM --'),
-    (Locale('en', 'SG'), 'HH:MM --'),
+    (null, 'HH:MM --'),
+    (Locale('en', 'SG'), 'HH:MM --'),
     (Locale('bg'), 'HH:MM ч.'),
     (Locale('fr', 'CA'), 'HH h MM'),
     (Locale('zh', 'HK'), '--HH:MM'),
@@ -128,7 +128,7 @@ void main() {
     await tester.sendKeyEvent(.arrowRight);
     await tester.pumpAndSettle();
 
-    expect(find.text('1:00 am'), findsOneWidget);
+    expect(find.text('1:00 am'), findsOneWidget);
   });
 
   testWidgets('clearable', (tester) async {
@@ -149,7 +149,7 @@ void main() {
     await tester.tap(find.bySemanticsLabel('Clear'));
     await tester.pumpAndSettle();
 
-    expect(find.text('HH:MM --'), findsOneWidget);
+    expect(find.text('HH:MM --'), findsOneWidget);
     expect(find.bySemanticsLabel('Clear'), findsNothing);
   });
 

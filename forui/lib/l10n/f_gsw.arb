@@ -3,7 +3,7 @@
   "sheetSemanticsLabel": "Ansicht",
   "barrierOnTapHint": "$modalRouteContentName schließen",
   "barrierLabel": "Gitter",
-  "shortDateSeparator": ".",
+  "shortDateSeparator": "-",
   "shortDateSuffix": "",
   "dateFieldHint": "Datum uswähle",
   "dateFieldInvalidDateError": "Ungültigs Datum.",

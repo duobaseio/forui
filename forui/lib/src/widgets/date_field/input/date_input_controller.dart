@@ -28,6 +28,7 @@ class DateInputController extends InputController {
   final DateSelector selector;
   final FCalendarController<DateTime?> controller;
   final DateFormat _format;
+  late final String _canonicalSpace;
 
   factory DateInputController(
     FCalendarController<DateTime?> controller,
@@ -56,6 +57,15 @@ class DateInputController extends InputController {
       _format = .yMd(localizations.localeName),
       super(value, style, DateParser(localizations.localeName, initialYear), placeholder) {
     controller.addListener(updateFromCalendar);
+    _canonicalSpace = _format.canonicalSpace;
+  }
+
+  @override
+  set value(TextEditingValue newValue) {
+    if (_canonicalSpace != ' ' && newValue.text.contains(' ')) {
+      newValue = newValue.copyWith(text: newValue.text.replaceAll(' ', _canonicalSpace));
+    }
+    super.value = newValue;
   }
 
   @override

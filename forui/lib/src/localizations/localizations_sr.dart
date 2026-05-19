@@ -78,7 +78,7 @@ class FLocalizationsSr extends FLocalizations {
   String get dateFieldInvalidDateError => 'Неважећи датум.';
 
   @override
-  String get shortDateSeparator => '.';
+  String get shortDateSeparator => '. ';
 
   @override
   String get shortDateSuffix => '.';
@@ -175,7 +175,7 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
   String get dateFieldInvalidDateError => 'Nevažeći datum.';
 
   @override
-  String get shortDateSeparator => '.';
+  String get shortDateSeparator => '. ';
 
   @override
   String get shortDateSuffix => '.';

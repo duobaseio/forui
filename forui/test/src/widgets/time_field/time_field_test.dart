@@ -68,7 +68,7 @@ void main() {
           ),
         );
 
-        expect(find.text('10:30 am'), findsOne);
+        expect(find.text('10:30 am'), findsOne);
 
         key.currentState!.save();
         await tester.pumpAndSettle(const Duration(seconds: 5));

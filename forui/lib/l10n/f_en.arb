@@ -59,8 +59,6 @@
       }
     }
   },
-
-
   "barrierLabel": "Barrier",
   "@barrierLabel": {
     "description": "The label for the barrier rendered underneath the content of a bottom sheet (used as the 'modalRouteContentName' of the 'barrierOnTapHint' message)."
@@ -74,14 +72,10 @@
       }
     }
   },
-
-
   "autocompleteNoResults": "No matches found.",
   "@autocompleteNoResults": {
     "description": "The message displayed when there are no matching results."
   },
-
-
   "dateFieldHint": "Pick a date",
   "@dateFieldHint": {
     "description": "The hint text for the calendar-only date field."
@@ -98,20 +92,14 @@
   "@shortDateSuffix": {
     "description": "The short date's suffix, typically empty."
   },
-
-
   "dateTimePickerToday": "Today",
   "@dateTimePickerToday": {
     "description": "The label for today's date in the date time picker."
   },
-
-
   "dialogSemanticsLabel": "Dialog",
   "@dialogSemanticsLabel": {
     "description": "The sheet's label."
   },
-
-
   "paginationPreviousSemanticsLabel": "Previous",
   "@paginationPreviousSemanticsLabel": {
     "description": "The label for the previous button in a pagination control."
@@ -120,25 +108,18 @@
   "@paginationNextSemanticsLabel": {
     "description": "The label for the next button in a pagination control."
   },
-
-
   "popoverSemanticsLabel": "Popover",
   "@popoverSemanticsLabel": {
     "description": "The semantic label for a popover."
   },
-
-
   "progressSemanticsLabel": "Loading",
   "@progressSemanticsLabel": {
     "description": "The default semantics label for a progress indicator."
   },
-
-
   "multiSelectHint": "Select items",
   "@multiSelectHint": {
     "description": "The hint text for the multi-select field."
   },
-
   "selectHint": "Select an item",
   "@selectHint": {
     "description": "The hint text for the select field."
@@ -159,13 +140,10 @@
   "@selectScrollDownSemanticsLabel": {
     "description": "The semantic label for the scroll handle in a select field."
   },
-
-
   "sheetSemanticsLabel": "Sheet",
   "@sheetSemanticsLabel": {
     "description": "The semantic label for a sheet."
   },
-
   "textFieldEmailLabel": "Email",
   "@textFieldEmailLabel": {
     "description": "The email text field's label."
@@ -180,19 +158,14 @@
   },
   "passwordFieldObscureTextButtonSemanticsLabel": "Hide password",
   "@passwordFieldObscureTextButtonSemanticsLabel": {
-    "description": "The semantic label for the obscure text button in a text field when the text is unobscured."
-  },
-  "passwordFieldUnobscureTextButtonSemanticsLabel": "Show password",
-  "@passwordFieldObscureTextButtonSemanticsLabel": {
     "description": "The semantic label for the unobscure text button in a text field when the text is obscured."
   },
-
-
+  "passwordFieldUnobscureTextButtonSemanticsLabel": "Show password",
   "timeFieldTimeSeparator": ":",
   "@timeFieldTimeSeparator": {
     "description": "The time field's time separator, typically ':'."
   },
-  "timeFieldPeriodSeparator": " ",
+  "timeFieldPeriodSeparator": " ",
   "@timeFieldPeriodSeparator": {
     "description": "The time field's period separator, typically ' '."
   },

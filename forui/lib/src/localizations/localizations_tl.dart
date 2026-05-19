@@ -141,7 +141,7 @@ class FLocalizationsTl extends FLocalizations {
   String get timeFieldTimeSeparator => ':';
 
   @override
-  String get timeFieldPeriodSeparator => ' ';
+  String get timeFieldPeriodSeparator => ' ';
 
   @override
   String get timeFieldSuffix => '';

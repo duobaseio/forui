@@ -181,6 +181,20 @@ void main() {
         expect(controller.value, expected);
       });
     }
+
+    test('normalizes ASCII space to NNBSP for bg', () {
+      controller = DateInputController.test(
+        calendarController,
+        FLocalizationsBg(),
+        TestScaffold.blueScreen.dateFieldStyle.fieldStyles.md,
+        'DD.MM.YYYY г.',
+        2000,
+        const TextEditingValue(text: 'DD.MM.YYYY г.'),
+      )..value = const TextEditingValue(text: '25.12.2024 г.');
+
+      expect(controller.value.text, '25.12.2024 г.');
+      expect(calendarController.value, DateTime.utc(2024, 12, 25));
+    });
   });
 
   group('traverse', () {

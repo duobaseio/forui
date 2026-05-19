@@ -7,7 +7,7 @@
   "shortDateSuffix": "",
   "dateFieldHint": "Seleccionar fecha",
   "dateFieldInvalidDateError": "Fecha no válida.",
-  "timeFieldPeriodSeparator": " ",
+  "timeFieldPeriodSeparator": " ",
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Elija una hora",

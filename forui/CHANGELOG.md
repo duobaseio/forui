@@ -69,7 +69,7 @@
 
 ### `FDateField`
 * Change `FDateField.defaultIconBuilder` to resolve the calendar icon from `FIcons.calendar`.
-
+* Change `FDateField` date format localizations to match CLDR 42. 
 
 ### `FDialog`
 * Add `FDialog.resizeToAvoidInsets` to opt out of view insets padding.
@@ -228,7 +228,7 @@ customized globally. Defaults to Lucide-backed set, `FIcons.lucide()`.
 
 ### `FTimeField`
 * Change `FTimeField.defaultIconBuilder` to resolve the clock icon from `FIcons.clock4`.
-
+* Change `FTimeField` time format localizations to match CLDR 42.
 
 ### `FToast` & `FToaster`
 * Add `FToast.clipBehavior` to clip the toast's content to the inner path of its decoration. Defaults to `Clip.none`.
