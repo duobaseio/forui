@@ -23,22 +23,19 @@ class FTypeaheadController extends TextEditingController {
 
   /// Creates a [FTypeaheadController] with an optional initial text and completion.
   FTypeaheadController({
-    required FTypeaheadControllerTextStyles textStyles,
-    List<String> suggestions = const [],
+    required this._textStyles,
+    this._suggestions = const [],
     super.text,
-  }) : _textStyles = textStyles,
-       _suggestions = suggestions {
+  }) {
     findCompletion();
   }
 
   /// Creates a [FTypeaheadController] from a [TextEditingValue].
   FTypeaheadController.fromValue(
     super.value, {
-    required FTypeaheadControllerTextStyles textStyles,
-    List<String> suggestions = const [],
-  }) : _textStyles = textStyles,
-       _suggestions = suggestions,
-       super.fromValue() {
+    required this._textStyles,
+    this._suggestions = const [],
+  }) : super.fromValue() {
     findCompletion();
   }
 

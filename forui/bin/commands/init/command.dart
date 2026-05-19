@@ -1,7 +1,7 @@
 import 'dart:io';
 
 import '../../args/command.dart';
-import '../../commands/snippet/snippet.dart';
+import '../snippet/snippet.dart';
 import '../../configuration.dart';
 
 class InitCommand extends ForuiCommand {

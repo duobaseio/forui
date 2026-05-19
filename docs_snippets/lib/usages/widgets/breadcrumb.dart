@@ -50,7 +50,7 @@ final breadcrumbItemCollapsed = FBreadcrumbItem.collapsed(
   // {@endcategory}
   // {@category "Scroll"}
   scrollController: null,
-  cacheExtent: null,
+  scrollCacheExtent: null,
   maxHeight: .infinity,
   dragStartBehavior: .start,
   // {@endcategory}
@@ -96,7 +96,7 @@ final breadcrumbItemCollapsedTiles = FBreadcrumbItem.collapsedTiles(
   // {@endcategory}
   // {@category "Scroll"}
   scrollController: null,
-  cacheExtent: null,
+  scrollCacheExtent: null,
   maxHeight: .infinity,
   dragStartBehavior: .start,
   // {@endcategory}

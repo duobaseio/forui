@@ -64,15 +64,7 @@ class RenderChildLayer extends RenderProxyBox {
   Offset? _previousGlobalOffset;
   Size? _previousPaintSize;
 
-  RenderChildLayer({
-    required FChangeNotifier notifier,
-    required ChildLayerLink link,
-    required Size viewSize,
-    RenderBox? child,
-  }) : _notifier = notifier,
-       _link = link,
-       _viewSize = viewSize,
-       super(child);
+  RenderChildLayer({required this._notifier, required this._link, required this._viewSize}) : super(null);
 
   @override
   void performLayout() {

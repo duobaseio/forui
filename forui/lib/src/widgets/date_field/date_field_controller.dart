@@ -24,8 +24,7 @@ class FDateFieldController implements ValueNotifier<DateTime?> {
         calendar: .date(initial: date, selectable: (date) => validator(date) == null),
       );
 
-  FDateFieldController._({required this.validator, required FCalendarController<DateTime?> calendar})
-    : _calendar = calendar;
+  FDateFieldController._({required this.validator, required this._calendar});
 
   @override
   void addListener(VoidCallback listener) => _calendar.addListener(listener);

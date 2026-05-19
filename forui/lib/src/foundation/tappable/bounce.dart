@@ -4,27 +4,19 @@ import 'package:flutter/widgets.dart';
 
 @internal
 class Bounce extends SingleChildRenderObjectWidget {
-  final Animation<double> bounce;
-  final double? bounceFloor;
+  final Animation<double> _bounce;
+  final double? _bounceFloor;
 
-  const Bounce({required this.bounce, required this.bounceFloor, required super.child, super.key});
+  const Bounce({required this._bounce, required this._bounceFloor, required super.child, super.key});
 
   @override
-  RenderObject createRenderObject(BuildContext context) => RenderBounce(bounce, bounceFloor);
+  RenderObject createRenderObject(BuildContext context) => RenderBounce(_bounce, _bounceFloor);
 
   @override
   void updateRenderObject(BuildContext context, RenderBounce renderObject) {
     renderObject
-      ..bounce = bounce
-      ..bounceFloor = bounceFloor;
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('bounce', bounce))
-      ..add(DoubleProperty('bounceFloor', bounceFloor));
+      ..bounce = _bounce
+      ..bounceFloor = _bounceFloor;
   }
 }
 

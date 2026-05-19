@@ -99,7 +99,7 @@ void main() {
 
   group('lifted', () {
     testWidgets('onChange receives correct indexes', (tester) async {
-      List<int> value = [0, 0];
+      var value = <int>[0, 0];
 
       await tester.pumpWidget(
         StatefulBuilder(
@@ -136,7 +136,7 @@ void main() {
   });
 
   testWidgets('adding wheels and indexes dynamically', (tester) async {
-    List<int> value = [0];
+    var value = <int>[0];
 
     await tester.pumpWidget(
       StatefulBuilder(

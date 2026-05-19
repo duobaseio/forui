@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
@@ -42,11 +43,8 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
   /// Scrolling past the end of the group using the controller will result in undefined behavior.
   final ScrollController? scrollController;
 
-  /// The menu's cache extent in logical pixels.
-  ///
-  /// Items that fall in this cache area are laid out even though they are not (yet) visible on screen. It describes
-  /// how many pixels the cache area extends before the leading edge and after the trailing edge of the viewport.
-  final double? cacheExtent;
+  /// {@macro forui.foundation.doc_templates.scrollCacheExtent}
+  final ScrollCacheExtent? scrollCacheExtent;
 
   /// The menu's max height, in logical pixels. Defaults to infinity.
   ///
@@ -235,12 +233,12 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
   /// {@endtemplate}
   FSelectMenuTile({
     required this.title,
-    required List<FSelectTile<T>> menu,
+    required List<FSelectTile<T>> this._menu,
     this.selectControl,
     this.popoverControl = const .managed(),
     this.scrollController,
     this.style = const .context(),
-    this.cacheExtent,
+    this.scrollCacheExtent,
     this.maxHeight = .infinity,
     this.menuIntrinsicWidth = false,
     this.dragStartBehavior = .start,
@@ -284,8 +282,7 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
     this.autovalidateMode = .disabled,
     this.formFieldKey,
     super.key,
-  }) : _menu = menu,
-       _menuBuilder = null,
+  }) : _menuBuilder = null,
        _count = null;
 
   /// {@template forui.widgets.FSelectMenuTile.fromMap}
@@ -302,7 +299,7 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
     FPopoverControl popoverControl = const .managed(),
     ScrollController? scrollController,
     FSelectMenuTileStyleDelta style = const .context(),
-    double? cacheExtent,
+    ScrollCacheExtent? scrollCacheExtent,
     double maxHeight = .infinity,
     bool menuIntrinsicWidth = false,
     DragStartBehavior dragStartBehavior = .start,
@@ -353,7 +350,7 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
     popoverControl: popoverControl,
     scrollController: scrollController,
     style: style,
-    cacheExtent: cacheExtent,
+    scrollCacheExtent: scrollCacheExtent,
     maxHeight: maxHeight,
     menuIntrinsicWidth: menuIntrinsicWidth,
     dragStartBehavior: dragStartBehavior,
@@ -402,29 +399,29 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
   /// {@template forui.widgets.FSelectMenuTile.builder}
   /// Creates a [FSelectMenuTile] that lazily builds the menu.
   ///
-  /// The [menuBuilder] is called for each tile that should be built. The current level's [FInheritedItemData] is **not**
+  /// The [_menuBuilder] is called for each tile that should be built. The current level's [FInheritedItemData] is **not**
   /// visible to `menuBuilder`.
   /// * It may return null to signify the end of the group.
   /// * It may be called more than once for the same index.
-  /// * It will be called only for indices <= [count] if [count] is given.
+  /// * It will be called only for indices <= [_count] if [_count] is given.
   ///
-  /// The [count] is the number of tiles to build. If null, [menuBuilder] will be called until it returns null.
+  /// The [_count] is the number of tiles to build. If null, [_menuBuilder] will be called until it returns null.
   ///
   /// ## Warning
   /// May result in an infinite loop or run out of memory if:
   /// * Placed in a parent widget that does not constrain its size, i.e., [Column].
-  /// * [count] is null and [menuBuilder] always provides a zero-size widget, i.e., SizedBox(). If possible, provide
-  ///   tiles with non-zero size, return null from the builder, or set [count] to non-null.
+  /// * [_count] is null and [_menuBuilder] always provides a zero-size widget, i.e., SizedBox(). If possible, provide
+  ///   tiles with non-zero size, return null from the builder, or set [_count] to non-null.
   /// {@endtemplate}
   FSelectMenuTile.builder({
     required this.title,
-    required FSelectTile<T>? Function(BuildContext context, int index) menuBuilder,
-    int? count,
+    required FSelectTile<T>? Function(BuildContext context, int index) this._menuBuilder,
+    this._count,
     this.selectControl,
     this.popoverControl = const .managed(),
     this.scrollController,
     this.style = const .context(),
-    this.cacheExtent,
+    this.scrollCacheExtent,
     this.maxHeight = .infinity,
     this.menuIntrinsicWidth = false,
     this.dragStartBehavior = .start,
@@ -468,9 +465,7 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
     this.autovalidateMode = .disabled,
     this.formFieldKey,
     super.key,
-  }) : _menu = null,
-       _menuBuilder = menuBuilder,
-       _count = count;
+  }) : _menu = null;
 
   @override
   State<FSelectMenuTile<T>> createState() => _FSelectMenuTileState<T>();
@@ -483,7 +478,7 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
       ..add(DiagnosticsProperty('popoverControl', popoverControl))
       ..add(DiagnosticsProperty('scrollController', scrollController))
       ..add(DiagnosticsProperty('style', style))
-      ..add(DoubleProperty('cacheExtent', cacheExtent))
+      ..add(DiagnosticsProperty('scrollCacheExtent', scrollCacheExtent))
       ..add(DoubleProperty('maxHeight', maxHeight))
       ..add(FlagProperty('menuIntrinsicWidth', value: menuIntrinsicWidth, ifTrue: 'menuIntrinsicWidth'))
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior))
@@ -631,7 +626,7 @@ class _FSelectMenuTileState<T> extends State<FSelectMenuTile<T>> with TickerProv
                 child: FSelectTileGroup<T>(
                   control: .managed(controller: _controller),
                   scrollController: widget.scrollController,
-                  cacheExtent: widget.cacheExtent,
+                  scrollCacheExtent: widget.scrollCacheExtent,
                   maxHeight: widget.maxHeight,
                   intrinsicWidth: widget.menuIntrinsicWidth,
                   dragStartBehavior: widget.dragStartBehavior,
@@ -647,7 +642,7 @@ class _FSelectMenuTileState<T> extends State<FSelectMenuTile<T>> with TickerProv
             return FSelectTileGroup<T>.builder(
               control: .managed(controller: _controller),
               scrollController: widget.scrollController,
-              cacheExtent: widget.cacheExtent,
+              scrollCacheExtent: widget.scrollCacheExtent,
               maxHeight: widget.maxHeight,
               dragStartBehavior: widget.dragStartBehavior,
               physics: widget.physics,

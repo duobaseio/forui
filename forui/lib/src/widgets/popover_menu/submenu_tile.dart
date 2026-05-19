@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
@@ -103,8 +104,8 @@ class FSubmenuTile extends StatelessWidget with FTileMixin {
   /// The submenu's scroll controller.
   final ScrollController? submenuScrollController;
 
-  /// The submenu's cache extent in logical pixels.
-  final double? submenuCacheExtent;
+  /// {@macro forui.foundation.doc_templates.scrollCacheExtent}
+  final ScrollCacheExtent? submenuScrollCacheExtent;
 
   /// Whether the submenu should size itself to the intrinsic width of its children.
   final bool? submenuIntrinsicWidth;
@@ -193,7 +194,7 @@ class FSubmenuTile extends StatelessWidget with FTileMixin {
     this.menuAnchor,
     this.childAnchor,
     this.submenuScrollController,
-    this.submenuCacheExtent,
+    this.submenuScrollCacheExtent,
     this.submenuIntrinsicWidth,
     this.submenuDragStartBehavior = .start,
     this.submenuSpacing = const .spacing(2),
@@ -235,7 +236,7 @@ class FSubmenuTile extends StatelessWidget with FTileMixin {
       ..add(DiagnosticsProperty('menuAnchor', menuAnchor))
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
       ..add(DiagnosticsProperty('submenuScrollController', submenuScrollController))
-      ..add(DoubleProperty('submenuCacheExtent', submenuCacheExtent))
+      ..add(DiagnosticsProperty('submenuScrollCacheExtent', submenuScrollCacheExtent))
       ..add(FlagProperty('submenuIntrinsicWidth', value: submenuIntrinsicWidth, ifTrue: 'submenu intrinsic width'))
       ..add(EnumProperty('submenuDragStartBehavior', submenuDragStartBehavior))
       ..add(DiagnosticsProperty('submenuSpacing', submenuSpacing))
@@ -260,7 +261,7 @@ class FSubmenuTile extends StatelessWidget with FTileMixin {
       control: control,
       style: menuStyle,
       scrollController: submenuScrollController,
-      cacheExtent: submenuCacheExtent,
+      scrollCacheExtent: submenuScrollCacheExtent,
       intrinsicWidth: submenuIntrinsicWidth ?? true,
       dragStartBehavior: submenuDragStartBehavior,
       maxHeight: submenuMaxHeight,

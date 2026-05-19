@@ -28,7 +28,7 @@ final popoverMenu = FPopoverMenu(
   // {@endcategory}
   // {@category "Scroll"}
   scrollController: null,
-  cacheExtent: null,
+  scrollCacheExtent: null,
   dragStartBehavior: .start,
   // {@endcategory}
   // {@category "Accessibility"}
@@ -82,7 +82,7 @@ final popoverMenuTiles = FPopoverMenu.tiles(
   // {@endcategory}
   // {@category "Scroll"}
   scrollController: null,
-  cacheExtent: null,
+  scrollCacheExtent: null,
   dragStartBehavior: .start,
   // {@endcategory}
   // {@category "Accessibility"}

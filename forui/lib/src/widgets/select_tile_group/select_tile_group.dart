@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
@@ -27,7 +28,7 @@ class FSelectTileGroup<T> extends StatefulWidget with FTileGroupMixin, FFormFiel
   final ScrollController? scrollController;
 
   /// {@macro forui.widgets.FTileGroup.cacheExtent}
-  final double? cacheExtent;
+  final ScrollCacheExtent? scrollCacheExtent;
 
   /// {@macro forui.widgets.FTileGroup.maxHeight}
   final double maxHeight;
@@ -119,11 +120,11 @@ class FSelectTileGroup<T> extends StatefulWidget with FTileGroupMixin, FFormFiel
   /// Creates a [FSelectTileGroup].
   /// {@endtemplate}
   FSelectTileGroup({
-    required List<FSelectTile<T>> children,
+    required List<FSelectTile<T>> this._children,
     this.control,
     this.scrollController,
     this.style = const .context(),
-    this.cacheExtent,
+    this.scrollCacheExtent,
     this.maxHeight = .infinity,
     this.intrinsicWidth,
     this.dragStartBehavior = .start,
@@ -141,8 +142,7 @@ class FSelectTileGroup<T> extends StatefulWidget with FTileGroupMixin, FFormFiel
     this.autovalidateMode = .disabled,
     this.formFieldKey,
     super.key,
-  }) : _children = children,
-       _tileBuilder = null,
+  }) : _tileBuilder = null,
        _count = null;
 
   /// {@template forui.widgets.FSelectTileGroup.builder}
@@ -151,12 +151,12 @@ class FSelectTileGroup<T> extends StatefulWidget with FTileGroupMixin, FFormFiel
   /// {@macro forui.widgets.FTileGroup.builder}
   /// {@endtemplate}
   FSelectTileGroup.builder({
-    required FSelectTile<T>? Function(BuildContext context, int index) tileBuilder,
-    int? count,
+    required FSelectTile<T>? Function(BuildContext context, int index) this._tileBuilder,
+    this._count,
     this.control,
     this.scrollController,
     this.style = const .context(),
-    this.cacheExtent,
+    this.scrollCacheExtent,
     this.maxHeight = .infinity,
     this.dragStartBehavior = .start,
     this.physics = const ClampingScrollPhysics(),
@@ -174,9 +174,7 @@ class FSelectTileGroup<T> extends StatefulWidget with FTileGroupMixin, FFormFiel
     this.formFieldKey,
     super.key,
   }) : intrinsicWidth = false,
-       _children = null,
-       _tileBuilder = tileBuilder,
-       _count = count;
+       _children = null;
 
   @override
   State<FSelectTileGroup<T>> createState() => _FSelectTileGroupState<T>();
@@ -188,7 +186,7 @@ class FSelectTileGroup<T> extends StatefulWidget with FTileGroupMixin, FFormFiel
       ..add(DiagnosticsProperty('control', control))
       ..add(DiagnosticsProperty('scrollController', scrollController))
       ..add(DiagnosticsProperty('style', style))
-      ..add(DoubleProperty('cacheExtent', cacheExtent))
+      ..add(DiagnosticsProperty('scrollCacheExtent', scrollCacheExtent))
       ..add(DoubleProperty('maxHeight', maxHeight))
       ..add(FlagProperty('intrinsicWidth', value: intrinsicWidth, ifTrue: 'intrinsicWidth'))
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior))
@@ -258,7 +256,7 @@ class _FSelectTileGroupState<T> extends State<FSelectTileGroup<T>> {
           return FTileGroup(
             scrollController: widget.scrollController,
             style: groupStyle,
-            cacheExtent: widget.cacheExtent,
+            scrollCacheExtent: widget.scrollCacheExtent,
             maxHeight: widget.maxHeight,
             intrinsicWidth: widget.intrinsicWidth,
             dragStartBehavior: widget.dragStartBehavior,
@@ -279,7 +277,7 @@ class _FSelectTileGroupState<T> extends State<FSelectTileGroup<T>> {
         return FTileGroup.builder(
           scrollController: widget.scrollController,
           style: groupStyle,
-          cacheExtent: widget.cacheExtent,
+          scrollCacheExtent: widget.scrollCacheExtent,
           maxHeight: widget.maxHeight,
           dragStartBehavior: widget.dragStartBehavior,
           physics: widget.physics,

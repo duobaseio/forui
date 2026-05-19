@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
@@ -23,7 +24,7 @@ mixin FItemGroupMixin on Widget {
     required List<FItemMixin> children,
     FItemGroupStyleDelta style = const .context(),
     ScrollController? scrollController,
-    double? cacheExtent,
+    ScrollCacheExtent? scrollCacheExtent,
     double maxHeight = .infinity,
     DragStartBehavior dragStartBehavior = .start,
     ScrollPhysics physics = const ClampingScrollPhysics(),
@@ -35,7 +36,7 @@ mixin FItemGroupMixin on Widget {
   }) => .new(
     style: style,
     scrollController: scrollController,
-    cacheExtent: cacheExtent,
+    scrollCacheExtent: scrollCacheExtent,
     maxHeight: maxHeight,
     dragStartBehavior: dragStartBehavior,
     physics: physics,
@@ -53,7 +54,7 @@ mixin FItemGroupMixin on Widget {
     int? count,
     FItemGroupStyleDelta style = const .context(),
     ScrollController? scrollController,
-    double? cacheExtent,
+    ScrollCacheExtent? scrollCacheExtent,
     double maxHeight = .infinity,
     DragStartBehavior dragStartBehavior = .start,
     ScrollPhysics physics = const ClampingScrollPhysics(),
@@ -66,7 +67,7 @@ mixin FItemGroupMixin on Widget {
     count: count,
     style: style,
     scrollController: scrollController,
-    cacheExtent: cacheExtent,
+    scrollCacheExtent: scrollCacheExtent,
     maxHeight: maxHeight,
     dragStartBehavior: dragStartBehavior,
     physics: physics,
@@ -81,7 +82,7 @@ mixin FItemGroupMixin on Widget {
     required List<FItemGroupMixin> children,
     FItemGroupStyleDelta style = const .context(),
     ScrollController? scrollController,
-    double? cacheExtent,
+    ScrollCacheExtent? scrollCacheExtent,
     double maxHeight = .infinity,
     DragStartBehavior dragStartBehavior = .start,
     ScrollPhysics physics = const ClampingScrollPhysics(),
@@ -93,7 +94,7 @@ mixin FItemGroupMixin on Widget {
   }) => .merge(
     style: style,
     scrollController: scrollController,
-    cacheExtent: cacheExtent,
+    scrollCacheExtent: scrollCacheExtent,
     maxHeight: maxHeight,
     dragStartBehavior: dragStartBehavior,
     physics: physics,
@@ -172,15 +173,14 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
   /// {@endtemplate}
   final ScrollController? scrollController;
 
-  /// {@template forui.widgets.FItemGroup.cacheExtent}
-  /// The scrollable area's cache extent in logical pixels.
+  /// {@template forui.widgets.FItemGroup.scrollCacheExtent}
+  /// The scrollable area's cache extent.
   ///
-  /// Items that fall in this cache area are laid out even though they are not (yet) visible on screen. It describes
-  /// how many pixels the cache area extends before the leading edge and after the trailing edge of the viewport.
+  /// Items that fall in this cache area are laid out even though they are not (yet) visible on screen.
   ///
   /// It is ignored if the group is part of a merged [FItemGroup] or if [intrinsicWidth] is true.
   /// {@endtemplate}
-  final double? cacheExtent;
+  final ScrollCacheExtent? scrollCacheExtent;
 
   /// {@template forui.widgets.FItemGroup.maxHeight}
   /// The max height, in logical pixels. Defaults to infinity.
@@ -241,7 +241,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
     required List<FItemMixin> children,
     this.style = const .context(),
     this.scrollController,
-    this.cacheExtent,
+    this.scrollCacheExtent,
     this.maxHeight = .infinity,
     this.dragStartBehavior = .start,
     this.physics = const ClampingScrollPhysics(),
@@ -295,7 +295,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
     int? count,
     this.style = const .context(),
     this.scrollController,
-    this.cacheExtent,
+    this.scrollCacheExtent,
     this.maxHeight = .infinity,
     this.dragStartBehavior = .start,
     this.physics = const ClampingScrollPhysics(),
@@ -340,7 +340,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
     required List<FItemGroupMixin> children,
     this.style = const .context(),
     this.scrollController,
-    this.cacheExtent,
+    this.scrollCacheExtent,
     this.maxHeight = .infinity,
     this.dragStartBehavior = .start,
     this.physics = const ClampingScrollPhysics(),
@@ -376,7 +376,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
     required List<FItemMixin> children,
     FItemGroupStyleDelta style = const .context(),
     ScrollController? scrollController,
-    double? cacheExtent,
+    ScrollCacheExtent? scrollCacheExtent,
     double maxHeight = .infinity,
     DragStartBehavior dragStartBehavior = .start,
     ScrollPhysics physics = const ClampingScrollPhysics(),
@@ -389,7 +389,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
          children: children,
          style: style,
          scrollController: scrollController,
-         cacheExtent: cacheExtent,
+         scrollCacheExtent: scrollCacheExtent,
          maxHeight: maxHeight,
          dragStartBehavior: dragStartBehavior,
          physics: physics,
@@ -425,8 +425,8 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
               ),
             )
           : CustomScrollView(
+              scrollCacheExtent: scrollCacheExtent,
               controller: scrollController,
-              cacheExtent: cacheExtent,
               dragStartBehavior: dragStartBehavior,
               shrinkWrap: true,
               physics: physics,
@@ -460,7 +460,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('controller', scrollController))
-      ..add(DoubleProperty('cacheExtent', cacheExtent))
+      ..add(DiagnosticsProperty('scrollCacheExtent', scrollCacheExtent))
       ..add(DoubleProperty('maxHeight', maxHeight))
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior))
       ..add(DiagnosticsProperty('physics', physics))

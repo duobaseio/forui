@@ -18,13 +18,12 @@ class FPaginationController extends ValueNotifier<int> {
   /// * Throws [AssertionError] if [pages] <= 0.
   /// * Throws [AssertionError] if [siblings] < 0.
   /// * Throws [AssertionError] if [page] is not in the range `0 <= page < pages`.
-  FPaginationController({required int pages, int page = 0, int siblings = 1, bool showEdges = true})
+  FPaginationController({required int pages, int page = 0, int siblings = 1, this._showEdges = true})
     : assert(0 < pages, 'pages ($pages) should be > 0'),
       assert(0 <= siblings, 'siblings ($siblings) >= 0'),
       assert(0 <= page && page < pages, 'initialPage ($page) must be between 0 and pages ($pages), exclusive.'),
       _pages = pages,
       _siblings = siblings,
-      _showEdges = showEdges,
       super(page);
 
   /// The total number of pages.

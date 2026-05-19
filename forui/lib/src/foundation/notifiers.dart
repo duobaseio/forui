@@ -121,9 +121,8 @@ class _ProxyNotifier<T> extends FMultiValueNotifier<T> {
   Set<T> _unsynced;
   ValueChanged<Set<T>> _onChange;
 
-  _ProxyNotifier({required super.value, required ValueChanged<Set<T>> onChange})
-    : _unsynced = value,
-      _onChange = onChange;
+  _ProxyNotifier({required super.value, required this._onChange})
+    : _unsynced = value;
 
   void _update(Set<T> newValue, ValueChanged<Set<T>> onChange) {
     _onChange = onChange;

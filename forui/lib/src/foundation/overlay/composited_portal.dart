@@ -107,25 +107,19 @@ class RenderPortalLayer extends RenderOverlayLayer {
   Offset _offset;
 
   RenderPortalLayer({
-    required FPortalConstraints portalConstraints,
-    required Alignment portalAnchor,
-    required Alignment childAnchor,
-    required EdgeInsets padding,
-    required Offset spacing,
-    required FPortalOverflow overflow,
-    required Offset offset,
+    required this._portalConstraints,
+    required this._portalAnchor,
+    required this._childAnchor,
+    required this._padding,
+    required this._spacing,
+    required this._overflow,
+    required this._offset,
     required super.notifier,
     required super.link,
     required super.viewSize,
     required super.showWhenUnlinked,
     super.child,
-  }) : _portalConstraints = portalConstraints,
-       _portalAnchor = portalAnchor,
-       _childAnchor = childAnchor,
-       _padding = padding,
-       _spacing = spacing,
-       _overflow = overflow,
-       _offset = offset;
+  });
 
   @override
   void performLayout() {

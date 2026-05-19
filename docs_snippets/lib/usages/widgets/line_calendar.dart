@@ -9,7 +9,7 @@ final lineCalendar = FLineCalendar(
   // {@category "Scroll"}
   initialScroll: .now(),
   initialScrollAlignment: .center,
-  cacheExtent: null,
+  scrollCacheExtent: null,
   keyboardDismissBehavior: .manual,
   physics: null,
   // {@endcategory}

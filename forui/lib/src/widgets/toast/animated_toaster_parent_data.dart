@@ -133,7 +133,7 @@ class AnimationTween<T> {
 
   static AnimationTween<Size> size({Size? begin, Size? end}) => .new(equal: _size, begin: begin, end: end);
 
-  AnimationTween({required bool Function(T, T) equal, this.begin, this.end}) : _equal = equal;
+  AnimationTween({required this._equal, this.begin, this.end});
 
   void mark() {
     begin = value;

@@ -2,6 +2,7 @@ import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
@@ -80,15 +81,14 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
   /// {@endtemplate}
   final ScrollController? scrollController;
 
-  /// {@template forui.widgets.FTileGroup.cacheExtent}
-  /// The scrollable area's cache extent in logical pixels.
+  /// {@template forui.widgets.FTileGroup.scrollCacheExtent}
+  /// The scrollable area's cache extent.
   ///
-  /// Items that fall in this cache area are laid out even though they are not (yet) visible on screen. It describes
-  /// how many pixels the cache area extends before the leading edge and after the trailing edge of the viewport.
+  /// Items that fall in this cache area are laid out even though they are not (yet) visible on screen.
   ///
   /// It is ignored if the group is part of a merged [FTileGroup].
   /// {@endtemplate}
-  final double? cacheExtent;
+  final ScrollCacheExtent? scrollCacheExtent;
 
   /// {@template forui.widgets.FTileGroup.maxHeight}
   /// The max height, in logical pixels. Defaults to infinity.
@@ -161,7 +161,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
     required List<FTileMixin> children,
     this.style = const .context(),
     this.scrollController,
-    this.cacheExtent,
+    this.scrollCacheExtent,
     this.maxHeight = .infinity,
     this.dragStartBehavior = .start,
     this.physics = const ClampingScrollPhysics(),
@@ -214,7 +214,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
     int? count,
     this.style = const .context(),
     this.scrollController,
-    this.cacheExtent,
+    this.scrollCacheExtent,
     this.maxHeight = .infinity,
     this.dragStartBehavior = .start,
     this.physics = const ClampingScrollPhysics(),
@@ -260,7 +260,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
     required List<FTileGroupMixin> children,
     this.style = const .context(),
     this.scrollController,
-    this.cacheExtent,
+    this.scrollCacheExtent,
     this.maxHeight = .infinity,
     this.dragStartBehavior = .start,
     this.physics = const ClampingScrollPhysics(),
@@ -317,7 +317,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
             )
           : CustomScrollView(
               controller: scrollController,
-              cacheExtent: cacheExtent,
+              scrollCacheExtent: scrollCacheExtent,
               dragStartBehavior: dragStartBehavior,
               shrinkWrap: true,
               physics: physics,
@@ -362,7 +362,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('controller', scrollController))
-      ..add(DoubleProperty('cacheExtent', cacheExtent))
+      ..add(DiagnosticsProperty('scrollCacheExtent', scrollCacheExtent))
       ..add(DoubleProperty('maxHeight', maxHeight))
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior))
       ..add(DiagnosticsProperty('physics', physics))

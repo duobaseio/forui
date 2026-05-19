@@ -10,7 +10,7 @@ void main() {
   late FAccordionController controller;
   late AnimationController first;
   late AnimationController second;
-  int count = 0;
+  var count = 0;
 
   setUp(() {
     count = 0;

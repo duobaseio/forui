@@ -295,9 +295,7 @@ class _RenderCutoutClipper extends RenderProxyBox {
   RenderBox _cutout;
   void Function(Path path, Rect bounds) _cutoutBuilder;
 
-  _RenderCutoutClipper({required RenderBox cutout, required void Function(Path path, Rect bounds) cutoutBuilder})
-    : _cutout = cutout,
-      _cutoutBuilder = cutoutBuilder;
+  _RenderCutoutClipper({required this._cutout, required this._cutoutBuilder});
 
   @override
   void paint(PaintingContext context, Offset offset) {
@@ -390,9 +388,8 @@ class _RenderSemanticsClipper extends RenderProxyBox {
 
   /// Creates a [RenderProxyBox] that Updates the [SemanticsNode.rect] of its child based on the value inside the
   /// provided [ValueNotifier].
-  _RenderSemanticsClipper({required ValueNotifier<EdgeInsets> clipDetailsNotifier, RenderBox? child})
-    : _clipDetailsNotifier = clipDetailsNotifier,
-      super(child);
+  _RenderSemanticsClipper({required this._clipDetailsNotifier, RenderBox? child})
+    : super(child);
 
   @override
   void attach(PipelineOwner owner) {

@@ -64,17 +64,12 @@ class _ShiftedSheet extends RenderShiftedBox {
   Size _previous = .zero;
 
   _ShiftedSheet({
-    required FLayout side,
-    required double value,
-    required double bottomViewInset,
-    required double? mainAxisMaxRatio,
-    required ValueChanged<Size>? onChange,
-  }) : _side = side,
-       _value = value,
-       _bottomViewInset = bottomViewInset,
-       _mainAxisMaxRatio = mainAxisMaxRatio,
-       _onChange = onChange,
-       super(null);
+    required this._side,
+    required this._value,
+    required this._bottomViewInset,
+    required this._mainAxisMaxRatio,
+    required this._onChange,
+  }) : super(null);
 
   @override
   void performLayout() {

@@ -28,7 +28,7 @@ String? summarizeDocs(String? documentation) {
   var parenDepth = 0;
   var backticked = false;
 
-  String summary = '';
+  var summary = '';
   parse:
   for (var i = 0; i < full.length; i++) {
     final char = full[i];

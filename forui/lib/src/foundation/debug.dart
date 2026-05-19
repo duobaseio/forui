@@ -33,7 +33,7 @@ class FiniteConstraintsValidator extends SingleChildRenderObjectWidget {
 class _RenderFiniteConstraintsValidator extends RenderProxyBox {
   String _type;
 
-  _RenderFiniteConstraintsValidator({required String type}) : _type = type;
+  _RenderFiniteConstraintsValidator({required this._type});
 
   @override
   void performLayout() {

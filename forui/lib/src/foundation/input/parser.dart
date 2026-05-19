@@ -19,7 +19,7 @@ abstract class Parser {
     assert(current.length == pattern.length, 'current must have ${pattern.length} parts.');
 
     Changes changes = const None();
-    for (int i = 0; i < pattern.length; i++) {
+    for (var i = 0; i < pattern.length; i++) {
       final previousPart = previous[i];
       final currentPart = current[i];
 

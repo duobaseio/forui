@@ -120,7 +120,7 @@ class FOtpController extends TextEditingController {
     final variants = FOtpFieldScope.of(context).variants;
 
     final spans = <InlineSpan>[];
-    int item = 0;
+    var item = 0;
     for (final (i, child) in children.indexed) {
       if (child is FOtpItemMixin) {
         final character = characters.elementAtOrNull(item);

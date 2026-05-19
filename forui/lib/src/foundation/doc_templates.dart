@@ -111,11 +111,10 @@ extension FormFieldKey on Never {
 
 @internal
 extension Scroll on Never {
-  /// {@template forui.foundation.doc_templates.cacheExtent}
-  /// The scrollable area's cache extent in logical pixels.
+  /// {@template forui.foundation.doc_templates.scrollCacheExtent}
+  /// The scrollable area's cache extent.
   ///
-  /// Items that fall in this cache area are laid out even though they are not (yet) visible on screen. It describes
-  /// how many pixels the cache area extends before the leading edge and after the trailing edge of the viewport.
+  /// Items that fall in this cache area are laid out even though they are not (yet) visible on screen.
   /// {@endtemplate}
-  static const cacheExtent = '';
+  static const scrollCacheExtent = '';
 }
