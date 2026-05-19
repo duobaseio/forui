@@ -3,5 +3,6 @@ analyzer:
   errors:
     diagnostic_describe_all_properties: ignore
     implicit_call_tearoffs: ignore
+    invalid_annotation_target: ignore # We disable this lint because we use @override extensively in our code snippets.
     public_member_api_docs: ignore
     unused_result: ignore
