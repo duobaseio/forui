@@ -44,14 +44,13 @@ extension type FAutocompleteFieldSizeStyles(
     FAutocompleteFieldStyleDelta
   >
   _
-)
-    implements
-        FVariants<
-          FTextFieldSizeVariantConstraint,
-          FTextFieldSizeVariant,
-          FAutocompleteFieldStyle,
-          FAutocompleteFieldStyleDelta
-        > {
+) implements
+    FVariants<
+      FTextFieldSizeVariantConstraint,
+      FTextFieldSizeVariant,
+      FAutocompleteFieldStyle,
+      FAutocompleteFieldStyleDelta
+    > {
   /// Creates [FAutocompleteFieldSizeStyles] that inherit their properties.
   factory FAutocompleteFieldSizeStyles.inherit({
     required FColors colors,

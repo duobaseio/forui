@@ -27,9 +27,7 @@ part 'text_field_style.design.dart';
 /// [FTextFieldStyle]'s size styles.
 extension type FTextFieldSizeStyles(
   FVariants<FTextFieldSizeVariantConstraint, FTextFieldSizeVariant, FTextFieldStyle, FTextFieldStyleDelta> _
-)
-    implements
-        FVariants<FTextFieldSizeVariantConstraint, FTextFieldSizeVariant, FTextFieldStyle, FTextFieldStyleDelta> {
+) implements FVariants<FTextFieldSizeVariantConstraint, FTextFieldSizeVariant, FTextFieldStyle, FTextFieldStyleDelta> {
   /// Creates a [FTextFieldSizeStyles] that inherits its properties.
   factory FTextFieldSizeStyles.inherit({
     required FColors colors,

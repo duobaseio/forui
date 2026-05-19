@@ -45,14 +45,8 @@ abstract class TimeInputController extends InputController {
     false => Time24InputController.new,
   }(localizations, controller, format, value, style, TimeParser(format), placeholder);
 
-  TimeInputController.fromValue(
-    this.controller,
-    this.format,
-    super.value,
-    super.style,
-    super.parser,
-    super.placeholder,
-  ): _canonicalSpace = format.canonicalSpace {
+  TimeInputController.fromValue(this.controller, this.format, super.value, super.style, super.parser, super.placeholder)
+    : _canonicalSpace = format.canonicalSpace {
     controller.addListener(updateFromTimeController);
   }
 

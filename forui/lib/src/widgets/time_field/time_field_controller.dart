@@ -62,12 +62,8 @@ class _ProxyController extends FTimeFieldController {
   Curve _curve;
   int _monotonic = 0;
 
-  _ProxyController({
-    required super.time,
-    required this._onChange,
-    required this._duration,
-    required this._curve,
-  }) : _unsynced = time;
+  _ProxyController({required super.time, required this._onChange, required this._duration, required this._curve})
+    : _unsynced = time;
 
   void update(FTime? newValue, ValueChanged<FTime?> onChange, bool shown, Duration duration, Curve curve) {
     _onChange = onChange;

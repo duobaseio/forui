@@ -20,8 +20,7 @@ class _ProxyController<T> extends FSelectController<T> {
   T? _unsynced;
   ValueChanged<T?> _onChange;
 
-  _ProxyController({required super.value, required this._onChange})
-    : _unsynced = value;
+  _ProxyController({required super.value, required this._onChange}) : _unsynced = value;
 
   void _update(T? newValue, ValueChanged<T?> onChange) {
     _onChange = onChange;

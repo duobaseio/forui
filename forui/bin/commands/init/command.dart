@@ -1,8 +1,8 @@
 import 'dart:io';
 
 import '../../args/command.dart';
-import '../snippet/snippet.dart';
 import '../../configuration.dart';
+import '../snippet/snippet.dart';
 
 class InitCommand extends ForuiCommand {
   @override

@@ -54,14 +54,13 @@ class FMultiSelectStyle with Diagnosticable, _$FMultiSelectStyleFunctions {
 extension type FMultiSelectFieldSizeStyles(
   FVariants<FTextFieldSizeVariantConstraint, FTextFieldSizeVariant, FMultiSelectFieldStyle, FMultiSelectFieldStyleDelta>
   _
-)
-    implements
-        FVariants<
-          FTextFieldSizeVariantConstraint,
-          FTextFieldSizeVariant,
-          FMultiSelectFieldStyle,
-          FMultiSelectFieldStyleDelta
-        > {
+) implements
+    FVariants<
+      FTextFieldSizeVariantConstraint,
+      FTextFieldSizeVariant,
+      FMultiSelectFieldStyle,
+      FMultiSelectFieldStyleDelta
+    > {
   /// Creates a [FMultiSelectFieldSizeStyles] that inherits its properties.
   factory FMultiSelectFieldSizeStyles.inherit({
     required FColors colors,

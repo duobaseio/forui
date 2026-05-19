@@ -302,8 +302,7 @@ class OverlayLayer extends ContainerLayer {
     if (_lastTransform == null) {
       return null;
     }
-    final result = Matrix4.translationValues(-_lastOffset!.dx, -_lastOffset!.dy, 0.0)
-      ..multiply(_lastTransform!);
+    final result = Matrix4.translationValues(-_lastOffset!.dx, -_lastOffset!.dy, 0.0)..multiply(_lastTransform!);
     return result;
   }
 

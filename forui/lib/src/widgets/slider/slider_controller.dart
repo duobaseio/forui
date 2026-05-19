@@ -375,11 +375,8 @@ class ProxyDiscreteSliderController extends FDiscreteSliderController {
     super.hapticFeedbackVelocity,
   }) : super();
 
-  ProxyDiscreteSliderController.range({
-    required super.value,
-    required this._onChange,
-    super.hapticFeedbackVelocity,
-  }) : super.range();
+  ProxyDiscreteSliderController.range({required super.value, required this._onChange, super.hapticFeedbackVelocity})
+    : super.range();
 
   @override
   void attach(double extent, List<FSliderMark> marks) {

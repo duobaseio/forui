@@ -38,8 +38,7 @@ void main() {
   // Flutter's overlay, producing values that drift from runtime.
   flutter_l10n.loadDateIntlDataIfNotLoaded();
 
-  final files = Directory('lib/l10n').listSync().whereType<File>().toList()
-    ..sort((a, b) => a.path.compareTo(b.path));
+  final files = Directory('lib/l10n').listSync().whereType<File>().toList()..sort((a, b) => a.path.compareTo(b.path));
 
   for (final file in files) {
     final locale = _arbName.firstMatch(file.path)?.group(1);
@@ -84,8 +83,10 @@ void _shortDate(String locale, Map<String, dynamic> arb) {
     return;
   }
   if (parts[1] != parts[2]) {
-    _warnings.add('$locale shortDate: asymmetric separators in "$formatted" '
-        '("${parts[1]}" vs "${parts[2]}") - using first');
+    _warnings.add(
+      '$locale shortDate: asymmetric separators in "$formatted" '
+      '("${parts[1]}" vs "${parts[2]}") - using first',
+    );
   }
 
   arb['shortDateSeparator'] = parts[1];

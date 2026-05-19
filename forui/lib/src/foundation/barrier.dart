@@ -388,8 +388,7 @@ class _RenderSemanticsClipper extends RenderProxyBox {
 
   /// Creates a [RenderProxyBox] that Updates the [SemanticsNode.rect] of its child based on the value inside the
   /// provided [ValueNotifier].
-  _RenderSemanticsClipper({required this._clipDetailsNotifier, RenderBox? child})
-    : super(child);
+  _RenderSemanticsClipper({required this._clipDetailsNotifier, RenderBox? child}) : super(child);
 
   @override
   void attach(PipelineOwner owner) {

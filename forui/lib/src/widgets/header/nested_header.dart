@@ -141,8 +141,7 @@ class _RenderNestedHeader extends RenderBox
   Alignment _alignment;
   TextDirection _direction;
 
-  _RenderNestedHeader({required this._alignment, required TextDirection textDirection})
-    : _direction = textDirection;
+  _RenderNestedHeader({required this._alignment, required TextDirection textDirection}) : _direction = textDirection;
 
   @override
   void setupParentData(RenderBox child) => child.parentData = DefaultData();

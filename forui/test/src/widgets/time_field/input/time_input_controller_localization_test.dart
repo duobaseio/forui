@@ -10,11 +10,7 @@ import '../../../test_scaffold.dart';
 
 final _date = DateTime(2024, 12, 25, 15, 30);
 
-const _wideSpaces = {
-  0x00A0: 'NBSP',
-  0x202F: 'NNBSP',
-  0x2007: 'FIGURE SPACE',
-};
+const _wideSpaces = {0x00A0: 'NBSP', 0x202F: 'NNBSP', 0x2007: 'FIGURE SPACE'};
 
 // We use a widget to load the locales since Flutter and default intl might have different mappings.
 void main() {
