@@ -62,11 +62,13 @@ void main() {
             locale: locale,
             child: Builder(
               builder: (context) {
-                final controller = TimeInputController(
-                  FLocalizations.of(context)!,
-                  FTimeFieldController(time: const FTime(12, 15)),
-                  .jm(locale.toString()),
-                  context.theme.textFieldStyles.md,
+                final controller = autoDispose(
+                  TimeInputController(
+                    FLocalizations.of(context)!,
+                    autoDispose(FTimeFieldController(time: const FTime(12, 15))),
+                    .jm(locale.toString()),
+                    context.theme.textFieldStyles.md,
+                  ),
                 );
 
                 parts = controller.selector.split(DateFormat.jm(locale.toString()).format(_date));
@@ -91,11 +93,13 @@ void main() {
             locale: locale,
             child: Builder(
               builder: (context) {
-                final controller = TimeInputController(
-                  FLocalizations.of(context)!,
-                  FTimeFieldController(time: const FTime(12, 15)),
-                  .Hm(locale.toString()),
-                  context.theme.textFieldStyles.md,
+                final controller = autoDispose(
+                  TimeInputController(
+                    FLocalizations.of(context)!,
+                    autoDispose(FTimeFieldController(time: const FTime(12, 15))),
+                    .Hm(locale.toString()),
+                    context.theme.textFieldStyles.md,
+                  ),
                 );
 
                 parts = controller.selector.split(DateFormat.Hm(locale.toString()).format(_date));
