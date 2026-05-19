@@ -1,27 +1,15 @@
 PODS:
   - FlutterMacOS (1.0.0)
-  - package_info_plus (0.0.1):
-    - FlutterMacOS
-  - wakelock_plus (0.0.1):
-    - FlutterMacOS
 
 DEPENDENCIES:
   - FlutterMacOS (from `Flutter/ephemeral`)
-  - package_info_plus (from `Flutter/ephemeral/.symlinks/plugins/package_info_plus/macos`)
-  - wakelock_plus (from `Flutter/ephemeral/.symlinks/plugins/wakelock_plus/macos`)
 
 EXTERNAL SOURCES:
   FlutterMacOS:
     :path: Flutter/ephemeral
-  package_info_plus:
-    :path: Flutter/ephemeral/.symlinks/plugins/package_info_plus/macos
-  wakelock_plus:
-    :path: Flutter/ephemeral/.symlinks/plugins/wakelock_plus/macos
 
 SPEC CHECKSUMS:
   FlutterMacOS: d0db08ddef1a9af05a5ec4b724367152bb0500b1
-  package_info_plus: f0052d280d17aa382b932f399edf32507174e870
-  wakelock_plus: 917609be14d812ddd9e9528876538b2263aaa03b
 
 PODFILE CHECKSUM: 9ebaf0ce3d369aaa26a9ea0e159195ed94724cf3
 
