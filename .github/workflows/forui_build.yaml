@@ -125,6 +125,4 @@ jobs:
 
       - run: flutter pub get
       - run: dart run build_runner build
-      - run: pod repo update
-        working-directory: forui/example/ios
       - run: flutter build ios --debug --no-codesign --no-pub
