@@ -27,7 +27,7 @@ class FSelectTileGroup<T> extends StatefulWidget with FTileGroupMixin, FFormFiel
   /// {@macro forui.widgets.FTileGroup.scrollController}
   final ScrollController? scrollController;
 
-  /// {@macro forui.widgets.FTileGroup.cacheExtent}
+  /// {@macro forui.widgets.FTileGroup.scrollCacheExtent}
   final ScrollCacheExtent? scrollCacheExtent;
 
   /// {@macro forui.widgets.FTileGroup.maxHeight}
