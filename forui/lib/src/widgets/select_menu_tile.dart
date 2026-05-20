@@ -399,19 +399,19 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
   /// {@template forui.widgets.FSelectMenuTile.builder}
   /// Creates a [FSelectMenuTile] that lazily builds the menu.
   ///
-  /// The [menuBuilder] is called for each tile that should be built. The current level's [FInheritedItemData] is **not**
-  /// visible to `menuBuilder`.
+  /// The `menuBuilder` is called for each tile that should be built. The current level's [FInheritedItemData] is
+  /// **not** visible to `menuBuilder`.
   /// * It may return null to signify the end of the group.
   /// * It may be called more than once for the same index.
-  /// * It will be called only for indices <= [count] if [count] is given.
+  /// * It will be called only for indices <= `count` if `count` is given.
   ///
-  /// The [count] is the number of tiles to build. If null, [menuBuilder] will be called until it returns null.
+  /// The `count` is the number of tiles to build. If null, `menuBuilder` will be called until it returns null.
   ///
   /// ## Warning
   /// May result in an infinite loop or run out of memory if:
   /// * Placed in a parent widget that does not constrain its size, i.e., [Column].
-  /// * [count] is null and [menuBuilder] always provides a zero-size widget, i.e., SizedBox(). If possible, provide
-  ///   tiles with non-zero size, return null from the builder, or set [count] to non-null.
+  /// * `count` is null and `menuBuilder` always provides a zero-size widget, i.e., SizedBox(). If possible, provide
+  ///   tiles with non-zero size, return null from the builder, or set `count` to non-null.
   /// {@endtemplate}
   FSelectMenuTile.builder({
     required this.title,
