@@ -25,10 +25,10 @@ jobs:
       - working-directory: forui
         run: |
           flutter pub get
-          dart run build_runner build --delete-conflicting-outputs
+          dart run build_runner build
       - run: flutter pub get
       - run: dart run ../tool/sort.dart docs_snippets
-      - run: dart run build_runner build --delete-conflicting-outputs
+      - run: dart run build_runner build
       - run: dart fix --apply
         # We format the code again since the required trailing comma lint fixes causes code to be formatted differently.
       - run: dart format .

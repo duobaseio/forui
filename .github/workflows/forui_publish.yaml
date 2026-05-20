@@ -30,7 +30,7 @@ jobs:
           id_token_audience: 'https://pub.dev'
           id_token_include_email: true
       - run: flutter pub get
-      - run: dart run build_runner build --delete-conflicting-outputs
+      - run: dart run build_runner build
       - run: dart pub token add https://pub.dev --env-var=PUB_TOKEN
       - run: dart pub publish --force
         env:

@@ -20,11 +20,11 @@ jobs:
       - working-directory: forui
         run: |
           flutter pub get
-          dart run build_runner build --delete-conflicting-outputs
+          dart run build_runner build
       - working-directory: ./docs_snippets
         run: |
           flutter pub get
-          dart run build_runner build --delete-conflicting-outputs
+          dart run build_runner build
           flutter build web
       - uses: actions/upload-artifact@v7
         with:
