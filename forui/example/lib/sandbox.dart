@@ -50,10 +50,7 @@ class _SandboxState extends State<Sandbox> {
           SizedBox(
             width: _viewportWidth,
             child: FLineCalendar(
-              scrollControl: .managed(
-                controller: _scroll,
-                onChange: (offset) => setState(() => _offset = offset),
-              ),
+              scrollControl: .managed(controller: _scroll, onChange: (offset) => setState(() => _offset = offset)),
             ),
           ),
           Text('offset: ${_offset.toStringAsFixed(1)}    viewport: ${_viewportWidth.toStringAsFixed(0)}'),
@@ -101,10 +98,8 @@ class _SandboxState extends State<Sandbox> {
               ),
               FButton(
                 mainAxisSize: .min,
-                onPress: () => _scroll.jumpToDate(
-                  DateTime.utc(_target.year, _target.month, _target.day),
-                  alignment: _alignment,
-                ),
+                onPress: () =>
+                    _scroll.jumpToDate(DateTime.utc(_target.year, _target.month, _target.day), alignment: _alignment),
                 child: const Text('Jump to today'),
               ),
               FButton(
