@@ -107,6 +107,12 @@ customized globally. Defaults to Lucide-backed set, `FIcons.lucide()`.
 
 
 ### `FLineCalendar`
+* Add `FLineCalendarScrollControl`.
+* Add `FLineCalendarScrollController`.
+* Add `FLineCalendar.scrollControl`.
+
+* **Breaking** Move `FLineCalendar.start`, `end`, `today`, `initialScroll`, and `initialScrollAlignment` to
+  `FLineCalendarScrollControl.managed(...)`.
 * **Breaking** Rename `FLineCalendar.cacheExtent` to `FLineCalendar.scrollCacheExtent`.
 
 

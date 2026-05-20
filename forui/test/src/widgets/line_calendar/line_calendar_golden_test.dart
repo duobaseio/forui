@@ -45,7 +45,7 @@ void main() {
           builder: (context, setState) => TestScaffold.app(
             child: FLineCalendar(
               control: .lifted(date: value, onChange: (date) => setState(() => value = date)),
-              today: DateTime(2024, 11, 28),
+              scrollControl: .managed(today: DateTime(2024, 11, 28)),
             ),
           ),
         ),
@@ -65,7 +65,7 @@ void main() {
           builder: (context, setState) => TestScaffold.app(
             child: FLineCalendar(
               control: .lifted(date: value, onChange: (_) {}),
-              today: DateTime(2024, 11, 28),
+              scrollControl: .managed(today: DateTime(2024, 11, 28)),
             ),
           ),
         ),
@@ -86,7 +86,7 @@ void main() {
             theme: theme.data,
             child: Focus(
               focusNode: focus,
-              child: FLineCalendar(today: DateTime(2024, 11, 28)),
+              child: FLineCalendar(scrollControl: .managed(today: DateTime(2024, 11, 28))),
             ),
           ),
         );
@@ -104,7 +104,7 @@ void main() {
             theme: theme.data,
             child: FLineCalendar(
               control: .managed(selectable: (d) => d.day != 19),
-              today: DateTime(2025, 12, 19),
+              scrollControl: .managed(today: DateTime(2025, 12, 19)),
             ),
           ),
         );
@@ -120,7 +120,7 @@ void main() {
               focusNode: focus,
               child: FLineCalendar(
                 control: .managed(selectable: (d) => d.day != 19),
-                today: DateTime(2025, 12, 19),
+                scrollControl: .managed(today: DateTime(2025, 12, 19)),
               ),
             ),
           ),
@@ -142,7 +142,7 @@ void main() {
             theme: theme.data,
             child: FLineCalendar(
               control: .managed(initial: DateTime(2025, 12, 19), selectable: (d) => d.day != 19),
-              today: DateTime(2025, 12, 19),
+              scrollControl: .managed(today: DateTime(2025, 12, 19)),
             ),
           ),
         );
@@ -161,7 +161,7 @@ void main() {
               focusNode: focus,
               child: FLineCalendar(
                 control: .managed(initial: DateTime(2025, 12, 19), selectable: (d) => d.day != 19),
-                today: DateTime(2025, 12, 19),
+                scrollControl: .managed(today: DateTime(2025, 12, 19)),
               ),
             ),
           ),
@@ -181,7 +181,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FLineCalendar(today: DateTime(2024, 11, 28)),
+            child: FLineCalendar(scrollControl: .managed(today: DateTime(2024, 11, 28))),
           ),
         );
 
@@ -198,7 +198,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FLineCalendar(today: DateTime(2024, 11, 28)),
+            child: FLineCalendar(scrollControl: .managed(today: DateTime(2024, 11, 28))),
           ),
         );
 
@@ -218,7 +218,7 @@ void main() {
             theme: theme.data,
             child: Focus(
               focusNode: focus,
-              child: FLineCalendar(today: DateTime(2024, 11, 28)),
+              child: FLineCalendar(scrollControl: .managed(today: DateTime(2024, 11, 28))),
             ),
           ),
         );
@@ -240,7 +240,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FLineCalendar(today: DateTime(2024, 11, 28)),
+            child: FLineCalendar(scrollControl: .managed(today: DateTime(2024, 11, 28))),
           ),
         );
 
@@ -263,7 +263,7 @@ void main() {
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
-            child: FLineCalendar(today: DateTime(2024, 11, 28)),
+            child: FLineCalendar(scrollControl: .managed(today: DateTime(2024, 11, 28))),
           ),
         );
 
@@ -285,7 +285,7 @@ void main() {
             theme: theme.data,
             child: FLineCalendar(
               control: .managed(initial: DateTime(2024, 11, 29)),
-              today: DateTime(2024, 11, 28),
+              scrollControl: .managed(today: DateTime(2024, 11, 28)),
             ),
           ),
         );
@@ -302,7 +302,7 @@ void main() {
             theme: theme.data,
             child: FLineCalendar(
               control: .managed(initial: DateTime(2024, 11, 29), toggleable: true),
-              today: DateTime(2024, 11, 28),
+              scrollControl: .managed(today: DateTime(2024, 11, 28)),
             ),
           ),
         );
@@ -319,7 +319,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         textDirection: .rtl,
-        child: FLineCalendar(today: DateTime(2024, 11, 28)),
+        child: FLineCalendar(scrollControl: .managed(today: DateTime(2024, 11, 28))),
       ),
     );
 
@@ -329,7 +329,9 @@ void main() {
   testWidgets('align to start', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        child: FLineCalendar(initialScrollAlignment: .bottomStart, today: DateTime(2024, 11, 28)),
+        child: FLineCalendar(
+          scrollControl: .managed(initialAlignment: .bottomStart, today: DateTime(2024, 11, 28)),
+        ),
       ),
     );
 
@@ -339,7 +341,9 @@ void main() {
   testWidgets('align to end', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        child: FLineCalendar(initialScrollAlignment: .bottomEnd, today: DateTime(2024, 11, 28)),
+        child: FLineCalendar(
+          scrollControl: .managed(initialAlignment: .bottomEnd, today: DateTime(2024, 11, 28)),
+        ),
       ),
     );
 
@@ -356,7 +360,7 @@ void main() {
               Positioned(top: 5, left: 5, child: Container(width: 3, height: 3, color: const Color(0xFF00FF00))),
             ],
           ),
-          today: DateTime(2024, 11, 28),
+          scrollControl: .managed(today: DateTime(2024, 11, 28)),
         ),
       ),
     );

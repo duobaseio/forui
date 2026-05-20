@@ -5,7 +5,6 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
-import 'package:sugar/sugar.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
@@ -41,6 +40,9 @@ class FLineCalendar extends StatelessWidget {
   /// Defines how this line calendar's value is controlled.
   final FLineCalendarControl control;
 
+  /// Defines how this line calendar is scrolled.
+  final FLineCalendarScrollControl scrollControl;
+
   /// The style.
   ///
   /// To modify the current style:
@@ -61,9 +63,6 @@ class FLineCalendar extends StatelessWidget {
   /// ```
   final FLineCalendarStyleDelta style;
 
-  /// The alignment to which the initially scrolled date will be aligned. Defaults to [Alignment.center].
-  final AlignmentDirectional initialScrollAlignment;
-
   /// How the scroll view should respond to user input.
   ///
   /// Defaults to matching platform conventions.
@@ -83,66 +82,23 @@ class FLineCalendar extends StatelessWidget {
   /// in a [Stack] to avoid re-creating the custom content from scratch.
   final ValueWidgetBuilder<FLineCalendarItemData> builder;
 
-  final LocalDate _start;
-  final LocalDate? _end;
-  final LocalDate? _initialScroll;
-  final LocalDate _today;
-
   /// Creates a [FLineCalendar].
-  ///
-  /// [start] represents the start date, inclusive. It is truncated to the nearest date. Defaults to the
-  /// [DateTime.utc(1900)].
-  ///
-  /// [end] represents the end date, exclusive. It is truncated to the nearest date.
-  ///
-  /// [initialScroll] represents the initial date to which the line calendar is scrolled. It is aligned based on
-  /// [initialScrollAlignment]. It is truncated to the nearest date. Defaults to [today] if not provided.
-  ///
-  /// [today] represents the current date. It is truncated to the nearest date. Defaults to the [DateTime.now].
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if:
-  /// * [end] <= [start].
-  /// * [initialScroll] < [start] or [end] <= [initialScroll].
-  /// * [today] < [start] or [end] <= [today].
-  FLineCalendar({
+  const FLineCalendar({
     this.control = const .managed(),
+    this.scrollControl = const .managed(),
     this.style = const .context(),
-    this.initialScrollAlignment = .center,
     this.physics,
     this.scrollCacheExtent,
     this.keyboardDismissBehavior = .manual,
     this.builder = defaultBuilder,
-    DateTime? start,
-    DateTime? end,
-    DateTime? initialScroll,
-    DateTime? today,
     super.key,
-  }) : _start = (start ?? .utc(1900)).toLocalDate(),
-       _end = end?.toLocalDate(),
-       _initialScroll = initialScroll?.toLocalDate(),
-       _today = (today ?? .now()).toLocalDate(),
-       assert(
-         start == null || end == null || start.toLocalDate() < end.toLocalDate(),
-         'start ($start) must be < end ($end)',
-       ),
-       assert(
-         initialScroll == null ||
-             start == null ||
-             (initialScroll.toLocalDate() >= start.toLocalDate() && initialScroll.toLocalDate() < end!.toLocalDate()),
-         'initialScroll ($initialScroll) must be >= start ($start)',
-       ),
-       assert(
-         today == null ||
-             start == null ||
-             (today.toLocalDate() >= start.toLocalDate() && today.toLocalDate() < end!.toLocalDate()),
-         'today ($today) must be >= start ($start) and < end ($end)',
-       );
+  });
 
   @override
   Widget build(BuildContext context) => LayoutBuilder(
     builder: (context, constraints) => CalendarLayout(
       control: control,
+      scrollControl: scrollControl,
       style: style(context.theme.lineCalendarStyle),
       physics: physics,
       scrollCacheExtent: scrollCacheExtent,
@@ -150,12 +106,7 @@ class FLineCalendar extends StatelessWidget {
       scale: MediaQuery.textScalerOf(context),
       textStyle: DefaultTextStyle.of(context).style,
       builder: builder,
-      start: _start,
-      end: _end,
-      initialScroll: _initialScroll,
-      today: _today,
       constraints: constraints,
-      alignment: initialScrollAlignment,
     ),
   );
 
@@ -164,8 +115,8 @@ class FLineCalendar extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('control', control))
+      ..add(DiagnosticsProperty('scrollControl', scrollControl))
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('initialScrollAlignment', initialScrollAlignment))
       ..add(DiagnosticsProperty('physics', physics))
       ..add(DiagnosticsProperty('scrollCacheExtent', scrollCacheExtent))
       ..add(DiagnosticsProperty('keyboardDismissBehavior', keyboardDismissBehavior))

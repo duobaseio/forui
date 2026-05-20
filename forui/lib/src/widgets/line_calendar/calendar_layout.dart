@@ -8,38 +8,31 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/rendering.dart';
 import 'package:forui/src/widgets/line_calendar/line_calendar_controller.dart';
 import 'package:forui/src/widgets/line_calendar/line_calendar_item.dart';
+import 'package:forui/src/widgets/line_calendar/line_calendar_scroll_controller.dart';
 
 @internal
 class CalendarLayout extends StatefulWidget {
   final FLineCalendarControl control;
+  final FLineCalendarScrollControl scrollControl;
   final FLineCalendarStyle style;
-  final AlignmentDirectional alignment;
   final ScrollPhysics? physics;
   final ScrollCacheExtent? scrollCacheExtent;
   final ScrollViewKeyboardDismissBehavior keyboardDismissBehavior;
   final TextScaler scale;
   final TextStyle textStyle;
   final ValueWidgetBuilder<FLineCalendarItemData> builder;
-  final LocalDate start;
-  final LocalDate? end;
-  final LocalDate? initialScroll;
-  final LocalDate today;
   final BoxConstraints constraints;
 
   const CalendarLayout({
     required this.control,
+    required this.scrollControl,
     required this.style,
-    required this.alignment,
     required this.physics,
     required this.scrollCacheExtent,
     required this.keyboardDismissBehavior,
     required this.scale,
     required this.textStyle,
     required this.builder,
-    required this.start,
-    required this.end,
-    required this.initialScroll,
-    required this.today,
     required this.constraints,
     super.key,
   });
@@ -52,62 +45,44 @@ class CalendarLayout extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('control', control))
+      ..add(DiagnosticsProperty('scrollControl', scrollControl))
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('alignment', alignment))
       ..add(DiagnosticsProperty('physics', physics))
       ..add(DiagnosticsProperty('scrollCacheExtent', scrollCacheExtent))
       ..add(DiagnosticsProperty('keyboardDismissBehavior', keyboardDismissBehavior))
       ..add(DiagnosticsProperty('scaler', scale))
       ..add(DiagnosticsProperty('textStyle', textStyle))
       ..add(ObjectFlagProperty.has('builder', builder))
-      ..add(DiagnosticsProperty('start', start))
-      ..add(DiagnosticsProperty('end', end))
-      ..add(DiagnosticsProperty('initialScroll', initialScroll))
-      ..add(DiagnosticsProperty('today', today))
       ..add(DiagnosticsProperty('constraints', constraints));
   }
 }
 
 class _CalendarLayoutState extends State<CalendarLayout> {
   late FCalendarController<DateTime?> _controller;
-  late ScrollController _scrollController;
-  late double _width;
+  late FLineCalendarScrollController _scrollController;
+  late double _itemExtent;
 
   @override
   void initState() {
     super.initState();
-    _width = _estimateWidth();
-
     _controller = widget.control.create(_handleOnChange);
-
-    final start = ((widget.initialScroll ?? widget.today).difference(widget.start).inDays) * _width;
-    _scrollController = ScrollController(
-      initialScrollOffset: switch (widget.alignment.start) {
-        -1 => start,
-        1 => start - widget.constraints.maxWidth + _width,
-        _ => start - (widget.constraints.maxWidth - _width) / 2,
-      },
-    );
+    _scrollController = widget.scrollControl.create(_handleOnScroll)
+      ..initialize(_itemExtent = _estimateExtent(), widget.constraints.maxWidth);
   }
 
   @override
   void didUpdateWidget(covariant CalendarLayout old) {
     super.didUpdateWidget(old);
     if (widget.style != old.style || widget.scale != old.scale || widget.textStyle != old.textStyle) {
-      _width = _estimateWidth();
+      _itemExtent = _estimateExtent();
     }
 
     _controller = widget.control.update(old.control, _controller, _handleOnChange).$1;
+    _scrollController = widget.scrollControl.update(old.scrollControl, _scrollController, _handleOnScroll).$1
+      ..initialize(_itemExtent, widget.constraints.maxWidth);
   }
 
-  @override
-  void dispose() {
-    _scrollController.dispose();
-    widget.control.dispose(_controller, _handleOnChange);
-    super.dispose();
-  }
-
-  double _estimateWidth() {
+  double _estimateExtent() {
     final scale = widget.scale;
     final textStyle = widget.textStyle;
 
@@ -119,7 +94,7 @@ class _CalendarLayoutState extends State<CalendarLayout> {
       return dateHeight + weekdayHeight + otherHeight;
     }
 
-    // We use the height to estimate the width.
+    // We use the height to estimate the item's extent.
     return [
       height(widget.style, {.selected}),
       height(widget.style, {.selected, .hovered}),
@@ -128,47 +103,59 @@ class _CalendarLayoutState extends State<CalendarLayout> {
     ].max!;
   }
 
+  @override
+  void dispose() {
+    widget.scrollControl.dispose(_scrollController, _handleOnScroll);
+    widget.control.dispose(_controller, _handleOnChange);
+    super.dispose();
+  }
+
   void _handleOnChange() {
     if (widget.control case FLineCalendarManagedControl(:final onChange?)) {
       onChange(_controller.value);
     }
   }
 
-  @override
-  Widget build(BuildContext _) {
-    final placeholder = widget.today.toNative();
-    return SpeculativeLayout(
-      children: [
-        ItemContent(style: widget.style, variants: {.selected}, date: placeholder),
-        ItemContent(style: widget.style, variants: {.selected, .hovered}, date: placeholder),
-        ItemContent(style: widget.style, variants: const {}, date: placeholder),
-        ItemContent(style: widget.style, variants: {.hovered}, date: placeholder),
-        ListView.builder(
-          scrollCacheExtent: widget.scrollCacheExtent,
-          controller: _scrollController,
-          scrollDirection: .horizontal,
-          padding: .zero,
-          physics: widget.physics,
-          keyboardDismissBehavior: widget.keyboardDismissBehavior,
-          itemExtent: _width,
-          itemCount: widget.end == null ? null : widget.end!.difference(widget.start).inDays + 1,
-          itemBuilder: (_, index) {
-            final date = widget.start.plus(days: index);
-            return Padding(
-              padding: .symmetric(horizontal: widget.style.itemSpacing / 2),
-              child: Item(
-                controller: _controller,
-                style: widget.style,
-                date: date.toNative(),
-                today: widget.today == date,
-                builder: widget.builder,
-              ),
-            );
-          },
-        ),
-      ],
-    );
+  void _handleOnScroll() {
+    if (widget.scrollControl case FLineCalendarScrollManagedControl(:final onChange?)) {
+      onChange(_scrollController.offset);
+    }
   }
+
+  @override
+  Widget build(BuildContext _) => SpeculativeLayout(
+    children: [
+      ItemContent(style: widget.style, variants: {.selected}, date: _scrollController.today),
+      ItemContent(style: widget.style, variants: {.selected, .hovered}, date: _scrollController.today),
+      ItemContent(style: widget.style, variants: const {}, date: _scrollController.today),
+      ItemContent(style: widget.style, variants: {.hovered}, date: _scrollController.today),
+      ListView.builder(
+        scrollCacheExtent: widget.scrollCacheExtent,
+        controller: _scrollController,
+        scrollDirection: .horizontal,
+        padding: .zero,
+        physics: widget.physics,
+        keyboardDismissBehavior: widget.keyboardDismissBehavior,
+        itemExtent: _itemExtent,
+        itemCount: _scrollController.end == null
+            ? null
+            : _scrollController.end!.difference(_scrollController.start).inDays + 1,
+        itemBuilder: (_, index) {
+          final date = _scrollController.start.plus(days: index);
+          return Padding(
+            padding: .symmetric(horizontal: widget.style.itemSpacing / 2),
+            child: Item(
+              controller: _controller,
+              style: widget.style,
+              date: date,
+              today: _scrollController.today == date,
+              builder: widget.builder,
+            ),
+          );
+        },
+      ),
+    ],
+  );
 }
 
 @internal
