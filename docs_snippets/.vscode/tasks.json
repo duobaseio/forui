@@ -8,8 +8,7 @@
             "args": [
                 "run",
                 "build_runner",
-                "build",
-                "--delete-conflicting-outputs"
+                "build"
             ],
             "problemMatcher": ["$dart-build_runner"]
         }

@@ -40,14 +40,14 @@ g: generate
 
 build_runner:
 	@echo ""
-	@echo "$(COLOR_BLUE)cd forui && dart run build_runner build --delete-conflicting-outputs$(COLOR_RESET)"
-	@cd forui && dart run build_runner build --delete-conflicting-outputs
+	@echo "$(COLOR_BLUE)cd forui && dart run build_runner build$(COLOR_RESET)"
+	@cd forui && dart run build_runner build
 	@echo ""
-	@echo "$(COLOR_BLUE)cd forui_assets && dart run build_runner build --delete-conflicting-outputs$(COLOR_RESET)"
-	@cd forui_assets && dart run build_runner build --delete-conflicting-outputs
+	@echo "$(COLOR_BLUE)cd forui_assets && dart run build_runner build$(COLOR_RESET)"
+	@cd forui_assets && dart run build_runner build
 	@echo ""
-	@echo "$(COLOR_BLUE)cd docs_snippets && dart run build_runner build --delete-conflicting-outputs$(COLOR_RESET)"
-	@cd docs_snippets && dart run build_runner build --delete-conflicting-outputs
+	@echo "$(COLOR_BLUE)cd docs_snippets && dart run build_runner build$(COLOR_RESET)"
+	@cd docs_snippets && dart run build_runner build
 	@echo ""
 	@echo "$(COLOR_GREEN)✓ Build runner complete$(COLOR_RESET)"
 br: build_runner
@@ -104,8 +104,8 @@ prepare:
 	@# Step 2: Run build_runner and cli generator (forui only)
 	@if [ "$(package)" = "forui" ]; then \
 		echo ""; \
-		echo "$(COLOR_BLUE)cd $(package) && dart run build_runner build --delete-conflicting-outputs$(COLOR_RESET)"; \
-		cd $(package) && dart run build_runner build --delete-conflicting-outputs; \
+		echo "$(COLOR_BLUE)cd $(package) && dart run build_runner build$(COLOR_RESET)"; \
+		cd $(package) && dart run build_runner build; \
 		echo "$(COLOR_GREEN)✓ Build runner complete$(COLOR_RESET)"; \
 		echo ""; \
 		echo "$(COLOR_BLUE)cd $(package) && dart run tool/cli_generator/main.dart$(COLOR_RESET)"; \

@@ -479,7 +479,7 @@ They should:
 5. Mix-in `_$FWidgetStyleFunctions` (generated utility functions).
 6. Provide constructors including `inherit(...)` for theme-based defaults.
 
-To generate files, run `dart run build_runner build --delete-conflicting-outputs` in the forui/forui directory.
+To generate files, run `dart run build_runner build` in the forui/forui directory.
 
 Platform variants (touch, desktop, android, iOS, etc.) are automatically included in generated variant types.
 
