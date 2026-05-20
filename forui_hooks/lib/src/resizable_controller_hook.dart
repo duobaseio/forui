@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:forui/forui.dart';
 
-
 /// Creates a [FResizableController] that allows only a single date to be selected and is automatically disposed.
 FResizableController useFResizableController({
   void Function(List<FResizableRegionData> resized)? onResizeUpdate,
