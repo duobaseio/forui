@@ -2,6 +2,7 @@ export '/src/accordion_controller_hook.dart';
 export '/src/autocomplete_controller_hook.dart';
 export '/src/calendar_controller_hook.dart';
 export '/src/date_field_controller_hook.dart';
+export '/src/line_calendar_scroll_controller_hook.dart';
 export '/src/multi_value_notifier_hook.dart';
 export '/src/pagination_controller_hook.dart';
 export '/src/picker_controller_hook.dart';

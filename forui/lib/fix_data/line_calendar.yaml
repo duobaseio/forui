@@ -11,3 +11,444 @@ transforms:
       - kind: renameParameter
         oldName: 'cacheExtent'
         newName: 'scrollCacheExtent'
+
+  - title: 'Migrate FLineCalendar date and alignment params into scrollControl.'
+    date: 2026-05-20
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FLineCalendar
+    variables:
+      start:
+        kind: fragment
+        value: arguments[start]
+      end:
+        kind: fragment
+        value: arguments[end]
+      today:
+        kind: fragment
+        value: arguments[today]
+      initialScroll:
+        kind: fragment
+        value: arguments[initialScroll]
+      initialScrollAlignment:
+        kind: fragment
+        value: arguments[initialScrollAlignment]
+    oneOf:
+      # 5 params
+      - if: "start != '' && end != '' && today != '' && initialScroll != '' && initialScrollAlignment != ''"
+        changes:
+          - kind: addParameter
+            name: 'scrollControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(start: {% start %}, end: {% end %}, today: {% today %}, initialDate: {% initialScroll %}, initialAlignment: {% initialScrollAlignment %})'
+          - kind: removeParameter
+            name: 'start'
+          - kind: removeParameter
+            name: 'end'
+          - kind: removeParameter
+            name: 'today'
+          - kind: removeParameter
+            name: 'initialScroll'
+          - kind: removeParameter
+            name: 'initialScrollAlignment'
+
+      # 4 params
+      - if: "start != '' && end != '' && today != '' && initialScroll != ''"
+        changes:
+          - kind: addParameter
+            name: 'scrollControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(start: {% start %}, end: {% end %}, today: {% today %}, initialDate: {% initialScroll %})'
+          - kind: removeParameter
+            name: 'start'
+          - kind: removeParameter
+            name: 'end'
+          - kind: removeParameter
+            name: 'today'
+          - kind: removeParameter
+            name: 'initialScroll'
+      - if: "start != '' && end != '' && today != '' && initialScrollAlignment != ''"
+        changes:
+          - kind: addParameter
+            name: 'scrollControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(start: {% start %}, end: {% end %}, today: {% today %}, initialAlignment: {% initialScrollAlignment %})'
+          - kind: removeParameter
+            name: 'start'
+          - kind: removeParameter
+            name: 'end'
+          - kind: removeParameter
+            name: 'today'
+          - kind: removeParameter
+            name: 'initialScrollAlignment'
+      - if: "start != '' && end != '' && initialScroll != '' && initialScrollAlignment != ''"
+        changes:
+          - kind: addParameter
+            name: 'scrollControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(start: {% start %}, end: {% end %}, initialDate: {% initialScroll %}, initialAlignment: {% initialScrollAlignment %})'
+          - kind: removeParameter
+            name: 'start'
+          - kind: removeParameter
+            name: 'end'
+          - kind: removeParameter
+            name: 'initialScroll'
+          - kind: removeParameter
+            name: 'initialScrollAlignment'
+      - if: "start != '' && today != '' && initialScroll != '' && initialScrollAlignment != ''"
+        changes:
+          - kind: addParameter
+            name: 'scrollControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(start: {% start %}, today: {% today %}, initialDate: {% initialScroll %}, initialAlignment: {% initialScrollAlignment %})'
+          - kind: removeParameter
+            name: 'start'
+          - kind: removeParameter
+            name: 'today'
+          - kind: removeParameter
+            name: 'initialScroll'
+          - kind: removeParameter
+            name: 'initialScrollAlignment'
+      - if: "end != '' && today != '' && initialScroll != '' && initialScrollAlignment != ''"
+        changes:
+          - kind: addParameter
+            name: 'scrollControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(end: {% end %}, today: {% today %}, initialDate: {% initialScroll %}, initialAlignment: {% initialScrollAlignment %})'
+          - kind: removeParameter
+            name: 'end'
+          - kind: removeParameter
+            name: 'today'
+          - kind: removeParameter
+            name: 'initialScroll'
+          - kind: removeParameter
+            name: 'initialScrollAlignment'
+
+      # 3 params
+      - if: "start != '' && end != '' && today != ''"
+        changes:
+          - kind: addParameter
+            name: 'scrollControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(start: {% start %}, end: {% end %}, today: {% today %})'
+          - kind: removeParameter
+            name: 'start'
+          - kind: removeParameter
+            name: 'end'
+          - kind: removeParameter
+            name: 'today'
+      - if: "start != '' && end != '' && initialScroll != ''"
+        changes:
+          - kind: addParameter
+            name: 'scrollControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(start: {% start %}, end: {% end %}, initialDate: {% initialScroll %})'
+          - kind: removeParameter
+            name: 'start'
+          - kind: removeParameter
+            name: 'end'
+          - kind: removeParameter
+            name: 'initialScroll'
+      - if: "start != '' && end != '' && initialScrollAlignment != ''"
+        changes:
+          - kind: addParameter
+            name: 'scrollControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(start: {% start %}, end: {% end %}, initialAlignment: {% initialScrollAlignment %})'
+          - kind: removeParameter
+            name: 'start'
+          - kind: removeParameter
+            name: 'end'
+          - kind: removeParameter
+            name: 'initialScrollAlignment'
+      - if: "start != '' && today != '' && initialScroll != ''"
+        changes:
+          - kind: addParameter
+            name: 'scrollControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(start: {% start %}, today: {% today %}, initialDate: {% initialScroll %})'
+          - kind: removeParameter
+            name: 'start'
+          - kind: removeParameter
+            name: 'today'
+          - kind: removeParameter
+            name: 'initialScroll'
+      - if: "start != '' && today != '' && initialScrollAlignment != ''"
+        changes:
+          - kind: addParameter
+            name: 'scrollControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(start: {% start %}, today: {% today %}, initialAlignment: {% initialScrollAlignment %})'
+          - kind: removeParameter
+            name: 'start'
+          - kind: removeParameter
+            name: 'today'
+          - kind: removeParameter
+            name: 'initialScrollAlignment'
+      - if: "start != '' && initialScroll != '' && initialScrollAlignment != ''"
+        changes:
+          - kind: addParameter
+            name: 'scrollControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(start: {% start %}, initialDate: {% initialScroll %}, initialAlignment: {% initialScrollAlignment %})'
+          - kind: removeParameter
+            name: 'start'
+          - kind: removeParameter
+            name: 'initialScroll'
+          - kind: removeParameter
+            name: 'initialScrollAlignment'
+      - if: "end != '' && today != '' && initialScroll != ''"
+        changes:
+          - kind: addParameter
+            name: 'scrollControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(end: {% end %}, today: {% today %}, initialDate: {% initialScroll %})'
+          - kind: removeParameter
+            name: 'end'
+          - kind: removeParameter
+            name: 'today'
+          - kind: removeParameter
+            name: 'initialScroll'
+      - if: "end != '' && today != '' && initialScrollAlignment != ''"
+        changes:
+          - kind: addParameter
+            name: 'scrollControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(end: {% end %}, today: {% today %}, initialAlignment: {% initialScrollAlignment %})'
+          - kind: removeParameter
+            name: 'end'
+          - kind: removeParameter
+            name: 'today'
+          - kind: removeParameter
+            name: 'initialScrollAlignment'
+      - if: "end != '' && initialScroll != '' && initialScrollAlignment != ''"
+        changes:
+          - kind: addParameter
+            name: 'scrollControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(end: {% end %}, initialDate: {% initialScroll %}, initialAlignment: {% initialScrollAlignment %})'
+          - kind: removeParameter
+            name: 'end'
+          - kind: removeParameter
+            name: 'initialScroll'
+          - kind: removeParameter
+            name: 'initialScrollAlignment'
+      - if: "today != '' && initialScroll != '' && initialScrollAlignment != ''"
+        changes:
+          - kind: addParameter
+            name: 'scrollControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(today: {% today %}, initialDate: {% initialScroll %}, initialAlignment: {% initialScrollAlignment %})'
+          - kind: removeParameter
+            name: 'today'
+          - kind: removeParameter
+            name: 'initialScroll'
+          - kind: removeParameter
+            name: 'initialScrollAlignment'
+
+      # 2 params
+      - if: "start != '' && end != ''"
+        changes:
+          - kind: addParameter
+            name: 'scrollControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(start: {% start %}, end: {% end %})'
+          - kind: removeParameter
+            name: 'start'
+          - kind: removeParameter
+            name: 'end'
+      - if: "start != '' && today != ''"
+        changes:
+          - kind: addParameter
+            name: 'scrollControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(start: {% start %}, today: {% today %})'
+          - kind: removeParameter
+            name: 'start'
+          - kind: removeParameter
+            name: 'today'
+      - if: "start != '' && initialScroll != ''"
+        changes:
+          - kind: addParameter
+            name: 'scrollControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(start: {% start %}, initialDate: {% initialScroll %})'
+          - kind: removeParameter
+            name: 'start'
+          - kind: removeParameter
+            name: 'initialScroll'
+      - if: "start != '' && initialScrollAlignment != ''"
+        changes:
+          - kind: addParameter
+            name: 'scrollControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(start: {% start %}, initialAlignment: {% initialScrollAlignment %})'
+          - kind: removeParameter
+            name: 'start'
+          - kind: removeParameter
+            name: 'initialScrollAlignment'
+      - if: "end != '' && today != ''"
+        changes:
+          - kind: addParameter
+            name: 'scrollControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(end: {% end %}, today: {% today %})'
+          - kind: removeParameter
+            name: 'end'
+          - kind: removeParameter
+            name: 'today'
+      - if: "end != '' && initialScroll != ''"
+        changes:
+          - kind: addParameter
+            name: 'scrollControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(end: {% end %}, initialDate: {% initialScroll %})'
+          - kind: removeParameter
+            name: 'end'
+          - kind: removeParameter
+            name: 'initialScroll'
+      - if: "end != '' && initialScrollAlignment != ''"
+        changes:
+          - kind: addParameter
+            name: 'scrollControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(end: {% end %}, initialAlignment: {% initialScrollAlignment %})'
+          - kind: removeParameter
+            name: 'end'
+          - kind: removeParameter
+            name: 'initialScrollAlignment'
+      - if: "today != '' && initialScroll != ''"
+        changes:
+          - kind: addParameter
+            name: 'scrollControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(today: {% today %}, initialDate: {% initialScroll %})'
+          - kind: removeParameter
+            name: 'today'
+          - kind: removeParameter
+            name: 'initialScroll'
+      - if: "today != '' && initialScrollAlignment != ''"
+        changes:
+          - kind: addParameter
+            name: 'scrollControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(today: {% today %}, initialAlignment: {% initialScrollAlignment %})'
+          - kind: removeParameter
+            name: 'today'
+          - kind: removeParameter
+            name: 'initialScrollAlignment'
+      - if: "initialScroll != '' && initialScrollAlignment != ''"
+        changes:
+          - kind: addParameter
+            name: 'scrollControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initialDate: {% initialScroll %}, initialAlignment: {% initialScrollAlignment %})'
+          - kind: removeParameter
+            name: 'initialScroll'
+          - kind: removeParameter
+            name: 'initialScrollAlignment'
+
+      # 1 param
+      - if: "start != ''"
+        changes:
+          - kind: addParameter
+            name: 'scrollControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(start: {% start %})'
+          - kind: removeParameter
+            name: 'start'
+      - if: "end != ''"
+        changes:
+          - kind: addParameter
+            name: 'scrollControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(end: {% end %})'
+          - kind: removeParameter
+            name: 'end'
+      - if: "today != ''"
+        changes:
+          - kind: addParameter
+            name: 'scrollControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(today: {% today %})'
+          - kind: removeParameter
+            name: 'today'
+      - if: "initialScroll != ''"
+        changes:
+          - kind: addParameter
+            name: 'scrollControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initialDate: {% initialScroll %})'
+          - kind: removeParameter
+            name: 'initialScroll'
+      - if: "initialScrollAlignment != ''"
+        changes:
+          - kind: addParameter
+            name: 'scrollControl'
+            index: 0
+            style: 'required_named'
+            argumentValue:
+              expression: '.managed(initialAlignment: {% initialScrollAlignment %})'
+          - kind: removeParameter
+            name: 'initialScrollAlignment'

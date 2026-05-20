@@ -7,17 +7,13 @@ final lineCalendar = FLineCalendar(
   control: const .managed(),
   // {@endcategory}
   // {@category "Scroll"}
-  initialScroll: .now(),
-  initialScrollAlignment: .center,
-  scrollCacheExtent: null,
-  keyboardDismissBehavior: .manual,
-  physics: null,
+  scrollControl: const .managed(),
   // {@endcategory}
   // {@category "Core"}
   style: const .delta(itemSpacing: 10),
-  start: .utc(1900),
-  end: .utc(2100),
-  today: .now(),
+  scrollCacheExtent: null,
+  keyboardDismissBehavior: .manual,
+  physics: null,
   builder: (context, data, child) => child!,
   // {@endcategory}
 );
@@ -41,4 +37,30 @@ final FLineCalendarControl managedExternal = .managed(
   // Don't create a controller inline. Store it in a State instead.
   controller: .date(initial: .now(), selectable: (date) => true, toggleable: false, truncateAndStripTimezone: true),
   onChange: (date) {},
+);
+
+// {@category "Scroll" "`.managed()` with internal controller"}
+/// Manages the line calendar scroll internally.
+final FLineCalendarScrollControl scrollManagedInternal = .managed(
+  // Don't create a controller inline. Store it in a State instead.
+  start: .utc(1900),
+  end: .utc(2100),
+  today: .now(),
+  initialDate: .now(),
+  initialAlignment: .center,
+  onChange: (offset) {},
+);
+
+// {@category "Scroll" "`.managed()` with external controller"}
+/// Uses an external [FLineCalendarScrollController] to drive programmatic scrolling.
+final FLineCalendarScrollControl scrollManagedExternal = .managed(
+  // Don't create a controller inline. Store it in a State instead.
+  controller: FLineCalendarScrollController(
+    start: .utc(1900),
+    end: .utc(2100),
+    today: .now(),
+    initialDate: .now(),
+    initialAlignment: .center,
+  ),
+  onChange: (offset) {},
 );
