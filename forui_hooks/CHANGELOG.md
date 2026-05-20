@@ -1,3 +1,9 @@
+## 0.22.0 (Next)
+
+### `FLineCalendar`
+* Add `useFLineCalendarScrollController(...)`.
+
+
 ## 0.21.0
 * **Breaking** Remove `useFPopoverController(motion: ...)`. Configure motion via `FPopoverStyle` instead.
 * **Breaking** Remove `useFTooltipController(motion: ...)`. Configure motion via `FTooltipStyle` instead.
