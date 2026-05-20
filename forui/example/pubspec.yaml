@@ -33,7 +33,6 @@ dependencies:
   intl: any
   lottie: ^3.3.2
   sugar: ^4.0.0
-  wakelock_plus: ^1.2.8
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
