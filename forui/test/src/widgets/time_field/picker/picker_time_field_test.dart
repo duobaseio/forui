@@ -35,7 +35,7 @@ void main() {
     });
   });
 
-  for (final (index, (locale, date)) in const [(null, '10:00 AM'), (Locale('en', 'SG'), '10:00 am')].indexed) {
+  for (final (index, (locale, date)) in const [(null, '10:00 AM'), (Locale('en', 'SG'), '10:00 am')].indexed) {
     testWidgets('formatted date - $index', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
@@ -148,7 +148,7 @@ void main() {
 
     await tester.pumpAndSettle();
 
-    expect(find.text('12:00:00 am'), findsOneWidget);
+    expect(find.text('12:00:00 am'), findsOneWidget);
   });
 
   testWidgets('holding & releasing on time field does not cause calendar to disappear & reappear', (tester) async {

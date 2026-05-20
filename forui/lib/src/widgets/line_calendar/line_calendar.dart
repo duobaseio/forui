@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
@@ -68,8 +69,8 @@ class FLineCalendar extends StatelessWidget {
   /// Defaults to matching platform conventions.
   final ScrollPhysics? physics;
 
-  /// {@macro forui.foundation.doc_templates.cacheExtent}
-  final double? cacheExtent;
+  /// {@macro forui.foundation.doc_templates.scrollCacheExtent}
+  final ScrollCacheExtent? scrollCacheExtent;
 
   /// [ScrollViewKeyboardDismissBehavior] the defines how this [FLineCalendar] will dismiss the keyboard automatically.
   ///
@@ -109,7 +110,7 @@ class FLineCalendar extends StatelessWidget {
     this.style = const .context(),
     this.initialScrollAlignment = .center,
     this.physics,
-    this.cacheExtent,
+    this.scrollCacheExtent,
     this.keyboardDismissBehavior = .manual,
     this.builder = defaultBuilder,
     DateTime? start,
@@ -144,7 +145,7 @@ class FLineCalendar extends StatelessWidget {
       control: control,
       style: style(context.theme.lineCalendarStyle),
       physics: physics,
-      cacheExtent: cacheExtent,
+      scrollCacheExtent: scrollCacheExtent,
       keyboardDismissBehavior: keyboardDismissBehavior,
       scale: MediaQuery.textScalerOf(context),
       textStyle: DefaultTextStyle.of(context).style,
@@ -166,7 +167,7 @@ class FLineCalendar extends StatelessWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('initialScrollAlignment', initialScrollAlignment))
       ..add(DiagnosticsProperty('physics', physics))
-      ..add(DoubleProperty('cacheExtent', cacheExtent))
+      ..add(DiagnosticsProperty('scrollCacheExtent', scrollCacheExtent))
       ..add(DiagnosticsProperty('keyboardDismissBehavior', keyboardDismissBehavior))
       ..add(ObjectFlagProperty.has('builder', builder));
   }

@@ -81,7 +81,7 @@ class FLocalizationsBg extends FLocalizations {
   String get shortDateSeparator => '.';
 
   @override
-  String get shortDateSuffix => ' г.';
+  String get shortDateSuffix => ' г.';
 
   @override
   String get dateTimePickerToday => 'Днес';

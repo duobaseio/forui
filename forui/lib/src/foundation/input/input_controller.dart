@@ -1,10 +1,31 @@
 import 'package:flutter/widgets.dart';
 
+import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/input/parser.dart';
 import 'package:forui/src/theme/variant.dart';
+
+@internal
+extension Canonical on DateFormat {
+  /// Returns the canonical whitespace used in the format.
+  ///
+  // CLDR 42 introduced NNBSP (U+202F) between time and period for many 12h locales.
+  // Users type ASCII space on a keyboard, so normalize it to whatever the pattern uses.
+  //
+  // This simple algorithm assumes that a time format only has one kind of whitespace, which is true for all supported
+  // locales in Flutter 3.44.0.
+  String get canonicalSpace {
+    for (final c in pattern!.codeUnits) {
+      if (c == 0x00A0 || c == 0x202F || c == 0x2007) {
+        return String.fromCharCode(c);
+      }
+    }
+
+    return ' ';
+  }
+}
 
 @internal
 abstract class InputController extends TextEditingController {

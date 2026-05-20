@@ -141,7 +141,7 @@ class FLocalizationsEn extends FLocalizations {
   String get timeFieldTimeSeparator => ':';
 
   @override
-  String get timeFieldPeriodSeparator => ' ';
+  String get timeFieldPeriodSeparator => ' ';
 
   @override
   String get timeFieldSuffix => '';
@@ -238,7 +238,7 @@ class FLocalizationsEnAu extends FLocalizationsEn {
   String get timeFieldTimeSeparator => ':';
 
   @override
-  String get timeFieldPeriodSeparator => ' ';
+  String get timeFieldPeriodSeparator => ' ';
 
   @override
   String get timeFieldSuffix => '';
@@ -335,7 +335,7 @@ class FLocalizationsEnCa extends FLocalizationsEn {
   String get timeFieldTimeSeparator => ':';
 
   @override
-  String get timeFieldPeriodSeparator => ' ';
+  String get timeFieldPeriodSeparator => ' ';
 
   @override
   String get timeFieldSuffix => '';
@@ -626,7 +626,7 @@ class FLocalizationsEnIn extends FLocalizationsEn {
   String get timeFieldTimeSeparator => ':';
 
   @override
-  String get timeFieldPeriodSeparator => ' ';
+  String get timeFieldPeriodSeparator => ' ';
 
   @override
   String get timeFieldSuffix => '';
@@ -723,7 +723,7 @@ class FLocalizationsEnNz extends FLocalizationsEn {
   String get timeFieldTimeSeparator => ':';
 
   @override
-  String get timeFieldPeriodSeparator => ' ';
+  String get timeFieldPeriodSeparator => ' ';
 
   @override
   String get timeFieldSuffix => '';
@@ -820,7 +820,7 @@ class FLocalizationsEnSg extends FLocalizationsEn {
   String get timeFieldTimeSeparator => ':';
 
   @override
-  String get timeFieldPeriodSeparator => ' ';
+  String get timeFieldPeriodSeparator => ' ';
 
   @override
   String get timeFieldSuffix => '';

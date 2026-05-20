@@ -1,7 +1,7 @@
 name: _
 environment:
-  sdk: ">=3.11.0 <4.0.0"
-  flutter: ">=3.41.0"
+  sdk: ">=3.12.0 <4.0.0"
+  flutter: ">=3.44.0"
 workspace:
   - demo
   - docs_snippets
@@ -11,4 +11,4 @@ workspace:
   - forui_internal_gen
 
 dev_dependencies:
-  flint: ^2.13.0
+  flint: ^2.15.0

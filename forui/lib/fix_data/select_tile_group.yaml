@@ -1,0 +1,24 @@
+version: 1
+transforms:
+  # FSelectTileGroup
+  - title: "Rename FSelectTileGroup(cacheExtent: ...) to FSelectTileGroup(scrollCacheExtent: ...)."
+    date: 2026-05-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FSelectTileGroup
+    changes:
+      - kind: renameParameter
+        oldName: 'cacheExtent'
+        newName: 'scrollCacheExtent'
+
+  - title: "Rename FSelectTileGroup.builder(cacheExtent: ...) to FSelectTileGroup.builder(scrollCacheExtent: ...)."
+    date: 2026-05-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'builder'
+      inClass: FSelectTileGroup
+    changes:
+      - kind: renameParameter
+        oldName: 'cacheExtent'
+        newName: 'scrollCacheExtent'

@@ -89,7 +89,7 @@ class FCalendar extends StatefulWidget {
 
   /// Creates a [FCalendar].
   ///
-  /// Subsequently changing [initialType] has no effect.
+  /// Subsequently changing [_initialType] has no effect.
   ///
   /// [initialMonth] defaults to [today]. It is truncated to the nearest date. Subsequently changing [initialMonth] has
   /// no effect. To change the selected date, change the key to create a new [FCalendar], and provide that widget the
@@ -101,7 +101,7 @@ class FCalendar extends StatefulWidget {
     this.onMonthChange,
     this.onPress,
     this.onLongPress,
-    FCalendarPickerType initialType = .day,
+    this._initialType = .day,
     DateTime? start,
     DateTime? end,
     DateTime? today,
@@ -110,7 +110,6 @@ class FCalendar extends StatefulWidget {
   }) : start = start ?? DateTime(1900),
        end = end ?? DateTime(2100),
        today = today ?? .now(),
-       _initialType = initialType,
        _initialMonth = (initialMonth ?? today ?? .now()).toLocalDate().truncate(to: .months) {
     assert(this.start.toLocalDate() < this.end.toLocalDate(), 'start ($start) must be < end ($end)');
   }

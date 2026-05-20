@@ -14,9 +14,7 @@ class FPlatformThemeData {
   late final FThemeData touch = _touch();
 
   /// Creates a [FPlatformThemeData].
-  FPlatformThemeData({required FThemeData Function() desktop, required FThemeData Function() touch})
-    : _desktop = desktop,
-      _touch = touch;
+  FPlatformThemeData({required this._desktop, required this._touch});
 }
 
 /// The Forui themes.

@@ -13,8 +13,8 @@ topics:
   - widget
 
 environment:
-  sdk: ">=3.11.0 <4.0.0"
-  flutter: ">=3.41.0"
+  sdk: ">=3.12.0 <4.0.0"
+  flutter: ">=3.44.0"
 resolution: workspace
 workspace:
   - example
@@ -38,7 +38,6 @@ dev_dependencies:
   analyzer: ^10.0.0
   build_runner: ^2.10.4
   code_builder: ^4.10.1
-  flint: ^2.8.1
   flutter_test:
     sdk: flutter
   forui_internal_gen:

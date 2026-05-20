@@ -216,14 +216,13 @@ extension type FCircularProgressSizeStyles(
     FCircularProgressStyleDelta
   >
   _
-)
-    implements
-        FVariants<
-          FCircularProgressSizeVariantConstraint,
-          FCircularProgressSizeVariant,
-          FCircularProgressStyle,
-          FCircularProgressStyleDelta
-        > {
+) implements
+    FVariants<
+      FCircularProgressSizeVariantConstraint,
+      FCircularProgressSizeVariant,
+      FCircularProgressStyle,
+      FCircularProgressStyleDelta
+    > {
   /// Creates [FCircularProgressSizeStyles] that inherit their properties.
   factory FCircularProgressSizeStyles.inherit({required FColors colors, required FTypography typography}) {
     final md = FCircularProgressStyle.inherit(colors: colors, iconSize: typography.md.fontSize!);

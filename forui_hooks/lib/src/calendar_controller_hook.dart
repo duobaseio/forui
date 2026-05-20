@@ -127,12 +127,11 @@ class _CalendarControllerHook<T> extends Hook<FCalendarController<T>> {
   const _CalendarControllerHook({
     required this.value,
     required this.selectable,
-    required String debugLabel,
-    required _Create<T> create,
+    required this._debugLabel,
+    required this._create,
     this.toggleable = false,
     super.keys,
-  }) : _create = create,
-       _debugLabel = debugLabel;
+  });
 
   @override
   _CalendarControllerHookState<T> createState() => .new();

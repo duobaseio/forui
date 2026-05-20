@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
@@ -129,7 +130,7 @@ abstract interface class FBreadcrumbItem extends Widget {
     FPopoverMenuStyleDelta popoverMenuStyle,
     FPopoverControl popoverControl,
     ScrollController? scrollController,
-    double? cacheExtent,
+    ScrollCacheExtent? scrollCacheExtent,
     double maxHeight,
     bool intrinsicWidth,
     DragStartBehavior dragStartBehavior,
@@ -165,7 +166,7 @@ abstract interface class FBreadcrumbItem extends Widget {
     FPopoverMenuStyleDelta popoverMenuStyle,
     FPopoverControl popoverControl,
     ScrollController? scrollController,
-    double? cacheExtent,
+    ScrollCacheExtent? scrollCacheExtent,
     double maxHeight,
     bool intrinsicWidth,
     DragStartBehavior dragStartBehavior,
@@ -249,7 +250,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
   final FPopoverMenuStyleDelta popoverMenuStyle;
   final FPopoverControl popoverControl;
   final ScrollController? scrollController;
-  final double? cacheExtent;
+  final ScrollCacheExtent? scrollCacheExtent;
   final double maxHeight;
   final bool intrinsicWidth;
   final DragStartBehavior dragStartBehavior;
@@ -277,7 +278,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
     this.popoverMenuStyle = const .context(),
     this.popoverControl = const .managed(),
     this.scrollController,
-    this.cacheExtent,
+    this.scrollCacheExtent,
     this.maxHeight = .infinity,
     this.intrinsicWidth = true,
     this.dragStartBehavior = .start,
@@ -308,7 +309,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
     this.popoverMenuStyle = const .context(),
     this.popoverControl = const .managed(),
     this.scrollController,
-    this.cacheExtent,
+    this.scrollCacheExtent,
     this.maxHeight = .infinity,
     this.intrinsicWidth = true,
     this.dragStartBehavior = .start,
@@ -343,7 +344,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
       ..add(DiagnosticsProperty('popoverMenuStyle', popoverMenuStyle))
       ..add(DiagnosticsProperty('popoverControl', popoverControl))
       ..add(DiagnosticsProperty('scrollController', scrollController))
-      ..add(DoubleProperty('cacheExtent', cacheExtent))
+      ..add(DiagnosticsProperty('scrollCacheExtent', scrollCacheExtent))
       ..add(DoubleProperty('maxHeight', maxHeight))
       ..add(FlagProperty('intrinsicWidth', value: intrinsicWidth, ifTrue: 'intrinsicWidth'))
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior))
@@ -415,7 +416,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
         onFocusChange: widget.onFocusChange,
         traversalEdgeBehavior: widget.traversalEdgeBehavior,
         scrollController: widget.scrollController,
-        cacheExtent: widget.cacheExtent,
+        scrollCacheExtent: widget.scrollCacheExtent,
         maxHeight: widget.maxHeight,
         intrinsicWidth: widget.intrinsicWidth,
         dragStartBehavior: widget.dragStartBehavior,
@@ -448,7 +449,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
         onFocusChange: widget.onFocusChange,
         traversalEdgeBehavior: widget.traversalEdgeBehavior,
         scrollController: widget.scrollController,
-        cacheExtent: widget.cacheExtent,
+        scrollCacheExtent: widget.scrollCacheExtent,
         maxHeight: widget.maxHeight,
         intrinsicWidth: widget.intrinsicWidth,
         dragStartBehavior: widget.dragStartBehavior,

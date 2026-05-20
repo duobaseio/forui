@@ -481,7 +481,7 @@ abstract class FLocalizations {
   /// The time field's period separator, typically ' '.
   ///
   /// In en, this message translates to:
-  /// **' '**
+  /// **' '**
   String get timeFieldPeriodSeparator;
 
   /// The time field's suffix, typically none.

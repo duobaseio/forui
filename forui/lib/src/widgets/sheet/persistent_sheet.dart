@@ -170,12 +170,11 @@ class FPersistentSheetController {
   FPersistentSheetController._({
     required TickerProvider vsync,
     required FSheetStyle style,
-    required VoidCallback onDispose,
+    required this._onDispose,
     required this.key,
     required this.keepAliveOffstage,
     required this.setState,
-  }) : _controller = Sheet.createAnimationController(vsync, style.motion),
-       _onDispose = onDispose {
+  }) : _controller = Sheet.createAnimationController(vsync, style.motion) {
     if (kFlutterMemoryAllocationsEnabled) {
       FlutterMemoryAllocations.instance.dispatchObjectCreated(
         library: 'package:flutter/forui.dart',

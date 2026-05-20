@@ -7,7 +7,7 @@ import 'package:forui/forui.dart';
 final itemGroup = FItemGroup(
   // {@category "Scroll"}
   scrollController: null,
-  cacheExtent: null,
+  scrollCacheExtent: null,
   maxHeight: .infinity,
   dragStartBehavior: .start,
   physics: const ClampingScrollPhysics(),
@@ -30,7 +30,7 @@ final itemGroup = FItemGroup(
 final builder = FItemGroup.builder(
   // {@category "Scroll"}
   scrollController: null,
-  cacheExtent: null,
+  scrollCacheExtent: null,
   maxHeight: .infinity,
   dragStartBehavior: .start,
   physics: const ClampingScrollPhysics(),
@@ -50,7 +50,7 @@ final builder = FItemGroup.builder(
 final merge = FItemGroup.merge(
   // {@category "Scroll"}
   scrollController: null,
-  cacheExtent: null,
+  scrollCacheExtent: null,
   maxHeight: .infinity,
   dragStartBehavior: .start,
   physics: const ClampingScrollPhysics(),

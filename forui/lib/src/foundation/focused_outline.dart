@@ -66,7 +66,7 @@ class _Outline extends RenderProxyBox {
   TextDirection _textDirection;
   bool _focused;
 
-  _Outline(this._style, this._textDirection, {required bool focused}) : _focused = focused;
+  _Outline(this._style, this._textDirection, {required this._focused});
 
   @override
   void paint(PaintingContext context, Offset offset) {

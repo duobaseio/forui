@@ -159,7 +159,7 @@ abstract class FSliderController extends FChangeNotifier {
     }
 
     FSliderActiveThumb? thumb;
-    bool haptic = false;
+    var haptic = false;
 
     if (_value case final old?) {
       thumb = switch (active) {
@@ -313,21 +313,19 @@ class ProxyContinuousSliderController extends FContinuousSliderController {
 
   ProxyContinuousSliderController({
     required super.value,
-    required ValueChanged<FSliderValue> onChange,
+    required this._onChange,
     required super.stepPercentage,
     required super.interaction,
     required super.thumb,
     super.hapticFeedbackVelocity,
-  }) : _onChange = onChange,
-       super();
+  }) : super();
 
   ProxyContinuousSliderController.range({
     required super.value,
-    required ValueChanged<FSliderValue> onChange,
+    required this._onChange,
     required super.stepPercentage,
     super.hapticFeedbackVelocity,
-  }) : _onChange = onChange,
-       super.range();
+  }) : super.range();
 
   @override
   void attach(double extent, List<FSliderMark> marks) {
@@ -371,19 +369,14 @@ class ProxyDiscreteSliderController extends FDiscreteSliderController {
 
   ProxyDiscreteSliderController({
     required super.value,
-    required ValueChanged<FSliderValue> onChange,
+    required this._onChange,
     required super.interaction,
     required super.thumb,
     super.hapticFeedbackVelocity,
-  }) : _onChange = onChange,
-       super();
+  }) : super();
 
-  ProxyDiscreteSliderController.range({
-    required super.value,
-    required ValueChanged<FSliderValue> onChange,
-    super.hapticFeedbackVelocity,
-  }) : _onChange = onChange,
-       super.range();
+  ProxyDiscreteSliderController.range({required super.value, required this._onChange, super.hapticFeedbackVelocity})
+    : super.range();
 
   @override
   void attach(double extent, List<FSliderMark> marks) {

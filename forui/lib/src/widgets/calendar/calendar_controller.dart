@@ -129,14 +129,7 @@ class ProxyController extends FCalendarController<Object?> {
   bool Function(DateTime) _selected;
   ValueChanged<DateTime> _select;
 
-  ProxyController({
-    required Predicate<DateTime> selectable,
-    required bool Function(DateTime) selected,
-    required ValueChanged<DateTime> select,
-  }) : _selectable = selectable,
-       _selected = selected,
-       _select = select,
-       super(0);
+  ProxyController({required this._selectable, required this._selected, required this._select}) : super(0);
 
   void update({
     required Predicate<DateTime> selectable,

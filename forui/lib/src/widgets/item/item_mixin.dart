@@ -1,4 +1,5 @@
 import 'package:flutter/gestures.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
@@ -87,7 +88,7 @@ mixin FItemMixin on Widget {
     AlignmentGeometry? menuAnchor,
     AlignmentGeometry? itemAnchor,
     ScrollController? submenuScrollController,
-    double? submenuCacheExtent,
+    ScrollCacheExtent? submenuScrollCacheExtent,
     bool? submenuIntrinsicWidth,
     DragStartBehavior submenuDragStartBehavior = .start,
     FPortalSpacing submenuSpacing = const .spacing(2),
@@ -130,7 +131,7 @@ mixin FItemMixin on Widget {
     submenuAnchor: menuAnchor,
     itemAnchor: itemAnchor,
     submenuScrollController: submenuScrollController,
-    submenuCacheExtent: submenuCacheExtent,
+    submenuScrollCacheExtent: submenuScrollCacheExtent,
     submenuIntrinsicWidth: submenuIntrinsicWidth,
     submenuDragStartBehavior: submenuDragStartBehavior,
     submenuSpacing: submenuSpacing,

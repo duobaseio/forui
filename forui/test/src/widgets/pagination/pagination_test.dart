@@ -165,7 +165,7 @@ void main() {
   });
 
   testWidgets('notifyListener', (tester) async {
-    int notifyCount = 0;
+    var notifyCount = 0;
     final controller = autoDispose(
       FPaginationController(pages: 10)..addListener(() {
         notifyCount++;

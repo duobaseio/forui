@@ -93,7 +93,7 @@ void main() {
     }
 
     testWidgets('transition between subclasses', (tester) async {
-      FSliderValue value = FSliderValue(max: 0.25);
+      var value = FSliderValue(max: 0.25);
 
       await tester.pumpWidget(
         TestScaffold.app(

@@ -114,9 +114,8 @@ class FOtpFieldStyle extends FLabelStyle with _$FOtpFieldStyleFunctions {
 /// The [FOtpFieldItemStyle]s for each variant.
 extension type FOtpFieldItemStyles(
   FVariants<FOtpFieldItemVariantConstraint, FOtpFieldItemVariant, FOtpFieldItemStyle, FOtpFieldItemStyleDelta> _
-)
-    implements
-        FVariants<FOtpFieldItemVariantConstraint, FOtpFieldItemVariant, FOtpFieldItemStyle, FOtpFieldItemStyleDelta> {
+) implements
+    FVariants<FOtpFieldItemVariantConstraint, FOtpFieldItemVariant, FOtpFieldItemStyle, FOtpFieldItemStyleDelta> {
   /// Creates [FOtpFieldItemStyles] that inherit their properties.
   factory FOtpFieldItemStyles.inherit({
     required FColors colors,

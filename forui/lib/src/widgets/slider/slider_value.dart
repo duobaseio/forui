@@ -135,12 +135,11 @@ final class ContinuousValue extends FSliderValue {
        super._();
 
   ContinuousValue._({
-    required double step,
+    required this._step,
     required super.pixelConstraints,
     required super.constraints,
     required super.pixels,
-  }) : _step = step,
-       super._copy(min: pixels.min / pixelConstraints.extent, max: pixels.max / pixelConstraints.extent);
+  }) : super._copy(min: pixels.min / pixelConstraints.extent, max: pixels.max / pixelConstraints.extent);
 
   @override
   ContinuousValue step({required bool min, required bool expand}) {

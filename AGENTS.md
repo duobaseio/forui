@@ -29,6 +29,10 @@ Bootstrapping: `make bootstrap` (or `make bs`). Run `make help` for all commands
 * Prefer `AlignmentGeometry`/`BorderRadiusGeometry`/`EdgeInsetsGeometry` over `Alignment`/`BorderRadius`/`EdgeInsets`.
 * Declare lifecycle objects (controllers, animations, focus nodes) as `late` (not `late final`) and initialize them in `initState()`.
 * Minimize dependency on Cupertino/Material.
+* Do not nest `{@macro ...}` inside a `{@template ...}` block. Dartdoc does not expand macros that appear inside a
+  template definition, so the literal `{@macro ...}` text leaks into every consumer. If you need to share text, either
+  inline it in each docstring, or have each consumer call `{@macro ...}` directly instead of wrapping it in another
+  `{@template ...}`.
 
 ## Changelog Organization
 

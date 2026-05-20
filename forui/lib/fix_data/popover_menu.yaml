@@ -1,0 +1,48 @@
+version: 1
+transforms:
+  # FPopoverMenu
+  - title: "Rename FPopoverMenu(cacheExtent: ...) to FPopoverMenu(scrollCacheExtent: ...)."
+    date: 2026-05-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FPopoverMenu
+    changes:
+      - kind: renameParameter
+        oldName: 'cacheExtent'
+        newName: 'scrollCacheExtent'
+
+  - title: "Rename FPopoverMenu.tiles(cacheExtent: ...) to FPopoverMenu.tiles(scrollCacheExtent: ...)."
+    date: 2026-05-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'tiles'
+      inClass: FPopoverMenu
+    changes:
+      - kind: renameParameter
+        oldName: 'cacheExtent'
+        newName: 'scrollCacheExtent'
+
+  # FSubmenuItem
+  - title: "Rename FSubmenuItem(submenuCacheExtent: ...) to FSubmenuItem(submenuScrollCacheExtent: ...)."
+    date: 2026-05-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FSubmenuItem
+    changes:
+      - kind: renameParameter
+        oldName: 'submenuCacheExtent'
+        newName: 'submenuScrollCacheExtent'
+
+  # FSubmenuTile
+  - title: "Rename FSubmenuTile(submenuCacheExtent: ...) to FSubmenuTile(submenuScrollCacheExtent: ...)."
+    date: 2026-05-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FSubmenuTile
+    changes:
+      - kind: renameParameter
+        oldName: 'submenuCacheExtent'
+        newName: 'submenuScrollCacheExtent'

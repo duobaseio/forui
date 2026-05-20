@@ -13,6 +13,7 @@ import 'package:forui/src/widgets/time_field/input/time_parser.dart';
 abstract class TimeInputController extends InputController {
   final FTimeFieldController controller;
   final DateFormat format;
+  final String _canonicalSpace;
 
   factory TimeInputController(
     FLocalizations localizations,
@@ -44,15 +45,17 @@ abstract class TimeInputController extends InputController {
     false => Time24InputController.new,
   }(localizations, controller, format, value, style, TimeParser(format), placeholder);
 
-  TimeInputController.fromValue(
-    this.controller,
-    this.format,
-    super.value,
-    super.style,
-    super.parser,
-    super.placeholder,
-  ) {
+  TimeInputController.fromValue(this.controller, this.format, super.value, super.style, super.parser, super.placeholder)
+    : _canonicalSpace = format.canonicalSpace {
     controller.addListener(updateFromTimeController);
+  }
+
+  @override
+  set value(TextEditingValue newValue) {
+    if (_canonicalSpace != ' ' && newValue.text.contains(' ')) {
+      newValue = newValue.copyWith(text: newValue.text.replaceAll(' ', _canonicalSpace));
+    }
+    super.value = newValue;
   }
 
   // Used for input-driven changes only.

@@ -29,7 +29,7 @@ class _Marker extends FTypographyExtension<_Marker> {
 
 void main() {
   group('FTypography', () {
-    FTypography typography = FTypography();
+    var typography = FTypography();
 
     setUp(() {
       typography = FTypography(

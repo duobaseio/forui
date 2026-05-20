@@ -75,14 +75,11 @@ class RenderAnimatedToaster extends RenderBox
 
   /// Creates a [RenderAnimatedToaster].
   RenderAnimatedToaster({
-    required FToasterStyle style,
-    required Offset expandedAlignTransform,
-    required Offset collapsedAlignTransform,
-    required double expand,
-  }) : _style = style,
-       _expandedAlignTransform = expandedAlignTransform,
-       _collapsedAlignTransform = collapsedAlignTransform,
-       _expand = expand;
+    required this._style,
+    required this._expandedAlignTransform,
+    required this._collapsedAlignTransform,
+    required this._expand,
+  });
 
   @override
   void setupParentData(RenderBox child) {

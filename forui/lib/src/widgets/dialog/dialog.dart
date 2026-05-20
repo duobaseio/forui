@@ -622,9 +622,8 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
 /// [FDialog] content's styles.
 extension type FDialogContentStyles(
   FVariants<FDialogAxisVariantConstraint, FDialogAxisVariant, FDialogContentStyle, FDialogContentStyleDelta> _
-)
-    implements
-        FVariants<FDialogAxisVariantConstraint, FDialogAxisVariant, FDialogContentStyle, FDialogContentStyleDelta> {
+) implements
+    FVariants<FDialogAxisVariantConstraint, FDialogAxisVariant, FDialogContentStyle, FDialogContentStyleDelta> {
   /// Creates a [FDialogContentStyles] that inherits its properties.
   factory FDialogContentStyles.inherit({
     required FColors colors,

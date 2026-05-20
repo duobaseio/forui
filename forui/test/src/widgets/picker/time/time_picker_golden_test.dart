@@ -84,7 +84,7 @@ void main() {
   group('lifted', () {
     testWidgets('programmatically changed value', (tester) async {
       final sheet = autoDispose(AnimationSheetBuilder(frameSize: const Size(300, 300)));
-      FTime value = const FTime(10, 30);
+      var value = const FTime(10, 30);
 
       await tester.pumpWidget(
         sheet.record(

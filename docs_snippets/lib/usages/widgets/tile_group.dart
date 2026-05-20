@@ -8,7 +8,7 @@ final tileGroup = FTileGroup(
   // {@category "Scroll"}
   scrollController: null,
   physics: const ClampingScrollPhysics(),
-  cacheExtent: null,
+  scrollCacheExtent: null,
   maxHeight: double.infinity,
   dragStartBehavior: .start,
   // {@endcategory}
@@ -34,7 +34,7 @@ final tileGroupBuilder = FTileGroup.builder(
   // {@category "Scroll"}
   scrollController: null,
   physics: const ClampingScrollPhysics(),
-  cacheExtent: null,
+  scrollCacheExtent: null,
   maxHeight: double.infinity,
   dragStartBehavior: .start,
   // {@endcategory}
@@ -57,7 +57,7 @@ final tileGroupMerge = FTileGroup.merge(
   // {@category "Scroll"}
   scrollController: null,
   physics: const ClampingScrollPhysics(),
-  cacheExtent: null,
+  scrollCacheExtent: null,
   maxHeight: double.infinity,
   dragStartBehavior: .start,
   // {@endcategory}

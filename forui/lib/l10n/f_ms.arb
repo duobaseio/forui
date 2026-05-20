@@ -7,7 +7,7 @@
   "shortDateSuffix": "",
   "dateFieldHint": "Pilih tarikh",
   "dateFieldInvalidDateError": "Tarikh tidak sah.",
-  "timeFieldPeriodSeparator": " ",
+  "timeFieldPeriodSeparator": " ",
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "Pilih masa",

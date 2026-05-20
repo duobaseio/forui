@@ -991,8 +991,8 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     required this.timeFieldStyle,
     required this.timePickerStyle,
     required this.tooltipStyle,
-    required Map<Object, ThemeExtension<dynamic>> extensions,
-  }) : _extensions = extensions;
+    required this._extensions,
+  });
 
   /// Obtains a particular [ThemeExtension].
   ///

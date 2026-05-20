@@ -279,7 +279,7 @@ void main() {
 
   group('swipe', () {
     testWidgets('swiping switches tabs when expands is true', (tester) async {
-      int index = 0;
+      var index = 0;
       await tester.pumpWidget(
         TestScaffold.app(
           child: Column(
@@ -313,7 +313,7 @@ void main() {
     });
 
     testWidgets('swiping does NOT switch tabs when contentPhysics is NeverScrollableScrollPhysics', (tester) async {
-      int index = 0;
+      var index = 0;
       await tester.pumpWidget(
         TestScaffold.app(
           child: Column(

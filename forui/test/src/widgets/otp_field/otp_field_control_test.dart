@@ -125,7 +125,7 @@ void main() {
 
   group('value', () {
     test('no-op when setting same value', () {
-      int count = 0;
+      var count = 0;
       controller
         ..addListener(() => count++)
         ..value = controller.value;

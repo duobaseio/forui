@@ -77,11 +77,10 @@ class _ProxyController extends TabController {
   _ProxyController({
     required super.length,
     required super.vsync,
-    required ValueChanged<int> onChange,
+    required this._onChange,
     super.initialIndex,
     super.animationDuration,
-  }) : _unsynced = initialIndex,
-       _onChange = onChange;
+  }) : _unsynced = initialIndex;
 
   void _update(int index, ValueChanged<int> onChange) {
     _onChange = onChange;

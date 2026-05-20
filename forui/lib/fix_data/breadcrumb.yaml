@@ -1,0 +1,24 @@
+version: 1
+transforms:
+  # FBreadcrumbItem
+  - title: "Rename FBreadcrumbItem.collapsed(cacheExtent: ...) to FBreadcrumbItem.collapsed(scrollCacheExtent: ...)."
+    date: 2026-05-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'collapsed'
+      inClass: FBreadcrumbItem
+    changes:
+      - kind: renameParameter
+        oldName: 'cacheExtent'
+        newName: 'scrollCacheExtent'
+
+  - title: "Rename FBreadcrumbItem.collapsedTiles(cacheExtent: ...) to FBreadcrumbItem.collapsedTiles(scrollCacheExtent: ...)."
+    date: 2026-05-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'collapsedTiles'
+      inClass: FBreadcrumbItem
+    changes:
+      - kind: renameParameter
+        oldName: 'cacheExtent'
+        newName: 'scrollCacheExtent'

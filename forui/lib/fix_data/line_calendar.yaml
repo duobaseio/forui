@@ -1,0 +1,13 @@
+version: 1
+transforms:
+  # FLineCalendar
+  - title: "Rename FLineCalendar(cacheExtent: ...) to FLineCalendar(scrollCacheExtent: ...)."
+    date: 2026-05-19
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FLineCalendar
+    changes:
+      - kind: renameParameter
+        oldName: 'cacheExtent'
+        newName: 'scrollCacheExtent'

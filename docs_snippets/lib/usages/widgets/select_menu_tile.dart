@@ -39,7 +39,7 @@ final selectMenuTile = FSelectMenuTile<String>(
   // {@endcategory}
   // {@category "Scroll"}
   scrollController: null,
-  cacheExtent: null,
+  scrollCacheExtent: null,
   maxHeight: .infinity,
   dragStartBehavior: .start,
   physics: const ClampingScrollPhysics(),
@@ -108,7 +108,7 @@ final selectMenuTileBuilder = FSelectMenuTile<String>.builder(
   // {@endcategory}
   // {@category "Scroll"}
   scrollController: null,
-  cacheExtent: null,
+  scrollCacheExtent: null,
   maxHeight: .infinity,
   dragStartBehavior: .start,
   physics: const ClampingScrollPhysics(),

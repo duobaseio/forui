@@ -186,7 +186,7 @@ void main() {
     testWidgets('reset', (tester) async {
       final key = GlobalKey<FormState>();
       final controller = autoDispose(TextEditingController(text: 'initial'));
-      int count = 0;
+      var count = 0;
 
       await tester.pumpWidget(
         TestScaffold.app(

@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_asserts_with_message
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/scheduler.dart';
@@ -73,16 +71,12 @@ class RenderOverlayLayer extends RenderProxyBox {
   bool _showWhenUnlinked;
 
   RenderOverlayLayer({
-    required FChangeNotifier notifier,
-    required ChildLayerLink link,
-    required Size viewSize,
-    required bool showWhenUnlinked,
+    required this._notifier,
+    required this._link,
+    required this._viewSize,
+    required this._showWhenUnlinked,
     RenderBox? child,
-  }) : _notifier = notifier,
-       _link = link,
-       _viewSize = viewSize,
-       _showWhenUnlinked = showWhenUnlinked,
-       super(child);
+  }) : super(child);
 
   @override
   void attach(PipelineOwner owner) {

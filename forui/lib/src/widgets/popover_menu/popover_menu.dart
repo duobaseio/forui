@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 import 'package:meta/meta.dart';
 
@@ -97,8 +98,8 @@ class FPopoverMenu extends StatefulWidget {
   /// {@macro forui.widgets.FTileGroup.scrollController}
   final ScrollController? scrollController;
 
-  /// {@macro forui.widgets.FTileGroup.cacheExtent}
-  final double? cacheExtent;
+  /// {@macro forui.widgets.FTileGroup.scrollCacheExtent}
+  final ScrollCacheExtent? scrollCacheExtent;
 
   /// {@macro forui.widgets.FTileGroup.maxHeight}
   final double maxHeight;
@@ -221,7 +222,7 @@ class FPopoverMenu extends StatefulWidget {
     this.control = const .managed(),
     this.scrollController,
     this.style = const .context(),
-    this.cacheExtent,
+    this.scrollCacheExtent,
     this.maxHeight = .infinity,
     this.intrinsicWidth = true,
     this.dragStartBehavior = .start,
@@ -255,7 +256,7 @@ class FPopoverMenu extends StatefulWidget {
     super.key,
   }) : _menuBuilder = ((context, controller, style) => FItemGroup.merge(
          scrollController: scrollController,
-         cacheExtent: cacheExtent,
+         scrollCacheExtent: scrollCacheExtent,
          maxHeight: maxHeight,
          intrinsicWidth: intrinsicWidth,
          dragStartBehavior: dragStartBehavior,
@@ -287,7 +288,7 @@ class FPopoverMenu extends StatefulWidget {
     this.control = const .managed(),
     this.scrollController,
     this.style = const .context(),
-    this.cacheExtent,
+    this.scrollCacheExtent,
     this.maxHeight = .infinity,
     this.intrinsicWidth = true,
     this.dragStartBehavior = .start,
@@ -321,7 +322,7 @@ class FPopoverMenu extends StatefulWidget {
     super.key,
   }) : _menuBuilder = ((context, controller, style) => FTileGroup.merge(
          scrollController: scrollController,
-         cacheExtent: cacheExtent,
+         scrollCacheExtent: scrollCacheExtent,
          maxHeight: maxHeight,
          intrinsicWidth: intrinsicWidth,
          dragStartBehavior: dragStartBehavior,
@@ -343,7 +344,7 @@ class FPopoverMenu extends StatefulWidget {
       ..add(DiagnosticsProperty('control', control))
       ..add(DiagnosticsProperty('scrollController', scrollController))
       ..add(DiagnosticsProperty('style', style))
-      ..add(DoubleProperty('cacheExtent', cacheExtent))
+      ..add(DiagnosticsProperty('scrollCacheExtent', scrollCacheExtent))
       ..add(DoubleProperty('maxHeight', maxHeight))
       ..add(FlagProperty('intrinsicWidth', value: intrinsicWidth, ifTrue: 'intrinsicWidth'))
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior))

@@ -249,9 +249,7 @@ class _RenderScaffold extends RenderBox
   bool _resizeToAvoidBottomInset;
   EdgeInsets _insets;
 
-  _RenderScaffold({required bool resizeToAvoidBottomInset, required EdgeInsets insets})
-    : _resizeToAvoidBottomInset = resizeToAvoidBottomInset,
-      _insets = insets;
+  _RenderScaffold({required this._resizeToAvoidBottomInset, required this._insets});
 
   @override
   void setupParentData(covariant RenderObject child) => child.parentData = DefaultData();

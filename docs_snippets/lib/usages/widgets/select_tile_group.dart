@@ -21,7 +21,7 @@ final selectTileGroup = FSelectTileGroup<String>(
   // {@endcategory}
   // {@category "Scroll"}
   scrollController: null,
-  cacheExtent: null,
+  scrollCacheExtent: null,
   maxHeight: .infinity,
   dragStartBehavior: .start,
   physics: const ClampingScrollPhysics(),
@@ -59,7 +59,7 @@ final selectTileGroupBuilder = FSelectTileGroup<String>.builder(
   // {@endcategory}
   // {@category "Scroll"}
   scrollController: null,
-  cacheExtent: null,
+  scrollCacheExtent: null,
   maxHeight: .infinity,
   dragStartBehavior: .start,
   physics: const ClampingScrollPhysics(),

@@ -15,7 +15,7 @@ class CalendarLayout extends StatefulWidget {
   final FLineCalendarStyle style;
   final AlignmentDirectional alignment;
   final ScrollPhysics? physics;
-  final double? cacheExtent;
+  final ScrollCacheExtent? scrollCacheExtent;
   final ScrollViewKeyboardDismissBehavior keyboardDismissBehavior;
   final TextScaler scale;
   final TextStyle textStyle;
@@ -31,7 +31,7 @@ class CalendarLayout extends StatefulWidget {
     required this.style,
     required this.alignment,
     required this.physics,
-    required this.cacheExtent,
+    required this.scrollCacheExtent,
     required this.keyboardDismissBehavior,
     required this.scale,
     required this.textStyle,
@@ -55,7 +55,7 @@ class CalendarLayout extends StatefulWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('alignment', alignment))
       ..add(DiagnosticsProperty('physics', physics))
-      ..add(DoubleProperty('cacheExtent', cacheExtent))
+      ..add(DiagnosticsProperty('scrollCacheExtent', scrollCacheExtent))
       ..add(DiagnosticsProperty('keyboardDismissBehavior', keyboardDismissBehavior))
       ..add(DiagnosticsProperty('scaler', scale))
       ..add(DiagnosticsProperty('textStyle', textStyle))
@@ -144,11 +144,11 @@ class _CalendarLayoutState extends State<CalendarLayout> {
         ItemContent(style: widget.style, variants: const {}, date: placeholder),
         ItemContent(style: widget.style, variants: {.hovered}, date: placeholder),
         ListView.builder(
+          scrollCacheExtent: widget.scrollCacheExtent,
           controller: _scrollController,
           scrollDirection: .horizontal,
           padding: .zero,
           physics: widget.physics,
-          cacheExtent: widget.cacheExtent,
           keyboardDismissBehavior: widget.keyboardDismissBehavior,
           itemExtent: _width,
           itemCount: widget.end == null ? null : widget.end!.difference(widget.start).inDays + 1,

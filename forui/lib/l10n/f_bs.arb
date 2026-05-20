@@ -3,7 +3,7 @@
   "sheetSemanticsLabel": "tabela",
   "barrierOnTapHint": "Zatvori: $modalRouteContentName",
   "barrierLabel": "Rubno",
-  "shortDateSeparator": ".",
+  "shortDateSeparator": ". ",
   "shortDateSuffix": ".",
   "dateFieldHint": "Odaberite datum",
   "dateFieldInvalidDateError": "Nevažeći datum.",

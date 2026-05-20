@@ -278,14 +278,13 @@ class _FResizableState extends State<FResizable> {
 extension type FResizableStyles(
   FVariants<FResizableAxisVariantConstraint, FResizableAxisVariant, FResizableDividerStyle, FResizableDividerStyleDelta>
   _
-)
-    implements
-        FVariants<
-          FResizableAxisVariantConstraint,
-          FResizableAxisVariant,
-          FResizableDividerStyle,
-          FResizableDividerStyleDelta
-        > {
+) implements
+    FVariants<
+      FResizableAxisVariantConstraint,
+      FResizableAxisVariant,
+      FResizableDividerStyle,
+      FResizableDividerStyleDelta
+    > {
   /// Creates a [FResizableStyles] that inherits its properties.
   factory FResizableStyles.inherit({
     required FColors colors,

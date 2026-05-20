@@ -88,10 +88,7 @@ class ChildLayer extends ContainerLayer {
   Offset _globalOffset;
   Offset _localOffset;
 
-  ChildLayer({required ChildLayerLink link, required Offset globalOffset, required Offset localOffset})
-    : _link = link,
-      _globalOffset = globalOffset,
-      _localOffset = localOffset;
+  ChildLayer({required this._link, required this._globalOffset, required this._localOffset});
 
   @override
   void attach(Object owner) {
@@ -206,8 +203,8 @@ class OverlayLayer extends ContainerLayer {
   OverlayLayer({
     required this.link,
     this.showWhenUnlinked = false,
-    this.unlinkedOffset = Offset.zero,
-    this.linkedOffset = Offset.zero,
+    this.unlinkedOffset = .zero,
+    this.linkedOffset = .zero,
   });
 
   /// The link to the [ChildLayer].
@@ -305,8 +302,7 @@ class OverlayLayer extends ContainerLayer {
     if (_lastTransform == null) {
       return null;
     }
-    final Matrix4 result = Matrix4.translationValues(-_lastOffset!.dx, -_lastOffset!.dy, 0.0)
-      ..multiply(_lastTransform!);
+    final result = Matrix4.translationValues(-_lastOffset!.dx, -_lastOffset!.dy, 0.0)..multiply(_lastTransform!);
     return result;
   }
 
@@ -318,7 +314,7 @@ class OverlayLayer extends ContainerLayer {
   /// null.
   static Matrix4 _collectTransformForLayerChain(List<ContainerLayer?> layers) {
     // Initialize our result matrix.
-    final Matrix4 result = Matrix4.identity();
+    final result = Matrix4.identity();
     // Apply each layer to the matrix in turn, starting from the last layer,
     // and providing the previous layer as the child.
     for (int index = layers.length - 1; index > 0; index -= 1) {
@@ -401,10 +397,10 @@ class OverlayLayer extends ContainerLayer {
     assert(leader.owner == owner, 'Linked ChildLayer anchor is not in the same layer tree as the FollowerLayer.');
 
     // Stores [leader, ..., commonAncestor] after calling _pathsToCommonAncestor.
-    final List<ContainerLayer> forwardLayers = <ContainerLayer>[leader];
+    final forwardLayers = <ContainerLayer>[leader];
     // Stores [this (follower), ..., commonAncestor] after calling
     // _pathsToCommonAncestor.
-    final List<ContainerLayer> inverseLayers = <ContainerLayer>[this];
+    final inverseLayers = <ContainerLayer>[this];
 
     final Layer? ancestor = _pathsToCommonAncestor(leader, this, forwardLayers, inverseLayers);
     assert(ancestor != null, 'ChildLayer and FollowerLayer do not have a common ancestor.');
@@ -413,14 +409,14 @@ class OverlayLayer extends ContainerLayer {
       'ChildLayer anchor must come before FollowerLayer in paint order, but the reverse was true.',
     );
 
-    final Matrix4 forwardTransform = _collectTransformForLayerChain(forwardLayers);
+    final forwardTransform = _collectTransformForLayerChain(forwardLayers);
     // Further transforms the coordinate system to a hypothetical child (null)
     // of the leader layer, to account for the leader's additional paint offset
     // and layer offset (ChildLayer.offset).
     leader.applyTransform(null, forwardTransform);
     forwardTransform.translateByDouble(linkedOffset!.dx, linkedOffset!.dy, 0.0, 1.0);
 
-    final Matrix4 inverseTransform = _collectTransformForLayerChain(inverseLayers);
+    final inverseTransform = _collectTransformForLayerChain(inverseLayers);
 
     if (inverseTransform.invert() == 0.0) {
       // We are in a degenerate transform, so there's not much we can do.
@@ -475,7 +471,7 @@ class OverlayLayer extends ContainerLayer {
       builder.pop();
     } else {
       _lastOffset = null;
-      final Matrix4 matrix = Matrix4.translationValues(unlinkedOffset!.dx, unlinkedOffset!.dy, .0);
+      final matrix = Matrix4.translationValues(unlinkedOffset!.dx, unlinkedOffset!.dy, .0);
       engineLayer = builder.pushTransform(matrix.storage, oldLayer: engineLayer as ui.TransformEngineLayer?);
       addChildrenToScene(builder);
       builder.pop();

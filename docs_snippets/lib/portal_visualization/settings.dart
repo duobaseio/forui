@@ -67,22 +67,15 @@ class Value extends FChangeNotifier {
   FPortalOverflow _overflow;
 
   Value({
-    Alignment childAnchor = .bottomLeft,
-    Size childSize = const Size(150, 150),
-    Offset childOffset = const Offset(20, 30),
-    Alignment portalAnchor = .topRight,
-    Size portalSize = const Size(90, 90),
-    double spacing = 4,
-    bool diagonal = true,
-    FPortalOverflow overflow = .flip,
-  }) : _childAnchor = childAnchor,
-       _childSize = childSize,
-       _childOffset = childOffset,
-       _portalAnchor = portalAnchor,
-       _portalSize = portalSize,
-       _spacing = spacing,
-       _diagonal = diagonal,
-       _overflow = overflow;
+    this._childAnchor = .bottomLeft,
+    this._childSize = const Size(150, 150),
+    this._childOffset = const Offset(20, 30),
+    this._portalAnchor = .topRight,
+    this._portalSize = const Size(90, 90),
+    this._spacing = 4,
+    this._diagonal = true,
+    this._overflow = .flip,
+  });
 
   Alignment get childAnchor => _childAnchor;
 

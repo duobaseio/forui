@@ -4,7 +4,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:forui/forui.dart';
 
-typedef _Create = FResizableController Function(_ResizableControllerHook);
 
 /// Creates a [FResizableController] that allows only a single date to be selected and is automatically disposed.
 FResizableController useFResizableController({
@@ -40,16 +39,15 @@ class _ResizableControllerHook extends Hook<FResizableController> {
   final void Function(List<FResizableRegionData> resized)? onResizeUpdate;
   final void Function(List<FResizableRegionData> resized)? onResizeEnd;
   final String _debugLabel;
-  final _Create _create;
+  final FResizableController Function(_ResizableControllerHook) _create;
 
   const _ResizableControllerHook({
     required this.onResizeUpdate,
     required this.onResizeEnd,
-    required String debugLabel,
-    required _Create create,
+    required this._debugLabel,
+    required this._create,
     super.keys,
-  }) : _debugLabel = debugLabel,
-       _create = create;
+  });
 
   @override
   _ResizableControllerHookState createState() => .new();

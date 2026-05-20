@@ -38,6 +38,7 @@
   `FIcons.ellipsis`.
 
 * Change `FBreadcrumb.divider` default to resolve from `FIcons.chevronRight`.
+* **Breaking** Change `FBreadcrumbItem.cacheExtent` to `FBreadcrumbItem.scrollCacheExtent`.
 
 
 ### `FButton`
@@ -68,7 +69,7 @@
 
 ### `FDateField`
 * Change `FDateField.defaultIconBuilder` to resolve the calendar icon from `FIcons.calendar`.
-
+* Change `FDateField` date format localizations to match CLDR 42. 
 
 ### `FDialog`
 * Add `FDialog.resizeToAvoidInsets` to opt out of view insets padding.
@@ -89,11 +90,7 @@ customized globally. Defaults to Lucide-backed set, `FIcons.lucide()`.
 
 
 ### `FItem` & `FItemGroup`
-* Remove `FItemStyle.menuInsets(...)`. Use `FItemContentStyle.inherit(touch: ...)` and
-  `FRawItemContentStyle.inherit(touch: ...)` instead.
-* Remove `FItemStyle.selectInsets(...)`. Use `FItemContentStyle.inherit(touch: ...)` and
-  `FRawItemContentStyle.inherit(touch: ...)` instead.
-
+* **Breaking** Change `FItemGroup.cacheExtent` to `FItemGroup.scrollCacheExtent`.
 * **Breaking** Remove `FItemContentStyle.inherit(suffixedPadding: ...)` and
   `FItemContentStyle.inherit(unsuffixedPadding: ...)`. Padding is now inlined based on the new `touch` parameter.
 * **Breaking** Remove `FRawItemContentStyle.inherit(padding: ...)`. Padding is now inlined based on the new `touch`
@@ -101,8 +98,16 @@ customized globally. Defaults to Lucide-backed set, `FIcons.lucide()`.
 * **Breaking** Rename `FItemStyle.rawItemContentStyle` to `FItemStyle.rawContentStyle`.
 * **Breaking** Rename `FItemStyle.margin` to `FItemStyle.padding`.
 * **Breaking** Rename `FItemStyle.decoration` to `FItemStyle.contentDecoration`.
+* Remove `FItemStyle.menuInsets(...)`. Use `FItemContentStyle.inherit(touch: ...)` and
+  `FRawItemContentStyle.inherit(touch: ...)` instead.
+* Remove `FItemStyle.selectInsets(...)`. Use `FItemContentStyle.inherit(touch: ...)` and
+  `FRawItemContentStyle.inherit(touch: ...)` instead.
 
 * Fix `FItemGroup` content not clipping properly at rounded corners.
+
+
+### `FLineCalendar`
+* **Breaking** Rename `FLineCalendar.cacheExtent` to `FLineCalendar.scrollCacheExtent`.
 
 
 ### `FPagination`
@@ -122,6 +127,10 @@ customized globally. Defaults to Lucide-backed set, `FIcons.lucide()`.
 * Add `FSubmenuTile.submenuHideRegion`.
 
 * Change `FSubmenuItem.suffix` and `FSubmenuTile.suffix` defaults to resolve from `FIcons.chevronRight`.
+
+* **Breaking** Change `FPopoverMenu.cacheExtent` to `FPopoverMenu.scrollCacheExtent`.
+* **Breaking** Change `FSubmenuItem.submenuCacheExtent` to `FSubmenuItem.submenuScrollCacheExtent`.
+* **Breaking** Change `FSubmenuTile.submenuCacheExtent` to `FSubmenuItem.submenuScrollCacheExtent.
 
 * Fix `FPopoverMenu` content not clipping properly at rounded corners.
 
@@ -155,10 +164,13 @@ customized globally. Defaults to Lucide-backed set, `FIcons.lucide()`.
 ### `FSelectMenuTile`
 * Change `FSelectMenuTile.suffix` default to resolve from `FIcons.chevronsUpDown`.
 
+* **Breaking** Change `FSelectMenuTile.cacheExtent` to `FSelectMenuTile.scrollCacheExtent`.
+
 
 ### `FSelectTile` & `FSelectTileGroup`
 * **Breaking** Change `FSelectTile.checkedIcon` and `FSelectTile.uncheckedIcon` from `Widget` to `Widget?`. Defaults
   to `FIcons.check`; the unchecked variant is rendered transparent to preserve layout.
+* **Breaking** Change `FSelectTileGroup.cacheExtent` to `FSelectTileGroup.scrollCacheExtent`.
 
 
 ### `FSidebar` & `FSidebarItem`
@@ -216,7 +228,7 @@ customized globally. Defaults to Lucide-backed set, `FIcons.lucide()`.
 
 ### `FTimeField`
 * Change `FTimeField.defaultIconBuilder` to resolve the clock icon from `FIcons.clock4`.
-
+* Change `FTimeField` time format localizations to match CLDR 42.
 
 ### `FToast` & `FToaster`
 * Add `FToast.clipBehavior` to clip the toast's content to the inner path of its decoration. Defaults to `Clip.none`.
@@ -226,6 +238,8 @@ customized globally. Defaults to Lucide-backed set, `FIcons.lucide()`.
 
 
 ### `FTileGroup`
+* **Breaking** Change `FTileGroup.cacheExtent` to `FTileGroup.scrollCacheExtent`.
+
 * Fix `FTileGroup` content not clipping properly at rounded corners.
 
 
