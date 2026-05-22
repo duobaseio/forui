@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 
 import 'package:collection/collection.dart';
 import 'package:meta/meta.dart';
@@ -48,11 +48,37 @@ class FStyle with Diagnosticable, _$FStyleFunctions {
   @override
   final FTappableStyle tappableStyle;
 
+  final Map<Object, ThemeExtension<dynamic>> _extensions;
+
   /// Creates an [FStyle].
   ///
   /// **Note:**
   /// Unless you are creating a completely new style, modifying [FThemes]' predefined styles should be preferred.
-  const FStyle({
+  FStyle({
+    required FFormFieldStyle formFieldStyle,
+    required FFocusedOutlineStyle focusedOutlineStyle,
+    required IconThemeData iconStyle,
+    required FSizes sizes,
+    required FTappableStyle tappableStyle,
+    FBorderRadius borderRadius = const FBorderRadius(),
+    double borderWidth = 1,
+    EdgeInsets pagePadding = const .symmetric(vertical: 8, horizontal: 12),
+    List<BoxShadow> shadow = const [BoxShadow(color: Color(0x0d000000), offset: Offset(0, 1), blurRadius: 2)],
+    Iterable<ThemeExtension<dynamic>> extensions = const [],
+  }) : this._(
+         formFieldStyle: formFieldStyle,
+         focusedOutlineStyle: focusedOutlineStyle,
+         iconStyle: iconStyle,
+         sizes: sizes,
+         tappableStyle: tappableStyle,
+         borderRadius: borderRadius,
+         borderWidth: borderWidth,
+         pagePadding: pagePadding,
+         shadow: shadow,
+         extensions: extensions.isEmpty ? const {} : {for (final extension in extensions) extension.type: extension},
+       );
+
+  const FStyle._({
     required this.formFieldStyle,
     required this.focusedOutlineStyle,
     required this.iconStyle,
@@ -62,6 +88,7 @@ class FStyle with Diagnosticable, _$FStyleFunctions {
     this.borderWidth = 1,
     this.pagePadding = const .symmetric(vertical: 8, horizontal: 12),
     this.shadow = const [BoxShadow(color: Color(0x0d000000), offset: Offset(0, 1), blurRadius: 2)],
+    this._extensions = const {},
   });
 
   /// Creates an [FStyle] that inherits its properties.
@@ -75,6 +102,67 @@ class FStyle with Diagnosticable, _$FStyleFunctions {
       tappableStyle: FTappableStyle(),
     );
   }
+
+  /// Obtains a particular [ThemeExtension].
+  ///
+  /// {@template forui.theme.FStyle.extension}
+  /// ## Creating and passing a [ThemeExtension] to [FStyle]
+  /// ```dart
+  /// class BrandStyle extends ThemeExtension<BrandStyle> {
+  ///   final double cardRadius;
+  ///
+  ///   const BrandStyle({required this.cardRadius});
+  ///
+  ///   @override
+  ///   BrandStyle copyWith({double? cardRadius}) => BrandStyle(cardRadius: cardRadius ?? this.cardRadius);
+  ///
+  ///   @override
+  ///   BrandStyle lerp(BrandStyle? other, double t) {
+  ///     if (other is! BrandStyle) return this;
+  ///     return BrandStyle(cardRadius: lerpDouble(cardRadius, other.cardRadius, t)!);
+  ///   }
+  /// }
+  /// ```
+  ///
+  /// Passing it via constructor:
+  /// ```dart
+  /// final style = FStyle(
+  ///   extensions: [BrandStyle(cardRadius: 12)],
+  ///   ... // other fields omitted for brevity
+  /// );
+  /// ```
+  ///
+  /// Passing it via [copyWith]:
+  /// ```dart
+  /// style.copyWith(extensions: [BrandStyle(cardRadius: 12)]);
+  /// ```
+  ///
+  /// ## Accessing the extension
+  /// ```dart
+  /// final brand = context.theme.style.extension<BrandStyle>();
+  /// ```
+  ///
+  /// It is recommended to define a getter for your [ThemeExtension]:
+  /// ```dart
+  /// extension FStyleBrandStyle on FStyle {
+  ///   BrandStyle get brand => extension<BrandStyle>();
+  ///
+  ///   // Alternatively
+  ///   double get cardRadius => extension<BrandStyle>().cardRadius;
+  /// }
+  ///
+  /// final brand = context.theme.style.brand;
+  ///
+  /// final cardRadius = context.theme.style.cardRadius;
+  /// ```
+  /// {@endtemplate}
+  T extension<T extends Object>() => _extensions[T]! as T;
+
+  /// All [ThemeExtension]s defined in this style.
+  ///
+  /// {@macro forui.theme.FStyle.extension}
+  @override
+  Iterable<ThemeExtension<dynamic>> get extensions => _extensions.values.toSet();
 }
 
 /// Provides function to access common visual properties from a [Decoration].

@@ -1,12 +1,85 @@
-import 'dart:typed_data';
-
-import 'package:flutter/painting.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
 
+class _Marker extends ThemeExtension<_Marker> {
+  final String id;
+
+  const _Marker(this.id);
+
+  @override
+  _Marker copyWith({String? id}) => _Marker(id ?? this.id);
+
+  @override
+  _Marker lerp(ThemeExtension<_Marker>? other, double t) => t < 0.5 ? this : (other as _Marker? ?? this);
+
+  @override
+  bool operator ==(Object other) => identical(this, other) || other is _Marker && id == other.id;
+
+  @override
+  int get hashCode => id.hashCode;
+}
+
 void main() {
+  group('FStyle', () {
+    final style = FStyle.inherit(colors: FColors.neutralLight, typography: FTypography(), touch: false);
+
+    group('extensions', () {
+      FStyle withExtensions(List<ThemeExtension<dynamic>> extensions) => style.copyWith(extensions: extensions);
+
+      test('defaults to empty', () {
+        expect(style.extensions, <ThemeExtension<dynamic>>{});
+      });
+
+      test('retrieved via extension<T>()', () {
+        final updated = withExtensions(const [_Marker('a')]);
+        expect(updated.extension<_Marker>(), const _Marker('a'));
+        expect(updated.extensions, {const _Marker('a')});
+      });
+
+      test('copyWith replaces extensions', () {
+        final original = withExtensions(const [_Marker('a')]);
+        final copy = original.copyWith(extensions: const [_Marker('b')]);
+        expect(copy.extension<_Marker>(), const _Marker('b'));
+      });
+
+      test('copyWith without extensions preserves them', () {
+        final original = withExtensions(const [_Marker('a')]);
+        final copy = original.copyWith();
+        expect(copy.extension<_Marker>(), const _Marker('a'));
+      });
+
+      test('lerp interpolates extensions', () {
+        final a = withExtensions(const [_Marker('a')]);
+        final b = withExtensions(const [_Marker('b')]);
+        expect(a.lerp(b, 0).extension<_Marker>(), const _Marker('a'));
+        expect(a.lerp(b, 1).extension<_Marker>(), const _Marker('b'));
+      });
+
+      test('lerp retains extensions present in only one side', () {
+        final a = withExtensions(const [_Marker('a')]);
+        expect(a.lerp(style, 0.5).extension<_Marker>(), const _Marker('a'));
+      });
+
+      test('equality includes extensions', () {
+        expect(withExtensions(const [_Marker('a')]), withExtensions(const [_Marker('a')]));
+        expect(withExtensions(const [_Marker('a')]) == withExtensions(const [_Marker('b')]), false);
+      });
+
+      test('debugFillProperties exposes extensions', () {
+        final builder = DiagnosticPropertiesBuilder();
+        withExtensions(const [_Marker('a')]).debugFillProperties(builder);
+        expect(
+          builder.properties.whereType<IterableProperty<ThemeExtension<dynamic>>>().single.value,
+          {const _Marker('a')},
+        );
+      });
+    });
+  });
+
   group('Decorations', () {
     group('color', () {
       for (final (String name, Decoration decoration, Color? expected) in [

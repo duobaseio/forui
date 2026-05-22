@@ -4,7 +4,7 @@ import 'create_command.dart';
 import 'ls_command.dart';
 import 'theme.dart';
 
-final registry = {for (final theme in Theme.values) theme.name: theme.source};
+final registry = {for (final theme in Theme.values) theme.name: theme};
 
 class ThemeCommand extends ForuiCommand {
   @override

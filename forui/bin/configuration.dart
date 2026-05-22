@@ -20,7 +20,7 @@ final formatter = DartFormatter(languageVersion: DartFormatter.latestLanguageVer
 
 class Configuration {
   static const defaultSnippet = 'lib';
-  static const defaultStyle = 'lib/theme';
+  static const defaultStyle = 'lib/theme/styles';
   static const defaultTheme = 'lib/theme/theme.dart';
 
   static Directory _findProjectRoot([Directory? directory]) {

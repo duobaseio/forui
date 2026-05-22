@@ -7,6 +7,9 @@ import {Callout} from "fumadocs-ui/components/callout";
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
 import mainSnippet from '@/snippets/snippets/guides/customizing_themes/main.json';
 import themeSnippet from '@/snippets/snippets/guides/customizing_themes/theme.json';
+import colorsSnippet from '@/snippets/snippets/guides/customizing_themes/colors.json';
+import typographySnippet from '@/snippets/snippets/guides/customizing_themes/typography.json';
+import styleSnippet from '@/snippets/snippets/guides/customizing_themes/style.json';
 import accordionStyleSnippet from '@/snippets/snippets/guides/customizing_themes/accordion_style.json';
 
 This guide uses [`FAccordionStyle`](https://pub.dev/documentation/forui/latest/forui.widgets.accordion/FAccordionStyle-class.html)
@@ -43,7 +46,7 @@ This generates an accordion style file which you can add to your theme:
 <CodeSnippet snippet={accordionStyleSnippet} />
 
 <Callout type="info">
-    To learn how to customize widget styles, see the [customizing widget styles](/docs/guides/customizing-widget-styles#deltas)
+    To learn how to customize widget styles, see the [cåustomizing widget styles](/docs/guides/customizing-widget-styles#deltas)
     guide.
 </Callout>
 
@@ -59,8 +62,17 @@ Generate a theme based on [neutral](/docs/concepts/themes#getting-started)'s lig
 dart run forui theme create neutral-light
 ```
 
-This generates a theme file which you can:
-- add to your generated `main.dart`.
-- add the generated styles to.
+This generates a theme directory with a `theme.dart` and three part files (`colors.dart`, `typography.dart`, `style.dart`)
+Each part file already includes a starter `App<Section>` extension you can fill in with your custom tokens.
 
+### Theme
 <CodeSnippet snippet={themeSnippet} />
+
+### Colors
+<CodeSnippet snippet={colorsSnippet} />
+
+### Typography
+<CodeSnippet snippet={typographySnippet} />
+
+### Style
+<CodeSnippet snippet={styleSnippet} />

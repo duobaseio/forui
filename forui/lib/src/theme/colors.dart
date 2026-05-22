@@ -818,7 +818,14 @@ final class FColors with Diagnosticable {
   /// ```dart
   /// extension FColorsBrandColors on FColors {
   ///   BrandColors get brand => extension<BrandColors>();
+  ///
+  ///   // Alternatively
+  ///   Color get accent => extension<BrandColors>().accent;
   /// }
+  ///
+  /// final brand = context.theme.colors.brand;
+  ///
+  /// final accent = context.theme.colors.accent;
   /// ```
   /// {@endtemplate}
   T extension<T extends Object>() => _extensions[T]! as T;
@@ -826,7 +833,7 @@ final class FColors with Diagnosticable {
   /// All [ThemeExtension]s defined in these colors.
   ///
   /// {@macro forui.theme.FColors.extension}
-  Set<ThemeExtension<dynamic>> get extensions => _extensions.values.toSet();
+  Iterable<ThemeExtension<dynamic>> get extensions => _extensions.values.toSet();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

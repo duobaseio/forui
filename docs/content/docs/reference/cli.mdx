@@ -60,7 +60,7 @@ Usage: forui snippet ls
 
 ### create
 
-Use the `style create` command to generate a style in your project. The styles are generated in `lib/theme` by default.
+Use the `style create` command to generate a style in your project. The styles are generated in `lib/theme/styles` by default.
 
 <Callout type="info">
     See the [docs](/docs/guides/customizing-widget-styles) on how to use the generated styles.
@@ -76,7 +76,7 @@ Usage: forui style create [styles]
 -a, --all       Create all styles.
 -f, --force     Overwrite existing files if they exist.
 -o, --output    The output directory or file, relative to the project directory.
-                (defaults to "lib/theme")
+                (defaults to "lib/theme/styles")
 ```
 
 ### ls
@@ -96,8 +96,8 @@ Usage: forui style ls
 
 ### create
 
-Use the `theme create` command to generate a theme in your project. The theme is generated in `lib/theme/theme.dart` by
-default.
+Use the `theme create` command to generate a theme in your project. The theme is generated across multiple files in
+`lib/theme/` by default.
 
 <Callout type="info">
     See the [docs](/docs/guides/customizing-themes) on how to use the generated theme.

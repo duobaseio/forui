@@ -197,6 +197,7 @@ customized globally. Defaults to Lucide-backed set, `FIcons.lucide()`.
 ### `FStyle` & `FThemeData`
 * Add `FThemeData.hapticFeedback`.
 * Add `FThemeData.icons` for theming icons used by Forui widgets. See `FIcons`.
+* Add `ThemeExtension` support via `FStyle(extensions: ...)`, `FStyle.extension<T>()`, and `FStyle.extensions`.
 
 * **Breaking** Remove `FStyle.hapticFeedback`. Use `FThemeData.hapticFeedback` instead.
 * **Breaking** Remove `colors`, `typography`, and `style` parameters from `FThemeData.copyWith`. Rebuild `FThemeData`
@@ -257,6 +258,9 @@ customized globally. Defaults to Lucide-backed set, `FIcons.lucide()`.
 
 ### Others
 * Change CLI to print generated file paths as `file://` URIs so they are clickable in JetBrains IDEs.
+* Change `forui theme create` to split the generated theme across `theme.dart`, `colors.dart`,
+  `typography.dart`, and `style.dart`.
+* Change `forui style create` default output directory from `lib/theme` to `lib/theme/styles`.
 
 * Fix spurious `LicenseRegistry` entries, including a hyphen-only "package" name, caused by separator rows in `LICENSE`.
 

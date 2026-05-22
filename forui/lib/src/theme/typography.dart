@@ -386,7 +386,14 @@ final class FTypography with Diagnosticable {
   /// ```dart
   /// extension FTypographyBrandTypography on FTypography {
   ///   BrandTypography get brand => extension<BrandTypography>();
+  ///
+  ///   // Alternatively
+  ///   TextStyle get display => extension<BrandTypography>().display;
   /// }
+  ///
+  /// final brand = context.theme.typography.brand;
+  ///
+  /// final display = context.theme.typography.display;
   /// ```
   /// {@endtemplate}
   T extension<T extends Object>() => _extensions[T]! as T;
@@ -394,7 +401,7 @@ final class FTypography with Diagnosticable {
   /// All [ThemeExtension]s defined in this typography.
   ///
   /// {@macro forui.theme.FTypography.extension}
-  Set<ThemeExtension<dynamic>> get extensions => _extensions.values.toSet();
+  Iterable<ThemeExtension<dynamic>> get extensions => _extensions.values.toSet();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
