@@ -132,7 +132,7 @@ class FStyle with Diagnosticable, _$FStyleFunctions {
   /// );
   /// ```
   ///
-  /// Passing it via [copyWith]:
+  /// Passing it via `copyWith`:
   /// ```dart
   /// style.copyWith(extensions: [BrandStyle(cardRadius: 12)]);
   /// ```
