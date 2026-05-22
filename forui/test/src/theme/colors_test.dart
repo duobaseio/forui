@@ -270,46 +270,46 @@ void main() {
     });
 
     group('extensions', () {
-      FColors withExtensions(List<ThemeExtension<dynamic>> extensions) => scheme.copyWith(extensions: extensions);
+      FColors withExtensions(Set<ThemeExtension<dynamic>> extensions) => scheme.copyWith(extensions: extensions);
 
       test('default is empty', () {
         expect(scheme.extensions, <ThemeExtension<dynamic>>{});
       });
 
       test('retrieved via extension<T>()', () {
-        final colors = withExtensions(const [_Marker('a')]);
+        final colors = withExtensions({const _Marker('a')});
         expect(colors.extension<_Marker>(), const _Marker('a'));
         expect(colors.extensions, {const _Marker('a')});
       });
 
       test('copyWith replaces extensions', () {
-        final original = withExtensions(const [_Marker('a')]);
-        final copy = original.copyWith(extensions: const [_Marker('b')]);
+        final original = withExtensions({const _Marker('a')});
+        final copy = original.copyWith(extensions: {const _Marker('b')});
         expect(copy.extension<_Marker>(), const _Marker('b'));
       });
 
       test('copyWith without extensions preserves them', () {
-        final original = withExtensions(const [_Marker('a')]);
+        final original = withExtensions({const _Marker('a')});
         final copy = original.copyWith(background: Colors.red);
         expect(copy.extension<_Marker>(), const _Marker('a'));
       });
 
       test('lerp interpolates extensions', () {
-        final a = withExtensions(const [_Marker('a')]);
-        final b = withExtensions(const [_Marker('b')]);
+        final a = withExtensions({const _Marker('a')});
+        final b = withExtensions({const _Marker('b')});
         expect(FColors.lerp(a, b, 0).extension<_Marker>(), const _Marker('a'));
         expect(FColors.lerp(a, b, 1).extension<_Marker>(), const _Marker('b'));
       });
 
       test('lerp retains extensions present in only one side', () {
-        final a = withExtensions(const [_Marker('a')]);
+        final a = withExtensions({const _Marker('a')});
         expect(FColors.lerp(a, scheme, 0.5).extension<_Marker>(), const _Marker('a'));
       });
 
       test('equality includes extensions', () {
-        final a = withExtensions(const [_Marker('a')]);
-        final b = withExtensions(const [_Marker('a')]);
-        final c = withExtensions(const [_Marker('b')]);
+        final a = withExtensions({const _Marker('a')});
+        final b = withExtensions({const _Marker('a')});
+        final c = withExtensions({const _Marker('b')});
         expect(a, b);
         expect(a.hashCode, b.hashCode);
         expect(a, isNot(c));

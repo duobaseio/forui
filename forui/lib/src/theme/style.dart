@@ -162,7 +162,7 @@ class FStyle with Diagnosticable, _$FStyleFunctions {
   ///
   /// {@macro forui.theme.FStyle.extension}
   @override
-  Iterable<ThemeExtension<dynamic>> get extensions => _extensions.values.toSet();
+  Set<ThemeExtension<dynamic>> get extensions => _extensions.values.toSet();
 }
 
 /// Provides function to access common visual properties from a [Decoration].

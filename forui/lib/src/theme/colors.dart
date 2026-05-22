@@ -833,7 +833,7 @@ final class FColors with Diagnosticable {
   /// All [ThemeExtension]s defined in these colors.
   ///
   /// {@macro forui.theme.FColors.extension}
-  Iterable<ThemeExtension<dynamic>> get extensions => _extensions.values.toSet();
+  Set<ThemeExtension<dynamic>> get extensions => _extensions.values.toSet();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

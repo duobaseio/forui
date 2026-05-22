@@ -35,6 +35,7 @@ const iconThemeData = TypeChecker.fromUrl('package:flutter/src/widgets/icon_them
 const textStyle = TypeChecker.fromUrl('package:flutter/src/painting/text_style.dart#TextStyle');
 const boxShadow = TypeChecker.fromUrl('package:flutter/src/painting/box_shadow.dart#BoxShadow');
 const shadow = TypeChecker.fromUrl('dart:ui#Shadow');
+const themeExtension = TypeChecker.fromUrl('package:flutter/src/material/theme_data.dart#ThemeExtension');
 
 const fWidgetStateMap = TypeChecker.fromUrl('package:forui/src/theme/widget_state_map.dart#FWidgetStateMap');
 const fVariants = TypeChecker.fromUrl('package:forui/src/theme/variants.dart#FVariants');

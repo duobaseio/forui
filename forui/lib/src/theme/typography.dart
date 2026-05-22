@@ -401,7 +401,7 @@ final class FTypography with Diagnosticable {
   /// All [ThemeExtension]s defined in this typography.
   ///
   /// {@macro forui.theme.FTypography.extension}
-  Iterable<ThemeExtension<dynamic>> get extensions => _extensions.values.toSet();
+  Set<ThemeExtension<dynamic>> get extensions => _extensions.values.toSet();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

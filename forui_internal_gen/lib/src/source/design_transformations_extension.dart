@@ -49,6 +49,16 @@ class DesignTransformationsExtension extends TransformationsExtension {
           final t when shadow.isAssignableFromType(t) => 'Shadow.lerpList($name, other.$name, t) ?? $name',
           _ => 't < 0.5 ? $name : other.$name',
         },
+        // Set<ThemeExtension<...>> - merge by type so extensions present on only one side survive the lerp.
+        _ when set.isAssignableFromType(type) && type is ParameterizedType => switch (type.typeArguments.single) {
+          final t when themeExtension.isAssignableFromType(t) =>
+            '{'
+                'for (final e in $name) '
+                'e.lerp(other.$name.where((o) => o.type == e.type).firstOrNull, t), '
+                'for (final e in other.$name) if (!$name.any((x) => x.type == e.type)) e, '
+                '}',
+          _ => 't < 0.5 ? $name : other.$name',
+        },
         // Extension types wrapping FVariants - use AST to get V type (generated types may not be resolved yet)
         InterfaceType(:final ExtensionTypeElement element) => await () async {
           var extension = await step.resolver.astNodeFor(element.firstFragment);

@@ -477,46 +477,46 @@ void main() {
       });
 
       test('retrieved via extension<T>()', () {
-        final typography = FTypography(extensions: [_Marker('a')]);
+        final typography = FTypography(extensions: {_Marker('a')});
         expect(typography.extension<_Marker>(), _Marker('a'));
         expect(typography.extensions, {_Marker('a')});
       });
 
       test('copyWith replaces extensions', () {
-        final original = FTypography(extensions: [_Marker('a')]);
-        final copy = original.copyWith(extensions: [_Marker('b')]);
+        final original = FTypography(extensions: {_Marker('a')});
+        final copy = original.copyWith(extensions: {_Marker('b')});
         expect(copy.extension<_Marker>(), _Marker('b'));
       });
 
       test('copyWith without extensions preserves them', () {
-        final original = FTypography(extensions: [_Marker('a')]);
+        final original = FTypography(extensions: {_Marker('a')});
         final copy = original.copyWith(xs3: const TextStyle(fontSize: 99));
         expect(copy.extension<_Marker>(), _Marker('a'));
       });
 
       test('scale forwards sizeScalar to extensions', () {
-        final original = FTypography(extensions: [_Marker('a')]);
+        final original = FTypography(extensions: {_Marker('a')});
         final scaled = original.scale(sizeScalar: 2);
         expect(scaled.extension<_Marker>(), _Marker('a', size: 2));
       });
 
       test('lerp interpolates extensions', () {
-        final a = FTypography(extensions: [_Marker('a')]);
-        final b = FTypography(extensions: [_Marker('b')]);
+        final a = FTypography(extensions: {_Marker('a')});
+        final b = FTypography(extensions: {_Marker('b')});
         expect(FTypography.lerp(a, b, 0).extension<_Marker>(), _Marker('a'));
         expect(FTypography.lerp(a, b, 1).extension<_Marker>(), _Marker('b'));
       });
 
       test('lerp retains extensions present in only one side', () {
-        final a = FTypography(extensions: [_Marker('a')]);
+        final a = FTypography(extensions: {_Marker('a')});
         final b = FTypography();
         expect(FTypography.lerp(a, b, 0.5).extension<_Marker>(), _Marker('a'));
       });
 
       test('equality includes extensions', () {
-        final a = FTypography(extensions: [_Marker('a')]);
-        final b = FTypography(extensions: [_Marker('a')]);
-        final c = FTypography(extensions: [_Marker('b')]);
+        final a = FTypography(extensions: {_Marker('a')});
+        final b = FTypography(extensions: {_Marker('a')});
+        final c = FTypography(extensions: {_Marker('b')});
         expect(a, b);
         expect(a.hashCode, b.hashCode);
         expect(a, isNot(c));
