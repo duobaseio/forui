@@ -9,7 +9,10 @@ import 'package:docs_snippets/snippets/guides/adding_theme_properties/brand_colo
 Widget build(BuildContext context) {
   final brand = context.theme.colors.extension<BrandColors>();
   return DecoratedBox(
-    decoration: BoxDecoration(color: brand.accent, border: .all(color: brand.accentForeground)),
+    decoration: BoxDecoration(
+      color: brand.accent,
+      border: .all(color: brand.accentForeground),
+    ),
   );
 }
 

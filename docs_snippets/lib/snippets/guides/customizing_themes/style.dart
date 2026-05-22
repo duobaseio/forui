@@ -62,4 +62,5 @@ class AppStyle extends ThemeExtension<AppStyle> {
   @override
   int get hashCode => runtimeType.hashCode;
 }
+
 // {@endsnippet}
