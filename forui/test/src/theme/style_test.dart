@@ -72,10 +72,9 @@ void main() {
       test('debugFillProperties exposes extensions', () {
         final builder = DiagnosticPropertiesBuilder();
         withExtensions(const [_Marker('a')]).debugFillProperties(builder);
-        expect(
-          builder.properties.whereType<IterableProperty<ThemeExtension<dynamic>>>().single.value,
-          {const _Marker('a')},
-        );
+        expect(builder.properties.whereType<IterableProperty<ThemeExtension<dynamic>>>().single.value, {
+          const _Marker('a'),
+        });
       });
     });
   });
