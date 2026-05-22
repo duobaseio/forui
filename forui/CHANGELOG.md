@@ -1,3 +1,9 @@
+## 0.22.1
+
+### Others
+* Fix `icon-mapping` CLI snippet referencing Lucide brand icons removed in 0.22.0.
+
+
 ## 0.22.0
 
 ### `FAccordionItem`
