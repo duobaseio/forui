@@ -1,4 +1,4 @@
-## 0.22.0 (Next)
+## 0.22.0
 
 ### `FLineCalendar`
 * Add `useFLineCalendarScrollController(...)`.

@@ -1,4 +1,4 @@
-## 0.22.0 (Next)
+## 0.22.0
 
 ### `FAccordionItem`
 * **Breaking** Change `FAccordionItem.icon` from `Widget` to `Widget?`. Defaults to `FIcons.chevronDown`.
