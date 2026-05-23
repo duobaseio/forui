@@ -34,7 +34,7 @@ typedef FSelectPopoverBuilder<T> =
 /// `FSelect`, `FSelectSection`, and `FSelectItem` (e.g., `FSelect<MyType>`).
 ///
 /// See:
-/// * https://forui.dev/docs/form/select for working examples.
+/// * https://forui.dev/docs/widgets/form/select for working examples.
 /// * [FSelectController] for customizing the behavior of a select.
 /// * [FSelectStyle] for customizing the appearance of a select.
 abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {

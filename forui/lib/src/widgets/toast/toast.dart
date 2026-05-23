@@ -7,7 +7,7 @@ import 'package:forui/src/foundation/inner_path_clipper.dart';
 /// A toast.
 ///
 /// See:
-/// * https://forui.dev/docs/overlay/toast for working examples.
+/// * https://forui.dev/docs/widgets/overlay/toast for working examples.
 /// * [showFToast] for displaying a toast.
 /// * [FToasterStyle] for customizing a toaster's appearance.
 /// * [FToastStyle] for customizing a toast's appearance.

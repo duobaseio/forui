@@ -18,7 +18,7 @@ part 'divider.design.dart';
 /// They can be used to establish visual hierarchy and organize content into distinct sections.
 ///
 /// See:
-/// * https://forui.dev/docs/layout/divider for working examples.
+/// * https://forui.dev/docs/widgets/layout/divider for working examples.
 /// * [FDividerStyle] for customizing a divider's appearance.
 class FDivider extends StatelessWidget {
   /// The style.

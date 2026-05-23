@@ -18,7 +18,7 @@ part 'breadcrumb.design.dart';
 /// allowing navigation up to any of its ancestors.
 ///
 /// See:
-/// * https://forui.dev/docs/navigation/breadcrumb for working examples.
+/// * https://forui.dev/docs/widgets/navigation/breadcrumb for working examples.
 /// * [FBreadcrumbStyle] for customizing a breadcrumb's appearance.
 /// * [FBreadcrumbItem] for adding items to a breadcrumb.
 class FBreadcrumb extends StatelessWidget {

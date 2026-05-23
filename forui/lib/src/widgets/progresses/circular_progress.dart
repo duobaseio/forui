@@ -30,7 +30,7 @@ part 'circular_progress.design.dart';
 /// An indeterminate circular progress indicator.
 ///
 /// See:
-/// * https://forui.dev/docs/feedback/circular-progress for working examples.
+/// * https://forui.dev/docs/widgets/feedback/circular-progress for working examples.
 /// * [FCircularProgressStyle] for customizing a circular progress's appearance.
 /// * [FProgress] for for an indeterminate linear progress indicator.
 class FCircularProgress extends StatefulWidget {

@@ -2,7 +2,7 @@
 ///
 /// A specialized [FItem] for touch devices.
 ///
-/// See https://forui.dev/docs/tile/tile for working examples.
+/// See https://forui.dev/docs/widgets/tile/tile for working examples.
 library forui.widgets.tile;
 
 import 'package:forui/forui.dart';

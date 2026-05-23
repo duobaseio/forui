@@ -48,7 +48,7 @@ enum FPopoverHideRegion {
 /// `groupId` are treated as part of the same tap region.
 ///
 /// See:
-/// * https://forui.dev/docs/overlay/popover for working examples.
+/// * https://forui.dev/docs/widgets/overlay/popover for working examples.
 /// * [FPopoverController] for controlling a popover.
 /// * [FPopoverStyle] for customizing a popover's appearance.
 class FPopover extends StatefulWidget {

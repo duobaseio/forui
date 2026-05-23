@@ -14,7 +14,7 @@ part 'focused_outline.design.dart';
 /// An outline around a focused widget that does not affect its layout.
 ///
 /// See:
-/// * https://forui.dev/docs/foundation/focused-outline for working examples.
+/// * https://forui.dev/docs/widgets/foundation/focused-outline for working examples.
 /// * [FFocusedOutlineStyle] for customizing an outline.
 class FFocusedOutline extends SingleChildRenderObjectWidget {
   /// The style.

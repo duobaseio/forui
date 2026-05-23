@@ -2,7 +2,7 @@
 ///
 /// An item that is typically used to group related information together.
 ///
-/// See https://forui.dev/docs/data/item for working examples.
+/// See https://forui.dev/docs/widgets/data/item for working examples.
 library forui.widgets.item;
 
 export '../src/widgets/item/item.dart';

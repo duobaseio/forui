@@ -57,7 +57,7 @@ enum FLabelLayout {
 /// {@endtemplate}
 ///
 /// See:
-/// * https://forui.dev/docs/form/label for working examples.
+/// * https://forui.dev/docs/widgets/form/label for working examples.
 /// * [FLabelStyles] for customizing a label's appearance.
 class FLabel extends StatelessWidget {
   /// The label's style. Defaults to the appropriate style in [FThemeData.labelStyles].

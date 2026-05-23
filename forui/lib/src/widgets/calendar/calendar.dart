@@ -24,7 +24,7 @@ part 'calendar.design.dart';
 /// [DateTime]s outside [start] and [end] are unselectable regardless of the [FCalendarControl] used.
 ///
 /// See:
-/// * https://forui.dev/docs/calendar for working examples.
+/// * https://forui.dev/docs/widgets/data/calendar for working examples.
 /// * [FCalendarControl] for customizing a calendar's date selection behavior.
 /// * [FCalendarStyle] for customizing a calendar's appearance.
 class FCalendar extends StatefulWidget {

@@ -4,7 +4,7 @@ import 'package:flutter/painting.dart';
 /// An interface for computing the spacing between a widget and its portal.
 ///
 /// See:
-/// * [Visualization](http://forui.dev/docs/foundation/portal#visualization) for a visual demonstration of how the
+/// * [Visualization](https://forui.dev/docs/widgets/foundation/portal#visualization) for a visual demonstration of how the
 ///   spacing works.
 abstract interface class FPortalSpacing {
   /// A [FPortalSpacing] that does not apply any spacing.

@@ -15,7 +15,7 @@ import 'package:forui/src/widgets/tooltip/tooltip_controller.dart';
 /// A slider is a form field and therefore can be used within a [Form] widget.
 ///
 /// See:
-/// * https://forui.dev/docs/form/slider for working examples.
+/// * https://forui.dev/docs/widgets/form/slider for working examples.
 /// * [FSliderControl] for configuring a slider's behavior.
 /// * [FSliderStyles] for customizing a slider's appearance.
 class FSlider extends StatelessWidget with FFormFieldProperties<FSliderValue> {

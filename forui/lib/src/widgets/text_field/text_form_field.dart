@@ -16,7 +16,7 @@ import 'package:forui/src/widgets/text_field/text_field_control.dart';
 /// It lets the user enter text, either with a hardware keyboard or with an onscreen keyboard.
 ///
 /// See:
-/// * https://forui.dev/docs/form/text-form-field for working examples.
+/// * https://forui.dev/docs/widgets/form/text-form-field for working examples.
 /// * [FTextFieldStyle] for customizing a text field's appearance.
 /// * [FTextField] for creating a text field that can be used in a form.
 /// * [TextField] for more details about working with a text field.

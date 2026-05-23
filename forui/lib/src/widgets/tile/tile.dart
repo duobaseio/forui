@@ -44,7 +44,7 @@ part 'tile.design.dart';
 ///
 ///
 /// See:
-/// * https://forui.dev/docs/tile/tile for working examples.
+/// * https://forui.dev/docs/widgets/tile/tile for working examples.
 /// * [FItem] for a more generic item that can be used in any context.
 /// * [FTileGroup] for grouping tiles together.
 /// * [FTileStyle] for customizing a tile's appearance.

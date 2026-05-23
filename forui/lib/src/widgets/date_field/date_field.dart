@@ -41,7 +41,7 @@ typedef FDateFieldPopoverBuilder =
 /// dates are valid.
 ///
 /// See:
-/// * https://forui.dev/docs/form/date-field for working examples.
+/// * https://forui.dev/docs/widgets/form/date-field for working examples.
 /// * [FDateFieldController] for controlling a date field.
 /// * [FDateFieldCalendarProperties] for customizing a date field calendar's behavior.
 /// * [FDateFieldStyle] for customizing a date field's appearance.

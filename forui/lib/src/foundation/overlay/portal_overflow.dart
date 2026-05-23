@@ -12,7 +12,7 @@ typedef FPortalRect = ({Offset offset, Size size, Alignment anchor});
 /// An interface for computing how to shift a portal when it overflows out of the viewport.
 ///
 /// See:
-/// * [Visualization](http://forui.dev/docs/foundation/portal#visualization) for a visual demonstration of how the
+/// * [Visualization](https://forui.dev/docs/widgets/foundation/portal#visualization) for a visual demonstration of how the
 ///   overflow strategies work.
 abstract interface class FPortalOverflow {
   /// Flips the portal to the opposite side to avoid overflow, falling back to sliding along the edge if needed.

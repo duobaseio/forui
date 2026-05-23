@@ -7,7 +7,7 @@ import 'package:forui/src/foundation/debug.dart';
 /// A tile that represents a selection in a [FSelectTileGroup]. It should only be used in a [FSelectTileGroup].
 ///
 /// See:
-/// * https://forui.dev/docs/tile/select-tile-group for working examples.
+/// * https://forui.dev/docs/widgets/tile/select-tile-group for working examples.
 /// * [FSelectTileGroup] for grouping tiles together.
 /// * [FTileStyle] for customizing a select tile's appearance.
 class FSelectTile<T> extends StatelessWidget with FTileMixin {

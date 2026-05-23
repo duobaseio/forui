@@ -54,7 +54,7 @@ class TooltipGroupScope extends InheritedWidget {
 /// [FTheme] contains a tooltip group by default.
 ///
 /// See:
-/// * https://forui.dev/docs/overlay/tooltip for working examples.
+/// * https://forui.dev/docs/widgets/overlay/tooltip for working examples.
 /// * [FTooltip] for the tooltip.
 class FTooltipGroup extends StatefulWidget {
   /// The tooltip's style.

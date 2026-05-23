@@ -52,7 +52,7 @@ part 'dialog.design.dart';
 /// ```
 ///
 /// See:
-/// * https://forui.dev/docs/overlay/dialog for working examples.
+/// * https://forui.dev/docs/widgets/overlay/dialog for working examples.
 /// * [showAdaptiveDialog] for displaying a dialog with adaptive transitions depending on the platform.
 /// * [FDialogStyle] for customizing a switch's appearance.
 Future<T?> showFDialog<T>({
@@ -239,7 +239,7 @@ class FDialogRouteMotion with Diagnosticable, _$FDialogRouteMotionFunctions {
 /// * [showAdaptiveDialog] if you want to show a dialog with transitions.
 ///
 /// See:
-/// * https://forui.dev/docs/overlay/dialog for working examples.
+/// * https://forui.dev/docs/widgets/overlay/dialog for working examples.
 /// * [FDialogStyle] for customizing a dialog's appearance.
 class FDialog extends StatefulWidget {
   /// The dialog's style. Defaults to [FThemeData.dialogStyle].

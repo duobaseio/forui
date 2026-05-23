@@ -2,7 +2,7 @@
 ///
 /// A date field allows a date to be selected from a calendar or input field.
 ///
-/// See https://forui.dev/docs/form/date-field for working examples.
+/// See https://forui.dev/docs/widgets/form/date-field for working examples.
 library forui.widgets.date_field;
 
 export '../src/widgets/date_field/date_field.dart';

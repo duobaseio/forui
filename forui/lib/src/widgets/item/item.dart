@@ -44,7 +44,7 @@ part 'item.design.dart';
 /// {@macro forui.foundation.doc_templates.overlay}
 ///
 /// See:
-/// * https://forui.dev/docs/data/item for working examples.
+/// * https://forui.dev/docs/widgets/data/item for working examples.
 /// * [FTile] for a specialized item for touch devices.
 /// * [FItemStyle] for customizing an item's appearance.
 class FItem extends StatelessWidget with FItemMixin {

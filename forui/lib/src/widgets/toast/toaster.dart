@@ -29,7 +29,7 @@ import 'package:forui/src/widgets/toast/toaster_stack.dart';
 /// * [dismissThreshold] is not in the range `[0, 1]`.
 ///
 /// See:
-/// * https://forui.dev/docs/overlay/toast for working examples.
+/// * https://forui.dev/docs/widgets/overlay/toast for working examples.
 /// * [showFToast] for displaying a toast in a toaster.
 /// * [FToasterStyle] for customizing a toaster's appearance.
 /// * [FToastStyle] for customizing a toast's appearance.
@@ -108,7 +108,7 @@ FToasterEntry showFToast({
 /// * [dismissThreshold] is not in the range `[0, 1]`.
 ///
 /// See:
-/// * https://forui.dev/docs/overlay/toast for working examples.
+/// * https://forui.dev/docs/widgets/overlay/toast for working examples.
 /// * [showFToast] for displaying a toast in a toaster.
 /// * [FToasterStyle] for customizing a toaster's appearance.
 /// * [FToastStyle] for customizing a toast's appearance.
@@ -257,7 +257,7 @@ final class FToastAlignment {
 /// ```
 ///
 /// See:
-/// * https://forui.dev/docs/overlay/toaster for working examples.
+/// * https://forui.dev/docs/widgets/overlay/toast for working examples.
 /// * [showFToast] for displaying a toast in a toaster.
 /// * [showRawFToast] for displaying a raw toast in a toaster.
 /// * [FToasterStyle] for customizing a toaster's appearance.

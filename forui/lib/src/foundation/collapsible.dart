@@ -8,7 +8,7 @@ import 'package:flutter/widgets.dart';
 /// It is recommended to lerp between 0 and 1 to create a smooth animation.
 ///
 /// See:
-/// * https://forui.dev/docs/foundation/collapsible for working examples.
+/// * https://forui.dev/docs/widgets/foundation/collapsible for working examples.
 class FCollapsible extends StatelessWidget {
   /// The value of the collapsible.
   final double value;

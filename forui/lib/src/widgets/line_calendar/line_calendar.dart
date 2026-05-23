@@ -31,7 +31,7 @@ part 'line_calendar.design.dart';
 /// scroll wheel to scroll the list.
 ///
 /// See:
-/// * https://forui.dev/docs/data/line-calendar for working examples.
+/// * https://forui.dev/docs/widgets/data/line-calendar for working examples.
 /// * [FLineCalendarStyle] for customizing a line calendar's style.
 class FLineCalendar extends StatelessWidget {
   /// The default builder that returns the child as-is.

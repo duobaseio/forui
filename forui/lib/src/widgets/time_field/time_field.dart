@@ -48,7 +48,7 @@ typedef FTimeFieldPopoverBuilder =
 /// times are valid.
 ///
 /// See:
-/// * https://forui.dev/docs/form/time-field for working examples.
+/// * https://forui.dev/docs/widgets/form/time-field for working examples.
 /// * [FTimeFieldController] for controlling a time field.
 /// * [FTimeFieldStyle] for customizing a time field's appearance.
 abstract class FTimeField extends StatefulWidget {

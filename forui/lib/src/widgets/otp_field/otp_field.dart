@@ -56,6 +56,7 @@ class FOtpFieldScope extends InheritedWidget {
 /// ```
 ///
 /// See:
+/// * https://forui.dev/docs/widgets/form/otp-field for working examples.
 /// * [FOtpController] for customizing the behavior of an OTP field.
 /// * [FOtpFieldStyle] for customizing the appearance of an OTP field.
 class FOtpField extends StatefulWidget with FFormFieldProperties<String> {

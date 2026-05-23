@@ -15,7 +15,7 @@ part 'sidebar_item.design.dart';
 /// optional action, with support for selected and enabled states.
 ///
 /// See:
-/// * https://forui.dev/docs/navigation/sidebar for working examples.
+/// * https://forui.dev/docs/widgets/navigation/sidebar for working examples.
 /// * [FSidebarItemStyle] for customizing a sidebar item's appearance.
 class FSidebarItem extends StatefulWidget {
   /// The sidebar item's style.

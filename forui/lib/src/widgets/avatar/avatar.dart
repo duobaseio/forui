@@ -17,7 +17,7 @@ part 'avatar.design.dart';
 /// with [FAvatarStyle.backgroundColor].
 ///
 /// See:
-/// * https://forui.dev/docs/data/avatar for working examples.
+/// * https://forui.dev/docs/widgets/data/avatar for working examples.
 class FAvatar extends StatelessWidget {
   /// The style. Defaults to [FThemeData.avatarStyle].
   ///

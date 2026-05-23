@@ -2,7 +2,7 @@
 ///
 /// A text field.
 ///
-/// See https://forui.dev/docs/form/text-field for working examples.
+/// See https://forui.dev/docs/widgets/form/text-field for working examples.
 library forui.widgets.text_field;
 
 export '../src/widgets/text_field/obscure_text_control.dart' hide InternalFObscureTextControl;

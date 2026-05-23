@@ -14,7 +14,7 @@ part 'card.design.dart';
 /// Cards are typically used to group related information together.
 ///
 /// See:
-/// * https://forui.dev/docs/data/card for working examples.
+/// * https://forui.dev/docs/widgets/data/card for working examples.
 /// * [FCardStyle] for customizing a card's appearance.
 class FCard extends StatelessWidget {
   /// The style. Defaults to [FThemeData.cardStyle].

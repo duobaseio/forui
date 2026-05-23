@@ -67,7 +67,7 @@ part 'persistent_sheet.design.dart';
 /// ```
 ///
 /// See:
-/// * https://forui.dev/docs/overlay/persistent-sheet for working examples.
+/// * https://forui.dev/docs/widgets/overlay/persistent-sheet for working examples.
 /// * [showFSheet] for showing a sheet in a modal that prevents the user from interacting with the rest of the app.
 /// * [FSheetStyle] for customizing a switch's appearance.
 /// * [DraggableScrollableSheet], creates a bottom sheet that grows and then becomes scrollable once it reaches its
@@ -221,7 +221,7 @@ class FPersistentSheetController {
 /// interacting with the rest of the app.
 ///
 /// See:
-/// * https://forui.dev/docs/overlay/sheet for working examples.
+/// * https://forui.dev/docs/widgets/overlay/sheet for working examples.
 /// * [FSheetStyle] for customizing a switch's appearance.
 /// * [showFPersistentSheet] for for displaying a sheet above the current widget.
 /// * [showFSheet] for displaying a modal sheet.

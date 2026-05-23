@@ -13,7 +13,7 @@ part 'accordion.design.dart';
 /// A vertically stacked set of interactive headings, each revealing a section of content.
 ///
 /// See:
-/// * https://forui.dev/docs/data/accordion for working examples.
+/// * https://forui.dev/docs/widgets/data/accordion for working examples.
 /// * [FAccordionController] for customizing the accordion's behavior.
 /// * [FAccordionItem] for adding items to an accordion.
 /// * [FAccordionStyle] for customizing an accordion's appearance.

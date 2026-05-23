@@ -24,7 +24,7 @@ Widget defaultSelectMenuTileBuilder<T>(BuildContext _, Set<dynamic>? _, Widget? 
 /// {@macro forui.widgets.label.error_transition}
 ///
 /// See:
-/// * https://forui.dev/docs/tile/select-menu-tile for working examples.
+/// * https://forui.dev/docs/widgets/tile/select-menu-tile for working examples.
 /// * [FSelectTile] for a single select tile.
 /// * [FSelectMenuTileStyle] for customizing a select menu tile's appearance.
 class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldProperties<Set<T>> {

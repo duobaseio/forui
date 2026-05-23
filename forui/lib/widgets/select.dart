@@ -2,7 +2,7 @@
 ///
 /// Displays a list of options for the user to pick from.
 ///
-/// See https://forui.dev/docs/form/select for working examples.
+/// See https://forui.dev/docs/widgets/form/select for working examples.
 library forui.widgets.select;
 
 export '../src/widgets/select/content/inherited_controller.dart' hide InheritedSelectController;

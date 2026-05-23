@@ -25,7 +25,7 @@ part 'resizable.design.dart';
 /// It is recommended that a [FResizable] contains at least 2 [FResizableRegion]s.
 ///
 /// See:
-/// * https://forui.dev/docs/layout/resizable for working examples.
+/// * https://forui.dev/docs/widgets/layout/resizable for working examples.
 /// * [FResizableStyles] for customizing a resizable's appearance.
 class FResizable extends StatefulWidget {
   /// The default semantic label formatter that announces the extents of both regions.

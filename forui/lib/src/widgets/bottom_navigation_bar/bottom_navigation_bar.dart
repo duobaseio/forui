@@ -18,7 +18,7 @@ part 'bottom_navigation_bar.design.dart';
 /// number of views, typically between three and five.
 ///
 /// See:
-/// * https://forui.dev/docs/navigation/bottom-navigation-bar for working examples.
+/// * https://forui.dev/docs/widgets/navigation/bottom-navigation-bar for working examples.
 /// * [FBottomNavigationBarStyle] for customizing a bottom navigation bar's appearance.
 /// * [FBottomNavigationBarItem] for the items in a bottom navigation bar.
 class FBottomNavigationBar extends StatelessWidget {

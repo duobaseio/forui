@@ -32,7 +32,7 @@ part 'button.design.dart';
 /// {@macro forui.foundation.doc_templates.overlay}
 ///
 /// See:
-/// * https://forui.dev/docs/form/button for working examples.
+/// * https://forui.dev/docs/widgets/form/button for working examples.
 /// * [FButtonStyle] for customizing a button's appearance.
 class FButton extends StatelessWidget {
   /// The default [FButtonContentBuilder] which returns [child] unchanged.

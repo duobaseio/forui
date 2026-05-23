@@ -23,7 +23,7 @@ part 'tooltip.design.dart';
 /// callback.
 ///
 /// See:
-/// * https://forui.dev/docs/overlay/tooltip for working examples.
+/// * https://forui.dev/docs/widgets/overlay/tooltip for working examples.
 /// * [FTooltipController] for controlling a tooltip.
 /// * [FTooltipStyle] for customizing a tooltip's appearance.
 /// * [FTooltipGroup] for grouping tooltips together where subsequent tooltips appear instantly after the initial one.

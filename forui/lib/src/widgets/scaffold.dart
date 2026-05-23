@@ -34,7 +34,7 @@ part 'scaffold.design.dart';
 /// ```
 ///
 /// See:
-/// * https://forui.dev/docs/layout/scaffold for working examples.
+/// * https://forui.dev/docs/widgets/layout/scaffold for working examples.
 /// * [FScaffoldStyle] for customizing a scaffold's appearance.
 class FScaffold extends StatelessWidget {
   /// The style. Defaults to [FThemeData.scaffoldStyle].

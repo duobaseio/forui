@@ -5,15 +5,16 @@
     "concepts",
     "guides",
     "reference",
+    "!widgets",
     "...",
     "---Widgets---",
-    "layout",
-    "form",
-    "data",
-    "tile",
-    "navigation",
-    "feedback",
-    "overlay",
-    "foundation"
+    "widgets/layout",
+    "widgets/form",
+    "widgets/data",
+    "widgets/tile",
+    "widgets/navigation",
+    "widgets/feedback",
+    "widgets/overlay",
+    "widgets/foundation"
   ]
 }

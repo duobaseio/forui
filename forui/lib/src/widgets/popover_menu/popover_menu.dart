@@ -51,7 +51,7 @@ class PopoverMenuScope extends InheritedWidget {
 /// A popover menu displays a menu in a portal aligned to a child.
 ///
 /// See:
-/// * https://forui.dev/docs/overlay/popover-menu for working examples.
+/// * https://forui.dev/docs/widgets/overlay/popover-menu for working examples.
 /// * [FPopoverController] for controlling a popover menu.
 /// * [FPopoverMenuStyle] for customizing a popover menu's appearance.
 /// * [FTileGroup] for customizing the items in the menu.

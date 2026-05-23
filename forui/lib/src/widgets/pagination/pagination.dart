@@ -10,7 +10,7 @@ import 'package:forui/src/widgets/pagination/pagination_controller.dart';
 /// A pagination allows the user to select a specific page from a range of pages.
 ///
 /// See:
-/// * https://forui.dev/docs/navigation/pagination for working examples.
+/// * https://forui.dev/docs/widgets/navigation/pagination for working examples.
 /// * [FPaginationController] for customizing the pagination's behavior.
 /// * [FPaginationStyle] for customizing the pagination's appearance.
 class FPagination extends StatefulWidget {

@@ -6,7 +6,7 @@ part of 'header.dart';
 /// It is typically used on pages that are not at the root of the navigation stack.
 ///
 /// See:
-/// * https://forui.dev/docs/navigation/header for working examples.
+/// * https://forui.dev/docs/widgets/navigation/header for working examples.
 /// * [FHeaderStyle] for customizing a header's appearance.
 class _FNestedHeader extends FHeader {
   /// The style.

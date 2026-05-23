@@ -2,7 +2,7 @@
 ///
 /// An opinionated toast that temporarily displays a succinct message.
 ///
-/// See https://forui.dev/docs/overlay/toast for working examples.
+/// See https://forui.dev/docs/widgets/overlay/toast for working examples.
 library forui.widgets.toast;
 
 export '../src/widgets/toast/toaster.dart' hide ToasterEntry;

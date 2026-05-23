@@ -23,6 +23,7 @@ part 'date_time_picker.design.dart';
 /// * Left/Right arrows: Move between wheels
 ///
 /// See:
+/// * https://forui.dev/docs/widgets/form/date-time-picker for working examples.
 /// * [FDateTimePickerController] for controlling a date time picker.
 /// * [FDateTimePickerStyle] for customizing a date time picker's appearance.
 class FDateTimePicker extends StatefulWidget {

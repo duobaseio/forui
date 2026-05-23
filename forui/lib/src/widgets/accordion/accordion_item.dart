@@ -11,7 +11,7 @@ mixin FAccordionItemMixin on Widget {}
 /// An interactive heading that reveals a section of content.
 ///
 /// See:
-/// * https://forui.dev/docs/data/accordion for working examples.
+/// * https://forui.dev/docs/widgets/data/accordion for working examples.
 class FAccordionItem extends StatefulWidget with FAccordionItemMixin {
   /// The accordion's style. Defaults to the enclosing [FAccordion]'s style.
   ///

@@ -141,7 +141,7 @@ mixin FItemGroupMixin on Widget {
 ///
 ///
 /// See:
-/// * https://forui.dev/docs/data/item-group for working examples.
+/// * https://forui.dev/docs/widgets/data/item-group for working examples.
 /// * [FItemGroupStyle] for customizing a item group's appearance.
 class FItemGroup extends StatelessWidget with FItemGroupMixin {
   /// The style.

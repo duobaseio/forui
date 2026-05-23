@@ -10,7 +10,7 @@ part 'determinate_progress.design.dart';
 /// A determinate linear progress indicator.
 ///
 /// See:
-/// * https://forui.dev/docs/feedback/progress for working examples.
+/// * https://forui.dev/docs/widgets/feedback/progress for working examples.
 /// * [FDeterminateProgressStyle] for customizing a progress's appearance.
 /// * [FProgress] for for an indeterminate linear progress indicator.
 /// * [FCircularProgress] for for an indeterminate circular progress indicator.

@@ -27,7 +27,7 @@ part 'radio.design.dart';
 /// {@macro forui.widgets.label.error_transition}
 ///
 /// See:
-/// * https://forui.dev/docs/form/radio for working examples.
+/// * https://forui.dev/docs/widgets/form/radio for working examples.
 /// * [FRadioStyle] for customizing a radio's appearance.
 class FRadio extends StatelessWidget {
   /// The style. Defaults to [FThemeData.radioStyle].

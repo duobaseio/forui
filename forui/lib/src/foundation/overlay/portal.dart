@@ -17,7 +17,7 @@ import 'package:forui/src/foundation/overlay/overlay_controller.dart';
 /// * [FOverlay] for a lower-level overlay without built-in positioning and overflow handling.
 /// * [FPortalOverflow] for handling viewport overflow.
 /// * [OverlayPortalController] for controlling the portal's visibility.
-/// * [Visualization](http://forui.dev/docs/foundation/portal#visualization) for a visual demonstration of how
+/// * [Visualization](https://forui.dev/docs/widgets/foundation/portal#visualization) for a visual demonstration of how
 ///   portals work.
 class FPortal extends StatefulWidget {
   /// The control.

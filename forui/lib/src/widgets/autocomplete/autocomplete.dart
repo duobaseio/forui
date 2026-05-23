@@ -40,7 +40,7 @@ typedef FAutocompletePopoverBuilder =
 /// The autocomplete does not support using arrow keys to navigate the suggestions on web.
 ///
 /// See:
-/// * https://forui.dev/docs/form/autocomplete for working examples.
+/// * https://forui.dev/docs/widgets/form/autocomplete for working examples.
 /// * [FAutocompleteController] for customizing the behavior of an autocomplete.
 /// * [FAutocompleteStyle] for customizing the appearance of an autocomplete.
 class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {

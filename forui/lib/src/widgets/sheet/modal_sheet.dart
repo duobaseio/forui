@@ -62,7 +62,7 @@ part 'modal_sheet.design.dart';
 /// ```
 ///
 /// See:
-/// * https://forui.dev/docs/overlay/sheet for working examples.
+/// * https://forui.dev/docs/widgets/overlay/sheet for working examples.
 /// * [showFPersistentSheet] for displaying a sheet above the current widget.
 /// * [FModalSheetRoute] for more information about the various arguments.
 /// * [FSheetStyle] for customizing a switch's appearance.
@@ -122,7 +122,7 @@ Future<T?> showFSheet<T>({
 /// app without preventing the user from interacting with the app.
 ///
 /// See:
-/// * https://forui.dev/docs/overlay/sheet for working examples.
+/// * https://forui.dev/docs/widgets/overlay/sheet for working examples.
 /// * [FSheetStyle] for customizing a switch's appearance.
 /// * [showFSheet] for displaying a FModalSheetRoute.
 /// * [showFPersistentSheet] for displaying a sheet above the current widget.

@@ -5,7 +5,7 @@
 ///
 /// Recommended for touch devices.
 ///
-/// See https://forui.dev/docs/form/picker for working examples.
+/// See https://forui.dev/docs/widgets/form/picker for working examples.
 library forui.widgets.picker;
 
 export '../src/widgets/picker/picker.dart' hide PickerData;

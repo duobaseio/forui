@@ -17,6 +17,15 @@ const config = {
       fallback: [],
     };
   },
+  async redirects() {
+    return [
+      {
+        source: '/docs/:category(data|feedback|form|foundation|layout|navigation|overlay|tile)/:slug*',
+        destination: '/docs/widgets/:category/:slug*',
+        permanent: true,
+      },
+    ];
+  },
 };
 
 export default withMDX(config);

@@ -22,7 +22,7 @@ part 'time_picker.design.dart';
 /// * Left/Right arrows: Move between wheels
 ///
 /// See:
-/// * https://forui.dev/docs/form/time-picker for working examples.
+/// * https://forui.dev/docs/widgets/form/time-picker for working examples.
 /// * [FTimePickerController] for controlling a time picker.
 /// * [FTimePickerStyle] for customizing a time picker's appearance.
 class FTimePicker extends StatefulWidget {

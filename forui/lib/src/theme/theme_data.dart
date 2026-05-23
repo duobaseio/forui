@@ -1421,7 +1421,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// }
   /// ```
   ///
-  /// Alternatively, consider using the [CLI](forui.dev/docs/reference/cli).
+  /// Alternatively, consider using the [CLI](https://forui.dev/docs/reference/cli).
   @useResult
   FThemeData copyWith({
     String? debugLabel,

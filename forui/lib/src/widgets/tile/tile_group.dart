@@ -49,7 +49,7 @@ part 'tile_group.design.dart';
 ///
 ///
 /// See:
-/// * https://forui.dev/docs/tile/tile-group for working examples.
+/// * https://forui.dev/docs/widgets/tile/tile-group for working examples.
 /// * [FTileGroupStyle] for customizing a tile group's appearance.
 class FTileGroup extends StatelessWidget with FTileGroupMixin {
   /// The style.

@@ -73,7 +73,7 @@ class FSelectGroupItemData<T> extends InheritedWidget {
 /// {@macro forui.widgets.label.error_transition}
 ///
 /// See:
-/// * https://forui.dev/docs/form/select-group for working examples.
+/// * https://forui.dev/docs/widgets/form/select-group for working examples.
 /// * [FSelectGroupStyle] for customizing a select group's appearance.
 class FSelectGroup<T> extends StatefulWidget with FFormFieldProperties<Set<T>> {
   /// Defines how the select group's value is controlled.

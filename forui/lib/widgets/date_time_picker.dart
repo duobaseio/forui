@@ -4,7 +4,7 @@
 ///
 /// Recommended for touch devices.
 ///
-/// See https://forui.dev/docs/form/date-time-picker for working examples.
+/// See https://forui.dev/docs/widgets/form/date-time-picker for working examples.
 library forui.widgets.date_time_picker;
 
 export '../src/widgets/picker/date_time/date_time_picker.dart';

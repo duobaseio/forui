@@ -16,7 +16,7 @@ part 'alert.design.dart';
 /// Use alerts to communicate statuses, provide feedback, or convey important contextual information.
 ///
 /// See:
-/// * https://forui.dev/docs/feedback/alert for working examples.
+/// * https://forui.dev/docs/widgets/feedback/alert for working examples.
 /// * [FAlertStyle] for customizing an alert's appearance.
 class FAlert extends StatelessWidget {
   /// The variants used to resolve the style from [FAlertStyles].

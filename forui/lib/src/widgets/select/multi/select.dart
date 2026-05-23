@@ -49,7 +49,7 @@ typedef FMultiSelectTagBuilder<T> =
 /// `FMultiSelect`, `FSelectSection`, and `FSelectItem` (e.g., `FMultiSelect<MyType>`).
 ///
 /// See:
-/// * https://forui.dev/docs/form/multi-select for working examples.
+/// * https://forui.dev/docs/widgets/form/multi-select for working examples.
 /// * [FMultiValueNotifier] for customizing the behavior of a select.
 /// * [FMultiSelectStyle] for customizing the appearance of a select.
 abstract class FMultiSelect<T> extends StatefulWidget {

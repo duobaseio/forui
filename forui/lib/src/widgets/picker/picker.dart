@@ -17,7 +17,7 @@ import 'package:forui/src/widgets/picker/picker_controller.dart';
 /// * Left/Right arrows: Move between wheels
 ///
 /// See:
-/// * https://forui.dev/docs/form/picker for working examples.
+/// * https://forui.dev/docs/widgets/form/picker for working examples.
 /// * [FPickerController] for controlling a picker.
 /// * [FPickerWheel] for customizing a picker's individual wheel.
 /// * [FPickerStyle] for customizing a picker's appearance.

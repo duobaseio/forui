@@ -4,7 +4,7 @@
 ///
 /// Recommended for touch devices.
 ///
-/// See https://forui.dev/docs/form/time-picker for working examples.
+/// See https://forui.dev/docs/widgets/form/time-picker for working examples.
 library forui.widgets.time_picker;
 
 export '../src/widgets/picker/time/time_picker.dart';

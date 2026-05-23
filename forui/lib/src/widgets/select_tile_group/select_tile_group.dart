@@ -15,7 +15,7 @@ import 'package:forui/src/widgets/select_tile_group/select_tile.dart';
 /// For desktop, a [FSelectGroup] is generally recommended over this.
 ///
 /// See:
-/// * https://forui.dev/docs/tile/select-tile-group for working examples.
+/// * https://forui.dev/docs/widgets/tile/select-tile-group for working examples.
 /// * [FSelectTile] for a single select tile.
 /// * [FTileGroupStyle] for customizing a select group's appearance.
 class FSelectTileGroup<T> extends StatefulWidget with FTileGroupMixin, FFormFieldProperties<Set<T>> {
