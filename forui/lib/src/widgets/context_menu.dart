@@ -223,7 +223,7 @@ class FContextMenu extends StatefulWidget {
     this.useViewInsets = true,
     this.offset = .zero,
     this.groupId,
-    this.hideRegion = .anywhere,
+    this.hideRegion = .excludeChild,
     this.onTapHide,
     this.barrierSemanticsLabel,
     this.barrierSemanticsDismissible = true,

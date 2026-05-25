@@ -72,7 +72,7 @@ class FLocalizationsHy extends FLocalizations {
   String get autocompleteNoResults => 'Համընկնումներ չեն գտնվել.';
 
   @override
-  String get contextMenuSemanticsLabel => 'Համատեքdelays delays մdelays delays ';
+  String get contextMenuSemanticsLabel => 'Համատեկստային մենյու';
 
   @override
   String get dateFieldHint => 'Ընտրել ամսաթիվը';

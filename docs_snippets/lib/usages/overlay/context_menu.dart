@@ -20,7 +20,7 @@ final contextMenu = FContextMenu(
   cutout: false,
   cutoutBuilder: FModalBarrier.defaultCutoutBuilder,
   // {@endcategory}
-  // {@category "Tap Region""}
+  // {@category "Tap Region"}
   groupId: null,
   hideRegion: .excludeChild,
   onTapHide: () {},
