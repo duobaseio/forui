@@ -7,47 +7,63 @@ import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/overlay/composited_child.dart';
-import 'package:forui/src/foundation/overlay/composited_portal.dart';
+import 'package:forui/src/foundation/overlay/composited_point_portal.dart';
 import 'package:forui/src/foundation/overlay/layer.dart';
 import 'package:forui/src/foundation/overlay/overlay_controller.dart';
 
-/// A portal that "floats" on top of and relative to a [child] widget.
+/// A portal that "floats" on top of a child widget, anchored at a specific [point] within the child's local coordinate
+/// space.
+///
+/// Use this when the anchor is a single point such as a cursor location for a context menu, a glyph position for a
+/// tooltip, or a touch position. For bounds-anchored overlays, use [FPortal] instead.
 ///
 /// See:
-/// * https://forui.dev/docs/widgets/foundation/portal for working examples.
+/// * https://forui.dev/docs/widgets/foundation/point-portal for working examples.
 /// * [FOverlay] for an overlay without built-in positioning and overflow handling.
-/// * [FPointPortal] for a portal that anchors to a specific point within the child's coordinate space.
+/// * [FPortal] for a portal that anchors relative to the child's bounds.
 /// * [FPortalOverflow] for handling viewport overflow.
 /// * [OverlayPortalController] for controlling the portal's visibility.
-class FPortal extends StatefulWidget {
+class FPointPortal extends StatefulWidget {
   /// The control.
   final FOverlayControl control;
 
-  /// The portal's size constraints.
-  final FPortalConstraints constraints;
+  /// The portal's size constraints. Defaults to no constraints.
+  final BoxConstraints constraints;
 
-  /// The anchor point on the portal used for positioning relative to the [childAnchor].
-  ///
-  /// For example, with `portalAnchor: Alignment.topCenter` and `childAnchor: Alignment.bottomCenter`,
-  /// the portal's top edge will align with the child's bottom edge.
-  ///
-  /// Defaults to [Alignment.topCenter].
-  final AlignmentGeometry portalAnchor;
+  /// The point within the [child]'s local coordinate space at which to anchor the portal.
+  final Offset point;
 
-  /// The anchor point on the [child] used for positioning relative to the [portalAnchor].
+  /// The anchor point on the portal used for positioning relative to [point].
   ///
-  /// For example, with `childAnchor: Alignment.bottomCenter` and `portalAnchor: Alignment.topCenter`,
-  /// the child's bottom edge will align with the portal's top edge.
+  /// For example, with `anchor: Alignment.topLeft`, the portal's top-left corner lines up with [point].
   ///
-  /// Defaults to [Alignment.bottomCenter].
-  final AlignmentGeometry childAnchor;
+  /// ```diagram
+  ///   • point
+  ///    ┌────────┐
+  ///    │ portal │
+  ///    └────────┘
+  /// ```
+  ///
+  /// Defaults to [Alignment.topLeft].
+  final AlignmentGeometry anchor;
 
-  /// The spacing between the [portalAnchor] and [childAnchor].
+  /// The gap, in logical pixels, between [point] and the portal's [anchor].
+  ///
+  /// The direction is implied by [anchor]. For example, given a spacing of 4 and a [Alignment.topLeft] [anchor],
+  /// the portal will be positioned 4 pixels down and to the right of [point].
+  ///
+  /// ```diagram
+  ///   • point
+  ///     ↘ 4px
+  ///       ┌────────┐
+  ///       │ portal │
+  ///       └────────┘
+  /// ```
   ///
   /// Applied before [overflow].
   ///
-  /// Defaults to [FPortalSpacing.zero].
-  final FPortalSpacing spacing;
+  /// Defaults to `0`.
+  final double spacing;
 
   /// The callback used to shift a portal when it overflows out of the viewport.
   ///
@@ -64,33 +80,17 @@ class FPortal extends StatefulWidget {
   /// Defaults to [Offset.zero].
   final Offset offset;
 
-  /// {@template forui.foundation.FPortal.useViewPadding}
-  /// Whether to avoid the platform view's padding (static safe areas like the notch and status bar).
-  ///
-  /// ## Note
-  /// Values are read directly from the [View] rather than [MediaQuery] to ensure unconsumed safe area padding is used,
-  /// even when a parent widget (e.g. Material `Scaffold`) has already consumed the [MediaQuery] values.
-  /// {@endtemplate}
+  /// {@macro forui.foundation.FPortal.useViewPadding}
   ///
   /// Defaults to true.
   final bool useViewPadding;
 
-  /// {@template forui.foundation.FPortal.useViewInsets}
-  /// Whether to avoid the platform view's insets (the soft keyboard).
-  ///
-  /// ## Note
-  /// Values are read directly from the [View] rather than [MediaQuery] to ensure unconsumed inset values are used,
-  /// even when a parent widget (e.g. Material `Scaffold`) has already consumed the [MediaQuery] values.
-  /// {@endtemplate}
+  /// {@macro forui.foundation.FPortal.useViewInsets}
   ///
   /// Defaults to true.
   final bool useViewInsets;
 
-  /// {@template forui.foundation.FPortal.padding}
-  /// The additional padding between the edges of the view and the edges of the portal.
-  ///
-  /// This is applied on top of any padding from [useViewPadding] and [useViewInsets].
-  /// {@endtemplate}
+  /// {@macro forui.foundation.FPortal.padding}
   ///
   /// Defaults to [EdgeInsets.zero].
   final EdgeInsetsGeometry padding;
@@ -104,20 +104,20 @@ class FPortal extends StatefulWidget {
   /// {@macro forui.foundation.overlay.builder}
   final ValueWidgetBuilder<OverlayPortalController> builder;
 
-  /// The child which the portal is aligned to.
+  /// The child which the portal is anchored within.
   final Widget? child;
 
-  /// Creates a portal.
+  /// Creates a point-anchored portal.
   ///
   /// ## Contract
   /// Throws [AssertionError] if [builder] and [child] are both null.
-  const FPortal({
+  const FPointPortal({
     required this.portalBuilder,
+    required this.point,
     this.control = const .managed(),
-    this.constraints = const FPortalConstraints(),
-    this.portalAnchor = .topCenter,
-    this.childAnchor = .bottomCenter,
-    this.spacing = .zero,
+    this.constraints = const BoxConstraints(),
+    this.anchor = .topLeft,
+    this.spacing = 0,
     this.overflow = .flip,
     this.offset = .zero,
     this.useViewPadding = true,
@@ -130,7 +130,7 @@ class FPortal extends StatefulWidget {
   }) : assert(builder != FOverlay.defaultBuilder || child != null, 'Either builder or child must be provided');
 
   @override
-  State<FPortal> createState() => _State();
+  State<FPointPortal> createState() => _State();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -138,9 +138,9 @@ class FPortal extends StatefulWidget {
     properties
       ..add(DiagnosticsProperty('control', control))
       ..add(DiagnosticsProperty('constraints', constraints))
-      ..add(DiagnosticsProperty('portalAnchor', portalAnchor))
-      ..add(DiagnosticsProperty('childAnchor', childAnchor))
-      ..add(DiagnosticsProperty('spacing', spacing))
+      ..add(DiagnosticsProperty('point', point))
+      ..add(DiagnosticsProperty('anchor', anchor))
+      ..add(DoubleProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('overflow', overflow))
       ..add(DiagnosticsProperty('offset', offset))
       ..add(FlagProperty('useViewPadding', value: useViewPadding, ifTrue: 'using view padding'))
@@ -152,7 +152,7 @@ class FPortal extends StatefulWidget {
   }
 }
 
-class _State extends State<FPortal> {
+class _State extends State<FPointPortal> {
   final _notifier = FChangeNotifier();
   final _link = ChildLayerLink();
   late OverlayPortalController _controller;
@@ -164,7 +164,7 @@ class _State extends State<FPortal> {
   }
 
   @override
-  void didUpdateWidget(covariant FPortal old) {
+  void didUpdateWidget(covariant FPointPortal old) {
     super.didUpdateWidget(old);
     _controller = widget.control.update(old.control, _controller).$1;
   }
@@ -177,8 +177,6 @@ class _State extends State<FPortal> {
       controller: _controller,
       overlayChildBuilder: (context) {
         final direction = Directionality.maybeOf(context) ?? .ltr;
-        final portalAnchor = widget.portalAnchor.resolve(direction);
-        final childAnchor = widget.childAnchor.resolve(direction);
 
         final view = View.of(context);
         final EdgeInsets padding = widget.useViewPadding
@@ -190,12 +188,12 @@ class _State extends State<FPortal> {
         // is being built.
         final insets = widget.useViewInsets ? MediaQuery.viewInsetsOf(context) : EdgeInsets.zero;
 
-        Widget portal = CompositedPortal(
+        Widget portal = CompositedPointPortal(
           notifier: _notifier,
           link: _link,
           constraints: widget.constraints,
-          portalAnchor: portalAnchor,
-          childAnchor: childAnchor,
+          anchor: widget.anchor.resolve(direction),
+          point: widget.point,
           padding:
               EdgeInsets.only(
                 left: math.max(padding.left, insets.left),
@@ -204,7 +202,7 @@ class _State extends State<FPortal> {
                 bottom: math.max(padding.bottom, insets.bottom),
               ) +
               widget.padding.resolve(direction),
-          spacing: widget.spacing(childAnchor, portalAnchor),
+          spacing: widget.spacing,
           overflow: widget.overflow,
           offset: widget.offset,
           child: widget.portalBuilder(context, _controller),

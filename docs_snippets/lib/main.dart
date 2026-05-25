@@ -201,6 +201,7 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/foundation/collapsible/default', page: CollapsibleRoute.page),
     AutoRoute(path: '/foundation/focused-outline/default', page: FocusedOutlineRoute.page),
     AutoRoute(path: '/foundation/overlay/default', page: OverlayRoute.page),
+    AutoRoute(path: '/foundation/point-portal/default', page: PointPortalRoute.page),
     AutoRoute(path: '/foundation/portal/default', page: PortalRoute.page),
     AutoRoute(path: '/foundation/portal-visualization/default', page: PortalVisualizationRoute.page),
     AutoRoute(path: '/foundation/tappable/default', page: TappableRoute.page),

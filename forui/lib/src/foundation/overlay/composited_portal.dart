@@ -148,7 +148,7 @@ class RenderPortalLayer extends RenderOverlayLayer {
   }
 
   @override
-  Offset onPaint(PaintingContext context, Offset offset) {
+  Offset onPaint(PaintingContext _, Offset _) {
     assert(
       link.childSize != null || link.childLayer == null || childAnchor == .topLeft,
       '$link: layer is linked to ${link.childLayer} but a valid childSize is not set. '
@@ -156,12 +156,12 @@ class RenderPortalLayer extends RenderOverlayLayer {
       '(current value is $childAnchor).',
     );
 
-    return this.offset +
+    return offset +
         switch ((link.childRenderBox?.localToGlobal(.zero), link.childSize, child)) {
           (final childOffset?, final childSize?, final portal?) => overflow(
             // There is NO guarantee that this render box's size is the window's size. Always use viewSize.
             // It's okay to use viewSize even though it's larger than the render box's size as we override paintBounds.
-            Size(viewSize.width - (padding.left + padding.right), viewSize.height - (padding.top + padding.bottom)),
+            Size(viewSize.width - padding.horizontal, viewSize.height - padding.vertical),
             (
               offset: Offset(childOffset.dx - padding.left, childOffset.dy - padding.top),
               size: childSize,
