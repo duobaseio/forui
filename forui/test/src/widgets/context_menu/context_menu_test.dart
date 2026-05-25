@@ -14,24 +14,24 @@ Widget _contextMenu({
   bool? longPress,
   bool? secondaryPress,
   List<FItemGroupMixin>? menu,
-}) =>
-    TestScaffold.app(
-      child: FContextMenu(
-        hideRegion: hideRegion,
-        longPress: longPress,
-        secondaryPress: secondaryPress,
-        menu: menu ??
-            [
-              FItemGroup(
-                children: [
-                  FItem(title: const Text('Cut'), onPress: () {}),
-                  FItem(title: const Text('Copy'), onPress: () {}),
-                ],
-              ),
+}) => TestScaffold.app(
+  child: FContextMenu(
+    hideRegion: hideRegion,
+    longPress: longPress,
+    secondaryPress: secondaryPress,
+    menu:
+        menu ??
+        [
+          FItemGroup(
+            children: [
+              FItem(title: const Text('Cut'), onPress: () {}),
+              FItem(title: const Text('Copy'), onPress: () {}),
             ],
-        child: const ColoredBox(key: _childKey, color: Colors.yellow, child: SizedBox.square(dimension: 200)),
-      ),
-    );
+          ),
+        ],
+    child: const ColoredBox(key: _childKey, color: Colors.yellow, child: SizedBox.square(dimension: 200)),
+  ),
+);
 
 Widget _contextMenuWithSubmenu({VoidCallback? onSubmenuItemPress}) => TestScaffold.app(
   child: FContextMenu(
@@ -119,7 +119,9 @@ void main() {
             useViewPadding: false,
             useViewInsets: false,
             menu: [
-              FItemGroup(children: [FItem(title: const Text('Cut'), onPress: () {})]),
+              FItemGroup(
+                children: [FItem(title: const Text('Cut'), onPress: () {})],
+              ),
             ],
             child: const ColoredBox(key: _childKey, color: Colors.yellow, child: SizedBox.square(dimension: 400)),
           ),
@@ -148,9 +150,7 @@ void main() {
             autofocus: true,
             menu: [
               FItemGroup(
-                children: [
-                  FItem(title: const Text('Cut'), onPress: () {}),
-                ],
+                children: [FItem(title: const Text('Cut'), onPress: () {})],
               ),
             ],
             child: const ColoredBox(key: _childKey, color: Colors.yellow, child: SizedBox.square(dimension: 200)),

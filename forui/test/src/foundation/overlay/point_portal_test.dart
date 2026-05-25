@@ -40,5 +40,4 @@ void main() {
 
     expect(taps, 1);
   });
-
 }

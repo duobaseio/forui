@@ -138,8 +138,7 @@ void main() {
             child: FPointPortal(
               point: point,
               control: .managed(controller: controller),
-              portalBuilder: (context, _) =>
-                  const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 80)),
+              portalBuilder: (context, _) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 80)),
               child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 200)),
             ),
           ),
@@ -163,8 +162,7 @@ void main() {
             builder: (_, value, _) => FPointPortal(
               point: value,
               control: .managed(controller: controller),
-              portalBuilder: (context, _) =>
-                  const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 80)),
+              portalBuilder: (context, _) => const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 80)),
               child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 200)),
             ),
           ),
