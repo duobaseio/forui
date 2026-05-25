@@ -72,6 +72,9 @@ class FLocalizationsTe extends FLocalizations {
   String get autocompleteNoResults => 'సరిపోలినవి ఏవీ కనుగొనబడలేదు.';
 
   @override
+  String get contextMenuSemanticsLabel => 'సందర్భ మెనూ';
+
+  @override
   String get dateFieldHint => 'తేదీని ఎంచుకోండి';
 
   @override

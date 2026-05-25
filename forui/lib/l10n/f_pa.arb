@@ -29,5 +29,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "ਪਾਸਵਰਡ ਦਿਖਾਓ",
   "textFieldEmailLabel": "ਈਮੇਲ",
   "passwordFieldLabel": "ਪਾਸਵਰਡ",
-  "dateTimePickerToday": "ਅੱਜ"
+  "dateTimePickerToday": "ਅੱਜ",
+  "contextMenuSemanticsLabel": "ਸੰਦਰਭ ਮੀਨੂ"
 }

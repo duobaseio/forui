@@ -72,6 +72,9 @@ class FLocalizationsMn extends FLocalizations {
   String get autocompleteNoResults => 'Тохирох зүйл олдсонгүй.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Контекст цэс';
+
+  @override
   String get dateFieldHint => 'Огноо сонгох';
 
   @override

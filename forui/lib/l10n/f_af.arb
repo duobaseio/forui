@@ -29,5 +29,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Wys wagwoord",
   "textFieldEmailLabel": "E-pos",
   "passwordFieldLabel": "Wagwoord",
-  "dateTimePickerToday": "Vandag"
+  "dateTimePickerToday": "Vandag",
+  "contextMenuSemanticsLabel": "Kontekskieslys"
 }

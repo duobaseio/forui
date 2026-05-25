@@ -238,6 +238,9 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/navigation/tabs/swipeable', page: SwipeableTabsRoute.page),
 
     // Overlay
+    AutoRoute(path: '/overlay/context-menu/default', page: ContextMenuRoute.page),
+    AutoRoute(path: '/overlay/context-menu/nested', page: NestedContextMenuRoute.page),
+    AutoRoute(path: '/overlay/context-menu/tiles', page: TileContextMenuRoute.page),
     AutoRoute(path: '/overlay/dialog/default', page: DialogRoute.page),
     AutoRoute(path: '/overlay/dialog/vertical', page: VerticalDialogRoute.page),
     AutoRoute(path: '/overlay/dialog/blurred', page: BlurredDialogRoute.page),

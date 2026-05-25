@@ -29,5 +29,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Rādīt paroli",
   "textFieldEmailLabel": "E-pasts",
   "passwordFieldLabel": "Parole",
-  "dateTimePickerToday": "Šodien"
+  "dateTimePickerToday": "Šodien",
+  "contextMenuSemanticsLabel": "Konteksta izvēlne"
 }

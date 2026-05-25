@@ -29,5 +29,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Jelszó megjelenítése",
   "textFieldEmailLabel": "E-mail",
   "passwordFieldLabel": "Jelszó",
-  "dateTimePickerToday": "Ma"
+  "dateTimePickerToday": "Ma",
+  "contextMenuSemanticsLabel": "Helyi menü"
 }

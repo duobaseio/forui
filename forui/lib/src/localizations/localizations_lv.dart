@@ -72,6 +72,9 @@ class FLocalizationsLv extends FLocalizations {
   String get autocompleteNoResults => 'Nav atrasts neviens atbilstošs rezultāts.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Konteksta izvēlne';
+
+  @override
   String get dateFieldHint => 'Atlasīt datumu';
 
   @override

@@ -1,0 +1,62 @@
+---
+title: Context Menu
+description: A context menu displays a menu at the user's pointer.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.context_menu/
+---
+
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/context-menu/default.json';
+import nestedSnippet from '@/snippets/examples/context-menu/nested.json';
+import tilesSnippet from '@/snippets/examples/context-menu/tiles.json';
+import contextMenuUsage from '@/snippets/usages/widgets/context_menu/contextMenu.json';
+import contextMenuTilesUsage from '@/snippets/usages/widgets/context_menu/contextMenuTiles.json';
+
+<Callout type="info">
+  On web, call [`BrowserContextMenu.disableContextMenu()`](https://api.flutter.dev/flutter/services/BrowserContextMenu/disableContextMenu.html)
+  to prevent the browser's native context menu from appearing.
+</Callout>
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='context-menu' height={500}/>
+  </Tab>
+  <Tab value="Code">
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## Usage
+
+### `FContextMenu(...)`
+<UsageSnippet usage={contextMenuUsage} />
+
+### `FContextMenu.tiles(...)`
+<UsageSnippet usage={contextMenuTilesUsage} />
+
+## Examples
+
+### Nested Submenu
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='context-menu' variant='nested' height={500}/>
+  </Tab>
+  <Tab value="Code">
+    <CodeSnippet snippet={nestedSnippet} />
+  </Tab>
+</Tabs>
+
+### Tiles
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='context-menu' variant='tiles' height={500}/>
+  </Tab>
+  <Tab value="Code">
+    <CodeSnippet snippet={tilesSnippet} />
+  </Tab>
+</Tabs>

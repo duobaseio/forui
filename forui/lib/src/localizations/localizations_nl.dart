@@ -72,6 +72,9 @@ class FLocalizationsNl extends FLocalizations {
   String get autocompleteNoResults => 'Geen overeenkomsten gevonden.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Contextmenu';
+
+  @override
   String get dateFieldHint => 'Datum selecteren';
 
   @override

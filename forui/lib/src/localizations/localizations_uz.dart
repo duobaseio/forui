@@ -72,6 +72,9 @@ class FLocalizationsUz extends FLocalizations {
   String get autocompleteNoResults => 'Hech qanday moslik topilmadi.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Kontekst menyusi';
+
+  @override
   String get dateFieldHint => 'Sanani tanlang';
 
   @override

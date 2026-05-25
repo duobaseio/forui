@@ -29,5 +29,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Parolu göstər",
   "textFieldEmailLabel": "E-poçt",
   "passwordFieldLabel": "Parol",
-  "dateTimePickerToday": "Bu gün"
+  "dateTimePickerToday": "Bu gün",
+  "contextMenuSemanticsLabel": "Kontekst menyusu"
 }

@@ -29,5 +29,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "顯示密碼",
   "textFieldEmailLabel": "電子郵件",
   "passwordFieldLabel": "密碼",
-  "dateTimePickerToday": "今天"
+  "dateTimePickerToday": "今天",
+  "contextMenuSemanticsLabel": "快捷選單"
 }

@@ -29,5 +29,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Wachtwoord tonen",
   "textFieldEmailLabel": "E-mail",
   "passwordFieldLabel": "Wachtwoord",
-  "dateTimePickerToday": "Vandaag"
+  "dateTimePickerToday": "Vandaag",
+  "contextMenuSemanticsLabel": "Contextmenu"
 }

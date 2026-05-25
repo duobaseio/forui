@@ -72,6 +72,9 @@ class FLocalizationsAz extends FLocalizations {
   String get autocompleteNoResults => 'Heç bir uyğunluq tapılmadı.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Kontekst menyusu';
+
+  @override
   String get dateFieldHint => 'Tarix seçin';
 
   @override

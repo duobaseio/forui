@@ -72,6 +72,9 @@ class FLocalizationsSv extends FLocalizations {
   String get autocompleteNoResults => 'Inga träffar hittades.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Kontextmeny';
+
+  @override
   String get dateFieldHint => 'Välj datum';
 
   @override

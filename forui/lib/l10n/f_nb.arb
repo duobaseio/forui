@@ -29,5 +29,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Vis passord",
   "textFieldEmailLabel": "E-post",
   "passwordFieldLabel": "Passord",
-  "dateTimePickerToday": "I dag"
+  "dateTimePickerToday": "I dag",
+  "contextMenuSemanticsLabel": "Kontekstmeny"
 }

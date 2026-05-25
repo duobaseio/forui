@@ -28,5 +28,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "ສະແດງລະຫັດຜ່ານ",
   "textFieldEmailLabel": "ອີເມວ",
   "passwordFieldLabel": "ລະຫັດຜ່ານ",
-  "dateTimePickerToday": "ມື້ນີ້"
+  "dateTimePickerToday": "ມື້ນີ້",
+  "contextMenuSemanticsLabel": "ເມນູບໍລິບົດ"
 }

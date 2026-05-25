@@ -72,6 +72,9 @@ class FLocalizationsDa extends FLocalizations {
   String get autocompleteNoResults => 'Ingen resultater fundet.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Kontekstmenu';
+
+  @override
   String get dateFieldHint => 'Vælg en dato';
 
   @override

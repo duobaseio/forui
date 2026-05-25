@@ -29,5 +29,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Näita parooli",
   "textFieldEmailLabel": "E-post",
   "passwordFieldLabel": "Parool",
-  "dateTimePickerToday": "Täna"
+  "dateTimePickerToday": "Täna",
+  "contextMenuSemanticsLabel": "Kontekstimenüü"
 }

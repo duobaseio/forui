@@ -429,11 +429,11 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
         constraints: widget.constraints,
         portalAnchor: popoverAnchor,
         childAnchor: childAnchor,
-        useViewPadding: widget.useViewPadding,
-        useViewInsets: widget.useViewInsets,
         padding: style.popoverPadding,
         spacing: widget.spacing,
         overflow: widget.overflow,
+        useViewPadding: widget.useViewPadding,
+        useViewInsets: widget.useViewInsets,
         offset: widget.offset,
         barrier: style.barrierFilter == null
             ? null

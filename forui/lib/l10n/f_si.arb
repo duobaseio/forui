@@ -28,5 +28,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "මුරපදය පෙන්වන්න",
   "textFieldEmailLabel": "විද්‍යුත් තැපෑල",
   "passwordFieldLabel": "මුරපදය",
-  "dateTimePickerToday": "අද"
+  "dateTimePickerToday": "අද",
+  "contextMenuSemanticsLabel": "සන්දර්භ මෙනුව"
 }

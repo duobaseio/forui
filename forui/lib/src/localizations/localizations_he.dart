@@ -72,6 +72,9 @@ class FLocalizationsHe extends FLocalizations {
   String get autocompleteNoResults => 'לא נמצאו התאמות.';
 
   @override
+  String get contextMenuSemanticsLabel => 'תפריט הקשר';
+
+  @override
   String get dateFieldHint => 'בחירת תאריך';
 
   @override

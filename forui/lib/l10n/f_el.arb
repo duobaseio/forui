@@ -28,5 +28,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Εμφάνιση κωδικού",
   "textFieldEmailLabel": "Email",
   "passwordFieldLabel": "Κωδικός πρόσβασης",
-  "dateTimePickerToday": "Σήμερα"
+  "dateTimePickerToday": "Σήμερα",
+  "contextMenuSemanticsLabel": "Μενού περιβάλλοντος"
 }

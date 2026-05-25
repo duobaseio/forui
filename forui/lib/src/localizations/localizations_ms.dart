@@ -72,6 +72,9 @@ class FLocalizationsMs extends FLocalizations {
   String get autocompleteNoResults => 'Tiada padanan ditemui.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Menu konteks';
+
+  @override
   String get dateFieldHint => 'Pilih tarikh';
 
   @override

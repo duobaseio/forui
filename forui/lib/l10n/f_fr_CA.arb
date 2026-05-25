@@ -29,5 +29,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Afficher le mot de passe",
   "textFieldEmailLabel": "Courriel",
   "passwordFieldLabel": "Mot de passe",
-  "dateTimePickerToday": "Aujourd'hui"
+  "dateTimePickerToday": "Aujourd'hui",
+  "contextMenuSemanticsLabel": "Menu contextuel"
 }

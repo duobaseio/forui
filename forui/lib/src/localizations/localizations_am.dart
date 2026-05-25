@@ -72,6 +72,9 @@ class FLocalizationsAm extends FLocalizations {
   String get autocompleteNoResults => 'ማንኛውም ውጤት አልተገኘም.';
 
   @override
+  String get contextMenuSemanticsLabel => 'የአውድ ምናሌ';
+
+  @override
   String get dateFieldHint => 'ቀን ይምረጡ';
 
   @override

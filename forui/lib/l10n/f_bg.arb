@@ -28,5 +28,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Покажи парола",
   "textFieldEmailLabel": "Имейл",
   "passwordFieldLabel": "Парола",
-  "dateTimePickerToday": "Днес"
+  "dateTimePickerToday": "Днес",
+  "contextMenuSemanticsLabel": "Контекстно меню"
 }

@@ -29,5 +29,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "แสดงรหัสผ่าน",
   "textFieldEmailLabel": "อีเมล",
   "passwordFieldLabel": "รหัสผ่าน",
-  "dateTimePickerToday": "วันนี้"
+  "dateTimePickerToday": "วันนี้",
+  "contextMenuSemanticsLabel": "เมนูบริบท"
 }

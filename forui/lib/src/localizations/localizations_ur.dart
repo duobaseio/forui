@@ -72,6 +72,9 @@ class FLocalizationsUr extends FLocalizations {
   String get autocompleteNoResults => 'کوئی میچ نہیں ملا.';
 
   @override
+  String get contextMenuSemanticsLabel => 'سیاق و سباق مینو';
+
+  @override
   String get dateFieldHint => 'تاریخ منتخب کریں';
 
   @override

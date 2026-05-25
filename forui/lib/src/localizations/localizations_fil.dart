@@ -72,6 +72,9 @@ class FLocalizationsFil extends FLocalizations {
   String get autocompleteNoResults => 'Walang nahanap na tugma.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Menu ng konteksto';
+
+  @override
   String get dateFieldHint => 'Pumili ng petsa';
 
   @override

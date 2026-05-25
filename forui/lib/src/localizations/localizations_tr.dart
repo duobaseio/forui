@@ -72,6 +72,9 @@ class FLocalizationsTr extends FLocalizations {
   String get autocompleteNoResults => 'Eşleşme bulunamadı.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Bağlam menüsü';
+
+  @override
   String get dateFieldHint => 'Tarih seçin';
 
   @override

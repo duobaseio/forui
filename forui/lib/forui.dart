@@ -17,6 +17,7 @@ export 'widgets/button.dart';
 export 'widgets/calendar.dart';
 export 'widgets/card.dart';
 export 'widgets/checkbox.dart';
+export 'widgets/context_menu.dart';
 export 'widgets/date_field.dart';
 export 'widgets/date_time_picker.dart';
 export 'widgets/dialog.dart';

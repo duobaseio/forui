@@ -28,5 +28,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "పాస్‌వర్డ్ చూపించు",
   "textFieldEmailLabel": "ఇమెయిల్",
   "passwordFieldLabel": "పాస్‌వర్డ్",
-  "dateTimePickerToday": "ఈ రోజు"
+  "dateTimePickerToday": "ఈ రోజు",
+  "contextMenuSemanticsLabel": "సందర్భ మెనూ"
 }

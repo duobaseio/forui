@@ -28,5 +28,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "הראה סיסמה",
   "textFieldEmailLabel": "דוא״ל",
   "passwordFieldLabel": "סיסמה",
-  "dateTimePickerToday": "היום"
+  "dateTimePickerToday": "היום",
+  "contextMenuSemanticsLabel": "תפריט הקשר"
 }

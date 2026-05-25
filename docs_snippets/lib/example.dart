@@ -71,6 +71,7 @@ abstract class StatefulExample extends StatefulWidget {
 abstract class StatefulExampleState<T extends StatefulExample> extends State<T> {
   @override
   Widget build(BuildContext context) => FTheme(
+    platform: .macOS,
     data: widget.theme,
     child: FScaffold(
       child: Align(

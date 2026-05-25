@@ -72,6 +72,9 @@ class FLocalizationsMy extends FLocalizations {
   String get autocompleteNoResults => 'ကိုက်ညီသောရလဒ်များ မတွေ့ရှိပါ.';
 
   @override
+  String get contextMenuSemanticsLabel => 'ဆက်စပ်မီနူး';
+
+  @override
   String get dateFieldHint => 'ရက်စွဲ ရွေးပါ';
 
   @override

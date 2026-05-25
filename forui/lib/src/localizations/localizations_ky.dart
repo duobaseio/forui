@@ -72,6 +72,9 @@ class FLocalizationsKy extends FLocalizations {
   String get autocompleteNoResults => 'Эч кандай дал келүү табылган жок.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Контексттик меню';
+
+  @override
   String get dateFieldHint => 'Күндү тандоо';
 
   @override

@@ -72,6 +72,9 @@ class FLocalizationsPt extends FLocalizations {
   String get autocompleteNoResults => 'Nenhuma correspondência encontrada.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Menu de contexto';
+
+  @override
   String get dateFieldHint => 'Selecionar data';
 
   @override
@@ -167,6 +170,9 @@ class FLocalizationsPtPt extends FLocalizationsPt {
 
   @override
   String get autocompleteNoResults => 'Nenhuma correspondência encontrada.';
+
+  @override
+  String get contextMenuSemanticsLabel => 'Menu de contexto';
 
   @override
   String get dateFieldHint => 'Selecionar data';

@@ -72,6 +72,9 @@ class FLocalizationsKn extends FLocalizations {
   String get autocompleteNoResults => 'ಯಾವುದೇ ಹೊಂದಾಣಿಕೆ ಕಂಡುಬಂದಿಲ್ಲ.';
 
   @override
+  String get contextMenuSemanticsLabel => 'ಸಂದರ್ಭ ಮೆನು';
+
+  @override
   String get dateFieldHint => 'ದಿನಾಂಕವನ್ನು ಆಯ್ಕೆಮಾಡಿ';
 
   @override

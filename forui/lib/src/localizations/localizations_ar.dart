@@ -72,6 +72,9 @@ class FLocalizationsAr extends FLocalizations {
   String get autocompleteNoResults => 'لم يتم العثور على أي تطابقات.';
 
   @override
+  String get contextMenuSemanticsLabel => 'قائمة السياق';
+
+  @override
   String get dateFieldHint => 'اختر تاريخًا';
 
   @override

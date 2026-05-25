@@ -29,5 +29,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Sýna lykilorð",
   "textFieldEmailLabel": "Netfang",
   "passwordFieldLabel": "Lykilorð",
-  "dateTimePickerToday": "Í dag"
+  "dateTimePickerToday": "Í dag",
+  "contextMenuSemanticsLabel": "Samhengisvalmynd"
 }

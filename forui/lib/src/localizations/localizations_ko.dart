@@ -72,6 +72,9 @@ class FLocalizationsKo extends FLocalizations {
   String get autocompleteNoResults => '일치하는 항목이 없습니다.';
 
   @override
+  String get contextMenuSemanticsLabel => '컨텍스트 메뉴';
+
+  @override
   String get dateFieldHint => '날짜 선택';
 
   @override

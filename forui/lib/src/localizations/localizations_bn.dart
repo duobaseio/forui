@@ -72,6 +72,9 @@ class FLocalizationsBn extends FLocalizations {
   String get autocompleteNoResults => 'কোনো মিল পাওয়া যায়নি.';
 
   @override
+  String get contextMenuSemanticsLabel => 'প্রসঙ্গ মেনু';
+
+  @override
   String get dateFieldHint => 'তারিখ বেছে নিন';
 
   @override

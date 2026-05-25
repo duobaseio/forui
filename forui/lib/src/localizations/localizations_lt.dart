@@ -72,6 +72,9 @@ class FLocalizationsLt extends FLocalizations {
   String get autocompleteNoResults => 'Nerasta atitikmenų.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Kontekstinis meniu';
+
+  @override
   String get dateFieldHint => 'Pasirinkti datą';
 
   @override

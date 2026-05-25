@@ -72,6 +72,9 @@ class FLocalizationsEl extends FLocalizations {
   String get autocompleteNoResults => 'Δεν βρέθηκαν αντιστοιχίες.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Μενού περιβάλλοντος';
+
+  @override
   String get dateFieldHint => 'Επιλέξτε ημερομηνία';
 
   @override

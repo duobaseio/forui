@@ -29,5 +29,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "پاس ورڈ دکھائیں",
   "textFieldEmailLabel": "ای میل",
   "passwordFieldLabel": "پاس ورڈ",
-  "dateTimePickerToday": "آج"
+  "dateTimePickerToday": "آج",
+  "contextMenuSemanticsLabel": "سیاق و سباق مینو"
 }

@@ -72,6 +72,9 @@ class FLocalizationsSr extends FLocalizations {
   String get autocompleteNoResults => 'Није пронађено подударање.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Контекстни мени';
+
+  @override
   String get dateFieldHint => 'Изаберите датум';
 
   @override
@@ -167,6 +170,9 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
 
   @override
   String get autocompleteNoResults => 'Nije pronađeno podudaranje.';
+
+  @override
+  String get contextMenuSemanticsLabel => 'Kontekstni meni';
 
   @override
   String get dateFieldHint => 'Izaberite datum';

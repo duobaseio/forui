@@ -72,6 +72,9 @@ class FLocalizationsPl extends FLocalizations {
   String get autocompleteNoResults => 'Nie znaleziono dopasowań.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Menu kontekstowe';
+
+  @override
   String get dateFieldHint => 'Wybierz datę';
 
   @override

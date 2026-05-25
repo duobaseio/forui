@@ -28,5 +28,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Құпия сөзді көрсету",
   "textFieldEmailLabel": "Электрондық пошта",
   "passwordFieldLabel": "Құпия сөз",
-  "dateTimePickerToday": "Бүгін"
+  "dateTimePickerToday": "Бүгін",
+  "contextMenuSemanticsLabel": "Контекстік мәзір"
 }

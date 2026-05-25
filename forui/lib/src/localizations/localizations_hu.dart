@@ -72,6 +72,9 @@ class FLocalizationsHu extends FLocalizations {
   String get autocompleteNoResults => 'Nincs találat.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Helyi menü';
+
+  @override
   String get dateFieldHint => 'Válasszon dátumot';
 
   @override

@@ -72,6 +72,9 @@ class FLocalizationsPs extends FLocalizations {
   String get autocompleteNoResults => 'هیڅ میچ ونه موندل شو.';
 
   @override
+  String get contextMenuSemanticsLabel => 'د شرایطو مینو';
+
+  @override
   String get dateFieldHint => 'نېټه وټاکئ';
 
   @override

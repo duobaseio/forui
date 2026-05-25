@@ -72,6 +72,9 @@ class FLocalizationsUk extends FLocalizations {
   String get autocompleteNoResults => 'Збігів не знайдено.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Контекстне меню';
+
+  @override
   String get dateFieldHint => 'Виберіть дату';
 
   @override

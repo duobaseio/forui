@@ -72,6 +72,9 @@ class FLocalizationsCy extends FLocalizations {
   String get autocompleteNoResults => 'Dim cydweddiadau wedi\'u canfod.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Dewislen cyd-destun';
+
+  @override
   String get dateFieldHint => 'Dewiswch ddyddiad';
 
   @override

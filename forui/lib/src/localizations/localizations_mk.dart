@@ -72,6 +72,9 @@ class FLocalizationsMk extends FLocalizations {
   String get autocompleteNoResults => 'Не се пронајдени совпаѓања.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Контекстно мени';
+
+  @override
   String get dateFieldHint => 'Изберете датум';
 
   @override

@@ -29,5 +29,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Şifreyi göster",
   "textFieldEmailLabel": "E-posta",
   "passwordFieldLabel": "Şifre",
-  "dateTimePickerToday": "Bugün"
+  "dateTimePickerToday": "Bugün",
+  "contextMenuSemanticsLabel": "Bağlam menüsü"
 }

@@ -72,6 +72,9 @@ class FLocalizationsFa extends FLocalizations {
   String get autocompleteNoResults => 'هیچ تطبیقی یافت نشد.';
 
   @override
+  String get contextMenuSemanticsLabel => 'منوی زمینه';
+
+  @override
   String get dateFieldHint => 'انتخاب تاریخ';
 
   @override
