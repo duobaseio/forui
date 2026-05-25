@@ -40,9 +40,7 @@ class _ContextMenuState extends StatefulExampleState<ContextMenuPage> {
         ],
       ),
       .group(
-        children: [
-          .item(prefix: const Icon(FLucideIcons.textSelect), title: const Text('Select All'), onPress: () {}),
-        ],
+        children: [.item(prefix: const Icon(FLucideIcons.textSelect), title: const Text('Select All'), onPress: () {})],
       ),
     ],
     child: Container(
@@ -97,11 +95,7 @@ class _NestedContextMenuState extends StatefulExampleState<NestedContextMenuPage
               .group(
                 children: [
                   .item(prefix: const Icon(FLucideIcons.mail), title: const Text('Email'), onPress: () {}),
-                  .item(
-                    prefix: const Icon(FLucideIcons.messageSquare),
-                    title: const Text('Message'),
-                    onPress: () {},
-                  ),
+                  .item(prefix: const Icon(FLucideIcons.messageSquare), title: const Text('Message'), onPress: () {}),
                   .item(prefix: const Icon(FLucideIcons.link), title: const Text('Copy Link'), onPress: () {}),
                 ],
               ),
@@ -111,9 +105,7 @@ class _NestedContextMenuState extends StatefulExampleState<NestedContextMenuPage
         ],
       ),
       .group(
-        children: [
-          .item(prefix: const Icon(FLucideIcons.textSelect), title: const Text('Select All'), onPress: () {}),
-        ],
+        children: [.item(prefix: const Icon(FLucideIcons.textSelect), title: const Text('Select All'), onPress: () {})],
       ),
     ],
     child: Container(

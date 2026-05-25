@@ -71,10 +71,7 @@ class _State extends StatefulExampleState<PointPortalPage> {
       child: Container(
         width: 300,
         height: 150,
-        decoration: BoxDecoration(
-          color: context.theme.colors.muted,
-          borderRadius: .circular(4),
-        ),
+        decoration: BoxDecoration(color: context.theme.colors.muted, borderRadius: .circular(4)),
         alignment: .center,
         child: Text('Tap anywhere', style: context.theme.typography.sm),
       ),
