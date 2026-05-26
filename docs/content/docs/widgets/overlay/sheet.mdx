@@ -24,7 +24,7 @@ It navigates to a new page each time.
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='modal-sheet' height={500}/>
+    <Widget name='overlay/modal-sheet' height={500}/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={defaultSnippet} />
@@ -57,7 +57,7 @@ To generate a specific style for customization:
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='modal-sheet' variant='blurred' height={500}/>
+    <Widget name='overlay/modal-sheet' variant='blurred' height={500}/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={blurredSnippet} />
@@ -68,7 +68,7 @@ To generate a specific style for customization:
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
-    <Widget name='modal-sheet' variant='draggable' height={400}/>
+    <Widget name='overlay/modal-sheet' variant='draggable' height={400}/>
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={draggableSnippet} />
