@@ -7,8 +7,14 @@ docs_snippets/
 │   ├── main.gr.dart              # Generated auto_route routes
 │   ├── example.dart              # Base classes (StatelessExample, StatefulExample, etc.)
 │   ├── examples/                 # Interactive widget examples (one file per widget)
+│   │   ├── data/
+│   │   ├── feedback/
+│   │   ├── form/
 │   │   ├── foundation/
-│   │   └── widgets/
+│   │   ├── layout/
+│   │   ├── navigation/
+│   │   ├── overlay/
+│   │   └── tile/
 │   ├── snippets/                 # Code fragments for documentation pages
 │   │   ├── concepts/
 │   │   ├── foundation/
@@ -16,8 +22,14 @@ docs_snippets/
 │   │   ├── guides/
 │   │   └── ...
 │   └── usages/                   # Widget constructor usage with selectable categories
+│       ├── data/
+│       ├── feedback/
+│       ├── form/
 │       ├── foundation/
-│       └── widgets/
+│       ├── layout/
+│       ├── navigation/
+│       ├── overlay/
+│       └── tile/
 │
 ├── test/                         # Widget tests
 ├── tool/

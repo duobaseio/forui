@@ -66,6 +66,7 @@ final breadcrumbItemCollapsed = FBreadcrumbItem.collapsed(
   onVariantChange: (previous, current) {},
   // {@endcategory}
   // {@category "Core"}
+  icon: const Icon(FLucideIcons.ellipsis),
   divider: .full,
   menu: [
     FItemGroup(
@@ -112,6 +113,7 @@ final breadcrumbItemCollapsedTiles = FBreadcrumbItem.collapsedTiles(
   onVariantChange: (previous, current) {},
   // {@endcategory}
   // {@category "Core"}
+  icon: const Icon(FLucideIcons.ellipsis),
   divider: .full,
   menu: [
     FTileGroup(
