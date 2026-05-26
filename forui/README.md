@@ -79,61 +79,61 @@ Licensed under the [MIT License](https://github.com/duobaseio/forui/blob/main/fo
 Forui provides the following widgets:
 
 - Layout
-  - Divider
-  - Resizable
-  - Scaffold
+  - [Divider](https://forui.dev/docs/widgets/layout/divider)
+  - [Resizable](https://forui.dev/docs/widgets/layout/resizable)
+  - [Scaffold](https://forui.dev/docs/widgets/layout/scaffold)
 - Form
-  - Autocomplete 
-  - Button
-  - Checkbox
-  - Date Field
-  - Label
-  - Picker
-  - Radio
-  - Multi-select
-  - OTP Field
-  - Select
-  - Select Group
-  - Slider
-  - Switch
-  - Text Field
-  - Text Form Field
-  - Time Field
-  - Time Picker
-- Date Presentation
-  - Accordion
-  - Avatar
-  - Badge
-  - Calendar
-  - Card
-  - Item
-  - Item Group
-  - Line Calendar
+  - [Autocomplete](https://forui.dev/docs/widgets/form/autocomplete)
+  - [Button](https://forui.dev/docs/widgets/form/button)
+  - [Checkbox](https://forui.dev/docs/widgets/form/checkbox)
+  - [Date Field](https://forui.dev/docs/widgets/form/date-field)
+  - [Label](https://forui.dev/docs/widgets/form/label)
+  - [Picker](https://forui.dev/docs/widgets/form/picker)
+  - [Radio](https://forui.dev/docs/widgets/form/radio)
+  - [Multi-select](https://forui.dev/docs/widgets/form/multi-select)
+  - [OTP Field](https://forui.dev/docs/widgets/form/otp-field)
+  - [Select](https://forui.dev/docs/widgets/form/select)
+  - [Select Group](https://forui.dev/docs/widgets/form/select-group)
+  - [Slider](https://forui.dev/docs/widgets/form/slider)
+  - [Switch](https://forui.dev/docs/widgets/form/switch)
+  - [Text Field](https://forui.dev/docs/widgets/form/text-field)
+  - [Text Form Field](https://forui.dev/docs/widgets/form/text-form-field)
+  - [Time Field](https://forui.dev/docs/widgets/form/time-field)
+  - [Time Picker](https://forui.dev/docs/widgets/form/time-picker)
+- Data Presentation
+  - [Accordion](https://forui.dev/docs/widgets/data/accordion)
+  - [Avatar](https://forui.dev/docs/widgets/data/avatar)
+  - [Badge](https://forui.dev/docs/widgets/data/badge)
+  - [Calendar](https://forui.dev/docs/widgets/data/calendar)
+  - [Card](https://forui.dev/docs/widgets/data/card)
+  - [Item](https://forui.dev/docs/widgets/data/item)
+  - [Item Group](https://forui.dev/docs/widgets/data/item-group)
+  - [Line Calendar](https://forui.dev/docs/widgets/data/line-calendar)
 - Tile
-  - Tile
-  - Tile Group
-  - Select Tile Group
-  - Select Menu Tile
+  - [Tile](https://forui.dev/docs/widgets/tile/tile)
+  - [Tile Group](https://forui.dev/docs/widgets/tile/tile-group)
+  - [Select Tile Group](https://forui.dev/docs/widgets/tile/select-tile-group)
+  - [Select Menu Tile](https://forui.dev/docs/widgets/tile/select-menu-tile)
 - Navigation
-  - Bottom Navigation Bar
-  - Breadcrumb
-  - Header
-  - Pagination
-  - Sidebar
-  - Tabs
+  - [Bottom Navigation Bar](https://forui.dev/docs/widgets/navigation/bottom-navigation-bar)
+  - [Breadcrumb](https://forui.dev/docs/widgets/navigation/breadcrumb)
+  - [Header](https://forui.dev/docs/widgets/navigation/header)
+  - [Pagination](https://forui.dev/docs/widgets/navigation/pagination)
+  - [Sidebar](https://forui.dev/docs/widgets/navigation/sidebar)
+  - [Tabs](https://forui.dev/docs/widgets/navigation/tabs)
 - Feedback
-  - Alert
-  - Progress
+  - [Alert](https://forui.dev/docs/widgets/feedback/alert)
+  - [Progress](https://forui.dev/docs/widgets/feedback/progress)
 - Overlay
-  - Dialog
-  - Sheet
-  - Persistent Sheet
-  - Popover
-  - Popover Menu
-  - Tooltip
-  - Toast/Sonner
+  - [Dialog](https://forui.dev/docs/widgets/overlay/dialog)
+  - [Sheet](https://forui.dev/docs/widgets/overlay/sheet)
+  - [Persistent Sheet](https://forui.dev/docs/widgets/overlay/persistent-sheet)
+  - [Popover](https://forui.dev/docs/widgets/overlay/popover)
+  - [Popover Menu](https://forui.dev/docs/widgets/overlay/popover-menu)
+  - [Tooltip](https://forui.dev/docs/widgets/overlay/tooltip)
+  - [Toast/Sonner](https://forui.dev/docs/widgets/overlay/toast)
 - Foundation
-  - Collapsible
-  - Focused Outline
-  - Portal
-  - Tappable
+  - [Collapsible](https://forui.dev/docs/widgets/foundation/collapsible)
+  - [Focused Outline](https://forui.dev/docs/widgets/foundation/focused-outline)
+  - [Portal](https://forui.dev/docs/widgets/foundation/portal)
+  - [Tappable](https://forui.dev/docs/widgets/foundation/tappable)

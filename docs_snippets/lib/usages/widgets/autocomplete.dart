@@ -98,6 +98,7 @@ final autocomplete = FAutocomplete(
   contentErrorBuilder: (context, style, error, stackTrace) => const Text('Error'),
   contentDivider: .none,
   filter: (query) => ['Apple', 'Banana'].where((item) => item.toLowerCase().startsWith(query.toLowerCase())),
+  onItemPress: (value) {},
   // {@endcategory}
   // {@category "Core"}
   style: const .delta(),
@@ -203,6 +204,7 @@ final builder = FAutocomplete.builder(
   contentErrorBuilder: (context, style, error, stackTrace) => const Text('Error'),
   contentPhysics: const ClampingScrollPhysics(),
   contentDivider: .none,
+  onItemPress: (value) {},
   // {@endcategory}
   // {@category "Core"}
   size: .md,
@@ -309,6 +311,7 @@ final text = FAutocomplete.text(
   contentErrorBuilder: (context, style, error, stackTrace) => const Text('Error'),
   contentDivider: .none,
   filter: (query) => ['Apple', 'Banana'].where((item) => item.toLowerCase().startsWith(query.toLowerCase())),
+  onItemPress: (value) {},
   // {@endcategory}
   // {@category "Core"}
   style: const .delta(),
@@ -412,6 +415,7 @@ final textBuilder = FAutocomplete.textBuilder(
   contentErrorBuilder: (context, style, error, stackTrace) => const Text('Error'),
   contentPhysics: const ClampingScrollPhysics(),
   contentDivider: .none,
+  onItemPress: (value) {},
   // {@endcategory}
   // {@category "Core"}
   size: .md,

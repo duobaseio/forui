@@ -1,3 +1,9 @@
+## 0.22.2
+
+### `FAutocomplete`
+* Add `FAutocomplete.onItemPress` callback.
+
+
 ## 0.22.1
 
 ### Others

@@ -165,6 +165,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
     Widget Function(BuildContext context, FAutocompleteContentStyle style, Object? error, StackTrace stackTrace)?
         contentErrorBuilder =
         defaultContentErrorBuilder,
+    ValueChanged<String>? onItemPress,
     Key? key,
   }) => FAutocomplete<String>.builder(
     filter: filter ?? (query) => items.where((item) => item.toLowerCase().startsWith(query.toLowerCase())),
@@ -257,6 +258,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
     contentEmptyBuilder: contentEmptyBuilder,
     contentLoadingBuilder: contentLoadingBuilder,
     contentErrorBuilder: contentErrorBuilder,
+    onItemPress: onItemPress,
     key: key,
   );
 
@@ -355,6 +357,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
     Widget Function(BuildContext context, FAutocompleteContentStyle style, Object? error, StackTrace stackTrace)?
         contentErrorBuilder =
         defaultContentErrorBuilder,
+    ValueChanged<String>? onItemPress,
     Key? key,
   }) => FAutocomplete<String>.builder(
     filter: filter,
@@ -447,6 +450,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
     contentEmptyBuilder: contentEmptyBuilder,
     contentLoadingBuilder: contentLoadingBuilder,
     contentErrorBuilder: contentErrorBuilder,
+    onItemPress: onItemPress,
     key: key,
   );
 
@@ -765,6 +769,9 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
   final Widget Function(BuildContext context, FAutocompleteContentStyle style, Object? error, StackTrace stackTrace)?
   contentErrorBuilder;
 
+  /// Called when the user selects an item from the popover suggestions.
+  final ValueChanged<T>? onItemPress;
+
   /// Creates a [FAutocomplete] from the given [items].
   ///
   /// See:
@@ -866,6 +873,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
     Widget Function(BuildContext context, FAutocompleteContentStyle style, Object? error, StackTrace stackTrace)?
         contentErrorBuilder =
         defaultContentErrorBuilder,
+    ValueChanged<T>? onItemPress,
     Key? key,
   }) : this.builder(
          filter:
@@ -963,6 +971,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
          contentEmptyBuilder: contentEmptyBuilder,
          contentLoadingBuilder: contentLoadingBuilder,
          contentErrorBuilder: contentErrorBuilder,
+         onItemPress: onItemPress,
          key: key,
        );
 
@@ -1062,6 +1071,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
     this.contentEmptyBuilder = defaultContentEmptyBuilder,
     this.contentLoadingBuilder = defaultContentLoadingBuilder,
     this.contentErrorBuilder = defaultContentErrorBuilder,
+    this.onItemPress,
     super.key,
   });
 
@@ -1169,7 +1179,8 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
       ..add(EnumProperty('contentDivider', contentDivider))
       ..add(ObjectFlagProperty.has('contentBuilder', contentBuilder))
       ..add(ObjectFlagProperty.has('contentLoadingBuilder', contentLoadingBuilder))
-      ..add(ObjectFlagProperty.has('contentErrorBuilder', contentErrorBuilder));
+      ..add(ObjectFlagProperty.has('contentErrorBuilder', contentErrorBuilder))
+      ..add(ObjectFlagProperty.has('onItemPress', onItemPress));
   }
 }
 
@@ -1465,6 +1476,8 @@ class _State<T> extends State<FAutocomplete<T>> with TickerProviderStateMixin {
                   _mutating = true;
                   _controller.text = widget.format(value);
                   _mutating = false;
+
+                  widget.onItemPress?.call(value);
                 },
                 onFocus: (value) {
                   _restore ??= _controller.text;

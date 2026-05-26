@@ -1073,4 +1073,55 @@ void main() {
       });
     }
   });
+
+  group('onItemPress', () {
+    testWidgets('called with correct value when item is tapped', (tester) async {
+      String? pressed;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FAutocomplete.text(
+            key: key,
+            control: .managed(controller: controller),
+            onItemPress: (value) => pressed = value,
+            items: fruits,
+          ),
+        ),
+      );
+
+      await tester.enterText(find.byKey(key), 'app');
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('Apple'));
+      await tester.pumpAndSettle();
+
+      expect(pressed, 'Apple');
+    });
+
+    testWidgets('not called on tab completion', (tester) async {
+      String? pressed;
+      final focus = autoDispose(FocusNode());
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FAutocomplete.text(
+            key: key,
+            control: .managed(controller: controller),
+            focusNode: focus,
+            onItemPress: (value) => pressed = value,
+            items: fruits,
+          ),
+        ),
+      );
+
+      await tester.enterText(find.byKey(key), 'app');
+      await tester.pumpAndSettle();
+
+      await tester.sendKeyEvent(.tab);
+      await tester.pumpAndSettle();
+
+      expect(controller.text, 'Apple');
+      expect(pressed, null);
+    });
+  });
 }
