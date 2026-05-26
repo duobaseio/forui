@@ -15,10 +15,10 @@ help:
 	@echo "  build_runner (br)   Run build_runner"
 	@echo "  l10n (l)            Generate localization files"
 	@echo "  snippets (s)        Generate snippet JSON files"
-	@echo "  prepare-all (pa)    Prepare all packages for release (v=<version>)"
-	@echo "  prepare (p)         Prepare a package release (package=<name> v=<version>)"
-	@echo "  release-all (ra)    Tag and release all packages (v=<version>)"
-	@echo "  release (r)         Tag and create GitHub release (package=<name> v=<version>)"
+	@echo "  prepare-all (pa)    Prepare all packages for release (version=<version>)"
+	@echo "  prepare (p)         Prepare a package release (package=<name> version=<version>)"
+	@echo "  release-all (ra)    Tag and release all packages (version=<version>)"
+	@echo "  release (r)         Tag and create GitHub release (package=<name> version=<version>)"
 
 bootstrap: install generate
 	@echo ""
@@ -67,21 +67,21 @@ snippets:
 s: snippets
 
 prepare-all:
-	@if [ -z "$(v)" ]; then \
-		echo "$(COLOR_RED)Error: usage: make prepare-all v=<version>$(COLOR_RESET)"; \
+	@if [ -z "$(version)" ]; then \
+		echo "$(COLOR_RED)Error: usage: make prepare-all version=<version>$(COLOR_RESET)"; \
 		exit 1; \
 	fi
-	@$(MAKE) prepare package=forui_assets v=$(v)
-	@$(MAKE) prepare package=forui v=$(v)
-	@$(MAKE) prepare package=forui_hooks v=$(v)
+	@$(MAKE) prepare package=forui_assets version=$(version)
+	@$(MAKE) prepare package=forui version=$(version)
+	@$(MAKE) prepare package=forui_hooks version=$(version)
 	@echo ""
-	@echo "$(COLOR_GREEN)✓ All packages prepared for $(v)$(COLOR_RESET)"
+	@echo "$(COLOR_GREEN)✓ All packages prepared for $(version)$(COLOR_RESET)"
 pa: prepare-all
 
 prepare:
 	@# Validate inputs
-	@if [ -z "$(package)" ] || [ -z "$(v)" ]; then \
-		echo "$(COLOR_RED)Error: usage: make prepare package=<forui|forui_assets|forui_hooks> v=<version>$(COLOR_RESET)"; \
+	@if [ -z "$(package)" ] || [ -z "$(version)" ]; then \
+		echo "$(COLOR_RED)Error: usage: make prepare package=<forui|forui_assets|forui_hooks> version=<version>$(COLOR_RESET)"; \
 		exit 1; \
 	fi
 	@if [ "$(package)" != "forui" ] && [ "$(package)" != "forui_assets" ] && [ "$(package)" != "forui_hooks" ]; then \
@@ -90,15 +90,15 @@ prepare:
 	fi
 	@# Step 1: Validate changelog
 	@echo ""
-	@echo "$(COLOR_BLUE)Checking changelog for $(package) $(v)$(COLOR_RESET)"
-	@if ! grep -q "^## $(v)" "$(package)/CHANGELOG.md"; then \
-		echo "$(COLOR_RED)Error: no '## $(v)' entry found in $(package)/CHANGELOG.md$(COLOR_RESET)"; \
+	@echo "$(COLOR_BLUE)Checking changelog for $(package) $(version)$(COLOR_RESET)"
+	@if ! grep -q "^## $(version)" "$(package)/CHANGELOG.md"; then \
+		echo "$(COLOR_RED)Error: no '## $(version)' entry found in $(package)/CHANGELOG.md$(COLOR_RESET)"; \
 		exit 1; \
 	fi
-	@if grep -q "^## $(v) " "$(package)/CHANGELOG.md"; then \
-		SUFFIX=$$(grep "^## $(v) " "$(package)/CHANGELOG.md" | head -1 | sed 's/^## $(v) //'); \
+	@if grep -q "^## $(version) " "$(package)/CHANGELOG.md"; then \
+		SUFFIX=$$(grep "^## $(version) " "$(package)/CHANGELOG.md" | head -1 | sed 's/^## $(version) //'); \
 		echo "Removing suffix '$$SUFFIX' from changelog heading"; \
-		sed -i '' 's/^## $(v) .*/## $(v)/' "$(package)/CHANGELOG.md"; \
+		sed -i '' 's/^## $(version) .*/## $(version)/' "$(package)/CHANGELOG.md"; \
 	fi
 	@echo "$(COLOR_GREEN)✓ Changelog entry found$(COLOR_RESET)"
 	@# Step 2: Run build_runner and cli generator (forui only)
@@ -120,21 +120,21 @@ prepare:
 	@# Step 4 & 5: Update own version and dependent pubspecs
 	@OLD_VERSION=$$(grep '^version: ' $(package)/pubspec.yaml | head -1 | sed 's/version: //'); \
 	OLD_MAJOR_MINOR=$$(echo "$$OLD_VERSION" | sed 's/\([0-9]*\.[0-9]*\)\..*/\1/'); \
-	NEW_MAJOR_MINOR=$$(echo "$(v)" | sed 's/\([0-9]*\.[0-9]*\)\..*/\1/'); \
+	NEW_MAJOR_MINOR=$$(echo "$(version)" | sed 's/\([0-9]*\.[0-9]*\)\..*/\1/'); \
 	echo ""; \
-	echo "$(COLOR_BLUE)Updating $(package)/pubspec.yaml version to $(v)$(COLOR_RESET)"; \
-	sed -i '' 's/^version: .*/version: $(v)/' $(package)/pubspec.yaml; \
+	echo "$(COLOR_BLUE)Updating $(package)/pubspec.yaml version to $(version)$(COLOR_RESET)"; \
+	sed -i '' 's/^version: .*/version: $(version)/' $(package)/pubspec.yaml; \
 	echo "$(COLOR_GREEN)✓ Version updated$(COLOR_RESET)"; \
 	if [ "$$OLD_MAJOR_MINOR" != "$$NEW_MAJOR_MINOR" ]; then \
 		echo ""; \
 		echo "$(COLOR_BLUE)Minor/major version changed ($$OLD_MAJOR_MINOR → $$NEW_MAJOR_MINOR), updating dependents$(COLOR_RESET)"; \
 		if [ "$(package)" = "forui_assets" ]; then \
-			sed -i '' 's/forui_assets: ^.*/forui_assets: ^$(v)/' forui/pubspec.yaml; \
+			sed -i '' 's/forui_assets: ^.*/forui_assets: ^$(version)/' forui/pubspec.yaml; \
 			echo "  Updated forui/pubspec.yaml"; \
 		elif [ "$(package)" = "forui" ]; then \
-			sed -i '' 's/forui: ^.*/forui: ^$(v)/' forui_hooks/pubspec.yaml; \
+			sed -i '' 's/forui: ^.*/forui: ^$(version)/' forui_hooks/pubspec.yaml; \
 			echo "  Updated forui_hooks/pubspec.yaml"; \
-			sed -i '' 's/forui: ^.*/forui: ^$(v)/' forui_internal_gen/pubspec.yaml; \
+			sed -i '' 's/forui: ^.*/forui: ^$(version)/' forui_internal_gen/pubspec.yaml; \
 			echo "  Updated forui_internal_gen/pubspec.yaml"; \
 		fi; \
 		echo "$(COLOR_GREEN)✓ Dependents updated$(COLOR_RESET)"; \
@@ -147,25 +147,25 @@ prepare:
 	@echo "$(COLOR_BLUE)dart pub get$(COLOR_RESET)"
 	@dart pub get
 	@echo ""
-	@echo "$(COLOR_GREEN)✓ Prepare $(package) $(v) prepared$(COLOR_RESET)"
+	@echo "$(COLOR_GREEN)✓ Prepare $(package) $(version) prepared$(COLOR_RESET)"
 p: prepare
 
 release-all:
-	@if [ -z "$(v)" ]; then \
-		echo "$(COLOR_RED)Error: usage: make release-all v=<version>$(COLOR_RESET)"; \
+	@if [ -z "$(version)" ]; then \
+		echo "$(COLOR_RED)Error: usage: make release-all version=<version>$(COLOR_RESET)"; \
 		exit 1; \
 	fi
-	@$(MAKE) release package=forui_assets v=$(v)
-	@$(MAKE) release package=forui v=$(v)
-	@$(MAKE) release package=forui_hooks v=$(v)
+	@$(MAKE) release package=forui_assets version=$(version)
+	@$(MAKE) release package=forui version=$(version)
+	@$(MAKE) release package=forui_hooks version=$(version)
 	@echo ""
-	@echo "$(COLOR_GREEN)✓ All packages released for $(v)$(COLOR_RESET)"
+	@echo "$(COLOR_GREEN)✓ All packages released for $(version)$(COLOR_RESET)"
 ra: release-all
 
 release:
 	@# Validate inputs
-	@if [ -z "$(package)" ] || [ -z "$(v)" ]; then \
-		echo "$(COLOR_RED)Error: usage: make release package=<forui|forui_assets|forui_hooks> v=<version>$(COLOR_RESET)"; \
+	@if [ -z "$(package)" ] || [ -z "$(version)" ]; then \
+		echo "$(COLOR_RED)Error: usage: make release package=<forui|forui_assets|forui_hooks> version=<version>$(COLOR_RESET)"; \
 		exit 1; \
 	fi
 	@if [ "$(package)" != "forui" ] && [ "$(package)" != "forui_assets" ] && [ "$(package)" != "forui_hooks" ]; then \
@@ -174,9 +174,9 @@ release:
 	fi
 	@# Step 1: Validate changelog
 	@echo ""
-	@echo "$(COLOR_BLUE)Checking changelog for $(package) $(v)$(COLOR_RESET)"
-	@if ! grep -q "^## $(v)" "$(package)/CHANGELOG.md"; then \
-		echo "$(COLOR_RED)Error: no '## $(v)' entry found in $(package)/CHANGELOG.md$(COLOR_RESET)"; \
+	@echo "$(COLOR_BLUE)Checking changelog for $(package) $(version)$(COLOR_RESET)"
+	@if ! grep -q "^## $(version)" "$(package)/CHANGELOG.md"; then \
+		echo "$(COLOR_RED)Error: no '## $(version)' entry found in $(package)/CHANGELOG.md$(COLOR_RESET)"; \
 		exit 1; \
 	fi
 	@echo "$(COLOR_GREEN)✓ Changelog entry found$(COLOR_RESET)"
@@ -190,13 +190,13 @@ release:
 	fi
 	@echo "$(COLOR_GREEN)✓ HEAD is on origin/main$(COLOR_RESET)"
 	@# Step 3: Extract changelog, tag, and create release
-	@PREV_TAG=$$(git tag -l '$(package)/*' --sort=-v:refname | grep -v '^$(package)/$(v)$$' | head -1); \
-	NOTES=$$(sed -n '/^## $(v)/,/^## /{/^## $(v)/d;/^## /d;p;}' "$(package)/CHANGELOG.md" | sed '1{/^$$/d;}' | sed '$${/^$$/d;}'); \
+	@PREV_TAG=$$(git tag -l '$(package)/*' --sort=-v:refname | grep -v '^$(package)/$(version)$$' | head -1); \
+	NOTES=$$(sed -n '/^## $(version)/,/^## /{/^## $(version)/d;/^## /d;p;}' "$(package)/CHANGELOG.md" | sed '1{/^$$/d;}' | sed '$${/^$$/d;}'); \
 	TITLE=$$(echo "$(package)" | tr '_' ' ' | awk '{for(i=1;i<=NF;i++) $$i=toupper(substr($$i,1,1)) substr($$i,2)}1'); \
-	TITLE="$$TITLE $(v)"; \
+	TITLE="$$TITLE $(version)"; \
 	echo ""; \
 	echo "Title:        $$TITLE"; \
-	echo "Tag:          $(package)/$(v)"; \
+	echo "Tag:          $(package)/$(version)"; \
 	if [ -n "$$PREV_TAG" ]; then \
 		echo "Previous tag: $$PREV_TAG"; \
 	else \
@@ -216,19 +216,19 @@ release:
 		fi; \
 	fi; \
 	echo ""; \
-	echo "$(COLOR_BLUE)Creating tag $(package)/$(v)$(COLOR_RESET)"; \
-	git tag "$(package)/$(v)"; \
+	echo "$(COLOR_BLUE)Creating tag $(package)/$(version)$(COLOR_RESET)"; \
+	git tag "$(package)/$(version)"; \
 	echo "$(COLOR_GREEN)✓ Tag created$(COLOR_RESET)"; \
 	echo ""; \
-	echo "$(COLOR_BLUE)Pushing tag $(package)/$(v)$(COLOR_RESET)"; \
-	git push origin "$(package)/$(v)"; \
+	echo "$(COLOR_BLUE)Pushing tag $(package)/$(version)$(COLOR_RESET)"; \
+	git push origin "$(package)/$(version)"; \
 	echo "$(COLOR_GREEN)✓ Tag pushed$(COLOR_RESET)"; \
 	echo ""; \
 	echo "$(COLOR_BLUE)Creating GitHub release: $$TITLE$(COLOR_RESET)"; \
 	if [ -n "$$PREV_TAG" ]; then \
-		gh release create "$(package)/$(v)" --title "$$TITLE" --notes "$$NOTES" --notes-start-tag "$$PREV_TAG"; \
+		gh release create "$(package)/$(version)" --title "$$TITLE" --notes "$$NOTES" --notes-start-tag "$$PREV_TAG"; \
 	else \
-		gh release create "$(package)/$(v)" --title "$$TITLE" --notes "$$NOTES"; \
+		gh release create "$(package)/$(version)" --title "$$TITLE" --notes "$$NOTES"; \
 	fi; \
-	echo "$(COLOR_GREEN)✓ Release $(package)/$(v) created$(COLOR_RESET)"
+	echo "$(COLOR_GREEN)✓ Release $(package)/$(version) created$(COLOR_RESET)"
 r: release
