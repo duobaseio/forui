@@ -72,6 +72,9 @@ class FLocalizationsSw extends FLocalizations {
   String get autocompleteNoResults => 'Hakuna mechi zilizopatikana.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Menyu ya muktadha';
+
+  @override
   String get dateFieldHint => 'Chagua tarehe';
 
   @override

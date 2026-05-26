@@ -72,6 +72,9 @@ class FLocalizationsSk extends FLocalizations {
   String get autocompleteNoResults => 'Nenašli sa žiadne zhody.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Kontextová ponuka';
+
+  @override
   String get dateFieldHint => 'Vyberte dátum';
 
   @override

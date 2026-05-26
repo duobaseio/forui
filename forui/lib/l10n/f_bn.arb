@@ -29,5 +29,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "পাসওয়ার্ড দেখান",
   "textFieldEmailLabel": "ইমেল",
   "passwordFieldLabel": "পাসওয়ার্ড",
-  "dateTimePickerToday": "আজ"
+  "dateTimePickerToday": "আজ",
+  "contextMenuSemanticsLabel": "প্রসঙ্গ মেনু"
 }

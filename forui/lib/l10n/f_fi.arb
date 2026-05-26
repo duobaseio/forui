@@ -29,5 +29,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Näytä salasana",
   "textFieldEmailLabel": "Sähköposti",
   "passwordFieldLabel": "Salasana",
-  "dateTimePickerToday": "Tänään"
+  "dateTimePickerToday": "Tänään",
+  "contextMenuSemanticsLabel": "Kontekstivalikko"
 }

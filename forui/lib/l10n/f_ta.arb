@@ -28,5 +28,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "கடவுச்சொல்லைக் காட்டு",
   "textFieldEmailLabel": "மின்னஞ்சல்",
   "passwordFieldLabel": "கடவுச்சொல்",
-  "dateTimePickerToday": "இன்று"
+  "dateTimePickerToday": "இன்று",
+  "contextMenuSemanticsLabel": "சூழல் பட்டி"
 }

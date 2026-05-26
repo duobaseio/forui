@@ -125,6 +125,7 @@ Forui provides the following widgets:
   - [Alert](https://forui.dev/docs/widgets/feedback/alert)
   - [Progress](https://forui.dev/docs/widgets/feedback/progress)
 - Overlay
+  - [Context Menu](https://forui.dev/docs/widgets/overlay/context-menu)
   - [Dialog](https://forui.dev/docs/widgets/overlay/dialog)
   - [Sheet](https://forui.dev/docs/widgets/overlay/sheet)
   - [Persistent Sheet](https://forui.dev/docs/widgets/overlay/persistent-sheet)

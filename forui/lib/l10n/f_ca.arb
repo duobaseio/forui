@@ -28,5 +28,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Mostra la contrasenya",
   "textFieldEmailLabel": "Correu electrònic",
   "passwordFieldLabel": "Contrasenya",
-  "dateTimePickerToday": "Avui"
+  "dateTimePickerToday": "Avui",
+  "contextMenuSemanticsLabel": "Menú contextual"
 }

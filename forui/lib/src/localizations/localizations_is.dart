@@ -72,6 +72,9 @@ class FLocalizationsIs extends FLocalizations {
   String get autocompleteNoResults => 'Engar niðurstöður fundust.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Samhengisvalmynd';
+
+  @override
   String get dateFieldHint => 'Veldu dagsetningu';
 
   @override

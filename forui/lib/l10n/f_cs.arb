@@ -29,5 +29,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Zobrazit heslo",
   "textFieldEmailLabel": "E-mail",
   "passwordFieldLabel": "Heslo",
-  "dateTimePickerToday": "Dnes"
+  "dateTimePickerToday": "Dnes",
+  "contextMenuSemanticsLabel": "Kontextová nabídka"
 }

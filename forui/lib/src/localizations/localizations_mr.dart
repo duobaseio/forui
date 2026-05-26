@@ -72,6 +72,9 @@ class FLocalizationsMr extends FLocalizations {
   String get autocompleteNoResults => 'कोणतेही जुळणारे आढळले नाही.';
 
   @override
+  String get contextMenuSemanticsLabel => 'संदर्भ मेनू';
+
+  @override
   String get dateFieldHint => 'तारीख निवडा';
 
   @override

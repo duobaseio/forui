@@ -28,5 +28,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "പാസ്‌വേഡ് കാണിക്കുക",
   "textFieldEmailLabel": "ഇമെയിൽ",
   "passwordFieldLabel": "പാസ്‌വേഡ്",
-  "dateTimePickerToday": "ഇന്ന്"
+  "dateTimePickerToday": "ഇന്ന്",
+  "contextMenuSemanticsLabel": "സന്ദർഭ മെനു"
 }

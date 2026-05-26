@@ -72,6 +72,9 @@ class FLocalizationsGl extends FLocalizations {
   String get autocompleteNoResults => 'Non se atoparon coincidencias.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Menú contextual';
+
+  @override
   String get dateFieldHint => 'Selecciona unha data';
 
   @override

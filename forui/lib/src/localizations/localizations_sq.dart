@@ -72,6 +72,9 @@ class FLocalizationsSq extends FLocalizations {
   String get autocompleteNoResults => 'Nuk u gjetën përputhje.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Menyja e kontekstit';
+
+  @override
   String get dateFieldHint => 'Zgjidh datën';
 
   @override

@@ -135,7 +135,19 @@ class FPopoverMenu extends StatefulWidget {
   final FPortalSpacing spacing;
 
   /// {@macro forui.widgets.FPopover.overflow}
+  ///
+  /// Defaults to [FPortalOverflow.flip].
   final FPortalOverflow overflow;
+
+  /// {@macro forui.foundation.FPortal.useViewPadding}
+  ///
+  /// Defaults to true.
+  final bool useViewPadding;
+
+  /// {@macro forui.foundation.FPortal.useViewInsets}
+  ///
+  /// Defaults to true.
+  final bool useViewInsets;
 
   /// {@macro forui.widgets.FPopover.offset}
   final Offset offset;
@@ -177,16 +189,6 @@ class FPopoverMenu extends StatefulWidget {
 
   /// The menu's semantic label used by accessibility frameworks.
   final String? semanticsLabel;
-
-  /// {@macro forui.foundation.FPortal.useViewPadding}
-  ///
-  /// Defaults to true.
-  final bool useViewPadding;
-
-  /// {@macro forui.foundation.FPortal.useViewInsets}
-  ///
-  /// Defaults to true.
-  final bool useViewInsets;
 
   /// Whether the parent menu fades when a submenu is active.
   ///
@@ -231,6 +233,8 @@ class FPopoverMenu extends StatefulWidget {
     this.childAnchor = .bottomCenter,
     this.spacing = const .spacing(4),
     this.overflow = .flip,
+    this.useViewPadding = true,
+    this.useViewInsets = true,
     this.offset = .zero,
     this.groupId,
     this.hideRegion = .excludeChild,
@@ -244,8 +248,6 @@ class FPopoverMenu extends StatefulWidget {
     this.focusNode,
     this.onFocusChange,
     this.traversalEdgeBehavior,
-    this.useViewPadding = true,
-    this.useViewInsets = true,
     this.faded,
     List<FItemGroupMixin> Function(BuildContext context, FPopoverController controller, List<FItemGroupMixin>? menu)
         menuBuilder =
@@ -263,7 +265,6 @@ class FPopoverMenu extends StatefulWidget {
          semanticsLabel: semanticsLabel,
          style: style.itemGroupStyle,
          divider: divider,
-
          children: menuBuilder(context, controller, menu),
        )),
        assert(builder != FPopover.defaultBuilder || child != null, 'Either builder or child must be provided'),
@@ -297,6 +298,8 @@ class FPopoverMenu extends StatefulWidget {
     this.childAnchor = .bottomCenter,
     this.spacing = const .spacing(4),
     this.overflow = .flip,
+    this.useViewPadding = true,
+    this.useViewInsets = true,
     this.offset = .zero,
     this.groupId,
     this.hideRegion = .excludeChild,
@@ -310,8 +313,6 @@ class FPopoverMenu extends StatefulWidget {
     this.focusNode,
     this.onFocusChange,
     this.traversalEdgeBehavior,
-    this.useViewPadding = true,
-    this.useViewInsets = true,
     this.faded,
     List<FTileGroupMixin> Function(BuildContext context, FPopoverController controller, List<FTileGroupMixin>? menu)
         menuBuilder =
@@ -353,6 +354,8 @@ class FPopoverMenu extends StatefulWidget {
       ..add(DiagnosticsProperty('childAnchor', childAnchor))
       ..add(DiagnosticsProperty('spacing', spacing))
       ..add(ObjectFlagProperty.has('overflow', overflow))
+      ..add(FlagProperty('useViewPadding', value: useViewPadding, ifTrue: 'using view padding'))
+      ..add(FlagProperty('useViewInsets', value: useViewInsets, ifTrue: 'using view insets'))
       ..add(DiagnosticsProperty('offset', offset))
       ..add(DiagnosticsProperty('groupId', groupId))
       ..add(EnumProperty('hideRegion', hideRegion))
@@ -372,8 +375,6 @@ class FPopoverMenu extends StatefulWidget {
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(EnumProperty('traversalEdgeBehavior', traversalEdgeBehavior))
-      ..add(FlagProperty('useViewPadding', value: useViewPadding, ifTrue: 'using view padding'))
-      ..add(FlagProperty('useViewInsets', value: useViewInsets, ifTrue: 'using view insets'))
       ..add(FlagProperty('faded', value: faded, ifTrue: 'faded'))
       ..add(ObjectFlagProperty.has('builder', builder));
   }

@@ -28,5 +28,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "پټنوم ښودل",
   "textFieldEmailLabel": "برېښنالیک",
   "passwordFieldLabel": "پټنوم",
-  "dateTimePickerToday": "نن"
+  "dateTimePickerToday": "نن",
+  "contextMenuSemanticsLabel": "د شرایطو مینو"
 }

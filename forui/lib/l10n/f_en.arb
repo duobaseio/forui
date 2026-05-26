@@ -76,6 +76,10 @@
   "@autocompleteNoResults": {
     "description": "The message displayed when there are no matching results."
   },
+  "contextMenuSemanticsLabel": "Context menu",
+  "@contextMenuSemanticsLabel": {
+    "description": "The semantic label for a context menu."
+  },
   "dateFieldHint": "Pick a date",
   "@dateFieldHint": {
     "description": "The hint text for the calendar-only date field."

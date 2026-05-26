@@ -72,6 +72,9 @@ class FLocalizationsLo extends FLocalizations {
   String get autocompleteNoResults => 'ບໍ່ພົບການຈັບຄູ່.';
 
   @override
+  String get contextMenuSemanticsLabel => 'ເມນູບໍລິບົດ';
+
+  @override
   String get dateFieldHint => 'ເລືອກວັນທີ';
 
   @override

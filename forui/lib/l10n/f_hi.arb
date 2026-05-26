@@ -28,5 +28,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "पासवर्ड दिखाएं",
   "textFieldEmailLabel": "ईमेल",
   "passwordFieldLabel": "पासवर्ड",
-  "dateTimePickerToday": "आज"
+  "dateTimePickerToday": "आज",
+  "contextMenuSemanticsLabel": "संदर्भ मेनू"
 }

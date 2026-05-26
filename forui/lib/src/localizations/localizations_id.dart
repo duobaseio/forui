@@ -72,6 +72,9 @@ class FLocalizationsId extends FLocalizations {
   String get autocompleteNoResults => 'Tidak ada hasil yang cocok.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Menu konteks';
+
+  @override
   String get dateFieldHint => 'Pilih tanggal';
 
   @override

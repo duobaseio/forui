@@ -72,6 +72,9 @@ class FLocalizationsKk extends FLocalizations {
   String get autocompleteNoResults => 'Ешқандай сәйкестік табылмады.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Контекстік мәзір';
+
+  @override
   String get dateFieldHint => 'Күнді таңдаңыз';
 
   @override

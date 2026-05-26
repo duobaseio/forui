@@ -72,6 +72,9 @@ class FLocalizationsJa extends FLocalizations {
   String get autocompleteNoResults => '一致するものが見つかりません.';
 
   @override
+  String get contextMenuSemanticsLabel => 'コンテキストメニュー';
+
+  @override
   String get dateFieldHint => '日付を選択';
 
   @override

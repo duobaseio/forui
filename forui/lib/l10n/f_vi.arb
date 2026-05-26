@@ -29,5 +29,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Hiển thị mật khẩu",
   "textFieldEmailLabel": "Email",
   "passwordFieldLabel": "Mật khẩu",
-  "dateTimePickerToday": "Hôm nay"
+  "dateTimePickerToday": "Hôm nay",
+  "contextMenuSemanticsLabel": "Trình đơn ngữ cảnh"
 }

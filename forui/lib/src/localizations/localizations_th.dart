@@ -72,6 +72,9 @@ class FLocalizationsTh extends FLocalizations {
   String get autocompleteNoResults => 'ไม่พบรายการที่ตรงกัน.';
 
   @override
+  String get contextMenuSemanticsLabel => 'เมนูบริบท';
+
+  @override
   String get dateFieldHint => 'เลือกวันที่';
 
   @override

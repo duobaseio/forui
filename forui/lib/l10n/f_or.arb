@@ -29,5 +29,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "ପାସୱାର୍ଡ ଦେଖାନ୍ତୁ",
   "textFieldEmailLabel": "ଇମେଲ୍",
   "passwordFieldLabel": "ପାସୱାର୍ଡ",
-  "dateTimePickerToday": "ଆଜି"
+  "dateTimePickerToday": "ଆଜି",
+  "contextMenuSemanticsLabel": "ପ୍ରସଙ୍ଗ ମେନୁ"
 }

@@ -72,6 +72,9 @@ class FLocalizationsPa extends FLocalizations {
   String get autocompleteNoResults => 'ਕੋਈ ਮੇਲ ਨਹੀਂ ਮਿਲਿਆ.';
 
   @override
+  String get contextMenuSemanticsLabel => 'ਸੰਦਰਭ ਮੀਨੂ';
+
+  @override
   String get dateFieldHint => 'ਤਾਰੀਖ ਚੁਣੋ';
 
   @override

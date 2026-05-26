@@ -72,6 +72,9 @@ class FLocalizationsEs extends FLocalizations {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Menú contextual';
+
+  @override
   String get dateFieldHint => 'Seleccionar fecha';
 
   @override
@@ -169,6 +172,9 @@ class FLocalizationsEs419 extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Menú contextual';
+
+  @override
   String get dateFieldHint => 'Seleccionar fecha';
 
   @override
@@ -252,6 +258,9 @@ class FLocalizationsEsAr extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String get contextMenuSemanticsLabel => 'Menú contextual';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -339,6 +348,9 @@ class FLocalizationsEsBo extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Menú contextual';
+
+  @override
   String get dateFieldHint => 'Seleccionar fecha';
 
   @override
@@ -422,6 +434,9 @@ class FLocalizationsEsCl extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String get contextMenuSemanticsLabel => 'Menú contextual';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -509,6 +524,9 @@ class FLocalizationsEsCo extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Menú contextual';
+
+  @override
   String get dateFieldHint => 'Seleccionar fecha';
 
   @override
@@ -592,6 +610,9 @@ class FLocalizationsEsCr extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String get contextMenuSemanticsLabel => 'Menú contextual';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -679,6 +700,9 @@ class FLocalizationsEsDo extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Menú contextual';
+
+  @override
   String get dateFieldHint => 'Seleccionar fecha';
 
   @override
@@ -762,6 +786,9 @@ class FLocalizationsEsEc extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String get contextMenuSemanticsLabel => 'Menú contextual';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -849,6 +876,9 @@ class FLocalizationsEsGt extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Menú contextual';
+
+  @override
   String get dateFieldHint => 'Seleccionar fecha';
 
   @override
@@ -932,6 +962,9 @@ class FLocalizationsEsHn extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String get contextMenuSemanticsLabel => 'Menú contextual';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -1019,6 +1052,9 @@ class FLocalizationsEsMx extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Menú contextual';
+
+  @override
   String get dateFieldHint => 'Seleccionar fecha';
 
   @override
@@ -1102,6 +1138,9 @@ class FLocalizationsEsNi extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String get contextMenuSemanticsLabel => 'Menú contextual';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -1189,6 +1228,9 @@ class FLocalizationsEsPa extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Menú contextual';
+
+  @override
   String get dateFieldHint => 'Seleccionar fecha';
 
   @override
@@ -1272,6 +1314,9 @@ class FLocalizationsEsPe extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String get contextMenuSemanticsLabel => 'Menú contextual';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -1359,6 +1404,9 @@ class FLocalizationsEsPr extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Menú contextual';
+
+  @override
   String get dateFieldHint => 'Seleccionar fecha';
 
   @override
@@ -1442,6 +1490,9 @@ class FLocalizationsEsPy extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String get contextMenuSemanticsLabel => 'Menú contextual';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -1529,6 +1580,9 @@ class FLocalizationsEsSv extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Menú contextual';
+
+  @override
   String get dateFieldHint => 'Seleccionar fecha';
 
   @override
@@ -1612,6 +1666,9 @@ class FLocalizationsEsUs extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String get contextMenuSemanticsLabel => 'Menú contextual';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';
@@ -1699,6 +1756,9 @@ class FLocalizationsEsUy extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Menú contextual';
+
+  @override
   String get dateFieldHint => 'Seleccionar fecha';
 
   @override
@@ -1782,6 +1842,9 @@ class FLocalizationsEsVe extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String get contextMenuSemanticsLabel => 'Menú contextual';
 
   @override
   String get dateFieldHint => 'Seleccionar fecha';

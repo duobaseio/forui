@@ -72,6 +72,9 @@ class FLocalizationsVi extends FLocalizations {
   String get autocompleteNoResults => 'Không tìm thấy kết quả phù hợp.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Trình đơn ngữ cảnh';
+
+  @override
   String get dateFieldHint => 'Chọn ngày';
 
   @override

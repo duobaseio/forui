@@ -72,6 +72,9 @@ class FLocalizationsEn extends FLocalizations {
   String get autocompleteNoResults => 'No matches found.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Context menu';
+
+  @override
   String get dateFieldHint => 'Pick a date';
 
   @override
@@ -167,6 +170,9 @@ class FLocalizationsEnAu extends FLocalizationsEn {
 
   @override
   String get autocompleteNoResults => 'No matches found.';
+
+  @override
+  String get contextMenuSemanticsLabel => 'Context menu';
 
   @override
   String get dateFieldHint => 'Pick a date';
@@ -266,6 +272,9 @@ class FLocalizationsEnCa extends FLocalizationsEn {
   String get autocompleteNoResults => 'No matches found.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Context menu';
+
+  @override
   String get dateFieldHint => 'Pick a date';
 
   @override
@@ -361,6 +370,9 @@ class FLocalizationsEnGb extends FLocalizationsEn {
 
   @override
   String get autocompleteNoResults => 'No matches found.';
+
+  @override
+  String get contextMenuSemanticsLabel => 'Context menu';
 
   @override
   String get dateFieldHint => 'Pick a date';
@@ -460,6 +472,9 @@ class FLocalizationsEnIe extends FLocalizationsEn {
   String get autocompleteNoResults => 'No matches found.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Context menu';
+
+  @override
   String get dateFieldHint => 'Pick a date';
 
   @override
@@ -555,6 +570,9 @@ class FLocalizationsEnIn extends FLocalizationsEn {
 
   @override
   String get autocompleteNoResults => 'No matches found.';
+
+  @override
+  String get contextMenuSemanticsLabel => 'Context menu';
 
   @override
   String get dateFieldHint => 'Pick a date';
@@ -654,6 +672,9 @@ class FLocalizationsEnNz extends FLocalizationsEn {
   String get autocompleteNoResults => 'No matches found.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Context menu';
+
+  @override
   String get dateFieldHint => 'Pick a date';
 
   @override
@@ -751,6 +772,9 @@ class FLocalizationsEnSg extends FLocalizationsEn {
   String get autocompleteNoResults => 'No matches found.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Context menu';
+
+  @override
   String get dateFieldHint => 'Pick a date';
 
   @override
@@ -846,6 +870,9 @@ class FLocalizationsEnZa extends FLocalizationsEn {
 
   @override
   String get autocompleteNoResults => 'No matches found.';
+
+  @override
+  String get contextMenuSemanticsLabel => 'Context menu';
 
   @override
   String get dateFieldHint => 'Pick a date';

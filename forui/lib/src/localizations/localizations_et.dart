@@ -72,6 +72,9 @@ class FLocalizationsEt extends FLocalizations {
   String get autocompleteNoResults => 'Vasteid ei leitud.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Kontekstimenüü';
+
+  @override
   String get dateFieldHint => 'Valige kuupäev';
 
   @override

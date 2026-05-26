@@ -72,6 +72,9 @@ class FLocalizationsKm extends FLocalizations {
   String get autocompleteNoResults => 'រកមិនឃើញការផ្គូផ្គង.';
 
   @override
+  String get contextMenuSemanticsLabel => 'ម៉ឺនុយបរិបទ';
+
+  @override
   String get dateFieldHint => 'ជ្រើសរើស​កាលបរិច្ឆេទ';
 
   @override

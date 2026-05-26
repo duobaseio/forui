@@ -29,5 +29,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Bonisa iphasiwedi",
   "textFieldEmailLabel": "I-imeyili",
   "passwordFieldLabel": "Iphasiwedi",
-  "dateTimePickerToday": "Namuhla"
+  "dateTimePickerToday": "Namuhla",
+  "contextMenuSemanticsLabel": "Imenyu yesimo"
 }

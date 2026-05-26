@@ -29,5 +29,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Prikaži lozinku",
   "textFieldEmailLabel": "Imejl",
   "passwordFieldLabel": "Lozinka",
-  "dateTimePickerToday": "Danas"
+  "dateTimePickerToday": "Danas",
+  "contextMenuSemanticsLabel": "Kontekstni meni"
 }

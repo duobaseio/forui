@@ -72,6 +72,9 @@ class FLocalizationsHr extends FLocalizations {
   String get autocompleteNoResults => 'Nisu pronađena poklapanja.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Kontekstni izbornik';
+
+  @override
   String get dateFieldHint => 'Odaberite datum';
 
   @override

@@ -29,5 +29,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Afișează parola",
   "textFieldEmailLabel": "E-mail",
   "passwordFieldLabel": "Parolă",
-  "dateTimePickerToday": "Astăzi"
+  "dateTimePickerToday": "Astăzi",
+  "contextMenuSemanticsLabel": "Meniu contextual"
 }

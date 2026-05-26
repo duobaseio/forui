@@ -29,5 +29,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Erakutsi pasahitza",
   "textFieldEmailLabel": "Posta elektronikoa",
   "passwordFieldLabel": "Pasahitza",
-  "dateTimePickerToday": "Gaur"
+  "dateTimePickerToday": "Gaur",
+  "contextMenuSemanticsLabel": "Testuinguru-menua"
 }

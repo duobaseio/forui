@@ -28,5 +28,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "نمایش رمز عبور",
   "textFieldEmailLabel": "ایمیل",
   "passwordFieldLabel": "رمز عبور",
-  "dateTimePickerToday": "امروز"
+  "dateTimePickerToday": "امروز",
+  "contextMenuSemanticsLabel": "منوی زمینه"
 }

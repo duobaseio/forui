@@ -29,5 +29,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "পাছৱাৰ্ড দেখুৱাওক",
   "textFieldEmailLabel": "ইমেইল",
   "passwordFieldLabel": "পাছৱাৰ্ড",
-  "dateTimePickerToday": "আজি"
+  "dateTimePickerToday": "আজি",
+  "contextMenuSemanticsLabel": "প্ৰসংগ মেনু"
 }

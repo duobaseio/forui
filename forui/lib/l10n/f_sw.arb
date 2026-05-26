@@ -29,5 +29,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Onyesha nenosiri",
   "textFieldEmailLabel": "Barua pepe",
   "passwordFieldLabel": "Nenosiri",
-  "dateTimePickerToday": "Leo"
+  "dateTimePickerToday": "Leo",
+  "contextMenuSemanticsLabel": "Menyu ya muktadha"
 }

@@ -72,6 +72,9 @@ class FLocalizationsZu extends FLocalizations {
   String get autocompleteNoResults => 'Akukho ukufana okutholiwe.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Imenyu yesimo';
+
+  @override
   String get dateFieldHint => 'Khetha usuku';
 
   @override

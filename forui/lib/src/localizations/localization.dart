@@ -87,6 +87,9 @@ class FDefaultLocalizations extends FLocalizations {
   String get dialogSemanticsLabel => 'Dialog';
 
   @override
+  String get contextMenuSemanticsLabel => 'Context menu';
+
+  @override
   String get dateFieldHint => 'Pick a date';
 
   @override

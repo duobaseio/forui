@@ -72,6 +72,9 @@ class FLocalizationsCs extends FLocalizations {
   String get autocompleteNoResults => 'Nebyly nalezeny žádné shody.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Kontextová nabídka';
+
+  @override
   String get dateFieldHint => 'Vyberte datum';
 
   @override

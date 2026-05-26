@@ -29,5 +29,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "បង្ហាញពាក្យសម្ងាត់",
   "textFieldEmailLabel": "អ៊ីមែល",
   "passwordFieldLabel": "ពាក្យសម្ងាត់",
-  "dateTimePickerToday": "ថ្ងៃនេះ"
+  "dateTimePickerToday": "ថ្ងៃនេះ",
+  "contextMenuSemanticsLabel": "ម៉ឺនុយបរិបទ"
 }

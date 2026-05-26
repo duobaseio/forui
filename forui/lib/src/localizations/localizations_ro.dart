@@ -72,6 +72,9 @@ class FLocalizationsRo extends FLocalizations {
   String get autocompleteNoResults => 'Nu s-au găsit potriviri.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Meniu contextual';
+
+  @override
   String get dateFieldHint => 'Selectați data';
 
   @override

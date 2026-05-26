@@ -340,6 +340,12 @@ abstract class FLocalizations {
   /// **'No matches found.'**
   String get autocompleteNoResults;
 
+  /// The semantic label for a context menu.
+  ///
+  /// In en, this message translates to:
+  /// **'Context menu'**
+  String get contextMenuSemanticsLabel;
+
   /// The hint text for the calendar-only date field.
   ///
   /// In en, this message translates to:

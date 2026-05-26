@@ -29,5 +29,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Dangos cyfrinair",
   "textFieldEmailLabel": "E-bost",
   "passwordFieldLabel": "Cyfrinair",
-  "dateTimePickerToday": "Heddiw"
+  "dateTimePickerToday": "Heddiw",
+  "contextMenuSemanticsLabel": "Dewislen cyd-destun"
 }

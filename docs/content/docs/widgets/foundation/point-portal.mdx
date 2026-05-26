@@ -1,0 +1,32 @@
+---
+title: Point Portal
+description: A "floating" portal anchored at a specific point within a child widget's coordinate space.
+apiReference: https://pub.dev/documentation/forui/latest/forui.foundation/FPointPortal-class.html
+---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Callout } from 'fumadocs-ui/components/callout';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import pointPortalDefault from '@/snippets/examples/foundation/point-portal/default.json';
+import pointPortalUsage from '@/snippets/usages/foundation/point_portal/pointPortal.json';
+
+<Callout type="info">
+  This widget is typically used to create other high-level widgets, e.g., [context menu](../overlay/context-menu).
+  You should prefer those high-level widgets unless you're creating a custom widget.
+</Callout>
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='foundation/point-portal' height={500}/>
+  </Tab>
+  <Tab value="Code">
+    <CodeSnippet snippet={pointPortalDefault} />
+  </Tab>
+</Tabs>
+
+## Usage
+
+### `FPointPortal(...)`
+<UsageSnippet usage={pointPortalUsage} />

@@ -28,5 +28,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "إظهار كلمة المرور",
   "textFieldEmailLabel": "البريد الإلكتروني",
   "passwordFieldLabel": "كلمة المرور",
-  "dateTimePickerToday": "اليوم"
+  "dateTimePickerToday": "اليوم",
+  "contextMenuSemanticsLabel": "قائمة السياق"
 }

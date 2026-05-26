@@ -72,6 +72,9 @@ class FLocalizationsSl extends FLocalizations {
   String get autocompleteNoResults => 'Ni ujemanj.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Kontekstni meni';
+
+  @override
   String get dateFieldHint => 'Izberite datum';
 
   @override

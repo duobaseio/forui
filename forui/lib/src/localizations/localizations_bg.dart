@@ -72,6 +72,9 @@ class FLocalizationsBg extends FLocalizations {
   String get autocompleteNoResults => 'Няма намерени съвпадения.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Контекстно меню';
+
+  @override
   String get dateFieldHint => 'Изберете дата';
 
   @override

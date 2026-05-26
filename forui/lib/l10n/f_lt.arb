@@ -29,5 +29,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Rodyti slaptažodį",
   "textFieldEmailLabel": "El. paštas",
   "passwordFieldLabel": "Slaptažodis",
-  "dateTimePickerToday": "Šiandien"
+  "dateTimePickerToday": "Šiandien",
+  "contextMenuSemanticsLabel": "Kontekstinis meniu"
 }

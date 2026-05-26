@@ -72,6 +72,9 @@ class FLocalizationsEu extends FLocalizations {
   String get autocompleteNoResults => 'Ez da bat-etortzerik aurkitu.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Testuinguru-menua';
+
+  @override
   String get dateFieldHint => 'Hautatu data';
 
   @override

@@ -29,5 +29,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Parolni koʻrsatish",
   "textFieldEmailLabel": "Elektron pochta",
   "passwordFieldLabel": "Parol",
-  "dateTimePickerToday": "Bugun"
+  "dateTimePickerToday": "Bugun",
+  "contextMenuSemanticsLabel": "Kontekst menyusi"
 }

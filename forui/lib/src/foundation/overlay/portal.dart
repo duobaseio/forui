@@ -14,11 +14,11 @@ import 'package:forui/src/foundation/overlay/overlay_controller.dart';
 /// A portal that "floats" on top of and relative to a [child] widget.
 ///
 /// See:
-/// * [FOverlay] for a lower-level overlay without built-in positioning and overflow handling.
+/// * https://forui.dev/docs/widgets/foundation/portal for working examples.
+/// * [FOverlay] for an overlay without built-in positioning and overflow handling.
+/// * [FPointPortal] for a portal that anchors to a specific point within the child's coordinate space.
 /// * [FPortalOverflow] for handling viewport overflow.
 /// * [OverlayPortalController] for controlling the portal's visibility.
-/// * [Visualization](https://forui.dev/docs/widgets/foundation/portal#visualization) for a visual demonstration of how
-///   portals work.
 class FPortal extends StatefulWidget {
   /// The control.
   final FOverlayControl control;

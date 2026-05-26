@@ -28,5 +28,6 @@
   "passwordFieldUnobscureTextButtonSemanticsLabel": "Mostrar contrasinal",
   "textFieldEmailLabel": "Correo electrónico",
   "passwordFieldLabel": "Contrasinal",
-  "dateTimePickerToday": "Hoxe"
+  "dateTimePickerToday": "Hoxe",
+  "contextMenuSemanticsLabel": "Menú contextual"
 }

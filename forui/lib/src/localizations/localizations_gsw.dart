@@ -72,6 +72,9 @@ class FLocalizationsGsw extends FLocalizations {
   String get autocompleteNoResults => 'Kei Überiistimmige gfunde.';
 
   @override
+  String get contextMenuSemanticsLabel => 'Kontextmenü';
+
+  @override
   String get dateFieldHint => 'Datum uswähle';
 
   @override
