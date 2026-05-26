@@ -7,7 +7,7 @@ import 'package:forui/forui.dart';
 /// should wrap the builder's result in an [IconTheme] with the desired [IconThemeData].
 typedef FIconBuilder = Widget Function(BuildContext context, {String? semanticsLabel});
 
-/// The icon tokens. Defaults to Lucide icons.
+/// The icon tokens used by Forui's widgets. Defaults to icons in [FLucideIcons].
 ///
 /// ## Customizing icons
 /// To change the icons used by Forui widgets, pass a [FIcons] to [FThemeData].

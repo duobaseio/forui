@@ -9,12 +9,15 @@ import materialSnippet from '@/snippets/snippets/guides/customizing_icons/materi
 import svgSnippet from '@/snippets/snippets/guides/customizing_icons/svg.json';
 
 Forui widgets use the icons defined in [`FIcons`](https://pub.dev/documentation/forui/latest/forui.theme/FIcons-class.html).
-They default to [Lucide](https://lucide.dev/) icons which may not fit your application's custom design system.
+They default to [Lucide](https://lucide.dev/) icons in [`FLucideIcons`](https://pub.dev/documentation/forui_assets/latest/forui_assets/FLucideIcons-class.html),
+which may not fit your application's custom design system.
 
 To change the icons used across all Forui widgets, pass a custom `FIcons` to your [`FThemeData`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData-class.html).
 
-Icons in `FIcons` should inherit their properties from the ambient [`IconTheme`](https://api.flutter.dev/flutter/widgets/IconTheme-class.html)
-created by Forui widgets.
+<Callout type="info">
+    Icons in `FIcons` should inherit their properties from the ambient [`IconTheme`](https://api.flutter.dev/flutter/widgets/IconTheme-class.html)
+    created by Forui widgets.
+</Callout>
 
 ## `IconData`
 
