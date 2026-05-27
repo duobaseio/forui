@@ -60,6 +60,52 @@ void main() {
     debugDefaultTargetPlatformOverride = null;
   });
 
+  testWidgets('opening does not scroll outer scrollable', (tester) async {
+    final outer = ScrollController();
+    addTearDown(outer.dispose);
+
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: ListView.builder(
+          controller: outer,
+          itemCount: 20,
+          itemBuilder: (context, index) {
+            if (index == 5) {
+              return SingleChildScrollView(
+                scrollDirection: .horizontal,
+                child: Row(
+                  children: [
+                    const SizedBox(width: 100),
+                    SizedBox(
+                      width: 200,
+                      child: FSelect<String>(
+                        key: key,
+                        control: const .managed(initial: 'O'),
+                        items: letters,
+                      ),
+                    ),
+                    const SizedBox(width: 200),
+                  ],
+                ),
+              );
+            }
+            return const SizedBox(height: 200);
+          },
+        ),
+      ),
+    );
+
+    outer.jumpTo(800);
+    await tester.pumpAndSettle();
+
+    final before = outer.offset;
+
+    await tester.tap(find.byKey(key));
+    await tester.pumpAndSettle();
+
+    expect(outer.offset, before);
+  });
+
   testWidgets('scrolls to item at the end of very long list', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(

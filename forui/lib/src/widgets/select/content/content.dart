@@ -235,7 +235,12 @@ class _ContentState<T> extends State<Content<T>> {
   }
 
   Future<void> _ensureVisible(BuildContext context) async {
-    await Scrollable.ensureVisible(context);
+    // Scrollable.ensureVisible scrolls ALL ancestor scrollables, not just the dropdown's internal one, causing the
+    // ancestor scrollables to jump.
+    if ((context.findRenderObject(), Scrollable.maybeOf(context)) case (final object?, final scrollable?)) {
+      await scrollable.position.ensureVisible(object);
+    }
+
     // There is an edge case, when at max scroll extent, the first visible item, if selected, remains partially obscured
     // by the scroll handle.
     if (widget.scrollHandles && 0 < _controller.offset && _controller.offset < _controller.position.maxScrollExtent) {
