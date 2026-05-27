@@ -277,6 +277,11 @@ class _FResizableState extends State<FResizable> {
         'FResizable must have a finite main-axis constraint when children use flex. Consider wrapping FResizable in a '
         'SizedBox or Expanded.',
       );
+      assert(
+        totalFixed <= constraint,
+        'Fixed regions require $totalFixed px but only $constraint px is available. '
+        'Increase the available space or reduce the fixed extents.',
+      );
       total = constraint;
     } else {
       total = totalFixed;
