@@ -78,7 +78,11 @@ void main() {
                     const SizedBox(width: 100),
                     SizedBox(
                       width: 200,
-                      child: FSelect<String>(key: key, control: const .managed(initial: 'O'), items: letters),
+                      child: FSelect<String>(
+                        key: key,
+                        control: const .managed(initial: 'O'),
+                        items: letters,
+                      ),
                     ),
                     const SizedBox(width: 200),
                   ],
