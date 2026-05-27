@@ -72,10 +72,7 @@ class FixedResizableRegion extends FResizableRegion {
   FixedResizableRegion({required this.extent, required super.builder, this.minExtent, super.child, super.key})
     : assert(0 < extent, 'extent ($extent) must be > 0'),
       assert(minExtent == null || 0 < minExtent, 'minExtent ($minExtent) must be > 0'),
-      assert(
-        minExtent == null || minExtent.lessOrAround(extent),
-        'minExtent ($minExtent) must be < extent ($extent)',
-      );
+      assert(minExtent == null || minExtent.lessOrAround(extent), 'minExtent ($minExtent) must be < extent ($extent)');
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
