@@ -1,6 +1,6 @@
 name: forui
 description: Beautifully designed, minimalistic widgets for desktop & touch devices.
-version: 0.22.2
+version: 0.22.3
 homepage: https://forui.dev/
 documentation: https://forui.dev/docs
 repository: https://github.com/duobaseio/forui/tree/main/forui
@@ -16,8 +16,8 @@ screenshots:
     path: screenshots/banner-text-130226.png
 
 environment:
-  sdk: ">=3.12.0 <4.0.0"
-  flutter: ">=3.44.0"
+  sdk: ">=3.12.0-0 <4.0.0"
+  flutter: ">=3.44.0-0"
 resolution: workspace
 workspace:
   - example

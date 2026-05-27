@@ -8,6 +8,14 @@
 * Add `FPointPortal`.
 
 
+## 0.22.3
+
+Relax SDK constraints to allow Flutter and Dart beta/pre-release versions.
+
+### `FSelect` & `FMultiSelect`
+* Fix `FSelect` & `FMultiSelect`'s popovers causing ancestor scrollables to jump when opened.
+
+
 ## 0.22.2
 
 ### `FAutocomplete`
