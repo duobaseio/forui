@@ -22,19 +22,16 @@ class ResizablePage extends Example {
       axis: .vertical,
       crossAxisExtent: 300,
       children: [
-        .region(
-          initialExtent: 250,
+        .fixed(
+          extent: 200,
           minExtent: 100,
           builder: (_, data, _) => Label(data: data, icon: FLucideIcons.sunrise, label: 'Morning'),
         ),
-        .region(
-          initialExtent: 100,
-          minExtent: 100,
+        .flex(
           builder: (_, data, _) => Label(data: data, icon: FLucideIcons.sun, label: 'Afternoon'),
         ),
-        .region(
-          initialExtent: 250,
-          minExtent: 100,
+        .flex(
+          flex: 2,
           builder: (_, data, _) => Label(data: data, icon: FLucideIcons.sunset, label: 'Evening'),
         ),
       ],
@@ -60,18 +57,18 @@ class NoCascadingResizablePage extends Example {
       axis: .vertical,
       crossAxisExtent: 300,
       children: [
-        .region(
-          initialExtent: 200,
+        .fixed(
+          extent: 200,
           minExtent: 100,
           builder: (_, data, _) => Label(data: data, icon: FLucideIcons.sunrise, label: 'Morning'),
         ),
-        .region(
-          initialExtent: 200,
+        .fixed(
+          extent: 200,
           minExtent: 100,
           builder: (_, data, _) => Label(data: data, icon: FLucideIcons.sun, label: 'Afternoon'),
         ),
-        .region(
-          initialExtent: 200,
+        .fixed(
+          extent: 200,
           minExtent: 100,
           builder: (_, data, _) => Label(data: data, icon: FLucideIcons.sunset, label: 'Evening'),
         ),
@@ -142,13 +139,13 @@ class HorizontalResizablePage extends Example {
       // {@endhighlight}
       crossAxisExtent: 300,
       children: [
-        .region(
-          initialExtent: 100,
+        .fixed(
+          extent: 100,
           minExtent: 100,
           builder: (context, data, _) => Align(child: Text('Sidebar', style: context.theme.typography.sm)),
         ),
-        .region(
-          initialExtent: 300,
+        .fixed(
+          extent: 300,
           minExtent: 100,
           builder: (context, data, _) => Align(child: Text('Content', style: context.theme.typography.sm)),
         ),
@@ -174,13 +171,13 @@ class DividerResizablePage extends Example {
       // {@endhighlight}
       crossAxisExtent: 300,
       children: [
-        .region(
-          initialExtent: 100,
+        .fixed(
+          extent: 100,
           minExtent: 100,
           builder: (context, data, _) => Align(child: Text('Sidebar', style: context.theme.typography.sm)),
         ),
-        .region(
-          initialExtent: 300,
+        .fixed(
+          extent: 300,
           minExtent: 100,
           builder: (context, data, _) => Align(child: Text('Content', style: context.theme.typography.sm)),
         ),
@@ -206,13 +203,13 @@ class NoDividerResizablePage extends Example {
       // {@endhighlight}
       crossAxisExtent: 300,
       children: [
-        .region(
-          initialExtent: 100,
+        .fixed(
+          extent: 100,
           minExtent: 100,
           builder: (context, data, _) => Align(child: Text('Sidebar', style: context.theme.typography.sm)),
         ),
-        .region(
-          initialExtent: 300,
+        .fixed(
+          extent: 300,
           minExtent: 100,
           builder: (context, data, _) => Align(child: Text('Content', style: context.theme.typography.sm)),
         ),

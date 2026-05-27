@@ -75,26 +75,18 @@ void main() {
               crossAxisExtent: 50,
               axis: axis,
               children: [
-                FResizableRegion(
-                  initialExtent: 30,
-                  minExtent: 20,
-                  builder: (context, snapshot, child) => const Align(child: Text('A')),
-                ),
-                FResizableRegion(
-                  initialExtent: 70,
-                  minExtent: 20,
-                  builder: (context, snapshot, child) => const Align(child: Text('B')),
-                ),
+                .fixed(extent: 30, minExtent: 20, builder: (context, snapshot, child) => const Align(child: Text('A'))),
+                .fixed(extent: 70, minExtent: 20, builder: (context, snapshot, child) => const Align(child: Text('B'))),
               ],
             ),
           ),
         ),
       );
 
-      final divider = axis == Axis.horizontal ? find.byType(HorizontalDivider) : find.byType(VerticalDivider);
+      final divider = axis == .horizontal ? find.byType(HorizontalDivider) : find.byType(VerticalDivider);
       final gesture = await tester.startGesture(tester.getCenter(divider));
       for (final step in steps) {
-        final offset = axis == Axis.horizontal ? Offset(step, 0) : Offset(0, step);
+        final offset = axis == .horizontal ? Offset(step, 0) : Offset(0, step);
         await gesture.moveBy(offset);
         await tester.pump();
       }

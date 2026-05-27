@@ -8,6 +8,16 @@
 * Add `FPointPortal`.
 
 
+### `FResizable`
+* Add `FResizableRegion.flex(...)` for proportionally-sized regions.
+
+* **Breaking** Change `FResizableRegion` to a sealed class with `FResizableRegion.fixed(...)` and
+  `FResizableRegion.flex(...)`.
+* **Breaking** Rename `FResizableRegion(...)` to `FResizableRegion.fixed(...)`.
+* **Breaking** Rename `FResizableRegion.region(...)` to `FResizableRegion.fixed(...)`.
+* **Breaking** Rename `FResizableRegion(initialExtent: ...)` to `FResizableRegion.fixed(extent: ...)`.
+
+
 ## 0.22.3
 
 Relax SDK constraints to allow Flutter and Dart beta/pre-release versions.

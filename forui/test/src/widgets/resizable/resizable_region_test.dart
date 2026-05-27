@@ -8,9 +8,9 @@ Widget stub(BuildContext context, FResizableRegionData data, Widget? child) => c
 
 void main() {
   for (final (index, constructor) in [
-    () => FResizableRegion(initialExtent: 0, builder: stub),
-    () => FResizableRegion(initialExtent: 10, minExtent: 0, builder: stub),
-    () => FResizableRegion(initialExtent: 10, minExtent: 20, builder: stub),
+    () => FResizableRegion.fixed(extent: 0, builder: stub),
+    () => FResizableRegion.fixed(extent: 10, minExtent: 0, builder: stub),
+    () => FResizableRegion.fixed(extent: 10, minExtent: 20, builder: stub),
   ].indexed) {
     test('[$index] constructor throws error', () => expect(constructor, throwsAssertionError));
   }

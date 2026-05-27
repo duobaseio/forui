@@ -8,21 +8,7 @@ import 'package:forui/src/widgets/resizable/resizable.dart';
 /// A resizable region that can be resized along the parent [FResizable]'s axis. It should always be in a [FResizable].
 ///
 /// See https://forui.dev/docs/widgets/layout/resizable for working examples.
-class FResizableRegion extends StatelessWidget {
-  /// The initial extent along the resizable axis, in logical pixels.
-  ///
-  /// ## Contract
-  /// Throws a [AssertionError] if:
-  /// * [initialExtent] is not positive
-  /// * [initialExtent] < [minExtent]
-  final double initialExtent;
-
-  /// The minimum extent along the resizable axis, in logical pixels.
-  ///
-  /// The effective minimum extent is either the given minimum extent or [FResizable.hitRegionExtent], whichever is
-  /// larger. Defaults to [FResizable.hitRegionExtent] if not given.
-  final double? minExtent;
-
+sealed class FResizableRegion extends StatelessWidget {
   /// The builder used to create a child to display in this region.
   final ValueWidgetBuilder<FResizableRegionData> builder;
 
@@ -32,25 +18,30 @@ class FResizableRegion extends StatelessWidget {
   /// the region.
   final Widget? child;
 
-  /// Creates a [FResizableRegion].
-  FResizableRegion({required this.initialExtent, required this.builder, this.minExtent, this.child, super.key})
-    : assert(0 < initialExtent, 'initialExtent ($initialExtent) must be > 0'),
-      assert(minExtent == null || 0 < minExtent, 'minExtent ($minExtent) must be > 0'),
-      assert(
-        minExtent == null || minExtent.lessOrAround(initialExtent),
-        'minExtent ($minExtent) must be < initialExtent ($initialExtent)',
-      );
-
-  /// Creates a [FResizableRegion].
-  ///
-  /// This is identical to [FResizableRegion.new], allowing dot-shorthand construction.
-  factory FResizableRegion.region({
-    required double initialExtent,
+  /// Creates a [FResizableRegion] with a concrete initial extent in logical pixels.
+  factory FResizableRegion.fixed({
+    required double extent,
     required ValueWidgetBuilder<FResizableRegionData> builder,
     double? minExtent,
     Widget? child,
     Key? key,
-  }) = FResizableRegion;
+  }) = FixedResizableRegion;
+
+  /// Creates a [FResizableRegion] that is sized proportionally from the remaining space.
+  ///
+  /// [flex] determines the region's share of the remaining space after concrete-extent regions are placed. The parent
+  /// [FResizable] must have finite main-axis constraints.
+  ///
+  /// [minFlex] constrains how small the region can be resized, expressed as a flex proportion.
+  const factory FResizableRegion.flex({
+    required ValueWidgetBuilder<FResizableRegionData> builder,
+    int flex,
+    int? minFlex,
+    Widget? child,
+    Key? key,
+  }) = FlexResizableRegion;
+
+  const FResizableRegion({required this.builder, this.child, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -69,9 +60,46 @@ class FResizableRegion extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
+    properties.add(ObjectFlagProperty.has('builder', builder));
+  }
+}
+
+@internal
+class FixedResizableRegion extends FResizableRegion {
+  final double extent;
+  final double? minExtent;
+
+  FixedResizableRegion({required this.extent, required super.builder, this.minExtent, super.child, super.key})
+    : assert(0 < extent, 'extent ($extent) must be > 0'),
+      assert(minExtent == null || 0 < minExtent, 'minExtent ($minExtent) must be > 0'),
+      assert(
+        minExtent == null || minExtent.lessOrAround(extent),
+        'minExtent ($minExtent) must be < extent ($extent)',
+      );
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
     properties
-      ..add(DoubleProperty('initialExtent', initialExtent))
-      ..add(DoubleProperty('minExtent', minExtent))
-      ..add(ObjectFlagProperty.has('builder', builder));
+      ..add(DoubleProperty('extent', extent))
+      ..add(DoubleProperty('minExtent', minExtent));
+  }
+}
+
+@internal
+class FlexResizableRegion extends FResizableRegion {
+  final int flex;
+  final int? minFlex;
+
+  const FlexResizableRegion({required super.builder, this.flex = 1, this.minFlex, super.child, super.key})
+    : assert(0 < flex, 'flex ($flex) must be > 0'),
+      assert(minFlex == null || (0 < minFlex && minFlex <= flex), 'minFlex ($minFlex) must be > 0 and <= flex ($flex)');
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(IntProperty('flex', flex))
+      ..add(IntProperty('minFlex', minFlex));
   }
 }

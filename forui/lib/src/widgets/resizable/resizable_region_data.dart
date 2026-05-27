@@ -15,7 +15,7 @@ final class FResizableRegionData with Diagnosticable {
 
   /// This region's minimum and maximum extent along the main resizable axis, in logical pixels.
   ///
-  /// The minimum extent is determined by [FResizableRegion.minExtent].
+  /// The minimum extent is determined by the region's `minExtent` or `minFlex`.
   /// The maximum extent is determined by the [FResizable]'s total extent - the minimum extent of all regions.
   ///
   /// ## Contract

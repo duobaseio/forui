@@ -9,6 +9,7 @@ import 'package:forui/src/foundation/debug.dart';
 import 'package:forui/src/theme/variant.dart';
 import 'package:forui/src/widgets/resizable/divider.dart';
 import 'package:forui/src/widgets/resizable/resizable_controller.dart';
+import 'package:forui/src/widgets/resizable/resizable_region.dart';
 
 @Variants('FResizableAxis', {
   'horizontal': (1, 'The horizontal resizable variant.'),
@@ -18,9 +19,13 @@ part 'resizable.design.dart';
 
 /// A resizable allows its children to be resized along either the horizontal or vertical main axis.
 ///
-/// Each child is a [FResizableRegion] that has an initial and minimum extent. Setting an initial extent less than the
-/// minimum extent will result in undefined behavior. The children are arranged from top to bottom, or left to right,
-/// depending on the main [axis].
+/// Each child is either a [FResizableRegion.fixed] (concrete pixel size) or a [FResizableRegion.flex] (proportional
+/// sizing from remaining space).
+///
+/// Using [FResizableRegion.flex] causes the [FResizable] to fill its parent's main-axis constraints, which must be
+/// finite.
+///
+/// The children are arranged from top to bottom, or left to right, depending on the main [axis] and ambient text direction.
 ///
 /// It is recommended that a [FResizable] contains at least 2 [FResizableRegion]s.
 ///
@@ -138,21 +143,17 @@ class _FResizableState extends State<FResizable> {
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _update();
+    _hitRegionExtent = widget.hitRegionExtent ?? (context.platformVariant.touch ? 60 : 10);
   }
 
   @override
   void didUpdateWidget(FResizable old) {
     super.didUpdateWidget(old);
     final (controller, updated) = widget.control.update(old.control, _controller, () {});
-    if (updated ||
-        widget.axis != old.axis ||
-        widget.crossAxisExtent != old.crossAxisExtent ||
-        widget.hitRegionExtent != old.hitRegionExtent ||
-        !widget.children.equals(old.children)) {
+    if (updated) {
       _controller = controller;
-      _update();
     }
+    _hitRegionExtent = widget.hitRegionExtent ?? (context.platformVariant.touch ? 60 : 10);
   }
 
   @override
@@ -161,74 +162,51 @@ class _FResizableState extends State<FResizable> {
     super.dispose();
   }
 
-  void _update() {
-    _hitRegionExtent = widget.hitRegionExtent ?? (context.platformVariant.touch ? 60 : 10);
-
-    var minOffset = 0.0;
-    final minTotalExtent = widget.children.sum((c) => max(c.minExtent ?? 0, _hitRegionExtent), initial: 0.0);
-    final totalExtent = widget.children.sum((c) => c.initialExtent, initial: 0.0);
-    final regions = [
-      for (final (index, region) in widget.children.indexed)
-        FResizableRegionData(
-          index: index,
-          extent: (
-            min: region.minExtent ?? _hitRegionExtent,
-            max: totalExtent - minTotalExtent + max(region.minExtent ?? 0, _hitRegionExtent),
-            total: totalExtent,
-          ),
-          offset: (min: minOffset, max: minOffset += region.initialExtent),
-        ),
-    ];
-
-    _controller.regions.clear();
-    _controller.regions.addAll(regions);
-  }
-
   @override
   Widget build(BuildContext context) {
-    assert(
-      _controller.regions.length == widget.children.length,
-      'The number of FResizableData should be equal to the number of children.',
-    );
-
     final styles = context.theme.resizableStyles;
     if (widget.axis == .horizontal) {
       final dividerStyle = widget.style(styles.resolve({FResizableAxisVariant.horizontal, context.platformVariant}));
       return SizedBox(
         height: widget.crossAxisExtent,
         child: LayoutBuilder(
-          builder: (_, constraints) => ListenableBuilder(
-            listenable: _controller,
-            builder: (_, _) => Stack(
-              children: [
-                Row(
-                  mainAxisSize: .min,
-                  children: [
-                    for (final (i, child) in widget.children.indexed)
-                      InheritedData(
-                        controller: _controller,
-                        axis: widget.axis,
-                        data: _controller.regions[i],
-                        child: child,
-                      ),
-                  ],
-                ),
-                for (var i = 0; i < widget.children.length - 1; i++)
-                  HorizontalDivider(
-                    controller: _controller,
-                    style: dividerStyle,
-                    type: widget.divider,
-                    left: i,
-                    right: i + 1,
-                    crossAxisExtent: constraints.maxHeight.isFinite ? constraints.maxHeight : widget.crossAxisExtent,
-                    hitRegionExtent: _hitRegionExtent,
-                    resizePercentage: widget.resizePercentage,
-                    cursor: SystemMouseCursors.resizeLeftRight,
-                    semanticFormatterCallback: widget.semanticFormatterCallback,
+          builder: (_, constraints) {
+            // This isn't ideal but the alternative to create a custom RenderObject, compute the layout, and pipe it to
+            // the controller, which is overkill.
+            _update(constraints.maxWidth);
+            return ListenableBuilder(
+              listenable: _controller,
+              builder: (_, _) => Stack(
+                children: [
+                  Row(
+                    mainAxisSize: .min,
+                    children: [
+                      for (final (i, child) in widget.children.indexed)
+                        InheritedData(
+                          controller: _controller,
+                          axis: widget.axis,
+                          data: _controller.regions[i],
+                          child: child,
+                        ),
+                    ],
                   ),
-              ],
-            ),
-          ),
+                  for (var i = 0; i < widget.children.length - 1; i++)
+                    HorizontalDivider(
+                      controller: _controller,
+                      style: dividerStyle,
+                      type: widget.divider,
+                      left: i,
+                      right: i + 1,
+                      crossAxisExtent: constraints.maxHeight.isFinite ? constraints.maxHeight : widget.crossAxisExtent,
+                      hitRegionExtent: _hitRegionExtent,
+                      resizePercentage: widget.resizePercentage,
+                      cursor: SystemMouseCursors.resizeLeftRight,
+                      semanticFormatterCallback: widget.semanticFormatterCallback,
+                    ),
+                ],
+              ),
+            );
+          },
         ),
       );
     } else {
@@ -236,41 +214,113 @@ class _FResizableState extends State<FResizable> {
       return SizedBox(
         width: widget.crossAxisExtent,
         child: LayoutBuilder(
-          builder: (_, constraints) => ListenableBuilder(
-            listenable: _controller,
-            builder: (_, _) => Stack(
-              children: [
-                Column(
-                  mainAxisSize: .min,
-                  children: [
-                    for (final (i, child) in widget.children.indexed)
-                      InheritedData(
-                        controller: _controller,
-                        axis: widget.axis,
-                        data: _controller.regions[i],
-                        child: child,
-                      ),
-                  ],
-                ),
-                for (var i = 0; i < widget.children.length - 1; i++)
-                  VerticalDivider(
-                    controller: _controller,
-                    style: dividerStyle,
-                    type: widget.divider,
-                    left: i,
-                    right: i + 1,
-                    crossAxisExtent: constraints.maxWidth.isFinite ? constraints.maxWidth : widget.crossAxisExtent,
-                    hitRegionExtent: _hitRegionExtent,
-                    resizePercentage: widget.resizePercentage,
-                    cursor: SystemMouseCursors.resizeUpDown,
-                    semanticFormatterCallback: widget.semanticFormatterCallback,
+          builder: (_, constraints) {
+            // This isn't ideal but the alternative to create a custom RenderObject, compute the layout, and pipe it to
+            // the controller, which is overkill.
+            _update(constraints.maxHeight);
+            return ListenableBuilder(
+              listenable: _controller,
+              builder: (_, _) => Stack(
+                children: [
+                  Column(
+                    mainAxisSize: .min,
+                    children: [
+                      for (final (i, child) in widget.children.indexed)
+                        InheritedData(
+                          controller: _controller,
+                          axis: widget.axis,
+                          data: _controller.regions[i],
+                          child: child,
+                        ),
+                    ],
                   ),
-              ],
-            ),
-          ),
+                  for (var i = 0; i < widget.children.length - 1; i++)
+                    VerticalDivider(
+                      controller: _controller,
+                      style: dividerStyle,
+                      type: widget.divider,
+                      left: i,
+                      right: i + 1,
+                      crossAxisExtent: constraints.maxWidth.isFinite ? constraints.maxWidth : widget.crossAxisExtent,
+                      hitRegionExtent: _hitRegionExtent,
+                      resizePercentage: widget.resizePercentage,
+                      cursor: SystemMouseCursors.resizeUpDown,
+                      semanticFormatterCallback: widget.semanticFormatterCallback,
+                    ),
+                ],
+              ),
+            );
+          },
         ),
       );
     }
+  }
+
+  void _update(double constraint) {
+    var totalFlex = 0.0;
+    var totalFixed = 0.0;
+    var totalMinExtent = 0.0;
+    for (final child in widget.children) {
+      switch (child) {
+        case FlexResizableRegion(:final flex):
+          totalFlex += flex;
+        case FixedResizableRegion(:final extent, :final minExtent):
+          totalFixed += extent;
+          totalMinExtent += max(minExtent ?? 0, _hitRegionExtent);
+      }
+    }
+
+    final double total;
+    if (0 < totalFlex) {
+      assert(
+        constraint.isFinite,
+        'FResizable must have a finite main-axis constraint when children use flex. Consider wrapping FResizable in a '
+        'SizedBox or Expanded.',
+      );
+      total = constraint;
+    } else {
+      total = totalFixed;
+    }
+
+    final remaining = total - totalFixed;
+    final regions = <FResizableRegionData>[];
+    var offset = 0.0;
+
+    for (final child in widget.children) {
+      if (child case FlexResizableRegion(:final minFlex)) {
+        totalMinExtent += minFlex == null ? _hitRegionExtent : max(remaining * minFlex / totalFlex, _hitRegionExtent);
+      }
+    }
+
+    for (final (index, region) in widget.children.indexed) {
+      switch (region) {
+        case FixedResizableRegion(:final extent, :final minExtent):
+          final minExt = max(minExtent ?? 0, _hitRegionExtent);
+          final maxExt = total - totalMinExtent + minExt;
+          regions.add(
+            FResizableRegionData(
+              index: index,
+              extent: (min: minExt, max: maxExt, total: total),
+              offset: (min: offset, max: offset += extent),
+            ),
+          );
+
+        case FlexResizableRegion(:final flex, :final minFlex):
+          final minExt = minFlex == null ? _hitRegionExtent : max(remaining * minFlex / totalFlex, _hitRegionExtent);
+          final maxExt = total - totalMinExtent + minExt;
+          regions.add(
+            FResizableRegionData(
+              index: index,
+              extent: (min: minExt, max: maxExt, total: total),
+              offset: (min: offset, max: offset += remaining * flex / totalFlex),
+            ),
+          );
+      }
+    }
+
+    _controller.regions
+      ..clear()
+      ..addAll(regions);
   }
 }
 
