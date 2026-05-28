@@ -20,14 +20,14 @@ void main() {
                 axis: .vertical,
                 control: .managed(controller: controller),
                 children: [
-                  FResizableRegion(
-                    initialExtent: 100,
+                  .fixed(
+                    extent: 100,
                     minExtent: 50,
                     builder: (context, snapshot, child) => const Align(child: Text('A')),
                     child: Container(),
                   ),
-                  FResizableRegion(
-                    initialExtent: 100,
+                  .fixed(
+                    extent: 100,
                     minExtent: 50,
                     builder: (context, snapshot, child) => const Align(child: Text('B')),
                     child: Container(),
@@ -57,14 +57,14 @@ void main() {
                 axis: .vertical,
                 control: .managed(controller: controller),
                 children: [
-                  FResizableRegion(
-                    initialExtent: 100,
+                  .fixed(
+                    extent: 100,
                     minExtent: 50,
                     builder: (context, snapshot, child) => const Align(child: Text('A')),
                     child: Container(),
                   ),
-                  FResizableRegion(
-                    initialExtent: 100,
+                  .fixed(
+                    extent: 100,
                     minExtent: 50,
                     builder: (context, snapshot, child) => const Align(child: Text('B')),
                     child: Container(),

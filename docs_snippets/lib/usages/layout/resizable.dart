@@ -21,16 +21,25 @@ final resizable = FResizable(
   axis: .vertical,
   divider: .dividerWithThumb,
   children: [
-    FResizableRegion(initialExtent: 200, builder: (context, data, child) => child!),
-    FResizableRegion(initialExtent: 200, minExtent: 100, builder: (context, data, child) => child!),
+    .fixed(extent: 200, minExtent: 100, builder: (context, data, child) => child!),
+    .flex(flex: 2, minFlex: 1, builder: (context, data, child) => child!),
   ],
   // {@endcategory}
 );
 
-final resizableRegion = FResizableRegion(
+final fixedRegion = FResizableRegion.fixed(
   // {@category "Core"}
-  initialExtent: 200,
+  extent: 200,
   minExtent: 100,
+  builder: (context, data, child) => child!,
+  child: const Placeholder(),
+  // {@endcategory}
+);
+
+final flexRegion = FResizableRegion.flex(
+  // {@category "Core"}
+  flex: 2,
+  minFlex: 1,
   builder: (context, data, child) => child!,
   child: const Placeholder(),
   // {@endcategory}

@@ -18,13 +18,13 @@ void main() {
             axis: .vertical,
             crossAxisExtent: 100,
             children: [
-              FResizableRegion(
-                initialExtent: 150,
+              .fixed(
+                extent: 150,
                 builder: (_, _, child) => child!,
                 child: const Align(child: Text('')),
               ),
-              FResizableRegion(
-                initialExtent: 300,
+              .fixed(
+                extent: 300,
                 builder: (_, _, child) => child!,
                 child: const Align(child: Text('')),
               ),
@@ -53,13 +53,13 @@ void main() {
                   divider: divider,
                   crossAxisExtent: 100,
                   children: [
-                    FResizableRegion(
-                      initialExtent: 150,
+                    .fixed(
+                      extent: 150,
                       builder: (_, _, child) => child!,
                       child: const Align(child: Text('A')),
                     ),
-                    FResizableRegion(
-                      initialExtent: 300,
+                    .fixed(
+                      extent: 300,
                       builder: (_, _, child) => child!,
                       child: const Align(child: Text('B')),
                     ),
@@ -94,13 +94,13 @@ void main() {
                     divider: divider,
                     crossAxisExtent: 100,
                     children: [
-                      FResizableRegion(
-                        initialExtent: 150,
+                      .fixed(
+                        extent: 150,
                         builder: (_, _, child) => child!,
                         child: const Align(child: Text('A')),
                       ),
-                      FResizableRegion(
-                        initialExtent: 300,
+                      .fixed(
+                        extent: 300,
                         builder: (_, _, child) => child!,
                         child: const Align(child: Text('B')),
                       ),
@@ -127,13 +127,13 @@ void main() {
                     divider: divider,
                     crossAxisExtent: 100,
                     children: [
-                      FResizableRegion(
-                        initialExtent: 150,
+                      .fixed(
+                        extent: 150,
                         builder: (_, _, child) => child!,
                         child: const Align(child: Text('A')),
                       ),
-                      FResizableRegion(
-                        initialExtent: 300,
+                      .fixed(
+                        extent: 300,
                         builder: (_, _, child) => child!,
                         child: const Align(child: Text('B')),
                       ),
@@ -149,6 +149,76 @@ void main() {
       }
     }
 
+    for (final theme in TestScaffold.themes) {
+      testWidgets('${theme.name} - flex-only - horizontal', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme.data,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                border: .all(color: theme.data.colors.border),
+                borderRadius: .circular(8),
+              ),
+              child: SizedBox(
+                width: 450,
+                child: FResizable(
+                  axis: .horizontal,
+                  crossAxisExtent: 100,
+                  children: [
+                    .flex(
+                      builder: (_, _, child) => child!,
+                      child: const Align(child: Text('A')),
+                    ),
+                    .flex(
+                      flex: 2,
+                      builder: (_, _, child) => child!,
+                      child: const Align(child: Text('B')),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+
+        await expectLater(find.byType(FResizable), matchesGoldenFile('resizable/${theme.name}/flex-horizontal.png'));
+      });
+
+      testWidgets('${theme.name} - mixed - vertical', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold(
+            theme: theme.data,
+            child: DecoratedBox(
+              decoration: BoxDecoration(
+                border: .all(color: theme.data.colors.border),
+                borderRadius: .circular(8),
+              ),
+              child: SizedBox(
+                height: 450,
+                child: FResizable(
+                  axis: .vertical,
+                  crossAxisExtent: 100,
+                  children: [
+                    .fixed(
+                      extent: 150,
+                      builder: (_, _, child) => child!,
+                      child: const Align(child: Text('Fixed')),
+                    ),
+                    .flex(
+                      builder: (_, _, child) => child!,
+                      child: const Align(child: Text('Flex')),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        );
+
+        await expectLater(find.byType(FResizable), matchesGoldenFile('resizable/${theme.name}/mixed-vertical.png'));
+      });
+    }
+
     for (final axis in Axis.values) {
       testWidgets('expanded - $axis', (tester) async {
         await tester.pumpWidget(
@@ -162,13 +232,13 @@ void main() {
                 child: FResizable(
                   axis: axis,
                   children: [
-                    FResizableRegion(
-                      initialExtent: 150,
+                    .fixed(
+                      extent: 150,
                       builder: (_, _, child) => child!,
                       child: const Align(child: Text('A')),
                     ),
-                    FResizableRegion(
-                      initialExtent: 300,
+                    .fixed(
+                      extent: 300,
                       builder: (_, _, child) => child!,
                       child: const Align(child: Text('B')),
                     ),
