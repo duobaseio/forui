@@ -258,8 +258,7 @@ class TappableGroupGestureRecognizer extends OneSequenceGestureRecognizer {
   /// expect non-overlapping siblings, so render-tree depth is the correct ordering for all in-scope use cases. Users
   /// who need paint-order Z (e.g. overlapping `FTappable`s in a `Stack`) can opt out via `FTappableGroup.isolate`.
   GroupEntry? _hitTest(Offset position) {
-    /// True iff [ancestor] is on the [RenderObject] parent chain of [descendant]. Mirrors the depth-based short-circuit
-    /// used by Flutter's `Element._debugIsDescendantOf`.
+    // True iff [ancestor] is on the [RenderObject] parent chain of [descendant].
     bool ancestorOf(RenderObject ancestor, RenderObject descendant) {
       var node = descendant.parent;
       while (node != null && node.depth > ancestor.depth) {
@@ -268,25 +267,26 @@ class TappableGroupGestureRecognizer extends OneSequenceGestureRecognizer {
       return node == ancestor;
     }
 
-    // Single-pass deepest-callback-bearing selection. Skipping !hasPrimaryCallback first avoids
-    // findRenderObject for entries that wouldn't have won anyway, and avoids the per-move list
-    // allocation and sort that fired on every slide-across cross-entry move.
-    GroupEntry? best;
-    RenderObject? bestRO;
-    for (final e in entries) {
-      if (!e.hitTest(position) || !e.hasPrimaryCallback) {
+    // Single-pass deepest-callback-bearing selection.
+    GroupEntry? deepest;
+    RenderObject? deepestObject;
+    for (final entry in entries) {
+      if (!entry.hitTest(position) || !entry.hasPrimaryCallback) {
         continue;
       }
-      final ro = e.context.findRenderObject();
-      if (ro == null) {
+
+      final object = entry.context.findRenderObject();
+      if (object == null) {
         continue;
       }
-      if (best == null || ancestorOf(bestRO!, ro)) {
-        best = e;
-        bestRO = ro;
+
+      if (deepest == null || ancestorOf(deepestObject!, object)) {
+        deepest = entry;
+        deepestObject = object;
       }
     }
-    return best;
+
+    return deepest;
   }
 
   @override
