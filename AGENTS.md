@@ -15,6 +15,7 @@ Bootstrapping: `make bootstrap` (or `make bs`). Run `make help` for all commands
 
 ## Style Guide
 
+* Wrap all source lines (code, dartdocs, comments) at 120 characters.
 * Prefix publicly exported widgets and styles with `F`.
 * Prefer [dot-shorthands](https://dart.dev/language/dot-shorthands) where possible except for unnamed constructors.
   ```dart

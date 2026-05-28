@@ -4,6 +4,11 @@
 * Add `FContextMenu`.
 
 
+### `FItem` & `FTile`
+* Fix nested `FTappable`-based widgets (e.g. `FButton` in a prefix or suffix) not receiving their own taps when the
+  enclosing tile is inside an `FItemGroup` or `FTileGroup`.
+
+
 ### `FPointPortal`
 * Add `FPointPortal`.
 

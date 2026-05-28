@@ -522,4 +522,126 @@ void main() {
       await tester.pumpAndSettle(const Duration(milliseconds: 200));
     });
   });
+
+  group('depth-aware hit resolution', () {
+    Widget buildNested({
+      required VoidCallback? outerOnPress,
+      required VoidCallback? innerOnPress,
+      HitTestBehavior innerBehavior = .translucent,
+    }) => TestScaffold(
+      child: FTappableGroup(
+        child: SizedBox(
+          height: 100,
+          width: 200,
+          child: FTappable.static(
+            onPress: outerOnPress,
+            child: Center(
+              child: SizedBox(
+                key: const ValueKey('inner'),
+                height: 30,
+                width: 30,
+                child: FTappable.static(
+                  behavior: innerBehavior,
+                  onPress: innerOnPress,
+                  child: const SizedBox.expand(),
+                ),
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+
+    testWidgets('translucent inner with onPress wins over outer', (tester) async {
+      var outerPress = 0;
+      var innerPress = 0;
+      await tester.pumpWidget(
+        buildNested(outerOnPress: () => outerPress++, innerOnPress: () => innerPress++),
+      );
+
+      await tester.tap(find.byKey(const ValueKey('inner')));
+      await tester.pumpAndSettle(const Duration(milliseconds: 200));
+
+      expect(innerPress, 1);
+      expect(outerPress, 0);
+    });
+
+    testWidgets('translucent inner without callbacks passes through to outer', (tester) async {
+      var outerPress = 0;
+      await tester.pumpWidget(buildNested(outerOnPress: () => outerPress++, innerOnPress: null));
+
+      await tester.tap(find.byKey(const ValueKey('inner')));
+      await tester.pumpAndSettle(const Duration(milliseconds: 200));
+
+      expect(outerPress, 1);
+    });
+
+    testWidgets('opaque inner without callbacks falls through to outer', (tester) async {
+      var outerPress = 0;
+      await tester.pumpWidget(
+        buildNested(
+          outerOnPress: () => outerPress++,
+          innerOnPress: null,
+          innerBehavior: .opaque,
+        ),
+      );
+
+      await tester.tap(find.byKey(const ValueKey('inner')));
+      await tester.pumpAndSettle(const Duration(milliseconds: 200));
+
+      // Mirrors Flutter's arena: an opaque widget without recognizers doesn't block ancestors.
+      expect(outerPress, 1);
+    });
+
+    testWidgets('opaque inner with onPress fires inner only', (tester) async {
+      var outerPress = 0;
+      var innerPress = 0;
+      await tester.pumpWidget(
+        buildNested(
+          outerOnPress: () => outerPress++,
+          innerOnPress: () => innerPress++,
+          innerBehavior: .opaque,
+        ),
+      );
+
+      await tester.tap(find.byKey(const ValueKey('inner')));
+      await tester.pumpAndSettle(const Duration(milliseconds: 200));
+
+      expect(innerPress, 1);
+      expect(outerPress, 0);
+    });
+
+    testWidgets('deferToChild inner is a transparent passthrough', (tester) async {
+      var outerPress = 0;
+      await tester.pumpWidget(
+        buildNested(
+          outerOnPress: () => outerPress++,
+          innerOnPress: null,
+          innerBehavior: .deferToChild,
+        ),
+      );
+
+      await tester.tap(find.byKey(const ValueKey('inner')));
+      await tester.pumpAndSettle(const Duration(milliseconds: 200));
+
+      expect(outerPress, 1);
+    });
+
+    testWidgets('outer-only tap (outside inner) still fires outer', (tester) async {
+      var outerPress = 0;
+      var innerPress = 0;
+      await tester.pumpWidget(
+        buildNested(outerOnPress: () => outerPress++, innerOnPress: () => innerPress++),
+      );
+
+      // The outer SizedBox is 200x100 centered; inner is 30x30 centered. Tap near the edge
+      // to land on the outer but outside the inner.
+      final outer = tester.getRect(find.byType(FTappableGroup));
+      await tester.tapAt(outer.topLeft + const Offset(10, 10));
+      await tester.pumpAndSettle(const Duration(milliseconds: 200));
+
+      expect(outerPress, 1);
+      expect(innerPress, 0);
+    });
+  });
 }

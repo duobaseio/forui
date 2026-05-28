@@ -2,8 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
-
-import 'package:collection/collection.dart';
+import 'package:flutter/rendering.dart';
 
 import 'package:forui/src/foundation/tappable/tappable_group.dart';
 
@@ -82,8 +81,9 @@ class TappableGroupGestureRecognizer extends OneSequenceGestureRecognizer {
           'This is likely a bug in Forui. Please file a bug report: https://github.com/duobaseio/forui/issues/new?template=bug_report.md',
         );
 
-        // Pressed down on an entry.
-        if (entries.firstWhereOrNull((e) => e.hitTest(position)) case final entry?) {
+        // Pressed down on an entry. Resolve deepest-first so nested entries (e.g. an FButton
+        // in an FTile suffix) win over their containing tile.
+        if (_hitTest(position) case final entry?) {
           _state = .pressing;
           _current = entry;
           _origin = position;
@@ -135,8 +135,8 @@ class TappableGroupGestureRecognizer extends OneSequenceGestureRecognizer {
         _state = .sliding;
         _cancel();
 
-        // Moved into another entry.
-        if (entries.firstWhereOrNull((e) => e.hitTest(position)) case final entry?) {
+        // Moved into another entry. Same depth resolution as PointerDown.
+        if (_hitTest(position) case final entry?) {
           _state = .slidePressing;
           unawaited(slidePressHapticFeedback());
           _current = entry;
@@ -247,6 +247,57 @@ class TappableGroupGestureRecognizer extends OneSequenceGestureRecognizer {
         resolve(.accepted);
       }
     });
+  }
+
+  /// Picks the deepest hit entry at [position] that has at least one primary callback. Mirrors Flutter's arena rule
+  /// "only widgets with recognizers compete" applied to our flat entries list: an entry with no callbacks contributes
+  /// nothing to resolution and the next outer entry gets the chance.
+  ///
+  /// Used for both `PointerDown` and `PointerMove`. Flutter doesn't re-hit-test on move events, so we resolve via
+  /// `RenderObject` ancestry rather than rely on Flutter's cached hit-test result. `FTappableGroup` is documented to
+  /// expect non-overlapping siblings, so render-tree depth is the correct ordering for all in-scope use cases. Users
+  /// who need paint-order Z (e.g. overlapping `FTappable`s in a `Stack`) can opt out via `FTappableGroup.isolate`.
+  GroupEntry? _hitTest(Offset position) {
+    /// True iff [ancestor] is on the [RenderObject] parent chain of [descendant]. Mirrors the depth-based short-circuit
+    /// used by Flutter's `Element._debugIsDescendantOf`.
+    bool ancestorOf(RenderObject ancestor, RenderObject descendant) {
+      var node = descendant.parent;
+      while (node != null && node.depth > ancestor.depth) {
+        node = node.parent;
+      }
+      return node == ancestor;
+    }
+
+    final hits =
+        [
+          for (final e in entries)
+            if (e.hitTest(position)) e,
+        ]..sort((a, b) {
+          final aRO = a.context.findRenderObject();
+          final bRO = b.context.findRenderObject();
+          if (aRO == null || bRO == null) {
+            return 0;
+          }
+
+          if (ancestorOf(aRO, bRO)) {
+            return 1; // a is outer, b is deeper; b first
+          }
+
+          if (ancestorOf(bRO, aRO)) {
+            return -1;
+          }
+
+          return 0;
+        });
+
+    // Mirror Flutter's arena: an entry "competes" only when it has at least one recognizer-equivalent (a primary callback).
+    // Without one, it doesn't claim regardless of HitTestBehavior, and the next outer entry gets the chance.
+    for (final entry in hits) {
+      if (entry.hasPrimaryCallback) {
+        return entry;
+      }
+    }
+    return null;
   }
 
   @override

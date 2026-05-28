@@ -152,4 +152,17 @@ class GroupEntry {
     final box = context.findRenderObject();
     return box is RenderBox ? box.globalToLocal(globalPosition) : globalPosition;
   }
+
+  bool get hasPrimaryCallback =>
+      onPress != null ||
+      onLongPress != null ||
+      onPressDown != null ||
+      onPressUp != null ||
+      onPressCancel != null ||
+      onPressMove != null ||
+      onLongPressDown != null ||
+      onLongPressStart != null ||
+      onLongPressEnd != null ||
+      onLongPressMove != null ||
+      onLongPressCancel != null;
 }
