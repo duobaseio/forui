@@ -623,5 +623,32 @@ void main() {
       expect(outerPress, 1);
       expect(innerPress, 0);
     });
+
+    testWidgets('group with only callback-less entries does not swallow ancestor gestures', (tester) async {
+      var ancestorTap = 0;
+      await tester.pumpWidget(
+        TestScaffold(
+          child: GestureDetector(
+            onTap: () => ancestorTap++,
+            child: FTappableGroup(
+              child: SizedBox(
+                height: 50,
+                width: 200,
+                child: FTappable.static(
+                  // Decorative tappable: registers with the group but has no callbacks. The group
+                  // recognizer must not claim the gesture so the ancestor's onTap can fire.
+                  child: const Text('decorative'),
+                ),
+              ),
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.text('decorative'));
+      await tester.pumpAndSettle(const Duration(milliseconds: 200));
+
+      expect(ancestorTap, 1);
+    });
   });
 }

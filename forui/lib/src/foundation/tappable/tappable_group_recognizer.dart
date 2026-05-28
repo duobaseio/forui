@@ -68,7 +68,7 @@ class TappableGroupGestureRecognizer extends OneSequenceGestureRecognizer {
   @override
   @protected
   bool isPointerAllowed(PointerDownEvent event) =>
-      (event.buttons & kPrimaryButton != 0) && entries.any((e) => e.hitTest(event.position));
+      (event.buttons & kPrimaryButton != 0) && _hitTest(event.position) != null;
 
   @override
   @protected
@@ -268,36 +268,25 @@ class TappableGroupGestureRecognizer extends OneSequenceGestureRecognizer {
       return node == ancestor;
     }
 
-    final hits =
-        [
-          for (final e in entries)
-            if (e.hitTest(position)) e,
-        ]..sort((a, b) {
-          final aRO = a.context.findRenderObject();
-          final bRO = b.context.findRenderObject();
-          if (aRO == null || bRO == null) {
-            return 0;
-          }
-
-          if (ancestorOf(aRO, bRO)) {
-            return 1; // a is outer, b is deeper; b first
-          }
-
-          if (ancestorOf(bRO, aRO)) {
-            return -1;
-          }
-
-          return 0;
-        });
-
-    // Mirror Flutter's arena: an entry "competes" only when it has at least one recognizer-equivalent (a primary callback).
-    // Without one, it doesn't claim regardless of HitTestBehavior, and the next outer entry gets the chance.
-    for (final entry in hits) {
-      if (entry.hasPrimaryCallback) {
-        return entry;
+    // Single-pass deepest-callback-bearing selection. Skipping !hasPrimaryCallback first avoids
+    // findRenderObject for entries that wouldn't have won anyway, and avoids the per-move list
+    // allocation and sort that fired on every slide-across cross-entry move.
+    GroupEntry? best;
+    RenderObject? bestRO;
+    for (final e in entries) {
+      if (!e.hitTest(position) || !e.hasPrimaryCallback) {
+        continue;
+      }
+      final ro = e.context.findRenderObject();
+      if (ro == null) {
+        continue;
+      }
+      if (best == null || ancestorOf(bestRO!, ro)) {
+        best = e;
+        bestRO = ro;
       }
     }
-    return null;
+    return best;
   }
 
   @override
