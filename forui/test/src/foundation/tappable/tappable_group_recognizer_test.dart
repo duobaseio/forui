@@ -540,11 +540,7 @@ void main() {
                 key: const ValueKey('inner'),
                 height: 30,
                 width: 30,
-                child: FTappable.static(
-                  behavior: innerBehavior,
-                  onPress: innerOnPress,
-                  child: const SizedBox.expand(),
-                ),
+                child: FTappable.static(behavior: innerBehavior, onPress: innerOnPress, child: const SizedBox.expand()),
               ),
             ),
           ),
@@ -555,9 +551,7 @@ void main() {
     testWidgets('translucent inner with onPress wins over outer', (tester) async {
       var outerPress = 0;
       var innerPress = 0;
-      await tester.pumpWidget(
-        buildNested(outerOnPress: () => outerPress++, innerOnPress: () => innerPress++),
-      );
+      await tester.pumpWidget(buildNested(outerOnPress: () => outerPress++, innerOnPress: () => innerPress++));
 
       await tester.tap(find.byKey(const ValueKey('inner')));
       await tester.pumpAndSettle(const Duration(milliseconds: 200));
@@ -579,11 +573,7 @@ void main() {
     testWidgets('opaque inner without callbacks falls through to outer', (tester) async {
       var outerPress = 0;
       await tester.pumpWidget(
-        buildNested(
-          outerOnPress: () => outerPress++,
-          innerOnPress: null,
-          innerBehavior: .opaque,
-        ),
+        buildNested(outerOnPress: () => outerPress++, innerOnPress: null, innerBehavior: .opaque),
       );
 
       await tester.tap(find.byKey(const ValueKey('inner')));
@@ -597,11 +587,7 @@ void main() {
       var outerPress = 0;
       var innerPress = 0;
       await tester.pumpWidget(
-        buildNested(
-          outerOnPress: () => outerPress++,
-          innerOnPress: () => innerPress++,
-          innerBehavior: .opaque,
-        ),
+        buildNested(outerOnPress: () => outerPress++, innerOnPress: () => innerPress++, innerBehavior: .opaque),
       );
 
       await tester.tap(find.byKey(const ValueKey('inner')));
@@ -614,11 +600,7 @@ void main() {
     testWidgets('deferToChild inner is a transparent passthrough', (tester) async {
       var outerPress = 0;
       await tester.pumpWidget(
-        buildNested(
-          outerOnPress: () => outerPress++,
-          innerOnPress: null,
-          innerBehavior: .deferToChild,
-        ),
+        buildNested(outerOnPress: () => outerPress++, innerOnPress: null, innerBehavior: .deferToChild),
       );
 
       await tester.tap(find.byKey(const ValueKey('inner')));
@@ -630,9 +612,7 @@ void main() {
     testWidgets('outer-only tap (outside inner) still fires outer', (tester) async {
       var outerPress = 0;
       var innerPress = 0;
-      await tester.pumpWidget(
-        buildNested(outerOnPress: () => outerPress++, innerOnPress: () => innerPress++),
-      );
+      await tester.pumpWidget(buildNested(outerOnPress: () => outerPress++, innerOnPress: () => innerPress++));
 
       // The outer SizedBox is 200x100 centered; inner is 30x30 centered. Tap near the edge
       // to land on the outer but outside the inner.
