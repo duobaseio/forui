@@ -630,14 +630,14 @@ void main() {
         TestScaffold(
           child: GestureDetector(
             onTap: () => ancestorTap++,
-            child: FTappableGroup(
+            child: const FTappableGroup(
               child: SizedBox(
                 height: 50,
                 width: 200,
                 child: FTappable.static(
                   // Decorative tappable: registers with the group but has no callbacks. The group
                   // recognizer must not claim the gesture so the ancestor's onTap can fire.
-                  child: const Text('decorative'),
+                  child: Text('decorative'),
                 ),
               ),
             ),
