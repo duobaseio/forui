@@ -10,6 +10,9 @@ on:
     paths:
       - forui/**
 
+permissions:
+  contents: read
+
 jobs:
   test:
     name: Build & test

@@ -10,6 +10,9 @@ on:
     paths:
       - forui_hooks/**
 
+permissions:
+  contents: read
+
 jobs:
   test:
     name: Build & test

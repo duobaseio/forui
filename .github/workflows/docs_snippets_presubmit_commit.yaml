@@ -5,6 +5,10 @@ on:
     workflows: ["Docs Snippets Presubmit Format"]
     types: [completed]
 
+permissions:
+  actions: read
+  contents: read
+
 jobs:
   commit:
     name: Commit Changes

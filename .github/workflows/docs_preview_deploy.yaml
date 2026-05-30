@@ -4,6 +4,11 @@ on:
     workflows: ["Docs Preview Build"]
     types: [completed]
 
+permissions:
+  actions: read
+  contents: read
+  pull-requests: read
+
 jobs:
   deploy:
     name: Deploy Docs & Snippets

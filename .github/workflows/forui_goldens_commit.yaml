@@ -8,39 +8,18 @@ on:
   #   workflows: ["Forui Goldens Generate"]
   #   types: [completed]
 
+permissions:
+  contents: read
+  actions: read
+
 jobs:
   commit:
     name: Commit Changes
     runs-on: ubuntu-latest
-    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    if: >-
+      ${{ github.event.workflow_run.conclusion == 'success'
+      && github.event.workflow_run.head_repository.full_name == github.repository }}
     steps:
-      # Try to download PR metadata from either OS
-      - id: download-metadata-macos
-        continue-on-error: true
-        uses: actions/download-artifact@v8
-        with:
-          name: pr-metadata-macos-latest
-          path: ./pr-metadata
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          run-id: ${{ github.event.workflow_run.id }}
-
-      - id: download-metadata-windows
-        continue-on-error: true
-        if: steps.download-metadata-macos.outcome == 'failure'
-        uses: actions/download-artifact@v8
-        with:
-          name: pr-metadata-windows-latest
-          path: ./pr-metadata
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          run-id: ${{ github.event.workflow_run.id }}
-
-      - id: pr-metadata
-        run: |
-          echo "pr_number=$(cat ./pr-metadata/pr-number.txt)" >> $GITHUB_OUTPUT
-          echo "pr_head_ref=$(cat ./pr-metadata/pr-head-ref.txt)" >> $GITHUB_OUTPUT
-          echo "pr_head_sha=$(cat ./pr-metadata/pr-head-sha.txt)" >> $GITHUB_OUTPUT
-          echo "pr_head_repo=$(cat ./pr-metadata/pr-head-repo.txt)" >> $GITHUB_OUTPUT
-
       # Download patches from both OS
       - id: download-patch-macos
         continue-on-error: true
@@ -84,8 +63,7 @@ jobs:
         uses: actions/checkout@v6
         with:
           token: ${{ steps.generate-token.outputs.token }}
-          repository: ${{ steps.pr-metadata.outputs.pr_head_repo }}
-          ref: ${{ steps.pr-metadata.outputs.pr_head_ref }}
+          ref: ${{ github.event.workflow_run.head_branch }}
 
       - if: steps.check-changes.outputs.changes == 'true'
         run: |

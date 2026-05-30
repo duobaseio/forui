@@ -8,6 +8,9 @@ on:
       - 'docs/**'
       - 'docs_snippets/**'
 
+permissions:
+  contents: read
+
 jobs:
   build:
     name: Build Docs & Snippets

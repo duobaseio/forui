@@ -12,6 +12,9 @@ on:
       - forui/**
       - docs_snippets/**
 
+permissions:
+  contents: read
+
 jobs:
   test:
     name: Build & test

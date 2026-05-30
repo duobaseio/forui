@@ -11,6 +11,9 @@ on:
       - .github/workflows/md_lint.yaml
       - '**.md'
 
+permissions:
+  contents: read
+
 jobs:
   lint:
     name: Lint Markdown URLs

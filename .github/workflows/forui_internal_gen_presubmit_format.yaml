@@ -11,6 +11,9 @@ on:
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
 
+permissions:
+  contents: read
+
 jobs:
   format:
     if: github.actor != 'auto-maid[bot]' && github.event.pull_request.draft == false
