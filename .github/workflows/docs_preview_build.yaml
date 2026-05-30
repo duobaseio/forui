@@ -75,18 +75,3 @@ jobs:
           name: docs-build
           path: ./docs/docs-build.tar
           retention-days: 1
-
-      # Upload PR metadata
-      - run: |
-          echo "${{ github.event.number }}" > pr-number.txt
-          echo "${{ github.event.pull_request.head.ref }}" > pr-head-ref.txt
-          echo "${{ github.event.pull_request.head.sha }}" > pr-head-sha.txt
-
-      - uses: actions/upload-artifact@v7
-        with:
-          name: pr-metadata
-          path: |
-            pr-number.txt
-            pr-head-ref.txt
-            pr-head-sha.txt
-          retention-days: 1

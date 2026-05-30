@@ -11,29 +11,20 @@ jobs:
     if: ${{ github.event.workflow_run.conclusion == 'success' }}
     environment: docs-development
     steps:
-      # Extract PR metadata
-      - uses: actions/download-artifact@v8
-        with:
-          name: pr-metadata
-          path: ./pr-metadata
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          run-id: ${{ github.event.workflow_run.id }}
-      - id: pr-metadata
+      # Derive PR identity from the trusted workflow_run event, not from build-job artifacts.
+      - id: meta
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HEAD_BRANCH: ${{ github.event.workflow_run.head_branch }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          REPO: ${{ github.repository }}
         run: |
-          echo "pr_number=$(cat ./pr-metadata/pr-number.txt)" >> $GITHUB_OUTPUT
-          echo "pr_head_ref=$(cat ./pr-metadata/pr-head-ref.txt)" >> $GITHUB_OUTPUT
-          echo "pr_head_sha=$(cat ./pr-metadata/pr-head-sha.txt)" >> $GITHUB_OUTPUT
-
-      # Escape branch name and create short SHA for URL
-      - id: escape-branch
-        run: |
-          BRANCH="$(cat ./pr-metadata/pr-head-ref.txt)"
-          ESCAPED="${BRANCH//\//-}"
-          echo "branch=$ESCAPED" >> $GITHUB_OUTPUT
-      - id: short-sha
-        run: |
-          SHA="$(cat ./pr-metadata/pr-head-sha.txt)"
-          echo "sha=${SHA:0:7}" >> $GITHUB_OUTPUT
+          echo "full_sha=$HEAD_SHA" >> "$GITHUB_OUTPUT"
+          echo "sha=${HEAD_SHA:0:7}" >> "$GITHUB_OUTPUT"
+          ESCAPED="${HEAD_BRANCH//\//-}"
+          echo "branch=$ESCAPED" >> "$GITHUB_OUTPUT"
+          PR=$(gh api "repos/$REPO/commits/$HEAD_SHA/pulls" --jq '.[0].number')
+          echo "pr_number=$PR" >> "$GITHUB_OUTPUT"
 
       # Deploy Snippets
       - uses: actions/download-artifact@v8
@@ -47,7 +38,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy ./docs-snippets--build --project-name=${{ vars.CLOUDFLARE_SNIPPETS_PROJECT_NAME }} --branch=${{ steps.escape-branch.outputs.branch }}-${{ steps.short-sha.outputs.sha }}
+          command: pages deploy ./docs-snippets--build --project-name=${{ vars.CLOUDFLARE_SNIPPETS_PROJECT_NAME }} --branch=${{ steps.meta.outputs.branch }}-${{ steps.meta.outputs.sha }}
 
       # Deploy docs
       - uses: actions/checkout@v6
@@ -59,15 +50,22 @@ jobs:
             docs/wrangler.jsonc
             docs/open-next.config.ts
             .github/deployment_preview_template.md
+      # The docs-build tarball is produced by the untrusted build job, so it can contain arbitrary files. Download it to
+      # an isolated path (NOT ./docs) and copy only the .open-next directory into place. Extracting it directly into
+      # ./docs would let it plant a malicious package.json / .pnpmfile.cjs / .npmrc beside the trusted files that the
+      # later `pnpm install` reads.
       - uses: actions/download-artifact@v8
         with:
           name: docs-build
-          path: ./docs
+          path: ./_artifact
           github-token: ${{ secrets.GITHUB_TOKEN }}
           run-id: ${{ github.event.workflow_run.id }}
-      - name: Extract docs build
-        working-directory: ./docs
-        run: tar -xf docs-build.tar && rm docs-build.tar
+      - name: Extract docs build in isolation
+        run: |
+          mkdir _scratch
+          tar -xf ./_artifact/docs-build.tar -C _scratch
+          rm -rf ./docs/.open-next
+          cp -r _scratch/.open-next ./docs/.open-next
       - uses: actions/setup-node@v6
         with:
           node-version: 24
@@ -99,20 +97,20 @@ jobs:
       - uses: peter-evans/find-comment@v4
         id: find-comment
         with:
-          issue-number: ${{ steps.pr-metadata.outputs.pr_number }}
+          issue-number: ${{ steps.meta.outputs.pr_number }}
           comment-author: 'auto-maid[bot]'
       - uses: chuhlomin/render-template@v1.12
         id: render-markdown
         with:
           template: .github/deployment_preview_template.md
           vars: |
-            sha: ${{ steps.pr-metadata.outputs.pr_head_sha }}
+            sha: ${{ steps.meta.outputs.full_sha }}
             url: ${{ steps.publish-docs.outputs.preview-url }}
       - uses: peter-evans/create-or-update-comment@v5
         with:
           token: ${{ steps.generate-token.outputs.token }}
           comment-id: ${{ steps.find-comment.outputs.comment-id }}
-          issue-number: ${{ steps.pr-metadata.outputs.pr_number }}
+          issue-number: ${{ steps.meta.outputs.pr_number }}
           body: ${{ steps.render-markdown.outputs.result }}
           edit-mode: replace
 
