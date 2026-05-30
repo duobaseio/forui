@@ -18,12 +18,19 @@ jobs:
           HEAD_BRANCH: ${{ github.event.workflow_run.head_branch }}
           HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
           REPO: ${{ github.repository }}
+        # A single SHA can belong to multiple PRs, so disambiguate by the trusted head branch instead of taking .[0].
+        #
+        # Read the (untrusted) branch via jq's env builtin so it is treated as data. Interpolating $HEAD_BRANCH into
+        # the jq program would let a branch name containing a double quote break out of the string literal and inject
+        # jq (e.g. forge pr_number, or read env via the env builtin).
         run: |
           echo "full_sha=$HEAD_SHA" >> "$GITHUB_OUTPUT"
           echo "sha=${HEAD_SHA:0:7}" >> "$GITHUB_OUTPUT"
           ESCAPED="${HEAD_BRANCH//\//-}"
           echo "branch=$ESCAPED" >> "$GITHUB_OUTPUT"
-          PR=$(gh api "repos/$REPO/commits/$HEAD_SHA/pulls" --jq '.[0].number')
+          
+          PR=$(gh api "repos/$REPO/commits/$HEAD_SHA/pulls" \
+            --jq 'first(.[] | select(.state == "open" and .head.ref == env.HEAD_BRANCH) | .number)')
           echo "pr_number=$PR" >> "$GITHUB_OUTPUT"
 
       # Deploy Snippets
@@ -38,7 +45,10 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy ./docs-snippets--build --project-name=${{ vars.CLOUDFLARE_SNIPPETS_PROJECT_NAME }} --branch=${{ steps.meta.outputs.branch }}-${{ steps.meta.outputs.sha }}
+          command: >-
+            pages deploy ./docs-snippets--build
+            --project-name=${{ vars.CLOUDFLARE_SNIPPETS_PROJECT_NAME }}
+            --branch=${{ steps.meta.outputs.branch }}-${{ steps.meta.outputs.sha }}
 
       # Deploy docs
       - uses: actions/checkout@v6
