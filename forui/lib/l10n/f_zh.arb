@@ -30,5 +30,7 @@
   "textFieldEmailLabel": "电子邮件",
   "passwordFieldLabel": "密码",
   "dateTimePickerToday": "今天",
-  "contextMenuSemanticsLabel": "上下文菜单"
+  "contextMenuSemanticsLabel": "上下文菜单",
+  "calendarPreviousMonthSemanticsLabel": "上个月",
+  "calendarNextMonthSemanticsLabel": "下个月"
 }

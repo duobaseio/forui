@@ -72,6 +72,12 @@ class FLocalizationsFi extends FLocalizations {
   String get autocompleteNoResults => 'Ei osumia löytynyt.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'Seuraava kuukausi';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Edellinen kuukausi';
+
+  @override
   String get contextMenuSemanticsLabel => 'Kontekstivalikko';
 
   @override

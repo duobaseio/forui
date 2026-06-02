@@ -30,5 +30,7 @@
   "textFieldEmailLabel": "E-bost",
   "passwordFieldLabel": "Cyfrinair",
   "dateTimePickerToday": "Heddiw",
-  "contextMenuSemanticsLabel": "Dewislen cyd-destun"
+  "contextMenuSemanticsLabel": "Dewislen cyd-destun",
+  "calendarPreviousMonthSemanticsLabel": "Mis blaenorol",
+  "calendarNextMonthSemanticsLabel": "Mis nesaf"
 }

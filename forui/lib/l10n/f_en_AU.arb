@@ -30,5 +30,7 @@
   "textFieldEmailLabel": "Email",
   "passwordFieldLabel": "Password",
   "dateTimePickerToday": "Today",
-  "contextMenuSemanticsLabel": "Context menu"
+  "contextMenuSemanticsLabel": "Context menu",
+  "calendarPreviousMonthSemanticsLabel": "Previous month",
+  "calendarNextMonthSemanticsLabel": "Next month"
 }

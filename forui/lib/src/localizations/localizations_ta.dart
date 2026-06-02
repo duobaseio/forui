@@ -72,6 +72,12 @@ class FLocalizationsTa extends FLocalizations {
   String get autocompleteNoResults => 'பொருத்தங்கள் எதுவும் கிடைக்கவில்லை.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'அடுத்த மாதம்';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'முந்தைய மாதம்';
+
+  @override
   String get contextMenuSemanticsLabel => 'சூழல் பட்டி';
 
   @override

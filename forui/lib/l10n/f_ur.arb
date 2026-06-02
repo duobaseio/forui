@@ -30,5 +30,7 @@
   "textFieldEmailLabel": "ای میل",
   "passwordFieldLabel": "پاس ورڈ",
   "dateTimePickerToday": "آج",
-  "contextMenuSemanticsLabel": "سیاق و سباق مینو"
+  "contextMenuSemanticsLabel": "سیاق و سباق مینو",
+  "calendarPreviousMonthSemanticsLabel": "پچھلا مہینہ",
+  "calendarNextMonthSemanticsLabel": "اگلا مہینہ"
 }

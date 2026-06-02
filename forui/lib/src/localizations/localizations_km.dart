@@ -72,6 +72,12 @@ class FLocalizationsKm extends FLocalizations {
   String get autocompleteNoResults => 'រកមិនឃើញការផ្គូផ្គង.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'ខែបន្ទាប់';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'ខែមុន';
+
+  @override
   String get contextMenuSemanticsLabel => 'ម៉ឺនុយបរិបទ';
 
   @override

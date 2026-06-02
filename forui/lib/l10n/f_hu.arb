@@ -30,5 +30,7 @@
   "textFieldEmailLabel": "E-mail",
   "passwordFieldLabel": "Jelszó",
   "dateTimePickerToday": "Ma",
-  "contextMenuSemanticsLabel": "Helyi menü"
+  "contextMenuSemanticsLabel": "Helyi menü",
+  "calendarPreviousMonthSemanticsLabel": "Előző hónap",
+  "calendarNextMonthSemanticsLabel": "Következő hónap"
 }

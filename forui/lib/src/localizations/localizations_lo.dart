@@ -72,6 +72,12 @@ class FLocalizationsLo extends FLocalizations {
   String get autocompleteNoResults => 'ບໍ່ພົບການຈັບຄູ່.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'ເດືອນຖັດໄປ';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'ເດືອນກ່ອນ';
+
+  @override
   String get contextMenuSemanticsLabel => 'ເມນູບໍລິບົດ';
 
   @override

@@ -29,5 +29,7 @@
   "textFieldEmailLabel": "Электрондық пошта",
   "passwordFieldLabel": "Құпия сөз",
   "dateTimePickerToday": "Бүгін",
-  "contextMenuSemanticsLabel": "Контекстік мәзір"
+  "contextMenuSemanticsLabel": "Контекстік мәзір",
+  "calendarPreviousMonthSemanticsLabel": "Алдыңғы ай",
+  "calendarNextMonthSemanticsLabel": "Келесі ай"
 }

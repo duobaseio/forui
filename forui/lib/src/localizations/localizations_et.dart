@@ -72,6 +72,12 @@ class FLocalizationsEt extends FLocalizations {
   String get autocompleteNoResults => 'Vasteid ei leitud.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'Järgmine kuu';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Eelmine kuu';
+
+  @override
   String get contextMenuSemanticsLabel => 'Kontekstimenüü';
 
   @override

@@ -29,5 +29,7 @@
   "textFieldEmailLabel": "ایمیل",
   "passwordFieldLabel": "رمز عبور",
   "dateTimePickerToday": "امروز",
-  "contextMenuSemanticsLabel": "منوی زمینه"
+  "contextMenuSemanticsLabel": "منوی زمینه",
+  "calendarPreviousMonthSemanticsLabel": "ماه قبل",
+  "calendarNextMonthSemanticsLabel": "ماه بعد"
 }

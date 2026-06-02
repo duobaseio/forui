@@ -29,5 +29,7 @@
   "textFieldEmailLabel": "Е-пошта",
   "passwordFieldLabel": "Лозинка",
   "dateTimePickerToday": "Денес",
-  "contextMenuSemanticsLabel": "Контекстно мени"
+  "contextMenuSemanticsLabel": "Контекстно мени",
+  "calendarPreviousMonthSemanticsLabel": "Претходен месец",
+  "calendarNextMonthSemanticsLabel": "Следен месец"
 }

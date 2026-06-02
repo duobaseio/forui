@@ -72,6 +72,12 @@ class FLocalizationsUz extends FLocalizations {
   String get autocompleteNoResults => 'Hech qanday moslik topilmadi.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'Keyingi oy';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Oldingi oy';
+
+  @override
   String get contextMenuSemanticsLabel => 'Kontekst menyusi';
 
   @override

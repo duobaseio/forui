@@ -72,6 +72,12 @@ class FLocalizationsKa extends FLocalizations {
   String get autocompleteNoResults => 'შესაბამისობები ვერ იქნა ნაპოვნი.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'შემდეგი თვე';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'წინა თვე';
+
+  @override
   String get contextMenuSemanticsLabel => 'კონტექსტური მენიუ';
 
   @override

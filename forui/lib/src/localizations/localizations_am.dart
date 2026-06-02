@@ -72,6 +72,12 @@ class FLocalizationsAm extends FLocalizations {
   String get autocompleteNoResults => 'ማንኛውም ውጤት አልተገኘም.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'የሚቀጥለው ወር';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'ያለፈው ወር';
+
+  @override
   String get contextMenuSemanticsLabel => 'የአውድ ምናሌ';
 
   @override

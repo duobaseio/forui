@@ -30,5 +30,7 @@
   "textFieldEmailLabel": "E-mel",
   "passwordFieldLabel": "Kata laluan",
   "dateTimePickerToday": "Hari ini",
-  "contextMenuSemanticsLabel": "Menu konteks"
+  "contextMenuSemanticsLabel": "Menu konteks",
+  "calendarPreviousMonthSemanticsLabel": "Bulan sebelumnya",
+  "calendarNextMonthSemanticsLabel": "Bulan seterusnya"
 }

@@ -30,5 +30,7 @@
   "textFieldEmailLabel": "電郵",
   "passwordFieldLabel": "密碼",
   "dateTimePickerToday": "今天",
-  "contextMenuSemanticsLabel": "快捷選單"
+  "contextMenuSemanticsLabel": "快捷選單",
+  "calendarPreviousMonthSemanticsLabel": "上個月",
+  "calendarNextMonthSemanticsLabel": "下個月"
 }

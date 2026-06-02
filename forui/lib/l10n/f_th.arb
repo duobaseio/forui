@@ -30,5 +30,7 @@
   "textFieldEmailLabel": "อีเมล",
   "passwordFieldLabel": "รหัสผ่าน",
   "dateTimePickerToday": "วันนี้",
-  "contextMenuSemanticsLabel": "เมนูบริบท"
+  "contextMenuSemanticsLabel": "เมนูบริบท",
+  "calendarPreviousMonthSemanticsLabel": "เดือนก่อนหน้า",
+  "calendarNextMonthSemanticsLabel": "เดือนถัดไป"
 }

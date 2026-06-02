@@ -30,5 +30,7 @@
   "textFieldEmailLabel": "អ៊ីមែល",
   "passwordFieldLabel": "ពាក្យសម្ងាត់",
   "dateTimePickerToday": "ថ្ងៃនេះ",
-  "contextMenuSemanticsLabel": "ម៉ឺនុយបរិបទ"
+  "contextMenuSemanticsLabel": "ម៉ឺនុយបរិបទ",
+  "calendarPreviousMonthSemanticsLabel": "ខែមុន",
+  "calendarNextMonthSemanticsLabel": "ខែបន្ទាប់"
 }

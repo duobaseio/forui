@@ -340,6 +340,18 @@ abstract class FLocalizations {
   /// **'No matches found.'**
   String get autocompleteNoResults;
 
+  /// The label for the calendar header's next-month navigation button.
+  ///
+  /// In en, this message translates to:
+  /// **'Next month'**
+  String get calendarNextMonthSemanticsLabel;
+
+  /// The label for the calendar header's previous-month navigation button.
+  ///
+  /// In en, this message translates to:
+  /// **'Previous month'**
+  String get calendarPreviousMonthSemanticsLabel;
+
   /// The semantic label for a context menu.
   ///
   /// In en, this message translates to:

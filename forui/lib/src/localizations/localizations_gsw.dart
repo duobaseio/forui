@@ -72,6 +72,12 @@ class FLocalizationsGsw extends FLocalizations {
   String get autocompleteNoResults => 'Kei Überiistimmige gfunde.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'Nächste Monet';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Letzte Monet';
+
+  @override
   String get contextMenuSemanticsLabel => 'Kontextmenü';
 
   @override

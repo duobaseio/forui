@@ -29,5 +29,7 @@
   "textFieldEmailLabel": "برېښنالیک",
   "passwordFieldLabel": "پټنوم",
   "dateTimePickerToday": "نن",
-  "contextMenuSemanticsLabel": "د شرایطو مینو"
+  "contextMenuSemanticsLabel": "د شرایطو مینو",
+  "calendarPreviousMonthSemanticsLabel": "تېره میاشت",
+  "calendarNextMonthSemanticsLabel": "راتلونکې میاشت"
 }

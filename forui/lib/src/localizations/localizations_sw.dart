@@ -72,6 +72,12 @@ class FLocalizationsSw extends FLocalizations {
   String get autocompleteNoResults => 'Hakuna mechi zilizopatikana.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'Mwezi ujao';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Mwezi uliopita';
+
+  @override
   String get contextMenuSemanticsLabel => 'Menyu ya muktadha';
 
   @override

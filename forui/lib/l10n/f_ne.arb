@@ -30,5 +30,7 @@
   "textFieldEmailLabel": "इमेल",
   "passwordFieldLabel": "पासवर्ड",
   "dateTimePickerToday": "आज",
-  "contextMenuSemanticsLabel": "सन्दर्भ मेनु"
+  "contextMenuSemanticsLabel": "सन्दर्भ मेनु",
+  "calendarPreviousMonthSemanticsLabel": "अघिल्लो महिना",
+  "calendarNextMonthSemanticsLabel": "अर्को महिना"
 }

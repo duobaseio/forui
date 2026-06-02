@@ -122,4 +122,39 @@ void main() {
       expect(errors, isEmpty);
     });
   });
+
+  group('debugCheckInclusiveDateRange', () {
+    test('date within range', () {
+      expect(debugCheckInclusiveDateRange(DateTime(2024), DateTime(2024, 6, 15), DateTime(2024, 12, 31)), true);
+    });
+
+    test('date equals start', () {
+      expect(debugCheckInclusiveDateRange(DateTime(2024), DateTime(2024), DateTime(2024, 12, 31)), true);
+    });
+
+    test('date equals end', () {
+      expect(
+        debugCheckInclusiveDateRange(DateTime(2024), DateTime(2024, 12, 31), DateTime(2024, 12, 31)),
+        true,
+      );
+    });
+
+    test('date before start', () {
+      expect(
+        () => debugCheckInclusiveDateRange(DateTime(2024, 6), DateTime(2024), DateTime(2024, 12, 31)),
+        throwsA(
+          isA<FlutterError>().having((e) => e.toString(), 'message', contains('date is not within [start, end].')),
+        ),
+      );
+    });
+
+    test('date after end', () {
+      expect(
+        () => debugCheckInclusiveDateRange(DateTime(2024), DateTime(2025), DateTime(2024, 12, 31)),
+        throwsA(
+          isA<FlutterError>().having((e) => e.toString(), 'message', contains('date is not within [start, end].')),
+        ),
+      );
+    });
+  });
 }

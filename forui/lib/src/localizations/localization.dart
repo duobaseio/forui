@@ -87,6 +87,12 @@ class FDefaultLocalizations extends FLocalizations {
   String get dialogSemanticsLabel => 'Dialog';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'Next month';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Previous month';
+
+  @override
   String get contextMenuSemanticsLabel => 'Context menu';
 
   @override

@@ -72,6 +72,12 @@ class FLocalizationsMy extends FLocalizations {
   String get autocompleteNoResults => 'ကိုက်ညီသောရလဒ်များ မတွေ့ရှိပါ.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'နောက်လ';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'ယခင်လ';
+
+  @override
   String get contextMenuSemanticsLabel => 'ဆက်စပ်မီနူး';
 
   @override

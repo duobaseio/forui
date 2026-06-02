@@ -72,6 +72,12 @@ class FLocalizationsTl extends FLocalizations {
   String get autocompleteNoResults => 'Walang nahanap na tugma.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'Susunod na buwan';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Nakaraang buwan';
+
+  @override
   String get contextMenuSemanticsLabel => 'Menu ng konteksto';
 
   @override

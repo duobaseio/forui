@@ -30,5 +30,7 @@
   "textFieldEmailLabel": "ኢሜይል",
   "passwordFieldLabel": "የይለፍ ቃል",
   "dateTimePickerToday": "ዛሬ",
-  "contextMenuSemanticsLabel": "የአውድ ምናሌ"
+  "contextMenuSemanticsLabel": "የአውድ ምናሌ",
+  "calendarPreviousMonthSemanticsLabel": "ያለፈው ወር",
+  "calendarNextMonthSemanticsLabel": "የሚቀጥለው ወር"
 }

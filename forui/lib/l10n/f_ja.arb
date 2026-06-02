@@ -30,5 +30,7 @@
   "textFieldEmailLabel": "メール",
   "passwordFieldLabel": "パスワード",
   "dateTimePickerToday": "今日",
-  "contextMenuSemanticsLabel": "コンテキストメニュー"
+  "contextMenuSemanticsLabel": "コンテキストメニュー",
+  "calendarPreviousMonthSemanticsLabel": "前の月",
+  "calendarNextMonthSemanticsLabel": "次の月"
 }

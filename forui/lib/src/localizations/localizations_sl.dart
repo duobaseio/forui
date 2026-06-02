@@ -72,6 +72,12 @@ class FLocalizationsSl extends FLocalizations {
   String get autocompleteNoResults => 'Ni ujemanj.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'Naslednji mesec';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Prejšnji mesec';
+
+  @override
   String get contextMenuSemanticsLabel => 'Kontekstni meni';
 
   @override

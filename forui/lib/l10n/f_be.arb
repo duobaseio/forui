@@ -29,5 +29,7 @@
   "textFieldEmailLabel": "Электронная пошта",
   "passwordFieldLabel": "Пароль",
   "dateTimePickerToday": "Сёння",
-  "contextMenuSemanticsLabel": "Кантэкстнае меню"
+  "contextMenuSemanticsLabel": "Кантэкстнае меню",
+  "calendarPreviousMonthSemanticsLabel": "Папярэдні месяц",
+  "calendarNextMonthSemanticsLabel": "Наступны месяц"
 }

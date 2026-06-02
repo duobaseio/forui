@@ -72,6 +72,12 @@ class FLocalizationsRo extends FLocalizations {
   String get autocompleteNoResults => 'Nu s-au găsit potriviri.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'Luna următoare';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Luna anterioară';
+
+  @override
   String get contextMenuSemanticsLabel => 'Meniu contextual';
 
   @override

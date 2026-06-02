@@ -72,6 +72,12 @@ class FLocalizationsOr extends FLocalizations {
   String get autocompleteNoResults => 'କୌଣସି ମେଳ ମିଳିଲା ନାହିଁ.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'ପରବର୍ତ୍ତୀ ମାସ';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'ପୂର୍ବ ମାସ';
+
+  @override
   String get contextMenuSemanticsLabel => 'ପ୍ରସଙ୍ଗ ମେନୁ';
 
   @override

@@ -30,5 +30,7 @@
   "textFieldEmailLabel": "Email",
   "passwordFieldLabel": "Fjalëkalimi",
   "dateTimePickerToday": "Sot",
-  "contextMenuSemanticsLabel": "Menyja e kontekstit"
+  "contextMenuSemanticsLabel": "Menyja e kontekstit",
+  "calendarPreviousMonthSemanticsLabel": "Muaji i mëparshëm",
+  "calendarNextMonthSemanticsLabel": "Muaji tjetër"
 }

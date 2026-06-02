@@ -72,6 +72,12 @@ class FLocalizationsKn extends FLocalizations {
   String get autocompleteNoResults => 'ಯಾವುದೇ ಹೊಂದಾಣಿಕೆ ಕಂಡುಬಂದಿಲ್ಲ.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'ಮುಂದಿನ ತಿಂಗಳು';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'ಹಿಂದಿನ ತಿಂಗಳು';
+
+  @override
   String get contextMenuSemanticsLabel => 'ಸಂದರ್ಭ ಮೆನು';
 
   @override

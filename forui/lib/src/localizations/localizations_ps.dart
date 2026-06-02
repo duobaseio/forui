@@ -72,6 +72,12 @@ class FLocalizationsPs extends FLocalizations {
   String get autocompleteNoResults => 'هیڅ میچ ونه موندل شو.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'راتلونکې میاشت';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'تېره میاشت';
+
+  @override
   String get contextMenuSemanticsLabel => 'د شرایطو مینو';
 
   @override

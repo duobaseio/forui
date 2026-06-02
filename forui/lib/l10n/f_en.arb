@@ -76,6 +76,14 @@
   "@autocompleteNoResults": {
     "description": "The message displayed when there are no matching results."
   },
+  "calendarNextMonthSemanticsLabel": "Next month",
+  "@calendarNextMonthSemanticsLabel": {
+    "description": "The label for the calendar header's next-month navigation button."
+  },
+  "calendarPreviousMonthSemanticsLabel": "Previous month",
+  "@calendarPreviousMonthSemanticsLabel": {
+    "description": "The label for the calendar header's previous-month navigation button."
+  },
   "contextMenuSemanticsLabel": "Context menu",
   "@contextMenuSemanticsLabel": {
     "description": "The semantic label for a context menu."

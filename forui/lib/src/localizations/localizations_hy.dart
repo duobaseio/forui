@@ -72,6 +72,12 @@ class FLocalizationsHy extends FLocalizations {
   String get autocompleteNoResults => 'Համընկնումներ չեն գտնվել.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'Հաջորդ ամիս';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Նախորդ ամիս';
+
+  @override
   String get contextMenuSemanticsLabel => 'Համատեկստային մենյու';
 
   @override

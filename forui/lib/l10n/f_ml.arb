@@ -29,5 +29,7 @@
   "textFieldEmailLabel": "ഇമെയിൽ",
   "passwordFieldLabel": "പാസ്‌വേഡ്",
   "dateTimePickerToday": "ഇന്ന്",
-  "contextMenuSemanticsLabel": "സന്ദർഭ മെനു"
+  "contextMenuSemanticsLabel": "സന്ദർഭ മെനു",
+  "calendarPreviousMonthSemanticsLabel": "മുൻ മാസം",
+  "calendarNextMonthSemanticsLabel": "അടുത്ത മാസം"
 }

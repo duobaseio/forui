@@ -72,6 +72,12 @@ class FLocalizationsVi extends FLocalizations {
   String get autocompleteNoResults => 'Không tìm thấy kết quả phù hợp.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'Tháng sau';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Tháng trước';
+
+  @override
   String get contextMenuSemanticsLabel => 'Trình đơn ngữ cảnh';
 
   @override

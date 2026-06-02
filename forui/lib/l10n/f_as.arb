@@ -30,5 +30,7 @@
   "textFieldEmailLabel": "ইমেইল",
   "passwordFieldLabel": "পাছৱাৰ্ড",
   "dateTimePickerToday": "আজি",
-  "contextMenuSemanticsLabel": "প্ৰসংগ মেনু"
+  "contextMenuSemanticsLabel": "প্ৰসংগ মেনু",
+  "calendarPreviousMonthSemanticsLabel": "যোৱা মাহ",
+  "calendarNextMonthSemanticsLabel": "পৰৱৰ্তী মাহ"
 }

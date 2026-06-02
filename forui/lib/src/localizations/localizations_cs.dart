@@ -72,6 +72,12 @@ class FLocalizationsCs extends FLocalizations {
   String get autocompleteNoResults => 'Nebyly nalezeny žádné shody.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'Následující měsíc';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Předchozí měsíc';
+
+  @override
   String get contextMenuSemanticsLabel => 'Kontextová nabídka';
 
   @override

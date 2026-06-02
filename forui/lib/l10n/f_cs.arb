@@ -30,5 +30,7 @@
   "textFieldEmailLabel": "E-mail",
   "passwordFieldLabel": "Heslo",
   "dateTimePickerToday": "Dnes",
-  "contextMenuSemanticsLabel": "Kontextová nabídka"
+  "contextMenuSemanticsLabel": "Kontextová nabídka",
+  "calendarPreviousMonthSemanticsLabel": "Předchozí měsíc",
+  "calendarNextMonthSemanticsLabel": "Následující měsíc"
 }

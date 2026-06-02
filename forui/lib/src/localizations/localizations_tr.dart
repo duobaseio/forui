@@ -72,6 +72,12 @@ class FLocalizationsTr extends FLocalizations {
   String get autocompleteNoResults => 'Eşleşme bulunamadı.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'Sonraki ay';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Önceki ay';
+
+  @override
   String get contextMenuSemanticsLabel => 'Bağlam menüsü';
 
   @override

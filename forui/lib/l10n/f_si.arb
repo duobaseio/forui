@@ -29,5 +29,7 @@
   "textFieldEmailLabel": "විද්‍යුත් තැපෑල",
   "passwordFieldLabel": "මුරපදය",
   "dateTimePickerToday": "අද",
-  "contextMenuSemanticsLabel": "සන්දර්භ මෙනුව"
+  "contextMenuSemanticsLabel": "සන්දර්භ මෙනුව",
+  "calendarPreviousMonthSemanticsLabel": "පෙර මාසය",
+  "calendarNextMonthSemanticsLabel": "ඊළඟ මාසය"
 }

@@ -72,6 +72,12 @@ class FLocalizationsSr extends FLocalizations {
   String get autocompleteNoResults => 'Није пронађено подударање.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'Следећи месец';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Претходни месец';
+
+  @override
   String get contextMenuSemanticsLabel => 'Контекстни мени';
 
   @override
@@ -170,6 +176,12 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
 
   @override
   String get autocompleteNoResults => 'Nije pronađeno podudaranje.';
+
+  @override
+  String get calendarNextMonthSemanticsLabel => 'Sledeći mesec';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Prethodni mesec';
 
   @override
   String get contextMenuSemanticsLabel => 'Kontekstni meni';

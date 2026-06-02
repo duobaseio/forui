@@ -30,5 +30,7 @@
   "textFieldEmailLabel": "I-imeyili",
   "passwordFieldLabel": "Iphasiwedi",
   "dateTimePickerToday": "Namuhla",
-  "contextMenuSemanticsLabel": "Imenyu yesimo"
+  "contextMenuSemanticsLabel": "Imenyu yesimo",
+  "calendarPreviousMonthSemanticsLabel": "Inyanga edlule",
+  "calendarNextMonthSemanticsLabel": "Inyanga elandelayo"
 }

@@ -72,6 +72,12 @@ class FLocalizationsHu extends FLocalizations {
   String get autocompleteNoResults => 'Nincs találat.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'Következő hónap';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Előző hónap';
+
+  @override
   String get contextMenuSemanticsLabel => 'Helyi menü';
 
   @override

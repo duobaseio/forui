@@ -30,5 +30,7 @@
   "textFieldEmailLabel": "Email",
   "passwordFieldLabel": "Mật khẩu",
   "dateTimePickerToday": "Hôm nay",
-  "contextMenuSemanticsLabel": "Trình đơn ngữ cảnh"
+  "contextMenuSemanticsLabel": "Trình đơn ngữ cảnh",
+  "calendarPreviousMonthSemanticsLabel": "Tháng trước",
+  "calendarNextMonthSemanticsLabel": "Tháng sau"
 }

@@ -30,5 +30,7 @@
   "textFieldEmailLabel": "E-post",
   "passwordFieldLabel": "Passord",
   "dateTimePickerToday": "I dag",
-  "contextMenuSemanticsLabel": "Kontekstmeny"
+  "contextMenuSemanticsLabel": "Kontekstmeny",
+  "calendarPreviousMonthSemanticsLabel": "Forrige måned",
+  "calendarNextMonthSemanticsLabel": "Neste måned"
 }

@@ -29,5 +29,7 @@
   "textFieldEmailLabel": "Имејл",
   "passwordFieldLabel": "Лозинка",
   "dateTimePickerToday": "Данас",
-  "contextMenuSemanticsLabel": "Контекстни мени"
+  "contextMenuSemanticsLabel": "Контекстни мени",
+  "calendarPreviousMonthSemanticsLabel": "Претходни месец",
+  "calendarNextMonthSemanticsLabel": "Следећи месец"
 }

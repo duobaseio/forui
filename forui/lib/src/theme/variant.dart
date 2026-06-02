@@ -54,7 +54,7 @@ sealed class FVariantConstraint {
   /// max(hovered.and(focused), focused.and(pressed)); // focused & hovered ("focused" < "pressed")
   /// ```
   static T max<T extends FVariantConstraint>(T a, T b) {
-    const maxTiers = 3;
+    const maxTiers = 5;
 
     final operandsA = <String>[];
     final operandsB = <String>[];

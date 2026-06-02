@@ -72,6 +72,12 @@ class FLocalizationsEu extends FLocalizations {
   String get autocompleteNoResults => 'Ez da bat-etortzerik aurkitu.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'Hurrengo hilabetea';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Aurreko hilabetea';
+
+  @override
   String get contextMenuSemanticsLabel => 'Testuinguru-menua';
 
   @override

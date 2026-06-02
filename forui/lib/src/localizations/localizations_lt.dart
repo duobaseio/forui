@@ -72,6 +72,12 @@ class FLocalizationsLt extends FLocalizations {
   String get autocompleteNoResults => 'Nerasta atitikmenų.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'Kitas mėnuo';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Ankstesnis mėnuo';
+
+  @override
   String get contextMenuSemanticsLabel => 'Kontekstinis meniu';
 
   @override

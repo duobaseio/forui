@@ -178,6 +178,24 @@ bool debugCheckInclusiveRange<T>(int min, int? max) {
 }
 
 @internal
+bool debugCheckInclusiveDateRange(DateTime start, DateTime date, DateTime end) {
+  assert(() {
+    if (date.isBefore(start) || date.isAfter(end)) {
+      throw FlutterError.fromParts([
+        ErrorSummary('date is not within [start, end].'),
+        DiagnosticsProperty('The offending date is', date, style: .errorProperty),
+        DiagnosticsProperty('The start is', start, style: .errorProperty),
+        DiagnosticsProperty('The end is', end, style: .errorProperty),
+        ErrorHint('To fix this, ensure that start <= date <= end.'),
+      ]);
+    }
+    return true;
+  }());
+
+  return true;
+}
+
+@internal
 bool debugCheckFLocalizationsInitialized(FLocalizations localizations) {
   assert(() {
     if (localizations is FDefaultLocalizations && !DateFormat.jm('en_US').pattern!.contains('\u202F')) {

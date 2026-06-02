@@ -30,5 +30,7 @@
   "textFieldEmailLabel": "El. paštas",
   "passwordFieldLabel": "Slaptažodis",
   "dateTimePickerToday": "Šiandien",
-  "contextMenuSemanticsLabel": "Kontekstinis meniu"
+  "contextMenuSemanticsLabel": "Kontekstinis meniu",
+  "calendarPreviousMonthSemanticsLabel": "Ankstesnis mėnuo",
+  "calendarNextMonthSemanticsLabel": "Kitas mėnuo"
 }

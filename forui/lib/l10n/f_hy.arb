@@ -29,5 +29,7 @@
   "textFieldEmailLabel": "Էլ․ փոստ",
   "passwordFieldLabel": "Գաղտնաբառ",
   "dateTimePickerToday": "Այսօր",
-  "contextMenuSemanticsLabel": "Համատեկստային մենյու"
+  "contextMenuSemanticsLabel": "Համատեկստային մենյու",
+  "calendarPreviousMonthSemanticsLabel": "Նախորդ ամիս",
+  "calendarNextMonthSemanticsLabel": "Հաջորդ ամիս"
 }

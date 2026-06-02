@@ -30,5 +30,7 @@
   "textFieldEmailLabel": "E-posta",
   "passwordFieldLabel": "Şifre",
   "dateTimePickerToday": "Bugün",
-  "contextMenuSemanticsLabel": "Bağlam menüsü"
+  "contextMenuSemanticsLabel": "Bağlam menüsü",
+  "calendarPreviousMonthSemanticsLabel": "Önceki ay",
+  "calendarNextMonthSemanticsLabel": "Sonraki ay"
 }

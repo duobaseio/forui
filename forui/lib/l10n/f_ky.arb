@@ -29,5 +29,7 @@
   "textFieldEmailLabel": "Электрондук почта",
   "passwordFieldLabel": "Сырсөз",
   "dateTimePickerToday": "Бүгүн",
-  "contextMenuSemanticsLabel": "Контексттик меню"
+  "contextMenuSemanticsLabel": "Контексттик меню",
+  "calendarPreviousMonthSemanticsLabel": "Мурунку ай",
+  "calendarNextMonthSemanticsLabel": "Кийинки ай"
 }

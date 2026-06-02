@@ -2,38 +2,174 @@ import 'dart:collection';
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-
-import 'package:meta/meta.dart';
-import 'package:sugar/sugar.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
-import 'package:forui/src/widgets/calendar/shared/entry.dart';
+import 'package:forui/src/widgets/calendar/day/day.dart';
+import 'package:forui/src/widgets/calendar/day/day_picker_controller.dart';
+import 'package:meta/meta.dart';
+import 'package:sugar/sugar.dart';
 
 @SentinelValues(FCalendarDayPickerStyle, {'startDayOfWeek': '-1'})
 part 'day_picker.design.dart';
 
+/// The maximum number of rows: 6 week-rows + 1 weekday header.
+const _rows = 7;
+
 @internal
 class DayPicker extends StatefulWidget {
-  static const maxRows = 7;
-
+  final FCalendarDayPickerController controller;
   final FCalendarDayPickerStyle style;
   final FLocalizations localization;
-  final ValueWidgetBuilder<FCalendarDayData> dayBuilder;
-  final LocalDate month;
-  final LocalDate today;
-  final LocalDate? focused;
-  final Predicate<LocalDate> selectable;
-  final Predicate<LocalDate> selected;
-  final ValueChanged<LocalDate> onPress;
-  final ValueChanged<LocalDate> onLongPress;
+  final DateTime today;
+  final bool Function(DateTime) selected;
+  final ValueChanged<DateTime> onPress;
+  final ValueChanged<DateTime> onLongPress;
+  final FCalendarDayBuilder builder;
 
   const DayPicker({
+    required this.controller,
     required this.style,
     required this.localization,
-    required this.dayBuilder,
+    required this.today,
+    required this.selected,
+    required this.onPress,
+    required this.onLongPress,
+    required this.builder,
+    super.key,
+  });
+
+  @override
+  State<DayPicker> createState() => _DayPickerState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty('localization', localization))
+      ..add(DiagnosticsProperty('today', today))
+      ..add(ObjectFlagProperty.has('selected', selected))
+      ..add(ObjectFlagProperty.has('onPress', onPress))
+      ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
+      ..add(ObjectFlagProperty.has('builder', builder));
+  }
+}
+
+class _DayPickerState extends State<DayPicker> {
+  static const Map<ShortcutActivator, Intent> _shortcuts = {
+    SingleActivator(.arrowLeft): DirectionalFocusIntent(.left),
+    SingleActivator(.arrowRight): DirectionalFocusIntent(.right),
+    SingleActivator(.arrowUp): DirectionalFocusIntent(.up),
+    SingleActivator(.arrowDown): DirectionalFocusIntent(.down),
+  };
+
+  late FocusNode _node;
+  late Map<Type, Action<Intent>> _actions;
+
+  @override
+  void initState() {
+    super.initState();
+    _node = FocusNode(debugLabel: 'DayPicker');
+    _actions = {
+      DirectionalFocusIntent: CallbackAction<DirectionalFocusIntent>(
+        onInvoke: (intent) => widget.controller.move(intent.direction, Directionality.of(context)),
+      ),
+      // Day cells skip traversal, so Tab/Shift-Tab escape the grid via its traversable node.
+      NextFocusIntent: CallbackAction<NextFocusIntent>(
+        onInvoke: (_) => _node
+          ..requestFocus()
+          ..nextFocus(),
+      ),
+      PreviousFocusIntent: CallbackAction<PreviousFocusIntent>(
+        onInvoke: (_) => _node
+          ..requestFocus()
+          ..previousFocus(),
+      ),
+    };
+  }
+
+  @override
+  void dispose() {
+    _node.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final controller = widget.controller;
+    final size = widget.style.daySize;
+
+    return SizedBox(
+      width: DateTime.daysPerWeek * size.width,
+      height: _rows * size.height + (_rows - 1) * widget.style.daySpacing,
+      child: FocusableActionDetector(
+        focusNode: _node,
+        shortcuts: _shortcuts,
+        actions: _actions,
+        onFocusChange: (focused) {
+          if (!focused) {
+            controller.focus(null);
+            return;
+          }
+
+          if (controller.focused == null) {
+            final today = widget.today;
+            final month = controller.month;
+            final preferred = today.year == month.year && today.month == month.month ? today.day : 1;
+            controller.focus(controller.findFocused(month, preferred));
+          }
+        },
+        child: PageView.builder(
+          controller: controller.page,
+          onPageChanged: (page) {
+            controller.onPageChange(page);
+            SemanticsService.sendAnnouncement(
+              View.of(context),
+              widget.localization.yearMonth(controller.to(page)),
+              Directionality.of(context),
+            );
+          },
+          itemCount: controller.length,
+          itemBuilder: (_, page) => ListenableBuilder(
+            listenable: controller,
+            builder: (_, _) => _Grid(
+              style: widget.style,
+              localization: widget.localization,
+              month: controller.to(page),
+              today: widget.today,
+              focused: controller.focused,
+              selectable: controller.selectable,
+              selected: widget.selected,
+              onPress: widget.onPress,
+              onLongPress: widget.onLongPress,
+              builder: widget.builder,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _Grid extends StatefulWidget {
+  final FCalendarDayPickerStyle style;
+  final FLocalizations localization;
+  final DateTime month;
+  final DateTime today;
+  final DateTime? focused;
+  final bool Function(DateTime) selectable;
+  final bool Function(DateTime) selected;
+  final ValueChanged<DateTime> onPress;
+  final ValueChanged<DateTime> onLongPress;
+  final FCalendarDayBuilder builder;
+
+  _Grid({
+    required this.style,
+    required this.localization,
     required this.month,
     required this.today,
     required this.focused,
@@ -41,11 +177,11 @@ class DayPicker extends StatefulWidget {
     required this.selected,
     required this.onPress,
     required this.onLongPress,
-    super.key,
-  });
+    required this.builder,
+  }) : super(key: ValueKey(month));
 
   @override
-  State createState() => _DayPickerState();
+  State createState() => _GridState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -53,26 +189,33 @@ class DayPicker extends StatefulWidget {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('localization', localization))
-      ..add(ObjectFlagProperty.has('dayBuilder', dayBuilder))
       ..add(DiagnosticsProperty('month', month))
       ..add(DiagnosticsProperty('today', today))
       ..add(DiagnosticsProperty('focused', focused))
       ..add(ObjectFlagProperty.has('selectable', selectable))
       ..add(ObjectFlagProperty.has('selected', selected))
       ..add(ObjectFlagProperty.has('onPress', onPress))
-      ..add(ObjectFlagProperty.has('onLongPress', onLongPress));
+      ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
+      ..add(ObjectFlagProperty.has('builder', builder));
   }
 }
 
-class _DayPickerState extends State<DayPicker> {
-  final SplayTreeMap<LocalDate, FocusNode> _days = SplayTreeMap();
+class _GridState extends State<_Grid> {
+  final SplayTreeMap<DateTime, FocusNode> _days = SplayTreeMap();
 
   @override
   void initState() {
     super.initState();
+    final firstDayOfMonth = widget.month.firstDayOfMonth;
+    final lastDayOfMonth = widget.month.lastDayOfMonth;
 
-    final (first, last) = _range;
-    for (var date = first; date <= last; date = date.tomorrow) {
+    final firstDayOfWeek = widget.style.firstDayOfWeek ?? widget.localization.firstDayOfWeek;
+    final lastDayOfWeek = firstDayOfWeek == DateTime.monday ? DateTime.sunday : firstDayOfWeek - 1;
+
+    final first = firstDayOfMonth.minus(days: (firstDayOfMonth.weekday - firstDayOfWeek) % 7);
+    final last = lastDayOfMonth.plus(days: (lastDayOfWeek - lastDayOfMonth.weekday) % 7);
+
+    for (var date = first; date.isBefore(last) || date.isAtSameMomentAs(last); date = date.plus(days: 1)) {
       _days[date] = FocusNode(skipTraversal: true, debugLabel: '$date');
     }
 
@@ -81,76 +224,9 @@ class _DayPickerState extends State<DayPicker> {
     }
   }
 
-  (LocalDate, LocalDate) get _range {
-    final firstDayOfWeek = widget.style.startDayOfWeek ?? widget.localization.firstDayOfWeek;
-    final firstDayOfMonth = widget.month.firstDayOfMonth;
-    var difference = firstDayOfMonth.weekday - firstDayOfWeek;
-    if (difference < 0) {
-      difference += 7;
-    }
-
-    final first = firstDayOfMonth.minus(days: difference);
-
-    final lastDayOfWeek = firstDayOfWeek == DateTime.monday ? DateTime.sunday : firstDayOfWeek - 1;
-    final lastDayOfMonth = widget.month.lastDayOfMonth;
-    difference = lastDayOfWeek - lastDayOfMonth.weekday;
-    if (difference < 0) {
-      difference += 7;
-    }
-
-    final last = lastDayOfMonth.plus(days: difference);
-
-    return (first, last);
-  }
-
   @override
-  Widget build(BuildContext context) {
-    final tileSize = widget.style.tileSize;
-    return SizedBox(
-      width: DateTime.daysPerWeek * tileSize,
-      child: GridView.custom(
-        padding: .zero,
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        gridDelegate: _GridDelegate(tileSize),
-        childrenDelegate: SliverChildListDelegate(addRepaintBoundaries: false, [
-          ..._headers(context),
-          for (final MapEntry(key: date, value: focusNode) in _days.entries)
-            Entry.day(
-              style: widget.style,
-              localizations: widget.localization,
-              dayBuilder: widget.dayBuilder,
-              date: date,
-              focusNode: focusNode,
-              current: date.month == widget.month.month,
-              today: date == widget.today,
-              selectable: widget.selectable,
-              selected: widget.selected,
-              onPress: widget.onPress,
-              onLongPress: widget.onLongPress,
-            ),
-        ]),
-      ),
-    );
-  }
-
-  List<Widget> _headers(BuildContext _) {
-    final firstDayOfWeek = widget.style.startDayOfWeek ?? widget.localization.firstDayOfWeek;
-    final narrowWeekdays = widget.localization.narrowWeekDays;
-
-    return [
-      for (int i = firstDayOfWeek, j = 0; j < DateTime.daysPerWeek; i++, j++)
-        ExcludeSemantics(
-          child: Center(child: Text(narrowWeekdays[i % DateTime.daysPerWeek], style: widget.style.headerTextStyle)),
-        ),
-    ];
-  }
-
-  @override
-  void didUpdateWidget(DayPicker old) {
+  void didUpdateWidget(_Grid old) {
     super.didUpdateWidget(old);
-    assert(old.month == widget.month, 'Current month must not change.');
-
     if (_days[widget.focused] case final focusNode? when old.focused != widget.focused) {
       focusNode.requestFocus();
     }
@@ -163,67 +239,124 @@ class _DayPickerState extends State<DayPicker> {
     }
     super.dispose();
   }
+
+  @override
+  Widget build(BuildContext context) {
+    final FCalendarDayPickerStyle(:weekdayTextStyle, :dayStyles, :daySize, :daySpacing) = widget.style;
+    final firstDayOfWeek = widget.style.firstDayOfWeek ?? widget.localization.firstDayOfWeek;
+    final narrowWeekdays = widget.localization.narrowWeekDays;
+
+    // We slide a window to reduce 3n checks to n + 2 checks.
+    final days = <Widget>[];
+    final first = _days.firstKey()!;
+    var before = widget.selected(first.minus(days: 1));
+    var current = widget.selected(first);
+
+    for (final MapEntry(key: date, value: focusNode) in _days.entries) {
+      final after = widget.selected(date.plus(days: 1));
+      final selectable = widget.selectable(date);
+
+      days.add(
+        Day(
+          styles: dayStyles,
+          localizations: widget.localization,
+          date: date,
+          focusNode: focusNode,
+          variants: {
+            if (date.month != widget.month.month) .adjacent,
+            if (date == widget.today) .today,
+            ?switch ((before, current, after)) {
+              (false, true, false) => .single,
+              (false, true, true) => .start,
+              (true, true, true) => .middle,
+              (true, true, false) => .end,
+              _ => null,
+            },
+          },
+          onPress: selectable ? () => widget.onPress(date) : null,
+          onLongPress: selectable ? () => widget.onLongPress(date) : null,
+          builder: widget.builder,
+        ),
+      );
+
+      before = current;
+      current = after;
+    }
+
+    return GridView.custom(
+      padding: .zero,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      gridDelegate: _Delegate(daySize, daySpacing),
+      childrenDelegate: SliverChildListDelegate(addRepaintBoundaries: false, [
+        for (int i = 0, j = firstDayOfWeek; i < DateTime.daysPerWeek; i++, j++)
+          ExcludeSemantics(
+            child: Center(child: Text(narrowWeekdays[j % DateTime.daysPerWeek], style: weekdayTextStyle)),
+          ),
+        ...days,
+      ]),
+    );
+  }
 }
 
-// Based on Material [CalendarDatePicker]'s _DayPickerGridDelegate.
-class _GridDelegate extends SliverGridDelegate {
-  final double tileSize;
+/// Lays out 7 day columns and up to 7 rows (6 weeks + a weekday header) as fixed [size]d-cells.
+class _Delegate extends SliverGridDelegate {
+  final Size size;
+  final double spacing;
 
-  const _GridDelegate(this.tileSize);
+  const _Delegate(this.size, this.spacing);
 
   @override
   SliverGridLayout getLayout(SliverConstraints constraints) => SliverGridRegularTileLayout(
-    childCrossAxisExtent: tileSize,
-    childMainAxisExtent: tileSize,
+    childCrossAxisExtent: size.width,
+    childMainAxisExtent: size.height,
     crossAxisCount: DateTime.daysPerWeek,
-    crossAxisStride: tileSize,
-    mainAxisStride: tileSize,
+    crossAxisStride: size.width,
+    mainAxisStride: size.height + spacing,
     reverseCrossAxis: axisDirectionIsReversed(constraints.crossAxisDirection),
   );
 
   @override
-  bool shouldRelayout(_GridDelegate oldDelegate) => tileSize != oldDelegate.tileSize;
+  bool shouldRelayout(_Delegate old) => size != old.size || spacing != old.spacing;
 }
 
 /// A day picker's style.
 class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunctions {
-  /// The text style for the day of th week headers.
+  /// The text style for the days of the weekday headers.
   @override
-  final TextStyle headerTextStyle;
+  final TextStyle weekdayTextStyle;
 
-  /// The styles of dates in the current month.
-  @override
-  final FCalendarEntryStyle current;
-
-  /// The styles of dates in the enclosing months.
-  @override
-  final FCalendarEntryStyle enclosing;
-
-  /// The starting day of the week. Defaults to the current locale's preferred starting day of the week if null.
-  ///
-  /// Specifying [startDayOfWeek] will override the current locale's preferred starting day of the week.
+  /// The starting day of the week. Defaults to the current locale's preferred starting day.
   ///
   /// ## Contract
   /// Throws [AssertionError] if:
-  /// * [startDayOfWeek] < [DateTime.monday]
-  /// * [DateTime.sunday] < [startDayOfWeek]
+  /// * [firstDayOfWeek] < [DateTime.monday]
+  /// * [DateTime.sunday] < [firstDayOfWeek]
   @override
-  final int? startDayOfWeek;
+  final int? firstDayOfWeek;
 
-  /// The tile's size.
+  /// The styles of the day tiles.
   @override
-  final double tileSize;
+  final FCalendarDayStyles dayStyles;
+
+  /// The size of each day. Defaults to [FSizes.calendar].
+  @override
+  final Size daySize;
+
+  /// The vertical spacing between days in the day picker. Defaults to 4.
+  @override
+  final double daySpacing;
 
   /// Creates a [FCalendarDayPickerStyle].
   const FCalendarDayPickerStyle({
-    required this.headerTextStyle,
-    required this.current,
-    required this.tileSize,
-    required this.enclosing,
-    this.startDayOfWeek,
+    required this.weekdayTextStyle,
+    required this.dayStyles,
+    required this.daySize,
+    this.firstDayOfWeek,
+    this.daySpacing = 4,
   }) : assert(
-         startDayOfWeek == null || (DateTime.monday <= startDayOfWeek && startDayOfWeek <= DateTime.sunday),
-         'startDayOfWeek ($startDayOfWeek) must be between DateTime.monday (1) and DateTime.sunday (7)',
+         firstDayOfWeek == null || (DateTime.monday <= firstDayOfWeek && firstDayOfWeek <= DateTime.sunday),
+         'firstDayOfWeek ($firstDayOfWeek) must be between DateTime.monday (1) and DateTime.sunday (7)',
        );
 
   /// Creates a [FCalendarDayPickerStyle] that inherits its properties.
@@ -232,72 +365,9 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
     required FTypography typography,
     required FStyle style,
     required bool touch,
-  }) {
-    final backgroundColor = FVariants<FTappableVariantConstraint, FTappableVariant, Color, Delta>(
-      colors.card,
-      variants: {
-        [.hovered, .pressed]: colors.secondary,
-        //
-        [.selected]: colors.primary,
-        [.selected.and(.disabled)]: colors.disable(colors.primary),
-      },
-    );
-    final border = FVariants<FTappableVariantConstraint, FTappableVariant, BorderSide?, Delta>(
-      null,
-      variants: {
-        [.focused]: BorderSide(color: colors.primary, width: style.borderWidth),
-        //
-        [.disabled.and(.selected).and(.focused)]: null,
-        [.disabled.and(.focused)]: null,
-      },
-    );
-    FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> textStyle(
-      TextStyle textStyle,
-      Color color,
-    ) => FVariants.from(
-      textStyle.copyWith(color: color, fontWeight: .w500),
-      variants: {
-        [.disabled]: .delta(color: colors.disable(color)),
-        //
-        [.selected]: .delta(color: colors.primaryForeground),
-        [.selected.and(.disabled)]: .delta(color: colors.disable(colors.primaryForeground)),
-      },
-    );
-
-    if (touch) {
-      return .new(
-        headerTextStyle: typography.xs2.copyWith(color: colors.mutedForeground),
-        tileSize: style.sizes.calendar,
-        current: FCalendarEntryStyle(
-          backgroundColor: backgroundColor,
-          borderSide: border,
-          textStyle: textStyle(typography.sm, colors.foreground),
-          borderRadius: style.borderRadius.md,
-        ),
-        enclosing: FCalendarEntryStyle(
-          backgroundColor: backgroundColor,
-          borderSide: border,
-          textStyle: textStyle(typography.sm, colors.mutedForeground),
-          borderRadius: style.borderRadius.md,
-        ),
-      );
-    } else {
-      return .new(
-        headerTextStyle: typography.xs.copyWith(color: colors.mutedForeground),
-        tileSize: style.sizes.calendar,
-        current: FCalendarEntryStyle(
-          backgroundColor: backgroundColor,
-          borderSide: border,
-          textStyle: textStyle(typography.sm, colors.foreground),
-          borderRadius: style.borderRadius.sm,
-        ),
-        enclosing: FCalendarEntryStyle(
-          backgroundColor: backgroundColor,
-          borderSide: border,
-          textStyle: textStyle(typography.sm, colors.mutedForeground),
-          borderRadius: style.borderRadius.sm,
-        ),
-      );
-    }
-  }
+  }) => FCalendarDayPickerStyle(
+    weekdayTextStyle: (touch ? typography.xs2 : typography.xs).copyWith(color: colors.mutedForeground),
+    dayStyles: .inherit(colors: colors, typography: typography, style: style),
+    daySize: .square(style.sizes.calendar),
+  );
 }

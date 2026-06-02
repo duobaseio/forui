@@ -30,5 +30,7 @@
   "textFieldEmailLabel": "Netfang",
   "passwordFieldLabel": "Lykilorð",
   "dateTimePickerToday": "Í dag",
-  "contextMenuSemanticsLabel": "Samhengisvalmynd"
+  "contextMenuSemanticsLabel": "Samhengisvalmynd",
+  "calendarPreviousMonthSemanticsLabel": "Fyrri mánuður",
+  "calendarNextMonthSemanticsLabel": "Næsti mánuður"
 }

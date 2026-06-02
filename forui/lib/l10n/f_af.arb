@@ -30,5 +30,7 @@
   "textFieldEmailLabel": "E-pos",
   "passwordFieldLabel": "Wagwoord",
   "dateTimePickerToday": "Vandag",
-  "contextMenuSemanticsLabel": "Kontekskieslys"
+  "contextMenuSemanticsLabel": "Kontekskieslys",
+  "calendarPreviousMonthSemanticsLabel": "Vorige maand",
+  "calendarNextMonthSemanticsLabel": "Volgende maand"
 }

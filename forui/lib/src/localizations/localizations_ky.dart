@@ -72,6 +72,12 @@ class FLocalizationsKy extends FLocalizations {
   String get autocompleteNoResults => 'Эч кандай дал келүү табылган жок.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'Кийинки ай';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Мурунку ай';
+
+  @override
   String get contextMenuSemanticsLabel => 'Контексттик меню';
 
   @override

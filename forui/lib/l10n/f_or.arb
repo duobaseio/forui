@@ -30,5 +30,7 @@
   "textFieldEmailLabel": "ଇମେଲ୍",
   "passwordFieldLabel": "ପାସୱାର୍ଡ",
   "dateTimePickerToday": "ଆଜି",
-  "contextMenuSemanticsLabel": "ପ୍ରସଙ୍ଗ ମେନୁ"
+  "contextMenuSemanticsLabel": "ପ୍ରସଙ୍ଗ ମେନୁ",
+  "calendarPreviousMonthSemanticsLabel": "ପୂର୍ବ ମାସ",
+  "calendarNextMonthSemanticsLabel": "ପରବର୍ତ୍ତୀ ମାସ"
 }

@@ -72,6 +72,12 @@ class FLocalizationsCy extends FLocalizations {
   String get autocompleteNoResults => 'Dim cydweddiadau wedi\'u canfod.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'Mis nesaf';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Mis blaenorol';
+
+  @override
   String get contextMenuSemanticsLabel => 'Dewislen cyd-destun';
 
   @override

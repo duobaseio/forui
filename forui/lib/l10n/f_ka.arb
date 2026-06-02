@@ -29,5 +29,7 @@
   "textFieldEmailLabel": "ელფოსტა",
   "passwordFieldLabel": "პაროლი",
   "dateTimePickerToday": "დღეს",
-  "contextMenuSemanticsLabel": "კონტექსტური მენიუ"
+  "contextMenuSemanticsLabel": "კონტექსტური მენიუ",
+  "calendarPreviousMonthSemanticsLabel": "წინა თვე",
+  "calendarNextMonthSemanticsLabel": "შემდეგი თვე"
 }

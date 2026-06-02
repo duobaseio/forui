@@ -29,5 +29,7 @@
   "textFieldEmailLabel": "Correo electrónico",
   "passwordFieldLabel": "Contrasinal",
   "dateTimePickerToday": "Hoxe",
-  "contextMenuSemanticsLabel": "Menú contextual"
+  "contextMenuSemanticsLabel": "Menú contextual",
+  "calendarPreviousMonthSemanticsLabel": "Mes anterior",
+  "calendarNextMonthSemanticsLabel": "Mes seguinte"
 }

@@ -72,6 +72,12 @@ class FLocalizationsDe extends FLocalizations {
   String get autocompleteNoResults => 'Keine Übereinstimmungen gefunden.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'Nächster Monat';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Vorheriger Monat';
+
+  @override
   String get contextMenuSemanticsLabel => 'Kontextmenü';
 
   @override
@@ -162,6 +168,12 @@ class FLocalizationsDeCh extends FLocalizationsDe {
 
   @override
   String get autocompleteNoResults => 'Keine Übereinstimmungen gefunden.';
+
+  @override
+  String get calendarNextMonthSemanticsLabel => 'Nächster Monat';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Vorheriger Monat';
 
   @override
   String get contextMenuSemanticsLabel => 'Kontextmenü';

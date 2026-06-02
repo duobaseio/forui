@@ -72,6 +72,12 @@ class FLocalizationsMs extends FLocalizations {
   String get autocompleteNoResults => 'Tiada padanan ditemui.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'Bulan seterusnya';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Bulan sebelumnya';
+
+  @override
   String get contextMenuSemanticsLabel => 'Menu konteks';
 
   @override

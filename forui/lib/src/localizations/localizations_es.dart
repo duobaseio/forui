@@ -72,6 +72,12 @@ class FLocalizationsEs extends FLocalizations {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
+
+  @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
 
   @override
@@ -172,6 +178,12 @@ class FLocalizationsEs419 extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
+
+  @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
 
   @override
@@ -258,6 +270,12 @@ class FLocalizationsEsAr extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -348,6 +366,12 @@ class FLocalizationsEsBo extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
+
+  @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
 
   @override
@@ -434,6 +458,12 @@ class FLocalizationsEsCl extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -524,6 +554,12 @@ class FLocalizationsEsCo extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
+
+  @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
 
   @override
@@ -610,6 +646,12 @@ class FLocalizationsEsCr extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -700,6 +742,12 @@ class FLocalizationsEsDo extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
+
+  @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
 
   @override
@@ -786,6 +834,12 @@ class FLocalizationsEsEc extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -876,6 +930,12 @@ class FLocalizationsEsGt extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
+
+  @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
 
   @override
@@ -962,6 +1022,12 @@ class FLocalizationsEsHn extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -1052,6 +1118,12 @@ class FLocalizationsEsMx extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
+
+  @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
 
   @override
@@ -1138,6 +1210,12 @@ class FLocalizationsEsNi extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -1228,6 +1306,12 @@ class FLocalizationsEsPa extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
+
+  @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
 
   @override
@@ -1314,6 +1398,12 @@ class FLocalizationsEsPe extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -1404,6 +1494,12 @@ class FLocalizationsEsPr extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
+
+  @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
 
   @override
@@ -1490,6 +1586,12 @@ class FLocalizationsEsPy extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -1580,6 +1682,12 @@ class FLocalizationsEsSv extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
+
+  @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
 
   @override
@@ -1666,6 +1774,12 @@ class FLocalizationsEsUs extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -1756,6 +1870,12 @@ class FLocalizationsEsUy extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
+
+  @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
 
   @override
@@ -1842,6 +1962,12 @@ class FLocalizationsEsVe extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';

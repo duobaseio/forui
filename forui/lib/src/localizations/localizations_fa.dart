@@ -72,6 +72,12 @@ class FLocalizationsFa extends FLocalizations {
   String get autocompleteNoResults => 'هیچ تطبیقی یافت نشد.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'ماه بعد';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'ماه قبل';
+
+  @override
   String get contextMenuSemanticsLabel => 'منوی زمینه';
 
   @override

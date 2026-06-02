@@ -29,5 +29,7 @@
   "textFieldEmailLabel": "ઇમેઇલ",
   "passwordFieldLabel": "પાસવર્ડ",
   "dateTimePickerToday": "આજે",
-  "contextMenuSemanticsLabel": "સંદર્ભ મેનૂ"
+  "contextMenuSemanticsLabel": "સંદર્ભ મેનૂ",
+  "calendarPreviousMonthSemanticsLabel": "પાછલો મહિનો",
+  "calendarNextMonthSemanticsLabel": "આગલો મહિનો"
 }

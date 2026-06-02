@@ -29,5 +29,7 @@
   "textFieldEmailLabel": "البريد الإلكتروني",
   "passwordFieldLabel": "كلمة المرور",
   "dateTimePickerToday": "اليوم",
-  "contextMenuSemanticsLabel": "قائمة السياق"
+  "contextMenuSemanticsLabel": "قائمة السياق",
+  "calendarPreviousMonthSemanticsLabel": "الشهر السابق",
+  "calendarNextMonthSemanticsLabel": "الشهر التالي"
 }

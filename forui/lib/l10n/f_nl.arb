@@ -30,5 +30,7 @@
   "textFieldEmailLabel": "E-mail",
   "passwordFieldLabel": "Wachtwoord",
   "dateTimePickerToday": "Vandaag",
-  "contextMenuSemanticsLabel": "Contextmenu"
+  "contextMenuSemanticsLabel": "Contextmenu",
+  "calendarPreviousMonthSemanticsLabel": "Vorige maand",
+  "calendarNextMonthSemanticsLabel": "Volgende maand"
 }

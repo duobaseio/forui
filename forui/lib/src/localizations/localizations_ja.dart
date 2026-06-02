@@ -72,6 +72,12 @@ class FLocalizationsJa extends FLocalizations {
   String get autocompleteNoResults => '一致するものが見つかりません.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => '次の月';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => '前の月';
+
+  @override
   String get contextMenuSemanticsLabel => 'コンテキストメニュー';
 
   @override

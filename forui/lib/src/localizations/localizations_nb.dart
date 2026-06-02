@@ -72,6 +72,12 @@ class FLocalizationsNb extends FLocalizations {
   String get autocompleteNoResults => 'Ingen treff funnet.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'Neste måned';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Forrige måned';
+
+  @override
   String get contextMenuSemanticsLabel => 'Kontekstmeny';
 
   @override

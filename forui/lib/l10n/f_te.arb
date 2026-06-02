@@ -29,5 +29,7 @@
   "textFieldEmailLabel": "ఇమెయిల్",
   "passwordFieldLabel": "పాస్‌వర్డ్",
   "dateTimePickerToday": "ఈ రోజు",
-  "contextMenuSemanticsLabel": "సందర్భ మెనూ"
+  "contextMenuSemanticsLabel": "సందర్భ మెనూ",
+  "calendarPreviousMonthSemanticsLabel": "మునుపటి నెల",
+  "calendarNextMonthSemanticsLabel": "తదుపరి నెల"
 }

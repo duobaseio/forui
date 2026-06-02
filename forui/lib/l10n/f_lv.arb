@@ -30,5 +30,7 @@
   "textFieldEmailLabel": "E-pasts",
   "passwordFieldLabel": "Parole",
   "dateTimePickerToday": "Šodien",
-  "contextMenuSemanticsLabel": "Konteksta izvēlne"
+  "contextMenuSemanticsLabel": "Konteksta izvēlne",
+  "calendarPreviousMonthSemanticsLabel": "Iepriekšējais mēnesis",
+  "calendarNextMonthSemanticsLabel": "Nākamais mēnesis"
 }

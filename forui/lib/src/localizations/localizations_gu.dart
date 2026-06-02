@@ -72,6 +72,12 @@ class FLocalizationsGu extends FLocalizations {
   String get autocompleteNoResults => 'કોઈ મેળ મળ્યો નહીં.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'આગલો મહિનો';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'પાછલો મહિનો';
+
+  @override
   String get contextMenuSemanticsLabel => 'સંદર્ભ મેનૂ';
 
   @override

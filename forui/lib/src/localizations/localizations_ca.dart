@@ -72,6 +72,12 @@ class FLocalizationsCa extends FLocalizations {
   String get autocompleteNoResults => 'No s\'han trobat coincidències.';
 
   @override
+  String get calendarNextMonthSemanticsLabel => 'Mes següent';
+
+  @override
+  String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
+
+  @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
 
   @override

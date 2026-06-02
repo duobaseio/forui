@@ -30,5 +30,7 @@
   "textFieldEmailLabel": "E-poçt",
   "passwordFieldLabel": "Parol",
   "dateTimePickerToday": "Bu gün",
-  "contextMenuSemanticsLabel": "Kontekst menyusu"
+  "contextMenuSemanticsLabel": "Kontekst menyusu",
+  "calendarPreviousMonthSemanticsLabel": "Əvvəlki ay",
+  "calendarNextMonthSemanticsLabel": "Növbəti ay"
 }
