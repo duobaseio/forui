@@ -32,5 +32,9 @@
   "dateTimePickerToday": "Hôm nay",
   "contextMenuSemanticsLabel": "Trình đơn ngữ cảnh",
   "calendarPreviousMonthSemanticsLabel": "Tháng trước",
-  "calendarNextMonthSemanticsLabel": "Tháng sau"
+  "calendarNextMonthSemanticsLabel": "Tháng sau",
+  "calendarNextYearSemanticsLabel": "Năm sau",
+  "calendarPreviousYearSemanticsLabel": "Năm trước",
+  "calendarNextYearsSemanticsLabel": "Các năm sau",
+  "calendarPreviousYearsSemanticsLabel": "Các năm trước"
 }

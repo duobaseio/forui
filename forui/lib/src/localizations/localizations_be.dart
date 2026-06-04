@@ -75,7 +75,19 @@ class FLocalizationsBe extends FLocalizations {
   String get calendarNextMonthSemanticsLabel => 'Наступны месяц';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'Наступны год';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'Наступныя гады';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'Папярэдні месяц';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'Папярэдні год';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'Папярэднія гады';
 
   @override
   String get contextMenuSemanticsLabel => 'Кантэкстнае меню';

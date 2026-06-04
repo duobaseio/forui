@@ -32,5 +32,9 @@
   "dateTimePickerToday": "Hüt",
   "contextMenuSemanticsLabel": "Kontextmenü",
   "calendarPreviousMonthSemanticsLabel": "Letzte Monet",
-  "calendarNextMonthSemanticsLabel": "Nächste Monet"
+  "calendarNextMonthSemanticsLabel": "Nächste Monet",
+  "calendarNextYearSemanticsLabel": "Nächschts Jaar",
+  "calendarPreviousYearSemanticsLabel": "Letschts Jaar",
+  "calendarNextYearsSemanticsLabel": "Nächschti Jaar",
+  "calendarPreviousYearsSemanticsLabel": "Letschti Jaar"
 }

@@ -8,7 +8,7 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
 import 'package:forui/src/widgets/calendar/day/day.dart';
-import 'package:forui/src/widgets/calendar/day/day_picker_controller.dart';
+import 'package:forui/src/widgets/calendar/grid.dart';
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
@@ -19,7 +19,7 @@ part 'day_picker.design.dart';
 const _rows = 7;
 
 @internal
-class DayPicker extends StatefulWidget {
+class DayPicker extends StatelessWidget {
   final FCalendarDayPickerController controller;
   final FCalendarDayPickerStyle style;
   final FLocalizations localization;
@@ -42,7 +42,56 @@ class DayPicker extends StatefulWidget {
   });
 
   @override
-  State<DayPicker> createState() => _DayPickerState();
+  Widget build(BuildContext context) {
+    final size = style.daySize;
+
+    return SizedBox(
+      width: DateTime.daysPerWeek * size.width,
+      height: _rows * size.height + (_rows - 1) * style.daySpacing,
+      child: GridFocusableActionDetector(
+        onFocusMove: controller.move,
+        onFocusChanage: (focused) {
+          if (!focused) {
+            controller.focus(null);
+            return;
+          }
+
+          if (controller.focused == null) {
+            final current = controller.current;
+            final preferred = today.year == current.year && today.month == current.month ? today : current;
+            controller.focus(controller.focusable(current, preferred));
+          }
+        },
+        child: PageView.builder(
+          controller: controller.controller,
+          onPageChanged: (page) {
+            controller.onPageChange(page);
+            SemanticsService.sendAnnouncement(
+              View.of(context),
+              localization.yearMonth(controller.to(page)),
+              Directionality.of(context),
+            );
+          },
+          itemCount: controller.pages,
+          itemBuilder: (_, page) => ListenableBuilder(
+            listenable: controller,
+            builder: (_, _) => _Grid(
+              style: style,
+              localization: localization,
+              month: controller.to(page),
+              today: today,
+              focused: controller.focused,
+              selectable: controller.selectable,
+              selected: selected,
+              onPress: onPress,
+              onLongPress: onLongPress,
+              builder: builder,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -56,102 +105,6 @@ class DayPicker extends StatefulWidget {
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
       ..add(ObjectFlagProperty.has('builder', builder));
-  }
-}
-
-class _DayPickerState extends State<DayPicker> {
-  static const Map<ShortcutActivator, Intent> _shortcuts = {
-    SingleActivator(.arrowLeft): DirectionalFocusIntent(.left),
-    SingleActivator(.arrowRight): DirectionalFocusIntent(.right),
-    SingleActivator(.arrowUp): DirectionalFocusIntent(.up),
-    SingleActivator(.arrowDown): DirectionalFocusIntent(.down),
-  };
-
-  late FocusNode _node;
-  late Map<Type, Action<Intent>> _actions;
-
-  @override
-  void initState() {
-    super.initState();
-    _node = FocusNode(debugLabel: 'DayPicker');
-    _actions = {
-      DirectionalFocusIntent: CallbackAction<DirectionalFocusIntent>(
-        onInvoke: (intent) => widget.controller.move(intent.direction, Directionality.of(context)),
-      ),
-      // Day cells skip traversal, so Tab/Shift-Tab escape the grid via its traversable node.
-      NextFocusIntent: CallbackAction<NextFocusIntent>(
-        onInvoke: (_) => _node
-          ..requestFocus()
-          ..nextFocus(),
-      ),
-      PreviousFocusIntent: CallbackAction<PreviousFocusIntent>(
-        onInvoke: (_) => _node
-          ..requestFocus()
-          ..previousFocus(),
-      ),
-    };
-  }
-
-  @override
-  void dispose() {
-    _node.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final controller = widget.controller;
-    final size = widget.style.daySize;
-
-    return SizedBox(
-      width: DateTime.daysPerWeek * size.width,
-      height: _rows * size.height + (_rows - 1) * widget.style.daySpacing,
-      child: FocusableActionDetector(
-        focusNode: _node,
-        shortcuts: _shortcuts,
-        actions: _actions,
-        onFocusChange: (focused) {
-          if (!focused) {
-            controller.focus(null);
-            return;
-          }
-
-          if (controller.focused == null) {
-            final today = widget.today;
-            final month = controller.month;
-            final preferred = today.year == month.year && today.month == month.month ? today.day : 1;
-            controller.focus(controller.findFocused(month, preferred));
-          }
-        },
-        child: PageView.builder(
-          controller: controller.page,
-          onPageChanged: (page) {
-            controller.onPageChange(page);
-            SemanticsService.sendAnnouncement(
-              View.of(context),
-              widget.localization.yearMonth(controller.to(page)),
-              Directionality.of(context),
-            );
-          },
-          itemCount: controller.length,
-          itemBuilder: (_, page) => ListenableBuilder(
-            listenable: controller,
-            builder: (_, _) => _Grid(
-              style: widget.style,
-              localization: widget.localization,
-              month: controller.to(page),
-              today: widget.today,
-              focused: controller.focused,
-              selectable: controller.selectable,
-              selected: widget.selected,
-              onPress: widget.onPress,
-              onLongPress: widget.onLongPress,
-              builder: widget.builder,
-            ),
-          ),
-        ),
-      ),
-    );
   }
 }
 
@@ -287,7 +240,7 @@ class _GridState extends State<_Grid> {
       padding: .zero,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
-      gridDelegate: _Delegate(daySize, daySpacing),
+      gridDelegate: GridDelegate(daySize, DateTime.daysPerWeek, daySpacing),
       childrenDelegate: SliverChildListDelegate(addRepaintBoundaries: false, [
         for (int i = 0, j = firstDayOfWeek; i < DateTime.daysPerWeek; i++, j++)
           ExcludeSemantics(
@@ -299,25 +252,38 @@ class _GridState extends State<_Grid> {
   }
 }
 
-/// Lays out 7 day columns and up to 7 rows (6 weeks + a weekday header) as fixed [size]d-cells.
-class _Delegate extends SliverGridDelegate {
-  final Size size;
-  final double spacing;
+/// Controls a calendar's day picker.
+class FCalendarDayPickerController extends GridController {
+  /// Creates a [FCalendarDayPickerController].
+  FCalendarDayPickerController({
+    required super.start,
+    required super.end,
+    required super.selectable,
+    required super.initial,
+    super.focused,
+  }) : super(
+    columns: 7,
+    focusable: (month, date) {
+      final last = month.lastDayOfMonth;
+      if (date.day <= last.day) {
+        final preferred = DateTime.utc(month.year, month.month, date.day);
+        if (selectable(preferred)) {
+          return preferred;
+        }
+      }
 
-  const _Delegate(this.size, this.spacing);
+      for (var day = month; !day.isAfter(last); day = day.plus(days: 1)) {
+        if (selectable(day)) {
+          return day;
+        }
+      }
 
-  @override
-  SliverGridLayout getLayout(SliverConstraints constraints) => SliverGridRegularTileLayout(
-    childCrossAxisExtent: size.width,
-    childMainAxisExtent: size.height,
-    crossAxisCount: DateTime.daysPerWeek,
-    crossAxisStride: size.width,
-    mainAxisStride: size.height + spacing,
-    reverseCrossAxis: axisDirectionIsReversed(constraints.crossAxisDirection),
+      return null;
+    },
+    step: (date, amount) => date.plus(days: amount),
+    from: (date) => (date.year - start.year) * 12 + (date.month - start.month),
+    to: (page) => .utc(start.year, start.month + page),
   );
-
-  @override
-  bool shouldRelayout(_Delegate old) => size != old.size || spacing != old.spacing;
 }
 
 /// A day picker's style.

@@ -13,6 +13,8 @@ class DualHeader extends StatelessWidget {
   final FCalendarHeaderStyle style;
   final FLocalizations localizations;
   final DateTime date;
+  final String previousSemanticsLabel;
+  final String nextSemanticsLabel;
   final bool month;
   final bool year;
   final VoidCallback? onMonth;
@@ -24,6 +26,8 @@ class DualHeader extends StatelessWidget {
     required this.style,
     required this.localizations,
     required this.date,
+    required this.previousSemanticsLabel,
+    required this.nextSemanticsLabel,
     required this.month,
     required this.year,
     required this.onMonth,
@@ -62,13 +66,13 @@ class DualHeader extends StatelessWidget {
         FButton.icon(
           style: style.buttonStyle,
           onPress: onPrevious,
-          semanticsLabel: localizations.calendarPreviousMonthSemanticsLabel,
+          semanticsLabel: previousSemanticsLabel,
           child: style.previousIcon(context),
         ),
         FButton.icon(
           style: style.buttonStyle,
           onPress: onNext,
-          semanticsLabel: localizations.calendarNextMonthSemanticsLabel,
+          semanticsLabel: nextSemanticsLabel,
           child: style.nextIcon(context),
         ),
       ],
@@ -82,6 +86,8 @@ class DualHeader extends StatelessWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('localizations', localizations))
       ..add(DiagnosticsProperty('date', date))
+      ..add(StringProperty('previousSemanticsLabel', previousSemanticsLabel))
+      ..add(StringProperty('nextSemanticsLabel', nextSemanticsLabel))
       ..add(FlagProperty('month', value: month, ifTrue: 'month picker shown'))
       ..add(FlagProperty('year', value: year, ifTrue: 'year picker shown'))
       ..add(ObjectFlagProperty.has('onMonth', onMonth))
@@ -96,8 +102,10 @@ class Header extends StatelessWidget {
   final FCalendarHeaderStyle style;
   final FLocalizations localizations;
   final DateTime date;
-  final bool monthYear;
-  final VoidCallback? onMonthYear;
+  final String previousSemanticsLabel;
+  final String nextSemanticsLabel;
+  final bool shown;
+  final VoidCallback? onPress;
   final VoidCallback? onNext;
   final VoidCallback? onPrevious;
 
@@ -105,8 +113,10 @@ class Header extends StatelessWidget {
     required this.style,
     required this.localizations,
     required this.date,
-    required this.monthYear,
-    required this.onMonthYear,
+    required this.previousSemanticsLabel,
+    required this.nextSemanticsLabel,
+    required this.shown,
+    required this.onPress,
     required this.onNext,
     required this.onPrevious,
     super.key,
@@ -118,18 +128,18 @@ class Header extends StatelessWidget {
 
     return Row(
       children: [
-        _Tappable(style: style, label: DateFormat.yMMMM(locale).format(date), shown: monthYear, onPress: onMonthYear),
+        _Tappable(style: style, label: DateFormat.yMMMM(locale).format(date), shown: shown, onPress: onPress),
         const Spacer(),
         FButton.icon(
           style: style.buttonStyle,
           onPress: onPrevious,
-          semanticsLabel: localizations.calendarPreviousMonthSemanticsLabel,
+          semanticsLabel: previousSemanticsLabel,
           child: style.previousIcon(context),
         ),
         FButton.icon(
           style: style.buttonStyle,
           onPress: onNext,
-          semanticsLabel: localizations.calendarNextMonthSemanticsLabel,
+          semanticsLabel: nextSemanticsLabel,
           child: style.nextIcon(context),
         ),
       ],
@@ -143,8 +153,10 @@ class Header extends StatelessWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('localizations', localizations))
       ..add(DiagnosticsProperty('date', date))
-      ..add(FlagProperty('monthYear', value: monthYear, ifTrue: 'month year picker shown'))
-      ..add(ObjectFlagProperty.has('onMonthYear', onMonthYear))
+      ..add(StringProperty('previousSemanticsLabel', previousSemanticsLabel))
+      ..add(StringProperty('nextSemanticsLabel', nextSemanticsLabel))
+      ..add(FlagProperty('monthYear', value: shown, ifTrue: 'month year picker shown'))
+      ..add(ObjectFlagProperty.has('onMonthYear', onPress))
       ..add(ObjectFlagProperty.has('onNext', onNext))
       ..add(ObjectFlagProperty.has('onPrevious', onPrevious));
   }

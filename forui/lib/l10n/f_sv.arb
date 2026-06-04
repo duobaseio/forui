@@ -32,5 +32,9 @@
   "dateTimePickerToday": "Idag",
   "contextMenuSemanticsLabel": "Kontextmeny",
   "calendarPreviousMonthSemanticsLabel": "Föregående månad",
-  "calendarNextMonthSemanticsLabel": "Nästa månad"
+  "calendarNextMonthSemanticsLabel": "Nästa månad",
+  "calendarNextYearSemanticsLabel": "Nästa år",
+  "calendarPreviousYearSemanticsLabel": "Föregående år",
+  "calendarNextYearsSemanticsLabel": "Nästa år",
+  "calendarPreviousYearsSemanticsLabel": "Föregående år"
 }

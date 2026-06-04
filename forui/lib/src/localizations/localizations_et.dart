@@ -75,7 +75,19 @@ class FLocalizationsEt extends FLocalizations {
   String get calendarNextMonthSemanticsLabel => 'Järgmine kuu';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'Järgmine aasta';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'Järgmised aastad';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'Eelmine kuu';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'Eelmine aasta';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'Eelmised aastad';
 
   @override
   String get contextMenuSemanticsLabel => 'Kontekstimenüü';

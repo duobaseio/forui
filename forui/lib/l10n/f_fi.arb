@@ -32,5 +32,9 @@
   "dateTimePickerToday": "Tänään",
   "contextMenuSemanticsLabel": "Kontekstivalikko",
   "calendarPreviousMonthSemanticsLabel": "Edellinen kuukausi",
-  "calendarNextMonthSemanticsLabel": "Seuraava kuukausi"
+  "calendarNextMonthSemanticsLabel": "Seuraava kuukausi",
+  "calendarNextYearSemanticsLabel": "Seuraava vuosi",
+  "calendarPreviousYearSemanticsLabel": "Edellinen vuosi",
+  "calendarNextYearsSemanticsLabel": "Seuraavat vuodet",
+  "calendarPreviousYearsSemanticsLabel": "Edelliset vuodet"
 }

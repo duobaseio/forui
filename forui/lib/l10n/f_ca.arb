@@ -31,5 +31,9 @@
   "dateTimePickerToday": "Avui",
   "contextMenuSemanticsLabel": "Menú contextual",
   "calendarPreviousMonthSemanticsLabel": "Mes anterior",
-  "calendarNextMonthSemanticsLabel": "Mes següent"
+  "calendarNextMonthSemanticsLabel": "Mes següent",
+  "calendarNextYearSemanticsLabel": "Any següent",
+  "calendarPreviousYearSemanticsLabel": "Any anterior",
+  "calendarNextYearsSemanticsLabel": "Anys següents",
+  "calendarPreviousYearsSemanticsLabel": "Anys anteriors"
 }

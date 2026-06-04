@@ -75,7 +75,19 @@ class FLocalizationsDe extends FLocalizations {
   String get calendarNextMonthSemanticsLabel => 'Nächster Monat';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'Nächstes Jahr';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'Nächste Jahre';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'Vorheriger Monat';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'Vorheriges Jahr';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'Vorherige Jahre';
 
   @override
   String get contextMenuSemanticsLabel => 'Kontextmenü';
@@ -173,7 +185,19 @@ class FLocalizationsDeCh extends FLocalizationsDe {
   String get calendarNextMonthSemanticsLabel => 'Nächster Monat';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'Nächstes Jahr';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'Nächste Jahre';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'Vorheriger Monat';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'Vorheriges Jahr';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'Vorherige Jahre';
 
   @override
   String get contextMenuSemanticsLabel => 'Kontextmenü';

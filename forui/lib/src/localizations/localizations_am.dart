@@ -75,7 +75,19 @@ class FLocalizationsAm extends FLocalizations {
   String get calendarNextMonthSemanticsLabel => 'የሚቀጥለው ወር';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'የሚቀጥለው ዓመት';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'የሚቀጥሉት ዓመታት';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'ያለፈው ወር';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'ያለፈው ዓመት';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'ያለፉት ዓመታት';
 
   @override
   String get contextMenuSemanticsLabel => 'የአውድ ምናሌ';

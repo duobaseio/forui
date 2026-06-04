@@ -31,5 +31,9 @@
   "dateTimePickerToday": "இன்று",
   "contextMenuSemanticsLabel": "சூழல் பட்டி",
   "calendarPreviousMonthSemanticsLabel": "முந்தைய மாதம்",
-  "calendarNextMonthSemanticsLabel": "அடுத்த மாதம்"
+  "calendarNextMonthSemanticsLabel": "அடுத்த மாதம்",
+  "calendarNextYearSemanticsLabel": "அடுத்த ஆண்டு",
+  "calendarPreviousYearSemanticsLabel": "முந்தைய ஆண்டு",
+  "calendarNextYearsSemanticsLabel": "அடுத்த ஆண்டுகள்",
+  "calendarPreviousYearsSemanticsLabel": "முந்தைய ஆண்டுகள்"
 }

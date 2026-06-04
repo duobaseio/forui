@@ -31,5 +31,9 @@
   "dateTimePickerToday": "Այսօր",
   "contextMenuSemanticsLabel": "Համատեկստային մենյու",
   "calendarPreviousMonthSemanticsLabel": "Նախորդ ամիս",
-  "calendarNextMonthSemanticsLabel": "Հաջորդ ամիս"
+  "calendarNextMonthSemanticsLabel": "Հաջորդ ամիս",
+  "calendarNextYearSemanticsLabel": "Հաջորդ տարի",
+  "calendarPreviousYearSemanticsLabel": "Նախորդ տարի",
+  "calendarNextYearsSemanticsLabel": "Հաջորդ տարիներ",
+  "calendarPreviousYearsSemanticsLabel": "Նախորդ տարիներ"
 }

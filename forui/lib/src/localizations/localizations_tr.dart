@@ -75,7 +75,19 @@ class FLocalizationsTr extends FLocalizations {
   String get calendarNextMonthSemanticsLabel => 'Sonraki ay';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'Sonraki yıl';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'Sonraki yıllar';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'Önceki ay';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'Önceki yıl';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'Önceki yıllar';
 
   @override
   String get contextMenuSemanticsLabel => 'Bağlam menüsü';

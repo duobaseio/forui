@@ -32,5 +32,9 @@
   "dateTimePickerToday": "Danes",
   "contextMenuSemanticsLabel": "Kontekstni meni",
   "calendarPreviousMonthSemanticsLabel": "Prejšnji mesec",
-  "calendarNextMonthSemanticsLabel": "Naslednji mesec"
+  "calendarNextMonthSemanticsLabel": "Naslednji mesec",
+  "calendarNextYearSemanticsLabel": "Naslednje leto",
+  "calendarPreviousYearSemanticsLabel": "Prejšnje leto",
+  "calendarNextYearsSemanticsLabel": "Naslednja leta",
+  "calendarPreviousYearsSemanticsLabel": "Prejšnja leta"
 }

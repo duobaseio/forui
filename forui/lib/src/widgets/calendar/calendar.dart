@@ -19,4 +19,19 @@ class FCalendar {
       ),
     );
   }
+
+  /// The default [FCalendarMonthBuilder].
+  static Widget defaultMonthBuilder(
+    BuildContext context,
+    FCalendarMonthStyles styles,
+    FLocalizations localizations,
+    DateTime date,
+    Set<FCalendarMonthVariant> variants,
+  ) {
+    final style = styles.resolve(variants);
+    return DecoratedBox(
+      decoration: style.decoration,
+      child: Center(child: Text(localizations.abbreviatedMonth(date), style: style.textStyle)),
+    );
+  }
 }

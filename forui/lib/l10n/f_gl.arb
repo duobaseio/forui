@@ -31,5 +31,9 @@
   "dateTimePickerToday": "Hoxe",
   "contextMenuSemanticsLabel": "Menú contextual",
   "calendarPreviousMonthSemanticsLabel": "Mes anterior",
-  "calendarNextMonthSemanticsLabel": "Mes seguinte"
+  "calendarNextMonthSemanticsLabel": "Mes seguinte",
+  "calendarNextYearSemanticsLabel": "Ano seguinte",
+  "calendarPreviousYearSemanticsLabel": "Ano anterior",
+  "calendarNextYearsSemanticsLabel": "Anos seguintes",
+  "calendarPreviousYearsSemanticsLabel": "Anos anteriores"
 }

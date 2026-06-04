@@ -31,5 +31,9 @@
   "dateTimePickerToday": "Сёння",
   "contextMenuSemanticsLabel": "Кантэкстнае меню",
   "calendarPreviousMonthSemanticsLabel": "Папярэдні месяц",
-  "calendarNextMonthSemanticsLabel": "Наступны месяц"
+  "calendarNextMonthSemanticsLabel": "Наступны месяц",
+  "calendarNextYearSemanticsLabel": "Наступны год",
+  "calendarPreviousYearSemanticsLabel": "Папярэдні год",
+  "calendarNextYearsSemanticsLabel": "Наступныя гады",
+  "calendarPreviousYearsSemanticsLabel": "Папярэднія гады"
 }

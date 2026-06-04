@@ -32,5 +32,9 @@
   "dateTimePickerToday": "Leo",
   "contextMenuSemanticsLabel": "Menyu ya muktadha",
   "calendarPreviousMonthSemanticsLabel": "Mwezi uliopita",
-  "calendarNextMonthSemanticsLabel": "Mwezi ujao"
+  "calendarNextMonthSemanticsLabel": "Mwezi ujao",
+  "calendarNextYearSemanticsLabel": "Mwaka unaofuata",
+  "calendarPreviousYearSemanticsLabel": "Mwaka uliopita",
+  "calendarNextYearsSemanticsLabel": "Miaka inayofuata",
+  "calendarPreviousYearsSemanticsLabel": "Miaka iliyopita"
 }

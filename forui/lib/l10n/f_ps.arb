@@ -31,5 +31,9 @@
   "dateTimePickerToday": "نن",
   "contextMenuSemanticsLabel": "د شرایطو مینو",
   "calendarPreviousMonthSemanticsLabel": "تېره میاشت",
-  "calendarNextMonthSemanticsLabel": "راتلونکې میاشت"
+  "calendarNextMonthSemanticsLabel": "راتلونکې میاشت",
+  "calendarNextYearSemanticsLabel": "راتلونکی کال",
+  "calendarPreviousYearSemanticsLabel": "تېر کال",
+  "calendarNextYearsSemanticsLabel": "راتلونکي کلونه",
+  "calendarPreviousYearsSemanticsLabel": "تېر کلونه"
 }

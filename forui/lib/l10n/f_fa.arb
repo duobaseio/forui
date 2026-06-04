@@ -31,5 +31,9 @@
   "dateTimePickerToday": "امروز",
   "contextMenuSemanticsLabel": "منوی زمینه",
   "calendarPreviousMonthSemanticsLabel": "ماه قبل",
-  "calendarNextMonthSemanticsLabel": "ماه بعد"
+  "calendarNextMonthSemanticsLabel": "ماه بعد",
+  "calendarNextYearSemanticsLabel": "سال بعد",
+  "calendarPreviousYearSemanticsLabel": "سال قبل",
+  "calendarNextYearsSemanticsLabel": "سال‌های بعد",
+  "calendarPreviousYearsSemanticsLabel": "سال‌های قبل"
 }

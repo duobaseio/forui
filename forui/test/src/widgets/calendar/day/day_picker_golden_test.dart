@@ -40,7 +40,7 @@ Widget _harness(
       final t = context.theme;
       return DayPicker(
         controller: controller,
-        style: .inherit(colors: t.colors, typography: t.typography, style: t.style, touch: false),
+        style: .inherit(colors: t.colors, typography: t.typography, style: t.style, touch: context.platformVariant.touch),
         localization: FLocalizations.of(context) ?? FDefaultLocalizations(),
         today: today ?? _initial,
         selected: selected ?? (_) => false,
@@ -66,7 +66,7 @@ void main() {
             _controller(),
             theme: theme.data,
             today: .utc(2024, 6, 5),
-            selected: (date) => _range(10, 14)(date) || date == .utc(2024, 6, 21),
+            selected: _range(13, 18),
           ),
         );
         await expectGolden(tester, 'range');
@@ -74,14 +74,14 @@ void main() {
 
       testWidgets('today-as-start', (tester) async {
         await tester.pumpWidget(
-          _harness(_controller(), theme: theme.data, today: .utc(2024, 6, 10), selected: _range(10, 14)),
+          _harness(_controller(), theme: theme.data, today: .utc(2024, 6, 13), selected: _range(13, 18)),
         );
         await expectGolden(tester, 'today-as-start');
       });
 
       testWidgets('today-in-range', (tester) async {
         await tester.pumpWidget(
-          _harness(_controller(), theme: theme.data, today: .utc(2024, 6, 12), selected: _range(10, 14)),
+          _harness(_controller(), theme: theme.data, today: .utc(2024, 6, 15), selected: _range(13, 18)),
         );
         await expectGolden(tester, 'today-in-range');
       });
@@ -100,14 +100,14 @@ void main() {
 
       testWidgets('disabled-in-range', (tester) async {
         // Explicit disabled coverage: weekends (plain + adjacent disabled) and specific selected days (start/middle/end
-        // + single disabled).
-        const disabled = {10, 12, 14, 21};
+        // disabled).
+        const disabled = {13, 15, 18};
         await tester.pumpWidget(
           _harness(
             _controller(selectable: (date) => _weekday(date) && !(date.month == 6 && disabled.contains(date.day))),
             theme: theme.data,
             today: .utc(2024, 6, 5),
-            selected: (date) => _range(10, 14)(date) || date == .utc(2024, 6, 21),
+            selected: _range(13, 18),
           ),
         );
         await expectGolden(tester, 'disabled-in-range');
@@ -125,8 +125,8 @@ void main() {
       for (final (name, day, selected) in <(String, int, bool Function(DateTime)?)>[
         ('focus-plain', 17, null),
         ('focus-single', 17, _range(17, 17)),
-        ('focus-start', 10, _range(10, 14)),
-        ('focus-middle', 12, _range(10, 14)),
+        ('focus-start', 13, _range(13, 18)),
+        ('focus-middle', 15, _range(13, 18)),
       ]) {
         testWidgets(name, (tester) async {
           final controller = _controller();
@@ -142,7 +142,7 @@ void main() {
     group('${theme.name} hover', () {
       for (final (name, day, selected) in <(String, int, bool Function(DateTime)?)>[
         ('hover-plain', 17, null),
-        ('hover-middle', 12, _range(10, 14)),
+        ('hover-middle', 15, _range(13, 18)),
       ]) {
         testWidgets(name, (tester) async {
           await tester.pumpWidget(_harness(_controller(), theme: theme.data, selected: selected));

@@ -75,7 +75,19 @@ class FLocalizationsSl extends FLocalizations {
   String get calendarNextMonthSemanticsLabel => 'Naslednji mesec';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'Naslednje leto';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'Naslednja leta';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'Prejšnji mesec';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'Prejšnje leto';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'Prejšnja leta';
 
   @override
   String get contextMenuSemanticsLabel => 'Kontekstni meni';

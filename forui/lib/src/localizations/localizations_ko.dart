@@ -75,7 +75,19 @@ class FLocalizationsKo extends FLocalizations {
   String get calendarNextMonthSemanticsLabel => '다음 달';
 
   @override
+  String get calendarNextYearSemanticsLabel => '다음 해';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => '다음 해들';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => '이전 달';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => '이전 해';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => '이전 해들';
 
   @override
   String get contextMenuSemanticsLabel => '컨텍스트 메뉴';

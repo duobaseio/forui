@@ -32,5 +32,9 @@
   "dateTimePickerToday": "Gaur",
   "contextMenuSemanticsLabel": "Testuinguru-menua",
   "calendarPreviousMonthSemanticsLabel": "Aurreko hilabetea",
-  "calendarNextMonthSemanticsLabel": "Hurrengo hilabetea"
+  "calendarNextMonthSemanticsLabel": "Hurrengo hilabetea",
+  "calendarNextYearSemanticsLabel": "Hurrengo urtea",
+  "calendarPreviousYearSemanticsLabel": "Aurreko urtea",
+  "calendarNextYearsSemanticsLabel": "Hurrengo urteak",
+  "calendarPreviousYearsSemanticsLabel": "Aurreko urteak"
 }

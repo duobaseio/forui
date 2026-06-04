@@ -31,5 +31,9 @@
   "dateTimePickerToday": "ມື້ນີ້",
   "contextMenuSemanticsLabel": "ເມນູບໍລິບົດ",
   "calendarPreviousMonthSemanticsLabel": "ເດືອນກ່ອນ",
-  "calendarNextMonthSemanticsLabel": "ເດືອນຖັດໄປ"
+  "calendarNextMonthSemanticsLabel": "ເດືອນຖັດໄປ",
+  "calendarNextYearSemanticsLabel": "ປີຕໍ່ໄປ",
+  "calendarPreviousYearSemanticsLabel": "ປີກ່ອນໜ້າ",
+  "calendarNextYearsSemanticsLabel": "ປີຕໍ່ໄປ",
+  "calendarPreviousYearsSemanticsLabel": "ປີກ່ອນໜ້າ"
 }

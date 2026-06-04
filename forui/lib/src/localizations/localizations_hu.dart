@@ -75,7 +75,19 @@ class FLocalizationsHu extends FLocalizations {
   String get calendarNextMonthSemanticsLabel => 'Következő hónap';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'Következő év';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'Következő évek';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'Előző hónap';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'Előző év';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'Előző évek';
 
   @override
   String get contextMenuSemanticsLabel => 'Helyi menü';

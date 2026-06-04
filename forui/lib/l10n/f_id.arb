@@ -32,5 +32,9 @@
   "dateTimePickerToday": "Hari ini",
   "contextMenuSemanticsLabel": "Menu konteks",
   "calendarPreviousMonthSemanticsLabel": "Bulan sebelumnya",
-  "calendarNextMonthSemanticsLabel": "Bulan berikutnya"
+  "calendarNextMonthSemanticsLabel": "Bulan berikutnya",
+  "calendarNextYearSemanticsLabel": "Tahun berikutnya",
+  "calendarPreviousYearSemanticsLabel": "Tahun sebelumnya",
+  "calendarNextYearsSemanticsLabel": "Tahun-tahun berikutnya",
+  "calendarPreviousYearsSemanticsLabel": "Tahun-tahun sebelumnya"
 }

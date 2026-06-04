@@ -32,5 +32,9 @@
   "dateTimePickerToday": "Namuhla",
   "contextMenuSemanticsLabel": "Imenyu yesimo",
   "calendarPreviousMonthSemanticsLabel": "Inyanga edlule",
-  "calendarNextMonthSemanticsLabel": "Inyanga elandelayo"
+  "calendarNextMonthSemanticsLabel": "Inyanga elandelayo",
+  "calendarNextYearSemanticsLabel": "Unyaka olandelayo",
+  "calendarPreviousYearSemanticsLabel": "Unyaka odlule",
+  "calendarNextYearsSemanticsLabel": "Iminyaka elandelayo",
+  "calendarPreviousYearsSemanticsLabel": "Iminyaka edlule"
 }

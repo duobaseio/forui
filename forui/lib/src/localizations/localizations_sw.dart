@@ -75,7 +75,19 @@ class FLocalizationsSw extends FLocalizations {
   String get calendarNextMonthSemanticsLabel => 'Mwezi ujao';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'Mwaka unaofuata';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'Miaka inayofuata';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'Mwezi uliopita';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'Mwaka uliopita';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'Miaka iliyopita';
 
   @override
   String get contextMenuSemanticsLabel => 'Menyu ya muktadha';

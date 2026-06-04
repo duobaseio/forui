@@ -32,5 +32,9 @@
   "dateTimePickerToday": "Ngayon",
   "contextMenuSemanticsLabel": "Menu ng konteksto",
   "calendarPreviousMonthSemanticsLabel": "Nakaraang buwan",
-  "calendarNextMonthSemanticsLabel": "Susunod na buwan"
+  "calendarNextMonthSemanticsLabel": "Susunod na buwan",
+  "calendarNextYearSemanticsLabel": "Susunod na taon",
+  "calendarPreviousYearSemanticsLabel": "Nakaraang taon",
+  "calendarNextYearsSemanticsLabel": "Susunod na mga taon",
+  "calendarPreviousYearsSemanticsLabel": "Nakaraang mga taon"
 }

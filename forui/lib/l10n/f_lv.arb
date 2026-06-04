@@ -32,5 +32,9 @@
   "dateTimePickerToday": "Šodien",
   "contextMenuSemanticsLabel": "Konteksta izvēlne",
   "calendarPreviousMonthSemanticsLabel": "Iepriekšējais mēnesis",
-  "calendarNextMonthSemanticsLabel": "Nākamais mēnesis"
+  "calendarNextMonthSemanticsLabel": "Nākamais mēnesis",
+  "calendarNextYearSemanticsLabel": "Nākamais gads",
+  "calendarPreviousYearSemanticsLabel": "Iepriekšējais gads",
+  "calendarNextYearsSemanticsLabel": "Nākamie gadi",
+  "calendarPreviousYearsSemanticsLabel": "Iepriekšējie gadi"
 }

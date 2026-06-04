@@ -32,5 +32,9 @@
   "dateTimePickerToday": "Ma",
   "contextMenuSemanticsLabel": "Helyi menü",
   "calendarPreviousMonthSemanticsLabel": "Előző hónap",
-  "calendarNextMonthSemanticsLabel": "Következő hónap"
+  "calendarNextMonthSemanticsLabel": "Következő hónap",
+  "calendarNextYearSemanticsLabel": "Következő év",
+  "calendarPreviousYearSemanticsLabel": "Előző év",
+  "calendarNextYearsSemanticsLabel": "Következő évek",
+  "calendarPreviousYearsSemanticsLabel": "Előző évek"
 }

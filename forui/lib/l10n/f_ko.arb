@@ -31,5 +31,9 @@
   "dateTimePickerToday": "오늘",
   "contextMenuSemanticsLabel": "컨텍스트 메뉴",
   "calendarPreviousMonthSemanticsLabel": "이전 달",
-  "calendarNextMonthSemanticsLabel": "다음 달"
+  "calendarNextMonthSemanticsLabel": "다음 달",
+  "calendarNextYearSemanticsLabel": "다음 해",
+  "calendarPreviousYearSemanticsLabel": "이전 해",
+  "calendarNextYearsSemanticsLabel": "다음 해들",
+  "calendarPreviousYearsSemanticsLabel": "이전 해들"
 }

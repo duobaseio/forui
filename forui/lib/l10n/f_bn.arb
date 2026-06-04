@@ -32,5 +32,9 @@
   "dateTimePickerToday": "আজ",
   "contextMenuSemanticsLabel": "প্রসঙ্গ মেনু",
   "calendarPreviousMonthSemanticsLabel": "আগের মাস",
-  "calendarNextMonthSemanticsLabel": "পরের মাস"
+  "calendarNextMonthSemanticsLabel": "পরের মাস",
+  "calendarNextYearSemanticsLabel": "পরবর্তী বছর",
+  "calendarPreviousYearSemanticsLabel": "পূর্ববর্তী বছর",
+  "calendarNextYearsSemanticsLabel": "পরবর্তী বছরগুলি",
+  "calendarPreviousYearsSemanticsLabel": "পূর্ববর্তী বছরগুলি"
 }

@@ -75,7 +75,19 @@ class FLocalizationsEs extends FLocalizations {
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'Año siguiente';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'Años siguientes';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'Año anterior';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -181,7 +193,19 @@ class FLocalizationsEs419 extends FLocalizationsEs {
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'Año siguiente';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'Años siguientes';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'Año anterior';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -275,7 +299,19 @@ class FLocalizationsEsAr extends FLocalizationsEs {
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'Año siguiente';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'Años siguientes';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'Año anterior';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -369,7 +405,19 @@ class FLocalizationsEsBo extends FLocalizationsEs {
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'Año siguiente';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'Años siguientes';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'Año anterior';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -463,7 +511,19 @@ class FLocalizationsEsCl extends FLocalizationsEs {
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'Año siguiente';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'Años siguientes';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'Año anterior';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -557,7 +617,19 @@ class FLocalizationsEsCo extends FLocalizationsEs {
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'Año siguiente';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'Años siguientes';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'Año anterior';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -651,7 +723,19 @@ class FLocalizationsEsCr extends FLocalizationsEs {
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'Año siguiente';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'Años siguientes';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'Año anterior';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -745,7 +829,19 @@ class FLocalizationsEsDo extends FLocalizationsEs {
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'Año siguiente';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'Años siguientes';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'Año anterior';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -839,7 +935,19 @@ class FLocalizationsEsEc extends FLocalizationsEs {
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'Año siguiente';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'Años siguientes';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'Año anterior';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -933,7 +1041,19 @@ class FLocalizationsEsGt extends FLocalizationsEs {
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'Año siguiente';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'Años siguientes';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'Año anterior';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -1027,7 +1147,19 @@ class FLocalizationsEsHn extends FLocalizationsEs {
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'Año siguiente';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'Años siguientes';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'Año anterior';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -1121,7 +1253,19 @@ class FLocalizationsEsMx extends FLocalizationsEs {
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'Año siguiente';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'Años siguientes';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'Año anterior';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -1215,7 +1359,19 @@ class FLocalizationsEsNi extends FLocalizationsEs {
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'Año siguiente';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'Años siguientes';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'Año anterior';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -1309,7 +1465,19 @@ class FLocalizationsEsPa extends FLocalizationsEs {
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'Año siguiente';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'Años siguientes';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'Año anterior';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -1403,7 +1571,19 @@ class FLocalizationsEsPe extends FLocalizationsEs {
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'Año siguiente';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'Años siguientes';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'Año anterior';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -1497,7 +1677,19 @@ class FLocalizationsEsPr extends FLocalizationsEs {
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'Año siguiente';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'Años siguientes';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'Año anterior';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -1591,7 +1783,19 @@ class FLocalizationsEsPy extends FLocalizationsEs {
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'Año siguiente';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'Años siguientes';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'Año anterior';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -1685,7 +1889,19 @@ class FLocalizationsEsSv extends FLocalizationsEs {
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'Año siguiente';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'Años siguientes';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'Año anterior';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -1779,7 +1995,19 @@ class FLocalizationsEsUs extends FLocalizationsEs {
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'Año siguiente';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'Años siguientes';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'Año anterior';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -1873,7 +2101,19 @@ class FLocalizationsEsUy extends FLocalizationsEs {
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'Año siguiente';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'Años siguientes';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'Año anterior';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -1967,7 +2207,19 @@ class FLocalizationsEsVe extends FLocalizationsEs {
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'Año siguiente';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'Años siguientes';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'Año anterior';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';

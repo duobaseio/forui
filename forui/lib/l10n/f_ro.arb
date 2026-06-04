@@ -32,5 +32,9 @@
   "dateTimePickerToday": "Astăzi",
   "contextMenuSemanticsLabel": "Meniu contextual",
   "calendarPreviousMonthSemanticsLabel": "Luna anterioară",
-  "calendarNextMonthSemanticsLabel": "Luna următoare"
+  "calendarNextMonthSemanticsLabel": "Luna următoare",
+  "calendarNextYearSemanticsLabel": "Anul următor",
+  "calendarPreviousYearSemanticsLabel": "Anul precedent",
+  "calendarNextYearsSemanticsLabel": "Anii următori",
+  "calendarPreviousYearsSemanticsLabel": "Anii precedenți"
 }

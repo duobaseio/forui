@@ -31,5 +31,9 @@
   "dateTimePickerToday": "Бүгүн",
   "contextMenuSemanticsLabel": "Контексттик меню",
   "calendarPreviousMonthSemanticsLabel": "Мурунку ай",
-  "calendarNextMonthSemanticsLabel": "Кийинки ай"
+  "calendarNextMonthSemanticsLabel": "Кийинки ай",
+  "calendarNextYearSemanticsLabel": "Кийинки жыл",
+  "calendarPreviousYearSemanticsLabel": "Мурунку жыл",
+  "calendarNextYearsSemanticsLabel": "Кийинки жылдар",
+  "calendarPreviousYearsSemanticsLabel": "Мурунку жылдар"
 }

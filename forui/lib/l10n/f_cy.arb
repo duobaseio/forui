@@ -32,5 +32,9 @@
   "dateTimePickerToday": "Heddiw",
   "contextMenuSemanticsLabel": "Dewislen cyd-destun",
   "calendarPreviousMonthSemanticsLabel": "Mis blaenorol",
-  "calendarNextMonthSemanticsLabel": "Mis nesaf"
+  "calendarNextMonthSemanticsLabel": "Mis nesaf",
+  "calendarNextYearSemanticsLabel": "Blwyddyn nesaf",
+  "calendarPreviousYearSemanticsLabel": "Blwyddyn flaenorol",
+  "calendarNextYearsSemanticsLabel": "Blynyddoedd nesaf",
+  "calendarPreviousYearsSemanticsLabel": "Blynyddoedd blaenorol"
 }

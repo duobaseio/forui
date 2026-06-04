@@ -1,5 +1,10 @@
 ## 0.23.0 (Next)
 
+### `FCalendar`
+* Add "Previous month"/"Next month", "Previous year"/"Next year", and "Previous years"/"Next years" semantics labels
+  to the calendar header's navigation buttons.
+
+
 ### `FContextMenu`
 * Add `FContextMenu`.
 

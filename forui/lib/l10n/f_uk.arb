@@ -31,5 +31,9 @@
   "dateTimePickerToday": "Сьогодні",
   "contextMenuSemanticsLabel": "Контекстне меню",
   "calendarPreviousMonthSemanticsLabel": "Попередній місяць",
-  "calendarNextMonthSemanticsLabel": "Наступний місяць"
+  "calendarNextMonthSemanticsLabel": "Наступний місяць",
+  "calendarNextYearSemanticsLabel": "Наступний рік",
+  "calendarPreviousYearSemanticsLabel": "Попередній рік",
+  "calendarNextYearsSemanticsLabel": "Наступні роки",
+  "calendarPreviousYearsSemanticsLabel": "Попередні роки"
 }

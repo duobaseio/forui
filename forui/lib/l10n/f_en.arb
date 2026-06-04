@@ -80,9 +80,25 @@
   "@calendarNextMonthSemanticsLabel": {
     "description": "The label for the calendar header's next-month navigation button."
   },
+  "calendarNextYearSemanticsLabel": "Next year",
+  "@calendarNextYearSemanticsLabel": {
+    "description": "The label for the calendar header's next-year navigation button."
+  },
+  "calendarNextYearsSemanticsLabel": "Next years",
+  "@calendarNextYearsSemanticsLabel": {
+    "description": "The label for the calendar header's next-years navigation button."
+  },
   "calendarPreviousMonthSemanticsLabel": "Previous month",
   "@calendarPreviousMonthSemanticsLabel": {
     "description": "The label for the calendar header's previous-month navigation button."
+  },
+  "calendarPreviousYearSemanticsLabel": "Previous year",
+  "@calendarPreviousYearSemanticsLabel": {
+    "description": "The label for the calendar header's previous-year navigation button."
+  },
+  "calendarPreviousYearsSemanticsLabel": "Previous years",
+  "@calendarPreviousYearsSemanticsLabel": {
+    "description": "The label for the calendar header's previous-years navigation button."
   },
   "contextMenuSemanticsLabel": "Context menu",
   "@contextMenuSemanticsLabel": {

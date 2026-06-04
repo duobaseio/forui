@@ -31,5 +31,9 @@
   "dateTimePickerToday": "اليوم",
   "contextMenuSemanticsLabel": "قائمة السياق",
   "calendarPreviousMonthSemanticsLabel": "الشهر السابق",
-  "calendarNextMonthSemanticsLabel": "الشهر التالي"
+  "calendarNextMonthSemanticsLabel": "الشهر التالي",
+  "calendarNextYearSemanticsLabel": "السنة التالية",
+  "calendarPreviousYearSemanticsLabel": "السنة السابقة",
+  "calendarNextYearsSemanticsLabel": "السنوات التالية",
+  "calendarPreviousYearsSemanticsLabel": "السنوات السابقة"
 }

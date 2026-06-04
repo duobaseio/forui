@@ -32,5 +32,9 @@
   "dateTimePickerToday": "Vandag",
   "contextMenuSemanticsLabel": "Kontekskieslys",
   "calendarPreviousMonthSemanticsLabel": "Vorige maand",
-  "calendarNextMonthSemanticsLabel": "Volgende maand"
+  "calendarNextMonthSemanticsLabel": "Volgende maand",
+  "calendarNextYearSemanticsLabel": "Volgende jaar",
+  "calendarPreviousYearSemanticsLabel": "Vorige jaar",
+  "calendarNextYearsSemanticsLabel": "Volgende jare",
+  "calendarPreviousYearsSemanticsLabel": "Vorige jare"
 }

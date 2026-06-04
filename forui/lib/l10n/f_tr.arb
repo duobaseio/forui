@@ -32,5 +32,9 @@
   "dateTimePickerToday": "Bugün",
   "contextMenuSemanticsLabel": "Bağlam menüsü",
   "calendarPreviousMonthSemanticsLabel": "Önceki ay",
-  "calendarNextMonthSemanticsLabel": "Sonraki ay"
+  "calendarNextMonthSemanticsLabel": "Sonraki ay",
+  "calendarNextYearSemanticsLabel": "Sonraki yıl",
+  "calendarPreviousYearSemanticsLabel": "Önceki yıl",
+  "calendarNextYearsSemanticsLabel": "Sonraki yıllar",
+  "calendarPreviousYearsSemanticsLabel": "Önceki yıllar"
 }

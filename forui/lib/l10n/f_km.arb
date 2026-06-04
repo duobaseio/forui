@@ -32,5 +32,9 @@
   "dateTimePickerToday": "ថ្ងៃនេះ",
   "contextMenuSemanticsLabel": "ម៉ឺនុយបរិបទ",
   "calendarPreviousMonthSemanticsLabel": "ខែមុន",
-  "calendarNextMonthSemanticsLabel": "ខែបន្ទាប់"
+  "calendarNextMonthSemanticsLabel": "ខែបន្ទាប់",
+  "calendarNextYearSemanticsLabel": "ឆ្នាំបន្ទាប់",
+  "calendarPreviousYearSemanticsLabel": "ឆ្នាំមុន",
+  "calendarNextYearsSemanticsLabel": "ឆ្នាំបន្ទាប់",
+  "calendarPreviousYearsSemanticsLabel": "ឆ្នាំមុន"
 }

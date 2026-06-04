@@ -7,7 +7,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/calendar/calendar.dart';
 import 'package:forui/src/widgets/calendar/day/day_picker.dart';
-import 'package:forui/src/widgets/calendar/day/day_picker_controller.dart';
+import 'package:forui/src/widgets/calendar/grid.dart';
 import '../../../test_scaffold.dart';
 
 FCalendarDayPickerController _controller({
@@ -53,7 +53,7 @@ void main() {
     test('seeds month from initial and focused defaults to null', () {
       final controller = _controller(initial: .utc(2024, 6, 15));
 
-      expect(controller.month, DateTime.utc(2024, 6));
+      expect(controller.current, DateTime.utc(2024, 6));
       expect(controller.focused, null);
     });
 
@@ -155,7 +155,7 @@ void main() {
       unawaited(controller.move(.right, .ltr));
       await tester.pumpAndSettle();
 
-      expect(controller.month, DateTime.utc(2024, 7));
+      expect(controller.current, DateTime.utc(2024, 7));
       expect(controller.focused, DateTime.utc(2024, 7));
     });
 
@@ -221,7 +221,7 @@ void main() {
       unawaited(controller.focus(.utc(2024, 8, 20)));
       await tester.pumpAndSettle();
 
-      expect(controller.month, DateTime.utc(2024, 8));
+      expect(controller.current, DateTime.utc(2024, 8));
       expect(controller.focused, DateTime.utc(2024, 8, 20));
     });
   });
@@ -234,7 +234,7 @@ void main() {
       controller.addListener(() => count++);
       await controller.next();
 
-      expect(controller.month, DateTime.utc(2024, 12));
+      expect(controller.current, DateTime.utc(2024, 12));
       expect(count, 0);
     });
 
@@ -245,7 +245,7 @@ void main() {
       unawaited(controller.next());
       await tester.pumpAndSettle();
 
-      expect(controller.month, DateTime.utc(2024, 7));
+      expect(controller.current, DateTime.utc(2024, 7));
     });
   });
 
@@ -257,7 +257,7 @@ void main() {
       controller.addListener(() => count++);
       await controller.previous();
 
-      expect(controller.month, DateTime.utc(2024));
+      expect(controller.current, DateTime.utc(2024));
       expect(count, 0);
     });
 
@@ -268,7 +268,7 @@ void main() {
       unawaited(controller.previous());
       await tester.pumpAndSettle();
 
-      expect(controller.month, DateTime.utc(2024, 5));
+      expect(controller.current, DateTime.utc(2024, 5));
     });
   });
 
@@ -285,7 +285,7 @@ void main() {
       unawaited(controller.animateTo(.utc(2024, 9, 10)));
       await tester.pumpAndSettle();
 
-      expect(controller.month, DateTime.utc(2024, 9));
+      expect(controller.current, DateTime.utc(2024, 9));
     });
   });
 
@@ -302,11 +302,11 @@ void main() {
       controller.jumpTo(.utc(2024, 3, 5));
       await tester.pumpAndSettle();
 
-      expect(controller.month, DateTime.utc(2024, 3));
+      expect(controller.current, DateTime.utc(2024, 3));
     });
   });
 
-  group('length', () {
+  group('pages', () {
     for (final (start, end, expected) in [
       (DateTime.utc(2024), DateTime.utc(2024, 12, 31), 12),
       (DateTime.utc(2024), DateTime.utc(2024, 1, 31), 1),
@@ -315,7 +315,7 @@ void main() {
     ]) {
       test('$start to $end', () {
         final controller = _controller(start: start, end: end, initial: start);
-        expect(controller.length, expected);
+        expect(controller.pages, expected);
       });
     }
   });
@@ -355,7 +355,7 @@ void main() {
       await tester.drag(find.byType(PageView), const Offset(-600, 0));
       await tester.pumpAndSettle();
 
-      expect(controller.month.isAfter(.utc(2024, 6)), true);
+      expect(controller.current.isAfter(.utc(2024, 6)), true);
       expect(count, greaterThan(0));
     });
 
@@ -365,7 +365,7 @@ void main() {
 
       controller.onPageChange(controller.from(.utc(2024, 6)));
 
-      expect(controller.month, DateTime.utc(2024, 6));
+      expect(controller.current, DateTime.utc(2024, 6));
       expect(controller.focused, DateTime.utc(2024, 6));
     });
 
@@ -375,30 +375,30 @@ void main() {
 
       controller.onPageChange(controller.from(.utc(2024, 6)));
 
-      expect(controller.month, DateTime.utc(2024, 6));
+      expect(controller.current, DateTime.utc(2024, 6));
       expect(count, 0);
     });
   });
 
-  group('findFocused', () {
+  group('focusable', () {
     test('returns the preferred day when selectable', () {
       final controller = _controller();
-      expect(controller.findFocused(.utc(2024, 6), 15), DateTime.utc(2024, 6, 15));
+      expect(controller.focusable(.utc(2024, 6), .utc(2024, 6, 15)), DateTime.utc(2024, 6, 15));
     });
 
     test('falls back to the first selectable day when the preferred day is out of range', () {
       final controller = _controller();
-      expect(controller.findFocused(.utc(2024, 2), 31), DateTime.utc(2024, 2));
+      expect(controller.focusable(.utc(2024, 2), .utc(2024, 1, 31)), DateTime.utc(2024, 2));
     });
 
     test('falls back to the first selectable day when the preferred day is unselectable', () {
       final controller = _controller(selectable: (date) => date.day.isEven);
-      expect(controller.findFocused(.utc(2024, 6), 15), DateTime.utc(2024, 6, 2));
+      expect(controller.focusable(.utc(2024, 6), .utc(2024, 6, 15)), DateTime.utc(2024, 6, 2));
     });
 
     test('returns null when no day is selectable', () {
       final controller = _controller(selectable: (_) => false);
-      expect(controller.findFocused(.utc(2024, 6), 15), null);
+      expect(controller.focusable(.utc(2024, 6), .utc(2024, 6, 15)), null);
     });
   });
 

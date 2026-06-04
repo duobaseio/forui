@@ -32,5 +32,9 @@
   "dateTimePickerToday": "Dnes",
   "contextMenuSemanticsLabel": "Kontextová nabídka",
   "calendarPreviousMonthSemanticsLabel": "Předchozí měsíc",
-  "calendarNextMonthSemanticsLabel": "Následující měsíc"
+  "calendarNextMonthSemanticsLabel": "Následující měsíc",
+  "calendarNextYearSemanticsLabel": "Příští rok",
+  "calendarPreviousYearSemanticsLabel": "Předchozí rok",
+  "calendarNextYearsSemanticsLabel": "Příští roky",
+  "calendarPreviousYearsSemanticsLabel": "Předchozí roky"
 }

@@ -75,7 +75,19 @@ class FLocalizationsNe extends FLocalizations {
   String get calendarNextMonthSemanticsLabel => 'अर्को महिना';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'अर्को वर्ष';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'अर्का वर्षहरू';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'अघिल्लो महिना';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'अघिल्लो वर्ष';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'अघिल्ला वर्षहरू';
 
   @override
   String get contextMenuSemanticsLabel => 'सन्दर्भ मेनु';

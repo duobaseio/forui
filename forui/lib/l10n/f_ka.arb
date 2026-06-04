@@ -31,5 +31,9 @@
   "dateTimePickerToday": "დღეს",
   "contextMenuSemanticsLabel": "კონტექსტური მენიუ",
   "calendarPreviousMonthSemanticsLabel": "წინა თვე",
-  "calendarNextMonthSemanticsLabel": "შემდეგი თვე"
+  "calendarNextMonthSemanticsLabel": "შემდეგი თვე",
+  "calendarNextYearSemanticsLabel": "შემდეგი წელი",
+  "calendarPreviousYearSemanticsLabel": "წინა წელი",
+  "calendarNextYearsSemanticsLabel": "შემდეგი წლები",
+  "calendarPreviousYearsSemanticsLabel": "წინა წლები"
 }

@@ -75,7 +75,19 @@ class FLocalizationsLt extends FLocalizations {
   String get calendarNextMonthSemanticsLabel => 'Kitas mėnuo';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'Kiti metai';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'Kiti metai';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'Ankstesnis mėnuo';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'Ankstesni metai';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'Ankstesni metai';
 
   @override
   String get contextMenuSemanticsLabel => 'Kontekstinis meniu';

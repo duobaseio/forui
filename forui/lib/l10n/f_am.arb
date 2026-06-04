@@ -32,5 +32,9 @@
   "dateTimePickerToday": "ዛሬ",
   "contextMenuSemanticsLabel": "የአውድ ምናሌ",
   "calendarPreviousMonthSemanticsLabel": "ያለፈው ወር",
-  "calendarNextMonthSemanticsLabel": "የሚቀጥለው ወር"
+  "calendarNextMonthSemanticsLabel": "የሚቀጥለው ወር",
+  "calendarNextYearSemanticsLabel": "የሚቀጥለው ዓመት",
+  "calendarPreviousYearSemanticsLabel": "ያለፈው ዓመት",
+  "calendarNextYearsSemanticsLabel": "የሚቀጥሉት ዓመታት",
+  "calendarPreviousYearsSemanticsLabel": "ያለፉት ዓመታት"
 }

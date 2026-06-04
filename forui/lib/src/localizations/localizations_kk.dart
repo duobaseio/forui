@@ -75,7 +75,19 @@ class FLocalizationsKk extends FLocalizations {
   String get calendarNextMonthSemanticsLabel => 'Келесі ай';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'Келесі жыл';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'Келесі жылдар';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'Алдыңғы ай';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'Алдыңғы жыл';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'Алдыңғы жылдар';
 
   @override
   String get contextMenuSemanticsLabel => 'Контекстік мәзір';

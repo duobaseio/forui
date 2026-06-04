@@ -31,5 +31,9 @@
   "dateTimePickerToday": "Бүгін",
   "contextMenuSemanticsLabel": "Контекстік мәзір",
   "calendarPreviousMonthSemanticsLabel": "Алдыңғы ай",
-  "calendarNextMonthSemanticsLabel": "Келесі ай"
+  "calendarNextMonthSemanticsLabel": "Келесі ай",
+  "calendarNextYearSemanticsLabel": "Келесі жыл",
+  "calendarPreviousYearSemanticsLabel": "Алдыңғы жыл",
+  "calendarNextYearsSemanticsLabel": "Келесі жылдар",
+  "calendarPreviousYearsSemanticsLabel": "Алдыңғы жылдар"
 }

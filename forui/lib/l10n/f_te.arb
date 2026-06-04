@@ -31,5 +31,9 @@
   "dateTimePickerToday": "ఈ రోజు",
   "contextMenuSemanticsLabel": "సందర్భ మెనూ",
   "calendarPreviousMonthSemanticsLabel": "మునుపటి నెల",
-  "calendarNextMonthSemanticsLabel": "తదుపరి నెల"
+  "calendarNextMonthSemanticsLabel": "తదుపరి నెల",
+  "calendarNextYearSemanticsLabel": "తదుపరి సంవత్సరం",
+  "calendarPreviousYearSemanticsLabel": "మునుపటి సంవత్సరం",
+  "calendarNextYearsSemanticsLabel": "తదుపరి సంవత్సరాలు",
+  "calendarPreviousYearsSemanticsLabel": "మునుపటి సంవత్సరాలు"
 }

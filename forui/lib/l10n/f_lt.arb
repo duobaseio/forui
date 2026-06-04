@@ -32,5 +32,9 @@
   "dateTimePickerToday": "Šiandien",
   "contextMenuSemanticsLabel": "Kontekstinis meniu",
   "calendarPreviousMonthSemanticsLabel": "Ankstesnis mėnuo",
-  "calendarNextMonthSemanticsLabel": "Kitas mėnuo"
+  "calendarNextMonthSemanticsLabel": "Kitas mėnuo",
+  "calendarNextYearSemanticsLabel": "Kiti metai",
+  "calendarPreviousYearSemanticsLabel": "Ankstesni metai",
+  "calendarNextYearsSemanticsLabel": "Kiti metai",
+  "calendarPreviousYearsSemanticsLabel": "Ankstesni metai"
 }

@@ -75,7 +75,19 @@ class FLocalizationsPa extends FLocalizations {
   String get calendarNextMonthSemanticsLabel => 'ਅਗਲਾ ਮਹੀਨਾ';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'ਅਗਲਾ ਸਾਲ';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'ਅਗਲੇ ਸਾਲ';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'ਪਿਛਲਾ ਮਹੀਨਾ';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'ਪਿਛਲਾ ਸਾਲ';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'ਪਿਛਲੇ ਸਾਲ';
 
   @override
   String get contextMenuSemanticsLabel => 'ਸੰਦਰਭ ਮੀਨੂ';

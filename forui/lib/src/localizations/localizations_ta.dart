@@ -75,7 +75,19 @@ class FLocalizationsTa extends FLocalizations {
   String get calendarNextMonthSemanticsLabel => 'அடுத்த மாதம்';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'அடுத்த ஆண்டு';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'அடுத்த ஆண்டுகள்';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'முந்தைய மாதம்';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'முந்தைய ஆண்டு';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'முந்தைய ஆண்டுகள்';
 
   @override
   String get contextMenuSemanticsLabel => 'சூழல் பட்டி';

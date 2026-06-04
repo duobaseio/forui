@@ -32,5 +32,9 @@
   "dateTimePickerToday": "Bugun",
   "contextMenuSemanticsLabel": "Kontekst menyusi",
   "calendarPreviousMonthSemanticsLabel": "Oldingi oy",
-  "calendarNextMonthSemanticsLabel": "Keyingi oy"
+  "calendarNextMonthSemanticsLabel": "Keyingi oy",
+  "calendarNextYearSemanticsLabel": "Keyingi yil",
+  "calendarPreviousYearSemanticsLabel": "Oldingi yil",
+  "calendarNextYearsSemanticsLabel": "Keyingi yillar",
+  "calendarPreviousYearsSemanticsLabel": "Oldingi yillar"
 }

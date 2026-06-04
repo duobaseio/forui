@@ -32,5 +32,9 @@
   "dateTimePickerToday": "今天",
   "contextMenuSemanticsLabel": "上下文菜单",
   "calendarPreviousMonthSemanticsLabel": "上个月",
-  "calendarNextMonthSemanticsLabel": "下个月"
+  "calendarNextMonthSemanticsLabel": "下个月",
+  "calendarNextYearSemanticsLabel": "下一年",
+  "calendarPreviousYearSemanticsLabel": "上一年",
+  "calendarNextYearsSemanticsLabel": "后几年",
+  "calendarPreviousYearsSemanticsLabel": "前几年"
 }

@@ -31,5 +31,9 @@
   "dateTimePickerToday": "අද",
   "contextMenuSemanticsLabel": "සන්දර්භ මෙනුව",
   "calendarPreviousMonthSemanticsLabel": "පෙර මාසය",
-  "calendarNextMonthSemanticsLabel": "ඊළඟ මාසය"
+  "calendarNextMonthSemanticsLabel": "ඊළඟ මාසය",
+  "calendarNextYearSemanticsLabel": "ඊළඟ වසර",
+  "calendarPreviousYearSemanticsLabel": "පෙර වසර",
+  "calendarNextYearsSemanticsLabel": "ඊළඟ වසර",
+  "calendarPreviousYearsSemanticsLabel": "පෙර වසර"
 }

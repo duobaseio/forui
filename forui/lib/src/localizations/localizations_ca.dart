@@ -75,7 +75,19 @@ class FLocalizationsCa extends FLocalizations {
   String get calendarNextMonthSemanticsLabel => 'Mes següent';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'Any següent';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'Anys següents';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'Mes anterior';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'Any anterior';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'Anys anteriors';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';

@@ -75,7 +75,19 @@ class FLocalizationsUr extends FLocalizations {
   String get calendarNextMonthSemanticsLabel => 'اگلا مہینہ';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'اگلا سال';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'اگلے سال';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'پچھلا مہینہ';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'پچھلا سال';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'پچھلے سال';
 
   @override
   String get contextMenuSemanticsLabel => 'سیاق و سباق مینو';

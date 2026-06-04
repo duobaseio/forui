@@ -31,5 +31,9 @@
   "dateTimePickerToday": "היום",
   "contextMenuSemanticsLabel": "תפריט הקשר",
   "calendarPreviousMonthSemanticsLabel": "החודש הקודם",
-  "calendarNextMonthSemanticsLabel": "החודש הבא"
+  "calendarNextMonthSemanticsLabel": "החודש הבא",
+  "calendarNextYearSemanticsLabel": "השנה הבאה",
+  "calendarPreviousYearSemanticsLabel": "השנה הקודמת",
+  "calendarNextYearsSemanticsLabel": "השנים הבאות",
+  "calendarPreviousYearsSemanticsLabel": "השנים הקודמות"
 }

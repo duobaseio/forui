@@ -31,5 +31,9 @@
   "dateTimePickerToday": "आज",
   "contextMenuSemanticsLabel": "संदर्भ मेनू",
   "calendarPreviousMonthSemanticsLabel": "पिछला महीना",
-  "calendarNextMonthSemanticsLabel": "अगला महीना"
+  "calendarNextMonthSemanticsLabel": "अगला महीना",
+  "calendarNextYearSemanticsLabel": "अगला वर्ष",
+  "calendarPreviousYearSemanticsLabel": "पिछला वर्ष",
+  "calendarNextYearsSemanticsLabel": "अगले वर्ष",
+  "calendarPreviousYearsSemanticsLabel": "पिछले वर्ष"
 }

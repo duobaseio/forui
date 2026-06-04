@@ -31,5 +31,9 @@
   "dateTimePickerToday": "આજે",
   "contextMenuSemanticsLabel": "સંદર્ભ મેનૂ",
   "calendarPreviousMonthSemanticsLabel": "પાછલો મહિનો",
-  "calendarNextMonthSemanticsLabel": "આગલો મહિનો"
+  "calendarNextMonthSemanticsLabel": "આગલો મહિનો",
+  "calendarNextYearSemanticsLabel": "આગલું વર્ષ",
+  "calendarPreviousYearSemanticsLabel": "પાછલું વર્ષ",
+  "calendarNextYearsSemanticsLabel": "આગલાં વર્ષ",
+  "calendarPreviousYearsSemanticsLabel": "પાછલાં વર્ષ"
 }

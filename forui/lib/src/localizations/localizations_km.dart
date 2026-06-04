@@ -75,7 +75,19 @@ class FLocalizationsKm extends FLocalizations {
   String get calendarNextMonthSemanticsLabel => 'ខែបន្ទាប់';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'ឆ្នាំបន្ទាប់';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'ឆ្នាំបន្ទាប់';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'ខែមុន';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'ឆ្នាំមុន';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'ឆ្នាំមុន';
 
   @override
   String get contextMenuSemanticsLabel => 'ម៉ឺនុយបរិបទ';

@@ -32,5 +32,9 @@
   "dateTimePickerToday": "Heute",
   "contextMenuSemanticsLabel": "Kontextmenü",
   "calendarPreviousMonthSemanticsLabel": "Vorheriger Monat",
-  "calendarNextMonthSemanticsLabel": "Nächster Monat"
+  "calendarNextMonthSemanticsLabel": "Nächster Monat",
+  "calendarNextYearSemanticsLabel": "Nächstes Jahr",
+  "calendarPreviousYearSemanticsLabel": "Vorheriges Jahr",
+  "calendarNextYearsSemanticsLabel": "Nächste Jahre",
+  "calendarPreviousYearsSemanticsLabel": "Vorherige Jahre"
 }

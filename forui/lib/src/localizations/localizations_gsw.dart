@@ -75,7 +75,19 @@ class FLocalizationsGsw extends FLocalizations {
   String get calendarNextMonthSemanticsLabel => 'Nächste Monet';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'Nächschts Jaar';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'Nächschti Jaar';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'Letzte Monet';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'Letschts Jaar';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'Letschti Jaar';
 
   @override
   String get contextMenuSemanticsLabel => 'Kontextmenü';

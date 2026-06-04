@@ -32,5 +32,9 @@
   "dateTimePickerToday": "ଆଜି",
   "contextMenuSemanticsLabel": "ପ୍ରସଙ୍ଗ ମେନୁ",
   "calendarPreviousMonthSemanticsLabel": "ପୂର୍ବ ମାସ",
-  "calendarNextMonthSemanticsLabel": "ପରବର୍ତ୍ତୀ ମାସ"
+  "calendarNextMonthSemanticsLabel": "ପରବର୍ତ୍ତୀ ମାସ",
+  "calendarNextYearSemanticsLabel": "ପରବର୍ତ୍ତୀ ବର୍ଷ",
+  "calendarPreviousYearSemanticsLabel": "ପୂର୍ବବର୍ତ୍ତୀ ବର୍ଷ",
+  "calendarNextYearsSemanticsLabel": "ପରବର୍ତ୍ତୀ ବର୍ଷଗୁଡ଼ିକ",
+  "calendarPreviousYearsSemanticsLabel": "ପୂର୍ବବର୍ତ୍ତୀ ବର୍ଷଗୁଡ଼ିକ"
 }

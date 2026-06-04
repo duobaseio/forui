@@ -32,5 +32,9 @@
   "dateTimePickerToday": "Sot",
   "contextMenuSemanticsLabel": "Menyja e kontekstit",
   "calendarPreviousMonthSemanticsLabel": "Muaji i mëparshëm",
-  "calendarNextMonthSemanticsLabel": "Muaji tjetër"
+  "calendarNextMonthSemanticsLabel": "Muaji tjetër",
+  "calendarNextYearSemanticsLabel": "Viti tjetër",
+  "calendarPreviousYearSemanticsLabel": "Viti i mëparshëm",
+  "calendarNextYearsSemanticsLabel": "Vitet e ardhshme",
+  "calendarPreviousYearsSemanticsLabel": "Vitet e mëparshme"
 }

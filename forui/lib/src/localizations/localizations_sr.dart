@@ -75,7 +75,19 @@ class FLocalizationsSr extends FLocalizations {
   String get calendarNextMonthSemanticsLabel => 'Следећи месец';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'Следећа година';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'Следеће године';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'Претходни месец';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'Претходна година';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'Претходне године';
 
   @override
   String get contextMenuSemanticsLabel => 'Контекстни мени';
@@ -181,7 +193,19 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
   String get calendarNextMonthSemanticsLabel => 'Sledeći mesec';
 
   @override
+  String get calendarNextYearSemanticsLabel => 'Sledeća godina';
+
+  @override
+  String get calendarNextYearsSemanticsLabel => 'Sledeće godine';
+
+  @override
   String get calendarPreviousMonthSemanticsLabel => 'Prethodni mesec';
+
+  @override
+  String get calendarPreviousYearSemanticsLabel => 'Prethodna godina';
+
+  @override
+  String get calendarPreviousYearsSemanticsLabel => 'Prethodne godine';
 
   @override
   String get contextMenuSemanticsLabel => 'Kontekstni meni';
