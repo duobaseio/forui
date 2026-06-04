@@ -7,18 +7,26 @@ import 'package:forui/src/foundation/debug.dart';
 @internal
 class GridFocusableActionDetector extends StatefulWidget {
   final void Function(TraversalDirection, TextDirection) onFocusMove;
-  final ValueChanged<bool> onFocusChanage;
+  final ValueChanged<bool> onFocusChange;
   final Widget child;
 
   const GridFocusableActionDetector({
     required this.onFocusMove,
-    required this.onFocusChanage,
+    required this.onFocusChange,
     required this.child,
     super.key,
   });
 
   @override
   State<GridFocusableActionDetector> createState() => _GridFocusableActionDetectorState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(ObjectFlagProperty.has('onFocusMove', onFocusMove))
+      ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange));
+  }
 }
 
 class _GridFocusableActionDetectorState extends State<GridFocusableActionDetector> {
@@ -65,7 +73,7 @@ class _GridFocusableActionDetectorState extends State<GridFocusableActionDetecto
     focusNode: _node,
     shortcuts: _shortcuts,
     actions: _actions,
-    onFocusChange: widget.onFocusChanage,
+    onFocusChange: widget.onFocusChange,
     child: widget.child,
   );
 }

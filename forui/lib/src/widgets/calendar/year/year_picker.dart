@@ -1,118 +1,260 @@
+import 'dart:collection';
+import 'dart:ui';
+
 import 'package:flutter/foundation.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/calendar/grid.dart';
+import 'package:forui/src/widgets/calendar/year/year.dart';
+import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
-import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/calendar/day/day_picker.dart';
-import 'package:forui/src/widgets/calendar/shared/entry.dart';
+part 'year_picker.design.dart';
+
+const _columns = 3;
+const _rows = 4;
 
 @internal
-class YearPicker extends StatefulWidget {
-  static const columns = 3;
-  static const rows = 5;
-  static const items = columns * rows;
+class YearPicker extends StatelessWidget {
+  final FCalendarYearPickerController controller;
+  final FCalendarYearPickerStyle style;
+  final FLocalizations localization;
+  final DateTime today;
+  final bool Function(DateTime) selected;
+  final ValueChanged<DateTime> onPress;
+  final FCalendarYearBuilder builder;
 
-  final FCalendarEntryStyle yearMonthStyle;
-  final FCalendarDayPickerStyle dayStyle;
-  final LocalDate startYear;
-  final LocalDate start;
-  final LocalDate end;
-  final LocalDate today;
-  final LocalDate? focused;
-  final ValueChanged<LocalDate> onPress;
-
-  YearPicker({
-    required this.yearMonthStyle,
-    required this.dayStyle,
-    required this.startYear,
-    required this.start,
-    required this.end,
+  const YearPicker({
+    required this.controller,
+    required this.style,
+    required this.localization,
     required this.today,
-    required this.focused,
+    required this.selected,
     required this.onPress,
+    required this.builder,
     super.key,
-  }) : assert(startYear == startYear.truncate(to: DateUnit.years), 'startYear must be truncated to years.');
+  });
 
   @override
-  State<YearPicker> createState() => _YearPickerState();
+  Widget build(BuildContext context) {
+    final size = style.yearSize;
+
+    return SizedBox(
+      width: _columns * size.width,
+      height: _rows * size.height + (_rows - 1) * style.yearSpacing,
+      child: GridFocusableActionDetector(
+        onFocusMove: controller.move,
+        onFocusChange: (focused) {
+          if (!focused) {
+            controller.focus(null);
+            return;
+          }
+
+          if (controller.focused == null) {
+            final current = controller.current;
+            final preferred = today.year - today.year % 10 == current.year ? today : current;
+            controller.focus(controller.focusable(current, preferred));
+          }
+        },
+        child: PageView.builder(
+          controller: controller.controller,
+          onPageChanged: (page) {
+            controller.onPageChange(page);
+            final decade = controller.to(page);
+            SemanticsService.sendAnnouncement(
+              View.of(context),
+              '${localization.year(decade)} — ${localization.year(.utc(decade.year + 9))}',
+              Directionality.of(context),
+            );
+          },
+          itemCount: controller.pages,
+          itemBuilder: (_, page) => ListenableBuilder(
+            listenable: controller,
+            builder: (_, _) => _Grid(
+              style: style,
+              localization: localization,
+              decade: controller.to(page),
+              today: today,
+              focused: controller.focused,
+              selectable: controller.selectable,
+              selected: selected,
+              onPress: onPress,
+              builder: builder,
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('yearMonthStyle', yearMonthStyle, level: .debug))
-      ..add(DiagnosticsProperty('dayStyle', dayStyle, level: .debug))
-      ..add(DiagnosticsProperty('startYear', startYear, level: .debug))
-      ..add(DiagnosticsProperty('start', start, level: .debug))
-      ..add(DiagnosticsProperty('end', end, level: .debug))
-      ..add(DiagnosticsProperty('today', today, level: .debug))
-      ..add(DiagnosticsProperty('focused', focused, level: .debug))
-      ..add(ObjectFlagProperty.has('onPress', onPress, level: .debug));
+      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty('localization', localization))
+      ..add(DiagnosticsProperty('today', today))
+      ..add(ObjectFlagProperty.has('selected', selected))
+      ..add(ObjectFlagProperty.has('onPress', onPress))
+      ..add(ObjectFlagProperty.has('builder', builder));
   }
 }
 
-class _YearPickerState extends State<YearPicker> {
-  late List<FocusNode> _years;
+class _Grid extends StatefulWidget {
+  final FCalendarYearPickerStyle style;
+  final FLocalizations localization;
+  final DateTime decade;
+  final DateTime today;
+  final DateTime? focused;
+  final bool Function(DateTime) selectable;
+  final bool Function(DateTime) selected;
+  final ValueChanged<DateTime> onPress;
+  final FCalendarYearBuilder builder;
+
+  _Grid({
+    required this.style,
+    required this.localization,
+    required this.decade,
+    required this.today,
+    required this.focused,
+    required this.selectable,
+    required this.selected,
+    required this.onPress,
+    required this.builder,
+  }) : super(key: ValueKey(decade));
+
+  @override
+  State createState() => _GridState();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty('localization', localization))
+      ..add(DiagnosticsProperty('decade', decade))
+      ..add(DiagnosticsProperty('today', today))
+      ..add(DiagnosticsProperty('focused', focused))
+      ..add(ObjectFlagProperty.has('selectable', selectable))
+      ..add(ObjectFlagProperty.has('selected', selected))
+      ..add(ObjectFlagProperty.has('onPress', onPress))
+      ..add(ObjectFlagProperty.has('builder', builder));
+  }
+}
+
+class _GridState extends State<_Grid> {
+  final SplayTreeMap<DateTime, FocusNode> _years = SplayTreeMap();
 
   @override
   void initState() {
     super.initState();
-    _years = List.generate(YearPicker.items, (i) => FocusNode(skipTraversal: true, debugLabel: '$i'));
-
-    final focused = widget.focused;
-    if (focused == null || focused < widget.startYear || widget.startYear.plus(years: YearPicker.items) <= focused) {
-      return;
+    for (var year = DateTime.utc(widget.decade.year), i = 0; i < 10; year = year.plus(years: 1), i++) {
+      _years[year] = FocusNode(skipTraversal: true, debugLabel: '$year');
     }
 
-    _years[focused.year - widget.startYear.year].requestFocus();
+    _years[widget.focused]?.requestFocus();
   }
 
   @override
-  Widget build(BuildContext context) => Padding(
-    padding: const EdgeInsets.only(top: 5.0),
-    child: GridView(
-      padding: EdgeInsets.zero,
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: YearPicker.columns,
-        mainAxisExtent: ((widget.dayStyle.tileSize - 5.0) * DayPicker.maxRows) / YearPicker.rows,
-        mainAxisSpacing: 5.0,
-      ),
-      children: [
-        for (var year = widget.startYear, i = 0; i < YearPicker.items; year = year.plus(years: 1), i++)
-          Entry.yearMonth(
-            style: widget.yearMonthStyle,
-            date: year,
-            focusNode: _years[i],
-            current: widget.today.year == year.year,
-            selectable: widget.start <= year && year <= widget.end,
-            format: (date) => (FLocalizations.of(context) ?? FDefaultLocalizations()).year(date.toNative()),
-            onPress: widget.onPress,
-          ),
-      ],
-    ),
-  );
-
-  @override
-  void didUpdateWidget(YearPicker old) {
+  void didUpdateWidget(_Grid old) {
     super.didUpdateWidget(old);
-    assert(old.startYear == widget.startYear, 'startYear must noe change.');
-
-    final focused = widget.focused;
-    if (focused == null || focused < widget.startYear || widget.startYear.plus(years: YearPicker.items) <= focused) {
-      return;
-    }
-
-    if (_years[focused.year - widget.startYear.year] case final focusNode when old.focused != widget.focused) {
-      focusNode.requestFocus();
+    if (old.focused != widget.focused) {
+      _years[widget.focused]?.requestFocus();
     }
   }
 
   @override
   void dispose() {
-    for (final node in _years) {
+    for (final node in _years.values) {
       node.dispose();
     }
     super.dispose();
   }
+
+  @override
+  Widget build(BuildContext context) {
+    final FCalendarYearPickerStyle(:yearStyles, :yearSize, :yearSpacing) = widget.style;
+    final today = widget.today.truncate(to: DateUnit.years);
+
+    return GridView.custom(
+      padding: .zero,
+      shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
+      gridDelegate: GridDelegate(yearSize, _columns, yearSpacing),
+      childrenDelegate: SliverChildListDelegate(addRepaintBoundaries: false, [
+        for (final MapEntry(key: year, value: focusNode) in _years.entries)
+          Year(
+            styles: yearStyles,
+            localizations: widget.localization,
+            date: year,
+            focusNode: focusNode,
+            variants: {if (widget.selected(year)) .selected, if (year == today) .today},
+            onPress: widget.selectable(year) ? () => widget.onPress(year) : null,
+            builder: widget.builder,
+          ),
+      ]),
+    );
+  }
+}
+
+/// Controls a calendar's year picker.
+class FCalendarYearPickerController extends GridController {
+  /// Creates a [FCalendarYearPickerController].
+  FCalendarYearPickerController({
+    required super.start,
+    required super.end,
+    required super.selectable,
+    required super.initial,
+    super.focused,
+  }) : super(
+         columns: _columns,
+         focusable: (decade, date) {
+           final preferred = DateTime.utc(date.year);
+           if (decade.year <= preferred.year && preferred.year < decade.year + 10 && selectable(preferred)) {
+             return preferred;
+           }
+
+           for (var year = decade; year.year < decade.year + 10; year = year.plus(years: 1)) {
+             if (selectable(year)) {
+               return year;
+             }
+           }
+
+           return null;
+         },
+         step: (date, amount) => date.plus(years: amount),
+         from: (date) => (date.year - date.year % 10 - (start.year - start.year % 10)) ~/ 10,
+         to: (page) => .utc(start.year - start.year % 10 + page * 10),
+       );
+}
+
+/// A year picker's style.
+class FCalendarYearPickerStyle with Diagnosticable, _$FCalendarYearPickerStyleFunctions {
+  /// The styles of the year tiles.
+  @override
+  final FCalendarYearStyles yearStyles;
+
+  /// The size of each year. Defaults to a width that aligns the 3-column grid with the day picker's 7-column grid.
+  @override
+  final Size yearSize;
+
+  /// The vertical spacing between rows of years in the year picker. Defaults to 4.
+  @override
+  final double yearSpacing;
+
+  /// Creates a [FCalendarYearPickerStyle].
+  const FCalendarYearPickerStyle({required this.yearStyles, required this.yearSize, this.yearSpacing = 4});
+
+  /// Creates a [FCalendarYearPickerStyle] that inherits its properties.
+  factory FCalendarYearPickerStyle.inherit({
+    required FColors colors,
+    required FTypography typography,
+    required FStyle style,
+  }) => FCalendarYearPickerStyle(
+    yearStyles: .inherit(colors: colors, typography: typography, style: style),
+    yearSize: Size(DateTime.daysPerWeek * style.sizes.calendar / _columns, style.sizes.calendar),
+  );
 }

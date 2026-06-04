@@ -34,4 +34,19 @@ class FCalendar {
       child: Center(child: Text(localizations.abbreviatedMonth(date), style: style.textStyle)),
     );
   }
+
+  /// The default [FCalendarYearBuilder].
+  static Widget defaultYearBuilder(
+    BuildContext context,
+    FCalendarYearStyles styles,
+    FLocalizations localizations,
+    DateTime date,
+    Set<FCalendarYearVariant> variants,
+  ) {
+    final style = styles.resolve(variants);
+    return DecoratedBox(
+      decoration: style.decoration,
+      child: Center(child: Text(localizations.year(date), style: style.textStyle)),
+    );
+  }
 }

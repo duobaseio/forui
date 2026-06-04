@@ -7,10 +7,10 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
 import 'package:forui/src/theme/variant.dart';
 
-@Variants('FCalendarMonth', {
-  'selected': (4, 'The semantic variant when the month is selected.'),
+@Variants('FCalendarYear', {
+  'selected': (4, 'The semantic variant when the year is selected.'),
   //
-  'today': (3, 'The semantic variant when the month is the current month.'),
+  'today': (3, 'The semantic variant when the year is the current year.'),
   //
   'disabled': (2, 'The semantic variant when this widget is disabled and cannot be interacted with.'),
   'primaryFocused': (1, 'The interaction variant when a given widget (and not its descendants) has focus.'),
@@ -18,23 +18,23 @@ import 'package:forui/src/theme/variant.dart';
   'hovered': (1, 'The interaction variant when the user drags their mouse cursor over the given widget.'),
   'pressed': (1, 'The interaction variant when the user is actively pressing down on the given widget.'),
 })
-part 'month.design.dart';
+part 'year.design.dart';
 
-/// A calendar month builder.
-typedef FCalendarMonthBuilder =
-    Widget Function(BuildContext, FCalendarMonthStyles, FLocalizations, DateTime, Set<FCalendarMonthVariant>);
+/// A calendar year builder.
+typedef FCalendarYearBuilder =
+    Widget Function(BuildContext, FCalendarYearStyles, FLocalizations, DateTime, Set<FCalendarYearVariant>);
 
 @internal
-class Month extends StatelessWidget {
-  final FCalendarMonthStyles styles;
+class Year extends StatelessWidget {
+  final FCalendarYearStyles styles;
   final FLocalizations localizations;
   final DateTime date;
-  final Set<FCalendarMonthVariant> variants;
+  final Set<FCalendarYearVariant> variants;
   final FocusNode focusNode;
   final VoidCallback? onPress;
-  final FCalendarMonthBuilder builder;
+  final FCalendarYearBuilder builder;
 
-  const Month({
+  const Year({
     required this.styles,
     required this.localizations,
     required this.date,
@@ -48,11 +48,11 @@ class Month extends StatelessWidget {
   @override
   Widget build(BuildContext context) => FTappable.static(
     focusNode: focusNode,
-    semanticsLabel: DateFormat.MMMM(localizations.localeName).format(date),
+    semanticsLabel: DateFormat.y(localizations.localeName).format(date),
     excludeSemantics: true,
     onPress: onPress,
     builder: (context, variants, _) =>
-        builder(context, styles, localizations, date, {...variants.cast<FCalendarMonthVariant>(), ...this.variants}),
+        builder(context, styles, localizations, date, {...variants.cast<FCalendarYearVariant>(), ...this.variants}),
   );
 
   @override
@@ -69,32 +69,32 @@ class Month extends StatelessWidget {
   }
 }
 
-/// A calendar's month style.
-class FCalendarMonthStyle with Diagnosticable, _$FCalendarMonthStyleFunctions {
-  /// The month's text style.
+/// A calendar's year style.
+class FCalendarYearStyle with Diagnosticable, _$FCalendarYearStyleFunctions {
+  /// The year's text style.
   @override
   final TextStyle textStyle;
 
-  /// The decoration painted behind the month's text.
+  /// The decoration painted behind the year's text.
   @override
   final Decoration decoration;
 
-  /// Creates a [FCalendarMonthStyle].
-  FCalendarMonthStyle({required this.textStyle, required this.decoration});
+  /// Creates a [FCalendarYearStyle].
+  FCalendarYearStyle({required this.textStyle, required this.decoration});
 }
 
-/// [FCalendarMonthStyle]'s variants.
-extension type FCalendarMonthStyles(
-  FVariants<FCalendarMonthVariantConstraint, FCalendarMonthVariant, FCalendarMonthStyle, FCalendarMonthStyleDelta> _
+/// [FCalendarYearStyle]'s variants.
+extension type FCalendarYearStyles(
+  FVariants<FCalendarYearVariantConstraint, FCalendarYearVariant, FCalendarYearStyle, FCalendarYearStyleDelta> _
 ) implements
-    FVariants<FCalendarMonthVariantConstraint, FCalendarMonthVariant, FCalendarMonthStyle, FCalendarMonthStyleDelta> {
-  /// Creates a [FCalendarMonthStyles] that inherits its properties.
-  factory FCalendarMonthStyles.inherit({
+    FVariants<FCalendarYearVariantConstraint, FCalendarYearVariant, FCalendarYearStyle, FCalendarYearStyleDelta> {
+  /// Creates a [FCalendarYearStyles] that inherits its properties.
+  factory FCalendarYearStyles.inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,
   }) {
-    final base = FCalendarMonthStyle(
+    final base = FCalendarYearStyle(
       textStyle: typography.sm.copyWith(color: colors.foreground),
       decoration: ShapeDecoration(shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md)),
     );
@@ -102,7 +102,7 @@ extension type FCalendarMonthStyles(
     final focused = BorderSide(color: colors.primary, width: style.borderWidth);
     final selectedFocused = BorderSide(color: colors.border, width: style.borderWidth);
 
-    return FCalendarMonthStyles(
+    return FCalendarYearStyles(
       FVariants.from(
         base,
         variants: {

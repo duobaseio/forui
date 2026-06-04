@@ -5,6 +5,8 @@ import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
+import 'package:intl/intl.dart' show DateFormat;
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/calendar/header.dart';
 import '../../test_scaffold.dart';
@@ -67,8 +69,7 @@ void main() {
       bool navEnabled = true,
     }) => Header(
       style: style,
-      localizations: l10n,
-      date: _date,
+      label: DateFormat.yMMMM(l10n.localeName).format(_date),
       previousSemanticsLabel: l10n.calendarPreviousMonthSemanticsLabel,
       nextSemanticsLabel: l10n.calendarNextMonthSemanticsLabel,
       shown: monthYear,
@@ -198,6 +199,62 @@ void main() {
         final gesture = await tester.createPointerGesture();
         await gesture.moveTo(tester.getCenter(find.text('June 2024')));
         await expectGolden(tester, 'single-hovered');
+      });
+    });
+
+    group('${theme.name} Header factories', () {
+      testWidgets('factory-day', (tester) async {
+        await tester.pumpWidget(
+          _harness(
+            theme: theme.data,
+            header: (s, l) => Header.day(
+              style: s,
+              localizations: l,
+              monthYear: _date,
+              shown: false,
+              onPress: () {},
+              onPrevious: () {},
+              onNext: () {},
+            ),
+          ),
+        );
+        await expectGolden(tester, 'factory-day');
+      });
+
+      testWidgets('factory-month', (tester) async {
+        await tester.pumpWidget(
+          _harness(
+            theme: theme.data,
+            header: (s, l) => Header.month(
+              style: s,
+              localizations: l,
+              year: _date,
+              shown: false,
+              onPress: () {},
+              onPrevious: () {},
+              onNext: () {},
+            ),
+          ),
+        );
+        await expectGolden(tester, 'factory-month');
+      });
+
+      testWidgets('factory-year', (tester) async {
+        await tester.pumpWidget(
+          _harness(
+            theme: theme.data,
+            header: (s, l) => Header.year(
+              style: s,
+              localizations: l,
+              decade: DateTime.utc(2020),
+              shown: false,
+              onPress: () {},
+              onPrevious: () {},
+              onNext: () {},
+            ),
+          ),
+        );
+        await expectGolden(tester, 'factory-year');
       });
     });
   }

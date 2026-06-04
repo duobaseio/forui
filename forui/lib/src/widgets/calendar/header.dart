@@ -100,8 +100,7 @@ class DualHeader extends StatelessWidget {
 @internal
 class Header extends StatelessWidget {
   final FCalendarHeaderStyle style;
-  final FLocalizations localizations;
-  final DateTime date;
+  final String label;
   final String previousSemanticsLabel;
   final String nextSemanticsLabel;
   final bool shown;
@@ -111,8 +110,7 @@ class Header extends StatelessWidget {
 
   const Header({
     required this.style,
-    required this.localizations,
-    required this.date,
+    required this.label,
     required this.previousSemanticsLabel,
     required this.nextSemanticsLabel,
     required this.shown,
@@ -122,37 +120,101 @@ class Header extends StatelessWidget {
     super.key,
   });
 
-  @override
-  Widget build(BuildContext context) {
-    final locale = localizations.localeName;
+  /// Creates a header for the day picker: a `Jun 2024` label with previous/next month navigation.
+  factory Header.day({
+    required FCalendarHeaderStyle style,
+    required FLocalizations localizations,
+    required DateTime monthYear,
+    required bool shown,
+    required VoidCallback? onPress,
+    required VoidCallback? onNext,
+    required VoidCallback? onPrevious,
+    Key? key,
+  }) => Header(
+    style: style,
+    label: DateFormat.yMMM(localizations.localeName).format(monthYear),
+    previousSemanticsLabel: localizations.calendarPreviousMonthSemanticsLabel,
+    nextSemanticsLabel: localizations.calendarNextMonthSemanticsLabel,
+    shown: shown,
+    onPress: onPress,
+    onNext: onNext,
+    onPrevious: onPrevious,
+    key: key,
+  );
 
-    return Row(
-      children: [
-        _Tappable(style: style, label: DateFormat.yMMMM(locale).format(date), shown: shown, onPress: onPress),
-        const Spacer(),
-        FButton.icon(
-          style: style.buttonStyle,
-          onPress: onPrevious,
-          semanticsLabel: previousSemanticsLabel,
-          child: style.previousIcon(context),
-        ),
-        FButton.icon(
-          style: style.buttonStyle,
-          onPress: onNext,
-          semanticsLabel: nextSemanticsLabel,
-          child: style.nextIcon(context),
-        ),
-      ],
+  /// Creates a header for the month picker: a `2024` label with previous/next year navigation.
+  factory Header.month({
+    required FCalendarHeaderStyle style,
+    required FLocalizations localizations,
+    required DateTime year,
+    required bool shown,
+    required VoidCallback? onPress,
+    required VoidCallback? onNext,
+    required VoidCallback? onPrevious,
+    Key? key,
+  }) => Header(
+    style: style,
+    label: DateFormat.y(localizations.localeName).format(year),
+    previousSemanticsLabel: localizations.calendarPreviousYearSemanticsLabel,
+    nextSemanticsLabel: localizations.calendarNextYearSemanticsLabel,
+    shown: shown,
+    onPress: onPress,
+    onNext: onNext,
+    onPrevious: onPrevious,
+    key: key,
+  );
+
+  /// Creates a header for the year picker: a `2020 — 2029` decade label with previous/next decade navigation.
+  factory Header.year({
+    required FCalendarHeaderStyle style,
+    required FLocalizations localizations,
+    required DateTime decade,
+    required bool shown,
+    required VoidCallback? onPress,
+    required VoidCallback? onNext,
+    required VoidCallback? onPrevious,
+    Key? key,
+  }) {
+    final locale = localizations.localeName;
+    return Header(
+      style: style,
+      label: '${DateFormat.y(locale).format(decade)} — ${DateFormat.y(locale).format(.utc(decade.year + 9))}',
+      previousSemanticsLabel: localizations.calendarPreviousYearsSemanticsLabel,
+      nextSemanticsLabel: localizations.calendarNextYearsSemanticsLabel,
+      shown: shown,
+      onPress: onPress,
+      onNext: onNext,
+      onPrevious: onPrevious,
+      key: key,
     );
   }
+
+  @override
+  Widget build(BuildContext context) => Row(
+    children: [
+      _Tappable(style: style, label: label, shown: shown, onPress: onPress),
+      const Spacer(),
+      FButton.icon(
+        style: style.buttonStyle,
+        onPress: onPrevious,
+        semanticsLabel: previousSemanticsLabel,
+        child: style.previousIcon(context),
+      ),
+      FButton.icon(
+        style: style.buttonStyle,
+        onPress: onNext,
+        semanticsLabel: nextSemanticsLabel,
+        child: style.nextIcon(context),
+      ),
+    ],
+  );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('localizations', localizations))
-      ..add(DiagnosticsProperty('date', date))
+      ..add(StringProperty('label', label))
       ..add(StringProperty('previousSemanticsLabel', previousSemanticsLabel))
       ..add(StringProperty('nextSemanticsLabel', nextSemanticsLabel))
       ..add(FlagProperty('monthYear', value: shown, ifTrue: 'month year picker shown'))
@@ -174,24 +236,23 @@ class _Tappable extends StatelessWidget {
   Widget build(BuildContext context) => FTappable.static(
     focusedOutlineStyle: style.headerFocusedOutlineStyle,
     onPress: onPress,
-    builder: (_, variants, child) => Container(
+    builder: (context, variants, _) => Container(
       decoration: style.headerDecoration.resolve(variants),
       padding: const .directional(start: 6, end: 2, top: 4, bottom: 4),
-      child: child,
-    ),
-    child: Row(
-      mainAxisSize: .min,
-      spacing: 2,
-      children: [
-        Text(label, style: style.headerTextStyle),
-        AnimatedRotation(
-          // toggleIcon (chevronRight) mirrors under matchTextDirection, so it points left in RTL; rotating the
-          // opposite way still lands it facing down.
-          turns: shown ? (Directionality.of(context) == .ltr ? 0.25 : -0.25) : 0.0,
-          duration: style.animationDuration,
-          child: IconTheme(data: style.toggleIconStyle, child: style.toggleIcon(context)),
-        ),
-      ],
+      child: Row(
+        mainAxisSize: .min,
+        spacing: 2,
+        children: [
+          Text(label, style: style.headerTextStyle.resolve(variants)),
+          AnimatedRotation(
+            // toggleIcon (chevronRight) mirrors under matchTextDirection, so it points left in RTL; rotating the
+            // opposite way still lands it facing down.
+            turns: shown ? (Directionality.of(context) == .ltr ? 0.25 : -0.25) : 0.0,
+            duration: style.animationDuration,
+            child: IconTheme(data: style.toggleIconStyle.resolve(variants), child: style.toggleIcon(context)),
+          ),
+        ],
+      ),
     ),
   );
 
@@ -214,11 +275,11 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
 
   /// The month and year labels' text style.
   @override
-  final TextStyle headerTextStyle;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> headerTextStyle;
 
   /// The month and year toggle icons' style. Defaults to [FColors.mutedForeground].
   @override
-  final IconThemeData toggleIconStyle;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> toggleIconStyle;
 
   /// The focused outline style for the header tappable.
   @override
@@ -271,14 +332,14 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
       fontWeight: .w500,
     );
     return FCalendarHeaderStyle(
-      headerDecoration: FVariants.from(
+      headerDecoration: .from(
         ShapeDecoration(shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md)),
         variants: {
           [.hovered, .pressed]: .shapeDelta(color: colors.secondary),
         },
       ),
-      headerTextStyle: headerTextStyle,
-      toggleIconStyle: IconThemeData(color: colors.mutedForeground, size: headerTextStyle.fontSize),
+      headerTextStyle: .all(headerTextStyle),
+      toggleIconStyle: .all(IconThemeData(color: colors.mutedForeground, size: headerTextStyle.fontSize)),
       headerFocusedOutlineStyle: style.focusedOutlineStyle,
       buttonStyle: touch ? buttons.ghost.md : buttons.ghost.xs,
       toggleIcon: icons.chevronRight,
