@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart' hide Autocomplete, Badge, Slider, Tooltip;
+import 'package:flutter/material.dart' hide Autocomplete, Badge, Tooltip;
 import 'package:forui/forui.dart';
 
-import 'widgets/slider.dart';
+import 'widgets/sidebar.dart';
 
 void main() {
   runApp(const Application());
@@ -22,15 +22,9 @@ class Application extends StatelessWidget {
       theme: theme.toApproximateMaterialTheme(),
       builder: (_, child) => FTheme(
         data: theme,
-        child: FToaster(
-          child: FTooltipGroup(
-            child: child!,
-          ),
-        ),
+        child: FToaster(child: FTooltipGroup(child: child!)),
       ),
-      home: const FScaffold(
-        child: Slider(),
-      ),
+      home: const FScaffold(child: Sidebar()),
     );
   }
 }

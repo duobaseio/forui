@@ -22,8 +22,8 @@ class SidebarPage extends Example {
               padding: const .fromLTRB(16, 8, 16, 16),
               child: SvgPicture.network(
                 context.theme.colors.brightness == .light
-                    ? 'https://forui.dev/light_logo.svg'
-                    : 'https://forui.dev/dark_logo.svg',
+                    ? 'https://forui.dev/logos/light_logo.svg'
+                    : 'https://forui.dev/logos/dark_logo.svg',
                 height: 24,
                 colorFilter: ColorFilter.mode(context.theme.colors.foreground, .srcIn),
               ),
@@ -171,8 +171,8 @@ class SheetSidebarPage extends Example {
                     padding: const .fromLTRB(16, 8, 16, 16),
                     child: SvgPicture.network(
                       context.theme.colors.brightness == .light
-                          ? 'https://forui.dev/light_logo.svg'
-                          : 'https://forui.dev/dark_logo.svg',
+                          ? 'https://forui.dev/logos/light_logo.svg'
+                          : 'https://forui.dev/logos/dark_logo.svg',
                       height: 24,
                       colorFilter: ColorFilter.mode(context.theme.colors.foreground, .srcIn),
                     ),
