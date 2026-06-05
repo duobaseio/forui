@@ -43,7 +43,7 @@ abstract class FDateSelectionController<T> extends ValueNotifier<T> {
   FDateSelectionController(super._value);
 
   /// Returns true if the given [date] is selected.
-  bool selected(DateTime date);
+  bool contains(DateTime date);
 
   /// Selects the given [date].
   void select(DateTime date);
@@ -63,7 +63,7 @@ class ProxyController extends FDateSelectionController<Object?> {
   }
 
   @override
-  bool selected(DateTime date) => _selected(date);
+  bool contains(DateTime date) => _selected(date);
 
   @override
   void select(DateTime date) => _select(date);
@@ -77,7 +77,7 @@ class _SingleController extends FDateSelectionController<DateTime?> {
     : super(initial == null ? null : _truncate(initial));
 
   @override
-  bool selected(DateTime date) => value == _truncate(date);
+  bool contains(DateTime date) => value == _truncate(date);
 
   @override
   void select(DateTime date) {
@@ -100,7 +100,7 @@ final class _MultiController extends FDateSelectionController<Set<DateTime>> {
   _MultiController({Set<DateTime> initial = const {}}) : super(initial.map(_truncate).toSet());
 
   @override
-  bool selected(DateTime date) => value.contains(_truncate(date));
+  bool contains(DateTime date) => value.contains(_truncate(date));
 
   @override
   void select(DateTime date) {
@@ -124,7 +124,7 @@ final class _RangeController extends FDateSelectionController<(DateTime, DateTim
   }
 
   @override
-  bool selected(DateTime date) {
+  bool contains(DateTime date) {
     if (value case (final first, final last)) {
       final current = _truncate(date);
       return !current.isBefore(first) && !current.isAfter(last);

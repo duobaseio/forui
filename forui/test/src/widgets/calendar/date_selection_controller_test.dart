@@ -15,9 +15,9 @@ void main() {
       (DateTime(2024, 5, 5), false),
       (DateTime(2024, 5, 5, 3), false),
     ]) {
-      test('selected($date)', () {
+      test('contains($date)', () {
         final controller = FDateSelectionController.single(initial: DateTime(2024, 5, 4));
-        expect(controller.selected(date), expected);
+        expect(controller.contains(date), expected);
       });
     }
 
@@ -71,9 +71,9 @@ void main() {
       (DateTime(2024, 1, 1, 9), true), // truncates the time component
       (DateTime(2025), false),
     ]) {
-      test('selected($date)', () {
+      test('contains($date)', () {
         final controller = FDateSelectionController.multi(initial: {.utc(2024)});
-        expect(controller.selected(date), expected);
+        expect(controller.contains(date), expected);
       });
     }
 
@@ -134,9 +134,9 @@ void main() {
       ((DateTime(2024), DateTime(2025)), DateTime.utc(2026), false), // after
       (null, DateTime.utc(2023), false),
     ]) {
-      test('selected($date) initial=$initial', () {
+      test('contains($date) initial=$initial', () {
         final controller = FDateSelectionController.range(initial: initial);
-        expect(controller.selected(date), expected);
+        expect(controller.contains(date), expected);
       });
     }
 

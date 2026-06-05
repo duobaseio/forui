@@ -8,8 +8,6 @@ import 'package:forui/src/foundation/annotations.dart';
 import 'package:forui/src/theme/variant.dart';
 
 @Variants('FCalendarMonth', {
-  'selected': (4, 'The semantic variant when the month is selected.'),
-  //
   'today': (3, 'The semantic variant when the month is the current month.'),
   //
   'disabled': (2, 'The semantic variant when this widget is disabled and cannot be interacted with.'),
@@ -100,7 +98,6 @@ extension type FCalendarMonthStyles(
     );
 
     final focused = BorderSide(color: colors.primary, width: style.borderWidth);
-    final selectedFocused = BorderSide(color: colors.border, width: style.borderWidth);
 
     return FCalendarMonthStyles(
       FVariants.from(
@@ -145,62 +142,6 @@ extension type FCalendarMonthStyles(
           ),
           [.today.and(.disabled)]: .delta(
             textStyle: .delta(color: colors.disable(colors.mutedForeground), decoration: () => .underline),
-          ),
-          //
-          [.selected]: .delta(
-            textStyle: .delta(color: colors.primaryForeground),
-            decoration: .shapeDelta(color: colors.primary),
-          ),
-          [.selected.and(.hovered), .selected.and(.pressed)]: .delta(
-            textStyle: .delta(color: colors.primaryForeground),
-            decoration: .shapeDelta(color: colors.hover(colors.primary)),
-          ),
-          [.selected.and(.focused)]: .delta(
-            textStyle: .delta(color: colors.primaryForeground),
-            decoration: .shapeDelta(
-              color: colors.primary,
-              shape: RoundedSuperellipseBorder(side: selectedFocused, borderRadius: style.borderRadius.md),
-            ),
-          ),
-          [.selected.and(.focused).and(.hovered), .selected.and(.focused).and(.pressed)]: .delta(
-            textStyle: .delta(color: colors.primaryForeground),
-            decoration: .shapeDelta(
-              color: colors.hover(colors.primary),
-              shape: RoundedSuperellipseBorder(side: selectedFocused, borderRadius: style.borderRadius.md),
-            ),
-          ),
-          [.selected.and(.disabled)]: .delta(
-            textStyle: .delta(color: colors.disable(colors.primaryForeground)),
-            decoration: .shapeDelta(color: colors.primary),
-          ),
-          [.selected.and(.today)]: .delta(
-            textStyle: .delta(color: colors.primaryForeground, decoration: () => .underline),
-            decoration: .shapeDelta(color: colors.primary),
-          ),
-          [.selected.and(.today).and(.hovered), .selected.and(.today).and(.pressed)]: .delta(
-            textStyle: .delta(color: colors.primaryForeground, decoration: () => .underline),
-            decoration: .shapeDelta(color: colors.hover(colors.primary)),
-          ),
-          [.selected.and(.today).and(.focused)]: .delta(
-            textStyle: .delta(color: colors.primaryForeground, decoration: () => .underline),
-            decoration: .shapeDelta(
-              color: colors.primary,
-              shape: RoundedSuperellipseBorder(side: selectedFocused, borderRadius: style.borderRadius.md),
-            ),
-          ),
-          [
-            .selected.and(.today).and(.focused).and(.hovered),
-            .selected.and(.today).and(.focused).and(.pressed),
-          ]: .delta(
-            textStyle: .delta(color: colors.primaryForeground, decoration: () => .underline),
-            decoration: .shapeDelta(
-              color: colors.hover(colors.primary),
-              shape: RoundedSuperellipseBorder(side: selectedFocused, borderRadius: style.borderRadius.md),
-            ),
-          ),
-          [.selected.and(.today).and(.disabled)]: .delta(
-            textStyle: .delta(color: colors.disable(colors.primaryForeground), decoration: () => .underline),
-            decoration: .shapeDelta(color: colors.primary),
           ),
         },
       ),

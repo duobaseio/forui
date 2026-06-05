@@ -27,7 +27,6 @@ FCalendarMonthPickerController _controller({
 Widget _harness(
   FCalendarMonthPickerController controller, {
   DateTime? today,
-  bool Function(DateTime)? selected,
   ValueChanged<DateTime>? onPress,
 }) => TestScaffold.app(
   child: Builder(
@@ -38,7 +37,7 @@ Widget _harness(
         style: .inherit(colors: theme.colors, typography: theme.typography, style: theme.style),
         localization: FLocalizations.of(context) ?? FDefaultLocalizations(),
         today: today ?? .utc(2024, 6),
-        selected: selected ?? (_) => false,
+        paged: true,
         onPress: onPress ?? (_) {},
         builder: FCalendar.defaultMonthBuilder,
       );

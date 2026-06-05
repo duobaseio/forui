@@ -109,13 +109,13 @@ abstract class GridController extends FChangeNotifier {
   /// The end date, inclusive.
   final DateTime end;
 
-  final PageController _controller;
   final int _columns;
   final bool Function(DateTime) _selectable;
   final DateTime? Function(DateTime, DateTime) _focusable;
   final DateTime Function(DateTime, int) _step;
   final int Function(DateTime) _from;
   final DateTime Function(int) _to;
+  PageController _controller;
   DateTime? _focused;
   DateTime _current;
 
@@ -242,6 +242,15 @@ abstract class GridController extends FChangeNotifier {
 
 @internal
 extension InternalPickerController on GridController {
+  void reattach(DateTime date) {
+    assert(debugCheckInclusiveDateRange(start, date, end));
+    assert(!_controller.hasClients, 'reattach() must be called while no grid is mounted with this controller.');
+    _controller.dispose();
+    _focused = null;
+    _current = _to(_from(date));
+    _controller = PageController(initialPage: _from(date));
+  }
+
   void onPageChange(int page) {
     if (to(page) case final current when current != _current) {
       _current = current;

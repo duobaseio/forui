@@ -22,7 +22,6 @@ class YearPicker extends StatelessWidget {
   final FCalendarYearPickerStyle style;
   final FLocalizations localization;
   final DateTime today;
-  final bool Function(DateTime) selected;
   final ValueChanged<DateTime> onPress;
   final FCalendarYearBuilder builder;
 
@@ -31,7 +30,6 @@ class YearPicker extends StatelessWidget {
     required this.style,
     required this.localization,
     required this.today,
-    required this.selected,
     required this.onPress,
     required this.builder,
     super.key,
@@ -79,7 +77,6 @@ class YearPicker extends StatelessWidget {
               today: today,
               focused: controller.focused,
               selectable: controller.selectable,
-              selected: selected,
               onPress: onPress,
               builder: builder,
             ),
@@ -97,7 +94,6 @@ class YearPicker extends StatelessWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('localization', localization))
       ..add(DiagnosticsProperty('today', today))
-      ..add(ObjectFlagProperty.has('selected', selected))
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(ObjectFlagProperty.has('builder', builder));
   }
@@ -110,7 +106,6 @@ class _Grid extends StatefulWidget {
   final DateTime today;
   final DateTime? focused;
   final bool Function(DateTime) selectable;
-  final bool Function(DateTime) selected;
   final ValueChanged<DateTime> onPress;
   final FCalendarYearBuilder builder;
 
@@ -121,7 +116,6 @@ class _Grid extends StatefulWidget {
     required this.today,
     required this.focused,
     required this.selectable,
-    required this.selected,
     required this.onPress,
     required this.builder,
   }) : super(key: ValueKey(decade));
@@ -139,7 +133,6 @@ class _Grid extends StatefulWidget {
       ..add(DiagnosticsProperty('today', today))
       ..add(DiagnosticsProperty('focused', focused))
       ..add(ObjectFlagProperty.has('selectable', selectable))
-      ..add(ObjectFlagProperty.has('selected', selected))
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(ObjectFlagProperty.has('builder', builder));
   }
@@ -191,7 +184,7 @@ class _GridState extends State<_Grid> {
             localizations: widget.localization,
             date: year,
             focusNode: focusNode,
-            variants: {if (widget.selected(year)) .selected, if (year == today) .today},
+            variants: {if (year == today) .today},
             onPress: widget.selectable(year) ? () => widget.onPress(year) : null,
             builder: widget.builder,
           ),

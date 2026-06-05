@@ -9,95 +9,6 @@ import 'package:forui/forui.dart';
 part 'header.design.dart';
 
 @internal
-class DualHeader extends StatelessWidget {
-  final FCalendarHeaderStyle style;
-  final FLocalizations localizations;
-  final DateTime date;
-  final String previousSemanticsLabel;
-  final String nextSemanticsLabel;
-  final bool month;
-  final bool year;
-  final VoidCallback? onMonth;
-  final VoidCallback? onYear;
-  final VoidCallback? onNext;
-  final VoidCallback? onPrevious;
-
-  const DualHeader({
-    required this.style,
-    required this.localizations,
-    required this.date,
-    required this.previousSemanticsLabel,
-    required this.nextSemanticsLabel,
-    required this.month,
-    required this.year,
-    required this.onMonth,
-    required this.onYear,
-    required this.onNext,
-    required this.onPrevious,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    final locale = localizations.localeName;
-    final yearTappable = _Tappable(
-      style: style,
-      label: DateFormat.y(locale).format(date),
-      shown: year,
-      onPress: onYear,
-    );
-    final monthTappable = _Tappable(
-      style: style,
-      label: DateFormat.MMM(locale).format(date),
-      shown: month,
-      onPress: onMonth,
-    );
-
-    return Row(
-      children: [
-        if (DateFormat.yMMM(locale).pattern case final pattern? when pattern.indexOf('y') < pattern.indexOf('M')) ...[
-          yearTappable,
-          monthTappable,
-        ] else ...[
-          monthTappable,
-          yearTappable,
-        ],
-        const Spacer(),
-        FButton.icon(
-          style: style.buttonStyle,
-          onPress: onPrevious,
-          semanticsLabel: previousSemanticsLabel,
-          child: style.previousIcon(context),
-        ),
-        FButton.icon(
-          style: style.buttonStyle,
-          onPress: onNext,
-          semanticsLabel: nextSemanticsLabel,
-          child: style.nextIcon(context),
-        ),
-      ],
-    );
-  }
-
-  @override
-  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
-    super.debugFillProperties(properties);
-    properties
-      ..add(DiagnosticsProperty('style', style))
-      ..add(DiagnosticsProperty('localizations', localizations))
-      ..add(DiagnosticsProperty('date', date))
-      ..add(StringProperty('previousSemanticsLabel', previousSemanticsLabel))
-      ..add(StringProperty('nextSemanticsLabel', nextSemanticsLabel))
-      ..add(FlagProperty('month', value: month, ifTrue: 'month picker shown'))
-      ..add(FlagProperty('year', value: year, ifTrue: 'year picker shown'))
-      ..add(ObjectFlagProperty.has('onMonth', onMonth))
-      ..add(ObjectFlagProperty.has('onYear', onYear))
-      ..add(ObjectFlagProperty.has('onNext', onNext))
-      ..add(ObjectFlagProperty.has('onPrevious', onPrevious));
-  }
-}
-
-@internal
 class Header extends StatelessWidget {
   final FCalendarHeaderStyle style;
   final String label;
@@ -132,7 +43,7 @@ class Header extends StatelessWidget {
     Key? key,
   }) => Header(
     style: style,
-    label: DateFormat.yMMM(localizations.localeName).format(monthYear),
+    label: DateFormat.yMMMM(localizations.localeName).format(monthYear),
     previousSemanticsLabel: localizations.calendarPreviousMonthSemanticsLabel,
     nextSemanticsLabel: localizations.calendarNextMonthSemanticsLabel,
     shown: shown,
@@ -219,6 +130,95 @@ class Header extends StatelessWidget {
       ..add(StringProperty('nextSemanticsLabel', nextSemanticsLabel))
       ..add(FlagProperty('monthYear', value: shown, ifTrue: 'month year picker shown'))
       ..add(ObjectFlagProperty.has('onMonthYear', onPress))
+      ..add(ObjectFlagProperty.has('onNext', onNext))
+      ..add(ObjectFlagProperty.has('onPrevious', onPrevious));
+  }
+}
+
+@internal
+class SplitHeader extends StatelessWidget {
+  final FCalendarHeaderStyle style;
+  final FLocalizations localizations;
+  final DateTime date;
+  final String previousSemanticsLabel;
+  final String nextSemanticsLabel;
+  final bool month;
+  final bool year;
+  final VoidCallback? onMonth;
+  final VoidCallback? onYear;
+  final VoidCallback? onNext;
+  final VoidCallback? onPrevious;
+
+  const SplitHeader({
+    required this.style,
+    required this.localizations,
+    required this.date,
+    required this.previousSemanticsLabel,
+    required this.nextSemanticsLabel,
+    required this.month,
+    required this.year,
+    required this.onMonth,
+    required this.onYear,
+    required this.onNext,
+    required this.onPrevious,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    final locale = localizations.localeName;
+    final yearTappable = _Tappable(
+      style: style,
+      label: DateFormat.y(locale).format(date),
+      shown: year,
+      onPress: onYear,
+    );
+    final monthTappable = _Tappable(
+      style: style,
+      label: DateFormat.MMMM(locale).format(date),
+      shown: month,
+      onPress: onMonth,
+    );
+
+    return Row(
+      children: [
+        if (DateFormat.yMMMM(locale).pattern case final pattern? when pattern.indexOf('y') < pattern.indexOf('M')) ...[
+          yearTappable,
+          monthTappable,
+        ] else ...[
+          monthTappable,
+          yearTappable,
+        ],
+        const Spacer(),
+        FButton.icon(
+          style: style.buttonStyle,
+          onPress: onPrevious,
+          semanticsLabel: previousSemanticsLabel,
+          child: style.previousIcon(context),
+        ),
+        FButton.icon(
+          style: style.buttonStyle,
+          onPress: onNext,
+          semanticsLabel: nextSemanticsLabel,
+          child: style.nextIcon(context),
+        ),
+      ],
+    );
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty('localizations', localizations))
+      ..add(DiagnosticsProperty('date', date))
+      ..add(StringProperty('previousSemanticsLabel', previousSemanticsLabel))
+      ..add(StringProperty('nextSemanticsLabel', nextSemanticsLabel))
+      ..add(FlagProperty('month', value: month, ifTrue: 'month picker shown'))
+      ..add(FlagProperty('year', value: year, ifTrue: 'year picker shown'))
+      ..add(ObjectFlagProperty.has('onMonth', onMonth))
+      ..add(ObjectFlagProperty.has('onYear', onYear))
       ..add(ObjectFlagProperty.has('onNext', onNext))
       ..add(ObjectFlagProperty.has('onPrevious', onPrevious));
   }
@@ -315,7 +315,7 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
     required this.toggleIcon,
     required this.previousIcon,
     required this.nextIcon,
-    this.animationDuration = const Duration(milliseconds: 200),
+    this.animationDuration = const Duration(milliseconds: 100),
   });
 
   /// Creates a [FCalendarHeaderStyle] that inherits its properties.

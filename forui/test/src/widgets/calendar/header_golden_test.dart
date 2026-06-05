@@ -17,10 +17,9 @@ Widget _harness({
   required FThemeData theme,
   required Widget Function(FCalendarHeaderStyle style, FLocalizations l10n) header,
   TextDirection? textDirection,
-}) => TestScaffold(
-  theme: theme,
-  textDirection: textDirection,
-  child: Builder(
+  Locale? locale,
+}) {
+  final child = Builder(
     builder: (context) {
       final t = context.theme;
       final style = FCalendarHeaderStyle.inherit(
@@ -32,8 +31,13 @@ Widget _harness({
       );
       return SizedBox(width: 320, child: header(style, FLocalizations.of(context) ?? FDefaultLocalizations()));
     },
-  ),
-);
+  );
+
+  // A locale needs the localization delegates, so wrap in an app; otherwise keep the lighter scaffold.
+  return locale == null
+      ? TestScaffold(theme: theme, textDirection: textDirection, child: child)
+      : TestScaffold.app(theme: theme, locale: locale, textDirection: textDirection, child: child);
+}
 
 void main() {
   for (final theme in TestScaffold.themes) {
@@ -42,13 +46,13 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('calendar-header/${theme.name}/$name.png'));
     }
 
-    Widget dual({
+    Widget split({
       required FCalendarHeaderStyle style,
       required FLocalizations l10n,
       bool month = false,
       bool year = false,
       bool navEnabled = true,
-    }) => DualHeader(
+    }) => SplitHeader(
       style: style,
       localizations: l10n,
       date: _date,
@@ -78,70 +82,94 @@ void main() {
       onNext: navEnabled ? () {} : null,
     );
 
-    group('${theme.name} DualHeader', () {
-      testWidgets('dual-resting', (tester) async {
+    group('${theme.name} SplitHeader', () {
+      testWidgets('split-resting', (tester) async {
         await tester.pumpWidget(
           _harness(
             theme: theme.data,
-            header: (s, l) => dual(style: s, l10n: l),
+            header: (s, l) => split(style: s, l10n: l),
           ),
         );
-        await expectGolden(tester, 'dual-resting');
+        await expectGolden(tester, 'split-resting');
       });
 
-      testWidgets('dual-month-expanded', (tester) async {
+      testWidgets('split-month-expanded', (tester) async {
         await tester.pumpWidget(
           _harness(
             theme: theme.data,
-            header: (s, l) => dual(month: true, style: s, l10n: l),
+            header: (s, l) => split(month: true, style: s, l10n: l),
           ),
         );
-        await expectGolden(tester, 'dual-month-expanded');
+        await expectGolden(tester, 'split-month-expanded');
       });
 
-      testWidgets('dual-year-expanded', (tester) async {
+      testWidgets('split-year-expanded', (tester) async {
         await tester.pumpWidget(
           _harness(
             theme: theme.data,
-            header: (s, l) => dual(year: true, style: s, l10n: l),
+            header: (s, l) => split(year: true, style: s, l10n: l),
           ),
         );
-        await expectGolden(tester, 'dual-year-expanded');
+        await expectGolden(tester, 'split-year-expanded');
       });
 
-      testWidgets('dual-nav-disabled', (tester) async {
+      testWidgets('split-nav-disabled', (tester) async {
         await tester.pumpWidget(
           _harness(
             theme: theme.data,
-            header: (s, l) => dual(navEnabled: false, style: s, l10n: l),
+            header: (s, l) => split(navEnabled: false, style: s, l10n: l),
           ),
         );
-        await expectGolden(tester, 'dual-nav-disabled');
+        await expectGolden(tester, 'split-nav-disabled');
       });
 
-      testWidgets('dual-rtl', (tester) async {
+      testWidgets('split-rtl', (tester) async {
         await tester.pumpWidget(
           _harness(
             theme: theme.data,
             textDirection: .rtl,
-            header: (s, l) => dual(month: true, style: s, l10n: l),
+            header: (s, l) => split(month: true, style: s, l10n: l),
           ),
         );
-        await expectGolden(tester, 'dual-rtl');
+        await expectGolden(tester, 'split-rtl');
       });
 
-      testWidgets('dual-hovered', (tester) async {
+      testWidgets('split-hovered', (tester) async {
         await tester.pumpWidget(
           _harness(
             theme: theme.data,
-            header: (s, l) => dual(style: s, l10n: l),
+            header: (s, l) => split(style: s, l10n: l),
           ),
         );
         await tester.pumpAndSettle();
 
         final gesture = await tester.createPointerGesture();
-        await gesture.moveTo(tester.getCenter(find.text('Jun')));
-        await expectGolden(tester, 'dual-hovered');
+        await gesture.moveTo(tester.getCenter(find.text('June')));
+        await expectGolden(tester, 'split-hovered');
+      });
+
+      // Hungarian orders the year before the month ('y. MMMM'), so the year tappable should render first.
+      testWidgets('split-year-first', (tester) async {
+        await tester.pumpWidget(
+          _harness(
+            theme: theme.data,
+            locale: const Locale('hu'),
+            header: (s, l) => split(month: true, style: s, l10n: l),
+          ),
+        );
+        await expectGolden(tester, 'split-year-first');
+      });
+
+      testWidgets('split-year-first-rtl', (tester) async {
+        await tester.pumpWidget(
+          _harness(
+            theme: theme.data,
+            locale: const Locale('hu'),
+            textDirection: .rtl,
+            header: (s, l) => split(month: true, style: s, l10n: l),
+          ),
+        );
+        await expectGolden(tester, 'split-year-first-rtl');
       });
     });
 

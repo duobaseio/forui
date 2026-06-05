@@ -27,7 +27,6 @@ FCalendarYearPickerController _controller({
 Widget _harness(
   FCalendarYearPickerController controller, {
   DateTime? today,
-  bool Function(DateTime)? selected,
   ValueChanged<DateTime>? onPress,
 }) => TestScaffold.app(
   child: Builder(
@@ -38,7 +37,6 @@ Widget _harness(
         style: .inherit(colors: theme.colors, typography: theme.typography, style: theme.style),
         localization: FLocalizations.of(context) ?? FDefaultLocalizations(),
         today: today ?? .utc(2024),
-        selected: selected ?? (_) => false,
         onPress: onPress ?? (_) {},
         builder: FCalendar.defaultYearBuilder,
       );
