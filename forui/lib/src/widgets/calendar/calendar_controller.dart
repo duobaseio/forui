@@ -78,33 +78,30 @@ abstract class _GridCalendarController extends FCalendarController {
   FCalendarPickerGridType _type = .day;
 
   _GridCalendarController({required super.start, required super.end, required super.today}) {
-    day = FCalendarDayPickerController(
-      start: start,
-      end: end,
-      initial: _currentMonth,
-      selectable: (date) => _daySelectable(start, date, end) && _selectable(date),
-    );
+    day =
+        FCalendarDayPickerController(
+          start: start,
+          end: end,
+          initial: _currentMonth,
+          selectable: (date) => _daySelectable(start, date, end) && _selectable(date),
+        )..addListener(() {
+          if (_type == .day) {
+            _currentMonth = day.current;
+          }
+          notifyListeners();
+        });
     month = FCalendarMonthPickerController(
       start: start,
       end: end,
       initial: _currentMonth,
       selectable: (date) => _monthSelectable(start, date, end) && _selectable(date),
-    );
+    )..addListener(notifyListeners);
     year = FCalendarYearPickerController(
       start: start,
       end: end,
       initial: _currentMonth,
       selectable: (date) => _yearSelectable(start, date, end) && _selectable(date),
-    );
-
-    day.addListener(() {
-      if (_type == .day) {
-        _currentMonth = day.current;
-      }
-      notifyListeners();
-    });
-    month.addListener(notifyListeners);
-    year.addListener(notifyListeners);
+    )..addListener(notifyListeners);
   }
 
   /// Shows the day picker on the given [date]'s month, or the current month if [date] is null.
@@ -156,7 +153,7 @@ abstract class _GridCalendarController extends FCalendarController {
   }
 }
 
-/// A controller for an inline [FCalendar] that cycles through day/month/year views in the same grid space.
+/// A controller for a [FCalendar] that cycles through day/month/year grid pickers.
 class FGridCalendarController extends _GridCalendarController {
   /// Creates a [FGridCalendarController].
   FGridCalendarController({required super.start, required super.end, required super.today});
@@ -174,7 +171,7 @@ class FGridCalendarController extends _GridCalendarController {
   }
 }
 
-/// A controller for an inline [FCalendar] with a split header whose month and years are independently togglable.
+/// A controller for a [FCalendar] with a split header whose month and year grid pickers are independently togglable.
 class FGridSplitCalendarController extends _GridCalendarController {
   /// Creates a [FGridSplitCalendarController].
   FGridSplitCalendarController({required super.start, required super.end, required super.today});
@@ -183,5 +180,61 @@ class FGridSplitCalendarController extends _GridCalendarController {
   void toggleMonthPicker() => type == .month ? showDayPicker() : showMonthPicker();
 
   /// Shows the year picker if not currently shown, and the day picker otherwise.
-  void toggleYear() => type == .year ? showDayPicker() : showYearPicker();
+  void toggleYearPicker() => type == .year ? showDayPicker() : showYearPicker();
+}
+
+/// A controller for a [FCalendar] that toggles between a day grid picker and a month-year wheel picker.
+class FWheelCalendarController extends FCalendarController {
+  /// The day picker controller.
+  late final FCalendarDayPickerController day;
+  bool _wheel = false;
+
+  /// Creates a [FWheelCalendarController].
+  FWheelCalendarController({required super.start, required super.end, required super.today}) {
+    day =
+        FCalendarDayPickerController(
+          start: start,
+          end: end,
+          initial: _currentMonth,
+          selectable: (date) => _daySelectable(start, date, end) && _selectable(date),
+        )..addListener(() {
+          if (!_wheel) {
+            _currentMonth = day.current;
+          }
+          notifyListeners();
+        });
+  }
+
+  /// Shows the month-year wheel if the day grid is shown, and the day grid otherwise.
+  void toggleMonthYearPicker() {
+    if (_wheel) {
+      day.reattach(_currentMonth);
+      _wheel = false;
+    } else {
+      _wheel = true;
+    }
+    notifyListeners();
+  }
+
+  /// Sets the month-year wheel picker's selected [month] and [year], and updates [currentMonth]. Does nothing if the
+  /// month-year wheel picker.
+  void setMonthYear(int month, int year) {
+    if (!_wheel) {
+      return;
+    }
+    final next = _clamp(start, .utc(year, month), end);
+    if (next != _currentMonth) {
+      _currentMonth = next;
+      notifyListeners();
+    }
+  }
+
+  /// Whether the month-year wheel picker is currently shown.
+  bool get monthYear => _wheel;
+
+  @override
+  void dispose() {
+    day.dispose();
+    super.dispose();
+  }
 }

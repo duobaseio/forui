@@ -104,6 +104,22 @@ void main() {
     expect(find.byType(FButton), findsNothing);
   });
 
+  testWidgets('Header.singleDay renders label without navigation', (tester) async {
+    await pump(
+      tester,
+      (style) => Header.singleDay(
+        style: style,
+        localizations: FDefaultLocalizations(),
+        monthYear: DateTime.utc(2024, 6, 15),
+        shown: false,
+        onPress: () {},
+      ),
+    );
+
+    expect(find.text('June 2024'), findsOneWidget);
+    expect(find.byType(FButton), findsNothing);
+  });
+
   testWidgets('SplitHeader renders labels and navigation semantics', (tester) async {
     final semantics = tester.ensureSemantics();
     await pump(

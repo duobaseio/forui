@@ -333,6 +333,38 @@ void main() {
         );
         await expectGolden(tester, 'factory-single-month');
       });
+
+      testWidgets('factory-single-day', (tester) async {
+        await tester.pumpWidget(
+          _harness(
+            theme: theme.data,
+            header: (s, l) => Header.singleDay(
+              style: s,
+              localizations: l,
+              monthYear: _date,
+              shown: false,
+              onPress: () {},
+            ),
+          ),
+        );
+        await expectGolden(tester, 'factory-single-day');
+      });
+
+      testWidgets('factory-single-day-expanded', (tester) async {
+        await tester.pumpWidget(
+          _harness(
+            theme: theme.data,
+            header: (s, l) => Header.singleDay(
+              style: s,
+              localizations: l,
+              monthYear: _date,
+              shown: true,
+              onPress: () {},
+            ),
+          ),
+        );
+        await expectGolden(tester, 'factory-single-day-expanded');
+      });
     });
   }
 }

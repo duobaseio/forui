@@ -44,7 +44,6 @@ class Header extends StatelessWidget {
        onNext = null,
        onPrevious = null;
 
-  /// Creates a header for the day picker: a `Jun 2024` label with previous/next month navigation.
   factory Header.day({
     required FCalendarHeaderStyle style,
     required FLocalizations localizations,
@@ -66,7 +65,21 @@ class Header extends StatelessWidget {
     key: key,
   );
 
-  /// Creates a header for the month picker: a `2024` label with previous/next year navigation.
+  factory Header.singleDay({
+    required FCalendarHeaderStyle style,
+    required FLocalizations localizations,
+    required DateTime monthYear,
+    required bool shown,
+    required VoidCallback? onPress,
+    Key? key,
+  }) => Header.single(
+    style: style,
+    label: DateFormat.yMMMM(localizations.localeName).format(monthYear),
+    shown: shown,
+    onPress: onPress,
+    key: key,
+  );
+
   factory Header.month({
     required FCalendarHeaderStyle style,
     required FLocalizations localizations,
@@ -88,7 +101,6 @@ class Header extends StatelessWidget {
     key: key,
   );
 
-  /// Creates a header for the month picker without navigation: a `2024` label.
   factory Header.singleMonth({
     required FCalendarHeaderStyle style,
     required FLocalizations localizations,
@@ -104,7 +116,6 @@ class Header extends StatelessWidget {
     key: key,
   );
 
-  /// Creates a header for the year picker: a `2020 — 2029` decade label with previous/next decade navigation.
   factory Header.year({
     required FCalendarHeaderStyle style,
     required FLocalizations localizations,
