@@ -157,9 +157,9 @@ abstract class _GridCalendarController extends FCalendarController {
 }
 
 /// A controller for an inline [FCalendar] that cycles through day/month/year views in the same grid space.
-class FInlineCalendarController extends _GridCalendarController {
-  /// Creates a [FInlineCalendarController].
-  FInlineCalendarController({required super.start, required super.end, required super.today});
+class FGridCalendarController extends _GridCalendarController {
+  /// Creates a [FGridCalendarController].
+  FGridCalendarController({required super.start, required super.end, required super.today});
 
   /// Advances the inline grid to show the next picker in the cycle.
   void cycle() {
@@ -175,9 +175,9 @@ class FInlineCalendarController extends _GridCalendarController {
 }
 
 /// A controller for an inline [FCalendar] with a split header whose month and years are independently togglable.
-class FInlineSplitCalendarController extends _GridCalendarController {
-  /// Creates a [FInlineSplitCalendarController].
-  FInlineSplitCalendarController({required super.start, required super.end, required super.today});
+class FGridSplitCalendarController extends _GridCalendarController {
+  /// Creates a [FGridSplitCalendarController].
+  FGridSplitCalendarController({required super.start, required super.end, required super.today});
 
   /// Shows the month picker if not currently shown, and the day picker otherwise.
   void toggleMonthPicker() => type == .month ? showDayPicker() : showMonthPicker();
