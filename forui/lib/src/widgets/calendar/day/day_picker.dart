@@ -288,6 +288,10 @@ class FCalendarDayPickerController extends GridController {
 
 /// A day picker's style.
 class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunctions {
+  /// The spacing between the header and the day picker. Defaults to 0. Does nothing if there is no header.
+  @override
+  final double headerSpacing;
+
   /// The text style for the days of the weekday headers.
   @override
   final TextStyle weekdayTextStyle;
@@ -318,6 +322,7 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
     required this.weekdayTextStyle,
     required this.dayStyles,
     required this.daySize,
+    this.headerSpacing = 0,
     this.firstDayOfWeek,
     this.daySpacing = 4,
   }) : assert(

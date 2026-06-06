@@ -123,6 +123,24 @@ void main() {
         await expectGolden(tester, 'split-nav-disabled');
       });
 
+      testWidgets('split-single', (tester) async {
+        await tester.pumpWidget(
+          _harness(
+            theme: theme.data,
+            header: (s, l) => SplitHeader.single(
+              style: s,
+              localizations: l,
+              date: _date,
+              month: true,
+              year: false,
+              onMonth: () {},
+              onYear: () {},
+            ),
+          ),
+        );
+        await expectGolden(tester, 'split-single');
+      });
+
       testWidgets('split-rtl', (tester) async {
         await tester.pumpWidget(
           _harness(
@@ -204,6 +222,21 @@ void main() {
         await expectGolden(tester, 'single-nav-disabled');
       });
 
+      testWidgets('single-no-nav', (tester) async {
+        await tester.pumpWidget(
+          _harness(
+            theme: theme.data,
+            header: (s, l) => Header.single(
+              style: s,
+              label: DateFormat.yMMMM(l.localeName).format(_date),
+              shown: false,
+              onPress: () {},
+            ),
+          ),
+        );
+        await expectGolden(tester, 'single-no-nav');
+      });
+
       testWidgets('single-rtl', (tester) async {
         await tester.pumpWidget(
           _harness(
@@ -283,6 +316,22 @@ void main() {
           ),
         );
         await expectGolden(tester, 'factory-year');
+      });
+
+      testWidgets('factory-single-month', (tester) async {
+        await tester.pumpWidget(
+          _harness(
+            theme: theme.data,
+            header: (s, l) => Header.singleMonth(
+              style: s,
+              localizations: l,
+              year: _date,
+              shown: false,
+              onPress: () {},
+            ),
+          ),
+        );
+        await expectGolden(tester, 'factory-single-month');
       });
     });
   }

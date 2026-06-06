@@ -226,6 +226,10 @@ class FCalendarYearPickerController extends GridController {
 
 /// A year picker's style.
 class FCalendarYearPickerStyle with Diagnosticable, _$FCalendarYearPickerStyleFunctions {
+  /// The spacing between the header and the year picker. Defaults to 6. Does nothing if there is no header.
+  @override
+  final double headerSpacing;
+
   /// The styles of the year tiles.
   @override
   final FCalendarYearStyles yearStyles;
@@ -239,7 +243,12 @@ class FCalendarYearPickerStyle with Diagnosticable, _$FCalendarYearPickerStyleFu
   final double yearSpacing;
 
   /// Creates a [FCalendarYearPickerStyle].
-  const FCalendarYearPickerStyle({required this.yearStyles, required this.yearSize, this.yearSpacing = 4});
+  const FCalendarYearPickerStyle({
+    required this.yearStyles,
+    required this.yearSize,
+    this.headerSpacing = 6,
+    this.yearSpacing = 4,
+  });
 
   /// Creates a [FCalendarYearPickerStyle] that inherits its properties.
   factory FCalendarYearPickerStyle.inherit({

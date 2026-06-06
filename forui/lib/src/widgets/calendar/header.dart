@@ -15,6 +15,7 @@ class Header extends StatelessWidget {
   final String previousSemanticsLabel;
   final String nextSemanticsLabel;
   final bool shown;
+  final bool navigation;
   final VoidCallback? onPress;
   final VoidCallback? onNext;
   final VoidCallback? onPrevious;
@@ -29,7 +30,19 @@ class Header extends StatelessWidget {
     required this.onNext,
     required this.onPrevious,
     super.key,
-  });
+  }) : navigation = true;
+
+  const Header.single({
+    required this.style,
+    required this.label,
+    required this.shown,
+    required this.onPress,
+    super.key,
+  }) : navigation = false,
+       previousSemanticsLabel = '',
+       nextSemanticsLabel = '',
+       onNext = null,
+       onPrevious = null;
 
   /// Creates a header for the day picker: a `Jun 2024` label with previous/next month navigation.
   factory Header.day({
@@ -75,6 +88,22 @@ class Header extends StatelessWidget {
     key: key,
   );
 
+  /// Creates a header for the month picker without navigation: a `2024` label.
+  factory Header.singleMonth({
+    required FCalendarHeaderStyle style,
+    required FLocalizations localizations,
+    required DateTime year,
+    required bool shown,
+    required VoidCallback? onPress,
+    Key? key,
+  }) => Header.single(
+    style: style,
+    label: DateFormat.y(localizations.localeName).format(year),
+    shown: shown,
+    onPress: onPress,
+    key: key,
+  );
+
   /// Creates a header for the year picker: a `2020 — 2029` decade label with previous/next decade navigation.
   factory Header.year({
     required FCalendarHeaderStyle style,
@@ -104,19 +133,21 @@ class Header extends StatelessWidget {
   Widget build(BuildContext context) => Row(
     children: [
       _Tappable(style: style, label: label, shown: shown, onPress: onPress),
-      const Spacer(),
-      FButton.icon(
-        style: style.buttonStyle,
-        onPress: onPrevious,
-        semanticsLabel: previousSemanticsLabel,
-        child: style.previousIcon(context),
-      ),
-      FButton.icon(
-        style: style.buttonStyle,
-        onPress: onNext,
-        semanticsLabel: nextSemanticsLabel,
-        child: style.nextIcon(context),
-      ),
+      if (navigation) ...[
+        const Spacer(),
+        FButton.icon(
+          style: style.buttonStyle,
+          onPress: onPrevious,
+          semanticsLabel: previousSemanticsLabel,
+          child: style.previousIcon(context),
+        ),
+        FButton.icon(
+          style: style.buttonStyle,
+          onPress: onNext,
+          semanticsLabel: nextSemanticsLabel,
+          child: style.nextIcon(context),
+        ),
+      ],
     ],
   );
 
@@ -129,6 +160,7 @@ class Header extends StatelessWidget {
       ..add(StringProperty('previousSemanticsLabel', previousSemanticsLabel))
       ..add(StringProperty('nextSemanticsLabel', nextSemanticsLabel))
       ..add(FlagProperty('monthYear', value: shown, ifTrue: 'month year picker shown'))
+      ..add(FlagProperty('navigation', value: navigation, ifTrue: 'navigable'))
       ..add(ObjectFlagProperty.has('onMonthYear', onPress))
       ..add(ObjectFlagProperty.has('onNext', onNext))
       ..add(ObjectFlagProperty.has('onPrevious', onPrevious));
@@ -144,6 +176,7 @@ class SplitHeader extends StatelessWidget {
   final String nextSemanticsLabel;
   final bool month;
   final bool year;
+  final bool navigation;
   final VoidCallback? onMonth;
   final VoidCallback? onYear;
   final VoidCallback? onNext;
@@ -162,7 +195,22 @@ class SplitHeader extends StatelessWidget {
     required this.onNext,
     required this.onPrevious,
     super.key,
-  });
+  }) : navigation = true;
+
+  const SplitHeader.single({
+    required this.style,
+    required this.localizations,
+    required this.date,
+    required this.month,
+    required this.year,
+    required this.onMonth,
+    required this.onYear,
+    super.key,
+  }) : navigation = false,
+       previousSemanticsLabel = '',
+       nextSemanticsLabel = '',
+       onNext = null,
+       onPrevious = null;
 
   @override
   Widget build(BuildContext context) {
@@ -189,19 +237,21 @@ class SplitHeader extends StatelessWidget {
           monthTappable,
           yearTappable,
         ],
-        const Spacer(),
-        FButton.icon(
-          style: style.buttonStyle,
-          onPress: onPrevious,
-          semanticsLabel: previousSemanticsLabel,
-          child: style.previousIcon(context),
-        ),
-        FButton.icon(
-          style: style.buttonStyle,
-          onPress: onNext,
-          semanticsLabel: nextSemanticsLabel,
-          child: style.nextIcon(context),
-        ),
+        if (navigation) ...[
+          const Spacer(),
+          FButton.icon(
+            style: style.buttonStyle,
+            onPress: onPrevious,
+            semanticsLabel: previousSemanticsLabel,
+            child: style.previousIcon(context),
+          ),
+          FButton.icon(
+            style: style.buttonStyle,
+            onPress: onNext,
+            semanticsLabel: nextSemanticsLabel,
+            child: style.nextIcon(context),
+          ),
+        ],
       ],
     );
   }
@@ -217,6 +267,7 @@ class SplitHeader extends StatelessWidget {
       ..add(StringProperty('nextSemanticsLabel', nextSemanticsLabel))
       ..add(FlagProperty('month', value: month, ifTrue: 'month picker shown'))
       ..add(FlagProperty('year', value: year, ifTrue: 'year picker shown'))
+      ..add(FlagProperty('navigation', value: navigation, ifTrue: 'navigable'))
       ..add(ObjectFlagProperty.has('onMonth', onMonth))
       ..add(ObjectFlagProperty.has('onYear', onYear))
       ..add(ObjectFlagProperty.has('onNext', onNext))

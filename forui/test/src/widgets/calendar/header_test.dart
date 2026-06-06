@@ -7,7 +7,7 @@ import 'package:forui/src/widgets/calendar/header.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  Future<void> pump(WidgetTester tester, Header Function(FCalendarHeaderStyle style) build) async {
+  Future<void> pump(WidgetTester tester, Widget Function(FCalendarHeaderStyle style) build) async {
     await tester.pumpWidget(
       TestScaffold(
         child: Builder(
@@ -40,7 +40,7 @@ void main() {
             onNext: () {},
             onPrevious: () {},
           ),
-          'Jun 2024',
+          'June 2024',
           'Previous month',
           'Next month',
         ),
@@ -82,8 +82,70 @@ void main() {
       expect(find.text(label), findsOneWidget);
       expect(find.bySemanticsLabel(previous), findsOneWidget);
       expect(find.bySemanticsLabel(next), findsOneWidget);
+      expect(find.byType(FButton), findsNWidgets(2));
 
       semantics.dispose();
     });
   }
+
+  testWidgets('Header.singleMonth renders label without navigation', (tester) async {
+    await pump(
+      tester,
+      (style) => Header.singleMonth(
+        style: style,
+        localizations: FDefaultLocalizations(),
+        year: DateTime.utc(2024),
+        shown: false,
+        onPress: () {},
+      ),
+    );
+
+    expect(find.text('2024'), findsOneWidget);
+    expect(find.byType(FButton), findsNothing);
+  });
+
+  testWidgets('SplitHeader renders labels and navigation semantics', (tester) async {
+    final semantics = tester.ensureSemantics();
+    await pump(
+      tester,
+      (style) => SplitHeader(
+        style: style,
+        localizations: FDefaultLocalizations(),
+        date: DateTime.utc(2024, 6, 15),
+        previousSemanticsLabel: 'Previous year',
+        nextSemanticsLabel: 'Next year',
+        month: false,
+        year: false,
+        onMonth: () {},
+        onYear: () {},
+        onPrevious: () {},
+        onNext: () {},
+      ),
+    );
+
+    expect(find.text('2024'), findsOneWidget);
+    expect(find.bySemanticsLabel('Previous year'), findsOneWidget);
+    expect(find.bySemanticsLabel('Next year'), findsOneWidget);
+    expect(find.byType(FButton), findsNWidgets(2));
+
+    semantics.dispose();
+  });
+
+  testWidgets('SplitHeader.single renders labels without navigation', (tester) async {
+    await pump(
+      tester,
+      (style) => SplitHeader.single(
+        style: style,
+        localizations: FDefaultLocalizations(),
+        date: DateTime.utc(2024, 6, 15),
+        month: false,
+        year: false,
+        onMonth: () {},
+        onYear: () {},
+      ),
+    );
+
+    expect(find.text('2024'), findsOneWidget);
+    expect(find.byType(FButton), findsNothing);
+  });
 }

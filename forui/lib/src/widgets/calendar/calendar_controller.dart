@@ -44,7 +44,7 @@ abstract class FCalendarController extends FChangeNotifier {
   final DateTime today;
 
   final bool Function(DateTime) _selectable;
-  late DateTime _current;
+  late DateTime _currentMonth;
 
   /// Creates a [FCalendarController].
   FCalendarController({
@@ -56,10 +56,13 @@ abstract class FCalendarController extends FChangeNotifier {
   }) : start = .utc(start.year, start.month, start.day),
        end = .utc(end.year, end.month, end.day),
        today = .utc(today.year, today.month, today.day) {
-    _current = initial == null ? today : .utc(initial.year, initial.month);
+    _currentMonth = initial == null ? today : .utc(initial.year, initial.month);
     assert(debugCheckInclusiveDateRange(start, today, end));
-    assert(debugCheckInclusiveDateRange(start, _current, end));
+    assert(debugCheckInclusiveDateRange(start, _currentMonth, end));
   }
+
+  /// The current year and month that the day picker shows.
+  DateTime get currentMonth => _currentMonth;
 }
 
 abstract class _GridCalendarController extends FCalendarController {
@@ -72,26 +75,77 @@ abstract class _GridCalendarController extends FCalendarController {
   /// The year picker controller.
   late final FCalendarYearPickerController year;
 
+  FCalendarPickerGridType _type = .day;
+
   _GridCalendarController({required super.start, required super.end, required super.today}) {
     day = FCalendarDayPickerController(
       start: start,
       end: end,
-      initial: _current,
+      initial: _currentMonth,
       selectable: (date) => _daySelectable(start, date, end) && _selectable(date),
     );
     month = FCalendarMonthPickerController(
       start: start,
       end: end,
-      initial: _current,
+      initial: _currentMonth,
       selectable: (date) => _monthSelectable(start, date, end) && _selectable(date),
     );
     year = FCalendarYearPickerController(
       start: start,
       end: end,
-      initial: _current,
+      initial: _currentMonth,
       selectable: (date) => _yearSelectable(start, date, end) && _selectable(date),
     );
+
+    day.addListener(() {
+      if (_type == .day) {
+        _currentMonth = day.current;
+      }
+      notifyListeners();
+    });
+    month.addListener(notifyListeners);
+    year.addListener(notifyListeners);
   }
+
+  /// Shows the day picker on the given [date]'s month, or the current month if [date] is null.
+  void showDayPicker([DateTime? date]) {
+    day.reattach(
+      _clamp(start, switch (date) {
+        null => _currentMonth,
+        final m => .utc(m.year, m.month),
+      }, end),
+    );
+    _currentMonth = day.current;
+    _type = .day;
+    notifyListeners();
+  }
+
+  /// Shows the month picker for the given [date]'s year, or the current year if [date] is null.
+  void showMonthPicker([DateTime? date]) {
+    month.reattach(
+      _clamp(start, switch (date) {
+        null => _currentMonth,
+        final m => .utc(m.year, m.month),
+      }, end),
+    );
+    _type = .month;
+    notifyListeners();
+  }
+
+  /// Shows the year picker for the given [date]'s year, or the current year if [date] is null.
+  void showYearPicker([DateTime? date]) {
+    year.reattach(
+      _clamp(start, switch (date) {
+        null => _currentMonth,
+        final m => .utc(m.year, m.month),
+      }, end),
+    );
+    _type = .year;
+    notifyListeners();
+  }
+
+  /// The currently shown grid's type.
+  FCalendarPickerGridType get type => _type;
 
   @override
   void dispose() {
@@ -104,23 +158,12 @@ abstract class _GridCalendarController extends FCalendarController {
 
 /// A controller for an inline [FCalendar] that cycles through day/month/year views in the same grid space.
 class FInlineCalendarController extends _GridCalendarController {
-  FCalendarPickerGridType _type = .day;
-
   /// Creates a [FInlineCalendarController].
-  FInlineCalendarController({required super.start, required super.end, required super.today}) {
-    day.addListener(() {
-      if (_type == .day) {
-        _current = day.current;
-      }
-      notifyListeners();
-    });
-    month.addListener(notifyListeners);
-    year.addListener(notifyListeners);
-  }
+  FInlineCalendarController({required super.start, required super.end, required super.today});
 
   /// Advances the inline grid to show the next picker in the cycle.
   void cycle() {
-    switch (_type) {
+    switch (type) {
       case .day:
         showMonthPicker();
       case .month:
@@ -129,44 +172,16 @@ class FInlineCalendarController extends _GridCalendarController {
         showDayPicker();
     }
   }
+}
 
-  /// Shows the day picker for the given [month], or the current month if [month] is null.
-  void showDayPicker([DateTime? date]) {
-    day.reattach(
-      _clamp(start, switch (date) {
-        null => _current,
-        final m => DateTime.utc(m.year, m.month),
-      }, end),
-    );
-    _current = day.current;
-    _type = .day;
-    notifyListeners();
-  }
+/// A controller for an inline [FCalendar] with a split header whose month and years are independently togglable.
+class FInlineSplitCalendarController extends _GridCalendarController {
+  /// Creates a [FInlineSplitCalendarController].
+  FInlineSplitCalendarController({required super.start, required super.end, required super.today});
 
-  /// Shows the month picker for the given [date]'s year, or the current year if [date] is null.
-  void showMonthPicker([DateTime? date]) {
-    month.reattach(
-      _clamp(start, switch (date) {
-        null => _current,
-        final m => DateTime.utc(m.year, m.month),
-      }, end),
-    );
-    _type = .month;
-    notifyListeners();
-  }
+  /// Shows the month picker if not currently shown, and the day picker otherwise.
+  void toggleMonthPicker() => type == .month ? showDayPicker() : showMonthPicker();
 
-  /// Shows the year picker for the given [date]'s year, or the current year if [date] is null.
-  void showYearPicker([DateTime? date]) {
-    year.reattach(
-      _clamp(start, switch (date) {
-        null => _current,
-        final m => DateTime.utc(m.year, m.month),
-      }, end),
-    );
-    _type = .year;
-    notifyListeners();
-  }
-
-  /// The currently shown grid's type.
-  FCalendarPickerGridType get type => _type;
+  /// Shows the year picker if not currently shown, and the day picker otherwise.
+  void toggleYear() => type == .year ? showDayPicker() : showYearPicker();
 }
