@@ -25,6 +25,9 @@ class DayPicker extends StatelessWidget {
   final FLocalizations localization;
   final DateTime today;
   final bool Function(DateTime) selected;
+  final ScrollPhysics? scrollPhysics;
+  final ScrollCacheExtent? scrollCacheExtent;
+  final ScrollBehavior? scrollBehavior;
   final ValueChanged<DateTime> onPress;
   final ValueChanged<DateTime> onLongPress;
   final FCalendarDayBuilder builder;
@@ -35,6 +38,9 @@ class DayPicker extends StatelessWidget {
     required this.localization,
     required this.today,
     required this.selected,
+    required this.scrollPhysics,
+    required this.scrollCacheExtent,
+    required this.scrollBehavior,
     required this.onPress,
     required this.onLongPress,
     required this.builder,
@@ -64,6 +70,9 @@ class DayPicker extends StatelessWidget {
         },
         child: PageView.builder(
           controller: controller.controller,
+          physics: scrollPhysics,
+          scrollCacheExtent: scrollCacheExtent,
+          scrollBehavior: scrollBehavior,
           onPageChanged: (page) {
             controller.onPageChange(page);
             SemanticsService.sendAnnouncement(
@@ -102,6 +111,9 @@ class DayPicker extends StatelessWidget {
       ..add(DiagnosticsProperty('localization', localization))
       ..add(DiagnosticsProperty('today', today))
       ..add(ObjectFlagProperty.has('selected', selected))
+      ..add(DiagnosticsProperty('scrollPhysics', scrollPhysics))
+      ..add(DiagnosticsProperty('scrollCacheExtent', scrollCacheExtent))
+      ..add(DiagnosticsProperty('scrollBehavior', scrollBehavior))
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
       ..add(ObjectFlagProperty.has('builder', builder));
@@ -262,28 +274,28 @@ class FCalendarDayPickerController extends GridController {
     required super.initial,
     super.focused,
   }) : super(
-    columns: 7,
-    focusable: (month, date) {
-      final last = month.lastDayOfMonth;
-      if (date.day <= last.day) {
-        final preferred = DateTime.utc(month.year, month.month, date.day);
-        if (selectable(preferred)) {
-          return preferred;
-        }
-      }
+         columns: 7,
+         focusable: (month, date) {
+           final last = month.lastDayOfMonth;
+           if (date.day <= last.day) {
+             final preferred = DateTime.utc(month.year, month.month, date.day);
+             if (selectable(preferred)) {
+               return preferred;
+             }
+           }
 
-      for (var day = month; !day.isAfter(last); day = day.plus(days: 1)) {
-        if (selectable(day)) {
-          return day;
-        }
-      }
+           for (var day = month; !day.isAfter(last); day = day.plus(days: 1)) {
+             if (selectable(day)) {
+               return day;
+             }
+           }
 
-      return null;
-    },
-    step: (date, amount) => date.plus(days: amount),
-    from: (date) => (date.year - start.year) * 12 + (date.month - start.month),
-    to: (page) => .utc(start.year, start.month + page),
-  );
+           return null;
+         },
+         step: (date, amount) => date.plus(days: amount),
+         from: (date) => (date.year - start.year) * 12 + (date.month - start.month),
+         to: (page) => .utc(start.year, start.month + page),
+       );
 }
 
 /// A day picker's style.
@@ -324,7 +336,7 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
     required this.daySize,
     this.headerSpacing = 0,
     this.firstDayOfWeek,
-    this.daySpacing = 4,
+    this.daySpacing = 2,
   }) : assert(
          firstDayOfWeek == null || (DateTime.monday <= firstDayOfWeek && firstDayOfWeek <= DateTime.sunday),
          'firstDayOfWeek ($firstDayOfWeek) must be between DateTime.monday (1) and DateTime.sunday (7)',

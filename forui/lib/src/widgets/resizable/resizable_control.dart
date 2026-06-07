@@ -129,14 +129,3 @@ class _ManagedCascade extends FResizableManagedControl {
   @override
   int get hashCode => Object.hash(controller, onResizeUpdate, onResizeEnd);
 }
-
-// TODO: Add support for lifted resizable.
-class _Lifted extends FResizableControl with _$_LiftedMixin {
-  const _Lifted() : super._();
-
-  @override
-  FResizableController createController() => throw UnimplementedError();
-
-  @override
-  void _updateController(FResizableController _) {}
-}

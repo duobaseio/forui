@@ -71,16 +71,6 @@ class FOtpFieldManagedControl extends FOtpFieldControl with _$FOtpFieldManagedCo
   FOtpController createController() => controller ?? FOtpController(children: children, value: initial ?? .empty);
 }
 
-class _Lifted extends FOtpFieldControl with _$_LiftedMixin {
-  const _Lifted() : super._();
-
-  @override
-  FOtpController createController() => throw UnimplementedError();
-
-  @override
-  void _updateController(FOtpController _) {}
-}
-
 @internal
 extension InternalFOtpController on FOtpController {
   /// The currently focused item index.

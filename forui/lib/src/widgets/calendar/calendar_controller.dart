@@ -1,6 +1,12 @@
+import 'package:flutter/foundation.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
 import 'package:forui/src/widgets/calendar/grid.dart';
+
+part 'calendar_control.dart';
+
+part 'calendar_controller.control.dart';
 
 bool _daySelectable(DateTime start, DateTime date, DateTime end) => !date.isBefore(start) && !date.isAfter(end);
 
@@ -11,6 +17,8 @@ bool _yearSelectable(DateTime start, DateTime date, DateTime end) => start.year 
 
 DateTime _clamp(DateTime start, DateTime date, DateTime end) =>
     date.isBefore(start) ? start : (date.isAfter(end) ? end : date);
+
+DateTime _truncate(DateTime date) => .utc(date.year, date.month, date.day);
 
 /// The calendar grid type.
 enum FCalendarPickerGridType {
@@ -34,31 +42,31 @@ abstract class FCalendarController extends FChangeNotifier {
   /// The default selectable predicate that always returns true.
   static bool defaultSelectable(DateTime date) => true;
 
-  /// The start date, inclusive.
+  /// The start date, inclusive. Defaults to `DateTime.utc(1900)`.
   final DateTime start;
 
-  /// The end date, inclusive.
-  final DateTime end;
-
-  /// Today's date.
+  /// Today's date. Defaults to [DateTime.now].
   final DateTime today;
+
+  /// The end date, inclusive. Defaults to `DateTime.utc(2100)`.
+  final DateTime end;
 
   final bool Function(DateTime) _selectable;
   late DateTime _currentMonth;
 
   /// Creates a [FCalendarController].
   FCalendarController({
-    required DateTime start,
-    required DateTime end,
-    required DateTime today,
     this._selectable = defaultSelectable,
+    DateTime? start,
+    DateTime? today,
     DateTime? initial,
-  }) : start = .utc(start.year, start.month, start.day),
-       end = .utc(end.year, end.month, end.day),
-       today = .utc(today.year, today.month, today.day) {
-    _currentMonth = initial == null ? today : .utc(initial.year, initial.month);
-    assert(debugCheckInclusiveDateRange(start, today, end));
-    assert(debugCheckInclusiveDateRange(start, _currentMonth, end));
+    DateTime? end,
+  }) : start = _truncate(start ?? .utc(1900)),
+       today = _truncate(today ?? .now()),
+       end = _truncate(end ?? .utc(2100)) {
+    _currentMonth = initial == null ? this.today : .utc(initial.year, initial.month);
+    assert(debugCheckInclusiveDateRange(this.start, this.today, this.end));
+    assert(debugCheckInclusiveDateRange(this.start, _currentMonth, this.end));
   }
 
   /// The current year and month that the day picker shows.
@@ -77,7 +85,7 @@ abstract class _GridCalendarController extends FCalendarController {
 
   FCalendarPickerGridType _type = .day;
 
-  _GridCalendarController({required super.start, required super.end, required super.today}) {
+  _GridCalendarController({super.selectable, super.start, super.today, super.initial, super.end}) {
     day =
         FCalendarDayPickerController(
           start: start,
@@ -156,7 +164,7 @@ abstract class _GridCalendarController extends FCalendarController {
 /// A controller for a [FCalendar] that cycles through day/month/year grid pickers.
 class FGridCalendarController extends _GridCalendarController {
   /// Creates a [FGridCalendarController].
-  FGridCalendarController({required super.start, required super.end, required super.today});
+  FGridCalendarController({super.selectable, super.start, super.today, super.initial, super.end});
 
   /// Advances the inline grid to show the next picker in the cycle.
   void cycle() {
@@ -174,7 +182,7 @@ class FGridCalendarController extends _GridCalendarController {
 /// A controller for a [FCalendar] with a split header whose month and year grid pickers are independently togglable.
 class FGridSplitCalendarController extends _GridCalendarController {
   /// Creates a [FGridSplitCalendarController].
-  FGridSplitCalendarController({required super.start, required super.end, required super.today});
+  FGridSplitCalendarController({super.selectable, super.start, super.today, super.initial, super.end});
 
   /// Shows the month picker if not currently shown, and the day picker otherwise.
   void toggleMonthPicker() => type == .month ? showDayPicker() : showMonthPicker();
@@ -190,7 +198,7 @@ class FWheelCalendarController extends FCalendarController {
   bool _wheel = false;
 
   /// Creates a [FWheelCalendarController].
-  FWheelCalendarController({required super.start, required super.end, required super.today}) {
+  FWheelCalendarController({super.selectable, super.start, super.today, super.initial, super.end}) {
     day =
         FCalendarDayPickerController(
           start: start,

@@ -94,7 +94,8 @@ class _Single extends FDateSelectionManagedControl<DateTime?> {
       );
 
   @override
-  FDateSelectionController<DateTime?> createController() => controller ?? .single(initial: initial, toggleable: toggleable);
+  FDateSelectionController<DateTime?> createController() =>
+      controller ?? .single(initial: initial, toggleable: toggleable);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

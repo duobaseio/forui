@@ -119,7 +119,7 @@ class _ManagedControlMixin extends ControlMixin {
     required super.default_,
     required super.siblings,
     required super.listenable,
-  }) : assert(siblings.length == 1, '_ManagedControlMixin only supports exactly 2 variants.'),
+  }) : assert(siblings.length <= 1, '_ManagedControlMixin supports at most one sibling variant.'),
        super._();
 
   @override
@@ -157,10 +157,12 @@ class _ManagedControlMixin extends ControlMixin {
           $removeListener
           return (createController($_createParameters)$addListener, true);
 
+        ${siblings.isEmpty ? '' : '''
         // Lifted -> Managed
         case ${siblings.first.name}():
           $dispose
           return (createController($_createParameters)$addListener, true);
+        '''}
 
         ${element.isAbstract ? '''
         // Internal -> Internal (different type, e.g. Normal -> Cascade)

@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
@@ -16,8 +17,19 @@ class GridCalendar extends StatelessWidget {
   final FLocalizations localizations;
   final double width;
   final double height;
-  final ValueChanged<DateTime> onPress;
-  final ValueChanged<DateTime> onLongPress;
+  final ScrollPhysics? dayScrollPhysics;
+  final ScrollCacheExtent? dayScrollCacheExtent;
+  final ScrollBehavior? dayScrollBehavior;
+  final ScrollPhysics? monthScrollPhysics;
+  final ScrollCacheExtent? monthScrollCacheExtent;
+  final ScrollBehavior? monthScrollBehavior;
+  final ScrollPhysics? yearScrollPhysics;
+  final ScrollCacheExtent? yearScrollCacheExtent;
+  final ScrollBehavior? yearScrollBehavior;
+  final ValueChanged<DateTime> onDayPress;
+  final ValueChanged<DateTime> onDayLongPress;
+  final FCalendarHeaderBuilder<FGridCalendarController> headerBuilder;
+  final FCalendarFooterBuilder<FGridCalendarController> footerBuilder;
   final FCalendarDayBuilder dayBuilder;
   final FCalendarMonthBuilder monthBuilder;
   final FCalendarYearBuilder yearBuilder;
@@ -27,13 +39,24 @@ class GridCalendar extends StatelessWidget {
     required this.selectionController,
     required this.style,
     required this.localizations,
-    required this.onPress,
-    required this.onLongPress,
+    required this.width,
+    required this.height,
+    required this.dayScrollPhysics,
+    required this.dayScrollCacheExtent,
+    required this.dayScrollBehavior,
+    required this.monthScrollPhysics,
+    required this.monthScrollCacheExtent,
+    required this.monthScrollBehavior,
+    required this.yearScrollPhysics,
+    required this.yearScrollCacheExtent,
+    required this.yearScrollBehavior,
+    required this.onDayPress,
+    required this.onDayLongPress,
+    required this.headerBuilder,
+    required this.footerBuilder,
     required this.dayBuilder,
     required this.monthBuilder,
     required this.yearBuilder,
-    required this.width,
-    required this.height,
     super.key,
   });
 
@@ -46,14 +69,19 @@ class GridCalendar extends StatelessWidget {
         .day => [
           SizedBox(
             width: width,
-            child: Header.day(
-              style: style.headerStyle,
-              localizations: localizations,
-              monthYear: controller.day.current,
-              shown: false,
-              onPress: controller.cycle,
-              onPrevious: controller.day.hasPrevious ? controller.day.previous : null,
-              onNext: controller.day.hasNext ? controller.day.next : null,
+            child: headerBuilder(
+              context,
+              controller,
+              selectionController,
+              Header.day(
+                style: style.headerStyle,
+                localizations: localizations,
+                monthYear: controller.day.current,
+                shown: false,
+                onPress: controller.cycle,
+                onPrevious: controller.day.hasPrevious ? controller.day.previous : null,
+                onNext: controller.day.hasNext ? controller.day.next : null,
+              ),
             ),
           ),
           SizedBox(height: style.dayPickerStyle.headerSpacing),
@@ -63,22 +91,31 @@ class GridCalendar extends StatelessWidget {
             localization: localizations,
             today: controller.today,
             selected: selectionController.contains,
-            onPress: onPress,
-            onLongPress: onLongPress,
+            scrollPhysics: dayScrollPhysics,
+            scrollCacheExtent: dayScrollCacheExtent,
+            scrollBehavior: dayScrollBehavior,
+            onPress: onDayPress,
+            onLongPress: onDayLongPress,
             builder: dayBuilder,
           ),
+          footerBuilder(context, controller, selectionController),
         ],
         .month => [
           SizedBox(
             width: width,
-            child: Header.month(
-              style: style.headerStyle,
-              localizations: localizations,
-              year: controller.month.current,
-              shown: false,
-              onPress: controller.cycle,
-              onPrevious: controller.month.hasPrevious ? controller.month.previous : null,
-              onNext: controller.month.hasNext ? controller.month.next : null,
+            child: headerBuilder(
+              context,
+              controller,
+              selectionController,
+              Header.month(
+                style: style.headerStyle,
+                localizations: localizations,
+                year: controller.month.current,
+                shown: false,
+                onPress: controller.cycle,
+                onPrevious: controller.month.hasPrevious ? controller.month.previous : null,
+                onNext: controller.month.hasNext ? controller.month.next : null,
+              ),
             ),
           ),
           SizedBox(height: style.monthPickerStyle.headerSpacing),
@@ -90,25 +127,33 @@ class GridCalendar extends StatelessWidget {
                 controller: controller.month,
                 style: style.monthPickerStyle,
                 localization: localizations,
-                paged: true,
                 today: controller.today,
+                scrollPhysics: monthScrollPhysics,
+                scrollCacheExtent: monthScrollCacheExtent,
+                scrollBehavior: monthScrollBehavior,
                 onPress: controller.showDayPicker,
                 builder: monthBuilder,
               ),
             ),
           ),
+          footerBuilder(context, controller, selectionController),
         ],
         .year => [
           SizedBox(
             width: width,
-            child: Header.year(
-              style: style.headerStyle,
-              localizations: localizations,
-              decade: controller.year.current,
-              shown: false,
-              onPress: controller.cycle,
-              onPrevious: controller.year.hasPrevious ? controller.year.previous : null,
-              onNext: controller.year.hasNext ? controller.year.next : null,
+            child: headerBuilder(
+              context,
+              controller,
+              selectionController,
+              Header.year(
+                style: style.headerStyle,
+                localizations: localizations,
+                decade: controller.year.current,
+                shown: false,
+                onPress: controller.cycle,
+                onPrevious: controller.year.hasPrevious ? controller.year.previous : null,
+                onNext: controller.year.hasNext ? controller.year.next : null,
+              ),
             ),
           ),
           SizedBox(height: style.yearPickerStyle.headerSpacing),
@@ -121,11 +166,15 @@ class GridCalendar extends StatelessWidget {
                 style: style.yearPickerStyle,
                 localization: localizations,
                 today: controller.today,
+                scrollPhysics: yearScrollPhysics,
+                scrollCacheExtent: yearScrollCacheExtent,
+                scrollBehavior: yearScrollBehavior,
                 onPress: controller.showMonthPicker,
                 builder: yearBuilder,
               ),
             ),
           ),
+          footerBuilder(context, controller, selectionController),
         ],
       },
     ),
@@ -139,13 +188,24 @@ class GridCalendar extends StatelessWidget {
       ..add(DiagnosticsProperty('selectionController', selectionController))
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('localizations', localizations))
-      ..add(ObjectFlagProperty.has('onPress', onPress))
-      ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
+      ..add(DoubleProperty('width', width))
+      ..add(DoubleProperty('height', height))
+      ..add(DiagnosticsProperty('dayScrollPhysics', dayScrollPhysics))
+      ..add(DiagnosticsProperty('dayScrollCacheExtent', dayScrollCacheExtent))
+      ..add(DiagnosticsProperty('dayScrollBehavior', dayScrollBehavior))
+      ..add(DiagnosticsProperty('monthScrollPhysics', monthScrollPhysics))
+      ..add(DiagnosticsProperty('monthScrollCacheExtent', monthScrollCacheExtent))
+      ..add(DiagnosticsProperty('monthScrollBehavior', monthScrollBehavior))
+      ..add(DiagnosticsProperty('yearScrollPhysics', yearScrollPhysics))
+      ..add(DiagnosticsProperty('yearScrollCacheExtent', yearScrollCacheExtent))
+      ..add(DiagnosticsProperty('yearScrollBehavior', yearScrollBehavior))
+      ..add(ObjectFlagProperty.has('onPress', onDayPress))
+      ..add(ObjectFlagProperty.has('onLongPress', onDayLongPress))
+      ..add(ObjectFlagProperty.has('headerBuilder', headerBuilder))
+      ..add(ObjectFlagProperty.has('footerBuilder', footerBuilder))
       ..add(ObjectFlagProperty.has('dayBuilder', dayBuilder))
       ..add(ObjectFlagProperty.has('monthBuilder', monthBuilder))
-      ..add(ObjectFlagProperty.has('yearBuilder', yearBuilder))
-      ..add(DoubleProperty('width', width))
-      ..add(DoubleProperty('height', height));
+      ..add(ObjectFlagProperty.has('yearBuilder', yearBuilder));
   }
 }
 
@@ -157,8 +217,16 @@ class GridSplitCalendar extends StatelessWidget {
   final FLocalizations localizations;
   final double width;
   final double height;
+  final ScrollPhysics? dayScrollPhysics;
+  final ScrollCacheExtent? dayScrollCacheExtent;
+  final ScrollBehavior? dayScrollBehavior;
+  final ScrollPhysics? yearScrollPhysics;
+  final ScrollCacheExtent? yearScrollCacheExtent;
+  final ScrollBehavior? yearScrollBehavior;
   final ValueChanged<DateTime> onPress;
   final ValueChanged<DateTime> onLongPress;
+  final FCalendarHeaderBuilder<FGridSplitCalendarController> headerBuilder;
+  final FCalendarFooterBuilder<FGridSplitCalendarController> footerBuilder;
   final FCalendarDayBuilder dayBuilder;
   final FCalendarMonthBuilder monthBuilder;
   final FCalendarYearBuilder yearBuilder;
@@ -168,13 +236,21 @@ class GridSplitCalendar extends StatelessWidget {
     required this.selectionController,
     required this.style,
     required this.localizations,
+    required this.width,
+    required this.height,
+    required this.dayScrollPhysics,
+    required this.dayScrollCacheExtent,
+    required this.dayScrollBehavior,
+    required this.yearScrollPhysics,
+    required this.yearScrollCacheExtent,
+    required this.yearScrollBehavior,
     required this.onPress,
     required this.onLongPress,
+    required this.headerBuilder,
+    required this.footerBuilder,
     required this.dayBuilder,
     required this.monthBuilder,
     required this.yearBuilder,
-    required this.width,
-    required this.height,
     super.key,
   });
 
@@ -187,18 +263,23 @@ class GridSplitCalendar extends StatelessWidget {
         .day => [
           SizedBox(
             width: width,
-            child: SplitHeader(
-              style: style.headerStyle,
-              localizations: localizations,
-              date: controller.day.current,
-              previousSemanticsLabel: localizations.calendarPreviousMonthSemanticsLabel,
-              nextSemanticsLabel: localizations.calendarNextMonthSemanticsLabel,
-              month: false,
-              year: false,
-              onMonth: controller.toggleMonthPicker,
-              onYear: controller.toggleYearPicker,
-              onPrevious: controller.day.hasPrevious ? controller.day.previous : null,
-              onNext: controller.day.hasNext ? controller.day.next : null,
+            child: headerBuilder(
+              context,
+              controller,
+              selectionController,
+              SplitHeader(
+                style: style.headerStyle,
+                localizations: localizations,
+                date: controller.day.current,
+                previousSemanticsLabel: localizations.calendarPreviousMonthSemanticsLabel,
+                nextSemanticsLabel: localizations.calendarNextMonthSemanticsLabel,
+                month: false,
+                year: false,
+                onMonth: controller.toggleMonthPicker,
+                onYear: controller.toggleYearPicker,
+                onPrevious: controller.day.hasPrevious ? controller.day.previous : null,
+                onNext: controller.day.hasNext ? controller.day.next : null,
+              ),
             ),
           ),
           SizedBox(height: style.dayPickerStyle.headerSpacing),
@@ -208,23 +289,32 @@ class GridSplitCalendar extends StatelessWidget {
             localization: localizations,
             today: controller.today,
             selected: selectionController.contains,
+            scrollPhysics: dayScrollPhysics,
+            scrollCacheExtent: dayScrollCacheExtent,
+            scrollBehavior: dayScrollBehavior,
             onPress: onPress,
             onLongPress: onLongPress,
             builder: dayBuilder,
           ),
+          footerBuilder(context, controller, selectionController),
         ],
         .month => [
           SizedBox(
             width: width,
             // The month grid shows a single year; the year is changed via the year target.
-            child: SplitHeader.single(
-              style: style.headerStyle,
-              localizations: localizations,
-              date: controller.day.current,
-              month: true,
-              year: false,
-              onMonth: controller.toggleMonthPicker,
-              onYear: controller.toggleYearPicker,
+            child: headerBuilder(
+              context,
+              controller,
+              selectionController,
+              SplitHeader.single(
+                style: style.headerStyle,
+                localizations: localizations,
+                date: controller.day.current,
+                month: true,
+                year: false,
+                onMonth: controller.toggleMonthPicker,
+                onYear: controller.toggleYearPicker,
+              ),
             ),
           ),
           SizedBox(height: style.monthPickerStyle.headerSpacing),
@@ -232,33 +322,38 @@ class GridSplitCalendar extends StatelessWidget {
             height: height - style.monthPickerStyle.headerSpacing,
             child: Align(
               alignment: .topCenter,
-              child: MonthPicker(
+              child: MonthPicker.single(
                 controller: controller.month,
                 style: style.monthPickerStyle,
                 localization: localizations,
-                paged: false,
                 today: controller.today,
                 onPress: controller.showDayPicker,
                 builder: monthBuilder,
               ),
             ),
           ),
+          footerBuilder(context, controller, selectionController),
         ],
         .year => [
           SizedBox(
             width: width,
-            child: SplitHeader(
-              style: style.headerStyle,
-              localizations: localizations,
-              date: controller.day.current,
-              previousSemanticsLabel: localizations.calendarPreviousYearsSemanticsLabel,
-              nextSemanticsLabel: localizations.calendarNextYearsSemanticsLabel,
-              month: false,
-              year: true,
-              onMonth: controller.toggleMonthPicker,
-              onYear: controller.toggleYearPicker,
-              onPrevious: controller.year.hasPrevious ? controller.year.previous : null,
-              onNext: controller.year.hasNext ? controller.year.next : null,
+            child: headerBuilder(
+              context,
+              controller,
+              selectionController,
+              SplitHeader(
+                style: style.headerStyle,
+                localizations: localizations,
+                date: controller.day.current,
+                previousSemanticsLabel: localizations.calendarPreviousYearsSemanticsLabel,
+                nextSemanticsLabel: localizations.calendarNextYearsSemanticsLabel,
+                month: false,
+                year: true,
+                onMonth: controller.toggleMonthPicker,
+                onYear: controller.toggleYearPicker,
+                onPrevious: controller.year.hasPrevious ? controller.year.previous : null,
+                onNext: controller.year.hasNext ? controller.year.next : null,
+              ),
             ),
           ),
           SizedBox(height: style.yearPickerStyle.headerSpacing),
@@ -271,11 +366,15 @@ class GridSplitCalendar extends StatelessWidget {
                 style: style.yearPickerStyle,
                 localization: localizations,
                 today: controller.today,
+                scrollPhysics: yearScrollPhysics,
+                scrollCacheExtent: yearScrollCacheExtent,
+                scrollBehavior: yearScrollBehavior,
                 onPress: (year) => controller.showDayPicker(.utc(year.year, controller.currentMonth.month)),
                 builder: yearBuilder,
               ),
             ),
           ),
+          footerBuilder(context, controller, selectionController),
         ],
       },
     ),
@@ -289,12 +388,20 @@ class GridSplitCalendar extends StatelessWidget {
       ..add(DiagnosticsProperty('selectionController', selectionController))
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('localizations', localizations))
+      ..add(DoubleProperty('width', width))
+      ..add(DoubleProperty('height', height))
+      ..add(DiagnosticsProperty('dayScrollPhysics', dayScrollPhysics))
+      ..add(DiagnosticsProperty('dayScrollCacheExtent', dayScrollCacheExtent))
+      ..add(DiagnosticsProperty('dayScrollBehavior', dayScrollBehavior))
+      ..add(DiagnosticsProperty('yearScrollPhysics', yearScrollPhysics))
+      ..add(DiagnosticsProperty('yearScrollCacheExtent', yearScrollCacheExtent))
+      ..add(DiagnosticsProperty('yearScrollBehavior', yearScrollBehavior))
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
+      ..add(ObjectFlagProperty.has('headerBuilder', headerBuilder))
+      ..add(ObjectFlagProperty.has('footerBuilder', footerBuilder))
       ..add(ObjectFlagProperty.has('dayBuilder', dayBuilder))
       ..add(ObjectFlagProperty.has('monthBuilder', monthBuilder))
-      ..add(ObjectFlagProperty.has('yearBuilder', yearBuilder))
-      ..add(DoubleProperty('width', width))
-      ..add(DoubleProperty('height', height));
+      ..add(ObjectFlagProperty.has('yearBuilder', yearBuilder));
   }
 }

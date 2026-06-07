@@ -32,17 +32,12 @@ class Header extends StatelessWidget {
     super.key,
   }) : navigation = true;
 
-  const Header.single({
-    required this.style,
-    required this.label,
-    required this.shown,
-    required this.onPress,
-    super.key,
-  }) : navigation = false,
-       previousSemanticsLabel = '',
-       nextSemanticsLabel = '',
-       onNext = null,
-       onPrevious = null;
+  const Header.single({required this.style, required this.label, required this.shown, required this.onPress, super.key})
+    : navigation = false,
+      previousSemanticsLabel = '',
+      nextSemanticsLabel = '',
+      onNext = null,
+      onPrevious = null;
 
   factory Header.day({
     required FCalendarHeaderStyle style,
@@ -141,25 +136,28 @@ class Header extends StatelessWidget {
   }
 
   @override
-  Widget build(BuildContext context) => Row(
-    children: [
-      _Tappable(style: style, label: label, shown: shown, onPress: onPress),
-      if (navigation) ...[
-        const Spacer(),
-        FButton.icon(
-          style: style.buttonStyle,
-          onPress: onPrevious,
-          semanticsLabel: previousSemanticsLabel,
-          child: style.previousIcon(context),
-        ),
-        FButton.icon(
-          style: style.buttonStyle,
-          onPress: onNext,
-          semanticsLabel: nextSemanticsLabel,
-          child: style.nextIcon(context),
-        ),
+  Widget build(BuildContext context) => Padding(
+    padding: style.padding,
+    child: Row(
+      children: [
+        _Tappable(style: style, label: label, shown: shown, onPress: onPress),
+        if (navigation) ...[
+          const Spacer(),
+          FButton.icon(
+            style: style.buttonStyle,
+            onPress: onPrevious,
+            semanticsLabel: previousSemanticsLabel,
+            child: style.previousIcon(context),
+          ),
+          FButton.icon(
+            style: style.buttonStyle,
+            onPress: onNext,
+            semanticsLabel: nextSemanticsLabel,
+            child: style.nextIcon(context),
+          ),
+        ],
       ],
-    ],
+    ),
   );
 
   @override
@@ -239,31 +237,35 @@ class SplitHeader extends StatelessWidget {
       onPress: onMonth,
     );
 
-    return Row(
-      children: [
-        if (DateFormat.yMMMM(locale).pattern case final pattern? when pattern.indexOf('y') < pattern.indexOf('M')) ...[
-          yearTappable,
-          monthTappable,
-        ] else ...[
-          monthTappable,
-          yearTappable,
+    return Padding(
+      padding: style.padding,
+      child: Row(
+        children: [
+          if (DateFormat.yMMMM(locale).pattern case final pattern?
+              when pattern.indexOf('y') < pattern.indexOf('M')) ...[
+            yearTappable,
+            monthTappable,
+          ] else ...[
+            monthTappable,
+            yearTappable,
+          ],
+          if (navigation) ...[
+            const Spacer(),
+            FButton.icon(
+              style: style.buttonStyle,
+              onPress: onPrevious,
+              semanticsLabel: previousSemanticsLabel,
+              child: style.previousIcon(context),
+            ),
+            FButton.icon(
+              style: style.buttonStyle,
+              onPress: onNext,
+              semanticsLabel: nextSemanticsLabel,
+              child: style.nextIcon(context),
+            ),
+          ],
         ],
-        if (navigation) ...[
-          const Spacer(),
-          FButton.icon(
-            style: style.buttonStyle,
-            onPress: onPrevious,
-            semanticsLabel: previousSemanticsLabel,
-            child: style.previousIcon(context),
-          ),
-          FButton.icon(
-            style: style.buttonStyle,
-            onPress: onNext,
-            semanticsLabel: nextSemanticsLabel,
-            child: style.nextIcon(context),
-          ),
-        ],
-      ],
+      ),
     );
   }
 
@@ -300,7 +302,7 @@ class _Tappable extends StatelessWidget {
     onPress: onPress,
     builder: (context, variants, _) => Container(
       decoration: style.headerDecoration.resolve(variants),
-      padding: const .directional(start: 6, end: 2, top: 4, bottom: 4),
+      padding: style.tappablePadding,
       child: Row(
         mainAxisSize: .min,
         spacing: 2,
@@ -331,9 +333,18 @@ class _Tappable extends StatelessWidget {
 
 /// A calendar header's style.
 class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions {
+  /// The padding around the entire header. Defaults to `EdgeInsetsDirectional.only(start: 4)`.
+  @override
+  final EdgeInsetsGeometry padding;
+
   /// The month and year tap targets' decoration. Defaults to a [FColors.secondary] background when hovered or pressed.
   @override
   final FVariants<FTappableVariantConstraint, FTappableVariant, Decoration, DecorationDelta> headerDecoration;
+
+  /// The month and year tap targets' padding. Defaults to `EdgeInsetsDirectional.only(start: 6, end: 2, top: 4,
+  /// bottom: 4)`.
+  @override
+  final EdgeInsetsGeometry tappablePadding;
 
   /// The month and year labels' text style.
   @override
@@ -377,6 +388,8 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
     required this.toggleIcon,
     required this.previousIcon,
     required this.nextIcon,
+    this.padding = .zero,
+    this.tappablePadding = const .directional(start: 8, end: 2, top: 4, bottom: 4),
     this.animationDuration = const Duration(milliseconds: 100),
   });
 

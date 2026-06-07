@@ -24,20 +24,38 @@ class MonthPicker extends StatelessWidget {
   final FCalendarMonthPickerStyle style;
   final FLocalizations localization;
   final DateTime today;
+  final ScrollPhysics? scrollPhysics;
+  final ScrollCacheExtent? scrollCacheExtent;
+  final ScrollBehavior? scrollBehavior;
   final ValueChanged<DateTime> onPress;
   final FCalendarMonthBuilder builder;
-  final bool paged;
 
+  /// Creates a paged month picker that swipes between years.
   const MonthPicker({
+    required this.controller,
+    required this.style,
+    required this.localization,
+    required this.today,
+    required this.scrollPhysics,
+    required this.scrollCacheExtent,
+    required this.scrollBehavior,
+    required this.onPress,
+    required this.builder,
+    super.key,
+  });
+
+  /// Creates a non-paged month picker that shows a single year and does not scroll.
+  const MonthPicker.single({
     required this.controller,
     required this.style,
     required this.localization,
     required this.today,
     required this.onPress,
     required this.builder,
-    required this.paged,
     super.key,
-  });
+  }) : scrollPhysics = const NeverScrollableScrollPhysics(),
+       scrollCacheExtent = null,
+       scrollBehavior = null;
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +80,9 @@ class MonthPicker extends StatelessWidget {
         },
         child: PageView.builder(
           controller: controller.controller,
-          physics: paged ? null : const NeverScrollableScrollPhysics(),
+          physics: scrollPhysics,
+          scrollCacheExtent: scrollCacheExtent,
+          scrollBehavior: scrollBehavior,
           onPageChanged: (page) {
             controller.onPageChange(page);
             SemanticsService.sendAnnouncement(
@@ -98,9 +118,11 @@ class MonthPicker extends StatelessWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('localization', localization))
       ..add(DiagnosticsProperty('today', today))
+      ..add(DiagnosticsProperty('scrollPhysics', scrollPhysics))
+      ..add(DiagnosticsProperty('scrollCacheExtent', scrollCacheExtent))
+      ..add(DiagnosticsProperty('scrollBehavior', scrollBehavior))
       ..add(ObjectFlagProperty.has('onPress', onPress))
-      ..add(ObjectFlagProperty.has('builder', builder))
-      ..add(FlagProperty('paged', value: paged, ifTrue: 'paged', ifFalse: 'not paged'));
+      ..add(ObjectFlagProperty.has('builder', builder));
   }
 }
 

@@ -22,6 +22,9 @@ class YearPicker extends StatelessWidget {
   final FCalendarYearPickerStyle style;
   final FLocalizations localization;
   final DateTime today;
+  final ScrollPhysics? scrollPhysics;
+  final ScrollCacheExtent? scrollCacheExtent;
+  final ScrollBehavior? scrollBehavior;
   final ValueChanged<DateTime> onPress;
   final FCalendarYearBuilder builder;
 
@@ -30,6 +33,9 @@ class YearPicker extends StatelessWidget {
     required this.style,
     required this.localization,
     required this.today,
+    required this.scrollPhysics,
+    required this.scrollCacheExtent,
+    required this.scrollBehavior,
     required this.onPress,
     required this.builder,
     super.key,
@@ -58,6 +64,9 @@ class YearPicker extends StatelessWidget {
         },
         child: PageView.builder(
           controller: controller.controller,
+          physics: scrollPhysics,
+          scrollCacheExtent: scrollCacheExtent,
+          scrollBehavior: scrollBehavior,
           onPageChanged: (page) {
             controller.onPageChange(page);
             final decade = controller.to(page);
@@ -94,6 +103,9 @@ class YearPicker extends StatelessWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('localization', localization))
       ..add(DiagnosticsProperty('today', today))
+      ..add(DiagnosticsProperty('scrollPhysics', scrollPhysics))
+      ..add(DiagnosticsProperty('scrollCacheExtent', scrollCacheExtent))
+      ..add(DiagnosticsProperty('scrollBehavior', scrollBehavior))
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(ObjectFlagProperty.has('builder', builder));
   }
