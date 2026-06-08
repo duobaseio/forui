@@ -6,7 +6,10 @@ void main() {
   group('FDateSelectionController.single(...)', () {
     test(
       'constructor converts date time',
-      () => expect(FDateSelectionController.single(initial: DateTime(2024, 11, 30, 12)).value, DateTime.utc(2024, 11, 30)),
+      () => expect(
+        FDateSelectionController.single(initial: DateTime(2024, 11, 30, 12)).value,
+        DateTime.utc(2024, 11, 30),
+      ),
     );
 
     for (final (date, expected) in [
@@ -122,7 +125,8 @@ void main() {
 
     test(
       'constructor throws error when end before start',
-      () => expect(() => FDateSelectionController.range(initial: (DateTime(2025), DateTime(2024))), throwsAssertionError),
+      () =>
+          expect(() => FDateSelectionController.range(initial: (DateTime(2025), DateTime(2024))), throwsAssertionError),
     );
 
     for (final (initial, date, expected) in [
@@ -147,7 +151,11 @@ void main() {
       ((DateTime(2024), DateTime(2025)), DateTime(2023), (DateTime.utc(2023), DateTime.utc(2025))), // extends before
       ((DateTime(2024), DateTime(2025)), DateTime(2026), (DateTime.utc(2024), DateTime.utc(2026))), // extends after
       ((DateTime(2024), DateTime(2027)), DateTime(2025), (DateTime.utc(2024), DateTime.utc(2025))), // shrinks the end
-      ((DateTime(2024), DateTime(2025)), DateTime(2024, 6, 1, 8), (DateTime.utc(2024), DateTime.utc(2024, 6))), // truncates
+      (
+        (DateTime(2024), DateTime(2025)),
+        DateTime(2024, 6, 1, 8),
+        (DateTime.utc(2024), DateTime.utc(2024, 6)),
+      ), // truncates
     ]) {
       test('select($date) initial=$initial', () {
         final controller = FDateSelectionController.range(initial: initial)..select(date);

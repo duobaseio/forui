@@ -34,6 +34,9 @@ Widget _harness(FCalendarYearPickerController controller, {required FThemeData t
             style: .inherit(colors: t.colors, typography: t.typography, style: t.style),
             localization: FLocalizations.of(context) ?? FDefaultLocalizations(),
             today: today ?? _initial,
+            scrollPhysics: null,
+            scrollCacheExtent: null,
+            scrollBehavior: null,
             onPress: (_) {},
             builder: FCalendar.defaultYearBuilder,
           );
@@ -56,7 +59,11 @@ void main() {
 
       testWidgets('disabled', (tester) async {
         await tester.pumpWidget(
-          _harness(_controller(selectable: (date) => date.year.isOdd), theme: theme.data, today: .utc(2024)),
+          _harness(
+            _controller(selectable: (date) => date.year.isOdd),
+            theme: theme.data,
+            today: .utc(2024),
+          ),
         );
         await expectGolden(tester, 'disabled');
       });

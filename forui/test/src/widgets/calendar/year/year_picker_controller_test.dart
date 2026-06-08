@@ -24,25 +24,25 @@ FCalendarYearPickerController _controller({
   ),
 );
 
-Widget _harness(
-  FCalendarYearPickerController controller, {
-  DateTime? today,
-  ValueChanged<DateTime>? onPress,
-}) => TestScaffold.app(
-  child: Builder(
-    builder: (context) {
-      final theme = context.theme;
-      return YearPicker(
-        controller: controller,
-        style: .inherit(colors: theme.colors, typography: theme.typography, style: theme.style),
-        localization: FLocalizations.of(context) ?? FDefaultLocalizations(),
-        today: today ?? .utc(2024),
-        onPress: onPress ?? (_) {},
-        builder: FCalendar.defaultYearBuilder,
-      );
-    },
-  ),
-);
+Widget _harness(FCalendarYearPickerController controller, {DateTime? today, ValueChanged<DateTime>? onPress}) =>
+    TestScaffold.app(
+      child: Builder(
+        builder: (context) {
+          final theme = context.theme;
+          return YearPicker(
+            controller: controller,
+            style: .inherit(colors: theme.colors, typography: theme.typography, style: theme.style),
+            localization: FLocalizations.of(context) ?? FDefaultLocalizations(),
+            today: today ?? .utc(2024),
+            scrollPhysics: null,
+            scrollCacheExtent: null,
+            scrollBehavior: null,
+            onPress: onPress ?? (_) {},
+            builder: FCalendar.defaultYearBuilder,
+          );
+        },
+      ),
+    );
 
 void main() {
   group('constructor', () {

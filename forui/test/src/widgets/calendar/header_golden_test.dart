@@ -322,13 +322,7 @@ void main() {
         await tester.pumpWidget(
           _harness(
             theme: theme.data,
-            header: (s, l) => Header.singleMonth(
-              style: s,
-              localizations: l,
-              year: _date,
-              shown: false,
-              onPress: () {},
-            ),
+            header: (s, l) => Header.singleMonth(style: s, localizations: l, year: _date, shown: false, onPress: () {}),
           ),
         );
         await expectGolden(tester, 'factory-single-month');
@@ -338,13 +332,8 @@ void main() {
         await tester.pumpWidget(
           _harness(
             theme: theme.data,
-            header: (s, l) => Header.singleDay(
-              style: s,
-              localizations: l,
-              monthYear: _date,
-              shown: false,
-              onPress: () {},
-            ),
+            header: (s, l) =>
+                Header.singleDay(style: s, localizations: l, monthYear: _date, shown: false, onPress: () {}),
           ),
         );
         await expectGolden(tester, 'factory-single-day');
@@ -354,13 +343,8 @@ void main() {
         await tester.pumpWidget(
           _harness(
             theme: theme.data,
-            header: (s, l) => Header.singleDay(
-              style: s,
-              localizations: l,
-              monthYear: _date,
-              shown: true,
-              onPress: () {},
-            ),
+            header: (s, l) =>
+                Header.singleDay(style: s, localizations: l, monthYear: _date, shown: true, onPress: () {}),
           ),
         );
         await expectGolden(tester, 'factory-single-day-expanded');

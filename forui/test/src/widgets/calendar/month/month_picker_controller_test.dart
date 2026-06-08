@@ -24,26 +24,25 @@ FCalendarMonthPickerController _controller({
   ),
 );
 
-Widget _harness(
-  FCalendarMonthPickerController controller, {
-  DateTime? today,
-  ValueChanged<DateTime>? onPress,
-}) => TestScaffold.app(
-  child: Builder(
-    builder: (context) {
-      final theme = context.theme;
-      return MonthPicker(
-        controller: controller,
-        style: .inherit(colors: theme.colors, typography: theme.typography, style: theme.style),
-        localization: FLocalizations.of(context) ?? FDefaultLocalizations(),
-        today: today ?? .utc(2024, 6),
-        paged: true,
-        onPress: onPress ?? (_) {},
-        builder: FCalendar.defaultMonthBuilder,
-      );
-    },
-  ),
-);
+Widget _harness(FCalendarMonthPickerController controller, {DateTime? today, ValueChanged<DateTime>? onPress}) =>
+    TestScaffold.app(
+      child: Builder(
+        builder: (context) {
+          final theme = context.theme;
+          return MonthPicker(
+            controller: controller,
+            style: .inherit(colors: theme.colors, typography: theme.typography, style: theme.style),
+            localization: FLocalizations.of(context) ?? FDefaultLocalizations(),
+            today: today ?? .utc(2024, 6),
+            scrollPhysics: null,
+            scrollCacheExtent: null,
+            scrollBehavior: null,
+            onPress: onPress ?? (_) {},
+            builder: FCalendar.defaultMonthBuilder,
+          );
+        },
+      ),
+    );
 
 void main() {
   group('constructor', () {
@@ -132,11 +131,7 @@ void main() {
     });
 
     test('does nothing when clamped against the range', () async {
-      final controller = _controller(
-        start: .utc(2024, 6),
-        end: .utc(2024, 6, 30),
-        initial: .utc(2024, 6),
-      );
+      final controller = _controller(start: .utc(2024, 6), end: .utc(2024, 6, 30), initial: .utc(2024, 6));
       await controller.focus(.utc(2024, 6));
 
       await controller.move(.right, .ltr);

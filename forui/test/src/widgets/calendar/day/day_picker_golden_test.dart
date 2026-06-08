@@ -40,10 +40,18 @@ Widget _harness(
       final t = context.theme;
       return DayPicker(
         controller: controller,
-        style: .inherit(colors: t.colors, typography: t.typography, style: t.style, touch: context.platformVariant.touch),
+        style: .inherit(
+          colors: t.colors,
+          typography: t.typography,
+          style: t.style,
+          touch: context.platformVariant.touch,
+        ),
         localization: FLocalizations.of(context) ?? FDefaultLocalizations(),
         today: today ?? _initial,
         selected: selected ?? (_) => false,
+        scrollPhysics: null,
+        scrollCacheExtent: null,
+        scrollBehavior: null,
         onPress: (_) {},
         onLongPress: (_) {},
         builder: FCalendar.defaultDayBuilder,
@@ -62,12 +70,7 @@ void main() {
     group('${theme.name} resting', () {
       testWidgets('range', (tester) async {
         await tester.pumpWidget(
-          _harness(
-            _controller(),
-            theme: theme.data,
-            today: .utc(2024, 6, 5),
-            selected: _range(13, 18),
-          ),
+          _harness(_controller(), theme: theme.data, today: .utc(2024, 6, 5), selected: _range(13, 18)),
         );
         await expectGolden(tester, 'range');
       });

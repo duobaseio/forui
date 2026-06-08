@@ -40,6 +40,9 @@ Widget _harness(
         localization: FLocalizations.of(context) ?? FDefaultLocalizations(),
         today: today ?? .utc(2024, 6, 15),
         selected: selected ?? (_) => false,
+        scrollPhysics: null,
+        scrollCacheExtent: null,
+        scrollBehavior: null,
         onPress: onPress ?? (_) {},
         onLongPress: onLongPress ?? (_) {},
         builder: FCalendar.defaultDayBuilder,
@@ -135,11 +138,7 @@ void main() {
     });
 
     test('does nothing when clamped against the range', () async {
-      final controller = _controller(
-        start: .utc(2024, 6, 15),
-        end: .utc(2024, 6, 15),
-        initial: .utc(2024, 6, 15),
-      );
+      final controller = _controller(start: .utc(2024, 6, 15), end: .utc(2024, 6, 15), initial: .utc(2024, 6, 15));
       await controller.focus(.utc(2024, 6, 15));
 
       await controller.move(.right, .ltr);
@@ -404,11 +403,7 @@ void main() {
 
   group('from / to', () {
     test('round-trips month and page index across a year boundary', () {
-      final controller = _controller(
-        start: .utc(2024),
-        end: .utc(2025, 12, 31),
-        initial: .utc(2024),
-      );
+      final controller = _controller(start: .utc(2024), end: .utc(2025, 12, 31), initial: .utc(2024));
 
       expect(controller.from(.utc(2024)), 0);
       expect(controller.from(.utc(2024, 12)), 11);

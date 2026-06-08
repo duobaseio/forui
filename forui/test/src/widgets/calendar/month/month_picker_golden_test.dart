@@ -34,7 +34,9 @@ Widget _harness(FCalendarMonthPickerController controller, {required FThemeData 
             style: .inherit(colors: t.colors, typography: t.typography, style: t.style),
             localization: FLocalizations.of(context) ?? FDefaultLocalizations(),
             today: today ?? _initial,
-            paged: true,
+            scrollPhysics: null,
+            scrollCacheExtent: null,
+            scrollBehavior: null,
             onPress: (_) {},
             builder: FCalendar.defaultMonthBuilder,
           );
@@ -57,7 +59,11 @@ void main() {
 
       testWidgets('disabled', (tester) async {
         await tester.pumpWidget(
-          _harness(_controller(selectable: (date) => date.month.isOdd), theme: theme.data, today: .utc(2024, 6)),
+          _harness(
+            _controller(selectable: (date) => date.month.isOdd),
+            theme: theme.data,
+            today: .utc(2024, 6),
+          ),
         );
         await expectGolden(tester, 'disabled');
       });
