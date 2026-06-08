@@ -270,6 +270,6 @@ class FCalendarYearPickerStyle with Diagnosticable, _$FCalendarYearPickerStyleFu
     required FStyle style,
   }) => FCalendarYearPickerStyle(
     yearStyles: .inherit(colors: colors, typography: typography, style: style),
-    yearSize: Size(DateTime.daysPerWeek * style.sizes.calendar / _columns, style.sizes.calendar),
+    yearSize: Size(DateTime.daysPerWeek * style.sizes.calendar / 3, style.sizes.calendar),
   );
 }

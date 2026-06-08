@@ -149,7 +149,7 @@ enum Style {
     null,
     <String>['calendar-month-picker', 'calendarmonthpicker'],
     <String>['FCalendarMonthPickerStyle'],
-    'FCalendarMonthPickerStyle calendarMonthPickerStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FCalendarMonthPickerStyle(\n  monthStyles: .inherit(colors: colors, typography: typography, style: style),\n  monthSize: Size(\n    DateTime.daysPerWeek * style.sizes.calendar / _columns,\n    style.sizes.calendar,\n  ),\n  headerSpacing: 6,\n  monthSpacing: 4,\n);\n',
+    'FCalendarMonthPickerStyle calendarMonthPickerStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FCalendarMonthPickerStyle(\n  monthStyles: .inherit(colors: colors, typography: typography, style: style),\n  monthSize: Size(\n    DateTime.daysPerWeek * style.sizes.calendar / 3,\n    style.sizes.calendar,\n  ),\n  headerSpacing: 6,\n  monthSpacing: 4,\n);\n',
   ),
   fcalendarmonthstyles(
     'FCalendarMonthStyles',
@@ -170,7 +170,7 @@ enum Style {
     null,
     <String>['calendar-year-picker', 'calendaryearpicker'],
     <String>['FCalendarYearPickerStyle'],
-    'FCalendarYearPickerStyle calendarYearPickerStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FCalendarYearPickerStyle(\n  yearStyles: .inherit(colors: colors, typography: typography, style: style),\n  yearSize: Size(\n    DateTime.daysPerWeek * style.sizes.calendar / _columns,\n    style.sizes.calendar,\n  ),\n  headerSpacing: 6,\n  yearSpacing: 4,\n);\n',
+    'FCalendarYearPickerStyle calendarYearPickerStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n}) => FCalendarYearPickerStyle(\n  yearStyles: .inherit(colors: colors, typography: typography, style: style),\n  yearSize: Size(\n    DateTime.daysPerWeek * style.sizes.calendar / 3,\n    style.sizes.calendar,\n  ),\n  headerSpacing: 6,\n  yearSpacing: 4,\n);\n',
   ),
   fcalendaryearstyles(
     'FCalendarYearStyles',

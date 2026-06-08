@@ -284,6 +284,6 @@ class FCalendarMonthPickerStyle with Diagnosticable, _$FCalendarMonthPickerStyle
     required FStyle style,
   }) => FCalendarMonthPickerStyle(
     monthStyles: .inherit(colors: colors, typography: typography, style: style),
-    monthSize: Size(DateTime.daysPerWeek * style.sizes.calendar / _columns, style.sizes.calendar),
+    monthSize: Size(DateTime.daysPerWeek * style.sizes.calendar / 3, style.sizes.calendar),
   );
 }
