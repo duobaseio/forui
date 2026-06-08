@@ -76,6 +76,9 @@ class FLineCalendar extends StatelessWidget {
   /// Defaults to [ScrollViewKeyboardDismissBehavior.manual].
   final ScrollViewKeyboardDismissBehavior keyboardDismissBehavior;
 
+  /// Returns whether a date is selectable. Defaults to [FCalendarController.defaultSelectable].
+  final bool Function(DateTime) selectable;
+
   /// The builder used to build a line calendar item. Defaults to returning the given child.
   ///
   /// The `child` is the default content with no alterations. Consider wrapping the `child` and other custom decoration
@@ -90,6 +93,7 @@ class FLineCalendar extends StatelessWidget {
     this.physics,
     this.scrollCacheExtent,
     this.keyboardDismissBehavior = .manual,
+    this.selectable = FCalendarController.defaultSelectable,
     this.builder = defaultBuilder,
     super.key,
   });
@@ -105,6 +109,7 @@ class FLineCalendar extends StatelessWidget {
       keyboardDismissBehavior: keyboardDismissBehavior,
       scale: MediaQuery.textScalerOf(context),
       textStyle: DefaultTextStyle.of(context).style,
+      selectable: selectable,
       builder: builder,
       constraints: constraints,
     ),
@@ -120,6 +125,7 @@ class FLineCalendar extends StatelessWidget {
       ..add(DiagnosticsProperty('physics', physics))
       ..add(DiagnosticsProperty('scrollCacheExtent', scrollCacheExtent))
       ..add(DiagnosticsProperty('keyboardDismissBehavior', keyboardDismissBehavior))
+      ..add(ObjectFlagProperty.has('selectable', selectable))
       ..add(ObjectFlagProperty.has('builder', builder));
   }
 }

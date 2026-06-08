@@ -8,10 +8,11 @@ typedef FLineCalendarItemData = ({FLineCalendarStyle style, DateTime date, Set<F
 
 @internal
 class Item extends StatelessWidget {
-  final FCalendarController<DateTime?> controller;
+  final FDateSelectionController<DateTime?> controller;
   final FLineCalendarStyle style;
   final DateTime date;
   final bool today;
+  final bool Function(DateTime) selectable;
   final ValueWidgetBuilder<FLineCalendarItemData> builder;
 
   const Item({
@@ -19,6 +20,7 @@ class Item extends StatelessWidget {
     required this.style,
     required this.date,
     required this.today,
+    required this.selectable,
     required this.builder,
     super.key,
   });
@@ -30,7 +32,7 @@ class Item extends StatelessWidget {
       style: style.tappableStyle,
       semanticsLabel: (FLocalizations.of(context) ?? FDefaultLocalizations()).fullDate(date),
       selected: selected == date,
-      onPress: controller.selectable(date) ? () => controller.select(date) : null,
+      onPress: selectable(date) ? () => controller.select(date) : null,
       builder: (context, v, _) {
         final variants = {
           for (final variant in v) variant as FLineCalendarItemVariant,
@@ -70,6 +72,7 @@ class Item extends StatelessWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('date', date))
       ..add(FlagProperty('today', value: today, ifTrue: 'today'))
+      ..add(ObjectFlagProperty.has('selectable', selectable))
       ..add(ObjectFlagProperty.has('builder', builder));
   }
 }

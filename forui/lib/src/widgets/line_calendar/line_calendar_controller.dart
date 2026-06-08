@@ -6,24 +6,17 @@ import 'package:forui/forui.dart';
 
 part 'line_calendar_controller.control.dart';
 
-class _ProxyController implements FCalendarController<DateTime?> {
-  FCalendarController<DateTime?> _controller;
+class _ProxyController implements FDateSelectionController<DateTime?> {
+  final FDateSelectionController<DateTime?> _controller;
   ValueChanged<DateTime?> _onChange;
-  Predicate<DateTime> _selectable;
   DateTime? _unsynced;
 
-  _ProxyController(this._unsynced, this._onChange, this._selectable)
-    : _controller = .date(initial: _unsynced, selectable: _selectable, toggleable: false);
+  _ProxyController(this._unsynced, this._onChange) : _controller = .single(initial: _unsynced, toggleable: false);
 
-  void update(DateTime? newValue, ValueChanged<DateTime?> onChange, Predicate<DateTime> selectable) {
+  void update(DateTime? newValue, ValueChanged<DateTime?> onChange) {
     _onChange = onChange;
 
-    if (_selectable != selectable) {
-      _selectable = selectable;
-      _unsynced = newValue;
-      _controller.dispose();
-      _controller = .date(initial: newValue, selectable: selectable, toggleable: false);
-    } else if (_controller.value != newValue) {
+    if (_controller.value != newValue) {
       _unsynced = newValue;
       _controller.value = newValue;
     } else if (_unsynced != newValue) {
@@ -31,6 +24,9 @@ class _ProxyController implements FCalendarController<DateTime?> {
       notifyListeners();
     }
   }
+
+  @override
+  bool contains(DateTime date) => _controller.contains(date);
 
   @override
   void select(DateTime date) {
@@ -50,12 +46,6 @@ class _ProxyController implements FCalendarController<DateTime?> {
       _onChange(value);
     }
   }
-
-  @override
-  bool selectable(DateTime date) => _controller.selectable(date);
-
-  @override
-  bool selected(DateTime date) => _controller.selected(date);
 
   @override
   void addListener(VoidCallback listener) => _controller.addListener(listener);
@@ -79,10 +69,9 @@ class _ProxyController implements FCalendarController<DateTime?> {
 sealed class FLineCalendarControl with Diagnosticable, _$FLineCalendarControlMixin {
   /// Creates a [FLineCalendarControl].
   const factory FLineCalendarControl.managed({
-    FCalendarController<DateTime?>? controller,
+    FDateSelectionController<DateTime?>? controller,
     DateTime? initial,
     bool? toggleable,
-    Predicate<DateTime>? selectable,
     ValueChanged<DateTime?>? onChange,
   }) = FLineCalendarManagedControl;
 
@@ -94,14 +83,13 @@ sealed class FLineCalendarControl with Diagnosticable, _$FLineCalendarControlMix
   const factory FLineCalendarControl.lifted({
     required DateTime? date,
     required ValueChanged<DateTime?> onChange,
-    Predicate<DateTime> selectable,
   }) = _Lifted;
 
   const FLineCalendarControl._();
 
-  (FCalendarController<DateTime?>, bool) _update(
+  (FDateSelectionController<DateTime?>, bool) _update(
     FLineCalendarControl old,
-    FCalendarController<DateTime?> controller,
+    FDateSelectionController<DateTime?> controller,
     VoidCallback callback,
   );
 }
@@ -113,7 +101,7 @@ sealed class FLineCalendarControl with Diagnosticable, _$FLineCalendarControlMix
 class FLineCalendarManagedControl extends FLineCalendarControl with Diagnosticable, _$FLineCalendarManagedControlMixin {
   /// The controller.
   @override
-  final FCalendarController<DateTime?>? controller;
+  final FDateSelectionController<DateTime?>? controller;
 
   /// The initial date. Defaults to null.
   ///
@@ -121,14 +109,6 @@ class FLineCalendarManagedControl extends FLineCalendarControl with Diagnosticab
   /// Throws [AssertionError] if [initial] and [controller] are both provided.
   @override
   final DateTime? initial;
-
-  /// A predicate that determines whether a date can be selected. Defaults to always returning true.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if [selectable] and [controller] are both provided.
-  @override
-  final Predicate<DateTime>? selectable;
-
   /// Whether the selection is toggleable. Defaults to false.
   ///
   /// ## Contract
@@ -141,14 +121,10 @@ class FLineCalendarManagedControl extends FLineCalendarControl with Diagnosticab
   final ValueChanged<DateTime?>? onChange;
 
   /// Creates a [FLineCalendarControl].
-  const FLineCalendarManagedControl({this.controller, this.initial, this.selectable, this.toggleable, this.onChange})
+  const FLineCalendarManagedControl({this.controller, this.initial, this.toggleable, this.onChange})
     : assert(
         controller == null || initial == null,
         'Cannot provide both controller and initial date. Pass initial date to the controller instead.',
-      ),
-      assert(
-        controller == null || selectable == null,
-        'Cannot provide both controller and selectable. Pass selectable to the controller instead.',
       ),
       assert(
         controller == null || toggleable == null,
@@ -157,26 +133,22 @@ class FLineCalendarManagedControl extends FLineCalendarControl with Diagnosticab
       super._();
 
   @override
-  FCalendarController<DateTime?> createController() =>
-      controller ?? .date(initial: initial, selectable: selectable, toggleable: toggleable ?? false);
+  FDateSelectionController<DateTime?> createController() =>
+      controller ?? .single(initial: initial, toggleable: toggleable ?? false);
 }
 
 class _Lifted extends FLineCalendarControl with _$_LiftedMixin {
-  static bool _defaultSelectable(DateTime _) => true;
-
   @override
   final DateTime? date;
   @override
   final ValueChanged<DateTime?> onChange;
-  @override
-  final Predicate<DateTime> selectable;
 
-  const _Lifted({required this.date, required this.onChange, this.selectable = _defaultSelectable}) : super._();
+  const _Lifted({required this.date, required this.onChange}) : super._();
 
   @override
-  FCalendarController<DateTime?> createController() => _ProxyController(date, onChange, selectable);
+  FDateSelectionController<DateTime?> createController() => _ProxyController(date, onChange);
 
   @override
-  void _updateController(FCalendarController<DateTime?> controller) =>
-      (controller as _ProxyController).update(date, onChange, selectable);
+  void _updateController(FDateSelectionController<DateTime?> controller) =>
+      (controller as _ProxyController).update(date, onChange);
 }

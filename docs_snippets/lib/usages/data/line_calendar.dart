@@ -14,19 +14,19 @@ final lineCalendar = FLineCalendar(
   scrollCacheExtent: null,
   keyboardDismissBehavior: .manual,
   physics: null,
+  selectable: (date) => true,
   builder: (context, data, child) => child!,
   // {@endcategory}
 );
 
 // {@category "Control" "`.lifted()`"}
 /// Externally controls the line calendar's date.
-final FLineCalendarControl lifted = .lifted(date: .now(), selectable: (date) => true, onChange: (date) {});
+final FLineCalendarControl lifted = .lifted(date: .now(), onChange: (date) {});
 
 // {@category "Control" "`.managed()` with internal controller"}
 /// Manages the line calendar state internally.
 final FLineCalendarControl managedInternal = .managed(
   initial: .now(),
-  selectable: (date) => true,
   toggleable: false,
   onChange: (date) {},
 );
@@ -35,7 +35,7 @@ final FLineCalendarControl managedInternal = .managed(
 /// Uses an external controller to control the line calendar's state.
 final FLineCalendarControl managedExternal = .managed(
   // Don't create a controller inline. Store it in a State instead.
-  controller: .date(initial: .now(), selectable: (date) => true, toggleable: false, truncateAndStripTimezone: true),
+  controller: .single(initial: .now()),
   onChange: (date) {},
 );
 

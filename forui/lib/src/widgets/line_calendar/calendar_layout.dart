@@ -20,6 +20,7 @@ class CalendarLayout extends StatefulWidget {
   final ScrollViewKeyboardDismissBehavior keyboardDismissBehavior;
   final TextScaler scale;
   final TextStyle textStyle;
+  final bool Function(DateTime) selectable;
   final ValueWidgetBuilder<FLineCalendarItemData> builder;
   final BoxConstraints constraints;
 
@@ -32,6 +33,7 @@ class CalendarLayout extends StatefulWidget {
     required this.keyboardDismissBehavior,
     required this.scale,
     required this.textStyle,
+    required this.selectable,
     required this.builder,
     required this.constraints,
     super.key,
@@ -52,13 +54,14 @@ class CalendarLayout extends StatefulWidget {
       ..add(DiagnosticsProperty('keyboardDismissBehavior', keyboardDismissBehavior))
       ..add(DiagnosticsProperty('scaler', scale))
       ..add(DiagnosticsProperty('textStyle', textStyle))
+      ..add(ObjectFlagProperty.has('selectable', selectable))
       ..add(ObjectFlagProperty.has('builder', builder))
       ..add(DiagnosticsProperty('constraints', constraints));
   }
 }
 
 class _CalendarLayoutState extends State<CalendarLayout> {
-  late FCalendarController<DateTime?> _controller;
+  late FDateSelectionController<DateTime?> _controller;
   late FLineCalendarScrollController _scrollController;
   late double _itemExtent;
 
@@ -149,6 +152,7 @@ class _CalendarLayoutState extends State<CalendarLayout> {
               style: widget.style,
               date: date,
               today: _scrollController.today == date,
+              selectable: widget.selectable,
               builder: widget.builder,
             ),
           );

@@ -1,11 +1,21 @@
 ## 0.23.0 (Next)
 
-### `FCalendar`
-* Add "Previous month"/"Next month", "Previous year"/"Next year", and "Previous years"/"Next years" semantics labels
-  to the calendar header's navigation buttons.
 
 
-### `FContextMenu`
+### `FCalendar` (New)
+`FCalendar` was one of the first complex widgets we implemented back in 2024, and it is showing its age. We have 
+re-implemented `FCalendar` with more selection modes, a controller for programmatic navigation, and updated styling
+and an API similar to other widgets. 
+
+* Add `FDateSelectionControl`.
+* Add `FDateSelectionController`.
+
+* **Breaking** Re-implement `FCalendar`.
+* **Breaking** Change `FCalendarControl` to handle programmatic navigation. See `FDateSelectionControl` for handling date selection.
+* **Breaking** Change `FCalendarController` to handle programmatic navigation. See `FDateSelectionController` for handling date selection.
+
+
+### `FContextMenu` (New)
 * Add `FContextMenu`.
 
 
@@ -14,7 +24,17 @@
   enclosing tile is inside an `FItemGroup` or `FTileGroup`.
 
 
-### `FPointPortal`
+### `FLineCalendar`
+* Add `FLineCalendar.selectable` to determine whether a date can be selected.
+
+* **Breaking** Change `FLineCalendarControl.managed(controller: ...)` to accept `FDateSelectionController<DateTime?>`
+  instead of `FCalendarController<DateTime?>`.
+
+* **Breaking** Remove `FLineCalendarControl.managed(selectable: ...)`. Use `FLineCalendar.selectable` instead.
+* **Breaking** Remove `FLineCalendarControl.lifted(selectable: ...)`. Use `FLineCalendar.selectable` instead.
+
+
+### `FPointPortal` (New)
 * Add `FPointPortal`.
 
 

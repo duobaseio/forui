@@ -103,8 +103,8 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: FLineCalendar(
-              control: .managed(selectable: (d) => d.day != 19),
               scrollControl: .managed(today: DateTime(2025, 12, 19)),
+              selectable: (d) => d.day != 19,
             ),
           ),
         );
@@ -119,8 +119,8 @@ void main() {
             child: Focus(
               focusNode: focus,
               child: FLineCalendar(
-                control: .managed(selectable: (d) => d.day != 19),
                 scrollControl: .managed(today: DateTime(2025, 12, 19)),
+                selectable: (d) => d.day != 19,
               ),
             ),
           ),
@@ -141,8 +141,8 @@ void main() {
           TestScaffold(
             theme: theme.data,
             child: FLineCalendar(
-              control: .managed(initial: DateTime(2025, 12, 19), selectable: (d) => d.day != 19),
               scrollControl: .managed(today: DateTime(2025, 12, 19)),
+              selectable: (d) => d.day != 19,
             ),
           ),
         );
@@ -160,8 +160,8 @@ void main() {
             child: Focus(
               focusNode: focus,
               child: FLineCalendar(
-                control: .managed(initial: DateTime(2025, 12, 19), selectable: (d) => d.day != 19),
                 scrollControl: .managed(today: DateTime(2025, 12, 19)),
+                selectable: (d) => d.day != 19,
               ),
             ),
           ),
