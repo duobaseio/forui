@@ -32,22 +32,19 @@ Widget _harness(
   ValueChanged<DateTime>? onLongPress,
 }) => TestScaffold.app(
   child: Builder(
-    builder: (context) {
-      final theme = context.theme;
-      return DayPicker(
-        controller: controller,
-        style: .inherit(colors: theme.colors, typography: theme.typography, style: theme.style, touch: false),
-        localization: FLocalizations.of(context) ?? FDefaultLocalizations(),
-        today: today ?? .utc(2024, 6, 15),
-        selected: selected ?? (_) => false,
-        scrollPhysics: null,
-        scrollCacheExtent: null,
-        scrollBehavior: null,
-        onPress: onPress ?? (_) {},
-        onLongPress: onLongPress ?? (_) {},
-        builder: FCalendar.defaultDayBuilder,
-      );
-    },
+    builder: (context) => DayPicker(
+      controller: controller,
+      style: context.theme.calendarStyle.dayPickerStyle,
+      localization: FLocalizations.of(context) ?? FDefaultLocalizations(),
+      today: today ?? .utc(2024, 6, 15),
+      selected: selected ?? (_) => false,
+      scrollPhysics: null,
+      scrollCacheExtent: null,
+      scrollBehavior: null,
+      onPress: onPress ?? (_) {},
+      onLongPress: onLongPress ?? (_) {},
+      builder: FCalendar.defaultDayBuilder,
+    ),
   ),
 );
 

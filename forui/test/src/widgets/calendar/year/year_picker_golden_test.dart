@@ -7,7 +7,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/calendar/calendar.dart';
 import 'package:forui/src/widgets/calendar/year/year_picker.dart';
 import '../../../test_scaffold.dart';
 
@@ -27,20 +26,17 @@ Widget _harness(FCalendarYearPickerController controller, {required FThemeData t
     TestScaffold.app(
       theme: theme,
       child: Builder(
-        builder: (context) {
-          final t = context.theme;
-          return YearPicker(
-            controller: controller,
-            style: .inherit(colors: t.colors, typography: t.typography, style: t.style),
-            localization: FLocalizations.of(context) ?? FDefaultLocalizations(),
-            today: today ?? _initial,
-            scrollPhysics: null,
-            scrollCacheExtent: null,
-            scrollBehavior: null,
-            onPress: (_) {},
-            builder: FCalendar.defaultYearBuilder,
-          );
-        },
+        builder: (context) => YearPicker(
+          controller: controller,
+          style: context.theme.calendarStyle.yearPickerStyle,
+          localization: FLocalizations.of(context) ?? FDefaultLocalizations(),
+          today: today ?? _initial,
+          scrollPhysics: null,
+          scrollCacheExtent: null,
+          scrollBehavior: null,
+          onPress: (_) {},
+          builder: FCalendar.defaultYearBuilder,
+        ),
       ),
     );
 
@@ -48,7 +44,7 @@ void main() {
   for (final theme in TestScaffold.themes) {
     Future<void> expectGolden(WidgetTester tester, String name) async {
       await tester.pumpAndSettle();
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('year-picker/${theme.name}/$name.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('calendar/year-picker/${theme.name}/$name.png'));
     }
 
     group('${theme.name} resting', () {

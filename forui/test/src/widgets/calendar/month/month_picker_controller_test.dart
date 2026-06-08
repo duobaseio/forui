@@ -27,20 +27,17 @@ FCalendarMonthPickerController _controller({
 Widget _harness(FCalendarMonthPickerController controller, {DateTime? today, ValueChanged<DateTime>? onPress}) =>
     TestScaffold.app(
       child: Builder(
-        builder: (context) {
-          final theme = context.theme;
-          return MonthPicker(
-            controller: controller,
-            style: .inherit(colors: theme.colors, typography: theme.typography, style: theme.style),
-            localization: FLocalizations.of(context) ?? FDefaultLocalizations(),
-            today: today ?? .utc(2024, 6),
-            scrollPhysics: null,
-            scrollCacheExtent: null,
-            scrollBehavior: null,
-            onPress: onPress ?? (_) {},
-            builder: FCalendar.defaultMonthBuilder,
-          );
-        },
+        builder: (context) => MonthPicker(
+          controller: controller,
+          style: context.theme.calendarStyle.monthPickerStyle,
+          localization: FLocalizations.of(context) ?? FDefaultLocalizations(),
+          today: today ?? .utc(2024, 6),
+          scrollPhysics: null,
+          scrollCacheExtent: null,
+          scrollBehavior: null,
+          onPress: onPress ?? (_) {},
+          builder: FCalendar.defaultMonthBuilder,
+        ),
       ),
     );
 

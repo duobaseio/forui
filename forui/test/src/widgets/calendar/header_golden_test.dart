@@ -18,32 +18,23 @@ Widget _harness({
   required Widget Function(FCalendarHeaderStyle style, FLocalizations l10n) header,
   TextDirection? textDirection,
   Locale? locale,
-}) {
-  final child = Builder(
-    builder: (context) {
-      final t = context.theme;
-      final style = FCalendarHeaderStyle.inherit(
-        colors: t.colors,
-        typography: t.typography,
-        icons: t.icons,
-        style: t.style,
-        touch: context.platformVariant.touch,
-      );
-      return SizedBox(width: 320, child: header(style, FLocalizations.of(context) ?? FDefaultLocalizations()));
-    },
-  );
-
-  // A locale needs the localization delegates, so wrap in an app; otherwise keep the lighter scaffold.
-  return locale == null
-      ? TestScaffold(theme: theme, textDirection: textDirection, child: child)
-      : TestScaffold.app(theme: theme, locale: locale, textDirection: textDirection, child: child);
-}
+}) => TestScaffold.app(
+  theme: theme,
+  locale: locale,
+  textDirection: textDirection,
+  child: Builder(
+    builder: (context) => SizedBox(
+      width: 320,
+      child: header(theme.calendarStyle.headerStyle, FLocalizations.of(context) ?? FDefaultLocalizations()),
+    ),
+  ),
+);
 
 void main() {
   for (final theme in TestScaffold.themes) {
     Future<void> expectGolden(WidgetTester tester, String name) async {
       await tester.pumpAndSettle();
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('calendar-header/${theme.name}/$name.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('calendar/header/${theme.name}/$name.png'));
     }
 
     Widget split({

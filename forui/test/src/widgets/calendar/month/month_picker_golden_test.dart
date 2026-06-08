@@ -7,7 +7,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/calendar/calendar.dart';
 import 'package:forui/src/widgets/calendar/month/month_picker.dart';
 import '../../../test_scaffold.dart';
 
@@ -27,20 +26,17 @@ Widget _harness(FCalendarMonthPickerController controller, {required FThemeData 
     TestScaffold.app(
       theme: theme,
       child: Builder(
-        builder: (context) {
-          final t = context.theme;
-          return MonthPicker(
-            controller: controller,
-            style: .inherit(colors: t.colors, typography: t.typography, style: t.style),
-            localization: FLocalizations.of(context) ?? FDefaultLocalizations(),
-            today: today ?? _initial,
-            scrollPhysics: null,
-            scrollCacheExtent: null,
-            scrollBehavior: null,
-            onPress: (_) {},
-            builder: FCalendar.defaultMonthBuilder,
-          );
-        },
+        builder: (context) => MonthPicker(
+          controller: controller,
+          style: context.theme.calendarStyle.monthPickerStyle,
+          localization: FLocalizations.of(context) ?? FDefaultLocalizations(),
+          today: today ?? _initial,
+          scrollPhysics: null,
+          scrollCacheExtent: null,
+          scrollBehavior: null,
+          onPress: (_) {},
+          builder: FCalendar.defaultMonthBuilder,
+        ),
       ),
     );
 
@@ -48,7 +44,7 @@ void main() {
   for (final theme in TestScaffold.themes) {
     Future<void> expectGolden(WidgetTester tester, String name) async {
       await tester.pumpAndSettle();
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('month-picker/${theme.name}/$name.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('calendar/month-picker/${theme.name}/$name.png'));
     }
 
     group('${theme.name} resting', () {

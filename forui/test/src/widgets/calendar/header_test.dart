@@ -11,17 +11,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold(
         child: Builder(
-          builder: (context) {
-            final theme = context.theme;
-            final style = FCalendarHeaderStyle.inherit(
-              colors: theme.colors,
-              typography: theme.typography,
-              icons: theme.icons,
-              style: theme.style,
-              touch: context.platformVariant.touch,
-            );
-            return SizedBox(width: 320, child: build(style));
-          },
+          builder: (context) => SizedBox(width: 320, child: build(context.theme.calendarStyle.headerStyle)),
         ),
       ),
     );

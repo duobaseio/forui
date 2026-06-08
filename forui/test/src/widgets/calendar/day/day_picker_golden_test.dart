@@ -7,7 +7,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/calendar/calendar.dart';
 import 'package:forui/src/widgets/calendar/day/day_picker.dart';
 import '../../../test_scaffold.dart';
 
@@ -36,27 +35,19 @@ Widget _harness(
 }) => TestScaffold.app(
   theme: theme,
   child: Builder(
-    builder: (context) {
-      final t = context.theme;
-      return DayPicker(
-        controller: controller,
-        style: .inherit(
-          colors: t.colors,
-          typography: t.typography,
-          style: t.style,
-          touch: context.platformVariant.touch,
-        ),
-        localization: FLocalizations.of(context) ?? FDefaultLocalizations(),
-        today: today ?? _initial,
-        selected: selected ?? (_) => false,
-        scrollPhysics: null,
-        scrollCacheExtent: null,
-        scrollBehavior: null,
-        onPress: (_) {},
-        onLongPress: (_) {},
-        builder: FCalendar.defaultDayBuilder,
-      );
-    },
+    builder: (context) => DayPicker(
+      controller: controller,
+      style: context.theme.calendarStyle.dayPickerStyle,
+      localization: FLocalizations.of(context) ?? FDefaultLocalizations(),
+      today: today ?? _initial,
+      selected: selected ?? (_) => false,
+      scrollPhysics: null,
+      scrollCacheExtent: null,
+      scrollBehavior: null,
+      onPress: (_) {},
+      onLongPress: (_) {},
+      builder: FCalendar.defaultDayBuilder,
+    ),
   ),
 );
 
@@ -64,27 +55,27 @@ void main() {
   for (final theme in TestScaffold.themes) {
     Future<void> expectGolden(WidgetTester tester, String name) async {
       await tester.pumpAndSettle();
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('day-picker/${theme.name}/$name.png'));
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('calendar/day-picker/${theme.name}/$name.png'));
     }
 
     group('${theme.name} resting', () {
       testWidgets('range', (tester) async {
         await tester.pumpWidget(
-          _harness(_controller(), theme: theme.data, today: .utc(2024, 6, 5), selected: _range(13, 18)),
+          _harness(_controller(), theme: theme.data, today: .utc(2024, 6, 5), selected: _range(10, 19)),
         );
         await expectGolden(tester, 'range');
       });
 
       testWidgets('today-as-start', (tester) async {
         await tester.pumpWidget(
-          _harness(_controller(), theme: theme.data, today: .utc(2024, 6, 13), selected: _range(13, 18)),
+          _harness(_controller(), theme: theme.data, today: .utc(2024, 6, 10), selected: _range(10, 19)),
         );
         await expectGolden(tester, 'today-as-start');
       });
 
       testWidgets('today-in-range', (tester) async {
         await tester.pumpWidget(
-          _harness(_controller(), theme: theme.data, today: .utc(2024, 6, 15), selected: _range(13, 18)),
+          _harness(_controller(), theme: theme.data, today: .utc(2024, 6, 15), selected: _range(10, 19)),
         );
         await expectGolden(tester, 'today-in-range');
       });
@@ -104,13 +95,13 @@ void main() {
       testWidgets('disabled-in-range', (tester) async {
         // Explicit disabled coverage: weekends (plain + adjacent disabled) and specific selected days (start/middle/end
         // disabled).
-        const disabled = {13, 15, 18};
+        const disabled = {10, 15, 19};
         await tester.pumpWidget(
           _harness(
             _controller(selectable: (date) => _weekday(date) && !(date.month == 6 && disabled.contains(date.day))),
             theme: theme.data,
             today: .utc(2024, 6, 5),
-            selected: _range(13, 18),
+            selected: _range(10, 19),
           ),
         );
         await expectGolden(tester, 'disabled-in-range');
@@ -128,8 +119,8 @@ void main() {
       for (final (name, day, selected) in <(String, int, bool Function(DateTime)?)>[
         ('focus-plain', 17, null),
         ('focus-single', 17, _range(17, 17)),
-        ('focus-start', 13, _range(13, 18)),
-        ('focus-middle', 15, _range(13, 18)),
+        ('focus-start', 10, _range(10, 19)),
+        ('focus-middle', 15, _range(10, 19)),
       ]) {
         testWidgets(name, (tester) async {
           final controller = _controller();
@@ -145,7 +136,7 @@ void main() {
     group('${theme.name} hover', () {
       for (final (name, day, selected) in <(String, int, bool Function(DateTime)?)>[
         ('hover-plain', 17, null),
-        ('hover-middle', 15, _range(13, 18)),
+        ('hover-middle', 15, _range(10, 19)),
       ]) {
         testWidgets(name, (tester) async {
           await tester.pumpWidget(_harness(_controller(), theme: theme.data, selected: selected));
