@@ -133,10 +133,7 @@ void main() {
     });
 
     test('date equals end', () {
-      expect(
-        debugCheckInclusiveDateRange(DateTime(2024), DateTime(2024, 12, 31), DateTime(2024, 12, 31)),
-        true,
-      );
+      expect(debugCheckInclusiveDateRange(DateTime(2024), DateTime(2024, 12, 31), DateTime(2024, 12, 31)), true);
     });
 
     test('date before start', () {

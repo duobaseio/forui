@@ -77,10 +77,8 @@ sealed class FLineCalendarControl with Diagnosticable, _$FLineCalendarControlMix
   ///
   /// The [date] parameter contains the current selected date.
   /// The [onChange] callback is invoked when the user selects a date.
-  const factory FLineCalendarControl.lifted({
-    required DateTime? date,
-    required ValueChanged<DateTime?> onChange,
-  }) = _Lifted;
+  const factory FLineCalendarControl.lifted({required DateTime? date, required ValueChanged<DateTime?> onChange}) =
+      _Lifted;
 
   const FLineCalendarControl._();
 
@@ -106,6 +104,7 @@ class FLineCalendarManagedControl extends FLineCalendarControl with Diagnosticab
   /// Throws [AssertionError] if [initial] and [controller] are both provided.
   @override
   final DateTime? initial;
+
   /// Whether the selection is toggleable. Defaults to false.
   ///
   /// ## Contract
