@@ -6,12 +6,12 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:intl/intl.dart' show DateFormat;
+import 'package:meta/meta.dart';
+import 'package:sugar/sugar.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/calendar/grid.dart';
 import 'package:forui/src/widgets/calendar/month/month.dart';
-import 'package:meta/meta.dart';
-import 'package:sugar/sugar.dart';
 
 part 'month_picker.design.dart';
 

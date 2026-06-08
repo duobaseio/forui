@@ -5,11 +5,12 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:meta/meta.dart';
+import 'package:sugar/sugar.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/calendar/grid.dart';
 import 'package:forui/src/widgets/calendar/year/year.dart';
-import 'package:meta/meta.dart';
-import 'package:sugar/sugar.dart';
 
 part 'year_picker.design.dart';
 
