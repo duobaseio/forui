@@ -698,14 +698,30 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
           ? FButtonStyles.inherit(colors: colors, typography: typography, style: style, touch: touch)
           : FButtonStyles(buttonStyles),
       calendarStyle:
-          calendarStyle ?? .inherit(colors: colors, typography: typography, icons: icons, style: style, touch: touch),
+          calendarStyle ??
+          .inherit(
+            colors: colors,
+            typography: typography,
+            icons: icons,
+            style: style,
+            hapticFeedback: hapticFeedback,
+            touch: touch,
+          ),
       cardStyle: cardStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       checkboxStyle: checkboxStyle ?? .inherit(colors: colors, icons: icons, style: style, touch: touch),
       circularProgressStyles: circularProgressStyles == null
           ? FCircularProgressSizeStyles.inherit(colors: colors, typography: typography)
           : FCircularProgressSizeStyles(circularProgressStyles),
       dateFieldStyle:
-          dateFieldStyle ?? .inherit(colors: colors, typography: typography, icons: icons, style: style, touch: touch),
+          dateFieldStyle ??
+          .inherit(
+            colors: colors,
+            typography: typography,
+            icons: icons,
+            style: style,
+            hapticFeedback: hapticFeedback,
+            touch: touch,
+          ),
       dateTimePickerStyle:
           dateTimePickerStyle ??
           .inherit(colors: colors, typography: typography, style: style, hapticFeedback: hapticFeedback, touch: touch),
