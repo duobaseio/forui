@@ -103,6 +103,11 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
     }
   }
 
+  void _show() {
+    _syncCalendar();
+    _popoverController.show();
+  }
+
   @override
   Widget build(BuildContext context) {
     final style = widget.style(context.theme.dateFieldStyle);
@@ -116,7 +121,7 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
       child: DateInput(
         controller: _selectionController,
         selectionController: _selectionController,
-        onTap: _popoverController.show,
+        onTap: _show,
         size: widget.size,
         platformVariant: context.platformVariant,
         style: style,

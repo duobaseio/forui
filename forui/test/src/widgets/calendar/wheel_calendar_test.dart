@@ -155,6 +155,69 @@ void main() {
     });
   });
 
+  group('jumpToDayPicker / animateToDayPicker', () {
+    for (final (motion, move) in <(String, Future<void> Function(FWheelCalendarController))>[
+      ('jumpToDayPicker', (c) async => c.jumpToDayPicker(DateTime.utc(2024, 9))),
+      ('animateToDayPicker', (c) => c.animateToDayPicker(DateTime.utc(2024, 9))),
+    ]) {
+      testWidgets('$motion moves the mounted day grid to another month', (tester) async {
+        final c = controller();
+        await tester.pumpWidget(calendar(selectionControl: .managedSingle(), controller: c));
+
+        expect(find.text('July 2024'), findsOneWidget);
+
+        // Fire-and-forget: awaiting animateToDayPicker deadlocks since pumpAndSettle drives the animation.
+        unawaited(move(c));
+        await tester.pumpAndSettle();
+
+        expect(tester.takeException(), null);
+        expect(find.byType(DayPicker), findsOneWidget);
+        expect(find.text('September 2024'), findsOneWidget);
+        expect(c.currentMonth, DateTime.utc(2024, 9));
+      });
+
+      testWidgets('$motion from the month-year wheel returns to the day grid on that month', (tester) async {
+        final c = controller();
+        await tester.pumpWidget(calendar(selectionControl: .managedSingle(), controller: c));
+
+        c.toggleMonthYearPicker();
+        await tester.pumpAndSettle();
+        expect(c.monthYear, true);
+
+        unawaited(move(c));
+        await tester.pumpAndSettle();
+
+        expect(c.monthYear, false);
+        expect(find.byType(DayPicker), findsOneWidget);
+        expect(find.byType(FPicker), findsNothing);
+        expect(find.text('September 2024'), findsOneWidget);
+        expect(c.currentMonth, DateTime.utc(2024, 9));
+      });
+    }
+
+    testWidgets('jumpToDayPicker(null) keeps the current month', (tester) async {
+      final c = controller();
+      await tester.pumpWidget(calendar(selectionControl: .managedSingle(), controller: c));
+
+      c.jumpToDayPicker();
+      await tester.pumpAndSettle();
+
+      expect(find.text('July 2024'), findsOneWidget);
+      expect(c.currentMonth, DateTime.utc(2024, 7));
+    });
+
+    testWidgets('jumpToDayPicker clamps an out-of-range month to the bounds', (tester) async {
+      final c = controller();
+      await tester.pumpWidget(calendar(selectionControl: .managedSingle(), controller: c));
+
+      c.jumpToDayPicker(DateTime.utc(2030, 12)); // past end (.utc(2025, 8, 10))
+      await tester.pumpAndSettle();
+
+      expect(c.currentMonth, DateTime.utc(2025, 8));
+      expect(find.text('August 2025'), findsOneWidget);
+    });
+  });
+
   group('boundary', () {
     testWidgets('the day grid still gates exact days within the partially-in-range start month', (tester) async {
       DateTime? selected;

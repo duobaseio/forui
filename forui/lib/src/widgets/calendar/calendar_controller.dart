@@ -300,6 +300,47 @@ class FWheelCalendarController extends FCalendarController {
         });
   }
 
+  /// Shows the day grid on the given [date]'s month, or the current month if [date] is null.
+  ///
+  /// If the day grid is already shown, it animates to the month; otherwise the month-year wheel is dismissed and the
+  /// day grid is shown on the month immediately.
+  Future<void> animateToDayPicker([
+    DateTime? date,
+    Duration duration = const Duration(milliseconds: 200),
+    Curve curve = Curves.ease,
+  ]) async {
+    final target = _clamp(start, switch (date) {
+      null => _currentMonth,
+      final m => .utc(m.year, m.month),
+    }, end);
+
+    if (!_wheel && day.controller.hasClients) {
+      await day.animateTo(target, duration: duration, curve: curve);
+    } else {
+      _wheel = false;
+      day.reattach(target);
+      _currentMonth = day.current;
+      notifyListeners();
+    }
+  }
+
+  /// Shows the day grid on the given [date]'s month, or the current month if [date] is null.
+  void jumpToDayPicker([DateTime? date]) {
+    final target = _clamp(start, switch (date) {
+      null => _currentMonth,
+      final m => .utc(m.year, m.month),
+    }, end);
+
+    if (!_wheel && day.controller.hasClients) {
+      day.jumpTo(target);
+    } else {
+      _wheel = false;
+      day.reattach(target);
+      _currentMonth = day.current;
+      notifyListeners();
+    }
+  }
+
   /// Shows the month-year wheel if the day grid is shown, and the day grid otherwise.
   void toggleMonthYearPicker() {
     if (_wheel) {

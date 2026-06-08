@@ -57,7 +57,7 @@ void main() {
       expect(selection.value, DateTime.utc(2025, 1, 15));
     });
 
-    testWidgets('adjustment does not work when text is valid date', (tester) async {
+    testWidgets('arrow adjustment changes the focused segment', (tester) async {
       final selection = autoDispose(FDateSelectionController.single(initial: DateTime.utc(2025, 1, 15)));
 
       await tester.pumpWidget(
@@ -70,13 +70,13 @@ void main() {
         ),
       );
 
-      await tester.tap(find.byKey(key));
+      await tester.tapAt(tester.getTopLeft(find.byKey(key)));
       await tester.pumpAndSettle();
 
       await tester.sendKeyEvent(.arrowUp);
       await tester.pumpAndSettle();
 
-      expect(find.text('15/01/2025'), findsOneWidget);
+      expect(find.text('16/01/2025'), findsOneWidget);
     });
 
     testWidgets('adjustment does not produce full date from placeholder', (tester) async {

@@ -188,9 +188,12 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
   }
 
   void _onTap() {
-    const {AnimationStatus.completed, AnimationStatus.reverse}.contains(_popoverController.status)
-        ? _focus.requestFocus()
-        : _focus.unfocus();
+    if (const {AnimationStatus.completed, AnimationStatus.reverse}.contains(_popoverController.status)) {
+      _focus.requestFocus();
+      _syncCalendar();
+    } else {
+      _focus.unfocus();
+    }
     _popoverController.toggle();
   }
 }

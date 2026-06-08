@@ -193,6 +193,61 @@ void main() {
         matchesGoldenFile('date-field/${theme.name}/calendar/keyboard-navigation.png'),
       );
     });
+
+    for (final (name, properties) in [
+      ('grid', FDateFieldGridCalendarProperties(control: FGridCalendarControl(today: DateTime.utc(2025, 1, 15)))),
+      (
+        'split-grid',
+        FDateFieldGridSplitCalendarProperties(control: FGridSplitCalendarControl(today: DateTime.utc(2025, 1, 15))),
+      ),
+      ('wheel', FDateFieldWheelCalendarProperties(control: FWheelCalendarControl(today: DateTime.utc(2025, 1, 15)))),
+    ]) {
+      testWidgets('${theme.name} $name calendar', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            theme: theme.data,
+            locale: const Locale('en', 'SG'),
+            alignment: .topCenter,
+            child: FDateField.calendar(key: key, calendar: properties),
+          ),
+        );
+
+        await tester.tap(find.byKey(key));
+        await tester.pumpAndSettle();
+
+        await expectLater(
+          find.byType(TestScaffold),
+          matchesGoldenFile('date-field/${theme.name}/calendar/mode-$name.png'),
+        );
+      });
+    }
+
+    testWidgets('${theme.name} wheel month-year picker', (tester) async {
+      final controller = autoDispose(FWheelCalendarController(today: DateTime.utc(2025, 1, 15)));
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          locale: const Locale('en', 'SG'),
+          alignment: .topCenter,
+          child: FDateField.calendar(
+            key: key,
+            calendar: FDateFieldWheelCalendarProperties(control: FWheelCalendarControl(controller: controller)),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      controller.toggleMonthYearPicker();
+      await tester.pumpAndSettle();
+
+      await expectLater(
+        find.byType(TestScaffold),
+        matchesGoldenFile('date-field/${theme.name}/calendar/mode-wheel-picker.png'),
+      );
+    });
   }
 
   testWidgets('popover builder', (tester) async {

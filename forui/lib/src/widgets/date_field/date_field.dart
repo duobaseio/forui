@@ -438,5 +438,25 @@ abstract class _FDateFieldState<T extends FDateField> extends State<T> with Tick
 
   void _handleOnCalendarChange() {}
 
+  /// Syncs changes from text-field to calendar.
+  void _syncCalendar() {
+    if (_calendarController case final controller?) {
+      final value = _selectionController.value;
+      final target = value != null && !value.isBefore(controller.start) && !value.isAfter(controller.end)
+          ? value
+          : controller.today;
+      switch (controller) {
+        case final FGridCalendarController c:
+          c.jumpToDayPicker(target);
+        case final FGridSplitCalendarController c:
+          c.jumpToDayPicker(target);
+        case final FWheelCalendarController c:
+          c.jumpToDayPicker(target);
+        case _:
+          break;
+      }
+    }
+  }
+
   String get _focusLabel;
 }
