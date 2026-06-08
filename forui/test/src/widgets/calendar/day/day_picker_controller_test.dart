@@ -5,7 +5,6 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/widgets/calendar/calendar.dart';
 import 'package:forui/src/widgets/calendar/day/day_picker.dart';
 import 'package:forui/src/widgets/calendar/grid.dart';
 import '../../../test_scaffold.dart';

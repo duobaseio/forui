@@ -10,12 +10,48 @@ class CalendarPage extends Example {
   CalendarPage({@queryParam super.theme});
 
   @override
-  Widget example(BuildContext _) => FCalendar(
+  Widget example(BuildContext _) => FCalendar.grid(
+    control: FGridCalendarControl(start: DateTime.utc(2000), end: DateTime.utc(2040)),
+    selectionControl: .managedSingle(),
+  );
+}
+
+@RoutePage()
+class DateCalendarPage extends Example {
+  DateCalendarPage({@queryParam super.theme});
+
+  @override
+  Widget example(BuildContext _) => FCalendar.grid(
+    control: FGridCalendarControl(start: DateTime.utc(2000), end: DateTime.utc(2040)),
     // {@highlight}
-    control: .managedDate(),
+    selectionControl: .managedSingle(),
     // {@endhighlight}
-    start: DateTime(2000),
-    end: DateTime(2040),
+  );
+}
+
+@RoutePage()
+class SplitGridCalendarPage extends Example {
+  SplitGridCalendarPage({@queryParam super.theme});
+
+  @override
+  Widget example(BuildContext _) => FCalendar.splitGrid(
+    // {@highlight}
+    control: FGridSplitCalendarControl(start: DateTime.utc(2000), end: DateTime.utc(2040)),
+    selectionControl: .managedSingle(),
+    // {@endhighlight}
+  );
+}
+
+@RoutePage()
+class WheelCalendarPage extends Example {
+  WheelCalendarPage({@queryParam super.theme});
+
+  @override
+  Widget example(BuildContext _) => FCalendar.wheel(
+    // {@highlight}
+    control: FWheelCalendarControl(start: DateTime.utc(2000), end: DateTime.utc(2040)),
+    // {@endhighlight}
+    selectionControl: .managedSingle(),
   );
 }
 
@@ -24,31 +60,11 @@ class DatesCalendarPage extends Example {
   DatesCalendarPage({@queryParam super.theme});
 
   @override
-  Widget example(BuildContext _) => FCalendar(
+  Widget example(BuildContext _) => FCalendar.grid(
+    control: FGridCalendarControl(start: DateTime.utc(2000), today: DateTime.utc(2026, 7, 15), end: DateTime.utc(2030)),
     // {@highlight}
-    control: .managedDates(initial: {DateTime(2024, 7, 17), DateTime(2024, 7, 20)}),
+    selectionControl: .managedMulti(initial: {DateTime.utc(2026, 7, 17), DateTime.utc(2026, 7, 20)}),
     // {@endhighlight}
-    start: DateTime(2000),
-    today: DateTime(2024, 7, 15),
-    end: DateTime(2030),
-  );
-}
-
-@RoutePage()
-class UnselectableCalendarPage extends Example {
-  UnselectableCalendarPage({@queryParam super.theme});
-
-  @override
-  Widget example(BuildContext _) => FCalendar(
-    control: .managedDates(
-      initial: {DateTime(2024, 7, 17), DateTime(2024, 7, 20)},
-      // {@highlight}
-      selectable: (date) => !{DateTime.utc(2024, 7, 18), DateTime.utc(2024, 7, 19)}.contains(date),
-      // {@endhighlight}
-    ),
-    start: DateTime(2000),
-    today: DateTime(2024, 7, 15),
-    end: DateTime(2030),
   );
 }
 
@@ -57,12 +73,80 @@ class RangeCalendarPage extends Example {
   RangeCalendarPage({@queryParam super.theme});
 
   @override
-  Widget example(BuildContext _) => FCalendar(
+  Widget example(BuildContext _) => FCalendar.grid(
+    control: FGridCalendarControl(start: DateTime.utc(2000), today: DateTime.utc(2026, 7, 15), end: DateTime.utc(2030)),
     // {@highlight}
-    control: .managedRange(initial: (DateTime(2024, 7, 17), DateTime(2024, 7, 20))),
+    selectionControl: .managedRange(initial: (DateTime.utc(2026, 7, 17), DateTime.utc(2026, 7, 20))),
     // {@endhighlight}
-    start: DateTime(2000),
-    today: DateTime(2024, 7, 15),
-    end: DateTime(2030),
+  );
+}
+
+@RoutePage()
+class NoneCalendarPage extends Example {
+  NoneCalendarPage({@queryParam super.theme});
+
+  @override
+  Widget example(BuildContext _) => FCalendar.grid(
+    control: FGridCalendarControl(start: DateTime.utc(2000), end: DateTime.utc(2030)),
+    // {@highlight}
+    selectionControl: .none(),
+    // {@endhighlight}
+  );
+}
+
+
+@RoutePage()
+class UnselectableCalendarPage extends Example {
+  UnselectableCalendarPage({@queryParam super.theme});
+
+  @override
+  Widget example(BuildContext _) => FCalendar.grid(
+    control: FGridCalendarControl(
+      // {@highlight}
+      selectable: (date) => !{DateTime.utc(2026, 7, 18), DateTime.utc(2026, 7, 19)}.contains(date),
+      // {@endhighlight}
+      start: DateTime.utc(2000),
+      today: DateTime.utc(2026, 7, 15),
+      end: DateTime.utc(2030),
+    ),
+    selectionControl: .managedMulti(initial: {DateTime.utc(2026, 7, 17), DateTime.utc(2026, 7, 20)}),
+  );
+}
+
+@RoutePage()
+class FooterCalendarPage extends Example {
+  FooterCalendarPage({@queryParam super.theme});
+
+  @override
+  Widget example(BuildContext _) => FCalendar.grid(
+    control: FGridCalendarControl(start: DateTime.utc(2000), end: DateTime.utc(2030)),
+    selectionControl: .managedSingle(),
+    // {@highlight}
+    footerBuilder: (context, controller, selectionController) => Padding(
+      padding: const .only(top: 8),
+      child: Wrap(
+        spacing: 6,
+        runSpacing: 6,
+        alignment: .center,
+        children: [
+          for (final (label, date) in [
+            ('Today', controller.today),
+            ('In a week', controller.today.add(const Duration(days: 7))),
+            ('In a month', controller.today.add(const Duration(days: 30))),
+          ])
+            FButton(
+              variant: .outline,
+              size: .sm,
+              mainAxisSize: .min,
+              onPress: () async {
+                selectionController.select(date);
+                await controller.animateToDayPicker(date);
+              },
+              child: Text(label),
+            ),
+        ],
+      ),
+    ),
+    // {@endhighlight}
   );
 }

@@ -32,7 +32,7 @@ typedef FCalendarFooterBuilder<C extends FCalendarController> =
 ///
 /// See:
 /// * https://forui.dev/docs/widgets/data/calendar for working examples.
-/// * [FCalendarControl] for programatically controlling a calendar.
+/// * [FCalendarControl] for programmatically controlling a calendar.
 /// * [FDateSelectionControl] for customizing date selection behavior.
 /// * [FCalendarStyle] for customizing a calendar's appearance.
 class FCalendar extends StatefulWidget {

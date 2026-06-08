@@ -292,6 +292,120 @@ void main() {
     });
   });
 
+  group('jumpTo*/animateTo* while the target grid is mounted', () {
+    // A footer button that invokes [action] on the live controller.
+    FCalendarFooterBuilder<FGridCalendarController> footer(void Function(FGridCalendarController) action) =>
+        (context, controller, _) => GestureDetector(
+          key: const ValueKey('go'),
+          behavior: HitTestBehavior.opaque,
+          onTap: () => action(controller),
+          child: const SizedBox(width: 40, height: 40),
+        );
+
+    group('day grid', () {
+      for (final (motion, move) in <(String, void Function(FGridCalendarController))>[
+        ('jumpToDayPicker', (c) => c.jumpToDayPicker(DateTime.utc(2024, 9))),
+        ('animateToDayPicker', (c) => c.animateToDayPicker(DateTime.utc(2024, 9))),
+      ]) {
+        testWidgets('$motion moves the mounted day grid to another month', (tester) async {
+          await tester.pumpWidget(
+            calendar(selectionControl: .managedSingle(), control: control(), footerBuilder: footer(move)),
+          );
+
+          expect(find.text('July 2024'), findsOneWidget);
+
+          await tester.tap(find.byKey(const ValueKey('go')));
+          await tester.pumpAndSettle();
+
+          expect(tester.takeException(), null);
+          expect(find.byType(DayPicker), findsOneWidget);
+          expect(find.text('September 2024'), findsOneWidget);
+        });
+      }
+    });
+
+    group('month grid', () {
+      for (final (motion, move) in <(String, void Function(FGridCalendarController))>[
+        ('jumpToMonthPicker', (c) => c.jumpToMonthPicker(DateTime.utc(2025))),
+        ('animateToMonthPicker', (c) => c.animateToMonthPicker(DateTime.utc(2025))),
+      ]) {
+        testWidgets('$motion moves the mounted month grid to another year', (tester) async {
+          await tester.pumpWidget(
+            calendar(selectionControl: .managedSingle(), control: control(), footerBuilder: footer(move)),
+          );
+
+          await tester.tap(find.text('July 2024')); // day grid -> month grid (2024)
+          await tester.pumpAndSettle();
+          expect(find.descendant(of: find.byType(Header), matching: find.text('2024')), findsOneWidget);
+
+          await tester.tap(find.byKey(const ValueKey('go')));
+          await tester.pumpAndSettle();
+
+          expect(tester.takeException(), null);
+          expect(find.byType(MonthPicker), findsOneWidget);
+          expect(find.descendant(of: find.byType(Header), matching: find.text('2025')), findsOneWidget);
+        });
+      }
+    });
+
+    group('year grid', () {
+      for (final (motion, move) in <(String, void Function(FGridCalendarController))>[
+        ('jumpToYearPicker', (c) => c.jumpToYearPicker(DateTime.utc(2055))),
+        ('animateToYearPicker', (c) => c.animateToYearPicker(DateTime.utc(2055))),
+      ]) {
+        testWidgets('$motion moves the mounted year grid to another decade', (tester) async {
+          await tester.pumpWidget(
+            calendar(
+              selectionControl: .managedSingle(),
+              control: control(start: .utc(2000), end: .utc(2099, 12, 31)),
+              footerBuilder: footer(move),
+            ),
+          );
+
+          await tester.tap(find.text('July 2024')); // day grid -> month grid
+          await tester.pumpAndSettle();
+          await tester.tap(find.descendant(of: find.byType(Header), matching: find.text('2024'))); // -> year grid
+          await tester.pumpAndSettle();
+          expect(find.descendant(of: find.byType(YearPicker), matching: find.text('2024')), findsOneWidget);
+
+          await tester.tap(find.byKey(const ValueKey('go')));
+          await tester.pumpAndSettle();
+
+          expect(tester.takeException(), null);
+          expect(find.byType(YearPicker), findsOneWidget);
+          expect(find.descendant(of: find.byType(YearPicker), matching: find.text('2055')), findsOneWidget);
+        });
+      }
+    });
+
+    testWidgets('a footer preset selects then animates to the selection on the new month', (tester) async {
+      DateTime? selected;
+      await tester.pumpWidget(
+        calendar(
+          selectionControl: .managedSingle(onChange: (date) => selected = date),
+          control: control(),
+          footerBuilder: (context, controller, selectionController) => GestureDetector(
+            key: const ValueKey('go'),
+            behavior: HitTestBehavior.opaque,
+            onTap: () async {
+              selectionController.select(DateTime.utc(2024, 9, 10));
+              await controller.animateToDayPicker(DateTime.utc(2024, 9, 10));
+            },
+            child: const SizedBox(width: 40, height: 40),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(const ValueKey('go')));
+      await tester.pumpAndSettle();
+
+      expect(tester.takeException(), null);
+      expect(selected, DateTime.utc(2024, 9, 10));
+      expect(find.text('September 2024'), findsOneWidget);
+      expect(find.descendant(of: find.byType(DayPicker), matching: find.text('10')), findsOneWidget);
+    });
+  });
+
   group('selection', () {
     testWidgets('managedSingle selects and toggles off a tapped day', (tester) async {
       DateTime? selected;

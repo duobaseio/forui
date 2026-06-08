@@ -1,3 +1,4 @@
+import 'package:flutter/animation.dart';
 import 'package:flutter/foundation.dart';
 
 import 'package:forui/forui.dart';
@@ -125,39 +126,113 @@ abstract class _GridCalendarController extends FCalendarController {
   }
 
   /// Shows the day picker on the given [date]'s month, or the current month if [date] is null.
-  void showDayPicker([DateTime? date]) {
-    day.reattach(
-      _clamp(start, switch (date) {
-        null => _currentMonth,
-        final m => .utc(m.year, m.month),
-      }, end),
-    );
-    _currentMonth = day.current;
-    _type = .day;
-    notifyListeners();
+  ///
+  /// If the day picker is already shown, its grid animates to the month; otherwise it is shown immediately.
+  Future<void> animateToDayPicker([
+    DateTime? date,
+    Duration duration = const Duration(milliseconds: 200),
+    Curve curve = Curves.ease,
+  ]) async {
+    final target = _clamp(start, switch (date) {
+      null => _currentMonth,
+      final m => .utc(m.year, m.month),
+    }, end);
+
+    if (day.controller.hasClients) {
+      await day.animateTo(target, duration: duration, curve: curve);
+    } else {
+      _reattach(day, .day, target);
+    }
+  }
+
+  /// Shows the day picker on the given [date]'s month, or the current month if [date] is null.
+  void jumpToDayPicker([DateTime? date]) {
+    final target = _clamp(start, switch (date) {
+      null => _currentMonth,
+      final m => .utc(m.year, m.month),
+    }, end);
+
+    if (day.controller.hasClients) {
+      day.jumpTo(target);
+    } else {
+      _reattach(day, .day, target);
+    }
   }
 
   /// Shows the month picker for the given [date]'s year, or the current year if [date] is null.
-  void showMonthPicker([DateTime? date]) {
-    month.reattach(
-      _clamp(start, switch (date) {
-        null => _currentMonth,
-        final m => .utc(m.year, m.month),
-      }, end),
-    );
-    _type = .month;
-    notifyListeners();
+  ///
+  /// If the month picker is already shown, its grid animates to the year; otherwise it is shown immediately.
+  Future<void> animateToMonthPicker([
+    DateTime? date,
+    Duration duration = const Duration(milliseconds: 200),
+    Curve curve = Curves.ease,
+  ]) async {
+    final target = _clamp(start, switch (date) {
+      null => _currentMonth,
+      final m => .utc(m.year, m.month),
+    }, end);
+
+    if (month.controller.hasClients) {
+      await month.animateTo(target, duration: duration, curve: curve);
+    } else {
+      _reattach(month, .month, target);
+    }
+  }
+
+  /// Shows the month picker for the given [date]'s year, or the current year if [date] is null.
+  void jumpToMonthPicker([DateTime? date]) {
+    final target = _clamp(start, switch (date) {
+      null => _currentMonth,
+      final m => .utc(m.year, m.month),
+    }, end);
+
+    if (month.controller.hasClients) {
+      month.jumpTo(target);
+    } else {
+      _reattach(month, .month, target);
+    }
   }
 
   /// Shows the year picker for the given [date]'s year, or the current year if [date] is null.
-  void showYearPicker([DateTime? date]) {
-    year.reattach(
-      _clamp(start, switch (date) {
-        null => _currentMonth,
-        final m => .utc(m.year, m.month),
-      }, end),
-    );
-    _type = .year;
+  ///
+  /// If the year picker is already shown, its grid animates to the decade; otherwise it is shown immediately.
+  Future<void> animateToYearPicker([
+    DateTime? date,
+    Duration duration = const Duration(milliseconds: 200),
+    Curve curve = Curves.ease,
+  ]) async {
+    final target = _clamp(start, switch (date) {
+      null => _currentMonth,
+      final m => .utc(m.year, m.month),
+    }, end);
+
+    if (year.controller.hasClients) {
+      await year.animateTo(target, duration: duration, curve: curve);
+    } else {
+      _reattach(year, .year, target);
+    }
+  }
+
+  /// Shows the year picker for the given [date]'s year, or the current year if [date] is null.
+  void jumpToYearPicker([DateTime? date]) {
+    final target = _clamp(start, switch (date) {
+      null => _currentMonth,
+      final m => .utc(m.year, m.month),
+    }, end);
+
+    if (year.controller.hasClients) {
+      year.jumpTo(target);
+    } else {
+      _reattach(year, .year, target);
+    }
+  }
+
+  void _reattach(GridController controller, FCalendarPickerGridType type, DateTime target) {
+    controller.reattach(target);
+    if (type == .day) {
+      _currentMonth = controller.current;
+    }
+    _type = type;
     notifyListeners();
   }
 
@@ -182,11 +257,11 @@ class FGridCalendarController extends _GridCalendarController {
   void cycle() {
     switch (type) {
       case .day:
-        showMonthPicker();
+        jumpToMonthPicker();
       case .month:
-        showYearPicker(month.current);
+        jumpToYearPicker(month.current);
       case .year:
-        showDayPicker();
+        jumpToDayPicker();
     }
   }
 }
@@ -197,10 +272,10 @@ class FGridSplitCalendarController extends _GridCalendarController {
   FGridSplitCalendarController({super.selectable, super.start, super.today, super.initial, super.end});
 
   /// Shows the month picker if not currently shown, and the day picker otherwise.
-  void toggleMonthPicker() => type == .month ? showDayPicker() : showMonthPicker();
+  void toggleMonthPicker() => type == .month ? jumpToDayPicker() : jumpToMonthPicker();
 
   /// Shows the year picker if not currently shown, and the day picker otherwise.
-  void toggleYearPicker() => type == .year ? showDayPicker() : showYearPicker();
+  void toggleYearPicker() => type == .year ? jumpToDayPicker() : jumpToYearPicker();
 }
 
 /// A controller for a [FCalendar] that toggles between a day grid picker and a month-year wheel picker.

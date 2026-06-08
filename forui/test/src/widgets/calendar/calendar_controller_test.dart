@@ -112,36 +112,36 @@ void main() {
       expect(controller().type, FCalendarPickerGridType.day);
     });
 
-    test('showMonthPicker shows the month grid for the current year', () {
-      final c = controller()..showMonthPicker();
+    test('jumpToMonthPicker shows the month grid for the current year', () {
+      final c = controller()..jumpToMonthPicker();
       expect(c.type, FCalendarPickerGridType.month);
       expect(c.month.current, DateTime.utc(2024)); // the month grid pages by year
     });
 
-    test('showYearPicker shows the year grid', () {
-      final c = controller()..showYearPicker();
+    test('jumpToYearPicker shows the year grid', () {
+      final c = controller()..jumpToYearPicker();
       expect(c.type, FCalendarPickerGridType.year);
       expect(c.year.current, DateTime.utc(2020)); // the year grid pages by decade
     });
 
-    test('showDayPicker(date) shows the day grid for that month and updates currentMonth', () {
+    test('jumpToDayPicker(date) shows the day grid for that month and updates currentMonth', () {
       final c = controller()
-        ..showMonthPicker()
-        ..showDayPicker(.utc(2024, 9, 20));
+        ..jumpToMonthPicker()
+        ..jumpToDayPicker(.utc(2024, 9, 20));
 
       expect(c.type, FCalendarPickerGridType.day);
       expect(c.day.current, DateTime.utc(2024, 9));
       expect(c.currentMonth, DateTime.utc(2024, 9));
     });
 
-    test('showDayPicker clamps a date before start to the start month', () {
-      final c = controller()..showDayPicker(.utc(2020));
+    test('jumpToDayPicker clamps a date before start to the start month', () {
+      final c = controller()..jumpToDayPicker(.utc(2020));
       expect(c.day.current, DateTime.utc(2023, 2)); // start is 8 Feb 2023
       expect(c.currentMonth, DateTime.utc(2023, 2));
     });
 
-    test('showDayPicker clamps a date after end to the end month', () {
-      final c = controller()..showDayPicker(.utc(2030));
+    test('jumpToDayPicker clamps a date after end to the end month', () {
+      final c = controller()..jumpToDayPicker(.utc(2030));
       expect(c.day.current, DateTime.utc(2025, 8)); // end is 10 Aug 2025
       expect(c.currentMonth, DateTime.utc(2025, 8));
     });

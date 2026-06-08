@@ -10,22 +10,27 @@ import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
 import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/data/calendar/default.json';
+import dateSnippet from '@/snippets/examples/data/calendar/date.json';
 import datesSnippet from '@/snippets/examples/data/calendar/dates.json';
 import unselectableSnippet from '@/snippets/examples/data/calendar/unselectable.json';
 import rangeSnippet from '@/snippets/examples/data/calendar/range.json';
-import calendarUsage from '@/snippets/usages/data/calendar/calendar.json';
+import splitGridSnippet from '@/snippets/examples/data/calendar/split-grid.json';
+import wheelSnippet from '@/snippets/examples/data/calendar/wheel.json';
+import noneSnippet from '@/snippets/examples/data/calendar/none.json';
+import footerSnippet from '@/snippets/examples/data/calendar/footer.json';
+import gridUsage from '@/snippets/usages/data/calendar/grid.json';
+import splitGridUsage from '@/snippets/usages/data/calendar/splitGrid.json';
+import wheelUsage from '@/snippets/usages/data/calendar/wheel.json';
 
 The calendar supports swipe gestures on mobile platforms, allowing users to navigate between pages by swiping left or right.
 
-A [`FCalendarController`](https://pub.dev/documentation/forui/latest/forui.widgets.calendar/FCalendarController-class.html)
-controls the date selection behavior, including single date, multiple dates, and date range selection.
+A [`FCalendarControl`](https://pub.dev/documentation/forui/latest/forui.widgets.calendar/FCalendarControl-class.html)
+controls navigation, while a [`FDateSelectionControl`](https://pub.dev/documentation/forui/latest/forui.widgets.calendar/FDateSelectionControl-class.html)
+controls the selection behavior (single date, multiple dates, or a range).
 
 <Callout type="info">
-    `FCalendar` and all `FCalendarController`s return `DateTime`s in UTC timezone, truncated to the nearest day.
-</Callout>
-
-<Callout type="info">
-  Hold `Shift` while scrolling to navigate through dates on desktop and web.
+    `FCalendar`, `FDateSelectionController`, and all `FCalendarController`s return `DateTime`s in UTC timezone, truncated
+    to the nearest day.
 </Callout>
 
 <Tabs items={['Preview', 'Code']}>
@@ -41,7 +46,7 @@ controls the date selection behavior, including single date, multiple dates, and
 
 To generate a specific style for customization:
 
-<Tabs items={['Calendar', 'Calendar Header', 'Calendar Day Picker']}>
+<Tabs items={['Calendar', 'Calendar Header', 'Calendar Day Picker', 'Calendar Month Picker', 'Calendar Year Picker']}>
     <Tab value="Calendar">
         ```shell copy
         dart run forui style create calendar
@@ -57,27 +62,69 @@ To generate a specific style for customization:
         dart run forui style create calendar-day-picker
         ````
     </Tab>
+    <Tab value="Calendar Month Picker">
+        ```shell copy
+        dart run forui style create calendar-month-picker
+        ````
+    </Tab>
+    <Tab value="Calendar Year Picker">
+        ```shell copy
+        dart run forui style create calendar-year-picker
+        ````
+    </Tab>
 </Tabs>
 
 ## Usage
 
-### `FCalendar(...)`
-<UsageSnippet usage={calendarUsage} />
+### `FCalendar.grid(...)`
+<UsageSnippet usage={gridUsage} />
+
+### `FCalendar.splitGrid(...)`
+<UsageSnippet usage={splitGridUsage} />
+
+### `FCalendar.wheel(...)`
+<UsageSnippet usage={wheelUsage} />
 
 ## Examples
 
-### Single Date
+### Modes
+
+#### Split Grid
 
 <Tabs items={['Preview', 'Code']}>
     <Tab value="Preview">
-        <Widget name='data/calendar' height={500}/>
+        <Widget name='data/calendar' variant='split-grid' height={500}/>
     </Tab>
     <Tab value="Code">
-        <CodeSnippet snippet={defaultSnippet} />
+        <CodeSnippet snippet={splitGridSnippet} />
     </Tab>
 </Tabs>
 
-### Multiple Dates with Initial Selections
+#### Month-Year Wheel
+
+<Tabs items={['Preview', 'Code']}>
+    <Tab value="Preview">
+        <Widget name='data/calendar' variant='wheel' height={500}/>
+    </Tab>
+    <Tab value="Code">
+        <CodeSnippet snippet={wheelSnippet} />
+    </Tab>
+</Tabs>
+
+### Selection
+
+#### Single Date
+
+<Tabs items={['Preview', 'Code']}>
+    <Tab value="Preview">
+        <Widget name='data/calendar' variant='date' height={500}/>
+    </Tab>
+    <Tab value="Code">
+        <CodeSnippet snippet={dateSnippet} />
+    </Tab>
+</Tabs>
+
+#### Multiple Dates
 
 <Tabs items={['Preview', 'Code']}>
     <Tab value="Preview">
@@ -87,6 +134,31 @@ To generate a specific style for customization:
         <CodeSnippet snippet={datesSnippet} />
     </Tab>
 </Tabs>
+
+#### Range Selection
+
+<Tabs items={['Preview', 'Code']}>
+    <Tab value="Preview">
+        <Widget name='data/calendar' variant='range' height={500}/>
+    </Tab>
+    <Tab value="Code">
+        <CodeSnippet snippet={rangeSnippet} />
+    </Tab>
+</Tabs>
+
+#### Display Only
+
+Pass `selectionControl: .none()` to render a read-only calendar that selects nothing.
+
+<Tabs items={['Preview', 'Code']}>
+    <Tab value="Preview">
+        <Widget name='data/calendar' variant='none' height={500}/>
+    </Tab>
+    <Tab value="Code">
+        <CodeSnippet snippet={noneSnippet} />
+    </Tab>
+</Tabs>
+
 
 ### Unselectable Dates
 
@@ -99,13 +171,13 @@ To generate a specific style for customization:
     </Tab>
 </Tabs>
 
-### Range Selection with Initial Range
+### Custom Footer with Presets
 
 <Tabs items={['Preview', 'Code']}>
     <Tab value="Preview">
-        <Widget name='data/calendar' variant='range' height={500}/>
+        <Widget name='data/calendar' variant='footer' height={500}/>
     </Tab>
     <Tab value="Code">
-        <CodeSnippet snippet={rangeSnippet} />
+        <CodeSnippet snippet={footerSnippet} />
     </Tab>
 </Tabs>

@@ -7,72 +7,72 @@ import 'package:forui/forui.dart';
 import 'package:forui_hooks/forui_hooks.dart';
 
 void main() {
-  testWidgets('useFDateCalendarController', (tester) async {
-    late FCalendarController<DateTime?> controller;
+  testWidgets('useFGridCalendarController', (tester) async {
+    late FGridCalendarController controller;
 
     await tester.pumpWidget(
       MaterialApp(
         home: HookBuilder(
           builder: (context) {
-            controller = useFDateCalendarController();
-            return FCalendar(
-              control: .managedDate(controller: controller),
-              start: DateTime.utc(1900),
-              end: DateTime.utc(2100),
+            controller = useFGridCalendarController(start: DateTime.utc(1900), end: DateTime.utc(2100));
+            return FCalendar.grid(
+              control: FGridCalendarControl(controller: controller),
+              selectionControl: .managedSingle(),
             );
           },
         ),
       ),
     );
 
-    controller.value = .utc(2000);
-
     await tester.pumpAndSettle();
+
+    expect(find.byType(FCalendar), findsOneWidget);
+    expect(controller.type, FCalendarPickerGridType.day);
   });
 
-  testWidgets('useFDatesCalendarController', (tester) async {
-    late FCalendarController<Set<DateTime>> controller;
+  testWidgets('useFGridSplitCalendarController', (tester) async {
+    late FGridSplitCalendarController controller;
 
     await tester.pumpWidget(
       MaterialApp(
         home: HookBuilder(
           builder: (context) {
-            controller = useFDatesCalendarController();
-            return FCalendar(
-              control: .managedDates(controller: controller),
-              start: DateTime.utc(1900),
-              end: DateTime.utc(2100),
+            controller = useFGridSplitCalendarController(start: DateTime.utc(1900), end: DateTime.utc(2100));
+            return FCalendar.splitGrid(
+              control: FGridSplitCalendarControl(controller: controller),
+              selectionControl: .managedSingle(),
             );
           },
         ),
       ),
     );
 
-    controller.value = {DateTime.utc(2000)};
-
     await tester.pumpAndSettle();
+
+    expect(find.byType(FCalendar), findsOneWidget);
+    expect(controller.type, FCalendarPickerGridType.day);
   });
 
-  testWidgets('useFRangeCalendarController', (tester) async {
-    late FCalendarController<(DateTime, DateTime)?> controller;
+  testWidgets('useFWheelCalendarController', (tester) async {
+    late FWheelCalendarController controller;
 
     await tester.pumpWidget(
       MaterialApp(
         home: HookBuilder(
           builder: (context) {
-            controller = useFRangeCalendarController();
-            return FCalendar(
-              control: .managedRange(controller: controller),
-              start: DateTime.utc(1900),
-              end: DateTime.utc(2100),
+            controller = useFWheelCalendarController(start: DateTime.utc(1900), end: DateTime.utc(2100));
+            return FCalendar.wheel(
+              control: FWheelCalendarControl(controller: controller),
+              selectionControl: .managedSingle(),
             );
           },
         ),
       ),
     );
 
-    controller.value = (DateTime.utc(2000), DateTime.utc(2000, 1, 2));
-
     await tester.pumpAndSettle();
+
+    expect(find.byType(FCalendar), findsOneWidget);
+    expect(controller.monthYear, false);
   });
 }

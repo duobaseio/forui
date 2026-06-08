@@ -4,150 +4,136 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:forui/forui.dart';
 
-typedef _Create<T> = FCalendarController<T> Function(_CalendarControllerHook<T>);
+typedef _Create<C extends FCalendarController> = C Function(_CalendarControllerHook<C>);
 
-/// Creates a [FCalendarController] that allows only a single date to be selected and is automatically disposed.
-///
-/// [selectable] will always return true if not given.
-///
-/// [toggleable] determines whether the controller should unselect a date if it is already selected. Defaults to true.
-///
-/// [truncateAndStripTimezone] determines whether the controller should truncate and convert all given [DateTime]s to
-/// dates in UTC timezone. Defaults to true.
-///
-/// ```dart
-/// DateTime truncateAndStripTimezone(DateTime date) => DateTime.utc(date.year, date.month, date.day);
-/// ```
-///
-/// [truncateAndStripTimezone] should be set to false if you can guarantee that all dates are in UTC timezone (with
-/// the help of a 3rd party library), which will improve performance. **Warning:** Giving a [DateTime] in local
-/// timezone or with a time component when [truncateAndStripTimezone] is false is undefined behavior.
-///
-/// ## Contract
-/// Throws [AssertionError] if [initial] is not in UTC timezone and [truncateAndStripTimezone] is false.
-FCalendarController<DateTime?> useFDateCalendarController({
-  DateTime? initial,
-  bool Function(DateTime)? selectable,
-  bool toggleable = true,
-  bool truncateAndStripTimezone = true,
-  List<Object?>? keys,
-}) => use(
-  _CalendarControllerHook<DateTime?>(
-    value: initial,
-    selectable: selectable,
-    toggleable: toggleable,
-    debugLabel: 'useFDateCalendarController',
-    create: (hook) => .date(
-      initial: hook.value,
-      selectable: hook.selectable,
-      toggleable: hook.toggleable,
-      truncateAndStripTimezone: truncateAndStripTimezone,
-    ),
-  ),
-);
-
-/// Creates a [FCalendarController] that allows only multiple dates to be selected and is automatically disposed.
-///
-/// [selectable] will always return true if not given.
-///
-/// [truncateAndStripTimezone] determines whether the controller should truncate and convert all given [DateTime]s to
-/// dates in UTC timezone. Defaults to true.
-///
-/// ```dart
-/// DateTime truncateAndStripTimezone(DateTime date) => DateTime.utc(date.year, date.month, date.day);
-/// ```
-///
-/// [truncateAndStripTimezone] should be set to false if you can guarantee that all dates are in UTC timezone (with
-/// the help of an 3rd party library), which will improve performance. **Warning:** Giving a [DateTime] in local
-/// timezone or with a time component when [truncateAndStripTimezone] is false is undefined behavior.
-///
-/// ## Contract
-/// Throws [AssertionError] if the dates in [initial] are not in UTC timezone and [truncateAndStripTimezone]
-/// is false.
-FCalendarController<Set<DateTime>> useFDatesCalendarController({
-  Set<DateTime> initial = const {},
-  bool Function(DateTime)? selectable,
-  bool truncateAndStripTimezone = true,
-  List<Object?>? keys,
-}) => use(
-  _CalendarControllerHook<Set<DateTime>>(
-    value: initial,
-    selectable: selectable,
-    debugLabel: 'useFDatesCalendarController',
-    create: (hook) =>
-        .dates(initial: hook.value, selectable: hook.selectable, truncateAndStripTimezone: truncateAndStripTimezone),
-  ),
-);
-
-/// Creates a [FCalendarController] that allows a single range to be selected to be selected and is automatically
+/// Creates a [FGridCalendarController] that cycles through the day, month and year grid pickers and is automatically
 /// disposed.
 ///
-/// [selectable] will always return true if not given.
-///
-/// [truncateAndStripTimezone] determines whether the controller should truncate and convert all given [DateTime]s to
-/// dates in UTC timezone. Defaults to true.
-///
-/// ```dart
-/// DateTime truncateAndStripTimezone(DateTime date) => DateTime.utc(date.year, date.month, date.day);
-/// ```
-///
-/// [truncateAndStripTimezone] should be set to false if you can guarantee that all dates are in UTC timezone (with
-/// the help of an 3rd party library), which will improve performance. **Warning:** Giving a [DateTime] in local
-/// timezone or with a time component when [truncateAndStripTimezone] is false is undefined behavior.
-///
-/// Both the start and end dates of the range is inclusive. Unselectable dates within the selected range are selected
-/// regardless.
-///
-/// ## Contract
-/// Throws [AssertionError] if:
-/// * the given dates in [initial] is not in UTC timezone and [truncateAndStripTimezone] is false.
-/// * the end date is less than start date.
-FCalendarController<(DateTime, DateTime)?> useFRangeCalendarController({
-  (DateTime, DateTime)? initial,
+/// [selectable] determines which dates can be selected and always returns true if not given.
+FGridCalendarController useFGridCalendarController({
   bool Function(DateTime)? selectable,
-  bool truncateAndStripTimezone = true,
+  DateTime? start,
+  DateTime? today,
+  DateTime? initial,
+  DateTime? end,
   List<Object?>? keys,
 }) => use(
-  _CalendarControllerHook<(DateTime, DateTime)?>(
-    value: initial,
+  _CalendarControllerHook<FGridCalendarController>(
     selectable: selectable,
-    debugLabel: 'useFRangeCalendarController',
-    create: (hook) =>
-        .range(initial: hook.value, selectable: hook.selectable, truncateAndStripTimezone: truncateAndStripTimezone),
+    start: start,
+    today: today,
+    initial: initial,
+    end: end,
+    debugLabel: 'useFGridCalendarController',
+    create: (hook) => FGridCalendarController(
+      selectable: hook.selectable ?? FCalendarController.defaultSelectable,
+      start: hook.start,
+      today: hook.today,
+      initial: hook.initial,
+      end: hook.end,
+    ),
+    keys: keys,
   ),
 );
 
-class _CalendarControllerHook<T> extends Hook<FCalendarController<T>> {
-  final T value;
+/// Creates a [FGridSplitCalendarController] whose month and year grid pickers are independently togglable and is
+/// automatically disposed.
+///
+/// [selectable] determines which dates can be selected and always returns true if not given.
+FGridSplitCalendarController useFGridSplitCalendarController({
+  bool Function(DateTime)? selectable,
+  DateTime? start,
+  DateTime? today,
+  DateTime? initial,
+  DateTime? end,
+  List<Object?>? keys,
+}) => use(
+  _CalendarControllerHook<FGridSplitCalendarController>(
+    selectable: selectable,
+    start: start,
+    today: today,
+    initial: initial,
+    end: end,
+    debugLabel: 'useFGridSplitCalendarController',
+    create: (hook) => FGridSplitCalendarController(
+      selectable: hook.selectable ?? FCalendarController.defaultSelectable,
+      start: hook.start,
+      today: hook.today,
+      initial: hook.initial,
+      end: hook.end,
+    ),
+    keys: keys,
+  ),
+);
+
+/// Creates a [FWheelCalendarController] that toggles between a day grid picker and a month-year wheel picker and is
+/// automatically disposed.
+///
+/// [selectable] determines which dates can be selected and always returns true if not given.
+FWheelCalendarController useFWheelCalendarController({
+  bool Function(DateTime)? selectable,
+  DateTime? start,
+  DateTime? today,
+  DateTime? initial,
+  DateTime? end,
+  List<Object?>? keys,
+}) => use(
+  _CalendarControllerHook<FWheelCalendarController>(
+    selectable: selectable,
+    start: start,
+    today: today,
+    initial: initial,
+    end: end,
+    debugLabel: 'useFWheelCalendarController',
+    create: (hook) => FWheelCalendarController(
+      selectable: hook.selectable ?? FCalendarController.defaultSelectable,
+      start: hook.start,
+      today: hook.today,
+      initial: hook.initial,
+      end: hook.end,
+    ),
+    keys: keys,
+  ),
+);
+
+class _CalendarControllerHook<C extends FCalendarController> extends Hook<C> {
   final bool Function(DateTime)? selectable;
-  final bool toggleable;
+  final DateTime? start;
+  final DateTime? today;
+  final DateTime? initial;
+  final DateTime? end;
   final String _debugLabel;
-  final _Create<T> _create;
+  final _Create<C> _create;
 
   const _CalendarControllerHook({
-    required this.value,
     required this.selectable,
+    required this.start,
+    required this.today,
+    required this.initial,
+    required this.end,
     required this._debugLabel,
     required this._create,
-    this.toggleable = false,
     super.keys,
   });
 
   @override
-  _CalendarControllerHookState<T> createState() => .new();
+  _CalendarControllerHookState<C> createState() => .new();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('initialSelection', value))
       ..add(ObjectFlagProperty.has('selectable', selectable))
-      ..add(FlagProperty('toggleable', value: toggleable, ifTrue: 'toggleable'));
+      ..add(DiagnosticsProperty('start', start))
+      ..add(DiagnosticsProperty('today', today))
+      ..add(DiagnosticsProperty('initial', initial))
+      ..add(DiagnosticsProperty('end', end));
   }
 }
 
-class _CalendarControllerHookState<T> extends HookState<FCalendarController<T>, _CalendarControllerHook<T>> {
-  late final FCalendarController<T> _controller;
+class _CalendarControllerHookState<C extends FCalendarController>
+    extends HookState<C, _CalendarControllerHook<C>> {
+  late final C _controller;
 
   @override
   void initHook() {
@@ -155,7 +141,7 @@ class _CalendarControllerHookState<T> extends HookState<FCalendarController<T>, 
   }
 
   @override
-  FCalendarController<T> build(BuildContext context) => _controller;
+  C build(BuildContext context) => _controller;
 
   @override
   void dispose() => _controller.dispose();
