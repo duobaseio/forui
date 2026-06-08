@@ -5,8 +5,8 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 final dateField = FDateField(
-  // {@category "Control"}
-  control: const .managed(),
+  // {@category "Selection"}
+  selectionControl: .managedSingle(),
   // {@endcategory}
   // {@category "Popover Control"}
   popoverControl: const .managed(),
@@ -18,6 +18,7 @@ final dateField = FDateField(
   onReset: () {},
   autovalidateMode: .onUnfocus,
   forceErrorText: null,
+  validator: (date) => null,
   errorBuilder: FFormFieldProperties.defaultErrorBuilder,
   formFieldKey: null,
   // {@endcategory}
@@ -38,8 +39,7 @@ final dateField = FDateField(
   suffixBuilder: null,
   // {@endcategory}
   // {@category "Calendar"}
-  popoverBuilder: (context, controller, popoverController, content) => content,
-  calendar: const FDateFieldCalendarProperties(),
+  calendar: const FDateFieldGridCalendarProperties(),
   // {@endcategory}
   // {@category "Accessibility"}
   autofocus: false,
@@ -53,8 +53,8 @@ final dateField = FDateField(
 );
 
 final calendar = FDateField.calendar(
-  // {@category "Control"}
-  control: const .managed(),
+  // {@category "Selection"}
+  selectionControl: .managedSingle(),
   // {@endcategory}
   // {@category "Popover Control"}
   popoverControl: const .managed(),
@@ -66,6 +66,7 @@ final calendar = FDateField.calendar(
   onReset: () {},
   autovalidateMode: .onUnfocus,
   forceErrorText: null,
+  validator: (date) => null,
   errorBuilder: FFormFieldProperties.defaultErrorBuilder,
   formFieldKey: null,
   // {@endcategory}
@@ -84,25 +85,7 @@ final calendar = FDateField.calendar(
   suffixBuilder: null,
   // {@endcategory}
   // {@category "Calendar"}
-  anchor: .topLeft,
-  fieldAnchor: .bottomLeft,
-  spacing: const .spacing(4),
-  overflow: .flip,
-  offset: .zero,
-  useViewPadding: true,
-  useViewInsets: true,
-  hideRegion: .excludeChild,
-  groupId: null,
-  onTapHide: null,
-  cutout: true,
-  cutoutBuilder: FModalBarrier.defaultCutoutBuilder,
-  popoverBuilder: (context, controller, popoverController, content) => content,
-  dayBuilder: FCalendar.defaultDayBuilder,
-  start: null,
-  end: null,
-  today: null,
-  initialType: .day,
-  autoHide: true,
+  calendar: const FDateFieldGridCalendarProperties(),
   // {@endcategory}
   // {@category "Accessibility"}
   autofocus: false,
@@ -116,12 +99,13 @@ final calendar = FDateField.calendar(
 );
 
 final input = FDateField.input(
-  // {@category "Control"}
-  control: const .managed(),
+  // {@category "Selection"}
+  selectionControl: .managedSingle(),
   // {@endcategory}
   // {@category "Form"}
   label: const Text('Label'),
   description: const Text('Description'),
+  validator: (date) => null,
   onSaved: (date) {},
   onReset: () {},
   autovalidateMode: .onUnfocus,
@@ -156,19 +140,19 @@ final input = FDateField.input(
   // {@endcategory}
 );
 
-// {@category "Control" "`.lifted()`"}
-/// Externally controls the date field's date.
-final FDateFieldControl lifted = .lifted(date: .utc(2026), validator: (date) => null, onChange: (date) {});
+// {@category "Selection" "`.lifted()`"}
+/// Externally controls the selected date.
+final FDateSelectionControl<Object?> selectionLifted = .lifted(selected: (date) => false, select: (date) {});
 
-// {@category "Control" "`.managed()` with internal controller"}
-/// Manages the date field state internally.
-final FDateFieldControl managedInternal = .managed(initial: .utc(2026), validator: (date) => null, onChange: (date) {});
+// {@category "Selection" "`.managedSingle()` with internal controller"}
+/// Manages the selected date internally.
+final FDateSelectionControl<DateTime?> selectionManaged = .managedSingle(initial: .utc(2026), onChange: (date) {});
 
-// {@category "Control" "`.managed()` with external controller"}
-/// Uses an external `FDateFieldController` to control the date field's state.
-final FDateFieldControl managedExternal = .managed(
+// {@category "Selection" "`.managedSingle()` with external controller"}
+/// Uses an external `FDateSelectionController` to control the selected date.
+final FDateSelectionControl<DateTime?> selectionExternal = .managedSingle(
   // Don't create a controller inline. Store it in a State instead.
-  controller: FDateFieldController(date: .utc(2026), validator: (date) => null),
+  controller: FDateSelectionController.single(),
   onChange: (date) {},
 );
 
@@ -186,6 +170,25 @@ final FPopoverControl popoverExternal = .managed(
   // Don't create a controller inline. Store it in a State instead.
   controller: FPopoverController(vsync: vsync, shown: true),
   onChange: (shown) {},
+);
+
+// {@category "Calendar" "Grid"}
+/// A calendar that cycles through the day, month and year grid pickers.
+const FDateFieldCalendarProperties grid = FDateFieldGridCalendarProperties();
+
+// {@category "Calendar" "Split grid"}
+/// A calendar with a split header whose month and year grid pickers are independently togglable.
+const FDateFieldCalendarProperties splitGrid = FDateFieldGridSplitCalendarProperties();
+
+// {@category "Calendar" "Wheel"}
+/// A calendar that toggles between a day grid picker and a month-year wheel picker.
+const FDateFieldCalendarProperties wheel = FDateFieldWheelCalendarProperties();
+
+// {@category "Calendar" "External controller"}
+/// Uses an external `FGridCalendarController` for programmatic navigation.
+final FDateFieldCalendarProperties externalCalendar = FDateFieldGridCalendarProperties(
+  // Don't create a controller inline. Store it in a State instead.
+  control: FGridCalendarControl(controller: FGridCalendarController()),
 );
 
 // {@category "Size" "Small"}

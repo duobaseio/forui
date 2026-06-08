@@ -116,9 +116,9 @@ final wheel = FCalendar.wheel(
   // {@endcategory}
 );
 
-// {@category "Selection" "`.none()`"}
-/// Displays a read-only calendar that selects nothing.
-final FDateSelectionControl<Object?> selectionNone = .none();
+// {@category "Selection" "`.lifted()`"}
+/// Lifts selection state to the parent for external state management.
+final FDateSelectionControl<Object?> selectionLifted = .lifted(selected: (date) => false, select: (date) {});
 
 // {@category "Selection" "`.managedSingle()` with internal controller"}
 /// Single date selection managed internally.
@@ -163,6 +163,6 @@ final FDateSelectionControl<(DateTime, DateTime)?> selectionRangeExternal = .man
   onChange: (range) {},
 );
 
-// {@category "Selection" "`.lifted()`"}
-/// Lifts selection state to the parent for external state management.
-final FDateSelectionControl<Object?> selectionLifted = .lifted(selected: (date) => false, select: (date) {});
+// {@category "Selection" "`.none()`"}
+/// Displays a read-only calendar that selects nothing.
+final FDateSelectionControl<Object?> selectionNone = .none();

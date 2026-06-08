@@ -1,7 +1,6 @@
 part of '../date_field.dart';
 
-// ignore: avoid_implementing_value_types
-class _CalendarDateField extends FDateField implements FDateFieldCalendarProperties {
+class _CalendarDateField extends FDateField {
   final FPopoverControl popoverControl;
   final String Function(BuildContext context, DateTime value, DateFormat format) format;
   final String? hint;
@@ -12,46 +11,8 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
   final MouseCursor mouseCursor;
   final bool canRequestFocus;
   final bool clearable;
-  @override
-  final AlignmentGeometry anchor;
-  @override
-  final AlignmentGeometry fieldAnchor;
-  @override
-  final FPortalSpacing spacing;
-  @override
-  final FPortalOverflow overflow;
-  @override
-  final Offset offset;
-  @override
-  final bool useViewPadding;
-  @override
-  final bool useViewInsets;
-  @override
-  final FPopoverHideRegion hideRegion;
-  @override
-  final Object? groupId;
-  @override
-  final VoidCallback? onTapHide;
-  @override
-  final bool cutout;
-  @override
-  final void Function(Path path, Rect bounds) cutoutBuilder;
-  @override
-  final FDateFieldPopoverBuilder popoverBuilder;
-  @override
-  final ValueWidgetBuilder<FCalendarDayData> dayBuilder;
-  @override
-  final DateTime? start;
-  @override
-  final DateTime? end;
-  @override
-  final DateTime? today;
-  @override
-  final FCalendarPickerType initialType;
-  @override
-  final bool autoHide;
 
-  const _CalendarDateField({
+  _CalendarDateField({
     this.popoverControl = const .managed(),
     this.format = FDateField.defaultFormat,
     this.hint,
@@ -62,26 +23,8 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
     this.mouseCursor = .defer,
     this.canRequestFocus = true,
     this.clearable = false,
-    this.anchor = .topLeft,
-    this.fieldAnchor = .bottomLeft,
-    this.spacing = const .spacing(4),
-    this.overflow = .flip,
-    this.offset = .zero,
-    this.useViewPadding = true,
-    this.useViewInsets = true,
-    this.hideRegion = .excludeChild,
-    this.groupId,
-    this.onTapHide,
-    this.cutout = true,
-    this.cutoutBuilder = FModalBarrier.defaultCutoutBuilder,
-    this.popoverBuilder = FPopover.defaultPopoverBuilder,
-    this.dayBuilder = FCalendar.defaultDayBuilder,
-    this.start,
-    this.end,
-    this.today,
-    this.initialType = .day,
-    this.autoHide = true,
-    super.control,
+    super.calendar = const FDateFieldGridCalendarProperties(),
+    super.selectionControl,
     super.size,
     super.style,
     super.autofocus,
@@ -96,6 +39,7 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
     super.onReset,
     super.autovalidateMode,
     super.forceErrorText,
+    super.validator,
     super.errorBuilder,
     super.formFieldKey,
     super.key,
@@ -115,11 +59,9 @@ class _CalendarDateField extends FDateField implements FDateFieldCalendarPropert
       ..add(DiagnosticsProperty('textAlignVertical', textAlignVertical))
       ..add(EnumProperty('textDirection', textDirection))
       ..add(FlagProperty('expands', value: expands, ifTrue: 'expands'))
-      ..add(ObjectFlagProperty.has('onTapHide', onTapHide))
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
       ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
-      ..add(FlagProperty('clearable', value: clearable, ifTrue: 'clearable'))
-      ..add(ObjectFlagProperty.has('popoverBuilder', popoverBuilder));
+      ..add(FlagProperty('clearable', value: clearable, ifTrue: 'clearable'));
   }
 }
 
@@ -136,7 +78,6 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
     super.initState();
     _textController.addListener(_onTextChange);
     _popoverController = widget.popoverControl.create(_handleOnPopoverChange, this);
-    _controller = widget.control.create(_handleOnChange, this);
   }
 
   @override
@@ -152,17 +93,12 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
     _popoverController = widget.popoverControl
         .update(old.popoverControl, _popoverController, _handleOnPopoverChange, this)
         .$1;
-    final (controller, updated) = widget.control.update(old.control, _controller, _handleOnChange, this);
-    if (updated) {
-      _controller = controller;
-      _updateTextController();
-    }
+    _updateTextController();
   }
 
   @override
   void dispose() {
     widget.popoverControl.dispose(_popoverController, _handleOnPopoverChange);
-    widget.control.dispose(_controller, _handleOnChange);
     _textController
       ..removeListener(_onTextChange)
       ..dispose();
@@ -171,19 +107,18 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
 
   void _onTextChange() {
     if (_textController.text.isEmpty) {
-      _controller.value = null;
+      _selectionController.value = null;
     }
   }
 
-  void _handleOnChange() {
+  @override
+  void _handleOnSelectionChange() {
+    super._handleOnSelectionChange();
     _updateTextController();
-    if (widget.control case FDateFieldManagedControl(:final onChange?)) {
-      onChange(_controller.value);
-    }
   }
 
   void _updateTextController() {
-    if (_controller.value case final value?) {
+    if (_selectionController.value case final value?) {
       _textController.text = widget.format(context, value, _format!);
     } else {
       _textController.text = '';
@@ -205,13 +140,13 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
 
     return Field<DateTime>(
       key: widget.formFieldKey,
-      controller: _controller,
+      controller: _selectionController,
       enabled: widget.enabled,
       autovalidateMode: widget.autovalidateMode,
       forceErrorText: widget.forceErrorText,
       onSaved: onSaved,
       onReset: widget.onReset,
-      validator: _controller.validator,
+      validator: widget.validator,
       builder: (state) => FTextField(
         control: .managed(controller: _textController),
         focusNode: _focus,
@@ -237,10 +172,10 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
         enabled: widget.enabled,
         builder: (context, _, variants, field) => _CalendarPopover(
           popoverController: _popoverController,
-          controller: _controller,
-          popoverBuilder: widget.popoverBuilder,
+          calendarController: _calendarController!,
+          selectionController: _selectionController,
           style: style,
-          properties: widget,
+          properties: widget._calendar!,
           autofocus: true,
           fieldFocusNode: _focus,
           child: CallbackShortcuts(
@@ -261,9 +196,9 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
 }
 
 class _CalendarPopover extends StatelessWidget {
-  final FDateFieldController controller;
+  final FCalendarController calendarController;
+  final FDateSelectionController<DateTime?> selectionController;
   final FPopoverController popoverController;
-  final FDateFieldPopoverBuilder popoverBuilder;
   final FDateFieldStyle style;
   final FDateFieldCalendarProperties properties;
   final bool autofocus;
@@ -271,9 +206,9 @@ class _CalendarPopover extends StatelessWidget {
   final Widget child;
 
   const _CalendarPopover({
-    required this.controller,
+    required this.calendarController,
+    required this.selectionController,
     required this.popoverController,
-    required this.popoverBuilder,
     required this.style,
     required this.properties,
     required this.autofocus,
@@ -299,47 +234,96 @@ class _CalendarPopover extends StatelessWidget {
     cutoutBuilder: properties.cutoutBuilder,
     autofocus: autofocus,
     shortcuts: {const SingleActivator(.escape): _hide},
-    popoverBuilder: (context, _) => TextFieldTapRegion(
-      child: popoverBuilder(
-        context,
-        controller,
-        popoverController,
-        ValueListenableBuilder(
-          valueListenable: controller.calendar,
-          builder: (_, value, _) => FCalendar(
-            control: .managedDate(controller: controller.calendar),
+    popoverBuilder: (context, _) {
+      final selection = FDateSelectionControl.managedSingle(controller: selectionController);
+      return TextFieldTapRegion(
+        child: properties.popoverBuilder(context, calendarController, popoverController, switch (properties) {
+          final FDateFieldGridCalendarProperties properties => FCalendar.grid(
+            control: FGridCalendarControl(controller: calendarController as FGridCalendarController),
+            selectionControl: selection,
             style: style.calendarStyle,
-            initialMonth: switch (value) {
-              null => null,
-              _ when value.isBefore(properties.start ?? .utc(1900)) => properties.today,
-              _ when value.isAfter(properties.end ?? .utc(2100)) => properties.today,
-              _ => value,
-            },
-            onPress: properties.autoHide ? (_) => _hide() : null,
             dayBuilder: properties.dayBuilder,
-            start: properties.start,
-            end: properties.end,
-            today: properties.today,
-            initialType: properties.initialType,
+            monthBuilder: properties.monthBuilder,
+            yearBuilder: properties.yearBuilder,
+            dayScrollPhysics: properties.dayScrollPhysics,
+            dayScrollCacheExtent: properties.dayScrollCacheExtent,
+            dayScrollBehavior: properties.dayScrollBehavior,
+            monthScrollPhysics: properties.monthScrollPhysics,
+            monthScrollCacheExtent: properties.monthScrollCacheExtent,
+            monthScrollBehavior: properties.monthScrollBehavior,
+            yearScrollPhysics: properties.yearScrollPhysics,
+            yearScrollCacheExtent: properties.yearScrollCacheExtent,
+            yearScrollBehavior: properties.yearScrollBehavior,
+            headerBuilder: properties.headerBuilder,
+            footerBuilder: properties.footerBuilder,
+            onDayPress: _onDayPress(properties.onDayPress),
+            onDayLongPress: properties.onDayLongPress,
           ),
-        ),
-      ),
-    ),
+          final FDateFieldGridSplitCalendarProperties properties => FCalendar.splitGrid(
+            control: FGridSplitCalendarControl(controller: calendarController as FGridSplitCalendarController),
+            selectionControl: selection,
+            style: style.calendarStyle,
+            dayBuilder: properties.dayBuilder,
+            monthBuilder: properties.monthBuilder,
+            yearBuilder: properties.yearBuilder,
+            dayScrollPhysics: properties.dayScrollPhysics,
+            dayScrollCacheExtent: properties.dayScrollCacheExtent,
+            dayScrollBehavior: properties.dayScrollBehavior,
+            yearScrollPhysics: properties.yearScrollPhysics,
+            yearScrollCacheExtent: properties.yearScrollCacheExtent,
+            yearScrollBehavior: properties.yearScrollBehavior,
+            headerBuilder: properties.headerBuilder,
+            footerBuilder: properties.footerBuilder,
+            onDayPress: _onDayPress(properties.onDayPress),
+            onDayLongPress: properties.onDayLongPress,
+          ),
+          final FDateFieldWheelCalendarProperties properties => FCalendar.wheel(
+            control: FWheelCalendarControl(controller: calendarController as FWheelCalendarController),
+            selectionControl: selection,
+            style: style.calendarStyle,
+            dayBuilder: properties.dayBuilder,
+            loop: properties.loop,
+            monthFlex: properties.monthFlex,
+            yearFlex: properties.yearFlex,
+            dayScrollPhysics: properties.dayScrollPhysics,
+            dayScrollCacheExtent: properties.dayScrollCacheExtent,
+            dayScrollBehavior: properties.dayScrollBehavior,
+            headerBuilder: properties.headerBuilder,
+            footerBuilder: properties.footerBuilder,
+            onDayPress: _onDayPress(properties.onDayPress),
+            onDayLongPress: properties.onDayLongPress,
+          ),
+        }),
+      );
+    },
     child: child,
   );
 
-  void _hide() {
+  FutureOr<void> Function(DateTime)? _onDayPress(FutureOr<void> Function(DateTime)? onDayPress) {
+    if (!properties.autoHide && onDayPress == null) {
+      return null;
+    }
+
+    return (date) async {
+      await onDayPress?.call(date);
+      if (properties.autoHide) {
+        await _hide();
+      }
+    };
+  }
+
+  Future<void> _hide() async {
     fieldFocusNode?.requestFocus();
-    popoverController.hide();
+    await popoverController.hide();
   }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('controller', controller))
+      ..add(DiagnosticsProperty('calendarController', calendarController))
+      ..add(DiagnosticsProperty('selectionController', selectionController))
       ..add(DiagnosticsProperty('popoverController', popoverController))
-      ..add(ObjectFlagProperty.has('popoverBuilder', popoverBuilder))
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('properties', this.properties))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))

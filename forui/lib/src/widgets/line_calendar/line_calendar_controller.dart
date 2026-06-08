@@ -1,7 +1,5 @@
 import 'package:flutter/foundation.dart';
 
-import 'package:sugar/core.dart';
-
 import 'package:forui/forui.dart';
 
 part 'line_calendar_controller.control.dart';
@@ -79,7 +77,6 @@ sealed class FLineCalendarControl with Diagnosticable, _$FLineCalendarControlMix
   ///
   /// The [date] parameter contains the current selected date.
   /// The [onChange] callback is invoked when the user selects a date.
-  /// The [selectable] predicate determines whether a date can be selected. Defaults to always returning true.
   const factory FLineCalendarControl.lifted({
     required DateTime? date,
     required ValueChanged<DateTime?> onChange,

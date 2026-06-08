@@ -114,6 +114,8 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/form/date-field/default', page: DateFieldRoute.page),
     AutoRoute(path: '/form/date-field/clearable', page: ClearableDateFieldRoute.page),
     AutoRoute(path: '/form/date-field/calendar', page: CalendarDateFieldRoute.page),
+    AutoRoute(path: '/form/date-field/split-grid', page: SplitGridDateFieldRoute.page),
+    AutoRoute(path: '/form/date-field/wheel', page: WheelDateFieldRoute.page),
     AutoRoute(path: '/form/date-field/input', page: InputDateFieldRoute.page),
     AutoRoute(path: '/form/date-field/popover-builder', page: PopoverBuilderDateFieldRoute.page),
     AutoRoute(path: '/form/date-field/validator', page: ValidatorDateFieldRoute.page),

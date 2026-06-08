@@ -16,7 +16,7 @@ void main() {
     (Locale('hr'), 'Odaberite datum'),
   ].indexed) {
     testWidgets('placeholder - $index', (tester) async {
-      await tester.pumpWidget(TestScaffold.app(locale: locale, child: const FDateField.calendar()));
+      await tester.pumpWidget(TestScaffold.app(locale: locale, child: FDateField.calendar()));
 
       expect(find.text(placeholder), findsOneWidget);
     });
@@ -31,7 +31,10 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           locale: locale,
-          child: FDateField.calendar(key: key, today: .utc(2025, 1, 15)),
+          child: FDateField.calendar(
+            key: key,
+            calendar: FDateFieldGridCalendarProperties(control: FGridCalendarControl(today: .utc(2025, 1, 15))),
+          ),
         ),
       );
 
@@ -48,14 +51,14 @@ void main() {
   group('managed', () {
     testWidgets('called when value changes', (tester) async {
       DateTime? changed;
-      final controller = autoDispose(FDateFieldController());
+      final controller = autoDispose(FDateSelectionController.single());
 
       await tester.pumpWidget(
         TestScaffold.app(
           locale: const Locale('en', 'SG'),
           child: FDateField.calendar(
-            control: .managed(controller: controller, onChange: (v) => changed = v),
-            today: DateTime.utc(2025, 1, 15),
+            selectionControl: .managedSingle(controller: controller, onChange: (v) => changed = v),
+            calendar: FDateFieldGridCalendarProperties(control: FGridCalendarControl(today: .utc(2025, 1, 15))),
           ),
         ),
       );
@@ -67,19 +70,17 @@ void main() {
     });
   });
 
-  group('lifted', () {
+  group('external controller', () {
     testWidgets('interaction works', (tester) async {
-      DateTime? value;
+      final controller = autoDispose(FDateSelectionController.single());
 
       await tester.pumpWidget(
         TestScaffold.app(
           locale: const Locale('en', 'SG'),
-          child: StatefulBuilder(
-            builder: (context, setState) => FDateField.calendar(
-              key: key,
-              control: .lifted(date: value, onChange: (v) => setState(() => value = v)),
-              today: .utc(2025, 1, 15),
-            ),
+          child: FDateField.calendar(
+            key: key,
+            selectionControl: .managedSingle(controller: controller),
+            calendar: FDateFieldGridCalendarProperties(control: FGridCalendarControl(today: .utc(2025, 1, 15))),
           ),
         ),
       );
@@ -90,41 +91,20 @@ void main() {
       await tester.tap(find.text('15'));
       await tester.pumpAndSettle();
 
-      expect(value, DateTime.utc(2025, 1, 15));
-    });
-
-    testWidgets('value does not change when onChange does not update state', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold.app(
-          locale: const Locale('en', 'SG'),
-          child: StatefulBuilder(
-            builder: (context, setState) => FDateField.calendar(
-              key: key,
-              control: .lifted(date: null, onChange: (v) => setState(() {})),
-              today: .utc(2025, 1, 15),
-            ),
-          ),
-        ),
-      );
-
-      await tester.tap(find.byKey(key));
-      await tester.pumpAndSettle();
-
-      await tester.tap(find.text('15'));
-      await tester.pumpAndSettle();
-
-      expect(find.text('Pick a date'), findsOneWidget);
+      expect(controller.value, DateTime.utc(2025, 1, 15));
     });
   });
 
   testWidgets('validator', (tester) async {
+    debugDefaultTargetPlatformOverride = .macOS;
+
     await tester.pumpWidget(
       TestScaffold.app(
         locale: const Locale('en', 'SG'),
         child: FDateField.calendar(
-          control: .managed(validator: (date) => date == .utc(2025, 1, 16) ? 'Custom error.' : null),
+          validator: (date) => date == DateTime.utc(2025, 1, 16) ? 'Custom error.' : null,
           key: key,
-          today: DateTime.utc(2025, 1, 15),
+          calendar: FDateFieldGridCalendarProperties(control: FGridCalendarControl(today: .utc(2025, 1, 15))),
         ),
       ),
     );
@@ -135,14 +115,22 @@ void main() {
     await tester.tap(find.text('16'));
     await tester.pumpAndSettle();
 
-    expect(find.text('16 Jan 2025'), findsNothing);
+    await tester.tapAt(const Offset(500, 500));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Custom error.'), findsOneWidget);
+
+    debugDefaultTargetPlatformOverride = null;
   });
 
   testWidgets('unselect', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
         locale: const Locale('en', 'SG'),
-        child: FDateField.calendar(key: key, today: .utc(2025, 1, 15)),
+        child: FDateField.calendar(
+          key: key,
+          calendar: FDateFieldGridCalendarProperties(control: FGridCalendarControl(today: .utc(2025, 1, 15))),
+        ),
       ),
     );
 
@@ -170,7 +158,7 @@ void main() {
         child: FDateField.calendar(
           key: key,
           format: (_, date, _) => DateFormat.yMMMMd('en_SG').format(date),
-          today: .utc(2025, 1, 15),
+          calendar: FDateFieldGridCalendarProperties(control: FGridCalendarControl(today: .utc(2025, 1, 15))),
         ),
       ),
     );
@@ -187,7 +175,10 @@ void main() {
   testWidgets('holding & releasing on date field does not cause calendar to disappear & reappear', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        child: FDateField.calendar(key: key, today: .utc(2025, 1, 15)),
+        child: FDateField.calendar(
+          key: key,
+          calendar: FDateFieldGridCalendarProperties(control: FGridCalendarControl(today: .utc(2025, 1, 15))),
+        ),
       ),
     );
 
@@ -209,7 +200,10 @@ void main() {
     testWidgets('no clear icon', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FDateField.calendar(key: key, today: .utc(2025, 1, 15)),
+          child: FDateField.calendar(
+            key: key,
+            calendar: FDateFieldGridCalendarProperties(control: FGridCalendarControl(today: .utc(2025, 1, 15))),
+          ),
         ),
       );
 
@@ -225,7 +219,11 @@ void main() {
     testWidgets('shows clear icon', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FDateField.calendar(key: key, today: .utc(2025, 1, 15), clearable: true),
+          child: FDateField.calendar(
+            key: key,
+            clearable: true,
+            calendar: FDateFieldGridCalendarProperties(control: FGridCalendarControl(today: .utc(2025, 1, 15))),
+          ),
         ),
       );
       expect(find.bySemanticsLabel('Clear'), findsNothing);
@@ -240,16 +238,16 @@ void main() {
     });
 
     testWidgets('clearing resets controller value', (tester) async {
-      final controller = autoDispose(FDateFieldController());
+      final controller = autoDispose(FDateSelectionController.single());
 
       await tester.pumpWidget(
         TestScaffold.app(
           locale: const Locale('en', 'SG'),
           child: FDateField.calendar(
             key: key,
-            today: .utc(2025, 1, 15),
             clearable: true,
-            control: .managed(controller: controller),
+            selectionControl: .managedSingle(controller: controller),
+            calendar: FDateFieldGridCalendarProperties(control: FGridCalendarControl(today: .utc(2025, 1, 15))),
           ),
         ),
       );

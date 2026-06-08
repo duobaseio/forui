@@ -14,18 +14,16 @@ void main() {
 
   setUpAll(initializeDateFormatting);
 
-  group('lifted', () {
+  group('external controller', () {
     testWidgets('text input interaction works', (tester) async {
-      DateTime? value;
+      final selection = autoDispose(FDateSelectionController.single());
 
       await tester.pumpWidget(
         TestScaffold.app(
           locale: const Locale('en', 'SG'),
-          child: StatefulBuilder(
-            builder: (context, setState) => FDateField(
-              key: key,
-              control: .lifted(date: value, onChange: (v) => setState(() => value = v)),
-            ),
+          child: FDateField(
+            key: key,
+            selectionControl: .managedSingle(controller: selection),
           ),
         ),
       );
@@ -33,21 +31,19 @@ void main() {
       await tester.enterText(find.byKey(key), '15/01/2025');
       await tester.pumpAndSettle();
 
-      expect(value, DateTime.utc(2025, 1, 15));
+      expect(selection.value, DateTime.utc(2025, 1, 15));
     });
 
     testWidgets('calendar interaction works', (tester) async {
-      DateTime? value;
+      final selection = autoDispose(FDateSelectionController.single());
 
       await tester.pumpWidget(
         TestScaffold.app(
           locale: const Locale('en', 'SG'),
-          child: StatefulBuilder(
-            builder: (context, setState) => FDateField(
-              key: key,
-              control: .lifted(date: value, onChange: (v) => setState(() => value = v)),
-              calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15)),
-            ),
+          child: FDateField(
+            key: key,
+            selectionControl: .managedSingle(controller: selection),
+            calendar: FDateFieldGridCalendarProperties(control: FGridCalendarControl(today: DateTime.utc(2025, 1, 15))),
           ),
         ),
       );
@@ -58,60 +54,18 @@ void main() {
       await tester.tap(find.text('15'));
       await tester.pumpAndSettle();
 
-      expect(value, DateTime.utc(2025, 1, 15));
-    });
-
-    testWidgets('text input value does not change when onChange does not update state', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold.app(
-          locale: const Locale('en', 'SG'),
-          child: StatefulBuilder(
-            builder: (context, setState) => FDateField(
-              key: key,
-              control: .lifted(date: null, onChange: (v) => setState(() {})),
-            ),
-          ),
-        ),
-      );
-
-      await tester.enterText(find.byKey(key), '15/01/2025');
-      await tester.pumpAndSettle();
-
-      expect(find.text('DD/MM/YYYY'), findsOneWidget);
-    });
-
-    testWidgets('calendar value does not change when onChange does not update state', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold.app(
-          locale: const Locale('en', 'SG'),
-          child: StatefulBuilder(
-            builder: (context, setState) => FDateField(
-              key: key,
-              control: .lifted(date: null, onChange: (v) => setState(() {})),
-              calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15)),
-            ),
-          ),
-        ),
-      );
-
-      await tester.tap(find.byKey(key));
-      await tester.pumpAndSettle();
-
-      await tester.tap(find.text('15'));
-      await tester.pumpAndSettle();
-
-      expect(find.text('DD/MM/YYYY'), findsOneWidget);
+      expect(selection.value, DateTime.utc(2025, 1, 15));
     });
 
     testWidgets('adjustment does not work when text is valid date', (tester) async {
+      final selection = autoDispose(FDateSelectionController.single(initial: DateTime.utc(2025, 1, 15)));
+
       await tester.pumpWidget(
         TestScaffold.app(
           locale: const Locale('en', 'SG'),
-          child: StatefulBuilder(
-            builder: (context, setState) => FDateField(
-              key: key,
-              control: .lifted(date: DateTime.utc(2025, 1, 15), onChange: (_) {}),
-            ),
+          child: FDateField(
+            key: key,
+            selectionControl: .managedSingle(controller: selection),
           ),
         ),
       );
@@ -126,16 +80,14 @@ void main() {
     });
 
     testWidgets('adjustment does not produce full date from placeholder', (tester) async {
-      DateTime? value;
+      final selection = autoDispose(FDateSelectionController.single());
 
       await tester.pumpWidget(
         TestScaffold.app(
           locale: const Locale('en', 'SG'),
-          child: StatefulBuilder(
-            builder: (context, setState) => FDateField(
-              key: key,
-              control: .lifted(date: value, onChange: (_) {}),
-            ),
+          child: FDateField(
+            key: key,
+            selectionControl: .managedSingle(controller: selection),
           ),
         ),
       );
@@ -156,16 +108,18 @@ void main() {
       await tester.sendKeyEvent(.arrowUp);
       await tester.pumpAndSettle();
 
-      expect(value, null);
+      expect(selection.value, null);
     });
 
     testWidgets('adjustment produces partial date from placeholder', (tester) async {
+      final selection = autoDispose(FDateSelectionController.single());
+
       await tester.pumpWidget(
         TestScaffold.app(
           locale: const Locale('en', 'SG'),
           child: FDateField(
             key: key,
-            control: .lifted(date: null, onChange: (_) {}),
+            selectionControl: .managedSingle(controller: selection),
           ),
         ),
       );
@@ -183,18 +137,18 @@ void main() {
   group('managed', () {
     testWidgets('called when value changes', (tester) async {
       DateTime? changed;
-      final controller = autoDispose(FDateFieldController());
+      final selection = autoDispose(FDateSelectionController.single());
 
       await tester.pumpWidget(
         TestScaffold.app(
           locale: const Locale('en', 'SG'),
           child: FDateField(
-            control: .managed(controller: controller, onChange: (v) => changed = v),
+            selectionControl: .managedSingle(controller: selection, onChange: (v) => changed = v),
           ),
         ),
       );
 
-      controller.value = DateTime.utc(2025, 1, 15);
+      selection.value = DateTime.utc(2025, 1, 15);
       await tester.pump();
 
       expect(changed, DateTime.utc(2025, 1, 15));
@@ -215,7 +169,9 @@ void main() {
           locale: const Locale('en', 'SG'),
           child: FDateField(
             key: key,
-            calendar: FDateFieldCalendarProperties(start: start, end: end, today: DateTime.utc(2025, 1, 15)),
+            calendar: FDateFieldGridCalendarProperties(
+              control: FGridCalendarControl(start: start, end: end, today: DateTime.utc(2025, 1, 15)),
+            ),
           ),
         ),
       );
@@ -236,7 +192,7 @@ void main() {
         locale: const Locale('en', 'SG'),
         child: FDateField(
           key: key,
-          calendar: FDateFieldCalendarProperties(today: DateTime.utc(2025, 1, 15)),
+          calendar: FDateFieldGridCalendarProperties(control: FGridCalendarControl(today: DateTime.utc(2025, 1, 15))),
         ),
       ),
     );
@@ -262,7 +218,7 @@ void main() {
     testWidgets('input only - change locale', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          child: const LocaleScaffold(child: FDateField.input(key: key)),
+          child: LocaleScaffold(child: FDateField.input(key: key)),
         ),
       );
       expect(find.text('MM/DD/YYYY'), findsOneWidget);
@@ -276,7 +232,7 @@ void main() {
     });
 
     testWidgets('calendar only - change locale', (tester) async {
-      await tester.pumpWidget(TestScaffold.app(child: const LocaleScaffold(child: FDateField.calendar())));
+      await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: FDateField.calendar())));
       expect(find.text('Pick a date'), findsOneWidget);
       expect(find.text('날짜 선택'), findsNothing);
 
@@ -288,39 +244,21 @@ void main() {
     });
 
     for (final (name, field) in [
-      (
-        'calendar only',
-        (controller, focus) => FDateField.calendar(
-          control: .managed(controller: controller),
-          focusNode: focus,
-        ),
-      ),
-      (
-        'input only',
-        (controller, focus) => FDateField.input(
-          control: .managed(controller: controller),
-          focusNode: focus,
-        ),
-      ),
-      (
-        'both',
-        (controller, focus) => FDateField(
-          control: .managed(controller: controller),
-          focusNode: focus,
-        ),
-      ),
+      ('calendar only', (FocusNode focus) => FDateField.calendar(focusNode: focus)),
+      ('input only', (FocusNode focus) => FDateField.input(focusNode: focus)),
+      ('both', (FocusNode focus) => FDateField(focusNode: focus)),
     ]) {
       group(name, () {
         testWidgets('update focus', (tester) async {
           final first = autoDispose(FocusNode());
 
-          await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(null, first))));
+          await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(first))));
 
           expect(first.hasListeners, true);
 
           final second = autoDispose(FocusNode());
 
-          await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(null, second))));
+          await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(second))));
 
           expect(first.hasListeners, false);
           expect(second.hasListeners, true);
@@ -329,7 +267,7 @@ void main() {
         testWidgets('dispose focus', (tester) async {
           final first = autoDispose(FocusNode());
 
-          await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(null, first))));
+          await tester.pumpWidget(TestScaffold.app(child: LocaleScaffold(child: field(first))));
           expect(first.hasListeners, true);
 
           await tester.pumpWidget(TestScaffold.app(child: const LocaleScaffold(child: SizedBox())));

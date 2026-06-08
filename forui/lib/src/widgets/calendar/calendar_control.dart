@@ -13,7 +13,7 @@ sealed class FCalendarControl with Diagnosticable, _$FCalendarControlMixin {
 /// common configurations.
 ///
 /// {@macro forui.foundation.doc_templates.managed}
-abstract class FCalendarManagedControl extends FCalendarControl with _$FCalendarManagedControlMixin {
+sealed class FCalendarManagedControl extends FCalendarControl with _$FCalendarManagedControlMixin {
   /// The controller.
   @override
   final FCalendarController? controller;

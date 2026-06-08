@@ -26,12 +26,12 @@ TextEditingValue _last(TextEditingValue value, int _, int last, int end, int sep
 class DateInputController extends InputController {
   @override
   final DateSelector selector;
-  final FCalendarController<DateTime?> controller;
+  final FDateSelectionController<DateTime?> controller;
   final DateFormat _format;
   late final String _canonicalSpace;
 
   factory DateInputController(
-    FCalendarController<DateTime?> controller,
+    FDateSelectionController<DateTime?> controller,
     FLocalizations localizations,
     FTextFieldStyle style,
     int initialYear,

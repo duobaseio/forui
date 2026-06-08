@@ -12,6 +12,9 @@
 * **Breaking** Remove `useFDatesCalendarController(...)`. Use `useFDatesSelectionController(...)` instead.
 * **Breaking** Remove `useFRangeCalendarController(...)`. Use `useFRangeSelectionController(...)` instead.
 
+### `FDateField`
+* **Breaking** Remove `useFDateFieldController`.
+
 
 ## 0.22.1
 

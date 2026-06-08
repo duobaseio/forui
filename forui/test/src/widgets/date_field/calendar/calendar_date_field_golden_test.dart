@@ -31,7 +31,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          child: const FDateField.calendar(key: key),
+          child: FDateField.calendar(key: key),
         ),
       );
 
@@ -42,7 +42,7 @@ void main() {
     });
 
     testWidgets('${theme.name} with no icon', (tester) async {
-      await tester.pumpWidget(TestScaffold(theme: theme.data, child: const FDateField.calendar(prefixBuilder: null)));
+      await tester.pumpWidget(TestScaffold(theme: theme.data, child: FDateField.calendar(prefixBuilder: null)));
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/${theme.name}/calendar/no-icon.png'));
     });
@@ -54,7 +54,7 @@ void main() {
           child: FDateField.calendar(
             key: key,
             builder: (context, _, _, child) => ColoredBox(color: context.theme.colors.destructive, child: child),
-            today: DateTime(2025, 4),
+            calendar: FDateFieldGridCalendarProperties(control: FGridCalendarControl(today: DateTime(2025, 4))),
           ),
         ),
       );
@@ -71,7 +71,10 @@ void main() {
           theme: theme.data,
           locale: const Locale('hr'),
           alignment: .topCenter,
-          child: FDateField.calendar(key: key, today: .utc(2025, 1, 15)),
+          child: FDateField.calendar(
+            key: key,
+            calendar: FDateFieldGridCalendarProperties(control: FGridCalendarControl(today: .utc(2025, 1, 15))),
+          ),
         ),
       );
 
@@ -90,7 +93,10 @@ void main() {
           theme: theme.data,
           locale: const Locale('en', 'SG'),
           alignment: .topCenter,
-          child: FDateField.calendar(key: key, today: .utc(2025, 1, 15)),
+          child: FDateField.calendar(
+            key: key,
+            calendar: FDateFieldGridCalendarProperties(control: FGridCalendarControl(today: .utc(2025, 1, 15))),
+          ),
         ),
       );
 
@@ -109,7 +115,13 @@ void main() {
           theme: theme.data,
           locale: const Locale('en', 'SG'),
           alignment: .topCenter,
-          child: FDateField.calendar(key: key, today: .utc(2025, 1, 15), autoHide: false),
+          child: FDateField.calendar(
+            key: key,
+            calendar: FDateFieldGridCalendarProperties(
+              autoHide: false,
+              control: FGridCalendarControl(today: .utc(2025, 1, 15)),
+            ),
+          ),
         ),
       );
 
@@ -129,7 +141,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          child: const FDateField.calendar(enabled: false, key: key),
+          child: FDateField.calendar(enabled: false, key: key),
         ),
       );
 
@@ -144,7 +156,11 @@ void main() {
         TestScaffold.app(
           alignment: .topCenter,
           theme: theme.data,
-          child: FDateField.calendar(forceErrorText: 'Error', key: key, today: DateTime(2025, 4)),
+          child: FDateField.calendar(
+            forceErrorText: 'Error',
+            key: key,
+            calendar: FDateFieldGridCalendarProperties(control: FGridCalendarControl(today: DateTime(2025, 4))),
+          ),
         ),
       );
 
@@ -159,7 +175,9 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: .topCenter,
-          child: FDateField.calendar(today: DateTime(2025, 5, 21)),
+          child: FDateField.calendar(
+            calendar: FDateFieldGridCalendarProperties(control: FGridCalendarControl(today: DateTime(2025, 5, 21))),
+          ),
         ),
       );
 
@@ -182,18 +200,20 @@ void main() {
       TestScaffold.app(
         alignment: .topCenter,
         child: FDateField.calendar(
-          today: DateTime(2025, 5, 21),
-          popoverBuilder: (context, _, _, content) => SingleChildScrollView(
-            child: Column(
-              mainAxisSize: .min,
-              children: [
-                const Padding(padding: .all(8), child: Text('Before')),
-                content,
-                const Padding(padding: .all(8), child: Text('After')),
-              ],
+          key: key,
+          calendar: FDateFieldGridCalendarProperties(
+            control: FGridCalendarControl(today: DateTime(2025, 5, 21)),
+            popoverBuilder: (context, _, _, content) => SingleChildScrollView(
+              child: Column(
+                mainAxisSize: .min,
+                children: [
+                  const Padding(padding: .all(8), child: Text('Before')),
+                  content,
+                  const Padding(padding: .all(8), child: Text('After')),
+                ],
+              ),
             ),
           ),
-          key: key,
         ),
       ),
     );

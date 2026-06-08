@@ -8,7 +8,7 @@ part 'date_field_style.design.dart';
 
 /// A date field's style.
 class FDateFieldStyle with Diagnosticable, _$FDateFieldStyleFunctions {
-  /// The date field's textfield styles.
+  /// The date field's text-field styles.
   @override
   final FTextFieldSizeStyles fieldStyles;
 
@@ -29,10 +29,18 @@ class FDateFieldStyle with Diagnosticable, _$FDateFieldStyleFunctions {
     required FTypography typography,
     required FIcons icons,
     required FStyle style,
+    required FHapticFeedback hapticFeedback,
     required bool touch,
   }) : this(
          fieldStyles: .inherit(colors: colors, typography: typography, style: style, touch: touch),
          popoverStyle: .inherit(colors: colors, style: style),
-         calendarStyle: .inherit(colors: colors, typography: typography, icons: icons, style: style, touch: touch),
+         calendarStyle: .inherit(
+           colors: colors,
+           typography: typography,
+           icons: icons,
+           style: style,
+           hapticFeedback: hapticFeedback,
+           touch: touch,
+         ),
        );
 }

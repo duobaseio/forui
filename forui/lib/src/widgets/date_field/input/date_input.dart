@@ -10,12 +10,12 @@ import 'package:forui/src/widgets/date_field/input/date_input_controller.dart';
 
 @internal
 class DateInput extends Input<DateTime?> {
-  final FCalendarController<DateTime?> calendarController;
+  final FDateSelectionController<DateTime?> selectionController;
   final FDateFieldStyle style;
   final int baselineYear;
 
   const DateInput({
-    required this.calendarController,
+    required this.selectionController,
     required this.style,
     required this.baselineYear,
     required super.controller,
@@ -57,7 +57,7 @@ class DateInput extends Input<DateTime?> {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
-      ..add(DiagnosticsProperty('calendarController', calendarController))
+      ..add(DiagnosticsProperty('selectionController', selectionController))
       ..add(DiagnosticsProperty('style', style))
       ..add(IntProperty('baselineYear', baselineYear));
   }
@@ -73,7 +73,7 @@ class _DateInputState extends InputState<DateInput, DateTime?> {
           : widget.localizations;
       inputController.dispose();
       inputController = createController();
-    } else if (widget.calendarController != old.calendarController) {
+    } else if (widget.selectionController != old.selectionController) {
       inputController.dispose();
       inputController = createController();
     }
@@ -82,7 +82,7 @@ class _DateInputState extends InputState<DateInput, DateTime?> {
   @override
   @protected
   InputController createController() => DateInputController(
-    widget.calendarController,
+    widget.selectionController,
     localizations,
     widget.style.fieldStyles.resolve({widget.size, widget.platformVariant}),
     widget.baselineYear,
@@ -98,7 +98,7 @@ class _DateInputState extends InputState<DateInput, DateTime?> {
 
   @override
   @protected
-  DateTime? get value => widget.calendarController.value;
+  DateTime? get value => widget.selectionController.value;
 
   @override
   @protected

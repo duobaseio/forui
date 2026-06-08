@@ -11,13 +11,13 @@ import 'package:forui/src/widgets/date_field/input/date_input_controller.dart';
 import '../../../test_scaffold.dart';
 
 void main() {
-  late FCalendarController<DateTime?> calendarController;
+  late FDateSelectionController<DateTime?> calendarController;
   late DateInputController controller;
 
   setUpAll(initializeDateFormatting);
 
   setUp(() {
-    calendarController = .date();
+    calendarController = .single();
     controller = DateInputController.test(
       calendarController,
       FLocalizationsEnSg(),
@@ -37,7 +37,7 @@ void main() {
     test('FieldController.() - $index', () {
       expect(
         DateInputController(
-          .date(initial: initial),
+          .single(initial: initial),
           localizations,
           TestScaffold.blueScreen.dateFieldStyle.fieldStyles.md,
           2000,
@@ -467,7 +467,7 @@ void main() {
     (DateTime.utc(2025, 2), null, const TextEditingValue(text: 'DD/MM/YYYY')),
   ].indexed) {
     test('update from calendar(...) - $index', () {
-      calendarController = FCalendarController.date(initial: initial);
+      calendarController = FDateSelectionController.single(initial: initial);
       controller = .test(
         calendarController,
         FLocalizationsEnSg(),

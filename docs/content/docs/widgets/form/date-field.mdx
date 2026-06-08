@@ -14,6 +14,8 @@ import dateFieldCalendarUsage from '@/snippets/usages/form/date_field/calendar.j
 import dateFieldInputUsage from '@/snippets/usages/form/date_field/input.json';
 import defaultSnippet from '@/snippets/examples/form/date-field/default.json';
 import calendarSnippet from '@/snippets/examples/form/date-field/calendar.json';
+import splitGridSnippet from '@/snippets/examples/form/date-field/split-grid.json';
+import wheelSnippet from '@/snippets/examples/form/date-field/wheel.json';
 import inputSnippet from '@/snippets/examples/form/date-field/input.json';
 import clearableSnippet from '@/snippets/examples/form/date-field/clearable.json';
 import popoverBuilderSnippet from '@/snippets/examples/form/date-field/popover-builder.json';
@@ -75,6 +77,30 @@ To generate a specific style for customization:
 <UsageSnippet usage={dateFieldInputUsage} />
 
 ## Examples
+
+### Calendar Modes
+
+#### Split Grid Calendar
+
+<Tabs items={['Preview', 'Code']}>
+    <Tab value="Preview">
+        <Widget name='form/date-field' variant='split-grid' height={500}/>
+    </Tab>
+    <Tab value="Code">
+        <CodeSnippet snippet={splitGridSnippet} />
+    </Tab>
+</Tabs>
+
+#### Wheel Calendar
+
+<Tabs items={['Preview', 'Code']}>
+    <Tab value="Preview">
+        <Widget name='form/date-field' variant='wheel' height={500}/>
+    </Tab>
+    <Tab value="Code">
+        <CodeSnippet snippet={wheelSnippet} />
+    </Tab>
+</Tabs>
 
 ### Calendar Only
 

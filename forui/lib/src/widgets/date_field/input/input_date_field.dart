@@ -12,11 +12,9 @@ class _InputDateField extends FDateField {
   final MouseCursor? mouseCursor;
   final bool canRequestFocus;
   final bool clearable;
-  final FDateFieldPopoverBuilder popoverBuilder;
   final int baselineInputYear;
-  final FDateFieldCalendarProperties? calendar;
 
-  const _InputDateField({
+  _InputDateField({
     this.popoverControl = const .managed(),
     this.textInputAction,
     this.textAlign = TextAlign.start,
@@ -28,10 +26,10 @@ class _InputDateField extends FDateField {
     this.mouseCursor,
     this.canRequestFocus = true,
     this.clearable = false,
-    this.popoverBuilder = FPopover.defaultPopoverBuilder,
     this.baselineInputYear = 2000,
-    this.calendar = const FDateFieldCalendarProperties(),
-    super.control,
+    super.calendar = const FDateFieldGridCalendarProperties(),
+    super.selectionControl,
+    super.validator,
     super.size,
     super.style,
     super.autofocus,
@@ -69,8 +67,6 @@ class _InputDateField extends FDateField {
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
       ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
       ..add(FlagProperty('clearable', value: clearable, ifTrue: 'clearable'))
-      ..add(ObjectFlagProperty.has('popoverBuilder', popoverBuilder))
-      ..add(DiagnosticsProperty('calendar', calendar))
       ..add(IntProperty('baselineInputYear', baselineInputYear));
   }
 }
@@ -85,7 +81,6 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
   void initState() {
     super.initState();
     _popoverController = widget.popoverControl.create(_handleOnPopoverChange, this);
-    _controller = widget.control.create(_handleOnChange, this);
   }
 
   @override
@@ -94,20 +89,12 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
     _popoverController = widget.popoverControl
         .update(old.popoverControl, _popoverController, _handleOnPopoverChange, this)
         .$1;
-    _controller = widget.control.update(old.control, _controller, _handleOnChange, this).$1;
   }
 
   @override
   void dispose() {
     widget.popoverControl.dispose(_popoverController, _handleOnPopoverChange);
-    widget.control.dispose(_controller, _handleOnChange);
     super.dispose();
-  }
-
-  void _handleOnChange() {
-    if (widget.control case FDateFieldManagedControl(:final onChange?)) {
-      onChange(_controller.value);
-    }
   }
 
   void _handleOnPopoverChange() {
@@ -127,9 +114,9 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
         },
       },
       child: DateInput(
-        controller: _controller,
-        calendarController: _controller.calendar,
-        onTap: widget.calendar == null ? null : _popoverController.show,
+        controller: _selectionController,
+        selectionController: _selectionController,
+        onTap: _popoverController.show,
         size: widget.size,
         platformVariant: context.platformVariant,
         style: style,
@@ -140,7 +127,7 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
         enabled: widget.enabled,
         onSaved: widget.onSaved,
         onReset: widget.onReset,
-        validator: _controller.validator,
+        validator: widget.validator,
         autovalidateMode: widget.autovalidateMode,
         forceErrorText: widget.forceErrorText,
         formFieldKey: widget.formFieldKey,
@@ -158,19 +145,16 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
         suffixBuilder: widget.suffixBuilder,
         localizations: FLocalizations.of(context) ?? FDefaultLocalizations(),
         baselineYear: widget.baselineInputYear,
-        builder: switch (widget.calendar) {
-          null => (context, _, variants, child) => widget.builder(context, style, variants, child),
-          final properties => (context, _, variants, child) => _CalendarPopover(
-            controller: _controller,
-            popoverController: _popoverController,
-            popoverBuilder: widget.popoverBuilder,
-            style: style,
-            properties: properties,
-            autofocus: false,
-            fieldFocusNode: null,
-            child: widget.builder(context, style, variants, child),
-          ),
-        },
+        builder: (context, _, variants, child) => _CalendarPopover(
+          calendarController: _calendarController!,
+          selectionController: _selectionController,
+          popoverController: _popoverController,
+          style: style,
+          properties: widget._calendar!,
+          autofocus: false,
+          fieldFocusNode: null,
+          child: widget.builder(context, style, variants, child),
+        ),
       ),
     );
   }
@@ -189,7 +173,7 @@ class _InputOnlyDateField extends FDateField {
   final bool clearable;
   final int baselineInputYear;
 
-  const _InputOnlyDateField({
+  _InputOnlyDateField({
     this.textInputAction,
     this.textAlign = TextAlign.start,
     this.textAlignVertical,
@@ -201,7 +185,7 @@ class _InputOnlyDateField extends FDateField {
     this.canRequestFocus = true,
     this.clearable = false,
     this.baselineInputYear = 2000,
-    super.control,
+    super.selectionControl,
     super.size,
     super.style,
     super.autofocus,
@@ -216,10 +200,11 @@ class _InputOnlyDateField extends FDateField {
     super.onReset,
     super.autovalidateMode,
     super.forceErrorText,
+    super.validator,
     super.errorBuilder,
     super.formFieldKey,
     super.key,
-  }) : super._();
+  }) : super._(calendar: null);
 
   @override
   State<_InputOnlyDateField> createState() => _InputOnlyDateFieldState();
@@ -247,35 +232,11 @@ class _InputOnlyDateFieldState extends _FDateFieldState<_InputOnlyDateField> {
   String get _focusLabel => 'InputOnlyDateField';
 
   @override
-  void initState() {
-    super.initState();
-    _controller = widget.control.create(_handleOnChange, this);
-  }
-
-  @override
-  void didUpdateWidget(covariant _InputOnlyDateField old) {
-    super.didUpdateWidget(old);
-    _controller = widget.control.update(old.control, _controller, _handleOnChange, this).$1;
-  }
-
-  @override
-  void dispose() {
-    widget.control.dispose(_controller, _handleOnChange);
-    super.dispose();
-  }
-
-  void _handleOnChange() {
-    if (widget.control case FDateFieldManagedControl(:final onChange?)) {
-      onChange(_controller.value);
-    }
-  }
-
-  @override
   Widget build(BuildContext context) {
     final style = widget.style(context.theme.dateFieldStyle);
     return DateInput(
-      controller: _controller,
-      calendarController: _controller.calendar,
+      controller: _selectionController,
+      selectionController: _selectionController,
       onTap: null,
       size: widget.size,
       platformVariant: context.platformVariant,
@@ -287,9 +248,9 @@ class _InputOnlyDateFieldState extends _FDateFieldState<_InputOnlyDateField> {
       enabled: widget.enabled,
       onSaved: widget.onSaved,
       onReset: widget.onReset,
-      validator: _controller.validator,
       autovalidateMode: widget.autovalidateMode,
       forceErrorText: widget.forceErrorText,
+      validator: widget.validator,
       formFieldKey: widget.formFieldKey,
       focusNode: _focus,
       textInputAction: widget.textInputAction,

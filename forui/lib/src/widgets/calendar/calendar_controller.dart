@@ -39,7 +39,7 @@ enum FCalendarPickerGridType {
 ///
 /// See:
 /// * [FDateSelectionController] for controlling date selection.
-abstract class FCalendarController extends FChangeNotifier {
+sealed class FCalendarController extends FChangeNotifier {
   /// The default selectable predicate that always returns true.
   static bool defaultSelectable(DateTime date) => true;
 

@@ -133,7 +133,7 @@ class _SandboxState extends State<Sandbox> {
             ],
           ),
           FDateField(
-            control: .managed(initial: DateTime(2025, 12, 31)),
+            selectionControl: .managedSingle(initial: DateTime(2025, 12, 31)),
             label: const Text('Start Date'),
             description: const Text('Select a start date'),
           ),

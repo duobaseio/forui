@@ -29,7 +29,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          child: const FDateField(key: key),
+          child: FDateField(key: key),
         ),
       );
 
@@ -40,7 +40,7 @@ void main() {
     });
 
     testWidgets('${theme.name} with no icon', (tester) async {
-      await tester.pumpWidget(TestScaffold.app(theme: theme.data, child: const FDateField(prefixBuilder: null)));
+      await tester.pumpWidget(TestScaffold.app(theme: theme.data, child: FDateField(prefixBuilder: null)));
 
       await expectLater(
         find.byType(TestScaffold),
@@ -55,7 +55,7 @@ void main() {
           theme: theme.data,
           child: FDateField(
             key: key,
-            calendar: FDateFieldCalendarProperties(today: DateTime(2025, 4)),
+            calendar: FDateFieldGridCalendarProperties(control: FGridCalendarControl(today: DateTime(2025, 4))),
             builder: (context, _, _, child) => ColoredBox(color: context.theme.colors.destructive, child: child),
           ),
         ),
@@ -78,7 +78,7 @@ void main() {
           alignment: .topCenter,
           child: FDateField(
             key: key,
-            calendar: FDateFieldCalendarProperties(today: .utc(2025, 1, 15)),
+            calendar: FDateFieldGridCalendarProperties(control: FGridCalendarControl(today: .utc(2025, 1, 15))),
           ),
         ),
       );
@@ -100,7 +100,7 @@ void main() {
           alignment: .topCenter,
           child: FDateField(
             key: key,
-            calendar: FDateFieldCalendarProperties(today: .utc(2025, 1, 15)),
+            calendar: FDateFieldGridCalendarProperties(control: FGridCalendarControl(today: .utc(2025, 1, 15))),
           ),
         ),
       );
@@ -122,7 +122,7 @@ void main() {
           alignment: .topCenter,
           child: FDateField(
             key: key,
-            calendar: FDateFieldCalendarProperties(today: .utc(2025, 1, 15)),
+            calendar: FDateFieldGridCalendarProperties(control: FGridCalendarControl(today: .utc(2025, 1, 15))),
           ),
         ),
       );
@@ -147,7 +147,7 @@ void main() {
           alignment: .topCenter,
           child: FDateField(
             key: key,
-            calendar: FDateFieldCalendarProperties(today: .utc(2025, 1, 15)),
+            calendar: FDateFieldGridCalendarProperties(control: FGridCalendarControl(today: .utc(2025, 1, 15))),
           ),
         ),
       );
@@ -172,7 +172,10 @@ void main() {
           alignment: .topCenter,
           child: FDateField(
             key: key,
-            calendar: FDateFieldCalendarProperties(today: .utc(2025, 1, 15), autoHide: false),
+            calendar: FDateFieldGridCalendarProperties(
+              autoHide: false,
+              control: FGridCalendarControl(today: .utc(2025, 1, 15)),
+            ),
           ),
         ),
       );
@@ -193,7 +196,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,
-          child: const FDateField(enabled: false, key: key),
+          child: FDateField(enabled: false, key: key),
         ),
       );
 
@@ -212,7 +215,7 @@ void main() {
           theme: theme.data,
           alignment: .topCenter,
           child: FDateField(
-            calendar: FDateFieldCalendarProperties(today: .utc(2025, 1, 15)),
+            calendar: FDateFieldGridCalendarProperties(control: FGridCalendarControl(today: .utc(2025, 1, 15))),
             forceErrorText: 'Error',
             key: key,
           ),
@@ -233,7 +236,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: .topCenter,
-          child: const FDateField(key: key),
+          child: FDateField(key: key),
         ),
       );
 
@@ -256,7 +259,7 @@ void main() {
         TestScaffold.app(
           theme: theme.data,
           alignment: .topCenter,
-          child: const FDateField(key: key),
+          child: FDateField(key: key),
         ),
       );
 
@@ -280,12 +283,9 @@ void main() {
       TestScaffold.app(
         alignment: .topCenter,
         locale: const Locale('en', 'SG'),
-        child: StatefulBuilder(
-          builder: (context, setState) => FDateField(
-            key: key,
-            control: .lifted(date: null, onChange: (_) {}),
-            calendar: .new(today: .utc(2025, 1, 15)),
-          ),
+        child: FDateField(
+          key: key,
+          calendar: FDateFieldGridCalendarProperties(control: FGridCalendarControl(today: .utc(2025, 1, 15))),
         ),
       ),
     );
@@ -310,18 +310,20 @@ void main() {
       TestScaffold.app(
         alignment: .topCenter,
         child: FDateField(
-          calendar: FDateFieldCalendarProperties(today: DateTime(2025, 5, 21)),
-          popoverBuilder: (context, _, _, content) => SingleChildScrollView(
-            child: Column(
-              mainAxisSize: .min,
-              children: [
-                const Padding(padding: .all(8), child: Text('Before')),
-                content,
-                const Padding(padding: .all(8), child: Text('After')),
-              ],
+          key: key,
+          calendar: FDateFieldGridCalendarProperties(
+            control: FGridCalendarControl(today: DateTime(2025, 5, 21)),
+            popoverBuilder: (context, _, _, content) => SingleChildScrollView(
+              child: Column(
+                mainAxisSize: .min,
+                children: [
+                  const Padding(padding: .all(8), child: Text('Before')),
+                  content,
+                  const Padding(padding: .all(8), child: Text('After')),
+                ],
+              ),
             ),
           ),
-          key: key,
         ),
       ),
     );
@@ -339,8 +341,8 @@ void main() {
           locale: const Locale('en', 'SG'),
           child: FDateField(
             key: key,
-            control: .managed(initial: .utc(2025)),
-            calendar: FDateFieldCalendarProperties(today: .utc(2025, 1, 15)),
+            selectionControl: .managedSingle(initial: .utc(2025)),
+            calendar: FDateFieldGridCalendarProperties(control: FGridCalendarControl(today: .utc(2025, 1, 15))),
           ),
         ),
       );
@@ -360,8 +362,8 @@ void main() {
           locale: const Locale('en', 'SG'),
           child: FDateField(
             key: key,
-            control: .managed(initial: .utc(2025, 12, 15)),
-            calendar: FDateFieldCalendarProperties(today: .utc(2025, 12, 15)),
+            selectionControl: .managedSingle(initial: .utc(2025, 12, 15)),
+            calendar: FDateFieldGridCalendarProperties(control: FGridCalendarControl(today: .utc(2025, 12, 15))),
           ),
         ),
       );
@@ -379,89 +381,6 @@ void main() {
       await tester.pumpAndSettle();
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/managed-selection-long-short.png'));
-    });
-
-    testWidgets('lifted - short to long', (tester) async {
-      DateTime? value = .utc(2025);
-
-      await tester.pumpWidget(
-        TestScaffold.app(
-          locale: const Locale('en', 'SG'),
-          child: StatefulBuilder(
-            builder: (context, setState) => FDateField(
-              key: key,
-              control: .lifted(date: value, onChange: (v) => setState(() => value = v)),
-              calendar: FDateFieldCalendarProperties(today: .utc(2025, 1, 15)),
-            ),
-          ),
-        ),
-      );
-
-      await tester.tap(find.byKey(key));
-      await tester.pumpAndSettle();
-
-      await tester.tap(find.text('12'));
-      await tester.pumpAndSettle();
-
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/lifted-selection-short-long.png'));
-    });
-
-    testWidgets('lifted - long to short', (tester) async {
-      DateTime? value = .utc(2025);
-
-      await tester.pumpWidget(
-        TestScaffold.app(
-          locale: const Locale('en', 'SG'),
-          child: StatefulBuilder(
-            builder: (context, setState) => FDateField(
-              key: key,
-              control: .lifted(date: value, onChange: (v) => setState(() => value = v)),
-              calendar: FDateFieldCalendarProperties(today: .utc(2025, 12, 15)),
-            ),
-          ),
-        ),
-      );
-
-      // Focus and select day part (second part)
-      await tester.tapAt(tester.getTopLeft(find.byKey(key)));
-      await tester.pumpAndSettle();
-      await tester.sendKeyEvent(.arrowRight);
-      await tester.pumpAndSettle();
-
-      await tester.tap(find.byKey(key));
-      await tester.pumpAndSettle();
-
-      await tester.tap(find.text('5'));
-      await tester.pumpAndSettle();
-
-      await expectLater(find.byType(TestScaffold), matchesGoldenFile('date-field/lifted-selection-long-short.png'));
-    });
-
-    testWidgets('lifted - arrow adjustment', (tester) async {
-      DateTime? value = .utc(2025, 1, 15);
-
-      await tester.pumpWidget(
-        TestScaffold.app(
-          locale: const Locale('en', 'SG'),
-          child: StatefulBuilder(
-            builder: (context, setState) => FDateField.input(
-              key: key,
-              control: .lifted(date: value, onChange: (v) => setState(() => value = v)),
-            ),
-          ),
-        ),
-      );
-
-      await tester.tapAt(tester.getTopLeft(find.byKey(key)));
-      await tester.pumpAndSettle();
-
-      await tester.sendKeyEvent(.arrowUp);
-      await tester.pumpAndSettle();
-
-      await expectLater(
-        find.byType(TestScaffold),
-        matchesGoldenFile('date-field/lifted-selection-arrow-adjustment.png'),
-      );
     });
   });
 }
