@@ -19,6 +19,22 @@ and an API similar to other widgets.
 * Add `FContextMenu`.
 
 
+### `FDateField`
+* Add split grid and wheel calendar modes via `FDateFieldGridSplitCalendarProperties` and `FDateFieldWheelCalendarProperties`.
+* Add `FDateField.selectionControl` to control the selected date.
+* Add `FDateField.validator` as a top-level parameter.
+
+* **Breaking** Change `FDateFieldCalendarProperties` to a sealed class. Use `FDateFieldGridCalendarProperties` for the
+  default grid calendar.
+* **Breaking** Move the calendar's selectable range, today's date, `dayBuilder`, `autoHide`, `popoverBuilder`, and
+  popover positioning onto the `calendar` properties.
+* **Breaking** Change `FDateFieldPopoverBuilder`'s second argument from `FDateFieldController` to `FCalendarController`.
+
+* **Breaking** Remove `FDateFieldController` and `FDateFieldControl`. Use `FDateField.selectionControl`
+ (`FDateSelectionControl`) and `FDateField.validator` instead.
+* **Breaking** Remove `FDateField.calendar(initialType: ...)`.
+
+
 ### `FItem` & `FTile`
 * Fix nested `FTappable`-based widgets (e.g. `FButton` in a prefix or suffix) not receiving their own taps when the
   enclosing tile is inside an `FItemGroup` or `FTileGroup`.
