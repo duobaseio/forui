@@ -52,7 +52,7 @@ abstract class FCalendarController extends FChangeNotifier {
   final DateTime end;
 
   final bool Function(DateTime) _selectable;
-  late DateTime _currentMonth;
+  late DateTime _month;
 
   /// Creates a [FCalendarController].
   FCalendarController({
@@ -64,13 +64,25 @@ abstract class FCalendarController extends FChangeNotifier {
   }) : start = _truncate(start ?? .utc(1900)),
        today = _truncate(today ?? .now()),
        end = _truncate(end ?? .utc(2100)) {
-    _currentMonth = initial == null ? this.today : .utc(initial.year, initial.month);
+    // [currentMonth] is a normalized first-of-month, so it is checked at month granularity: a mid-month/mid-year start
+    // (e.g. Jul 15) still permits showing its own month (Jul 1). The day grid gates individual days via selectable.
+    _currentMonth = .utc((initial ?? this.today).year, (initial ?? this.today).month);
     assert(debugCheckInclusiveDateRange(this.start, this.today, this.end));
-    assert(debugCheckInclusiveDateRange(this.start, _currentMonth, this.end));
+    assert(GridController.debugCheckInclusiveMonthRange(this.start, _currentMonth, this.end));
   }
 
   /// The current year and month that the day picker shows.
-  DateTime get currentMonth => _currentMonth;
+  DateTime get currentMonth => _month;
+
+  DateTime get _currentMonth => _month;
+
+  set _currentMonth(DateTime value) {
+    assert(
+      value.isUtc && value == .utc(value.year, value.month),
+      '_currentMonth must be a UTC first-of-month, but was $value.',
+    );
+    _month = value;
+  }
 }
 
 abstract class _GridCalendarController extends FCalendarController {
@@ -230,7 +242,8 @@ class FWheelCalendarController extends FCalendarController {
     if (!_wheel) {
       return;
     }
-    final next = _clamp(start, .utc(year, month), end);
+
+    final next = _clamp(.utc(start.year, start.month), .utc(year, month), .utc(end.year, end.month));
     if (next != _currentMonth) {
       _currentMonth = next;
       notifyListeners();

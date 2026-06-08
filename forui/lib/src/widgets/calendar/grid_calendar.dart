@@ -120,6 +120,7 @@ class GridCalendar extends StatelessWidget {
           ),
           SizedBox(height: style.monthPickerStyle.headerSpacing),
           SizedBox(
+            width: width,
             height: height - style.monthPickerStyle.headerSpacing,
             child: Align(
               alignment: .topCenter,
@@ -158,6 +159,7 @@ class GridCalendar extends StatelessWidget {
           ),
           SizedBox(height: style.yearPickerStyle.headerSpacing),
           SizedBox(
+            width: width,
             height: height - style.yearPickerStyle.headerSpacing,
             child: Align(
               alignment: .topCenter,
@@ -319,6 +321,7 @@ class GridSplitCalendar extends StatelessWidget {
           ),
           SizedBox(height: style.monthPickerStyle.headerSpacing),
           SizedBox(
+            width: width,
             height: height - style.monthPickerStyle.headerSpacing,
             child: Align(
               alignment: .topCenter,
@@ -358,6 +361,7 @@ class GridSplitCalendar extends StatelessWidget {
           ),
           SizedBox(height: style.yearPickerStyle.headerSpacing),
           SizedBox(
+            width: width,
             height: height - style.yearPickerStyle.headerSpacing,
             child: Align(
               alignment: .topCenter,

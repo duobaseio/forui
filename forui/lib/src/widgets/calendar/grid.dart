@@ -103,6 +103,29 @@ class GridDelegate extends SliverGridDelegate {
 
 @internal
 abstract class GridController extends FChangeNotifier {
+  @internal
+  static bool debugCheckInclusiveMonthRange(DateTime start, DateTime date, DateTime end) {
+    assert(() {
+      final startMonth = DateTime.utc(start.year, start.month);
+      final dateMonth = DateTime.utc(date.year, date.month);
+      final endMonth = DateTime.utc(end.year, end.month);
+
+      if (dateMonth.isBefore(startMonth) || dateMonth.isAfter(endMonth)) {
+        throw FlutterError.fromParts([
+          ErrorSummary("date's month is not within [start, end]."),
+          DiagnosticsProperty('The offending date is', date, style: .errorProperty),
+          DiagnosticsProperty("The offending date's month is", dateMonth, style: .errorProperty),
+          DiagnosticsProperty('The start is', start, style: .errorProperty),
+          DiagnosticsProperty('The end is', end, style: .errorProperty),
+          ErrorHint("To fix this, ensure the date's month is within start's and end's months."),
+        ]);
+      }
+      return true;
+    }());
+
+    return true;
+  }
+
   /// The start date, inclusive.
   final DateTime start;
 
@@ -133,7 +156,7 @@ abstract class GridController extends FChangeNotifier {
   }) : assert(start.isUtc, 'start must be in UTC'),
        assert(end.isUtc, 'end must be in UTC'),
        assert(start.isBefore(end) || start.isAtSameMomentAs(end), 'start must be before or equal to end'),
-       assert(debugCheckInclusiveDateRange(start, initial, end)),
+       assert(debugCheckInclusiveMonthRange(start, initial, end)),
        _controller = PageController(initialPage: _from(initial)),
        _current = _to(_from(initial));
 
@@ -243,7 +266,7 @@ abstract class GridController extends FChangeNotifier {
 @internal
 extension InternalPickerController on GridController {
   void reattach(DateTime date) {
-    assert(debugCheckInclusiveDateRange(start, date, end));
+    assert(GridController.debugCheckInclusiveMonthRange(start, date, end));
     assert(!_controller.hasClients, 'reattach() must be called while no grid is mounted with this controller.');
     _controller.dispose();
     _focused = null;

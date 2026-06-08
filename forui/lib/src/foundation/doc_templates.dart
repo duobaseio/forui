@@ -34,8 +34,8 @@ extension Control on Never {
   static const control = '';
 
   /// {@template forui.foundation.doc_templates.managed}
-  /// Subclass `ManagedControl` to create variants with different defaults or behaviors, e.g., `FCalendarControl.date()`
-  /// vs `FCalendarControl.range()`.
+  /// Subclass `ManagedControl` to create variants with different defaults or behaviors, e.g.,
+  /// `FDateSelectionControl.date()` vs `FDateSelectionControl.range()`.
   /// {@endtemplate}
   static const managed = '';
 }
