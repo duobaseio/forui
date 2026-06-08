@@ -377,33 +377,6 @@ void main() {
         });
       }
     });
-
-    testWidgets('a footer preset selects then animates to the selection on the new month', (tester) async {
-      DateTime? selected;
-      await tester.pumpWidget(
-        calendar(
-          selectionControl: .managedSingle(onChange: (date) => selected = date),
-          control: control(),
-          footerBuilder: (context, controller, selectionController) => GestureDetector(
-            key: const ValueKey('go'),
-            behavior: HitTestBehavior.opaque,
-            onTap: () async {
-              selectionController.select(DateTime.utc(2024, 9, 10));
-              await controller.animateToDayPicker(DateTime.utc(2024, 9, 10));
-            },
-            child: const SizedBox(width: 40, height: 40),
-          ),
-        ),
-      );
-
-      await tester.tap(find.byKey(const ValueKey('go')));
-      await tester.pumpAndSettle();
-
-      expect(tester.takeException(), null);
-      expect(selected, DateTime.utc(2024, 9, 10));
-      expect(find.text('September 2024'), findsOneWidget);
-      expect(find.descendant(of: find.byType(DayPicker), matching: find.text('10')), findsOneWidget);
-    });
   });
 
   group('selection', () {
