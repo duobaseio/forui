@@ -25,11 +25,7 @@ final FLineCalendarControl lifted = .lifted(date: .now(), onChange: (date) {});
 
 // {@category "Control" "`.managed()` with internal controller"}
 /// Manages the line calendar state internally.
-final FLineCalendarControl managedInternal = .managed(
-  initial: .now(),
-  toggleable: false,
-  onChange: (date) {},
-);
+final FLineCalendarControl managedInternal = .managed(initial: .now(), toggleable: false, onChange: (date) {});
 
 // {@category "Control" "`.managed()` with external controller"}
 /// Uses an external controller to control the line calendar's state.

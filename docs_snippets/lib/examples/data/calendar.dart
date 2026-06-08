@@ -94,7 +94,6 @@ class NoneCalendarPage extends Example {
   );
 }
 
-
 @RoutePage()
 class UnselectableCalendarPage extends Example {
   UnselectableCalendarPage({@queryParam super.theme});
