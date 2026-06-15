@@ -704,7 +704,7 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
     super.initState();
     _controller = (widget.control ?? FMultiValueControl<T>.managed()).create(_handleChange);
     _popoverController = widget.popoverControl.create(_handlePopoverChange, this);
-    _focus = widget.focusNode ?? FocusNode(debugLabel: 'FMultiSelect');
+    _focus = (widget.focusNode ?? FocusNode(debugLabel: 'FMultiSelect'))..addListener(_handleFocusChange);
   }
 
   @override
@@ -712,10 +712,12 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
     super.didUpdateWidget(old);
     // DO NOT REORDER
     if (widget.focusNode != old.focusNode) {
+      _focus.removeListener(_handleFocusChange);
       if (old.focusNode == null) {
         _focus.dispose();
       }
       _focus = widget.focusNode ?? FocusNode(debugLabel: 'FMultiSelect');
+      _focus.addListener(_handleFocusChange);
     }
 
     final current = widget.control ?? FMultiValueControl<T>.managed();
@@ -730,6 +732,7 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
   void dispose() {
     widget.popoverControl.dispose(_popoverController, _handlePopoverChange);
     (widget.control ?? FMultiValueControl<T>.managed()).dispose(_controller, _handleChange);
+    _focus.removeListener(_handleFocusChange);
     if (widget.focusNode == null) {
       _focus.dispose();
     }
@@ -745,6 +748,12 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
   void _handlePopoverChange() {
     if (widget.popoverControl case FPopoverManagedControl(:final onChange?)) {
       onChange(_popoverController.status.isForwardOrCompleted);
+    }
+  }
+
+  void _handleFocusChange() {
+    if (mounted) {
+      setState(() {});
     }
   }
 
@@ -766,7 +775,11 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
       validator: (v) => widget.validator(v ?? {}),
       builder: (state) {
         final values = widget.sort == null ? _controller.value : _controller.value.sorted(widget.sort!);
-        final formVariants = <FFormFieldVariant>{if (!widget.enabled) .disabled, if (state.hasError) .error};
+        final formVariants = <FFormFieldVariant>{
+          if (!widget.enabled) .disabled,
+          if (state.hasError) .error,
+          if (_focus.hasFocus) .focused,
+        };
 
         return Directionality(
           textDirection: direction,

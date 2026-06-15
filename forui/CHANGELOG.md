@@ -15,6 +15,10 @@ and an API similar to other widgets.
 * **Breaking** Change `FCalendarController` to handle programmatic navigation. See `FDateSelectionController` for handling date selection.
 
 
+### `FCheckbox`
+* Add support for styling the label in the `focused` state.
+
+
 ### `FContextMenu` (New)
 * Add `FContextMenu`.
 
@@ -33,6 +37,11 @@ and an API similar to other widgets.
 * **Breaking** Remove `FDateFieldController` and `FDateFieldControl`. Use `FDateField.selectionControl`
  (`FDateSelectionControl`) and `FDateField.validator` instead.
 * **Breaking** Remove `FDateField.calendar(initialType: ...)`.
+
+
+### `FFormField`
+* Add `FFormFieldVariant.focused`.
+* Add `FFormFieldErrorVariant.focused`.
 
 
 ### `FItem` & `FTile`
@@ -54,6 +63,10 @@ and an API similar to other widgets.
 * Add `FPointPortal`.
 
 
+### `FRadio`
+* Add support for styling the label in the `focused` state.
+
+
 ### `FResizable`
 * Add `FResizableRegion.flex(...)` for proportionally-sized regions.
 
@@ -62,6 +75,21 @@ and an API similar to other widgets.
 * **Breaking** Rename `FResizableRegion(...)` to `FResizableRegion.fixed(...)`.
 * **Breaking** Rename `FResizableRegion.region(...)` to `FResizableRegion.fixed(...)`.
 * **Breaking** Rename `FResizableRegion(initialExtent: ...)` to `FResizableRegion.fixed(extent: ...)`.
+
+
+### `FSelect` & `FMultiSelect`
+* Add support for styling the label in the `focused` state.
+
+
+### `FSelectMenuTile`
+* Add support for styling the label in the `focused` state.
+
+
+### `FSwitch`
+* Add support for styling the label in the `focused` state.
+
+* Fix `FSwitch` throwing when a `focusNode` is provided.
+* Fix `FSwitch` registering two focus nodes, causing it to be a duplicate stop when tabbing through.
 
 
 ## 0.22.3

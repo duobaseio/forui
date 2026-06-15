@@ -123,7 +123,7 @@ class FRadio extends StatelessWidget {
 
         return FLabel(
           layout: layout,
-          variants: formVariants,
+          variants: variants as Set<FFormFieldVariant>,
           style: labelStyle,
           label: label,
           description: description,

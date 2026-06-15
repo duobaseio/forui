@@ -264,4 +264,27 @@ void main() {
     expect(find.text('Item 1'), findsNothing);
     expect(find.text('Item 2'), findsNothing);
   });
+
+  testWidgets('forwards focus to label', (tester) async {
+    bool focused() => tester
+        .widget<FLabel>(find.ancestor(of: find.text('Label'), matching: find.byType(FLabel)))
+        .variants
+        .contains(FFormFieldVariant.focused);
+
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FSelectMenuTile<int>(
+          label: const Text('Label'),
+          title: const Text('Title'),
+          menu: const [.tile(title: Text('1'), value: 1)],
+        ),
+      ),
+    );
+    expect(focused(), false);
+
+    await tester.sendKeyEvent(.tab);
+    await tester.pumpAndSettle();
+
+    expect(focused(), true);
+  });
 }

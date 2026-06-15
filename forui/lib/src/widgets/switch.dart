@@ -23,7 +23,7 @@ part 'switch.design.dart';
 /// See:
 /// * https://forui.dev/docs/widgets/form/switch for working examples.
 /// * [FSwitchStyle] for customizing a switch's appearance.
-class FSwitch extends StatelessWidget {
+class FSwitch extends StatefulWidget {
   /// The style. Defaults to [FThemeData.switchStyle].
   ///
   /// To modify the current style:
@@ -115,58 +115,7 @@ class FSwitch extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) {
-    final style = this.style(context.theme.switchStyle);
-    final formVariants = <FFormFieldVariant>{if (!enabled) .disabled, if (error != null) .error};
-    final variants = <FVariant>{if (value) FSwitchVariant.selected, ...formVariants};
-    final (layout, labelStyle) = leadingLabel
-        ? (FLabelLayout.horizontalLeading, style.leadingLabelStyle)
-        : (FLabelLayout.horizontalTrailing, style.trailingLabelStyle);
-
-    // The label is wrapped in a GestureDetector to improve affordance.
-    return GestureDetector(
-      onTap: enabled ? () => onChange?.call(!value) : null,
-      child: FocusableActionDetector(
-        enabled: enabled,
-        autofocus: autofocus,
-        focusNode: focusNode,
-        onFocusChange: onFocusChange,
-        child: Semantics(
-          label: semanticsLabel,
-          enabled: enabled,
-          toggled: value,
-          child: FLabel(
-            layout: layout,
-            variants: formVariants,
-            style: labelStyle,
-            label: label,
-            description: description,
-            error: error,
-            child: CupertinoSwitch(
-              value: value,
-              onChanged: (value) {
-                if (!enabled) {
-                  return;
-                }
-
-                onChange?.call(value);
-              },
-              applyTheme: false,
-              activeTrackColor: style.trackColor.resolve(variants),
-              // Don't use [variants] as it always contains [.selected] but we want the unselected color.
-              inactiveTrackColor: style.trackColor.resolve(formVariants),
-              thumbColor: style.thumbColor.resolve(variants),
-              focusColor: style.focusColor,
-              autofocus: autofocus,
-              focusNode: focusNode,
-              onFocusChange: onFocusChange,
-              dragStartBehavior: dragStartBehavior,
-            ),
-          ),
-        ),
-      ),
-    );
-  }
+  State<FSwitch> createState() => _FSwitchState();
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -181,6 +130,67 @@ class FSwitch extends StatelessWidget {
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior, defaultValue: DragStartBehavior.start));
+  }
+}
+
+class _FSwitchState extends State<FSwitch> {
+  late bool _focused = widget.autofocus;
+
+  @override
+  Widget build(BuildContext context) {
+    final style = widget.style(context.theme.switchStyle);
+    final formVariants = <FFormFieldVariant>{
+      if (!widget.enabled) .disabled,
+      if (widget.error != null) .error,
+      if (_focused) .focused,
+    };
+    final variants = <FVariant>{if (widget.value) FSwitchVariant.selected, ...formVariants};
+    final (layout, labelStyle) = widget.leadingLabel
+        ? (FLabelLayout.horizontalLeading, style.leadingLabelStyle)
+        : (FLabelLayout.horizontalTrailing, style.trailingLabelStyle);
+
+    // The label is wrapped in a GestureDetector to improve affordance.
+    return GestureDetector(
+      onTap: widget.enabled ? () => widget.onChange?.call(!widget.value) : null,
+      child: Semantics(
+        label: widget.semanticsLabel,
+        enabled: widget.enabled,
+        toggled: widget.value,
+        child: FLabel(
+          layout: layout,
+          variants: formVariants,
+          style: labelStyle,
+          label: widget.label,
+          description: widget.description,
+          error: widget.error,
+          child: CupertinoSwitch(
+            value: widget.value,
+            onChanged: (value) {
+              if (!widget.enabled) {
+                return;
+              }
+
+              widget.onChange?.call(value);
+            },
+            applyTheme: false,
+            activeTrackColor: style.trackColor.resolve(variants),
+            // Don't use [variants] as it always contains [.selected] but we want the unselected color.
+            inactiveTrackColor: style.trackColor.resolve(formVariants),
+            thumbColor: style.thumbColor.resolve(variants),
+            focusColor: style.focusColor,
+            autofocus: widget.autofocus,
+            focusNode: widget.focusNode,
+            onFocusChange: (focused) {
+              widget.onFocusChange?.call(focused);
+              if (_focused != focused) {
+                setState(() => _focused = focused);
+              }
+            },
+            dragStartBehavior: widget.dragStartBehavior,
+          ),
+        ),
+      ),
+    );
   }
 }
 

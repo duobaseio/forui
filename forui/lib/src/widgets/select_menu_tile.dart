@@ -526,6 +526,7 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
 
 class _FSelectMenuTileState<T> extends State<FSelectMenuTile<T>> with TickerProviderStateMixin {
   late _Notifier<T> _controller;
+  bool _focused = false;
 
   @override
   void initState() {
@@ -655,6 +656,11 @@ class _FSelectMenuTileState<T> extends State<FSelectMenuTile<T>> with TickerProv
           },
           child: FTile(
             style: tileStyle,
+            onFocusChange: (focused) {
+              if (_focused != focused && mounted) {
+                setState(() => _focused = focused);
+              }
+            },
             prefix: widget.prefix,
             enabled: widget.enabled,
             title: widget.title,
@@ -672,7 +678,11 @@ class _FSelectMenuTileState<T> extends State<FSelectMenuTile<T>> with TickerProv
         );
 
         if (data == null && (widget.label != null || widget.description != null || state.errorText != null)) {
-          final variants = <FFormFieldVariant>{if (!widget.enabled) .disabled, if (state.errorText != null) .error};
+          final variants = <FFormFieldVariant>{
+            if (!widget.enabled) .disabled,
+            if (state.errorText != null) .error,
+            if (_focused) .focused,
+          };
           final error = state.errorText == null ? null : widget.errorBuilder(context, state.errorText!);
 
           tile = FLabel(

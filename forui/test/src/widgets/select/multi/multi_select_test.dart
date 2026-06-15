@@ -509,4 +509,25 @@ void main() {
       }
     }
   });
+
+  testWidgets('forwards focus to label', (tester) async {
+    final focus = autoDispose(FocusNode());
+    bool focused() => tester
+        .widget<FLabel>(find.ancestor(of: find.text('Label'), matching: find.byType(FLabel)))
+        .variants
+        .contains(FFormFieldVariant.focused);
+
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FMultiSelect<String>(focusNode: focus, label: const Text('Label'), items: const {'A': 'A'}),
+      ),
+    );
+    expect(focused(), false);
+
+    focus.requestFocus();
+
+    await tester.pumpAndSettle();
+
+    expect(focused(), true);
+  });
 }

@@ -10,9 +10,11 @@ import 'package:forui/src/theme/variant.dart';
 @Variants('FFormField', {
   'disabled': (2, 'The semantic variant when this widget is disabled and cannot be interacted with.'),
   'error': (2, 'The semantic variant when this widget is in an error state.'),
+  'focused': (1, 'The interaction variant when the given widget or any of its descendants have focus.'),
 })
 @Variants('FFormFieldError', {
   'disabled': (2, 'The semantic variant when this widget is disabled and cannot be interacted with.'),
+  'focused': (1, 'The interaction variant when the given widget or any of its descendants have focus.'),
 })
 part 'form_field_style.design.dart';
 
