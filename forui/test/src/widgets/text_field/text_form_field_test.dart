@@ -299,7 +299,11 @@ void main() {
         .variants
         .contains(FFormFieldVariant.focused);
 
-    await tester.pumpWidget(TestScaffold.app(child: FTextFormField(focusNode: focus, label: const Text('Label'))));
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FTextFormField(focusNode: focus, label: const Text('Label')),
+      ),
+    );
     expect(focused(), false);
 
     focus.requestFocus();

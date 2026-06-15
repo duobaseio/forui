@@ -559,7 +559,9 @@ void main() {
         .contains(FFormFieldVariant.focused);
 
     await tester.pumpWidget(
-      TestScaffold.app(child: FSelect<String>(focusNode: focus, label: const Text('Label'), items: const {'A': 'A'})),
+      TestScaffold.app(
+        child: FSelect<String>(focusNode: focus, label: const Text('Label'), items: const {'A': 'A'}),
+      ),
     );
     expect(focused(), false);
 
