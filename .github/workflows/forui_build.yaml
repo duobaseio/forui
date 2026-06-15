@@ -50,7 +50,7 @@ jobs:
               echo "$output"
               exit 1
           fi
-      - uses: codecov/codecov-action@v6
+      - uses: codecov/codecov-action@v7
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
 
