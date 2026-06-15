@@ -450,6 +450,8 @@ abstract class _FDateFieldState<T extends FDateField> extends State<T> with Tick
           c.jumpToDayPicker(target);
         case final FGridSplitCalendarController c:
           c.jumpToDayPicker(target);
+        case final FWheelCalendarController c when c.monthYear:
+          c.setMonthYear(target.month, target.year);
         case final FWheelCalendarController c:
           c.jumpToDayPicker(target);
         case _:

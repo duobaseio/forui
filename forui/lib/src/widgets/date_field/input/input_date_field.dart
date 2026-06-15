@@ -103,6 +103,14 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
     }
   }
 
+  @override
+  void _handleOnSelectionChange() {
+    super._handleOnSelectionChange();
+    if (_popoverController.status.isForwardOrCompleted && _selectionController.value != null) {
+      _syncCalendar();
+    }
+  }
+
   void _show() {
     _syncCalendar();
     _popoverController.show();

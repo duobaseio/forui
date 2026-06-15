@@ -186,6 +186,107 @@ void main() {
     });
   }
 
+  testWidgets('calendar changes month when text input changes month', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        locale: const Locale('en', 'SG'),
+        child: FDateField(
+          key: key,
+          calendar: FDateFieldGridCalendarProperties(control: FGridCalendarControl(today: .utc(2025, 1, 15))),
+        ),
+      ),
+    );
+
+    await tester.tap(find.byKey(key));
+    await tester.pumpAndSettle();
+
+    expect(find.text('January 2025'), findsOneWidget);
+
+    await tester.enterText(find.byKey(key), '15/06/2026');
+    await tester.pumpAndSettle();
+
+    expect(find.text('June 2026'), findsOneWidget);
+  });
+
+  testWidgets('calendar does nothing when input is invalid', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        locale: const Locale('en', 'SG'),
+        child: FDateField(
+          key: key,
+          calendar: FDateFieldGridCalendarProperties(control: FGridCalendarControl(today: .utc(2025, 1, 15))),
+        ),
+      ),
+    );
+
+    await tester.tap(find.byKey(key));
+    await tester.pumpAndSettle();
+
+    expect(find.text('January 2025'), findsOneWidget);
+
+    await tester.enterText(find.byKey(key), '15/06/YYYY');
+    await tester.pumpAndSettle();
+
+    expect(find.text('January 2025'), findsOneWidget);
+  });
+
+  testWidgets('calendar does nothing when going from a valid to an invalid date', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        locale: const Locale('en', 'SG'),
+        child: FDateField(
+          key: key,
+          calendar: FDateFieldGridCalendarProperties(control: FGridCalendarControl(today: .utc(2025, 1, 15))),
+        ),
+      ),
+    );
+
+    await tester.enterText(find.byKey(key), '15/06/2026');
+    await tester.pumpAndSettle();
+
+    await tester.tap(find.byKey(key));
+    await tester.pumpAndSettle();
+
+    expect(find.text('June 2026'), findsOneWidget);
+
+    await tester.enterText(find.byKey(key), '15/06/YYYY');
+    await tester.pumpAndSettle();
+
+    expect(find.text('June 2026'), findsOneWidget);
+    expect(find.text('January 2025'), findsNothing);
+  });
+
+  testWidgets('wheel picker updates when text input changes', (tester) async {
+    final controller = autoDispose(FWheelCalendarController(today: .utc(2025, 1, 15)));
+
+    await tester.pumpWidget(
+      TestScaffold.app(
+        locale: const Locale('en', 'SG'),
+        child: FDateField(
+          key: key,
+          calendar: FDateFieldWheelCalendarProperties(control: FWheelCalendarControl(controller: controller)),
+        ),
+      ),
+    );
+
+    await tester.tap(find.byKey(key));
+    await tester.pumpAndSettle();
+
+    // Toggle from the day grid to the month-year wheel.
+    controller.toggleMonthYearPicker();
+    await tester.pumpAndSettle();
+
+    expect(find.byType(FPicker), findsOneWidget);
+    expect(controller.currentMonth, DateTime.utc(2025));
+
+    await tester.enterText(find.byKey(key), '15/06/2026');
+    await tester.pumpAndSettle();
+
+    // The wheel stays visible and scrolls to the new month and year instead of collapsing to the day grid.
+    expect(find.byType(FPicker), findsOneWidget);
+    expect(controller.currentMonth, DateTime.utc(2026, 6));
+  });
+
   testWidgets('unselect', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
