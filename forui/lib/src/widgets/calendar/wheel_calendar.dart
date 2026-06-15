@@ -2,6 +2,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:intl/intl.dart';
+
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/calendar/day/day_picker.dart';
 import 'package:forui/src/widgets/calendar/header.dart';
@@ -85,14 +87,14 @@ class WheelCalendar extends StatelessWidget {
                       flex: monthFlex,
                       children: [
                         for (var month = 1; month <= 12; month++)
-                          Center(child: Text(localizations.abbreviatedMonth(.utc(2000, month)))),
+                          Center(child: Text(DateFormat.MMM(localizations.localeName).format(.utc(2000, month)))),
                       ],
                     ),
                     FPickerWheel(
                       flex: yearFlex,
                       children: [
                         for (var year = controller.start.year; year <= controller.end.year; year++)
-                          Center(child: Text(localizations.year(.utc(year)))),
+                          Center(child: Text(DateFormat.y(localizations.localeName).format(.utc(year)))),
                       ],
                     ),
                   ],

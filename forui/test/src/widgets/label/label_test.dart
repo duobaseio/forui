@@ -120,4 +120,36 @@ void main() {
     expect(find.text('Error A'), findsNothing);
     expect(find.text('Error B'), findsOneWidget);
   });
+
+  testWidgets('error text style reflects the focused variant', (tester) async {
+    const focused = Color(0xFF00FF00);
+    Color? error() => tester
+        .widget<AnimatedDefaultTextStyle>(
+          find.ancestor(of: find.text('Error'), matching: find.byType(AnimatedDefaultTextStyle)).first,
+        )
+        .style
+        .color;
+
+    Widget build(Set<FFormFieldVariant> variants) => TestScaffold(
+      child: FLabel(
+        layout: .vertical,
+        variants: variants,
+        error: const Text('Error'),
+        style: .delta(
+          errorTextStyle: .delta([
+            .exact({FFormFieldErrorVariant.focused}, const .delta(color: focused)),
+          ]),
+        ),
+        child: const Text('Child'),
+      ),
+    );
+
+    await tester.pumpWidget(build({.error}));
+    await tester.pumpAndSettle();
+    expect(error(), isNot(focused));
+
+    await tester.pumpWidget(build({.error, .focused}));
+    await tester.pumpAndSettle();
+    expect(error(), focused);
+  });
 }

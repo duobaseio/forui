@@ -5,6 +5,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 import 'package:sugar/sugar.dart';
 
@@ -71,9 +72,10 @@ class YearPicker extends StatelessWidget {
           onPageChanged: (page) {
             controller.onPageChange(page);
             final decade = controller.to(page);
+            final locale = localization.localeName;
             SemanticsService.sendAnnouncement(
               View.of(context),
-              '${localization.year(decade)} — ${localization.year(.utc(decade.year + 9))}',
+              '${DateFormat.y(locale).format(decade)} — ${DateFormat.y(locale).format(.utc(decade.year + 9))}',
               Directionality.of(context),
             );
           },

@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
@@ -54,7 +55,7 @@ class Day extends StatelessWidget {
   @override
   Widget build(BuildContext context) => FTappable.static(
     focusNode: focusNode,
-    semanticsLabel: localizations.fullDate(date),
+    semanticsLabel: DateFormat.yMMMMd(localizations.localeName).format(date),
     excludeSemantics: true,
     onPress: onPress,
     onLongPress: onLongPress,

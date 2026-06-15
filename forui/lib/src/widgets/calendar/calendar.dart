@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
@@ -64,7 +65,7 @@ class FCalendar extends StatefulWidget {
       decoration: style.background,
       child: DecoratedBox(
         decoration: style.foreground,
-        child: Center(child: Text(localizations.day(date), style: style.textStyle)),
+        child: Center(child: Text(DateFormat.d(localizations.localeName).format(date), style: style.textStyle)),
       ),
     );
   }
@@ -80,7 +81,7 @@ class FCalendar extends StatefulWidget {
     final style = styles.resolve(variants);
     return DecoratedBox(
       decoration: style.decoration,
-      child: Center(child: Text(localizations.abbreviatedMonth(date), style: style.textStyle)),
+      child: Center(child: Text(DateFormat.MMM(localizations.localeName).format(date), style: style.textStyle)),
     );
   }
 
@@ -95,7 +96,7 @@ class FCalendar extends StatefulWidget {
     final style = styles.resolve(variants);
     return DecoratedBox(
       decoration: style.decoration,
-      child: Center(child: Text(localizations.year(date), style: style.textStyle)),
+      child: Center(child: Text(DateFormat.y(localizations.localeName).format(date), style: style.textStyle)),
     );
   }
 

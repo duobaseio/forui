@@ -286,42 +286,6 @@ abstract class FLocalizations {
     Locale('zu')
   ];
 
-  /// The full date.
-  ///
-  /// In en, this message translates to:
-  /// **'{date}'**
-  String fullDate(DateTime date);
-
-  /// The year.
-  ///
-  /// In en, this message translates to:
-  /// **'{date}'**
-  String year(DateTime date);
-
-  /// The year and month.
-  ///
-  /// In en, this message translates to:
-  /// **'{date}'**
-  String yearMonth(DateTime date);
-
-  /// The abbreviated month.
-  ///
-  /// In en, this message translates to:
-  /// **'{date}'**
-  String abbreviatedMonth(DateTime date);
-
-  /// The day of the month.
-  ///
-  /// In en, this message translates to:
-  /// **'{date}'**
-  String day(DateTime date);
-
-  /// The short date.
-  ///
-  /// In en, this message translates to:
-  /// **'{date}'**
-  String shortDate(DateTime date);
-
   /// The label for the barrier rendered underneath the content of a bottom sheet (used as the 'modalRouteContentName' of the 'barrierOnTapHint' message).
   ///
   /// In en, this message translates to:

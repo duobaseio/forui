@@ -60,24 +60,6 @@ class FDefaultLocalizations extends FLocalizations {
   String get autocompleteNoResults => 'No matches found.';
 
   @override
-  String fullDate(DateTime date) => DateFormat.yMMMMd().format(date);
-
-  @override
-  String year(DateTime date) => DateFormat.y().format(date);
-
-  @override
-  String yearMonth(DateTime date) => DateFormat.yMMMM().format(date);
-
-  @override
-  String abbreviatedMonth(DateTime date) => DateFormat.MMM().format(date);
-
-  @override
-  String day(DateTime date) => DateFormat.d().format(date);
-
-  @override
-  String shortDate(DateTime date) => DateFormat.yMd().format(date);
-
-  @override
   String barrierOnTapHint(String modalRouteContentName) => 'Close $modalRouteContentName';
 
   @override

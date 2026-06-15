@@ -59,6 +59,15 @@ and an API similar to other widgets.
 * **Breaking** Remove `FLineCalendarControl.lifted(selectable: ...)`. Use `FLineCalendar.selectable` instead.
 
 
+### `FLocalizations`
+* **Breaking** Remove `FLocalizations.fullDate`. Use `DateFormat.yMMMMd` instead.
+* **Breaking** Remove `FLocalizations.year`. Use `DateFormat.y` instead.
+* **Breaking** Remove `FLocalizations.yearMonth`. Use `DateFormat.yMMMM` instead.
+* **Breaking** Remove `FLocalizations.abbreviatedMonth`. Use `DateFormat.MMM` instead.
+* **Breaking** Remove `FLocalizations.day`. Use `DateFormat.d` instead.
+* **Breaking** Remove `FLocalizations.shortDate`. Use `DateFormat.yMd` instead.
+
+
 ### `FPointPortal` (New)
 * Add `FPointPortal`.
 

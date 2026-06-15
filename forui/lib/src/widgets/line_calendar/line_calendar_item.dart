@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:intl/intl.dart';
+
 import 'package:forui/forui.dart';
 
 /// The state of a line calendar item used to build a line calendar item.
@@ -30,7 +32,9 @@ class Item extends StatelessWidget {
     valueListenable: controller,
     builder: (context, selected, _) => FTappable(
       style: style.tappableStyle,
-      semanticsLabel: (FLocalizations.of(context) ?? FDefaultLocalizations()).fullDate(date),
+      semanticsLabel: DateFormat.yMMMMd(
+        (FLocalizations.of(context) ?? FDefaultLocalizations()).localeName,
+      ).format(date),
       selected: selected == date,
       onPress: selectable(date) ? () => controller.select(date) : null,
       builder: (context, v, _) {
@@ -101,7 +105,10 @@ class ItemContent extends StatelessWidget {
               style: style.weekdayTextStyle.resolve(variants),
               child: Text(localizations.shortWeekDays[date.weekday % 7]),
             ),
-            DefaultTextStyle.merge(style: style.dateTextStyle.resolve(variants), child: Text(localizations.day(date))),
+            DefaultTextStyle.merge(
+              style: style.dateTextStyle.resolve(variants),
+              child: Text(DateFormat.d(localizations.localeName).format(date)),
+            ),
           ],
         ),
       ),

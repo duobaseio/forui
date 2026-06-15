@@ -41,7 +41,9 @@ class DateInputController extends InputController {
         .replaceAll(RegExp('M{1,2}'), 'MM')
         .replaceAll('y', 'YYYY')
         .replaceAll("'", '');
-    final text = controller.value == null ? placeholder : localizations.shortDate(controller.value!);
+    final text = controller.value == null
+        ? placeholder
+        : DateFormat.yMd(localizations.localeName).format(controller.value!);
     return .test(controller, localizations, style, placeholder, initialYear, TextEditingValue(text: text));
   }
 
@@ -131,7 +133,7 @@ class DateInputController extends InputController {
         TextEditingValue(
           text: switch (controller.value) {
             null => placeholder,
-            final value => selector.localizations.shortDate(value),
+            final value => _format.format(value),
           },
         ),
       );
