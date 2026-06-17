@@ -109,7 +109,6 @@ void main() {
 
     final controllers = _gridControllers();
     await tester.pumpWidget(
-
       TestScaffold.app(
         child: Row(
           mainAxisSize: .min,
