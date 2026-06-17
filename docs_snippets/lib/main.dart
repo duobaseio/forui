@@ -1,8 +1,10 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide DialogRoute, OverlayRoute;
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';
 import 'package:forui/forui.dart';
+import 'package:marionette_flutter/marionette_flutter.dart';
 
 import 'package:docs_snippets/example.dart';
 import 'package:docs_snippets/main.gr.dart';
@@ -15,6 +17,9 @@ class Options {
 }
 
 void main() {
+  if (kDebugMode) {
+    MarionetteBinding.ensureInitialized();
+  }
   usePathUrlStrategy();
   runApp(ForuiSamples());
 }

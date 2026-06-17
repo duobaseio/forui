@@ -1,10 +1,8 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart' hide Autocomplete, Badge, Dialog, Tooltip;
+import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
 import 'package:marionette_flutter/marionette_flutter.dart';
-
-import 'widgets/dialog.dart';
 
 void main() {
   if (kDebugMode) {
@@ -21,16 +19,18 @@ class Application extends StatelessWidget {
     final theme = FThemes.zinc.light.desktop;
 
     return MaterialApp(
-      title: 'Forui Widget Spotlight',
+      title: 'Forui Create',
       debugShowCheckedModeBanner: false,
       localizationsDelegates: FLocalizations.localizationsDelegates,
       supportedLocales: FLocalizations.supportedLocales,
       theme: theme.toApproximateMaterialTheme(),
-      builder: (_, child) => FTheme(
-        data: theme,
-        child: FToaster(child: FTooltipGroup(child: child!)),
+      builder: (_, child) => FTheme(data: theme, child: child!),
+      home: FScaffold(
+        // TODO: replace this placeholder with the theme builder UI.
+        child: Center(
+          child: FButton(mainAxisSize: .min, onPress: () {}, child: const Text('Placeholder')),
+        ),
       ),
-      home: const FScaffold(child: Dialog()),
     );
   }
 }

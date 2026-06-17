@@ -22,6 +22,7 @@ dependencies:
   forui_assets:
   forui_hooks:
   intl: any
+  marionette_flutter: ^0.5.0
   sugar: ^4.0.0
 
 dev_dependencies:
