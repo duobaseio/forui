@@ -1,9 +1,20 @@
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
 
 import { Button } from '@/components/ui/button';
 import { Footer } from '@/components/footer';
 import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
+
+export const metadata: Metadata = {
+  title: { absolute: 'Forui: Flutter UI library inspired by shadcn/ui' },
+  description:
+    'Forui is a Flutter UI library with beautifully designed, minimalistic widgets, heavily inspired by shadcn/ui. ' +
+    'Fully customizable, free, and open source.',
+  alternates: {
+    canonical: '/',
+  },
+};
 
 export default function HomePage() {
   return (
@@ -14,8 +25,8 @@ export default function HomePage() {
             Beautifully designed minimalistic Flutter widgets
           </h1>
           <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mb-6">
-            A flutter platform-agnostic UI library for developers seeking consistent and elegant UIs across all devices.
-            Fully customizable, free, and open source.
+            A platform-agnostic Flutter UI library for developers seeking consistent and elegant UIs across all
+            devices. Designs are heavily inspired by shadcn/ui, fully customizable, free, and open source.
           </p>
           <div className="flex gap-4">
             <Button asChild>

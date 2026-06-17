@@ -2,9 +2,10 @@ import { RootProvider } from 'fumadocs-ui/provider/next';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import './global.css';
 import { Inter } from 'next/font/google';
+import { siteUrl } from '@/lib/site';
 
 export const metadata = {
-  metadataBase: new URL('https://forui.dev'),
+  metadataBase: new URL(siteUrl),
   title: {
     default: 'Forui',
     template: '%s | Forui',

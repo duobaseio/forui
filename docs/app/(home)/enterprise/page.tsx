@@ -41,6 +41,9 @@ const services = [
 
 export const metadata: Metadata = {
   title: 'Enterprise',
+  alternates: {
+    canonical: '/enterprise',
+  },
 };
 
 const contact = 'https://forms.gle/wdxmjUMbYEhoJTsN8';
