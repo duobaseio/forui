@@ -10,6 +10,7 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/calendar/calendar_controller.dart';
 import 'package:forui/src/widgets/calendar/date_selection_controller.dart';
+import 'package:forui/src/widgets/calendar/day/day_picker.dart';
 import 'package:forui/src/widgets/calendar/grid_calendar.dart';
 import 'package:forui/src/widgets/calendar/wheel_calendar.dart';
 
@@ -132,6 +133,10 @@ class FCalendar extends StatefulWidget {
   /// A callback for when a date in a day picker is long pressed.
   final FutureOr<void> Function(DateTime)? onDayLongPress;
 
+  /// Whether the day grid always shows 6 week-rows instead of adapting its height to the month's 4-6 weeks. Defaults
+  /// to false.
+  final bool fixedWeeks;
+
   /// Builds the inner calendar widget for the chosen variant from its resolved controller and presentation inputs.
   final Widget Function(
     BuildContext context,
@@ -151,6 +156,7 @@ class FCalendar extends StatefulWidget {
     required FDateSelectionControl selectionControl,
     FGridCalendarControl control = const FGridCalendarControl(),
     FCalendarStyleDelta style = const .context(),
+    bool fixedWeeks = false,
     ScrollPhysics? dayScrollPhysics,
     ScrollCacheExtent? dayScrollCacheExtent,
     ScrollBehavior? dayScrollBehavior,
@@ -172,6 +178,7 @@ class FCalendar extends StatefulWidget {
          control: control,
          selectionControl: selectionControl,
          style: style,
+         fixedWeeks: fixedWeeks,
          onDayPress: onDayPress,
          onDayLongPress: onDayLongPress,
          key: key,
@@ -193,6 +200,7 @@ class FCalendar extends StatefulWidget {
                localizations: localizations,
                width: width,
                height: height,
+               fixedWeeks: fixedWeeks,
                dayScrollPhysics: dayScrollPhysics,
                dayScrollCacheExtent: dayScrollCacheExtent,
                dayScrollBehavior: dayScrollBehavior,
@@ -217,6 +225,7 @@ class FCalendar extends StatefulWidget {
     required FDateSelectionControl selectionControl,
     FGridSplitCalendarControl control = const FGridSplitCalendarControl(),
     FCalendarStyleDelta style = const .context(),
+    bool fixedWeeks = false,
     ScrollPhysics? dayScrollPhysics,
     ScrollCacheExtent? dayScrollCacheExtent,
     ScrollBehavior? dayScrollBehavior,
@@ -235,6 +244,7 @@ class FCalendar extends StatefulWidget {
          control: control,
          selectionControl: selectionControl,
          style: style,
+         fixedWeeks: fixedWeeks,
          onDayPress: onDayPress,
          onDayLongPress: onDayLongPress,
          key: key,
@@ -256,6 +266,7 @@ class FCalendar extends StatefulWidget {
                localizations: localizations,
                width: width,
                height: height,
+               fixedWeeks: fixedWeeks,
                dayScrollPhysics: dayScrollPhysics,
                dayScrollCacheExtent: dayScrollCacheExtent,
                dayScrollBehavior: dayScrollBehavior,
@@ -277,6 +288,7 @@ class FCalendar extends StatefulWidget {
     required FDateSelectionControl selectionControl,
     FWheelCalendarControl control = const FWheelCalendarControl(),
     FCalendarStyleDelta style = const .context(),
+    bool fixedWeeks = false,
     ScrollPhysics? dayScrollPhysics,
     ScrollCacheExtent? dayScrollCacheExtent,
     ScrollBehavior? dayScrollBehavior,
@@ -293,6 +305,7 @@ class FCalendar extends StatefulWidget {
          control: control,
          selectionControl: selectionControl,
          style: style,
+         fixedWeeks: fixedWeeks,
          onDayPress: onDayPress,
          onDayLongPress: onDayLongPress,
          key: key,
@@ -314,6 +327,7 @@ class FCalendar extends StatefulWidget {
                localizations: localizations,
                width: width,
                height: height,
+               fixedWeeks: fixedWeeks,
                dayScrollPhysics: dayScrollPhysics,
                dayScrollCacheExtent: dayScrollCacheExtent,
                dayScrollBehavior: dayScrollBehavior,
@@ -332,6 +346,7 @@ class FCalendar extends StatefulWidget {
     required this.control,
     required this.selectionControl,
     required this._builder,
+    required this.fixedWeeks,
     this.style = const .context(),
     this.onDayPress,
     this.onDayLongPress,
@@ -348,6 +363,7 @@ class FCalendar extends StatefulWidget {
       ..add(DiagnosticsProperty('control', control))
       ..add(DiagnosticsProperty('selectionControl', selectionControl))
       ..add(DiagnosticsProperty('style', style))
+      ..add(FlagProperty('fixedWeeks', value: fixedWeeks, ifTrue: 'fixedWeeks'))
       ..add(ObjectFlagProperty.has('onDayPress', onDayPress))
       ..add(ObjectFlagProperty.has('onDayLongPress', onDayLongPress));
   }
@@ -391,12 +407,10 @@ class _State extends State<FCalendar> {
   @override
   Widget build(BuildContext context) {
     final style = widget.style(context.theme.calendarStyle);
+    final dayPickerStyle = style.dayPickerStyle;
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
 
-    // The month and year grids are shorter than the day grid; pad them to its height so swapping views causes no
-    // layout shift, leaving the extra space below the grid.
     final width = DateTime.daysPerWeek * style.dayPickerStyle.daySize.width;
-    final height = 7 * style.dayPickerStyle.daySize.height + (7 - 1) * style.dayPickerStyle.daySpacing;
 
     return Container(
       decoration: style.decoration,
@@ -404,21 +418,30 @@ class _State extends State<FCalendar> {
       child: FocusScope(
         child: ListenableBuilder(
           listenable: _selectionController,
-          builder: (context, _) => widget._builder(
-            context,
-            _controller,
-            _selectionController,
-            style,
-            localizations,
-            width,
-            height,
-            (date) async {
-              if (widget.onDayPress?.call(date) case final Future<void> future) {
-                await future;
-              }
-              _selectionController.select(date);
+          builder: (_, _) => ListenableBuilder(
+            listenable: _controller,
+            builder: (context, _) {
+              final rows = widget.fixedWeeks
+                  ? 7
+                  : _controller.currentMonth.rows(dayPickerStyle.firstDayOfWeek ?? localizations.firstDayOfWeek) + 1;
+
+              return widget._builder(
+                context,
+                _controller,
+                _selectionController,
+                style,
+                localizations,
+                width,
+                rows * dayPickerStyle.daySize.height + (rows - 1) * dayPickerStyle.daySpacing,
+                (date) async {
+                  if (widget.onDayPress?.call(date) case final Future<void> future) {
+                    await future;
+                  }
+                  _selectionController.select(date);
+                },
+                widget.onDayLongPress ?? (_) {},
+              );
             },
-            widget.onDayLongPress ?? (_) {},
           ),
         ),
       ),

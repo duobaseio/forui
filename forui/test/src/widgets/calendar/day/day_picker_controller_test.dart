@@ -40,6 +40,7 @@ Widget _harness(
       scrollPhysics: null,
       scrollCacheExtent: null,
       scrollBehavior: null,
+      fixedWeeks: true,
       onPress: onPress ?? (_) {},
       onLongPress: onLongPress ?? (_) {},
       builder: FCalendar.defaultDayBuilder,

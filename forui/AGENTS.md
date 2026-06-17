@@ -255,6 +255,11 @@ Parameterize tests using for-each loop to cover multiple scenarios when sensible
 
 Prefer literals to matchers where possible, e.g. `expect(value, null)` instead of `expect(value, isNull)`.
 
+When a widget already has test files, add new tests to one of them rather than creating a new per-feature test file.
+Default to the existing non-golden behavior file (`<widget>_test.dart` or `<widget>_controller_test.dart`) for
+behavioral and unit tests, and `<widget>_golden_test.dart` for goldens. Only create a new file when there's a clear,
+distinct reason.
+
 After API changes, analyze all in-repo consumers: `forui/forui`, `forui/forui/example`, and `docs_snippets`.
 
 When using the `analyze_files` MCP tool, always analyze full project roots (without `paths`) rather than specific files.

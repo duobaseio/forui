@@ -61,6 +61,7 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/data/calendar/default', page: CalendarRoute.page),
     AutoRoute(path: '/data/calendar/date', page: DateCalendarRoute.page),
     AutoRoute(path: '/data/calendar/dates', page: DatesCalendarRoute.page),
+    AutoRoute(path: '/data/calendar/fixed-weeks', page: FixedWeeksCalendarRoute.page),
     AutoRoute(path: '/data/calendar/unselectable', page: UnselectableCalendarRoute.page),
     AutoRoute(path: '/data/calendar/range', page: RangeCalendarRoute.page),
     AutoRoute(path: '/data/calendar/split-grid', page: SplitGridCalendarRoute.page),

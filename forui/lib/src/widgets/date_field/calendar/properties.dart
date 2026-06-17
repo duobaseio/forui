@@ -67,6 +67,10 @@ sealed class FDateFieldCalendarProperties with Diagnosticable {
   /// True if the calendar popover should be automatically hidden after a date is selected. Defaults to true.
   final bool autoHide;
 
+  /// Whether the day grid always shows 6 week-rows instead of adapting its height to the month's 4-6 weeks. Defaults to
+  /// false.
+  final bool fixedWeeks;
+
   const FDateFieldCalendarProperties._({
     this.anchor = .topLeft,
     this.fieldAnchor = .bottomLeft,
@@ -82,6 +86,7 @@ sealed class FDateFieldCalendarProperties with Diagnosticable {
     this.cutoutBuilder = FModalBarrier.defaultCutoutBuilder,
     this.popoverBuilder = FPopover.defaultPopoverBuilder,
     this.autoHide = true,
+    this.fixedWeeks = false,
   });
 
   /// The control for the calendar's navigation.
@@ -105,7 +110,8 @@ sealed class FDateFieldCalendarProperties with Diagnosticable {
       ..add(FlagProperty('cutout', value: cutout, ifTrue: 'cutout'))
       ..add(ObjectFlagProperty.has('cutoutBuilder', cutoutBuilder))
       ..add(ObjectFlagProperty.has('popoverBuilder', popoverBuilder))
-      ..add(FlagProperty('autoHide', value: autoHide, ifTrue: 'autoHide'));
+      ..add(FlagProperty('autoHide', value: autoHide, ifTrue: 'autoHide'))
+      ..add(FlagProperty('fixedWeeks', value: fixedWeeks, ifTrue: 'fixedWeeks'));
   }
 
   @override
@@ -127,7 +133,8 @@ sealed class FDateFieldCalendarProperties with Diagnosticable {
           cutout == other.cutout &&
           cutoutBuilder == other.cutoutBuilder &&
           popoverBuilder == other.popoverBuilder &&
-          autoHide == other.autoHide;
+          autoHide == other.autoHide &&
+          fixedWeeks == other.fixedWeeks;
 
   @override
   int get hashCode =>
@@ -145,7 +152,8 @@ sealed class FDateFieldCalendarProperties with Diagnosticable {
       cutout.hashCode ^
       cutoutBuilder.hashCode ^
       popoverBuilder.hashCode ^
-      autoHide.hashCode;
+      autoHide.hashCode ^
+      fixedWeeks.hashCode;
 }
 
 /// A date field calendar that cycles through the day, month and year grid pickers. Mirrors [FCalendar.grid].
@@ -235,6 +243,7 @@ class FDateFieldGridCalendarProperties extends FDateFieldCalendarProperties {
     super.cutoutBuilder,
     super.popoverBuilder,
     super.autoHide,
+    super.fixedWeeks,
   }) : super._();
 
   @override
@@ -378,6 +387,7 @@ class FDateFieldGridSplitCalendarProperties extends FDateFieldCalendarProperties
     super.cutoutBuilder,
     super.popoverBuilder,
     super.autoHide,
+    super.fixedWeeks,
   }) : super._();
 
   @override
@@ -503,6 +513,7 @@ class FDateFieldWheelCalendarProperties extends FDateFieldCalendarProperties {
     super.cutoutBuilder,
     super.popoverBuilder,
     super.autoHide,
+    super.fixedWeeks,
   }) : super._();
 
   @override

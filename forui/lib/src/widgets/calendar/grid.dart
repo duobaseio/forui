@@ -142,6 +142,7 @@ abstract class GridController extends FChangeNotifier {
   PageController _controller;
   DateTime? _focused;
   DateTime _current;
+  (int, int)? _animation;
 
   GridController({
     required this.start,
@@ -203,7 +204,7 @@ abstract class GridController extends FChangeNotifier {
     _focused = date;
     if (date != null && _from(date) != _from(_current)) {
       assert(debugCheckInclusiveDateRange(start, date, end));
-      await _controller.animateToPage(_from(date), duration: duration, curve: curve);
+      await _animateTo(_from(date), duration, curve);
     }
 
     notifyListeners();
@@ -212,14 +213,14 @@ abstract class GridController extends FChangeNotifier {
   /// Animates the current page to the next page. Does nothing if it is the last page.
   Future<void> next({Duration duration = const Duration(milliseconds: 200), Curve curve = Curves.ease}) async {
     if (_from(_current) case final page when page < _from(end)) {
-      await _controller.animateToPage(page + 1, duration: duration, curve: curve);
+      await _animateTo(page + 1, duration, curve);
     }
   }
 
   /// Animates the current page to the previous page. Does nothing if it is the first page.
   Future<void> previous({Duration duration = const Duration(milliseconds: 200), Curve curve = Curves.ease}) async {
     if (_from(_current) case final page when 0 < page) {
-      await _controller.animateToPage(page - 1, duration: duration, curve: curve);
+      await _animateTo(page - 1, duration, curve);
     }
   }
 
@@ -233,7 +234,16 @@ abstract class GridController extends FChangeNotifier {
     Curve curve = Curves.ease,
   }) {
     assert(debugCheckInclusiveDateRange(start, date, end));
-    return _controller.animateToPage(_from(date), duration: duration, curve: curve);
+    return _animateTo(_from(date), duration, curve);
+  }
+
+  Future<void> _animateTo(int page, Duration duration, Curve curve) async {
+    try {
+      _animation = (_controller.hasClients ? (_controller.page?.round() ?? _from(_current)) : _from(_current), page);
+      await _controller.animateToPage(page, duration: duration, curve: curve);
+    } finally {
+      _animation = null;
+    }
   }
 
   /// Jumps the current page to the given [date]'s page.
@@ -298,4 +308,7 @@ extension InternalPickerController on GridController {
   DateTime? Function(DateTime, DateTime) get focusable => _focusable;
 
   DateTime get current => _current;
+
+  /// The start and end pages of the current programmatic animation, or null if none is running.
+  (int, int)? get animation => _animation;
 }

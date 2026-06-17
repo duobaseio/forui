@@ -21,12 +21,19 @@ part 'day_picker.design.dart';
 const _rows = 7;
 
 @internal
+extension DateTimes on DateTime {
+  /// The number of week rows, excluding the weekday header.
+  int rows(int firstDayOfWeek) => (((firstDayOfMonth.weekday - firstDayOfWeek) % 7 + daysInMonth) / 7).ceil();
+}
+
+@internal
 class DayPicker extends StatelessWidget {
   final FCalendarDayPickerController controller;
   final FCalendarDayPickerStyle style;
   final FLocalizations localization;
   final DateTime today;
   final bool Function(DateTime) selected;
+  final bool fixedWeeks;
   final ScrollPhysics? scrollPhysics;
   final ScrollCacheExtent? scrollCacheExtent;
   final ScrollBehavior? scrollBehavior;
@@ -40,6 +47,7 @@ class DayPicker extends StatelessWidget {
     required this.localization,
     required this.today,
     required this.selected,
+    required this.fixedWeeks,
     required this.scrollPhysics,
     required this.scrollCacheExtent,
     required this.scrollBehavior,
@@ -52,56 +60,88 @@ class DayPicker extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = style.daySize;
+    final width = DateTime.daysPerWeek * size.width;
+    final grid = GridFocusableActionDetector(
+      onFocusMove: controller.move,
+      onFocusChange: (focused) {
+        if (!focused) {
+          controller.focus(null);
+          return;
+        }
 
-    return SizedBox(
-      width: DateTime.daysPerWeek * size.width,
-      height: _rows * size.height + (_rows - 1) * style.daySpacing,
-      child: GridFocusableActionDetector(
-        onFocusMove: controller.move,
-        onFocusChange: (focused) {
-          if (!focused) {
-            controller.focus(null);
-            return;
-          }
-
-          if (controller.focused == null) {
-            final current = controller.current;
-            final preferred = today.year == current.year && today.month == current.month ? today : current;
-            controller.focus(controller.focusable(current, preferred));
-          }
+        if (controller.focused == null) {
+          final current = controller.current;
+          final preferred = today.year == current.year && today.month == current.month ? today : current;
+          controller.focus(controller.focusable(current, preferred));
+        }
+      },
+      child: PageView.builder(
+        controller: controller.controller,
+        physics: scrollPhysics,
+        scrollCacheExtent: scrollCacheExtent,
+        scrollBehavior: scrollBehavior,
+        onPageChanged: (page) {
+          controller.onPageChange(page);
+          SemanticsService.sendAnnouncement(
+            View.of(context),
+            DateFormat.yMMMM(localization.localeName).format(controller.to(page)),
+            Directionality.of(context),
+          );
         },
-        child: PageView.builder(
-          controller: controller.controller,
-          physics: scrollPhysics,
-          scrollCacheExtent: scrollCacheExtent,
-          scrollBehavior: scrollBehavior,
-          onPageChanged: (page) {
-            controller.onPageChange(page);
-            SemanticsService.sendAnnouncement(
-              View.of(context),
-              DateFormat.yMMMM(localization.localeName).format(controller.to(page)),
-              Directionality.of(context),
-            );
-          },
-          itemCount: controller.pages,
-          itemBuilder: (_, page) => ListenableBuilder(
-            listenable: controller,
-            builder: (_, _) => _Grid(
-              style: style,
-              localization: localization,
-              month: controller.to(page),
-              today: today,
-              focused: controller.focused,
-              selectable: controller.selectable,
-              selected: selected,
-              onPress: onPress,
-              onLongPress: onLongPress,
-              builder: builder,
-            ),
+        itemCount: controller.pages,
+        itemBuilder: (_, page) => ListenableBuilder(
+          listenable: controller,
+          builder: (_, _) => _Grid(
+            style: style,
+            localization: localization,
+            height: _height(page),
+            month: controller.to(page),
+            today: today,
+            focused: controller.focused,
+            selectable: controller.selectable,
+            selected: selected,
+            fixedWeeks: fixedWeeks,
+            onPress: onPress,
+            onLongPress: onLongPress,
+            builder: builder,
           ),
         ),
       ),
     );
+
+    if (fixedWeeks) {
+      return SizedBox(width: width, height: _rows * size.height + (_rows - 1) * style.daySpacing, child: grid);
+    }
+
+    return AnimatedBuilder(
+      animation: controller.controller,
+      builder: (_, _) {
+        final page = controller.controller.hasClients && controller.controller.page != null
+            ? controller.controller.page!
+            : controller.from(controller.current).toDouble();
+        final floored = page.floor();
+
+        final viewport = switch (controller.animation) {
+          (final start, final end)? when start != end => lerpDouble(
+            _height(start),
+            _height(end),
+            ((page - start) / (end - start)).clamp(0.0, 1.0),
+          )!,
+          _ => lerpDouble(_height(floored), _height(page.ceil()), page - floored)!,
+        };
+
+        return _Viewport(
+          height: viewport,
+          child: SizedBox(width: width, height: viewport, child: grid),
+        );
+      },
+    );
+  }
+
+  double _height(int page) {
+    final month = controller.to(page.clamp(0, controller.pages - 1));
+    final rows = 1 + month.rows(style.firstDayOfWeek ?? localization.firstDayOfWeek);
+    return rows * style.daySize.height + (rows - 1) * style.daySpacing;
   }
 
   @override
@@ -113,6 +153,7 @@ class DayPicker extends StatelessWidget {
       ..add(DiagnosticsProperty('localization', localization))
       ..add(DiagnosticsProperty('today', today))
       ..add(ObjectFlagProperty.has('selected', selected))
+      ..add(FlagProperty('fixedWeeks', value: fixedWeeks, ifTrue: 'fixedWeeks'))
       ..add(DiagnosticsProperty('scrollPhysics', scrollPhysics))
       ..add(DiagnosticsProperty('scrollCacheExtent', scrollCacheExtent))
       ..add(DiagnosticsProperty('scrollBehavior', scrollBehavior))
@@ -122,14 +163,27 @@ class DayPicker extends StatelessWidget {
   }
 }
 
+class _Viewport extends InheritedWidget {
+  static double of(BuildContext context) => context.dependOnInheritedWidgetOfExactType<_Viewport>()!._height;
+
+  final double _height;
+
+  const _Viewport({required this._height, required super.child});
+
+  @override
+  bool updateShouldNotify(_Viewport old) => _height != old._height;
+}
+
 class _Grid extends StatefulWidget {
   final FCalendarDayPickerStyle style;
   final FLocalizations localization;
+  final double height;
   final DateTime month;
   final DateTime today;
   final DateTime? focused;
   final bool Function(DateTime) selectable;
   final bool Function(DateTime) selected;
+  final bool fixedWeeks;
   final ValueChanged<DateTime> onPress;
   final ValueChanged<DateTime> onLongPress;
   final FCalendarDayBuilder builder;
@@ -137,11 +191,13 @@ class _Grid extends StatefulWidget {
   _Grid({
     required this.style,
     required this.localization,
+    required this.height,
     required this.month,
     required this.today,
     required this.focused,
     required this.selectable,
     required this.selected,
+    required this.fixedWeeks,
     required this.onPress,
     required this.onLongPress,
     required this.builder,
@@ -156,11 +212,13 @@ class _Grid extends StatefulWidget {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('localization', localization))
+      ..add(DoubleProperty('height', height))
       ..add(DiagnosticsProperty('month', month))
       ..add(DiagnosticsProperty('today', today))
       ..add(DiagnosticsProperty('focused', focused))
       ..add(ObjectFlagProperty.has('selectable', selectable))
       ..add(ObjectFlagProperty.has('selected', selected))
+      ..add(FlagProperty('fixedWeeks', value: fixedWeeks, ifTrue: 'fixedWeeks'))
       ..add(ObjectFlagProperty.has('onPress', onPress))
       ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
       ..add(ObjectFlagProperty.has('builder', builder));
@@ -250,7 +308,7 @@ class _GridState extends State<_Grid> {
       current = after;
     }
 
-    return GridView.custom(
+    final grid = GridView.custom(
       padding: .zero,
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -262,6 +320,41 @@ class _GridState extends State<_Grid> {
           ),
         ...days,
       ]),
+    );
+
+    if (widget.fixedWeeks) {
+      return grid;
+    }
+
+    return _Fade(height: widget.height, cell: widget.style.daySize.height, child: grid);
+  }
+}
+
+class _Fade extends StatelessWidget {
+  final double _height;
+  final double _cell;
+  final Widget child;
+
+  const _Fade({required this._height, required this._cell, required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    final viewport = _Viewport.of(context);
+    if (_height <= viewport) {
+      return child; // fully revealed, including at rest
+    }
+
+    return ShaderMask(
+      blendMode: .dstIn,
+      shaderCallback: LinearGradient(
+        begin: .topCenter,
+        end: .bottomCenter,
+        stops: [(viewport - _cell) / viewport, 1],
+        // Fade the bottom edge by how clipped the last row is: transparent when a whole row is hidden, opaque as it is
+        // revealed, so the gradient meets the solid `child` branch continuously at _height == viewport.
+        colors: [const Color(0xFFFFFFFF), .fromRGBO(255, 255, 255, (1 - (_height - viewport) / _cell).clamp(0.0, 1.0))],
+      ).createShader,
+      child: child,
     );
   }
 }

@@ -39,6 +39,7 @@ final grid = FCalendar.grid(
   // {@endcategory}
   // {@category "Core"}
   style: const .delta(padding: .value(.zero)),
+  fixedWeeks: false,
   // {@endcategory}
 );
 
@@ -76,6 +77,7 @@ final splitGrid = FCalendar.splitGrid(
   // {@endcategory}
   // {@category "Core"}
   style: const .delta(padding: .value(.zero)),
+  fixedWeeks: false,
   // {@endcategory}
 );
 
@@ -113,6 +115,7 @@ final wheel = FCalendar.wheel(
   // {@endcategory}
   // {@category "Core"}
   style: const .delta(padding: .value(.zero)),
+  fixedWeeks: false,
   // {@endcategory}
 );
 

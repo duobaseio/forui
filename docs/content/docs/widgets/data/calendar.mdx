@@ -16,6 +16,7 @@ import unselectableSnippet from '@/snippets/examples/data/calendar/unselectable.
 import rangeSnippet from '@/snippets/examples/data/calendar/range.json';
 import splitGridSnippet from '@/snippets/examples/data/calendar/split-grid.json';
 import wheelSnippet from '@/snippets/examples/data/calendar/wheel.json';
+import fixedWeeksSnippet from '@/snippets/examples/data/calendar/fixed-weeks.json';
 import noneSnippet from '@/snippets/examples/data/calendar/none.json';
 import footerSnippet from '@/snippets/examples/data/calendar/footer.json';
 import gridUsage from '@/snippets/usages/data/calendar/grid.json';
@@ -86,6 +87,20 @@ To generate a specific style for customization:
 <UsageSnippet usage={wheelUsage} />
 
 ## Examples
+
+### Fixed Weeks
+
+By default, the day grid adjusts its height to each month's 4 — 6 weeks. Set `fixedWeeks: true` to keep the calendar's
+height constant.
+
+<Tabs items={['Preview', 'Code']}>
+    <Tab value="Preview">
+        <Widget name='data/calendar' variant='fixed-weeks' height={500}/>
+    </Tab>
+    <Tab value="Code">
+        <CodeSnippet snippet={fixedWeeksSnippet} />
+    </Tab>
+</Tabs>
 
 ### Modes
 

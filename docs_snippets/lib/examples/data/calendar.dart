@@ -7,7 +7,7 @@ import 'package:docs_snippets/example.dart';
 
 @RoutePage()
 class CalendarPage extends Example {
-  CalendarPage({@queryParam super.theme});
+  CalendarPage({@queryParam super.theme}) : super(alignment: .topCenter, top: 24);
 
   @override
   Widget example(BuildContext _) => FCalendar.grid(
@@ -17,8 +17,27 @@ class CalendarPage extends Example {
 }
 
 @RoutePage()
+class FixedWeeksCalendarPage extends Example {
+  FixedWeeksCalendarPage({@queryParam super.theme}) : super(alignment: .topCenter, top: 24);
+
+  @override
+  Widget example(BuildContext _) => FCalendar.grid(
+    control: FGridCalendarControl(
+      start: DateTime.utc(2000),
+      today: DateTime.utc(2026, 2, 15),
+      initial: DateTime.utc(2026, 2, 15),
+      end: DateTime.utc(2030),
+    ),
+    selectionControl: .managedSingle(),
+    // {@highlight}
+    fixedWeeks: true,
+    // {@endhighlight}
+  );
+}
+
+@RoutePage()
 class DateCalendarPage extends Example {
-  DateCalendarPage({@queryParam super.theme});
+  DateCalendarPage({@queryParam super.theme}) : super(alignment: .topCenter, top: 24);
 
   @override
   Widget example(BuildContext _) => FCalendar.grid(
@@ -31,7 +50,7 @@ class DateCalendarPage extends Example {
 
 @RoutePage()
 class SplitGridCalendarPage extends Example {
-  SplitGridCalendarPage({@queryParam super.theme});
+  SplitGridCalendarPage({@queryParam super.theme}) : super(alignment: .topCenter, top: 24);
 
   @override
   Widget example(BuildContext _) => FCalendar.splitGrid(
@@ -44,7 +63,7 @@ class SplitGridCalendarPage extends Example {
 
 @RoutePage()
 class WheelCalendarPage extends Example {
-  WheelCalendarPage({@queryParam super.theme});
+  WheelCalendarPage({@queryParam super.theme}) : super(alignment: .topCenter, top: 24);
 
   @override
   Widget example(BuildContext _) => FCalendar.wheel(
@@ -57,7 +76,7 @@ class WheelCalendarPage extends Example {
 
 @RoutePage()
 class DatesCalendarPage extends Example {
-  DatesCalendarPage({@queryParam super.theme});
+  DatesCalendarPage({@queryParam super.theme}) : super(alignment: .topCenter, top: 24);
 
   @override
   Widget example(BuildContext _) => FCalendar.grid(
@@ -70,7 +89,7 @@ class DatesCalendarPage extends Example {
 
 @RoutePage()
 class RangeCalendarPage extends Example {
-  RangeCalendarPage({@queryParam super.theme});
+  RangeCalendarPage({@queryParam super.theme}) : super(alignment: .topCenter, top: 24);
 
   @override
   Widget example(BuildContext _) => FCalendar.grid(
@@ -83,7 +102,7 @@ class RangeCalendarPage extends Example {
 
 @RoutePage()
 class NoneCalendarPage extends Example {
-  NoneCalendarPage({@queryParam super.theme});
+  NoneCalendarPage({@queryParam super.theme}) : super(alignment: .topCenter, top: 24);
 
   @override
   Widget example(BuildContext _) => FCalendar.grid(
@@ -96,7 +115,7 @@ class NoneCalendarPage extends Example {
 
 @RoutePage()
 class UnselectableCalendarPage extends Example {
-  UnselectableCalendarPage({@queryParam super.theme});
+  UnselectableCalendarPage({@queryParam super.theme}) : super(alignment: .topCenter, top: 24);
 
   @override
   Widget example(BuildContext _) => FCalendar.grid(
@@ -114,7 +133,7 @@ class UnselectableCalendarPage extends Example {
 
 @RoutePage()
 class FooterCalendarPage extends Example {
-  FooterCalendarPage({@queryParam super.theme});
+  FooterCalendarPage({@queryParam super.theme}) : super(alignment: .topCenter, top: 24);
 
   @override
   Widget example(BuildContext _) => FCalendar.grid(

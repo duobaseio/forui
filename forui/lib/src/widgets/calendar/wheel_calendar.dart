@@ -16,6 +16,7 @@ class WheelCalendar extends StatelessWidget {
   final FLocalizations localizations;
   final double width;
   final double height;
+  final bool fixedWeeks;
   final ScrollPhysics? dayScrollPhysics;
   final ScrollCacheExtent? dayScrollCacheExtent;
   final ScrollBehavior? dayScrollBehavior;
@@ -35,6 +36,7 @@ class WheelCalendar extends StatelessWidget {
     required this.localizations,
     required this.width,
     required this.height,
+    required this.fixedWeeks,
     required this.dayScrollPhysics,
     required this.dayScrollCacheExtent,
     required this.dayScrollBehavior,
@@ -50,93 +52,91 @@ class WheelCalendar extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => ListenableBuilder(
-    listenable: controller,
-    builder: (context, _) => Column(
-      mainAxisSize: .min,
-      children: controller.monthYear
-          ? [
-              SizedBox(
-                width: width,
-                child: headerBuilder(
-                  context,
-                  controller,
-                  selectionController,
-                  Header.singleDay(
-                    style: style.headerStyle,
-                    localizations: localizations,
-                    monthYear: controller.currentMonth,
-                    shown: true,
-                    onPress: controller.toggleMonthYearPicker,
-                  ),
+  Widget build(BuildContext context) => Column(
+    mainAxisSize: .min,
+    children: controller.monthYear
+        ? [
+            SizedBox(
+              width: width,
+              child: headerBuilder(
+                context,
+                controller,
+                selectionController,
+                Header.singleDay(
+                  style: style.headerStyle,
+                  localizations: localizations,
+                  monthYear: controller.currentMonth,
+                  shown: true,
+                  onPress: controller.toggleMonthYearPicker,
                 ),
               ),
-              SizedBox(height: style.dayPickerStyle.headerSpacing),
-              SizedBox(
-                width: width,
-                height: height,
-                child: FPicker(
-                  style: style.wheelPickerStyle,
-                  control: .lifted(
-                    indexes: [controller.currentMonth.month - 1, controller.currentMonth.year - controller.start.year],
-                    onChange: (indexes) => controller.setMonthYear(indexes[0] + 1, controller.start.year + indexes[1]),
+            ),
+            SizedBox(height: style.dayPickerStyle.headerSpacing),
+            SizedBox(
+              width: width,
+              height: height,
+              child: FPicker(
+                style: style.wheelPickerStyle,
+                control: .lifted(
+                  indexes: [controller.currentMonth.month - 1, controller.currentMonth.year - controller.start.year],
+                  onChange: (indexes) => controller.setMonthYear(indexes[0] + 1, controller.start.year + indexes[1]),
+                ),
+                children: [
+                  FPickerWheel(
+                    loop: loop,
+                    flex: monthFlex,
+                    children: [
+                      for (var month = 1; month <= 12; month++)
+                        Center(child: Text(DateFormat.MMM(localizations.localeName).format(.utc(2000, month)))),
+                    ],
                   ),
-                  children: [
-                    FPickerWheel(
-                      loop: loop,
-                      flex: monthFlex,
-                      children: [
-                        for (var month = 1; month <= 12; month++)
-                          Center(child: Text(DateFormat.MMM(localizations.localeName).format(.utc(2000, month)))),
-                      ],
-                    ),
-                    FPickerWheel(
-                      flex: yearFlex,
-                      children: [
-                        for (var year = controller.start.year; year <= controller.end.year; year++)
-                          Center(child: Text(DateFormat.y(localizations.localeName).format(.utc(year)))),
-                      ],
-                    ),
-                  ],
+                  FPickerWheel(
+                    flex: yearFlex,
+                    children: [
+                      for (var year = controller.start.year; year <= controller.end.year; year++)
+                        Center(child: Text(DateFormat.y(localizations.localeName).format(.utc(year)))),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+            footerBuilder(context, controller, selectionController),
+          ]
+        : [
+            SizedBox(
+              width: width,
+              child: headerBuilder(
+                context,
+                controller,
+                selectionController,
+                Header.day(
+                  style: style.headerStyle,
+                  localizations: localizations,
+                  monthYear: controller.currentMonth,
+                  shown: false,
+                  onPress: controller.toggleMonthYearPicker,
+                  onPrevious: controller.day.hasPrevious ? controller.day.previous : null,
+                  onNext: controller.day.hasNext ? controller.day.next : null,
                 ),
               ),
-              footerBuilder(context, controller, selectionController),
-            ]
-          : [
-              SizedBox(
-                width: width,
-                child: headerBuilder(
-                  context,
-                  controller,
-                  selectionController,
-                  Header.day(
-                    style: style.headerStyle,
-                    localizations: localizations,
-                    monthYear: controller.currentMonth,
-                    shown: false,
-                    onPress: controller.toggleMonthYearPicker,
-                    onPrevious: controller.day.hasPrevious ? controller.day.previous : null,
-                    onNext: controller.day.hasNext ? controller.day.next : null,
-                  ),
-                ),
-              ),
-              SizedBox(height: style.dayPickerStyle.headerSpacing),
-              DayPicker(
-                controller: controller.day,
-                style: style.dayPickerStyle,
-                localization: localizations,
-                today: controller.today,
-                selected: selectionController.contains,
-                scrollPhysics: dayScrollPhysics,
-                scrollCacheExtent: dayScrollCacheExtent,
-                scrollBehavior: dayScrollBehavior,
-                onPress: onDayPress,
-                onLongPress: onDayLongPress,
-                builder: dayBuilder,
-              ),
-              footerBuilder(context, controller, selectionController),
-            ],
-    ),
+            ),
+            SizedBox(height: style.dayPickerStyle.headerSpacing),
+            DayPicker(
+              controller: controller.day,
+              style: style.dayPickerStyle,
+              localization: localizations,
+              today: controller.today,
+              selected: selectionController.contains,
+              fixedWeeks: fixedWeeks,
+              scrollPhysics: dayScrollPhysics,
+              scrollCacheExtent: dayScrollCacheExtent,
+              scrollBehavior: dayScrollBehavior,
+              onPress: onDayPress,
+              onLongPress: onDayLongPress,
+              builder: dayBuilder,
+            ),
+            footerBuilder(context, controller, selectionController),
+          ],
   );
 
   @override
@@ -149,6 +149,7 @@ class WheelCalendar extends StatelessWidget {
       ..add(DiagnosticsProperty('localizations', localizations))
       ..add(DoubleProperty('width', width))
       ..add(DoubleProperty('height', height))
+      ..add(FlagProperty('fixedWeeks', value: fixedWeeks, ifTrue: 'fixedWeeks'))
       ..add(DiagnosticsProperty('dayScrollPhysics', dayScrollPhysics))
       ..add(DiagnosticsProperty('dayScrollCacheExtent', dayScrollCacheExtent))
       ..add(DiagnosticsProperty('dayScrollBehavior', dayScrollBehavior))

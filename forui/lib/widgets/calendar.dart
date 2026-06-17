@@ -8,7 +8,7 @@ library forui.widgets.calendar;
 export '../src/widgets/calendar/calendar.dart';
 export '../src/widgets/calendar/calendar_controller.dart' hide InternalFCalendarControl;
 export '../src/widgets/calendar/day/day.dart' hide Day;
-export '../src/widgets/calendar/day/day_picker.dart' hide DayPicker;
+export '../src/widgets/calendar/day/day_picker.dart' hide DateTimes, DayPicker;
 export '../src/widgets/calendar/header.dart' hide Header, SplitHeader;
 export '../src/widgets/calendar/month/month.dart' hide Month;
 export '../src/widgets/calendar/month/month_picker.dart' hide MonthPicker;
