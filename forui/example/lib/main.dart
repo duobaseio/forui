@@ -3,8 +3,12 @@ import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui_example/sandbox.dart';
+import 'package:marionette_flutter/marionette_flutter.dart';
 
 void main() {
+  if (kDebugMode) {
+    MarionetteBinding.ensureInitialized();
+  }
   runApp(const Application());
 }
 

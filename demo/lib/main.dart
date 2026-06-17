@@ -1,9 +1,15 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide Autocomplete, Badge, Dialog, Tooltip;
+
 import 'package:forui/forui.dart';
+import 'package:marionette_flutter/marionette_flutter.dart';
 
 import 'widgets/dialog.dart';
 
 void main() {
+  if (kDebugMode) {
+    MarionetteBinding.ensureInitialized();
+  }
   runApp(const Application());
 }
 

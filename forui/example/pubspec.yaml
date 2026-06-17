@@ -32,6 +32,7 @@ dependencies:
   forui:
   intl: any
   lottie: ^3.3.2
+  marionette_flutter: ^0.5.0
   sugar: ^4.0.0
 
 # For information on the generic Dart part of this file, see the
