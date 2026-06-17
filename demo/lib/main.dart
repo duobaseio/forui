@@ -1,7 +1,7 @@
-import 'package:flutter/material.dart' hide Autocomplete, Badge, Tooltip;
+import 'package:flutter/material.dart' hide Autocomplete, Badge, Dialog, Tooltip;
 import 'package:forui/forui.dart';
 
-import 'widgets/breadcrumb.dart';
+import 'widgets/dialog.dart';
 
 void main() {
   runApp(const Application());
@@ -24,7 +24,7 @@ class Application extends StatelessWidget {
         data: theme,
         child: FToaster(child: FTooltipGroup(child: child!)),
       ),
-      home: const FScaffold(child: Breadcrumb()),
+      home: const FScaffold(child: Dialog()),
     );
   }
 }
