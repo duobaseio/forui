@@ -238,9 +238,10 @@ abstract class GridController extends FChangeNotifier {
   }
 
   Future<void> _animateTo(int page, Duration duration, Curve curve) async {
+    _animation = (_controller.hasClients ? (_controller.page?.round() ?? _from(_current)) : _from(_current), page);
+    final animation = _animation;
+
     try {
-      _animation = (_controller.hasClients ? (_controller.page?.round() ?? _from(_current)) : _from(_current), page);
-      final animation = _animation;
       await _controller.animateToPage(page, duration: duration, curve: curve);
     } finally {
       if (_animation == animation) {
