@@ -80,7 +80,8 @@ class _DateSelectionControllerHook<T> extends Hook<FDateSelectionController<T>> 
   }
 }
 
-class _DateSelectionControllerHookState<T> extends HookState<FDateSelectionController<T>, _DateSelectionControllerHook<T>> {
+class _DateSelectionControllerHookState<T>
+    extends HookState<FDateSelectionController<T>, _DateSelectionControllerHook<T>> {
   late final FDateSelectionController<T> _controller;
 
   @override
