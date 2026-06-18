@@ -35,11 +35,8 @@ final class FTypography with Diagnosticable {
   final Map<Object, FScalableExtension<dynamic>> _extensions;
 
   /// Creates a [FTypography].
-  FTypography({
-    required this.display,
-    required this.body,
-    Iterable<FScalableExtension<dynamic>> extensions = const [],
-  }) : _extensions = {for (final extension in extensions) extension.type: extension};
+  FTypography({required this.display, required this.body, Iterable<FScalableExtension<dynamic>> extensions = const []})
+    : _extensions = {for (final extension in extensions) extension.type: extension};
 
   /// Creates a [FTypography] that inherits its properties.
   factory FTypography.inherit({

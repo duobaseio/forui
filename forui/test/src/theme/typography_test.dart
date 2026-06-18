@@ -120,7 +120,10 @@ void main() {
     });
 
     test('copyWith replaces display, body, and extensions independently', () {
-      final typography = FTypography(display: FTypeface(fontFamily: 'D'), body: FTypeface(fontFamily: 'B'));
+      final typography = FTypography(
+        display: FTypeface(fontFamily: 'D'),
+        body: FTypeface(fontFamily: 'B'),
+      );
       final newDisplay = FTypeface(fontFamily: 'D2');
       final newBody = FTypeface(fontFamily: 'B2');
 
@@ -165,20 +168,48 @@ void main() {
 
     group('equality and hashcode', () {
       test('equal', () {
-        final a = FTypography(display: FTypeface(fontFamily: 'D'), body: FTypeface(fontFamily: 'B'));
-        final b = FTypography(display: FTypeface(fontFamily: 'D'), body: FTypeface(fontFamily: 'B'));
+        final a = FTypography(
+          display: FTypeface(fontFamily: 'D'),
+          body: FTypeface(fontFamily: 'B'),
+        );
+        final b = FTypography(
+          display: FTypeface(fontFamily: 'D'),
+          body: FTypeface(fontFamily: 'B'),
+        );
         expect(a, b);
         expect(a.hashCode, b.hashCode);
       });
 
       test('not equal on display', () {
-        final base = FTypography(display: FTypeface(fontFamily: 'D'), body: FTypeface(fontFamily: 'B'));
-        expect(base, isNot(FTypography(display: FTypeface(fontFamily: 'X'), body: FTypeface(fontFamily: 'B'))));
+        final base = FTypography(
+          display: FTypeface(fontFamily: 'D'),
+          body: FTypeface(fontFamily: 'B'),
+        );
+        expect(
+          base,
+          isNot(
+            FTypography(
+              display: FTypeface(fontFamily: 'X'),
+              body: FTypeface(fontFamily: 'B'),
+            ),
+          ),
+        );
       });
 
       test('not equal on body', () {
-        final base = FTypography(display: FTypeface(fontFamily: 'D'), body: FTypeface(fontFamily: 'B'));
-        expect(base, isNot(FTypography(display: FTypeface(fontFamily: 'D'), body: FTypeface(fontFamily: 'X'))));
+        final base = FTypography(
+          display: FTypeface(fontFamily: 'D'),
+          body: FTypeface(fontFamily: 'B'),
+        );
+        expect(
+          base,
+          isNot(
+            FTypography(
+              display: FTypeface(fontFamily: 'D'),
+              body: FTypeface(fontFamily: 'X'),
+            ),
+          ),
+        );
       });
 
       test('not equal on extensions', () {
@@ -189,7 +220,10 @@ void main() {
     });
 
     test('debugFillProperties', () {
-      final typography = FTypography(display: FTypeface(fontFamily: 'D'), body: FTypeface(fontFamily: 'B'));
+      final typography = FTypography(
+        display: FTypeface(fontFamily: 'D'),
+        body: FTypeface(fontFamily: 'B'),
+      );
       final builder = DiagnosticPropertiesBuilder();
       typography.debugFillProperties(builder);
 
