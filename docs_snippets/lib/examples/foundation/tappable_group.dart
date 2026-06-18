@@ -29,7 +29,7 @@ class TappableGroupPage extends Example {
               padding: const .symmetric(vertical: 8.0, horizontal: 12),
               child: child!,
             ),
-            child: Text(label, style: context.theme.typography.sm),
+            child: Text(label, style: context.theme.typography.body.sm),
           ),
       ],
     ),

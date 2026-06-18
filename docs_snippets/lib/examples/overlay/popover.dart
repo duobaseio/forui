@@ -25,11 +25,11 @@ class PopoverPage extends Example {
           mainAxisSize: .min,
           crossAxisAlignment: .start,
           children: [
-            Text('Dimensions', style: context.theme.typography.md),
+            Text('Dimensions', style: context.theme.typography.body.md),
             const SizedBox(height: 7),
             Text(
               'Set the dimensions for the layer.',
-              style: context.theme.typography.sm.copyWith(
+              style: context.theme.typography.body.sm.copyWith(
                 color: context.theme.colors.mutedForeground,
                 fontWeight: .w300,
               ),
@@ -43,7 +43,7 @@ class PopoverPage extends Example {
             ].indexed) ...[
               Row(
                 children: [
-                  Expanded(child: Text(label, style: context.theme.typography.sm)),
+                  Expanded(child: Text(label, style: context.theme.typography.body.sm)),
                   Expanded(
                     flex: 2,
                     child: FTextField(
@@ -87,11 +87,11 @@ class HorizontalPopoverPage extends Example {
           mainAxisSize: .min,
           crossAxisAlignment: .start,
           children: [
-            Text('Dimensions', style: context.theme.typography.md),
+            Text('Dimensions', style: context.theme.typography.body.md),
             const SizedBox(height: 7),
             Text(
               'Set the dimensions for the layer.',
-              style: context.theme.typography.sm.copyWith(
+              style: context.theme.typography.body.sm.copyWith(
                 color: context.theme.colors.mutedForeground,
                 fontWeight: .w300,
               ),
@@ -105,7 +105,7 @@ class HorizontalPopoverPage extends Example {
             ].indexed) ...[
               Row(
                 children: [
-                  Expanded(child: Text(label, style: context.theme.typography.sm)),
+                  Expanded(child: Text(label, style: context.theme.typography.body.sm)),
                   Expanded(
                     flex: 2,
                     child: FTextField(
@@ -150,11 +150,11 @@ class NoHideRegionPopoverPage extends Example {
           mainAxisSize: .min,
           crossAxisAlignment: .start,
           children: [
-            Text('Dimensions', style: context.theme.typography.md),
+            Text('Dimensions', style: context.theme.typography.body.md),
             const SizedBox(height: 7),
             Text(
               'Set the dimensions for the layer.',
-              style: context.theme.typography.sm.copyWith(
+              style: context.theme.typography.body.sm.copyWith(
                 color: context.theme.colors.mutedForeground,
                 fontWeight: .w300,
               ),
@@ -168,7 +168,7 @@ class NoHideRegionPopoverPage extends Example {
             ].indexed) ...[
               Row(
                 children: [
-                  Expanded(child: Text(label, style: context.theme.typography.sm)),
+                  Expanded(child: Text(label, style: context.theme.typography.body.sm)),
                   Expanded(
                     flex: 2,
                     child: FTextField(
@@ -211,11 +211,11 @@ class NestedPopoverPage extends Example {
           mainAxisSize: .min,
           crossAxisAlignment: .start,
           children: [
-            Text('Dimensions', style: context.theme.typography.md),
+            Text('Dimensions', style: context.theme.typography.body.md),
             const SizedBox(height: 7),
             Text(
               'Set the dimensions for the layer.',
-              style: context.theme.typography.sm.copyWith(
+              style: context.theme.typography.body.sm.copyWith(
                 color: context.theme.colors.mutedForeground,
                 fontWeight: .w300,
               ),
@@ -223,7 +223,7 @@ class NestedPopoverPage extends Example {
             const SizedBox(height: 15),
             Row(
               children: [
-                Expanded(child: Text('Width', style: context.theme.typography.sm)),
+                Expanded(child: Text('Width', style: context.theme.typography.body.sm)),
                 Expanded(
                   flex: 2,
                   child: FSelect<String>.rich(
@@ -267,7 +267,7 @@ class BlurredPopoverPage extends Example {
       Column(
         crossAxisAlignment: .start,
         children: [
-          Text('Layer Properties', style: context.theme.typography.xl.copyWith(fontWeight: .bold)),
+          Text('Layer Properties', style: context.theme.typography.body.xl.copyWith(fontWeight: .bold)),
           const SizedBox(height: 20),
           const FTextField(
             control: .managed(initial: TextEditingValue(text: 'Header Component')),
@@ -302,11 +302,11 @@ class BlurredPopoverPage extends Example {
               mainAxisSize: .min,
               crossAxisAlignment: .start,
               children: [
-                Text('Dimensions', style: context.theme.typography.md),
+                Text('Dimensions', style: context.theme.typography.body.md),
                 const SizedBox(height: 7),
                 Text(
                   'Set the dimensions for the layer.',
-                  style: context.theme.typography.sm.copyWith(
+                  style: context.theme.typography.body.sm.copyWith(
                     color: context.theme.colors.mutedForeground,
                     fontWeight: .w300,
                   ),
@@ -320,7 +320,7 @@ class BlurredPopoverPage extends Example {
                 ].indexed) ...[
                   Row(
                     children: [
-                      Expanded(child: Text(label, style: context.theme.typography.sm)),
+                      Expanded(child: Text(label, style: context.theme.typography.body.sm)),
                       Expanded(
                         flex: 2,
                         child: FTextField(
@@ -364,11 +364,11 @@ class FlipPopoverPage extends Example {
           mainAxisSize: .min,
           crossAxisAlignment: .start,
           children: [
-            Text('Dimensions', style: context.theme.typography.md),
+            Text('Dimensions', style: context.theme.typography.body.md),
             const SizedBox(height: 7),
             Text(
               'Set the dimensions for the layer.',
-              style: context.theme.typography.sm.copyWith(
+              style: context.theme.typography.body.sm.copyWith(
                 color: context.theme.colors.mutedForeground,
                 fontWeight: .w300,
               ),
@@ -382,7 +382,7 @@ class FlipPopoverPage extends Example {
             ].indexed) ...[
               Row(
                 children: [
-                  Expanded(child: Text(label, style: context.theme.typography.sm)),
+                  Expanded(child: Text(label, style: context.theme.typography.body.sm)),
                   Expanded(
                     flex: 2,
                     child: FTextField(
@@ -427,11 +427,11 @@ class SlidePopoverPage extends Example {
           mainAxisSize: .min,
           crossAxisAlignment: .start,
           children: [
-            Text('Dimensions', style: context.theme.typography.md),
+            Text('Dimensions', style: context.theme.typography.body.md),
             const SizedBox(height: 7),
             Text(
               'Set the dimensions for the layer.',
-              style: context.theme.typography.sm.copyWith(
+              style: context.theme.typography.body.sm.copyWith(
                 color: context.theme.colors.mutedForeground,
                 fontWeight: .w300,
               ),
@@ -445,7 +445,7 @@ class SlidePopoverPage extends Example {
             ].indexed) ...[
               Row(
                 children: [
-                  Expanded(child: Text(label, style: context.theme.typography.sm)),
+                  Expanded(child: Text(label, style: context.theme.typography.body.sm)),
                   Expanded(
                     flex: 2,
                     child: FTextField(
@@ -490,11 +490,11 @@ class AllowOverflowPopoverPage extends Example {
           mainAxisSize: .min,
           crossAxisAlignment: .start,
           children: [
-            Text('Dimensions', style: context.theme.typography.md),
+            Text('Dimensions', style: context.theme.typography.body.md),
             const SizedBox(height: 7),
             Text(
               'Set the dimensions for the layer.',
-              style: context.theme.typography.sm.copyWith(
+              style: context.theme.typography.body.sm.copyWith(
                 color: context.theme.colors.mutedForeground,
                 fontWeight: .w300,
               ),
@@ -508,7 +508,7 @@ class AllowOverflowPopoverPage extends Example {
             ].indexed) ...[
               Row(
                 children: [
-                  Expanded(child: Text(label, style: context.theme.typography.sm)),
+                  Expanded(child: Text(label, style: context.theme.typography.body.sm)),
                   Expanded(
                     flex: 2,
                     child: FTextField(

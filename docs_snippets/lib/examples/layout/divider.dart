@@ -12,7 +12,7 @@ class DividerPage extends Example {
   @override
   Widget example(BuildContext _) {
     final colors = theme.colors;
-    final text = theme.typography;
+    final text = theme.typography.body;
 
     return Column(
       mainAxisAlignment: .center,

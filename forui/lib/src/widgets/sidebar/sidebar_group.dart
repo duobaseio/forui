@@ -223,9 +223,9 @@ class FSidebarGroupStyle with Diagnosticable, _$FSidebarGroupStyleFunctions {
     required FStyle style,
     required bool touch,
   }) : this(
-         labelStyle: typography.xs.copyWith(color: colors.mutedForeground, overflow: .ellipsis, fontWeight: .w500),
+         labelStyle: typography.body.xs.copyWith(color: colors.mutedForeground, overflow: .ellipsis, fontWeight: .w500),
          actionStyle: FVariants.from(
-           IconThemeData(color: colors.mutedForeground, size: typography.md.fontSize),
+           IconThemeData(color: colors.mutedForeground, size: typography.body.md.fontSize),
            variants: {
              [.hovered, .pressed]: .delta(color: colors.foreground),
            },

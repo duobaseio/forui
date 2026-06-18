@@ -41,7 +41,7 @@ class FFormFieldStyle with Diagnosticable, _$FFormFieldStyleFunctions {
 
   /// Creates a [FFormFieldStyle] that inherits its properties.
   factory FFormFieldStyle.inherit({required FColors colors, required FTypography typography, required bool touch}) {
-    final textStyle = touch ? typography.xs : typography.sm;
+    final textStyle = touch ? typography.body.xs : typography.body.sm;
     return FFormFieldStyle(
       labelTextStyle: FVariants.from(
         textStyle.copyWith(color: colors.foreground, fontWeight: .w500),

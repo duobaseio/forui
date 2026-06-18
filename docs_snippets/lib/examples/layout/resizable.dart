@@ -109,13 +109,13 @@ class Label extends StatelessWidget {
             children: [
               Icon(icon, size: 15, color: colors.foreground),
               const SizedBox(width: 3),
-              Text(label, style: typography.sm.copyWith(color: colors.foreground)),
+              Text(label, style: typography.body.sm.copyWith(color: colors.foreground)),
             ],
           ),
           const SizedBox(height: 5),
           Text(
             '${format.format(start)} - ${format.format(end)}',
-            style: typography.sm.copyWith(color: colors.foreground),
+            style: typography.body.sm.copyWith(color: colors.foreground),
           ),
         ],
       ),
@@ -142,12 +142,12 @@ class HorizontalResizablePage extends Example {
         .fixed(
           extent: 100,
           minExtent: 100,
-          builder: (context, data, _) => Align(child: Text('Sidebar', style: context.theme.typography.sm)),
+          builder: (context, data, _) => Align(child: Text('Sidebar', style: context.theme.typography.body.sm)),
         ),
         .fixed(
           extent: 300,
           minExtent: 100,
-          builder: (context, data, _) => Align(child: Text('Content', style: context.theme.typography.sm)),
+          builder: (context, data, _) => Align(child: Text('Content', style: context.theme.typography.body.sm)),
         ),
       ],
     ),
@@ -174,12 +174,12 @@ class DividerResizablePage extends Example {
         .fixed(
           extent: 100,
           minExtent: 100,
-          builder: (context, data, _) => Align(child: Text('Sidebar', style: context.theme.typography.sm)),
+          builder: (context, data, _) => Align(child: Text('Sidebar', style: context.theme.typography.body.sm)),
         ),
         .fixed(
           extent: 300,
           minExtent: 100,
-          builder: (context, data, _) => Align(child: Text('Content', style: context.theme.typography.sm)),
+          builder: (context, data, _) => Align(child: Text('Content', style: context.theme.typography.body.sm)),
         ),
       ],
     ),
@@ -206,12 +206,12 @@ class NoDividerResizablePage extends Example {
         .fixed(
           extent: 100,
           minExtent: 100,
-          builder: (context, data, _) => Align(child: Text('Sidebar', style: context.theme.typography.sm)),
+          builder: (context, data, _) => Align(child: Text('Sidebar', style: context.theme.typography.body.sm)),
         ),
         .fixed(
           extent: 300,
           minExtent: 100,
-          builder: (context, data, _) => Align(child: Text('Content', style: context.theme.typography.sm)),
+          builder: (context, data, _) => Align(child: Text('Content', style: context.theme.typography.body.sm)),
         ),
       ],
     ),

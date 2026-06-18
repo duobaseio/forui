@@ -440,31 +440,31 @@ class FTileContentStyle extends FItemContentStyle with _$FTileContentStyleFuncti
     final disabledMutedForeground = colors.disable(mutedForeground);
     return FTileContentStyle(
       prefixIconStyle: FVariants.from(
-        IconThemeData(color: prefix, size: typography.md.fontSize),
+        IconThemeData(color: prefix, size: typography.body.md.fontSize),
         variants: {
           [.disabled]: .delta(color: colors.disable(prefix)),
         },
       ),
       titleTextStyle: FVariants.from(
-        typography.sm.copyWith(color: foreground),
+        typography.body.sm.copyWith(color: foreground),
         variants: {
           [.disabled]: .delta(color: colors.disable(foreground)),
         },
       ),
       subtitleTextStyle: FVariants.from(
-        typography.xs2.copyWith(color: mutedForeground),
+        typography.body.xs2.copyWith(color: mutedForeground),
         variants: {
           [.disabled]: .delta(color: disabledMutedForeground),
         },
       ),
       detailsTextStyle: FVariants.from(
-        typography.sm.copyWith(color: mutedForeground),
+        typography.body.sm.copyWith(color: mutedForeground),
         variants: {
           [.disabled]: .delta(color: disabledMutedForeground),
         },
       ),
       suffixIconStyle: FVariants.from(
-        IconThemeData(color: mutedForeground, size: typography.md.fontSize),
+        IconThemeData(color: mutedForeground, size: typography.body.md.fontSize),
         variants: {
           [.disabled]: .delta(color: disabledMutedForeground),
         },
@@ -491,13 +491,13 @@ class FRawTileContentStyle extends FRawItemContentStyle with _$FRawTileContentSt
     required Color color,
   }) : this(
          prefixIconStyle: FVariants.from(
-           IconThemeData(color: prefix, size: typography.md.fontSize),
+           IconThemeData(color: prefix, size: typography.body.md.fontSize),
            variants: {
              [.disabled]: .delta(color: colors.disable(prefix)),
            },
          ),
          childTextStyle: FVariants.from(
-           typography.sm.copyWith(color: color),
+           typography.body.sm.copyWith(color: color),
            variants: {
              [.disabled]: .delta(color: colors.disable(color)),
            },

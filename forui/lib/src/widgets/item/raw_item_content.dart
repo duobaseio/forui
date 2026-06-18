@@ -126,15 +126,15 @@ class FRawItemContentStyle with Diagnosticable, _$FRawItemContentStyleFunctions 
     required bool touch,
   }) : this(
          prefixIconStyle: .from(
-           IconThemeData(color: prefix, size: typography.md.fontSize),
+           IconThemeData(color: prefix, size: typography.body.md.fontSize),
            variants: {
              [.disabled]: .delta(color: colors.disable(prefix)),
            },
          ),
          childTextStyle: FVariants(
-           typography.sm.copyWith(color: color),
+           typography.body.sm.copyWith(color: color),
            variants: {
-             [.disabled]: typography.sm.copyWith(color: colors.disable(color)),
+             [.disabled]: typography.body.sm.copyWith(color: colors.disable(color)),
            },
          ),
          padding: touch

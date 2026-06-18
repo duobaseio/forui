@@ -24,11 +24,11 @@ void main() {
       (FThemes.neutral.light.touch, 'touch'),
     ]) {
       for (final (size, name, iconSize) in [
-        (FCircularProgressSizeVariant.xs, 'xs', theme.typography.xs.fontSize!),
-        (FCircularProgressSizeVariant.sm, 'sm', theme.typography.sm.fontSize!),
-        (FCircularProgressSizeVariant.md, 'md', theme.typography.md.fontSize!),
-        (FCircularProgressSizeVariant.lg, 'lg', theme.typography.lg.fontSize!),
-        (FCircularProgressSizeVariant.xl, 'xl', theme.typography.xl.fontSize!),
+        (FCircularProgressSizeVariant.xs, 'xs', theme.typography.body.xs.fontSize!),
+        (FCircularProgressSizeVariant.sm, 'sm', theme.typography.body.sm.fontSize!),
+        (FCircularProgressSizeVariant.md, 'md', theme.typography.body.md.fontSize!),
+        (FCircularProgressSizeVariant.lg, 'lg', theme.typography.body.lg.fontSize!),
+        (FCircularProgressSizeVariant.xl, 'xl', theme.typography.body.xl.fontSize!),
       ]) {
         testWidgets('$themeName $name has consistent icon size ($iconSize)', (tester) async {
           await tester.pumpWidget(

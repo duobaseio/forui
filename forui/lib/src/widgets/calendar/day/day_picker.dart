@@ -444,7 +444,7 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
     required FStyle style,
     required bool touch,
   }) => FCalendarDayPickerStyle(
-    weekdayTextStyle: (touch ? typography.xs2 : typography.xs).copyWith(color: colors.mutedForeground),
+    weekdayTextStyle: (touch ? typography.body.xs2 : typography.body.xs).copyWith(color: colors.mutedForeground),
     dayStyles: .inherit(colors: colors, typography: typography, style: style),
     daySize: .square(style.sizes.calendar),
   );

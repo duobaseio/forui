@@ -56,7 +56,7 @@ class ConstructorFragment {
     var source = match.constructor
         .toSource()
         .replaceAll('factory $type.inherit', '$type ${type.substring(1).toCamelCase()}')
-        .replaceAllMapped(pattern, (m) => '_${m.group(1)!.toCamelCase()}');
+        .replaceAllMapped(pattern, (m) => '_${m.group(1)!.substring(1).toCamelCase()}');
 
     final visitor = _ConstructorInvocationVisitor(type);
     match.constructor.body.accept(visitor);

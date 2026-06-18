@@ -65,7 +65,7 @@ class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
     required FStyle style,
     required bool touch,
   }) : this(
-         itemIconStyle: .all(IconThemeData(color: colors.foreground, size: typography.md.fontSize)),
+         itemIconStyle: .all(IconThemeData(color: colors.foreground, size: typography.body.md.fontSize)),
          itemDecoration: FVariants.from(
            ShapeDecoration(shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md)),
            variants: {
@@ -76,12 +76,12 @@ class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
            },
          ),
          itemTextStyle: FVariants.from(
-           typography.sm.copyWith(color: colors.foreground),
+           typography.body.sm.copyWith(color: colors.foreground),
            variants: {
              [.selected]: .delta(color: colors.primaryForeground),
            },
          ),
-         ellipsisTextStyle: typography.sm.copyWith(color: colors.foreground),
+         ellipsisTextStyle: typography.body.sm.copyWith(color: colors.foreground),
          actionTappableStyle: style.tappableStyle,
          pageTappableStyle: style.tappableStyle,
          focusedOutlineStyle: style.focusedOutlineStyle,

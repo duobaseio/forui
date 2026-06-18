@@ -130,11 +130,11 @@ class FCardStyle with Diagnosticable, _$FCardStyleFunctions {
     double titleSpacing;
     double subtitleSpacing;
     if (touch) {
-      titleTextStyle = typography.lg.copyWith(fontWeight: .w500, color: colors.foreground);
+      titleTextStyle = typography.display.lg.copyWith(fontWeight: .w500, color: colors.foreground);
       titleSpacing = 4;
       subtitleSpacing = 8;
     } else {
-      titleTextStyle = typography.md.copyWith(fontWeight: .w500, color: colors.foreground);
+      titleTextStyle = typography.display.md.copyWith(fontWeight: .w500, color: colors.foreground);
       titleSpacing = 2;
       subtitleSpacing = 6;
     }
@@ -149,7 +149,7 @@ class FCardStyle with Diagnosticable, _$FCardStyleFunctions {
       ),
       contentStyle: FCardContentStyle(
         titleTextStyle: titleTextStyle,
-        subtitleTextStyle: typography.sm.copyWith(color: colors.mutedForeground),
+        subtitleTextStyle: typography.body.sm.copyWith(color: colors.mutedForeground),
         titleSpacing: titleSpacing,
         subtitleSpacing: subtitleSpacing,
       ),

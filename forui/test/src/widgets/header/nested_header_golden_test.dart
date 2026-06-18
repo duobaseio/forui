@@ -102,7 +102,7 @@ void main() {
                 DecoratedBox(
                   decoration: BoxDecoration(border: .all(color: context.theme.colors.primary)),
                   child: FHeader.nested(
-                    title: Text('Title', style: context.theme.typography.xl3),
+                    title: Text('Title', style: context.theme.typography.display.xl3),
                     prefixes: [FHeaderAction(icon: const Icon(FLucideIcons.plus), onPress: () {})],
                     suffixes: [FHeaderAction(icon: const Icon(FLucideIcons.plus), onPress: () {})],
                   ),
@@ -127,7 +127,7 @@ void main() {
                 DecoratedBox(
                   decoration: BoxDecoration(border: .all(color: context.theme.colors.primary)),
                   child: FHeader.nested(
-                    title: Text('Title', style: context.theme.typography.xs),
+                    title: Text('Title', style: context.theme.typography.display.xs),
                     prefixes: [FHeaderAction(icon: const Icon(FLucideIcons.plus), onPress: () {})],
                     suffixes: [FHeaderAction(icon: const Icon(FLucideIcons.plus), onPress: () {})],
                   ),

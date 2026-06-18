@@ -26,11 +26,11 @@ class PortalPage extends Example {
           mainAxisSize: .min,
           crossAxisAlignment: .start,
           children: [
-            Text('Dimensions', style: context.theme.typography.md),
+            Text('Dimensions', style: context.theme.typography.body.md),
             const SizedBox(height: 7),
             Text(
               'Set the dimensions for the layer.',
-              style: context.theme.typography.sm.copyWith(
+              style: context.theme.typography.body.sm.copyWith(
                 color: context.theme.colors.mutedForeground,
                 fontWeight: FontWeight.w300,
               ),
@@ -39,7 +39,7 @@ class PortalPage extends Example {
             for (final (label, value) in [('Width', '100%'), ('Max. Width', '300px')]) ...[
               Row(
                 children: [
-                  Expanded(child: Text(label, style: context.theme.typography.sm)),
+                  Expanded(child: Text(label, style: context.theme.typography.body.sm)),
                   Expanded(
                     flex: 2,
                     child: FTextField(

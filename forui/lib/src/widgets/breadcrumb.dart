@@ -524,7 +524,7 @@ class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
 
     return FBreadcrumbStyle(
       textStyle: FVariants.from(
-        typography.sm.copyWith(color: colors.mutedForeground),
+        typography.body.sm.copyWith(color: colors.mutedForeground),
         variants: {
           [.hovered, .pressed]: .delta(color: colors.foreground),
           //
@@ -532,7 +532,7 @@ class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
           [.selected.and(.hovered), .selected.and(.pressed)]: .delta(color: colors.hover(colors.foreground)),
         },
       ),
-      iconStyle: IconThemeData(color: colors.mutedForeground, size: typography.md.fontSize),
+      iconStyle: IconThemeData(color: colors.mutedForeground, size: typography.body.md.fontSize),
       tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
       focusedOutlineStyle: style.focusedOutlineStyle,
       padding: padding,

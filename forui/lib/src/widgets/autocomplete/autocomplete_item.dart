@@ -253,7 +253,7 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
     required bool touch,
   }) => .new(
     labelTextStyle: .from(
-      typography.xs.copyWith(color: colors.mutedForeground),
+      typography.body.xs.copyWith(color: colors.mutedForeground),
       variants: {
         [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
       },

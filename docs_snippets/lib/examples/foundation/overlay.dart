@@ -27,7 +27,7 @@ class _State extends StatefulExampleState<OverlayPage> {
             border: .all(color: context.theme.colors.border),
             borderRadius: .circular(4),
           ),
-          child: Text('Overlay content', style: context.theme.typography.sm),
+          child: Text('Overlay content', style: context.theme.typography.body.sm),
         ),
       ),
     ],

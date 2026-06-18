@@ -25,7 +25,11 @@ class _Marker extends ThemeExtension<_Marker> {
 
 void main() {
   group('FStyle', () {
-    final style = FStyle.inherit(colors: FColors.neutralLight, typography: FTypography(), touch: false);
+    final style = FStyle.inherit(
+      colors: FColors.neutralLight,
+      typography: FTypography.inherit(colors: FColors.neutralLight, touch: false),
+      touch: false,
+    );
 
     group('extensions', () {
       FStyle withExtensions(Set<ThemeExtension<dynamic>> extensions) => style.copyWith(extensions: extensions);

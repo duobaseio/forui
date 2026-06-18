@@ -13,8 +13,8 @@ import copyWithExtensionsSnippet from '@/snippets/snippets/guides/adding_theme_p
 ## Create a Theme Extension
 
 Theme extensions must extend [`ThemeExtension`](https://api.flutter.dev/flutter/material/ThemeExtension-class.html) and
-implement `copyWith()` and `lerp()`. Extensions to `FTypography` must instead extend
-[`FTypographyExtension`](https://pub.dev/documentation/forui/latest/forui.theme/FTypographyExtension-class.html) which
+implement `copyWith()` and `lerp()`. Extensions to `FTypography` or `FTypeface` must instead extend
+[`FScalableExtension`](https://pub.dev/documentation/forui/latest/forui.theme/FScalableExtension-class.html) which
 has an additional `scale(...)` method.
 
 To add brand colors to your theme, create a `BrandColors` extension:

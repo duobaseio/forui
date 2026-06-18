@@ -93,7 +93,7 @@ class Visualization extends StatelessWidget {
               left: 8,
               child: Text(
                 'Viewport',
-                style: context.theme.typography.xs.copyWith(
+                style: context.theme.typography.body.xs.copyWith(
                   color: context.theme.colors.primary,
                   overflow: TextOverflow.ellipsis,
                 ),
@@ -155,7 +155,7 @@ class _Rect extends StatelessWidget {
               padding: const .all(8.0),
               child: Text(
                 label,
-                style: context.theme.typography.xs.copyWith(color: foreground, overflow: .ellipsis),
+                style: context.theme.typography.body.xs.copyWith(color: foreground, overflow: .ellipsis),
               ),
             ),
           ),

@@ -149,73 +149,68 @@ extension CustomMaterialTheme on FThemeData {
   // );
   // ```
   ThemeData toCustomMaterialTheme() {
-    final textTheme =
-        TextTheme(
-          displayLarge: typography.xl4.copyWith(
-            height: 1,
-            textBaseline: typography.xl4.textBaseline ?? .alphabetic,
-          ),
-          displayMedium: typography.xl3.copyWith(
-            height: 1,
-            textBaseline: typography.xl3.textBaseline ?? .alphabetic,
-          ),
-          displaySmall: typography.xl2.copyWith(
-            height: 1,
-            textBaseline: typography.xl2.textBaseline ?? .alphabetic,
-          ),
-          headlineLarge: typography.xl3.copyWith(
-            height: 1,
-            textBaseline: typography.xl3.textBaseline ?? .alphabetic,
-          ),
-          headlineMedium: typography.xl2.copyWith(
-            height: 1,
-            textBaseline: typography.xl2.textBaseline ?? .alphabetic,
-          ),
-          headlineSmall: typography.xl.copyWith(
-            height: 1,
-            textBaseline: typography.xl.textBaseline ?? .alphabetic,
-          ),
-          titleLarge: typography.lg.copyWith(
-            height: 1,
-            textBaseline: typography.lg.textBaseline ?? .alphabetic,
-          ),
-          titleMedium: typography.md.copyWith(
-            height: 1,
-            textBaseline: typography.md.textBaseline ?? .alphabetic,
-          ),
-          titleSmall: typography.sm.copyWith(
-            height: 1,
-            textBaseline: typography.sm.textBaseline ?? .alphabetic,
-          ),
-          labelLarge: typography.md.copyWith(
-            height: 1,
-            textBaseline: typography.md.textBaseline ?? .alphabetic,
-          ),
-          labelMedium: typography.sm.copyWith(
-            height: 1,
-            textBaseline: typography.sm.textBaseline ?? .alphabetic,
-          ),
-          labelSmall: typography.xs.copyWith(
-            height: 1,
-            textBaseline: typography.xs.textBaseline ?? .alphabetic,
-          ),
-          bodyLarge: typography.md.copyWith(
-            height: 1,
-            textBaseline: typography.md.textBaseline ?? .alphabetic,
-          ),
-          bodyMedium: typography.sm.copyWith(
-            height: 1,
-            textBaseline: typography.sm.textBaseline ?? .alphabetic,
-          ),
-          bodySmall: typography.xs.copyWith(
-            height: 1,
-            textBaseline: typography.xs.textBaseline ?? .alphabetic,
-          ),
-        )..apply(
-          fontFamily: typography.fontFamily,
-          bodyColor: colors.foreground,
-          displayColor: colors.foreground,
-        );
+    final textTheme = TextTheme(
+      displayLarge: typography.display.xl4.copyWith(
+        height: 1,
+        textBaseline: typography.display.xl4.textBaseline ?? .alphabetic,
+      ),
+      displayMedium: typography.display.xl3.copyWith(
+        height: 1,
+        textBaseline: typography.display.xl3.textBaseline ?? .alphabetic,
+      ),
+      displaySmall: typography.display.xl2.copyWith(
+        height: 1,
+        textBaseline: typography.display.xl2.textBaseline ?? .alphabetic,
+      ),
+      headlineLarge: typography.display.xl3.copyWith(
+        height: 1,
+        textBaseline: typography.display.xl3.textBaseline ?? .alphabetic,
+      ),
+      headlineMedium: typography.display.xl2.copyWith(
+        height: 1,
+        textBaseline: typography.display.xl2.textBaseline ?? .alphabetic,
+      ),
+      headlineSmall: typography.display.xl.copyWith(
+        height: 1,
+        textBaseline: typography.display.xl.textBaseline ?? .alphabetic,
+      ),
+      titleLarge: typography.body.lg.copyWith(
+        height: 1,
+        textBaseline: typography.body.lg.textBaseline ?? .alphabetic,
+      ),
+      titleMedium: typography.body.md.copyWith(
+        height: 1,
+        textBaseline: typography.body.md.textBaseline ?? .alphabetic,
+      ),
+      titleSmall: typography.body.sm.copyWith(
+        height: 1,
+        textBaseline: typography.body.sm.textBaseline ?? .alphabetic,
+      ),
+      labelLarge: typography.body.md.copyWith(
+        height: 1,
+        textBaseline: typography.body.md.textBaseline ?? .alphabetic,
+      ),
+      labelMedium: typography.body.sm.copyWith(
+        height: 1,
+        textBaseline: typography.body.sm.textBaseline ?? .alphabetic,
+      ),
+      labelSmall: typography.body.xs.copyWith(
+        height: 1,
+        textBaseline: typography.body.xs.textBaseline ?? .alphabetic,
+      ),
+      bodyLarge: typography.body.md.copyWith(
+        height: 1,
+        textBaseline: typography.body.md.textBaseline ?? .alphabetic,
+      ),
+      bodyMedium: typography.body.sm.copyWith(
+        height: 1,
+        textBaseline: typography.body.sm.textBaseline ?? .alphabetic,
+      ),
+      bodySmall: typography.body.xs.copyWith(
+        height: 1,
+        textBaseline: typography.body.xs.textBaseline ?? .alphabetic,
+      ),
+    )..apply(bodyColor: colors.foreground, displayColor: colors.foreground);
     return ThemeData(
       colorScheme: ColorScheme(
         brightness: colors.brightness,
@@ -230,7 +225,8 @@ extension CustomMaterialTheme on FThemeData {
         secondaryContainer: colors.secondary,
         onSecondaryContainer: colors.secondaryForeground,
       ),
-      fontFamily: typography.fontFamily,
+      fontFamily: typography.body.fontFamily,
+      fontFamilyFallback: typography.body.fontFamilyFallback,
       typography: Typography(
         black: textTheme,
         white: textTheme,

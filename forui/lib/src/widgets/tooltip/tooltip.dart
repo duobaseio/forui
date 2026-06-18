@@ -437,7 +437,7 @@ class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
            shadows: FTooltipStyle.shadow,
          ),
          padding: const .symmetric(horizontal: 14, vertical: 10),
-         textStyle: typography.xs,
+         textStyle: typography.body.xs,
          hapticFeedback: hapticFeedback.mediumImpact,
          motion: motion,
          hoverEnterDuration: hoverEnterDuration,

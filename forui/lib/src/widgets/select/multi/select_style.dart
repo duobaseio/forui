@@ -46,7 +46,7 @@ class FMultiSelectStyle with Diagnosticable, _$FMultiSelectStyleFunctions {
          fieldStyles: .inherit(colors: colors, icons: icons, typography: typography, style: style, touch: touch),
          searchStyle: .inherit(colors: colors, typography: typography, style: style, touch: touch),
          contentStyle: .inherit(colors: colors, icons: icons, typography: typography, style: style, touch: touch),
-         emptyTextStyle: typography.sm,
+         emptyTextStyle: typography.body.sm,
        );
 }
 
@@ -70,9 +70,9 @@ extension type FMultiSelectFieldSizeStyles(
     required bool touch,
   }) {
     final label = FLabelStyles.inherit(style: style).verticalStyle;
-    final textStyle = typography.sm;
+    final textStyle = typography.body.sm;
     final iconStyle = FVariants<FTextFieldVariantConstraint, FTextFieldVariant, IconThemeData, IconThemeDataDelta>.from(
-      IconThemeData(color: colors.mutedForeground, size: typography.sm.fontSize),
+      IconThemeData(color: colors.mutedForeground, size: typography.body.sm.fontSize),
       variants: {
         [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
       },
@@ -98,7 +98,7 @@ extension type FMultiSelectFieldSizeStyles(
         colors: colors,
         icons: icons,
         style: style,
-        textStyle: typography.sm,
+        textStyle: typography.body.sm,
         padding: tagPadding,
         borderRadius: tagBorderRadius,
       ),

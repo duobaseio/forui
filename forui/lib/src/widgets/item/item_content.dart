@@ -249,31 +249,31 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
     final disabledMutedForeground = colors.disable(mutedForeground);
     return FItemContentStyle(
       prefixIconStyle: .from(
-        IconThemeData(color: prefix, size: typography.md.fontSize),
+        IconThemeData(color: prefix, size: typography.body.md.fontSize),
         variants: {
           [.disabled]: .delta(color: colors.disable(prefix)),
         },
       ),
       titleTextStyle: .from(
-        typography.sm.copyWith(color: foreground),
+        typography.body.sm.copyWith(color: foreground),
         variants: {
           [.disabled]: .delta(color: colors.disable(foreground)),
         },
       ),
       subtitleTextStyle: .from(
-        typography.xs.copyWith(color: mutedForeground),
+        typography.body.xs.copyWith(color: mutedForeground),
         variants: {
           [.disabled]: .delta(color: disabledMutedForeground),
         },
       ),
       detailsTextStyle: .from(
-        typography.xs.copyWith(color: mutedForeground),
+        typography.body.xs.copyWith(color: mutedForeground),
         variants: {
           [.disabled]: .delta(color: disabledMutedForeground),
         },
       ),
       suffixIconStyle: .from(
-        IconThemeData(color: mutedForeground, size: typography.md.fontSize),
+        IconThemeData(color: mutedForeground, size: typography.body.md.fontSize),
         variants: {
           [.disabled]: .delta(color: disabledMutedForeground),
         },

@@ -44,6 +44,6 @@ class FSelectStyle with Diagnosticable, _$FSelectStyleFunctions {
          fieldStyles: .inherit(colors: colors, typography: typography, style: style, touch: touch),
          searchStyle: .inherit(colors: colors, typography: typography, style: style, touch: touch),
          contentStyle: .inherit(colors: colors, icons: icons, typography: typography, style: style, touch: touch),
-         emptyTextStyle: typography.xs,
+         emptyTextStyle: typography.body.xs,
        );
 }

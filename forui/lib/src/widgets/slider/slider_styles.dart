@@ -201,7 +201,7 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
          ),
          markStyle: FSliderMarkStyle(
            tickColor: .all(colors.mutedForeground),
-           labelTextStyle: .all(typography.xs.copyWith(color: colors.mutedForeground)),
+           labelTextStyle: .all(typography.body.xs.copyWith(color: colors.mutedForeground)),
            labelAnchor: labelAnchor,
            labelOffset: labelOffset,
          ),

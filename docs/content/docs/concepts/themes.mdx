@@ -78,7 +78,12 @@ class FColors {
 
 class FTypography {
     +FTypography(...)
-    +FTypography.inherit(colors)
+    +FTypography.inherit(colors, touch)
+}
+
+class FTypeface {
+    +FTypeface(...)
+    +FTypeface.inherit(colors, touch)
 }
 
 class FIcons {
@@ -119,6 +124,7 @@ note for FVariants "Maps variant constraints, e.g. hovered and pressed, to value
 FTheme --> FThemeData
 FThemeData --> FColors
 FThemeData --> FTypography
+FTypography --> FTypeface
 FThemeData --> FIcons
 FThemeData --> FStyle
 FThemeData --> FHapticFeedback
@@ -132,7 +138,7 @@ The main components in Forui's theming system:
 - **[`FTheme`](https://pub.dev/documentation/forui/latest/forui.theme/FTheme-class.html)**: The root widget that provides the theme data to all widgets in the subtree.
 - **[`FThemeData`](https://pub.dev/documentation/forui/latest/forui.theme/FThemeData-class.html)**: Main class that holds:
   - **[`FColors`](https://pub.dev/documentation/forui/latest/forui.theme/FColors-class.html)**: Color scheme including primary, foreground, and background colors.
-  - **[`FTypography`](https://pub.dev/documentation/forui/latest/forui.theme/FTypography-class.html)**: Typography settings including font family and text styles.
+  - **[`FTypography`](https://pub.dev/documentation/forui/latest/forui.theme/FTypography-class.html)**: Typography, composed of `body` and `display` [`FTypeface`](https://pub.dev/documentation/forui/latest/forui.theme/FTypeface-class.html)s that hold the font family and text styles.
   - **[`FIcons`](https://pub.dev/documentation/forui/latest/forui.theme/FIcons-class.html)**: Icons used by Forui widgets.
   - **[`FStyle`](https://pub.dev/documentation/forui/latest/forui.theme/FStyle-class.html)**: Misc. options such as border radius and icon size.
   - **[`FHapticFeedback`](https://pub.dev/documentation/forui/latest/forui.theme/FHapticFeedback-class.html)**: Haptic feedback callbacks shared across widgets.
@@ -165,22 +171,18 @@ and [`FColors.disable`](https://pub.dev/documentation/forui/latest/forui.theme/F
 
 ### Typography
 
-The `FTypography` class contains the theme's typography settings, including the default font family and various text
-styles.
+The `FTypography` class contains two semantic `FTypeface`s:
+* `display` for prominent text such as headings.
+* `body` for content and UI text.
 
-<Callout type="info">
-    The `TextStyle`s in `FTypography` are based on [Tailwind CSS Font Size](https://tailwindcss.com/docs/font-size).
-    For example, `FTypography.sm` is the equivalent of `text-sm` in Tailwind CSS.
-</Callout>
-
-`FTypography`'s text styles only specify `fontSize` and `height`. Use `copyWith()` to add colors and other properties:
+An `FTypeface` contains several `TextStyle`s across a scale based on
+[Tailwind CSS Font Size](https://tailwindcss.com/docs/font-size). Its text styles only specify `fontSize` and `height`.
+Use `copyWith()` to add colors and other properties:
 
 <CodeSnippet snippet={typographySnippet} />
 
-#### Custom Font Family
-
-Use the `copyWith()` method to change the default font family. As some fonts may have different sizes, the `scale()`
-method is provided to quickly scale all the font sizes.
+Set an `FTypeface`'s font family via its constructor, e.g. `FTypeface.inherit(fontFamily: ...)`, and use `scale()` to
+quickly scale all the font sizes.
 
 <CodeSnippet snippet={customFontFamilySnippet} />
 

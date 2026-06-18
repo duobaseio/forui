@@ -830,7 +830,7 @@ final class FColors with Diagnosticable {
   /// {@endtemplate}
   T extension<T extends Object>() => _extensions[T]! as T;
 
-  /// All [ThemeExtension]s defined in these colors.
+  /// All [ThemeExtension]s defined in this [FColors].
   ///
   /// {@macro forui.theme.FColors.extension}
   Set<ThemeExtension<dynamic>> get extensions => _extensions.values.toSet();

@@ -463,7 +463,7 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
     slideableTiles: const .all(true),
     slidePressHapticFeedback: hapticFeedback.selectionClick,
     labelTextStyle: FVariants.from(
-      typography.sm.copyWith(
+      typography.body.sm.copyWith(
         color: style.formFieldStyle.labelTextStyle.base.color ?? colors.foreground,
         fontWeight: .w600,
       ),
@@ -499,10 +499,10 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
       ),
     ),
     descriptionTextStyle: style.formFieldStyle.descriptionTextStyle.apply([
-      .all(.delta(fontSize: typography.xs2.fontSize, height: typography.xs2.height)),
+      .all(.delta(fontSize: typography.body.xs2.fontSize, height: typography.body.xs2.height)),
     ]),
     errorTextStyle: style.formFieldStyle.errorTextStyle.apply([
-      .all(.delta(fontSize: typography.xs2.fontSize, height: typography.xs2.height)),
+      .all(.delta(fontSize: typography.body.xs2.fontSize, height: typography.body.xs2.height)),
     ]),
   );
 }

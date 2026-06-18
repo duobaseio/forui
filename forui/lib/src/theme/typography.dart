@@ -5,13 +5,7 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 
-/// The typographical tokens.
-///
-/// A [FTypography] contains scalar values for scaling a [TextStyle]'s corresponding properties. It also contains labelled
-/// font sizes, such as [FTypography.xs], which are based on [Tailwind CSS](https://tailwindcss.com/docs/font-size).
-///
-/// The scaling is applied automatically in all Forui widgets while the labelled font sizes are used as the defaults
-/// for the corresponding properties of widget styles configured via `inherit(...)` constructors.
+/// The typographical tokens grouped by their semantic roles.
 ///
 /// ## CJK Text Alignment
 ///
@@ -32,6 +26,116 @@ import 'package:forui/forui.dart';
 /// )
 /// ```
 final class FTypography with Diagnosticable {
+  /// The typographical tokens used for prominent text such as headings.
+  final FTypeface display;
+
+  /// The typographical tokens for content and UI text.
+  final FTypeface body;
+
+  final Map<Object, FScalableExtension<dynamic>> _extensions;
+
+  /// Creates a [FTypography].
+  FTypography({
+    required this.display,
+    required this.body,
+    Iterable<FScalableExtension<dynamic>> extensions = const [],
+  }) : _extensions = {for (final extension in extensions) extension.type: extension};
+
+  /// Creates a [FTypography] that inherits its properties.
+  factory FTypography.inherit({
+    required FColors colors,
+    required bool touch,
+    Iterable<FScalableExtension<dynamic>> extensions = const [],
+  }) {
+    final typeface = FTypeface.inherit(colors: colors, touch: touch);
+    return FTypography(display: typeface, body: typeface, extensions: extensions);
+  }
+
+  /// Creates a linear interpolation between two [FTypography]s using the given factor [t].
+  factory FTypography.lerp(FTypography a, FTypography b, double t) => .new(
+    display: a.display.lerp(b.display, t),
+    body: a.body.lerp(b.body, t),
+    extensions: (a._extensions.map(
+      (id, extensionA) => MapEntry(id, extensionA.lerp(b._extensions[id], t)),
+    )..addEntries(b._extensions.entries.where((entry) => !a._extensions.containsKey(entry.key)))).values,
+  );
+
+  /// Returns a copy of this [FTypography] with the given properties replaced.
+  @useResult
+  FTypography copyWith({FTypeface? display, FTypeface? body, Iterable<FScalableExtension<dynamic>>? extensions}) =>
+      FTypography(
+        display: display ?? this.display,
+        body: body ?? this.body,
+        extensions: extensions ?? _extensions.values,
+      );
+
+  /// Scales this [FTypography] by [sizeScalar].
+  @useResult
+  FTypography scale({double sizeScalar = 1}) => .new(
+    display: display.scale(sizeScalar: sizeScalar),
+    body: body.scale(sizeScalar: sizeScalar),
+    extensions: [for (final extension in _extensions.values) extension.scale(sizeScalar: sizeScalar)],
+  );
+
+  /// Obtains a particular [FScalableExtension], such as an app's additional text styles.
+  ///
+  /// {@template forui.theme.FTypography.extension}
+  /// ## Creating and passing a [FScalableExtension] to [FTypography]
+  /// ```dart
+  /// class AppTypography extends FScalableExtension<AppTypography> {
+  ///   final TextStyle code;
+  ///
+  ///   const AppTypography({required this.code});
+  ///
+  ///   @override
+  ///   AppTypography copyWith({TextStyle? code}) => AppTypography(code: code ?? this.code);
+  ///
+  ///   @override
+  ///   AppTypography lerp(covariant AppTypography? other, double t) =>
+  ///       other == null ? this : AppTypography(code: TextStyle.lerp(code, other.code, t)!);
+  ///
+  ///   @override
+  ///   AppTypography scale({double sizeScalar = 1.0}) =>
+  ///       AppTypography(code: code.copyWith(fontSize: (code.fontSize ?? 14) * sizeScalar));
+  /// }
+  ///
+  /// final code = context.theme.typography.extension<AppTypography>().code;
+  /// ```
+  /// {@endtemplate}
+  T extension<T extends Object>() => _extensions[T]! as T;
+
+  /// All [FScalableExtension]s defined in this typography.
+  ///
+  /// {@macro forui.theme.FTypography.extension}
+  Set<ThemeExtension<dynamic>> get extensions => _extensions.values.toSet();
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('display', display))
+      ..add(DiagnosticsProperty('body', body))
+      ..add(IterableProperty('extensions', extensions));
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FTypography &&
+          runtimeType == other.runtimeType &&
+          display == other.display &&
+          body == other.body &&
+          mapEquals(_extensions, other._extensions);
+
+  @override
+  int get hashCode => display.hashCode ^ body.hashCode ^ Object.hashAllUnordered(_extensions.values);
+}
+
+/// Typographical tokens across different sizes, which are based on [Tailwind CSS](https://tailwindcss.com/docs/font-size).
+///
+/// A [FTypeface] is itself a [FScalableExtension], so it can be registered directly on a [FTypography] (e.g. a
+/// monospace code typeface) and retrieved via `typography.extension<FTypeface>()`.
+final class FTypeface extends FScalableExtension<FTypeface> with Diagnosticable {
   /// The default font family. Defaults to [`packages/forui/Inter`](https://fonts.google.com/specimen/Inter).
   static const String defaultFontFamily = 'packages/forui/Inter';
 
@@ -40,6 +144,9 @@ final class FTypography with Diagnosticable {
   /// ## Contract:
   /// Throws an [AssertionError] if empty.
   final String fontFamily;
+
+  /// The font families to use as fallbacks when a glyph is not found in [fontFamily]. Defaults to an empty list.
+  final List<String> fontFamilyFallback;
 
   /// The font size for extra extra extra small text.
   ///
@@ -139,11 +246,12 @@ final class FTypography with Diagnosticable {
   /// * Touch — `fontSize` = 108, `height` = 1.
   final TextStyle xl8;
 
-  final Map<Object, FTypographyExtension<dynamic>> _extensions;
+  final Map<Object, FScalableExtension<dynamic>> _extensions;
 
-  /// Creates a [FTypography] that defaults to touch font sizes.
-  FTypography({
-    this.fontFamily = FTypography.defaultFontFamily,
+  /// Creates a [FTypeface] that defaults to touch font sizes.
+  FTypeface({
+    this.fontFamily = FTypeface.defaultFontFamily,
+    List<String>? fontFamilyFallback,
     TextStyle? xs3,
     TextStyle? xs2,
     TextStyle? xs,
@@ -158,151 +266,431 @@ final class FTypography with Diagnosticable {
     TextStyle? xl6,
     TextStyle? xl7,
     TextStyle? xl8,
-    Iterable<FTypographyExtension<dynamic>> extensions = const [],
-  }) : xs3 = xs3 ?? TextStyle(fontFamily: fontFamily, fontSize: 10, height: 1, leadingDistribution: .even),
-       xs2 = xs2 ?? TextStyle(fontFamily: fontFamily, fontSize: 12, height: 1, leadingDistribution: .even),
-       xs = xs ?? TextStyle(fontFamily: fontFamily, fontSize: 14, height: 1.25, leadingDistribution: .even),
-       sm = sm ?? TextStyle(fontFamily: fontFamily, fontSize: 16, height: 1.5, leadingDistribution: .even),
-       md = md ?? TextStyle(fontFamily: fontFamily, fontSize: 18, height: 1.75, leadingDistribution: .even),
-       lg = lg ?? TextStyle(fontFamily: fontFamily, fontSize: 20, height: 1.75, leadingDistribution: .even),
-       xl = xl ?? TextStyle(fontFamily: fontFamily, fontSize: 22, height: 2, leadingDistribution: .even),
-       xl2 = xl2 ?? TextStyle(fontFamily: fontFamily, fontSize: 30, height: 2.25, leadingDistribution: .even),
-       xl3 = xl3 ?? TextStyle(fontFamily: fontFamily, fontSize: 36, height: 2.5, leadingDistribution: .even),
-       xl4 = xl4 ?? TextStyle(fontFamily: fontFamily, fontSize: 48, height: 1, leadingDistribution: .even),
-       xl5 = xl5 ?? TextStyle(fontFamily: fontFamily, fontSize: 60, height: 1, leadingDistribution: .even),
-       xl6 = xl6 ?? TextStyle(fontFamily: fontFamily, fontSize: 72, height: 1, leadingDistribution: .even),
-       xl7 = xl7 ?? TextStyle(fontFamily: fontFamily, fontSize: 96, height: 1, leadingDistribution: .even),
-       xl8 = xl8 ?? TextStyle(fontFamily: fontFamily, fontSize: 108, height: 1, leadingDistribution: .even),
+    Iterable<FScalableExtension<dynamic>> extensions = const [],
+  }) : fontFamilyFallback = fontFamilyFallback ?? const [],
+       xs3 =
+           xs3 ??
+           TextStyle(
+             fontFamily: fontFamily,
+             fontFamilyFallback: fontFamilyFallback,
+             fontSize: 10,
+             height: 1,
+             leadingDistribution: .even,
+           ),
+       xs2 =
+           xs2 ??
+           TextStyle(
+             fontFamily: fontFamily,
+             fontFamilyFallback: fontFamilyFallback,
+             fontSize: 12,
+             height: 1,
+             leadingDistribution: .even,
+           ),
+       xs =
+           xs ??
+           TextStyle(
+             fontFamily: fontFamily,
+             fontFamilyFallback: fontFamilyFallback,
+             fontSize: 14,
+             height: 1.25,
+             leadingDistribution: .even,
+           ),
+       sm =
+           sm ??
+           TextStyle(
+             fontFamily: fontFamily,
+             fontFamilyFallback: fontFamilyFallback,
+             fontSize: 16,
+             height: 1.5,
+             leadingDistribution: .even,
+           ),
+       md =
+           md ??
+           TextStyle(
+             fontFamily: fontFamily,
+             fontFamilyFallback: fontFamilyFallback,
+             fontSize: 18,
+             height: 1.75,
+             leadingDistribution: .even,
+           ),
+       lg =
+           lg ??
+           TextStyle(
+             fontFamily: fontFamily,
+             fontFamilyFallback: fontFamilyFallback,
+             fontSize: 20,
+             height: 1.75,
+             leadingDistribution: .even,
+           ),
+       xl =
+           xl ??
+           TextStyle(
+             fontFamily: fontFamily,
+             fontFamilyFallback: fontFamilyFallback,
+             fontSize: 22,
+             height: 2,
+             leadingDistribution: .even,
+           ),
+       xl2 =
+           xl2 ??
+           TextStyle(
+             fontFamily: fontFamily,
+             fontFamilyFallback: fontFamilyFallback,
+             fontSize: 30,
+             height: 2.25,
+             leadingDistribution: .even,
+           ),
+       xl3 =
+           xl3 ??
+           TextStyle(
+             fontFamily: fontFamily,
+             fontFamilyFallback: fontFamilyFallback,
+             fontSize: 36,
+             height: 2.5,
+             leadingDistribution: .even,
+           ),
+       xl4 =
+           xl4 ??
+           TextStyle(
+             fontFamily: fontFamily,
+             fontFamilyFallback: fontFamilyFallback,
+             fontSize: 48,
+             height: 1,
+             leadingDistribution: .even,
+           ),
+       xl5 =
+           xl5 ??
+           TextStyle(
+             fontFamily: fontFamily,
+             fontFamilyFallback: fontFamilyFallback,
+             fontSize: 60,
+             height: 1,
+             leadingDistribution: .even,
+           ),
+       xl6 =
+           xl6 ??
+           TextStyle(
+             fontFamily: fontFamily,
+             fontFamilyFallback: fontFamilyFallback,
+             fontSize: 72,
+             height: 1,
+             leadingDistribution: .even,
+           ),
+       xl7 =
+           xl7 ??
+           TextStyle(
+             fontFamily: fontFamily,
+             fontFamilyFallback: fontFamilyFallback,
+             fontSize: 96,
+             height: 1,
+             leadingDistribution: .even,
+           ),
+       xl8 =
+           xl8 ??
+           TextStyle(
+             fontFamily: fontFamily,
+             fontFamilyFallback: fontFamilyFallback,
+             fontSize: 108,
+             height: 1,
+             leadingDistribution: .even,
+           ),
        _extensions = {for (final extension in extensions) extension.type: extension},
        assert(fontFamily.isNotEmpty, 'fontFamily ($fontFamily) should not be empty.');
 
-  /// Creates a [FTypography] that inherits its properties.
-  factory FTypography.inherit({
+  /// Creates a [FTypeface] that inherits its properties.
+  factory FTypeface.inherit({
     required FColors colors,
     required bool touch,
-    String fontFamily = FTypography.defaultFontFamily,
+    String fontFamily = FTypeface.defaultFontFamily,
+    List<String>? fontFamilyFallback,
   }) {
     assert(fontFamily.isNotEmpty, 'fontFamily ($fontFamily) should not be empty.');
     final color = colors.foreground;
-    final font = fontFamily;
-
     if (touch) {
-      return FTypography(
+      return FTypeface(
         fontFamily: fontFamily,
-        xs3: TextStyle(color: color, fontFamily: font, fontSize: 10, height: 1, leadingDistribution: .even),
-        xs2: TextStyle(color: color, fontFamily: font, fontSize: 12, height: 1, leadingDistribution: .even),
-        xs: TextStyle(color: color, fontFamily: font, fontSize: 14, height: 1.25, leadingDistribution: .even),
-        sm: TextStyle(color: color, fontFamily: font, fontSize: 16, height: 1.5, leadingDistribution: .even),
-        md: TextStyle(color: color, fontFamily: font, fontSize: 18, height: 1.75, leadingDistribution: .even),
-        lg: TextStyle(color: color, fontFamily: font, fontSize: 20, height: 1.75, leadingDistribution: .even),
-        xl: TextStyle(color: color, fontFamily: font, fontSize: 22, height: 2, leadingDistribution: .even),
-        xl2: TextStyle(color: color, fontFamily: font, fontSize: 30, height: 2.25, leadingDistribution: .even),
-        xl3: TextStyle(color: color, fontFamily: font, fontSize: 36, height: 2.5, leadingDistribution: .even),
-        xl4: TextStyle(color: color, fontFamily: font, fontSize: 48, height: 1, leadingDistribution: .even),
-        xl5: TextStyle(color: color, fontFamily: font, fontSize: 60, height: 1, leadingDistribution: .even),
-        xl6: TextStyle(color: color, fontFamily: font, fontSize: 72, height: 1, leadingDistribution: .even),
-        xl7: TextStyle(color: color, fontFamily: font, fontSize: 96, height: 1, leadingDistribution: .even),
-        xl8: TextStyle(color: color, fontFamily: font, fontSize: 108, height: 1, leadingDistribution: .even),
+        fontFamilyFallback: fontFamilyFallback,
+        xs3: TextStyle(
+          color: color,
+          fontFamily: fontFamily,
+          fontFamilyFallback: fontFamilyFallback,
+          fontSize: 10,
+          height: 1,
+          leadingDistribution: .even,
+        ),
+        xs2: TextStyle(
+          color: color,
+          fontFamily: fontFamily,
+          fontFamilyFallback: fontFamilyFallback,
+          fontSize: 12,
+          height: 1,
+          leadingDistribution: .even,
+        ),
+        xs: TextStyle(
+          color: color,
+          fontFamily: fontFamily,
+          fontFamilyFallback: fontFamilyFallback,
+          fontSize: 14,
+          height: 1.25,
+          leadingDistribution: .even,
+        ),
+        sm: TextStyle(
+          color: color,
+          fontFamily: fontFamily,
+          fontFamilyFallback: fontFamilyFallback,
+          fontSize: 16,
+          height: 1.5,
+          leadingDistribution: .even,
+        ),
+        md: TextStyle(
+          color: color,
+          fontFamily: fontFamily,
+          fontFamilyFallback: fontFamilyFallback,
+          fontSize: 18,
+          height: 1.75,
+          leadingDistribution: .even,
+        ),
+        lg: TextStyle(
+          color: color,
+          fontFamily: fontFamily,
+          fontFamilyFallback: fontFamilyFallback,
+          fontSize: 20,
+          height: 1.75,
+          leadingDistribution: .even,
+        ),
+        xl: TextStyle(
+          color: color,
+          fontFamily: fontFamily,
+          fontFamilyFallback: fontFamilyFallback,
+          fontSize: 22,
+          height: 2,
+          leadingDistribution: .even,
+        ),
+        xl2: TextStyle(
+          color: color,
+          fontFamily: fontFamily,
+          fontFamilyFallback: fontFamilyFallback,
+          fontSize: 30,
+          height: 2.25,
+          leadingDistribution: .even,
+        ),
+        xl3: TextStyle(
+          color: color,
+          fontFamily: fontFamily,
+          fontFamilyFallback: fontFamilyFallback,
+          fontSize: 36,
+          height: 2.5,
+          leadingDistribution: .even,
+        ),
+        xl4: TextStyle(
+          color: color,
+          fontFamily: fontFamily,
+          fontFamilyFallback: fontFamilyFallback,
+          fontSize: 48,
+          height: 1,
+          leadingDistribution: .even,
+        ),
+        xl5: TextStyle(
+          color: color,
+          fontFamily: fontFamily,
+          fontFamilyFallback: fontFamilyFallback,
+          fontSize: 60,
+          height: 1,
+          leadingDistribution: .even,
+        ),
+        xl6: TextStyle(
+          color: color,
+          fontFamily: fontFamily,
+          fontFamilyFallback: fontFamilyFallback,
+          fontSize: 72,
+          height: 1,
+          leadingDistribution: .even,
+        ),
+        xl7: TextStyle(
+          color: color,
+          fontFamily: fontFamily,
+          fontFamilyFallback: fontFamilyFallback,
+          fontSize: 96,
+          height: 1,
+          leadingDistribution: .even,
+        ),
+        xl8: TextStyle(
+          color: color,
+          fontFamily: fontFamily,
+          fontFamilyFallback: fontFamilyFallback,
+          fontSize: 108,
+          height: 1,
+          leadingDistribution: .even,
+        ),
       );
     } else {
-      return FTypography(
+      return FTypeface(
         fontFamily: fontFamily,
-        xs3: TextStyle(color: color, fontFamily: font, fontSize: 8, height: 1, leadingDistribution: .even),
-        xs2: TextStyle(color: color, fontFamily: font, fontSize: 10, height: 1, leadingDistribution: .even),
-        xs: TextStyle(color: color, fontFamily: font, fontSize: 12, height: 1, leadingDistribution: .even),
-        sm: TextStyle(color: color, fontFamily: font, fontSize: 14, height: 1.25, leadingDistribution: .even),
-        md: TextStyle(color: color, fontFamily: font, fontSize: 16, height: 1.5, leadingDistribution: .even),
-        lg: TextStyle(color: color, fontFamily: font, fontSize: 18, height: 1.75, leadingDistribution: .even),
-        xl: TextStyle(color: color, fontFamily: font, fontSize: 20, height: 1.75, leadingDistribution: .even),
-        xl2: TextStyle(color: color, fontFamily: font, fontSize: 22, height: 2, leadingDistribution: .even),
-        xl3: TextStyle(color: color, fontFamily: font, fontSize: 30, height: 2.25, leadingDistribution: .even),
-        xl4: TextStyle(color: color, fontFamily: font, fontSize: 36, height: 2.5, leadingDistribution: .even),
-        xl5: TextStyle(color: color, fontFamily: font, fontSize: 48, height: 1, leadingDistribution: .even),
-        xl6: TextStyle(color: color, fontFamily: font, fontSize: 60, height: 1, leadingDistribution: .even),
-        xl7: TextStyle(color: color, fontFamily: font, fontSize: 72, height: 1, leadingDistribution: .even),
-        xl8: TextStyle(color: color, fontFamily: font, fontSize: 96, height: 1, leadingDistribution: .even),
+        fontFamilyFallback: fontFamilyFallback,
+        xs3: TextStyle(
+          color: color,
+          fontFamily: fontFamily,
+          fontFamilyFallback: fontFamilyFallback,
+          fontSize: 8,
+          height: 1,
+          leadingDistribution: .even,
+        ),
+        xs2: TextStyle(
+          color: color,
+          fontFamily: fontFamily,
+          fontFamilyFallback: fontFamilyFallback,
+          fontSize: 10,
+          height: 1,
+          leadingDistribution: .even,
+        ),
+        xs: TextStyle(
+          color: color,
+          fontFamily: fontFamily,
+          fontFamilyFallback: fontFamilyFallback,
+          fontSize: 12,
+          height: 1,
+          leadingDistribution: .even,
+        ),
+        sm: TextStyle(
+          color: color,
+          fontFamily: fontFamily,
+          fontFamilyFallback: fontFamilyFallback,
+          fontSize: 14,
+          height: 1.25,
+          leadingDistribution: .even,
+        ),
+        md: TextStyle(
+          color: color,
+          fontFamily: fontFamily,
+          fontFamilyFallback: fontFamilyFallback,
+          fontSize: 16,
+          height: 1.5,
+          leadingDistribution: .even,
+        ),
+        lg: TextStyle(
+          color: color,
+          fontFamily: fontFamily,
+          fontFamilyFallback: fontFamilyFallback,
+          fontSize: 18,
+          height: 1.75,
+          leadingDistribution: .even,
+        ),
+        xl: TextStyle(
+          color: color,
+          fontFamily: fontFamily,
+          fontFamilyFallback: fontFamilyFallback,
+          fontSize: 20,
+          height: 1.75,
+          leadingDistribution: .even,
+        ),
+        xl2: TextStyle(
+          color: color,
+          fontFamily: fontFamily,
+          fontFamilyFallback: fontFamilyFallback,
+          fontSize: 22,
+          height: 2,
+          leadingDistribution: .even,
+        ),
+        xl3: TextStyle(
+          color: color,
+          fontFamily: fontFamily,
+          fontFamilyFallback: fontFamilyFallback,
+          fontSize: 30,
+          height: 2.25,
+          leadingDistribution: .even,
+        ),
+        xl4: TextStyle(
+          color: color,
+          fontFamily: fontFamily,
+          fontFamilyFallback: fontFamilyFallback,
+          fontSize: 36,
+          height: 2.5,
+          leadingDistribution: .even,
+        ),
+        xl5: TextStyle(
+          color: color,
+          fontFamily: fontFamily,
+          fontFamilyFallback: fontFamilyFallback,
+          fontSize: 48,
+          height: 1,
+          leadingDistribution: .even,
+        ),
+        xl6: TextStyle(
+          color: color,
+          fontFamily: fontFamily,
+          fontFamilyFallback: fontFamilyFallback,
+          fontSize: 60,
+          height: 1,
+          leadingDistribution: .even,
+        ),
+        xl7: TextStyle(
+          color: color,
+          fontFamily: fontFamily,
+          fontFamilyFallback: fontFamilyFallback,
+          fontSize: 72,
+          height: 1,
+          leadingDistribution: .even,
+        ),
+        xl8: TextStyle(
+          color: color,
+          fontFamily: fontFamily,
+          fontFamilyFallback: fontFamilyFallback,
+          fontSize: 96,
+          height: 1,
+          leadingDistribution: .even,
+        ),
       );
     }
   }
 
-  /// Creates a linear interpolation between two [FTypography]s using the given factor [t].
-  factory FTypography.lerp(FTypography a, FTypography b, double t) => .new(
-    fontFamily: t < 0.5 ? a.fontFamily : b.fontFamily,
-    xs3: .lerp(a.xs3, b.xs3, t)!,
-    xs2: .lerp(a.xs2, b.xs2, t)!,
-    xs: .lerp(a.xs, b.xs, t)!,
-    sm: .lerp(a.sm, b.sm, t)!,
-    md: .lerp(a.md, b.md, t)!,
-    lg: .lerp(a.lg, b.lg, t)!,
-    xl: .lerp(a.xl, b.xl, t)!,
-    xl2: .lerp(a.xl2, b.xl2, t)!,
-    xl3: .lerp(a.xl3, b.xl3, t)!,
-    xl4: .lerp(a.xl4, b.xl4, t)!,
-    xl5: .lerp(a.xl5, b.xl5, t)!,
-    xl6: .lerp(a.xl6, b.xl6, t)!,
-    xl7: .lerp(a.xl7, b.xl7, t)!,
-    xl8: .lerp(a.xl8, b.xl8, t)!,
-    extensions: (a._extensions.map(
-      (id, extensionA) => MapEntry(id, extensionA.lerp(b._extensions[id], t)),
-    )..addEntries(b._extensions.entries.where((entry) => !a._extensions.containsKey(entry.key)))).values,
-  );
+  /// Linearly interpolates between this [FTypeface] and [other] using the given factor [t].
+  @override
+  FTypeface lerp(covariant FTypeface? other, double t) {
+    if (other == null) {
+      return this;
+    }
 
-  /// Scales this [FTypography] by [sizeScalar].
+    return FTypeface(
+      fontFamily: t < 0.5 ? fontFamily : other.fontFamily,
+      fontFamilyFallback: t < 0.5 ? fontFamilyFallback : other.fontFamilyFallback,
+      xs3: .lerp(xs3, other.xs3, t)!,
+      xs2: .lerp(xs2, other.xs2, t)!,
+      xs: .lerp(xs, other.xs, t)!,
+      sm: .lerp(sm, other.sm, t)!,
+      md: .lerp(md, other.md, t)!,
+      lg: .lerp(lg, other.lg, t)!,
+      xl: .lerp(xl, other.xl, t)!,
+      xl2: .lerp(xl2, other.xl2, t)!,
+      xl3: .lerp(xl3, other.xl3, t)!,
+      xl4: .lerp(xl4, other.xl4, t)!,
+      xl5: .lerp(xl5, other.xl5, t)!,
+      xl6: .lerp(xl6, other.xl6, t)!,
+      xl7: .lerp(xl7, other.xl7, t)!,
+      xl8: .lerp(xl8, other.xl8, t)!,
+      extensions: (_extensions.map(
+        (id, extension) => MapEntry(id, extension.lerp(other._extensions[id], t)),
+      )..addEntries(other._extensions.entries.where((entry) => !_extensions.containsKey(entry.key)))).values,
+    );
+  }
+
+  /// Returns a copy of this [FTypeface] with the given properties replaced.
+  ///
+  /// To change the [fontFamily] or [fontFamilyFallback], create a [FTypeface] via its constructors instead.
   ///
   /// ```dart
-  /// const typography = FTypography(
+  /// const typeface = FTypeface(
   ///   sm: TextStyle(fontSize: 10),
   ///   md: TextStyle(fontSize: 20),
   /// );
   ///
-  /// final scaled = typography.scale(sizeScalar: 1.5);
+  /// final copy = typeface.copyWith(sm: TextStyle(fontSize: 12));
   ///
-  /// print(scaled.sm.fontSize); // 15
-  /// print(scaled.md.fontSize); // 30
-  /// ```
-  @useResult
-  FTypography scale({double sizeScalar = 1}) => .new(
-    fontFamily: fontFamily,
-    xs3: _scaleTextStyle(style: xs3, sizeScalar: sizeScalar),
-    xs2: _scaleTextStyle(style: xs2, sizeScalar: sizeScalar),
-    xs: _scaleTextStyle(style: xs, sizeScalar: sizeScalar),
-    sm: _scaleTextStyle(style: sm, sizeScalar: sizeScalar),
-    md: _scaleTextStyle(style: md, sizeScalar: sizeScalar),
-    lg: _scaleTextStyle(style: lg, sizeScalar: sizeScalar),
-    xl: _scaleTextStyle(style: xl, sizeScalar: sizeScalar),
-    xl2: _scaleTextStyle(style: xl2, sizeScalar: sizeScalar),
-    xl3: _scaleTextStyle(style: xl3, sizeScalar: sizeScalar),
-    xl4: _scaleTextStyle(style: xl4, sizeScalar: sizeScalar),
-    xl5: _scaleTextStyle(style: xl5, sizeScalar: sizeScalar),
-    xl6: _scaleTextStyle(style: xl6, sizeScalar: sizeScalar),
-    xl7: _scaleTextStyle(style: xl7, sizeScalar: sizeScalar),
-    xl8: _scaleTextStyle(style: xl8, sizeScalar: sizeScalar),
-    extensions: [for (final extension in _extensions.values) extension.scale(sizeScalar: sizeScalar)],
-  );
-
-  // default font size: https://api.flutter.dev/flutter/painting/TextStyle/fontSize.html
-  TextStyle _scaleTextStyle({required TextStyle style, required double sizeScalar}) =>
-      style.copyWith(fontSize: (style.fontSize ?? 14) * sizeScalar);
-
-  /// Returns a copy of this [FTypography] with the given properties replaced.
-  ///
-  /// To change the [fontFamily], create a [FTypography] via its constructors instead.
-  ///
-  /// ```dart
-  /// const typography = FTypography(
-  ///   fontFamily: 'packages/forui/my-font',
-  ///   sm: TextStyle(fontSize: 10),
-  ///   md: TextStyle(fontSize: 20),
-  /// );
-  ///
-  /// final copy = typography.copyWith(fontFamily: 'packages/forui/another-font');
-  ///
-  /// print(copy.fontFamily); // 'packages/forui/another-font'
-  /// print(copy.sm.fontSize); // 10
+  /// print(copy.sm.fontSize); // 12
   /// print(copy.md.fontSize); // 20
   /// ```
+  @override
   @useResult
-  FTypography copyWith({
+  FTypeface copyWith({
     TextStyle? xs3,
     TextStyle? xs2,
     TextStyle? xs,
@@ -317,9 +705,10 @@ final class FTypography with Diagnosticable {
     TextStyle? xl6,
     TextStyle? xl7,
     TextStyle? xl8,
-    Iterable<FTypographyExtension<dynamic>>? extensions,
-  }) => FTypography(
+    Iterable<FScalableExtension<dynamic>>? extensions,
+  }) => FTypeface(
     fontFamily: fontFamily,
+    fontFamilyFallback: fontFamilyFallback,
     xs3: xs3 ?? this.xs3,
     xs2: xs2 ?? this.xs2,
     xs: xs ?? this.xs,
@@ -337,70 +726,109 @@ final class FTypography with Diagnosticable {
     extensions: extensions ?? _extensions.values,
   );
 
-  /// Obtains a particular [ThemeExtension].
+  /// Scales this [FTypeface] by [sizeScalar].
   ///
-  /// {@template forui.theme.FTypography.extension}
-  /// ## Creating and passing a [FTypographyExtension] to [FTypography]
   /// ```dart
-  /// class BrandTypography extends FTypographyExtension<BrandTypography> {
+  /// const typeface = FTypeface(
+  ///   sm: TextStyle(fontSize: 10),
+  ///   md: TextStyle(fontSize: 20),
+  /// );
+  ///
+  /// final scaled = typeface.scale(sizeScalar: 1.5);
+  ///
+  /// print(scaled.sm.fontSize); // 15
+  /// print(scaled.md.fontSize); // 30
+  /// ```
+  @override
+  @useResult
+  FTypeface scale({double sizeScalar = 1}) => .new(
+    fontFamily: fontFamily,
+    fontFamilyFallback: fontFamilyFallback,
+    xs3: _scale(style: xs3, sizeScalar: sizeScalar),
+    xs2: _scale(style: xs2, sizeScalar: sizeScalar),
+    xs: _scale(style: xs, sizeScalar: sizeScalar),
+    sm: _scale(style: sm, sizeScalar: sizeScalar),
+    md: _scale(style: md, sizeScalar: sizeScalar),
+    lg: _scale(style: lg, sizeScalar: sizeScalar),
+    xl: _scale(style: xl, sizeScalar: sizeScalar),
+    xl2: _scale(style: xl2, sizeScalar: sizeScalar),
+    xl3: _scale(style: xl3, sizeScalar: sizeScalar),
+    xl4: _scale(style: xl4, sizeScalar: sizeScalar),
+    xl5: _scale(style: xl5, sizeScalar: sizeScalar),
+    xl6: _scale(style: xl6, sizeScalar: sizeScalar),
+    xl7: _scale(style: xl7, sizeScalar: sizeScalar),
+    xl8: _scale(style: xl8, sizeScalar: sizeScalar),
+    extensions: [for (final extension in _extensions.values) extension.scale(sizeScalar: sizeScalar)],
+  );
+
+  // Default font size: https://api.flutter.dev/flutter/painting/TextStyle/fontSize.html
+  TextStyle _scale({required TextStyle style, required double sizeScalar}) =>
+      style.copyWith(fontSize: (style.fontSize ?? 14) * sizeScalar);
+
+  /// Obtains a particular [FScalableExtension].
+  ///
+  /// {@template forui.theme.FTypeface.extension}
+  /// ## Creating and passing a [FScalableExtension] to [FTypeface]
+  /// ```dart
+  /// class BrandTypeface extends FScalableExtension<BrandTypeface> {
   ///   final TextStyle display;
   ///
-  ///   const BrandTypography({required this.display});
+  ///   const BrandTypeface({required this.display});
   ///
   ///   @override
-  ///   BrandTypography copyWith({TextStyle? display}) => BrandTypography(display: display ?? this.display);
+  ///   BrandTypeface copyWith({TextStyle? display}) => BrandTypeface(display: display ?? this.display);
   ///
   ///   @override
-  ///   BrandTypography lerp(BrandTypography? other, double t) {
-  ///     if (other is! BrandTypography) return this;
-  ///     return BrandTypography(display: TextStyle.lerp(display, other.display, t)!);
+  ///   BrandTypeface lerp(BrandTypeface? other, double t) {
+  ///     if (other is! BrandTypeface) return this;
+  ///     return BrandTypeface(display: TextStyle.lerp(display, other.display, t)!);
   ///   }
   ///
   ///   @override
-  ///   BrandTypography scale({double sizeScalar = 1.0}) =>
-  ///       BrandTypography(display: display.copyWith(fontSize: (display.fontSize ?? 14) * sizeScalar));
+  ///   BrandTypeface scale({double sizeScalar = 1.0}) =>
+  ///       BrandTypeface(display: display.copyWith(fontSize: (display.fontSize ?? 14) * sizeScalar));
   /// }
   /// ```
   ///
   /// Passing it via constructor:
   /// ```dart
-  /// final typography = FTypography(
-  ///   extensions: [BrandTypography(display: TextStyle(fontSize: 32, fontWeight: .bold))],
+  /// final body = FTypeface(
+  ///   extensions: [BrandTypeface(display: TextStyle(fontSize: 32, fontWeight: .bold))],
   ///   ... // other fields omitted for brevity
   /// );
   /// ```
   ///
   /// Passing it via [copyWith]:
   /// ```dart
-  /// typography.copyWith(extensions: [
-  ///   BrandTypography(display: TextStyle(fontSize: 32, fontWeight: .bold)),
+  /// body.copyWith(extensions: [
+  ///   BrandTypeface(display: TextStyle(fontSize: 32, fontWeight: .bold)),
   /// ]);
   /// ```
   ///
   /// ## Accessing the extension
   /// ```dart
-  /// final brand = context.theme.typography.extension<BrandTypography>();
+  /// final brand = context.theme.typography.body.extension<BrandTypeface>();
   /// ```
   ///
-  /// It is recommended to define a getter for your [FTypographyExtension]:
+  /// It is recommended to define a getter for your [FScalableExtension]:
   /// ```dart
-  /// extension FTypographyBrandTypography on FTypography {
-  ///   BrandTypography get brand => extension<BrandTypography>();
+  /// extension FTypefaceBrandTypeface on FTypeface {
+  ///   BrandTypeface get brand => extension<BrandTypeface>();
   ///
   ///   // Alternatively
-  ///   TextStyle get display => extension<BrandTypography>().display;
+  ///   TextStyle get display => extension<BrandTypeface>().display;
   /// }
   ///
-  /// final brand = context.theme.typography.brand;
+  /// final brand = context.theme.typography.body.brand;
   ///
-  /// final display = context.theme.typography.display;
+  /// final display = context.theme.typography.body.display;
   /// ```
   /// {@endtemplate}
   T extension<T extends Object>() => _extensions[T]! as T;
 
-  /// All [ThemeExtension]s defined in this typography.
+  /// All [FScalableExtension]s defined in this typeface.
   ///
-  /// {@macro forui.theme.FTypography.extension}
+  /// {@macro forui.theme.FTypeface.extension}
   Set<ThemeExtension<dynamic>> get extensions => _extensions.values.toSet();
 
   @override
@@ -408,6 +836,7 @@ final class FTypography with Diagnosticable {
     super.debugFillProperties(properties);
     properties
       ..add(StringProperty('fontFamily', fontFamily, defaultValue: defaultFontFamily))
+      ..add(IterableProperty('fontFamilyFallback', fontFamilyFallback, defaultValue: const []))
       ..add(DiagnosticsProperty('xs3', xs3))
       ..add(DiagnosticsProperty('xs2', xs2))
       ..add(DiagnosticsProperty('xs', xs))
@@ -428,9 +857,10 @@ final class FTypography with Diagnosticable {
   @override
   bool operator ==(Object other) =>
       identical(this, other) ||
-      other is FTypography &&
+      other is FTypeface &&
           runtimeType == other.runtimeType &&
           fontFamily == other.fontFamily &&
+          listEquals(fontFamilyFallback, other.fontFamilyFallback) &&
           xs3 == other.xs3 &&
           xs2 == other.xs2 &&
           xs == other.xs &&
@@ -450,6 +880,7 @@ final class FTypography with Diagnosticable {
   @override
   int get hashCode =>
       fontFamily.hashCode ^
+      Object.hashAll(fontFamilyFallback) ^
       xs3.hashCode ^
       xs2.hashCode ^
       xs.hashCode ^
@@ -467,34 +898,18 @@ final class FTypography with Diagnosticable {
       Object.hashAllUnordered(_extensions.values);
 }
 
-/// A [ThemeExtension] for typography tokens.
-abstract class FTypographyExtension<T extends FTypographyExtension<T>> extends ThemeExtension<T> {
-  /// Creates a [FTypographyExtension].
-  const FTypographyExtension();
+/// A [ThemeExtension] that scales with the font size scalar, used for typographical tokens in a [FTypography] and
+/// [FTypeface].
+abstract class FScalableExtension<T extends FScalableExtension<T>> extends ThemeExtension<T> {
+  /// Creates a [FScalableExtension].
+  const FScalableExtension();
 
   @override
-  FTypographyExtension<T> copyWith();
+  FScalableExtension<T> lerp(FScalableExtension<T>? other, double t);
 
   @override
-  FTypographyExtension<T> lerp(FTypographyExtension<T>? other, double t);
+  FScalableExtension<T> copyWith();
 
-  /// Scales this [FTypographyExtension] by [sizeScalar].
-  ///
-  /// Invoked by [FTypography.scale] for every attached extension so that custom tokens scale alongside the
-  /// built‑in font sizes.
-  ///
-  /// ```dart
-  /// class BrandTypography extends FTypographyExtension<BrandTypography> {
-  ///   final TextStyle display;
-  ///
-  ///   const BrandTypography({required this.display});
-  ///
-  ///   @override
-  ///   BrandTypography scale({double sizeScalar = 1.0}) =>
-  ///       BrandTypography(display: display.copyWith(fontSize: (display.fontSize ?? 14) * sizeScalar));
-  ///
-  ///   // copyWith / lerp omitted for brevity
-  /// }
-  /// ```
-  FTypographyExtension<T> scale({double sizeScalar = 1.0});
+  /// Scales this [FScalableExtension] by [sizeScalar].
+  FScalableExtension<T> scale({double sizeScalar = 1.0});
 }

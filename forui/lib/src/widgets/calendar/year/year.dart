@@ -94,7 +94,7 @@ extension type FCalendarYearStyles(
     required FStyle style,
   }) {
     final base = FCalendarYearStyle(
-      textStyle: typography.sm.copyWith(color: colors.foreground),
+      textStyle: typography.body.sm.copyWith(color: colors.foreground),
       decoration: ShapeDecoration(shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md)),
     );
 

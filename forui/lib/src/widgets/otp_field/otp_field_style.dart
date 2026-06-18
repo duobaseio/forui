@@ -132,7 +132,7 @@ extension type FOtpFieldItemStyles(
             start: BorderSide(color: colors.border, width: style.borderWidth),
           ),
         ),
-        contentTextStyle: typography.sm.copyWith(color: colors.foreground),
+        contentTextStyle: typography.body.sm.copyWith(color: colors.foreground),
       ),
       variants: {
         // --- default ---
@@ -149,7 +149,7 @@ extension type FOtpFieldItemStyles(
               start: BorderSide(color: colors.border, width: style.borderWidth),
             ),
           ),
-          contentTextStyle: typography.sm.copyWith(color: colors.foreground),
+          contentTextStyle: typography.body.sm.copyWith(color: colors.foreground),
         ),
         [.end]: FOtpFieldItemStyle(
           decoration: BoxDecoration(
@@ -160,7 +160,7 @@ extension type FOtpFieldItemStyles(
             ),
             border: Border.all(color: colors.border, width: style.borderWidth),
           ),
-          contentTextStyle: typography.sm.copyWith(color: colors.foreground),
+          contentTextStyle: typography.body.sm.copyWith(color: colors.foreground),
         ),
         [.start.and(.end)]: FOtpFieldItemStyle(
           decoration: BoxDecoration(
@@ -168,7 +168,7 @@ extension type FOtpFieldItemStyles(
             borderRadius: style.borderRadius.sm,
             border: Border.all(color: colors.border, width: style.borderWidth),
           ),
-          contentTextStyle: typography.sm.copyWith(color: colors.foreground),
+          contentTextStyle: typography.body.sm.copyWith(color: colors.foreground),
         ),
         // --- focused ---
         [.focused]: FOtpFieldItemStyle(
@@ -178,7 +178,7 @@ extension type FOtpFieldItemStyles(
               side: BorderSide(color: colors.foreground, width: style.borderWidth),
             ),
           ),
-          contentTextStyle: typography.sm.copyWith(color: colors.foreground),
+          contentTextStyle: typography.body.sm.copyWith(color: colors.foreground),
         ),
         [.focused.and(.start)]: FOtpFieldItemStyle(
           decoration: ShapeDecoration(
@@ -191,7 +191,7 @@ extension type FOtpFieldItemStyles(
               side: BorderSide(color: colors.foreground, width: style.borderWidth),
             ),
           ),
-          contentTextStyle: typography.sm.copyWith(color: colors.foreground),
+          contentTextStyle: typography.body.sm.copyWith(color: colors.foreground),
         ),
         [.focused.and(.end)]: FOtpFieldItemStyle(
           decoration: ShapeDecoration(
@@ -204,7 +204,7 @@ extension type FOtpFieldItemStyles(
               side: BorderSide(color: colors.foreground, width: style.borderWidth),
             ),
           ),
-          contentTextStyle: typography.sm.copyWith(color: colors.foreground),
+          contentTextStyle: typography.body.sm.copyWith(color: colors.foreground),
         ),
         [.focused.and(.start).and(.end)]: FOtpFieldItemStyle(
           decoration: ShapeDecoration(
@@ -214,7 +214,7 @@ extension type FOtpFieldItemStyles(
               side: BorderSide(color: colors.foreground, width: style.borderWidth),
             ),
           ),
-          contentTextStyle: typography.sm.copyWith(color: colors.foreground),
+          contentTextStyle: typography.body.sm.copyWith(color: colors.foreground),
         ),
         // --- disabled ---
         [.disabled]: FOtpFieldItemStyle(
@@ -226,7 +226,7 @@ extension type FOtpFieldItemStyles(
               start: BorderSide(color: colors.disable(colors.border), width: style.borderWidth),
             ),
           ),
-          contentTextStyle: typography.sm.copyWith(color: colors.disable(colors.foreground)),
+          contentTextStyle: typography.body.sm.copyWith(color: colors.disable(colors.foreground)),
         ),
         [.disabled.and(.start)]: FOtpFieldItemStyle(
           decoration: BoxDecoration(
@@ -241,7 +241,7 @@ extension type FOtpFieldItemStyles(
               start: BorderSide(color: colors.disable(colors.border), width: style.borderWidth),
             ),
           ),
-          contentTextStyle: typography.sm.copyWith(color: colors.disable(colors.foreground)),
+          contentTextStyle: typography.body.sm.copyWith(color: colors.disable(colors.foreground)),
         ),
         [.disabled.and(.end)]: FOtpFieldItemStyle(
           decoration: BoxDecoration(
@@ -252,7 +252,7 @@ extension type FOtpFieldItemStyles(
             ),
             border: Border.all(color: colors.disable(colors.border), width: style.borderWidth),
           ),
-          contentTextStyle: typography.sm.copyWith(color: colors.disable(colors.foreground)),
+          contentTextStyle: typography.body.sm.copyWith(color: colors.disable(colors.foreground)),
         ),
         [.disabled.and(.start).and(.end)]: FOtpFieldItemStyle(
           decoration: BoxDecoration(
@@ -260,7 +260,7 @@ extension type FOtpFieldItemStyles(
             borderRadius: style.borderRadius.sm,
             border: Border.all(color: colors.disable(colors.border), width: style.borderWidth),
           ),
-          contentTextStyle: typography.sm.copyWith(color: colors.disable(colors.foreground)),
+          contentTextStyle: typography.body.sm.copyWith(color: colors.disable(colors.foreground)),
         ),
         // --- error ---
         [.error]: FOtpFieldItemStyle(
@@ -272,7 +272,7 @@ extension type FOtpFieldItemStyles(
               start: BorderSide(color: colors.error, width: style.borderWidth),
             ),
           ),
-          contentTextStyle: typography.sm.copyWith(color: colors.foreground),
+          contentTextStyle: typography.body.sm.copyWith(color: colors.foreground),
         ),
         [.error.and(.start)]: FOtpFieldItemStyle(
           decoration: BoxDecoration(
@@ -287,7 +287,7 @@ extension type FOtpFieldItemStyles(
               start: BorderSide(color: colors.error, width: style.borderWidth),
             ),
           ),
-          contentTextStyle: typography.sm.copyWith(color: colors.foreground),
+          contentTextStyle: typography.body.sm.copyWith(color: colors.foreground),
         ),
         [.error.and(.end)]: FOtpFieldItemStyle(
           decoration: BoxDecoration(
@@ -298,7 +298,7 @@ extension type FOtpFieldItemStyles(
             ),
             border: Border.all(color: colors.error, width: style.borderWidth),
           ),
-          contentTextStyle: typography.sm.copyWith(color: colors.foreground),
+          contentTextStyle: typography.body.sm.copyWith(color: colors.foreground),
         ),
         [.error.and(.start).and(.end)]: FOtpFieldItemStyle(
           decoration: BoxDecoration(
@@ -306,7 +306,7 @@ extension type FOtpFieldItemStyles(
             borderRadius: style.borderRadius.sm,
             border: Border.all(color: colors.error, width: style.borderWidth),
           ),
-          contentTextStyle: typography.sm.copyWith(color: colors.foreground),
+          contentTextStyle: typography.body.sm.copyWith(color: colors.foreground),
         ),
         // --- error + disabled ---
         [.error.and(.disabled)]: FOtpFieldItemStyle(
@@ -318,7 +318,7 @@ extension type FOtpFieldItemStyles(
               start: BorderSide(color: colors.disable(colors.error), width: style.borderWidth),
             ),
           ),
-          contentTextStyle: typography.sm.copyWith(color: colors.disable(colors.foreground)),
+          contentTextStyle: typography.body.sm.copyWith(color: colors.disable(colors.foreground)),
         ),
         [.error.and(.disabled).and(.start)]: FOtpFieldItemStyle(
           decoration: BoxDecoration(
@@ -333,7 +333,7 @@ extension type FOtpFieldItemStyles(
               start: BorderSide(color: colors.disable(colors.error), width: style.borderWidth),
             ),
           ),
-          contentTextStyle: typography.sm.copyWith(color: colors.disable(colors.foreground)),
+          contentTextStyle: typography.body.sm.copyWith(color: colors.disable(colors.foreground)),
         ),
         [.error.and(.disabled).and(.end)]: FOtpFieldItemStyle(
           decoration: BoxDecoration(
@@ -344,7 +344,7 @@ extension type FOtpFieldItemStyles(
             ),
             border: Border.all(color: colors.disable(colors.error), width: style.borderWidth),
           ),
-          contentTextStyle: typography.sm.copyWith(color: colors.disable(colors.foreground)),
+          contentTextStyle: typography.body.sm.copyWith(color: colors.disable(colors.foreground)),
         ),
         [.error.and(.disabled).and(.start).and(.end)]: FOtpFieldItemStyle(
           decoration: BoxDecoration(
@@ -352,7 +352,7 @@ extension type FOtpFieldItemStyles(
             borderRadius: style.borderRadius.sm,
             border: Border.all(color: colors.disable(colors.error), width: style.borderWidth),
           ),
-          contentTextStyle: typography.sm.copyWith(color: colors.disable(colors.foreground)),
+          contentTextStyle: typography.body.sm.copyWith(color: colors.disable(colors.foreground)),
         ),
       },
     ),

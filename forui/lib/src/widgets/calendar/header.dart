@@ -402,7 +402,7 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
     required bool touch,
   }) {
     final buttons = FButtonStyles.inherit(colors: colors, typography: typography, style: style, touch: touch);
-    final headerTextStyle = (touch ? typography.md : typography.sm).copyWith(
+    final headerTextStyle = (touch ? typography.display.md : typography.display.sm).copyWith(
       color: colors.foreground,
       fontWeight: .w500,
     );

@@ -162,9 +162,9 @@ extension type FAlertStyles(FVariants<FAlertVariantConstraint, FAlertVariant, FA
     required bool touch,
   }) {
     final primary = FAlertStyle(
-      iconStyle: IconThemeData(color: colors.foreground, size: typography.md.fontSize),
-      titleTextStyle: typography.sm.copyWith(fontWeight: .w500, color: colors.foreground),
-      subtitleTextStyle: (touch ? typography.xs : typography.sm).copyWith(color: colors.mutedForeground),
+      iconStyle: IconThemeData(color: colors.foreground, size: typography.body.md.fontSize),
+      titleTextStyle: typography.display.sm.copyWith(fontWeight: .w500, color: colors.foreground),
+      subtitleTextStyle: (touch ? typography.body.xs : typography.body.sm).copyWith(color: colors.mutedForeground),
       decoration: ShapeDecoration(
         shape: RoundedSuperellipseBorder(
           side: BorderSide(color: colors.border, width: style.borderWidth),

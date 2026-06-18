@@ -92,8 +92,8 @@ class FPickerStyle with Diagnosticable, _$FPickerStyleFunctions {
     required bool touch,
   }) : this(
          textStyle: touch
-             ? typography.lg.copyWith(fontWeight: .w500, height: 1.25)
-             : typography.sm.copyWith(fontWeight: .w500),
+             ? typography.body.lg.copyWith(fontWeight: .w500, height: 1.25)
+             : typography.body.sm.copyWith(fontWeight: .w500),
          selectionDecoration: ShapeDecoration(
            shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
            color: colors.muted,

@@ -96,7 +96,7 @@ extension type FBadgeStyles(FVariants<FBadgeVariantConstraint, FBadgeVariant, FB
     required FStyle style,
     required bool touch,
   }) {
-    final destructiveTextStyle = typography.xs.copyWith(color: colors.destructive, fontWeight: .w500);
+    final destructiveTextStyle = typography.body.xs.copyWith(color: colors.destructive, fontWeight: .w500);
     final destructiveDecoration = ShapeDecoration(
       shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.pill),
       color: colors.destructive.withValues(alpha: colors.brightness == .light ? 0.1 : 0.2),
@@ -119,7 +119,7 @@ extension type FBadgeStyles(FVariants<FBadgeVariantConstraint, FBadgeVariant, FB
             color: colors.primary,
           ),
           contentStyle: FBadgeContentStyle(
-            labelTextStyle: typography.xs.copyWith(color: colors.primaryForeground, fontWeight: .w500),
+            labelTextStyle: typography.body.xs.copyWith(color: colors.primaryForeground, fontWeight: .w500),
             padding: padding,
           ),
         ),

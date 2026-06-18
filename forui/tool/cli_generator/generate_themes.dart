@@ -24,8 +24,8 @@ final _colors = p.join(library, 'src', 'theme', 'colors.dart');
 final _icons = p.join(library, 'src', 'theme', 'icons.dart');
 final _themes = p.join(library, 'src', 'theme', 'themes.dart');
 
-final _typography = RegExp('FTypography');
-final _typographyConstructor = RegExp(r'(FTypography)\.inherit');
+final _typography = RegExp('FTypography|FTypeface');
+final _typographyConstructor = RegExp(r'(FTypography|FTypeface)\.inherit');
 final _style = RegExp(r'^FStyle$');
 final _styleConstructor = RegExp(r'(FStyle)\.inherit');
 
@@ -100,7 +100,8 @@ String generateThemes(Map<(String, String?), ThemeFragment> fragments) {
 }
 
 Map<(String, String?), ThemeFragment> mapThemes(ThemesConstructors themes) {
-  final typography = ConstructorFragment.inline(_typographyConstructor, themes.typography).values.single;
+  final typographyFragments = ConstructorFragment.inline(_typographyConstructor, themes.typography);
+  final typeface = typographyFragments['FTypeface']!;
   final icons = StringBuffer('FIcons(\n');
   for (final MapEntry(:key, :value) in themes.icons.entries) {
     icons.writeln('  $key: $value,');
@@ -195,61 +196,20 @@ class AppColors extends ThemeExtension<AppColors> {
 }
 ''');
 
+    // _display(...) and _body(...) share the same defaults but can be customized independently.
+    final face = typeface.source.replaceAll(RegExp(r'\s*extensions: const \[\],'), '');
+
     typographyBuffer
-      ..write(typography.source.substring(0, typography.type.length + 1))
-      ..write('_')
       ..writeln(
-        typography.source
-            .substring(typography.type.length + 1)
-            .replaceAll('extensions: const [],', 'extensions: const [AppTypography()],'),
+        'FTypography _typography({required FColors colors, required bool touch}) => '
+        'FTypography(display: _display(colors: colors, touch: touch), body: _body(colors: colors, touch: touch));',
       )
-      ..writeln('''
-/// Provides convenient access to theme extensions on [FTypography].
-///
-/// ```dart
-/// final display = context.theme.typography.app.display; ✅
-///
-/// // Alternatively, you can create a getter to access extension fields directly.
-/// final display = context.theme.typography.display; ✅
-///
-/// final display = context.theme.typography.extension<AppTypography>().display; ❌
-/// ```
-extension FTypographyExtensions on FTypography {
-  AppTypography get app => extension<AppTypography>();
-}
-
-/// Custom typography tokens unique to your app.
-///
-/// Add your fields below, then implement [copyWith], [lerp], [scale], [==], and [hashCode].
-/// See [FTypographyExtension].
-class AppTypography extends FTypographyExtension<AppTypography> {
-  // TODO: add your typography fields here:
-  // final TextStyle display;
-
-  const AppTypography();
-
-  @override
-  AppTypography copyWith() => const AppTypography();
-
-  @override
-  AppTypography lerp(covariant AppTypography? other, double t) {
-    if (other == null) {
-      return this;
-    }
-    return const AppTypography();
-  }
-
-  @override
-  AppTypography scale({double sizeScalar = 1.0}) => this;
-
-  @override
-  bool operator ==(Object other) =>
-      identical(this, other) || other is AppTypography && runtimeType == other.runtimeType;
-
-  @override
-  int get hashCode => runtimeType.hashCode;
-}
-''');
+      ..writeln()
+      ..writeln('/// The typographical tokens used for prominent text such as headings.')
+      ..writeln(face.replaceFirst('FTypeface typeface(', 'FTypeface _display('))
+      ..writeln()
+      ..writeln('/// The typographical tokens for content and UI text.')
+      ..writeln(face.replaceFirst('FTypeface typeface(', 'FTypeface _body('));
 
     styleBuffer
       ..write(style.source.substring(0, style.type.length + 1))
@@ -317,7 +277,10 @@ class AppStyle extends ThemeExtension<AppStyle> {
 
 /// Traverses the library and finds all themes.
 Future<ThemesConstructors> traverseThemes(AnalysisContextCollection collection) async {
-  final typography = await ConstructorMatch.traverse(collection, _typography, _typographyConstructor, {'FTypography'});
+  final typography = await ConstructorMatch.traverse(collection, _typography, _typographyConstructor, {
+    'FTypography',
+    'FTypeface',
+  });
   final style = await ConstructorMatch.traverse(collection, _style, _styleConstructor, {'FStyle'});
 
   // Parse colors.dart to build a map from field name to inline FColors(...) expression.

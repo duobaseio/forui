@@ -59,7 +59,7 @@ class Sidebar extends StatelessWidget {
                           children: [
                             Text(
                               'Dash',
-                              style: theme.typography.sm.copyWith(
+                              style: theme.typography.body.sm.copyWith(
                                 fontWeight: .bold,
                                 color: theme.colors.foreground,
                               ),
@@ -67,7 +67,7 @@ class Sidebar extends StatelessWidget {
                             ),
                             Text(
                               'dash@forui.dev',
-                              style: theme.typography.xs.copyWith(
+                              style: theme.typography.body.xs.copyWith(
                                 color: theme.colors.mutedForeground,
                               ),
                               overflow: .ellipsis,

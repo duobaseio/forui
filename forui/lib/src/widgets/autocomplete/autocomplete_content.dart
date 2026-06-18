@@ -180,7 +180,7 @@ class FAutocompleteContentStyle extends FPopoverStyle with Diagnosticable, _$FAu
     required FTypography typography,
     required super.style,
     required bool touch,
-  }) : emptyTextStyle = typography.sm,
+  }) : emptyTextStyle = typography.body.sm,
        progressStyle = .inherit(colors: colors),
        sectionStyle = .inherit(colors: colors, style: style, typography: typography, touch: touch),
        padding = const .symmetric(vertical: 6),

@@ -107,7 +107,7 @@ extension type FCalendarDayStyles(
     required FStyle style,
   }) {
     final base = FCalendarDayStyle(
-      textStyle: typography.sm.copyWith(color: colors.foreground),
+      textStyle: typography.body.sm.copyWith(color: colors.foreground),
       foreground: ShapeDecoration(shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md)),
     );
 

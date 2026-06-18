@@ -270,11 +270,17 @@ class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
     EdgeInsetsGeometry padding;
     if (touch) {
       titleSpacing = 4;
-      descriptionTextStyle = typography.xs.copyWith(color: colors.mutedForeground, overflow: TextOverflow.ellipsis);
+      descriptionTextStyle = typography.body.xs.copyWith(
+        color: colors.mutedForeground,
+        overflow: TextOverflow.ellipsis,
+      );
       padding = const EdgeInsets.symmetric(horizontal: 16, vertical: 14);
     } else {
       titleSpacing = 2;
-      descriptionTextStyle = typography.sm.copyWith(color: colors.mutedForeground, overflow: TextOverflow.ellipsis);
+      descriptionTextStyle = typography.body.sm.copyWith(
+        color: colors.mutedForeground,
+        overflow: TextOverflow.ellipsis,
+      );
       padding = const EdgeInsets.symmetric(horizontal: 16, vertical: 12);
     }
 
@@ -286,8 +292,8 @@ class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
         ),
         color: colors.card,
       ),
-      iconStyle: IconThemeData(color: colors.foreground, size: typography.md.fontSize),
-      titleTextStyle: typography.sm.copyWith(color: colors.foreground, fontWeight: .w500, height: 1),
+      iconStyle: IconThemeData(color: colors.foreground, size: typography.body.md.fontSize),
+      titleTextStyle: typography.display.sm.copyWith(color: colors.foreground, fontWeight: .w500, height: 1),
       titleSpacing: titleSpacing,
       descriptionTextStyle: descriptionTextStyle,
       padding: padding,

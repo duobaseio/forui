@@ -10,7 +10,7 @@ Widget build(BuildContext context) {
   return Text(
     'Hello World!',
     // {@highlight}
-    style: typography.xs.copyWith(color: context.theme.colors.primaryForeground, fontWeight: .bold),
+    style: typography.body.xs.copyWith(color: context.theme.colors.primaryForeground, fontWeight: .bold),
     // {@endhighlight}
   );
 }

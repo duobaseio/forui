@@ -11,7 +11,7 @@ FStyle _style({required FColors colors, required FTypography typography, require
     formFieldStyle: .inherit(colors: colors, typography: typography, touch: touch),
     focusedOutlineStyle: FFocusedOutlineStyle(color: colors.primary, borderRadius: borderRadius.md),
     sizes: FSizes.inherit(touch: touch),
-    iconStyle: IconThemeData(color: colors.foreground, size: typography.lg.fontSize),
+    iconStyle: IconThemeData(color: colors.foreground, size: typography.body.lg.fontSize),
     tappableStyle: FTappableStyle(),
     borderRadius: const FBorderRadius(),
     borderWidth: 1,

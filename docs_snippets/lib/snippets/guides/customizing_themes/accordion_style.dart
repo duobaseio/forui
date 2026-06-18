@@ -13,7 +13,7 @@ FAccordionStyle accordionStyle({
 }) => FAccordionStyle(
   titleTextStyle: FVariants.from(
     // This text style is applied when the accordion is NOT hovered OR pressed.
-    typography.sm.copyWith(fontWeight: .w500, color: colors.foreground),
+    typography.display.sm.copyWith(fontWeight: .w500, color: colors.foreground),
     variants: {
       // This text style is applied when the accordion is hovered OR pressed.
       // {@highlight}
@@ -21,9 +21,12 @@ FAccordionStyle accordionStyle({
       // {@endhighlight}
     },
   ),
-  childTextStyle: typography.sm.copyWith(color: colors.foreground),
+  childTextStyle: typography.body.sm.copyWith(color: colors.foreground),
   iconStyle: .all(
-    IconThemeData(color: colors.mutedForeground, size: touch ? typography.lg.fontSize : typography.md.fontSize),
+    IconThemeData(
+      color: colors.mutedForeground,
+      size: touch ? typography.display.lg.fontSize : typography.display.md.fontSize,
+    ),
   ),
   focusedOutlineStyle: style.focusedOutlineStyle,
   dividerStyle: FDividerStyle(color: colors.border, padding: .zero),

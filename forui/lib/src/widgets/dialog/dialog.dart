@@ -535,7 +535,7 @@ class _FDialogState extends State<FDialog> {
         context: context,
         child: Align(
           child: DefaultTextStyle(
-            style: context.theme.typography.md.copyWith(color: theme.colors.foreground),
+            style: context.theme.typography.body.md.copyWith(color: theme.colors.foreground),
             child: Semantics(
               scopesRoute: true,
               explicitChildNodes: true,
@@ -631,8 +631,8 @@ extension type FDialogContentStyles(
     required bool touch,
   }) {
     if (touch) {
-      final title = typography.md.copyWith(fontWeight: .w600, color: colors.foreground, height: 1.25);
-      final body = typography.xs.copyWith(color: colors.mutedForeground);
+      final title = typography.display.md.copyWith(fontWeight: .w600, color: colors.foreground, height: 1.25);
+      final body = typography.body.xs.copyWith(color: colors.mutedForeground);
 
       final horizontal = FDialogContentStyle(titleTextStyle: title, bodyTextStyle: body);
 
@@ -646,8 +646,8 @@ extension type FDialogContentStyles(
         ),
       );
     } else {
-      final title = typography.md.copyWith(fontWeight: .w600, color: colors.foreground, height: 1.25);
-      final body = typography.sm.copyWith(color: colors.mutedForeground);
+      final title = typography.display.md.copyWith(fontWeight: .w600, color: colors.foreground, height: 1.25);
+      final body = typography.body.sm.copyWith(color: colors.mutedForeground);
 
       final horizontal = FDialogContentStyle(
         titleTextStyle: title,

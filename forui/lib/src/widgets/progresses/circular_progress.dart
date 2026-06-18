@@ -12,17 +12,23 @@ import 'package:forui/src/theme/variant.dart';
 @Variants('FCircularProgressSize', {
   'xs': (
     1,
-    'The extra small circular progress size. Defaults to `typography.xs.fontSize`:\n* Desktop — 12.\n* Touch — 14.',
+    'The extra small circular progress size. Defaults to `typography.body.xs.fontSize`:\n* Desktop — 12.\n* Touch — 14.',
   ),
-  'sm': (1, 'The small circular progress size. Defaults to `typography.sm.fontSize`:\n* Desktop — 14.\n* Touch — 16.'),
+  'sm': (
+    1,
+    'The small circular progress size. Defaults to `typography.body.sm.fontSize`:\n* Desktop — 14.\n* Touch — 16.',
+  ),
   'md': (
     1,
-    'The medium (default) circular progress size. Defaults to `typography.md.fontSize`:\n* Desktop — 16.\n* Touch — 18.',
+    'The medium (default) circular progress size. Defaults to `typography.body.md.fontSize`:\n* Desktop — 16.\n* Touch — 18.',
   ),
-  'lg': (1, 'The large circular progress size. Defaults to `typography.lg.fontSize`:\n* Desktop — 18.\n* Touch — 20.'),
+  'lg': (
+    1,
+    'The large circular progress size. Defaults to `typography.body.lg.fontSize`:\n* Desktop — 18.\n* Touch — 20.',
+  ),
   'xl': (
     1,
-    'The extra large circular progress size. Defaults to `typography.xl.fontSize`:\n* Desktop — 20.\n* Touch — 22.',
+    'The extra large circular progress size. Defaults to `typography.body.xl.fontSize`:\n* Desktop — 20.\n* Touch — 22.',
   ),
 })
 part 'circular_progress.design.dart';
@@ -225,16 +231,16 @@ extension type FCircularProgressSizeStyles(
     > {
   /// Creates [FCircularProgressSizeStyles] that inherit their properties.
   factory FCircularProgressSizeStyles.inherit({required FColors colors, required FTypography typography}) {
-    final md = FCircularProgressStyle.inherit(colors: colors, iconSize: typography.md.fontSize!);
+    final md = FCircularProgressStyle.inherit(colors: colors, iconSize: typography.body.md.fontSize!);
     return FCircularProgressSizeStyles(
       FVariants(
         md,
         variants: {
-          [.xs]: FCircularProgressStyle.inherit(colors: colors, iconSize: typography.xs.fontSize!),
-          [.sm]: FCircularProgressStyle.inherit(colors: colors, iconSize: typography.sm.fontSize!),
+          [.xs]: FCircularProgressStyle.inherit(colors: colors, iconSize: typography.body.xs.fontSize!),
+          [.sm]: FCircularProgressStyle.inherit(colors: colors, iconSize: typography.body.sm.fontSize!),
           [.md]: md,
-          [.lg]: FCircularProgressStyle.inherit(colors: colors, iconSize: typography.lg.fontSize!),
-          [.xl]: FCircularProgressStyle.inherit(colors: colors, iconSize: typography.xl.fontSize!),
+          [.lg]: FCircularProgressStyle.inherit(colors: colors, iconSize: typography.body.lg.fontSize!),
+          [.xl]: FCircularProgressStyle.inherit(colors: colors, iconSize: typography.body.xl.fontSize!),
         },
       ),
     );

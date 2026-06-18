@@ -570,7 +570,7 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
                  .delta(
                    contentStyle: .delta(
                      prefixIconStyle: FVariants.from(
-                       IconThemeData(color: colors.foreground, size: typography.md.fontSize),
+                       IconThemeData(color: colors.foreground, size: typography.body.md.fontSize),
                        variants: {
                          [.disabled]: .delta(color: colors.disable(colors.foreground)),
                        },
@@ -578,7 +578,7 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
                    ),
                    rawContentStyle: .delta(
                      prefixIconStyle: FVariants.from(
-                       IconThemeData(color: colors.foreground, size: typography.md.fontSize),
+                       IconThemeData(color: colors.foreground, size: typography.body.md.fontSize),
                        variants: {
                          [.disabled]: .delta(color: colors.disable(colors.foreground)),
                        },

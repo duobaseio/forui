@@ -208,7 +208,7 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
           ),
           SizedBox(height: style.spacing),
           DefaultTextStyle(
-            style: theme.typography.md.copyWith(color: theme.colors.foreground),
+            style: theme.typography.body.md.copyWith(color: theme.colors.foreground),
             child: widget.expands
                 ? Expanded(
                     child: TabBarView(

@@ -358,7 +358,7 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
 
     return FSidebarItemStyle(
       textStyle: .from(
-        typography.sm.copyWith(color: colors.foreground, overflow: .ellipsis, height: 1),
+        typography.body.sm.copyWith(color: colors.foreground, overflow: .ellipsis, height: 1),
         variants: {
           [.disabled]: .delta(color: colors.mutedForeground),
         },

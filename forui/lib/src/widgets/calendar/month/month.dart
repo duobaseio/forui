@@ -94,7 +94,7 @@ extension type FCalendarMonthStyles(
     required FStyle style,
   }) {
     final base = FCalendarMonthStyle(
-      textStyle: typography.sm.copyWith(color: colors.foreground),
+      textStyle: typography.body.sm.copyWith(color: colors.foreground),
       decoration: ShapeDecoration(shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md)),
     );
 

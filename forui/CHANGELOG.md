@@ -1,5 +1,6 @@
 ## 0.23.0 (Next)
 
+This update introduces the long-awaited context menu, a revamped calendar, and support for multiple typefaces.
 
 
 ### `FCalendar` (New)
@@ -99,6 +100,20 @@ and an API similar to other widgets.
 
 * Fix `FSwitch` throwing when a `focusNode` is provided.
 * Fix `FSwitch` registering two focus nodes, causing it to be a duplicate stop when tabbing through.
+
+
+### `FTypography` & `FTypeface`
+
+We've added support for multiple typefaces by introducing a `FTypeface` that contains a text scale and changing 
+`FTypography` to contain a `display` and `body` typeface.
+
+* Add `FTypeface`, a single typeface's text scale.
+* Add `FTypeface.fontFamilyFallback`.
+* Add `FTypography.body` and `FTypography.display` typefaces.
+
+* **Breaking** Split `FTypography` into two `FTypeface`s. Replace `typography.<token>` with `typography.body.<token>` 
+  (e.g. `typography.sm` becomes `typography.body.sm`).
+* **Breaking** Rename `FTypographyExtension` to `FScalableExtension`.
 
 
 ## 0.22.3

@@ -102,8 +102,8 @@ class BlurredModalSheetPage extends Example {
           crossAxisAlignment: .start,
           spacing: 8,
           children: [
-            Text('Account Settings', style: context.theme.typography.lg.copyWith(fontWeight: .w600)),
-            Text('Manage your preferences and profile details.', style: context.theme.typography.sm),
+            Text('Account Settings', style: context.theme.typography.display.lg.copyWith(fontWeight: .w600)),
+            Text('Manage your preferences and profile details.', style: context.theme.typography.body.sm),
             const FDivider(),
             Row(
               spacing: 8,
@@ -112,8 +112,8 @@ class BlurredModalSheetPage extends Example {
                 Column(
                   crossAxisAlignment: .start,
                   children: [
-                    Text('John Renalo', style: context.theme.typography.sm.copyWith(fontWeight: .w600)),
-                    Text('john@doe.com', style: context.theme.typography.xs),
+                    Text('John Renalo', style: context.theme.typography.body.sm.copyWith(fontWeight: .w600)),
+                    Text('john@doe.com', style: context.theme.typography.body.xs),
                   ],
                 ),
               ],
@@ -149,7 +149,7 @@ class Form extends StatelessWidget {
           children: [
             Text(
               'Account',
-              style: context.theme.typography.xl2.copyWith(
+              style: context.theme.typography.display.xl2.copyWith(
                 fontWeight: .w600,
                 color: context.theme.colors.foreground,
                 height: 1.5,
@@ -157,7 +157,7 @@ class Form extends StatelessWidget {
             ),
             Text(
               'Make changes to your account here. Click save when you are done.',
-              style: context.theme.typography.sm.copyWith(color: context.theme.colors.mutedForeground),
+              style: context.theme.typography.body.sm.copyWith(color: context.theme.colors.mutedForeground),
             ),
             const SizedBox(height: 12),
             SizedBox(

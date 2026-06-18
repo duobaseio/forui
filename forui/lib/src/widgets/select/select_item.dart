@@ -266,7 +266,7 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
     required bool touch,
   }) => .new(
     labelTextStyle: FVariants.from(
-      typography.xs.copyWith(color: colors.mutedForeground),
+      typography.body.xs.copyWith(color: colors.mutedForeground),
       variants: {
         [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
       },
@@ -434,17 +434,25 @@ abstract class _State<W extends FSelectItem<T>, T> extends State<W> {
       content.autofocus(widget.value) || content.autofocusFirst,
       (previous, current) {
         final added = current.difference(previous);
-        final removed = previous.difference(current);
 
         if (added.contains(FTappableVariant.hovered) ||
             (!previous.contains(FTappableVariant.hovered) && added.contains(FTappableVariant.pressed))) {
           _focus.requestFocus();
-        } else if (removed.contains(FTappableVariant.hovered) ||
-            (!current.contains(FTappableVariant.hovered) && removed.contains(FTappableVariant.pressed))) {
+        } else if (previous.difference(current).contains(FTappableVariant.hovered)) {
+          // Only unfocus on hover exit. Releasing a press retains focus so the highlight stays on the last tapped item
+          // rather than reverting to the first focused item, https://github.com/duobaseio/forui/issues/1055.
           _focus.unfocus();
         }
       },
-      () => onPress(widget.value),
+      () {
+        // The autofocus mechanism only focuses an item when no other item is focused. When another item already holds
+        // focus, it cannot move to the tapped item, so move it explicitly. This keeps the highlight on the last tapped
+        // item instead of the first, https://github.com/duobaseio/forui/issues/1055.
+        if (_focus.enclosingScope?.focusedChild != null) {
+          _focus.requestFocus();
+        }
+        onPress(widget.value);
+      },
     );
   }
 

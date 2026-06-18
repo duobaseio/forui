@@ -55,7 +55,7 @@ class BlurredPopoverMenuPage extends Example {
       Column(
         crossAxisAlignment: .start,
         children: [
-          Text('Layer Properties', style: context.theme.typography.xl.copyWith(fontWeight: .bold)),
+          Text('Layer Properties', style: context.theme.typography.display.xl.copyWith(fontWeight: .bold)),
           const SizedBox(height: 20),
           const FTextField(
             control: .managed(initial: TextEditingValue(text: 'Header Component')),

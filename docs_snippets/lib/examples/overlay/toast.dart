@@ -37,7 +37,7 @@ class ToastPage extends Example {
                   contentStyle: .delta(
                     padding: const .value(.symmetric(horizontal: 12, vertical: 7.5)),
                     textStyle: FVariants.all(
-                      context.theme.typography.xs.copyWith(color: context.theme.colors.primaryForeground),
+                      context.theme.typography.body.xs.copyWith(color: context.theme.colors.primaryForeground),
                     ),
                   ),
                 ),
@@ -136,7 +136,7 @@ class RawToastPage extends Example {
           style: .delta(
             contentStyle: .delta(
               titleTextStyle: .value(
-                context.theme.typography.sm.copyWith(color: context.theme.colors.primary, fontWeight: .w600),
+                context.theme.typography.body.sm.copyWith(color: context.theme.colors.primary, fontWeight: .w600),
               ),
             ),
           ),

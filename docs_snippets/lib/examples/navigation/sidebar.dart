@@ -48,7 +48,7 @@ class SidebarPage extends Example {
                     children: [
                       Text(
                         'Dash',
-                        style: context.theme.typography.sm.copyWith(
+                        style: context.theme.typography.body.sm.copyWith(
                           fontWeight: .bold,
                           color: context.theme.colors.foreground,
                         ),
@@ -56,7 +56,7 @@ class SidebarPage extends Example {
                       ),
                       Text(
                         'dash@forui.dev',
-                        style: context.theme.typography.xs.copyWith(color: context.theme.colors.mutedForeground),
+                        style: context.theme.typography.body.xs.copyWith(color: context.theme.colors.mutedForeground),
                         overflow: .ellipsis,
                       ),
                     ],
@@ -199,7 +199,7 @@ class SheetSidebarPage extends Example {
                           children: [
                             Text(
                               'Dash',
-                              style: context.theme.typography.sm.copyWith(
+                              style: context.theme.typography.body.sm.copyWith(
                                 fontWeight: .bold,
                                 color: context.theme.colors.foreground,
                               ),
@@ -207,7 +207,9 @@ class SheetSidebarPage extends Example {
                             ),
                             Text(
                               'dash@forui.dev',
-                              style: context.theme.typography.xs.copyWith(color: context.theme.colors.mutedForeground),
+                              style: context.theme.typography.body.xs.copyWith(
+                                color: context.theme.colors.mutedForeground,
+                              ),
                               overflow: .ellipsis,
                             ),
                           ],

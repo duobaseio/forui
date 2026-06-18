@@ -36,7 +36,7 @@ extension type FTextFieldSizeStyles(
     required bool touch,
   }) {
     final iconStyle = FVariants<FTextFieldVariantConstraint, FTextFieldVariant, IconThemeData, IconThemeDataDelta>.from(
-      IconThemeData(color: colors.mutedForeground, size: typography.sm.fontSize),
+      IconThemeData(color: colors.mutedForeground, size: typography.body.sm.fontSize),
       variants: {
         [.disabled]: .delta(color: colors.disable(colors.mutedForeground)),
       },
@@ -50,7 +50,7 @@ extension type FTextFieldSizeStyles(
       colors: colors,
       style: style,
       labelStyle: FLabelStyles.inherit(style: style).verticalStyle,
-      textStyle: typography.sm,
+      textStyle: typography.body.sm,
       iconStyle: iconStyle,
       buttonStyle: buttonStyle,
       constraints: constraints,
