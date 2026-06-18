@@ -54,6 +54,14 @@ class Example extends HookWidget {
 }
 ```
 
+## Support Forui
+
+If Forui helps you build better apps, please consider supporting it. It only takes a few seconds, and it helps
+other Flutter developers discover the library.
+
+* ⭐ [Star Forui on GitHub](https://github.com/duobaseio/forui)
+* 👍 [Like Forui on pub.dev](https://pub.dev/packages/forui)
+
 ## Documentation
 
 Visit [forui.dev/docs](https://forui.dev/docs) to view the documentation.
