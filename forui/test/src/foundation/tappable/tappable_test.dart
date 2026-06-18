@@ -781,6 +781,49 @@ void main() {
         ]),
       );
     });
+
+    testWidgets('entry unmounted mid-gesture does not crash on cancel', (tester) async {
+      late StateSetter setState;
+      var show = true;
+
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FTappableGroup(
+            child: StatefulBuilder(
+              builder: (_, setter) {
+                setState = setter;
+                return Column(
+                  children: [
+                    if (show)
+                      FTappable(
+                        builder: (_, _, _) => const SizedBox(width: 50, height: 50, child: Text('A')),
+                        onPress: () {},
+                      ),
+                    const SizedBox(width: 50, height: 50, child: Text('keepalive')),
+                  ],
+                );
+              },
+            ),
+          ),
+        ),
+      );
+
+      // Press down on A — the group's recognizer captures A's entry as its current target.
+      final gesture = await tester.startGesture(tester.getCenter(find.text('A')));
+      await tester.pump();
+
+      // Unmount A while the gesture is in progress. The recognizer (owned by the still-alive group) keeps its
+      // reference to A's now-defunct entry.
+      setState(() => show = false);
+      await tester.pump();
+
+      // Cancelling routes a PointerCancelEvent to the recognizer, which calls entry.exit() (FTappable._cancel) on the
+      // defunct State.
+      await gesture.cancel();
+      await tester.pumpAndSettle();
+
+      expect(tester.takeException(), null);
+    });
   });
 
   testWidgets('returns focused state on primary focus', (tester) async {

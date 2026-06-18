@@ -719,6 +719,13 @@ class _FTappableState<T extends FTappable> extends State<T> {
 
   Future<void> _cancel() async {
     ++_monotonic;
+    // Check if it's mounted due to a non-deterministic race condition, https://github.com/duobaseio/forui/issues/482.
+    // A grouped tappable can be unmounted mid-gesture while the group's recognizer still holds its entry and calls
+    // exit (this).
+    if (!mounted) {
+      return;
+    }
+
     if (widget._animate(_buttons)) {
       onPressEnd();
     }
