@@ -1,4 +1,4 @@
-## 0.23.0 (Next)
+## 0.23.0
 
 This update introduces the long-awaited context menu, a revamped calendar, and support for multiple typefaces.
 

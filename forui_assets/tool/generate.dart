@@ -39,7 +39,7 @@ const directional = {
 };
 
 // UPDATE BEFORE EACH RELEASE.
-const _url = 'https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.16.0/icons';
+const _url = 'https://raw.githubusercontent.com/lucide-icons/lucide/refs/tags/1.21.0/icons';
 
 final _pattern = RegExp(r'static const (\w+) = IconData\((\d+),');
 

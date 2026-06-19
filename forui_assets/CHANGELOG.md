@@ -1,3 +1,7 @@
+## 0.23.0
+* Update icons to Lucide 1.21.0.
+
+
 ## 0.22.1
 
 Relax SDK constraints to allow Flutter and Dart beta/pre-release versions.

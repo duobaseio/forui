@@ -1,4 +1,4 @@
-## 0.23.0 (Next)
+## 0.23.0
 
 ### `FCalendar`
 * Add `useFDateSelectionController(...)`.
