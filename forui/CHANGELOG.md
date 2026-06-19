@@ -20,6 +20,10 @@ and an API similar to other widgets.
 * Add support for styling the label in the `focused` state.
 
 
+### `FCollapsible`
+* Add `FCollapsible.axis` to collapse the child horizontally.
+
+
 ### `FContextMenu` (New)
 * Add `FContextMenu`.
 

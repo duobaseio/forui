@@ -10,6 +10,9 @@ import 'package:flutter/widgets.dart';
 /// See:
 /// * https://forui.dev/docs/widgets/foundation/collapsible for working examples.
 class FCollapsible extends StatelessWidget {
+  /// The axis along which the child collapses. Defaults to [Axis.vertical].
+  final Axis axis;
+
   /// The value of the collapsible.
   final double value;
 
@@ -17,52 +20,64 @@ class FCollapsible extends StatelessWidget {
   final Widget child;
 
   /// Creates a [FCollapsible].
-  const FCollapsible({required this.value, required this.child, super.key});
+  const FCollapsible({required this.value, required this.child, this.axis = .vertical, super.key});
 
   // We use a combination of a custom render box & clip rect to avoid visual oddities. This is caused by
   // RenderPaddings (created by Paddings in the child) shrinking the constraints by the given padding, causing the
   // child to layout at a smaller size while the amount of padding remains the same.
   @override
   Widget build(BuildContext context) => _Expandable(
+    axis: axis,
     value: value,
-    child: ClipRect(clipper: _Clipper(value), child: child),
+    child: ClipRect(clipper: _Clipper(value, axis), child: child),
   );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(DoubleProperty('value', value));
+    properties
+      ..add(EnumProperty('axis', axis))
+      ..add(DoubleProperty('value', value));
   }
 }
 
 class _Expandable extends SingleChildRenderObjectWidget {
+  final Axis axis;
   final double value;
 
-  const _Expandable({required this.value, required super.child});
+  const _Expandable({required this.axis, required this.value, required super.child});
 
   @override
-  RenderObject createRenderObject(BuildContext _) => _RenderExpandable(value);
+  RenderObject createRenderObject(BuildContext _) => _RenderExpandable(value, axis);
 
   @override
-  void updateRenderObject(BuildContext context, _RenderExpandable renderObject) => renderObject..value = value;
+  void updateRenderObject(BuildContext context, _RenderExpandable renderObject) => renderObject
+    ..axis = axis
+    ..value = value;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(PercentProperty('value', value));
+    properties
+      ..add(EnumProperty('axis', axis))
+      ..add(PercentProperty('value', value));
   }
 }
 
 class _RenderExpandable extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
   double _value;
+  Axis _axis;
 
-  _RenderExpandable(this._value);
+  _RenderExpandable(this._value, this._axis);
 
   @override
   void performLayout() {
     if (child case final child?) {
       child.layout(constraints.normalize(), parentUsesSize: true);
-      size = Size(child.size.width, child.size.height * _value);
+      size = switch (_axis) {
+        .vertical => Size(child.size.width, child.size.height * _value),
+        .horizontal => Size(child.size.width * _value, child.size.height),
+      };
     } else {
       size = constraints.smallest;
     }
@@ -85,6 +100,17 @@ class _RenderExpandable extends RenderBox with RenderObjectWithChildMixin<Render
     return false;
   }
 
+  Axis get axis => _axis;
+
+  set axis(Axis axis) {
+    if (_axis == axis) {
+      return;
+    }
+
+    _axis = axis;
+    markNeedsLayout();
+  }
+
   double get value => _value;
 
   set value(double value) {
@@ -99,18 +125,24 @@ class _RenderExpandable extends RenderBox with RenderObjectWithChildMixin<Render
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
-    properties.add(PercentProperty('value', value));
+    properties
+      ..add(EnumProperty('axis', axis))
+      ..add(PercentProperty('value', value));
   }
 }
 
 class _Clipper extends CustomClipper<Rect> {
   final double percentage;
+  final Axis axis;
 
-  _Clipper(this.percentage);
-
-  @override
-  Rect getClip(Size size) => Offset.zero & Size(size.width, size.height * percentage);
+  _Clipper(this.percentage, this.axis);
 
   @override
-  bool shouldReclip(covariant _Clipper oldClipper) => oldClipper.percentage != percentage;
+  Rect getClip(Size size) => switch (axis) {
+    .vertical => Offset.zero & Size(size.width, size.height * percentage),
+    .horizontal => Offset.zero & Size(size.width * percentage, size.height),
+  };
+
+  @override
+  bool shouldReclip(covariant _Clipper oldClipper) => oldClipper.percentage != percentage || oldClipper.axis != axis;
 }
