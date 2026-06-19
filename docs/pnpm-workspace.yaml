@@ -1,3 +1,4 @@
+minimumReleaseAge: 4320 # 3 days
 allowBuilds:
   esbuild: true
   sharp: true
