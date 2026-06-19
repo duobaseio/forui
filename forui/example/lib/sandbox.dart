@@ -1,20 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
-const _alignments = <String, FToastAlignment?>{
-  'default': null,
-  'topStart': FToastAlignment.topStart,
-  'topCenter': FToastAlignment.topCenter,
-  'topEnd': FToastAlignment.topEnd,
-  'topLeft': FToastAlignment.topLeft,
-  'topRight': FToastAlignment.topRight,
-  'bottomStart': FToastAlignment.bottomStart,
-  'bottomCenter': FToastAlignment.bottomCenter,
-  'bottomEnd': FToastAlignment.bottomEnd,
-  'bottomLeft': FToastAlignment.bottomLeft,
-  'bottomRight': FToastAlignment.bottomRight,
-};
-
 class Sandbox extends StatefulWidget {
   const Sandbox({super.key});
 
