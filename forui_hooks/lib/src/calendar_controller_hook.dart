@@ -131,8 +131,7 @@ class _CalendarControllerHook<C extends FCalendarController> extends Hook<C> {
   }
 }
 
-class _CalendarControllerHookState<C extends FCalendarController>
-    extends HookState<C, _CalendarControllerHook<C>> {
+class _CalendarControllerHookState<C extends FCalendarController> extends HookState<C, _CalendarControllerHook<C>> {
   late final C _controller;
 
   @override

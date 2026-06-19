@@ -24,6 +24,7 @@
 
 <p align="center">
   Forui is a Flutter UI library that provides a set of beautifully designed, minimalistic widgets.
+  Designs are heavily inspired by shadcn/ui and are fully customizable.
 </p>
 
 <br />
@@ -37,10 +38,18 @@
 ## Why Choose Forui?
 
 * 🎨 Over 40+ beautifully crafted widgets.
-* ⚡ Bundled [CLI](https://forui.dev/docs/concepts/themes#themes) to generate themes & styling boilerplate.
+* ⚡ Bundled [CLI](https://forui.dev/docs/concepts/themes) to generate themes & styling boilerplate.
 * ✅ [Well-tested](https://app.codecov.io/gh/duobaseio/forui).
 * 🌍 I10n support.
 * 🪝 First-class [Flutter Hooks](https://pub.dev/packages/flutter_hooks) integration via [`forui_hooks`](https://pub.dev/packages/forui_hooks).
+
+## Support Forui
+
+If Forui helps you build better apps, please consider supporting it. It only takes a few seconds, and it helps
+other Flutter developers discover the library.
+
+* ⭐ [Star Forui on GitHub](https://github.com/duobaseio/forui)
+* 👍 [Like Forui on pub.dev](https://pub.dev/packages/forui)
 
 ## Documentation
 
