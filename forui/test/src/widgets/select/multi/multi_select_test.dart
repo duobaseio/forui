@@ -454,6 +454,33 @@ void main() {
 
       debugDefaultTargetPlatformOverride = null;
     });
+
+    testWidgets('highlight follows the last tapped item on touch', (tester) async {
+      debugDefaultTargetPlatformOverride = .iOS;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          alignment: .topCenter,
+          child: FMultiSelect<String>(key: key, items: const {'A': 'A', 'B': 'B', 'C': 'C'}),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      // Tapping the first item highlights it.
+      await tester.tap(find.text('A'));
+      await tester.pumpAndSettle();
+      expect(Focus.of(tester.element(find.text('A').last)).hasFocus, true);
+
+      // Tapping a second item moves the highlight to it instead of leaving it on the first.
+      await tester.tap(find.text('B'));
+      await tester.pumpAndSettle();
+      expect(Focus.of(tester.element(find.text('A').last)).hasFocus, false);
+      expect(Focus.of(tester.element(find.text('B').last)).hasFocus, true);
+
+      debugDefaultTargetPlatformOverride = null;
+    });
   });
 
   group('design system', skip: !Platform.isMacOS, () {

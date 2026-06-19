@@ -90,6 +90,8 @@ and an API similar to other widgets.
 ### `FSelect` & `FMultiSelect`
 * Add support for styling the label in the `focused` state.
 
+* Fix `FMultiSelect` retaining the highlight on the first item instead of the last tapped item.
+
 
 ### `FSelectMenuTile`
 * Add support for styling the label in the `focused` state.

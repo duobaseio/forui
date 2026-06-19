@@ -434,20 +434,20 @@ abstract class _State<W extends FSelectItem<T>, T> extends State<W> {
       content.autofocus(widget.value) || content.autofocusFirst,
       (previous, current) {
         final added = current.difference(previous);
-
         if (added.contains(FTappableVariant.hovered) ||
             (!previous.contains(FTappableVariant.hovered) && added.contains(FTappableVariant.pressed))) {
           _focus.requestFocus();
         } else if (previous.difference(current).contains(FTappableVariant.hovered)) {
           // Only unfocus on hover exit. Releasing a press retains focus so the highlight stays on the last tapped item
-          // rather than reverting to the first focused item, https://github.com/duobaseio/forui/issues/1055.
+          // on touch devices.
           _focus.unfocus();
         }
       },
       () {
-        // The autofocus mechanism only focuses an item when no other item is focused. When another item already holds
-        // focus, it cannot move to the tapped item, so move it explicitly. This keeps the highlight on the last tapped
-        // item instead of the first, https://github.com/duobaseio/forui/issues/1055.
+        // Autofocus cannot move to tapped item when another item is focused. This keeps highlight on last tapped item
+        // on touch devices.
+        //
+        // This is done here instead of above in onVariantChange since that is debounced.
         if (_focus.enclosingScope?.focusedChild != null) {
           _focus.requestFocus();
         }
