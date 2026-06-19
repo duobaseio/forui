@@ -102,6 +102,10 @@ and an API similar to other widgets.
 * Fix `FSwitch` registering two focus nodes, causing it to be a duplicate stop when tabbing through.
 
 
+### `FTappable` & `FTappableGroup`
+* Fix `FTappable` throwing a null check error when unmounted mid-gesture inside an `FTappableGroup`.
+
+
 ### `FTypography` & `FTypeface`
 
 We've added support for multiple typefaces by introducing a `FTypeface` that contains a text scale and changing 
