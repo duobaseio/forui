@@ -4,17 +4,6 @@ import 'package:forui/src/create/codec.dart';
 
 void main() {
   group('codec', () {
-    const preset = Preset(
-      base: .neutral,
-      primary: .blue,
-      display: .geist,
-      body: .inter,
-      icon: .lucide,
-      radius: .medium,
-    );
-
-    test('encode produces codes in order', () => expect(preset.encode(), 'aaabbc'));
-
     test('decode produces the matching preset', () {
       final decoded = Preset.decode('aaabbc');
 
@@ -26,7 +15,9 @@ void main() {
       expect(decoded.radius, Radius.medium);
     });
 
-    for (final code in ['aaabbc', 'ggzaed', 'gabrdc']) {
+    test('encode produces codes in order', () => expect(Preset.decode('cdefba').encode(), 'cdefba'));
+
+    for (final code in ['aaabbc', 'ggzaed', 'gabrdc', 'aaAAaa']) {
       test('round-trips $code', () => expect(Preset.decode(code).encode(), code));
     }
 
