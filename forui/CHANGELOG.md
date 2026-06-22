@@ -1,3 +1,11 @@
+## 0.23.1 (next)
+
+### Others
+* Add italic support to the bundled `Inter` font.
+
+* Change the bundled `Inter` font to a variable font.
+
+
 ## 0.23.0
 
 This update introduces the long-awaited context menu, a revamped calendar, and support for multiple typefaces.
