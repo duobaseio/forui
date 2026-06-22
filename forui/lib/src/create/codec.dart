@@ -575,10 +575,7 @@ enum FontFamily implements Code {
     's',
     'JetBrains Mono',
     'A monospaced face tuned for reading code in editors and terminals.',
-    VariableFontFormat(
-      normal: 'JetBrains_Mono/JetBrainsMono.ttf',
-      italic: 'JetBrains_Mono/JetBrainsMono-Italic.ttf',
-    ),
+    VariableFontFormat(normal: 'JetBrains_Mono/JetBrainsMono.ttf', italic: 'JetBrains_Mono/JetBrainsMono-Italic.ttf'),
     .mono,
   ),
   geistMono(
