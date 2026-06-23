@@ -11,22 +11,26 @@ library;
 
 final class Preset {
   final BaseColor base;
-  final PrimaryColor primary;
+  final PrimaryColor? primary;
   final FontFamily display;
   final FontFamily body;
   final IconLibrary icon;
   final Radius radius;
 
   const Preset._({
-    required this.base,
-    required this.primary,
-    required this.display,
-    required this.body,
-    required this.icon,
-    required this.radius,
+    this.base = .neutral,
+    this.primary,
+    this.display = .inter,
+    this.body = .inter,
+    this.icon = .lucide,
+    this.radius = .medium,
   });
 
-  factory Preset.decode(String encoded) {
+  factory Preset.decode(String? encoded) {
+    if (encoded == null) {
+      return const ._();
+    }
+
     if (encoded.length != 6) {
       throw FormatException('A preset must be exactly 6 codes long.', encoded, encoded.length);
     }
@@ -44,7 +48,7 @@ final class Preset {
 
     return ._(
       base: decode(BaseColor.values, encoded, 0),
-      primary: decode(PrimaryColor.values, encoded, 1),
+      primary: encoded[1] == '-' ? null : decode(PrimaryColor.values, encoded, 1),
       display: decode(FontFamily.values, encoded, 2),
       body: decode(FontFamily.values, encoded, 3),
       icon: decode(IconLibrary.values, encoded, 4),
@@ -52,7 +56,7 @@ final class Preset {
     );
   }
 
-  String encode() => '${base.code}${primary.code}${display.code}${body.code}${icon.code}${radius.code}';
+  String encode() => '${base.code}${primary?.code ?? '-'}${display.code}${body.code}${icon.code}${radius.code}';
 }
 
 abstract interface class Code {
