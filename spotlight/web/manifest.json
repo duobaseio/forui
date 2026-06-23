@@ -1,11 +1,11 @@
 {
-    "name": "demo",
-    "short_name": "demo",
+    "name": "Forui Widget Spotlight",
+    "short_name": "spotlight",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "description": "An internal playground app for showcasing Forui widgets.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
