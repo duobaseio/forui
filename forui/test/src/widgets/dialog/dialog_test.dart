@@ -180,6 +180,55 @@ void main() {
         expect(const FDialog.raw(builder: _emptyBuilder).resizeToAvoidInsets, true);
       });
     });
+
+    group('content alignment', () {
+      for (final direction in Axis.values) {
+        for (final (crossAxisAlignment, textAlign) in [
+          (CrossAxisAlignment.start, TextAlign.start),
+          (CrossAxisAlignment.center, TextAlign.center),
+          (CrossAxisAlignment.end, TextAlign.end),
+        ]) {
+          testWidgets('$direction $crossAxisAlignment / $textAlign flows from style', (tester) async {
+            await tester.pumpWidget(
+              TestScaffold(
+                child: FDialog(
+                  direction: direction,
+                  style: .delta(
+                    contentStyle: .delta([
+                      .all(
+                        .delta(
+                          crossAxisAlignment: crossAxisAlignment,
+                          titleTextAlign: textAlign,
+                          bodyTextAlign: textAlign,
+                        ),
+                      ),
+                    ]),
+                  ),
+                  title: const Text('Title'),
+                  body: const Text('Body'),
+                  actions: [FButton(onPress: () {}, child: const Text('OK'))],
+                ),
+              ),
+            );
+
+            final column = tester.widget<Column>(
+              find.ancestor(of: find.text('Title'), matching: find.byType(Column)).first,
+            );
+            expect(column.crossAxisAlignment, crossAxisAlignment);
+
+            final title = tester.widget<DefaultTextStyle>(
+              find.ancestor(of: find.text('Title'), matching: find.byType(DefaultTextStyle)).first,
+            );
+            expect(title.textAlign, textAlign);
+
+            final body = tester.widget<DefaultTextStyle>(
+              find.ancestor(of: find.text('Body'), matching: find.byType(DefaultTextStyle)).first,
+            );
+            expect(body.textAlign, textAlign);
+          });
+        }
+      }
+    });
   });
 }
 

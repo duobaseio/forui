@@ -1,3 +1,11 @@
+## 0.23.1
+
+### `FDialog`
+* Add `FDialogContentStyle.crossAxisAlignment`.
+* Add `FDialogContentStyle.titleTextAlign`.
+* Add `FDialogContentStyle.bodyTextAlign`.
+
+
 ## 0.23.0
 
 This update introduces the long-awaited context menu, a revamped calendar, and support for multiple typefaces.

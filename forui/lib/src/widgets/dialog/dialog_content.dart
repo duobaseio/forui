@@ -14,24 +14,18 @@ sealed class Content extends StatelessWidget {
   final FDialogContentStyle style;
   final bool slideableActions;
   final Future<void> Function() slidePressHapticFeedback;
-  final CrossAxisAlignment alignment;
   final Widget? image;
   final Widget? title;
-  final TextAlign titleTextAlign;
   final Widget? body;
-  final TextAlign bodyTextAlign;
   final List<Widget> actions;
 
   const Content({
     required this.style,
     required this.slideableActions,
     required this.slidePressHapticFeedback,
-    required this.alignment,
     required this.image,
     required this.title,
-    required this.titleTextAlign,
     required this.body,
-    required this.bodyTextAlign,
     required this.actions,
     super.key,
   });
@@ -41,7 +35,7 @@ sealed class Content extends StatelessWidget {
     padding: style.padding,
     child: Column(
       mainAxisSize: .min,
-      crossAxisAlignment: alignment,
+      crossAxisAlignment: style.crossAxisAlignment,
       children: [
         ?image,
         if (image != null && (title != null || body != null)) SizedBox(height: style.imageSpacing),
@@ -50,7 +44,7 @@ sealed class Content extends StatelessWidget {
             padding: style.titlePadding,
             child: Semantics(
               container: true,
-              child: DefaultTextStyle.merge(textAlign: titleTextAlign, style: style.titleTextStyle, child: title),
+              child: DefaultTextStyle.merge(textAlign: style.titleTextAlign, style: style.titleTextStyle, child: title),
             ),
           ),
         if (title != null && body != null) SizedBox(height: style.titleSpacing),
@@ -60,7 +54,7 @@ sealed class Content extends StatelessWidget {
               padding: style.bodyPadding,
               child: Semantics(
                 container: true,
-                child: DefaultTextStyle.merge(textAlign: bodyTextAlign, style: style.bodyTextStyle, child: body),
+                child: DefaultTextStyle.merge(textAlign: style.bodyTextAlign, style: style.bodyTextStyle, child: body),
               ),
             ),
           ),
@@ -83,9 +77,6 @@ sealed class Content extends StatelessWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(FlagProperty('slideableActions', value: slideableActions, ifTrue: 'slideableActions'))
       ..add(ObjectFlagProperty.has('slidePressHapticFeedback', slidePressHapticFeedback))
-      ..add(EnumProperty('alignment', alignment))
-      ..add(EnumProperty('titleTextAlign', titleTextAlign))
-      ..add(EnumProperty('bodyTextAlign', bodyTextAlign))
       ..add(IterableProperty('actions', actions));
   }
 }
@@ -101,7 +92,7 @@ class HorizontalContent extends Content {
     required super.body,
     required super.actions,
     super.key,
-  }) : super(alignment: .start, titleTextAlign: .start, bodyTextAlign: .start);
+  });
 
   @override
   Widget _actions(BuildContext context) => Row(
@@ -122,7 +113,7 @@ class VerticalContent extends Content {
     required super.body,
     required super.actions,
     super.key,
-  }) : super(alignment: .start, titleTextAlign: .start, bodyTextAlign: .start);
+  });
 
   @override
   Widget _actions(BuildContext context) => Column(mainAxisSize: .min, spacing: style.actionSpacing, children: actions);
@@ -134,9 +125,22 @@ class FDialogContentStyle with Diagnosticable, _$FDialogContentStyleFunctions {
   @override
   final TextStyle titleTextStyle;
 
+  /// The title's text alignment. Defaults to [TextAlign.start].
+  @override
+  final TextAlign titleTextAlign;
+
   /// The body's [TextStyle].
   @override
   final TextStyle bodyTextStyle;
+
+  /// The body's text alignment. Defaults to [TextAlign.start].
+  @override
+  final TextAlign bodyTextAlign;
+
+  /// How the content (image, title, body, and actions) is aligned along the cross axis. Defaults to
+  /// [CrossAxisAlignment.start].
+  @override
+  final CrossAxisAlignment crossAxisAlignment;
 
   /// The padding surrounding the content. Defaults to `EdgeInsets.only(left: 16, right: 16, top: 18, bottom: 18)`.
   @override
@@ -174,6 +178,9 @@ class FDialogContentStyle with Diagnosticable, _$FDialogContentStyleFunctions {
   FDialogContentStyle({
     required this.titleTextStyle,
     required this.bodyTextStyle,
+    this.titleTextAlign = .start,
+    this.bodyTextAlign = .start,
+    this.crossAxisAlignment = .start,
     this.padding = const .only(left: 16, right: 16, top: 18, bottom: 18),
     this.titlePadding = const .symmetric(horizontal: 8),
     this.bodyPadding = const .symmetric(horizontal: 8),
