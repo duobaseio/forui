@@ -4,12 +4,12 @@ environment:
   flutter: ">=3.44.0-0"
 workspace:
   - create
-  - demo
   - docs_snippets
   - forui
   - forui_assets
   - forui_hooks
   - forui_internal_gen
+  - spotlight
 
 dev_dependencies:
   flint: ^2.15.0
