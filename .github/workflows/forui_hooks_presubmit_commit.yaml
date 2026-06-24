@@ -43,7 +43,7 @@ jobs:
           private-key: ${{ secrets.AUTO_MAID_PRIVATE_KEY }}
 
       - if: steps.check-changes.outputs.changes == 'true'
-        uses: actions/checkout@v6
+        uses: actions/checkout@v7
         with:
           token: ${{ steps.generate-token.outputs.token }}
 
