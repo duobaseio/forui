@@ -41,7 +41,7 @@ dependencies:
   yaml_edit: ^2.2.2
 
 dev_dependencies:
-  analyzer: ^10.0.0
+  analyzer: ^14.0.0
   build_runner: ^2.10.4
   code_builder: ^4.10.1
   flutter_test:
