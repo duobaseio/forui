@@ -40,6 +40,10 @@ dependencies:
   cupertino_icons: ^1.0.8
   forui:
   marionette_flutter: ^0.5.0
+  hugeicons: ^1.1.7
+  tabler_icons_plus: ^3.44.0
+  remixicon: ^4.9.3
+  iconoir_flutter: ^7.11.1
 
 dev_dependencies:
   flutter_test:
