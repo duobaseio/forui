@@ -56,7 +56,7 @@ jobs:
             --branch=${{ steps.meta.outputs.branch }}-${{ steps.meta.outputs.sha }}
 
       # Deploy docs
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
         with:
           ref: main
           sparse-checkout: |

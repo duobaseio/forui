@@ -29,7 +29,7 @@ jobs:
         flutter-version: [ 3.x ]
 
     steps:
-      - uses: actions/checkout@v6
+      - uses: actions/checkout@v7
       - uses: subosito/flutter-action@v2.23.0
       - run: flutter pub get
       - run: dart run build_runner build
