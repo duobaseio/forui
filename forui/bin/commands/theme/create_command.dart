@@ -1,11 +1,9 @@
 import 'dart:io';
 
-import 'package:forui/src/create/codec.dart';
-
 import '../../args/command.dart';
-import '../../args/prompts.dart';
 import '../../configuration.dart';
 import '../../preset/create.dart';
+import '../../preset/wizard.dart';
 
 class ThemeCreateCommand extends ForuiCommand {
   @override
@@ -62,31 +60,6 @@ class ThemeCreateCommand extends ForuiCommand {
       exit(1);
     }
 
-    final base = pick<BaseColor>('Base color:', {'': BaseColor.values.named}, defaultValue: .neutral);
-    final primary = pick<PrimaryColor?>('Primary color:', {
-      '': {'None': null, ...PrimaryColor.values.named},
-    }, defaultValue: null);
-
-    final fonts = {
-      'Sans': FontFamily.values.where((f) => f.category == .sans).named,
-      'Serif': FontFamily.values.where((f) => f.category == .serif).named,
-      'Mono': FontFamily.values.where((f) => f.category == .mono).named,
-    };
-    final body = pick<FontFamily>('Font:', fonts, defaultValue: .inter);
-    final display = pick<FontFamily>('Heading font:', fonts, defaultValue: body);
-
-    final icon = pick<IconLibrary>('Icon library:', {'': IconLibrary.values.named}, defaultValue: .lucide);
-    final radius = pick<Radius>('Border radius:', {'': Radius.values.named}, defaultValue: .medium);
-
-    final preset = Preset(base: base, primary: primary, display: display, body: body, icon: icon, radius: radius);
-    final encoded = preset.encode();
-
-    stdout
-      ..writeln()
-      ..writeln('Your preset: $encoded')
-      ..writeln('Reuse it with "--preset $encoded" to regenerate this theme, or edit it at https://create.forui.dev.')
-      ..writeln();
-
-    await create(configuration, preset, input: input, force: force, output: output);
+    await create(configuration, wizard(), input: input, force: force, output: output);
   }
 }

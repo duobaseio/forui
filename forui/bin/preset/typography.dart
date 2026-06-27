@@ -45,6 +45,8 @@ Future<void> installTypography(Preset preset, Directory root, {required String d
         if (entry['family'] case final String family) family,
   };
 
+  final additions = <Map<String, Object?>>[];
+
   final client = HttpClient();
   try {
     for (final FontFamily(:name, :format) in {preset.display, preset.body}..remove(FontFamily.inter)) {
@@ -83,20 +85,27 @@ Future<void> installTypography(Preset preset, Directory root, {required String d
       ]);
 
       if (!existing.contains(name)) {
-        editor.appendToList(
-          ['flutter', 'fonts'],
-          {
-            'family': name,
-            'fonts': [
-              for (final (:path, :weight, :italic) in assets)
-                {'asset': '$directory/$path', 'weight': ?weight, if (italic) 'style': 'italic'},
-            ],
-          },
-        );
+        additions.add({
+          'family': name,
+          'fonts': [
+            for (final (:path, :weight, :italic) in assets)
+              {'asset': '$directory/$path', 'weight': ?weight, if (italic) 'style': 'italic'},
+          ],
+        });
       }
     }
   } finally {
     client.close();
+  }
+
+  // Rewrite the whole list as a block node. yaml_edit keeps a list that started empty (`[]`) in flow style, so
+  // appending would emit nasty inline `[{family: ...}]` entries instead of `- family: ...`.
+  if (additions.isNotEmpty) {
+    final entries = [
+      if (editor.at(['flutter', 'fonts']) case YamlList(:final nodes)) ...nodes,
+      ...additions,
+    ];
+    editor.update(['flutter', 'fonts'], wrapAsYamlNode(entries, collectionStyle: .BLOCK));
   }
 
   pubspec.writeAsStringSync(editor.toString());

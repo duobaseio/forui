@@ -8,6 +8,7 @@ import '../../args/prompts.dart';
 import '../../configuration.dart';
 import '../snippet/snippet.dart';
 import '../../preset/create.dart';
+import '../../preset/wizard.dart';
 
 const _placeholderImport = "import 'theme.dart';";
 
@@ -45,7 +46,11 @@ class InitCommand extends ForuiCommand {
       final input = !globalResults!.flag('no-input');
       final force = argResults!.flag('force');
       final template = argResults!['template'] as String;
-      final preset = Preset.decode(argResults!['preset'] as String?);
+      final preset = switch (argResults!['preset'] as String?) {
+        final code? => Preset.decode(code),
+        _ when input => wizard(),
+        _ => const Preset(),
+      };
 
       final config = _configuration(input: input, force: force)..writeAsStringSync(defaults);
       stdout.writeln('${emoji ? '✅' : '[Done]'} Created ${Uri.file(config.absolute.path)}.');
