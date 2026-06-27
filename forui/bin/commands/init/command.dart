@@ -1,8 +1,15 @@
 import 'dart:io';
 
+import 'package:forui/src/create/codec.dart';
+import 'package:yaml/yaml.dart';
+
 import '../../args/command.dart';
+import '../../args/prompts.dart';
 import '../../configuration.dart';
 import '../snippet/snippet.dart';
+import '../../preset/create.dart';
+
+const _placeholderImport = "import 'theme.dart';";
 
 class InitCommand extends ForuiCommand {
   @override
@@ -22,6 +29,7 @@ class InitCommand extends ForuiCommand {
   InitCommand(this.configuration) {
     argParser
       ..addFlag('force', abbr: 'f', help: 'Overwrite existing files if they exist.', negatable: false)
+      ..addOption('preset', abbr: 'p', help: 'A 6-character code for the theme (see create.forui.dev).')
       ..addOption(
         'template',
         abbr: 't',
@@ -32,74 +40,60 @@ class InitCommand extends ForuiCommand {
   }
 
   @override
-  void run() {
-    final template = argResults!['template'] as String;
+  Future<void> run() async {
+    try {
+      final input = !globalResults!.flag('no-input');
+      final force = argResults!.flag('force');
+      final template = argResults!['template'] as String;
+      final preset = Preset.decode(argResults!['preset'] as String?);
 
-    final config = _configuration()..writeAsStringSync(defaults);
-    stdout.writeln('${emoji ? '✅' : '[Done]'} Created ${Uri.file(config.absolute.path)}.');
+      final config = _configuration(input: input, force: force)..writeAsStringSync(defaults);
+      stdout.writeln('${emoji ? '✅' : '[Done]'} Created ${Uri.file(config.absolute.path)}.');
 
-    final main = _main()..writeAsStringSync(formatter.format(snippets['main-$template']!.$2));
-    stdout.writeln('${emoji ? '✅' : '[Done]'} Created ${Uri.file(main.absolute.path)}.');
+      await create(configuration, preset, input: input, force: force, output: configuration.theme);
+
+      _main(template: template, input: input, force: force);
+    } on FormatException catch (e) {
+      stdout.writeln('Invalid preset code: ${e.message}');
+    }
   }
 
-  File _configuration() {
-    final force = argResults!.flag('force');
-
+  File _configuration({required bool input, required bool force}) {
     final yaml = File('${configuration.root.path}/forui.yaml');
     final yml = File('${configuration.root.path}/forui.yml');
 
-    var file = yaml;
     if (force) {
-      return file;
+      return yaml;
     }
 
     if (yaml.existsSync() || yml.existsSync()) {
-      file = yaml.existsSync() ? yaml : yml;
-
-      _prompt(file);
-    }
-
-    return file;
-  }
-
-  File _main() {
-    final force = argResults!.flag('force');
-
-    final file = File('${configuration.root.path}/lib/main.dart');
-    if (force) {
+      final file = yaml.existsSync() ? yaml : yml;
+      confirm(file, input: input);
       return file;
     }
 
-    if (file.existsSync()) {
-      _prompt(
+    return yaml;
+  }
+
+  void _main({required String template, required bool input, required bool force}) {
+    final file = File('${configuration.root.path}/lib/main.dart');
+
+    if (!force && file.existsSync()) {
+      confirm(
         file,
-        'You can generate a main.dart later by running "dart forui snippet create main-basic/main-router". ',
+        input: input,
+        message: 'You can generate a main.dart later by running "dart forui snippet create main-basic/main-router". ',
       );
     }
 
-    return file;
-  }
+    // The package: import for the generated theme.
+    final theme = configuration.theme.endsWith('.dart') ? configuration.theme : '${configuration.theme}/theme.dart';
+    final package = (loadYaml(File('${configuration.root.path}/pubspec.yaml').readAsStringSync()) as YamlMap)['name'];
+    final path = theme.startsWith('lib/') ? theme.substring('lib/'.length) : theme;
 
-  void _prompt(File file, [String message = '']) {
-    final input = !globalResults!.flag('no-input');
-    final uri = Uri.file(file.absolute.path);
+    final main = init[template]!.$2.replaceFirst(_placeholderImport, "import 'package:$package/$path';");
 
-    if (!input) {
-      stdout.writeln('$uri already exists. Skipping... ');
-      exit(0);
-    }
-
-    while (true) {
-      stdout.write('${emoji ? '⚠️' : '[Warning]'} $uri already exists. ${message}Overwrite it? [Y/n] ');
-
-      switch (stdin.readLineSync()) {
-        case 'y' || 'Y' || '':
-          return;
-        case 'n' || 'N':
-          exit(0);
-        default:
-          stdout.writeln('Invalid option. Please enter enter either "y" or "n".');
-      }
-    }
+    file.writeAsStringSync(formatter.format(main));
+    stdout.writeln('${emoji ? '✅' : '[Done]'} Created ${Uri.file(file.absolute.path)}.');
   }
 }

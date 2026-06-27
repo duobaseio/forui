@@ -15,7 +15,7 @@ class Application extends StatelessWidget {
     ///
     /// To create a custom theme:
     /// ```shell
-    /// dart forui theme create [theme template].
+    /// dart forui theme create.
     /// ```
     final theme = const <TargetPlatform>{.android, .iOS, .fuchsia}.contains(defaultTargetPlatform)
         ? FThemes.neutral.dark.touch

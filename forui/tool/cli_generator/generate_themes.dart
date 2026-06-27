@@ -18,7 +18,7 @@ typedef ThemesConstructors = ({
 
 typedef ThemeConstructor = ({String theme, String variant, String colors});
 
-typedef ThemeFragment = ({String theme, String colors, String typography, String style});
+typedef ThemeFragment = ({String theme, String colors, String typography, String style, String icons});
 
 final _colors = p.join(library, 'src', 'theme', 'colors.dart');
 final _icons = p.join(library, 'src', 'theme', 'icons.dart');
@@ -46,6 +46,7 @@ String generateThemes(Map<(String, String?), ThemeFragment> fragments) {
                         literalString(fragment.colors.replaceAll(r'$', r'\$')),
                         literalString(fragment.typography.replaceAll(r'$', r'\$')),
                         literalString(fragment.style.replaceAll(r'$', r'\$')),
+                        literalString(fragment.icons.replaceAll(r'$', r'\$')),
                       ]))
                     .build(),
             ])
@@ -80,6 +81,12 @@ String generateThemes(Map<(String, String?), ThemeFragment> fragments) {
                     ..type = refer('String')
                     ..modifier = FieldModifier.final$)
                   .build(),
+              (FieldBuilder()
+                    ..docs.addAll(['/// The `_icons()` function source.'])
+                    ..name = 'icons'
+                    ..type = refer('String')
+                    ..modifier = FieldModifier.final$)
+                  .build(),
             ])
             ..constructors.add(
               (ConstructorBuilder()
@@ -90,6 +97,7 @@ String generateThemes(Map<(String, String?), ThemeFragment> fragments) {
                       Parameter((p) => p..name = 'this.colors'),
                       Parameter((p) => p..name = 'this.typography'),
                       Parameter((p) => p..name = 'this.style'),
+                      Parameter((p) => p..name = 'this.icons'),
                     ]))
                   .build(),
             ))
@@ -102,12 +110,13 @@ String generateThemes(Map<(String, String?), ThemeFragment> fragments) {
 Map<(String, String?), ThemeFragment> mapThemes(ThemesConstructors themes) {
   final typographyFragments = ConstructorFragment.inline(_typographyConstructor, themes.typography);
   final typeface = typographyFragments['FTypeface']!;
-  final icons = StringBuffer('FIcons(\n');
-  for (final MapEntry(:key, :value) in themes.icons.entries) {
-    icons.writeln('  $key: $value,');
-  }
-  icons.writeln(');');
   final style = ConstructorFragment.inline(_styleConstructor, themes.style).values.single;
+
+  final iconsBuffer = StringBuffer('FIcons _icons() => FIcons(\n');
+  for (final MapEntry(:key, :value) in themes.icons.entries) {
+    iconsBuffer.writeln('  $key: $value,');
+  }
+  iconsBuffer.writeln(');');
 
   final fragments = <(String, String?), ThemeFragment>{};
   for (final MapEntry(:key, value: constructors) in themes.themes.entries) {
@@ -117,7 +126,7 @@ Map<(String, String?), ThemeFragment> mapThemes(ThemesConstructors themes) {
     final styleBuffer = StringBuffer();
 
     for (final constructor in constructors) {
-      final name = '${constructor.theme}${constructor.variant.capitalize()}';
+      final name = '${constructor.variant}Theme';
       final colors = '${constructor.variant}Colors';
 
       themeBuffer.writeln('''
@@ -128,9 +137,9 @@ Map<(String, String?), ThemeFragment> mapThemes(ThemesConstructors themes) {
           final colors = $colors;
           
           final typography = _typography(colors: colors, touch: touch);
-          
-          final icons = $icons
-          
+
+          final icons = _icons();
+
           final style = _style(colors: colors, typography: typography, touch: touch);
 
           return FThemeData(
@@ -269,6 +278,7 @@ class AppStyle extends ThemeExtension<AppStyle> {
       colors: fragmentFormatter.format(colorsBuffer.toString()),
       typography: fragmentFormatter.format(typographyBuffer.toString()),
       style: fragmentFormatter.format(styleBuffer.toString()),
+      icons: fragmentFormatter.format(iconsBuffer.toString()),
     );
   }
 

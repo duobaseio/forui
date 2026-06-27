@@ -1,6 +1,7 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
+
+import 'theme.dart';
 
 void main() {
   runApp(const Application());
@@ -11,15 +12,7 @@ class Application extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /// Try changing this and hot reloading the application.
-    ///
-    /// To create a custom theme:
-    /// ```shell
-    /// dart forui theme create.
-    /// ```
-    final theme = const <TargetPlatform>{.android, .iOS, .fuchsia}.contains(defaultTargetPlatform)
-        ? FThemes.neutral.dark.touch
-        : FThemes.neutral.dark.desktop;
+    final theme = MediaQuery.platformBrightnessOf(context) == .light ? lightTheme : darkTheme;
 
     return MaterialApp.router(
       // TODO: replace with your application's supported locales.

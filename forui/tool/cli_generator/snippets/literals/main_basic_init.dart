@@ -1,6 +1,7 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
+
+import 'theme.dart';
 
 void main() {
   runApp(const Application());
@@ -11,17 +12,9 @@ class Application extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /// Try changing this and hot reloading the application.
-    ///
-    /// To create a custom theme:
-    /// ```shell
-    /// dart forui theme create.
-    /// ```
-    final theme = const <TargetPlatform>{.android, .iOS, .fuchsia}.contains(defaultTargetPlatform)
-        ? FThemes.neutral.dark.touch
-        : FThemes.neutral.dark.desktop;
+    final theme = MediaQuery.platformBrightnessOf(context) == .light ? lightTheme : darkTheme;
 
-    return MaterialApp.router(
+    return MaterialApp(
       // TODO: replace with your application's supported locales.
       supportedLocales: FLocalizations.supportedLocales,
       // TODO: add your application's localizations delegates.
@@ -36,7 +29,38 @@ class Application extends StatelessWidget {
         data: theme,
         child: FToaster(child: FTooltipGroup(child: child!)),
       ),
-      // TODO: Add your router configuration here.
+      // You can also replace FScaffold with Material Scaffold.
+      home: const FScaffold(
+        // TODO: replace with your widget.
+        child: Example(),
+      ),
     );
   }
+}
+
+class Example extends StatefulWidget {
+  const Example({super.key});
+
+  @override
+  State<Example> createState() => _ExampleState();
+}
+
+class _ExampleState extends State<Example> {
+  int _count = 0;
+
+  @override
+  Widget build(BuildContext context) => Center(
+    child: Column(
+      mainAxisSize: .min,
+      spacing: 10,
+      children: [
+        Text('Count: $_count'),
+        FButton(
+          onPress: () => setState(() => _count++),
+          suffix: const Icon(FLucideIcons.chevronsUp),
+          child: const Text('Increase'),
+        ),
+      ],
+    ),
+  );
 }

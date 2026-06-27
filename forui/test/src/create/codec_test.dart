@@ -5,7 +5,7 @@ import 'package:forui/src/create/codec.dart';
 void main() {
   group('codec', () {
     test('decode produces the matching preset', () {
-      final decoded = Preset.decode('aaabbc');
+      final decoded = Preset.decode('ababbc');
 
       expect(decoded.base, BaseColor.neutral);
       expect(decoded.primary, PrimaryColor.blue);

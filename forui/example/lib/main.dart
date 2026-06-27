@@ -2,6 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui_example/icons_sandbox.dart';
 import 'package:forui_example/sandbox.dart';
 import 'package:marionette_flutter/marionette_flutter.dart';
 
@@ -16,7 +17,7 @@ List<Widget> _pages = [
   const Text('Home'),
   const Text('Categories'),
   const Text('Search'),
-  const Text('Settings'),
+  const IconsSandbox(),
   const Sandbox(),
 ];
 
@@ -71,7 +72,7 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
                 FBottomNavigationBarItem(icon: Icon(FLucideIcons.house), label: Text('Home')),
                 FBottomNavigationBarItem(icon: Icon(FLucideIcons.layoutGrid), label: Text('Grid')),
                 FBottomNavigationBarItem(icon: Icon(FLucideIcons.search), label: Text('Search')),
-                FBottomNavigationBarItem(icon: Icon(FLucideIcons.settings), label: Text('Settings')),
+                FBottomNavigationBarItem(icon: Icon(FLucideIcons.iceCreamCone), label: Text('Icons')),
                 FBottomNavigationBarItem(icon: Icon(FLucideIcons.castle), label: Text('Sandbox')),
               ],
             ),

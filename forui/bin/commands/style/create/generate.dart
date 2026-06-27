@@ -178,7 +178,7 @@ extension Generation on StyleCreateCommand {
         case 'n' || 'N':
           exit(0);
         default:
-          stdout.writeln('Invalid option. Please enter enter either "y" or "n".');
+          stdout.writeln('Invalid option. Please enter either "y" or "n".');
       }
     }
   }

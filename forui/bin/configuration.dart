@@ -14,7 +14,12 @@ cli:
   
   # The default file or directory to output generated themes.
   theme-output: ${Configuration.defaultTheme}
+
+  # The default directory to download preset font assets into.
+  fonts-output: ${Configuration.defaultFonts}
 ''';
+
+const fonts = 'https://forui.dev/fonts';
 
 final formatter = DartFormatter(languageVersion: DartFormatter.latestLanguageVersion);
 
@@ -22,6 +27,7 @@ class Configuration {
   static const defaultSnippet = 'lib';
   static const defaultStyle = 'lib/theme/styles';
   static const defaultTheme = 'lib/theme/theme.dart';
+  static const defaultFonts = 'assets/fonts';
 
   static Directory _findProjectRoot([Directory? directory]) {
     directory ??= .current;
@@ -42,6 +48,7 @@ class Configuration {
   }
 
   final Directory root;
+  final String fonts;
   final String snippet;
   final String style;
   final String theme;
@@ -94,6 +101,13 @@ class Configuration {
             'Could not read forui.$extension.\n\n${node.span.message('"theme-output" must be a string.')}',
           ),
         },
+        fonts: switch (cli.nodes['fonts-output']) {
+          null => defaultFonts,
+          YamlScalar(:final value) when value is String => value,
+          final node => throw FormatException(
+            'Could not read forui.$extension.\n\n${node.span.message('"fonts-output" must be a string.')}',
+          ),
+        },
       );
     } on FormatException catch (e) {
       stdout.writeln(e.message);
@@ -106,5 +120,6 @@ class Configuration {
     this.snippet = defaultSnippet,
     this.style = defaultStyle,
     this.theme = defaultTheme,
+    this.fonts = defaultFonts,
   });
 }

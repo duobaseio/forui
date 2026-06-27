@@ -17,7 +17,7 @@ final class Preset {
   final IconLibrary icon;
   final Radius radius;
 
-  const Preset._({
+  const Preset({
     this.base = .neutral,
     this.primary,
     this.display = .inter,
@@ -28,14 +28,14 @@ final class Preset {
 
   factory Preset.decode(String? encoded) {
     if (encoded == null) {
-      return const ._();
+      return const Preset();
     }
 
     if (encoded.length != 6) {
       throw FormatException('A preset must be exactly 6 codes long.', encoded, encoded.length);
     }
 
-    T decode<T extends Code>(List<T> values, String encoded, int index) {
+    T decode<T extends Option>(List<T> values, String encoded, int index) {
       final char = encoded[index];
       for (final value in values) {
         if (value.code == char) {
@@ -46,9 +46,9 @@ final class Preset {
       throw FormatException("Invalid code '$char' at index $index.", encoded, index);
     }
 
-    return ._(
+    return Preset(
       base: decode(BaseColor.values, encoded, 0),
-      primary: encoded[1] == '-' ? null : decode(PrimaryColor.values, encoded, 1),
+      primary: encoded[1] == 'a' ? null : decode(PrimaryColor.values, encoded, 1),
       display: decode(FontFamily.values, encoded, 2),
       body: decode(FontFamily.values, encoded, 3),
       icon: decode(IconLibrary.values, encoded, 4),
@@ -56,14 +56,20 @@ final class Preset {
     );
   }
 
-  String encode() => '${base.code}${primary?.code ?? '-'}${display.code}${body.code}${icon.code}${radius.code}';
+  String encode() => '${base.code}${primary?.code ?? 'a'}${display.code}${body.code}${icon.code}${radius.code}';
 }
 
-abstract interface class Code {
+abstract interface class Option {
   String get code;
+
+  String get name;
 }
 
-enum BaseColor implements Code {
+extension Options<T extends Option> on Iterable<T> {
+  Map<String, T> get named => {for (final value in this) value.name: value};
+}
+
+enum BaseColor implements Option {
   neutral(
     code: 'a',
     name: 'Neutral',
@@ -333,6 +339,7 @@ enum BaseColor implements Code {
 
   @override
   final String code;
+  @override
   final String name;
   final BaseColors light;
   final BaseColors dark;
@@ -376,45 +383,45 @@ final class BaseColors {
   });
 }
 
-enum PrimaryColor implements Code {
+enum PrimaryColor implements Option {
   blue(
-    code: 'a',
+    code: 'b',
     name: 'Blue',
     light: PrimaryColors(primary: 0xFF1447E6, primaryForeground: 0xFFEFF6FF),
     dark: PrimaryColors(primary: 0xFF1447E6, primaryForeground: 0xFFEFF6FF),
   ),
   green(
-    code: 'b',
+    code: 'c',
     name: 'Green',
     light: PrimaryColors(primary: 0xFF5EA500, primaryForeground: 0xFFF7FEE7),
     dark: PrimaryColors(primary: 0xFF5EA500, primaryForeground: 0xFFF7FEE7),
   ),
   orange(
-    code: 'c',
+    code: 'd',
     name: 'Orange',
     light: PrimaryColors(primary: 0xFFF54A00, primaryForeground: 0xFFFFF7ED),
     dark: PrimaryColors(primary: 0xFFFF6900, primaryForeground: 0xFFFFF7ED),
   ),
   red(
-    code: 'd',
+    code: 'e',
     name: 'Red',
     light: PrimaryColors(primary: 0xFFE7000B, primaryForeground: 0xFFFEF2F2),
     dark: PrimaryColors(primary: 0xFFFB2C36, primaryForeground: 0xFFFEF2F2),
   ),
   rose(
-    code: 'e',
+    code: 'f',
     name: 'Rose',
     light: PrimaryColors(primary: 0xFFEC003F, primaryForeground: 0xFFFFF1F2),
     dark: PrimaryColors(primary: 0xFFFF2056, primaryForeground: 0xFFFFF1F2),
   ),
   violet(
-    code: 'f',
+    code: 'g',
     name: 'Violet',
     light: PrimaryColors(primary: 0xFF7F22FE, primaryForeground: 0xFFF5F3FF),
     dark: PrimaryColors(primary: 0xFF8E51FF, primaryForeground: 0xFFF5F3FF),
   ),
   yellow(
-    code: 'g',
+    code: 'h',
     name: 'Yellow',
     light: PrimaryColors(primary: 0xFFFCC800, primaryForeground: 0xFF733E0A),
     dark: PrimaryColors(primary: 0xFFEFB100, primaryForeground: 0xFF733E0A),
@@ -422,6 +429,7 @@ enum PrimaryColor implements Code {
 
   @override
   final String code;
+  @override
   final String name;
   final PrimaryColors light;
   final PrimaryColors dark;
@@ -436,7 +444,7 @@ final class PrimaryColors {
   const PrimaryColors({required this.primary, required this.primaryForeground});
 }
 
-enum FontFamily implements Code {
+enum FontFamily implements Option {
   geist(
     'a',
     'Geist',
@@ -647,6 +655,7 @@ enum FontFamily implements Code {
 
   @override
   final String code;
+  @override
   final String name;
   final String description;
   final FontFormat format;
@@ -673,7 +682,7 @@ final class StaticFontFormat implements FontFormat {
   const StaticFontFormat({required this.normal, required this.italic});
 }
 
-enum IconLibrary implements Code {
+enum IconLibrary implements Option {
   hugeicons('a', 'Hugeicons', 'hugeicons', 'https://hugeicons.com'),
   lucide('b', 'Lucide', 'forui_assets', 'https://lucide.dev'),
   tabler('c', 'Tabler', 'tabler_icons_plus', 'https://tabler.io/icons'),
@@ -682,6 +691,7 @@ enum IconLibrary implements Code {
 
   @override
   final String code;
+  @override
   final String name;
   final String package;
   final String url;
@@ -689,7 +699,7 @@ enum IconLibrary implements Code {
   const IconLibrary(this.code, this.name, this.package, this.url);
 }
 
-enum Radius implements Code {
+enum Radius implements Option {
   none('a', 'None', (xs2: 0, xs: 0, sm: 0, md: 0, lg: 0, xl: 0, xl2: 0, xl3: 0, pill: 0)),
   small('b', 'Small', (xs2: 3, xs: 4, sm: 6, md: 7, lg: 10, xl: 13, xl2: 16, xl3: 19, pill: 100)),
   medium('c', 'Medium', (xs2: 4, xs: 6, sm: 8, md: 10, lg: 14, xl: 18, xl2: 22, xl3: 26, pill: 100)),
@@ -697,6 +707,7 @@ enum Radius implements Code {
 
   @override
   final String code;
+  @override
   final String name;
   final BorderRadii radius;
 
