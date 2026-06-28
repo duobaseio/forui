@@ -7,11 +7,11 @@ late BuildContext context;
 final accordion =
     // {@snippet constructor}
     FAccordion(
-      // Replace the entire style with a new one based on the green theme.
+      // Replace the entire style with a new one based on the neutral theme.
       style: FAccordionStyle.inherit(
-        colors: FThemes.green.light.touch.colors,
-        typography: FThemes.green.light.touch.typography,
-        style: FThemes.green.light.touch.style,
+        colors: FTheme.neutral.light.touch.colors,
+        typography: FTheme.neutral.light.touch.typography,
+        style: FTheme.neutral.light.touch.style,
         touch: true,
       ),
       children: const [],

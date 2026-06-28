@@ -60,7 +60,7 @@ void main() {
   group('haptic feedback', () {
     Future<int> run({required WidgetTester tester, required Axis axis, required List<double> steps}) async {
       var feedback = 0;
-      final colors = FThemes.neutral.light.touch.colors;
+      final colors = FTheme.neutral.light.touch.colors;
 
       await tester.pumpWidget(
         TestScaffold.app(
@@ -108,7 +108,7 @@ void main() {
     }
 
     testWidgets('FHapticFeedback.none() leaves divider style with no-op haptic', (tester) async {
-      final colors = FThemes.neutral.light.touch.colors;
+      final colors = FTheme.neutral.light.touch.colors;
       final theme = FThemeData(colors: colors, touch: true, hapticFeedback: const FHapticFeedback.none());
 
       expect(theme.resizableStyles.horizontal.hapticFeedback, FHapticFeedback.noFeedback);

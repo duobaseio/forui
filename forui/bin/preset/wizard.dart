@@ -25,10 +25,7 @@ Preset wizard() {
   final preset = Preset(base: base, primary: primary, display: display, body: body, icon: icon, radius: radius);
   final encoded = preset.encode();
 
-  stdout
-    ..writeln('Your preset: $encoded')
-    ..writeln('Use "--preset $encoded" to regenerate this theme, or edit it at https://create.forui.dev.')
-    ..writeln();
+  stdout.writeln('Use "--preset $encoded" to regenerate this theme, or edit it at https://create.forui.dev.');
 
   return preset;
 }

@@ -18,7 +18,7 @@ part 'theme.design.dart';
 /// class Parent extends StatelessWidget {
 ///   @override
 ///   Widget build(BuildContext context) => FTheme(
-///      data: FThemes.neutral.light.touch,
+///      data: FTheme.neutral.light.touch,
 ///      child: Child(),
 ///    );
 ///  }
@@ -35,16 +35,17 @@ part 'theme.design.dart';
 /// ```
 ///
 /// See:
+/// * https://create.forui.dev for customizing the theme.
 /// * [FBasicTheme], the non-animated theme widget wrapped by this widget.
 /// * [FThemeData] which describes the actual configuration of a theme.
 class FTheme extends StatelessWidget {
-  /// Returns the current [FThemeData], or `FThemes.neutral.light.touch` if there is no ancestor [FTheme].
+  /// Returns the current [FThemeData], or `FTheme.neutral.light.touch` if there is no ancestor [FTheme].
   ///
   /// It is recommended to use the terser [FThemeBuildContext.theme] getter instead.
   ///
   /// ## Troubleshooting:
   ///
-  /// ### [FTheme.of] always returns `FThemes.neutral.light.touch`
+  /// ### [FTheme.of] always returns `FTheme.neutral.light.touch`
   ///
   /// One of the most common causes is calling [FTheme.of] in the same context which [FTheme] was declared. To fix this,
   /// move the call to [FTheme.of] to a descendant widget.
@@ -54,7 +55,7 @@ class FTheme extends StatelessWidget {
   /// class Parent extends StatelessWidget {
   ///   @override
   ///   Widget build(BuildContext context) => FTheme(
-  ///      data: FThemes.neutral.light.touch,
+  ///      data: FTheme.neutral.light.touch,
   ///      child: Child(),
   ///    );
   ///  }
@@ -73,7 +74,7 @@ class FTheme extends StatelessWidget {
   /// class Parent extends StatelessWidget {
   ///   @override
   ///   Widget build(BuildContext context) => FTheme(
-  ///      data: FThemes.neutral.light.touch,
+  ///      data: FTheme.neutral.light.touch,
   ///      child: SomeWidget(
   ///        theme: FTheme.of(context), // Whoops!
   ///      ),
@@ -83,8 +84,22 @@ class FTheme extends StatelessWidget {
   @useResult
   static FThemeData of(BuildContext context) {
     final theme = context.dependOnInheritedWidgetOfExactType<_InheritedTheme>();
-    return theme?.data ?? FThemes.neutral.light.touch;
+    return theme?.data ?? FTheme.neutral.light.touch;
   }
+
+  /// The [Neutral](https://ui.shadcn.com/docs/theming#neutral) theme.
+  ///
+  /// See https://create.forui.dev for customizing the theme.
+  static final neutral = (
+    light: FPlatformThemeData(
+      desktop: () => FThemeData(touch: false, debugLabel: 'Neutral Light Desktop', colors: FColors.neutralLight),
+      touch: () => FThemeData(touch: true, debugLabel: 'Neutral Light Touch', colors: FColors.neutralLight),
+    ),
+    dark: FPlatformThemeData(
+      desktop: () => FThemeData(touch: false, debugLabel: 'Neutral Dark Desktop', colors: FColors.neutralDark),
+      touch: () => FThemeData(touch: true, debugLabel: 'Neutral Dark Touch', colors: FColors.neutralDark),
+    ),
+  );
 
   /// Motion-related properties for the animation.
   final FThemeMotion motion;
@@ -208,11 +223,11 @@ class FThemeMotion with Diagnosticable, _$FThemeMotionFunctions {
 
 /// Provides functions for accessing the current [FThemeData].
 extension FThemeBuildContext on BuildContext {
-  /// Returns the current [FThemeData], or `FThemes.neutral.light.touch` if there is no ancestor [FTheme].
+  /// Returns the current [FThemeData], or `FTheme.neutral.light.touch` if there is no ancestor [FTheme].
   ///
   /// ## Troubleshooting:
   ///
-  /// ### [theme] always returns `FThemes.neutral.light.touch`
+  /// ### [theme] always returns `FTheme.neutral.light.touch`
   ///
   /// One of the most common causes is calling [theme] in the same context which [FTheme] was declared. To fix this,
   /// move the call to [theme] to a descendant widget.
@@ -222,7 +237,7 @@ extension FThemeBuildContext on BuildContext {
   /// class Parent extends StatelessWidget {
   ///   @override
   ///   Widget build(BuildContext context) => FTheme(
-  ///      data: FThemes.neutral.light.touch,
+  ///      data: FTheme.neutral.light.touch,
   ///      child: Child(),
   ///    );
   ///  }
@@ -241,7 +256,7 @@ extension FThemeBuildContext on BuildContext {
   /// class Parent extends StatelessWidget {
   ///   @override
   ///   Widget build(BuildContext context) => FTheme(
-  ///      data: FThemes.neutral.light.touch,
+  ///      data: FTheme.neutral.light.touch,
   ///      child: SomeWidget(
   ///        theme: context.theme, // Whoops!
   ///      ),
@@ -254,6 +269,7 @@ extension FThemeBuildContext on BuildContext {
 /// Applies a theme to descendant widgets.
 ///
 /// See:
+/// * https://create.forui.dev for customizing the theme.
 /// * [FTheme] which is an animated version of this widget.
 /// * [FThemeData] which describes the actual configuration of a theme.
 class FBasicTheme extends StatelessWidget {
@@ -313,4 +329,21 @@ class _InheritedTheme extends InheritedTheme {
     super.debugFillProperties(properties);
     properties.add(DiagnosticsProperty('data', data));
   }
+}
+
+/// A pair of [FThemeData] for desktop and touch platforms.
+// Most users will only ever want a desktop or touch theme. We lazily create the platform themes to avoid recreating
+// redundant themes thereby reusing memory consumption.
+class FPlatformThemeData {
+  final FThemeData Function() _desktop;
+  final FThemeData Function() _touch;
+
+  /// The desktop theme.
+  late final FThemeData desktop = _desktop();
+
+  /// The touch theme.
+  late final FThemeData touch = _touch();
+
+  /// Creates a [FPlatformThemeData].
+  FPlatformThemeData({required this._desktop, required this._touch});
 }

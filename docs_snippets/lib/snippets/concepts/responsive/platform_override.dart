@@ -5,7 +5,7 @@ import 'package:forui/forui.dart';
 // {@snippet}
 @override
 Widget build(BuildContext context) => FTheme(
-  data: FThemes.neutral.light.desktop,
+  data: FTheme.neutral.light.desktop,
   // {@highlight}
   platform: FPlatformVariant.iOS, // overrides the detected platform
   // {@endhighlight}

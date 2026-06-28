@@ -576,7 +576,7 @@ void main() {
         child: FTileGroup.merge(
           children: [
             .group(
-              style: FThemes.green.dark.touch.tileGroupStyle,
+              style: FTheme.neutral.dark.touch.tileGroupStyle,
               children: [
                 .tile(
                   prefix: const Icon(FLucideIcons.wifi),
@@ -586,7 +586,7 @@ void main() {
                   onPress: () {},
                 ),
                 .tile(
-                  style: FThemes.blue.dark.touch.tileGroupStyle.tileStyles.base,
+                  style: FTheme.neutral.dark.touch.tileGroupStyle.tileStyles.base,
                   prefix: const Icon(FLucideIcons.bluetooth),
                   title: const Text('Bluetooth'),
                   subtitle: const Text('Fee, Fo'),

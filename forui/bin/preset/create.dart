@@ -13,7 +13,6 @@ String _themeHeader(String preset) =>
     '''
 import 'package:forui/forui.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 
 part 'colors.dart';
 part 'typography.dart';

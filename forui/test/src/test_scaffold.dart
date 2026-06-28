@@ -74,7 +74,7 @@ class TestScaffold extends StatelessWidget {
     );
   }();
 
-  static final _default = FThemes.neutral;
+  static final _default = FTheme.neutral;
 
   static List<({String name, FThemeData data})> get themes => [
     (name: 'neutral-light', data: _default.light.touch),

@@ -1,5 +1,10 @@
 ## 0.24.0 (next)
 
+### `FColors`
+* **Breaking** Remove all predefined color schemes except `FColors.neutralLight` and `FColors.neutralDark`. Use
+  https://create.forui.dev to generate a custom theme.
+
+
 ### `FDateField`
 * Fix `FDateField.calendar` not displaying its selected date when driven by a lifted selection control.
 
@@ -10,6 +15,12 @@
 
 * **Breaking** Remove `FDateSelectionControl.lifted(...)`. Use `FDateSelectionControl.liftedSingle(...)`,
   `FDateSelectionControl.liftedMulti(...)` or `FDateSelectionControl.liftedRange(...)` instead.
+
+
+### `FTheme` & `FThemes`
+* Add `FTheme.neutral`.
+
+* **Breaking** Remove `FThemes`. Use `FTheme.neutral`, or https://create.forui.dev to generate a custom theme.
 
 
 ### Others

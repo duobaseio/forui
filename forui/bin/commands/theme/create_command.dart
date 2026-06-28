@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import '../../args/command.dart';
+import '../../args/prompts.dart';
 import '../../configuration.dart';
 import '../../preset/create.dart';
 import '../../preset/wizard.dart';
@@ -60,6 +61,7 @@ class ThemeCreateCommand extends ForuiCommand {
       exit(1);
     }
 
+    requireTerminal();
     await create(configuration, wizard(), input: input, force: force, output: output);
   }
 }

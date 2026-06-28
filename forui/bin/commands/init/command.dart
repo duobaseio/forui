@@ -46,7 +46,12 @@ class InitCommand extends ForuiCommand {
       final input = !globalResults!.flag('no-input');
       final force = argResults!.flag('force');
       final template = argResults!['template'] as String;
-      final preset = switch (argResults!['preset'] as String?) {
+      final code = argResults!['preset'] as String?;
+      if (code == null && input) {
+        requireTerminal();
+      }
+
+      final preset = switch (code) {
         final code? => Preset.decode(code),
         _ when input => wizard(),
         _ => const Preset(),

@@ -5,10 +5,10 @@ import 'package:forui/forui.dart';
 // {@snippet}
 @override
 Widget build(BuildContext context) {
-  final typography = FThemes.neutral.light.touch.typography;
+  final typography = FTheme.neutral.light.touch.typography;
   return FTheme(
     data: FThemeData(
-      colors: FThemes.neutral.light.touch.colors,
+      colors: FTheme.neutral.light.touch.colors,
       // {@highlight}
       typography: typography
           .copyWith(body: typography.body.copyWith(xs: const TextStyle(fontSize: 12, height: 1)))

@@ -66,11 +66,11 @@ void main() {
                 backgroundFilter: .blur(sigmaX: 5, sigmaY: 5),
                 decoration: .value(
                   BoxDecoration(
-                    color: FThemes.neutral.light.touch.colors.background.withValues(alpha: 0.5),
-                    borderRadius: FThemes.neutral.light.touch.style.borderRadius.md,
+                    color: FTheme.neutral.light.touch.colors.background.withValues(alpha: 0.5),
+                    borderRadius: FTheme.neutral.light.touch.style.borderRadius.md,
                     border: .all(
-                      width: FThemes.neutral.light.touch.style.borderWidth,
-                      color: FThemes.neutral.light.touch.colors.border,
+                      width: FTheme.neutral.light.touch.style.borderWidth,
+                      color: FTheme.neutral.light.touch.colors.border,
                     ),
                   ),
                 ),

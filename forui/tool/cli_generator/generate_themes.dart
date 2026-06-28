@@ -417,7 +417,7 @@ class _ThemesVisitor extends RecursiveAstVisitor<void> {
                 for (final expression in themeData.argumentList.arguments.whereType<NamedExpression>()) {
                   if (expression.name.label.name == 'colors') {
                     final source = expression.expression.toSource();
-                    // Resolve named constants (e.g. FColors.zincLight) to their inline definition.
+                    // Resolve named constants (e.g. FColors.neutralLight) to their inline definition.
                     colors = source.startsWith('FColors.')
                         ? (_colors[source.substring('FColors.'.length)] ?? source)
                         : source;

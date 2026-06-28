@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:mason_logger/mason_logger.dart';
+
 import 'command.dart';
 
 /// Prompts the user to confirm whether to override [file].
@@ -25,48 +27,37 @@ void confirm(File file, {required bool input, String message = ''}) {
   }
 }
 
-/// Prompts the user to pick one of the options in [groups] by number.
+/// Exits with an error if interactive prompts are unsupported, i.e. stdin or stdout is not attached to a terminal.
+void requireTerminal() {
+  if (!stdin.hasTerminal || !stdout.hasTerminal) {
+    stdout.writeln(
+      'Interactive prompts require a terminal. Pass --preset <preset> or --no-input to run non-interactively.',
+    );
+    exit(1);
+  }
+}
+
+/// Prompts the user to pick one of the options in [groups] using arrow-key navigation.
 T pick<T>(String title, Map<String, Map<String, T>> groups, {required T defaultValue}) {
-  final options = <MapEntry<String, T>>[];
-  final width = groups.values.fold(0, (count, group) => count + group.length).toString().length;
+  // chooseOne renders a flat list, so we flatten the groups and show each subheader once, aligned in a column on the
+  // first item of its group.
+  final width = groups.values
+      .expand((group) => group.keys)
+      .fold(0, (max, label) => label.length > max ? label.length : max);
 
-  stdout.writeln(title);
-  var first = true;
-  for (final MapEntry(key: header, value: group) in groups.entries) {
-    if (header.isNotEmpty) {
-      // Separate subheaders from each other, but not the first subheader from the title.
-      if (!first) {
-        stdout.writeln();
-      }
-      stdout.writeln('  $header');
-    }
-    first = false;
+  final choices = [
+    for (final MapEntry(key: header, value: group) in groups.entries)
+      for (final (index, MapEntry(key: label, :value)) in group.entries.indexed)
+        (display: index == 0 && header.isNotEmpty ? '${label.padRight(width)}   $header' : label, value: value),
+  ];
+  final fallback = choices.firstWhere((c) => c.value == defaultValue, orElse: () => choices.first);
 
-    final indent = header.isEmpty ? '  ' : '    ';
-    for (final option in group.entries) {
-      final marker = option.value == defaultValue ? ' (default)' : '';
-      final number = '${options.length + 1}.'.padRight(width + 1);
-      stdout.writeln('$indent$number ${option.key}$marker');
-      options.add(option);
-    }
-  }
-
-  stdout.writeln();
-  while (true) {
-    stdout.write('> ');
-    final input = stdin.readLineSync()?.trim() ?? '';
-
-    final T selected;
-    if (input.isEmpty) {
-      selected = defaultValue;
-    } else if (int.tryParse(input) case final number? when number >= 1 && number <= options.length) {
-      selected = options[number - 1].value;
-    } else {
-      stdout.writeln('Invalid option. Please enter a number between 1 and ${options.length}.');
-      continue;
-    }
-
-    stdout.writeln();
-    return selected;
-  }
+  return Logger()
+      .chooseOne<({String display, T value})>(
+        title,
+        choices: choices,
+        defaultValue: fallback,
+        display: (c) => c.display,
+      )
+      .value;
 }

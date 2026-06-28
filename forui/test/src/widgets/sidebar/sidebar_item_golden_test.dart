@@ -223,7 +223,7 @@ void main() {
       TestScaffold(
         child: FSidebarItem(
           key: const Key('item'),
-          style: FThemes.neutral.light.touch.sidebarStyle.groupStyle.itemStyle,
+          style: FTheme.neutral.light.touch.sidebarStyle.groupStyle.itemStyle,
           label: const Text('Item'),
           onPress: () {},
         ),
@@ -234,7 +234,7 @@ void main() {
       TestScaffold(
         child: FSidebarItem(
           key: const Key('item'),
-          style: FThemes.neutral.dark.touch.sidebarStyle.groupStyle.itemStyle,
+          style: FTheme.neutral.dark.touch.sidebarStyle.groupStyle.itemStyle,
           label: const Text('Item'),
           onPress: () {},
         ),

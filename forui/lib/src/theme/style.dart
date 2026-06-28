@@ -53,7 +53,7 @@ class FStyle with Diagnosticable, _$FStyleFunctions {
   /// Creates an [FStyle].
   ///
   /// **Note:**
-  /// Unless you are creating a completely new style, modifying [FThemes]' predefined styles should be preferred.
+  /// Unless you are creating a completely new style, modifying a predefined [FThemeData]'s style should be preferred.
   FStyle({
     required FFormFieldStyle formFieldStyle,
     required FFocusedOutlineStyle focusedOutlineStyle,

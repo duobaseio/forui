@@ -85,7 +85,7 @@ void main() {
   testWidgets('desktop default', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        theme: FThemes.neutral.light.desktop,
+        theme: FTheme.neutral.light.desktop,
         child: SizedBox(
           width: 400,
           height: 300,

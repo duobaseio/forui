@@ -451,7 +451,7 @@ void main() {
         child: FItemGroup.merge(
           children: [
             FItemGroup(
-              style: FThemes.green.dark.touch.itemGroupStyle,
+              style: FTheme.neutral.dark.touch.itemGroupStyle,
               children: [
                 FItem(
                   prefix: const Icon(FLucideIcons.wifi),
@@ -461,7 +461,7 @@ void main() {
                   onPress: () {},
                 ),
                 FItem(
-                  style: FThemes.blue.dark.touch.itemGroupStyle.itemStyles.base,
+                  style: FTheme.neutral.dark.touch.itemGroupStyle.itemStyles.base,
                   prefix: const Icon(FLucideIcons.bluetooth),
                   title: const Text('Bluetooth'),
                   subtitle: const Text('Fee, Fo'),

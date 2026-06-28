@@ -249,7 +249,7 @@ final class FToastAlignment {
 /// ```dart
 /// MaterialApp(
 ///   builder: (context, child) => FTheme(
-///     data: FThemes.neutral.light.touch,
+///     data: FTheme.neutral.light.touch,
 ///     child: FToaster(child: child!),
 ///   ),
 ///   home: HomePage(),

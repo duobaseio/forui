@@ -18,8 +18,8 @@ class Application extends StatelessWidget {
     /// dart forui theme create.
     /// ```
     final theme = const <TargetPlatform>{.android, .iOS, .fuchsia}.contains(defaultTargetPlatform)
-        ? FThemes.neutral.dark.touch
-        : FThemes.neutral.dark.desktop;
+        ? FTheme.neutral.dark.touch
+        : FTheme.neutral.dark.desktop;
 
     return MaterialApp(
       // TODO: replace with your application's supported locales.

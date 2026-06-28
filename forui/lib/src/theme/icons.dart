@@ -18,7 +18,7 @@ typedef FIconBuilder = Widget Function(BuildContext context, {String? semanticsL
 /// For example, to use the in-built Material icons:
 /// ```dart
 /// FThemeData(
-///   colors: FColors.zincLight,
+///   colors: FColors.neutralLight,
 ///   touch: false,
 ///   icons: FIcons(
 ///     arrowLeft: FIcons.iconData(Icons.arrow_left),
@@ -41,7 +41,7 @@ typedef FIconBuilder = Widget Function(BuildContext context, {String? semanticsL
 ///
 /// ```dart
 /// FThemeData(
-///   colors: FColors.zincLight,
+///   colors: FColors.neutralLight,
 ///   touch: false,
 ///   icons: FIcons(
 ///     arrowLeft: (_, {semanticsLabel}) => Builder(builder: (context) {
@@ -59,7 +59,7 @@ typedef FIconBuilder = Widget Function(BuildContext context, {String? semanticsL
 /// );
 /// ```
 ///
-/// See [FThemes] for predefined themes.
+/// See https://create.forui.dev for customizing the theme.
 final class FIcons with Diagnosticable {
   /// A builder that renders the given [IconData] as a Flutter [Icon].
   static FIconBuilder iconData(IconData icon) =>
