@@ -9,9 +9,21 @@ Forui includes a CLI that generates themes and styles in your project. These the
 to fit your design needs. No additional installation is required. Neither does the CLI increase your application's
 bundle size.
 
+## Global options
+
+These options are available on every command:
+
+```shell copy
+-h, --help          Print this usage information.
+    --[no-]color    Use terminal colors.
+    --no-input      Disable interactive prompts and assume default values.
+```
+
 ## init
 
-Use the `init` command to create `forui.yaml` and `main.dart` files in your project's directory.
+Use the `init` command to set up Forui in your project. It creates a `forui.yaml` configuration file, generates a theme,
+and creates a `main.dart` entry point. Run without `--preset` to configure the theme interactively, or pass a `--preset`
+ from [create.forui.dev](https://create.forui.dev).
 
 ```shell copy
 dart run forui init
@@ -19,10 +31,11 @@ dart run forui init
 
 ```shell copy
 Usage: forui init
--h, --help         Print this usage information.
--f, --force        Overwrite existing files if they exist.
--t, --template     The main.dart template to generate.
-                   [basic (default), router]
+-h, --help        Print this usage information.
+-f, --force       Overwrite existing files if they exist.
+-p, --preset      A 6-character code for the theme (see create.forui.dev).
+-t, --template    The main.dart template to generate.
+                  [basic (default), router]
 ```
 
 ## snippet
@@ -99,18 +112,22 @@ Usage: forui style ls
 Use the `theme create` command to generate a theme in your project. The theme is generated across multiple files in
 `lib/theme/` by default.
 
+Run without `--preset` to configure the theme interactively, or pass a `--preset` from [create.forui.dev](https://create.forui.dev)
+to generate a specific theme.
+
 <Callout type="info">
     See the [docs](/docs/guides/customizing-themes) on how to use the generated theme.
 </Callout>
 
 ```shell copy
-dart run forui theme create [theme]
+dart run forui theme create
 ```
 
 ```shell copy
-Usage: forui theme create [theme]
+Usage: forui theme create
 -h, --help      Print this usage information.
 -f, --force     Overwrite existing files if they exist.
+-p, --preset    A 6-character preset for the theme (see create.forui.dev).
 -o, --output    The output directory or file, relative to the project directory.
                 (defaults to "lib/theme/theme.dart")
 ```
