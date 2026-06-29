@@ -22,8 +22,7 @@ These options are available on every command:
 ## init
 
 Use the `init` command to set up Forui in your project. It creates a `forui.yaml` configuration file, generates a theme,
-and creates a `main.dart` entry point. Run without `--preset` to configure the theme interactively, or pass a `--preset`
- from [create.forui.dev](https://create.forui.dev).
+and creates a `main.dart` entry point. Run without `--preset` to configure the theme interactively.
 
 ```shell copy
 dart run forui init
@@ -33,7 +32,7 @@ dart run forui init
 Usage: forui init
 -h, --help        Print this usage information.
 -f, --force       Overwrite existing files if they exist.
--p, --preset      A 6-character code for the theme (see create.forui.dev).
+-p, --preset      A 6-character preset code for the theme.
 -t, --template    The main.dart template to generate.
                   [basic (default), router]
 ```
@@ -112,8 +111,7 @@ Usage: forui style ls
 Use the `theme create` command to generate a theme in your project. The theme is generated across multiple files in
 `lib/theme/` by default.
 
-Run without `--preset` to configure the theme interactively, or pass a `--preset` from [create.forui.dev](https://create.forui.dev)
-to generate a specific theme.
+Run without `--preset` to configure the theme interactively.
 
 <Callout type="info">
     See the [docs](/docs/guides/customizing-themes) on how to use the generated theme.
@@ -127,7 +125,7 @@ dart run forui theme create
 Usage: forui theme create
 -h, --help      Print this usage information.
 -f, --force     Overwrite existing files if they exist.
--p, --preset    A 6-character preset for the theme (see create.forui.dev).
+-p, --preset    A 6-character preset for the theme.
 -o, --output    The output directory or file, relative to the project directory.
                 (defaults to "lib/theme/theme.dart")
 ```

@@ -35,7 +35,7 @@ part 'theme.design.dart';
 /// ```
 ///
 /// See:
-/// * https://create.forui.dev for customizing the theme.
+/// * Run [`dart run forui theme create`](https://forui.dev/docs/reference/cli#create-2) to generate a custom theme.
 /// * [FBasicTheme], the non-animated theme widget wrapped by this widget.
 /// * [FThemeData] which describes the actual configuration of a theme.
 class FTheme extends StatelessWidget {
@@ -89,7 +89,7 @@ class FTheme extends StatelessWidget {
 
   /// The [Neutral](https://ui.shadcn.com/docs/theming#neutral) theme.
   ///
-  /// See https://create.forui.dev for customizing the theme.
+  /// Run [`dart run forui theme create`](https://forui.dev/docs/reference/cli#create-2) to generate a custom theme.
   static final neutral = (
     light: FPlatformThemeData(
       desktop: () => FThemeData(touch: false, debugLabel: 'Neutral Light Desktop', colors: FColors.neutralLight),
@@ -269,7 +269,7 @@ extension FThemeBuildContext on BuildContext {
 /// Applies a theme to descendant widgets.
 ///
 /// See:
-/// * https://create.forui.dev for customizing the theme.
+/// * Run [`dart run forui theme create`](https://forui.dev/docs/reference/cli#create-2) to generate a custom theme.
 /// * [FTheme] which is an animated version of this widget.
 /// * [FThemeData] which describes the actual configuration of a theme.
 class FBasicTheme extends StatelessWidget {

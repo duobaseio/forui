@@ -63,8 +63,7 @@ To use Forui widgets in your Flutter app, import the Forui package and place the
 [`FTheme`](https://pub.dev/documentation/forui/latest/forui.theme/FTheme-class.html) widget underneath
 `CupertinoApp`, `MaterialApp`, or `WidgetsApp` at the root of the widget tree.
 
-To generate a basic Forui app structure in your project, run the command below. Alternatively, pass a `--preset` from
-[create.forui.dev](https://create.forui.dev) to customize the generated theme.
+To generate a basic Forui app structure in your project, run the command below.
 
 <Tabs items={['Basic', 'Router']}>
     <Tab value="Basic">
@@ -97,8 +96,7 @@ It is perfectly fine to use Cupertino/Material widgets alongside Forui widgets!
 ### Themes
 
 Forui ships with a built-in `FTheme.neutral` theme that you can use out of the box. The example above uses its dark
-variant. To generate a custom theme with your own colors, fonts, icons, and border radius, use
-[create.forui.dev](https://create.forui.dev) or `dart run forui theme create`.
+variant. To generate a custom theme, run [`dart run forui theme create`](/docs/reference/cli#create-2).
 
 Themes are a very powerful building block in Forui, allowing you to customize the look and feel of your app.
 To learn more about themes, refer to the [Themes](/docs/concepts/themes) page.

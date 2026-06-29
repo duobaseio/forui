@@ -14,7 +14,7 @@ class ThemeCreateCommand extends ForuiCommand {
   final aliases = ['c'];
 
   @override
-  final description = 'Creates a Forui theme file from a preset code, or interactively.';
+  final description = 'Creates a Forui theme file from a code, or interactively.';
 
   @override
   final arguments = '';
@@ -24,7 +24,7 @@ class ThemeCreateCommand extends ForuiCommand {
   ThemeCreateCommand(this.configuration) {
     argParser
       ..addFlag('force', abbr: 'f', help: 'Overwrite existing files if they exist.', negatable: false)
-      ..addOption('preset', abbr: 'p', help: 'A 6-character preset for the theme (see create.forui.dev).')
+      ..addOption('preset', abbr: 'p', help: 'A code for the theme.')
       ..addOption(
         'output',
         abbr: 'o',

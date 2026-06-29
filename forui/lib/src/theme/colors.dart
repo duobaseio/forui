@@ -24,7 +24,7 @@ import 'package:meta/meta.dart';
 /// Disabled colors are derived by adjusting the opacity. To derive these colors, use the [disable] method. The opacity
 /// can be adjusted with [disabledOpacity].
 ///
-/// See https://create.forui.dev for customizing the color scheme.
+/// Run [`dart run forui theme create`](https://forui.dev/docs/reference/cli#create-2) to generate a custom color scheme.
 final class FColors with Diagnosticable {
   /// The [Neutral](https://ui.shadcn.com/docs/theming#neutral) light color scheme.
   static const neutralLight = FColors._(
@@ -192,7 +192,7 @@ final class FColors with Diagnosticable {
   /// Creates a [FColors].
   ///
   /// **Note:**
-  /// Consider generating a [FColors] using https://create.forui.dev instead.
+  /// Consider generating a [FColors] using [`dart run forui theme create`](https://forui.dev/docs/reference/cli#create-2) instead.
   FColors({
     required Brightness brightness,
     required SystemUiOverlayStyle systemOverlayStyle,

@@ -59,7 +59,7 @@ typedef FIconBuilder = Widget Function(BuildContext context, {String? semanticsL
 /// );
 /// ```
 ///
-/// See https://create.forui.dev for customizing the theme.
+/// Run [`dart run forui theme create`](https://forui.dev/docs/reference/cli#create-2) to generate a custom theme.
 final class FIcons with Diagnosticable {
   /// A builder that renders the given [IconData] as a Flutter [Icon].
   static FIconBuilder iconData(IconData icon) =>

@@ -1,8 +1,8 @@
 ## 0.24.0 (next)
 
 ### `FColors`
-* **Breaking** Remove all predefined color schemes except `FColors.neutralLight` and `FColors.neutralDark`. Use
-  https://create.forui.dev to generate a custom theme.
+* **Breaking** Remove all predefined color schemes except `FColors.neutralLight` and `FColors.neutralDark`. Run
+  `dart run forui theme create` to generate a custom theme.
 
 
 ### `FDateField`
@@ -20,7 +20,7 @@
 ### `FTheme` & `FThemes`
 * Add `FTheme.neutral`.
 
-* **Breaking** Remove `FThemes`. Use `FTheme.neutral`, or https://create.forui.dev to generate a custom theme.
+* **Breaking** Remove `FThemes`. Use `FTheme.neutral`, or run `dart run forui theme create` to generate a custom theme.
 
 
 ### Others
