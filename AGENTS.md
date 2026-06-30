@@ -6,12 +6,15 @@ Forui is a Flutter widget library. This is a monorepo with the following package
 |----------------------|--------------------------------------------------------------------|
 | `forui/`             | Main widget library (published to pub.dev)                         |
 | `forui_assets/`      | Font and icon assets                                               |
+| `forui_cli/`         | Command-line tool with interactive terminal prompts (pure Dart)    |
 | `forui_hooks/`       | Flutter Hooks integration                                          |
 | `forui_internal_gen/`| Code generator for styles, controls, and variants (`build_runner`) |
 | `docs_snippets/`     | Code snippets and examples for [forui.dev](https://forui.dev)      |
 | `docs/`              | Documentation site (Next.js)                                       |
 
 Bootstrapping: `make bootstrap` (or `make bs`). Run `make help` for all commands.
+
+Note: `forui_cli/` is pure Dart; the Flutter- and widget-specific style rules below don't apply to it.
 
 ## Style Guide
 
