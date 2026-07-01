@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 
-import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/calendar/date_selection_controller.dart';
 
 void main() {
   group('FDateSelectionController.single(...)', () {
@@ -176,5 +176,120 @@ void main() {
         expect(controller.value, expected);
       });
     }
+  });
+
+  group('FDateSelectionControl.liftedSingle(...)', () {
+    for (final (date, expected) in [
+      (DateTime(2024, 5, 4), true),
+      (DateTime(2024, 5, 4, 3), true), // truncates the time component
+      (DateTime(2024, 5, 5), false),
+    ]) {
+      test('contains($date)', () {
+        final controller = FDateSelectionControl.liftedSingle(
+          value: DateTime(2024, 5, 4),
+          onChange: (_) {},
+        ).create(() {});
+        expect(controller.contains(date), expected);
+      });
+    }
+
+    for (final (toggleable, value, date, expected) in [
+      (true, null, DateTime(2024), DateTime.utc(2024)),
+      (true, DateTime(2024), DateTime(2025), DateTime.utc(2025)),
+      (true, DateTime(2024), DateTime(2024), null), // toggles off
+      (true, DateTime(2024), DateTime(2024, 1, 1, 5), null), // truncates then toggles off
+      (false, DateTime(2024), DateTime(2024), DateTime.utc(2024)), // not toggleable, stays selected
+    ]) {
+      test('select($date) forwards to onChange toggleable=$toggleable value=$value', () {
+        final changes = <DateTime?>[];
+        FDateSelectionControl.liftedSingle(
+          value: value,
+          onChange: changes.add,
+          toggleable: toggleable,
+        ).create(() {}).select(date);
+        expect(changes.single, expected);
+      });
+    }
+
+    for (final (value, set, expected) in [
+      (null, DateTime(2024, 11, 30, 12), DateTime.utc(2024, 11, 30)), // truncates
+      (DateTime(2024), null, null), // clears
+    ]) {
+      test('value setter forwards to onChange value=$value set=$set', () {
+        final changes = <DateTime?>[];
+        FDateSelectionControl.liftedSingle(value: value, onChange: changes.add).create(() {}).value = set;
+        expect(changes.single, expected);
+      });
+    }
+  });
+
+  group('FDateSelectionControl.liftedMulti(...)', () {
+    for (final (date, expected) in [
+      (DateTime(2024), true),
+      (DateTime(2024, 1, 1, 9), true), // truncates the time component
+      (DateTime(2025), false),
+    ]) {
+      test('contains($date)', () {
+        final controller = FDateSelectionControl.liftedMulti(value: {.utc(2024)}, onChange: (_) {}).create(() {});
+        expect(controller.contains(date), expected);
+      });
+    }
+
+    for (final (value, date, expected) in [
+      (<DateTime>{}, DateTime(2024), {DateTime.utc(2024)}), // adds to empty
+      ({DateTime(2024)}, DateTime(2025), {DateTime.utc(2024), DateTime.utc(2025)}), // adds another
+      ({DateTime(2024)}, DateTime(2024), <DateTime>{}), // toggles off
+      ({DateTime(2024)}, DateTime(2024, 1, 1, 9), <DateTime>{}), // truncates then toggles off
+    ]) {
+      test('select($date) forwards to onChange value=$value', () {
+        final changes = <Set<DateTime>>[];
+        FDateSelectionControl.liftedMulti(value: value, onChange: changes.add).create(() {}).select(date);
+        expect(changes.single, expected);
+      });
+    }
+
+    test('value setter truncates and forwards to onChange', () {
+      final changes = <Set<DateTime>>[];
+      FDateSelectionControl.liftedMulti(value: {}, onChange: changes.add).create(() {}).value = {
+        DateTime(2024, 11, 30, 12),
+      };
+      expect(changes.single, {DateTime.utc(2024, 11, 30)});
+    });
+  });
+
+  group('FDateSelectionControl.liftedRange(...)', () {
+    for (final (value, date, expected) in [
+      ((DateTime(2024), DateTime(2025)), DateTime.utc(2024), true), // start, inclusive
+      ((DateTime(2024), DateTime(2025)), DateTime.utc(2024, 6), true), // inside
+      ((DateTime(2024), DateTime(2025)), DateTime.utc(2023), false), // before
+      (null, DateTime.utc(2023), false),
+    ]) {
+      test('contains($date) value=$value', () {
+        final controller = FDateSelectionControl.liftedRange(value: value, onChange: (_) {}).create(() {});
+        expect(controller.contains(date), expected);
+      });
+    }
+
+    for (final (value, date, expected) in [
+      (null, DateTime(2023), (DateTime.utc(2023), DateTime.utc(2023))), // starts a single-day range
+      ((DateTime(2024), DateTime(2025)), DateTime(2024), null), // tapping the start clears
+      ((DateTime(2024), DateTime(2025)), DateTime(2023), (DateTime.utc(2023), DateTime.utc(2025))), // extends before
+      ((DateTime(2024), DateTime(2025)), DateTime(2026), (DateTime.utc(2024), DateTime.utc(2026))), // extends after
+    ]) {
+      test('select($date) forwards to onChange value=$value', () {
+        final changes = <(DateTime, DateTime)?>[];
+        FDateSelectionControl.liftedRange(value: value, onChange: changes.add).create(() {}).select(date);
+        expect(changes.single, expected);
+      });
+    }
+
+    test('value setter truncates and forwards to onChange', () {
+      final changes = <(DateTime, DateTime)?>[];
+      FDateSelectionControl.liftedRange(value: null, onChange: changes.add).create(() {}).value = (
+        DateTime(2024, 11, 30, 12),
+        DateTime(2024, 12, 12, 12),
+      );
+      expect(changes.single, (DateTime.utc(2024, 11, 30), DateTime.utc(2024, 12, 12)));
+    });
   });
 }

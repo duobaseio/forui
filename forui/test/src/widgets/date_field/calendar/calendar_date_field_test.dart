@@ -95,6 +95,75 @@ void main() {
     });
   });
 
+  group('lifted', () {
+    testWidgets('displays external value', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          locale: const Locale('en', 'SG'),
+          child: FDateField.calendar(
+            selectionControl: .liftedSingle(value: DateTime.utc(2025, 1, 15), onChange: (_) {}),
+            calendar: FDateFieldGridCalendarProperties(control: FGridCalendarControl(today: .utc(2025, 1, 15))),
+          ),
+        ),
+      );
+
+      expect(find.text('15 Jan 2025'), findsOneWidget);
+    });
+
+    testWidgets('tapping a day drives external state and updates the field', (tester) async {
+      DateTime? selected;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          locale: const Locale('en', 'SG'),
+          child: StatefulBuilder(
+            builder: (context, setState) => FDateField.calendar(
+              key: key,
+              selectionControl: .liftedSingle(value: selected, onChange: (date) => setState(() => selected = date)),
+              calendar: FDateFieldGridCalendarProperties(control: FGridCalendarControl(today: .utc(2025, 1, 15))),
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('15'));
+      await tester.pumpAndSettle();
+
+      expect(selected, DateTime.utc(2025, 1, 15));
+      expect(find.text('15 Jan 2025'), findsOneWidget);
+    });
+
+    testWidgets('external value change updates the field', (tester) async {
+      DateTime? selected;
+      late StateSetter set;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          locale: const Locale('en', 'SG'),
+          child: StatefulBuilder(
+            builder: (context, setState) {
+              set = setState;
+              return FDateField.calendar(
+                selectionControl: .liftedSingle(value: selected, onChange: (date) => setState(() => selected = date)),
+                calendar: FDateFieldGridCalendarProperties(control: FGridCalendarControl(today: .utc(2025, 1, 15))),
+              );
+            },
+          ),
+        ),
+      );
+
+      expect(find.text('Pick a date'), findsOneWidget);
+
+      set(() => selected = DateTime.utc(2025, 1, 20));
+      await tester.pumpAndSettle();
+
+      expect(find.text('20 Jan 2025'), findsOneWidget);
+    });
+  });
+
   testWidgets('validator', (tester) async {
     debugDefaultTargetPlatformOverride = .macOS;
 

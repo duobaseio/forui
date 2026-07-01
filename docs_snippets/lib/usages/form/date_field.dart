@@ -140,9 +140,9 @@ final input = FDateField.input(
   // {@endcategory}
 );
 
-// {@category "Selection" "`.lifted()`"}
+// {@category "Selection" "`.liftedSingle()`"}
 /// Externally controls the selected date.
-final FDateSelectionControl<Object?> selectionLifted = .lifted(selected: (date) => false, select: (date) {});
+final FDateSelectionControl<DateTime?> selectionLifted = .liftedSingle(value: null, onChange: (date) {});
 
 // {@category "Selection" "`.managedSingle()` with internal controller"}
 /// Manages the selected date internally.
