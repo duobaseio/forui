@@ -4,27 +4,27 @@ import 'package:forui_cli/src/terminal/theme.dart';
 
 /// Prompts the user for a yes/no answer.
 ///
-/// [initialValue] is the initially highlighted choice. Arrow keys / Tab toggle; `y`/`n` answer immediately; Enter
+/// [initial] is the initially highlighted choice. Arrow keys / Tab toggle; `y`/`n` answer immediately; Enter
 /// confirms the current choice. Returns [Cancelled] on Esc / Ctrl+C.
 ///
 /// Ported from [clack](https://github.com/bombshell-dev/clack). AI-generated; use at your own risk.
-Result<bool> confirm({
+bool confirm({
   required String message,
-  bool initialValue = true,
+  bool initial = true,
   String active = 'Yes',
   String inactive = 'No',
 }) {
   if (!terminal.interactive) {
-    return Value(initialValue);
+    return initial;
   }
 
-  var value = initialValue;
+  var value = initial;
 
-  Result<bool> submit(FrameRenderer renderer) {
+  bool submit(FrameRenderer renderer) {
     renderer
       ..render(submitFrame(message, value ? active : inactive))
       ..commit();
-    return Value(value);
+    return value;
   }
 
   final renderer = FrameRenderer(terminal);
@@ -57,7 +57,7 @@ Result<bool> confirm({
           renderer
             ..render(cancelFrame(message))
             ..commit();
-          return const Cancelled();
+          return false;
         default:
           continue;
       }

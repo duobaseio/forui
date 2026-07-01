@@ -2,16 +2,10 @@ import 'package:forui_cli/src/terminal/primitives.dart';
 import 'package:forui_cli/src/terminal/terminal.dart';
 import 'package:forui_cli/src/terminal/theme.dart';
 
-/// Creates a [TaskLog] headed by [title]. Stream output via [TaskLog.message], then finish with [TaskLog.success] or
-/// [TaskLog.error].
-///
-/// [limit] caps how many of the most recent streamed lines stay visible (0 = all).
-///
-/// Ported from [clack](https://github.com/bombshell-dev/clack). AI-generated; use at your own risk.
-TaskLog taskLog({required String title, int limit = 0}) => TaskLog._(title, limit);
-
 /// A block that streams task output under a header, then collapses on success (clearing the output) or retains it on
 /// error.
+///
+/// Ported from [clack](https://github.com/bombshell-dev/clack). AI-generated; use at your own risk.
 class TaskLog {
   final String _title;
   final int _limit;
@@ -20,15 +14,13 @@ class TaskLog {
   final bool _interactive = terminal.interactive;
   var _started = false;
 
-  TaskLog._(this._title, this._limit);
+  TaskLog({required this._title, this._limit = 0});
 
   /// Appends an output [line] (which may itself contain newlines) and re-renders.
   void message(String line) {
     _lines.addAll(line.split('\n'));
     if (!_interactive) {
-      terminal
-        ..write(gutter(ansi.gray(symbols.bar), ansi.dim(line)))
-        ..write('\n');
+      terminal.writeln(gutter(ansi.gray(symbols.bar), ansi.dim(line)));
       return;
     }
 
@@ -40,7 +32,7 @@ class TaskLog {
       _finish(ansi.green(symbols.stepSubmit), message, keep: keep);
 
   /// Finishes the block in an error state, retaining the streamed output when [keep] is true.
-  void error({String message = '', bool keep = true}) => _finish(ansi.yellow(symbols.stepError), message, keep: keep);
+  void error({String message = '', bool keep = true}) => _finish(ansi.red(symbols.stepError), message, keep: keep);
 
   void _finish(String symbol, String message, {required bool keep}) {
     final header = message.isEmpty ? _title : message;
@@ -60,10 +52,8 @@ class TaskLog {
         ..commit();
     } else {
       terminal
-        ..write(barSpacer())
-        ..write('\n')
-        ..write(gutter(symbol, header))
-        ..write('\n');
+        ..writeln(barSpacer())
+        ..writeln(gutter(symbol, header));
     }
   }
 

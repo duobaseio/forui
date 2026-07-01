@@ -2,8 +2,10 @@ import 'dart:io';
 
 import 'package:forui_cli/src/codec.dart';
 import 'package:forui_cli/src/commands/theme/theme.dart';
+import 'package:forui_cli/src/components/log.dart';
 import 'package:forui_cli/src/components/spinner.dart';
 import 'package:forui_cli/src/configuration.dart';
+import 'package:forui_cli/src/terminal/terminal.dart';
 import 'package:yaml/yaml.dart';
 import 'package:yaml_edit/yaml_edit.dart';
 
@@ -52,11 +54,11 @@ Future<void> installTypography(Preset preset, Directory root, {required String d
 
   final additions = <Map<String, Object?>>[];
 
-  final progress = spinner()..start('Downloading fonts...');
+  final spinner = Spinner()..start('Downloading fonts...');
   final client = HttpClient();
   try {
     for (final FontFamily(:name, :format) in families) {
-      progress.message('Downloading $name...');
+      spinner.message('Downloading $name...');
 
       final assets = switch (format) {
         VariableFontFormat(:final normal, :final italic) => [
@@ -75,20 +77,21 @@ Future<void> installTypography(Preset preset, Directory root, {required String d
           return;
         }
 
-        if (await client.fetch('$fonts/$path') case final bytes?) {
-          file
-            ..createSync(recursive: true)
-            ..writeAsBytesSync(bytes);
-        } else {
-          progress.error('Failed to download $name from $fonts/$path.');
-          exit(1);
-        }
+        file
+          ..createSync(recursive: true)
+          ..writeAsBytesSync(await client.fetch('$fonts/$path'));
       }
 
-      await Future.wait([
-        for (final path in [...assets.map((a) => a.path), '${assets.first.path.split('/').first}/LICENSE.txt'])
-          fetch(path),
-      ]);
+      try {
+        await Future.wait([
+          for (final path in [...assets.map((a) => a.path), '${assets.first.path.split('/').first}/LICENSE.txt'])
+            fetch(path),
+        ]);
+      } on _DownloadException catch (e) {
+        spinner.error('Failed to download the $name font.', e.reason);
+        terminal.outro();
+        exit(1);
+      }
 
       if (!existing.contains(name)) {
         additions.add({
@@ -104,7 +107,7 @@ Future<void> installTypography(Preset preset, Directory root, {required String d
     client.close();
   }
 
-  progress.stop('Downloaded ${families.length == 1 ? '1 font' : '${families.length} fonts'}');
+  spinner.stop('Downloaded ${families.length == 1 ? '1 font' : '${families.length} fonts'}');
 
   // Rewrite the whole list as a block node. yaml_edit keeps a list that started empty (`[]`) in flow style, so
   // appending would emit nasty inline `[{family: ...}]` entries instead of `- family: ...`.
@@ -128,17 +131,27 @@ extension on YamlEditor {
 }
 
 extension on HttpClient {
-  Future<List<int>?> fetch(String url) async {
+  Future<List<int>> fetch(String url) async {
+    final HttpClientResponse response;
     try {
-      if (await (await getUrl(.parse(url))).close() case final response when response.statusCode == 200) {
-        return response.expand((c) => c).toList();
-      }
-
-      return null;
+      response = await (await getUrl(.parse(url))).close();
     } on SocketException {
-      return null;
+      throw _DownloadException('Could not reach ${Uri.parse(url).host}. Check your internet connection.');
     } on HttpException {
-      return null;
+      throw _DownloadException('Could not reach ${Uri.parse(url).host}. Check your internet connection.');
     }
+
+    if (response.statusCode != 200) {
+      throw _DownloadException('$url returned HTTP ${response.statusCode}. ');
+    }
+
+    return response.expand((c) => c).toList();
   }
+}
+
+/// Thrown when a font asset can't be downloaded; [reason] states the cause and [hint] optionally suggests a resolution.
+class _DownloadException implements Exception {
+  final String reason;
+
+  _DownloadException(this.reason);
 }

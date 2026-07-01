@@ -2,7 +2,7 @@ import 'dart:io';
 
 final ansi = () {
   final env = Platform.environment;
-  return Ansi(enabled: stdout.hasTerminal && !env.containsKey('NO_COLOR') && env['TERM'] != 'dumb');
+  return Ansi(supported: stdout.hasTerminal && !env.containsKey('NO_COLOR') && env['TERM'] != 'dumb');
 }();
 
 final truecolor = () {
@@ -11,7 +11,7 @@ final truecolor = () {
   // JediTerm renders 24-bit colour but doesn't advertise it via COLORTERM, so trust it explicitly (as `symbols` does).
   final supported =
       colorterm == 'truecolor' || colorterm == '24bit' || env['TERMINAL_EMULATOR'] == 'JetBrains-JediTerm';
-  return Truecolor(enabled: ansi.enabled && supported);
+  return Truecolor(supported: supported);
 }();
 
 final symbols = () {
@@ -24,7 +24,7 @@ final symbols = () {
     stepActive: '◆',
     stepSubmit: '◇',
     stepCancel: '■',
-    stepError: '▲',
+    stepError: '■',
     logInfo: '●',
     logSuccess: '◆',
     logWarn: '▲',
@@ -93,9 +93,10 @@ final symbols = () {
 class Ansi {
   static final _pattern = RegExp(r'\x1B\[[0-9;]*m');
 
-  final bool enabled;
+  final bool _supported;
+  bool _enabled = true;
 
-  const Ansi({required this.enabled});
+  Ansi({required this._supported});
 
   /// Removes ANSI SGR (colour/style) escape sequences from [text].
   String strip(String text) => text.replaceAll(_pattern, '');
@@ -120,6 +121,10 @@ class Ansi {
 
   /// An inverse-video single-space "cursor", or `_` when colour is disabled.
   String get cursor => enabled ? '\x1B[7m \x1B[0m' : '_';
+
+  bool get enabled => _supported && _enabled;
+
+  set enabled(bool value) => _enabled = value;
 }
 
 /// Applies 24-bit truecolor, or no-ops when truecolor is unsupported.
@@ -127,9 +132,10 @@ class Ansi {
 /// Unlike [Ansi]'s palette colours, these emit an exact RGB triple and ignore the terminal theme. Use for content whose
 /// colour is the point (e.g. theme swatches), not framework chrome. Output is stripped by [Ansi.strip].
 class Truecolor {
-  final bool enabled;
+  final bool _supported;
+  bool _enabled = true;
 
-  const Truecolor({required this.enabled});
+  Truecolor({required this._supported});
 
   /// Colours [text]'s foreground with [color] (`0xAARRGGBB`; alpha ignored).
   String foreground(int color, String text) => _wrap(38, color, text);
@@ -139,6 +145,10 @@ class Truecolor {
 
   String _wrap(int layer, int color, String text) =>
       enabled ? '\x1B[$layer;2;${(color >> 16) & 0xFF};${(color >> 8) & 0xFF};${color & 0xFF}m$text\x1B[0m' : text;
+
+  bool get enabled => _supported && _enabled;
+
+  set enabled(bool value) => _enabled = value;
 }
 
 /// The glyphs used to draw the gutter, step markers, radios, swatch, box and spinner.

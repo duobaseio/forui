@@ -5,26 +5,26 @@ import 'package:forui_cli/src/terminal/theme.dart';
 
 /// Prompts the user to pick one of [options] using arrow-key navigation; a flat, ungrouped [groupedSelect].
 ///
-/// See [groupedSelect] for [initialValue], [maxItems], and the return value.
+/// See [groupedSelect] for [initial], [maxItems], and the return value.
 ///
 /// Ported from [clack](https://github.com/bombshell-dev/clack). AI-generated; use at your own risk.
 Result<T> select<T>({
   required String message,
   required List<SelectOption<T>> options,
-  T? initialValue,
+  T? initial,
   int maxItems = 8,
-}) => groupedSelect(message: message, options: {'': options}, initialValue: initialValue, maxItems: maxItems);
+}) => groupedSelect(message: message, options: {'': options}, initial: initial, maxItems: maxItems);
 
 /// Prompts the user to pick one option from grouped [options], using arrow-key navigation.
 ///
 /// [options] maps a group header to its options, preserving insertion order; a `''` key renders its options without a
-/// header. Use [select] for a flat, ungrouped list. [initialValue] selects the initially highlighted option. When more
+/// header. Use [select] for a flat, ungrouped list. [initial] selects the initially highlighted option. When more
 /// than [maxItems] options are visible, a scrolling window keeps the selection visible. Returns [Cancelled] on Esc /
-/// Ctrl+C, or when not interactive and no [initialValue] matches.
+/// Ctrl+C, or when not interactive and no [initial] matches.
 Result<T> groupedSelect<T>({
   required String message,
   required Map<String, List<SelectOption<T>>> options,
-  T? initialValue,
+  T? initial,
   int maxItems = 8,
 }) {
   final entries = [
@@ -35,7 +35,7 @@ Result<T> groupedSelect<T>({
     return Cancelled<T>();
   }
 
-  var selected = initialValue == null ? 0 : entries.indexWhere((e) => e.option.value == initialValue);
+  var selected = initial == null ? 0 : entries.indexWhere((e) => e.option.value == initial);
   if (selected < 0) {
     selected = 0;
   }

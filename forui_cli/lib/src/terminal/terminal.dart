@@ -29,6 +29,7 @@ final terminal = Platform.isWindows ? WindowsTerminal() : UnixTerminal();
 /// forwards to `ioctl(TIOCGWINSZ)` bound with a fixed-arity FFI signature even though the syscall is variadic, an ABI
 /// mismatch that corrupts memory and crashes on arm64 macOS.
 abstract class Terminal {
+  bool _interactive = true;
   StreamSubscription<ProcessSignal>? _sigint;
 
   /// Switches the terminal into raw mode.
@@ -91,7 +92,11 @@ abstract class Terminal {
 
   void write(String text) => stdout.write(text);
 
-  void error(String text) => stderr.write(text);
+  void writeln(String text) => stdout.writeln(text);
+
+  void writeError(String text) => stderr.write(text);
+
+  void writeErrorln(String text) => stderr.writeln(text);
 
   void showCursor() => stdout.write('\x1B[?25h');
 
@@ -114,7 +119,9 @@ abstract class Terminal {
     _sigint = null;
   }
 
-  bool get interactive => stdin.hasTerminal && stdout.hasTerminal;
+  bool get interactive => _interactive && stdin.hasTerminal && stdout.hasTerminal;
+
+  set interactive(bool value) => _interactive = value;
 
   int get columns => stdout.hasTerminal ? stdout.terminalColumns : 80;
 }

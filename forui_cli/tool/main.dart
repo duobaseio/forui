@@ -7,14 +7,16 @@ import 'package:dart_style/dart_style.dart';
 import 'package:path/path.dart' as p;
 
 import 'snippets/generate_snippets.dart';
+import 'generate_icons.dart';
 import 'generate_styles.dart';
 import 'generate_theme.dart';
 
 final library = p.join(Directory.current.parent.path, 'forui', 'lib');
-final _commands = p.join(Directory.current.parent.path, 'forui_cli', 'lib', 'src', 'commands');
-final _snippet = p.join(_commands, 'snippet', 'snippet.dart');
-final _style = p.join(_commands, 'style', 'style.dart');
-final _theme = p.join(_commands, 'theme', 'theme.dart');
+final _base =  p.join(Directory.current.parent.path, 'forui_cli', 'lib', 'src');
+final _snippet = p.join(_base, 'commands', 'snippet', 'snippet.dart');
+final _icons = p.join(_base, 'preset', 'icon_mapping.dart');
+final _style = p.join(_base, 'commands', 'style', 'style.dart');
+final _theme = p.join(_base, 'commands', 'theme', 'theme.dart');
 
 final assetsLibrary = p.join(Directory.current.parent.path, 'forui_assets', 'lib', 'src');
 
@@ -48,6 +50,11 @@ Future<void> main() async {
   File(_snippet)
     ..parent.createSync(recursive: true)
     ..writeAsStringSync(generateSnippets(snippets));
+
+  final icons = await traverseIcons(collection);
+  File(_icons)
+    ..parent.createSync(recursive: true)
+    ..writeAsStringSync(generateIconMapping(icons));
 
   final styles = mapStyles(await traverseStyles(collection));
   File(_style)

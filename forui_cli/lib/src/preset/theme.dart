@@ -7,7 +7,6 @@ import 'package:forui_cli/src/components/log.dart';
 import 'package:forui_cli/src/configuration.dart';
 import 'package:forui_cli/src/preset/icons.dart';
 import 'package:forui_cli/src/preset/typography.dart';
-import 'package:forui_cli/src/terminal/primitives.dart';
 import 'package:forui_cli/src/terminal/terminal.dart';
 
 String _themeHeader(String preset, String? iconImport) =>
@@ -75,7 +74,6 @@ Future<void> create(
   Configuration configuration,
   Preset preset, {
   required bool force,
-  required bool interactive,
   required String output,
 }) async {
   final separator = Platform.pathSeparator;
@@ -100,14 +98,13 @@ Future<void> create(
 
     if (existing.isNotEmpty) {
       // Non-interactive runs can't prompt, so a conflict is a hard error; interactive runs ask.
-      if (!interactive) {
-        terminal.error('${existing.length} file(s) already exist; pass --force to overwrite.\n');
+      if (!terminal.interactive) {
+        terminal.writeErrorln('${existing.length} file(s) already exist; pass --force to overwrite.');
         exit(1);
       }
 
-      if (confirm(message: 'Overwrite ${existing.length} existing file(s)?', initialValue: false)
-          case Value(value: false) || Cancelled()) {
-        cancel('No theme created.');
+      if (!confirm(message: 'Overwrite ${existing.length} existing file(s)?', initial: false)) {
+        terminal.cancel('No theme created.');
         exit(130);
       }
     }
@@ -124,66 +121,25 @@ Future<void> create(
     iconsPath: '${_iconsHeader(themeFileName)}\n${generateIcons(preset)}\n',
   };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   for (final MapEntry(key: path, value: content) in files.entries) {
     File(path)
       ..createSync(recursive: true)
       ..writeAsStringSync(formatter.format(content));
 
     final message = 'Created ${Uri.file(path)}';
-    if (interactive) {
-      success(message);
+    if (terminal.interactive) {
+      terminal.success(message);
     } else {
-      terminal.write('$message\n');
+      terminal.writeln(message);
     }
   }
 
-  if (interactive) {
-    note(
+  if (terminal.interactive) {
+    terminal.note(
       'Regenerate this theme with:\n'
       '  dart run forui_cli theme create --preset ${preset.encode()}\n'
       '\n'
-      'See https://forui.dev/docs/guides/customizing-themes for how to use it.',
+      'See https://forui.dev/docs/concepts/themes for more information on themes.',
       title: 'Preset ${preset.encode()}',
     );
   }

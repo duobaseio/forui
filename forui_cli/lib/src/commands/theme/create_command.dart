@@ -9,6 +9,7 @@ import 'package:forui_cli/src/preset/theme.dart';
 import 'package:forui_cli/src/terminal/command.dart';
 import 'package:forui_cli/src/terminal/primitives.dart';
 import 'package:forui_cli/src/terminal/terminal.dart';
+import 'package:forui_cli/src/terminal/theme.dart';
 
 class ThemeCreateCommand extends ForuiCommand {
   @override
@@ -39,14 +40,16 @@ class ThemeCreateCommand extends ForuiCommand {
 
   @override
   Future<void> run() async {
-    final interactive = terminal.interactive && !globalResults!.flag('no-input');
+    ansi.enabled = globalResults!.flag('color');
+    truecolor.enabled = globalResults!.flag('color');
+    terminal.interactive = !globalResults!.flag('no-input');
     final force = argResults!.flag('force');
     final output = argResults!['output'] as String;
     final code = argResults!['preset'] as String?;
 
     if (argResults!.rest.isNotEmpty) {
-      terminal.error(
-        'Unexpected argument "${argResults!.rest.first}". Pass --preset <preset> or run without arguments.\n',
+      terminal.writeErrorln(
+        'Unexpected argument "${argResults!.rest.first}". Pass --preset <preset> or run without arguments.',
       );
       exit(1);
     }
@@ -56,16 +59,16 @@ class ThemeCreateCommand extends ForuiCommand {
       try {
         preset = Preset.decode(code);
       } on FormatException catch (e) {
-        terminal.error('Invalid preset: ${e.message}\n');
+        terminal.writeErrorln('Invalid preset: ${e.message}');
         exit(1);
       }
-    } else if (!interactive) {
-      terminal.error('Theme creation requires --preset when --no-input is set.\n');
+    } else if (!terminal.interactive) {
+      terminal.writeErrorln('Theme creation requires --preset when --no-input is set.');
       exit(1);
     }
 
-    if (interactive) {
-      intro('Create a Forui theme');
+    if (terminal.interactive) {
+      terminal.intro('Create a Forui theme');
 
       // Build the preset interactively when --preset wasn't given. Each prompt exits with 130 if cancelled.
       if (preset == null) {
@@ -77,16 +80,16 @@ class ThemeCreateCommand extends ForuiCommand {
               for (final base in BaseColor.values)
                 SelectOption(base, label: base.name, swatch: base.light.mutedForeground),
             ],
-            initialValue: .neutral,
+            initial: .neutral,
           ),
         );
 
         final primary = _require(
           select<PrimaryColor?>(
             message: 'Primary color',
-            options: <SelectOption<PrimaryColor?>>[
+            options: [
               // 'None' inherits the base colour, so show the chosen base's swatch beside it.
-              SelectOption(null, label: 'None', hint: 'use base', swatch: base.light.mutedForeground),
+              SelectOption(null, label: 'None (${base.name})', swatch: base.light.mutedForeground),
               for (final primary in PrimaryColor.values)
                 SelectOption(primary, label: primary.name, swatch: primary.light.primary),
             ],
@@ -104,14 +107,31 @@ class ThemeCreateCommand extends ForuiCommand {
           (fonts[group] ??= []).add(SelectOption(font, label: font.name, hint: font.url));
         }
 
-        final display = _require(autocomplete<FontFamily>(message: 'Display font', options: fonts, maxItems: 27));
-        final body = _require(autocomplete<FontFamily>(message: 'Body font', options: fonts, maxItems: 27));
+        terminal.note(
+          'Display fonts set headings and large text. Pick for character:\n'
+          'serifs and geometric sans add personality, and detail shows at size.\n'
+          '\n'
+          'Body fonts set paragraphs and UI. Pick for legibility:\n'
+          'a neutral sans with open, even letterforms reads best when small.\n'
+          '\n'
+          'Pair a characterful display with a plain body, or use one sans for both.\n'
+          '\n'
+          'See https://fonts.google.com/knowledge/choosing_type for more information on choosing & pairing fonts.',
+          title: 'Choosing fonts',
+        );
+
+        final display = _require(
+          autocomplete<FontFamily>(message: 'Display font', options: fonts, initial: .inter, maxItems: 27),
+        );
+        final body = _require(
+          autocomplete<FontFamily>(message: 'Body font', options: fonts, initial: .inter, maxItems: 27),
+        );
 
         final icon = _require(
           select<IconLibrary>(
             message: 'Icon library',
             options: [for (final icon in IconLibrary.values) SelectOption(icon, label: icon.name, hint: icon.url)],
-            initialValue: .lucide,
+            initial: .lucide,
           ),
         );
 
@@ -119,7 +139,7 @@ class ThemeCreateCommand extends ForuiCommand {
           select<Radius>(
             message: 'Border radius',
             options: [for (final radius in Radius.values) SelectOption(radius, label: radius.name)],
-            initialValue: .medium,
+            initial: .medium,
           ),
         );
 
@@ -128,10 +148,10 @@ class ThemeCreateCommand extends ForuiCommand {
     }
 
     // preset is non-null here: the wizard fills it when interactive, and a non-interactive run is required to pass one.
-    await create(configuration, preset!, force: force, interactive: interactive, output: output);
+    await create(configuration, preset!, force: force, output: output);
 
-    if (interactive) {
-      outro('Theme created!');
+    if (terminal.interactive) {
+      terminal.outro('Theme created!');
     }
   }
 
@@ -141,7 +161,7 @@ class ThemeCreateCommand extends ForuiCommand {
       return value;
     }
 
-    cancel('No theme created.');
+    terminal.cancel('No theme created.');
     exit(130);
   }
 }

@@ -3,12 +3,14 @@ import 'dart:io';
 import 'package:forui_cli/src/commands/snippet/snippet.dart';
 import 'package:forui_cli/src/components/confirm.dart';
 import 'package:forui_cli/src/components/log.dart';
+import 'package:forui_cli/src/components/multiselect.dart';
 import 'package:forui_cli/src/components/select.dart';
 import 'package:forui_cli/src/configuration.dart';
 import 'package:forui_cli/src/terminal/command.dart';
 import 'package:forui_cli/src/terminal/primitives.dart';
 import 'package:forui_cli/src/terminal/terminal.dart';
 import 'package:forui_cli/src/terminal/text.dart';
+import 'package:forui_cli/src/terminal/theme.dart';
 
 class SnippetCreateCommand extends ForuiCommand {
   @override
@@ -21,7 +23,7 @@ class SnippetCreateCommand extends ForuiCommand {
   final description = 'Create code snippet files.';
 
   @override
-  final arguments = '[snippet]';
+  final arguments = '[snippet...]';
 
   final Configuration configuration;
 
@@ -38,39 +40,51 @@ class SnippetCreateCommand extends ForuiCommand {
 
   @override
   void run() {
+    ansi.enabled = globalResults!.flag('color');
+    terminal.interactive = !globalResults!.flag('no-input');
     final output = argResults!['output'] as String;
-    final interactive = terminal.interactive && !globalResults!.flag('no-input');
     final arguments = argResults!.rest;
 
-    if (arguments.length > 1) {
-      terminal.error('Only one snippet can be created at a time.\n');
+    // Multiple snippets can't all be written to the same file.
+    if (arguments.length > 1 && output.endsWith('.dart')) {
+      terminal.writeErrorln(
+        'Cannot write multiple snippets to a single file. Try passing a directory to --output or omitting --output.',
+      );
       exit(1);
     }
 
-    // `select` auto-returns the first option when not interactive, so a script would silently scaffold it. Error instead.
-    if (arguments.isEmpty && !interactive) {
-      terminal.error('No snippet specified. Run "forui snippet ls" to see all snippets.\n');
+    // The multiselect can't prompt without a TTY, so a script must name its snippets.
+    if (arguments.isEmpty && !terminal.interactive) {
+      terminal.writeErrorln('No snippet specified. Run "forui snippet ls" to see all snippets.');
       exit(1);
     }
 
     if (arguments.isNotEmpty) {
-      final snippet = arguments.first;
-      if (!_validate(snippet)) {
+      var valid = true;
+      for (final snippet in arguments) {
+        if (!_validate(snippet)) {
+          valid = false;
+        }
+      }
+      if (!valid) {
         exit(1);
       }
 
-      // Non-interactive runs emit a plain line instead of an interactive box.
-      if (!interactive) {
-        terminal.write('Created ${_generate(snippet, output: output, interactive: false)}\n');
+      // Non-interactive runs emit plain lines instead of an interactive box.
+      if (!terminal.interactive) {
+        for (final snippet in arguments) {
+          terminal.writeln('Created ${_generate(snippet, output: output)}');
+        }
         return;
       }
     }
 
-    intro('Create code snippet');
+    terminal.intro('Create code snippets');
 
-    final snippet = arguments.isEmpty
-        ? switch (select<String>(
-            message: 'Snippet',
+    final selected = arguments.isEmpty
+        ? switch (multiselect<String>(
+            message: 'Snippets',
+            min: 1,
             options: [
               for (final name in snippets.keys.toList()..sort()) SelectOption(name, hint: '(${snippets[name]!.$2})'),
             ],
@@ -78,14 +92,28 @@ class SnippetCreateCommand extends ForuiCommand {
             Value(:final value) => value,
             Cancelled() => null,
           }
-        : arguments.first;
+        : arguments;
 
-    if (snippet == null) {
-      cancel('No snippet created.');
+    if (selected == null) {
+      terminal.cancel('No snippets created.');
       exit(130);
     }
 
-    outro('Created ${_generate(snippet, output: output, interactive: true)}');
+    // The multiselect can pick several, but only one snippet fits a single file.
+    if (selected.length > 1 && output.endsWith('.dart')) {
+      terminal
+        ..error(
+          'Cannot write multiple snippets to a single file.',
+          hint: 'Try passing a directory to --output or omitting --output.',
+        )
+        ..outro();
+      exit(1);
+    }
+
+    for (final snippet in selected) {
+      terminal.success('Created ${_generate(snippet, output: output)}');
+    }
+    terminal.outro('Created ${selected.length} snippet(s).');
   }
 
   bool _validate(String snippet) {
@@ -106,13 +134,13 @@ class SnippetCreateCommand extends ForuiCommand {
     }
 
     terminal
-      ..error('$buffer\n')
-      ..error('Run "forui snippet ls" to see all code snippets.\n');
+      ..writeErrorln('$buffer')
+      ..writeErrorln('Run "forui snippet ls" to see all code snippets.');
 
     return false;
   }
 
-  Uri _generate(String snippet, {required String output, required bool interactive}) {
+  Uri _generate(String snippet, {required String output}) {
     final force = argResults!.flag('force');
 
     final (file, _, source) = snippets[snippet.toLowerCase()]!;
@@ -121,19 +149,14 @@ class SnippetCreateCommand extends ForuiCommand {
         '${output.endsWith('.dart') ? output : '$output${Platform.pathSeparator}$file.dart'}';
 
     if (!force && File(path).existsSync()) {
-      if (interactive) {
-        final overwrite = switch (confirm(message: 'Overwrite existing file?', initialValue: false)) {
-          Value(:final value) => value,
-          Cancelled() => false,
-        };
-
-        if (!overwrite) {
-          cancel('No snippet created.');
-          exit(130);
-        }
-      } else {
-        terminal.error('File already exists; pass --force to overwrite.\n');
+      if (!terminal.interactive) {
+        terminal.writeErrorln('File already exists; pass --force to overwrite.');
         exit(1);
+      }
+
+      if (!confirm(message: 'Overwrite existing file?', initial: false)) {
+        terminal.cancel('No snippet created.');
+        exit(130);
       }
     }
 

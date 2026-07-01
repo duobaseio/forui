@@ -111,7 +111,7 @@ class Configuration {
         },
       );
     } on FormatException catch (e) {
-      terminal.error('${e.message}\n');
+      terminal.writeErrorln(e.message);
       exit(2);
     }
   }

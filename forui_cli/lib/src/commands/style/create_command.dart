@@ -10,6 +10,7 @@ import 'package:forui_cli/src/terminal/command.dart';
 import 'package:forui_cli/src/terminal/primitives.dart';
 import 'package:forui_cli/src/terminal/terminal.dart';
 import 'package:forui_cli/src/terminal/text.dart';
+import 'package:forui_cli/src/terminal/theme.dart';
 
 const _unnamespaced = '''
 import 'package:flutter/cupertino.dart';
@@ -170,20 +171,22 @@ class StyleCreateCommand extends ForuiCommand {
 
   @override
   void run() {
+    ansi.enabled = globalResults!.flag('color');
+    truecolor.enabled = globalResults!.flag('color');
+    terminal.interactive = !globalResults!.flag('no-input');
     final output = argResults!['output'] as String;
     final all = argResults!.flag('all');
-    final interactive = terminal.interactive && !globalResults!.flag('no-input');
     final rest = argResults!.rest;
 
     if (rest.isNotEmpty && all) {
-      terminal.error('Cannot use "[styles]" and "--all" at the same time.\n');
+      terminal.writeErrorln('Cannot use "[styles]" and "--all" at the same time.');
       exit(1);
     }
 
     // `autocompleteMultiselect` returns the initial (empty) selection when not interactive, so a script would silently
     // create nothing. Error instead.
-    if (rest.isEmpty && !all && !interactive) {
-      terminal.error('No style specified. Run "forui style ls" to see all styles.\n');
+    if (rest.isEmpty && !all && !terminal.interactive) {
+      terminal.writeErrorln('No style specified. Run "forui style ls" to see all styles.');
       exit(1);
     }
 
@@ -192,20 +195,17 @@ class StyleCreateCommand extends ForuiCommand {
       exit(1);
     }
 
-    if (!interactive) {
-      _generate(all ? Style.values.asNameMap().keys.toList() : rest, output: output, interactive: false);
+    if (!terminal.interactive) {
+      _generate(all ? Style.values.asNameMap().keys.toList() : rest, output: output);
       return;
     }
 
-    intro('Create widget styles');
+    terminal.intro('Create widget styles');
 
-    final List<String> styles;
-    if (all) {
-      styles = Style.values.asNameMap().keys.toList();
-    } else if (rest.isNotEmpty) {
-      styles = rest;
-    } else {
-      styles = switch (autocompleteMultiselect<String>(
+    final styles = switch (all) {
+      true => Style.values.asNameMap().keys.toList(),
+      false when rest.isNotEmpty => rest,
+      false => switch (autocompleteMultiselect<String>(
         message: 'Styles',
         options: {
           '': [
@@ -217,7 +217,6 @@ class StyleCreateCommand extends ForuiCommand {
         // "autocomplete-field", and "autocompletefield" all match.
         filter: (option, query) {
           final q = _fold(query);
-          // Every option above is built with a non-null hint.
           return _fold(option.label).contains(q) || _fold(option.hint!).contains(q);
         },
         min: 1,
@@ -225,11 +224,10 @@ class StyleCreateCommand extends ForuiCommand {
       )) {
         Value(:final value) => value,
         Cancelled() => _cancelled('No styles created.'),
-      };
-    }
+      },
+    };
 
-    final count = _generate(styles, output: output, interactive: true);
-    outro('Created $count file(s).');
+    terminal.outro('Created ${_generate(styles, output: output)} file(s).');
   }
 
   bool _validate(List<String> styles) {
@@ -253,11 +251,11 @@ class StyleCreateCommand extends ForuiCommand {
         }
       }
 
-      terminal.error('$buffer\n');
+      terminal.writeErrorln('$buffer');
     }
 
     if (!valid) {
-      terminal.error('Run "forui style ls" to see all styles.\n');
+      terminal.writeErrorln('Run "forui style ls" to see all styles.');
     }
 
     return valid;
@@ -265,7 +263,7 @@ class StyleCreateCommand extends ForuiCommand {
 
   /// Generates the style files for [styles] and returns the number of files written. Multiple styles collapse into one
   /// namespaced file when [output] is a `.dart` file.
-  int _generate(List<String> styles, {required String output, required bool interactive}) {
+  int _generate(List<String> styles, {required String output}) {
     final force = argResults!.flag('force');
 
     final paths = <String, List<String>>{};
@@ -285,19 +283,15 @@ class StyleCreateCommand extends ForuiCommand {
 
     if (!force && existing.isNotEmpty) {
       final overwrite =
-          interactive &&
-          switch (confirm(message: 'Overwrite ${existing.length} existing file(s)?', initialValue: false)) {
-            Value(:final value) => value,
-            Cancelled() => false,
-          };
+          terminal.interactive && confirm(message: 'Overwrite ${existing.length} existing file(s)?', initial: false);
 
       if (!overwrite) {
-        if (interactive) {
-          _cancelled('No styles created.');
+        if (!terminal.interactive) {
+          terminal.writeErrorln('${existing.length} file(s) already exist; pass --force to overwrite.');
+          exit(1);
         }
 
-        terminal.error('${existing.length} file(s) already exist; pass --force to overwrite.\n');
-        exit(1);
+        _cancelled('No styles created.');
       }
     }
 
@@ -345,10 +339,10 @@ class StyleCreateCommand extends ForuiCommand {
         ..createSync(recursive: true)
         ..writeAsStringSync(formatter.format(buffer.toString()));
 
-      if (interactive) {
-        success('Created ${Uri.file(path)}');
+      if (!terminal.interactive) {
+        terminal.success('Created ${Uri.file(path)}');
       } else {
-        terminal.write('Created ${Uri.file(path)}\n');
+        terminal.writeln('Created ${Uri.file(path)}');
       }
     }
 
@@ -356,7 +350,7 @@ class StyleCreateCommand extends ForuiCommand {
   }
 
   Never _cancelled(String message) {
-    cancel(message);
+    terminal.cancel(message);
     exit(130);
   }
 }

@@ -7,13 +7,15 @@ import 'package:forui_cli/src/terminal/theme.dart';
 /// Prompts the user to pick one option by typing to filter, then navigating the matches with the arrow keys.
 ///
 /// [options] maps a group header to its options, preserving insertion order; a `''` key renders its options without a
-/// header. [filter] decides whether an option matches the current query; it defaults to a case-insensitive label
-/// substring match. [placeholder] is shown dimmed while the query is empty. Returns [Cancelled] on Esc / Ctrl+C.
+/// header. [initial] selects the initially highlighted option. [filter] decides whether an option matches the current
+/// query; it defaults to a case-insensitive label substring match. [placeholder] is shown dimmed while the query is
+/// empty. Returns [Cancelled] on Esc / Ctrl+C.
 ///
 /// Ported from [clack](https://github.com/bombshell-dev/clack). AI-generated; use at your own risk.
 Result<T> autocomplete<T>({
   required String message,
   required Map<String, List<SelectOption<T>>> options,
+  T? initial,
   String placeholder = '',
   int maxItems = 8,
   bool Function(SelectOption<T> option, String query)? filter,
@@ -25,13 +27,18 @@ Result<T> autocomplete<T>({
   if (entries.isEmpty) {
     return Cancelled<T>();
   }
+
+  var cursor = initial == null ? 0 : entries.indexWhere((e) => e.option.value == initial);
+  if (cursor < 0) {
+    cursor = 0;
+  }
+
   if (!terminal.interactive) {
-    return Value(entries.first.option.value);
+    return Value(entries[cursor].option.value);
   }
 
   final match = filter ?? (o, q) => o.label.toLowerCase().contains(q.toLowerCase());
   var query = '';
-  var cursor = 0;
   var filtered = List<({String group, SelectOption<T> option})>.of(entries);
 
   void recompute() {
