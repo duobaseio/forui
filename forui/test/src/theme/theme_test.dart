@@ -10,8 +10,7 @@ class Foo extends StatelessWidget {
   const Foo({required this.child, super.key});
 
   @override
-  Widget build(BuildContext context) =>
-      FBasicTheme(data: FTheme.neutral.dark.touch, textDirection: .ltr, child: child);
+  Widget build(BuildContext context) => FBasicTheme(data: FTheme.neutral.dark.touch, textDirection: .ltr, child: child);
 }
 
 void main() {
