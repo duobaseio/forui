@@ -129,7 +129,10 @@ final FDateSelectionControl<Set<DateTime>> selectionLiftedMulti = .liftedMulti(v
 
 // {@category "Selection" "`.liftedRange()`"}
 /// Lifts range selection to the parent for external state management.
-final FDateSelectionControl<(DateTime, DateTime)?> selectionLiftedRange = .liftedRange(value: null, onChange: (range) {});
+final FDateSelectionControl<(DateTime, DateTime)?> selectionLiftedRange = .liftedRange(
+  value: null,
+  onChange: (range) {},
+);
 
 // {@category "Selection" "`.managedSingle()` with internal controller"}
 /// Single date selection managed internally.
