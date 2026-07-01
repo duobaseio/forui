@@ -149,7 +149,6 @@ extension on HttpClient {
   }
 }
 
-/// Thrown when a font asset can't be downloaded; [reason] states the cause and [hint] optionally suggests a resolution.
 class _DownloadException implements Exception {
   final String reason;
 

@@ -23,17 +23,8 @@
 
 ## Getting Started
 
-Activate the CLI globally:
-
-```shell
-dart pub global activate forui_cli
-```
-
-Then run it from your Flutter project and follow the prompts:
-
-```shell
-forui
-```
+The CLI is automatically downloaded as a development dependency when running `dart run forui`. No additional action is
+required.
 
 See the [documentation](https://forui.dev/docs) for the full command reference.
 
