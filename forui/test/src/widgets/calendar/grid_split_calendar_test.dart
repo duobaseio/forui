@@ -367,10 +367,7 @@ void main() {
         TestScaffold.app(
           child: StatefulBuilder(
             builder: (context, setState) => FCalendar.splitGrid(
-              selectionControl: .liftedSingle(
-                value: selected,
-                onChange: (date) => setState(() => selected = date),
-              ),
+              selectionControl: .liftedSingle(value: selected, onChange: (date) => setState(() => selected = date)),
               control: control(),
             ),
           ),

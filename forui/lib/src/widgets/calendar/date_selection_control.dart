@@ -138,7 +138,8 @@ class _Range extends FDateSelectionManagedControl<(DateTime, DateTime)?> {
 }
 
 /// A [FDateSelectionLiftedControl] enables a parent to own the selection state and update it via a callback.
-abstract class FDateSelectionLiftedControl<T> extends FDateSelectionControl<T> with _$FDateSelectionLiftedControlMixin<T> {
+abstract class FDateSelectionLiftedControl<T> extends FDateSelectionControl<T>
+    with _$FDateSelectionLiftedControlMixin<T> {
   /// The currently selected value.
   @override
   final T value;
@@ -175,7 +176,8 @@ class _LiftedMulti extends FDateSelectionLiftedControl<Set<DateTime>> {
   const _LiftedMulti({required super.value, required super.onChange});
 
   @override
-  FDateSelectionController<Set<DateTime>> createController() => _LiftedMultiController(value: value, onChange: onChange);
+  FDateSelectionController<Set<DateTime>> createController() =>
+      _LiftedMultiController(value: value, onChange: onChange);
 
   @override
   void _updateController(FDateSelectionController<Set<DateTime>> controller) =>

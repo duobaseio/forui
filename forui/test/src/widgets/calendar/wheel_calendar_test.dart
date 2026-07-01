@@ -304,10 +304,7 @@ void main() {
         TestScaffold.app(
           child: StatefulBuilder(
             builder: (context, setState) => FCalendar.wheel(
-              selectionControl: .liftedSingle(
-                value: selected,
-                onChange: (date) => setState(() => selected = date),
-              ),
+              selectionControl: .liftedSingle(value: selected, onChange: (date) => setState(() => selected = date)),
               control: FWheelCalendarControl(start: .utc(2023, 2, 8), today: .utc(2024, 7, 14), end: .utc(2025, 8, 10)),
             ),
           ),
