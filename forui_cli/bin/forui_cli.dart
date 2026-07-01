@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:args/command_runner.dart';
+import 'package:forui_cli/src/commands/init/command.dart';
 import 'package:forui_cli/src/commands/snippet/command.dart';
 import 'package:forui_cli/src/commands/style/command.dart';
 import 'package:forui_cli/src/commands/theme/command.dart';
@@ -12,7 +13,7 @@ Future<void> main(List<String> arguments) async {
   final configuration = Configuration.parse();
 
   final runner = ForuiCommandRunner('forui', 'Manage your Forui development environment.')
-    // ..addCommand(InitCommand(configuration))
+    ..addCommand(InitCommand(configuration))
     ..addCommand(SnippetCommand(configuration))
     ..addCommand(StyleCommand(configuration))
     ..addCommand(ThemeCommand(configuration));

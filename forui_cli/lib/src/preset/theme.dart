@@ -28,7 +28,7 @@ part 'icons.dart';
 ///
 /// You can also generate styles to be used in the generated [FThemeData] using:
 /// ```shell
-/// dart forui style create [styles]
+/// dart run forui style create [styles]
 /// ```
 ///
 /// See:
