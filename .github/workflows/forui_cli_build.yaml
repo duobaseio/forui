@@ -35,7 +35,7 @@ jobs:
       - run: dart analyze
         working-directory: forui_cli
       - run: dart run forui_cli init -f
-      - run: dart run forui_cli theme create zinc -f
+      - run: dart run forui_cli theme create --preset babbbc -f # zinc base, defaults otherwise
       - run: dart run forui_cli style create -af
       - run: dart run forui_cli style create -af -o ./lib/theme/all_styles.dart
       - run: dart run forui_cli snippet create icon-mapping -f
