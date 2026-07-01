@@ -153,7 +153,7 @@ class StyleCreateCommand extends ForuiCommand {
   final description = 'Create Forui widget style files.';
 
   @override
-  final arguments = '[styles]';
+  final arguments = '[style...]';
 
   final Configuration configuration;
 
@@ -179,7 +179,7 @@ class StyleCreateCommand extends ForuiCommand {
     final rest = argResults!.rest;
 
     if (rest.isNotEmpty && all) {
-      terminal.writeErrorln('Cannot use "[styles]" and "--all" at the same time.');
+      terminal.writeErrorln('Cannot use "[style...]" and "--all" at the same time.');
       exit(1);
     }
 
