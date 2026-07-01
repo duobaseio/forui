@@ -55,6 +55,71 @@ String optionLine(String label, String? hint, {required bool active, int? swatch
 /// the widest label-plus-hint so it doesn't shift as the active option changes.
 int optionWidth(String label, String? hint) => displayWidth(ansi.strip(optionLine(label, hint, active: true)));
 
+/// Renders one option row (checkbox + label + optional hint) for `autocompleteMultiselect`.
+///
+/// [active] is the highlighted (cursor) row; [selected] is whether the option is currently chosen. The checkbox is cyan
+/// while active, green when selected but inactive, and dim otherwise.
+String checkboxLine(String label, String? hint, {required bool active, required bool selected}) {
+  final box = active
+      ? ansi.cyan(selected ? symbols.checkboxSelected : symbols.checkboxActive)
+      : selected
+      ? ansi.green(symbols.checkboxSelected)
+      : ansi.dim(symbols.checkboxInactive);
+  final text = active ? ansi.cyan(label) : ansi.dim(label);
+  final h = (hint != null && active) ? ' ${ansi.dim(hint)}' : '';
+  return gutter(ansi.gray(symbols.bar), '$box $text$h');
+}
+
+/// The display width of [checkboxLine] as if active, selected, and with its [hint] shown. Used to size the divider
+/// against the widest row so it doesn't shift as the active option changes.
+int checkboxWidth(String label, String? hint) =>
+    displayWidth(ansi.strip(checkboxLine(label, hint, active: true, selected: true)));
+
+/// Appends a vertical scrollbar to the right edge of [rows] and returns the frame width to pass to [divider].
+///
+/// [positions] holds each row's option index within the visible window (`null` for non-option rows such as group
+/// headers, which get no glyph). The thumb is sized to the visible fraction ([maxItems] of [total]) and positioned by
+/// the window [start]. [content] is the frame width without a scrollbar; [optionWidths] are the widths of every match
+/// (visible or not), used to anchor the bar so it and the divider don't shift while scrolling. When the list fits
+/// ([total] `<=` [maxItems]) this is a no-op that returns [content] unchanged.
+int scrollbar(
+  List<String> rows,
+  List<int?> positions, {
+  required int start,
+  required int total,
+  required int maxItems,
+  required int content,
+  required Iterable<int> optionWidths,
+}) {
+  if (total <= maxItems) {
+    return content;
+  }
+
+  // Anchor to the widest match (even off-screen ones) so the column stays put as the window scrolls.
+  var anchor = content;
+  for (final w in optionWidths) {
+    if (w > anchor) {
+      anchor = w;
+    }
+  }
+  final width = anchor + 2;
+
+  final thumb = (maxItems * maxItems / total).round().clamp(1, maxItems);
+  final span = maxItems - thumb;
+  final at = span == 0 ? 0 : (start / (total - maxItems) * span).round().clamp(0, span);
+  for (var r = 0; r < rows.length; r++) {
+    final p = positions[r];
+    if (p == null) {
+      continue;
+    }
+    final glyph = ansi.gray(p >= at && p < at + thumb ? symbols.scrollThumb : symbols.scrollTrack);
+    final pad = width - 1 - displayWidth(ansi.strip(rows[r]));
+    rows[r] = '${rows[r]}${' ' * (pad < 0 ? 0 : pad)}$glyph';
+  }
+
+  return width;
+}
+
 /// Draws a multi-line frame in place, erasing the previously drawn frame on each [render] so a prompt updates without
 /// scrolling the terminal.
 class FrameRenderer {

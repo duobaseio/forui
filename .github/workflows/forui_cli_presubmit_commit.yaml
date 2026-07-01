@@ -1,0 +1,62 @@
+name: Forui CLI Presubmit Commit
+
+on:
+  workflow_run:
+    workflows: ["Forui CLI Presubmit Format"]
+    types: [completed]
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  commit:
+    name: Commit Changes
+    runs-on: ubuntu-latest
+    if: >-
+      ${{ github.event.workflow_run.conclusion == 'success'
+      && github.event.workflow_run.head_repository.full_name == github.repository }}
+    steps:
+      - id: download-patch
+        continue-on-error: true
+        uses: actions/download-artifact@v8
+        with:
+          name: format-changes
+          path: ./
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.workflow_run.id }}
+
+      - id: check-changes
+        run: |
+          if [ -f "changes.patch" ] && [ -s "changes.patch" ]; then
+            echo "changes=true" >> $GITHUB_OUTPUT
+            mv changes.patch ${{ runner.temp }}/changes.patch
+          else
+            echo "changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - if: steps.check-changes.outputs.changes == 'true'
+        uses: actions/create-github-app-token@v3
+        id: generate-token
+        with:
+          app-id: ${{ secrets.AUTO_MAID_APP_ID }}
+          private-key: ${{ secrets.AUTO_MAID_PRIVATE_KEY }}
+
+      - if: steps.check-changes.outputs.changes == 'true'
+        uses: actions/checkout@v7
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
+          ref: ${{ github.event.workflow_run.head_branch }}
+
+      - if: steps.check-changes.outputs.changes == 'true'
+        run: |
+          mv ${{ runner.temp }}/changes.patch .
+          git apply changes.patch
+          rm changes.patch
+
+      - if: steps.check-changes.outputs.changes == 'true'
+        uses: EndBug/add-and-commit@v10
+        with:
+          pull: '--rebase --autostash'
+          message: 'Prepare Forui CLI for review'
+          add: '*'

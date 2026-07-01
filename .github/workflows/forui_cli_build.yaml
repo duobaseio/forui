@@ -1,0 +1,45 @@
+name: Forui CLI Build
+
+on:
+  workflow_dispatch: {}
+  push:
+    paths:
+      - .github/workflows/forui_cli_build.yaml
+      - forui_cli/**
+      - forui/**
+  pull_request:
+    paths:
+      - forui_cli/**
+      - forui/**
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build CLI
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        flutter-version: [ 3.x ]
+    defaults:
+      run:
+        working-directory: forui/example
+    steps:
+      - uses: actions/checkout@v7
+      - uses: subosito/flutter-action@v2.23.0
+        with:
+          flutter-version: ${{ matrix.flutter-version }}
+      - run: dart run build_runner build
+        working-directory: forui
+      - run: dart analyze
+        working-directory: forui_cli
+      - run: dart run forui_cli init -f
+      - run: dart run forui_cli theme create zinc -f
+      - run: dart run forui_cli style create -af
+      - run: dart run forui_cli style create -af -o ./lib/theme/all_styles.dart
+      - run: dart run forui_cli snippet create icon-mapping -f
+      - run: dart run forui_cli snippet create main-basic -f
+      - run: dart run forui_cli snippet create main-router -f
+      - run: dart run forui_cli snippet create material-theme -f
+      - run: flutter analyze --no-fatal-infos --no-fatal-warnings

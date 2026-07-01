@@ -91,6 +91,8 @@ abstract class Terminal {
 
   void write(String text) => stdout.write(text);
 
+  void error(String text) => stderr.write(text);
+
   void showCursor() => stdout.write('\x1B[?25h');
 
   void hideCursor() => stdout.write('\x1B[?25l');

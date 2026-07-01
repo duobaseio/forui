@@ -31,7 +31,12 @@ final symbols = () {
     logError: '■',
     radioActive: '●',
     radioInactive: '○',
+    checkboxSelected: '◼',
+    checkboxActive: '◻',
+    checkboxInactive: '◻',
     swatch: '█',
+    scrollThumb: '█',
+    scrollTrack: '░',
     boxTopRight: '╮',
     connectLeft: '├',
     boxBottomRight: '╯',
@@ -54,7 +59,12 @@ final symbols = () {
     logError: 'x',
     radioActive: '>',
     radioInactive: ' ',
+    checkboxSelected: '[+]',
+    checkboxActive: '[•]',
+    checkboxInactive: '[ ]',
     swatch: '#',
+    scrollThumb: '#',
+    scrollTrack: ':',
     boxTopRight: '+',
     connectLeft: '+',
     boxBottomRight: '+',
@@ -147,7 +157,12 @@ class Symbols {
   final String logError;
   final String radioActive;
   final String radioInactive;
+  final String checkboxSelected;
+  final String checkboxActive;
+  final String checkboxInactive;
   final String swatch;
+  final String scrollThumb;
+  final String scrollTrack;
   final String boxTopRight;
   final String connectLeft;
   final String boxBottomRight;
@@ -170,7 +185,12 @@ class Symbols {
     required this.logError,
     required this.radioActive,
     required this.radioInactive,
+    required this.checkboxSelected,
+    required this.checkboxActive,
+    required this.checkboxInactive,
     required this.swatch,
+    required this.scrollThumb,
+    required this.scrollTrack,
     required this.boxTopRight,
     required this.connectLeft,
     required this.boxBottomRight,

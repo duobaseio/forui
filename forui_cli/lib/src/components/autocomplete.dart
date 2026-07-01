@@ -9,6 +9,8 @@ import 'package:forui_cli/src/terminal/theme.dart';
 /// [options] maps a group header to its options, preserving insertion order; a `''` key renders its options without a
 /// header. [filter] decides whether an option matches the current query; it defaults to a case-insensitive label
 /// substring match. [placeholder] is shown dimmed while the query is empty. Returns [Cancelled] on Esc / Ctrl+C.
+///
+/// Ported from [clack](https://github.com/bombshell-dev/clack). AI-generated; use at your own risk.
 Result<T> autocomplete<T>({
   required String message,
   required Map<String, List<SelectOption<T>>> options,
@@ -102,15 +104,18 @@ String _frame<T>(
   // Interleave a dim header whenever the group changes; starting [shown] at null shows the window's first header even
   // when scrolled into the middle of a group.
   final rows = <String>[];
+  final positions = <int?>[]; // each option's window position (for the scrollbar); null for non-option rows
   var optionsWidth = 0;
   String? shown;
   for (var i = start; i < end; i++) {
     final entry = filtered[i];
     if (entry.group.isNotEmpty && entry.group != shown) {
       rows.add(gutter(ansi.gray(symbols.bar), ansi.dim(entry.group)));
+      positions.add(null);
     }
     shown = entry.group;
     rows.add(optionLine(entry.option.label, entry.option.hint, active: i == cursor));
+    positions.add(i - start);
     // Size against the label + hint of every visible option so the divider stays put as the selection moves.
     final w = optionWidth(entry.option.label, entry.option.hint);
     if (w > optionsWidth) {
@@ -119,6 +124,7 @@ String _frame<T>(
   }
   if (rows.isEmpty) {
     rows.add(gutter(ansi.gray(symbols.bar), ansi.dim('No matches')));
+    positions.add(null);
   }
 
   final hint = gutter(
@@ -127,11 +133,20 @@ String _frame<T>(
         ? 'type ${ansi.dim('filter')} · ↑/↓ ${ansi.dim('navigate')} · enter ${ansi.dim('select')}'
         : 'type ${ansi.dim('filter')} - up/down ${ansi.dim('navigate')} - enter ${ansi.dim('select')}',
   );
-  final width = [
+  final content = [
     search,
     ...rows,
     hint,
   ].map((line) => displayWidth(ansi.strip(line))).fold(optionsWidth, (a, b) => a > b ? a : b);
+  final width = scrollbar(
+    rows,
+    positions,
+    start: start,
+    total: total,
+    maxItems: maxItems,
+    content: content,
+    optionWidths: filtered.map((e) => optionWidth(e.option.label, e.option.hint)),
+  );
 
   return [barSpacer(), activeHeader(message), search, ...rows, divider(width), hint].join('\n');
 }

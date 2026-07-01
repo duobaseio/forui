@@ -6,6 +6,8 @@ import 'package:forui_cli/src/terminal/theme.dart';
 /// [TaskLog.error].
 ///
 /// [limit] caps how many of the most recent streamed lines stay visible (0 = all).
+///
+/// Ported from [clack](https://github.com/bombshell-dev/clack). AI-generated; use at your own risk.
 TaskLog taskLog({required String title, int limit = 0}) => TaskLog._(title, limit);
 
 /// A block that streams task output under a header, then collapses on success (clearing the output) or retains it on

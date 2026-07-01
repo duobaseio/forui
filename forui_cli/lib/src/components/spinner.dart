@@ -5,6 +5,8 @@ import 'package:forui_cli/src/terminal/terminal.dart';
 import 'package:forui_cli/src/terminal/theme.dart';
 
 /// Creates a [Spinner]. Call [Spinner.start], do async work, then [Spinner.stop].
+///
+/// Ported from [clack](https://github.com/bombshell-dev/clack). AI-generated; use at your own risk.
 Spinner spinner() => Spinner._();
 
 /// An animated single-line progress indicator that hangs off the gutter.
@@ -19,11 +21,14 @@ class Spinner {
 
   Spinner._();
 
-  /// Starts spinning with [message].
+  /// Starts spinning with [message], or writes it as a plain line when not interactive.
   void start([String message = '']) {
     _message = message;
     _active = true;
     if (!terminal.interactive) {
+      if (message.isNotEmpty) {
+        terminal.write('$message\n');
+      }
       return;
     }
     terminal
@@ -46,12 +51,19 @@ class Spinner {
       ..write(gutter(ansi.magenta(frame), '$_message$dots'));
   }
 
-  /// Updates the spinner's message in place.
-  // ignore: use_setters_to_change_properties
-  void message(String text) => _message = text;
+  /// Updates the spinner's message in place, or writes it as a plain line when not interactive.
+  void message(String text) {
+    _message = text;
+    if (!terminal.interactive && text.isNotEmpty) {
+      terminal.write('$text\n');
+    }
+  }
 
   /// Stops the spinner, replacing the frame with a final symbol determined by [code] (0 = success, 1 = cancel,
   /// anything else = error) and [message] (defaults to the last message).
+  ///
+  /// When not interactive, a successful stop is silent (the work was already announced by [start] and [message]); a
+  /// non-zero [code] writes [message] to stderr.
   void stop([String message = '', int code = 0]) {
     if (!_active) {
       return;
@@ -61,26 +73,25 @@ class Spinner {
     _timer = null;
 
     final text = message.isEmpty ? _message : message;
+
+    if (!terminal.interactive) {
+      if (code != 0) {
+        terminal.error('$text\n');
+      }
+      return;
+    }
+
     final symbol = switch (code) {
       0 => ansi.green(symbols.stepSubmit),
       1 => ansi.red(symbols.stepCancel),
       _ => ansi.yellow(symbols.stepError),
     };
-
-    if (terminal.interactive) {
-      terminal
-        ..write('\r\x1B[2K') // return to column 0 and clear the spinner line
-        ..write(gutter(symbol, text))
-        ..write('\n')
-        ..releaseCursor()
-        ..showCursor();
-    } else {
-      terminal
-        ..write(barSpacer())
-        ..write('\n')
-        ..write(gutter(symbol, text))
-        ..write('\n');
-    }
+    terminal
+      ..write('\r\x1B[2K') // return to column 0 and clear the spinner line
+      ..write(gutter(symbol, text))
+      ..write('\n')
+      ..releaseCursor()
+      ..showCursor();
   }
 
   /// Stops the spinner in an error state.

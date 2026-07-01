@@ -6,6 +6,8 @@ import 'package:forui_cli/src/terminal/theme.dart';
 ///
 /// [initialValue] is the initially highlighted choice. Arrow keys / Tab toggle; `y`/`n` answer immediately; Enter
 /// confirms the current choice. Returns [Cancelled] on Esc / Ctrl+C.
+///
+/// Ported from [clack](https://github.com/bombshell-dev/clack). AI-generated; use at your own risk.
 Result<bool> confirm({
   required String message,
   bool initialValue = true,

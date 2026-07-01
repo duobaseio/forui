@@ -4,6 +4,9 @@ import 'package:forui_cli/src/terminal/text.dart';
 import 'package:forui_cli/src/terminal/theme.dart';
 
 /// Opens an interaction sequence with a top corner: `┌  title`.
+///
+/// These log helpers are ported from [clack](https://github.com/bombshell-dev/clack). AI-generated; use at your own
+/// risk.
 void intro([String title = '']) {
   terminal
     ..write(gutter(ansi.gray(symbols.barStart), title))
