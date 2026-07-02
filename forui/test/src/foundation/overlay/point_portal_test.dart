@@ -40,4 +40,53 @@ void main() {
 
     expect(taps, 1);
   });
+
+  testWidgets('avoids a keyboard that opens while shown inside a scrollable Scaffold', (tester) async {
+    // 400x600 screen; the keyboard occupies the bottom 300 (its top edge sits at y = 300).
+    tester.view.physicalSize = const Size(400, 600);
+    tester.view.devicePixelRatio = 1.0;
+    tester.view.viewInsets = FakeViewPadding.zero; // keyboard closed
+    addTearDown(tester.view.reset);
+
+    final controller = OverlayPortalController();
+
+    await tester.pumpWidget(
+      MaterialApp(
+        localizationsDelegates: FLocalizations.localizationsDelegates,
+        supportedLocales: FLocalizations.supportedLocales,
+        home: FTheme(
+          data: FTheme.neutral.light.touch,
+          child: Scaffold(
+            body: ListView(
+              children: [
+                const SizedBox(height: 250), // places the child above the keyboard
+                FPointPortal(
+                  control: .managed(controller: controller),
+                  point: const Offset(100, 20), // bottom-center of the child
+                  anchor: .topCenter,
+                  portalBuilder: (context, _) => const ColoredBox(
+                    key: ValueKey('portal'),
+                    color: Colors.red,
+                    child: SizedBox(height: 150, width: 200),
+                  ),
+                  child: const ColoredBox(color: Colors.yellow, child: SizedBox(height: 20, width: 200)),
+                ),
+                const SizedBox(height: 600), // makes the list scrollable
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+
+    controller.show();
+    await tester.pumpAndSettle();
+
+    // The keyboard slides up after the portal is already shown.
+    tester.view.viewInsets = const FakeViewPadding(bottom: 300);
+    await tester.pumpAndSettle();
+
+    // The portal flips above the point instead of rendering behind the keyboard.
+    expect(tester.getRect(find.byKey(const ValueKey('portal'))).bottom, lessThanOrEqualTo(300));
+  });
 }

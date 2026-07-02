@@ -152,7 +152,7 @@ class FPointPortal extends StatefulWidget {
   }
 }
 
-class _State extends State<FPointPortal> {
+class _State extends State<FPointPortal> with WidgetsBindingObserver {
   final _notifier = FChangeNotifier();
   final _link = ChildLayerLink();
   late OverlayPortalController _controller;
@@ -161,12 +161,24 @@ class _State extends State<FPointPortal> {
   void initState() {
     super.initState();
     _controller = widget.control.create();
+    WidgetsBinding.instance.addObserver(this);
   }
 
   @override
   void didUpdateWidget(covariant FPointPortal old) {
     super.didUpdateWidget(old);
     _controller = widget.control.update(old.control, _controller).$1;
+  }
+
+  @override
+  void didChangeMetrics() {
+    // A portal shown under an ancestor that absorbs the view insets (e.g. a Material Scaffold with
+    // resizeToAvoidBottomInset removes the bottom inset via MediaQuery.removeViewInsets) is not notified when the
+    // keyboard opens, as the absorbed MediaQuery no longer changes. Rebuild on metrics changes so
+    // MediaQuery.viewInsetsOf is re-read and the portal stays clear of the keyboard.
+    if ((widget.useViewInsets || widget.useViewPadding) && _controller.isShowing) {
+      setState(() {});
+    }
   }
 
   @override
@@ -183,9 +195,6 @@ class _State extends State<FPointPortal> {
             ? .fromViewPadding(view.viewPadding, view.devicePixelRatio)
             : .zero;
 
-        // We don't derive the insets from the view as it does not notify dependencies of changes. This led to
-        // incomplete insets being applied when a keyboard is sliding up from the bottom of the screen WHILE the portal
-        // is being built.
         final insets = widget.useViewInsets ? MediaQuery.viewInsetsOf(context) : EdgeInsets.zero;
 
         Widget portal = CompositedPointPortal(
@@ -235,6 +244,7 @@ class _State extends State<FPointPortal> {
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _notifier.dispose();
     super.dispose();
   }
