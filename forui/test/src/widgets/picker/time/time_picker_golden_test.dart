@@ -69,7 +69,7 @@ void main() {
   testWidgets('desktop default', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        theme: FThemes.neutral.light.desktop,
+        theme: FTheme.neutral.light.desktop,
         child: const SizedBox(
           width: 300,
           height: 300,

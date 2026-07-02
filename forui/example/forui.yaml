@@ -7,3 +7,6 @@ cli:
   
   # The default file or directory to output generated themes.
   theme-output: lib/theme/theme.dart
+
+  # The default directory to download preset font assets into.
+  fonts-output: assets/fonts

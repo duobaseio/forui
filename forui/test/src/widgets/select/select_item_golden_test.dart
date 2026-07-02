@@ -277,7 +277,7 @@ void main() {
   testWidgets('desktop hovered', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        theme: FThemes.neutral.light.desktop,
+        theme: FTheme.neutral.light.desktop,
         alignment: .topCenter,
         child: FSelect<String>(items: const {'A': 'A', 'B': 'B'}, key: key),
       ),

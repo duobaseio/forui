@@ -1,0 +1,54 @@
+name: Forui CLI Presubmit Format
+
+on:
+  workflow_dispatch: {}
+  pull_request:
+    branches: [ main ]
+    paths:
+      - '.github/workflows/forui_cli_presubmit*.yaml'
+      - 'forui_cli/**'
+      - 'forui/**'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+
+permissions:
+  contents: read
+
+jobs:
+  format:
+    if: github.actor != 'auto-maid[bot]' && github.event.pull_request.draft == false
+    name: Format & Lint
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: forui_cli
+    steps:
+      - uses: actions/checkout@v7
+      - uses: subosito/flutter-action@v2.23.0
+      - working-directory: forui
+        run: |
+          flutter pub get
+          dart run build_runner build
+      - run: flutter pub get
+      - run: dart run tool/main.dart
+      - run: dart run ../tool/sort.dart forui_cli
+      - run: dart format .
+      - run: dart fix --apply
+        # We format the code again since the required trailing comma lint fixes causes code to be formatted differently.
+      - run: dart format .
+
+      - id: changes
+        working-directory: .
+        run: |
+          git diff --exit-code -- forui_cli && echo "changes=false" >> $GITHUB_OUTPUT || {
+            git diff -- forui_cli > changes.patch
+            echo "changes=true" >> $GITHUB_OUTPUT
+          }
+
+      - if: steps.changes.outputs.changes == 'true'
+        uses: actions/upload-artifact@v7
+        with:
+          name: format-changes
+          path: changes.patch
+          retention-days: 1

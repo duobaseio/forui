@@ -10,8 +10,8 @@ import '../../test_scaffold.dart';
 void main() {
   group('design system', skip: !Platform.isMacOS, () {
     for (final (theme, themeName, height) in [
-      (FThemes.neutral.light.desktop, 'desktop', 54.0),
-      (FThemes.neutral.light.touch, 'touch', 62.0),
+      (FTheme.neutral.light.desktop, 'desktop', 54.0),
+      (FTheme.neutral.light.touch, 'touch', 62.0),
     ]) {
       testWidgets('$themeName FHeader and FHeader.nested have consistent height ($height) without actions', (
         tester,

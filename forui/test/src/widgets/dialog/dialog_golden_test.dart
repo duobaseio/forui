@@ -9,7 +9,7 @@ import 'package:forui/forui.dart';
 import '../../test_scaffold.dart';
 
 void main() {
-  final theme = FThemes.neutral.light.touch;
+  final theme = FTheme.neutral.light.touch;
 
   group('showFDialog', () {
     testWidgets('default', (tester) async {
@@ -435,8 +435,8 @@ void main() {
     }
 
     for (final theme in [
-      (name: 'neutral-light', data: FThemes.neutral.light.desktop),
-      (name: 'neutral-dark', data: FThemes.neutral.dark.desktop),
+      (name: 'neutral-light', data: FTheme.neutral.light.desktop),
+      (name: 'neutral-dark', data: FTheme.neutral.dark.desktop),
     ]) {
       group('${theme.name} desktop', () {
         group('vertical', () {

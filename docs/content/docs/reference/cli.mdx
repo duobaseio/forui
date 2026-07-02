@@ -9,9 +9,20 @@ Forui includes a CLI that generates themes and styles in your project. These the
 to fit your design needs. No additional installation is required. Neither does the CLI increase your application's
 bundle size.
 
+## Global options
+
+These options are available on every command:
+
+```shell copy
+-h, --help          Print this usage information.
+    --[no-]color    Use terminal colors.
+    --no-input      Disable interactive prompts and assume default values.
+```
+
 ## init
 
-Use the `init` command to create `forui.yaml` and `main.dart` files in your project's directory.
+Use the `init` command to set up Forui in your project. It creates a `forui.yaml` configuration file, generates a theme,
+and creates a `main.dart` entry point. Run without `--preset` to configure the theme interactively.
 
 ```shell copy
 dart run forui init
@@ -19,10 +30,11 @@ dart run forui init
 
 ```shell copy
 Usage: forui init
--h, --help         Print this usage information.
--f, --force        Overwrite existing files if they exist.
--t, --template     The main.dart template to generate.
-                   [basic (default), router]
+-h, --help        Print this usage information.
+-f, --force       Overwrite existing files if they exist.
+-p, --preset      A theme's code.
+-t, --template    The main.dart template to generate. Defaults to "basic".
+                  [basic, router]
 ```
 
 ## snippet
@@ -32,11 +44,11 @@ Usage: forui init
 Use the `snippet create` command to generate a code snippet in your project. The snippets are generated in `lib` by default.
 
 ```shell copy
-dart run forui snippet create [snippets]
+dart run forui snippet create [snippet...]
 ```
 
 ```shell copy
-Usage: forui snippet create [snippets]
+Usage: forui snippet create [snippet...]
 -h, --help      Print this usage information.
 -f, --force     Overwrite existing files if they exist.
 -o, --output    The output directory or file, relative to the project directory.
@@ -67,13 +79,13 @@ Use the `style create` command to generate a style in your project. The styles a
 </Callout>
 
 ```shell copy
-dart run forui style create [styles]
+dart run forui style create [style...]
 ```
 
 ```shell copy
-Usage: forui style create [styles]
+Usage: forui style create [style...]
 -h, --help      Print this usage information.
--a, --all       Create all styles.
+-a, --all       Generate all styles.
 -f, --force     Overwrite existing files if they exist.
 -o, --output    The output directory or file, relative to the project directory.
                 (defaults to "lib/theme/styles")
@@ -99,31 +111,21 @@ Usage: forui style ls
 Use the `theme create` command to generate a theme in your project. The theme is generated across multiple files in
 `lib/theme/` by default.
 
+Run without `--preset` to configure the theme interactively.
+
 <Callout type="info">
     See the [docs](/docs/guides/customizing-themes) on how to use the generated theme.
 </Callout>
 
 ```shell copy
-dart run forui theme create [theme]
+dart run forui theme create
 ```
 
 ```shell copy
-Usage: forui theme create [theme]
+Usage: forui theme create
 -h, --help      Print this usage information.
 -f, --force     Overwrite existing files if they exist.
+-p, --preset    A theme's code.
 -o, --output    The output directory or file, relative to the project directory.
                 (defaults to "lib/theme/theme.dart")
-```
-
-### ls
-
-Use the `theme ls` command to list all available themes.
-
-```shell copy
-dart run forui theme ls
-```
-
-```shell copy
-Usage: forui theme ls
--h, --help    Print this usage information.
 ```

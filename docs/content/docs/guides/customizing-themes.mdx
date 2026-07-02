@@ -10,6 +10,7 @@ import themeSnippet from '@/snippets/snippets/guides/customizing_themes/theme.js
 import colorsSnippet from '@/snippets/snippets/guides/customizing_themes/colors.json';
 import typographySnippet from '@/snippets/snippets/guides/customizing_themes/typography.json';
 import styleSnippet from '@/snippets/snippets/guides/customizing_themes/style.json';
+import iconsSnippet from '@/snippets/snippets/guides/customizing_themes/icons.json';
 import accordionStyleSnippet from '@/snippets/snippets/guides/customizing_themes/accordion_style.json';
 
 This guide uses [`FAccordionStyle`](https://pub.dev/documentation/forui/latest/forui.widgets.accordion/FAccordionStyle-class.html)
@@ -52,18 +53,15 @@ This generates an accordion style file which you can add to your theme:
 
 ## Generate a Theme
 
-<Callout type="info">
-    Tip: Run `dart run forui theme ls` to see all available themes.
-</Callout>
-
-Generate a theme based on [neutral](/docs/concepts/themes#getting-started)'s light variant:
+Generate a theme:
 
 ```shell copy
-dart run forui theme create neutral-light
+dart run forui theme create
 ```
 
-This generates a theme directory with a `theme.dart` and three part files (`colors.dart`, `typography.dart`, `style.dart`)
-Each part file already includes a starter `App<Section>` extension you can fill in with your custom tokens.
+This generates a theme directory with a `theme.dart` and four part files (`colors.dart`, `typography.dart`, `style.dart`,
+`icons.dart`). The `colors.dart` and `style.dart` part files each include a starter `App<Section>` extension you can fill
+in with your custom tokens.
 
 ### Theme
 <CodeSnippet snippet={themeSnippet} />
@@ -76,3 +74,6 @@ Each part file already includes a starter `App<Section>` extension you can fill 
 
 ### Style
 <CodeSnippet snippet={styleSnippet} />
+
+### Icons
+<CodeSnippet snippet={iconsSnippet} />

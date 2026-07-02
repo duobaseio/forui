@@ -130,23 +130,23 @@ void main() {
   group('design system', skip: !Platform.isMacOS, () {
     for (final (theme, themeName, sizes) in [
       (
-        FThemes.neutral.light.desktop,
+        FTheme.neutral.light.desktop,
         'desktop',
         [
-          (FButtonSizeVariant.xs, 'xs', FThemes.neutral.light.desktop.style.sizes.field.xs),
-          (FButtonSizeVariant.sm, 'sm', FThemes.neutral.light.desktop.style.sizes.field.sm),
-          (FButtonSizeVariant.md, 'md', FThemes.neutral.light.desktop.style.sizes.field.md),
-          (FButtonSizeVariant.lg, 'lg', FThemes.neutral.light.desktop.style.sizes.field.lg),
+          (FButtonSizeVariant.xs, 'xs', FTheme.neutral.light.desktop.style.sizes.field.xs),
+          (FButtonSizeVariant.sm, 'sm', FTheme.neutral.light.desktop.style.sizes.field.sm),
+          (FButtonSizeVariant.md, 'md', FTheme.neutral.light.desktop.style.sizes.field.md),
+          (FButtonSizeVariant.lg, 'lg', FTheme.neutral.light.desktop.style.sizes.field.lg),
         ],
       ),
       (
-        FThemes.neutral.light.touch,
+        FTheme.neutral.light.touch,
         'touch',
         [
-          (FButtonSizeVariant.xs, 'xs', FThemes.neutral.light.touch.style.sizes.field.xs),
-          (FButtonSizeVariant.sm, 'sm', FThemes.neutral.light.touch.style.sizes.field.sm),
-          (FButtonSizeVariant.md, 'md', FThemes.neutral.light.touch.style.sizes.field.md),
-          (FButtonSizeVariant.lg, 'lg', FThemes.neutral.light.touch.style.sizes.field.lg),
+          (FButtonSizeVariant.xs, 'xs', FTheme.neutral.light.touch.style.sizes.field.xs),
+          (FButtonSizeVariant.sm, 'sm', FTheme.neutral.light.touch.style.sizes.field.sm),
+          (FButtonSizeVariant.md, 'md', FTheme.neutral.light.touch.style.sizes.field.md),
+          (FButtonSizeVariant.lg, 'lg', FTheme.neutral.light.touch.style.sizes.field.lg),
         ],
       ),
     ]) {

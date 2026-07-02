@@ -4,7 +4,7 @@ import 'package:forui/forui.dart';
 
 // {@snippet}
 final theme = FThemeData(
-  colors: FColors.zincLight,
+  colors: FColors.neutralLight,
   touch: false,
   icons: FIcons(
     arrowLeft: FIcons.iconData(Icons.arrow_left),

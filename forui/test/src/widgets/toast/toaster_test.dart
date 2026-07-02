@@ -64,11 +64,11 @@ Widget button([
 void main() {
   group('FToasterStyle.inherit', () {
     test('defaults toastAlignment to topCenter on touch', () {
-      expect(FThemes.neutral.light.touch.toasterStyle.toastAlignment, FToastAlignment.topCenter);
+      expect(FTheme.neutral.light.touch.toasterStyle.toastAlignment, FToastAlignment.topCenter);
     });
 
     test('defaults toastAlignment to bottomEnd on desktop', () {
-      expect(FThemes.neutral.light.desktop.toasterStyle.toastAlignment, FToastAlignment.bottomEnd);
+      expect(FTheme.neutral.light.desktop.toasterStyle.toastAlignment, FToastAlignment.bottomEnd);
     });
   });
 
@@ -447,7 +447,7 @@ void main() {
         localizationsDelegates: FLocalizations.localizationsDelegates,
         supportedLocales: FLocalizations.supportedLocales,
         builder: (context, child) => FTheme(
-          data: FThemes.neutral.light.touch,
+          data: FTheme.neutral.light.touch,
           child: FToaster(child: child!),
         ),
         home: Builder(

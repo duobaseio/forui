@@ -528,7 +528,7 @@ void main() {
     });
   }
 
-  for (final (theme, name) in [(FThemes.neutral.light.desktop, 'desktop'), (FThemes.neutral.light.touch, 'touch')]) {
+  for (final (theme, name) in [(FTheme.neutral.light.desktop, 'desktop'), (FTheme.neutral.light.touch, 'touch')]) {
     testWidgets('$name sizes', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(

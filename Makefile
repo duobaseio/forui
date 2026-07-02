@@ -74,6 +74,7 @@ prepare-all:
 	@$(MAKE) prepare package=forui_assets version=$(version)
 	@$(MAKE) prepare package=forui version=$(version)
 	@$(MAKE) prepare package=forui_hooks version=$(version)
+	@$(MAKE) prepare package=forui_cli version=$(version)
 	@echo ""
 	@echo "$(COLOR_GREEN)✓ All packages prepared for $(version)$(COLOR_RESET)"
 pa: prepare-all
@@ -81,11 +82,11 @@ pa: prepare-all
 prepare:
 	@# Validate inputs
 	@if [ -z "$(package)" ] || [ -z "$(version)" ]; then \
-		echo "$(COLOR_RED)Error: usage: make prepare package=<forui|forui_assets|forui_hooks> version=<version>$(COLOR_RESET)"; \
+		echo "$(COLOR_RED)Error: usage: make prepare package=<forui|forui_assets|forui_hooks|forui_cli> version=<version>$(COLOR_RESET)"; \
 		exit 1; \
 	fi
-	@if [ "$(package)" != "forui" ] && [ "$(package)" != "forui_assets" ] && [ "$(package)" != "forui_hooks" ]; then \
-		echo "$(COLOR_RED)Error: package must be forui, forui_assets, or forui_hooks$(COLOR_RESET)"; \
+	@if [ "$(package)" != "forui" ] && [ "$(package)" != "forui_assets" ] && [ "$(package)" != "forui_hooks" ] && [ "$(package)" != "forui_cli" ]; then \
+		echo "$(COLOR_RED)Error: package must be forui, forui_assets, forui_hooks, or forui_cli$(COLOR_RESET)"; \
 		exit 1; \
 	fi
 	@# Step 1: Validate changelog
@@ -101,21 +102,28 @@ prepare:
 		sed -i '' 's/^## $(version) .*/## $(version)/' "$(package)/CHANGELOG.md"; \
 	fi
 	@echo "$(COLOR_GREEN)✓ Changelog entry found$(COLOR_RESET)"
-	@# Step 2: Run build_runner and cli generator (forui only)
+	@# Step 2: Run build_runner (forui) and the CLI generator (forui_cli, reads forui's source)
 	@if [ "$(package)" = "forui" ]; then \
 		echo ""; \
 		echo "$(COLOR_BLUE)cd $(package) && dart run build_runner build$(COLOR_RESET)"; \
 		cd $(package) && dart run build_runner build; \
 		echo "$(COLOR_GREEN)✓ Build runner complete$(COLOR_RESET)"; \
+	fi
+	@if [ "$(package)" = "forui_cli" ]; then \
 		echo ""; \
-		echo "$(COLOR_BLUE)cd $(package) && dart run tool/cli_generator/main.dart$(COLOR_RESET)"; \
-		cd $(package) && dart run tool/cli_generator/main.dart; \
+		echo "$(COLOR_BLUE)cd $(package) && dart run tool/main.dart$(COLOR_RESET)"; \
+		cd $(package) && dart run tool/main.dart; \
 		echo "$(COLOR_GREEN)✓ CLI generator complete$(COLOR_RESET)"; \
 	fi
-	@# Step 3: Analyze
+	@# Step 3: Analyze (forui_cli is pure Dart)
 	@echo ""
-	@echo "$(COLOR_BLUE)cd $(package) && flutter analyze$(COLOR_RESET)"
-	@cd $(package) && flutter analyze
+	@if [ "$(package)" = "forui_cli" ]; then \
+		echo "$(COLOR_BLUE)cd $(package) && dart analyze$(COLOR_RESET)"; \
+		cd $(package) && dart analyze; \
+	else \
+		echo "$(COLOR_BLUE)cd $(package) && flutter analyze$(COLOR_RESET)"; \
+		cd $(package) && flutter analyze; \
+	fi
 	@echo "$(COLOR_GREEN)✓ Analysis passed$(COLOR_RESET)"
 	@# Step 4 & 5: Update own version and dependent pubspecs
 	@OLD_VERSION=$$(grep '^version: ' $(package)/pubspec.yaml | head -1 | sed 's/version: //'); \
@@ -158,6 +166,7 @@ release-all:
 	@$(MAKE) release package=forui_assets version=$(version)
 	@$(MAKE) release package=forui version=$(version)
 	@$(MAKE) release package=forui_hooks version=$(version)
+	@$(MAKE) release package=forui_cli version=$(version)
 	@echo ""
 	@echo "$(COLOR_GREEN)✓ All packages released for $(version)$(COLOR_RESET)"
 ra: release-all
@@ -165,11 +174,11 @@ ra: release-all
 release:
 	@# Validate inputs
 	@if [ -z "$(package)" ] || [ -z "$(version)" ]; then \
-		echo "$(COLOR_RED)Error: usage: make release package=<forui|forui_assets|forui_hooks> version=<version>$(COLOR_RESET)"; \
+		echo "$(COLOR_RED)Error: usage: make release package=<forui|forui_assets|forui_hooks|forui_cli> version=<version>$(COLOR_RESET)"; \
 		exit 1; \
 	fi
-	@if [ "$(package)" != "forui" ] && [ "$(package)" != "forui_assets" ] && [ "$(package)" != "forui_hooks" ]; then \
-		echo "$(COLOR_RED)Error: package must be forui, forui_assets, or forui_hooks$(COLOR_RESET)"; \
+	@if [ "$(package)" != "forui" ] && [ "$(package)" != "forui_assets" ] && [ "$(package)" != "forui_hooks" ] && [ "$(package)" != "forui_cli" ]; then \
+		echo "$(COLOR_RED)Error: package must be forui, forui_assets, forui_hooks, or forui_cli$(COLOR_RESET)"; \
 		exit 1; \
 	fi
 	@# Step 1: Validate changelog

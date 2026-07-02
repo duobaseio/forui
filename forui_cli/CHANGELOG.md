@@ -1,0 +1,3 @@
+## 0.24.0 (Next)
+
+We've extracted the CLI from Forui into its own `forui_cli` package & rewrote it from the ground-up to improve DX.

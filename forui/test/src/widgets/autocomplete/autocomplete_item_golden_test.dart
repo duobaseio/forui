@@ -173,7 +173,7 @@ void main() {
   testWidgets('desktop hovered', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(
-        theme: FThemes.neutral.light.desktop,
+        theme: FTheme.neutral.light.desktop,
         alignment: .topCenter,
         child: FAutocomplete.text(key: key, items: const ['Apple', 'Banana']),
       ),

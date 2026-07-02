@@ -177,7 +177,7 @@ void main() {
   testWidgets('desktop default', (tester) async {
     await tester.pumpWidget(
       TestScaffold(
-        theme: FThemes.neutral.light.desktop,
+        theme: FTheme.neutral.light.desktop,
         child: FPicker(
           control: const .managed(initial: [1, 5]),
           children: [

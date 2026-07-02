@@ -109,7 +109,7 @@ void main() {
 
   group('range slider tooltip', () {
     Widget slider({FSliderValue? value}) => TestScaffold.app(
-      theme: FThemes.neutral.light.touch,
+      theme: FTheme.neutral.light.touch,
       child: FSlider(control: .managedContinuousRange(initial: value ?? FSliderValue(max: 0.75))),
     );
 
@@ -443,7 +443,7 @@ void main() {
     }) async {
       var ticks = 0;
       var collisions = 0;
-      final colors = FThemes.neutral.light.touch.colors;
+      final colors = FTheme.neutral.light.touch.colors;
       await tester.pumpWidget(
         TestScaffold.app(
           platform: .macOS,

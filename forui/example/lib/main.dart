@@ -34,7 +34,7 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
 
   @override
   Widget build(BuildContext context) {
-    final brightnessTheme = brightness == .light ? FThemes.zinc.light : FThemes.zinc.dark;
+    final brightnessTheme = brightness == .light ? FTheme.neutral.light : FTheme.neutral.dark;
     final theme = platform.desktop ? brightnessTheme.desktop : brightnessTheme.touch;
 
     return MaterialApp(

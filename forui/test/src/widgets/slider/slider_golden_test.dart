@@ -127,10 +127,10 @@ void main() {
   });
 
   for (final theme in [
-    (name: 'neutral-light-touch', data: FThemes.neutral.light.touch, platform: FPlatformVariant.iOS),
-    (name: 'neutral-light-desktop', data: FThemes.neutral.light.desktop, platform: FPlatformVariant.macOS),
-    (name: 'neutral-dark-touch', data: FThemes.neutral.dark.touch, platform: FPlatformVariant.iOS),
-    (name: 'neutral-dark-desktop', data: FThemes.neutral.dark.desktop, platform: FPlatformVariant.macOS),
+    (name: 'neutral-light-touch', data: FTheme.neutral.light.touch, platform: FPlatformVariant.iOS),
+    (name: 'neutral-light-desktop', data: FTheme.neutral.light.desktop, platform: FPlatformVariant.macOS),
+    (name: 'neutral-dark-touch', data: FTheme.neutral.dark.touch, platform: FPlatformVariant.iOS),
+    (name: 'neutral-dark-desktop', data: FTheme.neutral.dark.desktop, platform: FPlatformVariant.macOS),
   ]) {
     for (final layout in FLayout.values) {
       for (final enabled in [true, false]) {
@@ -280,7 +280,7 @@ void main() {
       late List<FSliderMark> marks;
 
       setUp(() {
-        final sliderStyles = FThemes.neutral.light.touch.sliderStyles;
+        final sliderStyles = FTheme.neutral.light.touch.sliderStyles;
         sliderStyle = sliderStyles.resolve({if (layout.vertical) FSliderAxisVariant.vertical});
 
         positive = layout.vertical ? .centerLeft : .topCenter;

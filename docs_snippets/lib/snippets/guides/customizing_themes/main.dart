@@ -1,4 +1,4 @@
-// ignore_for_file: always_use_package_imports, unused_import
+// ignore_for_file: always_use_package_imports
 // {@snippet}
 
 import 'package:flutter/material.dart';
@@ -8,8 +8,6 @@ import 'package:forui/forui.dart';
 import 'theme.dart';
 
 // {@endsnippet}
-
-final neutralLight = FThemes.neutral.light.touch;
 
 // {@snippet}
 void main() {
@@ -23,7 +21,7 @@ class Application extends StatelessWidget {
   Widget build(BuildContext context) {
     // Assign the generated theme to `theme`.
     // {@highlight}
-    final theme = neutralLight;
+    final theme = lightTheme;
     // {@endhighlight}
 
     return MaterialApp(

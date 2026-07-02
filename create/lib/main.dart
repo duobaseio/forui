@@ -16,7 +16,7 @@ class Application extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = FThemes.zinc.light.desktop;
+    final theme = FTheme.neutral.light.desktop;
 
     return MaterialApp(
       title: 'Forui Create',

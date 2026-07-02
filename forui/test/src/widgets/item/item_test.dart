@@ -188,8 +188,8 @@ void main() {
 
   group('design system', skip: !Platform.isMacOS, () {
     for (final (theme, themeName) in [
-      (FThemes.neutral.light.desktop, 'desktop'),
-      (FThemes.neutral.light.touch, 'touch'),
+      (FTheme.neutral.light.desktop, 'desktop'),
+      (FTheme.neutral.light.touch, 'touch'),
     ]) {
       final height = theme.style.sizes.item;
 

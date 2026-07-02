@@ -237,21 +237,21 @@ void main() {
   group('design system', skip: !Platform.isMacOS, () {
     for (final (theme, themeName, sizes) in [
       (
-        FThemes.neutral.light.desktop,
+        FTheme.neutral.light.desktop,
         'desktop',
         [
-          (FTextFieldSizeVariant.sm, 'sm', FThemes.neutral.light.desktop.style.sizes.field.sm),
-          (FTextFieldSizeVariant.md, 'md', FThemes.neutral.light.desktop.style.sizes.field.md),
-          (FTextFieldSizeVariant.lg, 'lg', FThemes.neutral.light.desktop.style.sizes.field.lg),
+          (FTextFieldSizeVariant.sm, 'sm', FTheme.neutral.light.desktop.style.sizes.field.sm),
+          (FTextFieldSizeVariant.md, 'md', FTheme.neutral.light.desktop.style.sizes.field.md),
+          (FTextFieldSizeVariant.lg, 'lg', FTheme.neutral.light.desktop.style.sizes.field.lg),
         ],
       ),
       (
-        FThemes.neutral.light.touch,
+        FTheme.neutral.light.touch,
         'touch',
         [
-          (FTextFieldSizeVariant.sm, 'sm', FThemes.neutral.light.touch.style.sizes.field.sm),
-          (FTextFieldSizeVariant.md, 'md', FThemes.neutral.light.touch.style.sizes.field.md),
-          (FTextFieldSizeVariant.lg, 'lg', FThemes.neutral.light.touch.style.sizes.field.lg),
+          (FTextFieldSizeVariant.sm, 'sm', FTheme.neutral.light.touch.style.sizes.field.sm),
+          (FTextFieldSizeVariant.md, 'md', FTheme.neutral.light.touch.style.sizes.field.md),
+          (FTextFieldSizeVariant.lg, 'lg', FTheme.neutral.light.touch.style.sizes.field.lg),
         ],
       ),
     ]) {

@@ -37,8 +37,7 @@ forui/
 │
 ├── example/                    # Flutter app with sandbox.dart for manual widget testing
 ├── tool/
-│   ├── l10n.dart               # Localization generation script
-│   └── cli_generator/          # Generates CLI command sources (styles, themes, snippets)
+│   └── l10n.dart               # Localization generation script
 └── assets/                     # Fonts and assets
 ```
 
@@ -243,7 +242,8 @@ When regenerating style files with `dart run forui style create -af`:
 2. After running, delete the generated `forui/forui/example/lib/theme/` folder.
 
 If you change source files that affect the CLI registry (e.g., `.inherit` constructors), run
-`dart run tool/cli_generator/main.dart` in `forui/forui` first to regenerate `bin/commands/style/style.dart`.
+`dart run tool/main.dart` in `forui_cli` first to regenerate
+`forui_cli/lib/src/commands/style/style.dart`.
 
 ## Testing & Verification
 

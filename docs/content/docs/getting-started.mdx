@@ -29,11 +29,11 @@ flutter pub add forui
 
 Flutter does not automatically upgrade minor versions of packages prior to `1.0.0`.
 
-This means that that following entry in your `pubspec.yaml` file will **not** automatically upgrade to `0.23.0`:
+This means that that following entry in your `pubspec.yaml` file will **not** automatically upgrade to `0.24.0`:
 
 ```yaml filename="pubspec.yaml"
 dependencies:
-  forui: ^0.22.0 // ❌ will not upgrade to 0.23.0
+  forui: ^0.23.0 // ❌ will not upgrade to 0.24.0
 ```
 
 To upgrade to the latest version of Forui, run the following command:
@@ -63,7 +63,7 @@ To use Forui widgets in your Flutter app, import the Forui package and place the
 [`FTheme`](https://pub.dev/documentation/forui/latest/forui.theme/FTheme-class.html) widget underneath
 `CupertinoApp`, `MaterialApp`, or `WidgetsApp` at the root of the widget tree.
 
-To generate a basic Forui app structure in your project, run:
+To generate a basic Forui app structure in your project, run the command below.
 
 <Tabs items={['Basic', 'Router']}>
     <Tab value="Basic">
@@ -95,8 +95,8 @@ It is perfectly fine to use Cupertino/Material widgets alongside Forui widgets!
 
 ### Themes
 
-Forui provides a set of predefined themes that you can use out of the box.
-In the example above, we used the `FThemes.neutral.light` theme, which is a light theme variant of the neutral color scheme.
+Forui ships with a built-in `FTheme.neutral` theme that you can use out of the box. The example above uses its dark
+variant. To generate a custom theme, run [`dart run forui theme create`](/docs/reference/cli#create-2).
 
 Themes are a very powerful building block in Forui, allowing you to customize the look and feel of your app.
 To learn more about themes, refer to the [Themes](/docs/concepts/themes) page.
