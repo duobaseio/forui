@@ -1,4 +1,4 @@
-// // GENERATED CODE - DO NOT MODIFY BY HAND
+// GENERATED CODE - DO NOT MODIFY BY HAND
 //
 // **************************************************************************
 // forui
@@ -578,7 +578,7 @@ extension CustomMaterialTheme on FThemeData {
     r'''import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
-// // GENERATED CODE - DO NOT MODIFY BY HAND
+// GENERATED CODE - DO NOT MODIFY BY HAND
 //
 // **************************************************************************
 // forui

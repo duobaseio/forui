@@ -9,7 +9,7 @@ const iconMappingFile = 'icon_mapping';
 
 String mapIconMapping(List<String> icons) {
   final library = LibraryBuilder()
-    ..comments.addAll([header])
+    ..comments.addAll(header)
     ..body.addAll([
       (EnumBuilder()
             ..docs.addAll([

@@ -23,7 +23,7 @@ Future<List<String>> traverseIcons(AnalysisContextCollection collection) async {
 /// Generates the `IconMapping` enum from FIcons's [slots].
 String generateIconMapping(List<String> slots) {
   final library = LibraryBuilder()
-    ..comments.addAll([header])
+    ..comments.addAll(header)
     ..body.add(
       (EnumBuilder()
             ..docs.addAll([

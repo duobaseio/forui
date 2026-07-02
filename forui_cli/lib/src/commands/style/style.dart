@@ -1,4 +1,4 @@
-// // GENERATED CODE - DO NOT MODIFY BY HAND
+// GENERATED CODE - DO NOT MODIFY BY HAND
 //
 // **************************************************************************
 // forui

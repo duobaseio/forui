@@ -28,17 +28,18 @@ final fragmentFormatter = DartFormatter(languageVersion: DartFormatter.latestLan
 /// The formatter to used format the generated code used in the CLI.
 final metaFormatter = DartFormatter(languageVersion: DartFormatter.latestLanguageVersion, pageWidth: 120);
 
-const header = '''
-// GENERATED CODE - DO NOT MODIFY BY HAND
-// 
-// **************************************************************************
-// forui
-// **************************************************************************
-//
-// ignore_for_file: type=lint
-// ignore_for_file: deprecated_member_use
-
-''';
+/// We don't use multiline strings since //s are automatically inserted at the start of each string, doing so will make
+/// multiline string appear malformed here since the first line's // needs to be removed.
+const header = [
+  'GENERATED CODE - DO NOT MODIFY BY HAND',
+  '',
+  '**************************************************************************',
+  'forui',
+  '**************************************************************************',
+  '',
+  'ignore_for_file: type=lint',
+  'ignore_for_file: deprecated_member_use',
+];
 
 Future<void> main() async {
   final collection = AnalysisContextCollection(
