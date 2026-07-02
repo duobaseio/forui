@@ -1,4 +1,16 @@
-## 0.23.1 (next)
+## 0.24.0 (next)
+
+### `FDateField`
+* Fix `FDateField.calendar` not displaying its selected date when driven by a lifted selection control.
+
+
+### `FDateSelectionControl`
+* Add `FDateSelectionControl.liftedSingle(...)`, `FDateSelectionControl.liftedMulti(...)` and
+  `FDateSelectionControl.liftedRange(...)`.
+
+* **Breaking** Remove `FDateSelectionControl.lifted(...)`. Use `FDateSelectionControl.liftedSingle(...)`,
+  `FDateSelectionControl.liftedMulti(...)` or `FDateSelectionControl.liftedRange(...)` instead.
+
 
 ### Others
 * Add italic support to the bundled `Inter` font.

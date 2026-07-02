@@ -119,9 +119,20 @@ final wheel = FCalendar.wheel(
   // {@endcategory}
 );
 
-// {@category "Selection" "`.lifted()`"}
-/// Lifts selection state to the parent for external state management.
-final FDateSelectionControl<Object?> selectionLifted = .lifted(selected: (date) => false, select: (date) {});
+// {@category "Selection" "`.liftedSingle()`"}
+/// Lifts single date selection to the parent for external state management.
+final FDateSelectionControl<DateTime?> selectionLiftedSingle = .liftedSingle(value: null, onChange: (date) {});
+
+// {@category "Selection" "`.liftedMulti()`"}
+/// Lifts multiple dates selection to the parent for external state management.
+final FDateSelectionControl<Set<DateTime>> selectionLiftedMulti = .liftedMulti(value: {}, onChange: (dates) {});
+
+// {@category "Selection" "`.liftedRange()`"}
+/// Lifts range selection to the parent for external state management.
+final FDateSelectionControl<(DateTime, DateTime)?> selectionLiftedRange = .liftedRange(
+  value: null,
+  onChange: (range) {},
+);
 
 // {@category "Selection" "`.managedSingle()` with internal controller"}
 /// Single date selection managed internally.

@@ -6,6 +6,23 @@ part 'date_selection_control.dart';
 
 part 'date_selection_controller.control.dart';
 
+DateTime? _selectSingle(DateTime? current, DateTime date, bool toggleable) {
+  date = _truncate(date);
+  return (toggleable && current == date) ? null : date;
+}
+
+Set<DateTime> _selectMulti(Set<DateTime> current, DateTime date) => {...current}..toggle(_truncate(date));
+
+(DateTime, DateTime)? _selectRange((DateTime, DateTime)? current, DateTime date) {
+  date = _truncate(date);
+  return switch (current) {
+    null => (date, date),
+    (final first, final last) when date == first || date == last => null,
+    (final first, final last) when date.isBefore(first) => (date, last),
+    (final first, _) => (first, date),
+  };
+}
+
 DateTime _truncate(DateTime date) => .utc(date.year, date.month, date.day);
 
 /// A controller that controls date selection.
@@ -49,24 +66,104 @@ abstract class FDateSelectionController<T> extends ValueNotifier<T> {
   void select(DateTime date);
 }
 
-@internal
-class ProxyController extends FDateSelectionController<Object?> {
-  bool Function(DateTime) _selected;
-  ValueChanged<DateTime> _select;
+// The lifted single date controller.
+class _LiftedSingleController extends FDateSelectionController<DateTime?> {
+  ValueChanged<DateTime?> _onChange;
+  bool _toggleable;
 
-  ProxyController({required this._selected, required this._select}) : super(0);
+  _LiftedSingleController({required DateTime? value, required this._onChange, required this._toggleable})
+    : super(value == null ? null : _truncate(value));
 
-  void update({required bool Function(DateTime) selected, required ValueChanged<DateTime> select}) {
-    _selected = selected;
-    _select = select;
-    notifyListeners();
+  void update({required DateTime? value, required ValueChanged<DateTime?> onChange, required bool toggleable}) {
+    _onChange = onChange;
+    _toggleable = toggleable;
+    super.value = value == null ? null : _truncate(value);
   }
 
   @override
-  bool contains(DateTime date) => _selected(date);
+  bool contains(DateTime date) => value == _truncate(date);
 
   @override
-  void select(DateTime date) => _select(date);
+  void select(DateTime date) => _onChange(_selectSingle(value, date, _toggleable));
+
+  @override
+  set value(DateTime? value) {
+    final next = value == null ? null : _truncate(value);
+    if (super.value != next) {
+      _onChange(next);
+    }
+  }
+}
+
+// The lifted multiple dates controller.
+class _LiftedMultiController extends FDateSelectionController<Set<DateTime>> {
+  ValueChanged<Set<DateTime>> _onChange;
+
+  _LiftedMultiController({required Set<DateTime> value, required this._onChange}) : super(value.map(_truncate).toSet());
+
+  void update({required Set<DateTime> value, required ValueChanged<Set<DateTime>> onChange}) {
+    _onChange = onChange;
+    super.value = value.map(_truncate).toSet();
+  }
+
+  @override
+  bool contains(DateTime date) => value.contains(_truncate(date));
+
+  @override
+  void select(DateTime date) => _onChange(_selectMulti(value, date));
+
+  @override
+  set value(Set<DateTime> value) {
+    final next = value.map(_truncate).toSet();
+    if (!setEquals(super.value, next)) {
+      _onChange(next);
+    }
+  }
+}
+
+// The lifted range controller.
+class _LiftedRangeController extends FDateSelectionController<(DateTime, DateTime)?> {
+  ValueChanged<(DateTime, DateTime)?> _onChange;
+
+  _LiftedRangeController({required (DateTime, DateTime)? value, required this._onChange})
+    : super(value == null ? null : (_truncate(value.$1), _truncate(value.$2)));
+
+  void update({required (DateTime, DateTime)? value, required ValueChanged<(DateTime, DateTime)?> onChange}) {
+    _onChange = onChange;
+    super.value = value == null ? null : (_truncate(value.$1), _truncate(value.$2));
+  }
+
+  @override
+  bool contains(DateTime date) {
+    if (value case (final first, final last)) {
+      final current = _truncate(date);
+      return !current.isBefore(first) && !current.isAfter(last);
+    }
+
+    return false;
+  }
+
+  @override
+  void select(DateTime date) => _onChange(_selectRange(value, date));
+
+  @override
+  set value((DateTime, DateTime)? value) {
+    final next = value == null ? null : (_truncate(value.$1), _truncate(value.$2));
+    if (super.value != next) {
+      _onChange(next);
+    }
+  }
+}
+
+// The display-only controller used by [FDateSelectionControl.none]. Nothing is ever selected.
+class _NoneController extends FDateSelectionController<Object?> {
+  _NoneController() : super(null);
+
+  @override
+  bool contains(DateTime date) => false;
+
+  @override
+  void select(DateTime date) {}
 }
 
 // The single date controller.
@@ -80,10 +177,7 @@ class _SingleController extends FDateSelectionController<DateTime?> {
   bool contains(DateTime date) => value == _truncate(date);
 
   @override
-  void select(DateTime date) {
-    date = _truncate(date);
-    super.value = (toggleable && value == date) ? null : date;
-  }
+  void select(DateTime date) => super.value = _selectSingle(value, date, toggleable);
 
   @override
   set value(DateTime? value) {
@@ -103,10 +197,7 @@ final class _MultiController extends FDateSelectionController<Set<DateTime>> {
   bool contains(DateTime date) => value.contains(_truncate(date));
 
   @override
-  void select(DateTime date) {
-    final copy = {...value};
-    super.value = copy..toggle(_truncate(date));
-  }
+  void select(DateTime date) => super.value = _selectMulti(value, date);
 
   @override
   set value(Set<DateTime> value) => super.value = value.map(_truncate).toSet();
@@ -134,22 +225,7 @@ final class _RangeController extends FDateSelectionController<(DateTime, DateTim
   }
 
   @override
-  void select(DateTime date) {
-    date = _truncate(date);
-    switch (value) {
-      case null:
-        super.value = (date, date);
-
-      case (final first, final last) when date == first || date == last:
-        super.value = null;
-
-      case (final first, final last) when date.isBefore(first):
-        super.value = (date, last);
-
-      case (final first, _):
-        super.value = (first, date);
-    }
-  }
+  void select(DateTime date) => super.value = _selectRange(value, date);
 
   @override
   set value((DateTime, DateTime)? value) =>
