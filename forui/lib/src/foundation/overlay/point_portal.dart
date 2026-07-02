@@ -176,7 +176,7 @@ class _State extends State<FPointPortal> with WidgetsBindingObserver {
     // resizeToAvoidBottomInset removes the bottom inset via MediaQuery.removeViewInsets) is not notified when the
     // keyboard opens, as the absorbed MediaQuery no longer changes. Rebuild on metrics changes so
     // MediaQuery.viewInsetsOf is re-read and the portal stays clear of the keyboard.
-    if (_controller.isShowing) {
+    if ((widget.useViewInsets || widget.useViewPadding) && _controller.isShowing) {
       setState(() {});
     }
   }
