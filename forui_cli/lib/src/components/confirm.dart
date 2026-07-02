@@ -8,12 +8,7 @@ import 'package:forui_cli/src/terminal/theme.dart';
 /// confirms the current choice. Returns [Cancelled] on Esc / Ctrl+C.
 ///
 /// Ported from [clack](https://github.com/bombshell-dev/clack). AI-generated; use at your own risk.
-bool confirm({
-  required String message,
-  bool initial = true,
-  String active = 'Yes',
-  String inactive = 'No',
-}) {
+bool confirm({required String message, bool initial = true, String active = 'Yes', String inactive = 'No'}) {
   if (!terminal.interactive) {
     return initial;
   }

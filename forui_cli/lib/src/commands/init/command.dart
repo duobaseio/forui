@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:yaml/yaml.dart';
+
 import 'package:forui_cli/src/codec.dart';
 import 'package:forui_cli/src/commands/snippet/snippet.dart';
 import 'package:forui_cli/src/components/autocomplete.dart';
@@ -12,7 +14,6 @@ import 'package:forui_cli/src/terminal/command.dart';
 import 'package:forui_cli/src/terminal/primitives.dart';
 import 'package:forui_cli/src/terminal/terminal.dart';
 import 'package:forui_cli/src/terminal/theme.dart';
-import 'package:yaml/yaml.dart';
 
 const _placeholderImport = "import 'theme.dart';";
 

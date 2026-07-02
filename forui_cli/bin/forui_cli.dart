@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:args/command_runner.dart';
+
 import 'package:forui_cli/src/commands/init/command.dart';
 import 'package:forui_cli/src/commands/snippet/command.dart';
 import 'package:forui_cli/src/commands/style/command.dart';

@@ -8,12 +8,8 @@ import 'package:forui_cli/src/terminal/theme.dart';
 /// See [groupedSelect] for [initial], [maxItems], and the return value.
 ///
 /// Ported from [clack](https://github.com/bombshell-dev/clack). AI-generated; use at your own risk.
-Result<T> select<T>({
-  required String message,
-  required List<SelectOption<T>> options,
-  T? initial,
-  int maxItems = 8,
-}) => groupedSelect(message: message, options: {'': options}, initial: initial, maxItems: maxItems);
+Result<T> select<T>({required String message, required List<SelectOption<T>> options, T? initial, int maxItems = 8}) =>
+    groupedSelect(message: message, options: {'': options}, initial: initial, maxItems: maxItems);
 
 /// Prompts the user to pick one option from grouped [options], using arrow-key navigation.
 ///

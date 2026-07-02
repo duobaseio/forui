@@ -12,7 +12,7 @@ import 'generate_styles.dart';
 import 'generate_theme.dart';
 
 final library = p.join(Directory.current.parent.path, 'forui', 'lib');
-final _base =  p.join(Directory.current.parent.path, 'forui_cli', 'lib', 'src');
+final _base = p.join(Directory.current.parent.path, 'forui_cli', 'lib', 'src');
 final _snippet = p.join(_base, 'commands', 'snippet', 'snippet.dart');
 final _icons = p.join(_base, 'preset', 'icon_mapping.dart');
 final _style = p.join(_base, 'commands', 'style', 'style.dart');
