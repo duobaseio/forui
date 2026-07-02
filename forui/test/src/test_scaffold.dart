@@ -88,7 +88,7 @@ class TestScaffold extends StatelessWidget {
       secondaryForeground: const Color(0xFFB7F5CE),
     ),
   );
-  
+
   static final FThemeData blueOverride = FThemeData(
     touch: true,
     debugLabel: 'Test Blue Override',
