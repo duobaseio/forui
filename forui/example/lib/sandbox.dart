@@ -72,8 +72,13 @@ class _SandboxState extends State<Sandbox> {
                   minExtent: 100,
                   builder: (context, data, _) => _Region(label: 'Sidebar (fixed)', data: data),
                 ),
-                .flex(builder: (context, data, _) => _Region(label: 'Content (flex 1)', data: data)),
-                .flex(flex: 2, builder: (context, data, _) => _Region(label: 'Preview (flex 2)', data: data)),
+                .flex(
+                  builder: (context, data, _) => _Region(label: 'Content (flex 1)', data: data),
+                ),
+                .flex(
+                  flex: 2,
+                  builder: (context, data, _) => _Region(label: 'Preview (flex 2)', data: data),
+                ),
               ],
             ),
           ),
