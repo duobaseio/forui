@@ -1,5 +1,6 @@
-import 'package:forui_cli/forui_cli.dart';
 import 'package:test/test.dart';
+
+import 'package:forui_cli/forui_cli.dart';
 
 void main() {
   group('codec', () {

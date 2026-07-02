@@ -3,6 +3,7 @@ import 'dart:math' as math;
 
 import 'package:args/args.dart';
 import 'package:args/command_runner.dart';
+
 import 'package:forui_cli/src/terminal/text.dart';
 import 'package:forui_cli/src/terminal/theme.dart';
 

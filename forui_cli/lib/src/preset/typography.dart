@@ -1,13 +1,14 @@
 import 'dart:io';
 
+import 'package:yaml/yaml.dart';
+import 'package:yaml_edit/yaml_edit.dart';
+
 import 'package:forui_cli/src/codec.dart';
 import 'package:forui_cli/src/commands/theme/theme.dart';
 import 'package:forui_cli/src/components/log.dart';
 import 'package:forui_cli/src/components/spinner.dart';
 import 'package:forui_cli/src/configuration.dart';
 import 'package:forui_cli/src/terminal/terminal.dart';
-import 'package:yaml/yaml.dart';
-import 'package:yaml_edit/yaml_edit.dart';
 
 /// Generates the typography section, swapping in [preset]'s display and body fonts where they differ from the default.
 String generateTypography(Preset preset) {

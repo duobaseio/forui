@@ -17,6 +17,10 @@
   `FDateSelectionControl.liftedMulti(...)` or `FDateSelectionControl.liftedRange(...)` instead.
 
 
+### `FResizable`
+* Fix `FResizable` resetting regions to their initial sizes when the main-axis constraint changes (e.g. window resize).
+
+
 ### `FTheme` & `FThemes`
 * Add `FTheme.neutral`.
 

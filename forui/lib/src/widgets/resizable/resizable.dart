@@ -131,8 +131,30 @@ class FResizable extends StatefulWidget {
 }
 
 class _FResizableState extends State<FResizable> {
+  static bool _listEquals(List<FResizableRegion> a, List<FResizableRegion> b) {
+    if (a.length != b.length) {
+      return false;
+    }
+
+    for (final (i, region) in a.indexed) {
+      final same = switch ((region, b[i])) {
+        (FixedResizableRegion(:final extent, :final minExtent), final FixedResizableRegion other) =>
+          extent == other.extent && minExtent == other.minExtent,
+        (FlexResizableRegion(:final flex, :final minFlex), final FlexResizableRegion other) =>
+          flex == other.flex && minFlex == other.minFlex,
+        _ => false,
+      };
+      if (!same) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
   late FResizableController _controller;
   late double _hitRegionExtent;
+  bool _dirty = true;
 
   @override
   void initState() {
@@ -153,7 +175,12 @@ class _FResizableState extends State<FResizable> {
     if (updated) {
       _controller = controller;
     }
-    _hitRegionExtent = widget.hitRegionExtent ?? (context.platformVariant.touch ? 60 : 10);
+
+    final extent = widget.hitRegionExtent ?? (context.platformVariant.touch ? 60 : 10);
+    if (extent != _hitRegionExtent || widget.axis != old.axis || !_listEquals(old.children, widget.children)) {
+      _hitRegionExtent = extent;
+      _dirty = true;
+    }
   }
 
   @override
@@ -173,7 +200,13 @@ class _FResizableState extends State<FResizable> {
           builder: (_, constraints) {
             // This isn't ideal but the alternative to create a custom RenderObject, compute the layout, and pipe it to
             // the controller, which is overkill.
-            _update(constraints.maxWidth);
+            if (_dirty || _controller.regions.length != widget.children.length) {
+              _dirty = false;
+              _reset(constraints.maxWidth);
+            } else {
+              _scale(constraints.maxWidth);
+            }
+
             return ListenableBuilder(
               listenable: _controller,
               builder: (_, _) => Stack(
@@ -217,7 +250,12 @@ class _FResizableState extends State<FResizable> {
           builder: (_, constraints) {
             // This isn't ideal but the alternative to create a custom RenderObject, compute the layout, and pipe it to
             // the controller, which is overkill.
-            _update(constraints.maxHeight);
+            if (_dirty || _controller.regions.length != widget.children.length) {
+              _dirty = false;
+              _reset(constraints.maxHeight);
+            } else {
+              _scale(constraints.maxHeight);
+            }
             return ListenableBuilder(
               listenable: _controller,
               builder: (_, _) => Stack(
@@ -256,7 +294,136 @@ class _FResizableState extends State<FResizable> {
     }
   }
 
-  void _update(double constraint) {
+  /// Lays out the regions by keeping their current extents and adjusting them to fit the new [constraint].
+  ///
+  /// Fixed regions keep their extent and flex regions grow or shrink to fill the rest. The fixed ones change only if the
+  /// flex regions can't. Called when only the constraint changed, so the user's resizing is kept.
+  void _scale(double constraint) {
+    final (total, totalMinExtent, remaining, totalFlex) = _constraints(constraint);
+
+    // Start from each region's current extent (what the user dragged it to), kept within its new min and max.
+    final bounds = <(double, double)>[];
+    final extents = <double>[];
+
+    for (final (i, region) in widget.children.indexed) {
+      final minExt = switch (region) {
+        FixedResizableRegion(:final minExtent) => max(minExtent ?? 0, _hitRegionExtent),
+        FlexResizableRegion(:final minFlex?) => max(remaining * minFlex / totalFlex, _hitRegionExtent),
+        FlexResizableRegion() => _hitRegionExtent,
+      };
+      final maxExt = total - totalMinExtent + minExt;
+
+      bounds.add((minExt, maxExt));
+      extents.add(clampDouble(_controller.regions[i].extent.current, minExt, maxExt));
+    }
+
+    // The regions' extents rarely add up to `total`, so grow or shrink them by the difference (`delta`) until they
+    // match it. The flex regions change first, the fixed ones only if the flex regions can't grow or shrink further.
+    // Repeat, since each region can only change until it reaches its min or max.
+    const eps = 1e-9;
+    var delta = total - extents.fold(0.0, (sum, extent) => sum + extent);
+    for (final flexOnly in [true, false]) {
+      for (var pass = 0; pass < extents.length && eps < delta.abs(); pass++) {
+        final grow = delta > 0;
+
+        final weights = List.filled(extents.length, 0.0);
+        var weightTotal = 0.0;
+        for (final (i, extent) in extents.indexed) {
+          if (flexOnly && widget.children[i] is! FlexResizableRegion) {
+            continue;
+          }
+
+          final (minExt, maxExt) = bounds[i];
+          if (grow ? extent < maxExt : extent > minExt) {
+            weights[i] = grow ? max(extent, eps) : max(extent - minExt, eps);
+            weightTotal += weights[i];
+          }
+        }
+
+        if (weightTotal == 0) {
+          break;
+        }
+
+        var moved = 0.0;
+        for (final (i, extent) in extents.indexed) {
+          if (weights[i] == 0) {
+            continue;
+          }
+
+          final (minExt, maxExt) = bounds[i];
+          final resized = clampDouble(extent + delta * weights[i] / weightTotal, minExt, maxExt);
+          moved += resized - extent;
+          extents[i] = resized;
+        }
+        delta -= moved;
+        if (moved.abs() <= eps) {
+          break;
+        }
+      }
+    }
+
+    // Turn the final extents into regions. The last region ends exactly at `total` so they add up perfectly.
+    final regions = <FResizableRegionData>[];
+    var offset = 0.0;
+    for (var index = 0; index < extents.length; index++) {
+      final maxOffset = index == extents.length - 1 ? total : offset + extents[index];
+      regions.add(
+        FResizableRegionData(
+          index: index,
+          extent: (min: bounds[index].$1, max: bounds[index].$2, total: total),
+          offset: (min: offset, max: maxOffset),
+        ),
+      );
+      offset = maxOffset;
+    }
+
+    _controller.regions
+      ..clear()
+      ..addAll(regions);
+  }
+
+  /// Lays out the regions from their declared configuration, discarding any current extents.
+  ///
+  /// Fixed regions take their declared extent and flex regions their share of the remaining space. Called on the first
+  /// layout and whenever the configuration changes, where there is nothing to preserve.
+  void _reset(double constraint) {
+    final (total, totalMinExtent, remaining, totalFlex) = _constraints(constraint);
+
+    final regions = <FResizableRegionData>[];
+    var offset = 0.0;
+    for (final (index, region) in widget.children.indexed) {
+      switch (region) {
+        case FixedResizableRegion(:final extent, :final minExtent):
+          final minExt = max(minExtent ?? 0, _hitRegionExtent);
+          final maxExt = total - totalMinExtent + minExt;
+          regions.add(
+            FResizableRegionData(
+              index: index,
+              extent: (min: minExt, max: maxExt, total: total),
+              offset: (min: offset, max: offset += extent),
+            ),
+          );
+
+        case FlexResizableRegion(:final flex, :final minFlex):
+          final minExt = minFlex == null ? _hitRegionExtent : max(remaining * minFlex / totalFlex, _hitRegionExtent);
+          final maxExt = total - totalMinExtent + minExt;
+          regions.add(
+            FResizableRegionData(
+              index: index,
+              extent: (min: minExt, max: maxExt, total: total),
+              offset: (min: offset, max: offset += remaining * flex / totalFlex),
+            ),
+          );
+      }
+    }
+
+    _controller.regions
+      ..clear()
+      ..addAll(regions);
+  }
+
+  /// Measures the layout for the current children at the given [constraint].
+  (double total, double totalMinExtent, double remaining, double totalFlex) _constraints(double constraint) {
     var totalFlex = 0.0;
     var totalFixed = 0.0;
     var totalMinExtent = 0.0;
@@ -288,44 +455,13 @@ class _FResizableState extends State<FResizable> {
     }
 
     final remaining = total - totalFixed;
-    final regions = <FResizableRegionData>[];
-    var offset = 0.0;
-
     for (final child in widget.children) {
       if (child case FlexResizableRegion(:final minFlex)) {
         totalMinExtent += minFlex == null ? _hitRegionExtent : max(remaining * minFlex / totalFlex, _hitRegionExtent);
       }
     }
 
-    for (final (index, region) in widget.children.indexed) {
-      switch (region) {
-        case FixedResizableRegion(:final extent, :final minExtent):
-          final minExt = max(minExtent ?? 0, _hitRegionExtent);
-          final maxExt = total - totalMinExtent + minExt;
-          regions.add(
-            FResizableRegionData(
-              index: index,
-              extent: (min: minExt, max: maxExt, total: total),
-              offset: (min: offset, max: offset += extent),
-            ),
-          );
-
-        case FlexResizableRegion(:final flex, :final minFlex):
-          final minExt = minFlex == null ? _hitRegionExtent : max(remaining * minFlex / totalFlex, _hitRegionExtent);
-          final maxExt = total - totalMinExtent + minExt;
-          regions.add(
-            FResizableRegionData(
-              index: index,
-              extent: (min: minExt, max: maxExt, total: total),
-              offset: (min: offset, max: offset += remaining * flex / totalFlex),
-            ),
-          );
-      }
-    }
-
-    _controller.regions
-      ..clear()
-      ..addAll(regions);
+    return (total, totalMinExtent, remaining, totalFlex);
   }
 }
 

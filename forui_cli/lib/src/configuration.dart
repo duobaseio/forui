@@ -1,8 +1,9 @@
 import 'dart:io';
 
 import 'package:dart_style/dart_style.dart';
-import 'package:forui_cli/src/terminal/terminal.dart';
 import 'package:yaml/yaml.dart';
+
+import 'package:forui_cli/src/terminal/terminal.dart';
 
 const defaults =
     '''

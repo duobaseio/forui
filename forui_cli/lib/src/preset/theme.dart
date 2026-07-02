@@ -70,12 +70,7 @@ part of '$themeFileName';
 /// Icon tokens for the generated theme.''';
 
 /// Generates the theme files for [preset] under [output], installing any required fonts and icon packages.
-Future<void> create(
-  Configuration configuration,
-  Preset preset, {
-  required bool force,
-  required String output,
-}) async {
+Future<void> create(Configuration configuration, Preset preset, {required bool force, required String output}) async {
   final separator = Platform.pathSeparator;
   final themePath =
       '${configuration.root.path}$separator${output.endsWith('.dart') ? output : '$output${separator}theme.dart'}';
