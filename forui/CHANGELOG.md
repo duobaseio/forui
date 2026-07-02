@@ -17,6 +17,11 @@
   `FDateSelectionControl.liftedMulti(...)` or `FDateSelectionControl.liftedRange(...)` instead.
 
 
+### `FPortal` & `FPointPortal`
+* Fix portal (and dependents like `FPopover`, `FSelect`, and `FAutocomplete`) rendering behind the soft keyboard when
+  shown inside a scrollable within a Material `Scaffold`.
+
+
 ### `FResizable`
 * Fix `FResizable` resetting regions to their initial sizes when the main-axis constraint changes (e.g. window resize).
 
