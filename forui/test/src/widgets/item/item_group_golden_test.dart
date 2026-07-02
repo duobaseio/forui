@@ -532,7 +532,7 @@ void main() {
                 onPress: () {},
               ),
               FItem(
-                style: FTheme.neutral.dark.touch.itemGroupStyle.itemStyles.base,
+                style: TestScaffold.blueOverride.itemGroupStyle.itemStyles.base,
                 prefix: const Icon(FLucideIcons.bluetooth),
                 title: const Text('Bluetooth'),
                 subtitle: const Text('Fee, Fo'),

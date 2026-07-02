@@ -542,7 +542,7 @@ void main() {
                 onPress: () {},
               ),
               .tile(
-                style: FTheme.neutral.dark.touch.tileGroupStyle.tileStyles.base,
+                style: TestScaffold.blueOverride.tileGroupStyle.tileStyles.base,
                 prefix: const Icon(FLucideIcons.bluetooth),
                 title: const Text('Bluetooth'),
                 subtitle: const Text('Fee, Fo'),

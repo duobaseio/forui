@@ -344,7 +344,7 @@ void main() {
                 value: 1,
               ),
               .tile(
-                style: FTheme.neutral.dark.touch.tileGroupStyle.tileStyles.base,
+                style: TestScaffold.blueOverride.tileGroupStyle.tileStyles.base,
                 title: const Text('Bluetooth'),
                 subtitle: const Text('Fee, Fo'),
                 details: const Text('FL (5G)'),

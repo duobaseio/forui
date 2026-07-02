@@ -74,6 +74,36 @@ class TestScaffold extends StatelessWidget {
     );
   }();
 
+  static final FThemeData greenOverride = FThemeData(
+    touch: true,
+    debugLabel: 'Test Green Override',
+    colors: FColors.neutralDark.copyWith(
+      background: const Color(0xFF0F2A18),
+      card: const Color(0xFF15331F),
+      border: const Color(0xFF2FA866),
+      foreground: const Color(0xFFB7F5CE),
+      mutedForeground: const Color(0xFF6FBE8E),
+      primary: const Color(0xFF34C177),
+      secondary: const Color(0xFF1C4A2E),
+      secondaryForeground: const Color(0xFFB7F5CE),
+    ),
+  );
+  
+  static final FThemeData blueOverride = FThemeData(
+    touch: true,
+    debugLabel: 'Test Blue Override',
+    colors: FColors.neutralDark.copyWith(
+      background: const Color(0xFF0E1E3A),
+      card: const Color(0xFF14284C),
+      border: const Color(0xFF3B82F6),
+      foreground: const Color(0xFFBBD5FF),
+      mutedForeground: const Color(0xFF7FA8E0),
+      primary: const Color(0xFF4C8DFF),
+      secondary: const Color(0xFF1B3768),
+      secondaryForeground: const Color(0xFFBBD5FF),
+    ),
+  );
+
   static final _default = FTheme.neutral;
 
   static List<({String name, FThemeData data})> get themes => [
