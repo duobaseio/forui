@@ -56,8 +56,51 @@ class _SandboxState extends State<Sandbox> {
               'Strawberry': 'Strawberry',
             },
           ),
+          // Drag the dividers, then resize the window: the fixed sidebar keeps its pixel width and the flex
+          // regions scale to fill the rest, without resetting to their initial sizes.
+          DecoratedBox(
+            decoration: BoxDecoration(
+              border: Border.all(color: context.theme.colors.border),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: FResizable(
+              axis: .horizontal,
+              crossAxisExtent: 200,
+              children: [
+                .fixed(
+                  extent: 160,
+                  minExtent: 100,
+                  builder: (context, data, _) => _Region(label: 'Sidebar (fixed)', data: data),
+                ),
+                .flex(builder: (context, data, _) => _Region(label: 'Content (flex 1)', data: data)),
+                .flex(flex: 2, builder: (context, data, _) => _Region(label: 'Preview (flex 2)', data: data)),
+              ],
+            ),
+          ),
         ],
       ),
     ),
   );
+}
+
+class _Region extends StatelessWidget {
+  final String label;
+  final FResizableRegionData data;
+
+  const _Region({required this.label, required this.data});
+
+  @override
+  Widget build(BuildContext context) {
+    final FThemeData(:colors, :typography) = context.theme;
+    return Align(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Text(label, style: typography.body.sm.copyWith(color: colors.foreground)),
+          const SizedBox(height: 4),
+          Text('${data.extent.current.round()} px', style: typography.body.xs.copyWith(color: colors.mutedForeground)),
+        ],
+      ),
+    );
+  }
 }

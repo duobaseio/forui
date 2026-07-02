@@ -92,7 +92,7 @@ final class _ResizableController extends FResizableController {
       regions[expanded.index] = expanded;
 
       assert(
-        regions.sum((r) => r.extent.current, initial: 0.0) == regions[0].extent.total,
+        regions.sum((r) => r.extent.current, initial: 0.0).around(regions[0].extent.total),
         'Current total extent: ${regions.sum((r) => r.extent.current, initial: 0.0)} != initial total extent: '
         '${regions[0].extent.total}. This is likely a bug in Forui. Please file a bug report: '
         'https://github.com/duobaseio/forui/issues/new?template=bug_report.md',
