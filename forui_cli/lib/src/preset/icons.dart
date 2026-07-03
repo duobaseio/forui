@@ -38,9 +38,30 @@ Future<void> installIcons(Preset preset, Directory root) async {
 }
 
 extension Icons on IconLibrary {
-  static String _tabler(String value) => 'FIcons.iconData(TablerIcons.$value)';
+  // Tabler's font metrics (ascent 0.9em, descent -0.1em) round differently from lucide's (1em, 0) at device
+  // pixel scale, sinking every glyph ~0.05em below lucide's position on macOS, so nudge all slots up. Some
+  // glyphs also render ~10% smaller than their lucide counterparts; scale those to match.
+  static String _tabler(String value, {double? scale}) {
+    var icon = 'Icon(TablerIcons.$value, semanticLabel: semanticsLabel)';
+    if (scale != null) {
+      icon = 'Transform.scale(scale: $scale, child: $icon)';
+    }
 
-  static String _remix(String value) => 'FIcons.iconData(RemixIcons.$value)';
+    return '(_, {semanticsLabel}) => Builder(builder: (context) => Transform.translate(offset: '
+        'Offset(0, -0.05 * (IconTheme.of(context).size ?? 24)), '
+        'child: $icon))';
+  }
+
+  static String _remix(String value, {bool rotated = false}) {
+    var icon = 'Icon(RemixIcons.$value, semanticLabel: semanticsLabel)';
+    if (rotated) {
+      icon = 'RotatedBox(quarterTurns: 1, child: $icon)';
+    }
+
+    return '(_, {semanticsLabel}) => Builder(builder: (context) => Transform.translate(offset: '
+        'Offset(0, 0.02 * (IconTheme.of(context).size ?? 24)), '
+        'child: Transform.scale(scale: 1.15, child: $icon)))';
+  }
 
   static String _hugeicon(String value) => '(_, {semanticsLabel}) => HugeIcon(icon: HugeIcons.$value, size: null)';
 
@@ -61,24 +82,24 @@ extension Icons on IconLibrary {
   String? map(IconMapping mapping) => switch (this) {
     .lucide => null,
     .tabler => switch (mapping) {
-      .arrowLeft => _tabler('arrowLeft'),
-      .calendar => _tabler('calendar'),
-      .check => _tabler('check'),
+      .arrowLeft => _tabler('arrowLeft', scale: 1.1),
+      .calendar => _tabler('calendar', scale: 1.1),
+      .check => _tabler('check', scale: 1.1),
       .chevronDown => _tabler('chevronDown'),
       .chevronLeft => _tabler('chevronLeft'),
       .chevronRight => _tabler('chevronRight'),
       .chevronUp => _tabler('chevronUp'),
-      .chevronsUpDown => _tabler('selector'),
-      .circleAlert => _tabler('alertCircle'),
-      .clock4 => _tabler('clockHour4'),
+      .chevronsUpDown => _tabler('selector', scale: 1.1),
+      .circleAlert => _tabler('alertCircle', scale: 1.1),
+      .clock4 => _tabler('clockHour4', scale: 1.1),
       .ellipsis => _tabler('dots'),
-      .eye => _tabler('eye'),
+      .eye => _tabler('eye', scale: 1.1),
       .eyeClosed => _tabler('eyeOff'),
       .gripHorizontal => _tabler('gripHorizontal'),
       .gripVertical => _tabler('gripVertical'),
-      .loader => _tabler('loader'),
+      .loader => _tabler('loader', scale: 1.1),
       .loaderCircle => _tabler('loader2'),
-      .loaderPinwheel => _tabler('loaderQuarter'),
+      .loaderPinwheel => _tabler('windmill', scale: 1.1),
       .search => _tabler('search'),
       .userRound => _tabler('userCircle'),
       .x => _tabler('x'),
@@ -97,11 +118,12 @@ extension Icons on IconLibrary {
       .ellipsis => _remix('more_line'),
       .eye => _remix('eye_line'),
       .eyeClosed => _remix('eye_off_line'),
-      .gripHorizontal => _remix('draggable'),
+      // Remix only ships a vertical grip; rotate it a quarter turn for the horizontal slot.
+      .gripHorizontal => _remix('draggable', rotated: true),
       .gripVertical => _remix('draggable'),
       .loader => _remix('loader_line'),
       .loaderCircle => _remix('loader_4_line'),
-      .loaderPinwheel => _remix('loader_5_line'),
+      .loaderPinwheel => _remix('loader_line'),
       .search => _remix('search_line'),
       .userRound => _remix('user_line'),
       .x => _remix('close_line'),
@@ -122,9 +144,10 @@ extension Icons on IconLibrary {
       .eyeClosed => _hugeicon('strokeRoundedViewOff'),
       .gripHorizontal => _hugeicon('strokeRoundedDragDropHorizontal'),
       .gripVertical => _hugeicon('strokeRoundedDragDropVertical'),
-      .loader => _hugeicon('strokeRoundedLoading01'),
+      // TODO: Replace with HugeIcons.strokeRoundedLoader once it is available.
+      .loader => _hugeicon('strokeRoundedLoading03'),
       .loaderCircle => _hugeicon('strokeRoundedLoading03'),
-      .loaderPinwheel => _hugeicon('strokeRoundedLoading04'),
+      .loaderPinwheel => _hugeicon('strokeRoundedLoaderPinwheel'),
       .search => _hugeicon('strokeRoundedSearch01'),
       .userRound => _hugeicon('strokeRoundedUserCircle'),
       .x => _hugeicon('strokeRoundedCancel01'),
@@ -137,7 +160,7 @@ extension Icons on IconLibrary {
       .chevronLeft => _iconoir('NavArrowLeft'),
       .chevronRight => _iconoir('NavArrowRight'),
       .chevronUp => _iconoir('NavArrowUp'),
-      .chevronsUpDown => _iconoir('DataTransferBoth'),
+      .chevronsUpDown => _iconoir('ArrowSeparateVertical'),
       .circleAlert => _iconoir('WarningCircle'),
       .clock4 => _iconoir('Clock'),
       .ellipsis => _iconoir('MoreHoriz'),
@@ -145,9 +168,9 @@ extension Icons on IconLibrary {
       .eyeClosed => _iconoir('EyeClosed'),
       .gripHorizontal => _iconoir('Drag'),
       .gripVertical => _iconoir('Drag'),
-      .loader => _iconoir('Refresh'),
-      .loaderCircle => _iconoir('RefreshCircle'),
-      .loaderPinwheel => _iconoir('Spiral'),
+      .loader => _iconoir('OnePointCircle'),
+      .loaderCircle => _iconoir('OnePointCircle'),
+      .loaderPinwheel => _iconoir('ColorWheel'),
       .search => _iconoir('Search'),
       .userRound => _iconoir('UserCircle'),
       .x => _iconoir('Xmark'),
