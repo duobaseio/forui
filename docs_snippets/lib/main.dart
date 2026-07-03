@@ -239,6 +239,7 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/navigation/carousel/no-indicator', page: NoIndicatorCarouselRoute.page),
     AutoRoute(path: '/navigation/carousel/no-autoplay', page: NoAutoPlayCarouselRoute.page),
     AutoRoute(path: '/navigation/carousel/image', page: ImageCarouselRoute.page),
+    AutoRoute(path: '/navigation/carousel/controls', page: ControlsCarouselRoute.page),
     AutoRoute(path: '/navigation/header/default', page: RootHeaderRoute.page),
     AutoRoute(path: '/navigation/header/nested', page: NestedHeaderRoute.page),
     AutoRoute(path: '/navigation/header/nested-x', page: XNestedHeaderRoute.page),

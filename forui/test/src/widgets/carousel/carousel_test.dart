@@ -74,4 +74,29 @@ void main() {
     expect(find.byType(AnimatedContainer), findsNothing);
     await tester.pumpWidget(const SizedBox.shrink());
   });
+
+  testWidgets('shows controls and navigates with chevrons', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold(
+        child: FCarousel(
+          width: 320,
+          height: 120,
+          showControls: true,
+          autoPlay: null,
+          children: const [
+            ColoredBox(color: Color(0xFFFF0000)),
+            ColoredBox(color: Color(0xFF00FF00)),
+          ],
+        ),
+      ),
+    );
+
+    expect(find.byIcon(FLucideIcons.chevronLeft), findsOneWidget);
+    expect(find.byIcon(FLucideIcons.chevronRight), findsOneWidget);
+
+    await tester.tap(find.byIcon(FLucideIcons.chevronRight));
+    await tester.pumpAndSettle(const Duration(milliseconds: 500));
+
+    await tester.pumpWidget(const SizedBox.shrink());
+  });
 }

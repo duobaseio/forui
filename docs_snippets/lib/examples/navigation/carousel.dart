@@ -71,3 +71,18 @@ class ImageCarouselPage extends Example {
     ],
   );
 }
+
+@RoutePage()
+class ControlsCarouselPage extends Example {
+  ControlsCarouselPage({@queryParam super.theme}) : super(maxWidth: 420);
+
+  @override
+  Widget example(BuildContext context) => FCarousel(
+    width: 360,
+    height: 120,
+    // {@highlight}
+    showControls: true,
+    // {@endhighlight}
+    children: _slides,
+  );
+}

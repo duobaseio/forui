@@ -2,6 +2,7 @@
 
 ### `FCarousel`
 * Add `FCarousel`.
+* Add `FCarousel.width`, `FCarousel.height`, `FCarousel.showControls`, `FCarousel.previous`, and `FCarousel.next`.
 
 
 ### `FColors`

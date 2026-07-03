@@ -12,6 +12,7 @@ import defaultSnippet from '@/snippets/examples/navigation/carousel/default.json
 import noIndicatorSnippet from '@/snippets/examples/navigation/carousel/no-indicator.json';
 import noAutoPlaySnippet from '@/snippets/examples/navigation/carousel/no-autoplay.json';
 import imageSnippet from '@/snippets/examples/navigation/carousel/image.json';
+import controlsSnippet from '@/snippets/examples/navigation/carousel/controls.json';
 import carouselUsage from '@/snippets/usages/navigation/carousel/carousel.json';
 
 <Tabs items={['Preview', 'Code']}>
@@ -72,5 +73,16 @@ To generate a specific style for customization:
   </Tab>
   <Tab value="Code">
     <CodeSnippet snippet={imageSnippet} />
+  </Tab>
+</Tabs>
+
+### Controls
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='navigation/carousel' variant='controls' height={400}/>
+  </Tab>
+  <Tab value="Code">
+    <CodeSnippet snippet={controlsSnippet} />
   </Tab>
 </Tabs>

@@ -59,9 +59,32 @@ class FCarouselStyle with Diagnosticable, _$FCarouselStyleFunctions {
   @override
   final FTappableStyle indicatorTappableStyle;
 
+  /// The padding applied around each navigation control. Defaults to `EdgeInsets.symmetric(horizontal: 4)`.
+  @override
+  final EdgeInsetsGeometry controlPadding;
+
+  /// The navigation control's constraints.
+  @override
+  final BoxConstraints controlConstraints;
+
+  /// The navigation control icon's style.
+  @override
+  final IconThemeData controlIconStyle;
+
+  /// The navigation control's decoration.
+  @override
+  final Decoration controlDecoration;
+
+  /// The navigation control's tappable style.
+  @override
+  final FTappableStyle controlTappableStyle;
+
   /// Creates a [FCarouselStyle].
   FCarouselStyle({
     required this.indicatorTappableStyle,
+    required this.controlIconStyle,
+    required this.controlDecoration,
+    required this.controlTappableStyle,
     this.height = 88,
     this.padding = const .fromLTRB(8, 6, 8, 0),
     this.borderRadius = const .all(.circular(12)),
@@ -73,6 +96,8 @@ class FCarouselStyle with Diagnosticable, _$FCarouselStyleFunctions {
     this.indicatorActiveColor = const Color(0xFFFFFFFF),
     this.indicatorInactiveColor = const Color(0x73FFFFFF),
     this.indicatorShadow = const BoxShadow(blurRadius: 4, color: Color(0x42000000)),
+    this.controlPadding = const .symmetric(horizontal: 4),
+    this.controlConstraints = const .tightFor(width: 32, height: 32),
   });
 
   /// Creates a [FCarouselStyle] that inherits its properties.
@@ -83,11 +108,15 @@ class FCarouselStyle with Diagnosticable, _$FCarouselStyleFunctions {
     required bool touch,
   }) : this(
          indicatorTappableStyle: style.tappableStyle,
+         controlTappableStyle: style.tappableStyle,
          borderRadius: style.borderRadius.md,
          indicatorActiveColor: colors.background,
          indicatorInactiveColor: colors.background.withValues(alpha: 0.45),
          indicatorDotHeight: touch ? 6 : 5,
          indicatorDotWidth: touch ? 6 : 5,
          indicatorActiveDotWidth: touch ? 18 : 16,
+         controlIconStyle: IconThemeData(color: colors.background, size: typography.body.md.fontSize),
+         controlDecoration: ShapeDecoration(shape: const CircleBorder(), color: colors.foreground.withValues(alpha: 0.35)),
+         controlConstraints: touch ? const .tightFor(width: 44, height: 44) : const .tightFor(width: 32, height: 32),
        );
 }
