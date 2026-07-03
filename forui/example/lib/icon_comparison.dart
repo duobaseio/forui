@@ -266,12 +266,8 @@ final List<(String, WidgetBuilder)> _sections = [
           ],
         ),
       ],
-      builder: (_, controller, _) => FButton(
-        variant: .outline,
-        mainAxisSize: .min,
-        onPress: controller.toggle,
-        child: const Text('Open menu'),
-      ),
+      builder: (_, controller, _) =>
+          FButton(variant: .outline, mainAxisSize: .min, onPress: controller.toggle, child: const Text('Open menu')),
     ),
   ),
   ('FSelect (chevronDown, check)', (_) => FSelect<String>(hint: 'Select a fruit', items: _fruits)),
