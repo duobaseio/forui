@@ -1,5 +1,9 @@
 ## 0.24.0 (next)
 
+### `FCarousel`
+* Add `FCarousel`.
+
+
 ### `FColors`
 * **Breaking** Remove all predefined color schemes except `FColors.neutralLight` and `FColors.neutralDark`. Run
   `dart run forui theme create` to generate a custom theme.

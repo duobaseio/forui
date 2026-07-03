@@ -22,6 +22,14 @@ class _SandboxState extends State<Sandbox> {
         mainAxisSize: MainAxisSize.min,
         spacing: 20,
         children: [
+          FCarousel(
+            autoPlay: null,
+            children: [
+              ColoredBox(color: context.theme.colors.primary),
+              ColoredBox(color: context.theme.colors.secondary),
+              ColoredBox(color: context.theme.colors.destructive),
+            ],
+          ),
           FSelect<String>(
             hint: 'Select a fruit',
             label: const Text('Fruit'),

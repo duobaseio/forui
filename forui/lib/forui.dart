@@ -16,6 +16,7 @@ export 'widgets/breadcrumb.dart';
 export 'widgets/button.dart';
 export 'widgets/calendar.dart';
 export 'widgets/card.dart';
+export 'widgets/carousel.dart';
 export 'widgets/checkbox.dart';
 export 'widgets/context_menu.dart';
 export 'widgets/date_field.dart';

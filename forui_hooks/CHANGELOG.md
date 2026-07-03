@@ -1,3 +1,9 @@
+## 0.24.0 (next)
+
+### `FCarousel`
+* Add `useFCarouselController`.
+
+
 ## 0.23.0
 
 ### `FCalendar`

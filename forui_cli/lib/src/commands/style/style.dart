@@ -186,6 +186,13 @@ enum Style {
     <String>['FCardStyle'],
     'FCardStyle cardStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n  required bool touch,\n}) {\n  TextStyle titleTextStyle;\n  double titleSpacing;\n  double subtitleSpacing;\n  if (touch) {\n    titleTextStyle = typography.display.lg.copyWith(\n      fontWeight: .w500,\n      color: colors.foreground,\n    );\n    titleSpacing = 4;\n    subtitleSpacing = 8;\n  } else {\n    titleTextStyle = typography.display.md.copyWith(\n      fontWeight: .w500,\n      color: colors.foreground,\n    );\n    titleSpacing = 2;\n    subtitleSpacing = 6;\n  }\n  return FCardStyle(\n    decoration: ShapeDecoration(\n      shape: RoundedSuperellipseBorder(\n        side: BorderSide(color: colors.border, width: style.borderWidth),\n        borderRadius: style.borderRadius.lg,\n      ),\n      color: colors.card,\n    ),\n    contentStyle: FCardContentStyle(\n      titleTextStyle: titleTextStyle,\n      subtitleTextStyle: typography.body.sm.copyWith(\n        color: colors.mutedForeground,\n      ),\n      titleSpacing: titleSpacing,\n      subtitleSpacing: subtitleSpacing,\n    ),\n  );\n}\n',
   ),
+  fcarouselstyle(
+    'FCarouselStyle',
+    null,
+    <String>['carousel'],
+    <String>['FCarouselStyle'],
+    'FCarouselStyle carouselStyle({\n  required FColors colors,\n  required FTypography typography,\n  required FStyle style,\n  required bool touch,\n}) => FCarouselStyle(\n  indicatorTappableStyle: style.tappableStyle,\n  borderRadius: style.borderRadius.md,\n  indicatorActiveColor: colors.background,\n  indicatorInactiveColor: colors.background.withValues(alpha: 0.45),\n  indicatorDotHeight: touch ? 6 : 5,\n  indicatorDotWidth: touch ? 6 : 5,\n  indicatorActiveDotWidth: touch ? 18 : 16,\n  height: 88,\n  padding: const .fromLTRB(8, 6, 8, 0),\n  indicatorPadding: const .only(bottom: 8),\n  indicatorSpacing: 3,\n  indicatorShadow: const BoxShadow(blurRadius: 4, color: Color(0x42000000)),\n);\n',
+  ),
   fcheckboxstyle(
     'FCheckboxStyle',
     null,

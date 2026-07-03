@@ -161,6 +161,17 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   @override
   final FCardStyle cardStyle;
 
+  /// The carousel style.
+  ///
+  /// ## CLI
+  /// To generate and customize this style:
+  ///
+  /// ```shell
+  /// dart run forui style create carousel
+  /// ```
+  @override
+  final FCarouselStyle carouselStyle;
+
   /// The checkbox style.
   ///
   /// ## CLI
@@ -615,6 +626,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FVariants<FButtonVariantConstraint, FButtonVariant, FButtonSizeStyles, FButtonSizesDelta>? buttonStyles,
     FCalendarStyle? calendarStyle,
     FCardStyle? cardStyle,
+    FCarouselStyle? carouselStyle,
     FCheckboxStyle? checkboxStyle,
     FVariants<
       FCircularProgressSizeVariantConstraint,
@@ -708,6 +720,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
             touch: touch,
           ),
       cardStyle: cardStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
+      carouselStyle: carouselStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       checkboxStyle: checkboxStyle ?? .inherit(colors: colors, icons: icons, style: style, touch: touch),
       circularProgressStyles: circularProgressStyles == null
           ? FCircularProgressSizeStyles.inherit(colors: colors, typography: typography)
@@ -856,6 +869,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     }, (base, variants) => FButtonStyles(.raw(base, variants))),
     calendarStyle: a.calendarStyle.lerp(b.calendarStyle, t),
     cardStyle: a.cardStyle.lerp(b.cardStyle, t),
+    carouselStyle: a.carouselStyle.lerp(b.carouselStyle, t),
     checkboxStyle: a.checkboxStyle.lerp(b.checkboxStyle, t),
     circularProgressStyles: FVariants.lerpWhereUsing(
       a.circularProgressStyles,
@@ -967,6 +981,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     required this.buttonStyles,
     required this.calendarStyle,
     required this.cardStyle,
+    required this.carouselStyle,
     required this.checkboxStyle,
     required this.circularProgressStyles,
     required this.dateFieldStyle,
@@ -1471,6 +1486,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     FVariantsDelta<FButtonVariantConstraint, FButtonVariant, FButtonSizeStyles, FButtonSizesDelta>? buttonStyles,
     FCalendarStyleDelta? calendarStyle,
     FCardStyleDelta? cardStyle,
+    FCarouselStyleDelta? carouselStyle,
     FCheckboxStyleDelta? checkboxStyle,
     FVariantsDelta<
       FCircularProgressSizeVariantConstraint,
@@ -1545,6 +1561,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     buttonStyles: buttonStyles == null ? this.buttonStyles : FButtonStyles(buttonStyles(this.buttonStyles)),
     calendarStyle: calendarStyle?.call(this.calendarStyle) ?? this.calendarStyle,
     cardStyle: cardStyle?.call(this.cardStyle) ?? this.cardStyle,
+    carouselStyle: carouselStyle?.call(this.carouselStyle) ?? this.carouselStyle,
     checkboxStyle: checkboxStyle?.call(this.checkboxStyle) ?? this.checkboxStyle,
     circularProgressStyles: circularProgressStyles == null
         ? this.circularProgressStyles

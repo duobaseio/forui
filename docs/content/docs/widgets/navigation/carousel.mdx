@@ -1,0 +1,76 @@
+---
+title: Carousel
+description: Display a horizontally scrollable sequence of slides with optional page indicators and automatic playback.
+apiReference: https://pub.dev/documentation/forui/latest/forui.widgets.carousel/
+---
+
+import { Tabs, Tab } from 'fumadocs-ui/components/tabs';
+import { Widget } from '@/components/demo/widget';
+import { CodeSnippet } from '@/components/code-snippet/code-snippet';
+import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
+import defaultSnippet from '@/snippets/examples/navigation/carousel/default.json';
+import noIndicatorSnippet from '@/snippets/examples/navigation/carousel/no-indicator.json';
+import noAutoPlaySnippet from '@/snippets/examples/navigation/carousel/no-autoplay.json';
+import imageSnippet from '@/snippets/examples/navigation/carousel/image.json';
+import carouselUsage from '@/snippets/usages/navigation/carousel/carousel.json';
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='navigation/carousel' height={400}/>
+  </Tab>
+  <Tab value="Code">
+    <CodeSnippet snippet={defaultSnippet} />
+  </Tab>
+</Tabs>
+
+## CLI
+
+To generate a specific style for customization:
+
+<Tabs items={['Carousel']}>
+    <Tab value="Carousel">
+        ```shell copy
+        dart run forui style create carousel
+        ````
+    </Tab>
+</Tabs>
+
+## Usage
+
+### `FCarousel(...)`
+<UsageSnippet usage={carouselUsage} />
+
+## Examples
+
+### No Indicator
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='navigation/carousel' variant='no-indicator' height={400}/>
+  </Tab>
+  <Tab value="Code">
+    <CodeSnippet snippet={noIndicatorSnippet} />
+  </Tab>
+</Tabs>
+
+### No Auto Play
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='navigation/carousel' variant='no-autoplay' height={400}/>
+  </Tab>
+  <Tab value="Code">
+    <CodeSnippet snippet={noAutoPlaySnippet} />
+  </Tab>
+</Tabs>
+
+### Images
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='navigation/carousel' variant='image' height={400}/>
+  </Tab>
+  <Tab value="Code">
+    <CodeSnippet snippet={imageSnippet} />
+  </Tab>
+</Tabs>

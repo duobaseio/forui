@@ -241,6 +241,18 @@ class _Showcase extends StatelessWidget {
       _section(context, 'FPagination (chevronLeft, chevronRight)', const FPagination(control: .managed(pages: 10))),
       _section(
         context,
+        'FCarousel',
+        FCarousel(
+          autoPlay: null,
+          children: [
+            ColoredBox(color: context.theme.colors.primary),
+            ColoredBox(color: context.theme.colors.secondary),
+            ColoredBox(color: context.theme.colors.destructive),
+          ],
+        ),
+      ),
+      _section(
+        context,
         'FCircularProgress (loader, loaderCircle, loaderPinwheel)',
         const Row(
           mainAxisAlignment: .spaceEvenly,
