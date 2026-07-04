@@ -156,6 +156,9 @@ void main() {
     });
 
     testWidgets('RTL', (tester) async {
+      FocusManager.instance.highlightStrategy = .alwaysTraditional;
+      addTearDown(() => FocusManager.instance.highlightStrategy = .automatic);
+
       await tester.pumpWidget(
         TestScaffold(
           theme: theme.data,
@@ -176,6 +179,9 @@ void main() {
     });
 
     testWidgets('focused', (tester) async {
+      FocusManager.instance.highlightStrategy = .alwaysTraditional;
+      addTearDown(() => FocusManager.instance.highlightStrategy = .automatic);
+
       await tester.pumpWidget(
         TestScaffold(
           theme: theme.data,

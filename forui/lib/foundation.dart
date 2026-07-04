@@ -4,7 +4,7 @@ library forui.foundation;
 export 'src/foundation/barrier.dart';
 export 'src/foundation/collapsible.dart';
 export 'src/foundation/doc_templates.dart' hide Control, Focus, FormFieldKey, Scroll, Semantics, TappableGroup;
-export 'src/foundation/focused_outline.dart';
+export 'src/foundation/focused_outline.dart' hide FocusHighlightScope;
 export 'src/foundation/form_field_properties.dart';
 export 'src/foundation/notifiers.dart' hide InternalFMultiValueControl;
 export 'src/foundation/rendering.dart' hide Alignments, DefaultData, RenderBoxes;

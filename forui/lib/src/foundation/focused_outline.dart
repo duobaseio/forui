@@ -11,6 +11,65 @@ import 'package:forui/forui.dart';
 
 part 'focused_outline.design.dart';
 
+@internal
+class FocusHighlightScope extends StatefulWidget {
+  final Widget child;
+
+  const FocusHighlightScope({required this.child, super.key});
+
+  @override
+  State<FocusHighlightScope> createState() => _FocusHighlightScopeState();
+}
+
+class _FocusHighlightScopeState extends State<FocusHighlightScope> {
+  late bool _highlight;
+
+  @override
+  void initState() {
+    super.initState();
+    _highlight = FocusManager.instance.highlightMode == .traditional;
+    FocusManager.instance.addHighlightModeListener(_onChange);
+  }
+
+  @override
+  void dispose() {
+    FocusManager.instance.removeHighlightModeListener(_onChange);
+    super.dispose();
+  }
+
+  void _onChange(FocusHighlightMode mode) {
+    final highlight = FocusManager.instance.highlightMode == .traditional;
+    if (mounted && _highlight != highlight) {
+      setState(() => _highlight = highlight);
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) => FFocusHighlight(highlight: _highlight, child: widget.child);
+}
+
+/// Provides the current [FocusHighlightMode] down the widget tree.
+class FFocusHighlight extends InheritedWidget {
+  /// Returns whether a highlight should be applied to focused descendants.
+  @useResult
+  static bool of(BuildContext context) => context.dependOnInheritedWidgetOfExactType<FFocusHighlight>()!.highlight;
+
+  /// True if a highlight should be applied to focused descendants.
+  final bool highlight;
+
+  /// Creates a [FFocusHighlight].
+  const FFocusHighlight({required this.highlight, required super.child, super.key});
+
+  @override
+  bool updateShouldNotify(FFocusHighlight old) => highlight != old.highlight;
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(FlagProperty('highlight', value: highlight, ifTrue: 'highlight'));
+  }
+}
+
 /// An outline around a focused widget that does not affect its layout.
 ///
 /// See:

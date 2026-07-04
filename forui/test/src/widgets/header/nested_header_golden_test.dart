@@ -153,6 +153,9 @@ void main() {
     });
 
     testWidgets('${theme.name} with focused FNestedHeader actions', (tester) async {
+      FocusManager.instance.highlightStrategy = .alwaysTraditional;
+      addTearDown(() => FocusManager.instance.highlightStrategy = .automatic);
+
       await tester.pumpWidget(
         TestScaffold.app(
           theme: theme.data,

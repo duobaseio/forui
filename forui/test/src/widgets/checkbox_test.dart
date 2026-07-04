@@ -7,6 +7,9 @@ import '../test_scaffold.dart';
 
 void main() {
   testWidgets('forwards focus to label', (tester) async {
+    FocusManager.instance.highlightStrategy = .alwaysTraditional;
+    addTearDown(() => FocusManager.instance.highlightStrategy = .automatic);
+
     final focus = autoDispose(FocusNode());
     bool focused() => tester
         .widget<FLabel>(find.ancestor(of: find.text('Label'), matching: find.byType(FLabel)))

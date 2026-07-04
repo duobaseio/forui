@@ -64,6 +64,9 @@ void main() {
     });
 
     testWidgets('${theme.name} with focused breadcrumb', (tester) async {
+      FocusManager.instance.highlightStrategy = .alwaysTraditional;
+      addTearDown(() => FocusManager.instance.highlightStrategy = .automatic);
+
       await tester.pumpWidget(
         TestScaffold(
           theme: theme.data,

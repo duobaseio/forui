@@ -470,6 +470,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
   late FTappableStyle _style;
   late FocusNode _focus;
   late Set<FTappableVariant> _current;
+  late bool _highlight;
   FTappableVariant? _platform;
   int _monotonic = 0;
   int _buttons = 0;
@@ -491,6 +492,20 @@ class _FTappableState<T extends FTappable> extends State<T> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     _style = widget.style(context.theme.tappableStyle);
+    _highlight = FFocusHighlight.of(context);
+    if (_highlight) {
+      if (_focus.hasFocus) {
+        _current.add(FTappableVariant.focused);
+      }
+      if (_focus.hasPrimaryFocus) {
+        _current.add(FTappableVariant.primaryFocused);
+      }
+    } else {
+      _current
+        ..remove(FTappableVariant.focused)
+        ..remove(FTappableVariant.primaryFocused);
+    }
+
     // This cast is always fine since extension types are erased at runtime.
     if (context.platformVariant case final FTappableVariant platform when _platform != platform) {
       _current
@@ -613,8 +628,10 @@ class _FTappableState<T extends FTappable> extends State<T> {
             canRequestFocus: !widget._disabled,
             onFocusChange: (focused) {
               setState(() {
-                _update(.focused, focused);
-                _update(.primaryFocused, _focus.hasPrimaryFocus);
+                if (_highlight) {
+                  _update(.focused, focused);
+                  _update(.primaryFocused, _focus.hasPrimaryFocus);
+                }
               });
               widget.onFocusChange?.call(focused);
             },
