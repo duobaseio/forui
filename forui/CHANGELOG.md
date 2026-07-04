@@ -26,6 +26,12 @@
 * Fix `FResizable` resetting regions to their initial sizes when the main-axis constraint changes (e.g. window resize).
 
 
+### `FTabs`
+* **Breaking** Rename `FTabsStyle.height` to `FTabsStyle.minHeight`.
+
+* Fix `FTabs` clipping labels taller than the tab bar. Tabs now grow to fit the tallest label and center the rest.
+
+
 ### `FTheme` & `FThemes`
 * Add `FTheme.neutral`.
 

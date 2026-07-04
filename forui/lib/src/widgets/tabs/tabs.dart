@@ -281,6 +281,9 @@ class _TabState extends State<_Tab> {
   Widget build(BuildContext _) => FFocusedOutline(
     style: widget.style.focusedOutlineStyle,
     focused: _focused,
-    child: Tab(height: widget.style.height, child: widget.label),
+    child: ConstrainedBox(
+      constraints: BoxConstraints(minHeight: widget.style.minHeight),
+      child: Center(widthFactor: 1.0, child: widget.label),
+    ),
   );
 }

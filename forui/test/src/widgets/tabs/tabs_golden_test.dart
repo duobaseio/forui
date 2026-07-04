@@ -57,6 +57,28 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('tabs/${theme.name}.png'));
     });
 
+    testWidgets('tall label - ${theme.name}', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          theme: theme.data,
+          child: FTabs(
+            children: [
+              FTabEntry(
+                label: const Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [Text('Account'), Text('& Security'), Text('& Settings')],
+                ),
+                child: Container(color: Colors.blue, height: 100),
+              ),
+              FTabEntry(label: const Text('Password'), child: Container(color: Colors.red, height: 100)),
+            ],
+          ),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('tabs/${theme.name}-tall-label.png'));
+    });
+
     testWidgets('scrollable - ${theme.name}', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
