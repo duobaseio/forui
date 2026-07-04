@@ -11,10 +11,7 @@ class Application extends StatelessWidget {
   const Application({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final theme = MediaQuery.platformBrightnessOf(context) == .light ? lightTheme : darkTheme;
-
-    return MaterialApp.router(
+  Widget build(BuildContext context) => MaterialApp.router(
       // TODO: replace with your application's supported locales.
       supportedLocales: FLocalizations.supportedLocales,
       // TODO: add your application's localizations delegates.
@@ -24,12 +21,12 @@ class Application extends StatelessWidget {
       //
       // There is a known issue with implicitly animated widgets where their transition occurs AFTER the theme's.
       // See https://github.com/duobaseio/forui/issues/670.
-      theme: theme.toApproximateMaterialTheme(),
-      builder: (_, child) => FTheme(
-        data: theme,
+      theme: lightTheme.toApproximateMaterialTheme(),
+      darkTheme: darkTheme.toApproximateMaterialTheme(),
+      builder: (context, child) => FTheme(
+        data: Theme.brightnessOf(context) == .light ? lightTheme : darkTheme,
         child: FToaster(child: FTooltipGroup(child: child!)),
       ),
       // TODO: Add your router configuration here.
     );
-  }
 }
