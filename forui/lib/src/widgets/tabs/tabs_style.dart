@@ -40,9 +40,11 @@ class FTabsStyle with Diagnosticable, _$FTabsStyleFunctions {
   @override
   final FTabBarIndicatorSize indicatorSize;
 
-  /// The height.
+  /// The minimum height of each tab. Tabs grow to fit taller labels.
+  ///
+  /// Defaults to 36.
   @override
-  final double height;
+  final double minHeight;
 
   /// The spacing between the tab bar and the views.
   @override
@@ -60,7 +62,7 @@ class FTabsStyle with Diagnosticable, _$FTabsStyleFunctions {
     required this.focusedOutlineStyle,
     this.padding = const .all(4),
     this.indicatorSize = .tab,
-    this.height = 36,
+    this.minHeight = 36,
     this.spacing = 10,
   });
 

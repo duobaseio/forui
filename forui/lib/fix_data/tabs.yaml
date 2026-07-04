@@ -1,0 +1,46 @@
+version: 1
+transforms:
+  # FTabsStyle
+  - title: "Rename FTabsStyle(height: ...) to FTabsStyle(minHeight: ...)"
+    date: 2026-07-04
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FTabsStyle
+    changes:
+      - kind: renameParameter
+        oldName: 'height'
+        newName: 'minHeight'
+
+  - title: "Rename FTabsStyle.copyWith(height: ...) to FTabsStyle.copyWith(minHeight: ...)"
+    date: 2026-07-04
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      method: 'copyWith'
+      inClass: 'FTabsStyle'
+    changes:
+      - kind: renameParameter
+        oldName: 'height'
+        newName: 'minHeight'
+
+  - title: "Rename FTabsStyle.height to FTabsStyle.minHeight"
+    date: 2026-07-04
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      getter: 'height'
+      inClass: FTabsStyle
+    changes:
+      - kind: rename
+        newName: 'minHeight'
+
+  # FTabsStyleDelta
+  - title: "Rename FTabsStyleDelta.delta(height: ...) to FTabsStyleDelta.delta(minHeight: ...)"
+    date: 2026-07-04
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'delta'
+      inClass: FTabsStyleDelta
+    changes:
+      - kind: renameParameter
+        oldName: 'height'
+        newName: 'minHeight'

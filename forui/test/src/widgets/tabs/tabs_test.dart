@@ -162,6 +162,50 @@ void main() {
     expect(tester.takeException(), null);
   });
 
+  group('tall label', () {
+    testWidgets('grows to fit taller labels without overflowing', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTabs(
+            children: const [
+              FTabEntry(
+                label: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [Text('line a'), Text('line b'), Text('line c')],
+                ),
+                child: Text('foo content'),
+              ),
+              FTabEntry(label: Text('bar'), child: Text('bar content')),
+            ],
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(tester.takeException(), null);
+      // The tab grew past the 36 minimum to accommodate the 3-line label.
+      expect(tester.getSize(find.byType(TabBar)).height, greaterThan(36));
+    });
+
+    testWidgets('short labels stay centered at the minimum height', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTabs(
+            children: const [
+              FTabEntry(label: Text('foo'), child: Text('foo content')),
+              FTabEntry(label: Text('bar'), child: Text('bar content')),
+            ],
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(tester.takeException(), null);
+      // Both labels share the same vertical center.
+      expect(tester.getCenter(find.text('foo')).dy, tester.getCenter(find.text('bar')).dy);
+    });
+  });
+
   testWidgets('non-English Locale', (tester) async {
     await tester.pumpWidget(
       Localizations(
