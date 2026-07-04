@@ -29,11 +29,11 @@ class Application extends StatelessWidget {
     ///
     /// To create a custom theme:
     /// ```shell
-    /// dart forui theme create.
+    /// dart forui theme create
     /// ```
-    final theme = const <TargetPlatform>{.android, .iOS, .fuchsia}.contains(defaultTargetPlatform)
-        ? FTheme.neutral.dark.touch
-        : FTheme.neutral.dark.desktop;
+    final (lightTheme, darkTheme) = const <TargetPlatform>{.android, .iOS, .fuchsia}.contains(defaultTargetPlatform)
+        ? (FTheme.neutral.light.touch, FTheme.neutral.dark.touch)
+        : (FTheme.neutral.light.desktop, FTheme.neutral.dark.desktop);
 
     return MaterialApp(
       // TODO: replace with your application's supported locales.
@@ -45,9 +45,10 @@ class Application extends StatelessWidget {
       //
       // There is a known issue with implicitly animated widgets where their transition occurs AFTER the theme's.
       // See https://github.com/duobaseio/forui/issues/670.
-      theme: theme.toApproximateMaterialTheme(),
-      builder: (_, child) => FTheme(
-        data: theme,
+      theme: lightTheme.toApproximateMaterialTheme(),
+      darkTheme: darkTheme.toApproximateMaterialTheme(),
+      builder: (context, child) => FTheme(
+        data: Theme.brightnessOf(context) == .light ? lightTheme : darkTheme,
         child: FToaster(child: FTooltipGroup(child: child!)),
       ),
       // You can also replace FScaffold with Material Scaffold.
@@ -103,15 +104,13 @@ class Application extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    /// Try changing this and hot reloading the application.
-    ///
     /// To create a custom theme:
     /// ```shell
-    /// dart forui theme create.
+    /// dart forui theme create
     /// ```
-    final theme = const <TargetPlatform>{.android, .iOS, .fuchsia}.contains(defaultTargetPlatform)
-        ? FTheme.neutral.dark.touch
-        : FTheme.neutral.dark.desktop;
+    final (lightTheme, darkTheme) = const <TargetPlatform>{.android, .iOS, .fuchsia}.contains(defaultTargetPlatform)
+        ? (FTheme.neutral.light.touch, FTheme.neutral.dark.touch)
+        : (FTheme.neutral.light.desktop, FTheme.neutral.dark.desktop);
 
     return MaterialApp.router(
       // TODO: replace with your application's supported locales.
@@ -123,9 +122,10 @@ class Application extends StatelessWidget {
       //
       // There is a known issue with implicitly animated widgets where their transition occurs AFTER the theme's.
       // See https://github.com/duobaseio/forui/issues/670.
-      theme: theme.toApproximateMaterialTheme(),
-      builder: (_, child) => FTheme(
-        data: theme,
+      theme: lightTheme.toApproximateMaterialTheme(),
+      darkTheme: darkTheme.toApproximateMaterialTheme(),
+      builder: (context, child) => FTheme(
+        data: Theme.brightnessOf(context) == .light ? lightTheme : darkTheme,
         child: FToaster(child: FTooltipGroup(child: child!)),
       ),
       // TODO: Add your router configuration here.
@@ -2603,31 +2603,28 @@ class Application extends StatelessWidget {
   const Application({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final theme = MediaQuery.platformBrightnessOf(context) == .light ? lightTheme : darkTheme;
-
-    return MaterialApp(
-      // TODO: replace with your application's supported locales.
-      supportedLocales: FLocalizations.supportedLocales,
-      // TODO: add your application's localizations delegates.
-      localizationsDelegates: const [...FLocalizations.localizationsDelegates],
-      // MaterialApp's theme is also animated by default with the same duration and curve.
-      // See https://api.flutter.dev/flutter/material/MaterialApp/themeAnimationStyle.html for how to configure this.
-      //
-      // There is a known issue with implicitly animated widgets where their transition occurs AFTER the theme's.
-      // See https://github.com/duobaseio/forui/issues/670.
-      theme: theme.toApproximateMaterialTheme(),
-      builder: (_, child) => FTheme(
-        data: theme,
-        child: FToaster(child: FTooltipGroup(child: child!)),
-      ),
-      // You can also replace FScaffold with Material Scaffold.
-      home: const FScaffold(
-        // TODO: replace with your widget.
-        child: Example(),
-      ),
-    );
-  }
+  Widget build(BuildContext context) => MaterialApp(
+    // TODO: replace with your application's supported locales.
+    supportedLocales: FLocalizations.supportedLocales,
+    // TODO: add your application's localizations delegates.
+    localizationsDelegates: const [...FLocalizations.localizationsDelegates],
+    // MaterialApp's theme is also animated by default with the same duration and curve.
+    // See https://api.flutter.dev/flutter/material/MaterialApp/themeAnimationStyle.html for how to configure this.
+    //
+    // There is a known issue with implicitly animated widgets where their transition occurs AFTER the theme's.
+    // See https://github.com/duobaseio/forui/issues/670.
+    theme: lightTheme.toApproximateMaterialTheme(),
+    darkTheme: darkTheme.toApproximateMaterialTheme(),
+    builder: (context, child) => FTheme(
+      data: Theme.brightnessOf(context) == .light ? lightTheme : darkTheme,
+      child: FToaster(child: FTooltipGroup(child: child!)),
+    ),
+    // You can also replace FScaffold with Material Scaffold.
+    home: const FScaffold(
+      // TODO: replace with your widget.
+      child: Example(),
+    ),
+  );
 }
 
 class Example extends StatefulWidget {
@@ -2673,10 +2670,7 @@ class Application extends StatelessWidget {
   const Application({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final theme = MediaQuery.platformBrightnessOf(context) == .light ? lightTheme : darkTheme;
-
-    return MaterialApp.router(
+  Widget build(BuildContext context) => MaterialApp.router(
       // TODO: replace with your application's supported locales.
       supportedLocales: FLocalizations.supportedLocales,
       // TODO: add your application's localizations delegates.
@@ -2686,14 +2680,14 @@ class Application extends StatelessWidget {
       //
       // There is a known issue with implicitly animated widgets where their transition occurs AFTER the theme's.
       // See https://github.com/duobaseio/forui/issues/670.
-      theme: theme.toApproximateMaterialTheme(),
-      builder: (_, child) => FTheme(
-        data: theme,
+      theme: lightTheme.toApproximateMaterialTheme(),
+      darkTheme: darkTheme.toApproximateMaterialTheme(),
+      builder: (context, child) => FTheme(
+        data: Theme.brightnessOf(context) == .light ? lightTheme : darkTheme,
         child: FToaster(child: FTooltipGroup(child: child!)),
       ),
       // TODO: Add your router configuration here.
     );
-  }
 }
 ''',
   ),
