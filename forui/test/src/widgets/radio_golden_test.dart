@@ -27,6 +27,9 @@ void main() {
 
   for (final theme in TestScaffold.themes) {
     testWidgets('${theme.name} focused', (tester) async {
+      FocusManager.instance.highlightStrategy = .alwaysTraditional;
+      addTearDown(() => FocusManager.instance.highlightStrategy = .automatic);
+
       await tester.pumpWidget(TestScaffold(theme: theme.data, child: const FRadio(autofocus: true)));
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('radio/${theme.name}/focused.png'));

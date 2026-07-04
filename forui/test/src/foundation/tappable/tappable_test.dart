@@ -77,6 +77,9 @@ void main() {
 
   group('FTappable', () {
     testWidgets('focused when enabled', (tester) async {
+      FocusManager.instance.highlightStrategy = .alwaysTraditional;
+      addTearDown(() => FocusManager.instance.highlightStrategy = .automatic);
+
       await tester.pumpWidget(
         TestScaffold(
           child: FTappable(focusNode: focusNode, builder: (_, states, _) => Text('$states'), onPress: () {}),
@@ -356,6 +359,9 @@ void main() {
 
   group('FTappable.static', () {
     testWidgets('focused when enabled', (tester) async {
+      FocusManager.instance.highlightStrategy = .alwaysTraditional;
+      addTearDown(() => FocusManager.instance.highlightStrategy = .automatic);
+
       await tester.pumpWidget(
         TestScaffold(
           child: FTappable.static(focusNode: focusNode, builder: (_, states, _) => Text('$states'), onPress: () {}),
@@ -827,6 +833,9 @@ void main() {
   });
 
   testWidgets('returns focused state on primary focus', (tester) async {
+    FocusManager.instance.highlightStrategy = .alwaysTraditional;
+    addTearDown(() => FocusManager.instance.highlightStrategy = .automatic);
+
     final focus = autoDispose(FocusNode());
 
     var focused = false;
@@ -850,6 +859,9 @@ void main() {
   });
 
   testWidgets('return focused state on non-primary focus', (tester) async {
+    FocusManager.instance.highlightStrategy = .alwaysTraditional;
+    addTearDown(() => FocusManager.instance.highlightStrategy = .automatic);
+
     final focus = autoDispose(FocusNode());
 
     var focused = false;

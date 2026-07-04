@@ -81,6 +81,9 @@ void main() {
   group('states', () {
     for (final theme in TestScaffold.themes) {
       testWidgets('${theme.name} - default', (tester) async {
+        FocusManager.instance.highlightStrategy = .alwaysTraditional;
+        addTearDown(() => FocusManager.instance.highlightStrategy = .automatic);
+
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
@@ -113,6 +116,9 @@ void main() {
       });
 
       testWidgets('${theme.name} - disabled focused', (tester) async {
+        FocusManager.instance.highlightStrategy = .alwaysTraditional;
+        addTearDown(() => FocusManager.instance.highlightStrategy = .automatic);
+
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
@@ -155,6 +161,9 @@ void main() {
       });
 
       testWidgets('${theme.name} - disabled selected focused', (tester) async {
+        FocusManager.instance.highlightStrategy = .alwaysTraditional;
+        addTearDown(() => FocusManager.instance.highlightStrategy = .automatic);
+
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,
@@ -215,6 +224,9 @@ void main() {
       });
 
       testWidgets('${theme.name} - selected focused', (tester) async {
+        FocusManager.instance.highlightStrategy = .alwaysTraditional;
+        addTearDown(() => FocusManager.instance.highlightStrategy = .automatic);
+
         await tester.pumpWidget(
           TestScaffold(
             theme: theme.data,

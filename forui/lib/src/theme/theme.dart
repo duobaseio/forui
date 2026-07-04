@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/focused_outline.dart';
 
 part 'theme.design.dart';
 
@@ -289,15 +290,17 @@ class FBasicTheme extends StatelessWidget {
   const FBasicTheme({required this.data, required this.child, this.textDirection, this.platform, super.key});
 
   @override
-  Widget build(BuildContext context) => FAdaptiveScope(
-    platform: platform,
-    child: _InheritedTheme(
-      data: data,
-      child: Directionality(
-        textDirection: textDirection ?? Directionality.maybeOf(context) ?? .ltr,
-        child: DefaultTextStyle(
-          style: data.typography.body.sm.copyWith(color: data.colors.foreground),
-          child: child,
+  Widget build(BuildContext context) => FocusHighlightScope(
+    child: FAdaptiveScope(
+      platform: platform,
+      child: _InheritedTheme(
+        data: data,
+        child: Directionality(
+          textDirection: textDirection ?? Directionality.maybeOf(context) ?? .ltr,
+          child: DefaultTextStyle(
+            style: data.typography.body.sm.copyWith(color: data.colors.foreground),
+            child: child,
+          ),
         ),
       ),
     ),

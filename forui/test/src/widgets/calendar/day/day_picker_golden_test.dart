@@ -124,6 +124,9 @@ void main() {
         ('focus-middle', 15, _range(10, 19)),
       ]) {
         testWidgets(name, (tester) async {
+          FocusManager.instance.highlightStrategy = .alwaysTraditional;
+          addTearDown(() => FocusManager.instance.highlightStrategy = .automatic);
+
           final controller = _controller();
           await tester.pumpWidget(_harness(controller, theme: theme.data, selected: selected));
           await tester.pumpAndSettle();

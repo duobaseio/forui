@@ -142,7 +142,7 @@ class _FSwitchState extends State<FSwitch> {
     final formVariants = <FFormFieldVariant>{
       if (!widget.enabled) .disabled,
       if (widget.error != null) .error,
-      if (_focused) .focused,
+      if (_focused && FFocusHighlight.of(context)) .focused,
     };
     final variants = <FVariant>{if (widget.value) FSwitchVariant.selected, ...formVariants};
     final (layout, labelStyle) = widget.leadingLabel

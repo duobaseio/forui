@@ -58,6 +58,9 @@ void main() {
     });
 
     testWidgets('focused', (tester) async {
+      FocusManager.instance.highlightStrategy = .alwaysTraditional;
+      addTearDown(() => FocusManager.instance.highlightStrategy = .automatic);
+
       final focus = autoDispose(FocusNode());
 
       await tester.pumpWidget(

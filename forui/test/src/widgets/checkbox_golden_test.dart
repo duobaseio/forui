@@ -27,6 +27,9 @@ void main() {
 
   for (final theme in TestScaffold.themes) {
     testWidgets('${theme.name} focused', (tester) async {
+      FocusManager.instance.highlightStrategy = .alwaysTraditional;
+      addTearDown(() => FocusManager.instance.highlightStrategy = .automatic);
+
       await tester.pumpWidget(TestScaffold(theme: theme.data, child: const FCheckbox(autofocus: true)));
 
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('check-box/${theme.name}/focused.png'));

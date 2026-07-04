@@ -67,6 +67,9 @@ void main() {
 
     group('${theme.name} focus', () {
       testWidgets('focus-plain', (tester) async {
+        FocusManager.instance.highlightStrategy = .alwaysTraditional;
+        addTearDown(() => FocusManager.instance.highlightStrategy = .automatic);
+
         final controller = _controller();
         await tester.pumpWidget(_harness(controller, theme: theme.data));
         await tester.pumpAndSettle();

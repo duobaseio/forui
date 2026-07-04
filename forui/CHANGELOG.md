@@ -17,6 +17,10 @@
   `FDateSelectionControl.liftedMulti(...)` or `FDateSelectionControl.liftedRange(...)` instead.
 
 
+### `FFocusHighlight`
+* Add `FFocusHighlight` to gate descendant focus decorations on `FocusManager.highlightMode`.
+
+
 ### `FPortal` & `FPointPortal`
 * Fix portal (and dependents like `FPopover`, `FSelect`, and `FAutocomplete`) rendering behind the soft keyboard when
   shown inside a scrollable within a Material `Scaffold`.
@@ -42,6 +46,9 @@
 * Add italic support to the bundled `Inter` font.
 
 * Change the bundled `Inter` font to a variable font.
+
+* Fix focus outlines and highlights persisting after a pointer click when Flutter web semantics are enabled. Focus
+  decorations now follow `FocusManager.highlightMode`.
 
 
 ## 0.23.0
