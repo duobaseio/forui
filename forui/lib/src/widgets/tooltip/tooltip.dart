@@ -106,6 +106,12 @@ class FTooltip extends StatefulWidget {
   /// Defaults to true.
   final bool useViewInsets;
 
+  /// The tip's label, exposed to screen readers as the [child]'s tooltip and announced when the [child] is focused.
+  ///
+  /// Set this to surface the tip's text to accessibility frameworks, since [tipBuilder] returns a widget, not a string.
+  /// Defaults to null.
+  final String? semanticsLabel;
+
   /// The tip builder. The child passed to [tipBuilder] will always be null.
   final Widget Function(BuildContext context, FTooltipController controller) tipBuilder;
 
@@ -135,6 +141,7 @@ class FTooltip extends StatefulWidget {
     this.longPress,
     this.useViewPadding = true,
     this.useViewInsets = true,
+    this.semanticsLabel,
     this.builder = defaultBuilder,
     this.child,
     super.key,
@@ -157,6 +164,7 @@ class FTooltip extends StatefulWidget {
       ..add(FlagProperty('longPress', value: longPress, ifTrue: 'longPress'))
       ..add(FlagProperty('useViewPadding', value: useViewPadding, ifTrue: 'using view padding'))
       ..add(FlagProperty('useViewInsets', value: useViewInsets, ifTrue: 'using view insets'))
+      ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(ObjectFlagProperty.has('tipBuilder', tipBuilder))
       ..add(ObjectFlagProperty.has('builder', builder));
   }
@@ -259,6 +267,11 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
         },
         child: child,
       );
+    }
+
+    // Expose the tip to screen readers as the child's tooltip (read on focus).
+    if (widget.semanticsLabel case final label?) {
+      child = Semantics(tooltip: label, child: child);
     }
 
     return BackdropGroup(

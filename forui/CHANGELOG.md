@@ -48,6 +48,10 @@
 * Change toasts to appear and dismiss instantly, and to not auto-dismiss, when accessible navigation is enabled.
 
 
+### `FTooltip`
+* Add `FTooltip.semanticsLabel` to expose the tip to screen readers as the child's tooltip.
+
+
 ### Others
 * Add italic support to the bundled `Inter` font.
 
