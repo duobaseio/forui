@@ -42,6 +42,12 @@
 * **Breaking** Remove `FThemes`. Use `FTheme.neutral`, or run `dart run forui theme create` to generate a custom theme.
 
 
+### `FToast`
+* Add a screen reader announcement via a live region when a toast appears.
+
+* Change toasts to appear and dismiss instantly, and to not auto-dismiss, when accessible navigation is enabled.
+
+
 ### Others
 * Add italic support to the bundled `Inter` font.
 

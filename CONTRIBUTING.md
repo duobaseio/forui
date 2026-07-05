@@ -20,8 +20,10 @@ In general, contributing code involves the adding/updating of:
 ## Before You Contribute
 
 Before starting work on a PR, please check if a similar [issue](https://github.com/forus-labs/forui/issues)/
-[PR](https://github.com/forus-labs/forui/pulls) exists. We recommend that first time contributors start with
-[existing issues that are labelled with `difficulty: easy` and/or `duration: tiny`](https://github.com/forus-labs/forui/issues?q=is%3Aopen+is%3Aissue+label%3A%22difficulty%3A+easy%22%2C%22duration%3A+tiny%22+).
+[PR](https://github.com/forus-labs/forui/pulls) exists.
+
+Unsolicited PRs that introduce significant changes, e.g. a new widget, without a prior issue may be closed without review.
+Trivial fixes such as typos, broken links, and documentation improvements are always welcome and don't require an issue.
 
 If an issue doesn't exist, create one to discuss the proposed changes. After which, please comment on the issue to
 indicate that you're working on it.
@@ -31,8 +33,16 @@ This helps to:
 * Ensure that the proposed changes align with the project's goals and direction.
 * Provide a platform for maintainers and the community to offer feedback and suggestions.
 
-If you're stuck or unsure about anything, feel free to ask for help in our [discord](https://discord.gg/UEky7WkXd6).
+### First time contributors
 
+We recommend that first time contributors start with
+[existing issues that are labeled with `difficulty: easy` and/or `duration: tiny`](https://github.com/forus-labs/forui/issues?q=is%3Aopen+is%3Aissue+label%3A%22difficulty%3A+easy%22%2C%22duration%3A+tiny%22+).
+
+It is not recommended for first time contributors to implement new widgets or other large features. The hard part is
+often not the implementation but rather than API design. Naming, control semantics, which configuration knobs exist, and 
+the style surface all become long-term commitments.
+
+If you're stuck or unsure about anything, feel free to ask for help in our [discord](https://discord.gg/UEky7WkXd6).
 
 ## Configuring the Development Environment
 

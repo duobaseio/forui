@@ -102,6 +102,7 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
   static const List<AxisDirection> _horizontal = [.left, .right];
   static const List<AxisDirection> _vertical = [.up, .down];
 
+  bool _accessibleNavigation = false;
   Timer? _timer;
   late final AnimationController _entranceDismissController;
   late final AnimationController _transitionController;
@@ -181,6 +182,17 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    // Toasts should not auto-dismiss when accessible navigation is enabled.
+    _accessibleNavigation = MediaQuery.accessibleNavigationOf(context);
+    if (_accessibleNavigation) {
+      _timer?.cancel();
+      _timer = null;
+    }
+  }
+
+  @override
   void didUpdateWidget(AnimatedToast old) {
     super.didUpdateWidget(old);
     if (widget.dismissing != old.dismissing) {
@@ -248,10 +260,22 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
     }
   }
 
-  void _startDismissing() => _entranceDismissController.reverse();
+  void _startDismissing() {
+    if (_accessibleNavigation) {
+      // Skip animation if accessibility navigation is enabled. We defer this as it can be invoked synchronously by
+      // FToasterEntry.dismiss(), disposing the notifier wile it is still notifying its listeners.
+      scheduleMicrotask(() {
+        if (mounted) {
+          _entranceDismissController.value = 0;
+        }
+      });
+    } else {
+      _entranceDismissController.reverse();
+    }
+  }
 
   void _resumeDismissing([Duration stagger = .zero]) {
-    if (widget.duration case final duration?) {
+    if (widget.duration case final duration? when !_accessibleNavigation) {
       _timer?.cancel();
       _timer = Timer(duration + stagger, _startDismissing);
     }
@@ -281,18 +305,18 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
   @override
   Widget build(BuildContext context) {
     // Slide in & out during entrance & exit.
-    var translation = -widget.alignTransform * (1.0 - _curvedEntranceDismiss.value);
+    var translation = _accessibleNavigation ? Offset.zero : -widget.alignTransform * (1.0 - _curvedEntranceDismiss.value);
     // Slide out during swiping to dismiss.
     translation += .lerp(_swipeFraction, _swipeFractionEnd, _swipeCompletion.value)!;
 
     // Gradually increase & decrease opacity during entrance & exit.
-    var opacity = _entranceDismiss.value * _visible.value;
+    var opacity = _accessibleNavigation ? (widget.visible ? 1.0 : 0.0) : _entranceDismiss.value * _visible.value;
     // Gradually decrease opacity during swiping to dismiss.
     opacity *= 1 - _swipeFraction.distance.abs();
 
     return AnimatedToastData(
       index: widget.index,
-      transition: _transition.value,
+      transition: _accessibleNavigation ? 1.0 : _transition.value,
       visible: widget.visible,
       signal: _signal,
       child: IgnorePointer(
@@ -369,7 +393,15 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
               },
               child: FractionalTranslation(
                 translation: translation,
-                child: Opacity(opacity: opacity.clamp(0, 1), child: widget.child),
+                child: Opacity(
+                  opacity: opacity.clamp(0, 1),
+                  child: Semantics(
+                    container: true,
+                    liveRegion: widget.visible,
+                    onDismiss: widget.visible ? _startDismissing : null,
+                    child: widget.child,
+                  ),
+                ),
               ),
             ),
           ),
