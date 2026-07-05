@@ -8,7 +8,7 @@ void main() {
       final decoded = Preset.decode('ababbc');
 
       expect(decoded.base, BaseColor.neutral);
-      expect(decoded.primary, PrimaryColor.blue);
+      expect(decoded.primary, PrimaryColor.amber);
       expect(decoded.display, FontFamily.geist);
       expect(decoded.body, FontFamily.inter);
       expect(decoded.icon, IconLibrary.lucide);
