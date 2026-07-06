@@ -316,6 +316,11 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
             );
           }
 
+          // Keep the tip visible while the pointer is over it so it can be read or interacted with (WCAG 1.4.13).
+          if (hover) {
+            tooltip = MouseRegion(onEnter: (_) => _enter(), onExit: (_) => _exit(), child: tooltip);
+          }
+
           return tooltip;
         },
         child: child,
@@ -409,7 +414,8 @@ class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
 
   /// The duration to wait before hiding the tooltip after the user has stopped hovering over the target.
   ///
-  /// Defaults to [Duration.zero].
+  /// Defaults to 100ms. It is not recommended to set this below 100ms as it does not conform with WCAG 1.4.13, since
+  /// the tip may hide before the pointer can move onto it.
   @override
   final Duration hoverExitDuration;
 
@@ -426,7 +432,7 @@ class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
     this.padding = const .symmetric(horizontal: 14, vertical: 10),
     this.motion = const FTooltipMotion(),
     this.hoverEnterDuration = const Duration(milliseconds: 500),
-    this.hoverExitDuration = .zero,
+    this.hoverExitDuration = const Duration(milliseconds: 100),
     this.longPressExitDuration = const Duration(milliseconds: 1500),
   });
 
@@ -438,7 +444,7 @@ class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
     required FHapticFeedback hapticFeedback,
     FTooltipMotion motion = const FTooltipMotion(),
     Duration hoverEnterDuration = const Duration(milliseconds: 500),
-    Duration hoverExitDuration = .zero,
+    Duration hoverExitDuration = const Duration(milliseconds: 100),
     Duration longPressExitDuration = const Duration(milliseconds: 1500),
   }) : this(
          decoration: ShapeDecoration(

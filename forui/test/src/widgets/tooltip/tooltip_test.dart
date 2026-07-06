@@ -365,5 +365,30 @@ void main() {
 
       semantics.dispose();
     });
+
+    testWidgets('tip remains visible when the pointer moves onto it', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTooltip(
+            tipBuilder: (context, _) => const Text('tip'),
+            child: FButton(onPress: () {}, child: const Text('button')),
+          ),
+        ),
+      );
+
+      final gesture = await tester.createPointerGesture();
+      await tester.pump();
+
+      await gesture.moveTo(tester.getCenter(find.byType(FButton)));
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      expect(find.text('tip'), findsOneWidget);
+
+      // Moving the pointer from the trigger onto the tip must not dismiss it (WCAG 1.4.13 hoverable).
+      await gesture.moveTo(tester.getCenter(find.text('tip')));
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      expect(find.text('tip'), findsOneWidget);
+    });
   });
 }

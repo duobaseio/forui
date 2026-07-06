@@ -51,6 +51,10 @@
 ### `FTooltip`
 * Add `FTooltip.semanticsLabel` to expose the tip to screen readers as the child's tooltip.
 
+* Change the default `FTooltipStyle.hoverExitDuration` to 100ms from `Duration.zero`.
+
+* Fix `FTooltip` dismissing when the pointer moves from the target onto the tip.
+
 
 ### Others
 * Add italic support to the bundled `Inter` font.

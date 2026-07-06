@@ -43,7 +43,10 @@ class FToasterStyle with Diagnosticable, _$FToasterStyleFunctions {
   @override
   final Duration expandHoverEnterDuration;
 
-  /// The duration to wait after exiting the toaster before collapsing the toasts. Defaults to 200ms.
+  /// The duration to wait after exiting the toaster before collapsing the toasts.
+  ///
+  /// Defaults to 200ms. It is not recommended to set this below 100ms as it does not conform with WCAG 1.4.13, since
+  /// the toasts may collapse before the pointer can move onto them.
   @override
   final Duration expandHoverExitDuration;
 

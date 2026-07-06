@@ -235,4 +235,28 @@ void main() {
       });
     });
   });
+
+  group('accessibility', () {
+    testWidgets('submenu remains open when the pointer moves onto it', (tester) async {
+      await tester.pumpWidget(_contextMenuWithSubmenu());
+
+      await tester.tap(find.byKey(_childKey), buttons: kSecondaryButton);
+      await tester.pumpAndSettle();
+
+      // Open the submenu by hovering its trigger.
+      final gesture = await tester.createPointerGesture();
+      await gesture.moveTo(tester.getCenter(find.text('Share')));
+      await tester.pump(const Duration(milliseconds: 200));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Email'), findsOneWidget);
+
+      // Moving the pointer from the trigger onto the submenu must not dismiss it (WCAG 1.4.13 hoverable).
+      await gesture.moveTo(tester.getCenter(find.text('Email')));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Email'), findsOneWidget);
+      expect(find.text('Messages'), findsOneWidget);
+    });
+  });
 }
