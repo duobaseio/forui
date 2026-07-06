@@ -294,7 +294,7 @@ abstract class _State<T extends _Label> extends State<T> with TickerProviderStat
           duration: widget.style.labelMotion.textStyleTransitionDuration,
           curve: widget.style.labelMotion.textStyleTransitionCurve,
           textHeightBehavior: behavior,
-          child: _error!,
+          child: Semantics(validationResult: .invalid, child: _error!),
         ),
       ),
     ),

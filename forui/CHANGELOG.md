@@ -36,6 +36,10 @@
 * Fix `FTabs` clipping labels taller than the tab bar. Tabs now grow to fit the tallest label and center the rest.
 
 
+### `FTextFormField`
+* **Breaking** Remove `FTextFormField.password(error: ...)`. It was erroneously included even though it did nothing.
+
+
 ### `FTheme` & `FThemes`
 * Add `FTheme.neutral`.
 
