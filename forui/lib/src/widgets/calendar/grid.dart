@@ -5,14 +5,48 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
 
+/// Pages the grid by [direction] (-1 up / 1 down). [large] jump a year in the day grid, a decade/century in the
+/// month/year grids.
+class _PageIntent extends Intent {
+  final int direction;
+  final bool large;
+
+  const _PageIntent(this.direction, {this.large = false});
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(IntProperty('direction', direction))
+      ..add(FlagProperty('large', value: large, ifTrue: 'large'));
+  }
+}
+
+/// Moves focus to the first or last selectable cell of the focused cell's row.
+class _RowEdgeIntent extends Intent {
+  final bool end;
+
+  const _RowEdgeIntent({required this.end});
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(FlagProperty('end', value: end, ifTrue: 'end'));
+  }
+}
+
 @internal
 class GridFocusableActionDetector extends StatefulWidget {
   final void Function(TraversalDirection, TextDirection) onFocusMove;
+  final void Function(int direction, {bool large}) onFocusPage;
+  final void Function({required bool end}) onFocusRowEdge;
   final ValueChanged<bool> onFocusChange;
   final Widget child;
 
   const GridFocusableActionDetector({
     required this.onFocusMove,
+    required this.onFocusPage,
+    required this.onFocusRowEdge,
     required this.onFocusChange,
     required this.child,
     super.key,
@@ -26,6 +60,8 @@ class GridFocusableActionDetector extends StatefulWidget {
     super.debugFillProperties(properties);
     properties
       ..add(ObjectFlagProperty.has('onFocusMove', onFocusMove))
+      ..add(ObjectFlagProperty.has('onFocusPage', onFocusPage))
+      ..add(ObjectFlagProperty.has('onFocusRowEdge', onFocusRowEdge))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange));
   }
 }
@@ -36,6 +72,12 @@ class _GridFocusableActionDetectorState extends State<GridFocusableActionDetecto
     SingleActivator(.arrowRight): DirectionalFocusIntent(.right),
     SingleActivator(.arrowUp): DirectionalFocusIntent(.up),
     SingleActivator(.arrowDown): DirectionalFocusIntent(.down),
+    SingleActivator(.pageUp): _PageIntent(-1),
+    SingleActivator(.pageDown): _PageIntent(1),
+    SingleActivator(.pageUp, shift: true): _PageIntent(-1, large: true),
+    SingleActivator(.pageDown, shift: true): _PageIntent(1, large: true),
+    SingleActivator(.home): _RowEdgeIntent(end: false),
+    SingleActivator(.end): _RowEdgeIntent(end: true),
   };
 
   late FocusNode _node;
@@ -60,6 +102,10 @@ class _GridFocusableActionDetectorState extends State<GridFocusableActionDetecto
           ..requestFocus()
           ..previousFocus(),
       ),
+      _PageIntent: CallbackAction<_PageIntent>(
+        onInvoke: (intent) => widget.onFocusPage(intent.direction, large: intent.large),
+      ),
+      _RowEdgeIntent: CallbackAction<_RowEdgeIntent>(onInvoke: (intent) => widget.onFocusRowEdge(end: intent.end)),
     };
   }
 
@@ -287,6 +333,31 @@ extension InternalPickerController on GridController {
     _focused = null;
     _current = _to(_from(date));
     _controller = PageController(initialPage: _from(date));
+  }
+
+  /// Animates [delta] pages from the current page, clamped to the valid range. Does nothing at the first/last page.
+  Future<void> page(
+    int delta, {
+    Duration duration = const Duration(milliseconds: 200),
+    Curve curve = Curves.ease,
+  }) async {
+    if ((_from(_current) + delta).clamp(0, _from(end)) case final target when target != _from(_current)) {
+      await _animateTo(target, duration, curve);
+    }
+  }
+
+  /// Focuses the first or last selectable date within `[low, high]`.
+  Future<void> edge(DateTime low, DateTime high, {required bool end}) async {
+    low = low.isBefore(start) ? start : low;
+    high = high.isAfter(this.end) ? this.end : high;
+    final (first, step) = end ? (high, -1) : (low, 1);
+
+    for (var date = first; !date.isBefore(low) && !date.isAfter(high); date = _step(date, step)) {
+      if (_selectable(date)) {
+        await focus(date);
+        return;
+      }
+    }
   }
 
   void onPageChange(int page) {

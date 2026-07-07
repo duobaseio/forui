@@ -1,5 +1,9 @@
 ## 0.24.0 (next)
 
+### `FCalendar`
+* Add PageUp/PageDown, Shift+PageUp/PageDown, and Home/End keyboard navigation to the day, month, and year grids.
+
+
 ### `FColors`
 * **Breaking** Remove all predefined color schemes except `FColors.neutralLight` and `FColors.neutralDark`. Run
   `dart run forui theme create` to generate a custom theme.

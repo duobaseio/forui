@@ -167,6 +167,81 @@ void main() {
     });
   });
 
+  group('page and row navigation', () {
+    testWidgets('PageDown pages to the next decade', (tester) async {
+      final controller = _controller(initial: .utc(2024));
+      await tester.pumpWidget(_harness(controller, today: .utc(2024)));
+
+      await tester.sendKeyEvent(.tab);
+      await tester.pumpAndSettle();
+      expect(controller.focused, DateTime.utc(2024));
+
+      await tester.sendKeyEvent(.pageDown);
+      await tester.pumpAndSettle();
+      expect(controller.current, DateTime.utc(2030));
+      // The year is not in the new decade, so focus re-homes to its first selectable year.
+      expect(controller.focused, DateTime.utc(2030));
+    });
+
+    testWidgets('PageUp pages to the previous decade', (tester) async {
+      final controller = _controller(initial: .utc(2024));
+      await tester.pumpWidget(_harness(controller, today: .utc(2024)));
+
+      await tester.sendKeyEvent(.tab);
+      await tester.pumpAndSettle();
+
+      await tester.sendKeyEvent(.pageUp);
+      await tester.pumpAndSettle();
+      expect(controller.current, DateTime.utc(2010));
+      expect(controller.focused, DateTime.utc(2010));
+    });
+
+    testWidgets('Shift+PageDown pages to the next century', (tester) async {
+      final controller = _controller(start: .utc(1900), end: .utc(2199, 12, 31), initial: .utc(2024));
+      await tester.pumpWidget(_harness(controller, today: .utc(2024)));
+
+      await tester.sendKeyEvent(.tab);
+      await tester.pumpAndSettle();
+
+      await tester.sendKeyDownEvent(.shiftLeft);
+      await tester.sendKeyEvent(.pageDown);
+      await tester.sendKeyUpEvent(.shiftLeft);
+      await tester.pumpAndSettle();
+      expect(controller.current, DateTime.utc(2120));
+    });
+
+    testWidgets('PageUp is clamped at the first page', (tester) async {
+      final controller = _controller(start: .utc(2020), end: .utc(2049, 12, 31), initial: .utc(2024));
+      await tester.pumpWidget(_harness(controller, today: .utc(2024)));
+
+      await tester.sendKeyEvent(.tab);
+      await tester.pumpAndSettle();
+
+      await tester.sendKeyEvent(.pageUp);
+      await tester.pumpAndSettle();
+      expect(controller.current, DateTime.utc(2020));
+      expect(controller.focused, DateTime.utc(2024));
+    });
+
+    testWidgets('Home and End move focus to the row edges', (tester) async {
+      final controller = _controller(initial: .utc(2024));
+      await tester.pumpWidget(_harness(controller, today: .utc(2024)));
+
+      await tester.sendKeyEvent(.tab);
+      await tester.pumpAndSettle();
+      // 2024 is the middle cell of its 3-column row [2023, 2024, 2025].
+      expect(controller.focused, DateTime.utc(2024));
+
+      await tester.sendKeyEvent(.home);
+      await tester.pumpAndSettle();
+      expect(controller.focused, DateTime.utc(2023));
+
+      await tester.sendKeyEvent(.end);
+      await tester.pumpAndSettle();
+      expect(controller.focused, DateTime.utc(2025));
+    });
+  });
+
   group('focus', () {
     test('no-op when already focused', () async {
       final controller = _controller();
