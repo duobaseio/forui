@@ -59,11 +59,7 @@ class YearPicker extends StatelessWidget {
             final column = (year - decade) % _columns;
             // The last row of a decade holds a single year, so clamp to the decade's last year.
             final last = year - column + _columns - 1;
-            controller.edge(
-              .utc(year - column),
-              .utc(last < decade + 9 ? last : decade + 9),
-              end: end,
-            );
+            controller.edge(.utc(year - column), .utc(last < decade + 9 ? last : decade + 9), end: end);
           }
         },
         onFocusChange: (focused) {

@@ -536,8 +536,8 @@ void main() {
       expect(
         tester
             .widget<FractionalTranslation>(
-          find.ancestor(of: find.text('1').last, matching: find.byType(FractionalTranslation)).first,
-        )
+              find.ancestor(of: find.text('1').last, matching: find.byType(FractionalTranslation)).first,
+            )
             .translation,
         Offset.zero,
       );

@@ -305,7 +305,9 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
   @override
   Widget build(BuildContext context) {
     // Slide in & out during entrance & exit.
-    var translation = _accessibleNavigation ? Offset.zero : -widget.alignTransform * (1.0 - _curvedEntranceDismiss.value);
+    var translation = _accessibleNavigation
+        ? Offset.zero
+        : -widget.alignTransform * (1.0 - _curvedEntranceDismiss.value);
     // Slide out during swiping to dismiss.
     translation += .lerp(_swipeFraction, _swipeFractionEnd, _swipeCompletion.value)!;
 

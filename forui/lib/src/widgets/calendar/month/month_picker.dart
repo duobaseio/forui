@@ -70,11 +70,7 @@ class MonthPicker extends StatelessWidget {
         onFocusRowEdge: ({required end}) {
           if (controller.focused case DateTime(:final month, :final year)) {
             final column = (month - 1) % _columns;
-            controller.edge(
-              .utc(year, month - column),
-              .utc(year, month - column + _columns - 1),
-              end: end,
-            );
+            controller.edge(.utc(year, month - column), .utc(year, month - column + _columns - 1), end: end);
           }
         },
         onFocusChange: (focused) {

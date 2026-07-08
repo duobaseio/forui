@@ -148,7 +148,7 @@ void main() {
     );
 
     final outline = tester.widget<FFocusedOutline>(find.byType(FFocusedOutline));
-    const sentinel = FFocusedOutlineStyle(color: const Color(0xFF111111), width: 9, borderRadius: .zero);
+    const sentinel = FFocusedOutlineStyle(color: Color(0xFF111111), width: 9, borderRadius: .zero);
     expect(outline.style(sentinel).color, color);
   });
 }
