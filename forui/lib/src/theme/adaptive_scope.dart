@@ -51,9 +51,3 @@ class FAdaptiveScope extends InheritedWidget {
     properties.add(DiagnosticsProperty('platform', platform));
   }
 }
-
-/// Provides functions for accessing the current platform variant.
-extension FAdaptiveBuildContext on BuildContext {
-  /// Returns the current [FPlatformVariant].
-  FPlatformVariant get platformVariant => FAdaptiveScope.of(this);
-}

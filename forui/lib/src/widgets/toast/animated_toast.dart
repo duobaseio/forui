@@ -185,7 +185,7 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
   void didChangeDependencies() {
     super.didChangeDependencies();
     // Toasts should not auto-dismiss when accessible navigation is enabled.
-    _accessibleNavigation = MediaQuery.accessibleNavigationOf(context);
+    _accessibleNavigation = context.accessibility.accessibleNavigation;
     if (_accessibleNavigation) {
       _timer?.cancel();
       _timer = null;

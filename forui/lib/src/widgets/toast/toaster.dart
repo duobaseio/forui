@@ -21,7 +21,7 @@ import 'package:forui/src/widgets/toast/toaster_stack.dart';
 /// The higher the threshold, the more the user has to swipe to dismiss the toast. Defaults to 0.5.
 ///
 /// [duration] controls the duration which the toast is shown. Defaults to 5 seconds. Set [duration] to null to disable
-/// auto-dismissing. Auto-dismissal is always disabled when [MediaQuery.accessibleNavigationOf] is true.
+/// auto-dismissing. Auto-dismissal is always disabled when [FAccessibilityScope.accessibleNavigationOf] is true.
 ///
 /// ## Contract
 /// Throws an error if:
@@ -100,7 +100,7 @@ FToasterEntry showFToast({
 /// The higher the threshold, the more the user has to swipe to dismiss the toast. Defaults to 0.5.
 ///
 /// [duration] controls the duration which the toast is shown. Defaults to 5 seconds. Set [duration] to null to disable
-/// auto-dismissing. Auto-dismissal is always disabled when [MediaQuery.accessibleNavigationOf] is true.
+/// auto-dismissing. Auto-dismissal is always disabled when [FAccessibilityScope.accessibleNavigationOf] is true.
 ///
 /// ## Contract
 /// Throws an error if:

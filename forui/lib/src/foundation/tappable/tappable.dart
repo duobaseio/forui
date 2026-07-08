@@ -492,7 +492,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     _style = widget.style(context.theme.tappableStyle);
-    _highlight = FFocusHighlight.of(context);
+    _highlight = context.accessibility.focusHighlight;
     if (_highlight) {
       if (_focus.hasFocus) {
         _current.add(FTappableVariant.focused);

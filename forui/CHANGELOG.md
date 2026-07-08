@@ -1,5 +1,9 @@
 ## 0.24.0 (next)
 
+### `FAccessibility`
+* Add `FAccessibility`, `FAccessibilityScope`, and `FAccessibilityMotion`.
+
+
 ### `FCalendar`
 * Add PageUp/PageDown, Shift+PageUp/PageDown, and Home/End keyboard navigation to the day, month, and year grids.
 
