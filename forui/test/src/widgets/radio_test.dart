@@ -29,4 +29,47 @@ void main() {
 
     expect(focused(), true);
   });
+
+  group('accessibility', () {
+    testWidgets('collapses durations to zero when animations are disabled', (tester) async {
+      tester.platformDispatcher.accessibilityFeaturesTestValue = const FakeAccessibilityFeatures(
+        disableAnimations: true,
+      );
+      addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+
+      await tester.pumpWidget(TestScaffold.app(child: const FRadio(value: true)));
+
+      final containers = find.descendant(of: find.byType(FRadio), matching: find.byType(AnimatedContainer));
+      expect(containers, findsExactly(2));
+      for (final container in tester.widgetList<AnimatedContainer>(containers)) {
+        expect(container.duration, Duration.zero);
+      }
+
+      final size = tester.widget<AnimatedSize>(
+        find.descendant(of: find.byType(FRadio), matching: find.byType(AnimatedSize)),
+      );
+      expect(size.duration, Duration.zero);
+      expect(size.reverseDuration, Duration.zero);
+    });
+
+    testWidgets('keeps durations when only reduce motion is set', (tester) async {
+      tester.platformDispatcher.accessibilityFeaturesTestValue = const FakeAccessibilityFeatures(reduceMotion: true);
+      addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+
+      await tester.pumpWidget(TestScaffold.app(child: const FRadio(value: true)));
+
+      const motion = FRadioMotion();
+      final containers = find.descendant(of: find.byType(FRadio), matching: find.byType(AnimatedContainer));
+      expect(containers, findsExactly(2));
+      for (final container in tester.widgetList<AnimatedContainer>(containers)) {
+        expect(container.duration, motion.transitionDuration);
+      }
+
+      final size = tester.widget<AnimatedSize>(
+        find.descendant(of: find.byType(FRadio), matching: find.byType(AnimatedSize)),
+      );
+      expect(size.duration, motion.selectDuration);
+      expect(size.reverseDuration, motion.unselectDuration);
+    });
+  });
 }

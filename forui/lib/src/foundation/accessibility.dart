@@ -6,7 +6,7 @@ import 'package:meta/meta.dart';
 /// The platform's motion accessibility preference.
 enum FAccessibilityMotion {
   /// Motion is unrestricted.
-  full,
+  all,
 
   /// Large or spatial motions are reduced and/or replaced with simpler animations such as cross-fades.
   ///
@@ -26,13 +26,6 @@ final class FAccessibility with Diagnosticable {
   /// {@endtemplate}
   final bool accessibleNavigation;
 
-  /// {@template forui.foundation.FAccessibility.deterministicCursor}
-  /// True if the platform requests a non-blinking, deterministic text cursor.
-  ///
-  /// [FAccessibilityMotion.disabled] also requests a non-blinking, deterministic text cursor.
-  /// {@endtemplate}
-  final bool deterministicCursor;
-
   /// {@template forui.foundation.FAccessibility.motion}
   /// The motion preference.
   /// {@endtemplate}
@@ -46,7 +39,6 @@ final class FAccessibility with Diagnosticable {
   /// Creates a [FAccessibility].
   const FAccessibility({
     required this.accessibleNavigation,
-    required this.deterministicCursor,
     required this.motion,
     required this.focusHighlight,
   });
@@ -59,7 +51,6 @@ final class FAccessibility with Diagnosticable {
     bool? focusHighlight,
   }) => FAccessibility(
     accessibleNavigation: accessibleNavigation ?? this.accessibleNavigation,
-    deterministicCursor: deterministicCursor ?? this.deterministicCursor,
     motion: motion ?? this.motion,
     focusHighlight: focusHighlight ?? this.focusHighlight,
   );
@@ -69,7 +60,6 @@ final class FAccessibility with Diagnosticable {
     super.debugFillProperties(properties);
     properties
       ..add(FlagProperty('accessibleNavigation', value: accessibleNavigation, ifTrue: 'accessibleNavigation'))
-      ..add(FlagProperty('deterministicCursor', value: deterministicCursor, ifTrue: 'deterministicCursor'))
       ..add(EnumProperty('motion', motion))
       ..add(FlagProperty('focusHighlight', value: focusHighlight, ifTrue: 'focusHighlight'));
   }
@@ -80,15 +70,14 @@ final class FAccessibility with Diagnosticable {
       other is FAccessibility &&
           runtimeType == other.runtimeType &&
           accessibleNavigation == other.accessibleNavigation &&
-          deterministicCursor == other.deterministicCursor &&
           motion == other.motion &&
           focusHighlight == other.focusHighlight;
 
   @override
-  int get hashCode => Object.hash(accessibleNavigation, deterministicCursor, motion, focusHighlight);
+  int get hashCode => Object.hash(accessibleNavigation, motion, focusHighlight);
 }
 
-enum _Aspect { accessibleNavigation, deterministicCursor, motion, focusHighlight }
+enum _Aspect { accessibleNavigation, motion, focusHighlight }
 
 /// Provides the [FAccessibility] features to descendants and updates them when the platform settings change.
 class FAccessibilityScope extends StatefulWidget {
@@ -100,15 +89,6 @@ class FAccessibilityScope extends StatefulWidget {
     context,
     aspect: _Aspect.accessibleNavigation,
   )!.data.accessibleNavigation;
-
-  /// Returns [FAccessibility.deterministicCursor] of the nearest [FAccessibilityScope] in the given [context].
-  ///
-  /// It is recommended to use the terser [FAccessibilityContext.deterministicCursor] getter instead.
-  @useResult
-  static bool deterministicCursorOf(BuildContext context) => InheritedModel.inheritFrom<_Accessibility>(
-    context,
-    aspect: _Aspect.deterministicCursor,
-  )!.data.deterministicCursor;
 
   /// Returns [FAccessibility.motion] of the nearest [FAccessibilityScope] in the given [context].
   ///
@@ -148,12 +128,11 @@ class _State extends State<FAccessibilityScope> with WidgetsBindingObserver {
     final features = WidgetsBinding.instance.platformDispatcher.accessibilityFeatures;
     return FAccessibility(
       accessibleNavigation: features.accessibleNavigation,
-      deterministicCursor: features.deterministicCursor,
       motion: features.disableAnimations
           ? .disabled
           : features.reduceMotion
           ? .reduced
-          : .full,
+          : .all,
       focusHighlight: FocusManager.instance.highlightMode == .traditional,
     );
   }
@@ -195,9 +174,6 @@ extension type FAccessibilityContext(BuildContext context) {
   /// {@macro forui.foundation.FAccessibility.accessibleNavigation}
   bool get accessibleNavigation => FAccessibilityScope.accessibleNavigationOf(context);
 
-  /// {@macro forui.foundation.FAccessibility.deterministicCursor}
-  bool get deterministicCursor => FAccessibilityScope.deterministicCursorOf(context);
-
   /// {@macro forui.foundation.FAccessibility.motion}
   FAccessibilityMotion get motion => FAccessibilityScope.motionOf(context);
 
@@ -217,7 +193,6 @@ class _Accessibility extends InheritedModel<_Aspect> {
   bool updateShouldNotifyDependent(_Accessibility old, Set<_Aspect> dependencies) =>
       dependencies.contains(_Aspect.accessibleNavigation) &&
           data.accessibleNavigation != old.data.accessibleNavigation ||
-      dependencies.contains(_Aspect.deterministicCursor) && data.deterministicCursor != old.data.deterministicCursor ||
       dependencies.contains(_Aspect.motion) && data.motion != old.data.motion ||
       dependencies.contains(_Aspect.focusHighlight) && data.focusHighlight != old.data.focusHighlight;
 

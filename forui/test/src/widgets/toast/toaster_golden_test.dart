@@ -584,4 +584,72 @@ void main() {
       });
     });
   });
+
+  group('accessibility', () {
+    for (final (name, features) in [
+      ('full', const FakeAccessibilityFeatures()),
+      ('reduced', const FakeAccessibilityFeatures(reduceMotion: true)),
+      ('disabled', const FakeAccessibilityFeatures(disableAnimations: true)),
+    ]) {
+      testWidgets('$name motion', (tester) async {
+        tester.platformDispatcher.accessibilityFeaturesTestValue = features;
+        addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+
+        final sheet = autoDispose(AnimationSheetBuilder(frameSize: const Size(300, 240)));
+
+        Widget build() => TestScaffold(
+          child: FToaster(child: Center(child: small('1'))),
+        );
+
+        await tester.pumpWidget(sheet.record(build(), recording: false));
+        await tester.tap(find.text('1'));
+        await tester.pump(); // Insert the toast and start the entrance.
+        await tester.pumpFrames(sheet.record(build()), const Duration(milliseconds: 300));
+
+        await expectLater(sheet.collate(5), matchesGoldenFile('toast/motion-$name.png'));
+
+        // Unmount the toaster to cancel the toast's pending auto-dismiss timer.
+        await tester.pumpWidget(TestScaffold(child: const SizedBox()));
+      });
+    }
+
+    // The stack fans open over time under full motion, and snaps open instantly under reduced and disabled motion.
+    for (final (name, features) in [
+      ('full', const FakeAccessibilityFeatures()),
+      ('reduced', const FakeAccessibilityFeatures(reduceMotion: true)),
+      ('disabled', const FakeAccessibilityFeatures(disableAnimations: true)),
+    ]) {
+      testWidgets('$name motion expand', (tester) async {
+        tester.platformDispatcher.accessibilityFeaturesTestValue = features;
+        addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+
+        final sheet = autoDispose(AnimationSheetBuilder(frameSize: const Size(300, 460)));
+
+        Widget build() => TestScaffold(
+          child: FToaster(
+            child: Center(
+              child: Column(mainAxisSize: .min, children: [small('1'), small('2'), small('3')]),
+            ),
+          ),
+        );
+
+        await tester.pumpWidget(sheet.record(build(), recording: false));
+        await tester.tap(find.text('1'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('2'));
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('3'));
+        await tester.pumpAndSettle();
+
+        await tester.tap(find.text('3').last); // Press the front toast to expand the stack.
+        await tester.pump(); // Start the expand.
+        await tester.pumpFrames(sheet.record(build()), const Duration(milliseconds: 300));
+
+        await expectLater(sheet.collate(5), matchesGoldenFile('toast/expand-motion-$name.png'));
+
+        // Unmount the toaster to cancel the toasts' pending auto-dismiss timers.
+        await tester.pumpWidget(TestScaffold(child: const SizedBox()));
+      });
+    }
+  });
 }

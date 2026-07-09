@@ -375,3 +375,17 @@ class FWheelCalendarController extends FCalendarController {
     super.dispose();
   }
 }
+
+@internal
+extension InternalFCalendarController on FCalendarController {
+  void reduceMotion({required bool reduce}) {
+    switch (this) {
+      case final _GridCalendarController c:
+        c.day.reduceMotion = reduce;
+        c.month.reduceMotion = reduce;
+        c.year.reduceMotion = reduce;
+      case final FWheelCalendarController c:
+        c.day.reduceMotion = reduce;
+    }
+  }
+}

@@ -29,4 +29,35 @@ void main() {
 
     expect(focused(), true);
   });
+
+  group('accessibility', () {
+    testWidgets('collapses switcher durations to zero when animations are disabled', (tester) async {
+      tester.platformDispatcher.accessibilityFeaturesTestValue = const FakeAccessibilityFeatures(
+        disableAnimations: true,
+      );
+      addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+
+      await tester.pumpWidget(TestScaffold.app(child: const FCheckbox(value: true)));
+
+      final switcher = tester.widget<AnimatedSwitcher>(
+        find.descendant(of: find.byType(FCheckbox), matching: find.byType(AnimatedSwitcher)),
+      );
+      expect(switcher.duration, Duration.zero);
+      expect(switcher.reverseDuration, Duration.zero);
+    });
+
+    testWidgets('keeps switcher durations when only reduce motion is set', (tester) async {
+      tester.platformDispatcher.accessibilityFeaturesTestValue = const FakeAccessibilityFeatures(reduceMotion: true);
+      addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+
+      await tester.pumpWidget(TestScaffold.app(child: const FCheckbox(value: true)));
+
+      final switcher = tester.widget<AnimatedSwitcher>(
+        find.descendant(of: find.byType(FCheckbox), matching: find.byType(AnimatedSwitcher)),
+      );
+      // Reduce motion keeps the cross-fade (a fade is not spatial), so its durations are not collapsed.
+      expect(switcher.duration == Duration.zero, false);
+      expect(switcher.reverseDuration == Duration.zero, false);
+    });
+  });
 }

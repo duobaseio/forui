@@ -481,6 +481,7 @@ class _FDialogState extends State<FDialog> {
     final theme = context.theme;
     final style = widget.style(context.theme.dialogStyle);
     final direction = Directionality.maybeOf(context) ?? TextDirection.ltr;
+    final motion = context.accessibility.motion;
 
     Widget dialog = DecoratedBox(
       decoration: style.decoration,
@@ -494,7 +495,7 @@ class _FDialogState extends State<FDialog> {
     );
 
     // We cannot handle the transition in [FDialogRoute] because of https://github.com/flutter/flutter/issues/31706.
-    if (_fade case final fade?) {
+    if (_fade case final fade? when motion != .disabled) {
       dialog = FadeTransition(opacity: fade, child: dialog);
     }
 
@@ -517,7 +518,7 @@ class _FDialogState extends State<FDialog> {
     }
 
     // We want to scale the dialog, including the background filter.
-    if (_scale case final scale?) {
+    if (_scale case final scale? when motion == .all) {
       dialog = ScaleTransition(scale: scale, child: dialog);
     }
 
@@ -694,6 +695,10 @@ extension type FDialogContentStyles(
 ///
 /// The actual animation duration is controlled by the route used to display the dialog, such as [FDialogRoute]. When
 /// using [showFDialog], the duration can be customized via [FDialogRouteStyle.motion].
+///
+/// When [FAccessibility.motion] is:
+/// * [FAccessibilityMotion.reduced], only fade transitions are applied.
+/// * [FAccessibilityMotion.disabled], no motion is applied.
 class FDialogMotion with Diagnosticable, _$FDialogMotionFunctions {
   /// The curve used for the dialog's expansion animation when entering. Defaults to [Curves.easeOutCubic].
   @override

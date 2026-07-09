@@ -8,8 +8,7 @@ void main() {
   group('FAccessibility', () {
     const data = FAccessibility(
       accessibleNavigation: false,
-      motion: .full,
-      deterministicCursor: false,
+      motion: .all,
       focusHighlight: false,
     );
 
@@ -18,7 +17,6 @@ void main() {
 
       expect(copy.motion, FAccessibilityMotion.disabled);
       expect(copy.accessibleNavigation, false);
-      expect(copy.deterministicCursor, false);
       expect(copy.focusHighlight, false);
     });
 
@@ -30,7 +28,7 @@ void main() {
 
   group('FAccessibilityScope', () {
     for (final (disableAnimations, reduceMotion, expected) in [
-      (false, false, FAccessibilityMotion.full),
+      (false, false, FAccessibilityMotion.all),
       (false, true, FAccessibilityMotion.reduced),
       (true, false, FAccessibilityMotion.disabled),
       (true, true, FAccessibilityMotion.disabled),
@@ -73,7 +71,7 @@ void main() {
           ),
         ),
       );
-      expect(motion, FAccessibilityMotion.full);
+      expect(motion, FAccessibilityMotion.all);
 
       tester.platformDispatcher.accessibilityFeaturesTestValue = const FakeAccessibilityFeatures(
         disableAnimations: true,
@@ -116,7 +114,6 @@ void main() {
           data: const FAccessibility(
             accessibleNavigation: false,
             motion: .reduced,
-            deterministicCursor: false,
             focusHighlight: false,
           ),
           child: Builder(
@@ -133,59 +130,6 @@ void main() {
       tester.platformDispatcher.accessibilityFeaturesTestValue = const FakeAccessibilityFeatures();
       await tester.pump();
       expect(motion, FAccessibilityMotion.reduced);
-    });
-
-    testWidgets('per-aspect accessors rebuild independently', (tester) async {
-      tester.platformDispatcher.accessibilityFeaturesTestValue = const FakeAccessibilityFeatures();
-      addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
-
-      var motionBuilds = 0;
-      var cursorBuilds = 0;
-
-      await tester.pumpWidget(
-        FAccessibilityScope(
-          child: Directionality(
-            textDirection: TextDirection.ltr,
-            child: Column(
-              children: [
-                Builder(
-                  builder: (context) {
-                    FAccessibilityScope.motionOf(context);
-                    motionBuilds++;
-                    return const SizedBox();
-                  },
-                ),
-                Builder(
-                  builder: (context) {
-                    FAccessibilityScope.deterministicCursorOf(context);
-                    cursorBuilds++;
-                    return const SizedBox();
-                  },
-                ),
-              ],
-            ),
-          ),
-        ),
-      );
-      expect(motionBuilds, 1);
-      expect(cursorBuilds, 1);
-
-      // Changing only deterministicCursor rebuilds the cursor dependent, not the motion dependent.
-      tester.platformDispatcher.accessibilityFeaturesTestValue = const FakeAccessibilityFeatures(
-        deterministicCursor: true,
-      );
-      await tester.pump();
-      expect(motionBuilds, 1);
-      expect(cursorBuilds, 2);
-
-      // Changing only motion rebuilds the motion dependent, not the cursor dependent.
-      tester.platformDispatcher.accessibilityFeaturesTestValue = const FakeAccessibilityFeatures(
-        deterministicCursor: true,
-        reduceMotion: true,
-      );
-      await tester.pump();
-      expect(motionBuilds, 2);
-      expect(cursorBuilds, 2);
     });
   });
 }

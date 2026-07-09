@@ -356,7 +356,7 @@ class _Fade extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewport = _Viewport.of(context);
-    if (_height <= viewport) {
+    if (_height <= viewport || context.accessibility.motion != .disabled) {
       return child; // fully revealed, including at rest
     }
 

@@ -113,6 +113,8 @@ class FSidebarItem extends StatefulWidget {
 class _FSidebarItemState extends State<FSidebarItem> with TickerProviderStateMixin {
   FSidebarItemStyle? _style;
   AnimationController? _controller;
+  AnimationController? _fadeController;
+  FAccessibilityMotion _motion = .all;
   CurvedAnimation? _curvedReveal;
   CurvedAnimation? _curvedFade;
   CurvedAnimation? _curvedIconRotation;
@@ -145,26 +147,37 @@ class _FSidebarItemState extends State<FSidebarItem> with TickerProviderStateMix
           FSidebarData.maybeOf(context)?.style.groupStyle.itemStyle ??
           context.theme.sidebarStyle.groupStyle.itemStyle,
     );
+    final motion = context.accessibility.motion;
 
-    if (_style != style) {
+    if (_style != style || _motion != motion) {
       _style = style;
+      _motion = motion;
       _curvedIconRotation?.dispose();
       _curvedFade?.dispose();
       _curvedReveal?.dispose();
+      _fadeController?.dispose();
       _controller?.dispose();
 
+      final reduceMotion = motion != .all;
+      final disableMotion = motion == .disabled;
       _controller = AnimationController(
         vsync: this,
         value: _expanded ? 1.0 : 0.0,
-        duration: style.motion.expandDuration,
-        reverseDuration: style.motion.collapseDuration,
+        duration: reduceMotion ? .zero : style.motion.expandDuration,
+        reverseDuration: reduceMotion ? .zero : style.motion.collapseDuration,
+      );
+      _fadeController = AnimationController(
+        vsync: this,
+        value: _expanded ? 1.0 : 0.0,
+        duration: disableMotion ? .zero : style.motion.expandDuration,
+        reverseDuration: disableMotion ? .zero : style.motion.collapseDuration,
       );
       _curvedReveal = CurvedAnimation(
         curve: style.motion.expandCurve,
         reverseCurve: style.motion.collapseCurve,
         parent: _controller!,
       );
-      _curvedFade = CurvedAnimation(curve: Curves.easeIn, reverseCurve: Curves.easeOut, parent: _controller!);
+      _curvedFade = CurvedAnimation(curve: Curves.easeIn, reverseCurve: Curves.easeOut, parent: _fadeController!);
       _curvedIconRotation = CurvedAnimation(
         curve: style.motion.iconExpandCurve,
         reverseCurve: style.motion.iconCollapseCurve,
@@ -181,6 +194,7 @@ class _FSidebarItemState extends State<FSidebarItem> with TickerProviderStateMix
     _curvedIconRotation?.dispose();
     _curvedFade?.dispose();
     _curvedReveal?.dispose();
+    _fadeController?.dispose();
     _controller?.dispose();
     super.dispose();
   }
@@ -261,6 +275,7 @@ class _FSidebarItemState extends State<FSidebarItem> with TickerProviderStateMix
 
   void _toggle() {
     _controller?.toggle();
+    _fadeController?.toggle();
     setState(() => _expanded = !_expanded);
   }
 }

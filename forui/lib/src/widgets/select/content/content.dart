@@ -237,7 +237,6 @@ class _ContentState<T> extends State<Content<T>> {
       data: FAccessibility(
         accessibleNavigation: context.accessibility.accessibleNavigation,
         motion: context.accessibility.motion,
-        deterministicCursor: context.accessibility.deterministicCursor,
         focusHighlight: true,
       ),
       child: content,

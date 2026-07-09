@@ -111,15 +111,16 @@ class FCircularProgress extends StatefulWidget {
 
 class _CircularState extends State<FCircularProgress> with SingleTickerProviderStateMixin {
   FCircularProgressStyle? _style;
+  FAccessibilityMotion? _motion;
   late AnimationController _controller;
-  late CurvedAnimation _curveRotation;
-  late Animation<double> _rotation;
+  late CurvedAnimation _curve;
+  late Animation<double> _animation;
 
   @override
   void initState() {
     super.initState();
     _controller = AnimationController(vsync: this);
-    _curveRotation = CurvedAnimation(parent: _controller, curve: Curves.linear);
+    _curve = CurvedAnimation(parent: _controller, curve: Curves.linear);
   }
 
   @override
@@ -139,19 +140,26 @@ class _CircularState extends State<FCircularProgress> with SingleTickerProviderS
       FInheritedCircularProgressStyle.of(context) ??
           context.theme.circularProgressStyles.resolve({widget.size, context.platformVariant}),
     );
-    if (_style != style) {
+    final motion = context.accessibility.motion;
+    if (_style != style || _motion != motion) {
       _style = style;
-      _controller
-        ..duration = style.motion.duration
-        ..repeat();
-      _curveRotation.curve = style.motion.curve;
-      _rotation = style.motion.tween.animate(_curveRotation);
+      _motion = motion;
+      _controller.duration = style.motion.duration;
+      _curve.curve = style.motion.curve;
+      _animation = style.motion.tween.animate(_curve);
+      if (motion == .disabled) {
+        _controller
+          ..stop()
+          ..value = 0;
+      } else {
+        _controller.repeat();
+      }
     }
   }
 
   @override
   void dispose() {
-    _curveRotation.dispose();
+    _curve.dispose();
     _controller.dispose();
     super.dispose();
   }
@@ -160,14 +168,18 @@ class _CircularState extends State<FCircularProgress> with SingleTickerProviderS
   Widget build(BuildContext context) {
     final semanticsLabel =
         widget.semanticsLabel ?? (FLocalizations.of(context) ?? FDefaultLocalizations()).progressSemanticsLabel;
-    return AnimatedBuilder(
-      animation: _rotation,
-      builder: (_, child) => Transform.rotate(angle: _rotation.value * 2 * math.pi, child: child),
-      child: IconTheme(
-        data: _style!.iconStyle,
-        child: widget.icon(context, semanticsLabel: semanticsLabel),
-      ),
+    final icon = IconTheme(
+      data: _style!.iconStyle,
+      child: widget.icon(context, semanticsLabel: semanticsLabel),
     );
+
+    return _motion == .disabled
+        ? icon
+        : AnimatedBuilder(
+            animation: _animation,
+            builder: (_, child) => Transform.rotate(angle: _animation.value * 2 * math.pi, child: child),
+            child: icon,
+          );
   }
 }
 
@@ -263,6 +275,8 @@ extension type FCircularProgressSizeStyles(
 }
 
 /// Motion-related properties for [FCircularProgress].
+///
+/// All motion is automatically disabled when [FAccessibility.motion] is [FAccessibilityMotion.disabled].
 class FCircularProgressMotion with Diagnosticable, _$FCircularProgressMotionFunctions {
   /// The duration of one full rotation. Defaults to 1s.
   @override

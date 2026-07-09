@@ -44,6 +44,7 @@ class _ToasterStackState extends State<ToasterStack> with SingleTickerProviderSt
   late CurvedAnimation _expand;
   bool _autoDismiss = true;
   bool _hovered = false;
+  bool _reduceMotion = false;
   int _monotonic = 0;
 
   @override
@@ -67,12 +68,21 @@ class _ToasterStackState extends State<ToasterStack> with SingleTickerProviderSt
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _reduceMotion = context.accessibility.accessibleNavigation || context.accessibility.motion != .all;
+    _controller
+      ..duration = _reduceMotion ? .zero : widget.style.motion.expandDuration
+      ..reverseDuration = _reduceMotion ? .zero : widget.style.motion.collapseDuration;
+  }
+
+  @override
   void didUpdateWidget(ToasterStack old) {
     super.didUpdateWidget(old);
     if (old.style != widget.style) {
       _controller
-        ..duration = widget.style.motion.expandDuration
-        ..reverseDuration = widget.style.motion.collapseDuration
+        ..duration = _reduceMotion ? .zero : widget.style.motion.expandDuration
+        ..reverseDuration = _reduceMotion ? .zero : widget.style.motion.collapseDuration
         ..value = 0;
       _expand
         ..curve = widget.style.motion.expandCurve

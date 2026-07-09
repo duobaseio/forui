@@ -409,6 +409,7 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
     final style = widget.style(context.theme.popoverStyle);
     final direction = Directionality.maybeOf(context) ?? .ltr;
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
+    final motion = context.accessibility.motion;
     final touch = context.platformVariant.touch;
     final popoverAnchor = widget.popoverAnchor ?? (touch ? .bottomCenter : .topCenter);
     final childAnchor = widget.childAnchor ?? (touch ? .topCenter : .bottomCenter);
@@ -451,36 +452,41 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
                 ),
               ),
         portalBuilder: (context, _) {
-          Widget popover = ScaleTransition(
-            alignment: popoverAnchor.resolve(direction),
-            scale: _controller.scale,
-            child: FadeTransition(
-              opacity: _controller.fade,
-              child: Semantics(
-                label: widget.semanticsLabel,
-                container: true,
-                child: FocusScope(
-                  autofocus: widget.autofocus ?? (style.barrierFilter != null),
-                  node: _focusNode,
-                  onFocusChange: widget.onFocusChange,
-                  child: TapRegion(
-                    groupId: _groupId,
-                    onTapOutside: widget.hideRegion == .none || style.barrierFilter != null ? null : (_) => _hide(),
-                    child: DecoratedBox(
-                      decoration: style.decoration,
-                      child: widget.popoverClipBehavior == .none
-                          ? widget.popoverBuilder(context, _controller)
-                          : ClipPath(
-                              clipBehavior: widget.popoverClipBehavior,
-                              clipper: InnerPathClipper(decoration: style.decoration, direction: direction),
-                              child: widget.popoverBuilder(context, _controller),
-                            ),
-                    ),
-                  ),
+          Widget popover = Semantics(
+            label: widget.semanticsLabel,
+            container: true,
+            child: FocusScope(
+              autofocus: widget.autofocus ?? (style.barrierFilter != null),
+              node: _focusNode,
+              onFocusChange: widget.onFocusChange,
+              child: TapRegion(
+                groupId: _groupId,
+                onTapOutside: widget.hideRegion == .none || style.barrierFilter != null ? null : (_) => _hide(),
+                child: DecoratedBox(
+                  decoration: style.decoration,
+                  child: widget.popoverClipBehavior == .none
+                      ? widget.popoverBuilder(context, _controller)
+                      : ClipPath(
+                          clipBehavior: widget.popoverClipBehavior,
+                          clipper: InnerPathClipper(decoration: style.decoration, direction: direction),
+                          child: widget.popoverBuilder(context, _controller),
+                        ),
                 ),
               ),
             ),
           );
+
+          if (motion != .disabled) {
+            popover = FadeTransition(opacity: _controller.fade, child: popover);
+          }
+
+          if (motion == .all) {
+            popover = ScaleTransition(
+              alignment: popoverAnchor.resolve(direction),
+              scale: _controller.scale,
+              child: popover,
+            );
+          }
 
           // The background filter cannot be nested in a FadeTransition because of https://github.com/flutter/flutter/issues/31706.
           if (style.backgroundFilter case final filter?) {
@@ -613,6 +619,10 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
 }
 
 /// Motion-related properties for [FPopover].
+///
+/// When [FAccessibility.motion] is:
+/// * [FAccessibilityMotion.reduced], only the fade transition is applied.
+/// * [FAccessibilityMotion.disabled], no motion is applied.
 class FPopoverMotion with Diagnosticable, _$FPopoverMotionFunctions {
   /// A [FPopoverMotion] with no motion effects.
   static const FPopoverMotion none = .new(

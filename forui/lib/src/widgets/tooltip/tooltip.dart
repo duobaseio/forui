@@ -218,6 +218,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
   Widget build(BuildContext context) {
     final group = TooltipGroupScope.maybeOf(context);
     final direction = Directionality.maybeOf(context) ?? .ltr;
+    final motion = context.accessibility.motion;
     final hover = widget.hover ?? group?.hover ?? true;
     final longPress = widget.longPress ?? group?.longPress ?? true;
 
@@ -284,23 +285,27 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
         useViewPadding: widget.useViewPadding,
         useViewInsets: widget.useViewInsets,
         portalBuilder: (context, _) {
-          Widget tooltip = Semantics(
-            container: true,
-            child: FadeTransition(
-              opacity: _controller.fade,
-              child: ScaleTransition(
-                alignment: widget.tipAnchor.resolve(direction),
-                scale: _controller.scale,
-                child: DecoratedBox(
-                  decoration: _style.decoration,
-                  child: Padding(
-                    padding: _style.padding,
-                    child: DefaultTextStyle(style: _style.textStyle, child: widget.tipBuilder(context, _controller)),
-                  ),
-                ),
-              ),
+          Widget tooltip = DecoratedBox(
+            decoration: _style.decoration,
+            child: Padding(
+              padding: _style.padding,
+              child: DefaultTextStyle(style: _style.textStyle, child: widget.tipBuilder(context, _controller)),
             ),
           );
+
+          if (motion == .all) {
+            tooltip = ScaleTransition(
+              alignment: widget.tipAnchor.resolve(direction),
+              scale: _controller.scale,
+              child: tooltip,
+            );
+          }
+
+          if (motion != .disabled) {
+            tooltip = FadeTransition(opacity: _controller.fade, child: tooltip);
+          }
+
+          tooltip = Semantics(container: true, child: tooltip);
 
           // The background filter cannot be nested in a FadeTransition because of https://github.com/flutter/flutter/issues/31706.
           if (_style.backgroundFilter case final background?) {
@@ -466,6 +471,10 @@ class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
 }
 
 /// Motion-related properties for [FTooltip].
+///
+/// When [FAccessibility.motion] is:
+/// * [FAccessibilityMotion.reduced], only the fade transition is applied.
+/// * [FAccessibilityMotion.disabled], no motion is applied.
 class FTooltipMotion with Diagnosticable, _$FTooltipMotionFunctions {
   /// A [FTooltipMotion] with no motion effects.
   static const FTooltipMotion none = .new(

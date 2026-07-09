@@ -57,6 +57,7 @@ class FProgress extends StatefulWidget {
 
 class _ProgressState extends State<FProgress> with SingleTickerProviderStateMixin {
   FProgressStyle? _style;
+  FAccessibilityMotion? _motion;
   late AnimationController _controller;
   late CurvedAnimation _curved;
   late Animation<double> _animation;
@@ -82,17 +83,19 @@ class _ProgressState extends State<FProgress> with SingleTickerProviderStateMixi
 
   void _setup() {
     final style = widget.style(context.theme.progressStyle);
-    if (_style != style) {
+    final motion = context.accessibility.motion;
+    if (_style != style || _motion != motion) {
       _style = style;
+      _motion = motion;
 
       final total = style.motion.period + style.motion.interval;
       final curve = Interval(0, style.motion.period.inMilliseconds / total.inMilliseconds, curve: style.motion.curve);
 
-      _controller
-        ..duration = total
-        ..repeat();
+      _controller.duration = total;
       _curved.curve = curve;
       _animation = Tween<double>(begin: -style.motion.value, end: 1).animate(_curved);
+
+      motion == .disabled ? _controller.stop() : _controller.repeat();
     }
   }
 
@@ -111,23 +114,30 @@ class _ProgressState extends State<FProgress> with SingleTickerProviderStateMixi
       child: Container(
         clipBehavior: .antiAlias,
         decoration: _style!.trackDecoration,
-        child: LayoutBuilder(
-          builder: (context, constraints) => AnimatedBuilder(
-            animation: _animation,
-            builder: (_, child) => Stack(
-              children: [
-                PositionedDirectional(
-                  start: constraints.maxWidth * (_animation.value),
-                  width: constraints.maxWidth * _style!.motion.value,
-                  top: 0,
-                  bottom: 0,
-                  child: child!,
+        // An indeterminate bar has no meaningful value: a full fill reads as "complete", so a disabled bar shows a
+        // partial segment.
+        child: _motion == .disabled
+            ? FractionallySizedBox(
+                widthFactor: _style!.motion.value,
+                child: DecoratedBox(decoration: _style!.fillDecoration),
+              )
+            : LayoutBuilder(
+                builder: (context, constraints) => AnimatedBuilder(
+                  animation: _animation,
+                  builder: (_, child) => Stack(
+                    children: [
+                      PositionedDirectional(
+                        start: constraints.maxWidth * _animation.value,
+                        width: constraints.maxWidth * _style!.motion.value,
+                        top: 0,
+                        bottom: 0,
+                        child: child!,
+                      ),
+                    ],
+                  ),
+                  child: DecoratedBox(decoration: _style!.fillDecoration),
                 ),
-              ],
-            ),
-            child: DecoratedBox(decoration: _style!.fillDecoration),
-          ),
-        ),
+              ),
       ),
     ),
   );
@@ -174,6 +184,8 @@ class FProgressStyle with Diagnosticable, _$FProgressStyleFunctions {
 }
 
 /// Motion-related properties for an indeterminate [FProgress].
+///
+/// All motion is automatically disabled when [FAccessibility.motion] is [FAccessibilityMotion.disabled].
 class FProgressMotion with Diagnosticable, _$FProgressMotionFunctions {
   /// The animation's period. Defaults to 1s.
   @override

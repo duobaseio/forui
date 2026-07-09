@@ -102,8 +102,9 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
   static const List<AxisDirection> _horizontal = [.left, .right];
   static const List<AxisDirection> _vertical = [.up, .down];
 
-  bool _accessibleNavigation = false;
   Timer? _timer;
+  bool _accessibleNavigation = false;
+  FAccessibilityMotion _motion = .all;
   late final AnimationController _entranceDismissController;
   late final AnimationController _transitionController;
   late final AnimationController _visibleController;
@@ -186,6 +187,7 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
     super.didChangeDependencies();
     // Toasts should not auto-dismiss when accessible navigation is enabled.
     _accessibleNavigation = context.accessibility.accessibleNavigation;
+    _motion = context.accessibility.motion;
     if (_accessibleNavigation) {
       _timer?.cancel();
       _timer = null;
@@ -304,21 +306,20 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
 
   @override
   Widget build(BuildContext context) {
-    // Slide in & out during entrance & exit.
-    var translation = _accessibleNavigation
-        ? Offset.zero
-        : -widget.alignTransform * (1.0 - _curvedEntranceDismiss.value);
+    final reduceMotion = _accessibleNavigation || _motion != .all;
+
+    var translation = reduceMotion ? Offset.zero : -widget.alignTransform * (1.0 - _curvedEntranceDismiss.value);
     // Slide out during swiping to dismiss.
     translation += .lerp(_swipeFraction, _swipeFractionEnd, _swipeCompletion.value)!;
 
-    // Gradually increase & decrease opacity during entrance & exit.
-    var opacity = _accessibleNavigation ? (widget.visible ? 1.0 : 0.0) : _entranceDismiss.value * _visible.value;
+    // The entrance fade looks jarring once the slide is dropped, so snap it under reduced too, not just disabled.
+    var opacity = reduceMotion ? (widget.visible ? 1.0 : 0.0) : _entranceDismiss.value * _visible.value;
     // Gradually decrease opacity during swiping to dismiss.
     opacity *= 1 - _swipeFraction.distance.abs();
 
     return AnimatedToastData(
       index: widget.index,
-      transition: _accessibleNavigation ? 1.0 : _transition.value,
+      transition: reduceMotion ? 1.0 : _transition.value,
       visible: widget.visible,
       signal: _signal,
       child: IgnorePointer(

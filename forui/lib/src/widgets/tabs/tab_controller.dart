@@ -37,6 +37,32 @@ final class FTabController extends FChangeNotifier {
     }
   }
 
+  void _apply(TickerProvider vsync, int length, VoidCallback callback, {required bool reduceMotion}) {
+    final duration = reduceMotion ? Duration.zero : _motion.duration;
+    if (_controller.animationDuration == duration) {
+      return;
+    }
+
+    final controller = switch (_controller) {
+      _ProxyController(:final index, :final length, :final _onChange) => _ProxyController(
+        initialIndex: index,
+        length: length,
+        animationDuration: duration,
+        vsync: vsync,
+        onChange: _onChange,
+      ),
+      TabController(:final index, :final length) => TabController(
+        initialIndex: index,
+        length: length,
+        animationDuration: duration,
+        vsync: vsync,
+      ),
+    };
+
+    _controller.dispose();
+    _controller = controller..addListener(callback);
+  }
+
   /// Animates to the given [index].
   ///
   /// [curve] defaults to the [FTabMotion.curve] if not provided.
@@ -110,6 +136,8 @@ class _ProxyController extends TabController {
 }
 
 /// Motion-related properties for [FTabs].
+///
+/// All motion is automatically disabled when [FAccessibility.motion] is not [FAccessibilityMotion.all].
 class FTabMotion with Diagnosticable, _$FTabMotionFunctions {
   /// The duration of the tab change animation. Defaults to 300 ms.
   @override

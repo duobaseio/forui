@@ -203,4 +203,30 @@ void main() {
 
     await expectLater(sheet.collate(5), matchesGoldenFile('calendar/calendar/day-grid-programmatic-animation.png'));
   });
+
+  group('accessibility', () {
+    // Month-page navigation slides under full motion and jumps instantly under reduced and disabled motion. The page
+    // transition is a pure spatial slide with no fade fallback, so reduced drops it entirely, same as disabled.
+    for (final (name, features) in [
+      ('full', const FakeAccessibilityFeatures()),
+      ('reduced', const FakeAccessibilityFeatures(reduceMotion: true)),
+      ('disabled', const FakeAccessibilityFeatures(disableAnimations: true)),
+    ]) {
+      testWidgets('$name motion', (tester) async {
+        tester.platformDispatcher.accessibilityFeaturesTestValue = features;
+        addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+
+        final sheet = autoDispose(AnimationSheetBuilder(frameSize: const Size(380, 480)));
+        final controller = animationController();
+
+        final widget = animationHarness(sheet, controller);
+        await tester.pumpWidget(widget);
+
+        unawaited(controller.animateToDayPicker(.utc(2026, 6), const Duration(milliseconds: 600)));
+        await tester.pumpFrames(widget, const Duration(milliseconds: 650), const Duration(milliseconds: 50));
+
+        await expectLater(sheet.collate(5), matchesGoldenFile('calendar/calendar/motion-$name.png'));
+      });
+    }
+  });
 }

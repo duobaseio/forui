@@ -223,6 +223,10 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
 }
 
 /// Motion-related properties for [FAccordion].
+///
+/// When [FAccessibility.motion] is:
+/// * [FAccessibilityMotion.reduced], only the fade transition is applied.
+/// * [FAccessibilityMotion.disabled], no motion is applied.
 class FAccordionMotion with Diagnosticable, _$FAccordionMotionFunctions {
   /// A [FAccordionMotion] with no motion effects.
   static const FAccordionMotion none = FAccordionMotion(

@@ -369,6 +369,7 @@ class _State extends State<FContextMenu> with TickerProviderStateMixin {
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
     final touch = context.platformVariant.touch;
     final menuAnchor = widget.menuAnchor.resolve(direction);
+    final motion = context.accessibility.motion;
     final fade = widget.faded ?? touch;
     final secondaryPress = widget.secondaryPress ?? !touch;
     final longPress = widget.longPress ?? touch;
@@ -433,51 +434,44 @@ class _State extends State<FContextMenu> with TickerProviderStateMixin {
                 ),
               ),
         portalBuilder: (context, _) {
-          Widget popover = ScaleTransition(
-            alignment: menuAnchor,
-            scale: _controller.scale,
-            child: FadeTransition(
-              opacity: _controller.fade,
-              child: Semantics(
-                label: widget.semanticsLabel,
-                container: true,
-                child: FocusScope(
-                  autofocus: widget.autofocus ?? (style.barrierFilter != null),
-                  node: _focusNode,
-                  onFocusChange: widget.onFocusChange,
-                  child: TapRegion(
-                    groupId: _groupId,
-                    onTapOutside: widget.hideRegion == .none || style.barrierFilter != null ? null : (_) => _hide(),
-                    child: DecoratedBox(
-                      decoration: style.decoration,
-                      child: ClipPath(
-                        clipper: InnerPathClipper(decoration: style.decoration, direction: direction),
-                        child: PopoverMenuScope(
-                          controller: _controller,
-                          style: style,
-                          groupId: _groupId,
-                          active: _active,
-                          // The default behavior for non-submenu trigger items.
-                          child: FInheritedItemCallbacks(
-                            onHoverEnter: () => _active.value = (null, false),
-                            onPress: () => _active.value = (null, false),
-                            onLongPress: () => _active.value = (null, false),
-                            // We explicitly wrap this in a `FInheritedItemData` to prevent any ancestor data from
-                            // accidentally leaking into the popover menu's items.
-                            //
-                            // ItemGroupStyles and ItemStyles are inherited by explicitly passing the style to _menuBuilder.
-                            child: FInheritedItemData(
-                              child: ValueListenableBuilder(
-                                valueListenable: _active,
-                                builder: (_, value, child) => AnimatedOpacity(
-                                  opacity: (!fade || value.$1 == null) ? 1.0 : style.menuMotion.fade,
-                                  duration: style.menuMotion.fadeDuration,
-                                  curve: style.menuMotion.fadeCurve,
-                                  child: child,
-                                ),
-                                child: widget._menuBuilder(context, _controller, style),
-                              ),
+          Widget popover = Semantics(
+            label: widget.semanticsLabel,
+            container: true,
+            child: FocusScope(
+              autofocus: widget.autofocus ?? (style.barrierFilter != null),
+              node: _focusNode,
+              onFocusChange: widget.onFocusChange,
+              child: TapRegion(
+                groupId: _groupId,
+                onTapOutside: widget.hideRegion == .none || style.barrierFilter != null ? null : (_) => _hide(),
+                child: DecoratedBox(
+                  decoration: style.decoration,
+                  child: ClipPath(
+                    clipper: InnerPathClipper(decoration: style.decoration, direction: direction),
+                    child: PopoverMenuScope(
+                      controller: _controller,
+                      style: style,
+                      groupId: _groupId,
+                      active: _active,
+                      // The default behavior for non-submenu trigger items.
+                      child: FInheritedItemCallbacks(
+                        onHoverEnter: () => _active.value = (null, false),
+                        onPress: () => _active.value = (null, false),
+                        onLongPress: () => _active.value = (null, false),
+                        // We explicitly wrap this in a `FInheritedItemData` to prevent any ancestor data from
+                        // accidentally leaking into the popover menu's items.
+                        //
+                        // ItemGroupStyles and ItemStyles are inherited by explicitly passing the style to _menuBuilder.
+                        child: FInheritedItemData(
+                          child: ValueListenableBuilder(
+                            valueListenable: _active,
+                            builder: (_, value, child) => AnimatedOpacity(
+                              opacity: (!fade || value.$1 == null) ? 1.0 : style.menuMotion.fade,
+                              duration: style.menuMotion.fadeDuration,
+                              curve: style.menuMotion.fadeCurve,
+                              child: child,
                             ),
+                            child: widget._menuBuilder(context, _controller, style),
                           ),
                         ),
                       ),
@@ -487,6 +481,14 @@ class _State extends State<FContextMenu> with TickerProviderStateMixin {
               ),
             ),
           );
+
+          if (motion != .disabled) {
+            popover = FadeTransition(opacity: _controller.fade, child: popover);
+          }
+
+          if (motion == .all) {
+            popover = ScaleTransition(alignment: menuAnchor, scale: _controller.scale, child: popover);
+          }
 
           // The background filter cannot be nested in a FadeTransition because of https://github.com/flutter/flutter/issues/31706.
           if (style.backgroundFilter case final filter?) {

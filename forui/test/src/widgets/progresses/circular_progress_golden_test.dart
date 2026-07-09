@@ -56,4 +56,27 @@ void main() {
 
     await expectLater(find.byType(TestScaffold), matchesGoldenFile('progresses/circular/inherit-style.png'));
   });
+
+  group('accessibility', () {
+    // A spinner is an essential loading indicator: it keeps spinning under reduced motion and only freezes when
+    // animations are disabled. The frame strip shows the icon rotating vs. holding still.
+    for (final (name, features) in [
+      ('reduced', const FakeAccessibilityFeatures(reduceMotion: true)),
+      ('disabled', const FakeAccessibilityFeatures(disableAnimations: true)),
+    ]) {
+      testWidgets('$name motion', (tester) async {
+        tester.platformDispatcher.accessibilityFeaturesTestValue = features;
+        addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+
+        final sheet = autoDispose(AnimationSheetBuilder(frameSize: const Size(100, 100)));
+
+        await tester.pumpFrames(
+          sheet.record(TestScaffold.app(child: const FCircularProgress())),
+          const Duration(milliseconds: 1000),
+        );
+
+        await expectLater(sheet.collate(10), matchesGoldenFile('progresses/circular/motion-$name.png'));
+      });
+    }
+  });
 }

@@ -186,6 +186,7 @@ abstract class GridController extends FChangeNotifier {
   final int Function(DateTime) _from;
   final DateTime Function(int) _to;
   PageController _controller;
+  bool _reduceMotion = false;
   DateTime? _focused;
   DateTime _current;
   (int, int)? _animation;
@@ -284,6 +285,11 @@ abstract class GridController extends FChangeNotifier {
   }
 
   Future<void> _animateTo(int page, Duration duration, Curve curve) async {
+    if (_reduceMotion) {
+      _controller.jumpToPage(page);
+      return;
+    }
+
     _animation = (_controller.hasClients ? (_controller.page?.round() ?? _from(_current)) : _from(_current), page);
     final animation = _animation;
 
@@ -377,6 +383,8 @@ extension InternalPickerController on GridController {
   DateTime to(int page) => _to(page);
 
   PageController get controller => _controller;
+
+  set reduceMotion(bool value) => _reduceMotion = value;
 
   bool Function(DateTime) get selectable => _selectable;
 

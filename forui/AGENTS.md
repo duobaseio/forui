@@ -245,6 +245,24 @@ If you change source files that affect the CLI registry (e.g., `.inherit` constr
 `dart run tool/main.dart` in `forui_cli` first to regenerate
 `forui_cli/lib/src/commands/style/style.dart`.
 
+## Reduce Motion
+
+Gate animations on `context.accessibility.motion` (`FAccessibilityMotion`: `full`, `reduced`, `disabled`). `reduced`
+targets spatial (vestibular) motion, not opacity, and reduces rather than removes it.
+
+| Motion                                                     | `full` | `reduced`                       | `disabled`                |
+|------------------------------------------------------------|--------|---------------------------------|---------------------------|
+| Spatial (slide, scale, rotate, parallax, spring, autoplay) | play   | swap to a fade, else drop       | snap                      |
+| Non-spatial (opacity/cross-fade, color, small feedback)    | play   | keep                            | snap                      |
+| Essential (loading/progress indicators)                    | play   | keep native motion              | static, never a full fill |
+
+Pattern (popover, tooltip, context menu, dialog):
+```dart
+if (motion != .disabled) child = FadeTransition(opacity: fade, child: child); // fade under full + reduced
+if (motion == .full) child = ScaleTransition(scale: scale, child: child);     // scale under full only
+```
+Small non-vestibular feedback (radio, checkbox) gates only on `motion == .disabled`.
+
 ## Testing & Verification
 
 Fix bugs test-first (TDD): write a failing test that reproduces the bug, confirm it fails for the expected reason,
@@ -259,6 +277,11 @@ When a widget already has test files, add new tests to one of them rather than c
 Default to the existing non-golden behavior file (`<widget>_test.dart` or `<widget>_controller_test.dart`) for
 behavioral and unit tests, and `<widget>_golden_test.dart` for goldens. Only create a new file when there's a clear,
 distinct reason.
+
+Put all accessibility-related tests in a single `group('accessibility', ...)`, conventionally the last group in the
+file. This covers semantics/screen-reader, focus, WCAG behaviors, and reduce-motion
+(`FakeAccessibilityFeatures(reduceMotion: ...)` / `disableAnimations: ...`). Don't split out a separate
+`group('reduce motion', ...)`.
 
 After API changes, analyze all in-repo consumers: `forui/forui`, `forui/forui/example`, and `docs_snippets`.
 

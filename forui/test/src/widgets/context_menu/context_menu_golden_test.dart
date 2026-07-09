@@ -1,6 +1,8 @@
 @Tags(['golden'])
 library;
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -212,4 +214,44 @@ void main() {
       });
     }
   }
+
+  group('accessibility', () {
+    // The menu scales up and fades in under full motion, drops the scale to a plain fade under reduced motion, and
+    // appears instantly (fully opaque, no scale) under disabled motion.
+    for (final (name, features) in [
+      ('full', const FakeAccessibilityFeatures()),
+      ('reduced', const FakeAccessibilityFeatures(reduceMotion: true)),
+      ('disabled', const FakeAccessibilityFeatures(disableAnimations: true)),
+    ]) {
+      testWidgets('$name motion', (tester) async {
+        tester.platformDispatcher.accessibilityFeaturesTestValue = features;
+        addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+
+        final controller = autoDispose(FPopoverController(vsync: tester));
+        final sheet = autoDispose(AnimationSheetBuilder(frameSize: const Size(260, 320)));
+
+        Widget build() => TestScaffold.app(
+          child: FContextMenu(
+            control: .managed(controller: controller),
+            menu: [
+              .group(
+                children: [
+                  .item(title: const Text('Cut'), onPress: () {}),
+                  .item(title: const Text('Copy'), onPress: () {}),
+                ],
+              ),
+            ],
+            child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 60)),
+          ),
+        );
+
+        await tester.pumpWidget(sheet.record(build(), recording: false));
+        unawaited(controller.show());
+        // Pump past the entrance so the controller's ticker stops before the tree is disposed.
+        await tester.pumpFrames(sheet.record(build()), const Duration(milliseconds: 300));
+
+        await expectLater(sheet.collate(5), matchesGoldenFile('context-menu/motion-$name.png'));
+      });
+    }
+  });
 }

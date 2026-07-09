@@ -71,6 +71,7 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late Animation<double> _animation;
   late ParametricCurve<double> _curve;
+  bool _dragging = false;
 
   @override
   void initState() {
@@ -78,18 +79,29 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
     _controller = widget.controller ?? Sheet.createAnimationController(this, widget.style.motion);
     _animation = widget.animation ?? _controller.view;
     _curve = widget.style.motion.curve;
+    _controller.addStatusListener(_onSettle);
   }
 
   @override
   void didUpdateWidget(covariant Sheet old) {
     super.didUpdateWidget(old);
     if (widget.controller != old.controller) {
+      _controller.removeStatusListener(_onSettle);
       if (old.controller == null) {
         _controller.dispose();
       }
 
       _controller = widget.controller ?? Sheet.createAnimationController(this, widget.style.motion);
       _animation = widget.animation ?? _controller.view;
+      _curve = widget.style.motion.curve;
+      _dragging = false;
+      _controller.addStatusListener(_onSettle);
+    }
+  }
+
+  void _onSettle(AnimationStatus status) {
+    if (_curve != Curves.linear && status == AnimationStatus.completed) {
+      _dragging = false;
       _curve = widget.style.motion.curve;
     }
   }
@@ -131,7 +143,10 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
         // Allow the sheet to track the user's finger accurately.
         // This cannot be done inside the Sheet widget itself since doing that will interfere with the expansion and
         // collapse animations when initially entering the screen and when dismissing the sheet without dragging.
-        onStart: (_) => _curve = Curves.linear,
+        onStart: (_) {
+          _dragging = true;
+          _curve = Curves.linear;
+        },
         onUpdate: _dragUpdate,
         onEnd: _dragEnd,
         child: sheet,
@@ -149,27 +164,34 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
       (.rtl, false) => MediaQuery.removePadding(context: context, removeLeft: true, child: sheet),
     };
 
+    final motion = context.accessibility.motion;
     return AnimatedBuilder(
       animation: _animation,
-      builder: (context, child) => Semantics(
-        scopesRoute: true,
-        namesRoute: true,
-        label: switch (defaultTargetPlatform) {
-          .iOS || .macOS => null,
-          _ => (FLocalizations.of(context) ?? FDefaultLocalizations()).sheetSemanticsLabel,
-        },
-        explicitChildNodes: true,
-        child: ClipRect(
-          child: ShiftedSheet(
-            side: widget.side,
-            value: _curve.transform(_animation.value),
-            bottomViewInset: widget.resizeToAvoidBottomInset ? MediaQuery.viewInsetsOf(context).bottom : 0,
-            mainAxisMaxRatio: widget.mainAxisMaxRatio,
-            onChange: widget.onChange,
-            child: child,
+      builder: (context, child) {
+        final progress = _curve.transform(_animation.value);
+
+        return Semantics(
+          scopesRoute: true,
+          namesRoute: true,
+          label: switch (defaultTargetPlatform) {
+            .iOS || .macOS => null,
+            _ => (FLocalizations.of(context) ?? FDefaultLocalizations()).sheetSemanticsLabel,
+          },
+          explicitChildNodes: true,
+          child: ClipRect(
+            child: ShiftedSheet(
+              side: widget.side,
+              // 1 is the resting position and 0 is off-screen. A drag (including a drag-to-dismiss) tracks a real
+              // translation.
+              value: !_dragging && motion != .all ? 1.0 : progress,
+              bottomViewInset: widget.resizeToAvoidBottomInset ? MediaQuery.viewInsetsOf(context).bottom : 0,
+              mainAxisMaxRatio: widget.mainAxisMaxRatio,
+              onChange: widget.onChange,
+              child: Opacity(opacity: !_dragging && motion == .reduced ? progress : 1.0, child: child),
+            ),
           ),
-        ),
-      ),
+        );
+      },
       child: sheet,
     );
   }
@@ -241,6 +263,7 @@ class _SheetState extends State<Sheet> with SingleTickerProviderStateMixin {
 
   @override
   void dispose() {
+    _controller.removeStatusListener(_onSettle);
     if (widget.controller == null) {
       _controller.dispose();
     }
@@ -276,6 +299,10 @@ abstract class FSheetStyle {
 }
 
 /// The motion-related properties for a sheet.
+///
+/// When [FAccessibility.motion] is:
+/// * [FAccessibilityMotion.reduced], only fade transitions are applied.
+/// * [FAccessibilityMotion.disabled], no motion is applied.
 abstract class FSheetMotion {
   /// The duration of the sheet's expansion animation. Defaults to 200ms.
   final Duration expandDuration;
