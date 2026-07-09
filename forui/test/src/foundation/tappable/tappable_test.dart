@@ -265,6 +265,35 @@ void main() {
       await tester.pumpAndSettle();
     });
 
+    for (final (name, features, pressed) in [
+      ('reduced motion', const FakeAccessibilityFeatures(reduceMotion: true), 0.97),
+      ('disabled motion', const FakeAccessibilityFeatures(disableAnimations: true), 1.0),
+    ]) {
+      testWidgets('bounce gated by $name', (tester) async {
+        tester.platformDispatcher.accessibilityFeaturesTestValue = features;
+        addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+
+        final key = GlobalKey<AnimatedTappableState>();
+        await tester.pumpWidget(
+          TestScaffold(
+            child: FTappable(key: key, builder: (_, states, _) => Text('$states'), onPress: () {}),
+          ),
+        );
+        expect(key.currentState?.bounce.value, 1);
+
+        final gesture = await tester.press(find.byType(AnimatedTappable));
+        await tester.pumpAndSettle(const Duration(milliseconds: 200));
+
+        // The press bounce is small local feedback: reduced motion keeps it (0.97), only disabled removes it (1.0).
+        expect(find.text({...set(true), FTappableVariant.pressed}.toString()), findsOneWidget);
+        expect(key.currentState?.bounce.value, pressed);
+
+        await gesture.up();
+        await tester.pumpAndSettle();
+        expect(key.currentState?.bounce.value, 1);
+      });
+    }
+
     testWidgets('simulated race condition between animation and unmounting of widget', (tester) async {
       await tester.pumpWidget(TestScaffold(child: const _StubTappable()));
 

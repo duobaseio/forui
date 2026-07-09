@@ -52,6 +52,16 @@ class YearPicker extends StatelessWidget {
       height: _rows * size.height + (_rows - 1) * style.yearSpacing,
       child: GridFocusableActionDetector(
         onFocusMove: controller.move,
+        onFocusPage: (direction, {large = false}) => controller.page(direction * (large ? 10 : 1)),
+        onFocusRowEdge: ({required end}) {
+          if (controller.focused case DateTime(:final year)) {
+            final decade = year - year % 10;
+            final column = (year - decade) % _columns;
+            // The last row of a decade holds a single year, so clamp to the decade's last year.
+            final last = year - column + _columns - 1;
+            controller.edge(.utc(year - column), .utc(last < decade + 9 ? last : decade + 9), end: end);
+          }
+        },
         onFocusChange: (focused) {
           if (!focused) {
             controller.focus(null);

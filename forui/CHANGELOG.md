@@ -1,8 +1,34 @@
 ## 0.24.0 (next)
 
+### `FAccessibility`
+* Add `FAccessibility`, `FAccessibilityScope`, and `FAccessibilityMotion`.
+
+
+### `FAccordionItem`
+* Change `FAccordionItem` to expand and collapse instantly when motion is reduced or disabled.
+
+
+### `FCalendar`
+* Add PageUp/PageDown, Shift+PageUp/PageDown, and Home/End keyboard navigation to the grids.
+
+* Change `FCalendar` to jump between pages when animations are disabled.
+
+
+### `FCheckbox`
+* Change `FCheckbox` to swap instantly when animations are disabled.
+
+
+### `FCircularProgress`
+* Change `FCircularProgress` to render statically when animations are disabled.
+
+
 ### `FColors`
 * **Breaking** Remove all predefined color schemes except `FColors.neutralLight` and `FColors.neutralDark`. Run
   `dart run forui theme create` to generate a custom theme.
+
+
+### `FContextMenu`
+* Change `FContextMenu` to fade without scaling when motion is reduced.
 
 
 ### `FDateField`
@@ -17,8 +43,24 @@
   `FDateSelectionControl.liftedMulti(...)` or `FDateSelectionControl.liftedRange(...)` instead.
 
 
+### `FDeterminateProgress`
+* Change `FDeterminateProgress` to jump to its value when animations are disabled.
+
+
+### `FDialog`
+* Change `FDialog` to fade without scaling when motion is reduced.
+
+
 ### `FFocusHighlight`
 * Add `FFocusHighlight` to gate descendant focus decorations on `FocusManager.highlightMode`.
+
+
+### `FOtpField`
+* Change `FOtpField` to stop its caret blinking under a deterministic cursor or disabled animations.
+
+
+### `FPopover`
+* Change `FPopover` (and `FSelect`, `FAutocomplete`) to fade without scaling when motion is reduced.
 
 
 ### `FPortal` & `FPointPortal`
@@ -26,20 +68,65 @@
   shown inside a scrollable within a Material `Scaffold`.
 
 
+### `FProgress`
+* Change `FProgress` to render a static partial fill when animations are disabled.
+
+
+### `FRadio`
+* Change `FRadio` to update instantly when animations are disabled.
+
+
 ### `FResizable`
 * Fix `FResizable` resetting regions to their initial sizes when the main-axis constraint changes (e.g. window resize).
 
 
+### `FSheet` & `FPersistentSheet`
+* Change `FSheet` and `FPersistentSheet` to cross-fade instead of sliding when motion is reduced.
+
+
+### `FSidebarItem`
+* Change `FSidebarItem` to reveal instantly when motion is reduced or disabled, keeping its fade under reduced.
+
+
 ### `FTabs`
 * **Breaking** Rename `FTabsStyle.height` to `FTabsStyle.minHeight`.
+* Change `FTabs` to switch tabs instantly when motion is reduced or disabled.
 
 * Fix `FTabs` clipping labels taller than the tab bar. Tabs now grow to fit the tallest label and center the rest.
+
+
+### `FTappable`
+* Change `FTappable` to skip its press bounce when animations are disabled.
+
+
+### `FTextFormField`
+* **Breaking** Remove `FTextFormField.password(error: ...)`. It was erroneously included even though it did nothing.
 
 
 ### `FTheme` & `FThemes`
 * Add `FTheme.neutral`.
 
 * **Breaking** Remove `FThemes`. Use `FTheme.neutral`, or run `dart run forui theme create` to generate a custom theme.
+
+
+### `FToast`
+* Add a screen reader announcement via a live region when a toast appears.
+
+* Change toasts to appear and dismiss instantly, and to not auto-dismiss, when accessible navigation is enabled.
+
+* Change toasts to appear instantly when motion is reduced or disabled.
+
+* Change the toast stack to expand and collapse instantly when motion is reduced or disabled.
+
+
+### `FTooltip`
+* Add `FTooltip.semanticsLabel` to expose the tip to screen readers as the child's tooltip.
+
+* Change the default `FTooltipStyle.hoverExitDuration` to 100ms from `Duration.zero`.
+
+* Change `FTooltip` to fade without scaling when motion is reduced.
+
+* Fix `FTooltip` dismissing when the pointer moves from the target onto the tip.
 
 
 ### Others

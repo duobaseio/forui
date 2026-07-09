@@ -29,11 +29,14 @@ Widget _harness(
   bool Function(DateTime)? selected,
   ValueChanged<DateTime>? onPress,
   ValueChanged<DateTime>? onLongPress,
+  int? firstDayOfWeek,
 }) => TestScaffold.app(
   child: Builder(
     builder: (context) => DayPicker(
       controller: controller,
-      style: context.theme.calendarStyle.dayPickerStyle,
+      style: context.theme.calendarStyle.dayPickerStyle.copyWith(
+        firstDayOfWeek: firstDayOfWeek == null ? null : () => firstDayOfWeek,
+      ),
       localization: FLocalizations.of(context) ?? FDefaultLocalizations(),
       today: today ?? .utc(2024, 6, 15),
       selected: selected ?? (_) => false,
@@ -166,6 +169,123 @@ void main() {
       await tester.sendKeyEvent(.arrowRight);
       await tester.pumpAndSettle();
       expect(controller.focused, DateTime.utc(2024, 6, 16));
+    });
+  });
+
+  group('page and row navigation', () {
+    testWidgets('PageDown pages to the next month keeping the day', (tester) async {
+      final controller = _controller(initial: .utc(2024, 6, 15));
+      await tester.pumpWidget(_harness(controller, today: .utc(2024, 6, 15)));
+
+      await tester.sendKeyEvent(.tab);
+      await tester.pumpAndSettle();
+      expect(controller.focused, DateTime.utc(2024, 6, 15));
+
+      await tester.sendKeyEvent(.pageDown);
+      await tester.pumpAndSettle();
+      expect(controller.current, DateTime.utc(2024, 7));
+      expect(controller.focused, DateTime.utc(2024, 7, 15));
+    });
+
+    testWidgets('PageUp pages to the previous month keeping the day', (tester) async {
+      final controller = _controller(initial: .utc(2024, 6, 15));
+      await tester.pumpWidget(_harness(controller, today: .utc(2024, 6, 15)));
+
+      await tester.sendKeyEvent(.tab);
+      await tester.pumpAndSettle();
+
+      await tester.sendKeyEvent(.pageUp);
+      await tester.pumpAndSettle();
+      expect(controller.current, DateTime.utc(2024, 5));
+      expect(controller.focused, DateTime.utc(2024, 5, 15));
+    });
+
+    testWidgets('Shift+PageDown pages to the next year', (tester) async {
+      final controller = _controller(start: .utc(2022), end: .utc(2026, 12, 31), initial: .utc(2024, 6, 15));
+      await tester.pumpWidget(_harness(controller, today: .utc(2024, 6, 15)));
+
+      await tester.sendKeyEvent(.tab);
+      await tester.pumpAndSettle();
+
+      await tester.sendKeyDownEvent(.shiftLeft);
+      await tester.sendKeyEvent(.pageDown);
+      await tester.sendKeyUpEvent(.shiftLeft);
+      await tester.pumpAndSettle();
+      expect(controller.current, DateTime.utc(2025, 6));
+      expect(controller.focused, DateTime.utc(2025, 6, 15));
+    });
+
+    testWidgets('Shift+PageUp pages to the previous year', (tester) async {
+      final controller = _controller(start: .utc(2022), end: .utc(2026, 12, 31), initial: .utc(2024, 6, 15));
+      await tester.pumpWidget(_harness(controller, today: .utc(2024, 6, 15)));
+
+      await tester.sendKeyEvent(.tab);
+      await tester.pumpAndSettle();
+
+      await tester.sendKeyDownEvent(.shiftLeft);
+      await tester.sendKeyEvent(.pageUp);
+      await tester.sendKeyUpEvent(.shiftLeft);
+      await tester.pumpAndSettle();
+      expect(controller.current, DateTime.utc(2023, 6));
+      expect(controller.focused, DateTime.utc(2023, 6, 15));
+    });
+
+    testWidgets('PageUp is clamped at the first page', (tester) async {
+      final controller = _controller(start: .utc(2024, 6), end: .utc(2024, 12, 31), initial: .utc(2024, 6, 15));
+      await tester.pumpWidget(_harness(controller, today: .utc(2024, 6, 15)));
+
+      await tester.sendKeyEvent(.tab);
+      await tester.pumpAndSettle();
+
+      await tester.sendKeyEvent(.pageUp);
+      await tester.pumpAndSettle();
+      expect(controller.current, DateTime.utc(2024, 6));
+      expect(controller.focused, DateTime.utc(2024, 6, 15));
+    });
+
+    testWidgets('Home and End move focus to the week edges (Monday start)', (tester) async {
+      final controller = _controller(initial: .utc(2024, 6, 15));
+      await tester.pumpWidget(_harness(controller, today: .utc(2024, 6, 15), firstDayOfWeek: DateTime.monday));
+
+      await tester.sendKeyEvent(.tab);
+      await tester.pumpAndSettle();
+
+      // 2024-06-15 is a Saturday; the Monday-start week is Jun 10 (Mon) .. Jun 16 (Sun).
+      await tester.sendKeyEvent(.home);
+      await tester.pumpAndSettle();
+      expect(controller.focused, DateTime.utc(2024, 6, 10));
+
+      await tester.sendKeyEvent(.end);
+      await tester.pumpAndSettle();
+      expect(controller.focused, DateTime.utc(2024, 6, 16));
+    });
+
+    testWidgets('Home moves focus to the week start (Sunday start)', (tester) async {
+      final controller = _controller(initial: .utc(2024, 6, 15));
+      await tester.pumpWidget(_harness(controller, today: .utc(2024, 6, 15), firstDayOfWeek: DateTime.sunday));
+
+      await tester.sendKeyEvent(.tab);
+      await tester.pumpAndSettle();
+
+      // With a Sunday-start week, Saturday Jun 15 is the last cell; its week is Jun 9 (Sun) .. Jun 15 (Sat).
+      await tester.sendKeyEvent(.home);
+      await tester.pumpAndSettle();
+      expect(controller.focused, DateTime.utc(2024, 6, 9));
+    });
+
+    testWidgets('Home clamps to the first day of the month on the leading week', (tester) async {
+      final controller = _controller(initial: .utc(2024, 6));
+      await tester.pumpWidget(_harness(controller, today: .utc(2024, 6, 15), firstDayOfWeek: DateTime.monday));
+
+      await tester.sendKeyEvent(.tab);
+      await tester.pumpAndSettle();
+      // Focus the 1st, whose Monday-start week begins in May; Home must stay within June.
+      unawaited(controller.focus(.utc(2024, 6)));
+      await tester.pumpAndSettle();
+
+      await tester.sendKeyEvent(.home);
+      await tester.pumpAndSettle();
+      expect(controller.focused, DateTime.utc(2024, 6));
     });
   });
 

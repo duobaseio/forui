@@ -1,3 +1,4 @@
+import 'package:flutter/semantics.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -151,5 +152,48 @@ void main() {
     await tester.pumpWidget(build({.error, .focused}));
     await tester.pumpAndSettle();
     expect(error(), focused);
+  });
+
+  group('accessibility', () {
+    SemanticsData errorNode(WidgetTester tester, String text) {
+      var node = tester.getSemantics(find.text(text));
+      while (node.getSemanticsData().validationResult != SemanticsValidationResult.invalid) {
+        node = node.parent!;
+      }
+      return node.getSemanticsData();
+    }
+
+    testWidgets('error marks the field as invalid', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FLabel(layout: .vertical, variants: {.error}, error: const Text('Error'), child: const Text('Child')),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(errorNode(tester, 'Error').validationResult, SemanticsValidationResult.invalid);
+
+      semantics.dispose();
+    });
+
+    testWidgets('is not marked invalid without an error', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold(
+          child: const FLabel(layout: .vertical, description: Text('Description'), child: Text('Child')),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(
+        tester.getSemantics(find.text('Child')).getSemanticsData().validationResult,
+        SemanticsValidationResult.none,
+      );
+
+      semantics.dispose();
+    });
   });
 }

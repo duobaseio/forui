@@ -43,7 +43,10 @@ class FToasterStyle with Diagnosticable, _$FToasterStyleFunctions {
   @override
   final Duration expandHoverEnterDuration;
 
-  /// The duration to wait after exiting the toaster before collapsing the toasts. Defaults to 200ms.
+  /// The duration to wait after exiting the toaster before collapsing the toasts.
+  ///
+  /// Defaults to 200ms. It is not recommended to set this below 100ms as it does not conform with WCAG 1.4.13, since
+  /// the toasts may collapse before the pointer can move onto them.
   @override
   final Duration expandHoverExitDuration;
 
@@ -147,6 +150,10 @@ extension type FToastStyles(FVariants<FToastVariantConstraint, FToastVariant, FT
 /// The motion-related properties for [FToaster] that affect all toasts.
 ///
 /// See [FToastMotion] for motion properties that affect individual toasts.
+///
+/// When [FAccessibility.motion] is:
+/// * [FAccessibilityMotion.reduced], only fade transitions are applied.
+/// * [FAccessibilityMotion.disabled], no motion is applied.
 class FToasterMotion with Diagnosticable, _$FToasterMotionFunctions {
   /// The duration of the toasts' expansion. Defaults to 400ms.
   @override
@@ -303,7 +310,12 @@ class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
 
 /// The motion-related properties for [FToaster] that affect individual toasts.
 ///
+///
 /// See [FToasterMotion] for motion properties that affect the entire toaster.
+///
+/// When [FAccessibility.motion] is:
+/// * [FAccessibilityMotion.reduced], only fade transitions are applied.
+/// * [FAccessibilityMotion.disabled], no motion is applied.
 class FToastMotion with Diagnosticable, _$FToastMotionFunctions {
   /// The duration of the toast's entrance when it is initially added to to toaster. Defaults to 400ms.
   @override

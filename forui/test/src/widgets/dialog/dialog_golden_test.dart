@@ -1,6 +1,8 @@
 @Tags(['golden'])
 library;
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -632,6 +634,43 @@ void main() {
             );
           });
         });
+      });
+    }
+  });
+
+  group('accessibility', () {
+    // The entrance scales up and fades in under full motion, drops the scale to a plain fade under reduced motion, and
+    // appears instantly (fully opaque, no scale) under disabled motion.
+    for (final (name, features) in [
+      ('full', const FakeAccessibilityFeatures()),
+      ('reduced', const FakeAccessibilityFeatures(reduceMotion: true)),
+      ('disabled', const FakeAccessibilityFeatures(disableAnimations: true)),
+    ]) {
+      testWidgets('$name motion', (tester) async {
+        tester.platformDispatcher.accessibilityFeaturesTestValue = features;
+        addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+
+        final controller = autoDispose(
+          AnimationController(vsync: const TestVSync(), duration: const Duration(milliseconds: 250)),
+        );
+        final sheet = autoDispose(AnimationSheetBuilder(frameSize: const Size(360, 260)));
+
+        Widget build() => TestScaffold.app(
+          theme: theme,
+          child: FDialog(
+            animation: controller,
+            title: const Text('Title'),
+            body: const Text('Body'),
+            actions: [FButton(onPress: () {}, child: const Text('OK'))],
+          ),
+        );
+
+        await tester.pumpWidget(sheet.record(build(), recording: false));
+        unawaited(controller.forward());
+        // Pump past the controller's duration so its ticker stops before the tree is disposed.
+        await tester.pumpFrames(sheet.record(build()), const Duration(milliseconds: 300));
+
+        await expectLater(sheet.collate(5), matchesGoldenFile('dialog/motion-$name.png'));
       });
     }
   });

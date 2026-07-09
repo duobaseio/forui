@@ -106,6 +106,12 @@ class FTooltip extends StatefulWidget {
   /// Defaults to true.
   final bool useViewInsets;
 
+  /// The tip's label, exposed to screen readers as the [child]'s tooltip and announced when the [child] is focused.
+  ///
+  /// Set this to surface the tip's text to accessibility frameworks, since [tipBuilder] returns a widget, not a string.
+  /// Defaults to null.
+  final String? semanticsLabel;
+
   /// The tip builder. The child passed to [tipBuilder] will always be null.
   final Widget Function(BuildContext context, FTooltipController controller) tipBuilder;
 
@@ -135,6 +141,7 @@ class FTooltip extends StatefulWidget {
     this.longPress,
     this.useViewPadding = true,
     this.useViewInsets = true,
+    this.semanticsLabel,
     this.builder = defaultBuilder,
     this.child,
     super.key,
@@ -157,6 +164,7 @@ class FTooltip extends StatefulWidget {
       ..add(FlagProperty('longPress', value: longPress, ifTrue: 'longPress'))
       ..add(FlagProperty('useViewPadding', value: useViewPadding, ifTrue: 'using view padding'))
       ..add(FlagProperty('useViewInsets', value: useViewInsets, ifTrue: 'using view insets'))
+      ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(ObjectFlagProperty.has('tipBuilder', tipBuilder))
       ..add(ObjectFlagProperty.has('builder', builder));
   }
@@ -210,6 +218,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
   Widget build(BuildContext context) {
     final group = TooltipGroupScope.maybeOf(context);
     final direction = Directionality.maybeOf(context) ?? .ltr;
+    final motion = context.accessibility.motion;
     final hover = widget.hover ?? group?.hover ?? true;
     final longPress = widget.longPress ?? group?.longPress ?? true;
 
@@ -261,6 +270,11 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
       );
     }
 
+    // Expose the tip to screen readers as the child's tooltip (read on focus).
+    if (widget.semanticsLabel case final label?) {
+      child = Semantics(tooltip: label, child: child);
+    }
+
     return BackdropGroup(
       child: FPortal(
         control: .managed(controller: _controller.overlay),
@@ -271,23 +285,27 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
         useViewPadding: widget.useViewPadding,
         useViewInsets: widget.useViewInsets,
         portalBuilder: (context, _) {
-          Widget tooltip = Semantics(
-            container: true,
-            child: FadeTransition(
-              opacity: _controller.fade,
-              child: ScaleTransition(
-                alignment: widget.tipAnchor.resolve(direction),
-                scale: _controller.scale,
-                child: DecoratedBox(
-                  decoration: _style.decoration,
-                  child: Padding(
-                    padding: _style.padding,
-                    child: DefaultTextStyle(style: _style.textStyle, child: widget.tipBuilder(context, _controller)),
-                  ),
-                ),
-              ),
+          Widget tooltip = DecoratedBox(
+            decoration: _style.decoration,
+            child: Padding(
+              padding: _style.padding,
+              child: DefaultTextStyle(style: _style.textStyle, child: widget.tipBuilder(context, _controller)),
             ),
           );
+
+          if (motion == .all) {
+            tooltip = ScaleTransition(
+              alignment: widget.tipAnchor.resolve(direction),
+              scale: _controller.scale,
+              child: tooltip,
+            );
+          }
+
+          if (motion != .disabled) {
+            tooltip = FadeTransition(opacity: _controller.fade, child: tooltip);
+          }
+
+          tooltip = Semantics(container: true, child: tooltip);
 
           // The background filter cannot be nested in a FadeTransition because of https://github.com/flutter/flutter/issues/31706.
           if (_style.backgroundFilter case final background?) {
@@ -301,6 +319,11 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
                 tooltip,
               ],
             );
+          }
+
+          // Keep the tip visible while the pointer is over it so it can be read or interacted with (WCAG 1.4.13).
+          if (hover) {
+            tooltip = MouseRegion(onEnter: (_) => _enter(), onExit: (_) => _exit(), child: tooltip);
           }
 
           return tooltip;
@@ -396,7 +419,8 @@ class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
 
   /// The duration to wait before hiding the tooltip after the user has stopped hovering over the target.
   ///
-  /// Defaults to [Duration.zero].
+  /// Defaults to 100ms. It is not recommended to set this below 100ms as it does not conform with WCAG 1.4.13, since
+  /// the tip may hide before the pointer can move onto it.
   @override
   final Duration hoverExitDuration;
 
@@ -413,7 +437,7 @@ class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
     this.padding = const .symmetric(horizontal: 14, vertical: 10),
     this.motion = const FTooltipMotion(),
     this.hoverEnterDuration = const Duration(milliseconds: 500),
-    this.hoverExitDuration = .zero,
+    this.hoverExitDuration = const Duration(milliseconds: 100),
     this.longPressExitDuration = const Duration(milliseconds: 1500),
   });
 
@@ -425,7 +449,7 @@ class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
     required FHapticFeedback hapticFeedback,
     FTooltipMotion motion = const FTooltipMotion(),
     Duration hoverEnterDuration = const Duration(milliseconds: 500),
-    Duration hoverExitDuration = .zero,
+    Duration hoverExitDuration = const Duration(milliseconds: 100),
     Duration longPressExitDuration = const Duration(milliseconds: 1500),
   }) : this(
          decoration: ShapeDecoration(
@@ -447,6 +471,10 @@ class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
 }
 
 /// Motion-related properties for [FTooltip].
+///
+/// When [FAccessibility.motion] is:
+/// * [FAccessibilityMotion.reduced], only the fade transition is applied.
+/// * [FAccessibilityMotion.disabled], no motion is applied.
 class FTooltipMotion with Diagnosticable, _$FTooltipMotionFunctions {
   /// A [FTooltipMotion] with no motion effects.
   static const FTooltipMotion none = .new(

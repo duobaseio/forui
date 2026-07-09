@@ -6,7 +6,7 @@
 library forui.widgets.calendar;
 
 export '../src/widgets/calendar/calendar.dart';
-export '../src/widgets/calendar/calendar_controller.dart' hide InternalFCalendarControl;
+export '../src/widgets/calendar/calendar_controller.dart' hide InternalFCalendarControl, InternalFCalendarController;
 export '../src/widgets/calendar/day/day.dart' hide Day;
 export '../src/widgets/calendar/day/day_picker.dart' hide DateTimes, DayPicker;
 export '../src/widgets/calendar/header.dart' hide Header, SplitHeader;

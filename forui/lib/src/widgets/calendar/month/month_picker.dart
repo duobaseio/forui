@@ -66,6 +66,13 @@ class MonthPicker extends StatelessWidget {
       height: _rows * size.height + (_rows - 1) * style.monthSpacing,
       child: GridFocusableActionDetector(
         onFocusMove: controller.move,
+        onFocusPage: (direction, {large = false}) => controller.page(direction * (large ? 10 : 1)),
+        onFocusRowEdge: ({required end}) {
+          if (controller.focused case DateTime(:final month, :final year)) {
+            final column = (month - 1) % _columns;
+            controller.edge(.utc(year, month - column), .utc(year, month - column + _columns - 1), end: end);
+          }
+        },
         onFocusChange: (focused) {
           if (!focused) {
             controller.focus(null);

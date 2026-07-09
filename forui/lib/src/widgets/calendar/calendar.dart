@@ -381,12 +381,19 @@ class _State extends State<FCalendar> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _controller.reduceMotion(reduce: context.accessibility.motion != .all);
+  }
+
+  @override
   void didUpdateWidget(covariant FCalendar old) {
     super.didUpdateWidget(old);
     _controller = widget.control.update(old.control, _controller, _handleOnChange).$1;
     _selectionController = widget.selectionControl
         .update(old.selectionControl, _selectionController, _handleOnSelectionChange)
         .$1;
+    _controller.reduceMotion(reduce: context.accessibility.motion != .all);
   }
 
   @override
@@ -450,6 +457,10 @@ class _State extends State<FCalendar> {
 }
 
 /// [FCalendar]'s style.
+///
+/// When [FAccessibility.motion] is:
+/// * [FAccessibilityMotion.reduced], only fade transitions are applied.
+/// * [FAccessibilityMotion.disabled], no motion is applied.
 class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
   /// The header's style.
   @override

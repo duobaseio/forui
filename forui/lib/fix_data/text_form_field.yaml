@@ -1,0 +1,12 @@
+version: 1
+transforms:
+  # FTextFormField
+  - title: "Remove FTextFormField.password(error: ...)"
+    date: 2026-07-06
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      method: 'password'
+      inClass: FTextFormField
+    changes:
+      - kind: removeParameter
+        name: 'error'

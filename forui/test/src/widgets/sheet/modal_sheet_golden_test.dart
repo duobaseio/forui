@@ -159,4 +159,50 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('sheet/modal/scrollable-$side.png'));
     });
   }
+
+  group('accessibility', () {
+    // The sheet slides up under full motion, cross-fades in place (snapped to its resting position, opacity fading)
+    // under reduced motion, and appears instantly (in place, fully opaque) under disabled motion.
+    for (final (name, features) in [
+      ('full', const FakeAccessibilityFeatures()),
+      ('reduced', const FakeAccessibilityFeatures(reduceMotion: true)),
+      ('disabled', const FakeAccessibilityFeatures(disableAnimations: true)),
+    ]) {
+      testWidgets('$name motion', (tester) async {
+        tester.platformDispatcher.accessibilityFeaturesTestValue = features;
+        addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+
+        final sheet = autoDispose(AnimationSheetBuilder(frameSize: const Size(240, 240)));
+
+        Widget build() => TestScaffold.app(
+          child: Builder(
+            builder: (context) => FButton.icon(
+              child: const Icon(FLucideIcons.chevronRight),
+              onPress: () => showFSheet(
+                context: context,
+                side: .btt,
+                builder: (context) => Container(
+                  height: 120,
+                  width: .infinity,
+                  color: Colors.blue,
+                  child: const Center(child: Text('sheet')),
+                ),
+              ),
+            ),
+          ),
+        );
+
+        await tester.pumpWidget(sheet.record(build(), recording: false));
+        await tester.tap(find.byType(FButton));
+        await tester.pump(); // Start the entrance.
+        await tester.pumpFrames(sheet.record(build()), const Duration(milliseconds: 300));
+
+        await expectLater(sheet.collate(5), matchesGoldenFile('sheet/modal/motion-$name.png'));
+
+        // Unmount to dispose the sheet route.
+        await tester.pumpWidget(TestScaffold(child: const SizedBox()));
+        await tester.pumpAndSettle();
+      });
+    }
+  });
 }

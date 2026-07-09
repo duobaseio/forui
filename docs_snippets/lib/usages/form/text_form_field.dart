@@ -359,7 +359,6 @@ final textFormFieldPassword = FTextFormField.password(
   label: const Text('Password'),
   hint: 'Enter password...',
   description: const Text('Description'),
-  error: null,
   // {@endcategory}
 );
 

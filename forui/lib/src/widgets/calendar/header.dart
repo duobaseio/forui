@@ -312,7 +312,7 @@ class _Tappable extends StatelessWidget {
             // toggleIcon (chevronRight) mirrors under matchTextDirection, so it points left in RTL; rotating the
             // opposite way still lands it facing down.
             turns: shown ? (Directionality.of(context) == .ltr ? 0.25 : -0.25) : 0.0,
-            duration: style.animationDuration,
+            duration: context.accessibility.motion == .all ? style.animationDuration : .zero,
             child: IconTheme(data: style.toggleIconStyle.resolve(variants), child: style.toggleIcon(context)),
           ),
         ],
@@ -332,6 +332,8 @@ class _Tappable extends StatelessWidget {
 }
 
 /// A calendar header's style.
+///
+/// All motion is automatically disabled when [FAccessibility.motion] is not [FAccessibilityMotion.all].
 class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions {
   /// The padding around the entire header. Defaults to `EdgeInsetsDirectional.only(start: 4)`.
   @override
@@ -374,7 +376,7 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
   @override
   final FIconBuilder nextIcon;
 
-  /// The arrow turn animation's duration. Defaults to 200ms.
+  /// The arrow turn animation's duration. Defaults to 100ms.
   @override
   final Duration animationDuration;
 

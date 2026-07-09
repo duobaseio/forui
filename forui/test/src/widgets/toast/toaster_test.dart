@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 
 import 'package:collection/collection.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -476,5 +477,165 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(tester.takeException(), isNull);
+  });
+
+  group('accessibility', () {
+    SemanticsNode liveRegionNode(WidgetTester tester, [String text = '1']) {
+      var node = tester.getSemantics(find.text(text).last);
+      while (!node.getSemanticsData().flagsCollection.isLiveRegion) {
+        node = node.parent!;
+      }
+      return node;
+    }
+
+    testWidgets('toast is a live region with a dismiss action', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FToaster(
+            child: Center(
+              child: Column(mainAxisSize: .min, children: [small('1', null, .bottomRight, null)]),
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.text('1'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('1'), findsExactly(2));
+
+      final data = liveRegionNode(tester).getSemanticsData();
+      expect(data.flagsCollection.isLiveRegion, true);
+      expect(data.hasAction(SemanticsAction.dismiss), true);
+
+      semantics.dispose();
+    });
+
+    testWidgets('skips the entrance animation when accessible navigation is enabled', (tester) async {
+      tester.platformDispatcher.accessibilityFeaturesTestValue = const FakeAccessibilityFeatures(
+        accessibleNavigation: true,
+      );
+      addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FToaster(
+            child: Center(
+              child: Column(mainAxisSize: .min, children: [small('1')]),
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.text('1'));
+      await tester.pump(); // Single frame, no settle: entrance is snapped, not mid-animation.
+
+      expect(find.text('1'), findsExactly(2));
+      expect(
+        tester
+            .widget<FractionalTranslation>(
+              find.ancestor(of: find.text('1').last, matching: find.byType(FractionalTranslation)).first,
+            )
+            .translation,
+        Offset.zero,
+      );
+      expect(
+        tester.widget<Opacity>(find.ancestor(of: find.text('1').last, matching: find.byType(Opacity)).first).opacity,
+        1.0,
+      );
+
+      await tester.pumpAndSettle();
+    });
+
+    testWidgets('dismiss action removes the toast instantly when accessible navigation is enabled', (tester) async {
+      tester.platformDispatcher.accessibilityFeaturesTestValue = const FakeAccessibilityFeatures(
+        accessibleNavigation: true,
+      );
+      addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FToaster(
+            child: Center(
+              child: Column(mainAxisSize: .min, children: [small('1')]),
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.text('1'));
+      await tester.pumpAndSettle();
+      expect(find.text('1'), findsExactly(2));
+
+      final node = liveRegionNode(tester);
+      node.owner!.performAction(node.id, SemanticsAction.dismiss);
+      await tester.pump(); // Flush the deferred snap microtask.
+      await tester.pump(); // Apply the resulting removal (still quicker than a reverse animation).
+
+      expect(find.text('1'), findsOne);
+
+      semantics.dispose();
+    });
+
+    testWidgets('does not auto-dismiss when accessible navigation is enabled', (tester) async {
+      tester.platformDispatcher.accessibilityFeaturesTestValue = const FakeAccessibilityFeatures(
+        accessibleNavigation: true,
+      );
+      addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FToaster(
+            child: Center(
+              child: Column(mainAxisSize: .min, children: [small('1')]),
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.text('1'));
+      await tester.pumpAndSettle();
+      expect(find.text('1'), findsExactly(2));
+
+      await tester.pumpAndSettle(const Duration(seconds: 10)); // Well past the 5s default.
+
+      expect(find.text('1'), findsExactly(2));
+    });
+
+    testWidgets('FToasterEntry.dismiss removes the toast without error when accessible navigation is enabled', (
+      tester,
+    ) async {
+      tester.platformDispatcher.accessibilityFeaturesTestValue = const FakeAccessibilityFeatures(
+        accessibleNavigation: true,
+      );
+      addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+
+      late BuildContext toasterContext;
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FToaster(
+            child: Builder(
+              builder: (context) {
+                toasterContext = context;
+                return const SizedBox.shrink();
+              },
+            ),
+          ),
+        ),
+      );
+
+      final entry = showFToast(context: toasterContext, title: const Text('1'));
+      await tester.pumpAndSettle();
+      expect(find.text('1'), findsOne);
+
+      // Dismissing via the notifier (close button / programmatic) must not dispose it mid-notification.
+      entry.dismiss();
+      await tester.pumpAndSettle();
+
+      expect(find.text('1'), findsNothing);
+    });
   });
 }

@@ -81,6 +81,7 @@ sealed class Divider extends StatefulWidget {
       },
       child: FFocusedOutline(
         focused: focused,
+        style: style.focusedOutlineStyle,
         child: Stack(alignment: .center, children: children),
       ),
     ),

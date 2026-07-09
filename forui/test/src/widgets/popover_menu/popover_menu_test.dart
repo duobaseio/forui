@@ -152,4 +152,49 @@ void main() {
 
     expect(find.text('Group 1'), findsNothing);
   });
+
+  group('accessibility', () {
+    testWidgets('submenu remains open when the pointer moves onto it', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FPopoverMenu(
+            menu: [
+              .group(
+                children: [
+                  .item(title: const Text('Edit'), onPress: () {}),
+                  .submenu(
+                    title: const Text('Share'),
+                    submenu: [
+                      .group(
+                        children: [.item(title: const Text('Email'), onPress: () {})],
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ],
+            builder: (_, controller, _) => FButton(onPress: controller.toggle, child: const Text('Open')),
+          ),
+        ),
+      );
+
+      await tester.tap(find.text('Open'));
+      await tester.pumpAndSettle();
+
+      // Open the submenu by hovering its trigger.
+      final gesture = await tester.createPointerGesture();
+      await gesture.moveTo(tester.getCenter(find.text('Share')));
+      await tester.pump(const Duration(milliseconds: 200));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Email'), findsOneWidget);
+
+      // Moving the pointer from the trigger onto the submenu must not dismiss it (WCAG 1.4.13 hoverable).
+      await gesture.moveTo(tester.getCenter(find.text('Email')));
+      await tester.pumpAndSettle();
+
+      expect(find.text('Share'), findsOneWidget);
+      expect(find.text('Email'), findsOneWidget);
+    });
+  });
 }

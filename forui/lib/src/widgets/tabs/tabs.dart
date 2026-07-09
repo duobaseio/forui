@@ -145,7 +145,7 @@ class FTabs extends StatefulWidget {
   State<FTabs> createState() => _FTabsState();
 }
 
-class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
+class _FTabsState extends State<FTabs> with TickerProviderStateMixin {
   late FTabController _controller;
 
   @override
@@ -155,9 +155,16 @@ class _FTabsState extends State<FTabs> with SingleTickerProviderStateMixin {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _controller._apply(this, widget.children.length, _update, reduceMotion: context.accessibility.motion != .all);
+  }
+
+  @override
   void didUpdateWidget(covariant FTabs old) {
     super.didUpdateWidget(old);
     _controller = widget.control.update(old.control, _controller, _update, this, widget.children.length).$1;
+    _controller._apply(this, widget.children.length, _update, reduceMotion: context.accessibility.motion != .all);
   }
 
   @override

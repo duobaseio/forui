@@ -142,7 +142,7 @@ abstract class _State<T extends FPickerWheel> extends State<T> {
         child: Stack(
           alignment: .center,
           children: [
-            if (_focused && FFocusHighlight.of(context))
+            if (_focused && context.accessibility.focusHighlight)
               Container(
                 height: extent,
                 decoration: ShapeDecoration(

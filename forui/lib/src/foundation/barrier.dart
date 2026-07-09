@@ -6,6 +6,8 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:forui/forui.dart';
+
 // These widgets are difficult to test individually, we test them in combination with widgets that use them instead.
 
 /// A widget that prevents the user from interacting with widgets behind itself, and can be configured with an animated
@@ -71,7 +73,7 @@ class FAnimatedModalBarrier extends AnimatedWidget {
   Widget build(BuildContext context) => FModalBarrier(
     cutout: cutout,
     cutoutBuilder: cutoutBuilder,
-    filter: filter == null ? null : filter!(animation.value),
+    filter: filter == null ? null : filter!(context.accessibility.motion == .disabled ? 1.0 : animation.value),
     onDismiss: onDismiss,
     semanticsLabel: semanticsLabel,
     barrierSemanticsDismissible: barrierSemanticsDismissible,

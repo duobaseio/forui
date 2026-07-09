@@ -61,8 +61,24 @@ class DayPicker extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = style.daySize;
     final width = DateTime.daysPerWeek * size.width;
+    final firstDayOfWeek = style.firstDayOfWeek ?? localization.firstDayOfWeek;
     final grid = GridFocusableActionDetector(
       onFocusMove: controller.move,
+      onFocusPage: (direction, {large = false}) => controller.page(direction * (large ? DateTime.monthsPerYear : 1)),
+      onFocusRowEdge: ({required end}) {
+        if (controller.focused case final focused?) {
+          final offset = (focused.weekday - firstDayOfWeek) % DateTime.daysPerWeek;
+          final first = controller.current;
+          final last = first.lastDayOfMonth;
+
+          // Clamp the week to the visible month so focus stays on the current page; edge clamps to [start, end].
+          controller.edge(
+            max(first, focused.minus(days: offset)),
+            min(last, focused.plus(days: DateTime.daysPerWeek - 1 - offset)),
+            end: end,
+          );
+        }
+      },
       onFocusChange: (focused) {
         if (!focused) {
           controller.focus(null);
@@ -340,7 +356,7 @@ class _Fade extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewport = _Viewport.of(context);
-    if (_height <= viewport) {
+    if (_height <= viewport || context.accessibility.motion == .disabled) {
       return child; // fully revealed, including at rest
     }
 

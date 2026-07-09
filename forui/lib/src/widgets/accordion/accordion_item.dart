@@ -126,9 +126,10 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
     _index = index;
     _accordionController.remove(_index, _controller);
 
+    final reduceMotion = context.accessibility.motion != .all;
     _controller
-      ..duration = style.motion.expandDuration
-      ..reverseDuration = style.motion.collapseDuration;
+      ..duration = reduceMotion ? .zero : style.motion.expandDuration
+      ..reverseDuration = reduceMotion ? .zero : style.motion.collapseDuration;
 
     switch ((_accordionController, _initialized)) {
       case (ProxyAccordionController _, true):

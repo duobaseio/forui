@@ -4,15 +4,65 @@ import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui/src/foundation/focused_outline.dart';
 
 part 'theme.design.dart';
+
+/// Provides functions for accessing the current [FThemeData].
+extension FBuildContext on BuildContext {
+  /// Returns the current [FThemeData], or `FTheme.neutral.light.touch` if there is no ancestor [FTheme].
+  ///
+  /// ## Troubleshooting:
+  ///
+  /// ### [theme] always returns `FTheme.neutral.light.touch`
+  ///
+  /// One of the most common causes is calling [theme] in the same context which [FTheme] was declared. To fix this,
+  /// move the call to [theme] to a descendant widget.
+  ///
+  /// ✅ Do:
+  /// ```dart
+  /// class Parent extends StatelessWidget {
+  ///   @override
+  ///   Widget build(BuildContext context) => FTheme(
+  ///      data: FTheme.neutral.light.touch,
+  ///      child: Child(),
+  ///    );
+  ///  }
+  ///
+  ///  class Child extends StatelessWidget {
+  ///    @override
+  ///    Widget build(BuildContext context) {
+  ///      final FThemeData theme = context.theme;
+  ///      return const SomeWidget(theme: theme);
+  ///    }
+  ///  }
+  /// ```
+  ///
+  /// ❌ Do not:
+  /// ```dart
+  /// class Parent extends StatelessWidget {
+  ///   @override
+  ///   Widget build(BuildContext context) => FTheme(
+  ///      data: FTheme.neutral.light.touch,
+  ///      child: SomeWidget(
+  ///        theme: context.theme, // Whoops!
+  ///      ),
+  ///    );
+  ///  }
+  /// ```
+  FThemeData get theme => FTheme.of(this);
+
+  /// Returns convenient accessors for the nearest [FAccessibilityScope]'s [FAccessibility] features.
+  FAccessibilityContext get accessibility => FAccessibilityContext(this);
+
+  /// Returns the current [FPlatformVariant].
+  FPlatformVariant get platformVariant => FAdaptiveScope.of(this);
+}
 
 /// Applies a theme to descendant widgets with animated transitions over a given duration whenever the provided
 /// [FThemeData] changes.
 ///
 /// A theme configures the colors and typographic choices of Forui widgets. The actual configuration is stored in
-/// a [FThemeData]. Descendant widgets obtain the current theme's [FThemeData] via either [FThemeBuildContext.theme],
+/// a [FThemeData]. Descendant widgets obtain the current theme's [FThemeData] via either [FBuildContext.theme],
 /// or [FTheme.of]. When a widget uses either, it is automatically rebuilt if the theme later changes.
 ///
 /// ```dart
@@ -42,7 +92,7 @@ part 'theme.design.dart';
 class FTheme extends StatelessWidget {
   /// Returns the current [FThemeData], or `FTheme.neutral.light.touch` if there is no ancestor [FTheme].
   ///
-  /// It is recommended to use the terser [FThemeBuildContext.theme] getter instead.
+  /// It is recommended to use the terser [FBuildContext.theme] getter instead.
   ///
   /// ## Troubleshooting:
   ///
@@ -114,6 +164,9 @@ class FTheme extends StatelessWidget {
   /// The platform variant. Defaults to the current platform.
   final FPlatformVariant? platform;
 
+  /// The accessibility features to expose to descendants. When null, the platform's are observed.
+  final FAccessibility? accessibility;
+
   /// Called every time an animation completes.
   final VoidCallback? onEnd;
 
@@ -126,6 +179,7 @@ class FTheme extends StatelessWidget {
     required this.child,
     this.textDirection,
     this.platform,
+    this.accessibility,
     this.motion = const FThemeMotion(),
     this.onEnd,
     super.key,
@@ -136,6 +190,7 @@ class FTheme extends StatelessWidget {
     data: data,
     textDirection: textDirection ?? Directionality.maybeOf(context) ?? .ltr,
     platform: platform,
+    accessibility: accessibility,
     motion: motion,
     onEnd: onEnd,
     child: child,
@@ -149,6 +204,7 @@ class FTheme extends StatelessWidget {
       ..add(DiagnosticsProperty('data', data))
       ..add(EnumProperty('textDirection', textDirection))
       ..add(DiagnosticsProperty('platform', platform))
+      ..add(DiagnosticsProperty('accessibility', accessibility))
       ..add(ObjectFlagProperty.has('onEnd', onEnd));
   }
 }
@@ -157,6 +213,7 @@ class _AnimatedTheme extends ImplicitlyAnimatedWidget {
   final FThemeData data;
   final TextDirection textDirection;
   final FPlatformVariant? platform;
+  final FAccessibility? accessibility;
   final Widget child;
 
   _AnimatedTheme({
@@ -164,6 +221,7 @@ class _AnimatedTheme extends ImplicitlyAnimatedWidget {
     required this.textDirection,
     required this.child,
     this.platform,
+    this.accessibility,
     FThemeMotion motion = const FThemeMotion(),
     super.onEnd,
   }) : super(duration: motion.duration, curve: motion.curve);
@@ -177,7 +235,8 @@ class _AnimatedTheme extends ImplicitlyAnimatedWidget {
     properties
       ..add(DiagnosticsProperty('data', data))
       ..add(EnumProperty('textDirection', textDirection))
-      ..add(DiagnosticsProperty('platform', platform));
+      ..add(DiagnosticsProperty('platform', platform))
+      ..add(DiagnosticsProperty('accessibility', accessibility));
   }
 }
 
@@ -194,6 +253,7 @@ class _AnimatedThemeState extends AnimatedWidgetBaseState<_AnimatedTheme> {
     data: _tween!.evaluate(animation),
     textDirection: widget.textDirection,
     platform: widget.platform,
+    accessibility: widget.accessibility,
     child: widget.child,
   );
 }
@@ -222,51 +282,6 @@ class FThemeMotion with Diagnosticable, _$FThemeMotionFunctions {
   const FThemeMotion({this.duration = const Duration(milliseconds: 200), this.curve = Curves.linear});
 }
 
-/// Provides functions for accessing the current [FThemeData].
-extension FThemeBuildContext on BuildContext {
-  /// Returns the current [FThemeData], or `FTheme.neutral.light.touch` if there is no ancestor [FTheme].
-  ///
-  /// ## Troubleshooting:
-  ///
-  /// ### [theme] always returns `FTheme.neutral.light.touch`
-  ///
-  /// One of the most common causes is calling [theme] in the same context which [FTheme] was declared. To fix this,
-  /// move the call to [theme] to a descendant widget.
-  ///
-  /// ✅ Do:
-  /// ```dart
-  /// class Parent extends StatelessWidget {
-  ///   @override
-  ///   Widget build(BuildContext context) => FTheme(
-  ///      data: FTheme.neutral.light.touch,
-  ///      child: Child(),
-  ///    );
-  ///  }
-  ///
-  ///  class Child extends StatelessWidget {
-  ///    @override
-  ///    Widget build(BuildContext context) {
-  ///      final FThemeData theme = context.theme;
-  ///      return const SomeWidget(theme: theme);
-  ///    }
-  ///  }
-  /// ```
-  ///
-  /// ❌ Do not:
-  /// ```dart
-  /// class Parent extends StatelessWidget {
-  ///   @override
-  ///   Widget build(BuildContext context) => FTheme(
-  ///      data: FTheme.neutral.light.touch,
-  ///      child: SomeWidget(
-  ///        theme: context.theme, // Whoops!
-  ///      ),
-  ///    );
-  ///  }
-  /// ```
-  FThemeData get theme => FTheme.of(this);
-}
-
 /// Applies a theme to descendant widgets.
 ///
 /// See:
@@ -277,20 +292,31 @@ class FBasicTheme extends StatelessWidget {
   /// The color and typography values for descendant Forui widgets.
   final FThemeData data;
 
-  /// The text direction. Defaults to the text direction inherited from its nearest ancestor.
-  final TextDirection? textDirection;
-
   /// The platform variant. Defaults to the current platform.
   final FPlatformVariant? platform;
+
+  /// The accessibility features to expose to descendants. When null, the platform's are observed.
+  final FAccessibility? accessibility;
+
+  /// The text direction. Defaults to the text direction inherited from its nearest ancestor.
+  final TextDirection? textDirection;
 
   /// The widget below this widget in the tree.
   final Widget child;
 
   /// Creates a [FTheme] that applies [data] to all descendant widgets in [child].
-  const FBasicTheme({required this.data, required this.child, this.textDirection, this.platform, super.key});
+  const FBasicTheme({
+    required this.data,
+    required this.child,
+    this.platform,
+    this.accessibility,
+    this.textDirection,
+    super.key,
+  });
 
   @override
-  Widget build(BuildContext context) => FocusHighlightScope(
+  Widget build(BuildContext context) => FAccessibilityScope(
+    data: accessibility,
     child: FAdaptiveScope(
       platform: platform,
       child: _InheritedTheme(
@@ -311,8 +337,9 @@ class FBasicTheme extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('data', data, showName: false))
-      ..add(EnumProperty('textDirection', textDirection))
-      ..add(DiagnosticsProperty('platform', platform));
+      ..add(DiagnosticsProperty('platform', platform))
+      ..add(DiagnosticsProperty('accessibility', accessibility))
+      ..add(EnumProperty('textDirection', textDirection));
   }
 }
 

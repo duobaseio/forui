@@ -38,7 +38,6 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     Widget? label = const LocalizedText.password(),
     String? hint,
     Widget? description,
-    Widget? error,
     TextMagnifierConfiguration? magnifierConfiguration,
     Object groupId = EditableText,
     FocusNode? focusNode,

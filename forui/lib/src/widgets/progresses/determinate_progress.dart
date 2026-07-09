@@ -63,6 +63,7 @@ class FDeterminateProgress extends StatefulWidget {
 
 class _State extends State<FDeterminateProgress> with SingleTickerProviderStateMixin {
   FDeterminateProgressStyle? _style;
+  FAccessibilityMotion? _motion;
   late AnimationController _controller;
   double? _target;
 
@@ -86,9 +87,16 @@ class _State extends State<FDeterminateProgress> with SingleTickerProviderStateM
 
   void _setup() {
     final style = _style = widget.style(context.theme.determinateProgressStyle);
-    if (_target != widget.value) {
+    final motion = context.accessibility.motion;
+    if (_target != widget.value || _motion != motion) {
       _target = widget.value;
-      _controller.animateTo(widget.value, duration: style.motion.duration, curve: style.motion.curve);
+      _motion = motion;
+
+      if (_motion == .disabled) {
+        _controller.value = widget.value;
+      } else {
+        _controller.animateTo(widget.value, duration: style.motion.duration, curve: style.motion.curve);
+      }
     }
   }
 
@@ -159,6 +167,8 @@ class FDeterminateProgressStyle with Diagnosticable, _$FDeterminateProgressStyle
 }
 
 /// Motion-related properties for a [FDeterminateProgress].
+///
+/// All motion is automatically disabled when [FAccessibility.motion] is [FAccessibilityMotion.disabled].
 class FDeterminateProgressMotion with Diagnosticable, _$FDeterminateProgressMotionFunctions {
   /// The animation's duration. Defaults to 1s.
   @override

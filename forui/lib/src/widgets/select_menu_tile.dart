@@ -681,7 +681,7 @@ class _FSelectMenuTileState<T> extends State<FSelectMenuTile<T>> with TickerProv
           final variants = <FFormFieldVariant>{
             if (!widget.enabled) .disabled,
             if (state.errorText != null) .error,
-            if (_focused && FFocusHighlight.of(context)) .focused,
+            if (_focused && context.accessibility.focusHighlight) .focused,
           };
           final error = state.errorText == null ? null : widget.errorBuilder(context, state.errorText!);
 

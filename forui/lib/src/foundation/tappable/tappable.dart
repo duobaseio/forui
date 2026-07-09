@@ -492,7 +492,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
   void didChangeDependencies() {
     super.didChangeDependencies();
     _style = widget.style(context.theme.tappableStyle);
-    _highlight = FFocusHighlight.of(context);
+    _highlight = context.accessibility.focusHighlight;
     if (_highlight) {
       if (_focus.hasFocus) {
         _current.add(FTappableVariant.focused);
@@ -847,7 +847,7 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
   }
 
   void _setupBounceAnimation() {
-    final motion = _style.motion;
+    final motion = context.accessibility.motion == .disabled ? FTappableMotion.none : _style.motion;
     if (_motion != motion) {
       _motion = motion;
       _bounceController
