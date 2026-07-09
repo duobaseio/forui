@@ -6,11 +6,7 @@ import 'package:forui/forui.dart';
 
 void main() {
   group('FAccessibility', () {
-    const data = FAccessibility(
-      accessibleNavigation: false,
-      motion: .all,
-      focusHighlight: false,
-    );
+    const data = FAccessibility(accessibleNavigation: false, motion: .all, focusHighlight: false);
 
     test('copyWith replaces only the given fields', () {
       final copy = data.copyWith(motion: .disabled);
@@ -111,11 +107,7 @@ void main() {
       late FAccessibilityMotion motion;
       await tester.pumpWidget(
         FAccessibilityScope(
-          data: const FAccessibility(
-            accessibleNavigation: false,
-            motion: .reduced,
-            focusHighlight: false,
-          ),
+          data: const FAccessibility(accessibleNavigation: false, motion: .reduced, focusHighlight: false),
           child: Builder(
             builder: (context) {
               motion = FAccessibilityScope.motionOf(context);

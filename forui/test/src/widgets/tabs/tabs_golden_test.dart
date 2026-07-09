@@ -188,11 +188,17 @@ void main() {
               children: const [
                 FTabEntry(
                   label: Text('foo'),
-                  child: ColoredBox(color: Colors.yellow, child: Center(child: Text('foo panel'))),
+                  child: ColoredBox(
+                    color: Colors.yellow,
+                    child: Center(child: Text('foo panel')),
+                  ),
                 ),
                 FTabEntry(
                   label: Text('bar'),
-                  child: ColoredBox(color: Colors.blue, child: Center(child: Text('bar panel'))),
+                  child: ColoredBox(
+                    color: Colors.blue,
+                    child: Center(child: Text('bar panel')),
+                  ),
                 ),
               ],
             ),

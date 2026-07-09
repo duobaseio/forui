@@ -37,11 +37,7 @@ final class FAccessibility with Diagnosticable {
   final bool focusHighlight;
 
   /// Creates a [FAccessibility].
-  const FAccessibility({
-    required this.accessibleNavigation,
-    required this.motion,
-    required this.focusHighlight,
-  });
+  const FAccessibility({required this.accessibleNavigation, required this.motion, required this.focusHighlight});
 
   /// Returns a copy of this [FAccessibility] with the given fields replaced.
   FAccessibility copyWith({
