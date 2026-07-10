@@ -35,5 +35,8 @@
   "calendarNextYearSemanticsLabel": "తదుపరి సంవత్సరం",
   "calendarPreviousYearSemanticsLabel": "మునుపటి సంవత్సరం",
   "calendarNextYearsSemanticsLabel": "తదుపరి సంవత్సరాలు",
-  "calendarPreviousYearsSemanticsLabel": "మునుపటి సంవత్సరాలు"
+  "calendarPreviousYearsSemanticsLabel": "మునుపటి సంవత్సరాలు",
+  "headerBackSemanticsLabel": "వెనుకకు",
+  "headerCloseSemanticsLabel": "మూసివేయి",
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount}లో {tabIndex} ట్యాబ్"
 }

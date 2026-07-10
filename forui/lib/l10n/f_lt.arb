@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "Kiti metai",
   "calendarPreviousYearSemanticsLabel": "Ankstesni metai",
   "calendarNextYearsSemanticsLabel": "Kiti metai",
-  "calendarPreviousYearsSemanticsLabel": "Ankstesni metai"
+  "calendarPreviousYearsSemanticsLabel": "Ankstesni metai",
+  "headerBackSemanticsLabel": "Atgal",
+  "headerCloseSemanticsLabel": "Uždaryti",
+  "bottomNavigationBarTabSemanticsLabel": "{tabIndex} skirtukas iš {tabCount}"
 }

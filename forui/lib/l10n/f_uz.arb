@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "Keyingi yil",
   "calendarPreviousYearSemanticsLabel": "Oldingi yil",
   "calendarNextYearsSemanticsLabel": "Keyingi yillar",
-  "calendarPreviousYearsSemanticsLabel": "Oldingi yillar"
+  "calendarPreviousYearsSemanticsLabel": "Oldingi yillar",
+  "headerBackSemanticsLabel": "Orqaga",
+  "headerCloseSemanticsLabel": "Yopish",
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount} tadan {tabIndex}-yorliq"
 }

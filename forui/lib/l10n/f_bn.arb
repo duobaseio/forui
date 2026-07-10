@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "পরবর্তী বছর",
   "calendarPreviousYearSemanticsLabel": "পূর্ববর্তী বছর",
   "calendarNextYearsSemanticsLabel": "পরবর্তী বছরগুলি",
-  "calendarPreviousYearsSemanticsLabel": "পূর্ববর্তী বছরগুলি"
+  "calendarPreviousYearsSemanticsLabel": "পূর্ববর্তী বছরগুলি",
+  "headerBackSemanticsLabel": "ফিরে যান",
+  "headerCloseSemanticsLabel": "বন্ধ করুন",
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount}টির মধ্যে {tabIndex}টি ট্যাব"
 }

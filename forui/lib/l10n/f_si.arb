@@ -35,5 +35,8 @@
   "calendarNextYearSemanticsLabel": "ඊළඟ වසර",
   "calendarPreviousYearSemanticsLabel": "පෙර වසර",
   "calendarNextYearsSemanticsLabel": "ඊළඟ වසර",
-  "calendarPreviousYearsSemanticsLabel": "පෙර වසර"
+  "calendarPreviousYearsSemanticsLabel": "පෙර වසර",
+  "headerBackSemanticsLabel": "ආපසු",
+  "headerCloseSemanticsLabel": "වසන්න",
+  "bottomNavigationBarTabSemanticsLabel": "ටැබ {tabCount}න් {tabIndex}"
 }

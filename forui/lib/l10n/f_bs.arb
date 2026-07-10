@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "Sljedeća godina",
   "calendarPreviousYearSemanticsLabel": "Prethodna godina",
   "calendarNextYearsSemanticsLabel": "Sljedeće godine",
-  "calendarPreviousYearsSemanticsLabel": "Prethodne godine"
+  "calendarPreviousYearsSemanticsLabel": "Prethodne godine",
+  "headerBackSemanticsLabel": "Nazad",
+  "headerCloseSemanticsLabel": "Zatvori",
+  "bottomNavigationBarTabSemanticsLabel": "Kartica {tabIndex} od {tabCount}"
 }

@@ -35,5 +35,8 @@
   "calendarNextYearSemanticsLabel": "Кийинки жыл",
   "calendarPreviousYearSemanticsLabel": "Мурунку жыл",
   "calendarNextYearsSemanticsLabel": "Кийинки жылдар",
-  "calendarPreviousYearsSemanticsLabel": "Мурунку жылдар"
+  "calendarPreviousYearsSemanticsLabel": "Мурунку жылдар",
+  "headerBackSemanticsLabel": "Артка",
+  "headerCloseSemanticsLabel": "Жабуу",
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount} ичинен {tabIndex}-өтмөк"
 }

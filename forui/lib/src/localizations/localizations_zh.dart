@@ -24,6 +24,11 @@ class FLocalizationsZh extends FLocalizations {
   String get autocompleteNoResults => '未找到匹配项.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return '第 $tabIndex 个标签，共 $tabCount 个';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => '下个月';
 
   @override
@@ -61,6 +66,12 @@ class FLocalizationsZh extends FLocalizations {
 
   @override
   String get dialogSemanticsLabel => '对话框';
+
+  @override
+  String get headerBackSemanticsLabel => '返回';
+
+  @override
+  String get headerCloseSemanticsLabel => '关闭';
 
   @override
   String get paginationPreviousSemanticsLabel => '上一个';
@@ -142,6 +153,11 @@ class FLocalizationsZhHk extends FLocalizationsZh {
   String get autocompleteNoResults => '未找到匹配項.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return '第 $tabIndex 個標籤，共 $tabCount 個';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => '下個月';
 
   @override
@@ -179,6 +195,12 @@ class FLocalizationsZhHk extends FLocalizationsZh {
 
   @override
   String get dialogSemanticsLabel => '對話方塊';
+
+  @override
+  String get headerBackSemanticsLabel => '返回';
+
+  @override
+  String get headerCloseSemanticsLabel => '關閉';
 
   @override
   String get paginationPreviousSemanticsLabel => '上一個';
@@ -260,6 +282,11 @@ class FLocalizationsZhTw extends FLocalizationsZh {
   String get autocompleteNoResults => '未找到匹配項.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return '第 $tabIndex 個標籤頁，共 $tabCount 個';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => '下個月';
 
   @override
@@ -297,6 +324,12 @@ class FLocalizationsZhTw extends FLocalizationsZh {
 
   @override
   String get dialogSemanticsLabel => '對話方塊';
+
+  @override
+  String get headerBackSemanticsLabel => '返回';
+
+  @override
+  String get headerCloseSemanticsLabel => '關閉';
 
   @override
   String get paginationPreviousSemanticsLabel => '上一個';

@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "পৰৱৰ্তী বছৰ",
   "calendarPreviousYearSemanticsLabel": "পূৰ্বৱৰ্তী বছৰ",
   "calendarNextYearsSemanticsLabel": "পৰৱৰ্তী বছৰবোৰ",
-  "calendarPreviousYearsSemanticsLabel": "পূৰ্বৱৰ্তী বছৰবোৰ"
+  "calendarPreviousYearsSemanticsLabel": "পূৰ্বৱৰ্তী বছৰবোৰ",
+  "headerBackSemanticsLabel": "উভতি যাওক",
+  "headerCloseSemanticsLabel": "বন্ধ কৰক",
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount}ৰ {tabIndex} নম্বৰ টেব"
 }

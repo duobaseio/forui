@@ -304,6 +304,12 @@ abstract class FLocalizations {
   /// **'No matches found.'**
   String get autocompleteNoResults;
 
+  /// The semantic label announcing a bottom navigation bar item's position, e.g. 'Tab 1 of 3'.
+  ///
+  /// In en, this message translates to:
+  /// **'Tab {tabIndex} of {tabCount}'**
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount);
+
   /// The label for the calendar header's next-month navigation button.
   ///
   /// In en, this message translates to:
@@ -381,6 +387,18 @@ abstract class FLocalizations {
   /// In en, this message translates to:
   /// **'Dialog'**
   String get dialogSemanticsLabel;
+
+  /// The default semantic label for a header's back button.
+  ///
+  /// In en, this message translates to:
+  /// **'Back'**
+  String get headerBackSemanticsLabel;
+
+  /// The default semantic label for a header's close button.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get headerCloseSemanticsLabel;
 
   /// The label for the previous button in a pagination control.
   ///

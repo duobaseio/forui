@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "နောက်နှစ်",
   "calendarPreviousYearSemanticsLabel": "ယခင်နှစ်",
   "calendarNextYearsSemanticsLabel": "နောက်နှစ်များ",
-  "calendarPreviousYearsSemanticsLabel": "ယခင်နှစ်များ"
+  "calendarPreviousYearsSemanticsLabel": "ယခင်နှစ်များ",
+  "headerBackSemanticsLabel": "နောက်သို့",
+  "headerCloseSemanticsLabel": "ပိတ်ရန်",
+  "bottomNavigationBarTabSemanticsLabel": "တဘ် {tabCount} ခုအနက် {tabIndex} ခု"
 }

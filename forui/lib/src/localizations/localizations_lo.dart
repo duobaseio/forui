@@ -24,6 +24,11 @@ class FLocalizationsLo extends FLocalizations {
   String get autocompleteNoResults => 'ບໍ່ພົບການຈັບຄູ່.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'ແຖບທີ $tabIndex ຈາກທັງໝົດ $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'ເດືອນຖັດໄປ';
 
   @override
@@ -61,6 +66,12 @@ class FLocalizationsLo extends FLocalizations {
 
   @override
   String get dialogSemanticsLabel => 'ຂໍ້ຄວາມ';
+
+  @override
+  String get headerBackSemanticsLabel => 'ກັບຄືນ';
+
+  @override
+  String get headerCloseSemanticsLabel => 'ປິດ';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Previous';

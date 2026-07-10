@@ -24,6 +24,11 @@ class FLocalizationsNo extends FLocalizations {
   String get autocompleteNoResults => 'Ingen treff funnet.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Fane $tabIndex av $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Neste måned';
 
   @override
@@ -61,6 +66,12 @@ class FLocalizationsNo extends FLocalizations {
 
   @override
   String get dialogSemanticsLabel => 'Dialogboks';
+
+  @override
+  String get headerBackSemanticsLabel => 'Tilbake';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Lukk';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Forrige';

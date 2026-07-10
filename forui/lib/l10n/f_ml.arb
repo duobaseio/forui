@@ -35,5 +35,8 @@
   "calendarNextYearSemanticsLabel": "അടുത്ത വർഷം",
   "calendarPreviousYearSemanticsLabel": "മുൻ വർഷം",
   "calendarNextYearsSemanticsLabel": "അടുത്ത വർഷങ്ങൾ",
-  "calendarPreviousYearsSemanticsLabel": "മുൻ വർഷങ്ങൾ"
+  "calendarPreviousYearsSemanticsLabel": "മുൻ വർഷങ്ങൾ",
+  "headerBackSemanticsLabel": "മടങ്ങുക",
+  "headerCloseSemanticsLabel": "അടയ്ക്കുക",
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount}-ൽ {tabIndex} ടാബ്"
 }

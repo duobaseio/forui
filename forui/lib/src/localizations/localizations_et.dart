@@ -24,6 +24,11 @@ class FLocalizationsEt extends FLocalizations {
   String get autocompleteNoResults => 'Vasteid ei leitud.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return '$tabCount-st $tabIndex. vahekaart';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Järgmine kuu';
 
   @override
@@ -61,6 +66,12 @@ class FLocalizationsEt extends FLocalizations {
 
   @override
   String get dialogSemanticsLabel => 'Dialoog';
+
+  @override
+  String get headerBackSemanticsLabel => 'Tagasi';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Sule';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Eelmine';

@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "ਅਗਲਾ ਸਾਲ",
   "calendarPreviousYearSemanticsLabel": "ਪਿਛਲਾ ਸਾਲ",
   "calendarNextYearsSemanticsLabel": "ਅਗਲੇ ਸਾਲ",
-  "calendarPreviousYearsSemanticsLabel": "ਪਿਛਲੇ ਸਾਲ"
+  "calendarPreviousYearsSemanticsLabel": "ਪਿਛਲੇ ਸਾਲ",
+  "headerBackSemanticsLabel": "ਪਿੱਛੇ",
+  "headerCloseSemanticsLabel": "ਬੰਦ ਕਰੋ",
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount} ਵਿੱਚੋਂ {tabIndex} ਟੈਬ"
 }

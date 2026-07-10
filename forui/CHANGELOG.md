@@ -16,6 +16,14 @@
 * Fix `FAvatarStyle.fadeInDuration` being ignored.
 
 
+### `FBottomNavigationBar` & `FBottomNavigationBarItem`
+* Add `FBottomNavigationBarData.length`.
+
+* Add `FBottomNavigationBarItem.semanticsLabel`.
+
+* Change `FBottomNavigationBarItem` to announce its position, e.g. "Tab 2 of 4", to screen readers.
+
+
 ### `FBreadcrumb`
 * Fix collapsed `FBreadcrumb` trigger not exposing its expanded state.
 
@@ -66,9 +74,19 @@
 ### `FDeterminateProgress`
 * Change `FDeterminateProgress` to jump to its value when animations are disabled.
 
+* Fix `FDeterminateProgress` not exposing its value to screen readers.
+
 
 ### `FDialog`
 * Change `FDialog` to fade without scaling when motion is reduced.
+
+
+### `FHeaderAction`
+* Add `semanticsLabel` to `FHeaderAction.x`.
+
+* Change `FHeaderAction.back` and `FHeaderAction.x` to default to localized semantics labels.
+
+* Fix `FHeaderAction.selected` not being forwarded to screen readers.
 
 
 ### `FItem` & `FTile`

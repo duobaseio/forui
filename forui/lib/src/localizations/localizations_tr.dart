@@ -24,6 +24,11 @@ class FLocalizationsTr extends FLocalizations {
   String get autocompleteNoResults => 'Eşleşme bulunamadı.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return '$tabCount sekmeden $tabIndex. sekme';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Sonraki ay';
 
   @override
@@ -61,6 +66,12 @@ class FLocalizationsTr extends FLocalizations {
 
   @override
   String get dialogSemanticsLabel => 'İletişim kutusu';
+
+  @override
+  String get headerBackSemanticsLabel => 'Geri';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Kapat';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Önceki';

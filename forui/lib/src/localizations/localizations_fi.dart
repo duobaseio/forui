@@ -24,6 +24,11 @@ class FLocalizationsFi extends FLocalizations {
   String get autocompleteNoResults => 'Ei osumia löytynyt.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Välilehti $tabIndex/$tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Seuraava kuukausi';
 
   @override
@@ -61,6 +66,12 @@ class FLocalizationsFi extends FLocalizations {
 
   @override
   String get dialogSemanticsLabel => 'Valintaikkuna';
+
+  @override
+  String get headerBackSemanticsLabel => 'Takaisin';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Sulje';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Edellinen';

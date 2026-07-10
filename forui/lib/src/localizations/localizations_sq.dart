@@ -24,6 +24,11 @@ class FLocalizationsSq extends FLocalizations {
   String get autocompleteNoResults => 'Nuk u gjetën përputhje.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Skeda $tabIndex nga $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Muaji tjetër';
 
   @override
@@ -61,6 +66,12 @@ class FLocalizationsSq extends FLocalizations {
 
   @override
   String get dialogSemanticsLabel => 'Dialogu';
+
+  @override
+  String get headerBackSemanticsLabel => 'Prapa';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Mbyll';
 
   @override
   String get paginationPreviousSemanticsLabel => 'E mëparshme';

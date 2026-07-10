@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "Növbəti il",
   "calendarPreviousYearSemanticsLabel": "Əvvəlki il",
   "calendarNextYearsSemanticsLabel": "Növbəti illər",
-  "calendarPreviousYearsSemanticsLabel": "Əvvəlki illər"
+  "calendarPreviousYearsSemanticsLabel": "Əvvəlki illər",
+  "headerBackSemanticsLabel": "Geri",
+  "headerCloseSemanticsLabel": "Bağla",
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount} tabdan {tabIndex}"
 }

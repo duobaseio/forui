@@ -35,5 +35,8 @@
   "calendarNextYearSemanticsLabel": "ಮುಂದಿನ ವರ್ಷ",
   "calendarPreviousYearSemanticsLabel": "ಹಿಂದಿನ ವರ್ಷ",
   "calendarNextYearsSemanticsLabel": "ಮುಂದಿನ ವರ್ಷಗಳು",
-  "calendarPreviousYearsSemanticsLabel": "ಹಿಂದಿನ ವರ್ಷಗಳು"
+  "calendarPreviousYearsSemanticsLabel": "ಹಿಂದಿನ ವರ್ಷಗಳು",
+  "headerBackSemanticsLabel": "ಹಿಂದೆ",
+  "headerCloseSemanticsLabel": "ಮುಚ್ಚಿರಿ",
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount} ರಲ್ಲಿ {tabIndex} ಟ್ಯಾಬ್"
 }

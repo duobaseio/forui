@@ -24,6 +24,11 @@ class FLocalizationsKm extends FLocalizations {
   String get autocompleteNoResults => 'រកមិនឃើញការផ្គូផ្គង.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'ផ្ទាំងទី $tabIndex នៃ $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'ខែបន្ទាប់';
 
   @override
@@ -61,6 +66,12 @@ class FLocalizationsKm extends FLocalizations {
 
   @override
   String get dialogSemanticsLabel => 'Dialog';
+
+  @override
+  String get headerBackSemanticsLabel => 'ថយក្រោយ';
+
+  @override
+  String get headerCloseSemanticsLabel => 'បិទ';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Previous';

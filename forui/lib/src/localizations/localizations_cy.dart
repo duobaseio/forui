@@ -24,6 +24,11 @@ class FLocalizationsCy extends FLocalizations {
   String get autocompleteNoResults => 'Dim cydweddiadau wedi\'u canfod.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Tab $tabIndex o $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mis nesaf';
 
   @override
@@ -61,6 +66,12 @@ class FLocalizationsCy extends FLocalizations {
 
   @override
   String get dialogSemanticsLabel => 'Deialog';
+
+  @override
+  String get headerBackSemanticsLabel => 'Yn ôl';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Cau';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Blaenorol';

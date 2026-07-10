@@ -24,6 +24,11 @@ class FLocalizationsTl extends FLocalizations {
   String get autocompleteNoResults => 'Walang nahanap na tugma.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Tab $tabIndex ng $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Susunod na buwan';
 
   @override
@@ -61,6 +66,12 @@ class FLocalizationsTl extends FLocalizations {
 
   @override
   String get dialogSemanticsLabel => 'Dialog';
+
+  @override
+  String get headerBackSemanticsLabel => 'Bumalik';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Isara';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Nakaraan';

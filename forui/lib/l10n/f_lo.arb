@@ -35,5 +35,8 @@
   "calendarNextYearSemanticsLabel": "ປີຕໍ່ໄປ",
   "calendarPreviousYearSemanticsLabel": "ປີກ່ອນໜ້າ",
   "calendarNextYearsSemanticsLabel": "ປີຕໍ່ໄປ",
-  "calendarPreviousYearsSemanticsLabel": "ປີກ່ອນໜ້າ"
+  "calendarPreviousYearsSemanticsLabel": "ປີກ່ອນໜ້າ",
+  "headerBackSemanticsLabel": "ກັບຄືນ",
+  "headerCloseSemanticsLabel": "ປິດ",
+  "bottomNavigationBarTabSemanticsLabel": "ແຖບທີ {tabIndex} ຈາກທັງໝົດ {tabCount}"
 }

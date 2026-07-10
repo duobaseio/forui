@@ -24,6 +24,11 @@ class FLocalizationsSw extends FLocalizations {
   String get autocompleteNoResults => 'Hakuna mechi zilizopatikana.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Kichupo cha $tabIndex kati ya $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mwezi ujao';
 
   @override
@@ -61,6 +66,12 @@ class FLocalizationsSw extends FLocalizations {
 
   @override
   String get dialogSemanticsLabel => 'Kidirisha';
+
+  @override
+  String get headerBackSemanticsLabel => 'Nyuma';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Funga';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Iliyotangulia';

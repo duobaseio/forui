@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "Anul următor",
   "calendarPreviousYearSemanticsLabel": "Anul precedent",
   "calendarNextYearsSemanticsLabel": "Anii următori",
-  "calendarPreviousYearsSemanticsLabel": "Anii precedenți"
+  "calendarPreviousYearsSemanticsLabel": "Anii precedenți",
+  "headerBackSemanticsLabel": "Înapoi",
+  "headerCloseSemanticsLabel": "Închideți",
+  "bottomNavigationBarTabSemanticsLabel": "Fila {tabIndex} din {tabCount}"
 }

@@ -35,5 +35,8 @@
   "calendarNextYearSemanticsLabel": "Επόμενο έτος",
   "calendarPreviousYearSemanticsLabel": "Προηγούμενο έτος",
   "calendarNextYearsSemanticsLabel": "Επόμενα έτη",
-  "calendarPreviousYearsSemanticsLabel": "Προηγούμενα έτη"
+  "calendarPreviousYearsSemanticsLabel": "Προηγούμενα έτη",
+  "headerBackSemanticsLabel": "Πίσω",
+  "headerCloseSemanticsLabel": "Κλείσιμο",
+  "bottomNavigationBarTabSemanticsLabel": "Καρτέλα {tabIndex} από {tabCount}"
 }

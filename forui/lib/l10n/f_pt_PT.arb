@@ -35,5 +35,8 @@
   "calendarNextYearSemanticsLabel": "Próximo ano",
   "calendarPreviousYearSemanticsLabel": "Ano anterior",
   "calendarNextYearsSemanticsLabel": "Próximos anos",
-  "calendarPreviousYearsSemanticsLabel": "Anos anteriores"
+  "calendarPreviousYearsSemanticsLabel": "Anos anteriores",
+  "headerBackSemanticsLabel": "Anterior",
+  "headerCloseSemanticsLabel": "Fechar",
+  "bottomNavigationBarTabSemanticsLabel": "Separador {tabIndex} de {tabCount}"
 }

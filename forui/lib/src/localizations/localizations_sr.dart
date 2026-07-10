@@ -24,6 +24,11 @@ class FLocalizationsSr extends FLocalizations {
   String get autocompleteNoResults => 'Није пронађено подударање.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Картица $tabIndex од $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Следећи месец';
 
   @override
@@ -61,6 +66,12 @@ class FLocalizationsSr extends FLocalizations {
 
   @override
   String get dialogSemanticsLabel => 'Дијалог';
+
+  @override
+  String get headerBackSemanticsLabel => 'Назад';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Затвори';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Previous';
@@ -142,6 +153,11 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
   String get autocompleteNoResults => 'Nije pronađeno podudaranje.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Kartica $tabIndex od $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Sledeći mesec';
 
   @override
@@ -179,6 +195,12 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
 
   @override
   String get dialogSemanticsLabel => 'Dijalog';
+
+  @override
+  String get headerBackSemanticsLabel => 'Nazad';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Zatvori';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Prethodno';

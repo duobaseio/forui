@@ -24,6 +24,11 @@ class FLocalizationsRu extends FLocalizations {
   String get autocompleteNoResults => 'Совпадений не найдено.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Вкладка $tabIndex из $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Следующий месяц';
 
   @override
@@ -61,6 +66,12 @@ class FLocalizationsRu extends FLocalizations {
 
   @override
   String get dialogSemanticsLabel => 'Диалоговое окно';
+
+  @override
+  String get headerBackSemanticsLabel => 'Назад';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Закрыть';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Previous';

@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "ឆ្នាំបន្ទាប់",
   "calendarPreviousYearSemanticsLabel": "ឆ្នាំមុន",
   "calendarNextYearsSemanticsLabel": "ឆ្នាំបន្ទាប់",
-  "calendarPreviousYearsSemanticsLabel": "ឆ្នាំមុន"
+  "calendarPreviousYearsSemanticsLabel": "ឆ្នាំមុន",
+  "headerBackSemanticsLabel": "ថយក្រោយ",
+  "headerCloseSemanticsLabel": "បិទ",
+  "bottomNavigationBarTabSemanticsLabel": "ផ្ទាំងទី {tabIndex} នៃ {tabCount}"
 }

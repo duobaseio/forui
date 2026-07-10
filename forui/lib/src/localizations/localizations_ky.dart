@@ -24,6 +24,11 @@ class FLocalizationsKy extends FLocalizations {
   String get autocompleteNoResults => 'Эч кандай дал келүү табылган жок.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return '$tabCount ичинен $tabIndex-өтмөк';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Кийинки ай';
 
   @override
@@ -61,6 +66,12 @@ class FLocalizationsKy extends FLocalizations {
 
   @override
   String get dialogSemanticsLabel => 'Dialog';
+
+  @override
+  String get headerBackSemanticsLabel => 'Артка';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Жабуу';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Previous';

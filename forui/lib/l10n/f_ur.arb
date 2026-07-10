@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "اگلا سال",
   "calendarPreviousYearSemanticsLabel": "پچھلا سال",
   "calendarNextYearsSemanticsLabel": "اگلے سال",
-  "calendarPreviousYearsSemanticsLabel": "پچھلے سال"
+  "calendarPreviousYearsSemanticsLabel": "پچھلے سال",
+  "headerBackSemanticsLabel": "پیچھے",
+  "headerCloseSemanticsLabel": "بند کریں",
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount} میں سے {tabIndex} ٹیب"
 }

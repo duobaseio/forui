@@ -35,5 +35,8 @@
   "calendarNextYearSemanticsLabel": "Հաջորդ տարի",
   "calendarPreviousYearSemanticsLabel": "Նախորդ տարի",
   "calendarNextYearsSemanticsLabel": "Հաջորդ տարիներ",
-  "calendarPreviousYearsSemanticsLabel": "Նախորդ տարիներ"
+  "calendarPreviousYearsSemanticsLabel": "Նախորդ տարիներ",
+  "headerBackSemanticsLabel": "Հետ",
+  "headerCloseSemanticsLabel": "Փակել",
+  "bottomNavigationBarTabSemanticsLabel": "Ներդիր {tabIndex}/{tabCount}"
 }

@@ -24,6 +24,11 @@ class FLocalizationsRo extends FLocalizations {
   String get autocompleteNoResults => 'Nu s-au găsit potriviri.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Fila $tabIndex din $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Luna următoare';
 
   @override
@@ -61,6 +66,12 @@ class FLocalizationsRo extends FLocalizations {
 
   @override
   String get dialogSemanticsLabel => 'Casetă de dialog';
+
+  @override
+  String get headerBackSemanticsLabel => 'Înapoi';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Închideți';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Anterior';

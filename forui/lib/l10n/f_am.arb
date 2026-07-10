@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "የሚቀጥለው ዓመት",
   "calendarPreviousYearSemanticsLabel": "ያለፈው ዓመት",
   "calendarNextYearsSemanticsLabel": "የሚቀጥሉት ዓመታት",
-  "calendarPreviousYearsSemanticsLabel": "ያለፉት ዓመታት"
+  "calendarPreviousYearsSemanticsLabel": "ያለፉት ዓመታት",
+  "headerBackSemanticsLabel": "ተመለስ",
+  "headerCloseSemanticsLabel": "ዝጋ",
+  "bottomNavigationBarTabSemanticsLabel": "ትር {tabIndex} ከ{tabCount}"
 }

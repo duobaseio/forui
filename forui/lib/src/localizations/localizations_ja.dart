@@ -24,6 +24,11 @@ class FLocalizationsJa extends FLocalizations {
   String get autocompleteNoResults => '一致するものが見つかりません.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return '$tabCount 個のタブのうち $tabIndex 個目';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => '次の月';
 
   @override
@@ -61,6 +66,12 @@ class FLocalizationsJa extends FLocalizations {
 
   @override
   String get dialogSemanticsLabel => 'Dialog';
+
+  @override
+  String get headerBackSemanticsLabel => '戻る';
+
+  @override
+  String get headerCloseSemanticsLabel => '閉じる';
 
   @override
   String get paginationPreviousSemanticsLabel => '前へ';

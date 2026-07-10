@@ -37,6 +37,11 @@ class FBottomNavigationBarItem extends StatelessWidget {
   /// The label.
   final Widget? label;
 
+  /// {@macro forui.foundation.doc_templates.semanticsLabel}
+  ///
+  /// It is strongly recommended to provide this if an item has no [label] so screen readers can announce it.
+  final String? semanticsLabel;
+
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
 
@@ -56,6 +61,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
   const FBottomNavigationBarItem({
     required this.icon,
     this.label,
+    this.semanticsLabel,
     this.style = const .context(),
     this.autofocus = false,
     this.focusNode,
@@ -67,32 +73,41 @@ class FBottomNavigationBarItem extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final FBottomNavigationBarData(:itemStyle, :selected, :index, :onChange) = .of(context);
+    final FBottomNavigationBarData(:itemStyle, :selected, :index, :length, :onChange) = .of(context);
     final style = this.style(itemStyle);
+    final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
 
-    return FTappable(
-      style: style.tappableStyle,
-      focusedOutlineStyle: style.focusedOutlineStyle,
-      autofocus: autofocus,
-      focusNode: focusNode,
-      onFocusChange: onFocusChange,
-      onHoverChange: onHoverChange,
-      onVariantChange: onVariantChange,
-      behavior: .opaque,
-      selected: selected,
-      onPress: () => onChange?.call(index),
-      builder: (_, variants, _) => Padding(
-        padding: style.padding,
-        child: Column(
-          mainAxisSize: .min,
-          spacing: style.spacing,
-          children: [
-            ExcludeSemantics(
-              child: IconTheme(data: style.iconStyle.resolve(variants), child: icon),
-            ),
-            if (label case final label?)
-              DefaultTextStyle.merge(style: style.textStyle.resolve(variants), overflow: .ellipsis, child: label),
-          ],
+    return MergeSemantics(
+      child: FTappable(
+        style: style.tappableStyle,
+        focusedOutlineStyle: style.focusedOutlineStyle,
+        semanticsLabel: semanticsLabel,
+        autofocus: autofocus,
+        focusNode: focusNode,
+        onFocusChange: onFocusChange,
+        onHoverChange: onHoverChange,
+        onVariantChange: onVariantChange,
+        behavior: .opaque,
+        selected: selected,
+        onPress: () => onChange?.call(index),
+        builder: (_, variants, _) => Padding(
+          padding: style.padding,
+          child: Column(
+            mainAxisSize: .min,
+            children: [
+              ExcludeSemantics(
+                child: IconTheme(data: style.iconStyle.resolve(variants), child: icon),
+              ),
+              if (label case final label?)
+                Padding(
+                  padding: .only(top: style.spacing),
+                  child: DefaultTextStyle.merge(style: style.textStyle.resolve(variants), overflow: .ellipsis, child: label),
+                ),
+              // We insert semantics as a separate widget here so that the order is always '<label>, <position>',
+              // regardless of whether a label and/or semantics label is provided.
+              Semantics(label: localizations.bottomNavigationBarTabSemanticsLabel(index + 1, length)),
+            ],
+          ),
         ),
       ),
     );
@@ -103,6 +118,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
+      ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(ObjectFlagProperty.has('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))

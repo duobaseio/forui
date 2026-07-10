@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "Seuraava vuosi",
   "calendarPreviousYearSemanticsLabel": "Edellinen vuosi",
   "calendarNextYearsSemanticsLabel": "Seuraavat vuodet",
-  "calendarPreviousYearsSemanticsLabel": "Edelliset vuodet"
+  "calendarPreviousYearsSemanticsLabel": "Edelliset vuodet",
+  "headerBackSemanticsLabel": "Takaisin",
+  "headerCloseSemanticsLabel": "Sulje",
+  "bottomNavigationBarTabSemanticsLabel": "Välilehti {tabIndex}/{tabCount}"
 }

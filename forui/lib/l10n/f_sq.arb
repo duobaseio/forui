@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "Viti tjetër",
   "calendarPreviousYearSemanticsLabel": "Viti i mëparshëm",
   "calendarNextYearsSemanticsLabel": "Vitet e ardhshme",
-  "calendarPreviousYearsSemanticsLabel": "Vitet e mëparshme"
+  "calendarPreviousYearsSemanticsLabel": "Vitet e mëparshme",
+  "headerBackSemanticsLabel": "Prapa",
+  "headerCloseSemanticsLabel": "Mbyll",
+  "bottomNavigationBarTabSemanticsLabel": "Skeda {tabIndex} nga {tabCount}"
 }

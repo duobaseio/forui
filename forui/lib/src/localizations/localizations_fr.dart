@@ -24,6 +24,11 @@ class FLocalizationsFr extends FLocalizations {
   String get autocompleteNoResults => 'Aucune correspondance trouvée.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Onglet $tabIndex sur $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mois suivant';
 
   @override
@@ -61,6 +66,12 @@ class FLocalizationsFr extends FLocalizations {
 
   @override
   String get dialogSemanticsLabel => 'Boîte de dialogue';
+
+  @override
+  String get headerBackSemanticsLabel => 'Retour';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Fermer';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Précédent';
@@ -142,6 +153,11 @@ class FLocalizationsFrCa extends FLocalizationsFr {
   String get autocompleteNoResults => 'Aucune correspondance trouvée.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Onglet $tabIndex sur $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mois suivant';
 
   @override
@@ -179,6 +195,12 @@ class FLocalizationsFrCa extends FLocalizationsFr {
 
   @override
   String get dialogSemanticsLabel => 'Boîte de dialogue';
+
+  @override
+  String get headerBackSemanticsLabel => 'Retour';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Fermer';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Précédent';

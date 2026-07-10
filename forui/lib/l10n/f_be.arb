@@ -35,5 +35,8 @@
   "calendarNextYearSemanticsLabel": "Наступны год",
   "calendarPreviousYearSemanticsLabel": "Папярэдні год",
   "calendarNextYearsSemanticsLabel": "Наступныя гады",
-  "calendarPreviousYearsSemanticsLabel": "Папярэднія гады"
+  "calendarPreviousYearsSemanticsLabel": "Папярэднія гады",
+  "headerBackSemanticsLabel": "Назад",
+  "headerCloseSemanticsLabel": "Закрыць",
+  "bottomNavigationBarTabSemanticsLabel": "Укладка {tabIndex} з {tabCount}"
 }

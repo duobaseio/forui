@@ -35,5 +35,8 @@
   "calendarNextYearSemanticsLabel": "Дараа жил",
   "calendarPreviousYearSemanticsLabel": "Өмнөх жил",
   "calendarNextYearsSemanticsLabel": "Дараагийн жилүүд",
-  "calendarPreviousYearsSemanticsLabel": "Өмнөх жилүүд"
+  "calendarPreviousYearsSemanticsLabel": "Өмнөх жилүүд",
+  "headerBackSemanticsLabel": "Буцах",
+  "headerCloseSemanticsLabel": "Хаах",
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount}-н {tabIndex}-р таб"
 }

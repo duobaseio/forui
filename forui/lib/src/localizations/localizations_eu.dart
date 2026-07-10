@@ -24,6 +24,11 @@ class FLocalizationsEu extends FLocalizations {
   String get autocompleteNoResults => 'Ez da bat-etortzerik aurkitu.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return '$tabCount/$tabIndex fitxa';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Hurrengo hilabetea';
 
   @override
@@ -61,6 +66,12 @@ class FLocalizationsEu extends FLocalizations {
 
   @override
   String get dialogSemanticsLabel => 'Leihoa';
+
+  @override
+  String get headerBackSemanticsLabel => 'Atzera';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Itxi';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Aurrekoa';

@@ -35,5 +35,8 @@
   "calendarNextYearSemanticsLabel": "આગલું વર્ષ",
   "calendarPreviousYearSemanticsLabel": "પાછલું વર્ષ",
   "calendarNextYearsSemanticsLabel": "આગલાં વર્ષ",
-  "calendarPreviousYearsSemanticsLabel": "પાછલાં વર્ષ"
+  "calendarPreviousYearsSemanticsLabel": "પાછલાં વર્ષ",
+  "headerBackSemanticsLabel": "પાછળ",
+  "headerCloseSemanticsLabel": "બંધ કરો",
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount} માંથી {tabIndex} ટૅબ"
 }

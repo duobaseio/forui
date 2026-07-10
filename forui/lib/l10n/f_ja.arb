@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "翌年",
   "calendarPreviousYearSemanticsLabel": "前年",
   "calendarNextYearsSemanticsLabel": "次の数年",
-  "calendarPreviousYearsSemanticsLabel": "前の数年"
+  "calendarPreviousYearsSemanticsLabel": "前の数年",
+  "headerBackSemanticsLabel": "戻る",
+  "headerCloseSemanticsLabel": "閉じる",
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount} 個のタブのうち {tabIndex} 個目"
 }

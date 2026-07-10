@@ -60,6 +60,9 @@ class FDefaultLocalizations extends FLocalizations {
   String get autocompleteNoResults => 'No matches found.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) => 'Tab $tabIndex of $tabCount';
+
+  @override
   String barrierOnTapHint(String modalRouteContentName) => 'Close $modalRouteContentName';
 
   @override
@@ -67,6 +70,12 @@ class FDefaultLocalizations extends FLocalizations {
 
   @override
   String get dialogSemanticsLabel => 'Dialog';
+
+  @override
+  String get headerBackSemanticsLabel => 'Back';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Close';
 
   @override
   String get calendarNextMonthSemanticsLabel => 'Next month';

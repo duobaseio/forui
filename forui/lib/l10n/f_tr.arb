@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "Sonraki yıl",
   "calendarPreviousYearSemanticsLabel": "Önceki yıl",
   "calendarNextYearsSemanticsLabel": "Sonraki yıllar",
-  "calendarPreviousYearsSemanticsLabel": "Önceki yıllar"
+  "calendarPreviousYearsSemanticsLabel": "Önceki yıllar",
+  "headerBackSemanticsLabel": "Geri",
+  "headerCloseSemanticsLabel": "Kapat",
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount} sekmeden {tabIndex}. sekme"
 }

@@ -35,5 +35,8 @@
   "calendarNextYearSemanticsLabel": "Следваща година",
   "calendarPreviousYearSemanticsLabel": "Предишна година",
   "calendarNextYearsSemanticsLabel": "Следващи години",
-  "calendarPreviousYearsSemanticsLabel": "Предишни години"
+  "calendarPreviousYearsSemanticsLabel": "Предишни години",
+  "headerBackSemanticsLabel": "Назад",
+  "headerCloseSemanticsLabel": "Затваряне",
+  "bottomNavigationBarTabSemanticsLabel": "Раздел {tabIndex} от {tabCount}"
 }

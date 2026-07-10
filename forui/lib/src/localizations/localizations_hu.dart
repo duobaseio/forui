@@ -24,6 +24,11 @@ class FLocalizationsHu extends FLocalizations {
   String get autocompleteNoResults => 'Nincs találat.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return '$tabCount/$tabIndex. lap';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Következő hónap';
 
   @override
@@ -61,6 +66,12 @@ class FLocalizationsHu extends FLocalizations {
 
   @override
   String get dialogSemanticsLabel => 'Párbeszédablak';
+
+  @override
+  String get headerBackSemanticsLabel => 'Vissza';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Bezárás';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Előző';

@@ -35,5 +35,8 @@
   "calendarNextYearSemanticsLabel": "سال بعد",
   "calendarPreviousYearSemanticsLabel": "سال قبل",
   "calendarNextYearsSemanticsLabel": "سال‌های بعد",
-  "calendarPreviousYearsSemanticsLabel": "سال‌های قبل"
+  "calendarPreviousYearsSemanticsLabel": "سال‌های قبل",
+  "headerBackSemanticsLabel": "برگشت",
+  "headerCloseSemanticsLabel": "بستن",
+  "bottomNavigationBarTabSemanticsLabel": "برگه {tabIndex} از {tabCount}"
 }

@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "Hurrengo urtea",
   "calendarPreviousYearSemanticsLabel": "Aurreko urtea",
   "calendarNextYearsSemanticsLabel": "Hurrengo urteak",
-  "calendarPreviousYearsSemanticsLabel": "Aurreko urteak"
+  "calendarPreviousYearsSemanticsLabel": "Aurreko urteak",
+  "headerBackSemanticsLabel": "Atzera",
+  "headerCloseSemanticsLabel": "Itxi",
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount}/{tabIndex} fitxa"
 }

@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "Volgend jaar",
   "calendarPreviousYearSemanticsLabel": "Vorig jaar",
   "calendarNextYearsSemanticsLabel": "Volgende jaren",
-  "calendarPreviousYearsSemanticsLabel": "Vorige jaren"
+  "calendarPreviousYearsSemanticsLabel": "Vorige jaren",
+  "headerBackSemanticsLabel": "Terug",
+  "headerCloseSemanticsLabel": "Sluiten",
+  "bottomNavigationBarTabSemanticsLabel": "Tabblad {tabIndex} van {tabCount}"
 }

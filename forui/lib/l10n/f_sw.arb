@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "Mwaka unaofuata",
   "calendarPreviousYearSemanticsLabel": "Mwaka uliopita",
   "calendarNextYearsSemanticsLabel": "Miaka inayofuata",
-  "calendarPreviousYearsSemanticsLabel": "Miaka iliyopita"
+  "calendarPreviousYearsSemanticsLabel": "Miaka iliyopita",
+  "headerBackSemanticsLabel": "Nyuma",
+  "headerCloseSemanticsLabel": "Funga",
+  "bottomNavigationBarTabSemanticsLabel": "Kichupo cha {tabIndex} kati ya {tabCount}"
 }

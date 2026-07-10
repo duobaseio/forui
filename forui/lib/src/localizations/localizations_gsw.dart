@@ -24,6 +24,11 @@ class FLocalizationsGsw extends FLocalizations {
   String get autocompleteNoResults => 'Kei Überiistimmige gfunde.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Tab $tabIndex von $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Nächste Monet';
 
   @override
@@ -61,6 +66,12 @@ class FLocalizationsGsw extends FLocalizations {
 
   @override
   String get dialogSemanticsLabel => 'Dialogfeld';
+
+  @override
+  String get headerBackSemanticsLabel => 'Zurück';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Schliessen';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Vorig';

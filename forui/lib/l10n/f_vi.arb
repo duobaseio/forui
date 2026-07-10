@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "Năm sau",
   "calendarPreviousYearSemanticsLabel": "Năm trước",
   "calendarNextYearsSemanticsLabel": "Các năm sau",
-  "calendarPreviousYearsSemanticsLabel": "Các năm trước"
+  "calendarPreviousYearsSemanticsLabel": "Các năm trước",
+  "headerBackSemanticsLabel": "Quay lại",
+  "headerCloseSemanticsLabel": "Đóng",
+  "bottomNavigationBarTabSemanticsLabel": "Thẻ {tabIndex} trong tổng số {tabCount}"
 }

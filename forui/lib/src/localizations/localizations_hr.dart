@@ -24,6 +24,11 @@ class FLocalizationsHr extends FLocalizations {
   String get autocompleteNoResults => 'Nisu pronađena poklapanja.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Kartica $tabIndex od $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Sljedeći mjesec';
 
   @override
@@ -61,6 +66,12 @@ class FLocalizationsHr extends FLocalizations {
 
   @override
   String get dialogSemanticsLabel => 'Dijalog';
+
+  @override
+  String get headerBackSemanticsLabel => 'Natrag';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Zatvori';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Prethodno';

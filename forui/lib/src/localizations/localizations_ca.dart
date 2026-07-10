@@ -24,6 +24,11 @@ class FLocalizationsCa extends FLocalizations {
   String get autocompleteNoResults => 'No s\'han trobat coincidències.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Pestanya $tabIndex de $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mes següent';
 
   @override
@@ -61,6 +66,12 @@ class FLocalizationsCa extends FLocalizations {
 
   @override
   String get dialogSemanticsLabel => 'Diàleg';
+
+  @override
+  String get headerBackSemanticsLabel => 'Enrere';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Tanca';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Previous';
