@@ -38,6 +38,10 @@
 * Change `FCircularProgress` to render statically when animations are disabled.
 
 
+### `FCollapsible`
+* Fix `FCollapsible` keeping collapsed content focusable and announced by screen readers.
+
+
 ### `FColors`
 * **Breaking** Remove all predefined color schemes except `FColors.neutralLight` and `FColors.neutralDark`. Run
   `dart run forui theme create` to generate a custom theme.

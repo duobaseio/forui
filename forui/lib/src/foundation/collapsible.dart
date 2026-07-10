@@ -29,7 +29,13 @@ class FCollapsible extends StatelessWidget {
   Widget build(BuildContext context) => _Expandable(
     axis: axis,
     value: value,
-    child: ClipRect(clipper: _Clipper(value, axis), child: child),
+    child: ExcludeSemantics(
+      excluding: value == 0,
+      child: ExcludeFocus(
+        excluding: value == 0,
+        child: ClipRect(clipper: _Clipper(value, axis), child: child),
+      ),
+    ),
   );
 
   @override
