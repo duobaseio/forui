@@ -10,9 +10,20 @@ Widget build(BuildContext context) => MaterialApp(
   home: Scaffold(
     body: Center(
       child: FCard(
-        title: const Text('Mixed Widgets'),
-        subtitle: const Text('Using both Forui and Material widgets together'),
-        child: ElevatedButton(onPressed: () {}, child: const Text('Material Button')),
+        builder: (context, style, _) => Padding(
+          padding: style.padding,
+          child: Column(
+            mainAxisSize: .min,
+            crossAxisAlignment: .start,
+            children: [
+              Text('Mixed Widgets', style: style.titleTextStyle),
+              const SizedBox(height: 2),
+              Text('Using both Forui and Material widgets together', style: style.subtitleTextStyle),
+              const SizedBox(height: 6),
+              ElevatedButton(onPressed: () {}, child: const Text('Material Button')),
+            ],
+          ),
+        ),
       ),
     ),
   ),

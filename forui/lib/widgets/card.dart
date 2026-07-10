@@ -5,5 +5,4 @@
 /// See https://forui.dev/docs/widgets/data/card for working examples.
 library forui.widgets.card;
 
-export '../src/widgets/card/card.dart';
-export '../src/widgets/card/card_content.dart' hide Content;
+export '../src/widgets/card.dart';

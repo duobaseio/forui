@@ -138,22 +138,8 @@ void main() {
         child: FTabs(
           control: const .managed(initial: 1),
           children: [
-            FTabEntry(
-              label: const Text('Account'),
-              child: FCard(
-                title: const Text('Account'),
-                subtitle: const Text('Make changes to your account here. Click save when you are done.'),
-                child: Container(color: Colors.blue, height: 100),
-              ),
-            ),
-            FTabEntry(
-              label: const Text('Password'),
-              child: FCard(
-                title: const Text('Password'),
-                subtitle: const Text('Change your password here. After saving, you will be logged out.'),
-                child: Container(color: Colors.red, height: 100),
-              ),
-            ),
+            FTabEntry(label: const Text('Account'), child: Container(color: Colors.blue, height: 100)),
+            FTabEntry(label: const Text('Password'), child: Container(color: Colors.red, height: 100)),
           ],
         ),
       ),

@@ -5,7 +5,6 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/inner_path_clipper.dart';
-import 'package:forui/src/widgets/card/card_content.dart';
 
 part 'card.design.dart';
 
@@ -13,10 +12,20 @@ part 'card.design.dart';
 ///
 /// Cards are typically used to group related information together.
 ///
+/// ## CLI
+/// To generate a layout for this widget:
+///
+/// ```shell
+/// dart run forui snippet create card
+/// ```
+///
 /// See:
-/// * https://forui.dev/docs/widgets/data/card for working examples.
+/// * https://forui.dev/docs/widgets/data/card for working examples and generatable layouts for this widget.
 /// * [FCardStyle] for customizing a card's appearance.
 class FCard extends StatelessWidget {
+  /// The default [builder] that returns [child] unchanged.
+  static Widget defaultBuilder(BuildContext _, FCardStyle _, Widget? child) => child!;
+
   /// The style. Defaults to [FThemeData.cardStyle].
   ///
   /// To modify the current style:
@@ -45,46 +54,37 @@ class FCard extends StatelessWidget {
   /// Defaults to [Clip.none].
   final Clip clipBehavior;
 
-  /// The child.
-  final Widget child;
-
-  /// Creates a [FCard] with a title, subtitle, and [child].
+  /// The builder for the card's content.
   ///
-  /// The card's layout is as follows:
-  /// ```diagram
-  /// |---------------------------|
-  /// |  [image]                  |
-  /// |                           |
-  /// |  [title]                  |
-  /// |  [subtitle]               |
-  /// |                           |
-  /// |  [child]                  |
-  /// |---------------------------|
+  /// Defaults to returning the given child.
+  final ValueWidgetBuilder<FCardStyle> builder;
+
+  /// The child.
+  final Widget? child;
+
+  /// Creates a [FCard].
+  ///
+  /// ## CLI
+  /// To generate a layout for this widget:
+  ///
+  /// ```shell
+  /// dart run forui snippet create card
   /// ```
-  FCard({
-    Widget? image,
-    Widget? title,
-    Widget? subtitle,
-    Widget? child,
-    MainAxisSize mainAxisSize = .min,
+  ///
+  /// See https://forui.dev/docs/widgets/data/card for other generatable layouts.
+  const FCard({
     this.style = const .context(),
     this.clipBehavior = .none,
+    this.builder = defaultBuilder,
+    this.child,
     super.key,
-  }) : child = Content(
-         image: image,
-         title: title,
-         subtitle: subtitle,
-         mainAxisSize: mainAxisSize,
-         style: style,
-         child: child,
-       );
-
-  /// Creates a [FCard] with custom content.
-  const FCard.raw({required this.child, this.style = const .context(), this.clipBehavior = .none, super.key});
+  }) : assert(builder != defaultBuilder || child != null, 'Either builder or child must be provided.');
 
   @override
   Widget build(BuildContext context) {
-    final decoration = style(context.theme.cardStyle).decoration;
+    final style = this.style(context.theme.cardStyle);
+    final decoration = style.decoration;
+    final child = builder(context, style, this.child);
     return DecoratedBox(
       decoration: decoration,
       child: clipBehavior == .none
@@ -102,7 +102,8 @@ class FCard extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(EnumProperty('clipBehavior', clipBehavior));
+      ..add(EnumProperty('clipBehavior', clipBehavior))
+      ..add(ObjectFlagProperty.has('builder', builder));
   }
 }
 
@@ -112,12 +113,25 @@ class FCardStyle with Diagnosticable, _$FCardStyleFunctions {
   @override
   final Decoration decoration;
 
-  /// The card content's style.
+  /// The title's [TextStyle].
   @override
-  final FCardContentStyle contentStyle;
+  final TextStyle titleTextStyle;
+
+  /// The subtitle's [TextStyle].
+  @override
+  final TextStyle subtitleTextStyle;
+
+  /// The padding. Defaults to `EdgeInsets.all(16)`.
+  @override
+  final EdgeInsetsGeometry padding;
 
   /// Creates a [FCardStyle].
-  FCardStyle({required this.decoration, required this.contentStyle});
+  FCardStyle({
+    required this.decoration,
+    required this.titleTextStyle,
+    required this.subtitleTextStyle,
+    this.padding = const .all(16),
+  });
 
   /// Creates a [FCardStyle] that inherits its properties.
   factory FCardStyle.inherit({
@@ -125,34 +139,17 @@ class FCardStyle with Diagnosticable, _$FCardStyleFunctions {
     required FTypography typography,
     required FStyle style,
     required bool touch,
-  }) {
-    TextStyle titleTextStyle;
-    double titleSpacing;
-    double subtitleSpacing;
-    if (touch) {
-      titleTextStyle = typography.display.lg.copyWith(fontWeight: .w500, color: colors.foreground);
-      titleSpacing = 4;
-      subtitleSpacing = 8;
-    } else {
-      titleTextStyle = typography.display.md.copyWith(fontWeight: .w500, color: colors.foreground);
-      titleSpacing = 2;
-      subtitleSpacing = 6;
-    }
-
-    return FCardStyle(
-      decoration: ShapeDecoration(
-        shape: RoundedSuperellipseBorder(
-          side: BorderSide(color: colors.border, width: style.borderWidth),
-          borderRadius: style.borderRadius.lg,
-        ),
-        color: colors.card,
+  }) => FCardStyle(
+    decoration: ShapeDecoration(
+      shape: RoundedSuperellipseBorder(
+        side: BorderSide(color: colors.border, width: style.borderWidth),
+        borderRadius: style.borderRadius.lg,
       ),
-      contentStyle: FCardContentStyle(
-        titleTextStyle: titleTextStyle,
-        subtitleTextStyle: typography.body.sm.copyWith(color: colors.mutedForeground),
-        titleSpacing: titleSpacing,
-        subtitleSpacing: subtitleSpacing,
-      ),
-    );
-  }
+      color: colors.card,
+    ),
+    titleTextStyle: touch
+        ? typography.display.lg.copyWith(fontWeight: .w500, color: colors.foreground)
+        : typography.display.md.copyWith(fontWeight: .w500, color: colors.foreground),
+    subtitleTextStyle: typography.body.sm.copyWith(color: colors.mutedForeground),
+  );
 }

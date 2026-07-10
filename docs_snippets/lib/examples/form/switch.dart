@@ -100,7 +100,7 @@ class _FormSwitchPageState extends StatefulExampleState<FormSwitchPage> {
             ),
           ),
           const SizedBox(height: 15),
-          FCard.raw(
+          FCard(
             child: Padding(
               padding: const .fromLTRB(16, 12, 16, 16),
               child: Row(
@@ -139,7 +139,7 @@ class _FormSwitchPageState extends StatefulExampleState<FormSwitchPage> {
             ),
           ),
           const SizedBox(height: 12),
-          FCard.raw(
+          FCard(
             child: Padding(
               padding: const .fromLTRB(16, 12, 16, 16),
               child: Row(

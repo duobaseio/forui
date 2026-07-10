@@ -69,6 +69,8 @@ class _AppRouter extends RootStackRouter {
     AutoRoute(path: '/data/calendar/none', page: NoneCalendarRoute.page),
     AutoRoute(path: '/data/calendar/footer', page: FooterCalendarRoute.page),
     AutoRoute(path: '/data/card/default', page: CardRoute.page),
+    AutoRoute(path: '/data/card/title', page: TitleCardRoute.page),
+    AutoRoute(path: '/data/card/media', page: MediaCardRoute.page),
     AutoRoute(path: '/data/item/default', page: ItemRoute.page),
     AutoRoute(path: '/data/item/disabled', page: ItemDisabledRoute.page),
     AutoRoute(path: '/data/item/untappable', page: ItemUntappableRoute.page),

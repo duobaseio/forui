@@ -133,22 +133,33 @@ class RawToastPage extends Example {
       duration: null,
       builder: (context, toast) => IntrinsicHeight(
         child: FCard(
-          style: .delta(
-            contentStyle: .delta(
-              titleTextStyle: .value(
-                context.theme.typography.body.sm.copyWith(color: context.theme.colors.primary, fontWeight: .w600),
-              ),
+          builder: (context, style, _) => Padding(
+            padding: style.padding,
+            child: Column(
+              mainAxisSize: .min,
+              crossAxisAlignment: .start,
+              children: [
+                Text(
+                  'Event has been created',
+                  style: context.theme.typography.body.sm.copyWith(
+                    color: context.theme.colors.primary,
+                    fontWeight: .w600,
+                  ),
+                ),
+                const SizedBox(height: 2),
+                Padding(
+                  padding: const .symmetric(vertical: 5),
+                  child: Text(
+                    'This is a more detailed description that provides comprehensive context and additional information '
+                    'about the notification, explaining what happened and what the user might expect next.',
+                    style: style.subtitleTextStyle,
+                  ),
+                ),
+                const SizedBox(height: 6),
+                FButton(onPress: () => toast.dismiss(), child: const Text('undo')),
+              ],
             ),
           ),
-          title: const Text('Event has been created'),
-          subtitle: const Padding(
-            padding: .symmetric(vertical: 5),
-            child: Text(
-              'This is a more detailed description that provides comprehensive context and additional information '
-              'about the notification, explaining what happened and what the user might expect next.',
-            ),
-          ),
-          child: FButton(onPress: () => toast.dismiss(), child: const Text('undo')),
         ),
       ),
     ),

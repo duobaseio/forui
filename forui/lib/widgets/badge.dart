@@ -5,5 +5,4 @@
 /// See https://forui.dev/docs/widgets/data/badge for working examples.
 library forui.widgets.badge;
 
-export '../src/widgets/badge/badge.dart';
-export '../src/widgets/badge/badge_content.dart' hide Content;
+export '../src/widgets/badge.dart';

@@ -8,18 +8,7 @@ final card = FCard(
   // {@category "Core"}
   style: const .delta(decoration: .shapeDelta(color: Color(0xFFFFFFFF))),
   clipBehavior: .none,
-  mainAxisSize: .min,
-  image: const Placeholder(),
-  title: const Text('Title'),
-  subtitle: const Text('Subtitle'),
+  builder: (context, style, child) => child!,
   child: const Text('Content'),
-  // {@endcategory}
-);
-
-const raw = FCard.raw(
-  // {@category "Core"}
-  style: .delta(decoration: .shapeDelta(color: Color(0xFFFFFFFF))),
-  clipBehavior: .none,
-  child: Text('Content'),
   // {@endcategory}
 );

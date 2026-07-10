@@ -6,7 +6,6 @@ import 'package:meta/meta.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
 import 'package:forui/src/theme/variant.dart';
-import 'package:forui/src/widgets/badge/badge_content.dart';
 
 @Variants('FBadge', {
   'primary': (2, 'The primary badge style.'),
@@ -61,7 +60,12 @@ class FBadge extends StatelessWidget {
 
   /// Creates a [FBadge].
   FBadge({required Widget child, this.variant = .primary, this.style = const .context(), super.key})
-    : builder = ((_, style) => Content(style: style, child: child));
+    : builder = ((_, style) => Center(
+        child: Padding(
+          padding: style.padding,
+          child: DefaultTextStyle.merge(style: style.labelTextStyle, child: child),
+        ),
+      ));
 
   /// Creates a [FBadge] with a custom builder.
   const FBadge.raw({required this.builder, this.variant = .primary, this.style = const .context(), super.key});
@@ -118,24 +122,23 @@ extension type FBadgeStyles(FVariants<FBadgeVariantConstraint, FBadgeVariant, FB
             shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.pill),
             color: colors.primary,
           ),
-          contentStyle: FBadgeContentStyle(
-            labelTextStyle: typography.body.xs.copyWith(color: colors.primaryForeground, fontWeight: .w500),
-            padding: padding,
-          ),
+          labelTextStyle: typography.body.xs.copyWith(color: colors.primaryForeground, fontWeight: .w500),
+          padding: padding,
         ),
         variants: {
           [.primary]: const .delta(),
           [.secondary]: .delta(
             decoration: .shapeDelta(color: colors.secondary),
-            contentStyle: .delta(labelTextStyle: .delta(color: colors.secondaryForeground)),
+            labelTextStyle: .delta(color: colors.secondaryForeground),
           ),
           [.destructive]: FBadgeStyle(
             decoration: destructiveDecoration,
-            contentStyle: FBadgeContentStyle(labelTextStyle: destructiveTextStyle, padding: padding),
+            labelTextStyle: destructiveTextStyle,
+            padding: padding,
           ),
           [.outline]: .delta(
             decoration: .shapeDelta(shape: outlineShape, color: colors.card),
-            contentStyle: .delta(labelTextStyle: .delta(color: colors.foreground)),
+            labelTextStyle: .delta(color: colors.foreground),
           ),
         },
       ),
@@ -161,10 +164,14 @@ final class FBadgeStyle with Diagnosticable, _$FBadgeStyleFunctions {
   @override
   final Decoration decoration;
 
-  /// The content's style.
+  /// The label's [TextStyle].
   @override
-  final FBadgeContentStyle contentStyle;
+  final TextStyle labelTextStyle;
+
+  /// The padding.
+  @override
+  final EdgeInsetsGeometry padding;
 
   /// Creates a [FBadgeStyle].
-  const FBadgeStyle({required this.decoration, required this.contentStyle});
+  const FBadgeStyle({required this.decoration, required this.labelTextStyle, required this.padding});
 }

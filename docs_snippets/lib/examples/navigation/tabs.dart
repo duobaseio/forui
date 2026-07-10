@@ -22,32 +22,52 @@ class TabsPage extends Example {
             .entry(
               label: const Text('Account'),
               child: FCard(
-                title: const Text('Account'),
-                subtitle: const Text('Make changes to your account here. Click save when you are done.'),
-                child: Column(
-                  children: [
-                    const FTextField(label: Text('Name'), hint: 'John Renalo'),
-                    const SizedBox(height: 10),
-                    const FTextField(label: Text('Email'), hint: 'john@doe.com'),
-                    const SizedBox(height: 16),
-                    FButton(child: const Text('Save'), onPress: () {}),
-                  ],
+                builder: (context, style, _) => Padding(
+                  padding: style.padding,
+                  child: Column(
+                    mainAxisSize: .min,
+                    crossAxisAlignment: .start,
+                    children: [
+                      Text('Account', style: style.titleTextStyle),
+                      const SizedBox(height: 2),
+                      Text(
+                        'Make changes to your account here. Click save when you are done.',
+                        style: style.subtitleTextStyle,
+                      ),
+                      const SizedBox(height: 6),
+                      const FTextField(label: Text('Name'), hint: 'John Renalo'),
+                      const SizedBox(height: 10),
+                      const FTextField(label: Text('Email'), hint: 'john@doe.com'),
+                      const SizedBox(height: 16),
+                      FButton(child: const Text('Save'), onPress: () {}),
+                    ],
+                  ),
                 ),
               ),
             ),
             .entry(
               label: const Text('Password'),
               child: FCard(
-                title: const Text('Password'),
-                subtitle: const Text('Change your password here. After saving, you will be logged out.'),
-                child: Column(
-                  children: [
-                    const FTextField(label: Text('Current password')),
-                    const SizedBox(height: 10),
-                    const FTextField(label: Text('New password')),
-                    const SizedBox(height: 16),
-                    FButton(child: const Text('Save'), onPress: () {}),
-                  ],
+                builder: (context, style, _) => Padding(
+                  padding: style.padding,
+                  child: Column(
+                    mainAxisSize: .min,
+                    crossAxisAlignment: .start,
+                    children: [
+                      Text('Password', style: style.titleTextStyle),
+                      const SizedBox(height: 2),
+                      Text(
+                        'Change your password here. After saving, you will be logged out.',
+                        style: style.subtitleTextStyle,
+                      ),
+                      const SizedBox(height: 6),
+                      const FTextField(label: Text('Current password')),
+                      const SizedBox(height: 10),
+                      const FTextField(label: Text('New password')),
+                      const SizedBox(height: 16),
+                      FButton(child: const Text('Save'), onPress: () {}),
+                    ],
+                  ),
                 ),
               ),
             ),
@@ -77,32 +97,52 @@ class SwipeableTabsPage extends Example {
           .entry(
             label: const Text('Account'),
             child: FCard(
-              title: const Text('Account'),
-              subtitle: const Text('Make changes to your account here. Click save when you are done.'),
-              child: Column(
-                children: [
-                  const FTextField(label: Text('Name'), hint: 'John Renalo'),
-                  const SizedBox(height: 10),
-                  const FTextField(label: Text('Email'), hint: 'john@doe.com'),
-                  const SizedBox(height: 16),
-                  FButton(child: const Text('Save'), onPress: () {}),
-                ],
+              builder: (context, style, _) => Padding(
+                padding: style.padding,
+                child: Column(
+                  mainAxisSize: .min,
+                  crossAxisAlignment: .start,
+                  children: [
+                    Text('Account', style: style.titleTextStyle),
+                    const SizedBox(height: 2),
+                    Text(
+                      'Make changes to your account here. Click save when you are done.',
+                      style: style.subtitleTextStyle,
+                    ),
+                    const SizedBox(height: 6),
+                    const FTextField(label: Text('Name'), hint: 'John Renalo'),
+                    const SizedBox(height: 10),
+                    const FTextField(label: Text('Email'), hint: 'john@doe.com'),
+                    const SizedBox(height: 16),
+                    FButton(child: const Text('Save'), onPress: () {}),
+                  ],
+                ),
               ),
             ),
           ),
           .entry(
             label: const Text('Password'),
             child: FCard(
-              title: const Text('Password'),
-              subtitle: const Text('Change your password here. After saving, you will be logged out.'),
-              child: Column(
-                children: [
-                  const FTextField(label: Text('Current password')),
-                  const SizedBox(height: 10),
-                  const FTextField(label: Text('New password')),
-                  const SizedBox(height: 16),
-                  FButton(child: const Text('Save'), onPress: () {}),
-                ],
+              builder: (context, style, _) => Padding(
+                padding: style.padding,
+                child: Column(
+                  mainAxisSize: .min,
+                  crossAxisAlignment: .start,
+                  children: [
+                    Text('Password', style: style.titleTextStyle),
+                    const SizedBox(height: 2),
+                    Text(
+                      'Change your password here. After saving, you will be logged out.',
+                      style: style.subtitleTextStyle,
+                    ),
+                    const SizedBox(height: 6),
+                    const FTextField(label: Text('Current password')),
+                    const SizedBox(height: 10),
+                    const FTextField(label: Text('New password')),
+                    const SizedBox(height: 16),
+                    FButton(child: const Text('Save'), onPress: () {}),
+                  ],
+                ),
               ),
             ),
           ),

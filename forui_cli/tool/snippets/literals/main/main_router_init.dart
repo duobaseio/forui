@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forui/forui.dart';
 
-import 'theme.dart';
+import '../theme.dart';
 
 void main() {
   runApp(const Application());

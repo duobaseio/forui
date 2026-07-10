@@ -45,12 +45,22 @@ class _CollapsiblePageState extends StatefulExampleState<CollapsiblePage> with S
         builder: (context, child) => FCollapsible(
           value: _animation.value,
           child: FCard(
-            title: const Text('Lorem ipsum'),
-            child: const Text(
-              'Sed ut perspiciatis unde omnis iste natus error sit voluptatem '
-              'accusantium doloremque laudantium, totam rem aperiam, eaque ipsa '
-              'quae ab illo inventore veritatis et quasi architecto beatae vitae '
-              'dicta sunt explicabo.',
+            builder: (context, style, _) => Padding(
+              padding: style.padding,
+              child: Column(
+                mainAxisSize: .min,
+                crossAxisAlignment: .start,
+                children: [
+                  Text('Lorem ipsum', style: style.titleTextStyle),
+                  const SizedBox(height: 6),
+                  const Text(
+                    'Sed ut perspiciatis unde omnis iste natus error sit voluptatem '
+                    'accusantium doloremque laudantium, totam rem aperiam, eaque ipsa '
+                    'quae ab illo inventore veritatis et quasi architecto beatae vitae '
+                    'dicta sunt explicabo.',
+                  ),
+                ],
+              ),
             ),
           ),
         ),

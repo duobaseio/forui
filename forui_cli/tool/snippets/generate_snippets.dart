@@ -68,15 +68,30 @@ Future<(Map<String, (String, String, String)>, Map<String, (String, String)>)> m
 
   return (
     {
+      'card': (
+        'card',
+        'A card with a title, subtitle, and child',
+        File(p.join(directory, 'card', 'card.dart')).readAsStringSync(),
+      ),
+      'title-card': (
+        'title_card',
+        'A card with a title and subtitle',
+        File(p.join(directory, 'card', 'title_card.dart')).readAsStringSync(),
+      ),
+      'media-card': (
+        'media_card',
+        'A card with an image, title, subtitle, and child',
+        File(p.join(directory, 'card', 'media_card.dart')).readAsStringSync(),
+      ),
       'main-basic': (
         'main',
         'A minimal Forui app entry point',
-        File(p.join(directory, 'main_basic.dart')).readAsStringSync(),
+        File(p.join(directory, 'main', 'main_basic.dart')).readAsStringSync(),
       ),
       'main-router': (
         'main',
         'A Forui app entry point using MaterialApp.router',
-        File(p.join(directory, 'main_router.dart')).readAsStringSync(),
+        File(p.join(directory, 'main', 'main_router.dart')).readAsStringSync(),
       ),
       materialThemeName: (
         materialThemeFile,
@@ -90,8 +105,8 @@ Future<(Map<String, (String, String, String)>, Map<String, (String, String)>)> m
       ),
     },
     {
-      'basic': ('main', File(p.join(directory, 'main_basic_init.dart')).readAsStringSync()),
-      'router': ('main', File(p.join(directory, 'main_router_init.dart')).readAsStringSync()),
+      'basic': ('main', File(p.join(directory, 'main', 'main_basic_init.dart')).readAsStringSync()),
+      'router': ('main', File(p.join(directory, 'main', 'main_router_init.dart')).readAsStringSync()),
     },
   );
 }
