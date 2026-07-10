@@ -24,6 +24,11 @@ class FLocalizationsEs extends FLocalizations {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Pestaña $tabIndex de $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
@@ -61,6 +66,12 @@ class FLocalizationsEs extends FLocalizations {
 
   @override
   String get dialogSemanticsLabel => 'Cuadro de diálogo';
+
+  @override
+  String get headerBackSemanticsLabel => 'Atrás';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Cerrar';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Previous';
@@ -142,6 +153,11 @@ class FLocalizationsEs419 extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Pestaña $tabIndex de $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
@@ -179,6 +195,12 @@ class FLocalizationsEs419 extends FLocalizationsEs {
 
   @override
   String get dialogSemanticsLabel => 'Diálogo';
+
+  @override
+  String get headerBackSemanticsLabel => 'Atrás';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Cerrar';
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -248,6 +270,11 @@ class FLocalizationsEsAr extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Pestaña $tabIndex de $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
@@ -285,6 +312,12 @@ class FLocalizationsEsAr extends FLocalizationsEs {
 
   @override
   String get dialogSemanticsLabel => 'Diálogo';
+
+  @override
+  String get headerBackSemanticsLabel => 'Atrás';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Cerrar';
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -354,6 +387,11 @@ class FLocalizationsEsBo extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Pestaña $tabIndex de $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
@@ -391,6 +429,12 @@ class FLocalizationsEsBo extends FLocalizationsEs {
 
   @override
   String get dialogSemanticsLabel => 'Diálogo';
+
+  @override
+  String get headerBackSemanticsLabel => 'Atrás';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Cerrar';
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -460,6 +504,11 @@ class FLocalizationsEsCl extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Pestaña $tabIndex de $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
@@ -497,6 +546,12 @@ class FLocalizationsEsCl extends FLocalizationsEs {
 
   @override
   String get dialogSemanticsLabel => 'Diálogo';
+
+  @override
+  String get headerBackSemanticsLabel => 'Atrás';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Cerrar';
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -566,6 +621,11 @@ class FLocalizationsEsCo extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Pestaña $tabIndex de $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
@@ -603,6 +663,12 @@ class FLocalizationsEsCo extends FLocalizationsEs {
 
   @override
   String get dialogSemanticsLabel => 'Diálogo';
+
+  @override
+  String get headerBackSemanticsLabel => 'Atrás';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Cerrar';
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -672,6 +738,11 @@ class FLocalizationsEsCr extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Pestaña $tabIndex de $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
@@ -709,6 +780,12 @@ class FLocalizationsEsCr extends FLocalizationsEs {
 
   @override
   String get dialogSemanticsLabel => 'Diálogo';
+
+  @override
+  String get headerBackSemanticsLabel => 'Atrás';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Cerrar';
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -778,6 +855,11 @@ class FLocalizationsEsDo extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Pestaña $tabIndex de $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
@@ -815,6 +897,12 @@ class FLocalizationsEsDo extends FLocalizationsEs {
 
   @override
   String get dialogSemanticsLabel => 'Diálogo';
+
+  @override
+  String get headerBackSemanticsLabel => 'Atrás';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Cerrar';
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -884,6 +972,11 @@ class FLocalizationsEsEc extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Pestaña $tabIndex de $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
@@ -921,6 +1014,12 @@ class FLocalizationsEsEc extends FLocalizationsEs {
 
   @override
   String get dialogSemanticsLabel => 'Diálogo';
+
+  @override
+  String get headerBackSemanticsLabel => 'Atrás';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Cerrar';
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -990,6 +1089,11 @@ class FLocalizationsEsGt extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Pestaña $tabIndex de $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
@@ -1027,6 +1131,12 @@ class FLocalizationsEsGt extends FLocalizationsEs {
 
   @override
   String get dialogSemanticsLabel => 'Diálogo';
+
+  @override
+  String get headerBackSemanticsLabel => 'Atrás';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Cerrar';
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -1096,6 +1206,11 @@ class FLocalizationsEsHn extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Pestaña $tabIndex de $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
@@ -1133,6 +1248,12 @@ class FLocalizationsEsHn extends FLocalizationsEs {
 
   @override
   String get dialogSemanticsLabel => 'Diálogo';
+
+  @override
+  String get headerBackSemanticsLabel => 'Atrás';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Cerrar';
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -1202,6 +1323,11 @@ class FLocalizationsEsMx extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Pestaña $tabIndex de $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
@@ -1239,6 +1365,12 @@ class FLocalizationsEsMx extends FLocalizationsEs {
 
   @override
   String get dialogSemanticsLabel => 'Diálogo';
+
+  @override
+  String get headerBackSemanticsLabel => 'Atrás';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Cerrar';
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -1308,6 +1440,11 @@ class FLocalizationsEsNi extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Pestaña $tabIndex de $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
@@ -1345,6 +1482,12 @@ class FLocalizationsEsNi extends FLocalizationsEs {
 
   @override
   String get dialogSemanticsLabel => 'Diálogo';
+
+  @override
+  String get headerBackSemanticsLabel => 'Atrás';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Cerrar';
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -1414,6 +1557,11 @@ class FLocalizationsEsPa extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Pestaña $tabIndex de $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
@@ -1451,6 +1599,12 @@ class FLocalizationsEsPa extends FLocalizationsEs {
 
   @override
   String get dialogSemanticsLabel => 'Diálogo';
+
+  @override
+  String get headerBackSemanticsLabel => 'Atrás';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Cerrar';
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -1520,6 +1674,11 @@ class FLocalizationsEsPe extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Pestaña $tabIndex de $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
@@ -1557,6 +1716,12 @@ class FLocalizationsEsPe extends FLocalizationsEs {
 
   @override
   String get dialogSemanticsLabel => 'Diálogo';
+
+  @override
+  String get headerBackSemanticsLabel => 'Atrás';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Cerrar';
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -1626,6 +1791,11 @@ class FLocalizationsEsPr extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Pestaña $tabIndex de $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
@@ -1663,6 +1833,12 @@ class FLocalizationsEsPr extends FLocalizationsEs {
 
   @override
   String get dialogSemanticsLabel => 'Diálogo';
+
+  @override
+  String get headerBackSemanticsLabel => 'Atrás';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Cerrar';
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -1732,6 +1908,11 @@ class FLocalizationsEsPy extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Pestaña $tabIndex de $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
@@ -1769,6 +1950,12 @@ class FLocalizationsEsPy extends FLocalizationsEs {
 
   @override
   String get dialogSemanticsLabel => 'Diálogo';
+
+  @override
+  String get headerBackSemanticsLabel => 'Atrás';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Cerrar';
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -1838,6 +2025,11 @@ class FLocalizationsEsSv extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Pestaña $tabIndex de $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
@@ -1875,6 +2067,12 @@ class FLocalizationsEsSv extends FLocalizationsEs {
 
   @override
   String get dialogSemanticsLabel => 'Diálogo';
+
+  @override
+  String get headerBackSemanticsLabel => 'Atrás';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Cerrar';
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -1944,6 +2142,11 @@ class FLocalizationsEsUs extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Pestaña $tabIndex de $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
@@ -1981,6 +2184,12 @@ class FLocalizationsEsUs extends FLocalizationsEs {
 
   @override
   String get dialogSemanticsLabel => 'Diálogo';
+
+  @override
+  String get headerBackSemanticsLabel => 'Atrás';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Cerrar';
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -2050,6 +2259,11 @@ class FLocalizationsEsUy extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Pestaña $tabIndex de $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
@@ -2087,6 +2301,12 @@ class FLocalizationsEsUy extends FLocalizationsEs {
 
   @override
   String get dialogSemanticsLabel => 'Diálogo';
+
+  @override
+  String get headerBackSemanticsLabel => 'Atrás';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Cerrar';
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -2156,6 +2376,11 @@ class FLocalizationsEsVe extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Pestaña $tabIndex de $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
@@ -2193,6 +2418,12 @@ class FLocalizationsEsVe extends FLocalizationsEs {
 
   @override
   String get dialogSemanticsLabel => 'Diálogo';
+
+  @override
+  String get headerBackSemanticsLabel => 'Atrás';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Cerrar';
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';

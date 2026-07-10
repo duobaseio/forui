@@ -24,6 +24,11 @@ class FLocalizationsSk extends FLocalizations {
   String get autocompleteNoResults => 'Nenašli sa žiadne zhody.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Karta $tabIndex z $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Nasledujúci mesiac';
 
   @override
@@ -61,6 +66,12 @@ class FLocalizationsSk extends FLocalizations {
 
   @override
   String get dialogSemanticsLabel => 'Dialógové okno';
+
+  @override
+  String get headerBackSemanticsLabel => 'Späť';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Zavrieť';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Predchádzajúce';

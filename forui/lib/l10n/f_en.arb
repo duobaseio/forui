@@ -16,6 +16,18 @@
   "@autocompleteNoResults": {
     "description": "The message displayed when there are no matching results."
   },
+  "bottomNavigationBarTabSemanticsLabel": "Tab {tabIndex} of {tabCount}",
+  "@bottomNavigationBarTabSemanticsLabel": {
+    "description": "The semantic label announcing a bottom navigation bar item's position, e.g. 'Tab 1 of 3'.",
+    "placeholders": {
+      "tabIndex": {
+        "type": "int"
+      },
+      "tabCount": {
+        "type": "int"
+      }
+    }
+  },
   "calendarNextMonthSemanticsLabel": "Next month",
   "@calendarNextMonthSemanticsLabel": {
     "description": "The label for the calendar header's next-month navigation button."
@@ -67,6 +79,14 @@
   "dialogSemanticsLabel": "Dialog",
   "@dialogSemanticsLabel": {
     "description": "The sheet's label."
+  },
+  "headerBackSemanticsLabel": "Back",
+  "@headerBackSemanticsLabel": {
+    "description": "The default semantic label for a header's back button."
+  },
+  "headerCloseSemanticsLabel": "Close",
+  "@headerCloseSemanticsLabel": {
+    "description": "The default semantic label for a header's close button."
   },
   "paginationPreviousSemanticsLabel": "Previous",
   "@paginationPreviousSemanticsLabel": {

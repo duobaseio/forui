@@ -48,4 +48,33 @@ void main() {
 
     expect(tester.widget<FractionallySizedBox>(find.byType(FractionallySizedBox)).widthFactor, 0.5);
   });
+
+  group('accessibility', () {
+    for (final (value, percent) in [(0.0, '0%'), (0.05, '5%'), (0.5, '50%'), (1.0, '100%')]) {
+      testWidgets('exposes $value as semantic value $percent', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FDeterminateProgress(value: value, semanticsLabel: 'progress'),
+          ),
+        );
+        await tester.pumpAndSettle();
+
+        expect(tester.getSemantics(find.bySemanticsLabel('progress')), isSemantics(value: percent));
+      });
+    }
+
+    testWidgets('updates semantic value when value changes', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(child: const FDeterminateProgress(value: 0.5, semanticsLabel: 'progress')),
+      );
+      await tester.pumpAndSettle();
+
+      await tester.pumpWidget(
+        TestScaffold.app(child: const FDeterminateProgress(value: 0.9, semanticsLabel: 'progress')),
+      );
+      await tester.pumpAndSettle();
+
+      expect(tester.getSemantics(find.bySemanticsLabel('progress')), isSemantics(value: '90%'));
+    });
+  });
 }

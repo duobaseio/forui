@@ -24,6 +24,11 @@ class FLocalizationsUz extends FLocalizations {
   String get autocompleteNoResults => 'Hech qanday moslik topilmadi.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return '$tabCount tadan $tabIndex-yorliq';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Keyingi oy';
 
   @override
@@ -61,6 +66,12 @@ class FLocalizationsUz extends FLocalizations {
 
   @override
   String get dialogSemanticsLabel => 'Muloqot oynasi';
+
+  @override
+  String get headerBackSemanticsLabel => 'Orqaga';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Yopish';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Oldingi';

@@ -35,5 +35,8 @@
   "calendarNextYearSemanticsLabel": "შემდეგი წელი",
   "calendarPreviousYearSemanticsLabel": "წინა წელი",
   "calendarNextYearsSemanticsLabel": "შემდეგი წლები",
-  "calendarPreviousYearsSemanticsLabel": "წინა წლები"
+  "calendarPreviousYearsSemanticsLabel": "წინა წლები",
+  "headerBackSemanticsLabel": "უკან",
+  "headerCloseSemanticsLabel": "დახურვა",
+  "bottomNavigationBarTabSemanticsLabel": "ჩანართი {tabIndex} {tabCount}-დან"
 }

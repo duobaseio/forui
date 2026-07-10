@@ -24,14 +24,14 @@ class FHeaderAction extends StatelessWidget {
   /// ```
   final FHeaderActionStyleDelta style;
 
-  /// {@macro forui.foundation.doc_templates.semanticsLabel}
-  final String? semanticsLabel;
-
   /// The icon, wrapped in a [IconThemeData].
   final Widget icon;
 
   /// True if this action is currently selected. Defaults to false.
   final bool selected;
+
+  /// {@macro forui.foundation.doc_templates.semanticsLabel}
+  final String? semanticsLabel;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
@@ -74,8 +74,8 @@ class FHeaderAction extends StatelessWidget {
     required this.icon,
     required this.onPress,
     this.style = const .context(),
-    this.semanticsLabel,
     this.selected = false,
+    this.semanticsLabel,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
@@ -108,7 +108,14 @@ class FHeaderAction extends StatelessWidget {
     Map<Type, Action<Intent>>? actions,
     Key? key,
   }) => .new(
-    icon: Builder(builder: (context) => context.theme.icons.arrowLeft(context)),
+    icon: Builder(
+      builder: (context) => context.theme.icons.arrowLeft(
+        context,
+        semanticsLabel: semanticsLabel == null
+            ? (FLocalizations.of(context) ?? FDefaultLocalizations()).headerBackSemanticsLabel
+            : null,
+      ),
+    ),
     onPress: onPress,
     style: style,
     semanticsLabel: semanticsLabel,
@@ -130,6 +137,7 @@ class FHeaderAction extends StatelessWidget {
   factory FHeaderAction.x({
     required VoidCallback? onPress,
     FHeaderActionStyleDelta style = const .context(),
+    String? semanticsLabel,
     bool autofocus = false,
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
@@ -143,9 +151,17 @@ class FHeaderAction extends StatelessWidget {
     Map<Type, Action<Intent>>? actions,
     Key? key,
   }) => .new(
-    icon: Builder(builder: (context) => context.theme.icons.x(context)),
+    icon: Builder(
+      builder: (context) => context.theme.icons.x(
+        context,
+        semanticsLabel: semanticsLabel == null
+            ? (FLocalizations.of(context) ?? FDefaultLocalizations()).headerCloseSemanticsLabel
+            : null,
+      ),
+    ),
     onPress: onPress,
     style: style,
+    semanticsLabel: semanticsLabel,
     autofocus: autofocus,
     focusNode: focusNode,
     onFocusChange: onFocusChange,
@@ -165,13 +181,14 @@ class FHeaderAction extends StatelessWidget {
     final style = this.style(FHeaderData.of(context).actionStyle);
     return FTappable(
       style: style.tappableStyle,
+      selected: selected,
+      semanticsLabel: semanticsLabel,
       autofocus: autofocus,
       focusNode: focusNode,
       onFocusChange: onFocusChange,
       onHoverChange: onHoverChange,
       onVariantChange: onVariantChange,
       focusedOutlineStyle: style.focusedOutlineStyle,
-      semanticsLabel: semanticsLabel,
       onPress: onPress,
       onLongPress: onLongPress,
       onDoubleTap: onDoubleTap,
@@ -189,9 +206,9 @@ class FHeaderAction extends StatelessWidget {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('style', style))
-      ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(DiagnosticsProperty('icon', icon))
       ..add(FlagProperty('selected', value: selected, ifTrue: 'selected'))
+      ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))

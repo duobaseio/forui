@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "Tahun seterusnya",
   "calendarPreviousYearSemanticsLabel": "Tahun sebelumnya",
   "calendarNextYearsSemanticsLabel": "Tahun-tahun seterusnya",
-  "calendarPreviousYearsSemanticsLabel": "Tahun-tahun sebelumnya"
+  "calendarPreviousYearsSemanticsLabel": "Tahun-tahun sebelumnya",
+  "headerBackSemanticsLabel": "Kembali",
+  "headerCloseSemanticsLabel": "Tutup",
+  "bottomNavigationBarTabSemanticsLabel": "Tab {tabIndex} daripada {tabCount}"
 }

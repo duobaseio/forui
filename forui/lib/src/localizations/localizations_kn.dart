@@ -24,6 +24,11 @@ class FLocalizationsKn extends FLocalizations {
   String get autocompleteNoResults => 'ಯಾವುದೇ ಹೊಂದಾಣಿಕೆ ಕಂಡುಬಂದಿಲ್ಲ.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return '$tabCount ರಲ್ಲಿ $tabIndex ಟ್ಯಾಬ್';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'ಮುಂದಿನ ತಿಂಗಳು';
 
   @override
@@ -61,6 +66,12 @@ class FLocalizationsKn extends FLocalizations {
 
   @override
   String get dialogSemanticsLabel => 'ಡೈಲಾಗ್';
+
+  @override
+  String get headerBackSemanticsLabel => 'ಹಿಂದೆ';
+
+  @override
+  String get headerCloseSemanticsLabel => 'ಮುಚ್ಚಿರಿ';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Previous';

@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
+import 'package:intl/intl.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
@@ -107,23 +108,27 @@ class _State extends State<FDeterminateProgress> with SingleTickerProviderStateM
   }
 
   @override
-  Widget build(BuildContext context) => ConstrainedBox(
-    constraints: _style!.constraints,
-    child: Semantics(
-      label: widget.semanticsLabel ?? (FLocalizations.of(context) ?? FDefaultLocalizations()).progressSemanticsLabel,
-      child: DecoratedBox(
-        decoration: _style!.trackDecoration,
-        child: Align(
-          alignment: .centerStart,
-          child: AnimatedBuilder(
-            animation: _controller,
-            builder: (_, child) => FractionallySizedBox(widthFactor: _controller.value, child: child!),
-            child: Container(decoration: _style!.fillDecoration),
+  Widget build(BuildContext context) {
+    final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
+    return ConstrainedBox(
+      constraints: _style!.constraints,
+      child: Semantics(
+        label: widget.semanticsLabel ?? localizations.progressSemanticsLabel,
+        value: NumberFormat.percentPattern(localizations.localeName).format(widget.value),
+        child: DecoratedBox(
+          decoration: _style!.trackDecoration,
+          child: Align(
+            alignment: .centerStart,
+            child: AnimatedBuilder(
+              animation: _controller,
+              builder: (_, child) => FractionallySizedBox(widthFactor: _controller.value, child: child!),
+              child: Container(decoration: _style!.fillDecoration),
+            ),
           ),
         ),
       ),
-    ),
-  );
+    );
+  }
 }
 
 /// A [FDeterminateProgress]'s style.

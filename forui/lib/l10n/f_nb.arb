@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "Neste år",
   "calendarPreviousYearSemanticsLabel": "Forrige år",
   "calendarNextYearsSemanticsLabel": "Neste år",
-  "calendarPreviousYearsSemanticsLabel": "Forrige år"
+  "calendarPreviousYearsSemanticsLabel": "Forrige år",
+  "headerBackSemanticsLabel": "Tilbake",
+  "headerCloseSemanticsLabel": "Lukk",
+  "bottomNavigationBarTabSemanticsLabel": "Fane {tabIndex} av {tabCount}"
 }

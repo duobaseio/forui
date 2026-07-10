@@ -207,6 +207,7 @@ class _FSidebarItemState extends State<FSidebarItem> with TickerProviderStateMix
         style: _style!.tappableStyle,
         focusedOutlineStyle: _style!.focusedOutlineStyle,
         selected: widget.selected,
+        semanticsExpanded: widget.children.isEmpty ? null : _expanded,
         autofocus: widget.autofocus,
         focusNode: widget.focusNode,
         onPress: widget.children.isNotEmpty

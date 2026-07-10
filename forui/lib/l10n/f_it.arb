@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "Anno successivo",
   "calendarPreviousYearSemanticsLabel": "Anno precedente",
   "calendarNextYearsSemanticsLabel": "Anni successivi",
-  "calendarPreviousYearsSemanticsLabel": "Anni precedenti"
+  "calendarPreviousYearsSemanticsLabel": "Anni precedenti",
+  "headerBackSemanticsLabel": "Indietro",
+  "headerCloseSemanticsLabel": "Chiudi",
+  "bottomNavigationBarTabSemanticsLabel": "Scheda {tabIndex} di {tabCount}"
 }

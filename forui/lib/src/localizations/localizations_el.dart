@@ -24,6 +24,11 @@ class FLocalizationsEl extends FLocalizations {
   String get autocompleteNoResults => 'Δεν βρέθηκαν αντιστοιχίες.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Καρτέλα $tabIndex από $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Επόμενος μήνας';
 
   @override
@@ -61,6 +66,12 @@ class FLocalizationsEl extends FLocalizations {
 
   @override
   String get dialogSemanticsLabel => 'Παράθυρο διαλόγου';
+
+  @override
+  String get headerBackSemanticsLabel => 'Πίσω';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Κλείσιμο';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Previous';

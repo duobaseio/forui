@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "Susunod na taon",
   "calendarPreviousYearSemanticsLabel": "Nakaraang taon",
   "calendarNextYearsSemanticsLabel": "Susunod na mga taon",
-  "calendarPreviousYearsSemanticsLabel": "Nakaraang mga taon"
+  "calendarPreviousYearsSemanticsLabel": "Nakaraang mga taon",
+  "headerBackSemanticsLabel": "Bumalik",
+  "headerCloseSemanticsLabel": "Isara",
+  "bottomNavigationBarTabSemanticsLabel": "Tab {tabIndex} ng {tabCount}"
 }

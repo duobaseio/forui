@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "Næsta ár",
   "calendarPreviousYearSemanticsLabel": "Fyrra ár",
   "calendarNextYearsSemanticsLabel": "Næstu ár",
-  "calendarPreviousYearsSemanticsLabel": "Fyrri ár"
+  "calendarPreviousYearsSemanticsLabel": "Fyrri ár",
+  "headerBackSemanticsLabel": "Til baka",
+  "headerCloseSemanticsLabel": "Loka",
+  "bottomNavigationBarTabSemanticsLabel": "Flipi {tabIndex} af {tabCount}"
 }

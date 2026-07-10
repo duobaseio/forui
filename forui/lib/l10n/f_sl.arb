@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "Naslednje leto",
   "calendarPreviousYearSemanticsLabel": "Prejšnje leto",
   "calendarNextYearsSemanticsLabel": "Naslednja leta",
-  "calendarPreviousYearsSemanticsLabel": "Prejšnja leta"
+  "calendarPreviousYearsSemanticsLabel": "Prejšnja leta",
+  "headerBackSemanticsLabel": "Nazaj",
+  "headerCloseSemanticsLabel": "Zapri",
+  "bottomNavigationBarTabSemanticsLabel": "Zavihek {tabIndex} od {tabCount}"
 }

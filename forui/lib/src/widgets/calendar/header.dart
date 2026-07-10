@@ -299,6 +299,7 @@ class _Tappable extends StatelessWidget {
   @override
   Widget build(BuildContext context) => FTappable.static(
     focusedOutlineStyle: style.headerFocusedOutlineStyle,
+    semanticsExpanded: shown,
     onPress: onPress,
     builder: (context, variants, _) => Container(
       decoration: style.headerDecoration.resolve(variants),

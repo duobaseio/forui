@@ -287,4 +287,24 @@ void main() {
 
     expect(focused(), true);
   });
+
+  group('accessibility', () {
+    testWidgets('trigger exposes expanded state that flips when the menu opens', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FSelectMenuTile<int>(
+            title: const Text('Title'),
+            menu: const [.tile(title: Text('1'), value: 1)],
+          ),
+        ),
+      );
+
+      expect(tester.getSemantics(find.text('Title')), isSemantics(hasExpandedState: true, isExpanded: false));
+
+      await tester.tap(find.byType(FSelectMenuTile<int>));
+      await tester.pumpAndSettle();
+
+      expect(tester.getSemantics(find.text('Title')), isSemantics(hasExpandedState: true, isExpanded: true));
+    });
+  });
 }

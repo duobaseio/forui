@@ -23,6 +23,9 @@ class Content extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final fallback = this.fallback ?? PlaceholderContent(style: style, size: size);
+    final duration = context.accessibility.motion == .disabled
+        ? Duration.zero
+        : style(context.theme.avatarStyle).fadeInDuration;
 
     return Image(
       height: size,
@@ -32,7 +35,7 @@ class Content extends StatelessWidget {
       errorBuilder: (_, _, _) => fallback,
       frameBuilder: (_, child, frame, wasSynchronouslyLoaded) => wasSynchronouslyLoaded
           ? child
-          : AnimatedSwitcher(duration: const Duration(milliseconds: 500), child: frame == null ? fallback : child),
+          : AnimatedSwitcher(duration: duration, child: frame == null ? fallback : child),
       loadingBuilder: (_, child, loadingProgress) => loadingProgress == null ? child : fallback,
       fit: BoxFit.cover,
     );

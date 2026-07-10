@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "Następny rok",
   "calendarPreviousYearSemanticsLabel": "Poprzedni rok",
   "calendarNextYearsSemanticsLabel": "Następne lata",
-  "calendarPreviousYearsSemanticsLabel": "Poprzednie lata"
+  "calendarPreviousYearsSemanticsLabel": "Poprzednie lata",
+  "headerBackSemanticsLabel": "Wstecz",
+  "headerCloseSemanticsLabel": "Zamknij",
+  "bottomNavigationBarTabSemanticsLabel": "Karta {tabIndex} z {tabCount}"
 }

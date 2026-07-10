@@ -910,4 +910,74 @@ void main() {
     expect(focus.hasFocus, true);
     expect(focused, true);
   });
+
+  group('accessibility', () {
+    testWidgets('is a button with no state flags by default', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTappable.static(onPress: () {}, child: const Text('tappable')),
+        ),
+      );
+
+      expect(
+        tester.getSemantics(find.text('tappable')),
+        isSemantics(isButton: true, hasCheckedState: false, hasExpandedState: false),
+      );
+    });
+
+    testWidgets('forwards button, checked, expanded, and inMutuallyExclusiveGroup', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTappable.static(
+            semanticsButton: false,
+            semanticsChecked: true,
+            semanticsExpanded: true,
+            semanticsInMutuallyExclusiveGroup: true,
+            onPress: () {},
+            child: const Text('tappable'),
+          ),
+        ),
+      );
+
+      expect(
+        tester.getSemantics(find.text('tappable')),
+        isSemantics(
+          isButton: false,
+          hasCheckedState: true,
+          isChecked: true,
+          hasExpandedState: true,
+          isExpanded: true,
+          isInMutuallyExclusiveGroup: true,
+        ),
+      );
+    });
+
+    testWidgets('suppresses selected flag when checked is set', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTappable.static(
+            selected: true,
+            semanticsChecked: true,
+            onPress: () {},
+            child: const Text('tappable'),
+          ),
+        ),
+      );
+
+      expect(
+        tester.getSemantics(find.text('tappable')),
+        isSemantics(hasCheckedState: true, isChecked: true, hasSelectedState: false),
+      );
+    });
+
+    testWidgets('exposes selected flag without checked', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTappable.static(selected: true, onPress: () {}, child: const Text('tappable')),
+        ),
+      );
+
+      expect(tester.getSemantics(find.text('tappable')), isSemantics(hasSelectedState: true, isSelected: true));
+    });
+  });
 }

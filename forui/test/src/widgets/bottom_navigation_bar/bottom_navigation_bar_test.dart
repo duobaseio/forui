@@ -45,4 +45,48 @@ void main() {
     expect(current, isNot(contains(FTappableVariant.hovered)));
     expect(hovered, false);
   });
+
+  group('accessibility', () {
+    testWidgets('labelled item announces its label, position and selected state', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: const FBottomNavigationBar(
+            index: 2,
+            children: [
+              FBottomNavigationBarItem(icon: Icon(FLucideIcons.house), label: Text('Home')),
+              FBottomNavigationBarItem(icon: Icon(FLucideIcons.layoutGrid), label: Text('Browse')),
+              FBottomNavigationBarItem(icon: Icon(FLucideIcons.radio), label: Text('Radio')),
+            ],
+          ),
+        ),
+      );
+
+      expect(
+        tester.getSemantics(find.text('Home')),
+        isSemantics(label: 'Home\nTab 1 of 3', isButton: true, isSelected: false),
+      );
+      expect(
+        tester.getSemantics(find.text('Radio')),
+        isSemantics(label: 'Radio\nTab 3 of 3', isButton: true, isSelected: true),
+      );
+    });
+
+    testWidgets('icon-only item is announced via its semanticsLabel', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: const FBottomNavigationBar(
+            children: [
+              FBottomNavigationBarItem(icon: Icon(FLucideIcons.house), semanticsLabel: 'Home'),
+              FBottomNavigationBarItem(icon: Icon(FLucideIcons.radio), semanticsLabel: 'Radio'),
+            ],
+          ),
+        ),
+      );
+
+      expect(
+        tester.getSemantics(find.bySemanticsLabel(RegExp('Home'))),
+        isSemantics(label: 'Home\nTab 1 of 2', isButton: true),
+      );
+    });
+  });
 }

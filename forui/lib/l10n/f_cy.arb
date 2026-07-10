@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "Blwyddyn nesaf",
   "calendarPreviousYearSemanticsLabel": "Blwyddyn flaenorol",
   "calendarNextYearsSemanticsLabel": "Blynyddoedd nesaf",
-  "calendarPreviousYearsSemanticsLabel": "Blynyddoedd blaenorol"
+  "calendarPreviousYearsSemanticsLabel": "Blynyddoedd blaenorol",
+  "headerBackSemanticsLabel": "Yn ôl",
+  "headerCloseSemanticsLabel": "Cau",
+  "bottomNavigationBarTabSemanticsLabel": "Tab {tabIndex} o {tabCount}"
 }

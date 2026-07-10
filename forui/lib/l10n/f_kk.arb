@@ -35,5 +35,8 @@
   "calendarNextYearSemanticsLabel": "Келесі жыл",
   "calendarPreviousYearSemanticsLabel": "Алдыңғы жыл",
   "calendarNextYearsSemanticsLabel": "Келесі жылдар",
-  "calendarPreviousYearsSemanticsLabel": "Алдыңғы жылдар"
+  "calendarPreviousYearsSemanticsLabel": "Алдыңғы жылдар",
+  "headerBackSemanticsLabel": "Артқа",
+  "headerCloseSemanticsLabel": "Жабу",
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount} қойындының {tabIndex}-сы"
 }

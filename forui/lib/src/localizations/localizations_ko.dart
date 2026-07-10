@@ -24,6 +24,11 @@ class FLocalizationsKo extends FLocalizations {
   String get autocompleteNoResults => '일치하는 항목이 없습니다.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return '탭 $tabCount개 중 $tabIndex번째';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => '다음 달';
 
   @override
@@ -61,6 +66,12 @@ class FLocalizationsKo extends FLocalizations {
 
   @override
   String get dialogSemanticsLabel => '대화상자';
+
+  @override
+  String get headerBackSemanticsLabel => '뒤로';
+
+  @override
+  String get headerCloseSemanticsLabel => '닫기';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Previous';

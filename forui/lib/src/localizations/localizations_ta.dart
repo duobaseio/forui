@@ -24,6 +24,11 @@ class FLocalizationsTa extends FLocalizations {
   String get autocompleteNoResults => 'பொருத்தங்கள் எதுவும் கிடைக்கவில்லை.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return '$tabCount இல் $tabIndex தாவல்';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'அடுத்த மாதம்';
 
   @override
@@ -61,6 +66,12 @@ class FLocalizationsTa extends FLocalizations {
 
   @override
   String get dialogSemanticsLabel => 'உரையாடல்';
+
+  @override
+  String get headerBackSemanticsLabel => 'பின்செல்';
+
+  @override
+  String get headerCloseSemanticsLabel => 'மூடு';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Previous';

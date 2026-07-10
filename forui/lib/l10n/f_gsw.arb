@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "Nächschts Jaar",
   "calendarPreviousYearSemanticsLabel": "Letschts Jaar",
   "calendarNextYearsSemanticsLabel": "Nächschti Jaar",
-  "calendarPreviousYearsSemanticsLabel": "Letschti Jaar"
+  "calendarPreviousYearsSemanticsLabel": "Letschti Jaar",
+  "headerBackSemanticsLabel": "Zurück",
+  "headerCloseSemanticsLabel": "Schliessen",
+  "bottomNavigationBarTabSemanticsLabel": "Tab {tabIndex} von {tabCount}"
 }

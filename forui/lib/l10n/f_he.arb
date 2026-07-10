@@ -35,5 +35,8 @@
   "calendarNextYearSemanticsLabel": "השנה הבאה",
   "calendarPreviousYearSemanticsLabel": "השנה הקודמת",
   "calendarNextYearsSemanticsLabel": "השנים הבאות",
-  "calendarPreviousYearsSemanticsLabel": "השנים הקודמות"
+  "calendarPreviousYearsSemanticsLabel": "השנים הקודמות",
+  "headerBackSemanticsLabel": "חזרה",
+  "headerCloseSemanticsLabel": "סגירה",
+  "bottomNavigationBarTabSemanticsLabel": "כרטיסייה {tabIndex} מתוך {tabCount}"
 }

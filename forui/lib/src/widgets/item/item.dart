@@ -94,6 +94,9 @@ class FItem extends StatelessWidget with FItemMixin {
   /// {@macro forui.foundation.doc_templates.semanticsLabel}
   final String? semanticsLabel;
 
+  /// Whether this item is expanded, for disclosure controls. Null if it has no expanded state.
+  final bool? semanticsExpanded;
+
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
 
@@ -201,6 +204,7 @@ class FItem extends StatelessWidget with FItemMixin {
     this.enabled,
     this.selected = false,
     this.semanticsLabel,
+    this.semanticsExpanded,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
@@ -254,6 +258,7 @@ class FItem extends StatelessWidget with FItemMixin {
     this.enabled,
     this.selected = false,
     this.semanticsLabel,
+    this.semanticsExpanded,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
@@ -335,6 +340,7 @@ class FItem extends StatelessWidget with FItemMixin {
             style: style.tappableStyle,
             focusedOutlineStyle: style.focusedOutlineStyle,
             semanticsLabel: semanticsLabel,
+            semanticsExpanded: semanticsExpanded,
             autofocus: autofocus,
             focusNode: focusNode,
             onFocusChange: onFocusChange,
@@ -400,6 +406,7 @@ class FItem extends StatelessWidget with FItemMixin {
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
       ..add(FlagProperty('selected', value: selected, ifTrue: 'selected'))
       ..add(StringProperty('semanticsLabel', semanticsLabel))
+      ..add(DiagnosticsProperty('semanticsExpanded', semanticsExpanded))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))

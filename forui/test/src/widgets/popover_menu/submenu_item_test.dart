@@ -679,5 +679,41 @@ void main() {
         expect(find.text('Level 3'), findsOneWidget);
       });
     });
+
+    group('accessibility', () {
+      testWidgets('trigger exposes expanded state that flips when the submenu opens', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FPopoverMenu(
+              menu: [
+                .group(
+                  children: [
+                    .submenu(
+                      title: const Text('Share'),
+                      submenu: [
+                        .group(
+                          children: [.item(title: const Text('Email'), onPress: () {})],
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ],
+              builder: (_, controller, _) => FButton(onPress: controller.toggle, child: const Text('Open')),
+            ),
+          ),
+        );
+
+        await tester.tap(find.text('Open'));
+        await tester.pumpAndSettle();
+
+        expect(tester.getSemantics(find.text('Share')), isSemantics(hasExpandedState: true, isExpanded: false));
+
+        await tester.tap(find.text('Share'));
+        await tester.pumpAndSettle();
+
+        expect(tester.getSemantics(find.text('Share')), isSemantics(hasExpandedState: true, isExpanded: true));
+      });
+    });
   });
 }

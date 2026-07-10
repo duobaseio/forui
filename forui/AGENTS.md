@@ -247,10 +247,10 @@ If you change source files that affect the CLI registry (e.g., `.inherit` constr
 
 ## Reduce Motion
 
-Gate animations on `context.accessibility.motion` (`FAccessibilityMotion`: `full`, `reduced`, `disabled`). `reduced`
+Gate animations on `context.accessibility.motion` (`FAccessibilityMotion`: `all`, `reduced`, `disabled`). `reduced`
 targets spatial (vestibular) motion, not opacity, and reduces rather than removes it.
 
-| Motion                                                     | `full` | `reduced`                       | `disabled`                |
+| Motion                                                     | `all`  | `reduced`                       | `disabled`                |
 |------------------------------------------------------------|--------|---------------------------------|---------------------------|
 | Spatial (slide, scale, rotate, parallax, spring, autoplay) | play   | swap to a fade, else drop       | snap                      |
 | Non-spatial (opacity/cross-fade, color, small feedback)    | play   | keep                            | snap                      |
@@ -258,8 +258,8 @@ targets spatial (vestibular) motion, not opacity, and reduces rather than remove
 
 Pattern (popover, tooltip, context menu, dialog):
 ```dart
-if (motion != .disabled) child = FadeTransition(opacity: fade, child: child); // fade under full + reduced
-if (motion == .full) child = ScaleTransition(scale: scale, child: child);     // scale under full only
+if (motion != .disabled) child = FadeTransition(opacity: fade, child: child); // fade under all + reduced
+if (motion == .all) child = ScaleTransition(scale: scale, child: child);      // scale under all only
 ```
 Small non-vestibular feedback (radio, checkbox) gates only on `motion == .disabled`.
 

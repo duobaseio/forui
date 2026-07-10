@@ -59,5 +59,20 @@ void main() {
       expect(switcher.duration == Duration.zero, false);
       expect(switcher.reverseDuration == Duration.zero, false);
     });
+
+    for (final value in [true, false]) {
+      testWidgets('announces checkbox role with checked state - $value', (tester) async {
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FCheckbox(value: value, semanticsLabel: 'checkbox'),
+          ),
+        );
+
+        expect(
+          tester.getSemantics(find.bySemanticsLabel('checkbox')),
+          isSemantics(hasCheckedState: true, isChecked: value, isButton: false),
+        );
+      });
+    }
   });
 }

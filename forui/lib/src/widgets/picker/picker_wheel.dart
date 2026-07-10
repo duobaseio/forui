@@ -129,11 +129,12 @@ abstract class _State<T extends FPickerWheel> extends State<T> {
         actions: {
           ScrollIntent: CallbackAction<ScrollIntent>(
             onInvoke: (intent) {
-              controller.animateToItem(
-                controller.selectedItem + (intent.direction == .up ? -1 : 1),
-                duration: const Duration(milliseconds: 100),
-                curve: Curves.decelerate,
-              );
+              final target = controller.selectedItem + (intent.direction == .up ? -1 : 1);
+              if (context.accessibility.motion == .all) {
+                controller.animateToItem(target, duration: const Duration(milliseconds: 100), curve: Curves.decelerate);
+              } else {
+                controller.jumpToItem(target);
+              }
 
               return null;
             },

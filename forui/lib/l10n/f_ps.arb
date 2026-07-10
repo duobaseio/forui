@@ -35,5 +35,8 @@
   "calendarNextYearSemanticsLabel": "راتلونکی کال",
   "calendarPreviousYearSemanticsLabel": "تېر کال",
   "calendarNextYearsSemanticsLabel": "راتلونکي کلونه",
-  "calendarPreviousYearsSemanticsLabel": "تېر کلونه"
+  "calendarPreviousYearsSemanticsLabel": "تېر کلونه",
+  "headerBackSemanticsLabel": "شاته",
+  "headerCloseSemanticsLabel": "بندول",
+  "bottomNavigationBarTabSemanticsLabel": "د {tabCount} څخه {tabIndex} ټب"
 }

@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "Volgende jaar",
   "calendarPreviousYearSemanticsLabel": "Vorige jaar",
   "calendarNextYearsSemanticsLabel": "Volgende jare",
-  "calendarPreviousYearsSemanticsLabel": "Vorige jare"
+  "calendarPreviousYearsSemanticsLabel": "Vorige jare",
+  "headerBackSemanticsLabel": "Terug",
+  "headerCloseSemanticsLabel": "Maak toe",
+  "bottomNavigationBarTabSemanticsLabel": "Oortjie {tabIndex} van {tabCount}"
 }

@@ -42,20 +42,20 @@ class FBottomNavigationBar extends StatelessWidget {
   /// ```
   final FBottomNavigationBarStyleDelta style;
 
-  /// A callback for when an item is selected.
-  final ValueChanged<int>? onChange;
-
-  /// The index.
-  final int index;
-
-  /// The children.
-  final List<Widget> children;
-
   /// Whether to avoid system intrusions on the top. Defaults to false.
   final bool safeAreaTop;
 
   /// Whether to avoid system intrusions on the bottom. Defaults to false.
   final bool safeAreaBottom;
+
+  /// The index.
+  final int index;
+
+  /// A callback for when an item is selected.
+  final ValueChanged<int>? onChange;
+
+  /// The children.
+  final List<Widget> children;
 
   /// Creates a [FBottomNavigationBar] with [FBottomNavigationBarItem]s.
   ///
@@ -63,10 +63,10 @@ class FBottomNavigationBar extends StatelessWidget {
   const FBottomNavigationBar({
     required this.children,
     this.style = const .context(),
-    this.onChange,
-    this.index = -1,
     this.safeAreaTop = false,
     this.safeAreaBottom = false,
+    this.index = -1,
+    this.onChange,
     super.key,
   });
 
@@ -82,8 +82,9 @@ class FBottomNavigationBar extends StatelessWidget {
           Expanded(
             child: FBottomNavigationBarData(
               itemStyle: style.itemStyle,
-              index: i,
               selected: i == index,
+              index: i,
+              length: children.length,
               onChange: onChange,
               child: child,
             ),
@@ -147,11 +148,14 @@ class FBottomNavigationBarData extends InheritedWidget {
   /// The item's style.
   final FBottomNavigationBarItemStyle itemStyle;
 
+  /// True if the item is selected.
+  final bool selected;
+
   /// The item's index.
   final int index;
 
-  /// True if the item is selected.
-  final bool selected;
+  /// The total number of items in the bottom navigation bar.
+  final int length;
 
   /// A callback for when an item is selected.
   final ValueChanged<int>? onChange;
@@ -159,8 +163,9 @@ class FBottomNavigationBarData extends InheritedWidget {
   /// Creates a [FBottomNavigationBarData].
   const FBottomNavigationBarData({
     required this.itemStyle,
-    required this.index,
     required this.selected,
+    required this.index,
+    required this.length,
     required this.onChange,
     required super.child,
     super.key,
@@ -168,15 +173,16 @@ class FBottomNavigationBarData extends InheritedWidget {
 
   @override
   bool updateShouldNotify(FBottomNavigationBarData old) =>
-      old.itemStyle != itemStyle || old.index != index || old.selected != selected;
+      old.itemStyle != itemStyle || old.selected != selected || old.index != index || old.length != length;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('itemStyle', itemStyle))
-      ..add(IntProperty('index', index))
       ..add(FlagProperty('selected', value: selected, ifTrue: 'selected', ifFalse: 'not selected'))
+      ..add(IntProperty('index', index))
+      ..add(IntProperty('length', length))
       ..add(ObjectFlagProperty.has('onChange', onChange));
   }
 }

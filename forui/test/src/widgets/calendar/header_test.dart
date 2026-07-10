@@ -154,4 +154,28 @@ void main() {
     expect(find.text('2024'), findsOneWidget);
     expect(find.byType(FButton), findsNothing);
   });
+
+  group('accessibility', () {
+    for (final shown in [true, false]) {
+      testWidgets('Header.day month/year toggle exposes expanded state - $shown', (tester) async {
+        final semantics = tester.ensureSemantics();
+        await pump(
+          tester,
+          (style) => Header.day(
+            style: style,
+            localizations: FDefaultLocalizations(),
+            monthYear: DateTime.utc(2024, 6, 15),
+            shown: shown,
+            onPress: () {},
+            onNext: () {},
+            onPrevious: () {},
+          ),
+        );
+
+        expect(tester.getSemantics(find.text('June 2024')), isSemantics(hasExpandedState: true, isExpanded: shown));
+
+        semantics.dispose();
+      });
+    }
+  });
 }

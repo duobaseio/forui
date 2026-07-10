@@ -95,6 +95,9 @@ class FPickerController extends ValueNotifier<List<int>> {
   /// Modifying [wheels] is undefined behavior.
   final List<FixedExtentScrollController> wheels = [];
 
+  /// Whether programmatic scrolls should jump instead of animate.
+  bool _reduceMotion = false;
+
   /// Creates a [FPickerController].
   FPickerController({required List<int> indexes}) : super([...indexes]);
 
@@ -115,6 +118,13 @@ class FPickerController extends ValueNotifier<List<int>> {
       wheels.isEmpty || value.length == wheels.length,
       'The value must have the same length as the number of wheels.',
     );
+
+    if (_reduceMotion) {
+      for (final (i, index) in value.indexed) {
+        wheels[i].jumpToItem(index);
+      }
+      return;
+    }
 
     await Future.wait([
       for (final (i, index) in value.indexed) wheels[i].animateToItem(index, duration: duration, curve: curve),
@@ -162,6 +172,10 @@ extension InternalFPickerController on FPickerController {
       _rawValue = value;
     }
   }
+
+  bool get reduceMotion => _reduceMotion;
+
+  set reduceMotion(bool value) => _reduceMotion = value;
 }
 
 class _ProxyController extends FPickerController {
@@ -182,14 +196,10 @@ class _ProxyController extends FPickerController {
     if (!listEquals(super._rawValue, newValue)) {
       _unsynced = newValue;
       super._rawValue = newValue;
-      for (final (i, index) in super._rawValue.indexed) {
-        wheels[i].animateToItem(index, duration: _duration, curve: _curve);
-      }
+      _move();
     } else if (!listEquals(_unsynced, newValue)) {
       _unsynced = newValue;
-      for (final (i, index) in super._rawValue.indexed) {
-        wheels[i].animateToItem(index, duration: _duration, curve: _curve);
-      }
+      _move();
       notifyListeners();
     }
   }
@@ -205,11 +215,21 @@ class _ProxyController extends FPickerController {
       // fired, and animating during that notification causes the animation to be ignored.
       SchedulerBinding.instance.addPostFrameCallback((_) {
         if (current == _monotonic) {
-          for (final (i, index) in super._rawValue.indexed) {
-            wheels[i].animateToItem(index, duration: _duration, curve: _curve);
-          }
+          _move();
         }
       });
+    }
+  }
+
+  void _move() {
+    if (_reduceMotion) {
+      for (final (i, index) in super._rawValue.indexed) {
+        wheels[i].jumpToItem(index);
+      }
+    } else {
+      for (final (i, index) in super._rawValue.indexed) {
+        wheels[i].animateToItem(index, duration: _duration, curve: _curve);
+      }
     }
   }
 }

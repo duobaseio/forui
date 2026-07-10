@@ -24,6 +24,11 @@ class FLocalizationsLv extends FLocalizations {
   String get autocompleteNoResults => 'Nav atrasts neviens atbilstošs rezultāts.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return '$tabIndex. cilne no $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Nākamais mēnesis';
 
   @override
@@ -61,6 +66,12 @@ class FLocalizationsLv extends FLocalizations {
 
   @override
   String get dialogSemanticsLabel => 'Dialoglodziņš';
+
+  @override
+  String get headerBackSemanticsLabel => 'Atpakaļ';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Aizvērt';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Iepriekšējais';

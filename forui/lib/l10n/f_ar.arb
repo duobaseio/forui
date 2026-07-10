@@ -35,5 +35,8 @@
   "calendarNextYearSemanticsLabel": "السنة التالية",
   "calendarPreviousYearSemanticsLabel": "السنة السابقة",
   "calendarNextYearsSemanticsLabel": "السنوات التالية",
-  "calendarPreviousYearsSemanticsLabel": "السنوات السابقة"
+  "calendarPreviousYearsSemanticsLabel": "السنوات السابقة",
+  "headerBackSemanticsLabel": "رجوع",
+  "headerCloseSemanticsLabel": "إغلاق",
+  "bottomNavigationBarTabSemanticsLabel": "علامة التبويب {tabIndex} من {tabCount}"
 }

@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "Nākamais gads",
   "calendarPreviousYearSemanticsLabel": "Iepriekšējais gads",
   "calendarNextYearsSemanticsLabel": "Nākamie gadi",
-  "calendarPreviousYearsSemanticsLabel": "Iepriekšējie gadi"
+  "calendarPreviousYearsSemanticsLabel": "Iepriekšējie gadi",
+  "headerBackSemanticsLabel": "Atpakaļ",
+  "headerCloseSemanticsLabel": "Aizvērt",
+  "bottomNavigationBarTabSemanticsLabel": "{tabIndex}. cilne no {tabCount}"
 }

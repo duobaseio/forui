@@ -24,6 +24,11 @@ class FLocalizationsId extends FLocalizations {
   String get autocompleteNoResults => 'Tidak ada hasil yang cocok.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Tab $tabIndex dari $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Bulan berikutnya';
 
   @override
@@ -61,6 +66,12 @@ class FLocalizationsId extends FLocalizations {
 
   @override
   String get dialogSemanticsLabel => 'Dialog';
+
+  @override
+  String get headerBackSemanticsLabel => 'Kembali';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Tutup';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Sebelumnya';

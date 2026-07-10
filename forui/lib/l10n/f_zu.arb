@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "Unyaka olandelayo",
   "calendarPreviousYearSemanticsLabel": "Unyaka odlule",
   "calendarNextYearsSemanticsLabel": "Iminyaka elandelayo",
-  "calendarPreviousYearsSemanticsLabel": "Iminyaka edlule"
+  "calendarPreviousYearsSemanticsLabel": "Iminyaka edlule",
+  "headerBackSemanticsLabel": "Emuva",
+  "headerCloseSemanticsLabel": "Vala",
+  "bottomNavigationBarTabSemanticsLabel": "Ithebhu {tabIndex} kwangu-{tabCount}"
 }

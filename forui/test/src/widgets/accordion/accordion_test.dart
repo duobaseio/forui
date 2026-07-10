@@ -186,4 +186,23 @@ void main() {
     expect(controller.controllers.length, 1);
     expect(find.text('Title B'), findsOneWidget);
   });
+
+  group('accessibility', () {
+    testWidgets('header exposes expanded state that flips on toggle', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: const FAccordion(
+            children: [FAccordionItem(title: Text('Title'), child: Text('Content'))],
+          ),
+        ),
+      );
+
+      expect(tester.getSemantics(find.text('Title')), isSemantics(hasExpandedState: true, isExpanded: false));
+
+      await tester.tap(find.text('Title'));
+      await tester.pumpAndSettle();
+
+      expect(tester.getSemantics(find.text('Title')), isSemantics(hasExpandedState: true, isExpanded: true));
+    });
+  });
 }

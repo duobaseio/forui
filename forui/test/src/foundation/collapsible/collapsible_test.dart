@@ -22,5 +22,48 @@ void main() {
 
       expect(tester.getSize(find.byType(FCollapsible)), const Size(25, 50));
     });
+
+    group('accessibility', () {
+      testWidgets('excludes collapsed content from semantics', (tester) async {
+        final handle = tester.ensureSemantics();
+
+        await tester.pumpWidget(TestScaffold(child: const FCollapsible(value: 0, child: Text('content'))));
+        expect(find.bySemanticsLabel('content'), findsNothing);
+
+        await tester.pumpWidget(TestScaffold(child: const FCollapsible(value: 1, child: Text('content'))));
+        expect(find.bySemanticsLabel('content'), findsOneWidget);
+
+        handle.dispose();
+      });
+
+      testWidgets('excludes collapsed content from focus traversal', (tester) async {
+        final node = FocusNode();
+        addTearDown(node.dispose);
+
+        await tester.pumpWidget(
+          TestScaffold(
+            child: FCollapsible(
+              value: 0,
+              child: Focus(focusNode: node, child: const SizedBox.square(dimension: 40)),
+            ),
+          ),
+        );
+        node.requestFocus();
+        await tester.pump();
+        expect(node.hasFocus, false);
+
+        await tester.pumpWidget(
+          TestScaffold(
+            child: FCollapsible(
+              value: 1,
+              child: Focus(focusNode: node, child: const SizedBox.square(dimension: 40)),
+            ),
+          ),
+        );
+        node.requestFocus();
+        await tester.pump();
+        expect(node.hasFocus, true);
+      });
+    });
   });
 }

@@ -100,4 +100,61 @@ void main() {
       });
     });
   });
+
+  group('accessibility', () {
+    testWidgets('selected state is announced', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FHeader(
+            title: const Text('Title'),
+            suffixes: [
+              FHeaderAction(icon: const Icon(FLucideIcons.plus), semanticsLabel: 'Add', selected: true, onPress: () {}),
+            ],
+          ),
+        ),
+      );
+
+      expect(tester.getSemantics(find.bySemanticsLabel('Add')), isSemantics(isSelected: true, isButton: true));
+    });
+
+    testWidgets('.back defaults to a localized label', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FHeader.nested(
+            title: const Text('Title'),
+            prefixes: [FHeaderAction.back(onPress: () {})],
+          ),
+        ),
+      );
+
+      expect(find.bySemanticsLabel('Back'), findsOneWidget);
+    });
+
+    testWidgets('.x defaults to a localized label', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FHeader.nested(
+            title: const Text('Title'),
+            suffixes: [FHeaderAction.x(onPress: () {})],
+          ),
+        ),
+      );
+
+      expect(find.bySemanticsLabel('Close'), findsOneWidget);
+    });
+
+    testWidgets('.back semanticsLabel overrides the default', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FHeader.nested(
+            title: const Text('Title'),
+            prefixes: [FHeaderAction.back(onPress: () {}, semanticsLabel: 'Go back')],
+          ),
+        ),
+      );
+
+      expect(find.bySemanticsLabel('Go back'), findsOneWidget);
+      expect(find.bySemanticsLabel('Back'), findsNothing);
+    });
+  });
 }

@@ -7,19 +7,47 @@
 ### `FAccordionItem`
 * Change `FAccordionItem` to expand and collapse instantly when motion is reduced or disabled.
 
+* Fix `FAccordionItem` header not exposing its expanded state.
+
+
+### `FAvatar`
+* Change `FAvatar` to skip its cross-fade when animations are disabled.
+
+* Fix `FAvatarStyle.fadeInDuration` being ignored.
+
+
+### `FBottomNavigationBar` & `FBottomNavigationBarItem`
+* Add `FBottomNavigationBarData.length`.
+
+* Add `FBottomNavigationBarItem.semanticsLabel`.
+
+* Change `FBottomNavigationBarItem` to announce its position, e.g. "Tab 2 of 4", to screen readers.
+
+
+### `FBreadcrumb`
+* Fix collapsed `FBreadcrumb` trigger not exposing its expanded state.
+
 
 ### `FCalendar`
 * Add PageUp/PageDown, Shift+PageUp/PageDown, and Home/End keyboard navigation to the grids.
 
 * Change `FCalendar` to jump between pages when animations are disabled.
 
+* Fix calendar month/year header not exposing its expanded state.
+
 
 ### `FCheckbox`
 * Change `FCheckbox` to swap instantly when animations are disabled.
 
+* Fix `FCheckbox` not exposing its checkbox role and checked state.
+
 
 ### `FCircularProgress`
 * Change `FCircularProgress` to render statically when animations are disabled.
+
+
+### `FCollapsible`
+* Fix `FCollapsible` keeping collapsed content focusable and announced by screen readers.
 
 
 ### `FColors`
@@ -46,21 +74,41 @@
 ### `FDeterminateProgress`
 * Change `FDeterminateProgress` to jump to its value when animations are disabled.
 
+* Fix `FDeterminateProgress` not exposing its value to screen readers.
+
 
 ### `FDialog`
 * Change `FDialog` to fade without scaling when motion is reduced.
 
 
-### `FFocusHighlight`
-* Add `FFocusHighlight` to gate descendant focus decorations on `FocusManager.highlightMode`.
+### `FHeaderAction`
+* Add `semanticsLabel` to `FHeaderAction.x`.
+
+* Change `FHeaderAction.back` and `FHeaderAction.x` to default to localized semantics labels.
+
+* Fix `FHeaderAction.selected` not being forwarded to screen readers.
 
 
-### `FOtpField`
-* Change `FOtpField` to stop its caret blinking under a deterministic cursor or disabled animations.
+### `FItem` & `FTile`
+* Add `expanded`.
+
+
+### `FLabel`
+* Change `FLabel` to show errors instantly when motion is reduced or disabled.
+
+
+### `FPicker`
+* Change `FPicker` to jump to selected items when motion is reduced or disabled.
 
 
 ### `FPopover`
 * Change `FPopover` (and `FSelect`, `FAutocomplete`) to fade without scaling when motion is reduced.
+
+
+### `FPopoverMenu`
+* Add `physics` to `FPopoverMenu` and `FPopoverMenu.tiles`.
+
+* Fix `FSubmenuItem` and `FSubmenuTile` triggers not exposing their expanded state.
 
 
 ### `FPortal` & `FPointPortal`
@@ -75,9 +123,15 @@
 ### `FRadio`
 * Change `FRadio` to update instantly when animations are disabled.
 
+* Fix `FRadio` not exposing its radio role and checked state.
+
 
 ### `FResizable`
 * Fix `FResizable` resetting regions to their initial sizes when the main-axis constraint changes (e.g. window resize).
+
+
+### `FSelectMenuTile`
+* Fix `FSelectMenuTile` trigger not exposing its expanded state.
 
 
 ### `FSheet` & `FPersistentSheet`
@@ -86,6 +140,8 @@
 
 ### `FSidebarItem`
 * Change `FSidebarItem` to reveal instantly when motion is reduced or disabled, keeping its fade under reduced.
+
+* Fix collapsible `FSidebarItem` not exposing its expanded state.
 
 
 ### `FTabs`
@@ -96,6 +152,8 @@
 
 
 ### `FTappable`
+* Add `button`, `checked`, `expanded`, and `inMutuallyExclusiveGroup`.
+
 * Change `FTappable` to skip its press bounce when animations are disabled.
 
 

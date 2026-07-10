@@ -24,6 +24,11 @@ class FLocalizationsKa extends FLocalizations {
   String get autocompleteNoResults => 'შესაბამისობები ვერ იქნა ნაპოვნი.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'ჩანართი $tabIndex $tabCount-დან';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'შემდეგი თვე';
 
   @override
@@ -61,6 +66,12 @@ class FLocalizationsKa extends FLocalizations {
 
   @override
   String get dialogSemanticsLabel => 'დიალოგი';
+
+  @override
+  String get headerBackSemanticsLabel => 'უკან';
+
+  @override
+  String get headerCloseSemanticsLabel => 'დახურვა';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Previous';

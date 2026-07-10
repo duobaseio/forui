@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "ปีถัดไป",
   "calendarPreviousYearSemanticsLabel": "ปีก่อนหน้า",
   "calendarNextYearsSemanticsLabel": "ปีถัดไป",
-  "calendarPreviousYearsSemanticsLabel": "ปีก่อนหน้า"
+  "calendarPreviousYearsSemanticsLabel": "ปีก่อนหน้า",
+  "headerBackSemanticsLabel": "กลับ",
+  "headerCloseSemanticsLabel": "ปิด",
+  "bottomNavigationBarTabSemanticsLabel": "แท็บที่ {tabIndex} จาก {tabCount}"
 }

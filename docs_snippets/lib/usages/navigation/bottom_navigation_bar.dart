@@ -19,6 +19,7 @@ final bottomNavigationBar = FBottomNavigationBar(
 
 final bottomNavigationBarItem = FBottomNavigationBarItem(
   // {@category "Accessibility"}
+  semanticsLabel: 'Home',
   autofocus: false,
   focusNode: null,
   onFocusChange: (focused) {},

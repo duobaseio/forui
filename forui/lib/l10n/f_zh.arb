@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "下一年",
   "calendarPreviousYearSemanticsLabel": "上一年",
   "calendarNextYearsSemanticsLabel": "后几年",
-  "calendarPreviousYearsSemanticsLabel": "前几年"
+  "calendarPreviousYearsSemanticsLabel": "前几年",
+  "headerBackSemanticsLabel": "返回",
+  "headerCloseSemanticsLabel": "关闭",
+  "bottomNavigationBarTabSemanticsLabel": "第 {tabIndex} 个标签，共 {tabCount} 个"
 }

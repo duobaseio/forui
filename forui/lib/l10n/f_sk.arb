@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "Nasledujúci rok",
   "calendarPreviousYearSemanticsLabel": "Predchádzajúci rok",
   "calendarNextYearsSemanticsLabel": "Nasledujúce roky",
-  "calendarPreviousYearsSemanticsLabel": "Predchádzajúce roky"
+  "calendarPreviousYearsSemanticsLabel": "Predchádzajúce roky",
+  "headerBackSemanticsLabel": "Späť",
+  "headerCloseSemanticsLabel": "Zavrieť",
+  "bottomNavigationBarTabSemanticsLabel": "Karta {tabIndex} z {tabCount}"
 }

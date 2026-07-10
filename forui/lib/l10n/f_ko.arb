@@ -35,5 +35,8 @@
   "calendarNextYearSemanticsLabel": "다음 해",
   "calendarPreviousYearSemanticsLabel": "이전 해",
   "calendarNextYearsSemanticsLabel": "다음 해들",
-  "calendarPreviousYearsSemanticsLabel": "이전 해들"
+  "calendarPreviousYearsSemanticsLabel": "이전 해들",
+  "headerBackSemanticsLabel": "뒤로",
+  "headerCloseSemanticsLabel": "닫기",
+  "bottomNavigationBarTabSemanticsLabel": "탭 {tabCount}개 중 {tabIndex}번째"
 }

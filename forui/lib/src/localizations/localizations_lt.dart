@@ -24,6 +24,11 @@ class FLocalizationsLt extends FLocalizations {
   String get autocompleteNoResults => 'Nerasta atitikmenų.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return '$tabIndex skirtukas iš $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Kitas mėnuo';
 
   @override
@@ -61,6 +66,12 @@ class FLocalizationsLt extends FLocalizations {
 
   @override
   String get dialogSemanticsLabel => 'Dialogo langas';
+
+  @override
+  String get headerBackSemanticsLabel => 'Atgal';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Uždaryti';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Ankstesnis';

@@ -35,5 +35,8 @@
   "calendarNextYearSemanticsLabel": "अगला वर्ष",
   "calendarPreviousYearSemanticsLabel": "पिछला वर्ष",
   "calendarNextYearsSemanticsLabel": "अगले वर्ष",
-  "calendarPreviousYearsSemanticsLabel": "पिछले वर्ष"
+  "calendarPreviousYearsSemanticsLabel": "पिछले वर्ष",
+  "headerBackSemanticsLabel": "वापस जाएं",
+  "headerCloseSemanticsLabel": "बंद करें",
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount} में से {tabIndex} टैब"
 }

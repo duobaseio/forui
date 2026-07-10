@@ -35,5 +35,8 @@
   "calendarNextYearSemanticsLabel": "Any següent",
   "calendarPreviousYearSemanticsLabel": "Any anterior",
   "calendarNextYearsSemanticsLabel": "Anys següents",
-  "calendarPreviousYearsSemanticsLabel": "Anys anteriors"
+  "calendarPreviousYearsSemanticsLabel": "Anys anteriors",
+  "headerBackSemanticsLabel": "Enrere",
+  "headerCloseSemanticsLabel": "Tanca",
+  "bottomNavigationBarTabSemanticsLabel": "Pestanya {tabIndex} de {tabCount}"
 }

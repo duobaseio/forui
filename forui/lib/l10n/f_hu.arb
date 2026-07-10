@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "Következő év",
   "calendarPreviousYearSemanticsLabel": "Előző év",
   "calendarNextYearsSemanticsLabel": "Következő évek",
-  "calendarPreviousYearsSemanticsLabel": "Előző évek"
+  "calendarPreviousYearsSemanticsLabel": "Előző évek",
+  "headerBackSemanticsLabel": "Vissza",
+  "headerCloseSemanticsLabel": "Bezárás",
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount}/{tabIndex}. lap"
 }

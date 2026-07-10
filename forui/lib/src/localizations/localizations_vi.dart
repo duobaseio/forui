@@ -24,6 +24,11 @@ class FLocalizationsVi extends FLocalizations {
   String get autocompleteNoResults => 'Không tìm thấy kết quả phù hợp.';
 
   @override
+  String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
+    return 'Thẻ $tabIndex trong tổng số $tabCount';
+  }
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Tháng sau';
 
   @override
@@ -61,6 +66,12 @@ class FLocalizationsVi extends FLocalizations {
 
   @override
   String get dialogSemanticsLabel => 'Hộp thoại';
+
+  @override
+  String get headerBackSemanticsLabel => 'Quay lại';
+
+  @override
+  String get headerCloseSemanticsLabel => 'Đóng';
 
   @override
   String get paginationPreviousSemanticsLabel => 'Trước';

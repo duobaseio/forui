@@ -36,5 +36,8 @@
   "calendarNextYearSemanticsLabel": "Järgmine aasta",
   "calendarPreviousYearSemanticsLabel": "Eelmine aasta",
   "calendarNextYearsSemanticsLabel": "Järgmised aastad",
-  "calendarPreviousYearsSemanticsLabel": "Eelmised aastad"
+  "calendarPreviousYearsSemanticsLabel": "Eelmised aastad",
+  "headerBackSemanticsLabel": "Tagasi",
+  "headerCloseSemanticsLabel": "Sule",
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount}-st {tabIndex}. vahekaart"
 }

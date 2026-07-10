@@ -40,16 +40,12 @@ final class FAccessibility with Diagnosticable {
   const FAccessibility({required this.accessibleNavigation, required this.motion, required this.focusHighlight});
 
   /// Returns a copy of this [FAccessibility] with the given fields replaced.
-  FAccessibility copyWith({
-    bool? accessibleNavigation,
-    bool? deterministicCursor,
-    FAccessibilityMotion? motion,
-    bool? focusHighlight,
-  }) => FAccessibility(
-    accessibleNavigation: accessibleNavigation ?? this.accessibleNavigation,
-    motion: motion ?? this.motion,
-    focusHighlight: focusHighlight ?? this.focusHighlight,
-  );
+  FAccessibility copyWith({bool? accessibleNavigation, FAccessibilityMotion? motion, bool? focusHighlight}) =>
+      FAccessibility(
+        accessibleNavigation: accessibleNavigation ?? this.accessibleNavigation,
+        motion: motion ?? this.motion,
+        focusHighlight: focusHighlight ?? this.focusHighlight,
+      );
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
