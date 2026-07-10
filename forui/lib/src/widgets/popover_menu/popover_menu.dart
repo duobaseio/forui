@@ -110,6 +110,9 @@ class FPopoverMenu extends StatefulWidget {
   /// {@macro forui.widgets.FTileGroup.dragStartBehavior}
   final DragStartBehavior dragStartBehavior;
 
+  /// {@macro forui.widgets.FTileGroup.physics}
+  final ScrollPhysics physics;
+
   /// {@macro forui.widgets.FTileGroup.divider}
   ///
   /// Defaults to [FItemDivider.full].
@@ -228,6 +231,7 @@ class FPopoverMenu extends StatefulWidget {
     this.maxHeight = .infinity,
     this.intrinsicWidth = true,
     this.dragStartBehavior = .start,
+    this.physics = const ClampingScrollPhysics(),
     this.divider = .full,
     this.menuAnchor = .topCenter,
     this.childAnchor = .bottomCenter,
@@ -262,6 +266,7 @@ class FPopoverMenu extends StatefulWidget {
          maxHeight: maxHeight,
          intrinsicWidth: intrinsicWidth,
          dragStartBehavior: dragStartBehavior,
+         physics: physics,
          semanticsLabel: semanticsLabel,
          style: style.itemGroupStyle,
          divider: divider,
@@ -293,6 +298,7 @@ class FPopoverMenu extends StatefulWidget {
     this.maxHeight = .infinity,
     this.intrinsicWidth = true,
     this.dragStartBehavior = .start,
+    this.physics = const ClampingScrollPhysics(),
     this.divider = .full,
     this.menuAnchor = .topCenter,
     this.childAnchor = .bottomCenter,
@@ -327,6 +333,7 @@ class FPopoverMenu extends StatefulWidget {
          maxHeight: maxHeight,
          intrinsicWidth: intrinsicWidth,
          dragStartBehavior: dragStartBehavior,
+         physics: physics,
          semanticsLabel: semanticsLabel,
          style: style.tileGroupStyle,
          divider: divider,
@@ -349,6 +356,7 @@ class FPopoverMenu extends StatefulWidget {
       ..add(DoubleProperty('maxHeight', maxHeight))
       ..add(FlagProperty('intrinsicWidth', value: intrinsicWidth, ifTrue: 'intrinsicWidth'))
       ..add(EnumProperty('dragStartBehavior', dragStartBehavior))
+      ..add(DiagnosticsProperty('physics', physics))
       ..add(EnumProperty('divider', divider))
       ..add(DiagnosticsProperty('popoverAnchor', menuAnchor))
       ..add(DiagnosticsProperty('childAnchor', childAnchor))

@@ -42,7 +42,6 @@ final class FAccessibility with Diagnosticable {
   /// Returns a copy of this [FAccessibility] with the given fields replaced.
   FAccessibility copyWith({
     bool? accessibleNavigation,
-    bool? deterministicCursor,
     FAccessibilityMotion? motion,
     bool? focusHighlight,
   }) => FAccessibility(

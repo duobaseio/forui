@@ -51,16 +51,12 @@
 * Change `FDialog` to fade without scaling when motion is reduced.
 
 
-### `FFocusHighlight`
-* Add `FFocusHighlight` to gate descendant focus decorations on `FocusManager.highlightMode`.
-
-
-### `FOtpField`
-* Change `FOtpField` to stop its caret blinking under a deterministic cursor or disabled animations.
-
-
 ### `FPopover`
 * Change `FPopover` (and `FSelect`, `FAutocomplete`) to fade without scaling when motion is reduced.
+
+
+### `FPopoverMenu`
+* Add `physics` to `FPopoverMenu` and `FPopoverMenu.tiles`.
 
 
 ### `FPortal` & `FPointPortal`
