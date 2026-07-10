@@ -82,6 +82,8 @@ class FAvatar extends StatelessWidget {
 }
 
 /// [FAvatar]'s style.
+///
+/// All motion is automatically disabled when [FAccessibility.motion] is [FAccessibilityMotion.disabled].
 class FAvatarStyle with Diagnosticable, _$FAvatarStyleFunctions {
   /// The fallback's background color.
   @override

@@ -280,4 +280,43 @@ void main() {
       });
     }
   }
+
+  group('accessibility', () {
+    for (final (name, features) in [
+      ('full', const FakeAccessibilityFeatures()),
+      ('reduced', const FakeAccessibilityFeatures(reduceMotion: true)),
+      ('disabled', const FakeAccessibilityFeatures(disableAnimations: true)),
+    ]) {
+      testWidgets('$name motion', (tester) async {
+        tester.platformDispatcher.accessibilityFeaturesTestValue = features;
+        addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+
+        final sheet = autoDispose(AnimationSheetBuilder(frameSize: const Size(300, 100)));
+
+        Widget build(Set<FFormFieldVariant> variants) => TestScaffold.app(
+          child: SizedBox(
+            width: 300,
+            child: FLabel(
+              layout: .horizontalTrailing,
+              label: const Text('Email'),
+              description: const Text('Enter your email address.'),
+              error: const Text('Please enter a valid email address.'),
+              variants: variants,
+              child: const DecoratedBox(
+                decoration: BoxDecoration(borderRadius: .all(.circular(5)), color: Colors.grey),
+                child: SizedBox(width: 16, height: 16),
+              ),
+            ),
+          ),
+        );
+
+        await tester.pumpWidget(sheet.record(build(const {}), recording: false));
+        await tester.pumpAndSettle();
+
+        await tester.pumpFrames(sheet.record(build({.error})), const Duration(milliseconds: 120));
+
+        await expectLater(sheet.collate(5), matchesGoldenFile('label/motion-$name.png'));
+      });
+    }
+  });
 }

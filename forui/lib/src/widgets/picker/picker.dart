@@ -95,12 +95,21 @@ class _FPickerState extends State<FPicker> {
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _updateMotion();
+  }
+
+  @override
   void didUpdateWidget(covariant FPicker old) {
     super.didUpdateWidget(old);
     _controller = widget.control
         .update(old.control, _controller, _handleChange, widget.children.whereType<FPickerWheel>().length)
         .$1;
+    _updateMotion();
   }
+
+  void _updateMotion() => _controller.reduceMotion = context.accessibility.motion != .all;
 
   @override
   void dispose() {

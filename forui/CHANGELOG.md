@@ -10,6 +10,12 @@
 * Fix `FAccordionItem` header not exposing its expanded state.
 
 
+### `FAvatar`
+* Change `FAvatar` to skip its cross-fade when animations are disabled.
+
+* Fix `FAvatarStyle.fadeInDuration` being ignored.
+
+
 ### `FBreadcrumb`
 * Fix collapsed `FBreadcrumb` trigger not exposing its expanded state.
 
@@ -63,6 +69,14 @@
 
 ### `FItem` & `FTile`
 * Add `expanded`.
+
+
+### `FLabel`
+* Change `FLabel` to show errors instantly when motion is reduced or disabled.
+
+
+### `FPicker`
+* Change `FPicker` to jump to selected items when motion is reduced or disabled.
 
 
 ### `FPopover`

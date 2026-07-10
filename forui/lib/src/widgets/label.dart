@@ -243,23 +243,16 @@ abstract class _State<T extends _Label> extends State<T> with TickerProviderStat
   }
 
   @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    _updateMotion();
+  }
+
+  @override
   void didUpdateWidget(covariant T old) {
     super.didUpdateWidget(old);
     if (old.style.labelMotion != widget.style.labelMotion) {
-      final motion = widget.style.labelMotion;
-      _sizeController
-        ..duration = motion.errorExpandDuration
-        ..reverseDuration = motion.errorCollapseDuration;
-      _fadeController
-        ..duration = motion.errorFadeInDuration
-        ..reverseDuration = motion.errorFadeOutDuration;
-      _curvedSize
-        ..curve = motion.errorExpandCurve
-        ..reverseCurve = motion.errorCollapseCurve;
-      _curvedFade
-        ..curve = motion.errorFadeInCurve
-        ..reverseCurve = motion.errorFadeOutCurve;
-      _fade = motion.errorFadeTween.animate(_curvedFade);
+      _updateMotion();
     }
 
     if (widget.variants.contains(FFormFieldVariant.error)) {
@@ -272,6 +265,23 @@ abstract class _State<T extends _Label> extends State<T> with TickerProviderStat
     }
   }
 
+  void _updateMotion() {
+    final motion = context.accessibility.motion == .all ? widget.style.labelMotion : FLabelMotion.none;
+    _sizeController
+      ..duration = motion.errorExpandDuration
+      ..reverseDuration = motion.errorCollapseDuration;
+    _fadeController
+      ..duration = motion.errorFadeInDuration
+      ..reverseDuration = motion.errorFadeOutDuration;
+    _curvedSize
+      ..curve = motion.errorExpandCurve
+      ..reverseCurve = motion.errorCollapseCurve;
+    _curvedFade
+      ..curve = motion.errorFadeInCurve
+      ..reverseCurve = motion.errorFadeOutCurve;
+    _fade = motion.errorFadeTween.animate(_curvedFade);
+  }
+
   @override
   void dispose() {
     _curvedFade.dispose();
@@ -281,24 +291,29 @@ abstract class _State<T extends _Label> extends State<T> with TickerProviderStat
     super.dispose();
   }
 
-  Widget _animatedError(BuildContext context, [TextHeightBehavior? behavior]) => AnimatedBuilder(
-    animation: _curvedSize,
-    builder: (context, child) =>
-        Align(alignment: .topStart, heightFactor: _curvedSize.value, widthFactor: 1.0, child: child),
-    child: FadeTransition(
-      opacity: _fade,
-      child: Padding(
-        padding: widget.style.errorPadding,
-        child: AnimatedDefaultTextStyle(
-          style: widget.style.errorTextStyle.resolve(widget.variants),
-          duration: widget.style.labelMotion.textStyleTransitionDuration,
-          curve: widget.style.labelMotion.textStyleTransitionCurve,
-          textHeightBehavior: behavior,
-          child: Semantics(validationResult: .invalid, child: _error!),
+  Widget _animatedError(BuildContext context, [TextHeightBehavior? behavior]) {
+    final motion = _motion;
+    return AnimatedBuilder(
+      animation: _curvedSize,
+      builder: (context, child) =>
+          Align(alignment: .topStart, heightFactor: _curvedSize.value, widthFactor: 1.0, child: child),
+      child: FadeTransition(
+        opacity: _fade,
+        child: Padding(
+          padding: widget.style.errorPadding,
+          child: AnimatedDefaultTextStyle(
+            style: widget.style.errorTextStyle.resolve(widget.variants),
+            duration: motion.textStyleTransitionDuration,
+            curve: motion.textStyleTransitionCurve,
+            textHeightBehavior: behavior,
+            child: Semantics(validationResult: .invalid, child: _error!),
+          ),
         ),
       ),
-    ),
-  );
+    );
+  }
+
+  FLabelMotion get _motion => context.accessibility.motion == .all ? widget.style.labelMotion : FLabelMotion.none;
 }
 
 class _HorizontalLeadingLabel extends _Label {
@@ -367,13 +382,14 @@ class _HorizontalLeadingState extends _State<_HorizontalLeadingLabel> {
       return const TableCell(child: SizedBox());
     }
 
+    final motion = _motion;
     return TableCell(
       child: Padding(
         padding: padding,
         child: AnimatedDefaultTextStyle(
           style: textStyle,
-          duration: widget.style.labelMotion.textStyleTransitionDuration,
-          curve: widget.style.labelMotion.textStyleTransitionCurve,
+          duration: motion.textStyleTransitionDuration,
+          curve: motion.textStyleTransitionCurve,
           child: child,
         ),
       ),
@@ -447,13 +463,14 @@ class _HorizontalTrailingState extends _State<_HorizontalTrailingLabel> {
       return const TableCell(child: SizedBox());
     }
 
+    final motion = _motion;
     return TableCell(
       child: Padding(
         padding: padding,
         child: AnimatedDefaultTextStyle(
           style: textStyle,
-          duration: widget.style.labelMotion.textStyleTransitionDuration,
-          curve: widget.style.labelMotion.textStyleTransitionCurve,
+          duration: motion.textStyleTransitionDuration,
+          curve: motion.textStyleTransitionCurve,
           child: child,
         ),
       ),
@@ -494,41 +511,44 @@ class _VerticalLabel extends _Label {
 
 class _VerticalLabelState extends _State<_VerticalLabel> {
   @override
-  Widget build(BuildContext context) => Column(
-    crossAxisAlignment: .start,
-    mainAxisSize: .min,
-    children: [
-      if (widget.label != null)
-        Padding(
-          padding: widget.style.labelPadding,
-          child: AnimatedDefaultTextStyle(
-            style: widget.style.labelTextStyle.resolve(widget.variants),
-            duration: widget.style.labelMotion.textStyleTransitionDuration,
-            curve: widget.style.labelMotion.textStyleTransitionCurve,
-            textHeightBehavior: const TextHeightBehavior(applyHeightToFirstAscent: false),
-            child: widget.label!,
+  Widget build(BuildContext context) {
+    final motion = _motion;
+    return Column(
+      crossAxisAlignment: .start,
+      mainAxisSize: .min,
+      children: [
+        if (widget.label != null)
+          Padding(
+            padding: widget.style.labelPadding,
+            child: AnimatedDefaultTextStyle(
+              style: widget.style.labelTextStyle.resolve(widget.variants),
+              duration: motion.textStyleTransitionDuration,
+              curve: motion.textStyleTransitionCurve,
+              textHeightBehavior: const TextHeightBehavior(applyHeightToFirstAscent: false),
+              child: widget.label!,
+            ),
           ),
-        ),
-      if (widget.expands)
-        Expanded(
-          child: Padding(padding: widget.style.childPadding, child: widget.child),
-        )
-      else
-        Padding(padding: widget.style.childPadding, child: widget.child),
-      if (widget.description != null)
-        Padding(
-          padding: widget.style.descriptionPadding,
-          child: AnimatedDefaultTextStyle(
-            style: widget.style.descriptionTextStyle.resolve(widget.variants),
-            duration: widget.style.labelMotion.textStyleTransitionDuration,
-            curve: widget.style.labelMotion.textStyleTransitionCurve,
-            textHeightBehavior: const TextHeightBehavior(applyHeightToFirstAscent: false),
-            child: widget.description!,
+        if (widget.expands)
+          Expanded(
+            child: Padding(padding: widget.style.childPadding, child: widget.child),
+          )
+        else
+          Padding(padding: widget.style.childPadding, child: widget.child),
+        if (widget.description != null)
+          Padding(
+            padding: widget.style.descriptionPadding,
+            child: AnimatedDefaultTextStyle(
+              style: widget.style.descriptionTextStyle.resolve(widget.variants),
+              duration: motion.textStyleTransitionDuration,
+              curve: motion.textStyleTransitionCurve,
+              textHeightBehavior: const TextHeightBehavior(applyHeightToFirstAscent: false),
+              child: widget.description!,
+            ),
           ),
-        ),
-      if (_error != null) _animatedError(context, const TextHeightBehavior(applyHeightToFirstAscent: false)),
-    ],
-  );
+        if (_error != null) _animatedError(context, const TextHeightBehavior(applyHeightToFirstAscent: false)),
+      ],
+    );
+  }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -639,6 +659,8 @@ class FLabelStyle extends FFormFieldStyle with _$FLabelStyleFunctions {
 }
 
 /// Motion-related properties for [FLabel] animations.
+///
+/// All motion is automatically disabled when [FAccessibility.motion] is not [FAccessibilityMotion.all].
 class FLabelMotion with Diagnosticable, _$FLabelMotionFunctions {
   /// A [FLabelMotion] with no motion effects.
   static const FLabelMotion none = FLabelMotion(

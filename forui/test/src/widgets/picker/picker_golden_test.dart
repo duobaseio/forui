@@ -1,6 +1,8 @@
 @Tags(['golden'])
 library;
 
+import 'dart:async';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
@@ -267,5 +269,35 @@ void main() {
     await expectLater(find.byType(TestScaffold), matchesGoldenFile('picker/arrow-key.png'));
 
     debugDefaultTargetPlatformOverride = null;
+  });
+
+  group('accessibility', () {
+    for (final (name, features) in [
+      ('full', const FakeAccessibilityFeatures()),
+      ('reduced', const FakeAccessibilityFeatures(reduceMotion: true)),
+      ('disabled', const FakeAccessibilityFeatures(disableAnimations: true)),
+    ]) {
+      testWidgets('$name motion', (tester) async {
+        tester.platformDispatcher.accessibilityFeaturesTestValue = features;
+        addTearDown(tester.platformDispatcher.clearAccessibilityFeaturesTestValue);
+
+        final wheel = FPickerController(indexes: [1]);
+        addTearDown(wheel.dispose);
+        final sheet = autoDispose(AnimationSheetBuilder(frameSize: const Size(300, 300)));
+
+        Widget build() => TestScaffold.app(
+          child: FPicker(
+            control: .managed(controller: wheel),
+            children: const [FPickerWheel(flex: 3, children: months)],
+          ),
+        );
+
+        await tester.pumpWidget(sheet.record(build(), recording: false));
+        unawaited(wheel.animateTo([8]));
+        await tester.pumpFrames(sheet.record(build()), const Duration(milliseconds: 300));
+
+        await expectLater(sheet.collate(5), matchesGoldenFile('picker/motion-$name.png'));
+      });
+    }
   });
 }
