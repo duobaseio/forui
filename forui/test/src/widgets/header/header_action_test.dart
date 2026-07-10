@@ -120,7 +120,10 @@ void main() {
     testWidgets('.back defaults to a localized label', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FHeader.nested(title: const Text('Title'), prefixes: [FHeaderAction.back(onPress: () {})]),
+          child: FHeader.nested(
+            title: const Text('Title'),
+            prefixes: [FHeaderAction.back(onPress: () {})],
+          ),
         ),
       );
 
@@ -130,7 +133,10 @@ void main() {
     testWidgets('.x defaults to a localized label', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FHeader.nested(title: const Text('Title'), suffixes: [FHeaderAction.x(onPress: () {})]),
+          child: FHeader.nested(
+            title: const Text('Title'),
+            suffixes: [FHeaderAction.x(onPress: () {})],
+          ),
         ),
       );
 

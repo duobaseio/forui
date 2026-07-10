@@ -52,7 +52,11 @@ void main() {
   group('accessibility', () {
     for (final (value, percent) in [(0.0, '0%'), (0.05, '5%'), (0.5, '50%'), (1.0, '100%')]) {
       testWidgets('exposes $value as semantic value $percent', (tester) async {
-        await tester.pumpWidget(TestScaffold.app(child: FDeterminateProgress(value: value, semanticsLabel: 'progress')));
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FDeterminateProgress(value: value, semanticsLabel: 'progress'),
+          ),
+        );
         await tester.pumpAndSettle();
 
         expect(tester.getSemantics(find.bySemanticsLabel('progress')), isSemantics(value: percent));

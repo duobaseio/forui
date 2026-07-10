@@ -101,7 +101,11 @@ class FBottomNavigationBarItem extends StatelessWidget {
               if (label case final label?)
                 Padding(
                   padding: .only(top: style.spacing),
-                  child: DefaultTextStyle.merge(style: style.textStyle.resolve(variants), overflow: .ellipsis, child: label),
+                  child: DefaultTextStyle.merge(
+                    style: style.textStyle.resolve(variants),
+                    overflow: .ellipsis,
+                    child: label,
+                  ),
                 ),
               // We insert semantics as a separate widget here so that the order is always '<label>, <position>',
               // regardless of whether a label and/or semantics label is provided.

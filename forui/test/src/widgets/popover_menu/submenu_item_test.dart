@@ -691,7 +691,9 @@ void main() {
                     .submenu(
                       title: const Text('Share'),
                       submenu: [
-                        .group(children: [.item(title: const Text('Email'), onPress: () {})]),
+                        .group(
+                          children: [.item(title: const Text('Email'), onPress: () {})],
+                        ),
                       ],
                     ),
                   ],

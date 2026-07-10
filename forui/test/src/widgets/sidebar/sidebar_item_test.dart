@@ -69,7 +69,10 @@ void main() {
         TestScaffold.app(
           child: FSidebar(
             children: const [
-              FSidebarItem(label: Text('Parent'), children: [FSidebarItem(label: Text('Child'))]),
+              FSidebarItem(
+                label: Text('Parent'),
+                children: [FSidebarItem(label: Text('Child'))],
+              ),
             ],
           ),
         ),
@@ -85,7 +88,11 @@ void main() {
 
     testWidgets('leaf item has no expanded state', (tester) async {
       await tester.pumpWidget(
-        TestScaffold.app(child: FSidebar(children: [FSidebarItem(label: const Text('Leaf'), onPress: () {})])),
+        TestScaffold.app(
+          child: FSidebar(
+            children: [FSidebarItem(label: const Text('Leaf'), onPress: () {})],
+          ),
+        ),
       );
 
       expect(tester.getSemantics(find.text('Leaf')), isSemantics(hasExpandedState: false));

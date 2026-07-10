@@ -62,7 +62,11 @@ void main() {
 
     for (final value in [true, false]) {
       testWidgets('announces checkbox role with checked state - $value', (tester) async {
-        await tester.pumpWidget(TestScaffold.app(child: FCheckbox(value: value, semanticsLabel: 'checkbox')));
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FCheckbox(value: value, semanticsLabel: 'checkbox'),
+          ),
+        );
 
         expect(
           tester.getSemantics(find.bySemanticsLabel('checkbox')),

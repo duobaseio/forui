@@ -191,7 +191,9 @@ void main() {
     testWidgets('header exposes expanded state that flips on toggle', (tester) async {
       await tester.pumpWidget(
         TestScaffold(
-          child: const FAccordion(children: [FAccordionItem(title: Text('Title'), child: Text('Content'))]),
+          child: const FAccordion(
+            children: [FAccordionItem(title: Text('Title'), child: Text('Content'))],
+          ),
         ),
       );
 

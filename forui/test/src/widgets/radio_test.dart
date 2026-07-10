@@ -74,7 +74,11 @@ void main() {
 
     for (final value in [true, false]) {
       testWidgets('announces radio role with checked state - $value', (tester) async {
-        await tester.pumpWidget(TestScaffold.app(child: FRadio(value: value, semanticsLabel: 'radio')));
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FRadio(value: value, semanticsLabel: 'radio'),
+          ),
+        );
 
         expect(
           tester.getSemantics(find.bySemanticsLabel('radio')),

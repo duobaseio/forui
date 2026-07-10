@@ -292,7 +292,10 @@ void main() {
     testWidgets('trigger exposes expanded state that flips when the menu opens', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FSelectMenuTile<int>(title: const Text('Title'), menu: const [.tile(title: Text('1'), value: 1)]),
+          child: FSelectMenuTile<int>(
+            title: const Text('Title'),
+            menu: const [.tile(title: Text('1'), value: 1)],
+          ),
         ),
       );
 

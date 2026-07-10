@@ -914,7 +914,9 @@ void main() {
   group('accessibility', () {
     testWidgets('is a button with no state flags by default', (tester) async {
       await tester.pumpWidget(
-        TestScaffold.app(child: FTappable.static(onPress: () {}, child: const Text('tappable'))),
+        TestScaffold.app(
+          child: FTappable.static(onPress: () {}, child: const Text('tappable')),
+        ),
       );
 
       expect(
@@ -953,7 +955,12 @@ void main() {
     testWidgets('suppresses selected flag when checked is set', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          child: FTappable.static(selected: true, semanticsChecked: true, onPress: () {}, child: const Text('tappable')),
+          child: FTappable.static(
+            selected: true,
+            semanticsChecked: true,
+            onPress: () {},
+            child: const Text('tappable'),
+          ),
         ),
       );
 
@@ -965,7 +972,9 @@ void main() {
 
     testWidgets('exposes selected flag without checked', (tester) async {
       await tester.pumpWidget(
-        TestScaffold.app(child: FTappable.static(selected: true, onPress: () {}, child: const Text('tappable'))),
+        TestScaffold.app(
+          child: FTappable.static(selected: true, onPress: () {}, child: const Text('tappable')),
+        ),
       );
 
       expect(tester.getSemantics(find.text('tappable')), isSemantics(hasSelectedState: true, isSelected: true));

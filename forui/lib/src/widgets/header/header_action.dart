@@ -23,6 +23,7 @@ class FHeaderAction extends StatelessWidget {
   /// dart run forui style create header-action
   /// ```
   final FHeaderActionStyleDelta style;
+
   /// The icon, wrapped in a [IconThemeData].
   final Widget icon;
 
