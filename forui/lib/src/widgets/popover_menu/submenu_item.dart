@@ -295,6 +295,7 @@ class FSubmenuItem extends StatelessWidget with FItemMixin {
             enabled: enabled,
             selected: controller.status.isForwardOrCompleted,
             semanticsLabel: semanticsLabel,
+            semanticsExpanded: controller.status.isForwardOrCompleted,
             autofocus: autofocus,
             focusNode: focusNode,
             onFocusChange: onFocusChange,

@@ -654,26 +654,30 @@ class _FSelectMenuTileState<T> extends State<FSelectMenuTile<T>> with TickerProv
               count: widget._count,
             );
           },
-          child: FTile(
-            style: tileStyle,
-            onFocusChange: (focused) {
-              if (_focused != focused && mounted) {
-                setState(() => _focused = focused);
-              }
-            },
-            prefix: widget.prefix,
-            enabled: widget.enabled,
-            title: widget.title,
-            subtitle: widget.subtitle,
-            details: ValueListenableBuilder(
-              valueListenable: _controller.delegate,
-              builder: widget.detailsBuilder,
-              child: widget.details,
+          child: ListenableBuilder(
+            listenable: _controller._popover,
+            builder: (context, _) => FTile(
+              style: tileStyle,
+              semanticsExpanded: _controller._popover.status.isForwardOrCompleted,
+              onFocusChange: (focused) {
+                if (_focused != focused && mounted) {
+                  setState(() => _focused = focused);
+                }
+              },
+              prefix: widget.prefix,
+              enabled: widget.enabled,
+              title: widget.title,
+              subtitle: widget.subtitle,
+              details: ValueListenableBuilder(
+                valueListenable: _controller.delegate,
+                builder: widget.detailsBuilder,
+                child: widget.details,
+              ),
+              suffix: widget.suffix ?? context.theme.icons.chevronsUpDown(context),
+              shortcuts: widget.shortcuts,
+              actions: widget.actions,
+              onPress: _controller._popover.toggle,
             ),
-            suffix: widget.suffix ?? context.theme.icons.chevronsUpDown(context),
-            shortcuts: widget.shortcuts,
-            actions: widget.actions,
-            onPress: _controller._popover.toggle,
           ),
         );
 

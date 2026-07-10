@@ -62,4 +62,33 @@ void main() {
       });
     }
   });
+
+  group('accessibility', () {
+    testWidgets('collapsible item exposes expanded state that flips on toggle', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FSidebar(
+            children: const [
+              FSidebarItem(label: Text('Parent'), children: [FSidebarItem(label: Text('Child'))]),
+            ],
+          ),
+        ),
+      );
+
+      expect(tester.getSemantics(find.text('Parent')), isSemantics(hasExpandedState: true, isExpanded: false));
+
+      await tester.tap(find.text('Parent'));
+      await tester.pumpAndSettle();
+
+      expect(tester.getSemantics(find.text('Parent')), isSemantics(hasExpandedState: true, isExpanded: true));
+    });
+
+    testWidgets('leaf item has no expanded state', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(child: FSidebar(children: [FSidebarItem(label: const Text('Leaf'), onPress: () {})])),
+      );
+
+      expect(tester.getSemantics(find.text('Leaf')), isSemantics(hasExpandedState: false));
+    });
+  });
 }

@@ -29,6 +29,7 @@ final popoverMenu = FPopoverMenu(
   // {@category "Scroll"}
   scrollController: null,
   scrollCacheExtent: null,
+  physics: const ClampingScrollPhysics(),
   dragStartBehavior: .start,
   // {@endcategory}
   // {@category "Accessibility"}
@@ -83,6 +84,7 @@ final popoverMenuTiles = FPopoverMenu.tiles(
   // {@category "Scroll"}
   scrollController: null,
   scrollCacheExtent: null,
+  physics: const ClampingScrollPhysics(),
   dragStartBehavior: .start,
   // {@endcategory}
   // {@category "Accessibility"}

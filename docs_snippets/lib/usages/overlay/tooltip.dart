@@ -20,6 +20,9 @@ final tooltip = FTooltip(
   hover: true,
   longPress: true,
   // {@endcategory}
+  // {@category "Accessibility"}
+  semanticsLabel: 'Tooltip',
+  // {@endcategory}
   // {@category "Core"}
   style: const .delta(padding: .value(.symmetric(horizontal: 14, vertical: 10))),
   tipBuilder: (context, controller) => const Text('Tooltip content'),

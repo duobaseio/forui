@@ -7,15 +7,25 @@
 ### `FAccordionItem`
 * Change `FAccordionItem` to expand and collapse instantly when motion is reduced or disabled.
 
+* Fix `FAccordionItem` header not exposing its expanded state.
+
+
+### `FBreadcrumb`
+* Fix collapsed `FBreadcrumb` trigger not exposing its expanded state.
+
 
 ### `FCalendar`
 * Add PageUp/PageDown, Shift+PageUp/PageDown, and Home/End keyboard navigation to the grids.
 
 * Change `FCalendar` to jump between pages when animations are disabled.
 
+* Fix calendar month/year header not exposing its expanded state.
+
 
 ### `FCheckbox`
 * Change `FCheckbox` to swap instantly when animations are disabled.
+
+* Fix `FCheckbox` not exposing its checkbox role and checked state.
 
 
 ### `FCircularProgress`
@@ -51,12 +61,18 @@
 * Change `FDialog` to fade without scaling when motion is reduced.
 
 
+### `FItem` & `FTile`
+* Add `expanded`.
+
+
 ### `FPopover`
 * Change `FPopover` (and `FSelect`, `FAutocomplete`) to fade without scaling when motion is reduced.
 
 
 ### `FPopoverMenu`
 * Add `physics` to `FPopoverMenu` and `FPopoverMenu.tiles`.
+
+* Fix `FSubmenuItem` and `FSubmenuTile` triggers not exposing their expanded state.
 
 
 ### `FPortal` & `FPointPortal`
@@ -71,9 +87,15 @@
 ### `FRadio`
 * Change `FRadio` to update instantly when animations are disabled.
 
+* Fix `FRadio` not exposing its radio role and checked state.
+
 
 ### `FResizable`
 * Fix `FResizable` resetting regions to their initial sizes when the main-axis constraint changes (e.g. window resize).
+
+
+### `FSelectMenuTile`
+* Fix `FSelectMenuTile` trigger not exposing its expanded state.
 
 
 ### `FSheet` & `FPersistentSheet`
@@ -82,6 +104,8 @@
 
 ### `FSidebarItem`
 * Change `FSidebarItem` to reveal instantly when motion is reduced or disabled, keeping its fade under reduced.
+
+* Fix collapsible `FSidebarItem` not exposing its expanded state.
 
 
 ### `FTabs`
@@ -92,6 +116,8 @@
 
 
 ### `FTappable`
+* Add `button`, `checked`, `expanded`, and `inMutuallyExclusiveGroup`.
+
 * Change `FTappable` to skip its press bounce when animations are disabled.
 
 

@@ -71,5 +71,16 @@ void main() {
       expect(size.duration, motion.selectDuration);
       expect(size.reverseDuration, motion.unselectDuration);
     });
+
+    for (final value in [true, false]) {
+      testWidgets('announces radio role with checked state - $value', (tester) async {
+        await tester.pumpWidget(TestScaffold.app(child: FRadio(value: value, semanticsLabel: 'radio')));
+
+        expect(
+          tester.getSemantics(find.bySemanticsLabel('radio')),
+          isSemantics(hasCheckedState: true, isChecked: value, isInMutuallyExclusiveGroup: true, isButton: false),
+        );
+      });
+    }
   });
 }

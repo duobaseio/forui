@@ -13,6 +13,7 @@ final item = FItem(
   focusNode: null,
   onFocusChange: (focused) {},
   semanticsLabel: 'Item',
+  semanticsExpanded: null,
   shortcuts: null,
   actions: null,
   // {@endcategory}
@@ -46,6 +47,7 @@ final raw = FItem.raw(
   focusNode: null,
   onFocusChange: (focused) {},
   semanticsLabel: 'Item',
+  semanticsExpanded: null,
   shortcuts: null,
   actions: null,
   // {@endcategory}

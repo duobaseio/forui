@@ -113,6 +113,8 @@ class FCheckbox extends StatelessWidget {
       style: style.tappableStyle,
       semanticsLabel: semanticsLabel,
       selected: value,
+      semanticsButton: false,
+      semanticsChecked: value,
       onPress: enabled ? () => onChange?.call(!value) : null,
       autofocus: autofocus,
       focusNode: focusNode,

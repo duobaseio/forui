@@ -398,6 +398,20 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
   @override
   Widget build(BuildContext context) {
     final style = FBreadcrumbItemData.of(context).style;
+    final child = ListenableBuilder(
+      listenable: _controller,
+      builder: (context, child) => FTappable(
+        focusedOutlineStyle: style.focusedOutlineStyle,
+        semanticsExpanded: _controller.status.isForwardOrCompleted,
+        onPress: _controller.toggle,
+        child: child,
+      ),
+      child: Padding(
+        padding: style.collapsedPadding,
+        child: IconTheme(data: style.iconStyle, child: widget.icon ?? context.theme.icons.ellipsis(context)),
+      ),
+    );
+
     if (widget.itemMenu case final menu?) {
       return FPopoverMenu(
         control: .managed(controller: _controller),
@@ -423,14 +437,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
         semanticsLabel: widget.semanticsLabel,
         divider: widget.divider,
         menu: menu,
-        child: FTappable(
-          focusedOutlineStyle: style.focusedOutlineStyle,
-          onPress: _controller.toggle,
-          child: Padding(
-            padding: style.collapsedPadding,
-            child: IconTheme(data: style.iconStyle, child: widget.icon ?? context.theme.icons.ellipsis(context)),
-          ),
-        ),
+        child: child,
       );
     } else {
       return FPopoverMenu.tiles(
@@ -456,14 +463,7 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
         semanticsLabel: widget.semanticsLabel,
         divider: widget.divider,
         menu: widget.tileMenu!,
-        child: FTappable(
-          focusedOutlineStyle: style.focusedOutlineStyle,
-          onPress: _controller.toggle,
-          child: Padding(
-            padding: style.collapsedPadding,
-            child: IconTheme(data: style.iconStyle, child: widget.icon ?? context.theme.icons.ellipsis(context)),
-          ),
-        ),
+        child: child,
       );
     }
   }

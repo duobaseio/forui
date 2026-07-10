@@ -13,6 +13,7 @@ final tile = FTile(
   focusNode: null,
   onFocusChange: (focused) {},
   semanticsLabel: 'Tile',
+  semanticsExpanded: null,
   shortcuts: null,
   actions: null,
   // {@endcategory}
@@ -46,6 +47,7 @@ final tileRaw = FTile.raw(
   focusNode: null,
   onFocusChange: (focused) {},
   semanticsLabel: 'Tile',
+  semanticsExpanded: null,
   shortcuts: null,
   actions: null,
   // {@endcategory}

@@ -176,41 +176,47 @@ class _FAccordionItemState extends State<FAccordionItem> with TickerProviderStat
     return Column(
       crossAxisAlignment: .stretch,
       children: [
-        FTappable(
-          style: style.tappableStyle,
-          autofocus: widget.autofocus,
-          focusNode: widget.focusNode,
-          onFocusChange: widget.onFocusChange,
-          onHoverChange: widget.onHoverChange,
-          onVariantChange: widget.onVariantChange,
-          onPress: () => controller.toggle(index),
-          builder: (_, variants, _) => Padding(
-            padding: style.titlePadding,
-            child: Row(
-              crossAxisAlignment: .start,
-              children: [
-                Expanded(
-                  child: DefaultTextStyle.merge(
-                    textHeightBehavior: const TextHeightBehavior(
-                      applyHeightToFirstAscent: false,
-                      applyHeightToLastDescent: false,
-                    ),
-                    style: style.titleTextStyle.resolve(variants),
-                    child: widget.title,
-                  ),
-                ),
-                FFocusedOutline(
-                  style: style.focusedOutlineStyle,
-                  focused: variants.contains(FTappableVariant.focused),
-                  child: RotationTransition(
-                    turns: _iconRotation!,
-                    child: IconTheme(
-                      data: style.iconStyle.resolve(variants),
-                      child: widget.icon ?? context.theme.icons.chevronDown(context),
+        // Rebuilt on toggle so the expanded semantics track the live controller state; the InheritedAccordionData
+        // snapshot is only recomputed when the accordion itself rebuilds.
+        ListenableBuilder(
+          listenable: controller,
+          builder: (context, _) => FTappable(
+            style: style.tappableStyle,
+            autofocus: widget.autofocus,
+            focusNode: widget.focusNode,
+            onFocusChange: widget.onFocusChange,
+            onHoverChange: widget.onHoverChange,
+            onVariantChange: widget.onVariantChange,
+            semanticsExpanded: controller.expanded.contains(index),
+            onPress: () => controller.toggle(index),
+            builder: (_, variants, _) => Padding(
+              padding: style.titlePadding,
+              child: Row(
+                crossAxisAlignment: .start,
+                children: [
+                  Expanded(
+                    child: DefaultTextStyle.merge(
+                      textHeightBehavior: const TextHeightBehavior(
+                        applyHeightToFirstAscent: false,
+                        applyHeightToLastDescent: false,
+                      ),
+                      style: style.titleTextStyle.resolve(variants),
+                      child: widget.title,
                     ),
                   ),
-                ),
-              ],
+                  FFocusedOutline(
+                    style: style.focusedOutlineStyle,
+                    focused: variants.contains(FTappableVariant.focused),
+                    child: RotationTransition(
+                      turns: _iconRotation!,
+                      child: IconTheme(
+                        data: style.iconStyle.resolve(variants),
+                        child: widget.icon ?? context.theme.icons.chevronDown(context),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),
