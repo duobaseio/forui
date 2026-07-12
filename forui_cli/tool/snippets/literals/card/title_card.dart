@@ -6,11 +6,7 @@ class TitleCard extends StatelessWidget {
   final Widget title;
   final Widget subtitle;
 
-  const TitleCard({
-    required this.title,
-    required this.subtitle,
-    super.key,
-  });
+  const TitleCard({required this.title, required this.subtitle, super.key});
 
   @override
   Widget build(BuildContext context) {

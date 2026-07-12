@@ -7,12 +7,7 @@ class Card extends StatelessWidget {
   final Widget subtitle;
   final Widget child;
 
-  const Card({
-    required this.title,
-    required this.subtitle,
-    required this.child,
-    super.key,
-  });
+  const Card({required this.title, required this.subtitle, required this.child, super.key});
 
   @override
   Widget build(BuildContext context) {

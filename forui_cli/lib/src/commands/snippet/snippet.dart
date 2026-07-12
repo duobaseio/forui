@@ -179,99 +179,6 @@ class MediaCard extends StatelessWidget {
 }
 ''',
   ),
-  'adaptive-media-dialog': (
-    'adaptive_media_dialog',
-    'An adaptive dialog with an image, title, body, and actions',
-    r'''import 'package:flutter/widgets.dart';
-
-import 'package:forui/forui.dart';
-
-class AdaptiveMediaDialog extends StatelessWidget {
-  final FDialogStyleDelta style;
-  final Animation<double>? animation;
-  final Widget image;
-  final Widget title;
-  final Widget body;
-  final List<Widget> actions;
-
-  const AdaptiveMediaDialog({
-    required this.image,
-    required this.title,
-    required this.body,
-    required this.actions,
-    this.style = const .context(),
-    this.animation,
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) => FDialog.adaptive(
-    style: style,
-    animation: animation,
-    horizontalBuilder: (context, style) {
-      final touch = context.platformVariant.touch;
-      return Padding(
-        padding: touch
-            ? const .symmetric(horizontal: 16, vertical: 18)
-            : const .symmetric(horizontal: 16, vertical: 14),
-        child: Column(
-          crossAxisAlignment: .start,
-          mainAxisSize: .min,
-          children: [
-            image,
-            Padding(
-              padding: touch ? const .only(left: 8, right: 8, top: 9, bottom: 9) : const .only(top: 9, bottom: 5),
-              child: DefaultTextStyle.merge(style: style.titleTextStyle, child: title),
-            ),
-            Flexible(
-              child: Padding(
-                padding: touch ? const .only(left: 8, right: 8, bottom: 20) : const .only(bottom: 16),
-                child: DefaultTextStyle.merge(style: style.bodyTextStyle, child: body),
-              ),
-            ),
-            Row(
-              mainAxisAlignment: .end,
-              spacing: touch ? 10 : 8,
-              children: touch ? [for (final action in actions) Expanded(child: action)] : actions,
-            ),
-          ],
-        ),
-      );
-    },
-    verticalBuilder: (context, style) {
-      final touch = context.platformVariant.touch;
-      return Padding(
-        padding: touch
-            ? const .symmetric(horizontal: 16, vertical: 18)
-            : const .symmetric(horizontal: 16, vertical: 14),
-        child: Column(
-          crossAxisAlignment: .start,
-          mainAxisSize: .min,
-          children: [
-            image,
-            Padding(
-              padding: touch
-                  ? const .only(left: 8, right: 8, top: 9, bottom: 9)
-                  : const .only(left: 8, right: 8, top: 9, bottom: 5),
-              child: DefaultTextStyle.merge(style: style.titleTextStyle, child: title),
-            ),
-            Flexible(
-              child: Padding(
-                padding: touch
-                    ? const .only(left: 8, right: 8, bottom: 20)
-                    : const .only(left: 8, right: 8, bottom: 16),
-                child: DefaultTextStyle.merge(style: style.bodyTextStyle, child: body),
-              ),
-            ),
-            Column(mainAxisSize: .min, spacing: touch ? 10 : 8, children: actions),
-          ],
-        ),
-      );
-    },
-  );
-}
-''',
-  ),
   'adaptive-dialog': (
     'adaptive_dialog',
     'An adaptive dialog with a title, body, and actions',
@@ -430,14 +337,14 @@ class AdaptiveTitleDialog extends StatelessWidget {
 }
 ''',
   ),
-  'horizontal-media-dialog': (
-    'horizontal_media_dialog',
-    'A horizontal dialog with an image, title, body, and actions',
+  'adaptive-media-dialog': (
+    'adaptive_media_dialog',
+    'An adaptive dialog with an image, title, body, and actions',
     r'''import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
 
-class HorizontalMediaDialog extends StatelessWidget {
+class AdaptiveMediaDialog extends StatelessWidget {
   final FDialogStyleDelta style;
   final Animation<double>? animation;
   final Widget image;
@@ -445,7 +352,7 @@ class HorizontalMediaDialog extends StatelessWidget {
   final Widget body;
   final List<Widget> actions;
 
-  const HorizontalMediaDialog({
+  const AdaptiveMediaDialog({
     required this.image,
     required this.title,
     required this.body,
@@ -456,10 +363,10 @@ class HorizontalMediaDialog extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => FDialog(
+  Widget build(BuildContext context) => FDialog.adaptive(
     style: style,
     animation: animation,
-    builder: (context, style) {
+    horizontalBuilder: (context, style) {
       final touch = context.platformVariant.touch;
       return Padding(
         padding: touch
@@ -485,6 +392,36 @@ class HorizontalMediaDialog extends StatelessWidget {
               spacing: touch ? 10 : 8,
               children: touch ? [for (final action in actions) Expanded(child: action)] : actions,
             ),
+          ],
+        ),
+      );
+    },
+    verticalBuilder: (context, style) {
+      final touch = context.platformVariant.touch;
+      return Padding(
+        padding: touch
+            ? const .symmetric(horizontal: 16, vertical: 18)
+            : const .symmetric(horizontal: 16, vertical: 14),
+        child: Column(
+          crossAxisAlignment: .start,
+          mainAxisSize: .min,
+          children: [
+            image,
+            Padding(
+              padding: touch
+                  ? const .only(left: 8, right: 8, top: 9, bottom: 9)
+                  : const .only(left: 8, right: 8, top: 9, bottom: 5),
+              child: DefaultTextStyle.merge(style: style.titleTextStyle, child: title),
+            ),
+            Flexible(
+              child: Padding(
+                padding: touch
+                    ? const .only(left: 8, right: 8, bottom: 20)
+                    : const .only(left: 8, right: 8, bottom: 16),
+                child: DefaultTextStyle.merge(style: style.bodyTextStyle, child: body),
+              ),
+            ),
+            Column(mainAxisSize: .min, spacing: touch ? 10 : 8, children: actions),
           ],
         ),
       );
@@ -605,14 +542,14 @@ class HorizontalTitleDialog extends StatelessWidget {
 }
 ''',
   ),
-  'vertical-media-dialog': (
-    'vertical_media_dialog',
-    'A vertical dialog with an image, title, body, and actions',
+  'horizontal-media-dialog': (
+    'horizontal_media_dialog',
+    'A horizontal dialog with an image, title, body, and actions',
     r'''import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
 
-class VerticalMediaDialog extends StatelessWidget {
+class HorizontalMediaDialog extends StatelessWidget {
   final FDialogStyleDelta style;
   final Animation<double>? animation;
   final Widget image;
@@ -620,7 +557,7 @@ class VerticalMediaDialog extends StatelessWidget {
   final Widget body;
   final List<Widget> actions;
 
-  const VerticalMediaDialog({
+  const HorizontalMediaDialog({
     required this.image,
     required this.title,
     required this.body,
@@ -646,20 +583,20 @@ class VerticalMediaDialog extends StatelessWidget {
           children: [
             image,
             Padding(
-              padding: touch
-                  ? const .only(left: 8, right: 8, top: 9, bottom: 9)
-                  : const .only(left: 8, right: 8, top: 9, bottom: 5),
+              padding: touch ? const .only(left: 8, right: 8, top: 9, bottom: 9) : const .only(top: 9, bottom: 5),
               child: DefaultTextStyle.merge(style: style.titleTextStyle, child: title),
             ),
             Flexible(
               child: Padding(
-                padding: touch
-                    ? const .only(left: 8, right: 8, bottom: 20)
-                    : const .only(left: 8, right: 8, bottom: 16),
+                padding: touch ? const .only(left: 8, right: 8, bottom: 20) : const .only(bottom: 16),
                 child: DefaultTextStyle.merge(style: style.bodyTextStyle, child: body),
               ),
             ),
-            Column(mainAxisSize: .min, spacing: touch ? 10 : 8, children: actions),
+            Row(
+              mainAxisAlignment: .end,
+              spacing: touch ? 10 : 8,
+              children: touch ? [for (final action in actions) Expanded(child: action)] : actions,
+            ),
           ],
         ),
       );
@@ -764,6 +701,69 @@ class VerticalTitleDialog extends StatelessWidget {
             Padding(
               padding: touch ? const .only(left: 8, right: 8, bottom: 20) : const .only(left: 8, right: 8, bottom: 16),
               child: DefaultTextStyle.merge(style: style.titleTextStyle, child: title),
+            ),
+            Column(mainAxisSize: .min, spacing: touch ? 10 : 8, children: actions),
+          ],
+        ),
+      );
+    },
+  );
+}
+''',
+  ),
+  'vertical-media-dialog': (
+    'vertical_media_dialog',
+    'A vertical dialog with an image, title, body, and actions',
+    r'''import 'package:flutter/widgets.dart';
+
+import 'package:forui/forui.dart';
+
+class VerticalMediaDialog extends StatelessWidget {
+  final FDialogStyleDelta style;
+  final Animation<double>? animation;
+  final Widget image;
+  final Widget title;
+  final Widget body;
+  final List<Widget> actions;
+
+  const VerticalMediaDialog({
+    required this.image,
+    required this.title,
+    required this.body,
+    required this.actions,
+    this.style = const .context(),
+    this.animation,
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) => FDialog(
+    style: style,
+    animation: animation,
+    builder: (context, style) {
+      final touch = context.platformVariant.touch;
+      return Padding(
+        padding: touch
+            ? const .symmetric(horizontal: 16, vertical: 18)
+            : const .symmetric(horizontal: 16, vertical: 14),
+        child: Column(
+          crossAxisAlignment: .start,
+          mainAxisSize: .min,
+          children: [
+            image,
+            Padding(
+              padding: touch
+                  ? const .only(left: 8, right: 8, top: 9, bottom: 9)
+                  : const .only(left: 8, right: 8, top: 9, bottom: 5),
+              child: DefaultTextStyle.merge(style: style.titleTextStyle, child: title),
+            ),
+            Flexible(
+              child: Padding(
+                padding: touch
+                    ? const .only(left: 8, right: 8, bottom: 20)
+                    : const .only(left: 8, right: 8, bottom: 16),
+                child: DefaultTextStyle.merge(style: style.bodyTextStyle, child: body),
+              ),
             ),
             Column(mainAxisSize: .min, spacing: touch ? 10 : 8, children: actions),
           ],
