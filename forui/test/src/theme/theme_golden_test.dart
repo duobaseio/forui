@@ -39,7 +39,10 @@ class Application extends StatelessWidget {
           child: Padding(
             padding: const .all(16.0),
             child: FCard(
-              child: Column(spacing: 16, children: [FBadge(child: const Text('Badge'))]),
+              builder: (context, style, _) => Padding(
+                padding: style.padding,
+                child: Column(spacing: 16, children: [FBadge(child: const Text('Badge'))]),
+              ),
             ),
           ),
         ),

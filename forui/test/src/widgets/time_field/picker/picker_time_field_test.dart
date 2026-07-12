@@ -245,4 +245,45 @@ void main() {
       debugDefaultTargetPlatformOverride = null;
     });
   });
+
+  group('alwaysUse24HourFormat', () {
+    testWidgets('null hour24 follows the platform 24-hour setting', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          locale: const Locale('en'),
+          child: Builder(
+            builder: (context) => MediaQuery(
+              data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+              child: const FTimeField.picker(
+                key: key,
+                control: .managed(initial: FTime(13, 30)),
+              ),
+            ),
+          ),
+        ),
+      );
+
+      expect(find.text('13:30'), findsOneWidget);
+    });
+
+    testWidgets('explicit hour24 overrides the platform 24-hour setting', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          locale: const Locale('en'),
+          child: Builder(
+            builder: (context) => MediaQuery(
+              data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+              child: const FTimeField.picker(
+                key: key,
+                hour24: false,
+                control: .managed(initial: FTime(13, 30)),
+              ),
+            ),
+          ),
+        ),
+      );
+
+      expect(find.text('13:30'), findsNothing);
+    });
+  });
 }

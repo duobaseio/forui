@@ -101,6 +101,10 @@ customize the widget directly instead of through the style API.
   `FDateSelectionControl.liftedMulti(...)` or `FDateSelectionControl.liftedRange(...)` instead.
 
 
+### `FDateTimePicker`
+* Change `hour24` to `bool?`. Defaults to `MediaQuery.alwaysUse24HourFormat`.
+
+
 ### `FDeterminateProgress`
 * Change `FDeterminateProgress` to jump to its value when animations are disabled.
 
@@ -209,6 +213,14 @@ customize the widget directly instead of through the style API.
 * Add `FTheme.neutral`.
 
 * **Breaking** Remove `FThemes`. Use `FTheme.neutral`, or run `dart run forui theme create` to generate a custom theme.
+
+
+### `FTimeField`
+* Change `hour24` to `bool?`. Defaults to `MediaQuery.alwaysUse24HourFormat`.
+
+
+### `FTimePicker`
+* Change `hour24` to `bool?`. Defaults to `MediaQuery.alwaysUse24HourFormat`.
 
 
 ### `FToast`

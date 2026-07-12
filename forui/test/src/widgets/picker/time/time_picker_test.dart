@@ -170,4 +170,42 @@ void main() {
 
     expect(controller.value, const FTime());
   });
+
+  group('alwaysUse24HourFormat', () {
+    testWidgets('null hour24 follows the platform 24-hour setting', (tester) async {
+      final controller = autoDispose(FTimePickerController());
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          locale: const Locale('en'),
+          child: Builder(
+            builder: (context) => MediaQuery(
+              data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+              child: FTimePicker(control: .managed(controller: controller)),
+            ),
+          ),
+        ),
+      );
+
+      expect(controller.hours24, true);
+    });
+
+    testWidgets('explicit hour24 overrides the platform 24-hour setting', (tester) async {
+      final controller = autoDispose(FTimePickerController());
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          locale: const Locale('en'),
+          child: Builder(
+            builder: (context) => MediaQuery(
+              data: MediaQuery.of(context).copyWith(alwaysUse24HourFormat: true),
+              child: FTimePicker(control: .managed(controller: controller), hour24: false),
+            ),
+          ),
+        ),
+      );
+
+      expect(controller.hours24, false);
+    });
+  });
 }

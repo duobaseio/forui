@@ -91,10 +91,10 @@ abstract class FTimeField extends StatefulWidget {
   /// ```
   final FTimeFieldStyleDelta style;
 
-  /// True if the time field should use the 24-hour format.
+  /// True if 24-hour format should be used.
   ///
-  /// Setting this to false will use the locale's default format, which may be 24-hours. Defaults to false.
-  final bool hour24;
+  /// Defaults to null, which follows [MediaQuery.alwaysUse24HourFormatOf]. If false, use the locale's default format.
+  final bool? hour24;
 
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
@@ -163,7 +163,7 @@ abstract class FTimeField extends StatefulWidget {
     this.popoverControl = const .managed(),
     this.size = .md,
     this.style = const .context(),
-    this.hour24 = false,
+    this.hour24,
     this.autofocus = false,
     this.focusNode,
     this.builder = FTextField.defaultBuilder,
@@ -212,7 +212,7 @@ abstract class FTimeField extends StatefulWidget {
     FPopoverControl popoverControl,
     FTextFieldSizeVariant size,
     FTimeFieldStyleDelta style,
-    bool hour24,
+    bool? hour24,
     bool autofocus,
     FocusNode? focusNode,
     FFieldBuilder<FTimeFieldStyle> builder,
@@ -291,7 +291,7 @@ abstract class FTimeField extends StatefulWidget {
     FPopoverControl popoverControl,
     FTextFieldSizeVariant size,
     FTimeFieldStyleDelta style,
-    bool hour24,
+    bool? hour24,
     String Function(BuildContext context, FTime value, DateFormat format) format,
     TextAlign textAlign,
     TextAlignVertical? textAlignVertical,
@@ -342,7 +342,7 @@ abstract class FTimeField extends StatefulWidget {
       ..add(DiagnosticsProperty('popoverControl', popoverControl))
       ..add(DiagnosticsProperty('size', size))
       ..add(DiagnosticsProperty('style', style))
-      ..add(FlagProperty('hour24', value: hour24, ifTrue: 'hour24'))
+      ..add(DiagnosticsProperty('hour24', hour24))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('builder', builder))

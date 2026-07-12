@@ -126,7 +126,7 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
     super.didChangeDependencies();
 
     final localizations = FLocalizations.of(context)?.localeName;
-    _format = widget.hour24 ? .Hm(localizations) : .jm(localizations);
+    _format = widget.hour24 ?? MediaQuery.alwaysUse24HourFormatOf(context) ? .Hm(localizations) : .jm(localizations);
 
     _updateTextController();
   }
@@ -145,7 +145,7 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
 
     if (widget.hour24 != old.hour24) {
       final localizations = FLocalizations.of(context)?.localeName;
-      _format = widget.hour24 ? .Hm(localizations) : .jm(localizations);
+      _format = widget.hour24 ?? MediaQuery.alwaysUse24HourFormatOf(context) ? .Hm(localizations) : .jm(localizations);
     }
 
     final (controller, updated) = widget.control.update(
@@ -260,7 +260,7 @@ class _PickerPopover extends StatelessWidget {
   final FPopoverController popoverController;
   final FTimeFieldStyle style;
   final FTimeFieldPickerProperties properties;
-  final bool hour24;
+  final bool? hour24;
   final bool autofocus;
   final FocusNode? fieldFocusNode;
   final FTimeFieldPopoverBuilder popoverBuilder;
