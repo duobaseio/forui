@@ -136,12 +136,20 @@ customize the widget directly instead of through the style API.
 * Fix `FHeaderAction.selected` not being forwarded to screen readers.
 
 
+### `FIcons`
+* Add `FIcons.error`.
+
+
 ### `FItem` & `FTile`
 * Add `expanded`.
 
 
 ### `FLabel`
 * Change `FLabel` to show errors instantly when motion is reduced or disabled.
+
+
+### `FLineCalendar`
+* Change `FLineCalendar` days to announce their today status and mutually exclusive selection to screen readers.
 
 
 ### `FPicker`
@@ -245,6 +253,7 @@ customize the widget directly instead of through the style API.
 ### Others
 * Add italic support to the bundled `Inter` font.
 
+* Change form field error messages to display a leading `FIcons.error` icon.
 * Change the bundled `Inter` font to a variable font.
 
 * Fix focus outlines and highlights persisting after a pointer click when Flutter web semantics are enabled. Focus

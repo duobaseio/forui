@@ -30,42 +30,47 @@ class Item extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ValueListenableBuilder(
     valueListenable: controller,
-    builder: (context, selected, _) => FTappable(
-      style: style.tappableStyle,
-      semanticsLabel: DateFormat.yMMMMd(
-        (FLocalizations.of(context) ?? FDefaultLocalizations()).localeName,
-      ).format(date),
-      selected: selected == date,
-      onPress: selectable(date) ? () => controller.select(date) : null,
-      builder: (context, v, _) {
-        final variants = {
-          for (final variant in v) variant as FLineCalendarItemVariant,
-          if (today) FLineCalendarItemVariant.today,
-        };
+    builder: (context, selected, _) {
+      final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
+      final label = DateFormat.yMMMMd(localizations.localeName).format(date);
 
-        return builder(
-          context,
-          (style: style, date: date, variants: variants),
-          Stack(
-            children: [
-              Positioned.fill(
-                child: ItemContent(style: style, date: date, variants: variants),
-              ),
-              if (today)
-                Positioned(
-                  top: 6,
-                  right: 6,
-                  child: Container(
-                    height: 4,
-                    width: 4,
-                    decoration: BoxDecoration(color: style.todayIndicatorColor.resolve(variants), shape: .circle),
-                  ),
+      return FTappable(
+        style: style.tappableStyle,
+        semanticsLabel: today ? '$label, ${localizations.calendarTodaySemanticsLabel}' : label,
+        selected: selected == date,
+        semanticsInMutuallyExclusiveGroup: true,
+        excludeSemantics: true,
+        onPress: selectable(date) ? () => controller.select(date) : null,
+        builder: (context, v, _) {
+          final variants = {
+            for (final variant in v) variant as FLineCalendarItemVariant,
+            if (today) FLineCalendarItemVariant.today,
+          };
+
+          return builder(
+            context,
+            (style: style, date: date, variants: variants),
+            Stack(
+              children: [
+                Positioned.fill(
+                  child: ItemContent(style: style, date: date, variants: variants),
                 ),
-            ],
-          ),
-        );
-      },
-    ),
+                if (today)
+                  Positioned(
+                    top: 6,
+                    right: 6,
+                    child: Container(
+                      height: 4,
+                      width: 4,
+                      decoration: BoxDecoration(color: style.todayIndicatorColor.resolve(variants), shape: .circle),
+                    ),
+                  ),
+              ],
+            ),
+          );
+        },
+      );
+    },
   );
 
   @override
