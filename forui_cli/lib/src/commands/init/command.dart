@@ -98,6 +98,7 @@ class InitCommand extends ForuiCommand {
                 SelectOption(base, label: base.name, swatch: base.light.mutedForeground),
             ],
             initial: .neutral,
+            maxItems: BaseColor.values.length,
           ),
         );
 
@@ -110,6 +111,7 @@ class InitCommand extends ForuiCommand {
               for (final primary in PrimaryColor.values)
                 SelectOption(primary, label: primary.name, swatch: primary.light.primary),
             ],
+            maxItems: PrimaryColor.values.length + 1,
           ),
         );
 
@@ -170,7 +172,16 @@ class InitCommand extends ForuiCommand {
     _main(template: template ?? 'basic', force: force);
 
     if (terminal.interactive) {
-      terminal.outro('Forui initialized!');
+      terminal.outro(
+        'Forui initialized!',
+        'Next steps:\n'
+        '1. Browse the widget catalog: https://forui.dev/docs/divider\n'
+        '2. Read the API reference: https://pub.dev/documentation/forui\n'
+        '\n'
+        'Enjoying Forui? A star or like goes a long way:\n'
+        'GitHub: https://github.com/duobaseio/forui\n'
+        'pub.dev: https://pub.dev/packages/forui',
+      );
     }
   }
 

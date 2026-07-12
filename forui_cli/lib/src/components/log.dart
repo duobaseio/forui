@@ -79,10 +79,44 @@ extension Log on Terminal {
     writeln(out.join('\n'));
   }
 
-  /// Closes an interaction sequence with a bottom corner under a connecting bar: `│` then `└  message`.
-  void outro([String message = '']) {
-    writeln(barSpacer());
-    writeln(gutter(ansi.gray(symbols.barEnd), message));
+  /// Closes an interaction sequence with a bottom corner under a connecting bar: `│` then `└  title`.
+  ///
+  /// When [message] is not empty, [title] heads a [note]-style box closed with the `└` corner instead:
+  ///
+  /// ```text
+  /// │
+  /// ◇  Forui initialized! ──────╮
+  /// │                           │
+  /// │  Thanks for using Forui!  │
+  /// │                           │
+  /// └───────────────────────────╯
+  /// ```
+  void outro([String title = '', String message = '']) {
+    if (message.isEmpty) {
+      writeln(barSpacer());
+      writeln(gutter(ansi.gray(symbols.barEnd), title));
+      return;
+    }
+
+    final lines = ['', ...message.split('\n'), ''];
+    final content = [for (final line in lines) displayWidth(line), displayWidth(title)].reduce((a, b) => a > b ? a : b);
+    final width = content + 2; // inner width between the gutter padding and the right border
+
+    final out = <String>[barSpacer()];
+
+    final titleWidth = displayWidth(title);
+    final dashes = symbols.hLine * (width - titleWidth - 1 < 1 ? 1 : width - titleWidth - 1);
+    out.add('${ansi.green(symbols.stepSubmit)}  $title ${ansi.gray('$dashes${symbols.boxTopRight}')}');
+
+    for (final line in lines) {
+      final pad = ' ' * (width - displayWidth(line));
+      out.add('${ansi.gray(symbols.bar)}  ${ansi.dim(line)}$pad${ansi.gray(symbols.bar)}');
+    }
+
+    // `└` closes the sequence, unlike note's `├` which continues the gutter.
+    out.add(ansi.gray('${symbols.barEnd}${symbols.hLine * (width + 2)}${symbols.boxBottomRight}'));
+
+    writeln(out.join('\n'));
   }
 
   /// Closes an interaction sequence after a cancellation: `└  message` with the message in red.
