@@ -38,5 +38,10 @@
   "calendarPreviousYearsSemanticsLabel": "Претходни години",
   "headerBackSemanticsLabel": "Назад",
   "headerCloseSemanticsLabel": "Затвори",
-  "bottomNavigationBarTabSemanticsLabel": "Картичка {tabIndex} од {tabCount}"
+  "bottomNavigationBarTabSemanticsLabel": "Картичка {tabIndex} од {tabCount}",
+  "calendarTodaySemanticsLabel": "Денес",
+  "calendarShowMonthYearPickerSemanticsHint": "Прикажи го избирачот на месец и година",
+  "calendarShowMonthPickerSemanticsHint": "Прикажи го избирачот на месец",
+  "calendarShowYearPickerSemanticsHint": "Прикажи го избирачот на година",
+  "calendarShowDaysSemanticsHint": "Прикажи ги деновите"
 }

@@ -39,5 +39,10 @@
   "calendarPreviousYearsSemanticsLabel": "পূৰ্বৱৰ্তী বছৰবোৰ",
   "headerBackSemanticsLabel": "উভতি যাওক",
   "headerCloseSemanticsLabel": "বন্ধ কৰক",
-  "bottomNavigationBarTabSemanticsLabel": "{tabCount}ৰ {tabIndex} নম্বৰ টেব"
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount}ৰ {tabIndex} নম্বৰ টেব",
+  "calendarTodaySemanticsLabel": "আজি",
+  "calendarShowMonthYearPickerSemanticsHint": "মাহ আৰু বছৰ বাছনিকৰ্তা দেখুৱাওক",
+  "calendarShowMonthPickerSemanticsHint": "মাহ বাছনিকৰ্তা দেখুৱাওক",
+  "calendarShowYearPickerSemanticsHint": "বছৰ বাছনিকৰ্তা দেখুৱাওক",
+  "calendarShowDaysSemanticsHint": "দিনবোৰ দেখুৱাওক"
 }

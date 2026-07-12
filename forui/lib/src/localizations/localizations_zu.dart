@@ -47,6 +47,21 @@ class FLocalizationsZu extends FLocalizations {
   String get calendarPreviousYearsSemanticsLabel => 'Iminyaka edlule';
 
   @override
+  String get calendarShowDaysSemanticsHint => 'Bonisa izinsuku';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Bonisa isikhethi senyanga';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Bonisa isikhethi senyanga nonyaka';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Bonisa isikhethi sonyaka';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Namuhla';
+
+  @override
   String get contextMenuSemanticsLabel => 'Imenyu yesimo';
 
   @override

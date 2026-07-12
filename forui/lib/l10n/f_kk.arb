@@ -38,5 +38,10 @@
   "calendarPreviousYearsSemanticsLabel": "Алдыңғы жылдар",
   "headerBackSemanticsLabel": "Артқа",
   "headerCloseSemanticsLabel": "Жабу",
-  "bottomNavigationBarTabSemanticsLabel": "{tabCount} қойындының {tabIndex}-сы"
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount} қойындының {tabIndex}-сы",
+  "calendarTodaySemanticsLabel": "Бүгін",
+  "calendarShowMonthYearPickerSemanticsHint": "Ай мен жыл таңдағышын көрсету",
+  "calendarShowMonthPickerSemanticsHint": "Ай таңдағышын көрсету",
+  "calendarShowYearPickerSemanticsHint": "Жыл таңдағышын көрсету",
+  "calendarShowDaysSemanticsHint": "Күндерді көрсету"
 }

@@ -47,6 +47,21 @@ class FLocalizationsGl extends FLocalizations {
   String get calendarPreviousYearsSemanticsLabel => 'Anos anteriores';
 
   @override
+  String get calendarShowDaysSemanticsHint => 'Mostrar os días';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Mostrar o selector de mes';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Mostrar o selector de mes e ano';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Mostrar o selector de ano';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Hoxe';
+
+  @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
 
   @override

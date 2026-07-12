@@ -38,5 +38,10 @@
   "calendarPreviousYearsSemanticsLabel": "Мурунку жылдар",
   "headerBackSemanticsLabel": "Артка",
   "headerCloseSemanticsLabel": "Жабуу",
-  "bottomNavigationBarTabSemanticsLabel": "{tabCount} ичинен {tabIndex}-өтмөк"
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount} ичинен {tabIndex}-өтмөк",
+  "calendarTodaySemanticsLabel": "Бүгүн",
+  "calendarShowMonthYearPickerSemanticsHint": "Ай жана жыл тандагычын көрсөтүү",
+  "calendarShowMonthPickerSemanticsHint": "Ай тандагычын көрсөтүү",
+  "calendarShowYearPickerSemanticsHint": "Жыл тандагычын көрсөтүү",
+  "calendarShowDaysSemanticsHint": "Күндөрдү көрсөтүү"
 }

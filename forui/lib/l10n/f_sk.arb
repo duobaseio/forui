@@ -39,5 +39,10 @@
   "calendarPreviousYearsSemanticsLabel": "Predchádzajúce roky",
   "headerBackSemanticsLabel": "Späť",
   "headerCloseSemanticsLabel": "Zavrieť",
-  "bottomNavigationBarTabSemanticsLabel": "Karta {tabIndex} z {tabCount}"
+  "bottomNavigationBarTabSemanticsLabel": "Karta {tabIndex} z {tabCount}",
+  "calendarTodaySemanticsLabel": "Dnes",
+  "calendarShowMonthYearPickerSemanticsHint": "Zobraziť výber mesiaca a roka",
+  "calendarShowMonthPickerSemanticsHint": "Zobraziť výber mesiaca",
+  "calendarShowYearPickerSemanticsHint": "Zobraziť výber roka",
+  "calendarShowDaysSemanticsHint": "Zobraziť dni"
 }

@@ -47,6 +47,21 @@ class FLocalizationsPs extends FLocalizations {
   String get calendarPreviousYearsSemanticsLabel => 'تېر کلونه';
 
   @override
+  String get calendarShowDaysSemanticsHint => 'ورځې وښایاست';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'د میاشتې ټاکونکی وښایاست';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'د میاشتې او کال ټاکونکی وښایاست';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'د کال ټاکونکی وښایاست';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'نن';
+
+  @override
   String get contextMenuSemanticsLabel => 'د شرایطو مینو';
 
   @override

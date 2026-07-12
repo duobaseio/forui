@@ -47,6 +47,21 @@ class FLocalizationsBs extends FLocalizations {
   String get calendarPreviousYearsSemanticsLabel => 'Prethodne godine';
 
   @override
+  String get calendarShowDaysSemanticsHint => 'Prikaži dane';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Prikaži birač mjeseca';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Prikaži birač mjeseca i godine';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Prikaži birač godine';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Danas';
+
+  @override
   String get contextMenuSemanticsLabel => 'Kontekstni meni';
 
   @override

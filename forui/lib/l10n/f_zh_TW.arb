@@ -39,5 +39,10 @@
   "calendarPreviousYearsSemanticsLabel": "前幾年",
   "headerBackSemanticsLabel": "返回",
   "headerCloseSemanticsLabel": "關閉",
-  "bottomNavigationBarTabSemanticsLabel": "第 {tabIndex} 個標籤頁，共 {tabCount} 個"
+  "bottomNavigationBarTabSemanticsLabel": "第 {tabIndex} 個標籤頁，共 {tabCount} 個",
+  "calendarTodaySemanticsLabel": "今天",
+  "calendarShowMonthYearPickerSemanticsHint": "顯示月份和年份選擇器",
+  "calendarShowMonthPickerSemanticsHint": "顯示月份選擇器",
+  "calendarShowYearPickerSemanticsHint": "顯示年份選擇器",
+  "calendarShowDaysSemanticsHint": "顯示日期"
 }

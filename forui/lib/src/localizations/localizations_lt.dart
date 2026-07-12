@@ -47,6 +47,21 @@ class FLocalizationsLt extends FLocalizations {
   String get calendarPreviousYearsSemanticsLabel => 'Ankstesni metai';
 
   @override
+  String get calendarShowDaysSemanticsHint => 'Rodyti dienas';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Rodyti mėnesio parinkiklį';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Rodyti mėnesio ir metų parinkiklį';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Rodyti metų parinkiklį';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Šiandien';
+
+  @override
   String get contextMenuSemanticsLabel => 'Kontekstinis meniu';
 
   @override

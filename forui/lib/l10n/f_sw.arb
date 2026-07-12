@@ -39,5 +39,10 @@
   "calendarPreviousYearsSemanticsLabel": "Miaka iliyopita",
   "headerBackSemanticsLabel": "Nyuma",
   "headerCloseSemanticsLabel": "Funga",
-  "bottomNavigationBarTabSemanticsLabel": "Kichupo cha {tabIndex} kati ya {tabCount}"
+  "bottomNavigationBarTabSemanticsLabel": "Kichupo cha {tabIndex} kati ya {tabCount}",
+  "calendarTodaySemanticsLabel": "Leo",
+  "calendarShowMonthYearPickerSemanticsHint": "Onyesha kiteua mwezi na mwaka",
+  "calendarShowMonthPickerSemanticsHint": "Onyesha kiteua mwezi",
+  "calendarShowYearPickerSemanticsHint": "Onyesha kiteua mwaka",
+  "calendarShowDaysSemanticsHint": "Onyesha siku"
 }

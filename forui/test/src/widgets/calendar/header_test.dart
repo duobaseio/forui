@@ -25,6 +25,7 @@ void main() {
             style: style,
             localizations: FDefaultLocalizations(),
             monthYear: DateTime.utc(2024, 6, 15),
+            semanticsHint: FDefaultLocalizations().calendarShowMonthPickerSemanticsHint,
             shown: false,
             onPress: () {},
             onNext: () {},
@@ -40,6 +41,7 @@ void main() {
             style: style,
             localizations: FDefaultLocalizations(),
             year: DateTime.utc(2024),
+            semanticsHint: FDefaultLocalizations().calendarShowYearPickerSemanticsHint,
             shown: false,
             onPress: () {},
             onNext: () {},
@@ -55,6 +57,7 @@ void main() {
             style: style,
             localizations: FDefaultLocalizations(),
             decade: DateTime.utc(2020),
+            semanticsHint: FDefaultLocalizations().calendarShowDaysSemanticsHint,
             shown: false,
             onPress: () {},
             onNext: () {},
@@ -85,6 +88,7 @@ void main() {
         style: style,
         localizations: FDefaultLocalizations(),
         year: DateTime.utc(2024),
+        semanticsHint: FDefaultLocalizations().calendarShowYearPickerSemanticsHint,
         shown: false,
         onPress: () {},
       ),
@@ -101,6 +105,7 @@ void main() {
         style: style,
         localizations: FDefaultLocalizations(),
         monthYear: DateTime.utc(2024, 6, 15),
+        semanticsHint: FDefaultLocalizations().calendarShowMonthYearPickerSemanticsHint,
         shown: false,
         onPress: () {},
       ),
@@ -157,7 +162,7 @@ void main() {
 
   group('accessibility', () {
     for (final shown in [true, false]) {
-      testWidgets('Header.day month/year toggle exposes expanded state - $shown', (tester) async {
+      testWidgets('Header.day toggle exposes expanded state and hint - $shown', (tester) async {
         final semantics = tester.ensureSemantics();
         await pump(
           tester,
@@ -165,6 +170,7 @@ void main() {
             style: style,
             localizations: FDefaultLocalizations(),
             monthYear: DateTime.utc(2024, 6, 15),
+            semanticsHint: FDefaultLocalizations().calendarShowMonthPickerSemanticsHint,
             shown: shown,
             onPress: () {},
             onNext: () {},
@@ -172,10 +178,38 @@ void main() {
           ),
         );
 
-        expect(tester.getSemantics(find.text('June 2024')), isSemantics(hasExpandedState: true, isExpanded: shown));
+        expect(
+          tester.getSemantics(find.text('June 2024')),
+          isSemantics(hasExpandedState: true, isExpanded: shown, hint: 'Show month picker'),
+        );
 
         semantics.dispose();
       });
     }
+
+    testWidgets('SplitHeader toggles expose distinct month and year hints', (tester) async {
+      final semantics = tester.ensureSemantics();
+      await pump(
+        tester,
+        (style) => SplitHeader(
+          style: style,
+          localizations: FDefaultLocalizations(),
+          date: DateTime.utc(2024, 6, 15),
+          previousSemanticsLabel: 'Previous year',
+          nextSemanticsLabel: 'Next year',
+          month: false,
+          year: false,
+          onMonth: () {},
+          onYear: () {},
+          onPrevious: () {},
+          onNext: () {},
+        ),
+      );
+
+      expect(tester.getSemantics(find.text('June')), isSemantics(hint: 'Show month picker'));
+      expect(tester.getSemantics(find.text('2024')), isSemantics(hint: 'Show year picker'));
+
+      semantics.dispose();
+    });
   });
 }

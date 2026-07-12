@@ -39,5 +39,10 @@
   "calendarPreviousYearsSemanticsLabel": "Vorige jare",
   "headerBackSemanticsLabel": "Terug",
   "headerCloseSemanticsLabel": "Maak toe",
-  "bottomNavigationBarTabSemanticsLabel": "Oortjie {tabIndex} van {tabCount}"
+  "bottomNavigationBarTabSemanticsLabel": "Oortjie {tabIndex} van {tabCount}",
+  "calendarTodaySemanticsLabel": "Vandag",
+  "calendarShowMonthYearPickerSemanticsHint": "Wys maand- en jaarkieser",
+  "calendarShowMonthPickerSemanticsHint": "Wys maandkieser",
+  "calendarShowYearPickerSemanticsHint": "Wys jaarkieser",
+  "calendarShowDaysSemanticsHint": "Wys dae"
 }

@@ -47,6 +47,21 @@ class FLocalizationsEn extends FLocalizations {
   String get calendarPreviousYearsSemanticsLabel => 'Previous years';
 
   @override
+  String get calendarShowDaysSemanticsHint => 'Show days';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Show month picker';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Show month and year picker';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Show year picker';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Today';
+
+  @override
   String get contextMenuSemanticsLabel => 'Context menu';
 
   @override
@@ -174,6 +189,21 @@ class FLocalizationsEnAu extends FLocalizationsEn {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Previous years';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Show days';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Show month picker';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Show month and year picker';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Show year picker';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Today';
 
   @override
   String get contextMenuSemanticsLabel => 'Context menu';
@@ -305,6 +335,21 @@ class FLocalizationsEnCa extends FLocalizationsEn {
   String get calendarPreviousYearsSemanticsLabel => 'Previous years';
 
   @override
+  String get calendarShowDaysSemanticsHint => 'Show days';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Show month picker';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Show month and year picker';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Show year picker';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Today';
+
+  @override
   String get contextMenuSemanticsLabel => 'Context menu';
 
   @override
@@ -432,6 +477,21 @@ class FLocalizationsEnGb extends FLocalizationsEn {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Previous years';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Show days';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Show month picker';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Show month and year picker';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Show year picker';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Today';
 
   @override
   String get contextMenuSemanticsLabel => 'Context menu';
@@ -563,6 +623,21 @@ class FLocalizationsEnIe extends FLocalizationsEn {
   String get calendarPreviousYearsSemanticsLabel => 'Previous years';
 
   @override
+  String get calendarShowDaysSemanticsHint => 'Show days';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Show month picker';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Show month and year picker';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Show year picker';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Today';
+
+  @override
   String get contextMenuSemanticsLabel => 'Context menu';
 
   @override
@@ -690,6 +765,21 @@ class FLocalizationsEnIn extends FLocalizationsEn {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Previous years';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Show days';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Show month picker';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Show month and year picker';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Show year picker';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Today';
 
   @override
   String get contextMenuSemanticsLabel => 'Context menu';
@@ -821,6 +911,21 @@ class FLocalizationsEnNz extends FLocalizationsEn {
   String get calendarPreviousYearsSemanticsLabel => 'Previous years';
 
   @override
+  String get calendarShowDaysSemanticsHint => 'Show days';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Show month picker';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Show month and year picker';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Show year picker';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Today';
+
+  @override
   String get contextMenuSemanticsLabel => 'Context menu';
 
   @override
@@ -950,6 +1055,21 @@ class FLocalizationsEnSg extends FLocalizationsEn {
   String get calendarPreviousYearsSemanticsLabel => 'Previous years';
 
   @override
+  String get calendarShowDaysSemanticsHint => 'Show days';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Show month picker';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Show month and year picker';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Show year picker';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Today';
+
+  @override
   String get contextMenuSemanticsLabel => 'Context menu';
 
   @override
@@ -1077,6 +1197,21 @@ class FLocalizationsEnZa extends FLocalizationsEn {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Previous years';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Show days';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Show month picker';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Show month and year picker';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Show year picker';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Today';
 
   @override
   String get contextMenuSemanticsLabel => 'Context menu';

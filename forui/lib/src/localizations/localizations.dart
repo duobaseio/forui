@@ -346,6 +346,36 @@ abstract class FLocalizations {
   /// **'Previous years'**
   String get calendarPreviousYearsSemanticsLabel;
 
+  /// The hint for the calendar header toggle that returns to the day grid.
+  ///
+  /// In en, this message translates to:
+  /// **'Show days'**
+  String get calendarShowDaysSemanticsHint;
+
+  /// The hint for the calendar header toggle that opens the month picker.
+  ///
+  /// In en, this message translates to:
+  /// **'Show month picker'**
+  String get calendarShowMonthPickerSemanticsHint;
+
+  /// The hint for the wheel calendar header toggle that opens the combined month and year picker.
+  ///
+  /// In en, this message translates to:
+  /// **'Show month and year picker'**
+  String get calendarShowMonthYearPickerSemanticsHint;
+
+  /// The hint for the calendar header toggle that opens the year picker.
+  ///
+  /// In en, this message translates to:
+  /// **'Show year picker'**
+  String get calendarShowYearPickerSemanticsHint;
+
+  /// The label appended to a calendar day cell's accessibility label when it is the current day.
+  ///
+  /// In en, this message translates to:
+  /// **'Today'**
+  String get calendarTodaySemanticsLabel;
+
   /// The semantic label for a context menu.
   ///
   /// In en, this message translates to:

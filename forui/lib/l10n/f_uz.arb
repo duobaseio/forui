@@ -39,5 +39,10 @@
   "calendarPreviousYearsSemanticsLabel": "Oldingi yillar",
   "headerBackSemanticsLabel": "Orqaga",
   "headerCloseSemanticsLabel": "Yopish",
-  "bottomNavigationBarTabSemanticsLabel": "{tabCount} tadan {tabIndex}-yorliq"
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount} tadan {tabIndex}-yorliq",
+  "calendarTodaySemanticsLabel": "Bugun",
+  "calendarShowMonthYearPickerSemanticsHint": "Oy va yil tanlagichini ko‘rsatish",
+  "calendarShowMonthPickerSemanticsHint": "Oy tanlagichini ko‘rsatish",
+  "calendarShowYearPickerSemanticsHint": "Yil tanlagichini ko‘rsatish",
+  "calendarShowDaysSemanticsHint": "Kunlarni ko‘rsatish"
 }

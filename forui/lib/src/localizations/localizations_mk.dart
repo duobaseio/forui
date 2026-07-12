@@ -47,6 +47,21 @@ class FLocalizationsMk extends FLocalizations {
   String get calendarPreviousYearsSemanticsLabel => 'Претходни години';
 
   @override
+  String get calendarShowDaysSemanticsHint => 'Прикажи ги деновите';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Прикажи го избирачот на месец';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Прикажи го избирачот на месец и година';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Прикажи го избирачот на година';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Денес';
+
+  @override
   String get contextMenuSemanticsLabel => 'Контекстно мени';
 
   @override

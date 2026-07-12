@@ -47,6 +47,21 @@ class FLocalizationsTe extends FLocalizations {
   String get calendarPreviousYearsSemanticsLabel => 'మునుపటి సంవత్సరాలు';
 
   @override
+  String get calendarShowDaysSemanticsHint => 'రోజులను చూపు';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'నెల ఎంపికను చూపు';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'నెల మరియు సంవత్సర ఎంపికను చూపు';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'సంవత్సర ఎంపికను చూపు';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'ఈ రోజు';
+
+  @override
   String get contextMenuSemanticsLabel => 'సందర్భ మెనూ';
 
   @override

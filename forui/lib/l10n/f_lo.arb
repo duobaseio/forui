@@ -38,5 +38,10 @@
   "calendarPreviousYearsSemanticsLabel": "ປີກ່ອນໜ້າ",
   "headerBackSemanticsLabel": "ກັບຄືນ",
   "headerCloseSemanticsLabel": "ປິດ",
-  "bottomNavigationBarTabSemanticsLabel": "ແຖບທີ {tabIndex} ຈາກທັງໝົດ {tabCount}"
+  "bottomNavigationBarTabSemanticsLabel": "ແຖບທີ {tabIndex} ຈາກທັງໝົດ {tabCount}",
+  "calendarTodaySemanticsLabel": "ມື້ນີ້",
+  "calendarShowMonthYearPickerSemanticsHint": "ສະແດງຕົວເລືອກເດືອນ ແລະ ປີ",
+  "calendarShowMonthPickerSemanticsHint": "ສະແດງຕົວເລືອກເດືອນ",
+  "calendarShowYearPickerSemanticsHint": "ສະແດງຕົວເລືອກປີ",
+  "calendarShowDaysSemanticsHint": "ສະແດງມື້"
 }

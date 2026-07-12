@@ -39,5 +39,10 @@
   "calendarPreviousYearsSemanticsLabel": "ปีก่อนหน้า",
   "headerBackSemanticsLabel": "กลับ",
   "headerCloseSemanticsLabel": "ปิด",
-  "bottomNavigationBarTabSemanticsLabel": "แท็บที่ {tabIndex} จาก {tabCount}"
+  "bottomNavigationBarTabSemanticsLabel": "แท็บที่ {tabIndex} จาก {tabCount}",
+  "calendarTodaySemanticsLabel": "วันนี้",
+  "calendarShowMonthYearPickerSemanticsHint": "แสดงตัวเลือกเดือนและปี",
+  "calendarShowMonthPickerSemanticsHint": "แสดงตัวเลือกเดือน",
+  "calendarShowYearPickerSemanticsHint": "แสดงตัวเลือกปี",
+  "calendarShowDaysSemanticsHint": "แสดงวัน"
 }

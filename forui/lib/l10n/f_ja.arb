@@ -39,5 +39,10 @@
   "calendarPreviousYearsSemanticsLabel": "前の数年",
   "headerBackSemanticsLabel": "戻る",
   "headerCloseSemanticsLabel": "閉じる",
-  "bottomNavigationBarTabSemanticsLabel": "{tabCount} 個のタブのうち {tabIndex} 個目"
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount} 個のタブのうち {tabIndex} 個目",
+  "calendarTodaySemanticsLabel": "今日",
+  "calendarShowMonthYearPickerSemanticsHint": "月と年の選択ツールを表示",
+  "calendarShowMonthPickerSemanticsHint": "月の選択ツールを表示",
+  "calendarShowYearPickerSemanticsHint": "年の選択ツールを表示",
+  "calendarShowDaysSemanticsHint": "日を表示"
 }

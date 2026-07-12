@@ -52,6 +52,26 @@
   "@calendarPreviousYearsSemanticsLabel": {
     "description": "The label for the calendar header's previous-years navigation button."
   },
+  "calendarShowDaysSemanticsHint": "Show days",
+  "@calendarShowDaysSemanticsHint": {
+    "description": "The hint for the calendar header toggle that returns to the day grid."
+  },
+  "calendarShowMonthPickerSemanticsHint": "Show month picker",
+  "@calendarShowMonthPickerSemanticsHint": {
+    "description": "The hint for the calendar header toggle that opens the month picker."
+  },
+  "calendarShowMonthYearPickerSemanticsHint": "Show month and year picker",
+  "@calendarShowMonthYearPickerSemanticsHint": {
+    "description": "The hint for the wheel calendar header toggle that opens the combined month and year picker."
+  },
+  "calendarShowYearPickerSemanticsHint": "Show year picker",
+  "@calendarShowYearPickerSemanticsHint": {
+    "description": "The hint for the calendar header toggle that opens the year picker."
+  },
+  "calendarTodaySemanticsLabel": "Today",
+  "@calendarTodaySemanticsLabel": {
+    "description": "The label appended to a calendar day cell's accessibility label when it is the current day."
+  },
   "contextMenuSemanticsLabel": "Context menu",
   "@contextMenuSemanticsLabel": {
     "description": "The semantic label for a context menu."

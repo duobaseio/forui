@@ -38,5 +38,10 @@
   "calendarPreviousYearsSemanticsLabel": "Попередні роки",
   "headerBackSemanticsLabel": "Назад",
   "headerCloseSemanticsLabel": "Закрити",
-  "bottomNavigationBarTabSemanticsLabel": "Вкладка {tabIndex} з {tabCount}"
+  "bottomNavigationBarTabSemanticsLabel": "Вкладка {tabIndex} з {tabCount}",
+  "calendarTodaySemanticsLabel": "Сьогодні",
+  "calendarShowMonthYearPickerSemanticsHint": "Показати вибір місяця та року",
+  "calendarShowMonthPickerSemanticsHint": "Показати вибір місяця",
+  "calendarShowYearPickerSemanticsHint": "Показати вибір року",
+  "calendarShowDaysSemanticsHint": "Показати дні"
 }

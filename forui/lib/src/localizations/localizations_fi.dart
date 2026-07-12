@@ -47,6 +47,21 @@ class FLocalizationsFi extends FLocalizations {
   String get calendarPreviousYearsSemanticsLabel => 'Edelliset vuodet';
 
   @override
+  String get calendarShowDaysSemanticsHint => 'Näytä päivät';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Näytä kuukauden valitsin';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Näytä kuukauden ja vuoden valitsin';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Näytä vuoden valitsin';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Tänään';
+
+  @override
   String get contextMenuSemanticsLabel => 'Kontekstivalikko';
 
   @override

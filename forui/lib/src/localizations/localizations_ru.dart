@@ -47,6 +47,21 @@ class FLocalizationsRu extends FLocalizations {
   String get calendarPreviousYearsSemanticsLabel => 'Предыдущие годы';
 
   @override
+  String get calendarShowDaysSemanticsHint => 'Показать дни';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Показать выбор месяца';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Показать выбор месяца и года';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Показать выбор года';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Сегодня';
+
+  @override
   String get contextMenuSemanticsLabel => 'Контекстное меню';
 
   @override

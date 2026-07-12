@@ -47,6 +47,21 @@ class FLocalizationsVi extends FLocalizations {
   String get calendarPreviousYearsSemanticsLabel => 'Các năm trước';
 
   @override
+  String get calendarShowDaysSemanticsHint => 'Hiển thị ngày';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Hiển thị bộ chọn tháng';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Hiển thị bộ chọn tháng và năm';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Hiển thị bộ chọn năm';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Hôm nay';
+
+  @override
   String get contextMenuSemanticsLabel => 'Trình đơn ngữ cảnh';
 
   @override

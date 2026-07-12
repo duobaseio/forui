@@ -47,6 +47,21 @@ class FLocalizationsGsw extends FLocalizations {
   String get calendarPreviousYearsSemanticsLabel => 'Letschti Jaar';
 
   @override
+  String get calendarShowDaysSemanticsHint => 'Täg aazeige';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Monatsuswahl aazeige';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Monats- und Jahresuswahl aazeige';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Jahresuswahl aazeige';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Hüt';
+
+  @override
   String get contextMenuSemanticsLabel => 'Kontextmenü';
 
   @override

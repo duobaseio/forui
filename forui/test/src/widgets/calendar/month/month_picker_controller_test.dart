@@ -472,4 +472,16 @@ void main() {
       expect(controller.to(7), DateTime.utc(2027));
     });
   });
+
+  group('accessibility', () {
+    testWidgets('month tile label includes the year', (tester) async {
+      final semantics = tester.ensureSemantics();
+      await tester.pumpWidget(_harness(_controller(initial: .utc(2024, 6))));
+
+      expect(find.bySemanticsLabel('January 2024'), findsOneWidget);
+      expect(find.bySemanticsLabel('June 2024'), findsOneWidget);
+
+      semantics.dispose();
+    });
+  });
 }

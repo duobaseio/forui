@@ -38,5 +38,10 @@
   "calendarPreviousYearsSemanticsLabel": "Anys anteriors",
   "headerBackSemanticsLabel": "Enrere",
   "headerCloseSemanticsLabel": "Tanca",
-  "bottomNavigationBarTabSemanticsLabel": "Pestanya {tabIndex} de {tabCount}"
+  "bottomNavigationBarTabSemanticsLabel": "Pestanya {tabIndex} de {tabCount}",
+  "calendarTodaySemanticsLabel": "Avui",
+  "calendarShowMonthYearPickerSemanticsHint": "Mostra el selector de mes i any",
+  "calendarShowMonthPickerSemanticsHint": "Mostra el selector de mes",
+  "calendarShowYearPickerSemanticsHint": "Mostra el selector d'any",
+  "calendarShowDaysSemanticsHint": "Mostra els dies"
 }

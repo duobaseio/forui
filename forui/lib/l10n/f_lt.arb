@@ -39,5 +39,10 @@
   "calendarPreviousYearsSemanticsLabel": "Ankstesni metai",
   "headerBackSemanticsLabel": "Atgal",
   "headerCloseSemanticsLabel": "Uždaryti",
-  "bottomNavigationBarTabSemanticsLabel": "{tabIndex} skirtukas iš {tabCount}"
+  "bottomNavigationBarTabSemanticsLabel": "{tabIndex} skirtukas iš {tabCount}",
+  "calendarTodaySemanticsLabel": "Šiandien",
+  "calendarShowMonthYearPickerSemanticsHint": "Rodyti mėnesio ir metų parinkiklį",
+  "calendarShowMonthPickerSemanticsHint": "Rodyti mėnesio parinkiklį",
+  "calendarShowYearPickerSemanticsHint": "Rodyti metų parinkiklį",
+  "calendarShowDaysSemanticsHint": "Rodyti dienas"
 }

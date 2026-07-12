@@ -47,6 +47,21 @@ class FLocalizationsLv extends FLocalizations {
   String get calendarPreviousYearsSemanticsLabel => 'Iepriekšējie gadi';
 
   @override
+  String get calendarShowDaysSemanticsHint => 'Rādīt dienas';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Rādīt mēneša atlasītāju';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Rādīt mēneša un gada atlasītāju';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Rādīt gada atlasītāju';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Šodien';
+
+  @override
   String get contextMenuSemanticsLabel => 'Konteksta izvēlne';
 
   @override

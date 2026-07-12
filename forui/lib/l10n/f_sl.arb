@@ -39,5 +39,10 @@
   "calendarPreviousYearsSemanticsLabel": "Prejšnja leta",
   "headerBackSemanticsLabel": "Nazaj",
   "headerCloseSemanticsLabel": "Zapri",
-  "bottomNavigationBarTabSemanticsLabel": "Zavihek {tabIndex} od {tabCount}"
+  "bottomNavigationBarTabSemanticsLabel": "Zavihek {tabIndex} od {tabCount}",
+  "calendarTodaySemanticsLabel": "Danes",
+  "calendarShowMonthYearPickerSemanticsHint": "Pokaži izbirnik meseca in leta",
+  "calendarShowMonthPickerSemanticsHint": "Pokaži izbirnik meseca",
+  "calendarShowYearPickerSemanticsHint": "Pokaži izbirnik leta",
+  "calendarShowDaysSemanticsHint": "Pokaži dneve"
 }

@@ -47,6 +47,21 @@ class FLocalizationsSq extends FLocalizations {
   String get calendarPreviousYearsSemanticsLabel => 'Vitet e mëparshme';
 
   @override
+  String get calendarShowDaysSemanticsHint => 'Shfaq ditët';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Shfaq zgjedhësin e muajit';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Shfaq zgjedhësin e muajit dhe vitit';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Shfaq zgjedhësin e vitit';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Sot';
+
+  @override
   String get contextMenuSemanticsLabel => 'Menyja e kontekstit';
 
   @override

@@ -46,8 +46,10 @@ automatically reduce or disable motion to match the OS's accessibility settings.
 * Add PageUp/PageDown, Shift+PageUp/PageDown, and Home/End keyboard navigation to the grids.
 
 * Change `FCalendar` to jump between pages when animations are disabled.
+* Improve `FCalendar` accessibility.
 
 * Fix calendar month/year header not exposing its expanded state.
+* Fix calendar days not exposing their selected state to screen readers.
 
 
 ### `FCard`
@@ -200,7 +202,7 @@ customize the widget directly instead of through the style API.
 
 
 ### `FTappable`
-* Add `button`, `checked`, `expanded`, and `inMutuallyExclusiveGroup`.
+* Add `button`, `checked`, `expanded`, `hint`, and `inMutuallyExclusiveGroup`.
 
 * Change `FTappable` to skip its press bounce when animations are disabled.
 

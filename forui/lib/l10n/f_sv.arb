@@ -39,5 +39,10 @@
   "calendarPreviousYearsSemanticsLabel": "Föregående år",
   "headerBackSemanticsLabel": "Tillbaka",
   "headerCloseSemanticsLabel": "Stäng",
-  "bottomNavigationBarTabSemanticsLabel": "Flik {tabIndex} av {tabCount}"
+  "bottomNavigationBarTabSemanticsLabel": "Flik {tabIndex} av {tabCount}",
+  "calendarTodaySemanticsLabel": "Idag",
+  "calendarShowMonthYearPickerSemanticsHint": "Visa månads- och årsväljare",
+  "calendarShowMonthPickerSemanticsHint": "Visa månadsväljare",
+  "calendarShowYearPickerSemanticsHint": "Visa årsväljare",
+  "calendarShowDaysSemanticsHint": "Visa dagar"
 }

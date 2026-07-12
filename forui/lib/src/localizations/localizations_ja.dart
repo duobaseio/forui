@@ -47,6 +47,21 @@ class FLocalizationsJa extends FLocalizations {
   String get calendarPreviousYearsSemanticsLabel => '前の数年';
 
   @override
+  String get calendarShowDaysSemanticsHint => '日を表示';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => '月の選択ツールを表示';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => '月と年の選択ツールを表示';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => '年の選択ツールを表示';
+
+  @override
+  String get calendarTodaySemanticsLabel => '今日';
+
+  @override
   String get contextMenuSemanticsLabel => 'コンテキストメニュー';
 
   @override

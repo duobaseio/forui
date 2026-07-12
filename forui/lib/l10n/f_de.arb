@@ -39,5 +39,10 @@
   "calendarPreviousYearsSemanticsLabel": "Vorherige Jahre",
   "headerBackSemanticsLabel": "Zurück",
   "headerCloseSemanticsLabel": "Schließen",
-  "bottomNavigationBarTabSemanticsLabel": "Tab {tabIndex} von {tabCount}"
+  "bottomNavigationBarTabSemanticsLabel": "Tab {tabIndex} von {tabCount}",
+  "calendarTodaySemanticsLabel": "Heute",
+  "calendarShowMonthYearPickerSemanticsHint": "Monats- und Jahresauswahl anzeigen",
+  "calendarShowMonthPickerSemanticsHint": "Monatsauswahl anzeigen",
+  "calendarShowYearPickerSemanticsHint": "Jahresauswahl anzeigen",
+  "calendarShowDaysSemanticsHint": "Tage anzeigen"
 }

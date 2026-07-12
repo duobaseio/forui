@@ -38,5 +38,10 @@
   "calendarPreviousYearsSemanticsLabel": "முந்தைய ஆண்டுகள்",
   "headerBackSemanticsLabel": "பின்செல்",
   "headerCloseSemanticsLabel": "மூடு",
-  "bottomNavigationBarTabSemanticsLabel": "{tabCount} இல் {tabIndex} தாவல்"
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount} இல் {tabIndex} தாவல்",
+  "calendarTodaySemanticsLabel": "இன்று",
+  "calendarShowMonthYearPickerSemanticsHint": "மாதம் மற்றும் ஆண்டு தேர்வியைக் காட்டு",
+  "calendarShowMonthPickerSemanticsHint": "மாதத் தேர்வியைக் காட்டு",
+  "calendarShowYearPickerSemanticsHint": "ஆண்டுத் தேர்வியைக் காட்டு",
+  "calendarShowDaysSemanticsHint": "நாட்களைக் காட்டு"
 }

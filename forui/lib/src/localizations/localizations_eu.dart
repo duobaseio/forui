@@ -47,6 +47,21 @@ class FLocalizationsEu extends FLocalizations {
   String get calendarPreviousYearsSemanticsLabel => 'Aurreko urteak';
 
   @override
+  String get calendarShowDaysSemanticsHint => 'Erakutsi egunak';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Erakutsi hilabete-hautatzailea';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Erakutsi hilabete- eta urte-hautatzailea';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Erakutsi urte-hautatzailea';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Gaur';
+
+  @override
   String get contextMenuSemanticsLabel => 'Testuinguru-menua';
 
   @override

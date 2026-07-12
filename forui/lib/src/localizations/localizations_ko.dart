@@ -47,6 +47,21 @@ class FLocalizationsKo extends FLocalizations {
   String get calendarPreviousYearsSemanticsLabel => '이전 해들';
 
   @override
+  String get calendarShowDaysSemanticsHint => '일 표시';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => '월 선택 도구 표시';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => '월 및 연도 선택 도구 표시';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => '연도 선택 도구 표시';
+
+  @override
+  String get calendarTodaySemanticsLabel => '오늘';
+
+  @override
   String get contextMenuSemanticsLabel => '컨텍스트 메뉴';
 
   @override

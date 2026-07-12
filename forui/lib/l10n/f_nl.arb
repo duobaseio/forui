@@ -39,5 +39,10 @@
   "calendarPreviousYearsSemanticsLabel": "Vorige jaren",
   "headerBackSemanticsLabel": "Terug",
   "headerCloseSemanticsLabel": "Sluiten",
-  "bottomNavigationBarTabSemanticsLabel": "Tabblad {tabIndex} van {tabCount}"
+  "bottomNavigationBarTabSemanticsLabel": "Tabblad {tabIndex} van {tabCount}",
+  "calendarTodaySemanticsLabel": "Vandaag",
+  "calendarShowMonthYearPickerSemanticsHint": "Maand- en jaarkiezer weergeven",
+  "calendarShowMonthPickerSemanticsHint": "Maandkiezer weergeven",
+  "calendarShowYearPickerSemanticsHint": "Jaarkiezer weergeven",
+  "calendarShowDaysSemanticsHint": "Dagen weergeven"
 }

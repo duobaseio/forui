@@ -39,5 +39,10 @@
   "calendarPreviousYearsSemanticsLabel": "Előző évek",
   "headerBackSemanticsLabel": "Vissza",
   "headerCloseSemanticsLabel": "Bezárás",
-  "bottomNavigationBarTabSemanticsLabel": "{tabCount}/{tabIndex}. lap"
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount}/{tabIndex}. lap",
+  "calendarTodaySemanticsLabel": "Ma",
+  "calendarShowMonthYearPickerSemanticsHint": "Hónap- és évválasztó megjelenítése",
+  "calendarShowMonthPickerSemanticsHint": "Hónapválasztó megjelenítése",
+  "calendarShowYearPickerSemanticsHint": "Évválasztó megjelenítése",
+  "calendarShowDaysSemanticsHint": "Napok megjelenítése"
 }

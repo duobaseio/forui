@@ -39,5 +39,10 @@
   "calendarPreviousYearsSemanticsLabel": "Eelmised aastad",
   "headerBackSemanticsLabel": "Tagasi",
   "headerCloseSemanticsLabel": "Sule",
-  "bottomNavigationBarTabSemanticsLabel": "{tabCount}-st {tabIndex}. vahekaart"
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount}-st {tabIndex}. vahekaart",
+  "calendarTodaySemanticsLabel": "Täna",
+  "calendarShowMonthYearPickerSemanticsHint": "Kuva kuu ja aasta valija",
+  "calendarShowMonthPickerSemanticsHint": "Kuva kuu valija",
+  "calendarShowYearPickerSemanticsHint": "Kuva aasta valija",
+  "calendarShowDaysSemanticsHint": "Kuva päevad"
 }

@@ -39,5 +39,10 @@
   "calendarPreviousYearsSemanticsLabel": "ယခင်နှစ်များ",
   "headerBackSemanticsLabel": "နောက်သို့",
   "headerCloseSemanticsLabel": "ပိတ်ရန်",
-  "bottomNavigationBarTabSemanticsLabel": "တဘ် {tabCount} ခုအနက် {tabIndex} ခု"
+  "bottomNavigationBarTabSemanticsLabel": "တဘ် {tabCount} ခုအနက် {tabIndex} ခု",
+  "calendarTodaySemanticsLabel": "ယနေ့",
+  "calendarShowMonthYearPickerSemanticsHint": "လနှင့် နှစ် ရွေးချယ်မှုကို ပြပါ",
+  "calendarShowMonthPickerSemanticsHint": "လ ရွေးချယ်မှုကို ပြပါ",
+  "calendarShowYearPickerSemanticsHint": "နှစ် ရွေးချယ်မှုကို ပြပါ",
+  "calendarShowDaysSemanticsHint": "ရက်များကို ပြပါ"
 }

@@ -47,6 +47,21 @@ class FLocalizationsPt extends FLocalizations {
   String get calendarPreviousYearsSemanticsLabel => 'Anos anteriores';
 
   @override
+  String get calendarShowDaysSemanticsHint => 'Mostrar os dias';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Mostrar o seletor de mês';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Mostrar o seletor de mês e ano';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Mostrar o seletor de ano';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Hoje';
+
+  @override
   String get contextMenuSemanticsLabel => 'Menu de contexto';
 
   @override
@@ -174,6 +189,21 @@ class FLocalizationsPtPt extends FLocalizationsPt {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Anos anteriores';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Mostrar os dias';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Mostrar o seletor de mês';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Mostrar o seletor de mês e ano';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Mostrar o seletor de ano';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Hoje';
 
   @override
   String get contextMenuSemanticsLabel => 'Menu de contexto';

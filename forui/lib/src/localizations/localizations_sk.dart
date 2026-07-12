@@ -47,6 +47,21 @@ class FLocalizationsSk extends FLocalizations {
   String get calendarPreviousYearsSemanticsLabel => 'Predchádzajúce roky';
 
   @override
+  String get calendarShowDaysSemanticsHint => 'Zobraziť dni';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Zobraziť výber mesiaca';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Zobraziť výber mesiaca a roka';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Zobraziť výber roka';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Dnes';
+
+  @override
   String get contextMenuSemanticsLabel => 'Kontextová ponuka';
 
   @override

@@ -39,5 +39,10 @@
   "calendarPreviousYearsSemanticsLabel": "Fyrri ár",
   "headerBackSemanticsLabel": "Til baka",
   "headerCloseSemanticsLabel": "Loka",
-  "bottomNavigationBarTabSemanticsLabel": "Flipi {tabIndex} af {tabCount}"
+  "bottomNavigationBarTabSemanticsLabel": "Flipi {tabIndex} af {tabCount}",
+  "calendarTodaySemanticsLabel": "Í dag",
+  "calendarShowMonthYearPickerSemanticsHint": "Sýna mánaðar- og ársval",
+  "calendarShowMonthPickerSemanticsHint": "Sýna mánaðarval",
+  "calendarShowYearPickerSemanticsHint": "Sýna ársval",
+  "calendarShowDaysSemanticsHint": "Sýna daga"
 }

@@ -47,6 +47,21 @@ class FLocalizationsCy extends FLocalizations {
   String get calendarPreviousYearsSemanticsLabel => 'Blynyddoedd blaenorol';
 
   @override
+  String get calendarShowDaysSemanticsHint => 'Dangos dyddiau';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Dangos dewisydd mis';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Dangos dewisydd mis a blwyddyn';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Dangos dewisydd blwyddyn';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Heddiw';
+
+  @override
   String get contextMenuSemanticsLabel => 'Dewislen cyd-destun';
 
   @override

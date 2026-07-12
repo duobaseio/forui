@@ -47,6 +47,21 @@ class FLocalizationsHu extends FLocalizations {
   String get calendarPreviousYearsSemanticsLabel => 'Előző évek';
 
   @override
+  String get calendarShowDaysSemanticsHint => 'Napok megjelenítése';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Hónapválasztó megjelenítése';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Hónap- és évválasztó megjelenítése';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Évválasztó megjelenítése';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Ma';
+
+  @override
   String get contextMenuSemanticsLabel => 'Helyi menü';
 
   @override

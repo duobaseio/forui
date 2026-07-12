@@ -64,6 +64,7 @@ void main() {
     }) => Header(
       style: style,
       label: DateFormat.yMMMM(l10n.localeName).format(_date),
+      semanticsHint: l10n.calendarShowMonthPickerSemanticsHint,
       previousSemanticsLabel: l10n.calendarPreviousMonthSemanticsLabel,
       nextSemanticsLabel: l10n.calendarNextMonthSemanticsLabel,
       shown: monthYear,
@@ -219,6 +220,7 @@ void main() {
             header: (s, l) => Header.single(
               style: s,
               label: DateFormat.yMMMM(l.localeName).format(_date),
+              semanticsHint: l.calendarShowMonthPickerSemanticsHint,
               shown: false,
               onPress: () {},
             ),
@@ -262,6 +264,7 @@ void main() {
               style: s,
               localizations: l,
               monthYear: _date,
+              semanticsHint: l.calendarShowMonthPickerSemanticsHint,
               shown: false,
               onPress: () {},
               onPrevious: () {},
@@ -280,6 +283,7 @@ void main() {
               style: s,
               localizations: l,
               year: _date,
+              semanticsHint: l.calendarShowYearPickerSemanticsHint,
               shown: false,
               onPress: () {},
               onPrevious: () {},
@@ -298,6 +302,7 @@ void main() {
               style: s,
               localizations: l,
               decade: DateTime.utc(2020),
+              semanticsHint: l.calendarShowDaysSemanticsHint,
               shown: false,
               onPress: () {},
               onPrevious: () {},
@@ -312,7 +317,14 @@ void main() {
         await tester.pumpWidget(
           _harness(
             theme: theme.data,
-            header: (s, l) => Header.singleMonth(style: s, localizations: l, year: _date, shown: false, onPress: () {}),
+            header: (s, l) => Header.singleMonth(
+              style: s,
+              localizations: l,
+              year: _date,
+              semanticsHint: l.calendarShowYearPickerSemanticsHint,
+              shown: false,
+              onPress: () {},
+            ),
           ),
         );
         await expectGolden(tester, 'factory-single-month');
@@ -322,8 +334,14 @@ void main() {
         await tester.pumpWidget(
           _harness(
             theme: theme.data,
-            header: (s, l) =>
-                Header.singleDay(style: s, localizations: l, monthYear: _date, shown: false, onPress: () {}),
+            header: (s, l) => Header.singleDay(
+              style: s,
+              localizations: l,
+              monthYear: _date,
+              semanticsHint: l.calendarShowMonthYearPickerSemanticsHint,
+              shown: false,
+              onPress: () {},
+            ),
           ),
         );
         await expectGolden(tester, 'factory-single-day');
@@ -333,8 +351,14 @@ void main() {
         await tester.pumpWidget(
           _harness(
             theme: theme.data,
-            header: (s, l) =>
-                Header.singleDay(style: s, localizations: l, monthYear: _date, shown: true, onPress: () {}),
+            header: (s, l) => Header.singleDay(
+              style: s,
+              localizations: l,
+              monthYear: _date,
+              semanticsHint: l.calendarShowMonthYearPickerSemanticsHint,
+              shown: true,
+              onPress: () {},
+            ),
           ),
         );
         await expectGolden(tester, 'factory-single-day-expanded');

@@ -38,5 +38,10 @@
   "calendarPreviousYearsSemanticsLabel": "تېر کلونه",
   "headerBackSemanticsLabel": "شاته",
   "headerCloseSemanticsLabel": "بندول",
-  "bottomNavigationBarTabSemanticsLabel": "د {tabCount} څخه {tabIndex} ټب"
+  "bottomNavigationBarTabSemanticsLabel": "د {tabCount} څخه {tabIndex} ټب",
+  "calendarTodaySemanticsLabel": "نن",
+  "calendarShowMonthYearPickerSemanticsHint": "د میاشتې او کال ټاکونکی وښایاست",
+  "calendarShowMonthPickerSemanticsHint": "د میاشتې ټاکونکی وښایاست",
+  "calendarShowYearPickerSemanticsHint": "د کال ټاکونکی وښایاست",
+  "calendarShowDaysSemanticsHint": "ورځې وښایاست"
 }

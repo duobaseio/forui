@@ -39,5 +39,10 @@
   "calendarPreviousYearsSemanticsLabel": "ପୂର୍ବବର୍ତ୍ତୀ ବର୍ଷଗୁଡ଼ିକ",
   "headerBackSemanticsLabel": "ପଛକୁ",
   "headerCloseSemanticsLabel": "ବନ୍ଦ କରନ୍ତୁ",
-  "bottomNavigationBarTabSemanticsLabel": "{tabCount}ଟିରୁ {tabIndex}ଟି ଟାବ୍"
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount}ଟିରୁ {tabIndex}ଟି ଟାବ୍",
+  "calendarTodaySemanticsLabel": "ଆଜି",
+  "calendarShowMonthYearPickerSemanticsHint": "ମାସ ଏବଂ ବର୍ଷ ଚୟନକର୍ତ୍ତା ଦେଖାନ୍ତୁ",
+  "calendarShowMonthPickerSemanticsHint": "ମାସ ଚୟନକର୍ତ୍ତା ଦେଖାନ୍ତୁ",
+  "calendarShowYearPickerSemanticsHint": "ବର୍ଷ ଚୟନକର୍ତ୍ତା ଦେଖାନ୍ତୁ",
+  "calendarShowDaysSemanticsHint": "ଦିନଗୁଡ଼ିକ ଦେଖାନ୍ତୁ"
 }

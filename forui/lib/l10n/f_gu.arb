@@ -38,5 +38,10 @@
   "calendarPreviousYearsSemanticsLabel": "પાછલાં વર્ષ",
   "headerBackSemanticsLabel": "પાછળ",
   "headerCloseSemanticsLabel": "બંધ કરો",
-  "bottomNavigationBarTabSemanticsLabel": "{tabCount} માંથી {tabIndex} ટૅબ"
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount} માંથી {tabIndex} ટૅબ",
+  "calendarTodaySemanticsLabel": "આજે",
+  "calendarShowMonthYearPickerSemanticsHint": "મહિનો અને વર્ષ પસંદગીકાર બતાવો",
+  "calendarShowMonthPickerSemanticsHint": "મહિનો પસંદગીકાર બતાવો",
+  "calendarShowYearPickerSemanticsHint": "વર્ષ પસંદગીકાર બતાવો",
+  "calendarShowDaysSemanticsHint": "દિવસો બતાવો"
 }

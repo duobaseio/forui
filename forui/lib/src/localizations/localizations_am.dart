@@ -47,6 +47,21 @@ class FLocalizationsAm extends FLocalizations {
   String get calendarPreviousYearsSemanticsLabel => 'ያለፉት ዓመታት';
 
   @override
+  String get calendarShowDaysSemanticsHint => 'ቀኖችን አሳይ';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'የወር መራጭ አሳይ';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'የወርና የዓመት መራጭ አሳይ';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'የዓመት መራጭ አሳይ';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'ዛሬ';
+
+  @override
   String get contextMenuSemanticsLabel => 'የአውድ ምናሌ';
 
   @override

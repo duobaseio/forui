@@ -39,5 +39,10 @@
   "calendarPreviousYearsSemanticsLabel": "前几年",
   "headerBackSemanticsLabel": "返回",
   "headerCloseSemanticsLabel": "关闭",
-  "bottomNavigationBarTabSemanticsLabel": "第 {tabIndex} 个标签，共 {tabCount} 个"
+  "bottomNavigationBarTabSemanticsLabel": "第 {tabIndex} 个标签，共 {tabCount} 个",
+  "calendarTodaySemanticsLabel": "今天",
+  "calendarShowMonthYearPickerSemanticsHint": "显示月份和年份选择器",
+  "calendarShowMonthPickerSemanticsHint": "显示月份选择器",
+  "calendarShowYearPickerSemanticsHint": "显示年份选择器",
+  "calendarShowDaysSemanticsHint": "显示日期"
 }

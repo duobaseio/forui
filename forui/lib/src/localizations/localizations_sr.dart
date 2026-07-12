@@ -47,6 +47,21 @@ class FLocalizationsSr extends FLocalizations {
   String get calendarPreviousYearsSemanticsLabel => 'Претходне године';
 
   @override
+  String get calendarShowDaysSemanticsHint => 'Прикажи дане';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Прикажи бирач месеца';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Прикажи бирач месеца и године';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Прикажи бирач године';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Данас';
+
+  @override
   String get contextMenuSemanticsLabel => 'Контекстни мени';
 
   @override
@@ -174,6 +189,21 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Prethodne godine';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Prikaži dane';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Prikaži birač meseca';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Prikaži birač meseca i godine';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Prikaži birač godine';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Danas';
 
   @override
   String get contextMenuSemanticsLabel => 'Kontekstni meni';

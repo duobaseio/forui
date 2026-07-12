@@ -47,7 +47,7 @@ class Month extends StatelessWidget {
   @override
   Widget build(BuildContext context) => FTappable.static(
     focusNode: focusNode,
-    semanticsLabel: DateFormat.MMMM(localizations.localeName).format(date),
+    semanticsLabel: DateFormat.yMMMM(localizations.localeName).format(date),
     excludeSemantics: true,
     onPress: onPress,
     builder: (context, variants, _) =>

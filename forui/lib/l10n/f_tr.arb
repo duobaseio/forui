@@ -39,5 +39,10 @@
   "calendarPreviousYearsSemanticsLabel": "Önceki yıllar",
   "headerBackSemanticsLabel": "Geri",
   "headerCloseSemanticsLabel": "Kapat",
-  "bottomNavigationBarTabSemanticsLabel": "{tabCount} sekmeden {tabIndex}. sekme"
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount} sekmeden {tabIndex}. sekme",
+  "calendarTodaySemanticsLabel": "Bugün",
+  "calendarShowMonthYearPickerSemanticsHint": "Ay ve yıl seçiciyi göster",
+  "calendarShowMonthPickerSemanticsHint": "Ay seçiciyi göster",
+  "calendarShowYearPickerSemanticsHint": "Yıl seçiciyi göster",
+  "calendarShowDaysSemanticsHint": "Günleri göster"
 }

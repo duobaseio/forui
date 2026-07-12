@@ -47,6 +47,21 @@ class FLocalizationsEt extends FLocalizations {
   String get calendarPreviousYearsSemanticsLabel => 'Eelmised aastad';
 
   @override
+  String get calendarShowDaysSemanticsHint => 'Kuva päevad';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Kuva kuu valija';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Kuva kuu ja aasta valija';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Kuva aasta valija';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Täna';
+
+  @override
   String get contextMenuSemanticsLabel => 'Kontekstimenüü';
 
   @override

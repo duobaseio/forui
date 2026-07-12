@@ -96,6 +96,21 @@ class FDefaultLocalizations extends FLocalizations {
   String get calendarPreviousYearsSemanticsLabel => 'Previous years';
 
   @override
+  String get calendarShowDaysSemanticsHint => 'Show days';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Show month picker';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Show month and year picker';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Show year picker';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Today';
+
+  @override
   String get contextMenuSemanticsLabel => 'Context menu';
 
   @override

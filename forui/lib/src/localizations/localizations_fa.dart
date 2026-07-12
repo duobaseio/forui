@@ -47,6 +47,21 @@ class FLocalizationsFa extends FLocalizations {
   String get calendarPreviousYearsSemanticsLabel => 'سال‌های قبل';
 
   @override
+  String get calendarShowDaysSemanticsHint => 'نمایش روزها';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'نمایش انتخابگر ماه';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'نمایش انتخابگر ماه و سال';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'نمایش انتخابگر سال';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'امروز';
+
+  @override
   String get contextMenuSemanticsLabel => 'منوی زمینه';
 
   @override

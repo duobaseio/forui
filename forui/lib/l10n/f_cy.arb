@@ -39,5 +39,10 @@
   "calendarPreviousYearsSemanticsLabel": "Blynyddoedd blaenorol",
   "headerBackSemanticsLabel": "Yn ôl",
   "headerCloseSemanticsLabel": "Cau",
-  "bottomNavigationBarTabSemanticsLabel": "Tab {tabIndex} o {tabCount}"
+  "bottomNavigationBarTabSemanticsLabel": "Tab {tabIndex} o {tabCount}",
+  "calendarTodaySemanticsLabel": "Heddiw",
+  "calendarShowMonthYearPickerSemanticsHint": "Dangos dewisydd mis a blwyddyn",
+  "calendarShowMonthPickerSemanticsHint": "Dangos dewisydd mis",
+  "calendarShowYearPickerSemanticsHint": "Dangos dewisydd blwyddyn",
+  "calendarShowDaysSemanticsHint": "Dangos dyddiau"
 }

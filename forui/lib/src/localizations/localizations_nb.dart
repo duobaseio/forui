@@ -47,6 +47,21 @@ class FLocalizationsNb extends FLocalizations {
   String get calendarPreviousYearsSemanticsLabel => 'Forrige år';
 
   @override
+  String get calendarShowDaysSemanticsHint => 'Vis dager';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Vis månedsvelger';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Vis måneds- og årsvelger';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Vis årsvelger';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'I dag';
+
+  @override
   String get contextMenuSemanticsLabel => 'Kontekstmeny';
 
   @override

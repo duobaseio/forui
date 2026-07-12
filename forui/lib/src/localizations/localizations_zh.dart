@@ -47,6 +47,21 @@ class FLocalizationsZh extends FLocalizations {
   String get calendarPreviousYearsSemanticsLabel => '前几年';
 
   @override
+  String get calendarShowDaysSemanticsHint => '显示日期';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => '显示月份选择器';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => '显示月份和年份选择器';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => '显示年份选择器';
+
+  @override
+  String get calendarTodaySemanticsLabel => '今天';
+
+  @override
   String get contextMenuSemanticsLabel => '上下文菜单';
 
   @override
@@ -176,6 +191,21 @@ class FLocalizationsZhHk extends FLocalizationsZh {
   String get calendarPreviousYearsSemanticsLabel => '前幾年';
 
   @override
+  String get calendarShowDaysSemanticsHint => '顯示日期';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => '顯示月份選擇器';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => '顯示月份和年份選擇器';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => '顯示年份選擇器';
+
+  @override
+  String get calendarTodaySemanticsLabel => '今天';
+
+  @override
   String get contextMenuSemanticsLabel => '快捷選單';
 
   @override
@@ -303,6 +333,21 @@ class FLocalizationsZhTw extends FLocalizationsZh {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => '前幾年';
+
+  @override
+  String get calendarShowDaysSemanticsHint => '顯示日期';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => '顯示月份選擇器';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => '顯示月份和年份選擇器';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => '顯示年份選擇器';
+
+  @override
+  String get calendarTodaySemanticsLabel => '今天';
 
   @override
   String get contextMenuSemanticsLabel => '快捷選單';

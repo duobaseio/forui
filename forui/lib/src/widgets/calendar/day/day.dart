@@ -34,6 +34,7 @@ class Day extends StatelessWidget {
   final FCalendarDayStyles styles;
   final FLocalizations localizations;
   final DateTime date;
+  final bool selected; // Optimization to avoid having to perform 4 checks.
   final Set<FCalendarDayVariant> variants;
   final FocusNode focusNode;
   final VoidCallback? onPress;
@@ -44,6 +45,7 @@ class Day extends StatelessWidget {
     required this.styles,
     required this.localizations,
     required this.date,
+    required this.selected,
     required this.variants,
     required this.focusNode,
     required this.onPress,
@@ -53,15 +55,21 @@ class Day extends StatelessWidget {
   });
 
   @override
-  Widget build(BuildContext context) => FTappable.static(
-    focusNode: focusNode,
-    semanticsLabel: DateFormat.yMMMMd(localizations.localeName).format(date),
-    excludeSemantics: true,
-    onPress: onPress,
-    onLongPress: onLongPress,
-    builder: (context, variants, _) =>
-        builder(context, styles, localizations, date, {...variants.cast<FCalendarDayVariant>(), ...this.variants}),
-  );
+  Widget build(BuildContext context) {
+    final semanticsLabel = DateFormat.yMMMMEEEEd(localizations.localeName).format(date);
+    return FTappable.static(
+      focusNode: focusNode,
+      selected: selected,
+      semanticsLabel: variants.contains(FCalendarDayVariant.today)
+          ? '$semanticsLabel, ${localizations.calendarTodaySemanticsLabel}'
+          : semanticsLabel,
+      excludeSemantics: true,
+      onPress: onPress,
+      onLongPress: onLongPress,
+      builder: (context, variants, _) =>
+          builder(context, styles, localizations, date, {...variants.cast<FCalendarDayVariant>(), ...this.variants}),
+    );
+  }
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -70,6 +78,7 @@ class Day extends StatelessWidget {
       ..add(DiagnosticsProperty('styles', styles))
       ..add(DiagnosticsProperty('localizations', localizations))
       ..add(DiagnosticsProperty('date', date))
+      ..add(FlagProperty('selected', value: selected, ifTrue: 'selected'))
       ..add(IterableProperty('variants', variants))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onPress', onPress))

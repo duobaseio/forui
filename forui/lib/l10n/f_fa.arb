@@ -38,5 +38,10 @@
   "calendarPreviousYearsSemanticsLabel": "سال‌های قبل",
   "headerBackSemanticsLabel": "برگشت",
   "headerCloseSemanticsLabel": "بستن",
-  "bottomNavigationBarTabSemanticsLabel": "برگه {tabIndex} از {tabCount}"
+  "bottomNavigationBarTabSemanticsLabel": "برگه {tabIndex} از {tabCount}",
+  "calendarTodaySemanticsLabel": "امروز",
+  "calendarShowMonthYearPickerSemanticsHint": "نمایش انتخابگر ماه و سال",
+  "calendarShowMonthPickerSemanticsHint": "نمایش انتخابگر ماه",
+  "calendarShowYearPickerSemanticsHint": "نمایش انتخابگر سال",
+  "calendarShowDaysSemanticsHint": "نمایش روزها"
 }

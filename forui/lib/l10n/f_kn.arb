@@ -38,5 +38,10 @@
   "calendarPreviousYearsSemanticsLabel": "ಹಿಂದಿನ ವರ್ಷಗಳು",
   "headerBackSemanticsLabel": "ಹಿಂದೆ",
   "headerCloseSemanticsLabel": "ಮುಚ್ಚಿರಿ",
-  "bottomNavigationBarTabSemanticsLabel": "{tabCount} ರಲ್ಲಿ {tabIndex} ಟ್ಯಾಬ್"
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount} ರಲ್ಲಿ {tabIndex} ಟ್ಯಾಬ್",
+  "calendarTodaySemanticsLabel": "ಇಂದು",
+  "calendarShowMonthYearPickerSemanticsHint": "ತಿಂಗಳು ಮತ್ತು ವರ್ಷ ಆಯ್ಕೆಗಾರವನ್ನು ತೋರಿಸಿ",
+  "calendarShowMonthPickerSemanticsHint": "ತಿಂಗಳು ಆಯ್ಕೆಗಾರವನ್ನು ತೋರಿಸಿ",
+  "calendarShowYearPickerSemanticsHint": "ವರ್ಷ ಆಯ್ಕೆಗಾರವನ್ನು ತೋರಿಸಿ",
+  "calendarShowDaysSemanticsHint": "ದಿನಗಳನ್ನು ತೋರಿಸಿ"
 }

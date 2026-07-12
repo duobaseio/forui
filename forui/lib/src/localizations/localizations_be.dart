@@ -47,6 +47,21 @@ class FLocalizationsBe extends FLocalizations {
   String get calendarPreviousYearsSemanticsLabel => 'Папярэднія гады';
 
   @override
+  String get calendarShowDaysSemanticsHint => 'Паказаць дні';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Паказаць выбар месяца';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Паказаць выбар месяца і года';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Паказаць выбар года';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Сёння';
+
+  @override
   String get contextMenuSemanticsLabel => 'Кантэкстнае меню';
 
   @override

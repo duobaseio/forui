@@ -47,6 +47,21 @@ class FLocalizationsSw extends FLocalizations {
   String get calendarPreviousYearsSemanticsLabel => 'Miaka iliyopita';
 
   @override
+  String get calendarShowDaysSemanticsHint => 'Onyesha siku';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Onyesha kiteua mwezi';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Onyesha kiteua mwezi na mwaka';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Onyesha kiteua mwaka';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Leo';
+
+  @override
   String get contextMenuSemanticsLabel => 'Menyu ya muktadha';
 
   @override

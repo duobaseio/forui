@@ -47,6 +47,21 @@ class FLocalizationsKa extends FLocalizations {
   String get calendarPreviousYearsSemanticsLabel => 'წინა წლები';
 
   @override
+  String get calendarShowDaysSemanticsHint => 'დღეების ჩვენება';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'თვის ამომრჩევის ჩვენება';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'თვისა და წლის ამომრჩევის ჩვენება';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'წლის ამომრჩევის ჩვენება';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'დღეს';
+
+  @override
   String get contextMenuSemanticsLabel => 'კონტექსტური მენიუ';
 
   @override

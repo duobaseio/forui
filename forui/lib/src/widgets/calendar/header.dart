@@ -12,6 +12,7 @@ part 'header.design.dart';
 class Header extends StatelessWidget {
   final FCalendarHeaderStyle style;
   final String label;
+  final String semanticsHint;
   final String previousSemanticsLabel;
   final String nextSemanticsLabel;
   final bool shown;
@@ -23,6 +24,7 @@ class Header extends StatelessWidget {
   const Header({
     required this.style,
     required this.label,
+    required this.semanticsHint,
     required this.previousSemanticsLabel,
     required this.nextSemanticsLabel,
     required this.shown,
@@ -32,17 +34,24 @@ class Header extends StatelessWidget {
     super.key,
   }) : navigation = true;
 
-  const Header.single({required this.style, required this.label, required this.shown, required this.onPress, super.key})
-    : navigation = false,
-      previousSemanticsLabel = '',
-      nextSemanticsLabel = '',
-      onNext = null,
-      onPrevious = null;
+  const Header.single({
+    required this.style,
+    required this.label,
+    required this.semanticsHint,
+    required this.shown,
+    required this.onPress,
+    super.key,
+  }) : navigation = false,
+       previousSemanticsLabel = '',
+       nextSemanticsLabel = '',
+       onNext = null,
+       onPrevious = null;
 
   factory Header.day({
     required FCalendarHeaderStyle style,
     required FLocalizations localizations,
     required DateTime monthYear,
+    required String semanticsHint,
     required bool shown,
     required VoidCallback? onPress,
     required VoidCallback? onNext,
@@ -51,6 +60,7 @@ class Header extends StatelessWidget {
   }) => Header(
     style: style,
     label: DateFormat.yMMMM(localizations.localeName).format(monthYear),
+    semanticsHint: semanticsHint,
     previousSemanticsLabel: localizations.calendarPreviousMonthSemanticsLabel,
     nextSemanticsLabel: localizations.calendarNextMonthSemanticsLabel,
     shown: shown,
@@ -64,12 +74,14 @@ class Header extends StatelessWidget {
     required FCalendarHeaderStyle style,
     required FLocalizations localizations,
     required DateTime monthYear,
+    required String semanticsHint,
     required bool shown,
     required VoidCallback? onPress,
     Key? key,
   }) => Header.single(
     style: style,
     label: DateFormat.yMMMM(localizations.localeName).format(monthYear),
+    semanticsHint: semanticsHint,
     shown: shown,
     onPress: onPress,
     key: key,
@@ -79,6 +91,7 @@ class Header extends StatelessWidget {
     required FCalendarHeaderStyle style,
     required FLocalizations localizations,
     required DateTime year,
+    required String semanticsHint,
     required bool shown,
     required VoidCallback? onPress,
     required VoidCallback? onNext,
@@ -87,6 +100,7 @@ class Header extends StatelessWidget {
   }) => Header(
     style: style,
     label: DateFormat.y(localizations.localeName).format(year),
+    semanticsHint: semanticsHint,
     previousSemanticsLabel: localizations.calendarPreviousYearSemanticsLabel,
     nextSemanticsLabel: localizations.calendarNextYearSemanticsLabel,
     shown: shown,
@@ -100,12 +114,14 @@ class Header extends StatelessWidget {
     required FCalendarHeaderStyle style,
     required FLocalizations localizations,
     required DateTime year,
+    required String semanticsHint,
     required bool shown,
     required VoidCallback? onPress,
     Key? key,
   }) => Header.single(
     style: style,
     label: DateFormat.y(localizations.localeName).format(year),
+    semanticsHint: semanticsHint,
     shown: shown,
     onPress: onPress,
     key: key,
@@ -115,6 +131,7 @@ class Header extends StatelessWidget {
     required FCalendarHeaderStyle style,
     required FLocalizations localizations,
     required DateTime decade,
+    required String semanticsHint,
     required bool shown,
     required VoidCallback? onPress,
     required VoidCallback? onNext,
@@ -125,6 +142,7 @@ class Header extends StatelessWidget {
     return Header(
       style: style,
       label: '${DateFormat.y(locale).format(decade)} — ${DateFormat.y(locale).format(.utc(decade.year + 9))}',
+      semanticsHint: semanticsHint,
       previousSemanticsLabel: localizations.calendarPreviousYearsSemanticsLabel,
       nextSemanticsLabel: localizations.calendarNextYearsSemanticsLabel,
       shown: shown,
@@ -140,7 +158,7 @@ class Header extends StatelessWidget {
     padding: style.padding,
     child: Row(
       children: [
-        _Tappable(style: style, label: label, shown: shown, onPress: onPress),
+        _Tappable(style: style, label: label, semanticsHint: semanticsHint, shown: shown, onPress: onPress),
         if (navigation) ...[
           const Spacer(),
           FButton.icon(
@@ -166,6 +184,7 @@ class Header extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(StringProperty('label', label))
+      ..add(StringProperty('semanticsHint', semanticsHint))
       ..add(StringProperty('previousSemanticsLabel', previousSemanticsLabel))
       ..add(StringProperty('nextSemanticsLabel', nextSemanticsLabel))
       ..add(FlagProperty('monthYear', value: shown, ifTrue: 'month year picker shown'))
@@ -227,12 +246,14 @@ class SplitHeader extends StatelessWidget {
     final yearTappable = _Tappable(
       style: style,
       label: DateFormat.y(locale).format(date),
+      semanticsHint: localizations.calendarShowYearPickerSemanticsHint,
       shown: year,
       onPress: onYear,
     );
     final monthTappable = _Tappable(
       style: style,
       label: DateFormat.MMMM(locale).format(date),
+      semanticsHint: localizations.calendarShowMonthPickerSemanticsHint,
       shown: month,
       onPress: onMonth,
     );
@@ -291,15 +312,23 @@ class SplitHeader extends StatelessWidget {
 class _Tappable extends StatelessWidget {
   final FCalendarHeaderStyle style;
   final String label;
+  final String semanticsHint;
   final bool shown;
   final VoidCallback? onPress;
 
-  const _Tappable({required this.style, required this.label, required this.shown, required this.onPress});
+  const _Tappable({
+    required this.style,
+    required this.label,
+    required this.semanticsHint,
+    required this.shown,
+    required this.onPress,
+  });
 
   @override
   Widget build(BuildContext context) => FTappable.static(
     focusedOutlineStyle: style.headerFocusedOutlineStyle,
     semanticsExpanded: shown,
+    semanticsHint: semanticsHint,
     onPress: onPress,
     builder: (context, variants, _) => Container(
       decoration: style.headerDecoration.resolve(variants),
@@ -327,6 +356,7 @@ class _Tappable extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(StringProperty('label', label))
+      ..add(StringProperty('semanticsHint', semanticsHint))
       ..add(FlagProperty('expands', value: shown, ifTrue: 'expanded'))
       ..add(ObjectFlagProperty.has('onPress', onPress));
   }

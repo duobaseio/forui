@@ -39,5 +39,10 @@
   "calendarPreviousYearsSemanticsLabel": "Prethodne godine",
   "headerBackSemanticsLabel": "Nazad",
   "headerCloseSemanticsLabel": "Zatvori",
-  "bottomNavigationBarTabSemanticsLabel": "Kartica {tabIndex} od {tabCount}"
+  "bottomNavigationBarTabSemanticsLabel": "Kartica {tabIndex} od {tabCount}",
+  "calendarTodaySemanticsLabel": "Danas",
+  "calendarShowMonthYearPickerSemanticsHint": "Prikaži birač meseca i godine",
+  "calendarShowMonthPickerSemanticsHint": "Prikaži birač meseca",
+  "calendarShowYearPickerSemanticsHint": "Prikaži birač godine",
+  "calendarShowDaysSemanticsHint": "Prikaži dane"
 }

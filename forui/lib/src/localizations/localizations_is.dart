@@ -47,6 +47,21 @@ class FLocalizationsIs extends FLocalizations {
   String get calendarPreviousYearsSemanticsLabel => 'Fyrri ár';
 
   @override
+  String get calendarShowDaysSemanticsHint => 'Sýna daga';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Sýna mánaðarval';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Sýna mánaðar- og ársval';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Sýna ársval';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Í dag';
+
+  @override
   String get contextMenuSemanticsLabel => 'Samhengisvalmynd';
 
   @override

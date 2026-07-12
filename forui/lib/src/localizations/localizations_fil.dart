@@ -47,6 +47,21 @@ class FLocalizationsFil extends FLocalizations {
   String get calendarPreviousYearsSemanticsLabel => 'Nakaraang mga taon';
 
   @override
+  String get calendarShowDaysSemanticsHint => 'Ipakita ang mga araw';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Ipakita ang pampili ng buwan';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Ipakita ang pampili ng buwan at taon';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Ipakita ang pampili ng taon';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Ngayon';
+
+  @override
   String get contextMenuSemanticsLabel => 'Menu ng konteksto';
 
   @override

@@ -47,6 +47,21 @@ class FLocalizationsRo extends FLocalizations {
   String get calendarPreviousYearsSemanticsLabel => 'Anii precedenți';
 
   @override
+  String get calendarShowDaysSemanticsHint => 'Afișează zilele';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Afișează selectorul de lună';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Afișează selectorul de lună și an';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Afișează selectorul de an';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Astăzi';
+
+  @override
   String get contextMenuSemanticsLabel => 'Meniu contextual';
 
   @override
