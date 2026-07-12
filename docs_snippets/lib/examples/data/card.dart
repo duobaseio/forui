@@ -72,10 +72,8 @@ class TitleCardPage extends Example {
   TitleCardPage({@queryParam super.theme});
 
   @override
-  Widget example(BuildContext _) => const TitleCard(
-    title: Text('Notifications'),
-    subtitle: Text('You have 3 unread messages.'),
-  );
+  Widget example(BuildContext _) =>
+      const TitleCard(title: Text('Notifications'), subtitle: Text('You have 3 unread messages.'));
 }
 
 class TitleCard extends StatelessWidget {
@@ -127,13 +125,13 @@ class MediaCardPage extends Example {
   @override
   Widget example(BuildContext _) => MediaCard(
     image: Container(
-      decoration: BoxDecoration(image: DecorationImage(image: AssetImage(path('avatar.png')), fit: .cover)),
+      decoration: BoxDecoration(
+        image: DecorationImage(image: AssetImage(path('avatar.png')), fit: .cover),
+      ),
       height: 200,
     ),
     title: const Text('Gratitude'),
-    subtitle: const Text(
-      'The quality of being thankful; readiness to show appreciation for and to return kindness.',
-    ),
+    subtitle: const Text('The quality of being thankful; readiness to show appreciation for and to return kindness.'),
     child: FButton(onPress: () {}, child: const Text('Read more')),
   );
 }

@@ -103,7 +103,9 @@ class AdaptiveMediaDialogPage extends Example {
           image: ClipRRect(
             borderRadius: context.theme.style.borderRadius.sm,
             child: Container(
-              decoration: BoxDecoration(image: DecorationImage(image: AssetImage(path('avatar.png')), fit: .cover)),
+              decoration: BoxDecoration(
+                image: DecorationImage(image: AssetImage(path('avatar.png')), fit: .cover),
+              ),
               height: 140,
             ),
           ),
@@ -217,7 +219,9 @@ class HorizontalMediaDialogPage extends Example {
           image: ClipRRect(
             borderRadius: context.theme.style.borderRadius.sm,
             child: Container(
-              decoration: BoxDecoration(image: DecorationImage(image: AssetImage(path('avatar.png')), fit: .cover)),
+              decoration: BoxDecoration(
+                image: DecorationImage(image: AssetImage(path('avatar.png')), fit: .cover),
+              ),
               height: 140,
             ),
           ),
@@ -331,7 +335,9 @@ class VerticalMediaDialogPage extends Example {
           image: ClipRRect(
             borderRadius: context.theme.style.borderRadius.sm,
             child: Container(
-              decoration: BoxDecoration(image: DecorationImage(image: AssetImage(path('avatar.png')), fit: .cover)),
+              decoration: BoxDecoration(
+                image: DecorationImage(image: AssetImage(path('avatar.png')), fit: .cover),
+              ),
               height: 140,
             ),
           ),
