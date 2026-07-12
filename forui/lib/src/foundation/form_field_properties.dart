@@ -7,8 +7,25 @@ mixin FFormFieldProperties<T> {
   /// The default validator that always returns null (no validation error).
   static String? defaultValidator(Object? _) => null;
 
-  /// The default builder for errors displayed below the [description].
-  static Widget defaultErrorBuilder(BuildContext _, String error) => Text(error);
+  /// The default builder for errors displayed below the [description]. Prefixes the message with [FIcons.error].
+  static Widget defaultErrorBuilder(BuildContext context, String error) => Builder(
+    builder: (context) {
+      final style = DefaultTextStyle.of(context).style;
+      return Row(
+        mainAxisSize: .min,
+        spacing: 4,
+        children: [
+          ExcludeSemantics(
+            child: IconTheme(
+              data: IconThemeData(color: style.color, size: style.fontSize),
+              child: context.theme.icons.error(context),
+            ),
+          ),
+          Flexible(child: Text(error)),
+        ],
+      );
+    },
+  );
 
   /// The label.
   Widget? get label;

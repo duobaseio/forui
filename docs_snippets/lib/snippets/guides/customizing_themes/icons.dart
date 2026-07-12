@@ -16,6 +16,7 @@ FIcons _icons() => FIcons(
   circleAlert: FIcons.iconData(FLucideIcons.circleAlert),
   clock4: FIcons.iconData(FLucideIcons.clock4),
   ellipsis: FIcons.iconData(FLucideIcons.ellipsis),
+  error: FIcons.iconData(FLucideIcons.circleAlert),
   eye: FIcons.iconData(FLucideIcons.eye),
   eyeClosed: FIcons.iconData(FLucideIcons.eyeClosed),
   gripHorizontal: FIcons.iconData(FLucideIcons.gripHorizontal),

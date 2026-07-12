@@ -73,6 +73,7 @@ enum _Icons {
       circleAlert: _tablerIcon(TablerIcons.alertCircle, scale: 1.1),
       clock4: _tablerIcon(TablerIcons.clockHour4, scale: 1.1),
       ellipsis: _tablerIcon(TablerIcons.dots),
+      error: _tablerIcon(TablerIcons.alertCircle, scale: 1.1),
       eye: _tablerIcon(TablerIcons.eye, scale: 1.1),
       eyeClosed: _tablerIcon(TablerIcons.eyeOff),
       gripHorizontal: _tablerIcon(TablerIcons.gripHorizontal),
@@ -96,6 +97,7 @@ enum _Icons {
       circleAlert: _fitted(RemixIcons.error_warning_line),
       clock4: _fitted(RemixIcons.time_line),
       ellipsis: _fitted(RemixIcons.more_line),
+      error: _fitted(RemixIcons.error_warning_line),
       eye: _fitted(RemixIcons.eye_line),
       eyeClosed: _fitted(RemixIcons.eye_off_line),
       // Remix only ships a vertical grip; rotate it a quarter turn for the horizontal slot.
@@ -120,6 +122,7 @@ enum _Icons {
       circleAlert: _hugeicon(HugeIcons.strokeRoundedAlertCircle),
       clock4: _hugeicon(HugeIcons.strokeRoundedClock01),
       ellipsis: _hugeicon(HugeIcons.strokeRoundedMoreHorizontal),
+      error: _hugeicon(HugeIcons.strokeRoundedAlertCircle),
       eye: _hugeicon(HugeIcons.strokeRoundedView),
       eyeClosed: _hugeicon(HugeIcons.strokeRoundedViewOff),
       gripHorizontal: _hugeicon(HugeIcons.strokeRoundedDragDropHorizontal),
@@ -143,6 +146,7 @@ enum _Icons {
       circleAlert: _iconoirIcon(iconoir_flutter.WarningCircle.new),
       clock4: _iconoirIcon(iconoir_flutter.Clock.new),
       ellipsis: _iconoirIcon(iconoir_flutter.MoreHoriz.new),
+      error: _iconoirIcon(iconoir_flutter.WarningCircle.new),
       eye: _iconoirIcon(iconoir_flutter.Eye.new),
       eyeClosed: _iconoirIcon(iconoir_flutter.EyeClosed.new),
       gripHorizontal: _iconoirIcon(iconoir_flutter.Drag.new),
@@ -319,6 +323,14 @@ final List<(String, WidgetBuilder)> _sections = [
       label: const Text('Clearable'),
       hint: 'Type to reveal clear button',
       clearable: (value) => value.text.isNotEmpty,
+    ),
+  ),
+  (
+    'FTextFormField (error message)',
+    (_) => FTextFormField(
+      label: const Text('Email'),
+      hint: 'janedoe@foruslabs.com',
+      forceErrorText: 'The email format is invalid',
     ),
   ),
   (
