@@ -14,7 +14,7 @@ import 'package:forui/src/widgets/time_field/input/time_input_controller.dart';
 class TimeInput extends Input<FTime?> {
   final FTimeFieldController timeController;
   final FTimeFieldStyle style;
-  final bool hour24;
+  final bool? hour24;
 
   const TimeInput({
     required this.timeController,
@@ -60,7 +60,7 @@ class TimeInput extends Input<FTime?> {
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('timeController', timeController))
-      ..add(FlagProperty('hour24', value: hour24, ifTrue: 'hour24'))
+      ..add(DiagnosticsProperty('hour24', hour24))
       ..add(DiagnosticsProperty('style', style))
       ..add(ObjectFlagProperty.has('builder', builder))
       ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
@@ -88,9 +88,31 @@ class _TimeFieldState extends InputState<TimeInput, FTime?> {
   /// ensures consistent spacing regardless of whether delegates are configured.
   static final _default12Hour = DateFormat('h:mm a', 'en_US');
 
+  /// The resolved 24-hour format. Falls back to [MediaQuery.alwaysUse24HourFormatOf] when [TimeInput.hour24] is null.
+  bool _hour24 = false;
+
+  @override
+  void initState() {
+    // MediaQuery cannot be read in initState; resolve the platform flag in didChangeDependencies instead.
+    _hour24 = widget.hour24 ?? false;
+    super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final hour24 = widget.hour24 ?? MediaQuery.alwaysUse24HourFormatOf(context);
+    if (_hour24 != hour24) {
+      _hour24 = hour24;
+      inputController.dispose();
+      inputController = createController();
+    }
+  }
+
   @override
   void didUpdateWidget(covariant TimeInput old) {
     super.didUpdateWidget(old);
+    final hour24 = widget.hour24 ?? MediaQuery.alwaysUse24HourFormatOf(context);
     if (widget.localizations != old.localizations) {
       // We don't support scripts which period requires composing. This is due to how primitive underlying text field
       // composing support is. I'll gladly accept any PR that fixes this.
@@ -100,9 +122,11 @@ class _TimeFieldState extends InputState<TimeInput, FTime?> {
         _ => widget.localizations,
       };
 
+      _hour24 = hour24;
       inputController.dispose();
       inputController = createController();
-    } else if (widget.timeController != old.timeController) {
+    } else if (widget.timeController != old.timeController || hour24 != _hour24) {
+      _hour24 = hour24;
       inputController.dispose();
       inputController = createController();
     }
@@ -111,7 +135,7 @@ class _TimeFieldState extends InputState<TimeInput, FTime?> {
   @override
   @protected
   InputController createController() {
-    final format = widget.hour24
+    final format = _hour24
         ? DateFormat.Hm(localizations.localeName)
         : (localizations is FDefaultLocalizations ? _default12Hour : DateFormat.jm(localizations.localeName));
     return TimeInputController(

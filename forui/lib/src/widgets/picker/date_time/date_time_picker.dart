@@ -62,10 +62,10 @@ class FDateTimePicker extends StatefulWidget {
   /// ```
   final FDateTimePickerStyleDelta style;
 
-  /// True if the time picker should use the 24-hour format.
+  /// True if 24-hour format should be used.
   ///
-  /// Setting this to false will use the locale's default format, which may be 24-hours. Defaults to false.
-  final bool hour24;
+  /// Defaults to null, which follows [MediaQuery.alwaysUse24HourFormatOf]. If false, use the locale's default format.
+  final bool? hour24;
 
   /// The interval between days in the picker. Defaults to 1.
   ///
@@ -94,7 +94,7 @@ class FDateTimePicker extends StatefulWidget {
   const FDateTimePicker({
     this.control = const .managed(),
     this.style = const .context(),
-    this.hour24 = false,
+    this.hour24,
     this.dayInterval = 1,
     this.hourInterval = 1,
     this.minuteInterval = 1,
@@ -113,7 +113,7 @@ class FDateTimePicker extends StatefulWidget {
     properties
       ..add(DiagnosticsProperty('control', control))
       ..add(DiagnosticsProperty('style', style))
-      ..add(FlagProperty('hour24', value: hour24, ifTrue: '24-hour'))
+      ..add(DiagnosticsProperty('hour24', hour24))
       ..add(IntProperty('dayInterval', dayInterval))
       ..add(IntProperty('hourInterval', hourInterval))
       ..add(IntProperty('minuteInterval', minuteInterval))
@@ -172,7 +172,9 @@ class _FDateTimePickerState extends State<FDateTimePicker> {
   void _locale() {
     final locale = FLocalizations.of(context) ?? FDefaultLocalizations();
     _dateFormat = .MMMEd(locale.localeName);
-    _timeFormat = widget.hour24 ? .Hm(locale.localeName) : .jm(locale.localeName);
+    _timeFormat = widget.hour24 ?? MediaQuery.alwaysUse24HourFormatOf(context)
+        ? .Hm(locale.localeName)
+        : .jm(locale.localeName);
     _padding = _timeFormat.pattern!.contains(RegExp('HH|hh')) ? 2 : 0;
   }
 

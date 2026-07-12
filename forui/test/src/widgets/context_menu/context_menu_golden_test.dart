@@ -215,6 +215,65 @@ void main() {
     }
   }
 
+  testWidgets('background filter matches the decoration', (tester) async {
+    final theme = TestScaffold.themes.first.data;
+
+    await tester.pumpWidget(
+      TestScaffold.app(
+        theme: theme,
+        // The menu opens over the two-tone box with transparent items so the frosted blur shows through.
+        child: FContextMenu(
+          control: const .managed(initial: true),
+          style: .delta(
+            minWidth: 250,
+            backgroundFilter: () =>
+                (v) => .blur(sigmaX: v * 8, sigmaY: v * 8),
+            decoration: .value(
+              BoxDecoration(
+                color: Colors.white.withValues(alpha: 0.2),
+                borderRadius: theme.style.borderRadius.md,
+                border: .all(color: Colors.white.withValues(alpha: 0.5)),
+              ),
+            ),
+            itemGroupStyle: .delta(
+              decoration: const .value(BoxDecoration()),
+              itemStyles: .delta([
+                .all(
+                  .delta(
+                    backgroundColor: const FVariants.all(Colors.transparent),
+                    contentDecoration: .delta([.base(const .shapeDelta(color: Colors.transparent))]),
+                  ),
+                ),
+              ]),
+            ),
+          ),
+          menu: [
+            .group(
+              children: [
+                .item(title: const Text('Cut'), onPress: () {}),
+                .item(title: const Text('Copy'), onPress: () {}),
+              ],
+            ),
+          ],
+          child: const SizedBox(
+            width: 400,
+            height: 120,
+            child: Column(
+              crossAxisAlignment: .stretch,
+              children: [
+                Expanded(child: ColoredBox(color: Colors.amber)),
+                Expanded(child: ColoredBox(color: Colors.deepOrange)),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('context-menu/background-filter.png'));
+  });
+
   group('accessibility', () {
     // The menu scales up and fades in under full motion, drops the scale to a plain fade under reduced motion, and
     // appears instantly (fully opaque, no scale) under disabled motion.

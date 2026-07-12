@@ -190,6 +190,38 @@ void main() {
     });
   }
 
+  testWidgets('background filter matches the decoration', (tester) async {
+    final theme = TestScaffold.themes.first.data;
+
+    await tester.pumpWidget(
+      TestScaffold.app(
+        theme: theme,
+        // The popover is centered over the dark bar so the frosted blur is visible through the translucent tint.
+        child: FPopover(
+          control: const .managed(initial: true),
+          popoverAnchor: .center,
+          childAnchor: .center,
+          constraints: const FPortalConstraints(minWidth: 300),
+          style: .delta(
+            backgroundFilter: (v) => .blur(sigmaX: v * 8, sigmaY: v * 8),
+            decoration: .value(
+              BoxDecoration(
+                color: Colors.white.withValues(alpha: 0.2),
+                borderRadius: theme.style.borderRadius.md,
+                border: .all(color: Colors.white.withValues(alpha: 0.5)),
+              ),
+            ),
+          ),
+          popoverBuilder: (_, _) => const SizedBox.square(dimension: 120),
+          child: const ColoredBox(color: Colors.black, child: SizedBox(width: 500, height: 80)),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover/background-filter.png'));
+  });
+
   for (final clip in [Clip.none, Clip.antiAlias]) {
     testWidgets('clip ${clip.name}', (tester) async {
       await tester.pumpWidget(

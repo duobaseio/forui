@@ -49,10 +49,10 @@ class FTimePicker extends StatefulWidget {
   /// ```
   final FTimePickerStyleDelta style;
 
-  /// True if the time picker should use the 24-hour format.
+  /// True if 24-hour format should be used.
   ///
-  /// Setting this to false will use the locale's default format, which may be 24-hours. Defaults to false.
-  final bool hour24;
+  /// Defaults to null, which follows [MediaQuery.alwaysUse24HourFormatOf]. If false, use the locale's default format.
+  final bool? hour24;
 
   /// The interval between hours in the picker. Defaults to 1.
   ///
@@ -70,7 +70,7 @@ class FTimePicker extends StatefulWidget {
   const FTimePicker({
     this.control = const .managed(),
     this.style = const .context(),
-    this.hour24 = false,
+    this.hour24,
     this.hourInterval = 1,
     this.minuteInterval = 1,
     super.key,
@@ -86,7 +86,7 @@ class FTimePicker extends StatefulWidget {
     properties
       ..add(DiagnosticsProperty('control', control))
       ..add(DiagnosticsProperty('style', style))
-      ..add(FlagProperty('hour24', value: hour24, ifTrue: '24-hour'))
+      ..add(DiagnosticsProperty('hour24', hour24))
       ..add(IntProperty('hourInterval', hourInterval))
       ..add(IntProperty('minuteInterval', minuteInterval));
   }
@@ -127,7 +127,9 @@ class _FTimePickerState extends State<FTimePicker> {
 
   void _locale() {
     final locale = FLocalizations.of(context) ?? FDefaultLocalizations();
-    _format = widget.hour24 ? .Hm(locale.localeName) : .jm(locale.localeName);
+    final hour24 = widget.hour24 ?? MediaQuery.alwaysUse24HourFormatOf(context);
+
+    _format = hour24 ? .Hm(locale.localeName) : .jm(locale.localeName);
     _padding = _format.pattern!.contains(RegExp('HH|hh')) ? 2 : 0;
   }
 

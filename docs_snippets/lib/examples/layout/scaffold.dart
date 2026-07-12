@@ -32,16 +32,26 @@ class _ScaffoldPageState extends StatefulExampleState<ScaffoldPage> {
       children: [
         const SizedBox(height: 5),
         FCard(
-          title: const Text('Account'),
-          subtitle: const Text('Make changes to your account here. Click save when you are done.'),
-          child: Column(
-            children: [
-              const FTextField(label: Text('Name'), hint: 'John Renalo'),
-              const SizedBox(height: 10),
-              const FTextField(label: Text('Email'), hint: 'john@doe.com'),
-              const SizedBox(height: 16),
-              FButton(child: const Text('Save'), onPress: () {}),
-            ],
+          builder: (context, style, _) => Padding(
+            padding: style.padding,
+            child: Column(
+              mainAxisSize: .min,
+              crossAxisAlignment: .start,
+              children: [
+                Text('Account', style: style.titleTextStyle),
+                const SizedBox(height: 2),
+                Text(
+                  'Make changes to your account here. Click save when you are done.',
+                  style: style.subtitleTextStyle,
+                ),
+                const SizedBox(height: 6),
+                const FTextField(label: Text('Name'), hint: 'John Renalo'),
+                const SizedBox(height: 10),
+                const FTextField(label: Text('Email'), hint: 'john@doe.com'),
+                const SizedBox(height: 16),
+                FButton(child: const Text('Save'), onPress: () {}),
+              ],
+            ),
           ),
         ),
       ],

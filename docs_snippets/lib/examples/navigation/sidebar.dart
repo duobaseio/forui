@@ -34,7 +34,7 @@ class SidebarPage extends Example {
       ),
       footer: Padding(
         padding: const .symmetric(horizontal: 16),
-        child: FCard.raw(
+        child: FCard(
           child: Padding(
             padding: const .symmetric(vertical: 12, horizontal: 16),
             child: Row(
@@ -183,7 +183,7 @@ class SheetSidebarPage extends Example {
             ),
             footer: Padding(
               padding: const .symmetric(horizontal: 16),
-              child: FCard.raw(
+              child: FCard(
                 child: Padding(
                   padding: const .symmetric(vertical: 12, horizontal: 16),
                   child: Row(

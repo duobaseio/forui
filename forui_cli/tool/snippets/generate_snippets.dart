@@ -68,15 +68,75 @@ Future<(Map<String, (String, String, String)>, Map<String, (String, String)>)> m
 
   return (
     {
+      'card': (
+        'card',
+        'A card with a title, subtitle, and child',
+        File(p.join(directory, 'card', 'card.dart')).readAsStringSync(),
+      ),
+      'title-card': (
+        'title_card',
+        'A card with a title and subtitle',
+        File(p.join(directory, 'card', 'title_card.dart')).readAsStringSync(),
+      ),
+      'media-card': (
+        'media_card',
+        'A card with an image, title, subtitle, and child',
+        File(p.join(directory, 'card', 'media_card.dart')).readAsStringSync(),
+      ),
+      'adaptive-dialog': (
+        'adaptive_dialog',
+        'An adaptive dialog with a title, body, and actions',
+        File(p.join(directory, 'dialog', 'adaptive_dialog.dart')).readAsStringSync(),
+      ),
+      'adaptive-title-dialog': (
+        'adaptive_title_dialog',
+        'An adaptive dialog with a title and actions',
+        File(p.join(directory, 'dialog', 'adaptive_title_dialog.dart')).readAsStringSync(),
+      ),
+      'adaptive-media-dialog': (
+        'adaptive_media_dialog',
+        'An adaptive dialog with an image, title, body, and actions',
+        File(p.join(directory, 'dialog', 'adaptive_media_dialog.dart')).readAsStringSync(),
+      ),
+      'horizontal-dialog': (
+        'horizontal_dialog',
+        'A horizontal dialog with a title, body, and actions',
+        File(p.join(directory, 'dialog', 'horizontal_dialog.dart')).readAsStringSync(),
+      ),
+      'horizontal-title-dialog': (
+        'horizontal_title_dialog',
+        'A horizontal dialog with a title and actions',
+        File(p.join(directory, 'dialog', 'horizontal_title_dialog.dart')).readAsStringSync(),
+      ),
+      'horizontal-media-dialog': (
+        'horizontal_media_dialog',
+        'A horizontal dialog with an image, title, body, and actions',
+        File(p.join(directory, 'dialog', 'horizontal_media_dialog.dart')).readAsStringSync(),
+      ),
+      'vertical-dialog': (
+        'vertical_dialog',
+        'A vertical dialog with a title, body, and actions',
+        File(p.join(directory, 'dialog', 'vertical_dialog.dart')).readAsStringSync(),
+      ),
+      'vertical-title-dialog': (
+        'vertical_title_dialog',
+        'A vertical dialog with a title and actions',
+        File(p.join(directory, 'dialog', 'vertical_title_dialog.dart')).readAsStringSync(),
+      ),
+      'vertical-media-dialog': (
+        'vertical_media_dialog',
+        'A vertical dialog with an image, title, body, and actions',
+        File(p.join(directory, 'dialog', 'vertical_media_dialog.dart')).readAsStringSync(),
+      ),
       'main-basic': (
         'main',
         'A minimal Forui app entry point',
-        File(p.join(directory, 'main_basic.dart')).readAsStringSync(),
+        File(p.join(directory, 'main', 'main_basic.dart')).readAsStringSync(),
       ),
       'main-router': (
         'main',
         'A Forui app entry point using MaterialApp.router',
-        File(p.join(directory, 'main_router.dart')).readAsStringSync(),
+        File(p.join(directory, 'main', 'main_router.dart')).readAsStringSync(),
       ),
       materialThemeName: (
         materialThemeFile,
@@ -90,8 +150,8 @@ Future<(Map<String, (String, String, String)>, Map<String, (String, String)>)> m
       ),
     },
     {
-      'basic': ('main', File(p.join(directory, 'main_basic_init.dart')).readAsStringSync()),
-      'router': ('main', File(p.join(directory, 'main_router_init.dart')).readAsStringSync()),
+      'basic': ('main', File(p.join(directory, 'main', 'main_basic_init.dart')).readAsStringSync()),
+      'router': ('main', File(p.join(directory, 'main', 'main_router_init.dart')).readAsStringSync()),
     },
   );
 }

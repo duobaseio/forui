@@ -1,0 +1,33 @@
+version: 1
+transforms:
+  # FDialogStyle
+  - title: "Remove FDialogStyle(contentStyle: ...). Set titleTextStyle and bodyTextStyle directly instead."
+    date: 2026-07-10
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: ''
+      inClass: FDialogStyle
+    changes:
+      - kind: removeParameter
+        name: 'contentStyle'
+
+  - title: "Remove FDialogStyle.copyWith(contentStyle: ...). Set titleTextStyle and bodyTextStyle directly instead."
+    date: 2026-07-10
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      method: 'copyWith'
+      inClass: FDialogStyle
+    changes:
+      - kind: removeParameter
+        name: 'contentStyle'
+
+  # FDialogStyleDelta
+  - title: "Remove FDialogStyleDelta.delta(contentStyle: ...). Set titleTextStyle and bodyTextStyle directly instead."
+    date: 2026-07-10
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'delta'
+      inClass: FDialogStyleDelta
+    changes:
+      - kind: removeParameter
+        name: 'contentStyle'

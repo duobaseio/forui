@@ -9,14 +9,19 @@ import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
 import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/data/card/default.json';
+import titleSnippet from '@/snippets/examples/data/card/title.json';
+import mediaSnippet from '@/snippets/examples/data/card/media.json';
 import cardUsage from '@/snippets/usages/data/card/card.json';
-import cardRawUsage from '@/snippets/usages/data/card/raw.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
       <Widget name='data/card' height={400}/>
   </Tab>
   <Tab value="Code">
+      ```shell copy
+        dart run forui snippet create card
+      ````
+
       <CodeSnippet snippet={defaultSnippet} />
   </Tab>
 </Tabs>
@@ -38,5 +43,34 @@ To generate a specific style for customization:
 ### `FCard(...)`
 <UsageSnippet usage={cardUsage} />
 
-### `FCard.raw(...)`
-<UsageSnippet usage={cardRawUsage} />
+## Examples
+
+### Title
+
+<Tabs items={['Preview', 'Code']}>
+    <Tab value="Preview">
+        <Widget name='data/card' variant='title' height={400}/>
+    </Tab>
+    <Tab value="Code">
+        ```shell copy
+          dart run forui snippet create title-card
+        ````
+
+        <CodeSnippet snippet={titleSnippet} />
+    </Tab>
+</Tabs>
+
+### Media
+
+<Tabs items={['Preview', 'Code']}>
+    <Tab value="Preview">
+        <Widget name='data/card' variant='media' height={400}/>
+    </Tab>
+    <Tab value="Code">
+        ```shell copy
+          dart run forui snippet create media-card
+        ````
+
+        <CodeSnippet snippet={mediaSnippet} />
+    </Tab>
+</Tabs>

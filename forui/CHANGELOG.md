@@ -1,5 +1,15 @@
 ## 0.24.0 (next)
 
+This update ships a refreshed CLI with a richer, more interactive experience, including the ability to build your own
+custom theme.
+
+The default layouts of several widgets, such as `FCard`, were too hard to customize through the style API. They've
+been removed and can instead be generated in your project with the CLI or copied from forui.dev, then modified
+directly.
+
+Lastly, we've shipped several accessibility improvements as part of our ongoing effort. Most notably, all widgets now
+automatically reduce or disable motion to match the OS's accessibility settings.
+
 ### `FAccessibility`
 * Add `FAccessibility`, `FAccessibilityScope`, and `FAccessibilityMotion`.
 
@@ -16,9 +26,13 @@
 * Fix `FAvatarStyle.fadeInDuration` being ignored.
 
 
+### `FBadge`
+* **Breaking** Remove `FBadgeContentStyle`. Use `FBadgeStyle.labelTextStyle` and `FBadgeStyle.padding` instead.
+* **Breaking** Remove `FBadgeStyle.contentStyle`. Use `FBadgeStyle.labelTextStyle` and `FBadgeStyle.padding` instead.
+
+
 ### `FBottomNavigationBar` & `FBottomNavigationBarItem`
 * Add `FBottomNavigationBarData.length`.
-
 * Add `FBottomNavigationBarItem.semanticsLabel`.
 
 * Change `FBottomNavigationBarItem` to announce its position, e.g. "Tab 2 of 4", to screen readers.
@@ -34,6 +48,20 @@
 * Change `FCalendar` to jump between pages when animations are disabled.
 
 * Fix calendar month/year header not exposing its expanded state.
+
+
+### `FCard`
+`FCard` no longer provides a built-in content layout. Generate one with the CLI or copy it from forui.dev, then
+customize the widget directly instead of through the style API.
+
+* Add `FCard.builder`.
+* Add `FCardStyle.titleTextStyle`, `FCardStyle.subtitleTextStyle`, and `FCardStyle.padding`.
+
+* **Breaking** Rename `FCard.raw` to `FCard(child: ...)` instead.
+
+* **Breaking** Remove `FCard(...)`. Run `dart run forui snippet create` instead.
+* **Breaking** Remove `FCardContentStyle`. Use `FCardStyle.titleTextStyle`, `FCardStyle.subtitleTextStyle`, and
+  `FCardStyle.padding` instead.
 
 
 ### `FCheckbox`
@@ -58,6 +86,8 @@
 ### `FContextMenu`
 * Change `FContextMenu` to fade without scaling when motion is reduced.
 
+* Fix `FContextMenu` background filter overflowing its rounded bounds.
+
 
 ### `FDateField`
 * Fix `FDateField.calendar` not displaying its selected date when driven by a lifted selection control.
@@ -71,6 +101,10 @@
   `FDateSelectionControl.liftedMulti(...)` or `FDateSelectionControl.liftedRange(...)` instead.
 
 
+### `FDateTimePicker`
+* Change `hour24` to `bool?`. Defaults to `MediaQuery.alwaysUse24HourFormat`.
+
+
 ### `FDeterminateProgress`
 * Change `FDeterminateProgress` to jump to its value when animations are disabled.
 
@@ -78,7 +112,18 @@
 
 
 ### `FDialog`
+`FDialog` no longer provides a built-in content layout. Generate one with the CLI or copy it from forui.dev, then
+customize the widget directly instead of through the style API.
+
+* Add `FDialogStyle.titleTextStyle` and `FDialogStyle.bodyTextStyle`.
+
 * Change `FDialog` to fade without scaling when motion is reduced.
+* **Breaking** Rename `FDialog.raw(...)` to `FDialog(...)`.
+
+* **Breaking** Remove `FDialog(...)`. Run `dart run forui snippet create` instead.
+* **Breaking** Remove `FDialogContentStyle`. Use `FDialogStyle.titleTextStyle` and `FDialogStyle.bodyTextStyle` instead.
+
+* Fix `FDialog` background filter overflowing its rounded bounds.
 
 
 ### `FHeaderAction`
@@ -104,11 +149,14 @@
 ### `FPopover`
 * Change `FPopover` (and `FSelect`, `FAutocomplete`) to fade without scaling when motion is reduced.
 
+* Fix `FPopover` background filter overflowing its rounded bounds.
+
 
 ### `FPopoverMenu`
 * Add `physics` to `FPopoverMenu` and `FPopoverMenu.tiles`.
 
 * Fix `FSubmenuItem` and `FSubmenuTile` triggers not exposing their expanded state.
+* Fix `FPopoverMenu` background filter overflowing its rounded bounds.
 
 
 ### `FPortal` & `FPointPortal`
@@ -167,13 +215,19 @@
 * **Breaking** Remove `FThemes`. Use `FTheme.neutral`, or run `dart run forui theme create` to generate a custom theme.
 
 
+### `FTimeField`
+* Change `hour24` to `bool?`. Defaults to `MediaQuery.alwaysUse24HourFormat`.
+
+
+### `FTimePicker`
+* Change `hour24` to `bool?`. Defaults to `MediaQuery.alwaysUse24HourFormat`.
+
+
 ### `FToast`
 * Add a screen reader announcement via a live region when a toast appears.
 
 * Change toasts to appear and dismiss instantly, and to not auto-dismiss, when accessible navigation is enabled.
-
 * Change toasts to appear instantly when motion is reduced or disabled.
-
 * Change the toast stack to expand and collapse instantly when motion is reduced or disabled.
 
 
@@ -181,7 +235,6 @@
 * Add `FTooltip.semanticsLabel` to expose the tip to screen readers as the child's tooltip.
 
 * Change the default `FTooltipStyle.hoverExitDuration` to 100ms from `Duration.zero`.
-
 * Change `FTooltip` to fade without scaling when motion is reduced.
 
 * Fix `FTooltip` dismissing when the pointer moves from the target onto the tip.

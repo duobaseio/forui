@@ -16,16 +16,10 @@ void main() {
               onPress: () => showFDialog(
                 barrierDismissible: false,
                 context: context,
-                builder: (context, _, animation) => FDialog(
+                builder: (context, _, animation) => FDialog.adaptive(
                   animation: animation,
-                  title: const Text('Are you absolutely sure?'),
-                  body: const Text(
-                    'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
-                  ),
-                  actions: [
-                    FButton(onPress: () {}, child: const Text('Continue')),
-                    FButton(variant: .outline, onPress: () {}, child: const Text('Cancel')),
-                  ],
+                  horizontalBuilder: _confirmation,
+                  verticalBuilder: _confirmation,
                 ),
               ),
               child: const Text('button'),
@@ -51,16 +45,10 @@ void main() {
             builder: (context) => FButton(
               onPress: () => showFDialog(
                 context: context,
-                builder: (context, _, animation) => FDialog(
+                builder: (context, _, animation) => FDialog.adaptive(
                   animation: animation,
-                  title: const Text('Are you absolutely sure?'),
-                  body: const Text(
-                    'This action cannot be undone. This will permanently delete your account and remove your data from our servers.',
-                  ),
-                  actions: [
-                    FButton(onPress: () {}, child: const Text('Continue')),
-                    FButton(variant: .outline, onPress: () {}, child: const Text('Cancel')),
-                  ],
+                  horizontalBuilder: _confirmation,
+                  verticalBuilder: _confirmation,
                 ),
               ),
               child: const Text('button'),
@@ -82,33 +70,25 @@ void main() {
   });
 
   group('FDialog', () {
-    for (final direction in Axis.values) {
-      testWidgets('$direction infinite sized child', (tester) async {
-        await tester.pumpWidget(
-          TestScaffold(
-            child: FDialog(
-              direction: direction,
-              title: const Text('Are you absolutely sure?'),
-              body: SingleChildScrollView(
-                child: Text.rich(
-                  WidgetSpan(
-                    child: Stack(
-                      children: [Container(height: 200, width: .infinity, color: Colors.red)],
-                    ),
+    testWidgets('infinite sized child', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FDialog(
+            builder: (context, style) => SingleChildScrollView(
+              child: Text.rich(
+                WidgetSpan(
+                  child: Stack(
+                    children: [Container(height: 200, width: double.infinity, color: Colors.red)],
                   ),
                 ),
               ),
-              actions: [
-                FButton(child: const Text('Continue'), onPress: () {}),
-                FButton(variant: .outline, child: const Text('Cancel'), onPress: () {}),
-              ],
             ),
           ),
-        );
+        ),
+      );
 
-        expect(tester.takeException(), null);
-      });
-    }
+      expect(tester.takeException(), null);
+    });
 
     testWidgets('scrollable body', (tester) async {
       await tester.pumpWidget(
@@ -118,16 +98,8 @@ void main() {
               mainAxisSize: .min,
               onPress: () => showFDialog(
                 context: context,
-                builder: (context, style, animation) => FDialog(
-                  style: style,
-                  animation: animation,
-                  title: const Text('Are you absolutely sure?'),
-                  body: SingleChildScrollView(child: Container(height: 5000)),
-                  actions: [
-                    FButton(variant: .outline, child: const Text('Cancel'), onPress: () {}),
-                    FButton(child: const Text('Continue'), onPress: () {}),
-                  ],
-                ),
+                builder: (context, style, animation) =>
+                    FDialog(style: style, animation: animation, builder: _scrollable),
               ),
               child: const Text('Show Dialog'),
             ),
@@ -155,11 +127,10 @@ void main() {
             TestScaffold(
               child: MediaQuery(
                 data: const MediaQueryData(viewInsets: EdgeInsets.only(bottom: viewInsetsBottom)),
-                child: FDialog(
+                child: FDialog.adaptive(
                   resizeToAvoidInsets: resize,
-                  title: const Text('Title'),
-                  body: const Text('Body'),
-                  actions: [FButton(onPress: () {}, child: const Text('OK'))],
+                  horizontalBuilder: _emptyBuilder,
+                  verticalBuilder: _emptyBuilder,
                 ),
               ),
             ),
@@ -175,12 +146,18 @@ void main() {
       }
 
       testWidgets('default is true across all constructors', (tester) async {
-        expect(FDialog(actions: const [], title: const Text('x')).resizeToAvoidInsets, true);
-        expect(FDialog.adaptive(actions: const []).resizeToAvoidInsets, true);
-        expect(const FDialog.raw(builder: _emptyBuilder).resizeToAvoidInsets, true);
+        expect(const FDialog(builder: _emptyBuilder).resizeToAvoidInsets, true);
+        expect(
+          FDialog.adaptive(horizontalBuilder: _emptyBuilder, verticalBuilder: _emptyBuilder).resizeToAvoidInsets,
+          true,
+        );
       });
     });
   });
 }
+
+Widget _confirmation(BuildContext _, FDialogStyle _) => const Text('Are you absolutely sure?');
+
+Widget _scrollable(BuildContext _, FDialogStyle _) => SingleChildScrollView(child: Container(height: 5000));
 
 Widget _emptyBuilder(BuildContext _, FDialogStyle _) => const SizedBox.shrink();
