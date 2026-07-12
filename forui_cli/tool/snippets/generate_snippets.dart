@@ -83,6 +83,51 @@ Future<(Map<String, (String, String, String)>, Map<String, (String, String)>)> m
         'A card with an image, title, subtitle, and child',
         File(p.join(directory, 'card', 'media_card.dart')).readAsStringSync(),
       ),
+      'adaptive-dialog': (
+        'adaptive_dialog',
+        'An adaptive dialog with a title, body, and actions',
+        File(p.join(directory, 'dialog', 'adaptive_dialog.dart')).readAsStringSync(),
+      ),
+      'adaptive-title-dialog': (
+        'adaptive_title_dialog',
+        'An adaptive dialog with a title and actions',
+        File(p.join(directory, 'dialog', 'adaptive_title_dialog.dart')).readAsStringSync(),
+      ),
+      'adaptive-media-dialog': (
+        'adaptive_media_dialog',
+        'An adaptive dialog with an image, title, body, and actions',
+        File(p.join(directory, 'dialog', 'adaptive_media_dialog.dart')).readAsStringSync(),
+      ),
+      'horizontal-dialog': (
+        'horizontal_dialog',
+        'A horizontal dialog with a title, body, and actions',
+        File(p.join(directory, 'dialog', 'horizontal_dialog.dart')).readAsStringSync(),
+      ),
+      'horizontal-title-dialog': (
+        'horizontal_title_dialog',
+        'A horizontal dialog with a title and actions',
+        File(p.join(directory, 'dialog', 'horizontal_title_dialog.dart')).readAsStringSync(),
+      ),
+      'horizontal-media-dialog': (
+        'horizontal_media_dialog',
+        'A horizontal dialog with an image, title, body, and actions',
+        File(p.join(directory, 'dialog', 'horizontal_media_dialog.dart')).readAsStringSync(),
+      ),
+      'vertical-dialog': (
+        'vertical_dialog',
+        'A vertical dialog with a title, body, and actions',
+        File(p.join(directory, 'dialog', 'vertical_dialog.dart')).readAsStringSync(),
+      ),
+      'vertical-title-dialog': (
+        'vertical_title_dialog',
+        'A vertical dialog with a title and actions',
+        File(p.join(directory, 'dialog', 'vertical_title_dialog.dart')).readAsStringSync(),
+      ),
+      'vertical-media-dialog': (
+        'vertical_media_dialog',
+        'A vertical dialog with an image, title, body, and actions',
+        File(p.join(directory, 'dialog', 'vertical_media_dialog.dart')).readAsStringSync(),
+      ),
       'main-basic': (
         'main',
         'A minimal Forui app entry point',

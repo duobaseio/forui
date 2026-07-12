@@ -57,11 +57,10 @@ customize the widget directly instead of through the style API.
 * Add `FCard.builder`.
 * Add `FCardStyle.titleTextStyle`, `FCardStyle.subtitleTextStyle`, and `FCardStyle.padding`.
 
-* **Breaking** Remove `FCard`'s `image`, `title`, `subtitle`, and `mainAxisSize` parameters.
-* **Breaking** Remove `FCard.raw`. Use `FCard(child: ...)` instead.
+* **Breaking** Rename `FCard.raw` to `FCard(child: ...)` instead.
+
+* **Breaking** Remove `FCard(...)`. Run `dart run forui snippet create` instead.
 * **Breaking** Remove `FCardContentStyle`. Use `FCardStyle.titleTextStyle`, `FCardStyle.subtitleTextStyle`, and
-  `FCardStyle.padding` instead.
-* **Breaking** Remove `FCardStyle.contentStyle`. Use `FCardStyle.titleTextStyle`, `FCardStyle.subtitleTextStyle`, and
   `FCardStyle.padding` instead.
 
 
@@ -87,6 +86,8 @@ customize the widget directly instead of through the style API.
 ### `FContextMenu`
 * Change `FContextMenu` to fade without scaling when motion is reduced.
 
+* Fix `FContextMenu` background filter overflowing its rounded bounds.
+
 
 ### `FDateField`
 * Fix `FDateField.calendar` not displaying its selected date when driven by a lifted selection control.
@@ -107,7 +108,18 @@ customize the widget directly instead of through the style API.
 
 
 ### `FDialog`
+`FDialog` no longer provides a built-in content layout. Generate one with the CLI or copy it from forui.dev, then
+customize the widget directly instead of through the style API.
+
+* Add `FDialogStyle.titleTextStyle` and `FDialogStyle.bodyTextStyle`.
+
 * Change `FDialog` to fade without scaling when motion is reduced.
+* **Breaking** Rename `FDialog.raw(...)` to `FDialog(...)`.
+
+* **Breaking** Remove `FDialog(...)`. Run `dart run forui snippet create` instead.
+* **Breaking** Remove `FDialogContentStyle`. Use `FDialogStyle.titleTextStyle` and `FDialogStyle.bodyTextStyle` instead.
+
+* Fix `FDialog` background filter overflowing its rounded bounds.
 
 
 ### `FHeaderAction`
@@ -133,11 +145,14 @@ customize the widget directly instead of through the style API.
 ### `FPopover`
 * Change `FPopover` (and `FSelect`, `FAutocomplete`) to fade without scaling when motion is reduced.
 
+* Fix `FPopover` background filter overflowing its rounded bounds.
+
 
 ### `FPopoverMenu`
 * Add `physics` to `FPopoverMenu` and `FPopoverMenu.tiles`.
 
 * Fix `FSubmenuItem` and `FSubmenuTile` triggers not exposing their expanded state.
+* Fix `FPopoverMenu` background filter overflowing its rounded bounds.
 
 
 ### `FPortal` & `FPointPortal`

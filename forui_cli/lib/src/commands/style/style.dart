@@ -228,13 +228,6 @@ enum Style {
     <String>['FDeterminateProgressStyle'],
     'FDeterminateProgressStyle determinateProgressStyle({\n  required FColors colors,\n  required FStyle style,\n}) => FDeterminateProgressStyle(\n  trackDecoration: ShapeDecoration(\n    shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.pill),\n    color: colors.muted,\n  ),\n  fillDecoration: ShapeDecoration(\n    shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.pill),\n    color: colors.primary,\n  ),\n  constraints: const .tightFor(height: 6.0),\n  motion: const FDeterminateProgressMotion(),\n);\n',
   ),
-  fdialogcontentstyles(
-    'FDialogContentStyles',
-    'FVariants<FDialogAxisVariantConstraint, FDialogAxisVariant, FDialogContentStyle, FDialogContentStyleDelta>',
-    <String>['dialog-contents', 'dialogcontents'],
-    <String>['FDialogContentStyles'],
-    'FDialogContentStyles dialogContentStyles({required bool touch}) {\n  if (touch) {\n    final content = FDialogContentStyle();\n    return FDialogContentStyles(\n      FVariants.from(\n        content,\n        variants: {\n          [.horizontal]: content,\n          [.vertical]: content,\n        },\n      ),\n    );\n  } else {\n    final horizontal = FDialogContentStyle(\n      padding: const .only(left: 16, right: 16, top: 14, bottom: 14),\n      titlePadding: .zero,\n      bodyPadding: .zero,\n      titleSpacing: 5,\n      contentSpacing: 16,\n      actionSpacing: 8,\n      expandActions: false,\n    );\n    return FDialogContentStyles(\n      FVariants.from(\n        horizontal,\n        variants: {\n          [.horizontal]: horizontal,\n          [.vertical]: FDialogContentStyle(\n            padding: const .only(left: 16, right: 16, top: 14, bottom: 14),\n            titleSpacing: 5,\n            contentSpacing: 16,\n            actionSpacing: 8,\n            expandActions: false,\n          ),\n        },\n      ),\n    );\n  }\n}\n',
-  ),
   fdialogroutestyle(
     'FDialogRouteStyle',
     null,
@@ -246,8 +239,8 @@ enum Style {
     'FDialogStyle',
     null,
     <String>['dialog'],
-    <String>['FDialogStyle', 'FDialogContentStyles'],
-    'FDialogStyle dialogStyle({\n  required FStyle style,\n  required FColors colors,\n  required FTypography typography,\n  required FHapticFeedback hapticFeedback,\n  required bool touch,\n}) => .new(\n  decoration: ShapeDecoration(\n    shape: RoundedSuperellipseBorder(\n      side: BorderSide(color: colors.border, width: style.borderWidth),\n      borderRadius: style.borderRadius.md,\n    ),\n    color: colors.card,\n  ),\n  titleTextStyle: typography.display.md.copyWith(\n    fontWeight: .w600,\n    color: colors.foreground,\n    height: 1.25,\n  ),\n  bodyTextStyle: touch\n      ? typography.body.xs.copyWith(color: colors.mutedForeground)\n      : typography.body.sm.copyWith(color: colors.mutedForeground),\n  slideableActions: FVariants(\n    false,\n    variants: {\n      [.touch]: true,\n    },\n  ),\n  slidePressHapticFeedback: hapticFeedback.selectionClick,\n  contentStyle: _dialogContentStyles(touch: touch),\n);\n',
+    <String>['FDialogStyle'],
+    'FDialogStyle dialogStyle({\n  required FStyle style,\n  required FColors colors,\n  required FTypography typography,\n  required FHapticFeedback hapticFeedback,\n  required bool touch,\n}) => .new(\n  decoration: ShapeDecoration(\n    shape: RoundedSuperellipseBorder(\n      side: BorderSide(color: colors.border, width: style.borderWidth),\n      borderRadius: style.borderRadius.md,\n    ),\n    color: colors.card,\n  ),\n  titleTextStyle: typography.display.md.copyWith(\n    fontWeight: .w600,\n    color: colors.foreground,\n    height: 1.25,\n  ),\n  bodyTextStyle: touch\n      ? typography.body.xs.copyWith(color: colors.mutedForeground)\n      : typography.body.sm.copyWith(color: colors.mutedForeground),\n  slidePressHapticFeedback: hapticFeedback.selectionClick,\n);\n',
   ),
   fdividerstyles(
     'FDividerStyles',

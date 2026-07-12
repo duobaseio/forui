@@ -490,10 +490,13 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
 
           // The background filter cannot be nested in a FadeTransition because of https://github.com/flutter/flutter/issues/31706.
           if (style.backgroundFilter case final filter?) {
+            // Confine the filter to the decoration: `.passthrough` matches its size, `ClipPath` its rounded shape.
             popover = Stack(
+              fit: .passthrough,
               children: [
                 Positioned.fill(
-                  child: ClipRect(
+                  child: ClipPath(
+                    clipper: InnerPathClipper(decoration: style.decoration, direction: direction),
                     child: AnimatedBuilder(
                       animation: _controller.fade,
                       builder: (_, _) => BackdropFilter(filter: filter(_controller.fade.value), child: Container()),

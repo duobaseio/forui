@@ -379,4 +379,55 @@ void main() {
 
     await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover-menu/submenu-rtl.png'));
   });
+
+  testWidgets('background filter matches the decoration', (tester) async {
+    final theme = TestScaffold.themes.first.data;
+
+    await tester.pumpWidget(
+      TestScaffold.app(
+        theme: theme,
+        // The menu is centered over the bar with transparent items so the frosted blur shows through.
+        child: FPopoverMenu(
+          control: const .managed(initial: true),
+          menuAnchor: .center,
+          childAnchor: .center,
+          style: .delta(
+            minWidth: 250,
+            backgroundFilter: () =>
+                (v) => .blur(sigmaX: v * 8, sigmaY: v * 8),
+            decoration: .value(
+              BoxDecoration(
+                color: Colors.white.withValues(alpha: 0.2),
+                borderRadius: theme.style.borderRadius.md,
+                border: .all(color: Colors.white.withValues(alpha: 0.5)),
+              ),
+            ),
+            itemGroupStyle: .delta(
+              decoration: const .value(BoxDecoration()),
+              itemStyles: .delta([
+                .all(
+                  .delta(
+                    backgroundColor: const FVariants.all(Colors.transparent),
+                    contentDecoration: .delta([.base(const .shapeDelta(color: Colors.transparent))]),
+                  ),
+                ),
+              ]),
+            ),
+          ),
+          menu: [
+            .group(
+              children: [
+                .item(title: const Text('Cut'), onPress: () {}),
+                .item(title: const Text('Copy'), onPress: () {}),
+              ],
+            ),
+          ],
+          child: const ColoredBox(color: Colors.amber, child: SizedBox(width: 350, height: 60)),
+        ),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('popover-menu/background-filter.png'));
+  });
 }

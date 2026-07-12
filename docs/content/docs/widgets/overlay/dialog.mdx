@@ -9,21 +9,34 @@ import { Widget } from '@/components/demo/widget';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
 import { UsageSnippet } from '@/components/usage-snippet/usage-snippet';
 import defaultSnippet from '@/snippets/examples/overlay/dialog/default.json';
+import adaptiveTitleSnippet from '@/snippets/examples/overlay/dialog/adaptive-title.json';
+import adaptiveMediaSnippet from '@/snippets/examples/overlay/dialog/adaptive-media.json';
+import horizontalSnippet from '@/snippets/examples/overlay/dialog/horizontal.json';
+import horizontalTitleSnippet from '@/snippets/examples/overlay/dialog/horizontal-title.json';
+import horizontalMediaSnippet from '@/snippets/examples/overlay/dialog/horizontal-media.json';
 import verticalSnippet from '@/snippets/examples/overlay/dialog/vertical.json';
+import verticalTitleSnippet from '@/snippets/examples/overlay/dialog/vertical-title.json';
+import verticalMediaSnippet from '@/snippets/examples/overlay/dialog/vertical-media.json';
 import blurredSnippet from '@/snippets/examples/overlay/dialog/blurred.json';
 import dialogShowUsage from '@/snippets/usages/overlay/dialog/show.json';
 import dialogUsage from '@/snippets/usages/overlay/dialog/dialog.json';
 import dialogAdaptiveUsage from '@/snippets/usages/overlay/dialog/adaptive.json';
-import dialogRawUsage from '@/snippets/usages/overlay/dialog/raw.json';
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
     <Widget name='overlay/dialog' height={400}/>
   </Tab>
   <Tab value="Code">
+    ```shell copy
+    dart run forui snippet create adaptive-dialog
+    ````
+
     <CodeSnippet snippet={defaultSnippet} />
   </Tab>
 </Tabs>
+
+`FDialog` does not provide a built-in content layout. Generate one with the CLI or copy it from an example below, then
+customize the widget directly.
 
 ## CLI
 
@@ -53,32 +66,152 @@ To generate a specific style for customization:
 ### `FDialog.adaptive(...)`
 <UsageSnippet usage={dialogAdaptiveUsage} />
 
-### `FDialog.raw(...)`
-<UsageSnippet usage={dialogRawUsage} />
-
 ## Examples
 
-### Horizontal Layout
+### Adaptive
+
+Lays out the actions horizontally on wider devices and vertically on smaller ones.
+
+#### Default
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
     <Widget name='overlay/dialog' height={400}/>
   </Tab>
   <Tab value="Code">
+    ```shell copy
+    dart run forui snippet create adaptive-dialog
+    ````
+
     <CodeSnippet snippet={defaultSnippet} />
   </Tab>
 </Tabs>
 
-### Vertical Layout
+#### Title
 
-We recommend using the vertical layout on mobile devices.
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='overlay/dialog' variant='adaptive-title' height={400}/>
+  </Tab>
+  <Tab value="Code">
+    ```shell copy
+    dart run forui snippet create adaptive-title-dialog
+    ````
+
+    <CodeSnippet snippet={adaptiveTitleSnippet} />
+  </Tab>
+</Tabs>
+
+#### Media
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='overlay/dialog' variant='adaptive-media' height={400}/>
+  </Tab>
+  <Tab value="Code">
+    ```shell copy
+    dart run forui snippet create adaptive-media-dialog
+    ````
+
+    <CodeSnippet snippet={adaptiveMediaSnippet} />
+  </Tab>
+</Tabs>
+
+### Horizontal
+
+Lays out the actions horizontally. Recommended for desktop and wider devices
+
+#### default
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='overlay/dialog' variant='horizontal' height={400}/>
+  </Tab>
+  <Tab value="Code">
+    ```shell copy
+    dart run forui snippet create horizontal-dialog
+    ````
+
+    <CodeSnippet snippet={horizontalSnippet} />
+  </Tab>
+</Tabs>
+
+#### Title
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='overlay/dialog' variant='horizontal-title' height={400}/>
+  </Tab>
+  <Tab value="Code">
+    ```shell copy
+    dart run forui snippet create horizontal-title-dialog
+    ````
+
+    <CodeSnippet snippet={horizontalTitleSnippet} />
+  </Tab>
+</Tabs>
+
+#### Media
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='overlay/dialog' variant='horizontal-media' height={400}/>
+  </Tab>
+  <Tab value="Code">
+    ```shell copy
+    dart run forui snippet create horizontal-media-dialog
+    ````
+
+    <CodeSnippet snippet={horizontalMediaSnippet} />
+  </Tab>
+</Tabs>
+
+### Vertical
+
+Lays out the actions vertically. Recommended for mobile devices.
+
+#### Default
 
 <Tabs items={['Preview', 'Code']}>
   <Tab value="Preview">
     <Widget name='overlay/dialog' variant='vertical' height={400}/>
   </Tab>
   <Tab value="Code">
+    ```shell copy
+    dart run forui snippet create vertical-dialog
+    ````
+
     <CodeSnippet snippet={verticalSnippet} />
+  </Tab>
+</Tabs>
+
+#### Title
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='overlay/dialog' variant='vertical-title' height={400}/>
+  </Tab>
+  <Tab value="Code">
+    ```shell copy
+    dart run forui snippet create vertical-title-dialog
+    ````
+
+    <CodeSnippet snippet={verticalTitleSnippet} />
+  </Tab>
+</Tabs>
+
+#### Media
+
+<Tabs items={['Preview', 'Code']}>
+  <Tab value="Preview">
+    <Widget name='overlay/dialog' variant='vertical-media' height={400}/>
+  </Tab>
+  <Tab value="Code">
+    ```shell copy
+    dart run forui snippet create vertical-media-dialog
+    ````
+
+    <CodeSnippet snippet={verticalMediaSnippet} />
   </Tab>
 </Tabs>
 
