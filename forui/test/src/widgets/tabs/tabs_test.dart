@@ -138,8 +138,14 @@ void main() {
         child: FTabs(
           control: const .managed(initial: 1),
           children: [
-            FTabEntry(label: const Text('Account'), child: Container(color: Colors.blue, height: 100)),
-            FTabEntry(label: const Text('Password'), child: Container(color: Colors.red, height: 100)),
+            FTabEntry(
+              label: const Text('Account'),
+              child: Container(color: Colors.blue, height: 100),
+            ),
+            FTabEntry(
+              label: const Text('Password'),
+              child: Container(color: Colors.red, height: 100),
+            ),
           ],
         ),
       ),

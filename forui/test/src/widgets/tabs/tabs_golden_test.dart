@@ -33,8 +33,14 @@ void main() {
           theme: theme.data,
           child: FTabs(
             children: [
-              FTabEntry(label: const Text('Account'), child: Container(color: Colors.blue, height: 100)),
-              FTabEntry(label: const Text('Password'), child: Container(color: Colors.red, height: 100)),
+              FTabEntry(
+                label: const Text('Account'),
+                child: Container(color: Colors.blue, height: 100),
+              ),
+              FTabEntry(
+                label: const Text('Password'),
+                child: Container(color: Colors.red, height: 100),
+              ),
             ],
           ),
         ),
@@ -88,8 +94,14 @@ void main() {
           theme: theme.data,
           child: FTabs(
             children: [
-              FTabEntry(label: const Text('Account'), child: Container(color: Colors.blue, height: 100)),
-              FTabEntry(label: const Text('Password'), child: Container(color: Colors.red, height: 100)),
+              FTabEntry(
+                label: const Text('Account'),
+                child: Container(color: Colors.blue, height: 100),
+              ),
+              FTabEntry(
+                label: const Text('Password'),
+                child: Container(color: Colors.red, height: 100),
+              ),
             ],
           ),
         ),
@@ -112,8 +124,14 @@ void main() {
             child: FTabs(
               expands: true,
               children: [
-                FTabEntry(label: const Text('Account'), child: Container(color: Colors.blue, height: 100)),
-                FTabEntry(label: const Text('Password'), child: Container(color: Colors.red, height: 100)),
+                FTabEntry(
+                  label: const Text('Account'),
+                  child: Container(color: Colors.blue, height: 100),
+                ),
+                FTabEntry(
+                  label: const Text('Password'),
+                  child: Container(color: Colors.red, height: 100),
+                ),
               ],
             ),
           ),
