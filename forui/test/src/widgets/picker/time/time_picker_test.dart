@@ -211,8 +211,10 @@ void main() {
   });
 
   group('accessibility', () {
-    Widget picker(FTimePickerController controller) =>
-        TestScaffold.app(locale: const Locale('en'), child: FTimePicker(control: .managed(controller: controller)));
+    Widget picker(FTimePickerController controller) => TestScaffold.app(
+      locale: const Locale('en'),
+      child: FTimePicker(control: .managed(controller: controller)),
+    );
 
     testWidgets('hour, minute, and period wheels expose adjustable semantics', (tester) async {
       final semantics = tester.ensureSemantics();

@@ -35,11 +35,7 @@ void main() {
 
       await tester.pumpWidget(
         TestScaffold(
-          child: const FAlert(
-            liveRegion: false,
-            title: Text('Alert Title'),
-            subtitle: Text('Alert description'),
-          ),
+          child: const FAlert(liveRegion: false, title: Text('Alert Title'), subtitle: Text('Alert description')),
         ),
       );
 

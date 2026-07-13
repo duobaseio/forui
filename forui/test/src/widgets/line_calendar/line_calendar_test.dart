@@ -8,7 +8,9 @@ void main() {
     testWidgets('day belongs to a mutually exclusive group and exposes its selected state', (tester) async {
       final semantics = tester.ensureSemantics();
       await tester.pumpWidget(
-        TestScaffold.app(child: FLineCalendar(scrollControl: .managed(today: DateTime(2024, 11, 28)))),
+        TestScaffold.app(
+          child: FLineCalendar(scrollControl: .managed(today: DateTime(2024, 11, 28))),
+        ),
       );
       await tester.pumpAndSettle();
 
@@ -31,7 +33,9 @@ void main() {
     testWidgets("day's label includes its today status", (tester) async {
       final semantics = tester.ensureSemantics();
       await tester.pumpWidget(
-        TestScaffold.app(child: FLineCalendar(scrollControl: .managed(today: DateTime(2024, 11, 28)))),
+        TestScaffold.app(
+          child: FLineCalendar(scrollControl: .managed(today: DateTime(2024, 11, 28))),
+        ),
       );
       await tester.pumpAndSettle();
 

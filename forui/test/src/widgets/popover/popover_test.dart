@@ -584,7 +584,10 @@ void main() {
             control: const .managed(initial: true),
             autofocus: false,
             popoverBuilder: (_, _) => const Text('content'),
-            child: Focus(focusNode: trigger, child: Container(color: Colors.black, height: 10, width: 10)),
+            child: Focus(
+              focusNode: trigger,
+              child: Container(color: Colors.black, height: 10, width: 10),
+            ),
           ),
         ),
       );
@@ -612,7 +615,10 @@ void main() {
             bindings: {const SingleActivator(.escape): () => escaped = true},
             child: FPopover(
               popoverBuilder: (_, _) => const Text('content'),
-              child: Focus(focusNode: trigger, child: Container(color: Colors.black, height: 10, width: 10)),
+              child: Focus(
+                focusNode: trigger,
+                child: Container(color: Colors.black, height: 10, width: 10),
+              ),
             ),
           ),
         ),

@@ -890,10 +890,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
             ),
           ),
           child: CallbackShortcuts(
-            bindings: {
-              const SingleActivator(.enter): _toggle,
-              const SingleActivator(.space): _toggle,
-            },
+            bindings: {const SingleActivator(.enter): _toggle, const SingleActivator(.space): _toggle},
             child: ListenableBuilder(
               listenable: _popoverController,
               child: widget.builder(context, style, variants, field),

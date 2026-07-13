@@ -643,10 +643,7 @@ void main() {
       semantics.dispose();
     });
 
-    for (final (activator, name) in [
-      (LogicalKeyboardKey.enter, 'Enter'),
-      (LogicalKeyboardKey.space, 'Space'),
-    ]) {
+    for (final (activator, name) in [(LogicalKeyboardKey.enter, 'Enter'), (LogicalKeyboardKey.space, 'Space')]) {
       testWidgets('trigger opens the popover on $name', (tester) async {
         final semantics = tester.ensureSemantics();
         final focus = autoDispose(FocusNode());

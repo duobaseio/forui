@@ -63,7 +63,9 @@ void main() {
     for (final value in [true, false]) {
       testWidgets('announces toggle role and state - $value', (tester) async {
         await tester.pumpWidget(
-          TestScaffold.app(child: FSwitch(value: value, semanticsLabel: 'switch')),
+          TestScaffold.app(
+            child: FSwitch(value: value, semanticsLabel: 'switch'),
+          ),
         );
 
         expect(

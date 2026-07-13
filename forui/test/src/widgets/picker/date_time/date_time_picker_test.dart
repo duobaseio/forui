@@ -208,7 +208,11 @@ void main() {
   group('accessibility', () {
     Widget picker(FDateTimePickerController controller) => TestScaffold.app(
       locale: const Locale('en'),
-      child: SizedBox(width: 400, height: 300, child: FDateTimePicker(control: .managed(controller: controller))),
+      child: SizedBox(
+        width: 400,
+        height: 300,
+        child: FDateTimePicker(control: .managed(controller: controller)),
+      ),
     );
 
     testWidgets('date, hour, and minute wheels expose adjustable semantics', (tester) async {
