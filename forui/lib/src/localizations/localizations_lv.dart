@@ -150,4 +150,10 @@ class FLocalizationsLv extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Nederīgs laiks.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Stunda';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minūte';
 }

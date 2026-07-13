@@ -43,5 +43,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "ສະແດງຕົວເລືອກເດືອນ ແລະ ປີ",
   "calendarShowMonthPickerSemanticsHint": "ສະແດງຕົວເລືອກເດືອນ",
   "calendarShowYearPickerSemanticsHint": "ສະແດງຕົວເລືອກປີ",
-  "calendarShowDaysSemanticsHint": "ສະແດງມື້"
+  "calendarShowDaysSemanticsHint": "ສະແດງມື້",
+  "timePickerHourSemanticsLabel": "ຊົ່ວໂມງ",
+  "timePickerMinuteSemanticsLabel": "ນາທີ"
 }

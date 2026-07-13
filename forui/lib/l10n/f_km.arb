@@ -44,5 +44,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "បង្ហាញកម្មវិធីជ្រើសរើសខែ និងឆ្នាំ",
   "calendarShowMonthPickerSemanticsHint": "បង្ហាញកម្មវិធីជ្រើសរើសខែ",
   "calendarShowYearPickerSemanticsHint": "បង្ហាញកម្មវិធីជ្រើសរើសឆ្នាំ",
-  "calendarShowDaysSemanticsHint": "បង្ហាញថ្ងៃ"
+  "calendarShowDaysSemanticsHint": "បង្ហាញថ្ងៃ",
+  "timePickerHourSemanticsLabel": "ម៉ោង",
+  "timePickerMinuteSemanticsLabel": "នាទី"
 }

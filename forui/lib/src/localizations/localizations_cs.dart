@@ -150,4 +150,10 @@ class FLocalizationsCs extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Neplatný čas.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hodina';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minuta';
 }

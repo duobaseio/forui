@@ -150,4 +150,10 @@ class FLocalizationsKm extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'ពេលវេលាមិនត្រឹមត្រូវ។';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'ម៉ោង';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'នាទី';
 }

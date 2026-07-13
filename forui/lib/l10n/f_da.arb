@@ -44,5 +44,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "Vis måneds- og årsvælger",
   "calendarShowMonthPickerSemanticsHint": "Vis månedsvælger",
   "calendarShowYearPickerSemanticsHint": "Vis årsvælger",
-  "calendarShowDaysSemanticsHint": "Vis dage"
+  "calendarShowDaysSemanticsHint": "Vis dage",
+  "timePickerHourSemanticsLabel": "Time",
+  "timePickerMinuteSemanticsLabel": "Minut"
 }

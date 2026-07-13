@@ -44,5 +44,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "የወርና የዓመት መራጭ አሳይ",
   "calendarShowMonthPickerSemanticsHint": "የወር መራጭ አሳይ",
   "calendarShowYearPickerSemanticsHint": "የዓመት መራጭ አሳይ",
-  "calendarShowDaysSemanticsHint": "ቀኖችን አሳይ"
+  "calendarShowDaysSemanticsHint": "ቀኖችን አሳይ",
+  "timePickerHourSemanticsLabel": "ሰዓት",
+  "timePickerMinuteSemanticsLabel": "ደቂቃ"
 }

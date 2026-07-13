@@ -44,5 +44,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "Sýna mánaðar- og ársval",
   "calendarShowMonthPickerSemanticsHint": "Sýna mánaðarval",
   "calendarShowYearPickerSemanticsHint": "Sýna ársval",
-  "calendarShowDaysSemanticsHint": "Sýna daga"
+  "calendarShowDaysSemanticsHint": "Sýna daga",
+  "timePickerHourSemanticsLabel": "Klukkustund",
+  "timePickerMinuteSemanticsLabel": "Mínúta"
 }

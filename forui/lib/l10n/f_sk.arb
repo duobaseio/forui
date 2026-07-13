@@ -44,5 +44,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "Zobraziť výber mesiaca a roka",
   "calendarShowMonthPickerSemanticsHint": "Zobraziť výber mesiaca",
   "calendarShowYearPickerSemanticsHint": "Zobraziť výber roka",
-  "calendarShowDaysSemanticsHint": "Zobraziť dni"
+  "calendarShowDaysSemanticsHint": "Zobraziť dni",
+  "timePickerHourSemanticsLabel": "Hodina",
+  "timePickerMinuteSemanticsLabel": "Minúta"
 }

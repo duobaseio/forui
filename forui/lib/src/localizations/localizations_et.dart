@@ -150,4 +150,10 @@ class FLocalizationsEt extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Vigane aeg.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Tund';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minut';
 }

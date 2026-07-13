@@ -43,5 +43,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "Показати вибір місяця та року",
   "calendarShowMonthPickerSemanticsHint": "Показати вибір місяця",
   "calendarShowYearPickerSemanticsHint": "Показати вибір року",
-  "calendarShowDaysSemanticsHint": "Показати дні"
+  "calendarShowDaysSemanticsHint": "Показати дні",
+  "timePickerHourSemanticsLabel": "Години",
+  "timePickerMinuteSemanticsLabel": "Хвилини"
 }

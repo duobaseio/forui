@@ -555,6 +555,18 @@ abstract class FLocalizations {
   /// In en, this message translates to:
   /// **'Invalid time.'**
   String get timeFieldInvalidDateError;
+
+  /// The semantic label for the hour wheel in a time or date time picker.
+  ///
+  /// In en, this message translates to:
+  /// **'Hour'**
+  String get timePickerHourSemanticsLabel;
+
+  /// The semantic label for the minute wheel in a time or date time picker.
+  ///
+  /// In en, this message translates to:
+  /// **'Minute'**
+  String get timePickerMinuteSemanticsLabel;
 }
 
 class _FLocalizationsDelegate extends LocalizationsDelegate<FLocalizations> {

@@ -44,5 +44,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "Rādīt mēneša un gada atlasītāju",
   "calendarShowMonthPickerSemanticsHint": "Rādīt mēneša atlasītāju",
   "calendarShowYearPickerSemanticsHint": "Rādīt gada atlasītāju",
-  "calendarShowDaysSemanticsHint": "Rādīt dienas"
+  "calendarShowDaysSemanticsHint": "Rādīt dienas",
+  "timePickerHourSemanticsLabel": "Stunda",
+  "timePickerMinuteSemanticsLabel": "Minūte"
 }

@@ -44,5 +44,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "แสดงตัวเลือกเดือนและปี",
   "calendarShowMonthPickerSemanticsHint": "แสดงตัวเลือกเดือน",
   "calendarShowYearPickerSemanticsHint": "แสดงตัวเลือกปี",
-  "calendarShowDaysSemanticsHint": "แสดงวัน"
+  "calendarShowDaysSemanticsHint": "แสดงวัน",
+  "timePickerHourSemanticsLabel": "ชั่วโมง",
+  "timePickerMinuteSemanticsLabel": "นาที"
 }

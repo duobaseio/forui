@@ -44,5 +44,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "Bonisa isikhethi senyanga nonyaka",
   "calendarShowMonthPickerSemanticsHint": "Bonisa isikhethi senyanga",
   "calendarShowYearPickerSemanticsHint": "Bonisa isikhethi sonyaka",
-  "calendarShowDaysSemanticsHint": "Bonisa izinsuku"
+  "calendarShowDaysSemanticsHint": "Bonisa izinsuku",
+  "timePickerHourSemanticsLabel": "Ihora",
+  "timePickerMinuteSemanticsLabel": "Iminithi"
 }

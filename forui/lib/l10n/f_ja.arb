@@ -44,5 +44,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "月と年の選択ツールを表示",
   "calendarShowMonthPickerSemanticsHint": "月の選択ツールを表示",
   "calendarShowYearPickerSemanticsHint": "年の選択ツールを表示",
-  "calendarShowDaysSemanticsHint": "日を表示"
+  "calendarShowDaysSemanticsHint": "日を表示",
+  "timePickerHourSemanticsLabel": "時",
+  "timePickerMinuteSemanticsLabel": "分"
 }

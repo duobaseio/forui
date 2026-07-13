@@ -150,6 +150,12 @@ class FLocalizationsDe extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Ungültige Uhrzeit.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Stunde';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minute';
 }
 
 /// The translations for German, as used in Switzerland (`de_CH`).
@@ -283,4 +289,10 @@ class FLocalizationsDeCh extends FLocalizationsDe {
 
   @override
   String get timeFieldInvalidDateError => 'Ungültige Zeit.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Stunde';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minute';
 }

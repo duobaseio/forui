@@ -44,5 +44,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "مہینہ اور سال منتخب کنندہ دکھائیں",
   "calendarShowMonthPickerSemanticsHint": "مہینہ منتخب کنندہ دکھائیں",
   "calendarShowYearPickerSemanticsHint": "سال منتخب کنندہ دکھائیں",
-  "calendarShowDaysSemanticsHint": "دن دکھائیں"
+  "calendarShowDaysSemanticsHint": "دن دکھائیں",
+  "timePickerHourSemanticsLabel": "گھنٹہ",
+  "timePickerMinuteSemanticsLabel": "منٹ"
 }

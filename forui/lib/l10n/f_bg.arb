@@ -43,5 +43,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "Показване на инструмента за избор на месец и година",
   "calendarShowMonthPickerSemanticsHint": "Показване на избора на месец",
   "calendarShowYearPickerSemanticsHint": "Показване на избора на година",
-  "calendarShowDaysSemanticsHint": "Показване на дните"
+  "calendarShowDaysSemanticsHint": "Показване на дните",
+  "timePickerHourSemanticsLabel": "Час",
+  "timePickerMinuteSemanticsLabel": "Минута"
 }

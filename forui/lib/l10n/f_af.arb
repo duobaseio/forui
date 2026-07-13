@@ -44,5 +44,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "Wys maand- en jaarkieser",
   "calendarShowMonthPickerSemanticsHint": "Wys maandkieser",
   "calendarShowYearPickerSemanticsHint": "Wys jaarkieser",
-  "calendarShowDaysSemanticsHint": "Wys dae"
+  "calendarShowDaysSemanticsHint": "Wys dae",
+  "timePickerHourSemanticsLabel": "Uur",
+  "timePickerMinuteSemanticsLabel": "Minuut"
 }

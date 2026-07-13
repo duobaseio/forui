@@ -150,4 +150,10 @@ class FLocalizationsKo extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => '잘못된 시간입니다.';
+
+  @override
+  String get timePickerHourSemanticsLabel => '시';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => '분';
 }

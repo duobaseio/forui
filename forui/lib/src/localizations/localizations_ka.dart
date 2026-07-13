@@ -150,4 +150,10 @@ class FLocalizationsKa extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'არასწორი დრო.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'საათი';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'წუთი';
 }

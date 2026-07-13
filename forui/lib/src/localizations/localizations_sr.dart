@@ -150,6 +150,12 @@ class FLocalizationsSr extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Неважеће време.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Сат';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Минут';
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
@@ -294,4 +300,10 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
 
   @override
   String get timeFieldInvalidDateError => 'Nevažeće vreme.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Sat';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minut';
 }

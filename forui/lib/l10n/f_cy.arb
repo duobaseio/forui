@@ -44,5 +44,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "Dangos dewisydd mis a blwyddyn",
   "calendarShowMonthPickerSemanticsHint": "Dangos dewisydd mis",
   "calendarShowYearPickerSemanticsHint": "Dangos dewisydd blwyddyn",
-  "calendarShowDaysSemanticsHint": "Dangos dyddiau"
+  "calendarShowDaysSemanticsHint": "Dangos dyddiau",
+  "timePickerHourSemanticsLabel": "Awr",
+  "timePickerMinuteSemanticsLabel": "Munud"
 }

@@ -150,4 +150,10 @@ class FLocalizationsSq extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Orë e pavlefshme.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Ora';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minuta';
 }

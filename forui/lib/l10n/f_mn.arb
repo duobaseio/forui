@@ -43,5 +43,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "Сар, жил сонгогчийг харуулах",
   "calendarShowMonthPickerSemanticsHint": "Сар сонгогчийг харуулах",
   "calendarShowYearPickerSemanticsHint": "Жил сонгогчийг харуулах",
-  "calendarShowDaysSemanticsHint": "Өдрүүдийг харуулах"
+  "calendarShowDaysSemanticsHint": "Өдрүүдийг харуулах",
+  "timePickerHourSemanticsLabel": "Цаг",
+  "timePickerMinuteSemanticsLabel": "Минут"
 }

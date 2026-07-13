@@ -44,5 +44,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "Onyesha kiteua mwezi na mwaka",
   "calendarShowMonthPickerSemanticsHint": "Onyesha kiteua mwezi",
   "calendarShowYearPickerSemanticsHint": "Onyesha kiteua mwaka",
-  "calendarShowDaysSemanticsHint": "Onyesha siku"
+  "calendarShowDaysSemanticsHint": "Onyesha siku",
+  "timePickerHourSemanticsLabel": "Saa",
+  "timePickerMinuteSemanticsLabel": "Dakika"
 }

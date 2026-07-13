@@ -44,5 +44,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "Prikaži birač mjeseca i godine",
   "calendarShowMonthPickerSemanticsHint": "Prikaži birač mjeseca",
   "calendarShowYearPickerSemanticsHint": "Prikaži birač godine",
-  "calendarShowDaysSemanticsHint": "Prikaži dane"
+  "calendarShowDaysSemanticsHint": "Prikaži dane",
+  "timePickerHourSemanticsLabel": "Sat",
+  "timePickerMinuteSemanticsLabel": "Minuta"
 }

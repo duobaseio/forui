@@ -150,4 +150,10 @@ class FLocalizationsIt extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Orario non valido.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Ora';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minuto';
 }

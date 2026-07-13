@@ -150,4 +150,10 @@ class FLocalizationsGsw extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Ungültigi Zyt.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Stunde';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minute';
 }

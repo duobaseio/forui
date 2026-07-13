@@ -43,5 +43,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "إظهار أداة اختيار الشهر والسنة",
   "calendarShowMonthPickerSemanticsHint": "إظهار أداة اختيار الشهر",
   "calendarShowYearPickerSemanticsHint": "إظهار أداة اختيار السنة",
-  "calendarShowDaysSemanticsHint": "إظهار الأيام"
+  "calendarShowDaysSemanticsHint": "إظهار الأيام",
+  "timePickerHourSemanticsLabel": "ساعة",
+  "timePickerMinuteSemanticsLabel": "دقيقة"
 }

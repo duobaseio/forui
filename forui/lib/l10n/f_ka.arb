@@ -43,5 +43,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "თვისა და წლის ამომრჩევის ჩვენება",
   "calendarShowMonthPickerSemanticsHint": "თვის ამომრჩევის ჩვენება",
   "calendarShowYearPickerSemanticsHint": "წლის ამომრჩევის ჩვენება",
-  "calendarShowDaysSemanticsHint": "დღეების ჩვენება"
+  "calendarShowDaysSemanticsHint": "დღეების ჩვენება",
+  "timePickerHourSemanticsLabel": "საათი",
+  "timePickerMinuteSemanticsLabel": "წუთი"
 }

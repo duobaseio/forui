@@ -43,5 +43,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "Ցուցադրել ամսվա և տարվա ընտրիչը",
   "calendarShowMonthPickerSemanticsHint": "Ցուցադրել ամսվա ընտրիչը",
   "calendarShowYearPickerSemanticsHint": "Ցուցադրել տարվա ընտրիչը",
-  "calendarShowDaysSemanticsHint": "Ցուցադրել օրերը"
+  "calendarShowDaysSemanticsHint": "Ցուցադրել օրերը",
+  "timePickerHourSemanticsLabel": "Ժամ",
+  "timePickerMinuteSemanticsLabel": "Րոպե"
 }

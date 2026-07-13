@@ -44,5 +44,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "顯示月份和年份選擇器",
   "calendarShowMonthPickerSemanticsHint": "顯示月份選擇器",
   "calendarShowYearPickerSemanticsHint": "顯示年份選擇器",
-  "calendarShowDaysSemanticsHint": "顯示日期"
+  "calendarShowDaysSemanticsHint": "顯示日期",
+  "timePickerHourSemanticsLabel": "小時",
+  "timePickerMinuteSemanticsLabel": "分鐘"
 }

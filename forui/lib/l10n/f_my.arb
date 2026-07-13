@@ -44,5 +44,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "လနှင့် နှစ် ရွေးချယ်မှုကို ပြပါ",
   "calendarShowMonthPickerSemanticsHint": "လ ရွေးချယ်မှုကို ပြပါ",
   "calendarShowYearPickerSemanticsHint": "နှစ် ရွေးချယ်မှုကို ပြပါ",
-  "calendarShowDaysSemanticsHint": "ရက်များကို ပြပါ"
+  "calendarShowDaysSemanticsHint": "ရက်များကို ပြပါ",
+  "timePickerHourSemanticsLabel": "နာရီ",
+  "timePickerMinuteSemanticsLabel": "မိနစ်"
 }

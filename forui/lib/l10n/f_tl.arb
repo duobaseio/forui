@@ -44,5 +44,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "Ipakita ang pampili ng buwan at taon",
   "calendarShowMonthPickerSemanticsHint": "Ipakita ang pampili ng buwan",
   "calendarShowYearPickerSemanticsHint": "Ipakita ang pampili ng taon",
-  "calendarShowDaysSemanticsHint": "Ipakita ang mga araw"
+  "calendarShowDaysSemanticsHint": "Ipakita ang mga araw",
+  "timePickerHourSemanticsLabel": "Oras",
+  "timePickerMinuteSemanticsLabel": "Minuto"
 }

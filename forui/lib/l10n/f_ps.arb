@@ -43,5 +43,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "د میاشتې او کال ټاکونکی وښایاست",
   "calendarShowMonthPickerSemanticsHint": "د میاشتې ټاکونکی وښایاست",
   "calendarShowYearPickerSemanticsHint": "د کال ټاکونکی وښایاست",
-  "calendarShowDaysSemanticsHint": "ورځې وښایاست"
+  "calendarShowDaysSemanticsHint": "ورځې وښایاست",
+  "timePickerHourSemanticsLabel": "ساعت",
+  "timePickerMinuteSemanticsLabel": "دقیقه"
 }

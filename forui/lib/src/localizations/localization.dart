@@ -190,4 +190,10 @@ class FDefaultLocalizations extends FLocalizations {
 
   @override
   String get timeFieldSuffix => '';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hour';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minute';
 }

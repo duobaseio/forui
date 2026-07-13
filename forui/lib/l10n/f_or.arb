@@ -44,5 +44,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "ମାସ ଏବଂ ବର୍ଷ ଚୟନକର୍ତ୍ତା ଦେଖାନ୍ତୁ",
   "calendarShowMonthPickerSemanticsHint": "ମାସ ଚୟନକର୍ତ୍ତା ଦେଖାନ୍ତୁ",
   "calendarShowYearPickerSemanticsHint": "ବର୍ଷ ଚୟନକର୍ତ୍ତା ଦେଖାନ୍ତୁ",
-  "calendarShowDaysSemanticsHint": "ଦିନଗୁଡ଼ିକ ଦେଖାନ୍ତୁ"
+  "calendarShowDaysSemanticsHint": "ଦିନଗୁଡ଼ିକ ଦେଖାନ୍ତୁ",
+  "timePickerHourSemanticsLabel": "ଘଣ୍ଟା",
+  "timePickerMinuteSemanticsLabel": "ମିନିଟ୍"
 }

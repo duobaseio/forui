@@ -43,5 +43,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "نمایش انتخابگر ماه و سال",
   "calendarShowMonthPickerSemanticsHint": "نمایش انتخابگر ماه",
   "calendarShowYearPickerSemanticsHint": "نمایش انتخابگر سال",
-  "calendarShowDaysSemanticsHint": "نمایش روزها"
+  "calendarShowDaysSemanticsHint": "نمایش روزها",
+  "timePickerHourSemanticsLabel": "ساعت",
+  "timePickerMinuteSemanticsLabel": "دقیقه"
 }

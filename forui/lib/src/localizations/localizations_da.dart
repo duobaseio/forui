@@ -150,4 +150,10 @@ class FLocalizationsDa extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Ugyldigt tidspunkt.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Time';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minut';
 }

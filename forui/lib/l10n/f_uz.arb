@@ -44,5 +44,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "Oy va yil tanlagichini ko‘rsatish",
   "calendarShowMonthPickerSemanticsHint": "Oy tanlagichini ko‘rsatish",
   "calendarShowYearPickerSemanticsHint": "Yil tanlagichini ko‘rsatish",
-  "calendarShowDaysSemanticsHint": "Kunlarni ko‘rsatish"
+  "calendarShowDaysSemanticsHint": "Kunlarni ko‘rsatish",
+  "timePickerHourSemanticsLabel": "Soat",
+  "timePickerMinuteSemanticsLabel": "Daqiqa"
 }

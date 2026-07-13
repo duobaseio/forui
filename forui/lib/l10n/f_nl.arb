@@ -44,5 +44,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "Maand- en jaarkiezer weergeven",
   "calendarShowMonthPickerSemanticsHint": "Maandkiezer weergeven",
   "calendarShowYearPickerSemanticsHint": "Jaarkiezer weergeven",
-  "calendarShowDaysSemanticsHint": "Dagen weergeven"
+  "calendarShowDaysSemanticsHint": "Dagen weergeven",
+  "timePickerHourSemanticsLabel": "Uur",
+  "timePickerMinuteSemanticsLabel": "Minuut"
 }

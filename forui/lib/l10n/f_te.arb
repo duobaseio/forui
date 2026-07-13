@@ -43,5 +43,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "నెల మరియు సంవత్సర ఎంపికను చూపు",
   "calendarShowMonthPickerSemanticsHint": "నెల ఎంపికను చూపు",
   "calendarShowYearPickerSemanticsHint": "సంవత్సర ఎంపికను చూపు",
-  "calendarShowDaysSemanticsHint": "రోజులను చూపు"
+  "calendarShowDaysSemanticsHint": "రోజులను చూపు",
+  "timePickerHourSemanticsLabel": "గంట",
+  "timePickerMinuteSemanticsLabel": "నిమిషం"
 }

@@ -43,5 +43,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "महीना और वर्ष चयनकर्ता दिखाएँ",
   "calendarShowMonthPickerSemanticsHint": "महीना चयनकर्ता दिखाएँ",
   "calendarShowYearPickerSemanticsHint": "वर्ष चयनकर्ता दिखाएँ",
-  "calendarShowDaysSemanticsHint": "दिन दिखाएँ"
+  "calendarShowDaysSemanticsHint": "दिन दिखाएँ",
+  "timePickerHourSemanticsLabel": "घंटा",
+  "timePickerMinuteSemanticsLabel": "मिनट"
 }

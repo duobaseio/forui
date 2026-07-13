@@ -44,5 +44,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "Tunjukkan pemilih bulan dan tahun",
   "calendarShowMonthPickerSemanticsHint": "Tunjukkan pemilih bulan",
   "calendarShowYearPickerSemanticsHint": "Tunjukkan pemilih tahun",
-  "calendarShowDaysSemanticsHint": "Tunjukkan hari"
+  "calendarShowDaysSemanticsHint": "Tunjukkan hari",
+  "timePickerHourSemanticsLabel": "Jam",
+  "timePickerMinuteSemanticsLabel": "Minit"
 }

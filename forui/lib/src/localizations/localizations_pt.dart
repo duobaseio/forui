@@ -150,6 +150,12 @@ class FLocalizationsPt extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Horário inválido.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hora';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minuto';
 }
 
 /// The translations for Portuguese, as used in Portugal (`pt_PT`).
@@ -282,4 +288,10 @@ class FLocalizationsPtPt extends FLocalizationsPt {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hora';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minuto';
 }

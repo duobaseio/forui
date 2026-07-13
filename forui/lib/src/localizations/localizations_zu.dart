@@ -150,4 +150,10 @@ class FLocalizationsZu extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Isikhathi esingalungile.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Ihora';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Iminithi';
 }

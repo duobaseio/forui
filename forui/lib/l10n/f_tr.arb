@@ -44,5 +44,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "Ay ve yıl seçiciyi göster",
   "calendarShowMonthPickerSemanticsHint": "Ay seçiciyi göster",
   "calendarShowYearPickerSemanticsHint": "Yıl seçiciyi göster",
-  "calendarShowDaysSemanticsHint": "Günleri göster"
+  "calendarShowDaysSemanticsHint": "Günleri göster",
+  "timePickerHourSemanticsLabel": "Saat",
+  "timePickerMinuteSemanticsLabel": "Dakika"
 }

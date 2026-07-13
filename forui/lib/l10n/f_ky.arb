@@ -43,5 +43,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "Ай жана жыл тандагычын көрсөтүү",
   "calendarShowMonthPickerSemanticsHint": "Ай тандагычын көрсөтүү",
   "calendarShowYearPickerSemanticsHint": "Жыл тандагычын көрсөтүү",
-  "calendarShowDaysSemanticsHint": "Күндөрдү көрсөтүү"
+  "calendarShowDaysSemanticsHint": "Күндөрдү көрсөтүү",
+  "timePickerHourSemanticsLabel": "Саат",
+  "timePickerMinuteSemanticsLabel": "Мүнөт"
 }

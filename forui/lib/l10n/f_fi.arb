@@ -44,5 +44,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "Näytä kuukauden ja vuoden valitsin",
   "calendarShowMonthPickerSemanticsHint": "Näytä kuukauden valitsin",
   "calendarShowYearPickerSemanticsHint": "Näytä vuoden valitsin",
-  "calendarShowDaysSemanticsHint": "Näytä päivät"
+  "calendarShowDaysSemanticsHint": "Näytä päivät",
+  "timePickerHourSemanticsLabel": "Tunti",
+  "timePickerMinuteSemanticsLabel": "Minuutti"
 }

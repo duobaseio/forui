@@ -43,5 +43,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "Εμφάνιση επιλογέα μήνα και έτους",
   "calendarShowMonthPickerSemanticsHint": "Εμφάνιση επιλογέα μήνα",
   "calendarShowYearPickerSemanticsHint": "Εμφάνιση επιλογέα έτους",
-  "calendarShowDaysSemanticsHint": "Εμφάνιση ημερών"
+  "calendarShowDaysSemanticsHint": "Εμφάνιση ημερών",
+  "timePickerHourSemanticsLabel": "Ώρα",
+  "timePickerMinuteSemanticsLabel": "Λεπτό"
 }

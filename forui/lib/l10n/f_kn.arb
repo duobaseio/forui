@@ -43,5 +43,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "ತಿಂಗಳು ಮತ್ತು ವರ್ಷ ಆಯ್ಕೆಗಾರವನ್ನು ತೋರಿಸಿ",
   "calendarShowMonthPickerSemanticsHint": "ತಿಂಗಳು ಆಯ್ಕೆಗಾರವನ್ನು ತೋರಿಸಿ",
   "calendarShowYearPickerSemanticsHint": "ವರ್ಷ ಆಯ್ಕೆಗಾರವನ್ನು ತೋರಿಸಿ",
-  "calendarShowDaysSemanticsHint": "ದಿನಗಳನ್ನು ತೋರಿಸಿ"
+  "calendarShowDaysSemanticsHint": "ದಿನಗಳನ್ನು ತೋರಿಸಿ",
+  "timePickerHourSemanticsLabel": "ಗಂಟೆ",
+  "timePickerMinuteSemanticsLabel": "ನಿಮಿಷ"
 }

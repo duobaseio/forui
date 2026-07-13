@@ -44,5 +44,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "Hiển thị bộ chọn tháng và năm",
   "calendarShowMonthPickerSemanticsHint": "Hiển thị bộ chọn tháng",
   "calendarShowYearPickerSemanticsHint": "Hiển thị bộ chọn năm",
-  "calendarShowDaysSemanticsHint": "Hiển thị ngày"
+  "calendarShowDaysSemanticsHint": "Hiển thị ngày",
+  "timePickerHourSemanticsLabel": "Giờ",
+  "timePickerMinuteSemanticsLabel": "Phút"
 }

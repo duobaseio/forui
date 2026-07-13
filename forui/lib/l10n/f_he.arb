@@ -43,5 +43,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "הצגת בורר החודש והשנה",
   "calendarShowMonthPickerSemanticsHint": "הצגת בורר החודש",
   "calendarShowYearPickerSemanticsHint": "הצגת בורר השנה",
-  "calendarShowDaysSemanticsHint": "הצגת הימים"
+  "calendarShowDaysSemanticsHint": "הצגת הימים",
+  "timePickerHourSemanticsLabel": "שעה",
+  "timePickerMinuteSemanticsLabel": "דקה"
 }

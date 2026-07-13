@@ -150,6 +150,12 @@ class FLocalizationsZh extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => '无效的时间。';
+
+  @override
+  String get timePickerHourSemanticsLabel => '小时';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => '分钟';
 }
 
 /// The translations for Chinese, as used in Hong Kong (`zh_HK`).
@@ -294,6 +300,12 @@ class FLocalizationsZhHk extends FLocalizationsZh {
 
   @override
   String get timeFieldInvalidDateError => '無效的時間。';
+
+  @override
+  String get timePickerHourSemanticsLabel => '小時';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => '分鐘';
 }
 
 /// The translations for Chinese, as used in Taiwan (`zh_TW`).
@@ -438,4 +450,10 @@ class FLocalizationsZhTw extends FLocalizationsZh {
 
   @override
   String get timeFieldInvalidDateError => '無效的時間。';
+
+  @override
+  String get timePickerHourSemanticsLabel => '小時';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => '分鐘';
 }

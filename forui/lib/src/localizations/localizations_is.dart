@@ -150,4 +150,10 @@ class FLocalizationsIs extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Ógildur tími.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Klukkustund';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Mínúta';
 }

@@ -44,5 +44,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "Kuva kuu ja aasta valija",
   "calendarShowMonthPickerSemanticsHint": "Kuva kuu valija",
   "calendarShowYearPickerSemanticsHint": "Kuva aasta valija",
-  "calendarShowDaysSemanticsHint": "Kuva päevad"
+  "calendarShowDaysSemanticsHint": "Kuva päevad",
+  "timePickerHourSemanticsLabel": "Tund",
+  "timePickerMinuteSemanticsLabel": "Minut"
 }

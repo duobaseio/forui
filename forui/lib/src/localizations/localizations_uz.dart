@@ -150,4 +150,10 @@ class FLocalizationsUz extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Yaroqsiz vaqt.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Soat';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Daqiqa';
 }

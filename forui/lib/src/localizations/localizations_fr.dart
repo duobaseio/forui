@@ -150,6 +150,12 @@ class FLocalizationsFr extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Heure invalide.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Heure';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minute';
 }
 
 /// The translations for French, as used in Canada (`fr_CA`).
@@ -294,4 +300,10 @@ class FLocalizationsFrCa extends FLocalizationsFr {
 
   @override
   String get timeFieldInvalidDateError => 'Heure invalide.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Heure';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minute';
 }

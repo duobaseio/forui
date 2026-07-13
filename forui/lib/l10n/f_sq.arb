@@ -44,5 +44,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "Shfaq zgjedhësin e muajit dhe vitit",
   "calendarShowMonthPickerSemanticsHint": "Shfaq zgjedhësin e muajit",
   "calendarShowYearPickerSemanticsHint": "Shfaq zgjedhësin e vitit",
-  "calendarShowDaysSemanticsHint": "Shfaq ditët"
+  "calendarShowDaysSemanticsHint": "Shfaq ditët",
+  "timePickerHourSemanticsLabel": "Ora",
+  "timePickerMinuteSemanticsLabel": "Minuta"
 }

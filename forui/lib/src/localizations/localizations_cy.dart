@@ -150,4 +150,10 @@ class FLocalizationsCy extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Amser annilys.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Awr';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Munud';
 }

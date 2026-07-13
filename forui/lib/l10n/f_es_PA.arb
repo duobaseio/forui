@@ -43,5 +43,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "Mostrar el selector de mes y año",
   "calendarShowMonthPickerSemanticsHint": "Mostrar el selector de mes",
   "calendarShowYearPickerSemanticsHint": "Mostrar el selector de año",
-  "calendarShowDaysSemanticsHint": "Mostrar los días"
+  "calendarShowDaysSemanticsHint": "Mostrar los días",
+  "timePickerHourSemanticsLabel": "Hora",
+  "timePickerMinuteSemanticsLabel": "Minuto"
 }

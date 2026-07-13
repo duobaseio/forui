@@ -44,5 +44,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "মাহ আৰু বছৰ বাছনিকৰ্তা দেখুৱাওক",
   "calendarShowMonthPickerSemanticsHint": "মাহ বাছনিকৰ্তা দেখুৱাওক",
   "calendarShowYearPickerSemanticsHint": "বছৰ বাছনিকৰ্তা দেখুৱাওক",
-  "calendarShowDaysSemanticsHint": "দিনবোৰ দেখুৱাওক"
+  "calendarShowDaysSemanticsHint": "দিনবোৰ দেখুৱাওক",
+  "timePickerHourSemanticsLabel": "ঘণ্টা",
+  "timePickerMinuteSemanticsLabel": "মিনিট"
 }

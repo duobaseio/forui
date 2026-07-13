@@ -150,4 +150,10 @@ class FLocalizationsTa extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'தவறான நேரம்.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'மணிநேரம்';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'நிமிடம்';
 }

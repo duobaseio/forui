@@ -44,5 +44,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "ਮਹੀਨਾ ਅਤੇ ਸਾਲ ਚੋਣਕਾਰ ਦਿਖਾਓ",
   "calendarShowMonthPickerSemanticsHint": "ਮਹੀਨਾ ਚੋਣਕਾਰ ਦਿਖਾਓ",
   "calendarShowYearPickerSemanticsHint": "ਸਾਲ ਚੋਣਕਾਰ ਦਿਖਾਓ",
-  "calendarShowDaysSemanticsHint": "ਦਿਨ ਦਿਖਾਓ"
+  "calendarShowDaysSemanticsHint": "ਦਿਨ ਦਿਖਾਓ",
+  "timePickerHourSemanticsLabel": "ਘੰਟਾ",
+  "timePickerMinuteSemanticsLabel": "ਮਿੰਟ"
 }

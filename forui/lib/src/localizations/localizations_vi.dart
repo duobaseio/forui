@@ -150,4 +150,10 @@ class FLocalizationsVi extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Thời gian không hợp lệ.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Giờ';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Phút';
 }

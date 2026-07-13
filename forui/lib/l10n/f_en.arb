@@ -185,5 +185,13 @@
   "@timeFieldHint": {
     "description": "The hint text for the picker-only time field."
   },
-  "timeFieldInvalidDateError": "Invalid time."
+  "timeFieldInvalidDateError": "Invalid time.",
+  "timePickerHourSemanticsLabel": "Hour",
+  "@timePickerHourSemanticsLabel": {
+    "description": "The semantic label for the hour wheel in a time or date time picker."
+  },
+  "timePickerMinuteSemanticsLabel": "Minute",
+  "@timePickerMinuteSemanticsLabel": {
+    "description": "The semantic label for the minute wheel in a time or date time picker."
+  }
 }

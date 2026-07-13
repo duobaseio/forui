@@ -150,4 +150,10 @@ class FLocalizationsJa extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => '無効な時間です。';
+
+  @override
+  String get timePickerHourSemanticsLabel => '時';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => '分';
 }

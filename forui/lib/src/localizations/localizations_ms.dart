@@ -150,4 +150,10 @@ class FLocalizationsMs extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Masa tidak sah.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Jam';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minit';
 }

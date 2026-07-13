@@ -150,4 +150,10 @@ class FLocalizationsFil extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Hindi wastong oras.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Oras';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minuto';
 }

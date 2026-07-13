@@ -43,5 +43,7 @@
   "calendarShowMonthYearPickerSemanticsHint": "மாதம் மற்றும் ஆண்டு தேர்வியைக் காட்டு",
   "calendarShowMonthPickerSemanticsHint": "மாதத் தேர்வியைக் காட்டு",
   "calendarShowYearPickerSemanticsHint": "ஆண்டுத் தேர்வியைக் காட்டு",
-  "calendarShowDaysSemanticsHint": "நாட்களைக் காட்டு"
+  "calendarShowDaysSemanticsHint": "நாட்களைக் காட்டு",
+  "timePickerHourSemanticsLabel": "மணிநேரம்",
+  "timePickerMinuteSemanticsLabel": "நிமிடம்"
 }

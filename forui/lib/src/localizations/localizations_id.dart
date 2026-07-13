@@ -150,4 +150,10 @@ class FLocalizationsId extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Waktu tidak valid.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Jam';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Menit';
 }
