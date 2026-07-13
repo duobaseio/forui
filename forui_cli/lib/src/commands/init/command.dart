@@ -175,12 +175,12 @@ class InitCommand extends ForuiCommand {
       terminal.outro(
         'Forui initialized!',
         'Next steps:\n'
-        '1. Browse the widget catalog: https://forui.dev/docs/divider\n'
-        '2. Read the API reference: https://pub.dev/documentation/forui\n'
-        '\n'
-        'Enjoying Forui? A star or like goes a long way:\n'
-        'GitHub: https://github.com/duobaseio/forui\n'
-        'pub.dev: https://pub.dev/packages/forui',
+            '1. Browse the widget catalog: https://forui.dev/docs/divider\n'
+            '2. Read the API reference: https://pub.dev/documentation/forui\n'
+            '\n'
+            'Enjoying Forui? A star or like goes a long way:\n'
+            'GitHub: https://github.com/duobaseio/forui\n'
+            'pub.dev: https://pub.dev/packages/forui',
       );
     }
   }
