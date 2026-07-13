@@ -46,5 +46,7 @@
   "calendarShowYearPickerSemanticsHint": "Hiển thị bộ chọn năm",
   "calendarShowDaysSemanticsHint": "Hiển thị ngày",
   "timePickerHourSemanticsLabel": "Giờ",
-  "timePickerMinuteSemanticsLabel": "Phút"
+  "timePickerMinuteSemanticsLabel": "Phút",
+  "autocompleteResults": "Có {count} kết quả",
+  "autocompleteSuggestion": "Đề xuất: {suggestion}"
 }

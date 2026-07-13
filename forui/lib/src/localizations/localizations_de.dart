@@ -24,6 +24,16 @@ class FLocalizationsDe extends FLocalizations {
   String get autocompleteNoResults => 'Keine Übereinstimmungen gefunden.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count Ergebnisse verfügbar';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Vorschlag: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Tab $tabIndex von $tabCount';
   }
@@ -164,6 +174,16 @@ class FLocalizationsDeCh extends FLocalizationsDe {
 
   @override
   String get autocompleteNoResults => 'Keine Übereinstimmungen gefunden.';
+
+  @override
+  String autocompleteResults(int count) {
+    return '$count Ergebnisse verfügbar';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Vorschlag: $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {

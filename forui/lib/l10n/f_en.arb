@@ -16,6 +16,24 @@
   "@autocompleteNoResults": {
     "description": "The message displayed when there are no matching results."
   },
+  "autocompleteResults": "{count, plural, =1{1 result available} other{{count} results available}}",
+  "@autocompleteResults": {
+    "description": "Announced to screen readers when autocomplete suggestions appear or their count changes, e.g. '3 results available'.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "autocompleteSuggestion": "Suggestion: {suggestion}",
+  "@autocompleteSuggestion": {
+    "description": "The semantic hint announcing the inline autocomplete completion, e.g. 'Suggestion: Apple'.",
+    "placeholders": {
+      "suggestion": {
+        "type": "String"
+      }
+    }
+  },
   "bottomNavigationBarTabSemanticsLabel": "Tab {tabIndex} of {tabCount}",
   "@bottomNavigationBarTabSemanticsLabel": {
     "description": "The semantic label announcing a bottom navigation bar item's position, e.g. 'Tab 1 of 3'.",

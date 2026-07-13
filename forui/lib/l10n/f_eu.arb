@@ -46,5 +46,7 @@
   "calendarShowYearPickerSemanticsHint": "Erakutsi urte-hautatzailea",
   "calendarShowDaysSemanticsHint": "Erakutsi egunak",
   "timePickerHourSemanticsLabel": "Ordua",
-  "timePickerMinuteSemanticsLabel": "Minutua"
+  "timePickerMinuteSemanticsLabel": "Minutua",
+  "autocompleteResults": "{count} emaitza erabilgarri",
+  "autocompleteSuggestion": "Iradokizuna: {suggestion}"
 }

@@ -24,6 +24,16 @@ class FLocalizationsPa extends FLocalizations {
   String get autocompleteNoResults => 'ਕੋਈ ਮੇਲ ਨਹੀਂ ਮਿਲਿਆ.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count ਨਤੀਜੇ ਉਪਲਬਧ';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'ਸੁਝਾਅ: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return '$tabCount ਵਿੱਚੋਂ $tabIndex ਟੈਬ';
   }

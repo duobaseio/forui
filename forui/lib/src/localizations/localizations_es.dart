@@ -24,6 +24,16 @@ class FLocalizationsEs extends FLocalizations {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Pestaña $tabIndex de $tabCount';
   }
@@ -174,6 +184,16 @@ class FLocalizationsEs419 extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Pestaña $tabIndex de $tabCount';
   }
@@ -310,6 +330,16 @@ class FLocalizationsEsAr extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
@@ -450,6 +480,16 @@ class FLocalizationsEsBo extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Pestaña $tabIndex de $tabCount';
   }
@@ -586,6 +626,16 @@ class FLocalizationsEsCl extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
@@ -726,6 +776,16 @@ class FLocalizationsEsCo extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Pestaña $tabIndex de $tabCount';
   }
@@ -862,6 +922,16 @@ class FLocalizationsEsCr extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
@@ -1002,6 +1072,16 @@ class FLocalizationsEsDo extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Pestaña $tabIndex de $tabCount';
   }
@@ -1138,6 +1218,16 @@ class FLocalizationsEsEc extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
@@ -1278,6 +1368,16 @@ class FLocalizationsEsGt extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Pestaña $tabIndex de $tabCount';
   }
@@ -1414,6 +1514,16 @@ class FLocalizationsEsHn extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
@@ -1554,6 +1664,16 @@ class FLocalizationsEsMx extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Pestaña $tabIndex de $tabCount';
   }
@@ -1690,6 +1810,16 @@ class FLocalizationsEsNi extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
@@ -1830,6 +1960,16 @@ class FLocalizationsEsPa extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Pestaña $tabIndex de $tabCount';
   }
@@ -1966,6 +2106,16 @@ class FLocalizationsEsPe extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
@@ -2106,6 +2256,16 @@ class FLocalizationsEsPr extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Pestaña $tabIndex de $tabCount';
   }
@@ -2242,6 +2402,16 @@ class FLocalizationsEsPy extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
@@ -2382,6 +2552,16 @@ class FLocalizationsEsSv extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Pestaña $tabIndex de $tabCount';
   }
@@ -2518,6 +2698,16 @@ class FLocalizationsEsUs extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
@@ -2658,6 +2848,16 @@ class FLocalizationsEsUy extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Pestaña $tabIndex de $tabCount';
   }
@@ -2794,6 +2994,16 @@ class FLocalizationsEsVe extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {

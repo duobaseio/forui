@@ -24,6 +24,16 @@ class FLocalizationsEl extends FLocalizations {
   String get autocompleteNoResults => 'Δεν βρέθηκαν αντιστοιχίες.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count διαθέσιμα αποτελέσματα';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Πρόταση: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Καρτέλα $tabIndex από $tabCount';
   }

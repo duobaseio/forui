@@ -24,6 +24,16 @@ class FLocalizationsCs extends FLocalizations {
   String get autocompleteNoResults => 'Nebyly nalezeny žádné shody.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count dostupných výsledků';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Návrh: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Karta $tabIndex z $tabCount';
   }

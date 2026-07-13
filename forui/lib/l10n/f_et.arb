@@ -46,5 +46,7 @@
   "calendarShowYearPickerSemanticsHint": "Kuva aasta valija",
   "calendarShowDaysSemanticsHint": "Kuva päevad",
   "timePickerHourSemanticsLabel": "Tund",
-  "timePickerMinuteSemanticsLabel": "Minut"
+  "timePickerMinuteSemanticsLabel": "Minut",
+  "autocompleteResults": "{count} tulemust saadaval",
+  "autocompleteSuggestion": "Soovitus: {suggestion}"
 }

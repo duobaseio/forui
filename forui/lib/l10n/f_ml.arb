@@ -45,5 +45,7 @@
   "calendarShowYearPickerSemanticsHint": "വർഷം തിരഞ്ഞെടുക്കൽ കാണിക്കുക",
   "calendarShowDaysSemanticsHint": "ദിവസങ്ങൾ കാണിക്കുക",
   "timePickerHourSemanticsLabel": "മണിക്കൂർ",
-  "timePickerMinuteSemanticsLabel": "മിനിറ്റ്"
+  "timePickerMinuteSemanticsLabel": "മിനിറ്റ്",
+  "autocompleteResults": "{count} ഫലങ്ങൾ ലഭ്യമാണ്",
+  "autocompleteSuggestion": "നിർദ്ദേശം: {suggestion}"
 }

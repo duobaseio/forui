@@ -46,5 +46,7 @@
   "calendarShowYearPickerSemanticsHint": "Jahresuswahl aazeige",
   "calendarShowDaysSemanticsHint": "Täg aazeige",
   "timePickerHourSemanticsLabel": "Stunde",
-  "timePickerMinuteSemanticsLabel": "Minute"
+  "timePickerMinuteSemanticsLabel": "Minute",
+  "autocompleteResults": "{count} Ergebnisse verfügbar",
+  "autocompleteSuggestion": "Vorschlag: {suggestion}"
 }

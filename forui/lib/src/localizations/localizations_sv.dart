@@ -24,6 +24,16 @@ class FLocalizationsSv extends FLocalizations {
   String get autocompleteNoResults => 'Inga träffar hittades.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count resultat tillgängliga';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Förslag: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Flik $tabIndex av $tabCount';
   }

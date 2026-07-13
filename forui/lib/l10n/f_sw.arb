@@ -46,5 +46,7 @@
   "calendarShowYearPickerSemanticsHint": "Onyesha kiteua mwaka",
   "calendarShowDaysSemanticsHint": "Onyesha siku",
   "timePickerHourSemanticsLabel": "Saa",
-  "timePickerMinuteSemanticsLabel": "Dakika"
+  "timePickerMinuteSemanticsLabel": "Dakika",
+  "autocompleteResults": "Matokeo {count} yanapatikana",
+  "autocompleteSuggestion": "Pendekezo: {suggestion}"
 }

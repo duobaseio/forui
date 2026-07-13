@@ -46,5 +46,7 @@
   "calendarShowYearPickerSemanticsHint": "سال منتخب کنندہ دکھائیں",
   "calendarShowDaysSemanticsHint": "دن دکھائیں",
   "timePickerHourSemanticsLabel": "گھنٹہ",
-  "timePickerMinuteSemanticsLabel": "منٹ"
+  "timePickerMinuteSemanticsLabel": "منٹ",
+  "autocompleteResults": "{count} نتائج دستیاب ہیں",
+  "autocompleteSuggestion": "تجویز: {suggestion}"
 }

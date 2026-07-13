@@ -24,6 +24,16 @@ class FLocalizationsRo extends FLocalizations {
   String get autocompleteNoResults => 'Nu s-au găsit potriviri.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count rezultate disponibile';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugestie: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Fila $tabIndex din $tabCount';
   }

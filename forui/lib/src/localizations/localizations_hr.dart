@@ -24,6 +24,16 @@ class FLocalizationsHr extends FLocalizations {
   String get autocompleteNoResults => 'Nisu pronađena poklapanja.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count dostupnih rezultata';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Prijedlog: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Kartica $tabIndex od $tabCount';
   }

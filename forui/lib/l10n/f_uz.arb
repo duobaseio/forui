@@ -46,5 +46,7 @@
   "calendarShowYearPickerSemanticsHint": "Yil tanlagichini ko‘rsatish",
   "calendarShowDaysSemanticsHint": "Kunlarni ko‘rsatish",
   "timePickerHourSemanticsLabel": "Soat",
-  "timePickerMinuteSemanticsLabel": "Daqiqa"
+  "timePickerMinuteSemanticsLabel": "Daqiqa",
+  "autocompleteResults": "{count} ta natija mavjud",
+  "autocompleteSuggestion": "Taklif: {suggestion}"
 }

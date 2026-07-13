@@ -46,5 +46,7 @@
   "calendarShowYearPickerSemanticsHint": "Afișează selectorul de an",
   "calendarShowDaysSemanticsHint": "Afișează zilele",
   "timePickerHourSemanticsLabel": "Oră",
-  "timePickerMinuteSemanticsLabel": "Minut"
+  "timePickerMinuteSemanticsLabel": "Minut",
+  "autocompleteResults": "{count} rezultate disponibile",
+  "autocompleteSuggestion": "Sugestie: {suggestion}"
 }

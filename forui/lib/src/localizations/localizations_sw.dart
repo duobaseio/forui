@@ -24,6 +24,16 @@ class FLocalizationsSw extends FLocalizations {
   String get autocompleteNoResults => 'Hakuna mechi zilizopatikana.';
 
   @override
+  String autocompleteResults(int count) {
+    return 'Matokeo $count yanapatikana';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Pendekezo: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Kichupo cha $tabIndex kati ya $tabCount';
   }

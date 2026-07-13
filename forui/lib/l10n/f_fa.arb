@@ -45,5 +45,7 @@
   "calendarShowYearPickerSemanticsHint": "نمایش انتخابگر سال",
   "calendarShowDaysSemanticsHint": "نمایش روزها",
   "timePickerHourSemanticsLabel": "ساعت",
-  "timePickerMinuteSemanticsLabel": "دقیقه"
+  "timePickerMinuteSemanticsLabel": "دقیقه",
+  "autocompleteResults": "{count} نتیجه موجود است",
+  "autocompleteSuggestion": "پیشنهاد: {suggestion}"
 }

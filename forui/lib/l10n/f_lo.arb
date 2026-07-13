@@ -45,5 +45,7 @@
   "calendarShowYearPickerSemanticsHint": "ສະແດງຕົວເລືອກປີ",
   "calendarShowDaysSemanticsHint": "ສະແດງມື້",
   "timePickerHourSemanticsLabel": "ຊົ່ວໂມງ",
-  "timePickerMinuteSemanticsLabel": "ນາທີ"
+  "timePickerMinuteSemanticsLabel": "ນາທີ",
+  "autocompleteResults": "ມີ {count} ຜົນລັບ",
+  "autocompleteSuggestion": "ຄຳແນະນຳ: {suggestion}"
 }

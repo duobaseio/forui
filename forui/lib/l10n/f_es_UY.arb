@@ -45,5 +45,7 @@
   "calendarShowYearPickerSemanticsHint": "Mostrar el selector de año",
   "calendarShowDaysSemanticsHint": "Mostrar los días",
   "timePickerHourSemanticsLabel": "Hora",
-  "timePickerMinuteSemanticsLabel": "Minuto"
+  "timePickerMinuteSemanticsLabel": "Minuto",
+  "autocompleteResults": "{count} resultados disponibles",
+  "autocompleteSuggestion": "Sugerencia: {suggestion}"
 }

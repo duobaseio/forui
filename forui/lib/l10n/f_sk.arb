@@ -46,5 +46,7 @@
   "calendarShowYearPickerSemanticsHint": "Zobraziť výber roka",
   "calendarShowDaysSemanticsHint": "Zobraziť dni",
   "timePickerHourSemanticsLabel": "Hodina",
-  "timePickerMinuteSemanticsLabel": "Minúta"
+  "timePickerMinuteSemanticsLabel": "Minúta",
+  "autocompleteResults": "{count} dostupných výsledkov",
+  "autocompleteSuggestion": "Návrh: {suggestion}"
 }

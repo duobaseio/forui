@@ -24,6 +24,16 @@ class FLocalizationsZh extends FLocalizations {
   String get autocompleteNoResults => '未找到匹配项.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count 个结果可用';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return '建议：$suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return '第 $tabIndex 个标签，共 $tabCount 个';
   }
@@ -174,6 +184,16 @@ class FLocalizationsZhHk extends FLocalizationsZh {
   String get autocompleteNoResults => '未找到匹配項.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count 個結果可用';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return '建議：$suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return '第 $tabIndex 個標籤，共 $tabCount 個';
   }
@@ -322,6 +342,16 @@ class FLocalizationsZhTw extends FLocalizationsZh {
 
   @override
   String get autocompleteNoResults => '未找到匹配項.';
+
+  @override
+  String autocompleteResults(int count) {
+    return '$count 個結果可用';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return '建議：$suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {

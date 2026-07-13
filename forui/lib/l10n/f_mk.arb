@@ -45,5 +45,7 @@
   "calendarShowYearPickerSemanticsHint": "Прикажи го избирачот на година",
   "calendarShowDaysSemanticsHint": "Прикажи ги деновите",
   "timePickerHourSemanticsLabel": "Час",
-  "timePickerMinuteSemanticsLabel": "Минута"
+  "timePickerMinuteSemanticsLabel": "Минута",
+  "autocompleteResults": "{count} достапни резултати",
+  "autocompleteSuggestion": "Предлог: {suggestion}"
 }

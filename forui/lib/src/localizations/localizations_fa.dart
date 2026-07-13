@@ -24,6 +24,16 @@ class FLocalizationsFa extends FLocalizations {
   String get autocompleteNoResults => 'هیچ تطبیقی یافت نشد.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count نتیجه موجود است';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'پیشنهاد: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'برگه $tabIndex از $tabCount';
   }

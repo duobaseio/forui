@@ -46,5 +46,7 @@
   "calendarShowYearPickerSemanticsHint": "বছৰ বাছনিকৰ্তা দেখুৱাওক",
   "calendarShowDaysSemanticsHint": "দিনবোৰ দেখুৱাওক",
   "timePickerHourSemanticsLabel": "ঘণ্টা",
-  "timePickerMinuteSemanticsLabel": "মিনিট"
+  "timePickerMinuteSemanticsLabel": "মিনিট",
+  "autocompleteResults": "{count} ফলাফল উপলব্ধ",
+  "autocompleteSuggestion": "পৰামৰ্শ: {suggestion}"
 }

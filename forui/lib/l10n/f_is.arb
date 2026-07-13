@@ -46,5 +46,7 @@
   "calendarShowYearPickerSemanticsHint": "Sýna ársval",
   "calendarShowDaysSemanticsHint": "Sýna daga",
   "timePickerHourSemanticsLabel": "Klukkustund",
-  "timePickerMinuteSemanticsLabel": "Mínúta"
+  "timePickerMinuteSemanticsLabel": "Mínúta",
+  "autocompleteResults": "{count} niðurstöður í boði",
+  "autocompleteSuggestion": "Tillaga: {suggestion}"
 }

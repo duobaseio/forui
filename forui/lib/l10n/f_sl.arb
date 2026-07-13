@@ -46,5 +46,7 @@
   "calendarShowYearPickerSemanticsHint": "Pokaži izbirnik leta",
   "calendarShowDaysSemanticsHint": "Pokaži dneve",
   "timePickerHourSemanticsLabel": "Ura",
-  "timePickerMinuteSemanticsLabel": "Minuta"
+  "timePickerMinuteSemanticsLabel": "Minuta",
+  "autocompleteResults": "{count} razpoložljivih rezultatov",
+  "autocompleteSuggestion": "Predlog: {suggestion}"
 }

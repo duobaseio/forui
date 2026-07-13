@@ -24,6 +24,16 @@ class FLocalizationsUz extends FLocalizations {
   String get autocompleteNoResults => 'Hech qanday moslik topilmadi.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count ta natija mavjud';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Taklif: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return '$tabCount tadan $tabIndex-yorliq';
   }

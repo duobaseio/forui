@@ -24,6 +24,16 @@ class FLocalizationsKn extends FLocalizations {
   String get autocompleteNoResults => 'ಯಾವುದೇ ಹೊಂದಾಣಿಕೆ ಕಂಡುಬಂದಿಲ್ಲ.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count ಫಲಿತಾಂಶಗಳು ಲಭ್ಯವಿದೆ';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'ಸಲಹೆ: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return '$tabCount ರಲ್ಲಿ $tabIndex ಟ್ಯಾಬ್';
   }

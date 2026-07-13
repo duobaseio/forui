@@ -45,5 +45,7 @@
   "calendarShowYearPickerSemanticsHint": "ஆண்டுத் தேர்வியைக் காட்டு",
   "calendarShowDaysSemanticsHint": "நாட்களைக் காட்டு",
   "timePickerHourSemanticsLabel": "மணிநேரம்",
-  "timePickerMinuteSemanticsLabel": "நிமிடம்"
+  "timePickerMinuteSemanticsLabel": "நிமிடம்",
+  "autocompleteResults": "{count} முடிவுகள் கிடைக்கின்றன",
+  "autocompleteSuggestion": "பரிந்துரை: {suggestion}"
 }

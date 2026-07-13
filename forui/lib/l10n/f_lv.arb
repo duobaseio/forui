@@ -46,5 +46,7 @@
   "calendarShowYearPickerSemanticsHint": "Rādīt gada atlasītāju",
   "calendarShowDaysSemanticsHint": "Rādīt dienas",
   "timePickerHourSemanticsLabel": "Stunda",
-  "timePickerMinuteSemanticsLabel": "Minūte"
+  "timePickerMinuteSemanticsLabel": "Minūte",
+  "autocompleteResults": "Pieejami {count} rezultāti",
+  "autocompleteSuggestion": "Ieteikums: {suggestion}"
 }

@@ -45,5 +45,7 @@
   "calendarShowYearPickerSemanticsHint": "د کال ټاکونکی وښایاست",
   "calendarShowDaysSemanticsHint": "ورځې وښایاست",
   "timePickerHourSemanticsLabel": "ساعت",
-  "timePickerMinuteSemanticsLabel": "دقیقه"
+  "timePickerMinuteSemanticsLabel": "دقیقه",
+  "autocompleteResults": "{count} پایلې شتون لري",
+  "autocompleteSuggestion": "وړاندیز: {suggestion}"
 }

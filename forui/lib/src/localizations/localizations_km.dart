@@ -24,6 +24,16 @@ class FLocalizationsKm extends FLocalizations {
   String get autocompleteNoResults => 'រកមិនឃើញការផ្គូផ្គង.';
 
   @override
+  String autocompleteResults(int count) {
+    return 'លទ្ធផល $count អាចប្រើបាន';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'សំណើ៖ $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'ផ្ទាំងទី $tabIndex នៃ $tabCount';
   }

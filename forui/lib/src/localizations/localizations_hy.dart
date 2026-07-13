@@ -24,6 +24,16 @@ class FLocalizationsHy extends FLocalizations {
   String get autocompleteNoResults => 'Համընկնումներ չեն գտնվել.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count արդյունք հասանելի է';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Առաջարկ: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Ներդիր $tabIndex/$tabCount';
   }

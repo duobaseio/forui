@@ -24,6 +24,16 @@ class FLocalizationsPt extends FLocalizations {
   String get autocompleteNoResults => 'Nenhuma correspondência encontrada.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponíveis';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugestão: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Guia $tabIndex de $tabCount';
   }
@@ -172,6 +182,16 @@ class FLocalizationsPtPt extends FLocalizationsPt {
 
   @override
   String get autocompleteNoResults => 'Nenhuma correspondência encontrada.';
+
+  @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponíveis';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugestão: $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {

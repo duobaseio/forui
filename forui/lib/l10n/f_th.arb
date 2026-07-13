@@ -46,5 +46,7 @@
   "calendarShowYearPickerSemanticsHint": "แสดงตัวเลือกปี",
   "calendarShowDaysSemanticsHint": "แสดงวัน",
   "timePickerHourSemanticsLabel": "ชั่วโมง",
-  "timePickerMinuteSemanticsLabel": "นาที"
+  "timePickerMinuteSemanticsLabel": "นาที",
+  "autocompleteResults": "มีผลลัพธ์ {count} รายการ",
+  "autocompleteSuggestion": "คำแนะนำ: {suggestion}"
 }

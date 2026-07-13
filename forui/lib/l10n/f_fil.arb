@@ -46,5 +46,7 @@
   "calendarShowYearPickerSemanticsHint": "Ipakita ang pampili ng taon",
   "calendarShowDaysSemanticsHint": "Ipakita ang mga araw",
   "timePickerHourSemanticsLabel": "Oras",
-  "timePickerMinuteSemanticsLabel": "Minuto"
+  "timePickerMinuteSemanticsLabel": "Minuto",
+  "autocompleteResults": "{count} resulta ang available",
+  "autocompleteSuggestion": "Mungkahi: {suggestion}"
 }

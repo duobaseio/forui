@@ -46,5 +46,7 @@
   "calendarShowYearPickerSemanticsHint": "Rodyti metų parinkiklį",
   "calendarShowDaysSemanticsHint": "Rodyti dienas",
   "timePickerHourSemanticsLabel": "Valandos",
-  "timePickerMinuteSemanticsLabel": "Minutės"
+  "timePickerMinuteSemanticsLabel": "Minutės",
+  "autocompleteResults": "Yra {count} rezultatų",
+  "autocompleteSuggestion": "Pasiūlymas: {suggestion}"
 }

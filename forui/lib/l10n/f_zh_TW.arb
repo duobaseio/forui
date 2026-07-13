@@ -46,5 +46,7 @@
   "calendarShowYearPickerSemanticsHint": "顯示年份選擇器",
   "calendarShowDaysSemanticsHint": "顯示日期",
   "timePickerHourSemanticsLabel": "小時",
-  "timePickerMinuteSemanticsLabel": "分鐘"
+  "timePickerMinuteSemanticsLabel": "分鐘",
+  "autocompleteResults": "{count} 個結果可用",
+  "autocompleteSuggestion": "建議：{suggestion}"
 }

@@ -24,6 +24,16 @@ class FLocalizationsTl extends FLocalizations {
   String get autocompleteNoResults => 'Walang nahanap na tugma.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count resulta ang available';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Mungkahi: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Tab $tabIndex ng $tabCount';
   }

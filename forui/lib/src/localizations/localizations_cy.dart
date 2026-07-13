@@ -24,6 +24,16 @@ class FLocalizationsCy extends FLocalizations {
   String get autocompleteNoResults => 'Dim cydweddiadau wedi\'u canfod.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count canlyniad ar gael';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Awgrym: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Tab $tabIndex o $tabCount';
   }

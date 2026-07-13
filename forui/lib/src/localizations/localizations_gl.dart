@@ -24,6 +24,16 @@ class FLocalizationsGl extends FLocalizations {
   String get autocompleteNoResults => 'Non se atoparon coincidencias.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count resultados dispoñibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Suxestión: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Pestana $tabIndex de $tabCount';
   }

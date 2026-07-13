@@ -46,5 +46,7 @@
   "calendarShowYearPickerSemanticsHint": "Bonisa isikhethi sonyaka",
   "calendarShowDaysSemanticsHint": "Bonisa izinsuku",
   "timePickerHourSemanticsLabel": "Ihora",
-  "timePickerMinuteSemanticsLabel": "Iminithi"
+  "timePickerMinuteSemanticsLabel": "Iminithi",
+  "autocompleteResults": "Imiphumela engu-{count} iyatholakala",
+  "autocompleteSuggestion": "Isiphakamiso: {suggestion}"
 }

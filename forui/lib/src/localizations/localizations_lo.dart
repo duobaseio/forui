@@ -24,6 +24,16 @@ class FLocalizationsLo extends FLocalizations {
   String get autocompleteNoResults => 'ບໍ່ພົບການຈັບຄູ່.';
 
   @override
+  String autocompleteResults(int count) {
+    return 'ມີ $count ຜົນລັບ';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'ຄຳແນະນຳ: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'ແຖບທີ $tabIndex ຈາກທັງໝົດ $tabCount';
   }

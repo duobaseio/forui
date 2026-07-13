@@ -46,5 +46,7 @@
   "calendarShowYearPickerSemanticsHint": "နှစ် ရွေးချယ်မှုကို ပြပါ",
   "calendarShowDaysSemanticsHint": "ရက်များကို ပြပါ",
   "timePickerHourSemanticsLabel": "နာရီ",
-  "timePickerMinuteSemanticsLabel": "မိနစ်"
+  "timePickerMinuteSemanticsLabel": "မိနစ်",
+  "autocompleteResults": "ရလဒ် {count} ခု ရနိုင်ပါသည်",
+  "autocompleteSuggestion": "အကြံပြုချက်: {suggestion}"
 }

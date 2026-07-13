@@ -46,5 +46,7 @@
   "calendarShowYearPickerSemanticsHint": "Tampilkan pemilih tahun",
   "calendarShowDaysSemanticsHint": "Tampilkan hari",
   "timePickerHourSemanticsLabel": "Jam",
-  "timePickerMinuteSemanticsLabel": "Menit"
+  "timePickerMinuteSemanticsLabel": "Menit",
+  "autocompleteResults": "{count} hasil tersedia",
+  "autocompleteSuggestion": "Saran: {suggestion}"
 }

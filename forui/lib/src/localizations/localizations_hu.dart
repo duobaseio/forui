@@ -24,6 +24,16 @@ class FLocalizationsHu extends FLocalizations {
   String get autocompleteNoResults => 'Nincs találat.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count találat érhető el';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Javaslat: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return '$tabCount/$tabIndex. lap';
   }

@@ -45,5 +45,7 @@
   "calendarShowYearPickerSemanticsHint": "Εμφάνιση επιλογέα έτους",
   "calendarShowDaysSemanticsHint": "Εμφάνιση ημερών",
   "timePickerHourSemanticsLabel": "Ώρα",
-  "timePickerMinuteSemanticsLabel": "Λεπτό"
+  "timePickerMinuteSemanticsLabel": "Λεπτό",
+  "autocompleteResults": "{count} διαθέσιμα αποτελέσματα",
+  "autocompleteSuggestion": "Πρόταση: {suggestion}"
 }

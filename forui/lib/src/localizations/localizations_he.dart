@@ -24,6 +24,16 @@ class FLocalizationsHe extends FLocalizations {
   String get autocompleteNoResults => 'לא נמצאו התאמות.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count תוצאות זמינות';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'הצעה: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'כרטיסייה $tabIndex מתוך $tabCount';
   }

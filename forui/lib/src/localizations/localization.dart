@@ -60,6 +60,12 @@ class FDefaultLocalizations extends FLocalizations {
   String get autocompleteNoResults => 'No matches found.';
 
   @override
+  String autocompleteResults(int count) => count == 1 ? '1 result available' : '$count results available';
+
+  @override
+  String autocompleteSuggestion(String suggestion) => 'Suggestion: $suggestion';
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) => 'Tab $tabIndex of $tabCount';
 
   @override

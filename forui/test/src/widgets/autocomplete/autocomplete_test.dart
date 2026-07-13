@@ -3,6 +3,7 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
@@ -1122,6 +1123,179 @@ void main() {
 
       expect(controller.text, 'Apple');
       expect(pressed, null);
+    });
+  });
+
+  group('accessibility', () {
+    List<String> captureAnnouncements(WidgetTester tester) {
+      final announcements = <String>[];
+      tester.binding.defaultBinaryMessenger.setMockDecodedMessageHandler<Object?>(SystemChannels.accessibility, (
+        message,
+      ) async {
+        final map = message! as Map<Object?, Object?>;
+        if (map['type'] == 'announce') {
+          announcements.add((map['data']! as Map<Object?, Object?>)['message']! as String);
+        }
+        return null;
+      });
+      addTearDown(
+        () => tester.binding.defaultBinaryMessenger.setMockDecodedMessageHandler<Object?>(
+          SystemChannels.accessibility,
+          null,
+        ),
+      );
+      return announcements;
+    }
+
+    testWidgets('field advertises a collapsed combobox state when the popover is closed', (tester) async {
+      final semantics = tester.ensureSemantics();
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FAutocomplete.text(
+            key: key,
+            control: .managed(controller: controller),
+            popoverControl: .managed(controller: popoverController),
+            items: fruits,
+          ),
+        ),
+      );
+
+      expect(tester.getSemantics(find.byType(EditableText)), isSemantics(hasExpandedState: true, isExpanded: false));
+
+      semantics.dispose();
+    });
+
+    testWidgets('field advertises an expanded state when suggestions are shown', (tester) async {
+      final semantics = tester.ensureSemantics();
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FAutocomplete.text(
+            key: key,
+            control: .managed(controller: controller),
+            popoverControl: .managed(controller: popoverController),
+            items: fruits,
+          ),
+        ),
+      );
+
+      await tester.enterText(find.byKey(key), 'b');
+      await tester.pumpAndSettle();
+
+      expect(popoverController.status.isForwardOrCompleted, true);
+      expect(tester.getSemantics(find.byType(EditableText)), isSemantics(hasExpandedState: true, isExpanded: true));
+
+      semantics.dispose();
+    });
+
+    testWidgets('announces the result count when suggestions appear', (tester) async {
+      final announcements = captureAnnouncements(tester);
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FAutocomplete.text(
+            key: key,
+            control: .managed(controller: controller),
+            popoverControl: .managed(controller: popoverController),
+            items: fruits,
+          ),
+        ),
+      );
+
+      await tester.enterText(find.byKey(key), 'b');
+      await tester.pumpAndSettle();
+
+      expect(announcements, contains('2 results available'));
+    });
+
+    testWidgets('announces no matches when the query has no results', (tester) async {
+      final announcements = captureAnnouncements(tester);
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FAutocomplete.text(
+            key: key,
+            control: .managed(controller: controller),
+            popoverControl: .managed(controller: popoverController),
+            items: fruits,
+          ),
+        ),
+      );
+
+      await tester.enterText(find.byKey(key), 'zzz');
+      await tester.pumpAndSettle();
+
+      expect(announcements, contains('No matches found.'));
+    });
+
+    testWidgets('exposes the inline completion as a semantics hint', (tester) async {
+      final semantics = tester.ensureSemantics();
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FAutocomplete.text(
+            key: key,
+            control: .managed(controller: controller),
+            popoverControl: .managed(controller: popoverController),
+            items: fruits,
+          ),
+        ),
+      );
+
+      await tester.enterText(find.byKey(key), 'app');
+      await tester.pumpAndSettle();
+
+      expect(tester.getSemantics(find.byType(EditableText)), isSemantics(hint: 'Suggestion: Apple'));
+
+      semantics.dispose();
+    });
+
+    testWidgets('arrow down navigates through the suggestions', (tester) async {
+      final focus = autoDispose(FocusNode());
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FAutocomplete.text(
+            key: key,
+            control: .managed(controller: controller),
+            popoverControl: .managed(controller: popoverController),
+            focusNode: focus,
+            items: fruits,
+          ),
+        ),
+      );
+
+      await tester.enterText(find.byKey(key), 'b');
+      await tester.pumpAndSettle();
+
+      await tester.sendKeyEvent(.arrowDown);
+      await tester.pumpAndSettle();
+      expect(controller.text, 'Banana');
+
+      await tester.sendKeyEvent(.arrowDown);
+      await tester.pumpAndSettle();
+      expect(controller.text, 'Blueberry');
+    });
+
+    testWidgets('arrow up from the first suggestion returns focus to the field', (tester) async {
+      final focus = autoDispose(FocusNode());
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FAutocomplete.text(
+            key: key,
+            control: .managed(controller: controller),
+            popoverControl: .managed(controller: popoverController),
+            focusNode: focus,
+            items: fruits,
+          ),
+        ),
+      );
+
+      await tester.enterText(find.byKey(key), 'b');
+      await tester.pumpAndSettle();
+
+      await tester.sendKeyEvent(.arrowDown);
+      await tester.pumpAndSettle();
+      expect(focus.hasFocus, false);
+
+      await tester.sendKeyEvent(.arrowUp);
+      await tester.pumpAndSettle();
+      expect(focus.hasFocus, true);
     });
   });
 }

@@ -24,6 +24,22 @@ class FLocalizationsEn extends FLocalizations {
   String get autocompleteNoResults => 'No matches found.';
 
   @override
+  String autocompleteResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results available',
+      one: '1 result available',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Suggestion: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Tab $tabIndex of $tabCount';
   }
@@ -172,6 +188,22 @@ class FLocalizationsEnAu extends FLocalizationsEn {
 
   @override
   String get autocompleteNoResults => 'No matches found.';
+
+  @override
+  String autocompleteResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results available',
+      one: '1 result available',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Suggestion: $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
@@ -324,6 +356,22 @@ class FLocalizationsEnCa extends FLocalizationsEn {
   String get autocompleteNoResults => 'No matches found.';
 
   @override
+  String autocompleteResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results available',
+      one: '1 result available',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Suggestion: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Tab $tabIndex of $tabCount';
   }
@@ -472,6 +520,22 @@ class FLocalizationsEnGb extends FLocalizationsEn {
 
   @override
   String get autocompleteNoResults => 'No matches found.';
+
+  @override
+  String autocompleteResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results available',
+      one: '1 result available',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Suggestion: $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
@@ -624,6 +688,22 @@ class FLocalizationsEnIe extends FLocalizationsEn {
   String get autocompleteNoResults => 'No matches found.';
 
   @override
+  String autocompleteResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results available',
+      one: '1 result available',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Suggestion: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Tab $tabIndex of $tabCount';
   }
@@ -772,6 +852,22 @@ class FLocalizationsEnIn extends FLocalizationsEn {
 
   @override
   String get autocompleteNoResults => 'No matches found.';
+
+  @override
+  String autocompleteResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results available',
+      one: '1 result available',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Suggestion: $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
@@ -924,6 +1020,22 @@ class FLocalizationsEnNz extends FLocalizationsEn {
   String get autocompleteNoResults => 'No matches found.';
 
   @override
+  String autocompleteResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results available',
+      one: '1 result available',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Suggestion: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Tab $tabIndex of $tabCount';
   }
@@ -1074,6 +1186,22 @@ class FLocalizationsEnSg extends FLocalizationsEn {
   String get autocompleteNoResults => 'No matches found.';
 
   @override
+  String autocompleteResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results available',
+      one: '1 result available',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Suggestion: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Tab $tabIndex of $tabCount';
   }
@@ -1222,6 +1350,22 @@ class FLocalizationsEnZa extends FLocalizationsEn {
 
   @override
   String get autocompleteNoResults => 'No matches found.';
+
+  @override
+  String autocompleteResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results available',
+      one: '1 result available',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Suggestion: $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {

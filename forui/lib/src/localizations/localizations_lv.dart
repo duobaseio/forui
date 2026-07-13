@@ -24,6 +24,16 @@ class FLocalizationsLv extends FLocalizations {
   String get autocompleteNoResults => 'Nav atrasts neviens atbilstošs rezultāts.';
 
   @override
+  String autocompleteResults(int count) {
+    return 'Pieejami $count rezultāti';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Ieteikums: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return '$tabIndex. cilne no $tabCount';
   }

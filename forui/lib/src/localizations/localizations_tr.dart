@@ -24,6 +24,16 @@ class FLocalizationsTr extends FLocalizations {
   String get autocompleteNoResults => 'Eşleşme bulunamadı.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count sonuç mevcut';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Öneri: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return '$tabCount sekmeden $tabIndex. sekme';
   }

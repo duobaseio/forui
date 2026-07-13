@@ -46,5 +46,7 @@
   "calendarShowYearPickerSemanticsHint": "Näytä vuoden valitsin",
   "calendarShowDaysSemanticsHint": "Näytä päivät",
   "timePickerHourSemanticsLabel": "Tunti",
-  "timePickerMinuteSemanticsLabel": "Minuutti"
+  "timePickerMinuteSemanticsLabel": "Minuutti",
+  "autocompleteResults": "{count} tulosta saatavilla",
+  "autocompleteSuggestion": "Ehdotus: {suggestion}"
 }

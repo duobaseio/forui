@@ -45,5 +45,7 @@
   "calendarShowYearPickerSemanticsHint": "Жил сонгогчийг харуулах",
   "calendarShowDaysSemanticsHint": "Өдрүүдийг харуулах",
   "timePickerHourSemanticsLabel": "Цаг",
-  "timePickerMinuteSemanticsLabel": "Минут"
+  "timePickerMinuteSemanticsLabel": "Минут",
+  "autocompleteResults": "{count} үр дүн байна",
+  "autocompleteSuggestion": "Санал: {suggestion}"
 }

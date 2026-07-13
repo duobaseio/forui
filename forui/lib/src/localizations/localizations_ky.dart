@@ -24,6 +24,16 @@ class FLocalizationsKy extends FLocalizations {
   String get autocompleteNoResults => 'Эч кандай дал келүү табылган жок.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count жыйынтык бар';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Сунуш: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return '$tabCount ичинен $tabIndex-өтмөк';
   }

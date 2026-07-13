@@ -46,5 +46,7 @@
   "calendarShowYearPickerSemanticsHint": "Vis årsvelger",
   "calendarShowDaysSemanticsHint": "Vis dager",
   "timePickerHourSemanticsLabel": "Time",
-  "timePickerMinuteSemanticsLabel": "Minutt"
+  "timePickerMinuteSemanticsLabel": "Minutt",
+  "autocompleteResults": "{count} resultater tilgjengelig",
+  "autocompleteSuggestion": "Forslag: {suggestion}"
 }

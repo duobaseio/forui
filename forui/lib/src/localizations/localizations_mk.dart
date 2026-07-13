@@ -24,6 +24,16 @@ class FLocalizationsMk extends FLocalizations {
   String get autocompleteNoResults => 'Не се пронајдени совпаѓања.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count достапни резултати';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Предлог: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Картичка $tabIndex од $tabCount';
   }

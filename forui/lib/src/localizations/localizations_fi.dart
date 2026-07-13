@@ -24,6 +24,16 @@ class FLocalizationsFi extends FLocalizations {
   String get autocompleteNoResults => 'Ei osumia löytynyt.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count tulosta saatavilla';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Ehdotus: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Välilehti $tabIndex/$tabCount';
   }

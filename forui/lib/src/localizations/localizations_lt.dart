@@ -24,6 +24,16 @@ class FLocalizationsLt extends FLocalizations {
   String get autocompleteNoResults => 'Nerasta atitikmenų.';
 
   @override
+  String autocompleteResults(int count) {
+    return 'Yra $count rezultatų';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Pasiūlymas: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return '$tabIndex skirtukas iš $tabCount';
   }

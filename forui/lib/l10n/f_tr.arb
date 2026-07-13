@@ -46,5 +46,7 @@
   "calendarShowYearPickerSemanticsHint": "Yıl seçiciyi göster",
   "calendarShowDaysSemanticsHint": "Günleri göster",
   "timePickerHourSemanticsLabel": "Saat",
-  "timePickerMinuteSemanticsLabel": "Dakika"
+  "timePickerMinuteSemanticsLabel": "Dakika",
+  "autocompleteResults": "{count} sonuç mevcut",
+  "autocompleteSuggestion": "Öneri: {suggestion}"
 }

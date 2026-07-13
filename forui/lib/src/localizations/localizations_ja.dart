@@ -24,6 +24,16 @@ class FLocalizationsJa extends FLocalizations {
   String get autocompleteNoResults => '一致するものが見つかりません.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count 件の結果があります';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return '候補: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return '$tabCount 個のタブのうち $tabIndex 個目';
   }

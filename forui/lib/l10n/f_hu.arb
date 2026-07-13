@@ -46,5 +46,7 @@
   "calendarShowYearPickerSemanticsHint": "Évválasztó megjelenítése",
   "calendarShowDaysSemanticsHint": "Napok megjelenítése",
   "timePickerHourSemanticsLabel": "Óra",
-  "timePickerMinuteSemanticsLabel": "Perc"
+  "timePickerMinuteSemanticsLabel": "Perc",
+  "autocompleteResults": "{count} találat érhető el",
+  "autocompleteSuggestion": "Javaslat: {suggestion}"
 }

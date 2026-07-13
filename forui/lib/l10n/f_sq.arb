@@ -46,5 +46,7 @@
   "calendarShowYearPickerSemanticsHint": "Shfaq zgjedhësin e vitit",
   "calendarShowDaysSemanticsHint": "Shfaq ditët",
   "timePickerHourSemanticsLabel": "Ora",
-  "timePickerMinuteSemanticsLabel": "Minuta"
+  "timePickerMinuteSemanticsLabel": "Minuta",
+  "autocompleteResults": "{count} rezultate në dispozicion",
+  "autocompleteSuggestion": "Sugjerim: {suggestion}"
 }

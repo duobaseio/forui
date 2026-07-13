@@ -24,6 +24,16 @@ class FLocalizationsSr extends FLocalizations {
   String get autocompleteNoResults => 'Није пронађено подударање.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count доступних резултата';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Предлог: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Картица $tabIndex од $tabCount';
   }
@@ -172,6 +182,16 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
 
   @override
   String get autocompleteNoResults => 'Nije pronađeno podudaranje.';
+
+  @override
+  String autocompleteResults(int count) {
+    return '$count dostupnih rezultata';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Predlog: $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {

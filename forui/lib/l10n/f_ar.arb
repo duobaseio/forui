@@ -45,5 +45,7 @@
   "calendarShowYearPickerSemanticsHint": "إظهار أداة اختيار السنة",
   "calendarShowDaysSemanticsHint": "إظهار الأيام",
   "timePickerHourSemanticsLabel": "ساعة",
-  "timePickerMinuteSemanticsLabel": "دقيقة"
+  "timePickerMinuteSemanticsLabel": "دقيقة",
+  "autocompleteResults": "{count} نتائج متوفرة",
+  "autocompleteSuggestion": "اقتراح: {suggestion}"
 }

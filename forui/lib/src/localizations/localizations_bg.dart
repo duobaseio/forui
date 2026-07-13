@@ -24,6 +24,16 @@ class FLocalizationsBg extends FLocalizations {
   String get autocompleteNoResults => 'Няма намерени съвпадения.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count налични резултата';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Предложение: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Раздел $tabIndex от $tabCount';
   }

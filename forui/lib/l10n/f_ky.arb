@@ -45,5 +45,7 @@
   "calendarShowYearPickerSemanticsHint": "Жыл тандагычын көрсөтүү",
   "calendarShowDaysSemanticsHint": "Күндөрдү көрсөтүү",
   "timePickerHourSemanticsLabel": "Саат",
-  "timePickerMinuteSemanticsLabel": "Мүнөт"
+  "timePickerMinuteSemanticsLabel": "Мүнөт",
+  "autocompleteResults": "{count} жыйынтык бар",
+  "autocompleteSuggestion": "Сунуш: {suggestion}"
 }

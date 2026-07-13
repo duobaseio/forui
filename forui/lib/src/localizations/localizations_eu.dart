@@ -24,6 +24,16 @@ class FLocalizationsEu extends FLocalizations {
   String get autocompleteNoResults => 'Ez da bat-etortzerik aurkitu.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count emaitza erabilgarri';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Iradokizuna: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return '$tabCount/$tabIndex fitxa';
   }

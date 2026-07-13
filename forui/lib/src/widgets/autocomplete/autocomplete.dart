@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
+import 'package:flutter/semantics.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
@@ -35,9 +36,6 @@ typedef FAutocompletePopoverBuilder =
 /// An autocomplete is not a searchable select. it is a text-field with suggestions. Values are not limited to one of
 /// suggestions, users can type anything. If you need a searchable select, use [FSelect.search] or [FMultiSelect.search]
 /// instead.
-///
-/// ## Note
-/// The autocomplete does not support using arrow keys to navigate the suggestions on web.
 ///
 /// See:
 /// * https://forui.dev/docs/widgets/form/autocomplete for working examples.
@@ -1196,6 +1194,10 @@ class _State<T> extends State<FAutocomplete<T>> with TickerProviderStateMixin {
   String? _previous;
   int _monotonic = 0;
 
+  /// The last result count announced to screen readers, used to suppress duplicate announcements. Null when the popover
+  /// is hidden.
+  int? _count;
+
   /// The original text used to restore the textfield when navigating but not selecting any completion using a keyboard.
   String? _restore;
 
@@ -1284,6 +1286,7 @@ class _State<T> extends State<FAutocomplete<T>> with TickerProviderStateMixin {
       // popover open while the user is keyboard-navigating items (popover has focus), or while an item tap is
       // unfocusing the field (handled by onPress's autoHide flag instead).
     } else if (!_fieldFocus.hasFocus && !_popoverFocus.hasFocus && !_itemTap) {
+      _count = null;
       _popoverController.hide();
     }
 
@@ -1296,18 +1299,16 @@ class _State<T> extends State<FAutocomplete<T>> with TickerProviderStateMixin {
     final data = _data;
 
     _apply(token, _content(data));
-    if (data is Future<Iterable<T>>) {
-      data.then(
-        (values) => _apply(token, _content(values)),
-        onError: (_, _) => _apply(token, widget.contentErrorBuilder != null),
-      );
+    switch (data) {
+      case final Iterable<T> values:
+        _announce(token, values.length);
+      case final Future<Iterable<T>> future:
+        future.then((values) {
+          _apply(token, _content(values));
+          _announce(token, values.length);
+        }, onError: (_, _) => _apply(token, widget.contentErrorBuilder != null));
     }
   }
-
-  bool _content(FutureOr<Iterable<T>> data) => switch (data) {
-    final Iterable<T> values => values.isNotEmpty || widget.contentEmptyBuilder != null,
-    Future<Iterable<T>>() => widget.contentLoadingBuilder != null,
-  };
 
   void _apply(int token, bool show) {
     if (!mounted || token != _monotonic) {
@@ -1322,8 +1323,38 @@ class _State<T> extends State<FAutocomplete<T>> with TickerProviderStateMixin {
     if (show) {
       _popoverController.show();
     } else {
+      _count = null;
       _popoverController.hide();
     }
+  }
+
+  bool _content(FutureOr<Iterable<T>> data) => switch (data) {
+    final Iterable<T> values => values.isNotEmpty || widget.contentEmptyBuilder != null,
+    Future<Iterable<T>>() => widget.contentLoadingBuilder != null,
+  };
+
+  void _announce(int token, int count) {
+    if (!mounted || token != _monotonic || !_fieldFocus.hasFocus) {
+      return;
+    }
+
+    // Mirror _content: the popover only shows results when there are matches or an empty builder is configured.
+    if (!(count > 0 || widget.contentEmptyBuilder != null)) {
+      _count = null;
+      return;
+    }
+
+    if (count == _count) {
+      return;
+    }
+    _count = count;
+
+    final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
+    SemanticsService.sendAnnouncement(
+      View.of(context),
+      count == 0 ? localizations.autocompleteNoResults : localizations.autocompleteResults(count),
+      Directionality.of(context),
+    );
   }
 
   void _handleOnPopoverChange() {
@@ -1452,55 +1483,74 @@ class _State<T> extends State<FAutocomplete<T>> with TickerProviderStateMixin {
               widget.contentOnTapHide?.call();
             },
             focusNode: _popoverFocus,
-            popoverBuilder: (_, popoverController) => TextFieldTapRegion(
-              child: InheritedAutocompleteController<T>(
-                popover: popoverController,
-                format: widget.format,
-                onPress: (value) {
-                  final retainFocus =
-                      widget.retainFocus ??
-                      switch (defaultTargetPlatform) {
-                        .macOS || .windows || .linux => true,
-                        _ => false,
-                      };
-
-                  if (!retainFocus) {
-                    _itemTap = true;
-                    _fieldFocus.unfocus(); // Hides on-screen keyboard.
+            popoverBuilder: (_, popoverController) => CallbackShortcuts(
+              //  Bound so item-to-item navigation works on web, where the platform default maps arrows to scrolling.
+              bindings: {
+                const SingleActivator(.arrowDown): () {
+                  final focused = _popoverFocus.focusedChild;
+                  if (focused == null) {
+                    _popoverFocus.descendants.firstOrNull?.requestFocus();
+                  } else {
+                    focused.focusInDirection(.down);
                   }
-
-                  if (widget.autoHide) {
-                    _popoverController.hide();
+                },
+                const SingleActivator(.arrowUp): () {
+                  final focused = _popoverFocus.focusedChild;
+                  if (focused == null || !focused.focusInDirection(.up)) {
+                    _fieldFocus.requestFocus();
                   }
-
-                  _mutating = true;
-                  _controller.text = widget.format(value);
-                  _mutating = false;
-
-                  widget.onItemPress?.call(value);
                 },
-                onFocus: (value) {
-                  _restore ??= _controller.text;
-                  _mutating = true;
-                  _controller.text = widget.format(value);
-                  _mutating = false;
-                },
-                child: widget.popoverBuilder(
-                  context,
-                  _controller,
-                  _popoverController,
-                  Content<T>(
-                    controller: _controller,
-                    style: style.contentStyle,
-                    enabled: widget.enabled,
-                    scrollController: widget.contentScrollController,
-                    physics: widget.contentPhysics,
-                    divider: widget.contentDivider,
-                    data: _data,
-                    loadingBuilder: widget.contentLoadingBuilder ?? (_, _) => const SizedBox.shrink(),
-                    builder: widget.contentBuilder,
-                    emptyBuilder: widget.contentEmptyBuilder ?? (_, _) => const SizedBox.shrink(),
-                    errorBuilder: widget.contentErrorBuilder ?? (_, _, _, _) => const SizedBox.shrink(),
+              },
+              child: TextFieldTapRegion(
+                child: InheritedAutocompleteController<T>(
+                  popover: popoverController,
+                  format: widget.format,
+                  onPress: (value) {
+                    final retainFocus =
+                        widget.retainFocus ??
+                        switch (defaultTargetPlatform) {
+                          .macOS || .windows || .linux => true,
+                          _ => false,
+                        };
+
+                    if (!retainFocus) {
+                      _itemTap = true;
+                      _fieldFocus.unfocus(); // Hides on-screen keyboard.
+                    }
+
+                    if (widget.autoHide) {
+                      _popoverController.hide();
+                    }
+
+                    _mutating = true;
+                    _controller.text = widget.format(value);
+                    _mutating = false;
+
+                    widget.onItemPress?.call(value);
+                  },
+                  onFocus: (value) {
+                    _restore ??= _controller.text;
+                    _mutating = true;
+                    _controller.text = widget.format(value);
+                    _mutating = false;
+                  },
+                  child: widget.popoverBuilder(
+                    context,
+                    _controller,
+                    _popoverController,
+                    Content<T>(
+                      controller: _controller,
+                      style: style.contentStyle,
+                      enabled: widget.enabled,
+                      scrollController: widget.contentScrollController,
+                      physics: widget.contentPhysics,
+                      divider: widget.contentDivider,
+                      data: _data,
+                      loadingBuilder: widget.contentLoadingBuilder ?? (_, _) => const SizedBox.shrink(),
+                      builder: widget.contentBuilder,
+                      emptyBuilder: widget.contentEmptyBuilder ?? (_, _) => const SizedBox.shrink(),
+                      errorBuilder: widget.contentErrorBuilder ?? (_, _, _, _) => const SizedBox.shrink(),
+                    ),
                   ),
                 ),
               ),
@@ -1516,7 +1566,19 @@ class _State<T> extends State<FAutocomplete<T>> with TickerProviderStateMixin {
                   if (_controller.current != null && widget.rightArrowToComplete)
                     const SingleActivator(.arrowRight): _complete,
                 },
-                child: widget.builder(context, style, variants, field),
+                child: ListenableBuilder(
+                  listenable: Listenable.merge([_controller, _popoverController]),
+                  child: widget.builder(context, style, variants, field),
+                  builder: (context, child) {
+                    final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
+                    final completion = _controller.current;
+                    return Semantics(
+                      expanded: _popoverController.status.isForwardOrCompleted,
+                      hint: completion == null ? null : localizations.autocompleteSuggestion(completion.replacement),
+                      child: child,
+                    );
+                  },
+                ),
               ),
             ),
           ),

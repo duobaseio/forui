@@ -24,6 +24,16 @@ class FLocalizationsKa extends FLocalizations {
   String get autocompleteNoResults => 'შესაბამისობები ვერ იქნა ნაპოვნი.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count შედეგი ხელმისაწვდომია';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'შემოთავაზება: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'ჩანართი $tabIndex $tabCount-დან';
   }

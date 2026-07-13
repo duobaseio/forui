@@ -150,43 +150,52 @@ class _FSwitchState extends State<FSwitch> {
         : (FLabelLayout.horizontalTrailing, style.trailingLabelStyle);
 
     // The label is wrapped in a GestureDetector to improve affordance.
-    return GestureDetector(
-      onTap: widget.enabled ? () => widget.onChange?.call(!widget.value) : null,
-      child: Semantics(
-        label: widget.semanticsLabel,
-        enabled: widget.enabled,
-        toggled: widget.value,
-        child: FLabel(
-          layout: layout,
-          variants: formVariants,
-          style: labelStyle,
-          label: widget.label,
-          description: widget.description,
-          error: widget.error,
-          child: CupertinoSwitch(
-            value: widget.value,
-            onChanged: (value) {
-              if (!widget.enabled) {
-                return;
-              }
+    return MergeSemantics(
+      child: GestureDetector(
+        onTap: widget.enabled ? () => widget.onChange?.call(!widget.value) : null,
+        child: Semantics(
+          // A visible label merges in as the accessible name, otherwise the name is announced twice.
+          label: widget.label == null ? widget.semanticsLabel : null,
+          enabled: widget.enabled,
+          focusable: widget.enabled,
+          focused: widget.enabled ? _focused : null,
+          toggled: widget.value,
+          child: FLabel(
+            layout: layout,
+            variants: formVariants,
+            style: labelStyle,
+            label: widget.label,
+            description: widget.description,
+            error: widget.error,
+            // CupertinoSwitch emits its own toggle node; exclude it so the switch presents as a single merged node
+            // instead of announcing its state (and enabled/focus) twice.
+            child: ExcludeSemantics(
+              child: CupertinoSwitch(
+                value: widget.value,
+                onChanged: (value) {
+                  if (!widget.enabled) {
+                    return;
+                  }
 
-              widget.onChange?.call(value);
-            },
-            applyTheme: false,
-            activeTrackColor: style.trackColor.resolve(variants),
-            // Don't use [variants] as it always contains [.selected] but we want the unselected color.
-            inactiveTrackColor: style.trackColor.resolve(formVariants),
-            thumbColor: style.thumbColor.resolve(variants),
-            focusColor: style.focusColor,
-            autofocus: widget.autofocus,
-            focusNode: widget.focusNode,
-            onFocusChange: (focused) {
-              widget.onFocusChange?.call(focused);
-              if (_focused != focused) {
-                setState(() => _focused = focused);
-              }
-            },
-            dragStartBehavior: widget.dragStartBehavior,
+                  widget.onChange?.call(value);
+                },
+                applyTheme: false,
+                activeTrackColor: style.trackColor.resolve(variants),
+                // Don't use [variants] as it always contains [.selected] but we want the unselected color.
+                inactiveTrackColor: style.trackColor.resolve(formVariants),
+                thumbColor: style.thumbColor.resolve(variants),
+                focusColor: style.focusColor,
+                autofocus: widget.autofocus,
+                focusNode: widget.focusNode,
+                onFocusChange: (focused) {
+                  widget.onFocusChange?.call(focused);
+                  if (_focused != focused) {
+                    setState(() => _focused = focused);
+                  }
+                },
+                dragStartBehavior: widget.dragStartBehavior,
+              ),
+            ),
           ),
         ),
       ),

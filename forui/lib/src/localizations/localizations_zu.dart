@@ -24,6 +24,16 @@ class FLocalizationsZu extends FLocalizations {
   String get autocompleteNoResults => 'Akukho ukufana okutholiwe.';
 
   @override
+  String autocompleteResults(int count) {
+    return 'Imiphumela engu-$count iyatholakala';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Isiphakamiso: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Ithebhu $tabIndex kwangu-$tabCount';
   }

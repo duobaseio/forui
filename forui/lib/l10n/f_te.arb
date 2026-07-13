@@ -45,5 +45,7 @@
   "calendarShowYearPickerSemanticsHint": "సంవత్సర ఎంపికను చూపు",
   "calendarShowDaysSemanticsHint": "రోజులను చూపు",
   "timePickerHourSemanticsLabel": "గంట",
-  "timePickerMinuteSemanticsLabel": "నిమిషం"
+  "timePickerMinuteSemanticsLabel": "నిమిషం",
+  "autocompleteResults": "{count} ఫలితాలు అందుబాటులో ఉన్నాయి",
+  "autocompleteSuggestion": "సూచన: {suggestion}"
 }

@@ -24,6 +24,16 @@ class FLocalizationsPs extends FLocalizations {
   String get autocompleteNoResults => 'هیڅ میچ ونه موندل شو.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count پایلې شتون لري';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'وړاندیز: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'د $tabCount څخه $tabIndex ټب';
   }

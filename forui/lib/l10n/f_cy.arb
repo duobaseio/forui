@@ -46,5 +46,7 @@
   "calendarShowYearPickerSemanticsHint": "Dangos dewisydd blwyddyn",
   "calendarShowDaysSemanticsHint": "Dangos dyddiau",
   "timePickerHourSemanticsLabel": "Awr",
-  "timePickerMinuteSemanticsLabel": "Munud"
+  "timePickerMinuteSemanticsLabel": "Munud",
+  "autocompleteResults": "{count} canlyniad ar gael",
+  "autocompleteSuggestion": "Awgrym: {suggestion}"
 }

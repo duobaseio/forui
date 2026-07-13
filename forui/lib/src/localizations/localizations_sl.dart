@@ -24,6 +24,16 @@ class FLocalizationsSl extends FLocalizations {
   String get autocompleteNoResults => 'Ni ujemanj.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count razpoložljivih rezultatov';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Predlog: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Zavihek $tabIndex od $tabCount';
   }

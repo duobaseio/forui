@@ -24,6 +24,16 @@ class FLocalizationsVi extends FLocalizations {
   String get autocompleteNoResults => 'Không tìm thấy kết quả phù hợp.';
 
   @override
+  String autocompleteResults(int count) {
+    return 'Có $count kết quả';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Đề xuất: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Thẻ $tabIndex trong tổng số $tabCount';
   }

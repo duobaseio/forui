@@ -24,6 +24,16 @@ class FLocalizationsPl extends FLocalizations {
   String get autocompleteNoResults => 'Nie znaleziono dopasowań.';
 
   @override
+  String autocompleteResults(int count) {
+    return 'Dostępne wyniki: $count';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugestia: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Karta $tabIndex z $tabCount';
   }

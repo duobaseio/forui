@@ -304,6 +304,18 @@ abstract class FLocalizations {
   /// **'No matches found.'**
   String get autocompleteNoResults;
 
+  /// Announced to screen readers when autocomplete suggestions appear or their count changes, e.g. '3 results available'.
+  ///
+  /// In en, this message translates to:
+  /// **'{count, plural, =1{1 result available} other{{count} results available}}'**
+  String autocompleteResults(int count);
+
+  /// The semantic hint announcing the inline autocomplete completion, e.g. 'Suggestion: Apple'.
+  ///
+  /// In en, this message translates to:
+  /// **'Suggestion: {suggestion}'**
+  String autocompleteSuggestion(String suggestion);
+
   /// The semantic label announcing a bottom navigation bar item's position, e.g. 'Tab 1 of 3'.
   ///
   /// In en, this message translates to:

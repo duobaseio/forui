@@ -45,5 +45,7 @@
   "calendarShowYearPickerSemanticsHint": "વર્ષ પસંદગીકાર બતાવો",
   "calendarShowDaysSemanticsHint": "દિવસો બતાવો",
   "timePickerHourSemanticsLabel": "કલાક",
-  "timePickerMinuteSemanticsLabel": "મિનિટ"
+  "timePickerMinuteSemanticsLabel": "મિનિટ",
+  "autocompleteResults": "{count} પરિણામો ઉપલબ્ધ",
+  "autocompleteSuggestion": "સૂચન: {suggestion}"
 }

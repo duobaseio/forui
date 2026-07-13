@@ -46,5 +46,7 @@
   "calendarShowYearPickerSemanticsHint": "បង្ហាញកម្មវិធីជ្រើសរើសឆ្នាំ",
   "calendarShowDaysSemanticsHint": "បង្ហាញថ្ងៃ",
   "timePickerHourSemanticsLabel": "ម៉ោង",
-  "timePickerMinuteSemanticsLabel": "នាទី"
+  "timePickerMinuteSemanticsLabel": "នាទី",
+  "autocompleteResults": "លទ្ធផល {count} អាចប្រើបាន",
+  "autocompleteSuggestion": "សំណើ៖ {suggestion}"
 }

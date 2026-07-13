@@ -46,5 +46,7 @@
   "calendarShowYearPickerSemanticsHint": "Wys jaarkieser",
   "calendarShowDaysSemanticsHint": "Wys dae",
   "timePickerHourSemanticsLabel": "Uur",
-  "timePickerMinuteSemanticsLabel": "Minuut"
+  "timePickerMinuteSemanticsLabel": "Minuut",
+  "autocompleteResults": "{count} beskikbare resultate",
+  "autocompleteSuggestion": "Voorstel: {suggestion}"
 }

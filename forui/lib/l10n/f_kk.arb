@@ -45,5 +45,7 @@
   "calendarShowYearPickerSemanticsHint": "Жыл таңдағышын көрсету",
   "calendarShowDaysSemanticsHint": "Күндерді көрсету",
   "timePickerHourSemanticsLabel": "Сағат",
-  "timePickerMinuteSemanticsLabel": "Минут"
+  "timePickerMinuteSemanticsLabel": "Минут",
+  "autocompleteResults": "{count} нәтиже қолжетімді",
+  "autocompleteSuggestion": "Ұсыныс: {suggestion}"
 }

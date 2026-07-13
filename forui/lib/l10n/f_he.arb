@@ -45,5 +45,7 @@
   "calendarShowYearPickerSemanticsHint": "הצגת בורר השנה",
   "calendarShowDaysSemanticsHint": "הצגת הימים",
   "timePickerHourSemanticsLabel": "שעה",
-  "timePickerMinuteSemanticsLabel": "דקה"
+  "timePickerMinuteSemanticsLabel": "דקה",
+  "autocompleteResults": "{count} תוצאות זמינות",
+  "autocompleteSuggestion": "הצעה: {suggestion}"
 }

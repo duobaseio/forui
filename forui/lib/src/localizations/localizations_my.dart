@@ -24,6 +24,16 @@ class FLocalizationsMy extends FLocalizations {
   String get autocompleteNoResults => 'ကိုက်ညီသောရလဒ်များ မတွေ့ရှိပါ.';
 
   @override
+  String autocompleteResults(int count) {
+    return 'ရလဒ် $count ခု ရနိုင်ပါသည်';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'အကြံပြုချက်: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'တဘ် $tabCount ခုအနက် $tabIndex ခု';
   }

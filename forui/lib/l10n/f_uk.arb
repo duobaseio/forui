@@ -45,5 +45,7 @@
   "calendarShowYearPickerSemanticsHint": "Показати вибір року",
   "calendarShowDaysSemanticsHint": "Показати дні",
   "timePickerHourSemanticsLabel": "Години",
-  "timePickerMinuteSemanticsLabel": "Хвилини"
+  "timePickerMinuteSemanticsLabel": "Хвилини",
+  "autocompleteResults": "Доступно результатів: {count}",
+  "autocompleteSuggestion": "Пропозиція: {suggestion}"
 }

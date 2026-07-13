@@ -45,5 +45,7 @@
   "calendarShowYearPickerSemanticsHint": "연도 선택 도구 표시",
   "calendarShowDaysSemanticsHint": "일 표시",
   "timePickerHourSemanticsLabel": "시",
-  "timePickerMinuteSemanticsLabel": "분"
+  "timePickerMinuteSemanticsLabel": "분",
+  "autocompleteResults": "{count}개의 결과가 있습니다",
+  "autocompleteSuggestion": "제안: {suggestion}"
 }

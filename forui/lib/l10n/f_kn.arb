@@ -45,5 +45,7 @@
   "calendarShowYearPickerSemanticsHint": "ವರ್ಷ ಆಯ್ಕೆಗಾರವನ್ನು ತೋರಿಸಿ",
   "calendarShowDaysSemanticsHint": "ದಿನಗಳನ್ನು ತೋರಿಸಿ",
   "timePickerHourSemanticsLabel": "ಗಂಟೆ",
-  "timePickerMinuteSemanticsLabel": "ನಿಮಿಷ"
+  "timePickerMinuteSemanticsLabel": "ನಿಮಿಷ",
+  "autocompleteResults": "{count} ಫಲಿತಾಂಶಗಳು ಲಭ್ಯವಿದೆ",
+  "autocompleteSuggestion": "ಸಲಹೆ: {suggestion}"
 }

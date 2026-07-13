@@ -24,6 +24,16 @@ class FLocalizationsEt extends FLocalizations {
   String get autocompleteNoResults => 'Vasteid ei leitud.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count tulemust saadaval';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Soovitus: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return '$tabCount-st $tabIndex. vahekaart';
   }

@@ -24,6 +24,14 @@ automatically reduce or disable motion to match the OS's accessibility settings.
 * Add `FAlert.liveRegion`.
 
 
+### `FAutocomplete`
+* Change `FAutocomplete` to announce the number of suggestions to screen readers.
+
+* Fix `FAutocomplete` not exposing its expanded state to screen readers.
+* Fix `FAutocomplete` not announcing the inline completion to screen readers.
+* Fix `FAutocomplete` arrow keys not navigating past the first suggestion on web.
+
+
 ### `FAvatar`
 * Change `FAvatar` to skip its cross-fade when animations are disabled.
 
@@ -208,6 +216,10 @@ customize the widget directly instead of through the style API.
 * Change `FSidebarItem` to reveal instantly when motion is reduced or disabled, keeping its fade under reduced.
 
 * Fix collapsible `FSidebarItem` not exposing its expanded state.
+
+
+### `FSwitch`
+* Fix `FSwitch` announcing its state twice to screen readers.
 
 
 ### `FTabs`

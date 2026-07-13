@@ -24,6 +24,16 @@ class FLocalizationsSq extends FLocalizations {
   String get autocompleteNoResults => 'Nuk u gjetën përputhje.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count rezultate në dispozicion';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugjerim: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Skeda $tabIndex nga $tabCount';
   }

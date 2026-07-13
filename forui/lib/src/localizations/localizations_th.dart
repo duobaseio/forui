@@ -24,6 +24,16 @@ class FLocalizationsTh extends FLocalizations {
   String get autocompleteNoResults => 'ไม่พบรายการที่ตรงกัน.';
 
   @override
+  String autocompleteResults(int count) {
+    return 'มีผลลัพธ์ $count รายการ';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'คำแนะนำ: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'แท็บที่ $tabIndex จาก $tabCount';
   }

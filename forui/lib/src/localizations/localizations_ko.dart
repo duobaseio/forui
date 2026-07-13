@@ -24,6 +24,16 @@ class FLocalizationsKo extends FLocalizations {
   String get autocompleteNoResults => '일치하는 항목이 없습니다.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count개의 결과가 있습니다';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return '제안: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return '탭 $tabCount개 중 $tabIndex번째';
   }

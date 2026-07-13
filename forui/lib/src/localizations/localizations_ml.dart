@@ -24,6 +24,16 @@ class FLocalizationsMl extends FLocalizations {
   String get autocompleteNoResults => 'പൊരുത്തങ്ങളൊന്നും കണ്ടെത്തിയില്ല.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count ഫലങ്ങൾ ലഭ്യമാണ്';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'നിർദ്ദേശം: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return '$tabCount-ൽ $tabIndex ടാബ്';
   }

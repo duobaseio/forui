@@ -45,5 +45,7 @@
   "calendarShowYearPickerSemanticsHint": "Паказаць выбар года",
   "calendarShowDaysSemanticsHint": "Паказаць дні",
   "timePickerHourSemanticsLabel": "Гадзіна",
-  "timePickerMinuteSemanticsLabel": "Хвіліна"
+  "timePickerMinuteSemanticsLabel": "Хвіліна",
+  "autocompleteResults": "Даступна вынікаў: {count}",
+  "autocompleteSuggestion": "Прапанова: {suggestion}"
 }

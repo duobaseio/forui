@@ -24,6 +24,16 @@ class FLocalizationsAz extends FLocalizations {
   String get autocompleteNoResults => 'Heç bir uyğunluq tapılmadı.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count nəticə mövcuddur';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Təklif: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return '$tabCount tabdan $tabIndex';
   }

@@ -24,6 +24,16 @@ class FLocalizationsDa extends FLocalizations {
   String get autocompleteNoResults => 'Ingen resultater fundet.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count resultater tilgængelige';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Forslag: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Fane $tabIndex af $tabCount';
   }

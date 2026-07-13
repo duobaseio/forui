@@ -24,6 +24,16 @@ class FLocalizationsIs extends FLocalizations {
   String get autocompleteNoResults => 'Engar niðurstöður fundust.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count niðurstöður í boði';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Tillaga: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Flipi $tabIndex af $tabCount';
   }
