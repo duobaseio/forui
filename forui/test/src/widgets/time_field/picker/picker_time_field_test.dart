@@ -286,4 +286,29 @@ void main() {
       expect(find.text('13:30'), findsNothing);
     });
   });
+
+  group('accessibility', () {
+    testWidgets('trigger advertises a collapsed state when the picker is closed', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(TestScaffold.app(child: const FTimeField.picker(key: key)));
+
+      expect(tester.getSemantics(find.byType(EditableText)), isSemantics(hasExpandedState: true, isExpanded: false));
+
+      semantics.dispose();
+    });
+
+    testWidgets('trigger advertises an expanded state when the picker is open', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(TestScaffold.app(child: const FTimeField.picker(key: key)));
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      expect(tester.getSemantics(find.byType(EditableText)), isSemantics(hasExpandedState: true, isExpanded: true));
+
+      semantics.dispose();
+    });
+  });
 }

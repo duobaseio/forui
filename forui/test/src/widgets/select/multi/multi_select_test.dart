@@ -2,6 +2,8 @@ import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
+import 'package:flutter/services.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
@@ -556,5 +558,118 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(focused(), true);
+  });
+
+  group('accessibility', () {
+    testWidgets('trigger advertises a collapsed state when the popover is closed', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FMultiSelect<String>(key: key, items: letters),
+        ),
+      );
+
+      expect(tester.getSemantics(find.text('Select items')), isSemantics(hasExpandedState: true, isExpanded: false));
+
+      semantics.dispose();
+    });
+
+    testWidgets('trigger advertises an expanded state when the popover is open', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FMultiSelect<String>(key: key, items: letters),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      expect(tester.getSemantics(find.text('Select items')), isSemantics(hasExpandedState: true, isExpanded: true));
+
+      semantics.dispose();
+    });
+
+    SemanticsValidationResult validation(WidgetTester tester, Finder finder) {
+      SemanticsNode? node = tester.getSemantics(finder);
+      while (node != null) {
+        if (node.getSemanticsData().validationResult == SemanticsValidationResult.invalid) {
+          return SemanticsValidationResult.invalid;
+        }
+        node = node.parent;
+      }
+      return SemanticsValidationResult.none;
+    }
+
+    testWidgets('field exposes an invalid state when validation fails', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FMultiSelect<String>(
+            key: key,
+            items: letters,
+            autovalidateMode: AutovalidateMode.always,
+            validator: (_) => 'error',
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(validation(tester, find.text('Select items')), SemanticsValidationResult.invalid);
+
+      semantics.dispose();
+    });
+
+    testWidgets('field does not expose an invalid state when validation passes', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FMultiSelect<String>(
+            key: key,
+            items: letters,
+            autovalidateMode: AutovalidateMode.always,
+            validator: (_) => null,
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(validation(tester, find.text('Select items')), SemanticsValidationResult.none);
+
+      semantics.dispose();
+    });
+
+    for (final (activator, name) in [
+      (LogicalKeyboardKey.enter, 'Enter'),
+      (LogicalKeyboardKey.space, 'Space'),
+    ]) {
+      testWidgets('trigger opens the popover on $name', (tester) async {
+        final semantics = tester.ensureSemantics();
+        final focus = autoDispose(FocusNode());
+
+        await tester.pumpWidget(
+          TestScaffold.app(
+            platform: .macOS,
+            child: FMultiSelect<String>(key: key, items: letters, focusNode: focus),
+          ),
+        );
+
+        focus.requestFocus();
+        await tester.pump();
+
+        expect(tester.getSemantics(find.text('Select items')), isSemantics(hasExpandedState: true, isExpanded: false));
+
+        await tester.sendKeyEvent(activator);
+        await tester.pumpAndSettle();
+
+        expect(tester.getSemantics(find.text('Select items')), isSemantics(hasExpandedState: true, isExpanded: true));
+
+        semantics.dispose();
+      });
+    }
   });
 }

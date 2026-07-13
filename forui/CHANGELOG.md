@@ -105,6 +105,8 @@ customize the widget directly instead of through the style API.
 
 ### `FDateField`
 * Fix `FDateField.calendar` not displaying its selected date when driven by a lifted selection control.
+* Fix combined `FDateField` not dismissing its calendar on Escape while the input is focused.
+* Fix `FDateField` trigger not exposing its expanded state to screen readers.
 
 
 ### `FDateSelectionControl`
@@ -176,6 +178,7 @@ customize the widget directly instead of through the style API.
 * Change `FPopover` (and `FSelect`, `FAutocomplete`) to fade without scaling when motion is reduced.
 
 * Fix `FPopover` background filter overflowing its rounded bounds.
+* Fix `FPopover` not dismissing on Escape while focus is on the trigger.
 
 
 ### `FPopoverMenu`
@@ -202,6 +205,12 @@ customize the widget directly instead of through the style API.
 
 ### `FResizable`
 * Fix `FResizable` resetting regions to their initial sizes when the main-axis constraint changes (e.g. window resize).
+
+
+### `FSelect` & `FMultiSelect`
+* Fix `FSelect` and `FMultiSelect` trigger not exposing its expanded state.
+* Fix `FMultiSelect` not exposing its invalid state when validation fails.
+* Fix `FSelect` not opening on Space.
 
 
 ### `FSelectMenuTile`
@@ -247,6 +256,8 @@ customize the widget directly instead of through the style API.
 
 ### `FTimeField`
 * Change `hour24` to `bool?`. Defaults to `MediaQuery.alwaysUse24HourFormat`.
+
+* Fix `FTimeField.picker` trigger not exposing its expanded state to screen readers.
 
 
 ### `FTimePicker`

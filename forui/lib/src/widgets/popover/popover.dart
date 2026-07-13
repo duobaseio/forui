@@ -424,96 +424,110 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
       );
     }
 
-    return BackdropGroup(
-      child: FPortal(
-        control: .managed(controller: _controller.overlay),
-        constraints: widget.constraints,
-        portalAnchor: popoverAnchor,
-        childAnchor: childAnchor,
-        padding: style.popoverPadding,
-        spacing: widget.spacing,
-        overflow: widget.overflow,
-        useViewPadding: widget.useViewPadding,
-        useViewInsets: widget.useViewInsets,
-        offset: widget.offset,
-        barrier: style.barrierFilter == null
-            ? null
-            : (cutout) => TapRegion(
-                groupId: widget.groupId,
-                child: FAnimatedModalBarrier(
-                  cutout: widget.cutout ? cutout : null,
-                  cutoutBuilder: widget.cutoutBuilder,
-                  animation: _controller.fade,
-                  filter: style.barrierFilter!,
-                  semanticsLabel: widget.barrierSemanticsLabel ?? localizations.barrierLabel,
-                  barrierSemanticsDismissible: widget.barrierSemanticsDismissible,
-                  semanticsOnTapHint: localizations.barrierOnTapHint(localizations.popoverSemanticsLabel),
-                  onDismiss: widget.hideRegion == .none ? null : _hide,
-                ),
-              ),
-        portalBuilder: (context, _) {
-          Widget popover = Semantics(
-            label: widget.semanticsLabel,
-            container: true,
-            child: FocusScope(
-              autofocus: widget.autofocus ?? (style.barrierFilter != null),
-              node: _focusNode,
-              onFocusChange: widget.onFocusChange,
-              child: TapRegion(
-                groupId: _groupId,
-                onTapOutside: widget.hideRegion == .none || style.barrierFilter != null ? null : (_) => _hide(),
-                child: DecoratedBox(
-                  decoration: style.decoration,
-                  child: widget.popoverClipBehavior == .none
-                      ? widget.popoverBuilder(context, _controller)
-                      : ClipPath(
-                          clipBehavior: widget.popoverClipBehavior,
-                          clipper: InnerPathClipper(decoration: style.decoration, direction: direction),
-                          child: widget.popoverBuilder(context, _controller),
-                        ),
-                ),
-              ),
-            ),
-          );
+    return Focus(
+      canRequestFocus: false,
+      skipTraversal: true,
+      includeSemantics: false,
+      onKeyEvent: (node, event) {
+        // Dismiss on Escape from the trigger as well as the popover content when shown.
+        if (_controller.status.isForwardOrCompleted && const SingleActivator(.escape).accepts(event, .instance)) {
+          _hide();
+          return .handled;
+        }
 
-          if (motion != .disabled) {
-            popover = FadeTransition(opacity: _controller.fade, child: popover);
-          }
-
-          if (motion == .all) {
-            popover = ScaleTransition(
-              alignment: popoverAnchor.resolve(direction),
-              scale: _controller.scale,
-              child: popover,
-            );
-          }
-
-          // The background filter cannot be nested in a FadeTransition because of https://github.com/flutter/flutter/issues/31706.
-          if (style.backgroundFilter case final filter?) {
-            // Confine the filter to the decoration: `.passthrough` matches its size, `ClipPath` its rounded shape.
-            popover = Stack(
-              fit: .passthrough,
-              children: [
-                Positioned.fill(
-                  child: ClipPath(
-                    clipper: InnerPathClipper(decoration: style.decoration, direction: direction),
-                    child: AnimatedBuilder(
-                      animation: _controller.fade,
-                      builder: (_, _) => BackdropFilter(filter: filter(_controller.fade.value), child: Container()),
-                    ),
+        return .ignored;
+      },
+      child: BackdropGroup(
+        child: FPortal(
+          control: .managed(controller: _controller.overlay),
+          constraints: widget.constraints,
+          portalAnchor: popoverAnchor,
+          childAnchor: childAnchor,
+          padding: style.popoverPadding,
+          spacing: widget.spacing,
+          overflow: widget.overflow,
+          useViewPadding: widget.useViewPadding,
+          useViewInsets: widget.useViewInsets,
+          offset: widget.offset,
+          barrier: style.barrierFilter == null
+              ? null
+              : (cutout) => TapRegion(
+                  groupId: widget.groupId,
+                  child: FAnimatedModalBarrier(
+                    cutout: widget.cutout ? cutout : null,
+                    cutoutBuilder: widget.cutoutBuilder,
+                    animation: _controller.fade,
+                    filter: style.barrierFilter!,
+                    semanticsLabel: widget.barrierSemanticsLabel ?? localizations.barrierLabel,
+                    barrierSemanticsDismissible: widget.barrierSemanticsDismissible,
+                    semanticsOnTapHint: localizations.barrierOnTapHint(localizations.popoverSemanticsLabel),
+                    onDismiss: widget.hideRegion == .none ? null : _hide,
                   ),
                 ),
-                popover,
-              ],
+          portalBuilder: (context, _) {
+            Widget popover = Semantics(
+              label: widget.semanticsLabel,
+              container: true,
+              child: FocusScope(
+                autofocus: widget.autofocus ?? (style.barrierFilter != null),
+                node: _focusNode,
+                onFocusChange: widget.onFocusChange,
+                child: TapRegion(
+                  groupId: _groupId,
+                  onTapOutside: widget.hideRegion == .none || style.barrierFilter != null ? null : (_) => _hide(),
+                  child: DecoratedBox(
+                    decoration: style.decoration,
+                    child: widget.popoverClipBehavior == .none
+                        ? widget.popoverBuilder(context, _controller)
+                        : ClipPath(
+                            clipBehavior: widget.popoverClipBehavior,
+                            clipper: InnerPathClipper(decoration: style.decoration, direction: direction),
+                            child: widget.popoverBuilder(context, _controller),
+                          ),
+                  ),
+                ),
+              ),
             );
-          }
 
-          return CallbackShortcuts(
-            bindings: widget.shortcuts ?? {const SingleActivator(.escape): _hide},
-            child: popover,
-          );
-        },
-        child: child,
+            if (motion != .disabled) {
+              popover = FadeTransition(opacity: _controller.fade, child: popover);
+            }
+
+            if (motion == .all) {
+              popover = ScaleTransition(
+                alignment: popoverAnchor.resolve(direction),
+                scale: _controller.scale,
+                child: popover,
+              );
+            }
+
+            // The background filter cannot be nested in a FadeTransition because of https://github.com/flutter/flutter/issues/31706.
+            if (style.backgroundFilter case final filter?) {
+              // Confine the filter to the decoration: `.passthrough` matches its size, `ClipPath` its rounded shape.
+              popover = Stack(
+                fit: .passthrough,
+                children: [
+                  Positioned.fill(
+                    child: ClipPath(
+                      clipper: InnerPathClipper(decoration: style.decoration, direction: direction),
+                      child: AnimatedBuilder(
+                        animation: _controller.fade,
+                        builder: (_, _) => BackdropFilter(filter: filter(_controller.fade.value), child: Container()),
+                      ),
+                    ),
+                  ),
+                  popover,
+                ],
+              );
+            }
+
+            return CallbackShortcuts(
+              bindings: widget.shortcuts ?? {const SingleActivator(.escape): _hide},
+              child: popover,
+            );
+          },
+          child: child,
+        ),
       ),
     );
   }

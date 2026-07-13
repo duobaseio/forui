@@ -314,7 +314,11 @@ class _PickerPopover extends StatelessWidget {
         ),
       ),
     ),
-    child: child,
+    child: ListenableBuilder(
+      listenable: popoverController,
+      child: child,
+      builder: (_, child) => Semantics(expanded: popoverController.status.isForwardOrCompleted, child: child),
+    ),
   );
 
   void _hide() {
