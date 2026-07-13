@@ -1,10 +1,10 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart' hide Autocomplete, Badge, Dialog, TextField, Tooltip;
+import 'package:flutter/material.dart' hide Autocomplete, Badge, Dialog, Switch, TextField, Tooltip;
 
 import 'package:forui/forui.dart';
 import 'package:marionette_flutter/marionette_flutter.dart';
 
-import 'widgets/tabs.dart';
+import 'widgets/switch.dart';
 
 void main() {
   if (kDebugMode) {
@@ -30,7 +30,7 @@ class Application extends StatelessWidget {
         data: theme,
         child: FToaster(child: FTooltipGroup(child: child!)),
       ),
-      home: const FScaffold(child: Tabs()),
+      home: const FScaffold(child: Switch()),
     );
   }
 }
