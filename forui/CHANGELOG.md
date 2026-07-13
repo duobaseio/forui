@@ -20,6 +20,10 @@ automatically reduce or disable motion to match the OS's accessibility settings.
 * Fix `FAccordionItem` header not exposing its expanded state.
 
 
+### `FAlert`
+* Add `FAlert.liveRegion`.
+
+
 ### `FAvatar`
 * Change `FAvatar` to skip its cross-fade when animations are disabled.
 
@@ -105,6 +109,7 @@ customize the widget directly instead of through the style API.
 
 ### `FDateTimePicker`
 * Change `hour24` to `bool?`. Defaults to `MediaQuery.alwaysUse24HourFormat`.
+* Change `FDateTimePicker` wheels to expose adjustable value and label semantics to screen readers.
 
 
 ### `FDeterminateProgress`
@@ -153,7 +158,10 @@ customize the widget directly instead of through the style API.
 
 
 ### `FPicker`
+* Add `FPickerWheel.semanticsLabel` and `FPickerWheel.semanticsValueBuilder`.
+
 * Change `FPicker` to jump to selected items when motion is reduced or disabled.
+* Change `FPickerWheel` to expose adjustable value and label semantics to screen readers.
 
 
 ### `FPopover`
@@ -231,6 +239,7 @@ customize the widget directly instead of through the style API.
 
 ### `FTimePicker`
 * Change `hour24` to `bool?`. Defaults to `MediaQuery.alwaysUse24HourFormat`.
+* Change `FTimePicker` wheels to expose adjustable value and label semantics to screen readers.
 
 
 ### `FToast`

@@ -53,6 +53,9 @@ class FAlert extends StatelessWidget {
   /// ```
   final FAlertStyleDelta style;
 
+  /// Whether screen readers announce the alert when it appears or changes. Defaults to true.
+  final bool liveRegion;
+
   /// The clip behavior applied to the alert's content.
   ///
   /// When set to a value other than [Clip.none], the alert's content is clipped to the inner path of its decoration,
@@ -83,46 +86,51 @@ class FAlert extends StatelessWidget {
   /// ```
   const FAlert({
     required this.title,
+    this.variant = .primary,
+    this.style = const .context(),
+    this.liveRegion = true,
     this.clipBehavior = .none,
     this.icon,
     this.subtitle,
-    this.variant = .primary,
-    this.style = const .context(),
     super.key,
   });
 
   @override
   Widget build(BuildContext context) {
     final style = this.style(context.theme.alertStyles.resolve({variant, context.platformVariant}));
-    final Widget content = Padding(
-      padding: style.padding,
-      child: Column(
-        mainAxisSize: .min,
-        children: [
-          Row(
-            children: [
-              IconTheme(data: style.iconStyle, child: icon ?? context.theme.icons.circleAlert(context)),
-              Flexible(
-                child: Padding(
-                  padding: const .only(left: 10),
-                  child: DefaultTextStyle.merge(style: style.titleTextStyle, child: title),
-                ),
-              ),
-            ],
-          ),
-          if (subtitle case final subtitle?)
+    final Widget content = Semantics(
+      container: true,
+      liveRegion: liveRegion,
+      child: Padding(
+        padding: style.padding,
+        child: Column(
+          mainAxisSize: .min,
+          children: [
             Row(
               children: [
-                SizedBox(width: style.iconStyle.size),
+                IconTheme(data: style.iconStyle, child: icon ?? context.theme.icons.circleAlert(context)),
                 Flexible(
                   child: Padding(
-                    padding: const .only(top: 2, left: 10),
-                    child: DefaultTextStyle.merge(style: style.subtitleTextStyle, child: subtitle),
+                    padding: const .only(left: 10),
+                    child: DefaultTextStyle.merge(style: style.titleTextStyle, child: title),
                   ),
                 ),
               ],
             ),
-        ],
+            if (subtitle case final subtitle?)
+              Row(
+                children: [
+                  SizedBox(width: style.iconStyle.size),
+                  Flexible(
+                    child: Padding(
+                      padding: const .only(top: 2, left: 10),
+                      child: DefaultTextStyle.merge(style: style.subtitleTextStyle, child: subtitle),
+                    ),
+                  ),
+                ],
+              ),
+          ],
+        ),
       ),
     );
 
@@ -147,7 +155,8 @@ class FAlert extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('variant', variant))
       ..add(DiagnosticsProperty('style', style))
-      ..add(EnumProperty('clipBehavior', clipBehavior));
+      ..add(EnumProperty('clipBehavior', clipBehavior))
+      ..add(FlagProperty('liveRegion', value: liveRegion, ifTrue: 'liveRegion'));
   }
 }
 
