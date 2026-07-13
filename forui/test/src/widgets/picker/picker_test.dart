@@ -1,3 +1,4 @@
+import 'package:flutter/semantics.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -180,5 +181,88 @@ void main() {
 
     expect(tester.takeException(), null);
     expect(value.length, 2);
+  });
+
+  group('accessibility', () {
+    testWidgets('wheel with semanticsValueBuilder is adjustable', (tester) async {
+      final semantics = tester.ensureSemantics();
+      final controller = autoDispose(FPickerController(indexes: [1]));
+
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FPicker(
+            control: .managed(controller: controller),
+            children: [
+              FPickerWheel(
+                semanticsLabel: 'Letter',
+                semanticsValueBuilder: (index) => const ['A', 'B', 'C'][index],
+                children: const [Text('A'), Text('B'), Text('C')],
+              ),
+            ],
+          ),
+        ),
+      );
+
+      expect(find.semantics.byLabel('Letter'), findsOne);
+      expect(
+        tester.getSemantics(find.bySemanticsLabel('Letter')),
+        isSemantics(
+          label: 'Letter',
+          value: 'B',
+          increasedValue: 'C',
+          decreasedValue: 'A',
+          isFocusable: true,
+          hasIncreaseAction: true,
+          hasDecreaseAction: true,
+        ),
+      );
+
+      final node = tester.getSemantics(find.bySemanticsLabel('Letter'));
+      node.owner!.performAction(node.id, SemanticsAction.decrease);
+      await tester.pumpAndSettle();
+
+      expect(controller.value, [0]);
+
+      semantics.dispose();
+    });
+
+    testWidgets('wheel without semanticsValueBuilder keeps default item semantics', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold(
+          child: const FPicker(
+            children: [
+              FPickerWheel(children: [Text('A'), Text('B'), Text('C')]),
+            ],
+          ),
+        ),
+      );
+
+      expect(tester.getSemantics(find.text('A')), isSemantics(isInMutuallyExclusiveGroup: true));
+      expect(find.semantics.byAction(SemanticsAction.increase), findsNothing);
+
+      semantics.dispose();
+    });
+
+    testWidgets('wheel with only semanticsLabel names the group and keeps items readable', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold(
+          child: const FPicker(
+            children: [
+              FPickerWheel(semanticsLabel: 'Letters', children: [Text('A'), Text('B'), Text('C')]),
+            ],
+          ),
+        ),
+      );
+
+      expect(tester.getSemantics(find.bySemanticsLabel('Letters')), isSemantics(label: 'Letters'));
+      expect(tester.getSemantics(find.text('A')), isSemantics(isInMutuallyExclusiveGroup: true));
+      expect(find.semantics.byAction(SemanticsAction.increase), findsNothing);
+
+      semantics.dispose();
+    });
   });
 }

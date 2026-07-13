@@ -1,3 +1,4 @@
+import 'package:flutter/semantics.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -206,6 +207,74 @@ void main() {
       );
 
       expect(controller.hours24, false);
+    });
+  });
+
+  group('accessibility', () {
+    Widget picker(FTimePickerController controller) =>
+        TestScaffold.app(locale: const Locale('en'), child: FTimePicker(control: .managed(controller: controller)));
+
+    testWidgets('hour, minute, and period wheels expose adjustable semantics', (tester) async {
+      final semantics = tester.ensureSemantics();
+      final controller = autoDispose(FTimePickerController(time: const FTime(10, 30)));
+      await tester.pumpWidget(picker(controller));
+
+      expect(
+        tester.getSemantics(find.bySemanticsLabel('Hour')),
+        isSemantics(
+          label: 'Hour',
+          value: '10',
+          increasedValue: '11',
+          decreasedValue: '9',
+          isFocusable: true,
+          hasIncreaseAction: true,
+          hasDecreaseAction: true,
+        ),
+      );
+      expect(
+        tester.getSemantics(find.bySemanticsLabel('Minute')),
+        isSemantics(
+          label: 'Minute',
+          value: '30',
+          increasedValue: '31',
+          decreasedValue: '29',
+          isFocusable: true,
+          hasIncreaseAction: true,
+          hasDecreaseAction: true,
+        ),
+      );
+      expect(find.semantics.byValue('AM'), findsOne);
+      expect(find.semantics.byLabel(':'), findsNothing);
+
+      semantics.dispose();
+    });
+
+    testWidgets('increase action increments the hour', (tester) async {
+      final semantics = tester.ensureSemantics();
+      final controller = autoDispose(FTimePickerController(time: const FTime(10, 30)));
+      await tester.pumpWidget(picker(controller));
+
+      final node = tester.getSemantics(find.bySemanticsLabel('Hour'));
+      node.owner!.performAction(node.id, SemanticsAction.increase);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      expect(controller.value, const FTime(11, 30));
+
+      semantics.dispose();
+    });
+
+    testWidgets('decrease action decrements the minute', (tester) async {
+      final semantics = tester.ensureSemantics();
+      final controller = autoDispose(FTimePickerController(time: const FTime(10, 30)));
+      await tester.pumpWidget(picker(controller));
+
+      final node = tester.getSemantics(find.bySemanticsLabel('Minute'));
+      node.owner!.performAction(node.id, SemanticsAction.decrease);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      expect(controller.value, const FTime(10, 29));
+
+      semantics.dispose();
     });
   });
 }

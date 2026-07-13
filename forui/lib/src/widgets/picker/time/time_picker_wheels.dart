@@ -126,6 +126,7 @@ class Western12Picker extends _Picker {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
     // Do NOT try to separate the date returned by format by whitespace. Locales may use NNBSP or have no separators.
     // ISTG if there's a locale that inserts the period in the middle of the time...
     final period = DateFormat('a', timeFormat.locale);
@@ -144,15 +145,22 @@ class Western12Picker extends _Picker {
         offset: dateWheels.length,
         child: FPickerWheel.builder(
           flex: hourFlex,
+          semanticsLabel: localizations.timePickerHourSemanticsLabel,
+          semanticsValueBuilder: (index) {
+            final hour = (index * hourInterval) % 12;
+            return '${hour == 0 ? 12 : hour}';
+          },
           builder: (_, index) {
             final hour = (index * hourInterval) % 12;
             return Padding(padding: hourPadding, child: Text('${hour == 0 ? 12 : hour}'.padLeft(padding, '0')));
           },
         ),
       ),
-      const Text(':'),
+      const ExcludeSemantics(child: Text(':')),
       FPickerWheel.builder(
         flex: minuteFlex,
+        semanticsLabel: localizations.timePickerMinuteSemanticsLabel,
+        semanticsValueBuilder: (index) => '${(index * minuteInterval) % 60}',
         builder: (_, index) =>
             Padding(padding: minutePadding, child: Text('${(index * minuteInterval) % 60}'.padLeft(2, '0'))),
       ),
@@ -160,6 +168,7 @@ class Western12Picker extends _Picker {
 
     final periodPicker = FPickerWheel(
       flex: periodFlex,
+      semanticsValueBuilder: (index) => period.format(.utc(1970, 1, 1, index == 0 ? 1 : 13)),
       children: [
         Padding(padding: periodPadding, child: Text(period.format(.utc(1970, 1, 1, 1)))),
         Padding(padding: periodPadding, child: Text(period.format(.utc(1970, 1, 1, 13)))),
@@ -201,24 +210,31 @@ class Western24Picker extends _Picker {
   });
 
   @override
-  Widget build(BuildContext context) => FPicker(
-    control: .managed(controller: controller.picker),
-    style: style,
-    debugLabel: debugLabel,
-    children: [
-      ...dateWheels,
-      FPickerWheel.builder(
-        flex: hourFlex,
-        builder: (_, index) =>
-            Padding(padding: start, child: Text('${(index * hourInterval) % 24}'.padLeft(padding, '0'))),
-      ),
-      const Text(':'),
-      FPickerWheel.builder(
-        flex: minuteFlex,
-        builder: (_, index) => Padding(padding: end, child: Text('${(index * minuteInterval) % 60}'.padLeft(2, '0'))),
-      ),
-    ],
-  );
+  Widget build(BuildContext context) {
+    final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
+    return FPicker(
+      control: .managed(controller: controller.picker),
+      style: style,
+      debugLabel: debugLabel,
+      children: [
+        ...dateWheels,
+        FPickerWheel.builder(
+          flex: hourFlex,
+          semanticsLabel: localizations.timePickerHourSemanticsLabel,
+          semanticsValueBuilder: (index) => '${(index * hourInterval) % 24}',
+          builder: (_, index) =>
+              Padding(padding: start, child: Text('${(index * hourInterval) % 24}'.padLeft(padding, '0'))),
+        ),
+        const ExcludeSemantics(child: Text(':')),
+        FPickerWheel.builder(
+          flex: minuteFlex,
+          semanticsLabel: localizations.timePickerMinuteSemanticsLabel,
+          semanticsValueBuilder: (index) => '${(index * minuteInterval) % 60}',
+          builder: (_, index) => Padding(padding: end, child: Text('${(index * minuteInterval) % 60}'.padLeft(2, '0'))),
+        ),
+      ],
+    );
+  }
 }
 
 @internal
@@ -244,6 +260,7 @@ class Eastern12Picker extends _Picker {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
     // Do NOT try to separate the date returned by format by whitespace. Locales may use NNBSP or have no separators.
     // ISTG if there's a locale that inserts the period in the middle of the time...
     final period = DateFormat('a', timeFormat.locale);
@@ -262,15 +279,21 @@ class Eastern12Picker extends _Picker {
         offset: dateWheels.length,
         child: FPickerWheel.builder(
           flex: hourFlex,
+          semanticsLabel: localizations.timePickerHourSemanticsLabel,
+          semanticsValueBuilder: (index) =>
+              timeFormat.format(DateTime(1970, 1, 1, (index * hourInterval) % 12)).split(':').first,
           builder: (_, index) {
             final time = timeFormat.format(DateTime(1970, 1, 1, (index * hourInterval) % 12));
             return Padding(padding: hourPadding, child: Text(time.split(':').first));
           },
         ),
       ),
-      const Text(':'),
+      const ExcludeSemantics(child: Text(':')),
       FPickerWheel.builder(
         flex: minuteFlex,
+        semanticsLabel: localizations.timePickerMinuteSemanticsLabel,
+        semanticsValueBuilder: (index) =>
+            timeFormat.format(DateTime(1970, 1, 1, 0, (index * minuteInterval) % 60)).split(':').last.split(' ').first,
         builder: (_, index) {
           final time = timeFormat.format(DateTime(1970, 1, 1, 0, (index * minuteInterval) % 60));
           return Padding(padding: minutePadding, child: Text(time.split(':').last.split(' ').first));
@@ -280,6 +303,7 @@ class Eastern12Picker extends _Picker {
 
     final periodPicker = FPickerWheel(
       flex: periodFlex,
+      semanticsValueBuilder: (index) => period.format(.utc(1970, 1, 1, index == 0 ? 1 : 13)),
       children: [
         Padding(padding: periodPadding, child: Text(period.format(.utc(1970, 1, 1, 1)))),
         Padding(padding: periodPadding, child: Text(period.format(.utc(1970, 1, 1, 13)))),
@@ -321,27 +345,40 @@ class Eastern24Picker extends _Picker {
   });
 
   @override
-  Widget build(BuildContext context) => FPicker(
-    control: .managed(controller: controller.picker),
-    style: style,
-    debugLabel: debugLabel,
-    children: [
-      ...dateWheels,
-      FPickerWheel.builder(
-        flex: hourFlex,
-        builder: (_, index) {
-          final time = timeFormat.format(DateTime(1970, 1, 1, (index * hourInterval) % 24));
-          return Padding(padding: start, child: Text(time.split(':').first));
-        },
-      ),
-      const Text(':'),
-      FPickerWheel.builder(
-        flex: minuteFlex,
-        builder: (_, index) {
-          final time = timeFormat.format(DateTime(1970, 1, 1, (index * minuteInterval) % minuteInterval));
-          return Padding(padding: end, child: Text(time.split(':').last.split(' ').first));
-        },
-      ),
-    ],
-  );
+  Widget build(BuildContext context) {
+    final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
+    return FPicker(
+      control: .managed(controller: controller.picker),
+      style: style,
+      debugLabel: debugLabel,
+      children: [
+        ...dateWheels,
+        FPickerWheel.builder(
+          flex: hourFlex,
+          semanticsLabel: localizations.timePickerHourSemanticsLabel,
+          semanticsValueBuilder: (index) =>
+              timeFormat.format(DateTime(1970, 1, 1, (index * hourInterval) % 24)).split(':').first,
+          builder: (_, index) {
+            final time = timeFormat.format(DateTime(1970, 1, 1, (index * hourInterval) % 24));
+            return Padding(padding: start, child: Text(time.split(':').first));
+          },
+        ),
+        const ExcludeSemantics(child: Text(':')),
+        FPickerWheel.builder(
+          flex: minuteFlex,
+          semanticsLabel: localizations.timePickerMinuteSemanticsLabel,
+          semanticsValueBuilder: (index) => timeFormat
+              .format(DateTime(1970, 1, 1, (index * minuteInterval) % minuteInterval))
+              .split(':')
+              .last
+              .split(' ')
+              .first,
+          builder: (_, index) {
+            final time = timeFormat.format(DateTime(1970, 1, 1, (index * minuteInterval) % minuteInterval));
+            return Padding(padding: end, child: Text(time.split(':').last.split(' ').first));
+          },
+        ),
+      ],
+    );
+  }
 }

@@ -10,7 +10,7 @@ import 'package:sugar/sugar.dart' hide Offset;
 import 'package:forui/forui.dart';
 import 'package:forui/src/localizations/localization.dart';
 import 'package:forui/src/widgets/picker/date_time/date_time_picker_controller.dart';
-import 'package:forui/src/widgets/picker/date_time_picker.dart';
+import 'package:forui/src/widgets/picker/time/time_picker_wheels.dart';
 
 part 'date_time_picker.design.dart';
 
@@ -124,6 +124,7 @@ class FDateTimePicker extends StatefulWidget {
 class _FDateTimePickerState extends State<FDateTimePicker> {
   late FDateTimePickerController _controller;
   late DateFormat _dateFormat;
+  late DateFormat _dateSemanticsFormat;
   late DateFormat _timeFormat;
   late int _padding;
   bool _initialized = false;
@@ -172,6 +173,7 @@ class _FDateTimePickerState extends State<FDateTimePicker> {
   void _locale() {
     final locale = FLocalizations.of(context) ?? FDefaultLocalizations();
     _dateFormat = .MMMEd(locale.localeName);
+    _dateSemanticsFormat = .yMMMMEEEEd(locale.localeName);
     _timeFormat = widget.hour24 ?? MediaQuery.alwaysUse24HourFormatOf(context)
         ? .Hm(locale.localeName)
         : .jm(locale.localeName);
@@ -192,6 +194,8 @@ class _FDateTimePickerState extends State<FDateTimePicker> {
     final dateWheels = [
       FPickerWheel.builder(
         flex: style.dateFlex,
+        semanticsValueBuilder: (index) =>
+            _dateSemanticsFormat.format(_controller.referenceDate.add(Duration(days: index * _controller.dayInterval))),
         builder: (_, index) {
           final date = _controller.referenceDate.add(Duration(days: index * _controller.dayInterval));
           return Padding(padding: start, child: widget.dateBuilder(context, date, _dateFormat));

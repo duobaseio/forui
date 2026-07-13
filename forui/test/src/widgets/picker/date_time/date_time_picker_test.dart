@@ -1,7 +1,9 @@
+import 'package:flutter/semantics.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:intl/intl.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/picker/date_time/date_time_picker_controller.dart';
@@ -200,6 +202,47 @@ void main() {
       );
 
       expect(controller.hours24, false);
+    });
+  });
+
+  group('accessibility', () {
+    Widget picker(FDateTimePickerController controller) => TestScaffold.app(
+      locale: const Locale('en'),
+      child: SizedBox(width: 400, height: 300, child: FDateTimePicker(control: .managed(controller: controller))),
+    );
+
+    testWidgets('date, hour, and minute wheels expose adjustable semantics', (tester) async {
+      final semantics = tester.ensureSemantics();
+      final controller = autoDispose(FDateTimePickerController(dateTime: DateTime(2026, 4, 8, 10, 30)));
+      await tester.pumpWidget(picker(controller));
+
+      expect(find.semantics.byValue(DateFormat.yMMMMEEEEd('en').format(DateTime.utc(2026, 4, 8))), findsOne);
+      expect(
+        tester.getSemantics(find.bySemanticsLabel('Hour')),
+        isSemantics(label: 'Hour', value: '10', isFocusable: true, hasIncreaseAction: true, hasDecreaseAction: true),
+      );
+      expect(
+        tester.getSemantics(find.bySemanticsLabel('Minute')),
+        isSemantics(label: 'Minute', value: '30', isFocusable: true, hasIncreaseAction: true, hasDecreaseAction: true),
+      );
+      expect(find.semantics.byLabel(':'), findsNothing);
+
+      semantics.dispose();
+    });
+
+    testWidgets('increase action advances the date by a day', (tester) async {
+      final semantics = tester.ensureSemantics();
+      final controller = autoDispose(FDateTimePickerController(dateTime: DateTime(2026, 4, 8, 10, 30)));
+      await tester.pumpWidget(picker(controller));
+
+      final date = DateFormat.yMMMMEEEEd('en').format(DateTime.utc(2026, 4, 8));
+      final node = find.semantics.byValue(date).evaluate().single;
+      node.owner!.performAction(node.id, SemanticsAction.increase);
+      await tester.pumpAndSettle(const Duration(seconds: 1));
+
+      expect(controller.value, DateTime(2026, 4, 9, 10, 30));
+
+      semantics.dispose();
     });
   });
 }
