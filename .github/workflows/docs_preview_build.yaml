@@ -61,7 +61,10 @@ jobs:
           node-version: 24
       - uses: pnpm/action-setup@v6
         with:
-          version: 11
+          # Pinned: pnpm 11.12.0 crashes action-setup with "Cannot use 'in' operator to
+          # search for 'integrity' in undefined". Hold at the last known-good release.
+          # See https://github.com/pnpm/action-setup/issues/276
+          version: '11.10.0'
       - working-directory: ./docs
         run: pnpm install
       - working-directory: ./docs
