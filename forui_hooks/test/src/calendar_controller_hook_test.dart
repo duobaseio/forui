@@ -12,6 +12,7 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
+        builder: (_, child) => FTheme(data: FTheme.neutral.light.touch, child: child!),
         home: HookBuilder(
           builder: (context) {
             controller = useFGridCalendarController(start: DateTime.utc(1900), end: DateTime.utc(2100));
@@ -35,6 +36,7 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
+        builder: (_, child) => FTheme(data: FTheme.neutral.light.touch, child: child!),
         home: HookBuilder(
           builder: (context) {
             controller = useFGridSplitCalendarController(start: DateTime.utc(1900), end: DateTime.utc(2100));
@@ -58,6 +60,7 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
+        builder: (_, child) => FTheme(data: FTheme.neutral.light.touch, child: child!),
         home: HookBuilder(
           builder: (context) {
             controller = useFWheelCalendarController(start: DateTime.utc(1900), end: DateTime.utc(2100));
