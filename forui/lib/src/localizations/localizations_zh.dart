@@ -24,6 +24,16 @@ class FLocalizationsZh extends FLocalizations {
   String get autocompleteNoResults => '未找到匹配项.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count 个结果可用';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return '建议：$suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return '第 $tabIndex 个标签，共 $tabCount 个';
   }
@@ -45,6 +55,21 @@ class FLocalizationsZh extends FLocalizations {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => '前几年';
+
+  @override
+  String get calendarShowDaysSemanticsHint => '显示日期';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => '显示月份选择器';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => '显示月份和年份选择器';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => '显示年份选择器';
+
+  @override
+  String get calendarTodaySemanticsLabel => '今天';
 
   @override
   String get contextMenuSemanticsLabel => '上下文菜单';
@@ -135,6 +160,12 @@ class FLocalizationsZh extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => '无效的时间。';
+
+  @override
+  String get timePickerHourSemanticsLabel => '小时';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => '分钟';
 }
 
 /// The translations for Chinese, as used in Hong Kong (`zh_HK`).
@@ -151,6 +182,16 @@ class FLocalizationsZhHk extends FLocalizationsZh {
 
   @override
   String get autocompleteNoResults => '未找到匹配項.';
+
+  @override
+  String autocompleteResults(int count) {
+    return '$count 個結果可用';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return '建議：$suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
@@ -174,6 +215,21 @@ class FLocalizationsZhHk extends FLocalizationsZh {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => '前幾年';
+
+  @override
+  String get calendarShowDaysSemanticsHint => '顯示日期';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => '顯示月份選擇器';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => '顯示月份和年份選擇器';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => '顯示年份選擇器';
+
+  @override
+  String get calendarTodaySemanticsLabel => '今天';
 
   @override
   String get contextMenuSemanticsLabel => '快捷選單';
@@ -264,6 +320,12 @@ class FLocalizationsZhHk extends FLocalizationsZh {
 
   @override
   String get timeFieldInvalidDateError => '無效的時間。';
+
+  @override
+  String get timePickerHourSemanticsLabel => '小時';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => '分鐘';
 }
 
 /// The translations for Chinese, as used in Taiwan (`zh_TW`).
@@ -280,6 +342,16 @@ class FLocalizationsZhTw extends FLocalizationsZh {
 
   @override
   String get autocompleteNoResults => '未找到匹配項.';
+
+  @override
+  String autocompleteResults(int count) {
+    return '$count 個結果可用';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return '建議：$suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
@@ -303,6 +375,21 @@ class FLocalizationsZhTw extends FLocalizationsZh {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => '前幾年';
+
+  @override
+  String get calendarShowDaysSemanticsHint => '顯示日期';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => '顯示月份選擇器';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => '顯示月份和年份選擇器';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => '顯示年份選擇器';
+
+  @override
+  String get calendarTodaySemanticsLabel => '今天';
 
   @override
   String get contextMenuSemanticsLabel => '快捷選單';
@@ -393,4 +480,10 @@ class FLocalizationsZhTw extends FLocalizationsZh {
 
   @override
   String get timeFieldInvalidDateError => '無效的時間。';
+
+  @override
+  String get timePickerHourSemanticsLabel => '小時';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => '分鐘';
 }

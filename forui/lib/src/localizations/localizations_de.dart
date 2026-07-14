@@ -24,6 +24,16 @@ class FLocalizationsDe extends FLocalizations {
   String get autocompleteNoResults => 'Keine Übereinstimmungen gefunden.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count Ergebnisse verfügbar';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Vorschlag: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Tab $tabIndex von $tabCount';
   }
@@ -45,6 +55,21 @@ class FLocalizationsDe extends FLocalizations {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Vorherige Jahre';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Tage anzeigen';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Monatsauswahl anzeigen';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Monats- und Jahresauswahl anzeigen';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Jahresauswahl anzeigen';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Heute';
 
   @override
   String get contextMenuSemanticsLabel => 'Kontextmenü';
@@ -135,6 +160,12 @@ class FLocalizationsDe extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Ungültige Uhrzeit.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Stunde';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minute';
 }
 
 /// The translations for German, as used in Switzerland (`de_CH`).
@@ -143,6 +174,16 @@ class FLocalizationsDeCh extends FLocalizationsDe {
 
   @override
   String get autocompleteNoResults => 'Keine Übereinstimmungen gefunden.';
+
+  @override
+  String autocompleteResults(int count) {
+    return '$count Ergebnisse verfügbar';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Vorschlag: $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
@@ -166,6 +207,21 @@ class FLocalizationsDeCh extends FLocalizationsDe {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Vorherige Jahre';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Tage anzeigen';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Monatsauswahl anzeigen';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Monats- und Jahresauswahl anzeigen';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Jahresauswahl anzeigen';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Heute';
 
   @override
   String get contextMenuSemanticsLabel => 'Kontextmenü';
@@ -253,4 +309,10 @@ class FLocalizationsDeCh extends FLocalizationsDe {
 
   @override
   String get timeFieldInvalidDateError => 'Ungültige Zeit.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Stunde';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minute';
 }

@@ -24,6 +24,16 @@ class FLocalizationsAm extends FLocalizations {
   String get autocompleteNoResults => 'ማንኛውም ውጤት አልተገኘም.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count ውጤቶች ይገኛሉ';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'ጥቆማ: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'ትር $tabIndex ከ$tabCount';
   }
@@ -45,6 +55,21 @@ class FLocalizationsAm extends FLocalizations {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'ያለፉት ዓመታት';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'ቀኖችን አሳይ';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'የወር መራጭ አሳይ';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'የወርና የዓመት መራጭ አሳይ';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'የዓመት መራጭ አሳይ';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'ዛሬ';
 
   @override
   String get contextMenuSemanticsLabel => 'የአውድ ምናሌ';
@@ -135,4 +160,10 @@ class FLocalizationsAm extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'ልክ ያልሆነ ሰዓት።';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'ሰዓት';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'ደቂቃ';
 }

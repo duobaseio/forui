@@ -24,6 +24,16 @@ class FLocalizationsHe extends FLocalizations {
   String get autocompleteNoResults => 'לא נמצאו התאמות.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count תוצאות זמינות';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'הצעה: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'כרטיסייה $tabIndex מתוך $tabCount';
   }
@@ -45,6 +55,21 @@ class FLocalizationsHe extends FLocalizations {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'השנים הקודמות';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'הצגת הימים';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'הצגת בורר החודש';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'הצגת בורר החודש והשנה';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'הצגת בורר השנה';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'היום';
 
   @override
   String get contextMenuSemanticsLabel => 'תפריט הקשר';
@@ -135,4 +160,10 @@ class FLocalizationsHe extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'שעה לא חוקית.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'שעה';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'דקה';
 }

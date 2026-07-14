@@ -38,5 +38,14 @@
   "calendarPreviousYearsSemanticsLabel": "మునుపటి సంవత్సరాలు",
   "headerBackSemanticsLabel": "వెనుకకు",
   "headerCloseSemanticsLabel": "మూసివేయి",
-  "bottomNavigationBarTabSemanticsLabel": "{tabCount}లో {tabIndex} ట్యాబ్"
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount}లో {tabIndex} ట్యాబ్",
+  "calendarTodaySemanticsLabel": "ఈ రోజు",
+  "calendarShowMonthYearPickerSemanticsHint": "నెల మరియు సంవత్సర ఎంపికను చూపు",
+  "calendarShowMonthPickerSemanticsHint": "నెల ఎంపికను చూపు",
+  "calendarShowYearPickerSemanticsHint": "సంవత్సర ఎంపికను చూపు",
+  "calendarShowDaysSemanticsHint": "రోజులను చూపు",
+  "timePickerHourSemanticsLabel": "గంట",
+  "timePickerMinuteSemanticsLabel": "నిమిషం",
+  "autocompleteResults": "{count} ఫలితాలు అందుబాటులో ఉన్నాయి",
+  "autocompleteSuggestion": "సూచన: {suggestion}"
 }

@@ -39,5 +39,14 @@
   "calendarPreviousYearsSemanticsLabel": "Əvvəlki illər",
   "headerBackSemanticsLabel": "Geri",
   "headerCloseSemanticsLabel": "Bağla",
-  "bottomNavigationBarTabSemanticsLabel": "{tabCount} tabdan {tabIndex}"
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount} tabdan {tabIndex}",
+  "calendarTodaySemanticsLabel": "Bu gün",
+  "calendarShowMonthYearPickerSemanticsHint": "Ay və il seçicisini göstər",
+  "calendarShowMonthPickerSemanticsHint": "Ay seçicisini göstər",
+  "calendarShowYearPickerSemanticsHint": "İl seçicisini göstər",
+  "calendarShowDaysSemanticsHint": "Günləri göstər",
+  "timePickerHourSemanticsLabel": "Saat",
+  "timePickerMinuteSemanticsLabel": "Dəqiqə",
+  "autocompleteResults": "{count} nəticə mövcuddur",
+  "autocompleteSuggestion": "Təklif: {suggestion}"
 }

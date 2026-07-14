@@ -38,5 +38,14 @@
   "calendarPreviousYearsSemanticsLabel": "이전 해들",
   "headerBackSemanticsLabel": "뒤로",
   "headerCloseSemanticsLabel": "닫기",
-  "bottomNavigationBarTabSemanticsLabel": "탭 {tabCount}개 중 {tabIndex}번째"
+  "bottomNavigationBarTabSemanticsLabel": "탭 {tabCount}개 중 {tabIndex}번째",
+  "calendarTodaySemanticsLabel": "오늘",
+  "calendarShowMonthYearPickerSemanticsHint": "월 및 연도 선택 도구 표시",
+  "calendarShowMonthPickerSemanticsHint": "월 선택 도구 표시",
+  "calendarShowYearPickerSemanticsHint": "연도 선택 도구 표시",
+  "calendarShowDaysSemanticsHint": "일 표시",
+  "timePickerHourSemanticsLabel": "시",
+  "timePickerMinuteSemanticsLabel": "분",
+  "autocompleteResults": "{count}개의 결과가 있습니다",
+  "autocompleteSuggestion": "제안: {suggestion}"
 }

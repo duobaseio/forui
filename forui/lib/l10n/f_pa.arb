@@ -39,5 +39,14 @@
   "calendarPreviousYearsSemanticsLabel": "ਪਿਛਲੇ ਸਾਲ",
   "headerBackSemanticsLabel": "ਪਿੱਛੇ",
   "headerCloseSemanticsLabel": "ਬੰਦ ਕਰੋ",
-  "bottomNavigationBarTabSemanticsLabel": "{tabCount} ਵਿੱਚੋਂ {tabIndex} ਟੈਬ"
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount} ਵਿੱਚੋਂ {tabIndex} ਟੈਬ",
+  "calendarTodaySemanticsLabel": "ਅੱਜ",
+  "calendarShowMonthYearPickerSemanticsHint": "ਮਹੀਨਾ ਅਤੇ ਸਾਲ ਚੋਣਕਾਰ ਦਿਖਾਓ",
+  "calendarShowMonthPickerSemanticsHint": "ਮਹੀਨਾ ਚੋਣਕਾਰ ਦਿਖਾਓ",
+  "calendarShowYearPickerSemanticsHint": "ਸਾਲ ਚੋਣਕਾਰ ਦਿਖਾਓ",
+  "calendarShowDaysSemanticsHint": "ਦਿਨ ਦਿਖਾਓ",
+  "timePickerHourSemanticsLabel": "ਘੰਟਾ",
+  "timePickerMinuteSemanticsLabel": "ਮਿੰਟ",
+  "autocompleteResults": "{count} ਨਤੀਜੇ ਉਪਲਬਧ",
+  "autocompleteSuggestion": "ਸੁਝਾਅ: {suggestion}"
 }

@@ -24,6 +24,16 @@ class FLocalizationsHu extends FLocalizations {
   String get autocompleteNoResults => 'Nincs találat.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count találat érhető el';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Javaslat: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return '$tabCount/$tabIndex. lap';
   }
@@ -45,6 +55,21 @@ class FLocalizationsHu extends FLocalizations {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Előző évek';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Napok megjelenítése';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Hónapválasztó megjelenítése';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Hónap- és évválasztó megjelenítése';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Évválasztó megjelenítése';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Ma';
 
   @override
   String get contextMenuSemanticsLabel => 'Helyi menü';
@@ -135,4 +160,10 @@ class FLocalizationsHu extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Érvénytelen idő.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Óra';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Perc';
 }

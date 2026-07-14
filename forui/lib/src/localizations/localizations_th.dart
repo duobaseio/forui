@@ -24,6 +24,16 @@ class FLocalizationsTh extends FLocalizations {
   String get autocompleteNoResults => 'ไม่พบรายการที่ตรงกัน.';
 
   @override
+  String autocompleteResults(int count) {
+    return 'มีผลลัพธ์ $count รายการ';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'คำแนะนำ: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'แท็บที่ $tabIndex จาก $tabCount';
   }
@@ -45,6 +55,21 @@ class FLocalizationsTh extends FLocalizations {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'ปีก่อนหน้า';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'แสดงวัน';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'แสดงตัวเลือกเดือน';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'แสดงตัวเลือกเดือนและปี';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'แสดงตัวเลือกปี';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'วันนี้';
 
   @override
   String get contextMenuSemanticsLabel => 'เมนูบริบท';
@@ -135,4 +160,10 @@ class FLocalizationsTh extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'เวลาไม่ถูกต้อง';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'ชั่วโมง';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'นาที';
 }

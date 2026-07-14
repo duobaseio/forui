@@ -38,5 +38,14 @@
   "calendarPreviousYearsSemanticsLabel": "השנים הקודמות",
   "headerBackSemanticsLabel": "חזרה",
   "headerCloseSemanticsLabel": "סגירה",
-  "bottomNavigationBarTabSemanticsLabel": "כרטיסייה {tabIndex} מתוך {tabCount}"
+  "bottomNavigationBarTabSemanticsLabel": "כרטיסייה {tabIndex} מתוך {tabCount}",
+  "calendarTodaySemanticsLabel": "היום",
+  "calendarShowMonthYearPickerSemanticsHint": "הצגת בורר החודש והשנה",
+  "calendarShowMonthPickerSemanticsHint": "הצגת בורר החודש",
+  "calendarShowYearPickerSemanticsHint": "הצגת בורר השנה",
+  "calendarShowDaysSemanticsHint": "הצגת הימים",
+  "timePickerHourSemanticsLabel": "שעה",
+  "timePickerMinuteSemanticsLabel": "דקה",
+  "autocompleteResults": "{count} תוצאות זמינות",
+  "autocompleteSuggestion": "הצעה: {suggestion}"
 }

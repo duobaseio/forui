@@ -24,6 +24,16 @@ class FLocalizationsEs extends FLocalizations {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Pestaña $tabIndex de $tabCount';
   }
@@ -45,6 +55,21 @@ class FLocalizationsEs extends FLocalizations {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Mostrar los días';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Mostrar el selector de mes';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Mostrar el selector de mes y año';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Mostrar el selector de año';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Hoy';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -135,6 +160,12 @@ class FLocalizationsEs extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Hora no válida.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hora';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minuto';
 }
 
 /// The translations for Spanish Castilian, as used in Latin America and the Caribbean (`es_419`).
@@ -151,6 +182,16 @@ class FLocalizationsEs419 extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
@@ -174,6 +215,21 @@ class FLocalizationsEs419 extends FLocalizationsEs {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Mostrar los días';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Mostrar el selector de mes';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Mostrar el selector de mes y año';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Mostrar el selector de año';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Hoy';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -252,6 +308,12 @@ class FLocalizationsEs419 extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hora';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minuto';
 }
 
 /// The translations for Spanish Castilian, as used in Argentina (`es_AR`).
@@ -268,6 +330,16 @@ class FLocalizationsEsAr extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
@@ -291,6 +363,21 @@ class FLocalizationsEsAr extends FLocalizationsEs {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Mostrar los días';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Mostrar el selector de mes';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Mostrar el selector de mes y año';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Mostrar el selector de año';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Hoy';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -369,6 +456,12 @@ class FLocalizationsEsAr extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hora';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minuto';
 }
 
 /// The translations for Spanish Castilian, as used in Bolivia (`es_BO`).
@@ -387,6 +480,16 @@ class FLocalizationsEsBo extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Pestaña $tabIndex de $tabCount';
   }
@@ -408,6 +511,21 @@ class FLocalizationsEsBo extends FLocalizationsEs {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Mostrar los días';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Mostrar el selector de mes';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Mostrar el selector de mes y año';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Mostrar el selector de año';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Hoy';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -486,6 +604,12 @@ class FLocalizationsEsBo extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hora';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minuto';
 }
 
 /// The translations for Spanish Castilian, as used in Chile (`es_CL`).
@@ -504,6 +628,16 @@ class FLocalizationsEsCl extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Pestaña $tabIndex de $tabCount';
   }
@@ -525,6 +659,21 @@ class FLocalizationsEsCl extends FLocalizationsEs {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Mostrar los días';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Mostrar el selector de mes';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Mostrar el selector de mes y año';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Mostrar el selector de año';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Hoy';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -603,6 +752,12 @@ class FLocalizationsEsCl extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hora';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minuto';
 }
 
 /// The translations for Spanish Castilian, as used in Colombia (`es_CO`).
@@ -621,6 +776,16 @@ class FLocalizationsEsCo extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Pestaña $tabIndex de $tabCount';
   }
@@ -642,6 +807,21 @@ class FLocalizationsEsCo extends FLocalizationsEs {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Mostrar los días';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Mostrar el selector de mes';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Mostrar el selector de mes y año';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Mostrar el selector de año';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Hoy';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -720,6 +900,12 @@ class FLocalizationsEsCo extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hora';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minuto';
 }
 
 /// The translations for Spanish Castilian, as used in Costa Rica (`es_CR`).
@@ -738,6 +924,16 @@ class FLocalizationsEsCr extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Pestaña $tabIndex de $tabCount';
   }
@@ -759,6 +955,21 @@ class FLocalizationsEsCr extends FLocalizationsEs {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Mostrar los días';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Mostrar el selector de mes';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Mostrar el selector de mes y año';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Mostrar el selector de año';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Hoy';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -837,6 +1048,12 @@ class FLocalizationsEsCr extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hora';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minuto';
 }
 
 /// The translations for Spanish Castilian, as used in the Dominican Republic (`es_DO`).
@@ -855,6 +1072,16 @@ class FLocalizationsEsDo extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Pestaña $tabIndex de $tabCount';
   }
@@ -876,6 +1103,21 @@ class FLocalizationsEsDo extends FLocalizationsEs {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Mostrar los días';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Mostrar el selector de mes';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Mostrar el selector de mes y año';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Mostrar el selector de año';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Hoy';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -954,6 +1196,12 @@ class FLocalizationsEsDo extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hora';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minuto';
 }
 
 /// The translations for Spanish Castilian, as used in Ecuador (`es_EC`).
@@ -972,6 +1220,16 @@ class FLocalizationsEsEc extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Pestaña $tabIndex de $tabCount';
   }
@@ -993,6 +1251,21 @@ class FLocalizationsEsEc extends FLocalizationsEs {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Mostrar los días';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Mostrar el selector de mes';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Mostrar el selector de mes y año';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Mostrar el selector de año';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Hoy';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -1071,6 +1344,12 @@ class FLocalizationsEsEc extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hora';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minuto';
 }
 
 /// The translations for Spanish Castilian, as used in Guatemala (`es_GT`).
@@ -1089,6 +1368,16 @@ class FLocalizationsEsGt extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Pestaña $tabIndex de $tabCount';
   }
@@ -1110,6 +1399,21 @@ class FLocalizationsEsGt extends FLocalizationsEs {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Mostrar los días';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Mostrar el selector de mes';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Mostrar el selector de mes y año';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Mostrar el selector de año';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Hoy';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -1188,6 +1492,12 @@ class FLocalizationsEsGt extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hora';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minuto';
 }
 
 /// The translations for Spanish Castilian, as used in Honduras (`es_HN`).
@@ -1206,6 +1516,16 @@ class FLocalizationsEsHn extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Pestaña $tabIndex de $tabCount';
   }
@@ -1227,6 +1547,21 @@ class FLocalizationsEsHn extends FLocalizationsEs {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Mostrar los días';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Mostrar el selector de mes';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Mostrar el selector de mes y año';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Mostrar el selector de año';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Hoy';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -1305,6 +1640,12 @@ class FLocalizationsEsHn extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hora';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minuto';
 }
 
 /// The translations for Spanish Castilian, as used in Mexico (`es_MX`).
@@ -1321,6 +1662,16 @@ class FLocalizationsEsMx extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
@@ -1344,6 +1695,21 @@ class FLocalizationsEsMx extends FLocalizationsEs {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Mostrar los días';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Mostrar el selector de mes';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Mostrar el selector de mes y año';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Mostrar el selector de año';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Hoy';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -1422,6 +1788,12 @@ class FLocalizationsEsMx extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hora';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minuto';
 }
 
 /// The translations for Spanish Castilian, as used in Nicaragua (`es_NI`).
@@ -1440,6 +1812,16 @@ class FLocalizationsEsNi extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Pestaña $tabIndex de $tabCount';
   }
@@ -1461,6 +1843,21 @@ class FLocalizationsEsNi extends FLocalizationsEs {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Mostrar los días';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Mostrar el selector de mes';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Mostrar el selector de mes y año';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Mostrar el selector de año';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Hoy';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -1539,6 +1936,12 @@ class FLocalizationsEsNi extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hora';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minuto';
 }
 
 /// The translations for Spanish Castilian, as used in Panama (`es_PA`).
@@ -1557,6 +1960,16 @@ class FLocalizationsEsPa extends FLocalizationsEs {
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Pestaña $tabIndex de $tabCount';
   }
@@ -1578,6 +1991,21 @@ class FLocalizationsEsPa extends FLocalizationsEs {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Mostrar los días';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Mostrar el selector de mes';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Mostrar el selector de mes y año';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Mostrar el selector de año';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Hoy';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -1656,6 +2084,12 @@ class FLocalizationsEsPa extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hora';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minuto';
 }
 
 /// The translations for Spanish Castilian, as used in Peru (`es_PE`).
@@ -1672,6 +2106,16 @@ class FLocalizationsEsPe extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
@@ -1695,6 +2139,21 @@ class FLocalizationsEsPe extends FLocalizationsEs {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Mostrar los días';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Mostrar el selector de mes';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Mostrar el selector de mes y año';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Mostrar el selector de año';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Hoy';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -1773,6 +2232,12 @@ class FLocalizationsEsPe extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hora';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minuto';
 }
 
 /// The translations for Spanish Castilian, as used in Puerto Rico (`es_PR`).
@@ -1789,6 +2254,16 @@ class FLocalizationsEsPr extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
@@ -1812,6 +2287,21 @@ class FLocalizationsEsPr extends FLocalizationsEs {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Mostrar los días';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Mostrar el selector de mes';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Mostrar el selector de mes y año';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Mostrar el selector de año';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Hoy';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -1890,6 +2380,12 @@ class FLocalizationsEsPr extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hora';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minuto';
 }
 
 /// The translations for Spanish Castilian, as used in Paraguay (`es_PY`).
@@ -1906,6 +2402,16 @@ class FLocalizationsEsPy extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
@@ -1929,6 +2435,21 @@ class FLocalizationsEsPy extends FLocalizationsEs {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Mostrar los días';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Mostrar el selector de mes';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Mostrar el selector de mes y año';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Mostrar el selector de año';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Hoy';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -2007,6 +2528,12 @@ class FLocalizationsEsPy extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hora';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minuto';
 }
 
 /// The translations for Spanish Castilian, as used in El Salvador (`es_SV`).
@@ -2023,6 +2550,16 @@ class FLocalizationsEsSv extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
@@ -2046,6 +2583,21 @@ class FLocalizationsEsSv extends FLocalizationsEs {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Mostrar los días';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Mostrar el selector de mes';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Mostrar el selector de mes y año';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Mostrar el selector de año';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Hoy';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -2124,6 +2676,12 @@ class FLocalizationsEsSv extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hora';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minuto';
 }
 
 /// The translations for Spanish Castilian, as used in the United States (`es_US`).
@@ -2140,6 +2698,16 @@ class FLocalizationsEsUs extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
@@ -2163,6 +2731,21 @@ class FLocalizationsEsUs extends FLocalizationsEs {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Mostrar los días';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Mostrar el selector de mes';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Mostrar el selector de mes y año';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Mostrar el selector de año';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Hoy';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -2241,6 +2824,12 @@ class FLocalizationsEsUs extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hora';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minuto';
 }
 
 /// The translations for Spanish Castilian, as used in Uruguay (`es_UY`).
@@ -2257,6 +2846,16 @@ class FLocalizationsEsUy extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
@@ -2280,6 +2879,21 @@ class FLocalizationsEsUy extends FLocalizationsEs {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Mostrar los días';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Mostrar el selector de mes';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Mostrar el selector de mes y año';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Mostrar el selector de año';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Hoy';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -2358,6 +2972,12 @@ class FLocalizationsEsUy extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hora';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minuto';
 }
 
 /// The translations for Spanish Castilian, as used in Venezuela (`es_VE`).
@@ -2374,6 +2994,16 @@ class FLocalizationsEsVe extends FLocalizationsEs {
 
   @override
   String get autocompleteNoResults => 'No se encontraron coincidencias.';
+
+  @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugerencia: $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
@@ -2397,6 +3027,21 @@ class FLocalizationsEsVe extends FLocalizationsEs {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Años anteriores';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Mostrar los días';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Mostrar el selector de mes';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Mostrar el selector de mes y año';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Mostrar el selector de año';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Hoy';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -2475,4 +3120,10 @@ class FLocalizationsEsVe extends FLocalizationsEs {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hora';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minuto';
 }

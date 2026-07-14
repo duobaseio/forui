@@ -24,6 +24,16 @@ class FLocalizationsZu extends FLocalizations {
   String get autocompleteNoResults => 'Akukho ukufana okutholiwe.';
 
   @override
+  String autocompleteResults(int count) {
+    return 'Imiphumela engu-$count iyatholakala';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Isiphakamiso: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Ithebhu $tabIndex kwangu-$tabCount';
   }
@@ -45,6 +55,21 @@ class FLocalizationsZu extends FLocalizations {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Iminyaka edlule';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Bonisa izinsuku';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Bonisa isikhethi senyanga';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Bonisa isikhethi senyanga nonyaka';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Bonisa isikhethi sonyaka';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Namuhla';
 
   @override
   String get contextMenuSemanticsLabel => 'Imenyu yesimo';
@@ -135,4 +160,10 @@ class FLocalizationsZu extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Isikhathi esingalungile.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Ihora';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Iminithi';
 }

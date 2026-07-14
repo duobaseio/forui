@@ -24,6 +24,16 @@ class FLocalizationsAz extends FLocalizations {
   String get autocompleteNoResults => 'Heç bir uyğunluq tapılmadı.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count nəticə mövcuddur';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Təklif: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return '$tabCount tabdan $tabIndex';
   }
@@ -45,6 +55,21 @@ class FLocalizationsAz extends FLocalizations {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Əvvəlki illər';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Günləri göstər';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Ay seçicisini göstər';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Ay və il seçicisini göstər';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'İl seçicisini göstər';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Bu gün';
 
   @override
   String get contextMenuSemanticsLabel => 'Kontekst menyusu';
@@ -135,4 +160,10 @@ class FLocalizationsAz extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Yanlış vaxt.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Saat';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Dəqiqə';
 }

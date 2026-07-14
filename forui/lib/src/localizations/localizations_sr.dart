@@ -24,6 +24,16 @@ class FLocalizationsSr extends FLocalizations {
   String get autocompleteNoResults => 'Није пронађено подударање.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count доступних резултата';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Предлог: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Картица $tabIndex од $tabCount';
   }
@@ -45,6 +55,21 @@ class FLocalizationsSr extends FLocalizations {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Претходне године';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Прикажи дане';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Прикажи бирач месеца';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Прикажи бирач месеца и године';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Прикажи бирач године';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Данас';
 
   @override
   String get contextMenuSemanticsLabel => 'Контекстни мени';
@@ -135,6 +160,12 @@ class FLocalizationsSr extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Неважеће време.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Сат';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Минут';
 }
 
 /// The translations for Serbian, using the Latin script (`sr_Latn`).
@@ -151,6 +182,16 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
 
   @override
   String get autocompleteNoResults => 'Nije pronađeno podudaranje.';
+
+  @override
+  String autocompleteResults(int count) {
+    return '$count dostupnih rezultata';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Predlog: $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
@@ -174,6 +215,21 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Prethodne godine';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Prikaži dane';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Prikaži birač meseca';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Prikaži birač meseca i godine';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Prikaži birač godine';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Danas';
 
   @override
   String get contextMenuSemanticsLabel => 'Kontekstni meni';
@@ -264,4 +320,10 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
 
   @override
   String get timeFieldInvalidDateError => 'Nevažeće vreme.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Sat';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minut';
 }

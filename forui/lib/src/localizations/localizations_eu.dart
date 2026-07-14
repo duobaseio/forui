@@ -24,6 +24,16 @@ class FLocalizationsEu extends FLocalizations {
   String get autocompleteNoResults => 'Ez da bat-etortzerik aurkitu.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count emaitza erabilgarri';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Iradokizuna: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return '$tabCount/$tabIndex fitxa';
   }
@@ -45,6 +55,21 @@ class FLocalizationsEu extends FLocalizations {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Aurreko urteak';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Erakutsi egunak';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Erakutsi hilabete-hautatzailea';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Erakutsi hilabete- eta urte-hautatzailea';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Erakutsi urte-hautatzailea';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Gaur';
 
   @override
   String get contextMenuSemanticsLabel => 'Testuinguru-menua';
@@ -135,4 +160,10 @@ class FLocalizationsEu extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Ordu baliogabea.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Ordua';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minutua';
 }

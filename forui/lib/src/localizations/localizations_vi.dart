@@ -24,6 +24,16 @@ class FLocalizationsVi extends FLocalizations {
   String get autocompleteNoResults => 'Không tìm thấy kết quả phù hợp.';
 
   @override
+  String autocompleteResults(int count) {
+    return 'Có $count kết quả';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Đề xuất: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Thẻ $tabIndex trong tổng số $tabCount';
   }
@@ -45,6 +55,21 @@ class FLocalizationsVi extends FLocalizations {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Các năm trước';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Hiển thị ngày';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Hiển thị bộ chọn tháng';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Hiển thị bộ chọn tháng và năm';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Hiển thị bộ chọn năm';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Hôm nay';
 
   @override
   String get contextMenuSemanticsLabel => 'Trình đơn ngữ cảnh';
@@ -135,4 +160,10 @@ class FLocalizationsVi extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Thời gian không hợp lệ.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Giờ';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Phút';
 }

@@ -510,4 +510,34 @@ void main() {
       expect(selected, false);
     });
   });
+
+  group('accessibility', () {
+    Finder day(String number) => find.descendant(of: find.byType(DayPicker), matching: find.text(number));
+
+    testWidgets('day cell exposes its selected state', (tester) async {
+      final semantics = tester.ensureSemantics();
+      await tester.pumpWidget(calendar(selectionControl: .managedSingle(), control: control()));
+
+      expect(tester.getSemantics(day('15')), isSemantics(hasSelectedState: true, isSelected: false));
+
+      await tester.tap(day('15'));
+      await tester.pumpAndSettle();
+
+      expect(tester.getSemantics(day('15')), isSemantics(hasSelectedState: true, isSelected: true));
+      expect(tester.getSemantics(day('16')), isSemantics(hasSelectedState: true, isSelected: false));
+
+      semantics.dispose();
+    });
+
+    testWidgets('day cell label includes the weekday and today status', (tester) async {
+      final semantics = tester.ensureSemantics();
+      await tester.pumpWidget(calendar(selectionControl: .managedSingle(), control: control()));
+
+      // control()'s today is 2024-07-14, a Sunday.
+      expect(tester.getSemantics(day('14')), isSemantics(label: 'Sunday, July 14, 2024, Today'));
+      expect(tester.getSemantics(day('15')), isSemantics(label: 'Monday, July 15, 2024'));
+
+      semantics.dispose();
+    });
+  });
 }

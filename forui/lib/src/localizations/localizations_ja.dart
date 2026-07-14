@@ -24,6 +24,16 @@ class FLocalizationsJa extends FLocalizations {
   String get autocompleteNoResults => '一致するものが見つかりません.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count 件の結果があります';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return '候補: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return '$tabCount 個のタブのうち $tabIndex 個目';
   }
@@ -45,6 +55,21 @@ class FLocalizationsJa extends FLocalizations {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => '前の数年';
+
+  @override
+  String get calendarShowDaysSemanticsHint => '日を表示';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => '月の選択ツールを表示';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => '月と年の選択ツールを表示';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => '年の選択ツールを表示';
+
+  @override
+  String get calendarTodaySemanticsLabel => '今日';
 
   @override
   String get contextMenuSemanticsLabel => 'コンテキストメニュー';
@@ -135,4 +160,10 @@ class FLocalizationsJa extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => '無効な時間です。';
+
+  @override
+  String get timePickerHourSemanticsLabel => '時';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => '分';
 }

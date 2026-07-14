@@ -24,6 +24,16 @@ class FLocalizationsFil extends FLocalizations {
   String get autocompleteNoResults => 'Walang nahanap na tugma.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count resulta ang available';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Mungkahi: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Tab $tabIndex ng $tabCount';
   }
@@ -45,6 +55,21 @@ class FLocalizationsFil extends FLocalizations {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Nakaraang mga taon';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Ipakita ang mga araw';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Ipakita ang pampili ng buwan';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Ipakita ang pampili ng buwan at taon';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Ipakita ang pampili ng taon';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Ngayon';
 
   @override
   String get contextMenuSemanticsLabel => 'Menu ng konteksto';
@@ -135,4 +160,10 @@ class FLocalizationsFil extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Hindi wastong oras.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Oras';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minuto';
 }

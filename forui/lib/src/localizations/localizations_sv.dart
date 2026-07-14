@@ -24,6 +24,16 @@ class FLocalizationsSv extends FLocalizations {
   String get autocompleteNoResults => 'Inga träffar hittades.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count resultat tillgängliga';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Förslag: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Flik $tabIndex av $tabCount';
   }
@@ -45,6 +55,21 @@ class FLocalizationsSv extends FLocalizations {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Föregående år';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Visa dagar';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Visa månadsväljare';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Visa månads- och årsväljare';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Visa årsväljare';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Idag';
 
   @override
   String get contextMenuSemanticsLabel => 'Kontextmeny';
@@ -135,4 +160,10 @@ class FLocalizationsSv extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Ogiltig tid.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Timme';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minut';
 }

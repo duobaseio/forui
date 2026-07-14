@@ -38,5 +38,14 @@
   "calendarPreviousYearsSemanticsLabel": "Предыдущие годы",
   "headerBackSemanticsLabel": "Назад",
   "headerCloseSemanticsLabel": "Закрыть",
-  "bottomNavigationBarTabSemanticsLabel": "Вкладка {tabIndex} из {tabCount}"
+  "bottomNavigationBarTabSemanticsLabel": "Вкладка {tabIndex} из {tabCount}",
+  "calendarTodaySemanticsLabel": "Сегодня",
+  "calendarShowMonthYearPickerSemanticsHint": "Показать выбор месяца и года",
+  "calendarShowMonthPickerSemanticsHint": "Показать выбор месяца",
+  "calendarShowYearPickerSemanticsHint": "Показать выбор года",
+  "calendarShowDaysSemanticsHint": "Показать дни",
+  "timePickerHourSemanticsLabel": "Часы",
+  "timePickerMinuteSemanticsLabel": "Минуты",
+  "autocompleteResults": "Доступно результатов: {count}",
+  "autocompleteSuggestion": "Предложение: {suggestion}"
 }

@@ -24,6 +24,16 @@ class FLocalizationsEl extends FLocalizations {
   String get autocompleteNoResults => 'Δεν βρέθηκαν αντιστοιχίες.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count διαθέσιμα αποτελέσματα';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Πρόταση: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Καρτέλα $tabIndex από $tabCount';
   }
@@ -45,6 +55,21 @@ class FLocalizationsEl extends FLocalizations {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Προηγούμενα έτη';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Εμφάνιση ημερών';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Εμφάνιση επιλογέα μήνα';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Εμφάνιση επιλογέα μήνα και έτους';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Εμφάνιση επιλογέα έτους';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Σήμερα';
 
   @override
   String get contextMenuSemanticsLabel => 'Μενού περιβάλλοντος';
@@ -135,4 +160,10 @@ class FLocalizationsEl extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Μη έγκυρη ώρα.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Ώρα';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Λεπτό';
 }

@@ -39,5 +39,14 @@
   "calendarPreviousYearsSemanticsLabel": "Vitet e mëparshme",
   "headerBackSemanticsLabel": "Prapa",
   "headerCloseSemanticsLabel": "Mbyll",
-  "bottomNavigationBarTabSemanticsLabel": "Skeda {tabIndex} nga {tabCount}"
+  "bottomNavigationBarTabSemanticsLabel": "Skeda {tabIndex} nga {tabCount}",
+  "calendarTodaySemanticsLabel": "Sot",
+  "calendarShowMonthYearPickerSemanticsHint": "Shfaq zgjedhësin e muajit dhe vitit",
+  "calendarShowMonthPickerSemanticsHint": "Shfaq zgjedhësin e muajit",
+  "calendarShowYearPickerSemanticsHint": "Shfaq zgjedhësin e vitit",
+  "calendarShowDaysSemanticsHint": "Shfaq ditët",
+  "timePickerHourSemanticsLabel": "Ora",
+  "timePickerMinuteSemanticsLabel": "Minuta",
+  "autocompleteResults": "{count} rezultate në dispozicion",
+  "autocompleteSuggestion": "Sugjerim: {suggestion}"
 }

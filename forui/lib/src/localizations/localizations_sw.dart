@@ -24,6 +24,16 @@ class FLocalizationsSw extends FLocalizations {
   String get autocompleteNoResults => 'Hakuna mechi zilizopatikana.';
 
   @override
+  String autocompleteResults(int count) {
+    return 'Matokeo $count yanapatikana';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Pendekezo: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Kichupo cha $tabIndex kati ya $tabCount';
   }
@@ -45,6 +55,21 @@ class FLocalizationsSw extends FLocalizations {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Miaka iliyopita';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Onyesha siku';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Onyesha kiteua mwezi';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Onyesha kiteua mwezi na mwaka';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Onyesha kiteua mwaka';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Leo';
 
   @override
   String get contextMenuSemanticsLabel => 'Menyu ya muktadha';
@@ -135,4 +160,10 @@ class FLocalizationsSw extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Wakati batili.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Saa';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Dakika';
 }

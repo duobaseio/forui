@@ -38,5 +38,14 @@
   "calendarPreviousYearsSemanticsLabel": "Նախորդ տարիներ",
   "headerBackSemanticsLabel": "Հետ",
   "headerCloseSemanticsLabel": "Փակել",
-  "bottomNavigationBarTabSemanticsLabel": "Ներդիր {tabIndex}/{tabCount}"
+  "bottomNavigationBarTabSemanticsLabel": "Ներդիր {tabIndex}/{tabCount}",
+  "calendarTodaySemanticsLabel": "Այսօր",
+  "calendarShowMonthYearPickerSemanticsHint": "Ցուցադրել ամսվա և տարվա ընտրիչը",
+  "calendarShowMonthPickerSemanticsHint": "Ցուցադրել ամսվա ընտրիչը",
+  "calendarShowYearPickerSemanticsHint": "Ցուցադրել տարվա ընտրիչը",
+  "calendarShowDaysSemanticsHint": "Ցուցադրել օրերը",
+  "timePickerHourSemanticsLabel": "Ժամ",
+  "timePickerMinuteSemanticsLabel": "Րոպե",
+  "autocompleteResults": "{count} արդյունք հասանելի է",
+  "autocompleteSuggestion": "Առաջարկ: {suggestion}"
 }

@@ -38,5 +38,14 @@
   "calendarPreviousYearsSemanticsLabel": "पिछले वर्ष",
   "headerBackSemanticsLabel": "वापस जाएं",
   "headerCloseSemanticsLabel": "बंद करें",
-  "bottomNavigationBarTabSemanticsLabel": "{tabCount} में से {tabIndex} टैब"
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount} में से {tabIndex} टैब",
+  "calendarTodaySemanticsLabel": "आज",
+  "calendarShowMonthYearPickerSemanticsHint": "महीना और वर्ष चयनकर्ता दिखाएँ",
+  "calendarShowMonthPickerSemanticsHint": "महीना चयनकर्ता दिखाएँ",
+  "calendarShowYearPickerSemanticsHint": "वर्ष चयनकर्ता दिखाएँ",
+  "calendarShowDaysSemanticsHint": "दिन दिखाएँ",
+  "timePickerHourSemanticsLabel": "घंटा",
+  "timePickerMinuteSemanticsLabel": "मिनट",
+  "autocompleteResults": "{count} परिणाम उपलब्ध हैं",
+  "autocompleteSuggestion": "सुझाव: {suggestion}"
 }

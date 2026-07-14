@@ -18,6 +18,7 @@ final theme = FThemeData(
     circleAlert: FIcons.iconData(Icons.error_outline),
     clock4: FIcons.iconData(Icons.access_time),
     ellipsis: FIcons.iconData(Icons.more_horiz),
+    error: FIcons.iconData(Icons.error_outline),
     eye: FIcons.iconData(Icons.visibility),
     eyeClosed: FIcons.iconData(Icons.visibility_off),
     gripHorizontal: FIcons.iconData(Icons.drag_handle),

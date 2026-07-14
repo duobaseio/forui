@@ -98,6 +98,9 @@ final class FIcons with Diagnosticable {
   /// A horizontal ellipsis (three dots).
   final FIconBuilder ellipsis;
 
+  /// An alert used to denote errors such as form field validation failures.
+  final FIconBuilder error;
+
   /// An open eye.
   final FIconBuilder eye;
 
@@ -141,6 +144,7 @@ final class FIcons with Diagnosticable {
     required this.circleAlert,
     required this.clock4,
     required this.ellipsis,
+    required this.error,
     required this.eye,
     required this.eyeClosed,
     required this.gripHorizontal,
@@ -167,6 +171,7 @@ final class FIcons with Diagnosticable {
         circleAlert: iconData(FLucideIcons.circleAlert),
         clock4: iconData(FLucideIcons.clock4),
         ellipsis: iconData(FLucideIcons.ellipsis),
+        error: iconData(FLucideIcons.circleAlert),
         eye: iconData(FLucideIcons.eye),
         eyeClosed: iconData(FLucideIcons.eyeClosed),
         gripHorizontal: iconData(FLucideIcons.gripHorizontal),
@@ -194,6 +199,7 @@ final class FIcons with Diagnosticable {
       ..add(ObjectFlagProperty.has('circleAlert', circleAlert))
       ..add(ObjectFlagProperty.has('clock4', clock4))
       ..add(ObjectFlagProperty.has('ellipsis', ellipsis))
+      ..add(ObjectFlagProperty.has('error', error))
       ..add(ObjectFlagProperty.has('eye', eye))
       ..add(ObjectFlagProperty.has('eyeClosed', eyeClosed))
       ..add(ObjectFlagProperty.has('gripHorizontal', gripHorizontal))

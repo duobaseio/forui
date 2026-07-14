@@ -38,5 +38,14 @@
   "calendarPreviousYearsSemanticsLabel": "Предишни години",
   "headerBackSemanticsLabel": "Назад",
   "headerCloseSemanticsLabel": "Затваряне",
-  "bottomNavigationBarTabSemanticsLabel": "Раздел {tabIndex} от {tabCount}"
+  "bottomNavigationBarTabSemanticsLabel": "Раздел {tabIndex} от {tabCount}",
+  "calendarTodaySemanticsLabel": "Днес",
+  "calendarShowMonthYearPickerSemanticsHint": "Показване на инструмента за избор на месец и година",
+  "calendarShowMonthPickerSemanticsHint": "Показване на избора на месец",
+  "calendarShowYearPickerSemanticsHint": "Показване на избора на година",
+  "calendarShowDaysSemanticsHint": "Показване на дните",
+  "timePickerHourSemanticsLabel": "Час",
+  "timePickerMinuteSemanticsLabel": "Минута",
+  "autocompleteResults": "{count} налични резултата",
+  "autocompleteSuggestion": "Предложение: {suggestion}"
 }

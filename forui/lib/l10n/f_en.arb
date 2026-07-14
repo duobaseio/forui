@@ -16,6 +16,24 @@
   "@autocompleteNoResults": {
     "description": "The message displayed when there are no matching results."
   },
+  "autocompleteResults": "{count, plural, =1{1 result available} other{{count} results available}}",
+  "@autocompleteResults": {
+    "description": "Announced to screen readers when autocomplete suggestions appear or their count changes, e.g. '3 results available'.",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "autocompleteSuggestion": "Suggestion: {suggestion}",
+  "@autocompleteSuggestion": {
+    "description": "The semantic hint announcing the inline autocomplete completion, e.g. 'Suggestion: Apple'.",
+    "placeholders": {
+      "suggestion": {
+        "type": "String"
+      }
+    }
+  },
   "bottomNavigationBarTabSemanticsLabel": "Tab {tabIndex} of {tabCount}",
   "@bottomNavigationBarTabSemanticsLabel": {
     "description": "The semantic label announcing a bottom navigation bar item's position, e.g. 'Tab 1 of 3'.",
@@ -51,6 +69,26 @@
   "calendarPreviousYearsSemanticsLabel": "Previous years",
   "@calendarPreviousYearsSemanticsLabel": {
     "description": "The label for the calendar header's previous-years navigation button."
+  },
+  "calendarShowDaysSemanticsHint": "Show days",
+  "@calendarShowDaysSemanticsHint": {
+    "description": "The hint for the calendar header toggle that returns to the day grid."
+  },
+  "calendarShowMonthPickerSemanticsHint": "Show month picker",
+  "@calendarShowMonthPickerSemanticsHint": {
+    "description": "The hint for the calendar header toggle that opens the month picker."
+  },
+  "calendarShowMonthYearPickerSemanticsHint": "Show month and year picker",
+  "@calendarShowMonthYearPickerSemanticsHint": {
+    "description": "The hint for the wheel calendar header toggle that opens the combined month and year picker."
+  },
+  "calendarShowYearPickerSemanticsHint": "Show year picker",
+  "@calendarShowYearPickerSemanticsHint": {
+    "description": "The hint for the calendar header toggle that opens the year picker."
+  },
+  "calendarTodaySemanticsLabel": "Today",
+  "@calendarTodaySemanticsLabel": {
+    "description": "The label appended to a calendar day cell's accessibility label when it is the current day."
   },
   "contextMenuSemanticsLabel": "Context menu",
   "@contextMenuSemanticsLabel": {
@@ -165,5 +203,13 @@
   "@timeFieldHint": {
     "description": "The hint text for the picker-only time field."
   },
-  "timeFieldInvalidDateError": "Invalid time."
+  "timeFieldInvalidDateError": "Invalid time.",
+  "timePickerHourSemanticsLabel": "Hour",
+  "@timePickerHourSemanticsLabel": {
+    "description": "The semantic label for the hour wheel in a time or date time picker."
+  },
+  "timePickerMinuteSemanticsLabel": "Minute",
+  "@timePickerMinuteSemanticsLabel": {
+    "description": "The semantic label for the minute wheel in a time or date time picker."
+  }
 }

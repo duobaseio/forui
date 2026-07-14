@@ -24,6 +24,16 @@ class FLocalizationsCa extends FLocalizations {
   String get autocompleteNoResults => 'No s\'han trobat coincidències.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count resultats disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Suggeriment: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Pestanya $tabIndex de $tabCount';
   }
@@ -45,6 +55,21 @@ class FLocalizationsCa extends FLocalizations {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Anys anteriors';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Mostra els dies';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Mostra el selector de mes';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Mostra el selector de mes i any';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Mostra el selector d\'any';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Avui';
 
   @override
   String get contextMenuSemanticsLabel => 'Menú contextual';
@@ -135,4 +160,10 @@ class FLocalizationsCa extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Hora no vàlida.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hora';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minut';
 }

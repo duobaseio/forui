@@ -20,6 +20,18 @@ automatically reduce or disable motion to match the OS's accessibility settings.
 * Fix `FAccordionItem` header not exposing its expanded state.
 
 
+### `FAlert`
+* Add `FAlert.liveRegion`.
+
+
+### `FAutocomplete`
+* Change `FAutocomplete` to announce the number of suggestions to screen readers.
+
+* Fix `FAutocomplete` not exposing its expanded state to screen readers.
+* Fix `FAutocomplete` not announcing the inline completion to screen readers.
+* Fix `FAutocomplete` arrow keys not navigating past the first suggestion on web.
+
+
 ### `FAvatar`
 * Change `FAvatar` to skip its cross-fade when animations are disabled.
 
@@ -46,8 +58,10 @@ automatically reduce or disable motion to match the OS's accessibility settings.
 * Add PageUp/PageDown, Shift+PageUp/PageDown, and Home/End keyboard navigation to the grids.
 
 * Change `FCalendar` to jump between pages when animations are disabled.
+* Improve `FCalendar` accessibility.
 
 * Fix calendar month/year header not exposing its expanded state.
+* Fix calendar days not exposing their selected state to screen readers.
 
 
 ### `FCard`
@@ -91,6 +105,8 @@ customize the widget directly instead of through the style API.
 
 ### `FDateField`
 * Fix `FDateField.calendar` not displaying its selected date when driven by a lifted selection control.
+* Fix combined `FDateField` not dismissing its calendar on Escape while the input is focused.
+* Fix `FDateField` trigger not exposing its expanded state to screen readers.
 
 
 ### `FDateSelectionControl`
@@ -103,6 +119,7 @@ customize the widget directly instead of through the style API.
 
 ### `FDateTimePicker`
 * Change `hour24` to `bool?`. Defaults to `MediaQuery.alwaysUse24HourFormat`.
+* Change `FDateTimePicker` wheels to expose adjustable value and label semantics to screen readers.
 
 
 ### `FDeterminateProgress`
@@ -134,6 +151,10 @@ customize the widget directly instead of through the style API.
 * Fix `FHeaderAction.selected` not being forwarded to screen readers.
 
 
+### `FIcons`
+* Add `FIcons.error`.
+
+
 ### `FItem` & `FTile`
 * Add `expanded`.
 
@@ -142,14 +163,22 @@ customize the widget directly instead of through the style API.
 * Change `FLabel` to show errors instantly when motion is reduced or disabled.
 
 
+### `FLineCalendar`
+* Change `FLineCalendar` days to announce their today status and mutually exclusive selection to screen readers.
+
+
 ### `FPicker`
+* Add `FPickerWheel.semanticsLabel` and `FPickerWheel.semanticsValueBuilder`.
+
 * Change `FPicker` to jump to selected items when motion is reduced or disabled.
+* Change `FPickerWheel` to expose adjustable value and label semantics to screen readers.
 
 
 ### `FPopover`
 * Change `FPopover` (and `FSelect`, `FAutocomplete`) to fade without scaling when motion is reduced.
 
 * Fix `FPopover` background filter overflowing its rounded bounds.
+* Fix `FPopover` not dismissing on Escape while focus is on the trigger.
 
 
 ### `FPopoverMenu`
@@ -178,6 +207,12 @@ customize the widget directly instead of through the style API.
 * Fix `FResizable` resetting regions to their initial sizes when the main-axis constraint changes (e.g. window resize).
 
 
+### `FSelect` & `FMultiSelect`
+* Fix `FSelect` and `FMultiSelect` trigger not exposing its expanded state.
+* Fix `FMultiSelect` not exposing its invalid state when validation fails.
+* Fix `FSelect` not opening on Space.
+
+
 ### `FSelectMenuTile`
 * Fix `FSelectMenuTile` trigger not exposing its expanded state.
 
@@ -192,6 +227,10 @@ customize the widget directly instead of through the style API.
 * Fix collapsible `FSidebarItem` not exposing its expanded state.
 
 
+### `FSwitch`
+* Fix `FSwitch` announcing its state twice to screen readers.
+
+
 ### `FTabs`
 * **Breaking** Rename `FTabsStyle.height` to `FTabsStyle.minHeight`.
 * Change `FTabs` to switch tabs instantly when motion is reduced or disabled.
@@ -200,7 +239,7 @@ customize the widget directly instead of through the style API.
 
 
 ### `FTappable`
-* Add `button`, `checked`, `expanded`, and `inMutuallyExclusiveGroup`.
+* Add `button`, `checked`, `expanded`, `hint`, and `inMutuallyExclusiveGroup`.
 
 * Change `FTappable` to skip its press bounce when animations are disabled.
 
@@ -218,9 +257,12 @@ customize the widget directly instead of through the style API.
 ### `FTimeField`
 * Change `hour24` to `bool?`. Defaults to `MediaQuery.alwaysUse24HourFormat`.
 
+* Fix `FTimeField.picker` trigger not exposing its expanded state to screen readers.
+
 
 ### `FTimePicker`
 * Change `hour24` to `bool?`. Defaults to `MediaQuery.alwaysUse24HourFormat`.
+* Change `FTimePicker` wheels to expose adjustable value and label semantics to screen readers.
 
 
 ### `FToast`
@@ -243,6 +285,7 @@ customize the widget directly instead of through the style API.
 ### Others
 * Add italic support to the bundled `Inter` font.
 
+* Change form field error messages to display a leading `FIcons.error` icon.
 * Change the bundled `Inter` font to a variable font.
 
 * Fix focus outlines and highlights persisting after a pointer click when Flutter web semantics are enabled. Focus

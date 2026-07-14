@@ -38,5 +38,14 @@
   "calendarPreviousYearsSemanticsLabel": "السنوات السابقة",
   "headerBackSemanticsLabel": "رجوع",
   "headerCloseSemanticsLabel": "إغلاق",
-  "bottomNavigationBarTabSemanticsLabel": "علامة التبويب {tabIndex} من {tabCount}"
+  "bottomNavigationBarTabSemanticsLabel": "علامة التبويب {tabIndex} من {tabCount}",
+  "calendarTodaySemanticsLabel": "اليوم",
+  "calendarShowMonthYearPickerSemanticsHint": "إظهار أداة اختيار الشهر والسنة",
+  "calendarShowMonthPickerSemanticsHint": "إظهار أداة اختيار الشهر",
+  "calendarShowYearPickerSemanticsHint": "إظهار أداة اختيار السنة",
+  "calendarShowDaysSemanticsHint": "إظهار الأيام",
+  "timePickerHourSemanticsLabel": "ساعة",
+  "timePickerMinuteSemanticsLabel": "دقيقة",
+  "autocompleteResults": "{count} نتائج متوفرة",
+  "autocompleteSuggestion": "اقتراح: {suggestion}"
 }

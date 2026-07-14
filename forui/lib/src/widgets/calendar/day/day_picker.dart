@@ -301,8 +301,9 @@ class _GridState extends State<_Grid> {
         Day(
           styles: dayStyles,
           localizations: widget.localization,
-          date: date,
           focusNode: focusNode,
+          date: date,
+          selected: current,
           variants: {
             if (date.month != widget.month.month) .adjacent,
             if (date == widget.today) .today,

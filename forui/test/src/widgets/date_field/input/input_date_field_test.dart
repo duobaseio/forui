@@ -265,4 +265,100 @@ void main() {
 
     expect(find.byType(FCalendar), findsNothing);
   });
+
+  group('accessibility', () {
+    testWidgets('empty segmented field announces an empty value, not the placeholder', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(TestScaffold.app(child: FDateField.input(label: const Text('Date of birth'))));
+
+      // The placeholder is still painted for sighted users.
+      expect(find.text('MM/DD/YYYY'), findsOneWidget);
+
+      // But it is not announced as the entered value: the field reads as empty.
+      expect(tester.getSemantics(find.text('MM/DD/YYYY')), isSemantics(isTextField: true, value: ''));
+
+      semantics.dispose();
+    });
+
+    testWidgets('filled segmented field announces the entered value', (tester) async {
+      final semantics = tester.ensureSemantics();
+      final controller = autoDispose(FDateSelectionController.single());
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FDateField.input(
+            selectionControl: .managedSingle(controller: controller),
+            label: const Text('Date'),
+          ),
+        ),
+      );
+
+      controller.value = DateTime.utc(2025, 1, 15);
+      await tester.pump();
+
+      final shown = tester.widget<EditableText>(find.byType(EditableText)).controller.text;
+      expect(shown, isNot('MM/DD/YYYY'));
+      expect(tester.getSemantics(find.byType(EditableText)), isSemantics(isTextField: true, value: shown));
+
+      semantics.dispose();
+    });
+
+    testWidgets('trigger advertises a collapsed state when the calendar is closed', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(TestScaffold.app(child: FDateField(key: key)));
+
+      expect(tester.getSemantics(find.byType(EditableText)), isSemantics(hasExpandedState: true, isExpanded: false));
+
+      semantics.dispose();
+    });
+
+    testWidgets('trigger advertises an expanded state when the calendar is open', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(TestScaffold.app(child: FDateField(key: key)));
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      expect(tester.getSemantics(find.byType(EditableText)), isSemantics(hasExpandedState: true, isExpanded: true));
+
+      semantics.dispose();
+    });
+
+    testWidgets('escape dismisses the calendar while focus is in the combined field', (tester) async {
+      await tester.pumpWidget(TestScaffold.app(child: FDateField(key: key)));
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+      expect(find.byType(FCalendar), findsOne);
+
+      await tester.sendKeyEvent(.escape);
+      await tester.pumpAndSettle();
+      expect(find.byType(FCalendar), findsNothing);
+    });
+
+    testWidgets('escape is not consumed by the combined field when the calendar is closed', (tester) async {
+      final focus = autoDispose(FocusNode());
+      var escaped = false;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: CallbackShortcuts(
+            bindings: {const SingleActivator(.escape): () => escaped = true},
+            child: FDateField(key: key, focusNode: focus),
+          ),
+        ),
+      );
+
+      focus.requestFocus();
+      await tester.pump();
+
+      await tester.sendKeyEvent(.escape);
+      await tester.pump();
+
+      expect(escaped, true);
+    });
+  });
 }

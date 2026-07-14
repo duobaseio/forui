@@ -24,6 +24,16 @@ class FLocalizationsId extends FLocalizations {
   String get autocompleteNoResults => 'Tidak ada hasil yang cocok.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count hasil tersedia';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Saran: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Tab $tabIndex dari $tabCount';
   }
@@ -45,6 +55,21 @@ class FLocalizationsId extends FLocalizations {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Tahun-tahun sebelumnya';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Tampilkan hari';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Tampilkan pemilih bulan';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Tampilkan pemilih bulan dan tahun';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Tampilkan pemilih tahun';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Hari ini';
 
   @override
   String get contextMenuSemanticsLabel => 'Menu konteks';
@@ -135,4 +160,10 @@ class FLocalizationsId extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Waktu tidak valid.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Jam';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Menit';
 }

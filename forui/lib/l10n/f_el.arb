@@ -38,5 +38,14 @@
   "calendarPreviousYearsSemanticsLabel": "Προηγούμενα έτη",
   "headerBackSemanticsLabel": "Πίσω",
   "headerCloseSemanticsLabel": "Κλείσιμο",
-  "bottomNavigationBarTabSemanticsLabel": "Καρτέλα {tabIndex} από {tabCount}"
+  "bottomNavigationBarTabSemanticsLabel": "Καρτέλα {tabIndex} από {tabCount}",
+  "calendarTodaySemanticsLabel": "Σήμερα",
+  "calendarShowMonthYearPickerSemanticsHint": "Εμφάνιση επιλογέα μήνα και έτους",
+  "calendarShowMonthPickerSemanticsHint": "Εμφάνιση επιλογέα μήνα",
+  "calendarShowYearPickerSemanticsHint": "Εμφάνιση επιλογέα έτους",
+  "calendarShowDaysSemanticsHint": "Εμφάνιση ημερών",
+  "timePickerHourSemanticsLabel": "Ώρα",
+  "timePickerMinuteSemanticsLabel": "Λεπτό",
+  "autocompleteResults": "{count} διαθέσιμα αποτελέσματα",
+  "autocompleteSuggestion": "Πρόταση: {suggestion}"
 }

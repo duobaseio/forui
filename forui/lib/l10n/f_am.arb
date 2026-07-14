@@ -39,5 +39,14 @@
   "calendarPreviousYearsSemanticsLabel": "ያለፉት ዓመታት",
   "headerBackSemanticsLabel": "ተመለስ",
   "headerCloseSemanticsLabel": "ዝጋ",
-  "bottomNavigationBarTabSemanticsLabel": "ትር {tabIndex} ከ{tabCount}"
+  "bottomNavigationBarTabSemanticsLabel": "ትር {tabIndex} ከ{tabCount}",
+  "calendarTodaySemanticsLabel": "ዛሬ",
+  "calendarShowMonthYearPickerSemanticsHint": "የወርና የዓመት መራጭ አሳይ",
+  "calendarShowMonthPickerSemanticsHint": "የወር መራጭ አሳይ",
+  "calendarShowYearPickerSemanticsHint": "የዓመት መራጭ አሳይ",
+  "calendarShowDaysSemanticsHint": "ቀኖችን አሳይ",
+  "timePickerHourSemanticsLabel": "ሰዓት",
+  "timePickerMinuteSemanticsLabel": "ደቂቃ",
+  "autocompleteResults": "{count} ውጤቶች ይገኛሉ",
+  "autocompleteSuggestion": "ጥቆማ: {suggestion}"
 }

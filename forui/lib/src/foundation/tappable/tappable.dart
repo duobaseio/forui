@@ -59,6 +59,9 @@ class FTappable extends StatefulWidget {
   /// {@macro forui.foundation.doc_templates.semanticsLabel}
   final String? semanticsLabel;
 
+  /// A hint describing the result of activating this tappable. Null if it has no hint.
+  final String? semanticsHint;
+
   /// Whether this tappable is announced as a button. Defaults to true.
   final bool semanticsButton;
 
@@ -311,6 +314,7 @@ class FTappable extends StatefulWidget {
     FTappableStyleDelta style,
     FFocusedOutlineStyleDelta? focusedOutlineStyle,
     String? semanticsLabel,
+    String? semanticsHint,
     bool semanticsButton,
     bool? semanticsChecked,
     bool? semanticsExpanded,
@@ -362,6 +366,7 @@ class FTappable extends StatefulWidget {
     this.style = const .context(),
     this.focusedOutlineStyle,
     this.semanticsLabel,
+    this.semanticsHint,
     this.semanticsButton = true,
     this.semanticsChecked,
     this.semanticsExpanded,
@@ -416,6 +421,7 @@ class FTappable extends StatefulWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(DiagnosticsProperty('focusedOutlineStyle', focusedOutlineStyle))
       ..add(StringProperty('semanticsLabel', semanticsLabel))
+      ..add(StringProperty('semanticsHint', semanticsHint))
       ..add(FlagProperty('semanticsButton', value: semanticsButton, ifFalse: 'not a button'))
       ..add(DiagnosticsProperty('semanticsChecked', semanticsChecked))
       ..add(DiagnosticsProperty('semanticsExpanded', semanticsExpanded))
@@ -644,6 +650,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
         child: Semantics(
           enabled: !widget._disabled,
           label: widget.semanticsLabel,
+          hint: widget.semanticsHint,
           container: true,
           button: widget.semanticsButton,
           checked: widget.semanticsChecked,
@@ -808,6 +815,7 @@ class AnimatedTappable extends FTappable {
     super.semanticsChecked,
     super.semanticsExpanded,
     super.semanticsInMutuallyExclusiveGroup,
+    super.semanticsHint,
     super.excludeSemantics,
     super.autofocus,
     super.focusNode,

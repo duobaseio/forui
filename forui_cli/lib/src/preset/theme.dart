@@ -98,6 +98,10 @@ Future<void> create(Configuration configuration, Preset preset, {required bool f
         exit(1);
       }
 
+      final prefix = '${configuration.root.path}$separator';
+      final relative = [for (final path in existing) path.startsWith(prefix) ? path.substring(prefix.length) : path];
+      terminal.warn('The following file(s) will be overwritten:\n\n${relative.join('\n')}');
+
       if (!confirm(message: 'Overwrite ${existing.length} existing file(s)?', initial: false)) {
         terminal.cancel('No theme created.');
         exit(130);

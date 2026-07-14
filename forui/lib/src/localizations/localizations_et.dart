@@ -24,6 +24,16 @@ class FLocalizationsEt extends FLocalizations {
   String get autocompleteNoResults => 'Vasteid ei leitud.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count tulemust saadaval';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Soovitus: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return '$tabCount-st $tabIndex. vahekaart';
   }
@@ -45,6 +55,21 @@ class FLocalizationsEt extends FLocalizations {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Eelmised aastad';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Kuva päevad';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Kuva kuu valija';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Kuva kuu ja aasta valija';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Kuva aasta valija';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Täna';
 
   @override
   String get contextMenuSemanticsLabel => 'Kontekstimenüü';
@@ -135,4 +160,10 @@ class FLocalizationsEt extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Vigane aeg.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Tund';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minut';
 }

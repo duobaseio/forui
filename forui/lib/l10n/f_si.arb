@@ -38,5 +38,14 @@
   "calendarPreviousYearsSemanticsLabel": "පෙර වසර",
   "headerBackSemanticsLabel": "ආපසු",
   "headerCloseSemanticsLabel": "වසන්න",
-  "bottomNavigationBarTabSemanticsLabel": "ටැබ {tabCount}න් {tabIndex}"
+  "bottomNavigationBarTabSemanticsLabel": "ටැබ {tabCount}න් {tabIndex}",
+  "calendarTodaySemanticsLabel": "අද",
+  "calendarShowMonthYearPickerSemanticsHint": "මාසය සහ වර්ෂ තෝරකය පෙන්වන්න",
+  "calendarShowMonthPickerSemanticsHint": "මාසය තෝරකය පෙන්වන්න",
+  "calendarShowYearPickerSemanticsHint": "වර්ෂ තෝරකය පෙන්වන්න",
+  "calendarShowDaysSemanticsHint": "දින පෙන්වන්න",
+  "timePickerHourSemanticsLabel": "පැය",
+  "timePickerMinuteSemanticsLabel": "මිනිත්තු",
+  "autocompleteResults": "ප්‍රතිඵල {count}ක් තිබේ",
+  "autocompleteSuggestion": "යෝජනාව: {suggestion}"
 }

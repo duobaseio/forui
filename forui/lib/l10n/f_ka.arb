@@ -38,5 +38,14 @@
   "calendarPreviousYearsSemanticsLabel": "წინა წლები",
   "headerBackSemanticsLabel": "უკან",
   "headerCloseSemanticsLabel": "დახურვა",
-  "bottomNavigationBarTabSemanticsLabel": "ჩანართი {tabIndex} {tabCount}-დან"
+  "bottomNavigationBarTabSemanticsLabel": "ჩანართი {tabIndex} {tabCount}-დან",
+  "calendarTodaySemanticsLabel": "დღეს",
+  "calendarShowMonthYearPickerSemanticsHint": "თვისა და წლის ამომრჩევის ჩვენება",
+  "calendarShowMonthPickerSemanticsHint": "თვის ამომრჩევის ჩვენება",
+  "calendarShowYearPickerSemanticsHint": "წლის ამომრჩევის ჩვენება",
+  "calendarShowDaysSemanticsHint": "დღეების ჩვენება",
+  "timePickerHourSemanticsLabel": "საათი",
+  "timePickerMinuteSemanticsLabel": "წუთი",
+  "autocompleteResults": "{count} შედეგი ხელმისაწვდომია",
+  "autocompleteSuggestion": "შემოთავაზება: {suggestion}"
 }

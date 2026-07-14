@@ -38,5 +38,14 @@
   "calendarPreviousYearsSemanticsLabel": "Өмнөх жилүүд",
   "headerBackSemanticsLabel": "Буцах",
   "headerCloseSemanticsLabel": "Хаах",
-  "bottomNavigationBarTabSemanticsLabel": "{tabCount}-н {tabIndex}-р таб"
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount}-н {tabIndex}-р таб",
+  "calendarTodaySemanticsLabel": "Өнөөдөр",
+  "calendarShowMonthYearPickerSemanticsHint": "Сар, жил сонгогчийг харуулах",
+  "calendarShowMonthPickerSemanticsHint": "Сар сонгогчийг харуулах",
+  "calendarShowYearPickerSemanticsHint": "Жил сонгогчийг харуулах",
+  "calendarShowDaysSemanticsHint": "Өдрүүдийг харуулах",
+  "timePickerHourSemanticsLabel": "Цаг",
+  "timePickerMinuteSemanticsLabel": "Минут",
+  "autocompleteResults": "{count} үр дүн байна",
+  "autocompleteSuggestion": "Санал: {suggestion}"
 }

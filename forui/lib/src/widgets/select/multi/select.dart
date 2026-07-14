@@ -781,116 +781,123 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
           if (_focus.hasFocus) .focused,
         };
 
-        return Directionality(
-          textDirection: direction,
-          child: FLabel(
-            layout: .vertical,
-            variants: formVariants,
-            label: widget.label,
-            style: fieldStyle,
-            description: widget.description,
-            // Error should never be null as doing so causes the widget tree to change.
-            error: state.errorText == null ? const SizedBox() : widget.errorBuilder(context, state.errorText!),
-            child: FPopover(
-              control: .managed(controller: _popoverController),
-              style: style.contentStyle,
-              constraints: widget.contentConstraints,
-              popoverAnchor: widget.contentAnchor,
-              childAnchor: widget.fieldAnchor,
-              spacing: widget.contentSpacing,
-              overflow: widget.contentOverflow,
-              useViewPadding: widget.contentUseViewPadding,
-              useViewInsets: widget.contentUseViewInsets,
-              offset: widget.contentOffset,
-              hideRegion: widget.contentHideRegion,
-              groupId: widget.contentGroupId,
-              cutout: widget.contentCutout,
-              cutoutBuilder: widget.contentCutoutBuilder,
-              shortcuts: {const SingleActivator(.escape): _toggle},
-              popoverBuilder: (context, controller) => InheritedSelectController<T>(
-                popover: _popoverController,
-                contains: (value) => _controller.value.contains(value),
-                onPress: (value) => _controller.update(value, add: !_controller.value.contains(value)),
-                child: widget.popoverBuilder(
-                  context,
-                  _controller,
-                  _popoverController,
-                  content(
+        return Semantics(
+          validationResult: state.hasError ? .invalid : .valid,
+          child: Directionality(
+            textDirection: direction,
+            child: FLabel(
+              layout: .vertical,
+              variants: formVariants,
+              label: widget.label,
+              style: fieldStyle,
+              description: widget.description,
+              // Error should never be null as doing so causes the widget tree to change.
+              error: state.errorText == null ? const SizedBox() : widget.errorBuilder(context, state.errorText!),
+              child: FPopover(
+                control: .managed(controller: _popoverController),
+                style: style.contentStyle,
+                constraints: widget.contentConstraints,
+                popoverAnchor: widget.contentAnchor,
+                childAnchor: widget.fieldAnchor,
+                spacing: widget.contentSpacing,
+                overflow: widget.contentOverflow,
+                useViewPadding: widget.contentUseViewPadding,
+                useViewInsets: widget.contentUseViewInsets,
+                offset: widget.contentOffset,
+                hideRegion: widget.contentHideRegion,
+                groupId: widget.contentGroupId,
+                cutout: widget.contentCutout,
+                cutoutBuilder: widget.contentCutoutBuilder,
+                shortcuts: {const SingleActivator(.escape): _toggle},
+                popoverBuilder: (context, controller) => InheritedSelectController<T>(
+                  popover: _popoverController,
+                  contains: (value) => _controller.value.contains(value),
+                  onPress: (value) => _controller.update(value, add: !_controller.value.contains(value)),
+                  child: widget.popoverBuilder(
                     context,
-                    style,
-                    autofocusFirst: _controller.value.isEmpty && context.platformVariant.desktop,
-                    autofocus: (value) => _controller.value.lastOrNull == value,
+                    _controller,
+                    _popoverController,
+                    content(
+                      context,
+                      style,
+                      autofocusFirst: _controller.value.isEmpty && context.platformVariant.desktop,
+                      autofocus: (value) => _controller.value.lastOrNull == value,
+                    ),
                   ),
                 ),
-              ),
-              child: MultiSelectFieldScope(
-                style: fieldStyle,
-                child: FTappable(
-                  style: fieldStyle.tappableStyle,
-                  focusNode: _focus,
-                  onPress: widget.enabled ? _toggle : null,
-                  builder: (context, tappableVariants, child) {
-                    final variants = <FVariant>{...tappableVariants, ...formVariants};
-                    return DecoratedBox(
-                      decoration: fieldStyle.decoration.resolve(variants),
-                      child: Padding(
-                        padding: padding.copyWith(top: 0, bottom: 0),
-                        child: DefaultTextStyle.merge(
-                          textAlign: widget.textAlign,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              if (widget.prefixBuilder case final prefix?)
-                                prefix(context, fieldStyle, variants as Set<FTextFieldVariant>),
-                              Expanded(
-                                child: Padding(
-                                  padding: padding.copyWith(left: 0, right: 0),
-                                  child: Wrap(
-                                    crossAxisAlignment: WrapCrossAlignment.center,
-                                    spacing: fieldStyle.spacing,
-                                    runSpacing: fieldStyle.runSpacing,
-                                    children: [
-                                      for (final value in values)
-                                        widget.tagBuilder(
-                                          context,
-                                          widget.enabled,
-                                          _controller,
-                                          fieldStyle,
-                                          value,
-                                          widget.format(value),
-                                        ),
-                                      if (widget.keepHint || _controller.value.isEmpty)
-                                        Padding(
-                                          padding: fieldStyle.hintPadding,
-                                          child: DefaultTextStyle.merge(
-                                            style: fieldStyle.hintTextStyle.resolve(variants),
-                                            child: widget.hint ?? Text(localizations.multiSelectHint),
-                                          ),
-                                        ),
-                                    ],
-                                  ),
-                                ),
-                              ),
-                              if (widget.enabled && widget.clearable && _controller.value.isNotEmpty)
-                                Padding(
-                                  padding: fieldStyle.clearButtonPadding,
-                                  child: FButton.icon(
-                                    style: fieldStyle.clearButtonStyle,
-                                    onPress: () => _controller.value = {},
-                                    child: fieldStyle.clearIcon(
-                                      context,
-                                      semanticsLabel: localizations.textFieldClearButtonSemanticsLabel,
+                child: MultiSelectFieldScope(
+                  style: fieldStyle,
+                  child: ListenableBuilder(
+                    listenable: _popoverController,
+                    builder: (context, _) => FTappable(
+                      style: fieldStyle.tappableStyle,
+                      semanticsExpanded: _popoverController.status.isForwardOrCompleted,
+                      focusNode: _focus,
+                      onPress: widget.enabled ? _toggle : null,
+                      builder: (context, tappableVariants, child) {
+                        final variants = <FVariant>{...tappableVariants, ...formVariants};
+                        return DecoratedBox(
+                          decoration: fieldStyle.decoration.resolve(variants),
+                          child: Padding(
+                            padding: padding.copyWith(top: 0, bottom: 0),
+                            child: DefaultTextStyle.merge(
+                              textAlign: widget.textAlign,
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  if (widget.prefixBuilder case final prefix?)
+                                    prefix(context, fieldStyle, variants as Set<FTextFieldVariant>),
+                                  Expanded(
+                                    child: Padding(
+                                      padding: padding.copyWith(left: 0, right: 0),
+                                      child: Wrap(
+                                        crossAxisAlignment: WrapCrossAlignment.center,
+                                        spacing: fieldStyle.spacing,
+                                        runSpacing: fieldStyle.runSpacing,
+                                        children: [
+                                          for (final value in values)
+                                            widget.tagBuilder(
+                                              context,
+                                              widget.enabled,
+                                              _controller,
+                                              fieldStyle,
+                                              value,
+                                              widget.format(value),
+                                            ),
+                                          if (widget.keepHint || _controller.value.isEmpty)
+                                            Padding(
+                                              padding: fieldStyle.hintPadding,
+                                              child: DefaultTextStyle.merge(
+                                                style: fieldStyle.hintTextStyle.resolve(variants),
+                                                child: widget.hint ?? Text(localizations.multiSelectHint),
+                                              ),
+                                            ),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                              if (widget.suffixBuilder case final suffix?)
-                                suffix(context, fieldStyle, variants as Set<FTextFieldVariant>),
-                            ],
+                                  if (widget.enabled && widget.clearable && _controller.value.isNotEmpty)
+                                    Padding(
+                                      padding: fieldStyle.clearButtonPadding,
+                                      child: FButton.icon(
+                                        style: fieldStyle.clearButtonStyle,
+                                        onPress: () => _controller.value = {},
+                                        child: fieldStyle.clearIcon(
+                                          context,
+                                          semanticsLabel: localizations.textFieldClearButtonSemanticsLabel,
+                                        ),
+                                      ),
+                                    ),
+                                  if (widget.suffixBuilder case final suffix?)
+                                    suffix(context, fieldStyle, variants as Set<FTextFieldVariant>),
+                                ],
+                              ),
+                            ),
                           ),
-                        ),
-                      ),
-                    );
-                  },
+                        );
+                      },
+                    ),
+                  ),
                 ),
               ),
             ),

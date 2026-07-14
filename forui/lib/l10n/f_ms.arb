@@ -39,5 +39,14 @@
   "calendarPreviousYearsSemanticsLabel": "Tahun-tahun sebelumnya",
   "headerBackSemanticsLabel": "Kembali",
   "headerCloseSemanticsLabel": "Tutup",
-  "bottomNavigationBarTabSemanticsLabel": "Tab {tabIndex} daripada {tabCount}"
+  "bottomNavigationBarTabSemanticsLabel": "Tab {tabIndex} daripada {tabCount}",
+  "calendarTodaySemanticsLabel": "Hari ini",
+  "calendarShowMonthYearPickerSemanticsHint": "Tunjukkan pemilih bulan dan tahun",
+  "calendarShowMonthPickerSemanticsHint": "Tunjukkan pemilih bulan",
+  "calendarShowYearPickerSemanticsHint": "Tunjukkan pemilih tahun",
+  "calendarShowDaysSemanticsHint": "Tunjukkan hari",
+  "timePickerHourSemanticsLabel": "Jam",
+  "timePickerMinuteSemanticsLabel": "Minit",
+  "autocompleteResults": "{count} hasil tersedia",
+  "autocompleteSuggestion": "Cadangan: {suggestion}"
 }

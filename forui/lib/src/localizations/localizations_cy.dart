@@ -24,6 +24,16 @@ class FLocalizationsCy extends FLocalizations {
   String get autocompleteNoResults => 'Dim cydweddiadau wedi\'u canfod.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count canlyniad ar gael';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Awgrym: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Tab $tabIndex o $tabCount';
   }
@@ -45,6 +55,21 @@ class FLocalizationsCy extends FLocalizations {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Blynyddoedd blaenorol';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Dangos dyddiau';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Dangos dewisydd mis';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Dangos dewisydd mis a blwyddyn';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Dangos dewisydd blwyddyn';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Heddiw';
 
   @override
   String get contextMenuSemanticsLabel => 'Dewislen cyd-destun';
@@ -135,4 +160,10 @@ class FLocalizationsCy extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Amser annilys.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Awr';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Munud';
 }

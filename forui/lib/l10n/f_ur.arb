@@ -39,5 +39,14 @@
   "calendarPreviousYearsSemanticsLabel": "پچھلے سال",
   "headerBackSemanticsLabel": "پیچھے",
   "headerCloseSemanticsLabel": "بند کریں",
-  "bottomNavigationBarTabSemanticsLabel": "{tabCount} میں سے {tabIndex} ٹیب"
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount} میں سے {tabIndex} ٹیب",
+  "calendarTodaySemanticsLabel": "آج",
+  "calendarShowMonthYearPickerSemanticsHint": "مہینہ اور سال منتخب کنندہ دکھائیں",
+  "calendarShowMonthPickerSemanticsHint": "مہینہ منتخب کنندہ دکھائیں",
+  "calendarShowYearPickerSemanticsHint": "سال منتخب کنندہ دکھائیں",
+  "calendarShowDaysSemanticsHint": "دن دکھائیں",
+  "timePickerHourSemanticsLabel": "گھنٹہ",
+  "timePickerMinuteSemanticsLabel": "منٹ",
+  "autocompleteResults": "{count} نتائج دستیاب ہیں",
+  "autocompleteSuggestion": "تجویز: {suggestion}"
 }

@@ -24,6 +24,16 @@ class FLocalizationsRo extends FLocalizations {
   String get autocompleteNoResults => 'Nu s-au găsit potriviri.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count rezultate disponibile';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugestie: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Fila $tabIndex din $tabCount';
   }
@@ -45,6 +55,21 @@ class FLocalizationsRo extends FLocalizations {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Anii precedenți';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Afișează zilele';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Afișează selectorul de lună';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Afișează selectorul de lună și an';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Afișează selectorul de an';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Astăzi';
 
   @override
   String get contextMenuSemanticsLabel => 'Meniu contextual';
@@ -135,4 +160,10 @@ class FLocalizationsRo extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Oră invalidă.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Oră';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minut';
 }

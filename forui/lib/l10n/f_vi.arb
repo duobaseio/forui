@@ -39,5 +39,14 @@
   "calendarPreviousYearsSemanticsLabel": "Các năm trước",
   "headerBackSemanticsLabel": "Quay lại",
   "headerCloseSemanticsLabel": "Đóng",
-  "bottomNavigationBarTabSemanticsLabel": "Thẻ {tabIndex} trong tổng số {tabCount}"
+  "bottomNavigationBarTabSemanticsLabel": "Thẻ {tabIndex} trong tổng số {tabCount}",
+  "calendarTodaySemanticsLabel": "Hôm nay",
+  "calendarShowMonthYearPickerSemanticsHint": "Hiển thị bộ chọn tháng và năm",
+  "calendarShowMonthPickerSemanticsHint": "Hiển thị bộ chọn tháng",
+  "calendarShowYearPickerSemanticsHint": "Hiển thị bộ chọn năm",
+  "calendarShowDaysSemanticsHint": "Hiển thị ngày",
+  "timePickerHourSemanticsLabel": "Giờ",
+  "timePickerMinuteSemanticsLabel": "Phút",
+  "autocompleteResults": "Có {count} kết quả",
+  "autocompleteSuggestion": "Đề xuất: {suggestion}"
 }

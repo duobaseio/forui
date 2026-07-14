@@ -24,6 +24,16 @@ class FLocalizationsKm extends FLocalizations {
   String get autocompleteNoResults => 'រកមិនឃើញការផ្គូផ្គង.';
 
   @override
+  String autocompleteResults(int count) {
+    return 'លទ្ធផល $count អាចប្រើបាន';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'សំណើ៖ $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'ផ្ទាំងទី $tabIndex នៃ $tabCount';
   }
@@ -45,6 +55,21 @@ class FLocalizationsKm extends FLocalizations {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'ឆ្នាំមុន';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'បង្ហាញថ្ងៃ';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'បង្ហាញកម្មវិធីជ្រើសរើសខែ';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'បង្ហាញកម្មវិធីជ្រើសរើសខែ និងឆ្នាំ';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'បង្ហាញកម្មវិធីជ្រើសរើសឆ្នាំ';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'ថ្ងៃនេះ';
 
   @override
   String get contextMenuSemanticsLabel => 'ម៉ឺនុយបរិបទ';
@@ -135,4 +160,10 @@ class FLocalizationsKm extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'ពេលវេលាមិនត្រឹមត្រូវ។';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'ម៉ោង';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'នាទី';
 }

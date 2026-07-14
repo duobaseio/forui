@@ -39,5 +39,14 @@
   "calendarPreviousYearsSemanticsLabel": "Iminyaka edlule",
   "headerBackSemanticsLabel": "Emuva",
   "headerCloseSemanticsLabel": "Vala",
-  "bottomNavigationBarTabSemanticsLabel": "Ithebhu {tabIndex} kwangu-{tabCount}"
+  "bottomNavigationBarTabSemanticsLabel": "Ithebhu {tabIndex} kwangu-{tabCount}",
+  "calendarTodaySemanticsLabel": "Namuhla",
+  "calendarShowMonthYearPickerSemanticsHint": "Bonisa isikhethi senyanga nonyaka",
+  "calendarShowMonthPickerSemanticsHint": "Bonisa isikhethi senyanga",
+  "calendarShowYearPickerSemanticsHint": "Bonisa isikhethi sonyaka",
+  "calendarShowDaysSemanticsHint": "Bonisa izinsuku",
+  "timePickerHourSemanticsLabel": "Ihora",
+  "timePickerMinuteSemanticsLabel": "Iminithi",
+  "autocompleteResults": "Imiphumela engu-{count} iyatholakala",
+  "autocompleteSuggestion": "Isiphakamiso: {suggestion}"
 }

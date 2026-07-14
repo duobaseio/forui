@@ -24,6 +24,16 @@ class FLocalizationsPt extends FLocalizations {
   String get autocompleteNoResults => 'Nenhuma correspondência encontrada.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponíveis';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugestão: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Guia $tabIndex de $tabCount';
   }
@@ -45,6 +55,21 @@ class FLocalizationsPt extends FLocalizations {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Anos anteriores';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Mostrar os dias';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Mostrar o seletor de mês';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Mostrar o seletor de mês e ano';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Mostrar o seletor de ano';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Hoje';
 
   @override
   String get contextMenuSemanticsLabel => 'Menu de contexto';
@@ -135,6 +160,12 @@ class FLocalizationsPt extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Horário inválido.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hora';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minuto';
 }
 
 /// The translations for Portuguese, as used in Portugal (`pt_PT`).
@@ -151,6 +182,16 @@ class FLocalizationsPtPt extends FLocalizationsPt {
 
   @override
   String get autocompleteNoResults => 'Nenhuma correspondência encontrada.';
+
+  @override
+  String autocompleteResults(int count) {
+    return '$count resultados disponíveis';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugestão: $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
@@ -174,6 +215,21 @@ class FLocalizationsPtPt extends FLocalizationsPt {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Anos anteriores';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Mostrar os dias';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Mostrar o seletor de mês';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Mostrar o seletor de mês e ano';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Mostrar o seletor de ano';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Hoje';
 
   @override
   String get contextMenuSemanticsLabel => 'Menu de contexto';
@@ -252,4 +308,10 @@ class FLocalizationsPtPt extends FLocalizationsPt {
 
   @override
   String get timeFieldInvalidDateError => 'Hora inválida.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hora';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minuto';
 }

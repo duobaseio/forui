@@ -39,5 +39,14 @@
   "calendarPreviousYearsSemanticsLabel": "Anni precedenti",
   "headerBackSemanticsLabel": "Indietro",
   "headerCloseSemanticsLabel": "Chiudi",
-  "bottomNavigationBarTabSemanticsLabel": "Scheda {tabIndex} di {tabCount}"
+  "bottomNavigationBarTabSemanticsLabel": "Scheda {tabIndex} di {tabCount}",
+  "calendarTodaySemanticsLabel": "Oggi",
+  "calendarShowMonthYearPickerSemanticsHint": "Mostra il selettore di mese e anno",
+  "calendarShowMonthPickerSemanticsHint": "Mostra il selettore del mese",
+  "calendarShowYearPickerSemanticsHint": "Mostra il selettore dell'anno",
+  "calendarShowDaysSemanticsHint": "Mostra i giorni",
+  "timePickerHourSemanticsLabel": "Ora",
+  "timePickerMinuteSemanticsLabel": "Minuto",
+  "autocompleteResults": "{count} risultati disponibili",
+  "autocompleteSuggestion": "Suggerimento: {suggestion}"
 }

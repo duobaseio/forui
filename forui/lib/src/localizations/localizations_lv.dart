@@ -24,6 +24,16 @@ class FLocalizationsLv extends FLocalizations {
   String get autocompleteNoResults => 'Nav atrasts neviens atbilstošs rezultāts.';
 
   @override
+  String autocompleteResults(int count) {
+    return 'Pieejami $count rezultāti';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Ieteikums: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return '$tabIndex. cilne no $tabCount';
   }
@@ -45,6 +55,21 @@ class FLocalizationsLv extends FLocalizations {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Iepriekšējie gadi';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Rādīt dienas';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Rādīt mēneša atlasītāju';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Rādīt mēneša un gada atlasītāju';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Rādīt gada atlasītāju';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Šodien';
 
   @override
   String get contextMenuSemanticsLabel => 'Konteksta izvēlne';
@@ -135,4 +160,10 @@ class FLocalizationsLv extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Nederīgs laiks.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Stunda';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minūte';
 }

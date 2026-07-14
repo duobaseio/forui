@@ -24,6 +24,16 @@ class FLocalizationsFr extends FLocalizations {
   String get autocompleteNoResults => 'Aucune correspondance trouvée.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count résultats disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Suggestion : $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Onglet $tabIndex sur $tabCount';
   }
@@ -45,6 +55,21 @@ class FLocalizationsFr extends FLocalizations {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Années précédentes';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Afficher les jours';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Afficher le sélecteur de mois';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Afficher le sélecteur de mois et d\'année';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Afficher le sélecteur d\'année';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Aujourd\'hui';
 
   @override
   String get contextMenuSemanticsLabel => 'Menu contextuel';
@@ -135,6 +160,12 @@ class FLocalizationsFr extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Heure invalide.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Heure';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minute';
 }
 
 /// The translations for French, as used in Canada (`fr_CA`).
@@ -151,6 +182,16 @@ class FLocalizationsFrCa extends FLocalizationsFr {
 
   @override
   String get autocompleteNoResults => 'Aucune correspondance trouvée.';
+
+  @override
+  String autocompleteResults(int count) {
+    return '$count résultats disponibles';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Suggestion : $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
@@ -174,6 +215,21 @@ class FLocalizationsFrCa extends FLocalizationsFr {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Années précédentes';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Afficher les jours';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Afficher le sélecteur de mois';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Afficher le sélecteur de mois et d\'année';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Afficher le sélecteur d\'année';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Aujourd\'hui';
 
   @override
   String get contextMenuSemanticsLabel => 'Menu contextuel';
@@ -264,4 +320,10 @@ class FLocalizationsFrCa extends FLocalizationsFr {
 
   @override
   String get timeFieldInvalidDateError => 'Heure invalide.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Heure';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minute';
 }

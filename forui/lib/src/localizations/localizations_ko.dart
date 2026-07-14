@@ -24,6 +24,16 @@ class FLocalizationsKo extends FLocalizations {
   String get autocompleteNoResults => '일치하는 항목이 없습니다.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count개의 결과가 있습니다';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return '제안: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return '탭 $tabCount개 중 $tabIndex번째';
   }
@@ -45,6 +55,21 @@ class FLocalizationsKo extends FLocalizations {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => '이전 해들';
+
+  @override
+  String get calendarShowDaysSemanticsHint => '일 표시';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => '월 선택 도구 표시';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => '월 및 연도 선택 도구 표시';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => '연도 선택 도구 표시';
+
+  @override
+  String get calendarTodaySemanticsLabel => '오늘';
 
   @override
   String get contextMenuSemanticsLabel => '컨텍스트 메뉴';
@@ -135,4 +160,10 @@ class FLocalizationsKo extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => '잘못된 시간입니다.';
+
+  @override
+  String get timePickerHourSemanticsLabel => '시';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => '분';
 }

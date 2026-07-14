@@ -24,6 +24,16 @@ class FLocalizationsSl extends FLocalizations {
   String get autocompleteNoResults => 'Ni ujemanj.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count razpoložljivih rezultatov';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Predlog: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Zavihek $tabIndex od $tabCount';
   }
@@ -45,6 +55,21 @@ class FLocalizationsSl extends FLocalizations {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Prejšnja leta';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Pokaži dneve';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Pokaži izbirnik meseca';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Pokaži izbirnik meseca in leta';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Pokaži izbirnik leta';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Danes';
 
   @override
   String get contextMenuSemanticsLabel => 'Kontekstni meni';
@@ -135,4 +160,10 @@ class FLocalizationsSl extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Neveljaven čas.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Ura';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minuta';
 }

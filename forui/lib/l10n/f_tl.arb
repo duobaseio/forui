@@ -39,5 +39,14 @@
   "calendarPreviousYearsSemanticsLabel": "Nakaraang mga taon",
   "headerBackSemanticsLabel": "Bumalik",
   "headerCloseSemanticsLabel": "Isara",
-  "bottomNavigationBarTabSemanticsLabel": "Tab {tabIndex} ng {tabCount}"
+  "bottomNavigationBarTabSemanticsLabel": "Tab {tabIndex} ng {tabCount}",
+  "calendarTodaySemanticsLabel": "Ngayon",
+  "calendarShowMonthYearPickerSemanticsHint": "Ipakita ang pampili ng buwan at taon",
+  "calendarShowMonthPickerSemanticsHint": "Ipakita ang pampili ng buwan",
+  "calendarShowYearPickerSemanticsHint": "Ipakita ang pampili ng taon",
+  "calendarShowDaysSemanticsHint": "Ipakita ang mga araw",
+  "timePickerHourSemanticsLabel": "Oras",
+  "timePickerMinuteSemanticsLabel": "Minuto",
+  "autocompleteResults": "{count} resulta ang available",
+  "autocompleteSuggestion": "Mungkahi: {suggestion}"
 }

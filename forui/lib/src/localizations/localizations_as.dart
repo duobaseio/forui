@@ -24,6 +24,16 @@ class FLocalizationsAs extends FLocalizations {
   String get autocompleteNoResults => 'কোনো মিল পোৱা নগল.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count ফলাফল উপলব্ধ';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'পৰামৰ্শ: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return '$tabCountৰ $tabIndex নম্বৰ টেব';
   }
@@ -45,6 +55,21 @@ class FLocalizationsAs extends FLocalizations {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'পূৰ্বৱৰ্তী বছৰবোৰ';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'দিনবোৰ দেখুৱাওক';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'মাহ বাছনিকৰ্তা দেখুৱাওক';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'মাহ আৰু বছৰ বাছনিকৰ্তা দেখুৱাওক';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'বছৰ বাছনিকৰ্তা দেখুৱাওক';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'আজি';
 
   @override
   String get contextMenuSemanticsLabel => 'প্ৰসংগ মেনু';
@@ -135,4 +160,10 @@ class FLocalizationsAs extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'অমান্য সময়।';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'ঘণ্টা';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'মিনিট';
 }

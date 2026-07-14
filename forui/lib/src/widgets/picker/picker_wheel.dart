@@ -44,6 +44,14 @@ abstract class FPickerWheel extends StatefulWidget with FPickerWheelMixin {
   /// [TextScaler].
   final double? itemExtent;
 
+  /// {@macro forui.foundation.doc_templates.semanticsLabel}
+  final String? semanticsLabel;
+
+  /// Builds the value announced by screen readers for the item at the given index, e.g. "3".
+  ///
+  /// Defaults to null.
+  final String Function(int index)? semanticsValueBuilder;
+
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
 
@@ -59,6 +67,8 @@ abstract class FPickerWheel extends StatefulWidget with FPickerWheelMixin {
     bool loop,
     int flex,
     double? itemExtent,
+    String? semanticsLabel,
+    String Function(int index)? semanticsValueBuilder,
     bool autofocus,
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
@@ -70,6 +80,8 @@ abstract class FPickerWheel extends StatefulWidget with FPickerWheelMixin {
     required IndexedWidgetBuilder builder,
     int flex,
     double? itemExtent,
+    String? semanticsLabel,
+    String Function(int index)? semanticsValueBuilder,
     bool autofocus,
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
@@ -79,6 +91,8 @@ abstract class FPickerWheel extends StatefulWidget with FPickerWheelMixin {
   const FPickerWheel._({
     this.flex = 1,
     this.itemExtent,
+    this.semanticsLabel,
+    this.semanticsValueBuilder,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
@@ -91,6 +105,8 @@ abstract class FPickerWheel extends StatefulWidget with FPickerWheelMixin {
     properties
       ..add(IntProperty('flex', flex))
       ..add(DoubleProperty('itemExtent', itemExtent))
+      ..add(StringProperty('semanticsLabel', semanticsLabel))
+      ..add(ObjectFlagProperty.has('semanticsValueBuilder', semanticsValueBuilder))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange));
@@ -99,81 +115,137 @@ abstract class FPickerWheel extends StatefulWidget with FPickerWheelMixin {
 
 abstract class _State<T extends FPickerWheel> extends State<T> {
   bool _focused = false;
+  FixedExtentScrollController? _controller;
+  late ValueNotifier<int> _index;
 
   @override
   void initState() {
     super.initState();
     _focused = widget.autofocus;
+    _index = ValueNotifier(0);
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final controller = PickerData.of(context).controller;
+    if (_controller != controller) {
+      _controller = controller;
+      _index.value = controller.initialItem;
+    }
+  }
+
+  @override
+  void dispose() {
+    _index.dispose();
+    super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    final PickerData(:controller, :style) = .of(context);
+    final PickerData(:style) = .of(context);
+    final motion = context.accessibility.motion;
     final extent = widget.itemExtent ?? FPickerWheel.estimateExtent(style, context);
-    return Flexible(
-      flex: widget.flex,
-      child: FocusableActionDetector(
-        descendantsAreFocusable: false,
-        autofocus: widget.autofocus,
-        focusNode: widget.focusNode,
-        onFocusChange: (focused) {
-          widget.onFocusChange?.call(focused);
-          if (_focused != focused) {
-            setState(() => _focused = focused);
-          }
-        },
-        shortcuts: const {
-          SingleActivator(.arrowUp): ScrollIntent(direction: .up),
-          SingleActivator(.arrowDown): ScrollIntent(direction: .down),
-        },
-        actions: {
-          ScrollIntent: CallbackAction<ScrollIntent>(
-            onInvoke: (intent) {
-              final target = controller.selectedItem + (intent.direction == .up ? -1 : 1);
-              if (context.accessibility.motion == .all) {
-                controller.animateToItem(target, duration: const Duration(milliseconds: 100), curve: Curves.decelerate);
-              } else {
-                controller.jumpToItem(target);
-              }
 
-              return null;
-            },
-          ),
+    Widget wheel = ScrollConfiguration(
+      behavior: const _ScrollBehavior(),
+      child: ListWheelScrollView.useDelegate(
+        controller: _controller,
+        physics: const FixedExtentScrollPhysics(),
+        itemExtent: extent,
+        diameterRatio: style.diameterRatio,
+        magnification: style.magnification,
+        squeeze: style.squeeze,
+        overAndUnderCenterOpacity: style.overAndUnderCenterOpacity,
+        childDelegate: delegate(style),
+        onSelectedItemChanged: (index) {
+          style.hapticFeedback();
+          _index.value = index;
         },
-        child: Stack(
-          alignment: .center,
-          children: [
-            if (_focused && context.accessibility.focusHighlight)
-              Container(
-                height: extent,
-                decoration: ShapeDecoration(
-                  shape: RoundedSuperellipseBorder(
-                    side: BorderSide(color: style.focusedOutlineStyle.color, width: style.focusedOutlineStyle.width),
-                    borderRadius: style.focusedOutlineStyle.borderRadius,
-                  ),
-                ),
-              ),
-            ScrollConfiguration(
-              behavior: const _ScrollBehavior(),
-              child: ListWheelScrollView.useDelegate(
-                controller: controller,
-                physics: const FixedExtentScrollPhysics(),
-                itemExtent: extent,
-                diameterRatio: style.diameterRatio,
-                magnification: style.magnification,
-                squeeze: style.squeeze,
-                overAndUnderCenterOpacity: style.overAndUnderCenterOpacity,
-                childDelegate: delegate(style),
-                onSelectedItemChanged: (_) => style.hapticFeedback(),
-              ),
-            ),
-          ],
-        ),
       ),
     );
+
+    if (widget.semanticsValueBuilder case final value?) {
+      wheel = ValueListenableBuilder<int>(
+        valueListenable: _index,
+        builder: (_, selected, child) => Semantics(
+          container: true,
+          excludeSemantics: true,
+          label: widget.semanticsLabel,
+          value: value(selected),
+          increasedValue: value(clamp(selected + 1)),
+          decreasedValue: value(clamp(selected - 1)),
+          onIncrease: () => _adjust(motion, 1),
+          onDecrease: () => _adjust(motion, -1),
+          child: child,
+        ),
+        child: wheel,
+      );
+    } else if (widget.semanticsLabel case final label?) {
+      wheel = Semantics(container: true, label: label, child: wheel);
+    }
+
+    Widget detector = FocusableActionDetector(
+      descendantsAreFocusable: false,
+      autofocus: widget.autofocus,
+      focusNode: widget.focusNode,
+      onFocusChange: (focused) {
+        widget.onFocusChange?.call(focused);
+        if (_focused != focused) {
+          setState(() => _focused = focused);
+        }
+      },
+      shortcuts: const {
+        SingleActivator(.arrowUp): ScrollIntent(direction: .up),
+        SingleActivator(.arrowDown): ScrollIntent(direction: .down),
+      },
+      actions: {
+        ScrollIntent: CallbackAction<ScrollIntent>(
+          onInvoke: (intent) {
+            _adjust(motion, intent.direction == .up ? -1 : 1);
+            return null;
+          },
+        ),
+      },
+      child: Stack(
+        alignment: .center,
+        children: [
+          if (_focused && context.accessibility.focusHighlight)
+            Container(
+              height: extent,
+              decoration: ShapeDecoration(
+                shape: RoundedSuperellipseBorder(
+                  side: BorderSide(color: style.focusedOutlineStyle.color, width: style.focusedOutlineStyle.width),
+                  borderRadius: style.focusedOutlineStyle.borderRadius,
+                ),
+              ),
+            ),
+          wheel,
+        ],
+      ),
+    );
+
+    // Merge into a single adjustable node so screen readers announce it once, not twice (the focus node's computed name
+    // and then the value node). Unmerged behavior is flaky.
+    if (widget.semanticsValueBuilder != null) {
+      detector = MergeSemantics(child: detector);
+    }
+
+    return Flexible(flex: widget.flex, child: detector);
+  }
+
+  void _adjust(FAccessibilityMotion motion, int delta) {
+    final target = _controller!.selectedItem + delta;
+    if (motion == .all) {
+      _controller!.animateToItem(target, duration: const Duration(milliseconds: 100), curve: Curves.decelerate);
+    } else {
+      _controller!.jumpToItem(target);
+    }
   }
 
   ListWheelChildDelegate delegate(FPickerStyle style);
+
+  int clamp(int index);
 }
 
 @internal
@@ -186,6 +258,8 @@ class ListWheel extends FPickerWheel {
     this.loop = false,
     super.flex = 1,
     super.itemExtent,
+    super.semanticsLabel,
+    super.semanticsValueBuilder,
     super.autofocus,
     super.focusNode,
     super.onFocusChange,
@@ -220,6 +294,16 @@ class _ListState extends _State<ListWheel> {
         ? ListWheelChildLoopingListDelegate(children: children)
         : ListWheelChildListDelegate(children: children);
   }
+
+  @override
+  int clamp(int index) {
+    final length = widget.children.length;
+    if (length == 0) {
+      return 0;
+    }
+
+    return widget.loop ? index % length : index.clamp(0, length - 1);
+  }
 }
 
 @internal
@@ -230,6 +314,8 @@ class BuilderWheel extends FPickerWheel {
     required this.builder,
     super.flex,
     super.itemExtent,
+    super.semanticsLabel,
+    super.semanticsValueBuilder,
     super.autofocus,
     super.focusNode,
     super.onFocusChange,
@@ -257,4 +343,7 @@ class _BuilderState extends _State<BuilderWheel> {
       ),
     ),
   );
+
+  @override
+  int clamp(int index) => index;
 }

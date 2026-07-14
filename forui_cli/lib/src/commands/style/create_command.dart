@@ -282,6 +282,14 @@ class StyleCreateCommand extends ForuiCommand {
     }
 
     if (!force && existing.isNotEmpty) {
+      if (terminal.interactive) {
+        final prefix = '${configuration.root.path}${Platform.pathSeparator}';
+        final relative = [
+          for (final path in existing.toList()..sort()) path.startsWith(prefix) ? path.substring(prefix.length) : path,
+        ];
+        terminal.warn('The following file(s) will be overwritten:\n\n${relative.join('\n')}');
+      }
+
       final overwrite =
           terminal.interactive && confirm(message: 'Overwrite ${existing.length} existing file(s)?', initial: false);
 

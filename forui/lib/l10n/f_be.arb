@@ -38,5 +38,14 @@
   "calendarPreviousYearsSemanticsLabel": "Папярэднія гады",
   "headerBackSemanticsLabel": "Назад",
   "headerCloseSemanticsLabel": "Закрыць",
-  "bottomNavigationBarTabSemanticsLabel": "Укладка {tabIndex} з {tabCount}"
+  "bottomNavigationBarTabSemanticsLabel": "Укладка {tabIndex} з {tabCount}",
+  "calendarTodaySemanticsLabel": "Сёння",
+  "calendarShowMonthYearPickerSemanticsHint": "Паказаць выбар месяца і года",
+  "calendarShowMonthPickerSemanticsHint": "Паказаць выбар месяца",
+  "calendarShowYearPickerSemanticsHint": "Паказаць выбар года",
+  "calendarShowDaysSemanticsHint": "Паказаць дні",
+  "timePickerHourSemanticsLabel": "Гадзіна",
+  "timePickerMinuteSemanticsLabel": "Хвіліна",
+  "autocompleteResults": "Даступна вынікаў: {count}",
+  "autocompleteSuggestion": "Прапанова: {suggestion}"
 }

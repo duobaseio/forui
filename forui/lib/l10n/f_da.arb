@@ -39,5 +39,14 @@
   "calendarPreviousYearsSemanticsLabel": "Forrige år",
   "headerBackSemanticsLabel": "Tilbage",
   "headerCloseSemanticsLabel": "Luk",
-  "bottomNavigationBarTabSemanticsLabel": "Fane {tabIndex} af {tabCount}"
+  "bottomNavigationBarTabSemanticsLabel": "Fane {tabIndex} af {tabCount}",
+  "calendarTodaySemanticsLabel": "I dag",
+  "calendarShowMonthYearPickerSemanticsHint": "Vis måneds- og årsvælger",
+  "calendarShowMonthPickerSemanticsHint": "Vis månedsvælger",
+  "calendarShowYearPickerSemanticsHint": "Vis årsvælger",
+  "calendarShowDaysSemanticsHint": "Vis dage",
+  "timePickerHourSemanticsLabel": "Time",
+  "timePickerMinuteSemanticsLabel": "Minut",
+  "autocompleteResults": "{count} resultater tilgængelige",
+  "autocompleteSuggestion": "Forslag: {suggestion}"
 }

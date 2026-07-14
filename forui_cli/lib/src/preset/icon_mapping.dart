@@ -22,6 +22,7 @@ enum IconMapping {
   circleAlert,
   clock4,
   ellipsis,
+  error,
   eye,
   eyeClosed,
   gripHorizontal,

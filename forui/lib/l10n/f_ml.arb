@@ -38,5 +38,14 @@
   "calendarPreviousYearsSemanticsLabel": "മുൻ വർഷങ്ങൾ",
   "headerBackSemanticsLabel": "മടങ്ങുക",
   "headerCloseSemanticsLabel": "അടയ്ക്കുക",
-  "bottomNavigationBarTabSemanticsLabel": "{tabCount}-ൽ {tabIndex} ടാബ്"
+  "bottomNavigationBarTabSemanticsLabel": "{tabCount}-ൽ {tabIndex} ടാബ്",
+  "calendarTodaySemanticsLabel": "ഇന്ന്",
+  "calendarShowMonthYearPickerSemanticsHint": "മാസവും വർഷവും തിരഞ്ഞെടുക്കൽ കാണിക്കുക",
+  "calendarShowMonthPickerSemanticsHint": "മാസം തിരഞ്ഞെടുക്കൽ കാണിക്കുക",
+  "calendarShowYearPickerSemanticsHint": "വർഷം തിരഞ്ഞെടുക്കൽ കാണിക്കുക",
+  "calendarShowDaysSemanticsHint": "ദിവസങ്ങൾ കാണിക്കുക",
+  "timePickerHourSemanticsLabel": "മണിക്കൂർ",
+  "timePickerMinuteSemanticsLabel": "മിനിറ്റ്",
+  "autocompleteResults": "{count} ഫലങ്ങൾ ലഭ്യമാണ്",
+  "autocompleteSuggestion": "നിർദ്ദേശം: {suggestion}"
 }

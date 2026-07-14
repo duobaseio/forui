@@ -39,5 +39,14 @@
   "calendarPreviousYearsSemanticsLabel": "Edelliset vuodet",
   "headerBackSemanticsLabel": "Takaisin",
   "headerCloseSemanticsLabel": "Sulje",
-  "bottomNavigationBarTabSemanticsLabel": "Välilehti {tabIndex}/{tabCount}"
+  "bottomNavigationBarTabSemanticsLabel": "Välilehti {tabIndex}/{tabCount}",
+  "calendarTodaySemanticsLabel": "Tänään",
+  "calendarShowMonthYearPickerSemanticsHint": "Näytä kuukauden ja vuoden valitsin",
+  "calendarShowMonthPickerSemanticsHint": "Näytä kuukauden valitsin",
+  "calendarShowYearPickerSemanticsHint": "Näytä vuoden valitsin",
+  "calendarShowDaysSemanticsHint": "Näytä päivät",
+  "timePickerHourSemanticsLabel": "Tunti",
+  "timePickerMinuteSemanticsLabel": "Minuutti",
+  "autocompleteResults": "{count} tulosta saatavilla",
+  "autocompleteSuggestion": "Ehdotus: {suggestion}"
 }

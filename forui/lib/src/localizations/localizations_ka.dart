@@ -24,6 +24,16 @@ class FLocalizationsKa extends FLocalizations {
   String get autocompleteNoResults => 'შესაბამისობები ვერ იქნა ნაპოვნი.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count შედეგი ხელმისაწვდომია';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'შემოთავაზება: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'ჩანართი $tabIndex $tabCount-დან';
   }
@@ -45,6 +55,21 @@ class FLocalizationsKa extends FLocalizations {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'წინა წლები';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'დღეების ჩვენება';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'თვის ამომრჩევის ჩვენება';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'თვისა და წლის ამომრჩევის ჩვენება';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'წლის ამომრჩევის ჩვენება';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'დღეს';
 
   @override
   String get contextMenuSemanticsLabel => 'კონტექსტური მენიუ';
@@ -135,4 +160,10 @@ class FLocalizationsKa extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'არასწორი დრო.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'საათი';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'წუთი';
 }

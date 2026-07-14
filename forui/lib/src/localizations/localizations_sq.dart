@@ -24,6 +24,16 @@ class FLocalizationsSq extends FLocalizations {
   String get autocompleteNoResults => 'Nuk u gjetën përputhje.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count rezultate në dispozicion';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Sugjerim: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Skeda $tabIndex nga $tabCount';
   }
@@ -45,6 +55,21 @@ class FLocalizationsSq extends FLocalizations {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Vitet e mëparshme';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Shfaq ditët';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Shfaq zgjedhësin e muajit';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Shfaq zgjedhësin e muajit dhe vitit';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Shfaq zgjedhësin e vitit';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Sot';
 
   @override
   String get contextMenuSemanticsLabel => 'Menyja e kontekstit';
@@ -135,4 +160,10 @@ class FLocalizationsSq extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Orë e pavlefshme.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Ora';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minuta';
 }

@@ -39,5 +39,14 @@
   "calendarPreviousYearsSemanticsLabel": "Letschti Jaar",
   "headerBackSemanticsLabel": "Zurück",
   "headerCloseSemanticsLabel": "Schliessen",
-  "bottomNavigationBarTabSemanticsLabel": "Tab {tabIndex} von {tabCount}"
+  "bottomNavigationBarTabSemanticsLabel": "Tab {tabIndex} von {tabCount}",
+  "calendarTodaySemanticsLabel": "Hüt",
+  "calendarShowMonthYearPickerSemanticsHint": "Monats- und Jahresuswahl aazeige",
+  "calendarShowMonthPickerSemanticsHint": "Monatsuswahl aazeige",
+  "calendarShowYearPickerSemanticsHint": "Jahresuswahl aazeige",
+  "calendarShowDaysSemanticsHint": "Täg aazeige",
+  "timePickerHourSemanticsLabel": "Stunde",
+  "timePickerMinuteSemanticsLabel": "Minute",
+  "autocompleteResults": "{count} Ergebnisse verfügbar",
+  "autocompleteSuggestion": "Vorschlag: {suggestion}"
 }

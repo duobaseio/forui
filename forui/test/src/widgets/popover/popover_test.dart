@@ -573,4 +573,65 @@ void main() {
       expect(node.context, isNotNull);
     });
   });
+
+  group('accessibility', () {
+    testWidgets('escape on the trigger dismisses the popover', (tester) async {
+      final trigger = autoDispose(FocusNode());
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FPopover(
+            control: const .managed(initial: true),
+            autofocus: false,
+            popoverBuilder: (_, _) => const Text('content'),
+            child: Focus(
+              focusNode: trigger,
+              child: Container(color: Colors.black, height: 10, width: 10),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      trigger.requestFocus();
+      await tester.pump();
+
+      expect(find.text('content'), findsOneWidget);
+      expect(trigger.hasFocus, true);
+
+      await tester.sendKeyEvent(.escape);
+      await tester.pumpAndSettle();
+
+      expect(find.text('content'), findsNothing);
+    });
+
+    testWidgets('escape on the trigger is not consumed when the popover is closed', (tester) async {
+      final trigger = autoDispose(FocusNode());
+      var escaped = false;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: CallbackShortcuts(
+            bindings: {const SingleActivator(.escape): () => escaped = true},
+            child: FPopover(
+              popoverBuilder: (_, _) => const Text('content'),
+              child: Focus(
+                focusNode: trigger,
+                child: Container(color: Colors.black, height: 10, width: 10),
+              ),
+            ),
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      trigger.requestFocus();
+      await tester.pump();
+
+      await tester.sendKeyEvent(.escape);
+      await tester.pump();
+
+      expect(escaped, true);
+    });
+  });
 }

@@ -24,6 +24,16 @@ class FLocalizationsCs extends FLocalizations {
   String get autocompleteNoResults => 'Nebyly nalezeny žádné shody.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count dostupných výsledků';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Návrh: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Karta $tabIndex z $tabCount';
   }
@@ -45,6 +55,21 @@ class FLocalizationsCs extends FLocalizations {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Předchozí roky';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Zobrazit dny';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Zobrazit výběr měsíce';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Zobrazit výběr měsíce a roku';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Zobrazit výběr roku';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Dnes';
 
   @override
   String get contextMenuSemanticsLabel => 'Kontextová nabídka';
@@ -135,4 +160,10 @@ class FLocalizationsCs extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Neplatný čas.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hodina';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minuta';
 }

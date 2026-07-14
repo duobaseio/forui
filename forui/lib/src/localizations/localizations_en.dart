@@ -24,6 +24,22 @@ class FLocalizationsEn extends FLocalizations {
   String get autocompleteNoResults => 'No matches found.';
 
   @override
+  String autocompleteResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results available',
+      one: '1 result available',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Suggestion: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Tab $tabIndex of $tabCount';
   }
@@ -45,6 +61,21 @@ class FLocalizationsEn extends FLocalizations {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Previous years';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Show days';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Show month picker';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Show month and year picker';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Show year picker';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Today';
 
   @override
   String get contextMenuSemanticsLabel => 'Context menu';
@@ -135,6 +166,12 @@ class FLocalizationsEn extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Invalid time.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hour';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minute';
 }
 
 /// The translations for English, as used in Australia (`en_AU`).
@@ -151,6 +188,22 @@ class FLocalizationsEnAu extends FLocalizationsEn {
 
   @override
   String get autocompleteNoResults => 'No matches found.';
+
+  @override
+  String autocompleteResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results available',
+      one: '1 result available',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Suggestion: $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
@@ -174,6 +227,21 @@ class FLocalizationsEnAu extends FLocalizationsEn {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Previous years';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Show days';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Show month picker';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Show month and year picker';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Show year picker';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Today';
 
   @override
   String get contextMenuSemanticsLabel => 'Context menu';
@@ -264,6 +332,12 @@ class FLocalizationsEnAu extends FLocalizationsEn {
 
   @override
   String get timeFieldInvalidDateError => 'Invalid time.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hour';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minute';
 }
 
 /// The translations for English, as used in Canada (`en_CA`).
@@ -280,6 +354,22 @@ class FLocalizationsEnCa extends FLocalizationsEn {
 
   @override
   String get autocompleteNoResults => 'No matches found.';
+
+  @override
+  String autocompleteResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results available',
+      one: '1 result available',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Suggestion: $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
@@ -303,6 +393,21 @@ class FLocalizationsEnCa extends FLocalizationsEn {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Previous years';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Show days';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Show month picker';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Show month and year picker';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Show year picker';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Today';
 
   @override
   String get contextMenuSemanticsLabel => 'Context menu';
@@ -393,6 +498,12 @@ class FLocalizationsEnCa extends FLocalizationsEn {
 
   @override
   String get timeFieldInvalidDateError => 'Invalid time.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hour';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minute';
 }
 
 /// The translations for English, as used in the United Kingdom (`en_GB`).
@@ -411,6 +522,22 @@ class FLocalizationsEnGb extends FLocalizationsEn {
   String get autocompleteNoResults => 'No matches found.';
 
   @override
+  String autocompleteResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results available',
+      one: '1 result available',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Suggestion: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Tab $tabIndex of $tabCount';
   }
@@ -432,6 +559,21 @@ class FLocalizationsEnGb extends FLocalizationsEn {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Previous years';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Show days';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Show month picker';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Show month and year picker';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Show year picker';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Today';
 
   @override
   String get contextMenuSemanticsLabel => 'Context menu';
@@ -522,6 +664,12 @@ class FLocalizationsEnGb extends FLocalizationsEn {
 
   @override
   String get timeFieldInvalidDateError => 'Invalid time.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hour';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minute';
 }
 
 /// The translations for English, as used in Ireland (`en_IE`).
@@ -540,6 +688,22 @@ class FLocalizationsEnIe extends FLocalizationsEn {
   String get autocompleteNoResults => 'No matches found.';
 
   @override
+  String autocompleteResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results available',
+      one: '1 result available',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Suggestion: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Tab $tabIndex of $tabCount';
   }
@@ -561,6 +725,21 @@ class FLocalizationsEnIe extends FLocalizationsEn {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Previous years';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Show days';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Show month picker';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Show month and year picker';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Show year picker';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Today';
 
   @override
   String get contextMenuSemanticsLabel => 'Context menu';
@@ -651,6 +830,12 @@ class FLocalizationsEnIe extends FLocalizationsEn {
 
   @override
   String get timeFieldInvalidDateError => 'Invalid time.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hour';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minute';
 }
 
 /// The translations for English, as used in India (`en_IN`).
@@ -667,6 +852,22 @@ class FLocalizationsEnIn extends FLocalizationsEn {
 
   @override
   String get autocompleteNoResults => 'No matches found.';
+
+  @override
+  String autocompleteResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results available',
+      one: '1 result available',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Suggestion: $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
@@ -690,6 +891,21 @@ class FLocalizationsEnIn extends FLocalizationsEn {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Previous years';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Show days';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Show month picker';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Show month and year picker';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Show year picker';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Today';
 
   @override
   String get contextMenuSemanticsLabel => 'Context menu';
@@ -780,6 +996,12 @@ class FLocalizationsEnIn extends FLocalizationsEn {
 
   @override
   String get timeFieldInvalidDateError => 'Invalid time.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hour';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minute';
 }
 
 /// The translations for English, as used in New Zealand (`en_NZ`).
@@ -796,6 +1018,22 @@ class FLocalizationsEnNz extends FLocalizationsEn {
 
   @override
   String get autocompleteNoResults => 'No matches found.';
+
+  @override
+  String autocompleteResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results available',
+      one: '1 result available',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Suggestion: $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
@@ -819,6 +1057,21 @@ class FLocalizationsEnNz extends FLocalizationsEn {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Previous years';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Show days';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Show month picker';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Show month and year picker';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Show year picker';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Today';
 
   @override
   String get contextMenuSemanticsLabel => 'Context menu';
@@ -909,6 +1162,12 @@ class FLocalizationsEnNz extends FLocalizationsEn {
 
   @override
   String get timeFieldInvalidDateError => 'Invalid time.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hour';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minute';
 }
 
 /// The translations for English, as used in Singapore (`en_SG`).
@@ -925,6 +1184,22 @@ class FLocalizationsEnSg extends FLocalizationsEn {
 
   @override
   String get autocompleteNoResults => 'No matches found.';
+
+  @override
+  String autocompleteResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results available',
+      one: '1 result available',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Suggestion: $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
@@ -948,6 +1223,21 @@ class FLocalizationsEnSg extends FLocalizationsEn {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Previous years';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Show days';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Show month picker';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Show month and year picker';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Show year picker';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Today';
 
   @override
   String get contextMenuSemanticsLabel => 'Context menu';
@@ -1038,6 +1328,12 @@ class FLocalizationsEnSg extends FLocalizationsEn {
 
   @override
   String get timeFieldInvalidDateError => 'Invalid time.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hour';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minute';
 }
 
 /// The translations for English, as used in South Africa (`en_ZA`).
@@ -1054,6 +1350,22 @@ class FLocalizationsEnZa extends FLocalizationsEn {
 
   @override
   String get autocompleteNoResults => 'No matches found.';
+
+  @override
+  String autocompleteResults(int count) {
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$count results available',
+      one: '1 result available',
+    );
+    return '$_temp0';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Suggestion: $suggestion';
+  }
 
   @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
@@ -1077,6 +1389,21 @@ class FLocalizationsEnZa extends FLocalizationsEn {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Previous years';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Show days';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Show month picker';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Show month and year picker';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Show year picker';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Today';
 
   @override
   String get contextMenuSemanticsLabel => 'Context menu';
@@ -1167,4 +1494,10 @@ class FLocalizationsEnZa extends FLocalizationsEn {
 
   @override
   String get timeFieldInvalidDateError => 'Invalid time.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hour';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minute';
 }

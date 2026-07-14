@@ -8,8 +8,8 @@ import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/localizations/localization.dart';
-import 'package:forui/src/widgets/picker/date_time_picker.dart';
 import 'package:forui/src/widgets/picker/time/time_picker_controller.dart';
+import 'package:forui/src/widgets/picker/time/time_picker_wheels.dart';
 
 part 'time_picker.design.dart';
 

@@ -24,6 +24,16 @@ class FLocalizationsFi extends FLocalizations {
   String get autocompleteNoResults => 'Ei osumia löytynyt.';
 
   @override
+  String autocompleteResults(int count) {
+    return '$count tulosta saatavilla';
+  }
+
+  @override
+  String autocompleteSuggestion(String suggestion) {
+    return 'Ehdotus: $suggestion';
+  }
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Välilehti $tabIndex/$tabCount';
   }
@@ -45,6 +55,21 @@ class FLocalizationsFi extends FLocalizations {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Edelliset vuodet';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Näytä päivät';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Näytä kuukauden valitsin';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Näytä kuukauden ja vuoden valitsin';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Näytä vuoden valitsin';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Tänään';
 
   @override
   String get contextMenuSemanticsLabel => 'Kontekstivalikko';
@@ -135,4 +160,10 @@ class FLocalizationsFi extends FLocalizations {
 
   @override
   String get timeFieldInvalidDateError => 'Virheellinen aika.';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Tunti';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minuutti';
 }

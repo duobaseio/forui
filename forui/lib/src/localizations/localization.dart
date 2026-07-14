@@ -60,6 +60,12 @@ class FDefaultLocalizations extends FLocalizations {
   String get autocompleteNoResults => 'No matches found.';
 
   @override
+  String autocompleteResults(int count) => count == 1 ? '1 result available' : '$count results available';
+
+  @override
+  String autocompleteSuggestion(String suggestion) => 'Suggestion: $suggestion';
+
+  @override
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) => 'Tab $tabIndex of $tabCount';
 
   @override
@@ -94,6 +100,21 @@ class FDefaultLocalizations extends FLocalizations {
 
   @override
   String get calendarPreviousYearsSemanticsLabel => 'Previous years';
+
+  @override
+  String get calendarShowDaysSemanticsHint => 'Show days';
+
+  @override
+  String get calendarShowMonthPickerSemanticsHint => 'Show month picker';
+
+  @override
+  String get calendarShowMonthYearPickerSemanticsHint => 'Show month and year picker';
+
+  @override
+  String get calendarShowYearPickerSemanticsHint => 'Show year picker';
+
+  @override
+  String get calendarTodaySemanticsLabel => 'Today';
 
   @override
   String get contextMenuSemanticsLabel => 'Context menu';
@@ -175,4 +196,10 @@ class FDefaultLocalizations extends FLocalizations {
 
   @override
   String get timeFieldSuffix => '';
+
+  @override
+  String get timePickerHourSemanticsLabel => 'Hour';
+
+  @override
+  String get timePickerMinuteSemanticsLabel => 'Minute';
 }
