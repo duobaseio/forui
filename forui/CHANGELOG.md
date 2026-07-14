@@ -1,4 +1,4 @@
-## 0.24.0 (next)
+## 0.24.0
 
 This update ships a refreshed CLI with a richer, more interactive experience, including the ability to build your own
 custom theme.

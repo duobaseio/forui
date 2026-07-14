@@ -12,6 +12,7 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
+        builder: (_, child) => FTheme(data: FTheme.neutral.light.touch, child: child!),
         home: HookBuilder(
           builder: (context) {
             controller = useFContinuousSliderController(value: FSliderValue(max: 0.2));
@@ -31,6 +32,7 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
+        builder: (_, child) => FTheme(data: FTheme.neutral.light.touch, child: child!),
         home: HookBuilder(
           builder: (context) {
             controller = useFContinuousRangeSliderController(value: FSliderValue(max: 0.2));
@@ -50,6 +52,7 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
+        builder: (_, child) => FTheme(data: FTheme.neutral.light.touch, child: child!),
         home: HookBuilder(
           builder: (context) {
             controller = useFDiscreteSliderController(value: FSliderValue(max: 0.2));
@@ -72,6 +75,7 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
+        builder: (_, child) => FTheme(data: FTheme.neutral.light.touch, child: child!),
         home: HookBuilder(
           builder: (context) {
             controller = useFDiscreteRangeSliderController(value: FSliderValue(max: 0.2));

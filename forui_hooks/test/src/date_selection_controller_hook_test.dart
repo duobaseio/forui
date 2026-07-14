@@ -12,6 +12,7 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
+        builder: (_, child) => FTheme(data: FTheme.neutral.light.touch, child: child!),
         home: HookBuilder(
           builder: (context) {
             controller = useFDateSelectionController();
@@ -36,6 +37,7 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
+        builder: (_, child) => FTheme(data: FTheme.neutral.light.touch, child: child!),
         home: HookBuilder(
           builder: (context) {
             controller = useFDatesSelectionController();
@@ -60,6 +62,7 @@ void main() {
 
     await tester.pumpWidget(
       MaterialApp(
+        builder: (_, child) => FTheme(data: FTheme.neutral.light.touch, child: child!),
         home: HookBuilder(
           builder: (context) {
             controller = useFRangeSelectionController();

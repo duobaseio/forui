@@ -144,6 +144,8 @@ prepare:
 			echo "  Updated forui_hooks/pubspec.yaml"; \
 			sed -i '' 's/forui: ^.*/forui: ^$(version)/' forui_internal_gen/pubspec.yaml; \
 			echo "  Updated forui_internal_gen/pubspec.yaml"; \
+			sed -i '' 's/forui: ^.*/forui: ^$(version)/' forui_cli/pubspec.yaml; \
+			echo "  Updated forui_cli/pubspec.yaml"; \
 		fi; \
 		echo "$(COLOR_GREEN)✓ Dependents updated$(COLOR_RESET)"; \
 	else \
