@@ -285,11 +285,14 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
         useViewPadding: widget.useViewPadding,
         useViewInsets: widget.useViewInsets,
         portalBuilder: (context, _) {
-          Widget tooltip = DecoratedBox(
-            decoration: _style.decoration,
-            child: Padding(
-              padding: _style.padding,
-              child: DefaultTextStyle(style: _style.textStyle, child: widget.tipBuilder(context, _controller)),
+          Widget tooltip = ConstrainedBox(
+            constraints: BoxConstraints(maxWidth: _style.maxWidth),
+            child: DecoratedBox(
+              decoration: _style.decoration,
+              child: Padding(
+                padding: _style.padding,
+                child: DefaultTextStyle(style: _style.textStyle, child: widget.tipBuilder(context, _controller)),
+              ),
             ),
           );
 
@@ -401,6 +404,12 @@ class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
   @override
   final EdgeInsets padding;
 
+  /// The maximum width of the tooltip.
+  ///
+  /// Defaults to [double.infinity], which wraps the tip at the viewport's edge.
+  @override
+  final double maxWidth;
+
   /// The tooltip's default text style.
   @override
   final TextStyle textStyle;
@@ -435,6 +444,7 @@ class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
     required this.hapticFeedback,
     this.backgroundFilter,
     this.padding = const .symmetric(horizontal: 14, vertical: 10),
+    this.maxWidth = double.infinity,
     this.motion = const FTooltipMotion(),
     this.hoverEnterDuration = const Duration(milliseconds: 500),
     this.hoverExitDuration = const Duration(milliseconds: 100),
@@ -461,6 +471,7 @@ class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
            shadows: FTooltipStyle.shadow,
          ),
          padding: const .symmetric(horizontal: 14, vertical: 10),
+         maxWidth: double.infinity,
          textStyle: typography.body.xs,
          hapticFeedback: hapticFeedback.mediumImpact,
          motion: motion,

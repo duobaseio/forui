@@ -1,3 +1,13 @@
+## 0.24.1 (next)
+
+### `FPortal`
+* Fix `FPortal` content overflowing the viewport's width instead of wrapping.
+
+
+### `FTooltip`
+* Add `FTooltipStyle.maxWidth`.
+
+
 ## 0.24.0
 
 This update ships a refreshed CLI with a richer, more interactive experience, including the ability to build your own

@@ -1,3 +1,5 @@
+import 'dart:math' as math;
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
@@ -141,7 +143,8 @@ class RenderPortalLayer extends RenderOverlayLayer {
         ),
       };
 
-      child.layout(constraints.normalize(), parentUsesSize: true);
+      final available = BoxConstraints(maxWidth: math.max(0, viewSize.width - padding.horizontal));
+      child.layout(constraints.enforce(available).normalize(), parentUsesSize: true);
     }
 
     size = constraints.biggest;
