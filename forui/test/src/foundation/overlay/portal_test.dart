@@ -55,11 +55,8 @@ void main() {
         padded: false,
         child: FPortal(
           control: .managed(controller: controller),
-          portalBuilder: (context, _) => const ColoredBox(
-            key: ValueKey('portal'),
-            color: Colors.red,
-            child: SizedBox(height: 20, width: 10000),
-          ),
+          portalBuilder: (context, _) =>
+              const ColoredBox(key: ValueKey('portal'), color: Colors.red, child: SizedBox(height: 20, width: 10000)),
           child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 20)),
         ),
       ),
