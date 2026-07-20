@@ -42,32 +42,6 @@ void main() {
     expect(taps, 1);
   });
 
-  testWidgets('clamps the portal width to the viewport', (tester) async {
-    tester.view.physicalSize = const Size(400, 600);
-    tester.view.devicePixelRatio = 1.0;
-    tester.view.padding = FakeViewPadding.zero;
-    addTearDown(tester.view.reset);
-
-    final controller = OverlayPortalController();
-
-    await tester.pumpWidget(
-      TestScaffold.app(
-        padded: false,
-        child: FPortal(
-          control: .managed(controller: controller),
-          portalBuilder: (context, _) =>
-              const ColoredBox(key: ValueKey('portal'), color: Colors.red, child: SizedBox(height: 20, width: 10000)),
-          child: const ColoredBox(color: Colors.yellow, child: SizedBox.square(dimension: 20)),
-        ),
-      ),
-    );
-
-    controller.show();
-    await tester.pumpAndSettle();
-
-    expect(tester.getSize(find.byKey(const ValueKey('portal'))).width, lessThanOrEqualTo(400));
-  });
-
   testWidgets('avoids a keyboard that opens while shown inside a scrollable Scaffold', (tester) async {
     // 400x600 screen; the keyboard occupies the bottom 300 (its top edge sits at y = 300).
     tester.view.physicalSize = const Size(400, 600);

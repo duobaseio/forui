@@ -1,11 +1,7 @@
 ## 0.24.1 (next)
 
-### `FPortal`
-* Fix `FPortal` content overflowing the viewport's width instead of wrapping.
-
-
 ### `FTooltip`
-* Add `FTooltipStyle.maxWidth`.
+* Add `FTooltipStyle.constraints`.
 
 
 ## 0.24.0

@@ -1,5 +1,3 @@
-import 'dart:math' as math;
-
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
@@ -144,12 +142,6 @@ class RenderPortalLayer extends RenderOverlayLayer {
       };
 
       child.layout(constraints.normalize(), parentUsesSize: true);
-
-      // Clamp to the viewport only when the content overflows, so width-filling content isn't forced to expand.
-      final available = math.max(0.0, viewSize.width - padding.horizontal);
-      if (available < child.size.width) {
-        child.layout(constraints.enforce(BoxConstraints(maxWidth: available)).normalize(), parentUsesSize: true);
-      }
     }
 
     size = constraints.biggest;

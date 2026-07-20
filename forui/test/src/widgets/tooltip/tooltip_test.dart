@@ -145,7 +145,7 @@ void main() {
     expect(tester.getSize(find.text(tip)).width, lessThanOrEqualTo(400));
   });
 
-  testWidgets('caps the tip at the style maxWidth', (tester) async {
+  testWidgets('caps the tip at the style constraints', (tester) async {
     const tip =
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et '
         'dolore magna aliqua.';
@@ -156,7 +156,7 @@ void main() {
     await tester.pumpWidget(
       TestScaffold.app(
         child: FTooltip(
-          style: const .delta(maxWidth: 150),
+          style: const .delta(constraints: BoxConstraints(maxWidth: 150)),
           control: .managed(controller: controller),
           tipBuilder: (_, _) => const Text(tip),
           child: const SizedBox.square(dimension: 20),
