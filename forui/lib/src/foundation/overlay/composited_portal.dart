@@ -143,8 +143,13 @@ class RenderPortalLayer extends RenderOverlayLayer {
         ),
       };
 
-      final available = BoxConstraints(maxWidth: math.max(0, viewSize.width - padding.horizontal));
-      child.layout(constraints.enforce(available).normalize(), parentUsesSize: true);
+      child.layout(constraints.normalize(), parentUsesSize: true);
+
+      // Clamp to the viewport only when the content overflows, so width-filling content isn't forced to expand.
+      final available = math.max(0.0, viewSize.width - padding.horizontal);
+      if (available < child.size.width) {
+        child.layout(constraints.enforce(BoxConstraints(maxWidth: available)).normalize(), parentUsesSize: true);
+      }
     }
 
     size = constraints.biggest;
