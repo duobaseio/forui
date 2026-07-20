@@ -1,4 +1,4 @@
-## 0.24.1 (next)
+## 0.24.1
 
 ### `FTooltip`
 * Add `FTooltipStyle.constraints`.
