@@ -2,7 +2,7 @@ name: forui
 description: >-
   Beautifully designed, minimalistic Flutter widgets for desktop & touch devices. Designs are heavily
   inspired by shadcn/ui and are fully customizable.
-version: 0.24.0
+version: 0.24.1
 homepage: https://forui.dev/
 documentation: https://forui.dev/docs
 repository: https://github.com/duobaseio/forui/tree/main/forui
