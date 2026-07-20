@@ -285,11 +285,15 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
         useViewPadding: widget.useViewPadding,
         useViewInsets: widget.useViewInsets,
         portalBuilder: (context, _) {
-          Widget tooltip = DecoratedBox(
-            decoration: _style.decoration,
-            child: Padding(
-              padding: _style.padding,
-              child: DefaultTextStyle(style: _style.textStyle, child: widget.tipBuilder(context, _controller)),
+          final Size(:width, :height) = MediaQuery.sizeOf(context);
+          Widget tooltip = ConstrainedBox(
+            constraints: _style.constraints.enforce(BoxConstraints(maxWidth: width, maxHeight: height)),
+            child: DecoratedBox(
+              decoration: _style.decoration,
+              child: Padding(
+                padding: _style.padding,
+                child: DefaultTextStyle(style: _style.textStyle, child: widget.tipBuilder(context, _controller)),
+              ),
             ),
           );
 
@@ -401,6 +405,12 @@ class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
   @override
   final EdgeInsets padding;
 
+  /// The tooltip's constraints. The height & width is capped at the viewport so large tips wrap.
+  ///
+  /// Defaults to `const BoxConstraints()`.
+  @override
+  final BoxConstraints constraints;
+
   /// The tooltip's default text style.
   @override
   final TextStyle textStyle;
@@ -435,6 +445,7 @@ class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
     required this.hapticFeedback,
     this.backgroundFilter,
     this.padding = const .symmetric(horizontal: 14, vertical: 10),
+    this.constraints = const BoxConstraints(),
     this.motion = const FTooltipMotion(),
     this.hoverEnterDuration = const Duration(milliseconds: 500),
     this.hoverExitDuration = const Duration(milliseconds: 100),
@@ -461,6 +472,7 @@ class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
            shadows: FTooltipStyle.shadow,
          ),
          padding: const .symmetric(horizontal: 14, vertical: 10),
+         constraints: const BoxConstraints(),
          textStyle: typography.body.xs,
          hapticFeedback: hapticFeedback.mediumImpact,
          motion: motion,

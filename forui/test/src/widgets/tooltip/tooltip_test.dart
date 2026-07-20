@@ -114,6 +114,62 @@ void main() {
     expect(find.text('tip'), findsNothing);
   });
 
+  testWidgets('wraps long tip text within the viewport', (tester) async {
+    tester.view.physicalSize = const Size(400, 600);
+    tester.view.devicePixelRatio = 1.0;
+    tester.view.padding = FakeViewPadding.zero;
+    addTearDown(tester.view.reset);
+
+    const tip =
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et '
+        'dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex '
+        'ea commodo consequat.';
+
+    final controller = FTooltipController(vsync: tester);
+    addTearDown(controller.dispose);
+
+    await tester.pumpWidget(
+      TestScaffold.app(
+        padded: false,
+        child: FTooltip(
+          control: .managed(controller: controller),
+          tipBuilder: (_, _) => const Text(tip),
+          child: const SizedBox.square(dimension: 20),
+        ),
+      ),
+    );
+
+    unawaited(controller.show());
+    await tester.pumpAndSettle();
+
+    expect(tester.getSize(find.text(tip)).width, lessThanOrEqualTo(400));
+  });
+
+  testWidgets('caps the tip at the style constraints', (tester) async {
+    const tip =
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et '
+        'dolore magna aliqua.';
+
+    final controller = FTooltipController(vsync: tester);
+    addTearDown(controller.dispose);
+
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FTooltip(
+          style: const .delta(constraints: BoxConstraints(maxWidth: 150)),
+          control: .managed(controller: controller),
+          tipBuilder: (_, _) => const Text(tip),
+          child: const SizedBox.square(dimension: 20),
+        ),
+      ),
+    );
+
+    unawaited(controller.show());
+    await tester.pumpAndSettle();
+
+    expect(tester.getSize(find.text(tip)).width, lessThanOrEqualTo(150));
+  });
+
   group('long press', () {
     testWidgets('shows tooltip', (tester) async {
       const duration = Duration(milliseconds: 1000);
