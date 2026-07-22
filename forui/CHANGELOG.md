@@ -1,4 +1,4 @@
-## 0.24.2 (next)
+## 0.24.2
 
 ### `FHeader`
 * Fix `FHeader.nested` crashing when given a tight width constraint.
