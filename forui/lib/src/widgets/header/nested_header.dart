@@ -157,11 +157,14 @@ class _RenderNestedHeader extends RenderBox
     final title = childAfter(prefixes)!;
     final suffixes = childAfter(title)!;
 
+    // Loosen the width so the children shrink-wrap instead of filling a tight-width parent (e.g. a ListView).
+    final loosened = constraints.copyWith(minWidth: 0);
+
     // We prioritize the prefixes and suffixes since they are interactive.
-    prefixes.layout(constraints, parentUsesSize: true);
-    suffixes.layout(constraints, parentUsesSize: true);
+    prefixes.layout(loosened, parentUsesSize: true);
+    suffixes.layout(loosened, parentUsesSize: true);
     title.layout(
-      constraints.copyWith(
+      loosened.copyWith(
         minHeight: 0,
         maxWidth: max(constraints.maxWidth - prefixes.size.width - suffixes.size.width, 0),
       ),
