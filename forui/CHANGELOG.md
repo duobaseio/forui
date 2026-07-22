@@ -1,3 +1,9 @@
+## 0.24.2 (next)
+
+### `FHeader`
+* Fix `FHeader.nested` crashing when given a tight width constraint.
+
+
 ## 0.24.1
 
 ### `FTooltip`

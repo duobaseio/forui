@@ -298,4 +298,23 @@ void main() {
       );
     });
   }
+
+  testWidgets('in a tight-width parent', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold(
+        // A tight width constraint, such as one imposed by a ListView, previously crashed FHeader.nested.
+        child: SizedBox(
+          width: 400,
+          child: FHeader.nested(
+            title: const Text('Today'),
+            prefixes: [FHeaderAction.back(onPress: () {})],
+            suffixes: [FHeaderAction(icon: const Icon(FLucideIcons.bell), onPress: () {})],
+          ),
+        ),
+      ),
+    );
+
+    await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/nested/tight-width.png'));
+  });
+
 }
