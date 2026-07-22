@@ -81,7 +81,7 @@ jobs:
           tar -xf ./_artifact/docs-build.tar -C _scratch
           rm -rf ./docs/.open-next
           cp -r _scratch/.open-next ./docs/.open-next
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
       - uses: pnpm/action-setup@v6
@@ -133,7 +133,7 @@ jobs:
           edit-mode: replace
 
       # Check that all relative URLs are working
-      - uses: actions/setup-go@v6
+      - uses: actions/setup-go@v7
         with:
           go-version: '1.26'
       - run: go install github.com/raviqqe/muffet/v2@latest

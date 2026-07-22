@@ -52,7 +52,7 @@ jobs:
           flutter pub get
           dart run tool/snippet_generator/main.dart
 
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
       - uses: pnpm/action-setup@v6
@@ -98,7 +98,7 @@ jobs:
           command: pages deploy ./docs_snippets/build/web --project-name=${{ vars.CLOUDFLARE_SNIPPETS_PROJECT_NAME }} --branch=main
 
       # Check that all relative URLs are working. We don't check GitHub links due to rate limiting.
-      - uses: actions/setup-go@v6
+      - uses: actions/setup-go@v7
         with:
           go-version: '1.26'
       - run: go install github.com/raviqqe/muffet/v2@latest

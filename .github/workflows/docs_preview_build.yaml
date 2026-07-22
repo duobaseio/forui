@@ -56,7 +56,7 @@ jobs:
           echo "slug=${SLUG:0:28}" >> $GITHUB_OUTPUT
 
       # Build docs
-      - uses: actions/setup-node@v6
+      - uses: actions/setup-node@v7
         with:
           node-version: 24
       - uses: pnpm/action-setup@v6
