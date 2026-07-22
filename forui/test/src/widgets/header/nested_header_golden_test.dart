@@ -316,5 +316,4 @@ void main() {
 
     await expectLater(find.byType(TestScaffold), matchesGoldenFile('header/nested/tight-width.png'));
   });
-
 }
