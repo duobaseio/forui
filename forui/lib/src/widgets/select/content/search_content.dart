@@ -86,7 +86,6 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
   void initState() {
     super.initState();
     _controller = widget.properties.control.create(_update);
-    _controller.addListener(_update);
 
     _previous = _controller.text;
     _data = widget.filter(_controller.text);

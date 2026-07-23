@@ -396,6 +396,58 @@ void main() {
       expect(autocompleteFocus.hasFocus, false);
       expect(buttonFocus.hasFocus, true);
     });
+
+    testWidgets('external focus node reused after autocomplete is disposed', (tester) async {
+      final focus = autoDispose(FocusNode());
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FAutocomplete.text(key: key, focusNode: focus, items: fruits),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.enterText(find.byKey(key), 'h');
+      await tester.pumpAndSettle();
+
+      focus.unfocus();
+      await tester.pumpAndSettle();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTextField(key: key, focusNode: focus),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      expect(tester.takeException(), null);
+    });
+
+    testWidgets('swapping external focus nodes attaches listener to new node', (tester) async {
+      final first = autoDispose(FocusNode());
+      final second = autoDispose(FocusNode());
+
+      Widget build(FocusNode focus) => TestScaffold.app(
+        child: FAutocomplete.text(
+          key: key,
+          popoverControl: .managed(controller: popoverController),
+          focusNode: focus,
+          items: fruits,
+        ),
+      );
+
+      await tester.pumpWidget(build(first));
+      await tester.pumpWidget(build(second));
+
+      second.requestFocus();
+      await tester.pumpAndSettle();
+
+      expect(second.hasFocus, true);
+      expect(popoverController.status.isForwardOrCompleted, true);
+    });
   });
 
   group('right arrow completion', () {

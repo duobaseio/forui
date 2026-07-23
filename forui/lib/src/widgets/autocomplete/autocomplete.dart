@@ -1217,10 +1217,12 @@ class _State<T> extends State<FAutocomplete<T>> with TickerProviderStateMixin {
     super.didUpdateWidget(old);
     // DO NOT REORDER
     if (widget.focusNode != old.focusNode) {
+      _fieldFocus.removeListener(_focus);
       if (old.focusNode == null) {
         _fieldFocus.dispose();
       }
       _fieldFocus = widget.focusNode ?? .new(debugLabel: 'FAutocomplete field');
+      _fieldFocus.addListener(_focus);
     }
 
     final (controller, updated) = widget.control.update(old.control, _controller, _update);
@@ -1237,6 +1239,7 @@ class _State<T> extends State<FAutocomplete<T>> with TickerProviderStateMixin {
   void dispose() {
     _popoverFocus.dispose();
 
+    _fieldFocus.removeListener(_focus);
     if (widget.focusNode == null) {
       _fieldFocus.dispose();
     }

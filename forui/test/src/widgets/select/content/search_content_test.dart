@@ -146,6 +146,32 @@ void main() {
 
         expect(changedValue?.text, 'test');
       });
+
+      testWidgets('external controller mutated after popover closes', (tester) async {
+        final textController = autoDispose(TextEditingController());
+
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FSelect<String>.search(
+              key: key,
+              searchFieldProperties: FSelectSearchFieldProperties(control: .managed(controller: textController)),
+              filter: (query) => fruits,
+              items: {for (final fruit in fruits) fruit: fruit},
+            ),
+          ),
+        );
+
+        await tester.tap(find.byKey(key));
+        await tester.pumpAndSettle();
+
+        await tester.tapAt(.zero);
+        await tester.pumpAndSettle();
+
+        textController.text = 'Ba';
+        await tester.pumpAndSettle();
+
+        expect(tester.takeException(), null);
+      });
     });
   });
 }
