@@ -1,3 +1,14 @@
+## 0.24.3
+
+### `FAutocomplete`
+* Fix crash when an external focus node is reused by another widget after `FAutocomplete` is disposed.
+* Fix `FAutocomplete` not responding to focus changes after its focus node is swapped.
+
+
+### `FSelect` & `FMultiSelect`
+* Fix crash when the search field's external controller is modified after the popover closes.
+
+
 ## 0.24.2
 
 ### `FHeader`
