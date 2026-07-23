@@ -414,7 +414,11 @@ void main() {
       focus.unfocus();
       await tester.pumpAndSettle();
 
-      await tester.pumpWidget(TestScaffold.app(child: FTextField(key: key, focusNode: focus)));
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTextField(key: key, focusNode: focus),
+        ),
+      );
 
       await tester.tap(find.byKey(key));
       await tester.pumpAndSettle();
