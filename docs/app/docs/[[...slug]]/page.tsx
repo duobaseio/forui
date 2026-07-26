@@ -7,6 +7,7 @@ import { createRelativeLink } from 'fumadocs-ui/mdx';
 import { Separator } from '@/components/ui/separator';
 import LinkBadge from '@/components/ui/link-badge/link-badge';
 import LinkBadgeGroup from '@/components/ui/link-badge/link-badge-group';
+import { Ads } from '@/components/ads';
 
 export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
   const params = await props.params;
@@ -16,7 +17,11 @@ export default async function Page(props: PageProps<'/docs/[[...slug]]'>) {
   const MDX = page.data.body;
 
   return (
-    <DocsPage toc={page.data.toc} full={page.data.full} tableOfContent={{ style: 'clerk' }}>
+    <DocsPage
+      toc={page.data.toc}
+      full={page.data.full}
+      tableOfContent={{ style: 'clerk', footer: <Ads className="mt-auto shrink-0 pt-4 pb-2" /> }}
+    >
       <div className="space-y-0.5">
         <DocsTitle className="">{page.data.title}</DocsTitle>
         <DocsDescription className="text-base mb-0">{page.data.description}</DocsDescription>
