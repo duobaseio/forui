@@ -402,26 +402,6 @@ void main() {
   });
 
   group('accessibility', () {
-    testWidgets('exposes the tip as the child tooltip without showing the overlay', (tester) async {
-      final semantics = tester.ensureSemantics();
-
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: FTooltip(
-            semanticsLabel: 'Save',
-            tipBuilder: (context, controller) => const Text('Save changes'),
-            child: const Text('target'),
-          ),
-        ),
-      );
-      await tester.pumpAndSettle();
-
-      expect(find.text('Save changes'), findsNothing);
-      expect(tester.getSemantics(find.text('target')).getSemanticsData().tooltip, 'Save');
-
-      semantics.dispose();
-    });
-
     testWidgets('tip remains visible when the pointer moves onto it', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(

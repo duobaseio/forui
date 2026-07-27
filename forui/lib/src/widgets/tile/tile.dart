@@ -96,6 +96,9 @@ class FTile extends StatelessWidget with FTileMixin {
   /// {@macro forui.foundation.doc_templates.semanticsLabel}
   final String? semanticsLabel;
 
+  /// {@macro forui.foundation.doc_templates.semanticsTooltip}
+  final String? semanticsTooltip;
+
   /// Whether this tile is expanded, for disclosure controls. Null if it has no expanded state.
   final bool? semanticsExpanded;
 
@@ -185,6 +188,7 @@ class FTile extends StatelessWidget with FTileMixin {
     this.enabled,
     this.selected = false,
     this.semanticsLabel,
+    this.semanticsTooltip,
     this.semanticsExpanded,
     this.autofocus = false,
     this.focusNode,
@@ -210,6 +214,7 @@ class FTile extends StatelessWidget with FTileMixin {
          enabled: enabled,
          selected: selected,
          semanticsLabel: semanticsLabel,
+         semanticsTooltip: semanticsTooltip,
          semanticsExpanded: semanticsExpanded,
          autofocus: autofocus,
          focusNode: focusNode,
@@ -248,6 +253,7 @@ class FTile extends StatelessWidget with FTileMixin {
     this.enabled,
     this.selected = false,
     this.semanticsLabel,
+    this.semanticsTooltip,
     this.semanticsExpanded,
     this.autofocus = false,
     this.focusNode,
@@ -269,6 +275,7 @@ class FTile extends StatelessWidget with FTileMixin {
          enabled: enabled,
          selected: selected,
          semanticsLabel: semanticsLabel,
+         semanticsTooltip: semanticsTooltip,
          semanticsExpanded: semanticsExpanded,
          autofocus: autofocus,
          focusNode: focusNode,
@@ -305,6 +312,7 @@ class FTile extends StatelessWidget with FTileMixin {
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
       ..add(FlagProperty('selected', value: selected, ifTrue: 'selected'))
       ..add(StringProperty('semanticsLabel', semanticsLabel, defaultValue: null, quoted: false))
+      ..add(StringProperty('semanticsTooltip', semanticsTooltip, defaultValue: null, quoted: false))
       ..add(DiagnosticsProperty('semanticsExpanded', semanticsExpanded, defaultValue: null))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))

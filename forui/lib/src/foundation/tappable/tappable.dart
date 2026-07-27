@@ -62,6 +62,9 @@ class FTappable extends StatefulWidget {
   /// A hint describing the result of activating this tappable. Null if it has no hint.
   final String? semanticsHint;
 
+  /// {@macro forui.foundation.doc_templates.semanticsTooltip}
+  final String? semanticsTooltip;
+
   /// Whether this tappable is announced as a button. Defaults to true.
   final bool semanticsButton;
 
@@ -315,6 +318,7 @@ class FTappable extends StatefulWidget {
     FFocusedOutlineStyleDelta? focusedOutlineStyle,
     String? semanticsLabel,
     String? semanticsHint,
+    String? semanticsTooltip,
     bool semanticsButton,
     bool? semanticsChecked,
     bool? semanticsExpanded,
@@ -367,6 +371,7 @@ class FTappable extends StatefulWidget {
     this.focusedOutlineStyle,
     this.semanticsLabel,
     this.semanticsHint,
+    this.semanticsTooltip,
     this.semanticsButton = true,
     this.semanticsChecked,
     this.semanticsExpanded,
@@ -422,6 +427,7 @@ class FTappable extends StatefulWidget {
       ..add(DiagnosticsProperty('focusedOutlineStyle', focusedOutlineStyle))
       ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(StringProperty('semanticsHint', semanticsHint))
+      ..add(StringProperty('semanticsTooltip', semanticsTooltip))
       ..add(FlagProperty('semanticsButton', value: semanticsButton, ifFalse: 'not a button'))
       ..add(DiagnosticsProperty('semanticsChecked', semanticsChecked))
       ..add(DiagnosticsProperty('semanticsExpanded', semanticsExpanded))
@@ -651,6 +657,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
           enabled: !widget._disabled,
           label: widget.semanticsLabel,
           hint: widget.semanticsHint,
+          tooltip: widget.semanticsTooltip,
           container: true,
           button: widget.semanticsButton,
           checked: widget.semanticsChecked,
@@ -816,6 +823,7 @@ class AnimatedTappable extends FTappable {
     super.semanticsExpanded,
     super.semanticsInMutuallyExclusiveGroup,
     super.semanticsHint,
+    super.semanticsTooltip,
     super.excludeSemantics,
     super.autofocus,
     super.focusNode,

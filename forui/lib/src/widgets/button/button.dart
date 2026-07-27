@@ -122,6 +122,9 @@ class FButton extends StatelessWidget {
   /// {@macro forui.foundation.doc_templates.semanticsLabel}
   final String? semanticsLabel;
 
+  /// {@macro forui.foundation.doc_templates.semanticsTooltip}
+  final String? semanticsTooltip;
+
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
 
@@ -179,6 +182,7 @@ class FButton extends StatelessWidget {
     this.onSecondaryPress,
     this.onSecondaryLongPress,
     this.semanticsLabel,
+    this.semanticsTooltip,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
@@ -229,6 +233,7 @@ class FButton extends StatelessWidget {
     this.onSecondaryPress,
     this.onSecondaryLongPress,
     this.semanticsLabel,
+    this.semanticsTooltip,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
@@ -255,6 +260,7 @@ class FButton extends StatelessWidget {
     this.onSecondaryPress,
     this.onSecondaryLongPress,
     this.semanticsLabel,
+    this.semanticsTooltip,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
@@ -287,6 +293,7 @@ class FButton extends StatelessWidget {
       onSecondaryLongPress: onSecondaryLongPress,
       selected: selected,
       semanticsLabel: semanticsLabel,
+      semanticsTooltip: semanticsTooltip,
       excludeSemantics: semanticsLabel != null,
       builder: (_, variants, _) => DecoratedBox(
         decoration: style.decoration.resolve(variants),
@@ -308,6 +315,7 @@ class FButton extends StatelessWidget {
       ..add(ObjectFlagProperty.has('onSecondaryPress', onSecondaryPress))
       ..add(ObjectFlagProperty.has('onSecondaryLongPress', onSecondaryLongPress))
       ..add(StringProperty('semanticsLabel', semanticsLabel))
+      ..add(StringProperty('semanticsTooltip', semanticsTooltip))
       ..add(FlagProperty('autofocus', value: autofocus, defaultValue: false, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))

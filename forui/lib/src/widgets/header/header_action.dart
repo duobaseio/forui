@@ -33,6 +33,9 @@ class FHeaderAction extends StatelessWidget {
   /// {@macro forui.foundation.doc_templates.semanticsLabel}
   final String? semanticsLabel;
 
+  /// {@macro forui.foundation.doc_templates.semanticsTooltip}
+  final String? semanticsTooltip;
+
   /// {@macro forui.foundation.doc_templates.autofocus}
   final bool autofocus;
 
@@ -76,6 +79,7 @@ class FHeaderAction extends StatelessWidget {
     this.style = const .context(),
     this.selected = false,
     this.semanticsLabel,
+    this.semanticsTooltip,
     this.autofocus = false,
     this.focusNode,
     this.onFocusChange,
@@ -95,6 +99,7 @@ class FHeaderAction extends StatelessWidget {
     required VoidCallback? onPress,
     FHeaderActionStyleDelta style = const .context(),
     String? semanticsLabel,
+    String? semanticsTooltip,
     bool autofocus = false,
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
@@ -119,6 +124,7 @@ class FHeaderAction extends StatelessWidget {
     onPress: onPress,
     style: style,
     semanticsLabel: semanticsLabel,
+    semanticsTooltip: semanticsTooltip,
     autofocus: autofocus,
     focusNode: focusNode,
     onFocusChange: onFocusChange,
@@ -138,6 +144,7 @@ class FHeaderAction extends StatelessWidget {
     required VoidCallback? onPress,
     FHeaderActionStyleDelta style = const .context(),
     String? semanticsLabel,
+    String? semanticsTooltip,
     bool autofocus = false,
     FocusNode? focusNode,
     ValueChanged<bool>? onFocusChange,
@@ -162,6 +169,7 @@ class FHeaderAction extends StatelessWidget {
     onPress: onPress,
     style: style,
     semanticsLabel: semanticsLabel,
+    semanticsTooltip: semanticsTooltip,
     autofocus: autofocus,
     focusNode: focusNode,
     onFocusChange: onFocusChange,
@@ -183,6 +191,7 @@ class FHeaderAction extends StatelessWidget {
       style: style.tappableStyle,
       selected: selected,
       semanticsLabel: semanticsLabel,
+      semanticsTooltip: semanticsTooltip,
       autofocus: autofocus,
       focusNode: focusNode,
       onFocusChange: onFocusChange,
@@ -209,6 +218,7 @@ class FHeaderAction extends StatelessWidget {
       ..add(DiagnosticsProperty('icon', icon))
       ..add(FlagProperty('selected', value: selected, ifTrue: 'selected'))
       ..add(StringProperty('semanticsLabel', semanticsLabel))
+      ..add(StringProperty('semanticsTooltip', semanticsTooltip))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))

@@ -80,6 +80,14 @@ extension Semantics on Never {
   /// {@endtemplate}
   @internal
   static const semanticsLabel = '';
+
+  /// {@template forui.foundation.doc_templates.semanticsTooltip}
+  /// The tooltip announced by accessibility frameworks, in addition to the semantic label. Null if it has no tooltip.
+  ///
+  /// Set this when wrapping this widget in an [FTooltip], as a tooltip cannot annotate its child's semantics node.
+  /// {@endtemplate}
+  @internal
+  static const semanticsTooltip = '';
 }
 
 @internal

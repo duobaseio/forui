@@ -1,3 +1,25 @@
+## 0.25.0
+
+### `FButton`
+* Add `FButton.semanticsTooltip`.
+
+
+### `FHeaderAction`
+* Add `FHeaderAction.semanticsTooltip`.
+
+
+### `FItem` & `FTile`
+* Add `FItem.semanticsTooltip` and `FTile.semanticsTooltip`.
+
+
+### `FTappable`
+* Add `FTappable.semanticsTooltip`.
+
+
+### `FTooltip`
+* **Breaking** Remove `FTooltip.semanticsLabel`. Set `semanticsTooltip` on the trigger instead.
+
+
 ## 0.24.3
 
 ### `FAutocomplete`

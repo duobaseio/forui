@@ -952,6 +952,39 @@ void main() {
       );
     });
 
+    testWidgets('forwards semanticsTooltip onto its own node', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTappable.static(
+            semanticsLabel: 'Save',
+            semanticsTooltip: 'Save changes',
+            onPress: () {},
+            child: const Text('tappable'),
+          ),
+        ),
+      );
+
+      expect(tester.getSemantics(find.text('tappable')).getSemanticsData().tooltip, 'Save changes');
+
+      semantics.dispose();
+    });
+
+    testWidgets('has no tooltip by default', (tester) async {
+      final semantics = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTappable.static(onPress: () {}, child: const Text('tappable')),
+        ),
+      );
+
+      expect(tester.getSemantics(find.text('tappable')).getSemanticsData().tooltip, '');
+
+      semantics.dispose();
+    });
+
     testWidgets('suppresses selected flag when checked is set', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
