@@ -48,5 +48,6 @@
   "timePickerHourSemanticsLabel": "小時",
   "timePickerMinuteSemanticsLabel": "分鐘",
   "autocompleteResults": "{count} 個結果可用",
-  "autocompleteSuggestion": "建議：{suggestion}"
+  "autocompleteSuggestion": "建議：{suggestion}",
+  "breadcrumbCollapsedSemanticsLabel": "更多"
 }

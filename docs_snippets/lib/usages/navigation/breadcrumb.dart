@@ -60,6 +60,7 @@ final breadcrumbItemCollapsed = FBreadcrumbItem.collapsed(
   onFocusChange: (focused) {},
   traversalEdgeBehavior: .closedLoop,
   semanticsLabel: 'More pages',
+  menuSemanticsLabel: 'Collapsed pages',
   // {@endcategory}
   // {@category "Callbacks"}
   onHoverChange: (hovered) {},
@@ -107,6 +108,7 @@ final breadcrumbItemCollapsedTiles = FBreadcrumbItem.collapsedTiles(
   onFocusChange: (focused) {},
   traversalEdgeBehavior: .closedLoop,
   semanticsLabel: 'More pages',
+  menuSemanticsLabel: 'Collapsed pages',
   // {@endcategory}
   // {@category "Callbacks"}
   onHoverChange: (hovered) {},

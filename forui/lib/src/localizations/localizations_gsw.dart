@@ -39,6 +39,9 @@ class FLocalizationsGsw extends FLocalizations {
   }
 
   @override
+  String get breadcrumbCollapsedSemanticsLabel => 'Meh';
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Nächste Monet';
 
   @override

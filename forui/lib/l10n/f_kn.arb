@@ -47,5 +47,6 @@
   "timePickerHourSemanticsLabel": "ಗಂಟೆ",
   "timePickerMinuteSemanticsLabel": "ನಿಮಿಷ",
   "autocompleteResults": "{count} ಫಲಿತಾಂಶಗಳು ಲಭ್ಯವಿದೆ",
-  "autocompleteSuggestion": "ಸಲಹೆ: {suggestion}"
+  "autocompleteSuggestion": "ಸಲಹೆ: {suggestion}",
+  "breadcrumbCollapsedSemanticsLabel": "ಇನ್ನಷ್ಟು"
 }

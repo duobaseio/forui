@@ -39,6 +39,9 @@ class FLocalizationsZu extends FLocalizations {
   }
 
   @override
+  String get breadcrumbCollapsedSemanticsLabel => 'Okuningi';
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Inyanga elandelayo';
 
   @override

@@ -39,6 +39,9 @@ class FLocalizationsSr extends FLocalizations {
   }
 
   @override
+  String get breadcrumbCollapsedSemanticsLabel => 'Више';
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Следећи месец';
 
   @override
@@ -197,6 +200,9 @@ class FLocalizationsSrLatn extends FLocalizationsSr {
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Kartica $tabIndex od $tabCount';
   }
+
+  @override
+  String get breadcrumbCollapsedSemanticsLabel => 'Više';
 
   @override
   String get calendarNextMonthSemanticsLabel => 'Sledeći mesec';

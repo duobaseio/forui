@@ -48,5 +48,6 @@
   "timePickerHourSemanticsLabel": "घन्टा",
   "timePickerMinuteSemanticsLabel": "मिनेट",
   "autocompleteResults": "{count} परिणामहरू उपलब्ध छन्",
-  "autocompleteSuggestion": "सुझाव: {suggestion}"
+  "autocompleteSuggestion": "सुझाव: {suggestion}",
+  "breadcrumbCollapsedSemanticsLabel": "थप"
 }

@@ -48,5 +48,6 @@
   "timePickerHourSemanticsLabel": "Giờ",
   "timePickerMinuteSemanticsLabel": "Phút",
   "autocompleteResults": "Có {count} kết quả",
-  "autocompleteSuggestion": "Đề xuất: {suggestion}"
+  "autocompleteSuggestion": "Đề xuất: {suggestion}",
+  "breadcrumbCollapsedSemanticsLabel": "Thêm"
 }

@@ -47,5 +47,6 @@
   "timePickerHourSemanticsLabel": "Гадзіна",
   "timePickerMinuteSemanticsLabel": "Хвіліна",
   "autocompleteResults": "Даступна вынікаў: {count}",
-  "autocompleteSuggestion": "Прапанова: {suggestion}"
+  "autocompleteSuggestion": "Прапанова: {suggestion}",
+  "breadcrumbCollapsedSemanticsLabel": "Больш"
 }

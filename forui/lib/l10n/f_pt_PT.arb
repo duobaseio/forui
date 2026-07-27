@@ -47,5 +47,6 @@
   "timePickerHourSemanticsLabel": "Hora",
   "timePickerMinuteSemanticsLabel": "Minuto",
   "autocompleteResults": "{count} resultados disponíveis",
-  "autocompleteSuggestion": "Sugestão: {suggestion}"
+  "autocompleteSuggestion": "Sugestão: {suggestion}",
+  "breadcrumbCollapsedSemanticsLabel": "Mais"
 }

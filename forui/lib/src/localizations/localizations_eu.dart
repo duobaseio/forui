@@ -39,6 +39,9 @@ class FLocalizationsEu extends FLocalizations {
   }
 
   @override
+  String get breadcrumbCollapsedSemanticsLabel => 'Gehiago';
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Hurrengo hilabetea';
 
   @override

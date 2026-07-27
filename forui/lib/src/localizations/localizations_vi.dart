@@ -39,6 +39,9 @@ class FLocalizationsVi extends FLocalizations {
   }
 
   @override
+  String get breadcrumbCollapsedSemanticsLabel => 'Thêm';
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Tháng sau';
 
   @override

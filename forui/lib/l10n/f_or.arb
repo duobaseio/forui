@@ -48,5 +48,6 @@
   "timePickerHourSemanticsLabel": "ଘଣ୍ଟା",
   "timePickerMinuteSemanticsLabel": "ମିନିଟ୍",
   "autocompleteResults": "{count} ଫଳାଫଳ ଉପଲବ୍ଧ",
-  "autocompleteSuggestion": "ପରାମର୍ଶ: {suggestion}"
+  "autocompleteSuggestion": "ପରାମର୍ଶ: {suggestion}",
+  "breadcrumbCollapsedSemanticsLabel": "ଅଧିକ"
 }

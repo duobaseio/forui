@@ -39,6 +39,9 @@ class FLocalizationsEs extends FLocalizations {
   }
 
   @override
+  String get breadcrumbCollapsedSemanticsLabel => 'Más';
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
@@ -199,6 +202,9 @@ class FLocalizationsEs419 extends FLocalizationsEs {
   }
 
   @override
+  String get breadcrumbCollapsedSemanticsLabel => 'Más';
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
@@ -345,6 +351,9 @@ class FLocalizationsEsAr extends FLocalizationsEs {
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Pestaña $tabIndex de $tabCount';
   }
+
+  @override
+  String get breadcrumbCollapsedSemanticsLabel => 'Más';
 
   @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
@@ -495,6 +504,9 @@ class FLocalizationsEsBo extends FLocalizationsEs {
   }
 
   @override
+  String get breadcrumbCollapsedSemanticsLabel => 'Más';
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
@@ -641,6 +653,9 @@ class FLocalizationsEsCl extends FLocalizationsEs {
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Pestaña $tabIndex de $tabCount';
   }
+
+  @override
+  String get breadcrumbCollapsedSemanticsLabel => 'Más';
 
   @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
@@ -791,6 +806,9 @@ class FLocalizationsEsCo extends FLocalizationsEs {
   }
 
   @override
+  String get breadcrumbCollapsedSemanticsLabel => 'Más';
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
@@ -937,6 +955,9 @@ class FLocalizationsEsCr extends FLocalizationsEs {
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Pestaña $tabIndex de $tabCount';
   }
+
+  @override
+  String get breadcrumbCollapsedSemanticsLabel => 'Más';
 
   @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
@@ -1087,6 +1108,9 @@ class FLocalizationsEsDo extends FLocalizationsEs {
   }
 
   @override
+  String get breadcrumbCollapsedSemanticsLabel => 'Más';
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
@@ -1233,6 +1257,9 @@ class FLocalizationsEsEc extends FLocalizationsEs {
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Pestaña $tabIndex de $tabCount';
   }
+
+  @override
+  String get breadcrumbCollapsedSemanticsLabel => 'Más';
 
   @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
@@ -1383,6 +1410,9 @@ class FLocalizationsEsGt extends FLocalizationsEs {
   }
 
   @override
+  String get breadcrumbCollapsedSemanticsLabel => 'Más';
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
@@ -1529,6 +1559,9 @@ class FLocalizationsEsHn extends FLocalizationsEs {
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Pestaña $tabIndex de $tabCount';
   }
+
+  @override
+  String get breadcrumbCollapsedSemanticsLabel => 'Más';
 
   @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
@@ -1679,6 +1712,9 @@ class FLocalizationsEsMx extends FLocalizationsEs {
   }
 
   @override
+  String get breadcrumbCollapsedSemanticsLabel => 'Más';
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
@@ -1825,6 +1861,9 @@ class FLocalizationsEsNi extends FLocalizationsEs {
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Pestaña $tabIndex de $tabCount';
   }
+
+  @override
+  String get breadcrumbCollapsedSemanticsLabel => 'Más';
 
   @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
@@ -1975,6 +2014,9 @@ class FLocalizationsEsPa extends FLocalizationsEs {
   }
 
   @override
+  String get breadcrumbCollapsedSemanticsLabel => 'Más';
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
@@ -2121,6 +2163,9 @@ class FLocalizationsEsPe extends FLocalizationsEs {
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Pestaña $tabIndex de $tabCount';
   }
+
+  @override
+  String get breadcrumbCollapsedSemanticsLabel => 'Más';
 
   @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
@@ -2271,6 +2316,9 @@ class FLocalizationsEsPr extends FLocalizationsEs {
   }
 
   @override
+  String get breadcrumbCollapsedSemanticsLabel => 'Más';
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
@@ -2417,6 +2465,9 @@ class FLocalizationsEsPy extends FLocalizationsEs {
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Pestaña $tabIndex de $tabCount';
   }
+
+  @override
+  String get breadcrumbCollapsedSemanticsLabel => 'Más';
 
   @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
@@ -2567,6 +2618,9 @@ class FLocalizationsEsSv extends FLocalizationsEs {
   }
 
   @override
+  String get breadcrumbCollapsedSemanticsLabel => 'Más';
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
@@ -2713,6 +2767,9 @@ class FLocalizationsEsUs extends FLocalizationsEs {
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Pestaña $tabIndex de $tabCount';
   }
+
+  @override
+  String get breadcrumbCollapsedSemanticsLabel => 'Más';
 
   @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
@@ -2863,6 +2920,9 @@ class FLocalizationsEsUy extends FLocalizationsEs {
   }
 
   @override
+  String get breadcrumbCollapsedSemanticsLabel => 'Más';
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';
 
   @override
@@ -3009,6 +3069,9 @@ class FLocalizationsEsVe extends FLocalizationsEs {
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Pestaña $tabIndex de $tabCount';
   }
+
+  @override
+  String get breadcrumbCollapsedSemanticsLabel => 'Más';
 
   @override
   String get calendarNextMonthSemanticsLabel => 'Mes siguiente';

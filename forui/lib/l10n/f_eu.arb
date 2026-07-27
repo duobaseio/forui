@@ -48,5 +48,6 @@
   "timePickerHourSemanticsLabel": "Ordua",
   "timePickerMinuteSemanticsLabel": "Minutua",
   "autocompleteResults": "{count} emaitza erabilgarri",
-  "autocompleteSuggestion": "Iradokizuna: {suggestion}"
+  "autocompleteSuggestion": "Iradokizuna: {suggestion}",
+  "breadcrumbCollapsedSemanticsLabel": "Gehiago"
 }

@@ -47,5 +47,6 @@
   "timePickerHourSemanticsLabel": "שעה",
   "timePickerMinuteSemanticsLabel": "דקה",
   "autocompleteResults": "{count} תוצאות זמינות",
-  "autocompleteSuggestion": "הצעה: {suggestion}"
+  "autocompleteSuggestion": "הצעה: {suggestion}",
+  "breadcrumbCollapsedSemanticsLabel": "עוד"
 }

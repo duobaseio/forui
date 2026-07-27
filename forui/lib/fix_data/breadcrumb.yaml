@@ -1,0 +1,24 @@
+version: 1
+transforms:
+  # FBreadcrumbItem
+  - title: 'Rename FBreadcrumbItem.collapsed(semanticsLabel: ...) to FBreadcrumbItem.collapsed(menuSemanticsLabel: ...)'
+    date: 2026-07-27
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'collapsed'
+      inClass: FBreadcrumbItem
+    changes:
+      - kind: renameParameter
+        oldName: 'semanticsLabel'
+        newName: 'menuSemanticsLabel'
+
+  - title: 'Rename FBreadcrumbItem.collapsedTiles(semanticsLabel: ...) to FBreadcrumbItem.collapsedTiles(menuSemanticsLabel: ...)'
+    date: 2026-07-27
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'collapsedTiles'
+      inClass: FBreadcrumbItem
+    changes:
+      - kind: renameParameter
+        oldName: 'semanticsLabel'
+        newName: 'menuSemanticsLabel'

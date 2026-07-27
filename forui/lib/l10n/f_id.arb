@@ -48,5 +48,6 @@
   "timePickerHourSemanticsLabel": "Jam",
   "timePickerMinuteSemanticsLabel": "Menit",
   "autocompleteResults": "{count} hasil tersedia",
-  "autocompleteSuggestion": "Saran: {suggestion}"
+  "autocompleteSuggestion": "Saran: {suggestion}",
+  "breadcrumbCollapsedSemanticsLabel": "Lainnya"
 }

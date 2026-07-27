@@ -39,6 +39,9 @@ class FLocalizationsCs extends FLocalizations {
   }
 
   @override
+  String get breadcrumbCollapsedSemanticsLabel => 'Více';
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Následující měsíc';
 
   @override

@@ -39,6 +39,9 @@ class FLocalizationsTl extends FLocalizations {
   }
 
   @override
+  String get breadcrumbCollapsedSemanticsLabel => 'Higit pa';
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Susunod na buwan';
 
   @override

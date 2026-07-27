@@ -39,6 +39,9 @@ class FLocalizationsPt extends FLocalizations {
   }
 
   @override
+  String get breadcrumbCollapsedSemanticsLabel => 'Mais';
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Próximo mês';
 
   @override
@@ -197,6 +200,9 @@ class FLocalizationsPtPt extends FLocalizationsPt {
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Separador $tabIndex de $tabCount';
   }
+
+  @override
+  String get breadcrumbCollapsedSemanticsLabel => 'Mais';
 
   @override
   String get calendarNextMonthSemanticsLabel => 'Mês seguinte';

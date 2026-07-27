@@ -39,6 +39,9 @@ class FLocalizationsKy extends FLocalizations {
   }
 
   @override
+  String get breadcrumbCollapsedSemanticsLabel => 'Дагы';
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Кийинки ай';
 
   @override

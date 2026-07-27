@@ -48,5 +48,6 @@
   "timePickerHourSemanticsLabel": "Saat",
   "timePickerMinuteSemanticsLabel": "Dəqiqə",
   "autocompleteResults": "{count} nəticə mövcuddur",
-  "autocompleteSuggestion": "Təklif: {suggestion}"
+  "autocompleteSuggestion": "Təklif: {suggestion}",
+  "breadcrumbCollapsedSemanticsLabel": "Daha çox"
 }

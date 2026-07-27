@@ -69,6 +69,9 @@ class FDefaultLocalizations extends FLocalizations {
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) => 'Tab $tabIndex of $tabCount';
 
   @override
+  String get breadcrumbCollapsedSemanticsLabel => 'More';
+
+  @override
   String barrierOnTapHint(String modalRouteContentName) => 'Close $modalRouteContentName';
 
   @override

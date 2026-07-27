@@ -47,5 +47,6 @@
   "timePickerHourSemanticsLabel": "Сағат",
   "timePickerMinuteSemanticsLabel": "Минут",
   "autocompleteResults": "{count} нәтиже қолжетімді",
-  "autocompleteSuggestion": "Ұсыныс: {suggestion}"
+  "autocompleteSuggestion": "Ұсыныс: {suggestion}",
+  "breadcrumbCollapsedSemanticsLabel": "Тағы"
 }

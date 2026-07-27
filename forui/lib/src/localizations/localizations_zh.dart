@@ -39,6 +39,9 @@ class FLocalizationsZh extends FLocalizations {
   }
 
   @override
+  String get breadcrumbCollapsedSemanticsLabel => '更多';
+
+  @override
   String get calendarNextMonthSemanticsLabel => '下个月';
 
   @override
@@ -199,6 +202,9 @@ class FLocalizationsZhHk extends FLocalizationsZh {
   }
 
   @override
+  String get breadcrumbCollapsedSemanticsLabel => '更多';
+
+  @override
   String get calendarNextMonthSemanticsLabel => '下個月';
 
   @override
@@ -357,6 +363,9 @@ class FLocalizationsZhTw extends FLocalizationsZh {
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return '第 $tabIndex 個標籤頁，共 $tabCount 個';
   }
+
+  @override
+  String get breadcrumbCollapsedSemanticsLabel => '更多';
 
   @override
   String get calendarNextMonthSemanticsLabel => '下個月';

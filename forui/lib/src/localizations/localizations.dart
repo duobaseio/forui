@@ -322,6 +322,12 @@ abstract class FLocalizations {
   /// **'Tab {tabIndex} of {tabCount}'**
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount);
 
+  /// The label for a collapsed breadcrumb item's trigger, which reveals the hidden breadcrumb items.
+  ///
+  /// In en, this message translates to:
+  /// **'More'**
+  String get breadcrumbCollapsedSemanticsLabel;
+
   /// The label for the calendar header's next-month navigation button.
   ///
   /// In en, this message translates to:

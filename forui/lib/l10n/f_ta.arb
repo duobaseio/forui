@@ -47,5 +47,6 @@
   "timePickerHourSemanticsLabel": "மணிநேரம்",
   "timePickerMinuteSemanticsLabel": "நிமிடம்",
   "autocompleteResults": "{count} முடிவுகள் கிடைக்கின்றன",
-  "autocompleteSuggestion": "பரிந்துரை: {suggestion}"
+  "autocompleteSuggestion": "பரிந்துரை: {suggestion}",
+  "breadcrumbCollapsedSemanticsLabel": "மேலும்"
 }

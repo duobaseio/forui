@@ -47,5 +47,6 @@
   "timePickerHourSemanticsLabel": "മണിക്കൂർ",
   "timePickerMinuteSemanticsLabel": "മിനിറ്റ്",
   "autocompleteResults": "{count} ഫലങ്ങൾ ലഭ്യമാണ്",
-  "autocompleteSuggestion": "നിർദ്ദേശം: {suggestion}"
+  "autocompleteSuggestion": "നിർദ്ദേശം: {suggestion}",
+  "breadcrumbCollapsedSemanticsLabel": "കൂടുതൽ"
 }

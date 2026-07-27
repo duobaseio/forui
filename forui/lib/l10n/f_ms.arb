@@ -48,5 +48,6 @@
   "timePickerHourSemanticsLabel": "Jam",
   "timePickerMinuteSemanticsLabel": "Minit",
   "autocompleteResults": "{count} hasil tersedia",
-  "autocompleteSuggestion": "Cadangan: {suggestion}"
+  "autocompleteSuggestion": "Cadangan: {suggestion}",
+  "breadcrumbCollapsedSemanticsLabel": "Lagi"
 }

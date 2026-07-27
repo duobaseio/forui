@@ -48,5 +48,6 @@
   "timePickerHourSemanticsLabel": "Awr",
   "timePickerMinuteSemanticsLabel": "Munud",
   "autocompleteResults": "{count} canlyniad ar gael",
-  "autocompleteSuggestion": "Awgrym: {suggestion}"
+  "autocompleteSuggestion": "Awgrym: {suggestion}",
+  "breadcrumbCollapsedSemanticsLabel": "Rhagor"
 }

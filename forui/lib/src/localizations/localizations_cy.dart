@@ -39,6 +39,9 @@ class FLocalizationsCy extends FLocalizations {
   }
 
   @override
+  String get breadcrumbCollapsedSemanticsLabel => 'Rhagor';
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Mis nesaf';
 
   @override

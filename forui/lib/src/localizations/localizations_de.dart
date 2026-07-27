@@ -39,6 +39,9 @@ class FLocalizationsDe extends FLocalizations {
   }
 
   @override
+  String get breadcrumbCollapsedSemanticsLabel => 'Mehr';
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Nächster Monat';
 
   @override
@@ -189,6 +192,9 @@ class FLocalizationsDeCh extends FLocalizationsDe {
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Tab $tabIndex von $tabCount';
   }
+
+  @override
+  String get breadcrumbCollapsedSemanticsLabel => 'Mehr';
 
   @override
   String get calendarNextMonthSemanticsLabel => 'Nächster Monat';

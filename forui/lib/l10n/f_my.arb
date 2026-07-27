@@ -48,5 +48,6 @@
   "timePickerHourSemanticsLabel": "နာရီ",
   "timePickerMinuteSemanticsLabel": "မိနစ်",
   "autocompleteResults": "ရလဒ် {count} ခု ရနိုင်ပါသည်",
-  "autocompleteSuggestion": "အကြံပြုချက်: {suggestion}"
+  "autocompleteSuggestion": "အကြံပြုချက်: {suggestion}",
+  "breadcrumbCollapsedSemanticsLabel": "နောက်ထပ်"
 }

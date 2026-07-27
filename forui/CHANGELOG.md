@@ -1,5 +1,15 @@
 ## 0.25.0
 
+### `FBreadcrumb`
+* Add `FBreadcrumbItem.collapsed(menuSemanticsLabel: ...)` and `FBreadcrumbItem.collapsedTiles(menuSemanticsLabel: ...)`.
+
+* **Breaking** Change `FBreadcrumbItem.collapsed(semanticsLabel: ...)` and
+  `FBreadcrumbItem.collapsedTiles(semanticsLabel: ...)` to label the trigger. Use `menuSemanticsLabel` to label the menu.
+
+* Fix `FBreadcrumbItem.collapsed` and `FBreadcrumbItem.collapsedTiles` triggers being unlabeled.
+* Fix `FBreadcrumbItem.collapsed` and `FBreadcrumbItem.collapsedTiles` ignoring `onHoverChange` and `onVariantChange`.
+
+
 ### `FButton`
 * Add `FButton.semanticsTooltip`.
 

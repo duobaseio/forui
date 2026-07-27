@@ -48,5 +48,6 @@
   "timePickerHourSemanticsLabel": "Tund",
   "timePickerMinuteSemanticsLabel": "Minut",
   "autocompleteResults": "{count} tulemust saadaval",
-  "autocompleteSuggestion": "Soovitus: {suggestion}"
+  "autocompleteSuggestion": "Soovitus: {suggestion}",
+  "breadcrumbCollapsedSemanticsLabel": "Rohkem"
 }

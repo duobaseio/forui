@@ -47,5 +47,6 @@
   "timePickerHourSemanticsLabel": "ساعت",
   "timePickerMinuteSemanticsLabel": "دقیقه",
   "autocompleteResults": "{count} پایلې شتون لري",
-  "autocompleteSuggestion": "وړاندیز: {suggestion}"
+  "autocompleteSuggestion": "وړاندیز: {suggestion}",
+  "breadcrumbCollapsedSemanticsLabel": "نور"
 }

@@ -48,5 +48,6 @@
   "timePickerHourSemanticsLabel": "Stunda",
   "timePickerMinuteSemanticsLabel": "Minūte",
   "autocompleteResults": "Pieejami {count} rezultāti",
-  "autocompleteSuggestion": "Ieteikums: {suggestion}"
+  "autocompleteSuggestion": "Ieteikums: {suggestion}",
+  "breadcrumbCollapsedSemanticsLabel": "Vairāk"
 }

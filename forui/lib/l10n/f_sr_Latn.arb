@@ -48,5 +48,6 @@
   "timePickerHourSemanticsLabel": "Sat",
   "timePickerMinuteSemanticsLabel": "Minut",
   "autocompleteResults": "{count} dostupnih rezultata",
-  "autocompleteSuggestion": "Predlog: {suggestion}"
+  "autocompleteSuggestion": "Predlog: {suggestion}",
+  "breadcrumbCollapsedSemanticsLabel": "Više"
 }

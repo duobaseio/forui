@@ -45,6 +45,9 @@ class FLocalizationsEn extends FLocalizations {
   }
 
   @override
+  String get breadcrumbCollapsedSemanticsLabel => 'More';
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Next month';
 
   @override
@@ -209,6 +212,9 @@ class FLocalizationsEnAu extends FLocalizationsEn {
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Tab $tabIndex of $tabCount';
   }
+
+  @override
+  String get breadcrumbCollapsedSemanticsLabel => 'More';
 
   @override
   String get calendarNextMonthSemanticsLabel => 'Next month';
@@ -377,6 +383,9 @@ class FLocalizationsEnCa extends FLocalizationsEn {
   }
 
   @override
+  String get breadcrumbCollapsedSemanticsLabel => 'More';
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Next month';
 
   @override
@@ -541,6 +550,9 @@ class FLocalizationsEnGb extends FLocalizationsEn {
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Tab $tabIndex of $tabCount';
   }
+
+  @override
+  String get breadcrumbCollapsedSemanticsLabel => 'More';
 
   @override
   String get calendarNextMonthSemanticsLabel => 'Next month';
@@ -709,6 +721,9 @@ class FLocalizationsEnIe extends FLocalizationsEn {
   }
 
   @override
+  String get breadcrumbCollapsedSemanticsLabel => 'More';
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Next month';
 
   @override
@@ -873,6 +888,9 @@ class FLocalizationsEnIn extends FLocalizationsEn {
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Tab $tabIndex of $tabCount';
   }
+
+  @override
+  String get breadcrumbCollapsedSemanticsLabel => 'More';
 
   @override
   String get calendarNextMonthSemanticsLabel => 'Next month';
@@ -1041,6 +1059,9 @@ class FLocalizationsEnNz extends FLocalizationsEn {
   }
 
   @override
+  String get breadcrumbCollapsedSemanticsLabel => 'More';
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Next month';
 
   @override
@@ -1207,6 +1228,9 @@ class FLocalizationsEnSg extends FLocalizationsEn {
   }
 
   @override
+  String get breadcrumbCollapsedSemanticsLabel => 'More';
+
+  @override
   String get calendarNextMonthSemanticsLabel => 'Next month';
 
   @override
@@ -1371,6 +1395,9 @@ class FLocalizationsEnZa extends FLocalizationsEn {
   String bottomNavigationBarTabSemanticsLabel(int tabIndex, int tabCount) {
     return 'Tab $tabIndex of $tabCount';
   }
+
+  @override
+  String get breadcrumbCollapsedSemanticsLabel => 'More';
 
   @override
   String get calendarNextMonthSemanticsLabel => 'Next month';

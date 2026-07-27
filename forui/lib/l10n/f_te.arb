@@ -47,5 +47,6 @@
   "timePickerHourSemanticsLabel": "గంట",
   "timePickerMinuteSemanticsLabel": "నిమిషం",
   "autocompleteResults": "{count} ఫలితాలు అందుబాటులో ఉన్నాయి",
-  "autocompleteSuggestion": "సూచన: {suggestion}"
+  "autocompleteSuggestion": "సూచన: {suggestion}",
+  "breadcrumbCollapsedSemanticsLabel": "మరిన్ని"
 }

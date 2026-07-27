@@ -48,5 +48,6 @@
   "timePickerHourSemanticsLabel": "ម៉ោង",
   "timePickerMinuteSemanticsLabel": "នាទី",
   "autocompleteResults": "លទ្ធផល {count} អាចប្រើបាន",
-  "autocompleteSuggestion": "សំណើ៖ {suggestion}"
+  "autocompleteSuggestion": "សំណើ៖ {suggestion}",
+  "breadcrumbCollapsedSemanticsLabel": "ច្រើនទៀត"
 }

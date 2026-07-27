@@ -48,5 +48,6 @@
   "timePickerHourSemanticsLabel": "Tunti",
   "timePickerMinuteSemanticsLabel": "Minuutti",
   "autocompleteResults": "{count} tulosta saatavilla",
-  "autocompleteSuggestion": "Ehdotus: {suggestion}"
+  "autocompleteSuggestion": "Ehdotus: {suggestion}",
+  "breadcrumbCollapsedSemanticsLabel": "Lisää"
 }

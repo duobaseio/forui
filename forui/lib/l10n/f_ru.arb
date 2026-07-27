@@ -47,5 +47,6 @@
   "timePickerHourSemanticsLabel": "Часы",
   "timePickerMinuteSemanticsLabel": "Минуты",
   "autocompleteResults": "Доступно результатов: {count}",
-  "autocompleteSuggestion": "Предложение: {suggestion}"
+  "autocompleteSuggestion": "Предложение: {suggestion}",
+  "breadcrumbCollapsedSemanticsLabel": "Ещё"
 }

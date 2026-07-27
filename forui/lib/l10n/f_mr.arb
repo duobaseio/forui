@@ -47,5 +47,6 @@
   "timePickerHourSemanticsLabel": "तास",
   "timePickerMinuteSemanticsLabel": "मिनिट",
   "autocompleteResults": "{count} परिणाम उपलब्ध",
-  "autocompleteSuggestion": "सूचना: {suggestion}"
+  "autocompleteSuggestion": "सूचना: {suggestion}",
+  "breadcrumbCollapsedSemanticsLabel": "अधिक"
 }

@@ -48,5 +48,6 @@
   "timePickerHourSemanticsLabel": "Soat",
   "timePickerMinuteSemanticsLabel": "Daqiqa",
   "autocompleteResults": "{count} ta natija mavjud",
-  "autocompleteSuggestion": "Taklif: {suggestion}"
+  "autocompleteSuggestion": "Taklif: {suggestion}",
+  "breadcrumbCollapsedSemanticsLabel": "Yana"
 }

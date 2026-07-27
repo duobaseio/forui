@@ -48,5 +48,6 @@
   "timePickerHourSemanticsLabel": "時",
   "timePickerMinuteSemanticsLabel": "分",
   "autocompleteResults": "{count} 件の結果があります",
-  "autocompleteSuggestion": "候補: {suggestion}"
+  "autocompleteSuggestion": "候補: {suggestion}",
+  "breadcrumbCollapsedSemanticsLabel": "その他"
 }

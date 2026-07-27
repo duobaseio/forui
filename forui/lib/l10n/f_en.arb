@@ -46,6 +46,10 @@
       }
     }
   },
+  "breadcrumbCollapsedSemanticsLabel": "More",
+  "@breadcrumbCollapsedSemanticsLabel": {
+    "description": "The label for a collapsed breadcrumb item's trigger, which reveals the hidden breadcrumb items."
+  },
   "calendarNextMonthSemanticsLabel": "Next month",
   "@calendarNextMonthSemanticsLabel": {
     "description": "The label for the calendar header's next-month navigation button."

@@ -48,5 +48,6 @@
   "timePickerHourSemanticsLabel": "گھنٹہ",
   "timePickerMinuteSemanticsLabel": "منٹ",
   "autocompleteResults": "{count} نتائج دستیاب ہیں",
-  "autocompleteSuggestion": "تجویز: {suggestion}"
+  "autocompleteSuggestion": "تجویز: {suggestion}",
+  "breadcrumbCollapsedSemanticsLabel": "مزید"
 }

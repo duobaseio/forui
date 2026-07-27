@@ -47,5 +47,6 @@
   "timePickerHourSemanticsLabel": "ຊົ່ວໂມງ",
   "timePickerMinuteSemanticsLabel": "ນາທີ",
   "autocompleteResults": "ມີ {count} ຜົນລັບ",
-  "autocompleteSuggestion": "ຄຳແນະນຳ: {suggestion}"
+  "autocompleteSuggestion": "ຄຳແນະນຳ: {suggestion}",
+  "breadcrumbCollapsedSemanticsLabel": "ເພີ່ມເຕີມ"
 }
