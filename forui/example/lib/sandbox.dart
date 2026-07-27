@@ -13,11 +13,10 @@ import 'package:forui/forui.dart';
 /// but nothing pins its traversal order. The default `ReadingOrderTraversalPolicy` therefore sorted it geometrically.
 ///
 /// Before the traversal fix, with the popover open and focus on the trigger:
-/// `trigger -> after -> before -> popover A -> popover B -> popover A (loops)`. `FPortal` now pins the order, so Tab
-/// moves from the trigger straight into the content. The trailing loop is intended: the content `FocusScope` uses
-/// [TraversalEdgeBehavior.closedLoop] by default.
-///
-/// Still open: Escape from inside the popover restores focus to `before` rather than the trigger.
+/// `trigger -> after -> before -> popover A -> popover B -> popover A (loops)`, and Escape from inside restored focus
+/// to `before`. `FPortal` now pins the order, so Tab moves from the trigger straight into the content, and the
+/// enclosing scope's last focused child is the trigger, so Escape restores to it. The trailing loop is intended: the
+/// content `FocusScope` uses [TraversalEdgeBehavior.closedLoop] by default.
 class Sandbox extends StatefulWidget {
   const Sandbox({super.key});
 
@@ -134,8 +133,8 @@ class _SandboxState extends State<Sandbox> {
       for (final step in const [
         '1. Press Tab until the readout shows "trigger".',
         '2. Press Enter to open the popover.',
-        '3. Press Tab. Now lands on "popover A" (part 1, fixed).',
-        '4. Press Escape. Expected "trigger", actual "before" (part 2, open).',
+        '3. Press Tab. Lands on "popover A".',
+        '4. Press Escape. Focus returns to "trigger".',
       ])
         Text(step, style: typography.body.sm.copyWith(color: colors.mutedForeground)),
       const SizedBox(height: 6),
