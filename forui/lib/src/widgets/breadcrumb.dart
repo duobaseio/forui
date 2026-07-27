@@ -219,8 +219,6 @@ class _Crumb extends StatelessWidget implements FBreadcrumbItem {
   Widget build(BuildContext context) {
     final style = FBreadcrumbItemData.of(context).style;
 
-    // A crumb without an onPress is presentational. Rendering it as a tappable announces it as a disabled button and
-    // highlights it on hover despite it being inert.
     if (onPress == null) {
       return Semantics(
         selected: current ? true : null,
