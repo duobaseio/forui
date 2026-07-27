@@ -8,6 +8,8 @@
 
 * Fix `FBreadcrumbItem` ignoring `autofocus`, `focusNode`, `onFocusChange`, `onHoverChange` and `onVariantChange`.
 * Fix `FBreadcrumbItem` ignoring `FBreadcrumbStyle.focusedOutlineStyle`.
+* Fix `FBreadcrumbItem` without an `onPress` being announced as a disabled button.
+* Fix `FBreadcrumbItem` without an `onPress` changing color on hover.
 * Fix `FBreadcrumbItem.collapsed` and `FBreadcrumbItem.collapsedTiles` triggers being unlabeled.
 * Fix `FBreadcrumbItem.collapsed` and `FBreadcrumbItem.collapsedTiles` ignoring `onHoverChange` and `onVariantChange`.
 

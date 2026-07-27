@@ -172,9 +172,77 @@ void main() {
       expect(previous, isNot(contains(FTappableVariant.hovered)));
       expect(current, contains(FTappableVariant.hovered));
     });
+
+    testWidgets('FBreadcrumbItem without onPress does not respond to hover', (tester) async {
+      Color? color() => tester
+          .widget<DefaultTextStyle>(
+            find.ancestor(of: find.text('Widgets'), matching: find.byType(DefaultTextStyle)).first,
+          )
+          .style
+          .color;
+
+      bool? hovered;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FBreadcrumb(
+            children: [
+              FBreadcrumbItem(current: true, onHoverChange: (value) => hovered = value, child: const Text('Widgets')),
+            ],
+          ),
+        ),
+      );
+
+      final resting = color();
+
+      final gesture = await tester.createPointerGesture();
+      await tester.pump();
+
+      await gesture.moveTo(tester.getCenter(find.text('Widgets')));
+      await tester.pumpAndSettle();
+
+      expect(hovered, null);
+      expect(color(), resting);
+    });
   });
 
   group('accessibility', () {
+    testWidgets('FBreadcrumbItem without onPress is not announced as a disabled button', (tester) async {
+      final handle = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: const FBreadcrumb(children: [FBreadcrumbItem(current: true, child: Text('Widgets'))]),
+        ),
+      );
+
+      expect(
+        tester.getSemantics(find.text('Widgets')),
+        isSemantics(label: 'Widgets', isButton: false, hasEnabledState: false, isSelected: true),
+      );
+
+      handle.dispose();
+    });
+
+    testWidgets('FBreadcrumbItem with onPress is announced as an enabled button', (tester) async {
+      final handle = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FBreadcrumb(
+            children: [FBreadcrumbItem(onPress: () {}, child: const Text('Forui'))],
+          ),
+        ),
+      );
+
+      expect(
+        tester.getSemantics(find.text('Forui')),
+        isSemantics(label: 'Forui', isButton: true, hasEnabledState: true, isEnabled: true),
+      );
+
+      handle.dispose();
+    });
+
     testWidgets('FBreadcrumbItem focuses via an external focus node', (tester) async {
       final focus = FocusNode();
       addTearDown(focus.dispose);
@@ -211,9 +279,7 @@ void main() {
       await tester.pumpWidget(
         TestScaffold.app(
           child: FBreadcrumb(
-            children: [
-              FBreadcrumbItem(autofocus: true, focusNode: focus, onPress: () {}, child: const Text('Home')),
-            ],
+            children: [FBreadcrumbItem(autofocus: true, focusNode: focus, onPress: () {}, child: const Text('Home'))],
           ),
         ),
       );
