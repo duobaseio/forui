@@ -848,6 +848,8 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
           useViewPadding: widget.contentUseViewPadding,
           useViewInsets: widget.contentUseViewInsets,
           offset: widget.contentOffset,
+          // Tab should move to the next control instead of into the content.
+          traversalGrouped: false,
           hideRegion: widget.contentHideRegion,
           groupId: widget.contentGroupId,
           cutout: widget.contentCutout,

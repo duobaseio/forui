@@ -95,6 +95,15 @@ class FPortal extends StatefulWidget {
   /// Defaults to [EdgeInsets.zero].
   final EdgeInsetsGeometry padding;
 
+  /// {@template forui.foundation.FPortal.traversalGrouped}
+  /// Whether the portal's content is traversed immediately after the [child].
+  ///
+  /// Set to false for combobox-like widgets, where tab should move to the next control instead of into the content.
+  ///
+  /// Defaults to true.
+  /// {@endtemplate}
+  final bool traversalGrouped;
+
   /// An optional barrier builder that is displayed behind the portal.
   final Widget Function(RenderBox? cutout)? barrier;
 
@@ -123,6 +132,7 @@ class FPortal extends StatefulWidget {
     this.useViewPadding = true,
     this.useViewInsets = true,
     this.padding = .zero,
+    this.traversalGrouped = true,
     this.barrier,
     this.builder = FOverlay.defaultBuilder,
     this.child,
@@ -146,6 +156,7 @@ class FPortal extends StatefulWidget {
       ..add(FlagProperty('useViewPadding', value: useViewPadding, ifTrue: 'using view padding'))
       ..add(FlagProperty('useViewInsets', value: useViewInsets, ifTrue: 'using view insets'))
       ..add(DiagnosticsProperty('padding', padding))
+      ..add(FlagProperty('traversalGrouped', value: traversalGrouped, ifTrue: 'traversal grouped with child'))
       ..add(ObjectFlagProperty.has('barrier', barrier))
       ..add(ObjectFlagProperty.has('portalBuilder', portalBuilder))
       ..add(ObjectFlagProperty.has('builder', builder));
@@ -155,6 +166,7 @@ class FPortal extends StatefulWidget {
 class _State extends State<FPortal> with WidgetsBindingObserver {
   final _notifier = FChangeNotifier();
   final _link = ChildLayerLink();
+  final _traversal = OrderedTraversalPolicy();
   late OverlayPortalController _controller;
 
   @override
@@ -182,10 +194,13 @@ class _State extends State<FPortal> with WidgetsBindingObserver {
   }
 
   @override
-  Widget build(BuildContext context) => CompositedChild(
-    notifier: _notifier,
-    link: _link,
-    child: OverlayPortal(
+  Widget build(BuildContext context) {
+    Widget child = RepaintBoundary(child: widget.builder(context, _controller, widget.child));
+    if (widget.traversalGrouped) {
+      child = FocusTraversalOrder(order: const NumericFocusOrder(0), child: child);
+    }
+
+    final portal = OverlayPortal(
       controller: _controller,
       overlayChildBuilder: (context) {
         final direction = Directionality.maybeOf(context) ?? .ltr;
@@ -238,11 +253,24 @@ class _State extends State<FPortal> with WidgetsBindingObserver {
 
         // Prevents the portal from inheriting FTappableGroups in the widget.builder/widget.child since FTappableGroup
         // does not hit test across layers.
-        return FTappableGroup.isolate(child: portal);
+        portal = FTappableGroup.isolate(child: portal);
+        if (widget.traversalGrouped) {
+          portal = FocusTraversalOrder(order: const NumericFocusOrder(1), child: portal);
+        }
+
+        return portal;
       },
-      child: RepaintBoundary(child: widget.builder(context, _controller, widget.child)),
-    ),
-  );
+      child: child,
+    );
+
+    return CompositedChild(
+      notifier: _notifier,
+      link: _link,
+      // The portal shares a focus scope with this widget. The default ReadingOrderTraversalPolicy sorts it geometrically,
+      // e.g. after unrelated content. This keeps the content immediately after the child.
+      child: widget.traversalGrouped ? FocusTraversalGroup(policy: _traversal, child: portal) : portal,
+    );
+  }
 
   @override
   void dispose() {

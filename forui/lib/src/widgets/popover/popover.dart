@@ -193,6 +193,9 @@ class FPopover extends StatefulWidget {
   /// {@endtemplate}
   final TraversalEdgeBehavior? traversalEdgeBehavior;
 
+  /// {@macro forui.foundation.FPortal.traversalGrouped}
+  final bool traversalGrouped;
+
   /// {@template forui.widgets.FPopover.barrierSemanticsLabel}
   /// The popover's barrier label used by accessibility frameworks.
   ///
@@ -283,6 +286,7 @@ class FPopover extends StatefulWidget {
     this.focusNode,
     this.onFocusChange,
     this.traversalEdgeBehavior,
+    this.traversalGrouped = true,
     this.barrierSemanticsLabel,
     this.barrierSemanticsDismissible = true,
     this.cutout = true,
@@ -338,6 +342,7 @@ class FPopover extends StatefulWidget {
       ..add(DiagnosticsProperty('focusNode', focusNode))
       ..add(ObjectFlagProperty.has('onFocusChange', onFocusChange))
       ..add(EnumProperty('traversalEdgeBehavior', traversalEdgeBehavior))
+      ..add(FlagProperty('traversalGrouped', value: traversalGrouped, ifTrue: 'traversal grouped with child'))
       ..add(FlagProperty('useViewPadding', value: useViewPadding, ifTrue: 'using view padding'))
       ..add(FlagProperty('useViewInsets', value: useViewInsets, ifTrue: 'using view insets'))
       ..add(DiagnosticsProperty('shortcuts', shortcuts))
@@ -449,6 +454,7 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
           useViewPadding: widget.useViewPadding,
           useViewInsets: widget.useViewInsets,
           offset: widget.offset,
+          traversalGrouped: widget.traversalGrouped,
           barrier: style.barrierFilter == null
               ? null
               : (cutout) => TapRegion(

@@ -630,5 +630,32 @@ void main() {
         semantics.dispose();
       });
     }
+
+    testWidgets('tab moves to the next control instead of into the popover', (tester) async {
+      final focus = autoDispose(FocusNode());
+      final next = autoDispose(FocusNode());
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: Column(
+            children: [
+              FSelect<String>(key: key, items: letters, focusNode: focus),
+              FButton(onPress: () {}, focusNode: next, child: const Text('next')),
+            ],
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      focus.requestFocus();
+      await tester.pump();
+
+      await tester.sendKeyEvent(.tab);
+      await tester.pumpAndSettle();
+
+      expect(next.hasFocus, true);
+    });
   });
 }

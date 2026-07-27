@@ -12,6 +12,18 @@
 * Add `FItem.semanticsTooltip` and `FTile.semanticsTooltip`.
 
 
+### `FPopover`
+* Add `FPopover.traversalGrouped`.
+
+* Fix `FPopover` content not being traversed immediately after its child.
+
+
+### `FPortal`
+* Add `FPortal.traversalGrouped`.
+
+* Fix `FPortal` content not being traversed immediately after its child.
+
+
 ### `FTappable`
 * Add `FTappable.semanticsTooltip`.
 

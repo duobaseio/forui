@@ -1473,6 +1473,8 @@ class _State<T> extends State<FAutocomplete<T>> with TickerProviderStateMixin {
             useViewPadding: widget.contentUseViewPadding,
             useViewInsets: widget.contentUseViewInsets,
             offset: widget.contentOffset,
+            // Tab should move to the next control instead of into the content.
+            traversalGrouped: false,
             hideRegion: widget.contentHideRegion,
             groupId: widget.contentGroupId,
             cutout: widget.contentCutout,
