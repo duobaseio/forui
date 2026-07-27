@@ -138,7 +138,90 @@ void main() {
     });
   });
 
+  group('callbacks', () {
+    testWidgets('FBreadcrumbItem onVariantChange & onHoverChange called', (tester) async {
+      Set<FTappableVariant>? previous;
+      Set<FTappableVariant>? current;
+      bool? hovered;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FBreadcrumb(
+            children: [
+              FBreadcrumbItem(
+                onHoverChange: (value) => hovered = value,
+                onVariantChange: (p, c) {
+                  previous = p;
+                  current = c;
+                },
+                onPress: () {},
+                child: const Text('Home'),
+              ),
+            ],
+          ),
+        ),
+      );
+
+      final gesture = await tester.createPointerGesture();
+      await tester.pump();
+
+      await gesture.moveTo(tester.getCenter(find.text('Home')));
+      await tester.pumpAndSettle();
+
+      expect(hovered, true);
+      expect(previous, isNot(contains(FTappableVariant.hovered)));
+      expect(current, contains(FTappableVariant.hovered));
+    });
+  });
+
   group('accessibility', () {
+    testWidgets('FBreadcrumbItem focuses via an external focus node', (tester) async {
+      final focus = FocusNode();
+      addTearDown(focus.dispose);
+      bool? focused;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FBreadcrumb(
+            children: [
+              FBreadcrumbItem(
+                focusNode: focus,
+                onFocusChange: (value) => focused = value,
+                onPress: () {},
+                child: const Text('Home'),
+              ),
+            ],
+          ),
+        ),
+      );
+
+      expect(focus.hasFocus, false);
+
+      focus.requestFocus();
+      await tester.pumpAndSettle();
+
+      expect(focus.hasFocus, true);
+      expect(focused, true);
+    });
+
+    testWidgets('FBreadcrumbItem autofocuses', (tester) async {
+      final focus = FocusNode();
+      addTearDown(focus.dispose);
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FBreadcrumb(
+            children: [
+              FBreadcrumbItem(autofocus: true, focusNode: focus, onPress: () {}, child: const Text('Home')),
+            ],
+          ),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      expect(focus.hasFocus, true);
+    });
+
     for (final (name, collapsed) in [
       ('FBreadcrumbItem.collapsed', _collapsed),
       ('FBreadcrumbItem.collapsedTiles', _collapsedTiles),

@@ -6,6 +6,8 @@
 * **Breaking** Change `FBreadcrumbItem.collapsed(semanticsLabel: ...)` and
   `FBreadcrumbItem.collapsedTiles(semanticsLabel: ...)` to label the trigger. Use `menuSemanticsLabel` to label the menu.
 
+* Fix `FBreadcrumbItem` ignoring `autofocus`, `focusNode`, `onFocusChange`, `onHoverChange` and `onVariantChange`.
+* Fix `FBreadcrumbItem` ignoring `FBreadcrumbStyle.focusedOutlineStyle`.
 * Fix `FBreadcrumbItem.collapsed` and `FBreadcrumbItem.collapsedTiles` triggers being unlabeled.
 * Fix `FBreadcrumbItem.collapsed` and `FBreadcrumbItem.collapsedTiles` ignoring `onHoverChange` and `onVariantChange`.
 

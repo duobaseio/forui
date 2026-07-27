@@ -218,12 +218,16 @@ class _Crumb extends StatelessWidget implements FBreadcrumbItem {
   @override
   Widget build(BuildContext context) {
     final style = FBreadcrumbItemData.of(context).style;
-    final focusedOutlineStyle = context.theme.style.focusedOutlineStyle;
 
     return FTappable(
       style: style.tappableStyle,
-      focusedOutlineStyle: focusedOutlineStyle,
+      focusedOutlineStyle: style.focusedOutlineStyle,
       selected: current,
+      autofocus: autofocus,
+      focusNode: focusNode,
+      onFocusChange: onFocusChange,
+      onHoverChange: onHoverChange,
+      onVariantChange: onVariantChange,
       onPress: onPress,
       builder: (_, variants, child) => DefaultTextStyle(style: style.textStyle.resolve(variants), child: child!),
       child: Padding(padding: style.padding, child: child),
