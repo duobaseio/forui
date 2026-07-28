@@ -38,6 +38,17 @@ void main() {
       await expectLater(find.byType(TestScaffold), matchesGoldenFile('pagination/${theme.name}/default.png'));
     });
 
+    testWidgets('disabled actions', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          theme: theme.data,
+          child: const FPagination(control: .managed(pages: 1)),
+        ),
+      );
+
+      await expectLater(find.byType(TestScaffold), matchesGoldenFile('pagination/${theme.name}/disabled.png'));
+    });
+
     testWidgets('hide edges', (tester) async {
       await tester.pumpWidget(
         TestScaffold(

@@ -65,11 +65,18 @@ class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
     required FStyle style,
     required bool touch,
   }) : this(
-         itemIconStyle: .all(IconThemeData(color: colors.foreground, size: typography.body.md.fontSize)),
+         itemIconStyle: FVariants.from(
+           IconThemeData(color: colors.foreground, size: typography.body.md.fontSize),
+           variants: {
+             [.disabled]: .delta(color: colors.disable(colors.foreground)),
+           },
+         ),
          itemDecoration: FVariants.from(
            ShapeDecoration(shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md)),
            variants: {
              [.hovered, .pressed]: .shapeDelta(color: colors.secondary),
+             //
+             [.disabled]: const .shapeDelta(),
              //
              [.selected]: .shapeDelta(color: colors.primary),
              [.selected.and(.hovered), .selected.and(.pressed)]: .shapeDelta(color: colors.hover(colors.primary)),

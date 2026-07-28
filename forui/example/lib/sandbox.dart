@@ -1,22 +1,28 @@
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/semantics.dart';
+import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
 
-/// Repro for accessibility audit finding U7-004: `FPopover` content sorts last in focus traversal, and focus restore
-/// after dismissal lands on the wrong element.
+/// Repro for accessibility audit finding U3-016: `FPagination`'s previous/next actions stay enabled at the range edges.
 ///
-/// Run on a desktop target or the web (`flutter run -d macos` / `-d chrome`) and follow the on-screen steps. The readout
-/// shows which node currently holds primary focus, plus a log of the last few focus changes, so the traversal order is
-/// visible without watching focus outlines.
+/// Run on any target (`flutter run -d macos` / `-d chrome`) and follow the on-screen steps.
 ///
-/// Root cause: the content is an element tree descendant of the portal, so it already shares the trigger's focus scope,
-/// but nothing pins its traversal order. The default `ReadingOrderTraversalPolicy` therefore sorted it geometrically.
+/// [FPaginationController.previous] and [FPaginationController.next] guard internally, so activating them at the
+/// first/last page is a silent no-op. The buttons were nonetheless always built with a non-null `onPress`, so
+/// `FTappable` reported `enabled: true` and kept a `tap` action.
 ///
-/// Before the traversal fix, with the popover open and focus on the trigger:
-/// `trigger -> after -> before -> popover A -> popover B -> popover A (loops)`, and Escape from inside restored focus
-/// to `before`. `FPortal` now pins the order, so Tab moves from the trigger straight into the content, and the
-/// enclosing scope's last focused child is the trigger, so Escape restores to it. The trailing loop is intended: the
-/// content `FocusScope` uses [TraversalEdgeBehavior.closedLoop] by default.
+/// The readout below dumps the live semantics node for each action, so the state is visible without a screen reader.
+/// Semantics is force-enabled via [SemanticsBinding.ensureSemantics], which is why the readout is populated even with
+/// VoiceOver/TalkBack off.
+///
+/// Before the fix, "Previous" reported this on page 1 of 3, unchanged as you paged:
+///   actions: focus, tap
+///   flags:   isButton, hasEnabledState, isEnabled, isFocusable
+///
+/// The actions are now built inside the `ListenableBuilder` and take a null `onPress` at their edge, so they drop the
+/// `tap` action and `isEnabled`, leave the focus order, and dim. The second pagination has a single page, so both are
+/// inert from the start.
 class Sandbox extends StatefulWidget {
   const Sandbox({super.key});
 
@@ -25,65 +31,72 @@ class Sandbox extends StatefulWidget {
 }
 
 class _SandboxState extends State<Sandbox> {
-  late FocusNode _before;
-  late FocusNode _trigger;
-  late FocusNode _popoverA;
-  late FocusNode _popoverB;
-  late FocusNode _after;
-  late Map<FocusNode, String> _names;
+  final GlobalKey _multiple = GlobalKey();
+  final GlobalKey _single = GlobalKey();
 
-  final List<String> _log = [];
+  late SemanticsHandle _semantics;
+  late FPaginationController _controller;
+
+  Map<String, String> _multipleNodes = const {};
+  Map<String, String> _singleNodes = const {};
 
   @override
   void initState() {
     super.initState();
-    _before = FocusNode(debugLabel: 'before');
-    _trigger = FocusNode(debugLabel: 'trigger');
-    _popoverA = FocusNode(debugLabel: 'popover A');
-    _popoverB = FocusNode(debugLabel: 'popover B');
-    _after = FocusNode(debugLabel: 'after');
-    _names = {
-      _before: 'before',
-      _trigger: 'trigger',
-      _popoverA: 'popover A',
-      _popoverB: 'popover B',
-      _after: 'after',
-    };
-
-    FocusManager.instance.addListener(_onFocusChange);
+    _semantics = SemanticsBinding.instance.ensureSemantics();
+    _controller = FPaginationController(pages: 3);
+    _controller.addListener(_schedule);
+    _schedule();
   }
 
   @override
   void dispose() {
-    FocusManager.instance.removeListener(_onFocusChange);
-    _before.dispose();
-    _trigger.dispose();
-    _popoverA.dispose();
-    _popoverB.dispose();
-    _after.dispose();
+    _controller
+      ..removeListener(_schedule)
+      ..dispose();
+    _semantics.dispose();
     super.dispose();
   }
 
-  void _onFocusChange() {
-    final focused = _focused;
-    if (_log.isNotEmpty && _log.last == focused) {
+  void _schedule() => WidgetsBinding.instance.addPostFrameCallback((_) {
+    if (!mounted) {
       return;
     }
 
-    setState(() {
-      _log.add(focused);
-      if (_log.length > 6) {
-        _log.removeAt(0);
+    final multiple = _dump(_multiple);
+    final single = _dump(_single);
+    if (!mapEquals(multiple, _multipleNodes) || !mapEquals(single, _singleNodes)) {
+      setState(() {
+        _multipleNodes = multiple;
+        _singleNodes = single;
+      });
+    }
+  });
+
+  /// Collects the semantics node of every labelled action inside [key]'s subtree, keyed by label.
+  Map<String, String> _dump(GlobalKey key) {
+    if (key.currentContext?.findRenderObject() case final root?) {
+      final nodes = <String, String>{};
+
+      void visit(RenderObject object) {
+        if (object.debugSemantics case final node? when node.label == 'Previous' || node.label == 'Next') {
+          nodes[node.label] = _summarize(node);
+        }
+        object.visitChildren(visit);
       }
-    });
+
+      visit(root);
+      return nodes;
+    }
+
+    return const {};
   }
 
-  String get _focused {
-    final focus = FocusManager.instance.primaryFocus;
-    return switch (focus) {
-      null => '(none)',
-      _ => _names[focus] ?? '(${focus.runtimeType})',
-    };
+  String _summarize(SemanticsNode node) {
+    final description = node.toString();
+    final actions = RegExp(r'actions: \[(.*?)\]').firstMatch(description)?.group(1) ?? 'none';
+    final flags = RegExp(r'flags: \[(.*?)\]').firstMatch(description)?.group(1) ?? 'none';
+    return 'actions: $actions\nflags:   $flags';
   }
 
   @override
@@ -94,31 +107,32 @@ class _SandboxState extends State<Sandbox> {
       padding: const EdgeInsets.all(20),
       child: Center(
         child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 420),
+          constraints: const BoxConstraints(maxWidth: 460),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             spacing: 16,
             children: [
-              Text('U7-004: FPopover focus traversal', style: typography.body.lg.copyWith(color: colors.foreground)),
-              _steps(colors, typography),
-              _readout(colors, typography),
-              FButton(variant: .outline, focusNode: _before, onPress: () {}, child: const Text('before')),
-              FPopover(
-                popoverBuilder: (context, controller) => Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    spacing: 8,
-                    children: [
-                      FButton(focusNode: _popoverA, onPress: () {}, child: const Text('popover A')),
-                      FButton(focusNode: _popoverB, onPress: () {}, child: const Text('popover B')),
-                    ],
-                  ),
-                ),
-                builder: (context, controller, _) =>
-                    FButton(focusNode: _trigger, onPress: controller.toggle, child: const Text('trigger')),
+              Text(
+                'U3-016: FPagination prev/next stay enabled at the edges',
+                textAlign: TextAlign.center,
+                style: typography.body.lg.copyWith(color: colors.foreground),
               ),
-              FButton(variant: .outline, focusNode: _after, onPress: () {}, child: const Text('after')),
+              _steps(colors, typography),
+              Text(
+                'Three pages, currently on page ${_controller.value + 1}',
+                style: typography.body.sm.copyWith(color: colors.mutedForeground),
+              ),
+              FPagination(
+                key: _multiple,
+                control: .managed(controller: _controller),
+              ),
+              _readout(colors, typography, _multipleNodes),
+              Text(
+                'One page, so both actions are always inert',
+                style: typography.body.sm.copyWith(color: colors.mutedForeground),
+              ),
+              FPagination(key: _single, control: const .managed(pages: 1)),
+              _readout(colors, typography, _singleNodes),
             ],
           ),
         ),
@@ -131,30 +145,42 @@ class _SandboxState extends State<Sandbox> {
     spacing: 2,
     children: [
       for (final step in const [
-        '1. Press Tab until the readout shows "trigger".',
-        '2. Press Enter to open the popover.',
-        '3. Press Tab. Lands on "popover A".',
-        '4. Press Escape. Focus returns to "trigger".',
+        '1. On page 1, the left chevron is dimmed and its row below reports no tap action and no isEnabled.',
+        '2. Press Tab. Focus skips the left chevron and lands on page 1.',
+        '3. Click the right chevron to reach page 2. The left chevron un-dims and regains its tap action.',
+        '4. Click through to page 3. "Next" now reports the same thing "Previous" did on page 1.',
       ])
         Text(step, style: typography.body.sm.copyWith(color: colors.mutedForeground)),
       const SizedBox(height: 6),
       Text(
-        'Tab inside the popover loops A -> B -> A by design (traversalEdgeBehavior defaults to closedLoop).',
+        'With a screen reader on, an action at its edge is announced as a disabled button.',
         style: typography.body.xs.copyWith(color: colors.mutedForeground),
       ),
     ],
   );
 
-  Widget _readout(FColors colors, FTypography typography) => DecoratedBox(
-    decoration: BoxDecoration(border: Border.all(color: colors.border), borderRadius: BorderRadius.circular(8)),
+  Widget _readout(FColors colors, FTypography typography, Map<String, String> nodes) => DecoratedBox(
+    decoration: BoxDecoration(
+      border: Border.all(color: colors.border),
+      borderRadius: BorderRadius.circular(8),
+    ),
     child: Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        spacing: 2,
+        spacing: 8,
         children: [
-          Text('focus: $_focused', style: typography.body.sm.copyWith(color: colors.foreground)),
-          Text('log: ${_log.join(' -> ')}', style: typography.body.sm.copyWith(color: colors.mutedForeground)),
+          if (nodes.isEmpty)
+            Text('(no semantics yet)', style: typography.body.sm.copyWith(color: colors.mutedForeground))
+          else
+            for (final MapEntry(key: label, value: summary) in nodes.entries)
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(label, style: typography.body.sm.copyWith(color: colors.foreground)),
+                  Text(summary, style: typography.body.xs.copyWith(color: colors.mutedForeground)),
+                ],
+              ),
         ],
       ),
     ),

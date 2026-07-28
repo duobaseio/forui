@@ -1,4 +1,4 @@
-## 0.25.0
+## 0.25.0 (Next)
 
 ### `FBreadcrumb`
 * Add `FBreadcrumbItem.collapsed(menuSemanticsLabel: ...)` and `FBreadcrumbItem.collapsedTiles(menuSemanticsLabel: ...)`.
@@ -6,12 +6,9 @@
 * **Breaking** Change `FBreadcrumbItem.collapsed(semanticsLabel: ...)` and
   `FBreadcrumbItem.collapsedTiles(semanticsLabel: ...)` to label the trigger. Use `menuSemanticsLabel` to label the menu.
 
-* Fix `FBreadcrumbItem` ignoring `autofocus`, `focusNode`, `onFocusChange`, `onHoverChange` and `onVariantChange`.
-* Fix `FBreadcrumbItem` ignoring `FBreadcrumbStyle.focusedOutlineStyle`.
-* Fix `FBreadcrumbItem` without an `onPress` being announced as a disabled button.
-* Fix `FBreadcrumbItem` without an `onPress` changing color on hover.
-* Fix `FBreadcrumbItem.collapsed` and `FBreadcrumbItem.collapsedTiles` triggers being unlabeled.
-* Fix `FBreadcrumbItem.collapsed` and `FBreadcrumbItem.collapsedTiles` ignoring `onHoverChange` and `onVariantChange`.
+* Fix `FBreadcrumbItem` ignoring `autofocus`, `focusNode`, `onFocusChange`, `onHoverChange`, `onVariantChange` and
+  `FBreadcrumbStyle.focusedOutlineStyle`.
+* Fix `FBreadcrumbItem` without an `onPress` being announced as a disabled button and changing color on hover.
 
 
 ### `FButton`
@@ -24,6 +21,10 @@
 
 ### `FItem` & `FTile`
 * Add `FItem.semanticsTooltip` and `FTile.semanticsTooltip`.
+
+
+### `FPagination`
+* Fix `FPagination`'s previous and next buttons being enabled on the first and last pages.
 
 
 ### `FPopover`

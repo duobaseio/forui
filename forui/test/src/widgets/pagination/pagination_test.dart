@@ -1,3 +1,5 @@
+import 'package:flutter/widgets.dart' hide Action;
+
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
@@ -164,6 +166,35 @@ void main() {
     expect(controller.value, 4);
   });
 
+  for (final (name, page, highlights) in [('disabled', 0, false), ('enabled', 5, true)]) {
+    testWidgets('$name previous action highlights on hover: $highlights', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FPagination(control: .managed(initial: page, pages: 10)),
+        ),
+      );
+
+      Color? color() =>
+          (tester
+                      .widget<DecoratedBox>(
+                        find.descendant(of: find.byType(Action).first, matching: find.byType(DecoratedBox)).first,
+                      )
+                      .decoration
+                  as ShapeDecoration)
+              .color;
+
+      final resting = color();
+
+      final gesture = await tester.createPointerGesture();
+      await tester.pump();
+
+      await gesture.moveTo(tester.getCenter(find.byType(Action).first));
+      await tester.pumpAndSettle();
+
+      expect(color() != resting, highlights);
+    });
+  }
+
   testWidgets('notifyListener', (tester) async {
     var notifyCount = 0;
     final controller = autoDispose(
@@ -186,5 +217,73 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(notifyCount, 3);
+  });
+
+  group('accessibility', () {
+    for (final (label, edge, inside) in [('Previous', 0, 1), ('Next', 9, 8)]) {
+      testWidgets('$label is disabled at its edge', (tester) async {
+        final handle = tester.ensureSemantics();
+        final controller = autoDispose(FPaginationController(pages: 10, page: edge));
+
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: FPagination(control: .managed(controller: controller)),
+          ),
+        );
+
+        expect(
+          tester.getSemantics(find.bySemanticsLabel(label)),
+          isSemantics(label: label, isButton: true, hasEnabledState: true, isEnabled: false, hasTapAction: false),
+        );
+
+        controller.value = inside;
+        await tester.pumpAndSettle();
+
+        expect(
+          tester.getSemantics(find.bySemanticsLabel(label)),
+          isSemantics(label: label, isButton: true, hasEnabledState: true, isEnabled: true, hasTapAction: true),
+        );
+
+        handle.dispose();
+      });
+    }
+
+    testWidgets('both actions are disabled when there is a single page', (tester) async {
+      final handle = tester.ensureSemantics();
+
+      await tester.pumpWidget(TestScaffold.app(child: const FPagination(control: .managed(pages: 1))));
+
+      for (final label in ['Previous', 'Next']) {
+        expect(
+          tester.getSemantics(find.bySemanticsLabel(label)),
+          isSemantics(label: label, isButton: true, hasEnabledState: true, isEnabled: false, hasTapAction: false),
+        );
+      }
+
+      handle.dispose();
+    });
+
+    testWidgets('custom previous and next are left untouched at the edges', (tester) async {
+      final handle = tester.ensureSemantics();
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FPagination(
+            control: const .managed(pages: 1),
+            previous: FButton(onPress: () {}, child: const Text('Custom previous')),
+            next: FButton(onPress: () {}, child: const Text('Custom next')),
+          ),
+        ),
+      );
+
+      for (final label in ['Custom previous', 'Custom next']) {
+        expect(
+          tester.getSemantics(find.bySemanticsLabel(label)),
+          isSemantics(label: label, hasEnabledState: true, isEnabled: true, hasTapAction: true),
+        );
+      }
+
+      handle.dispose();
+    });
   });
 }
