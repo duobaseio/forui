@@ -25,6 +25,7 @@
 
 ### `FPagination`
 * Fix `FPagination`'s previous and next buttons being enabled on the first and last pages.
+* Fix `FPagination`'s ellipsis being announced by screen readers.
 
 
 ### `FPopover`

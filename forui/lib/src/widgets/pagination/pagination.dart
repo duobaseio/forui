@@ -106,7 +106,7 @@ class _FPaginationState extends State<FPagination> {
         constraints: style.itemConstraints,
         child: DefaultTextStyle(
           style: style.ellipsisTextStyle,
-          child: const Center(child: Text('...')),
+          child: const ExcludeSemantics(child: Center(child: Text('...'))),
         ),
       ),
     );

@@ -263,6 +263,17 @@ void main() {
       handle.dispose();
     });
 
+    testWidgets('ellipsis is excluded from semantics', (tester) async {
+      final handle = tester.ensureSemantics();
+
+      await tester.pumpWidget(TestScaffold.app(child: const FPagination(control: .managed(initial: 5, pages: 20))));
+
+      expect(find.text('...'), findsNWidgets(2), reason: 'the ellipsis should still be painted');
+      expect(find.bySemanticsLabel('...'), findsNothing);
+
+      handle.dispose();
+    });
+
     testWidgets('custom previous and next are left untouched at the edges', (tester) async {
       final handle = tester.ensureSemantics();
 
