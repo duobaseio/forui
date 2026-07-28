@@ -49,5 +49,6 @@
   "timePickerMinuteSemanticsLabel": "Minúta",
   "autocompleteResults": "{count} dostupných výsledkov",
   "autocompleteSuggestion": "Návrh: {suggestion}",
-  "breadcrumbCollapsedSemanticsLabel": "Viac"
+  "breadcrumbCollapsedSemanticsLabel": "Viac",
+  "paginationPageSemanticsLabel": "Strana {page}"
 }

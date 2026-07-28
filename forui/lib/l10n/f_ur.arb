@@ -49,5 +49,6 @@
   "timePickerMinuteSemanticsLabel": "منٹ",
   "autocompleteResults": "{count} نتائج دستیاب ہیں",
   "autocompleteSuggestion": "تجویز: {suggestion}",
-  "breadcrumbCollapsedSemanticsLabel": "مزید"
+  "breadcrumbCollapsedSemanticsLabel": "مزید",
+  "paginationPageSemanticsLabel": "صفحہ {page}"
 }

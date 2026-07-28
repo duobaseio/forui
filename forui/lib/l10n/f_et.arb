@@ -49,5 +49,6 @@
   "timePickerMinuteSemanticsLabel": "Minut",
   "autocompleteResults": "{count} tulemust saadaval",
   "autocompleteSuggestion": "Soovitus: {suggestion}",
-  "breadcrumbCollapsedSemanticsLabel": "Rohkem"
+  "breadcrumbCollapsedSemanticsLabel": "Rohkem",
+  "paginationPageSemanticsLabel": "{page}. leht"
 }

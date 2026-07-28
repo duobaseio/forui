@@ -102,6 +102,11 @@ class FLocalizationsUz extends FLocalizations {
   String get headerCloseSemanticsLabel => 'Yopish';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return '$page-sahifa';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Oldingi';
 
   @override

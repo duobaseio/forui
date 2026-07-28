@@ -49,5 +49,6 @@
   "timePickerMinuteSemanticsLabel": "分钟",
   "autocompleteResults": "{count} 个结果可用",
   "autocompleteSuggestion": "建议：{suggestion}",
-  "breadcrumbCollapsedSemanticsLabel": "更多"
+  "breadcrumbCollapsedSemanticsLabel": "更多",
+  "paginationPageSemanticsLabel": "第 {page} 页"
 }

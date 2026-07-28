@@ -49,5 +49,6 @@
   "timePickerMinuteSemanticsLabel": "ମିନିଟ୍",
   "autocompleteResults": "{count} ଫଳାଫଳ ଉପଲବ୍ଧ",
   "autocompleteSuggestion": "ପରାମର୍ଶ: {suggestion}",
-  "breadcrumbCollapsedSemanticsLabel": "ଅଧିକ"
+  "breadcrumbCollapsedSemanticsLabel": "ଅଧିକ",
+  "paginationPageSemanticsLabel": "ପୃଷ୍ଠା {page}"
 }

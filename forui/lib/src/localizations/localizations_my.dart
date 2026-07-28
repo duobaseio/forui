@@ -102,6 +102,11 @@ class FLocalizationsMy extends FLocalizations {
   String get headerCloseSemanticsLabel => 'ပိတ်ရန်';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'စာမျက်နှာ $page';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Previous';
 
   @override

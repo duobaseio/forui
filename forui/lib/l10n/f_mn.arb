@@ -48,5 +48,6 @@
   "timePickerMinuteSemanticsLabel": "Минут",
   "autocompleteResults": "{count} үр дүн байна",
   "autocompleteSuggestion": "Санал: {suggestion}",
-  "breadcrumbCollapsedSemanticsLabel": "Илүү"
+  "breadcrumbCollapsedSemanticsLabel": "Илүү",
+  "paginationPageSemanticsLabel": "{page}-р хуудас"
 }

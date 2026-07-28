@@ -102,6 +102,11 @@ class FLocalizationsEu extends FLocalizations {
   String get headerCloseSemanticsLabel => 'Itxi';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return '$page. orria';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Aurrekoa';
 
   @override

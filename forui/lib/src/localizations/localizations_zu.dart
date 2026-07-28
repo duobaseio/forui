@@ -102,6 +102,11 @@ class FLocalizationsZu extends FLocalizations {
   String get headerCloseSemanticsLabel => 'Vala';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Ikhasi $page';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Okwedlule';
 
   @override

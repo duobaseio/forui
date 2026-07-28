@@ -102,6 +102,11 @@ class FLocalizationsCa extends FLocalizations {
   String get headerCloseSemanticsLabel => 'Tanca';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Pàgina $page';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Previous';
 
   @override

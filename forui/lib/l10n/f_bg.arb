@@ -48,5 +48,6 @@
   "timePickerMinuteSemanticsLabel": "Минута",
   "autocompleteResults": "{count} налични резултата",
   "autocompleteSuggestion": "Предложение: {suggestion}",
-  "breadcrumbCollapsedSemanticsLabel": "Още"
+  "breadcrumbCollapsedSemanticsLabel": "Още",
+  "paginationPageSemanticsLabel": "Страница {page}"
 }

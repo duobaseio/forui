@@ -49,5 +49,6 @@
   "timePickerMinuteSemanticsLabel": "Perc",
   "autocompleteResults": "{count} találat érhető el",
   "autocompleteSuggestion": "Javaslat: {suggestion}",
-  "breadcrumbCollapsedSemanticsLabel": "Továbbiak"
+  "breadcrumbCollapsedSemanticsLabel": "Továbbiak",
+  "paginationPageSemanticsLabel": "{page}. oldal"
 }

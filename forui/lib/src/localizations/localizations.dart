@@ -448,6 +448,12 @@ abstract class FLocalizations {
   /// **'Close'**
   String get headerCloseSemanticsLabel;
 
+  /// The label for a page button in a pagination control, e.g. 'Page 5'.
+  ///
+  /// In en, this message translates to:
+  /// **'Page {page}'**
+  String paginationPageSemanticsLabel(int page);
+
   /// The label for the previous button in a pagination control.
   ///
   /// In en, this message translates to:

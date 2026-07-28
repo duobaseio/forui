@@ -48,5 +48,6 @@
   "timePickerMinuteSemanticsLabel": "Минут",
   "autocompleteResults": "{count} нәтиже қолжетімді",
   "autocompleteSuggestion": "Ұсыныс: {suggestion}",
-  "breadcrumbCollapsedSemanticsLabel": "Тағы"
+  "breadcrumbCollapsedSemanticsLabel": "Тағы",
+  "paginationPageSemanticsLabel": "{page}-бет"
 }

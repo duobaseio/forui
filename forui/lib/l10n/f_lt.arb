@@ -49,5 +49,6 @@
   "timePickerMinuteSemanticsLabel": "Minutės",
   "autocompleteResults": "Yra {count} rezultatų",
   "autocompleteSuggestion": "Pasiūlymas: {suggestion}",
-  "breadcrumbCollapsedSemanticsLabel": "Daugiau"
+  "breadcrumbCollapsedSemanticsLabel": "Daugiau",
+  "paginationPageSemanticsLabel": "{page} puslapis"
 }

@@ -49,5 +49,6 @@
   "timePickerMinuteSemanticsLabel": "Minut",
   "autocompleteResults": "{count} resultat tillgängliga",
   "autocompleteSuggestion": "Förslag: {suggestion}",
-  "breadcrumbCollapsedSemanticsLabel": "Mer"
+  "breadcrumbCollapsedSemanticsLabel": "Mer",
+  "paginationPageSemanticsLabel": "Sida {page}"
 }

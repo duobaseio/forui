@@ -102,6 +102,11 @@ class FLocalizationsId extends FLocalizations {
   String get headerCloseSemanticsLabel => 'Tutup';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Halaman $page';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Sebelumnya';
 
   @override

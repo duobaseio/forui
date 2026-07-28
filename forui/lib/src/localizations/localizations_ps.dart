@@ -102,6 +102,11 @@ class FLocalizationsPs extends FLocalizations {
   String get headerCloseSemanticsLabel => 'بندول';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'مخ $page';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Previous';
 
   @override

@@ -102,6 +102,11 @@ class FLocalizationsFr extends FLocalizations {
   String get headerCloseSemanticsLabel => 'Fermer';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Page $page';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Précédent';
 
   @override
@@ -263,6 +268,11 @@ class FLocalizationsFrCa extends FLocalizationsFr {
 
   @override
   String get headerCloseSemanticsLabel => 'Fermer';
+
+  @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Page $page';
+  }
 
   @override
   String get paginationPreviousSemanticsLabel => 'Précédent';

@@ -48,5 +48,6 @@
   "timePickerMinuteSemanticsLabel": "മിനിറ്റ്",
   "autocompleteResults": "{count} ഫലങ്ങൾ ലഭ്യമാണ്",
   "autocompleteSuggestion": "നിർദ്ദേശം: {suggestion}",
-  "breadcrumbCollapsedSemanticsLabel": "കൂടുതൽ"
+  "breadcrumbCollapsedSemanticsLabel": "കൂടുതൽ",
+  "paginationPageSemanticsLabel": "പേജ് {page}"
 }

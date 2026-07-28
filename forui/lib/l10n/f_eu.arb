@@ -49,5 +49,6 @@
   "timePickerMinuteSemanticsLabel": "Minutua",
   "autocompleteResults": "{count} emaitza erabilgarri",
   "autocompleteSuggestion": "Iradokizuna: {suggestion}",
-  "breadcrumbCollapsedSemanticsLabel": "Gehiago"
+  "breadcrumbCollapsedSemanticsLabel": "Gehiago",
+  "paginationPageSemanticsLabel": "{page}. orria"
 }

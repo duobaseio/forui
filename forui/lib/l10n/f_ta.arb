@@ -48,5 +48,6 @@
   "timePickerMinuteSemanticsLabel": "நிமிடம்",
   "autocompleteResults": "{count} முடிவுகள் கிடைக்கின்றன",
   "autocompleteSuggestion": "பரிந்துரை: {suggestion}",
-  "breadcrumbCollapsedSemanticsLabel": "மேலும்"
+  "breadcrumbCollapsedSemanticsLabel": "மேலும்",
+  "paginationPageSemanticsLabel": "பக்கம் {page}"
 }

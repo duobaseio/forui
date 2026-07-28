@@ -49,5 +49,6 @@
   "timePickerMinuteSemanticsLabel": "Minit",
   "autocompleteResults": "{count} hasil tersedia",
   "autocompleteSuggestion": "Cadangan: {suggestion}",
-  "breadcrumbCollapsedSemanticsLabel": "Lagi"
+  "breadcrumbCollapsedSemanticsLabel": "Lagi",
+  "paginationPageSemanticsLabel": "Halaman {page}"
 }

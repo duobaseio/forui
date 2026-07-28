@@ -49,5 +49,6 @@
   "timePickerMinuteSemanticsLabel": "မိနစ်",
   "autocompleteResults": "ရလဒ် {count} ခု ရနိုင်ပါသည်",
   "autocompleteSuggestion": "အကြံပြုချက်: {suggestion}",
-  "breadcrumbCollapsedSemanticsLabel": "နောက်ထပ်"
+  "breadcrumbCollapsedSemanticsLabel": "နောက်ထပ်",
+  "paginationPageSemanticsLabel": "စာမျက်နှာ {page}"
 }

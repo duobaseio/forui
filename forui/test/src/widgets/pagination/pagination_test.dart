@@ -296,5 +296,28 @@ void main() {
 
       handle.dispose();
     });
+
+    testWidgets('pages are labelled with their page number', (tester) async {
+      final handle = tester.ensureSemantics();
+      final controller = autoDispose(FPaginationController(pages: 10, page: 4));
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FPagination(control: .managed(controller: controller)),
+        ),
+      );
+
+      expect(
+        tester.getSemantics(find.bySemanticsLabel('Page 5')),
+        isSemantics(label: 'Page 5', isButton: true, isSelected: true, hasSelectedState: true, hasTapAction: true),
+      );
+      expect(
+        tester.getSemantics(find.bySemanticsLabel('Page 6')),
+        isSemantics(label: 'Page 6', isButton: true, isSelected: false, hasSelectedState: true, hasTapAction: true),
+      );
+      expect(find.bySemanticsLabel('5'), findsNothing, reason: 'the bare number should not be announced separately');
+
+      handle.dispose();
+    });
   });
 }

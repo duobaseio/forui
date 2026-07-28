@@ -102,6 +102,11 @@ class FLocalizationsAz extends FLocalizations {
   String get headerCloseSemanticsLabel => 'Bağla';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Səhifə $page';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Əvvəlki';
 
   @override

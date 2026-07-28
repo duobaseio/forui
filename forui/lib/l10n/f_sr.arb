@@ -48,5 +48,6 @@
   "timePickerMinuteSemanticsLabel": "Минут",
   "autocompleteResults": "{count} доступних резултата",
   "autocompleteSuggestion": "Предлог: {suggestion}",
-  "breadcrumbCollapsedSemanticsLabel": "Више"
+  "breadcrumbCollapsedSemanticsLabel": "Више",
+  "paginationPageSemanticsLabel": "{page}. страница"
 }

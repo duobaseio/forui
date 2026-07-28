@@ -102,6 +102,11 @@ class FLocalizationsSq extends FLocalizations {
   String get headerCloseSemanticsLabel => 'Mbyll';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Faqja $page';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'E mëparshme';
 
   @override

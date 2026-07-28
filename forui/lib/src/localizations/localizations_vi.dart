@@ -102,6 +102,11 @@ class FLocalizationsVi extends FLocalizations {
   String get headerCloseSemanticsLabel => 'Đóng';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Trang $page';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Trước';
 
   @override

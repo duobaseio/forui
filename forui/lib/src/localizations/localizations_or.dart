@@ -102,6 +102,11 @@ class FLocalizationsOr extends FLocalizations {
   String get headerCloseSemanticsLabel => 'ବନ୍ଦ କରନ୍ତୁ';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'ପୃଷ୍ଠା $page';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'ପୂର୍ବବର୍ତ୍ତୀ';
 
   @override

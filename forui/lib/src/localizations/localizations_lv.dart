@@ -102,6 +102,11 @@ class FLocalizationsLv extends FLocalizations {
   String get headerCloseSemanticsLabel => 'Aizvērt';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return '$page. lapa';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Iepriekšējais';
 
   @override

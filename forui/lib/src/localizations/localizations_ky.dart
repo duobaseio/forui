@@ -102,6 +102,11 @@ class FLocalizationsKy extends FLocalizations {
   String get headerCloseSemanticsLabel => 'Жабуу';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return '$page-бет';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Previous';
 
   @override

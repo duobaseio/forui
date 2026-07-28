@@ -102,6 +102,11 @@ class FLocalizationsRo extends FLocalizations {
   String get headerCloseSemanticsLabel => 'Închideți';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Pagina $page';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Anterior';
 
   @override

@@ -48,5 +48,6 @@
   "timePickerMinuteSemanticsLabel": "דקה",
   "autocompleteResults": "{count} תוצאות זמינות",
   "autocompleteSuggestion": "הצעה: {suggestion}",
-  "breadcrumbCollapsedSemanticsLabel": "עוד"
+  "breadcrumbCollapsedSemanticsLabel": "עוד",
+  "paginationPageSemanticsLabel": "דף {page}"
 }

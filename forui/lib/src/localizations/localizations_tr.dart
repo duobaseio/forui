@@ -102,6 +102,11 @@ class FLocalizationsTr extends FLocalizations {
   String get headerCloseSemanticsLabel => 'Kapat';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Sayfa $page';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Önceki';
 
   @override

@@ -48,5 +48,6 @@
   "timePickerMinuteSemanticsLabel": "Хвіліна",
   "autocompleteResults": "Даступна вынікаў: {count}",
   "autocompleteSuggestion": "Прапанова: {suggestion}",
-  "breadcrumbCollapsedSemanticsLabel": "Больш"
+  "breadcrumbCollapsedSemanticsLabel": "Больш",
+  "paginationPageSemanticsLabel": "Старонка {page}"
 }

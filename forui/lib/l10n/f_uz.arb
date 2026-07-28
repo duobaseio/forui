@@ -49,5 +49,6 @@
   "timePickerMinuteSemanticsLabel": "Daqiqa",
   "autocompleteResults": "{count} ta natija mavjud",
   "autocompleteSuggestion": "Taklif: {suggestion}",
-  "breadcrumbCollapsedSemanticsLabel": "Yana"
+  "breadcrumbCollapsedSemanticsLabel": "Yana",
+  "paginationPageSemanticsLabel": "{page}-sahifa"
 }

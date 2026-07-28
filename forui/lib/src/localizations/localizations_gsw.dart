@@ -102,6 +102,11 @@ class FLocalizationsGsw extends FLocalizations {
   String get headerCloseSemanticsLabel => 'Schliessen';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Seite $page';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Vorig';
 
   @override

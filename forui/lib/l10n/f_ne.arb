@@ -49,5 +49,6 @@
   "timePickerMinuteSemanticsLabel": "मिनेट",
   "autocompleteResults": "{count} परिणामहरू उपलब्ध छन्",
   "autocompleteSuggestion": "सुझाव: {suggestion}",
-  "breadcrumbCollapsedSemanticsLabel": "थप"
+  "breadcrumbCollapsedSemanticsLabel": "थप",
+  "paginationPageSemanticsLabel": "पृष्ठ {page}"
 }

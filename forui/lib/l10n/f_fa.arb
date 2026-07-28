@@ -48,5 +48,6 @@
   "timePickerMinuteSemanticsLabel": "دقیقه",
   "autocompleteResults": "{count} نتیجه موجود است",
   "autocompleteSuggestion": "پیشنهاد: {suggestion}",
-  "breadcrumbCollapsedSemanticsLabel": "بیشتر"
+  "breadcrumbCollapsedSemanticsLabel": "بیشتر",
+  "paginationPageSemanticsLabel": "صفحه {page}"
 }

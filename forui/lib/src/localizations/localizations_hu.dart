@@ -102,6 +102,11 @@ class FLocalizationsHu extends FLocalizations {
   String get headerCloseSemanticsLabel => 'Bezárás';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return '$page. oldal';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Előző';
 
   @override

@@ -48,5 +48,6 @@
   "timePickerMinuteSemanticsLabel": "Λεπτό",
   "autocompleteResults": "{count} διαθέσιμα αποτελέσματα",
   "autocompleteSuggestion": "Πρόταση: {suggestion}",
-  "breadcrumbCollapsedSemanticsLabel": "Περισσότερα"
+  "breadcrumbCollapsedSemanticsLabel": "Περισσότερα",
+  "paginationPageSemanticsLabel": "Σελίδα {page}"
 }

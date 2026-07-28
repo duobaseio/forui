@@ -250,6 +250,8 @@ class _Page extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final FPaginationItemData(:page, :controller, :style) = FPaginationItemData.of(context);
+    final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
+
     return Padding(
       padding: style.itemPadding,
       child: ListenableBuilder(
@@ -257,6 +259,7 @@ class _Page extends StatelessWidget {
         builder: (_, _) => FTappable(
           style: style.pageTappableStyle,
           focusedOutlineStyle: style.focusedOutlineStyle,
+          semanticsLabel: localizations.paginationPageSemanticsLabel(page + 1),
           selected: controller.value == page,
           onPress: () => controller.value = page,
           builder: (_, variants, _) => DecoratedBox(
@@ -265,7 +268,8 @@ class _Page extends StatelessWidget {
               constraints: style.itemConstraints,
               child: DefaultTextStyle(
                 style: style.itemTextStyle.resolve(variants),
-                child: Center(child: Text('${page + 1}')),
+                // The page number is excluded so that it is not announced after the tappable's label.
+                child: ExcludeSemantics(child: Center(child: Text('${page + 1}'))),
               ),
             ),
           ),

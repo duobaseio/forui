@@ -48,5 +48,6 @@
   "timePickerMinuteSemanticsLabel": "મિનિટ",
   "autocompleteResults": "{count} પરિણામો ઉપલબ્ધ",
   "autocompleteSuggestion": "સૂચન: {suggestion}",
-  "breadcrumbCollapsedSemanticsLabel": "વધુ"
+  "breadcrumbCollapsedSemanticsLabel": "વધુ",
+  "paginationPageSemanticsLabel": "પેજ {page}"
 }

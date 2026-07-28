@@ -102,6 +102,11 @@ class FLocalizationsEt extends FLocalizations {
   String get headerCloseSemanticsLabel => 'Sule';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return '$page. leht';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Eelmine';
 
   @override

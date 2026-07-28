@@ -102,6 +102,11 @@ class FLocalizationsKm extends FLocalizations {
   String get headerCloseSemanticsLabel => 'បិទ';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'ទំព័រ $page';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Previous';
 
   @override

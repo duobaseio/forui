@@ -102,6 +102,11 @@ class FLocalizationsTe extends FLocalizations {
   String get headerCloseSemanticsLabel => 'మూసివేయి';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'పేజీ $page';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Previous';
 
   @override

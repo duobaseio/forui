@@ -102,6 +102,11 @@ class FLocalizationsKn extends FLocalizations {
   String get headerCloseSemanticsLabel => 'ಮುಚ್ಚಿರಿ';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'ಪುಟ $page';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Previous';
 
   @override

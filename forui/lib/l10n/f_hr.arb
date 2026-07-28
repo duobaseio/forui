@@ -49,5 +49,6 @@
   "timePickerMinuteSemanticsLabel": "Minuta",
   "autocompleteResults": "{count} dostupnih rezultata",
   "autocompleteSuggestion": "Prijedlog: {suggestion}",
-  "breadcrumbCollapsedSemanticsLabel": "Više"
+  "breadcrumbCollapsedSemanticsLabel": "Više",
+  "paginationPageSemanticsLabel": "Stranica {page}"
 }

@@ -48,5 +48,6 @@
   "timePickerMinuteSemanticsLabel": "నిమిషం",
   "autocompleteResults": "{count} ఫలితాలు అందుబాటులో ఉన్నాయి",
   "autocompleteSuggestion": "సూచన: {suggestion}",
-  "breadcrumbCollapsedSemanticsLabel": "మరిన్ని"
+  "breadcrumbCollapsedSemanticsLabel": "మరిన్ని",
+  "paginationPageSemanticsLabel": "పేజీ {page}"
 }

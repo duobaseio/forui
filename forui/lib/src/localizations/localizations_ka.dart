@@ -102,6 +102,11 @@ class FLocalizationsKa extends FLocalizations {
   String get headerCloseSemanticsLabel => 'დახურვა';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'გვერდი $page';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Previous';
 
   @override

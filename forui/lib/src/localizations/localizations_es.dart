@@ -102,6 +102,11 @@ class FLocalizationsEs extends FLocalizations {
   String get headerCloseSemanticsLabel => 'Cerrar';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Página $page';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Previous';
 
   @override
@@ -265,6 +270,11 @@ class FLocalizationsEs419 extends FLocalizationsEs {
   String get headerCloseSemanticsLabel => 'Cerrar';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Página $page';
+  }
+
+  @override
   String get popoverSemanticsLabel => 'Ventana emergente';
 
   @override
@@ -414,6 +424,11 @@ class FLocalizationsEsAr extends FLocalizationsEs {
 
   @override
   String get headerCloseSemanticsLabel => 'Cerrar';
+
+  @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Página $page';
+  }
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -567,6 +582,11 @@ class FLocalizationsEsBo extends FLocalizationsEs {
   String get headerCloseSemanticsLabel => 'Cerrar';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Página $page';
+  }
+
+  @override
   String get popoverSemanticsLabel => 'Ventana emergente';
 
   @override
@@ -716,6 +736,11 @@ class FLocalizationsEsCl extends FLocalizationsEs {
 
   @override
   String get headerCloseSemanticsLabel => 'Cerrar';
+
+  @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Página $page';
+  }
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -869,6 +894,11 @@ class FLocalizationsEsCo extends FLocalizationsEs {
   String get headerCloseSemanticsLabel => 'Cerrar';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Página $page';
+  }
+
+  @override
   String get popoverSemanticsLabel => 'Ventana emergente';
 
   @override
@@ -1018,6 +1048,11 @@ class FLocalizationsEsCr extends FLocalizationsEs {
 
   @override
   String get headerCloseSemanticsLabel => 'Cerrar';
+
+  @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Página $page';
+  }
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -1171,6 +1206,11 @@ class FLocalizationsEsDo extends FLocalizationsEs {
   String get headerCloseSemanticsLabel => 'Cerrar';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Página $page';
+  }
+
+  @override
   String get popoverSemanticsLabel => 'Ventana emergente';
 
   @override
@@ -1320,6 +1360,11 @@ class FLocalizationsEsEc extends FLocalizationsEs {
 
   @override
   String get headerCloseSemanticsLabel => 'Cerrar';
+
+  @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Página $page';
+  }
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -1473,6 +1518,11 @@ class FLocalizationsEsGt extends FLocalizationsEs {
   String get headerCloseSemanticsLabel => 'Cerrar';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Página $page';
+  }
+
+  @override
   String get popoverSemanticsLabel => 'Ventana emergente';
 
   @override
@@ -1622,6 +1672,11 @@ class FLocalizationsEsHn extends FLocalizationsEs {
 
   @override
   String get headerCloseSemanticsLabel => 'Cerrar';
+
+  @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Página $page';
+  }
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -1775,6 +1830,11 @@ class FLocalizationsEsMx extends FLocalizationsEs {
   String get headerCloseSemanticsLabel => 'Cerrar';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Página $page';
+  }
+
+  @override
   String get popoverSemanticsLabel => 'Ventana emergente';
 
   @override
@@ -1924,6 +1984,11 @@ class FLocalizationsEsNi extends FLocalizationsEs {
 
   @override
   String get headerCloseSemanticsLabel => 'Cerrar';
+
+  @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Página $page';
+  }
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -2077,6 +2142,11 @@ class FLocalizationsEsPa extends FLocalizationsEs {
   String get headerCloseSemanticsLabel => 'Cerrar';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Página $page';
+  }
+
+  @override
   String get popoverSemanticsLabel => 'Ventana emergente';
 
   @override
@@ -2226,6 +2296,11 @@ class FLocalizationsEsPe extends FLocalizationsEs {
 
   @override
   String get headerCloseSemanticsLabel => 'Cerrar';
+
+  @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Página $page';
+  }
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -2379,6 +2454,11 @@ class FLocalizationsEsPr extends FLocalizationsEs {
   String get headerCloseSemanticsLabel => 'Cerrar';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Página $page';
+  }
+
+  @override
   String get popoverSemanticsLabel => 'Ventana emergente';
 
   @override
@@ -2528,6 +2608,11 @@ class FLocalizationsEsPy extends FLocalizationsEs {
 
   @override
   String get headerCloseSemanticsLabel => 'Cerrar';
+
+  @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Página $page';
+  }
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -2681,6 +2766,11 @@ class FLocalizationsEsSv extends FLocalizationsEs {
   String get headerCloseSemanticsLabel => 'Cerrar';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Página $page';
+  }
+
+  @override
   String get popoverSemanticsLabel => 'Ventana emergente';
 
   @override
@@ -2830,6 +2920,11 @@ class FLocalizationsEsUs extends FLocalizationsEs {
 
   @override
   String get headerCloseSemanticsLabel => 'Cerrar';
+
+  @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Página $page';
+  }
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';
@@ -2983,6 +3078,11 @@ class FLocalizationsEsUy extends FLocalizationsEs {
   String get headerCloseSemanticsLabel => 'Cerrar';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Página $page';
+  }
+
+  @override
   String get popoverSemanticsLabel => 'Ventana emergente';
 
   @override
@@ -3132,6 +3232,11 @@ class FLocalizationsEsVe extends FLocalizationsEs {
 
   @override
   String get headerCloseSemanticsLabel => 'Cerrar';
+
+  @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Página $page';
+  }
 
   @override
   String get popoverSemanticsLabel => 'Ventana emergente';

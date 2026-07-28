@@ -102,6 +102,11 @@ class FLocalizationsKo extends FLocalizations {
   String get headerCloseSemanticsLabel => '닫기';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return '$page페이지';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Previous';
 
   @override

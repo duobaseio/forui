@@ -48,5 +48,6 @@
   "timePickerMinuteSemanticsLabel": "Minut",
   "autocompleteResults": "{count} resultats disponibles",
   "autocompleteSuggestion": "Suggeriment: {suggestion}",
-  "breadcrumbCollapsedSemanticsLabel": "Més"
+  "breadcrumbCollapsedSemanticsLabel": "Més",
+  "paginationPageSemanticsLabel": "Pàgina {page}"
 }

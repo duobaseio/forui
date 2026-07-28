@@ -102,6 +102,11 @@ class FLocalizationsGl extends FLocalizations {
   String get headerCloseSemanticsLabel => 'Pechar';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Páxina $page';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Previous';
 
   @override

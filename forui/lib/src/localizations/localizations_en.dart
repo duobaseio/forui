@@ -108,6 +108,11 @@ class FLocalizationsEn extends FLocalizations {
   String get headerCloseSemanticsLabel => 'Close';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Page $page';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Previous';
 
   @override
@@ -275,6 +280,11 @@ class FLocalizationsEnAu extends FLocalizationsEn {
 
   @override
   String get headerCloseSemanticsLabel => 'Close';
+
+  @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Page $page';
+  }
 
   @override
   String get paginationPreviousSemanticsLabel => 'Previous';
@@ -446,6 +456,11 @@ class FLocalizationsEnCa extends FLocalizationsEn {
   String get headerCloseSemanticsLabel => 'Close';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Page $page';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Previous';
 
   @override
@@ -613,6 +628,11 @@ class FLocalizationsEnGb extends FLocalizationsEn {
 
   @override
   String get headerCloseSemanticsLabel => 'Close';
+
+  @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Page $page';
+  }
 
   @override
   String get paginationPreviousSemanticsLabel => 'Previous';
@@ -784,6 +804,11 @@ class FLocalizationsEnIe extends FLocalizationsEn {
   String get headerCloseSemanticsLabel => 'Close';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Page $page';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Previous';
 
   @override
@@ -951,6 +976,11 @@ class FLocalizationsEnIn extends FLocalizationsEn {
 
   @override
   String get headerCloseSemanticsLabel => 'Close';
+
+  @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Page $page';
+  }
 
   @override
   String get paginationPreviousSemanticsLabel => 'Previous';
@@ -1122,6 +1152,11 @@ class FLocalizationsEnNz extends FLocalizationsEn {
   String get headerCloseSemanticsLabel => 'Close';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Page $page';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Previous';
 
   @override
@@ -1291,6 +1326,11 @@ class FLocalizationsEnSg extends FLocalizationsEn {
   String get headerCloseSemanticsLabel => 'Close';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Page $page';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Previous';
 
   @override
@@ -1458,6 +1498,11 @@ class FLocalizationsEnZa extends FLocalizationsEn {
 
   @override
   String get headerCloseSemanticsLabel => 'Close';
+
+  @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Page $page';
+  }
 
   @override
   String get paginationPreviousSemanticsLabel => 'Previous';

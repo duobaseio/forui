@@ -102,6 +102,11 @@ class FLocalizationsPt extends FLocalizations {
   String get headerCloseSemanticsLabel => 'Fechar';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Página $page';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Previous';
 
   @override
@@ -263,6 +268,11 @@ class FLocalizationsPtPt extends FLocalizationsPt {
 
   @override
   String get headerCloseSemanticsLabel => 'Fechar';
+
+  @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Página $page';
+  }
 
   @override
   String get popoverSemanticsLabel => 'Janela sobreposta';

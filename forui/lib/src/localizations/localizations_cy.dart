@@ -102,6 +102,11 @@ class FLocalizationsCy extends FLocalizations {
   String get headerCloseSemanticsLabel => 'Cau';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Tudalen $page';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Blaenorol';
 
   @override

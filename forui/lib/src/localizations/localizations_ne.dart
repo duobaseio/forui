@@ -102,6 +102,11 @@ class FLocalizationsNe extends FLocalizations {
   String get headerCloseSemanticsLabel => 'बन्द गर्नुहोस्';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'पृष्ठ $page';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Previous';
 
   @override

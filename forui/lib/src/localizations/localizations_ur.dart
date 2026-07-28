@@ -102,6 +102,11 @@ class FLocalizationsUr extends FLocalizations {
   String get headerCloseSemanticsLabel => 'بند کریں';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'صفحہ $page';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'پچھلا';
 
   @override

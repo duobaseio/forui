@@ -102,6 +102,11 @@ class FLocalizationsZh extends FLocalizations {
   String get headerCloseSemanticsLabel => '关闭';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return '第 $page 页';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => '上一个';
 
   @override
@@ -265,6 +270,11 @@ class FLocalizationsZhHk extends FLocalizationsZh {
   String get headerCloseSemanticsLabel => '關閉';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return '第 $page 頁';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => '上一個';
 
   @override
@@ -426,6 +436,11 @@ class FLocalizationsZhTw extends FLocalizationsZh {
 
   @override
   String get headerCloseSemanticsLabel => '關閉';
+
+  @override
+  String paginationPageSemanticsLabel(int page) {
+    return '第 $page 頁';
+  }
 
   @override
   String get paginationPreviousSemanticsLabel => '上一個';

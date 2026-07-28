@@ -130,6 +130,15 @@
   "@headerCloseSemanticsLabel": {
     "description": "The default semantic label for a header's close button."
   },
+  "paginationPageSemanticsLabel": "Page {page}",
+  "@paginationPageSemanticsLabel": {
+    "description": "The label for a page button in a pagination control, e.g. 'Page 5'.",
+    "placeholders": {
+      "page": {
+        "type": "int"
+      }
+    }
+  },
   "paginationPreviousSemanticsLabel": "Previous",
   "@paginationPreviousSemanticsLabel": {
     "description": "The label for the previous button in a pagination control."

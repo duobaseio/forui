@@ -48,5 +48,6 @@
   "timePickerMinuteSemanticsLabel": "Րոպե",
   "autocompleteResults": "{count} արդյունք հասանելի է",
   "autocompleteSuggestion": "Առաջարկ: {suggestion}",
-  "breadcrumbCollapsedSemanticsLabel": "Ավելին"
+  "breadcrumbCollapsedSemanticsLabel": "Ավելին",
+  "paginationPageSemanticsLabel": "Էջ {page}"
 }

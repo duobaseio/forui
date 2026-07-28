@@ -49,5 +49,6 @@
   "timePickerMinuteSemanticsLabel": "Minute",
   "autocompleteResults": "{count, plural, =1{1 result available} other{{count} results available}}",
   "autocompleteSuggestion": "Suggestion: {suggestion}",
-  "breadcrumbCollapsedSemanticsLabel": "More"
+  "breadcrumbCollapsedSemanticsLabel": "More",
+  "paginationPageSemanticsLabel": "Page {page}"
 }

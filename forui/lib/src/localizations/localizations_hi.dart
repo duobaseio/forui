@@ -102,6 +102,11 @@ class FLocalizationsHi extends FLocalizations {
   String get headerCloseSemanticsLabel => 'बंद करें';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'पेज $page';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Previous';
 
   @override

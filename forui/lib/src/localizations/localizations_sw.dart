@@ -102,6 +102,11 @@ class FLocalizationsSw extends FLocalizations {
   String get headerCloseSemanticsLabel => 'Funga';
 
   @override
+  String paginationPageSemanticsLabel(int page) {
+    return 'Ukurasa $page';
+  }
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Iliyotangulia';
 
   @override

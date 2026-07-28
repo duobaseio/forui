@@ -49,5 +49,6 @@
   "timePickerMinuteSemanticsLabel": "Munud",
   "autocompleteResults": "{count} canlyniad ar gael",
   "autocompleteSuggestion": "Awgrym: {suggestion}",
-  "breadcrumbCollapsedSemanticsLabel": "Rhagor"
+  "breadcrumbCollapsedSemanticsLabel": "Rhagor",
+  "paginationPageSemanticsLabel": "Tudalen {page}"
 }

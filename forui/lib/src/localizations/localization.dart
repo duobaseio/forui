@@ -138,6 +138,9 @@ class FDefaultLocalizations extends FLocalizations {
   String get shortDateSuffix => '';
 
   @override
+  String paginationPageSemanticsLabel(int page) => 'Page $page';
+
+  @override
   String get paginationPreviousSemanticsLabel => 'Previous';
 
   @override
