@@ -4,7 +4,7 @@ import 'package:flutter/material.dart' hide Autocomplete, Badge, Dialog, Switch,
 import 'package:forui/forui.dart';
 import 'package:marionette_flutter/marionette_flutter.dart';
 
-import 'widgets/switch.dart';
+import 'widgets/sheet.dart';
 
 void main() {
   if (kDebugMode) {
@@ -30,7 +30,7 @@ class Application extends StatelessWidget {
         data: theme,
         child: FToaster(child: FTooltipGroup(child: child!)),
       ),
-      home: const FScaffold(child: Switch()),
+      home: const FScaffold(child: Sheet()),
     );
   }
 }

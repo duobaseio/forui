@@ -32,7 +32,7 @@ class _SwitchState extends State<Switch> {
                 ),
               ),
               const SizedBox(height: 15),
-              FCard.raw(
+              FCard(
                 child: Padding(
                   padding: const .fromLTRB(16, 12, 16, 16),
                   child: Row(
@@ -71,7 +71,7 @@ class _SwitchState extends State<Switch> {
                 ),
               ),
               const SizedBox(height: 12),
-              FCard.raw(
+              FCard(
                 child: Padding(
                   padding: const .fromLTRB(16, 12, 16, 16),
                   child: Row(
