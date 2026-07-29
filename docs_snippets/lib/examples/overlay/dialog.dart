@@ -23,26 +23,23 @@ class DialogPage extends Example {
     mainAxisSize: .min,
     onPress: () => showFDialog(
       context: context,
-      builder: (context, style, animation) => FTheme(
-        data: theme,
-        child: AdaptiveDialog(
-          style: style,
-          animation: animation,
-          title: const Text('Are you absolutely sure?'),
-          body: const Text(
-            'This action cannot be undone. This will permanently delete your account and '
-            'remove your data from our servers.',
-          ),
-          actions: [
-            FButton(size: .sm, child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
-            FButton(
-              variant: .outline,
-              size: .sm,
-              child: const Text('Cancel'),
-              onPress: () => Navigator.of(context).pop(),
-            ),
-          ],
+      builder: (context, style, animation) => AdaptiveDialog(
+        style: style,
+        animation: animation,
+        title: const Text('Are you absolutely sure?'),
+        body: const Text(
+          'This action cannot be undone. This will permanently delete your account and '
+          'remove your data from our servers.',
         ),
+        actions: [
+          FButton(size: .sm, child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
+          FButton(
+            variant: .outline,
+            size: .sm,
+            child: const Text('Cancel'),
+            onPress: () => Navigator.of(context).pop(),
+          ),
+        ],
       ),
     ),
     child: const Text('Show Dialog'),
@@ -61,22 +58,19 @@ class AdaptiveTitleDialogPage extends Example {
     mainAxisSize: .min,
     onPress: () => showFDialog(
       context: context,
-      builder: (context, style, animation) => FTheme(
-        data: theme,
-        child: AdaptiveTitleDialog(
-          style: style,
-          animation: animation,
-          title: const Text('Are you absolutely sure?'),
-          actions: [
-            FButton(size: .sm, child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
-            FButton(
-              variant: .outline,
-              size: .sm,
-              child: const Text('Cancel'),
-              onPress: () => Navigator.of(context).pop(),
-            ),
-          ],
-        ),
+      builder: (context, style, animation) => AdaptiveTitleDialog(
+        style: style,
+        animation: animation,
+        title: const Text('Are you absolutely sure?'),
+        actions: [
+          FButton(size: .sm, child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
+          FButton(
+            variant: .outline,
+            size: .sm,
+            child: const Text('Cancel'),
+            onPress: () => Navigator.of(context).pop(),
+          ),
+        ],
       ),
     ),
     child: const Text('Show Dialog'),
@@ -95,32 +89,29 @@ class AdaptiveMediaDialogPage extends Example {
     mainAxisSize: .min,
     onPress: () => showFDialog(
       context: context,
-      builder: (context, style, animation) => FTheme(
-        data: theme,
-        child: AdaptiveMediaDialog(
-          style: style,
-          animation: animation,
-          image: ClipRRect(
-            borderRadius: context.theme.style.borderRadius.sm,
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(image: AssetImage(path('avatar.png')), fit: .cover),
-              ),
-              height: 140,
+      builder: (context, style, animation) => AdaptiveMediaDialog(
+        style: style,
+        animation: animation,
+        image: ClipRRect(
+          borderRadius: context.theme.style.borderRadius.sm,
+          child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(image: AssetImage(path('avatar.png')), fit: .cover),
             ),
+            height: 140,
           ),
-          title: const Text('Gratitude'),
-          body: const Text('The quality of being thankful; readiness to show appreciation for and to return kindness.'),
-          actions: [
-            FButton(size: .sm, child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
-            FButton(
-              variant: .outline,
-              size: .sm,
-              child: const Text('Cancel'),
-              onPress: () => Navigator.of(context).pop(),
-            ),
-          ],
         ),
+        title: const Text('Gratitude'),
+        body: const Text('The quality of being thankful; readiness to show appreciation for and to return kindness.'),
+        actions: [
+          FButton(size: .sm, child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
+          FButton(
+            variant: .outline,
+            size: .sm,
+            child: const Text('Cancel'),
+            onPress: () => Navigator.of(context).pop(),
+          ),
+        ],
       ),
     ),
     child: const Text('Show Dialog'),
@@ -139,26 +130,23 @@ class HorizontalDialogPage extends Example {
     mainAxisSize: .min,
     onPress: () => showFDialog(
       context: context,
-      builder: (context, style, animation) => FTheme(
-        data: theme,
-        child: HorizontalDialog(
-          style: style,
-          animation: animation,
-          title: const Text('Are you absolutely sure?'),
-          body: const Text(
-            'This action cannot be undone. This will permanently delete your account and '
-            'remove your data from our servers.',
-          ),
-          actions: [
-            FButton(size: .sm, child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
-            FButton(
-              variant: .outline,
-              size: .sm,
-              child: const Text('Cancel'),
-              onPress: () => Navigator.of(context).pop(),
-            ),
-          ],
+      builder: (context, style, animation) => HorizontalDialog(
+        style: style,
+        animation: animation,
+        title: const Text('Are you absolutely sure?'),
+        body: const Text(
+          'This action cannot be undone. This will permanently delete your account and '
+          'remove your data from our servers.',
         ),
+        actions: [
+          FButton(size: .sm, child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
+          FButton(
+            variant: .outline,
+            size: .sm,
+            child: const Text('Cancel'),
+            onPress: () => Navigator.of(context).pop(),
+          ),
+        ],
       ),
     ),
     child: const Text('Show Dialog'),
@@ -177,22 +165,19 @@ class HorizontalTitleDialogPage extends Example {
     mainAxisSize: .min,
     onPress: () => showFDialog(
       context: context,
-      builder: (context, style, animation) => FTheme(
-        data: theme,
-        child: HorizontalTitleDialog(
-          style: style,
-          animation: animation,
-          title: const Text('Are you absolutely sure?'),
-          actions: [
-            FButton(size: .sm, child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
-            FButton(
-              variant: .outline,
-              size: .sm,
-              child: const Text('Cancel'),
-              onPress: () => Navigator.of(context).pop(),
-            ),
-          ],
-        ),
+      builder: (context, style, animation) => HorizontalTitleDialog(
+        style: style,
+        animation: animation,
+        title: const Text('Are you absolutely sure?'),
+        actions: [
+          FButton(size: .sm, child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
+          FButton(
+            variant: .outline,
+            size: .sm,
+            child: const Text('Cancel'),
+            onPress: () => Navigator.of(context).pop(),
+          ),
+        ],
       ),
     ),
     child: const Text('Show Dialog'),
@@ -211,32 +196,29 @@ class HorizontalMediaDialogPage extends Example {
     mainAxisSize: .min,
     onPress: () => showFDialog(
       context: context,
-      builder: (context, style, animation) => FTheme(
-        data: theme,
-        child: HorizontalMediaDialog(
-          style: style,
-          animation: animation,
-          image: ClipRRect(
-            borderRadius: context.theme.style.borderRadius.sm,
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(image: AssetImage(path('avatar.png')), fit: .cover),
-              ),
-              height: 140,
+      builder: (context, style, animation) => HorizontalMediaDialog(
+        style: style,
+        animation: animation,
+        image: ClipRRect(
+          borderRadius: context.theme.style.borderRadius.sm,
+          child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(image: AssetImage(path('avatar.png')), fit: .cover),
             ),
+            height: 140,
           ),
-          title: const Text('Gratitude'),
-          body: const Text('The quality of being thankful; readiness to show appreciation for and to return kindness.'),
-          actions: [
-            FButton(size: .sm, child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
-            FButton(
-              variant: .outline,
-              size: .sm,
-              child: const Text('Cancel'),
-              onPress: () => Navigator.of(context).pop(),
-            ),
-          ],
         ),
+        title: const Text('Gratitude'),
+        body: const Text('The quality of being thankful; readiness to show appreciation for and to return kindness.'),
+        actions: [
+          FButton(size: .sm, child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
+          FButton(
+            variant: .outline,
+            size: .sm,
+            child: const Text('Cancel'),
+            onPress: () => Navigator.of(context).pop(),
+          ),
+        ],
       ),
     ),
     child: const Text('Show Dialog'),
@@ -255,26 +237,23 @@ class VerticalDialogPage extends Example {
     mainAxisSize: .min,
     onPress: () => showFDialog(
       context: context,
-      builder: (context, style, animation) => FTheme(
-        data: theme,
-        child: VerticalDialog(
-          style: style,
-          animation: animation,
-          title: const Text('Are you absolutely sure?'),
-          body: const Text(
-            'This action cannot be undone. This will permanently delete your account and '
-            'remove your data from our servers.',
-          ),
-          actions: [
-            FButton(size: .sm, child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
-            FButton(
-              variant: .outline,
-              size: .sm,
-              child: const Text('Cancel'),
-              onPress: () => Navigator.of(context).pop(),
-            ),
-          ],
+      builder: (context, style, animation) => VerticalDialog(
+        style: style,
+        animation: animation,
+        title: const Text('Are you absolutely sure?'),
+        body: const Text(
+          'This action cannot be undone. This will permanently delete your account and '
+          'remove your data from our servers.',
         ),
+        actions: [
+          FButton(size: .sm, child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
+          FButton(
+            variant: .outline,
+            size: .sm,
+            child: const Text('Cancel'),
+            onPress: () => Navigator.of(context).pop(),
+          ),
+        ],
       ),
     ),
     child: const Text('Show Dialog'),
@@ -293,22 +272,19 @@ class VerticalTitleDialogPage extends Example {
     mainAxisSize: .min,
     onPress: () => showFDialog(
       context: context,
-      builder: (context, style, animation) => FTheme(
-        data: theme,
-        child: VerticalTitleDialog(
-          style: style,
-          animation: animation,
-          title: const Text('Are you absolutely sure?'),
-          actions: [
-            FButton(size: .sm, child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
-            FButton(
-              variant: .outline,
-              size: .sm,
-              child: const Text('Cancel'),
-              onPress: () => Navigator.of(context).pop(),
-            ),
-          ],
-        ),
+      builder: (context, style, animation) => VerticalTitleDialog(
+        style: style,
+        animation: animation,
+        title: const Text('Are you absolutely sure?'),
+        actions: [
+          FButton(size: .sm, child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
+          FButton(
+            variant: .outline,
+            size: .sm,
+            child: const Text('Cancel'),
+            onPress: () => Navigator.of(context).pop(),
+          ),
+        ],
       ),
     ),
     child: const Text('Show Dialog'),
@@ -327,32 +303,29 @@ class VerticalMediaDialogPage extends Example {
     mainAxisSize: .min,
     onPress: () => showFDialog(
       context: context,
-      builder: (context, style, animation) => FTheme(
-        data: theme,
-        child: VerticalMediaDialog(
-          style: style,
-          animation: animation,
-          image: ClipRRect(
-            borderRadius: context.theme.style.borderRadius.sm,
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(image: AssetImage(path('avatar.png')), fit: .cover),
-              ),
-              height: 140,
+      builder: (context, style, animation) => VerticalMediaDialog(
+        style: style,
+        animation: animation,
+        image: ClipRRect(
+          borderRadius: context.theme.style.borderRadius.sm,
+          child: Container(
+            decoration: BoxDecoration(
+              image: DecorationImage(image: AssetImage(path('avatar.png')), fit: .cover),
             ),
+            height: 140,
           ),
-          title: const Text('Gratitude'),
-          body: const Text('The quality of being thankful; readiness to show appreciation for and to return kindness.'),
-          actions: [
-            FButton(size: .sm, child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
-            FButton(
-              variant: .outline,
-              size: .sm,
-              child: const Text('Cancel'),
-              onPress: () => Navigator.of(context).pop(),
-            ),
-          ],
         ),
+        title: const Text('Gratitude'),
+        body: const Text('The quality of being thankful; readiness to show appreciation for and to return kindness.'),
+        actions: [
+          FButton(size: .sm, child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
+          FButton(
+            variant: .outline,
+            size: .sm,
+            child: const Text('Cancel'),
+            onPress: () => Navigator.of(context).pop(),
+          ),
+        ],
       ),
     ),
     child: const Text('Show Dialog'),
@@ -380,26 +353,23 @@ class BlurredDialogPage extends Example {
             ),
       ),
       // {@endhighlight}
-      builder: (context, style, animation) => FTheme(
-        data: theme,
-        child: VerticalDialog(
-          style: style,
-          animation: animation,
-          title: const Text('Are you absolutely sure?'),
-          body: const Text(
-            'This action cannot be undone. This will permanently delete your account and '
-            'remove your data from our servers.',
-          ),
-          actions: [
-            FButton(size: .sm, child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
-            FButton(
-              size: .sm,
-              variant: .outline,
-              child: const Text('Cancel'),
-              onPress: () => Navigator.of(context).pop(),
-            ),
-          ],
+      builder: (context, style, animation) => VerticalDialog(
+        style: style,
+        animation: animation,
+        title: const Text('Are you absolutely sure?'),
+        body: const Text(
+          'This action cannot be undone. This will permanently delete your account and '
+          'remove your data from our servers.',
         ),
+        actions: [
+          FButton(size: .sm, child: const Text('Continue'), onPress: () => Navigator.of(context).pop()),
+          FButton(
+            size: .sm,
+            variant: .outline,
+            child: const Text('Cancel'),
+            onPress: () => Navigator.of(context).pop(),
+          ),
+        ],
       ),
     ),
     child: const Text('Show Dialog'),

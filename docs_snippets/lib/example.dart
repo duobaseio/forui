@@ -20,28 +20,17 @@ abstract class Example extends StatelessWidget {
     this.top = 0,
   }) : theme = themes[theme]!;
 
-  // In most cases, we should create FTheme inside MaterialApp.builder(...) instead. Otherwise FDialog will not inherit
-  // from FTheme since it is in a different route.
-  //
-  // We do not does that in this project since the theme is determined by a query parameter upon navigating to each page.
-  // This requires us to immediately set the state of the page's parent widget that stores the theme data. Doing so
-  // is extremely hacky and prone to infinite build cycles.
-  //
-  // That said, I'm open to suggestions on how to fix this issue.
+  // FTheme is created in MaterialApp.builder(...) so that routes, i.e. dialogs and modal sheets, inherit from it.
   @override
-  Widget build(BuildContext context) => FTheme(
-    platform: .macOS,
-    data: theme,
-    child: FToaster(
-      child: FScaffold(
-        child: Align(
-          alignment: alignment,
-          child: ConstrainedBox(
-            constraints: BoxConstraints(maxWidth: maxWidth, maxHeight: maxHeight),
-            child: Padding(
-              padding: .only(top: top),
-              child: Builder(builder: example),
-            ),
+  Widget build(BuildContext context) => FToaster(
+    child: FScaffold(
+      child: Align(
+        alignment: alignment,
+        child: ConstrainedBox(
+          constraints: BoxConstraints(maxWidth: maxWidth, maxHeight: maxHeight),
+          child: Padding(
+            padding: .only(top: top),
+            child: Builder(builder: example),
           ),
         ),
       ),
@@ -70,18 +59,14 @@ abstract class StatefulExample extends StatefulWidget {
 
 abstract class StatefulExampleState<T extends StatefulExample> extends State<T> {
   @override
-  Widget build(BuildContext context) => FTheme(
-    platform: .macOS,
-    data: widget.theme,
-    child: FScaffold(
-      child: Align(
-        alignment: widget.alignment,
-        child: ConstrainedBox(
-          constraints: BoxConstraints(maxWidth: widget.maxWidth, maxHeight: widget.maxHeight),
-          child: Padding(
-            padding: .only(top: widget.top),
-            child: Builder(builder: example),
-          ),
+  Widget build(BuildContext context) => FScaffold(
+    child: Align(
+      alignment: widget.alignment,
+      child: ConstrainedBox(
+        constraints: BoxConstraints(maxWidth: widget.maxWidth, maxHeight: widget.maxHeight),
+        child: Padding(
+          padding: .only(top: widget.top),
+          child: Builder(builder: example),
         ),
       ),
     ),

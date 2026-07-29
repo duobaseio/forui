@@ -34,6 +34,17 @@ class ForuiSamples extends StatelessWidget {
     localizationsDelegates: FLocalizations.localizationsDelegates,
     supportedLocales: FLocalizations.supportedLocales,
     routerConfig: _router.config(),
+    // FTheme is created above the Navigator so that routes, i.e. dialogs and modal sheets, inherit from it. The theme
+    // is read from the current route's query parameter instead of the page, which is built below the Navigator.
+    builder: (context, child) => ListenableBuilder(
+      listenable: _router,
+      child: child,
+      builder: (context, child) => FTheme(
+        platform: .macOS,
+        data: themes[_router.current.queryParams.getString('theme', 'neutral-light')]!,
+        child: child!,
+      ),
+    ),
   );
 }
 
