@@ -519,7 +519,8 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
                       clipper: InnerPathClipper(decoration: style.decoration, direction: direction),
                       child: AnimatedBuilder(
                         animation: _controller.fade,
-                        builder: (_, _) => BackdropFilter(filter: filter(context.theme, _controller.fade.value), child: Container()),
+                        builder: (_, _) =>
+                            BackdropFilter(filter: filter(context.theme, _controller.fade.value), child: Container()),
                       ),
                     ),
                   ),

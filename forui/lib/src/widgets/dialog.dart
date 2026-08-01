@@ -461,7 +461,8 @@ class _FDialogState extends State<FDialog> {
                   ? BackdropFilter(filter: filter(context.theme, 1), child: Container())
                   : AnimatedBuilder(
                       animation: _fade!,
-                      builder: (_, _) => BackdropFilter(filter: filter(context.theme, _fade!.value), child: Container()),
+                      builder: (_, _) =>
+                          BackdropFilter(filter: filter(context.theme, _fade!.value), child: Container()),
                     ),
             ),
           ),
