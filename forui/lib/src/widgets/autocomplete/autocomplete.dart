@@ -143,6 +143,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
     Offset contentOffset = .zero,
     bool contentUseViewPadding = true,
     bool contentUseViewInsets = true,
+    OverlayChildLocation contentOverlayLocation = .nearestOverlay,
     FPopoverHideRegion contentHideRegion = .excludeChild,
     Object? contentGroupId,
     bool contentCutout = true,
@@ -242,6 +243,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
     contentOffset: contentOffset,
     contentUseViewPadding: contentUseViewPadding,
     contentUseViewInsets: contentUseViewInsets,
+    contentOverlayLocation: contentOverlayLocation,
     contentHideRegion: contentHideRegion,
     contentGroupId: contentGroupId,
     contentCutout: contentCutout,
@@ -337,6 +339,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
     Offset contentOffset = .zero,
     bool contentUseViewPadding = true,
     bool contentUseViewInsets = true,
+    OverlayChildLocation contentOverlayLocation = .nearestOverlay,
     FPopoverHideRegion contentHideRegion = .excludeChild,
     Object? contentGroupId,
     bool contentCutout = true,
@@ -434,6 +437,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
     contentOffset: contentOffset,
     contentUseViewPadding: contentUseViewPadding,
     contentUseViewInsets: contentUseViewInsets,
+    contentOverlayLocation: contentOverlayLocation,
     contentHideRegion: contentHideRegion,
     contentGroupId: contentGroupId,
     contentCutout: contentCutout,
@@ -695,6 +699,11 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// Defaults to true.
   final bool contentUseViewInsets;
 
+  /// {@macro forui.foundation.FPortal.overlayLocation}
+  ///
+  /// Defaults to [OverlayChildLocation.nearestOverlay].
+  final OverlayChildLocation contentOverlayLocation;
+
   /// {@macro forui.widgets.FPopover.hideRegion}
   final FPopoverHideRegion contentHideRegion;
 
@@ -851,6 +860,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
     Offset contentOffset = .zero,
     bool contentUseViewPadding = true,
     bool contentUseViewInsets = true,
+    OverlayChildLocation contentOverlayLocation = .nearestOverlay,
     FPopoverHideRegion contentHideRegion = .excludeChild,
     Object? contentGroupId,
     bool contentCutout = true,
@@ -955,6 +965,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
          contentOffset: contentOffset,
          contentUseViewPadding: contentUseViewPadding,
          contentUseViewInsets: contentUseViewInsets,
+         contentOverlayLocation: contentOverlayLocation,
          contentHideRegion: contentHideRegion,
          contentGroupId: contentGroupId,
          contentCutout: contentCutout,
@@ -1055,6 +1066,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
     this.contentOffset = .zero,
     this.contentUseViewPadding = true,
     this.contentUseViewInsets = true,
+    this.contentOverlayLocation = .nearestOverlay,
     this.contentHideRegion = .excludeChild,
     this.contentGroupId,
     this.contentCutout = true,
@@ -1159,6 +1171,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
       ..add(DiagnosticsProperty('contentOffset', contentOffset))
       ..add(FlagProperty('contentUseViewPadding', value: contentUseViewPadding, ifTrue: 'using view padding'))
       ..add(FlagProperty('contentUseViewInsets', value: contentUseViewInsets, ifTrue: 'using view insets'))
+      ..add(EnumProperty('contentOverlayLocation', contentOverlayLocation))
       ..add(EnumProperty('contentHideRegion', contentHideRegion))
       ..add(DiagnosticsProperty('contentGroupId', contentGroupId))
       ..add(FlagProperty('contentCutout', value: contentCutout, ifTrue: 'cutout'))
@@ -1472,6 +1485,7 @@ class _State<T> extends State<FAutocomplete<T>> with TickerProviderStateMixin {
             overflow: widget.contentOverflow,
             useViewPadding: widget.contentUseViewPadding,
             useViewInsets: widget.contentUseViewInsets,
+            overlayLocation: widget.contentOverlayLocation,
             offset: widget.contentOffset,
             // Tab should move to the next control instead of into the content.
             traversalGrouped: false,

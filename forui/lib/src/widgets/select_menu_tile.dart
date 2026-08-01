@@ -121,6 +121,11 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
   /// Defaults to true.
   final bool menuUseViewInsets;
 
+  /// {@macro forui.foundation.FPortal.overlayLocation}
+  ///
+  /// Defaults to [OverlayChildLocation.nearestOverlay].
+  final OverlayChildLocation menuOverlayLocation;
+
   /// {@macro forui.widgets.FPopover.hideRegion}
   final FPopoverHideRegion menuHideRegion;
 
@@ -250,6 +255,7 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
     this.menuOverflow = .flip,
     this.menuUseViewPadding = true,
     this.menuUseViewInsets = true,
+    this.menuOverlayLocation = .nearestOverlay,
     this.menuOffset = .zero,
     this.menuHideRegion = .excludeChild,
     this.menuOnTapHide,
@@ -311,6 +317,7 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
     FPortalOverflow menuOverflow = .flip,
     bool menuUseViewPadding = true,
     bool menuUseViewInsets = true,
+    OverlayChildLocation menuOverlayLocation = .nearestOverlay,
     Offset menuOffset = .zero,
     FPopoverHideRegion menuHideRegion = .excludeChild,
     VoidCallback? menuOnTapHide,
@@ -362,6 +369,7 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
     menuOverflow: menuOverflow,
     menuUseViewPadding: menuUseViewPadding,
     menuUseViewInsets: menuUseViewInsets,
+    menuOverlayLocation: menuOverlayLocation,
     menuOffset: menuOffset,
     menuHideRegion: menuHideRegion,
     menuOnTapHide: menuOnTapHide,
@@ -433,6 +441,7 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
     this.menuOverflow = .flip,
     this.menuUseViewPadding = true,
     this.menuUseViewInsets = true,
+    this.menuOverlayLocation = .nearestOverlay,
     this.menuOffset = .zero,
     this.menuHideRegion = .excludeChild,
     this.menuOnTapHide,
@@ -490,6 +499,7 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
       ..add(ObjectFlagProperty.has('menuOverflow', menuOverflow))
       ..add(FlagProperty('menuUseViewPadding', value: menuUseViewPadding, ifTrue: 'using view padding'))
       ..add(FlagProperty('menuUseViewInsets', value: menuUseViewInsets, ifTrue: 'using view insets'))
+      ..add(EnumProperty('menuOverlayLocation', menuOverlayLocation))
       ..add(DiagnosticsProperty('menuOffset', menuOffset))
       ..add(EnumProperty('menuHideRegion', menuHideRegion))
       ..add(ObjectFlagProperty.has('menuOnTapHide', menuOnTapHide))
@@ -609,6 +619,7 @@ class _FSelectMenuTileState<T> extends State<FSelectMenuTile<T>> with TickerProv
           overflow: widget.menuOverflow,
           useViewPadding: widget.menuUseViewPadding,
           useViewInsets: widget.menuUseViewInsets,
+          overlayLocation: widget.menuOverlayLocation,
           offset: widget.menuOffset,
           hideRegion: widget.menuHideRegion,
           onTapHide: widget.menuOnTapHide,

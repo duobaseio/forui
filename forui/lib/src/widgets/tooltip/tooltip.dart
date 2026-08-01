@@ -106,6 +106,11 @@ class FTooltip extends StatefulWidget {
   /// Defaults to true.
   final bool useViewInsets;
 
+  /// {@macro forui.foundation.FPortal.overlayLocation}
+  ///
+  /// Defaults to [OverlayChildLocation.nearestOverlay].
+  final OverlayChildLocation overlayLocation;
+
   /// The tip builder. The child passed to [tipBuilder] will always be null.
   final Widget Function(BuildContext context, FTooltipController controller) tipBuilder;
 
@@ -135,6 +140,7 @@ class FTooltip extends StatefulWidget {
     this.longPress,
     this.useViewPadding = true,
     this.useViewInsets = true,
+    this.overlayLocation = .nearestOverlay,
     this.builder = defaultBuilder,
     this.child,
     super.key,
@@ -157,6 +163,7 @@ class FTooltip extends StatefulWidget {
       ..add(FlagProperty('longPress', value: longPress, ifTrue: 'longPress'))
       ..add(FlagProperty('useViewPadding', value: useViewPadding, ifTrue: 'using view padding'))
       ..add(FlagProperty('useViewInsets', value: useViewInsets, ifTrue: 'using view insets'))
+      ..add(EnumProperty('overlayLocation', overlayLocation))
       ..add(ObjectFlagProperty.has('tipBuilder', tipBuilder))
       ..add(ObjectFlagProperty.has('builder', builder));
   }
@@ -271,6 +278,7 @@ class _FTooltipState extends State<FTooltip> with SingleTickerProviderStateMixin
         overflow: widget.overflow,
         useViewPadding: widget.useViewPadding,
         useViewInsets: widget.useViewInsets,
+        overlayLocation: widget.overlayLocation,
         portalBuilder: (context, _) {
           final Size(:width, :height) = MediaQuery.sizeOf(context);
           Widget tooltip = ConstrainedBox(

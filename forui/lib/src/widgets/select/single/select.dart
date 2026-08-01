@@ -194,6 +194,11 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// Defaults to true.
   final bool contentUseViewInsets;
 
+  /// {@macro forui.foundation.FPortal.overlayLocation}
+  ///
+  /// Defaults to [OverlayChildLocation.nearestOverlay].
+  final OverlayChildLocation contentOverlayLocation;
+
   /// {@macro forui.widgets.FPopover.offset}
   final Offset contentOffset;
 
@@ -278,6 +283,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     FPortalOverflow contentOverflow = .flip,
     bool contentUseViewPadding = true,
     bool contentUseViewInsets = true,
+    OverlayChildLocation contentOverlayLocation = .nearestOverlay,
     Offset contentOffset = .zero,
     FPopoverHideRegion contentHideRegion = .excludeChild,
     Object? contentGroupId,
@@ -330,6 +336,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       contentOverflow: contentOverflow,
       contentUseViewPadding: contentUseViewPadding,
       contentUseViewInsets: contentUseViewInsets,
+      contentOverlayLocation: contentOverlayLocation,
       contentOffset: contentOffset,
       contentHideRegion: contentHideRegion,
       contentGroupId: contentGroupId,
@@ -386,6 +393,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     FPortalOverflow contentOverflow,
     bool contentUseViewPadding,
     bool contentUseViewInsets,
+    OverlayChildLocation contentOverlayLocation,
     Offset contentOffset,
     FPopoverHideRegion contentHideRegion,
     Object? contentGroupId,
@@ -458,6 +466,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     FPortalOverflow contentOverflow = .flip,
     bool contentUseViewPadding = true,
     bool contentUseViewInsets = true,
+    OverlayChildLocation contentOverlayLocation = .nearestOverlay,
     Offset contentOffset = .zero,
     FPopoverHideRegion contentHideRegion = .excludeChild,
     Object? contentGroupId,
@@ -522,6 +531,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       contentOverflow: contentOverflow,
       contentUseViewPadding: contentUseViewPadding,
       contentUseViewInsets: contentUseViewInsets,
+      contentOverlayLocation: contentOverlayLocation,
       contentOffset: contentOffset,
       contentHideRegion: contentHideRegion,
       contentGroupId: contentGroupId,
@@ -589,6 +599,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     FPortalOverflow contentOverflow,
     bool contentUseViewPadding,
     bool contentUseViewInsets,
+    OverlayChildLocation contentOverlayLocation,
     Offset contentOffset,
     FPopoverHideRegion contentHideRegion,
     Object? contentGroupId,
@@ -641,6 +652,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     this.contentOverflow = .flip,
     this.contentUseViewPadding = true,
     this.contentUseViewInsets = true,
+    this.contentOverlayLocation = .nearestOverlay,
     this.contentOffset = .zero,
     this.contentHideRegion = .excludeChild,
     this.contentGroupId,
@@ -694,6 +706,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       ..add(ObjectFlagProperty.has('contentOverflow', contentOverflow))
       ..add(FlagProperty('contentUseViewPadding', value: contentUseViewPadding, ifTrue: 'using view padding'))
       ..add(FlagProperty('contentUseViewInsets', value: contentUseViewInsets, ifTrue: 'using view insets'))
+      ..add(EnumProperty('contentOverlayLocation', contentOverlayLocation))
       ..add(DiagnosticsProperty('contentOffset', contentOffset))
       ..add(EnumProperty('contentHideRegion', contentHideRegion))
       ..add(DiagnosticsProperty('contentGroupId', contentGroupId))
@@ -847,6 +860,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
           overflow: widget.contentOverflow,
           useViewPadding: widget.contentUseViewPadding,
           useViewInsets: widget.contentUseViewInsets,
+          overlayLocation: widget.contentOverlayLocation,
           offset: widget.contentOffset,
           // Tab should move to the next control instead of into the content.
           traversalGrouped: false,

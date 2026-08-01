@@ -39,6 +39,11 @@ sealed class FDateFieldCalendarProperties with Diagnosticable {
   /// Defaults to true.
   final bool useViewInsets;
 
+  /// {@macro forui.foundation.FPortal.overlayLocation}
+  ///
+  /// Defaults to [OverlayChildLocation.nearestOverlay].
+  final OverlayChildLocation overlayLocation;
+
   /// {@macro forui.widgets.FPopover.hideRegion}
   ///
   /// Defaults to [FPopoverHideRegion.excludeChild].
@@ -79,6 +84,7 @@ sealed class FDateFieldCalendarProperties with Diagnosticable {
     this.offset = .zero,
     this.useViewPadding = true,
     this.useViewInsets = true,
+    this.overlayLocation = .nearestOverlay,
     this.hideRegion = .excludeChild,
     this.groupId,
     this.onTapHide,
@@ -104,6 +110,7 @@ sealed class FDateFieldCalendarProperties with Diagnosticable {
       ..add(DiagnosticsProperty('offset', offset))
       ..add(FlagProperty('useViewPadding', value: useViewPadding, ifTrue: 'using view padding'))
       ..add(FlagProperty('useViewInsets', value: useViewInsets, ifTrue: 'using view insets'))
+      ..add(EnumProperty('overlayLocation', overlayLocation))
       ..add(EnumProperty('hideRegion', hideRegion))
       ..add(DiagnosticsProperty('groupId', groupId))
       ..add(ObjectFlagProperty.has('onTapHide', onTapHide))
@@ -127,6 +134,7 @@ sealed class FDateFieldCalendarProperties with Diagnosticable {
           offset == other.offset &&
           useViewPadding == other.useViewPadding &&
           useViewInsets == other.useViewInsets &&
+          overlayLocation == other.overlayLocation &&
           hideRegion == other.hideRegion &&
           groupId == other.groupId &&
           onTapHide == other.onTapHide &&
@@ -146,6 +154,7 @@ sealed class FDateFieldCalendarProperties with Diagnosticable {
       offset.hashCode ^
       useViewPadding.hashCode ^
       useViewInsets.hashCode ^
+      overlayLocation.hashCode ^
       hideRegion.hashCode ^
       groupId.hashCode ^
       onTapHide.hashCode ^
@@ -236,6 +245,7 @@ class FDateFieldGridCalendarProperties extends FDateFieldCalendarProperties {
     super.offset,
     super.useViewPadding,
     super.useViewInsets,
+    super.overlayLocation,
     super.hideRegion,
     super.groupId,
     super.onTapHide,
@@ -380,6 +390,7 @@ class FDateFieldGridSplitCalendarProperties extends FDateFieldCalendarProperties
     super.offset,
     super.useViewPadding,
     super.useViewInsets,
+    super.overlayLocation,
     super.hideRegion,
     super.groupId,
     super.onTapHide,
@@ -506,6 +517,7 @@ class FDateFieldWheelCalendarProperties extends FDateFieldCalendarProperties {
     super.offset,
     super.useViewPadding,
     super.useViewInsets,
+    super.overlayLocation,
     super.hideRegion,
     super.groupId,
     super.onTapHide,

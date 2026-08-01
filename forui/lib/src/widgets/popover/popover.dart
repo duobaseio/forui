@@ -138,6 +138,11 @@ class FPopover extends StatefulWidget {
   /// Defaults to true.
   final bool useViewInsets;
 
+  /// {@macro forui.foundation.FPortal.overlayLocation}
+  ///
+  /// Defaults to [OverlayChildLocation.nearestOverlay].
+  final OverlayChildLocation overlayLocation;
+
   /// {@template forui.widgets.FPopover.offset}
   /// Additional translation to apply to the popover's position.
   ///
@@ -278,6 +283,7 @@ class FPopover extends StatefulWidget {
     this.overflow = .flip,
     this.useViewPadding = true,
     this.useViewInsets = true,
+    this.overlayLocation = .nearestOverlay,
     this.offset = .zero,
     this.groupId,
     this.hideRegion = .excludeChild,
@@ -345,6 +351,7 @@ class FPopover extends StatefulWidget {
       ..add(FlagProperty('traversalGrouped', value: traversalGrouped, ifTrue: 'traversal grouped with child'))
       ..add(FlagProperty('useViewPadding', value: useViewPadding, ifTrue: 'using view padding'))
       ..add(FlagProperty('useViewInsets', value: useViewInsets, ifTrue: 'using view insets'))
+      ..add(EnumProperty('overlayLocation', overlayLocation))
       ..add(DiagnosticsProperty('shortcuts', shortcuts))
       ..add(ObjectFlagProperty.has('popoverBuilder', popoverBuilder))
       ..add(EnumProperty('popoverClipBehavior', popoverClipBehavior))
@@ -453,6 +460,7 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
           overflow: widget.overflow,
           useViewPadding: widget.useViewPadding,
           useViewInsets: widget.useViewInsets,
+          overlayLocation: widget.overlayLocation,
           offset: widget.offset,
           traversalGrouped: widget.traversalGrouped,
           barrier: style.barrierFilter == null

@@ -100,6 +100,11 @@ class FOverlay extends StatefulWidget {
   /// Defaults to returning [overlay] as-is.
   final FOverlayBuilder overlayBuilder;
 
+  /// {@macro forui.foundation.FPortal.overlayLocation}
+  ///
+  /// Defaults to [OverlayChildLocation.nearestOverlay].
+  final OverlayChildLocation overlayLocation;
+
   /// {@template forui.foundation.overlay.builder}
   /// An optional builder for the child widget.
   ///
@@ -120,6 +125,7 @@ class FOverlay extends StatefulWidget {
     required this.overlay,
     this.control = const .managed(),
     this.overlayBuilder = defaultOverlayBuilder,
+    this.overlayLocation = .nearestOverlay,
     this.builder = defaultBuilder,
     this.child,
     super.key,
@@ -135,6 +141,7 @@ class FOverlay extends StatefulWidget {
       ..add(DiagnosticsProperty('control', control))
       ..add(ObjectFlagProperty.has('overlayBuilder', overlayBuilder))
       ..add(IterableProperty('overlay', overlay))
+      ..add(EnumProperty('overlayLocation', overlayLocation))
       ..add(ObjectFlagProperty.has('builder', builder));
   }
 }
@@ -162,6 +169,7 @@ class _State extends State<FOverlay> {
     link: _link,
     child: OverlayPortal(
       controller: _controller,
+      overlayLocation: widget.overlayLocation,
       // Prevents the portal from inheriting FTappableGroups in the widget.builder/widget.child since FTappableGroup
       // does not hit test across layers.
       overlayChildBuilder: (context) => FTappableGroup.isolate(

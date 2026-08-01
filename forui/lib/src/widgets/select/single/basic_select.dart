@@ -40,6 +40,7 @@ class _BasicSelect<T> extends FSelect<T> {
     super.contentOverflow,
     super.contentUseViewPadding,
     super.contentUseViewInsets,
+    super.contentOverlayLocation,
     super.contentOffset,
     super.contentHideRegion,
     super.contentGroupId,

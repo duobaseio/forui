@@ -37,6 +37,7 @@ class _BasicSelect<T> extends FMultiSelect<T> {
     super.contentOverflow,
     super.contentUseViewPadding,
     super.contentUseViewInsets,
+    super.contentOverlayLocation,
     super.contentOffset,
     super.contentHideRegion,
     super.contentGroupId,

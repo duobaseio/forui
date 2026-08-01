@@ -148,6 +148,11 @@ class FSubmenuTile extends StatelessWidget with FTileMixin {
   /// Defaults to true.
   final bool submenuUseViewInsets;
 
+  /// {@macro forui.foundation.FPortal.overlayLocation}
+  ///
+  /// Defaults to [OverlayChildLocation.nearestOverlay].
+  final OverlayChildLocation submenuOverlayLocation;
+
   /// Whether the submenu should be auto-focused.
   final bool? submenuAutofocus;
 
@@ -204,6 +209,7 @@ class FSubmenuTile extends StatelessWidget with FTileMixin {
     this.submenuSemanticsLabel,
     this.submenuUseViewPadding = true,
     this.submenuUseViewInsets = true,
+    this.submenuOverlayLocation = .nearestOverlay,
     this.submenuAutofocus,
     this.submenuFocusNode,
     this.submenuOnFocusChange,
@@ -246,6 +252,7 @@ class FSubmenuTile extends StatelessWidget with FTileMixin {
       ..add(StringProperty('submenuSemanticsLabel', submenuSemanticsLabel))
       ..add(FlagProperty('submenuUseViewPadding', value: submenuUseViewPadding, ifTrue: 'submenu using view padding'))
       ..add(FlagProperty('submenuUseViewInsets', value: submenuUseViewInsets, ifTrue: 'submenu using view insets'))
+      ..add(EnumProperty('submenuOverlayLocation', submenuOverlayLocation))
       ..add(FlagProperty('submenuAutofocus', value: submenuAutofocus, ifTrue: 'submenu autofocus'))
       ..add(DiagnosticsProperty('submenuFocusNode', submenuFocusNode))
       ..add(ObjectFlagProperty.has('submenuOnFocusChange', submenuOnFocusChange))
@@ -275,6 +282,7 @@ class FSubmenuTile extends StatelessWidget with FTileMixin {
       semanticsLabel: submenuSemanticsLabel,
       useViewPadding: submenuUseViewPadding,
       useViewInsets: submenuUseViewInsets,
+      overlayLocation: submenuOverlayLocation,
       autofocus: submenuAutofocus,
       focusNode: submenuFocusNode,
       onFocusChange: submenuOnFocusChange,

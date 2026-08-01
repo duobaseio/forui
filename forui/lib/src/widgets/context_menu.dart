@@ -73,6 +73,11 @@ class FContextMenu extends StatefulWidget {
   /// Defaults to true.
   final bool useViewInsets;
 
+  /// {@macro forui.foundation.FPortal.overlayLocation}
+  ///
+  /// Defaults to [OverlayChildLocation.nearestOverlay].
+  final OverlayChildLocation overlayLocation;
+
   /// {@macro forui.widgets.FPopover.offset}
   ///
   /// Defaults to [Offset.zero].
@@ -163,6 +168,7 @@ class FContextMenu extends StatefulWidget {
     this.overflow = .flip,
     this.useViewPadding = true,
     this.useViewInsets = true,
+    this.overlayLocation = .nearestOverlay,
     this.offset = .zero,
     this.groupId,
     this.hideRegion = .excludeChild,
@@ -221,6 +227,7 @@ class FContextMenu extends StatefulWidget {
     this.overflow = .flip,
     this.useViewPadding = true,
     this.useViewInsets = true,
+    this.overlayLocation = .nearestOverlay,
     this.offset = .zero,
     this.groupId,
     this.hideRegion = .excludeChild,
@@ -281,6 +288,7 @@ class FContextMenu extends StatefulWidget {
       ..add(ObjectFlagProperty.has('overflow', overflow))
       ..add(FlagProperty('useViewPadding', value: useViewPadding, ifTrue: 'using view padding'))
       ..add(FlagProperty('useViewInsets', value: useViewInsets, ifTrue: 'using view insets'))
+      ..add(EnumProperty('overlayLocation', overlayLocation))
       ..add(DiagnosticsProperty('offset', offset))
       ..add(DiagnosticsProperty('groupId', groupId))
       ..add(EnumProperty('hideRegion', hideRegion))
@@ -417,6 +425,7 @@ class _State extends State<FContextMenu> with TickerProviderStateMixin {
         offset: widget.offset,
         useViewPadding: widget.useViewPadding,
         useViewInsets: widget.useViewInsets,
+        overlayLocation: widget.overlayLocation,
         padding: style.popoverPadding,
         barrier: style.barrierFilter == null
             ? null

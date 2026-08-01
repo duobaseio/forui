@@ -33,6 +33,11 @@ class FTimeFieldPickerProperties with Diagnosticable {
   /// Defaults to true.
   final bool useViewInsets;
 
+  /// {@macro forui.foundation.FPortal.overlayLocation}
+  ///
+  /// Defaults to [OverlayChildLocation.nearestOverlay].
+  final OverlayChildLocation overlayLocation;
+
   /// {@macro forui.widgets.FPopover.hideRegion}
   ///
   /// Defaults to [FPopoverHideRegion.excludeChild].
@@ -74,6 +79,7 @@ class FTimeFieldPickerProperties with Diagnosticable {
     this.overflow = .flip,
     this.useViewPadding = true,
     this.useViewInsets = true,
+    this.overlayLocation = .nearestOverlay,
     this.offset = .zero,
     this.hideRegion = .excludeChild,
     this.groupId,
@@ -96,6 +102,7 @@ class FTimeFieldPickerProperties with Diagnosticable {
       ..add(ObjectFlagProperty.has('overflow', overflow))
       ..add(FlagProperty('useViewPadding', value: useViewPadding, ifTrue: 'using view padding'))
       ..add(FlagProperty('useViewInsets', value: useViewInsets, ifTrue: 'using view insets'))
+      ..add(EnumProperty('overlayLocation', overlayLocation))
       ..add(DiagnosticsProperty('offset', offset))
       ..add(EnumProperty('hideRegion', hideRegion))
       ..add(DiagnosticsProperty('groupId', groupId))
@@ -119,6 +126,7 @@ class FTimeFieldPickerProperties with Diagnosticable {
           overflow == other.overflow &&
           useViewPadding == other.useViewPadding &&
           useViewInsets == other.useViewInsets &&
+          overlayLocation == other.overlayLocation &&
           offset == other.offset &&
           hideRegion == other.hideRegion &&
           groupId == other.groupId &&
@@ -138,6 +146,7 @@ class FTimeFieldPickerProperties with Diagnosticable {
       overflow.hashCode ^
       useViewPadding.hashCode ^
       useViewInsets.hashCode ^
+      overlayLocation.hashCode ^
       offset.hashCode ^
       hideRegion.hashCode ^
       groupId.hashCode ^

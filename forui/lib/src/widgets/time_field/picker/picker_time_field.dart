@@ -25,6 +25,8 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
   @override
   final bool useViewInsets;
   @override
+  final OverlayChildLocation overlayLocation;
+  @override
   final Offset offset;
   @override
   final FPopoverHideRegion hideRegion;
@@ -59,6 +61,7 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
     this.overflow = .flip,
     this.useViewPadding = true,
     this.useViewInsets = true,
+    this.overlayLocation = .nearestOverlay,
     this.offset = .zero,
     this.hideRegion = .excludeChild,
     this.groupId,
@@ -289,6 +292,7 @@ class _PickerPopover extends StatelessWidget {
     overflow: properties.overflow,
     useViewPadding: properties.useViewPadding,
     useViewInsets: properties.useViewInsets,
+    overlayLocation: properties.overlayLocation,
     offset: properties.offset,
     hideRegion: properties.hideRegion,
     groupId: properties.groupId,

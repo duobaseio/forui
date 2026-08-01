@@ -1,5 +1,9 @@
 ## 0.25.0 (Next)
 
+### `FAutocomplete`
+* Add `FAutocomplete.contentOverlayLocation`.
+
+
 ### `FBreadcrumb`
 * Add `FBreadcrumbItem.collapsed(menuSemanticsLabel: ...)` and `FBreadcrumbItem.collapsedTiles(menuSemanticsLabel: ...)`.
 
@@ -13,6 +17,14 @@
 
 ### `FButton`
 * Add `FButton.semanticsTooltip`.
+
+
+### `FContextMenu`
+* Add `FContextMenu.overlayLocation`.
+
+
+### `FDateField`
+* Add `FDateFieldCalendarProperties.overlayLocation`.
 
 
 ### `FDialog`
@@ -43,13 +55,22 @@ rebuilt.
 * Add `FItem.semanticsTooltip` and `FTile.semanticsTooltip`.
 
 
+### `FOverlay`
+* Add `FOverlay.overlayLocation`.
+
+
 ### `FPagination`
 * Fix `FPagination`'s previous and next buttons being enabled on the first and last pages.
 * Fix `FPagination`'s ellipsis being announced by screen readers.
 * Fix `FPagination`'s page buttons being announced without their page number.
 
 
+### `FPointPortal`
+* Add `FPointPortal.overlayLocation`.
+
+
 ### `FPopover`
+* Add `FPopover.overlayLocation`.
 * Add `FPopover.traversalGrouped`.
 
 * **Breaking** Change `FPopoverStyle.barrierFilter` and `FPopoverStyle.backgroundFilter` to accept a `FThemeData`.
@@ -57,10 +78,23 @@ rebuilt.
 * Fix `FPopover` content not being traversed immediately after its child.
 
 
+### `FPopoverMenu`
+* Add `FPopoverMenu.overlayLocation`, `FSubmenuItem.submenuOverlayLocation` and `FSubmenuTile.submenuOverlayLocation`.
+
+
 ### `FPortal`
+* Add `FPortal.overlayLocation`.
 * Add `FPortal.traversalGrouped`.
 
 * Fix `FPortal` content not being traversed immediately after its child.
+
+
+### `FSelect` & `FMultiSelect`
+* Add `FSelect.contentOverlayLocation` and `FMultiSelect.contentOverlayLocation`.
+
+
+### `FSelectMenuTile`
+* Add `FSelectMenuTile.menuOverlayLocation`.
 
 
 ### `FSheet`
@@ -75,7 +109,13 @@ rebuilt.
 * Add `FTappable.semanticsTooltip`.
 
 
+### `FTimeField`
+* Add `FTimeFieldPickerProperties.overlayLocation`.
+
+
 ### `FTooltip`
+* Add `FTooltip.overlayLocation`.
+
 * **Breaking** Remove `FTooltip.semanticsLabel`. Set `semanticsTooltip` on the trigger instead.
 
 

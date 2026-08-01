@@ -95,6 +95,11 @@ class FPointPortal extends StatefulWidget {
   /// Defaults to [EdgeInsets.zero].
   final EdgeInsetsGeometry padding;
 
+  /// {@macro forui.foundation.FPortal.overlayLocation}
+  ///
+  /// Defaults to [OverlayChildLocation.nearestOverlay].
+  final OverlayChildLocation overlayLocation;
+
   /// An optional barrier builder that is displayed behind the portal.
   final Widget Function(RenderBox? cutout)? barrier;
 
@@ -123,6 +128,7 @@ class FPointPortal extends StatefulWidget {
     this.useViewPadding = true,
     this.useViewInsets = true,
     this.padding = .zero,
+    this.overlayLocation = .nearestOverlay,
     this.barrier,
     this.builder = FOverlay.defaultBuilder,
     this.child,
@@ -146,6 +152,7 @@ class FPointPortal extends StatefulWidget {
       ..add(FlagProperty('useViewPadding', value: useViewPadding, ifTrue: 'using view padding'))
       ..add(FlagProperty('useViewInsets', value: useViewInsets, ifTrue: 'using view insets'))
       ..add(DiagnosticsProperty('padding', padding))
+      ..add(EnumProperty('overlayLocation', overlayLocation))
       ..add(ObjectFlagProperty.has('barrier', barrier))
       ..add(ObjectFlagProperty.has('portalBuilder', portalBuilder))
       ..add(ObjectFlagProperty.has('builder', builder));
@@ -187,6 +194,7 @@ class _State extends State<FPointPortal> with WidgetsBindingObserver {
     link: _link,
     child: OverlayPortal(
       controller: _controller,
+      overlayLocation: widget.overlayLocation,
       overlayChildBuilder: (context) {
         final direction = Directionality.maybeOf(context) ?? .ltr;
 

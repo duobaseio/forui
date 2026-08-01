@@ -95,6 +95,13 @@ class FPortal extends StatefulWidget {
   /// Defaults to [EdgeInsets.zero].
   final EdgeInsetsGeometry padding;
 
+  /// {@template forui.foundation.FPortal.overlayLocation}
+  /// The [Overlay] that the portal is attached to.
+  /// {@endtemplate}
+  ///
+  /// Defaults to [OverlayChildLocation.nearestOverlay].
+  final OverlayChildLocation overlayLocation;
+
   /// {@template forui.foundation.FPortal.traversalGrouped}
   /// Whether the portal's content is traversed immediately after the [child].
   ///
@@ -132,6 +139,7 @@ class FPortal extends StatefulWidget {
     this.useViewPadding = true,
     this.useViewInsets = true,
     this.padding = .zero,
+    this.overlayLocation = .nearestOverlay,
     this.traversalGrouped = true,
     this.barrier,
     this.builder = FOverlay.defaultBuilder,
@@ -156,6 +164,7 @@ class FPortal extends StatefulWidget {
       ..add(FlagProperty('useViewPadding', value: useViewPadding, ifTrue: 'using view padding'))
       ..add(FlagProperty('useViewInsets', value: useViewInsets, ifTrue: 'using view insets'))
       ..add(DiagnosticsProperty('padding', padding))
+      ..add(EnumProperty('overlayLocation', overlayLocation))
       ..add(FlagProperty('traversalGrouped', value: traversalGrouped, ifTrue: 'traversal grouped with child'))
       ..add(ObjectFlagProperty.has('barrier', barrier))
       ..add(ObjectFlagProperty.has('portalBuilder', portalBuilder))
@@ -202,6 +211,7 @@ class _State extends State<FPortal> with WidgetsBindingObserver {
 
     final portal = OverlayPortal(
       controller: _controller,
+      overlayLocation: widget.overlayLocation,
       overlayChildBuilder: (context) {
         final direction = Directionality.maybeOf(context) ?? .ltr;
         final portalAnchor = widget.portalAnchor.resolve(direction);

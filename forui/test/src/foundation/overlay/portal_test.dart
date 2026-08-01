@@ -88,4 +88,56 @@ void main() {
     // The portal flips above its child instead of rendering behind the keyboard.
     expect(tester.getRect(find.byKey(const ValueKey('portal'))).bottom, lessThanOrEqualTo(300));
   });
+
+  group('overlayLocation', () {
+    for (final (location, nested) in const <(OverlayChildLocation, bool)>[
+      (.nearestOverlay, true),
+      (.rootOverlay, false),
+    ]) {
+      testWidgets('$location attaches to the ${nested ? 'nested' : 'root'} overlay', (tester) async {
+        final controller = OverlayPortalController();
+        final key = GlobalKey();
+        late OverlayEntry entry;
+
+        await tester.pumpWidget(
+          TestScaffold.app(
+            child: SizedBox.square(
+              dimension: 200,
+              child: Overlay(
+                key: key,
+                initialEntries: [
+                  entry = OverlayEntry(
+                    builder: (_) => FPortal(
+                      control: .managed(controller: controller),
+                      overlayLocation: location,
+                      portalBuilder: (_, _) => const SizedBox.square(dimension: 10, child: Text('portal')),
+                      child: const SizedBox.square(dimension: 10),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        );
+
+        controller.show();
+        await tester.pumpAndSettle();
+
+        final overlay = key.currentContext!.findRenderObject();
+        var descendant = false;
+        for (RenderObject? node = tester.renderObject(find.text('portal')); node != null; node = node.parent) {
+          if (identical(node, overlay)) {
+            descendant = true;
+            break;
+          }
+        }
+
+        expect(descendant, nested);
+
+        entry.remove();
+        await tester.pumpAndSettle();
+        entry.dispose();
+      });
+    }
+  });
 }

@@ -2,7 +2,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:forui/forui.dart';
-import 'package:forui_example/flicker.dart';
 import 'package:forui_example/icon_comparison.dart';
 import 'package:forui_example/sandbox.dart';
 import 'package:marionette_flutter/marionette_flutter.dart';
@@ -21,7 +20,6 @@ List<Widget> _pages = [
   const Text('Settings'),
   const Sandbox(),
   const IconComparison(),
-  const Flicker(),
 ];
 
 class Application extends StatefulWidget {
@@ -78,7 +76,6 @@ class _ApplicationState extends State<Application> with SingleTickerProviderStat
                 FBottomNavigationBarItem(icon: Icon(FLucideIcons.settings), label: Text('Settings')),
                 FBottomNavigationBarItem(icon: Icon(FLucideIcons.castle), label: Text('Sandbox')),
                 FBottomNavigationBarItem(icon: Icon(FLucideIcons.shapes), label: Text('Icons')),
-                FBottomNavigationBarItem(icon: Icon(FLucideIcons.zap), label: Text('Flicker')),
               ],
             ),
             child: _pages[index],

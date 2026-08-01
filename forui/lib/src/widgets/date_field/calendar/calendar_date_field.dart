@@ -231,6 +231,7 @@ class _CalendarPopover extends StatelessWidget {
     offset: properties.offset,
     useViewPadding: properties.useViewPadding,
     useViewInsets: properties.useViewInsets,
+    overlayLocation: properties.overlayLocation,
     hideRegion: properties.hideRegion,
     groupId: properties.groupId,
     cutout: properties.cutout,
