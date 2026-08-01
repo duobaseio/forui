@@ -394,7 +394,7 @@ void main() {
           style: .delta(
             minWidth: 250,
             backgroundFilter: () =>
-                (v) => .blur(sigmaX: v * 8, sigmaY: v * 8),
+                (_, v) => .blur(sigmaX: v * 8, sigmaY: v * 8),
             decoration: .value(
               BoxDecoration(
                 color: Colors.white.withValues(alpha: 0.2),

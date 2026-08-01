@@ -305,7 +305,7 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
 
   /// The collapsible icon builder. Defaults to [FIcons.chevronRight].
   @override
-  final FIconBuilder collapsibleIcon;
+  final FIcon collapsibleIcon;
 
   /// The spacing between child items. Defaults to 4.
   @override

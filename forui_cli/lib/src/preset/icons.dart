@@ -12,11 +12,14 @@ String generateIcons(Preset preset) {
   var icons = neutral.icons;
   for (final mapping in IconMapping.values) {
     if (preset.icon.map(mapping) case final icon?) {
-      icons = icons.replaceAll('FIcons.iconData(FLucideIcons.${mapping.name})', icon);
+      icons = icons.replaceAll('const FIcon(FLucideIcons.${mapping.name})', icon);
     }
   }
 
-  return icons;
+  return switch (preset.icon.builder) {
+    final builder? => '$icons\n$builder',
+    null => icons,
+  };
 }
 
 /// Adds [preset]'s icon library package to the project, unless it is the built-in Lucide.
@@ -41,33 +44,111 @@ extension Icons on IconLibrary {
   // Tabler's font metrics (ascent 0.9em, descent -0.1em) round differently from lucide's (1em, 0) at device
   // pixel scale, sinking every glyph ~0.05em below lucide's position on macOS, so nudge all slots up. Some
   // glyphs also render ~10% smaller than their lucide counterparts; scale those to match.
-  static String _tabler(String value, {double? scale}) {
-    var icon = 'Icon(TablerIcons.$value, semanticLabel: semanticsLabel)';
-    if (scale != null) {
-      icon = 'Transform.scale(scale: $scale, child: $icon)';
-    }
+  static String _tabler(String value, {double? scale}) =>
+      "const _Icon(TablerIcons.$value${scale == null ? '' : ', scale: $scale'})";
 
-    return '(_, {semanticsLabel}) => Builder(builder: (context) => Transform.translate(offset: '
-        'Offset(0, -0.05 * (IconTheme.of(context).size ?? 24)), '
-        'child: $icon))';
-  }
+  static String _remix(String value, {bool rotated = false}) =>
+      "const _Icon(RemixIcons.$value${rotated ? ', rotated: true' : ''})";
 
-  static String _remix(String value, {bool rotated = false}) {
-    var icon = 'Icon(RemixIcons.$value, semanticLabel: semanticsLabel)';
-    if (rotated) {
-      icon = 'RotatedBox(quarterTurns: 1, child: $icon)';
-    }
+  static String _hugeicon(String value) => 'const _Icon(HugeIcons.$value)';
 
-    return '(_, {semanticsLabel}) => Builder(builder: (context) => Transform.translate(offset: '
-        'Offset(0, 0.02 * (IconTheme.of(context).size ?? 24)), '
-        'child: Transform.scale(scale: 1.15, child: $icon)))';
-  }
+  static String _iconoir(String value) => 'const _Icon(iconoir.$value.new)';
 
-  static String _hugeicon(String value) => '(_, {semanticsLabel}) => HugeIcon(icon: HugeIcons.$value, size: null)';
+  /// The `_Icon` class backing this library's icons, or null for the built-in Lucide.
+  String? get builder => switch (this) {
+    IconLibrary.lucide => null,
+    IconLibrary.tabler =>
+      '''
+class _Icon implements FIcon {
+  final IconData icon;
+  final double scale;
 
-  static String _iconoir(String value) =>
-      '(_, {semanticsLabel}) => Builder(builder: (context) => iconoir.'
-      '$value(color: IconTheme.of(context).color, width: IconTheme.of(context).size, height: IconTheme.of(context).size))';
+  const _Icon(this.icon, {this.scale = 1});
+
+  @override
+  Widget call(BuildContext _, {String? semanticsLabel}) => Builder(
+    builder: (context) => Transform.translate(
+      offset: Offset(0, -0.05 * (IconTheme.of(context).size ?? 24)),
+      child: Transform.scale(scale: scale, child: Icon(icon, semanticLabel: semanticsLabel)),
+    ),
+  );
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is _Icon && icon == other.icon && scale == other.scale;
+
+  @override
+  int get hashCode => Object.hash(icon, scale);
+}
+''',
+    IconLibrary.remix =>
+      '''
+class _Icon implements FIcon {
+  final IconData icon;
+  final bool rotated;
+
+  const _Icon(this.icon, {this.rotated = false});
+
+  @override
+  Widget call(BuildContext _, {String? semanticsLabel}) => Builder(
+    builder: (context) {
+      final Widget child = Icon(icon, semanticLabel: semanticsLabel);
+      return Transform.translate(
+        offset: Offset(0, 0.02 * (IconTheme.of(context).size ?? 24)),
+        child: Transform.scale(scale: 1.15, child: rotated ? RotatedBox(quarterTurns: 1, child: child) : child),
+      );
+    },
+  );
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is _Icon && icon == other.icon && rotated == other.rotated;
+
+  @override
+  int get hashCode => Object.hash(icon, rotated);
+}
+''',
+    IconLibrary.hugeicons =>
+      '''
+class _Icon implements FIcon {
+  final List<List<dynamic>> icon;
+
+  const _Icon(this.icon);
+
+  @override
+  Widget call(BuildContext _, {String? semanticsLabel}) => HugeIcon(icon: icon, size: null);
+
+  // HugeIcons' constants are const lists, so identity is sufficient.
+  @override
+  bool operator ==(Object other) => identical(this, other) || other is _Icon && identical(icon, other.icon);
+
+  @override
+  int get hashCode => identityHashCode(icon);
+}
+''',
+    IconLibrary.iconoir =>
+      '''
+class _Icon implements FIcon {
+  final Widget Function({Color? color, double? width, double? height}) icon;
+
+  const _Icon(this.icon);
+
+  @override
+  Widget call(BuildContext _, {String? semanticsLabel}) => Builder(
+    builder: (context) {
+      final theme = IconTheme.of(context);
+      return icon(color: theme.color, width: theme.size, height: theme.size);
+    },
+  );
+
+  @override
+  bool operator ==(Object other) => identical(this, other) || other is _Icon && icon == other.icon;
+
+  @override
+  int get hashCode => icon.hashCode;
+}
+''',
+  };
 
   /// The import statement for this library, or null for the built-in Lucide.
   String? get import => switch (this) {

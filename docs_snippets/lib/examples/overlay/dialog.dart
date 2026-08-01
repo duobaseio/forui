@@ -347,7 +347,7 @@ class BlurredDialogPage extends Example {
       // {@highlight}
       routeStyle: .delta(
         barrierFilter: () =>
-            (animation) => ImageFilter.compose(
+            (_, animation) => ImageFilter.compose(
               outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
               inner: ColorFilter.mode(context.theme.colors.barrier, .srcOver),
             ),

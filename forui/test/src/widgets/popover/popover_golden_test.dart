@@ -72,7 +72,7 @@ void main() {
           child: FPopover(
             control: const .managed(initial: true),
             style: .delta(
-              barrierFilter: (animation) => .blur(sigmaX: animation * 5, sigmaY: animation * 5),
+              barrierFilter: (_, animation) => .blur(sigmaX: animation * 5, sigmaY: animation * 5),
             ),
             cutout: false,
             popoverBuilder: (context, _) => const SizedBox.square(dimension: 100),
@@ -100,7 +100,7 @@ void main() {
                 popoverAnchor: .bottomRight,
                 control: .managed(controller: controller),
                 style: .delta(
-                  barrierFilter: (animation) => ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
+                  barrierFilter: (_, animation) => ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
                 ),
                 popoverBuilder: (context, _) =>
                     const ColoredBox(color: Colors.red, child: SizedBox.square(dimension: 100)),
@@ -133,7 +133,7 @@ void main() {
                 popoverAnchor: .bottomRight,
                 control: .managed(controller: controller),
                 style: .delta(
-                  barrierFilter: (animation) => ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
+                  barrierFilter: (_, animation) => ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
                 ),
                 cutoutBuilder: (path, bounds) => path.addOval(bounds),
                 popoverBuilder: (context, _) =>
@@ -168,7 +168,7 @@ void main() {
               FPopover(
                 control: .managed(controller: controller),
                 style: .delta(
-                  backgroundFilter: (v) => .blur(sigmaX: v * 5, sigmaY: v * 5),
+                  backgroundFilter: (_, v) => .blur(sigmaX: v * 5, sigmaY: v * 5),
                   decoration: .value(
                     BoxDecoration(
                       color: theme.data.colors.background.withValues(alpha: 0.5),
@@ -203,7 +203,7 @@ void main() {
           childAnchor: .center,
           constraints: const FPortalConstraints(minWidth: 300),
           style: .delta(
-            backgroundFilter: (v) => .blur(sigmaX: v * 8, sigmaY: v * 8),
+            backgroundFilter: (_, v) => .blur(sigmaX: v * 8, sigmaY: v * 8),
             decoration: .value(
               BoxDecoration(
                 color: Colors.white.withValues(alpha: 0.2),

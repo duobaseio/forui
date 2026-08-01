@@ -184,7 +184,7 @@ class FMultiSelectTagStyle with Diagnosticable, _$FMultiSelectTagStyleFunctions 
 
   /// The dismiss icon builder. Defaults to [FIcons.x].
   @override
-  final FIconBuilder icon;
+  final FIcon icon;
 
   /// The tappable style.
   @override

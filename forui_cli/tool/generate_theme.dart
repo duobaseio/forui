@@ -289,7 +289,7 @@ class _ColorsVisitor extends RecursiveAstVisitor<void> {
 }
 
 class _IconsVisitor extends RecursiveAstVisitor<void> {
-  // Icon name -> default initializer expression (qualified, e.g. `FIcons.iconData(FLucideIcons.arrowLeft)`).
+  // Icon name -> default initializer expression (qualified, e.g. `FIcon(FLucideIcons.arrowLeft)`).
   final Map<String, String> icons = {};
   bool _inside = false;
 
@@ -308,7 +308,7 @@ class _IconsVisitor extends RecursiveAstVisitor<void> {
       for (final initializer in declaration.initializers) {
         if (initializer case RedirectingConstructorInvocation(argumentList: ArgumentList(:final arguments))) {
           for (final NamedExpression(:name, :expression) in arguments.whereType<NamedExpression>()) {
-            icons[name.label.name] = 'FIcons.${expression.toSource()}';
+            icons[name.label.name] = expression.toSource();
           }
         }
       }

@@ -82,7 +82,7 @@ void main() {
           children: [
             FPopover(
               style: .delta(
-                barrierFilter: (animation) => .blur(sigmaX: animation * 5, sigmaY: animation * 5),
+                barrierFilter: (_, animation) => .blur(sigmaX: animation * 5, sigmaY: animation * 5),
               ),
               popoverBuilder: (context, _) => const Text('popover'),
               builder: (_, controller, _) => FButton(onPress: controller.toggle, child: const Text('target')),
@@ -135,7 +135,7 @@ void main() {
       TestScaffold.app(
         child: FPopover(
           style: .delta(
-            barrierFilter: (animation) => .blur(sigmaX: animation * 5, sigmaY: animation * 5),
+            barrierFilter: (_, animation) => .blur(sigmaX: animation * 5, sigmaY: animation * 5),
           ),
           onTapHide: () => count++,
           popoverBuilder: (context, _) => const Text('popover'),
@@ -162,7 +162,7 @@ void main() {
       TestScaffold.app(
         child: FPopover(
           style: .delta(
-            barrierFilter: (animation) => .blur(sigmaX: animation * 5, sigmaY: animation * 5),
+            barrierFilter: (_, animation) => .blur(sigmaX: animation * 5, sigmaY: animation * 5),
           ),
           onTapHide: () => count++,
           hideRegion: .none,
@@ -279,7 +279,7 @@ void main() {
         groupId: 'nested',
         style: outer
             ? .delta(
-                barrierFilter: (a) => .blur(sigmaX: a * 5, sigmaY: a * 5),
+                barrierFilter: (_, a) => .blur(sigmaX: a * 5, sigmaY: a * 5),
               )
             : const .context(),
         popoverBuilder: (context, _) => Container(
@@ -296,7 +296,7 @@ void main() {
                 groupId: 'nested',
                 style: inner
                     ? .delta(
-                        barrierFilter: (a) => .blur(sigmaX: a * 5, sigmaY: a * 5),
+                        barrierFilter: (_, a) => .blur(sigmaX: a * 5, sigmaY: a * 5),
                       )
                     : const .context(),
                 popoverBuilder: (context, _) => Container(

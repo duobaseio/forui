@@ -397,15 +397,15 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
 
   /// The toggle icon builder. Defaults to [FIcons.chevronRight].
   @override
-  final FIconBuilder toggleIcon;
+  final FIcon toggleIcon;
 
   /// The previous-month icon builder. Defaults to [FIcons.chevronLeft].
   @override
-  final FIconBuilder previousIcon;
+  final FIcon previousIcon;
 
   /// The next-month icon builder. Defaults to [FIcons.chevronRight].
   @override
-  final FIconBuilder nextIcon;
+  final FIcon nextIcon;
 
   /// The arrow turn animation's duration. Defaults to 100ms.
   @override

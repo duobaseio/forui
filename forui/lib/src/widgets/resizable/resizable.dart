@@ -483,7 +483,7 @@ extension type FResizableStyles(
     required FStyle style,
     required FHapticFeedback hapticFeedback,
   }) {
-    FResizableDividerStyle dividerStyle({required FIconBuilder icon, required double height, required double width}) =>
+    FResizableDividerStyle dividerStyle({required FIcon icon, required double height, required double width}) =>
         FResizableDividerStyle(
           color: colors.border,
           focusedOutlineStyle: style.focusedOutlineStyle,

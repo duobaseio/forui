@@ -13,7 +13,7 @@ void main() {
     thumbStyle: FResizableDividerThumbStyle(
       decoration: const BoxDecoration(color: Color(0xFF000000)),
       foregroundColor: const Color(0xFF000000),
-      icon: FIcons.iconData(FLucideIcons.gripVertical),
+      icon: const FIcon(FLucideIcons.gripVertical),
       height: 4,
       width: 4,
     ),

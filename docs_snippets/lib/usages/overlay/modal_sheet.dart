@@ -57,6 +57,7 @@ final route = FModalSheetRoute<void>(
   // {@endcategory}
   // {@category "Core"}
   style: const FModalSheetStyle(),
+  theme: FTheme.neutral.light.touch,
   side: .btt,
   builder: (context) => const Padding(padding: .all(16), child: Text('Sheet content')),
   // {@endcategory}

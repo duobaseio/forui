@@ -137,11 +137,11 @@ class FSelectScrollHandleStyle with Diagnosticable, _$FSelectScrollHandleStyleFu
 
   /// The up scroll handle icon builder. Defaults to [FIcons.chevronUp].
   @override
-  final FIconBuilder upIcon;
+  final FIcon upIcon;
 
   /// The down scroll handle icon builder. Defaults to [FIcons.chevronDown].
   @override
-  final FIconBuilder downIcon;
+  final FIcon downIcon;
 
   /// The background color.
   @override

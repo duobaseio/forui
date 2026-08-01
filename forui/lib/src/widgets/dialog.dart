@@ -84,6 +84,7 @@ Future<T?> showFDialog<T>({
   return navigator.push(
     FDialogRoute<T>(
       style: dialogRouteStyle,
+      theme: context.theme,
       builder: (context, animation) => builder(context, dialogStyle, animation),
       capturedThemes: InheritedTheme.capture(from: context, to: navigator.context),
       barrierDismissible: barrierDismissible,
@@ -103,6 +104,12 @@ class FDialogRoute<T> extends RawDialogRoute<T> {
   /// The dialog route's style.
   final FDialogRouteStyle style;
 
+  /// The theme passed to [FDialogRouteStyle.barrierFilter].
+  ///
+  /// A barrier is mounted in an [Overlay], outside the [FTheme] that created it, so the theme cannot be read from the
+  /// [BuildContext].
+  final FThemeData theme;
+
   @override
   final bool barrierDismissible;
 
@@ -116,6 +123,7 @@ class FDialogRoute<T> extends RawDialogRoute<T> {
   /// Creates a [FDialogRoute].
   FDialogRoute({
     required this.style,
+    required this.theme,
     required Widget Function(BuildContext context, Animation<double> animation) builder,
     this.barrierDismissible = true,
     this.barrierLabel,
@@ -145,6 +153,7 @@ class FDialogRoute<T> extends RawDialogRoute<T> {
         builder: (context) => FAnimatedModalBarrier(
           animation: animation!.drive(CurveTween(curve: barrierCurve)),
           filter: style.barrierFilter,
+          theme: theme,
           onDismiss: barrierDismissible ? () => Navigator.pop(context) : null,
           semanticsLabel: barrierLabel,
           // changedInternalState is called if barrierLabel updates
@@ -191,23 +200,23 @@ class FDialogRoute<T> extends RawDialogRoute<T> {
 class FDialogRouteStyle with Diagnosticable, _$FDialogRouteStyleFunctions {
   /// {@macro forui.widgets.FPopoverStyle.barrierFilter}
   @override
-  final ImageFilter Function(double animation)? barrierFilter;
+  final ImageFilter Function(FThemeData theme, double animation)? barrierFilter;
 
   /// Motion-related properties.
   @override
   final FDialogRouteMotion motion;
 
+  /// The default [barrierFilter]. Blurs and tints the content behind the barrier.
+  static ImageFilter defaultBarrierFilter(FThemeData theme, double animation) => ImageFilter.compose(
+    outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
+    inner: ColorFilter.mode(FColors.lerpColor(Colors.transparent, theme.colors.barrier, animation)!, .srcOver),
+  );
+
   /// Creates a [FDialogRouteStyle].
   const FDialogRouteStyle({this.barrierFilter, this.motion = const FDialogRouteMotion()});
 
   /// Creates a [FDialogRouteStyle] that inherits its properties.
-  FDialogRouteStyle.inherit({required FColors colors})
-    : this(
-        barrierFilter: (v) => .compose(
-          outer: .blur(sigmaX: v * 5, sigmaY: v * 5),
-          inner: ColorFilter.mode(FColors.lerpColor(Colors.transparent, colors.barrier, v)!, .srcOver),
-        ),
-      );
+  FDialogRouteStyle.inherit() : this(barrierFilter: FDialogRouteStyle.defaultBarrierFilter);
 }
 
 /// Motion-related properties for [FDialogRoute].
@@ -449,10 +458,10 @@ class _FDialogState extends State<FDialog> {
             child: ClipPath(
               clipper: InnerPathClipper(decoration: style.decoration, direction: direction),
               child: _fade == null
-                  ? BackdropFilter(filter: filter(1), child: Container())
+                  ? BackdropFilter(filter: filter(context.theme, 1), child: Container())
                   : AnimatedBuilder(
                       animation: _fade!,
-                      builder: (_, _) => BackdropFilter(filter: filter(_fade!.value), child: Container()),
+                      builder: (_, _) => BackdropFilter(filter: filter(context.theme, _fade!.value), child: Container()),
                     ),
             ),
           ),
@@ -501,7 +510,7 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
   ///
   /// This requires [FDialog.animation] to be non-null.
   @override
-  final ImageFilter Function(double animation)? backgroundFilter;
+  final ImageFilter Function(FThemeData theme, double animation)? backgroundFilter;
 
   /// The decoration.
   @override

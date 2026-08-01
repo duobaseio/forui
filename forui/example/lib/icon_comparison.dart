@@ -17,44 +17,6 @@ enum _Icons {
   hugeicons('Hugeicons'),
   iconoir('Iconoir');
 
-  // Tabler's font metrics (ascent 0.9em, descent -0.1em) round differently from lucide's (1em, 0) at device
-  // pixel scale, sinking every glyph ~0.05em below lucide's position on macOS, so nudge all slots up. Some
-  // glyphs also render ~10% smaller than their lucide counterparts; scale those to match.
-  static FIconBuilder _tablerIcon(IconData icon, {double scale = 1}) =>
-      (_, {semanticsLabel}) => Builder(
-        builder: (context) {
-          final size = IconTheme.of(context).size ?? 24;
-          final child = Icon(icon, semanticLabel: semanticsLabel);
-          return Transform.translate(
-            offset: Offset(0, -0.05 * size),
-            child: scale == 1 ? child : Transform.scale(scale: scale, child: child),
-          );
-        },
-      );
-
-  static FIconBuilder _fitted(IconData icon, {bool rotated = false}) =>
-      (_, {semanticsLabel}) => Builder(
-        builder: (context) {
-          final size = IconTheme.of(context).size ?? 24;
-          final child = Icon(icon, semanticLabel: semanticsLabel);
-          return Transform.translate(
-            offset: Offset(0, 0.02 * size),
-            child: Transform.scale(scale: 1.15, child: rotated ? RotatedBox(quarterTurns: 1, child: child) : child),
-          );
-        },
-      );
-
-  static FIconBuilder _hugeicon(List<List<dynamic>> icon) =>
-      (_, {semanticsLabel}) => HugeIcon(icon: icon, size: null);
-
-  static FIconBuilder _iconoirIcon(Widget Function({Color? color, double? width, double? height}) icon) =>
-      (_, {semanticsLabel}) => Builder(
-        builder: (context) {
-          final theme = IconTheme.of(context);
-          return icon(color: theme.color, width: theme.size, height: theme.size);
-        },
-      );
-
   final String label;
 
   const _Icons(this.label);
@@ -62,103 +24,195 @@ enum _Icons {
   FIcons get icons => switch (this) {
     .lucide => FIcons.lucide(),
     .tabler => FIcons(
-      arrowLeft: _tablerIcon(TablerIcons.arrowLeft, scale: 1.1),
-      calendar: _tablerIcon(TablerIcons.calendar, scale: 1.1),
-      check: _tablerIcon(TablerIcons.check, scale: 1.1),
-      chevronDown: _tablerIcon(TablerIcons.chevronDown),
-      chevronLeft: _tablerIcon(TablerIcons.chevronLeft),
-      chevronRight: _tablerIcon(TablerIcons.chevronRight),
-      chevronUp: _tablerIcon(TablerIcons.chevronUp),
-      chevronsUpDown: _tablerIcon(TablerIcons.selector, scale: 1.1),
-      circleAlert: _tablerIcon(TablerIcons.alertCircle, scale: 1.1),
-      clock4: _tablerIcon(TablerIcons.clockHour4, scale: 1.1),
-      ellipsis: _tablerIcon(TablerIcons.dots),
-      error: _tablerIcon(TablerIcons.alertCircle, scale: 1.1),
-      eye: _tablerIcon(TablerIcons.eye, scale: 1.1),
-      eyeClosed: _tablerIcon(TablerIcons.eyeOff),
-      gripHorizontal: _tablerIcon(TablerIcons.gripHorizontal),
-      gripVertical: _tablerIcon(TablerIcons.gripVertical),
-      loader: _tablerIcon(TablerIcons.loader, scale: 1.1),
-      loaderCircle: _tablerIcon(TablerIcons.loader2),
-      loaderPinwheel: _tablerIcon(TablerIcons.windmill, scale: 1.1),
-      search: _tablerIcon(TablerIcons.search),
-      userRound: _tablerIcon(TablerIcons.userCircle),
-      x: _tablerIcon(TablerIcons.x),
+      arrowLeft: const _TablerIcon(TablerIcons.arrowLeft, scale: 1.1),
+      calendar: const _TablerIcon(TablerIcons.calendar, scale: 1.1),
+      check: const _TablerIcon(TablerIcons.check, scale: 1.1),
+      chevronDown: const _TablerIcon(TablerIcons.chevronDown),
+      chevronLeft: const _TablerIcon(TablerIcons.chevronLeft),
+      chevronRight: const _TablerIcon(TablerIcons.chevronRight),
+      chevronUp: const _TablerIcon(TablerIcons.chevronUp),
+      chevronsUpDown: const _TablerIcon(TablerIcons.selector, scale: 1.1),
+      circleAlert: const _TablerIcon(TablerIcons.alertCircle, scale: 1.1),
+      clock4: const _TablerIcon(TablerIcons.clockHour4, scale: 1.1),
+      ellipsis: const _TablerIcon(TablerIcons.dots),
+      error: const _TablerIcon(TablerIcons.alertCircle, scale: 1.1),
+      eye: const _TablerIcon(TablerIcons.eye, scale: 1.1),
+      eyeClosed: const _TablerIcon(TablerIcons.eyeOff),
+      gripHorizontal: const _TablerIcon(TablerIcons.gripHorizontal),
+      gripVertical: const _TablerIcon(TablerIcons.gripVertical),
+      loader: const _TablerIcon(TablerIcons.loader, scale: 1.1),
+      loaderCircle: const _TablerIcon(TablerIcons.loader2),
+      loaderPinwheel: const _TablerIcon(TablerIcons.windmill, scale: 1.1),
+      search: const _TablerIcon(TablerIcons.search),
+      userRound: const _TablerIcon(TablerIcons.userCircle),
+      x: const _TablerIcon(TablerIcons.x),
     ),
     .remix => FIcons(
-      arrowLeft: _fitted(RemixIcons.arrow_left_line),
-      calendar: _fitted(RemixIcons.calendar_line),
-      check: _fitted(RemixIcons.check_line),
-      chevronDown: _fitted(RemixIcons.arrow_down_s_line),
-      chevronLeft: _fitted(RemixIcons.arrow_left_s_line),
-      chevronRight: _fitted(RemixIcons.arrow_right_s_line),
-      chevronUp: _fitted(RemixIcons.arrow_up_s_line),
-      chevronsUpDown: _fitted(RemixIcons.expand_up_down_line),
-      circleAlert: _fitted(RemixIcons.error_warning_line),
-      clock4: _fitted(RemixIcons.time_line),
-      ellipsis: _fitted(RemixIcons.more_line),
-      error: _fitted(RemixIcons.error_warning_line),
-      eye: _fitted(RemixIcons.eye_line),
-      eyeClosed: _fitted(RemixIcons.eye_off_line),
+      arrowLeft: const _RemixIcon(RemixIcons.arrow_left_line),
+      calendar: const _RemixIcon(RemixIcons.calendar_line),
+      check: const _RemixIcon(RemixIcons.check_line),
+      chevronDown: const _RemixIcon(RemixIcons.arrow_down_s_line),
+      chevronLeft: const _RemixIcon(RemixIcons.arrow_left_s_line),
+      chevronRight: const _RemixIcon(RemixIcons.arrow_right_s_line),
+      chevronUp: const _RemixIcon(RemixIcons.arrow_up_s_line),
+      chevronsUpDown: const _RemixIcon(RemixIcons.expand_up_down_line),
+      circleAlert: const _RemixIcon(RemixIcons.error_warning_line),
+      clock4: const _RemixIcon(RemixIcons.time_line),
+      ellipsis: const _RemixIcon(RemixIcons.more_line),
+      error: const _RemixIcon(RemixIcons.error_warning_line),
+      eye: const _RemixIcon(RemixIcons.eye_line),
+      eyeClosed: const _RemixIcon(RemixIcons.eye_off_line),
       // Remix only ships a vertical grip; rotate it a quarter turn for the horizontal slot.
-      gripHorizontal: _fitted(RemixIcons.draggable, rotated: true),
-      gripVertical: _fitted(RemixIcons.draggable),
-      loader: _fitted(RemixIcons.loader_line),
-      loaderCircle: _fitted(RemixIcons.loader_4_line),
-      loaderPinwheel: _fitted(RemixIcons.loader_line),
-      search: _fitted(RemixIcons.search_line),
-      userRound: _fitted(RemixIcons.user_line),
-      x: _fitted(RemixIcons.close_line),
+      gripHorizontal: const _RemixIcon(RemixIcons.draggable, rotated: true),
+      gripVertical: const _RemixIcon(RemixIcons.draggable),
+      loader: const _RemixIcon(RemixIcons.loader_line),
+      loaderCircle: const _RemixIcon(RemixIcons.loader_4_line),
+      loaderPinwheel: const _RemixIcon(RemixIcons.loader_line),
+      search: const _RemixIcon(RemixIcons.search_line),
+      userRound: const _RemixIcon(RemixIcons.user_line),
+      x: const _RemixIcon(RemixIcons.close_line),
     ),
     .hugeicons => FIcons(
-      arrowLeft: _hugeicon(HugeIcons.strokeRoundedArrowLeft01),
-      calendar: _hugeicon(HugeIcons.strokeRoundedCalendar03),
-      check: _hugeicon(HugeIcons.strokeRoundedTick02),
-      chevronDown: _hugeicon(HugeIcons.strokeRoundedArrowDown01),
-      chevronLeft: _hugeicon(HugeIcons.strokeRoundedArrowLeft01),
-      chevronRight: _hugeicon(HugeIcons.strokeRoundedArrowRight01),
-      chevronUp: _hugeicon(HugeIcons.strokeRoundedArrowUp01),
-      chevronsUpDown: _hugeicon(HugeIcons.strokeRoundedUnfoldMore),
-      circleAlert: _hugeicon(HugeIcons.strokeRoundedAlertCircle),
-      clock4: _hugeicon(HugeIcons.strokeRoundedClock01),
-      ellipsis: _hugeicon(HugeIcons.strokeRoundedMoreHorizontal),
-      error: _hugeicon(HugeIcons.strokeRoundedAlertCircle),
-      eye: _hugeicon(HugeIcons.strokeRoundedView),
-      eyeClosed: _hugeicon(HugeIcons.strokeRoundedViewOff),
-      gripHorizontal: _hugeicon(HugeIcons.strokeRoundedDragDropHorizontal),
-      gripVertical: _hugeicon(HugeIcons.strokeRoundedDragDropVertical),
-      loader: _hugeicon(HugeIcons.strokeRoundedLoading03),
-      loaderCircle: _hugeicon(HugeIcons.strokeRoundedLoading03),
-      loaderPinwheel: _hugeicon(HugeIcons.strokeRoundedLoaderPinwheel),
-      search: _hugeicon(HugeIcons.strokeRoundedSearch01),
-      userRound: _hugeicon(HugeIcons.strokeRoundedUserCircle),
-      x: _hugeicon(HugeIcons.strokeRoundedCancel01),
+      arrowLeft: const _HugeIcon(HugeIcons.strokeRoundedArrowLeft01),
+      calendar: const _HugeIcon(HugeIcons.strokeRoundedCalendar03),
+      check: const _HugeIcon(HugeIcons.strokeRoundedTick02),
+      chevronDown: const _HugeIcon(HugeIcons.strokeRoundedArrowDown01),
+      chevronLeft: const _HugeIcon(HugeIcons.strokeRoundedArrowLeft01),
+      chevronRight: const _HugeIcon(HugeIcons.strokeRoundedArrowRight01),
+      chevronUp: const _HugeIcon(HugeIcons.strokeRoundedArrowUp01),
+      chevronsUpDown: const _HugeIcon(HugeIcons.strokeRoundedUnfoldMore),
+      circleAlert: const _HugeIcon(HugeIcons.strokeRoundedAlertCircle),
+      clock4: const _HugeIcon(HugeIcons.strokeRoundedClock01),
+      ellipsis: const _HugeIcon(HugeIcons.strokeRoundedMoreHorizontal),
+      error: const _HugeIcon(HugeIcons.strokeRoundedAlertCircle),
+      eye: const _HugeIcon(HugeIcons.strokeRoundedView),
+      eyeClosed: const _HugeIcon(HugeIcons.strokeRoundedViewOff),
+      gripHorizontal: const _HugeIcon(HugeIcons.strokeRoundedDragDropHorizontal),
+      gripVertical: const _HugeIcon(HugeIcons.strokeRoundedDragDropVertical),
+      loader: const _HugeIcon(HugeIcons.strokeRoundedLoading03),
+      loaderCircle: const _HugeIcon(HugeIcons.strokeRoundedLoading03),
+      loaderPinwheel: const _HugeIcon(HugeIcons.strokeRoundedLoaderPinwheel),
+      search: const _HugeIcon(HugeIcons.strokeRoundedSearch01),
+      userRound: const _HugeIcon(HugeIcons.strokeRoundedUserCircle),
+      x: const _HugeIcon(HugeIcons.strokeRoundedCancel01),
     ),
     .iconoir => FIcons(
-      arrowLeft: _iconoirIcon(iconoir_flutter.ArrowLeft.new),
-      calendar: _iconoirIcon(iconoir_flutter.Calendar.new),
-      check: _iconoirIcon(iconoir_flutter.Check.new),
-      chevronDown: _iconoirIcon(iconoir_flutter.NavArrowDown.new),
-      chevronLeft: _iconoirIcon(iconoir_flutter.NavArrowLeft.new),
-      chevronRight: _iconoirIcon(iconoir_flutter.NavArrowRight.new),
-      chevronUp: _iconoirIcon(iconoir_flutter.NavArrowUp.new),
-      chevronsUpDown: _iconoirIcon(iconoir_flutter.ArrowSeparateVertical.new),
-      circleAlert: _iconoirIcon(iconoir_flutter.WarningCircle.new),
-      clock4: _iconoirIcon(iconoir_flutter.Clock.new),
-      ellipsis: _iconoirIcon(iconoir_flutter.MoreHoriz.new),
-      error: _iconoirIcon(iconoir_flutter.WarningCircle.new),
-      eye: _iconoirIcon(iconoir_flutter.Eye.new),
-      eyeClosed: _iconoirIcon(iconoir_flutter.EyeClosed.new),
-      gripHorizontal: _iconoirIcon(iconoir_flutter.Drag.new),
-      gripVertical: _iconoirIcon(iconoir_flutter.Drag.new),
-      loader: _iconoirIcon(iconoir_flutter.OnePointCircle.new),
-      loaderCircle: _iconoirIcon(iconoir_flutter.OnePointCircle.new),
-      loaderPinwheel: _iconoirIcon(iconoir_flutter.ColorWheel.new),
-      search: _iconoirIcon(iconoir_flutter.Search.new),
-      userRound: _iconoirIcon(iconoir_flutter.UserCircle.new),
-      x: _iconoirIcon(iconoir_flutter.Xmark.new),
+      arrowLeft: const _IconoirIcon(iconoir_flutter.ArrowLeft.new),
+      calendar: const _IconoirIcon(iconoir_flutter.Calendar.new),
+      check: const _IconoirIcon(iconoir_flutter.Check.new),
+      chevronDown: const _IconoirIcon(iconoir_flutter.NavArrowDown.new),
+      chevronLeft: const _IconoirIcon(iconoir_flutter.NavArrowLeft.new),
+      chevronRight: const _IconoirIcon(iconoir_flutter.NavArrowRight.new),
+      chevronUp: const _IconoirIcon(iconoir_flutter.NavArrowUp.new),
+      chevronsUpDown: const _IconoirIcon(iconoir_flutter.ArrowSeparateVertical.new),
+      circleAlert: const _IconoirIcon(iconoir_flutter.WarningCircle.new),
+      clock4: const _IconoirIcon(iconoir_flutter.Clock.new),
+      ellipsis: const _IconoirIcon(iconoir_flutter.MoreHoriz.new),
+      error: const _IconoirIcon(iconoir_flutter.WarningCircle.new),
+      eye: const _IconoirIcon(iconoir_flutter.Eye.new),
+      eyeClosed: const _IconoirIcon(iconoir_flutter.EyeClosed.new),
+      gripHorizontal: const _IconoirIcon(iconoir_flutter.Drag.new),
+      gripVertical: const _IconoirIcon(iconoir_flutter.Drag.new),
+      loader: const _IconoirIcon(iconoir_flutter.OnePointCircle.new),
+      loaderCircle: const _IconoirIcon(iconoir_flutter.OnePointCircle.new),
+      loaderPinwheel: const _IconoirIcon(iconoir_flutter.ColorWheel.new),
+      search: const _IconoirIcon(iconoir_flutter.Search.new),
+      userRound: const _IconoirIcon(iconoir_flutter.UserCircle.new),
+      x: const _IconoirIcon(iconoir_flutter.Xmark.new),
     ),
   };
+}
+
+// Tabler's font metrics (ascent 0.9em, descent -0.1em) round differently from lucide's (1em, 0) at device
+// pixel scale, sinking every glyph ~0.05em below lucide's position on macOS, so nudge all slots up. Some
+// glyphs also render ~10% smaller than their lucide counterparts; scale those to match.
+class _TablerIcon implements FIcon {
+  final IconData icon;
+  final double scale;
+
+  const _TablerIcon(this.icon, {this.scale = 1});
+
+  @override
+  Widget call(BuildContext _, {String? semanticsLabel}) => Builder(
+    builder: (context) {
+      final size = IconTheme.of(context).size ?? 24;
+      final child = Icon(icon, semanticLabel: semanticsLabel);
+      return Transform.translate(
+        offset: Offset(0, -0.05 * size),
+        child: scale == 1 ? child : Transform.scale(scale: scale, child: child),
+      );
+    },
+  );
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is _TablerIcon && icon == other.icon && scale == other.scale;
+
+  @override
+  int get hashCode => Object.hash(icon, scale);
+}
+
+class _RemixIcon implements FIcon {
+  final IconData icon;
+  final bool rotated;
+
+  const _RemixIcon(this.icon, {this.rotated = false});
+
+  @override
+  Widget call(BuildContext _, {String? semanticsLabel}) => Builder(
+    builder: (context) {
+      final size = IconTheme.of(context).size ?? 24;
+      final child = Icon(icon, semanticLabel: semanticsLabel);
+      return Transform.translate(
+        offset: Offset(0, 0.02 * size),
+        child: Transform.scale(scale: 1.15, child: rotated ? RotatedBox(quarterTurns: 1, child: child) : child),
+      );
+    },
+  );
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is _RemixIcon && icon == other.icon && rotated == other.rotated;
+
+  @override
+  int get hashCode => Object.hash(icon, rotated);
+}
+
+class _HugeIcon implements FIcon {
+  final List<List<dynamic>> icon;
+
+  const _HugeIcon(this.icon);
+
+  @override
+  Widget call(BuildContext _, {String? semanticsLabel}) => HugeIcon(icon: icon, size: null);
+
+  // HugeIcons' constants are const lists, so identity is sufficient.
+  @override
+  bool operator ==(Object other) => identical(this, other) || other is _HugeIcon && identical(icon, other.icon);
+
+  @override
+  int get hashCode => identityHashCode(icon);
+}
+
+class _IconoirIcon implements FIcon {
+  final Widget Function({Color? color, double? width, double? height}) icon;
+
+  const _IconoirIcon(this.icon);
+
+  @override
+  Widget call(BuildContext _, {String? semanticsLabel}) => Builder(
+    builder: (context) {
+      final theme = IconTheme.of(context);
+      return icon(color: theme.color, width: theme.size, height: theme.size);
+    },
+  );
+
+  // Constructor tear-offs of the same class are canonical, so `==` holds.
+  @override
+  bool operator ==(Object other) => identical(this, other) || other is _IconoirIcon && icon == other.icon;
+
+  @override
+  int get hashCode => icon.hashCode;
 }
 
 const _fruits = {

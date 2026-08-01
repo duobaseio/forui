@@ -15,8 +15,28 @@
 * Add `FButton.semanticsTooltip`.
 
 
+### `FDialog`
+* Add `FDialogRouteStyle.defaultBarrierFilter`.
+
+* **Breaking** Add `FDialogRoute(theme: ...)`.
+* **Breaking** Change `FDialogRouteStyle.barrierFilter` and `FDialogStyle.backgroundFilter` to accept a `FThemeData`.
+* **Breaking** Remove `FDialogRouteStyle.inherit(colors: ...)`. Use `FDialogRouteStyle.inherit()` instead.
+
+
 ### `FHeaderAction`
 * Add `FHeaderAction.semanticsTooltip`.
+
+
+### `FIcons`
+We have replaced the `FIconBuilder` function with `FIcon` to fix widgets flickering whenever the same `FThemeData` is
+rebuilt.
+
+* Add `FIcon`.
+
+* **Breaking** Remove `FIconBuilder`. Use `FIcon` instead.
+* **Breaking** Remove `FIcons.iconData(...)`. Use `FIcon(...)` instead.
+
+* Fix widgets flickering when an equal `FThemeData` is recreated.
 
 
 ### `FItem` & `FTile`
@@ -32,6 +52,8 @@
 ### `FPopover`
 * Add `FPopover.traversalGrouped`.
 
+* **Breaking** Change `FPopoverStyle.barrierFilter` and `FPopoverStyle.backgroundFilter` to accept a `FThemeData`.
+
 * Fix `FPopover` content not being traversed immediately after its child.
 
 
@@ -39,6 +61,14 @@
 * Add `FPortal.traversalGrouped`.
 
 * Fix `FPortal` content not being traversed immediately after its child.
+
+
+### `FSheet`
+* Add `FModalSheetStyle.defaultBarrierFilter`.
+
+* **Breaking** Add `FModalSheetRoute(theme: ...)`.
+* **Breaking** Change `FModalSheetStyle.barrierFilter` to accept a `FThemeData`.
+* **Breaking** Remove `FModalSheetStyle.inherit(colors: ...)`. Use `FModalSheetStyle.inherit()` instead.
 
 
 ### `FTappable`

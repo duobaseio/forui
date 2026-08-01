@@ -671,7 +671,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     Iterable<ThemeExtension<dynamic>> extensions = const [],
   }) {
     typography ??= .inherit(colors: colors, touch: touch);
-    icons ??= FIcons.lucide();
+    icons ??= const FIcons.lucide();
     style ??= .inherit(colors: colors, typography: typography, touch: touch);
     return ._(
       debugLabel: debugLabel,
@@ -726,7 +726,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
           dateTimePickerStyle ??
           .inherit(colors: colors, typography: typography, style: style, hapticFeedback: hapticFeedback, touch: touch),
       determinateProgressStyle: determinateProgressStyle ?? .inherit(colors: colors, style: style),
-      dialogRouteStyle: dialogRouteStyle ?? .inherit(colors: colors),
+      dialogRouteStyle: dialogRouteStyle ?? .inherit(),
       dialogStyle:
           dialogStyle ??
           .inherit(colors: colors, typography: typography, style: style, hapticFeedback: hapticFeedback, touch: touch),
@@ -747,7 +747,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       multiSelectStyle:
           multiSelectStyle ??
           .inherit(colors: colors, icons: icons, typography: typography, style: style, touch: touch),
-      modalSheetStyle: modalSheetStyle ?? .inherit(colors: colors),
+      modalSheetStyle: modalSheetStyle ?? .inherit(),
       otpFieldStyle: otpFieldStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       paginationStyle: paginationStyle ?? .inherit(colors: colors, typography: typography, style: style, touch: touch),
       persistentSheetStyle: persistentSheetStyle ?? const FPersistentSheetStyle(),

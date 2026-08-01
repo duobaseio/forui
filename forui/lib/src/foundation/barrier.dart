@@ -23,6 +23,12 @@ import 'package:forui/forui.dart';
 /// * support for [ImageFilter]s instead of just solid colors.
 /// * uses [FModalBarrier] instead of [ModalBarrier].
 class FAnimatedModalBarrier extends AnimatedWidget {
+  /// The theme passed to [filter].
+  ///
+  /// A barrier is mounted in an [Overlay], outside the [FTheme] that created it, so the theme cannot be read from the
+  /// [BuildContext].
+  final FThemeData theme;
+
   /// {@macro forui.foundation.FModalBarrier.cutout}
   final RenderBox? cutout;
 
@@ -30,7 +36,7 @@ class FAnimatedModalBarrier extends AnimatedWidget {
   final void Function(Path path, Rect bounds) cutoutBuilder;
 
   /// If non-null, applies the given [ImageFilter] to the barrier.
-  final ImageFilter Function(double value)? filter;
+  final ImageFilter Function(FThemeData theme, double value)? filter;
 
   /// {@macro forui.foundation.FModalBarrier.onDismiss}
   final VoidCallback? onDismiss;
@@ -57,6 +63,7 @@ class FAnimatedModalBarrier extends AnimatedWidget {
 
   /// Creates a [FAnimatedModalBarrier] that blocks user interaction.
   const FAnimatedModalBarrier({
+    required this.theme,
     required this.filter,
     required this.onDismiss,
     required Animation<double> animation,
@@ -73,7 +80,7 @@ class FAnimatedModalBarrier extends AnimatedWidget {
   Widget build(BuildContext context) => FModalBarrier(
     cutout: cutout,
     cutoutBuilder: cutoutBuilder,
-    filter: filter == null ? null : filter!(context.accessibility.motion == .disabled ? 1.0 : animation.value),
+    filter: filter == null ? null : filter!(theme, context.accessibility.motion == .disabled ? 1.0 : animation.value),
     onDismiss: onDismiss,
     semanticsLabel: semanticsLabel,
     barrierSemanticsDismissible: barrierSemanticsDismissible,
@@ -91,6 +98,7 @@ class FAnimatedModalBarrier extends AnimatedWidget {
       ..add(DiagnosticsProperty('cutout', cutout))
       ..add(ObjectFlagProperty.has('cutoutBuilder', cutoutBuilder))
       ..add(DiagnosticsProperty('filter', filter))
+      ..add(DiagnosticsProperty('theme', theme))
       ..add(ObjectFlagProperty.has('onDismiss', onDismiss))
       ..add(StringProperty('semanticsLabel', semanticsLabel))
       ..add(

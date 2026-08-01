@@ -233,7 +233,7 @@ enum Style {
     null,
     <String>['dialog-route', 'dialogroute'],
     <String>['FDialogRouteStyle'],
-    'FDialogRouteStyle dialogRouteStyle({required FColors colors}) =>\n    FDialogRouteStyle(\n      barrierFilter: (v) => .compose(\n        outer: .blur(sigmaX: v * 5, sigmaY: v * 5),\n        inner: ColorFilter.mode(\n          FColors.lerpColor(Colors.transparent, colors.barrier, v)!,\n          .srcOver,\n        ),\n      ),\n      motion: const FDialogRouteMotion(),\n    );\n',
+    'FDialogRouteStyle dialogRouteStyle() => FDialogRouteStyle(\n  barrierFilter: FDialogRouteStyle.defaultBarrierFilter,\n  motion: const FDialogRouteMotion(),\n);\n',
   ),
   fdialogstyle(
     'FDialogStyle',
@@ -324,7 +324,7 @@ enum Style {
     null,
     <String>['modal-sheet', 'modalsheet'],
     <String>['FModalSheetStyle'],
-    'FModalSheetStyle modalSheetStyle({required FColors colors}) => FModalSheetStyle(\n  barrierFilter: (v) => ColorFilter.mode(\n    FColors.lerpColor(Colors.transparent, colors.barrier, v)!,\n    .srcOver,\n  ),\n  motion: const FModalSheetMotion(),\n  flingVelocity: 700,\n  closeProgressThreshold: 0.5,\n);\n',
+    'FModalSheetStyle modalSheetStyle() => FModalSheetStyle(\n  barrierFilter: FModalSheetStyle.defaultBarrierFilter,\n  motion: const FModalSheetMotion(),\n  flingVelocity: 700,\n  closeProgressThreshold: 0.5,\n);\n',
   ),
   fmultiselectfieldsizestyles(
     'FMultiSelectFieldSizeStyles',
@@ -443,7 +443,7 @@ enum Style {
     'FVariants<FResizableAxisVariantConstraint, FResizableAxisVariant, FResizableDividerStyle, FResizableDividerStyleDelta>',
     <String>['resizables'],
     <String>['FResizableStyles'],
-    'FResizableStyles resizableStyles({\n  required FColors colors,\n  required FIcons icons,\n  required FStyle style,\n  required FHapticFeedback hapticFeedback,\n}) {\n  FResizableDividerStyle dividerStyle({\n    required FIconBuilder icon,\n    required double height,\n    required double width,\n  }) => FResizableDividerStyle(\n    color: colors.border,\n    focusedOutlineStyle: style.focusedOutlineStyle,\n    thumbStyle: FResizableDividerThumbStyle(\n      decoration: ShapeDecoration(\n        shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),\n        color: colors.border,\n      ),\n      foregroundColor: colors.foreground,\n      icon: icon,\n      height: height,\n      width: width,\n    ),\n    hapticFeedback: hapticFeedback.lightImpact,\n  );\n  final horizontal = dividerStyle(\n    icon: icons.gripVertical,\n    height: 20,\n    width: 10,\n  );\n  return FResizableStyles(\n    FVariants(\n      horizontal,\n      variants: {\n        [.horizontal]: horizontal,\n        [.vertical]: dividerStyle(\n          icon: icons.gripHorizontal,\n          height: 10,\n          width: 20,\n        ),\n      },\n    ),\n  );\n}\n',
+    'FResizableStyles resizableStyles({\n  required FColors colors,\n  required FIcons icons,\n  required FStyle style,\n  required FHapticFeedback hapticFeedback,\n}) {\n  FResizableDividerStyle dividerStyle({\n    required FIcon icon,\n    required double height,\n    required double width,\n  }) => FResizableDividerStyle(\n    color: colors.border,\n    focusedOutlineStyle: style.focusedOutlineStyle,\n    thumbStyle: FResizableDividerThumbStyle(\n      decoration: ShapeDecoration(\n        shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),\n        color: colors.border,\n      ),\n      foregroundColor: colors.foreground,\n      icon: icon,\n      height: height,\n      width: width,\n    ),\n    hapticFeedback: hapticFeedback.lightImpact,\n  );\n  final horizontal = dividerStyle(\n    icon: icons.gripVertical,\n    height: 20,\n    width: 10,\n  );\n  return FResizableStyles(\n    FVariants(\n      horizontal,\n      variants: {\n        [.horizontal]: horizontal,\n        [.vertical]: dividerStyle(\n          icon: icons.gripHorizontal,\n          height: 10,\n          width: 20,\n        ),\n      },\n    ),\n  );\n}\n',
   ),
   fscaffoldstyle(
     'FScaffoldStyle',

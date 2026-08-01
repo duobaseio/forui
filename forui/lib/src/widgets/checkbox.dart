@@ -196,7 +196,7 @@ class FCheckboxStyle with Diagnosticable, _$FCheckboxStyleFunctions {
 
   /// The check icon builder. Defaults to [FIcons.check].
   @override
-  final FIconBuilder icon;
+  final FIcon icon;
 
   /// The box decoration.
   @override

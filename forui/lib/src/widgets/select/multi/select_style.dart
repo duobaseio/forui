@@ -221,7 +221,7 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
 
   /// The clear button's icon builder. Defaults to [FIcons.x].
   @override
-  final FIconBuilder clearIcon;
+  final FIcon clearIcon;
 
   /// The padding surrounding the clear button. Defaults to [EdgeInsets.zero].
   @override

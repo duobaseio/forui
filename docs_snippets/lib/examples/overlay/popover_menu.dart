@@ -71,7 +71,7 @@ class BlurredPopoverMenuPage extends Example {
         // {@highlight}
         style: .delta(
           barrierFilter: () =>
-              (animation) => ImageFilter.compose(
+              (_, animation) => ImageFilter.compose(
                 outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
                 inner: ColorFilter.mode(
                   Color.lerp(const Color(0x00000000), const Color(0x33000000), animation)!,

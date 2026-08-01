@@ -94,6 +94,7 @@ Future<T?> showFSheet<T>({
   return navigator.push(
     FModalSheetRoute<T>(
       style: style(context.theme.modalSheetStyle),
+      theme: context.theme,
       side: side,
       builder: builder,
       mainAxisMaxRatio: mainAxisMaxRatio,
@@ -133,6 +134,12 @@ Future<T?> showFSheet<T>({
 class FModalSheetRoute<T> extends PopupRoute<T> {
   /// The style.
   final FModalSheetStyle style;
+
+  /// The theme passed to [FModalSheetStyle.barrierFilter].
+  ///
+  /// A barrier is mounted in an [Overlay], outside the [FTheme] that created it, so the theme cannot be read from the
+  /// [BuildContext].
+  final FThemeData theme;
 
   /// The side.
   final FLayout side;
@@ -220,6 +227,7 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
   /// Creates a [FModalSheetRoute].
   FModalSheetRoute({
     required this.style,
+    required this.theme,
     required this.side,
     required this.builder,
     this.mainAxisMaxRatio = 9 / 16,
@@ -287,6 +295,7 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
         builder: (context) => FAnimatedModalBarrier(
           animation: animation!.drive(CurveTween(curve: barrierCurve)),
           filter: style.barrierFilter,
+          theme: theme,
           onDismiss: barrierDismissible ? () => Navigator.pop(context) : null,
           semanticsLabel: barrierLabel,
           // changedInternalState is called if barrierLabel updates
@@ -345,9 +354,13 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
 
 /// A modal sheet's style.
 class FModalSheetStyle extends FSheetStyle with Diagnosticable, _$FModalSheetStyleFunctions {
+  /// The default [barrierFilter]. Tints the content behind the barrier.
+  static ImageFilter defaultBarrierFilter(FThemeData theme, double animation) =>
+      ColorFilter.mode(FColors.lerpColor(Colors.transparent, theme.colors.barrier, animation)!, .srcOver);
+
   /// {@macro forui.widgets.FPopoverStyle.barrierFilter}
   @override
-  final ImageFilter Function(double animation)? barrierFilter;
+  final ImageFilter Function(FThemeData theme, double animation)? barrierFilter;
 
   /// The motion-related properties for a modal sheet.
   @override
@@ -361,9 +374,8 @@ class FModalSheetStyle extends FSheetStyle with Diagnosticable, _$FModalSheetSty
     super.closeProgressThreshold,
   });
 
-  /// Creates a [FSheetStyle] that inherits its colors from the given [FColors].
-  FModalSheetStyle.inherit({required FColors colors})
-    : this(barrierFilter: (v) => ColorFilter.mode(FColors.lerpColor(Colors.transparent, colors.barrier, v)!, .srcOver));
+  /// Creates a [FSheetStyle] that inherits its properties.
+  FModalSheetStyle.inherit() : this(barrierFilter: FModalSheetStyle.defaultBarrierFilter);
 }
 
 /// The motion-related properties for a modal sheet.

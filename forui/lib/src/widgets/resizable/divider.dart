@@ -312,7 +312,7 @@ class FResizableDividerThumbStyle with Diagnosticable, _$FResizableDividerThumbS
   /// The thumb icon builder. Defaults to [FIcons.gripVertical] (horizontal axis) or [FIcons.gripHorizontal] (vertical
   /// axis).
   @override
-  final FIconBuilder icon;
+  final FIcon icon;
 
   /// The height.
   ///

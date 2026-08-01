@@ -427,6 +427,7 @@ class _State extends State<FContextMenu> with TickerProviderStateMixin {
                   cutoutBuilder: widget.cutoutBuilder,
                   animation: _controller.fade,
                   filter: style.barrierFilter!,
+                  theme: context.theme,
                   semanticsLabel: widget.barrierSemanticsLabel ?? localizations.barrierLabel,
                   barrierSemanticsDismissible: widget.barrierSemanticsDismissible,
                   semanticsOnTapHint: localizations.barrierOnTapHint(localizations.contextMenuSemanticsLabel),
@@ -501,7 +502,7 @@ class _State extends State<FContextMenu> with TickerProviderStateMixin {
                     clipper: InnerPathClipper(decoration: style.decoration, direction: direction),
                     child: AnimatedBuilder(
                       animation: _controller.fade,
-                      builder: (_, _) => BackdropFilter(filter: filter(_controller.fade.value), child: Container()),
+                      builder: (_, _) => BackdropFilter(filter: filter(context.theme, _controller.fade.value), child: Container()),
                     ),
                   ),
                 ),

@@ -40,15 +40,6 @@ part 'circular_progress.design.dart';
 /// * [FCircularProgressStyle] for customizing a circular progress's appearance.
 /// * [FProgress] for for an indeterminate linear progress indicator.
 class FCircularProgress extends StatefulWidget {
-  static Widget _loaderCircle(BuildContext context, {String? semanticsLabel}) =>
-      context.theme.icons.loaderCircle(context, semanticsLabel: semanticsLabel);
-
-  static Widget _loader(BuildContext context, {String? semanticsLabel}) =>
-      context.theme.icons.loader(context, semanticsLabel: semanticsLabel);
-
-  static Widget _loaderPinwheel(BuildContext context, {String? semanticsLabel}) =>
-      context.theme.icons.loaderPinwheel(context, semanticsLabel: semanticsLabel);
-
   /// The size. Defaults to [FCircularProgressSizeVariant.md].
   final FCircularProgressSizeVariant size;
 
@@ -76,24 +67,24 @@ class FCircularProgress extends StatefulWidget {
   final String? semanticsLabel;
 
   /// The icon.
-  final FIconBuilder icon;
+  final FIcon icon;
 
   /// Creates a [FCircularProgress] that uses [FIcons.loaderCircle].
   const FCircularProgress({
     this.size = .md,
     this.style = const .context(),
     this.semanticsLabel,
-    this.icon = _loaderCircle,
+    this.icon = const _Loader(.circle),
     super.key,
   });
 
   /// Creates a [FCircularProgress] that uses [FIcons.loader].
   const FCircularProgress.loader({this.size = .md, this.style = const .context(), this.semanticsLabel, super.key})
-    : icon = _loader;
+    : icon = const _Loader(.plain);
 
   /// Creates a [FCircularProgress] that uses [FIcons.loaderPinwheel].
   const FCircularProgress.pinwheel({this.size = .md, this.style = const .context(), this.semanticsLabel, super.key})
-    : icon = _loaderPinwheel;
+    : icon = const _Loader(.pinwheel);
 
   @override
   State<FCircularProgress> createState() => _CircularState();
@@ -181,6 +172,33 @@ class _CircularState extends State<FCircularProgress> with SingleTickerProviderS
             child: icon,
           );
   }
+}
+
+enum _Slot { circle, plain, pinwheel }
+
+/// Defers to the ambient [FIcons]'s loader slot.
+class _Loader implements FIcon {
+  final _Slot slot;
+
+  const _Loader(this.slot);
+
+  @override
+  Widget call(BuildContext context, {String? semanticsLabel}) {
+    final icons = context.theme.icons;
+    final icon = switch (slot) {
+      .circle => icons.loaderCircle,
+      .plain => icons.loader,
+      .pinwheel => icons.loaderPinwheel,
+    };
+
+    return icon(context, semanticsLabel: semanticsLabel);
+  }
+
+  @override
+  bool operator ==(Object other) => identical(this, other) || other is _Loader && slot == other.slot;
+
+  @override
+  int get hashCode => slot.hashCode;
 }
 
 /// An inherited widget that provides [FCircularProgressStyle] to its descendants.

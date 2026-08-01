@@ -464,6 +464,7 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
                     cutoutBuilder: widget.cutoutBuilder,
                     animation: _controller.fade,
                     filter: style.barrierFilter!,
+                    theme: context.theme,
                     semanticsLabel: widget.barrierSemanticsLabel ?? localizations.barrierLabel,
                     barrierSemanticsDismissible: widget.barrierSemanticsDismissible,
                     semanticsOnTapHint: localizations.barrierOnTapHint(localizations.popoverSemanticsLabel),
@@ -518,7 +519,7 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
                       clipper: InnerPathClipper(decoration: style.decoration, direction: direction),
                       child: AnimatedBuilder(
                         animation: _controller.fade,
-                        builder: (_, _) => BackdropFilter(filter: filter(_controller.fade.value), child: Container()),
+                        builder: (_, _) => BackdropFilter(filter: filter(context.theme, _controller.fade.value), child: Container()),
                       ),
                     ),
                   ),
@@ -558,6 +559,9 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
   /// An optional callback that takes the current animation transition value (0.0 to 1.0) and returns an [ImageFilter]
   /// that is used as the barrier. Defaults to null.
   ///
+  /// Prefer a static function over a closure literal. A closure literal is never equal to another, which causes widgets
+  /// to flicker when the same theme is recreated.
+  ///
   /// ## Examples
   /// ```dart
   /// // Blurred
@@ -577,7 +581,7 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
   /// ```
   /// {@endtemplate}
   @override
-  final ImageFilter Function(double animation)? barrierFilter;
+  final ImageFilter Function(FThemeData theme, double animation)? barrierFilter;
 
   /// {@template forui.widgets.FPopoverStyle.backgroundFilter}
   /// An optional callback that takes the current animation transition value (0.0 to 1.0) and returns an [ImageFilter]
@@ -585,6 +589,9 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
   ///
   /// This is typically combined with a transparent/translucent background to create a glassmorphic effect.
   ///
+  /// Prefer a static function over a closure literal. A closure literal is never equal to another, which causes widgets
+  /// to flicker when the same theme is recreated.
+  ///
   /// ## Examples
   /// ```dart
   /// // Blurred
@@ -604,7 +611,7 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
   /// ```
   /// {@endtemplate}
   @override
-  final ImageFilter Function(double animation)? backgroundFilter;
+  final ImageFilter Function(FThemeData theme, double animation)? backgroundFilter;
 
   /// The additional padding between the edges of the view and the edges of the popover.
   ///

@@ -13,6 +13,7 @@ import styleSnippet from '@/snippets/snippets/concepts/themes/components/style.j
 import variantsSnippet from '@/snippets/snippets/concepts/themes/components/variants.json';
 import variantsDeltaSnippet from '@/snippets/snippets/concepts/themes/components/variants_delta.json';
 import customFontFamilySnippet from '@/snippets/snippets/concepts/themes/components/custom_font_family.json';
+import equalitySnippet from '@/snippets/snippets/concepts/themes/components/equality.json';
 import approximateMaterialThemeSnippet from '@/snippets/snippets/concepts/themes/material_interop/approximate_material_theme.json';
 
 Forui themes allow you to define a consistent visual style across your application & widgets. It optionally relies on
@@ -225,6 +226,15 @@ is a tier 2 (semantic) state which outranks tier 1 (interaction) states.
     To learn how to customize `FVariants`, see the [customizing widget styles](/docs/guides/customizing-widget-styles#variants)
     guide.
 </Callout>
+
+## Equality
+
+`FTheme` animates between themes. Two themes built from the same inputs must be equal, or widgets may flicker.
+
+<CodeSnippet snippet={equalitySnippet} />
+
+* Use static functions instead of closure literals.
+* `FIcons`' icons should implement `FIcon` with `==` and `hashCode`.
 
 ## Material Interoperability
 

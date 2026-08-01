@@ -99,7 +99,7 @@ class FAvatarStyle with Diagnosticable, _$FAvatarStyleFunctions {
 
   /// The fallback icon builder shown when no image is loaded. Defaults to [FIcons.userRound].
   @override
-  final FIconBuilder fallbackIcon;
+  final FIcon fallbackIcon;
 
   /// Duration for the transition animation. Defaults to 500ms.
   @override

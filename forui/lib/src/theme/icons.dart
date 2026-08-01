@@ -3,17 +3,13 @@ import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
 
-/// Builds an icon given a [BuildContext]. The icon inherits its size/color from the ambient [IconTheme]; callers
-/// should wrap the builder's result in an [IconTheme] with the desired [IconThemeData].
-typedef FIconBuilder = Widget Function(BuildContext context, {String? semanticsLabel});
-
 /// The icon tokens used by Forui's widgets. Defaults to icons in [FLucideIcons].
 ///
 /// ## Customizing icons
 /// To change the icons used by Forui widgets, pass a [FIcons] to [FThemeData].
 ///
 /// Icons in [FIcons] should inherit their properties from the ambient [IconTheme]. Packages that represent icons as
-/// [IconData] inherit automatically; use [iconData] to wrap them.
+/// [IconData] inherit automatically; use [FIcon.new] to wrap them.
 ///
 /// For example, to use the in-built Material icons:
 /// ```dart
@@ -21,117 +17,139 @@ typedef FIconBuilder = Widget Function(BuildContext context, {String? semanticsL
 ///   colors: FColors.neutralLight,
 ///   touch: false,
 ///   icons: FIcons(
-///     arrowLeft: FIcons.iconData(Icons.arrow_left),
-///     calendar: FIcons.iconData(Icons.calendar_month),
-///     check: FIcons.iconData(Icons.check),
+///     arrowLeft: FIcon(Icons.arrow_left),
+///     calendar: FIcon(Icons.calendar_month),
+///     check: FIcon(Icons.check),
 ///     // ...
 ///   ),
 /// );
 /// ```
 ///
-/// Packages with duotone or multi-color glyphs typically expose a custom icon widget instead. As long as the widget
-/// inherits from the ambient [IconTheme], you can pass it directly.
+/// Packages with duotone or multi-color glyphs typically expose a custom icon widget instead. Implement [FIcon] to use
+/// them, taking care to follow [FIcon]'s contract:
+///
+/// ```dart
+/// class AwesomeIcon implements FIcon {
+///   final IconDataBrands data;
+///
+///   const AwesomeIcon(this.data);
+///
+///   @override
+///   Widget call(BuildContext context, {String? semanticsLabel}) =>
+///       FaIcon(data, semanticLabel: semanticsLabel);
+///
+///   @override
+///   bool operator ==(Object other) => identical(this, other) || other is AwesomeIcon && data == other.data;
+///
+///   @override
+///   int get hashCode => data.hashCode;
+/// }
+/// ```
 ///
 /// Known-compatible packages:
 /// * `font_awesome_flutter`
 /// * `hugeicons`
 ///
-/// Custom widgets that do not inherit from the ambient [IconTheme] (e.g. SVG-based packages) must read the data
-/// themselves. Wrap the callback in a [Builder] so [IconTheme.of] is evaluated inside the caller's wrap:
+/// Icons that do not inherit from the ambient [IconTheme] (e.g. SVG-based packages) must read the data themselves. Wrap
+/// the widget in a [Builder] so [IconTheme.of] is evaluated inside the caller's wrap:
 ///
 /// ```dart
-/// FThemeData(
-///   colors: FColors.neutralLight,
-///   touch: false,
-///   icons: FIcons(
-///     arrowLeft: (_, {semanticsLabel}) => Builder(builder: (context) {
+/// class SvgIcon implements FIcon {
+///   final String asset;
+///
+///   const SvgIcon(this.asset);
+///
+///   @override
+///   Widget call(BuildContext _, {String? semanticsLabel}) => Builder(
+///     builder: (context) {
 ///       final data = IconTheme.of(context);
 ///       return SvgPicture.asset(
-///         'assets/arrow_left.svg',
+///         asset,
 ///         width: data.size,
 ///         height: data.size,
 ///         colorFilter: data.color == null ? null : ColorFilter.mode(data.color!, BlendMode.srcIn),
 ///         semanticsLabel: semanticsLabel,
 ///       );
-///     }),
-///     // ...
-///   ),
-/// );
+///     },
+///   );
+///
+///   @override
+///   bool operator ==(Object other) => identical(this, other) || other is SvgIcon && asset == other.asset;
+///
+///   @override
+///   int get hashCode => asset.hashCode;
+/// }
 /// ```
 ///
 /// Run [`dart run forui theme create`](https://forui.dev/docs/reference/cli#create-2) to generate a custom theme.
 final class FIcons with Diagnosticable {
-  /// A builder that renders the given [IconData] as a Flutter [Icon].
-  static FIconBuilder iconData(IconData icon) =>
-      (_, {semanticsLabel}) => Icon(icon, semanticLabel: semanticsLabel);
-
   /// A left-pointing arrow.
-  final FIconBuilder arrowLeft;
+  final FIcon arrowLeft;
 
   /// A calendar.
-  final FIconBuilder calendar;
+  final FIcon calendar;
 
   /// A check mark.
-  final FIconBuilder check;
+  final FIcon check;
 
   /// A downward-pointing chevron.
-  final FIconBuilder chevronDown;
+  final FIcon chevronDown;
 
   /// A left-pointing chevron.
-  final FIconBuilder chevronLeft;
+  final FIcon chevronLeft;
 
   /// A right-pointing chevron.
-  final FIconBuilder chevronRight;
+  final FIcon chevronRight;
 
   /// An upward-pointing chevron.
-  final FIconBuilder chevronUp;
+  final FIcon chevronUp;
 
   /// A pair of vertically-stacked chevrons.
-  final FIconBuilder chevronsUpDown;
+  final FIcon chevronsUpDown;
 
   /// An alert / warning indicator inside a circle.
-  final FIconBuilder circleAlert;
+  final FIcon circleAlert;
 
   /// A clock with a 4 o'clock indicator.
-  final FIconBuilder clock4;
+  final FIcon clock4;
 
   /// A horizontal ellipsis (three dots).
-  final FIconBuilder ellipsis;
+  final FIcon ellipsis;
 
   /// An alert used to denote errors such as form field validation failures.
-  final FIconBuilder error;
+  final FIcon error;
 
   /// An open eye.
-  final FIconBuilder eye;
+  final FIcon eye;
 
   /// A closed eye.
-  final FIconBuilder eyeClosed;
+  final FIcon eyeClosed;
 
   /// A horizontal grip handle.
-  final FIconBuilder gripHorizontal;
+  final FIcon gripHorizontal;
 
   /// A vertical grip handle.
-  final FIconBuilder gripVertical;
+  final FIcon gripVertical;
 
   /// A loading indicator (segments).
-  final FIconBuilder loader;
+  final FIcon loader;
 
   /// A loading indicator (circular).
-  final FIconBuilder loaderCircle;
+  final FIcon loaderCircle;
 
   /// A loading indicator (pinwheel).
-  final FIconBuilder loaderPinwheel;
+  final FIcon loaderPinwheel;
 
   /// A search / magnifying glass.
-  final FIconBuilder search;
+  final FIcon search;
 
   /// A user silhouette in a circle.
-  final FIconBuilder userRound;
+  final FIcon userRound;
 
   /// An "x" / close mark.
-  final FIconBuilder x;
+  final FIcon x;
 
-  /// Creates a [FIcons] with the given builders.
+  /// Creates a [FIcons] with the given icons.
   const FIcons({
     required this.arrowLeft,
     required this.calendar,
@@ -158,30 +176,30 @@ final class FIcons with Diagnosticable {
   });
 
   /// Creates a [FIcons] backed by [FLucideIcons] defaults.
-  FIcons.lucide()
+  const FIcons.lucide()
     : this(
-        arrowLeft: iconData(FLucideIcons.arrowLeft),
-        calendar: iconData(FLucideIcons.calendar),
-        check: iconData(FLucideIcons.check),
-        chevronDown: iconData(FLucideIcons.chevronDown),
-        chevronLeft: iconData(FLucideIcons.chevronLeft),
-        chevronRight: iconData(FLucideIcons.chevronRight),
-        chevronUp: iconData(FLucideIcons.chevronUp),
-        chevronsUpDown: iconData(FLucideIcons.chevronsUpDown),
-        circleAlert: iconData(FLucideIcons.circleAlert),
-        clock4: iconData(FLucideIcons.clock4),
-        ellipsis: iconData(FLucideIcons.ellipsis),
-        error: iconData(FLucideIcons.circleAlert),
-        eye: iconData(FLucideIcons.eye),
-        eyeClosed: iconData(FLucideIcons.eyeClosed),
-        gripHorizontal: iconData(FLucideIcons.gripHorizontal),
-        gripVertical: iconData(FLucideIcons.gripVertical),
-        loader: iconData(FLucideIcons.loader),
-        loaderCircle: iconData(FLucideIcons.loaderCircle),
-        loaderPinwheel: iconData(FLucideIcons.loaderPinwheel),
-        search: iconData(FLucideIcons.search),
-        userRound: iconData(FLucideIcons.userRound),
-        x: iconData(FLucideIcons.x),
+        arrowLeft: const FIcon(FLucideIcons.arrowLeft),
+        calendar: const FIcon(FLucideIcons.calendar),
+        check: const FIcon(FLucideIcons.check),
+        chevronDown: const FIcon(FLucideIcons.chevronDown),
+        chevronLeft: const FIcon(FLucideIcons.chevronLeft),
+        chevronRight: const FIcon(FLucideIcons.chevronRight),
+        chevronUp: const FIcon(FLucideIcons.chevronUp),
+        chevronsUpDown: const FIcon(FLucideIcons.chevronsUpDown),
+        circleAlert: const FIcon(FLucideIcons.circleAlert),
+        clock4: const FIcon(FLucideIcons.clock4),
+        ellipsis: const FIcon(FLucideIcons.ellipsis),
+        error: const FIcon(FLucideIcons.circleAlert),
+        eye: const FIcon(FLucideIcons.eye),
+        eyeClosed: const FIcon(FLucideIcons.eyeClosed),
+        gripHorizontal: const FIcon(FLucideIcons.gripHorizontal),
+        gripVertical: const FIcon(FLucideIcons.gripVertical),
+        loader: const FIcon(FLucideIcons.loader),
+        loaderCircle: const FIcon(FLucideIcons.loaderCircle),
+        loaderPinwheel: const FIcon(FLucideIcons.loaderPinwheel),
+        search: const FIcon(FLucideIcons.search),
+        userRound: const FIcon(FLucideIcons.userRound),
+        x: const FIcon(FLucideIcons.x),
       );
 
   @override
@@ -211,4 +229,90 @@ final class FIcons with Diagnosticable {
       ..add(ObjectFlagProperty.has('userRound', userRound))
       ..add(ObjectFlagProperty.has('x', x));
   }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is FIcons &&
+          runtimeType == other.runtimeType &&
+          arrowLeft == other.arrowLeft &&
+          calendar == other.calendar &&
+          check == other.check &&
+          chevronDown == other.chevronDown &&
+          chevronLeft == other.chevronLeft &&
+          chevronRight == other.chevronRight &&
+          chevronUp == other.chevronUp &&
+          chevronsUpDown == other.chevronsUpDown &&
+          circleAlert == other.circleAlert &&
+          clock4 == other.clock4 &&
+          ellipsis == other.ellipsis &&
+          error == other.error &&
+          eye == other.eye &&
+          eyeClosed == other.eyeClosed &&
+          gripHorizontal == other.gripHorizontal &&
+          gripVertical == other.gripVertical &&
+          loader == other.loader &&
+          loaderCircle == other.loaderCircle &&
+          loaderPinwheel == other.loaderPinwheel &&
+          search == other.search &&
+          userRound == other.userRound &&
+          x == other.x;
+
+  @override
+  int get hashCode => Object.hashAll([
+    arrowLeft,
+    calendar,
+    check,
+    chevronDown,
+    chevronLeft,
+    chevronRight,
+    chevronUp,
+    chevronsUpDown,
+    circleAlert,
+    clock4,
+    ellipsis,
+    error,
+    eye,
+    eyeClosed,
+    gripHorizontal,
+    gripVertical,
+    loader,
+    loaderCircle,
+    loaderPinwheel,
+    search,
+    userRound,
+    x,
+  ]);
+}
+
+/// An icon that is used by Forui widgets.
+///
+/// ## Contract
+/// Subclasses should implement [==] and [hashCode] so that two icons that render the same glyph are equal. Not doing so
+/// may cause widgets to "flicker" whenever the same [FThemeData] is recreated.
+// ignore: one_member_abstracts
+abstract interface class FIcon {
+  /// Creates an [FIcon] with the given [IconData].
+  const factory FIcon(IconData icon) = _Icon;
+
+  /// Builds an icon given a [BuildContext].
+  ///
+  /// The icon inherits its size/color from the ambient [IconTheme].
+  Widget call(BuildContext context, {String? semanticsLabel});
+}
+
+class _Icon implements FIcon {
+  final IconData icon;
+
+  const _Icon(this.icon);
+
+  @override
+  Widget call(BuildContext context, {String? semanticsLabel}) => Icon(icon, semanticLabel: semanticsLabel);
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) || other is _Icon && runtimeType == other.runtimeType && icon == other.icon;
+
+  @override
+  int get hashCode => icon.hashCode;
 }

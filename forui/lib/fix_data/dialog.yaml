@@ -1,5 +1,16 @@
 version: 1
 transforms:
+  # FDialogRouteStyle
+  - title: "Remove FDialogRouteStyle.inherit(colors: ...)"
+    date: 2026-08-01
+    element:
+      uris: [ 'package:forui/forui.dart' ]
+      constructor: 'inherit'
+      inClass: FDialogRouteStyle
+    changes:
+      - kind: removeParameter
+        name: 'colors'
+
   # FDialogStyle
   - title: "Remove FDialogStyle(contentStyle: ...). Set titleTextStyle and bodyTextStyle directly instead."
     date: 2026-07-10

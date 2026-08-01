@@ -3,7 +3,7 @@ import 'dart:ui';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
-import 'package:forui/src/foundation/focused_outline.dart';
+import 'package:forui/forui.dart';
 
 /// Special values that indicate the absence of a value of a particular type.
 extension Sentinels on Never {
@@ -26,7 +26,7 @@ extension Sentinels on Never {
   static const imageFilter = _ImageFilterSentinel();
 
   /// A sentinel value for image filter function fields.
-  static ImageFilter imageFilterFunction(double animation) => throw UnimplementedError();
+  static ImageFilter imageFilterFunction(FThemeData theme, double animation) => throw UnimplementedError();
 
   /// A sentinel value for border radius fields.
   static const borderRadius = _BorderRadiusSentinel();
