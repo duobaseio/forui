@@ -73,9 +73,7 @@ class FAnimatedModalBarrier extends AnimatedWidget {
   Widget build(BuildContext context) => FModalBarrier(
     cutout: cutout,
     cutoutBuilder: cutoutBuilder,
-    filter: filter == null
-        ? null
-        : filter!(context, context.accessibility.motion == .disabled ? 1.0 : animation.value),
+    filter: filter == null ? null : filter!(context, context.accessibility.motion == .disabled ? 1.0 : animation.value),
     onDismiss: onDismiss,
     semanticsLabel: semanticsLabel,
     barrierSemanticsDismissible: barrierSemanticsDismissible,

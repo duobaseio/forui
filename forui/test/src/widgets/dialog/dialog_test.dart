@@ -308,8 +308,7 @@ void main() {
                     builder: (context) => FButton(
                       onPress: () => showFDialog(
                         context: context,
-                        builder: (context, style, _) =>
-                            FDialog(style: style, builder: (_, _) => const Text('dialog')),
+                        builder: (context, style, _) => FDialog(style: style, builder: (_, _) => const Text('dialog')),
                       ),
                       child: const Text('button'),
                     ),
