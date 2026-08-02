@@ -1,3 +1,7 @@
+## 0.25.0
+Add support for Forui `0.25.0`.
+
+
 ## 0.24.0
 Add support for Forui `0.24.0`.
 
