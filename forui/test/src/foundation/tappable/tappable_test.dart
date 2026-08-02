@@ -861,6 +861,150 @@ void main() {
     });
   });
 
+  group('nested', () {
+    Widget nested({
+      bool static = false,
+      bool inner = true,
+      Key? outerKey,
+      Key? innerKey,
+      List<String>? calls,
+      ValueChanged<Set<FTappableVariant>>? onOuter,
+      ValueChanged<Set<FTappableVariant>>? onInner,
+    }) {
+      final constructor = static ? FTappable.static : FTappable.new;
+      return TestScaffold(
+        child: constructor(
+          key: outerKey,
+          onPress: () => calls?.add('outer'),
+          onVariantChange: onOuter == null ? null : (_, current) => onOuter(current),
+          // The ColoredBox makes the padding gutter hit-testable, like a real widget's background.
+          builder: (_, _, child) => ColoredBox(
+            color: const Color(0x00000000),
+            child: Padding(padding: const EdgeInsets.all(30), child: child),
+          ),
+          child: constructor(
+            key: innerKey,
+            onPress: inner ? () => calls?.add('inner') : null,
+            onVariantChange: onInner == null ? null : (_, current) => onInner(current),
+            child: const SizedBox(width: 60, height: 60, child: Text('inner')),
+          ),
+        ),
+      );
+    }
+
+    for (final static in [false, true]) {
+      testWidgets('pressing inner never presses outer - static: $static', (tester) async {
+        final calls = <String>[];
+        final outerSeen = <FTappableVariant>{};
+        final innerSeen = <FTappableVariant>{};
+        await tester.pumpWidget(
+          nested(static: static, calls: calls, onOuter: outerSeen.addAll, onInner: innerSeen.addAll),
+        );
+
+        final gesture = await tester.startGesture(tester.getCenter(find.text('inner')));
+        await tester.pump(const Duration(milliseconds: 200));
+
+        expect(innerSeen.contains(FTappableVariant.pressed), true);
+        expect(outerSeen.contains(FTappableVariant.pressed), false);
+
+        await gesture.up();
+        await tester.pumpAndSettle();
+
+        expect(outerSeen.contains(FTappableVariant.pressed), false);
+        expect(calls, ['inner']);
+      });
+    }
+
+    testWidgets('pressing inner never bounces outer', (tester) async {
+      final outerKey = GlobalKey<AnimatedTappableState>();
+      final innerKey = GlobalKey<AnimatedTappableState>();
+      await tester.pumpWidget(nested(outerKey: outerKey, innerKey: innerKey));
+
+      final gesture = await tester.startGesture(tester.getCenter(find.text('inner')));
+      await tester.pumpAndSettle(const Duration(milliseconds: 200));
+
+      expect(innerKey.currentState?.bounce.value, 0.97);
+      expect(outerKey.currentState?.bounce.value, 1);
+
+      await gesture.up();
+      await tester.pumpAndSettle();
+    });
+
+    testWidgets('pressing disabled inner presses outer', (tester) async {
+      final calls = <String>[];
+      final outerSeen = <FTappableVariant>{};
+      await tester.pumpWidget(nested(inner: false, calls: calls, onOuter: outerSeen.addAll));
+
+      final gesture = await tester.startGesture(tester.getCenter(find.text('inner')));
+      await tester.pump(const Duration(milliseconds: 200));
+
+      expect(outerSeen.contains(FTappableVariant.pressed), true);
+
+      await gesture.up();
+      await tester.pumpAndSettle();
+
+      expect(calls, ['outer']);
+    });
+
+    testWidgets('outer presses normally after pressing inner', (tester) async {
+      var outerLive = <FTappableVariant>{};
+      await tester.pumpWidget(nested(onOuter: (current) => outerLive = current));
+
+      await tester.tap(find.text('inner'));
+      await tester.pumpAndSettle();
+      expect(outerLive.contains(FTappableVariant.pressed), false);
+
+      // 15px outside the inner tappable's top-left corner is within the outer tappable's padding.
+      final gesture = await tester.startGesture(tester.getTopLeft(find.text('inner')) - const Offset(15, 15));
+      await tester.pump(const Duration(milliseconds: 200));
+
+      expect(outerLive.contains(FTappableVariant.pressed), true);
+
+      await gesture.up();
+      await tester.pumpAndSettle();
+
+      expect(outerLive.contains(FTappableVariant.pressed), false);
+    });
+
+    testWidgets("second pointer on inner does not end outer's press", (tester) async {
+      var outerLive = <FTappableVariant>{};
+      await tester.pumpWidget(nested(onOuter: (current) => outerLive = current));
+
+      final outer = await tester.startGesture(tester.getTopLeft(find.text('inner')) - const Offset(15, 15));
+      await tester.pump(const Duration(milliseconds: 200));
+      expect(outerLive.contains(FTappableVariant.pressed), true);
+
+      final inner = await tester.startGesture(tester.getCenter(find.text('inner')));
+      await tester.pump(const Duration(milliseconds: 50));
+      await inner.up();
+      await tester.pump(const Duration(milliseconds: 200));
+
+      expect(outerLive.contains(FTappableVariant.pressed), true);
+
+      await outer.up();
+      await tester.pumpAndSettle();
+
+      expect(outerLive.contains(FTappableVariant.pressed), false);
+    });
+
+    testWidgets('hovering inner also hovers outer', (tester) async {
+      var outerLive = <FTappableVariant>{};
+      var innerLive = <FTappableVariant>{};
+      await tester.pumpWidget(
+        nested(onOuter: (current) => outerLive = current, onInner: (current) => innerLive = current),
+      );
+
+      final gesture = await tester.createPointerGesture();
+      await tester.pump();
+
+      await gesture.moveTo(tester.getCenter(find.text('inner')));
+      await tester.pumpAndSettle();
+
+      expect(innerLive.contains(FTappableVariant.hovered), true);
+      expect(outerLive.contains(FTappableVariant.hovered), true);
+    });
+  });
+
   testWidgets('returns focused state on primary focus', (tester) async {
     FocusManager.instance.highlightStrategy = .alwaysTraditional;
     addTearDown(() => FocusManager.instance.highlightStrategy = .automatic);

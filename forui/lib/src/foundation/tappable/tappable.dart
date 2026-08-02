@@ -35,6 +35,9 @@ typedef FTappableVariantChangeCallback = void Function(Set<FTappableVariant> pre
 /// It is typically used to create other high-level widgets, i.e., [FButton]. Unless you are creating a custom widget,
 /// you should use those high-level widgets instead.
 ///
+/// Pressing a tappable nested inside another tappable shows a pressed effect on only the deepest enabled tappable.
+/// Hovering it also hovers its ancestor tappables, mirroring CSS `:hover`.
+///
 /// {@macro forui.foundation.doc_templates.overlay}
 class FTappable extends StatefulWidget {
   /// The default builder that returns the child as-is.
@@ -505,6 +508,9 @@ class FTappable extends StatefulWidget {
 }
 
 class _FTappableState<T extends FTappable> extends State<T> {
+  /// Pointers claimed by the deepest enabled tappable.
+  static final Map<int, _FTappableState<FTappable>> _claims = {};
+
   late FTappableStyle _style;
   late FocusNode _focus;
   late Set<FTappableVariant> _current;
@@ -512,6 +518,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
   FTappableVariant? _platform;
   int _monotonic = 0;
   int _buttons = 0;
+  int? _pointer;
   List<GroupEntry>? _entries;
   GroupEntry? _entry;
 
@@ -603,6 +610,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
 
   @override
   void dispose() {
+    _unclaim();
     _unregister();
     if (widget.focusNode == null) {
       _focus.dispose();
@@ -695,11 +703,26 @@ class _FTappableState<T extends FTappable> extends State<T> {
               // GestureArena and only 1 GestureDetector will win. This is problematic if this tappable is wrapped in
               // another GestureDetector as onTapDown and onTapUp might absorb EVERY gesture, including drags and pans.
               child: Listener(
-                onPointerDown: _entries == null ? (event) => _start(event.buttons) : null,
+                onPointerDown: _entries == null
+                    ? (event) {
+                        // A deeper tappable claimed this pointer first.
+                        if (_claims.containsKey(event.pointer)) {
+                          return;
+                        }
+
+                        _unclaim();
+                        if (!widget._disabled) {
+                          _claims[event.pointer] = this;
+                        }
+                        _pointer = event.pointer;
+
+                        unawaited(_start(event.buttons));
+                      }
+                    : null,
                 onPointerMove: _entries == null
                     ? (event) async {
                         // Check if it's mounted due to a non-deterministic race condition, https://github.com/duobaseio/forui/issues/482.
-                        if (!mounted) {
+                        if (!mounted || event.pointer != _pointer) {
                           return;
                         }
 
@@ -720,7 +743,22 @@ class _FTappableState<T extends FTappable> extends State<T> {
                         await _cancel();
                       }
                     : null,
-                onPointerUp: _entries == null ? (_) => _end() : null,
+                onPointerUp: _entries == null
+                    ? (event) {
+                        if (event.pointer == _pointer) {
+                          _unclaim();
+                          unawaited(_end());
+                        }
+                      }
+                    : null,
+                onPointerCancel: _entries == null
+                    ? (event) {
+                        if (event.pointer == _pointer) {
+                          _unclaim();
+                          unawaited(_cancel());
+                        }
+                      }
+                    : null,
                 child: GestureDetector(
                   behavior: widget.behavior,
                   onTapDown: _entries == null ? widget.onPressDown : null,
@@ -805,6 +843,13 @@ class _FTappableState<T extends FTappable> extends State<T> {
     if (mounted && count == _monotonic && _current.contains(FTappableVariant.pressed)) {
       setState(() => _update(.pressed, false));
     }
+  }
+
+  void _unclaim() {
+    if (_pointer case final pointer? when identical(_claims[pointer], this)) {
+      _claims.remove(pointer);
+    }
+    _pointer = null;
   }
 
   void onPressStart() {}

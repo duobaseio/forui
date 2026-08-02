@@ -108,6 +108,8 @@ rebuilt.
 ### `FTappable`
 * Add `FTappable.semanticsTooltip`.
 
+* Fix pressed effect applying to ancestor tappables when a nested tappable is pressed.
+
 
 ### `FTimeField`
 * Add `FTimeFieldPickerProperties.overlayLocation`.
