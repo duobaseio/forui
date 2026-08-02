@@ -208,8 +208,8 @@ class AccessibilityScopeElement extends InheritedModelElement<_Aspect> {
   AccessibilityScopeElement(_AccessibilityScope super.widget) : notifier = ValueNotifier(widget.data);
 
   @override
+  // ignore: library_private_types_in_public_api
   void update(covariant _AccessibilityScope current) {
-    // ignore: library_private_types_in_public_api
     notifier.value = current.data;
     super.update(current);
   }
