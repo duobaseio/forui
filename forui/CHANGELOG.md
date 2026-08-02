@@ -16,6 +16,7 @@
 
 
 ### `FButton`
+* Add `FButton.onDisabledPress`.
 * Add `FButton.semanticsTooltip`.
 
 
@@ -106,6 +107,7 @@ rebuilt.
 
 
 ### `FTappable`
+* Add `FTappable.onDisabledPress`.
 * Add `FTappable.semanticsTooltip`.
 
 * Fix pressed effect applying to ancestor tappables when a nested tappable is pressed.

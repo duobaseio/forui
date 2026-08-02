@@ -628,6 +628,84 @@ void main() {
     });
   });
 
+  group('onDisabledPress', () {
+    testWidgets('fires when disabled tappable is tapped', (tester) async {
+      final calls = <String>[];
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FTappable(
+            builder: (_, states, _) => Text('$states'),
+            onDisabledPress: () => calls.add('onDisabledPress'),
+          ),
+        ),
+      );
+      expect(find.text(set(false).toString()), findsOneWidget);
+
+      await tester.tap(find.byType(AnimatedTappable));
+      await tester.pumpAndSettle();
+
+      expect(calls, ['onDisabledPress']);
+    });
+
+    testWidgets('does not fire when enabled', (tester) async {
+      final calls = <String>[];
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FTappable(
+            builder: (_, states, _) => Text('$states'),
+            onPress: () => calls.add('onPress'),
+            onDisabledPress: () => calls.add('onDisabledPress'),
+          ),
+        ),
+      );
+      expect(find.text(set(true).toString()), findsOneWidget);
+
+      await tester.tap(find.byType(AnimatedTappable));
+      await tester.pumpAndSettle();
+
+      expect(calls, ['onPress']);
+    });
+
+    testWidgets('focusable and activatable via keyboard when disabled', (tester) async {
+      final calls = <String>[];
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FTappable(
+            focusNode: focusNode,
+            builder: (_, states, _) => Text('$states'),
+            onDisabledPress: () => calls.add('onDisabledPress'),
+          ),
+        ),
+      );
+      expect(find.text(set(false).toString()), findsOneWidget);
+
+      focusNode.requestFocus();
+      await tester.pumpAndSettle();
+      expect(focusNode.hasFocus, true);
+
+      await tester.sendKeyEvent(.enter);
+      await tester.pumpAndSettle();
+
+      expect(calls, ['onDisabledPress']);
+    });
+
+    testWidgets('no bounce when pressed', (tester) async {
+      final key = GlobalKey<AnimatedTappableState>();
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FTappable(key: key, builder: (_, states, _) => Text('$states'), onDisabledPress: () {}),
+        ),
+      );
+
+      final gesture = await tester.press(find.byType(AnimatedTappable));
+      await tester.pumpAndSettle(const Duration(milliseconds: 200));
+      expect(key.currentState?.bounce.value, 1.0);
+
+      await gesture.up();
+      await tester.pumpAndSettle();
+    });
+  });
+
   group('in FTappableGroup', () {
     Widget tappables(List<String> calls) => TestScaffold(
       child: FTappableGroup(
@@ -817,6 +895,25 @@ void main() {
       );
     });
 
+    testWidgets('disabled tappable with onDisabledPress fires on tap', (tester) async {
+      final calls = <String>[];
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FTappableGroup(
+            child: FTappable(
+              builder: (_, _, _) => const SizedBox(width: 50, height: 50, child: Text('A')),
+              onDisabledPress: () => calls.add('onDisabledPress'),
+            ),
+          ),
+        ),
+      );
+
+      await tester.tap(find.text('A'));
+      await tester.pumpAndSettle();
+
+      expect(calls, ['onDisabledPress']);
+    });
+
     testWidgets('entry unmounted mid-gesture does not crash on cancel', (tester) async {
       late StateSetter setState;
       var show = true;
@@ -928,6 +1025,37 @@ void main() {
 
       await gesture.up();
       await tester.pumpAndSettle();
+    });
+
+    testWidgets('pressing disabled inner with onDisabledPress does not press outer', (tester) async {
+      final calls = <String>[];
+      final outerSeen = <FTappableVariant>{};
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FTappable(
+            onPress: () => calls.add('outer'),
+            onVariantChange: (_, current) => outerSeen.addAll(current),
+            builder: (_, _, child) => ColoredBox(
+              color: const Color(0x00000000),
+              child: Padding(padding: const EdgeInsets.all(30), child: child),
+            ),
+            child: FTappable(
+              onDisabledPress: () => calls.add('inner.onDisabledPress'),
+              child: const SizedBox(width: 60, height: 60, child: Text('inner')),
+            ),
+          ),
+        ),
+      );
+
+      final gesture = await tester.startGesture(tester.getCenter(find.text('inner')));
+      await tester.pump(const Duration(milliseconds: 200));
+
+      expect(outerSeen.contains(FTappableVariant.pressed), false);
+
+      await gesture.up();
+      await tester.pumpAndSettle();
+
+      expect(calls, ['inner.onDisabledPress']);
     });
 
     testWidgets('pressing disabled inner presses outer', (tester) async {
@@ -1155,6 +1283,32 @@ void main() {
       );
 
       expect(tester.getSemantics(find.text('tappable')), isSemantics(hasSelectedState: true, isSelected: true));
+    });
+
+    testWidgets('disabled with onDisabledPress announced as disabled with tap action', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTappable.static(onDisabledPress: () {}, child: const Text('tappable')),
+        ),
+      );
+
+      expect(
+        tester.getSemantics(find.text('tappable')),
+        isSemantics(isButton: true, hasEnabledState: true, isEnabled: false, hasTapAction: true, isFocusable: true),
+      );
+    });
+
+    testWidgets('disabled without onDisabledPress has no tap action', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: const FTappable.static(child: Text('tappable')),
+        ),
+      );
+
+      expect(
+        tester.getSemantics(find.text('tappable')),
+        isSemantics(hasEnabledState: true, isEnabled: false, hasTapAction: false),
+      );
     });
   });
 }

@@ -149,6 +149,14 @@ class FTappable extends StatefulWidget {
   /// {@endtemplate}
   final VoidCallback? onPress;
 
+  /// {@template forui.foundation.FTappable.onDisabledPress}
+  /// A callback for when the widget is pressed while disabled. Setting it does not enable the widget.
+  ///
+  /// The widget remains styled and announced as disabled but can receive focus and be activated. Useful for showing
+  /// feedback, such as a validation error, when a user presses a disabled widget.
+  /// {@endtemplate}
+  final VoidCallback? onDisabledPress;
+
   /// {@template forui.foundation.FTappable.onLongPressDown}
   /// A callback for when a primary pointer that might cause a long press has contacted the widget.
   ///
@@ -339,6 +347,7 @@ class FTappable extends StatefulWidget {
     GestureTapMoveCallback? onPressMove,
     GestureTapUpCallback? onPressUp,
     VoidCallback? onPress,
+    VoidCallback? onDisabledPress,
     GestureLongPressDownCallback? onLongPressDown,
     GestureLongPressCancelCallback? onLongPressCancel,
     GestureLongPressStartCallback? onLongPressStart,
@@ -392,6 +401,7 @@ class FTappable extends StatefulWidget {
     this.onPressMove,
     this.onPressUp,
     this.onPress,
+    this.onDisabledPress,
     this.onLongPressDown,
     this.onLongPressCancel,
     this.onLongPressStart,
@@ -416,7 +426,9 @@ class FTappable extends StatefulWidget {
     this.child,
     Map<ShortcutActivator, Intent>? shortcuts,
     super.key,
-  }) : shortcuts = shortcuts ?? (onPress == null ? const {} : const {SingleActivator(.enter): ActivateIntent()}),
+  }) : shortcuts =
+           shortcuts ??
+           (onPress == null && onDisabledPress == null ? const {} : const {SingleActivator(.enter): ActivateIntent()}),
        assert(builder != defaultBuilder || child != null, 'Either builder or child must be provided');
 
   @override
@@ -448,6 +460,7 @@ class FTappable extends StatefulWidget {
       ..add(ObjectFlagProperty.has('onPressMove', onPressMove))
       ..add(ObjectFlagProperty.has('onPressUp', onPressUp))
       ..add(ObjectFlagProperty.has('onPress', onPress))
+      ..add(ObjectFlagProperty.has('onDisabledPress', onDisabledPress))
       ..add(ObjectFlagProperty.has('onLongPressDown', onLongPressDown))
       ..add(ObjectFlagProperty.has('onLongPressCancel', onLongPressCancel))
       ..add(ObjectFlagProperty.has('onLongPressStart', onLongPressStart))
@@ -475,6 +488,8 @@ class FTappable extends StatefulWidget {
   bool _animate(int buttons) =>
       (buttons & kPrimaryButton != 0 && _hasPrimaryCallback) ||
       (buttons & kSecondaryButton != 0 && _hasSecondaryCallback);
+
+  VoidCallback? get _onPress => _disabled ? onDisabledPress : onPress;
 
   bool get _disabled => !_hasPrimaryCallback && !_hasSecondaryCallback;
 
@@ -588,7 +603,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
         ..onPressCancel = widget.onPressCancel
         ..onPressMove = widget.onPressMove
         ..onPressUp = widget.onPressUp
-        ..onPress = widget.onPress
+        ..onPress = widget._onPress
         ..onLongPressDown = widget.onLongPressDown
         ..onLongPressCancel = widget.onLongPressCancel
         ..onLongPressStart = widget.onLongPressStart
@@ -630,7 +645,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
           onPressCancel: widget.onPressCancel,
           onPressMove: widget.onPressMove,
           onPressUp: widget.onPressUp,
-          onPress: widget.onPress,
+          onPress: widget._onPress,
           onLongPressDown: widget.onLongPressDown,
           onLongPressCancel: widget.onLongPressCancel,
           onLongPressStart: widget.onLongPressStart,
@@ -658,8 +673,8 @@ class _FTappableState<T extends FTappable> extends State<T> {
         actions:
             widget.actions ??
             {
-              if (widget.onPress != null)
-                ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) => widget.onPress!.call()),
+              if (widget._onPress != null)
+                ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) => widget._onPress!.call()),
             },
         child: Semantics(
           enabled: !widget._disabled,
@@ -676,7 +691,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
           child: Focus(
             autofocus: widget.autofocus,
             focusNode: _focus,
-            canRequestFocus: !widget._disabled,
+            canRequestFocus: !widget._disabled || widget.onDisabledPress != null,
             onFocusChange: (focused) {
               setState(() {
                 if (_highlight) {
@@ -711,7 +726,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
                         }
 
                         _unclaim();
-                        if (!widget._disabled) {
+                        if (!widget._disabled || widget.onDisabledPress != null) {
                           _claims[event.pointer] = this;
                         }
                         _pointer = event.pointer;
@@ -765,7 +780,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
                   onTapCancel: _entries == null ? widget.onPressCancel : null,
                   onTapMove: _entries == null ? widget.onPressMove : null,
                   onTapUp: _entries == null ? widget.onPressUp : null,
-                  onTap: _entries == null ? widget.onPress : null,
+                  onTap: _entries == null ? widget._onPress : null,
                   onLongPressDown: _entries == null ? widget.onLongPressDown : null,
                   onLongPressCancel: _entries == null ? widget.onLongPressCancel : null,
                   onLongPressStart: _entries == null ? widget.onLongPressStart : null,
@@ -882,6 +897,7 @@ class AnimatedTappable extends FTappable {
     super.onPressMove,
     super.onPressUp,
     super.onPress,
+    super.onDisabledPress,
     super.onLongPressDown,
     super.onLongPressCancel,
     super.onLongPressStart,

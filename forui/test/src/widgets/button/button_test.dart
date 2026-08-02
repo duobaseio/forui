@@ -44,6 +44,64 @@ void main() {
     expect(hovered, false);
   });
 
+  group('onDisabledPress', () {
+    testWidgets('fires when disabled button is tapped', (tester) async {
+      final calls = <String>[];
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FButton(
+            onPress: null,
+            onDisabledPress: () => calls.add('onDisabledPress'),
+            child: const Text('Button'),
+          ),
+        ),
+      );
+
+      await tester.tap(find.text('Button'));
+      await tester.pumpAndSettle();
+
+      expect(calls, ['onDisabledPress']);
+    });
+
+    testWidgets('does not fire when enabled', (tester) async {
+      final calls = <String>[];
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FButton(
+            onPress: () => calls.add('onPress'),
+            onDisabledPress: () => calls.add('onDisabledPress'),
+            child: const Text('Button'),
+          ),
+        ),
+      );
+
+      await tester.tap(find.text('Button'));
+      await tester.pumpAndSettle();
+
+      expect(calls, ['onPress']);
+    });
+
+    testWidgets('keeps disabled variant', (tester) async {
+      Set<FTappableVariant>? variants;
+      await tester.pumpWidget(
+        TestScaffold(
+          child: FButton.raw(
+            onPress: null,
+            onDisabledPress: () {},
+            child: Builder(
+              builder: (context) {
+                variants = FButtonData.of(context).variants;
+                return const Text('Button');
+              },
+            ),
+          ),
+        ),
+      );
+
+      expect(variants, contains(FTappableVariant.disabled));
+    });
+  });
+
   group('builders', () {
     testWidgets('FButton prefixBuilder & suffixBuilder receive child widgets', (tester) async {
       Widget? capturedPrefixChild;

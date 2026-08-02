@@ -27,7 +27,7 @@ part 'button.design.dart';
 /// A button.
 ///
 /// [FButton] typically contains icons and/or a label. If the [onPress] and [onLongPress] callbacks are null, then this
-/// button will be disabled, and it will not react to touch.
+/// button will be disabled. A disabled button only reacts to touch when [onDisabledPress] is given.
 ///
 /// {@macro forui.foundation.doc_templates.overlay}
 ///
@@ -107,6 +107,9 @@ class FButton extends StatelessWidget {
   /// {@macro forui.foundation.FTappable.onPress}
   final VoidCallback? onPress;
 
+  /// {@macro forui.foundation.FTappable.onDisabledPress}
+  final VoidCallback? onDisabledPress;
+
   /// {@macro forui.foundation.FTappable.onLongPress}
   final VoidCallback? onLongPress;
 
@@ -177,6 +180,7 @@ class FButton extends StatelessWidget {
     this.variant = .primary,
     this.size = .md,
     this.style = const .context(),
+    this.onDisabledPress,
     this.onLongPress,
     this.onDoubleTap,
     this.onSecondaryPress,
@@ -228,6 +232,7 @@ class FButton extends StatelessWidget {
     this.variant = .outline,
     this.size = .md,
     this.style = const .context(),
+    this.onDisabledPress,
     this.onLongPress,
     this.onDoubleTap,
     this.onSecondaryPress,
@@ -255,6 +260,7 @@ class FButton extends StatelessWidget {
     this.variant = .primary,
     this.size = .md,
     this.style = const .context(),
+    this.onDisabledPress,
     this.onLongPress,
     this.onDoubleTap,
     this.onSecondaryPress,
@@ -287,6 +293,7 @@ class FButton extends StatelessWidget {
       onHoverChange: onHoverChange,
       onVariantChange: onVariantChange,
       onPress: onPress,
+      onDisabledPress: onDisabledPress,
       onLongPress: onLongPress,
       onDoubleTap: onDoubleTap,
       onSecondaryPress: onSecondaryPress,
@@ -310,6 +317,7 @@ class FButton extends StatelessWidget {
       ..add(DiagnosticsProperty('size', size))
       ..add(DiagnosticsProperty('style', style))
       ..add(ObjectFlagProperty.has('onPress', onPress))
+      ..add(ObjectFlagProperty.has('onDisabledPress', onDisabledPress))
       ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
       ..add(ObjectFlagProperty.has('onDoubleTap', onDoubleTap))
       ..add(ObjectFlagProperty.has('onSecondaryPress', onSecondaryPress))
