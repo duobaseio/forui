@@ -210,11 +210,13 @@ class _AnimatedToastState extends State<AnimatedToast> with TickerProviderStateM
         ..duration = widget.style.motion.reentranceDuration
         ..reverseDuration = widget.style.motion.exitDuration;
 
+      _curvedEntranceDismiss.dispose();
       _curvedEntranceDismiss = CurvedAnimation(
         parent: _entranceDismissController,
         curve: widget.style.motion.entranceCurve,
         reverseCurve: widget.style.motion.dismissCurve,
       );
+      _transition.dispose();
       _transition = CurvedAnimation(
         parent: _transitionController,
         curve: widget.style.motion.reentranceCurve,

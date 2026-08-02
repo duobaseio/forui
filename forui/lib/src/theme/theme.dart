@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/foundation/accessibility.dart';
+import 'package:forui/src/theme/adaptive_scope.dart';
 
 part 'theme.design.dart';
 
@@ -136,6 +138,20 @@ class FTheme extends StatelessWidget {
   static FThemeData of(BuildContext context) {
     final theme = context.dependOnInheritedWidgetOfExactType<_InheritedTheme>();
     return theme?.data ?? FTheme.neutral.light.touch;
+  }
+
+  /// Captures the [FTheme], [FAccessibilityScope] and [FAdaptiveScope] visible from [from] to [to].
+  @useResult
+  static FCapturedTheme capture({required BuildContext from, required BuildContext to}) {
+    final theme = InheritedThemeElement.of(from);
+    final accessibility = AccessibilityScopeElement.of(from);
+    final platform = AdaptiveScopeElement.of(from);
+
+    return FCapturedTheme(
+      theme: identical(theme, InheritedThemeElement.of(to)) ? null : theme,
+      accessibility: identical(accessibility, AccessibilityScopeElement.of(to)) ? null : accessibility,
+      platform: identical(platform, AdaptiveScopeElement.of(to)) ? null : platform,
+    );
   }
 
   /// The [Neutral](https://ui.shadcn.com/docs/theming#neutral) theme.
@@ -349,6 +365,9 @@ class _InheritedTheme extends InheritedTheme {
   const _InheritedTheme({required this.data, required super.child});
 
   @override
+  InheritedElement createElement() => InheritedThemeElement(this);
+
+  @override
   Widget wrap(BuildContext context, Widget child) => _InheritedTheme(data: data, child: child);
 
   @override
@@ -358,6 +377,35 @@ class _InheritedTheme extends InheritedTheme {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(DiagnosticsProperty('data', data));
+  }
+}
+
+@internal
+class InheritedThemeElement extends InheritedElement {
+  static ValueListenable<FThemeData>? of(BuildContext context) =>
+      (context.getElementForInheritedWidgetOfExactType<_InheritedTheme>() as InheritedThemeElement?)?.notifier;
+
+  final ValueNotifier<FThemeData> notifier;
+
+  InheritedThemeElement(_InheritedTheme super.widget) : notifier = ValueNotifier(widget.data);
+
+  @override
+  // ignore: library_private_types_in_public_api
+  void update(covariant _InheritedTheme current) {
+    notifier.value = current.data;
+    super.update(current);
+  }
+
+  @override
+  void unmount() {
+    notifier.dispose();
+    super.unmount();
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('notifier', notifier));
   }
 }
 

@@ -153,4 +153,70 @@ void main() {
       expect(find.text('sheet'), findsOne);
     });
   }
+
+  group('scope liveness', () {
+    testWidgets('content observes theme changes while open', (tester) async {
+      FThemeData? seen;
+      Widget app(FThemeData theme) => TestScaffold.app(
+        theme: theme,
+        child: Builder(
+          builder: (context) => FButton(
+            onPress: () => showFSheet(
+              context: context,
+              side: .btt,
+              builder: (context) {
+                seen = context.theme;
+                return const Text('sheet');
+              },
+            ),
+            child: const Text('button'),
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(app(FTheme.neutral.light.touch));
+      await tester.tap(find.text('button'));
+      await tester.pumpAndSettle();
+
+      expect(seen, FTheme.neutral.light.touch);
+
+      await tester.pumpWidget(app(FTheme.neutral.dark.touch));
+      await tester.pumpAndSettle();
+
+      expect(seen, FTheme.neutral.dark.touch);
+    });
+
+    testWidgets('content observes nested theme below the navigator', (tester) async {
+      FThemeData? seen;
+      Widget app(FThemeData nested) => TestScaffold.app(
+        child: FTheme(
+          data: nested,
+          child: Builder(
+            builder: (context) => FButton(
+              onPress: () => showFSheet(
+                context: context,
+                side: .btt,
+                builder: (context) {
+                  seen = context.theme;
+                  return const Text('sheet');
+                },
+              ),
+              child: const Text('button'),
+            ),
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(app(TestScaffold.greenOverride));
+      await tester.tap(find.text('button'));
+      await tester.pumpAndSettle();
+
+      expect(seen, TestScaffold.greenOverride);
+
+      await tester.pumpWidget(app(TestScaffold.blueOverride));
+      await tester.pumpAndSettle();
+
+      expect(seen, TestScaffold.blueOverride);
+    });
+  });
 }

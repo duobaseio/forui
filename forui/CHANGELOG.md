@@ -1,4 +1,7 @@
-## 0.25.0 (Next)
+## 0.25.0
+
+This update continues with our ongoing effort to improve Forui's accessibility. It also includes several QoL improvements
+and bugfixes.
 
 ### `FAutocomplete`
 * Add `FAutocomplete.contentOverlayLocation`.
@@ -30,10 +33,12 @@
 
 ### `FDialog`
 * Add `FDialogRouteStyle.defaultBarrierFilter`.
+* Add `FDialogRoute.capturedScopes`.
 
-* **Breaking** Add `FDialogRoute(theme: ...)`.
-* **Breaking** Change `FDialogRouteStyle.barrierFilter` and `FDialogStyle.backgroundFilter` to accept a `FThemeData`.
+* **Breaking** Change `FDialogRouteStyle.barrierFilter` and `FDialogStyle.backgroundFilter` to accept a `BuildContext`.
 * **Breaking** Remove `FDialogRouteStyle.inherit(colors: ...)`. Use `FDialogRouteStyle.inherit()` instead.
+
+* Fix `showFDialog` not restyling the dialog and barrier when the theme changes while open.
 
 
 ### `FHeaderAction`
@@ -56,6 +61,10 @@ rebuilt.
 * Add `FItem.semanticsTooltip` and `FTile.semanticsTooltip`.
 
 
+### `FModalBarrier` & `FAnimatedModalBarrier`
+* **Breaking** Change `FAnimatedModalBarrier.filter` to accept a `BuildContext`.
+
+
 ### `FOverlay`
 * Add `FOverlay.overlayLocation`.
 
@@ -74,7 +83,7 @@ rebuilt.
 * Add `FPopover.overlayLocation`.
 * Add `FPopover.traversalGrouped`.
 
-* **Breaking** Change `FPopoverStyle.barrierFilter` and `FPopoverStyle.backgroundFilter` to accept a `FThemeData`.
+* **Breaking** Change `FPopoverStyle.barrierFilter` and `FPopoverStyle.backgroundFilter` to accept a `BuildContext`.
 
 * Fix `FPopover` content not being traversed immediately after its child.
 
@@ -100,10 +109,12 @@ rebuilt.
 
 ### `FSheet`
 * Add `FModalSheetStyle.defaultBarrierFilter`.
+* Add `FModalSheetRoute.capturedScopes`.
 
-* **Breaking** Add `FModalSheetRoute(theme: ...)`.
-* **Breaking** Change `FModalSheetStyle.barrierFilter` to accept a `FThemeData`.
+* **Breaking** Change `FModalSheetStyle.barrierFilter` to accept a `BuildContext`.
 * **Breaking** Remove `FModalSheetStyle.inherit(colors: ...)`. Use `FModalSheetStyle.inherit()` instead.
+
+* Fix `showFSheet` content not restyling when the theme changes while open.
 
 
 ### `FTappable`
@@ -113,8 +124,16 @@ rebuilt.
 * Fix pressed effect applying to ancestor tappables when a nested tappable is pressed.
 
 
+### `FTheme`
+* Add `FTheme.capture` and `FCapturedTheme`.
+
+
 ### `FTimeField`
 * Add `FTimeFieldPickerProperties.overlayLocation`.
+
+
+### `FToast` & `FToaster`
+* Fix toasts not restyling when the theme changes while shown.
 
 
 ### `FTooltip`

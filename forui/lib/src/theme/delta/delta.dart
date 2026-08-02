@@ -26,7 +26,7 @@ extension Sentinels on Never {
   static const imageFilter = _ImageFilterSentinel();
 
   /// A sentinel value for image filter function fields.
-  static ImageFilter imageFilterFunction(FThemeData theme, double animation) => throw UnimplementedError();
+  static ImageFilter imageFilterFunction(BuildContext context, double animation) => throw UnimplementedError();
 
   /// A sentinel value for border radius fields.
   static const borderRadius = _BorderRadiusSentinel();

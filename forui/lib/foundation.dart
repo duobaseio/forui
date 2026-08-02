@@ -1,7 +1,7 @@
 /// Low-level utilities and services.
 library forui.foundation;
 
-export 'src/foundation/accessibility.dart';
+export 'src/foundation/accessibility.dart' hide AccessibilityScopeElement;
 export 'src/foundation/barrier.dart';
 export 'src/foundation/collapsible.dart';
 export 'src/foundation/doc_templates.dart' hide Control, Focus, FormFieldKey, Scroll, Semantics, TappableGroup;

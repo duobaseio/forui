@@ -2,9 +2,10 @@
 /// choices of Forui widgets.
 library forui.theme;
 
-export 'src/theme/adaptive_scope.dart';
+export 'src/theme/adaptive_scope.dart' hide AdaptiveScopeElement;
 export 'src/theme/border_radius.dart';
 export 'src/theme/breakpoints.dart';
+export 'src/theme/captured_theme.dart';
 export 'src/theme/colors.dart';
 export 'src/theme/delta/decoration.dart';
 export 'src/theme/delta/delta.dart';
@@ -16,7 +17,7 @@ export 'src/theme/haptic_feedback.dart';
 export 'src/theme/icons.dart';
 export 'src/theme/sizes.dart';
 export 'src/theme/style.dart';
-export 'src/theme/theme.dart';
+export 'src/theme/theme.dart' hide InheritedThemeElement;
 export 'src/theme/theme_data.dart';
 export 'src/theme/typography.dart';
 export 'src/theme/variant.dart' hide And, Desktop, Not, Touch, Value, toTextFieldVariants;

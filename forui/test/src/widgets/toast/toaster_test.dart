@@ -5,6 +5,7 @@ import 'package:collection/collection.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 import 'package:forui/forui.dart';
+import 'package:forui/src/widgets/toast/animated_toast.dart';
 import 'package:forui/src/widgets/toast/toaster.dart';
 import '../../test_scaffold.dart';
 
@@ -636,6 +637,42 @@ void main() {
       await tester.pumpAndSettle();
 
       expect(find.text('1'), findsNothing);
+    });
+  });
+
+  group('scope liveness', () {
+    testWidgets('toast restyles when the theme changes while shown', (tester) async {
+      Widget app(FThemeData theme) => TestScaffold.app(
+        theme: theme,
+        child: FToaster(
+          child: Builder(
+            builder: (context) => FButton(
+              onPress: () => showFToast(context: context, title: const Text('toast'), duration: null),
+              child: const Text('button'),
+            ),
+          ),
+        ),
+      );
+
+      FToastStyle resolved(FThemeData theme) =>
+          theme.toasterStyle.toastStyles.resolve({FToastVariant.primary, FPlatformVariant.android});
+
+      await tester.pumpWidget(app(FTheme.neutral.light.touch));
+      await tester.tap(find.text('button'));
+      await tester.pumpAndSettle();
+
+      expect(
+        tester.widget<AnimatedToast>(find.byType(AnimatedToast)).style.decoration,
+        resolved(FTheme.neutral.light.touch).decoration,
+      );
+
+      await tester.pumpWidget(app(FTheme.neutral.dark.touch));
+      await tester.pumpAndSettle();
+
+      expect(
+        tester.widget<AnimatedToast>(find.byType(AnimatedToast)).style.decoration,
+        resolved(FTheme.neutral.dark.touch).decoration,
+      );
     });
   });
 }

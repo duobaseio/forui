@@ -338,14 +338,7 @@ class FToasterState extends State<FToaster> {
           if (resolved.x < 0) .left else if (resolved.x > 0) .right,
         ];
 
-    final entry = ToasterEntry(
-      style(toasterStyle.toastStyles.resolve({variant, context.platformVariant})),
-      resolved,
-      directions,
-      dismissThreshold,
-      duration,
-      builder,
-    );
+    final entry = ToasterEntry(style, variant, resolved, directions, dismissThreshold, duration, builder);
     entry.onDismiss = () {
       entry.dismissing.value = true;
       _remove(entry);
@@ -432,7 +425,8 @@ mixin FToasterEntry {
 @internal
 class ToasterEntry with FToasterEntry {
   final GlobalKey key = GlobalKey();
-  final FToastStyle style;
+  final FToastStyleDelta style;
+  final FToastVariant variant;
   final Alignment alignment;
   List<AxisDirection> swipeToDismiss;
   final double dismissThreshold;
@@ -441,7 +435,15 @@ class ToasterEntry with FToasterEntry {
   final Widget Function(BuildContext context, FToasterEntry entry) builder;
   VoidCallback? onDismiss;
 
-  ToasterEntry(this.style, this.alignment, this.swipeToDismiss, this.dismissThreshold, this.duration, this.builder);
+  ToasterEntry(
+    this.style,
+    this.variant,
+    this.alignment,
+    this.swipeToDismiss,
+    this.dismissThreshold,
+    this.duration,
+    this.builder,
+  );
 
   @override
   void dismiss() {

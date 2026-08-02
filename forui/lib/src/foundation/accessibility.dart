@@ -77,7 +77,7 @@ class FAccessibilityScope extends StatefulWidget {
   ///
   /// It is recommended to use the terser [FAccessibilityContext.accessibleNavigation] getter instead.
   @useResult
-  static bool accessibleNavigationOf(BuildContext context) => InheritedModel.inheritFrom<_Accessibility>(
+  static bool accessibleNavigationOf(BuildContext context) => InheritedModel.inheritFrom<_AccessibilityScope>(
     context,
     aspect: _Aspect.accessibleNavigation,
   )!.data.accessibleNavigation;
@@ -87,14 +87,14 @@ class FAccessibilityScope extends StatefulWidget {
   /// It is recommended to use the terser [FAccessibilityContext.motion] getter instead.
   @useResult
   static FAccessibilityMotion motionOf(BuildContext context) =>
-      InheritedModel.inheritFrom<_Accessibility>(context, aspect: _Aspect.motion)!.data.motion;
+      InheritedModel.inheritFrom<_AccessibilityScope>(context, aspect: _Aspect.motion)!.data.motion;
 
   /// Returns [FAccessibility.focusHighlight] of the nearest [FAccessibilityScope] in the given [context].
   ///
   /// It is recommended to use the terser [FAccessibilityContext.focusHighlight] getter instead.
   @useResult
   static bool focusHighlightOf(BuildContext context) =>
-      InheritedModel.inheritFrom<_Accessibility>(context, aspect: _Aspect.focusHighlight)!.data.focusHighlight;
+      InheritedModel.inheritFrom<_AccessibilityScope>(context, aspect: _Aspect.focusHighlight)!.data.focusHighlight;
 
   /// The features to expose. When null, the platform features are observed instead.
   final FAccessibility? data;
@@ -158,7 +158,7 @@ class _State extends State<FAccessibilityScope> with WidgetsBindingObserver {
   }
 
   @override
-  Widget build(BuildContext context) => _Accessibility(data: widget.data ?? _current, child: widget.child);
+  Widget build(BuildContext context) => _AccessibilityScope(data: widget.data ?? _current, child: widget.child);
 }
 
 /// Provides convenient access to the nearest [FAccessibility].
@@ -173,16 +173,19 @@ extension type FAccessibilityContext(BuildContext context) {
   bool get focusHighlight => FAccessibilityScope.focusHighlightOf(context);
 }
 
-class _Accessibility extends InheritedModel<_Aspect> {
+class _AccessibilityScope extends InheritedModel<_Aspect> {
   final FAccessibility data;
 
-  const _Accessibility({required this.data, required super.child});
+  const _AccessibilityScope({required this.data, required super.child});
 
   @override
-  bool updateShouldNotify(_Accessibility old) => data != old.data;
+  InheritedModelElement<_Aspect> createElement() => AccessibilityScopeElement(this);
 
   @override
-  bool updateShouldNotifyDependent(_Accessibility old, Set<_Aspect> dependencies) =>
+  bool updateShouldNotify(_AccessibilityScope old) => data != old.data;
+
+  @override
+  bool updateShouldNotifyDependent(_AccessibilityScope old, Set<_Aspect> dependencies) =>
       dependencies.contains(_Aspect.accessibleNavigation) &&
           data.accessibleNavigation != old.data.accessibleNavigation ||
       dependencies.contains(_Aspect.motion) && data.motion != old.data.motion ||
@@ -192,5 +195,33 @@ class _Accessibility extends InheritedModel<_Aspect> {
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(DiagnosticsProperty('data', data));
+  }
+}
+
+@internal
+class AccessibilityScopeElement extends InheritedModelElement<_Aspect> {
+  static ValueListenable<FAccessibility>? of(BuildContext context) =>
+      (context.getElementForInheritedWidgetOfExactType<_AccessibilityScope>() as AccessibilityScopeElement?)?.notifier;
+
+  final ValueNotifier<FAccessibility> notifier;
+
+  AccessibilityScopeElement(_AccessibilityScope super.widget) : notifier = ValueNotifier(widget.data);
+
+  @override
+  void update(covariant _AccessibilityScope current) { // ignore: library_private_types_in_public_api
+    notifier.value = current.data;
+    super.update(current);
+  }
+
+  @override
+  void unmount() {
+    notifier.dispose();
+    super.unmount();
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('notifier', notifier));
   }
 }

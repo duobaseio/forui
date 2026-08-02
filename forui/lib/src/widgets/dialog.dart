@@ -20,8 +20,7 @@ part 'dialog.design.dart';
 
 /// Shows a dialog.
 ///
-/// [context] is used to look up the [Navigator] and [FDialogStyle] for the dialog. It is only used when the method is
-/// called. Its corresponding widget can be safely removed from the tree before the sheet is closed.
+/// [context] is used to look up the [Navigator] and [FDialogStyle] for the dialog.
 ///
 /// [useRootNavigator] ensures that the root navigator displays the sheet when `true`. This is useful in the case that a
 /// modal sheet needs to be displayed above all other content but the caller is inside another [Navigator].
@@ -79,14 +78,13 @@ Future<T?> showFDialog<T>({
   final navigator = Navigator.of(context, rootNavigator: useRootNavigator);
   final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
   final dialogRouteStyle = routeStyle(context.theme.dialogRouteStyle);
-  final dialogStyle = style(context.theme.dialogStyle);
 
   return navigator.push(
     FDialogRoute<T>(
       style: dialogRouteStyle,
-      theme: context.theme,
-      builder: (context, animation) => builder(context, dialogStyle, animation),
+      builder: (context, animation) => builder(context, style(context.theme.dialogStyle), animation),
       capturedThemes: InheritedTheme.capture(from: context, to: navigator.context),
+      capturedFTheme: FTheme.capture(from: context, to: navigator.context),
       barrierDismissible: barrierDismissible,
       barrierLabel: barrierLabel ?? localizations.barrierLabel,
       barrierOnTapHint: localizations.barrierOnTapHint(localizations.dialogSemanticsLabel),
@@ -104,11 +102,8 @@ class FDialogRoute<T> extends RawDialogRoute<T> {
   /// The dialog route's style.
   final FDialogRouteStyle style;
 
-  /// The theme passed to [FDialogRouteStyle.barrierFilter].
-  ///
-  /// A barrier is mounted in an [Overlay], outside the [FTheme] that created it, so the theme cannot be read from the
-  /// [BuildContext].
-  final FThemeData theme;
+  /// The captured [FTheme].
+  final FCapturedTheme? capturedFTheme;
 
   @override
   final bool barrierDismissible;
@@ -123,11 +118,11 @@ class FDialogRoute<T> extends RawDialogRoute<T> {
   /// Creates a [FDialogRoute].
   FDialogRoute({
     required this.style,
-    required this.theme,
     required Widget Function(BuildContext context, Animation<double> animation) builder,
     this.barrierDismissible = true,
     this.barrierLabel,
     this.barrierOnTapHint,
+    this.capturedFTheme,
     CapturedThemes? capturedThemes,
     bool useSafeArea = true,
     super.settings,
@@ -137,8 +132,9 @@ class FDialogRoute<T> extends RawDialogRoute<T> {
     super.directionalTraversalEdgeBehavior,
   }) : super(
          pageBuilder: (context, animation, secondaryAnimation) {
-           final child = Builder(builder: (context) => builder(context, animation));
-           Widget dialog = capturedThemes?.wrap(child) ?? child;
+           Widget dialog = Builder(builder: (context) => builder(context, animation));
+           dialog = capturedFTheme?.wrap(dialog) ?? dialog;
+           dialog = capturedThemes?.wrap(dialog) ?? dialog;
            if (useSafeArea) {
              dialog = SafeArea(child: dialog);
            }
@@ -148,12 +144,12 @@ class FDialogRoute<T> extends RawDialogRoute<T> {
 
   @override
   Widget buildModalBarrier() {
+    final Widget barrier;
     if (style.barrierFilter != null && !offstage) {
-      return Builder(
+      barrier = Builder(
         builder: (context) => FAnimatedModalBarrier(
           animation: animation!.drive(CurveTween(curve: barrierCurve)),
           filter: style.barrierFilter,
-          theme: theme,
           onDismiss: barrierDismissible ? () => Navigator.pop(context) : null,
           semanticsLabel: barrierLabel,
           // changedInternalState is called if barrierLabel updates
@@ -162,7 +158,7 @@ class FDialogRoute<T> extends RawDialogRoute<T> {
         ),
       );
     } else {
-      return Builder(
+      barrier = Builder(
         builder: (context) => FModalBarrier(
           filter: null,
           onDismiss: barrierDismissible ? () => Navigator.pop(context) : null,
@@ -173,6 +169,8 @@ class FDialogRoute<T> extends RawDialogRoute<T> {
         ),
       );
     }
+
+    return capturedFTheme?.wrap(barrier) ?? barrier;
   }
 
   @override
@@ -198,19 +196,19 @@ class FDialogRoute<T> extends RawDialogRoute<T> {
 
 /// [FDialogRoute]'s style.
 class FDialogRouteStyle with Diagnosticable, _$FDialogRouteStyleFunctions {
+  /// The default [barrierFilter]. Blurs and tints the content behind the barrier.
+  static ImageFilter defaultBarrierFilter(BuildContext context, double animation) => ImageFilter.compose(
+    outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
+    inner: ColorFilter.mode(FColors.lerpColor(Colors.transparent, context.theme.colors.barrier, animation)!, .srcOver),
+  );
+
   /// {@macro forui.widgets.FPopoverStyle.barrierFilter}
   @override
-  final ImageFilter Function(FThemeData theme, double animation)? barrierFilter;
+  final ImageFilter Function(BuildContext context, double animation)? barrierFilter;
 
   /// Motion-related properties.
   @override
   final FDialogRouteMotion motion;
-
-  /// The default [barrierFilter]. Blurs and tints the content behind the barrier.
-  static ImageFilter defaultBarrierFilter(FThemeData theme, double animation) => ImageFilter.compose(
-    outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
-    inner: ColorFilter.mode(FColors.lerpColor(Colors.transparent, theme.colors.barrier, animation)!, .srcOver),
-  );
 
   /// Creates a [FDialogRouteStyle].
   const FDialogRouteStyle({this.barrierFilter, this.motion = const FDialogRouteMotion()});
@@ -458,11 +456,11 @@ class _FDialogState extends State<FDialog> {
             child: ClipPath(
               clipper: InnerPathClipper(decoration: style.decoration, direction: direction),
               child: _fade == null
-                  ? BackdropFilter(filter: filter(context.theme, 1), child: Container())
+                  ? BackdropFilter(filter: filter(context, 1), child: Container())
                   : AnimatedBuilder(
                       animation: _fade!,
-                      builder: (_, _) =>
-                          BackdropFilter(filter: filter(context.theme, _fade!.value), child: Container()),
+                      builder: (context, _) =>
+                          BackdropFilter(filter: filter(context, _fade!.value), child: Container()),
                     ),
             ),
           ),
@@ -511,7 +509,7 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
   ///
   /// This requires [FDialog.animation] to be non-null.
   @override
-  final ImageFilter Function(FThemeData theme, double animation)? backgroundFilter;
+  final ImageFilter Function(BuildContext context, double animation)? backgroundFilter;
 
   /// The decoration.
   @override

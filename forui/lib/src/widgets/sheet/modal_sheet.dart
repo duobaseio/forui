@@ -18,8 +18,7 @@ part 'modal_sheet.design.dart';
 /// A modal sheet is an alternative to a menu or a dialog and prevents the user from interacting with the rest of the
 /// app.
 ///
-/// [context] is used to look up the [Navigator] and [FSheetStyle] for the sheet. It is only used when the method is
-/// called. Its corresponding widget can be safely removed from the tree before the sheet is closed.
+/// [context] is used to look up the [Navigator] and [FSheetStyle] for the sheet.
 ///
 /// [useRootNavigator] ensures that the root navigator displays the sheet when `true`. This is useful in the case that a
 /// modal sheet needs to be displayed above all other content but the caller is inside another [Navigator].
@@ -94,10 +93,10 @@ Future<T?> showFSheet<T>({
   return navigator.push(
     FModalSheetRoute<T>(
       style: style(context.theme.modalSheetStyle),
-      theme: context.theme,
       side: side,
       builder: builder,
       mainAxisMaxRatio: mainAxisMaxRatio,
+      capturedFTheme: FTheme.capture(from: context, to: navigator.context),
       capturedThemes: InheritedTheme.capture(from: context, to: navigator.context),
       barrierOnTapHint: localizations.barrierOnTapHint(localizations.sheetSemanticsLabel),
       barrierLabel: barrierLabel ?? localizations.barrierLabel,
@@ -135,14 +134,11 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
   /// The style.
   final FModalSheetStyle style;
 
-  /// The theme passed to [FModalSheetStyle.barrierFilter].
-  ///
-  /// A barrier is mounted in an [Overlay], outside the [FTheme] that created it, so the theme cannot be read from the
-  /// [BuildContext].
-  final FThemeData theme;
-
   /// The side.
   final FLayout side;
+
+  /// The captured [FTheme].
+  final FCapturedTheme? capturedFTheme;
 
   /// Stores a list of captured [InheritedTheme]s that are wrapped around the sheet.
   ///
@@ -227,10 +223,10 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
   /// Creates a [FModalSheetRoute].
   FModalSheetRoute({
     required this.style,
-    required this.theme,
     required this.side,
     required this.builder,
     this.mainAxisMaxRatio = 9 / 16,
+    this.capturedFTheme,
     this.capturedThemes,
     this.barrierOnTapHint,
     this.barrierLabel,
@@ -285,17 +281,19 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
       },
     );
 
-    return capturedThemes?.wrap(sheet) ?? sheet;
+    // The scopes are nested inside the captured themes so that their live values shadow the snapshots.
+    final wrapped = capturedFTheme?.wrap(sheet) ?? sheet;
+    return capturedThemes?.wrap(wrapped) ?? wrapped;
   }
 
   @override
   Widget buildModalBarrier() {
+    final Widget barrier;
     if (style.barrierFilter != null && !offstage) {
-      return Builder(
+      barrier = Builder(
         builder: (context) => FAnimatedModalBarrier(
           animation: animation!.drive(CurveTween(curve: barrierCurve)),
           filter: style.barrierFilter,
-          theme: theme,
           onDismiss: barrierDismissible ? () => Navigator.pop(context) : null,
           semanticsLabel: barrierLabel,
           // changedInternalState is called if barrierLabel updates
@@ -305,7 +303,7 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
         ),
       );
     } else {
-      return Builder(
+      barrier = Builder(
         builder: (context) => FModalBarrier(
           filter: null,
           onDismiss: barrierDismissible ? () => Navigator.pop(context) : null,
@@ -317,6 +315,8 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
         ),
       );
     }
+
+    return capturedFTheme?.wrap(barrier) ?? barrier;
   }
 
   @override
@@ -355,12 +355,12 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
 /// A modal sheet's style.
 class FModalSheetStyle extends FSheetStyle with Diagnosticable, _$FModalSheetStyleFunctions {
   /// The default [barrierFilter]. Tints the content behind the barrier.
-  static ImageFilter defaultBarrierFilter(FThemeData theme, double animation) =>
-      ColorFilter.mode(FColors.lerpColor(Colors.transparent, theme.colors.barrier, animation)!, .srcOver);
+  static ImageFilter defaultBarrierFilter(BuildContext context, double animation) =>
+      ColorFilter.mode(FColors.lerpColor(Colors.transparent, context.theme.colors.barrier, animation)!, .srcOver);
 
   /// {@macro forui.widgets.FPopoverStyle.barrierFilter}
   @override
-  final ImageFilter Function(FThemeData theme, double animation)? barrierFilter;
+  final ImageFilter Function(BuildContext context, double animation)? barrierFilter;
 
   /// The motion-related properties for a modal sheet.
   @override

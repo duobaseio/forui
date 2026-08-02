@@ -43,11 +43,42 @@ class FAdaptiveScope extends InheritedWidget {
   FAdaptiveScope({required super.child, FPlatformVariant? platform, super.key}) : platform = platform ?? _platform;
 
   @override
+  InheritedElement createElement() => AdaptiveScopeElement(this);
+
+  @override
   bool updateShouldNotify(FAdaptiveScope old) => platform != old.platform;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
     properties.add(DiagnosticsProperty('platform', platform));
+  }
+}
+
+@internal
+class AdaptiveScopeElement extends InheritedElement {
+  static ValueListenable<FPlatformVariant>? of(BuildContext context) =>
+      (context.getElementForInheritedWidgetOfExactType<FAdaptiveScope>() as AdaptiveScopeElement?)?.notifier;
+
+  final ValueNotifier<FPlatformVariant> notifier;
+
+  AdaptiveScopeElement(FAdaptiveScope super.widget) : notifier = ValueNotifier(widget.platform);
+
+  @override
+  void update(covariant FAdaptiveScope current) {
+    notifier.value = current.platform;
+    super.update(current);
+  }
+
+  @override
+  void unmount() {
+    notifier.dispose();
+    super.unmount();
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('notifier', notifier));
   }
 }

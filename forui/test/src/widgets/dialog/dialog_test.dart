@@ -153,6 +153,184 @@ void main() {
         );
       });
     });
+
+    testWidgets('restyles when the enclosing theme changes while open', (tester) async {
+      Widget app(FThemeData theme) => TestScaffold.app(
+        theme: theme,
+        child: Builder(
+          builder: (context) => FButton(
+            onPress: () => showFDialog(
+              context: context,
+              builder: (context, style, _) => FDialog(style: style, builder: (_, _) => const Text('dialog')),
+            ),
+            child: const Text('button'),
+          ),
+        ),
+      );
+
+      await tester.pumpWidget(app(FTheme.neutral.light.touch));
+      await tester.tap(find.text('button'));
+      await tester.pumpAndSettle();
+
+      ShapeDecoration decoration() =>
+          tester
+                  .widget<DecoratedBox>(
+                    find.descendant(of: find.byType(FDialog), matching: find.byType(DecoratedBox)).first,
+                  )
+                  .decoration
+              as ShapeDecoration;
+
+      expect(decoration().color, FTheme.neutral.light.touch.colors.card);
+
+      await tester.pumpWidget(app(FTheme.neutral.dark.touch));
+      await tester.pumpAndSettle();
+
+      expect(decoration().color, FTheme.neutral.dark.touch.colors.card);
+    });
+
+    group('captured scopes', () {
+      ShapeDecoration decoration(WidgetTester tester) =>
+          tester
+                  .widget<DecoratedBox>(
+                    find.descendant(of: find.byType(FDialog), matching: find.byType(DecoratedBox)).first,
+                  )
+                  .decoration
+              as ShapeDecoration;
+
+      testWidgets('uses nested theme below the navigator and observes changes', (tester) async {
+        Widget app(FThemeData nested) => TestScaffold.app(
+          child: FTheme(
+            data: nested,
+            child: Builder(
+              builder: (context) => FButton(
+                onPress: () => showFDialog(
+                  context: context,
+                  builder: (context, style, _) => FDialog(style: style, builder: (_, _) => const Text('dialog')),
+                ),
+                child: const Text('button'),
+              ),
+            ),
+          ),
+        );
+
+        await tester.pumpWidget(app(TestScaffold.greenOverride));
+        await tester.tap(find.text('button'));
+        await tester.pumpAndSettle();
+
+        expect(decoration(tester).color, TestScaffold.greenOverride.colors.card);
+
+        await tester.pumpWidget(app(TestScaffold.blueOverride));
+        await tester.pumpAndSettle();
+
+        expect(decoration(tester).color, TestScaffold.blueOverride.colors.card);
+      });
+
+      testWidgets('observes nested FAccessibilityScope below the navigator', (tester) async {
+        const all = FAccessibility(accessibleNavigation: false, motion: .all, focusHighlight: false);
+        const disabled = FAccessibility(accessibleNavigation: false, motion: .disabled, focusHighlight: false);
+
+        FAccessibilityMotion? seen;
+        Widget app(FAccessibility accessibility) => TestScaffold.app(
+          child: FAccessibilityScope(
+            data: accessibility,
+            child: Builder(
+              builder: (context) => FButton(
+                onPress: () => showFDialog(
+                  context: context,
+                  builder: (context, style, _) => FDialog(
+                    style: style,
+                    builder: (context, _) {
+                      seen = context.accessibility.motion;
+                      return const Text('dialog');
+                    },
+                  ),
+                ),
+                child: const Text('button'),
+              ),
+            ),
+          ),
+        );
+
+        await tester.pumpWidget(app(all));
+        await tester.tap(find.text('button'));
+        await tester.pumpAndSettle();
+
+        expect(seen, FAccessibilityMotion.all);
+
+        await tester.pumpWidget(app(disabled));
+        await tester.pumpAndSettle();
+
+        expect(seen, FAccessibilityMotion.disabled);
+      });
+
+      testWidgets('observes nested FAdaptiveScope below the navigator', (tester) async {
+        FPlatformVariant? seen;
+        Widget app(FPlatformVariant platform) => TestScaffold.app(
+          child: FAdaptiveScope(
+            platform: platform,
+            child: Builder(
+              builder: (context) => FButton(
+                onPress: () => showFDialog(
+                  context: context,
+                  builder: (context, style, _) => FDialog(
+                    style: style,
+                    builder: (context, _) {
+                      seen = context.platformVariant;
+                      return const Text('dialog');
+                    },
+                  ),
+                ),
+                child: const Text('button'),
+              ),
+            ),
+          ),
+        );
+
+        await tester.pumpWidget(app(.android));
+        await tester.tap(find.text('button'));
+        await tester.pumpAndSettle();
+
+        expect(seen, FPlatformVariant.android);
+
+        await tester.pumpWidget(app(.iOS));
+        await tester.pumpAndSettle();
+
+        expect(seen, FPlatformVariant.iOS);
+      });
+
+      testWidgets('retains captured scopes after the call-site is removed', (tester) async {
+        Widget app({required bool present}) => TestScaffold.app(
+          child: !present
+              ? const SizedBox()
+              : FTheme(
+                  data: TestScaffold.greenOverride,
+                  child: Builder(
+                    builder: (context) => FButton(
+                      onPress: () => showFDialog(
+                        context: context,
+                        builder: (context, style, _) =>
+                            FDialog(style: style, builder: (_, _) => const Text('dialog')),
+                      ),
+                      child: const Text('button'),
+                    ),
+                  ),
+                ),
+        );
+
+        await tester.pumpWidget(app(present: true));
+        await tester.tap(find.text('button'));
+        await tester.pumpAndSettle();
+
+        expect(decoration(tester).color, TestScaffold.greenOverride.colors.card);
+
+        await tester.pumpWidget(app(present: false));
+        await tester.pumpAndSettle();
+
+        expect(tester.takeException(), null);
+        expect(find.text('dialog'), findsOneWidget);
+        expect(decoration(tester).color, TestScaffold.greenOverride.colors.card);
+      });
+    });
   });
 }
 

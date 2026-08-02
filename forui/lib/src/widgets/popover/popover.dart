@@ -472,7 +472,6 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
                     cutoutBuilder: widget.cutoutBuilder,
                     animation: _controller.fade,
                     filter: style.barrierFilter!,
-                    theme: context.theme,
                     semanticsLabel: widget.barrierSemanticsLabel ?? localizations.barrierLabel,
                     barrierSemanticsDismissible: widget.barrierSemanticsDismissible,
                     semanticsOnTapHint: localizations.barrierOnTapHint(localizations.popoverSemanticsLabel),
@@ -527,8 +526,8 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
                       clipper: InnerPathClipper(decoration: style.decoration, direction: direction),
                       child: AnimatedBuilder(
                         animation: _controller.fade,
-                        builder: (_, _) =>
-                            BackdropFilter(filter: filter(context.theme, _controller.fade.value), child: Container()),
+                        builder: (context, _) =>
+                            BackdropFilter(filter: filter(context, _controller.fade.value), child: Container()),
                       ),
                     ),
                   ),
@@ -565,8 +564,8 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
   final Decoration decoration;
 
   /// {@template forui.widgets.FPopoverStyle.barrierFilter}
-  /// An optional callback that takes the current animation transition value (0.0 to 1.0) and returns an [ImageFilter]
-  /// that is used as the barrier. Defaults to null.
+  /// An optional callback that takes a [BuildContext] and the current animation transition value (0.0 to 1.0), and
+  /// returns an [ImageFilter] that is used as the barrier. Defaults to null.
   ///
   /// Prefer a static function over a closure literal. A closure literal is never equal to another, which causes widgets
   /// to flicker when the same theme is recreated.
@@ -574,23 +573,26 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
   /// ## Examples
   /// ```dart
   /// // Blurred
-  /// (animation) => ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5);
+  /// (context, animation) => ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5);
   ///
   /// // Solid color
-  /// (animation) => ColorFilter.mode(Colors.white.withValues(alpha: animation), BlendMode.srcOver);
+  /// (context, animation) => ColorFilter.mode(Colors.white.withValues(alpha: animation), BlendMode.srcOver);
   ///
   /// // Tinted
-  /// (animation) => ColorFilter.mode(Colors.white.withValues(alpha: animation * 0.5), BlendMode.srcOver);
+  /// (context, animation) => ColorFilter.mode(
+  ///   context.theme.colors.barrier.withValues(alpha: animation * 0.5),
+  ///   BlendMode.srcOver,
+  /// );
   ///
   /// // Blurred & tinted
-  /// (animation) => ImageFilter.compose(
+  /// (context, animation) => ImageFilter.compose(
   ///   outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
   ///   inner: ColorFilter.mode(Colors.white.withValues(alpha: animation * 0.5), BlendMode.srcOver),
   /// );
   /// ```
   /// {@endtemplate}
   @override
-  final ImageFilter Function(FThemeData theme, double animation)? barrierFilter;
+  final ImageFilter Function(BuildContext context, double animation)? barrierFilter;
 
   /// {@template forui.widgets.FPopoverStyle.backgroundFilter}
   /// An optional callback that takes the current animation transition value (0.0 to 1.0) and returns an [ImageFilter]
@@ -604,23 +606,23 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
   /// ## Examples
   /// ```dart
   /// // Blurred
-  /// (animation) => ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5);
+  /// (context, animation) => ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5);
   ///
   /// // Solid color
-  /// (animation) => ColorFilter.mode(Colors.white.withValues(alpha: animation), BlendMode.srcOver);
+  /// (context, animation) => ColorFilter.mode(Colors.white.withValues(alpha: animation), BlendMode.srcOver);
   ///
   /// // Tinted
-  /// (animation) => ColorFilter.mode(Colors.white.withValues(alpha: animation * 0.5), BlendMode.srcOver);
+  /// (context, animation) => ColorFilter.mode(Colors.white.withValues(alpha: animation * 0.5), BlendMode.srcOver);
   ///
   /// // Blurred & tinted
-  /// (animation) => ImageFilter.compose(
+  /// (context, animation) => ImageFilter.compose(
   ///   outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
   ///   inner: ColorFilter.mode(Colors.white.withValues(alpha: animation * 0.5), BlendMode.srcOver),
   /// );
   /// ```
   /// {@endtemplate}
   @override
-  final ImageFilter Function(FThemeData theme, double animation)? backgroundFilter;
+  final ImageFilter Function(BuildContext context, double animation)? backgroundFilter;
 
   /// The additional padding between the edges of the view and the edges of the popover.
   ///
