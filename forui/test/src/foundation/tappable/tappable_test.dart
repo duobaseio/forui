@@ -1299,11 +1299,7 @@ void main() {
     });
 
     testWidgets('disabled without onDisabledPress has no tap action', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: const FTappable.static(child: Text('tappable')),
-        ),
-      );
+      await tester.pumpWidget(TestScaffold.app(child: const FTappable.static(child: Text('tappable'))));
 
       expect(
         tester.getSemantics(find.text('tappable')),
