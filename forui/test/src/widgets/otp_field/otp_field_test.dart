@@ -10,9 +10,7 @@ void main() {
     await tester.pumpWidget(TestScaffold.app(child: FOtpField()));
 
     final field = tester.getRect(find.byType(FOtpField));
-    final boxes = tester.getRect(
-      find.descendant(of: find.byType(FOtpField), matching: find.byType(IntrinsicWidth)),
-    );
+    final boxes = tester.getRect(find.descendant(of: find.byType(FOtpField), matching: find.byType(IntrinsicWidth)));
     expect(boxes.top, field.top);
     expect(boxes.bottom, field.bottom);
     expect(boxes.left, field.left);

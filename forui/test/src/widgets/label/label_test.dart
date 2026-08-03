@@ -57,11 +57,11 @@ void main() {
             alignment: .topLeft,
             child: SizedBox(
               width: width,
-              child: FLabel(
+              child: const FLabel(
                 layout: .horizontalLeading,
-                label: const Text('Label'),
-                description: const Text('Description'),
-                child: const SizedBox(key: Key('child'), width: 20, height: 20),
+                label: Text('Label'),
+                description: Text('Description'),
+                child: SizedBox(key: Key('child'), width: 20, height: 20),
               ),
             ),
           ),
@@ -80,11 +80,11 @@ void main() {
             alignment: .topLeft,
             child: SizedBox(
               width: width,
-              child: FLabel(
+              child: const FLabel(
                 layout: .horizontalTrailing,
-                label: const Text('Label'),
-                description: const Text('Description'),
-                child: const SizedBox(key: Key('child'), width: 20, height: 20),
+                label: Text('Label'),
+                description: Text('Description'),
+                child: SizedBox(key: Key('child'), width: 20, height: 20),
               ),
             ),
           ),

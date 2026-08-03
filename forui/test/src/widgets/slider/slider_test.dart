@@ -39,11 +39,7 @@ void main() {
 
   group('track is flush with layout edges', () {
     testWidgets('horizontal', (tester) async {
-      await tester.pumpWidget(
-        TestScaffold.app(
-          child: SizedBox(width: 320, child: FSlider(control: const .managedContinuous())),
-        ),
-      );
+      await tester.pumpWidget(TestScaffold.app(child: SizedBox(width: 320, child: FSlider())));
 
       final slider = tester.getRect(find.byType(FSlider));
       final track = tester.getRect(find.byType(Track));
@@ -56,7 +52,7 @@ void main() {
     testWidgets('vertical', (tester) async {
       await tester.pumpWidget(
         TestScaffold.app(
-          child: SizedBox(height: 320, child: FSlider(layout: .ttb, control: const .managedContinuous())),
+          child: SizedBox(height: 320, child: FSlider(layout: .ttb)),
         ),
       );
 
