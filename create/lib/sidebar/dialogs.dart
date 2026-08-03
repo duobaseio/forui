@@ -1,7 +1,9 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart' show ThemeMode;
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../selection.dart';
 import 'controls.dart';
@@ -47,68 +49,130 @@ class GetCodeDialog extends StatelessWidget {
   const GetCodeDialog({required this.code, required this.animation, super.key});
 
   @override
+  Widget build(BuildContext context) => FDialog(
+    animation: animation,
+    constraints: const BoxConstraints.tightFor(width: 420),
+    builder: (context, style) => Padding(
+      padding: const .all(20),
+      child: Column(
+        mainAxisSize: .min,
+        crossAxisAlignment: .stretch,
+        children: [
+          _DialogHeader(
+            title: 'Get Code',
+            subtitle: 'Run these commands in your Flutter project to apply the theme.',
+            style: style,
+          ),
+          const SizedBox(height: 16),
+          const _Command(title: '1. Install Forui', command: 'flutter pub add forui'),
+          const SizedBox(height: 16),
+          _Command(title: '2. Initialize Forui with theme', command: 'dart run forui init --preset $code'),
+          const SizedBox(height: 20),
+          const _Support(),
+        ],
+      ),
+    ),
+  );
+}
+
+class _Command extends StatelessWidget {
+  final String title;
+  final String command;
+
+  const _Command({required this.title, required this.command});
+
+  @override
   Widget build(BuildContext context) {
     final theme = context.theme;
-    final command = 'flutter pub add forui\ndart run forui init --preset $code';
     final mono = theme.typography.body.sm.copyWith(fontFamily: 'JetBrains Mono', color: theme.colors.foreground);
 
-    return FDialog(
-      animation: animation,
-      constraints: const BoxConstraints.tightFor(width: 420),
-      builder: (context, style) => Padding(
-        padding: const .all(20),
-        child: Column(
-          mainAxisSize: .min,
-          crossAxisAlignment: .stretch,
-          children: [
-            _DialogHeader(
-              title: 'Get Code',
-              subtitle: 'Run this in your Flutter project to apply the theme.',
-              style: style,
-            ),
-            const SizedBox(height: 16),
-            DecoratedBox(
-              decoration: BoxDecoration(
-                color: theme.colors.secondary,
-                borderRadius: theme.style.borderRadius.md,
-                border: Border.all(color: theme.colors.border),
-              ),
-              child: Padding(
-                padding: const .fromLTRB(12, 12, 8, 12),
-                child: Row(
-                  crossAxisAlignment: .start,
-                  children: [
-                    Expanded(child: Text(command, style: mono)),
-                    Copyable(
-                      text: command,
-                      builder: (context, copied, copy) => FButton.icon(
-                        variant: .ghost,
-                        size: .xs,
-                        onPress: copy,
-                        child: Icon(
-                          copied ? FLucideIcons.check : FLucideIcons.copy,
-                          size: 16,
-                          color: theme.colors.mutedForeground,
-                        ),
-                      ),
+    return Column(
+      crossAxisAlignment: .stretch,
+      children: [
+        Text(title, style: theme.typography.body.sm.copyWith(fontWeight: .w600, color: theme.colors.foreground)),
+        const SizedBox(height: 6),
+        DecoratedBox(
+          decoration: BoxDecoration(
+            color: theme.colors.secondary,
+            borderRadius: theme.style.borderRadius.md,
+            border: Border.all(color: theme.colors.border),
+          ),
+          child: Padding(
+            padding: const .fromLTRB(12, 8, 8, 8),
+            child: Row(
+              children: [
+                Expanded(child: Text(command, style: mono)),
+                Copyable(
+                  text: command,
+                  builder: (context, copied, copy) => FButton.icon(
+                    variant: .ghost,
+                    size: .xs,
+                    onPress: copy,
+                    child: Icon(
+                      copied ? FLucideIcons.check : FLucideIcons.copy,
+                      size: 16,
+                      color: theme.colors.mutedForeground,
                     ),
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
-            const SizedBox(height: 12),
-            Copyable(
-              text: command,
-              builder: (context, copied, copy) => FButton(
-                key: const ValueKey('copy-command'),
-                onPress: copy,
-                child: Text(copied ? 'Copied' : 'Copy Command'),
-              ),
-            ),
-          ],
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _Support extends StatefulWidget {
+  const _Support();
+
+  @override
+  State<_Support> createState() => _SupportState();
+}
+
+class _SupportState extends State<_Support> {
+  late TapGestureRecognizer _github;
+  late TapGestureRecognizer _pub;
+
+  @override
+  void initState() {
+    super.initState();
+    _github = TapGestureRecognizer()..onTap = () => launchUrl(Uri.parse('https://github.com/duobaseio/forui'));
+    _pub = TapGestureRecognizer()..onTap = () => launchUrl(Uri.parse('https://pub.dev/packages/forui'));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final link = TextStyle(color: context.theme.colors.foreground, decoration: TextDecoration.underline);
+
+    return FAlert(
+      liveRegion: false,
+      style: .delta(titleTextStyle: .delta(fontWeight: .w600)),
+      icon: const Icon(FLucideIcons.heart),
+      title: const Text('Enjoying Forui?'),
+      subtitle: Padding(
+        padding: const .only(top: 4),
+        child: Text.rich(
+          TextSpan(
+            children: [
+              const TextSpan(text: 'Support the project by starring the repo on '),
+              TextSpan(text: 'GitHub', style: link, recognizer: _github, mouseCursor: SystemMouseCursors.click),
+              const TextSpan(text: ' and liking it on '),
+              TextSpan(text: 'pub.dev', style: link, recognizer: _pub, mouseCursor: SystemMouseCursors.click),
+              const TextSpan(text: '.'),
+            ],
+          ),
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _github.dispose();
+    _pub.dispose();
+    super.dispose();
   }
 }
 

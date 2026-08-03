@@ -1,8 +1,43 @@
+import 'dart:convert';
+
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
+import 'package:http/http.dart' as http;
 import 'package:remixicon/remixicon.dart' as remix;
 import 'package:url_launcher/url_launcher.dart';
+
+/// The number of GitHub stars, or null if they could not be fetched.
+final Future<int?> _stars = () async {
+  try {
+    final response = await http.get(Uri.parse('https://api.github.com/repos/duobaseio/forui'));
+    if (response.statusCode != 200) {
+      return null;
+    }
+
+    return switch (jsonDecode(response.body)) {
+      {'stargazers_count': final int stars} => stars,
+      _ => null,
+    };
+  } on Exception {
+    return null;
+  }
+}();
+
+void _openGitHub() => launchUrl(Uri.parse('https://github.com/duobaseio/forui'));
+
+String _abbreviate(int stars) {
+  if (stars < 1000) {
+    return '$stars';
+  }
+
+  final tenths = (stars / 100).round();
+  if (tenths < 100 && tenths % 10 != 0) {
+    return '${tenths ~/ 10}.${tenths % 10}k';
+  }
+
+  return '${(stars / 1000).round()}k';
+}
 
 /// The header.
 class TopBar extends StatelessWidget {
@@ -29,20 +64,33 @@ class TopBar extends StatelessWidget {
               onPress: onMenu,
               child: const Icon(FLucideIcons.menu),
             ),
-          _Logo(height: compact ? 20 : 24),
-          const Spacer(),
-          FButton(
-            variant: .ghost,
-            prefix: const Icon(remix.RemixIcons.github_fill),
-            onPress: () => launchUrl(Uri.parse('https://github.com/forus-labs/forui')),
-            child: const Text('GitHub'),
+          FTappable(
+            semanticsLabel: 'forui.dev',
+            onPress: () => launchUrl(Uri.parse('https://forui.dev')),
+            child: _Logo(height: compact ? 20 : 24),
           ),
+          const Spacer(),
           if (!compact)
             FButton(
               variant: .ghost,
-              onPress: () => launchUrl(Uri.parse('https://forui.dev')),
-              child: const Text('forui.dev'),
+              onPress: () => launchUrl(Uri.parse('https://forui.dev/docs')),
+              child: const Text('Documentation'),
             ),
+          FutureBuilder(
+            future: _stars,
+            builder: (context, snapshot) => switch (snapshot.data) {
+              final stars? => FButton(
+                variant: .ghost,
+                prefix: const Icon(remix.RemixIcons.github_fill, size: 18),
+                onPress: _openGitHub,
+                child: Text(
+                  _abbreviate(stars),
+                  style: context.theme.typography.body.sm.copyWith(color: context.theme.colors.mutedForeground),
+                ),
+              ),
+              null => FButton(variant: .ghost, onPress: _openGitHub, child: const Text('GitHub')),
+            },
+          ),
         ],
       ),
     );
