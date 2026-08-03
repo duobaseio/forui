@@ -1,0 +1,55 @@
+name: Create Deploy
+
+on:
+  push:
+    branches: [main]
+    tags:
+      - forui/*
+    paths:
+      - '.github/workflows/create_deploy.yaml'
+      - 'create/**'
+  workflow_dispatch:
+    inputs:
+      target:
+        type: choice
+        description: 'Environment'
+        required: true
+        options:
+          - development
+          - production
+
+permissions:
+  contents: read
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: create
+  cancel-in-progress: false
+
+jobs:
+  create:
+    name: Deploy Create
+    runs-on: ubuntu-latest
+    environment: ${{ (startsWith(github.ref, 'refs/tags/forui/') || inputs.target == 'production') && 'create-production' || 'create-development' }}
+    defaults:
+      run:
+        working-directory: ./create
+    steps:
+      - uses: actions/checkout@v7
+      - uses: subosito/flutter-action@v2.23.0
+      - working-directory: forui
+        run: |
+          flutter pub get
+          dart run build_runner build
+      - run: flutter pub get
+      - run: flutter test
+      - run: flutter build web
+
+      - name: Deploy to Cloudflare Workers
+        uses: cloudflare/wrangler-action@v4
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: create
+          command: deploy ${{ vars.DEPLOY_ARGS }}

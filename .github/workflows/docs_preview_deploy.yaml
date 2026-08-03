@@ -117,6 +117,7 @@ jobs:
         with:
           issue-number: ${{ steps.meta.outputs.pr_number }}
           comment-author: 'auto-maid[bot]'
+          body-includes: 'Documentation Preview'
       - uses: chuhlomin/render-template@v1.12
         id: render-markdown
         with:

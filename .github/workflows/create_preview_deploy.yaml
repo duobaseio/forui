@@ -1,0 +1,96 @@
+name: Create Preview Deploy
+on:
+  workflow_run:
+    workflows: ["Create Preview Build"]
+    types: [completed]
+
+permissions:
+  actions: read
+  contents: read
+  pull-requests: read
+
+jobs:
+  deploy:
+    name: Deploy Create
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+    environment: create-development
+    steps:
+      # Derive PR identity from the trusted workflow_run event, not from build-job artifacts.
+      - id: meta
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          HEAD_BRANCH: ${{ github.event.workflow_run.head_branch }}
+          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
+          REPO: ${{ github.repository }}
+        # A single SHA can belong to multiple PRs, so disambiguate by the trusted head branch instead of taking .[0].
+        #
+        # Read the (untrusted) branch via jq's env builtin so it is treated as data. Interpolating $HEAD_BRANCH into
+        # the jq program would let a branch name containing a double quote break out of the string literal and inject
+        # jq (e.g. forge pr_number, or read env via the env builtin).
+        run: |
+          echo "full_sha=$HEAD_SHA" >> "$GITHUB_OUTPUT"
+
+          PR=$(gh api "repos/$REPO/commits/$HEAD_SHA/pulls" \
+            --jq 'first(.[] | select(.state == "open" and .head.ref == env.HEAD_BRANCH) | .number)')
+          echo "pr_number=$PR" >> "$GITHUB_OUTPUT"
+
+      # Check out the wrangler config and comment template from main so the untrusted build job cannot tamper with
+      # them. The artifact is downloaded to an isolated path and copied into place as static assets only.
+      - uses: actions/checkout@v7
+        with:
+          ref: main
+          sparse-checkout: |
+            create/wrangler.jsonc
+            .github/create_preview_template.md
+      - uses: actions/download-artifact@v8
+        with:
+          name: create-build
+          path: ./_artifact
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.workflow_run.id }}
+      - run: |
+          mkdir -p create/build
+          cp -r _artifact create/build/web
+
+      # Upload a new version of the dev worker without deploying it, yielding a per-version preview URL.
+      - uses: cloudflare/wrangler-action@v4
+        id: upload
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+          workingDirectory: create
+          command: versions upload --env dev
+      - id: preview-url
+        env:
+          COMMAND_OUTPUT: ${{ steps.upload.outputs.command-output }}
+        run: |
+          URL=$(echo "$COMMAND_OUTPUT" | grep "Version Preview URL:" | awk '{print $NF}')
+          echo "url=$URL" >> "$GITHUB_OUTPUT"
+
+      # Create/update comment with link to preview
+      - uses: actions/create-github-app-token@v3
+        id: generate-token
+        with:
+          app-id: ${{ secrets.AUTO_MAID_APP_ID }}
+          private-key: ${{ secrets.AUTO_MAID_PRIVATE_KEY }}
+      - uses: peter-evans/find-comment@v4
+        id: find-comment
+        with:
+          issue-number: ${{ steps.meta.outputs.pr_number }}
+          comment-author: 'auto-maid[bot]'
+          body-includes: 'Create Preview'
+      - uses: chuhlomin/render-template@v1.12
+        id: render-markdown
+        with:
+          template: .github/create_preview_template.md
+          vars: |
+            sha: ${{ steps.meta.outputs.full_sha }}
+            url: ${{ steps.preview-url.outputs.url }}
+      - uses: peter-evans/create-or-update-comment@v5
+        with:
+          token: ${{ steps.generate-token.outputs.token }}
+          comment-id: ${{ steps.find-comment.outputs.comment-id }}
+          issue-number: ${{ steps.meta.outputs.pr_number }}
+          body: ${{ steps.render-markdown.outputs.result }}
+          edit-mode: replace

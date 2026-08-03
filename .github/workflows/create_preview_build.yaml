@@ -1,0 +1,33 @@
+name: Create Preview Build
+on:
+  pull_request:
+    branches: [ main ]
+    paths:
+      - '.github/workflows/create_preview_build.yaml'
+      - '.github/workflows/create_preview_deploy.yaml'
+      - 'create/**'
+
+permissions:
+  contents: read
+
+jobs:
+  build:
+    name: Build Create
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - uses: subosito/flutter-action@v2.23.0
+      - working-directory: forui
+        run: |
+          flutter pub get
+          dart run build_runner build
+      - working-directory: create
+        run: |
+          flutter pub get
+          flutter test
+          flutter build web
+      - uses: actions/upload-artifact@v7
+        with:
+          name: create-build
+          path: ./create/build/web
+          retention-days: 1

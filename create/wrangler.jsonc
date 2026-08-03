@@ -1,0 +1,14 @@
+{
+	"name": "forui-create-prod",
+	"compatibility_date": "2026-08-03",
+	"assets": {
+		"directory": "build/web",
+		// Serve index.html for unmatched paths so usePathUrlStrategy() deep links work.
+		"not_found_handling": "single-page-application"
+	},
+	"env": {
+		"dev": {
+			"name": "forui-create-dev"
+		}
+	}
+}
