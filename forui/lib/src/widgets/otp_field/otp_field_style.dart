@@ -107,7 +107,6 @@ class FOtpFieldStyle extends FLabelStyle with _$FOtpFieldStyleFunctions {
          labelTextStyle: style.formFieldStyle.labelTextStyle,
          descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,
          errorTextStyle: style.formFieldStyle.errorTextStyle,
-         childPadding: const .symmetric(vertical: 2),
        );
 }
 

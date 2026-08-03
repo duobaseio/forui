@@ -335,7 +335,7 @@ class _HorizontalLeadingState extends _State<_HorizontalLeadingLabel> {
   Widget build(BuildContext context) => Table(
     defaultColumnWidth: const IntrinsicColumnWidth(),
     defaultVerticalAlignment: .middle,
-    columnWidths: const {0: IntrinsicColumnWidth(), 1: IntrinsicColumnWidth()},
+    columnWidths: const {0: FlexColumnWidth(), 1: IntrinsicColumnWidth()},
     children: [
       TableRow(
         children: [
@@ -585,15 +585,15 @@ class FLabelStyles with Diagnosticable, _$FLabelStylesFunctions {
   FLabelStyles.inherit({required FStyle style})
     : horizontalLeadingStyle = .inherit(
         style: style,
-        descriptionPadding: const .only(top: 2),
-        errorPadding: const .only(top: 2),
-        childPadding: const .symmetric(horizontal: 12),
+        labelPadding: const .directional(end: 12),
+        descriptionPadding: const .directional(top: 2, end: 12),
+        errorPadding: const .directional(top: 2, end: 12),
       ),
       horizontalTrailingStyle = .inherit(
         style: style,
-        descriptionPadding: const .only(top: 2),
-        errorPadding: const .only(top: 2),
-        childPadding: const .symmetric(horizontal: 8),
+        labelPadding: const .directional(start: 8),
+        descriptionPadding: const .directional(top: 2, start: 8),
+        errorPadding: const .directional(top: 2, start: 8),
       ),
       verticalStyle = .inherit(
         style: style,

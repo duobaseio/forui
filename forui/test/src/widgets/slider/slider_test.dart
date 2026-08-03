@@ -37,6 +37,36 @@ void main() {
     }
   });
 
+  group('track is flush with layout edges', () {
+    testWidgets('horizontal', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: SizedBox(width: 320, child: FSlider(control: const .managedContinuous())),
+        ),
+      );
+
+      final slider = tester.getRect(find.byType(FSlider));
+      final track = tester.getRect(find.byType(Track));
+      expect(track.left, slider.left);
+      expect(track.right, slider.right);
+      expect(track.top, slider.top);
+      expect(track.bottom, slider.bottom);
+    });
+
+    testWidgets('vertical', (tester) async {
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: SizedBox(height: 320, child: FSlider(layout: .ttb, control: const .managedContinuous())),
+        ),
+      );
+
+      final slider = tester.getRect(find.byType(FSlider));
+      final track = tester.getRect(find.byType(Track));
+      expect(track.top, slider.top);
+      expect(track.bottom, slider.bottom);
+    });
+  });
+
   group('value slider tooltip', () {
     Widget slider({FSliderValue? value, FSliderInteraction interaction = .tapAndSlideThumb}) => TestScaffold.app(
       child: FSlider(

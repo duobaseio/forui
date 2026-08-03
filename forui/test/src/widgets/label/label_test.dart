@@ -35,6 +35,66 @@ void main() {
     expect(find.text('Child'), findsOneWidget);
   });
 
+  testWidgets('horizontal layouts do not pad child when label, description, and error are null', (tester) async {
+    for (final layout in [FLabelLayout.horizontalLeading, FLabelLayout.horizontalTrailing]) {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: Center(
+            child: FLabel(layout: layout, child: const SizedBox(width: 20, height: 20)),
+          ),
+        ),
+      );
+
+      expect(tester.getSize(find.byType(FLabel)), const Size(20, 20));
+    }
+  });
+
+  testWidgets('horizontal leading child is flush with the end edge', (tester) async {
+    for (final width in [null, 320.0]) {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: Align(
+            alignment: .topLeft,
+            child: SizedBox(
+              width: width,
+              child: FLabel(
+                layout: .horizontalLeading,
+                label: const Text('Label'),
+                description: const Text('Description'),
+                child: const SizedBox(key: Key('child'), width: 20, height: 20),
+              ),
+            ),
+          ),
+        ),
+      );
+
+      expect(tester.getTopRight(find.byKey(const Key('child'))).dx, tester.getTopRight(find.byType(FLabel)).dx);
+    }
+  });
+
+  testWidgets('horizontal trailing child is flush with the start edge', (tester) async {
+    for (final width in [null, 320.0]) {
+      await tester.pumpWidget(
+        TestScaffold(
+          child: Align(
+            alignment: .topLeft,
+            child: SizedBox(
+              width: width,
+              child: FLabel(
+                layout: .horizontalTrailing,
+                label: const Text('Label'),
+                description: const Text('Description'),
+                child: const SizedBox(key: Key('child'), width: 20, height: 20),
+              ),
+            ),
+          ),
+        ),
+      );
+
+      expect(tester.getTopLeft(find.byKey(const Key('child'))).dx, tester.getTopLeft(find.byType(FLabel)).dx);
+    }
+  });
+
   testWidgets('renders error even when label and description are null', (tester) async {
     await tester.pumpWidget(
       TestScaffold(

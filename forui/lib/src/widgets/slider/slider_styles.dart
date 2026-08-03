@@ -37,7 +37,6 @@ extension type FSliderStyles(
       labelAnchor: .topCenter,
       labelOffset: 10,
       descriptionPadding: const .only(top: 10),
-      childPadding: const .only(top: 10, bottom: 20, left: 10, right: 10),
     );
 
     return FSliderStyles(
@@ -51,7 +50,6 @@ extension type FSliderStyles(
             tooltipTipAnchor: .centerLeft,
             tooltipThumbAnchor: .centerRight,
             descriptionPadding: .value(.only(top: 5)),
-            childPadding: .value(.all(10)),
           ),
           [.vertical.and(.touch)]: const .delta(
             markStyle: .delta(labelAnchor: .centerRight, labelOffset: -10),
@@ -59,7 +57,6 @@ extension type FSliderStyles(
             tooltipThumbAnchor: .topCenter,
             thumbSize: 25,
             descriptionPadding: .value(.only(top: 5)),
-            childPadding: .value(.all(10)),
           ),
         },
       ),
@@ -162,7 +159,7 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
     this.thumbSize = 16,
     this.tooltipTipAnchor = .bottomCenter,
     this.tooltipThumbAnchor = .topCenter,
-    super.labelPadding = const .only(bottom: 5),
+    super.labelPadding = const .only(bottom: 15),
     super.descriptionPadding,
     super.errorPadding = const .only(top: 5),
     super.childPadding,
@@ -178,7 +175,7 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
     required AlignmentGeometry labelAnchor,
     required double labelOffset,
     required EdgeInsetsGeometry descriptionPadding,
-    required EdgeInsetsGeometry childPadding,
+    EdgeInsetsGeometry childPadding = .zero,
     AlignmentGeometry tooltipTipAnchor = .bottomCenter,
     AlignmentGeometry tooltipThumbAnchor = .topCenter,
   }) : this(

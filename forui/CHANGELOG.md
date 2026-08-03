@@ -1,3 +1,14 @@
+## 0.26.0
+
+### `FLabel`, `FCheckbox`, `FOtpField`, `FRadio`, `FSelectGroup`, `FSlider` & `FSwitch`
+* Change `FLabel`'s horizontal layouts to place the gap between the label and child in `labelPadding`,
+  `descriptionPadding` and `errorPadding` instead of `childPadding`.
+* Change `FSliderStyle.labelPadding`'s default from `EdgeInsets.only(bottom: 5)` to `EdgeInsets.only(bottom: 15)`.
+
+* Fix dead space around the control even when no label, description and error is given.
+* Fix control not being flush with the layout edges, misaligning it with sibling form fields.
+
+
 ## 0.25.0
 
 This update continues with our ongoing effort to improve Forui's accessibility. It also includes several QoL improvements
