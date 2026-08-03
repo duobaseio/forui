@@ -1,12 +1,12 @@
 {
-    "name": "create",
-    "short_name": "create",
+    "name": "Forui Create",
+    "short_name": "Forui Create",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
-    "orientation": "portrait-primary",
+    "background_color": "#FFFFFF",
+    "theme_color": "#FFFFFF",
+    "description": "Build a Forui theme and use it directly in your Flutter app.",
+    "orientation": "any",
     "prefer_related_applications": false,
     "icons": [
         {
