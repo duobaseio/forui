@@ -17,6 +17,7 @@ final contextMenu = FContextMenu(
   useViewPadding: true,
   useViewInsets: true,
   offset: .zero,
+  overlayLocation: .nearestOverlay,
   cutout: false,
   cutoutBuilder: FModalBarrier.defaultCutoutBuilder,
   // {@endcategory}
@@ -72,6 +73,7 @@ final contextMenuTiles = FContextMenu.tiles(
   useViewPadding: true,
   useViewInsets: true,
   offset: .zero,
+  overlayLocation: .nearestOverlay,
   cutout: false,
   cutoutBuilder: FModalBarrier.defaultCutoutBuilder,
   // {@endcategory}

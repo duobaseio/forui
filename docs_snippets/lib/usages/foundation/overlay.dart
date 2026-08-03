@@ -9,6 +9,7 @@ final overlay = FOverlay(
   control: const .managed(),
   // {@endcategory}
   // {@category "Core"}
+  overlayLocation: .nearestOverlay,
   overlay: const [Positioned(top: 42, left: 0, child: Text('Overlay content'))],
   overlayBuilder: (context, controller, childRenderBox, overlay) => overlay,
   builder: (context, controller, child) => child!,

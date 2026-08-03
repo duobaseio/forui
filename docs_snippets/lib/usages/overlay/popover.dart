@@ -17,6 +17,7 @@ final popover = FPopover(
   useViewPadding: true,
   useViewInsets: true,
   offset: .zero,
+  overlayLocation: .nearestOverlay,
   cutout: true,
   cutoutBuilder: FModalBarrier.defaultCutoutBuilder,
   // {@endcategory}
@@ -31,6 +32,7 @@ final popover = FPopover(
   onFocusChange: (focused) {},
   semanticsLabel: 'Popover',
   traversalEdgeBehavior: null,
+  traversalGrouped: true,
   barrierSemanticsLabel: null,
   barrierSemanticsDismissible: true,
   shortcuts: null,

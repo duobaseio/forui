@@ -17,6 +17,7 @@ final pointPortal = FPointPortal(
   padding: .zero,
   useViewPadding: true,
   useViewInsets: true,
+  overlayLocation: .nearestOverlay,
   // {@endcategory}
   // {@category "Core"}
   point: const Offset(100, 100),

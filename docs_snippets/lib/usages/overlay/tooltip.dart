@@ -15,6 +15,7 @@ final tooltip = FTooltip(
   overflow: .flip,
   useViewPadding: true,
   useViewInsets: true,
+  overlayLocation: .nearestOverlay,
   // {@endcategory}
   // {@category "Behavior"}
   hover: true,

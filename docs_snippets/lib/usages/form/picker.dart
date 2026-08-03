@@ -24,6 +24,8 @@ final pickerWheel = FPickerWheel(
   autofocus: false,
   focusNode: null,
   onFocusChange: (focused) {},
+  semanticsLabel: 'Hour',
+  semanticsValueBuilder: (index) => '$index',
   // {@endcategory}
   // {@category "Core"}
   loop: false,
@@ -38,6 +40,8 @@ final pickerWheelBuilder = FPickerWheel.builder(
   autofocus: false,
   focusNode: null,
   onFocusChange: (focused) {},
+  semanticsLabel: 'Hour',
+  semanticsValueBuilder: (index) => '$index',
   // {@endcategory}
   // {@category "Core"}
   flex: 1,

@@ -18,6 +18,7 @@ final popoverMenu = FPopoverMenu(
   useViewPadding: true,
   useViewInsets: true,
   offset: .zero,
+  overlayLocation: .nearestOverlay,
   cutout: true,
   cutoutBuilder: FModalBarrier.defaultCutoutBuilder,
   // {@endcategory}
@@ -73,6 +74,7 @@ final popoverMenuTiles = FPopoverMenu.tiles(
   useViewPadding: true,
   useViewInsets: true,
   offset: .zero,
+  overlayLocation: .nearestOverlay,
   cutout: true,
   cutoutBuilder: FModalBarrier.defaultCutoutBuilder,
   // {@endcategory}

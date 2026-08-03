@@ -18,8 +18,10 @@ final portal = FPortal(
   padding: .zero,
   useViewPadding: true,
   useViewInsets: true,
+  overlayLocation: .nearestOverlay,
   // {@endcategory}
   // {@category "Core"}
+  traversalGrouped: true,
   portalBuilder: (context, controller) => const Text('Portal content'),
   builder: (context, controller, child) => child!,
   child: const Text('Child'),

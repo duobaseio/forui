@@ -11,6 +11,7 @@ const alert = FAlert(
   // {@category "Core"}
   style: .context(),
   clipBehavior: .none,
+  liveRegion: true,
   icon: Icon(FLucideIcons.circleAlert),
   title: Text('Alert Title'),
   subtitle: Text('Alert subtitle with more details'),
