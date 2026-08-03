@@ -5,8 +5,8 @@
   `descriptionPadding` and `errorPadding` instead of `childPadding`.
 * Change `FSliderStyle.labelPadding`'s default from `EdgeInsets.only(bottom: 5)` to `EdgeInsets.only(bottom: 15)`.
 
-* Fix dead space around the control even when no label, description and error is given.
-* Fix control not being flush with the layout edges, misaligning it with sibling form fields.
+* Fix dead space around the control even when no label, description, and error are provided.
+* Fix controls not being flush with the layout edges, misaligning them with sibling form fields.
 
 
 ## 0.25.0
