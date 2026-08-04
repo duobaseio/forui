@@ -26,7 +26,8 @@ final Future<int?> _stars = () async {
 
 void _openGitHub() => launchUrl(Uri.parse('https://github.com/duobaseio/forui'));
 
-String _abbreviate(int stars) {
+/// Abbreviates a star count, e.g. 1234 -> '1.2k'.
+String abbreviate(int stars) {
   if (stars < 1000) {
     return '$stars';
   }
@@ -84,7 +85,7 @@ class TopBar extends StatelessWidget {
                 prefix: const Icon(remix.RemixIcons.github_fill, size: 18),
                 onPress: _openGitHub,
                 child: Text(
-                  _abbreviate(stars),
+                  abbreviate(stars),
                   style: context.theme.typography.body.sm.copyWith(color: context.theme.colors.mutedForeground),
                 ),
               ),
