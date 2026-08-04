@@ -185,7 +185,7 @@ class _Row extends StatelessWidget {
               Expanded(
                 child: Text(
                   item.label,
-                  style: theme.typography.body.sm.copyWith(color: colors.foreground),
+                  style: theme.typography.body.sm.copyWith(color: foreground),
                   maxLines: 1,
                   overflow: .ellipsis,
                 ),
