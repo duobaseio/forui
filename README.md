@@ -38,6 +38,7 @@
 ## Why Choose Forui?
 
 * 🎨 Over 40+ beautifully crafted widgets.
+* 🖌️ Interactive theme builder to visually design and export themes with [Forui Create](https://create.forui.dev).
 * ⚡ Bundled [CLI](https://forui.dev/docs/concepts/themes) to generate themes & styling boilerplate.
 * ✅ [Well-tested](https://app.codecov.io/gh/duobaseio/forui).
 * 🌍 I10n support.

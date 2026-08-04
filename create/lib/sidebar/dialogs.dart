@@ -1,5 +1,5 @@
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart' show ThemeMode;
+import 'package:flutter/material.dart' show SelectionArea, ThemeMode;
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';
@@ -52,24 +52,26 @@ class GetCodeDialog extends StatelessWidget {
   Widget build(BuildContext context) => FDialog(
     animation: animation,
     constraints: const BoxConstraints.tightFor(width: 420),
-    builder: (context, style) => Padding(
-      padding: const .all(20),
-      child: Column(
-        mainAxisSize: .min,
-        crossAxisAlignment: .stretch,
-        children: [
-          _DialogHeader(
-            title: 'Get Code',
-            subtitle: 'Run these commands in your Flutter project to apply the theme.',
-            style: style,
-          ),
-          const SizedBox(height: 16),
-          const _Command(title: '1. Install Forui', command: 'flutter pub add forui'),
-          const SizedBox(height: 16),
-          _Command(title: '2. Initialize Forui with theme', command: 'dart run forui init --preset $code'),
-          const SizedBox(height: 20),
-          const _Support(),
-        ],
+    builder: (context, style) => SelectionArea(
+      child: Padding(
+        padding: const .all(20),
+        child: Column(
+          mainAxisSize: .min,
+          crossAxisAlignment: .stretch,
+          children: [
+            _DialogHeader(
+              title: 'Get Code',
+              subtitle: 'Run these commands in your Flutter project to apply the theme.',
+              style: style,
+            ),
+            const SizedBox(height: 16),
+            const _Command(title: '1. Install Forui', command: 'flutter pub add forui'),
+            const SizedBox(height: 16),
+            _Command(title: '2. Initialize Forui with theme', command: 'dart run forui init --preset $code'),
+            const SizedBox(height: 20),
+            const _Support(),
+          ],
+        ),
       ),
     ),
   );
@@ -193,31 +195,33 @@ class _LoadPresetDialogState extends State<LoadPresetDialog> {
   Widget build(BuildContext context) => FDialog(
     animation: widget.animation,
     constraints: const BoxConstraints.tightFor(width: 420),
-    builder: (context, style) => Padding(
-      padding: const .all(20),
-      child: Column(
-        mainAxisSize: .min,
-        crossAxisAlignment: .stretch,
-        children: [
-          _DialogHeader(title: 'Load Preset', subtitle: 'Paste a preset code to apply a saved theme.', style: style),
-          const SizedBox(height: 16),
-          FTextField(
-            key: const ValueKey('load-preset-code'),
-            autofocus: true,
-            hint: 'aabbbc or --preset aabbbc',
-            control: .managed(onChange: (value) => setState(() => _parsed = _parse(value.text))),
-            onSubmit: (_) => _load(context),
-          ),
-          const SizedBox(height: 16),
-          Row(
-            mainAxisAlignment: .end,
-            spacing: 8,
-            children: [
-              FButton(variant: .outline, onPress: () => Navigator.of(context).pop(), child: const Text('Cancel')),
-              FButton(onPress: _parsed == null ? null : () => _load(context), child: const Text('Load')),
-            ],
-          ),
-        ],
+    builder: (context, style) => SelectionArea(
+      child: Padding(
+        padding: const .all(20),
+        child: Column(
+          mainAxisSize: .min,
+          crossAxisAlignment: .stretch,
+          children: [
+            _DialogHeader(title: 'Load Preset', subtitle: 'Paste a preset code to apply a saved theme.', style: style),
+            const SizedBox(height: 16),
+            FTextField(
+              key: const ValueKey('load-preset-code'),
+              autofocus: true,
+              hint: 'aabbbc or --preset aabbbc',
+              control: .managed(onChange: (value) => setState(() => _parsed = _parse(value.text))),
+              onSubmit: (_) => _load(context),
+            ),
+            const SizedBox(height: 16),
+            Row(
+              mainAxisAlignment: .end,
+              spacing: 8,
+              children: [
+                FButton(variant: .outline, onPress: () => Navigator.of(context).pop(), child: const Text('Cancel')),
+                FButton(onPress: _parsed == null ? null : () => _load(context), child: const Text('Load')),
+              ],
+            ),
+          ],
+        ),
       ),
     ),
   );
@@ -260,48 +264,50 @@ class _SettingsDialogState extends State<SettingsDialog> {
   Widget build(BuildContext context) => FDialog(
     animation: widget.animation,
     constraints: const BoxConstraints.tightFor(width: 420),
-    builder: (context, style) => Padding(
-      padding: const .all(20),
-      child: Column(
-        mainAxisSize: .min,
-        crossAxisAlignment: .stretch,
-        children: [
-          _DialogHeader(title: 'Settings', subtitle: 'Configure Forui Create.', style: style),
-          const SizedBox(height: 16),
-          FSelect<ThemeMode>.rich(
-            key: const ValueKey('theme-mode'),
-            label: const Text('Theme'),
-            format: _name,
-            control: .lifted(
-              value: _mode,
-              onChange: (mode) {
-                if (mode != null) {
-                  setState(() => _mode = mode);
-                  widget.onModeChanged(mode);
-                }
-              },
+    builder: (context, style) => SelectionArea(
+      child: Padding(
+        padding: const .all(20),
+        child: Column(
+          mainAxisSize: .min,
+          crossAxisAlignment: .stretch,
+          children: [
+            _DialogHeader(title: 'Settings', subtitle: 'Configure Forui Create.', style: style),
+            const SizedBox(height: 16),
+            FSelect<ThemeMode>.rich(
+              key: const ValueKey('theme-mode'),
+              label: const Text('Theme'),
+              format: _name,
+              control: .lifted(
+                value: _mode,
+                onChange: (mode) {
+                  if (mode != null) {
+                    setState(() => _mode = mode);
+                    widget.onModeChanged(mode);
+                  }
+                },
+              ),
+              prefixBuilder: (context, style, _) => fieldPrefix(
+                Icon(switch (_mode) {
+                  ThemeMode.system => FLucideIcons.monitor,
+                  ThemeMode.light => FLucideIcons.sun,
+                  ThemeMode.dark => FLucideIcons.moon,
+                }, color: context.theme.colors.mutedForeground),
+              ),
+              children: [
+                for (final (icon, mode) in [
+                  (FLucideIcons.monitor, ThemeMode.system),
+                  (FLucideIcons.sun, ThemeMode.light),
+                  (FLucideIcons.moon, ThemeMode.dark),
+                ])
+                  .item(
+                    prefix: Icon(icon, color: context.theme.colors.mutedForeground),
+                    title: Text(_name(mode)),
+                    value: mode,
+                  ),
+              ],
             ),
-            prefixBuilder: (context, style, _) => fieldPrefix(
-              Icon(switch (_mode) {
-                ThemeMode.system => FLucideIcons.monitor,
-                ThemeMode.light => FLucideIcons.sun,
-                ThemeMode.dark => FLucideIcons.moon,
-              }, color: context.theme.colors.mutedForeground),
-            ),
-            children: [
-              for (final (icon, mode) in [
-                (FLucideIcons.monitor, ThemeMode.system),
-                (FLucideIcons.sun, ThemeMode.light),
-                (FLucideIcons.moon, ThemeMode.dark),
-              ])
-                .item(
-                  prefix: Icon(icon, color: context.theme.colors.mutedForeground),
-                  title: Text(_name(mode)),
-                  value: mode,
-                ),
-            ],
-          ),
-        ],
+          ],
+        ),
       ),
     ),
   );

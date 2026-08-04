@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
@@ -1181,6 +1182,53 @@ void main() {
 
     expect(focus.hasFocus, true);
     expect(focused, true);
+  });
+
+  group('selectable', () {
+    Future<String?> select(WidgetTester tester, {required bool static, required bool selectable}) async {
+      String? selection;
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: SelectionArea(
+            onSelectionChanged: (content) => selection = content?.plainText,
+            child: (static ? FTappable.static : FTappable.new)(
+              selectable: selectable,
+              onPress: () {},
+              child: const Text('label'),
+            ),
+          ),
+        ),
+      );
+
+      final paragraph = tester.renderObject<RenderParagraph>(
+        find.descendant(of: find.text('label'), matching: find.byType(RichText)),
+      );
+      Offset offset(int index) =>
+          paragraph.localToGlobal(paragraph.getOffsetForCaret(TextPosition(offset: index), .zero)) +
+          Offset(0, paragraph.size.height / 2);
+
+      final gesture = await tester.startGesture(offset(0), kind: .mouse);
+      addTearDown(gesture.removePointer);
+      await tester.pump();
+
+      await gesture.moveTo(offset('label'.length));
+      await gesture.up();
+      await tester.pumpAndSettle();
+
+      return selection;
+    }
+
+    for (final static in [false, true]) {
+      final name = static ? 'FTappable.static' : 'FTappable';
+
+      testWidgets('$name text is not selected by an enclosing SelectionArea by default', (tester) async {
+        expect(await select(tester, static: static, selectable: false), null);
+      });
+
+      testWidgets('$name text is selected by an enclosing SelectionArea when selectable', (tester) async {
+        expect(await select(tester, static: static, selectable: true), 'label');
+      });
+    }
   });
 
   group('accessibility', () {

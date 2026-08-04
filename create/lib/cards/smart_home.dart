@@ -61,7 +61,7 @@ class _ShadesState extends State<_Shades> {
             padding: const .only(top: 10, bottom: 6),
             child: Row(
               children: [
-                Text('OPEN', style: label),
+                SelectionContainer.disabled(child: Text('OPEN', style: label)),
                 Expanded(
                   child: FSlider(
                     style: const .delta(childPadding: .value(.symmetric(horizontal: 20, vertical: 0))),
@@ -72,7 +72,7 @@ class _ShadesState extends State<_Shades> {
                     tooltipControls: const .disabled(),
                   ),
                 ),
-                Text('CLOSE', style: label),
+                SelectionContainer.disabled(child: Text('CLOSE', style: label)),
               ],
             ),
           ),

@@ -111,29 +111,31 @@ class CreatePage extends StatelessWidget {
   Widget build(BuildContext context) {
     final compact = MediaQuery.sizeOf(context).width < context.theme.breakpoints.md;
     final scope = _ThemeModeScope.of(context);
-    return FScaffold(
-      childPad: false,
-      child: Column(
-        crossAxisAlignment: .stretch,
-        children: [
-          TopBar(onMenu: compact ? () => _openSidebar(context) : null),
-          Expanded(
-            child: compact
-                ? Preview(selection: selection)
-                : Row(
-                    crossAxisAlignment: .stretch,
-                    children: [
-                      Sidebar(
-                        selection: selection,
-                        mode: scope.mode,
-                        onChanged: (selection) => _change(context, selection),
-                        onModeChanged: scope.onChanged,
-                      ),
-                      Expanded(child: Preview(selection: selection)),
-                    ],
-                  ),
-          ),
-        ],
+    return SelectionArea(
+      child: FScaffold(
+        childPad: false,
+        child: Column(
+          crossAxisAlignment: .stretch,
+          children: [
+            TopBar(onMenu: compact ? () => _openSidebar(context) : null),
+            Expanded(
+              child: compact
+                  ? Preview(selection: selection)
+                  : Row(
+                      crossAxisAlignment: .stretch,
+                      children: [
+                        Sidebar(
+                          selection: selection,
+                          mode: scope.mode,
+                          onChanged: (selection) => _change(context, selection),
+                          onModeChanged: scope.onChanged,
+                        ),
+                        Expanded(child: Preview(selection: selection)),
+                      ],
+                    ),
+            ),
+          ],
+        ),
       ),
     );
   }

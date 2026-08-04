@@ -5,6 +5,7 @@ description: Get started with Forui in your Flutter project.
 
 import {Callout} from "fumadocs-ui/components/callout";
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
+import { CreateBanner } from '@/components/create-banner';
 import { CodeSnippet } from '@/components/code-snippet/code-snippet';
 import mainBasicSnippet from '@/snippets/snippets/getting_started/main_basic.json';
 import mainRouterSnippet from '@/snippets/snippets/getting_started/main_router.json';
@@ -12,6 +13,8 @@ import materialSnippet from '@/snippets/snippets/getting_started/material.json';
 
 This guide assumes you have a basic understanding of Flutter and have already set up your development environment.
 If you're new to Flutter, you may follow the official [installation guide](https://docs.flutter.dev/get-started).
+
+<CreateBanner />
 
 ## Installation
 
@@ -96,7 +99,8 @@ It is perfectly fine to use Cupertino/Material widgets alongside Forui widgets!
 ### Themes
 
 Forui ships with a built-in `FTheme.neutral` theme that you can use out of the box. The example above uses its dark
-variant. To generate a custom theme, run [`dart run forui theme create`](/docs/reference/cli#create-2).
+variant. To generate a custom theme, run [`dart run forui theme create`](/docs/reference/cli#create-2) or design one
+visually in [Forui Create](https://create.forui.dev).
 
 Themes are a very powerful building block in Forui, allowing you to customize the look and feel of your app.
 To learn more about themes, refer to the [Themes](/docs/concepts/themes) page.

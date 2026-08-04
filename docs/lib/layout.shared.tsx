@@ -39,6 +39,11 @@ export function baseOptions(): BaseLayoutProps {
         secondary: false,
       },
       {
+        text: 'Create',
+        url: 'https://create.forui.dev',
+        secondary: false,
+      },
+      {
         text: 'Enterprise',
         url: '/enterprise',
         secondary: false,
@@ -58,6 +63,11 @@ export function docsOptions(): BaseLayoutProps {
       {
         text: 'Home',
         url: '/',
+        secondary: false,
+      },
+      {
+        text: 'Create',
+        url: 'https://create.forui.dev',
         secondary: false,
       },
       {

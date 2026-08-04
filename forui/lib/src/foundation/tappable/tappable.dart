@@ -5,7 +5,6 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
 
@@ -108,6 +107,15 @@ class FTappable extends StatefulWidget {
 
   /// True if this tappable is currently selected. Defaults to false.
   final bool selected;
+
+  /// {@template forui.foundation.FTappable.selectable}
+  /// Whether descendant text participates in an enclosing [SelectionArea]. Defaults to false.
+  ///
+  /// The default matches native platforms, where a control's label is never selectable. Set this to true for
+  /// content-bearing tappable surfaces, such as a card or list item, whose text a user may legitimately want to
+  /// select and copy.
+  /// {@endtemplate}
+  final bool selectable;
 
   /// The tappable's hit test behavior. Defaults to [HitTestBehavior.translucent].
   final HitTestBehavior behavior;
@@ -341,6 +349,7 @@ class FTappable extends StatefulWidget {
     ValueChanged<bool>? onHoverChange,
     FTappableVariantChangeCallback? onVariantChange,
     bool selected,
+    bool selectable,
     HitTestBehavior behavior,
     GestureTapDownCallback? onPressDown,
     GestureTapCancelCallback? onPressCancel,
@@ -395,6 +404,7 @@ class FTappable extends StatefulWidget {
     this.onHoverChange,
     this.onVariantChange,
     this.selected = false,
+    this.selectable = false,
     this.behavior = .translucent,
     this.onPressDown,
     this.onPressCancel,
@@ -454,6 +464,7 @@ class FTappable extends StatefulWidget {
       ..add(ObjectFlagProperty.has('onHoverChange', onHoverChange))
       ..add(ObjectFlagProperty.has('onVariantChange', onVariantChange))
       ..add(FlagProperty('selected', value: selected, ifTrue: 'selected'))
+      ..add(FlagProperty('selectable', value: selectable, ifTrue: 'selectable'))
       ..add(EnumProperty('behavior', behavior))
       ..add(ObjectFlagProperty.has('onPressDown', onPressDown))
       ..add(ObjectFlagProperty.has('onPressCancel', onPressCancel))
@@ -667,6 +678,10 @@ class _FTappableState<T extends FTappable> extends State<T> {
   @override
   Widget build(BuildContext context) {
     var tappable = _decorate(context, widget.builder(context, _current, widget.child));
+    if (!widget.selectable) {
+      tappable = SelectionContainer.disabled(child: tappable);
+    }
+
     tappable = Shortcuts(
       shortcuts: widget.shortcuts,
       child: Actions(
@@ -891,6 +906,7 @@ class AnimatedTappable extends FTappable {
     super.onHoverChange,
     super.onVariantChange,
     super.selected,
+    super.selectable,
     super.behavior,
     super.onPressDown,
     super.onPressCancel,

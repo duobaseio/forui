@@ -1,3 +1,4 @@
+import { ArrowRight } from 'lucide-react';
 import type { Metadata } from 'next';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -21,10 +22,22 @@ export default function HomePage() {
     <main className="flex flex-col">
       <section className="flex flex-col items-center px-6 pt-10 sm:pt-20 pb-8 text-center gap-10 sm:gap-16">
         <div className="flex flex-col items-center justify-center max-w-3xl mx-auto">
+          <a
+            href="https://create.forui.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mb-3 sm:mb-6 inline-flex items-center gap-2 rounded-full bg-secondary py-1.5 ps-4 sm:ps-1.5 pe-4 text-xs sm:text-sm text-foreground"
+          >
+            <span className="hidden sm:inline rounded-full bg-primary px-2 py-0.5 text-xs font-medium text-primary-foreground">
+              New
+            </span>
+            <span className="whitespace-nowrap">Forui Create: design your theme visually</span>
+            <ArrowRight className="size-3.5" />
+          </a>
           <h1 className="text-3xl sm:text-5xl font-bold tracking-tight mb-4">
             Beautifully designed minimalistic Flutter widgets
           </h1>
-          <p className="text-base sm:text-lg text-muted-foreground max-w-2xl mb-6">
+          <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mb-6">
             A platform-agnostic Flutter UI library for developers seeking consistent and elegant UIs across all
             devices. Designs are heavily inspired by shadcn/ui, fully customizable, free, and open source.
           </p>

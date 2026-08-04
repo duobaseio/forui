@@ -9,6 +9,11 @@
 * Fix controls not being flush with the layout edges, misaligning them with sibling form fields.
 
 
+### `FTappable`
+* Add `FTappable(selectable: ...)` to control whether descendant text participates in an enclosing `SelectionArea`.
+  Defaults to false.
+
+
 ## 0.25.0
 
 This update continues with our ongoing effort to improve Forui's accessibility. It also includes several QoL improvements

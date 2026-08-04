@@ -6,7 +6,7 @@ description: Beautiful, minimalistic, and platform-agnostic UI library for Flutt
 import { ImageZoom } from 'fumadocs-ui/components/image-zoom';
 import { Cards, Card } from 'fumadocs-ui/components/card';
 import { Accordion, Accordions } from 'fumadocs-ui/components/accordion';
-import { Sparkles, MessagesSquare, FolderGit2 } from 'lucide-react';
+import { Sparkles, MessagesSquare, FolderGit2, Palette } from 'lucide-react';
 
 <ImageZoom
   src="/banners/banner-text-130226.png"
@@ -22,6 +22,7 @@ import { Sparkles, MessagesSquare, FolderGit2 } from 'lucide-react';
 ## Why Choose Forui?
 
 - Over 40+ beautifully crafted widgets.
+- Interactive theme builder to visually design and export themes with [Forui Create](https://create.forui.dev).
 - Bundled [CLI](/docs/reference/cli) to generate themes & styling boilerplate.
 - [Well-tested](https://app.codecov.io/gh/duobaseio/forui).
 - I10n support.
@@ -43,6 +44,7 @@ The library is designed with the following core principles in mind:
 
 <Cards>
   <Card icon={<Sparkles />} title="Get Started" href="/docs/getting-started" />
+  <Card icon={<Palette />} title="Forui Create" href="https://create.forui.dev" />
   <Card icon={<MessagesSquare />} title="Discussion" href="https://github.com/duobaseio/forui/discussions" />
   <Card icon={<FolderGit2 />} title="Source" href="https://github.com/duobaseio/forui" />
 </Cards>
