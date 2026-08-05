@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/semantics.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -233,5 +234,29 @@ void main() {
         });
       }
     }
+  });
+
+  group('accessibility', () {
+    // FButton sets excludeSemantics when semanticsLabel is non-null, which would
+    // otherwise drop SemanticsAction.tap (#1144).
+    testWidgets('semanticsLabel keeps a single tap action', (tester) async {
+      final semantics = tester.ensureSemantics();
+      var presses = 0;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FButton(semanticsLabel: 'Save', onPress: () => presses++, child: const Text('Visible')),
+        ),
+      );
+
+      expect(tester.getSemantics(find.text('Visible')), isSemantics(label: 'Save', hasTapAction: true));
+      expect(find.semantics.byAction(SemanticsAction.tap), findsOneWidget);
+
+      tester.semantics.tap(find.semantics.byLabel('Save'));
+      await tester.pump();
+      expect(presses, 1);
+
+      semantics.dispose();
+    });
   });
 }

@@ -691,6 +691,11 @@ class _FTappableState<T extends FTappable> extends State<T> {
               if (widget._onPress != null)
                 ActivateIntent: CallbackAction<ActivateIntent>(onInvoke: (_) => widget._onPress!.call()),
             },
+        // When excludeSemantics is true, child GestureDetector tap is omitted from
+        // the tree. When grouped (_entries != null), GestureDetector.onTap is
+        // nullified so the group owns pointer gestures. In both cases, forward
+        // onPress via Semantics.onTap so Voice Control / screen readers can activate
+        // the control. Leave onTap null otherwise to avoid double-numbering.
         child: Semantics(
           enabled: !widget._disabled,
           label: widget.semanticsLabel,
@@ -703,6 +708,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
           inMutuallyExclusiveGroup: widget.semanticsInMutuallyExclusiveGroup,
           selected: widget.semanticsChecked == null ? widget.selected : null,
           excludeSemantics: widget.excludeSemantics,
+          onTap: (widget.excludeSemantics || _entries != null) ? widget._onPress : null,
           child: Focus(
             autofocus: widget.autofocus,
             focusNode: _focus,

@@ -1354,5 +1354,52 @@ void main() {
         isSemantics(hasEnabledState: true, isEnabled: false, hasTapAction: false),
       );
     });
+
+    // excludeSemantics drops GestureDetector tap from the tree; Semantics.onTap must
+    // compensate so Voice Control / screen readers can still activate the control.
+    testWidgets('excludeSemantics keeps a single tap action on the labelled node', (tester) async {
+      final semantics = tester.ensureSemantics();
+      var presses = 0;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTappable.static(
+            semanticsLabel: 'Save',
+            excludeSemantics: true,
+            onPress: () => presses++,
+            child: const Text('tappable'),
+          ),
+        ),
+      );
+
+      expect(tester.getSemantics(find.text('tappable')), isSemantics(label: 'Save', hasTapAction: true));
+      expect(find.semantics.byAction(SemanticsAction.tap), findsOneWidget);
+
+      tester.semantics.tap(find.semantics.byLabel('Save'));
+      await tester.pump();
+      expect(presses, 1);
+
+      semantics.dispose();
+    });
+
+    testWidgets('without excludeSemantics exposes a single tap action', (tester) async {
+      final semantics = tester.ensureSemantics();
+      var presses = 0;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FTappable.static(onPress: () => presses++, child: const Text('tappable')),
+        ),
+      );
+
+      expect(tester.getSemantics(find.text('tappable')), isSemantics(hasTapAction: true));
+      expect(find.semantics.byAction(SemanticsAction.tap), findsOneWidget);
+
+      tester.semantics.tap(find.semantics.byAction(SemanticsAction.tap));
+      await tester.pump();
+      expect(presses, 1);
+
+      semantics.dispose();
+    });
   });
 }

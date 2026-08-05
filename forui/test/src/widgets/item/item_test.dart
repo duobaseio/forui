@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/semantics.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
@@ -215,5 +216,31 @@ void main() {
         expect(tester.getSize(find.byKey(const Key('raw-item'))).height, closeTo(height, 0.001));
       });
     }
+  });
+
+  group('accessibility', () {
+    // Default FItemGroup wraps items in FTappableGroup, which nulls GestureDetector
+    // onTap; Semantics.onTap must compensate (#1145).
+    testWidgets('item in FItemGroup keeps a single tap action', (tester) async {
+      final semantics = tester.ensureSemantics();
+      var presses = 0;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FItemGroup(
+            children: [FItem(title: const Text('Option one'), onPress: () => presses++)],
+          ),
+        ),
+      );
+
+      expect(tester.getSemantics(find.text('Option one')), isSemantics(label: 'Option one', hasTapAction: true));
+      expect(find.semantics.byAction(SemanticsAction.tap), findsOneWidget);
+
+      tester.semantics.tap(find.semantics.byLabel('Option one'));
+      await tester.pump();
+      expect(presses, 1);
+
+      semantics.dispose();
+    });
   });
 }

@@ -13,6 +13,8 @@
 * Add `FTappable(selectable: ...)` to control whether descendant text participates in an enclosing `SelectionArea`.
   Defaults to false.
 
+* Fix labelled (`excludeSemantics`) and grouped (`FTappableGroup`) tappables dropping `SemanticsAction.tap`.
+
 
 ## 0.25.0
 
