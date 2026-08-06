@@ -1,3 +1,7 @@
+## 0.26.0
+* Fix `forui init --force` writing files to the overwritten `forui.yaml`'s output paths.
+
+
 ## 0.25.0
 Add support for Forui `0.25.0`.
 

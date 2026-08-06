@@ -167,9 +167,9 @@ class InitCommand extends ForuiCommand {
     }
 
     // preset is non-null here: the wizard fills it when interactive, and a non-interactive run defaults it above.
-    _configuration(force: force);
+    final configuration = _configuration(force: force);
     await create(configuration, preset!, force: force, output: configuration.theme);
-    _main(template: template ?? 'basic', force: force);
+    _main(configuration, template: template ?? 'basic', force: force);
 
     if (terminal.interactive) {
       terminal.outro(
@@ -185,7 +185,7 @@ class InitCommand extends ForuiCommand {
     }
   }
 
-  void _configuration({required bool force}) {
+  Configuration _configuration({required bool force}) {
     final yaml = File('${configuration.root.path}/forui.yaml');
     final yml = File('${configuration.root.path}/forui.yml');
     final file = yaml.existsSync() ? yaml : (yml.existsSync() ? yml : yaml);
@@ -205,9 +205,13 @@ class InitCommand extends ForuiCommand {
 
     file.writeAsStringSync(defaults);
     _created(file);
+
+    // [configuration] was parsed before this command ran, so it still holds the overwritten file's paths. Re-read it
+    // to keep the rest of the run in step with what this file now declares.
+    return Configuration.parse();
   }
 
-  void _main({required String template, required bool force}) {
+  void _main(Configuration configuration, {required String template, required bool force}) {
     final file = File('${configuration.root.path}/lib/main.dart');
 
     if (!force && file.existsSync()) {
