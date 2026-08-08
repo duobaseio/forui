@@ -251,6 +251,30 @@ void main() {
     });
   });
 
+  testWidgets('custom clearIconBuilder', (tester) async {
+    final values = <String?>[];
+
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FSelect<String>(
+          key: key,
+          clearable: true,
+          clearIconBuilder: (_, _, clear) => GestureDetector(onTap: clear, child: const Text('custom clear')),
+          control: .managed(initial: 'A', onChange: values.add),
+          items: letters,
+        ),
+      ),
+    );
+
+    expect(find.bySemanticsLabel('Clear'), findsNothing);
+    expect(find.text('custom clear'), findsOneWidget);
+
+    await tester.tap(find.text('custom clear'));
+    await tester.pumpAndSettle();
+
+    expect(values, [null]);
+  });
+
   group('form', () {
     testWidgets('set initial value using initialValue', (tester) async {
       final key = GlobalKey<FormState>();

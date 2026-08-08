@@ -35,6 +35,7 @@ final timeField = FTimeField(
   prefixBuilder: FTimeField.defaultIconBuilder,
   suffixBuilder: null,
   clearable: false,
+  clearIconBuilder: (context, style, clear) => const SizedBox.shrink(),
   // {@endcategory}
   // {@category "Accessibility"}
   autofocus: false,
@@ -78,6 +79,7 @@ final timeFieldPicker = FTimeField.picker(
   prefixBuilder: FTimeField.defaultIconBuilder,
   suffixBuilder: null,
   clearable: false,
+  clearIconBuilder: (context, style, clear) => const SizedBox.shrink(),
   // {@endcategory}
   // {@category "Picker"}
   anchor: .topLeft,

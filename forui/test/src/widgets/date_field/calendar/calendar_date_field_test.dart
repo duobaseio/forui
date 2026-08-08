@@ -337,6 +337,36 @@ void main() {
       expect(find.bySemanticsLabel('Clear'), findsNothing);
       expect(find.text('Pick a date'), findsOneWidget);
     });
+
+    testWidgets('custom clearIconBuilder', (tester) async {
+      final controller = autoDispose(FDateSelectionController.single());
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FDateField.calendar(
+            key: key,
+            clearable: true,
+            clearIconBuilder: (_, _, clear) => GestureDetector(onTap: clear, child: const Text('custom clear')),
+            selectionControl: .managedSingle(controller: controller),
+            calendar: FDateFieldGridCalendarProperties(control: FGridCalendarControl(today: .utc(2025, 1, 15))),
+          ),
+        ),
+      );
+
+      await tester.tap(find.byKey(key));
+      await tester.pumpAndSettle();
+
+      await tester.tap(find.text('15'));
+      await tester.pumpAndSettle(const Duration(seconds: 3));
+
+      expect(find.bySemanticsLabel('Clear'), findsNothing);
+      expect(find.text('custom clear'), findsOneWidget);
+
+      await tester.tap(find.text('custom clear'));
+      await tester.pumpAndSettle();
+
+      expect(controller.value, null);
+    });
   });
 
   group('focus', () {

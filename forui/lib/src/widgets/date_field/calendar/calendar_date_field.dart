@@ -11,6 +11,7 @@ class _CalendarDateField extends FDateField {
   final MouseCursor mouseCursor;
   final bool canRequestFocus;
   final bool clearable;
+  final FFieldClearIconBuilder<FTextFieldStyle> clearIconBuilder;
 
   _CalendarDateField({
     this.popoverControl = const .managed(),
@@ -23,6 +24,7 @@ class _CalendarDateField extends FDateField {
     this.mouseCursor = .defer,
     this.canRequestFocus = true,
     this.clearable = false,
+    this.clearIconBuilder = FTextField.defaultClearIconBuilder,
     super.calendar = const FDateFieldGridCalendarProperties(),
     super.selectionControl,
     super.size,
@@ -61,7 +63,8 @@ class _CalendarDateField extends FDateField {
       ..add(FlagProperty('expands', value: expands, ifTrue: 'expands'))
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
       ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
-      ..add(FlagProperty('clearable', value: clearable, ifTrue: 'clearable'));
+      ..add(FlagProperty('clearable', value: clearable, ifTrue: 'clearable'))
+      ..add(ObjectFlagProperty.has('clearIconBuilder', clearIconBuilder));
   }
 }
 
@@ -166,6 +169,7 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
         prefixBuilder: widget.prefixBuilder,
         suffixBuilder: widget.suffixBuilder,
         clearable: widget.clearable ? (value) => value.text.isNotEmpty : (_) => false,
+        clearIconBuilder: widget.clearIconBuilder,
         label: widget.label,
         description: widget.description,
         error: state.hasError ? widget.errorBuilder(context, state.errorText ?? '') : null,

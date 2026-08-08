@@ -153,6 +153,30 @@ void main() {
     expect(find.bySemanticsLabel('Clear'), findsNothing);
   });
 
+  testWidgets('custom clearIconBuilder', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        locale: const Locale('en', 'SG'),
+        child: FTimeField(
+          key: key,
+          clearable: true,
+          clearIconBuilder: (_, _, clear) => GestureDetector(onTap: clear, child: const Text('custom clear')),
+        ),
+      ),
+    );
+
+    await tester.enterText(find.byKey(key), '12:30 pm');
+    await tester.pumpAndSettle();
+
+    expect(find.bySemanticsLabel('Clear'), findsNothing);
+    expect(find.text('custom clear'), findsOneWidget);
+
+    await tester.tap(find.text('custom clear'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('HH:MM --'), findsOneWidget);
+  });
+
   group('validator', () {
     testWidgets('placeholder', (tester) async {
       debugDefaultTargetPlatformOverride = .macOS;

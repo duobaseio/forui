@@ -45,6 +45,7 @@ class DateInput extends Input<DateTime?> {
     required super.prefixBuilder,
     required super.suffixBuilder,
     required super.clearable,
+    required super.clearIconBuilder,
     required super.localizations,
     required super.formFieldKey,
     super.key,

@@ -1,5 +1,14 @@
 ## 0.26.0
 
+### `FAutocomplete`
+* Add `FAutocomplete.clearIconBuilder`.
+
+
+### `FDateField` & `FTimeField`
+* Add `FDateField.clearIconBuilder`.
+* Add `FTimeField.clearIconBuilder`.
+
+
 ### `FLabel`, `FCheckbox`, `FOtpField`, `FRadio`, `FSelectGroup`, `FSlider` & `FSwitch`
 * Change `FLabel`'s horizontal layouts to place the gap between the label and child in `labelPadding`,
   `descriptionPadding` and `errorPadding` instead of `childPadding`.
@@ -9,11 +18,21 @@
 * Fix controls not being flush with the layout edges, misaligning them with sibling form fields.
 
 
+### `FSelect` & `FMultiSelect`
+* Add `FSelect.clearIconBuilder`.
+* Add `FMultiSelect.clearIconBuilder` and `FMultiSelect.defaultClearIconBuilder`.
+* Add `FSelectSearchFieldProperties.clearIconBuilder`.
+
+
 ### `FTappable`
 * Add `FTappable(selectable: ...)` to control whether descendant text participates in an enclosing `SelectionArea`.
   Defaults to false.
 
 * Fix labelled (`excludeSemantics`) and grouped (`FTappableGroup`) tappables dropping `SemanticsAction.tap`.
+
+
+### `FTextField`
+* **Breaking** Change `FFieldClearIconBuilder` to be generic. Use `FFieldClearIconBuilder<FTextFieldStyle>` instead.
 
 
 ## 0.25.0

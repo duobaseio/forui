@@ -338,6 +338,31 @@ void main() {
     expect(controller.value, <String>{});
   });
 
+  testWidgets('custom clearIconBuilder', (tester) async {
+    controller.value = {'A'};
+
+    await tester.pumpWidget(
+      TestScaffold.app(
+        locale: const Locale('en', 'SG'),
+        child: FMultiSelect<String>(
+          key: key,
+          control: .managed(controller: controller),
+          items: letters,
+          clearable: true,
+          clearIconBuilder: (_, _, clear) => GestureDetector(onTap: clear, child: const Text('custom clear')),
+        ),
+      ),
+    );
+
+    expect(find.bySemanticsLabel(FLocalizationsEnSg().textFieldClearButtonSemanticsLabel), findsNothing);
+    expect(find.text('custom clear'), findsOneWidget);
+
+    await tester.tap(find.text('custom clear'));
+    await tester.pumpAndSettle();
+
+    expect(controller.value, <String>{});
+  });
+
   testWidgets('keyboard navigation on desktop', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(

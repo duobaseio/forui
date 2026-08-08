@@ -30,6 +30,7 @@ final multiSelect = FMultiSelect<String>(
   textAlign: .start,
   textDirection: null,
   clearable: false,
+  clearIconBuilder: (context, style, clear) => const SizedBox.shrink(),
   prefixBuilder: null,
   suffixBuilder: FMultiSelect.defaultIconBuilder,
   // {@endcategory}
@@ -92,6 +93,7 @@ final multiSelectRich = FMultiSelect<String>.rich(
   textAlign: .start,
   textDirection: null,
   clearable: false,
+  clearIconBuilder: (context, style, clear) => const SizedBox.shrink(),
   prefixBuilder: null,
   suffixBuilder: FMultiSelect.defaultIconBuilder,
   // {@endcategory}
@@ -159,6 +161,7 @@ final multiSelectSearch = FMultiSelect<String>.search(
   textAlign: .start,
   textDirection: null,
   clearable: false,
+  clearIconBuilder: (context, style, clear) => const SizedBox.shrink(),
   prefixBuilder: null,
   suffixBuilder: FMultiSelect.defaultIconBuilder,
   // {@endcategory}
@@ -225,6 +228,7 @@ final multiSelectSearchBuilder = FMultiSelect<String>.searchBuilder(
   textAlign: .start,
   textDirection: null,
   clearable: false,
+  clearIconBuilder: (context, style, clear) => const SizedBox.shrink(),
   prefixBuilder: null,
   suffixBuilder: FMultiSelect.defaultIconBuilder,
   // {@endcategory}

@@ -78,7 +78,7 @@ class PasswordFieldProperties with Diagnosticable {
   final FPasswordFieldIconBuilder<FTextFieldStyle>? prefixBuilder;
   final FPasswordFieldIconBuilder<FTextFieldStyle>? suffixBuilder;
   final bool Function(TextEditingValue) clearable;
-  final FFieldClearIconBuilder clearIconBuilder;
+  final FFieldClearIconBuilder<FTextFieldStyle> clearIconBuilder;
   final FObscureTextControl obscureTextControl;
 
   PasswordFieldProperties({

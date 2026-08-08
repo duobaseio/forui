@@ -200,6 +200,8 @@ abstract class FDateField extends StatefulWidget {
   ///
   /// If [clearable] is true, the input field will show a clear button when a date is selected. Defaults to false.
   ///
+  /// The [clearIconBuilder] builds the clear button shown when [clearable] is true.
+  ///
   /// The [baselineInputYear] is used as a reference point for two-digit year input. Years will be interpreted as
   /// being within 80 years before or 20 years after this year.
   ///
@@ -225,6 +227,7 @@ abstract class FDateField extends StatefulWidget {
     MouseCursor? mouseCursor,
     bool canRequestFocus,
     bool clearable,
+    FFieldClearIconBuilder<FTextFieldStyle> clearIconBuilder,
     int baselineInputYear,
     FDateFieldCalendarProperties calendar,
     FFieldBuilder<FDateFieldStyle> builder,
@@ -265,6 +268,8 @@ abstract class FDateField extends StatefulWidget {
   ///
   /// If [clearable] is true, the input field will show a clear button when a date is selected. Defaults to false.
   ///
+  /// The [clearIconBuilder] builds the clear button shown when [clearable] is true.
+  ///
   /// The [calendar] is used to customize the calendar mode, its appearance and behavior.
   ///
   /// See also:
@@ -283,6 +288,7 @@ abstract class FDateField extends StatefulWidget {
     MouseCursor mouseCursor,
     bool canRequestFocus,
     bool clearable,
+    FFieldClearIconBuilder<FTextFieldStyle> clearIconBuilder,
     String? hint,
     bool autofocus,
     FocusNode? focusNode,
@@ -326,6 +332,8 @@ abstract class FDateField extends StatefulWidget {
   ///
   /// If [clearable] is true, the input field will show a clear button when a date is selected. Defaults to false.
   ///
+  /// The [clearIconBuilder] builds the clear button shown when [clearable] is true.
+  ///
   /// The [baselineInputYear] is used as a reference point for two-digit year input. Years will be interpreted as
   /// being within 80 years before or 20 years after this year.
   ///
@@ -351,6 +359,7 @@ abstract class FDateField extends StatefulWidget {
     MouseCursor? mouseCursor,
     bool canRequestFocus,
     bool clearable,
+    FFieldClearIconBuilder<FTextFieldStyle> clearIconBuilder,
     int baselineInputYear,
     Widget? label,
     Widget? description,

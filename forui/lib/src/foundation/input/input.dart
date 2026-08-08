@@ -39,6 +39,7 @@ abstract class Input<T> extends StatefulWidget {
   final Widget Function(BuildContext context, FTextFieldStyle style, Set<FTextFieldVariant> variants)? prefixBuilder;
   final Widget Function(BuildContext context, FTextFieldStyle style, Set<FTextFieldVariant> variants)? suffixBuilder;
   final bool clearable;
+  final FFieldClearIconBuilder<FTextFieldStyle> clearIconBuilder;
   final FLocalizations localizations;
   final Key? formFieldKey;
 
@@ -70,6 +71,7 @@ abstract class Input<T> extends StatefulWidget {
     required this.prefixBuilder,
     required this.suffixBuilder,
     required this.clearable,
+    required this.clearIconBuilder,
     required this.localizations,
     required this.formFieldKey,
     super.key,
@@ -104,6 +106,7 @@ abstract class Input<T> extends StatefulWidget {
       ..add(DiagnosticsProperty('prefixBuilder', prefixBuilder))
       ..add(DiagnosticsProperty('suffixBuilder', suffixBuilder))
       ..add(FlagProperty('clearable', value: clearable, ifTrue: 'clearable'))
+      ..add(ObjectFlagProperty.has('clearIconBuilder', clearIconBuilder))
       ..add(DiagnosticsProperty('localizations', localizations))
       ..add(DiagnosticsProperty('formFieldKey', formFieldKey));
   }
@@ -185,6 +188,7 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
             prefixBuilder: widget.prefixBuilder,
             suffixBuilder: widget.suffixBuilder,
             clearable: widget.clearable ? clearable : (_) => false,
+            clearIconBuilder: widget.clearIconBuilder,
           ),
         ),
       ),

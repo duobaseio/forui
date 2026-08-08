@@ -93,6 +93,39 @@ void main() {
     expect(find.text('Pick a time'), findsOneWidget);
   });
 
+  testWidgets('custom clearIconBuilder', (tester) async {
+    final controller = autoDispose(FTimeFieldController());
+
+    await tester.pumpWidget(
+      TestScaffold.app(
+        locale: const Locale('en', 'SG'),
+        child: FTimeField.picker(
+          key: key,
+          clearable: true,
+          clearIconBuilder: (_, _, clear) => GestureDetector(onTap: clear, child: const Text('custom clear')),
+          control: .managed(controller: controller),
+        ),
+      ),
+    );
+
+    await tester.tap(find.byKey(key));
+    await tester.pumpAndSettle();
+
+    await tester.drag(find.byType(BuilderWheel).first, const Offset(0, 50));
+    await tester.pumpAndSettle();
+
+    await tester.tapAt(.zero);
+    await tester.pumpAndSettle();
+
+    expect(find.bySemanticsLabel('Clear'), findsNothing);
+    expect(find.text('custom clear'), findsOneWidget);
+
+    await tester.tap(find.text('custom clear'));
+    await tester.pumpAndSettle();
+
+    expect(controller.value, null);
+  });
+
   testWidgets('24 hours', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(

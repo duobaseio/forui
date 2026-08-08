@@ -166,6 +166,11 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// True if a clear button should be shown. Defaults to false.
   final bool clearable;
 
+  /// Builds the clear button shown when [clearable] is true.
+  ///
+  /// Defaults to [FTextField.defaultClearIconBuilder].
+  final FFieldClearIconBuilder<FTextFieldStyle> clearIconBuilder;
+
   /// A builder that wraps the entire popover content with arbitrary widgets. Defaults to returning the content as-is.
   final FSelectPopoverBuilder<T> popoverBuilder;
 
@@ -275,6 +280,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     MouseCursor mouseCursor = .defer,
     bool canRequestFocus = true,
     bool clearable = false,
+    FFieldClearIconBuilder<FTextFieldStyle> clearIconBuilder = FTextField.defaultClearIconBuilder,
     FSelectPopoverBuilder<T> popoverBuilder = FPopover.defaultPopoverBuilder,
     AlignmentGeometry contentAnchor = .topStart,
     AlignmentGeometry fieldAnchor = .bottomStart,
@@ -328,6 +334,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       mouseCursor: mouseCursor,
       canRequestFocus: canRequestFocus,
       clearable: clearable,
+      clearIconBuilder: clearIconBuilder,
       popoverBuilder: popoverBuilder,
       contentAnchor: contentAnchor,
       fieldAnchor: fieldAnchor,
@@ -385,6 +392,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     MouseCursor mouseCursor,
     bool canRequestFocus,
     bool clearable,
+    FFieldClearIconBuilder<FTextFieldStyle> clearIconBuilder,
     FSelectPopoverBuilder<T> popoverBuilder,
     AlignmentGeometry contentAnchor,
     AlignmentGeometry fieldAnchor,
@@ -458,6 +466,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     MouseCursor mouseCursor = .defer,
     bool canRequestFocus = true,
     bool clearable = false,
+    FFieldClearIconBuilder<FTextFieldStyle> clearIconBuilder = FTextField.defaultClearIconBuilder,
     FSelectPopoverBuilder<T> popoverBuilder = FPopover.defaultPopoverBuilder,
     AlignmentGeometry contentAnchor = .topStart,
     AlignmentGeometry fieldAnchor = .bottomStart,
@@ -523,6 +532,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       mouseCursor: mouseCursor,
       canRequestFocus: canRequestFocus,
       clearable: clearable,
+      clearIconBuilder: clearIconBuilder,
       popoverBuilder: popoverBuilder,
       contentAnchor: contentAnchor,
       fieldAnchor: fieldAnchor,
@@ -591,6 +601,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     MouseCursor mouseCursor,
     bool canRequestFocus,
     bool clearable,
+    FFieldClearIconBuilder<FTextFieldStyle> clearIconBuilder,
     FSelectPopoverBuilder<T> popoverBuilder,
     AlignmentGeometry contentAnchor,
     AlignmentGeometry fieldAnchor,
@@ -644,6 +655,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     this.mouseCursor = .defer,
     this.canRequestFocus = true,
     this.clearable = false,
+    this.clearIconBuilder = FTextField.defaultClearIconBuilder,
     this.popoverBuilder = FPopover.defaultPopoverBuilder,
     this.contentAnchor = .topStart,
     this.fieldAnchor = .bottomStart,
@@ -698,6 +710,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
       ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
       ..add(FlagProperty('clearable', value: clearable, ifTrue: 'clearable'))
+      ..add(ObjectFlagProperty.has('clearIconBuilder', clearIconBuilder))
       ..add(ObjectFlagProperty.has('popoverBuilder', popoverBuilder))
       ..add(DiagnosticsProperty('contentAnchor', contentAnchor))
       ..add(DiagnosticsProperty('fieldAnchor', fieldAnchor))
@@ -846,6 +859,7 @@ abstract class _State<S extends FSelect<T>, T> extends State<S> with TickerProvi
         prefixBuilder: widget.prefixBuilder,
         suffixBuilder: widget.suffixBuilder,
         clearable: widget.clearable ? (_) => _controller.value != null : (_) => false,
+        clearIconBuilder: widget.clearIconBuilder,
         label: widget.label,
         description: widget.description,
         error: state.hasError ? widget.errorBuilder(state.context, state.errorText ?? '') : null,

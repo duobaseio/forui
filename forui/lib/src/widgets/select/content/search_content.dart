@@ -177,6 +177,7 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
             prefixBuilder: widget.properties.prefixBuilder,
             suffixBuilder: widget.properties.suffixBuilder,
             clearable: widget.properties.clearable,
+            clearIconBuilder: widget.properties.clearIconBuilder,
           ),
         ),
         FDivider(style: widget.searchStyle.dividerStyle),

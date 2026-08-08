@@ -247,6 +247,40 @@ void main() {
     });
   }
 
+  for (final (description, field) in [
+    (
+      'input only',
+      () => FDateField.input(
+        key: key,
+        clearable: true,
+        clearIconBuilder: (_, _, clear) => GestureDetector(onTap: clear, child: const Text('custom clear')),
+      ),
+    ),
+    (
+      'input & calendar',
+      () => FDateField(
+        key: key,
+        clearable: true,
+        clearIconBuilder: (_, _, clear) => GestureDetector(onTap: clear, child: const Text('custom clear')),
+      ),
+    ),
+  ]) {
+    testWidgets('$description, custom clearIconBuilder', (tester) async {
+      await tester.pumpWidget(TestScaffold.app(locale: const Locale('en', 'SG'), child: field()));
+
+      await tester.enterText(find.byKey(key), '14/01/2025');
+      await tester.pumpAndSettle();
+
+      expect(find.bySemanticsLabel('Clear'), findsNothing);
+      expect(find.text('custom clear'), findsOneWidget);
+
+      await tester.tap(find.text('custom clear'));
+      await tester.pumpAndSettle();
+
+      expect(find.text('DD/MM/YYYY'), findsOneWidget);
+    });
+  }
+
   testWidgets('enter closes popover', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(

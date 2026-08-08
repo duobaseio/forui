@@ -77,6 +77,19 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     onPress: enabled ? () => controller.update(value, add: false) : null,
   );
 
+  /// The default clear icon builder that shows a clear button.
+  static Widget defaultClearIconBuilder(BuildContext context, FMultiSelectFieldStyle style, VoidCallback clear) {
+    final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();
+    return Padding(
+      padding: style.clearButtonPadding,
+      child: FButton.icon(
+        style: style.clearButtonStyle,
+        onPress: clear,
+        child: style.clearIcon(context, semanticsLabel: localizations.textFieldClearButtonSemanticsLabel),
+      ),
+    );
+  }
+
   /// The default loading builder that shows a spinner when an asynchronous search is pending.
   static Widget defaultContentLoadingBuilder(BuildContext _, FSelectSearchStyle style) => Padding(
     padding: const EdgeInsets.all(13),
@@ -188,6 +201,11 @@ abstract class FMultiSelect<T> extends StatefulWidget {
   /// True if a clear button should be shown. Defaults to false.
   final bool clearable;
 
+  /// Builds the clear button shown when [clearable] is true.
+  ///
+  /// Defaults to [defaultClearIconBuilder].
+  final FFieldClearIconBuilder<FMultiSelectFieldStyle> clearIconBuilder;
+
   /// A builder that wraps the entire popover content with arbitrary widgets.
   ///
   /// Defaults to returning the content as-is.
@@ -289,6 +307,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     TextAlign textAlign = .start,
     TextDirection? textDirection,
     bool clearable = false,
+    FFieldClearIconBuilder<FMultiSelectFieldStyle> clearIconBuilder = defaultClearIconBuilder,
     FMultiSelectPopoverBuilder<T> popoverBuilder = FPopover.defaultPopoverBuilder,
     AlignmentGeometry contentAnchor = .topStart,
     AlignmentGeometry fieldAnchor = .bottomStart,
@@ -339,6 +358,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
       textAlign: textAlign,
       textDirection: textDirection,
       clearable: clearable,
+      clearIconBuilder: clearIconBuilder,
       popoverBuilder: popoverBuilder,
       contentAnchor: contentAnchor,
       fieldAnchor: fieldAnchor,
@@ -392,6 +412,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     TextAlign textAlign,
     TextDirection? textDirection,
     bool clearable,
+    FFieldClearIconBuilder<FMultiSelectFieldStyle> clearIconBuilder,
     FMultiSelectPopoverBuilder<T> popoverBuilder,
     AlignmentGeometry contentAnchor,
     AlignmentGeometry fieldAnchor,
@@ -461,6 +482,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     TextAlign textAlign = .start,
     TextDirection? textDirection,
     bool clearable = false,
+    FFieldClearIconBuilder<FMultiSelectFieldStyle> clearIconBuilder = defaultClearIconBuilder,
     FMultiSelectPopoverBuilder<T> popoverBuilder = FPopover.defaultPopoverBuilder,
     AlignmentGeometry contentAnchor = .topStart,
     AlignmentGeometry fieldAnchor = .bottomStart,
@@ -522,6 +544,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
       textAlign: textAlign,
       textDirection: textDirection,
       clearable: clearable,
+      clearIconBuilder: clearIconBuilder,
       popoverBuilder: popoverBuilder,
       contentAnchor: contentAnchor,
       fieldAnchor: fieldAnchor,
@@ -586,6 +609,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     TextAlign textAlign,
     TextDirection? textDirection,
     bool clearable,
+    FFieldClearIconBuilder<FMultiSelectFieldStyle> clearIconBuilder,
     FMultiSelectPopoverBuilder<T> popoverBuilder,
     AlignmentGeometry contentAnchor,
     AlignmentGeometry fieldAnchor,
@@ -634,6 +658,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     this.textAlign = .start,
     this.textDirection,
     this.clearable = false,
+    this.clearIconBuilder = defaultClearIconBuilder,
     this.popoverBuilder = FPopover.defaultPopoverBuilder,
     this.contentAnchor = .topStart,
     this.fieldAnchor = .bottomStart,
@@ -684,6 +709,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
       ..add(EnumProperty('textAlign', textAlign))
       ..add(EnumProperty('textDirection', textDirection))
       ..add(FlagProperty('clearable', value: clearable, ifTrue: 'clearable'))
+      ..add(ObjectFlagProperty.has('clearIconBuilder', clearIconBuilder))
       ..add(ObjectFlagProperty.has('popoverBuilder', popoverBuilder))
       ..add(DiagnosticsProperty('contentAnchor', contentAnchor))
       ..add(DiagnosticsProperty('fieldAnchor', fieldAnchor))
@@ -893,17 +919,7 @@ abstract class _FMultiSelectState<S extends FMultiSelect<T>, T> extends State<S>
                                     ),
                                   ),
                                   if (widget.enabled && widget.clearable && _controller.value.isNotEmpty)
-                                    Padding(
-                                      padding: fieldStyle.clearButtonPadding,
-                                      child: FButton.icon(
-                                        style: fieldStyle.clearButtonStyle,
-                                        onPress: () => _controller.value = {},
-                                        child: fieldStyle.clearIcon(
-                                          context,
-                                          semanticsLabel: localizations.textFieldClearButtonSemanticsLabel,
-                                        ),
-                                      ),
-                                    ),
+                                    widget.clearIconBuilder(context, fieldStyle, () => _controller.value = {}),
                                   if (widget.suffixBuilder case final suffix?)
                                     suffix(context, fieldStyle, variants as Set<FTextFieldVariant>),
                                 ],

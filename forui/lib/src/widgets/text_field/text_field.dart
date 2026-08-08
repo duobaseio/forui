@@ -41,9 +41,11 @@ typedef FFieldIconBuilder<T> = Widget Function(BuildContext context, T style, Se
 
 /// A callback for building a clear icon.
 ///
-/// [style] is the text field's style.
-/// [clear] is the callback to clear the text field's content.
-typedef FFieldClearIconBuilder = Widget Function(BuildContext, FTextFieldStyle style, VoidCallback clear);
+/// [style] is the field's style.
+/// [clear] is the callback to clear the field's content.
+///
+/// See [FTextField.clearIconBuilder].
+typedef FFieldClearIconBuilder<S> = Widget Function(BuildContext context, S style, VoidCallback clear);
 
 /// A text field.
 ///
@@ -185,7 +187,7 @@ class FTextField extends StatelessWidget {
     FPasswordFieldIconBuilder<FTextFieldStyle>? prefixBuilder,
     FPasswordFieldIconBuilder<FTextFieldStyle>? suffixBuilder = defaultObscureIconBuilder,
     bool Function(TextEditingValue) clearable = defaultClearable,
-    FFieldClearIconBuilder clearIconBuilder = defaultClearIconBuilder,
+    FFieldClearIconBuilder<FTextFieldStyle> clearIconBuilder = defaultClearIconBuilder,
     Key? key,
   }) => TextFieldControl(
     key: key,
@@ -891,7 +893,7 @@ class FTextField extends StatelessWidget {
   /// {@template forui.text_field.clearIconBuilder}
   /// The builder used to build the clear icon when [clearable] returns true.
   /// {@endtemplate}
-  final FFieldClearIconBuilder clearIconBuilder;
+  final FFieldClearIconBuilder<FTextFieldStyle> clearIconBuilder;
 
   /// Creates a [FTextField].
   const FTextField({

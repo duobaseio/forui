@@ -71,6 +71,7 @@ final autocomplete = FAutocomplete(
   prefixBuilder: null,
   suffixBuilder: null,
   clearable: (value) => false,
+  clearIconBuilder: (context, style, clear) => const SizedBox.shrink(),
   rightArrowToComplete: false,
   // {@endcategory}
   // {@category "Content"}
@@ -180,6 +181,7 @@ final builder = FAutocomplete.builder(
   prefixBuilder: null,
   suffixBuilder: null,
   clearable: (value) => false,
+  clearIconBuilder: (context, style, clear) => const SizedBox.shrink(),
   rightArrowToComplete: false,
   // {@endcategory}
   // {@category "Content"}
@@ -286,6 +288,7 @@ final text = FAutocomplete.text(
   prefixBuilder: null,
   suffixBuilder: null,
   clearable: (value) => false,
+  clearIconBuilder: (context, style, clear) => const SizedBox.shrink(),
   rightArrowToComplete: false,
   // {@endcategory}
   // {@category "Content"}
@@ -393,6 +396,7 @@ final textBuilder = FAutocomplete.textBuilder(
   prefixBuilder: null,
   suffixBuilder: null,
   clearable: (value) => false,
+  clearIconBuilder: (context, style, clear) => const SizedBox.shrink(),
   rightArrowToComplete: false,
   // {@endcategory}
   // {@category "Content"}

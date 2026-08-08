@@ -1350,4 +1350,47 @@ void main() {
       expect(focus.hasFocus, true);
     });
   });
+
+  group('clearIconBuilder', () {
+    testWidgets('default', (tester) async {
+      controller.text = 'Apple';
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FAutocomplete.text(
+            key: key,
+            control: .managed(controller: controller),
+            items: fruits,
+            clearable: (value) => value.text.isNotEmpty,
+          ),
+        ),
+      );
+
+      expect(find.bySemanticsLabel('Clear'), findsOneWidget);
+    });
+
+    testWidgets('custom', (tester) async {
+      controller.text = 'Apple';
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FAutocomplete.text(
+            key: key,
+            control: .managed(controller: controller),
+            items: fruits,
+            clearable: (value) => value.text.isNotEmpty,
+            clearIconBuilder: (_, _, clear) => GestureDetector(onTap: clear, child: const Text('custom clear')),
+          ),
+        ),
+      );
+
+      expect(find.bySemanticsLabel('Clear'), findsNothing);
+      expect(find.text('custom clear'), findsOneWidget);
+
+      await tester.tap(find.text('custom clear'));
+      await tester.pumpAndSettle();
+
+      expect(controller.text, '');
+    });
+  });
 }

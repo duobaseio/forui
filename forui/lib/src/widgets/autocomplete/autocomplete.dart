@@ -128,6 +128,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
     FFieldIconBuilder<FAutocompleteStyle>? prefixBuilder,
     FFieldIconBuilder<FAutocompleteStyle>? suffixBuilder,
     bool Function(TextEditingValue value) clearable = FTextField.defaultClearable,
+    FFieldClearIconBuilder<FAutocompleteFieldStyle> clearIconBuilder = FTextField.defaultClearIconBuilder,
     FAutocompletePopoverBuilder popoverBuilder = FPopover.defaultPopoverBuilder,
     FormFieldSetter<String>? onSaved,
     VoidCallback? onReset,
@@ -228,6 +229,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
     prefixBuilder: prefixBuilder,
     suffixBuilder: suffixBuilder,
     clearable: clearable,
+    clearIconBuilder: clearIconBuilder,
     popoverBuilder: popoverBuilder,
     onSaved: onSaved,
     onReset: onReset,
@@ -324,6 +326,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
     FFieldIconBuilder<FAutocompleteStyle>? prefixBuilder,
     FFieldIconBuilder<FAutocompleteStyle>? suffixBuilder,
     bool Function(TextEditingValue value) clearable = FTextField.defaultClearable,
+    FFieldClearIconBuilder<FAutocompleteFieldStyle> clearIconBuilder = FTextField.defaultClearIconBuilder,
     FAutocompletePopoverBuilder popoverBuilder = FPopover.defaultPopoverBuilder,
     FormFieldSetter<String>? onSaved,
     VoidCallback? onReset,
@@ -422,6 +425,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
     prefixBuilder: prefixBuilder,
     suffixBuilder: suffixBuilder,
     clearable: clearable,
+    clearIconBuilder: clearIconBuilder,
     popoverBuilder: popoverBuilder,
     onSaved: onSaved,
     onReset: onReset,
@@ -648,6 +652,9 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// {@macro forui.text_field.clearable}
   final bool Function(TextEditingValue value) clearable;
 
+  /// {@macro forui.text_field.clearIconBuilder}
+  final FFieldClearIconBuilder<FAutocompleteFieldStyle> clearIconBuilder;
+
   /// A builder that wraps the entire popover content with arbitrary widgets.
   ///
   /// Defaults to returning the content as-is.
@@ -845,6 +852,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
     FFieldIconBuilder<FAutocompleteStyle>? prefixBuilder,
     FFieldIconBuilder<FAutocompleteStyle>? suffixBuilder,
     bool Function(TextEditingValue value) clearable = FTextField.defaultClearable,
+    FFieldClearIconBuilder<FAutocompleteFieldStyle> clearIconBuilder = FTextField.defaultClearIconBuilder,
     FAutocompletePopoverBuilder popoverBuilder = FPopover.defaultPopoverBuilder,
     FormFieldSetter<T>? onSaved,
     VoidCallback? onReset,
@@ -950,6 +958,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
          prefixBuilder: prefixBuilder,
          suffixBuilder: suffixBuilder,
          clearable: clearable,
+         clearIconBuilder: clearIconBuilder,
          popoverBuilder: popoverBuilder,
          onSaved: onSaved,
          onReset: onReset,
@@ -1051,6 +1060,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
     this.prefixBuilder,
     this.suffixBuilder,
     this.clearable = FTextField.defaultClearable,
+    this.clearIconBuilder = FTextField.defaultClearIconBuilder,
     this.popoverBuilder = FPopover.defaultPopoverBuilder,
     this.onSaved,
     this.onReset,
@@ -1156,6 +1166,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
       ..add(ObjectFlagProperty.has('prefixBuilder', prefixBuilder))
       ..add(ObjectFlagProperty.has('suffixBuilder', suffixBuilder))
       ..add(ObjectFlagProperty.has('clearable', clearable))
+      ..add(ObjectFlagProperty.has('clearIconBuilder', clearIconBuilder))
       ..add(ObjectFlagProperty.has('popoverBuilder', popoverBuilder))
       ..add(ObjectFlagProperty.has('onSaved', onSaved))
       ..add(ObjectFlagProperty.has('onReset', onReset))
@@ -1464,6 +1475,7 @@ class _State<T> extends State<FAutocomplete<T>> with TickerProviderStateMixin {
             ? null
             : (context, _, variants) => widget.suffixBuilder!(context, style, variants),
         clearable: widget.clearable,
+        clearIconBuilder: (context, _, clear) => widget.clearIconBuilder(context, fieldStyle, clear),
         onSaved: widget.onSaved == null ? null : (text) => widget.onSaved!(widget.parse(text)),
         onReset: widget.onReset,
         validator: widget.validator == null ? null : (text) => widget.validator!(widget.parse(text)),

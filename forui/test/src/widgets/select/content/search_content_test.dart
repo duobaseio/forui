@@ -174,4 +174,34 @@ void main() {
       });
     });
   });
+
+  testWidgets('custom clearIconBuilder', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        child: FSelect<String>.search(
+          key: key,
+          searchFieldProperties: FSelectSearchFieldProperties(
+            clearable: (value) => value.text.isNotEmpty,
+            clearIconBuilder: (_, _, clear) => GestureDetector(onTap: clear, child: const Text('custom clear')),
+          ),
+          filter: (query) => fruits,
+          items: {for (final fruit in fruits) fruit: fruit},
+        ),
+      ),
+    );
+
+    await tester.tap(find.byKey(key));
+    await tester.pumpAndSettle();
+
+    await tester.enterText(find.byType(FTextField).last, 'Ba');
+    await tester.pumpAndSettle();
+
+    expect(find.bySemanticsLabel('Clear'), findsNothing);
+    expect(find.text('custom clear'), findsOneWidget);
+
+    await tester.tap(find.text('custom clear'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('custom clear'), findsNothing);
+  });
 }

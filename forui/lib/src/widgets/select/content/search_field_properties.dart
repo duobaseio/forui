@@ -180,6 +180,9 @@ class FSelectSearchFieldProperties with Diagnosticable {
   /// {@macro forui.text_field.clearable}
   final bool Function(TextEditingValue value) clearable;
 
+  /// {@macro forui.text_field.clearIconBuilder}
+  final FFieldClearIconBuilder<FTextFieldStyle> clearIconBuilder;
+
   /// Creates a [FSelectSearchFieldProperties].
   const FSelectSearchFieldProperties({
     this.size = FTextFieldSizeVariant.md,
@@ -228,6 +231,7 @@ class FSelectSearchFieldProperties with Diagnosticable {
     this.prefixBuilder = defaultIconBuilder,
     this.suffixBuilder,
     this.clearable = FTextField.defaultClearable,
+    this.clearIconBuilder = FTextField.defaultClearIconBuilder,
   });
 
   @override
@@ -289,6 +293,7 @@ class FSelectSearchFieldProperties with Diagnosticable {
       ..add(DiagnosticsProperty('spellCheckConfiguration', spellCheckConfiguration))
       ..add(ObjectFlagProperty.has('prefixBuilder', prefixBuilder))
       ..add(ObjectFlagProperty.has('suffixBuilder', suffixBuilder))
-      ..add(ObjectFlagProperty.has('clearable', clearable));
+      ..add(ObjectFlagProperty.has('clearable', clearable))
+      ..add(ObjectFlagProperty.has('clearIconBuilder', clearIconBuilder));
   }
 }

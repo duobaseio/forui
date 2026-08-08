@@ -90,7 +90,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
     FPasswordFieldIconBuilder<FTextFieldStyle>? prefixBuilder,
     FPasswordFieldIconBuilder<FTextFieldStyle>? suffixBuilder = FTextField.defaultObscureIconBuilder,
     bool Function(TextEditingValue) clearable = FTextField.defaultClearable,
-    FFieldClearIconBuilder clearIconBuilder = FTextField.defaultClearIconBuilder,
+    FFieldClearIconBuilder<FTextFieldStyle> clearIconBuilder = FTextField.defaultClearIconBuilder,
     FormFieldSetter<String>? onSaved,
     VoidCallback? onReset,
     FormFieldValidator<String>? validator,
@@ -359,7 +359,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   final bool Function(TextEditingValue) clearable;
 
   /// {@macro forui.text_field.clearIconBuilder}
-  final FFieldClearIconBuilder clearIconBuilder;
+  final FFieldClearIconBuilder<FTextFieldStyle> clearIconBuilder;
 
   @override
   final FormFieldSetter<String>? onSaved;

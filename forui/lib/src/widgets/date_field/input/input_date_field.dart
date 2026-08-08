@@ -12,6 +12,7 @@ class _InputDateField extends FDateField {
   final MouseCursor? mouseCursor;
   final bool canRequestFocus;
   final bool clearable;
+  final FFieldClearIconBuilder<FTextFieldStyle> clearIconBuilder;
   final int baselineInputYear;
 
   _InputDateField({
@@ -26,6 +27,7 @@ class _InputDateField extends FDateField {
     this.mouseCursor,
     this.canRequestFocus = true,
     this.clearable = false,
+    this.clearIconBuilder = FTextField.defaultClearIconBuilder,
     this.baselineInputYear = 2000,
     super.calendar = const FDateFieldGridCalendarProperties(),
     super.selectionControl,
@@ -67,6 +69,7 @@ class _InputDateField extends FDateField {
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
       ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
       ..add(FlagProperty('clearable', value: clearable, ifTrue: 'clearable'))
+      ..add(ObjectFlagProperty.has('clearIconBuilder', clearIconBuilder))
       ..add(IntProperty('baselineInputYear', baselineInputYear));
   }
 }
@@ -137,6 +140,7 @@ class _InputDateFieldState extends _FDateFieldState<_InputDateField> {
         description: widget.description,
         errorBuilder: widget.errorBuilder,
         clearable: widget.clearable,
+        clearIconBuilder: widget.clearIconBuilder,
         enabled: widget.enabled,
         onSaved: widget.onSaved,
         onReset: widget.onReset,
@@ -184,6 +188,7 @@ class _InputOnlyDateField extends FDateField {
   final MouseCursor? mouseCursor;
   final bool canRequestFocus;
   final bool clearable;
+  final FFieldClearIconBuilder<FTextFieldStyle> clearIconBuilder;
   final int baselineInputYear;
 
   _InputOnlyDateField({
@@ -197,6 +202,7 @@ class _InputOnlyDateField extends FDateField {
     this.mouseCursor,
     this.canRequestFocus = true,
     this.clearable = false,
+    this.clearIconBuilder = FTextField.defaultClearIconBuilder,
     this.baselineInputYear = 2000,
     super.selectionControl,
     super.size,
@@ -236,6 +242,7 @@ class _InputOnlyDateField extends FDateField {
       ..add(DiagnosticsProperty('mouseCursor', mouseCursor))
       ..add(FlagProperty('canRequestFocus', value: canRequestFocus, ifTrue: 'canRequestFocus'))
       ..add(FlagProperty('clearable', value: clearable, ifTrue: 'clearable'))
+      ..add(ObjectFlagProperty.has('clearIconBuilder', clearIconBuilder))
       ..add(IntProperty('baselineInputYear', baselineInputYear));
   }
 }
@@ -258,6 +265,7 @@ class _InputOnlyDateFieldState extends _FDateFieldState<_InputOnlyDateField> {
       description: widget.description,
       errorBuilder: widget.errorBuilder,
       clearable: widget.clearable,
+      clearIconBuilder: widget.clearIconBuilder,
       enabled: widget.enabled,
       onSaved: widget.onSaved,
       onReset: widget.onReset,
