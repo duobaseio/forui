@@ -9,3 +9,5 @@ minimumReleaseAgeExclude:
   - next@16.2.11
   # Renovate security update: postcss@8.5.18
   - postcss@8.5.18
+  # Renovate security update: mermaid@11.16.1
+  - mermaid@11.16.1
