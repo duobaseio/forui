@@ -38,7 +38,8 @@ FDateSelectionController<Set<DateTime>> useFDatesSelectionController({
 
 /// Creates a [FDateSelectionController] that allows a single range to be selected and is automatically disposed.
 ///
-/// Both the start and end dates of the range are inclusive.
+/// Both the start and end dates of the range are inclusive. Unlike [useFOpenRangeSelectionController], selecting the
+/// first date returns a complete range, `(first date, first date)`.
 ///
 /// ## Contract
 /// Throws [AssertionError] if the end date is less than the start date.
@@ -54,9 +55,34 @@ FDateSelectionController<(DateTime, DateTime)?> useFRangeSelectionController({
   ),
 );
 
+/// Creates a [FDateSelectionController] that allows a range with an open bound to be selected and is automatically
+/// disposed.
+///
+/// Both the start and end dates of the range are inclusive. Unlike [useFRangeSelectionController], selecting the first
+/// date returns an open-bound range, `(first date, null)`/`(null, first date)`, depending on [startFirst].
+///
+/// [startFirst] determines whether the first selected date is the range's start or end. Defaults to true.
+///
+/// ## Contract
+/// Throws [AssertionError] if both bounds are given and the end date is less than the start date.
+FDateSelectionController<(DateTime?, DateTime?)> useFOpenRangeSelectionController({
+  (DateTime?, DateTime?) initial = (null, null),
+  bool startFirst = true,
+  List<Object?>? keys,
+}) => use(
+  _DateSelectionControllerHook<(DateTime?, DateTime?)>(
+    value: initial,
+    startFirst: startFirst,
+    debugLabel: 'useFOpenRangeSelectionController',
+    create: (hook) => .openRange(initial: hook.value, startFirst: hook.startFirst),
+    keys: keys,
+  ),
+);
+
 class _DateSelectionControllerHook<T> extends Hook<FDateSelectionController<T>> {
   final T value;
   final bool toggleable;
+  final bool startFirst;
   final String _debugLabel;
   final _Create<T> _create;
 
@@ -65,6 +91,7 @@ class _DateSelectionControllerHook<T> extends Hook<FDateSelectionController<T>> 
     required this._debugLabel,
     required this._create,
     this.toggleable = true,
+    this.startFirst = true,
     super.keys,
   });
 
@@ -76,7 +103,15 @@ class _DateSelectionControllerHook<T> extends Hook<FDateSelectionController<T>> 
     super.debugFillProperties(properties);
     properties
       ..add(DiagnosticsProperty('initialSelection', value))
-      ..add(FlagProperty('toggleable', value: toggleable, ifTrue: 'toggleable'));
+      ..add(FlagProperty('toggleable', value: toggleable, ifTrue: 'toggleable'))
+      ..add(
+        FlagProperty(
+          'startFirst',
+          value: startFirst,
+          ifTrue: 'selects the start first',
+          ifFalse: 'selects the end first',
+        ),
+      );
   }
 }
 

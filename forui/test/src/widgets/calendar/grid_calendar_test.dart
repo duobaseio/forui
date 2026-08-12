@@ -434,6 +434,50 @@ void main() {
       expect(selected, (DateTime.utc(2024, 7, 15), DateTime.utc(2024, 7, 20)));
     });
 
+    testWidgets('managedOpenRange opens, completes and restarts a range', (tester) async {
+      (DateTime?, DateTime?) selected = (null, null);
+      await tester.pumpWidget(
+        calendar(
+          selectionControl: .managedOpenRange(onChange: (range) => selected = range),
+          control: control(),
+        ),
+      );
+
+      await tester.tap(find.descendant(of: find.byType(DayPicker), matching: find.text('15')));
+      await tester.pumpAndSettle();
+      expect(selected, (DateTime.utc(2024, 7, 15), null));
+
+      await tester.tap(find.descendant(of: find.byType(DayPicker), matching: find.text('20')));
+      await tester.pumpAndSettle();
+      expect(selected, (DateTime.utc(2024, 7, 15), DateTime.utc(2024, 7, 20)));
+
+      await tester.tap(find.descendant(of: find.byType(DayPicker), matching: find.text('25')));
+      await tester.pumpAndSettle();
+      expect(selected, (DateTime.utc(2024, 7, 25), null));
+
+      await tester.tap(find.descendant(of: find.byType(DayPicker), matching: find.text('25')));
+      await tester.pumpAndSettle();
+      expect(selected, (DateTime.utc(2024, 7, 25), DateTime.utc(2024, 7, 25)));
+    });
+
+    testWidgets('managedOpenRange with startFirst: false selects the end first', (tester) async {
+      (DateTime?, DateTime?) selected = (null, null);
+      await tester.pumpWidget(
+        calendar(
+          selectionControl: .managedOpenRange(startFirst: false, onChange: (range) => selected = range),
+          control: control(),
+        ),
+      );
+
+      await tester.tap(find.descendant(of: find.byType(DayPicker), matching: find.text('20')));
+      await tester.pumpAndSettle();
+      expect(selected, (null, DateTime.utc(2024, 7, 20)));
+
+      await tester.tap(find.descendant(of: find.byType(DayPicker), matching: find.text('15')));
+      await tester.pumpAndSettle();
+      expect(selected, (DateTime.utc(2024, 7, 15), DateTime.utc(2024, 7, 20)));
+    });
+
     testWidgets('lifted calls select with the tapped day', (tester) async {
       DateTime? selected;
       await tester.pumpWidget(

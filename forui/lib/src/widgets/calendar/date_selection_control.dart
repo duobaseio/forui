@@ -25,11 +25,35 @@ sealed class FDateSelectionControl<T> with Diagnosticable, _$FDateSelectionContr
   }) => _Multi(controller: controller, initial: initial, onChange: onChange);
 
   /// Creates a [FDateSelectionControl] for range selection.
+  ///
+  /// Both the start and end dates of the range are inclusive. Unlike [managedOpenRange], selecting the first date
+  /// returns a complete range, `(first date, first date)`.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [initial]'s end date is less than its start date.
   static FDateSelectionControl<(DateTime, DateTime)?> managedRange({
     FDateSelectionController<(DateTime, DateTime)?>? controller,
     (DateTime, DateTime)? initial,
     ValueChanged<(DateTime, DateTime)?>? onChange,
   }) => _Range(controller: controller, initial: initial, onChange: onChange);
+
+  /// Creates a [FDateSelectionControl] for range selection with an open bound.
+  ///
+  /// Both the start and end dates of the range are inclusive. Unlike [managedRange], selecting the first date returns
+  /// an open-bound range, `(first date, null)`/`(null, first date)`, depending on [startFirst].
+  ///
+  /// [startFirst] determines whether the first selected date is the range's start or end. Defaults to true.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [controller] is provided and [startFirst] is false.
+  ///
+  /// Throws [AssertionError] if both of [initial]'s bounds are given and the end date is less than the start date.
+  static FDateSelectionControl<(DateTime?, DateTime?)> managedOpenRange({
+    FDateSelectionController<(DateTime?, DateTime?)>? controller,
+    (DateTime?, DateTime?)? initial,
+    ValueChanged<(DateTime?, DateTime?)>? onChange,
+    bool startFirst = true,
+  }) => _OpenRange(controller: controller, initial: initial, onChange: onChange, startFirst: startFirst);
 
   /// Creates a lifted [FDateSelectionControl] for single date selection.
   ///
@@ -53,13 +77,29 @@ sealed class FDateSelectionControl<T> with Diagnosticable, _$FDateSelectionContr
 
   /// Creates a lifted [FDateSelectionControl] for range selection.
   ///
+  /// Both the start and end dates of the range are inclusive. Unlike [liftedOpenRange], selecting the first date
+  /// returns a complete range, `(first date, first date)`.
+  ///
   /// The [value] is the currently selected range.
   /// [onChange] is called with the new selection when a date is selected.
-  /// Both the start and end dates of the range are inclusive.
   static FDateSelectionControl<(DateTime, DateTime)?> liftedRange({
     required (DateTime, DateTime)? value,
     required ValueChanged<(DateTime, DateTime)?> onChange,
   }) => _LiftedRange(value: value, onChange: onChange);
+
+  /// Creates a lifted [FDateSelectionControl] for range selection with an open bound.
+  ///
+  /// Both the start and end dates of the range are inclusive. Unlike [liftedRange], selecting the first date returns
+  /// an open-bound range, `(first date, null)`/`(null, first date)`, depending on [startFirst].
+  ///
+  /// The [value] is the currently selected range.
+  /// [onChange] is called with the new selection when a date is selected.
+  /// [startFirst] determines whether the first selected date is the range's start or end. Defaults to true.
+  static FDateSelectionControl<(DateTime?, DateTime?)> liftedOpenRange({
+    required (DateTime?, DateTime?) value,
+    required ValueChanged<(DateTime?, DateTime?)> onChange,
+    bool startFirst = true,
+  }) => _LiftedOpenRange(value: value, onChange: onChange, startFirst: startFirst);
 
   const FDateSelectionControl._();
 
@@ -137,6 +177,33 @@ class _Range extends FDateSelectionManagedControl<(DateTime, DateTime)?> {
   FDateSelectionController<(DateTime, DateTime)?> createController() => controller ?? .range(initial: initial);
 }
 
+class _OpenRange extends FDateSelectionManagedControl<(DateTime?, DateTime?)> {
+  final bool startFirst;
+
+  const _OpenRange({this.startFirst = true, super.controller, super.initial, super.onChange})
+    : assert(
+        controller == null || startFirst,
+        'Cannot provide both controller and startFirst. Pass startFirst to the controller instead.',
+      );
+
+  @override
+  FDateSelectionController<(DateTime?, DateTime?)> createController() =>
+      controller ?? .openRange(initial: initial ?? (null, null), startFirst: startFirst);
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+      FlagProperty(
+        'startFirst',
+        value: startFirst,
+        ifTrue: 'selects the start first',
+        ifFalse: 'selects the end first',
+      ),
+    );
+  }
+}
+
 /// A [FDateSelectionLiftedControl] enables a parent to own the selection state and update it via a callback.
 abstract class FDateSelectionLiftedControl<T> extends FDateSelectionControl<T>
     with _$FDateSelectionLiftedControlMixin<T> {
@@ -194,6 +261,33 @@ class _LiftedRange extends FDateSelectionLiftedControl<(DateTime, DateTime)?> {
   @override
   void _updateController(FDateSelectionController<(DateTime, DateTime)?> controller) =>
       (controller as _LiftedRangeController).update(value: value, onChange: onChange);
+}
+
+class _LiftedOpenRange extends FDateSelectionLiftedControl<(DateTime?, DateTime?)> {
+  final bool startFirst;
+
+  const _LiftedOpenRange({required super.value, required super.onChange, required this.startFirst});
+
+  @override
+  FDateSelectionController<(DateTime?, DateTime?)> createController() =>
+      _LiftedOpenRangeController(value: value, onChange: onChange, startFirst: startFirst);
+
+  @override
+  void _updateController(FDateSelectionController<(DateTime?, DateTime?)> controller) =>
+      (controller as _LiftedOpenRangeController).update(value: value, onChange: onChange, startFirst: startFirst);
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(
+      FlagProperty(
+        'startFirst',
+        value: startFirst,
+        ifTrue: 'selects the start first',
+        ifFalse: 'selects the end first',
+      ),
+    );
+  }
 }
 
 class _None extends FDateSelectionLiftedControl<Object?> {

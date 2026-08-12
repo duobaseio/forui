@@ -1,3 +1,9 @@
+## 0.26.0
+
+### `FCalendar`
+* Add `useFOpenRangeSelectionController(...)`.
+
+
 ## 0.25.0
 Add support for Forui `0.25.0`.
 

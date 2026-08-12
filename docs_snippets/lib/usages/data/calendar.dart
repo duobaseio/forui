@@ -134,6 +134,14 @@ final FDateSelectionControl<(DateTime, DateTime)?> selectionLiftedRange = .lifte
   onChange: (range) {},
 );
 
+// {@category "Selection" "`.liftedOpenRange()`"}
+/// Lifts open range selection to the parent for external state management.
+final FDateSelectionControl<(DateTime?, DateTime?)> selectionLiftedOpenRange = .liftedOpenRange(
+  value: (null, null),
+  onChange: (range) {},
+  startFirst: true,
+);
+
 // {@category "Selection" "`.managedSingle()` with internal controller"}
 /// Single date selection managed internally.
 final FDateSelectionControl<DateTime?> selectionSingleInternal = .managedSingle(
@@ -174,6 +182,22 @@ final FDateSelectionControl<(DateTime, DateTime)?> selectionRangeInternal = .man
 final FDateSelectionControl<(DateTime, DateTime)?> selectionRangeExternal = .managedRange(
   // Don't create a controller inline. Store it in a State instead.
   controller: FDateSelectionController.range(initial: (.utc(2026, 7, 17), .utc(2026, 7, 20))),
+  onChange: (range) {},
+);
+
+// {@category "Selection" "`.managedOpenRange()` with internal controller"}
+/// Open range selection managed internally. A bound stays null until the user selects it.
+final FDateSelectionControl<(DateTime?, DateTime?)> selectionOpenRangeInternal = .managedOpenRange(
+  initial: (null, null),
+  startFirst: true,
+  onChange: (range) {},
+);
+
+// {@category "Selection" "`.managedOpenRange()` with external controller"}
+/// Open range selection with an external controller.
+final FDateSelectionControl<(DateTime?, DateTime?)> selectionOpenRangeExternal = .managedOpenRange(
+  // Don't create a controller inline. Store it in a State instead.
+  controller: FDateSelectionController.openRange(initial: (.utc(2026, 7, 17), null)),
   onChange: (range) {},
 );
 

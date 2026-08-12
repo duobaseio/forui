@@ -178,6 +178,141 @@ void main() {
     }
   });
 
+  group('FDateSelectionController.openRange(...)', () {
+    test('constructor defaults to nothing selected', () {
+      expect(FDateSelectionController.openRange().value, (null, null));
+    });
+
+    test(
+      'constructor converts date time',
+      () => expect(
+        FDateSelectionController.openRange(initial: (DateTime(2024, 11, 30, 12), DateTime(2024, 12, 12, 12))).value,
+        (DateTime.utc(2024, 11, 30), DateTime.utc(2024, 12, 12)),
+      ),
+    );
+
+    test(
+      'constructor converts an open end',
+      () => expect(FDateSelectionController.openRange(initial: (DateTime(2024, 11, 30, 12), null)).value, (
+        DateTime.utc(2024, 11, 30),
+        null,
+      )),
+    );
+
+    test(
+      'constructor converts an open start',
+      () => expect(FDateSelectionController.openRange(initial: (null, DateTime(2024, 12, 12, 12))).value, (
+        null,
+        DateTime.utc(2024, 12, 12),
+      )),
+    );
+
+    test(
+      'constructor allows equal start and end',
+      () => expect(FDateSelectionController.openRange(initial: (DateTime(2024), DateTime(2024))).value, (
+        DateTime.utc(2024),
+        DateTime.utc(2024),
+      )),
+    );
+
+    test(
+      'constructor throws error when end before start',
+      () => expect(
+        () => FDateSelectionController.openRange(initial: (DateTime(2025), DateTime(2024))),
+        throwsAssertionError,
+      ),
+    );
+
+    for (final initial in <(DateTime?, DateTime?)>[(DateTime(2025), null), (null, DateTime(2024))]) {
+      test('constructor does not assert the order of an open bound initial=$initial', () {
+        expect(() => FDateSelectionController.openRange(initial: initial), returnsNormally);
+      });
+    }
+
+    for (final (initial, date, expected) in <((DateTime?, DateTime?), DateTime, bool)>[
+      ((DateTime(2024), DateTime(2025)), DateTime.utc(2024), true), // start, inclusive
+      ((DateTime(2024), DateTime(2025)), DateTime(2024, 1, 1, 15), true), // start, truncates the time component
+      ((DateTime(2024), DateTime(2025)), DateTime.utc(2024, 6), true), // inside
+      ((DateTime(2024), DateTime(2025)), DateTime.utc(2025), true), // end, inclusive
+      ((DateTime(2024), DateTime(2025)), DateTime.utc(2023), false), // before
+      ((DateTime(2024), DateTime(2025)), DateTime.utc(2026), false), // after
+      ((DateTime(2024), null), DateTime.utc(2024), true), // the selected start
+      ((DateTime(2024), null), DateTime.utc(2025), false), // the open end matches nothing
+      ((null, DateTime(2025)), DateTime.utc(2025), true), // the selected end
+      ((null, DateTime(2025)), DateTime.utc(2024), false), // the open start matches nothing
+      ((null, null), DateTime.utc(2023), false),
+    ]) {
+      test('contains($date) initial=$initial', () {
+        final controller = FDateSelectionController.openRange(initial: initial);
+        expect(controller.contains(date), expected);
+      });
+    }
+
+    for (final (startFirst, initial, date, expected)
+        in <(bool, (DateTime?, DateTime?), DateTime, (DateTime?, DateTime?))>[
+          (true, (null, null), DateTime(2023), (DateTime.utc(2023), null)), // selects the start first
+          (false, (null, null), DateTime(2023), (null, DateTime.utc(2023))), // selects the end first
+          (true, (DateTime(2024), null), DateTime(2023), (DateTime.utc(2023), null)), // moves the start back
+          (true, (DateTime(2024), null), DateTime(2024), (DateTime.utc(2024), DateTime.utc(2024))), // completes one day
+          (true, (DateTime(2024), null), DateTime(2025), (DateTime.utc(2024), DateTime.utc(2025))), // completes
+          (true, (null, DateTime(2025)), DateTime(2026), (null, DateTime.utc(2026))), // moves the end forward
+          (true, (null, DateTime(2025)), DateTime(2025), (DateTime.utc(2025), DateTime.utc(2025))), // completes one day
+          (true, (null, DateTime(2025)), DateTime(2024), (DateTime.utc(2024), DateTime.utc(2025))), // completes
+          (true, (DateTime(2024), DateTime(2025)), DateTime(2024), (DateTime.utc(2024), null)), // restarts at the start
+          (true, (DateTime(2024), DateTime(2025)), DateTime(2025), (DateTime.utc(2025), null)), // restarts at the end
+          (true, (DateTime(2024), DateTime(2025)), DateTime(2026), (DateTime.utc(2026), null)), // restarts
+          (false, (DateTime(2024), DateTime(2025)), DateTime(2026), (null, DateTime.utc(2026))), // restarts at the end
+          (true, (DateTime(2024), DateTime(2027)), DateTime(2025), (DateTime.utc(2025), null)), // restarts from inside
+          (
+            true,
+            (DateTime(2024), null),
+            DateTime(2024, 6, 1, 8),
+            (DateTime.utc(2024), DateTime.utc(2024, 6)),
+          ), // truncates
+        ]) {
+      test('select($date) startFirst=$startFirst initial=$initial', () {
+        final controller = FDateSelectionController.openRange(initial: initial, startFirst: startFirst)..select(date);
+        expect(controller.value, expected);
+      });
+    }
+
+    for (final (initial, value, expected) in <((DateTime?, DateTime?), (DateTime?, DateTime?), (DateTime?, DateTime?))>[
+      (
+        (null, null),
+        (DateTime(2024, 11, 30, 12), DateTime(2024, 12, 12, 12)),
+        (DateTime.utc(2024, 11, 30), DateTime.utc(2024, 12, 12)),
+      ), // truncates
+      ((null, null), (DateTime(2024, 11, 30, 12), null), (DateTime.utc(2024, 11, 30), null)), // truncates an open end
+      ((null, null), (null, DateTime(2024, 12, 12, 12)), (null, DateTime.utc(2024, 12, 12))), // truncates an open start
+      ((DateTime(2024), DateTime(2025)), (null, null), (null, null)), // clears
+    ]) {
+      test('value setter initial=$initial value=$value', () {
+        final controller = FDateSelectionController.openRange(initial: initial)..value = value;
+        expect(controller.value, expected);
+      });
+    }
+  });
+
+  group('FDateSelectionControl.managedOpenRange(...)', () {
+    test('throws error when both controller and startFirst are provided', () {
+      expect(
+        () =>
+            FDateSelectionControl.managedOpenRange(controller: FDateSelectionController.openRange(), startFirst: false),
+        throwsAssertionError,
+      );
+    });
+
+    test('throws error when both controller and initial are provided', () {
+      expect(
+        () => FDateSelectionControl.managedOpenRange(
+          controller: FDateSelectionController.openRange(),
+          initial: (DateTime(2024), null),
+        ),
+        throwsAssertionError,
+      );
+    });
+  });
+
   group('FDateSelectionControl.liftedSingle(...)', () {
     for (final (date, expected) in [
       (DateTime(2024, 5, 4), true),
@@ -290,6 +425,51 @@ void main() {
         DateTime(2024, 12, 12, 12),
       );
       expect(changes.single, (DateTime.utc(2024, 11, 30), DateTime.utc(2024, 12, 12)));
+    });
+  });
+
+  group('FDateSelectionControl.liftedOpenRange(...)', () {
+    for (final (value, date, expected) in <((DateTime?, DateTime?), DateTime, bool)>[
+      ((DateTime(2024), DateTime(2025)), DateTime.utc(2024), true), // start, inclusive
+      ((DateTime(2024), DateTime(2025)), DateTime.utc(2024, 6), true), // inside
+      ((DateTime(2024), DateTime(2025)), DateTime.utc(2023), false), // before
+      ((DateTime(2024), null), DateTime.utc(2024), true), // the selected start
+      ((null, DateTime(2025)), DateTime.utc(2025), true), // the selected end
+      ((null, null), DateTime.utc(2023), false),
+    ]) {
+      test('contains($date) value=$value', () {
+        final controller = FDateSelectionControl.liftedOpenRange(value: value, onChange: (_) {}).create(() {});
+        expect(controller.contains(date), expected);
+      });
+    }
+
+    for (final (startFirst, value, date, expected)
+        in <(bool, (DateTime?, DateTime?), DateTime, (DateTime?, DateTime?))>[
+          (true, (null, null), DateTime(2023), (DateTime.utc(2023), null)), // selects the start first
+          (false, (null, null), DateTime(2023), (null, DateTime.utc(2023))), // selects the end first
+          (true, (DateTime(2024), null), DateTime(2023), (DateTime.utc(2023), null)), // moves the start back
+          (true, (DateTime(2024), null), DateTime(2025), (DateTime.utc(2024), DateTime.utc(2025))), // completes
+          (true, (DateTime(2024), DateTime(2025)), DateTime(2024), (DateTime.utc(2024), null)), // restarts at the start
+          (true, (DateTime(2024), DateTime(2025)), DateTime(2026), (DateTime.utc(2026), null)), // restarts
+        ]) {
+      test('select($date) forwards to onChange startFirst=$startFirst value=$value', () {
+        final changes = <(DateTime?, DateTime?)>[];
+        FDateSelectionControl.liftedOpenRange(
+          value: value,
+          onChange: changes.add,
+          startFirst: startFirst,
+        ).create(() {}).select(date);
+        expect(changes.single, expected);
+      });
+    }
+
+    test('value setter truncates and forwards to onChange', () {
+      final changes = <(DateTime?, DateTime?)>[];
+      FDateSelectionControl.liftedOpenRange(value: (null, null), onChange: changes.add).create(() {}).value = (
+        DateTime(2024, 11, 30, 12),
+        null,
+      );
+      expect(changes.single, (DateTime.utc(2024, 11, 30), null));
     });
   });
 }

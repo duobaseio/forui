@@ -14,6 +14,7 @@ import dateSnippet from '@/snippets/examples/data/calendar/date.json';
 import datesSnippet from '@/snippets/examples/data/calendar/dates.json';
 import unselectableSnippet from '@/snippets/examples/data/calendar/unselectable.json';
 import rangeSnippet from '@/snippets/examples/data/calendar/range.json';
+import openRangeSnippet from '@/snippets/examples/data/calendar/open-range.json';
 import splitGridSnippet from '@/snippets/examples/data/calendar/split-grid.json';
 import wheelSnippet from '@/snippets/examples/data/calendar/wheel.json';
 import fixedWeeksSnippet from '@/snippets/examples/data/calendar/fixed-weeks.json';
@@ -150,7 +151,10 @@ height constant.
     </Tab>
 </Tabs>
 
-#### Range Selection
+#### Range
+
+`.managedRange()` always holds a complete range, unlike `.managedOpenRange()` which leaves one bound open until the
+user selects it.
 
 <Tabs items={['Preview', 'Code']}>
     <Tab value="Preview">
@@ -158,6 +162,20 @@ height constant.
     </Tab>
     <Tab value="Code">
         <CodeSnippet snippet={rangeSnippet} />
+    </Tab>
+</Tabs>
+
+#### Open Range
+
+`.managedOpenRange()` leaves one bound open until the user selects it, unlike `.managedRange()` which always holds a
+complete range.
+
+<Tabs items={['Preview', 'Code']}>
+    <Tab value="Preview">
+        <Widget name='data/calendar' variant='open-range' height={350}/>
+    </Tab>
+    <Tab value="Code">
+        <CodeSnippet snippet={openRangeSnippet} />
     </Tab>
 </Tabs>
 

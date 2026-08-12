@@ -81,4 +81,30 @@ void main() {
 
     expect(controller.contains(DateTime.utc(2000)), true);
   });
+
+  testWidgets('useFOpenRangeSelectionController', (tester) async {
+    late FDateSelectionController<(DateTime?, DateTime?)> controller;
+
+    await tester.pumpWidget(
+      MaterialApp(
+        builder: (_, child) => FTheme(data: FTheme.neutral.light.touch, child: child!),
+        home: HookBuilder(
+          builder: (context) {
+            controller = useFOpenRangeSelectionController();
+            return FCalendar.grid(
+              control: FGridCalendarControl(start: DateTime.utc(1900), end: DateTime.utc(2100)),
+              selectionControl: .managedOpenRange(controller: controller),
+            );
+          },
+        ),
+      ),
+    );
+
+    controller.value = (DateTime.utc(2000), null);
+
+    await tester.pumpAndSettle();
+
+    expect(controller.contains(DateTime.utc(2000)), true);
+    expect(controller.value, (DateTime.utc(2000), null));
+  });
 }

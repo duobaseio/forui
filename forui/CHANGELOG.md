@@ -4,6 +4,11 @@
 * Add `FAutocomplete.clearIconBuilder`.
 
 
+### `FCalendar`
+* Add `FDateSelectionController.openRange(...)`.
+* Add `FDateSelectionControl.managedOpenRange(...)` and `FDateSelectionControl.liftedOpenRange(...)`.
+
+
 ### `FDateField` & `FTimeField`
 * Add `FDateField.clearIconBuilder`.
 * Add `FTimeField.clearIconBuilder`.

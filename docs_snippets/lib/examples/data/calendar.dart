@@ -2,6 +2,7 @@ import 'package:flutter/widgets.dart';
 
 import 'package:auto_route/auto_route.dart';
 import 'package:forui/forui.dart';
+import 'package:intl/intl.dart';
 
 import 'package:docs_snippets/example.dart';
 
@@ -88,16 +89,85 @@ class DatesCalendarPage extends Example {
 }
 
 @RoutePage()
-class RangeCalendarPage extends Example {
+class RangeCalendarPage extends StatefulExample {
   RangeCalendarPage({@queryParam super.theme}) : super(alignment: .topCenter, top: 24);
 
   @override
-  Widget example(BuildContext _) => FCalendar.grid(
-    control: FGridCalendarControl(start: DateTime.utc(2000), today: DateTime.utc(2026, 7, 15), end: DateTime.utc(2030)),
-    // {@highlight}
-    selectionControl: .managedRange(initial: (DateTime.utc(2026, 7, 17), DateTime.utc(2026, 7, 20))),
-    // {@endhighlight}
-  );
+  State<RangeCalendarPage> createState() => _RangeCalendarPageState();
+}
+
+class _RangeCalendarPageState extends StatefulExampleState<RangeCalendarPage> {
+  static final _format = DateFormat.yMMMd(); // Requires package:intl
+  static final _initial = (DateTime.utc(2026, 7, 17), DateTime.utc(2026, 7, 20));
+
+  (DateTime, DateTime)? _range = _initial;
+
+  @override
+  Widget example(BuildContext context) {
+    final FThemeData(:colors, :typography) = context.theme;
+    return Column(
+      mainAxisSize: .min,
+      spacing: 12,
+      children: [
+        Text(switch (_range) {
+          (final start, final end) => '${_format.format(start)} to ${_format.format(end)}',
+          null => 'No dates selected',
+        }, style: typography.body.sm.copyWith(color: colors.mutedForeground)),
+        FCalendar.grid(
+          control: FGridCalendarControl(
+            start: DateTime.utc(2000),
+            today: DateTime.utc(2026, 7, 15),
+            end: DateTime.utc(2030),
+          ),
+          // {@highlight}
+          selectionControl: .managedRange(initial: _initial, onChange: (range) => setState(() => _range = range)),
+          // {@endhighlight}
+        ),
+      ],
+    );
+  }
+}
+
+@RoutePage()
+class OpenRangeCalendarPage extends StatefulExample {
+  OpenRangeCalendarPage({@queryParam super.theme}) : super(alignment: .topCenter, top: 24);
+
+  @override
+  State<OpenRangeCalendarPage> createState() => _OpenRangeCalendarPageState();
+}
+
+class _OpenRangeCalendarPageState extends StatefulExampleState<OpenRangeCalendarPage> {
+  static final _format = DateFormat.yMMMd(); // Requires package:intl
+  static final (DateTime?, DateTime?) _initial = (DateTime.utc(2026, 7, 17), null);
+
+  (DateTime?, DateTime?) _range = _initial;
+
+  @override
+  Widget example(BuildContext context) {
+    final FThemeData(:colors, :typography) = context.theme;
+    return Column(
+      mainAxisSize: .min,
+      spacing: 12,
+      children: [
+        Text(switch (_range) {
+          (final start?, final end?) => '${_format.format(start)} to ${_format.format(end)}',
+          (final start?, null) => 'From ${_format.format(start)}',
+          (null, final end?) => 'Until ${_format.format(end)}',
+          _ => 'No dates selected',
+        }, style: typography.body.sm.copyWith(color: colors.mutedForeground)),
+        FCalendar.grid(
+          control: FGridCalendarControl(
+            start: DateTime.utc(2000),
+            today: DateTime.utc(2026, 7, 15),
+            end: DateTime.utc(2030),
+          ),
+          // {@highlight}
+          selectionControl: .managedOpenRange(initial: _initial, onChange: (range) => setState(() => _range = range)),
+          // {@endhighlight}
+        ),
+      ],
+    );
+  }
 }
 
 @RoutePage()
