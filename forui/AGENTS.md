@@ -332,6 +332,19 @@ Steps to add a new localized string:
    ```
    Or equivalently, from `forui/forui`: `flutter gen-l10n`.
 
+4.1: 
+   gen-l10n re-emits `import 'package:flutter_localizations/flutter_localizations.dart';` in
+   `lib/src/localizations/localizations.dart`, which resolves `GlobalMaterialLocalizations` and
+   `GlobalCupertinoLocalizations` to the legacy `package:flutter/material.dart` types instead of
+   `material_ui`/`cupertino_ui`'s. Re-apply by hand after every regeneration:
+   ```dart
+   import 'package:cupertino_ui/cupertino_ui.dart' show GlobalCupertinoLocalizations;
+   import 'package:flutter_localizations/flutter_localizations.dart' show GlobalWidgetsLocalizations;
+   import 'package:material_ui/material_ui.dart' show GlobalMaterialLocalizations;
+   ```
+   
+   Remove this subsection 4.1 once Flutter fixes this upstream.
+
 5. **Add override to `FDefaultLocalizations`** — In `lib/src/localizations/localization.dart`, add an `@override` getter
    (or method) for the new key with the English value. This class provides hardcoded English fallbacks when no
    localization delegate is present. Keep overrides in alphabetical order by widget group.
