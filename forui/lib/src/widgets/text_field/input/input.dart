@@ -1,11 +1,10 @@
-import 'package:flutter/cupertino.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/services.dart';
 
-import 'package:flutter_localizations/flutter_localizations.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/theme/variant.dart';
@@ -410,11 +409,7 @@ class _InputState extends State<Input> {
     if (materialLocalizations == null) {
       field = Localizations(
         locale: Localizations.maybeLocaleOf(context) ?? const Locale('en', 'US'),
-        delegates: const [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
+        delegates: GlobalMaterialLocalizations.delegates,
         child: field,
       );
     }

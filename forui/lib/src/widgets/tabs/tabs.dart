@@ -1,9 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
@@ -233,11 +232,7 @@ class _FTabsState extends State<FTabs> with TickerProviderStateMixin {
     if (localizations == null) {
       return Localizations(
         locale: Localizations.maybeLocaleOf(context) ?? const Locale('en', 'US'),
-        delegates: const [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
+        delegates: GlobalMaterialLocalizations.delegates,
         child: tabs,
       );
     }

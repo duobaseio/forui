@@ -7,7 +7,7 @@ const materialThemeName = 'material-theme';
 const materialThemeFile = 'material_theme';
 
 String mapMaterialThemeMapping(String method) => fragmentFormatter.format('''
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:forui/forui.dart';
 
 extension CustomMaterialTheme on FThemeData {

@@ -289,7 +289,7 @@ class FVariantOperation<K extends FVariantConstraint, E extends FVariant, V, D e
   /// * [FVariantOperation.match] for applying to variants whose constraint's variants are all present.
   /// * [FVariantOperation.variants] for applying to all variants.
   /// * [FVariantOperation.all] for applying to all variants and base.
-  FVariantOperation.base(D delta) : _call = ((base, existing) => .raw(delta(base) as V, {...existing}));
+  new base(D delta) : _call = ((base, existing) => .raw(delta(base) as V, {...existing}));
 
   /// Applies [delta] to the base and associates the result with each constraint in [constraints].
   ///
@@ -305,7 +305,7 @@ class FVariantOperation<K extends FVariantConstraint, E extends FVariant, V, D e
   /// * [FVariantOperation.base] for applying to the base.
   /// * [FVariantOperation.variants] for applying to all variants.
   /// * [FVariantOperation.all] for applying to all variants and base.
-  FVariantOperation.exact(Set<K> constraints, D delta)
+  new exact(Set<K> constraints, D delta)
     : _call = ((base, existing) => .raw(base, {
         ...existing,
         for (final constraint in constraints) constraint: delta(existing[constraint] ?? base) as V,

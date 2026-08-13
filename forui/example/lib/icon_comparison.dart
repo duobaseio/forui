@@ -19,7 +19,7 @@ enum _Icons {
 
   final String label;
 
-  const _Icons(this.label);
+  _Icons(this.label);
 
   FIcons get icons => switch (this) {
     .lucide => FIcons.lucide(),

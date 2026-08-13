@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart' hide DialogRoute, OverlayRoute;
+import 'package:material_ui/material_ui.dart' hide DialogRoute, OverlayRoute;
 
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter_web_plugins/flutter_web_plugins.dart';

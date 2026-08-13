@@ -769,7 +769,7 @@ class VerticalMediaDialog extends StatelessWidget {
     'main',
     'A minimal Forui app entry point',
     r'''import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:forui/forui.dart';
 
 void main() {
@@ -848,7 +848,7 @@ class _ExampleState extends State<Example> {
     'main',
     'A Forui app entry point using MaterialApp.router',
     r'''import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:forui/forui.dart';
 
 void main() {
@@ -893,7 +893,7 @@ class Application extends StatelessWidget {
   'material-theme': (
     'material_theme',
     'An extension mapping your Forui theme to a Material ThemeData',
-    r'''import 'package:flutter/material.dart';
+    r'''import 'package:material_ui/material_ui.dart';
 import 'package:forui/forui.dart';
 
 extension CustomMaterialTheme on FThemeData {
@@ -3367,7 +3367,7 @@ enum FLucideIconMapping {
 const init = {
   'basic': (
     'main',
-    r'''import 'package:flutter/material.dart';
+    r'''import 'package:material_ui/material_ui.dart';
 import 'package:forui/forui.dart';
 
 import '../theme.dart';
@@ -3434,7 +3434,7 @@ class _ExampleState extends State<Example> {
   ),
   'router': (
     'main',
-    r'''import 'package:flutter/material.dart';
+    r'''import 'package:material_ui/material_ui.dart';
 import 'package:forui/forui.dart';
 
 import '../theme.dart';

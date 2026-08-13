@@ -290,10 +290,9 @@ final class FIcons with Diagnosticable {
 /// ## Contract
 /// Subclasses should implement [==] and [hashCode] so that two icons that render the same glyph are equal. Not doing so
 /// may cause widgets to "flicker" whenever the same [FThemeData] is recreated.
-// ignore: one_member_abstracts
 abstract interface class FIcon {
   /// Creates an [FIcon] with the given [IconData].
-  const factory FIcon(IconData icon) = _Icon;
+  const factory(IconData icon) = _Icon;
 
   /// Builds an icon given a [BuildContext].
   ///

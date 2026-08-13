@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart' hide VerticalDivider;
+import 'package:material_ui/material_ui.dart' hide VerticalDivider;
 
 import 'package:flutter_test/flutter_test.dart';
 

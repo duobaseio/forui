@@ -12,7 +12,7 @@ import 'package:forui_cli/src/terminal/terminal.dart';
 String _themeHeader(String preset, String? iconImport) =>
     '''
 import 'package:forui/forui.dart';
-import 'package:flutter/material.dart';${iconImport == null ? '' : '\n$iconImport'}
+import 'package:material_ui/material_ui.dart';${iconImport == null ? '' : '\n$iconImport'}
 
 part 'colors.dart';
 part 'typography.dart';

@@ -1,6 +1,6 @@
 // ignore_for_file: always_use_package_imports
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'package:forui/forui.dart';
 
