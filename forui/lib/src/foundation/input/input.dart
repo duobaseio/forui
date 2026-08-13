@@ -10,7 +10,7 @@ import 'package:forui/src/localizations/localization.dart';
 import 'package:forui/src/localizations/localizations_en.dart';
 
 @internal
-// TODO: Remove once @internal proper ignores this.
+// TODO: https://github.com/dart-lang/sdk/issues/64043
 // ignore: public_member_api_docs
 abstract class const Input<T>({
     required final ValueNotifier<T?> controller,

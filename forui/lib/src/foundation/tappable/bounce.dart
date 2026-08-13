@@ -3,7 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 @internal
-// TODO: Remove once @internal proper ignores this.
+// TODO: https://github.com/dart-lang/sdk/issues/64043
 // ignore: public_member_api_docs
 class const Bounce({
   required final Animation<double> _bounce,

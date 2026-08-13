@@ -34,7 +34,7 @@ dependencies:
   forui_assets: ^0.25.0
   intl: any
   material_ui: ^1.0.0
-  meta: ^1.11.0
+  meta: ^1.19.0
   sugar: ^4.0.0
   vector_math: ^2.1.4
 
