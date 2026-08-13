@@ -320,7 +320,7 @@ class _ThemesVisitor extends RecursiveAstVisitor<void> {
   final Map<String, String> _colors;
   final List<ThemeConstructor> themes = [];
 
-  _ThemesVisitor(this._colors);
+  new(this._colors);
 
   @override
   void visitFieldDeclaration(FieldDeclaration field) {

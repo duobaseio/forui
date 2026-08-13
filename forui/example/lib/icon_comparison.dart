@@ -19,7 +19,7 @@ enum _Icons {
 
   final String label;
 
-  _Icons(this.label);
+  new(this.label);
 
   FIcons get icons => switch (this) {
     .lucide => FIcons.lucide(),
@@ -130,7 +130,7 @@ class _TablerIcon implements FIcon {
   final IconData icon;
   final double scale;
 
-  const _TablerIcon(this.icon, {this.scale = 1});
+  const new(this.icon, {this.scale = 1});
 
   @override
   Widget call(BuildContext _, {String? semanticsLabel}) => Builder(
@@ -156,7 +156,7 @@ class _RemixIcon implements FIcon {
   final IconData icon;
   final bool rotated;
 
-  const _RemixIcon(this.icon, {this.rotated = false});
+  const new(this.icon, {this.rotated = false});
 
   @override
   Widget call(BuildContext _, {String? semanticsLabel}) => Builder(
@@ -181,7 +181,7 @@ class _RemixIcon implements FIcon {
 class _HugeIcon implements FIcon {
   final List<List<dynamic>> icon;
 
-  const _HugeIcon(this.icon);
+  const new(this.icon);
 
   @override
   Widget call(BuildContext _, {String? semanticsLabel}) => HugeIcon(icon: icon, size: null);
@@ -197,7 +197,7 @@ class _HugeIcon implements FIcon {
 class _IconoirIcon implements FIcon {
   final Widget Function({Color? color, double? width, double? height}) icon;
 
-  const _IconoirIcon(this.icon);
+  const new(this.icon);
 
   @override
   Widget call(BuildContext _, {String? semanticsLabel}) => Builder(
@@ -424,7 +424,7 @@ final List<(String, WidgetBuilder)> _sections = [
 /// Compares Lucide (left column) against another icon library (right column) across every widget that consumes an
 /// [FIcons] slot.
 class IconComparison extends StatefulWidget {
-  const IconComparison({super.key});
+  const new({super.key});
 
   @override
   State<IconComparison> createState() => _IconComparisonState();
@@ -508,7 +508,7 @@ class _IconComparisonState extends State<IconComparison> {
 }
 
 class _Checkbox extends StatefulWidget {
-  const _Checkbox();
+  const new();
 
   @override
   State<_Checkbox> createState() => _CheckboxState();

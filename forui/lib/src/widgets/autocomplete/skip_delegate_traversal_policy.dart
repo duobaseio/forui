@@ -15,7 +15,7 @@ class SkipDelegateTraversalPolicy with Diagnosticable implements FocusTraversalP
   final FocusTraversalPolicy _delegate;
   final FocusScopeNode _popover;
 
-  SkipDelegateTraversalPolicy(this._delegate, this._popover);
+  new(this._delegate, this._popover);
 
   @override
   TraversalRequestFocusCallback get requestFocusCallback => _delegate.requestFocusCallback;

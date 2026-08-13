@@ -34,7 +34,7 @@ class FFocusedOutline extends SingleChildRenderObjectWidget {
   final bool focused;
 
   /// Creates a [FFocusedOutline].
-  const FFocusedOutline({required this.focused, required super.child, this.style = const .context(), super.key});
+  const new({required this.focused, required super.child, this.style = const .context(), super.key});
 
   @override
   RenderObject createRenderObject(BuildContext context) => _Outline(
@@ -66,7 +66,7 @@ class _Outline extends RenderProxyBox {
   TextDirection _textDirection;
   bool _focused;
 
-  _Outline(this._style, this._textDirection, {required this._focused});
+  new(this._style, this._textDirection, {required this._focused});
 
   @override
   void paint(PaintingContext context, Offset offset) {
@@ -148,6 +148,6 @@ class FFocusedOutlineStyle with Diagnosticable, _$FFocusedOutlineStyleFunctions 
   final double spacing;
 
   /// Creates a [FFocusedOutlineStyle].
-  const FFocusedOutlineStyle({required this.color, required this.borderRadius, this.width = 1, this.spacing = 3})
+  const new({required this.color, required this.borderRadius, this.width = 1, this.spacing = 3})
     : assert(0 < width, 'width ($width) must be > 0.');
 }

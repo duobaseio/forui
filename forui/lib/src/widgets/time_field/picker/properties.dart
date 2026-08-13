@@ -71,7 +71,7 @@ class FTimeFieldPickerProperties with Diagnosticable {
   /// For example, setting this to 15 will show minutes like 0, 15, 30, and 45.
   final int minuteInterval;
 
-  const FTimeFieldPickerProperties({
+  const new({
     this.anchor = .topLeft,
     this.fieldAnchor = .bottomLeft,
     this.constraints = const FPortalConstraints(maxWidth: 200, maxHeight: 200),

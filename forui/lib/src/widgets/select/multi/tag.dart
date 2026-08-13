@@ -80,7 +80,7 @@ class FMultiSelectTag extends StatelessWidget {
   final Map<Type, Action<Intent>>? actions;
 
   /// Creates a [FMultiSelectTag].
-  const FMultiSelectTag({
+  const new({
     required this.label,
     this.style = const .context(),
     this.autofocus = false,
@@ -195,7 +195,7 @@ class FMultiSelectTagStyle with Diagnosticable, _$FMultiSelectTagStyleFunctions 
   final FFocusedOutlineStyle focusedOutlineStyle;
 
   /// Creates a [FMultiSelectTagStyle].
-  FMultiSelectTagStyle({
+  new({
     required this.decoration,
     required this.labelTextStyle,
     required this.iconStyle,
@@ -207,7 +207,7 @@ class FMultiSelectTagStyle with Diagnosticable, _$FMultiSelectTagStyleFunctions 
   });
 
   /// Creates a [FMultiSelectTagStyle] that inherits its properties.
-  factory FMultiSelectTagStyle.inherit({
+  factory inherit({
     required FColors colors,
     required FIcons icons,
     required FStyle style,

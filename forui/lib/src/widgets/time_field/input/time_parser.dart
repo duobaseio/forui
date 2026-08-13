@@ -13,9 +13,9 @@ abstract class TimeParser extends Parser {
   final int _hourDigit;
   final int _hourEnd;
 
-  factory TimeParser(DateFormat format) => format.pattern!.contains('a') ? Time12Parser(format) : Time24Parser(format);
+  factory(DateFormat format) => format.pattern!.contains('a') ? Time12Parser(format) : Time24Parser(format);
 
-  TimeParser._(DateFormat format, this._hour, this._hourDigit, this._hourEnd)
+  new _(DateFormat format, this._hour, this._hourDigit, this._hourEnd)
     : _minute = NumberFormat('00', format.locale),
       super(_split(format.pattern!));
 
@@ -93,7 +93,7 @@ class Time12Parser extends TimeParser {
   final List<String> periods;
   final List<String> _matches;
 
-  Time12Parser(DateFormat format)
+  new(DateFormat format)
     : periods = [DateFormat('a', format.locale).format(_morning), DateFormat('a', format.locale).format(_afternoon)],
       _matches = [
         DateFormat('a', format.locale).format(_morning).toLowerCase(),
@@ -156,7 +156,7 @@ class Time12Parser extends TimeParser {
 
 @internal
 class Time24Parser extends TimeParser {
-  Time24Parser(DateFormat format)
+  new(DateFormat format)
     : super._(format, NumberFormat(format.pattern!.contains('HH') ? '00' : '#0', format.locale), 3, 23);
 
   @override

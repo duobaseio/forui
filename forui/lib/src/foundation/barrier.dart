@@ -56,7 +56,7 @@ class FAnimatedModalBarrier extends AnimatedWidget {
   final String? semanticsOnTapHint;
 
   /// Creates a [FAnimatedModalBarrier] that blocks user interaction.
-  const FAnimatedModalBarrier({
+  const new({
     required this.filter,
     required this.onDismiss,
     required Animation<double> animation,
@@ -181,7 +181,7 @@ class FModalBarrier extends StatelessWidget {
   final String? semanticsOnTapHint;
 
   /// Creates a widget that blocks user interaction.
-  const FModalBarrier({
+  const new({
     required this.filter,
     required this.onDismiss,
     this.cutout,
@@ -274,7 +274,7 @@ class _CutoutClipper extends SingleChildRenderObjectWidget {
   final RenderBox cutout;
   final void Function(Path path, Rect bounds) cutoutBuilder;
 
-  const _CutoutClipper({required this.cutout, required this.cutoutBuilder, super.child});
+  const new({required this.cutout, required this.cutoutBuilder, super.child});
 
   @override
   RenderObject createRenderObject(BuildContext _) => _RenderCutoutClipper(cutout: cutout, cutoutBuilder: cutoutBuilder);
@@ -297,7 +297,7 @@ class _RenderCutoutClipper extends RenderProxyBox {
   RenderBox _cutout;
   void Function(Path path, Rect bounds) _cutoutBuilder;
 
-  _RenderCutoutClipper({required this._cutout, required this._cutoutBuilder});
+  new({required this._cutout, required this._cutoutBuilder});
 
   @override
   void paint(PaintingContext context, Offset offset) {
@@ -365,7 +365,7 @@ class _SemanticsClipper extends SingleChildRenderObjectWidget {
 
   /// Creates a [_SemanticsClipper] that updates the size of the [SemanticsNode.rect] of its child based on the value
   /// inside the provided [ValueNotifier], or a default value of [EdgeInsets.zero].
-  const _SemanticsClipper({required this.clipDetailsNotifier, super.child});
+  const new({required this.clipDetailsNotifier, super.child});
 
   @override
   _RenderSemanticsClipper createRenderObject(BuildContext _) =>
@@ -390,7 +390,7 @@ class _RenderSemanticsClipper extends RenderProxyBox {
 
   /// Creates a [RenderProxyBox] that Updates the [SemanticsNode.rect] of its child based on the value inside the
   /// provided [ValueNotifier].
-  _RenderSemanticsClipper({required this._clipDetailsNotifier, RenderBox? child}) : super(child);
+  new({required this._clipDetailsNotifier, RenderBox? child}) : super(child);
 
   @override
   void attach(PipelineOwner owner) {
@@ -445,7 +445,7 @@ class _RenderSemanticsClipper extends RenderProxyBox {
 
 /// This is an exact copy of [_AnyTapGestureRecognizerFactory] in Flutter 3.32.1.
 class _AnyTapGestureRecognizerFactory extends GestureRecognizerFactory<_AnyTapGestureRecognizer> {
-  const _AnyTapGestureRecognizerFactory({this.onAnyTapUp});
+  const new({this.onAnyTapUp});
 
   final VoidCallback? onAnyTapUp;
 
@@ -463,7 +463,7 @@ class _AnyTapGestureRecognizerFactory extends GestureRecognizerFactory<_AnyTapGe
 ///
 /// This is an exact copy of [_AnyTapGestureRecognizer] in Flutter 3.32.1.
 class _AnyTapGestureRecognizer extends BaseTapGestureRecognizer {
-  _AnyTapGestureRecognizer();
+  new();
 
   VoidCallback? onAnyTapUp;
 

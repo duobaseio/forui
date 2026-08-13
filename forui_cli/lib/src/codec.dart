@@ -16,7 +16,7 @@ final class Preset {
   final IconLibrary icon;
   final Radius radius;
 
-  const Preset({
+  const new({
     this.base = .neutral,
     this.primary,
     this.display = .inter,
@@ -25,7 +25,7 @@ final class Preset {
     this.radius = .medium,
   });
 
-  factory Preset.decode(String? encoded) {
+  factory decode(String? encoded) {
     if (encoded == null) {
       return const Preset();
     }
@@ -343,7 +343,7 @@ enum BaseColor implements Option {
   final BaseColors light;
   final BaseColors dark;
 
-  const BaseColor({required this.code, required this.name, required this.light, required this.dark});
+  new({required this.code, required this.name, required this.light, required this.dark});
 }
 
 final class BaseColors {
@@ -363,7 +363,7 @@ final class BaseColors {
   final int card;
   final int border;
 
-  const BaseColors({
+  const new({
     required this.barrier,
     required this.background,
     required this.foreground,
@@ -493,14 +493,14 @@ enum PrimaryColor implements Option {
   final PrimaryColors light;
   final PrimaryColors dark;
 
-  const PrimaryColor({required this.code, required this.name, required this.light, required this.dark});
+  new({required this.code, required this.name, required this.light, required this.dark});
 }
 
 final class PrimaryColors {
   final int primary;
   final int primaryForeground;
 
-  const PrimaryColors({required this.primary, required this.primaryForeground});
+  const new({required this.primary, required this.primaryForeground});
 }
 
 enum FontFamily implements Option {
@@ -720,25 +720,25 @@ enum FontFamily implements Option {
   final FontFormat format;
   final FontFamilyCategory category;
 
-  const FontFamily(this.code, this.name, this.url, this.format, this.category);
+  new(this.code, this.name, this.url, this.format, this.category);
 }
 
 enum FontFamilyCategory { sans, serif, mono }
 
-sealed class FontFormat {}
+sealed class FontFormat;
 
 final class VariableFontFormat implements FontFormat {
   final String normal;
   final String? italic;
 
-  const VariableFontFormat({required this.normal, required this.italic});
+  const new({required this.normal, required this.italic});
 }
 
 final class StaticFontFormat implements FontFormat {
   final Map<int, String> normal;
   final Map<int, String> italic;
 
-  const StaticFontFormat({required this.normal, required this.italic});
+  const new({required this.normal, required this.italic});
 }
 
 enum IconLibrary implements Option {
@@ -755,7 +755,7 @@ enum IconLibrary implements Option {
   final String package;
   final String url;
 
-  const IconLibrary(this.code, this.name, this.package, this.url);
+  new(this.code, this.name, this.package, this.url);
 }
 
 enum Radius implements Option {
@@ -770,7 +770,7 @@ enum Radius implements Option {
   final String name;
   final BorderRadii radius;
 
-  const Radius(this.code, this.name, this.radius);
+  new(this.code, this.name, this.radius);
 }
 
 typedef BorderRadii = ({

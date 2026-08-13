@@ -12,7 +12,7 @@ class _HourPicker extends StatefulWidget with FPickerWheelMixin {
   final int offset;
   final Widget child;
 
-  const _HourPicker({required this.controller, required this.pattern, required this.offset, required this.child});
+  const new({required this.controller, required this.pattern, required this.offset, required this.child});
 
   @override
   State<_HourPicker> createState() => _HourPickerState();
@@ -69,7 +69,7 @@ abstract class _Picker extends StatelessWidget {
   final int minuteFlex;
   final String debugLabel;
 
-  const _Picker({
+  const new({
     required this.controller,
     required this.style,
     required this.dateWheels,
@@ -107,7 +107,7 @@ abstract class _Picker extends StatelessWidget {
 class Western12Picker extends _Picker {
   final int periodFlex;
 
-  const Western12Picker({
+  const new({
     required this.periodFlex,
     required super.controller,
     required super.style,
@@ -193,7 +193,7 @@ class Western12Picker extends _Picker {
 
 @internal
 class Western24Picker extends _Picker {
-  const Western24Picker({
+  const new({
     required super.controller,
     required super.style,
     required super.dateWheels,
@@ -241,7 +241,7 @@ class Western24Picker extends _Picker {
 class Eastern12Picker extends _Picker {
   final int periodFlex;
 
-  const Eastern12Picker({
+  const new({
     required this.periodFlex,
     required super.controller,
     required super.style,
@@ -328,7 +328,7 @@ class Eastern12Picker extends _Picker {
 
 @internal
 class Eastern24Picker extends _Picker {
-  const Eastern24Picker({
+  const new({
     required super.controller,
     required super.style,
     required super.dateWheels,

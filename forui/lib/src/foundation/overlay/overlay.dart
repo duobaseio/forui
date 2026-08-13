@@ -121,7 +121,7 @@ class FOverlay extends StatefulWidget {
   ///
   /// ## Contract
   /// Throws [AssertionError] if [builder] and [child] are both null.
-  const FOverlay({
+  const new({
     required this.overlay,
     this.control = const .managed(),
     this.overlayBuilder = defaultOverlayBuilder,
@@ -197,7 +197,7 @@ class _State extends State<FOverlay> {
 /// This is fine since the [Stack] is rendered in an overlay layer that is hit tested independently of the child widget.
 /// It is a simple way to implement positioning relative to the child widget without re-inventing the stack protocol.
 class _UnclippedStack extends Stack {
-  const _UnclippedStack({super.children}) : super(clipBehavior: .none);
+  const new({super.children}) : super(clipBehavior: .none);
 
   @override
   RenderStack createRenderObject(BuildContext context) =>
@@ -205,7 +205,7 @@ class _UnclippedStack extends Stack {
 }
 
 class _RenderUnclippedStack extends RenderStack {
-  _RenderUnclippedStack({super.textDirection, super.clipBehavior});
+  new({super.textDirection, super.clipBehavior});
 
   @override
   bool hitTest(BoxHitTestResult result, {required Offset position}) => hitTestChildren(result, position: position);

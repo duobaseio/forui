@@ -236,7 +236,7 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
   /// {@template forui.widgets.FSelectMenuTile.new}
   /// Creates a [FSelectMenuTile] that eagerly builds the menu.
   /// {@endtemplate}
-  FSelectMenuTile({
+  new({
     required this.title,
     required List<FSelectTile<T>> this._menu,
     this.selectControl,
@@ -298,7 +298,7 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
   /// Each key in [menu] must map to a unique value. Having multiple keys map to the same value will result in
   /// undefined behavior.
   /// {@endtemplate}
-  factory FSelectMenuTile.fromMap(
+  factory fromMap(
     Map<String, T> menu, {
     required Text title,
     FMultiValueControl<T>? selectControl,
@@ -421,7 +421,7 @@ class FSelectMenuTile<T> extends StatefulWidget with FTileMixin, FFormFieldPrope
   /// * `count` is null and `menuBuilder` always provides a zero-size widget, i.e., SizedBox(). If possible, provide
   ///   tiles with non-zero size, return null from the builder, or set `count` to non-null.
   /// {@endtemplate}
-  FSelectMenuTile.builder({
+  new builder({
     required this.title,
     required FSelectTile<T>? Function(BuildContext context, int index) this._menuBuilder,
     this._count,
@@ -722,7 +722,7 @@ class _Notifier<T> implements FMultiValueNotifier<T> {
   FPopoverController _popover;
   bool autoHide;
 
-  _Notifier(this.delegate, this._popover, {required this.autoHide});
+  new(this.delegate, this._popover, {required this.autoHide});
 
   @override
   bool contains(T value) => delegate.contains(value);
@@ -772,7 +772,7 @@ class FSelectMenuTileStyle extends FLabelStyle with _$FSelectMenuTileStyleFuncti
   final FTileStyle tileStyle;
 
   /// Creates a [FSelectMenuTileStyle].
-  FSelectMenuTileStyle({
+  new({
     required this.menuStyle,
     required this.tileStyle,
     required super.labelTextStyle,
@@ -786,7 +786,7 @@ class FSelectMenuTileStyle extends FLabelStyle with _$FSelectMenuTileStyleFuncti
   });
 
   /// Creates a [FSelectMenuTileStyle] that inherits its properties.
-  factory FSelectMenuTileStyle.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,

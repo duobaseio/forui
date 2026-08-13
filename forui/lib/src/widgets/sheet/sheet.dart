@@ -24,7 +24,7 @@ class Sheet extends StatefulWidget {
   final ValueChanged<Size>? onChange;
   final VoidCallback? onClosing;
 
-  const Sheet({
+  const new({
     required this.controller,
     required this.animation,
     required this.style,
@@ -292,7 +292,7 @@ abstract class FSheetStyle {
   final double closeProgressThreshold;
 
   /// Creates a [FSheetStyle].
-  const FSheetStyle({this.flingVelocity = 700, this.closeProgressThreshold = 0.5});
+  const new({this.flingVelocity = 700, this.closeProgressThreshold = 0.5});
 
   /// The motion-related properties for a sheet.
   FSheetMotion get motion;
@@ -314,7 +314,7 @@ abstract class FSheetMotion {
   final Curve curve;
 
   /// Creates a [FSheetMotion].
-  const FSheetMotion({
+  const new({
     this.expandDuration = const Duration(milliseconds: 200),
     this.collapseDuration = const Duration(milliseconds: 200),
     this.curve = Curves.easeOutCubic,

@@ -18,7 +18,7 @@ class AnimatedToastData extends ParentDataWidget<AnimatedToasterParentData> {
   /// The signal to indicate that a widget update has occurred.
   final int signal;
 
-  const AnimatedToastData({
+  const new({
     required this.index,
     required this.transition,
     required this.visible,
@@ -133,7 +133,7 @@ class AnimationTween<T> {
 
   static AnimationTween<Size> size({Size? begin, Size? end}) => .new(equal: _size, begin: begin, end: end);
 
-  AnimationTween({required this._equal, this.begin, this.end});
+  new({required this._equal, this.begin, this.end});
 
   void mark() {
     begin = value;

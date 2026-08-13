@@ -60,7 +60,7 @@ class FSidebarGroup extends StatelessWidget {
   final List<Widget> children;
 
   /// Creates a [FSidebarGroup].
-  const FSidebarGroup({
+  const new({
     required this.children,
     this.style = const .context(),
     this.label,
@@ -147,7 +147,7 @@ class FSidebarGroupData extends InheritedWidget {
   final FSidebarGroupStyle style;
 
   /// Creates a [FSidebarGroupData].
-  const FSidebarGroupData({required this.style, required super.child, super.key});
+  const new({required this.style, required super.child, super.key});
 
   @override
   bool updateShouldNotify(FSidebarGroupData old) => style != old.style;
@@ -202,7 +202,7 @@ class FSidebarGroupStyle with Diagnosticable, _$FSidebarGroupStyleFunctions {
   final FSidebarItemStyle itemStyle;
 
   /// Creates a [FSidebarGroupStyle].
-  const FSidebarGroupStyle({
+  const new({
     required this.labelStyle,
     required this.actionStyle,
     required this.tappableStyle,
@@ -216,7 +216,7 @@ class FSidebarGroupStyle with Diagnosticable, _$FSidebarGroupStyleFunctions {
   });
 
   /// Creates a [FSidebarGroupStyle] that inherits its properties.
-  FSidebarGroupStyle.inherit({
+  new inherit({
     required FColors colors,
     required FTypography typography,
     required FIcons icons,

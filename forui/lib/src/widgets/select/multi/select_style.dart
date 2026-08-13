@@ -28,7 +28,7 @@ class FMultiSelectStyle with Diagnosticable, _$FMultiSelectStyleFunctions {
   final TextStyle emptyTextStyle;
 
   /// Creates a [FMultiSelectStyle].
-  FMultiSelectStyle({
+  new({
     required this.fieldStyles,
     required this.searchStyle,
     required this.contentStyle,
@@ -36,7 +36,7 @@ class FMultiSelectStyle with Diagnosticable, _$FMultiSelectStyleFunctions {
   });
 
   /// Creates a [FMultiSelectStyle] that inherits its properties.
-  FMultiSelectStyle.inherit({
+  new inherit({
     required FColors colors,
     required FTypography typography,
     required FIcons icons,
@@ -62,7 +62,7 @@ extension type FMultiSelectFieldSizeStyles(
       FMultiSelectFieldStyleDelta
     > {
   /// Creates a [FMultiSelectFieldSizeStyles] that inherits its properties.
-  factory FMultiSelectFieldSizeStyles.inherit({
+  factory inherit({
     required FColors colors,
     required FIcons icons,
     required FTypography typography,
@@ -236,7 +236,7 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
   final FMultiSelectTagStyle tagStyle;
 
   /// Creates a [FMultiSelectFieldStyle].
-  FMultiSelectFieldStyle({
+  new({
     required this.decoration,
     required this.contentPadding,
     required this.hintTextStyle,
@@ -260,7 +260,7 @@ class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSe
   });
 
   /// Creates a [FMultiSelectFieldStyle] that inherits its properties.
-  FMultiSelectFieldStyle.inherit({
+  new inherit({
     required FColors colors,
     required FIcons icons,
     required FStyle style,

@@ -23,7 +23,7 @@ List<Widget> _pages = [
 ];
 
 class Application extends StatefulWidget {
-  const Application({super.key});
+  const new({super.key});
 
   @override
   State<Application> createState() => _ApplicationState();

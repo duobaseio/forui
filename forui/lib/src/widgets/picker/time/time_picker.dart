@@ -67,7 +67,7 @@ class FTimePicker extends StatefulWidget {
   final int minuteInterval;
 
   /// Creates a [FTimePicker].
-  const FTimePicker({
+  const new({
     this.control = const .managed(),
     this.style = const .context(),
     this.hour24,
@@ -227,7 +227,7 @@ class FTimePickerStyle extends FPickerStyle with _$FTimePickerStyleFunctions {
   final EdgeInsetsDirectional padding;
 
   /// Creates a [FTimePickerStyle].
-  const FTimePickerStyle({
+  const new({
     required super.textStyle,
     required super.selectionDecoration,
     required super.focusedOutlineStyle,
@@ -249,7 +249,7 @@ class FTimePickerStyle extends FPickerStyle with _$FTimePickerStyleFunctions {
   });
 
   /// Creates a [FTimePickerStyle] that inherits its properties.
-  FTimePickerStyle.inherit({
+  new inherit({
     required FColors colors,
     required FStyle style,
     required FTypography typography,

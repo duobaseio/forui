@@ -84,7 +84,7 @@ class FCheckbox extends StatelessWidget {
   final ValueChanged<bool>? onFocusChange;
 
   /// Creates a [FCheckbox].
-  const FCheckbox({
+  const new({
     this.style = const .context(),
     this.leadingLabel = false,
     this.label,
@@ -215,7 +215,7 @@ class FCheckboxStyle with Diagnosticable, _$FCheckboxStyleFunctions {
   final FLabelStyle trailingLabelStyle;
 
   /// Creates a [FCheckboxStyle].
-  const FCheckboxStyle({
+  const new({
     required this.tappableStyle,
     required this.focusedOutlineStyle,
     required this.iconStyle,
@@ -228,7 +228,7 @@ class FCheckboxStyle with Diagnosticable, _$FCheckboxStyleFunctions {
   });
 
   /// Creates a [FCheckboxStyle] that inherits its properties.
-  factory FCheckboxStyle.inherit({
+  factory inherit({
     required FColors colors,
     required FIcons icons,
     required FStyle style,
@@ -331,7 +331,7 @@ class FCheckboxMotion with Diagnosticable, _$FCheckboxMotionFunctions {
   final Curve fadeOutCurve;
 
   /// Creates a [FCheckboxMotion].
-  const FCheckboxMotion({
+  const new({
     this.fadeInDuration = const Duration(milliseconds: 100),
     this.fadeOutDuration = const Duration(milliseconds: 100),
     this.fadeInCurve = Curves.linear,

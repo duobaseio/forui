@@ -17,7 +17,7 @@ class InheritedSelectController<T> extends InheritedWidget {
   final bool Function(T) contains;
   final ValueChanged<T> onPress;
 
-  const InheritedSelectController({
+  const new({
     required this.popover,
     required this.contains,
     required this.onPress,

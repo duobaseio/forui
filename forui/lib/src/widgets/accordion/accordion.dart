@@ -51,7 +51,7 @@ class FAccordion extends StatefulWidget {
   final List<Widget> children;
 
   /// Creates a [FAccordion].
-  const FAccordion({required this.children, this.control = const .managed(), this.style = const .context(), super.key});
+  const new({required this.children, this.control = const .managed(), this.style = const .context(), super.key});
 
   @override
   State<FAccordion> createState() => _FAccordionState();
@@ -122,7 +122,7 @@ class InheritedAccordionData extends InheritedWidget {
   final int index;
   final Set<int> expanded;
 
-  InheritedAccordionData({
+  new({
     required this.controller,
     required this.style,
     required this.index,
@@ -184,7 +184,7 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
   final FAccordionMotion motion;
 
   /// Creates a [FAccordionStyle].
-  const FAccordionStyle({
+  const new({
     required this.titleTextStyle,
     required this.childTextStyle,
     required this.iconStyle,
@@ -197,7 +197,7 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
   });
 
   /// Creates a [FDividerStyles] that inherits its properties.
-  FAccordionStyle.inherit({
+  new inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,
@@ -270,7 +270,7 @@ class FAccordionMotion with Diagnosticable, _$FAccordionMotionFunctions {
   final Animatable<double> iconTween;
 
   /// Creates a [FAccordionMotion].
-  const FAccordionMotion({
+  const new({
     this.expandDuration = const Duration(milliseconds: 200),
     this.expandCurve = Curves.easeOutCubic,
     this.collapseDuration = const Duration(milliseconds: 200),

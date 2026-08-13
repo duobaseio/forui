@@ -72,7 +72,7 @@ class FCard extends StatelessWidget {
   /// ```
   ///
   /// See https://forui.dev/docs/widgets/data/card for other generatable layouts.
-  const FCard({
+  const new({
     this.style = const .context(),
     this.clipBehavior = .none,
     this.builder = defaultBuilder,
@@ -126,7 +126,7 @@ class FCardStyle with Diagnosticable, _$FCardStyleFunctions {
   final EdgeInsetsGeometry padding;
 
   /// Creates a [FCardStyle].
-  FCardStyle({
+  new({
     required this.decoration,
     required this.titleTextStyle,
     required this.subtitleTextStyle,
@@ -134,7 +134,7 @@ class FCardStyle with Diagnosticable, _$FCardStyleFunctions {
   });
 
   /// Creates a [FCardStyle] that inherits its properties.
-  factory FCardStyle.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,

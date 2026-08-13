@@ -13,7 +13,7 @@ import 'package:forui/src/widgets/slider/thumb.dart';
 
 @internal
 class Track extends StatelessWidget {
-  const Track({super.key});
+  const new({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -54,7 +54,7 @@ class Track extends StatelessWidget {
 }
 
 class _GestureDetector extends StatefulWidget {
-  const _GestureDetector();
+  const new();
 
   @override
   State<_GestureDetector> createState() => _GestureDetectorState();
@@ -194,7 +194,7 @@ class _GestureDetectorState extends State<_GestureDetector> {
 }
 
 class _Track extends StatelessWidget {
-  const _Track();
+  const new();
 
   @override
   Widget build(BuildContext context) {
@@ -241,7 +241,7 @@ class _Track extends StatelessWidget {
 
 @internal
 class ActiveTrack extends StatelessWidget {
-  const ActiveTrack({super.key});
+  const new({super.key});
 
   @override
   Widget build(BuildContext context) {

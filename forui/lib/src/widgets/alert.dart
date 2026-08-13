@@ -84,7 +84,7 @@ class FAlert extends StatelessWidget {
   /// |          [subtitle]       |
   /// |---------------------------|
   /// ```
-  const FAlert({
+  const new({
     required this.title,
     this.variant = .primary,
     this.style = const .context(),
@@ -164,7 +164,7 @@ class FAlert extends StatelessWidget {
 extension type FAlertStyles(FVariants<FAlertVariantConstraint, FAlertVariant, FAlertStyle, FAlertStyleDelta> _)
     implements FVariants<FAlertVariantConstraint, FAlertVariant, FAlertStyle, FAlertStyleDelta> {
   /// Creates a [FAlertStyles] that inherits its properties.
-  factory FAlertStyles.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,
@@ -228,7 +228,7 @@ final class FAlertStyle with Diagnosticable, _$FAlertStyleFunctions {
   final TextStyle subtitleTextStyle;
 
   /// Creates a [FAlertStyle].
-  FAlertStyle({
+  new({
     required this.decoration,
     required this.iconStyle,
     required this.titleTextStyle,

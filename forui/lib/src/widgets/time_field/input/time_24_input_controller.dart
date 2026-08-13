@@ -21,7 +21,7 @@ class Time24InputController extends TimeInputController {
   @override
   final Time24Selector selector;
 
-  Time24InputController(
+  new(
     FLocalizations localizations,
     super.controller,
     super.format,
@@ -63,7 +63,7 @@ class Time24InputController extends TimeInputController {
 
 @internal
 class Time24Selector extends Selector {
-  Time24Selector(FLocalizations localizations)
+  new(FLocalizations localizations)
     : super(localizations, RegExp(RegExp.escape(localizations.timeFieldSuffix) + r'$'));
 
   @override

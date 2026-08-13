@@ -28,7 +28,7 @@ class AnimatedToaster extends MultiChildRenderObjectWidget {
   /// The expansion's animation value between `[0, 1]`.
   final double expand;
 
-  const AnimatedToaster({
+  const new({
     required this.style,
     required this.expandedAlignTransform,
     required this.collapsedAlignTransform,
@@ -74,7 +74,7 @@ class RenderAnimatedToaster extends RenderBox
   double _expand;
 
   /// Creates a [RenderAnimatedToaster].
-  RenderAnimatedToaster({
+  new({
     required this._style,
     required this._expandedAlignTransform,
     required this._collapsedAlignTransform,

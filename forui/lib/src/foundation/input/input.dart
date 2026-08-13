@@ -43,7 +43,7 @@ abstract class Input<T> extends StatefulWidget {
   final FLocalizations localizations;
   final Key? formFieldKey;
 
-  const Input({
+  const new({
     required this.controller,
     required this.size,
     required this.platformVariant,
@@ -223,7 +223,7 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
 class AdjustIntent extends Intent {
   final int amount;
 
-  const AdjustIntent(this.amount);
+  const new(this.amount);
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

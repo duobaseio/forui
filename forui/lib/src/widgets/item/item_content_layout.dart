@@ -18,7 +18,7 @@ class ItemContentLayout extends MultiChildRenderObjectWidget {
   final double? dividerWidth;
   final FItemDivider dividerType;
 
-  const ItemContentLayout({
+  const new({
     required this.margin,
     required this.padding,
     required this.top,
@@ -92,7 +92,7 @@ class _RenderLayout extends RenderBox
   FItemDivider _dividerType;
   TextDirection _textDirection;
 
-  _RenderLayout(
+  new(
     this._margin,
     this._padding,
     this._top,

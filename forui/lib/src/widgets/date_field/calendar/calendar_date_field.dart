@@ -13,7 +13,7 @@ class _CalendarDateField extends FDateField {
   final bool clearable;
   final FFieldClearIconBuilder<FTextFieldStyle> clearIconBuilder;
 
-  _CalendarDateField({
+  new({
     this.popoverControl = const .managed(),
     this.format = FDateField.defaultFormat,
     this.hint,
@@ -212,7 +212,7 @@ class _CalendarPopover extends StatelessWidget {
   final FocusNode? fieldFocusNode;
   final Widget child;
 
-  const _CalendarPopover({
+  const new({
     required this.calendarController,
     required this.selectionController,
     required this.popoverController,

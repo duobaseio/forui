@@ -200,7 +200,7 @@ class FItem extends StatelessWidget with FItemMixin {
   ///
   /// Use [FItem.raw] in these cases.
   /// {@endtemplate}
-  FItem({
+  new({
     required Widget title,
     this.variant = .primary,
     this.style = const .context(),
@@ -255,7 +255,7 @@ class FItem extends StatelessWidget with FItemMixin {
   ///
   /// The order is reversed for RTL locales.
   /// {@endtemplate}
-  FItem.raw({
+  new raw({
     required Widget child,
     this.variant = .primary,
     this.style = const .context(),
@@ -433,7 +433,7 @@ class FItem extends StatelessWidget with FItemMixin {
 extension type FItemStyles(FVariants<FItemVariantConstraint, FItemVariant, FItemStyle, FItemStyleDelta> _)
     implements FVariants<FItemVariantConstraint, FItemVariant, FItemStyle, FItemStyleDelta> {
   /// Creates a [FItemStyles] that inherits its properties.
-  factory FItemStyles.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,
@@ -533,7 +533,7 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
   final FFocusedOutlineStyle? focusedOutlineStyle;
 
   /// Creates a [FItemStyle].
-  FItemStyle({
+  new({
     required this.backgroundColor,
     required this.contentDecoration,
     required this.contentStyle,
@@ -545,7 +545,7 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
   });
 
   /// Creates a [FItemStyle] that inherits from the given arguments.
-  FItemStyle.inherit({
+  new inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,

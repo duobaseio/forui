@@ -13,7 +13,7 @@ import 'package:forui/forui.dart';
 class FiniteConstraintsValidator extends SingleChildRenderObjectWidget {
   final String type;
 
-  const FiniteConstraintsValidator({required this.type, required super.child, super.key});
+  const new({required this.type, required super.child, super.key});
 
   @override
   RenderObject createRenderObject(BuildContext context) => _RenderFiniteConstraintsValidator(type: type);
@@ -33,7 +33,7 @@ class FiniteConstraintsValidator extends SingleChildRenderObjectWidget {
 class _RenderFiniteConstraintsValidator extends RenderProxyBox {
   String _type;
 
-  _RenderFiniteConstraintsValidator({required this._type});
+  new({required this._type});
 
   @override
   void performLayout() {

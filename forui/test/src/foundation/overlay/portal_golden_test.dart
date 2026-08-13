@@ -635,7 +635,7 @@ void main() {
 }
 
 class Expanding extends StatefulWidget {
-  const Expanding({super.key});
+  const new({super.key});
 
   @override
   State<Expanding> createState() => _ExpandingState();

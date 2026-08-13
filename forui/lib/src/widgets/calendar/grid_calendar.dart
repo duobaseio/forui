@@ -35,7 +35,7 @@ class GridCalendar extends StatelessWidget {
   final FCalendarMonthBuilder monthBuilder;
   final FCalendarYearBuilder yearBuilder;
 
-  const GridCalendar({
+  const new({
     required this.controller,
     required this.selectionController,
     required this.style,
@@ -238,7 +238,7 @@ class GridSplitCalendar extends StatelessWidget {
   final FCalendarMonthBuilder monthBuilder;
   final FCalendarYearBuilder yearBuilder;
 
-  const GridSplitCalendar({
+  const new({
     required this.controller,
     required this.selectionController,
     required this.style,

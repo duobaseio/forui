@@ -29,7 +29,7 @@ class WheelCalendar extends StatelessWidget {
   final FCalendarFooterBuilder<FWheelCalendarController> footerBuilder;
   final FCalendarDayBuilder dayBuilder;
 
-  const WheelCalendar({
+  const new({
     required this.controller,
     required this.selectionController,
     required this.style,

@@ -36,7 +36,7 @@ class _LineCalendarScrollControllerHook extends Hook<FLineCalendarScrollControll
   final bool keepScrollOffset;
   final String? debugLabel;
 
-  const _LineCalendarScrollControllerHook({
+  const new({
     required this.start,
     required this.end,
     required this.today,

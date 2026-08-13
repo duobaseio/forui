@@ -123,7 +123,7 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderValue> {
   final Key? formFieldKey;
 
   /// Creates a [FSlider].
-  FSlider({
+  new({
     this.control = const .managedContinuous(),
     this.style = const .context(),
     this.layout,
@@ -252,7 +252,7 @@ class _Slider extends StatefulWidget {
   final bool enabled;
   final Key? formFieldKey;
 
-  const _Slider({
+  const new({
     required this.control,
     required this.style,
     required this.layout,

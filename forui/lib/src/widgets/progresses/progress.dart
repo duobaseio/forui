@@ -41,7 +41,7 @@ class FProgress extends StatefulWidget {
   final String? semanticsLabel;
 
   /// Creates a determinate [FProgress].
-  const FProgress({this.style = const .context(), this.semanticsLabel, super.key});
+  const new({this.style = const .context(), this.semanticsLabel, super.key});
 
   @override
   State<FProgress> createState() => _ProgressState();
@@ -162,7 +162,7 @@ class FProgressStyle with Diagnosticable, _$FProgressStyleFunctions {
   final FProgressMotion motion;
 
   /// Creates a [FProgressStyle].
-  const FProgressStyle({
+  const new({
     required this.trackDecoration,
     required this.fillDecoration,
     this.constraints = const .tightFor(height: 6.0),
@@ -170,7 +170,7 @@ class FProgressStyle with Diagnosticable, _$FProgressStyleFunctions {
   });
 
   /// Creates a [FProgressStyle] that inherits its properties.
-  FProgressStyle.inherit({required FColors colors, required FStyle style})
+  new inherit({required FColors colors, required FStyle style})
     : this(
         trackDecoration: ShapeDecoration(
           shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.pill),
@@ -207,7 +207,7 @@ class FProgressMotion with Diagnosticable, _$FProgressMotionFunctions {
   final double value;
 
   /// Creates a [FProgressMotion].
-  const FProgressMotion({
+  const new({
     this.period = const Duration(milliseconds: 1000),
     this.interval = const Duration(milliseconds: 500),
     this.curve = Curves.ease,

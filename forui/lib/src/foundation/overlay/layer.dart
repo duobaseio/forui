@@ -88,7 +88,7 @@ class ChildLayer extends ContainerLayer {
   Offset _globalOffset;
   Offset _localOffset;
 
-  ChildLayer({required this._link, required this._globalOffset, required this._localOffset});
+  new({required this._link, required this._globalOffset, required this._localOffset});
 
   @override
   void attach(Object owner) {
@@ -200,7 +200,7 @@ class OverlayLayer extends ContainerLayer {
   ///
   /// The [unlinkedOffset], [linkedOffset], and [showWhenUnlinked] properties
   /// must be non-null before the compositing phase of the pipeline.
-  OverlayLayer({
+  new({
     required this.link,
     this.showWhenUnlinked = false,
     this.unlinkedOffset = .zero,

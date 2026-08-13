@@ -86,7 +86,7 @@ class FRadio extends StatelessWidget {
   final ValueChanged<bool>? onFocusChange;
 
   /// Creates a [FRadio].
-  const FRadio({
+  const new({
     this.style = const .context(),
     this.leadingLabel = false,
     this.label,
@@ -233,7 +233,7 @@ class FRadioStyle with Diagnosticable, _$FRadioStyleFunctions {
   final FLabelStyle trailingLabelStyle;
 
   /// Creates a [FRadioStyle].
-  const FRadioStyle({
+  const new({
     required this.tappableStyle,
     required this.focusedOutlineStyle,
     required this.padding,
@@ -248,7 +248,7 @@ class FRadioStyle with Diagnosticable, _$FRadioStyleFunctions {
   });
 
   /// Creates a [FRadioStyle] that inherits its properties.
-  factory FRadioStyle.inherit({required FColors colors, required FStyle style, required bool touch}) {
+  factory inherit({required FColors colors, required FStyle style, required bool touch}) {
     final labels = FLabelStyles.inherit(style: style);
     final (padding, indicatorSize) = switch (touch) {
       true => (const EdgeInsets.all(3), 12.0),
@@ -316,7 +316,7 @@ class FRadioMotion with Diagnosticable, _$FRadioMotionFunctions {
   final Curve selectCurve;
 
   /// Creates a [FRadioMotion].
-  const FRadioMotion({
+  const new({
     this.transitionDuration = const Duration(milliseconds: 100),
     this.transitionCurve = Curves.linear,
     this.selectDuration = const Duration(milliseconds: 100),

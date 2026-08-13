@@ -27,12 +27,12 @@ class FTabEntry {
   final Widget child;
 
   /// Creates a [FTabEntry].
-  const FTabEntry({required this.label, required this.child});
+  const new({required this.label, required this.child});
 
   /// Creates a [FTabEntry].
   ///
   /// This is identical to [FTabEntry.new], allowing dot-shorthand construction.
-  const factory FTabEntry.entry({required Widget label, required Widget child}) = FTabEntry;
+  const factory entry({required Widget label, required Widget child}) = FTabEntry;
 
   @override
   bool operator ==(Object other) =>
@@ -112,7 +112,7 @@ class FTabs extends StatefulWidget {
   /// ## Contract
   /// Throws [AssertionError] if:
   /// * [children] is empty.
-  FTabs({
+  new({
     required this.children,
     this.control = const .managed(),
     this.scrollable = false,
@@ -245,7 +245,7 @@ class _Tab extends StatefulWidget {
   final FTabsStyle style;
   final Widget label;
 
-  const _Tab({required this.style, required this.label});
+  const new({required this.style, required this.label});
 
   @override
   State<_Tab> createState() => _TabState();

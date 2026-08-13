@@ -23,7 +23,7 @@ class ControlInternalExtension {
   final bool listenable;
 
   /// Creates a new [ControlInternalExtension].
-  ControlInternalExtension({
+  new({
     required this.supertype,
     required this.update,
     required this.createController,

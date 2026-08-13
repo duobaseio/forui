@@ -5,7 +5,7 @@ import 'package:forui/src/theme/delta/delta.dart';
 /// A delta that applies modifications to an [IconThemeData].
 abstract class IconThemeDataDelta with Delta {
   /// Creates a partial modification of an [IconThemeData].
-  const factory IconThemeDataDelta.delta({
+  const factory delta({
     Color? color,
     double? opacity,
     double? size,
@@ -18,7 +18,7 @@ abstract class IconThemeDataDelta with Delta {
   }) = _IconThemeDataDelta;
 
   /// Creates a complete replacement of an [IconThemeData].
-  const factory IconThemeDataDelta.value(IconThemeData data) = _IconThemeDataValue;
+  const factory value(IconThemeData data) = _IconThemeDataValue;
 
   @override
   IconThemeData call(IconThemeData? data);
@@ -35,7 +35,7 @@ class _IconThemeDataDelta implements IconThemeDataDelta {
   final List<Shadow>? shadows;
   final bool? Function()? applyTextScaling;
 
-  const _IconThemeDataDelta({
+  const new({
     this.color = Sentinels.color,
     this.opacity = .infinity,
     this.size = .infinity,
@@ -64,7 +64,7 @@ class _IconThemeDataDelta implements IconThemeDataDelta {
 class _IconThemeDataValue implements IconThemeDataDelta {
   final IconThemeData _data;
 
-  const _IconThemeDataValue(this._data);
+  const new(this._data);
 
   @override
   IconThemeData call(IconThemeData? data) => _data;

@@ -154,7 +154,7 @@ class FContextMenu extends StatefulWidget {
   ///
   /// ## Contract
   /// Throws [AssertionError] if neither [menuBuilder] nor [menu] is provided.
-  FContextMenu({
+  new({
     this.control = const .managed(),
     this.style = const .context(),
     this.scrollController,
@@ -213,7 +213,7 @@ class FContextMenu extends StatefulWidget {
   ///
   /// ## Contract
   /// Throws [AssertionError] if neither [menuBuilder] nor [menu] is provided.
-  FContextMenu.tiles({
+  new tiles({
     this.control = const .managed(),
     this.style = const .context(),
     this.scrollController,

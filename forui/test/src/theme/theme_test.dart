@@ -7,7 +7,7 @@ import 'package:forui/forui.dart';
 class Foo extends StatelessWidget {
   final Widget child;
 
-  const Foo({required this.child, super.key});
+  const new({required this.child, super.key});
 
   @override
   Widget build(BuildContext context) => FBasicTheme(data: FTheme.neutral.dark.touch, textDirection: .ltr, child: child);

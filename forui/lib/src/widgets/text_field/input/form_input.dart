@@ -6,7 +6,7 @@ import 'package:flutter/widgets.dart';
 class FormInput extends FormField<String> {
   final TextEditingController controller;
 
-  FormInput({
+  new({
     required this.controller,
     required super.initialValue,
     required super.onSaved,

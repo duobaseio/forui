@@ -6,7 +6,7 @@ part of 'variant.dart';
 /// * [FPlatformVariant], which represents individual platform variants.
 extension type const FPlatformVariantConstraint._(FVariantConstraint _) implements FVariantConstraint {
   /// Creates a [FPlatformVariantConstraint] that negates [variant].
-  factory FPlatformVariantConstraint.not(FPlatformVariant variant) => FPlatformVariantConstraint._(Not(variant));
+  factory not(FPlatformVariant variant) => FPlatformVariantConstraint._(Not(variant));
 
   /// A platform variant that matches all touch-based platforms, [android], [iOS] and [fuchsia].
   static const touch = FPlatformVariant(Touch());
@@ -93,7 +93,7 @@ extension type const FPlatformVariant(FVariant _) implements FPlatformVariantCon
 
 @internal
 class Touch implements FVariant {
-  const Touch();
+  const new();
 
   @override
   bool satisfiedBy(Set<FVariant> variants) => variants.any((v) => v is Touch);
@@ -109,7 +109,7 @@ class Touch implements FVariant {
 }
 
 class _Android extends Touch {
-  const _Android();
+  const new();
 
   @override
   bool satisfiedBy(Set<FVariant> variants) => variants.contains(const _Android());
@@ -127,7 +127,7 @@ class _Android extends Touch {
 }
 
 class _Ios extends Touch {
-  const _Ios();
+  const new();
 
   @override
   bool satisfiedBy(Set<FVariant> variants) => variants.contains(const _Ios());
@@ -145,7 +145,7 @@ class _Ios extends Touch {
 }
 
 class _Fuchsia extends Touch {
-  const _Fuchsia();
+  const new();
 
   @override
   bool satisfiedBy(Set<FVariant> variants) => variants.contains(const _Fuchsia());
@@ -164,7 +164,7 @@ class _Fuchsia extends Touch {
 
 @internal
 class Desktop implements FVariant {
-  const Desktop();
+  const new();
 
   @override
   bool satisfiedBy(Set<FVariant> variants) => variants.any((v) => v is Desktop);
@@ -180,7 +180,7 @@ class Desktop implements FVariant {
 }
 
 class _Windows extends Desktop {
-  const _Windows();
+  const new();
 
   @override
   bool satisfiedBy(Set<FVariant> variants) => variants.contains(const _Windows());
@@ -198,7 +198,7 @@ class _Windows extends Desktop {
 }
 
 class _MacOS extends Desktop {
-  const _MacOS();
+  const new();
 
   @override
   bool satisfiedBy(Set<FVariant> variants) => variants.contains(const _MacOS());
@@ -216,7 +216,7 @@ class _MacOS extends Desktop {
 }
 
 class _Linux extends Desktop {
-  const _Linux();
+  const new();
 
   @override
   bool satisfiedBy(Set<FVariant> variants) => variants.contains(const _Linux());
@@ -234,7 +234,7 @@ class _Linux extends Desktop {
 }
 
 class _Web implements FVariant {
-  const _Web();
+  const new();
 
   @override
   bool satisfiedBy(Set<FVariant> variants) => variants.contains(const _Web());

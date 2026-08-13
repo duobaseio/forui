@@ -28,7 +28,7 @@ class ItemContent extends StatelessWidget {
   final Widget? details;
   final Widget? suffix;
 
-  const ItemContent({
+  const new({
     required this.style,
     required this.margin,
     required this.bottom,
@@ -220,7 +220,7 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
   final double suffixIconSpacing;
 
   /// Creates a [FItemContentStyle].
-  FItemContentStyle({
+  new({
     required this.prefixIconStyle,
     required this.titleTextStyle,
     required this.subtitleTextStyle,
@@ -238,7 +238,7 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
        assert(0 <= suffixIconSpacing, 'suffixIconSpacing ($suffixIconSpacing) must be >= 0');
 
   /// Creates a [FItemContentStyle] that inherits its properties.
-  factory FItemContentStyle.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required Color prefix,

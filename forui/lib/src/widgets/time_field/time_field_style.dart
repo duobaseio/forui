@@ -21,10 +21,10 @@ class FTimeFieldStyle with Diagnosticable, _$FTimeFieldStyleFunctions {
   final FTimePickerStyle pickerStyle;
 
   /// Creates a [FTimeFieldStyle].
-  FTimeFieldStyle({required this.fieldStyles, required this.popoverStyle, required this.pickerStyle});
+  new({required this.fieldStyles, required this.popoverStyle, required this.pickerStyle});
 
   /// Creates a [FTimeFieldStyle] that inherits its properties.
-  FTimeFieldStyle.inherit({
+  new inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,

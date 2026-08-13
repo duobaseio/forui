@@ -3,7 +3,10 @@ import 'package:flutter/rendering.dart';
 import 'package:meta/meta.dart';
 
 /// Possible way to layout a sequence of items.
-enum FLayout {
+enum FLayout({
+  /// Whether the layout is vertical.
+  required final bool vertical,
+}) {
   /// Lays out the items horizontally from left to right.
   ltr(vertical: false),
 
@@ -15,15 +18,10 @@ enum FLayout {
 
   /// Lays out the items vertically from bottom to top.
   btt(vertical: true);
-
-  /// Whether the layout is vertical.
-  final bool vertical;
-
-  const FLayout({required this.vertical});
 }
 
 @internal
-class DefaultData extends ContainerBoxParentData<RenderBox> with ContainerParentDataMixin<RenderBox> {}
+class DefaultData extends ContainerBoxParentData<RenderBox> with ContainerParentDataMixin<RenderBox>;
 
 @internal
 extension RenderBoxes on RenderBox {

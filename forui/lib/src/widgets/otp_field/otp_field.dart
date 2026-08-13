@@ -26,7 +26,7 @@ class FOtpFieldScope extends InheritedWidget {
   final Set<FTextFieldVariant> variants;
 
   /// Creates a [FOtpFieldScope].
-  const FOtpFieldScope({required this.style, required this.variants, required super.child, super.key});
+  const new({required this.style, required this.variants, required super.child, super.key});
 
   @override
   bool updateShouldNotify(FOtpFieldScope old) => style != old.style || !setEquals(variants, old.variants);
@@ -201,7 +201,7 @@ class FOtpField extends StatefulWidget with FFormFieldProperties<String> {
   final Key? formFieldKey;
 
   /// Creates an [FOtpField].
-  FOtpField({
+  new({
     this.control = const .managed(),
     this.style = const .context(),
     this.builder = defaultBuilder,

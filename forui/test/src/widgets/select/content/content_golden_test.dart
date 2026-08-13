@@ -11,7 +11,7 @@ import '../../../test_scaffold.dart';
 const letters = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O'];
 
 class ItemWrapper extends StatelessWidget with FItemMixin {
-  const ItemWrapper({super.key});
+  const new({super.key});
 
   @override
   Widget build(BuildContext context) => Padding(

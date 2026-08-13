@@ -8,7 +8,7 @@ class _ProxyController extends ValueNotifier<bool> {
   bool _unsynced;
   ValueChanged<bool> _onChange;
 
-  _ProxyController(super._value, this._onChange) : _unsynced = _value;
+  new(super._value, this._onChange) : _unsynced = _value;
 
   void update(bool newValue, ValueChanged<bool> onChange) {
     _onChange = onChange;
@@ -35,16 +35,16 @@ class _ProxyController extends ValueNotifier<bool> {
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FObscureTextControl with Diagnosticable, _$FObscureTextControlMixin {
   /// Creates a [FObscureTextControl].
-  const factory FObscureTextControl.managed({
+  const factory managed({
     ValueNotifier<bool>? controller,
     bool? initial,
     ValueChanged<bool>? onChange,
   }) = FObscureTextManagedControl;
 
   /// Creates a [FObscureTextControl] for controlling the obscure text using lifted state.
-  const factory FObscureTextControl.lifted({required bool value, required ValueChanged<bool> onChange}) = _Lifted;
+  const factory lifted({required bool value, required ValueChanged<bool> onChange}) = _Lifted;
 
-  const FObscureTextControl._();
+  const new _();
 
   (ValueNotifier<bool>, bool) _update(FObscureTextControl old, ValueNotifier<bool> controller, VoidCallback callback);
 }
@@ -70,7 +70,7 @@ final class FObscureTextManagedControl extends FObscureTextControl with _$FObscu
   final ValueChanged<bool>? onChange;
 
   /// Creates a [FObscureTextControl].
-  const FObscureTextManagedControl({this.controller, this.initial, this.onChange})
+  const new({this.controller, this.initial, this.onChange})
     : assert(
         controller == null || initial == null,
         'Cannot provide both controller and initially obscured. Pass initial value to the controller instead.',
@@ -87,7 +87,7 @@ final class _Lifted extends FObscureTextControl with _$_LiftedMixin {
   @override
   final ValueChanged<bool> onChange;
 
-  const _Lifted({required this.value, required this.onChange}) : super._();
+  const new({required this.value, required this.onChange}) : super._();
 
   @override
   ValueNotifier<bool> createController() => _ProxyController(value, onChange);

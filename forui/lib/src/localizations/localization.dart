@@ -52,9 +52,9 @@ class FDefaultLocalizations extends FLocalizations {
   static final _localizations = FDefaultLocalizations._();
 
   /// Creates a [FDefaultLocalizations].
-  factory FDefaultLocalizations() => _localizations;
+  factory() => _localizations;
 
-  FDefaultLocalizations._() : super('en_US');
+  new _() : super('en_US');
 
   @override
   String get autocompleteNoResults => 'No matches found.';

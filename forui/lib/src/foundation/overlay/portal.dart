@@ -127,7 +127,7 @@ class FPortal extends StatefulWidget {
   ///
   /// ## Contract
   /// Throws [AssertionError] if [builder] and [child] are both null.
-  const FPortal({
+  const new({
     required this.portalBuilder,
     this.control = const .managed(),
     this.constraints = const FPortalConstraints(),

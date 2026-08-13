@@ -21,7 +21,7 @@ class ContentData extends InheritedWidget {
   final FAutocompleteSectionStyle style;
   final bool enabled;
 
-  const ContentData({required this.style, required this.enabled, required super.child, super.key});
+  const new({required this.style, required this.enabled, required super.child, super.key});
 
   @override
   bool updateShouldNotify(ContentData old) => style != old.style || enabled != old.enabled;
@@ -50,7 +50,7 @@ class Content<T> extends StatelessWidget {
   final Widget Function(BuildContext context, FAutocompleteContentStyle style, Object? error, StackTrace stackTrace)
   errorBuilder;
 
-  const Content({
+  const new({
     required this.controller,
     required this.style,
     required this.enabled,
@@ -162,7 +162,7 @@ class FAutocompleteContentStyle extends FPopoverStyle with Diagnosticable, _$FAu
   final FAutocompleteSectionStyle sectionStyle;
 
   /// Creates an [FAutocompleteContentStyle].
-  FAutocompleteContentStyle({
+  new({
     required this.emptyTextStyle,
     required this.progressStyle,
     required this.sectionStyle,
@@ -175,7 +175,7 @@ class FAutocompleteContentStyle extends FPopoverStyle with Diagnosticable, _$FAu
   });
 
   /// Creates a [FAutocompleteContentStyle] that inherits its properties.
-  FAutocompleteContentStyle.inherit({
+  new inherit({
     required super.colors,
     required FTypography typography,
     required super.style,

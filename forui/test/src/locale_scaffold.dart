@@ -7,7 +7,7 @@ class LocaleScaffold extends StatefulWidget {
   final List<Locale> locales;
   final Widget child;
 
-  const LocaleScaffold({required this.child, this.locales = const [Locale('en', 'US'), Locale('ko')], super.key});
+  const new({required this.child, this.locales = const [Locale('en', 'US'), Locale('ko')], super.key});
 
   @override
   State<LocaleScaffold> createState() => _LocaleScaffoldState();

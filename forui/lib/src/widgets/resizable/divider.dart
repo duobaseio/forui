@@ -13,11 +13,11 @@ import 'package:forui/forui.dart';
 part 'divider.design.dart';
 
 class _Up extends Intent {
-  const _Up();
+  const new();
 }
 
 class _Down extends Intent {
-  const _Down();
+  const new();
 }
 
 @internal
@@ -33,7 +33,7 @@ sealed class Divider extends StatefulWidget {
   final MouseCursor cursor;
   final String Function(FResizableRegionData first, FResizableRegionData second) semanticFormatterCallback;
 
-  const Divider({
+  const new({
     required this.controller,
     required this.style,
     required this.type,
@@ -106,7 +106,7 @@ sealed class Divider extends StatefulWidget {
 
 @internal
 class HorizontalDivider extends Divider {
-  const HorizontalDivider({
+  const new({
     required super.controller,
     required super.style,
     required super.type,
@@ -170,7 +170,7 @@ class _HorizontalDividerState extends State<HorizontalDivider> {
 
 @internal
 class VerticalDivider extends Divider {
-  const VerticalDivider({
+  const new({
     required super.controller,
     required super.style,
     required super.type,
@@ -229,7 +229,7 @@ class _VerticalDividerState extends State<VerticalDivider> {
 class _Thumb extends StatelessWidget {
   final FResizableDividerThumbStyle style;
 
-  const _Thumb({required this.style});
+  const new({required this.style});
 
   @override
   Widget build(BuildContext context) => Container(
@@ -290,7 +290,7 @@ class FResizableDividerStyle with Diagnosticable, _$FResizableDividerStyleFuncti
   final Future<void> Function() hapticFeedback;
 
   /// Creates a [FResizableDividerStyle].
-  FResizableDividerStyle({
+  new({
     required this.color,
     required this.focusedOutlineStyle,
     required this.thumbStyle,
@@ -329,7 +329,7 @@ class FResizableDividerThumbStyle with Diagnosticable, _$FResizableDividerThumbS
   final double width;
 
   /// Creates a [FResizableDividerThumbStyle].
-  FResizableDividerThumbStyle({
+  new({
     required this.decoration,
     required this.foregroundColor,
     required this.icon,

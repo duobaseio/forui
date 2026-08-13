@@ -30,7 +30,7 @@ class YearPicker extends StatelessWidget {
   final ValueChanged<DateTime> onPress;
   final FCalendarYearBuilder builder;
 
-  const YearPicker({
+  const new({
     required this.controller,
     required this.style,
     required this.localization,
@@ -134,7 +134,7 @@ class _Grid extends StatefulWidget {
   final ValueChanged<DateTime> onPress;
   final FCalendarYearBuilder builder;
 
-  _Grid({
+  new({
     required this.style,
     required this.localization,
     required this.decade,
@@ -221,7 +221,7 @@ class _GridState extends State<_Grid> {
 /// Controls a calendar's year picker.
 class FCalendarYearPickerController extends GridController {
   /// Creates a [FCalendarYearPickerController].
-  FCalendarYearPickerController({
+  new({
     required super.start,
     required super.end,
     required super.selectable,
@@ -268,7 +268,7 @@ class FCalendarYearPickerStyle with Diagnosticable, _$FCalendarYearPickerStyleFu
   final double yearSpacing;
 
   /// Creates a [FCalendarYearPickerStyle].
-  const FCalendarYearPickerStyle({
+  const new({
     required this.yearStyles,
     required this.yearSize,
     this.headerSpacing = 6,
@@ -276,7 +276,7 @@ class FCalendarYearPickerStyle with Diagnosticable, _$FCalendarYearPickerStyleFu
   });
 
   /// Creates a [FCalendarYearPickerStyle] that inherits its properties.
-  factory FCalendarYearPickerStyle.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,

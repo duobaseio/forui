@@ -46,7 +46,7 @@ class FDeterminateProgress extends StatefulWidget {
   final double value;
 
   /// Creates a determinate [FDeterminateProgress].
-  const FDeterminateProgress({required this.value, this.style = const .context(), this.semanticsLabel, super.key})
+  const new({required this.value, this.style = const .context(), this.semanticsLabel, super.key})
     : assert((0.0 <= value && value <= 1.0), 'value ($value) must be between 0.0 and 1.0');
 
   @override
@@ -150,7 +150,7 @@ class FDeterminateProgressStyle with Diagnosticable, _$FDeterminateProgressStyle
   final FDeterminateProgressMotion motion;
 
   /// Creates a [FDeterminateProgressStyle].
-  const FDeterminateProgressStyle({
+  const new({
     required this.trackDecoration,
     required this.fillDecoration,
     this.constraints = const .tightFor(height: 6.0),
@@ -158,7 +158,7 @@ class FDeterminateProgressStyle with Diagnosticable, _$FDeterminateProgressStyle
   });
 
   /// Creates a [FDeterminateProgressStyle] that inherits its properties.
-  FDeterminateProgressStyle.inherit({required FColors colors, required FStyle style})
+  new inherit({required FColors colors, required FStyle style})
     : this(
         trackDecoration: ShapeDecoration(
           shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.pill),
@@ -184,5 +184,5 @@ class FDeterminateProgressMotion with Diagnosticable, _$FDeterminateProgressMoti
   final Curve curve;
 
   /// Creates a [FDeterminateProgressMotion].
-  const FDeterminateProgressMotion({this.duration = const Duration(milliseconds: 1000), this.curve = Curves.linear});
+  const new({this.duration = const Duration(milliseconds: 1000), this.curve = Curves.linear});
 }

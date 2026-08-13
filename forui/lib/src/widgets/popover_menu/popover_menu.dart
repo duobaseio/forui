@@ -24,7 +24,7 @@ class PopoverMenuScope extends InheritedWidget {
 
   final ValueNotifier<(Key?, bool)> active;
 
-  const PopoverMenuScope({
+  const new({
     required this.controller,
     required this.style,
     required this.groupId,
@@ -228,7 +228,7 @@ class FPopoverMenu extends StatefulWidget {
   /// Throws [AssertionError] if:
   /// * neither [builder] nor [child] is provided.
   /// * neither [menuBuilder] nor [menu] is provided.
-  FPopoverMenu({
+  new({
     this.control = const .managed(),
     this.scrollController,
     this.style = const .context(),
@@ -296,7 +296,7 @@ class FPopoverMenu extends StatefulWidget {
   /// Throws [AssertionError] if:
   /// * neither [builder] nor [child] is provided.
   /// * neither [menuBuilder] nor [menu] is provided.
-  FPopoverMenu.tiles({
+  new tiles({
     this.control = const .managed(),
     this.scrollController,
     this.style = const .context(),
@@ -511,7 +511,7 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
   final Future<void> Function() hapticFeedback;
 
   /// Creates a [FPopoverMenuStyle].
-  const FPopoverMenuStyle({
+  const new({
     required this.itemGroupStyle,
     required this.tileGroupStyle,
     required super.decoration,
@@ -529,7 +529,7 @@ class FPopoverMenuStyle extends FPopoverStyle with _$FPopoverMenuStyleFunctions 
        assert(minWidth <= maxWidth, 'minWidth ($minWidth) must be <= maxWidth ($maxWidth)');
 
   /// Creates a [FPopoverMenuStyle] that inherits its properties.
-  FPopoverMenuStyle.inherit({
+  new inherit({
     required super.colors,
     required super.style,
     required FTypography typography,
@@ -631,7 +631,7 @@ class FPopoverMenuMotion with Diagnosticable, _$FPopoverMenuMotionFunctions {
   final Curve fadeCurve;
 
   /// Creates a [FPopoverMenuMotion].
-  const FPopoverMenuMotion({
+  const new({
     this.fade = 0.4,
     this.fadeDuration = const Duration(milliseconds: 100),
     this.fadeCurve = Curves.linear,

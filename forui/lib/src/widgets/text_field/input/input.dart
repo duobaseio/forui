@@ -74,7 +74,7 @@ class Input extends StatefulWidget {
   final bool Function(TextEditingValue) clearable;
   final FFieldClearIconBuilder<FTextFieldStyle> clearIconBuilder;
 
-  const Input({
+  const new({
     required this.controller,
     required this.builder,
     required this.groupId,

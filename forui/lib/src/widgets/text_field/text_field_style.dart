@@ -29,7 +29,7 @@ extension type FTextFieldSizeStyles(
   FVariants<FTextFieldSizeVariantConstraint, FTextFieldSizeVariant, FTextFieldStyle, FTextFieldStyleDelta> _
 ) implements FVariants<FTextFieldSizeVariantConstraint, FTextFieldSizeVariant, FTextFieldStyle, FTextFieldStyleDelta> {
   /// Creates a [FTextFieldSizeStyles] that inherits its properties.
-  factory FTextFieldSizeStyles.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,
@@ -213,7 +213,7 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
   final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, InputBorder, Delta> border;
 
   /// Creates a [FTextFieldStyle].
-  FTextFieldStyle({
+  new({
     required this.keyboardAppearance,
     required this.color,
     required this.iconStyle,
@@ -242,7 +242,7 @@ class FTextFieldStyle extends FLabelStyle with _$FTextFieldStyleFunctions {
   });
 
   /// Creates a [FTextFieldStyle] that inherits its properties.
-  FTextFieldStyle.inherit({
+  new inherit({
     required FColors colors,
     required FStyle style,
     required FLabelStyle labelStyle,

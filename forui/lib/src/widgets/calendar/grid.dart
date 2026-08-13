@@ -11,7 +11,7 @@ class _PageIntent extends Intent {
   final int direction;
   final bool large;
 
-  const _PageIntent(this.direction, {this.large = false});
+  const new(this.direction, {this.large = false});
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -26,7 +26,7 @@ class _PageIntent extends Intent {
 class _RowEdgeIntent extends Intent {
   final bool end;
 
-  const _RowEdgeIntent({required this.end});
+  const new({required this.end});
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -43,7 +43,7 @@ class GridFocusableActionDetector extends StatefulWidget {
   final ValueChanged<bool> onFocusChange;
   final Widget child;
 
-  const GridFocusableActionDetector({
+  const new({
     required this.onFocusMove,
     required this.onFocusPage,
     required this.onFocusRowEdge,
@@ -131,7 +131,7 @@ class GridDelegate extends SliverGridDelegate {
   final int crossAxisCount;
   final double spacing;
 
-  const GridDelegate(this.size, this.crossAxisCount, this.spacing);
+  const new(this.size, this.crossAxisCount, this.spacing);
 
   @override
   SliverGridLayout getLayout(SliverConstraints constraints) => SliverGridRegularTileLayout(
@@ -191,7 +191,7 @@ abstract class GridController extends FChangeNotifier {
   DateTime _current;
   (int, int)? _animation;
 
-  GridController({
+  new({
     required this.start,
     required this.end,
     required this._columns,

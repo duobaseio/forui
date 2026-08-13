@@ -10,7 +10,7 @@ class AdaptiveMediaDialog extends StatelessWidget {
   final Widget body;
   final List<Widget> actions;
 
-  const AdaptiveMediaDialog({
+  const new({
     required this.image,
     required this.title,
     required this.body,

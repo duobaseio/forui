@@ -73,7 +73,7 @@ class FHeaderAction extends StatelessWidget {
   final Map<Type, Action<Intent>>? actions;
 
   /// Creates a [FHeaderAction] from the given SVG [icon].
-  const FHeaderAction({
+  const new({
     required this.icon,
     required this.onPress,
     this.style = const .context(),
@@ -95,7 +95,7 @@ class FHeaderAction extends StatelessWidget {
   });
 
   /// Creates a [FHeaderAction] with [FIcons.arrowLeft].
-  factory FHeaderAction.back({
+  factory back({
     required VoidCallback? onPress,
     FHeaderActionStyleDelta style = const .context(),
     String? semanticsLabel,
@@ -140,7 +140,7 @@ class FHeaderAction extends StatelessWidget {
   );
 
   /// Creates a [FHeaderAction] with [FIcons.x].
-  factory FHeaderAction.x({
+  factory x({
     required VoidCallback? onPress,
     FHeaderActionStyleDelta style = const .context(),
     String? semanticsLabel,
@@ -253,7 +253,7 @@ class FHeaderActionStyle with Diagnosticable, _$FHeaderActionStyleFunctions {
   final FTappableStyle tappableStyle;
 
   /// Creates a [FHeaderActionStyle].
-  FHeaderActionStyle({
+  new({
     required this.iconStyle,
     required this.padding,
     required this.focusedOutlineStyle,
@@ -261,7 +261,7 @@ class FHeaderActionStyle with Diagnosticable, _$FHeaderActionStyleFunctions {
   });
 
   /// Creates a [FHeaderActionStyle] that inherits its properties.
-  FHeaderActionStyle.inherit({
+  new inherit({
     required FColors colors,
     required FStyle style,
     required double size,

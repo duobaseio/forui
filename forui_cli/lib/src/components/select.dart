@@ -137,5 +137,5 @@ final class SelectOption<T> {
   /// An optional ARGB colour (`0xAARRGGBB`) shown as a swatch before the label. Only renders when truecolor is enabled.
   final int? swatch;
 
-  SelectOption(this.value, {String? label, this.hint, this.swatch}) : label = label ?? '$value';
+  new(this.value, {String? label, this.hint, this.swatch}) : label = label ?? '$value';
 }

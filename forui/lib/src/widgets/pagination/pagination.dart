@@ -48,7 +48,7 @@ class FPagination extends StatefulWidget {
   final Widget? next;
 
   /// Creates an [FPagination].
-  const FPagination({
+  const new({
     this.control = const .managed(),
     this.style = const .context(),
     this.previous,
@@ -171,7 +171,7 @@ class FPaginationItemData extends InheritedWidget {
   final FPaginationController controller;
   final FPaginationStyle style;
 
-  const FPaginationItemData({
+  const new({
     required this.page,
     required this.controller,
     required this.style,
@@ -202,7 +202,7 @@ class Action extends StatelessWidget {
   final VoidCallback? onPress;
   final Widget child;
 
-  const Action({
+  const new({
     required this.style,
     required this.semanticsLabel,
     required this.onPress,
@@ -245,7 +245,7 @@ class Action extends StatelessWidget {
 }
 
 class _Page extends StatelessWidget {
-  const _Page();
+  const new();
 
   @override
   Widget build(BuildContext context) {

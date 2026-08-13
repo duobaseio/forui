@@ -150,7 +150,7 @@ final class FIcons with Diagnosticable {
   final FIcon x;
 
   /// Creates a [FIcons] with the given icons.
-  const FIcons({
+  const new({
     required this.arrowLeft,
     required this.calendar,
     required this.check,
@@ -176,7 +176,7 @@ final class FIcons with Diagnosticable {
   });
 
   /// Creates a [FIcons] backed by [FLucideIcons] defaults.
-  const FIcons.lucide()
+  const new lucide()
     : this(
         arrowLeft: const FIcon(FLucideIcons.arrowLeft),
         calendar: const FIcon(FLucideIcons.calendar),
@@ -303,7 +303,7 @@ abstract interface class FIcon {
 class _Icon implements FIcon {
   final IconData icon;
 
-  const _Icon(this.icon);
+  const new(this.icon);
 
   @override
   Widget call(BuildContext context, {String? semanticsLabel}) => Icon(icon, semanticLabel: semanticsLabel);

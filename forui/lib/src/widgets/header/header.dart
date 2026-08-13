@@ -35,7 +35,7 @@ sealed class FHeader extends StatelessWidget {
   /// The title.
   final Widget title;
 
-  const FHeader._({this.title = const SizedBox(), super.key});
+  const new _({this.title = const SizedBox(), super.key});
 
   /// Creates a header whose title is aligned to the start.
   ///
@@ -47,7 +47,7 @@ sealed class FHeader extends StatelessWidget {
   /// ```shell
   /// dart run forui style create headers
   /// ```
-  const factory FHeader({Widget title, FHeaderStyleDelta style, List<Widget> suffixes, Key? key}) = _FRootHeader;
+  const factory({Widget title, FHeaderStyleDelta style, List<Widget> suffixes, Key? key}) = _FRootHeader;
 
   /// Creates a nested header whose title is aligned to the center.
   ///
@@ -59,7 +59,7 @@ sealed class FHeader extends StatelessWidget {
   /// ```shell
   /// dart run forui style create headers
   /// ```
-  const factory FHeader.nested({
+  const factory nested({
     Widget title,
     AlignmentGeometry titleAlignment,
     FHeaderStyleDelta style,
@@ -85,7 +85,7 @@ class FHeaderData extends InheritedWidget {
   final FHeaderActionStyle actionStyle;
 
   /// Creates a [FHeaderData].
-  const FHeaderData({required this.actionStyle, required super.child, super.key});
+  const new({required this.actionStyle, required super.child, super.key});
 
   @override
   bool updateShouldNotify(FHeaderData oldWidget) => actionStyle != oldWidget.actionStyle;
@@ -101,7 +101,7 @@ class FHeaderData extends InheritedWidget {
 extension type FHeaderStyles(FVariants<FHeaderVariantConstraint, FHeaderVariant, FHeaderStyle, FHeaderStyleDelta> _)
     implements FVariants<FHeaderVariantConstraint, FHeaderVariant, FHeaderStyle, FHeaderStyleDelta> {
   /// Creates a [FHeaderStyles] that inherits its properties.
-  factory FHeaderStyles.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,
@@ -210,7 +210,7 @@ class FHeaderStyle with Diagnosticable, _$FHeaderStyleFunctions {
   final FVariants<FPlatformVariantConstraint, FPlatformVariant, bool, Delta> slidableActions;
 
   /// Creates a [FHeaderStyle].
-  const FHeaderStyle({
+  const new({
     required this.systemOverlayStyle,
     required this.padding,
     required this.titleTextStyle,

@@ -1,6 +1,7 @@
 include: package:flint/analysis_options.flutter.yaml
 analyzer:
   errors:
+    unnecessary_null_checks: ignore
     unused_result: ignore
   exclude:
     - build/**

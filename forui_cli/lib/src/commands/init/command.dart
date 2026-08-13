@@ -32,7 +32,7 @@ class InitCommand extends ForuiCommand {
 
   final Configuration configuration;
 
-  InitCommand(this.configuration) {
+  new(this.configuration) {
     argParser
       ..addFlag('force', abbr: 'f', help: 'Overwrite existing files if they exist.', negatable: false)
       ..addOption('preset', abbr: 'p', help: "A theme's code.")

@@ -15,7 +15,7 @@ abstract class TimeInputController extends InputController {
   final DateFormat format;
   final String _canonicalSpace;
 
-  factory TimeInputController(
+  factory(
     FLocalizations localizations,
     FTimeFieldController controller,
     DateFormat format,
@@ -33,7 +33,7 @@ abstract class TimeInputController extends InputController {
   }
 
   @visibleForTesting
-  factory TimeInputController.test(
+  factory test(
     FLocalizations localizations,
     FTimeFieldController controller,
     DateFormat format,
@@ -45,7 +45,7 @@ abstract class TimeInputController extends InputController {
     false => Time24InputController.new,
   }(localizations, controller, format, value, style, TimeParser(format), placeholder);
 
-  TimeInputController.fromValue(this.controller, this.format, super.value, super.style, super.parser, super.placeholder)
+  new fromValue(this.controller, this.format, super.value, super.style, super.parser, super.placeholder)
     : _canonicalSpace = format.canonicalSpace {
     controller.addListener(updateFromTimeController);
   }

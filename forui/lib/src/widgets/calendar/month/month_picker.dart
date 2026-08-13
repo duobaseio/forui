@@ -31,7 +31,7 @@ class MonthPicker extends StatelessWidget {
   final FCalendarMonthBuilder builder;
 
   /// Creates a paged month picker that swipes between years.
-  const MonthPicker({
+  const new({
     required this.controller,
     required this.style,
     required this.localization,
@@ -45,7 +45,7 @@ class MonthPicker extends StatelessWidget {
   });
 
   /// Creates a non-paged month picker that shows a single year and does not scroll.
-  const MonthPicker.single({
+  const new single({
     required this.controller,
     required this.style,
     required this.localization,
@@ -143,7 +143,7 @@ class _Grid extends StatefulWidget {
   final ValueChanged<DateTime> onPress;
   final FCalendarMonthBuilder builder;
 
-  _Grid({
+  new({
     required this.style,
     required this.localization,
     required this.year,
@@ -230,7 +230,7 @@ class _GridState extends State<_Grid> {
 /// Controls a calendar's month picker.
 class FCalendarMonthPickerController extends GridController {
   /// Creates a [FCalendarMonthPickerController].
-  FCalendarMonthPickerController({
+  new({
     required super.start,
     required super.end,
     required super.selectable,
@@ -277,7 +277,7 @@ class FCalendarMonthPickerStyle with Diagnosticable, _$FCalendarMonthPickerStyle
   final double monthSpacing;
 
   /// Creates a [FCalendarMonthPickerStyle].
-  const FCalendarMonthPickerStyle({
+  const new({
     required this.monthStyles,
     required this.monthSize,
     this.headerSpacing = 6,
@@ -285,7 +285,7 @@ class FCalendarMonthPickerStyle with Diagnosticable, _$FCalendarMonthPickerStyle
   });
 
   /// Creates a [FCalendarMonthPickerStyle] that inherits its properties.
-  factory FCalendarMonthPickerStyle.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,

@@ -167,7 +167,7 @@ class FPersistentSheetController {
   final AnimationController _controller;
   final VoidCallback _onDispose;
 
-  FPersistentSheetController._({
+  new _({
     required TickerProvider vsync,
     required FSheetStyle style,
     required this._onDispose,
@@ -232,7 +232,7 @@ class FSheets extends StatefulWidget {
   final Widget child;
 
   /// Creates a [FSheets].
-  const FSheets({required this.child, super.key});
+  const new({required this.child, super.key});
 
   @override
   State<FSheets> createState() => FSheetsState();
@@ -310,7 +310,7 @@ class FPersistentSheetStyle extends FSheetStyle with Diagnosticable, _$FPersiste
   final FPersistentSheetMotion motion;
 
   /// Creates a [FSheetStyle].
-  const FPersistentSheetStyle({
+  const new({
     this.motion = const FPersistentSheetMotion(),
     super.flingVelocity,
     super.closeProgressThreshold,
@@ -318,11 +318,11 @@ class FPersistentSheetStyle extends FSheetStyle with Diagnosticable, _$FPersiste
 
   /// Creates a [FPersistentSheetStyle] that inherits its properties from the given arguments.
   // This is needed because the CLI generator scans all style inherit constructors to generate the style mappings.
-  FPersistentSheetStyle.inherit() : this();
+  new inherit() : this();
 }
 
 /// The motion-related properties for a persistent sheet.
 class FPersistentSheetMotion extends FSheetMotion with Diagnosticable, _$FPersistentSheetMotionFunctions {
   /// Creates a [FPersistentSheetMotion].
-  const FPersistentSheetMotion({super.expandDuration, super.collapseDuration, super.curve});
+  const new({super.expandDuration, super.collapseDuration, super.curve});
 }

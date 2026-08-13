@@ -82,7 +82,7 @@ class FScaffold extends StatelessWidget {
   final bool resizeToAvoidBottomInset;
 
   /// Creates a [FScaffold].
-  const FScaffold({
+  const new({
     required this.child,
     this.scaffoldStyle = const .context(),
     this.header,
@@ -191,7 +191,7 @@ class FScaffoldStyle with Diagnosticable, _$FScaffoldStyleFunctions {
   final Decoration footerDecoration;
 
   /// Creates a [FScaffoldStyle].
-  FScaffoldStyle({
+  new({
     required this.systemOverlayStyle,
     required this.backgroundColor,
     required this.sidebarBackgroundColor,
@@ -201,7 +201,7 @@ class FScaffoldStyle with Diagnosticable, _$FScaffoldStyleFunctions {
   });
 
   /// Creates a [FScaffoldStyle] that inherits its properties.
-  FScaffoldStyle.inherit({required FColors colors, required FStyle style})
+  new inherit({required FColors colors, required FStyle style})
     : this(
         systemOverlayStyle: colors.systemOverlayStyle,
         backgroundColor: colors.background,
@@ -218,7 +218,7 @@ class FScaffoldStyle with Diagnosticable, _$FScaffoldStyleFunctions {
 class _RenderScaffoldWidget extends MultiChildRenderObjectWidget {
   final bool resizeToAvoidBottomInset;
 
-  const _RenderScaffoldWidget({required this.resizeToAvoidBottomInset, required super.children});
+  const new({required this.resizeToAvoidBottomInset, required super.children});
 
   @override
   RenderObject createRenderObject(BuildContext context) {
@@ -249,7 +249,7 @@ class _RenderScaffold extends RenderBox
   bool _resizeToAvoidBottomInset;
   EdgeInsets _insets;
 
-  _RenderScaffold({required this._resizeToAvoidBottomInset, required this._insets});
+  new({required this._resizeToAvoidBottomInset, required this._insets});
 
   @override
   void setupParentData(covariant RenderObject child) => child.parentData = DefaultData();

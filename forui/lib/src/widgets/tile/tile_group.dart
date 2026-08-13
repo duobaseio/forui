@@ -157,7 +157,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
   /// {@template forui.widgets.FTileGroup.new}
   /// Creates a [FTileGroup].
   /// {@endtemplate}
-  FTileGroup({
+  new({
     required List<FTileMixin> children,
     this.style = const .context(),
     this.scrollController,
@@ -209,7 +209,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
   /// * [count] is null and [tileBuilder] always provides a zero-size widget, i.e. SizedBox(). If possible, provide
   ///   tiles with non-zero size, return null from builder, or set [count] to non-null.
   /// {@endtemplate}
-  FTileGroup.builder({
+  new builder({
     required NullableIndexedWidgetBuilder tileBuilder,
     int? count,
     this.style = const .context(),
@@ -256,7 +256,7 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
   ///
   /// All group labels will be ignored.
   /// {@endtemplate}
-  FTileGroup.merge({
+  new merge({
     required List<FTileGroupMixin> children,
     this.style = const .context(),
     this.scrollController,
@@ -387,7 +387,7 @@ class FTileGroupStyleData extends InheritedWidget {
   final FTileGroupStyle style;
 
   /// Creates a [FTileGroupStyleData].
-  const FTileGroupStyleData({required this.style, required super.child, super.key});
+  const new({required this.style, required super.child, super.key});
 
   @override
   bool updateShouldNotify(FTileGroupStyleData old) => style != old.style;
@@ -428,7 +428,7 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
   final Future<void> Function() slidePressHapticFeedback;
 
   /// Creates a [FTileGroupStyle].
-  FTileGroupStyle({
+  new({
     required this.decoration,
     required this.dividerColor,
     required this.dividerWidth,
@@ -446,7 +446,7 @@ class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
   });
 
   /// Creates a [FTileGroupStyle] that inherits from the given arguments.
-  factory FTileGroupStyle.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,

@@ -28,7 +28,7 @@ class Time12InputController extends TimeInputController {
   @override
   final Time12Selector selector;
 
-  Time12InputController(
+  new(
     FLocalizations localizations,
     super.controller,
     super.format,
@@ -77,7 +77,7 @@ class Time12Selector extends Selector {
   final String _first;
   final String _last;
 
-  Time12Selector(FLocalizations localizations, DateFormat format)
+  new(FLocalizations localizations, DateFormat format)
     : _first = format.pattern!.startsWith('a')
           ? localizations.timeFieldPeriodSeparator
           : localizations.timeFieldTimeSeparator,

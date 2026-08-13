@@ -24,7 +24,7 @@ class RawItemContent extends StatelessWidget {
   final Widget? prefix;
   final Widget child;
 
-  const RawItemContent({
+  const new({
     required this.style,
     required this.margin,
     required this.bottom,
@@ -110,7 +110,7 @@ class FRawItemContentStyle with Diagnosticable, _$FRawItemContentStyleFunctions 
   final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> childTextStyle;
 
   /// Creates a [FRawItemContentStyle].
-  FRawItemContentStyle({
+  new({
     required this.prefixIconStyle,
     required this.childTextStyle,
     required this.padding,
@@ -118,7 +118,7 @@ class FRawItemContentStyle with Diagnosticable, _$FRawItemContentStyleFunctions 
   }) : assert(0 <= prefixIconSpacing, 'prefixIconSpacing ($prefixIconSpacing) must be >= 0');
 
   /// Creates a [FRawItemContentStyle] that inherits its properties.
-  FRawItemContentStyle.inherit({
+  new inherit({
     required FColors colors,
     required FTypography typography,
     required Color prefix,

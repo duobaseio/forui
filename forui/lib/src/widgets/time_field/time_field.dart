@@ -163,7 +163,7 @@ abstract class FTimeField extends StatefulWidget {
   /// {@macro forui.foundation.doc_templates.formFieldKey}
   final Key? formFieldKey;
 
-  const FTimeField._({
+  const new _({
     this.control = const .managed(),
     this.popoverControl = const .managed(),
     this.size = .md,
@@ -215,7 +215,7 @@ abstract class FTimeField extends StatefulWidget {
   ///
   /// See also:
   /// * [FTimeField.picker] - Creates a time field with only a picker.
-  const factory FTimeField({
+  const factory({
     FTimeFieldControl control,
     FPopoverControl popoverControl,
     FTextFieldSizeVariant size,
@@ -297,7 +297,7 @@ abstract class FTimeField extends StatefulWidget {
   ///
   /// See also:
   /// * [FTimeField.new] - Creates a time field with only an input field.
-  const factory FTimeField.picker({
+  const factory picker({
     FTimeFieldControl control,
     FPopoverControl popoverControl,
     FTextFieldSizeVariant size,

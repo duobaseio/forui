@@ -15,18 +15,18 @@ import 'package:forui/src/widgets/slider/inherited_variants.dart';
 part 'thumb.design.dart';
 
 class _ShrinkIntent extends Intent {
-  const _ShrinkIntent();
+  const new();
 }
 
 class _ExpandIntent extends Intent {
-  const _ExpandIntent();
+  const new();
 }
 
 @internal
 class Thumb extends StatefulWidget {
   final bool min;
 
-  const Thumb({required this.min, super.key});
+  const new({required this.min, super.key});
 
   @override
   State<Thumb> createState() => _ThumbState();
@@ -273,7 +273,7 @@ class FSliderThumbStyle with Diagnosticable, _$FSliderThumbStyleFunctions {
   final FFocusedOutlineStyle focusedOutlineStyle;
 
   /// Creates a [FSliderThumbStyle].
-  FSliderThumbStyle({
+  new({
     required this.color,
     required this.borderColor,
     required this.focusedOutlineStyle,

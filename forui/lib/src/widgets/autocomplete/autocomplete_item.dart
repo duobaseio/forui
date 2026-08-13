@@ -124,7 +124,7 @@ class FAutocompleteSection<T> extends StatelessWidget with FAutocompleteItemMixi
   /// {@endtemplate}
   ///
   /// For more control over the appearance of individual items, use [FAutocompleteSection.rich].
-  FAutocompleteSection({
+  new({
     required Widget label,
     required List<T> items,
     FAutocompleteSectionStyleDelta style = const .context(),
@@ -143,7 +143,7 @@ class FAutocompleteSection<T> extends StatelessWidget with FAutocompleteItemMixi
   /// {@template forui.widgets.FAutocompleteSection.rich}
   /// Creates a [FAutocompleteSection] with the given [children].
   /// {@endtemplate}
-  const FAutocompleteSection.rich({
+  const new rich({
     required this.label,
     required this.children,
     this.style = const .context(),
@@ -236,7 +236,7 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
   final double spacing;
 
   /// Creates a [FAutocompleteSectionStyle].
-  FAutocompleteSectionStyle({
+  new({
     required this.labelTextStyle,
     required this.dividerColor,
     required this.dividerWidth,
@@ -246,7 +246,7 @@ class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyle
   }) : assert(0 <= spacing, 'spacing ($spacing) must be >= 0');
 
   /// Creates a [FAutocompleteSectionStyle] that inherits its properties.
-  factory FAutocompleteSectionStyle.inherit({
+  factory inherit({
     required FColors colors,
     required FStyle style,
     required FTypography typography,
@@ -332,7 +332,7 @@ abstract class FAutocompleteItem<T> extends StatelessWidget with FAutocompleteIt
   ///
   /// For even more control over the item's appearance, use [FAutocompleteItem.raw].
   /// {@endtemplate}
-  factory FAutocompleteItem({
+  factory({
     required T value,
     FItemStyleDelta style,
     bool? enabled,
@@ -349,7 +349,7 @@ abstract class FAutocompleteItem<T> extends StatelessWidget with FAutocompleteIt
   /// members when using dot-shorthands.
   ///
   /// For even more control over the item's appearance, use [FAutocompleteItem.raw].
-  factory FAutocompleteItem.item({
+  factory item({
     required T value,
     FItemStyleDelta style,
     bool? enabled,
@@ -366,7 +366,7 @@ abstract class FAutocompleteItem<T> extends StatelessWidget with FAutocompleteIt
   /// This provides full control over the item's layout without the structured
   /// title/subtitle/prefix/suffix layout of the default constructor.
   /// {@endtemplate}
-  factory FAutocompleteItem.raw({
+  factory raw({
     required Widget child,
     required T value,
     FItemStyleDelta style,
@@ -375,7 +375,7 @@ abstract class FAutocompleteItem<T> extends StatelessWidget with FAutocompleteIt
     Key? key,
   }) = _RawAutocompleteItem<T>;
 
-  const FAutocompleteItem._({required this.value, this.style = const .context(), this.enabled, this.prefix, super.key});
+  const new _({required this.value, this.style = const .context(), this.enabled, this.prefix, super.key});
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -392,7 +392,7 @@ class _AutocompleteItem<T> extends FAutocompleteItem<T> {
   final Widget? title;
   final Widget? suffix;
 
-  const _AutocompleteItem({
+  const new({
     required super.value,
     super.style,
     super.enabled,
@@ -430,7 +430,7 @@ class _AutocompleteItem<T> extends FAutocompleteItem<T> {
 class _RawAutocompleteItem<T> extends FAutocompleteItem<T> {
   final Widget child;
 
-  const _RawAutocompleteItem({
+  const new({
     required this.child,
     required super.value,
     super.style,

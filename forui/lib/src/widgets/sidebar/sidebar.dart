@@ -79,7 +79,7 @@ class FSidebar extends StatefulWidget {
   final TraversalEdgeBehavior? traversalEdgeBehavior;
 
   /// Creates a sidebar with a list of children that will be wrapped in a [ListView].
-  FSidebar({
+  new({
     required List<Widget> children,
     this.header,
     this.footer,
@@ -95,7 +95,7 @@ class FSidebar extends StatefulWidget {
        child = ListView(children: children);
 
   /// Creates a sidebar with a builder function that will be wrapped in a [ListView.builder].
-  FSidebar.builder({
+  new builder({
     required Widget Function(BuildContext context, int index) itemBuilder,
     required int itemCount,
     this.style = const .context(),
@@ -115,7 +115,7 @@ class FSidebar extends StatefulWidget {
   ///
   /// Use this constructor when you want to provide your own scrollable content widget instead of using the default
   /// [ListView].
-  const FSidebar.raw({
+  const new raw({
     required this.child,
     this.header,
     this.footer,
@@ -233,7 +233,7 @@ class FSidebarData extends InheritedWidget {
   final FSidebarStyle style;
 
   /// Creates a [FSidebarData].
-  const FSidebarData({required this.style, required super.child, super.key});
+  const new({required this.style, required super.child, super.key});
 
   @override
   bool updateShouldNotify(FSidebarData old) => style != old.style;
@@ -287,7 +287,7 @@ class FSidebarStyle with Diagnosticable, _$FSidebarStyleFunctions {
   final EdgeInsetsGeometry footerPadding;
 
   /// Creates a [FSidebarStyle].
-  const FSidebarStyle({
+  const new({
     required this.decoration,
     required this.groupStyle,
     this.constraints = const .tightFor(width: 256),
@@ -298,7 +298,7 @@ class FSidebarStyle with Diagnosticable, _$FSidebarStyleFunctions {
   });
 
   /// Creates a [FSidebarStyle] that inherits its properties.
-  FSidebarStyle.inherit({
+  new inherit({
     required FColors colors,
     required FTypography typography,
     required FIcons icons,

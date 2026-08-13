@@ -128,7 +128,7 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
   ///
   /// For more control over the items' appearances, use [FSelectSection.rich].
   /// {@endtemplate}
-  FSelectSection({
+  new({
     required Widget label,
     required Map<String, T> items,
     FSelectSectionStyleDelta style = const .context(),
@@ -147,7 +147,7 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
   /// {@template forui.widgets.FSelectSection.rich}
   /// Creates a [FSelectSection] with the given [children].
   /// {@endtemplate}
-  const FSelectSection.rich({
+  const new rich({
     required this.label,
     required this.children,
     this.style = const .context(),
@@ -249,7 +249,7 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
   final double spacing;
 
   /// Creates a [FSelectSectionStyle].
-  FSelectSectionStyle({
+  new({
     required this.labelTextStyle,
     required this.dividerColor,
     required this.dividerWidth,
@@ -259,7 +259,7 @@ class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
   }) : assert(0 <= spacing, 'spacing ($spacing) must be >= 0');
 
   /// Creates a [FSelectSectionStyle] that inherits its properties.
-  factory FSelectSectionStyle.inherit({
+  factory inherit({
     required FColors colors,
     required FStyle style,
     required FTypography typography,
@@ -343,7 +343,7 @@ abstract class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
   /// {@template forui.widgets.FSelectItem.new}
   /// Creates a [FSelectItem] with a custom [title] and value.
   /// {@endtemplate}
-  const factory FSelectItem({
+  const factory({
     required Widget title,
     required T value,
     FItemStyleDelta style,
@@ -359,7 +359,7 @@ abstract class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
   ///
   /// This is identical to [FSelectItem.new]. It provides consistency with other [FSelectItemMixin] members when using
   /// dot-shorthands.
-  const factory FSelectItem.item({
+  const factory item({
     required Widget title,
     required T value,
     FItemStyleDelta style,
@@ -374,7 +374,7 @@ abstract class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
   /// {@template forui.widgets.FSelectItem.raw}
   /// Creates a [FSelectItem] with a raw layout.
   /// {@endtemplate}
-  const factory FSelectItem.raw({
+  const factory raw({
     required Widget child,
     required T value,
     FItemStyleDelta style,
@@ -383,7 +383,7 @@ abstract class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
     Key? key,
   }) = _RawSelectItem<T>;
 
-  const FSelectItem._({required this.value, this.style = const .context(), this.enabled, this.prefix, super.key});
+  const new _({required this.value, this.style = const .context(), this.enabled, this.prefix, super.key});
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -473,7 +473,7 @@ class _SelectItem<T> extends FSelectItem<T> {
   // ignore: avoid_positional_boolean_parameters
   final Widget? Function(BuildContext context, bool selected) suffixBuilder;
 
-  const _SelectItem({
+  const new({
     required this.title,
     required super.value,
     this.subtitle,
@@ -521,7 +521,7 @@ class _SelectItemState<T> extends _State<_SelectItem<T>, T> {
 class _RawSelectItem<T> extends FSelectItem<T> {
   final Widget child;
 
-  const _RawSelectItem({required this.child, required super.value, super.style, super.enabled, super.prefix, super.key})
+  const new({required this.child, required super.value, super.style, super.enabled, super.prefix, super.key})
     : super._();
 
   @override

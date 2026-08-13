@@ -48,11 +48,11 @@ extension Sentinels on Never {
 }
 
 final class _ColorSentinel extends Color {
-  const _ColorSentinel() : super(0);
+  const new() : super(0);
 }
 
 final class _ImageFilterSentinel implements ImageFilter {
-  const _ImageFilterSentinel();
+  const new();
 
   @override
   String get debugShortDescription => throw UnimplementedError();
@@ -60,7 +60,7 @@ final class _ImageFilterSentinel implements ImageFilter {
 
 // ignore: avoid_implementing_value_types
 final class _FocusedOutlineStyleSentinel implements FFocusedOutlineStyle {
-  const _FocusedOutlineStyleSentinel();
+  const new();
 
   @override
   BorderRadiusGeometry get borderRadius => throw UnimplementedError();
@@ -91,7 +91,7 @@ final class _FocusedOutlineStyleSentinel implements FFocusedOutlineStyle {
 }
 
 final class _BorderRadiusSentinel extends BorderRadiusGeometry {
-  const _BorderRadiusSentinel();
+  const new();
 
   @override
   BorderRadiusGeometry add(BorderRadiusGeometry other) => throw UnimplementedError();
@@ -119,7 +119,7 @@ final class _BorderRadiusSentinel extends BorderRadiusGeometry {
 }
 
 final class _BoxBorderSentinel extends BoxBorder {
-  const _BoxBorderSentinel();
+  const new();
 
   @override
   BorderSide get bottom => throw UnimplementedError();
@@ -147,18 +147,18 @@ final class _BoxBorderSentinel extends BoxBorder {
 }
 
 final class _DecorationImageSentinel extends DecorationImage {
-  const _DecorationImageSentinel() : super(image: const _ImageProvider());
+  const new() : super(image: const _ImageProvider());
 }
 
 final class _ImageProvider extends ImageProvider {
-  const _ImageProvider();
+  const new();
 
   @override
   Future<Object> obtainKey(ImageConfiguration configuration) => throw UnimplementedError();
 }
 
 final class _GradientSentinel extends Gradient {
-  const _GradientSentinel() : super(colors: const []);
+  const new() : super(colors: const []);
 
   @override
   Gradient scale(double factor) => throw UnimplementedError();
@@ -172,7 +172,7 @@ final class _GradientSentinel extends Gradient {
 
 // ignore: avoid_implementing_value_types
 final class _FontWeightSentinel implements FontWeight {
-  const _FontWeightSentinel();
+  const new();
 
   @override
   int get index => throw UnimplementedError();
@@ -182,7 +182,7 @@ final class _FontWeightSentinel implements FontWeight {
 }
 
 final class _ShapeBorderSentinel extends ShapeBorder {
-  const _ShapeBorderSentinel();
+  const new();
 
   @override
   EdgeInsetsGeometry get dimensions => throw UnimplementedError();

@@ -25,7 +25,7 @@ class ContentData<T> extends InheritedWidget {
   final bool Function(T) visible;
   final ValueChanged<BuildContext> ensureVisible;
 
-  const ContentData({
+  const new({
     required this.style,
     required this.enabled,
     required this.autofocusFirst,
@@ -71,7 +71,7 @@ class Content<T> extends StatefulWidget {
   final bool Function(T) visible;
   final List<FSelectItemMixin> children;
 
-  const Content({
+  const new({
     required this.controller,
     required this.style,
     required this.enabled,
@@ -282,7 +282,7 @@ class FSelectContentStyle extends FPopoverStyle with Diagnosticable, _$FSelectCo
   final EdgeInsetsGeometry padding;
 
   /// Creates a [FSelectContentStyle].
-  FSelectContentStyle({
+  new({
     required this.sectionStyle,
     required this.scrollHandleStyle,
     required super.decoration,
@@ -294,7 +294,7 @@ class FSelectContentStyle extends FPopoverStyle with Diagnosticable, _$FSelectCo
   });
 
   /// Creates a [FSelectContentStyle] that inherits its properties.
-  FSelectContentStyle.inherit({
+  new inherit({
     required super.colors,
     required super.style,
     required FIcons icons,

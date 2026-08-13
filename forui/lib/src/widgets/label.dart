@@ -106,7 +106,7 @@ class FLabel extends StatelessWidget {
   final Widget child;
 
   /// Creates a [FLabel].
-  const FLabel({
+  const new({
     required this.layout,
     required this.child,
     this.style = const .context(),
@@ -176,7 +176,7 @@ abstract class _Label extends StatefulWidget {
   final Set<FFormFieldVariant> variants;
   final Widget child;
 
-  const _Label({
+  const new({
     required this.style,
     required this.label,
     required this.description,
@@ -317,7 +317,7 @@ abstract class _State<T extends _Label> extends State<T> with TickerProviderStat
 }
 
 class _HorizontalLeadingLabel extends _Label {
-  const _HorizontalLeadingLabel({
+  const new({
     required super.style,
     required super.label,
     required super.description,
@@ -398,7 +398,7 @@ class _HorizontalLeadingState extends _State<_HorizontalLeadingLabel> {
 }
 
 class _HorizontalTrailingLabel extends _Label {
-  const _HorizontalTrailingLabel({
+  const new({
     required super.style,
     required super.label,
     required super.description,
@@ -489,7 +489,7 @@ class _HorizontalTrailingState extends _State<_HorizontalTrailingLabel> {
 class _VerticalLabel extends _Label {
   final bool expands;
 
-  const _VerticalLabel({
+  const new({
     required super.style,
     required super.label,
     required super.description,
@@ -575,14 +575,14 @@ class FLabelStyles with Diagnosticable, _$FLabelStylesFunctions {
   final FLabelStyle verticalStyle;
 
   /// Creates a [FLabelStyles].
-  const FLabelStyles({
+  const new({
     required this.horizontalLeadingStyle,
     required this.horizontalTrailingStyle,
     required this.verticalStyle,
   });
 
   /// Creates a [FLabelStyles] that inherits its properties.
-  FLabelStyles.inherit({required FStyle style})
+  new inherit({required FStyle style})
     : horizontalLeadingStyle = .inherit(
         style: style,
         labelPadding: const .directional(end: 12),
@@ -632,7 +632,7 @@ class FLabelStyle extends FFormFieldStyle with _$FLabelStyleFunctions {
   final FLabelMotion labelMotion;
 
   /// Creates a [FLabelStyle].
-  const FLabelStyle({
+  const new({
     required super.labelTextStyle,
     required super.descriptionTextStyle,
     required super.errorTextStyle,
@@ -644,7 +644,7 @@ class FLabelStyle extends FFormFieldStyle with _$FLabelStyleFunctions {
   });
 
   /// Creates a [FLabelStyle].
-  FLabelStyle.inherit({
+  new inherit({
     required FStyle style,
     this.labelPadding = .zero,
     this.descriptionPadding = .zero,
@@ -725,7 +725,7 @@ class FLabelMotion with Diagnosticable, _$FLabelMotionFunctions {
   final Animatable<double> errorFadeTween;
 
   /// Creates a [FLabelMotion].
-  const FLabelMotion({
+  const new({
     this.textStyleTransitionDuration = const Duration(milliseconds: 100),
     this.textStyleTransitionCurve = Curves.linear,
     this.errorExpandDuration = const Duration(milliseconds: 100),

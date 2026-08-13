@@ -17,7 +17,7 @@ class Item extends StatelessWidget {
   final bool Function(DateTime) selectable;
   final ValueWidgetBuilder<FLineCalendarItemData> builder;
 
-  const Item({
+  const new({
     required this.controller,
     required this.style,
     required this.date,
@@ -92,7 +92,7 @@ class ItemContent extends StatelessWidget {
   final DateTime date;
   final Set<FLineCalendarItemVariant> variants;
 
-  const ItemContent({required this.style, required this.date, required this.variants, super.key});
+  const new({required this.style, required this.date, required this.variants, super.key});
 
   @override
   Widget build(BuildContext context) {

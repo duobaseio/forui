@@ -45,7 +45,7 @@ class _PickerTimeField extends FTimeField implements FTimeFieldPickerProperties 
   @override
   final int minuteInterval;
 
-  const _PickerTimeField({
+  const new({
     this.format = FTimeField.defaultFormat,
     this.hint,
     this.textAlign = .start,
@@ -271,7 +271,7 @@ class _PickerPopover extends StatelessWidget {
   final FTimeFieldPopoverBuilder popoverBuilder;
   final Widget child;
 
-  const _PickerPopover({
+  const new({
     required this.controller,
     required this.popoverController,
     required this.style,

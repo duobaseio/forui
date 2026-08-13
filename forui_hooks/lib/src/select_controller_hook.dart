@@ -12,7 +12,7 @@ class _SelectHook<T> extends Hook<FSelectController<T>> {
   final T? value;
   final bool toggleable;
 
-  const _SelectHook({required this.value, required this.toggleable, super.keys});
+  const new({required this.value, required this.toggleable, super.keys});
 
   @override
   _SelectHookState<T> createState() => .new();

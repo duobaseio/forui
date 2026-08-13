@@ -21,10 +21,10 @@ class FDateFieldStyle with Diagnosticable, _$FDateFieldStyleFunctions {
   final FCalendarStyle calendarStyle;
 
   /// Creates a [FDateFieldStyle].
-  FDateFieldStyle({required this.fieldStyles, required this.popoverStyle, required this.calendarStyle});
+  new({required this.fieldStyles, required this.popoverStyle, required this.calendarStyle});
 
   /// Creates a [FDateFieldStyle] that inherits its properties.
-  FDateFieldStyle.inherit({
+  new inherit({
     required FColors colors,
     required FTypography typography,
     required FIcons icons,

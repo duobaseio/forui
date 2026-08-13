@@ -116,7 +116,7 @@ class FPointPortal extends StatefulWidget {
   ///
   /// ## Contract
   /// Throws [AssertionError] if [builder] and [child] are both null.
-  const FPointPortal({
+  const new({
     required this.portalBuilder,
     required this.point,
     this.control = const .managed(),

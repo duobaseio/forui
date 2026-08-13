@@ -281,7 +281,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
   /// ## Contract
   /// Each key in [items] must map to a unique value. Having multiple keys map to the same value will result in
   /// undefined behavior.
-  factory FMultiSelect({
+  factory({
     required Map<String, T> items,
     FMultiValueControl<T>? control,
     FPopoverControl popoverControl = const .managed(),
@@ -385,7 +385,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
   }
 
   /// Creates a [FMultiSelect] with the given [children].
-  const factory FMultiSelect.rich({
+  const factory rich({
     required Widget Function(T value) format,
     required List<FSelectItemMixin> children,
     FMultiValueControl<T>? control,
@@ -451,7 +451,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
   /// ## Contract
   /// Each key in [items] must map to a unique value. Having multiple keys map to the same value will result in
   /// undefined behavior.
-  factory FMultiSelect.search(
+  factory search(
     Map<String, T> items, {
     FutureOr<Iterable<T>> Function(String query)? filter,
     FSelectSearchFieldProperties searchFieldProperties = const FSelectSearchFieldProperties(),
@@ -578,7 +578,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
   /// The [contentLoadingBuilder] is used to show a loading indicator while the search results is processed
   /// asynchronously by [filter].
   /// The [contentErrorBuilder] is used to show an error message when [filter] is asynchronous and fails.
-  const factory FMultiSelect.searchBuilder({
+  const factory searchBuilder({
     required Widget Function(T) format,
     required FutureOr<Iterable<T>> Function(String query) filter,
     required FSelectSearchContentBuilder<T> contentBuilder,
@@ -633,7 +633,7 @@ abstract class FMultiSelect<T> extends StatefulWidget {
     Key? key,
   }) = _SearchSelect<T>;
 
-  const FMultiSelect._({
+  const new _({
     required this.format,
     this.control,
     this.popoverControl = const .managed(),
@@ -960,7 +960,7 @@ class MultiSelectFieldScope extends InheritedWidget {
 
   final FMultiSelectFieldStyle style;
 
-  const MultiSelectFieldScope({required this.style, required super.child, super.key});
+  const new({required this.style, required super.child, super.key});
 
   @override
   bool updateShouldNotify(MultiSelectFieldScope old) => style != old.style;

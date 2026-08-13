@@ -9,7 +9,7 @@ import 'package:meta/meta.dart';
 /// Generates a [TransformationsExtension] that provides `copyWith` and `lerp` methods.
 class DesignTransformationsExtension extends TransformationsExtension {
   /// Creates a [DesignTransformationsExtension].
-  DesignTransformationsExtension(super.step, super.element, super.sentinels, {required super.copyWithDocsHeader});
+  new(super.step, super.element, super.sentinels, {required super.copyWithDocsHeader});
 
   /// Generates an extension that provides non virtual transforming methods.
   @override

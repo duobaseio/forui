@@ -11,7 +11,7 @@ import 'package:forui/src/widgets/slider/inherited_data.dart';
 
 @internal
 class HorizontalSliderRenderObject extends _SliderRenderObject {
-  const HorizontalSliderRenderObject({super.children, super.key});
+  const new({super.children, super.key});
 
   @override
   RenderObject createRenderObject(BuildContext context) {
@@ -24,7 +24,7 @@ class HorizontalSliderRenderObject extends _SliderRenderObject {
 
 @internal
 class VerticalSliderRenderObject extends _SliderRenderObject {
-  const VerticalSliderRenderObject({super.children, super.key});
+  const new({super.children, super.key});
 
   @override
   RenderObject createRenderObject(BuildContext context) {
@@ -36,7 +36,7 @@ class VerticalSliderRenderObject extends _SliderRenderObject {
 }
 
 abstract class _SliderRenderObject extends MultiChildRenderObjectWidget {
-  const _SliderRenderObject({super.key, super.children});
+  const new({super.key, super.children});
 
   @override
   void updateRenderObject(BuildContext context, covariant _RenderSlider slider) {
@@ -51,7 +51,7 @@ abstract class _SliderRenderObject extends MultiChildRenderObjectWidget {
 }
 
 class _RenderHorizontalSlider extends _RenderSlider {
-  _RenderHorizontalSlider(super._style, super._layout, super._textDirection, super._marks, super._mainAxisExtent);
+  new(super._style, super._layout, super._textDirection, super._marks, super._mainAxisExtent);
 
   @override
   void performLayout() {
@@ -93,7 +93,7 @@ class _RenderHorizontalSlider extends _RenderSlider {
 }
 
 class _RenderVerticalSlider extends _RenderSlider {
-  _RenderVerticalSlider(super._style, super._layout, super._textDirection, super._marks, super._mainAxisExtent);
+  new(super._style, super._layout, super._textDirection, super._marks, super._mainAxisExtent);
 
   @override
   void performLayout() {
@@ -169,7 +169,7 @@ abstract class _RenderSlider extends RenderBox
   double? _mainAxisExtent;
   late Rect Function(RenderBox, Size, FSliderMark, FSliderMarkStyle) _positionMark;
 
-  _RenderSlider(this._style, this._layout, this._textDirection, this._marks, this._mainAxisExtent) {
+  new(this._style, this._layout, this._textDirection, this._marks, this._mainAxisExtent) {
     _positionMark = _position;
   }
 

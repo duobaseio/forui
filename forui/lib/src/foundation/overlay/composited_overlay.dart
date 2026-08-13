@@ -23,7 +23,7 @@ class CompositedOverlay extends SingleChildRenderObjectWidget {
   /// Whether to show the widget's contents when there is no corresponding [CompositedChild] with the same [link].
   final bool showWhenUnlinked;
 
-  const CompositedOverlay({
+  const new({
     required this.notifier,
     required this.link,
     this.showWhenUnlinked = false,
@@ -70,7 +70,7 @@ class RenderOverlayLayer extends RenderProxyBox {
   Size _viewSize;
   bool _showWhenUnlinked;
 
-  RenderOverlayLayer({
+  new({
     required this._notifier,
     required this._link,
     required this._viewSize,

@@ -8,7 +8,7 @@ class Variants {
   /// The variants and their associated tier and documentation.
   final Map<String, (int, String)> variants;
 
-  const Variants(this.prefix, this.variants);
+  const new(this.prefix, this.variants);
 }
 
 @internal
@@ -19,5 +19,5 @@ class SentinelValues {
   /// The field name and their associated sentinel values which is typically a const field name.
   final Map<String, String> values;
 
-  const SentinelValues(this.style, this.values);
+  const new(this.style, this.values);
 }

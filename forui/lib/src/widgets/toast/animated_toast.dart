@@ -57,7 +57,7 @@ class AnimatedToast extends StatefulWidget {
   /// The content.
   final Widget child;
 
-  const AnimatedToast({
+  const new({
     required this.style,
     required this.alignTransform,
     required this.index,

@@ -34,7 +34,7 @@ class FSelectGroupItemData<T> extends InheritedWidget {
   final bool error;
 
   /// The [FSelectGroup]'s item data.
-  const FSelectGroupItemData({
+  const new({
     required this.controller,
     required this.style,
     required this.enabled,
@@ -141,7 +141,7 @@ class FSelectGroup<T> extends StatefulWidget with FFormFieldProperties<Set<T>> {
   final Key? formFieldKey;
 
   /// Creates a [FSelectGroup].
-  const FSelectGroup({
+  const new({
     required this.children,
     this.control,
     this.style = const .context(),
@@ -267,7 +267,7 @@ class FSelectGroupStyle extends FLabelStyle with Diagnosticable, _$FSelectGroupS
   final EdgeInsetsGeometry itemPadding;
 
   /// Creates a [FSelectGroupStyle].
-  const FSelectGroupStyle({
+  const new({
     required this.checkboxStyle,
     required this.radioStyle,
     required super.labelTextStyle,
@@ -282,7 +282,7 @@ class FSelectGroupStyle extends FLabelStyle with Diagnosticable, _$FSelectGroupS
   });
 
   /// Creates a [FSelectGroupStyle] that inherits its properties.
-  factory FSelectGroupStyle.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FIcons icons,

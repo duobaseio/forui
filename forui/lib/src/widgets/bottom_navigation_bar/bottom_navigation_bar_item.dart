@@ -58,7 +58,7 @@ class FBottomNavigationBarItem extends StatelessWidget {
   final FTappableVariantChangeCallback? onVariantChange;
 
   /// Creates a [FBottomNavigationBarItem].
-  const FBottomNavigationBarItem({
+  const new({
     required this.icon,
     this.label,
     this.semanticsLabel,
@@ -158,7 +158,7 @@ class FBottomNavigationBarItemStyle with Diagnosticable, _$FBottomNavigationBarI
   final FFocusedOutlineStyle focusedOutlineStyle;
 
   /// Creates a [FBottomNavigationBarItemStyle].
-  FBottomNavigationBarItemStyle({
+  new({
     required this.iconStyle,
     required this.textStyle,
     required this.tappableStyle,
@@ -168,7 +168,7 @@ class FBottomNavigationBarItemStyle with Diagnosticable, _$FBottomNavigationBarI
   });
 
   /// Creates a [FBottomNavigationBarItemStyle] that inherits its properties.
-  FBottomNavigationBarItemStyle.inherit({
+  new inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,

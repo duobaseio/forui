@@ -59,7 +59,7 @@ class FPickerStyle with Diagnosticable, _$FPickerStyleFunctions {
   final Future<void> Function() hapticFeedback;
 
   /// Creates a [FPickerStyle].
-  const FPickerStyle({
+  const new({
     required this.textStyle,
     required this.selectionDecoration,
     required this.focusedOutlineStyle,
@@ -84,7 +84,7 @@ class FPickerStyle with Diagnosticable, _$FPickerStyleFunctions {
        assert(spacing >= 0, 'spacing ($spacing) must be >= 0');
 
   /// Creates a [FPickerStyle] that inherits its properties.
-  FPickerStyle.inherit({
+  new inherit({
     required FColors colors,
     required FStyle style,
     required FTypography typography,

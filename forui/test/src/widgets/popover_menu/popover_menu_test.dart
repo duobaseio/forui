@@ -8,7 +8,7 @@ import '../../test_scaffold.dart';
 const key = Key('key');
 
 class PopoverItem extends StatelessWidget with FItemMixin {
-  const PopoverItem({super.key});
+  const new({super.key});
 
   @override
   Widget build(BuildContext context) => FPopoverMenu(
@@ -25,7 +25,7 @@ class PopoverItem extends StatelessWidget with FItemMixin {
 }
 
 class PopoverTile extends StatelessWidget with FTileMixin {
-  const PopoverTile({super.key});
+  const new({super.key});
 
   @override
   Widget build(BuildContext context) => FPopoverMenu.tiles(

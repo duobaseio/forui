@@ -41,7 +41,7 @@ class DayPicker extends StatelessWidget {
   final ValueChanged<DateTime> onLongPress;
   final FCalendarDayBuilder builder;
 
-  const DayPicker({
+  const new({
     required this.controller,
     required this.style,
     required this.localization,
@@ -184,7 +184,7 @@ class _Viewport extends InheritedWidget {
 
   final double _height;
 
-  const _Viewport({required this._height, required super.child});
+  const new({required this._height, required super.child});
 
   @override
   bool updateShouldNotify(_Viewport old) => _height != old._height;
@@ -204,7 +204,7 @@ class _Grid extends StatefulWidget {
   final ValueChanged<DateTime> onLongPress;
   final FCalendarDayBuilder builder;
 
-  _Grid({
+  new({
     required this.style,
     required this.localization,
     required this.height,
@@ -352,7 +352,7 @@ class _Fade extends StatelessWidget {
   final double _cell;
   final Widget child;
 
-  const _Fade({required this._height, required this._cell, required this.child});
+  const new({required this._height, required this._cell, required this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -379,7 +379,7 @@ class _Fade extends StatelessWidget {
 /// Controls a calendar's day picker.
 class FCalendarDayPickerController extends GridController {
   /// Creates a [FCalendarDayPickerController].
-  FCalendarDayPickerController({
+  new({
     required super.start,
     required super.end,
     required super.selectable,
@@ -442,7 +442,7 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
   final double daySpacing;
 
   /// Creates a [FCalendarDayPickerStyle].
-  const FCalendarDayPickerStyle({
+  const new({
     required this.weekdayTextStyle,
     required this.dayStyles,
     required this.daySize,
@@ -455,7 +455,7 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
        );
 
   /// Creates a [FCalendarDayPickerStyle] that inherits its properties.
-  factory FCalendarDayPickerStyle.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,

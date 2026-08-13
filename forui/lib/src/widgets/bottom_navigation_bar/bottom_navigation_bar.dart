@@ -60,7 +60,7 @@ class FBottomNavigationBar extends StatelessWidget {
   /// Creates a [FBottomNavigationBar] with [FBottomNavigationBarItem]s.
   ///
   /// See [FBottomNavigationBarItem] for the items in a bottom navigation bar.
-  const FBottomNavigationBar({
+  const new({
     required this.children,
     this.style = const .context(),
     this.safeAreaTop = false,
@@ -161,7 +161,7 @@ class FBottomNavigationBarData extends InheritedWidget {
   final ValueChanged<int>? onChange;
 
   /// Creates a [FBottomNavigationBarData].
-  const FBottomNavigationBarData({
+  const new({
     required this.itemStyle,
     required this.selected,
     required this.index,
@@ -236,7 +236,7 @@ class FBottomNavigationBarStyle with Diagnosticable, _$FBottomNavigationBarStyle
   final FVariants<FPlatformVariantConstraint, FPlatformVariant, bool, Delta> slideableItems;
 
   /// Creates a [FBottomNavigationBarStyle].
-  const FBottomNavigationBarStyle({
+  const new({
     required this.decoration,
     required this.itemStyle,
     this.backgroundFilter,
@@ -245,7 +245,7 @@ class FBottomNavigationBarStyle with Diagnosticable, _$FBottomNavigationBarStyle
   });
 
   /// Creates a [FBottomNavigationBarStyle] that inherits its properties.
-  FBottomNavigationBarStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
+  new inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         decoration: BoxDecoration(
           border: Border(

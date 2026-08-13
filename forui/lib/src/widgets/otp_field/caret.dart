@@ -10,7 +10,7 @@ class Caret extends StatefulWidget {
   final double height;
   final bool cursorOpacityAnimates;
 
-  const Caret({
+  const new({
     required this.color,
     required this.width,
     required this.height,
@@ -108,7 +108,7 @@ class _DiscreteKeyFrameSimulation extends Simulation {
   // The index of the keyframe corresponds to the most recent input `time`.
   int _lastKeyFrame = 0;
 
-  _DiscreteKeyFrameSimulation();
+  new();
 
   @override
   double x(double time) {

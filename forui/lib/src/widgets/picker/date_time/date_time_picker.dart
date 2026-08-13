@@ -91,7 +91,7 @@ class FDateTimePicker extends StatefulWidget {
   final Widget Function(BuildContext context, DateTime date, DateFormat format) dateBuilder;
 
   /// Creates a [FDateTimePicker] that uses a single wheel for the date.
-  const FDateTimePicker({
+  const new({
     this.control = const .managed(),
     this.style = const .context(),
     this.hour24,
@@ -289,7 +289,7 @@ class FDateTimePickerStyle extends FPickerStyle with _$FDateTimePickerStyleFunct
   final EdgeInsetsDirectional padding;
 
   /// Creates a [FDateTimePickerStyle].
-  const FDateTimePickerStyle({
+  const new({
     required super.textStyle,
     required super.selectionDecoration,
     required super.focusedOutlineStyle,
@@ -312,7 +312,7 @@ class FDateTimePickerStyle extends FPickerStyle with _$FDateTimePickerStyleFunct
   });
 
   /// Creates a [FDateTimePickerStyle] that inherits its properties.
-  FDateTimePickerStyle.inherit({
+  new inherit({
     required FColors colors,
     required FStyle style,
     required FTypography typography,

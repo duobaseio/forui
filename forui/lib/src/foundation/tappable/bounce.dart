@@ -7,7 +7,7 @@ class Bounce extends SingleChildRenderObjectWidget {
   final Animation<double> _bounce;
   final double? _bounceFloor;
 
-  const Bounce({required this._bounce, required this._bounceFloor, required super.child, super.key});
+  const new({required this._bounce, required this._bounceFloor, required super.child, super.key});
 
   @override
   RenderObject createRenderObject(BuildContext context) => RenderBounce(_bounce, _bounceFloor);
@@ -25,7 +25,7 @@ class RenderBounce extends RenderProxyBox {
   Animation<double> _bounce;
   double? _bounceFloor;
 
-  RenderBounce(this._bounce, this._bounceFloor) {
+  new(this._bounce, this._bounceFloor) {
     _bounce.addListener(markNeedsPaint);
   }
 

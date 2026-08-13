@@ -8,14 +8,14 @@ import 'package:forui/src/widgets/picker/picker.dart';
 class _ScrollBehavior extends ScrollBehavior {
   static final _devices = PointerDeviceKind.values.toSet();
 
-  const _ScrollBehavior();
+  const new();
 
   @override
   Set<PointerDeviceKind> get dragDevices => _devices;
 }
 
 /// A marker interface that indicates that a widget is a picker wheel.
-mixin FPickerWheelMixin on Widget {}
+mixin FPickerWheelMixin on Widget;
 
 /// A picker wheel that displays a list of items that can be scrolled vertically.
 ///
@@ -62,7 +62,7 @@ abstract class FPickerWheel extends StatefulWidget with FPickerWheelMixin {
   final ValueChanged<bool>? onFocusChange;
 
   /// Creates a picker wheel with the given children.
-  const factory FPickerWheel({
+  const factory({
     required List<Widget> children,
     bool loop,
     int flex,
@@ -76,7 +76,7 @@ abstract class FPickerWheel extends StatefulWidget with FPickerWheelMixin {
   }) = ListWheel;
 
   /// Creates a picker wheel with the given builder.
-  const factory FPickerWheel.builder({
+  const factory builder({
     required IndexedWidgetBuilder builder,
     int flex,
     double? itemExtent,
@@ -88,7 +88,7 @@ abstract class FPickerWheel extends StatefulWidget with FPickerWheelMixin {
     Key? key,
   }) = BuilderWheel;
 
-  const FPickerWheel._({
+  const new _({
     this.flex = 1,
     this.itemExtent,
     this.semanticsLabel,
@@ -253,7 +253,7 @@ class ListWheel extends FPickerWheel {
   final bool loop;
   final List<Widget> children;
 
-  const ListWheel({
+  const new({
     required this.children,
     this.loop = false,
     super.flex = 1,
@@ -310,7 +310,7 @@ class _ListState extends _State<ListWheel> {
 class BuilderWheel extends FPickerWheel {
   final IndexedWidgetBuilder builder;
 
-  const BuilderWheel({
+  const new({
     required this.builder,
     super.flex,
     super.itemExtent,

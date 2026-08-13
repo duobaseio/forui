@@ -33,7 +33,7 @@ class Month extends StatelessWidget {
   final VoidCallback? onPress;
   final FCalendarMonthBuilder builder;
 
-  const Month({
+  const new({
     required this.styles,
     required this.localizations,
     required this.date,
@@ -79,7 +79,7 @@ class FCalendarMonthStyle with Diagnosticable, _$FCalendarMonthStyleFunctions {
   final Decoration decoration;
 
   /// Creates a [FCalendarMonthStyle].
-  FCalendarMonthStyle({required this.textStyle, required this.decoration});
+  new({required this.textStyle, required this.decoration});
 }
 
 /// [FCalendarMonthStyle]'s variants.
@@ -88,7 +88,7 @@ extension type FCalendarMonthStyles(
 ) implements
     FVariants<FCalendarMonthVariantConstraint, FCalendarMonthVariant, FCalendarMonthStyle, FCalendarMonthStyleDelta> {
   /// Creates a [FCalendarMonthStyles] that inherits its properties.
-  factory FCalendarMonthStyles.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,

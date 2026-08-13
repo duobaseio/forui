@@ -5,25 +5,25 @@ import 'package:meta/meta.dart';
 /// Size constraints for a portal.
 sealed class FPortalConstraints extends Constraints {
   /// Creates a [FPortalConstraints] with the given constraints.
-  const factory FPortalConstraints({double minWidth, double maxWidth, double minHeight, double maxHeight}) =
+  const factory({double minWidth, double maxWidth, double minHeight, double maxHeight}) =
       FixedConstraints;
 
   /// Creates a [FPortalConstraints] that require the given width or height.
-  const factory FPortalConstraints.tightFor({double? width, double? height}) = FixedConstraints.tightFor;
+  const factory tightFor({double? width, double? height}) = FixedConstraints.tightFor;
 
-  const FPortalConstraints._();
+  const new _();
 }
 
 @internal
 final class FixedConstraints extends BoxConstraints implements FPortalConstraints {
-  const FixedConstraints({
+  const new({
     super.minWidth = 0.0,
     super.maxWidth = .infinity,
     super.minHeight = 0.0,
     super.maxHeight = .infinity,
   });
 
-  const FixedConstraints.tightFor({super.width, super.height}) : super.tightFor();
+  const new tightFor({super.width, super.height}) : super.tightFor();
 }
 
 /// Size constraints for a portal that has the same height as the child widget.
@@ -37,10 +37,10 @@ final class FAutoHeightPortalConstraints extends FPortalConstraints {
   final double maxWidth;
 
   /// Creates a [FPortalConstraints] that has the same height as the child widget.
-  const FAutoHeightPortalConstraints({this.minWidth = 0.0, this.maxWidth = .infinity}) : super._();
+  const new({this.minWidth = 0.0, this.maxWidth = .infinity}) : super._();
 
   /// Creates a [FPortalConstraints] that has the same height as the child widget.
-  const FAutoHeightPortalConstraints.tightFor({double? width})
+  const new tightFor({double? width})
     : minWidth = width ?? 0,
       maxWidth = width ?? .infinity,
       super._();
@@ -77,10 +77,10 @@ final class FAutoWidthPortalConstraints extends FPortalConstraints {
   final double maxHeight;
 
   /// Creates a [FPortalConstraints] that has the same width as the child widget.
-  const FAutoWidthPortalConstraints({this.minHeight = 0.0, this.maxHeight = .infinity}) : super._();
+  const new({this.minHeight = 0.0, this.maxHeight = .infinity}) : super._();
 
   /// Creates a [FPortalConstraints] that has the same width as the child widget.
-  const FAutoWidthPortalConstraints.tightFor({double? height})
+  const new tightFor({double? height})
     : minHeight = height ?? 0,
       maxHeight = height ?? .infinity,
       super._();

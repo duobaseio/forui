@@ -11,7 +11,7 @@ class FChangeNotifier with ChangeNotifier {
   bool _disposed = false;
 
   /// Creates a [FChangeNotifier].
-  FChangeNotifier() {
+  new() {
     if (kFlutterMemoryAllocationsEnabled) {
       ChangeNotifier.maybeDispatchObjectCreation(this);
     }
@@ -38,14 +38,14 @@ class FMultiValueNotifier<T> extends ValueNotifier<Set<T>> {
   ///
   /// # Contract:
   /// [min] and [max] must be: `0 <= min <= max`.
-  FMultiValueNotifier({Set<T> value = const {}, int min = 0, int? max})
+  new({Set<T> value = const {}, int min = 0, int? max})
     : _min = min,
       _max = max,
       assert(debugCheckInclusiveRange<FMultiValueNotifier<T>>(min, max)),
       super(value);
 
   /// Creates a [FMultiValueNotifier] that allows only one element at a time.
-  factory FMultiValueNotifier.radio([T? value]) = _RadioNotifier<T>;
+  factory radio([T? value]) = _RadioNotifier<T>;
 
   /// Returns true if the notifier contains the [value].
   bool contains(T value) => super.value.contains(value);
@@ -96,7 +96,7 @@ class FMultiValueNotifier<T> extends ValueNotifier<Set<T>> {
 }
 
 class _RadioNotifier<T> extends FMultiValueNotifier<T> {
-  _RadioNotifier([T? value]) : super(value: {?value});
+  new([T? value]) : super(value: {?value});
 
   @override
   void update(T value, {required bool add}) {
@@ -121,7 +121,7 @@ class _ProxyNotifier<T> extends FMultiValueNotifier<T> {
   Set<T> _unsynced;
   ValueChanged<Set<T>> _onChange;
 
-  _ProxyNotifier({required super.value, required this._onChange}) : _unsynced = value;
+  new({required super.value, required this._onChange}) : _unsynced = value;
 
   void _update(Set<T> newValue, ValueChanged<Set<T>> onChange) {
     _onChange = onChange;
@@ -157,7 +157,7 @@ class _ProxyNotifier<T> extends FMultiValueNotifier<T> {
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FMultiValueControl<T> with Diagnosticable, _$FMultiValueControlMixin<T> {
   /// Creates a [FMultiValueControl] for multiple value selection.
-  const factory FMultiValueControl.managed({
+  const factory managed({
     FMultiValueNotifier<T>? controller,
     Set<T>? initial,
     int min,
@@ -169,7 +169,7 @@ sealed class FMultiValueControl<T> with Diagnosticable, _$FMultiValueControlMixi
   ///
   /// The [initial] parameter contains the initially selected value. It may be null.
   /// The [onChange] callback is invoked when the user selects a different item.
-  const factory FMultiValueControl.managedRadio({
+  const factory managedRadio({
     FMultiValueNotifier<T>? controller,
     T? initial,
     ValueChanged<Set<T>>? onChange,
@@ -179,9 +179,9 @@ sealed class FMultiValueControl<T> with Diagnosticable, _$FMultiValueControlMixi
   ///
   /// The [value] parameter contains the current selected values.
   /// The [onChange] callback is invoked when the user selects or deselects an item.
-  const factory FMultiValueControl.lifted({required Set<T> value, required ValueChanged<Set<T>> onChange}) = _Lifted<T>;
+  const factory lifted({required Set<T> value, required ValueChanged<Set<T>> onChange}) = _Lifted<T>;
 
-  const FMultiValueControl._();
+  const new _();
 
   (FMultiValueNotifier<T>, bool) _update(
     FMultiValueControl<T> old,
@@ -219,7 +219,7 @@ abstract class FMultiValueManagedControl<T> extends FMultiValueControl<T>
   final ValueChanged<Set<T>>? onChange;
 
   /// Creates a [FMultiValueControl].
-  const FMultiValueManagedControl({this.controller, this.min, this.max, this.onChange})
+  const new({this.controller, this.min, this.max, this.onChange})
     : assert(controller == null || min == null, 'Cannot provide both controller and min. Pass min to the controller.'),
       assert(controller == null || max == null, 'Cannot provide both controller and max. Pass max to the controller.'),
       super._();
@@ -228,7 +228,7 @@ abstract class FMultiValueManagedControl<T> extends FMultiValueControl<T>
 class _Normal<T> extends FMultiValueManagedControl<T> {
   final Set<T>? initial;
 
-  const _Normal({this.initial, super.controller, super.min, super.max, super.onChange})
+  const new({this.initial, super.controller, super.min, super.max, super.onChange})
     : assert(
         controller == null || initial == null,
         'Cannot provide both controller and initial. Pass initial value to the controller.',
@@ -248,7 +248,7 @@ class _Normal<T> extends FMultiValueManagedControl<T> {
 class _Radio<T> extends FMultiValueManagedControl<T> {
   final T? initial;
 
-  const _Radio({this.initial, super.controller, super.onChange})
+  const new({this.initial, super.controller, super.onChange})
     : assert(
         controller == null || initial == null,
         'Cannot provide both controller and initial. Pass initial value to the controller.',
@@ -270,7 +270,7 @@ class _Lifted<T> extends FMultiValueControl<T> with _$_LiftedMixin<T> {
   @override
   final ValueChanged<Set<T>> onChange;
 
-  const _Lifted({required this.value, required this.onChange}) : super._();
+  const new({required this.value, required this.onChange}) : super._();
 
   @override
   FMultiValueNotifier<T> createController() => _ProxyNotifier(value: value, onChange: onChange);

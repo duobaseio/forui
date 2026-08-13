@@ -3,6 +3,7 @@ analyzer:
   errors:
     prefer_asserts_with_message: ignore
     public_member_api_docs: ignore
+    unnecessary_null_checks: ignore
   exclude:
     - build/**
     - android/**

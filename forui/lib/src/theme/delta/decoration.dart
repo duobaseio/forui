@@ -5,7 +5,7 @@ import 'package:forui/src/theme/delta/delta.dart';
 /// A delta that applies modifications to a [ShapeDecoration].
 abstract class ShapeDecorationDelta with Delta {
   /// Creates a partial modification of a [ShapeDecoration].
-  const factory ShapeDecorationDelta.delta({
+  const factory delta({
     Color? color,
     DecorationImage? image,
     Gradient? gradient,
@@ -14,7 +14,7 @@ abstract class ShapeDecorationDelta with Delta {
   }) = _ShapeDelta;
 
   /// Creates a complete replacement for a [ShapeDecoration].
-  const factory ShapeDecorationDelta.value(ShapeDecoration decoration) = _ShapeValue;
+  const factory value(ShapeDecoration decoration) = _ShapeValue;
 
   @override
   ShapeDecoration call(ShapeDecoration? decoration);
@@ -27,7 +27,7 @@ class _ShapeDelta implements ShapeDecorationDelta {
   final List<BoxShadow>? shadows;
   final ShapeBorder? shape;
 
-  const _ShapeDelta({
+  const new({
     this.color = Sentinels.color,
     this.image = Sentinels.decorationImage,
     this.gradient = Sentinels.gradient,
@@ -48,7 +48,7 @@ class _ShapeDelta implements ShapeDecorationDelta {
 class _ShapeValue implements ShapeDecorationDelta {
   final ShapeDecoration _decoration;
 
-  const _ShapeValue(this._decoration);
+  const new(this._decoration);
 
   @override
   ShapeDecoration call(ShapeDecoration? decoration) => _decoration;
@@ -63,7 +63,7 @@ abstract class DecorationDelta with Delta {
   ///
   /// ## Contract
   /// Throws an error if applied to a [Decoration] that is neither a [BoxDecoration] nor [ShapeDecoration].
-  const factory DecorationDelta.boxDelta({
+  const factory boxDelta({
     Color? color,
     DecorationImage? image,
     BoxBorder? border,
@@ -80,7 +80,7 @@ abstract class DecorationDelta with Delta {
   ///
   /// ## Contract
   /// Throws an error if applied to a [Decoration] that is neither a [BoxDecoration] nor [ShapeDecoration].
-  const factory DecorationDelta.shapeDelta({
+  const factory shapeDelta({
     Color? color,
     DecorationImage? image,
     Gradient? gradient,
@@ -89,14 +89,14 @@ abstract class DecorationDelta with Delta {
   }) = _DecorationShapeDelta;
 
   /// Creates a complete replacement for a [Decoration].
-  const factory DecorationDelta.value(Decoration decoration) = _ValueDelta;
+  const factory value(Decoration decoration) = _ValueDelta;
 
   @override
   Decoration call(Decoration? decoration);
 }
 
 class _DecorationBoxDelta extends _BoxDelta implements DecorationDelta {
-  const _DecorationBoxDelta({
+  const new({
     super.color,
     super.image,
     super.border,
@@ -146,7 +146,7 @@ class _DecorationBoxDelta extends _BoxDelta implements DecorationDelta {
 }
 
 class _DecorationShapeDelta extends _ShapeDelta implements DecorationDelta {
-  const _DecorationShapeDelta({super.color, super.image, super.gradient, super.shadows, super.shape});
+  const new({super.color, super.image, super.gradient, super.shadows, super.shape});
 
   @override
   ShapeDecoration call(covariant Decoration? decoration) => switch (decoration) {
@@ -159,7 +159,7 @@ class _DecorationShapeDelta extends _ShapeDelta implements DecorationDelta {
 class _ValueDelta implements DecorationDelta {
   final Decoration _decoration;
 
-  const _ValueDelta(this._decoration);
+  const new(this._decoration);
 
   @override
   Decoration call(Decoration? decoration) => _decoration;
@@ -168,7 +168,7 @@ class _ValueDelta implements DecorationDelta {
 /// A delta that applies modifications to a [BoxDecoration].
 abstract class BoxDecorationDelta with Delta {
   /// Creates a partial modification of a [BoxDecoration].
-  const factory BoxDecorationDelta.delta({
+  const factory delta({
     Color? color,
     DecorationImage? image,
     BoxBorder? border,
@@ -180,7 +180,7 @@ abstract class BoxDecorationDelta with Delta {
   }) = _BoxDelta;
 
   /// Creates a complete replacement for a [BoxDecoration].
-  const factory BoxDecorationDelta.value(BoxDecoration decoration) = _BoxValue;
+  const factory value(BoxDecoration decoration) = _BoxValue;
 
   @override
   BoxDecoration call(BoxDecoration? decoration);
@@ -196,7 +196,7 @@ class _BoxDelta implements BoxDecorationDelta {
   final BlendMode? Function()? backgroundBlendMode;
   final BoxShape? shape;
 
-  const _BoxDelta({
+  const new({
     this.color = Sentinels.color,
     this.image = Sentinels.decorationImage,
     this.border = Sentinels.boxBorder,
@@ -223,7 +223,7 @@ class _BoxDelta implements BoxDecorationDelta {
 class _BoxValue implements BoxDecorationDelta {
   final BoxDecoration _decoration;
 
-  const _BoxValue(this._decoration);
+  const new(this._decoration);
 
   @override
   BoxDecoration call(BoxDecoration? decoration) => _decoration;

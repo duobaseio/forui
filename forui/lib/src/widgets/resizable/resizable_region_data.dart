@@ -36,7 +36,7 @@ final class FResizableRegionData with Diagnosticable {
   final ({double min, double max}) offset;
 
   /// Creates a [FResizableRegionData].
-  FResizableRegionData({
+  new({
     required this.index,
     required ({double min, double max, double total}) extent,
     required this.offset,

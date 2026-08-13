@@ -33,7 +33,7 @@ class PasswordFormField extends StatelessWidget with FFormFieldProperties<String
 
   final Key? formFieldKey;
 
-  PasswordFormField({
+  new({
     required this.control,
     required this.properties,
     required this.onSaved,

@@ -153,5 +153,5 @@ extension on HttpClient {
 class _DownloadException implements Exception {
   final String reason;
 
-  _DownloadException(this.reason);
+  new(this.reason);
 }

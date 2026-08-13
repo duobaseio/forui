@@ -116,7 +116,7 @@ class FDialogRoute<T> extends RawDialogRoute<T> {
   final String? barrierOnTapHint;
 
   /// Creates a [FDialogRoute].
-  FDialogRoute({
+  new({
     required this.style,
     required Widget Function(BuildContext context, Animation<double> animation) builder,
     this.barrierDismissible = true,
@@ -211,10 +211,10 @@ class FDialogRouteStyle with Diagnosticable, _$FDialogRouteStyleFunctions {
   final FDialogRouteMotion motion;
 
   /// Creates a [FDialogRouteStyle].
-  const FDialogRouteStyle({this.barrierFilter, this.motion = const FDialogRouteMotion()});
+  const new({this.barrierFilter, this.motion = const FDialogRouteMotion()});
 
   /// Creates a [FDialogRouteStyle] that inherits its properties.
-  FDialogRouteStyle.inherit() : this(barrierFilter: FDialogRouteStyle.defaultBarrierFilter);
+  new inherit() : this(barrierFilter: FDialogRouteStyle.defaultBarrierFilter);
 }
 
 /// Motion-related properties for [FDialogRoute].
@@ -236,7 +236,7 @@ class FDialogRouteMotion with Diagnosticable, _$FDialogRouteMotionFunctions {
   final Curve barrierCurve;
 
   /// Creates a [FDialogRouteMotion].
-  const FDialogRouteMotion({
+  const new({
     this.entranceDuration = const Duration(milliseconds: 150),
     this.exitDuration = const Duration(milliseconds: 150),
     this.barrierCurve = Curves.ease,
@@ -326,7 +326,7 @@ class FDialog extends StatefulWidget {
   /// ```
   ///
   /// See https://forui.dev/docs/widgets/data/card for other generatable layouts.
-  const FDialog({
+  const new({
     required this.builder,
     this.style = const .context(),
     this.clipBehavior = .none,
@@ -348,7 +348,7 @@ class FDialog extends StatefulWidget {
   /// ```
   ///
   /// See https://forui.dev/docs/widgets/data/card for other generatable layouts.
-  FDialog.adaptive({
+  new adaptive({
     required Widget Function(BuildContext context, FDialogStyle style) horizontalBuilder,
     required Widget Function(BuildContext context, FDialogStyle style) verticalBuilder,
     this.style = const .context(),
@@ -536,7 +536,7 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
   final FDialogMotion motion;
 
   /// Creates a [FDialogStyle].
-  FDialogStyle({
+  new({
     required this.decoration,
     required this.titleTextStyle,
     required this.bodyTextStyle,
@@ -547,7 +547,7 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
   });
 
   /// Creates a [FDialogStyle] that inherits its properties.
-  factory FDialogStyle.inherit({
+  factory inherit({
     required FStyle style,
     required FColors colors,
     required FTypography typography,
@@ -615,7 +615,7 @@ class FDialogMotion with Diagnosticable, _$FDialogMotionFunctions {
   final Curve insetCurve;
 
   /// Creates a [FDialogMotion].
-  const FDialogMotion({
+  const new({
     this.expandCurve = Curves.easeOutCubic,
     this.collapseCurve = Curves.easeInCubic,
     this.fadeInCurve = Curves.linear,

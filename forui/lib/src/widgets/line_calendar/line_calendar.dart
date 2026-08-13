@@ -86,7 +86,7 @@ class FLineCalendar extends StatelessWidget {
   final ValueWidgetBuilder<FLineCalendarItemData> builder;
 
   /// Creates a [FLineCalendar].
-  const FLineCalendar({
+  const new({
     this.control = const .managed(),
     this.scrollControl = const .managed(),
     this.style = const .context(),
@@ -167,7 +167,7 @@ class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
   final FTappableStyle tappableStyle;
 
   /// Creates a [FLineCalendarStyle].
-  FLineCalendarStyle({
+  new({
     required this.decoration,
     required this.todayIndicatorColor,
     required this.dateTextStyle,
@@ -179,7 +179,7 @@ class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
   });
 
   /// Creates a [FLineCalendarStyle] that inherits its properties.
-  factory FLineCalendarStyle.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,

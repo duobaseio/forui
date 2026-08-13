@@ -274,7 +274,7 @@ class FPopover extends StatefulWidget {
   /// Throws an [AssertionError] if:
   /// * [groupId] is not null and [hideRegion] is not set to [FPopoverHideRegion.excludeChild].
   /// * neither [builder] nor [child] is provided.
-  const FPopover({
+  const new({
     required this.popoverBuilder,
     this.control = const .managed(),
     this.style = const .context(),
@@ -637,7 +637,7 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
   final FPopoverMotion motion;
 
   /// Creates a [FPopoverStyle].
-  const FPopoverStyle({
+  const new({
     required this.decoration,
     this.barrierFilter,
     this.backgroundFilter,
@@ -646,7 +646,7 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
   });
 
   /// Creates a [FPopoverStyle] that inherits its properties.
-  FPopoverStyle.inherit({required FColors colors, required FStyle style})
+  new inherit({required FColors colors, required FStyle style})
     : this(
         decoration: ShapeDecoration(
           shape: RoundedSuperellipseBorder(
@@ -704,7 +704,7 @@ class FPopoverMotion with Diagnosticable, _$FPopoverMotionFunctions {
   final Animatable<double> fadeTween;
 
   /// Creates a [FPopoverMotion].
-  const FPopoverMotion({
+  const new({
     this.entranceDuration = const Duration(milliseconds: 100),
     this.exitDuration = const Duration(milliseconds: 100),
     this.expandCurve = Curves.easeOutCubic,

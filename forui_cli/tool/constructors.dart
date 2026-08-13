@@ -188,7 +188,7 @@ class ConstructorFragment {
   final List<String> closure;
   final String source;
 
-  ConstructorFragment({
+  new({
     required this.root,
     required this.type,
     required this.wrapped,
@@ -202,7 +202,7 @@ class _ConstructorInvocationVisitor extends RecursiveAstVisitor<void> {
   final String type;
   final List<InstanceCreationExpression> constructorInvocations = [];
 
-  _ConstructorInvocationVisitor(this.type);
+  new(this.type);
 
   @override
   void visitInstanceCreationExpression(InstanceCreationExpression node) {
@@ -247,7 +247,7 @@ class ConstructorMatch {
   /// The names of classes that are [ConstructorMatch]es and are created inside this [constructor].
   final Set<String> nested = {};
 
-  ConstructorMatch({required this.root, required this.constructor, this.wrapped});
+  new({required this.root, required this.constructor, this.wrapped});
 }
 
 class _Visitor extends RecursiveAstVisitor<void> {
@@ -258,7 +258,7 @@ class _Visitor extends RecursiveAstVisitor<void> {
   String? _name;
   String? _wrapped;
 
-  _Visitor(this._type, this._constructor, this._roots);
+  new(this._type, this._constructor, this._roots);
 
   @override
   void visitClassDeclaration(ClassDeclaration declaration) {

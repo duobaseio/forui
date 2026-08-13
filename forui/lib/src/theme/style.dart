@@ -54,7 +54,7 @@ class FStyle with Diagnosticable, _$FStyleFunctions {
   ///
   /// **Note:**
   /// Unless you are creating a completely new style, modifying a predefined [FThemeData]'s style should be preferred.
-  FStyle({
+  new({
     required FFormFieldStyle formFieldStyle,
     required FFocusedOutlineStyle focusedOutlineStyle,
     required IconThemeData iconStyle,
@@ -78,7 +78,7 @@ class FStyle with Diagnosticable, _$FStyleFunctions {
          extensions: extensions.isEmpty ? const {} : {for (final extension in extensions) extension.type: extension},
        );
 
-  const FStyle._({
+  const new _({
     required this.formFieldStyle,
     required this.focusedOutlineStyle,
     required this.iconStyle,
@@ -92,7 +92,7 @@ class FStyle with Diagnosticable, _$FStyleFunctions {
   });
 
   /// Creates an [FStyle] that inherits its properties.
-  factory FStyle.inherit({required FColors colors, required FTypography typography, required bool touch}) {
+  factory inherit({required FColors colors, required FTypography typography, required bool touch}) {
     const borderRadius = FBorderRadius();
     return FStyle(
       formFieldStyle: .inherit(colors: colors, typography: typography, touch: touch),

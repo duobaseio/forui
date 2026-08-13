@@ -128,7 +128,7 @@ class FTooltip extends StatefulWidget {
   ///
   /// ## Contract
   /// Throws [AssertionError] if neither [builder] nor [child] is both provided.
-  const FTooltip({
+  const new({
     required this.tipBuilder,
     this.control = const .managed(),
     this.style = const .context(),
@@ -434,7 +434,7 @@ class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
   final Duration longPressExitDuration;
 
   /// Creates a [FTooltipStyle].
-  const FTooltipStyle({
+  const new({
     required this.decoration,
     required this.textStyle,
     required this.hapticFeedback,
@@ -448,7 +448,7 @@ class FTooltipStyle with Diagnosticable, _$FTooltipStyleFunctions {
   });
 
   /// Creates a [FTooltipStyle] that inherits its properties.
-  FTooltipStyle.inherit({
+  new inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,
@@ -522,7 +522,7 @@ class FTooltipMotion with Diagnosticable, _$FTooltipMotionFunctions {
   final Animatable<double> fadeTween;
 
   /// Creates a [FTooltipMotion].
-  const FTooltipMotion({
+  const new({
     this.entranceDuration = const Duration(milliseconds: 100),
     this.exitDuration = const Duration(milliseconds: 100),
     this.expandCurve = Curves.easeOutCubic,

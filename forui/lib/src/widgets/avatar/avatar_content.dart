@@ -11,7 +11,7 @@ class Content extends StatelessWidget {
   final String? semanticsLabel;
   final Widget? fallback;
 
-  const Content({
+  const new({
     required this.style,
     required this.size,
     required this.image,
@@ -57,7 +57,7 @@ class PlaceholderContent extends StatelessWidget {
   final FAvatarStyleDelta style;
   final double size;
 
-  const PlaceholderContent({required this.size, required this.style, super.key});
+  const new({required this.size, required this.style, super.key});
 
   @override
   Widget build(BuildContext context) {

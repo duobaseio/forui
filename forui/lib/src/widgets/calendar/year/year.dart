@@ -33,7 +33,7 @@ class Year extends StatelessWidget {
   final VoidCallback? onPress;
   final FCalendarYearBuilder builder;
 
-  const Year({
+  const new({
     required this.styles,
     required this.localizations,
     required this.date,
@@ -79,7 +79,7 @@ class FCalendarYearStyle with Diagnosticable, _$FCalendarYearStyleFunctions {
   final Decoration decoration;
 
   /// Creates a [FCalendarYearStyle].
-  FCalendarYearStyle({required this.textStyle, required this.decoration});
+  new({required this.textStyle, required this.decoration});
 }
 
 /// [FCalendarYearStyle]'s variants.
@@ -88,7 +88,7 @@ extension type FCalendarYearStyles(
 ) implements
     FVariants<FCalendarYearVariantConstraint, FCalendarYearVariant, FCalendarYearStyle, FCalendarYearStyleDelta> {
   /// Creates a [FCalendarYearStyles] that inherits its properties.
-  factory FCalendarYearStyles.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,

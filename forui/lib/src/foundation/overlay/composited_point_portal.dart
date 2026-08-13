@@ -35,7 +35,7 @@ class CompositedPointPortal extends CompositedOverlay {
   /// It is applied after [overflow].
   final Offset offset;
 
-  const CompositedPointPortal({
+  const new({
     required this.constraints,
     required this.anchor,
     required this.point,
@@ -104,7 +104,7 @@ class RenderPointPortalLayer extends RenderOverlayLayer {
   FPortalOverflow _overflow;
   Offset _offset;
 
-  RenderPointPortalLayer({
+  new({
     required this._portalConstraints,
     required this._anchor,
     required this._point,

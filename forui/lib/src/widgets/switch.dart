@@ -97,7 +97,7 @@ class FSwitch extends StatefulWidget {
   final DragStartBehavior dragStartBehavior;
 
   /// Creates a [FSwitch].
-  const FSwitch({
+  const new({
     this.style = const .context(),
     this.leadingLabel = false,
     this.label,
@@ -227,7 +227,7 @@ class FSwitchStyle with Diagnosticable, _$FSwitchStyleFunctions {
   final FLabelStyle trailingLabelStyle;
 
   /// Creates a [FSwitchStyle].
-  const FSwitchStyle({
+  const new({
     required this.focusColor,
     required this.trackColor,
     required this.thumbColor,
@@ -236,7 +236,7 @@ class FSwitchStyle with Diagnosticable, _$FSwitchStyleFunctions {
   });
 
   /// Creates a [FSwitchStyle] that inherits its properties.
-  factory FSwitchStyle.inherit({required FColors colors, required FStyle style}) {
+  factory inherit({required FColors colors, required FStyle style}) {
     final labels = FLabelStyles.inherit(style: style);
     return .new(
       focusColor: colors.primary,

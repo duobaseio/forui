@@ -152,7 +152,7 @@ class FCalendar extends StatefulWidget {
   _builder;
 
   /// Creates a [FCalendar] that cycles through the day, month and year grid pickers.
-  FCalendar.grid({
+  new grid({
     required FDateSelectionControl selectionControl,
     FGridCalendarControl control = const FGridCalendarControl(),
     FCalendarStyleDelta style = const .context(),
@@ -221,7 +221,7 @@ class FCalendar extends StatefulWidget {
        );
 
   /// Creates a [FCalendar] with a split header whose month and year grid pickers are independently togglable.
-  FCalendar.splitGrid({
+  new splitGrid({
     required FDateSelectionControl selectionControl,
     FGridSplitCalendarControl control = const FGridSplitCalendarControl(),
     FCalendarStyleDelta style = const .context(),
@@ -284,7 +284,7 @@ class FCalendar extends StatefulWidget {
        );
 
   /// Creates a [FCalendar] that toggles between a day grid picker and a month-year wheel picker.
-  FCalendar.wheel({
+  new wheel({
     required FDateSelectionControl selectionControl,
     FWheelCalendarControl control = const FWheelCalendarControl(),
     FCalendarStyleDelta style = const .context(),
@@ -342,7 +342,7 @@ class FCalendar extends StatefulWidget {
              ),
        );
 
-  const FCalendar._({
+  const new _({
     required this.control,
     required this.selectionControl,
     required this._builder,
@@ -491,7 +491,7 @@ class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
   final EdgeInsetsGeometry padding;
 
   /// Creates a [FCalendarStyle].
-  FCalendarStyle({
+  new({
     required this.headerStyle,
     required this.dayPickerStyle,
     required this.monthPickerStyle,
@@ -502,7 +502,7 @@ class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
   });
 
   /// Creates a [FCalendarStyle] that inherits its properties.
-  factory FCalendarStyle.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FIcons icons,

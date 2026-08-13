@@ -181,7 +181,7 @@ class FTile extends StatelessWidget with FTileMixin {
   ///
   /// Use [FTile.raw] in these cases.
   /// {@endtemplate}
-  FTile({
+  new({
     required Widget title,
     this.variant = .primary,
     this.style = const .context(),
@@ -246,7 +246,7 @@ class FTile extends StatelessWidget with FTileMixin {
   ///
   /// The order is reversed for RTL locales.
   /// {@endtemplate}
-  FTile.raw({
+  new raw({
     required Widget child,
     this.variant = .primary,
     this.style = const .context(),
@@ -333,7 +333,7 @@ class FTile extends StatelessWidget with FTileMixin {
 extension type FTileStyles(FVariants<FItemVariantConstraint, FItemVariant, FTileStyle, FTileStyleDelta> _)
     implements FVariants<FItemVariantConstraint, FItemVariant, FTileStyle, FTileStyleDelta> {
   /// Creates a [FTileStyles] that inherits its properties.
-  factory FTileStyles.inherit({required FColors colors, required FTypography typography, required FStyle style}) {
+  factory inherit({required FColors colors, required FTypography typography, required FStyle style}) {
     final primary = FTileStyle.inherit(colors: colors, typography: typography, style: style);
 
     return FTileStyles(
@@ -376,7 +376,7 @@ extension FTileStylesConversion on FVariants<FItemVariantConstraint, FItemVarian
 /// A [FTile]'s style.
 class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
   /// Creates a [FTileStyle].
-  FTileStyle({
+  new({
     required super.backgroundColor,
     required super.contentDecoration,
     required super.contentStyle,
@@ -388,7 +388,7 @@ class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
   });
 
   /// Creates a [FTileStyle].
-  FTileStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
+  new inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         backgroundColor: .all(colors.card),
         contentDecoration: FVariants.from(
@@ -431,7 +431,7 @@ class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
 /// A tile-specific [FItemContentStyle].
 class FTileContentStyle extends FItemContentStyle with _$FTileContentStyleFunctions {
   /// Creates a [FTileContentStyle].
-  FTileContentStyle({
+  new({
     required super.prefixIconStyle,
     required super.titleTextStyle,
     required super.subtitleTextStyle,
@@ -446,7 +446,7 @@ class FTileContentStyle extends FItemContentStyle with _$FTileContentStyleFuncti
   });
 
   /// Creates a [FTileContentStyle] that inherits its properties.
-  factory FTileContentStyle.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required Color prefix,
@@ -492,7 +492,7 @@ class FTileContentStyle extends FItemContentStyle with _$FTileContentStyleFuncti
 /// A tile-specific [FRawItemContentStyle].
 class FRawTileContentStyle extends FRawItemContentStyle with _$FRawTileContentStyleFunctions {
   /// Creates a [FRawTileContentStyle].
-  FRawTileContentStyle({
+  new({
     required super.prefixIconStyle,
     required super.childTextStyle,
     super.padding = const .symmetric(horizontal: 15, vertical: 14.5),
@@ -500,7 +500,7 @@ class FRawTileContentStyle extends FRawItemContentStyle with _$FRawTileContentSt
   });
 
   /// Creates a [FRawTileContentStyle] that inherits its properties.
-  FRawTileContentStyle.inherit({
+  new inherit({
     required FColors colors,
     required FTypography typography,
     required Color prefix,

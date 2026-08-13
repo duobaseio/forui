@@ -72,7 +72,7 @@ class _Checkbox<T> extends StatelessWidget with FSelectGroupItemMixin<T> {
   final FocusNode? focusNode;
   final ValueChanged<bool>? onFocusChange;
 
-  const _Checkbox({
+  const new({
     required this.value,
     this.style,
     this.label,
@@ -133,7 +133,7 @@ class _Radio<T> extends StatelessWidget with FSelectGroupItemMixin<T> {
   final FocusNode? focusNode;
   final ValueChanged<bool>? onFocusChange;
 
-  const _Radio({
+  const new({
     required this.value,
     this.style,
     this.label,

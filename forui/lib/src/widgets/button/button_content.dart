@@ -37,7 +37,7 @@ class Content extends StatelessWidget {
   final FButtonContentBuilder builder;
   final Widget? child;
 
-  const Content({
+  const new({
     required this.mainAxisSize,
     required this.mainAxisAlignment,
     required this.crossAxisAlignment,
@@ -113,7 +113,7 @@ class IconContent extends StatelessWidget {
   final FButtonIconContentBuilder builder;
   final Widget? child;
 
-  const IconContent({required this.builder, required this.child, super.key});
+  const new({required this.builder, required this.child, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -168,7 +168,7 @@ class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFunctions {
   final double spacing;
 
   /// Creates a [FButtonContentStyle].
-  const FButtonContentStyle({
+  const new({
     required this.textStyle,
     required this.iconStyle,
     required this.circularProgressStyle,
@@ -193,7 +193,7 @@ class FButtonIconContentStyle with Diagnosticable, _$FButtonIconContentStyleFunc
   final EdgeInsetsGeometry padding;
 
   /// Creates a [FButtonIconContentStyle].
-  const FButtonIconContentStyle({
+  const new({
     required this.iconStyle,
     this.constraints = const BoxConstraints(),
     this.padding = const .all(10),

@@ -27,7 +27,7 @@ class FunctionsMixin {
   final List<FieldElement> fields;
 
   /// Creates a new [FunctionsMixin].
-  FunctionsMixin(this.step, this.element)
+  new(this.step, this.element)
     : transitiveFields = transitiveInstanceFields(element),
       fields = instanceFields(element);
 

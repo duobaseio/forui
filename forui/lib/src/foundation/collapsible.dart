@@ -20,7 +20,7 @@ class FCollapsible extends StatelessWidget {
   final Widget child;
 
   /// Creates a [FCollapsible].
-  const FCollapsible({required this.value, required this.child, this.axis = .vertical, super.key});
+  const new({required this.value, required this.child, this.axis = .vertical, super.key});
 
   // We use a combination of a custom render box & clip rect to avoid visual oddities. This is caused by
   // RenderPaddings (created by Paddings in the child) shrinking the constraints by the given padding, causing the
@@ -51,7 +51,7 @@ class _Expandable extends SingleChildRenderObjectWidget {
   final Axis axis;
   final double value;
 
-  const _Expandable({required this.axis, required this.value, required super.child});
+  const new({required this.axis, required this.value, required super.child});
 
   @override
   RenderObject createRenderObject(BuildContext _) => _RenderExpandable(value, axis);
@@ -74,7 +74,7 @@ class _RenderExpandable extends RenderBox with RenderObjectWithChildMixin<Render
   double _value;
   Axis _axis;
 
-  _RenderExpandable(this._value, this._axis);
+  new(this._value, this._axis);
 
   @override
   void performLayout() {
@@ -141,7 +141,7 @@ class _Clipper extends CustomClipper<Rect> {
   final double percentage;
   final Axis axis;
 
-  _Clipper(this.percentage, this.axis);
+  new(this.percentage, this.axis);
 
   @override
   Rect getClip(Size size) => switch (axis) {

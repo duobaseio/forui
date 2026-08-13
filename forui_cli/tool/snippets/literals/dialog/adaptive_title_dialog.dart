@@ -8,7 +8,7 @@ class AdaptiveTitleDialog extends StatelessWidget {
   final Widget title;
   final List<Widget> actions;
 
-  const AdaptiveTitleDialog({
+  const new({
     required this.title,
     required this.actions,
     this.style = const .context(),

@@ -15,7 +15,7 @@ enum FTabBarIndicatorSize {
 
   final TabBarIndicatorSize _value;
 
-  const FTabBarIndicatorSize(this._value);
+  new(this._value);
 }
 
 /// [FTabs]'s style.
@@ -55,7 +55,7 @@ class FTabsStyle with Diagnosticable, _$FTabsStyleFunctions {
   final FFocusedOutlineStyle focusedOutlineStyle;
 
   /// Creates a [FTabsStyle].
-  FTabsStyle({
+  new({
     required this.decoration,
     required this.labelTextStyle,
     required this.indicatorDecoration,
@@ -67,7 +67,7 @@ class FTabsStyle with Diagnosticable, _$FTabsStyleFunctions {
   });
 
   /// Creates a [FTabsStyle] that inherits its properties.
-  FTabsStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
+  new inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         decoration: ShapeDecoration(
           shape: RoundedSuperellipseBorder(

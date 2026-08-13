@@ -5,7 +5,7 @@ import 'package:forui/src/theme/delta/delta.dart';
 /// A delta that applies modifications to a [TextStyle].
 abstract class TextStyleDelta with Delta {
   /// Creates a partial modification of a [TextStyle].
-  const factory TextStyleDelta.delta({
+  const factory delta({
     bool? inherit,
     Color? color,
     Color? backgroundColor,
@@ -35,7 +35,7 @@ abstract class TextStyleDelta with Delta {
   }) = _TextStyleDelta;
 
   /// Creates a complete replacement of a [TextStyle].
-  const factory TextStyleDelta.value(TextStyle style) = _TextStyleValue;
+  const factory value(TextStyle style) = _TextStyleValue;
 
   @override
   TextStyle call(TextStyle? style);
@@ -69,7 +69,7 @@ class _TextStyleDelta implements TextStyleDelta {
   final String? package;
   final TextOverflow? Function()? overflow;
 
-  const _TextStyleDelta({
+  const new({
     this.inherit,
     this.color = Sentinels.color,
     this.backgroundColor = Sentinels.color,
@@ -134,7 +134,7 @@ class _TextStyleDelta implements TextStyleDelta {
 class _TextStyleValue implements TextStyleDelta {
   final TextStyle _style;
 
-  const _TextStyleValue(this._style);
+  const new(this._style);
 
   @override
   TextStyle call(TextStyle? style) => _style;

@@ -24,7 +24,7 @@ class CalendarLayout extends StatefulWidget {
   final ValueWidgetBuilder<FLineCalendarItemData> builder;
   final BoxConstraints constraints;
 
-  const CalendarLayout({
+  const new({
     required this.control,
     required this.scrollControl,
     required this.style,
@@ -164,7 +164,7 @@ class _CalendarLayoutState extends State<CalendarLayout> {
 
 @internal
 class SpeculativeLayout extends MultiChildRenderObjectWidget {
-  const SpeculativeLayout({required super.children, super.key});
+  const new({required super.children, super.key});
 
   @override
   RenderObject createRenderObject(BuildContext _) => _SpeculativeBox();

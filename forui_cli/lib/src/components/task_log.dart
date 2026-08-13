@@ -14,7 +14,7 @@ class TaskLog {
   final bool _interactive = terminal.interactive;
   var _started = false;
 
-  TaskLog({required this._title, this._limit = 0});
+  new({required this._title, this._limit = 0});
 
   /// Appends an output [line] (which may itself contain newlines) and re-renders.
   void message(String line) {

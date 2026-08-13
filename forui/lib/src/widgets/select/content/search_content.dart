@@ -33,7 +33,7 @@ class SearchContent<T> extends StatefulWidget {
   final WidgetBuilder emptyBuilder;
   final Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? errorBuilder;
 
-  const SearchContent({
+  const new({
     required this.scrollController,
     required this.searchStyle,
     required this.contentStyle,
@@ -238,10 +238,10 @@ class FSelectSearchStyle with Diagnosticable, _$FSelectSearchStyleFunctions {
   final FCircularProgressStyle progressStyle;
 
   /// Creates a [FSelectSearchStyle].
-  FSelectSearchStyle({required this.fieldStyles, required this.dividerStyle, required this.progressStyle});
+  new({required this.fieldStyles, required this.dividerStyle, required this.progressStyle});
 
   /// Creates a [FSelectSearchStyle] that inherits its properties.
-  factory FSelectSearchStyle.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,

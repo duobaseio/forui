@@ -86,7 +86,7 @@ class FToasterStyle with Diagnosticable, _$FToasterStyleFunctions {
   final FToastStyles toastStyles;
 
   /// Creates a [FToasterStyle].
-  const FToasterStyle({
+  const new({
     required this.toastStyles,
     this.max = 3,
     this.padding = const .symmetric(horizontal: 20, vertical: 15),
@@ -102,7 +102,7 @@ class FToasterStyle with Diagnosticable, _$FToasterStyleFunctions {
   });
 
   /// Creates a [FToasterStyle] that inherits its properties.
-  FToasterStyle.inherit({
+  new inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,
@@ -117,7 +117,7 @@ class FToasterStyle with Diagnosticable, _$FToasterStyleFunctions {
 extension type FToastStyles(FVariants<FToastVariantConstraint, FToastVariant, FToastStyle, FToastStyleDelta> _)
     implements FVariants<FToastVariantConstraint, FToastVariant, FToastStyle, FToastStyleDelta> {
   /// Creates a [FToastStyles] that inherits its properties.
-  factory FToastStyles.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,
@@ -172,7 +172,7 @@ class FToasterMotion with Diagnosticable, _$FToasterMotionFunctions {
   final Curve collapseCurve;
 
   /// Creates a [FToasterMotion].
-  const FToasterMotion({
+  const new({
     this.expandDuration = const Duration(milliseconds: 400),
     this.collapseDuration = const Duration(milliseconds: 300),
     this.expandCurve = Curves.easeOutCubic,
@@ -251,7 +251,7 @@ class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
   final FToastMotion motion;
 
   /// Creates a [FToastStyle].
-  FToastStyle({
+  new({
     required this.decoration,
     required this.iconStyle,
     required this.titleTextStyle,
@@ -266,7 +266,7 @@ class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
   });
 
   /// Creates a [FToastStyle] that inherits its properties.
-  factory FToastStyle.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,
@@ -376,7 +376,7 @@ class FToastMotion with Diagnosticable, _$FToastMotionFunctions {
   final Animatable<double> entranceDismissFadeTween;
 
   /// Creates a [FToastMotion].
-  const FToastMotion({
+  const new({
     this.entranceDuration = const Duration(milliseconds: 400),
     this.dismissDuration = const Duration(milliseconds: 300),
     this.transitionDuration = const Duration(milliseconds: 400),

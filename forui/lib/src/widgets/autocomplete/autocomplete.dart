@@ -791,7 +791,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// See:
   /// * [FAutocomplete.builder] for more control over the appearance of items.
   /// * [FAutocomplete.text] for a simpler autocomplete for `String` suggestions.
-  FAutocomplete({
+  new({
     required Map<String, T> items,
     String Function(T suggestion)? format,
     T? Function(String? text)? parse,
@@ -998,7 +998,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
   ///
   /// See:
   /// * [FAutocomplete.textBuilder] for a simpler autocomplete for `String` suggestions.
-  const FAutocomplete.builder({
+  const new builder({
     required this.filter,
     required this.format,
     required this.parse,
@@ -1642,7 +1642,7 @@ final class AutocompleteFieldScope extends InheritedWidget {
   /// The current widget variants.
   final Set<FTextFieldVariant> variants;
 
-  const AutocompleteFieldScope({required this.style, required this.variants, required super.child, super.key});
+  const new({required this.style, required this.variants, required super.child, super.key});
 
   @override
   bool updateShouldNotify(AutocompleteFieldScope old) => style != old.style || variants != old.variants;

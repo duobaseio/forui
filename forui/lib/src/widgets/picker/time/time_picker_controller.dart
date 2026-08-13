@@ -17,7 +17,7 @@ final class FTimePickerController extends ValuePickerController<FTime> {
   int? _minuteInterval;
 
   /// Creates a [FTimePickerController].
-  FTimePickerController({FTime time = const FTime()}) : super(time);
+  new({FTime time = const FTime()}) : super(time);
 
   @override
   @internal
@@ -87,7 +87,7 @@ final class _ProxyController extends FTimePickerController {
   Curve _curve;
   int _monotonic = 0;
 
-  _ProxyController(this._unsynced, this._onChange, this._duration, this._curve) : super(time: _unsynced);
+  new(this._unsynced, this._onChange, this._duration, this._curve) : super(time: _unsynced);
 
   void update(
     FTime newValue,
@@ -141,7 +141,7 @@ final class _ProxyController extends FTimePickerController {
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FTimePickerControl with Diagnosticable, _$FTimePickerControlMixin {
   /// Creates a [FTimePickerControl].
-  const factory FTimePickerControl.managed({
+  const factory managed({
     FTimePickerController? controller,
     FTime? initial,
     ValueChanged<FTime>? onChange,
@@ -156,14 +156,14 @@ sealed class FTimePickerControl with Diagnosticable, _$FTimePickerControlMixin {
   /// The [onChange] callback is invoked when the user selects a time.
   /// The [duration] when animating to [time] from an invalid/different time. Defaults to 200 milliseconds.
   /// The [curve] when animating to [time] from an invalid/different time. Defaults to [Curves.easeOutCubic].
-  const factory FTimePickerControl.lifted({
+  const factory lifted({
     required FTime time,
     required ValueChanged<FTime> onChange,
     Duration duration,
     Curve curve,
   }) = _Lifted;
 
-  const FTimePickerControl._();
+  const new _();
 
   (FTimePickerController, bool) _update(
     FTimePickerControl old,
@@ -206,7 +206,7 @@ class FTimePickerManagedControl extends FTimePickerControl with Diagnosticable, 
   final ValueChanged<FTime>? onChange;
 
   /// Creates a [FTimePickerControl].
-  const FTimePickerManagedControl({this.controller, this.initial, this.onChange})
+  const new({this.controller, this.initial, this.onChange})
     : assert(
         controller == null || initial == null,
         'Cannot provide both controller and initial time. Pass initial time to the controller instead.',
@@ -228,7 +228,7 @@ class _Lifted extends FTimePickerControl with _$_LiftedMixin {
   @override
   final Curve curve;
 
-  const _Lifted({
+  const new({
     required this.time,
     required this.onChange,
     this.duration = const Duration(milliseconds: 300),

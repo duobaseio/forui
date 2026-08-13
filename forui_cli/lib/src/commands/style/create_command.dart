@@ -157,7 +157,7 @@ class StyleCreateCommand extends ForuiCommand {
 
   final Configuration configuration;
 
-  StyleCreateCommand(this.configuration) {
+  new(this.configuration) {
     argParser
       ..addFlag('all', abbr: 'a', help: 'Generate all styles.', negatable: false)
       ..addFlag('force', abbr: 'f', help: 'Overwrite existing files if they exist.', negatable: false)

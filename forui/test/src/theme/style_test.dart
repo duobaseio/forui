@@ -8,7 +8,7 @@ import 'package:forui/forui.dart';
 class _Marker extends ThemeExtension<_Marker> {
   final String id;
 
-  const _Marker(this.id);
+  const new(this.id);
 
   @override
   _Marker copyWith({String? id}) => _Marker(id ?? this.id);

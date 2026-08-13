@@ -59,7 +59,7 @@ class FBadge extends StatelessWidget {
   final Widget Function(BuildContext context, FBadgeStyle style) builder;
 
   /// Creates a [FBadge].
-  FBadge({required Widget child, this.variant = .primary, this.style = const .context(), super.key})
+  new({required Widget child, this.variant = .primary, this.style = const .context(), super.key})
     : builder = ((_, style) => Center(
         child: Padding(
           padding: style.padding,
@@ -68,7 +68,7 @@ class FBadge extends StatelessWidget {
       ));
 
   /// Creates a [FBadge] with a custom builder.
-  const FBadge.raw({required this.builder, this.variant = .primary, this.style = const .context(), super.key});
+  const new raw({required this.builder, this.variant = .primary, this.style = const .context(), super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -94,7 +94,7 @@ class FBadge extends StatelessWidget {
 extension type FBadgeStyles(FVariants<FBadgeVariantConstraint, FBadgeVariant, FBadgeStyle, FBadgeStyleDelta> _)
     implements FVariants<FBadgeVariantConstraint, FBadgeVariant, FBadgeStyle, FBadgeStyleDelta> {
   /// Creates a [FBadgeStyles] that inherits its properties.
-  factory FBadgeStyles.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,
@@ -173,5 +173,5 @@ final class FBadgeStyle with Diagnosticable, _$FBadgeStyleFunctions {
   final EdgeInsetsGeometry padding;
 
   /// Creates a [FBadgeStyle].
-  const FBadgeStyle({required this.decoration, required this.labelTextStyle, required this.padding});
+  const new({required this.decoration, required this.labelTextStyle, required this.padding});
 }

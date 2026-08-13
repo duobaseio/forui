@@ -29,13 +29,13 @@ class FSliderMark with Diagnosticable {
   final Widget? label;
 
   /// Creates a [FSliderMark] at the given percentage in a slider.
-  const FSliderMark({required this.value, this.style, this.tick = true, this.label})
+  const new({required this.value, this.style, this.tick = true, this.label})
     : assert(0 <= value && value <= 1, 'value ($value) must be between 0.0 and 1.0, inclusive.');
 
   /// Creates a [FSliderMark] at the given percentage in a slider.
   ///
   /// This is identical to [FSliderMark.new], allowing dot-shorthand construction.
-  const factory FSliderMark.mark({required double value, FSliderMarkStyle? style, bool tick, Widget? label}) =
+  const factory mark({required double value, FSliderMarkStyle? style, bool tick, Widget? label}) =
       FSliderMark;
 
   @override
@@ -113,7 +113,7 @@ class FSliderMarkStyle with Diagnosticable, _$FSliderMarkStyleFunctions {
   final double labelOffset;
 
   /// Creates a [FSliderMarkStyle].
-  const FSliderMarkStyle({
+  const new({
     required this.tickColor,
     required this.labelTextStyle,
     required this.labelAnchor,

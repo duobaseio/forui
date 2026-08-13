@@ -46,7 +46,7 @@ class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
   final FFocusedOutlineStyle focusedOutlineStyle;
 
   /// Creates a [FPaginationStyle].
-  FPaginationStyle({
+  new({
     required this.itemIconStyle,
     required this.itemDecoration,
     required this.itemTextStyle,
@@ -59,7 +59,7 @@ class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
   });
 
   /// Creates a [FPaginationStyle] that inherits its properties.
-  FPaginationStyle.inherit({
+  new inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,

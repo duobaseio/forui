@@ -122,7 +122,7 @@ class TestScaffold extends StatelessWidget {
   final bool padded;
   final bool wrapped;
 
-  TestScaffold({
+  new({
     required this.child,
     this.platform,
     this.textDirection,
@@ -140,7 +140,7 @@ class TestScaffold extends StatelessWidget {
        },
        wrapped = false;
 
-  TestScaffold.app({
+  new app({
     required this.child,
     this.platform,
     this.locale,
@@ -158,7 +158,7 @@ class TestScaffold extends StatelessWidget {
        },
        wrapped = true;
 
-  TestScaffold.blue({required this.child, this.platform, this.alignment = .center, super.key})
+  new blue({required this.child, this.platform, this.alignment = .center, super.key})
     : theme = _default.light.touch,
       background = blueScreen.colors.background,
       locale = null,

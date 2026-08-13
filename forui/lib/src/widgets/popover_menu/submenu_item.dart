@@ -177,7 +177,7 @@ class FSubmenuItem extends StatelessWidget with FItemMixin {
   final FItemDivider submenuDivider;
 
   /// Creates a [FSubmenuItem].
-  const FSubmenuItem({
+  const new({
     required this.title,
     required this.submenu,
     this.control = const .managed(),

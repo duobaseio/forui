@@ -29,7 +29,7 @@ mixin _Usage {
 /// A runner that additionally supports:
 /// * Usage information with aliases
 class ForuiCommandRunner<T> extends CommandRunner<T> with _Usage {
-  ForuiCommandRunner(super.executableName, super.description) {
+  new(super.executableName, super.description) {
     argParser
       ..addFlag('color', help: 'Use terminal colors.', defaultsTo: ansi.enabled)
       ..addFlag('no-input', help: 'Disable interactive prompts and assume default values.', negatable: false);

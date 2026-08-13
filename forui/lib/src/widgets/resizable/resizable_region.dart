@@ -19,7 +19,7 @@ sealed class FResizableRegion extends StatelessWidget {
   final Widget? child;
 
   /// Creates a [FResizableRegion] with a concrete initial extent in logical pixels.
-  factory FResizableRegion.fixed({
+  factory fixed({
     required double extent,
     required ValueWidgetBuilder<FResizableRegionData> builder,
     double? minExtent,
@@ -33,7 +33,7 @@ sealed class FResizableRegion extends StatelessWidget {
   /// [FResizable] must have finite main-axis constraints.
   ///
   /// [minFlex] constrains how small the region can be resized, expressed as a flex proportion.
-  const factory FResizableRegion.flex({
+  const factory flex({
     required ValueWidgetBuilder<FResizableRegionData> builder,
     int flex,
     int? minFlex,
@@ -41,7 +41,7 @@ sealed class FResizableRegion extends StatelessWidget {
     Key? key,
   }) = FlexResizableRegion;
 
-  const FResizableRegion({required this.builder, this.child, super.key});
+  const new({required this.builder, this.child, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +69,7 @@ class FixedResizableRegion extends FResizableRegion {
   final double extent;
   final double? minExtent;
 
-  FixedResizableRegion({required this.extent, required super.builder, this.minExtent, super.child, super.key})
+  new({required this.extent, required super.builder, this.minExtent, super.child, super.key})
     : assert(0 < extent, 'extent ($extent) must be > 0'),
       assert(minExtent == null || 0 < minExtent, 'minExtent ($minExtent) must be > 0'),
       assert(minExtent == null || minExtent.lessOrAround(extent), 'minExtent ($minExtent) must be < extent ($extent)');
@@ -88,7 +88,7 @@ class FlexResizableRegion extends FResizableRegion {
   final int flex;
   final int? minFlex;
 
-  const FlexResizableRegion({required super.builder, this.flex = 1, this.minFlex, super.child, super.key})
+  const new({required super.builder, this.flex = 1, this.minFlex, super.child, super.key})
     : assert(0 < flex, 'flex ($flex) must be > 0'),
       assert(minFlex == null || (0 < minFlex && minFlex <= flex), 'minFlex ($minFlex) must be > 0 and <= flex ($flex)');
 

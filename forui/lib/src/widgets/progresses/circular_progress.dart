@@ -70,7 +70,7 @@ class FCircularProgress extends StatefulWidget {
   final FIcon icon;
 
   /// Creates a [FCircularProgress] that uses [FIcons.loaderCircle].
-  const FCircularProgress({
+  const new({
     this.size = .md,
     this.style = const .context(),
     this.semanticsLabel,
@@ -79,11 +79,11 @@ class FCircularProgress extends StatefulWidget {
   });
 
   /// Creates a [FCircularProgress] that uses [FIcons.loader].
-  const FCircularProgress.loader({this.size = .md, this.style = const .context(), this.semanticsLabel, super.key})
+  const new loader({this.size = .md, this.style = const .context(), this.semanticsLabel, super.key})
     : icon = const _Loader(.plain);
 
   /// Creates a [FCircularProgress] that uses [FIcons.loaderPinwheel].
-  const FCircularProgress.pinwheel({this.size = .md, this.style = const .context(), this.semanticsLabel, super.key})
+  const new pinwheel({this.size = .md, this.style = const .context(), this.semanticsLabel, super.key})
     : icon = const _Loader(.pinwheel);
 
   @override
@@ -180,7 +180,7 @@ enum _Slot { circle, plain, pinwheel }
 class _Loader implements FIcon {
   final _Slot slot;
 
-  const _Loader(this.slot);
+  const new(this.slot);
 
   @override
   Widget call(BuildContext context, {String? semanticsLabel}) {
@@ -211,7 +211,7 @@ class FInheritedCircularProgressStyle extends InheritedWidget {
       context.dependOnInheritedWidgetOfExactType<FInheritedCircularProgressStyle>()?.style;
 
   /// Creates a [FInheritedCircularProgressStyle].
-  const FInheritedCircularProgressStyle({required this.style, required super.child, super.key});
+  const new({required this.style, required super.child, super.key});
 
   @override
   bool updateShouldNotify(FInheritedCircularProgressStyle old) => style != old.style;
@@ -234,10 +234,10 @@ class FCircularProgressStyle with Diagnosticable, _$FCircularProgressStyleFuncti
   final FCircularProgressMotion motion;
 
   /// Creates a [FCircularProgressStyle].
-  FCircularProgressStyle({required this.iconStyle, this.motion = const FCircularProgressMotion()});
+  new({required this.iconStyle, this.motion = const FCircularProgressMotion()});
 
   /// Creates a [FCircularProgressStyle].
-  FCircularProgressStyle.inherit({required FColors colors, double iconSize = 20})
+  new inherit({required FColors colors, double iconSize = 20})
     : this(
         iconStyle: IconThemeData(color: colors.mutedForeground, size: iconSize),
       );
@@ -260,7 +260,7 @@ extension type FCircularProgressSizeStyles(
       FCircularProgressStyleDelta
     > {
   /// Creates [FCircularProgressSizeStyles] that inherit their properties.
-  factory FCircularProgressSizeStyles.inherit({required FColors colors, required FTypography typography}) {
+  factory inherit({required FColors colors, required FTypography typography}) {
     final md = FCircularProgressStyle.inherit(colors: colors, iconSize: typography.body.md.fontSize!);
     return FCircularProgressSizeStyles(
       FVariants(
@@ -309,7 +309,7 @@ class FCircularProgressMotion with Diagnosticable, _$FCircularProgressMotionFunc
   final Animatable<double> tween;
 
   /// Creates a [FCircularProgressMotion].
-  const FCircularProgressMotion({
+  const new({
     this.duration = const Duration(seconds: 1),
     this.curve = Curves.linear,
     this.tween = const FImmutableTween(begin: 0.0, end: 1.0),

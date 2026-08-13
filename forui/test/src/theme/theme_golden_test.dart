@@ -26,7 +26,7 @@ void main() {
 class Application extends StatelessWidget {
   final FThemeData data;
 
-  const Application({required this.data, super.key});
+  const new({required this.data, super.key});
 
   @override
   Widget build(BuildContext context) => MaterialApp(

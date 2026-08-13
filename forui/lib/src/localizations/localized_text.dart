@@ -10,11 +10,11 @@ class LocalizedText extends StatelessWidget {
 
   final String Function(FLocalizations) text;
 
-  const LocalizedText._(this.text);
+  const new _(this.text);
 
-  const LocalizedText.email() : this._(_email);
+  const new email() : this._(_email);
 
-  const LocalizedText.password() : this._(_password);
+  const new password() : this._(_password);
 
   @override
   Widget build(BuildContext context) => Text(text(FLocalizations.of(context) ?? FDefaultLocalizations()));

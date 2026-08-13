@@ -16,7 +16,7 @@ class ToasterStack extends StatefulWidget {
   final Offset collapsedAlignTransform;
   final List<ToasterEntry> entries;
 
-  const ToasterStack({
+  const new({
     required this.style,
     required this.expandedAlignTransform,
     required this.collapsedAlignTransform,
@@ -201,7 +201,7 @@ class _ToasterStackState extends State<ToasterStack> with SingleTickerProviderSt
 /// A state machine which describes a toast's swipe to dismiss state.
 @internal
 sealed class Swipe {
-  const Swipe();
+  const new();
 
   // ignore: avoid_returning_this
   Swipe start() => this;
@@ -219,7 +219,7 @@ sealed class Swipe {
 /// A toast is not being swiped, initial state.
 @internal
 class Unswiped extends Swipe {
-  const Unswiped();
+  const new();
 
   @override
   Swipe start() => const InternalSwipe();
@@ -228,7 +228,7 @@ class Unswiped extends Swipe {
 /// A toast is being swiped internally, i.e. within the toast region.
 @internal
 class InternalSwipe extends Swipe {
-  const InternalSwipe();
+  const new();
 
   @override
   Swipe end() => const Unswiped();
@@ -240,7 +240,7 @@ class InternalSwipe extends Swipe {
 /// A toast is being swiped externally, i.e. outside the toast region.
 @internal
 class ExternalSwipe extends Swipe {
-  const ExternalSwipe();
+  const new();
 
   @override
   Swipe end() => const ExternalEndSwipe();
@@ -252,7 +252,7 @@ class ExternalSwipe extends Swipe {
 /// A toast has been swiped externally, and the swipe has ended outside the toast region.
 @internal
 class ExternalEndSwipe extends Swipe {
-  const ExternalEndSwipe();
+  const new();
 
   @override
   Swipe end() => const Unswiped();

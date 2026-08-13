@@ -896,7 +896,7 @@ class FTextField extends StatelessWidget {
   final FFieldClearIconBuilder<FTextFieldStyle> clearIconBuilder;
 
   /// Creates a [FTextField].
-  const FTextField({
+  const new({
     this.control = const .managed(),
     this.size = .md,
     this.style = const .context(),
@@ -963,7 +963,7 @@ class FTextField extends StatelessWidget {
   });
 
   /// Creates a [FTextField] configured for emails.
-  const FTextField.email({
+  const new email({
     this.control = const .managed(),
     this.size = .md,
     this.style = const .context(),
@@ -1034,7 +1034,7 @@ class FTextField extends StatelessWidget {
   /// The text field's height can be configured by adjusting [minLines]. By default, the text field will expand every
   /// time a new line is added. To limit the maximum height of the text field and make it scrollable, consider setting
   /// [maxLines].
-  const FTextField.multiline({
+  const new multiline({
     this.control = const .managed(),
     this.size = .md,
     this.style = const .context(),

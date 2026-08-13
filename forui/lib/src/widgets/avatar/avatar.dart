@@ -46,7 +46,7 @@ class FAvatar extends StatelessWidget {
   final Widget child;
 
   /// Creates an [FAvatar].
-  FAvatar({
+  new({
     required ImageProvider image,
     this.style = const .context(),
     this.size = 40.0,
@@ -56,7 +56,7 @@ class FAvatar extends StatelessWidget {
   }) : child = Content(style: style, size: size, image: image, semanticsLabel: semanticsLabel, fallback: fallback);
 
   /// Creates a [FAvatar] without a fallback.
-  FAvatar.raw({Widget? child, this.style = const .context(), this.size = 40.0, super.key})
+  new raw({Widget? child, this.style = const .context(), this.size = 40.0, super.key})
     : child = child ?? PlaceholderContent(style: style, size: size);
 
   @override
@@ -106,7 +106,7 @@ class FAvatarStyle with Diagnosticable, _$FAvatarStyleFunctions {
   final Duration fadeInDuration;
 
   /// Creates a [FAvatarStyle].
-  const FAvatarStyle({
+  const new({
     required this.backgroundColor,
     required this.foregroundColor,
     required this.textStyle,
@@ -115,7 +115,7 @@ class FAvatarStyle with Diagnosticable, _$FAvatarStyleFunctions {
   });
 
   /// Creates a [FAvatarStyle] that inherits its properties.
-  FAvatarStyle.inherit({required FColors colors, required FIcons icons, required FTypography typography})
+  new inherit({required FColors colors, required FIcons icons, required FTypography typography})
     : this(
         backgroundColor: colors.muted,
         foregroundColor: colors.mutedForeground,

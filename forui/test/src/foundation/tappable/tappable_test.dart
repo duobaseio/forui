@@ -15,7 +15,7 @@ class _StubTappable extends AnimatedTappable {
   static void _press() {}
 
   // ignore: unused_element_parameter
-  const _StubTappable({super.onPress = _press, super.child = const Text('stub')});
+  const new({super.onPress = _press, super.child = const Text('stub')});
 
   @override
   _StubTappableState createState() => _StubTappableState();

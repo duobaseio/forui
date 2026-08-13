@@ -12,7 +12,7 @@ class _AccordionControllerHook extends Hook<FAccordionController> {
   final int min;
   final int? max;
 
-  const _AccordionControllerHook({required this.min, required this.max, super.keys});
+  const new({required this.min, required this.max, super.keys});
 
   @override
   _AccordionControllerHookState createState() => .new();

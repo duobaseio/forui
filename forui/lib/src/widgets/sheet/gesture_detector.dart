@@ -16,7 +16,7 @@ class SheetGestureDetector extends StatelessWidget {
   final GestureDragEndCallback? onEnd;
   final Widget child;
 
-  const SheetGestureDetector({
+  const new({
     required this.layout,
     required this.onStart,
     required this.onUpdate,

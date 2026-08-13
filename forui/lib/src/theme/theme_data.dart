@@ -596,7 +596,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// Creates a [FThemeData].
   ///
   /// Set [touch] to true for touch-optimized sizing.
-  factory FThemeData({
+  factory({
     required FColors colors,
     required bool touch,
     String? debugLabel,
@@ -804,7 +804,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   }
 
   /// Creates a linear interpolation between two [FThemeData] using the given factor [t].
-  factory FThemeData.lerp(FThemeData a, FThemeData b, double t) => ._(
+  factory lerp(FThemeData a, FThemeData b, double t) => ._(
     debugLabel: t < 0.5 ? a.debugLabel : b.debugLabel,
     breakpoints: t < 0.5 ? a.breakpoints : b.breakpoints,
     colors: .lerp(a.colors, b.colors, t),
@@ -949,7 +949,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
       ..addEntries(b._extensions.entries.where((entry) => !a._extensions.containsKey(entry.key))),
   );
 
-  FThemeData._({
+  new _({
     required this.debugLabel,
     required this.breakpoints,
     required this.colors,

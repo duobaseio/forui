@@ -41,7 +41,7 @@ class Day extends StatelessWidget {
   final VoidCallback? onLongPress;
   final FCalendarDayBuilder builder;
 
-  const Day({
+  const new({
     required this.styles,
     required this.localizations,
     required this.date,
@@ -102,7 +102,7 @@ class FCalendarDayStyle with Diagnosticable, _$FCalendarDayStyleFunctions {
   final Decoration background;
 
   /// Creates a [FCalendarDayStyle].
-  FCalendarDayStyle({required this.textStyle, required this.foreground, this.background = const BoxDecoration()});
+  new({required this.textStyle, required this.foreground, this.background = const BoxDecoration()});
 }
 
 /// [FCalendarDayStyle]'s variants.
@@ -110,7 +110,7 @@ extension type FCalendarDayStyles(
   FVariants<FCalendarDayVariantConstraint, FCalendarDayVariant, FCalendarDayStyle, FCalendarDayStyleDelta> _
 ) implements FVariants<FCalendarDayVariantConstraint, FCalendarDayVariant, FCalendarDayStyle, FCalendarDayStyleDelta> {
   /// Creates a [FCalendarDayStyles] that inherits its properties.
-  factory FCalendarDayStyles.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,

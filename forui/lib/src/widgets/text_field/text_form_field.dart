@@ -383,7 +383,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   final Key? formFieldKey;
 
   /// Creates a [FTextFormField].
-  const FTextFormField({
+  const new({
     this.control = const .managed(),
     this.size = .md,
     this.style = const .context(),
@@ -456,7 +456,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   });
 
   /// Creates a [FTextFormField] configured for emails.
-  const FTextFormField.email({
+  const new email({
     this.control = const .managed(),
     this.size = .md,
     this.style = const .context(),
@@ -533,7 +533,7 @@ class FTextFormField extends StatelessWidget with FFormFieldProperties<String> {
   /// The text field's height can be configured by adjusting [minLines]. By default, the text field will expand every
   /// time a new line is added. To limit the maximum height of the text field and make it scrollable, consider setting
   /// [maxLines].
-  const FTextFormField.multiline({
+  const new multiline({
     this.control = const .managed(),
     this.size = .md,
     this.style = const .context(),

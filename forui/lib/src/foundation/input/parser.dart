@@ -11,7 +11,7 @@ import 'package:forui/forui.dart';
 abstract class Parser {
   final List<String> pattern;
 
-  Parser(this.pattern);
+  new(this.pattern);
 
   /// Updates the [current] input based on the [current] and [previous] input.
   (List<String>, Changes) update(List<String> previous, List<String> current) {
@@ -58,14 +58,14 @@ abstract class Parser {
 
 @internal
 sealed class Changes {
-  const Changes();
+  const new();
 
   Changes add(int i);
 }
 
 @internal
 class None extends Changes {
-  const None();
+  const new();
 
   @override
   Single add(int i) => Single(i);
@@ -75,7 +75,7 @@ class None extends Changes {
 class Single extends Changes {
   final int index;
 
-  const Single(this.index);
+  const new(this.index);
 
   @override
   Many add(int i) => const Many();
@@ -93,7 +93,7 @@ class Single extends Changes {
 
 @internal
 class Many extends Changes {
-  const Many();
+  const new();
 
   @override
   Many add(int _) => this;
@@ -104,7 +104,7 @@ abstract class Selector {
   final FLocalizations localizations;
   final RegExp suffix;
 
-  Selector(this.localizations, this.suffix);
+  new(this.localizations, this.suffix);
 
   TextEditingValue? navigate(TextEditingValue value);
 

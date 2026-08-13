@@ -18,7 +18,7 @@ class FPaginationController extends ValueNotifier<int> {
   /// * Throws [AssertionError] if [pages] <= 0.
   /// * Throws [AssertionError] if [siblings] < 0.
   /// * Throws [AssertionError] if [page] is not in the range `0 <= page < pages`.
-  FPaginationController({required int pages, int page = 0, int siblings = 1, this._showEdges = true})
+  new({required int pages, int page = 0, int siblings = 1, this._showEdges = true})
     : assert(0 < pages, 'pages ($pages) should be > 0'),
       assert(0 <= siblings, 'siblings ($siblings) >= 0'),
       assert(0 <= page && page < pages, 'initialPage ($page) must be between 0 and pages ($pages), exclusive.'),
@@ -149,7 +149,7 @@ class _ProxyController extends FPaginationController {
   int _unsynced;
   ValueChanged<int> _onChange;
 
-  _ProxyController(this._unsynced, this._onChange, int pages, int siblings, bool showEdges)
+  new(this._unsynced, this._onChange, int pages, int siblings, bool showEdges)
     : super(page: _unsynced, pages: pages, siblings: siblings, showEdges: showEdges);
 
   void update(int page, ValueChanged<int> onChange, int pages, int siblings, bool showEdges) {
@@ -185,7 +185,7 @@ class _ProxyController extends FPaginationController {
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FPaginationControl with Diagnosticable, _$FPaginationControlMixin {
   /// Creates a [FPaginationControl].
-  const factory FPaginationControl.managed({
+  const factory managed({
     FPaginationController? controller,
     int? initial,
     int? pages,
@@ -198,7 +198,7 @@ sealed class FPaginationControl with Diagnosticable, _$FPaginationControlMixin {
   ///
   /// The [page] parameter contains the current page index.
   /// The [onChange] callback is invoked when the user changes the page.
-  const factory FPaginationControl.lifted({
+  const factory lifted({
     required int page,
     required ValueChanged<int> onChange,
     required int pages,
@@ -206,7 +206,7 @@ sealed class FPaginationControl with Diagnosticable, _$FPaginationControlMixin {
     bool showEdges,
   }) = _Lifted;
 
-  const FPaginationControl._();
+  const new _();
 
   (FPaginationController, bool) _update(
     FPaginationControl old,
@@ -257,7 +257,7 @@ class FPaginationManagedControl extends FPaginationControl with Diagnosticable, 
   final ValueChanged<int>? onChange;
 
   /// Creates a [FPaginationControl].
-  const FPaginationManagedControl({
+  const new({
     this.controller,
     this.initial,
     this.pages,
@@ -299,7 +299,7 @@ class _Lifted extends FPaginationControl with _$_LiftedMixin {
   @override
   final bool showEdges;
 
-  const _Lifted({
+  const new({
     required this.page,
     required this.onChange,
     required this.pages,

@@ -15,7 +15,7 @@ class _AutocompleteControllerHook extends Hook<FAutocompleteController> {
   final String? text;
   final List<String> suggestions;
 
-  const _AutocompleteControllerHook({required this.text, required this.suggestions, super.keys});
+  const new({required this.text, required this.suggestions, super.keys});
 
   @override
   _AutocompleteControllerHookState createState() => .new();

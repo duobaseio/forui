@@ -20,7 +20,7 @@ class InnerPathClipper extends CustomClipper<Path> {
   final TextDirection direction;
 
   /// Creates an [InnerPathClipper].
-  const InnerPathClipper({required this.decoration, this.direction = .ltr});
+  const new({required this.decoration, this.direction = .ltr});
 
   @override
   Path getClip(Size size) {

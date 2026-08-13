@@ -221,7 +221,7 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
   AnimationController? _animationController;
 
   /// Creates a [FModalSheetRoute].
-  FModalSheetRoute({
+  new({
     required this.style,
     required this.side,
     required this.builder,
@@ -367,7 +367,7 @@ class FModalSheetStyle extends FSheetStyle with Diagnosticable, _$FModalSheetSty
   final FModalSheetMotion motion;
 
   /// Creates a [FSheetStyle].
-  const FModalSheetStyle({
+  const new({
     this.barrierFilter,
     this.motion = const FModalSheetMotion(),
     super.flingVelocity,
@@ -375,7 +375,7 @@ class FModalSheetStyle extends FSheetStyle with Diagnosticable, _$FModalSheetSty
   });
 
   /// Creates a [FSheetStyle] that inherits its properties.
-  FModalSheetStyle.inherit() : this(barrierFilter: FModalSheetStyle.defaultBarrierFilter);
+  new inherit() : this(barrierFilter: FModalSheetStyle.defaultBarrierFilter);
 }
 
 /// The motion-related properties for a modal sheet.
@@ -385,7 +385,7 @@ class FModalSheetMotion extends FSheetMotion with Diagnosticable, _$FModalSheetM
   final Curve barrierCurve;
 
   /// Creates a [FModalSheetMotion].
-  const FModalSheetMotion({
+  const new({
     this.barrierCurve = Curves.easeOutCubic,
     super.expandDuration,
     super.collapseDuration,

@@ -190,7 +190,7 @@ class FTheme extends StatelessWidget {
   final Widget child;
 
   /// Creates an animated theme.
-  const FTheme({
+  const new({
     required this.data,
     required this.child,
     this.textDirection,
@@ -232,7 +232,7 @@ class _AnimatedTheme extends ImplicitlyAnimatedWidget {
   final FAccessibility? accessibility;
   final Widget child;
 
-  _AnimatedTheme({
+  new({
     required this.data,
     required this.textDirection,
     required this.child,
@@ -275,7 +275,7 @@ class _AnimatedThemeState extends AnimatedWidgetBaseState<_AnimatedTheme> {
 }
 
 class _Tween extends Tween<FThemeData> {
-  _Tween({super.begin});
+  new({super.begin});
 
   @override
   FThemeData lerp(double t) => FThemeData.lerp(begin!, end!, t);
@@ -295,7 +295,7 @@ class FThemeMotion with Diagnosticable, _$FThemeMotionFunctions {
   final Curve curve;
 
   /// Creates a [FThemeMotion].
-  const FThemeMotion({this.duration = const Duration(milliseconds: 200), this.curve = Curves.linear});
+  const new({this.duration = const Duration(milliseconds: 200), this.curve = Curves.linear});
 }
 
 /// Applies a theme to descendant widgets.
@@ -321,7 +321,7 @@ class FBasicTheme extends StatelessWidget {
   final Widget child;
 
   /// Creates a [FTheme] that applies [data] to all descendant widgets in [child].
-  const FBasicTheme({
+  const new({
     required this.data,
     required this.child,
     this.platform,
@@ -362,7 +362,7 @@ class FBasicTheme extends StatelessWidget {
 class _InheritedTheme extends InheritedTheme {
   final FThemeData data;
 
-  const _InheritedTheme({required this.data, required super.child});
+  const new({required this.data, required super.child});
 
   @override
   InheritedElement createElement() => InheritedThemeElement(this);
@@ -387,7 +387,7 @@ class InheritedThemeElement extends InheritedElement {
 
   final ValueNotifier<FThemeData> notifier;
 
-  InheritedThemeElement(_InheritedTheme super.widget) : notifier = ValueNotifier(widget.data);
+  new(_InheritedTheme super.widget) : notifier = ValueNotifier(widget.data);
 
   @override
   // ignore: library_private_types_in_public_api
@@ -423,5 +423,5 @@ class FPlatformThemeData {
   late final FThemeData touch = _touch();
 
   /// Creates a [FPlatformThemeData].
-  FPlatformThemeData({required this._desktop, required this._touch});
+  new({required this._desktop, required this._touch});
 }

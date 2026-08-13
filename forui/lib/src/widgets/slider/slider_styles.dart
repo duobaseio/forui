@@ -23,7 +23,7 @@ extension type FSliderStyles(
   FVariants<FSliderAxisVariantConstraint, FSliderAxisVariant, FSliderStyle, FSliderStyleDelta> _
 ) implements FVariants<FSliderAxisVariantConstraint, FSliderAxisVariant, FSliderStyle, FSliderStyleDelta> {
   /// Creates a [FSliderStyles] that inherits its properties.
-  factory FSliderStyles.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,
@@ -143,7 +143,7 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
   final Future<void> Function() tickHapticFeedback;
 
   /// Creates a [FSliderStyle].
-  const FSliderStyle({
+  const new({
     required this.activeColor,
     required this.inactiveColor,
     required this.thumbStyle,
@@ -167,7 +167,7 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
   }) : assert(0 < thumbSize, 'thumbSize must be > 0');
 
   /// Creates a [FSliderStyle] that inherits its properties.
-  FSliderStyle.inherit({
+  new inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,

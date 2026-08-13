@@ -33,7 +33,7 @@ final class FBorderRadius with Diagnosticable {
   final BorderRadius pill;
 
   /// Creates an [FBorderRadius].
-  const FBorderRadius({
+  const new({
     this.xs2 = const .all(.circular(4)),
     this.xs = const .all(.circular(6)),
     this.sm = const .all(.circular(8)),

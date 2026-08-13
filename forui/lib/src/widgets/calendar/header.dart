@@ -21,7 +21,7 @@ class Header extends StatelessWidget {
   final VoidCallback? onNext;
   final VoidCallback? onPrevious;
 
-  const Header({
+  const new({
     required this.style,
     required this.label,
     required this.semanticsHint,
@@ -34,7 +34,7 @@ class Header extends StatelessWidget {
     super.key,
   }) : navigation = true;
 
-  const Header.single({
+  const new single({
     required this.style,
     required this.label,
     required this.semanticsHint,
@@ -47,7 +47,7 @@ class Header extends StatelessWidget {
        onNext = null,
        onPrevious = null;
 
-  factory Header.day({
+  factory day({
     required FCalendarHeaderStyle style,
     required FLocalizations localizations,
     required DateTime monthYear,
@@ -70,7 +70,7 @@ class Header extends StatelessWidget {
     key: key,
   );
 
-  factory Header.singleDay({
+  factory singleDay({
     required FCalendarHeaderStyle style,
     required FLocalizations localizations,
     required DateTime monthYear,
@@ -87,7 +87,7 @@ class Header extends StatelessWidget {
     key: key,
   );
 
-  factory Header.month({
+  factory month({
     required FCalendarHeaderStyle style,
     required FLocalizations localizations,
     required DateTime year,
@@ -110,7 +110,7 @@ class Header extends StatelessWidget {
     key: key,
   );
 
-  factory Header.singleMonth({
+  factory singleMonth({
     required FCalendarHeaderStyle style,
     required FLocalizations localizations,
     required DateTime year,
@@ -127,7 +127,7 @@ class Header extends StatelessWidget {
     key: key,
   );
 
-  factory Header.year({
+  factory year({
     required FCalendarHeaderStyle style,
     required FLocalizations localizations,
     required DateTime decade,
@@ -210,7 +210,7 @@ class SplitHeader extends StatelessWidget {
   final VoidCallback? onNext;
   final VoidCallback? onPrevious;
 
-  const SplitHeader({
+  const new({
     required this.style,
     required this.localizations,
     required this.date,
@@ -225,7 +225,7 @@ class SplitHeader extends StatelessWidget {
     super.key,
   }) : navigation = true;
 
-  const SplitHeader.single({
+  const new single({
     required this.style,
     required this.localizations,
     required this.date,
@@ -316,7 +316,7 @@ class _Tappable extends StatelessWidget {
   final bool shown;
   final VoidCallback? onPress;
 
-  const _Tappable({
+  const new({
     required this.style,
     required this.label,
     required this.semanticsHint,
@@ -412,7 +412,7 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
   final Duration animationDuration;
 
   /// Creates a [FCalendarHeaderStyle].
-  const FCalendarHeaderStyle({
+  const new({
     required this.headerDecoration,
     required this.headerTextStyle,
     required this.toggleIconStyle,
@@ -427,7 +427,7 @@ class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions 
   });
 
   /// Creates a [FCalendarHeaderStyle] that inherits its properties.
-  factory FCalendarHeaderStyle.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FIcons icons,

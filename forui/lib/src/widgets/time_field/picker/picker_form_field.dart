@@ -8,7 +8,7 @@ import 'package:forui/forui.dart';
 class PickerFormField extends FormField<FTime> {
   final FTimeFieldController controller;
 
-  PickerFormField({
+  new({
     required this.controller,
     required super.enabled,
     required super.autovalidateMode,

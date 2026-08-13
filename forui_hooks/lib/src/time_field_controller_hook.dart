@@ -21,7 +21,7 @@ class _TimeFieldHook extends Hook<FTimeFieldController> {
   final FTime? time;
   final FormFieldValidator<FTime> validator;
 
-  const _TimeFieldHook({required this.time, required this.validator, super.keys});
+  const new({required this.time, required this.validator, super.keys});
 
   @override
   _TimeFieldHookState createState() => .new();

@@ -332,7 +332,7 @@ class FTappable extends StatefulWidget {
   ///
   /// ## Contract
   /// Throws [AssertionError] if [builder] and [child] are both null.
-  const factory FTappable({
+  const factory({
     FTappableStyleDelta style,
     FFocusedOutlineStyleDelta? focusedOutlineStyle,
     String? semanticsLabel,
@@ -387,7 +387,7 @@ class FTappable extends StatefulWidget {
   ///
   /// ## Contract
   /// Throws [AssertionError] if [builder] and [child] are both null.
-  const FTappable.static({
+  const new static({
     this.style = const .context(),
     this.focusedOutlineStyle,
     this.semanticsLabel,
@@ -895,7 +895,7 @@ class _FTappableState<T extends FTappable> extends State<T> {
 
 @internal
 class AnimatedTappable extends FTappable {
-  const AnimatedTappable({
+  const new({
     super.style,
     super.focusedOutlineStyle,
     super.semanticsLabel,
@@ -1047,7 +1047,7 @@ class FTappableStyle with Diagnosticable, _$FTappableStyleFunctions {
   final FTappableMotion motion;
 
   /// Creates a [FTappableStyle].
-  FTappableStyle({
+  new({
     this.cursor = const .all(.defer),
     this.pressedEnterDuration = const Duration(milliseconds: 100),
     this.pressedExitDuration = const Duration(milliseconds: 100),
@@ -1099,7 +1099,7 @@ class FTappableMotion with Diagnosticable, _$FTappableMotionFunctions {
   final double? bounceFloor;
 
   /// Creates a [FTappableMotion].
-  const FTappableMotion({
+  const new({
     this.bounceDownDuration = const Duration(milliseconds: 100),
     this.bounceUpDuration = const Duration(milliseconds: 100),
     this.bounceDownCurve = Curves.easeOutQuart,

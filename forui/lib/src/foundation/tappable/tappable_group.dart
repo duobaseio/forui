@@ -50,7 +50,7 @@ class FTappableGroup extends StatefulWidget {
   final Widget child;
 
   /// Creates an [FTappableGroup].
-  const FTappableGroup({required this.child, this.slidePressHapticFeedback = FHapticFeedback.noFeedback, super.key});
+  const new({required this.child, this.slidePressHapticFeedback = FHapticFeedback.noFeedback, super.key});
 
   @override
   State<FTappableGroup> createState() => _FTappableGroupState();
@@ -91,7 +91,7 @@ class TappableGroupScope extends InheritedWidget {
 
   final List<GroupEntry>? entries;
 
-  const TappableGroupScope({required this.entries, required super.child, super.key});
+  const new({required this.entries, required super.child, super.key});
 
   // Comparing using identity is fine as it is tied to the lifecycle of the owning tappable group.
   @override
@@ -125,7 +125,7 @@ class GroupEntry {
   GestureLongPressEndCallback? onLongPressEnd;
   VoidCallback? onLongPress;
 
-  GroupEntry({
+  new({
     required this.context,
     required this.enter,
     required this.exit,

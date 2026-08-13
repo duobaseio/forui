@@ -22,7 +22,7 @@ class FTimeFieldController extends ValueNotifier<FTime?> {
   bool _mutating = false;
 
   /// Creates a [FTimeFieldController].
-  FTimeFieldController({FTime? time, this.validator = _defaultValidator})
+  new({FTime? time, this.validator = _defaultValidator})
     : _picker = FTimePickerController(time: time ?? const FTime()),
       super(time) {
     _picker.addListener(() {
@@ -62,7 +62,7 @@ class _ProxyController extends FTimeFieldController {
   Curve _curve;
   int _monotonic = 0;
 
-  _ProxyController({required super.time, required this._onChange, required this._duration, required this._curve})
+  new({required super.time, required this._onChange, required this._duration, required this._curve})
     : _unsynced = time;
 
   void update(FTime? newValue, ValueChanged<FTime?> onChange, bool shown, Duration duration, Curve curve) {
@@ -111,7 +111,7 @@ class _ProxyController extends FTimeFieldController {
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FTimeFieldControl with Diagnosticable, _$FTimeFieldControlMixin {
   /// Creates a [FTimeFieldControl].
-  const factory FTimeFieldControl.managed({
+  const factory managed({
     FTimeFieldController? controller,
     FTime? initial,
     FormFieldValidator<FTime>? validator,
@@ -124,14 +124,14 @@ sealed class FTimeFieldControl with Diagnosticable, _$FTimeFieldControlMixin {
   /// The [onChange] callback is invoked when the user selects a time.
   /// The [duration] when animating to [time] from an invalid/different time. Defaults to 200 milliseconds.
   /// The [curve] when animating to [time] from an invalid/different time. Defaults to [Curves.easeOutCubic].
-  const factory FTimeFieldControl.lifted({
+  const factory lifted({
     required FTime? time,
     required ValueChanged<FTime?> onChange,
     Duration duration,
     Curve curve,
   }) = _Lifted;
 
-  const FTimeFieldControl._();
+  const new _();
 
   (FTimeFieldController, bool) _update(
     FTimeFieldControl old,
@@ -169,7 +169,7 @@ class FTimeFieldManagedControl extends FTimeFieldControl with Diagnosticable, _$
   final ValueChanged<FTime?>? onChange;
 
   /// Creates a [FTimeFieldControl].
-  const FTimeFieldManagedControl({this.controller, this.initial, this.validator, this.onChange})
+  const new({this.controller, this.initial, this.validator, this.onChange})
     : assert(
         controller == null || initial == null,
         'Cannot provide both controller and initial time. Pass initial time to the controller instead.',
@@ -195,7 +195,7 @@ class _Lifted extends FTimeFieldControl with _$_LiftedMixin {
   @override
   final Curve curve;
 
-  const _Lifted({
+  const new({
     required this.time,
     required this.onChange,
     this.duration = const Duration(milliseconds: 300),

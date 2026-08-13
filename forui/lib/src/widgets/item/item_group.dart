@@ -237,7 +237,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
   /// {@template forui.widgets.FItemGroup.new}
   /// Creates a [FItemGroup].
   /// {@endtemplate}
-  FItemGroup({
+  new({
     required List<FItemMixin> children,
     this.style = const .context(),
     this.scrollController,
@@ -290,7 +290,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
   /// * [count] is null and [itemBuilder] always provides a zero-size widget, i.e. SizedBox(). If possible, provide
   ///   items with non-zero size, return null from builder, or set [count] to non-null.
   /// {@endtemplate}
-  FItemGroup.builder({
+  new builder({
     required NullableIndexedWidgetBuilder itemBuilder,
     int? count,
     this.style = const .context(),
@@ -336,7 +336,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
   ///
   /// All group labels will be ignored.
   /// {@endtemplate}
-  FItemGroup.merge({
+  new merge({
     required List<FItemGroupMixin> children,
     this.style = const .context(),
     this.scrollController,
@@ -372,7 +372,7 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
   /// {@macro forui.widgets.FItemGroup.new}
   ///
   /// This function is a shorthand for [FItemGroup.new].
-  FItemGroup.group({
+  new group({
     required List<FItemMixin> children,
     FItemGroupStyleDelta style = const .context(),
     ScrollController? scrollController,
@@ -485,7 +485,7 @@ class FItemGroupStyleData extends InheritedWidget {
   final FItemGroupStyle style;
 
   /// Creates a [FItemGroupStyleData].
-  const FItemGroupStyleData({required this.style, required super.child, super.key});
+  const new({required this.style, required super.child, super.key});
 
   @override
   bool updateShouldNotify(FItemGroupStyleData old) => style != old.style;
@@ -549,7 +549,7 @@ class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
   final Future<void> Function() slidePressHapticFeedback;
 
   /// Creates a [FItemGroupStyle].
-  FItemGroupStyle({
+  new({
     required this.decoration,
     required this.dividerColor,
     required this.dividerWidth,
@@ -560,7 +560,7 @@ class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
   });
 
   /// Creates a [FItemGroupStyle] that inherits from the given arguments.
-  FItemGroupStyle.inherit({
+  new inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,

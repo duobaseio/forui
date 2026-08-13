@@ -193,7 +193,7 @@ final class FColors with Diagnosticable {
   ///
   /// **Note:**
   /// Consider generating a [FColors] using [`dart run forui theme create`](https://forui.dev/docs/reference/cli#create-2) instead.
-  FColors({
+  new({
     required Brightness brightness,
     required SystemUiOverlayStyle systemOverlayStyle,
     required Color barrier,
@@ -239,7 +239,7 @@ final class FColors with Diagnosticable {
          extensions: extensions.isEmpty ? const {} : {for (final extension in extensions) extension.type: extension},
        );
 
-  const FColors._({
+  const new _({
     required this.brightness,
     required this.systemOverlayStyle,
     required this.barrier,
@@ -266,7 +266,7 @@ final class FColors with Diagnosticable {
        assert(0 <= disabledOpacity && disabledOpacity <= 1, 'disabledOpacity must be between 0 and 1.');
 
   /// Creates a linear interpolation between two [FColors] using the given factor [t].
-  factory FColors.lerp(FColors a, FColors b, double t) => .new(
+  factory lerp(FColors a, FColors b, double t) => .new(
     brightness: t < 0.5 ? a.brightness : b.brightness,
     systemOverlayStyle: t < 0.5 ? a.systemOverlayStyle : b.systemOverlayStyle,
     barrier: FColors.lerpColor(a.barrier, b.barrier, t)!,

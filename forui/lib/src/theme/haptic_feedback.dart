@@ -60,7 +60,7 @@ final class FHapticFeedback with Diagnosticable {
   final Future<void> Function() vibrate;
 
   /// Creates an [FHapticFeedback].
-  const FHapticFeedback({
+  const new({
     this.heavyImpact = HapticFeedback.heavyImpact,
     this.lightImpact = HapticFeedback.lightImpact,
     this.mediumImpact = HapticFeedback.mediumImpact,
@@ -72,7 +72,7 @@ final class FHapticFeedback with Diagnosticable {
   });
 
   /// Creates an [FHapticFeedback] with no haptic feedback.
-  const FHapticFeedback.none()
+  const new none()
     : heavyImpact = noFeedback,
       lightImpact = noFeedback,
       mediumImpact = noFeedback,

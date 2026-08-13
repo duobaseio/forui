@@ -12,7 +12,7 @@ class SubmenuTrigger extends StatefulWidget {
   final FPopoverController controller;
   final Widget child;
 
-  const SubmenuTrigger({required this.controller, required this.child, super.key});
+  const new({required this.controller, required this.child, super.key});
 
   @override
   State<SubmenuTrigger> createState() => _State();

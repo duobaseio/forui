@@ -252,7 +252,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// ## Contract
   /// Each key in [items] must map to a unique value. Having multiple keys map to the same value will result in
   /// undefined behavior.
-  factory FSelect({
+  factory({
     required Map<String, T> items,
     FSelectControl<T>? control,
     FPopoverControl popoverControl = const .managed(),
@@ -363,7 +363,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   }
 
   /// Creates a select with the given [children].
-  const factory FSelect.rich({
+  const factory rich({
     required String Function(T value) format,
     required List<FSelectItemMixin> children,
     FSelectControl<T>? control,
@@ -433,7 +433,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// ## Contract
   /// Each key in [items] must map to a unique value. Having multiple keys map to the same value will result in
   /// undefined behavior.
-  factory FSelect.search({
+  factory search({
     required Map<String, T> items,
     FutureOr<Iterable<T>> Function(String query)? filter,
     FSelectSearchFieldProperties searchFieldProperties = const FSelectSearchFieldProperties(),
@@ -568,7 +568,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// The [contentLoadingBuilder] is used to show a loading indicator while the search results is processed
   /// asynchronously by [filter].
   /// The [contentErrorBuilder] is used to show an error message when [filter] is asynchronous and fails.
-  const factory FSelect.searchBuilder({
+  const factory searchBuilder({
     required String Function(T value) format,
     required FutureOr<Iterable<T>> Function(String query) filter,
     required FSelectSearchContentBuilder<T> contentBuilder,
@@ -627,7 +627,7 @@ abstract class FSelect<T> extends StatefulWidget with FFormFieldProperties<T> {
     Key? key,
   }) = _SearchSelect<T>;
 
-  const FSelect._({
+  const new _({
     required this.format,
     this.control,
     this.popoverControl = const .managed(),

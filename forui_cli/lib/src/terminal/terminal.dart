@@ -9,7 +9,7 @@ import 'dart:io';
 import 'package:ffi/ffi.dart';
 
 /// A key press: either a [Control] key or a printable [Character].
-sealed class KeyEvent {}
+sealed class KeyEvent;
 
 /// The non-printable keys the prompts care about.
 enum Control implements KeyEvent { up, down, left, right, enter, escape, backspace, tab, ctrlC, unknown }
@@ -18,7 +18,7 @@ enum Control implements KeyEvent { up, down, left, right, enter, escape, backspa
 class Character implements KeyEvent {
   final String character;
 
-  const Character(this.character);
+  const new(this.character);
 }
 
 final terminal = Platform.isWindows ? WindowsTerminal() : UnixTerminal();
@@ -133,7 +133,7 @@ class UnixTerminal extends Terminal {
   late final TCGetAttrDart _tcgetattr;
   late final TCSetAttrDart _tcsetattr;
 
-  UnixTerminal() {
+  new() {
     _lib = Platform.isMacOS ? DynamicLibrary.open('/usr/lib/libSystem.dylib') : DynamicLibrary.open('libc.so.6');
     _tcgetattr = _lib.lookupFunction<TCGetAttrNative, TCGetAttrDart>('tcgetattr');
     _tcsetattr = _lib.lookupFunction<TCSetAttrNative, TCSetAttrDart>('tcsetattr');
@@ -237,7 +237,7 @@ class WindowsTerminal extends Terminal {
   late final SetConsoleModeDart _setConsoleMode;
   late final int _inputHandle;
 
-  WindowsTerminal() {
+  new() {
     final kernel32 = DynamicLibrary.open('kernel32.dll');
     final getStdHandle = kernel32.lookupFunction<GetStdHandleNative, GetStdHandleDart>('GetStdHandle');
     _setConsoleMode = kernel32.lookupFunction<SetConsoleModeNative, SetConsoleModeDart>('SetConsoleMode');

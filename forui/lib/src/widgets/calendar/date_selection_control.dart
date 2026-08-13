@@ -101,7 +101,7 @@ sealed class FDateSelectionControl<T> with Diagnosticable, _$FDateSelectionContr
     bool startFirst = true,
   }) => _LiftedOpenRange(value: value, onChange: onChange, startFirst: startFirst);
 
-  const FDateSelectionControl._();
+  const new _();
 
   (FDateSelectionController<T>, bool) _update(
     FDateSelectionControl<T> old,
@@ -132,7 +132,7 @@ abstract class FDateSelectionManagedControl<T> extends FDateSelectionControl<T>
   final ValueChanged<T>? onChange;
 
   /// Creates a [FDateSelectionControl].
-  const FDateSelectionManagedControl({this.controller, this.initial, this.onChange})
+  const new({this.controller, this.initial, this.onChange})
     : assert(
         controller == null || initial == null,
         'Cannot provide both controller and initial. Pass initial value to the controller instead.',
@@ -146,7 +146,7 @@ abstract class FDateSelectionManagedControl<T> extends FDateSelectionControl<T>
 class _Single extends FDateSelectionManagedControl<DateTime?> {
   final bool toggleable;
 
-  const _Single({this.toggleable = true, super.controller, super.initial, super.onChange})
+  const new({this.toggleable = true, super.controller, super.initial, super.onChange})
     : assert(
         controller == null || toggleable,
         'Cannot provide both controller and toggleable. Pass toggleable to the controller instead.',
@@ -164,14 +164,14 @@ class _Single extends FDateSelectionManagedControl<DateTime?> {
 }
 
 class _Multi extends FDateSelectionManagedControl<Set<DateTime>> {
-  const _Multi({super.controller, super.initial, super.onChange});
+  const new({super.controller, super.initial, super.onChange});
 
   @override
   FDateSelectionController<Set<DateTime>> createController() => controller ?? .multi(initial: initial ?? {});
 }
 
 class _Range extends FDateSelectionManagedControl<(DateTime, DateTime)?> {
-  const _Range({super.controller, super.initial, super.onChange});
+  const new({super.controller, super.initial, super.onChange});
 
   @override
   FDateSelectionController<(DateTime, DateTime)?> createController() => controller ?? .range(initial: initial);
@@ -180,7 +180,7 @@ class _Range extends FDateSelectionManagedControl<(DateTime, DateTime)?> {
 class _OpenRange extends FDateSelectionManagedControl<(DateTime?, DateTime?)> {
   final bool startFirst;
 
-  const _OpenRange({this.startFirst = true, super.controller, super.initial, super.onChange})
+  const new({this.startFirst = true, super.controller, super.initial, super.onChange})
     : assert(
         controller == null || startFirst,
         'Cannot provide both controller and startFirst. Pass startFirst to the controller instead.',
@@ -216,13 +216,13 @@ abstract class FDateSelectionLiftedControl<T> extends FDateSelectionControl<T>
   final ValueChanged<T> onChange;
 
   /// Creates a [FDateSelectionLiftedControl].
-  const FDateSelectionLiftedControl({required this.value, required this.onChange}) : super._();
+  const new({required this.value, required this.onChange}) : super._();
 }
 
 class _LiftedSingle extends FDateSelectionLiftedControl<DateTime?> {
   final bool toggleable;
 
-  const _LiftedSingle({required super.value, required super.onChange, required this.toggleable});
+  const new({required super.value, required super.onChange, required this.toggleable});
 
   @override
   FDateSelectionController<DateTime?> createController() =>
@@ -240,7 +240,7 @@ class _LiftedSingle extends FDateSelectionLiftedControl<DateTime?> {
 }
 
 class _LiftedMulti extends FDateSelectionLiftedControl<Set<DateTime>> {
-  const _LiftedMulti({required super.value, required super.onChange});
+  const new({required super.value, required super.onChange});
 
   @override
   FDateSelectionController<Set<DateTime>> createController() =>
@@ -252,7 +252,7 @@ class _LiftedMulti extends FDateSelectionLiftedControl<Set<DateTime>> {
 }
 
 class _LiftedRange extends FDateSelectionLiftedControl<(DateTime, DateTime)?> {
-  const _LiftedRange({required super.value, required super.onChange});
+  const new({required super.value, required super.onChange});
 
   @override
   FDateSelectionController<(DateTime, DateTime)?> createController() =>
@@ -266,7 +266,7 @@ class _LiftedRange extends FDateSelectionLiftedControl<(DateTime, DateTime)?> {
 class _LiftedOpenRange extends FDateSelectionLiftedControl<(DateTime?, DateTime?)> {
   final bool startFirst;
 
-  const _LiftedOpenRange({required super.value, required super.onChange, required this.startFirst});
+  const new({required super.value, required super.onChange, required this.startFirst});
 
   @override
   FDateSelectionController<(DateTime?, DateTime?)> createController() =>
@@ -291,7 +291,7 @@ class _LiftedOpenRange extends FDateSelectionLiftedControl<(DateTime?, DateTime?
 }
 
 class _None extends FDateSelectionLiftedControl<Object?> {
-  const _None() : super(value: null, onChange: _ignore);
+  const new() : super(value: null, onChange: _ignore);
 
   @override
   FDateSelectionController<Object?> createController() => _NoneController();

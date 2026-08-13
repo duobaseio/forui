@@ -28,7 +28,7 @@ class ControlParentMixin {
   final bool listenable;
 
   /// Creates a new [ControlParentMixin].
-  ControlParentMixin({
+  new({
     required this.supertype,
     required this.createController,
     required this.update,

@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 class ListKey<T> extends LocalKey {
   final List<T> items;
 
-  const ListKey(this.items);
+  const new(this.items);
 
   @override
   bool operator ==(Object other) {
@@ -30,7 +30,7 @@ class ListKey<T> extends LocalKey {
 class SetKey<T> extends LocalKey {
   final Set<T> items;
 
-  const SetKey(this.items);
+  const new(this.items);
 
   @override
   bool operator ==(Object other) {

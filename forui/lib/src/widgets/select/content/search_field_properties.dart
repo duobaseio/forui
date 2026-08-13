@@ -184,7 +184,7 @@ class FSelectSearchFieldProperties with Diagnosticable {
   final FFieldClearIconBuilder<FTextFieldStyle> clearIconBuilder;
 
   /// Creates a [FSelectSearchFieldProperties].
-  const FSelectSearchFieldProperties({
+  const new({
     this.size = FTextFieldSizeVariant.md,
     this.control = const .managed(),
     this.hint,

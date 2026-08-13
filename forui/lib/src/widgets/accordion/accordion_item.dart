@@ -6,7 +6,7 @@ import 'package:forui/src/widgets/accordion/accordion.dart';
 import 'package:forui/src/widgets/accordion/accordion_controller.dart';
 
 /// A marker interface which denotes that mixed-in widgets can be used in a [FAccordion].
-mixin FAccordionItemMixin on Widget {}
+mixin FAccordionItemMixin on Widget;
 
 /// An interactive heading that reveals a section of content.
 ///
@@ -64,7 +64,7 @@ class FAccordionItem extends StatefulWidget with FAccordionItemMixin {
   final Widget child;
 
   /// Creates an [FAccordionItem].
-  const FAccordionItem({
+  const new({
     required this.title,
     required this.child,
     this.style = const .context(),

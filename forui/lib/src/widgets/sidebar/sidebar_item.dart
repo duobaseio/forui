@@ -74,7 +74,7 @@ class FSidebarItem extends StatefulWidget {
   final List<Widget> children;
 
   /// Creates a [FSidebarItem].
-  const FSidebarItem({
+  const new({
     this.style = const .context(),
     this.icon,
     this.label,
@@ -340,7 +340,7 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
   final FSidebarItemMotion motion;
 
   /// Creates a [FSidebarItemStyle].
-  const FSidebarItemStyle({
+  const new({
     required this.textStyle,
     required this.iconStyle,
     required this.collapsibleIconStyle,
@@ -358,7 +358,7 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
   });
 
   /// Creates a [FSidebarItemStyle] that inherits its properties.
-  factory FSidebarItemStyle.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FIcons icons,
@@ -455,7 +455,7 @@ class FSidebarItemMotion with Diagnosticable, _$FSidebarItemMotionFunctions {
   final Animatable<double> iconTween;
 
   /// Creates a [FSidebarItemMotion].
-  const FSidebarItemMotion({
+  const new({
     this.expandDuration = const Duration(milliseconds: 200),
     this.collapseDuration = const Duration(milliseconds: 150),
     this.expandCurve = Curves.easeOutCubic,

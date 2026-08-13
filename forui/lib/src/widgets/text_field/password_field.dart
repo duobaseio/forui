@@ -81,7 +81,7 @@ class PasswordFieldProperties with Diagnosticable {
   final FFieldClearIconBuilder<FTextFieldStyle> clearIconBuilder;
   final FObscureTextControl obscureTextControl;
 
-  PasswordFieldProperties({
+  new({
     required this.size,
     required this.style,
     required this.builder,
@@ -225,7 +225,7 @@ class PasswordField extends StatefulWidget {
   final TextEditingController controller;
   final PasswordFieldProperties properties;
 
-  const PasswordField({required this.controller, required this.properties, super.key});
+  const new({required this.controller, required this.properties, super.key});
 
   @override
   State<PasswordField> createState() => _State();

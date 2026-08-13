@@ -8,7 +8,7 @@ class HorizontalTitleDialog extends StatelessWidget {
   final Widget title;
   final List<Widget> actions;
 
-  const HorizontalTitleDialog({
+  const new({
     required this.title,
     required this.actions,
     this.style = const .context(),

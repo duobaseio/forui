@@ -21,10 +21,10 @@ class FAutocompleteStyle with Diagnosticable, _$FAutocompleteStyleFunctions {
   final FAutocompleteContentStyle contentStyle;
 
   /// Creates a [FAutocompleteStyle].
-  FAutocompleteStyle({required this.fieldStyles, required this.contentStyle});
+  new({required this.fieldStyles, required this.contentStyle});
 
   /// Creates a [FAutocompleteStyle] that inherits its properties.
-  FAutocompleteStyle.inherit({
+  new inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,
@@ -52,7 +52,7 @@ extension type FAutocompleteFieldSizeStyles(
       FAutocompleteFieldStyleDelta
     > {
   /// Creates [FAutocompleteFieldSizeStyles] that inherit their properties.
-  factory FAutocompleteFieldSizeStyles.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,
@@ -101,7 +101,7 @@ class FAutocompleteFieldStyle extends FTextFieldStyle with _$FAutocompleteFieldS
   final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, TextStyle?, TextStyleDelta> typeaheadTextStyle;
 
   /// Creates a [FAutocompleteFieldStyle].
-  FAutocompleteFieldStyle({
+  new({
     required this.composingTextStyle,
     required this.typeaheadTextStyle,
     required super.keyboardAppearance,
@@ -132,7 +132,7 @@ class FAutocompleteFieldStyle extends FTextFieldStyle with _$FAutocompleteFieldS
   });
 
   /// Creates an [FAutocompleteFieldStyle] from a [FTextFieldStyle].
-  FAutocompleteFieldStyle.inherit({required FColors colors, required FTextFieldStyle field})
+  new inherit({required FColors colors, required FTextFieldStyle field})
     : this(
         composingTextStyle: field.contentTextStyle.apply([.all(.delta(decoration: () => .underline))]),
         typeaheadTextStyle: FVariants(

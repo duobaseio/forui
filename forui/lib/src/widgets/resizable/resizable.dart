@@ -97,7 +97,7 @@ class FResizable extends StatefulWidget {
   final List<FResizableRegion> children;
 
   /// Creates a [FResizable].
-  const FResizable({
+  const new({
     required this.axis,
     required this.children,
     this.control = const .managedCascade(),
@@ -477,7 +477,7 @@ extension type FResizableStyles(
       FResizableDividerStyleDelta
     > {
   /// Creates a [FResizableStyles] that inherits its properties.
-  factory FResizableStyles.inherit({
+  factory inherit({
     required FColors colors,
     required FIcons icons,
     required FStyle style,
@@ -530,7 +530,7 @@ class InheritedData extends InheritedWidget {
   final Axis axis;
   final FResizableRegionData data;
 
-  const InheritedData({
+  const new({
     required this.controller,
     required this.axis,
     required this.data,

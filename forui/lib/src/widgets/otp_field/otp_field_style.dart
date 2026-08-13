@@ -66,7 +66,7 @@ class FOtpFieldStyle extends FLabelStyle with _$FOtpFieldStyleFunctions {
   final FVariants<FOtpFieldItemVariantConstraint, FOtpFieldItemVariant, Color, Delta> dividerColor;
 
   /// Creates a [FOtpFieldStyle].
-  FOtpFieldStyle({
+  new({
     required this.keyboardAppearance,
     required this.itemSize,
     required this.itemStyles,
@@ -87,7 +87,7 @@ class FOtpFieldStyle extends FLabelStyle with _$FOtpFieldStyleFunctions {
   });
 
   /// Creates a [FOtpFieldStyle] that inherits its properties.
-  FOtpFieldStyle.inherit({
+  new inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,
@@ -116,7 +116,7 @@ extension type FOtpFieldItemStyles(
 ) implements
     FVariants<FOtpFieldItemVariantConstraint, FOtpFieldItemVariant, FOtpFieldItemStyle, FOtpFieldItemStyleDelta> {
   /// Creates [FOtpFieldItemStyles] that inherit their properties.
-  factory FOtpFieldItemStyles.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,
@@ -369,5 +369,5 @@ class FOtpFieldItemStyle with Diagnosticable, _$FOtpFieldItemStyleFunctions {
   final TextStyle contentTextStyle;
 
   /// Creates a [FOtpFieldItemStyle].
-  const FOtpFieldItemStyle({required this.decoration, required this.contentTextStyle});
+  const new({required this.decoration, required this.contentTextStyle});
 }
