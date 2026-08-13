@@ -196,27 +196,28 @@ class TooltipLinker extends DartDocLinker {
   ///
   /// Handles named arguments like `onPress:` in `FButton(onPress: () {})`.
   @override
-  void visitNamedExpression(NamedExpression node) {
-    if (node case NamedExpression(:final name, :final FormalParameterElement element) when _forui(element)) {
+  void visitNamedArgument(NamedArgument node) {
+    if (node case NamedArgument(:final name, correspondingParameter: final FormalParameterElement element)
+        when _forui(element)) {
       tooltip(name, .formalParameter, element.toString());
     }
-    super.visitNamedExpression(node);
+    super.visitNamedArgument(node);
   }
 
   /// Adds tooltips for lambda parameters.
   ///
   /// Handles parameters like `controller` in `(_, controller, _) => ...`.
   @override
-  void visitSimpleFormalParameter(SimpleFormalParameter node) {
+  void visitRegularFormalParameter(RegularFormalParameter node) {
     // Only handle parameters in function expressions (lambdas), not in method/function declarations.
     // Top-level functions are also considered function expressions but are part of FunctionDeclarations.
-    if (node.parent?.parent is FunctionExpression && node.parent?.parent?.parent is NamedExpression) {
+    if (node.parent?.parent is FunctionExpression && node.parent?.parent?.parent is NamedArgument) {
       if (node.declaredFragment?.element case final element?) {
         tooltip(node, .formalParameter, element.toString());
       }
     }
 
-    super.visitSimpleFormalParameter(node);
+    super.visitRegularFormalParameter(node);
   }
 
   bool _forui(Element element) => packages.any((p) => p.name == element.library?.uri.pathSegments.first);

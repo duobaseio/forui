@@ -3,6 +3,14 @@ analyzer:
   errors:
     prefer_asserts_with_message: ignore
     unused_result: ignore # Re-enable once Dart 3.13 lands
+  exclude:
+    - build/**
+    - android/**
+    - ios/**
+    - web/**
+    - windows/**
+    - macos/**
+    - linux/**
 
 linter:
   rules:

@@ -124,6 +124,7 @@ class FSwitch extends StatefulWidget {
       ..add(DiagnosticsProperty('style', style))
       ..add(FlagProperty('leadingLabel', value: leadingLabel, ifTrue: 'leadingLabel'))
       ..add(StringProperty('semanticsLabel', semanticsLabel))
+      ..add(DiagnosticsProperty('value', value))
       ..add(ObjectFlagProperty.has('onChange', onChange))
       ..add(FlagProperty('enabled', value: enabled, ifFalse: 'disabled'))
       ..add(FlagProperty('autofocus', value: autofocus, defaultValue: false, ifTrue: 'autofocus'))

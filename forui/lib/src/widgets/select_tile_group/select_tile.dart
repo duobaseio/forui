@@ -202,6 +202,7 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(StringProperty('semanticsLabel', semanticsLabel))
+      ..add(DiagnosticsProperty('value', value))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))

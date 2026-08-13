@@ -51,8 +51,8 @@ class ConstantPropagation extends RecursiveAstVisitor<void> {
     // invocations, each with different arguments.
     for (final argument in node.argumentList.arguments) {
       // We only support named arguments.
-      if (argument case NamedExpression(:final name, :final expression)) {
-        substitutions[name.label.name] = expression.toSource();
+      if (argument case NamedArgument(:final name, :final argumentExpression)) {
+        substitutions[name.lexeme] = argumentExpression.toSource();
       }
     }
   }
@@ -141,8 +141,8 @@ class ArgumentElision extends RecursiveAstVisitor<void> {
 
     // Remove arguments that match their defaults.
     for (final argument in arguments.arguments) {
-      if (argument case NamedExpression(:final name, :final expression, :final endToken)) {
-        if (normalize(defaults[name.label.name] ?? '') == normalize(expression.toSource())) {
+      if (argument case NamedArgument(:final name, :final argumentExpression, :final endToken)) {
+        if (normalize(defaults[name.lexeme] ?? '') == normalize(argumentExpression.toSource())) {
           _transformations.removeWithComma(argument, endToken);
         }
       }

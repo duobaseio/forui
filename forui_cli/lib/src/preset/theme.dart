@@ -99,7 +99,10 @@ Future<void> create(Configuration configuration, Preset preset, {required bool f
       }
 
       final prefix = '${configuration.root.path}$separator';
-      final relative = [for (final path in existing) path.startsWith(prefix) ? path.substring(prefix.length) : path];
+      final relative = [
+        for (final path in existing)
+          if (path.startsWith(prefix)) path.substring(prefix.length) else path,
+      ];
       terminal.warn('The following file(s) will be overwritten:\n\n${relative.join('\n')}');
 
       if (!confirm(message: 'Overwrite ${existing.length} existing file(s)?', initial: false)) {

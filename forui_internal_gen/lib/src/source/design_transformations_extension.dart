@@ -70,7 +70,7 @@ class DesignTransformationsExtension extends TransformationsExtension {
             primaryConstructor: PrimaryConstructorDeclaration(
               formalParameters: FormalParameterList(
                 parameters: [
-                  SimpleFormalParameter(type: NamedType(name: final representationName, :final typeArguments?)),
+                  RegularFormalParameter(type: NamedType(name: final representationName, :final typeArguments?)),
                 ],
               ),
             ),

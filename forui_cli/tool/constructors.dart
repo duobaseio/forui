@@ -65,8 +65,8 @@ class ConstructorFragment {
       // Finds all optional named parameters that are not given in the invocation.
       final constructor = invocation.constructorName.element!;
       final given = invocation.argumentList.arguments
-          .whereType<NamedExpression>()
-          .map((p) => p.name.label.name)
+          .whereType<NamedArgument>()
+          .map((p) => p.name.lexeme)
           .toSet();
       final additional = [
         for (final p in constructor.formalParameters.where((p) => p.isOptionalNamed && !given.contains(p.name)))
@@ -100,7 +100,7 @@ class ConstructorFragment {
 
     // Finds all optional named parameters that are not given in the constructor.
     final to = constructor.initializers.whereType<RedirectingConstructorInvocation>().single;
-    final given = to.argumentList.arguments.whereType<NamedExpression>().map((p) => p.name.label.name).toSet();
+    final given = to.argumentList.arguments.whereType<NamedArgument>().map((p) => p.name.lexeme).toSet();
     final additional = [
       for (final p in to.element!.formalParameters.where((p) => p.isOptionalNamed && !given.contains(p.name)))
         if (p.defaultValueCode case final defaultValue? when defaultValue.isNotEmpty) '${p.name}: $defaultValue',
@@ -148,14 +148,14 @@ class ConstructorFragment {
     for (final parameter in constructor.parameters.parameters) {
       parameters.add('${parameter.name!.lexeme}: ${parameter.name!.lexeme},');
 
-      if (parameter case final DefaultFormalParameter superParameter) {
+      if (!parameter.isRequiredPositional) {
         final name = parameter.name!.lexeme;
         final type = constructor.declaredFragment!.formalParameters.firstWhere((p) => p.name == name).element.type;
 
-        if (superParameter.parameter is SuperFormalParameter) {
+        if (parameter is SuperFormalParameter) {
           abort = true;
           constructorParameters = constructorParameters.replaceAll('super.$name', '$type $name');
-        } else if (parameter.parameter is FieldFormalParameter) {
+        } else if (parameter is FieldFormalParameter) {
           constructorParameters = constructorParameters.replaceAll('this.$name', '$type $name');
         }
       }
@@ -275,7 +275,7 @@ class _Visitor extends RecursiveAstVisitor<void> {
     final name = declaration.primaryConstructor.typeName.lexeme;
     if (_type.hasMatch(name)) {
       _name = name;
-      _wrapped = (declaration.primaryConstructor.formalParameters.parameters.single as SimpleFormalParameter).type!
+      _wrapped = (declaration.primaryConstructor.formalParameters.parameters.single as RegularFormalParameter).type!
           .toSource();
       super.visitExtensionTypeDeclaration(declaration);
       _name = null;

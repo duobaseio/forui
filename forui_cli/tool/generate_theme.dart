@@ -307,8 +307,8 @@ class _IconsVisitor extends RecursiveAstVisitor<void> {
     if (_inside && declaration.name?.lexeme == 'lucide') {
       for (final initializer in declaration.initializers) {
         if (initializer case RedirectingConstructorInvocation(argumentList: ArgumentList(:final arguments))) {
-          for (final NamedExpression(:name, :expression) in arguments.whereType<NamedExpression>()) {
-            icons[name.label.name] = expression.toSource();
+          for (final NamedArgument(:name, :argumentExpression) in arguments.whereType<NamedArgument>()) {
+            icons[name.lexeme] = argumentExpression.toSource();
           }
         }
       }
@@ -333,30 +333,31 @@ class _ThemesVisitor extends RecursiveAstVisitor<void> {
 
       // Match (light: FPlatformThemeData(desktop: () => FThemeData(...), touch: () => FThemeData(...)), dark: ...)
       if (variable.initializer case final RecordLiteral autoTheme) {
-        for (final NamedExpression(:name, :expression) in autoTheme.fields.whereType<NamedExpression>()) {
-          final variant = name.label.name; // "light" or "dark"
+        for (final RecordLiteralNamedField(:name, :fieldExpression)
+            in autoTheme.fields.whereType<RecordLiteralNamedField>()) {
+          final variant = name.lexeme; // "light" or "dark"
 
           // FPlatformThemeData(desktop: () => FThemeData(...), touch: () => FThemeData(...))
-          if (expression case final InstanceCreationExpression platformTheme) {
+          if (fieldExpression case final InstanceCreationExpression platformTheme) {
             // Extract colors from the touch variant
-            for (final NamedExpression(:name, :expression)
-                in platformTheme.argumentList.arguments.whereType<NamedExpression>()) {
-              if (name.label.name != 'touch') {
+            for (final NamedArgument(:name, :argumentExpression)
+                in platformTheme.argumentList.arguments.whereType<NamedArgument>()) {
+              if (name.lexeme != 'touch') {
                 continue;
               }
 
               // () => FThemeData(colors: ...) — unwrap the closure
-              final themeDataExpr = switch (expression) {
+              final themeDataExpr = switch (argumentExpression) {
                 FunctionExpression(body: ExpressionFunctionBody(:final expression)) => expression,
-                _ => expression,
+                _ => argumentExpression,
               };
 
               // FThemeData(colors: ...)
               if (themeDataExpr case final InstanceCreationExpression themeData) {
                 var colors = '';
-                for (final expression in themeData.argumentList.arguments.whereType<NamedExpression>()) {
-                  if (expression.name.label.name == 'colors') {
-                    final source = expression.expression.toSource();
+                for (final expression in themeData.argumentList.arguments.whereType<NamedArgument>()) {
+                  if (expression.name.lexeme == 'colors') {
+                    final source = expression.argumentExpression.toSource();
                     // Resolve named constants (e.g. FColors.neutralLight) to their inline definition.
                     colors = source.startsWith('FColors.')
                         ? (_colors[source.substring('FColors.'.length)] ?? source)

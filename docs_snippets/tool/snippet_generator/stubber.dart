@@ -142,8 +142,8 @@ class _Linker extends DartDocLinker {
   }
 
   @override
-  void visitDefaultFormalParameter(DefaultFormalParameter node) {
-    final element = node.parameter.declaredFragment?.element;
+  void visitRegularFormalParameter(RegularFormalParameter node) {
+    final element = node.declaredFragment?.element;
     if (element case Element(enclosingElement: ConstructorElement(:final name?)) when node.name != null) {
       // Find the actual type from packages (not the stub).
       if (_type(container) case final type?) {
@@ -156,7 +156,7 @@ class _Linker extends DartDocLinker {
       }
     }
 
-    super.visitDefaultFormalParameter(node);
+    super.visitRegularFormalParameter(node);
   }
 
   InterfaceElement? _type(String? name) {

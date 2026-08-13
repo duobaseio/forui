@@ -195,25 +195,25 @@ class DartDocLinker extends RecursiveAstVisitor<void> {
   ///
   /// Handles named arguments like `onPress:` in `FButton(onPress: () {})`.
   @override
-  void visitNamedExpression(NamedExpression node) {
-    if (node.element case FormalParameterElement(:final enclosingElement?, :final name?)) {
+  void visitNamedArgument(NamedArgument node) {
+    if (node.correspondingParameter case FormalParameterElement(:final enclosingElement?, :final name?)) {
       switch (enclosingElement) {
         case final TopLevelFunctionElement function:
           // Link to the top level function for named parameters.
-          link(node.name.label, function);
+          link(node.name, function);
 
         case final ConstructorElement constructor:
           final classElement = constructor.enclosingElement;
           final field = classElement.getField(name);
           // Link to the constructor for named parameters that don't correspond to fields.
-          link(node.name.label, field ?? constructor);
+          link(node.name, field ?? constructor);
 
         case final MethodElement method:
           // Link to the method for named parameters.
-          link(node.name.label, method);
+          link(node.name, method);
       }
     }
-    super.visitNamedExpression(node);
+    super.visitNamedArgument(node);
   }
 
   /// Adds a link for [element] at [node].

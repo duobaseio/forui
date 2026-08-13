@@ -6,3 +6,11 @@ analyzer:
     invalid_annotation_target: ignore # We disable this lint because we use @override extensively in our code snippets.
     public_member_api_docs: ignore
     unused_result: ignore
+  exclude:
+    - build/**
+    - android/**
+    - ios/**
+    - web/**
+    - windows/**
+    - macos/**
+    - linux/**

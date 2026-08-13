@@ -136,7 +136,7 @@ Future<(String type, String assignment, String? sentinel)> deltaField(
     if (extension case ExtensionTypeDeclaration(
       primaryConstructor: PrimaryConstructorDeclaration(
         formalParameters: FormalParameterList(
-          parameters: [SimpleFormalParameter(type: NamedType(:final name, :final typeArguments?))],
+          parameters: [RegularFormalParameter(type: NamedType(:final name, :final typeArguments?))],
         ),
       ),
     ) when name.lexeme == 'FVariants') {
