@@ -8,11 +8,9 @@ import 'package:forui/forui.dart';
 
 /// A parser that updates individual parts of a string input.
 @internal
-abstract class Parser {
-  final List<String> pattern;
-
-  new(this.pattern);
-
+// TODO: Remove once @internal proper ignores this.
+// ignore: public_member_api_docs
+abstract class Parser(final List<String> pattern) {
   /// Updates the [current] input based on the [current] and [previous] input.
   (List<String>, Changes) update(List<String> previous, List<String> current) {
     assert(previous.length == pattern.length, 'previous must have ${pattern.length} parts.');
@@ -57,26 +55,24 @@ abstract class Parser {
 }
 
 @internal
-sealed class Changes {
-  const new();
-
+// TODO: Remove once @internal proper ignores this.
+// ignore: public_member_api_docs
+sealed class const Changes() {
   Changes add(int i);
 }
 
 @internal
-class None extends Changes {
-  const new();
-
+// TODO: Remove once @internal proper ignores this.
+// ignore: public_member_api_docs
+class const None() extends Changes {
   @override
   Single add(int i) => Single(i);
 }
 
 @internal
-class Single extends Changes {
-  final int index;
-
-  const new(this.index);
-
+// TODO: Remove once @internal proper ignores this.
+// ignore: public_member_api_docs
+class const Single(final int index) extends Changes {
   @override
   Many add(int i) => const Many();
 
@@ -92,20 +88,17 @@ class Single extends Changes {
 }
 
 @internal
-class Many extends Changes {
-  const new();
-
+// TODO: Remove once @internal proper ignores this.
+// ignore: public_member_api_docs
+class const Many() extends Changes {
   @override
   Many add(int _) => this;
 }
 
 @internal
-abstract class Selector {
-  final FLocalizations localizations;
-  final RegExp suffix;
-
-  new(this.localizations, this.suffix);
-
+// TODO: Remove once @internal proper ignores this.
+// ignore: public_member_api_docs
+abstract class Selector(final FLocalizations localizations, final RegExp suffix) {
   TextEditingValue? navigate(TextEditingValue value);
 
   TextEditingValue select(List<String> parts, int index);

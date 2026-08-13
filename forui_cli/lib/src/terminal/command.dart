@@ -53,7 +53,7 @@ class ForuiCommandRunner<T> extends CommandRunner<T> with _Usage {
 /// A command that additionally supports:
 /// * Custom invocation arguments
 /// * Usage information with aliases
-abstract class ForuiCommand extends Command with _Usage {
+abstract class ForuiCommand extends Command<void> with _Usage {
   @override
   String get invocation {
     final parents = [name];
@@ -92,7 +92,7 @@ abstract class ForuiCommand extends Command with _Usage {
   }
 }
 
-String _getCommandUsage(Map<String, Command> commands, {bool isSubcommand = false, int? lineLength}) {
+String _getCommandUsage<T>(Map<String, Command<T>> commands, {bool isSubcommand = false, int? lineLength}) {
   // Don't include aliases.
   var names = commands.keys.where((name) => !commands[name]!.aliases.contains(name));
 
@@ -106,7 +106,7 @@ String _getCommandUsage(Map<String, Command> commands, {bool isSubcommand = fals
   names = names.toList()..sort();
 
   // Group the commands by category.
-  final commandsByCategory = SplayTreeMap<String, List<Command>>();
+  final commandsByCategory = SplayTreeMap<String, List<Command<T>>>();
   for (final name in names) {
     final category = commands[name]!.category;
     commandsByCategory.putIfAbsent(category, () => []).add(commands[name]!);

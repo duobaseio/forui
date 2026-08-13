@@ -18,11 +18,16 @@ part 'calendar.design.dart';
 
 /// Builds a [FCalendar]'s header. The [child] is the always default header for the currently shown picker.
 typedef FCalendarHeaderBuilder<C extends FCalendarController> =
-    Widget Function(BuildContext context, C controller, FDateSelectionController selectionController, Widget child);
+    Widget Function(
+      BuildContext context,
+      C controller,
+      FDateSelectionController<Object?> selectionController,
+      Widget child,
+    );
 
 /// Builds a [FCalendar]'s footer, shown below the picker.
 typedef FCalendarFooterBuilder<C extends FCalendarController> =
-    Widget Function(BuildContext context, C controller, FDateSelectionController selectionController);
+    Widget Function(BuildContext context, C controller, FDateSelectionController<Object?> selectionController);
 
 /// A calendar.
 ///
@@ -42,7 +47,7 @@ class FCalendar extends StatefulWidget {
   static Widget defaultHeaderBuilder<C extends FCalendarController>(
     BuildContext context,
     C controller,
-    FDateSelectionController selectionController,
+    FDateSelectionController<Object?> selectionController,
     Widget child,
   ) => child;
 
@@ -50,7 +55,7 @@ class FCalendar extends StatefulWidget {
   static Widget defaultFooterBuilder<C extends FCalendarController>(
     BuildContext context,
     C controller,
-    FDateSelectionController selectionController,
+    FDateSelectionController<Object?> selectionController,
   ) => const SizedBox.shrink();
 
   /// The default [FCalendarDayBuilder] for a day picker.
@@ -105,7 +110,7 @@ class FCalendar extends StatefulWidget {
   final FCalendarControl control;
 
   /// Defines how this calendar's date selection is controlled.
-  final FDateSelectionControl selectionControl;
+  final FDateSelectionControl<Object?> selectionControl;
 
   /// The style.
   ///
@@ -141,7 +146,7 @@ class FCalendar extends StatefulWidget {
   final Widget Function(
     BuildContext context,
     FCalendarController controller,
-    FDateSelectionController selectionController,
+    FDateSelectionController<Object?> selectionController,
     FCalendarStyle style,
     FLocalizations localizations,
     double width,
@@ -153,7 +158,7 @@ class FCalendar extends StatefulWidget {
 
   /// Creates a [FCalendar] that cycles through the day, month and year grid pickers.
   new grid({
-    required FDateSelectionControl selectionControl,
+    required FDateSelectionControl<Object?> selectionControl,
     FGridCalendarControl control = const FGridCalendarControl(),
     FCalendarStyleDelta style = const .context(),
     bool fixedWeeks = false,
@@ -222,7 +227,7 @@ class FCalendar extends StatefulWidget {
 
   /// Creates a [FCalendar] with a split header whose month and year grid pickers are independently togglable.
   new splitGrid({
-    required FDateSelectionControl selectionControl,
+    required FDateSelectionControl<Object?> selectionControl,
     FGridSplitCalendarControl control = const FGridSplitCalendarControl(),
     FCalendarStyleDelta style = const .context(),
     bool fixedWeeks = false,
@@ -285,7 +290,7 @@ class FCalendar extends StatefulWidget {
 
   /// Creates a [FCalendar] that toggles between a day grid picker and a month-year wheel picker.
   new wheel({
-    required FDateSelectionControl selectionControl,
+    required FDateSelectionControl<Object?> selectionControl,
     FWheelCalendarControl control = const FWheelCalendarControl(),
     FCalendarStyleDelta style = const .context(),
     bool fixedWeeks = false,
@@ -371,7 +376,7 @@ class FCalendar extends StatefulWidget {
 
 class _State extends State<FCalendar> {
   late FCalendarController _controller;
-  late FDateSelectionController _selectionController;
+  late FDateSelectionController<Object?> _selectionController;
 
   @override
   void initState() {
@@ -406,7 +411,7 @@ class _State extends State<FCalendar> {
   void _handleOnChange() {}
 
   void _handleOnSelectionChange() {
-    if (widget.selectionControl case final FDateSelectionManagedControl control) {
+    if (widget.selectionControl case final FDateSelectionManagedControl<Object?> control) {
       control.handleOnChange(_selectionController);
     }
   }

@@ -10,16 +10,12 @@ import 'package:remixicon/remixicon.dart';
 import 'package:tabler_icons_plus/tabler_icons_plus.dart';
 
 /// These mappings mirror `forui_cli/lib/src/preset/icons.dart`. Keep both in sync.
-enum _Icons {
+enum _Icons(final String label) {
   lucide('Lucide'),
   tabler('Tabler'),
   remix('Remix'),
   hugeicons('Hugeicons'),
   iconoir('Iconoir');
-
-  final String label;
-
-  new(this.label);
 
   FIcons get icons => switch (this) {
     .lucide => FIcons.lucide(),

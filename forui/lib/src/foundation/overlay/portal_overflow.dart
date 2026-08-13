@@ -30,9 +30,7 @@ abstract interface class FPortalOverflow {
   Offset call(Size view, FPortalChildRect child, FPortalRect portal);
 }
 
-class _Flip implements FPortalOverflow {
-  const new();
-
+class const _Flip() implements FPortalOverflow {
   @override
   Offset call(Size view, FPortalChildRect child, FPortalRect portal) {
     var anchor = _allow(view, child, portal).translate(child.offset.dx, child.offset.dy);
@@ -88,9 +86,7 @@ Offset _flip(FPortalChildRect child, FPortalRect portal, {required bool x}) {
   return anchor.translate(child.offset.dx, child.offset.dy);
 }
 
-class _Slide implements FPortalOverflow {
-  const new();
-
+class const _Slide() implements FPortalOverflow {
   @override
   Offset call(Size view, FPortalChildRect child, FPortalRect portal) {
     final anchor = _allow(view, child, portal).translate(child.offset.dx, child.offset.dy);
@@ -118,9 +114,7 @@ Offset _slide(Offset anchor, Rect viewRect, Rect portalRect) {
   return anchor;
 }
 
-class _Allow implements FPortalOverflow {
-  const new();
-
+class const _Allow() implements FPortalOverflow {
   @override
   Offset call(Size view, FPortalChildRect child, FPortalRect portal) => _allow(view, child, portal);
 }

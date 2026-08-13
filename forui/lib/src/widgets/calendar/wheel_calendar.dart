@@ -11,7 +11,7 @@ import 'package:forui/src/widgets/calendar/header.dart';
 @internal
 class WheelCalendar extends StatelessWidget {
   final FWheelCalendarController controller;
-  final FDateSelectionController selectionController;
+  final FDateSelectionController<Object?> selectionController;
   final FCalendarStyle style;
   final FLocalizations localizations;
   final double width;

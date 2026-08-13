@@ -18,7 +18,7 @@ FGridCalendarControl _control({DateTime? start}) => FGridCalendarControl(
 
 Widget _harness({
   required FThemeData theme,
-  FDateSelectionControl? selectionControl,
+  FDateSelectionControl<Object?>? selectionControl,
   FGridCalendarControl? control,
   TextDirection textDirection = .ltr,
 }) => TestScaffold.app(

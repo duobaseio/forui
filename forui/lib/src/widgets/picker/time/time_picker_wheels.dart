@@ -7,7 +7,7 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/picker/picker_controller.dart';
 
 class _HourPicker extends StatefulWidget with FPickerWheelMixin {
-  final ValuePickerController controller;
+  final ValuePickerController<Object?> controller;
   final String pattern;
   final int offset;
   final Widget child;
@@ -56,7 +56,7 @@ class _HourPickerState extends State<_HourPicker> {
 }
 
 abstract class _Picker extends StatelessWidget {
-  final ValuePickerController controller;
+  final ValuePickerController<Object?> controller;
   final FPickerStyle style;
   final List<Widget> dateWheels;
   final DateFormat timeFormat;

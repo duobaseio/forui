@@ -15,11 +15,7 @@ sealed class KeyEvent;
 enum Control implements KeyEvent { up, down, left, right, enter, escape, backspace, tab, ctrlC, unknown }
 
 /// A printable character (one grapheme).
-class Character implements KeyEvent {
-  final String character;
-
-  const new(this.character);
-}
+class const Character(final String character) implements KeyEvent;
 
 final terminal = Platform.isWindows ? WindowsTerminal() : UnixTerminal();
 

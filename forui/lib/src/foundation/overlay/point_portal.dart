@@ -189,6 +189,13 @@ class _State extends State<FPointPortal> with WidgetsBindingObserver {
   }
 
   @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    _notifier.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) => CompositedChild(
     notifier: _notifier,
     link: _link,
@@ -249,11 +256,4 @@ class _State extends State<FPointPortal> with WidgetsBindingObserver {
       child: RepaintBoundary(child: widget.builder(context, _controller, widget.child)),
     ),
   );
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    _notifier.dispose();
-    super.dispose();
-  }
 }

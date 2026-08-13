@@ -13,4 +13,4 @@ workspace:
   - spotlight
 
 dev_dependencies:
-  flint: ^2.16.1
+  flint: ^2.16.2

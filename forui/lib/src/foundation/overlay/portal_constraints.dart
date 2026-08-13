@@ -3,27 +3,31 @@ import 'package:flutter/rendering.dart';
 import 'package:meta/meta.dart';
 
 /// Size constraints for a portal.
-sealed class FPortalConstraints extends Constraints {
+sealed class const FPortalConstraints._() extends Constraints {
   /// Creates a [FPortalConstraints] with the given constraints.
   const factory({double minWidth, double maxWidth, double minHeight, double maxHeight}) =
       FixedConstraints;
 
   /// Creates a [FPortalConstraints] that require the given width or height.
   const factory tightFor({double? width, double? height}) = FixedConstraints.tightFor;
-
-  const new _();
 }
 
 @internal
-final class FixedConstraints extends BoxConstraints implements FPortalConstraints {
-  const new({
-    super.minWidth = 0.0,
-    super.maxWidth = .infinity,
-    super.minHeight = 0.0,
-    super.maxHeight = .infinity,
-  });
-
-  const new tightFor({super.width, super.height}) : super.tightFor();
+// TODO: Remove once @internal proper ignores this.
+// ignore: public_member_api_docs
+final class const FixedConstraints({
+  super.minWidth = 0.0,
+  super.maxWidth = .infinity,
+  super.minHeight = 0.0,
+  super.maxHeight = .infinity,
+}) extends BoxConstraints implements FPortalConstraints {
+  const new tightFor({double? width, double? height})
+    : this(
+        minWidth: width ?? 0.0,
+        maxWidth: width ?? .infinity,
+        minHeight: height ?? 0.0,
+        maxHeight: height ?? .infinity,
+      );
 }
 
 /// Size constraints for a portal that has the same height as the child widget.

@@ -3,12 +3,14 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 @internal
-class Bounce extends SingleChildRenderObjectWidget {
-  final Animation<double> _bounce;
-  final double? _bounceFloor;
-
-  const new({required this._bounce, required this._bounceFloor, required super.child, super.key});
-
+// TODO: Remove once @internal proper ignores this.
+// ignore: public_member_api_docs
+class const Bounce({
+  required final Animation<double> _bounce,
+  required final double? _bounceFloor,
+  required super.child,
+  super.key,
+}) extends SingleChildRenderObjectWidget {
   @override
   RenderObject createRenderObject(BuildContext context) => RenderBounce(_bounce, _bounceFloor);
 

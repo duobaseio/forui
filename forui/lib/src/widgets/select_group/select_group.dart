@@ -45,7 +45,7 @@ class FSelectGroupItemData<T> extends InheritedWidget {
   });
 
   @override
-  bool updateShouldNotify(FSelectGroupItemData old) =>
+  bool updateShouldNotify(FSelectGroupItemData<T> old) =>
       controller != old.controller ||
       style != old.style ||
       enabled != old.enabled ||

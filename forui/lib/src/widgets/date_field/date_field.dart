@@ -440,7 +440,7 @@ abstract class _FDateFieldState<T extends FDateField> extends State<T> with Tick
   }
 
   void _handleOnSelectionChange() {
-    if (widget.selectionControl case final FDateSelectionManagedControl control) {
+    if (widget.selectionControl case final FDateSelectionManagedControl<DateTime?> control) {
       control.handleOnChange(_selectionController);
     }
   }

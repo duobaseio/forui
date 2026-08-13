@@ -1,7 +1,7 @@
 part of 'tabs.dart';
 
 /// Defines how the bounds of the selected tab indicator are computed.
-enum FTabBarIndicatorSize {
+enum FTabBarIndicatorSize(final TabBarIndicatorSize _value) {
   /// The tab indicator's bounds are as wide as the space occupied by the tab
   /// in the tab bar: from the right edge of the previous tab to the left edge
   /// of the next tab.
@@ -12,10 +12,6 @@ enum FTabBarIndicatorSize {
   /// This value is used to align the tab's label, typically a [Tab]
   /// widget's text or icon, with the selected tab indicator.
   label(.label);
-
-  final TabBarIndicatorSize _value;
-
-  new(this._value);
 }
 
 /// [FTabs]'s style.

@@ -60,7 +60,7 @@ class _ResizableControllerHook extends Hook<FResizableController> {
   }
 }
 
-class _ResizableControllerHookState<T> extends HookState<FResizableController, _ResizableControllerHook> {
+class _ResizableControllerHookState extends HookState<FResizableController, _ResizableControllerHook> {
   late final FResizableController _controller;
 
   @override

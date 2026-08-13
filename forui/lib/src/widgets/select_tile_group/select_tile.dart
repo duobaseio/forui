@@ -227,7 +227,7 @@ class FSelectTileData<T> extends InheritedWidget with FTileMixin {
   const new({required this.controller, required this.selected, required super.child, super.key});
 
   @override
-  bool updateShouldNotify(FSelectTileData old) => controller != old.controller || selected != old.selected;
+  bool updateShouldNotify(FSelectTileData<T> old) => controller != old.controller || selected != old.selected;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

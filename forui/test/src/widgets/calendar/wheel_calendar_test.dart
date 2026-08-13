@@ -23,7 +23,7 @@ void main() {
       );
 
   Widget calendar({
-    required FDateSelectionControl selectionControl,
+    required FDateSelectionControl<Object?> selectionControl,
     FWheelCalendarController? controller,
     FutureOr<void> Function(DateTime)? onDayPress,
     FutureOr<void> Function(DateTime)? onDayLongPress,

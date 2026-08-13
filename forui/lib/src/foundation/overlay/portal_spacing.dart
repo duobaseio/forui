@@ -28,12 +28,9 @@ abstract interface class FPortalSpacing {
   Offset call(Alignment child, Alignment portal);
 }
 
-class _FPortalSpacing with Diagnosticable implements FPortalSpacing {
-  final double spacing;
-  final bool diagonal;
-
-  const new(this.spacing, {this.diagonal = false});
-
+class const _FPortalSpacing(final double spacing, {final bool diagonal = false})
+    with Diagnosticable
+    implements FPortalSpacing {
   @override
   Offset call(Alignment child, Alignment portal) {
     // ignore corners that are diagonal.

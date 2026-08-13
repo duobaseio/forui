@@ -12,7 +12,7 @@ import 'package:forui/src/widgets/calendar/year/year_picker.dart';
 @internal
 class GridCalendar extends StatelessWidget {
   final FGridCalendarController controller;
-  final FDateSelectionController selectionController;
+  final FDateSelectionController<Object?> selectionController;
   final FCalendarStyle style;
   final FLocalizations localizations;
   final double width;
@@ -218,7 +218,7 @@ class GridCalendar extends StatelessWidget {
 @internal
 class GridSplitCalendar extends StatelessWidget {
   final FGridSplitCalendarController controller;
-  final FDateSelectionController selectionController;
+  final FDateSelectionController<Object?> selectionController;
   final FCalendarStyle style;
   final FLocalizations localizations;
   final double width;

@@ -204,9 +204,7 @@ class _UnclippedStack extends Stack {
       _RenderUnclippedStack(textDirection: Directionality.maybeOf(context), clipBehavior: .none);
 }
 
-class _RenderUnclippedStack extends RenderStack {
-  new({super.textDirection, super.clipBehavior});
-
+class _RenderUnclippedStack({super.textDirection, super.clipBehavior}) extends RenderStack {
   @override
   bool hitTest(BoxHitTestResult result, {required Offset position}) => hitTestChildren(result, position: position);
 }

@@ -6,7 +6,7 @@ part 'overlay_controller.control.dart';
 /// An [FOverlayControl] defines how an `FOverlay` is controlled.
 ///
 /// {@macro forui.foundation.doc_templates.control}
-sealed class FOverlayControl with Diagnosticable, _$FOverlayControlMixin {
+sealed class const FOverlayControl._() with Diagnosticable, _$FOverlayControlMixin {
   /// Creates a [FOverlayControl].
   const factory managed({OverlayPortalController? controller, bool? initial}) = FOverlayManagedControl;
 
@@ -15,8 +15,6 @@ sealed class FOverlayControl with Diagnosticable, _$FOverlayControlMixin {
   /// The [shown] parameter indicates whether the overlay is currently shown.
   /// The [onChange] callback is invoked when the user triggers a show/hide action.
   const factory lifted({required bool shown, required ValueChanged<bool> onChange}) = _Lifted;
-
-  const new _();
 
   (OverlayPortalController, bool) _update(FOverlayControl old, OverlayPortalController controller);
 }
