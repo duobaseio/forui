@@ -30,10 +30,12 @@ class FGoldenStyle with Diagnosticable, _$FGoldenStyleFunctions {
   final EdgeInsets edgeInsets;
   final EdgeInsetsDirectional edgeInsetsDirectional;
   final EdgeInsetsGeometry edgeInsetsGeometry;
+  final IconData iconData;
   final IconThemeData iconThemeData;
   final TextStyle textStyle;
   final List<BoxShadow> boxShadows;
   final List<Shadow> shadows;
+  final Set<ThemeExtension<dynamic>> extensions;
   final FVariants<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration, BoxDecorationDelta> boxDecorationVariants;
   final FVariants<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration?, BoxDecorationDelta> nullableBoxDecorationVariants;
   final FVariants<FGoldenVariantConstraint, FGoldenVariant, Decoration, DecorationDelta> decorationVariants;
@@ -64,10 +66,12 @@ class FGoldenStyle with Diagnosticable, _$FGoldenStyleFunctions {
     required this.edgeInsets,
     required this.edgeInsetsDirectional,
     required this.edgeInsetsGeometry,
+    required this.iconData,
     required this.iconThemeData,
     required this.textStyle,
     required this.boxShadows,
     required this.shadows,
+    required this.extensions,
     required this.boxDecorationVariants,
     required this.nullableBoxDecorationVariants,
     required this.decorationVariants,

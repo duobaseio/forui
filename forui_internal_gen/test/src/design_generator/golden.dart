@@ -109,10 +109,12 @@ extension $FGoldenStyleTransformations on FGoldenStyle {
   /// * [FGoldenStyle.edgeInsets]
   /// * [FGoldenStyle.edgeInsetsDirectional]
   /// * [FGoldenStyle.edgeInsetsGeometry]
+  /// * [FGoldenStyle.iconData]
   /// * [FGoldenStyle.iconThemeData]
   /// * [FGoldenStyle.textStyle]
   /// * [FGoldenStyle.boxShadows]
   /// * [FGoldenStyle.shadows]
+  /// * [FGoldenStyle.extensions]
   /// * [FGoldenStyle.boxDecorationVariants]
   /// * [FGoldenStyle.nullableBoxDecorationVariants]
   /// * [FGoldenStyle.decorationVariants]
@@ -144,10 +146,12 @@ extension $FGoldenStyleTransformations on FGoldenStyle {
     EdgeInsetsDelta? edgeInsets,
     EdgeInsetsDirectionalDelta? edgeInsetsDirectional,
     EdgeInsetsGeometryDelta? edgeInsetsGeometry,
+    IconData? iconData,
     IconThemeDataDelta? iconThemeData,
     TextStyleDelta? textStyle,
     List<BoxShadow>? boxShadows,
     List<Shadow>? shadows,
+    Set<ThemeExtension<dynamic>>? extensions,
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration, BoxDecorationDelta>? boxDecorationVariants,
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration?, BoxDecorationDelta>?
     nullableBoxDecorationVariants,
@@ -181,10 +185,12 @@ extension $FGoldenStyleTransformations on FGoldenStyle {
     edgeInsets: edgeInsets?.call(this.edgeInsets) ?? this.edgeInsets,
     edgeInsetsDirectional: edgeInsetsDirectional?.call(this.edgeInsetsDirectional) ?? this.edgeInsetsDirectional,
     edgeInsetsGeometry: edgeInsetsGeometry?.call(this.edgeInsetsGeometry) ?? this.edgeInsetsGeometry,
+    iconData: iconData ?? this.iconData,
     iconThemeData: iconThemeData?.call(this.iconThemeData) ?? this.iconThemeData,
     textStyle: textStyle?.call(this.textStyle) ?? this.textStyle,
     boxShadows: boxShadows ?? this.boxShadows,
     shadows: shadows ?? this.shadows,
+    extensions: extensions ?? this.extensions,
     boxDecorationVariants: boxDecorationVariants?.call(this.boxDecorationVariants) ?? this.boxDecorationVariants,
     nullableBoxDecorationVariants:
         nullableBoxDecorationVariants?.call(this.nullableBoxDecorationVariants) ?? this.nullableBoxDecorationVariants,
@@ -223,10 +229,16 @@ extension $FGoldenStyleTransformations on FGoldenStyle {
     edgeInsets: .lerp(edgeInsets, other.edgeInsets, t) ?? edgeInsets,
     edgeInsetsDirectional: .lerp(edgeInsetsDirectional, other.edgeInsetsDirectional, t) ?? edgeInsetsDirectional,
     edgeInsetsGeometry: .lerp(edgeInsetsGeometry, other.edgeInsetsGeometry, t) ?? edgeInsetsGeometry,
+    iconData: t < 0.5 ? iconData : other.iconData,
     iconThemeData: .lerp(iconThemeData, other.iconThemeData, t),
     textStyle: .lerp(textStyle, other.textStyle, t) ?? textStyle,
     boxShadows: BoxShadow.lerpList(boxShadows, other.boxShadows, t) ?? boxShadows,
     shadows: Shadow.lerpList(shadows, other.shadows, t) ?? shadows,
+    extensions: {
+      for (final e in extensions) e.lerp(other.extensions.where((o) => o.type == e.type).firstOrNull, t),
+      for (final e in other.extensions)
+        if (!extensions.any((x) => x.type == e.type)) e,
+    },
     boxDecorationVariants: .lerpBoxDecoration(boxDecorationVariants, other.boxDecorationVariants, t),
     nullableBoxDecorationVariants: .lerpWhere(
       nullableBoxDecorationVariants,
@@ -284,10 +296,12 @@ mixin _$FGoldenStyleFunctions on Diagnosticable implements FGoldenStyleDelta {
   EdgeInsets get edgeInsets;
   EdgeInsetsDirectional get edgeInsetsDirectional;
   EdgeInsetsGeometry get edgeInsetsGeometry;
+  IconData get iconData;
   IconThemeData get iconThemeData;
   TextStyle get textStyle;
   List<BoxShadow> get boxShadows;
   List<Shadow> get shadows;
+  Set<ThemeExtension<dynamic>> get extensions;
   FVariants<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration, BoxDecorationDelta> get boxDecorationVariants;
   FVariants<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration?, BoxDecorationDelta>
   get nullableBoxDecorationVariants;
@@ -324,10 +338,12 @@ mixin _$FGoldenStyleFunctions on Diagnosticable implements FGoldenStyleDelta {
       ..add(DiagnosticsProperty('edgeInsets', edgeInsets, level: .debug))
       ..add(DiagnosticsProperty('edgeInsetsDirectional', edgeInsetsDirectional, level: .debug))
       ..add(DiagnosticsProperty('edgeInsetsGeometry', edgeInsetsGeometry, level: .debug))
+      ..add(IconDataProperty('iconData', iconData, level: .debug))
       ..add(DiagnosticsProperty('iconThemeData', iconThemeData, level: .debug))
       ..add(DiagnosticsProperty('textStyle', textStyle, level: .debug))
       ..add(IterableProperty('boxShadows', boxShadows, level: .debug))
       ..add(IterableProperty('shadows', shadows, level: .debug))
+      ..add(IterableProperty('extensions', extensions, level: .debug))
       ..add(DiagnosticsProperty('boxDecorationVariants', boxDecorationVariants, level: .debug))
       ..add(DiagnosticsProperty('nullableBoxDecorationVariants', nullableBoxDecorationVariants, level: .debug))
       ..add(DiagnosticsProperty('decorationVariants', decorationVariants, level: .debug))
@@ -364,10 +380,12 @@ mixin _$FGoldenStyleFunctions on Diagnosticable implements FGoldenStyleDelta {
           edgeInsets == other.edgeInsets &&
           edgeInsetsDirectional == other.edgeInsetsDirectional &&
           edgeInsetsGeometry == other.edgeInsetsGeometry &&
+          iconData == other.iconData &&
           iconThemeData == other.iconThemeData &&
           textStyle == other.textStyle &&
           listEquals(boxShadows, other.boxShadows) &&
           listEquals(shadows, other.shadows) &&
+          setEquals(extensions, other.extensions) &&
           boxDecorationVariants == other.boxDecorationVariants &&
           nullableBoxDecorationVariants == other.nullableBoxDecorationVariants &&
           decorationVariants == other.decorationVariants &&
@@ -400,10 +418,12 @@ mixin _$FGoldenStyleFunctions on Diagnosticable implements FGoldenStyleDelta {
       edgeInsets.hashCode ^
       edgeInsetsDirectional.hashCode ^
       edgeInsetsGeometry.hashCode ^
+      iconData.hashCode ^
       iconThemeData.hashCode ^
       textStyle.hashCode ^
       const ListEquality().hash(boxShadows) ^
       const ListEquality().hash(shadows) ^
+      const SetEquality().hash(extensions) ^
       boxDecorationVariants.hashCode ^
       nullableBoxDecorationVariants.hashCode ^
       decorationVariants.hashCode ^
@@ -442,10 +462,12 @@ abstract class FGoldenStyleDelta with Delta {
   /// * [FGoldenStyle.edgeInsets]
   /// * [FGoldenStyle.edgeInsetsDirectional]
   /// * [FGoldenStyle.edgeInsetsGeometry]
+  /// * [FGoldenStyle.iconData]
   /// * [FGoldenStyle.iconThemeData]
   /// * [FGoldenStyle.textStyle]
   /// * [FGoldenStyle.boxShadows]
   /// * [FGoldenStyle.shadows]
+  /// * [FGoldenStyle.extensions]
   /// * [FGoldenStyle.boxDecorationVariants]
   /// * [FGoldenStyle.nullableBoxDecorationVariants]
   /// * [FGoldenStyle.decorationVariants]
@@ -476,10 +498,12 @@ abstract class FGoldenStyleDelta with Delta {
     EdgeInsetsDelta? edgeInsets,
     EdgeInsetsDirectionalDelta? edgeInsetsDirectional,
     EdgeInsetsGeometryDelta? edgeInsetsGeometry,
+    IconData? iconData,
     IconThemeDataDelta? iconThemeData,
     TextStyleDelta? textStyle,
     List<BoxShadow>? boxShadows,
     List<Shadow>? shadows,
+    Set<ThemeExtension<dynamic>>? extensions,
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration, BoxDecorationDelta>? boxDecorationVariants,
     FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration?, BoxDecorationDelta>?
     nullableBoxDecorationVariants,
@@ -523,10 +547,12 @@ class _FGoldenStyleDelta implements FGoldenStyleDelta {
     this.edgeInsets,
     this.edgeInsetsDirectional,
     this.edgeInsetsGeometry,
+    this.iconData,
     this.iconThemeData,
     this.textStyle,
     this.boxShadows,
     this.shadows,
+    this.extensions,
     this.boxDecorationVariants,
     this.nullableBoxDecorationVariants,
     this.decorationVariants,
@@ -570,6 +596,8 @@ class _FGoldenStyleDelta implements FGoldenStyleDelta {
 
   final EdgeInsetsGeometryDelta? edgeInsetsGeometry;
 
+  final IconData? iconData;
+
   final IconThemeDataDelta? iconThemeData;
 
   final TextStyleDelta? textStyle;
@@ -577,6 +605,8 @@ class _FGoldenStyleDelta implements FGoldenStyleDelta {
   final List<BoxShadow>? boxShadows;
 
   final List<Shadow>? shadows;
+
+  final Set<ThemeExtension<dynamic>>? extensions;
 
   final FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration, BoxDecorationDelta>?
   boxDecorationVariants;
@@ -633,10 +663,12 @@ class _FGoldenStyleDelta implements FGoldenStyleDelta {
     edgeInsetsDirectional:
         edgeInsetsDirectional?.call(original.edgeInsetsDirectional) ?? original.edgeInsetsDirectional,
     edgeInsetsGeometry: edgeInsetsGeometry?.call(original.edgeInsetsGeometry) ?? original.edgeInsetsGeometry,
+    iconData: iconData ?? original.iconData,
     iconThemeData: iconThemeData?.call(original.iconThemeData) ?? original.iconThemeData,
     textStyle: textStyle?.call(original.textStyle) ?? original.textStyle,
     boxShadows: boxShadows ?? original.boxShadows,
     shadows: shadows ?? original.shadows,
+    extensions: extensions ?? original.extensions,
     boxDecorationVariants:
         boxDecorationVariants?.call(original.boxDecorationVariants) ?? original.boxDecorationVariants,
     nullableBoxDecorationVariants:

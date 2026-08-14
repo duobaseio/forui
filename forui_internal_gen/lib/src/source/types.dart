@@ -27,17 +27,15 @@ const borderRadiusGeometry = TypeChecker.fromUrl(
   'package:flutter/src/painting/border_radius.dart#BorderRadiusGeometry',
 );
 const boxConstraints = TypeChecker.fromUrl('package:flutter/src/rendering/box.dart#BoxConstraints');
-const boxDecoration = TypeChecker.fromUrl('package:flutter/src/painting/box_decoration.dart#BoxDecoration');
 const decoration = TypeChecker.fromUrl('package:flutter/src/painting/decoration.dart#Decoration');
 const edgeInsetsGeometry = TypeChecker.fromUrl('package:flutter/src/painting/edge_insets.dart#EdgeInsetsGeometry');
-const iconData = TypeChecker.fromUrl('package:flutter/src/widgets/icon_theme.dart#IconData');
+const iconData = TypeChecker.fromUrl('package:flutter/src/widgets/icon_data.dart#IconData');
 const iconThemeData = TypeChecker.fromUrl('package:flutter/src/widgets/icon_theme_data.dart#IconThemeData');
 const textStyle = TypeChecker.fromUrl('package:flutter/src/painting/text_style.dart#TextStyle');
 const boxShadow = TypeChecker.fromUrl('package:flutter/src/painting/box_shadow.dart#BoxShadow');
 const shadow = TypeChecker.fromUrl('dart:ui#Shadow');
-const themeExtension = TypeChecker.fromUrl('package:flutter/src/material/theme_data.dart#ThemeExtension');
+const themeExtension = TypeChecker.fromUrl('package:material_ui/src/theme_data.dart#ThemeExtension');
 
-const fWidgetStateMap = TypeChecker.fromUrl('package:forui/src/theme/widget_state_map.dart#FWidgetStateMap');
 const fVariants = TypeChecker.fromUrl('package:forui/src/theme/variants.dart#FVariants');
 
 // Annotations
