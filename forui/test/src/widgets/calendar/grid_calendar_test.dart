@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:ui' as ui;
 
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
 import 'package:flutter_test/flutter_test.dart';
@@ -32,19 +34,37 @@ void main() {
     FGridCalendarControl? control,
     FCalendarHeaderBuilder<FGridCalendarController> headerBuilder = FCalendar.defaultHeaderBuilder,
     FCalendarFooterBuilder<FGridCalendarController> footerBuilder = FCalendar.defaultFooterBuilder,
+    FCalendarDayBuilder dayBuilder = FCalendar.defaultDayBuilder,
     FutureOr<void> Function(DateTime)? onDayPress,
     FutureOr<void> Function(DateTime)? onDayLongPress,
-  }) => TestScaffold.app(
-    child: FCalendar.grid(
+    Key? repaintBoundaryKey,
+  }) {
+    final child = FCalendar.grid(
       selectionControl: selectionControl,
       control:
           control ?? FGridCalendarControl(start: .utc(2023, 2, 8), today: .utc(2024, 7, 14), end: .utc(2025, 8, 10)),
       headerBuilder: headerBuilder,
       footerBuilder: footerBuilder,
+      dayBuilder: dayBuilder,
       onDayPress: onDayPress,
       onDayLongPress: onDayLongPress,
-    ),
-  );
+    );
+
+    return TestScaffold.app(
+      child: repaintBoundaryKey == null ? child : RepaintBoundary(key: repaintBoundaryKey, child: child),
+    );
+  }
+
+  Future<Color> pixel(WidgetTester tester, Finder boundary, Offset global) async {
+    final render = tester.renderObject<RenderRepaintBoundary>(boundary);
+    final image = await render.toImage();
+    final data = (await image.toByteData(format: ui.ImageByteFormat.rawRgba))!;
+    final local = render.globalToLocal(global);
+    final offset = (local.dy.floor() * image.width + local.dx.floor()) * 4;
+    final color = Color.fromARGB(255, data.getUint8(offset), data.getUint8(offset + 1), data.getUint8(offset + 2));
+    image.dispose();
+    return color;
+  }
 
   group('switching', () {
     testWidgets('initial state shows the day grid for the initial month', (tester) async {
@@ -274,6 +294,38 @@ void main() {
   });
 
   group('navigation', () {
+    testWidgets('day labels paint through horizontal padding while dragging', (tester) async {
+      const boundaryKey = ValueKey('calendar-boundary');
+      const dayColor = Color(0xFFFF0000);
+      await tester.pumpWidget(
+        calendar(
+          selectionControl: .managedSingle(),
+          control: control(),
+          repaintBoundaryKey: boundaryKey,
+          dayBuilder: (_, _, _, _, _) => const ColoredBox(color: dayColor),
+        ),
+      );
+
+      final calendarRect = tester.getRect(find.byType(FCalendar));
+      final pageRect = tester.getRect(find.byType(PageView));
+      expect(pageRect.left - calendarRect.left, greaterThan(0));
+      final clip = tester.widget<ClipRect>(
+        find.descendant(
+          of: find.byType(DayPicker),
+          matching: find.byWidgetPredicate((widget) => widget is ClipRect && widget.child is PageView),
+        ),
+      );
+      expect(clip.clipper!.getClip(pageRect.size), Rect.fromLTRB(-12, 0, pageRect.width + 12, pageRect.height));
+
+      final gesture = await tester.startGesture(pageRect.center);
+      addTearDown(gesture.up);
+      await gesture.moveBy(Offset(-pageRect.width / 2, 0));
+      await tester.pump();
+
+      final sample = Offset(pageRect.left - 6, pageRect.top + 66);
+      expect(await pixel(tester, find.byKey(boundaryKey), sample), dayColor);
+    });
+
     testWidgets('the previous button navigates to the previous month', (tester) async {
       await tester.pumpWidget(calendar(selectionControl: .managedSingle(), control: control()));
 

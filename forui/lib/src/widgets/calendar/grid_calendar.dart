@@ -63,6 +63,7 @@ class const GridCalendar({
         DayPicker(
           controller: controller.day,
           style: style.dayPickerStyle,
+          clipPadding: style.padding,
           localization: localizations,
           today: controller.today,
           selected: selectionController.contains,
@@ -243,6 +244,7 @@ class const GridSplitCalendar({
         DayPicker(
           controller: controller.day,
           style: style.dayPickerStyle,
+          clipPadding: style.padding,
           localization: localizations,
           today: controller.today,
           selected: selectionController.contains,
