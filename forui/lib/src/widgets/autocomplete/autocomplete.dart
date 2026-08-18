@@ -96,6 +96,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
     bool autocorrect = true,
     SmartDashesType? smartDashesType,
     SmartQuotesType? smartQuotesType,
+    bool autocompleteEnabled = true,
     bool enableSuggestions = true,
     int? minLines,
     int? maxLines = 1,
@@ -197,6 +198,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
     autocorrect: autocorrect,
     smartDashesType: smartDashesType,
     smartQuotesType: smartQuotesType,
+    autocompleteEnabled: autocompleteEnabled,
     enableSuggestions: enableSuggestions,
     minLines: minLines,
     maxLines: maxLines,
@@ -294,6 +296,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
     bool autocorrect = true,
     SmartDashesType? smartDashesType,
     SmartQuotesType? smartQuotesType,
+    bool autocompleteEnabled = true,
     bool enableSuggestions = true,
     int? minLines,
     int? maxLines = 1,
@@ -393,6 +396,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
     autocorrect: autocorrect,
     smartDashesType: smartDashesType,
     smartQuotesType: smartQuotesType,
+    autocompleteEnabled: autocompleteEnabled,
     enableSuggestions: enableSuggestions,
     minLines: minLines,
     maxLines: maxLines,
@@ -550,6 +554,12 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
 
   /// {@macro forui.text_field.smartQuotesType}
   final SmartQuotesType? smartQuotesType;
+
+  /// Whether suggestions and inline typeahead are enabled. Defaults to true.
+  ///
+  /// When false, the autocomplete behaves like an ordinary text field. Changing this from true to false immediately
+  /// hides the suggestions and inline typeahead without changing the field's text, selection, or focus.
+  final bool autocompleteEnabled;
 
   /// {@macro forui.text_field.enableSuggestions}
   final bool enableSuggestions;
@@ -820,6 +830,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
     bool autocorrect = true,
     SmartDashesType? smartDashesType,
     SmartQuotesType? smartQuotesType,
+    bool autocompleteEnabled = true,
     bool enableSuggestions = true,
     int? minLines,
     int? maxLines = 1,
@@ -926,6 +937,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
          autocorrect: autocorrect,
          smartDashesType: smartDashesType,
          smartQuotesType: smartQuotesType,
+         autocompleteEnabled: autocompleteEnabled,
          enableSuggestions: enableSuggestions,
          minLines: minLines,
          maxLines: maxLines,
@@ -1028,6 +1040,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
     this.autocorrect = true,
     this.smartDashesType,
     this.smartQuotesType,
+    this.autocompleteEnabled = true,
     this.enableSuggestions = true,
     this.minLines,
     this.maxLines = 1,
@@ -1124,6 +1137,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
       ..add(FlagProperty('autocorrect', value: autocorrect, ifTrue: 'autocorrect'))
       ..add(EnumProperty('smartDashesType', smartDashesType))
       ..add(EnumProperty('smartQuotesType', smartQuotesType))
+      ..add(FlagProperty('autocompleteEnabled', value: autocompleteEnabled, ifTrue: 'autocompleteEnabled'))
       ..add(FlagProperty('enableSuggestions', value: enableSuggestions, ifTrue: 'enableSuggestions'))
       ..add(IntProperty('minLines', minLines))
       ..add(IntProperty('maxLines', maxLines))
@@ -1235,7 +1249,7 @@ class _State<T> extends State<FAutocomplete<T>> with TickerProviderStateMixin {
     _popoverFocus = FocusScopeNode(debugLabel: 'FAutocomplete popover');
     _popoverController = widget.popoverControl.create(_handleOnPopoverChange, this);
     _controller = widget.control.create(_update);
-    _controller.loadSuggestions(_format(_data = widget.filter(_controller.text))).ignore();
+    _loadAutocomplete();
   }
 
   @override
@@ -1254,11 +1268,17 @@ class _State<T> extends State<FAutocomplete<T>> with TickerProviderStateMixin {
     final (controller, updated) = widget.control.update(old.control, _controller, _update);
     if (updated) {
       _controller = controller;
-      _controller.loadSuggestions(_format(_data = widget.filter(_controller.text))).ignore();
+      _loadAutocomplete();
     }
     _popoverController = widget.popoverControl
         .update(old.popoverControl, _popoverController, _handleOnPopoverChange, this)
         .$1;
+
+    if (old.autocompleteEnabled && !widget.autocompleteEnabled) {
+      _disableAutocomplete();
+    } else if (!old.autocompleteEnabled && widget.autocompleteEnabled && !updated) {
+      _loadAutocomplete();
+    }
   }
 
   @override
@@ -1286,6 +1306,12 @@ class _State<T> extends State<FAutocomplete<T>> with TickerProviderStateMixin {
     }
 
     if (!_mutating) {
+      if (!widget.autocompleteEnabled) {
+        _data = <T>[];
+        _controller.loadSuggestions(const <String>[]).ignore();
+        return;
+      }
+
       setState(() {
         _controller.loadSuggestions(_format(_data = widget.filter(_controller.text))).ignore();
       });
@@ -1295,6 +1321,24 @@ class _State<T> extends State<FAutocomplete<T>> with TickerProviderStateMixin {
         _toggle();
       }
     }
+  }
+
+  void _loadAutocomplete() {
+    if (widget.autocompleteEnabled) {
+      _controller.loadSuggestions(_format(_data = widget.filter(_controller.text))).ignore();
+    } else {
+      _data = <T>[];
+      _controller.loadSuggestions(const <String>[]).ignore();
+    }
+  }
+
+  void _disableAutocomplete() {
+    ++_monotonic;
+    _count = null;
+    _restore = null;
+    _data = <T>[];
+    _controller.loadSuggestions(const <String>[]).ignore();
+    _popoverController.hide();
   }
 
   FutureOr<Iterable<String>> _format(FutureOr<Iterable<T>> result) => switch (result) {
@@ -1310,7 +1354,9 @@ class _State<T> extends State<FAutocomplete<T>> with TickerProviderStateMixin {
         _controller.selection = TextSelection(baseOffset: 0, extentOffset: _controller.text.length);
       }
       _tapFocus = false;
-      _toggle();
+      if (widget.autocompleteEnabled) {
+        _toggle();
+      }
       // Hide the popover when focus leaves the autocomplete entirely (field and popover both unfocused). Keeps the
       // popover open while the user is keyboard-navigating items (popover has focus), or while an item tap is
       // unfocusing the field (handled by onPress's autoHide flag instead).
@@ -1324,6 +1370,13 @@ class _State<T> extends State<FAutocomplete<T>> with TickerProviderStateMixin {
   }
 
   void _toggle() {
+    if (!widget.autocompleteEnabled) {
+      ++_monotonic;
+      _count = null;
+      _popoverController.hide();
+      return;
+    }
+
     final token = ++_monotonic;
     final data = _data;
 
@@ -1345,7 +1398,7 @@ class _State<T> extends State<FAutocomplete<T>> with TickerProviderStateMixin {
     }
 
     // Don't re-show after unfocus: a pending async filter completing must not reopen the popover.
-    if (show && !_fieldFocus.hasFocus) {
+    if (show && (!widget.autocompleteEnabled || !_fieldFocus.hasFocus)) {
       return;
     }
 
@@ -1363,7 +1416,7 @@ class _State<T> extends State<FAutocomplete<T>> with TickerProviderStateMixin {
   };
 
   void _announce(int token, int count) {
-    if (!mounted || token != _monotonic || !_fieldFocus.hasFocus) {
+    if (!mounted || token != _monotonic || !widget.autocompleteEnabled || !_fieldFocus.hasFocus) {
       return;
     }
 

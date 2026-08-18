@@ -112,6 +112,108 @@ void main() {
     });
   });
 
+  group('autocompleteEnabled', () {
+    testWidgets('initially disabled behaves like an ordinary text field', (tester) async {
+      final focus = autoDispose(FocusNode());
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: FAutocomplete.text(
+            key: key,
+            control: .managed(controller: controller),
+            popoverControl: .managed(controller: popoverController),
+            focusNode: focus,
+            autocompleteEnabled: false,
+            items: fruits,
+          ),
+        ),
+      );
+
+      await tester.enterText(find.byKey(key), 'App');
+      await tester.pumpAndSettle();
+
+      expect(controller.text, 'App');
+      expect(controller.current, null);
+      expect(focus.hasFocus, true);
+      expect(popoverController.status.isForwardOrCompleted, false);
+    });
+
+    testWidgets('disabling dismisses autocomplete without changing field state', (tester) async {
+      final focus = autoDispose(FocusNode());
+      late StateSetter rebuild;
+      var autocompleteEnabled = true;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: StatefulBuilder(
+            builder: (context, setState) {
+              rebuild = setState;
+              return FAutocomplete.text(
+                key: key,
+                control: .managed(controller: controller),
+                popoverControl: .managed(controller: popoverController),
+                focusNode: focus,
+                autocompleteEnabled: autocompleteEnabled,
+                items: fruits,
+              );
+            },
+          ),
+        ),
+      );
+
+      await tester.enterText(find.byKey(key), 'App');
+      await tester.pumpAndSettle();
+      expect(controller.current, isNotNull);
+      expect(popoverController.status.isForwardOrCompleted, true);
+
+      final value = controller.value;
+      rebuild(() => autocompleteEnabled = false);
+      await tester.pumpAndSettle();
+
+      expect(controller.value, value);
+      expect(controller.current, null);
+      expect(focus.hasFocus, true);
+      expect(popoverController.status.isForwardOrCompleted, false);
+      expect(tester.takeException(), null);
+    });
+
+    testWidgets('re-enabling restores autocomplete on the next input', (tester) async {
+      late StateSetter rebuild;
+      var autocompleteEnabled = false;
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          child: StatefulBuilder(
+            builder: (context, setState) {
+              rebuild = setState;
+              return FAutocomplete.text(
+                key: key,
+                control: .managed(controller: controller),
+                popoverControl: .managed(controller: popoverController),
+                autocompleteEnabled: autocompleteEnabled,
+                items: fruits,
+              );
+            },
+          ),
+        ),
+      );
+
+      await tester.enterText(find.byKey(key), 'App');
+      await tester.pumpAndSettle();
+      expect(controller.current, null);
+      expect(popoverController.status.isForwardOrCompleted, false);
+
+      rebuild(() => autocompleteEnabled = true);
+      await tester.pump();
+      await tester.enterText(find.byKey(key), 'Appl');
+      await tester.pumpAndSettle();
+
+      expect(controller.current, isNotNull);
+      expect(popoverController.status.isForwardOrCompleted, true);
+      expect(tester.takeException(), null);
+    });
+  });
+
   group('focus', () {
     testWidgets('external focus is not disposed', (tester) async {
       final focus = autoDispose(FocusNode());

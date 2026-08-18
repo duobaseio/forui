@@ -4,6 +4,7 @@ This update migrates Forui from the deprecated `flutter/cupertino.dart` & `flutt
 `cupertino_ui` & `material_ui` packages.
 
 ### `FAutocomplete`
+* Add `FAutocomplete.autocompleteEnabled`.
 * Add `FAutocomplete.clearIconBuilder`.
 
 
