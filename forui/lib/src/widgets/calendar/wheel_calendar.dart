@@ -126,6 +126,7 @@ class WheelCalendar extends StatelessWidget {
             DayPicker(
               controller: controller.day,
               style: style.dayPickerStyle,
+              clipPadding: style.padding,
               localization: localizations,
               today: controller.today,
               selected: selectionController.contains,

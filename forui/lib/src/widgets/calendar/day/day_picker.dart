@@ -30,6 +30,7 @@ extension DateTimes on DateTime {
 class DayPicker extends StatelessWidget {
   final FCalendarDayPickerController controller;
   final FCalendarDayPickerStyle style;
+  final EdgeInsetsGeometry clipPadding;
   final FLocalizations localization;
   final DateTime today;
   final bool Function(DateTime) selected;
@@ -44,6 +45,7 @@ class DayPicker extends StatelessWidget {
   const DayPicker({
     required this.controller,
     required this.style,
+    this.clipPadding = .zero,
     required this.localization,
     required this.today,
     required this.selected,
@@ -91,35 +93,39 @@ class DayPicker extends StatelessWidget {
           controller.focus(controller.focusable(current, preferred));
         }
       },
-      child: PageView.builder(
-        controller: controller.controller,
-        physics: scrollPhysics,
-        scrollCacheExtent: scrollCacheExtent,
-        scrollBehavior: scrollBehavior,
-        onPageChanged: (page) {
-          controller.onPageChange(page);
-          SemanticsService.sendAnnouncement(
-            View.of(context),
-            DateFormat.yMMMM(localization.localeName).format(controller.to(page)),
-            Directionality.of(context),
-          );
-        },
-        itemCount: controller.pages,
-        itemBuilder: (_, page) => ListenableBuilder(
-          listenable: controller,
-          builder: (_, _) => _Grid(
-            style: style,
-            localization: localization,
-            height: _height(page),
-            month: controller.to(page),
-            today: today,
-            focused: controller.focused,
-            selectable: controller.selectable,
-            selected: selected,
-            fixedWeeks: fixedWeeks,
-            onPress: onPress,
-            onLongPress: onLongPress,
-            builder: builder,
+      child: ClipRect(
+        clipper: _HorizontalPaddingClipper(clipPadding.resolve(Directionality.of(context))),
+        child: PageView.builder(
+          clipBehavior: .none,
+          controller: controller.controller,
+          physics: scrollPhysics,
+          scrollCacheExtent: scrollCacheExtent,
+          scrollBehavior: scrollBehavior,
+          onPageChanged: (page) {
+            controller.onPageChange(page);
+            SemanticsService.sendAnnouncement(
+              View.of(context),
+              DateFormat.yMMMM(localization.localeName).format(controller.to(page)),
+              Directionality.of(context),
+            );
+          },
+          itemCount: controller.pages,
+          itemBuilder: (_, page) => ListenableBuilder(
+            listenable: controller,
+            builder: (_, _) => _Grid(
+              style: style,
+              localization: localization,
+              height: _height(page),
+              month: controller.to(page),
+              today: today,
+              focused: controller.focused,
+              selectable: controller.selectable,
+              selected: selected,
+              fixedWeeks: fixedWeeks,
+              onPress: onPress,
+              onLongPress: onLongPress,
+              builder: builder,
+            ),
           ),
         ),
       ),
@@ -166,6 +172,7 @@ class DayPicker extends StatelessWidget {
     properties
       ..add(DiagnosticsProperty('controller', controller))
       ..add(DiagnosticsProperty('style', style))
+      ..add(DiagnosticsProperty('clipPadding', clipPadding))
       ..add(DiagnosticsProperty('localization', localization))
       ..add(DiagnosticsProperty('today', today))
       ..add(ObjectFlagProperty.has('selected', selected))
@@ -177,6 +184,18 @@ class DayPicker extends StatelessWidget {
       ..add(ObjectFlagProperty.has('onLongPress', onLongPress))
       ..add(ObjectFlagProperty.has('builder', builder));
   }
+}
+
+class _HorizontalPaddingClipper extends CustomClipper<Rect> {
+  final EdgeInsets padding;
+
+  const _HorizontalPaddingClipper(this.padding);
+
+  @override
+  Rect getClip(Size size) => Rect.fromLTRB(-padding.left, 0, size.width + padding.right, size.height);
+
+  @override
+  bool shouldReclip(_HorizontalPaddingClipper old) => padding != old.padding;
 }
 
 class _Viewport extends InheritedWidget {

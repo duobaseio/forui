@@ -89,6 +89,7 @@ class GridCalendar extends StatelessWidget {
         DayPicker(
           controller: controller.day,
           style: style.dayPickerStyle,
+          clipPadding: style.padding,
           localization: localizations,
           today: controller.today,
           selected: selectionController.contains,
@@ -292,6 +293,7 @@ class GridSplitCalendar extends StatelessWidget {
         DayPicker(
           controller: controller.day,
           style: style.dayPickerStyle,
+          clipPadding: style.padding,
           localization: localizations,
           today: controller.today,
           selected: selectionController.contains,
