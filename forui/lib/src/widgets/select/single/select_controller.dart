@@ -47,12 +47,8 @@ class _ProxyController<T> extends FSelectController<T> {
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FSelectControl<T> with Diagnosticable, _$FSelectControlMixin<T> {
   /// Creates a [FSelectControl].
-  const factory managed({
-    FSelectController<T>? controller,
-    T? initial,
-    bool toggleable,
-    ValueChanged<T?>? onChange,
-  }) = FSelectManagedControl<T>;
+  const factory managed({FSelectController<T>? controller, T? initial, bool toggleable, ValueChanged<T?>? onChange}) =
+      FSelectManagedControl<T>;
 
   /// Creates a [FSelectControl] for controlling select using lifted state.
   ///

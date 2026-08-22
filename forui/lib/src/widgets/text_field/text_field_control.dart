@@ -8,12 +8,11 @@ import 'package:forui/widgets/text_field.dart' show FTextField;
 part 'text_field_control.control.dart';
 
 @internal
-class TextFieldControl extends StatefulWidget {
-  final FTextFieldControl control;
-  final ValueWidgetBuilder<TextEditingController> builder;
-
-  const new({required this.control, required this.builder, super.key});
-
+class const TextFieldControl({
+  required final FTextFieldControl control,
+  required final ValueWidgetBuilder<TextEditingController> builder,
+  super.key,
+}) extends StatefulWidget {
   @override
   State<TextFieldControl> createState() => _TextFieldControlState();
 
@@ -96,10 +95,7 @@ sealed class FTextFieldControl with Diagnosticable, _$FTextFieldControlMixin {
   }) = FTextFieldManagedControl;
 
   /// Creates a [FTextFieldControl] for controlling a text field using lifted state.
-  const factory lifted({
-    required TextEditingValue value,
-    required ValueChanged<TextEditingValue> onChange,
-  }) = _Lifted;
+  const factory lifted({required TextEditingValue value, required ValueChanged<TextEditingValue> onChange}) = _Lifted;
 
   const new _();
 

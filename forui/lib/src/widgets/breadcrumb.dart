@@ -192,29 +192,20 @@ abstract interface class FBreadcrumbItem extends Widget {
   }) = _CollapsedCrumb.tiles;
 }
 
-// ignore: avoid_implementing_value_types
-class _Crumb extends StatelessWidget implements FBreadcrumbItem {
-  final bool current;
-  final bool autofocus;
-  final FocusNode? focusNode;
-  final ValueChanged<bool>? onFocusChange;
-  final ValueChanged<bool>? onHoverChange;
-  final FTappableVariantChangeCallback? onVariantChange;
-  final VoidCallback? onPress;
-  final Widget child;
-
-  const new({
-    required this.child,
-    this.onPress,
-    this.current = false,
-    this.autofocus = false,
-    this.focusNode,
-    this.onFocusChange,
-    this.onHoverChange,
-    this.onVariantChange,
-    super.key,
-  });
-
+class const _Crumb({
+  required final Widget child,
+  final VoidCallback? onPress,
+  final bool current = false,
+  final bool autofocus = false,
+  final FocusNode? focusNode,
+  final ValueChanged<bool>? onFocusChange,
+  final ValueChanged<bool>? onHoverChange,
+  final FTappableVariantChangeCallback? onVariantChange,
+  super.key,
+}) extends StatelessWidget
+    implements
+        // ignore: avoid_implementing_value_types
+        FBreadcrumbItem {
   @override
   Widget build(BuildContext context) {
     final style = FBreadcrumbItemData.of(context).style;

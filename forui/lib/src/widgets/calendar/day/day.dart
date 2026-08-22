@@ -26,34 +26,27 @@ import 'package:forui/src/theme/variant.dart';
 part 'day.design.dart';
 
 /// A calendar day builder.
-typedef FCalendarDayBuilder =
-    Widget Function(BuildContext, FCalendarDayStyles, FLocalizations, DateTime, Set<FCalendarDayVariant>);
+typedef FCalendarDayBuilder = Widget Function(
+  BuildContext,
+  FCalendarDayStyles,
+  FLocalizations,
+  DateTime,
+  Set<FCalendarDayVariant>,
+);
 
 @internal
-class Day extends StatelessWidget {
-  final FCalendarDayStyles styles;
-  final FLocalizations localizations;
-  final DateTime date;
-  final bool selected; // Optimization to avoid having to perform 4 checks.
-  final Set<FCalendarDayVariant> variants;
-  final FocusNode focusNode;
-  final VoidCallback? onPress;
-  final VoidCallback? onLongPress;
-  final FCalendarDayBuilder builder;
-
-  const new({
-    required this.styles,
-    required this.localizations,
-    required this.date,
-    required this.selected,
-    required this.variants,
-    required this.focusNode,
-    required this.onPress,
-    required this.onLongPress,
-    required this.builder,
-    super.key,
-  });
-
+class const Day({
+  required final FCalendarDayStyles styles,
+  required final FLocalizations localizations,
+  required final DateTime date,
+  required final bool selected, // Optimization to avoid having to perform 4 checks.
+  required final Set<FCalendarDayVariant> variants,
+  required final FocusNode focusNode,
+  required final VoidCallback? onPress,
+  required final VoidCallback? onLongPress,
+  required final FCalendarDayBuilder builder,
+  super.key,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final semanticsLabel = DateFormat.yMMMMEEEEd(localizations.localeName).format(date);
@@ -107,14 +100,10 @@ class FCalendarDayStyle with Diagnosticable, _$FCalendarDayStyleFunctions {
 
 /// [FCalendarDayStyle]'s variants.
 extension type FCalendarDayStyles(
-  FVariants<FCalendarDayVariantConstraint, FCalendarDayVariant, FCalendarDayStyle, FCalendarDayStyleDelta> _
+  FVariants<FCalendarDayVariantConstraint, FCalendarDayVariant, FCalendarDayStyle, FCalendarDayStyleDelta> _,
 ) implements FVariants<FCalendarDayVariantConstraint, FCalendarDayVariant, FCalendarDayStyle, FCalendarDayStyleDelta> {
   /// Creates a [FCalendarDayStyles] that inherits its properties.
-  factory inherit({
-    required FColors colors,
-    required FTypography typography,
-    required FStyle style,
-  }) {
+  factory inherit({required FColors colors, required FTypography typography, required FStyle style}) {
     final base = FCalendarDayStyle(
       textStyle: typography.body.sm.copyWith(color: colors.foreground),
       foreground: ShapeDecoration(shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md)),

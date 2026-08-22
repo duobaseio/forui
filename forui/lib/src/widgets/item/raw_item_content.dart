@@ -110,12 +110,8 @@ class FRawItemContentStyle with Diagnosticable, _$FRawItemContentStyleFunctions 
   final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> childTextStyle;
 
   /// Creates a [FRawItemContentStyle].
-  new({
-    required this.prefixIconStyle,
-    required this.childTextStyle,
-    required this.padding,
-    this.prefixIconSpacing = 8,
-  }) : assert(0 <= prefixIconSpacing, 'prefixIconSpacing ($prefixIconSpacing) must be >= 0');
+  new({required this.prefixIconStyle, required this.childTextStyle, required this.padding, this.prefixIconSpacing = 8})
+    : assert(0 <= prefixIconSpacing, 'prefixIconSpacing ($prefixIconSpacing) must be >= 0');
 
   /// Creates a [FRawItemContentStyle] that inherits its properties.
   new inherit({

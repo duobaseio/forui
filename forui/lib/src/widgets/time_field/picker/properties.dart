@@ -4,39 +4,39 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 @internal
-class FTimeFieldPickerProperties with Diagnosticable {
+class const FTimeFieldPickerProperties({
   /// The alignment point on the picker popover. Defaults to [Alignment.topLeft].
-  final AlignmentGeometry anchor;
+  final AlignmentGeometry anchor = .topLeft,
 
   /// The alignment point on the field. Defaults to [Alignment.bottomLeft].
-  final AlignmentGeometry fieldAnchor;
+  final AlignmentGeometry fieldAnchor = .bottomLeft,
 
   /// The constraints to apply to the picker popover. Defaults to `const FPortalConstraints(maxWidth: 200, maxHeight: 200)`.
-  final FPortalConstraints constraints;
+  final FPortalConstraints constraints = const FPortalConstraints(maxWidth: 200, maxHeight: 200),
 
   /// {@macro forui.widgets.FPopover.spacing}
-  final FPortalSpacing spacing;
+  final FPortalSpacing spacing = const .spacing(4),
 
   /// {@macro forui.widgets.FPopover.overflow}
-  final FPortalOverflow overflow;
-
-  /// {@macro forui.widgets.FPopover.offset}
-  final Offset offset;
+  final FPortalOverflow overflow = .flip,
 
   /// {@macro forui.foundation.FPortal.useViewPadding}
   ///
   /// Defaults to true.
-  final bool useViewPadding;
+  final bool useViewPadding = true,
 
   /// {@macro forui.foundation.FPortal.useViewInsets}
   ///
   /// Defaults to true.
-  final bool useViewInsets;
+  final bool useViewInsets = true,
 
   /// {@macro forui.foundation.FPortal.overlayLocation}
   ///
   /// Defaults to [OverlayChildLocation.nearestOverlay].
-  final OverlayChildLocation overlayLocation;
+  final OverlayChildLocation overlayLocation = .nearestOverlay,
+
+  /// {@macro forui.widgets.FPopover.offset}
+  final Offset offset = .zero,
 
   /// {@macro forui.widgets.FPopover.hideRegion}
   ///
@@ -44,53 +44,33 @@ class FTimeFieldPickerProperties with Diagnosticable {
   ///
   /// Setting [hideRegion] to [FPopoverHideRegion.anywhere] may result in the calendar disappearing and reappearing
   /// when pressing and holding the field, due to the popover being hidden and then immediately shown again.
-  final FPopoverHideRegion hideRegion;
+  final FPopoverHideRegion hideRegion = .excludeChild,
 
   /// {@macro forui.widgets.FPopover.groupId}
-  final Object? groupId;
+  final Object? groupId,
 
   /// Callback that is called when the time picker is tapped to hide it.
-  final VoidCallback? onTapHide;
+  final VoidCallback? onTapHide,
 
   /// {@macro forui.widgets.FPopover.cutout}
-  final bool cutout;
+  final bool cutout = true,
 
   /// {@macro forui.widgets.FPopover.cutoutBuilder}
-  final void Function(Path path, Rect bounds) cutoutBuilder;
+  final void Function(Path path, Rect bounds) cutoutBuilder = FModalBarrier.defaultCutoutBuilder,
 
   /// The builder used to wrap the time picker popover content.
-  final FTimeFieldPopoverBuilder popoverBuilder;
+  final FTimeFieldPopoverBuilder popoverBuilder = FPopover.defaultPopoverBuilder,
 
   /// The interval between hours shown in the time picker. Defaults to 1.
   ///
   /// For example, setting this to 6 will show hours like 0, 6, 12, and 18.
-  final int hourInterval;
+  final int hourInterval = 1,
 
   /// The interval between minutes shown in the time picker. Defaults to 1.
   ///
   /// For example, setting this to 15 will show minutes like 0, 15, 30, and 45.
-  final int minuteInterval;
-
-  const new({
-    this.anchor = .topLeft,
-    this.fieldAnchor = .bottomLeft,
-    this.constraints = const FPortalConstraints(maxWidth: 200, maxHeight: 200),
-    this.spacing = const .spacing(4),
-    this.overflow = .flip,
-    this.useViewPadding = true,
-    this.useViewInsets = true,
-    this.overlayLocation = .nearestOverlay,
-    this.offset = .zero,
-    this.hideRegion = .excludeChild,
-    this.groupId,
-    this.onTapHide,
-    this.cutout = true,
-    this.cutoutBuilder = FModalBarrier.defaultCutoutBuilder,
-    this.popoverBuilder = FPopover.defaultPopoverBuilder,
-    this.hourInterval = 1,
-    this.minuteInterval = 1,
-  });
-
+  final int minuteInterval = 1,
+}) with Diagnosticable {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);

@@ -253,12 +253,7 @@ class FHeaderActionStyle with Diagnosticable, _$FHeaderActionStyleFunctions {
   final FTappableStyle tappableStyle;
 
   /// Creates a [FHeaderActionStyle].
-  new({
-    required this.iconStyle,
-    required this.padding,
-    required this.focusedOutlineStyle,
-    required this.tappableStyle,
-  });
+  new({required this.iconStyle, required this.padding, required this.focusedOutlineStyle, required this.tappableStyle});
 
   /// Creates a [FHeaderActionStyle] that inherits its properties.
   new inherit({

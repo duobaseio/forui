@@ -149,8 +149,7 @@ class DateInputController extends InputController {
 
 @internal
 class DateSelector extends Selector {
-  new(FLocalizations localizations)
-    : super(localizations, RegExp(RegExp.escape(localizations.shortDateSuffix) + r'$'));
+  new(FLocalizations localizations) : super(localizations, RegExp(RegExp.escape(localizations.shortDateSuffix) + r'$'));
 
   @override
   TextEditingValue? navigate(

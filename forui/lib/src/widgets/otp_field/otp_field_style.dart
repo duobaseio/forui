@@ -87,275 +87,268 @@ class FOtpFieldStyle extends FLabelStyle with _$FOtpFieldStyleFunctions {
   });
 
   /// Creates a [FOtpFieldStyle] that inherits its properties.
-  new inherit({
-    required FColors colors,
-    required FTypography typography,
-    required FStyle style,
-    required bool touch,
-  }) : this(
-         keyboardAppearance: colors.brightness,
-         cursorColor: colors.primary,
-         itemSize: touch ? const Size(44, 44) : const Size(36, 36),
-         itemStyles: .inherit(colors: colors, typography: typography, style: style),
-         dividerPadding: const .symmetric(horizontal: 4),
-         dividerColor: FVariants(
-           colors.foreground,
-           variants: {
-             [.disabled]: colors.disable(colors.foreground),
-           },
-         ),
-         labelTextStyle: style.formFieldStyle.labelTextStyle,
-         descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,
-         errorTextStyle: style.formFieldStyle.errorTextStyle,
-       );
+  new inherit({required FColors colors, required FTypography typography, required FStyle style, required bool touch})
+    : this(
+        keyboardAppearance: colors.brightness,
+        cursorColor: colors.primary,
+        itemSize: touch ? const Size(44, 44) : const Size(36, 36),
+        itemStyles: .inherit(colors: colors, typography: typography, style: style),
+        dividerPadding: const .symmetric(horizontal: 4),
+        dividerColor: FVariants(
+          colors.foreground,
+          variants: {
+            [.disabled]: colors.disable(colors.foreground),
+          },
+        ),
+        labelTextStyle: style.formFieldStyle.labelTextStyle,
+        descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,
+        errorTextStyle: style.formFieldStyle.errorTextStyle,
+      );
 }
 
 /// The [FOtpFieldItemStyle]s for each variant.
 extension type FOtpFieldItemStyles(
-  FVariants<FOtpFieldItemVariantConstraint, FOtpFieldItemVariant, FOtpFieldItemStyle, FOtpFieldItemStyleDelta> _
+  FVariants<FOtpFieldItemVariantConstraint, FOtpFieldItemVariant, FOtpFieldItemStyle, FOtpFieldItemStyleDelta> _,
 ) implements
     FVariants<FOtpFieldItemVariantConstraint, FOtpFieldItemVariant, FOtpFieldItemStyle, FOtpFieldItemStyleDelta> {
   /// Creates [FOtpFieldItemStyles] that inherit their properties.
-  factory inherit({
-    required FColors colors,
-    required FTypography typography,
-    required FStyle style,
-  }) => FOtpFieldItemStyles(
-    .from(
-      FOtpFieldItemStyle(
-        decoration: BoxDecoration(
-          color: colors.card,
-          border: BorderDirectional(
-            top: BorderSide(color: colors.border, width: style.borderWidth),
-            bottom: BorderSide(color: colors.border, width: style.borderWidth),
-            start: BorderSide(color: colors.border, width: style.borderWidth),
-          ),
-        ),
-        contentTextStyle: typography.body.sm.copyWith(color: colors.foreground),
-      ),
-      variants: {
-        // --- default ---
-        [.start]: FOtpFieldItemStyle(
-          decoration: BoxDecoration(
-            color: colors.card,
-            borderRadius: BorderRadiusDirectional.only(
-              topStart: style.borderRadius.sm.topLeft,
-              bottomStart: style.borderRadius.sm.bottomLeft,
-            ),
-            border: BorderDirectional(
-              top: BorderSide(color: colors.border, width: style.borderWidth),
-              bottom: BorderSide(color: colors.border, width: style.borderWidth),
-              start: BorderSide(color: colors.border, width: style.borderWidth),
-            ),
-          ),
-          contentTextStyle: typography.body.sm.copyWith(color: colors.foreground),
-        ),
-        [.end]: FOtpFieldItemStyle(
-          decoration: BoxDecoration(
-            color: colors.card,
-            borderRadius: BorderRadiusDirectional.only(
-              topEnd: style.borderRadius.sm.topRight,
-              bottomEnd: style.borderRadius.sm.bottomRight,
-            ),
-            border: Border.all(color: colors.border, width: style.borderWidth),
-          ),
-          contentTextStyle: typography.body.sm.copyWith(color: colors.foreground),
-        ),
-        [.start.and(.end)]: FOtpFieldItemStyle(
-          decoration: BoxDecoration(
-            color: colors.card,
-            borderRadius: style.borderRadius.sm,
-            border: Border.all(color: colors.border, width: style.borderWidth),
-          ),
-          contentTextStyle: typography.body.sm.copyWith(color: colors.foreground),
-        ),
-        // --- focused ---
-        [.focused]: FOtpFieldItemStyle(
-          decoration: ShapeDecoration(
-            color: colors.card,
-            shape: RoundedSuperellipseBorder(
-              side: BorderSide(color: colors.foreground, width: style.borderWidth),
-            ),
-          ),
-          contentTextStyle: typography.body.sm.copyWith(color: colors.foreground),
-        ),
-        [.focused.and(.start)]: FOtpFieldItemStyle(
-          decoration: ShapeDecoration(
-            color: colors.card,
-            shape: RoundedSuperellipseBorder(
-              borderRadius: BorderRadiusDirectional.only(
-                topStart: style.borderRadius.sm.topLeft,
-                bottomStart: style.borderRadius.sm.bottomLeft,
+  factory inherit({required FColors colors, required FTypography typography, required FStyle style}) =>
+      FOtpFieldItemStyles(
+        .from(
+          FOtpFieldItemStyle(
+            decoration: BoxDecoration(
+              color: colors.card,
+              border: BorderDirectional(
+                top: BorderSide(color: colors.border, width: style.borderWidth),
+                bottom: BorderSide(color: colors.border, width: style.borderWidth),
+                start: BorderSide(color: colors.border, width: style.borderWidth),
               ),
-              side: BorderSide(color: colors.foreground, width: style.borderWidth),
             ),
+            contentTextStyle: typography.body.sm.copyWith(color: colors.foreground),
           ),
-          contentTextStyle: typography.body.sm.copyWith(color: colors.foreground),
-        ),
-        [.focused.and(.end)]: FOtpFieldItemStyle(
-          decoration: ShapeDecoration(
-            color: colors.card,
-            shape: RoundedSuperellipseBorder(
-              borderRadius: BorderRadiusDirectional.only(
-                topEnd: style.borderRadius.sm.topRight,
-                bottomEnd: style.borderRadius.sm.bottomRight,
+          variants: {
+            // --- default ---
+            [.start]: FOtpFieldItemStyle(
+              decoration: BoxDecoration(
+                color: colors.card,
+                borderRadius: BorderRadiusDirectional.only(
+                  topStart: style.borderRadius.sm.topLeft,
+                  bottomStart: style.borderRadius.sm.bottomLeft,
+                ),
+                border: BorderDirectional(
+                  top: BorderSide(color: colors.border, width: style.borderWidth),
+                  bottom: BorderSide(color: colors.border, width: style.borderWidth),
+                  start: BorderSide(color: colors.border, width: style.borderWidth),
+                ),
               ),
-              side: BorderSide(color: colors.foreground, width: style.borderWidth),
+              contentTextStyle: typography.body.sm.copyWith(color: colors.foreground),
             ),
-          ),
-          contentTextStyle: typography.body.sm.copyWith(color: colors.foreground),
-        ),
-        [.focused.and(.start).and(.end)]: FOtpFieldItemStyle(
-          decoration: ShapeDecoration(
-            color: colors.card,
-            shape: RoundedSuperellipseBorder(
-              borderRadius: style.borderRadius.sm,
-              side: BorderSide(color: colors.foreground, width: style.borderWidth),
+            [.end]: FOtpFieldItemStyle(
+              decoration: BoxDecoration(
+                color: colors.card,
+                borderRadius: BorderRadiusDirectional.only(
+                  topEnd: style.borderRadius.sm.topRight,
+                  bottomEnd: style.borderRadius.sm.bottomRight,
+                ),
+                border: Border.all(color: colors.border, width: style.borderWidth),
+              ),
+              contentTextStyle: typography.body.sm.copyWith(color: colors.foreground),
             ),
-          ),
-          contentTextStyle: typography.body.sm.copyWith(color: colors.foreground),
-        ),
-        // --- disabled ---
-        [.disabled]: FOtpFieldItemStyle(
-          decoration: BoxDecoration(
-            color: colors.disable(colors.card),
-            border: BorderDirectional(
-              top: BorderSide(color: colors.disable(colors.border), width: style.borderWidth),
-              bottom: BorderSide(color: colors.disable(colors.border), width: style.borderWidth),
-              start: BorderSide(color: colors.disable(colors.border), width: style.borderWidth),
+            [.start.and(.end)]: FOtpFieldItemStyle(
+              decoration: BoxDecoration(
+                color: colors.card,
+                borderRadius: style.borderRadius.sm,
+                border: Border.all(color: colors.border, width: style.borderWidth),
+              ),
+              contentTextStyle: typography.body.sm.copyWith(color: colors.foreground),
             ),
-          ),
-          contentTextStyle: typography.body.sm.copyWith(color: colors.disable(colors.foreground)),
-        ),
-        [.disabled.and(.start)]: FOtpFieldItemStyle(
-          decoration: BoxDecoration(
-            color: colors.disable(colors.card),
-            borderRadius: BorderRadiusDirectional.only(
-              topStart: style.borderRadius.sm.topLeft,
-              bottomStart: style.borderRadius.sm.bottomLeft,
+            // --- focused ---
+            [.focused]: FOtpFieldItemStyle(
+              decoration: ShapeDecoration(
+                color: colors.card,
+                shape: RoundedSuperellipseBorder(
+                  side: BorderSide(color: colors.foreground, width: style.borderWidth),
+                ),
+              ),
+              contentTextStyle: typography.body.sm.copyWith(color: colors.foreground),
             ),
-            border: BorderDirectional(
-              top: BorderSide(color: colors.disable(colors.border), width: style.borderWidth),
-              bottom: BorderSide(color: colors.disable(colors.border), width: style.borderWidth),
-              start: BorderSide(color: colors.disable(colors.border), width: style.borderWidth),
+            [.focused.and(.start)]: FOtpFieldItemStyle(
+              decoration: ShapeDecoration(
+                color: colors.card,
+                shape: RoundedSuperellipseBorder(
+                  borderRadius: BorderRadiusDirectional.only(
+                    topStart: style.borderRadius.sm.topLeft,
+                    bottomStart: style.borderRadius.sm.bottomLeft,
+                  ),
+                  side: BorderSide(color: colors.foreground, width: style.borderWidth),
+                ),
+              ),
+              contentTextStyle: typography.body.sm.copyWith(color: colors.foreground),
             ),
-          ),
-          contentTextStyle: typography.body.sm.copyWith(color: colors.disable(colors.foreground)),
-        ),
-        [.disabled.and(.end)]: FOtpFieldItemStyle(
-          decoration: BoxDecoration(
-            color: colors.disable(colors.card),
-            borderRadius: BorderRadiusDirectional.only(
-              topEnd: style.borderRadius.sm.topRight,
-              bottomEnd: style.borderRadius.sm.bottomRight,
+            [.focused.and(.end)]: FOtpFieldItemStyle(
+              decoration: ShapeDecoration(
+                color: colors.card,
+                shape: RoundedSuperellipseBorder(
+                  borderRadius: BorderRadiusDirectional.only(
+                    topEnd: style.borderRadius.sm.topRight,
+                    bottomEnd: style.borderRadius.sm.bottomRight,
+                  ),
+                  side: BorderSide(color: colors.foreground, width: style.borderWidth),
+                ),
+              ),
+              contentTextStyle: typography.body.sm.copyWith(color: colors.foreground),
             ),
-            border: Border.all(color: colors.disable(colors.border), width: style.borderWidth),
-          ),
-          contentTextStyle: typography.body.sm.copyWith(color: colors.disable(colors.foreground)),
-        ),
-        [.disabled.and(.start).and(.end)]: FOtpFieldItemStyle(
-          decoration: BoxDecoration(
-            color: colors.disable(colors.card),
-            borderRadius: style.borderRadius.sm,
-            border: Border.all(color: colors.disable(colors.border), width: style.borderWidth),
-          ),
-          contentTextStyle: typography.body.sm.copyWith(color: colors.disable(colors.foreground)),
-        ),
-        // --- error ---
-        [.error]: FOtpFieldItemStyle(
-          decoration: BoxDecoration(
-            color: colors.card,
-            border: BorderDirectional(
-              top: BorderSide(color: colors.error, width: style.borderWidth),
-              bottom: BorderSide(color: colors.error, width: style.borderWidth),
-              start: BorderSide(color: colors.error, width: style.borderWidth),
+            [.focused.and(.start).and(.end)]: FOtpFieldItemStyle(
+              decoration: ShapeDecoration(
+                color: colors.card,
+                shape: RoundedSuperellipseBorder(
+                  borderRadius: style.borderRadius.sm,
+                  side: BorderSide(color: colors.foreground, width: style.borderWidth),
+                ),
+              ),
+              contentTextStyle: typography.body.sm.copyWith(color: colors.foreground),
             ),
-          ),
-          contentTextStyle: typography.body.sm.copyWith(color: colors.foreground),
-        ),
-        [.error.and(.start)]: FOtpFieldItemStyle(
-          decoration: BoxDecoration(
-            color: colors.card,
-            borderRadius: BorderRadiusDirectional.only(
-              topStart: style.borderRadius.sm.topLeft,
-              bottomStart: style.borderRadius.sm.bottomLeft,
+            // --- disabled ---
+            [.disabled]: FOtpFieldItemStyle(
+              decoration: BoxDecoration(
+                color: colors.disable(colors.card),
+                border: BorderDirectional(
+                  top: BorderSide(color: colors.disable(colors.border), width: style.borderWidth),
+                  bottom: BorderSide(color: colors.disable(colors.border), width: style.borderWidth),
+                  start: BorderSide(color: colors.disable(colors.border), width: style.borderWidth),
+                ),
+              ),
+              contentTextStyle: typography.body.sm.copyWith(color: colors.disable(colors.foreground)),
             ),
-            border: BorderDirectional(
-              top: BorderSide(color: colors.error, width: style.borderWidth),
-              bottom: BorderSide(color: colors.error, width: style.borderWidth),
-              start: BorderSide(color: colors.error, width: style.borderWidth),
+            [.disabled.and(.start)]: FOtpFieldItemStyle(
+              decoration: BoxDecoration(
+                color: colors.disable(colors.card),
+                borderRadius: BorderRadiusDirectional.only(
+                  topStart: style.borderRadius.sm.topLeft,
+                  bottomStart: style.borderRadius.sm.bottomLeft,
+                ),
+                border: BorderDirectional(
+                  top: BorderSide(color: colors.disable(colors.border), width: style.borderWidth),
+                  bottom: BorderSide(color: colors.disable(colors.border), width: style.borderWidth),
+                  start: BorderSide(color: colors.disable(colors.border), width: style.borderWidth),
+                ),
+              ),
+              contentTextStyle: typography.body.sm.copyWith(color: colors.disable(colors.foreground)),
             ),
-          ),
-          contentTextStyle: typography.body.sm.copyWith(color: colors.foreground),
-        ),
-        [.error.and(.end)]: FOtpFieldItemStyle(
-          decoration: BoxDecoration(
-            color: colors.card,
-            borderRadius: BorderRadiusDirectional.only(
-              topEnd: style.borderRadius.sm.topRight,
-              bottomEnd: style.borderRadius.sm.bottomRight,
+            [.disabled.and(.end)]: FOtpFieldItemStyle(
+              decoration: BoxDecoration(
+                color: colors.disable(colors.card),
+                borderRadius: BorderRadiusDirectional.only(
+                  topEnd: style.borderRadius.sm.topRight,
+                  bottomEnd: style.borderRadius.sm.bottomRight,
+                ),
+                border: Border.all(color: colors.disable(colors.border), width: style.borderWidth),
+              ),
+              contentTextStyle: typography.body.sm.copyWith(color: colors.disable(colors.foreground)),
             ),
-            border: Border.all(color: colors.error, width: style.borderWidth),
-          ),
-          contentTextStyle: typography.body.sm.copyWith(color: colors.foreground),
-        ),
-        [.error.and(.start).and(.end)]: FOtpFieldItemStyle(
-          decoration: BoxDecoration(
-            color: colors.card,
-            borderRadius: style.borderRadius.sm,
-            border: Border.all(color: colors.error, width: style.borderWidth),
-          ),
-          contentTextStyle: typography.body.sm.copyWith(color: colors.foreground),
-        ),
-        // --- error + disabled ---
-        [.error.and(.disabled)]: FOtpFieldItemStyle(
-          decoration: BoxDecoration(
-            color: colors.disable(colors.card),
-            border: BorderDirectional(
-              top: BorderSide(color: colors.disable(colors.error), width: style.borderWidth),
-              bottom: BorderSide(color: colors.disable(colors.error), width: style.borderWidth),
-              start: BorderSide(color: colors.disable(colors.error), width: style.borderWidth),
+            [.disabled.and(.start).and(.end)]: FOtpFieldItemStyle(
+              decoration: BoxDecoration(
+                color: colors.disable(colors.card),
+                borderRadius: style.borderRadius.sm,
+                border: Border.all(color: colors.disable(colors.border), width: style.borderWidth),
+              ),
+              contentTextStyle: typography.body.sm.copyWith(color: colors.disable(colors.foreground)),
             ),
-          ),
-          contentTextStyle: typography.body.sm.copyWith(color: colors.disable(colors.foreground)),
-        ),
-        [.error.and(.disabled).and(.start)]: FOtpFieldItemStyle(
-          decoration: BoxDecoration(
-            color: colors.disable(colors.card),
-            borderRadius: BorderRadiusDirectional.only(
-              topStart: style.borderRadius.sm.topLeft,
-              bottomStart: style.borderRadius.sm.bottomLeft,
+            // --- error ---
+            [.error]: FOtpFieldItemStyle(
+              decoration: BoxDecoration(
+                color: colors.card,
+                border: BorderDirectional(
+                  top: BorderSide(color: colors.error, width: style.borderWidth),
+                  bottom: BorderSide(color: colors.error, width: style.borderWidth),
+                  start: BorderSide(color: colors.error, width: style.borderWidth),
+                ),
+              ),
+              contentTextStyle: typography.body.sm.copyWith(color: colors.foreground),
             ),
-            border: BorderDirectional(
-              top: BorderSide(color: colors.disable(colors.error), width: style.borderWidth),
-              bottom: BorderSide(color: colors.disable(colors.error), width: style.borderWidth),
-              start: BorderSide(color: colors.disable(colors.error), width: style.borderWidth),
+            [.error.and(.start)]: FOtpFieldItemStyle(
+              decoration: BoxDecoration(
+                color: colors.card,
+                borderRadius: BorderRadiusDirectional.only(
+                  topStart: style.borderRadius.sm.topLeft,
+                  bottomStart: style.borderRadius.sm.bottomLeft,
+                ),
+                border: BorderDirectional(
+                  top: BorderSide(color: colors.error, width: style.borderWidth),
+                  bottom: BorderSide(color: colors.error, width: style.borderWidth),
+                  start: BorderSide(color: colors.error, width: style.borderWidth),
+                ),
+              ),
+              contentTextStyle: typography.body.sm.copyWith(color: colors.foreground),
             ),
-          ),
-          contentTextStyle: typography.body.sm.copyWith(color: colors.disable(colors.foreground)),
-        ),
-        [.error.and(.disabled).and(.end)]: FOtpFieldItemStyle(
-          decoration: BoxDecoration(
-            color: colors.disable(colors.card),
-            borderRadius: BorderRadiusDirectional.only(
-              topEnd: style.borderRadius.sm.topRight,
-              bottomEnd: style.borderRadius.sm.bottomRight,
+            [.error.and(.end)]: FOtpFieldItemStyle(
+              decoration: BoxDecoration(
+                color: colors.card,
+                borderRadius: BorderRadiusDirectional.only(
+                  topEnd: style.borderRadius.sm.topRight,
+                  bottomEnd: style.borderRadius.sm.bottomRight,
+                ),
+                border: Border.all(color: colors.error, width: style.borderWidth),
+              ),
+              contentTextStyle: typography.body.sm.copyWith(color: colors.foreground),
             ),
-            border: Border.all(color: colors.disable(colors.error), width: style.borderWidth),
-          ),
-          contentTextStyle: typography.body.sm.copyWith(color: colors.disable(colors.foreground)),
+            [.error.and(.start).and(.end)]: FOtpFieldItemStyle(
+              decoration: BoxDecoration(
+                color: colors.card,
+                borderRadius: style.borderRadius.sm,
+                border: Border.all(color: colors.error, width: style.borderWidth),
+              ),
+              contentTextStyle: typography.body.sm.copyWith(color: colors.foreground),
+            ),
+            // --- error + disabled ---
+            [.error.and(.disabled)]: FOtpFieldItemStyle(
+              decoration: BoxDecoration(
+                color: colors.disable(colors.card),
+                border: BorderDirectional(
+                  top: BorderSide(color: colors.disable(colors.error), width: style.borderWidth),
+                  bottom: BorderSide(color: colors.disable(colors.error), width: style.borderWidth),
+                  start: BorderSide(color: colors.disable(colors.error), width: style.borderWidth),
+                ),
+              ),
+              contentTextStyle: typography.body.sm.copyWith(color: colors.disable(colors.foreground)),
+            ),
+            [.error.and(.disabled).and(.start)]: FOtpFieldItemStyle(
+              decoration: BoxDecoration(
+                color: colors.disable(colors.card),
+                borderRadius: BorderRadiusDirectional.only(
+                  topStart: style.borderRadius.sm.topLeft,
+                  bottomStart: style.borderRadius.sm.bottomLeft,
+                ),
+                border: BorderDirectional(
+                  top: BorderSide(color: colors.disable(colors.error), width: style.borderWidth),
+                  bottom: BorderSide(color: colors.disable(colors.error), width: style.borderWidth),
+                  start: BorderSide(color: colors.disable(colors.error), width: style.borderWidth),
+                ),
+              ),
+              contentTextStyle: typography.body.sm.copyWith(color: colors.disable(colors.foreground)),
+            ),
+            [.error.and(.disabled).and(.end)]: FOtpFieldItemStyle(
+              decoration: BoxDecoration(
+                color: colors.disable(colors.card),
+                borderRadius: BorderRadiusDirectional.only(
+                  topEnd: style.borderRadius.sm.topRight,
+                  bottomEnd: style.borderRadius.sm.bottomRight,
+                ),
+                border: Border.all(color: colors.disable(colors.error), width: style.borderWidth),
+              ),
+              contentTextStyle: typography.body.sm.copyWith(color: colors.disable(colors.foreground)),
+            ),
+            [.error.and(.disabled).and(.start).and(.end)]: FOtpFieldItemStyle(
+              decoration: BoxDecoration(
+                color: colors.disable(colors.card),
+                borderRadius: style.borderRadius.sm,
+                border: Border.all(color: colors.disable(colors.error), width: style.borderWidth),
+              ),
+              contentTextStyle: typography.body.sm.copyWith(color: colors.disable(colors.foreground)),
+            ),
+          },
         ),
-        [.error.and(.disabled).and(.start).and(.end)]: FOtpFieldItemStyle(
-          decoration: BoxDecoration(
-            color: colors.disable(colors.card),
-            borderRadius: style.borderRadius.sm,
-            border: Border.all(color: colors.disable(colors.error), width: style.borderWidth),
-          ),
-          contentTextStyle: typography.body.sm.copyWith(color: colors.disable(colors.foreground)),
-        ),
-      },
-    ),
-  );
+      );
 }
 
 /// The style of an individual item in an [FOtpField].

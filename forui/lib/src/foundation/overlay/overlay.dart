@@ -9,13 +9,12 @@ import 'package:forui/src/foundation/overlay/layer.dart';
 import 'package:forui/src/foundation/overlay/overlay_controller.dart';
 
 /// The signature for [FOverlay.overlayBuilder].
-typedef FOverlayBuilder =
-    List<Widget> Function(
-      BuildContext context,
-      OverlayPortalController controller,
-      RenderBox? childRenderBox,
-      List<Widget> overlay,
-    );
+typedef FOverlayBuilder = List<Widget> Function(
+  BuildContext context,
+  OverlayPortalController controller,
+  RenderBox? childRenderBox,
+  List<Widget> overlay,
+);
 
 /// A low-level overlay primitive that composites content relative to a child widget using [Positioned]/
 /// [AnimatedPositioned]s similar to a [Stack].

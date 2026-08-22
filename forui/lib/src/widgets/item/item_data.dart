@@ -60,14 +60,7 @@ class FInheritedItemCallbacks extends InheritedWidget {
   final VoidCallback? onLongPress;
 
   /// Creates a [FInheritedItemCallbacks].
-  const new({
-    required super.child,
-    super.key,
-    this.onHoverEnter,
-    this.onHoverExit,
-    this.onPress,
-    this.onLongPress,
-  });
+  const new({required super.child, super.key, this.onHoverEnter, this.onHoverExit, this.onPress, this.onLongPress});
 
   @override
   bool updateShouldNotify(FInheritedItemCallbacks old) =>

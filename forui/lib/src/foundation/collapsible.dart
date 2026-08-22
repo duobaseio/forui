@@ -47,12 +47,8 @@ class FCollapsible extends StatelessWidget {
   }
 }
 
-class _Expandable extends SingleChildRenderObjectWidget {
-  final Axis axis;
-  final double value;
-
-  const new({required this.axis, required this.value, required super.child});
-
+class const _Expandable({required final Axis axis, required final double value, required super.child})
+    extends SingleChildRenderObjectWidget {
   @override
   RenderObject createRenderObject(BuildContext _) => _RenderExpandable(value, axis);
 
@@ -70,12 +66,9 @@ class _Expandable extends SingleChildRenderObjectWidget {
   }
 }
 
-class _RenderExpandable extends RenderBox with RenderObjectWithChildMixin<RenderBox> {
-  double _value;
-  Axis _axis;
-
-  new(this._value, this._axis);
-
+class _RenderExpandable(var double _value, var Axis _axis)
+    extends RenderBox
+    with RenderObjectWithChildMixin<RenderBox> {
   @override
   void performLayout() {
     if (child case final child?) {
@@ -137,12 +130,7 @@ class _RenderExpandable extends RenderBox with RenderObjectWithChildMixin<Render
   }
 }
 
-class _Clipper extends CustomClipper<Rect> {
-  final double percentage;
-  final Axis axis;
-
-  new(this.percentage, this.axis);
-
+class _Clipper(final double percentage, final Axis axis) extends CustomClipper<Rect> {
   @override
   Rect getClip(Size size) => switch (axis) {
     .vertical => Offset.zero & Size(size.width, size.height * percentage),

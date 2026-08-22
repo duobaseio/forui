@@ -4,20 +4,13 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 
 @internal
-class Caret extends StatefulWidget {
-  final Color color;
-  final double width;
-  final double height;
-  final bool cursorOpacityAnimates;
-
-  const new({
-    required this.color,
-    required this.width,
-    required this.height,
-    required this.cursorOpacityAnimates,
-    super.key,
-  });
-
+class const Caret({
+  required final Color color,
+  required final double width,
+  required final double height,
+  required final bool cursorOpacityAnimates,
+  super.key,
+}) extends StatefulWidget {
   @override
   State<Caret> createState() => _CaretState();
 
@@ -85,7 +78,7 @@ class _CaretState extends State<Caret> with SingleTickerProviderStateMixin {
 }
 
 // Based on Flutter 3.41.5's _DiscreteKeyFrameSimulation in editable_text.dart:533.
-class _DiscreteKeyFrameSimulation extends Simulation {
+class _DiscreteKeyFrameSimulation() extends Simulation {
   // Based on Flutter 3.41.5's _KeyFrame in editable_text.dart:511.
   //
   // Values extracted from iOS 15.4 UIKit.
@@ -107,8 +100,6 @@ class _DiscreteKeyFrameSimulation extends Simulation {
 
   // The index of the keyframe corresponds to the most recent input `time`.
   int _lastKeyFrame = 0;
-
-  new();
 
   @override
   double x(double time) {

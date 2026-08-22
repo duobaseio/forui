@@ -35,8 +35,7 @@ class FSliderMark with Diagnosticable {
   /// Creates a [FSliderMark] at the given percentage in a slider.
   ///
   /// This is identical to [FSliderMark.new], allowing dot-shorthand construction.
-  const factory mark({required double value, FSliderMarkStyle? style, bool tick, Widget? label}) =
-      FSliderMark;
+  const factory mark({required double value, FSliderMarkStyle? style, bool tick, Widget? label}) = FSliderMark;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

@@ -20,21 +20,13 @@ abstract class ShapeDecorationDelta with Delta {
   ShapeDecoration call(ShapeDecoration? decoration);
 }
 
-class _ShapeDelta implements ShapeDecorationDelta {
-  final Color? color;
-  final DecorationImage? image;
-  final Gradient? gradient;
-  final List<BoxShadow>? shadows;
-  final ShapeBorder? shape;
-
-  const new({
-    this.color = Sentinels.color,
-    this.image = Sentinels.decorationImage,
-    this.gradient = Sentinels.gradient,
-    this.shadows,
-    this.shape = Sentinels.shapeBorder,
-  });
-
+class const _ShapeDelta({
+  final Color? color = Sentinels.color,
+  final DecorationImage? image = Sentinels.decorationImage,
+  final Gradient? gradient = Sentinels.gradient,
+  final List<BoxShadow>? shadows,
+  final ShapeBorder? shape = Sentinels.shapeBorder,
+}) implements ShapeDecorationDelta {
   @override
   ShapeDecoration call(ShapeDecoration? decoration) => ShapeDecoration(
     color: identical(color, Sentinels.color) ? decoration?.color : color,
@@ -45,11 +37,7 @@ class _ShapeDelta implements ShapeDecorationDelta {
   );
 }
 
-class _ShapeValue implements ShapeDecorationDelta {
-  final ShapeDecoration _decoration;
-
-  const new(this._decoration);
-
+class const _ShapeValue(final ShapeDecoration _decoration) implements ShapeDecorationDelta {
   @override
   ShapeDecoration call(ShapeDecoration? decoration) => _decoration;
 }
@@ -95,18 +83,16 @@ abstract class DecorationDelta with Delta {
   Decoration call(Decoration? decoration);
 }
 
-class _DecorationBoxDelta extends _BoxDelta implements DecorationDelta {
-  const new({
-    super.color,
-    super.image,
-    super.border,
-    super.borderRadius,
-    super.boxShadow,
-    super.gradient,
-    super.backgroundBlendMode,
-    super.shape,
-  });
-
+class const _DecorationBoxDelta({
+  super.color,
+  super.image,
+  super.border,
+  super.borderRadius,
+  super.boxShadow,
+  super.gradient,
+  super.backgroundBlendMode,
+  super.shape,
+}) extends _BoxDelta implements DecorationDelta {
   @override
   BoxDecoration call(covariant Decoration? decoration) => switch (decoration) {
     final BoxDecoration? decoration => super(decoration),
@@ -145,9 +131,9 @@ class _DecorationBoxDelta extends _BoxDelta implements DecorationDelta {
   }
 }
 
-class _DecorationShapeDelta extends _ShapeDelta implements DecorationDelta {
-  const new({super.color, super.image, super.gradient, super.shadows, super.shape});
-
+class const _DecorationShapeDelta({super.color, super.image, super.gradient, super.shadows, super.shape})
+    extends _ShapeDelta
+    implements DecorationDelta {
   @override
   ShapeDecoration call(covariant Decoration? decoration) => switch (decoration) {
     final ShapeDecoration? decoration => super(decoration),
@@ -156,11 +142,7 @@ class _DecorationShapeDelta extends _ShapeDelta implements DecorationDelta {
   };
 }
 
-class _ValueDelta implements DecorationDelta {
-  final Decoration _decoration;
-
-  const new(this._decoration);
-
+class const _ValueDelta(final Decoration _decoration) implements DecorationDelta {
   @override
   Decoration call(Decoration? decoration) => _decoration;
 }
@@ -186,27 +168,16 @@ abstract class BoxDecorationDelta with Delta {
   BoxDecoration call(BoxDecoration? decoration);
 }
 
-class _BoxDelta implements BoxDecorationDelta {
-  final Color? color;
-  final DecorationImage? image;
-  final BoxBorder? border;
-  final BorderRadiusGeometry? borderRadius;
-  final List<BoxShadow>? boxShadow;
-  final Gradient? gradient;
-  final BlendMode? Function()? backgroundBlendMode;
-  final BoxShape? shape;
-
-  const new({
-    this.color = Sentinels.color,
-    this.image = Sentinels.decorationImage,
-    this.border = Sentinels.boxBorder,
-    this.borderRadius = Sentinels.borderRadius,
-    this.boxShadow,
-    this.gradient = Sentinels.gradient,
-    this.backgroundBlendMode,
-    this.shape,
-  });
-
+class const _BoxDelta({
+  final Color? color = Sentinels.color,
+  final DecorationImage? image = Sentinels.decorationImage,
+  final BoxBorder? border = Sentinels.boxBorder,
+  final BorderRadiusGeometry? borderRadius = Sentinels.borderRadius,
+  final List<BoxShadow>? boxShadow,
+  final Gradient? gradient = Sentinels.gradient,
+  final BlendMode? Function()? backgroundBlendMode,
+  final BoxShape? shape,
+}) implements BoxDecorationDelta {
   @override
   BoxDecoration call(BoxDecoration? decoration) => BoxDecoration(
     color: identical(color, Sentinels.color) ? decoration?.color : color,
@@ -220,11 +191,7 @@ class _BoxDelta implements BoxDecorationDelta {
   );
 }
 
-class _BoxValue implements BoxDecorationDelta {
-  final BoxDecoration _decoration;
-
-  const new(this._decoration);
-
+class const _BoxValue(final BoxDecoration _decoration) implements BoxDecorationDelta {
   @override
   BoxDecoration call(BoxDecoration? decoration) => _decoration;
 }

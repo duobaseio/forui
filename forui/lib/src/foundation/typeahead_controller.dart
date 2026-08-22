@@ -27,8 +27,7 @@ class FTypeaheadController extends TextEditingController {
   }
 
   /// Creates a [FTypeaheadController] from a [TextEditingValue].
-  new fromValue(super.value, {required this._textStyles, this._suggestions = const []})
-    : super.fromValue() {
+  new fromValue(super.value, {required this._textStyles, this._suggestions = const []}) : super.fromValue() {
     findCompletion();
   }
 

@@ -20,7 +20,7 @@ part 'slider_styles.design.dart';
 
 /// A slider's styles.
 extension type FSliderStyles(
-  FVariants<FSliderAxisVariantConstraint, FSliderAxisVariant, FSliderStyle, FSliderStyleDelta> _
+  FVariants<FSliderAxisVariantConstraint, FSliderAxisVariant, FSliderStyle, FSliderStyleDelta> _,
 ) implements FVariants<FSliderAxisVariantConstraint, FSliderAxisVariant, FSliderStyle, FSliderStyleDelta> {
   /// Creates a [FSliderStyles] that inherits its properties.
   factory inherit({

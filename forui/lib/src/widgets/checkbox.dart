@@ -228,12 +228,7 @@ class FCheckboxStyle with Diagnosticable, _$FCheckboxStyleFunctions {
   });
 
   /// Creates a [FCheckboxStyle] that inherits its properties.
-  factory inherit({
-    required FColors colors,
-    required FIcons icons,
-    required FStyle style,
-    required bool touch,
-  }) {
+  factory inherit({required FColors colors, required FIcons icons, required FStyle style, required bool touch}) {
     final FLabelStyles(:horizontalLeadingStyle, :horizontalTrailingStyle) = FLabelStyles.inherit(style: style);
 
     final (size, iconSize) = switch (touch) {

@@ -274,9 +274,7 @@ class _AnimatedThemeState extends AnimatedWidgetBaseState<_AnimatedTheme> {
   );
 }
 
-class _Tween extends Tween<FThemeData> {
-  new({super.begin});
-
+class _Tween({super.begin}) extends Tween<FThemeData> {
   @override
   FThemeData lerp(double t) => FThemeData.lerp(begin!, end!, t);
 }

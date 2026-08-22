@@ -310,11 +310,7 @@ class FPersistentSheetStyle extends FSheetStyle with Diagnosticable, _$FPersiste
   final FPersistentSheetMotion motion;
 
   /// Creates a [FSheetStyle].
-  const new({
-    this.motion = const FPersistentSheetMotion(),
-    super.flingVelocity,
-    super.closeProgressThreshold,
-  });
+  const new({this.motion = const FPersistentSheetMotion(), super.flingVelocity, super.closeProgressThreshold});
 
   /// Creates a [FPersistentSheetStyle] that inherits its properties from the given arguments.
   // This is needed because the CLI generator scans all style inherit constructors to generate the style mappings.

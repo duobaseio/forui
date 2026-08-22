@@ -545,53 +545,49 @@ class FItemStyle with Diagnosticable, _$FItemStyleFunctions {
   });
 
   /// Creates a [FItemStyle] that inherits from the given arguments.
-  new inherit({
-    required FColors colors,
-    required FTypography typography,
-    required FStyle style,
-    required bool touch,
-  }) : this(
-         backgroundColor: FVariants(
-           colors.background,
-           variants: {
-             [.disabled]: colors.background,
-           },
-         ),
-         contentDecoration: .from(
-           ShapeDecoration(
-             shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
-             color: colors.background,
-           ),
-           variants: {
-             [.hovered, .pressed]: .shapeDelta(color: colors.secondary),
-             //
-             [.disabled]: const .shapeDelta(),
-             //
-             [.selected]: .shapeDelta(color: colors.secondary),
-             [.selected.and(.disabled)]: .shapeDelta(color: colors.disable(colors.secondary)),
-           },
-         ),
-         contentStyle: .inherit(
-           colors: colors,
-           typography: typography,
-           prefix: colors.primary,
-           foreground: colors.foreground,
-           mutedForeground: colors.mutedForeground,
-           touch: touch,
-         ),
-         rawContentStyle: .inherit(
-           colors: colors,
-           typography: typography,
-           prefix: colors.foreground,
-           color: colors.foreground,
-           touch: touch,
-         ),
-         tappableStyle: style.tappableStyle.copyWith(
-           motion: FTappableMotion.none,
-           pressedEnterDuration: .zero,
-           pressedExitDuration: const Duration(milliseconds: 25),
-         ),
-         focusedOutlineStyle: style.focusedOutlineStyle.copyWith(spacing: -style.borderWidth),
-         padding: const .symmetric(horizontal: 4),
-       );
+  new inherit({required FColors colors, required FTypography typography, required FStyle style, required bool touch})
+    : this(
+        backgroundColor: FVariants(
+          colors.background,
+          variants: {
+            [.disabled]: colors.background,
+          },
+        ),
+        contentDecoration: .from(
+          ShapeDecoration(
+            shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md),
+            color: colors.background,
+          ),
+          variants: {
+            [.hovered, .pressed]: .shapeDelta(color: colors.secondary),
+            //
+            [.disabled]: const .shapeDelta(),
+            //
+            [.selected]: .shapeDelta(color: colors.secondary),
+            [.selected.and(.disabled)]: .shapeDelta(color: colors.disable(colors.secondary)),
+          },
+        ),
+        contentStyle: .inherit(
+          colors: colors,
+          typography: typography,
+          prefix: colors.primary,
+          foreground: colors.foreground,
+          mutedForeground: colors.mutedForeground,
+          touch: touch,
+        ),
+        rawContentStyle: .inherit(
+          colors: colors,
+          typography: typography,
+          prefix: colors.foreground,
+          color: colors.foreground,
+          touch: touch,
+        ),
+        tappableStyle: style.tappableStyle.copyWith(
+          motion: FTappableMotion.none,
+          pressedEnterDuration: .zero,
+          pressedExitDuration: const Duration(milliseconds: 25),
+        ),
+        focusedOutlineStyle: style.focusedOutlineStyle.copyWith(spacing: -style.borderWidth),
+        padding: const .symmetric(horizontal: 4),
+      );
 }

@@ -62,8 +62,7 @@ class _ProxyController extends FTimeFieldController {
   Curve _curve;
   int _monotonic = 0;
 
-  new({required super.time, required this._onChange, required this._duration, required this._curve})
-    : _unsynced = time;
+  new({required super.time, required this._onChange, required this._duration, required this._curve}) : _unsynced = time;
 
   void update(FTime? newValue, ValueChanged<FTime?> onChange, bool shown, Duration duration, Curve curve) {
     _onChange = onChange;
@@ -124,12 +123,8 @@ sealed class FTimeFieldControl with Diagnosticable, _$FTimeFieldControlMixin {
   /// The [onChange] callback is invoked when the user selects a time.
   /// The [duration] when animating to [time] from an invalid/different time. Defaults to 200 milliseconds.
   /// The [curve] when animating to [time] from an invalid/different time. Defaults to [Curves.easeOutCubic].
-  const factory lifted({
-    required FTime? time,
-    required ValueChanged<FTime?> onChange,
-    Duration duration,
-    Curve curve,
-  }) = _Lifted;
+  const factory lifted({required FTime? time, required ValueChanged<FTime?> onChange, Duration duration, Curve curve}) =
+      _Lifted;
 
   const new _();
 

@@ -9,11 +9,9 @@ import 'package:forui/forui.dart';
 part 'picker_controller.control.dart';
 
 @internal
-abstract class ValuePickerController<T> extends ValueNotifier<T> {
+abstract class ValuePickerController<T>(super._value) extends ValueNotifier<T> {
   FPickerController? _picker;
   bool _mutating = false;
-
-  new(super._value);
 
   /// Animates the controller to the given [value].
   Future<void> animateTo(
@@ -239,11 +237,8 @@ class _ProxyController extends FPickerController {
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FPickerControl with Diagnosticable, _$FPickerControlMixin {
   /// Creates a [FPickerControl].
-  const factory managed({
-    FPickerController? controller,
-    List<int>? initial,
-    ValueChanged<List<int>>? onChange,
-  }) = FPickerManagedControl;
+  const factory managed({FPickerController? controller, List<int>? initial, ValueChanged<List<int>>? onChange}) =
+      FPickerManagedControl;
 
   /// Creates a [FPickerControl] for controlling a picker using lifted state.
   ///

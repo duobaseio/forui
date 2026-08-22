@@ -179,11 +179,7 @@ class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
   });
 
   /// Creates a [FLineCalendarStyle] that inherits its properties.
-  factory inherit({
-    required FColors colors,
-    required FTypography typography,
-    required FStyle style,
-  }) {
+  factory inherit({required FColors colors, required FTypography typography, required FStyle style}) {
     final focusedShape = RoundedSuperellipseBorder(
       side: BorderSide(color: colors.primary, width: style.borderWidth),
       borderRadius: style.borderRadius.md,

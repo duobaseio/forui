@@ -168,23 +168,14 @@ class FLabel extends StatelessWidget {
   }
 }
 
-abstract class _Label extends StatefulWidget {
-  final FLabelStyle style;
-  final Widget? label;
-  final Widget? description;
-  final Widget? error;
-  final Set<FFormFieldVariant> variants;
-  final Widget child;
-
-  const new({
-    required this.style,
-    required this.label,
-    required this.description,
-    required this.error,
-    required this.variants,
-    required this.child,
-  });
-
+abstract class const _Label({
+  required final FLabelStyle style,
+  required final Widget? label,
+  required final Widget? description,
+  required final Widget? error,
+  required final Set<FFormFieldVariant> variants,
+  required final Widget child,
+}) extends StatefulWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
@@ -575,11 +566,7 @@ class FLabelStyles with Diagnosticable, _$FLabelStylesFunctions {
   final FLabelStyle verticalStyle;
 
   /// Creates a [FLabelStyles].
-  const new({
-    required this.horizontalLeadingStyle,
-    required this.horizontalTrailingStyle,
-    required this.verticalStyle,
-  });
+  const new({required this.horizontalLeadingStyle, required this.horizontalTrailingStyle, required this.verticalStyle});
 
   /// Creates a [FLabelStyles] that inherits its properties.
   new inherit({required FStyle style})

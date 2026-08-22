@@ -56,15 +56,10 @@ sealed class FCalendarController extends FChangeNotifier {
   late DateTime _month;
 
   /// Creates a [FCalendarController].
-  new({
-    this._selectable = defaultSelectable,
-    DateTime? start,
-    DateTime? today,
-    DateTime? initial,
-    DateTime? end,
-  }) : start = _truncate(start ?? .utc(1900)),
-       today = _truncate(today ?? .now()),
-       end = _truncate(end ?? .utc(2100)) {
+  new({this._selectable = defaultSelectable, DateTime? start, DateTime? today, DateTime? initial, DateTime? end})
+    : start = _truncate(start ?? .utc(1900)),
+      today = _truncate(today ?? .now()),
+      end = _truncate(end ?? .utc(2100)) {
     // [currentMonth] is a normalized first-of-month, so it is checked at month granularity: a mid-month/mid-year start
     // (e.g. Jul 15) still permits showing its own month (Jul 1). The day grid gates individual days via selectable.
     _currentMonth = .utc((initial ?? this.today).year, (initial ?? this.today).month);

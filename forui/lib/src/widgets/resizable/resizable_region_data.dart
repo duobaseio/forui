@@ -36,21 +36,18 @@ final class FResizableRegionData with Diagnosticable {
   final ({double min, double max}) offset;
 
   /// Creates a [FResizableRegionData].
-  new({
-    required this.index,
-    required ({double min, double max, double total}) extent,
-    required this.offset,
-  }) : assert(0 <= index, 'index ($index) must be >= 0'),
-       assert(0 < extent.min, 'extent.min (${extent.min}) must be > 0'),
-       assert(extent.min < extent.max, 'min ${extent.min} must be < max ${extent.max}'),
-       assert(extent.max <= extent.total, 'extent.max (${extent.max}) must be <= extent.total (${extent.total})'),
-       assert(0 <= offset.min, 'offset.min ${offset.min} must be >= 0'),
-       assert(offset.min < offset.max, 'offset.min (${offset.min}) must be < offset.max (${offset.max})'),
-       assert(
-         0.0.lessOrAround(offset.max - offset.min) && (offset.max - offset.min).lessOrAround(extent.max),
-         'Current extent (${offset.max - offset.min}) must be >= 0 and <= extent.max (${extent.max})',
-       ),
-       extent = (min: extent.min, current: offset.max - offset.min, max: extent.max, total: extent.total);
+  new({required this.index, required ({double min, double max, double total}) extent, required this.offset})
+    : assert(0 <= index, 'index ($index) must be >= 0'),
+      assert(0 < extent.min, 'extent.min (${extent.min}) must be > 0'),
+      assert(extent.min < extent.max, 'min ${extent.min} must be < max ${extent.max}'),
+      assert(extent.max <= extent.total, 'extent.max (${extent.max}) must be <= extent.total (${extent.total})'),
+      assert(0 <= offset.min, 'offset.min ${offset.min} must be >= 0'),
+      assert(offset.min < offset.max, 'offset.min (${offset.min}) must be < offset.max (${offset.max})'),
+      assert(
+        0.0.lessOrAround(offset.max - offset.min) && (offset.max - offset.min).lessOrAround(extent.max),
+        'Current extent (${offset.max - offset.min}) must be >= 0 and <= extent.max (${extent.max})',
+      ),
+      extent = (min: extent.min, current: offset.max - offset.min, max: extent.max, total: extent.total);
 
   /// Returns a copy of this [FResizableRegionData] with the given fields replaced by the new values.
   @useResult

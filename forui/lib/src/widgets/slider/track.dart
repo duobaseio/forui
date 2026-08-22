@@ -12,9 +12,7 @@ import 'package:forui/src/widgets/slider/inherited_variants.dart';
 import 'package:forui/src/widgets/slider/thumb.dart';
 
 @internal
-class Track extends StatelessWidget {
-  const new({super.key});
-
+class const Track({super.key}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final InheritedData(:style, :layout, :semanticFormatterCallback) = .of(context);
@@ -53,9 +51,7 @@ class Track extends StatelessWidget {
   }
 }
 
-class _GestureDetector extends StatefulWidget {
-  const new();
-
+class const _GestureDetector() extends StatefulWidget {
   @override
   State<_GestureDetector> createState() => _GestureDetectorState();
 }
@@ -193,9 +189,7 @@ class _GestureDetectorState extends State<_GestureDetector> {
   }
 }
 
-class _Track extends StatelessWidget {
-  const new();
-
+class const _Track() extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final InheritedData(:style, :layout, :marks, :enabled) = InheritedData.of(context);
@@ -240,9 +234,7 @@ class _Track extends StatelessWidget {
 }
 
 @internal
-class ActiveTrack extends StatelessWidget {
-  const new({super.key});
-
+class const ActiveTrack({super.key}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final InheritedData(:style, :layout) = .of(context);

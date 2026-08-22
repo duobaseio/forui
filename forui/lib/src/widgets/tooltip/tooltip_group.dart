@@ -16,15 +16,7 @@ class TooltipGroupScope extends InheritedWidget {
   final bool hover;
   final bool longPress;
 
-  const new _(
-    this.style,
-    this.active,
-    this.show,
-    this.hide,
-    this.hover,
-    this.longPress, {
-    required super.child,
-  });
+  const new _(this.style, this.active, this.show, this.hide, this.hover, this.longPress, {required super.child});
 
   @override
   bool updateShouldNotify(TooltipGroupScope old) =>

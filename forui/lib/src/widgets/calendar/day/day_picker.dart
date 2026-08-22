@@ -27,36 +27,21 @@ extension DateTimes on DateTime {
 }
 
 @internal
-class DayPicker extends StatelessWidget {
-  final FCalendarDayPickerController controller;
-  final FCalendarDayPickerStyle style;
-  final FLocalizations localization;
-  final DateTime today;
-  final bool Function(DateTime) selected;
-  final bool fixedWeeks;
-  final ScrollPhysics? scrollPhysics;
-  final ScrollCacheExtent? scrollCacheExtent;
-  final ScrollBehavior? scrollBehavior;
-  final ValueChanged<DateTime> onPress;
-  final ValueChanged<DateTime> onLongPress;
-  final FCalendarDayBuilder builder;
-
-  const new({
-    required this.controller,
-    required this.style,
-    required this.localization,
-    required this.today,
-    required this.selected,
-    required this.fixedWeeks,
-    required this.scrollPhysics,
-    required this.scrollCacheExtent,
-    required this.scrollBehavior,
-    required this.onPress,
-    required this.onLongPress,
-    required this.builder,
-    super.key,
-  });
-
+class const DayPicker({
+  required final FCalendarDayPickerController controller,
+  required final FCalendarDayPickerStyle style,
+  required final FLocalizations localization,
+  required final DateTime today,
+  required final bool Function(DateTime) selected,
+  required final bool fixedWeeks,
+  required final ScrollPhysics? scrollPhysics,
+  required final ScrollCacheExtent? scrollCacheExtent,
+  required final ScrollBehavior? scrollBehavior,
+  required final ValueChanged<DateTime> onPress,
+  required final ValueChanged<DateTime> onLongPress,
+  required final FCalendarDayBuilder builder,
+  super.key,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = style.daySize;
@@ -347,13 +332,8 @@ class _GridState extends State<_Grid> {
   }
 }
 
-class _Fade extends StatelessWidget {
-  final double _height;
-  final double _cell;
-  final Widget child;
-
-  const new({required this._height, required this._cell, required this.child});
-
+class const _Fade({required final double _height, required final double _cell, required final Widget child})
+    extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewport = _Viewport.of(context);
@@ -379,35 +359,30 @@ class _Fade extends StatelessWidget {
 /// Controls a calendar's day picker.
 class FCalendarDayPickerController extends GridController {
   /// Creates a [FCalendarDayPickerController].
-  new({
-    required super.start,
-    required super.end,
-    required super.selectable,
-    required super.initial,
-    super.focused,
-  }) : super(
-         columns: 7,
-         focusable: (month, date) {
-           final last = month.lastDayOfMonth;
-           if (date.day <= last.day) {
-             final preferred = DateTime.utc(month.year, month.month, date.day);
-             if (selectable(preferred)) {
-               return preferred;
-             }
-           }
+  new({required super.start, required super.end, required super.selectable, required super.initial, super.focused})
+    : super(
+        columns: 7,
+        focusable: (month, date) {
+          final last = month.lastDayOfMonth;
+          if (date.day <= last.day) {
+            final preferred = DateTime.utc(month.year, month.month, date.day);
+            if (selectable(preferred)) {
+              return preferred;
+            }
+          }
 
-           for (var day = month; !day.isAfter(last); day = day.plus(days: 1)) {
-             if (selectable(day)) {
-               return day;
-             }
-           }
+          for (var day = month; !day.isAfter(last); day = day.plus(days: 1)) {
+            if (selectable(day)) {
+              return day;
+            }
+          }
 
-           return null;
-         },
-         step: (date, amount) => date.plus(days: amount),
-         from: (date) => (date.year - start.year) * 12 + (date.month - start.month),
-         to: (page) => .utc(start.year, start.month + page),
-       );
+          return null;
+        },
+        step: (date, amount) => date.plus(days: amount),
+        from: (date) => (date.year - start.year) * 12 + (date.month - start.month),
+        to: (page) => .utc(start.year, start.month + page),
+      );
 }
 
 /// A day picker's style.

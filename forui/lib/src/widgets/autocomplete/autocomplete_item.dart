@@ -430,14 +430,8 @@ class _AutocompleteItem<T> extends FAutocompleteItem<T> {
 class _RawAutocompleteItem<T> extends FAutocompleteItem<T> {
   final Widget child;
 
-  const new({
-    required this.child,
-    required super.value,
-    super.style,
-    super.enabled,
-    super.prefix,
-    super.key,
-  }) : super._();
+  const new({required this.child, required super.value, super.style, super.enabled, super.prefix, super.key})
+    : super._();
 
   @override
   Widget build(BuildContext context) {

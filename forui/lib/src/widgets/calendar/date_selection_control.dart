@@ -163,16 +163,14 @@ class _Single extends FDateSelectionManagedControl<DateTime?> {
   }
 }
 
-class _Multi extends FDateSelectionManagedControl<Set<DateTime>> {
-  const new({super.controller, super.initial, super.onChange});
-
+class const _Multi({super.controller, super.initial, super.onChange})
+    extends FDateSelectionManagedControl<Set<DateTime>> {
   @override
   FDateSelectionController<Set<DateTime>> createController() => controller ?? .multi(initial: initial ?? {});
 }
 
-class _Range extends FDateSelectionManagedControl<(DateTime, DateTime)?> {
-  const new({super.controller, super.initial, super.onChange});
-
+class const _Range({super.controller, super.initial, super.onChange})
+    extends FDateSelectionManagedControl<(DateTime, DateTime)?> {
   @override
   FDateSelectionController<(DateTime, DateTime)?> createController() => controller ?? .range(initial: initial);
 }

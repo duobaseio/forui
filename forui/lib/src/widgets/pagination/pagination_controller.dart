@@ -257,30 +257,24 @@ class FPaginationManagedControl extends FPaginationControl with Diagnosticable, 
   final ValueChanged<int>? onChange;
 
   /// Creates a [FPaginationControl].
-  const new({
-    this.controller,
-    this.initial,
-    this.pages,
-    this.siblings,
-    this.showEdges,
-    this.onChange,
-  }) : assert(
-         controller == null || initial == null,
-         'Cannot provide both controller and initial page. Pass initial page to the controller.',
-       ),
-       assert(
-         controller == null || pages == null,
-         'Cannot provide both controller and pages. Pass pages to the controller.',
-       ),
-       assert(
-         controller == null || siblings == null,
-         'Cannot provide both controller and siblings. Pass siblings to the controller.',
-       ),
-       assert(
-         controller == null || showEdges == null,
-         'Cannot provide both controller and showEdges. Pass showEdges to the controller.',
-       ),
-       super._();
+  const new({this.controller, this.initial, this.pages, this.siblings, this.showEdges, this.onChange})
+    : assert(
+        controller == null || initial == null,
+        'Cannot provide both controller and initial page. Pass initial page to the controller.',
+      ),
+      assert(
+        controller == null || pages == null,
+        'Cannot provide both controller and pages. Pass pages to the controller.',
+      ),
+      assert(
+        controller == null || siblings == null,
+        'Cannot provide both controller and siblings. Pass siblings to the controller.',
+      ),
+      assert(
+        controller == null || showEdges == null,
+        'Cannot provide both controller and showEdges. Pass showEdges to the controller.',
+      ),
+      super._();
 
   @override
   FPaginationController createController() =>
@@ -299,13 +293,8 @@ class _Lifted extends FPaginationControl with _$_LiftedMixin {
   @override
   final bool showEdges;
 
-  const new({
-    required this.page,
-    required this.onChange,
-    required this.pages,
-    this.siblings = 1,
-    this.showEdges = true,
-  }) : super._();
+  const new({required this.page, required this.onChange, required this.pages, this.siblings = 1, this.showEdges = true})
+    : super._();
 
   @override
   FPaginationController createController() => _ProxyController(page, onChange, pages, siblings, showEdges);

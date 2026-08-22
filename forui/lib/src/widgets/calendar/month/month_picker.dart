@@ -230,32 +230,27 @@ class _GridState extends State<_Grid> {
 /// Controls a calendar's month picker.
 class FCalendarMonthPickerController extends GridController {
   /// Creates a [FCalendarMonthPickerController].
-  new({
-    required super.start,
-    required super.end,
-    required super.selectable,
-    required super.initial,
-    super.focused,
-  }) : super(
-         columns: _columns,
-         focusable: (year, date) {
-           final preferred = DateTime.utc(year.year, date.month);
-           if (selectable(preferred)) {
-             return preferred;
-           }
+  new({required super.start, required super.end, required super.selectable, required super.initial, super.focused})
+    : super(
+        columns: _columns,
+        focusable: (year, date) {
+          final preferred = DateTime.utc(year.year, date.month);
+          if (selectable(preferred)) {
+            return preferred;
+          }
 
-           for (var month = DateTime.utc(year.year); month.year == year.year; month = month.plus(months: 1)) {
-             if (selectable(month)) {
-               return month;
-             }
-           }
+          for (var month = DateTime.utc(year.year); month.year == year.year; month = month.plus(months: 1)) {
+            if (selectable(month)) {
+              return month;
+            }
+          }
 
-           return null;
-         },
-         step: (date, amount) => date.plus(months: amount),
-         from: (date) => date.year - start.year,
-         to: (page) => .utc(start.year + page),
-       );
+          return null;
+        },
+        step: (date, amount) => date.plus(months: amount),
+        from: (date) => date.year - start.year,
+        to: (page) => .utc(start.year + page),
+      );
 }
 
 /// A month picker's style.
@@ -277,20 +272,12 @@ class FCalendarMonthPickerStyle with Diagnosticable, _$FCalendarMonthPickerStyle
   final double monthSpacing;
 
   /// Creates a [FCalendarMonthPickerStyle].
-  const new({
-    required this.monthStyles,
-    required this.monthSize,
-    this.headerSpacing = 6,
-    this.monthSpacing = 4,
-  });
+  const new({required this.monthStyles, required this.monthSize, this.headerSpacing = 6, this.monthSpacing = 4});
 
   /// Creates a [FCalendarMonthPickerStyle] that inherits its properties.
-  factory inherit({
-    required FColors colors,
-    required FTypography typography,
-    required FStyle style,
-  }) => FCalendarMonthPickerStyle(
-    monthStyles: .inherit(colors: colors, typography: typography, style: style),
-    monthSize: Size(DateTime.daysPerWeek * style.sizes.calendar / 3, style.sizes.calendar),
-  );
+  factory inherit({required FColors colors, required FTypography typography, required FStyle style}) =>
+      FCalendarMonthPickerStyle(
+        monthStyles: .inherit(colors: colors, typography: typography, style: style),
+        monthSize: Size(DateTime.daysPerWeek * style.sizes.calendar / 3, style.sizes.calendar),
+      );
 }

@@ -17,13 +17,12 @@ part 'input/input_time_field.dart';
 part 'picker/picker_time_field.dart';
 
 /// A builder that wraps [FTimeField]'s popover content.
-typedef FTimeFieldPopoverBuilder =
-    Widget Function(
-      BuildContext context,
-      FTimeFieldController controller,
-      FPopoverController popoverController,
-      Widget content,
-    );
+typedef FTimeFieldPopoverBuilder = Widget Function(
+  BuildContext context,
+  FTimeFieldController controller,
+  FPopoverController popoverController,
+  Widget content,
+);
 
 /// A time field allows a time to be selected from a picker or input field.
 ///

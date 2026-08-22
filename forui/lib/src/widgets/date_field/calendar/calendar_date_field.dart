@@ -202,27 +202,16 @@ class _CalendarDatePickerState extends _FDateFieldState<_CalendarDateField> {
   }
 }
 
-class _CalendarPopover extends StatelessWidget {
-  final FCalendarController calendarController;
-  final FDateSelectionController<DateTime?> selectionController;
-  final FPopoverController popoverController;
-  final FDateFieldStyle style;
-  final FDateFieldCalendarProperties properties;
-  final bool autofocus;
-  final FocusNode? fieldFocusNode;
-  final Widget child;
-
-  const new({
-    required this.calendarController,
-    required this.selectionController,
-    required this.popoverController,
-    required this.style,
-    required this.properties,
-    required this.autofocus,
-    required this.fieldFocusNode,
-    required this.child,
-  });
-
+class const _CalendarPopover({
+  required final FCalendarController calendarController,
+  required final FDateSelectionController<DateTime?> selectionController,
+  required final FPopoverController popoverController,
+  required final FDateFieldStyle style,
+  required final FDateFieldCalendarProperties properties,
+  required final bool autofocus,
+  required final FocusNode? fieldFocusNode,
+  required final Widget child,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext _) => FPopover(
     control: .managed(controller: popoverController),

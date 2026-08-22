@@ -10,9 +10,7 @@ import 'package:forui/src/foundation/rendering.dart';
 import 'package:forui/src/widgets/slider/inherited_data.dart';
 
 @internal
-class HorizontalSliderRenderObject extends _SliderRenderObject {
-  const new({super.children, super.key});
-
+class const HorizontalSliderRenderObject({super.children, super.key}) extends _SliderRenderObject {
   @override
   RenderObject createRenderObject(BuildContext context) {
     final InheritedData(:style, :layout, :marks, :trackMainAxisExtent) = .of(context);
@@ -23,9 +21,7 @@ class HorizontalSliderRenderObject extends _SliderRenderObject {
 }
 
 @internal
-class VerticalSliderRenderObject extends _SliderRenderObject {
-  const new({super.children, super.key});
-
+class const VerticalSliderRenderObject({super.children, super.key}) extends _SliderRenderObject {
   @override
   RenderObject createRenderObject(BuildContext context) {
     final InheritedData(:style, :layout, :marks, :trackMainAxisExtent) = .of(context);
@@ -35,9 +31,7 @@ class VerticalSliderRenderObject extends _SliderRenderObject {
   }
 }
 
-abstract class _SliderRenderObject extends MultiChildRenderObjectWidget {
-  const new({super.key, super.children});
-
+abstract class const _SliderRenderObject({super.key, super.children}) extends MultiChildRenderObjectWidget {
   @override
   void updateRenderObject(BuildContext context, covariant _RenderSlider slider) {
     final InheritedData(:style, :layout, :marks, :trackMainAxisExtent) = .of(context);
@@ -50,9 +44,8 @@ abstract class _SliderRenderObject extends MultiChildRenderObjectWidget {
   }
 }
 
-class _RenderHorizontalSlider extends _RenderSlider {
-  new(super._style, super._layout, super._textDirection, super._marks, super._mainAxisExtent);
-
+class _RenderHorizontalSlider(super._style, super._layout, super._textDirection, super._marks, super._mainAxisExtent)
+    extends _RenderSlider {
   @override
   void performLayout() {
     final loosened = constraints.loosen();
@@ -92,9 +85,8 @@ class _RenderHorizontalSlider extends _RenderSlider {
   }
 }
 
-class _RenderVerticalSlider extends _RenderSlider {
-  new(super._style, super._layout, super._textDirection, super._marks, super._mainAxisExtent);
-
+class _RenderVerticalSlider(super._style, super._layout, super._textDirection, super._marks, super._mainAxisExtent)
+    extends _RenderSlider {
   @override
   void performLayout() {
     final loosened = constraints.loosen();

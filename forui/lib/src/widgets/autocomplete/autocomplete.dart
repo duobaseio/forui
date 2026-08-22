@@ -16,17 +16,19 @@ import 'package:forui/src/widgets/autocomplete/skip_delegate_traversal_policy.da
 import 'package:forui/src/widgets/popover/popover_controller.dart';
 
 /// A builder for [FAutocomplete]'s results.
-typedef FAutocompleteContentBuilder<T> =
-    List<FAutocompleteItemMixin<T>> Function(BuildContext context, String query, Iterable<T> values);
+typedef FAutocompleteContentBuilder<T> = List<FAutocompleteItemMixin<T>> Function(
+  BuildContext context,
+  String query,
+  Iterable<T> values,
+);
 
 /// A builder that wraps [FAutocomplete]'s popover content.
-typedef FAutocompletePopoverBuilder =
-    Widget Function(
-      BuildContext context,
-      FAutocompleteController controller,
-      FPopoverController popoverController,
-      Widget content,
-    );
+typedef FAutocompletePopoverBuilder = Widget Function(
+  BuildContext context,
+  FAutocompleteController controller,
+  FPopoverController popoverController,
+  Widget content,
+);
 
 /// An autocomplete provides a list of suggestions based on the user's input and shows typeahead text for the first match.
 ///

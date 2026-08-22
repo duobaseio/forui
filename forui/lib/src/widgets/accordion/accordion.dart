@@ -122,13 +122,8 @@ class InheritedAccordionData extends InheritedWidget {
   final int index;
   final Set<int> expanded;
 
-  new({
-    required this.controller,
-    required this.style,
-    required this.index,
-    required super.child,
-    super.key,
-  }) : expanded = controller.expanded;
+  new({required this.controller, required this.style, required this.index, required super.child, super.key})
+    : expanded = controller.expanded;
 
   @override
   bool updateShouldNotify(covariant InheritedAccordionData old) =>
@@ -197,29 +192,25 @@ class FAccordionStyle with Diagnosticable, _$FAccordionStyleFunctions {
   });
 
   /// Creates a [FDividerStyles] that inherits its properties.
-  new inherit({
-    required FColors colors,
-    required FTypography typography,
-    required FStyle style,
-    required bool touch,
-  }) : this(
-         titleTextStyle: .from(
-           typography.display.sm.copyWith(fontWeight: .w500, color: colors.foreground),
-           variants: {
-             [.hovered, .pressed]: .delta(decoration: () => .underline),
-           },
-         ),
-         childTextStyle: typography.body.sm.copyWith(color: colors.foreground),
-         iconStyle: .all(
-           IconThemeData(
-             color: colors.mutedForeground,
-             size: touch ? typography.display.lg.fontSize : typography.display.md.fontSize,
-           ),
-         ),
-         focusedOutlineStyle: style.focusedOutlineStyle,
-         dividerStyle: FDividerStyle(color: colors.border, padding: .zero),
-         tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
-       );
+  new inherit({required FColors colors, required FTypography typography, required FStyle style, required bool touch})
+    : this(
+        titleTextStyle: .from(
+          typography.display.sm.copyWith(fontWeight: .w500, color: colors.foreground),
+          variants: {
+            [.hovered, .pressed]: .delta(decoration: () => .underline),
+          },
+        ),
+        childTextStyle: typography.body.sm.copyWith(color: colors.foreground),
+        iconStyle: .all(
+          IconThemeData(
+            color: colors.mutedForeground,
+            size: touch ? typography.display.lg.fontSize : typography.display.md.fontSize,
+          ),
+        ),
+        focusedOutlineStyle: style.focusedOutlineStyle,
+        dividerStyle: FDividerStyle(color: colors.border, padding: .zero),
+        tappableStyle: style.tappableStyle.copyWith(motion: FTappableMotion.none),
+      );
 }
 
 /// Motion-related properties for [FAccordion].

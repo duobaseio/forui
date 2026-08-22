@@ -141,11 +141,8 @@ final class _ProxyController extends FTimePickerController {
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FTimePickerControl with Diagnosticable, _$FTimePickerControlMixin {
   /// Creates a [FTimePickerControl].
-  const factory managed({
-    FTimePickerController? controller,
-    FTime? initial,
-    ValueChanged<FTime>? onChange,
-  }) = FTimePickerManagedControl;
+  const factory managed({FTimePickerController? controller, FTime? initial, ValueChanged<FTime>? onChange}) =
+      FTimePickerManagedControl;
 
   /// Creates a [FTimePickerControl] for controlling time picker using lifted state.
   ///
@@ -156,12 +153,8 @@ sealed class FTimePickerControl with Diagnosticable, _$FTimePickerControlMixin {
   /// The [onChange] callback is invoked when the user selects a time.
   /// The [duration] when animating to [time] from an invalid/different time. Defaults to 200 milliseconds.
   /// The [curve] when animating to [time] from an invalid/different time. Defaults to [Curves.easeOutCubic].
-  const factory lifted({
-    required FTime time,
-    required ValueChanged<FTime> onChange,
-    Duration duration,
-    Curve curve,
-  }) = _Lifted;
+  const factory lifted({required FTime time, required ValueChanged<FTime> onChange, Duration duration, Curve curve}) =
+      _Lifted;
 
   const new _();
 

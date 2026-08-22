@@ -11,12 +11,9 @@ import 'package:flutter/widgets.dart';
 /// It also allows the focus to move between suggestions when the focus is already inside of the popover and the user
 /// presses tab.
 @internal
-class SkipDelegateTraversalPolicy with Diagnosticable implements FocusTraversalPolicy {
-  final FocusTraversalPolicy _delegate;
-  final FocusScopeNode _popover;
-
-  new(this._delegate, this._popover);
-
+class SkipDelegateTraversalPolicy(final FocusTraversalPolicy _delegate, final FocusScopeNode _popover)
+    with Diagnosticable
+    implements FocusTraversalPolicy {
   @override
   TraversalRequestFocusCallback get requestFocusCallback => _delegate.requestFocusCallback;
 

@@ -17,17 +17,19 @@ import 'package:forui/src/widgets/calendar/wheel_calendar.dart';
 part 'calendar.design.dart';
 
 /// Builds a [FCalendar]'s header. The [child] is the always default header for the currently shown picker.
-typedef FCalendarHeaderBuilder<C extends FCalendarController> =
-    Widget Function(
-      BuildContext context,
-      C controller,
-      FDateSelectionController<Object?> selectionController,
-      Widget child,
-    );
+typedef FCalendarHeaderBuilder<C extends FCalendarController> = Widget Function(
+  BuildContext context,
+  C controller,
+  FDateSelectionController<Object?> selectionController,
+  Widget child,
+);
 
 /// Builds a [FCalendar]'s footer, shown below the picker.
-typedef FCalendarFooterBuilder<C extends FCalendarController> =
-    Widget Function(BuildContext context, C controller, FDateSelectionController<Object?> selectionController);
+typedef FCalendarFooterBuilder<C extends FCalendarController> = Widget Function(
+  BuildContext context,
+  C controller,
+  FDateSelectionController<Object?> selectionController,
+);
 
 /// A calendar.
 ///

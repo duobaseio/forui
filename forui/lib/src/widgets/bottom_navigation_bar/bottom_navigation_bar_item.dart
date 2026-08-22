@@ -168,26 +168,23 @@ class FBottomNavigationBarItemStyle with Diagnosticable, _$FBottomNavigationBarI
   });
 
   /// Creates a [FBottomNavigationBarItemStyle] that inherits its properties.
-  new inherit({
-    required FColors colors,
-    required FTypography typography,
-    required FStyle style,
-  }) : this(
-         iconStyle: FVariants.from(
-           IconThemeData(color: colors.mutedForeground, size: 24),
-           variants: {
-             [.hovered, .pressed]: .delta(color: colors.hover(colors.mutedForeground)),
-             [.selected]: .delta(color: colors.primary, weight: 700),
-           },
-         ),
-         textStyle: FVariants.from(
-           typography.body.xs3.copyWith(color: colors.mutedForeground, height: 1.5),
-           variants: {
-             [.hovered, .pressed]: .delta(color: colors.hover(colors.mutedForeground)),
-             [.selected]: .delta(color: colors.primary, fontWeight: .bold),
-           },
-         ),
-         tappableStyle: style.tappableStyle,
-         focusedOutlineStyle: style.focusedOutlineStyle,
-       );
+  new inherit({required FColors colors, required FTypography typography, required FStyle style})
+    : this(
+        iconStyle: FVariants.from(
+          IconThemeData(color: colors.mutedForeground, size: 24),
+          variants: {
+            [.hovered, .pressed]: .delta(color: colors.hover(colors.mutedForeground)),
+            [.selected]: .delta(color: colors.primary, weight: 700),
+          },
+        ),
+        textStyle: FVariants.from(
+          typography.body.xs3.copyWith(color: colors.mutedForeground, height: 1.5),
+          variants: {
+            [.hovered, .pressed]: .delta(color: colors.hover(colors.mutedForeground)),
+            [.selected]: .delta(color: colors.primary, fontWeight: .bold),
+          },
+        ),
+        tappableStyle: style.tappableStyle,
+        focusedOutlineStyle: style.focusedOutlineStyle,
+      );
 }

@@ -10,33 +10,26 @@ import 'package:forui/src/widgets/toast/animated_toaster_parent_data.dart';
 
 /// The [AnimatedToaster] that is responsible for coordinating the animation, layout and painting of toasts.
 @internal
-class AnimatedToaster extends MultiChildRenderObjectWidget {
+class const AnimatedToaster({
   /// The toaster's style.
-  final FToasterStyle style;
+  required final FToasterStyle style,
 
   /// A unit vector indicating how a toasts should be aligned to the front-most toast when expanded
   ///
   /// For example, `Offset(1, 0)` indicates that all toasts ahould be aligned to the right edge.
-  final Offset expandedAlignTransform;
+  required final Offset expandedAlignTransform,
 
   /// A unit vector indicating how a toast's protrusion should be aligned to the toast in front of it.
   ///
   /// For example, `Offset(0, -1)` indicates that the top-center of this toast's protrusion should be aligned to the
   /// top-center of the toast in front of it.
-  final Offset collapsedAlignTransform;
+  required final Offset collapsedAlignTransform,
 
   /// The expansion's animation value between `[0, 1]`.
-  final double expand;
-
-  const new({
-    required this.style,
-    required this.expandedAlignTransform,
-    required this.collapsedAlignTransform,
-    required this.expand,
-    super.children,
-    super.key,
-  });
-
+  required final double expand,
+  super.children,
+  super.key,
+}) extends MultiChildRenderObjectWidget {
   @override
   RenderObject createRenderObject(BuildContext context) => RenderAnimatedToaster(
     style: style,

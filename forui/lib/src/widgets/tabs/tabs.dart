@@ -241,12 +241,7 @@ class _FTabsState extends State<FTabs> with TickerProviderStateMixin {
   }
 }
 
-class _Tab extends StatefulWidget {
-  final FTabsStyle style;
-  final Widget label;
-
-  const new({required this.style, required this.label});
-
+class const _Tab({required final FTabsStyle style, required final Widget label}) extends StatefulWidget {
   @override
   State<_Tab> createState() => _TabState();
 

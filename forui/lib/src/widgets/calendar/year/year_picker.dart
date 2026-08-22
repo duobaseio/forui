@@ -19,30 +19,18 @@ const _columns = 3;
 const _rows = 4;
 
 @internal
-class YearPicker extends StatelessWidget {
-  final FCalendarYearPickerController controller;
-  final FCalendarYearPickerStyle style;
-  final FLocalizations localization;
-  final DateTime today;
-  final ScrollPhysics? scrollPhysics;
-  final ScrollCacheExtent? scrollCacheExtent;
-  final ScrollBehavior? scrollBehavior;
-  final ValueChanged<DateTime> onPress;
-  final FCalendarYearBuilder builder;
-
-  const new({
-    required this.controller,
-    required this.style,
-    required this.localization,
-    required this.today,
-    required this.scrollPhysics,
-    required this.scrollCacheExtent,
-    required this.scrollBehavior,
-    required this.onPress,
-    required this.builder,
-    super.key,
-  });
-
+class const YearPicker({
+  required final FCalendarYearPickerController controller,
+  required final FCalendarYearPickerStyle style,
+  required final FLocalizations localization,
+  required final DateTime today,
+  required final ScrollPhysics? scrollPhysics,
+  required final ScrollCacheExtent? scrollCacheExtent,
+  required final ScrollBehavior? scrollBehavior,
+  required final ValueChanged<DateTime> onPress,
+  required final FCalendarYearBuilder builder,
+  super.key,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = style.yearSize;
@@ -221,32 +209,27 @@ class _GridState extends State<_Grid> {
 /// Controls a calendar's year picker.
 class FCalendarYearPickerController extends GridController {
   /// Creates a [FCalendarYearPickerController].
-  new({
-    required super.start,
-    required super.end,
-    required super.selectable,
-    required super.initial,
-    super.focused,
-  }) : super(
-         columns: _columns,
-         focusable: (decade, date) {
-           final preferred = DateTime.utc(date.year);
-           if (decade.year <= preferred.year && preferred.year < decade.year + 10 && selectable(preferred)) {
-             return preferred;
-           }
+  new({required super.start, required super.end, required super.selectable, required super.initial, super.focused})
+    : super(
+        columns: _columns,
+        focusable: (decade, date) {
+          final preferred = DateTime.utc(date.year);
+          if (decade.year <= preferred.year && preferred.year < decade.year + 10 && selectable(preferred)) {
+            return preferred;
+          }
 
-           for (var year = decade; year.year < decade.year + 10; year = year.plus(years: 1)) {
-             if (selectable(year)) {
-               return year;
-             }
-           }
+          for (var year = decade; year.year < decade.year + 10; year = year.plus(years: 1)) {
+            if (selectable(year)) {
+              return year;
+            }
+          }
 
-           return null;
-         },
-         step: (date, amount) => date.plus(years: amount),
-         from: (date) => (date.year - date.year % 10 - (start.year - start.year % 10)) ~/ 10,
-         to: (page) => .utc(start.year - start.year % 10 + page * 10),
-       );
+          return null;
+        },
+        step: (date, amount) => date.plus(years: amount),
+        from: (date) => (date.year - date.year % 10 - (start.year - start.year % 10)) ~/ 10,
+        to: (page) => .utc(start.year - start.year % 10 + page * 10),
+      );
 }
 
 /// A year picker's style.
@@ -268,20 +251,12 @@ class FCalendarYearPickerStyle with Diagnosticable, _$FCalendarYearPickerStyleFu
   final double yearSpacing;
 
   /// Creates a [FCalendarYearPickerStyle].
-  const new({
-    required this.yearStyles,
-    required this.yearSize,
-    this.headerSpacing = 6,
-    this.yearSpacing = 4,
-  });
+  const new({required this.yearStyles, required this.yearSize, this.headerSpacing = 6, this.yearSpacing = 4});
 
   /// Creates a [FCalendarYearPickerStyle] that inherits its properties.
-  factory inherit({
-    required FColors colors,
-    required FTypography typography,
-    required FStyle style,
-  }) => FCalendarYearPickerStyle(
-    yearStyles: .inherit(colors: colors, typography: typography, style: style),
-    yearSize: Size(DateTime.daysPerWeek * style.sizes.calendar / 3, style.sizes.calendar),
-  );
+  factory inherit({required FColors colors, required FTypography typography, required FStyle style}) =>
+      FCalendarYearPickerStyle(
+        yearStyles: .inherit(colors: colors, typography: typography, style: style),
+        yearSize: Size(DateTime.daysPerWeek * style.sizes.calendar / 3, style.sizes.calendar),
+      );
 }

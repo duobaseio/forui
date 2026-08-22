@@ -5,10 +5,8 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/picker/picker.dart';
 
-class _ScrollBehavior extends ScrollBehavior {
+class const _ScrollBehavior() extends ScrollBehavior {
   static final _devices = PointerDeviceKind.values.toSet();
-
-  const new();
 
   @override
   Set<PointerDeviceKind> get dragDevices => _devices;

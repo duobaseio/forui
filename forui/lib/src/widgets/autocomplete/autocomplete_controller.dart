@@ -110,10 +110,7 @@ sealed class FAutocompleteControl with Diagnosticable, _$FAutocompleteControlMix
   }) = FAutocompleteManagedControl;
 
   /// Creates a [FAutocompleteControl] for controlling an autocomplete using lifted state.
-  const factory lifted({
-    required TextEditingValue value,
-    required ValueChanged<TextEditingValue> onChange,
-  }) = _Lifted;
+  const factory lifted({required TextEditingValue value, required ValueChanged<TextEditingValue> onChange}) = _Lifted;
 
   const new _();
 

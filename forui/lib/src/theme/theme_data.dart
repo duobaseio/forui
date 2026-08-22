@@ -22,34 +22,27 @@ part 'theme_data.design.dart';
 ///
 /// Widget styles provide an `inherit(...)` constructor. The constructor configures the widget style using the defaults
 /// provided by the [colors], [typography], and [style].
-final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
+final class FThemeData._({
   /// A label that is used in the [toString] output. Intended to aid with identifying themes in debug output.
-  @override
-  final String? debugLabel;
+  @override required final String? debugLabel,
 
   /// The responsive breakpoints.
-  @override
-  final FBreakpoints breakpoints;
+  @override required final FBreakpoints breakpoints,
 
   /// The color scheme. It is used to configure the colors of Forui widgets.
-  @override
-  final FColors colors;
+  @override required final FColors colors,
 
   /// The typography data. It is used to configure the [TextStyle]s of Forui widgets.
-  @override
-  final FTypography typography;
+  @override required final FTypography typography,
 
   /// The icon tokens. Defaults to a [FIcons.lucide].
-  @override
-  final FIcons icons;
+  @override required final FIcons icons,
 
   /// The style. It is used to configure the miscellaneous properties, such as border radii, of Forui widgets.
-  @override
-  final FStyle style;
+  @override required final FStyle style,
 
   /// The haptic feedback. Defaults to `const FHapticFeedback()`.
-  @override
-  final FHapticFeedback hapticFeedback;
+  @override required final FHapticFeedback hapticFeedback,
 
   /// The accordion style.
   ///
@@ -59,8 +52,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create accordion
   /// ```
-  @override
-  final FAccordionStyle accordionStyle;
+  @override required final FAccordionStyle accordionStyle,
 
   /// The autocomplete style.
   ///
@@ -70,8 +62,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create autocomplete
   /// ```
-  @override
-  final FAutocompleteStyle autocompleteStyle;
+  @override required final FAutocompleteStyle autocompleteStyle,
 
   /// The alert styles.
   ///
@@ -81,8 +72,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create alerts
   /// ```
-  @override
-  final FAlertStyles alertStyles;
+  @override required final FAlertStyles alertStyles,
 
   /// The avatar style.
   ///
@@ -92,8 +82,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create avatar
   /// ```
-  @override
-  final FAvatarStyle avatarStyle;
+  @override required final FAvatarStyle avatarStyle,
 
   /// The badge styles.
   ///
@@ -103,8 +92,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create badges
   /// ```
-  @override
-  final FBadgeStyles badgeStyles;
+  @override required final FBadgeStyles badgeStyles,
 
   /// The bottom navigation bar style.
   ///
@@ -114,8 +102,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create bottom-navigation-bar
   /// ```
-  @override
-  final FBottomNavigationBarStyle bottomNavigationBarStyle;
+  @override required final FBottomNavigationBarStyle bottomNavigationBarStyle,
 
   /// The breadcrumb style.
   ///
@@ -125,8 +112,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create breadcrumb
   /// ```
-  @override
-  final FBreadcrumbStyle breadcrumbStyle;
+  @override required final FBreadcrumbStyle breadcrumbStyle,
 
   /// The button styles.
   ///
@@ -136,8 +122,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create buttons
   /// ```
-  @override
-  final FButtonStyles buttonStyles;
+  @override required final FButtonStyles buttonStyles,
 
   /// The calendar style.
   ///
@@ -147,8 +132,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create calendar
   /// ```
-  @override
-  final FCalendarStyle calendarStyle;
+  @override required final FCalendarStyle calendarStyle,
 
   /// The card style.
   ///
@@ -158,8 +142,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create card
   /// ```
-  @override
-  final FCardStyle cardStyle;
+  @override required final FCardStyle cardStyle,
 
   /// The checkbox style.
   ///
@@ -169,8 +152,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create checkbox
   /// ```
-  @override
-  final FCheckboxStyle checkboxStyle;
+  @override required final FCheckboxStyle checkboxStyle,
 
   /// The circular progress style.
   ///
@@ -180,8 +162,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create circular-progress
   /// ```
-  @override
-  final FCircularProgressSizeStyles circularProgressStyles;
+  @override required final FCircularProgressSizeStyles circularProgressStyles,
 
   /// The date field style.
   ///
@@ -191,8 +172,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create date-field
   /// ```
-  @override
-  final FDateFieldStyle dateFieldStyle;
+  @override required final FDateFieldStyle dateFieldStyle,
 
   /// The date time picker style.
   ///
@@ -202,8 +182,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create date-time-picker
   /// ```
-  @override
-  final FDateTimePickerStyle dateTimePickerStyle;
+  @override required final FDateTimePickerStyle dateTimePickerStyle,
 
   /// The determinate progress style.
   ///
@@ -213,8 +192,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create determinate-progress
   /// ```
-  @override
-  final FDeterminateProgressStyle determinateProgressStyle;
+  @override required final FDeterminateProgressStyle determinateProgressStyle,
 
   /// The dialog route's style.
   ///
@@ -224,8 +202,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create dialog-route
   /// ```
-  @override
-  final FDialogRouteStyle dialogRouteStyle;
+  @override required final FDialogRouteStyle dialogRouteStyle,
 
   /// The dialog style.
   ///
@@ -235,8 +212,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create dialog
   /// ```
-  @override
-  final FDialogStyle dialogStyle;
+  @override required final FDialogStyle dialogStyle,
 
   /// The divider styles.
   ///
@@ -246,8 +222,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create dividers
   /// ```
-  @override
-  final FDividerStyles dividerStyles;
+  @override required final FDividerStyles dividerStyles,
 
   /// The header styles.
   ///
@@ -257,8 +232,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create headers
   /// ```
-  @override
-  final FHeaderStyles headerStyles;
+  @override required final FHeaderStyles headerStyles,
 
   /// The item styles.
   ///
@@ -267,8 +241,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create item
   /// ```
-  @override
-  final FItemStyles itemStyles;
+  @override required final FItemStyles itemStyles,
 
   /// The item group style.
   ///
@@ -277,8 +250,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create item-group
   /// ```
-  @override
-  final FItemGroupStyle itemGroupStyle;
+  @override required final FItemGroupStyle itemGroupStyle,
 
   /// The label styles.
   ///
@@ -288,8 +260,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create labels
   /// ```
-  @override
-  final FLabelStyles labelStyles;
+  @override required final FLabelStyles labelStyles,
 
   /// The line calendar style.
   ///
@@ -299,8 +270,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create line-calendar
   /// ```
-  @override
-  final FLineCalendarStyle lineCalendarStyle;
+  @override required final FLineCalendarStyle lineCalendarStyle,
 
   /// The multi-select style.
   ///
@@ -309,8 +279,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create multi-select
   /// ```
-  @override
-  final FMultiSelectStyle multiSelectStyle;
+  @override required final FMultiSelectStyle multiSelectStyle,
 
   /// The modal sheet style.
   ///
@@ -320,12 +289,10 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create modal-sheet
   /// ```
-  @override
-  final FModalSheetStyle modalSheetStyle;
+  @override required final FModalSheetStyle modalSheetStyle,
 
   /// The OTP field style.
-  @override
-  final FOtpFieldStyle otpFieldStyle;
+  @override required final FOtpFieldStyle otpFieldStyle,
 
   /// The pagination style.
   ///
@@ -335,8 +302,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create pagination
   /// ```
-  @override
-  final FPaginationStyle paginationStyle;
+  @override required final FPaginationStyle paginationStyle,
 
   /// The persistent sheet style.
   ///
@@ -346,8 +312,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create persistent-sheet
   /// ```
-  @override
-  final FPersistentSheetStyle persistentSheetStyle;
+  @override required final FPersistentSheetStyle persistentSheetStyle,
 
   /// The picker's style.
   ///
@@ -357,8 +322,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create picker
   /// ```
-  @override
-  final FPickerStyle pickerStyle;
+  @override required final FPickerStyle pickerStyle,
 
   /// The popover's style.
   ///
@@ -368,8 +332,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create popover
   /// ```
-  @override
-  final FPopoverStyle popoverStyle;
+  @override required final FPopoverStyle popoverStyle,
 
   /// The popover menu's style.
   ///
@@ -379,8 +342,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create popover-menu
   /// ```
-  @override
-  final FPopoverMenuStyle popoverMenuStyle;
+  @override required final FPopoverMenuStyle popoverMenuStyle,
 
   /// The progress style.
   ///
@@ -390,8 +352,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create progress
   /// ```
-  @override
-  final FProgressStyle progressStyle;
+  @override required final FProgressStyle progressStyle,
 
   /// The radio style.
   ///
@@ -401,8 +362,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create radio
   /// ```
-  @override
-  final FRadioStyle radioStyle;
+  @override required final FRadioStyle radioStyle,
 
   /// The resizable styles.
   ///
@@ -412,8 +372,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create resizable
   /// ```
-  @override
-  final FResizableStyles resizableStyles;
+  @override required final FResizableStyles resizableStyles,
 
   /// The scaffold style.
   ///
@@ -423,8 +382,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create scaffold
   /// ```
-  @override
-  final FScaffoldStyle scaffoldStyle;
+  @override required final FScaffoldStyle scaffoldStyle,
 
   /// The select style.
   ///
@@ -434,8 +392,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create select
   /// ```
-  @override
-  final FSelectStyle selectStyle;
+  @override required final FSelectStyle selectStyle,
 
   /// The select group style.
   ///
@@ -445,8 +402,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create select-group
   /// ```
-  @override
-  final FSelectGroupStyle selectGroupStyle;
+  @override required final FSelectGroupStyle selectGroupStyle,
 
   /// The select menu tile style.
   ///
@@ -456,8 +412,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create select-menu-tile
   /// ```
-  @override
-  final FSelectMenuTileStyle selectMenuTileStyle;
+  @override required final FSelectMenuTileStyle selectMenuTileStyle,
 
   /// The sidebar style.
   ///
@@ -467,8 +422,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create sidebar
   /// ```
-  @override
-  final FSidebarStyle sidebarStyle;
+  @override required final FSidebarStyle sidebarStyle,
 
   /// The slider styles.
   ///
@@ -478,8 +432,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create sliders
   /// ```
-  @override
-  final FSliderStyles sliderStyles;
+  @override required final FSliderStyles sliderStyles,
 
   /// The toaster style.
   ///
@@ -489,8 +442,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create toaster
   /// ```
-  @override
-  final FToasterStyle toasterStyle;
+  @override required final FToasterStyle toasterStyle,
 
   /// The switch style.
   ///
@@ -500,8 +452,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create switch
   /// ```
-  @override
-  final FSwitchStyle switchStyle;
+  @override required final FSwitchStyle switchStyle,
 
   /// The tabs styles.
   ///
@@ -511,8 +462,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create tabs
   /// ```
-  @override
-  final FTabsStyle tabsStyle;
+  @override required final FTabsStyle tabsStyle,
 
   /// The tappable style.
   ///
@@ -522,8 +472,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create tappable
   /// ```
-  @override
-  final FTappableStyle tappableStyle;
+  @override required final FTappableStyle tappableStyle,
 
   /// The text field styles.
   ///
@@ -533,8 +482,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create text-field
   /// ```
-  @override
-  final FTextFieldSizeStyles textFieldStyles;
+  @override required final FTextFieldSizeStyles textFieldStyles,
 
   /// The tile's styles.
   ///
@@ -544,8 +492,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create tile
   /// ```
-  @override
-  final FTileStyles tileStyles;
+  @override required final FTileStyles tileStyles,
 
   /// The tile group's style.
   ///
@@ -555,8 +502,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create tile-group
   /// ```
-  @override
-  final FTileGroupStyle tileGroupStyle;
+  @override required final FTileGroupStyle tileGroupStyle,
 
   /// The time field's style.
   ///
@@ -566,8 +512,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create time-field
   /// ```
-  @override
-  final FTimeFieldStyle timeFieldStyle;
+  @override required final FTimeFieldStyle timeFieldStyle,
 
   /// The time picker style.
   ///
@@ -577,8 +522,7 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create time-picker
   /// ```
-  @override
-  final FTimePickerStyle timePickerStyle;
+  @override required final FTimePickerStyle timePickerStyle,
 
   /// The tooltip style.
   ///
@@ -588,11 +532,10 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
   /// ```shell
   /// dart run forui style create tooltip
   /// ```
-  @override
-  final FTooltipStyle tooltipStyle;
+  @override required final FTooltipStyle tooltipStyle,
 
-  final Map<Object, ThemeExtension<dynamic>> _extensions;
-
+  required final Map<Object, ThemeExtension<dynamic>> _extensions,
+}) with Diagnosticable, _$FThemeDataFunctions {
   /// Creates a [FThemeData].
   ///
   /// Set [touch] to true for touch-optimized sizing.
@@ -948,67 +891,6 @@ final class FThemeData with Diagnosticable, _$FThemeDataFunctions {
     extensions: a._extensions.map((id, extensionA) => MapEntry(id, extensionA.lerp(b._extensions[id], t)))
       ..addEntries(b._extensions.entries.where((entry) => !a._extensions.containsKey(entry.key))),
   );
-
-  new _({
-    required this.debugLabel,
-    required this.breakpoints,
-    required this.colors,
-    required this.typography,
-    required this.icons,
-    required this.style,
-    required this.hapticFeedback,
-    required this.accordionStyle,
-    required this.autocompleteStyle,
-    required this.alertStyles,
-    required this.avatarStyle,
-    required this.badgeStyles,
-    required this.bottomNavigationBarStyle,
-    required this.breadcrumbStyle,
-    required this.buttonStyles,
-    required this.calendarStyle,
-    required this.cardStyle,
-    required this.checkboxStyle,
-    required this.circularProgressStyles,
-    required this.dateFieldStyle,
-    required this.dateTimePickerStyle,
-    required this.determinateProgressStyle,
-    required this.dialogRouteStyle,
-    required this.dialogStyle,
-    required this.dividerStyles,
-    required this.headerStyles,
-    required this.itemStyles,
-    required this.itemGroupStyle,
-    required this.labelStyles,
-    required this.lineCalendarStyle,
-    required this.multiSelectStyle,
-    required this.modalSheetStyle,
-    required this.otpFieldStyle,
-    required this.paginationStyle,
-    required this.persistentSheetStyle,
-    required this.pickerStyle,
-    required this.popoverStyle,
-    required this.popoverMenuStyle,
-    required this.progressStyle,
-    required this.radioStyle,
-    required this.resizableStyles,
-    required this.scaffoldStyle,
-    required this.selectStyle,
-    required this.selectGroupStyle,
-    required this.selectMenuTileStyle,
-    required this.sidebarStyle,
-    required this.sliderStyles,
-    required this.toasterStyle,
-    required this.switchStyle,
-    required this.tabsStyle,
-    required this.tappableStyle,
-    required this.textFieldStyles,
-    required this.tileStyles,
-    required this.tileGroupStyle,
-    required this.timeFieldStyle,
-    required this.timePickerStyle,
-    required this.tooltipStyle,
-    required this._extensions,
-  });
 
   /// Obtains a particular [ThemeExtension].
   ///

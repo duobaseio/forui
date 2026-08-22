@@ -124,22 +124,13 @@ final class _Value extends FSliderValue {
 final class ContinuousValue extends FSliderValue {
   final double _step;
 
-  new({
-    required double step,
-    required super.extent,
-    required super.constraints,
-    required super.min,
-    required super.max,
-  }) : assert(0 < step && step <= 1, 'step must be > 0 and <= 1, but is $step.'),
-       _step = step,
-       super._();
+  new({required double step, required super.extent, required super.constraints, required super.min, required super.max})
+    : assert(0 < step && step <= 1, 'step must be > 0 and <= 1, but is $step.'),
+      _step = step,
+      super._();
 
-  new _({
-    required this._step,
-    required super.pixelConstraints,
-    required super.constraints,
-    required super.pixels,
-  }) : super._copy(min: pixels.min / pixelConstraints.extent, max: pixels.max / pixelConstraints.extent);
+  new _({required this._step, required super.pixelConstraints, required super.constraints, required super.pixels})
+    : super._copy(min: pixels.min / pixelConstraints.extent, max: pixels.max / pixelConstraints.extent);
 
   @override
   ContinuousValue step({required bool min, required bool expand}) {

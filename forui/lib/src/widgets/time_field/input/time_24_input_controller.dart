@@ -63,8 +63,7 @@ class Time24InputController extends TimeInputController {
 
 @internal
 class Time24Selector extends Selector {
-  new(FLocalizations localizations)
-    : super(localizations, RegExp(RegExp.escape(localizations.timeFieldSuffix) + r'$'));
+  new(FLocalizations localizations) : super(localizations, RegExp(RegExp.escape(localizations.timeFieldSuffix) + r'$'));
 
   @override
   TextEditingValue? navigate(

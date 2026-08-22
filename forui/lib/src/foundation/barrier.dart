@@ -270,12 +270,11 @@ class FModalBarrier extends StatelessWidget {
 }
 
 /// Clips its child with an even-odd path that cuts out the area occupied by `cutout`.
-class _CutoutClipper extends SingleChildRenderObjectWidget {
-  final RenderBox cutout;
-  final void Function(Path path, Rect bounds) cutoutBuilder;
-
-  const new({required this.cutout, required this.cutoutBuilder, super.child});
-
+class const _CutoutClipper({
+  required final RenderBox cutout,
+  required final void Function(Path path, Rect bounds) cutoutBuilder,
+  super.child,
+}) extends SingleChildRenderObjectWidget {
   @override
   RenderObject createRenderObject(BuildContext _) => _RenderCutoutClipper(cutout: cutout, cutoutBuilder: cutoutBuilder);
 
@@ -293,12 +292,10 @@ class _CutoutClipper extends SingleChildRenderObjectWidget {
   }
 }
 
-class _RenderCutoutClipper extends RenderProxyBox {
-  RenderBox _cutout;
-  void Function(Path path, Rect bounds) _cutoutBuilder;
-
-  new({required this._cutout, required this._cutoutBuilder});
-
+class _RenderCutoutClipper({
+  required var RenderBox _cutout,
+  required var void Function(Path path, Rect bounds) _cutoutBuilder,
+}) extends RenderProxyBox {
   @override
   void paint(PaintingContext context, Offset offset) {
     if (!_cutout.attached || !_cutout.hasSize) {
@@ -358,14 +355,14 @@ class _RenderCutoutClipper extends RenderProxyBox {
 ///    layer rendered on top of it.
 ///
 /// This is an exact copy of [_SemanticsClipper] in Flutter 3.32.1.
-class _SemanticsClipper extends SingleChildRenderObjectWidget {
+class const _SemanticsClipper({
   /// The [ValueNotifier] whose value determines how the child's [SemanticsNode.rect] should be clipped in four
   /// directions.
-  final ValueNotifier<EdgeInsets> clipDetailsNotifier;
-
+  required final ValueNotifier<EdgeInsets> clipDetailsNotifier,
+  super.child,
+}) extends SingleChildRenderObjectWidget {
   /// Creates a [_SemanticsClipper] that updates the size of the [SemanticsNode.rect] of its child based on the value
   /// inside the provided [ValueNotifier], or a default value of [EdgeInsets.zero].
-  const new({required this.clipDetailsNotifier, super.child});
 
   @override
   _RenderSemanticsClipper createRenderObject(BuildContext _) =>
@@ -444,11 +441,8 @@ class _RenderSemanticsClipper extends RenderProxyBox {
 }
 
 /// This is an exact copy of [_AnyTapGestureRecognizerFactory] in Flutter 3.32.1.
-class _AnyTapGestureRecognizerFactory extends GestureRecognizerFactory<_AnyTapGestureRecognizer> {
-  const new({this.onAnyTapUp});
-
-  final VoidCallback? onAnyTapUp;
-
+class const _AnyTapGestureRecognizerFactory({final VoidCallback? onAnyTapUp})
+    extends GestureRecognizerFactory<_AnyTapGestureRecognizer> {
   @override
   _AnyTapGestureRecognizer constructor() => _AnyTapGestureRecognizer();
 
@@ -462,9 +456,7 @@ class _AnyTapGestureRecognizerFactory extends GestureRecognizerFactory<_AnyTapGe
 /// parts in gesture arenas.
 ///
 /// This is an exact copy of [_AnyTapGestureRecognizer] in Flutter 3.32.1.
-class _AnyTapGestureRecognizer extends BaseTapGestureRecognizer {
-  new();
-
+class _AnyTapGestureRecognizer() extends BaseTapGestureRecognizer {
   VoidCallback? onAnyTapUp;
 
   @protected

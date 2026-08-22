@@ -26,12 +26,8 @@ class FCapturedTheme {
       theme == null && accessibility == null && platform == null ? child : _CapturedTheme(captured: this, child: child);
 }
 
-class _CapturedTheme extends StatefulWidget {
-  final FCapturedTheme captured;
-  final Widget child;
-
-  const new({required this.captured, required this.child});
-
+class const _CapturedTheme({required final FCapturedTheme captured, required final Widget child})
+    extends StatefulWidget {
   @override
   State<_CapturedTheme> createState() => _CapturedThemeState();
 

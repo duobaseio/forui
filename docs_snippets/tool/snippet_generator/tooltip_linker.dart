@@ -71,8 +71,8 @@ class TooltipLinker extends DartDocLinker {
       case final PropertyAccessorElement element when _forui(element):
         tooltip(
           element.isStatic ? node : node.identifier,
-          element.nonSynthetic is FieldElement ? .field : .getter,
-          element.nonSynthetic.toString(),
+          _property(element).$1,
+          _property(element).$2,
           element.enclosingElement,
         );
 
@@ -94,8 +94,8 @@ class TooltipLinker extends DartDocLinker {
     if (node.propertyName.element case final element? when _forui(element)) {
       tooltip(
         node.propertyName,
-        element.nonSynthetic is FieldElement ? .field : .getter,
-        element.nonSynthetic.toString(),
+        _property(element).$1,
+        _property(element).$2,
         element.enclosingElement,
       );
     } else if (node.target?.staticType case final RecordType type) {
@@ -153,8 +153,8 @@ class TooltipLinker extends DartDocLinker {
     if (node.propertyName.element case final element? when _forui(element)) {
       tooltip(
         node.propertyName,
-        element.nonSynthetic is FieldElement ? .field : .getter,
-        element.nonSynthetic.toString(),
+        _property(element).$1,
+        _property(element).$2,
         element.enclosingElement,
       );
     }
@@ -221,6 +221,12 @@ class TooltipLinker extends DartDocLinker {
   }
 
   bool _forui(Element element) => packages.any((p) => p.name == element.library?.uri.pathSegments.first);
+
+  (FragmentSnippetKind, String) _property(Element element) => switch (element.nonSynthetic) {
+    FormalParameterElement(:final type, :final name?) => (.field, '$type $name'),
+    final FieldElement field => (.field, field.toString()),
+    final other => (.getter, other.toString()),
+  };
 
   void tooltip(SyntacticEntity node, FragmentSnippetKind kind, String text, [Element? container]) {
     tooltips.add(

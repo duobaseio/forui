@@ -33,11 +33,7 @@ class FFormFieldStyle with Diagnosticable, _$FFormFieldStyleFunctions {
   final FVariants<FFormFieldErrorVariantConstraint, FFormFieldErrorVariant, TextStyle, TextStyleDelta> errorTextStyle;
 
   /// Creates a [FFormFieldStyle].
-  const new({
-    required this.labelTextStyle,
-    required this.descriptionTextStyle,
-    required this.errorTextStyle,
-  });
+  const new({required this.labelTextStyle, required this.descriptionTextStyle, required this.errorTextStyle});
 
   /// Creates a [FFormFieldStyle] that inherits its properties.
   factory inherit({required FColors colors, required FTypography typography, required bool touch}) {

@@ -3,7 +3,7 @@ analyzer:
   errors:
     prefer_asserts_with_message: ignore
     public_member_api_docs: ignore # TODO: https://github.com/dart-lang/sdk/issues/64043
-    unused_result: ignore # TODO: Re-enable once Dart 3.13 lands
+    unused_result: ignore # TODO: https://github.com/dart-lang/sdk/issues/64113
   exclude:
     - build/**
     - android/**

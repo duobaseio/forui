@@ -20,30 +20,25 @@ import 'package:forui/src/theme/variant.dart';
 part 'year.design.dart';
 
 /// A calendar year builder.
-typedef FCalendarYearBuilder =
-    Widget Function(BuildContext, FCalendarYearStyles, FLocalizations, DateTime, Set<FCalendarYearVariant>);
+typedef FCalendarYearBuilder = Widget Function(
+  BuildContext,
+  FCalendarYearStyles,
+  FLocalizations,
+  DateTime,
+  Set<FCalendarYearVariant>,
+);
 
 @internal
-class Year extends StatelessWidget {
-  final FCalendarYearStyles styles;
-  final FLocalizations localizations;
-  final DateTime date;
-  final Set<FCalendarYearVariant> variants;
-  final FocusNode focusNode;
-  final VoidCallback? onPress;
-  final FCalendarYearBuilder builder;
-
-  const new({
-    required this.styles,
-    required this.localizations,
-    required this.date,
-    required this.variants,
-    required this.focusNode,
-    required this.onPress,
-    required this.builder,
-    super.key,
-  });
-
+class const Year({
+  required final FCalendarYearStyles styles,
+  required final FLocalizations localizations,
+  required final DateTime date,
+  required final Set<FCalendarYearVariant> variants,
+  required final FocusNode focusNode,
+  required final VoidCallback? onPress,
+  required final FCalendarYearBuilder builder,
+  super.key,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) => FTappable.static(
     focusNode: focusNode,
@@ -84,15 +79,11 @@ class FCalendarYearStyle with Diagnosticable, _$FCalendarYearStyleFunctions {
 
 /// [FCalendarYearStyle]'s variants.
 extension type FCalendarYearStyles(
-  FVariants<FCalendarYearVariantConstraint, FCalendarYearVariant, FCalendarYearStyle, FCalendarYearStyleDelta> _
+  FVariants<FCalendarYearVariantConstraint, FCalendarYearVariant, FCalendarYearStyle, FCalendarYearStyleDelta> _,
 ) implements
     FVariants<FCalendarYearVariantConstraint, FCalendarYearVariant, FCalendarYearStyle, FCalendarYearStyleDelta> {
   /// Creates a [FCalendarYearStyles] that inherits its properties.
-  factory inherit({
-    required FColors colors,
-    required FTypography typography,
-    required FStyle style,
-  }) {
+  factory inherit({required FColors colors, required FTypography typography, required FStyle style}) {
     final base = FCalendarYearStyle(
       textStyle: typography.body.sm.copyWith(color: colors.foreground),
       decoration: ShapeDecoration(shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md)),

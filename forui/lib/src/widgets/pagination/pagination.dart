@@ -48,13 +48,7 @@ class FPagination extends StatefulWidget {
   final Widget? next;
 
   /// Creates an [FPagination].
-  const new({
-    this.control = const .managed(),
-    this.style = const .context(),
-    this.previous,
-    this.next,
-    super.key,
-  });
+  const new({this.control = const .managed(), this.style = const .context(), this.previous, this.next, super.key});
 
   @override
   State<FPagination> createState() => _FPaginationState();
@@ -171,13 +165,7 @@ class FPaginationItemData extends InheritedWidget {
   final FPaginationController controller;
   final FPaginationStyle style;
 
-  const new({
-    required this.page,
-    required this.controller,
-    required this.style,
-    required super.child,
-    super.key,
-  });
+  const new({required this.page, required this.controller, required this.style, required super.child, super.key});
 
   @override
   bool updateShouldNotify(covariant FPaginationItemData old) =>
@@ -194,22 +182,15 @@ class FPaginationItemData extends InheritedWidget {
 }
 
 @internal
-class Action extends StatelessWidget {
-  final FPaginationStyle style;
-  final String semanticsLabel;
+class const Action({
+  required final FPaginationStyle style,
+  required final String semanticsLabel,
 
   /// Null when the action is at an edge of the page range, which disables it.
-  final VoidCallback? onPress;
-  final Widget child;
-
-  const new({
-    required this.style,
-    required this.semanticsLabel,
-    required this.onPress,
-    required this.child,
-    super.key,
-  });
-
+  required final VoidCallback? onPress,
+  required final Widget child,
+  super.key,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Padding(
     padding: style.itemPadding,
@@ -244,9 +225,7 @@ class Action extends StatelessWidget {
   }
 }
 
-class _Page extends StatelessWidget {
-  const new();
-
+class const _Page() extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final FPaginationItemData(:page, :controller, :style) = FPaginationItemData.of(context);

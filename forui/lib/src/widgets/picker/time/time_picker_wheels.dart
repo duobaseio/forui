@@ -6,14 +6,12 @@ import 'package:intl/intl.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/picker/picker_controller.dart';
 
-class _HourPicker extends StatefulWidget with FPickerWheelMixin {
-  final ValuePickerController<Object?> controller;
-  final String pattern;
-  final int offset;
-  final Widget child;
-
-  const new({required this.controller, required this.pattern, required this.offset, required this.child});
-
+class const _HourPicker({
+  required final ValuePickerController<Object?> controller,
+  required final String pattern,
+  required final int offset,
+  required final Widget child,
+}) extends StatefulWidget with FPickerWheelMixin {
   @override
   State<_HourPicker> createState() => _HourPickerState();
 
@@ -55,36 +53,21 @@ class _HourPickerState extends State<_HourPicker> {
   );
 }
 
-abstract class _Picker extends StatelessWidget {
-  final ValuePickerController<Object?> controller;
-  final FPickerStyle style;
-  final List<Widget> dateWheels;
-  final DateFormat timeFormat;
-  final int padding;
-  final EdgeInsetsGeometry start;
-  final EdgeInsetsGeometry end;
-  final int hourInterval;
-  final int minuteInterval;
-  final int hourFlex;
-  final int minuteFlex;
-  final String debugLabel;
-
-  const new({
-    required this.controller,
-    required this.style,
-    required this.dateWheels,
-    required this.timeFormat,
-    required this.padding,
-    required this.start,
-    required this.end,
-    required this.hourInterval,
-    required this.minuteInterval,
-    required this.hourFlex,
-    required this.minuteFlex,
-    required this.debugLabel,
-    super.key,
-  });
-
+abstract class const _Picker({
+  required final ValuePickerController<Object?> controller,
+  required final FPickerStyle style,
+  required final List<Widget> dateWheels,
+  required final DateFormat timeFormat,
+  required final int padding,
+  required final EdgeInsetsGeometry start,
+  required final EdgeInsetsGeometry end,
+  required final int hourInterval,
+  required final int minuteInterval,
+  required final int hourFlex,
+  required final int minuteFlex,
+  required final String debugLabel,
+  super.key,
+}) extends StatelessWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);

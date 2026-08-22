@@ -75,9 +75,8 @@ class _Outline extends RenderProxyBox {
       final size = child!.size;
       final spacing = math.max(_style.spacing, -math.min(size.width, size.height) / 2);
       context.canvas.drawPath(
-        RoundedSuperellipseBorder(
-          borderRadius: _style.borderRadius.resolve(_textDirection),
-        ).getOuterPath((offset & size).inflate(spacing), textDirection: _textDirection),
+        RoundedSuperellipseBorder(borderRadius: _style.borderRadius.resolve(_textDirection))
+            .getOuterPath((offset & size).inflate(spacing), textDirection: _textDirection),
         Paint()
           ..style = .stroke
           ..color = _style.color

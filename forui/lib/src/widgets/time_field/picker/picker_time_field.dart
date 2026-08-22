@@ -260,29 +260,17 @@ class _PickerTimeFieldState extends _FTimeFieldState<_PickerTimeField> {
   }
 }
 
-class _PickerPopover extends StatelessWidget {
-  final FTimeFieldController controller;
-  final FPopoverController popoverController;
-  final FTimeFieldStyle style;
-  final FTimeFieldPickerProperties properties;
-  final bool? hour24;
-  final bool autofocus;
-  final FocusNode? fieldFocusNode;
-  final FTimeFieldPopoverBuilder popoverBuilder;
-  final Widget child;
-
-  const new({
-    required this.controller,
-    required this.popoverController,
-    required this.style,
-    required this.properties,
-    required this.hour24,
-    required this.autofocus,
-    required this.fieldFocusNode,
-    required this.popoverBuilder,
-    required this.child,
-  });
-
+class const _PickerPopover({
+  required final FTimeFieldController controller,
+  required final FPopoverController popoverController,
+  required final FTimeFieldStyle style,
+  required final FTimeFieldPickerProperties properties,
+  required final bool? hour24,
+  required final bool autofocus,
+  required final FocusNode? fieldFocusNode,
+  required final FTimeFieldPopoverBuilder popoverBuilder,
+  required final Widget child,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext _) => FPopover(
     control: .managed(controller: popoverController),

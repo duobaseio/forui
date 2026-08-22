@@ -102,15 +102,11 @@ class FToasterStyle with Diagnosticable, _$FToasterStyleFunctions {
   });
 
   /// Creates a [FToasterStyle] that inherits its properties.
-  new inherit({
-    required FColors colors,
-    required FTypography typography,
-    required FStyle style,
-    required bool touch,
-  }) : this(
-         toastStyles: .inherit(colors: colors, typography: typography, style: style, touch: touch),
-         toastAlignment: touch ? .topCenter : .bottomEnd,
-       );
+  new inherit({required FColors colors, required FTypography typography, required FStyle style, required bool touch})
+    : this(
+        toastStyles: .inherit(colors: colors, typography: typography, style: style, touch: touch),
+        toastAlignment: touch ? .topCenter : .bottomEnd,
+      );
 }
 
 /// The toast styles.

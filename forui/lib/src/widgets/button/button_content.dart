@@ -10,47 +10,37 @@ import 'package:forui/forui.dart';
 part 'button_content.design.dart';
 
 /// Builds a [FButton] slot with the resolved styles.
-typedef FButtonContentBuilder =
-    Widget Function(
-      BuildContext context,
-      FButtonStyle style,
-      TextStyle textStyle,
-      IconThemeData iconStyle,
-      FCircularProgressStyle progressStyle,
-      Widget? child,
-    );
+typedef FButtonContentBuilder = Widget Function(
+  BuildContext context,
+  FButtonStyle style,
+  TextStyle textStyle,
+  IconThemeData iconStyle,
+  FCircularProgressStyle progressStyle,
+  Widget? child,
+);
 
 /// Builds a [FButton.icon] content with the resolved icon style.
-typedef FButtonIconContentBuilder =
-    Widget Function(BuildContext context, FButtonStyle style, IconThemeData iconStyle, Widget? child);
+typedef FButtonIconContentBuilder = Widget Function(
+  BuildContext context,
+  FButtonStyle style,
+  IconThemeData iconStyle,
+  Widget? child,
+);
 
 @internal
-class Content extends StatelessWidget {
-  final MainAxisSize mainAxisSize;
-  final MainAxisAlignment mainAxisAlignment;
-  final CrossAxisAlignment crossAxisAlignment;
-  final TextBaseline? textBaseline;
-  final FButtonContentBuilder? prefixBuilder;
-  final Widget? prefix;
-  final FButtonContentBuilder? suffixBuilder;
-  final Widget? suffix;
-  final FButtonContentBuilder builder;
-  final Widget? child;
-
-  const new({
-    required this.mainAxisSize,
-    required this.mainAxisAlignment,
-    required this.crossAxisAlignment,
-    required this.textBaseline,
-    required this.prefixBuilder,
-    required this.prefix,
-    required this.suffixBuilder,
-    required this.suffix,
-    required this.builder,
-    required this.child,
-    super.key,
-  });
-
+class const Content({
+  required final MainAxisSize mainAxisSize,
+  required final MainAxisAlignment mainAxisAlignment,
+  required final CrossAxisAlignment crossAxisAlignment,
+  required final TextBaseline? textBaseline,
+  required final FButtonContentBuilder? prefixBuilder,
+  required final Widget? prefix,
+  required final FButtonContentBuilder? suffixBuilder,
+  required final Widget? suffix,
+  required final FButtonContentBuilder builder,
+  required final Widget? child,
+  super.key,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final FButtonData(:style, :variants) = .of(context);
@@ -109,12 +99,8 @@ class Content extends StatelessWidget {
 }
 
 @internal
-class IconContent extends StatelessWidget {
-  final FButtonIconContentBuilder builder;
-  final Widget? child;
-
-  const new({required this.builder, required this.child, super.key});
-
+class const IconContent({required final FButtonIconContentBuilder builder, required final Widget? child, super.key})
+    extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final FButtonData(:style, :variants) = .of(context);
@@ -193,9 +179,5 @@ class FButtonIconContentStyle with Diagnosticable, _$FButtonIconContentStyleFunc
   final EdgeInsetsGeometry padding;
 
   /// Creates a [FButtonIconContentStyle].
-  const new({
-    required this.iconStyle,
-    this.constraints = const BoxConstraints(),
-    this.padding = const .all(10),
-  });
+  const new({required this.iconStyle, this.constraints = const BoxConstraints(), this.padding = const .all(10)});
 }

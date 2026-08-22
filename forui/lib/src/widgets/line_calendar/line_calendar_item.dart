@@ -9,24 +9,15 @@ import 'package:forui/forui.dart';
 typedef FLineCalendarItemData = ({FLineCalendarStyle style, DateTime date, Set<FLineCalendarItemVariant> variants});
 
 @internal
-class Item extends StatelessWidget {
-  final FDateSelectionController<DateTime?> controller;
-  final FLineCalendarStyle style;
-  final DateTime date;
-  final bool today;
-  final bool Function(DateTime) selectable;
-  final ValueWidgetBuilder<FLineCalendarItemData> builder;
-
-  const new({
-    required this.controller,
-    required this.style,
-    required this.date,
-    required this.today,
-    required this.selectable,
-    required this.builder,
-    super.key,
-  });
-
+class const Item({
+  required final FDateSelectionController<DateTime?> controller,
+  required final FLineCalendarStyle style,
+  required final DateTime date,
+  required final bool today,
+  required final bool Function(DateTime) selectable,
+  required final ValueWidgetBuilder<FLineCalendarItemData> builder,
+  super.key,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) => ValueListenableBuilder(
     valueListenable: controller,
@@ -87,13 +78,12 @@ class Item extends StatelessWidget {
 }
 
 @internal
-class ItemContent extends StatelessWidget {
-  final FLineCalendarStyle style;
-  final DateTime date;
-  final Set<FLineCalendarItemVariant> variants;
-
-  const new({required this.style, required this.date, required this.variants, super.key});
-
+class const ItemContent({
+  required final FLineCalendarStyle style,
+  required final DateTime date,
+  required final Set<FLineCalendarItemVariant> variants,
+  super.key,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final localizations = FLocalizations.of(context) ?? FDefaultLocalizations();

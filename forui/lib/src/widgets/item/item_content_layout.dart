@@ -8,29 +8,18 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/rendering.dart';
 
 @internal
-class ItemContentLayout extends MultiChildRenderObjectWidget {
-  final EdgeInsetsGeometry margin;
-  final EdgeInsetsGeometry padding;
-  final double top;
-  final double bottom;
-  final Color? dividerForeground;
-  final Color? dividerBackground;
-  final double? dividerWidth;
-  final FItemDivider dividerType;
-
-  const new({
-    required this.margin,
-    required this.padding,
-    required this.top,
-    required this.bottom,
-    required this.dividerForeground,
-    required this.dividerBackground,
-    required this.dividerWidth,
-    required this.dividerType,
-    super.children,
-    super.key,
-  });
-
+class const ItemContentLayout({
+  required final EdgeInsetsGeometry margin,
+  required final EdgeInsetsGeometry padding,
+  required final double top,
+  required final double bottom,
+  required final Color? dividerForeground,
+  required final Color? dividerBackground,
+  required final double? dividerWidth,
+  required final FItemDivider dividerType,
+  super.children,
+  super.key,
+}) extends MultiChildRenderObjectWidget {
   @override
   RenderObject createRenderObject(BuildContext context) {
     final direction = Directionality.maybeOf(context) ?? .ltr;

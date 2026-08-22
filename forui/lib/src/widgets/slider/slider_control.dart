@@ -140,10 +140,8 @@ sealed class FSliderControl with Diagnosticable, _$FSliderControlMixin {
   /// The [value] is the current value.
   ///
   /// The [onChange] callback is called when the selected value changes.
-  const factory liftedDiscreteRange({
-    required FSliderValue value,
-    required ValueChanged<FSliderValue> onChange,
-  }) = _LiftedDiscreteRange;
+  const factory liftedDiscreteRange({required FSliderValue value, required ValueChanged<FSliderValue> onChange}) =
+      _LiftedDiscreteRange;
 
   const new _();
 
@@ -194,21 +192,15 @@ class _Continuous extends FSliderManagedControl {
   final double? stepPercentage;
   final FSliderActiveThumb? thumb;
 
-  const new({
-    this.stepPercentage,
-    this.thumb,
-    super.controller,
-    super.initial,
-    super.interaction,
-    super.onChange,
-  }) : assert(
-         controller == null || stepPercentage == null,
-         'Cannot provide both controller and stepPercentage. Pass stepPercentage to the controller instead.',
-       ),
-       assert(
-         controller == null || thumb == null,
-         'Cannot provide both controller and thumb. Pass thumb to the controller instead.',
-       );
+  const new({this.stepPercentage, this.thumb, super.controller, super.initial, super.interaction, super.onChange})
+    : assert(
+        controller == null || stepPercentage == null,
+        'Cannot provide both controller and stepPercentage. Pass stepPercentage to the controller instead.',
+      ),
+      assert(
+        controller == null || thumb == null,
+        'Cannot provide both controller and thumb. Pass thumb to the controller instead.',
+      );
 
   @override
   FSliderController createController() =>
@@ -278,9 +270,7 @@ class _Discrete extends FSliderManagedControl {
   }
 }
 
-class _DiscreteRange extends FSliderManagedControl {
-  const new({super.controller, super.initial, super.onChange});
-
+class const _DiscreteRange({super.controller, super.initial, super.onChange}) extends FSliderManagedControl {
   @override
   FSliderController createController() =>
       controller ?? FDiscreteSliderController.range(value: initial ?? .new(min: 0, max: 0));
@@ -303,13 +293,7 @@ class _LiftedContinuous extends _Lifted with _$_LiftedContinuousMixin {
   @override
   final FSliderActiveThumb? thumb;
 
-  const new({
-    required super.value,
-    required super.onChange,
-    this.stepPercentage,
-    this.interaction,
-    this.thumb,
-  });
+  const new({required super.value, required super.onChange, this.stepPercentage, this.interaction, this.thumb});
 
   @override
   FSliderController createController() => ProxyContinuousSliderController(

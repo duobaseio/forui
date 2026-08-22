@@ -12,13 +12,9 @@ import 'package:forui/forui.dart';
 
 part 'divider.design.dart';
 
-class _Up extends Intent {
-  const new();
-}
+class const _Up() extends Intent;
 
-class _Down extends Intent {
-  const new();
-}
+class const _Down() extends Intent;
 
 @internal
 sealed class Divider extends StatefulWidget {
@@ -226,11 +222,7 @@ class _VerticalDividerState extends State<VerticalDivider> {
   );
 }
 
-class _Thumb extends StatelessWidget {
-  final FResizableDividerThumbStyle style;
-
-  const new({required this.style});
-
+class const _Thumb({required final FResizableDividerThumbStyle style}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Container(
     alignment: .center,

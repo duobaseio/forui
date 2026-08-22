@@ -18,13 +18,12 @@ part 'calendar/calendar_date_field.dart';
 part 'input/input_date_field.dart';
 
 /// A builder that wraps [FDateField]'s popover content.
-typedef FDateFieldPopoverBuilder =
-    Widget Function(
-      BuildContext context,
-      FCalendarController calendarController,
-      FPopoverController popoverController,
-      Widget content,
-    );
+typedef FDateFieldPopoverBuilder = Widget Function(
+  BuildContext context,
+  FCalendarController calendarController,
+  FPopoverController popoverController,
+  Widget content,
+);
 
 /// A date field allows a date to be selected from a calendar, input field, or both.
 ///

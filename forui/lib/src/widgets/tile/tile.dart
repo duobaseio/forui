@@ -500,23 +500,19 @@ class FRawTileContentStyle extends FRawItemContentStyle with _$FRawTileContentSt
   });
 
   /// Creates a [FRawTileContentStyle] that inherits its properties.
-  new inherit({
-    required FColors colors,
-    required FTypography typography,
-    required Color prefix,
-    required Color color,
-  }) : this(
-         prefixIconStyle: FVariants.from(
-           IconThemeData(color: prefix, size: typography.body.md.fontSize),
-           variants: {
-             [.disabled]: .delta(color: colors.disable(prefix)),
-           },
-         ),
-         childTextStyle: FVariants.from(
-           typography.body.sm.copyWith(color: color),
-           variants: {
-             [.disabled]: .delta(color: colors.disable(color)),
-           },
-         ),
-       );
+  new inherit({required FColors colors, required FTypography typography, required Color prefix, required Color color})
+    : this(
+        prefixIconStyle: FVariants.from(
+          IconThemeData(color: prefix, size: typography.body.md.fontSize),
+          variants: {
+            [.disabled]: .delta(color: colors.disable(prefix)),
+          },
+        ),
+        childTextStyle: FVariants.from(
+          typography.body.sm.copyWith(color: color),
+          variants: {
+            [.disabled]: .delta(color: colors.disable(color)),
+          },
+        ),
+      );
 }

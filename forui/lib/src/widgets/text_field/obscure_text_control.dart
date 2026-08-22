@@ -35,11 +35,8 @@ class _ProxyController extends ValueNotifier<bool> {
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FObscureTextControl with Diagnosticable, _$FObscureTextControlMixin {
   /// Creates a [FObscureTextControl].
-  const factory managed({
-    ValueNotifier<bool>? controller,
-    bool? initial,
-    ValueChanged<bool>? onChange,
-  }) = FObscureTextManagedControl;
+  const factory managed({ValueNotifier<bool>? controller, bool? initial, ValueChanged<bool>? onChange}) =
+      FObscureTextManagedControl;
 
   /// Creates a [FObscureTextControl] for controlling the obscure text using lifted state.
   const factory lifted({required bool value, required ValueChanged<bool> onChange}) = _Lifted;

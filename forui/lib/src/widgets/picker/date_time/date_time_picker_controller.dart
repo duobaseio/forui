@@ -158,11 +158,8 @@ final class _ProxyController extends FDateTimePickerController {
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FDateTimePickerControl with Diagnosticable, _$FDateTimePickerControlMixin {
   /// Creates a [FDateTimePickerControl].
-  const factory managed({
-    FDateTimePickerController? controller,
-    DateTime? initial,
-    ValueChanged<DateTime>? onChange,
-  }) = FDateTimePickerManagedControl;
+  const factory managed({FDateTimePickerController? controller, DateTime? initial, ValueChanged<DateTime>? onChange}) =
+      FDateTimePickerManagedControl;
 
   /// Creates a [FDateTimePickerControl] for controlling date time picker using lifted state.
   ///

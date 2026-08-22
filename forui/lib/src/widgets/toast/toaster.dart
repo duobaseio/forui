@@ -423,27 +423,18 @@ mixin FToasterEntry {
 }
 
 @internal
-class ToasterEntry with FToasterEntry {
+class ToasterEntry(
+  final FToastStyleDelta style,
+  final FToastVariant variant,
+  final Alignment alignment,
+  var List<AxisDirection> swipeToDismiss,
+  final double dismissThreshold,
+  final Duration? duration,
+  final Widget Function(BuildContext context, FToasterEntry entry) builder,
+) with FToasterEntry {
   final GlobalKey key = GlobalKey();
-  final FToastStyleDelta style;
-  final FToastVariant variant;
-  final Alignment alignment;
-  List<AxisDirection> swipeToDismiss;
-  final double dismissThreshold;
-  final Duration? duration;
   final ValueNotifier<bool> dismissing = ValueNotifier(false);
-  final Widget Function(BuildContext context, FToasterEntry entry) builder;
   VoidCallback? onDismiss;
-
-  new(
-    this.style,
-    this.variant,
-    this.alignment,
-    this.swipeToDismiss,
-    this.dismissThreshold,
-    this.duration,
-    this.builder,
-  );
 
   @override
   void dismiss() {

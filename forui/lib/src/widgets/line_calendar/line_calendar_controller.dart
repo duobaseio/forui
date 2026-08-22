@@ -77,8 +77,7 @@ sealed class FLineCalendarControl with Diagnosticable, _$FLineCalendarControlMix
   ///
   /// The [date] parameter contains the current selected date.
   /// The [onChange] callback is invoked when the user selects a date.
-  const factory lifted({required DateTime? date, required ValueChanged<DateTime?> onChange}) =
-      _Lifted;
+  const factory lifted({required DateTime? date, required ValueChanged<DateTime?> onChange}) = _Lifted;
 
   const new _();
 

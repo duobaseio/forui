@@ -156,12 +156,8 @@ class FTabMotion with Diagnosticable, _$FTabMotionFunctions {
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FTabControl with Diagnosticable, _$FTabControlMixin {
   /// Creates a [FTabControl].
-  const factory managed({
-    FTabController? controller,
-    int? initial,
-    FTabMotion? motion,
-    ValueChanged<int>? onChange,
-  }) = FTabManagedControl;
+  const factory managed({FTabController? controller, int? initial, FTabMotion? motion, ValueChanged<int>? onChange}) =
+      FTabManagedControl;
 
   /// Creates lifted state control.
   ///
@@ -169,8 +165,7 @@ sealed class FTabControl with Diagnosticable, _$FTabControlMixin {
   ///
   /// The [index] parameter contains the current selected tab index.
   /// The [onChange] callback is invoked when the user selects a tab.
-  const factory lifted({required int index, required ValueChanged<int> onChange, FTabMotion motion}) =
-      _Lifted;
+  const factory lifted({required int index, required ValueChanged<int> onChange, FTabMotion motion}) = _Lifted;
 
   const new _();
 

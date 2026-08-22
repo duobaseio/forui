@@ -28,12 +28,7 @@ class FMultiSelectStyle with Diagnosticable, _$FMultiSelectStyleFunctions {
   final TextStyle emptyTextStyle;
 
   /// Creates a [FMultiSelectStyle].
-  new({
-    required this.fieldStyles,
-    required this.searchStyle,
-    required this.contentStyle,
-    required this.emptyTextStyle,
-  });
+  new({required this.fieldStyles, required this.searchStyle, required this.contentStyle, required this.emptyTextStyle});
 
   /// Creates a [FMultiSelectStyle] that inherits its properties.
   new inherit({
@@ -53,7 +48,7 @@ class FMultiSelectStyle with Diagnosticable, _$FMultiSelectStyleFunctions {
 /// [FMultiSelectFieldStyle]'s size styles.
 extension type FMultiSelectFieldSizeStyles(
   FVariants<FTextFieldSizeVariantConstraint, FTextFieldSizeVariant, FMultiSelectFieldStyle, FMultiSelectFieldStyleDelta>
-  _
+  _,
 ) implements
     FVariants<
       FTextFieldSizeVariantConstraint,

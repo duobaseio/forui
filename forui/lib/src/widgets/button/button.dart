@@ -337,7 +337,7 @@ class FButton extends StatelessWidget {
 
 /// [FButtonStyle]'s style.
 extension type FButtonStyles(
-  FVariants<FButtonVariantConstraint, FButtonVariant, FButtonSizeStyles, FButtonSizesDelta> _
+  FVariants<FButtonVariantConstraint, FButtonVariant, FButtonSizeStyles, FButtonSizesDelta> _,
 ) implements FVariants<FButtonVariantConstraint, FButtonVariant, FButtonSizeStyles, FButtonSizesDelta> {
   /// Creates a [FButtonStyles] that inherits its properties.
   factory inherit({
@@ -492,7 +492,7 @@ typedef FButtonSizesDelta =
 
 /// [FButtonStyle]'s size styles.
 extension type FButtonSizeStyles(
-  FVariants<FButtonSizeVariantConstraint, FButtonSizeVariant, FButtonStyle, FButtonStyleDelta> _
+  FVariants<FButtonSizeVariantConstraint, FButtonSizeVariant, FButtonStyle, FButtonStyleDelta> _,
 ) implements FVariants<FButtonSizeVariantConstraint, FButtonSizeVariant, FButtonStyle, FButtonStyleDelta> {
   /// Creates a [FButtonSizeStyles] that inherits its properties.
   factory inherit({

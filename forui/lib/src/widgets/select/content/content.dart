@@ -59,32 +59,19 @@ class ContentData<T> extends InheritedWidget {
 }
 
 @internal
-class Content<T> extends StatefulWidget {
-  final ScrollController? controller;
-  final FSelectContentStyle style;
-  final bool enabled;
-  final bool scrollHandles;
-  final ScrollPhysics physics;
-  final FItemDivider divider;
-  final bool autofocusFirst;
-  final bool Function(T) autofocus;
-  final bool Function(T) visible;
-  final List<FSelectItemMixin> children;
-
-  const new({
-    required this.controller,
-    required this.style,
-    required this.enabled,
-    required this.scrollHandles,
-    required this.physics,
-    required this.divider,
-    required this.autofocusFirst,
-    required this.autofocus,
-    required this.visible,
-    required this.children,
-    super.key,
-  });
-
+class const Content<T>({
+  required final ScrollController? controller,
+  required final FSelectContentStyle style,
+  required final bool enabled,
+  required final bool scrollHandles,
+  required final ScrollPhysics physics,
+  required final FItemDivider divider,
+  required final bool autofocusFirst,
+  required final bool Function(T) autofocus,
+  required final bool Function(T) visible,
+  required final List<FSelectItemMixin> children,
+  super.key,
+}) extends StatefulWidget {
   @override
   State<Content<T>> createState() => _ContentState<T>();
 

@@ -169,21 +169,15 @@ class ProxyAccordionController extends FAccordionController {
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FAccordionControl with Diagnosticable, _$FAccordionControlMixin {
   /// Creates a [FAccordionManagedControl].
-  const factory managed({
-    FAccordionController? controller,
-    int? min,
-    int? max,
-    ValueChanged<Set<int>>? onChange,
-  }) = FAccordionManagedControl;
+  const factory managed({FAccordionController? controller, int? min, int? max, ValueChanged<Set<int>>? onChange}) =
+      FAccordionManagedControl;
 
   /// Creates a [FAccordionControl] for controlling an accordion using lifted state.
   ///
   /// The [expanded] function should return true if the item at the given index is expanded. It must be idempotent.
   /// The [onChange] callback is invoked when the user toggles an item.
-  const factory lifted({
-    required Predicate<int> expanded,
-    required void Function(int index, bool expanded) onChange,
-  }) = _Lifted;
+  const factory lifted({required Predicate<int> expanded, required void Function(int index, bool expanded) onChange}) =
+      _Lifted;
 
   const new _();
 

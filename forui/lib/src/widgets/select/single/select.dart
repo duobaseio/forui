@@ -17,13 +17,12 @@ part 'basic_select.dart';
 part 'search_select.dart';
 
 /// A builder that wraps [FSelect]'s popover content.
-typedef FSelectPopoverBuilder<T> =
-    Widget Function(
-      BuildContext context,
-      FSelectController<T> controller,
-      FPopoverController popoverController,
-      Widget content,
-    );
+typedef FSelectPopoverBuilder<T> = Widget Function(
+  BuildContext context,
+  FSelectController<T> controller,
+  FPopoverController popoverController,
+  Widget content,
+);
 
 /// A select displays a list of options for the user to pick from.
 ///

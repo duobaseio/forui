@@ -24,15 +24,11 @@ class FAutocompleteStyle with Diagnosticable, _$FAutocompleteStyleFunctions {
   new({required this.fieldStyles, required this.contentStyle});
 
   /// Creates a [FAutocompleteStyle] that inherits its properties.
-  new inherit({
-    required FColors colors,
-    required FTypography typography,
-    required FStyle style,
-    required bool touch,
-  }) : this(
-         fieldStyles: .inherit(colors: colors, typography: typography, style: style, touch: touch),
-         contentStyle: .inherit(colors: colors, typography: typography, style: style, touch: touch),
-       );
+  new inherit({required FColors colors, required FTypography typography, required FStyle style, required bool touch})
+    : this(
+        fieldStyles: .inherit(colors: colors, typography: typography, style: style, touch: touch),
+        contentStyle: .inherit(colors: colors, typography: typography, style: style, touch: touch),
+      );
 }
 
 /// [FAutocompleteStyle]'s size styles.
@@ -43,7 +39,7 @@ extension type FAutocompleteFieldSizeStyles(
     FAutocompleteFieldStyle,
     FAutocompleteFieldStyleDelta
   >
-  _
+  _,
 ) implements
     FVariants<
       FTextFieldSizeVariantConstraint,

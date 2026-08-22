@@ -204,16 +204,11 @@ class FContinuousSliderController extends FSliderController {
   final double stepPercentage;
 
   /// Creates a [FContinuousSliderController] for selecting a single value.
-  new({
-    required super.value,
-    this.stepPercentage = 0.05,
-    super.interaction,
-    super.thumb,
-    super.hapticFeedbackVelocity,
-  }) : assert(
-         0 <= stepPercentage && stepPercentage <= 1,
-         'stepPercentage ($stepPercentage) must be between 0 and 1, inclusive.',
-       );
+  new({required super.value, this.stepPercentage = 0.05, super.interaction, super.thumb, super.hapticFeedbackVelocity})
+    : assert(
+        0 <= stepPercentage && stepPercentage <= 1,
+        'stepPercentage ($stepPercentage) must be between 0 and 1, inclusive.',
+      );
 
   /// Creates a [FContinuousSliderController] for selecting a range.
   new range({required super.value, this.stepPercentage = 0.05, super.hapticFeedbackVelocity})
@@ -375,8 +370,7 @@ class ProxyDiscreteSliderController extends FDiscreteSliderController {
     super.hapticFeedbackVelocity,
   }) : super();
 
-  new range({required super.value, required this._onChange, super.hapticFeedbackVelocity})
-    : super.range();
+  new range({required super.value, required this._onChange, super.hapticFeedbackVelocity}) : super.range();
 
   @override
   void attach(double extent, List<FSliderMark> marks) {

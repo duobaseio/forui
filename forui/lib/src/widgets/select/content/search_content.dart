@@ -12,46 +12,31 @@ import 'package:forui/src/widgets/text_field/text_field_control.dart';
 part 'search_content.design.dart';
 
 /// A builder for [FSelect] search results.
-typedef FSelectSearchContentBuilder<T> =
-    List<FSelectItemMixin> Function(BuildContext context, String query, Iterable<T> values);
+typedef FSelectSearchContentBuilder<T> = List<FSelectItemMixin> Function(
+  BuildContext context,
+  String query,
+  Iterable<T> values,
+);
 
 @internal
-class SearchContent<T> extends StatefulWidget {
-  final ScrollController? scrollController;
-  final FSelectSearchStyle searchStyle;
-  final FSelectContentStyle contentStyle;
-  final FSelectSearchFieldProperties properties;
-  final bool enabled;
-  final bool scrollHandles;
-  final ScrollPhysics physics;
-  final FItemDivider divider;
-  final bool autofocusFirst;
-  final bool Function(T) autofocus;
-  final FutureOr<Iterable<T>> Function(String query) filter;
-  final Widget Function(BuildContext context, FSelectSearchStyle style) loadingBuilder;
-  final FSelectSearchContentBuilder<T> builder;
-  final WidgetBuilder emptyBuilder;
-  final Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? errorBuilder;
-
-  const new({
-    required this.scrollController,
-    required this.searchStyle,
-    required this.contentStyle,
-    required this.properties,
-    required this.autofocusFirst,
-    required this.enabled,
-    required this.scrollHandles,
-    required this.physics,
-    required this.divider,
-    required this.autofocus,
-    required this.filter,
-    required this.loadingBuilder,
-    required this.builder,
-    required this.emptyBuilder,
-    required this.errorBuilder,
-    super.key,
-  });
-
+class const SearchContent<T>({
+  required final ScrollController? scrollController,
+  required final FSelectSearchStyle searchStyle,
+  required final FSelectContentStyle contentStyle,
+  required final FSelectSearchFieldProperties properties,
+  required final bool autofocusFirst,
+  required final bool enabled,
+  required final bool scrollHandles,
+  required final ScrollPhysics physics,
+  required final FItemDivider divider,
+  required final bool Function(T) autofocus,
+  required final FutureOr<Iterable<T>> Function(String query) filter,
+  required final Widget Function(BuildContext context, FSelectSearchStyle style) loadingBuilder,
+  required final FSelectSearchContentBuilder<T> builder,
+  required final WidgetBuilder emptyBuilder,
+  required final Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? errorBuilder,
+  super.key,
+}) extends StatefulWidget {
   @override
   State<SearchContent<T>> createState() => _SearchContentState<T>();
 

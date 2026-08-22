@@ -8,12 +8,8 @@ import 'package:forui/src/widgets/popover/popover_controller.dart';
 import 'package:forui/src/widgets/popover_menu/popover_menu.dart';
 
 @internal
-class SubmenuTrigger extends StatefulWidget {
-  final FPopoverController controller;
-  final Widget child;
-
-  const new({required this.controller, required this.child, super.key});
-
+class const SubmenuTrigger({required final FPopoverController controller, required final Widget child, super.key})
+    extends StatefulWidget {
   @override
   State<SubmenuTrigger> createState() => _State();
 

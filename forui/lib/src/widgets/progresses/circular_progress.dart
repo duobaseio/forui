@@ -177,11 +177,7 @@ class _CircularState extends State<FCircularProgress> with SingleTickerProviderS
 enum _Slot { circle, plain, pinwheel }
 
 /// Defers to the ambient [FIcons]'s loader slot.
-class _Loader implements FIcon {
-  final _Slot slot;
-
-  const new(this.slot);
-
+class const _Loader(final _Slot slot) implements FIcon {
   @override
   Widget call(BuildContext context, {String? semanticsLabel}) {
     final icons = context.theme.icons;
@@ -251,7 +247,7 @@ extension type FCircularProgressSizeStyles(
     FCircularProgressStyle,
     FCircularProgressStyleDelta
   >
-  _
+  _,
 ) implements
     FVariants<
       FCircularProgressSizeVariantConstraint,

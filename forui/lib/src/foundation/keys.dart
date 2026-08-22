@@ -1,11 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 @internal
-class ListKey<T> extends LocalKey {
-  final List<T> items;
-
-  const new(this.items);
-
+class const ListKey<T>(final List<T> items) extends LocalKey {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {
@@ -27,11 +23,7 @@ class ListKey<T> extends LocalKey {
 }
 
 @internal
-class SetKey<T> extends LocalKey {
-  final Set<T> items;
-
-  const new(this.items);
-
+class const SetKey<T>(final Set<T> items) extends LocalKey {
   @override
   bool operator ==(Object other) {
     if (identical(this, other)) {

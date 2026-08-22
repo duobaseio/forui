@@ -385,10 +385,5 @@ class FModalSheetMotion extends FSheetMotion with Diagnosticable, _$FModalSheetM
   final Curve barrierCurve;
 
   /// Creates a [FModalSheetMotion].
-  const new({
-    this.barrierCurve = Curves.easeOutCubic,
-    super.expandDuration,
-    super.collapseDuration,
-    super.curve,
-  });
+  const new({this.barrierCurve = Curves.easeOutCubic, super.expandDuration, super.collapseDuration, super.curve});
 }

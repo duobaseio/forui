@@ -309,21 +309,13 @@ class SplitHeader extends StatelessWidget {
   }
 }
 
-class _Tappable extends StatelessWidget {
-  final FCalendarHeaderStyle style;
-  final String label;
-  final String semanticsHint;
-  final bool shown;
-  final VoidCallback? onPress;
-
-  const new({
-    required this.style,
-    required this.label,
-    required this.semanticsHint,
-    required this.shown,
-    required this.onPress,
-  });
-
+class const _Tappable({
+  required final FCalendarHeaderStyle style,
+  required final String label,
+  required final String semanticsHint,
+  required final bool shown,
+  required final VoidCallback? onPress,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) => FTappable.static(
     focusedOutlineStyle: style.headerFocusedOutlineStyle,

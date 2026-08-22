@@ -169,11 +169,8 @@ sealed class FMultiValueControl<T> with Diagnosticable, _$FMultiValueControlMixi
   ///
   /// The [initial] parameter contains the initially selected value. It may be null.
   /// The [onChange] callback is invoked when the user selects a different item.
-  const factory managedRadio({
-    FMultiValueNotifier<T>? controller,
-    T? initial,
-    ValueChanged<Set<T>>? onChange,
-  }) = _Radio<T>;
+  const factory managedRadio({FMultiValueNotifier<T>? controller, T? initial, ValueChanged<Set<T>>? onChange}) =
+      _Radio<T>;
 
   /// Creates a [FMultiValueControl] for controlling multi-value notifier using lifted state.
   ///

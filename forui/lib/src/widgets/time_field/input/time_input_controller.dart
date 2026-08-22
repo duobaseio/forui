@@ -15,12 +15,7 @@ abstract class TimeInputController extends InputController {
   final DateFormat format;
   final String _canonicalSpace;
 
-  factory(
-    FLocalizations localizations,
-    FTimeFieldController controller,
-    DateFormat format,
-    FTextFieldStyle style,
-  ) {
+  factory(FLocalizations localizations, FTimeFieldController controller, DateFormat format, FTextFieldStyle style) {
     final placeholder = format.pattern!
         .replaceAll(RegExp('HH|H|hh|h'), 'HH')
         .replaceAll("'HH'", 'h') // fr_CA uses h to separate hour & minute

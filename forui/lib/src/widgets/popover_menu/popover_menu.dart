@@ -631,9 +631,5 @@ class FPopoverMenuMotion with Diagnosticable, _$FPopoverMenuMotionFunctions {
   final Curve fadeCurve;
 
   /// Creates a [FPopoverMenuMotion].
-  const new({
-    this.fade = 0.4,
-    this.fadeDuration = const Duration(milliseconds: 100),
-    this.fadeCurve = Curves.linear,
-  });
+  const new({this.fade = 0.4, this.fadeDuration = const Duration(milliseconds: 100), this.fadeCurve = Curves.linear});
 }

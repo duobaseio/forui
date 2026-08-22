@@ -72,7 +72,7 @@ class FDivider extends StatelessWidget {
 
 /// The [FDivider] styles.
 extension type FDividerStyles(
-  FVariants<FDividerAxisVariantConstraint, FDividerAxisVariant, FDividerStyle, FDividerStyleDelta> _
+  FVariants<FDividerAxisVariantConstraint, FDividerAxisVariant, FDividerStyle, FDividerStyleDelta> _,
 ) implements FVariants<FDividerAxisVariantConstraint, FDividerAxisVariant, FDividerStyle, FDividerStyleDelta> {
   /// Creates a [FDividerStyles] that inherits its properties.
   new inherit({required FColors colors, required FStyle style})
@@ -126,6 +126,5 @@ class FDividerStyle with Diagnosticable, _$FDividerStyleFunctions {
   final double width;
 
   /// Creates a [FDividerStyle].
-  new({required this.color, required this.padding, this.width = 1})
-    : assert(0 < width, 'width ($width) must be > 0');
+  new({required this.color, required this.padding, this.width = 1}) : assert(0 < width, 'width ($width) must be > 0');
 }

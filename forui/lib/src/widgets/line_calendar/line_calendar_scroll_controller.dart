@@ -178,20 +178,13 @@ class FLineCalendarScrollManagedControl extends FLineCalendarScrollControl
   /// ## Contract
   /// Throws [AssertionError] if [controller] is provided alongside any other parameter (except [onChange]). Pass the
   /// other parameters to the [controller] instead.
-  const new({
-    this.controller,
-    this.start,
-    this.end,
-    this.today,
-    this.initialDate,
-    this.initialAlignment,
-    this.onChange,
-  }) : assert(
-         controller == null ||
-             (start == null && end == null && today == null && initialDate == null && initialAlignment == null),
-         'Cannot provide both controller and other parameters. Pass these parameters to the controller instead.',
-       ),
-       super._();
+  const new({this.controller, this.start, this.end, this.today, this.initialDate, this.initialAlignment, this.onChange})
+    : assert(
+        controller == null ||
+            (start == null && end == null && today == null && initialDate == null && initialAlignment == null),
+        'Cannot provide both controller and other parameters. Pass these parameters to the controller instead.',
+      ),
+      super._();
 
   @override
   FLineCalendarScrollController createController() =>

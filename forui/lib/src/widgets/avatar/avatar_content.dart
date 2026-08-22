@@ -4,22 +4,14 @@ import 'package:flutter/widgets.dart';
 import 'package:forui/forui.dart';
 
 @internal
-class Content extends StatelessWidget {
-  final FAvatarStyleDelta style;
-  final double size;
-  final ImageProvider image;
-  final String? semanticsLabel;
-  final Widget? fallback;
-
-  const new({
-    required this.style,
-    required this.size,
-    required this.image,
-    required this.semanticsLabel,
-    required this.fallback,
-    super.key,
-  });
-
+class const Content({
+  required final FAvatarStyleDelta style,
+  required final double size,
+  required final ImageProvider image,
+  required final String? semanticsLabel,
+  required final Widget? fallback,
+  super.key,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final fallback = this.fallback ?? PlaceholderContent(style: style, size: size);
@@ -53,12 +45,8 @@ class Content extends StatelessWidget {
 }
 
 @internal
-class PlaceholderContent extends StatelessWidget {
-  final FAvatarStyleDelta style;
-  final double size;
-
-  const new({required this.size, required this.style, super.key});
-
+class const PlaceholderContent({required final double size, required final FAvatarStyleDelta style, super.key})
+    extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final resolved = style.call(context.theme.avatarStyle);

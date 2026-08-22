@@ -104,8 +104,7 @@ class _LiftedSingleController extends FDateSelectionController<DateTime?> {
   ValueChanged<DateTime?> _onChange;
   bool _toggleable;
 
-  new({required DateTime? value, required this._onChange, required this._toggleable})
-    : super(value?._truncate());
+  new({required DateTime? value, required this._onChange, required this._toggleable}) : super(value?._truncate());
 
   void update({required DateTime? value, required ValueChanged<DateTime?> onChange, required bool toggleable}) {
     _onChange = onChange;
@@ -132,8 +131,7 @@ class _LiftedSingleController extends FDateSelectionController<DateTime?> {
 class _LiftedMultiController extends FDateSelectionController<Set<DateTime>> {
   ValueChanged<Set<DateTime>> _onChange;
 
-  new({required Set<DateTime> value, required this._onChange})
-    : super(value.map((date) => date._truncate()).toSet());
+  new({required Set<DateTime> value, required this._onChange}) : super(value.map((date) => date._truncate()).toSet());
 
   void update({required Set<DateTime> value, required ValueChanged<Set<DateTime>> onChange}) {
     _onChange = onChange;
@@ -194,11 +192,8 @@ class _LiftedOpenRangeController extends FDateSelectionController<(DateTime?, Da
   ValueChanged<(DateTime?, DateTime?)> _onChange;
   bool _startFirst;
 
-  new({
-    required (DateTime?, DateTime?) value,
-    required this._onChange,
-    required this._startFirst,
-  }) : super((value.$1?._truncate(), value.$2?._truncate()));
+  new({required (DateTime?, DateTime?) value, required this._onChange, required this._startFirst})
+    : super((value.$1?._truncate(), value.$2?._truncate()));
 
   void update({
     required (DateTime?, DateTime?) value,

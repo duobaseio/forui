@@ -21,24 +21,22 @@ part 'basic_select.dart';
 part 'search_select.dart';
 
 /// A builder that wraps [FMultiSelect]'s popover content.
-typedef FMultiSelectPopoverBuilder<T> =
-    Widget Function(
-      BuildContext context,
-      FMultiValueNotifier<T> controller,
-      FPopoverController popoverController,
-      Widget content,
-    );
+typedef FMultiSelectPopoverBuilder<T> = Widget Function(
+  BuildContext context,
+  FMultiValueNotifier<T> controller,
+  FPopoverController popoverController,
+  Widget content,
+);
 
 /// A function that builds a tag in a [FMultiSelect].
-typedef FMultiSelectTagBuilder<T> =
-    Widget Function(
-      BuildContext context,
-      bool enabled,
-      FMultiValueNotifier<T> controller,
-      FMultiSelectFieldStyle style,
-      T value,
-      Widget label,
-    );
+typedef FMultiSelectTagBuilder<T> = Widget Function(
+  BuildContext context,
+  bool enabled,
+  FMultiValueNotifier<T> controller,
+  FMultiSelectFieldStyle style,
+  T value,
+  Widget label,
+);
 
 /// A multi-select displays a list of options for the user to pick from.
 ///

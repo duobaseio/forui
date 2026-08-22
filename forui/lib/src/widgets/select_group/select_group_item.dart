@@ -59,33 +59,19 @@ mixin FSelectGroupItemMixin<T> on Widget {
   T get value;
 }
 
-class _Checkbox<T> extends StatelessWidget with FSelectGroupItemMixin<T> {
-  @override
-  final T value;
-  final FCheckboxStyle? style;
-  final Widget? label;
-  final Widget? description;
-  final Widget? error;
-  final String? semanticsLabel;
-  final bool? enabled;
-  final bool autofocus;
-  final FocusNode? focusNode;
-  final ValueChanged<bool>? onFocusChange;
-
-  const new({
-    required this.value,
-    this.style,
-    this.label,
-    this.description,
-    this.error,
-    this.semanticsLabel,
-    this.enabled,
-    this.autofocus = false,
-    this.focusNode,
-    this.onFocusChange,
-    super.key,
-  });
-
+class const _Checkbox<T>({
+  @override required final T value,
+  final FCheckboxStyle? style,
+  final Widget? label,
+  final Widget? description,
+  final Widget? error,
+  final String? semanticsLabel,
+  final bool? enabled,
+  final bool autofocus = false,
+  final FocusNode? focusNode,
+  final ValueChanged<bool>? onFocusChange,
+  super.key,
+}) extends StatelessWidget with FSelectGroupItemMixin<T> {
   @override
   Widget build(BuildContext context) {
     final FSelectGroupItemData(:controller, :style, :enabled, :selected, :error) = .of<T>(context);
@@ -120,33 +106,19 @@ class _Checkbox<T> extends StatelessWidget with FSelectGroupItemMixin<T> {
   }
 }
 
-class _Radio<T> extends StatelessWidget with FSelectGroupItemMixin<T> {
-  @override
-  final T value;
-  final FRadioStyle? style;
-  final Widget? label;
-  final Widget? description;
-  final Widget? error;
-  final String? semanticsLabel;
-  final bool? enabled;
-  final bool autofocus;
-  final FocusNode? focusNode;
-  final ValueChanged<bool>? onFocusChange;
-
-  const new({
-    required this.value,
-    this.style,
-    this.label,
-    this.description,
-    this.error,
-    this.semanticsLabel,
-    this.enabled,
-    this.autofocus = false,
-    this.focusNode,
-    this.onFocusChange,
-    super.key,
-  });
-
+class const _Radio<T>({
+  @override required final T value,
+  final FRadioStyle? style,
+  final Widget? label,
+  final Widget? description,
+  final Widget? error,
+  final String? semanticsLabel,
+  final bool? enabled,
+  final bool autofocus = false,
+  final FocusNode? focusNode,
+  final ValueChanged<bool>? onFocusChange,
+  super.key,
+}) extends StatelessWidget with FSelectGroupItemMixin<T> {
   @override
   Widget build(BuildContext context) {
     final FSelectGroupItemData(:controller, :selected, :style, :enabled, :error) = .of<T>(context);

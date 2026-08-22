@@ -495,8 +495,7 @@ class FVariantValueDeltaOperation<K extends FVariantConstraint, E extends FVaria
   /// * [FVariantValueDeltaOperation.match] for replacing variants whose constraint's variants are all present.
   /// * [FVariantValueDeltaOperation.base] for replacing the base.
   /// * [FVariantValueDeltaOperation.all] for replacing all variants and base.
-  new variants(V value)
-    : _call = ((base, variants) => .raw(base, {for (final key in variants.keys) key: value}));
+  new variants(V value) : _call = ((base, variants) => .raw(base, {for (final key in variants.keys) key: value}));
 
   /// Replaces all variants and base with [value].
   ///
@@ -510,8 +509,7 @@ class FVariantValueDeltaOperation<K extends FVariantConstraint, E extends FVaria
   /// * [FVariantValueDeltaOperation.match] for replacing variants whose constraint's variants are all present.
   /// * [FVariantValueDeltaOperation.base] for replacing the base.
   /// * [FVariantValueDeltaOperation.variants] for replacing all variants.
-  new all(V value)
-    : _call = ((_, variants) => .raw(value, {for (final key in variants.keys) key: value}));
+  new all(V value) : _call = ((_, variants) => .raw(value, {for (final key in variants.keys) key: value}));
 
   /// Removes exact [constraints] from existing variants.
   ///

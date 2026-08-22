@@ -26,12 +26,7 @@ class FSelectStyle with Diagnosticable, _$FSelectStyleFunctions {
   final TextStyle emptyTextStyle;
 
   /// Creates a [FSelectStyle].
-  new({
-    required this.fieldStyles,
-    required this.searchStyle,
-    required this.contentStyle,
-    required this.emptyTextStyle,
-  });
+  new({required this.fieldStyles, required this.searchStyle, required this.contentStyle, required this.emptyTextStyle});
 
   /// Creates a [FSelectStyle] that inherits its properties.
   new inherit({

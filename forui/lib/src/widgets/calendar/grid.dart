@@ -23,11 +23,7 @@ class _PageIntent extends Intent {
 }
 
 /// Moves focus to the first or last selectable cell of the focused cell's row.
-class _RowEdgeIntent extends Intent {
-  final bool end;
-
-  const new({required this.end});
-
+class const _RowEdgeIntent({required final bool end}) extends Intent {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
@@ -36,22 +32,14 @@ class _RowEdgeIntent extends Intent {
 }
 
 @internal
-class GridFocusableActionDetector extends StatefulWidget {
-  final void Function(TraversalDirection, TextDirection) onFocusMove;
-  final void Function(int direction, {bool large}) onFocusPage;
-  final void Function({required bool end}) onFocusRowEdge;
-  final ValueChanged<bool> onFocusChange;
-  final Widget child;
-
-  const new({
-    required this.onFocusMove,
-    required this.onFocusPage,
-    required this.onFocusRowEdge,
-    required this.onFocusChange,
-    required this.child,
-    super.key,
-  });
-
+class const GridFocusableActionDetector({
+  required final void Function(TraversalDirection, TextDirection) onFocusMove,
+  required final void Function(int direction, {bool large}) onFocusPage,
+  required final void Function({required bool end}) onFocusRowEdge,
+  required final ValueChanged<bool> onFocusChange,
+  required final Widget child,
+  super.key,
+}) extends StatefulWidget {
   @override
   State<GridFocusableActionDetector> createState() => _GridFocusableActionDetectorState();
 
@@ -126,13 +114,7 @@ class _GridFocusableActionDetectorState extends State<GridFocusableActionDetecto
 }
 
 @internal
-class GridDelegate extends SliverGridDelegate {
-  final Size size;
-  final int crossAxisCount;
-  final double spacing;
-
-  const new(this.size, this.crossAxisCount, this.spacing);
-
+class const GridDelegate(final Size size, final int crossAxisCount, final double spacing) extends SliverGridDelegate {
   @override
   SliverGridLayout getLayout(SliverConstraints constraints) => SliverGridRegularTileLayout(
     childCrossAxisExtent: size.width,
