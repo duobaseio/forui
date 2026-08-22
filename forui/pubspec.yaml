@@ -51,7 +51,7 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-  generate: true
+  generate: false # TODO: Re-enable once https://github.com/flutter/flutter/issues/191072 lands
   # To add assets to your package, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

@@ -39,27 +39,15 @@ String generateIconMapping(List<String> slots) {
   return metaFormatter.format(library.build().accept(emitter).toString());
 }
 
-/// Collects FIcons's instance final field names in declaration order.
+/// Collects FIcons's primary constructor parameter names in declaration order.
 class _IconsVisitor extends RecursiveAstVisitor<void> {
   final List<String> slots = [];
-  bool _inside = false;
 
   @override
   void visitClassDeclaration(ClassDeclaration declaration) {
-    if (declaration.namePart.typeName.lexeme == 'FIcons') {
-      _inside = true;
-      super.visitClassDeclaration(declaration);
-      _inside = false;
+    if (declaration.namePart case PrimaryConstructorDeclaration(:final typeName, :final formalParameters)
+        when typeName.lexeme == 'FIcons') {
+      slots.addAll([for (final parameter in formalParameters.parameters) parameter.name!.lexeme]);
     }
-  }
-
-  @override
-  void visitFieldDeclaration(FieldDeclaration declaration) {
-    if (_inside && !declaration.isStatic) {
-      for (final variable in declaration.fields.variables) {
-        slots.add(variable.name.lexeme);
-      }
-    }
-    super.visitFieldDeclaration(declaration);
   }
 }

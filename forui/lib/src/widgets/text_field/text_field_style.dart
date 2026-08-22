@@ -154,7 +154,10 @@ class FTextFieldStyle({
   /// The counter's [TextStyle].
   @override
   required final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, TextStyle, TextStyleDelta> counterTextStyle,
-  required final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, InputBorder, Delta> border,
+
+  /// The border.
+  // TODO: Change this to Decoration once Flutter provides a raw text field, EditableText is awful to work with.
+  @override required final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, InputBorder, Delta> border,
   required super.labelTextStyle,
   required super.descriptionTextStyle,
   required super.errorTextStyle,
@@ -207,9 +210,6 @@ class FTextFieldStyle({
   /// Creates a [FTextFieldStyle].
   this;
 
-  /// The border.
-  @override
-  // TODO: Change this to Decoration once Flutter provides a raw text field, EditableText is awful to work with.
   /// Creates a [FTextFieldStyle] that inherits its properties.
   new inherit({
     required FColors colors,

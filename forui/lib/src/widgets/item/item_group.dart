@@ -332,7 +332,6 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
        });
 
   /// {@template forui.widgets.FItemGroup.merge}
-
   /// Creates a [FItemGroup] that merges multiple [FItemGroupMixin]s together.
   ///
   /// All group labels will be ignored.
