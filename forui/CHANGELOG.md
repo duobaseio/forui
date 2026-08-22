@@ -14,6 +14,10 @@
 * Add `FTimeField.clearIconBuilder`.
 
 
+### `FDateTimePicker` & `FTimePicker`
+* Fix minute wheel showing only `00` in 24-hour mode in locales that use non-western numerals.
+
+
 ### `FLabel`, `FCheckbox`, `FOtpField`, `FRadio`, `FSelectGroup`, `FSlider` & `FSwitch`
 * Change `FLabel`'s horizontal layouts to place the gap between the label and child in `labelPadding`,
   `descriptionPadding` and `errorPadding` instead of `childPadding`.

@@ -172,6 +172,28 @@ void main() {
     expect(controller.value, const FTime());
   });
 
+  for (final (name, hour24) in [('12-hour', false), ('24-hour', true)]) {
+    testWidgets('eastern $name minute wheel shows minutes', (tester) async {
+      final controller = autoDispose(FTimePickerController(time: const FTime(10, 30)));
+
+      await tester.pumpWidget(
+        TestScaffold.app(
+          locale: const Locale('ar'),
+          child: SizedBox(
+            width: 300,
+            height: 300,
+            child: FTimePicker(control: .managed(controller: controller), hour24: hour24),
+          ),
+        ),
+      );
+
+      // Eastern Arabic-Indic 29, 30 and 31, escaped so the source stays LTR.
+      for (final minute in ['\u0662\u0669', '\u0663\u0660', '\u0663\u0661']) {
+        expect(find.text(minute), findsOneWidget);
+      }
+    });
+  }
+
   group('alwaysUse24HourFormat', () {
     testWidgets('null hour24 follows the platform 24-hour setting', (tester) async {
       final controller = autoDispose(FTimePickerController());

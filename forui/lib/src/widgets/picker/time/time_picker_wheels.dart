@@ -368,13 +368,13 @@ class Eastern24Picker extends _Picker {
           flex: minuteFlex,
           semanticsLabel: localizations.timePickerMinuteSemanticsLabel,
           semanticsValueBuilder: (index) => timeFormat
-              .format(DateTime(1970, 1, 1, (index * minuteInterval) % minuteInterval))
+              .format(DateTime(1970, 1, 1, 0, (index * minuteInterval) % 60))
               .split(':')
               .last
               .split(' ')
               .first,
           builder: (_, index) {
-            final time = timeFormat.format(DateTime(1970, 1, 1, (index * minuteInterval) % minuteInterval));
+            final time = timeFormat.format(DateTime(1970, 1, 1, 0, (index * minuteInterval) % 60));
             return Padding(padding: end, child: Text(time.split(':').last.split(' ').first));
           },
         ),

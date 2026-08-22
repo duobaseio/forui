@@ -382,25 +382,24 @@ class _InputState extends State<Input> {
       child: widget.builder(context, style, variants, textfield),
     );
 
-    field = MergeSemantics(
-      child: Material(
-        color: Colors.transparent,
-        child: Theme(
-          // The selection colors are defined in a Theme instead of TextField since TextField does not expose parameters
-          // for overriding selectionHandleColor.
-          data: Theme.of(context).copyWith(
-            visualDensity: .standard,
-            textSelectionTheme: TextSelectionThemeData(
-              cursorColor: style.cursorColor,
-              selectionColor: style.cursorColor.withValues(alpha: 0.4),
-              selectionHandleColor: style.cursorColor,
-            ),
+    // TODO: https://github.com/flutter/flutter/issues/191095
+    field = Material(
+      color: Colors.transparent,
+      child: Theme(
+        // The selection colors are defined in a Theme instead of TextField since TextField does not expose parameters
+        // for overriding selectionHandleColor.
+        data: Theme.of(context).copyWith(
+          visualDensity: .standard,
+          textSelectionTheme: TextSelectionThemeData(
+            cursorColor: style.cursorColor,
+            selectionColor: style.cursorColor.withValues(alpha: 0.4),
+            selectionHandleColor: style.cursorColor,
           ),
-          child: CupertinoTheme(
-            // Theme.cupertinoOverrideTheme cannot be used because of https://github.com/flutter/flutter/issues/161573.
-            data: CupertinoTheme.of(context).copyWith(primaryColor: style.cursorColor),
-            child: field,
-          ),
+        ),
+        child: CupertinoTheme(
+          // Theme.cupertinoOverrideTheme cannot be used because of https://github.com/flutter/flutter/issues/161573.
+          data: CupertinoTheme.of(context).copyWith(primaryColor: style.cursorColor),
+          child: field,
         ),
       ),
     );

@@ -24,6 +24,15 @@ Future<void> testExecutable(FutureOr<void> Function() testMain) async {
   }
   await inter.load();
 
+  for (final family in Directory('$relativePath/test/resources/fonts').listSync().whereType<Directory>()) {
+    final loader = FontLoader(family.path.split(Platform.pathSeparator).last);
+    for (final file in family.listSync().where((e) => e.path.endsWith('.ttf'))) {
+      loader.addFont(File(file.path).readAsBytes().then(ByteData.sublistView));
+    }
+
+    await loader.load();
+  }
+
   final lucide = FontLoader('packages/forui_assets/ForuiLucideIcons')
     ..addFont(rootBundle.load('packages/forui_assets/assets/lucide.ttf'));
   await lucide.load();
