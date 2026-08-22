@@ -195,7 +195,8 @@ class FTileGroup extends StatelessWidget with FTileGroupMixin {
   /// Creates a [FTileGroup] that lazily builds its children.
   ///
   /// {@template forui.widgets.FTileGroup.builder}
-  /// The [tileBuilder] is called for each tile that should be built. The current level's [FInheritedItemData] is **not**
+  /// The [tileBuilder] is called for each tile that should be built. The current level's [FInheritedItemData] is
+  /// **not**
   /// visible to `tileBuilder`.
   /// * It may return null to signify the end of the group.
   /// * It may be called more than once for the same index.
@@ -400,50 +401,38 @@ class FTileGroupStyleData extends InheritedWidget {
 }
 
 /// A [FTileGroup]'s style.
-class FTileGroupStyle extends FLabelStyle with _$FTileGroupStyleFunctions {
+class FTileGroupStyle({
   /// The group's decoration.
-  @override
-  final Decoration decoration;
+  @override required final Decoration decoration,
 
   /// The divider's style.
-  @override
-  final FVariants<FItemGroupVariantConstraint, FItemGroupVariant, Color, Delta> dividerColor;
+  @override required final FVariants<FItemGroupVariantConstraint, FItemGroupVariant, Color, Delta> dividerColor,
 
   /// The divider's width.
-  @override
-  final double dividerWidth;
+  @override required final double dividerWidth,
 
   /// The tile's styles.
-  @override
-  final FTileStyles tileStyles;
+  @override required final FTileStyles tileStyles,
+  required super.labelTextStyle,
+  required super.descriptionTextStyle,
+  required super.errorTextStyle,
+
+  /// The haptic feedback for when the user slides from one tile to another when [slideableTiles] is enabled.
+  @override required final Future<void> Function() slidePressHapticFeedback,
 
   /// Whether the tiles support pressing a tile and sliding to another. Defaults to true.
   ///
   /// This is ignored if the tile group's content is scrollable, i.e. `maxHeight` is finite.
   @override
-  final FVariants<FItemGroupVariantConstraint, FItemGroupVariant, bool, Delta> slideableTiles;
-
-  /// The haptic feedback for when the user slides from one tile to another when [slideableTiles] is enabled.
-  @override
-  final Future<void> Function() slidePressHapticFeedback;
-
+  final FVariants<FItemGroupVariantConstraint, FItemGroupVariant, bool, Delta> slideableTiles = const .all(true),
+  super.labelPadding = const .symmetric(vertical: 7.7),
+  super.descriptionPadding = const .only(top: 7.5),
+  super.errorPadding = const .only(top: 5),
+  super.childPadding,
+  super.labelMotion,
+}) extends FLabelStyle with _$FTileGroupStyleFunctions {
   /// Creates a [FTileGroupStyle].
-  new({
-    required this.decoration,
-    required this.dividerColor,
-    required this.dividerWidth,
-    required this.tileStyles,
-    required super.labelTextStyle,
-    required super.descriptionTextStyle,
-    required super.errorTextStyle,
-    required this.slidePressHapticFeedback,
-    this.slideableTiles = const .all(true),
-    super.labelPadding = const .symmetric(vertical: 7.7),
-    super.descriptionPadding = const .only(top: 7.5),
-    super.errorPadding = const .only(top: 5),
-    super.childPadding,
-    super.labelMotion,
-  });
+  this;
 
   /// Creates a [FTileGroupStyle] that inherits from the given arguments.
   factory inherit({

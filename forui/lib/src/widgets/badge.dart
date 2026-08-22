@@ -159,19 +159,16 @@ extension type FBadgeStyles(FVariants<FBadgeVariantConstraint, FBadgeVariant, FB
 }
 
 /// A [FBadge]'s style.
-final class FBadgeStyle with Diagnosticable, _$FBadgeStyleFunctions {
+final class const FBadgeStyle({
   /// The decoration.
-  @override
-  final Decoration decoration;
+  @override required final Decoration decoration,
 
   /// The label's [TextStyle].
-  @override
-  final TextStyle labelTextStyle;
+  @override required final TextStyle labelTextStyle,
 
   /// The padding.
-  @override
-  final EdgeInsetsGeometry padding;
-
+  @override required final EdgeInsetsGeometry padding,
+}) with Diagnosticable, _$FBadgeStyleFunctions {
   /// Creates a [FBadgeStyle].
-  const new({required this.decoration, required this.labelTextStyle, required this.padding});
+  this;
 }

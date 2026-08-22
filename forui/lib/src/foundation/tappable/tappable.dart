@@ -1026,36 +1026,56 @@ class AnimatedTappableState extends _FTappableState<AnimatedTappable> with Singl
 }
 
 /// A [FTappable]'s style.
-class FTappableStyle with Diagnosticable, _$FTappableStyleFunctions {
+class FTappableStyle({
   /// The mouse cursor for mouse pointers that are hovering over the region. Defaults to [MouseCursor.defer].
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, MouseCursor, Delta> cursor;
+  final FVariants<FTappableVariantConstraint, FTappableVariant, MouseCursor, Delta> cursor = const .all(.defer),
 
   /// The duration to wait before applying the pressed effect after the user presses the tile. Defaults to 100ms.
-  @override
-  final Duration pressedEnterDuration;
+  @override final Duration pressedEnterDuration = const Duration(milliseconds: 100),
 
-  /// The duration to wait before removing the pressed effect after the user stops pressing the tile. Defaults to 100s.
-  @override
-  final Duration pressedExitDuration;
+  /// The duration to wait before removing the pressed effect after the user stops pressing the tile. Defaults to 100ms.
+  @override final Duration pressedExitDuration = const Duration(milliseconds: 100),
 
-  /// Motion-related properties for the tappable.
+  /// Motion-related properties for the tappable. Defaults to [FTappableMotion].
   ///
   /// Set this to [FTappableMotion.none] to disable the bounce effect.
-  @override
-  final FTappableMotion motion;
-
+  @override final FTappableMotion motion = const FTappableMotion(),
+}) with Diagnosticable, _$FTappableStyleFunctions {
   /// Creates a [FTappableStyle].
-  new({
-    this.cursor = const .all(.defer),
-    this.pressedEnterDuration = const Duration(milliseconds: 100),
-    this.pressedExitDuration = const Duration(milliseconds: 100),
-    this.motion = const FTappableMotion(),
-  });
+  this;
 }
 
 /// Motion-related properties for [FTappable].
-class FTappableMotion with Diagnosticable, _$FTappableMotionFunctions {
+class const FTappableMotion({
+  /// The bounce animation's duration when the tappable is pressed down. Defaults to 100ms.
+  @override final Duration bounceDownDuration = const Duration(milliseconds: 100),
+
+  /// The bounce animation's duration when the tappable is released (up). Defaults to 100ms.
+  @override final Duration bounceUpDuration = const Duration(milliseconds: 100),
+
+  /// The curve used to animate the scale of the tappable when pressed (down). Defaults to [Curves.easeOutQuart].
+  @override final Curve bounceDownCurve = Curves.easeOutQuart,
+
+  /// The curve used to animate the scale of the tappable when released (up). Defaults to [Curves.easeOutCubic].
+  @override final Curve bounceUpCurve = Curves.easeOutCubic,
+
+  /// The bounce's tween. Defaults to [defaultBounceTween].
+  ///
+  /// Set to [noBounceTween] to disable the bounce effect.
+  @override final Animatable<double> bounceTween = defaultBounceTween,
+
+  /// The maximum number of pixels that the tappable can shrink during the bounce animation regardless of widget size.
+  /// Defaults to 5.
+  ///
+  /// This prevents large widgets from shrinking too much. For example, with the default [bounceFloor]:
+  /// * A 100px widget would shrink to 97px (3% shrink)
+  /// * A 500px widget would shrink to 495px (1% shrink)
+  @override final double? bounceFloor = 5,
+}) with Diagnosticable, _$FTappableMotionFunctions {
+  /// Creates a [FTappableMotion].
+  this;
+
   /// A [FTappableMotion] with no motion effects.
   static const FTappableMotion none = .new(bounceTween: noBounceTween);
 
@@ -1065,45 +1085,4 @@ class FTappableMotion with Diagnosticable, _$FTappableMotionFunctions {
 
   /// A tween that does not animate the scale of the tappable. It is used to disable the bounce effect.
   static const FImmutableTween<double> noBounceTween = .new(begin: 1.0, end: 1.0);
-
-  /// The bounce animation's duration when the tappable is pressed down. Defaults to 100ms.
-  @override
-  final Duration bounceDownDuration;
-
-  /// The bounce animation's duration when the tappable is released (up). Defaults to 100ms.
-  @override
-  final Duration bounceUpDuration;
-
-  /// The curve used to animate the scale of the tappable when pressed (down). Defaults to [Curves.easeOutQuart].
-  @override
-  final Curve bounceDownCurve;
-
-  /// The curve used to animate the scale of the tappable when released (up). Defaults to [Curves.easeOutCubic].
-  @override
-  final Curve bounceUpCurve;
-
-  /// The bounce's tween. Defaults to [defaultBounceTween].
-  ///
-  /// Set to [noBounceTween] to disable the bounce effect.
-  @override
-  final Animatable<double> bounceTween;
-
-  /// The maximum number of pixels that the tappable can shrink during the bounce animation regardless of widget size.
-  /// Defaults to 5.
-  ///
-  /// This prevents large widgets from shrinking too much. For example, with the default [bounceFloor]:
-  /// * A 100px widget would shrink to 97px (3% shrink)
-  /// * A 500px widget would shrink to 495px (1% shrink)
-  @override
-  final double? bounceFloor;
-
-  /// Creates a [FTappableMotion].
-  const new({
-    this.bounceDownDuration = const Duration(milliseconds: 100),
-    this.bounceUpDuration = const Duration(milliseconds: 100),
-    this.bounceDownCurve = Curves.easeOutQuart,
-    this.bounceUpCurve = Curves.easeOutCubic,
-    this.bounceTween = defaultBounceTween,
-    this.bounceFloor = 5,
-  });
 }

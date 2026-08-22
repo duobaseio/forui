@@ -103,5 +103,18 @@ class FGoldenNestedMotion with Diagnosticable, _$FGoldenNestedMotionFunctions {
   FGoldenNestedMotion({required this.someDouble, required this.duration, required this.curve});
 }
 
+class const FGoldenPrimaryStyle({
+  /// This is a field's summary.
+  ///
+  /// This is more information about a field.
+  required final double someDouble,
+  required final FVariants<FGoldenVariantConstraint, FGoldenVariant, TextStyle, TextStyleDelta> textStyleVariants,
+  required final FVariants<FGoldenVariantConstraint, FGoldenVariant, Color, Delta> colorVariants,
+  required final FGoldenNestedStyle nestedStyle,
+}) with Diagnosticable, _$FGoldenPrimaryStyleFunctions {
+  /// Creates a [FGoldenPrimaryStyle].
+  this;
+}
+
 class FGoldenNestedStyle with Diagnosticable, _$FGoldenNestedStyleFunctions {}
 ''';

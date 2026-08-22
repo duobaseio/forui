@@ -255,78 +255,56 @@ enum FResizableDivider {
 }
 
 /// The style of the dividers between [FResizableRegion]s.
-class FResizableDividerStyle with Diagnosticable, _$FResizableDividerStyleFunctions {
+class FResizableDividerStyle({
   /// The divider's color.
-  @override
-  final Color color;
+  @override required final Color color,
+
+  /// The focused outline style.
+  @override required final FFocusedOutlineStyle focusedOutlineStyle,
+
+  /// The divider thumb's style.
+  @override required final FResizableDividerThumbStyle thumbStyle,
+
+  /// The haptic feedback when a region collides with its neighbour while resizing.
+  ///
+  /// Defaults to [FHapticFeedback.lightImpact]. The minimum velocity is controlled by
+  /// [FResizableController.hapticFeedbackVelocity].
+  @override required final Future<void> Function() hapticFeedback,
 
   /// The divider's width (thickness). Defaults to `0.5`.
   ///
   /// ## Contract
   /// Throws [AssertionError] if [width] <= 0.
-  @override
-  final double width;
-
-  /// The focused outline style.
-  @override
-  final FFocusedOutlineStyle focusedOutlineStyle;
-
-  /// The divider thumb's style.
-  @override
-  final FResizableDividerThumbStyle thumbStyle;
-
-  /// The haptic feedback when a region collides with its neighbour while resizing.
-  ///
-  /// Defaults to [FHapticFeedback.lightImpact]. The minimum velocity is controlled by [FResizableController.hapticFeedbackVelocity].
-  @override
-  final Future<void> Function() hapticFeedback;
-
+  @override final double width = 0.5,
+}) with Diagnosticable, _$FResizableDividerStyleFunctions {
   /// Creates a [FResizableDividerStyle].
-  new({
-    required this.color,
-    required this.focusedOutlineStyle,
-    required this.thumbStyle,
-    required this.hapticFeedback,
-    this.width = 0.5,
-  }) : assert(0 < width, 'width ($width) must be > 0');
+  this : assert(0 < width, 'width ($width) must be > 0');
 }
 
 /// The style of the dividers' thumbs between [FResizableRegion]s.
-class FResizableDividerThumbStyle with Diagnosticable, _$FResizableDividerThumbStyleFunctions {
+class FResizableDividerThumbStyle({
   /// The background color.
-  @override
-  final Decoration decoration;
+  @override required final Decoration decoration,
 
   /// The foreground color.
-  @override
-  final Color foregroundColor;
+  @override required final Color foregroundColor,
 
   /// The thumb icon builder. Defaults to [FIcons.gripVertical] (horizontal axis) or [FIcons.gripHorizontal] (vertical
   /// axis).
-  @override
-  final FIcon icon;
+  @override required final FIcon icon,
 
   /// The height.
   ///
   /// ## Contract
   /// Throws [AssertionError] if height] <= 0.
-  @override
-  final double height;
+  @override required final double height,
 
   /// The width.
   ///
   /// ## Contract
   /// Throws [AssertionError] if [width] <= 0.
-  @override
-  final double width;
-
+  @override required final double width,
+}) with Diagnosticable, _$FResizableDividerThumbStyleFunctions {
   /// Creates a [FResizableDividerThumbStyle].
-  new({
-    required this.decoration,
-    required this.foregroundColor,
-    required this.icon,
-    required this.height,
-    required this.width,
-  }) : assert(0 < height, 'height ($height) must be > 0'),
-       assert(0 < width, 'width ($width) must be > 0');
+  this : assert(0 < height, 'height ($height) must be > 0'), assert(0 < width, 'width ($width) must be > 0');
 }

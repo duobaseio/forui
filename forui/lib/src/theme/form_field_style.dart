@@ -19,21 +19,23 @@ import 'package:forui/src/theme/variant.dart';
 part 'form_field_style.design.dart';
 
 /// A form field state's style.
-class FFormFieldStyle with Diagnosticable, _$FFormFieldStyleFunctions {
+class const FFormFieldStyle({
   /// The label's text style.
   @override
-  final FVariants<FFormFieldVariantConstraint, FFormFieldVariant, TextStyle, TextStyleDelta> labelTextStyle;
+  required final FVariants<FFormFieldVariantConstraint, FFormFieldVariant, TextStyle, TextStyleDelta> labelTextStyle,
 
   /// The description's text style.
   @override
-  final FVariants<FFormFieldVariantConstraint, FFormFieldVariant, TextStyle, TextStyleDelta> descriptionTextStyle;
+  required final FVariants<FFormFieldVariantConstraint, FFormFieldVariant, TextStyle, TextStyleDelta>
+  descriptionTextStyle,
 
   /// The error's text style.
   @override
-  final FVariants<FFormFieldErrorVariantConstraint, FFormFieldErrorVariant, TextStyle, TextStyleDelta> errorTextStyle;
-
+  required final FVariants<FFormFieldErrorVariantConstraint, FFormFieldErrorVariant, TextStyle, TextStyleDelta>
+  errorTextStyle,
+}) with Diagnosticable, _$FFormFieldStyleFunctions {
   /// Creates a [FFormFieldStyle].
-  const new({required this.labelTextStyle, required this.descriptionTextStyle, required this.errorTextStyle});
+  this;
 
   /// Creates a [FFormFieldStyle] that inherits its properties.
   factory inherit({required FColors colors, required FTypography typography, required bool touch}) {

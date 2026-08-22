@@ -26,80 +26,55 @@ enum FToasterExpandBehavior {
 }
 
 /// [FToaster]'s style.
-class FToasterStyle with Diagnosticable, _$FToasterStyleFunctions {
+class const FToasterStyle({
+  /// The toast variant styles.
+  @override required final FToastStyles toastStyles,
+
   /// The maximum number of entries shown per [FToastAlignment]. Defaults to to 3.
-  @override
-  final double max;
+  @override final double max = 3,
 
   /// The toaster's padding. Defaults to `EdgeInsets.symmetric(horizontal: 20, vertical: 15)`.
-  @override
-  final EdgeInsetsGeometry padding;
+  @override final EdgeInsetsGeometry padding = const .symmetric(horizontal: 20, vertical: 15),
 
   /// The toaster's expansion behavior. Defaults to [FToasterExpandBehavior.hoverOrPress].
-  @override
-  final FToasterExpandBehavior expandBehavior;
+  @override final FToasterExpandBehavior expandBehavior = .hoverOrPress,
 
   /// The duration to wait after entering the toaster before expanding the toasts. Defaults to 200ms.
-  @override
-  final Duration expandHoverEnterDuration;
+  @override final Duration expandHoverEnterDuration = const Duration(milliseconds: 200),
 
   /// The duration to wait after exiting the toaster before collapsing the toasts.
   ///
   /// Defaults to 200ms. It is not recommended to set this below 100ms as it does not conform with WCAG 1.4.13, since
   /// the toasts may collapse before the pointer can move onto them.
-  @override
-  final Duration expandHoverExitDuration;
+  @override final Duration expandHoverExitDuration = const Duration(milliseconds: 200),
 
   /// The spacing below or above the toasts when they are expanded. Defaults to 0.
-  @override
-  final double expandStartSpacing;
+  @override final double expandStartSpacing = 0,
 
   /// The spacing between the toasts when they are expanded. Defaults to 10.0.
-  @override
-  final double expandSpacing;
+  @override final double expandSpacing = 10,
 
   /// The protrusion of the collapsed toasts behind the front toast. This is scaled by the number of toasts in
   /// front of the toast.
   ///
   /// Defaults to 12.0.
-  @override
-  final double collapsedProtrusion;
+  @override final double collapsedProtrusion = 12,
 
   /// The scaling factor pf the collapsed toasts behind the front toast. This is scaled by the number of toasts in
   /// front of the toast.
   ///
   /// Defaults to 0.9.
-  @override
-  final double collapsedScale;
+  @override final double collapsedScale = 0.9,
 
-  /// The motion-related properties.
-  @override
-  final FToasterMotion motion;
+  /// The motion-related properties. Defaults to [FToasterMotion].
+  @override final FToasterMotion motion = const FToasterMotion(),
 
   /// The toast's alignment relative to a [FToaster]. Defaults to [FToastAlignment.topCenter] on touch devices, and
   /// [FToastAlignment.bottomEnd] otherwise.
-  @override
-  final FToastAlignment toastAlignment;
-
-  /// The toast variant styles.
-  @override
-  final FToastStyles toastStyles;
-
+  @override final FToastAlignment toastAlignment = .bottomEnd,
+}) with Diagnosticable, _$FToasterStyleFunctions {
   /// Creates a [FToasterStyle].
-  const new({
-    required this.toastStyles,
-    this.max = 3,
-    this.padding = const .symmetric(horizontal: 20, vertical: 15),
-    this.expandBehavior = .hoverOrPress,
-    this.expandHoverEnterDuration = const Duration(milliseconds: 200),
-    this.expandHoverExitDuration = const Duration(milliseconds: 200),
-    this.expandStartSpacing = 0,
-    this.expandSpacing = 10,
-    this.collapsedProtrusion = 12,
-    this.collapsedScale = 0.9,
-    this.motion = const FToasterMotion(),
-    this.toastAlignment = .bottomEnd,
-  });
+  this;
 
   /// Creates a [FToasterStyle] that inherits its properties.
   new inherit({required FColors colors, required FTypography typography, required FStyle style, required bool touch})
@@ -150,48 +125,50 @@ extension type FToastStyles(FVariants<FToastVariantConstraint, FToastVariant, FT
 /// When [FAccessibility.motion] is:
 /// * [FAccessibilityMotion.reduced], only fade transitions are applied.
 /// * [FAccessibilityMotion.disabled], no motion is applied.
-class FToasterMotion with Diagnosticable, _$FToasterMotionFunctions {
+class const FToasterMotion({
   /// The duration of the toasts' expansion. Defaults to 400ms.
-  @override
-  final Duration expandDuration;
+  @override final Duration expandDuration = const Duration(milliseconds: 400),
 
   /// The duration of the toasts' collapsing. Defaults to 300ms.
-  @override
-  final Duration collapseDuration;
+  @override final Duration collapseDuration = const Duration(milliseconds: 300),
 
   /// The animation curve for the toasts' expansion and collapsing. Defaults to [Curves.easeOutCubic].
-  @override
-  final Curve expandCurve;
+  @override final Curve expandCurve = Curves.easeOutCubic,
 
   /// The animation curve for the toasts' collapsing. Defaults to [Curves.easeOut].
-  @override
-  final Curve collapseCurve;
-
+  @override final Curve collapseCurve = Curves.easeOut,
+}) with Diagnosticable, _$FToasterMotionFunctions {
   /// Creates a [FToasterMotion].
-  const new({
-    this.expandDuration = const Duration(milliseconds: 400),
-    this.collapseDuration = const Duration(milliseconds: 300),
-    this.expandCurve = Curves.easeOutCubic,
-    this.collapseCurve = Curves.easeOut,
-  });
+  this;
 }
 
 /// The toast's style.
-class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
-  /// The toast's constraints. Defaults to `BoxConstraints(maxHeight: 250, maxWidth: 400)`.
-  @override
-  final BoxConstraints constraints;
-
+class FToastStyle({
   /// The toast's decoration.
-  @override
-  final Decoration decoration;
+  @override required final Decoration decoration,
+
+  /// The style of the toast's prefix icon.
+  @override required final IconThemeData iconStyle,
+
+  /// The title's text style.
+  @override required final TextStyle titleTextStyle,
+
+  /// The description's text style.
+  @override required final TextStyle descriptionTextStyle,
+
+  /// The toast content's padding.
+  @override required final EdgeInsetsGeometry padding,
+
+  /// The toast's constraints. Defaults to `BoxConstraints(maxHeight: 250, maxWidth: 400)`.
+  @override final BoxConstraints constraints = const BoxConstraints(maxHeight: 250, maxWidth: 400),
 
   /// An optional background filter. This only takes effect if the [decoration] has a transparent or translucent
   /// background color.
   ///
   /// This is typically combined with a transparent/translucent background to create a glassmorphic effect.
   ///
-  /// There will be a flicker after the toast's fade-in entrance when a blur background filter is applied. This is due to
+  /// There will be a flicker after the toast's fade-in entrance when a blur background filter is applied. This is due
+  /// to
   /// https://github.com/flutter/flutter/issues/31706.
   ///
   /// ## Examples
@@ -211,55 +188,23 @@ class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
   ///   inner: ColorFilter.mode(Colors.white.withValues(alpha: 0.5), BlendMode.srcOver),
   /// );
   /// ```
-  @override
-  final ImageFilter? backgroundFilter;
+  @override final ImageFilter? backgroundFilter,
 
-  /// The toast content's padding.
-  @override
-  final EdgeInsetsGeometry padding;
+  /// The spacing between the icon and the title. Defaults to 10.
+  @override final double iconSpacing = 10,
 
-  /// The style of the toast's prefix icon.
-  @override
-  final IconThemeData iconStyle;
+  /// The spacing between the title and description. Defaults to 4 on primarily touch devices and 2 on
+  /// non-primarily touch devices.
+  @override final double titleSpacing = 1,
 
-  /// The spacing between the icon and the title. Defaults to 10.0.
-  @override
-  final double iconSpacing;
+  /// The spacing between the content and the suffix. Defaults to 12.
+  @override final double suffixSpacing = 12,
 
-  /// The title's text style.
-  @override
-  final TextStyle titleTextStyle;
-
-  /// The spacing between the title and description Defaults to 5.0.
-  @override
-  final double titleSpacing;
-
-  /// The description's text style.
-  @override
-  final TextStyle descriptionTextStyle;
-
-  /// The spacing between the icon and the title. Defaults to 12.0.
-  @override
-  final double suffixSpacing;
-
-  /// The motion-related properties.
-  @override
-  final FToastMotion motion;
-
+  /// The motion-related properties. Defaults to [FToastMotion].
+  @override final FToastMotion motion = const FToastMotion(),
+}) with Diagnosticable, _$FToastStyleFunctions {
   /// Creates a [FToastStyle].
-  new({
-    required this.decoration,
-    required this.iconStyle,
-    required this.titleTextStyle,
-    required this.descriptionTextStyle,
-    required this.padding,
-    this.constraints = const BoxConstraints(maxHeight: 250, maxWidth: 400),
-    this.backgroundFilter,
-    this.iconSpacing = 10,
-    this.titleSpacing = 1,
-    this.suffixSpacing = 12,
-    this.motion = const FToastMotion(),
-  });
+  this;
 
   /// Creates a [FToastStyle] that inherits its properties.
   factory inherit({
@@ -312,79 +257,52 @@ class FToastStyle with Diagnosticable, _$FToastStyleFunctions {
 /// When [FAccessibility.motion] is:
 /// * [FAccessibilityMotion.reduced], only fade transitions are applied.
 /// * [FAccessibilityMotion.disabled], no motion is applied.
-class FToastMotion with Diagnosticable, _$FToastMotionFunctions {
+class const FToastMotion({
   /// The duration of the toast's entrance when it is initially added to to toaster. Defaults to 400ms.
-  @override
-  final Duration entranceDuration;
+  @override final Duration entranceDuration = const Duration(milliseconds: 400),
 
   /// The duration of the toast's exit animation when it is dismissed. Defaults to 300ms.
-  @override
-  final Duration dismissDuration;
+  @override final Duration dismissDuration = const Duration(milliseconds: 300),
 
   /// The duration of the toast's transition between places in the toaster. Defaults to 400ms.
-  @override
-  final Duration transitionDuration;
+  @override final Duration transitionDuration = const Duration(milliseconds: 400),
 
   /// The duration of the toast's fade-in animation when another toast has been dismissed and this toast re-enters the
   /// toaster. Defaults to 400ms.
-  @override
-  final Duration reentranceDuration;
+  @override final Duration reentranceDuration = const Duration(milliseconds: 400),
 
   /// The duration of the toast's fade-out animation when the number of toasts in a toaster exceeds the maximum allowed
   /// and this toast is hidden. Defaults to 400ms.
-  @override
-  final Duration exitDuration;
+  @override final Duration exitDuration = const Duration(milliseconds: 400),
 
   /// The toast's swipe completion animation duration. Defaults to 150ms.
-  @override
-  final Duration swipeCompletionDuration;
+  @override final Duration swipeCompletionDuration = const Duration(milliseconds: 150),
 
   /// The toast's initial entrance animation curve. Defaults to [Curves.easeOutCubic].
-  @override
-  final Curve entranceCurve;
+  @override final Curve entranceCurve = Curves.easeOutCubic,
 
   /// The toast's exit animation curve. Defaults to [Curves.easeOutCubic].
-  @override
-  final Curve dismissCurve;
+  @override final Curve dismissCurve = Curves.easeOutCubic,
 
   /// The toast's transition animation curve. Defaults to [Curves.easeOutCubic].
-  @override
-  final Curve transitionCurve;
+  @override final Curve transitionCurve = Curves.easeOutCubic,
 
   /// The curve of the toast's fade-in animation when another toast has been dismissed and this toast re-enters the
   /// toaster. Defaults to [Curves.easeOutCubic].
-  @override
-  final Curve reentranceCurve;
+  @override final Curve reentranceCurve = Curves.easeOutCubic,
 
   /// The curve of the toast's fade-out animation when the number of toasts in a toaster exceeds the maximum allowed
   /// and this toast is hidden. Defaults to [Curves.easeOutCubic].
-  @override
-  final Curve exitCurve;
+  @override final Curve exitCurve = Curves.easeOutCubic,
 
   /// The toast's swipe completion animation curve. Defaults to [Curves.easeInCubic].
-  @override
-  final Curve swipeCompletionCurve;
+  @override final Curve swipeCompletionCurve = Curves.easeInCubic,
 
   /// The toast's initial entrance's opacity and dismiss's fade tween. Defaults to `[0, 1]`.
   ///
   /// Set to `[1, 1]` to disable the fade-in/out effect.
-  @override
-  final Animatable<double> entranceDismissFadeTween;
-
+  @override final Animatable<double> entranceDismissFadeTween = const FImmutableTween(begin: 0.0, end: 1.0),
+}) with Diagnosticable, _$FToastMotionFunctions {
   /// Creates a [FToastMotion].
-  const new({
-    this.entranceDuration = const Duration(milliseconds: 400),
-    this.dismissDuration = const Duration(milliseconds: 300),
-    this.transitionDuration = const Duration(milliseconds: 400),
-    this.reentranceDuration = const Duration(milliseconds: 400),
-    this.exitDuration = const Duration(milliseconds: 400),
-    this.swipeCompletionDuration = const Duration(milliseconds: 150),
-    this.entranceCurve = Curves.easeOutCubic,
-    this.dismissCurve = Curves.easeOutCubic,
-    this.transitionCurve = Curves.easeOutCubic,
-    this.reentranceCurve = Curves.easeOutCubic,
-    this.exitCurve = Curves.easeOutCubic,
-    this.swipeCompletionCurve = Curves.easeInCubic,
-    this.entranceDismissFadeTween = const FImmutableTween(begin: 0.0, end: 1.0),
-  });
+  this;
 }

@@ -205,35 +205,24 @@ class _FSwitchState extends State<FSwitch> {
 }
 
 /// [FSwitch]'s style.
-class FSwitchStyle with Diagnosticable, _$FSwitchStyleFunctions {
+class const FSwitchStyle({
   /// This [FSwitch]'s color when focused.
-  @override
-  final Color focusColor;
+  @override required final Color focusColor,
 
   /// The track's color.
-  @override
-  final FVariants<FSwitchVariantConstraint, FSwitchVariant, Color, Delta> trackColor;
+  @override required final FVariants<FSwitchVariantConstraint, FSwitchVariant, Color, Delta> trackColor,
 
   /// The thumb's color.
-  @override
-  final FVariants<FSwitchVariantConstraint, FSwitchVariant, Color, Delta> thumbColor;
+  @override required final FVariants<FSwitchVariantConstraint, FSwitchVariant, Color, Delta> thumbColor,
 
   /// The label style when [FSwitch.leadingLabel] is true.
-  @override
-  final FLabelStyle leadingLabelStyle;
+  @override required final FLabelStyle leadingLabelStyle,
 
   /// The label style when [FSwitch.leadingLabel] is false (the default).
-  @override
-  final FLabelStyle trailingLabelStyle;
-
+  @override required final FLabelStyle trailingLabelStyle,
+}) with Diagnosticable, _$FSwitchStyleFunctions {
   /// Creates a [FSwitchStyle].
-  const new({
-    required this.focusColor,
-    required this.trackColor,
-    required this.thumbColor,
-    required this.leadingLabelStyle,
-    required this.trailingLabelStyle,
-  });
+  this;
 
   /// Creates a [FSwitchStyle] that inherits its properties.
   factory inherit({required FColors colors, required FStyle style}) {

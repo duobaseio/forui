@@ -468,45 +468,30 @@ class _State extends State<FCalendar> {
 /// When [FAccessibility.motion] is:
 /// * [FAccessibilityMotion.reduced], only fade transitions are applied.
 /// * [FAccessibilityMotion.disabled], no motion is applied.
-class FCalendarStyle with Diagnosticable, _$FCalendarStyleFunctions {
+class FCalendarStyle({
   /// The header's style.
-  @override
-  final FCalendarHeaderStyle headerStyle;
+  @override required final FCalendarHeaderStyle headerStyle,
 
   /// The day picker's style.
-  @override
-  final FCalendarDayPickerStyle dayPickerStyle;
+  @override required final FCalendarDayPickerStyle dayPickerStyle,
 
   /// The month picker's style.
-  @override
-  final FCalendarMonthPickerStyle monthPickerStyle;
+  @override required final FCalendarMonthPickerStyle monthPickerStyle,
 
   /// The year picker's style.
-  @override
-  final FCalendarYearPickerStyle yearPickerStyle;
+  @override required final FCalendarYearPickerStyle yearPickerStyle,
 
   /// The wheel picker's style.
-  @override
-  final FPickerStyle wheelPickerStyle;
+  @override required final FPickerStyle wheelPickerStyle,
 
   /// The decoration surrounding the header & picker.
-  @override
-  final Decoration decoration;
+  @override required final Decoration decoration,
 
   /// The padding surrounding the header & picker. Defaults to `EdgeInsets.all(12)`.
-  @override
-  final EdgeInsetsGeometry padding;
-
+  @override final EdgeInsetsGeometry padding = const .all(12),
+}) with Diagnosticable, _$FCalendarStyleFunctions {
   /// Creates a [FCalendarStyle].
-  new({
-    required this.headerStyle,
-    required this.dayPickerStyle,
-    required this.monthPickerStyle,
-    required this.yearPickerStyle,
-    required this.wheelPickerStyle,
-    required this.decoration,
-    this.padding = const .all(12),
-  });
+  this;
 
   /// Creates a [FCalendarStyle] that inherits its properties.
   factory inherit({

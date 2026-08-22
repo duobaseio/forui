@@ -64,17 +64,15 @@ class const Year({
 }
 
 /// A calendar's year style.
-class FCalendarYearStyle with Diagnosticable, _$FCalendarYearStyleFunctions {
+class FCalendarYearStyle({
   /// The year's text style.
-  @override
-  final TextStyle textStyle;
+  @override required final TextStyle textStyle,
 
   /// The decoration painted behind the year's text.
-  @override
-  final Decoration decoration;
-
+  @override required final Decoration decoration,
+}) with Diagnosticable, _$FCalendarYearStyleFunctions {
   /// Creates a [FCalendarYearStyle].
-  new({required this.textStyle, required this.decoration});
+  this;
 }
 
 /// [FCalendarYearStyle]'s variants.

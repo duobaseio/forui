@@ -71,27 +71,47 @@ extension type FSliderStyles(
 }
 
 /// A slider's style.
-class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
+class const FSliderStyle({
   /// The slider's active track colors.
-  @override
-  final FVariants<FSliderVariantConstraint, FSliderVariant, Color, Delta> activeColor;
+  @override required final FVariants<FSliderVariantConstraint, FSliderVariant, Color, Delta> activeColor,
 
   /// The slider's inactive track colors.
-  @override
-  final FVariants<FSliderVariantConstraint, FSliderVariant, Color, Delta> inactiveColor;
+  @override required final FVariants<FSliderVariantConstraint, FSliderVariant, Color, Delta> inactiveColor,
 
-  /// The slider's border radius.
-  @override
-  final BorderRadius borderRadius;
+  /// The slider thumb's style.
+  @override required final FSliderThumbStyle thumbStyle,
+
+  /// The slider marks' style.
+  @override required final FSliderMarkStyle markStyle,
+
+  /// The tooltip's style.
+  @override required final FTooltipStyle tooltipStyle,
+
+  /// The haptic feedback when the active edge collides with the track's limit, the other thumb, or a configured min
+  /// range extent.
+  ///
+  /// Defaults to [FHapticFeedback.lightImpact]. The minimum velocity is controlled by
+  /// [FSliderController.hapticFeedbackVelocity].
+  @override required final Future<void> Function() collisionHapticFeedback,
+
+  /// The haptic feedback when the active edge lands on a new discrete tick.
+  ///
+  /// Defaults to [FHapticFeedback.selectionClick]. Fired by [FDiscreteSliderController] only.
+  @override required final Future<void> Function() tickHapticFeedback,
+  required super.labelTextStyle,
+  required super.descriptionTextStyle,
+  required super.errorTextStyle,
+
+  /// The slider's border radius. Defaults to `BorderRadius.all(Radius.circular(4))`.
+  @override final BorderRadius borderRadius = const .all(.circular(4)),
 
   /// The slider's cross-axis extent. Defaults to 6.
   ///
   /// ## Contract:
   /// Throws [AssertionError] if it is not positive.
-  @override
-  final double crossAxisExtent;
+  @override final double crossAxisExtent = 6,
 
-  /// The thumb's size. Defaults to `20` on primarily touch devices and `16` on non-primarily touch devices.
+  /// The thumb's size. Defaults to `25` on primarily touch devices and `16` on non-primarily touch devices.
   ///
   /// ## Contract
   /// Throws [AssertionError] if [thumbSize] is not positive.
@@ -100,71 +120,27 @@ class FSliderStyle extends FLabelStyle with _$FSliderStyleFunctions {
   /// This unfortunately has to be placed outside of FSliderThumbStyle because [FSliderThumbStyle] is inside
   /// [FSliderStyle]. Putting the thumb size inside [FSliderThumbStyle] will cause a cyclic rebuild to occur
   /// whenever the window is resized due to a bad interaction between an internal LayoutBuilder and SliderFormField.
-  @override
-  final double thumbSize;
-
-  /// The slider thumb's style.
-  @override
-  final FSliderThumbStyle thumbStyle;
-
-  /// The slider marks' style.
-  @override
-  final FSliderMarkStyle markStyle;
-
-  /// The tooltip's style.
-  @override
-  final FTooltipStyle tooltipStyle;
+  @override final double thumbSize = 16,
 
   /// The anchor of the tooltip to which the [tooltipThumbAnchor] is aligned.
   ///
   /// Defaults to [Alignment.bottomCenter] on primarily touch devices and [Alignment.centerLeft] on non-primarily touch
   /// devices.
-  @override
-  final AlignmentGeometry tooltipTipAnchor;
+  @override final AlignmentGeometry tooltipTipAnchor = .bottomCenter,
 
   /// The anchor of the thumb to which the [tooltipTipAnchor] is aligned.
   ///
   /// Defaults to [Alignment.topCenter] on primarily touch devices and [Alignment.centerRight] on non-primarily touch
   /// devices.
-  @override
-  final AlignmentGeometry tooltipThumbAnchor;
-
-  /// The haptic feedback when the active edge collides with the track's limit, the other thumb, or a configured min
-  /// range extent.
-  ///
-  /// Defaults to [FHapticFeedback.lightImpact]. The minimum velocity is controlled by [FSliderController.hapticFeedbackVelocity].
-  @override
-  final Future<void> Function() collisionHapticFeedback;
-
-  /// The haptic feedback when the active edge lands on a new discrete tick.
-  ///
-  /// Defaults to [FHapticFeedback.selectionClick]. Fired by [FDiscreteSliderController] only.
-  @override
-  final Future<void> Function() tickHapticFeedback;
-
+  @override final AlignmentGeometry tooltipThumbAnchor = .topCenter,
+  super.labelPadding = const .only(bottom: 15),
+  super.descriptionPadding,
+  super.errorPadding = const .only(top: 5),
+  super.childPadding,
+  super.labelMotion,
+}) extends FLabelStyle with _$FSliderStyleFunctions {
   /// Creates a [FSliderStyle].
-  const new({
-    required this.activeColor,
-    required this.inactiveColor,
-    required this.thumbStyle,
-    required this.markStyle,
-    required this.tooltipStyle,
-    required this.collisionHapticFeedback,
-    required this.tickHapticFeedback,
-    required super.labelTextStyle,
-    required super.descriptionTextStyle,
-    required super.errorTextStyle,
-    this.borderRadius = const .all(.circular(4)),
-    this.crossAxisExtent = 6,
-    this.thumbSize = 16,
-    this.tooltipTipAnchor = .bottomCenter,
-    this.tooltipThumbAnchor = .topCenter,
-    super.labelPadding = const .only(bottom: 15),
-    super.descriptionPadding,
-    super.errorPadding = const .only(top: 5),
-    super.childPadding,
-    super.labelMotion,
-  }) : assert(0 < thumbSize, 'thumbSize must be > 0');
+  this : assert(0 < thumbSize, 'thumbSize must be > 0');
 
   /// Creates a [FSliderStyle] that inherits its properties.
   new inherit({

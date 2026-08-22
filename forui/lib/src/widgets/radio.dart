@@ -187,65 +187,42 @@ class FRadio extends StatelessWidget {
 }
 
 /// A [FRadio]'s style.
-class FRadioStyle with Diagnosticable, _$FRadioStyleFunctions {
+class const FRadioStyle({
   /// The tappable style.
-  @override
-  final FTappableStyle tappableStyle;
+  @override required final FTappableStyle tappableStyle,
 
   /// The focused outline style.
-  @override
-  final FFocusedOutlineStyle focusedOutlineStyle;
+  @override required final FFocusedOutlineStyle focusedOutlineStyle,
 
   /// The padding between the border and indicator circles.
-  @override
-  final EdgeInsetsGeometry padding;
+  @override required final EdgeInsetsGeometry padding,
 
   /// The [FRadio]'s border color.
-  @override
-  final FVariants<FRadioVariantConstraint, FRadioVariant, Color, Delta> borderColor;
+  @override required final FVariants<FRadioVariantConstraint, FRadioVariant, Color, Delta> borderColor,
 
   /// The border width.
-  @override
-  final double borderWidth;
+  @override required final double borderWidth,
 
   /// The [FRadio]'s background color.
-  @override
-  final FVariants<FRadioVariantConstraint, FRadioVariant, Color, Delta> backgroundColor;
+  @override required final FVariants<FRadioVariantConstraint, FRadioVariant, Color, Delta> backgroundColor,
 
   /// The [FRadio]'s indicator color.
-  @override
-  final FVariants<FRadioVariantConstraint, FRadioVariant, Color, Delta> indicatorColor;
+  @override required final FVariants<FRadioVariantConstraint, FRadioVariant, Color, Delta> indicatorColor,
 
   /// The inner indicator's size.
-  @override
-  final double indicatorSize;
-
-  /// The motion-related properties.
-  @override
-  final FRadioMotion motion;
+  @override required final double indicatorSize,
 
   /// The label style when [FRadio.leadingLabel] is true.
-  @override
-  final FLabelStyle leadingLabelStyle;
+  @override required final FLabelStyle leadingLabelStyle,
 
   /// The label style when [FRadio.leadingLabel] is false (the default).
-  @override
-  final FLabelStyle trailingLabelStyle;
+  @override required final FLabelStyle trailingLabelStyle,
 
+  /// The motion-related properties. Defaults to [FRadioMotion].
+  @override final FRadioMotion motion = const FRadioMotion(),
+}) with Diagnosticable, _$FRadioStyleFunctions {
   /// Creates a [FRadioStyle].
-  const new({
-    required this.tappableStyle,
-    required this.focusedOutlineStyle,
-    required this.padding,
-    required this.borderColor,
-    required this.borderWidth,
-    required this.backgroundColor,
-    required this.indicatorColor,
-    required this.indicatorSize,
-    required this.leadingLabelStyle,
-    required this.trailingLabelStyle,
-    this.motion = const FRadioMotion(),
-  });
+  this;
 
   /// Creates a [FRadioStyle] that inherits its properties.
   factory inherit({required FColors colors, required FStyle style, required bool touch}) {
@@ -294,33 +271,22 @@ class FRadioStyle with Diagnosticable, _$FRadioStyleFunctions {
 /// The motion-related properties for a [FRadio].
 ///
 /// All motion is automatically disabled when [FAccessibility.motion] is [FAccessibilityMotion.disabled].
-class FRadioMotion with Diagnosticable, _$FRadioMotionFunctions {
+class const FRadioMotion({
   /// The duration of the transition between states. Defaults to 100ms.
-  @override
-  final Duration transitionDuration;
+  @override final Duration transitionDuration = const Duration(milliseconds: 100),
 
   /// The curve of the transition between states. Defaults to [Curves.linear].
-  @override
-  final Curve transitionCurve;
+  @override final Curve transitionCurve = Curves.linear,
 
   /// The duration of the animation when selected. Defaults to 100ms.
-  @override
-  final Duration selectDuration;
+  @override final Duration selectDuration = const Duration(milliseconds: 100),
 
   /// The duration of the animation when unselected. Defaults to 100ms.
-  @override
-  final Duration unselectDuration;
+  @override final Duration unselectDuration = const Duration(milliseconds: 100),
 
   /// The curve of the select & unselect animation. Defaults to [Curves.easeOutCirc].
-  @override
-  final Curve selectCurve;
-
+  @override final Curve selectCurve = Curves.easeOutCirc,
+}) with Diagnosticable, _$FRadioMotionFunctions {
   /// Creates a [FRadioMotion].
-  const new({
-    this.transitionDuration = const Duration(milliseconds: 100),
-    this.transitionCurve = Curves.linear,
-    this.selectDuration = const Duration(milliseconds: 100),
-    this.unselectDuration = const Duration(milliseconds: 100),
-    this.selectCurve = Curves.easeOutCirc,
-  });
+  this;
 }

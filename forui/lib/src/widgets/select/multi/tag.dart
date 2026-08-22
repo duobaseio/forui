@@ -158,53 +158,41 @@ class FMultiSelectTag extends StatelessWidget {
 }
 
 /// A [FMultiSelectTag]'s style.
-class FMultiSelectTagStyle with Diagnosticable, _$FMultiSelectTagStyleFunctions {
+class FMultiSelectTagStyle({
   /// The decoration.
   @override
-  final FVariants<FMultiSelectTagVariantConstraint, FMultiSelectTagVariant, Decoration, DecorationDelta> decoration;
+  required final FVariants<FMultiSelectTagVariantConstraint, FMultiSelectTagVariant, Decoration, DecorationDelta>
+  decoration,
+
+  /// The label's text style.
+  @override
+  required final FVariants<FMultiSelectTagVariantConstraint, FMultiSelectTagVariant, TextStyle, TextStyleDelta>
+  labelTextStyle,
+
+  /// The icon's style.
+  @override
+  required final FVariants<FMultiSelectTagVariantConstraint, FMultiSelectTagVariant, IconThemeData, IconThemeDataDelta>
+  iconStyle,
+
+  /// The dismiss icon builder. Defaults to [FIcons.x].
+  @override required final FIcon icon,
+
+  /// The tappable style.
+  @override required final FTappableStyle tappableStyle,
+
+  /// The focused outline style.
+  @override required final FFocusedOutlineStyle focusedOutlineStyle,
 
   /// The padding. Defaults to `EdgeInsets.symmetric(vertical: 4, horizontal: 8)`.
   ///
   /// The vertical padding should typically be the same as the [FMultiSelectFieldStyle.hintPadding].
-  @override
-  final EdgeInsetsGeometry padding;
+  @override required final EdgeInsetsGeometry padding,
 
   /// The spacing between the label and the icon. Defaults to 4.
-  @override
-  final double spacing;
-
-  /// The label's text style.
-  @override
-  final FVariants<FMultiSelectTagVariantConstraint, FMultiSelectTagVariant, TextStyle, TextStyleDelta> labelTextStyle;
-
-  /// The icon's style.
-  @override
-  final FVariants<FMultiSelectTagVariantConstraint, FMultiSelectTagVariant, IconThemeData, IconThemeDataDelta>
-  iconStyle;
-
-  /// The dismiss icon builder. Defaults to [FIcons.x].
-  @override
-  final FIcon icon;
-
-  /// The tappable style.
-  @override
-  final FTappableStyle tappableStyle;
-
-  /// The focused outline style.
-  @override
-  final FFocusedOutlineStyle focusedOutlineStyle;
-
+  @override final double spacing = 4,
+}) with Diagnosticable, _$FMultiSelectTagStyleFunctions {
   /// Creates a [FMultiSelectTagStyle].
-  new({
-    required this.decoration,
-    required this.labelTextStyle,
-    required this.iconStyle,
-    required this.icon,
-    required this.tappableStyle,
-    required this.focusedOutlineStyle,
-    required this.padding,
-    this.spacing = 4,
-  });
+  this;
 
   /// Creates a [FMultiSelectTagStyle] that inherits its properties.
   factory inherit({

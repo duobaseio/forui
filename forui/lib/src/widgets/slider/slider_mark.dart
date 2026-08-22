@@ -61,25 +61,16 @@ class FSliderMark with Diagnosticable {
 }
 
 /// A [FSlider] mark's style.
-class FSliderMarkStyle with Diagnosticable, _$FSliderMarkStyleFunctions {
+class const FSliderMarkStyle({
   /// The tick's color.
-  @override
-  final FVariants<FSliderVariantConstraint, FSliderVariant, Color, Delta> tickColor;
-
-  /// The tick's size. Defaults to 3.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if it is not positive.
-  @override
-  final double tickSize;
+  @override required final FVariants<FSliderVariantConstraint, FSliderVariant, Color, Delta> tickColor,
 
   /// The label's default text style.
   @override
-  final FVariants<FSliderVariantConstraint, FSliderVariant, TextStyle, TextStyleDelta> labelTextStyle;
+  required final FVariants<FSliderVariantConstraint, FSliderVariant, TextStyle, TextStyleDelta> labelTextStyle,
 
   /// The label's anchor to which the [labelOffset] is applied.
-  @override
-  final AlignmentGeometry labelAnchor;
+  @override required final AlignmentGeometry labelAnchor,
 
   /// The label's offset from the slider, along its cross axis, in logical pixels. The top-left corner is always the
   /// origin, regardless of the layout.
@@ -108,15 +99,14 @@ class FSliderMarkStyle with Diagnosticable, _$FSliderMarkStyleFunctions {
   /// |----------[tick]----------|
   /// |__________________________|
   /// ```
-  @override
-  final double labelOffset;
+  @override required final double labelOffset,
 
+  /// The tick's size. Defaults to 3.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if it is not positive.
+  @override final double tickSize = 3,
+}) with Diagnosticable, _$FSliderMarkStyleFunctions {
   /// Creates a [FSliderMarkStyle].
-  const new({
-    required this.tickColor,
-    required this.labelTextStyle,
-    required this.labelAnchor,
-    required this.labelOffset,
-    this.tickSize = 3,
-  }) : assert(0 < tickSize, 'tickSize ($tickSize) must be > 0');
+  this : assert(0 < tickSize, 'tickSize ($tickSize) must be > 0');
 }

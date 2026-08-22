@@ -11,17 +11,15 @@ import 'package:forui/forui.dart';
 part 'autocomplete_style.design.dart';
 
 /// An [FAutocomplete]'s style.
-class FAutocompleteStyle with Diagnosticable, _$FAutocompleteStyleFunctions {
+class FAutocompleteStyle({
   /// The field's styles.
-  @override
-  final FAutocompleteFieldSizeStyles fieldStyles;
+  @override required final FAutocompleteFieldSizeStyles fieldStyles,
 
   /// The content's style.
-  @override
-  final FAutocompleteContentStyle contentStyle;
-
+  @override required final FAutocompleteContentStyle contentStyle,
+}) with Diagnosticable, _$FAutocompleteStyleFunctions {
   /// Creates a [FAutocompleteStyle].
-  new({required this.fieldStyles, required this.contentStyle});
+  this;
 
   /// Creates a [FAutocompleteStyle] that inherits its properties.
   new inherit({required FColors colors, required FTypography typography, required FStyle style, required bool touch})
@@ -80,7 +78,7 @@ extension type FAutocompleteFieldSizeStyles(
 }
 
 /// An autocomplete field's style.
-class FAutocompleteFieldStyle extends FTextFieldStyle with _$FAutocompleteFieldStyleFunctions {
+class FAutocompleteFieldStyle({
   /// The composing text's [TextStyle].
   ///
   /// {@template forui.text_field.composingTextStyle}
@@ -88,44 +86,43 @@ class FAutocompleteFieldStyle extends FTextFieldStyle with _$FAutocompleteFieldS
   /// are the same size to prevent visual discrepancies between the actual and typeahead text.
   /// {@endtemplate}
   @override
-  final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, TextStyle, TextStyleDelta> composingTextStyle;
+  required final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, TextStyle, TextStyleDelta>
+  composingTextStyle,
 
   /// The typeahead's [TextStyle].
   ///
   /// {@macro forui.text_field.composingTextStyle}
   @override
-  final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, TextStyle?, TextStyleDelta> typeaheadTextStyle;
-
+  required final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, TextStyle?, TextStyleDelta>
+  typeaheadTextStyle,
+  required super.keyboardAppearance,
+  required super.color,
+  required super.iconStyle,
+  required super.clearButtonStyle,
+  required super.obscureButtonStyle,
+  required super.contentTextStyle,
+  required super.hintTextStyle,
+  required super.counterTextStyle,
+  required super.border,
+  required super.labelTextStyle,
+  required super.descriptionTextStyle,
+  required super.errorTextStyle,
+  super.cursorColor,
+  super.cursorWidth,
+  super.cursorOpacityAnimates,
+  super.contentPadding,
+  super.constraints,
+  super.clearButtonPadding,
+  super.obscureButtonPadding,
+  super.scrollPadding,
+  super.labelPadding,
+  super.descriptionPadding,
+  super.errorPadding,
+  super.childPadding,
+  super.labelMotion,
+}) extends FTextFieldStyle with _$FAutocompleteFieldStyleFunctions {
   /// Creates a [FAutocompleteFieldStyle].
-  new({
-    required this.composingTextStyle,
-    required this.typeaheadTextStyle,
-    required super.keyboardAppearance,
-    required super.color,
-    required super.iconStyle,
-    required super.clearButtonStyle,
-    required super.obscureButtonStyle,
-    required super.contentTextStyle,
-    required super.hintTextStyle,
-    required super.counterTextStyle,
-    required super.border,
-    required super.labelTextStyle,
-    required super.descriptionTextStyle,
-    required super.errorTextStyle,
-    super.cursorColor,
-    super.cursorWidth,
-    super.cursorOpacityAnimates,
-    super.contentPadding,
-    super.constraints,
-    super.clearButtonPadding,
-    super.obscureButtonPadding,
-    super.scrollPadding,
-    super.labelPadding,
-    super.descriptionPadding,
-    super.errorPadding,
-    super.childPadding,
-    super.labelMotion,
-  });
+  this;
 
   /// Creates an [FAutocompleteFieldStyle] from a [FTextFieldStyle].
   new inherit({required FColors colors, required FTextFieldStyle field})

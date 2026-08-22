@@ -81,21 +81,18 @@ class const Day({
 }
 
 /// A calendar's day style.
-class FCalendarDayStyle with Diagnosticable, _$FCalendarDayStyleFunctions {
+class FCalendarDayStyle({
   /// The day's text style.
-  @override
-  final TextStyle textStyle;
+  @override required final TextStyle textStyle,
 
   /// The decoration painted in front of [background].
-  @override
-  final Decoration foreground;
+  @override required final Decoration foreground,
 
-  /// The decoration painted behind [foreground].
-  @override
-  final Decoration background;
-
+  /// The decoration painted behind [foreground]. Defaults to `BoxDecoration()`.
+  @override final Decoration background = const BoxDecoration(),
+}) with Diagnosticable, _$FCalendarDayStyleFunctions {
   /// Creates a [FCalendarDayStyle].
-  new({required this.textStyle, required this.foreground, this.background = const BoxDecoration()});
+  this;
 }
 
 /// [FCalendarDayStyle]'s variants.

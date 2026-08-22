@@ -254,25 +254,21 @@ class FCalendarMonthPickerController extends GridController {
 }
 
 /// A month picker's style.
-class FCalendarMonthPickerStyle with Diagnosticable, _$FCalendarMonthPickerStyleFunctions {
-  /// The spacing between the header and the month picker. Defaults to 6. Does nothing if there is no header.
-  @override
-  final double headerSpacing;
-
+class const FCalendarMonthPickerStyle({
   /// The styles of the month tiles.
-  @override
-  final FCalendarMonthStyles monthStyles;
+  @override required final FCalendarMonthStyles monthStyles,
 
   /// The size of each month. Defaults to a width that aligns the 3-column grid with the day picker's 7-column grid.
-  @override
-  final Size monthSize;
+  @override required final Size monthSize,
+
+  /// The spacing between the header and the month picker. Defaults to 6. Does nothing if there is no header.
+  @override final double headerSpacing = 6,
 
   /// The vertical spacing between rows of months in the month picker. Defaults to 4.
-  @override
-  final double monthSpacing;
-
+  @override final double monthSpacing = 4,
+}) with Diagnosticable, _$FCalendarMonthPickerStyleFunctions {
   /// Creates a [FCalendarMonthPickerStyle].
-  const new({required this.monthStyles, required this.monthSize, this.headerSpacing = 6, this.monthSpacing = 4});
+  this;
 
   /// Creates a [FCalendarMonthPickerStyle] that inherits its properties.
   factory inherit({required FColors colors, required FTypography typography, required FStyle style}) =>

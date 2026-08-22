@@ -2,7 +2,8 @@ part of 'header.dart';
 
 /// A [FHeader] action.
 ///
-/// If the [onPress] and [onLongPress] callbacks are null, then this action will be disabled, it will not react to touch.
+/// If the [onPress] and [onLongPress] callbacks are null, then this action will be disabled, it will not react to
+/// touch.
 class FHeaderAction extends StatelessWidget {
   /// The style.
   ///
@@ -235,25 +236,22 @@ class FHeaderAction extends StatelessWidget {
 }
 
 /// [FHeaderAction]'s style.
-class FHeaderActionStyle with Diagnosticable, _$FHeaderActionStyleFunctions {
+class FHeaderActionStyle({
   /// The icon's style.
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> iconStyle;
+  required final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> iconStyle,
 
   /// The padding around the icon.
-  @override
-  final EdgeInsetsGeometry padding;
+  @override required final EdgeInsetsGeometry padding,
 
   /// The outline style when this action is focused.
-  @override
-  final FFocusedOutlineStyle focusedOutlineStyle;
+  @override required final FFocusedOutlineStyle focusedOutlineStyle,
 
   /// The tappable's style.
-  @override
-  final FTappableStyle tappableStyle;
-
+  @override required final FTappableStyle tappableStyle,
+}) with Diagnosticable, _$FHeaderActionStyleFunctions {
   /// Creates a [FHeaderActionStyle].
-  new({required this.iconStyle, required this.padding, required this.focusedOutlineStyle, required this.tappableStyle});
+  this;
 
   /// Creates a [FHeaderActionStyle] that inherits its properties.
   new inherit({

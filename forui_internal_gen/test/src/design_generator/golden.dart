@@ -800,6 +800,125 @@ class _FGoldenNestedMotionContext implements FGoldenNestedMotionDelta {
 }
 
 /// Provides [copyWith] and [lerp] methods.
+extension $FGoldenPrimaryStyleTransformations on FGoldenPrimaryStyle {
+  /// Returns a copy of this [FGoldenPrimaryStyle] with the given properties replaced.
+  ///
+  /// See [customizing widget styles](https://forui.dev/docs/guides/customizing-widget-styles).
+  ///
+  /// ## Parameters
+  /// * [FGoldenPrimaryStyle.someDouble] - This is a field's summary.
+  /// * [FGoldenPrimaryStyle.textStyleVariants]
+  /// * [FGoldenPrimaryStyle.colorVariants]
+  /// * [FGoldenPrimaryStyle.nestedStyle]
+  @useResult
+  FGoldenPrimaryStyle copyWith({
+    double? someDouble,
+    FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, TextStyle, TextStyleDelta>? textStyleVariants,
+    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color, Delta>? colorVariants,
+    FGoldenNestedStyleDelta? nestedStyle,
+  }) => .new(
+    someDouble: someDouble ?? this.someDouble,
+    textStyleVariants: textStyleVariants?.call(this.textStyleVariants) ?? this.textStyleVariants,
+    colorVariants: colorVariants?.call(this.colorVariants) ?? this.colorVariants,
+    nestedStyle: nestedStyle?.call(this.nestedStyle) ?? this.nestedStyle,
+  );
+
+  /// Linearly interpolate between this and another [FGoldenPrimaryStyle] using the given factor [t].
+  @useResult
+  FGoldenPrimaryStyle lerp(FGoldenPrimaryStyle other, double t) => .new(
+    someDouble: lerpDouble(someDouble, other.someDouble, t) ?? someDouble,
+    textStyleVariants: .lerpTextStyle(textStyleVariants, other.textStyleVariants, t),
+    colorVariants: .lerpColor(colorVariants, other.colorVariants, t),
+    nestedStyle: nestedStyle.lerp(other.nestedStyle, t),
+  );
+}
+
+mixin _$FGoldenPrimaryStyleFunctions on Diagnosticable implements FGoldenPrimaryStyleDelta {
+  /// Returns itself.
+  @override
+  FGoldenPrimaryStyle call(Object _) => this as FGoldenPrimaryStyle;
+
+  double get someDouble;
+  FVariants<FGoldenVariantConstraint, FGoldenVariant, TextStyle, TextStyleDelta> get textStyleVariants;
+  FVariants<FGoldenVariantConstraint, FGoldenVariant, Color, Delta> get colorVariants;
+  FGoldenNestedStyle get nestedStyle;
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DoubleProperty('someDouble', someDouble, level: .debug))
+      ..add(DiagnosticsProperty('textStyleVariants', textStyleVariants, level: .debug))
+      ..add(DiagnosticsProperty('colorVariants', colorVariants, level: .debug))
+      ..add(DiagnosticsProperty('nestedStyle', nestedStyle, level: .debug));
+  }
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      (other is FGoldenPrimaryStyle &&
+          runtimeType == other.runtimeType &&
+          someDouble == other.someDouble &&
+          textStyleVariants == other.textStyleVariants &&
+          colorVariants == other.colorVariants &&
+          nestedStyle == other.nestedStyle);
+
+  @override
+  int get hashCode => someDouble.hashCode ^ textStyleVariants.hashCode ^ colorVariants.hashCode ^ nestedStyle.hashCode;
+}
+
+/// A delta that applies modifications to a [FGoldenPrimaryStyle].
+///
+/// A [FGoldenPrimaryStyle] is itself a [FGoldenPrimaryStyleDelta].
+abstract class FGoldenPrimaryStyleDelta with Delta {
+  /// Creates a partial modification of a [FGoldenPrimaryStyle].
+  ///
+  /// ## Parameters
+  /// * [FGoldenPrimaryStyle.someDouble] - This is a field's summary.
+  /// * [FGoldenPrimaryStyle.textStyleVariants]
+  /// * [FGoldenPrimaryStyle.colorVariants]
+  /// * [FGoldenPrimaryStyle.nestedStyle]
+  const factory delta({
+    double? someDouble,
+    FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, TextStyle, TextStyleDelta>? textStyleVariants,
+    FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color, Delta>? colorVariants,
+    FGoldenNestedStyleDelta? nestedStyle,
+  }) = _FGoldenPrimaryStyleDelta;
+
+  /// Creates a delta that returns the [FGoldenPrimaryStyle] in the current context.
+  const factory context() = _FGoldenPrimaryStyleContext;
+
+  @override
+  FGoldenPrimaryStyle call(covariant FGoldenPrimaryStyle value);
+}
+
+class _FGoldenPrimaryStyleDelta implements FGoldenPrimaryStyleDelta {
+  const new({this.someDouble, this.textStyleVariants, this.colorVariants, this.nestedStyle});
+
+  final double? someDouble;
+
+  final FVariantsDelta<FGoldenVariantConstraint, FGoldenVariant, TextStyle, TextStyleDelta>? textStyleVariants;
+
+  final FVariantsValueDelta<FGoldenVariantConstraint, FGoldenVariant, Color, Delta>? colorVariants;
+
+  final FGoldenNestedStyleDelta? nestedStyle;
+
+  @override
+  FGoldenPrimaryStyle call(FGoldenPrimaryStyle original) => FGoldenPrimaryStyle(
+    someDouble: someDouble ?? original.someDouble,
+    textStyleVariants: textStyleVariants?.call(original.textStyleVariants) ?? original.textStyleVariants,
+    colorVariants: colorVariants?.call(original.colorVariants) ?? original.colorVariants,
+    nestedStyle: nestedStyle?.call(original.nestedStyle) ?? original.nestedStyle,
+  );
+}
+
+class _FGoldenPrimaryStyleContext implements FGoldenPrimaryStyleDelta {
+  const new();
+
+  @override
+  FGoldenPrimaryStyle call(FGoldenPrimaryStyle original) => original;
+}
+
+/// Provides [copyWith] and [lerp] methods.
 extension $FGoldenNestedStyleTransformations on FGoldenNestedStyle {
   /// Returns a copy of this [FGoldenNestedStyle] with the given properties replaced.
   ///

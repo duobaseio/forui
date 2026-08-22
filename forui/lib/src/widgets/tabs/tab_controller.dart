@@ -138,17 +138,15 @@ class _ProxyController extends TabController {
 /// Motion-related properties for [FTabs].
 ///
 /// All motion is automatically disabled when [FAccessibility.motion] is not [FAccessibilityMotion.all].
-class FTabMotion with Diagnosticable, _$FTabMotionFunctions {
+class const FTabMotion({
   /// The duration of the tab change animation. Defaults to 300 ms.
-  @override
-  final Duration duration;
+  @override final Duration duration = const Duration(milliseconds: 300),
 
   /// The curve of the tab change animation. Defaults to [Curves.easeOutCubic].
-  @override
-  final Curve curve;
-
+  @override final Curve curve = Curves.easeOutCubic,
+}) with Diagnosticable, _$FTabMotionFunctions {
   /// Creates a [FTabMotion].
-  const new({this.duration = const Duration(milliseconds: 300), this.curve = Curves.easeOutCubic});
+  this;
 }
 
 /// A [FTabControl] defines how a [FTabs] is controlled.

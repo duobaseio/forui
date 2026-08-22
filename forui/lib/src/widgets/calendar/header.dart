@@ -357,66 +357,47 @@ class const _Tappable({
 /// A calendar header's style.
 ///
 /// All motion is automatically disabled when [FAccessibility.motion] is not [FAccessibilityMotion.all].
-class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions {
-  /// The padding around the entire header. Defaults to `EdgeInsetsDirectional.only(start: 4)`.
-  @override
-  final EdgeInsetsGeometry padding;
-
+class const FCalendarHeaderStyle({
   /// The month and year tap targets' decoration. Defaults to a [FColors.secondary] background when hovered or pressed.
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, Decoration, DecorationDelta> headerDecoration;
-
-  /// The month and year tap targets' padding. Defaults to `EdgeInsetsDirectional.only(start: 6, end: 2, top: 4,
-  /// bottom: 4)`.
-  @override
-  final EdgeInsetsGeometry tappablePadding;
+  required final FVariants<FTappableVariantConstraint, FTappableVariant, Decoration, DecorationDelta> headerDecoration,
 
   /// The month and year labels' text style.
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> headerTextStyle;
+  required final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> headerTextStyle,
 
   /// The month and year toggle icons' style. Defaults to [FColors.mutedForeground].
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> toggleIconStyle;
+  required final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta>
+  toggleIconStyle,
 
   /// The focused outline style for the header tappable.
-  @override
-  final FFocusedOutlineStyle headerFocusedOutlineStyle;
+  @override required final FFocusedOutlineStyle headerFocusedOutlineStyle,
 
   /// The navigation buttons' style.
-  @override
-  final FButtonStyle buttonStyle;
+  @override required final FButtonStyle buttonStyle,
 
   /// The toggle icon builder. Defaults to [FIcons.chevronRight].
-  @override
-  final FIcon toggleIcon;
+  @override required final FIcon toggleIcon,
 
   /// The previous-month icon builder. Defaults to [FIcons.chevronLeft].
-  @override
-  final FIcon previousIcon;
+  @override required final FIcon previousIcon,
 
   /// The next-month icon builder. Defaults to [FIcons.chevronRight].
-  @override
-  final FIcon nextIcon;
+  @override required final FIcon nextIcon,
+
+  /// The padding around the entire header. Defaults to `EdgeInsets.zero`.
+  @override final EdgeInsetsGeometry padding = .zero,
+
+  /// The month and year tap targets' padding. Defaults to `EdgeInsetsDirectional.only(start: 8, end: 2, top: 4, bottom:
+  /// 4)`.
+  @override final EdgeInsetsGeometry tappablePadding = const .directional(start: 8, end: 2, top: 4, bottom: 4),
 
   /// The arrow turn animation's duration. Defaults to 100ms.
-  @override
-  final Duration animationDuration;
-
+  @override final Duration animationDuration = const Duration(milliseconds: 100),
+}) with Diagnosticable, _$FCalendarHeaderStyleFunctions {
   /// Creates a [FCalendarHeaderStyle].
-  const new({
-    required this.headerDecoration,
-    required this.headerTextStyle,
-    required this.toggleIconStyle,
-    required this.headerFocusedOutlineStyle,
-    required this.buttonStyle,
-    required this.toggleIcon,
-    required this.previousIcon,
-    required this.nextIcon,
-    this.padding = .zero,
-    this.tappablePadding = const .directional(start: 8, end: 2, top: 4, bottom: 4),
-    this.animationDuration = const Duration(milliseconds: 100),
-  });
+  this;
 
   /// Creates a [FCalendarHeaderStyle] that inherits its properties.
   factory inherit({

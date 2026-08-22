@@ -253,33 +253,26 @@ class _FSelectGroupState<T> extends State<FSelectGroup<T>> {
 }
 
 /// [FSelectGroup]'s style.
-class FSelectGroupStyle extends FLabelStyle with Diagnosticable, _$FSelectGroupStyleFunctions {
+class const FSelectGroupStyle({
   /// The [FCheckbox]'s style.
-  @override
-  final FCheckboxStyle checkboxStyle;
+  @override required final FCheckboxStyle checkboxStyle,
 
   /// The [FRadio]'s style.
-  @override
-  final FRadioStyle radioStyle;
+  @override required final FRadioStyle radioStyle,
+  required super.labelTextStyle,
+  required super.descriptionTextStyle,
+  required super.errorTextStyle,
 
   /// The padding surrounding an item. Defaults to `EdgeInsets.symmetric(vertical: 4)`.
-  @override
-  final EdgeInsetsGeometry itemPadding;
-
+  @override final EdgeInsetsGeometry itemPadding = const .symmetric(vertical: 4),
+  super.labelPadding,
+  super.descriptionPadding,
+  super.errorPadding,
+  super.childPadding,
+  super.labelMotion,
+}) extends FLabelStyle with Diagnosticable, _$FSelectGroupStyleFunctions {
   /// Creates a [FSelectGroupStyle].
-  const new({
-    required this.checkboxStyle,
-    required this.radioStyle,
-    required super.labelTextStyle,
-    required super.descriptionTextStyle,
-    required super.errorTextStyle,
-    this.itemPadding = const .symmetric(vertical: 4),
-    super.labelPadding,
-    super.descriptionPadding,
-    super.errorPadding,
-    super.childPadding,
-    super.labelMotion,
-  });
+  this;
 
   /// Creates a [FSelectGroupStyle] that inherits its properties.
   factory inherit({

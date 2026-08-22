@@ -1,5 +1,8 @@
 ## 0.26.0
 
+This update migrates Forui from the deprecated `flutter/cupertino.dart` & `flutter/material.dart` libraries to the
+`cupertino_ui` & `material_ui` packages.
+
 ### `FAutocomplete`
 * Add `FAutocomplete.clearIconBuilder`.
 
@@ -18,7 +21,7 @@
 * Fix minute wheel showing only `00` in 24-hour mode in locales that use non-western numerals.
 
 
-### `FLabel`, `FCheckbox`, `FOtpField`, `FRadio`, `FSelectGroup`, `FSlider` & `FSwitch`
+### `FLabel`
 * Change `FLabel`'s horizontal layouts to place the gap between the label and child in `labelPadding`,
   `descriptionPadding` and `errorPadding` instead of `childPadding`.
 * Change `FSliderStyle.labelPadding`'s default from `EdgeInsets.only(bottom: 5)` to `EdgeInsets.only(bottom: 15)`.
@@ -42,6 +45,11 @@
 
 ### `FTextField`
 * **Breaking** Change `FFieldClearIconBuilder` to be generic. Use `FFieldClearIconBuilder<FTextFieldStyle>` instead.
+
+
+### Others
+* **Breaking** Migrate from deprecated `flutter/cupertino.dart` to `cupertino_ui` package.
+* **Breaking** Migrate from deprecated `flutter/material.dart` to `material_ui` package.
 
 
 ## 0.25.0

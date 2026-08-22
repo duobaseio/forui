@@ -149,6 +149,9 @@ final class const FIcons({
   /// An "x" / close mark.
   required final FIcon x,
 }) with Diagnosticable {
+  /// Creates a [FIcons] with the given icons.
+  this;
+
   /// Creates a [FIcons] backed by [FLucideIcons] defaults.
   const new lucide()
     : this(

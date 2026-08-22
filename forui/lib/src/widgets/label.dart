@@ -552,41 +552,40 @@ class _VerticalLabelState extends _State<_VerticalLabel> {
 }
 
 /// The [FLabel]'s styles.
-class FLabelStyles with Diagnosticable, _$FLabelStylesFunctions {
+class const FLabelStyles({
   /// The [FLabelLayout.horizontalLeading] style.
-  @override
-  final FLabelStyle horizontalLeadingStyle;
+  @override required final FLabelStyle horizontalLeadingStyle,
 
   /// The [FLabelLayout.horizontalTrailing] style.
-  @override
-  final FLabelStyle horizontalTrailingStyle;
+  @override required final FLabelStyle horizontalTrailingStyle,
 
   /// The [FLabelLayout.vertical] style.
-  @override
-  final FLabelStyle verticalStyle;
-
+  @override required final FLabelStyle verticalStyle,
+}) with Diagnosticable, _$FLabelStylesFunctions {
   /// Creates a [FLabelStyles].
-  const new({required this.horizontalLeadingStyle, required this.horizontalTrailingStyle, required this.verticalStyle});
+  this;
 
   /// Creates a [FLabelStyles] that inherits its properties.
   new inherit({required FStyle style})
-    : horizontalLeadingStyle = .inherit(
-        style: style,
-        labelPadding: const .directional(end: 12),
-        descriptionPadding: const .directional(top: 2, end: 12),
-        errorPadding: const .directional(top: 2, end: 12),
-      ),
-      horizontalTrailingStyle = .inherit(
-        style: style,
-        labelPadding: const .directional(start: 8),
-        descriptionPadding: const .directional(top: 2, start: 8),
-        errorPadding: const .directional(top: 2, start: 8),
-      ),
-      verticalStyle = .inherit(
-        style: style,
-        labelPadding: const .only(bottom: 6),
-        descriptionPadding: const .only(top: 6),
-        errorPadding: const .only(top: 6),
+    : this(
+        horizontalLeadingStyle: .inherit(
+          style: style,
+          labelPadding: const .directional(end: 12),
+          descriptionPadding: const .directional(top: 2, end: 12),
+          errorPadding: const .directional(top: 2, end: 12),
+        ),
+        horizontalTrailingStyle: .inherit(
+          style: style,
+          labelPadding: const .directional(start: 8),
+          descriptionPadding: const .directional(top: 2, start: 8),
+          errorPadding: const .directional(top: 2, start: 8),
+        ),
+        verticalStyle: .inherit(
+          style: style,
+          labelPadding: const .only(bottom: 6),
+          descriptionPadding: const .only(top: 6),
+          errorPadding: const .only(top: 6),
+        ),
       );
 
   FLabelStyle _style(FLabelLayout layout) => switch (layout) {
@@ -597,58 +596,91 @@ class FLabelStyles with Diagnosticable, _$FLabelStylesFunctions {
 }
 
 /// The [FLabel]'s style.
-class FLabelStyle extends FFormFieldStyle with _$FLabelStyleFunctions {
-  /// The label's padding.
-  @override
-  final EdgeInsetsGeometry labelPadding;
+class const FLabelStyle({
+  required super.labelTextStyle,
+  required super.descriptionTextStyle,
+  required super.errorTextStyle,
 
-  /// The description's padding.
-  @override
-  final EdgeInsetsGeometry descriptionPadding;
+  /// The label's padding. Defaults to `EdgeInsets.zero`.
+  @override final EdgeInsetsGeometry labelPadding = .zero,
 
-  /// The error's padding.
-  @override
-  final EdgeInsetsGeometry errorPadding;
+  /// The description's padding. Defaults to `EdgeInsets.zero`.
+  @override final EdgeInsetsGeometry descriptionPadding = .zero,
 
-  /// The child's padding.
-  @override
-  final EdgeInsetsGeometry childPadding;
+  /// The error's padding. Defaults to `EdgeInsets.zero`.
+  @override final EdgeInsetsGeometry errorPadding = .zero,
 
-  /// The motion properties for error animations.
-  @override
-  final FLabelMotion labelMotion;
+  /// The child's padding. Defaults to `EdgeInsets.zero`.
+  @override final EdgeInsetsGeometry childPadding = .zero,
 
+  /// The motion properties for error animations. Defaults to [FLabelMotion].
+  @override final FLabelMotion labelMotion = const FLabelMotion(),
+}) extends FFormFieldStyle with _$FLabelStyleFunctions {
   /// Creates a [FLabelStyle].
-  const new({
-    required super.labelTextStyle,
-    required super.descriptionTextStyle,
-    required super.errorTextStyle,
-    this.labelPadding = .zero,
-    this.descriptionPadding = .zero,
-    this.errorPadding = .zero,
-    this.childPadding = .zero,
-    this.labelMotion = const FLabelMotion(),
-  });
+  this;
 
   /// Creates a [FLabelStyle].
   new inherit({
     required FStyle style,
-    this.labelPadding = .zero,
-    this.descriptionPadding = .zero,
-    this.errorPadding = .zero,
-    this.childPadding = .zero,
-    this.labelMotion = const FLabelMotion(),
-  }) : super(
+    EdgeInsetsGeometry labelPadding = .zero,
+    EdgeInsetsGeometry descriptionPadding = .zero,
+    EdgeInsetsGeometry errorPadding = .zero,
+    EdgeInsetsGeometry childPadding = .zero,
+    FLabelMotion labelMotion = const FLabelMotion(),
+  }) : this(
          labelTextStyle: style.formFieldStyle.labelTextStyle,
          descriptionTextStyle: style.formFieldStyle.descriptionTextStyle,
          errorTextStyle: style.formFieldStyle.errorTextStyle,
+         labelPadding: labelPadding,
+         descriptionPadding: descriptionPadding,
+         errorPadding: errorPadding,
+         childPadding: childPadding,
+         labelMotion: labelMotion,
        );
 }
 
 /// Motion-related properties for [FLabel] animations.
 ///
 /// All motion is automatically disabled when [FAccessibility.motion] is not [FAccessibilityMotion.all].
-class FLabelMotion with Diagnosticable, _$FLabelMotionFunctions {
+class const FLabelMotion({
+  /// The text style transition duration. Defaults to 100ms.
+  @override final Duration textStyleTransitionDuration = const Duration(milliseconds: 100),
+
+  /// The text style transition curve. Defaults to [Curves.linear].
+  @override final Curve textStyleTransitionCurve = Curves.linear,
+
+  /// The error expansion duration. Defaults to 100ms.
+  @override final Duration errorExpandDuration = const Duration(milliseconds: 100),
+
+  /// The error collapse duration. Defaults to 100ms.
+  @override final Duration errorCollapseDuration = const Duration(milliseconds: 100),
+
+  /// The error expansion curve. Defaults to [Curves.easeOut].
+  @override final Curve errorExpandCurve = Curves.easeOut,
+
+  /// The error collapse curve. Defaults to [Curves.easeOut].
+  @override final Curve errorCollapseCurve = Curves.easeOut,
+
+  /// The error fade in duration. Defaults to 100ms.
+  @override final Duration errorFadeInDuration = const Duration(milliseconds: 100),
+
+  /// The error fade out duration. Defaults to 100ms.
+  @override final Duration errorFadeOutDuration = const Duration(milliseconds: 100),
+
+  /// The error fade in curve. Defaults to [Curves.linear].
+  @override final Curve errorFadeInCurve = Curves.linear,
+
+  /// The error fade out curve. Defaults to [Curves.linear].
+  @override final Curve errorFadeOutCurve = Curves.linear,
+
+  /// The error fade tween. Defaults to [defaultErrorFadeTween].
+  ///
+  /// Set to [noErrorFadeTween] to disable the fade effect.
+  @override final Animatable<double> errorFadeTween = defaultErrorFadeTween,
+}) with Diagnosticable, _$FLabelMotionFunctions {
+  /// Creates a [FLabelMotion].
+  this;
+
   /// A [FLabelMotion] with no motion effects.
   static const FLabelMotion none = FLabelMotion(
     textStyleTransitionDuration: .zero,
@@ -664,65 +696,4 @@ class FLabelMotion with Diagnosticable, _$FLabelMotionFunctions {
 
   /// A tween that does not fade the error.
   static const FImmutableTween<double> noErrorFadeTween = FImmutableTween(begin: 1.0, end: 1.0);
-
-  /// The text style transition duration. Defaults to 100ms.
-  @override
-  final Duration textStyleTransitionDuration;
-
-  /// The text style transition curve. Defaults to [Curves.linear].
-  @override
-  final Curve textStyleTransitionCurve;
-
-  /// The error expansion duration. Defaults to 100ms.
-  @override
-  final Duration errorExpandDuration;
-
-  /// The error collapse duration. Defaults to 100ms.
-  @override
-  final Duration errorCollapseDuration;
-
-  /// The error expansion curve. Defaults to [Curves.easeOut].
-  @override
-  final Curve errorExpandCurve;
-
-  /// The error collapse curve. Defaults to [Curves.easeOut].
-  @override
-  final Curve errorCollapseCurve;
-
-  /// The error fade in duration. Defaults to 100ms.
-  @override
-  final Duration errorFadeInDuration;
-
-  /// The error fade out duration. Defaults to 100ms.
-  @override
-  final Duration errorFadeOutDuration;
-
-  /// The error fade in curve. Defaults to [Curves.linear].
-  @override
-  final Curve errorFadeInCurve;
-
-  /// The error fade out curve. Defaults to [Curves.linear].
-  @override
-  final Curve errorFadeOutCurve;
-
-  /// The error fade tween. Defaults to [defaultErrorFadeTween].
-  ///
-  /// Set to [noErrorFadeTween] to disable the fade effect.
-  @override
-  final Animatable<double> errorFadeTween;
-
-  /// Creates a [FLabelMotion].
-  const new({
-    this.textStyleTransitionDuration = const Duration(milliseconds: 100),
-    this.textStyleTransitionCurve = Curves.linear,
-    this.errorExpandDuration = const Duration(milliseconds: 100),
-    this.errorCollapseDuration = const Duration(milliseconds: 100),
-    this.errorExpandCurve = Curves.easeOut,
-    this.errorCollapseCurve = Curves.easeOut,
-    this.errorFadeInDuration = const Duration(milliseconds: 100),
-    this.errorFadeOutDuration = const Duration(milliseconds: 100),
-    this.errorFadeInCurve = Curves.linear,
-    this.errorFadeOutCurve = Curves.linear,
-    this.errorFadeTween = defaultErrorFadeTween,
-  });
 }

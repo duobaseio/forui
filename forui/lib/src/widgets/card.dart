@@ -108,30 +108,21 @@ class FCard extends StatelessWidget {
 }
 
 /// [FCard]'s style.
-class FCardStyle with Diagnosticable, _$FCardStyleFunctions {
+class FCardStyle({
   /// The decoration.
-  @override
-  final Decoration decoration;
+  @override required final Decoration decoration,
 
   /// The title's [TextStyle].
-  @override
-  final TextStyle titleTextStyle;
+  @override required final TextStyle titleTextStyle,
 
   /// The subtitle's [TextStyle].
-  @override
-  final TextStyle subtitleTextStyle;
+  @override required final TextStyle subtitleTextStyle,
 
   /// The padding. Defaults to `EdgeInsets.all(16)`.
-  @override
-  final EdgeInsetsGeometry padding;
-
+  @override final EdgeInsetsGeometry padding = const .all(16),
+}) with Diagnosticable, _$FCardStyleFunctions {
   /// Creates a [FCardStyle].
-  new({
-    required this.decoration,
-    required this.titleTextStyle,
-    required this.subtitleTextStyle,
-    this.padding = const .all(16),
-  });
+  this;
 
   /// Creates a [FCardStyle] that inherits its properties.
   factory inherit({

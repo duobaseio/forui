@@ -386,14 +386,18 @@ class FCalendarDayPickerController extends GridController {
 }
 
 /// A day picker's style.
-class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunctions {
-  /// The spacing between the header and the day picker. Defaults to 0. Does nothing if there is no header.
-  @override
-  final double headerSpacing;
-
+class const FCalendarDayPickerStyle({
   /// The text style for the days of the weekday headers.
-  @override
-  final TextStyle weekdayTextStyle;
+  @override required final TextStyle weekdayTextStyle,
+
+  /// The styles of the day tiles.
+  @override required final FCalendarDayStyles dayStyles,
+
+  /// The size of each day. Defaults to [FSizes.calendar].
+  @override required final Size daySize,
+
+  /// The spacing between the header and the day picker. Defaults to 0. Does nothing if there is no header.
+  @override final double headerSpacing = 0,
 
   /// The starting day of the week. Defaults to the current locale's preferred starting day.
   ///
@@ -401,33 +405,17 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
   /// Throws [AssertionError] if:
   /// * [firstDayOfWeek] < [DateTime.monday]
   /// * [DateTime.sunday] < [firstDayOfWeek]
-  @override
-  final int? firstDayOfWeek;
+  @override final int? firstDayOfWeek,
 
-  /// The styles of the day tiles.
-  @override
-  final FCalendarDayStyles dayStyles;
-
-  /// The size of each day. Defaults to [FSizes.calendar].
-  @override
-  final Size daySize;
-
-  /// The vertical spacing between days in the day picker. Defaults to 4.
-  @override
-  final double daySpacing;
-
+  /// The vertical spacing between days in the day picker. Defaults to 2.
+  @override final double daySpacing = 2,
+}) with Diagnosticable, _$FCalendarDayPickerStyleFunctions {
   /// Creates a [FCalendarDayPickerStyle].
-  const new({
-    required this.weekdayTextStyle,
-    required this.dayStyles,
-    required this.daySize,
-    this.headerSpacing = 0,
-    this.firstDayOfWeek,
-    this.daySpacing = 2,
-  }) : assert(
-         firstDayOfWeek == null || (DateTime.monday <= firstDayOfWeek && firstDayOfWeek <= DateTime.sunday),
-         'firstDayOfWeek ($firstDayOfWeek) must be between DateTime.monday (1) and DateTime.sunday (7)',
-       );
+  this
+    : assert(
+        firstDayOfWeek == null || (DateTime.monday <= firstDayOfWeek && firstDayOfWeek <= DateTime.sunday),
+        'firstDayOfWeek ($firstDayOfWeek) must be between DateTime.monday (1) and DateTime.sunday (7)',
+      );
 
   /// Creates a [FCalendarDayPickerStyle] that inherits its properties.
   factory inherit({

@@ -144,41 +144,34 @@ class Content<T> extends StatelessWidget {
 }
 
 /// An [FAutocomplete]'s content style.
-class FAutocompleteContentStyle extends FPopoverStyle with Diagnosticable, _$FAutocompleteContentStyleFunctions {
+class FAutocompleteContentStyle({
   /// The default text style when there are no results.
-  @override
-  final TextStyle emptyTextStyle;
-
-  /// The padding surrounding the content. Defaults to `const EdgeInsets.symmetric(vertical: 6)`.
-  @override
-  final EdgeInsetsGeometry padding;
+  @override required final TextStyle emptyTextStyle,
 
   /// The loading progress's style.
-  @override
-  final FCircularProgressStyle progressStyle;
+  @override required final FCircularProgressStyle progressStyle,
 
   /// The section's style.
-  @override
-  final FAutocompleteSectionStyle sectionStyle;
+  @override required final FAutocompleteSectionStyle sectionStyle,
+  required super.decoration,
 
+  /// The padding surrounding the content. Defaults to `const EdgeInsets.symmetric(vertical: 6)`.
+  @override final EdgeInsetsGeometry padding = const .symmetric(vertical: 6),
+  super.barrierFilter,
+  super.backgroundFilter,
+  super.popoverPadding,
+  super.motion,
+}) extends FPopoverStyle with Diagnosticable, _$FAutocompleteContentStyleFunctions {
   /// Creates an [FAutocompleteContentStyle].
-  new({
-    required this.emptyTextStyle,
-    required this.progressStyle,
-    required this.sectionStyle,
-    required super.decoration,
-    this.padding = const .symmetric(vertical: 6),
-    super.barrierFilter,
-    super.backgroundFilter,
-    super.popoverPadding,
-    super.motion,
-  });
+  this;
 
   /// Creates a [FAutocompleteContentStyle] that inherits its properties.
-  new inherit({required super.colors, required FTypography typography, required super.style, required bool touch})
-    : emptyTextStyle = typography.body.sm,
-      progressStyle = .inherit(colors: colors),
-      sectionStyle = .inherit(colors: colors, style: style, typography: typography, touch: touch),
-      padding = const .symmetric(vertical: 6),
-      super.inherit();
+  new inherit({required FColors colors, required FTypography typography, required FStyle style, required bool touch})
+    : this(
+        emptyTextStyle: typography.body.sm,
+        progressStyle: .inherit(colors: colors),
+        sectionStyle: .inherit(colors: colors, style: style, typography: typography, touch: touch),
+        padding: const .symmetric(vertical: 6),
+        decoration: FPopoverStyle.inherit(colors: colors, style: style).decoration,
+      );
 }

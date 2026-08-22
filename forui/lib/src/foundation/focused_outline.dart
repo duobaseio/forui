@@ -126,27 +126,22 @@ class _Outline extends RenderProxyBox {
 }
 
 /// The [FFocusedOutline]'s style.
-class FFocusedOutlineStyle with Diagnosticable, _$FFocusedOutlineStyleFunctions {
+class const FFocusedOutlineStyle({
   /// The outline's color.
-  @override
-  final Color color;
+  @override required final Color color,
 
   /// The border radius.
-  @override
-  final BorderRadiusGeometry borderRadius;
+  @override required final BorderRadiusGeometry borderRadius,
 
   /// The outline's width. Defaults to 1.
   ///
   /// ## Contract
   /// Must be > 0.
-  @override
-  final double width;
+  @override final double width = 1,
 
   /// The spacing between the outline and the outlined widget. Can be negative. Defaults to 3.
-  @override
-  final double spacing;
-
+  @override final double spacing = 3,
+}) with Diagnosticable, _$FFocusedOutlineStyleFunctions {
   /// Creates a [FFocusedOutlineStyle].
-  const new({required this.color, required this.borderRadius, this.width = 1, this.spacing = 3})
-    : assert(0 < width, 'width ($width) must be > 0.');
+  this : assert(0 < width, 'width ($width) must be > 0.');
 }

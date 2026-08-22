@@ -220,43 +220,32 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
 }
 
 /// A [FSelectSection]'s style.
-class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
+class FSelectSectionStyle({
   /// The label's text style.
   @override
-  final FVariants<FSelectSectionVariantConstraint, FSelectSectionVariant, TextStyle, TextStyleDelta> labelTextStyle;
-
-  /// The padding around the label. Defaults to `EdgeInsetsDirectional.only(start: 14, top: 6, bottom: 6, end: 10)`.
-  @override
-  final EdgeInsetsGeometry labelPadding;
+  required final FVariants<FSelectSectionVariantConstraint, FSelectSectionVariant, TextStyle, TextStyleDelta>
+  labelTextStyle,
 
   /// The color of the divider between items in this section.
-  @override
-  final FVariants<FSelectSectionVariantConstraint, FSelectSectionVariant, Color, Delta> dividerColor;
+  @override required final FVariants<FSelectSectionVariantConstraint, FSelectSectionVariant, Color, Delta> dividerColor,
 
   /// The width of the divider between items in this section.
-  @override
-  final double dividerWidth;
+  @override required final double dividerWidth,
 
   /// The section's items' style.
-  @override
-  final FItemStyle itemStyle;
+  @override required final FItemStyle itemStyle,
+
+  /// The padding around the label. Defaults to `EdgeInsetsDirectional.only(start: 14, top: 6, bottom: 6, end: 10)`.
+  @override final EdgeInsetsGeometry labelPadding = const .directional(start: 14, top: 6, bottom: 6, end: 10),
 
   /// The spacing below the section. Defaults to 4.
   ///
   /// ## Contract
   /// Throws [AssertionError] if [spacing] is negative.
-  @override
-  final double spacing;
-
+  @override final double spacing = 4,
+}) with Diagnosticable, _$FSelectSectionStyleFunctions {
   /// Creates a [FSelectSectionStyle].
-  new({
-    required this.labelTextStyle,
-    required this.dividerColor,
-    required this.dividerWidth,
-    required this.itemStyle,
-    this.labelPadding = const .directional(start: 14, top: 6, bottom: 6, end: 10),
-    this.spacing = 4,
-  }) : assert(0 <= spacing, 'spacing ($spacing) must be >= 0');
+  this : assert(0 <= spacing, 'spacing ($spacing) must be >= 0');
 
   /// Creates a [FSelectSectionStyle] that inherits its properties.
   factory inherit({

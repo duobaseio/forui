@@ -64,17 +64,15 @@ class const Month({
 }
 
 /// A calendar's month style.
-class FCalendarMonthStyle with Diagnosticable, _$FCalendarMonthStyleFunctions {
+class FCalendarMonthStyle({
   /// The month's text style.
-  @override
-  final TextStyle textStyle;
+  @override required final TextStyle textStyle,
 
   /// The decoration painted behind the month's text.
-  @override
-  final Decoration decoration;
-
+  @override required final Decoration decoration,
+}) with Diagnosticable, _$FCalendarMonthStyleFunctions {
   /// Creates a [FCalendarMonthStyle].
-  new({required this.textStyle, required this.decoration});
+  this;
 }
 
 /// [FCalendarMonthStyle]'s variants.

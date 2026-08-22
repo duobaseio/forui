@@ -647,35 +647,25 @@ extension type FButtonSizeStyles(
 }
 
 /// A [FButton]'s style.
-final class FButtonStyle with Diagnosticable, _$FButtonStyleFunctions {
+final class FButtonStyle({
   /// The box decoration.
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, Decoration, DecorationDelta> decoration;
+  required final FVariants<FTappableVariantConstraint, FTappableVariant, Decoration, DecorationDelta> decoration,
 
   /// The content's style.
-  @override
-  final FButtonContentStyle contentStyle;
+  @override required final FButtonContentStyle contentStyle,
 
   /// The icon content's style.
-  @override
-  final FButtonIconContentStyle iconContentStyle;
+  @override required final FButtonIconContentStyle iconContentStyle,
 
   /// The tappable's style.
-  @override
-  final FTappableStyle tappableStyle;
+  @override required final FTappableStyle tappableStyle,
 
   /// The focused outline style.
-  @override
-  final FFocusedOutlineStyle focusedOutlineStyle;
-
+  @override required final FFocusedOutlineStyle focusedOutlineStyle,
+}) with Diagnosticable, _$FButtonStyleFunctions {
   /// Creates a [FButtonStyle].
-  new({
-    required this.decoration,
-    required this.contentStyle,
-    required this.iconContentStyle,
-    required this.tappableStyle,
-    required this.focusedOutlineStyle,
-  });
+  this;
 
   /// Creates a [FButtonStyle] that inherits its properties.
   factory inherit({

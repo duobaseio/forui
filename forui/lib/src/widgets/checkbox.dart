@@ -177,55 +177,38 @@ class FCheckbox extends StatelessWidget {
 }
 
 /// A checkboxes style.
-class FCheckboxStyle with Diagnosticable, _$FCheckboxStyleFunctions {
+class const FCheckboxStyle({
   /// The tappable style.
-  @override
-  final FTappableStyle tappableStyle;
+  @override required final FTappableStyle tappableStyle,
 
   /// The focused outline style.
-  @override
-  final FFocusedOutlineStyle focusedOutlineStyle;
-
-  /// The checkboxes size.
-  @override
-  final double size;
+  @override required final FFocusedOutlineStyle focusedOutlineStyle,
 
   /// The icon style.
   @override
-  final FVariants<FFormFieldVariantConstraint, FFormFieldVariant, IconThemeData, IconThemeDataDelta> iconStyle;
+  required final FVariants<FFormFieldVariantConstraint, FFormFieldVariant, IconThemeData, IconThemeDataDelta> iconStyle,
 
   /// The check icon builder. Defaults to [FIcons.check].
-  @override
-  final FIcon icon;
+  @override required final FIcon icon,
 
   /// The box decoration.
   @override
-  final FVariants<FCheckboxVariantConstraint, FCheckboxVariant, Decoration, DecorationDelta> decoration;
-
-  /// The motion-related properties.
-  @override
-  final FCheckboxMotion motion;
+  required final FVariants<FCheckboxVariantConstraint, FCheckboxVariant, Decoration, DecorationDelta> decoration,
 
   /// The label style when [FCheckbox.leadingLabel] is true.
-  @override
-  final FLabelStyle leadingLabelStyle;
+  @override required final FLabelStyle leadingLabelStyle,
 
   /// The label style when [FCheckbox.leadingLabel] is false (the default).
-  @override
-  final FLabelStyle trailingLabelStyle;
+  @override required final FLabelStyle trailingLabelStyle,
 
+  /// The checkboxes size. Defaults to 16.
+  @override final double size = 16,
+
+  /// The motion-related properties. Defaults to [FCheckboxMotion].
+  @override final FCheckboxMotion motion = const FCheckboxMotion(),
+}) with Diagnosticable, _$FCheckboxStyleFunctions {
   /// Creates a [FCheckboxStyle].
-  const new({
-    required this.tappableStyle,
-    required this.focusedOutlineStyle,
-    required this.iconStyle,
-    required this.icon,
-    required this.decoration,
-    required this.leadingLabelStyle,
-    required this.trailingLabelStyle,
-    this.size = 16,
-    this.motion = const FCheckboxMotion(),
-  });
+  this;
 
   /// Creates a [FCheckboxStyle] that inherits its properties.
   factory inherit({required FColors colors, required FIcons icons, required FStyle style, required bool touch}) {
@@ -308,28 +291,19 @@ class FCheckboxStyle with Diagnosticable, _$FCheckboxStyleFunctions {
 /// The motion-related properties for a [FCheckbox].
 ///
 /// All motion is automatically disabled when [FAccessibility.motion] is [FAccessibilityMotion.disabled].
-class FCheckboxMotion with Diagnosticable, _$FCheckboxMotionFunctions {
+class const FCheckboxMotion({
   /// The duration of the fade in animation. Defaults to 100ms.
-  @override
-  final Duration fadeInDuration;
+  @override final Duration fadeInDuration = const Duration(milliseconds: 100),
 
   /// The duration of the fade out animation. Defaults to 100ms.
-  @override
-  final Duration fadeOutDuration;
+  @override final Duration fadeOutDuration = const Duration(milliseconds: 100),
 
   /// The curve of the fade in animation. Defaults to [Curves.linear].
-  @override
-  final Curve fadeInCurve;
+  @override final Curve fadeInCurve = Curves.linear,
 
   /// The curve of the fade out animation. Defaults to [Curves.linear].
-  @override
-  final Curve fadeOutCurve;
-
+  @override final Curve fadeOutCurve = Curves.linear,
+}) with Diagnosticable, _$FCheckboxMotionFunctions {
   /// Creates a [FCheckboxMotion].
-  const new({
-    this.fadeInDuration = const Duration(milliseconds: 100),
-    this.fadeOutDuration = const Duration(milliseconds: 100),
-    this.fadeInCurve = Curves.linear,
-    this.fadeOutCurve = Curves.linear,
-  });
+  this;
 }

@@ -233,25 +233,21 @@ class FCalendarYearPickerController extends GridController {
 }
 
 /// A year picker's style.
-class FCalendarYearPickerStyle with Diagnosticable, _$FCalendarYearPickerStyleFunctions {
-  /// The spacing between the header and the year picker. Defaults to 6. Does nothing if there is no header.
-  @override
-  final double headerSpacing;
-
+class const FCalendarYearPickerStyle({
   /// The styles of the year tiles.
-  @override
-  final FCalendarYearStyles yearStyles;
+  @override required final FCalendarYearStyles yearStyles,
 
   /// The size of each year. Defaults to a width that aligns the 3-column grid with the day picker's 7-column grid.
-  @override
-  final Size yearSize;
+  @override required final Size yearSize,
+
+  /// The spacing between the header and the year picker. Defaults to 6. Does nothing if there is no header.
+  @override final double headerSpacing = 6,
 
   /// The vertical spacing between rows of years in the year picker. Defaults to 4.
-  @override
-  final double yearSpacing;
-
+  @override final double yearSpacing = 4,
+}) with Diagnosticable, _$FCalendarYearPickerStyleFunctions {
   /// Creates a [FCalendarYearPickerStyle].
-  const new({required this.yearStyles, required this.yearSize, this.headerSpacing = 6, this.yearSpacing = 4});
+  this;
 
   /// Creates a [FCalendarYearPickerStyle] that inherits its properties.
   factory inherit({required FColors colors, required FTypography typography, required FStyle style}) =>

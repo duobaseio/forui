@@ -8,25 +8,21 @@ import 'package:forui/forui.dart';
 part 'select_style.design.dart';
 
 /// A [FSelect]'s style.
-class FSelectStyle with Diagnosticable, _$FSelectStyleFunctions {
+class FSelectStyle({
   /// The select field's size styles.
-  @override
-  final FTextFieldSizeStyles fieldStyles;
+  @override required final FTextFieldSizeStyles fieldStyles,
 
   /// The search's style.
-  @override
-  final FSelectSearchStyle searchStyle;
+  @override required final FSelectSearchStyle searchStyle,
 
   /// The content's style.
-  @override
-  final FSelectContentStyle contentStyle;
+  @override required final FSelectContentStyle contentStyle,
 
   /// The default text style when there are no results.
-  @override
-  final TextStyle emptyTextStyle;
-
+  @override required final TextStyle emptyTextStyle,
+}) with Diagnosticable, _$FSelectStyleFunctions {
   /// Creates a [FSelectStyle].
-  new({required this.fieldStyles, required this.searchStyle, required this.contentStyle, required this.emptyTextStyle});
+  this;
 
   /// Creates a [FSelectStyle] that inherits its properties.
   new inherit({

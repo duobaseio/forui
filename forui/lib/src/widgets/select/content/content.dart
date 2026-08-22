@@ -255,40 +255,35 @@ class _ContentState<T> extends State<Content<T>> {
 }
 
 /// An [FSelect]'s contents style.
-class FSelectContentStyle extends FPopoverStyle with Diagnosticable, _$FSelectContentStyleFunctions {
+class FSelectContentStyle({
   /// A section's style.
-  @override
-  final FSelectSectionStyle sectionStyle;
+  @override required final FSelectSectionStyle sectionStyle,
 
   /// A scroll handle's style.
-  @override
-  final FSelectScrollHandleStyle scrollHandleStyle;
+  @override required final FSelectScrollHandleStyle scrollHandleStyle,
+  required super.decoration,
 
-  /// The padding surrounding the content. Defaults to `const EdgeInsets.symmetric(6)`.
-  @override
-  final EdgeInsetsGeometry padding;
-
+  /// The padding surrounding the content. Defaults to `EdgeInsets.symmetric(vertical: 6)`.
+  @override final EdgeInsetsGeometry padding = const .symmetric(vertical: 6),
+  super.barrierFilter,
+  super.backgroundFilter,
+  super.popoverPadding,
+  super.motion,
+}) extends FPopoverStyle with Diagnosticable, _$FSelectContentStyleFunctions {
   /// Creates a [FSelectContentStyle].
-  new({
-    required this.sectionStyle,
-    required this.scrollHandleStyle,
-    required super.decoration,
-    this.padding = const .symmetric(vertical: 6),
-    super.barrierFilter,
-    super.backgroundFilter,
-    super.popoverPadding,
-    super.motion,
-  });
+  this;
 
   /// Creates a [FSelectContentStyle] that inherits its properties.
   new inherit({
-    required super.colors,
-    required super.style,
+    required FColors colors,
+    required FStyle style,
     required FIcons icons,
     required FTypography typography,
     required bool touch,
-  }) : sectionStyle = .inherit(colors: colors, style: style, typography: typography, touch: touch),
-       scrollHandleStyle = .inherit(colors: colors, icons: icons, typography: typography),
-       padding = const .symmetric(vertical: 6),
-       super.inherit();
+  }) : this(
+         sectionStyle: .inherit(colors: colors, style: style, typography: typography, touch: touch),
+         scrollHandleStyle: .inherit(colors: colors, icons: icons, typography: typography),
+         padding: const .symmetric(vertical: 6),
+         decoration: FPopoverStyle.inherit(colors: colors, style: style).decoration,
+       );
 }

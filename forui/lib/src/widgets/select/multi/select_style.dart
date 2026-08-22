@@ -10,25 +10,21 @@ import 'package:forui/forui.dart';
 part 'select_style.design.dart';
 
 /// A [FMultiSelect]'s style.
-class FMultiSelectStyle with Diagnosticable, _$FMultiSelectStyleFunctions {
+class FMultiSelectStyle({
   /// The field's size styles.
-  @override
-  final FMultiSelectFieldSizeStyles fieldStyles;
+  @override required final FMultiSelectFieldSizeStyles fieldStyles,
 
   /// The search's style.
-  @override
-  final FSelectSearchStyle searchStyle;
+  @override required final FSelectSearchStyle searchStyle,
 
   /// The content's style.
-  @override
-  final FSelectContentStyle contentStyle;
+  @override required final FSelectContentStyle contentStyle,
 
   /// The default text style when there are no results.
-  @override
-  final TextStyle emptyTextStyle;
-
+  @override required final TextStyle emptyTextStyle,
+}) with Diagnosticable, _$FMultiSelectStyleFunctions {
   /// Creates a [FMultiSelectStyle].
-  new({required this.fieldStyles, required this.searchStyle, required this.contentStyle, required this.emptyTextStyle});
+  this;
 
   /// Creates a [FMultiSelectStyle] that inherits its properties.
   new inherit({
@@ -181,78 +177,56 @@ extension type FMultiSelectFieldSizeStyles(
 }
 
 /// A [FMultiSelectFieldStyle]'s style.
-class FMultiSelectFieldStyle extends FLabelStyle with Diagnosticable, _$FMultiSelectFieldStyleFunctions {
+class FMultiSelectFieldStyle({
   /// The multi-select field's decoration.
   @override
-  final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, Decoration, DecorationDelta> decoration;
+  required final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, Decoration, DecorationDelta> decoration,
 
   /// The multi-select field's padding.
-  @override
-  final EdgeInsetsGeometry contentPadding;
-
-  /// The spacing between tags. Defaults to 4.
-  @override
-  final double spacing;
-
-  /// The spacing between the rows of tags. Defaults to 4.
-  @override
-  final double runSpacing;
+  @override required final EdgeInsetsGeometry contentPadding,
 
   /// The multi-select field hint's text style.
   @override
-  final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, TextStyle, TextStyleDelta> hintTextStyle;
+  required final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, TextStyle, TextStyleDelta> hintTextStyle,
 
   /// The multi-select field's hint padding.
-  @override
-  final EdgeInsetsGeometry hintPadding;
+  @override required final EdgeInsetsGeometry hintPadding,
 
   /// The multi-select field's icon style.
   @override
-  final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, IconThemeData, IconThemeDataDelta> iconStyle;
+  required final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, IconThemeData, IconThemeDataDelta> iconStyle,
 
   /// The clear button's style when [FMultiSelect.clearable] is true.
-  @override
-  final FButtonStyle clearButtonStyle;
+  @override required final FButtonStyle clearButtonStyle,
 
   /// The clear button's icon builder. Defaults to [FIcons.x].
-  @override
-  final FIcon clearIcon;
-
-  /// The padding surrounding the clear button. Defaults to [EdgeInsets.zero].
-  @override
-  final EdgeInsetsGeometry clearButtonPadding;
+  @override required final FIcon clearIcon,
 
   /// The multi-select field's tappable style.
-  @override
-  final FTappableStyle tappableStyle;
+  @override required final FTappableStyle tappableStyle,
 
   /// The tag's style.
-  @override
-  final FMultiSelectTagStyle tagStyle;
+  @override required final FMultiSelectTagStyle tagStyle,
+  required super.labelTextStyle,
+  required super.descriptionTextStyle,
+  required super.errorTextStyle,
 
+  /// The spacing between tags. Defaults to 4.
+  @override final double spacing = 4,
+
+  /// The spacing between the rows of tags. Defaults to 4.
+  @override final double runSpacing = 4,
+
+  /// The padding surrounding the clear button. Defaults to [EdgeInsets.zero].
+  @override final EdgeInsetsGeometry clearButtonPadding = .zero,
+  super.labelPadding,
+  super.descriptionPadding,
+  super.errorPadding,
+  super.childPadding,
+  super.labelMotion,
+}) extends FLabelStyle with Diagnosticable, _$FMultiSelectFieldStyleFunctions {
   /// Creates a [FMultiSelectFieldStyle].
-  new({
-    required this.decoration,
-    required this.contentPadding,
-    required this.hintTextStyle,
-    required this.hintPadding,
-    required this.iconStyle,
-    required this.clearButtonStyle,
-    required this.clearIcon,
-    required this.tappableStyle,
-    required this.tagStyle,
-    required super.labelTextStyle,
-    required super.descriptionTextStyle,
-    required super.errorTextStyle,
-    this.spacing = 4,
-    this.runSpacing = 4,
-    this.clearButtonPadding = .zero,
-    super.labelPadding,
-    super.descriptionPadding,
-    super.errorPadding,
-    super.childPadding,
-    super.labelMotion,
-  });
+  this;
 
   /// Creates a [FMultiSelectFieldStyle] that inherits its properties.
   new inherit({

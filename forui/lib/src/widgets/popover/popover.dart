@@ -93,7 +93,8 @@ class FPopover extends StatefulWidget {
   /// the popover's top edge will align with the child's bottom edge.
   /// {@endtemplate}
   ///
-  /// Defaults to [Alignment.bottomCenter] on Android, iOS and Fuchsia, and [Alignment.topCenter] on all other platforms.
+  /// Defaults to [Alignment.bottomCenter] on Android, iOS and Fuchsia, and [Alignment.topCenter] on all other
+  /// platforms.
   /// To change the platform variant, update the enclosing [FTheme.platform]/[FAdaptiveScope.platform].
   final AlignmentGeometry? popoverAnchor;
 
@@ -558,10 +559,9 @@ class _State extends State<FPopover> with TickerProviderStateMixin {
 }
 
 /// A [FPopover]'s style.
-class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
+class const FPopoverStyle({
   /// The popover's decoration.
-  @override
-  final Decoration decoration;
+  @override required final Decoration decoration,
 
   /// {@template forui.widgets.FPopoverStyle.barrierFilter}
   /// An optional callback that takes a [BuildContext] and the current animation transition value (0.0 to 1.0), and
@@ -591,8 +591,7 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
   /// );
   /// ```
   /// {@endtemplate}
-  @override
-  final ImageFilter Function(BuildContext context, double animation)? barrierFilter;
+  @override final ImageFilter Function(BuildContext context, double animation)? barrierFilter,
 
   /// {@template forui.widgets.FPopoverStyle.backgroundFilter}
   /// An optional callback that takes the current animation transition value (0.0 to 1.0) and returns an [ImageFilter]
@@ -621,29 +620,20 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
   /// );
   /// ```
   /// {@endtemplate}
-  @override
-  final ImageFilter Function(BuildContext context, double animation)? backgroundFilter;
+  @override final ImageFilter Function(BuildContext context, double animation)? backgroundFilter,
 
   /// The additional padding between the edges of the view and the edges of the popover.
   ///
   /// This is applied on top of the view's safe area and keyboard insets.
   ///
   /// Defaults to `EdgeInsets.all(5)`.
-  @override
-  final EdgeInsetsGeometry popoverPadding;
+  @override final EdgeInsetsGeometry popoverPadding = const .all(5),
 
-  /// The popover's motion configuration.
-  @override
-  final FPopoverMotion motion;
-
+  /// The popover's motion configuration. Defaults to [FPopoverMotion].
+  @override final FPopoverMotion motion = const FPopoverMotion(),
+}) with Diagnosticable, _$FPopoverStyleFunctions {
   /// Creates a [FPopoverStyle].
-  const new({
-    required this.decoration,
-    this.barrierFilter,
-    this.backgroundFilter,
-    this.popoverPadding = const .all(5),
-    this.motion = const FPopoverMotion(),
-  });
+  this;
 
   /// Creates a [FPopoverStyle] that inherits its properties.
   new inherit({required FColors colors, required FStyle style})
@@ -664,54 +654,37 @@ class FPopoverStyle with Diagnosticable, _$FPopoverStyleFunctions {
 /// When [FAccessibility.motion] is:
 /// * [FAccessibilityMotion.reduced], only the fade transition is applied.
 /// * [FAccessibilityMotion.disabled], no motion is applied.
-class FPopoverMotion with Diagnosticable, _$FPopoverMotionFunctions {
+class const FPopoverMotion({
+  /// The popover's entrance duration. Defaults to 100ms.
+  @override final Duration entranceDuration = const Duration(milliseconds: 100),
+
+  /// The popover's exit duration. Defaults to 100ms.
+  @override final Duration exitDuration = const Duration(milliseconds: 100),
+
+  /// The curve used for the popover's expansion animation when entering. Defaults to [Curves.easeOutCubic].
+  @override final Curve expandCurve = Curves.easeOutCubic,
+
+  /// The curve used for the popover's collapse animation when exiting. Defaults to [Curves.easeInCubic].
+  @override final Curve collapseCurve = Curves.easeInCubic,
+
+  /// The curve used for the popover's fade-in animation when entering. Defaults to [Curves.linear].
+  @override final Curve fadeInCurve = Curves.linear,
+
+  /// The curve used for the popover's fade-out animation when exiting. Defaults to [Curves.linear].
+  @override final Curve fadeOutCurve = Curves.linear,
+
+  /// The popover's scale tween. Defaults to a tween from 0.93 to 1.
+  @override final Animatable<double> scaleTween = const FImmutableTween(begin: 0.93, end: 1),
+
+  /// The popover's fade tween. Defaults to a tween from 0 to 1.
+  @override final Animatable<double> fadeTween = const FImmutableTween(begin: 0, end: 1),
+}) with Diagnosticable, _$FPopoverMotionFunctions {
+  /// Creates a [FPopoverMotion].
+  this;
+
   /// A [FPopoverMotion] with no motion effects.
   static const FPopoverMotion none = .new(
     scaleTween: FImmutableTween(begin: 1, end: 1),
     fadeTween: FImmutableTween(begin: 1, end: 1),
   );
-
-  /// The popover's entrance duration. Defaults to 120ms.
-  @override
-  final Duration entranceDuration;
-
-  /// The popover's exit duration. Defaults to 100ms.
-  @override
-  final Duration exitDuration;
-
-  /// The curve used for the popover's expansion animation when entering. Defaults to [Curves.easeOutCubic].
-  @override
-  final Curve expandCurve;
-
-  /// The curve used for the popover's collapse animation when exiting. Defaults to [Curves.easeInCubic].
-  @override
-  final Curve collapseCurve;
-
-  /// The curve used for the popover's fade-in animation when entering. Defaults to [Curves.linear].
-  @override
-  final Curve fadeInCurve;
-
-  /// The curve used for the popover's fade-out animation when exiting. Defaults to [Curves.linear].
-  @override
-  final Curve fadeOutCurve;
-
-  /// The popover's scale tween. Defaults to a tween from 0.93 to 1.
-  @override
-  final Animatable<double> scaleTween;
-
-  /// The popover's fade tween. Defaults to a tween from 0 to 1.
-  @override
-  final Animatable<double> fadeTween;
-
-  /// Creates a [FPopoverMotion].
-  const new({
-    this.entranceDuration = const Duration(milliseconds: 100),
-    this.exitDuration = const Duration(milliseconds: 100),
-    this.expandCurve = Curves.easeOutCubic,
-    this.collapseCurve = Curves.easeInCubic,
-    this.fadeInCurve = Curves.linear,
-    this.fadeOutCurve = Curves.linear,
-    this.scaleTween = const FImmutableTween(begin: 0.93, end: 1),
-    this.fadeTween = const FImmutableTween(begin: 0, end: 1),
-  });
 }

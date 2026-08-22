@@ -273,7 +273,8 @@ class FItemGroup extends StatelessWidget with FItemGroupMixin {
   /// {@template forui.widgets.FItemGroup.builder}
   /// Creates a [FItemGroup] that lazily builds its children.
   ///
-  /// The [itemBuilder] is called for each item that should be built. The current level's [FInheritedItemData] is **not**
+  /// The [itemBuilder] is called for each item that should be built. The current level's [FInheritedItemData] is
+  /// **not**
   /// visible to `itemBuilder`.
   /// * It may return null to signify the end of the group.
   /// * It may be called more than once for the same index.
@@ -514,50 +515,36 @@ class FItemGroupStyleData extends InheritedWidget {
 /// └────────────────────────────────────────────┘
 /// ```
 /// {@endtemplate}
-class FItemGroupStyle with Diagnosticable, _$FItemGroupStyleFunctions {
+class FItemGroupStyle({
   /// The group's decoration, painted below [FItemStyle.backgroundColor] and [FItemStyle.contentDecoration].
   ///
   /// As it is below [FItemStyle.backgroundColor], setting a [FItemStyle.backgroundColor]/[FItemStyle.contentDecoration]
   /// will paint over the decoration's color.
-  @override
-  final Decoration decoration;
-
-  /// The vertical spacing at the top and bottom of each group. Defaults to 4.
-  @override
-  final double spacing;
+  @override required final Decoration decoration,
 
   /// The divider's style.
-  @override
-  final FVariants<FItemGroupVariantConstraint, FItemGroupVariant, Color, Delta> dividerColor;
+  @override required final FVariants<FItemGroupVariantConstraint, FItemGroupVariant, Color, Delta> dividerColor,
 
   /// The divider's width.
-  @override
-  final double dividerWidth;
+  @override required final double dividerWidth,
 
   /// The item's styles.
-  @override
-  final FVariants<FItemVariantConstraint, FItemVariant, FItemStyle, FItemStyleDelta> itemStyles;
+  @override required final FVariants<FItemVariantConstraint, FItemVariant, FItemStyle, FItemStyleDelta> itemStyles,
+
+  /// The haptic feedback for when the user slides from one item to another when [slideableItems] is enabled.
+  @override required final Future<void> Function() slidePressHapticFeedback,
 
   /// Whether the items support pressing an item and sliding to another. Defaults to true.
   ///
   /// This is ignored if the item group's content is scrollable, i.e. `maxHeight` is finite.
   @override
-  final FVariants<FItemGroupVariantConstraint, FItemGroupVariant, bool, Delta> slideableItems;
+  final FVariants<FItemGroupVariantConstraint, FItemGroupVariant, bool, Delta> slideableItems = const .all(true),
 
-  /// The haptic feedback for when the user slides from one item to another when [slideableItems] is enabled.
-  @override
-  final Future<void> Function() slidePressHapticFeedback;
-
+  /// The vertical spacing at the top and bottom of each group. Defaults to 4.
+  @override final double spacing = 4,
+}) with Diagnosticable, _$FItemGroupStyleFunctions {
   /// Creates a [FItemGroupStyle].
-  new({
-    required this.decoration,
-    required this.dividerColor,
-    required this.dividerWidth,
-    required this.itemStyles,
-    required this.slidePressHapticFeedback,
-    this.slideableItems = const .all(true),
-    this.spacing = 4,
-  });
+  this;
 
   /// Creates a [FItemGroupStyle] that inherits from the given arguments.
   new inherit({

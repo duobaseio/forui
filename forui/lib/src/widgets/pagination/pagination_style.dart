@@ -8,55 +8,40 @@ import 'package:forui/forui.dart';
 part 'pagination_style.design.dart';
 
 /// The [FPagination] styles.
-class FPaginationStyle with Diagnosticable, _$FPaginationStyleFunctions {
-  /// The padding around each item. Defaults to EdgeInsets.symmetric(horizontal: 2)`.
-  @override
-  final EdgeInsets itemPadding;
-
-  /// The item's constraints.
-  @override
-  final BoxConstraints itemConstraints;
-
+class FPaginationStyle({
   /// The icon's style.
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> itemIconStyle;
+  required final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta>
+  itemIconStyle,
 
   /// The decoration applied to the pagination item.
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, Decoration, DecorationDelta> itemDecoration;
+  required final FVariants<FTappableVariantConstraint, FTappableVariant, Decoration, DecorationDelta> itemDecoration,
 
   /// The default text style applied to the pagination item.
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> itemTextStyle;
+  required final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> itemTextStyle,
 
   /// The ellipsis's text style.
-  @override
-  final TextStyle ellipsisTextStyle;
+  @override required final TextStyle ellipsisTextStyle,
 
   /// The action's tappable style.
-  @override
-  final FTappableStyle actionTappableStyle;
+  @override required final FTappableStyle actionTappableStyle,
 
   /// The pagination item's tappable style.
-  @override
-  final FTappableStyle pageTappableStyle;
+  @override required final FTappableStyle pageTappableStyle,
 
   /// The pagination item's focused outline style.
-  @override
-  final FFocusedOutlineStyle focusedOutlineStyle;
+  @override required final FFocusedOutlineStyle focusedOutlineStyle,
 
+  /// The item's constraints.
+  @override required final BoxConstraints itemConstraints,
+
+  /// The padding around each item. Defaults to EdgeInsets.symmetric(horizontal: 2)`.
+  @override final EdgeInsets itemPadding = const .symmetric(horizontal: 2),
+}) with Diagnosticable, _$FPaginationStyleFunctions {
   /// Creates a [FPaginationStyle].
-  new({
-    required this.itemIconStyle,
-    required this.itemDecoration,
-    required this.itemTextStyle,
-    required this.ellipsisTextStyle,
-    required this.actionTappableStyle,
-    required this.pageTappableStyle,
-    required this.focusedOutlineStyle,
-    required this.itemConstraints,
-    this.itemPadding = const .symmetric(horizontal: 2),
-  });
+  this;
 
   /// Creates a [FPaginationStyle] that inherits its properties.
   new inherit({required FColors colors, required FTypography typography, required FStyle style, required bool touch})

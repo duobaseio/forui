@@ -280,20 +280,18 @@ class _Tween({super.begin}) extends Tween<FThemeData> {
 }
 
 /// The motion-related properties for [FTheme].
-class FThemeMotion with Diagnosticable, _$FThemeMotionFunctions {
+class const FThemeMotion({
   /// The animation's duration. Defaults to 200 milliseconds.
-  @override
-  final Duration duration;
+  @override final Duration duration = const Duration(milliseconds: 200),
 
   /// The animation's curve. Defaults to [Curves.linear].
   ///
   /// We recommend [Curves.linear], especially if only the theme's colors are changing.
   /// See https://pow.rs/blog/animation-easings/ for more information.
-  @override
-  final Curve curve;
-
+  @override final Curve curve = Curves.linear,
+}) with Diagnosticable, _$FThemeMotionFunctions {
   /// Creates a [FThemeMotion].
-  const new({this.duration = const Duration(milliseconds: 200), this.curve = Curves.linear});
+  this;
 }
 
 /// Applies a theme to descendant widgets.

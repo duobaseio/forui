@@ -485,40 +485,27 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
 }
 
 /// The [FBreadcrumb] styles.
-class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
+class FBreadcrumbStyle({
   /// The text style.
-  @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> textStyle;
+  @override required final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> textStyle,
 
   /// The divider icon style.
-  @override
-  final IconThemeData iconStyle;
-
-  /// The padding for breadcrumb items.
-  @override
-  final EdgeInsetsGeometry padding;
-
-  /// The padding for collapsed breadcrumb items.
-  @override
-  final EdgeInsetsGeometry collapsedPadding;
+  @override required final IconThemeData iconStyle,
 
   /// The tappable's style.
-  @override
-  final FTappableStyle tappableStyle;
+  @override required final FTappableStyle tappableStyle,
 
   /// The focused outline style.
-  @override
-  final FFocusedOutlineStyle focusedOutlineStyle;
+  @override required final FFocusedOutlineStyle focusedOutlineStyle,
 
+  /// The padding for breadcrumb items.
+  @override required final EdgeInsetsGeometry padding,
+
+  /// The padding for collapsed breadcrumb items.
+  @override required final EdgeInsetsGeometry collapsedPadding,
+}) with Diagnosticable, _$FBreadcrumbStyleFunctions {
   /// Creates a [FBreadcrumbStyle].
-  new({
-    required this.textStyle,
-    required this.iconStyle,
-    required this.tappableStyle,
-    required this.focusedOutlineStyle,
-    required this.padding,
-    required this.collapsedPadding,
-  });
+  this;
 
   /// Creates a [FBreadcrumbStyle] that inherits its properties.
   factory inherit({

@@ -53,7 +53,8 @@ class FTile extends StatelessWidget with FTileMixin {
 
   /// The variant used to resolve the style from [FTileStyles].
   ///
-  /// Defaults to [FItemVariant.primary]. The current platform variant is automatically included during style resolution.
+  /// Defaults to [FItemVariant.primary]. The current platform variant is automatically included during style
+  /// resolution.
   /// To change the platform variant, update the enclosing [FTheme.platform]/[FAdaptiveScope.platform].
   ///
   /// For example, to create a destructive tile:
@@ -374,18 +375,18 @@ extension FTileStylesConversion on FVariants<FItemVariantConstraint, FItemVarian
 }
 
 /// A [FTile]'s style.
-class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
+class FTileStyle({
+  required super.backgroundColor,
+  required super.contentDecoration,
+  required super.contentStyle,
+  required super.rawContentStyle,
+  required super.tappableStyle,
+  required super.focusedOutlineStyle,
+  required super.shape,
+  super.padding = .zero,
+}) extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
   /// Creates a [FTileStyle].
-  new({
-    required super.backgroundColor,
-    required super.contentDecoration,
-    required super.contentStyle,
-    required super.rawContentStyle,
-    required super.tappableStyle,
-    required super.focusedOutlineStyle,
-    required super.shape,
-    super.padding = .zero,
-  });
+  this;
 
   /// Creates a [FTileStyle].
   new inherit({required FColors colors, required FTypography typography, required FStyle style})
@@ -429,21 +430,21 @@ class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
 }
 
 /// A tile-specific [FItemContentStyle].
-class FTileContentStyle extends FItemContentStyle with _$FTileContentStyleFunctions {
+class FTileContentStyle({
+  required super.prefixIconStyle,
+  required super.titleTextStyle,
+  required super.subtitleTextStyle,
+  required super.detailsTextStyle,
+  required super.suffixIconStyle,
+  super.suffixedPadding = const .fromSTEB(15, 14.5, 13, 14.5),
+  super.unsuffixedPadding = const .symmetric(horizontal: 15, vertical: 14.5),
+  super.prefixIconSpacing = 10,
+  super.titleSpacing = 3,
+  super.middleSpacing = 4,
+  super.suffixIconSpacing = 5,
+}) extends FItemContentStyle with _$FTileContentStyleFunctions {
   /// Creates a [FTileContentStyle].
-  new({
-    required super.prefixIconStyle,
-    required super.titleTextStyle,
-    required super.subtitleTextStyle,
-    required super.detailsTextStyle,
-    required super.suffixIconStyle,
-    super.suffixedPadding = const .fromSTEB(15, 14.5, 13, 14.5),
-    super.unsuffixedPadding = const .symmetric(horizontal: 15, vertical: 14.5),
-    super.prefixIconSpacing = 10,
-    super.titleSpacing = 3,
-    super.middleSpacing = 4,
-    super.suffixIconSpacing = 5,
-  });
+  this;
 
   /// Creates a [FTileContentStyle] that inherits its properties.
   factory inherit({
@@ -490,14 +491,14 @@ class FTileContentStyle extends FItemContentStyle with _$FTileContentStyleFuncti
 }
 
 /// A tile-specific [FRawItemContentStyle].
-class FRawTileContentStyle extends FRawItemContentStyle with _$FRawTileContentStyleFunctions {
+class FRawTileContentStyle({
+  required super.prefixIconStyle,
+  required super.childTextStyle,
+  super.padding = const .symmetric(horizontal: 15, vertical: 14.5),
+  super.prefixIconSpacing = 10,
+}) extends FRawItemContentStyle with _$FRawTileContentStyleFunctions {
   /// Creates a [FRawTileContentStyle].
-  new({
-    required super.prefixIconStyle,
-    required super.childTextStyle,
-    super.padding = const .symmetric(horizontal: 15, vertical: 14.5),
-    super.prefixIconSpacing = 10,
-  });
+  this;
 
   /// Creates a [FRawTileContentStyle] that inherits its properties.
   new inherit({required FColors colors, required FTypography typography, required Color prefix, required Color color})

@@ -7,21 +7,18 @@ import 'package:forui/forui.dart';
 part 'time_field_style.design.dart';
 
 /// A time field's style.
-class FTimeFieldStyle with Diagnosticable, _$FTimeFieldStyleFunctions {
+class FTimeFieldStyle({
   /// The time field's text field size styles.
-  @override
-  final FTextFieldSizeStyles fieldStyles;
+  @override required final FTextFieldSizeStyles fieldStyles,
 
   /// The time field picker's popover style.
-  @override
-  final FPopoverStyle popoverStyle;
+  @override required final FPopoverStyle popoverStyle,
 
   /// The time field's picker style.
-  @override
-  final FTimePickerStyle pickerStyle;
-
+  @override required final FTimePickerStyle pickerStyle,
+}) with Diagnosticable, _$FTimeFieldStyleFunctions {
   /// Creates a [FTimeFieldStyle].
-  new({required this.fieldStyles, required this.popoverStyle, required this.pickerStyle});
+  this;
 
   /// Creates a [FTimeFieldStyle] that inherits its properties.
   new inherit({

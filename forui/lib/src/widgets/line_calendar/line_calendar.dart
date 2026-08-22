@@ -131,52 +131,41 @@ class FLineCalendar extends StatelessWidget {
 }
 
 /// [FLineCalendar]'s style.
-class FLineCalendarStyle with Diagnosticable, _$FLineCalendarStyleFunctions {
-  /// The horizontal spacing between each calendar item. Defaults to 10.
-  @override
-  final double itemSpacing;
-
-  /// The vertical height between the content and the edges. Defaults to 13.
-  @override
-  final double contentEdgeSpacing;
-
-  /// The vertical height between the date and weekday. Defaults to 4.
-  @override
-  final double contentSpacing;
-
+class FLineCalendarStyle({
   /// The decoration.
   @override
-  final FVariants<FLineCalendarItemVariantConstraint, FLineCalendarItemVariant, Decoration, DecorationDelta> decoration;
+  required final FVariants<FLineCalendarItemVariantConstraint, FLineCalendarItemVariant, Decoration, DecorationDelta>
+  decoration,
 
   /// The color of the today indicator.
   @override
-  final FVariants<FLineCalendarItemVariantConstraint, FLineCalendarItemVariant, Color, Delta> todayIndicatorColor;
+  required final FVariants<FLineCalendarItemVariantConstraint, FLineCalendarItemVariant, Color, Delta>
+  todayIndicatorColor,
 
   /// The text style for the date.
   @override
-  final FVariants<FLineCalendarItemVariantConstraint, FLineCalendarItemVariant, TextStyle, TextStyleDelta>
-  dateTextStyle;
+  required final FVariants<FLineCalendarItemVariantConstraint, FLineCalendarItemVariant, TextStyle, TextStyleDelta>
+  dateTextStyle,
 
   /// The text style for the day of the week.
   @override
-  final FVariants<FLineCalendarItemVariantConstraint, FLineCalendarItemVariant, TextStyle, TextStyleDelta>
-  weekdayTextStyle;
+  required final FVariants<FLineCalendarItemVariantConstraint, FLineCalendarItemVariant, TextStyle, TextStyleDelta>
+  weekdayTextStyle,
 
   /// The tappable style.
-  @override
-  final FTappableStyle tappableStyle;
+  @override required final FTappableStyle tappableStyle,
 
+  /// The horizontal spacing between each calendar item. Defaults to 10.
+  @override final double itemSpacing = 10,
+
+  /// The vertical height between the content and the edges. Defaults to 13.
+  @override final double contentEdgeSpacing = 13,
+
+  /// The vertical height between the date and weekday. Defaults to 4.
+  @override final double contentSpacing = 4,
+}) with Diagnosticable, _$FLineCalendarStyleFunctions {
   /// Creates a [FLineCalendarStyle].
-  new({
-    required this.decoration,
-    required this.todayIndicatorColor,
-    required this.dateTextStyle,
-    required this.weekdayTextStyle,
-    required this.tappableStyle,
-    this.itemSpacing = 10,
-    this.contentEdgeSpacing = 13,
-    this.contentSpacing = 4,
-  });
+  this;
 
   /// Creates a [FLineCalendarStyle] that inherits its properties.
   factory inherit({required FColors colors, required FTypography typography, required FStyle style}) {

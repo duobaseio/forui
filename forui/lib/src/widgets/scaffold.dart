@@ -157,29 +157,21 @@ class FScaffold extends StatelessWidget {
 }
 
 /// The scaffold style.
-class FScaffoldStyle with Diagnosticable, _$FScaffoldStyleFunctions {
+class FScaffoldStyle({
   /// The fallback system overlay style.
   ///
   /// This is used as a fallback when no other widgets override [AnnotatedRegion<SystemUiOverlayStyle>]. Typically, the
   /// [SystemUiOverlayStyle] property is overridden by [FHeader].
-  @override
-  final SystemUiOverlayStyle systemOverlayStyle;
+  @override required final SystemUiOverlayStyle systemOverlayStyle,
 
   /// The background color.
-  @override
-  final Color backgroundColor;
+  @override required final Color backgroundColor,
 
   /// The sidebar background color.
-  @override
-  final Color sidebarBackgroundColor;
+  @override required final Color sidebarBackgroundColor,
 
   /// The child padding. Only used when [FScaffold.childPad] is `true`.
-  @override
-  final EdgeInsetsGeometry childPadding;
-
-  /// The header decoration.
-  @override
-  final Decoration headerDecoration;
+  @override required final EdgeInsetsGeometry childPadding,
 
   /// The footer decoration.
   ///
@@ -187,18 +179,13 @@ class FScaffoldStyle with Diagnosticable, _$FScaffoldStyleFunctions {
   /// By default, both [FBottomNavigationBar] and [FScaffold.footer] specify a top border. When used together, the
   /// top border must be removed from both [FBottomNavigationBarStyle.decoration] and [FScaffoldStyle.footerDecoration]
   /// for the changes to take effect.
-  @override
-  final Decoration footerDecoration;
+  @override required final Decoration footerDecoration,
 
+  /// The header decoration. Defaults to `BoxDecoration()`.
+  @override final Decoration headerDecoration = const BoxDecoration(),
+}) with Diagnosticable, _$FScaffoldStyleFunctions {
   /// Creates a [FScaffoldStyle].
-  new({
-    required this.systemOverlayStyle,
-    required this.backgroundColor,
-    required this.sidebarBackgroundColor,
-    required this.childPadding,
-    required this.footerDecoration,
-    this.headerDecoration = const BoxDecoration(),
-  });
+  this;
 
   /// Creates a [FScaffoldStyle] that inherits its properties.
   new inherit({required FColors colors, required FStyle style})

@@ -21,70 +21,51 @@ import 'package:forui/src/theme/variant.dart';
 part 'otp_field_style.design.dart';
 
 /// The [FOtpField]'s style.
-class FOtpFieldStyle extends FLabelStyle with _$FOtpFieldStyleFunctions {
+class FOtpFieldStyle({
   /// The appearance of the keyboard. Defaults to [FColors.brightness].
   ///
   /// This setting is only honored on iOS devices.
-  @override
-  final Brightness keyboardAppearance;
+  @override required final Brightness keyboardAppearance,
+
+  /// The item size.
+  @override required final Size itemSize,
+
+  /// The item styles per variant.
+  @override required final FOtpFieldItemStyles itemStyles,
+
+  /// The divider's color.
+  @override required final FVariants<FOtpFieldItemVariantConstraint, FOtpFieldItemVariant, Color, Delta> dividerColor,
+  required super.labelTextStyle,
+  required super.descriptionTextStyle,
+  required super.errorTextStyle,
 
   /// The color of the cursor. Defaults to [CupertinoColors.activeBlue].
   ///
   /// The cursor indicates the current location of text insertion point in the field.
-  @override
-  final Color cursorColor;
+  @override final Color cursorColor = CupertinoColors.activeBlue,
 
   /// The width of the cursor. Defaults to 2.0.
   ///
   /// The cursor indicates the current location of text insertion point in the field.
-  @override
-  final double cursorWidth;
+  @override final double cursorWidth = 2.0,
 
   /// Whether the cursor opacity animates. Defaults to the current platform's behavior (true on iOS and macOS, false on
   /// other platforms).
-  @override
-  final bool? cursorOpacityAnimates;
-
-  /// The item size.
-  @override
-  final Size itemSize;
-
-  /// The item styles per variant.
-  @override
-  final FOtpFieldItemStyles itemStyles;
+  @override final bool? cursorOpacityAnimates,
 
   /// The divider's padding. Defaults to `EdgeInsets.symmetric(horizontal: 8)`.
-  @override
-  final EdgeInsetsGeometry dividerPadding;
+  @override final EdgeInsetsGeometry dividerPadding = const .symmetric(horizontal: 8),
 
   /// The divider's size. Defaults to `Size(12, 1)`.
-  @override
-  final Size dividerSize;
-
-  /// The divider's color.
-  @override
-  final FVariants<FOtpFieldItemVariantConstraint, FOtpFieldItemVariant, Color, Delta> dividerColor;
-
+  @override final Size dividerSize = const Size(12, 1),
+  super.labelPadding = const .only(bottom: 6),
+  super.descriptionPadding = const .only(top: 6),
+  super.errorPadding = const .only(top: 6),
+  super.childPadding,
+  super.labelMotion,
+}) extends FLabelStyle with _$FOtpFieldStyleFunctions {
   /// Creates a [FOtpFieldStyle].
-  new({
-    required this.keyboardAppearance,
-    required this.itemSize,
-    required this.itemStyles,
-    required this.dividerColor,
-    required super.labelTextStyle,
-    required super.descriptionTextStyle,
-    required super.errorTextStyle,
-    this.cursorColor = CupertinoColors.activeBlue,
-    this.cursorWidth = 2.0,
-    this.cursorOpacityAnimates,
-    this.dividerPadding = const .symmetric(horizontal: 8),
-    this.dividerSize = const Size(12, 1),
-    super.labelPadding = const .only(bottom: 6),
-    super.descriptionPadding = const .only(top: 6),
-    super.errorPadding = const .only(top: 6),
-    super.childPadding,
-    super.labelMotion,
-  });
+  this;
 
   /// Creates a [FOtpFieldStyle] that inherits its properties.
   new inherit({required FColors colors, required FTypography typography, required FStyle style, required bool touch})
@@ -352,15 +333,13 @@ extension type FOtpFieldItemStyles(
 }
 
 /// The style of an individual item in an [FOtpField].
-class FOtpFieldItemStyle with Diagnosticable, _$FOtpFieldItemStyleFunctions {
+class const FOtpFieldItemStyle({
   /// The decoration.
-  @override
-  final Decoration decoration;
+  @override required final Decoration decoration,
 
   /// The content's [TextStyle].
-  @override
-  final TextStyle contentTextStyle;
-
+  @override required final TextStyle contentTextStyle,
+}) with Diagnosticable, _$FOtpFieldItemStyleFunctions {
   /// Creates a [FOtpFieldItemStyle].
-  const new({required this.decoration, required this.contentTextStyle});
+  this;
 }

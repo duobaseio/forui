@@ -127,57 +127,49 @@ class const IconContent({required final FButtonIconContentBuilder builder, requi
 }
 
 /// [FButton] content's style.
-class FButtonContentStyle with Diagnosticable, _$FButtonContentStyleFunctions {
+class const FButtonContentStyle({
   /// The [TextStyle].
-  @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> textStyle;
+  @override required final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> textStyle,
 
   /// The icon's style.
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> iconStyle;
+  required final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> iconStyle,
 
   /// The circular progress's style.
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, FCircularProgressStyle, FCircularProgressStyleDelta>
-  circularProgressStyle;
+  required final FVariants<
+    FTappableVariantConstraint,
+    FTappableVariant,
+    FCircularProgressStyle,
+    FCircularProgressStyleDelta
+  >
+  circularProgressStyle,
 
-  /// The constraints applied to the content.
-  @override
-  final BoxConstraints constraints;
+  /// The constraints applied to the content. Defaults to `BoxConstraints()`.
+  @override final BoxConstraints constraints = const BoxConstraints(),
 
-  /// The padding.
-  @override
-  final EdgeInsetsGeometry padding;
+  /// The padding. Defaults to `EdgeInsets.symmetric(horizontal: 10, vertical: 11)`.
+  @override final EdgeInsetsGeometry padding = const .symmetric(horizontal: 10, vertical: 11),
 
-  /// The spacing between prefix, child, and suffix.
-  @override
-  final double spacing;
-
+  /// The spacing between prefix, child, and suffix. Defaults to 6.
+  @override final double spacing = 6,
+}) with Diagnosticable, _$FButtonContentStyleFunctions {
   /// Creates a [FButtonContentStyle].
-  const new({
-    required this.textStyle,
-    required this.iconStyle,
-    required this.circularProgressStyle,
-    this.constraints = const BoxConstraints(),
-    this.padding = const .symmetric(horizontal: 10, vertical: 11),
-    this.spacing = 6,
-  });
+  this;
 }
 
 /// [FButton] icon content's style.
-class FButtonIconContentStyle with Diagnosticable, _$FButtonIconContentStyleFunctions {
+class const FButtonIconContentStyle({
   /// The icon's style.
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> iconStyle;
+  required final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> iconStyle,
 
-  /// The constraints applied to the icon content.
-  @override
-  final BoxConstraints constraints;
+  /// The constraints applied to the icon content. Defaults to `BoxConstraints()`.
+  @override final BoxConstraints constraints = const BoxConstraints(),
 
   /// The padding. Defaults to `EdgeInsets.all(10)`.
-  @override
-  final EdgeInsetsGeometry padding;
-
+  @override final EdgeInsetsGeometry padding = const .all(10),
+}) with Diagnosticable, _$FButtonIconContentStyleFunctions {
   /// Creates a [FButtonIconContentStyle].
-  const new({required this.iconStyle, this.constraints = const BoxConstraints(), this.padding = const .all(10)});
+  this;
 }

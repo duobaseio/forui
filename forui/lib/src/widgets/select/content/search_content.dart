@@ -209,21 +209,18 @@ class _SearchContentState<T> extends State<SearchContent<T>> {
 }
 
 /// A [FSelect]'s search field style.
-class FSelectSearchStyle with Diagnosticable, _$FSelectSearchStyleFunctions {
+class FSelectSearchStyle({
   /// The search field's size styles.
-  @override
-  final FTextFieldSizeStyles fieldStyles;
+  @override required final FTextFieldSizeStyles fieldStyles,
 
   /// The style of the divider between the search field and results.
-  @override
-  final FDividerStyle dividerStyle;
+  @override required final FDividerStyle dividerStyle,
 
   /// The loading progress's style.
-  @override
-  final FCircularProgressStyle progressStyle;
-
+  @override required final FCircularProgressStyle progressStyle,
+}) with Diagnosticable, _$FSelectSearchStyleFunctions {
   /// Creates a [FSelectSearchStyle].
-  new({required this.fieldStyles, required this.dividerStyle, required this.progressStyle});
+  this;
 
   /// Creates a [FSelectSearchStyle] that inherits its properties.
   factory inherit({

@@ -10,8 +10,6 @@ import 'package:forui/src/localizations/localization.dart';
 import 'package:forui/src/localizations/localizations_en.dart';
 
 @internal
-// TODO: https://github.com/dart-lang/sdk/issues/64043
-// ignore: public_member_api_docs
 abstract class const Input<T>({
   required final ValueNotifier<T?> controller,
   required final FTextFieldSizeVariant size,
@@ -196,8 +194,6 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
 }
 
 @internal
-// TODO: https://github.com/dart-lang/sdk/issues/64043
-// ignore: public_member_api_docs
 class const AdjustIntent(final int amount) extends Intent {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

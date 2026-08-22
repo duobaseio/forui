@@ -762,28 +762,23 @@ class _Notifier<T> implements FMultiValueNotifier<T> {
 }
 
 /// A select menu tile's style.
-class FSelectMenuTileStyle extends FLabelStyle with _$FSelectMenuTileStyleFunctions {
+class FSelectMenuTileStyle({
   /// The menu's style.
-  @override
-  final FPopoverMenuStyle menuStyle;
+  @override required final FPopoverMenuStyle menuStyle,
 
   /// The tile's style.
-  @override
-  final FTileStyle tileStyle;
-
+  @override required final FTileStyle tileStyle,
+  required super.labelTextStyle,
+  required super.descriptionTextStyle,
+  required super.errorTextStyle,
+  super.labelPadding,
+  super.descriptionPadding,
+  super.errorPadding,
+  super.childPadding,
+  super.labelMotion,
+}) extends FLabelStyle with _$FSelectMenuTileStyleFunctions {
   /// Creates a [FSelectMenuTileStyle].
-  new({
-    required this.menuStyle,
-    required this.tileStyle,
-    required super.labelTextStyle,
-    required super.descriptionTextStyle,
-    required super.errorTextStyle,
-    super.labelPadding,
-    super.descriptionPadding,
-    super.errorPadding,
-    super.childPadding,
-    super.labelMotion,
-  });
+  this;
 
   /// Creates a [FSelectMenuTileStyle] that inherits its properties.
   factory inherit({

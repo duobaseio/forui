@@ -7,21 +7,18 @@ import 'package:forui/forui.dart';
 part 'date_field_style.design.dart';
 
 /// A date field's style.
-class FDateFieldStyle with Diagnosticable, _$FDateFieldStyleFunctions {
+class FDateFieldStyle({
   /// The date field's text-field styles.
-  @override
-  final FTextFieldSizeStyles fieldStyles;
+  @override required final FTextFieldSizeStyles fieldStyles,
 
   /// The date field calendar's popover style.
-  @override
-  final FPopoverStyle popoverStyle;
+  @override required final FPopoverStyle popoverStyle,
 
   /// The date field's calendar style.
-  @override
-  final FCalendarStyle calendarStyle;
-
+  @override required final FCalendarStyle calendarStyle,
+}) with Diagnosticable, _$FDateFieldStyleFunctions {
   /// Creates a [FDateFieldStyle].
-  new({required this.fieldStyles, required this.popoverStyle, required this.calendarStyle});
+  this;
 
   /// Creates a [FDateFieldStyle] that inherits its properties.
   new inherit({

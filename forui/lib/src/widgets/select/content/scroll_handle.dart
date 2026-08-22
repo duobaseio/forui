@@ -130,43 +130,30 @@ class _ScrollHandleState extends State<ScrollHandle> {
 }
 
 /// A [FSelect] content scroll handle's style.
-class FSelectScrollHandleStyle with Diagnosticable, _$FSelectScrollHandleStyleFunctions {
+class const FSelectScrollHandleStyle({
+  /// The background color.
+  @override required final Color background,
+
   /// The handle icon's style.
-  @override
-  final IconThemeData iconStyle;
+  @override required final IconThemeData iconStyle,
 
   /// The up scroll handle icon builder. Defaults to [FIcons.chevronUp].
-  @override
-  final FIcon upIcon;
+  @override required final FIcon upIcon,
 
   /// The down scroll handle icon builder. Defaults to [FIcons.chevronDown].
-  @override
-  final FIcon downIcon;
-
-  /// The background color.
-  @override
-  final Color background;
+  @override required final FIcon downIcon,
 
   /// The duration to wait before scrolling. Defaults to 200ms.
-  @override
-  final Duration enterDuration;
+  @override final Duration enterDuration = const Duration(milliseconds: 200),
 
   /// The number of pixels to scroll per second. Defaults to 200.
   ///
   /// ## Contract
   /// Throws an [AssertionError] if the pixels per second <= 0.
-  @override
-  final double pixelsPerSecond;
-
+  @override final double pixelsPerSecond = 200,
+}) with Diagnosticable, _$FSelectScrollHandleStyleFunctions {
   /// Creates a [FSelectScrollHandleStyle].
-  const new({
-    required this.background,
-    required this.iconStyle,
-    required this.upIcon,
-    required this.downIcon,
-    this.enterDuration = const Duration(milliseconds: 200),
-    this.pixelsPerSecond = 200,
-  }) : assert(0 < pixelsPerSecond, 'pixelsPerSecond ($pixelsPerSecond) must be > 0');
+  this : assert(0 < pixelsPerSecond, 'pixelsPerSecond ($pixelsPerSecond) must be > 0');
 
   /// Creates a [FSelectScrollHandleStyle] that inherits its properties.
   new inherit({required FColors colors, required FIcons icons, required FTypography typography})

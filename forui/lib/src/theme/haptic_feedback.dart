@@ -56,6 +56,9 @@ final class const FHapticFeedback({
   /// Defaults to [HapticFeedback.vibrate].
   final Future<void> Function() vibrate = HapticFeedback.vibrate,
 }) with Diagnosticable {
+  /// Creates an [FHapticFeedback].
+  this;
+
   /// A no-op haptic feedback function.
   static Future<void> noFeedback() async {}
 
