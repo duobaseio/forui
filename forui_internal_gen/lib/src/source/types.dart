@@ -132,7 +132,7 @@ Future<(String type, String assignment, String? sentinel)> deltaField(
     }
 
     if (extension case ExtensionTypeDeclaration(
-      primaryConstructor: PrimaryConstructorDeclaration(
+      namePart: PrimaryConstructorDeclaration(
         formalParameters: FormalParameterList(
           parameters: [RegularFormalParameter(type: NamedType(:final name, :final typeArguments?))],
         ),

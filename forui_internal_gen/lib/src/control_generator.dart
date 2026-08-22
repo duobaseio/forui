@@ -1,8 +1,8 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:analyzer/dart/element/type.dart';
 import 'package:build/build.dart';
-import 'package:code_builder/code_builder.dart' hide RecordType;
 import 'package:collection/collection.dart';
+import 'package:forui_internal_gen/src/emitter.dart';
 import 'package:forui_internal_gen/src/source/control_full_mixin.dart';
 import 'package:forui_internal_gen/src/source/control_internal_extension.dart';
 import 'package:forui_internal_gen/src/source/control_parent_mixin.dart';
@@ -13,7 +13,7 @@ final _control = RegExp(r'^F.*(Control)$');
 
 /// Generates corresponding style/motion mixins and extensions that implement several commonly used operations.
 class ControlGenerator extends Generator {
-  final _emitter = DartEmitter(orderDirectives: true, useNullSafetySyntax: true);
+  final _emitter = ShorthandEmitter(orderDirectives: true, useNullSafetySyntax: true);
 
   @override
   Future<String?> generate(LibraryReader library, BuildStep step) async {

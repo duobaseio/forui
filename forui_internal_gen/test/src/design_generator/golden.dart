@@ -16,7 +16,7 @@ part of 'example.dart';
 /// * [FGoldenVariant], which represents individual variants.
 extension type const FGoldenVariantConstraint._(FVariantConstraint _) implements FVariantConstraint {
   /// Creates a [FGoldenVariantConstraint] that negates [variant].
-  factory FGoldenVariantConstraint.not(FGoldenVariant variant) => FGoldenVariantConstraint._(Not(variant));
+  factory not(FGoldenVariant variant) => FGoldenVariantConstraint._(Not(variant));
 
   /// The hovered state
   static const hovered = FGoldenVariant.hovered;
@@ -485,7 +485,7 @@ abstract class FGoldenStyleDelta with Delta {
   /// * [FGoldenStyle.list]
   /// * [FGoldenStyle.set]
   /// * [FGoldenStyle.map]
-  const factory FGoldenStyleDelta.delta({
+  const factory delta({
     double someDouble,
     Alignment? alignment,
     AlignmentGeometry? alignmentGeometry,
@@ -527,14 +527,14 @@ abstract class FGoldenStyleDelta with Delta {
   }) = _FGoldenStyleDelta;
 
   /// Creates a delta that returns the [FGoldenStyle] in the current context.
-  const factory FGoldenStyleDelta.context() = _FGoldenStyleContext;
+  const factory context() = _FGoldenStyleContext;
 
   @override
   FGoldenStyle call(covariant FGoldenStyle value);
 }
 
 class _FGoldenStyleDelta implements FGoldenStyleDelta {
-  const _FGoldenStyleDelta({
+  const new({
     this.someDouble = double.infinity,
     this.alignment,
     this.alignmentGeometry,
@@ -699,7 +699,7 @@ class _FGoldenStyleDelta implements FGoldenStyleDelta {
 }
 
 class _FGoldenStyleContext implements FGoldenStyleDelta {
-  const _FGoldenStyleContext();
+  const new();
 
   @override
   FGoldenStyle call(FGoldenStyle original) => original;
@@ -766,18 +766,17 @@ abstract class FGoldenNestedMotionDelta with Delta {
   /// * [FGoldenNestedMotion.someDouble] - This is a field's summary.
   /// * [FGoldenNestedMotion.duration]
   /// * [FGoldenNestedMotion.curve]
-  const factory FGoldenNestedMotionDelta.delta({double? someDouble, Duration? duration, Curve? curve}) =
-      _FGoldenNestedMotionDelta;
+  const factory delta({double? someDouble, Duration? duration, Curve? curve}) = _FGoldenNestedMotionDelta;
 
   /// Creates a delta that returns the [FGoldenNestedMotion] in the current context.
-  const factory FGoldenNestedMotionDelta.context() = _FGoldenNestedMotionContext;
+  const factory context() = _FGoldenNestedMotionContext;
 
   @override
   FGoldenNestedMotion call(covariant FGoldenNestedMotion value);
 }
 
 class _FGoldenNestedMotionDelta implements FGoldenNestedMotionDelta {
-  const _FGoldenNestedMotionDelta({this.someDouble, this.duration, this.curve});
+  const new({this.someDouble, this.duration, this.curve});
 
   final double? someDouble;
 
@@ -794,7 +793,7 @@ class _FGoldenNestedMotionDelta implements FGoldenNestedMotionDelta {
 }
 
 class _FGoldenNestedMotionContext implements FGoldenNestedMotionDelta {
-  const _FGoldenNestedMotionContext();
+  const new();
 
   @override
   FGoldenNestedMotion call(FGoldenNestedMotion original) => original;
@@ -835,24 +834,24 @@ abstract class FGoldenNestedStyleDelta with Delta {
   /// Creates a partial modification of a [FGoldenNestedStyle].
   ///
   /// ## Parameters
-  const factory FGoldenNestedStyleDelta.delta() = _FGoldenNestedStyleDelta;
+  const factory delta() = _FGoldenNestedStyleDelta;
 
   /// Creates a delta that returns the [FGoldenNestedStyle] in the current context.
-  const factory FGoldenNestedStyleDelta.context() = _FGoldenNestedStyleContext;
+  const factory context() = _FGoldenNestedStyleContext;
 
   @override
   FGoldenNestedStyle call(covariant FGoldenNestedStyle value);
 }
 
 class _FGoldenNestedStyleDelta implements FGoldenNestedStyleDelta {
-  const _FGoldenNestedStyleDelta();
+  const new();
 
   @override
   FGoldenNestedStyle call(FGoldenNestedStyle original) => FGoldenNestedStyle();
 }
 
 class _FGoldenNestedStyleContext implements FGoldenNestedStyleDelta {
-  const _FGoldenNestedStyleContext();
+  const new();
 
   @override
   FGoldenNestedStyle call(FGoldenNestedStyle original) => original;

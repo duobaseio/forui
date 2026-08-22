@@ -13,38 +13,46 @@ import 'package:forui/src/localizations/localizations_en.dart';
 // TODO: https://github.com/dart-lang/sdk/issues/64043
 // ignore: public_member_api_docs
 abstract class const Input<T>({
-    required final ValueNotifier<T?> controller,
-    required final FTextFieldSizeVariant size,
-    required final FPlatformVariant platformVariant,
-    required final Widget Function(BuildContext context, FTextFieldStyle style, Set<FTextFieldVariant> variants, Widget child) builder,
-    required final Widget? label,
-    required final Widget? description,
-    required final Widget Function(BuildContext context, String message) errorBuilder,
-    required final bool enabled,
-    required final FormFieldSetter<T>? onSaved,
-    required final VoidCallback? onReset,
-    required final FormFieldValidator<T> validator,
-    required final AutovalidateMode autovalidateMode,
-    required final String? forceErrorText,
-    required final FocusNode? focusNode,
-    required final TextInputAction? textInputAction,
-    required final TextAlign textAlign,
-    required final TextAlignVertical? textAlignVertical,
-    required final TextDirection? textDirection,
-    required final bool autofocus,
-    required final bool expands,
-    required final VoidCallback? onEditingComplete,
-    required final MouseCursor? mouseCursor,
-    required final VoidCallback? onTap,
-    required final bool canRequestFocus,
-    required final Widget Function(BuildContext context, FTextFieldStyle style, Set<FTextFieldVariant> variants)? prefixBuilder,
-    required final Widget Function(BuildContext context, FTextFieldStyle style, Set<FTextFieldVariant> variants)? suffixBuilder,
-    required final bool clearable,
-    required final FFieldClearIconBuilder<FTextFieldStyle> clearIconBuilder,
-    required final FLocalizations localizations,
-    required final Key? formFieldKey,
-    super.key,
-  }) extends StatefulWidget {
+  required final ValueNotifier<T?> controller,
+  required final FTextFieldSizeVariant size,
+  required final FPlatformVariant platformVariant,
+  required final Widget Function(
+    BuildContext context,
+    FTextFieldStyle style,
+    Set<FTextFieldVariant> variants,
+    Widget child,
+  )
+  builder,
+  required final Widget? label,
+  required final Widget? description,
+  required final Widget Function(BuildContext context, String message) errorBuilder,
+  required final bool enabled,
+  required final FormFieldSetter<T>? onSaved,
+  required final VoidCallback? onReset,
+  required final FormFieldValidator<T> validator,
+  required final AutovalidateMode autovalidateMode,
+  required final String? forceErrorText,
+  required final FocusNode? focusNode,
+  required final TextInputAction? textInputAction,
+  required final TextAlign textAlign,
+  required final TextAlignVertical? textAlignVertical,
+  required final TextDirection? textDirection,
+  required final bool autofocus,
+  required final bool expands,
+  required final VoidCallback? onEditingComplete,
+  required final MouseCursor? mouseCursor,
+  required final VoidCallback? onTap,
+  required final bool canRequestFocus,
+  required final Widget Function(BuildContext context, FTextFieldStyle style, Set<FTextFieldVariant> variants)?
+  prefixBuilder,
+  required final Widget Function(BuildContext context, FTextFieldStyle style, Set<FTextFieldVariant> variants)?
+  suffixBuilder,
+  required final bool clearable,
+  required final FFieldClearIconBuilder<FTextFieldStyle> clearIconBuilder,
+  required final FLocalizations localizations,
+  required final Key? formFieldKey,
+  super.key,
+}) extends StatefulWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
@@ -188,11 +196,9 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
 }
 
 @internal
-class AdjustIntent extends Intent {
-  final int amount;
-
-  const new(this.amount);
-
+// TODO: https://github.com/dart-lang/sdk/issues/64043
+// ignore: public_member_api_docs
+class const AdjustIntent(final int amount) extends Intent {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);

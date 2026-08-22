@@ -8,8 +8,6 @@ import 'package:forui/forui.dart';
 
 /// A parser that updates individual parts of a string input.
 @internal
-// TODO: https://github.com/dart-lang/sdk/issues/64043
-// ignore: public_member_api_docs
 abstract class Parser(final List<String> pattern) {
   /// Updates the [current] input based on the [current] and [previous] input.
   (List<String>, Changes) update(List<String> previous, List<String> current) {
@@ -55,23 +53,17 @@ abstract class Parser(final List<String> pattern) {
 }
 
 @internal
-// TODO: https://github.com/dart-lang/sdk/issues/64043
-// ignore: public_member_api_docs
 sealed class const Changes() {
   Changes add(int i);
 }
 
 @internal
-// TODO: https://github.com/dart-lang/sdk/issues/64043
-// ignore: public_member_api_docs
 class const None() extends Changes {
   @override
   Single add(int i) => Single(i);
 }
 
 @internal
-// TODO: https://github.com/dart-lang/sdk/issues/64043
-// ignore: public_member_api_docs
 class const Single(final int index) extends Changes {
   @override
   Many add(int i) => const Many();
@@ -88,16 +80,12 @@ class const Single(final int index) extends Changes {
 }
 
 @internal
-// TODO: https://github.com/dart-lang/sdk/issues/64043
-// ignore: public_member_api_docs
 class const Many() extends Changes {
   @override
   Many add(int _) => this;
 }
 
 @internal
-// TODO: https://github.com/dart-lang/sdk/issues/64043
-// ignore: public_member_api_docs
 abstract class Selector(final FLocalizations localizations, final RegExp suffix) {
   TextEditingValue? navigate(TextEditingValue value);
 

@@ -9,47 +9,37 @@ import 'package:forui/src/foundation/overlay/composited_overlay.dart';
 ///
 /// Unlike `CompositedPortal`, the anchor is a single [point] rather than a rectangle.
 @internal
-class CompositedPointPortal extends CompositedOverlay {
+class const CompositedPointPortal({
   /// The portal's constraints.
-  final BoxConstraints constraints;
+  required final BoxConstraints constraints,
 
   /// The anchor point on the portal.
-  final Alignment anchor;
+  required final Alignment anchor,
 
   /// The point within the linked `CompositedChild`'s local coordinate space at which to anchor the portal.
-  final Offset point;
+  required final Offset point,
 
   /// The padding.
-  final EdgeInsets padding;
+  required final EdgeInsets padding,
 
   /// The spacing between the [point] and the [anchor] in the direction the portal extends.
-  final double spacing;
+  required final double spacing,
 
   /// The callback used to shift a portal when it overflows out of the viewport.
   ///
   /// Applied after [spacing] and before [offset].
-  final FPortalOverflow overflow;
+  required final FPortalOverflow overflow,
 
   /// Additional translation to apply to the portal's position.
   ///
   /// It is applied after [overflow].
-  final Offset offset;
-
-  const new({
-    required this.constraints,
-    required this.anchor,
-    required this.point,
-    required this.padding,
-    required this.spacing,
-    required this.overflow,
-    required this.offset,
-    required super.notifier,
-    required super.link,
-    super.showWhenUnlinked,
-    super.key,
-    super.child,
-  });
-
+  required final Offset offset,
+  required super.notifier,
+  required super.link,
+  super.showWhenUnlinked,
+  super.key,
+  super.child,
+}) extends CompositedOverlay {
   @override
   RenderPointPortalLayer createRenderObject(BuildContext context) => RenderPointPortalLayer(
     notifier: notifier,
@@ -95,30 +85,20 @@ class CompositedPointPortal extends CompositedOverlay {
 
 /// A point-anchored sibling of `RenderPortalLayer`.
 @internal
-class RenderPointPortalLayer extends RenderOverlayLayer {
-  BoxConstraints _portalConstraints;
-  Alignment _anchor;
-  Offset _point;
-  EdgeInsets _padding;
-  double _spacing;
-  FPortalOverflow _overflow;
-  Offset _offset;
-
-  new({
-    required this._portalConstraints,
-    required this._anchor,
-    required this._point,
-    required this._padding,
-    required this._spacing,
-    required this._overflow,
-    required this._offset,
-    required super.notifier,
-    required super.link,
-    required super.viewSize,
-    required super.showWhenUnlinked,
-    super.child,
-  });
-
+class RenderPointPortalLayer({
+  required var BoxConstraints _portalConstraints,
+  required var Alignment _anchor,
+  required var Offset _point,
+  required var EdgeInsets _padding,
+  required var double _spacing,
+  required var FPortalOverflow _overflow,
+  required var Offset _offset,
+  required super.notifier,
+  required super.link,
+  required super.viewSize,
+  required super.showWhenUnlinked,
+  super.child,
+}) extends RenderOverlayLayer {
   @override
   void performLayout() {
     if (child case final child?) {

@@ -13,24 +13,18 @@ import 'package:forui/src/foundation/overlay/layer.dart';
 /// This class is a copy of [CompositedTransformFollower] with the following enhancements:
 /// * Receives the global position of a linked [CompositedChild].
 @internal
-class CompositedOverlay extends SingleChildRenderObjectWidget {
+class const CompositedOverlay({
   /// The notifier that is updated whenever the linked [CompositedChild] changes its global position.
-  final FChangeNotifier notifier;
+  required final FChangeNotifier notifier,
 
   /// The link object that connects this [CompositedOverlay] with a [CompositedChild].
-  final ChildLayerLink link;
+  required final ChildLayerLink link,
 
   /// Whether to show the widget's contents when there is no corresponding [CompositedChild] with the same [link].
-  final bool showWhenUnlinked;
-
-  const new({
-    required this.notifier,
-    required this.link,
-    this.showWhenUnlinked = false,
-    super.key,
-    super.child,
-  });
-
+  final bool showWhenUnlinked = false,
+  super.key,
+  super.child,
+}) extends SingleChildRenderObjectWidget {
   @override
   RenderOverlayLayer createRenderObject(BuildContext context) => RenderOverlayLayer(
     notifier: notifier,

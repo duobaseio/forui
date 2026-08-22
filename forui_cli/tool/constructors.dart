@@ -55,7 +55,7 @@ class ConstructorFragment {
   static String _factory(String type, RegExp pattern, ConstructorMatch match) {
     var source = match.constructor
         .toSource()
-        .replaceAll('factory $type.inherit', '$type ${type.substring(1).toCamelCase()}')
+        .replaceAll('factory inherit', '$type ${type.substring(1).toCamelCase()}')
         .replaceAllMapped(pattern, (m) => '_${m.group(1)!.toCamelCase()}');
 
     final visitor = _ConstructorInvocationVisitor(type);
@@ -95,7 +95,7 @@ class ConstructorFragment {
     var source = constructor.toSource();
 
     source = source
-        .replaceAll('$type.inherit', '$type ${type.substring(1).toCamelCase()}')
+        .replaceAll('new inherit', '$type ${type.substring(1).toCamelCase()}')
         .replaceAll(' : this', ' => $type');
 
     // Finds all optional named parameters that are not given in the constructor.
@@ -124,10 +124,10 @@ class ConstructorFragment {
     var source = constructor.toSource();
 
     // Extension type: keep the extension type wrapper with its public constructor.
-    // "FBadgeStyles.inherit({...}) : this(FVariants.delta(...))"
+    // "new inherit({...}) : this(FVariants.delta(...))"
     // becomes: "FBadgeStyles badgeStyles({...}) => FBadgeStyles(FVariants.delta(...))"
     source = source
-        .replaceAll('$type.inherit', '$type ${type.substring(1).toCamelCase()}')
+        .replaceAll('new inherit', '$type ${type.substring(1).toCamelCase()}')
         .replaceFirst(RegExp(r' : this\('), ' => $type(');
 
     return source.replaceAllMapped(pattern, (m) => '_${m.group(1)!.toCamelCase()}');
@@ -272,11 +272,10 @@ class _Visitor extends RecursiveAstVisitor<void> {
 
   @override
   void visitExtensionTypeDeclaration(ExtensionTypeDeclaration declaration) {
-    final name = declaration.primaryConstructor.typeName.lexeme;
-    if (_type.hasMatch(name)) {
-      _name = name;
-      _wrapped = (declaration.primaryConstructor.formalParameters.parameters.single as RegularFormalParameter).type!
-          .toSource();
+    if (declaration.namePart case PrimaryConstructorDeclaration(:final typeName, :final formalParameters)
+        when _type.hasMatch(typeName.lexeme)) {
+      _name = typeName.lexeme;
+      _wrapped = (formalParameters.parameters.single as RegularFormalParameter).type!.toSource();
       super.visitExtensionTypeDeclaration(declaration);
       _name = null;
       _wrapped = null;

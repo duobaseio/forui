@@ -83,13 +83,11 @@ class ChildLayerLink {
 /// This class is a copy of [LeaderLayer] with the following enhancements:
 /// * Contains both local & global offsets.
 @internal
-class ChildLayer extends ContainerLayer {
-  ChildLayerLink _link;
-  Offset _globalOffset;
-  Offset _localOffset;
-
-  new({required this._link, required this._globalOffset, required this._localOffset});
-
+class ChildLayer({
+  required var ChildLayerLink _link,
+  required var Offset _globalOffset,
+  required var Offset _localOffset,
+}) extends ContainerLayer {
   @override
   void attach(Object owner) {
     super.attach(owner);
@@ -195,27 +193,13 @@ class ChildLayer extends ContainerLayer {
 /// This class is a copy of [FollowerLayer] with the only differences being:
 /// * Contains a [ChildLayerLink] instead of [LayerLink]
 @internal
-class OverlayLayer extends ContainerLayer {
-  /// Creates a follower layer.
-  ///
-  /// The [unlinkedOffset], [linkedOffset], and [showWhenUnlinked] properties
-  /// must be non-null before the compositing phase of the pipeline.
-  new({
-    required this.link,
-    this.showWhenUnlinked = false,
-    this.unlinkedOffset = .zero,
-    this.linkedOffset = .zero,
-  });
-
+class OverlayLayer({
   /// The link to the [ChildLayer].
   ///
   /// The same object should be provided to a [ChildLayer] that is earlier in
   /// the layer tree. When this layer is composited, it will apply a transform
   /// that moves its children to match the position of the [ChildLayer].
-  ChildLayerLink link;
-
-  /// The render box of the overlay, used to schedule repaints when the child's global offset changes during compositing.
-  RenderBox? overlayRenderBox;
+  required var ChildLayerLink link,
 
   /// Whether to show the layer's contents when the [link] does not point to a
   /// [ChildLayer].
@@ -229,7 +213,7 @@ class OverlayLayer extends ContainerLayer {
   ///
   /// The [showWhenUnlinked] property must be non-null before the compositing
   /// phase of the pipeline.
-  bool? showWhenUnlinked;
+  var bool? showWhenUnlinked = false,
 
   /// Offset from parent in the parent's coordinate system, used when the layer
   /// is not linked to a [ChildLayer].
@@ -243,7 +227,7 @@ class OverlayLayer extends ContainerLayer {
   /// See also:
   ///
   ///  * [linkedOffset], for when the layers are linked.
-  Offset? unlinkedOffset;
+  var Offset? unlinkedOffset = .zero,
 
   /// Offset from the origin of the leader layer to the origin of the child
   /// layers, used when the layer is linked to a [ChildLayer].
@@ -257,7 +241,10 @@ class OverlayLayer extends ContainerLayer {
   /// See also:
   ///
   ///  * [unlinkedOffset], for when the layer is not linked.
-  Offset? linkedOffset;
+  var Offset? linkedOffset = .zero,
+}) extends ContainerLayer {
+  /// The render box of the overlay, used to schedule repaints when the child's global offset changes during compositing.
+  RenderBox? overlayRenderBox;
 
   Offset? _lastOffset;
   Matrix4? _lastTransform;

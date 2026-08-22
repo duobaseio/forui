@@ -17,15 +17,15 @@ import 'package:forui/src/foundation/overlay/layer.dart';
 /// This class is a copy of [CompositedTransformTarget] with the following enhancements:
 /// * Passes its global position to the [CompositedPortal]s.
 @internal
-class CompositedChild extends SingleChildRenderObjectWidget {
+class const CompositedChild({
   /// The notifier used to signal to the linked [CompositedPortal]s that they need to repaint.
-  final FChangeNotifier notifier;
+  required final FChangeNotifier notifier,
 
   /// The link object that connects this [CompositedChild] with one or more [CompositedPortal]s.
-  final ChildLayerLink link;
-
-  const new({required this.notifier, required this.link, super.key, super.child});
-
+  required final ChildLayerLink link,
+  super.key,
+  super.child,
+}) extends SingleChildRenderObjectWidget {
   @override
   RenderChildLayer createRenderObject(BuildContext context) =>
       RenderChildLayer(notifier: notifier, link: link, viewSize: MediaQuery.sizeOf(context));

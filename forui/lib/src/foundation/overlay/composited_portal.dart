@@ -11,47 +11,37 @@ import 'package:forui/src/foundation/overlay/portal_constraints.dart';
 ///
 /// Unlike [CompositedOverlay], it additionally performs anchor alignment, overflow handling, and constraint switching.
 @internal
-class CompositedPortal extends CompositedOverlay {
+class const CompositedPortal({
   /// The portal's constraints.
-  final FPortalConstraints constraints;
+  required final FPortalConstraints constraints,
 
   /// The anchor point on the portal used for positioning relative to the [childAnchor].
-  final Alignment portalAnchor;
+  required final Alignment portalAnchor,
 
   /// The anchor point on the [child] used for positioning relative to the [portalAnchor].
-  final Alignment childAnchor;
+  required final Alignment childAnchor,
 
   /// The padding.
-  final EdgeInsets padding;
+  required final EdgeInsets padding,
 
   /// The spacing between the [portalAnchor] and [childAnchor].
-  final Offset spacing;
+  required final Offset spacing,
 
   /// The callback used to shift a portal when it overflows out of the viewport.
   ///
   /// Applied after [spacing] and before [offset].
-  final FPortalOverflow overflow;
+  required final FPortalOverflow overflow,
 
   /// Additional translation to apply to the portal's position.
   ///
   /// It is applied after [overflow].
-  final Offset offset;
-
-  const new({
-    required this.constraints,
-    required this.portalAnchor,
-    required this.childAnchor,
-    required this.padding,
-    required this.spacing,
-    required this.overflow,
-    required this.offset,
-    required super.notifier,
-    required super.link,
-    super.showWhenUnlinked,
-    super.key,
-    super.child,
-  });
-
+  required final Offset offset,
+  required super.notifier,
+  required super.link,
+  super.showWhenUnlinked,
+  super.key,
+  super.child,
+}) extends CompositedOverlay {
   @override
   RenderPortalLayer createRenderObject(BuildContext context) => RenderPortalLayer(
     notifier: notifier,
@@ -97,30 +87,20 @@ class CompositedPortal extends CompositedOverlay {
 
 /// Unlike [RenderOverlayLayer], this additionally performs anchor alignment, overflow handling, and constraint switching.
 @internal
-class RenderPortalLayer extends RenderOverlayLayer {
-  FPortalConstraints _portalConstraints;
-  Alignment _portalAnchor;
-  Alignment _childAnchor;
-  EdgeInsets _padding;
-  Offset _spacing;
-  FPortalOverflow _overflow;
-  Offset _offset;
-
-  new({
-    required this._portalConstraints,
-    required this._portalAnchor,
-    required this._childAnchor,
-    required this._padding,
-    required this._spacing,
-    required this._overflow,
-    required this._offset,
-    required super.notifier,
-    required super.link,
-    required super.viewSize,
-    required super.showWhenUnlinked,
-    super.child,
-  });
-
+class RenderPortalLayer({
+  required var FPortalConstraints _portalConstraints,
+  required var Alignment _portalAnchor,
+  required var Alignment _childAnchor,
+  required var EdgeInsets _padding,
+  required var Offset _spacing,
+  required var FPortalOverflow _overflow,
+  required var Offset _offset,
+  required super.notifier,
+  required super.link,
+  required super.viewSize,
+  required super.showWhenUnlinked,
+  super.child,
+}) extends RenderOverlayLayer {
   @override
   void performLayout() {
     if (child case final child?) {

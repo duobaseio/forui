@@ -770,9 +770,8 @@ class _FTappableState<T extends FTappable> extends State<T> {
                         // The RenderObject should almost always be a [RenderBox] since it is wrapped in a Semantics
                         // which required the child to be a [RenderBox] as well. We use a pattern match anyways just to
                         // be safe.
-                        if (context.findRenderObject() case RenderBox(
-                          :final size,
-                        ) when size.contains(event.localPosition)) {
+                        if (context.findRenderObject() case RenderBox(:final size)
+                            when size.contains(event.localPosition)) {
                           return;
                         }
 
@@ -894,57 +893,57 @@ class _FTappableState<T extends FTappable> extends State<T> {
 }
 
 @internal
-class AnimatedTappable extends FTappable {
-  const new({
-    super.style,
-    super.focusedOutlineStyle,
-    super.semanticsLabel,
-    super.semanticsButton,
-    super.semanticsChecked,
-    super.semanticsExpanded,
-    super.semanticsInMutuallyExclusiveGroup,
-    super.semanticsHint,
-    super.semanticsTooltip,
-    super.excludeSemantics,
-    super.autofocus,
-    super.focusNode,
-    super.onFocusChange,
-    super.onHoverChange,
-    super.onVariantChange,
-    super.selected,
-    super.selectable,
-    super.behavior,
-    super.onPressDown,
-    super.onPressCancel,
-    super.onPressMove,
-    super.onPressUp,
-    super.onPress,
-    super.onDisabledPress,
-    super.onLongPressDown,
-    super.onLongPressCancel,
-    super.onLongPressStart,
-    super.onLongPressMove,
-    super.onLongPressEnd,
-    super.onLongPress,
-    super.onDoubleTapDown,
-    super.onDoubleTapCancel,
-    super.onDoubleTap,
-    super.onSecondaryPressDown,
-    super.onSecondaryPressCancel,
-    super.onSecondaryPressUp,
-    super.onSecondaryPress,
-    super.onSecondaryLongPressDown,
-    super.onSecondaryLongPressCancel,
-    super.onSecondaryLongPressStart,
-    super.onSecondaryLongPressMove,
-    super.onSecondaryLongPressEnd,
-    super.onSecondaryLongPress,
-    super.shortcuts,
-    super.actions,
-    super.builder,
-    super.child,
-    super.key,
-  }) : super.static();
+class const AnimatedTappable({
+  super.style,
+  super.focusedOutlineStyle,
+  super.semanticsLabel,
+  super.semanticsButton,
+  super.semanticsChecked,
+  super.semanticsExpanded,
+  super.semanticsInMutuallyExclusiveGroup,
+  super.semanticsHint,
+  super.semanticsTooltip,
+  super.excludeSemantics,
+  super.autofocus,
+  super.focusNode,
+  super.onFocusChange,
+  super.onHoverChange,
+  super.onVariantChange,
+  super.selected,
+  super.selectable,
+  super.behavior,
+  super.onPressDown,
+  super.onPressCancel,
+  super.onPressMove,
+  super.onPressUp,
+  super.onPress,
+  super.onDisabledPress,
+  super.onLongPressDown,
+  super.onLongPressCancel,
+  super.onLongPressStart,
+  super.onLongPressMove,
+  super.onLongPressEnd,
+  super.onLongPress,
+  super.onDoubleTapDown,
+  super.onDoubleTapCancel,
+  super.onDoubleTap,
+  super.onSecondaryPressDown,
+  super.onSecondaryPressCancel,
+  super.onSecondaryPressUp,
+  super.onSecondaryPress,
+  super.onSecondaryLongPressDown,
+  super.onSecondaryLongPressCancel,
+  super.onSecondaryLongPressStart,
+  super.onSecondaryLongPressMove,
+  super.onSecondaryLongPressEnd,
+  super.onSecondaryLongPress,
+  super.shortcuts,
+  super.actions,
+  super.builder,
+  super.child,
+  super.key,
+}) extends FTappable {
+  this : super.static();
 
   @override
   State<FTappable> createState() => AnimatedTappableState();

@@ -13,8 +13,6 @@ sealed class const FPortalConstraints._() extends Constraints {
 }
 
 @internal
-// TODO: https://github.com/dart-lang/sdk/issues/64043
-// ignore: public_member_api_docs
 final class const FixedConstraints({
   super.minWidth = 0.0,
   super.maxWidth = .infinity,

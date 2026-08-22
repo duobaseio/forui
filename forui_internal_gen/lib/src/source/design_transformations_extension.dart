@@ -67,7 +67,7 @@ class DesignTransformationsExtension extends TransformationsExtension {
           }
 
           if (extension case ExtensionTypeDeclaration(
-            primaryConstructor: PrimaryConstructorDeclaration(
+            namePart: PrimaryConstructorDeclaration(
               formalParameters: FormalParameterList(
                 parameters: [
                   RegularFormalParameter(type: NamedType(name: final representationName, :final typeArguments?)),
