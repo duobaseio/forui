@@ -12,9 +12,10 @@ This update migrates Forui from the deprecated `flutter/cupertino.dart` & `flutt
 * Add `FDateSelectionControl.managedOpenRange(...)` and `FDateSelectionControl.liftedOpenRange(...)`.
 
 
-### `FDateField` & `FTimeField`
+### `FDateField`
 * Add `FDateField.clearIconBuilder`.
-* Add `FTimeField.clearIconBuilder`.
+
+* Fix Tamil (`ta`) defaulting to English.
 
 
 ### `FDateTimePicker` & `FTimePicker`
@@ -24,7 +25,6 @@ This update migrates Forui from the deprecated `flutter/cupertino.dart` & `flutt
 ### `FLabel`
 * Change `FLabel`'s horizontal layouts to place the gap between the label and child in `labelPadding`,
   `descriptionPadding` and `errorPadding` instead of `childPadding`.
-* Change `FSliderStyle.labelPadding`'s default from `EdgeInsets.only(bottom: 5)` to `EdgeInsets.only(bottom: 15)`.
 
 * Fix dead space around the control even when no label, description, and error are provided.
 * Fix controls not being flush with the layout edges, misaligning them with sibling form fields.
@@ -34,6 +34,10 @@ This update migrates Forui from the deprecated `flutter/cupertino.dart` & `flutt
 * Add `FSelect.clearIconBuilder`.
 * Add `FMultiSelect.clearIconBuilder` and `FMultiSelect.defaultClearIconBuilder`.
 * Add `FSelectSearchFieldProperties.clearIconBuilder`.
+
+
+### `FSlider`
+* Change `FSliderStyle.labelPadding`'s default from `EdgeInsets.only(bottom: 5)` to `EdgeInsets.only(bottom: 15)`.
 
 
 ### `FTappable`
@@ -46,6 +50,12 @@ This update migrates Forui from the deprecated `flutter/cupertino.dart` & `flutt
 ### `FTextField`
 * **Breaking** Change `FFieldClearIconBuilder` to be generic. Use `FFieldClearIconBuilder<FTextFieldStyle>` instead.
 
+
+### `FTimeField`
+* Add `FTimeField.clearIconBuilder`.
+
+* Fix Tamil (`ta`) defaulting to English.
+* Fix Assamese (`as`) and Tamil (`ta`) merging the minute and period into a single segment.
 
 ### Others
 * **Breaking** Migrate from deprecated `flutter/cupertino.dart` to `cupertino_ui` package.

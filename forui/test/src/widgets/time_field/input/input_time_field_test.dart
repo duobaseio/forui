@@ -131,6 +131,22 @@ void main() {
     expect(find.text('1:00 am'), findsOneWidget);
   });
 
+  testWidgets('period separator', (tester) async {
+    await tester.pumpWidget(
+      TestScaffold.app(
+        locale: const Locale('ta'),
+        child: const FTimeField(key: key, control: .managed(initial: FTime(15, 30))),
+      ),
+    );
+
+    expect(find.text('3:30 PM'), findsOneWidget);
+
+    await tester.tapAt(tester.getCenter(find.byKey(key)));
+    await tester.pumpAndSettle();
+
+    expect(tester.widget<EditableText>(find.byType(EditableText)).controller.selection.textInside('3:30 PM'), 'PM');
+  });
+
   testWidgets('clearable', (tester) async {
     await tester.pumpWidget(
       TestScaffold.app(

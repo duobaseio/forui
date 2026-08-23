@@ -13,10 +13,9 @@ import 'package:forui/forui.dart';
 ///  * Burmese (မြန်မာ)
 ///  * Nepali (नेपाली)
 ///  * Pashto (پښتو)
-///  * Tamil (தமிழ்)
 /// {@endtemplate}
 @internal
-const scriptNumerals = ['ar', 'as', 'bn', 'fa', 'mr', 'my', 'ne', 'ps', 'ta'];
+const scriptNumerals = ['ar', 'as', 'bn', 'fa', 'mr', 'my', 'ne', 'ps'];
 
 /// The locales which period is written in a script that requires composing:
 /// {@template forui.localization.scriptPeriods}

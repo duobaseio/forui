@@ -18,6 +18,7 @@ void main() {
       (Locale('en', 'SG'), 'DD/MM/YYYY'), // dd/MM/y
       (Locale('hr'), 'DD. MM. YYYY.'),
       (Locale('bg'), 'DD.MM.YYYY г.'),
+      (Locale('ta'), 'DD/MM/YYYY'), // d/M/y
     ].indexed) {
       testWidgets('placeholder - $description - $index', (tester) async {
         await tester.pumpWidget(TestScaffold.app(locale: locale, child: field()));
