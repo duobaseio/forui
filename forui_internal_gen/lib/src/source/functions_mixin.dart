@@ -27,9 +27,7 @@ class FunctionsMixin {
   final List<FieldElement> fields;
 
   /// Creates a new [FunctionsMixin].
-  new(this.step, this.element)
-    : transitiveFields = transitiveInstanceFields(element),
-      fields = instanceFields(element);
+  new(this.step, this.element) : transitiveFields = transitiveInstanceFields(element), fields = instanceFields(element);
 
   /// Generates a mixin.
   Future<Mixin> generate() async =>

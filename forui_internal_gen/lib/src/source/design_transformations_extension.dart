@@ -66,15 +66,17 @@ class DesignTransformationsExtension extends TransformationsExtension {
             extension = extension.parent;
           }
 
-          if (extension case ExtensionTypeDeclaration(
-            namePart: PrimaryConstructorDeclaration(
-              formalParameters: FormalParameterList(
-                parameters: [
-                  RegularFormalParameter(type: NamedType(name: final representationName, :final typeArguments?)),
-                ],
-              ),
-            ),
-          ) when representationName.lexeme == 'FVariants') {
+          if (extension
+              case ExtensionTypeDeclaration(
+                namePart: PrimaryConstructorDeclaration(
+                  formalParameters: FormalParameterList(
+                    parameters: [
+                      RegularFormalParameter(type: NamedType(name: final representationName, :final typeArguments?)),
+                    ],
+                  ),
+                ),
+              )
+              when representationName.lexeme == 'FVariants') {
             // Supported inner types:
             return switch (typeArguments.arguments[2].toSource()) {
               'BoxDecoration' => '$typeName(.lerpBoxDecoration($name, other.$name, t))',
