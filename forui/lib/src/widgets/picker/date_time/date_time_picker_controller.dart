@@ -189,7 +189,6 @@ sealed class FDateTimePickerControl with Diagnosticable, _$FDateTimePickerContro
     int minuteInterval,
   );
 
-  @override
   FDateTimePickerController _default(
     FDateTimePickerControl old,
     FDateTimePickerController controller,

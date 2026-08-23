@@ -104,8 +104,6 @@ mixin _$FGoldenControlMixin {
   @visibleForOverriding
   FGoldenController createController(int children);
   void _dispose(FGoldenController controller, VoidCallback callback);
-  // TODO: https://github.com/dart-lang/sdk/issues/62198
-  // ignore: unused_element
   FGoldenController _default(FGoldenControl old, FGoldenController controller, VoidCallback callback, int children) =>
       controller;
 }
@@ -341,8 +339,6 @@ mixin _$FGenericControlMixin<T> {
   @visibleForOverriding
   FGenericController<T> createController();
   void _dispose(FGenericController<T> controller, VoidCallback callback);
-  // TODO: https://github.com/dart-lang/sdk/issues/62198
-  // ignore: unused_element
   FGenericController<T> _default(FGenericControl<T> old, FGenericController<T> controller, VoidCallback callback) =>
       controller;
 }
@@ -588,8 +584,6 @@ mixin _$FSubclassControlMixin {
   @visibleForOverriding
   FSubclassController createController();
   void _dispose(FSubclassController controller, VoidCallback callback);
-  // TODO: https://github.com/dart-lang/sdk/issues/62198
-  // ignore: unused_element
   FSubclassController _default(FSubclassControl old, FSubclassController controller, VoidCallback callback) =>
       controller;
 }
@@ -839,8 +833,6 @@ mixin _$FNonListenableControlMixin {
   /// Overriding managed subclasses should always return `controller` if it is non-null, e.g. `return controller ?? MyController();`
   @visibleForOverriding
   FNonListenableController createController();
-  // TODO: https://github.com/dart-lang/sdk/issues/62198
-  // ignore: unused_element
   FNonListenableController _default(FNonListenableControl old, FNonListenableController controller) => controller;
 }
 

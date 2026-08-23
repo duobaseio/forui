@@ -167,7 +167,6 @@ sealed class FTimePickerControl with Diagnosticable, _$FTimePickerControlMixin {
     int minuteInterval,
   );
 
-  @override
   FTimePickerController _default(
     FTimePickerControl old,
     FTimePickerController controller,
