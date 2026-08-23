@@ -5,6 +5,7 @@ This update migrates Forui from the deprecated `flutter/cupertino.dart` & `flutt
 
 ### `FAutocomplete`
 * Add `FAutocomplete.clearIconBuilder`.
+* Add `FAutocomplete.enableAutocompletion`.
 
 
 ### `FCalendar`
