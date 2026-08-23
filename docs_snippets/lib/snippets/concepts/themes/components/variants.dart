@@ -1,6 +1,5 @@
-import 'package:material_ui/material_ui.dart';
-
 import 'package:forui/forui.dart';
+import 'package:material_ui/material_ui.dart';
 
 final FVariants<FTappableVariantConstraint, FTappableVariant, BoxDecoration, BoxDecorationDelta> decoration =
     // {@snippet constructor}

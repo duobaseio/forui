@@ -1,6 +1,5 @@
-import 'package:material_ui/material_ui.dart';
-
 import 'package:forui/forui.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'package:docs_snippets/snippets/concepts/responsive/custom_breakpoints.dart';
 import 'package:docs_snippets/snippets/concepts/responsive/usage.dart';

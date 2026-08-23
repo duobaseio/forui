@@ -1,7 +1,6 @@
 // {@highlight}
 
 import 'package:cupertino_ui/cupertino_ui.dart';
-
 import 'package:forui/forui.dart';
 
 // {@endhighlight}
