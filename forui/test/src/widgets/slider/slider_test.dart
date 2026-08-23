@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart' hide Thumb;
+import 'package:material_ui/material_ui.dart' hide Thumb;
 
 import 'package:flutter_test/flutter_test.dart';
 

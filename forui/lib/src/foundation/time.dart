@@ -15,15 +15,15 @@ final class FTime implements Comparable<FTime> {
   final int minute;
 
   /// Creates a [FTime].
-  const FTime([this.hour = 0, this.minute = 0])
+  const new([this.hour = 0, this.minute = 0])
     : assert(hour >= 0 && hour <= 23, 'hour ($hour) must be between 0 and 23'),
       assert(minute >= 0 && minute <= 59, 'minute ($minute) must be between 0 and 59');
 
   /// Creates a [FTime] based on the given [DateTime].
-  FTime.fromDateTime(DateTime dateTime) : this(dateTime.hour, dateTime.minute);
+  new fromDateTime(DateTime dateTime) : this(dateTime.hour, dateTime.minute);
 
   /// Creates a [FTime] based on the current time.
-  FTime.now() : this.fromDateTime(.now());
+  new now() : this.fromDateTime(.now());
 
   /// Returns a new [FTime] with the hour and/or minute replaced.
   @useResult

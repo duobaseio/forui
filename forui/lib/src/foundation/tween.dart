@@ -13,7 +13,7 @@ class FImmutableTween<T extends Object?> extends Animatable<T> {
   final T end;
 
   /// Creates an immutable tween.
-  const FImmutableTween({required this.begin, required this.end});
+  const new({required this.begin, required this.end});
 
   /// Returns the value this variable has at the given animation clock value.
   ///

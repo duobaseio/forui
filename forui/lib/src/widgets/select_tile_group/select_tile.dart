@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/debug.dart';
@@ -83,7 +83,7 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
   /// {@template forui.widgets.FSelectTile.new}
   /// Creates a [FSelectTile] with a prefix check icon.
   /// {@endtemplate}
-  const FSelectTile({
+  const new({
     required this.title,
     required this.value,
     this.style = const .context(),
@@ -109,7 +109,7 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
   ///
   /// This is identical to [FSelectTile.new]. It provides consistency with other [FTileMixin]
   /// members when using dot-shorthands.
-  const factory FSelectTile.tile({
+  const factory tile({
     required Widget title,
     required T value,
     FItemStyleDelta style,
@@ -133,7 +133,7 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
   /// {@template forui.widgets.FSelectTile.suffix}
   /// Creates a [FSelectTile] with a suffix check icon.
   /// {@endtemplate}
-  const FSelectTile.suffix({
+  const new suffix({
     required this.title,
     required this.value,
     this.style = const .context(),
@@ -202,6 +202,7 @@ class FSelectTile<T> extends StatelessWidget with FTileMixin {
     properties
       ..add(DiagnosticsProperty('style', style))
       ..add(StringProperty('semanticsLabel', semanticsLabel))
+      ..add(DiagnosticsProperty('value', value))
       ..add(FlagProperty('enabled', value: enabled, ifTrue: 'enabled'))
       ..add(FlagProperty('autofocus', value: autofocus, ifTrue: 'autofocus'))
       ..add(DiagnosticsProperty('focusNode', focusNode))
@@ -223,10 +224,10 @@ class FSelectTileData<T> extends InheritedWidget with FTileMixin {
   final FMultiValueNotifier<T> controller;
   final bool selected;
 
-  const FSelectTileData({required this.controller, required this.selected, required super.child, super.key});
+  const new({required this.controller, required this.selected, required super.child, super.key});
 
   @override
-  bool updateShouldNotify(FSelectTileData old) => controller != old.controller || selected != old.selected;
+  bool updateShouldNotify(FSelectTileData<T> old) => controller != old.controller || selected != old.selected;
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {

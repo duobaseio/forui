@@ -1,9 +1,8 @@
 @Tags(['golden'])
 library;
 
-import 'dart:async';
 
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
@@ -172,7 +171,7 @@ void main() {
         );
 
         await tester.pumpWidget(sheet.record(build(), recording: false));
-        unawaited(controller.forward());
+        controller.forward();
         // Pump past the controller's duration so its ticker stops before the tree is disposed.
         await tester.pumpFrames(sheet.record(build()), const Duration(milliseconds: 300));
 

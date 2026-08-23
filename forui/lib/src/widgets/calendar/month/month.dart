@@ -20,30 +20,25 @@ import 'package:forui/src/theme/variant.dart';
 part 'month.design.dart';
 
 /// A calendar month builder.
-typedef FCalendarMonthBuilder =
-    Widget Function(BuildContext, FCalendarMonthStyles, FLocalizations, DateTime, Set<FCalendarMonthVariant>);
+typedef FCalendarMonthBuilder = Widget Function(
+  BuildContext,
+  FCalendarMonthStyles,
+  FLocalizations,
+  DateTime,
+  Set<FCalendarMonthVariant>,
+);
 
 @internal
-class Month extends StatelessWidget {
-  final FCalendarMonthStyles styles;
-  final FLocalizations localizations;
-  final DateTime date;
-  final Set<FCalendarMonthVariant> variants;
-  final FocusNode focusNode;
-  final VoidCallback? onPress;
-  final FCalendarMonthBuilder builder;
-
-  const Month({
-    required this.styles,
-    required this.localizations,
-    required this.date,
-    required this.variants,
-    required this.focusNode,
-    required this.onPress,
-    required this.builder,
-    super.key,
-  });
-
+class const Month({
+  required final FCalendarMonthStyles styles,
+  required final FLocalizations localizations,
+  required final DateTime date,
+  required final Set<FCalendarMonthVariant> variants,
+  required final FocusNode focusNode,
+  required final VoidCallback? onPress,
+  required final FCalendarMonthBuilder builder,
+  super.key,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) => FTappable.static(
     focusNode: focusNode,
@@ -69,30 +64,24 @@ class Month extends StatelessWidget {
 }
 
 /// A calendar's month style.
-class FCalendarMonthStyle with Diagnosticable, _$FCalendarMonthStyleFunctions {
+class FCalendarMonthStyle({
   /// The month's text style.
-  @override
-  final TextStyle textStyle;
+  @override required final TextStyle textStyle,
 
   /// The decoration painted behind the month's text.
-  @override
-  final Decoration decoration;
-
+  @override required final Decoration decoration,
+}) with Diagnosticable, _$FCalendarMonthStyleFunctions {
   /// Creates a [FCalendarMonthStyle].
-  FCalendarMonthStyle({required this.textStyle, required this.decoration});
+  this;
 }
 
 /// [FCalendarMonthStyle]'s variants.
 extension type FCalendarMonthStyles(
-  FVariants<FCalendarMonthVariantConstraint, FCalendarMonthVariant, FCalendarMonthStyle, FCalendarMonthStyleDelta> _
+  FVariants<FCalendarMonthVariantConstraint, FCalendarMonthVariant, FCalendarMonthStyle, FCalendarMonthStyleDelta> _,
 ) implements
     FVariants<FCalendarMonthVariantConstraint, FCalendarMonthVariant, FCalendarMonthStyle, FCalendarMonthStyleDelta> {
   /// Creates a [FCalendarMonthStyles] that inherits its properties.
-  factory FCalendarMonthStyles.inherit({
-    required FColors colors,
-    required FTypography typography,
-    required FStyle style,
-  }) {
+  factory inherit({required FColors colors, required FTypography typography, required FStyle style}) {
     final base = FCalendarMonthStyle(
       textStyle: typography.body.sm.copyWith(color: colors.foreground),
       decoration: ShapeDecoration(shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md)),

@@ -16,15 +16,7 @@ class TooltipGroupScope extends InheritedWidget {
   final bool hover;
   final bool longPress;
 
-  const TooltipGroupScope._(
-    this.style,
-    this.active,
-    this.show,
-    this.hide,
-    this.hover,
-    this.longPress, {
-    required super.child,
-  });
+  const new _(this.style, this.active, this.show, this.hide, this.hover, this.longPress, {required super.child});
 
   @override
   bool updateShouldNotify(TooltipGroupScope old) =>
@@ -76,7 +68,7 @@ class FTooltipGroup extends StatefulWidget {
   final Widget child;
 
   /// Creates a tooltip group.
-  const FTooltipGroup({
+  const new({
     required this.child,
     this.style = const .context(),
     this.activeDuration = const Duration(milliseconds: 300),

@@ -6,17 +6,15 @@ part 'overlay_controller.control.dart';
 /// An [FOverlayControl] defines how an `FOverlay` is controlled.
 ///
 /// {@macro forui.foundation.doc_templates.control}
-sealed class FOverlayControl with Diagnosticable, _$FOverlayControlMixin {
+sealed class const FOverlayControl._() with Diagnosticable, _$FOverlayControlMixin {
   /// Creates a [FOverlayControl].
-  const factory FOverlayControl.managed({OverlayPortalController? controller, bool? initial}) = FOverlayManagedControl;
+  const factory managed({OverlayPortalController? controller, bool? initial}) = FOverlayManagedControl;
 
   /// Creates a [FOverlayControl] for controlling an overlay using lifted state.
   ///
   /// The [shown] parameter indicates whether the overlay is currently shown.
   /// The [onChange] callback is invoked when the user triggers a show/hide action.
-  const factory FOverlayControl.lifted({required bool shown, required ValueChanged<bool> onChange}) = _Lifted;
-
-  const FOverlayControl._();
+  const factory lifted({required bool shown, required ValueChanged<bool> onChange}) = _Lifted;
 
   (OverlayPortalController, bool) _update(FOverlayControl old, OverlayPortalController controller);
 }
@@ -25,20 +23,17 @@ sealed class FOverlayControl with Diagnosticable, _$FOverlayControlMixin {
 /// common configurations.
 ///
 /// {@macro forui.foundation.doc_templates.managed}
-class FOverlayManagedControl extends FOverlayControl with _$FOverlayManagedControlMixin {
+class const FOverlayManagedControl({
   /// The controller.
-  @override
-  final OverlayPortalController? controller;
+  @override final OverlayPortalController? controller,
 
   /// Whether the overlay is initially shown. Defaults to false (hidden).
   ///
   /// ## Contract
   /// Throws [AssertionError] if [initial] and [controller] are both provided.
-  @override
-  final bool? initial;
-
-  /// Creates a [FOverlayControl].
-  const FOverlayManagedControl({this.controller, this.initial})
+  @override final bool? initial,
+}) extends FOverlayControl with _$FOverlayManagedControlMixin {
+  this
     : assert(
         controller == null || initial == null,
         'Cannot provide both controller and initial. Pass initial visibility to the controller instead.',
@@ -55,13 +50,10 @@ class FOverlayManagedControl extends FOverlayControl with _$FOverlayManagedContr
   }
 }
 
-class _Lifted extends FOverlayControl with _$_LiftedMixin {
-  @override
-  final bool shown;
-  @override
-  final ValueChanged<bool> onChange;
-
-  const _Lifted({required this.shown, required this.onChange}) : super._();
+class const _Lifted({@override required final bool shown, @override required final ValueChanged<bool> onChange})
+    extends FOverlayControl
+    with _$_LiftedMixin {
+  this : super._();
 
   @override
   OverlayPortalController createController() {

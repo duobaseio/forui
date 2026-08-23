@@ -30,6 +30,19 @@ Note: `forui_cli/` is pure Dart; the Flutter- and widget-specific style rules be
   FWidgetStyle style = .new(...);  // Don't do this
   FWidgetStyle style = FWidgetStyle(...);  // Do this instead
   ```
+* Declare private and `@internal` classes with primary constructor when constructor is only a parameter list. Keep an 
+  ordinary constructor when it has an initializer list, an assertion, a body, `: super(...)`. `super.x` parameters 
+  belong in the header; fields without `final` are mutable and need `var`.
+  ```dart
+  // Good
+  class const _Crumb({required final Widget child, final bool current = false, super.key}) extends StatelessWidget {
+
+  // Bad - initializer list, leave the constructor alone
+  final class _ColorSentinel extends Color {
+    const new() : super(0);
+  }
+  ```
+
 * Prefer `AlignmentGeometry`/`BorderRadiusGeometry`/`EdgeInsetsGeometry` over `Alignment`/`BorderRadius`/`EdgeInsets`.
 * Declare lifecycle objects (controllers, animations, focus nodes) as `late` (not `late final`) and initialize them in `initState()`.
 * Minimize dependency on Cupertino/Material.

@@ -9,13 +9,12 @@ import 'package:forui/src/foundation/overlay/layer.dart';
 import 'package:forui/src/foundation/overlay/overlay_controller.dart';
 
 /// The signature for [FOverlay.overlayBuilder].
-typedef FOverlayBuilder =
-    List<Widget> Function(
-      BuildContext context,
-      OverlayPortalController controller,
-      RenderBox? childRenderBox,
-      List<Widget> overlay,
-    );
+typedef FOverlayBuilder = List<Widget> Function(
+  BuildContext context,
+  OverlayPortalController controller,
+  RenderBox? childRenderBox,
+  List<Widget> overlay,
+);
 
 /// A low-level overlay primitive that composites content relative to a child widget using [Positioned]/
 /// [AnimatedPositioned]s similar to a [Stack].
@@ -121,7 +120,7 @@ class FOverlay extends StatefulWidget {
   ///
   /// ## Contract
   /// Throws [AssertionError] if [builder] and [child] are both null.
-  const FOverlay({
+  const new({
     required this.overlay,
     this.control = const .managed(),
     this.overlayBuilder = defaultOverlayBuilder,
@@ -197,16 +196,14 @@ class _State extends State<FOverlay> {
 /// This is fine since the [Stack] is rendered in an overlay layer that is hit tested independently of the child widget.
 /// It is a simple way to implement positioning relative to the child widget without re-inventing the stack protocol.
 class _UnclippedStack extends Stack {
-  const _UnclippedStack({super.children}) : super(clipBehavior: .none);
+  const new({super.children}) : super(clipBehavior: .none);
 
   @override
   RenderStack createRenderObject(BuildContext context) =>
       _RenderUnclippedStack(textDirection: Directionality.maybeOf(context), clipBehavior: .none);
 }
 
-class _RenderUnclippedStack extends RenderStack {
-  _RenderUnclippedStack({super.textDirection, super.clipBehavior});
-
+class _RenderUnclippedStack({super.textDirection, super.clipBehavior}) extends RenderStack {
   @override
   bool hitTest(BoxHitTestResult result, {required Offset position}) => hitTestChildren(result, position: position);
 }

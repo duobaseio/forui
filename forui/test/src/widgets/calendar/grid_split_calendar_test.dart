@@ -27,7 +27,7 @@ void main() {
   );
 
   Widget calendar({
-    required FDateSelectionControl selectionControl,
+    required FDateSelectionControl<Object?> selectionControl,
     FGridSplitCalendarControl? control,
     FCalendarHeaderBuilder<FGridSplitCalendarController> headerBuilder = FCalendar.defaultHeaderBuilder,
     FCalendarFooterBuilder<FGridSplitCalendarController> footerBuilder = FCalendar.defaultFooterBuilder,

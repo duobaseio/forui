@@ -56,15 +56,10 @@ sealed class FCalendarController extends FChangeNotifier {
   late DateTime _month;
 
   /// Creates a [FCalendarController].
-  FCalendarController({
-    this._selectable = defaultSelectable,
-    DateTime? start,
-    DateTime? today,
-    DateTime? initial,
-    DateTime? end,
-  }) : start = _truncate(start ?? .utc(1900)),
-       today = _truncate(today ?? .now()),
-       end = _truncate(end ?? .utc(2100)) {
+  new({this._selectable = defaultSelectable, DateTime? start, DateTime? today, DateTime? initial, DateTime? end})
+    : start = _truncate(start ?? .utc(1900)),
+      today = _truncate(today ?? .now()),
+      end = _truncate(end ?? .utc(2100)) {
     // [currentMonth] is a normalized first-of-month, so it is checked at month granularity: a mid-month/mid-year start
     // (e.g. Jul 15) still permits showing its own month (Jul 1). The day grid gates individual days via selectable.
     _currentMonth = .utc((initial ?? this.today).year, (initial ?? this.today).month);
@@ -98,7 +93,7 @@ abstract class _GridCalendarController extends FCalendarController {
 
   FCalendarPickerGridType _type = .day;
 
-  _GridCalendarController({super.selectable, super.start, super.today, super.initial, super.end}) {
+  new({super.selectable, super.start, super.today, super.initial, super.end}) {
     day =
         FCalendarDayPickerController(
           start: start,
@@ -251,7 +246,7 @@ abstract class _GridCalendarController extends FCalendarController {
 /// A controller for a [FCalendar] that cycles through day/month/year grid pickers.
 class FGridCalendarController extends _GridCalendarController {
   /// Creates a [FGridCalendarController].
-  FGridCalendarController({super.selectable, super.start, super.today, super.initial, super.end});
+  new({super.selectable, super.start, super.today, super.initial, super.end});
 
   /// Advances the inline grid to show the next picker in the cycle.
   void cycle() {
@@ -269,7 +264,7 @@ class FGridCalendarController extends _GridCalendarController {
 /// A controller for a [FCalendar] with a split header whose month and year grid pickers are independently togglable.
 class FGridSplitCalendarController extends _GridCalendarController {
   /// Creates a [FGridSplitCalendarController].
-  FGridSplitCalendarController({super.selectable, super.start, super.today, super.initial, super.end});
+  new({super.selectable, super.start, super.today, super.initial, super.end});
 
   /// Shows the month picker if not currently shown, and the day picker otherwise.
   void toggleMonthPicker() => type == .month ? jumpToDayPicker() : jumpToMonthPicker();
@@ -285,7 +280,7 @@ class FWheelCalendarController extends FCalendarController {
   bool _wheel = false;
 
   /// Creates a [FWheelCalendarController].
-  FWheelCalendarController({super.selectable, super.start, super.today, super.initial, super.end}) {
+  new({super.selectable, super.start, super.today, super.initial, super.end}) {
     day =
         FCalendarDayPickerController(
           start: start,

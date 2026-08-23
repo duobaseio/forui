@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/semantics.dart';
 
 import 'package:meta/meta.dart';
@@ -116,7 +116,7 @@ class FDialogRoute<T> extends RawDialogRoute<T> {
   final String? barrierOnTapHint;
 
   /// Creates a [FDialogRoute].
-  FDialogRoute({
+  new({
     required this.style,
     required Widget Function(BuildContext context, Animation<double> animation) builder,
     this.barrierDismissible = true,
@@ -195,52 +195,43 @@ class FDialogRoute<T> extends RawDialogRoute<T> {
 }
 
 /// [FDialogRoute]'s style.
-class FDialogRouteStyle with Diagnosticable, _$FDialogRouteStyleFunctions {
+class const FDialogRouteStyle({
+  /// {@macro forui.widgets.FPopoverStyle.barrierFilter}
+  @override final ImageFilter Function(BuildContext context, double animation)? barrierFilter,
+
+  /// Motion-related properties. Defaults to [FDialogRouteMotion].
+  @override final FDialogRouteMotion motion = const FDialogRouteMotion(),
+}) with Diagnosticable, _$FDialogRouteStyleFunctions {
+  /// Creates a [FDialogRouteStyle].
+  this;
+
   /// The default [barrierFilter]. Blurs and tints the content behind the barrier.
   static ImageFilter defaultBarrierFilter(BuildContext context, double animation) => ImageFilter.compose(
     outer: ImageFilter.blur(sigmaX: animation * 5, sigmaY: animation * 5),
     inner: ColorFilter.mode(FColors.lerpColor(Colors.transparent, context.theme.colors.barrier, animation)!, .srcOver),
   );
 
-  /// {@macro forui.widgets.FPopoverStyle.barrierFilter}
-  @override
-  final ImageFilter Function(BuildContext context, double animation)? barrierFilter;
-
-  /// Motion-related properties.
-  @override
-  final FDialogRouteMotion motion;
-
-  /// Creates a [FDialogRouteStyle].
-  const FDialogRouteStyle({this.barrierFilter, this.motion = const FDialogRouteMotion()});
-
   /// Creates a [FDialogRouteStyle] that inherits its properties.
-  FDialogRouteStyle.inherit() : this(barrierFilter: FDialogRouteStyle.defaultBarrierFilter);
+  new inherit() : this(barrierFilter: FDialogRouteStyle.defaultBarrierFilter);
 }
 
 /// Motion-related properties for [FDialogRoute].
-class FDialogRouteMotion with Diagnosticable, _$FDialogRouteMotionFunctions {
+class const FDialogRouteMotion({
   /// The amount of time the entrance animation takes. Defaults to 150ms.
   ///
   /// The dialog's animation and curve is managed by [FDialogMotion].
-  @override
-  final Duration entranceDuration;
+  @override final Duration entranceDuration = const Duration(milliseconds: 150),
 
   /// The amount of time the exit animation takes. Defaults to 150ms.
   ///
   /// The dialog's animation and curve is managed by [FDialogMotion].
-  @override
-  final Duration exitDuration;
+  @override final Duration exitDuration = const Duration(milliseconds: 150),
 
   /// The curve used for the barrier's entrance and exit. Defaults to [Curves.ease].
-  @override
-  final Curve barrierCurve;
-
+  @override final Curve barrierCurve = Curves.ease,
+}) with Diagnosticable, _$FDialogRouteMotionFunctions {
   /// Creates a [FDialogRouteMotion].
-  const FDialogRouteMotion({
-    this.entranceDuration = const Duration(milliseconds: 150),
-    this.exitDuration = const Duration(milliseconds: 150),
-    this.barrierCurve = Curves.ease,
-  });
+  this;
 }
 
 /// A modal dialog.
@@ -326,7 +317,7 @@ class FDialog extends StatefulWidget {
   /// ```
   ///
   /// See https://forui.dev/docs/widgets/data/card for other generatable layouts.
-  const FDialog({
+  const new({
     required this.builder,
     this.style = const .context(),
     this.clipBehavior = .none,
@@ -348,7 +339,7 @@ class FDialog extends StatefulWidget {
   /// ```
   ///
   /// See https://forui.dev/docs/widgets/data/card for other generatable layouts.
-  FDialog.adaptive({
+  new adaptive({
     required Widget Function(BuildContext context, FDialogStyle style) horizontalBuilder,
     required Widget Function(BuildContext context, FDialogStyle style) verticalBuilder,
     this.style = const .context(),
@@ -504,50 +495,35 @@ class _FDialogState extends State<FDialog> {
 }
 
 /// [FDialog]'s style.
-class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
+class FDialogStyle({
+  /// The decoration.
+  @override required final Decoration decoration,
+
+  /// The title's [TextStyle].
+  @override required final TextStyle titleTextStyle,
+
+  /// The body's [TextStyle].
+  @override required final TextStyle bodyTextStyle,
+
+  /// The haptic feedback for when the user slides from one action to another.
+  @override required final Future<void> Function() slidePressHapticFeedback,
+
   /// {@macro forui.widgets.FPopoverStyle.backgroundFilter}
   ///
   /// This requires [FDialog.animation] to be non-null.
-  @override
-  final ImageFilter Function(BuildContext context, double animation)? backgroundFilter;
-
-  /// The decoration.
-  @override
-  final Decoration decoration;
-
-  /// The title's [TextStyle].
-  @override
-  final TextStyle titleTextStyle;
-
-  /// The body's [TextStyle].
-  @override
-  final TextStyle bodyTextStyle;
+  @override final ImageFilter Function(BuildContext context, double animation)? backgroundFilter,
 
   /// The inset padding. Defaults to `EdgeInsets.symmetric(horizontal: 40, vertical: 24)`.
-  @override
-  final EdgeInsetsGeometry insetPadding;
+  @override final EdgeInsetsGeometry insetPadding = const .symmetric(horizontal: 40, vertical: 24),
 
-  /// The haptic feedback for when the user slides from one action to another.
-  @override
-  final Future<void> Function() slidePressHapticFeedback;
-
-  /// Motion-related properties.
-  @override
-  final FDialogMotion motion;
-
+  /// Motion-related properties. Defaults to [FDialogMotion].
+  @override final FDialogMotion motion = const FDialogMotion(),
+}) with Diagnosticable, _$FDialogStyleFunctions {
   /// Creates a [FDialogStyle].
-  FDialogStyle({
-    required this.decoration,
-    required this.titleTextStyle,
-    required this.bodyTextStyle,
-    required this.slidePressHapticFeedback,
-    this.backgroundFilter,
-    this.insetPadding = const .symmetric(horizontal: 40, vertical: 24),
-    this.motion = const FDialogMotion(),
-  });
+  this;
 
   /// Creates a [FDialogStyle] that inherits its properties.
-  factory FDialogStyle.inherit({
+  factory inherit({
     required FStyle style,
     required FColors colors,
     required FTypography typography,
@@ -579,50 +555,34 @@ class FDialogStyle with Diagnosticable, _$FDialogStyleFunctions {
 /// When [FAccessibility.motion] is:
 /// * [FAccessibilityMotion.reduced], only fade transitions are applied.
 /// * [FAccessibilityMotion.disabled], no motion is applied.
-class FDialogMotion with Diagnosticable, _$FDialogMotionFunctions {
+class const FDialogMotion({
   /// The curve used for the dialog's expansion animation when entering. Defaults to [Curves.easeOutCubic].
-  @override
-  final Curve expandCurve;
+  @override final Curve expandCurve = Curves.easeOutCubic,
 
   /// The curve used for the dialog's collapse animation when exiting. Defaults to [Curves.easeInCubic].
-  @override
-  final Curve collapseCurve;
+  @override final Curve collapseCurve = Curves.easeInCubic,
 
   /// The curve used for the dialog's fade-in animation when entering. Defaults to [Curves.linear].
-  @override
-  final Curve fadeInCurve;
+  @override final Curve fadeInCurve = Curves.linear,
 
   /// The curve used for the dialog's fade-out animation when exiting. Defaults to [Curves.linear].
-  @override
-  final Curve fadeOutCurve;
+  @override final Curve fadeOutCurve = Curves.linear,
 
   /// The tween used to animate the dialog's scale in and out. Defaults to `[0.95, 1]`.
-  @override
-  final Animatable<double> scaleTween;
+  @override final Animatable<double> scaleTween = const FImmutableTween(begin: 0.95, end: 1.0),
 
   /// The tween used to animate the dialog's fade in and out. Defaults to `[0, 1]`.
-  @override
-  final Animatable<double> fadeTween;
+  @override final Animatable<double> fadeTween = const FImmutableTween(begin: 0.0, end: 1.0),
 
-  /// The duration of the animation to show when the system keyboard intrudes into the space that the dialog is placed in.
+  /// The duration of the animation to show when the system keyboard intrudes into the space that the dialog is placed
+  /// in.
   /// Defaults to 100ms.
-  @override
-  final Duration insetDuration;
+  @override final Duration insetDuration = const Duration(milliseconds: 100),
 
   /// The curve to use for the animation shown when the system keyboard intrudes into the space that the dialog is
   /// placed in. Defaults to [Curves.decelerate].
-  @override
-  final Curve insetCurve;
-
+  @override final Curve insetCurve = Curves.decelerate,
+}) with Diagnosticable, _$FDialogMotionFunctions {
   /// Creates a [FDialogMotion].
-  const FDialogMotion({
-    this.expandCurve = Curves.easeOutCubic,
-    this.collapseCurve = Curves.easeInCubic,
-    this.fadeInCurve = Curves.linear,
-    this.fadeOutCurve = Curves.linear,
-    this.scaleTween = const FImmutableTween(begin: 0.95, end: 1.0),
-    this.fadeTween = const FImmutableTween(begin: 0.0, end: 1.0),
-    this.insetDuration = const Duration(milliseconds: 100),
-    this.insetCurve = Curves.decelerate,
-  });
+  this;
 }

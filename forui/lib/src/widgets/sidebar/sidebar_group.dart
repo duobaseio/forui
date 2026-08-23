@@ -60,7 +60,7 @@ class FSidebarGroup extends StatelessWidget {
   final List<Widget> children;
 
   /// Creates a [FSidebarGroup].
-  const FSidebarGroup({
+  const new({
     required this.children,
     this.style = const .context(),
     this.label,
@@ -147,7 +147,7 @@ class FSidebarGroupData extends InheritedWidget {
   final FSidebarGroupStyle style;
 
   /// Creates a [FSidebarGroupData].
-  const FSidebarGroupData({required this.style, required super.child, super.key});
+  const new({required this.style, required super.child, super.key});
 
   @override
   bool updateShouldNotify(FSidebarGroupData old) => style != old.style;
@@ -160,63 +160,43 @@ class FSidebarGroupData extends InheritedWidget {
 }
 
 /// The style for a [FSidebarGroup].
-class FSidebarGroupStyle with Diagnosticable, _$FSidebarGroupStyleFunctions {
-  /// The padding. Defaults to `EdgeInsets.symmetric(horizontal: 16)`.
-  @override
-  final EdgeInsets padding;
-
-  /// The spacing between the label and action in the header. Defaults to 8.
-  @override
-  final double headerSpacing;
-
-  /// The padding around the header. Defaults to `EdgeInsets.fromLTRB(8, 0, 8, 2)`.
-  @override
-  final EdgeInsetsGeometry headerPadding;
-
+class const FSidebarGroupStyle({
   /// The label's text style.
-  @override
-  final TextStyle labelStyle;
+  @override required final TextStyle labelStyle,
 
   /// The action's style.
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> actionStyle;
-
-  /// The spacing between children. Defaults to 4.
-  @override
-  final double childrenSpacing;
-
-  /// The padding around the children. Defaults to `EdgeInsets.fromLTRB(0, 0, 0, 16)`.
-  @override
-  final EdgeInsetsGeometry childrenPadding;
+  required final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> actionStyle,
 
   /// The tappable action's style.
-  @override
-  final FTappableStyle tappableStyle;
+  @override required final FTappableStyle tappableStyle,
 
   /// The focused outline style.
-  @override
-  final FFocusedOutlineStyle focusedOutlineStyle;
+  @override required final FFocusedOutlineStyle focusedOutlineStyle,
 
   /// The item's style.
-  @override
-  final FSidebarItemStyle itemStyle;
+  @override required final FSidebarItemStyle itemStyle,
 
+  /// The padding. Defaults to `EdgeInsets.symmetric(horizontal: 16)`.
+  @override final EdgeInsets padding = const .symmetric(horizontal: 16),
+
+  /// The spacing between the label and action in the header. Defaults to 8.
+  @override final double headerSpacing = 8,
+
+  /// The padding around the header. Defaults to `EdgeInsets.fromLTRB(8, 0, 8, 2)`.
+  @override final EdgeInsetsGeometry headerPadding = const .fromLTRB(8, 0, 8, 2),
+
+  /// The spacing between children. Defaults to 4.
+  @override final double childrenSpacing = 4,
+
+  /// The padding around the children. Defaults to `EdgeInsets.fromLTRB(0, 0, 0, 16)`.
+  @override final EdgeInsetsGeometry childrenPadding = const .fromLTRB(0, 0, 0, 16),
+}) with Diagnosticable, _$FSidebarGroupStyleFunctions {
   /// Creates a [FSidebarGroupStyle].
-  const FSidebarGroupStyle({
-    required this.labelStyle,
-    required this.actionStyle,
-    required this.tappableStyle,
-    required this.focusedOutlineStyle,
-    required this.itemStyle,
-    this.padding = const .symmetric(horizontal: 16),
-    this.headerSpacing = 8,
-    this.headerPadding = const .fromLTRB(8, 0, 8, 2),
-    this.childrenSpacing = 4,
-    this.childrenPadding = const .fromLTRB(0, 0, 0, 16),
-  });
+  this;
 
   /// Creates a [FSidebarGroupStyle] that inherits its properties.
-  FSidebarGroupStyle.inherit({
+  new inherit({
     required FColors colors,
     required FTypography typography,
     required FIcons icons,

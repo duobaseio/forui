@@ -55,7 +55,7 @@ class Configuration {
   final String style;
   final String theme;
 
-  factory Configuration.parse() {
+  factory parse() {
     try {
       final root = _findProjectRoot();
       var configuration = File('${root.path}/forui.yaml');
@@ -117,7 +117,7 @@ class Configuration {
     }
   }
 
-  Configuration({
+  new({
     required this.root,
     this.snippet = defaultSnippet,
     this.style = defaultStyle,

@@ -123,7 +123,7 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderValue> {
   final Key? formFieldKey;
 
   /// Creates a [FSlider].
-  FSlider({
+  new({
     this.control = const .managedContinuous(),
     this.style = const .context(),
     this.layout,
@@ -227,57 +227,31 @@ class FSlider extends StatelessWidget with FFormFieldProperties<FSliderValue> {
   }
 }
 
-class _Slider extends StatefulWidget {
-  final FSliderControl control;
-  final FSliderStyle style;
-  final FLayout layout;
-  final Widget? label;
-  final Widget? description;
-  final Widget Function(BuildContext context, String message) errorBuilder;
-  final List<FSliderMark> marks;
-  final TextDirection textDirection;
-  final BoxConstraints constraints;
-  final double? mainAxisExtent;
-  final double? trackHitRegionCrossExtent;
-  final FSliderTooltipControls tooltipControls;
-  final Widget Function(FTooltipController controller, double value) tooltipBuilder;
-  final String Function(FSliderValue)? semanticFormatterCallback;
-  final String Function(double) semanticValueFormatterCallback;
-  final ValueChanged<FSliderValue>? onEnd;
-  final FormFieldSetter<FSliderValue>? onSaved;
-  final VoidCallback? onReset;
-  final FormFieldValidator<FSliderValue>? validator;
-  final AutovalidateMode? autovalidateMode;
-  final String? forceErrorText;
-  final bool enabled;
-  final Key? formFieldKey;
-
-  const _Slider({
-    required this.control,
-    required this.style,
-    required this.layout,
-    required this.label,
-    required this.description,
-    required this.errorBuilder,
-    required this.marks,
-    required this.textDirection,
-    required this.constraints,
-    required this.mainAxisExtent,
-    required this.trackHitRegionCrossExtent,
-    required this.tooltipControls,
-    required this.tooltipBuilder,
-    required this.semanticFormatterCallback,
-    required this.semanticValueFormatterCallback,
-    required this.onEnd,
-    required this.onSaved,
-    required this.onReset,
-    required this.validator,
-    required this.autovalidateMode,
-    required this.forceErrorText,
-    required this.enabled,
-    this.formFieldKey,
-  });
-
+class const _Slider({
+  required final FSliderControl control,
+  required final FSliderStyle style,
+  required final FLayout layout,
+  required final Widget? label,
+  required final Widget? description,
+  required final Widget Function(BuildContext context, String message) errorBuilder,
+  required final List<FSliderMark> marks,
+  required final TextDirection textDirection,
+  required final BoxConstraints constraints,
+  required final double? mainAxisExtent,
+  required final double? trackHitRegionCrossExtent,
+  required final FSliderTooltipControls tooltipControls,
+  required final Widget Function(FTooltipController controller, double value) tooltipBuilder,
+  required final String Function(FSliderValue)? semanticFormatterCallback,
+  required final String Function(double) semanticValueFormatterCallback,
+  required final ValueChanged<FSliderValue>? onEnd,
+  required final FormFieldSetter<FSliderValue>? onSaved,
+  required final VoidCallback? onReset,
+  required final FormFieldValidator<FSliderValue>? validator,
+  required final AutovalidateMode? autovalidateMode,
+  required final String? forceErrorText,
+  required final bool enabled,
+  final Key? formFieldKey,
+}) extends StatefulWidget {
   @override
   State<_Slider> createState() => _SliderState();
 
@@ -429,7 +403,8 @@ class _SliderState extends State<_Slider> with TickerProviderStateMixin {
   String Function(FSliderValue) get _formatter => switch (_controller.active) {
     (min: true, max: false) => (value) => '${(value.min * 100).toStringAsFixed(0)}%',
     (min: false, max: true) => (value) => '${(value.max * 100).toStringAsFixed(0)}%',
-    (min: true, max: true) || (min: false, max: false) =>
-      (value) => '${(value.min * 100).toStringAsFixed(0)}% - ${(value.max * 100).toStringAsFixed(0)}%',
+    (min: true, max: true) || (min: false, max: false) => (
+      value,
+    ) => '${(value.min * 100).toStringAsFixed(0)}% - ${(value.max * 100).toStringAsFixed(0)}%',
   };
 }

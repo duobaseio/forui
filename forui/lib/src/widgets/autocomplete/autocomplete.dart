@@ -16,17 +16,19 @@ import 'package:forui/src/widgets/autocomplete/skip_delegate_traversal_policy.da
 import 'package:forui/src/widgets/popover/popover_controller.dart';
 
 /// A builder for [FAutocomplete]'s results.
-typedef FAutocompleteContentBuilder<T> =
-    List<FAutocompleteItemMixin<T>> Function(BuildContext context, String query, Iterable<T> values);
+typedef FAutocompleteContentBuilder<T> = List<FAutocompleteItemMixin<T>> Function(
+  BuildContext context,
+  String query,
+  Iterable<T> values,
+);
 
 /// A builder that wraps [FAutocomplete]'s popover content.
-typedef FAutocompletePopoverBuilder =
-    Widget Function(
-      BuildContext context,
-      FAutocompleteController controller,
-      FPopoverController popoverController,
-      Widget content,
-    );
+typedef FAutocompletePopoverBuilder = Widget Function(
+  BuildContext context,
+  FAutocompleteController controller,
+  FPopoverController popoverController,
+  Widget content,
+);
 
 /// An autocomplete provides a list of suggestions based on the user's input and shows typeahead text for the first match.
 ///
@@ -791,7 +793,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
   /// See:
   /// * [FAutocomplete.builder] for more control over the appearance of items.
   /// * [FAutocomplete.text] for a simpler autocomplete for `String` suggestions.
-  FAutocomplete({
+  new({
     required Map<String, T> items,
     String Function(T suggestion)? format,
     T? Function(String? text)? parse,
@@ -998,7 +1000,7 @@ class FAutocomplete<T> extends StatefulWidget with FFormFieldProperties<T> {
   ///
   /// See:
   /// * [FAutocomplete.textBuilder] for a simpler autocomplete for `String` suggestions.
-  const FAutocomplete.builder({
+  const new builder({
     required this.filter,
     required this.format,
     required this.parse,
@@ -1642,7 +1644,7 @@ final class AutocompleteFieldScope extends InheritedWidget {
   /// The current widget variants.
   final Set<FTextFieldVariant> variants;
 
-  const AutocompleteFieldScope({required this.style, required this.variants, required super.child, super.key});
+  const new({required this.style, required this.variants, required super.child, super.key});
 
   @override
   bool updateShouldNotify(AutocompleteFieldScope old) => style != old.style || variants != old.variants;

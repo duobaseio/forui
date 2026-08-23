@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart' show InputBorder;
+import 'package:material_ui/material_ui.dart' show InputBorder;
 import 'package:flutter/widgets.dart';
 
 import 'package:meta/meta.dart';
@@ -11,28 +11,22 @@ import 'package:forui/forui.dart';
 part 'autocomplete_style.design.dart';
 
 /// An [FAutocomplete]'s style.
-class FAutocompleteStyle with Diagnosticable, _$FAutocompleteStyleFunctions {
+class FAutocompleteStyle({
   /// The field's styles.
-  @override
-  final FAutocompleteFieldSizeStyles fieldStyles;
+  @override required final FAutocompleteFieldSizeStyles fieldStyles,
 
   /// The content's style.
-  @override
-  final FAutocompleteContentStyle contentStyle;
-
+  @override required final FAutocompleteContentStyle contentStyle,
+}) with Diagnosticable, _$FAutocompleteStyleFunctions {
   /// Creates a [FAutocompleteStyle].
-  FAutocompleteStyle({required this.fieldStyles, required this.contentStyle});
+  this;
 
   /// Creates a [FAutocompleteStyle] that inherits its properties.
-  FAutocompleteStyle.inherit({
-    required FColors colors,
-    required FTypography typography,
-    required FStyle style,
-    required bool touch,
-  }) : this(
-         fieldStyles: .inherit(colors: colors, typography: typography, style: style, touch: touch),
-         contentStyle: .inherit(colors: colors, typography: typography, style: style, touch: touch),
-       );
+  new inherit({required FColors colors, required FTypography typography, required FStyle style, required bool touch})
+    : this(
+        fieldStyles: .inherit(colors: colors, typography: typography, style: style, touch: touch),
+        contentStyle: .inherit(colors: colors, typography: typography, style: style, touch: touch),
+      );
 }
 
 /// [FAutocompleteStyle]'s size styles.
@@ -43,7 +37,7 @@ extension type FAutocompleteFieldSizeStyles(
     FAutocompleteFieldStyle,
     FAutocompleteFieldStyleDelta
   >
-  _
+  _,
 ) implements
     FVariants<
       FTextFieldSizeVariantConstraint,
@@ -52,7 +46,7 @@ extension type FAutocompleteFieldSizeStyles(
       FAutocompleteFieldStyleDelta
     > {
   /// Creates [FAutocompleteFieldSizeStyles] that inherit their properties.
-  factory FAutocompleteFieldSizeStyles.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,
@@ -84,7 +78,7 @@ extension type FAutocompleteFieldSizeStyles(
 }
 
 /// An autocomplete field's style.
-class FAutocompleteFieldStyle extends FTextFieldStyle with _$FAutocompleteFieldStyleFunctions {
+class FAutocompleteFieldStyle({
   /// The composing text's [TextStyle].
   ///
   /// {@template forui.text_field.composingTextStyle}
@@ -92,47 +86,46 @@ class FAutocompleteFieldStyle extends FTextFieldStyle with _$FAutocompleteFieldS
   /// are the same size to prevent visual discrepancies between the actual and typeahead text.
   /// {@endtemplate}
   @override
-  final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, TextStyle, TextStyleDelta> composingTextStyle;
+  required final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, TextStyle, TextStyleDelta>
+  composingTextStyle,
 
   /// The typeahead's [TextStyle].
   ///
   /// {@macro forui.text_field.composingTextStyle}
   @override
-  final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, TextStyle?, TextStyleDelta> typeaheadTextStyle;
-
+  required final FVariants<FTextFieldVariantConstraint, FTextFieldVariant, TextStyle?, TextStyleDelta>
+  typeaheadTextStyle,
+  required super.keyboardAppearance,
+  required super.color,
+  required super.iconStyle,
+  required super.clearButtonStyle,
+  required super.obscureButtonStyle,
+  required super.contentTextStyle,
+  required super.hintTextStyle,
+  required super.counterTextStyle,
+  required super.border,
+  required super.labelTextStyle,
+  required super.descriptionTextStyle,
+  required super.errorTextStyle,
+  super.cursorColor,
+  super.cursorWidth,
+  super.cursorOpacityAnimates,
+  super.contentPadding,
+  super.constraints,
+  super.clearButtonPadding,
+  super.obscureButtonPadding,
+  super.scrollPadding,
+  super.labelPadding,
+  super.descriptionPadding,
+  super.errorPadding,
+  super.childPadding,
+  super.labelMotion,
+}) extends FTextFieldStyle with _$FAutocompleteFieldStyleFunctions {
   /// Creates a [FAutocompleteFieldStyle].
-  FAutocompleteFieldStyle({
-    required this.composingTextStyle,
-    required this.typeaheadTextStyle,
-    required super.keyboardAppearance,
-    required super.color,
-    required super.iconStyle,
-    required super.clearButtonStyle,
-    required super.obscureButtonStyle,
-    required super.contentTextStyle,
-    required super.hintTextStyle,
-    required super.counterTextStyle,
-    required super.border,
-    required super.labelTextStyle,
-    required super.descriptionTextStyle,
-    required super.errorTextStyle,
-    super.cursorColor,
-    super.cursorWidth,
-    super.cursorOpacityAnimates,
-    super.contentPadding,
-    super.constraints,
-    super.clearButtonPadding,
-    super.obscureButtonPadding,
-    super.scrollPadding,
-    super.labelPadding,
-    super.descriptionPadding,
-    super.errorPadding,
-    super.childPadding,
-    super.labelMotion,
-  });
+  this;
 
   /// Creates an [FAutocompleteFieldStyle] from a [FTextFieldStyle].
-  FAutocompleteFieldStyle.inherit({required FColors colors, required FTextFieldStyle field})
+  new inherit({required FColors colors, required FTextFieldStyle field})
     : this(
         composingTextStyle: field.contentTextStyle.apply([.all(.delta(decoration: () => .underline))]),
         typeaheadTextStyle: FVariants(

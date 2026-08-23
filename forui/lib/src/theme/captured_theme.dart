@@ -19,19 +19,15 @@ class FCapturedTheme {
   final ValueListenable<FPlatformVariant>? platform;
 
   /// Creates a [FCapturedTheme].
-  const FCapturedTheme({this.theme, this.accessibility, this.platform});
+  const new({this.theme, this.accessibility, this.platform});
 
   /// Wraps the given [child] in widgets that re-establish and observe the captured scopes.
   Widget wrap(Widget child) =>
       theme == null && accessibility == null && platform == null ? child : _CapturedTheme(captured: this, child: child);
 }
 
-class _CapturedTheme extends StatefulWidget {
-  final FCapturedTheme captured;
-  final Widget child;
-
-  const _CapturedTheme({required this.captured, required this.child});
-
+class const _CapturedTheme({required final FCapturedTheme captured, required final Widget child})
+    extends StatefulWidget {
   @override
   State<_CapturedTheme> createState() => _CapturedThemeState();
 

@@ -17,7 +17,7 @@ class _PopoverControllerHook extends Hook<FPopoverController> {
   final TickerProvider vsync;
   final bool shown;
 
-  const _PopoverControllerHook({required this.vsync, required this.shown, super.keys});
+  const new({required this.vsync, required this.shown, super.keys});
 
   @override
   _PopoverControllerHookState createState() => .new();

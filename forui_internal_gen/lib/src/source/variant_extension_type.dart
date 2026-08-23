@@ -39,7 +39,7 @@ class VariantExtensionType {
   final Map<String, (int, String)> variants;
 
   /// Creates a new [VariantExtensionType].
-  VariantExtensionType(this.prefix, this.variants)
+  new(this.prefix, this.variants)
     : constraint = '${prefix}VariantConstraint',
       variant = '${prefix}Variant';
 

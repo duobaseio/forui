@@ -3,7 +3,7 @@
 import 'dart:io';
 
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'package:flutter_test/flutter_test.dart';
 
@@ -104,12 +104,32 @@ class TestScaffold extends StatelessWidget {
     ),
   );
 
-  static final _default = FTheme.neutral;
-
   static List<({String name, FThemeData data})> get themes => [
     (name: 'neutral-light', data: _default.light.touch),
     (name: 'neutral-dark', data: _default.dark.touch),
   ];
+
+  static final _default = (
+    light: (
+      desktop: _theme(FColors.neutralLight, touch: false, debugLabel: 'Neutral Light Desktop'),
+      touch: _theme(FColors.neutralLight, touch: true, debugLabel: 'Neutral Light Touch'),
+    ),
+    dark: (
+      desktop: _theme(FColors.neutralDark, touch: false, debugLabel: 'Neutral Dark Desktop'),
+      touch: _theme(FColors.neutralDark, touch: true, debugLabel: 'Neutral Dark Touch'),
+    ),
+  );
+
+  static FThemeData _theme(FColors colors, {required bool touch, required String debugLabel}) {
+    const fontFamilyFallback = ['NotoSansArabic', 'NotoSansSC', 'NotoSansKR'];
+    final typeface = FTypeface.inherit(colors: colors, touch: touch, fontFamilyFallback: fontFamilyFallback);
+    return FThemeData(
+      colors: colors,
+      touch: touch,
+      debugLabel: debugLabel,
+      typography: FTypography(display: typeface, body: typeface),
+    );
+  }
 
   final FThemeData theme;
   final FPlatformVariant? platform;
@@ -122,7 +142,7 @@ class TestScaffold extends StatelessWidget {
   final bool padded;
   final bool wrapped;
 
-  TestScaffold({
+  new({
     required this.child,
     this.platform,
     this.textDirection,
@@ -134,13 +154,13 @@ class TestScaffold extends StatelessWidget {
   }) : locale = null,
        theme = theme ?? _default.light.touch,
        background = switch (theme) {
-         _ when theme == _default.light.touch || theme == _default.light.desktop => const Color(0xFFEEFFFF),
-         _ when theme == _default.dark.touch || theme == _default.dark.desktop => const Color(0xFF06111C),
+         _ when theme?.colors == FColors.neutralLight => const Color(0xFFEEFFFF),
+         _ when theme?.colors == FColors.neutralDark => const Color(0xFF06111C),
          _ => null,
        },
        wrapped = false;
 
-  TestScaffold.app({
+  new app({
     required this.child,
     this.platform,
     this.locale,
@@ -152,13 +172,13 @@ class TestScaffold extends StatelessWidget {
     super.key,
   }) : theme = theme ?? _default.light.touch,
        background = switch (theme) {
-         _ when theme == _default.light.touch || theme == _default.light.desktop => const Color(0xFFEEFFFF),
-         _ when theme == _default.dark.touch || theme == _default.dark.desktop => const Color(0xFF06111C),
+         _ when theme?.colors == FColors.neutralLight => const Color(0xFFEEFFFF),
+         _ when theme?.colors == FColors.neutralDark => const Color(0xFF06111C),
          _ => null,
        },
        wrapped = true;
 
-  TestScaffold.blue({required this.child, this.platform, this.alignment = .center, super.key})
+  new blue({required this.child, this.platform, this.alignment = .center, super.key})
     : theme = _default.light.touch,
       background = blueScreen.colors.background,
       locale = null,

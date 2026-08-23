@@ -27,36 +27,21 @@ extension DateTimes on DateTime {
 }
 
 @internal
-class DayPicker extends StatelessWidget {
-  final FCalendarDayPickerController controller;
-  final FCalendarDayPickerStyle style;
-  final FLocalizations localization;
-  final DateTime today;
-  final bool Function(DateTime) selected;
-  final bool fixedWeeks;
-  final ScrollPhysics? scrollPhysics;
-  final ScrollCacheExtent? scrollCacheExtent;
-  final ScrollBehavior? scrollBehavior;
-  final ValueChanged<DateTime> onPress;
-  final ValueChanged<DateTime> onLongPress;
-  final FCalendarDayBuilder builder;
-
-  const DayPicker({
-    required this.controller,
-    required this.style,
-    required this.localization,
-    required this.today,
-    required this.selected,
-    required this.fixedWeeks,
-    required this.scrollPhysics,
-    required this.scrollCacheExtent,
-    required this.scrollBehavior,
-    required this.onPress,
-    required this.onLongPress,
-    required this.builder,
-    super.key,
-  });
-
+class const DayPicker({
+  required final FCalendarDayPickerController controller,
+  required final FCalendarDayPickerStyle style,
+  required final FLocalizations localization,
+  required final DateTime today,
+  required final bool Function(DateTime) selected,
+  required final bool fixedWeeks,
+  required final ScrollPhysics? scrollPhysics,
+  required final ScrollCacheExtent? scrollCacheExtent,
+  required final ScrollBehavior? scrollBehavior,
+  required final ValueChanged<DateTime> onPress,
+  required final ValueChanged<DateTime> onLongPress,
+  required final FCalendarDayBuilder builder,
+  super.key,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = style.daySize;
@@ -184,7 +169,7 @@ class _Viewport extends InheritedWidget {
 
   final double _height;
 
-  const _Viewport({required this._height, required super.child});
+  const new({required this._height, required super.child});
 
   @override
   bool updateShouldNotify(_Viewport old) => _height != old._height;
@@ -204,7 +189,7 @@ class _Grid extends StatefulWidget {
   final ValueChanged<DateTime> onLongPress;
   final FCalendarDayBuilder builder;
 
-  _Grid({
+  new({
     required this.style,
     required this.localization,
     required this.height,
@@ -347,13 +332,8 @@ class _GridState extends State<_Grid> {
   }
 }
 
-class _Fade extends StatelessWidget {
-  final double _height;
-  final double _cell;
-  final Widget child;
-
-  const _Fade({required this._height, required this._cell, required this.child});
-
+class const _Fade({required final double _height, required final double _cell, required final Widget child})
+    extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final viewport = _Viewport.of(context);
@@ -379,46 +359,45 @@ class _Fade extends StatelessWidget {
 /// Controls a calendar's day picker.
 class FCalendarDayPickerController extends GridController {
   /// Creates a [FCalendarDayPickerController].
-  FCalendarDayPickerController({
-    required super.start,
-    required super.end,
-    required super.selectable,
-    required super.initial,
-    super.focused,
-  }) : super(
-         columns: 7,
-         focusable: (month, date) {
-           final last = month.lastDayOfMonth;
-           if (date.day <= last.day) {
-             final preferred = DateTime.utc(month.year, month.month, date.day);
-             if (selectable(preferred)) {
-               return preferred;
-             }
-           }
+  new({required super.start, required super.end, required super.selectable, required super.initial, super.focused})
+    : super(
+        columns: 7,
+        focusable: (month, date) {
+          final last = month.lastDayOfMonth;
+          if (date.day <= last.day) {
+            final preferred = DateTime.utc(month.year, month.month, date.day);
+            if (selectable(preferred)) {
+              return preferred;
+            }
+          }
 
-           for (var day = month; !day.isAfter(last); day = day.plus(days: 1)) {
-             if (selectable(day)) {
-               return day;
-             }
-           }
+          for (var day = month; !day.isAfter(last); day = day.plus(days: 1)) {
+            if (selectable(day)) {
+              return day;
+            }
+          }
 
-           return null;
-         },
-         step: (date, amount) => date.plus(days: amount),
-         from: (date) => (date.year - start.year) * 12 + (date.month - start.month),
-         to: (page) => .utc(start.year, start.month + page),
-       );
+          return null;
+        },
+        step: (date, amount) => date.plus(days: amount),
+        from: (date) => (date.year - start.year) * 12 + (date.month - start.month),
+        to: (page) => .utc(start.year, start.month + page),
+      );
 }
 
 /// A day picker's style.
-class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunctions {
-  /// The spacing between the header and the day picker. Defaults to 0. Does nothing if there is no header.
-  @override
-  final double headerSpacing;
-
+class const FCalendarDayPickerStyle({
   /// The text style for the days of the weekday headers.
-  @override
-  final TextStyle weekdayTextStyle;
+  @override required final TextStyle weekdayTextStyle,
+
+  /// The styles of the day tiles.
+  @override required final FCalendarDayStyles dayStyles,
+
+  /// The size of each day. Defaults to [FSizes.calendar].
+  @override required final Size daySize,
+
+  /// The spacing between the header and the day picker. Defaults to 0. Does nothing if there is no header.
+  @override final double headerSpacing = 0,
 
   /// The starting day of the week. Defaults to the current locale's preferred starting day.
   ///
@@ -426,36 +405,20 @@ class FCalendarDayPickerStyle with Diagnosticable, _$FCalendarDayPickerStyleFunc
   /// Throws [AssertionError] if:
   /// * [firstDayOfWeek] < [DateTime.monday]
   /// * [DateTime.sunday] < [firstDayOfWeek]
-  @override
-  final int? firstDayOfWeek;
+  @override final int? firstDayOfWeek,
 
-  /// The styles of the day tiles.
-  @override
-  final FCalendarDayStyles dayStyles;
-
-  /// The size of each day. Defaults to [FSizes.calendar].
-  @override
-  final Size daySize;
-
-  /// The vertical spacing between days in the day picker. Defaults to 4.
-  @override
-  final double daySpacing;
-
+  /// The vertical spacing between days in the day picker. Defaults to 2.
+  @override final double daySpacing = 2,
+}) with Diagnosticable, _$FCalendarDayPickerStyleFunctions {
   /// Creates a [FCalendarDayPickerStyle].
-  const FCalendarDayPickerStyle({
-    required this.weekdayTextStyle,
-    required this.dayStyles,
-    required this.daySize,
-    this.headerSpacing = 0,
-    this.firstDayOfWeek,
-    this.daySpacing = 2,
-  }) : assert(
-         firstDayOfWeek == null || (DateTime.monday <= firstDayOfWeek && firstDayOfWeek <= DateTime.sunday),
-         'firstDayOfWeek ($firstDayOfWeek) must be between DateTime.monday (1) and DateTime.sunday (7)',
-       );
+  this
+    : assert(
+        firstDayOfWeek == null || (DateTime.monday <= firstDayOfWeek && firstDayOfWeek <= DateTime.sunday),
+        'firstDayOfWeek ($firstDayOfWeek) must be between DateTime.monday (1) and DateTime.sunday (7)',
+      );
 
   /// Creates a [FCalendarDayPickerStyle] that inherits its properties.
-  factory FCalendarDayPickerStyle.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,

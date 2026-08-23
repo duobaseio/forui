@@ -12,7 +12,7 @@ sealed class FResizableControl with Diagnosticable, _$FResizableControlMixin {
   ///
   /// ## Contract
   /// Throws [AssertionError] if [controller] and [onResizeUpdate]/[onResizeEnd] are both provided.
-  const factory FResizableControl.managed({
+  const factory managed({
     FResizableController? controller,
     ValueChanged<List<FResizableRegionData>>? onResizeUpdate,
     ValueChanged<List<FResizableRegionData>>? onResizeEnd,
@@ -28,13 +28,13 @@ sealed class FResizableControl with Diagnosticable, _$FResizableControlMixin {
   ///
   /// ## Contract
   /// Throws [AssertionError] if [controller] and [onResizeUpdate]/[onResizeEnd] are both provided.
-  const factory FResizableControl.managedCascade({
+  const factory managedCascade({
     FResizableController? controller,
     ValueChanged<List<FResizableRegionData>>? onResizeUpdate,
     ValueChanged<UnmodifiableListView<FResizableRegionData>>? onResizeEnd,
   }) = _ManagedCascade;
 
-  const FResizableControl._();
+  const new _();
 
   (FResizableController, bool) _update(FResizableControl old, FResizableController controller, VoidCallback callback);
 }
@@ -53,14 +53,14 @@ abstract class FResizableManagedControl extends FResizableControl with _$FResiza
   final ValueChanged<List<FResizableRegionData>>? onResizeUpdate;
 
   /// Creates a [FResizableManagedControl].
-  const FResizableManagedControl({this.controller, this.onResizeUpdate}) : super._();
+  const new({this.controller, this.onResizeUpdate}) : super._();
 }
 
 class _Managed extends FResizableManagedControl {
   /// Called after a resizable region and its neighbours have been resized.
   final ValueChanged<List<FResizableRegionData>>? onResizeEnd;
 
-  const _Managed({super.controller, super.onResizeUpdate, this.onResizeEnd})
+  const new({super.controller, super.onResizeUpdate, this.onResizeEnd})
     : assert(
         controller == null || onResizeUpdate == null,
         'Cannot provide both controller and onResizeUpdate. Pass onResizeUpdate to the controller instead.',
@@ -97,7 +97,7 @@ class _ManagedCascade extends FResizableManagedControl {
   /// Called after a resizable region and its neighbours have been resized.
   final ValueChanged<UnmodifiableListView<FResizableRegionData>>? onResizeEnd;
 
-  const _ManagedCascade({super.controller, super.onResizeUpdate, this.onResizeEnd})
+  const new({super.controller, super.onResizeUpdate, this.onResizeEnd})
     : assert(
         controller == null || onResizeUpdate == null,
         'Cannot provide both controller and onResizeUpdate. Pass onResizeUpdate to the controller instead.',

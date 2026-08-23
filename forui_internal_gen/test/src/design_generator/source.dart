@@ -2,7 +2,7 @@ const source = r'''
 import 'dart:ui';
 import 'package:collection/collection.dart';
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/annotations.dart';
 import 'package:forui/src/theme/delta.dart';
@@ -30,10 +30,12 @@ class FGoldenStyle with Diagnosticable, _$FGoldenStyleFunctions {
   final EdgeInsets edgeInsets;
   final EdgeInsetsDirectional edgeInsetsDirectional;
   final EdgeInsetsGeometry edgeInsetsGeometry;
+  final IconData iconData;
   final IconThemeData iconThemeData;
   final TextStyle textStyle;
   final List<BoxShadow> boxShadows;
   final List<Shadow> shadows;
+  final Set<ThemeExtension<dynamic>> extensions;
   final FVariants<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration, BoxDecorationDelta> boxDecorationVariants;
   final FVariants<FGoldenVariantConstraint, FGoldenVariant, BoxDecoration?, BoxDecorationDelta> nullableBoxDecorationVariants;
   final FVariants<FGoldenVariantConstraint, FGoldenVariant, Decoration, DecorationDelta> decorationVariants;
@@ -64,10 +66,12 @@ class FGoldenStyle with Diagnosticable, _$FGoldenStyleFunctions {
     required this.edgeInsets,
     required this.edgeInsetsDirectional,
     required this.edgeInsetsGeometry,
+    required this.iconData,
     required this.iconThemeData,
     required this.textStyle,
     required this.boxShadows,
     required this.shadows,
+    required this.extensions,
     required this.boxDecorationVariants,
     required this.nullableBoxDecorationVariants,
     required this.decorationVariants,
@@ -97,6 +101,19 @@ class FGoldenNestedMotion with Diagnosticable, _$FGoldenNestedMotionFunctions {
   final Curve curve;
 
   FGoldenNestedMotion({required this.someDouble, required this.duration, required this.curve});
+}
+
+class const FGoldenPrimaryStyle({
+  /// This is a field's summary.
+  ///
+  /// This is more information about a field.
+  required final double someDouble,
+  required final FVariants<FGoldenVariantConstraint, FGoldenVariant, TextStyle, TextStyleDelta> textStyleVariants,
+  required final FVariants<FGoldenVariantConstraint, FGoldenVariant, Color, Delta> colorVariants,
+  required final FGoldenNestedStyle nestedStyle,
+}) with Diagnosticable, _$FGoldenPrimaryStyleFunctions {
+  /// Creates a [FGoldenPrimaryStyle].
+  this;
 }
 
 class FGoldenNestedStyle with Diagnosticable, _$FGoldenNestedStyleFunctions {}

@@ -45,7 +45,7 @@ class FDivider extends StatelessWidget {
   final Axis axis;
 
   /// Creates a [FDivider].
-  const FDivider({this.style = const .context(), this.axis = .horizontal, super.key});
+  const new({this.style = const .context(), this.axis = .horizontal, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -72,10 +72,10 @@ class FDivider extends StatelessWidget {
 
 /// The [FDivider] styles.
 extension type FDividerStyles(
-  FVariants<FDividerAxisVariantConstraint, FDividerAxisVariant, FDividerStyle, FDividerStyleDelta> _
+  FVariants<FDividerAxisVariantConstraint, FDividerAxisVariant, FDividerStyle, FDividerStyleDelta> _,
 ) implements FVariants<FDividerAxisVariantConstraint, FDividerAxisVariant, FDividerStyle, FDividerStyleDelta> {
   /// Creates a [FDividerStyles] that inherits its properties.
-  FDividerStyles.inherit({required FColors colors, required FStyle style})
+  new inherit({required FColors colors, required FStyle style})
     : this(
         .from(
           FDividerStyle(
@@ -99,22 +99,14 @@ extension type FDividerStyles(
 /// The divider style.
 ///
 /// The [padding] property can be used to indent the start and end of the separating line.
-class FDividerStyle with Diagnosticable, _$FDividerStyleFunctions {
-  /// The default padding for horizontal and vertical dividers.
-  static const defaultPadding = (
-    horizontalStyle: EdgeInsets.symmetric(vertical: 16),
-    verticalStyle: EdgeInsets.symmetric(horizontal: 16),
-  );
-
+class FDividerStyle({
   /// The color of the separating line.
-  @override
-  final Color color;
+  @override required final Color color,
 
   /// The padding surrounding the separating line. Defaults to the appropriate padding in [defaultPadding].
   ///
   /// This property can be used to indent the start and end of the separating line.
-  @override
-  final EdgeInsetsGeometry padding;
+  @override required final EdgeInsetsGeometry padding,
 
   /// The width (thickness) of the separating line. Defaults to 1.
   ///
@@ -122,10 +114,14 @@ class FDividerStyle with Diagnosticable, _$FDividerStyleFunctions {
   /// Throws [AssertionError] if:
   /// * `width` <= 0.0
   /// * `width` is Nan
-  @override
-  final double width;
-
+  @override final double width = 1,
+}) with Diagnosticable, _$FDividerStyleFunctions {
   /// Creates a [FDividerStyle].
-  FDividerStyle({required this.color, required this.padding, this.width = 1})
-    : assert(0 < width, 'width ($width) must be > 0');
+  this : assert(0 < width, 'width ($width) must be > 0');
+
+  /// The default padding for horizontal and vertical dividers.
+  static const defaultPadding = (
+    horizontalStyle: EdgeInsets.symmetric(vertical: 16),
+    verticalStyle: EdgeInsets.symmetric(horizontal: 16),
+  );
 }

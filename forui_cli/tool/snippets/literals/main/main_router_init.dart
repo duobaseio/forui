@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:forui/forui.dart';
 
 import '../theme.dart';
@@ -8,7 +8,7 @@ void main() {
 }
 
 class Application extends StatelessWidget {
-  const Application({super.key});
+  const new({super.key});
 
   @override
   Widget build(BuildContext context) => MaterialApp.router(

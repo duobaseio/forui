@@ -1,6 +1,6 @@
 import 'package:analyzer/dart/element/element.dart';
 import 'package:build/build.dart';
-import 'package:code_builder/code_builder.dart' hide RecordType;
+import 'package:forui_internal_gen/src/emitter.dart';
 import 'package:forui_internal_gen/src/source/delta_class.dart';
 import 'package:forui_internal_gen/src/source/design_functions_mixin.dart';
 import 'package:forui_internal_gen/src/source/design_transformations_extension.dart';
@@ -14,7 +14,7 @@ final _motion = RegExp(r'^F.*(Motion)$');
 
 /// Generates corresponding style/motion mixins and extensions that implement several commonly used operations.
 class DesignGenerator extends Generator {
-  final _emitter = DartEmitter(orderDirectives: true, useNullSafetySyntax: true);
+  final _emitter = ShorthandEmitter(orderDirectives: true, useNullSafetySyntax: true);
 
   @override
   Future<String?> generate(LibraryReader library, BuildStep step) async {

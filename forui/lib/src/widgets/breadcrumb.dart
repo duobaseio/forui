@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
@@ -54,7 +54,7 @@ class FBreadcrumb extends StatelessWidget {
   final Widget? divider;
 
   /// Creates an [FBreadcrumb].
-  const FBreadcrumb({required this.children, this.style = const .context(), this.divider, super.key});
+  const new({required this.children, this.style = const .context(), this.divider, super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -91,7 +91,7 @@ class FBreadcrumbItemData extends InheritedWidget {
   final FBreadcrumbStyle style;
 
   /// Creates a [FBreadcrumbItemData].
-  const FBreadcrumbItemData({required this.style, required super.child, super.key});
+  const new({required this.style, required super.child, super.key});
 
   @override
   bool updateShouldNotify(FBreadcrumbItemData old) => style != old.style;
@@ -106,7 +106,7 @@ class FBreadcrumbItemData extends InheritedWidget {
 /// A breadcrumb item.
 abstract interface class FBreadcrumbItem extends Widget {
   /// Creates a crumb that typically represents a single item in the navigation path.
-  const factory FBreadcrumbItem({
+  const factory({
     required Widget child,
     bool current,
     bool autofocus,
@@ -124,7 +124,7 @@ abstract interface class FBreadcrumbItem extends Widget {
   ///
   /// It is typically used to keep the breadcrumb compact and reduce the number of items displayed. When tapped, it
   /// displays a popover menu with the collapsed items.
-  const factory FBreadcrumbItem.collapsed({
+  const factory collapsed({
     required List<FItemGroup> menu,
     Widget? icon,
     FPopoverMenuStyleDelta popoverMenuStyle,
@@ -161,7 +161,7 @@ abstract interface class FBreadcrumbItem extends Widget {
   ///
   /// It is typically used to keep the breadcrumb compact and reduce the number of items displayed. When tapped, it
   /// displays a popover menu with the collapsed items.
-  const factory FBreadcrumbItem.collapsedTiles({
+  const factory collapsedTiles({
     required List<FTileGroup> menu,
     Widget? icon,
     FPopoverMenuStyleDelta popoverMenuStyle,
@@ -192,29 +192,20 @@ abstract interface class FBreadcrumbItem extends Widget {
   }) = _CollapsedCrumb.tiles;
 }
 
-// ignore: avoid_implementing_value_types
-class _Crumb extends StatelessWidget implements FBreadcrumbItem {
-  final bool current;
-  final bool autofocus;
-  final FocusNode? focusNode;
-  final ValueChanged<bool>? onFocusChange;
-  final ValueChanged<bool>? onHoverChange;
-  final FTappableVariantChangeCallback? onVariantChange;
-  final VoidCallback? onPress;
-  final Widget child;
-
-  const _Crumb({
-    required this.child,
-    this.onPress,
-    this.current = false,
-    this.autofocus = false,
-    this.focusNode,
-    this.onFocusChange,
-    this.onHoverChange,
-    this.onVariantChange,
-    super.key,
-  });
-
+class const _Crumb({
+  required final Widget child,
+  final VoidCallback? onPress,
+  final bool current = false,
+  final bool autofocus = false,
+  final FocusNode? focusNode,
+  final ValueChanged<bool>? onFocusChange,
+  final ValueChanged<bool>? onHoverChange,
+  final FTappableVariantChangeCallback? onVariantChange,
+  super.key,
+}) extends StatelessWidget
+    implements
+        // ignore: avoid_implementing_value_types
+        FBreadcrumbItem {
   @override
   Widget build(BuildContext context) {
     final style = FBreadcrumbItemData.of(context).style;
@@ -289,7 +280,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
   final String? semanticsLabel;
   final String? menuSemanticsLabel;
 
-  const _CollapsedCrumb({
+  const new({
     required List<FItemGroup> menu,
     this.icon,
     this.popoverMenuStyle = const .context(),
@@ -321,7 +312,7 @@ class _CollapsedCrumb extends StatefulWidget implements FBreadcrumbItem {
   }) : itemMenu = menu,
        tileMenu = null;
 
-  const _CollapsedCrumb.tiles({
+  const new tiles({
     required List<FTileGroup> menu,
     this.icon,
     this.popoverMenuStyle = const .context(),
@@ -494,43 +485,30 @@ class _CollapsedCrumbState extends State<_CollapsedCrumb> with SingleTickerProvi
 }
 
 /// The [FBreadcrumb] styles.
-class FBreadcrumbStyle with Diagnosticable, _$FBreadcrumbStyleFunctions {
+class FBreadcrumbStyle({
   /// The text style.
-  @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> textStyle;
+  @override required final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> textStyle,
 
   /// The divider icon style.
-  @override
-  final IconThemeData iconStyle;
-
-  /// The padding for breadcrumb items.
-  @override
-  final EdgeInsetsGeometry padding;
-
-  /// The padding for collapsed breadcrumb items.
-  @override
-  final EdgeInsetsGeometry collapsedPadding;
+  @override required final IconThemeData iconStyle,
 
   /// The tappable's style.
-  @override
-  final FTappableStyle tappableStyle;
+  @override required final FTappableStyle tappableStyle,
 
   /// The focused outline style.
-  @override
-  final FFocusedOutlineStyle focusedOutlineStyle;
+  @override required final FFocusedOutlineStyle focusedOutlineStyle,
 
+  /// The padding for breadcrumb items.
+  @override required final EdgeInsetsGeometry padding,
+
+  /// The padding for collapsed breadcrumb items.
+  @override required final EdgeInsetsGeometry collapsedPadding,
+}) with Diagnosticable, _$FBreadcrumbStyleFunctions {
   /// Creates a [FBreadcrumbStyle].
-  FBreadcrumbStyle({
-    required this.textStyle,
-    required this.iconStyle,
-    required this.tappableStyle,
-    required this.focusedOutlineStyle,
-    required this.padding,
-    required this.collapsedPadding,
-  });
+  this;
 
   /// Creates a [FBreadcrumbStyle] that inherits its properties.
-  factory FBreadcrumbStyle.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,

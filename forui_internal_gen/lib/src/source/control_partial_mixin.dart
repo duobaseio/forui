@@ -13,7 +13,7 @@ class ControlPartialMixin extends FunctionsMixin {
   final ClassElement supertype;
 
   /// Creates a new [ControlPartialMixin].
-  ControlPartialMixin({required BuildStep step, required ClassElement type, required this.supertype})
+  new({required BuildStep step, required ClassElement type, required this.supertype})
     : super(step, type);
 
   @override

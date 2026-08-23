@@ -11,7 +11,7 @@ class _InputTimeField extends FTimeField {
   final MouseCursor? mouseCursor;
   final bool canRequestFocus;
 
-  const _InputTimeField({
+  const new({
     this.textInputAction,
     this.textAlign = .start,
     this.textAlignVertical,

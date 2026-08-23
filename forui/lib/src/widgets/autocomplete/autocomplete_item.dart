@@ -124,7 +124,7 @@ class FAutocompleteSection<T> extends StatelessWidget with FAutocompleteItemMixi
   /// {@endtemplate}
   ///
   /// For more control over the appearance of individual items, use [FAutocompleteSection.rich].
-  FAutocompleteSection({
+  new({
     required Widget label,
     required List<T> items,
     FAutocompleteSectionStyleDelta style = const .context(),
@@ -143,7 +143,7 @@ class FAutocompleteSection<T> extends StatelessWidget with FAutocompleteItemMixi
   /// {@template forui.widgets.FAutocompleteSection.rich}
   /// Creates a [FAutocompleteSection] with the given [children].
   /// {@endtemplate}
-  const FAutocompleteSection.rich({
+  const new rich({
     required this.label,
     required this.children,
     this.style = const .context(),
@@ -206,47 +206,40 @@ class FAutocompleteSection<T> extends StatelessWidget with FAutocompleteItemMixi
 }
 
 /// A [FAutocompleteSection]'s style.
-class FAutocompleteSectionStyle with Diagnosticable, _$FAutocompleteSectionStyleFunctions {
+class FAutocompleteSectionStyle({
   /// The enabled label's text style.
   @override
-  final FVariants<FAutocompleteSectionVariantConstraint, FAutocompleteSectionVariant, TextStyle, TextStyleDelta>
-  labelTextStyle;
-
-  /// The padding around the label. Defaults to `EdgeInsetsDirectional.only(start: 14, top: 6, bottom: 6, end: 10)`.
-  @override
-  final EdgeInsetsGeometry labelPadding;
+  required final FVariants<
+    FAutocompleteSectionVariantConstraint,
+    FAutocompleteSectionVariant,
+    TextStyle,
+    TextStyleDelta
+  >
+  labelTextStyle,
 
   /// The color of the divider between items in this section.
-  @override
-  final FVariants<FItemGroupVariantConstraint, FItemGroupVariant, Color, Delta> dividerColor;
+  @override required final FVariants<FItemGroupVariantConstraint, FItemGroupVariant, Color, Delta> dividerColor,
 
   /// The width of the divider between items in this section.
-  @override
-  final double dividerWidth;
+  @override required final double dividerWidth,
 
   /// The section's items' style.
-  @override
-  final FItemStyle itemStyle;
+  @override required final FItemStyle itemStyle,
+
+  /// The padding around the label. Defaults to `EdgeInsetsDirectional.only(start: 14, top: 6, bottom: 6, end: 10)`.
+  @override final EdgeInsetsGeometry labelPadding = const .directional(start: 14, top: 6, bottom: 6, end: 10),
 
   /// The spacing below the section. Defaults to 4.
   ///
   /// ## Contract
   /// Throws [AssertionError] if [spacing] is negative.
-  @override
-  final double spacing;
-
+  @override final double spacing = 4,
+}) with Diagnosticable, _$FAutocompleteSectionStyleFunctions {
   /// Creates a [FAutocompleteSectionStyle].
-  FAutocompleteSectionStyle({
-    required this.labelTextStyle,
-    required this.dividerColor,
-    required this.dividerWidth,
-    required this.itemStyle,
-    this.labelPadding = const .directional(start: 14, top: 6, bottom: 6, end: 10),
-    this.spacing = 4,
-  }) : assert(0 <= spacing, 'spacing ($spacing) must be >= 0');
+  this : assert(0 <= spacing, 'spacing ($spacing) must be >= 0');
 
   /// Creates a [FAutocompleteSectionStyle] that inherits its properties.
-  factory FAutocompleteSectionStyle.inherit({
+  factory inherit({
     required FColors colors,
     required FStyle style,
     required FTypography typography,
@@ -332,7 +325,7 @@ abstract class FAutocompleteItem<T> extends StatelessWidget with FAutocompleteIt
   ///
   /// For even more control over the item's appearance, use [FAutocompleteItem.raw].
   /// {@endtemplate}
-  factory FAutocompleteItem({
+  factory({
     required T value,
     FItemStyleDelta style,
     bool? enabled,
@@ -349,7 +342,7 @@ abstract class FAutocompleteItem<T> extends StatelessWidget with FAutocompleteIt
   /// members when using dot-shorthands.
   ///
   /// For even more control over the item's appearance, use [FAutocompleteItem.raw].
-  factory FAutocompleteItem.item({
+  factory item({
     required T value,
     FItemStyleDelta style,
     bool? enabled,
@@ -366,7 +359,7 @@ abstract class FAutocompleteItem<T> extends StatelessWidget with FAutocompleteIt
   /// This provides full control over the item's layout without the structured
   /// title/subtitle/prefix/suffix layout of the default constructor.
   /// {@endtemplate}
-  factory FAutocompleteItem.raw({
+  factory raw({
     required Widget child,
     required T value,
     FItemStyleDelta style,
@@ -375,7 +368,7 @@ abstract class FAutocompleteItem<T> extends StatelessWidget with FAutocompleteIt
     Key? key,
   }) = _RawAutocompleteItem<T>;
 
-  const FAutocompleteItem._({required this.value, this.style = const .context(), this.enabled, this.prefix, super.key});
+  const new _({required this.value, this.style = const .context(), this.enabled, this.prefix, super.key});
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -392,7 +385,7 @@ class _AutocompleteItem<T> extends FAutocompleteItem<T> {
   final Widget? title;
   final Widget? suffix;
 
-  const _AutocompleteItem({
+  const new({
     required super.value,
     super.style,
     super.enabled,
@@ -430,14 +423,8 @@ class _AutocompleteItem<T> extends FAutocompleteItem<T> {
 class _RawAutocompleteItem<T> extends FAutocompleteItem<T> {
   final Widget child;
 
-  const _RawAutocompleteItem({
-    required this.child,
-    required super.value,
-    super.style,
-    super.enabled,
-    super.prefix,
-    super.key,
-  }) : super._();
+  const new({required this.child, required super.value, super.style, super.enabled, super.prefix, super.key})
+    : super._();
 
   @override
   Widget build(BuildContext context) {

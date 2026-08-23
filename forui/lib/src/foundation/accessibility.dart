@@ -37,7 +37,7 @@ final class FAccessibility with Diagnosticable {
   final bool focusHighlight;
 
   /// Creates a [FAccessibility].
-  const FAccessibility({required this.accessibleNavigation, required this.motion, required this.focusHighlight});
+  const new({required this.accessibleNavigation, required this.motion, required this.focusHighlight});
 
   /// Returns a copy of this [FAccessibility] with the given fields replaced.
   FAccessibility copyWith({bool? accessibleNavigation, FAccessibilityMotion? motion, bool? focusHighlight}) =>
@@ -103,7 +103,7 @@ class FAccessibilityScope extends StatefulWidget {
   final Widget child;
 
   /// Creates an [FAccessibilityScope].
-  const FAccessibilityScope({required this.child, this.data, super.key});
+  const new({required this.child, this.data, super.key});
 
   @override
   State<FAccessibilityScope> createState() => _State();
@@ -176,7 +176,7 @@ extension type FAccessibilityContext(BuildContext context) {
 class _AccessibilityScope extends InheritedModel<_Aspect> {
   final FAccessibility data;
 
-  const _AccessibilityScope({required this.data, required super.child});
+  const new({required this.data, required super.child});
 
   @override
   InheritedModelElement<_Aspect> createElement() => AccessibilityScopeElement(this);
@@ -205,7 +205,7 @@ class AccessibilityScopeElement extends InheritedModelElement<_Aspect> {
 
   final ValueNotifier<FAccessibility> notifier;
 
-  AccessibilityScopeElement(_AccessibilityScope super.widget) : notifier = ValueNotifier(widget.data);
+  new(_AccessibilityScope super.widget) : notifier = ValueNotifier(widget.data);
 
   @override
   // ignore: library_private_types_in_public_api

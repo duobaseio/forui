@@ -17,7 +17,7 @@ class _TooltipControllerHook extends Hook<FTooltipController> {
   final TickerProvider vsync;
   final bool shown;
 
-  const _TooltipControllerHook({required this.vsync, required this.shown, super.keys});
+  const new({required this.vsync, required this.shown, super.keys});
 
   @override
   _TooltipControllerHookState createState() => .new();

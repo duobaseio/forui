@@ -10,7 +10,7 @@ class FSelectController<T> extends ValueNotifier<T?> {
   final bool toggleable;
 
   /// Creates a [FSelectController].
-  FSelectController({T? value, this.toggleable = false}) : super(value);
+  new({T? value, this.toggleable = false}) : super(value);
 
   @override
   set value(T? value) => super.value = toggleable && super.value == value ? null : value;
@@ -20,7 +20,7 @@ class _ProxyController<T> extends FSelectController<T> {
   T? _unsynced;
   ValueChanged<T?> _onChange;
 
-  _ProxyController({required super.value, required this._onChange}) : _unsynced = value;
+  new({required super.value, required this._onChange}) : _unsynced = value;
 
   void _update(T? newValue, ValueChanged<T?> onChange) {
     _onChange = onChange;
@@ -47,20 +47,16 @@ class _ProxyController<T> extends FSelectController<T> {
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FSelectControl<T> with Diagnosticable, _$FSelectControlMixin<T> {
   /// Creates a [FSelectControl].
-  const factory FSelectControl.managed({
-    FSelectController<T>? controller,
-    T? initial,
-    bool toggleable,
-    ValueChanged<T?>? onChange,
-  }) = FSelectManagedControl<T>;
+  const factory managed({FSelectController<T>? controller, T? initial, bool toggleable, ValueChanged<T?>? onChange}) =
+      FSelectManagedControl<T>;
 
   /// Creates a [FSelectControl] for controlling select using lifted state.
   ///
   /// The [value] parameter contains the current selected value.
   /// The [onChange] callback is invoked when the user selects an item.
-  const factory FSelectControl.lifted({required T? value, required ValueChanged<T?> onChange}) = _Lifted<T>;
+  const factory lifted({required T? value, required ValueChanged<T?> onChange}) = _Lifted<T>;
 
-  const FSelectControl._();
+  const new _();
 
   (FSelectController<T>, bool) _update(FSelectControl<T> old, FSelectController<T> controller, VoidCallback callback);
 }
@@ -93,7 +89,7 @@ class FSelectManagedControl<T> extends FSelectControl<T> with Diagnosticable, _$
   final ValueChanged<T?>? onChange;
 
   /// Creates a [FSelectControl].
-  const FSelectManagedControl({this.controller, this.initial, this.toggleable, this.onChange})
+  const new({this.controller, this.initial, this.toggleable, this.onChange})
     : assert(
         controller == null || initial == null,
         'Cannot provide both controller and initial. Pass initial value to the controller.',
@@ -115,7 +111,7 @@ class _Lifted<T> extends FSelectControl<T> with _$_LiftedMixin<T> {
   @override
   final ValueChanged<T?> onChange;
 
-  const _Lifted({required this.value, required this.onChange}) : super._();
+  const new({required this.value, required this.onChange}) : super._();
 
   @override
   FSelectController<T> createController() => _ProxyController(value: value, onChange: onChange);

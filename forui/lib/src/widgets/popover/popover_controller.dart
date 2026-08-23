@@ -25,7 +25,7 @@ class FPopoverController extends FChangeNotifier {
   FPopoverMotion _motion;
 
   /// Creates a [FPopoverController] with the given [vsync] and [shown].
-  FPopoverController({required TickerProvider vsync, bool shown = false}) : _motion = const FPopoverMotion() {
+  new({required TickerProvider vsync, bool shown = false}) : _motion = const FPopoverMotion() {
     if (shown) {
       _overlay.show();
     }
@@ -138,7 +138,7 @@ class _ProxyController extends FPopoverController {
   int _monotonic;
   ValueChanged<bool> _onChange;
 
-  _ProxyController(this._onChange, {required super.vsync, super.shown}) : _monotonic = 0;
+  new(this._onChange, {required super.vsync, super.shown}) : _monotonic = 0;
 
   void update(bool shown, ValueChanged<bool> onChange) {
     _onChange = onChange;
@@ -173,16 +173,16 @@ class _ProxyController extends FPopoverController {
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FPopoverControl with Diagnosticable, _$FPopoverControlMixin {
   /// Creates a [FPopoverControl].
-  const factory FPopoverControl.managed({FPopoverController? controller, bool? initial, ValueChanged<bool>? onChange}) =
+  const factory managed({FPopoverController? controller, bool? initial, ValueChanged<bool>? onChange}) =
       FPopoverManagedControl;
 
   /// Creates a [FPopoverControl] for controlling a popover using lifted state.
   ///
   /// The [shown] parameter indicates whether the popover is currently shown.
   /// The [onChange] callback is invoked when the user triggers a show/hide action.
-  const factory FPopoverControl.lifted({required bool shown, required ValueChanged<bool> onChange}) = _Lifted;
+  const factory lifted({required bool shown, required ValueChanged<bool> onChange}) = _Lifted;
 
-  const FPopoverControl._();
+  const new _();
 
   (FPopoverController, bool) _update(
     FPopoverControl old,
@@ -213,7 +213,7 @@ class FPopoverManagedControl extends FPopoverControl with Diagnosticable, _$FPop
   final ValueChanged<bool>? onChange;
 
   /// Creates a [FPopoverControl].
-  const FPopoverManagedControl({this.controller, this.initial, this.onChange})
+  const new({this.controller, this.initial, this.onChange})
     : assert(
         controller == null || initial == null,
         'Cannot provide both controller and initially shown. Pass initially shown to the controller instead.',
@@ -231,7 +231,7 @@ class _Lifted extends FPopoverControl with _$_LiftedMixin {
   @override
   final ValueChanged<bool> onChange;
 
-  const _Lifted({required this.shown, required this.onChange}) : super._();
+  const new({required this.shown, required this.onChange}) : super._();
 
   @override
   FPopoverController createController(TickerProvider vsync) => _ProxyController(vsync: vsync, shown: shown, onChange);

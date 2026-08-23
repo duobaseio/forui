@@ -12,7 +12,7 @@ class ThemeCommand extends ForuiCommand {
   @override
   final description = 'Manage your Forui themes.';
 
-  ThemeCommand(Configuration configuration) {
+  new(Configuration configuration) {
     addSubcommand(ThemeCreateCommand(configuration));
   }
 }

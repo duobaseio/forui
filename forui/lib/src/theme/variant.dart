@@ -105,16 +105,11 @@ sealed class FVariantConstraint {
 /// Unlike [WidgetState], it is extended by widget-specific variants, allowing widgets to define their own states.
 sealed class FVariant implements FVariantConstraint {
   /// Creates a variant.
-  const factory FVariant(int priority, String value) = Value;
+  const factory(int priority, String value) = Value;
 }
 
 @internal
-class Value implements FVariant {
-  final int _tier;
-  final String _value;
-
-  const Value(this._tier, this._value);
-
+class const Value(final int _tier, final String _value) implements FVariant {
   @override
   bool satisfiedBy(Set<FVariant> variants) => variants.contains(this);
 
@@ -136,12 +131,7 @@ class Value implements FVariant {
 }
 
 @internal
-class And implements FVariantConstraint {
-  final FVariantConstraint _left;
-  final FVariantConstraint _right;
-
-  const And(this._left, this._right);
-
+class const And(final FVariantConstraint _left, final FVariantConstraint _right) implements FVariantConstraint {
   @override
   bool satisfiedBy(Set<FVariant> variants) => _left.satisfiedBy(variants) && _right.satisfiedBy(variants);
 
@@ -166,11 +156,7 @@ class And implements FVariantConstraint {
 }
 
 @internal
-class Not implements FVariantConstraint {
-  final FVariant _operand;
-
-  const Not(this._operand);
-
+class const Not(final FVariant _operand) implements FVariantConstraint {
   @override
   bool satisfiedBy(Set<FVariant> variants) => !_operand.satisfiedBy(variants);
 

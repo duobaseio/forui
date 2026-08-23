@@ -97,7 +97,7 @@ class FResizable extends StatefulWidget {
   final List<FResizableRegion> children;
 
   /// Creates a [FResizable].
-  const FResizable({
+  const new({
     required this.axis,
     required this.children,
     this.control = const .managedCascade(),
@@ -468,7 +468,7 @@ class _FResizableState extends State<FResizable> {
 /// A [FResizable]'s style.
 extension type FResizableStyles(
   FVariants<FResizableAxisVariantConstraint, FResizableAxisVariant, FResizableDividerStyle, FResizableDividerStyleDelta>
-  _
+  _,
 ) implements
     FVariants<
       FResizableAxisVariantConstraint,
@@ -477,7 +477,7 @@ extension type FResizableStyles(
       FResizableDividerStyleDelta
     > {
   /// Creates a [FResizableStyles] that inherits its properties.
-  factory FResizableStyles.inherit({
+  factory inherit({
     required FColors colors,
     required FIcons icons,
     required FStyle style,
@@ -530,13 +530,7 @@ class InheritedData extends InheritedWidget {
   final Axis axis;
   final FResizableRegionData data;
 
-  const InheritedData({
-    required this.controller,
-    required this.axis,
-    required this.data,
-    required super.child,
-    super.key,
-  });
+  const new({required this.controller, required this.axis, required this.data, required super.child, super.key});
 
   @override
   bool updateShouldNotify(InheritedData old) => controller != old.controller || axis != old.axis || data != old.data;

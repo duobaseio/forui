@@ -24,7 +24,7 @@ class RawItemContent extends StatelessWidget {
   final Widget? prefix;
   final Widget child;
 
-  const RawItemContent({
+  const new({
     required this.style,
     required this.margin,
     required this.bottom,
@@ -89,36 +89,30 @@ class RawItemContent extends StatelessWidget {
 }
 
 /// An [FItem] raw content's style.
-class FRawItemContentStyle with Diagnosticable, _$FRawItemContentStyleFunctions {
-  /// The content's padding.
-  @override
-  final EdgeInsetsGeometry padding;
-
+class FRawItemContentStyle({
   /// The prefix icon style.
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> prefixIconStyle;
-
-  /// The horizontal spacing between the prefix icon and child. Defaults to 10.
-  ///
-  /// ## Contract
-  /// Throws [AssertionError] if [prefixIconSpacing] is negative.
-  @override
-  final double prefixIconSpacing;
+  required final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta>
+  prefixIconStyle,
 
   /// The child's text style.
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> childTextStyle;
+  required final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> childTextStyle,
 
+  /// The content's padding.
+  @override required final EdgeInsetsGeometry padding,
+
+  /// The horizontal spacing between the prefix icon and child. Defaults to 8.
+  ///
+  /// ## Contract
+  /// Throws [AssertionError] if [prefixIconSpacing] is negative.
+  @override final double prefixIconSpacing = 8,
+}) with Diagnosticable, _$FRawItemContentStyleFunctions {
   /// Creates a [FRawItemContentStyle].
-  FRawItemContentStyle({
-    required this.prefixIconStyle,
-    required this.childTextStyle,
-    required this.padding,
-    this.prefixIconSpacing = 8,
-  }) : assert(0 <= prefixIconSpacing, 'prefixIconSpacing ($prefixIconSpacing) must be >= 0');
+  this : assert(0 <= prefixIconSpacing, 'prefixIconSpacing ($prefixIconSpacing) must be >= 0');
 
   /// Creates a [FRawItemContentStyle] that inherits its properties.
-  FRawItemContentStyle.inherit({
+  new inherit({
     required FColors colors,
     required FTypography typography,
     required Color prefix,

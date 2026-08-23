@@ -8,7 +8,7 @@ class VerticalTitleDialog extends StatelessWidget {
   final Widget title;
   final List<Widget> actions;
 
-  const VerticalTitleDialog({
+  const new({
     required this.title,
     required this.actions,
     this.style = const .context(),

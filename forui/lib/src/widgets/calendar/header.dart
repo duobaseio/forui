@@ -21,7 +21,7 @@ class Header extends StatelessWidget {
   final VoidCallback? onNext;
   final VoidCallback? onPrevious;
 
-  const Header({
+  const new({
     required this.style,
     required this.label,
     required this.semanticsHint,
@@ -34,7 +34,7 @@ class Header extends StatelessWidget {
     super.key,
   }) : navigation = true;
 
-  const Header.single({
+  const new single({
     required this.style,
     required this.label,
     required this.semanticsHint,
@@ -47,7 +47,7 @@ class Header extends StatelessWidget {
        onNext = null,
        onPrevious = null;
 
-  factory Header.day({
+  factory day({
     required FCalendarHeaderStyle style,
     required FLocalizations localizations,
     required DateTime monthYear,
@@ -70,7 +70,7 @@ class Header extends StatelessWidget {
     key: key,
   );
 
-  factory Header.singleDay({
+  factory singleDay({
     required FCalendarHeaderStyle style,
     required FLocalizations localizations,
     required DateTime monthYear,
@@ -87,7 +87,7 @@ class Header extends StatelessWidget {
     key: key,
   );
 
-  factory Header.month({
+  factory month({
     required FCalendarHeaderStyle style,
     required FLocalizations localizations,
     required DateTime year,
@@ -110,7 +110,7 @@ class Header extends StatelessWidget {
     key: key,
   );
 
-  factory Header.singleMonth({
+  factory singleMonth({
     required FCalendarHeaderStyle style,
     required FLocalizations localizations,
     required DateTime year,
@@ -127,7 +127,7 @@ class Header extends StatelessWidget {
     key: key,
   );
 
-  factory Header.year({
+  factory year({
     required FCalendarHeaderStyle style,
     required FLocalizations localizations,
     required DateTime decade,
@@ -210,7 +210,7 @@ class SplitHeader extends StatelessWidget {
   final VoidCallback? onNext;
   final VoidCallback? onPrevious;
 
-  const SplitHeader({
+  const new({
     required this.style,
     required this.localizations,
     required this.date,
@@ -225,7 +225,7 @@ class SplitHeader extends StatelessWidget {
     super.key,
   }) : navigation = true;
 
-  const SplitHeader.single({
+  const new single({
     required this.style,
     required this.localizations,
     required this.date,
@@ -309,21 +309,13 @@ class SplitHeader extends StatelessWidget {
   }
 }
 
-class _Tappable extends StatelessWidget {
-  final FCalendarHeaderStyle style;
-  final String label;
-  final String semanticsHint;
-  final bool shown;
-  final VoidCallback? onPress;
-
-  const _Tappable({
-    required this.style,
-    required this.label,
-    required this.semanticsHint,
-    required this.shown,
-    required this.onPress,
-  });
-
+class const _Tappable({
+  required final FCalendarHeaderStyle style,
+  required final String label,
+  required final String semanticsHint,
+  required final bool shown,
+  required final VoidCallback? onPress,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) => FTappable.static(
     focusedOutlineStyle: style.headerFocusedOutlineStyle,
@@ -365,69 +357,50 @@ class _Tappable extends StatelessWidget {
 /// A calendar header's style.
 ///
 /// All motion is automatically disabled when [FAccessibility.motion] is not [FAccessibilityMotion.all].
-class FCalendarHeaderStyle with Diagnosticable, _$FCalendarHeaderStyleFunctions {
-  /// The padding around the entire header. Defaults to `EdgeInsetsDirectional.only(start: 4)`.
-  @override
-  final EdgeInsetsGeometry padding;
-
+class const FCalendarHeaderStyle({
   /// The month and year tap targets' decoration. Defaults to a [FColors.secondary] background when hovered or pressed.
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, Decoration, DecorationDelta> headerDecoration;
-
-  /// The month and year tap targets' padding. Defaults to `EdgeInsetsDirectional.only(start: 6, end: 2, top: 4,
-  /// bottom: 4)`.
-  @override
-  final EdgeInsetsGeometry tappablePadding;
+  required final FVariants<FTappableVariantConstraint, FTappableVariant, Decoration, DecorationDelta> headerDecoration,
 
   /// The month and year labels' text style.
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> headerTextStyle;
+  required final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> headerTextStyle,
 
   /// The month and year toggle icons' style. Defaults to [FColors.mutedForeground].
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> toggleIconStyle;
+  required final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta>
+  toggleIconStyle,
 
   /// The focused outline style for the header tappable.
-  @override
-  final FFocusedOutlineStyle headerFocusedOutlineStyle;
+  @override required final FFocusedOutlineStyle headerFocusedOutlineStyle,
 
   /// The navigation buttons' style.
-  @override
-  final FButtonStyle buttonStyle;
+  @override required final FButtonStyle buttonStyle,
 
   /// The toggle icon builder. Defaults to [FIcons.chevronRight].
-  @override
-  final FIcon toggleIcon;
+  @override required final FIcon toggleIcon,
 
   /// The previous-month icon builder. Defaults to [FIcons.chevronLeft].
-  @override
-  final FIcon previousIcon;
+  @override required final FIcon previousIcon,
 
   /// The next-month icon builder. Defaults to [FIcons.chevronRight].
-  @override
-  final FIcon nextIcon;
+  @override required final FIcon nextIcon,
+
+  /// The padding around the entire header. Defaults to `EdgeInsets.zero`.
+  @override final EdgeInsetsGeometry padding = .zero,
+
+  /// The month and year tap targets' padding. Defaults to `EdgeInsetsDirectional.only(start: 8, end: 2, top: 4, bottom:
+  /// 4)`.
+  @override final EdgeInsetsGeometry tappablePadding = const .directional(start: 8, end: 2, top: 4, bottom: 4),
 
   /// The arrow turn animation's duration. Defaults to 100ms.
-  @override
-  final Duration animationDuration;
-
+  @override final Duration animationDuration = const Duration(milliseconds: 100),
+}) with Diagnosticable, _$FCalendarHeaderStyleFunctions {
   /// Creates a [FCalendarHeaderStyle].
-  const FCalendarHeaderStyle({
-    required this.headerDecoration,
-    required this.headerTextStyle,
-    required this.toggleIconStyle,
-    required this.headerFocusedOutlineStyle,
-    required this.buttonStyle,
-    required this.toggleIcon,
-    required this.previousIcon,
-    required this.nextIcon,
-    this.padding = .zero,
-    this.tappablePadding = const .directional(start: 8, end: 2, top: 4, bottom: 4),
-    this.animationDuration = const Duration(milliseconds: 100),
-  });
+  this;
 
   /// Creates a [FCalendarHeaderStyle] that inherits its properties.
-  factory FCalendarHeaderStyle.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FIcons icons,

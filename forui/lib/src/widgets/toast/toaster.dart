@@ -196,7 +196,7 @@ final class FToastAlignment {
   final AlignmentGeometry _alignment;
   final Alignment _toastAlignment;
 
-  const FToastAlignment._(this._alignment, this._toastAlignment);
+  const new _(this._alignment, this._toastAlignment);
 
   /// Creates a [FToastAlignment] with the given alignments.
   ///
@@ -220,7 +220,7 @@ final class FToastAlignment {
   ///
   /// ## Contract
   /// Throws [AssertionError] if [toastAlignment] is not between -1 and 1, inclusive.
-  FToastAlignment(this._alignment, double toastAlignment)
+  new(this._alignment, double toastAlignment)
     : assert(
         toastAlignment >= -1 && toastAlignment <= 1,
         'toastAlignment ($toastAlignment) must be between -1 and 1, inclusive.',
@@ -290,7 +290,7 @@ class FToaster extends StatefulWidget {
   final Widget child;
 
   /// Creates a [FToaster] widget.
-  const FToaster({required this.child, this.style = const .context(), super.key});
+  const new({required this.child, this.style = const .context(), super.key});
 
   @override
   State<FToaster> createState() => FToasterState();
@@ -423,27 +423,18 @@ mixin FToasterEntry {
 }
 
 @internal
-class ToasterEntry with FToasterEntry {
+class ToasterEntry(
+  final FToastStyleDelta style,
+  final FToastVariant variant,
+  final Alignment alignment,
+  var List<AxisDirection> swipeToDismiss,
+  final double dismissThreshold,
+  final Duration? duration,
+  final Widget Function(BuildContext context, FToasterEntry entry) builder,
+) with FToasterEntry {
   final GlobalKey key = GlobalKey();
-  final FToastStyleDelta style;
-  final FToastVariant variant;
-  final Alignment alignment;
-  List<AxisDirection> swipeToDismiss;
-  final double dismissThreshold;
-  final Duration? duration;
   final ValueNotifier<bool> dismissing = ValueNotifier(false);
-  final Widget Function(BuildContext context, FToasterEntry entry) builder;
   VoidCallback? onDismiss;
-
-  ToasterEntry(
-    this.style,
-    this.variant,
-    this.alignment,
-    this.swipeToDismiss,
-    this.dismissThreshold,
-    this.duration,
-    this.builder,
-  );
 
   @override
   void dismiss() {

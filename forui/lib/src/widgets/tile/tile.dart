@@ -53,7 +53,8 @@ class FTile extends StatelessWidget with FTileMixin {
 
   /// The variant used to resolve the style from [FTileStyles].
   ///
-  /// Defaults to [FItemVariant.primary]. The current platform variant is automatically included during style resolution.
+  /// Defaults to [FItemVariant.primary]. The current platform variant is automatically included during style
+  /// resolution.
   /// To change the platform variant, update the enclosing [FTheme.platform]/[FAdaptiveScope.platform].
   ///
   /// For example, to create a destructive tile:
@@ -181,7 +182,7 @@ class FTile extends StatelessWidget with FTileMixin {
   ///
   /// Use [FTile.raw] in these cases.
   /// {@endtemplate}
-  FTile({
+  new({
     required Widget title,
     this.variant = .primary,
     this.style = const .context(),
@@ -246,7 +247,7 @@ class FTile extends StatelessWidget with FTileMixin {
   ///
   /// The order is reversed for RTL locales.
   /// {@endtemplate}
-  FTile.raw({
+  new raw({
     required Widget child,
     this.variant = .primary,
     this.style = const .context(),
@@ -333,7 +334,7 @@ class FTile extends StatelessWidget with FTileMixin {
 extension type FTileStyles(FVariants<FItemVariantConstraint, FItemVariant, FTileStyle, FTileStyleDelta> _)
     implements FVariants<FItemVariantConstraint, FItemVariant, FTileStyle, FTileStyleDelta> {
   /// Creates a [FTileStyles] that inherits its properties.
-  factory FTileStyles.inherit({required FColors colors, required FTypography typography, required FStyle style}) {
+  factory inherit({required FColors colors, required FTypography typography, required FStyle style}) {
     final primary = FTileStyle.inherit(colors: colors, typography: typography, style: style);
 
     return FTileStyles(
@@ -374,21 +375,21 @@ extension FTileStylesConversion on FVariants<FItemVariantConstraint, FItemVarian
 }
 
 /// A [FTile]'s style.
-class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
+class FTileStyle({
+  required super.backgroundColor,
+  required super.contentDecoration,
+  required super.contentStyle,
+  required super.rawContentStyle,
+  required super.tappableStyle,
+  required super.focusedOutlineStyle,
+  required super.shape,
+  super.padding = .zero,
+}) extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
   /// Creates a [FTileStyle].
-  FTileStyle({
-    required super.backgroundColor,
-    required super.contentDecoration,
-    required super.contentStyle,
-    required super.rawContentStyle,
-    required super.tappableStyle,
-    required super.focusedOutlineStyle,
-    required super.shape,
-    super.padding = .zero,
-  });
+  this;
 
   /// Creates a [FTileStyle].
-  FTileStyle.inherit({required FColors colors, required FTypography typography, required FStyle style})
+  new inherit({required FColors colors, required FTypography typography, required FStyle style})
     : this(
         backgroundColor: .all(colors.card),
         contentDecoration: FVariants.from(
@@ -429,24 +430,24 @@ class FTileStyle extends FItemStyle with Diagnosticable, _$FTileStyleFunctions {
 }
 
 /// A tile-specific [FItemContentStyle].
-class FTileContentStyle extends FItemContentStyle with _$FTileContentStyleFunctions {
+class FTileContentStyle({
+  required super.prefixIconStyle,
+  required super.titleTextStyle,
+  required super.subtitleTextStyle,
+  required super.detailsTextStyle,
+  required super.suffixIconStyle,
+  super.suffixedPadding = const .fromSTEB(15, 14.5, 13, 14.5),
+  super.unsuffixedPadding = const .symmetric(horizontal: 15, vertical: 14.5),
+  super.prefixIconSpacing = 10,
+  super.titleSpacing = 3,
+  super.middleSpacing = 4,
+  super.suffixIconSpacing = 5,
+}) extends FItemContentStyle with _$FTileContentStyleFunctions {
   /// Creates a [FTileContentStyle].
-  FTileContentStyle({
-    required super.prefixIconStyle,
-    required super.titleTextStyle,
-    required super.subtitleTextStyle,
-    required super.detailsTextStyle,
-    required super.suffixIconStyle,
-    super.suffixedPadding = const .fromSTEB(15, 14.5, 13, 14.5),
-    super.unsuffixedPadding = const .symmetric(horizontal: 15, vertical: 14.5),
-    super.prefixIconSpacing = 10,
-    super.titleSpacing = 3,
-    super.middleSpacing = 4,
-    super.suffixIconSpacing = 5,
-  });
+  this;
 
   /// Creates a [FTileContentStyle] that inherits its properties.
-  factory FTileContentStyle.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required Color prefix,
@@ -490,33 +491,29 @@ class FTileContentStyle extends FItemContentStyle with _$FTileContentStyleFuncti
 }
 
 /// A tile-specific [FRawItemContentStyle].
-class FRawTileContentStyle extends FRawItemContentStyle with _$FRawTileContentStyleFunctions {
+class FRawTileContentStyle({
+  required super.prefixIconStyle,
+  required super.childTextStyle,
+  super.padding = const .symmetric(horizontal: 15, vertical: 14.5),
+  super.prefixIconSpacing = 10,
+}) extends FRawItemContentStyle with _$FRawTileContentStyleFunctions {
   /// Creates a [FRawTileContentStyle].
-  FRawTileContentStyle({
-    required super.prefixIconStyle,
-    required super.childTextStyle,
-    super.padding = const .symmetric(horizontal: 15, vertical: 14.5),
-    super.prefixIconSpacing = 10,
-  });
+  this;
 
   /// Creates a [FRawTileContentStyle] that inherits its properties.
-  FRawTileContentStyle.inherit({
-    required FColors colors,
-    required FTypography typography,
-    required Color prefix,
-    required Color color,
-  }) : this(
-         prefixIconStyle: FVariants.from(
-           IconThemeData(color: prefix, size: typography.body.md.fontSize),
-           variants: {
-             [.disabled]: .delta(color: colors.disable(prefix)),
-           },
-         ),
-         childTextStyle: FVariants.from(
-           typography.body.sm.copyWith(color: color),
-           variants: {
-             [.disabled]: .delta(color: colors.disable(color)),
-           },
-         ),
-       );
+  new inherit({required FColors colors, required FTypography typography, required Color prefix, required Color color})
+    : this(
+        prefixIconStyle: FVariants.from(
+          IconThemeData(color: prefix, size: typography.body.md.fontSize),
+          variants: {
+            [.disabled]: .delta(color: colors.disable(prefix)),
+          },
+        ),
+        childTextStyle: FVariants.from(
+          typography.body.sm.copyWith(color: color),
+          variants: {
+            [.disabled]: .delta(color: colors.disable(color)),
+          },
+        ),
+      );
 }

@@ -14,20 +14,12 @@ import 'package:forui/src/widgets/slider/inherited_variants.dart';
 
 part 'thumb.design.dart';
 
-class _ShrinkIntent extends Intent {
-  const _ShrinkIntent();
-}
+class const _ShrinkIntent() extends Intent;
 
-class _ExpandIntent extends Intent {
-  const _ExpandIntent();
-}
+class const _ExpandIntent() extends Intent;
 
 @internal
-class Thumb extends StatefulWidget {
-  final bool min;
-
-  const Thumb({required this.min, super.key});
-
+class const Thumb({required final bool min, super.key}) extends StatefulWidget {
   @override
   State<Thumb> createState() => _ThumbState();
 
@@ -252,33 +244,24 @@ class _ThumbState extends State<Thumb> with TickerProviderStateMixin {
 /// **Note**:
 /// The thumb size can be configured inside [FSliderStyle] instead. This is due to an unfortunate limitation of the
 /// implementation.
-class FSliderThumbStyle with Diagnosticable, _$FSliderThumbStyleFunctions {
+class FSliderThumbStyle({
   /// The thumb's color.
-  @override
-  final FVariants<FSliderVariantConstraint, FSliderVariant, Color, Delta> color;
+  @override required final FVariants<FSliderVariantConstraint, FSliderVariant, Color, Delta> color,
 
   /// The border's color.
-  @override
-  final FVariants<FSliderVariantConstraint, FSliderVariant, Color, Delta> borderColor;
+  @override required final FVariants<FSliderVariantConstraint, FSliderVariant, Color, Delta> borderColor,
+
+  /// The thumb's focused outline style.
+  @override required final FFocusedOutlineStyle focusedOutlineStyle,
 
   /// The border's width. Defaults to `2`.
   ///
   /// ## Contract
   /// Throws [AssertionError] if [borderWidth] is not positive.
-  @override
-  final double borderWidth;
-
-  /// The thumb's focused outline style.
-  @override
-  final FFocusedOutlineStyle focusedOutlineStyle;
-
+  @override final double borderWidth = 2,
+}) with Diagnosticable, _$FSliderThumbStyleFunctions {
   /// Creates a [FSliderThumbStyle].
-  FSliderThumbStyle({
-    required this.color,
-    required this.borderColor,
-    required this.focusedOutlineStyle,
-    this.borderWidth = 2,
-  }) : assert(0 < borderWidth, 'borderWidth ($borderWidth) must be > 0');
+  this : assert(0 < borderWidth, 'borderWidth ($borderWidth) must be > 0');
 }
 
 @internal

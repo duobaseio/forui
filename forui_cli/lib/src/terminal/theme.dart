@@ -96,7 +96,7 @@ class Ansi {
   final bool _supported;
   bool _enabled = true;
 
-  Ansi({required this._supported});
+  new({required this._supported});
 
   /// Removes ANSI SGR (colour/style) escape sequences from [text].
   String strip(String text) => text.replaceAll(_pattern, '');
@@ -135,7 +135,7 @@ class Truecolor {
   final bool _supported;
   bool _enabled = true;
 
-  Truecolor({required this._supported});
+  new({required this._supported});
 
   /// Colours [text]'s foreground with [color] (`0xAARRGGBB`; alpha ignored).
   String foreground(int color, String text) => _wrap(38, color, text);
@@ -180,7 +180,7 @@ class Symbols {
   final Duration spinnerInterval;
   final bool unicode;
 
-  const Symbols({
+  const new({
     required this.bar,
     required this.barStart,
     required this.barEnd,

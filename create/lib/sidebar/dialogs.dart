@@ -1,5 +1,5 @@
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart' show SelectionArea, ThemeMode;
+import 'package:material_ui/material_ui.dart' show SelectionArea, ThemeMode;
 import 'package:flutter/widgets.dart';
 
 import 'package:forui/forui.dart';

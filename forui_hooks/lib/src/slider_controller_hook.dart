@@ -27,7 +27,7 @@ class _ContinuousControllerHook extends Hook<FContinuousSliderController> {
   final FSliderInteraction interaction;
   final FSliderActiveThumb activeThumb;
 
-  const _ContinuousControllerHook({
+  const new({
     required this.value,
     required this.stepPercentage,
     required this.interaction,
@@ -81,7 +81,7 @@ class _ContinuousRangeControllerHook extends Hook<FContinuousSliderController> {
   final FSliderValue value;
   final double stepPercentage;
 
-  const _ContinuousRangeControllerHook({required this.value, required this.stepPercentage, super.keys});
+  const new({required this.value, required this.stepPercentage, super.keys});
 
   @override
   _ContinuousRangeControllerHookState createState() => .new();
@@ -125,7 +125,7 @@ class _DiscreteControllerHook extends Hook<FDiscreteSliderController> {
   final FSliderInteraction interaction;
   final FSliderActiveThumb activeThumb;
 
-  const _DiscreteControllerHook({
+  const new({
     required this.value,
     required this.interaction,
     required this.activeThumb,
@@ -172,7 +172,7 @@ FDiscreteSliderController useFDiscreteRangeSliderController({required FSliderVal
 class _DiscreteRangeControllerHook extends Hook<FDiscreteSliderController> {
   final FSliderValue value;
 
-  const _DiscreteRangeControllerHook({required this.value, super.keys});
+  const new({required this.value, super.keys});
 
   @override
   _DiscreteRangeControllerHookState createState() => .new();

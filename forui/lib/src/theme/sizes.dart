@@ -39,10 +39,10 @@ final class FSizes with Diagnosticable {
   final double calendar;
 
   /// Creates an [FSizes].
-  const FSizes({required this.field, required this.item, required this.tile, required this.calendar});
+  const new({required this.field, required this.item, required this.tile, required this.calendar});
 
   /// Creates an [FSizes] that inherits its properties based on [touch].
-  factory FSizes.inherit({required bool touch}) => touch
+  factory inherit({required bool touch}) => touch
       ? const FSizes(field: (xs: 32, sm: 40, md: 44, lg: 48), item: 44, tile: 48, calendar: 44)
       : const FSizes(field: (xs: 24, sm: 32, md: 36, lg: 40), item: 30, tile: 48, calendar: 32);
 

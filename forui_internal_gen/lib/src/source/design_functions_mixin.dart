@@ -8,7 +8,7 @@ import 'package:meta/meta.dart';
 @internal
 class DesignFunctionsMixin extends FunctionsMixin {
   /// Creates a new [DesignFunctionsMixin].
-  DesignFunctionsMixin(super.step, super.element);
+  new(super.step, super.element);
 
   /// Generates a mixin.
   @override

@@ -16,7 +16,7 @@ class SliderFormField extends FormField<FSliderValue> with FFormFieldProperties<
   @override
   final Widget? description;
 
-  SliderFormField({
+  new({
     required this.controller,
     required this.constraints,
     required this.label,

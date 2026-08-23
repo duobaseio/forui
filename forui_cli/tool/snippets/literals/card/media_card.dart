@@ -8,7 +8,7 @@ class MediaCard extends StatelessWidget {
   final Widget subtitle;
   final Widget child;
 
-  const MediaCard({required this.image, required this.title, required this.subtitle, required this.child, super.key});
+  const new({required this.image, required this.title, required this.subtitle, required this.child, super.key});
 
   @override
   Widget build(BuildContext context) {

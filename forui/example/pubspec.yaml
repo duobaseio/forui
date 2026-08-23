@@ -19,8 +19,8 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.10.0 <4.0.0'
-  flutter: ">=3.38.0"
+  sdk: ">=3.13.0-0 <4.0.0"
+  flutter: ">=3.47.0-0"
 resolution: workspace
 
 dependencies:
@@ -35,6 +35,7 @@ dependencies:
   intl: any
   lottie: ^3.3.2
   marionette_flutter: ^0.6.0
+  material_ui: ^1.0.0
   remixicon: ^4.9.3
   sugar: ^4.0.0
   tabler_icons_plus: ^3.44.0

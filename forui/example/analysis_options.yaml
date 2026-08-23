@@ -7,3 +7,11 @@ analyzer:
     prefer_expression_function_bodies: ignore
     public_member_api_docs: ignore
     unused_result: ignore
+  exclude:
+    - build/**
+    - android/**
+    - ios/**
+    - web/**
+    - windows/**
+    - macos/**
+    - linux/**

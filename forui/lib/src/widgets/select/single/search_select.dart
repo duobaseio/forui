@@ -7,7 +7,7 @@ class _SearchSelect<T> extends FSelect<T> {
   final Widget Function(BuildContext context, FSelectSearchStyle style) contentLoadingBuilder;
   final Widget Function(BuildContext context, Object? error, StackTrace stackTrace)? contentErrorBuilder;
 
-  const _SearchSelect({
+  const new({
     required this.filter,
     required this.contentBuilder,
     required super.format,

@@ -28,7 +28,7 @@ class ItemContent extends StatelessWidget {
   final Widget? details;
   final Widget? suffix;
 
-  const ItemContent({
+  const new({
     required this.style,
     required this.margin,
     required this.bottom,
@@ -148,24 +148,40 @@ class ItemContent extends StatelessWidget {
 /// └─────────────────────────────────────────────────────────────────────────────────────────────────────┘
 /// ```
 /// {@endtemplate}
-class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
-  /// The content's padding when a suffix is present.
-  ///
-  /// {@macro forui.widgets.item.ItemContentStyle}
-  @override
-  final EdgeInsetsGeometry suffixedPadding;
-
-  /// The content's padding when no suffix is present.
-  ///
-  /// {@macro forui.widgets.item.ItemContentStyle}
-  @override
-  final EdgeInsetsGeometry unsuffixedPadding;
-
+class FItemContentStyle({
   /// The prefix icon style.
   ///
   /// {@macro forui.widgets.item.ItemContentStyle}
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> prefixIconStyle;
+  required final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta>
+  prefixIconStyle,
+
+  /// The title's text style.
+  @override
+  required final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> titleTextStyle,
+
+  /// The subtitle's text style.
+  @override
+  required final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> subtitleTextStyle,
+
+  /// The details text style.
+  @override
+  required final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> detailsTextStyle,
+
+  /// The suffix icon style.
+  @override
+  required final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta>
+  suffixIconStyle,
+
+  /// The content's padding when a suffix is present.
+  ///
+  /// {@macro forui.widgets.item.ItemContentStyle}
+  @override required final EdgeInsetsGeometry suffixedPadding,
+
+  /// The content's padding when no suffix is present.
+  ///
+  /// {@macro forui.widgets.item.ItemContentStyle}
+  @override required final EdgeInsetsGeometry unsuffixedPadding,
 
   /// The horizontal spacing between the prefix icon and title and the subtitle. Defaults to 8.
   ///
@@ -173,12 +189,7 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
   ///
   /// ## Contract
   /// Throws [AssertionError] if [prefixIconSpacing] is negative.
-  @override
-  final double prefixIconSpacing;
-
-  /// The title's text style.
-  @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> titleTextStyle;
+  @override final double prefixIconSpacing = 8,
 
   /// The vertical spacing between the title and the subtitle. Defaults to 4.
   ///
@@ -186,12 +197,7 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
   ///
   /// ## Contract
   /// Throws [AssertionError] if [titleSpacing] is negative.
-  @override
-  final double titleSpacing;
-
-  /// The subtitle's text style.
-  @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> subtitleTextStyle;
+  @override final double titleSpacing = 4,
 
   /// The minimum horizontal spacing between the title, subtitle, combined, and the details. Defaults to 4.
   ///
@@ -199,16 +205,7 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
   ///
   /// ## Contract
   /// Throws [AssertionError] if [middleSpacing] is negative.
-  @override
-  final double middleSpacing;
-
-  /// The details text style.
-  @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> detailsTextStyle;
-
-  /// The suffix icon style.
-  @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> suffixIconStyle;
+  @override final double middleSpacing = 4,
 
   /// The horizontal spacing between the details and suffix icon. Defaults to 8.
   ///
@@ -216,29 +213,17 @@ class FItemContentStyle with Diagnosticable, _$FItemContentStyleFunctions {
   ///
   /// ## Contract
   /// Throws [AssertionError] if [suffixIconSpacing] is negative.
-  @override
-  final double suffixIconSpacing;
-
+  @override final double suffixIconSpacing = 8,
+}) with Diagnosticable, _$FItemContentStyleFunctions {
   /// Creates a [FItemContentStyle].
-  FItemContentStyle({
-    required this.prefixIconStyle,
-    required this.titleTextStyle,
-    required this.subtitleTextStyle,
-    required this.detailsTextStyle,
-    required this.suffixIconStyle,
-    required this.suffixedPadding,
-    required this.unsuffixedPadding,
-    this.prefixIconSpacing = 8,
-    this.titleSpacing = 4,
-    this.middleSpacing = 4,
-    this.suffixIconSpacing = 8,
-  }) : assert(0 <= prefixIconSpacing, 'prefixIconSpacing ($prefixIconSpacing) must be >= 0'),
-       assert(0 <= titleSpacing, 'titleSpacing ($titleSpacing) must be >= 0'),
-       assert(0 <= middleSpacing, 'middleSpacing ($middleSpacing) must be >= 0'),
-       assert(0 <= suffixIconSpacing, 'suffixIconSpacing ($suffixIconSpacing) must be >= 0');
+  this
+    : assert(0 <= prefixIconSpacing, 'prefixIconSpacing ($prefixIconSpacing) must be >= 0'),
+      assert(0 <= titleSpacing, 'titleSpacing ($titleSpacing) must be >= 0'),
+      assert(0 <= middleSpacing, 'middleSpacing ($middleSpacing) must be >= 0'),
+      assert(0 <= suffixIconSpacing, 'suffixIconSpacing ($suffixIconSpacing) must be >= 0');
 
   /// Creates a [FItemContentStyle] that inherits its properties.
-  factory FItemContentStyle.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required Color prefix,

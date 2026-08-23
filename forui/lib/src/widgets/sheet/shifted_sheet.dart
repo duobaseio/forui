@@ -15,7 +15,7 @@ class ShiftedSheet extends SingleChildRenderObjectWidget {
   final double? mainAxisMaxRatio;
   final ValueChanged<Size>? onChange;
 
-  const ShiftedSheet({
+  const new({
     required this.side,
     required this.value,
     required this.bottomViewInset,
@@ -63,7 +63,7 @@ class _ShiftedSheet extends RenderShiftedBox {
   ValueChanged<Size>? _onChange;
   Size _previous = .zero;
 
-  _ShiftedSheet({
+  new({
     required this._side,
     required this._value,
     required this._bottomViewInset,

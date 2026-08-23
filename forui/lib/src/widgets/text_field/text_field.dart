@@ -1,7 +1,7 @@
-import 'package:flutter/cupertino.dart' show CupertinoTextMagnifier;
+import 'package:cupertino_ui/cupertino_ui.dart' show CupertinoTextMagnifier;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
 
 import 'package:forui/forui.dart';
@@ -28,8 +28,12 @@ typedef FTextFieldCounterBuilder =
 /// [field] is the field that will be decorated.
 ///
 /// See [FTextField.builder].
-typedef FFieldBuilder<T> =
-    Widget Function(BuildContext context, T style, Set<FTextFieldVariant> variants, Widget field);
+typedef FFieldBuilder<T> = Widget Function(
+  BuildContext context,
+  T style,
+  Set<FTextFieldVariant> variants,
+  Widget field,
+);
 
 /// A callback for building a field's icon.
 ///
@@ -896,7 +900,7 @@ class FTextField extends StatelessWidget {
   final FFieldClearIconBuilder<FTextFieldStyle> clearIconBuilder;
 
   /// Creates a [FTextField].
-  const FTextField({
+  const new({
     this.control = const .managed(),
     this.size = .md,
     this.style = const .context(),
@@ -963,7 +967,7 @@ class FTextField extends StatelessWidget {
   });
 
   /// Creates a [FTextField] configured for emails.
-  const FTextField.email({
+  const new email({
     this.control = const .managed(),
     this.size = .md,
     this.style = const .context(),
@@ -1034,7 +1038,7 @@ class FTextField extends StatelessWidget {
   /// The text field's height can be configured by adjusting [minLines]. By default, the text field will expand every
   /// time a new line is added. To limit the maximum height of the text field and make it scrollable, consider setting
   /// [maxLines].
-  const FTextField.multiline({
+  const new multiline({
     this.control = const .managed(),
     this.size = .md,
     this.style = const .context(),

@@ -1,7 +1,7 @@
 import 'dart:math' as math;
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 
@@ -116,7 +116,7 @@ class FPointPortal extends StatefulWidget {
   ///
   /// ## Contract
   /// Throws [AssertionError] if [builder] and [child] are both null.
-  const FPointPortal({
+  const new({
     required this.portalBuilder,
     required this.point,
     this.control = const .managed(),
@@ -189,6 +189,13 @@ class _State extends State<FPointPortal> with WidgetsBindingObserver {
   }
 
   @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    _notifier.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) => CompositedChild(
     notifier: _notifier,
     link: _link,
@@ -249,11 +256,4 @@ class _State extends State<FPointPortal> with WidgetsBindingObserver {
       child: RepaintBoundary(child: widget.builder(context, _controller, widget.child)),
     ),
   );
-
-  @override
-  void dispose() {
-    WidgetsBinding.instance.removeObserver(this);
-    _notifier.dispose();
-    super.dispose();
-  }
 }

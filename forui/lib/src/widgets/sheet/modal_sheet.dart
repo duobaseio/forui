@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/rendering.dart';
 
 import 'package:meta/meta.dart';
@@ -147,7 +147,8 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
 
   /// The main axis's max constraint ratio for the sheet, depending on [side]. Defaults to 9 / 16.
   ///
-  /// The main axis is the width if [side] is [FLayout.ltr] or [FLayout.rtl], and the height if [side] is [FLayout.ttb] or
+  /// The main axis is the width if [side] is [FLayout.ltr] or [FLayout.rtl], and the height if [side] is [FLayout.ttb]
+  /// or
   /// [FLayout.btt].
   ///
   /// Consider setting this to null if this sheet has a scrollable child, i.e. [ListView], along the main axis, to have
@@ -221,7 +222,7 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
   AnimationController? _animationController;
 
   /// Creates a [FModalSheetRoute].
-  FModalSheetRoute({
+  new({
     required this.style,
     required this.side,
     required this.builder,
@@ -353,42 +354,34 @@ class FModalSheetRoute<T> extends PopupRoute<T> {
 }
 
 /// A modal sheet's style.
-class FModalSheetStyle extends FSheetStyle with Diagnosticable, _$FModalSheetStyleFunctions {
+class const FModalSheetStyle({
+  /// {@macro forui.widgets.FPopoverStyle.barrierFilter}
+  @override final ImageFilter Function(BuildContext context, double animation)? barrierFilter,
+
+  /// The motion-related properties for a modal sheet. Defaults to [FModalSheetMotion].
+  @override final FModalSheetMotion motion = const FModalSheetMotion(),
+  super.flingVelocity,
+  super.closeProgressThreshold,
+}) extends FSheetStyle with Diagnosticable, _$FModalSheetStyleFunctions {
+  /// Creates a [FSheetStyle].
+  this;
+
   /// The default [barrierFilter]. Tints the content behind the barrier.
   static ImageFilter defaultBarrierFilter(BuildContext context, double animation) =>
       ColorFilter.mode(FColors.lerpColor(Colors.transparent, context.theme.colors.barrier, animation)!, .srcOver);
 
-  /// {@macro forui.widgets.FPopoverStyle.barrierFilter}
-  @override
-  final ImageFilter Function(BuildContext context, double animation)? barrierFilter;
-
-  /// The motion-related properties for a modal sheet.
-  @override
-  final FModalSheetMotion motion;
-
-  /// Creates a [FSheetStyle].
-  const FModalSheetStyle({
-    this.barrierFilter,
-    this.motion = const FModalSheetMotion(),
-    super.flingVelocity,
-    super.closeProgressThreshold,
-  });
-
   /// Creates a [FSheetStyle] that inherits its properties.
-  FModalSheetStyle.inherit() : this(barrierFilter: FModalSheetStyle.defaultBarrierFilter);
+  new inherit() : this(barrierFilter: FModalSheetStyle.defaultBarrierFilter);
 }
 
 /// The motion-related properties for a modal sheet.
-class FModalSheetMotion extends FSheetMotion with Diagnosticable, _$FModalSheetMotionFunctions {
+class const FModalSheetMotion({
   /// The barrier's curve. Defaults to [Curves.easeOutCubic].
-  @override
-  final Curve barrierCurve;
-
+  @override final Curve barrierCurve = Curves.easeOutCubic,
+  super.expandDuration,
+  super.collapseDuration,
+  super.curve,
+}) extends FSheetMotion with Diagnosticable, _$FModalSheetMotionFunctions {
   /// Creates a [FModalSheetMotion].
-  const FModalSheetMotion({
-    this.barrierCurve = Curves.easeOutCubic,
-    super.expandDuration,
-    super.collapseDuration,
-    super.curve,
-  });
+  this;
 }

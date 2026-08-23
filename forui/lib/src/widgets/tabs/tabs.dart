@@ -1,9 +1,8 @@
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
-import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:meta/meta.dart';
 
 import 'package:forui/forui.dart';
@@ -28,12 +27,12 @@ class FTabEntry {
   final Widget child;
 
   /// Creates a [FTabEntry].
-  const FTabEntry({required this.label, required this.child});
+  const new({required this.label, required this.child});
 
   /// Creates a [FTabEntry].
   ///
   /// This is identical to [FTabEntry.new], allowing dot-shorthand construction.
-  const factory FTabEntry.entry({required Widget label, required Widget child}) = FTabEntry;
+  const factory entry({required Widget label, required Widget child}) = FTabEntry;
 
   @override
   bool operator ==(Object other) =>
@@ -113,7 +112,7 @@ class FTabs extends StatefulWidget {
   /// ## Contract
   /// Throws [AssertionError] if:
   /// * [children] is empty.
-  FTabs({
+  new({
     required this.children,
     this.control = const .managed(),
     this.scrollable = false,
@@ -233,11 +232,7 @@ class _FTabsState extends State<FTabs> with TickerProviderStateMixin {
     if (localizations == null) {
       return Localizations(
         locale: Localizations.maybeLocaleOf(context) ?? const Locale('en', 'US'),
-        delegates: const [
-          GlobalMaterialLocalizations.delegate,
-          GlobalWidgetsLocalizations.delegate,
-          GlobalCupertinoLocalizations.delegate,
-        ],
+        delegates: GlobalMaterialLocalizations.delegates,
         child: tabs,
       );
     }
@@ -246,12 +241,7 @@ class _FTabsState extends State<FTabs> with TickerProviderStateMixin {
   }
 }
 
-class _Tab extends StatefulWidget {
-  final FTabsStyle style;
-  final Widget label;
-
-  const _Tab({required this.style, required this.label});
-
+class const _Tab({required final FTabsStyle style, required final Widget label}) extends StatefulWidget {
   @override
   State<_Tab> createState() => _TabState();
 

@@ -8,11 +8,7 @@ import 'package:forui/forui.dart';
 
 /// A parser that updates individual parts of a string input.
 @internal
-abstract class Parser {
-  final List<String> pattern;
-
-  Parser(this.pattern);
-
+abstract class Parser(final List<String> pattern) {
   /// Updates the [current] input based on the [current] and [previous] input.
   (List<String>, Changes) update(List<String> previous, List<String> current) {
     assert(previous.length == pattern.length, 'previous must have ${pattern.length} parts.');
@@ -57,26 +53,18 @@ abstract class Parser {
 }
 
 @internal
-sealed class Changes {
-  const Changes();
-
+sealed class const Changes() {
   Changes add(int i);
 }
 
 @internal
-class None extends Changes {
-  const None();
-
+class const None() extends Changes {
   @override
   Single add(int i) => Single(i);
 }
 
 @internal
-class Single extends Changes {
-  final int index;
-
-  const Single(this.index);
-
+class const Single(final int index) extends Changes {
   @override
   Many add(int i) => const Many();
 
@@ -92,20 +80,13 @@ class Single extends Changes {
 }
 
 @internal
-class Many extends Changes {
-  const Many();
-
+class const Many() extends Changes {
   @override
   Many add(int _) => this;
 }
 
 @internal
-abstract class Selector {
-  final FLocalizations localizations;
-  final RegExp suffix;
-
-  Selector(this.localizations, this.suffix);
-
+abstract class Selector(final FLocalizations localizations, final RegExp suffix) {
   TextEditingValue? navigate(TextEditingValue value);
 
   TextEditingValue select(List<String> parts, int index);

@@ -10,7 +10,7 @@ class HorizontalMediaDialog extends StatelessWidget {
   final Widget body;
   final List<Widget> actions;
 
-  const HorizontalMediaDialog({
+  const new({
     required this.image,
     required this.title,
     required this.body,

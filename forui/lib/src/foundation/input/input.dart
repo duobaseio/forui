@@ -10,73 +10,47 @@ import 'package:forui/src/localizations/localization.dart';
 import 'package:forui/src/localizations/localizations_en.dart';
 
 @internal
-abstract class Input<T> extends StatefulWidget {
-  final ValueNotifier<T?> controller;
-  final FTextFieldSizeVariant size;
-  final FPlatformVariant platformVariant;
-  final Widget Function(BuildContext context, FTextFieldStyle style, Set<FTextFieldVariant> variants, Widget child)
-  builder;
-  final Widget? label;
-  final Widget? description;
-  final Widget Function(BuildContext context, String message) errorBuilder;
-  final bool enabled;
-  final FormFieldSetter<T>? onSaved;
-  final VoidCallback? onReset;
-  final FormFieldValidator<T> validator;
-  final AutovalidateMode autovalidateMode;
-  final String? forceErrorText;
-  final FocusNode? focusNode;
-  final TextInputAction? textInputAction;
-  final TextAlign textAlign;
-  final TextAlignVertical? textAlignVertical;
-  final TextDirection? textDirection;
-  final bool expands;
-  final bool autofocus;
-  final VoidCallback? onEditingComplete;
-  final MouseCursor? mouseCursor;
-  final VoidCallback? onTap;
-  final bool canRequestFocus;
-  final Widget Function(BuildContext context, FTextFieldStyle style, Set<FTextFieldVariant> variants)? prefixBuilder;
-  final Widget Function(BuildContext context, FTextFieldStyle style, Set<FTextFieldVariant> variants)? suffixBuilder;
-  final bool clearable;
-  final FFieldClearIconBuilder<FTextFieldStyle> clearIconBuilder;
-  final FLocalizations localizations;
-  final Key? formFieldKey;
-
-  const Input({
-    required this.controller,
-    required this.size,
-    required this.platformVariant,
-    required this.builder,
-    required this.label,
-    required this.description,
-    required this.errorBuilder,
-    required this.enabled,
-    required this.onSaved,
-    required this.onReset,
-    required this.validator,
-    required this.autovalidateMode,
-    required this.forceErrorText,
-    required this.focusNode,
-    required this.textInputAction,
-    required this.textAlign,
-    required this.textAlignVertical,
-    required this.textDirection,
-    required this.autofocus,
-    required this.expands,
-    required this.onEditingComplete,
-    required this.mouseCursor,
-    required this.onTap,
-    required this.canRequestFocus,
-    required this.prefixBuilder,
-    required this.suffixBuilder,
-    required this.clearable,
-    required this.clearIconBuilder,
-    required this.localizations,
-    required this.formFieldKey,
-    super.key,
-  });
-
+abstract class const Input<T>({
+  required final ValueNotifier<T?> controller,
+  required final FTextFieldSizeVariant size,
+  required final FPlatformVariant platformVariant,
+  required final Widget Function(
+    BuildContext context,
+    FTextFieldStyle style,
+    Set<FTextFieldVariant> variants,
+    Widget child,
+  )
+  builder,
+  required final Widget? label,
+  required final Widget? description,
+  required final Widget Function(BuildContext context, String message) errorBuilder,
+  required final bool enabled,
+  required final FormFieldSetter<T>? onSaved,
+  required final VoidCallback? onReset,
+  required final FormFieldValidator<T> validator,
+  required final AutovalidateMode autovalidateMode,
+  required final String? forceErrorText,
+  required final FocusNode? focusNode,
+  required final TextInputAction? textInputAction,
+  required final TextAlign textAlign,
+  required final TextAlignVertical? textAlignVertical,
+  required final TextDirection? textDirection,
+  required final bool autofocus,
+  required final bool expands,
+  required final VoidCallback? onEditingComplete,
+  required final MouseCursor? mouseCursor,
+  required final VoidCallback? onTap,
+  required final bool canRequestFocus,
+  required final Widget Function(BuildContext context, FTextFieldStyle style, Set<FTextFieldVariant> variants)?
+  prefixBuilder,
+  required final Widget Function(BuildContext context, FTextFieldStyle style, Set<FTextFieldVariant> variants)?
+  suffixBuilder,
+  required final bool clearable,
+  required final FFieldClearIconBuilder<FTextFieldStyle> clearIconBuilder,
+  required final FLocalizations localizations,
+  required final Key? formFieldKey,
+  super.key,
+}) extends StatefulWidget {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);
@@ -220,11 +194,7 @@ abstract class InputState<T extends Input<U>, U> extends State<T> {
 }
 
 @internal
-class AdjustIntent extends Intent {
-  final int amount;
-
-  const AdjustIntent(this.amount);
-
+class const AdjustIntent(final int amount) extends Intent {
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
     super.debugFillProperties(properties);

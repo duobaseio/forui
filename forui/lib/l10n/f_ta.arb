@@ -7,7 +7,7 @@
   "shortDateSuffix": "",
   "dateFieldHint": "தேதியைத் தேர்ந்தெடுக்கவும்",
   "dateFieldInvalidDateError": "தவறான தேதி.",
-  "timeFieldPeriodSeparator": "",
+  "timeFieldPeriodSeparator": " ",
   "timeFieldSuffix": "",
   "timeFieldTimeSeparator": ":",
   "timeFieldHint": "நேரத்தைத் தேர்ந்தெடுக்கவும்",

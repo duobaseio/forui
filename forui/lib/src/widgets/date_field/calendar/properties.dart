@@ -76,7 +76,7 @@ sealed class FDateFieldCalendarProperties with Diagnosticable {
   /// false.
   final bool fixedWeeks;
 
-  const FDateFieldCalendarProperties._({
+  const new _({
     this.anchor = .topLeft,
     this.fieldAnchor = .bottomLeft,
     this.spacing = const .spacing(4),
@@ -220,7 +220,7 @@ class FDateFieldGridCalendarProperties extends FDateFieldCalendarProperties {
   final FutureOr<void> Function(DateTime)? onDayLongPress;
 
   /// Creates a [FDateFieldGridCalendarProperties].
-  const FDateFieldGridCalendarProperties({
+  const new({
     this.control = const FGridCalendarControl(),
     this.dayScrollPhysics,
     this.dayScrollCacheExtent,
@@ -368,7 +368,7 @@ class FDateFieldGridSplitCalendarProperties extends FDateFieldCalendarProperties
   final FutureOr<void> Function(DateTime)? onDayLongPress;
 
   /// Creates a [FDateFieldGridSplitCalendarProperties].
-  const FDateFieldGridSplitCalendarProperties({
+  const new({
     this.control = const FGridSplitCalendarControl(),
     this.dayScrollPhysics,
     this.dayScrollCacheExtent,
@@ -497,7 +497,7 @@ class FDateFieldWheelCalendarProperties extends FDateFieldCalendarProperties {
   final FutureOr<void> Function(DateTime)? onDayLongPress;
 
   /// Creates a [FDateFieldWheelCalendarProperties].
-  const FDateFieldWheelCalendarProperties({
+  const new({
     this.control = const FWheelCalendarControl(),
     this.loop = false,
     this.monthFlex = 1,

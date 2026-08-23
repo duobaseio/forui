@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.11.0 <4.0.0'
+  sdk: ">=3.13.0-0 <4.0.0"
 resolution: workspace
 
 # Dependencies specify other packages that your package needs in order to work.
@@ -33,10 +33,11 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-
   cupertino_icons: ^1.0.8
   forui:
   marionette_flutter: ^0.6.0
+  material_ui: ^1.0.0
+  cupertino_ui: ^1.0.0
 
 dev_dependencies:
   flutter_test:

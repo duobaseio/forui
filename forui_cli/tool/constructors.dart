@@ -55,7 +55,7 @@ class ConstructorFragment {
   static String _factory(String type, RegExp pattern, ConstructorMatch match) {
     var source = match.constructor
         .toSource()
-        .replaceAll('factory $type.inherit', '$type ${type.substring(1).toCamelCase()}')
+        .replaceAll('factory inherit', '$type ${type.substring(1).toCamelCase()}')
         .replaceAllMapped(pattern, (m) => '_${m.group(1)!.toCamelCase()}');
 
     final visitor = _ConstructorInvocationVisitor(type);
@@ -65,8 +65,8 @@ class ConstructorFragment {
       // Finds all optional named parameters that are not given in the invocation.
       final constructor = invocation.constructorName.element!;
       final given = invocation.argumentList.arguments
-          .whereType<NamedExpression>()
-          .map((p) => p.name.label.name)
+          .whereType<NamedArgument>()
+          .map((p) => p.name.lexeme)
           .toSet();
       final additional = [
         for (final p in constructor.formalParameters.where((p) => p.isOptionalNamed && !given.contains(p.name)))
@@ -95,12 +95,12 @@ class ConstructorFragment {
     var source = constructor.toSource();
 
     source = source
-        .replaceAll('$type.inherit', '$type ${type.substring(1).toCamelCase()}')
+        .replaceAll('new inherit', '$type ${type.substring(1).toCamelCase()}')
         .replaceAll(' : this', ' => $type');
 
     // Finds all optional named parameters that are not given in the constructor.
     final to = constructor.initializers.whereType<RedirectingConstructorInvocation>().single;
-    final given = to.argumentList.arguments.whereType<NamedExpression>().map((p) => p.name.label.name).toSet();
+    final given = to.argumentList.arguments.whereType<NamedArgument>().map((p) => p.name.lexeme).toSet();
     final additional = [
       for (final p in to.element!.formalParameters.where((p) => p.isOptionalNamed && !given.contains(p.name)))
         if (p.defaultValueCode case final defaultValue? when defaultValue.isNotEmpty) '${p.name}: $defaultValue',
@@ -124,10 +124,10 @@ class ConstructorFragment {
     var source = constructor.toSource();
 
     // Extension type: keep the extension type wrapper with its public constructor.
-    // "FBadgeStyles.inherit({...}) : this(FVariants.delta(...))"
+    // "new inherit({...}) : this(FVariants.delta(...))"
     // becomes: "FBadgeStyles badgeStyles({...}) => FBadgeStyles(FVariants.delta(...))"
     source = source
-        .replaceAll('$type.inherit', '$type ${type.substring(1).toCamelCase()}')
+        .replaceAll('new inherit', '$type ${type.substring(1).toCamelCase()}')
         .replaceFirst(RegExp(r' : this\('), ' => $type(');
 
     return source.replaceAllMapped(pattern, (m) => '_${m.group(1)!.toCamelCase()}');
@@ -148,14 +148,14 @@ class ConstructorFragment {
     for (final parameter in constructor.parameters.parameters) {
       parameters.add('${parameter.name!.lexeme}: ${parameter.name!.lexeme},');
 
-      if (parameter case final DefaultFormalParameter superParameter) {
+      if (!parameter.isRequiredPositional) {
         final name = parameter.name!.lexeme;
         final type = constructor.declaredFragment!.formalParameters.firstWhere((p) => p.name == name).element.type;
 
-        if (superParameter.parameter is SuperFormalParameter) {
+        if (parameter is SuperFormalParameter) {
           abort = true;
           constructorParameters = constructorParameters.replaceAll('super.$name', '$type $name');
-        } else if (parameter.parameter is FieldFormalParameter) {
+        } else if (parameter is FieldFormalParameter) {
           constructorParameters = constructorParameters.replaceAll('this.$name', '$type $name');
         }
       }
@@ -188,7 +188,7 @@ class ConstructorFragment {
   final List<String> closure;
   final String source;
 
-  ConstructorFragment({
+  new({
     required this.root,
     required this.type,
     required this.wrapped,
@@ -202,7 +202,7 @@ class _ConstructorInvocationVisitor extends RecursiveAstVisitor<void> {
   final String type;
   final List<InstanceCreationExpression> constructorInvocations = [];
 
-  _ConstructorInvocationVisitor(this.type);
+  new(this.type);
 
   @override
   void visitInstanceCreationExpression(InstanceCreationExpression node) {
@@ -247,7 +247,7 @@ class ConstructorMatch {
   /// The names of classes that are [ConstructorMatch]es and are created inside this [constructor].
   final Set<String> nested = {};
 
-  ConstructorMatch({required this.root, required this.constructor, this.wrapped});
+  new({required this.root, required this.constructor, this.wrapped});
 }
 
 class _Visitor extends RecursiveAstVisitor<void> {
@@ -258,7 +258,7 @@ class _Visitor extends RecursiveAstVisitor<void> {
   String? _name;
   String? _wrapped;
 
-  _Visitor(this._type, this._constructor, this._roots);
+  new(this._type, this._constructor, this._roots);
 
   @override
   void visitClassDeclaration(ClassDeclaration declaration) {
@@ -272,11 +272,10 @@ class _Visitor extends RecursiveAstVisitor<void> {
 
   @override
   void visitExtensionTypeDeclaration(ExtensionTypeDeclaration declaration) {
-    final name = declaration.primaryConstructor.typeName.lexeme;
-    if (_type.hasMatch(name)) {
-      _name = name;
-      _wrapped = (declaration.primaryConstructor.formalParameters.parameters.single as SimpleFormalParameter).type!
-          .toSource();
+    if (declaration.namePart case PrimaryConstructorDeclaration(:final typeName, :final formalParameters)
+        when _type.hasMatch(typeName.lexeme)) {
+      _name = typeName.lexeme;
+      _wrapped = (formalParameters.parameters.single as RegularFormalParameter).type!.toSource();
       super.visitExtensionTypeDeclaration(declaration);
       _name = null;
       _wrapped = null;

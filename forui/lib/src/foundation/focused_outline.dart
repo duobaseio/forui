@@ -34,7 +34,7 @@ class FFocusedOutline extends SingleChildRenderObjectWidget {
   final bool focused;
 
   /// Creates a [FFocusedOutline].
-  const FFocusedOutline({required this.focused, required super.child, this.style = const .context(), super.key});
+  const new({required this.focused, required super.child, this.style = const .context(), super.key});
 
   @override
   RenderObject createRenderObject(BuildContext context) => _Outline(
@@ -66,7 +66,7 @@ class _Outline extends RenderProxyBox {
   TextDirection _textDirection;
   bool _focused;
 
-  _Outline(this._style, this._textDirection, {required this._focused});
+  new(this._style, this._textDirection, {required this._focused});
 
   @override
   void paint(PaintingContext context, Offset offset) {
@@ -75,9 +75,8 @@ class _Outline extends RenderProxyBox {
       final size = child!.size;
       final spacing = math.max(_style.spacing, -math.min(size.width, size.height) / 2);
       context.canvas.drawPath(
-        RoundedSuperellipseBorder(
-          borderRadius: _style.borderRadius.resolve(_textDirection),
-        ).getOuterPath((offset & size).inflate(spacing), textDirection: _textDirection),
+        RoundedSuperellipseBorder(borderRadius: _style.borderRadius.resolve(_textDirection))
+            .getOuterPath((offset & size).inflate(spacing), textDirection: _textDirection),
         Paint()
           ..style = .stroke
           ..color = _style.color
@@ -127,27 +126,22 @@ class _Outline extends RenderProxyBox {
 }
 
 /// The [FFocusedOutline]'s style.
-class FFocusedOutlineStyle with Diagnosticable, _$FFocusedOutlineStyleFunctions {
+class const FFocusedOutlineStyle({
   /// The outline's color.
-  @override
-  final Color color;
+  @override required final Color color,
 
   /// The border radius.
-  @override
-  final BorderRadiusGeometry borderRadius;
+  @override required final BorderRadiusGeometry borderRadius,
 
   /// The outline's width. Defaults to 1.
   ///
   /// ## Contract
   /// Must be > 0.
-  @override
-  final double width;
+  @override final double width = 1,
 
   /// The spacing between the outline and the outlined widget. Can be negative. Defaults to 3.
-  @override
-  final double spacing;
-
+  @override final double spacing = 3,
+}) with Diagnosticable, _$FFocusedOutlineStyleFunctions {
   /// Creates a [FFocusedOutlineStyle].
-  const FFocusedOutlineStyle({required this.color, required this.borderRadius, this.width = 1, this.spacing = 3})
-    : assert(0 < width, 'width ($width) must be > 0.');
+  this : assert(0 < width, 'width ($width) must be > 0.');
 }

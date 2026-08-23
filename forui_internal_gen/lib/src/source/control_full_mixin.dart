@@ -33,7 +33,7 @@ abstract class ControlMixin extends FunctionsMixin {
   final bool listenable;
 
   /// Creates a new [ControlMixin].
-  factory ControlMixin({
+  factory({
     required BuildStep step,
     required ClassElement element,
     required ClassElement supertype,
@@ -67,7 +67,7 @@ abstract class ControlMixin extends FunctionsMixin {
           listenable: listenable,
         );
 
-  ControlMixin._({
+  new _({
     required BuildStep step,
     required ClassElement element,
     required this.supertype,
@@ -109,7 +109,7 @@ abstract class ControlMixin extends FunctionsMixin {
 }
 
 class _ManagedControlMixin extends ControlMixin {
-  _ManagedControlMixin({
+  new({
     required super.step,
     required super.element,
     required super.supertype,
@@ -194,7 +194,7 @@ class _ManagedControlMixin extends ControlMixin {
 }
 
 class _LiftedControlMixin extends ControlMixin {
-  _LiftedControlMixin({
+  new({
     required super.step,
     required super.element,
     required super.supertype,

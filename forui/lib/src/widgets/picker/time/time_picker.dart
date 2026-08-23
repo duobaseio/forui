@@ -67,7 +67,7 @@ class FTimePicker extends StatefulWidget {
   final int minuteInterval;
 
   /// Creates a [FTimePicker].
-  const FTimePicker({
+  const new({
     this.control = const .managed(),
     this.style = const .context(),
     this.hour24,
@@ -209,47 +209,36 @@ class _FTimePickerState extends State<FTimePicker> {
 }
 
 /// The style of a time picker.
-class FTimePickerStyle extends FPickerStyle with _$FTimePickerStyleFunctions {
+class const FTimePickerStyle({
+  required super.textStyle,
+  required super.selectionDecoration,
+  required super.focusedOutlineStyle,
+  required super.hapticFeedback,
+
   /// The hour wheel's flex factor. Defaults to 1.
-  @override
-  final int hourFlex;
+  @override final int hourFlex = 1,
 
   /// The minute wheel's flex factor. Defaults to 1.
-  @override
-  final int minuteFlex;
+  @override final int minuteFlex = 1,
 
   /// The period (AM/PM) wheel's flex factor. Defaults to 1.
-  @override
-  final int periodFlex;
+  @override final int periodFlex = 1,
 
-  /// The padding.
-  @override
-  final EdgeInsetsDirectional padding;
-
+  /// The padding. Defaults to `EdgeInsetsDirectional.only(start: 10, end: 10)`.
+  @override final EdgeInsetsDirectional padding = const .only(start: 10, end: 10),
+  super.diameterRatio,
+  super.squeeze,
+  super.magnification,
+  super.overAndUnderCenterOpacity,
+  super.spacing = 0,
+  super.textHeightBehavior = const TextHeightBehavior(applyHeightToFirstAscent: false, applyHeightToLastDescent: false),
+  super.selectionHeightAdjustment = 5,
+}) extends FPickerStyle with _$FTimePickerStyleFunctions {
   /// Creates a [FTimePickerStyle].
-  const FTimePickerStyle({
-    required super.textStyle,
-    required super.selectionDecoration,
-    required super.focusedOutlineStyle,
-    required super.hapticFeedback,
-    this.hourFlex = 1,
-    this.minuteFlex = 1,
-    this.periodFlex = 1,
-    this.padding = const .only(start: 10, end: 10),
-    super.diameterRatio,
-    super.squeeze,
-    super.magnification,
-    super.overAndUnderCenterOpacity,
-    super.spacing = 0,
-    super.textHeightBehavior = const TextHeightBehavior(
-      applyHeightToFirstAscent: false,
-      applyHeightToLastDescent: false,
-    ),
-    super.selectionHeightAdjustment = 5,
-  });
+  this;
 
   /// Creates a [FTimePickerStyle] that inherits its properties.
-  FTimePickerStyle.inherit({
+  new inherit({
     required FColors colors,
     required FStyle style,
     required FTypography typography,

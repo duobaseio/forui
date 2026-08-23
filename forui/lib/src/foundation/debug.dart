@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:cupertino_ui/cupertino_ui.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/rendering.dart';
 
@@ -10,11 +10,8 @@ import 'package:forui/forui.dart';
 ///
 /// This should always be guarded by a [kDebugMode] check at the call-site to prevent unnecessary performance overhead.
 @internal
-class FiniteConstraintsValidator extends SingleChildRenderObjectWidget {
-  final String type;
-
-  const FiniteConstraintsValidator({required this.type, required super.child, super.key});
-
+class const FiniteConstraintsValidator({required final String type, required super.child, super.key})
+    extends SingleChildRenderObjectWidget {
   @override
   RenderObject createRenderObject(BuildContext context) => _RenderFiniteConstraintsValidator(type: type);
 
@@ -30,11 +27,7 @@ class FiniteConstraintsValidator extends SingleChildRenderObjectWidget {
   }
 }
 
-class _RenderFiniteConstraintsValidator extends RenderProxyBox {
-  String _type;
-
-  _RenderFiniteConstraintsValidator({required this._type});
-
+class _RenderFiniteConstraintsValidator({required var String _type}) extends RenderProxyBox {
   @override
   void performLayout() {
     assert(() {

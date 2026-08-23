@@ -11,14 +11,14 @@ import 'package:forui/src/theme/variants.dart';
 class _Add with Delta {
   final int value;
 
-  const _Add(this.value);
+  const new(this.value);
 
   @override
   int call(covariant int base) => base + value;
 }
 
 class _NullableDelta with Delta {
-  const _NullableDelta();
+  const new();
 
   @override
   Object call(covariant double? base) => base ?? 0.0;

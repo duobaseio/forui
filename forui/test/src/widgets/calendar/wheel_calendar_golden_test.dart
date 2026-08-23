@@ -10,7 +10,7 @@ import '../../test_scaffold.dart';
 
 Widget _harness({
   required FThemeData theme,
-  FDateSelectionControl? selectionControl,
+  FDateSelectionControl<Object?>? selectionControl,
   FWheelCalendarControl? control,
   TextDirection textDirection = .ltr,
 }) => TestScaffold.app(

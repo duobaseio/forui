@@ -9,7 +9,7 @@ import 'package:meta/meta.dart';
 /// Generates a [TransformationsExtension] that provides `copyWith` and `lerp` methods.
 class DesignTransformationsExtension extends TransformationsExtension {
   /// Creates a [DesignTransformationsExtension].
-  DesignTransformationsExtension(super.step, super.element, super.sentinels, {required super.copyWithDocsHeader});
+  new(super.step, super.element, super.sentinels, {required super.copyWithDocsHeader});
 
   /// Generates an extension that provides non virtual transforming methods.
   @override
@@ -67,10 +67,10 @@ class DesignTransformationsExtension extends TransformationsExtension {
           }
 
           if (extension case ExtensionTypeDeclaration(
-            primaryConstructor: PrimaryConstructorDeclaration(
+            namePart: PrimaryConstructorDeclaration(
               formalParameters: FormalParameterList(
                 parameters: [
-                  SimpleFormalParameter(type: NamedType(name: final representationName, :final typeArguments?)),
+                  RegularFormalParameter(type: NamedType(name: final representationName, :final typeArguments?)),
                 ],
               ),
             ),
@@ -94,11 +94,9 @@ class DesignTransformationsExtension extends TransformationsExtension {
           }
           return 't < 0.5 ? $name : other.$name';
         }(),
-        // FVariants<K, V, D> - use AST to get type due to circular dependency
+        // FVariants<K, E, V, D> - use AST to get type due to circular dependency
         InterfaceType(:final element) when element.name == 'FVariants' => await () async {
-          final node = await step.resolver.astNodeFor(field.firstFragment);
-
-          if (node?.parent case VariableDeclarationList(type: NamedType(:final typeArguments?))) {
+          if (await declaredType(step, field) case NamedType(:final typeArguments?)) {
             return switch (typeArguments.arguments[2].toSource()) {
               'BoxDecoration' => '.lerpBoxDecoration($name, other.$name, t)',
               'BoxDecoration?' => '.lerpWhere($name, other.$name, t, BoxDecoration.lerp)',

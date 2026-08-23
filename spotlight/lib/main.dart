@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart' hide Autocomplete, Badge, Dialog, Switch, TextField, Tooltip;
+import 'package:material_ui/material_ui.dart' hide Autocomplete, Badge, Dialog, Switch, TextField, Tooltip;
 
 import 'package:forui/forui.dart';
 import 'package:marionette_flutter/marionette_flutter.dart';

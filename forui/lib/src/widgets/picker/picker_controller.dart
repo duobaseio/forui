@@ -9,11 +9,9 @@ import 'package:forui/forui.dart';
 part 'picker_controller.control.dart';
 
 @internal
-abstract class ValuePickerController<T> extends ValueNotifier<T> {
+abstract class ValuePickerController<T>(super._value) extends ValueNotifier<T> {
   FPickerController? _picker;
   bool _mutating = false;
-
-  ValuePickerController(super._value);
 
   /// Animates the controller to the given [value].
   Future<void> animateTo(
@@ -99,7 +97,7 @@ class FPickerController extends ValueNotifier<List<int>> {
   bool _reduceMotion = false;
 
   /// Creates a [FPickerController].
-  FPickerController({required List<int> indexes}) : super([...indexes]);
+  new({required List<int> indexes}) : super([...indexes]);
 
   /// Animates the wheels to the given [value].
   Future<void> animateTo(
@@ -185,7 +183,7 @@ class _ProxyController extends FPickerController {
   Curve _curve;
   int _monotonic = 0;
 
-  _ProxyController(this._unsynced, this._onChange, this._duration, this._curve) : super(indexes: _unsynced);
+  new(this._unsynced, this._onChange, this._duration, this._curve) : super(indexes: _unsynced);
 
   void update(List<int> newValue, ValueChanged<List<int>> onChange, Duration duration, Curve curve) {
     _onChange = onChange;
@@ -239,11 +237,8 @@ class _ProxyController extends FPickerController {
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FPickerControl with Diagnosticable, _$FPickerControlMixin {
   /// Creates a [FPickerControl].
-  const factory FPickerControl.managed({
-    FPickerController? controller,
-    List<int>? initial,
-    ValueChanged<List<int>>? onChange,
-  }) = FPickerManagedControl;
+  const factory managed({FPickerController? controller, List<int>? initial, ValueChanged<List<int>>? onChange}) =
+      FPickerManagedControl;
 
   /// Creates a [FPickerControl] for controlling a picker using lifted state.
   ///
@@ -254,14 +249,14 @@ sealed class FPickerControl with Diagnosticable, _$FPickerControlMixin {
   /// The [onChange] callback is invoked when the user changes the value.
   /// The [duration] when animating to [indexes] from an invalid/different index. Defaults to 300 milliseconds.
   /// The [curve] when animating to [indexes] from an invalid/different index. Defaults to [Curves.easeOutCubic].
-  const factory FPickerControl.lifted({
+  const factory lifted({
     required List<int> indexes,
     required ValueChanged<List<int>> onChange,
     Duration duration,
     Curve curve,
   }) = _Lifted;
 
-  const FPickerControl._();
+  const new _();
 
   (FPickerController, bool) _update(
     FPickerControl old,
@@ -317,7 +312,7 @@ class FPickerManagedControl extends FPickerControl with Diagnosticable, _$FPicke
   final ValueChanged<List<int>>? onChange;
 
   /// Creates a [FPickerControl].
-  const FPickerManagedControl({this.controller, this.initial, this.onChange})
+  const new({this.controller, this.initial, this.onChange})
     : assert(
         controller == null || initial == null,
         'Cannot provide both controller and initial indexes. Pass the initial indexes to the controller instead.',
@@ -343,7 +338,7 @@ class _Lifted extends FPickerControl with _$_LiftedMixin {
   @override
   final Curve curve;
 
-  const _Lifted({
+  const new({
     required this.indexes,
     required this.onChange,
     this.duration = const Duration(milliseconds: 300),

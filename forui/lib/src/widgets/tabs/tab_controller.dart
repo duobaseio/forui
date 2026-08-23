@@ -6,7 +6,7 @@ final class FTabController extends FChangeNotifier {
   FTabMotion _motion;
 
   /// Creates a [FTabController].
-  factory FTabController({
+  factory({
     required int length,
     required TickerProvider vsync,
     int index = 0,
@@ -19,7 +19,7 @@ final class FTabController extends FChangeNotifier {
     );
   }
 
-  FTabController._(this._controller, this._motion);
+  new _(this._controller, this._motion);
 
   void _update(int index, TickerProvider vsync, int length, FTabMotion motion, ValueChanged<int> onChange) {
     if (_motion != motion) {
@@ -100,7 +100,7 @@ class _ProxyController extends TabController {
   int _unsynced;
   ValueChanged<int> _onChange;
 
-  _ProxyController({
+  new({
     required super.length,
     required super.vsync,
     required this._onChange,
@@ -138,17 +138,15 @@ class _ProxyController extends TabController {
 /// Motion-related properties for [FTabs].
 ///
 /// All motion is automatically disabled when [FAccessibility.motion] is not [FAccessibilityMotion.all].
-class FTabMotion with Diagnosticable, _$FTabMotionFunctions {
+class const FTabMotion({
   /// The duration of the tab change animation. Defaults to 300 ms.
-  @override
-  final Duration duration;
+  @override final Duration duration = const Duration(milliseconds: 300),
 
   /// The curve of the tab change animation. Defaults to [Curves.easeOutCubic].
-  @override
-  final Curve curve;
-
+  @override final Curve curve = Curves.easeOutCubic,
+}) with Diagnosticable, _$FTabMotionFunctions {
   /// Creates a [FTabMotion].
-  const FTabMotion({this.duration = const Duration(milliseconds: 300), this.curve = Curves.easeOutCubic});
+  this;
 }
 
 /// A [FTabControl] defines how a [FTabs] is controlled.
@@ -156,12 +154,8 @@ class FTabMotion with Diagnosticable, _$FTabMotionFunctions {
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FTabControl with Diagnosticable, _$FTabControlMixin {
   /// Creates a [FTabControl].
-  const factory FTabControl.managed({
-    FTabController? controller,
-    int? initial,
-    FTabMotion? motion,
-    ValueChanged<int>? onChange,
-  }) = FTabManagedControl;
+  const factory managed({FTabController? controller, int? initial, FTabMotion? motion, ValueChanged<int>? onChange}) =
+      FTabManagedControl;
 
   /// Creates lifted state control.
   ///
@@ -169,10 +163,9 @@ sealed class FTabControl with Diagnosticable, _$FTabControlMixin {
   ///
   /// The [index] parameter contains the current selected tab index.
   /// The [onChange] callback is invoked when the user selects a tab.
-  const factory FTabControl.lifted({required int index, required ValueChanged<int> onChange, FTabMotion motion}) =
-      _Lifted;
+  const factory lifted({required int index, required ValueChanged<int> onChange, FTabMotion motion}) = _Lifted;
 
-  const FTabControl._();
+  const new _();
 
   (FTabController, bool) _update(
     FTabControl old,
@@ -211,7 +204,7 @@ class FTabManagedControl extends FTabControl with _$FTabManagedControlMixin {
   final ValueChanged<int>? onChange;
 
   /// Creates a [FTabControl].
-  const FTabManagedControl({this.controller, this.initial, this.motion, this.onChange})
+  const new({this.controller, this.initial, this.motion, this.onChange})
     : assert(
         controller == null || initial == null,
         'Cannot provide both controller and initial. Pass initial index to controller instead.',
@@ -235,7 +228,7 @@ class _Lifted extends FTabControl with _$_LiftedMixin {
   @override
   final FTabMotion motion;
 
-  const _Lifted({required this.index, required this.onChange, this.motion = const .new()}) : super._();
+  const new({required this.index, required this.onChange, this.motion = const .new()}) : super._();
 
   @override
   FTabController createController(TickerProvider vsync, int length) => FTabController._(

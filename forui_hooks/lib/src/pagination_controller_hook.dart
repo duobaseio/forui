@@ -19,7 +19,7 @@ class _PaginationControllerHook extends Hook<FPaginationController> {
   final int siblings;
   final bool showEdges;
 
-  const _PaginationControllerHook({
+  const new({
     required this.pages,
     required this.page,
     required this.siblings,

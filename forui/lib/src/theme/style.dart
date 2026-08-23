@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'package:collection/collection.dart';
 import 'package:meta/meta.dart';
@@ -11,50 +11,42 @@ import 'package:forui/forui.dart';
 part 'style.design.dart';
 
 /// A set of miscellaneous tokens that are part of a [FThemeData].
-class FStyle with Diagnosticable, _$FStyleFunctions {
+class const FStyle._({
   /// The style for the form field.
-  @override
-  final FFormFieldStyle formFieldStyle;
+  @override required final FFormFieldStyle formFieldStyle,
 
   /// The focused outline style.
-  @override
-  final FFocusedOutlineStyle focusedOutlineStyle;
+  @override required final FFocusedOutlineStyle focusedOutlineStyle,
 
   /// The icon style.
-  @override
-  final IconThemeData iconStyle;
+  @override required final IconThemeData iconStyle,
 
   /// The size tokens.
-  @override
-  final FSizes sizes;
+  @override required final FSizes sizes,
+
+  /// The tappable style.
+  @override required final FTappableStyle tappableStyle,
 
   /// The border radius.
-  @override
-  final FBorderRadius borderRadius;
+  @override final FBorderRadius borderRadius = const FBorderRadius(),
 
   /// The border width. Defaults to 1.
-  @override
-  final double borderWidth;
+  @override final double borderWidth = 1,
 
   /// The page's padding. Defaults to `EdgeInsets.symmetric(vertical: 8, horizontal: 12)`.
-  @override
-  final EdgeInsets pagePadding;
+  @override final EdgeInsets pagePadding = const .symmetric(vertical: 8, horizontal: 12),
 
   /// The shadow used for elevated widgets.
   @override
-  final List<BoxShadow> shadow;
+  final List<BoxShadow> shadow = const [BoxShadow(color: Color(0x0d000000), offset: Offset(0, 1), blurRadius: 2)],
 
-  /// The tappable style.
-  @override
-  final FTappableStyle tappableStyle;
-
-  final Map<Object, ThemeExtension<dynamic>> _extensions;
-
+  final Map<Object, ThemeExtension<dynamic>> _extensions = const {},
+}) with Diagnosticable, _$FStyleFunctions {
   /// Creates an [FStyle].
   ///
   /// **Note:**
   /// Unless you are creating a completely new style, modifying a predefined [FThemeData]'s style should be preferred.
-  FStyle({
+  new({
     required FFormFieldStyle formFieldStyle,
     required FFocusedOutlineStyle focusedOutlineStyle,
     required IconThemeData iconStyle,
@@ -78,21 +70,8 @@ class FStyle with Diagnosticable, _$FStyleFunctions {
          extensions: extensions.isEmpty ? const {} : {for (final extension in extensions) extension.type: extension},
        );
 
-  const FStyle._({
-    required this.formFieldStyle,
-    required this.focusedOutlineStyle,
-    required this.iconStyle,
-    required this.sizes,
-    required this.tappableStyle,
-    this.borderRadius = const FBorderRadius(),
-    this.borderWidth = 1,
-    this.pagePadding = const .symmetric(vertical: 8, horizontal: 12),
-    this.shadow = const [BoxShadow(color: Color(0x0d000000), offset: Offset(0, 1), blurRadius: 2)],
-    this._extensions = const {},
-  });
-
   /// Creates an [FStyle] that inherits its properties.
-  factory FStyle.inherit({required FColors colors, required FTypography typography, required bool touch}) {
+  factory inherit({required FColors colors, required FTypography typography, required bool touch}) {
     const borderRadius = FBorderRadius();
     return FStyle(
       formFieldStyle: .inherit(colors: colors, typography: typography, touch: touch),

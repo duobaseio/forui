@@ -82,7 +82,7 @@ class FScaffold extends StatelessWidget {
   final bool resizeToAvoidBottomInset;
 
   /// Creates a [FScaffold].
-  const FScaffold({
+  const new({
     required this.child,
     this.scaffoldStyle = const .context(),
     this.header,
@@ -157,29 +157,21 @@ class FScaffold extends StatelessWidget {
 }
 
 /// The scaffold style.
-class FScaffoldStyle with Diagnosticable, _$FScaffoldStyleFunctions {
+class FScaffoldStyle({
   /// The fallback system overlay style.
   ///
   /// This is used as a fallback when no other widgets override [AnnotatedRegion<SystemUiOverlayStyle>]. Typically, the
   /// [SystemUiOverlayStyle] property is overridden by [FHeader].
-  @override
-  final SystemUiOverlayStyle systemOverlayStyle;
+  @override required final SystemUiOverlayStyle systemOverlayStyle,
 
   /// The background color.
-  @override
-  final Color backgroundColor;
+  @override required final Color backgroundColor,
 
   /// The sidebar background color.
-  @override
-  final Color sidebarBackgroundColor;
+  @override required final Color sidebarBackgroundColor,
 
   /// The child padding. Only used when [FScaffold.childPad] is `true`.
-  @override
-  final EdgeInsetsGeometry childPadding;
-
-  /// The header decoration.
-  @override
-  final Decoration headerDecoration;
+  @override required final EdgeInsetsGeometry childPadding,
 
   /// The footer decoration.
   ///
@@ -187,21 +179,16 @@ class FScaffoldStyle with Diagnosticable, _$FScaffoldStyleFunctions {
   /// By default, both [FBottomNavigationBar] and [FScaffold.footer] specify a top border. When used together, the
   /// top border must be removed from both [FBottomNavigationBarStyle.decoration] and [FScaffoldStyle.footerDecoration]
   /// for the changes to take effect.
-  @override
-  final Decoration footerDecoration;
+  @override required final Decoration footerDecoration,
 
+  /// The header decoration. Defaults to `BoxDecoration()`.
+  @override final Decoration headerDecoration = const BoxDecoration(),
+}) with Diagnosticable, _$FScaffoldStyleFunctions {
   /// Creates a [FScaffoldStyle].
-  FScaffoldStyle({
-    required this.systemOverlayStyle,
-    required this.backgroundColor,
-    required this.sidebarBackgroundColor,
-    required this.childPadding,
-    required this.footerDecoration,
-    this.headerDecoration = const BoxDecoration(),
-  });
+  this;
 
   /// Creates a [FScaffoldStyle] that inherits its properties.
-  FScaffoldStyle.inherit({required FColors colors, required FStyle style})
+  new inherit({required FColors colors, required FStyle style})
     : this(
         systemOverlayStyle: colors.systemOverlayStyle,
         backgroundColor: colors.background,
@@ -218,7 +205,7 @@ class FScaffoldStyle with Diagnosticable, _$FScaffoldStyleFunctions {
 class _RenderScaffoldWidget extends MultiChildRenderObjectWidget {
   final bool resizeToAvoidBottomInset;
 
-  const _RenderScaffoldWidget({required this.resizeToAvoidBottomInset, required super.children});
+  const new({required this.resizeToAvoidBottomInset, required super.children});
 
   @override
   RenderObject createRenderObject(BuildContext context) {
@@ -249,7 +236,7 @@ class _RenderScaffold extends RenderBox
   bool _resizeToAvoidBottomInset;
   EdgeInsets _insets;
 
-  _RenderScaffold({required this._resizeToAvoidBottomInset, required this._insets});
+  new({required this._resizeToAvoidBottomInset, required this._insets});
 
   @override
   void setupParentData(covariant RenderObject child) => child.parentData = DefaultData();

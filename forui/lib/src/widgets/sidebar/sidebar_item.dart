@@ -74,7 +74,7 @@ class FSidebarItem extends StatefulWidget {
   final List<Widget> children;
 
   /// Creates a [FSidebarItem].
-  const FSidebarItem({
+  const new({
     this.style = const .context(),
     this.icon,
     this.label,
@@ -282,83 +282,57 @@ class _FSidebarItemState extends State<FSidebarItem> with TickerProviderStateMix
 }
 
 /// The style for a [FSidebarItem].
-class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
+class const FSidebarItemStyle({
   /// The label's text style.
-  @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> textStyle;
-
-  /// The spacing between the icon and label. Defaults to 8.
-  @override
-  final double iconSpacing;
+  @override required final FVariants<FTappableVariantConstraint, FTappableVariant, TextStyle, TextStyleDelta> textStyle,
 
   /// The icon's style.
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> iconStyle;
-
-  /// The spacing between the label and collapsible widget. Defaults to 8.
-  @override
-  final double collapsibleIconSpacing;
+  required final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> iconStyle,
 
   /// The collapsible icon's style.
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta> collapsibleIconStyle;
+  required final FVariants<FTappableVariantConstraint, FTappableVariant, IconThemeData, IconThemeDataDelta>
+  collapsibleIconStyle,
 
   /// The collapsible icon builder. Defaults to [FIcons.chevronRight].
-  @override
-  final FIcon collapsibleIcon;
-
-  /// The spacing between child items. Defaults to 4.
-  @override
-  final double childrenSpacing;
-
-  /// The padding around the children container. Defaults to `EdgeInsets.only(left: 26, top: 2)`.
-  @override
-  final EdgeInsetsGeometry childrenPadding;
+  @override required final FIcon collapsibleIcon,
 
   /// The background color.
-  @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, Color, Delta> backgroundColor;
+  @override required final FVariants<FTappableVariantConstraint, FTappableVariant, Color, Delta> backgroundColor,
 
   /// The padding around the content. Defaults to `EdgeInsets.all(8)`.
-  @override
-  final EdgeInsetsGeometry padding;
+  @override required final EdgeInsetsGeometry padding,
 
   /// The item's border radius.
-  @override
-  final BorderRadius borderRadius;
+  @override required final BorderRadius borderRadius,
 
   /// The tappable's style.
-  @override
-  final FTappableStyle tappableStyle;
+  @override required final FTappableStyle tappableStyle,
 
   /// The focused outline style.
-  @override
-  final FFocusedOutlineStyle focusedOutlineStyle;
+  @override required final FFocusedOutlineStyle focusedOutlineStyle,
 
-  /// The motion-related properties.
-  @override
-  final FSidebarItemMotion motion;
+  /// The spacing between the icon and label. Defaults to 8.
+  @override final double iconSpacing = 8,
 
+  /// The spacing between the label and collapsible widget. Defaults to 8.
+  @override final double collapsibleIconSpacing = 8,
+
+  /// The spacing between child items. Defaults to 4.
+  @override final double childrenSpacing = 4,
+
+  /// The padding around the children container. Defaults to `EdgeInsets.only(left: 26, top: 2)`.
+  @override final EdgeInsetsGeometry childrenPadding = const .only(left: 26, top: 2),
+
+  /// The motion-related properties. Defaults to [FSidebarItemMotion].
+  @override final FSidebarItemMotion motion = const FSidebarItemMotion(),
+}) with Diagnosticable, _$FSidebarItemStyleFunctions {
   /// Creates a [FSidebarItemStyle].
-  const FSidebarItemStyle({
-    required this.textStyle,
-    required this.iconStyle,
-    required this.collapsibleIconStyle,
-    required this.collapsibleIcon,
-    required this.backgroundColor,
-    required this.padding,
-    required this.borderRadius,
-    required this.tappableStyle,
-    required this.focusedOutlineStyle,
-    this.iconSpacing = 8,
-    this.collapsibleIconSpacing = 8,
-    this.childrenSpacing = 4,
-    this.childrenPadding = const .only(left: 26, top: 2),
-    this.motion = const FSidebarItemMotion(),
-  });
+  this;
 
   /// Creates a [FSidebarItemStyle] that inherits its properties.
-  factory FSidebarItemStyle.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FIcons icons,
@@ -409,63 +383,40 @@ class FSidebarItemStyle with Diagnosticable, _$FSidebarItemStyleFunctions {
 }
 
 /// The motion-related properties for a [FSidebarItem].
-class FSidebarItemMotion with Diagnosticable, _$FSidebarItemMotionFunctions {
+class const FSidebarItemMotion({
   /// The expand animation's duration. Defaults to 200ms.
-  @override
-  final Duration expandDuration;
+  @override final Duration expandDuration = const Duration(milliseconds: 200),
 
   /// The collapse animation's duration. Defaults to 150ms.
-  @override
-  final Duration collapseDuration;
+  @override final Duration collapseDuration = const Duration(milliseconds: 150),
 
   /// The expand animation's curve. Defaults to [Curves.easeOutCubic].
-  @override
-  final Curve expandCurve;
+  @override final Curve expandCurve = Curves.easeOutCubic,
 
   /// The collapse animation's curve. Defaults to [Curves.easeInCubic].
-  @override
-  final Curve collapseCurve;
+  @override final Curve collapseCurve = Curves.easeInCubic,
 
   /// The fade-in animation's curve. Defaults to [Curves.linear].
-  @override
-  final Curve fadeInCurve;
+  @override final Curve fadeInCurve = Curves.linear,
 
   /// The fade-out animation's curve. Defaults to [Curves.linear].
-  @override
-  final Curve fadeOutCurve;
+  @override final Curve fadeOutCurve = Curves.linear,
 
   /// The icon's animation curve when expanding. Defaults to [Curves.easeOut].
-  @override
-  final Curve iconExpandCurve;
+  @override final Curve iconExpandCurve = Curves.easeOut,
 
   /// The icon's animation curve when collapsing. Defaults to [Curves.easeOut].
-  @override
-  final Curve iconCollapseCurve;
+  @override final Curve iconCollapseCurve = Curves.easeOut,
 
   /// The reveal animation's tween. Defaults to `FImmutableTween(begin: 0.0, end: 1.0)`.
-  @override
-  final Animatable<double> revealTween;
+  @override final Animatable<double> revealTween = const FImmutableTween(begin: 0.0, end: 1.0),
 
   /// The fade animation's tween. Defaults to `FImmutableTween(begin: 0.0, end: 1.0)`.
-  @override
-  final Animatable<double> fadeTween;
+  @override final Animatable<double> fadeTween = const FImmutableTween(begin: 0.0, end: 1.0),
 
   /// The icon animation's tween. Defaults to `FImmutableTween(begin: 0.0, end: 0.25)`.
-  @override
-  final Animatable<double> iconTween;
-
+  @override final Animatable<double> iconTween = const FImmutableTween(begin: 0.0, end: 0.25),
+}) with Diagnosticable, _$FSidebarItemMotionFunctions {
   /// Creates a [FSidebarItemMotion].
-  const FSidebarItemMotion({
-    this.expandDuration = const Duration(milliseconds: 200),
-    this.collapseDuration = const Duration(milliseconds: 150),
-    this.expandCurve = Curves.easeOutCubic,
-    this.collapseCurve = Curves.easeInCubic,
-    this.fadeInCurve = Curves.linear,
-    this.fadeOutCurve = Curves.linear,
-    this.iconExpandCurve = Curves.easeOut,
-    this.iconCollapseCurve = Curves.easeOut,
-    this.revealTween = const FImmutableTween(begin: 0.0, end: 1.0),
-    this.fadeTween = const FImmutableTween(begin: 0.0, end: 1.0),
-    this.iconTween = const FImmutableTween(begin: 0.0, end: 0.25),
-  });
+  this;
 }

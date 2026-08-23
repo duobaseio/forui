@@ -1,5 +1,5 @@
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'package:forui/forui.dart';
 
@@ -7,7 +7,7 @@ class LocaleScaffold extends StatefulWidget {
   final List<Locale> locales;
   final Widget child;
 
-  const LocaleScaffold({required this.child, this.locales = const [Locale('en', 'US'), Locale('ko')], super.key});
+  const new({required this.child, this.locales = const [Locale('en', 'US'), Locale('ko')], super.key});
 
   @override
   State<LocaleScaffold> createState() => _LocaleScaffoldState();

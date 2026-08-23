@@ -175,7 +175,7 @@ class FButton extends StatelessWidget {
   /// ```
   ///
   /// The layout is reversed for RTL locales.
-  FButton({
+  new({
     required this.onPress,
     this.variant = .primary,
     this.size = .md,
@@ -227,7 +227,7 @@ class FButton extends StatelessWidget {
   /// [builder] exposes the resolved [FButtonStyle] and icon style. When [child] is provided, it is passed to the
   /// builder as its `child` argument. The builder defaults to [defaultIconContentBuilder] which returns [child]
   /// unchanged. At least one of [child] or a custom [builder] must be provided.
-  FButton.icon({
+  new icon({
     required this.onPress,
     this.variant = .outline,
     this.size = .md,
@@ -254,7 +254,7 @@ class FButton extends StatelessWidget {
        child = IconContent(builder: builder, child: child);
 
   /// Creates a [FButton] with custom content.
-  const FButton.raw({
+  const new raw({
     required this.onPress,
     required this.child,
     this.variant = .primary,
@@ -337,10 +337,10 @@ class FButton extends StatelessWidget {
 
 /// [FButtonStyle]'s style.
 extension type FButtonStyles(
-  FVariants<FButtonVariantConstraint, FButtonVariant, FButtonSizeStyles, FButtonSizesDelta> _
+  FVariants<FButtonVariantConstraint, FButtonVariant, FButtonSizeStyles, FButtonSizesDelta> _,
 ) implements FVariants<FButtonVariantConstraint, FButtonVariant, FButtonSizeStyles, FButtonSizesDelta> {
   /// Creates a [FButtonStyles] that inherits its properties.
-  factory FButtonStyles.inherit({
+  factory inherit({
     required FColors colors,
     required FTypography typography,
     required FStyle style,
@@ -492,10 +492,10 @@ typedef FButtonSizesDelta =
 
 /// [FButtonStyle]'s size styles.
 extension type FButtonSizeStyles(
-  FVariants<FButtonSizeVariantConstraint, FButtonSizeVariant, FButtonStyle, FButtonStyleDelta> _
+  FVariants<FButtonSizeVariantConstraint, FButtonSizeVariant, FButtonStyle, FButtonStyleDelta> _,
 ) implements FVariants<FButtonSizeVariantConstraint, FButtonSizeVariant, FButtonStyle, FButtonStyleDelta> {
   /// Creates a [FButtonSizeStyles] that inherits its properties.
-  factory FButtonSizeStyles.inherit({
+  factory inherit({
     required FTypography typography,
     required FStyle style,
     required FVariants<FTappableVariantConstraint, FTappableVariant, Decoration, DecorationDelta> Function(
@@ -647,38 +647,28 @@ extension type FButtonSizeStyles(
 }
 
 /// A [FButton]'s style.
-final class FButtonStyle with Diagnosticable, _$FButtonStyleFunctions {
+final class FButtonStyle({
   /// The box decoration.
   @override
-  final FVariants<FTappableVariantConstraint, FTappableVariant, Decoration, DecorationDelta> decoration;
+  required final FVariants<FTappableVariantConstraint, FTappableVariant, Decoration, DecorationDelta> decoration,
 
   /// The content's style.
-  @override
-  final FButtonContentStyle contentStyle;
+  @override required final FButtonContentStyle contentStyle,
 
   /// The icon content's style.
-  @override
-  final FButtonIconContentStyle iconContentStyle;
+  @override required final FButtonIconContentStyle iconContentStyle,
 
   /// The tappable's style.
-  @override
-  final FTappableStyle tappableStyle;
+  @override required final FTappableStyle tappableStyle,
 
   /// The focused outline style.
-  @override
-  final FFocusedOutlineStyle focusedOutlineStyle;
-
+  @override required final FFocusedOutlineStyle focusedOutlineStyle,
+}) with Diagnosticable, _$FButtonStyleFunctions {
   /// Creates a [FButtonStyle].
-  FButtonStyle({
-    required this.decoration,
-    required this.contentStyle,
-    required this.iconContentStyle,
-    required this.tappableStyle,
-    required this.focusedOutlineStyle,
-  });
+  this;
 
   /// Creates a [FButtonStyle] that inherits its properties.
-  factory FButtonStyle.inherit({
+  factory inherit({
     required FStyle style,
     required FVariants<FTappableVariantConstraint, FTappableVariant, Decoration, DecorationDelta> decoration,
     required Color foregroundColor,
@@ -748,7 +738,7 @@ class FButtonData extends InheritedWidget {
   final Set<FTappableVariant> variants;
 
   /// Creates a [FButtonData].
-  const FButtonData({required this.style, required this.variants, required super.child, super.key});
+  const new({required this.style, required this.variants, required super.child, super.key});
 
   @override
   bool updateShouldNotify(covariant FButtonData old) => style != old.style || !setEquals(variants, old.variants);

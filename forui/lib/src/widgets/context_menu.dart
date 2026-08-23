@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
 
@@ -154,7 +154,7 @@ class FContextMenu extends StatefulWidget {
   ///
   /// ## Contract
   /// Throws [AssertionError] if neither [menuBuilder] nor [menu] is provided.
-  FContextMenu({
+  new({
     this.control = const .managed(),
     this.style = const .context(),
     this.scrollController,
@@ -213,7 +213,7 @@ class FContextMenu extends StatefulWidget {
   ///
   /// ## Contract
   /// Throws [AssertionError] if neither [menuBuilder] nor [menu] is provided.
-  FContextMenu.tiles({
+  new tiles({
     this.control = const .managed(),
     this.style = const .context(),
     this.scrollController,

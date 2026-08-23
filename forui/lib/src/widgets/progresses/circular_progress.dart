@@ -70,7 +70,7 @@ class FCircularProgress extends StatefulWidget {
   final FIcon icon;
 
   /// Creates a [FCircularProgress] that uses [FIcons.loaderCircle].
-  const FCircularProgress({
+  const new({
     this.size = .md,
     this.style = const .context(),
     this.semanticsLabel,
@@ -79,11 +79,11 @@ class FCircularProgress extends StatefulWidget {
   });
 
   /// Creates a [FCircularProgress] that uses [FIcons.loader].
-  const FCircularProgress.loader({this.size = .md, this.style = const .context(), this.semanticsLabel, super.key})
+  const new loader({this.size = .md, this.style = const .context(), this.semanticsLabel, super.key})
     : icon = const _Loader(.plain);
 
   /// Creates a [FCircularProgress] that uses [FIcons.loaderPinwheel].
-  const FCircularProgress.pinwheel({this.size = .md, this.style = const .context(), this.semanticsLabel, super.key})
+  const new pinwheel({this.size = .md, this.style = const .context(), this.semanticsLabel, super.key})
     : icon = const _Loader(.pinwheel);
 
   @override
@@ -177,11 +177,7 @@ class _CircularState extends State<FCircularProgress> with SingleTickerProviderS
 enum _Slot { circle, plain, pinwheel }
 
 /// Defers to the ambient [FIcons]'s loader slot.
-class _Loader implements FIcon {
-  final _Slot slot;
-
-  const _Loader(this.slot);
-
+class const _Loader(final _Slot slot) implements FIcon {
   @override
   Widget call(BuildContext context, {String? semanticsLabel}) {
     final icons = context.theme.icons;
@@ -202,16 +198,18 @@ class _Loader implements FIcon {
 }
 
 /// An inherited widget that provides [FCircularProgressStyle] to its descendants.
-class FInheritedCircularProgressStyle extends InheritedWidget {
+class const FInheritedCircularProgressStyle({
   /// The circular progress's style.
-  final FCircularProgressStyle style;
+  required final FCircularProgressStyle style,
+  required super.child,
+  super.key,
+}) extends InheritedWidget {
+  /// Creates a [FInheritedCircularProgressStyle].
+  this;
 
   /// Returns the current [FCircularProgressStyle], or `null` if there is no ancestor [FInheritedCircularProgressStyle].
   static FCircularProgressStyle? of(BuildContext context) =>
       context.dependOnInheritedWidgetOfExactType<FInheritedCircularProgressStyle>()?.style;
-
-  /// Creates a [FInheritedCircularProgressStyle].
-  const FInheritedCircularProgressStyle({required this.style, required super.child, super.key});
 
   @override
   bool updateShouldNotify(FInheritedCircularProgressStyle old) => style != old.style;
@@ -224,20 +222,18 @@ class FInheritedCircularProgressStyle extends InheritedWidget {
 }
 
 /// The style for [FCircularProgress].
-class FCircularProgressStyle with Diagnosticable, _$FCircularProgressStyleFunctions {
+class FCircularProgressStyle({
   /// The circular progress's style.
-  @override
-  final IconThemeData iconStyle;
+  @override required final IconThemeData iconStyle,
 
-  /// The motion-related properties.
-  @override
-  final FCircularProgressMotion motion;
+  /// The motion-related properties. Defaults to [FCircularProgressMotion].
+  @override final FCircularProgressMotion motion = const FCircularProgressMotion(),
+}) with Diagnosticable, _$FCircularProgressStyleFunctions {
+  /// Creates a [FCircularProgressStyle].
+  this;
 
   /// Creates a [FCircularProgressStyle].
-  FCircularProgressStyle({required this.iconStyle, this.motion = const FCircularProgressMotion()});
-
-  /// Creates a [FCircularProgressStyle].
-  FCircularProgressStyle.inherit({required FColors colors, double iconSize = 20})
+  new inherit({required FColors colors, double iconSize = 20})
     : this(
         iconStyle: IconThemeData(color: colors.mutedForeground, size: iconSize),
       );
@@ -251,7 +247,7 @@ extension type FCircularProgressSizeStyles(
     FCircularProgressStyle,
     FCircularProgressStyleDelta
   >
-  _
+  _,
 ) implements
     FVariants<
       FCircularProgressSizeVariantConstraint,
@@ -260,7 +256,7 @@ extension type FCircularProgressSizeStyles(
       FCircularProgressStyleDelta
     > {
   /// Creates [FCircularProgressSizeStyles] that inherit their properties.
-  factory FCircularProgressSizeStyles.inherit({required FColors colors, required FTypography typography}) {
+  factory inherit({required FColors colors, required FTypography typography}) {
     final md = FCircularProgressStyle.inherit(colors: colors, iconSize: typography.body.md.fontSize!);
     return FCircularProgressSizeStyles(
       FVariants(
@@ -295,23 +291,16 @@ extension type FCircularProgressSizeStyles(
 /// Motion-related properties for [FCircularProgress].
 ///
 /// All motion is automatically disabled when [FAccessibility.motion] is [FAccessibilityMotion.disabled].
-class FCircularProgressMotion with Diagnosticable, _$FCircularProgressMotionFunctions {
+class const FCircularProgressMotion({
   /// The duration of one full rotation. Defaults to 1s.
-  @override
-  final Duration duration;
+  @override final Duration duration = const Duration(seconds: 1),
 
   /// The animation curve. Defaults to [Curves.linear].
-  @override
-  final Curve curve;
+  @override final Curve curve = Curves.linear,
 
   /// The rotation's tween. Defaults to `FImmutableTween(begin: 0.0, end: 1.0)`. Reverse to rotate counter-clockwise.
-  @override
-  final Animatable<double> tween;
-
+  @override final Animatable<double> tween = const FImmutableTween(begin: 0.0, end: 1.0),
+}) with Diagnosticable, _$FCircularProgressMotionFunctions {
   /// Creates a [FCircularProgressMotion].
-  const FCircularProgressMotion({
-    this.duration = const Duration(seconds: 1),
-    this.curve = Curves.linear,
-    this.tween = const FImmutableTween(begin: 0.0, end: 1.0),
-  });
+  this;
 }

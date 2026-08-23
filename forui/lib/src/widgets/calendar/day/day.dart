@@ -26,34 +26,27 @@ import 'package:forui/src/theme/variant.dart';
 part 'day.design.dart';
 
 /// A calendar day builder.
-typedef FCalendarDayBuilder =
-    Widget Function(BuildContext, FCalendarDayStyles, FLocalizations, DateTime, Set<FCalendarDayVariant>);
+typedef FCalendarDayBuilder = Widget Function(
+  BuildContext,
+  FCalendarDayStyles,
+  FLocalizations,
+  DateTime,
+  Set<FCalendarDayVariant>,
+);
 
 @internal
-class Day extends StatelessWidget {
-  final FCalendarDayStyles styles;
-  final FLocalizations localizations;
-  final DateTime date;
-  final bool selected; // Optimization to avoid having to perform 4 checks.
-  final Set<FCalendarDayVariant> variants;
-  final FocusNode focusNode;
-  final VoidCallback? onPress;
-  final VoidCallback? onLongPress;
-  final FCalendarDayBuilder builder;
-
-  const Day({
-    required this.styles,
-    required this.localizations,
-    required this.date,
-    required this.selected,
-    required this.variants,
-    required this.focusNode,
-    required this.onPress,
-    required this.onLongPress,
-    required this.builder,
-    super.key,
-  });
-
+class const Day({
+  required final FCalendarDayStyles styles,
+  required final FLocalizations localizations,
+  required final DateTime date,
+  required final bool selected, // Optimization to avoid having to perform 4 checks.
+  required final Set<FCalendarDayVariant> variants,
+  required final FocusNode focusNode,
+  required final VoidCallback? onPress,
+  required final VoidCallback? onLongPress,
+  required final FCalendarDayBuilder builder,
+  super.key,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final semanticsLabel = DateFormat.yMMMMEEEEd(localizations.localeName).format(date);
@@ -88,33 +81,26 @@ class Day extends StatelessWidget {
 }
 
 /// A calendar's day style.
-class FCalendarDayStyle with Diagnosticable, _$FCalendarDayStyleFunctions {
+class FCalendarDayStyle({
   /// The day's text style.
-  @override
-  final TextStyle textStyle;
+  @override required final TextStyle textStyle,
 
   /// The decoration painted in front of [background].
-  @override
-  final Decoration foreground;
+  @override required final Decoration foreground,
 
-  /// The decoration painted behind [foreground].
-  @override
-  final Decoration background;
-
+  /// The decoration painted behind [foreground]. Defaults to `BoxDecoration()`.
+  @override final Decoration background = const BoxDecoration(),
+}) with Diagnosticable, _$FCalendarDayStyleFunctions {
   /// Creates a [FCalendarDayStyle].
-  FCalendarDayStyle({required this.textStyle, required this.foreground, this.background = const BoxDecoration()});
+  this;
 }
 
 /// [FCalendarDayStyle]'s variants.
 extension type FCalendarDayStyles(
-  FVariants<FCalendarDayVariantConstraint, FCalendarDayVariant, FCalendarDayStyle, FCalendarDayStyleDelta> _
+  FVariants<FCalendarDayVariantConstraint, FCalendarDayVariant, FCalendarDayStyle, FCalendarDayStyleDelta> _,
 ) implements FVariants<FCalendarDayVariantConstraint, FCalendarDayVariant, FCalendarDayStyle, FCalendarDayStyleDelta> {
   /// Creates a [FCalendarDayStyles] that inherits its properties.
-  factory FCalendarDayStyles.inherit({
-    required FColors colors,
-    required FTypography typography,
-    required FStyle style,
-  }) {
+  factory inherit({required FColors colors, required FTypography typography, required FStyle style}) {
     final base = FCalendarDayStyle(
       textStyle: typography.body.sm.copyWith(color: colors.foreground),
       foreground: ShapeDecoration(shape: RoundedSuperellipseBorder(borderRadius: style.borderRadius.md)),

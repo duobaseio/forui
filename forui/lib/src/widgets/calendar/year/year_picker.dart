@@ -19,30 +19,18 @@ const _columns = 3;
 const _rows = 4;
 
 @internal
-class YearPicker extends StatelessWidget {
-  final FCalendarYearPickerController controller;
-  final FCalendarYearPickerStyle style;
-  final FLocalizations localization;
-  final DateTime today;
-  final ScrollPhysics? scrollPhysics;
-  final ScrollCacheExtent? scrollCacheExtent;
-  final ScrollBehavior? scrollBehavior;
-  final ValueChanged<DateTime> onPress;
-  final FCalendarYearBuilder builder;
-
-  const YearPicker({
-    required this.controller,
-    required this.style,
-    required this.localization,
-    required this.today,
-    required this.scrollPhysics,
-    required this.scrollCacheExtent,
-    required this.scrollBehavior,
-    required this.onPress,
-    required this.builder,
-    super.key,
-  });
-
+class const YearPicker({
+  required final FCalendarYearPickerController controller,
+  required final FCalendarYearPickerStyle style,
+  required final FLocalizations localization,
+  required final DateTime today,
+  required final ScrollPhysics? scrollPhysics,
+  required final ScrollCacheExtent? scrollCacheExtent,
+  required final ScrollBehavior? scrollBehavior,
+  required final ValueChanged<DateTime> onPress,
+  required final FCalendarYearBuilder builder,
+  super.key,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final size = style.yearSize;
@@ -134,7 +122,7 @@ class _Grid extends StatefulWidget {
   final ValueChanged<DateTime> onPress;
   final FCalendarYearBuilder builder;
 
-  _Grid({
+  new({
     required this.style,
     required this.localization,
     required this.decade,
@@ -221,67 +209,50 @@ class _GridState extends State<_Grid> {
 /// Controls a calendar's year picker.
 class FCalendarYearPickerController extends GridController {
   /// Creates a [FCalendarYearPickerController].
-  FCalendarYearPickerController({
-    required super.start,
-    required super.end,
-    required super.selectable,
-    required super.initial,
-    super.focused,
-  }) : super(
-         columns: _columns,
-         focusable: (decade, date) {
-           final preferred = DateTime.utc(date.year);
-           if (decade.year <= preferred.year && preferred.year < decade.year + 10 && selectable(preferred)) {
-             return preferred;
-           }
+  new({required super.start, required super.end, required super.selectable, required super.initial, super.focused})
+    : super(
+        columns: _columns,
+        focusable: (decade, date) {
+          final preferred = DateTime.utc(date.year);
+          if (decade.year <= preferred.year && preferred.year < decade.year + 10 && selectable(preferred)) {
+            return preferred;
+          }
 
-           for (var year = decade; year.year < decade.year + 10; year = year.plus(years: 1)) {
-             if (selectable(year)) {
-               return year;
-             }
-           }
+          for (var year = decade; year.year < decade.year + 10; year = year.plus(years: 1)) {
+            if (selectable(year)) {
+              return year;
+            }
+          }
 
-           return null;
-         },
-         step: (date, amount) => date.plus(years: amount),
-         from: (date) => (date.year - date.year % 10 - (start.year - start.year % 10)) ~/ 10,
-         to: (page) => .utc(start.year - start.year % 10 + page * 10),
-       );
+          return null;
+        },
+        step: (date, amount) => date.plus(years: amount),
+        from: (date) => (date.year - date.year % 10 - (start.year - start.year % 10)) ~/ 10,
+        to: (page) => .utc(start.year - start.year % 10 + page * 10),
+      );
 }
 
 /// A year picker's style.
-class FCalendarYearPickerStyle with Diagnosticable, _$FCalendarYearPickerStyleFunctions {
-  /// The spacing between the header and the year picker. Defaults to 6. Does nothing if there is no header.
-  @override
-  final double headerSpacing;
-
+class const FCalendarYearPickerStyle({
   /// The styles of the year tiles.
-  @override
-  final FCalendarYearStyles yearStyles;
+  @override required final FCalendarYearStyles yearStyles,
 
   /// The size of each year. Defaults to a width that aligns the 3-column grid with the day picker's 7-column grid.
-  @override
-  final Size yearSize;
+  @override required final Size yearSize,
+
+  /// The spacing between the header and the year picker. Defaults to 6. Does nothing if there is no header.
+  @override final double headerSpacing = 6,
 
   /// The vertical spacing between rows of years in the year picker. Defaults to 4.
-  @override
-  final double yearSpacing;
-
+  @override final double yearSpacing = 4,
+}) with Diagnosticable, _$FCalendarYearPickerStyleFunctions {
   /// Creates a [FCalendarYearPickerStyle].
-  const FCalendarYearPickerStyle({
-    required this.yearStyles,
-    required this.yearSize,
-    this.headerSpacing = 6,
-    this.yearSpacing = 4,
-  });
+  this;
 
   /// Creates a [FCalendarYearPickerStyle] that inherits its properties.
-  factory FCalendarYearPickerStyle.inherit({
-    required FColors colors,
-    required FTypography typography,
-    required FStyle style,
-  }) => FCalendarYearPickerStyle(
-    yearStyles: .inherit(colors: colors, typography: typography, style: style),
-    yearSize: Size(DateTime.daysPerWeek * style.sizes.calendar / 3, style.sizes.calendar),
-  );
+  factory inherit({required FColors colors, required FTypography typography, required FStyle style}) =>
+      FCalendarYearPickerStyle(
+        yearStyles: .inherit(colors: colors, typography: typography, style: style),
+        yearSize: Size(DateTime.daysPerWeek * style.sizes.calendar / 3, style.sizes.calendar),
+      );
 }

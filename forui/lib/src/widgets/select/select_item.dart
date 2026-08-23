@@ -1,7 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
+import 'package:material_ui/material_ui.dart';
 
 import 'package:meta/meta.dart';
 
@@ -128,7 +128,7 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
   ///
   /// For more control over the items' appearances, use [FSelectSection.rich].
   /// {@endtemplate}
-  FSelectSection({
+  new({
     required Widget label,
     required Map<String, T> items,
     FSelectSectionStyleDelta style = const .context(),
@@ -147,7 +147,7 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
   /// {@template forui.widgets.FSelectSection.rich}
   /// Creates a [FSelectSection] with the given [children].
   /// {@endtemplate}
-  const FSelectSection.rich({
+  const new rich({
     required this.label,
     required this.children,
     this.style = const .context(),
@@ -220,46 +220,35 @@ class FSelectSection<T> extends StatelessWidget with FSelectItemMixin {
 }
 
 /// A [FSelectSection]'s style.
-class FSelectSectionStyle with Diagnosticable, _$FSelectSectionStyleFunctions {
+class FSelectSectionStyle({
   /// The label's text style.
   @override
-  final FVariants<FSelectSectionVariantConstraint, FSelectSectionVariant, TextStyle, TextStyleDelta> labelTextStyle;
-
-  /// The padding around the label. Defaults to `EdgeInsetsDirectional.only(start: 14, top: 6, bottom: 6, end: 10)`.
-  @override
-  final EdgeInsetsGeometry labelPadding;
+  required final FVariants<FSelectSectionVariantConstraint, FSelectSectionVariant, TextStyle, TextStyleDelta>
+  labelTextStyle,
 
   /// The color of the divider between items in this section.
-  @override
-  final FVariants<FSelectSectionVariantConstraint, FSelectSectionVariant, Color, Delta> dividerColor;
+  @override required final FVariants<FSelectSectionVariantConstraint, FSelectSectionVariant, Color, Delta> dividerColor,
 
   /// The width of the divider between items in this section.
-  @override
-  final double dividerWidth;
+  @override required final double dividerWidth,
 
   /// The section's items' style.
-  @override
-  final FItemStyle itemStyle;
+  @override required final FItemStyle itemStyle,
+
+  /// The padding around the label. Defaults to `EdgeInsetsDirectional.only(start: 14, top: 6, bottom: 6, end: 10)`.
+  @override final EdgeInsetsGeometry labelPadding = const .directional(start: 14, top: 6, bottom: 6, end: 10),
 
   /// The spacing below the section. Defaults to 4.
   ///
   /// ## Contract
   /// Throws [AssertionError] if [spacing] is negative.
-  @override
-  final double spacing;
-
+  @override final double spacing = 4,
+}) with Diagnosticable, _$FSelectSectionStyleFunctions {
   /// Creates a [FSelectSectionStyle].
-  FSelectSectionStyle({
-    required this.labelTextStyle,
-    required this.dividerColor,
-    required this.dividerWidth,
-    required this.itemStyle,
-    this.labelPadding = const .directional(start: 14, top: 6, bottom: 6, end: 10),
-    this.spacing = 4,
-  }) : assert(0 <= spacing, 'spacing ($spacing) must be >= 0');
+  this : assert(0 <= spacing, 'spacing ($spacing) must be >= 0');
 
   /// Creates a [FSelectSectionStyle] that inherits its properties.
-  factory FSelectSectionStyle.inherit({
+  factory inherit({
     required FColors colors,
     required FStyle style,
     required FTypography typography,
@@ -343,7 +332,7 @@ abstract class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
   /// {@template forui.widgets.FSelectItem.new}
   /// Creates a [FSelectItem] with a custom [title] and value.
   /// {@endtemplate}
-  const factory FSelectItem({
+  const factory({
     required Widget title,
     required T value,
     FItemStyleDelta style,
@@ -359,7 +348,7 @@ abstract class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
   ///
   /// This is identical to [FSelectItem.new]. It provides consistency with other [FSelectItemMixin] members when using
   /// dot-shorthands.
-  const factory FSelectItem.item({
+  const factory item({
     required Widget title,
     required T value,
     FItemStyleDelta style,
@@ -374,7 +363,7 @@ abstract class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
   /// {@template forui.widgets.FSelectItem.raw}
   /// Creates a [FSelectItem] with a raw layout.
   /// {@endtemplate}
-  const factory FSelectItem.raw({
+  const factory raw({
     required Widget child,
     required T value,
     FItemStyleDelta style,
@@ -383,7 +372,7 @@ abstract class FSelectItem<T> extends StatefulWidget with FSelectItemMixin {
     Key? key,
   }) = _RawSelectItem<T>;
 
-  const FSelectItem._({required this.value, this.style = const .context(), this.enabled, this.prefix, super.key});
+  const new _({required this.value, this.style = const .context(), this.enabled, this.prefix, super.key});
 
   @override
   void debugFillProperties(DiagnosticPropertiesBuilder properties) {
@@ -473,7 +462,7 @@ class _SelectItem<T> extends FSelectItem<T> {
   // ignore: avoid_positional_boolean_parameters
   final Widget? Function(BuildContext context, bool selected) suffixBuilder;
 
-  const _SelectItem({
+  const new({
     required this.title,
     required super.value,
     this.subtitle,
@@ -521,7 +510,7 @@ class _SelectItemState<T> extends _State<_SelectItem<T>, T> {
 class _RawSelectItem<T> extends FSelectItem<T> {
   final Widget child;
 
-  const _RawSelectItem({required this.child, required super.value, super.style, super.enabled, super.prefix, super.key})
+  const new({required this.child, required super.value, super.style, super.enabled, super.prefix, super.key})
     : super._();
 
   @override

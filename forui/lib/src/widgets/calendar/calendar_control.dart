@@ -4,7 +4,7 @@ part of 'calendar_controller.dart';
 ///
 /// {@macro forui.foundation.doc_templates.control}
 sealed class FCalendarControl with Diagnosticable, _$FCalendarControlMixin {
-  const FCalendarControl._();
+  const new _();
 
   (FCalendarController, bool) _update(FCalendarControl old, FCalendarController controller, VoidCallback callback);
 }
@@ -54,7 +54,7 @@ sealed class FCalendarManagedControl extends FCalendarControl with _$FCalendarMa
   final DateTime? end;
 
   /// Creates a [FCalendarManagedControl].
-  const FCalendarManagedControl({this.controller, this.selectable, this.start, this.today, this.initial, this.end})
+  const new({this.controller, this.selectable, this.start, this.today, this.initial, this.end})
     : assert(
         controller == null || (start == null && end == null && today == null && selectable == null && initial == null),
         'Cannot provide both controller and other parameters. Pass these parameters to the controller instead.',
@@ -67,7 +67,7 @@ sealed class FCalendarManagedControl extends FCalendarControl with _$FCalendarMa
 /// {@macro forui.foundation.doc_templates.managed}
 class FGridCalendarControl extends FCalendarManagedControl {
   /// Creates a [FGridCalendarControl].
-  const FGridCalendarControl({
+  const new({
     FGridCalendarController? super.controller,
     super.selectable,
     super.start,
@@ -94,7 +94,7 @@ class FGridCalendarControl extends FCalendarManagedControl {
 /// {@macro forui.foundation.doc_templates.managed}
 class FGridSplitCalendarControl extends FCalendarManagedControl {
   /// Creates a [FGridSplitCalendarControl].
-  const FGridSplitCalendarControl({
+  const new({
     FGridSplitCalendarController? super.controller,
     super.selectable,
     super.start,
@@ -121,7 +121,7 @@ class FGridSplitCalendarControl extends FCalendarManagedControl {
 /// {@macro forui.foundation.doc_templates.managed}
 class FWheelCalendarControl extends FCalendarManagedControl {
   /// Creates a [FWheelCalendarControl].
-  const FWheelCalendarControl({
+  const new({
     FWheelCalendarController? super.controller,
     super.selectable,
     super.start,

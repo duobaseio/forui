@@ -9,22 +9,14 @@ import 'package:forui/forui.dart';
 ///
 /// This is based on Material's _BottomSheetGestureDetector.
 @internal
-class SheetGestureDetector extends StatelessWidget {
-  final FLayout layout;
-  final GestureDragStartCallback? onStart;
-  final GestureDragUpdateCallback? onUpdate;
-  final GestureDragEndCallback? onEnd;
-  final Widget child;
-
-  const SheetGestureDetector({
-    required this.layout,
-    required this.onStart,
-    required this.onUpdate,
-    required this.onEnd,
-    required this.child,
-    super.key,
-  });
-
+class const SheetGestureDetector({
+  required final FLayout layout,
+  required final GestureDragStartCallback? onStart,
+  required final GestureDragUpdateCallback? onUpdate,
+  required final GestureDragEndCallback? onEnd,
+  required final Widget child,
+  super.key,
+}) extends StatelessWidget {
   @override
   Widget build(BuildContext _) {
     void initialize(DragGestureRecognizer recognizer) {

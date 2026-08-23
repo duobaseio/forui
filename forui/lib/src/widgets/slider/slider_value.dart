@@ -44,9 +44,9 @@ sealed class FSliderValue with Diagnosticable {
   final double max;
 
   /// Creates a [FSliderValue].
-  factory FSliderValue({required double max, double min, ({double min, double max}) constraints}) = _Value;
+  factory({required double max, double min, ({double min, double max}) constraints}) = _Value;
 
-  FSliderValue._({
+  new _({
     required double extent,
     required ({double min, double max}) constraints,
     required double min,
@@ -59,7 +59,7 @@ sealed class FSliderValue with Diagnosticable {
          max: max,
        );
 
-  FSliderValue._copy({
+  new _copy({
     required this.pixelConstraints,
     required this.constraints,
     required this.pixels,
@@ -96,7 +96,7 @@ sealed class FSliderValue with Diagnosticable {
 }
 
 final class _Value extends FSliderValue {
-  _Value({required super.max, super.min = 0, super.constraints = (min: 0, max: 1)})
+  new({required super.max, super.min = 0, super.constraints = (min: 0, max: 1)})
     : super._copy(pixelConstraints: (min: 0, max: 0, extent: 0), pixels: (min: 0, max: 0));
 
   @override
@@ -124,22 +124,13 @@ final class _Value extends FSliderValue {
 final class ContinuousValue extends FSliderValue {
   final double _step;
 
-  ContinuousValue({
-    required double step,
-    required super.extent,
-    required super.constraints,
-    required super.min,
-    required super.max,
-  }) : assert(0 < step && step <= 1, 'step must be > 0 and <= 1, but is $step.'),
-       _step = step,
-       super._();
+  new({required double step, required super.extent, required super.constraints, required super.min, required super.max})
+    : assert(0 < step && step <= 1, 'step must be > 0 and <= 1, but is $step.'),
+      _step = step,
+      super._();
 
-  ContinuousValue._({
-    required this._step,
-    required super.pixelConstraints,
-    required super.constraints,
-    required super.pixels,
-  }) : super._copy(min: pixels.min / pixelConstraints.extent, max: pixels.max / pixelConstraints.extent);
+  new _({required this._step, required super.pixelConstraints, required super.constraints, required super.pixels})
+    : super._copy(min: pixels.min / pixelConstraints.extent, max: pixels.max / pixelConstraints.extent);
 
   @override
   ContinuousValue step({required bool min, required bool expand}) {
@@ -192,7 +183,7 @@ final class ContinuousValue extends FSliderValue {
 final class DiscreteValue extends FSliderValue {
   final SplayTreeMap<double, void> ticks;
 
-  DiscreteValue({
+  new({
     required this.ticks,
     required double min,
     required double max,
@@ -202,7 +193,7 @@ final class DiscreteValue extends FSliderValue {
        assert(ticks.keys.every((tick) => 0 <= tick && tick <= 1), 'Every tick must be >= 0 and <= 1.'),
        super._(min: ticks.round(min), max: ticks.round(max));
 
-  DiscreteValue._({
+  new _({
     required this.ticks,
     required super.pixelConstraints,
     required super.constraints,

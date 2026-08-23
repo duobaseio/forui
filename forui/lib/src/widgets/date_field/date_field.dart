@@ -18,13 +18,12 @@ part 'calendar/calendar_date_field.dart';
 part 'input/input_date_field.dart';
 
 /// A builder that wraps [FDateField]'s popover content.
-typedef FDateFieldPopoverBuilder =
-    Widget Function(
-      BuildContext context,
-      FCalendarController calendarController,
-      FPopoverController popoverController,
-      Widget content,
-    );
+typedef FDateFieldPopoverBuilder = Widget Function(
+  BuildContext context,
+  FCalendarController calendarController,
+  FPopoverController popoverController,
+  Widget content,
+);
 
 /// A date field allows a date to be selected from a calendar, input field, or both.
 ///
@@ -150,7 +149,7 @@ abstract class FDateField extends StatefulWidget {
 
   final FDateFieldCalendarProperties? _calendar;
 
-  FDateField._({
+  new _({
     required this._calendar,
     this.size = .md,
     this.style = const .context(),
@@ -210,7 +209,7 @@ abstract class FDateField extends StatefulWidget {
   /// See also:
   /// * [FDateField.calendar] - Creates a date field with only a calendar.
   /// * [FDateField.input] - Creates a date field with only an input field.
-  factory FDateField({
+  factory({
     FDateSelectionControl<DateTime?>? selectionControl,
     FPopoverControl popoverControl,
     FTextFieldSizeVariant size,
@@ -275,7 +274,7 @@ abstract class FDateField extends StatefulWidget {
   /// See also:
   /// * [FDateField] - Creates a date field with both input field and calendar.
   /// * [FDateField.input] - Creates a date field with only an input field.
-  factory FDateField.calendar({
+  factory calendar({
     FDateSelectionControl<DateTime?>? selectionControl,
     FPopoverControl popoverControl,
     FTextFieldSizeVariant size,
@@ -340,7 +339,7 @@ abstract class FDateField extends StatefulWidget {
   /// See also:
   /// * [FDateField] - Creates a date field with both input field and calendar.
   /// * [FDateField.calendar] - Creates a date field with only a calendar.
-  factory FDateField.input({
+  factory input({
     FDateSelectionControl<DateTime?>? selectionControl,
     FTextFieldSizeVariant size,
     FDateFieldStyleDelta style,
@@ -440,7 +439,7 @@ abstract class _FDateFieldState<T extends FDateField> extends State<T> with Tick
   }
 
   void _handleOnSelectionChange() {
-    if (widget.selectionControl case final FDateSelectionManagedControl control) {
+    if (widget.selectionControl case final FDateSelectionManagedControl<DateTime?> control) {
       control.handleOnChange(_selectionController);
     }
   }
