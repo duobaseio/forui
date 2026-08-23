@@ -2,9 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/services.dart';
+
+import 'package:material_ui/material_ui.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/foundation/inner_path_clipper.dart';

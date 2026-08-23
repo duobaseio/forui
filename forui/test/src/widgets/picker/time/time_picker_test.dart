@@ -8,6 +8,7 @@ import 'package:forui/forui.dart';
 import 'package:forui/src/widgets/picker/picker_controller.dart';
 import 'package:forui/src/widgets/picker/picker_wheel.dart';
 import 'package:forui/src/widgets/picker/time/time_picker_controller.dart';
+
 import '../../../test_scaffold.dart';
 
 void main() {
@@ -182,7 +183,10 @@ void main() {
           child: SizedBox(
             width: 300,
             height: 300,
-            child: FTimePicker(control: .managed(controller: controller), hour24: hour24),
+            child: FTimePicker(
+              control: .managed(controller: controller),
+              hour24: hour24,
+            ),
           ),
         ),
       );

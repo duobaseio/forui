@@ -1,8 +1,9 @@
-import 'package:cupertino_ui/cupertino_ui.dart' show CupertinoTextMagnifier;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
-import 'package:material_ui/material_ui.dart';
 import 'package:flutter/services.dart';
+
+import 'package:cupertino_ui/cupertino_ui.dart' show CupertinoTextMagnifier;
+import 'package:material_ui/material_ui.dart';
 
 import 'package:forui/forui.dart';
 import 'package:forui/src/localizations/localized_text.dart';
